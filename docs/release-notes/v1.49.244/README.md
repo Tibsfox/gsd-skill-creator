@@ -1,505 +1,173 @@
-# v1.49.244 -- Degree 104: Lemolo (Electronic) + Gray Jay -- THE DREAM CIRCUIT AND THE SOFT WHISTLE -- CORVIDAE QUINTET
+# v1.49.244 — Degree 104: Lemolo (Electronic) + Gray Jay — THE DREAM CIRCUIT AND THE SOFT WHISTLE — CORVIDAE QUINTET
 
 **Released:** 2026-04-01
-**Degree:** 104 of 360 -- 28.9% of 360
-**Part A:** Lemolo (electronic) -- Electronic Pop, E=3, self-released, SEVENTH RETURN ARTIST (first at degree 56 as Indie Folk), back-to-back electronic return with Briana Marela (103), GENRE STAGE 86 (Electronic Pop, eighty-sixth genre stage, dream-haze folk rebuilt with electronic instruments, distinct from Art Pop/Electronic 103 dissolution and Indie Electronic 102 organic warmth), THE DREAM CIRCUIT 105th acoustic element (preserved atmosphere electronic foundation added pulse voice afloat, distinct from layered dissolution 103 dissolved voice and organic circuit 102 breathing synths), THE SUSTAINED ELECTRONIC RETURN 105th artist-city pattern (multiple artists returning in electronic context across consecutive degrees confirming pattern as systematic, distinct from electronic reframing 103 single return)
-**Part B:** Gray Jay (*Perisoreus canadensis*) / Canada Jay -- soft whistles + mimicry, E=4, subalpine forest, Corvidae (FIFTH CONSECUTIVE CORVIDAE 100-104 = CORVIDAE QUINTET, ties Mustelidae/Swallow/Sciuridae quintets for longest same-family run, camp robber / whiskey jack, forty-fourth consecutive original CSV)
-**Series:** Seattle 360 + Sound of Puget Sound -- Continuous Release Engine
+**Scope:** Seattle 360 + Sound of Puget Sound — paired degree release, Corvidae quintet closer
+**Branch:** main
+**Commits:** `2d73e47d9` (1)
+**Files changed:** 1 (release note)
+**Degree:** 104 of 360 — 28.9% of 360 — Fourteenth degree of Quadrant II
+**Part A:** Lemolo (electronic) — Electronic Pop, E=3, self-released, SEVENTH RETURN ARTIST (first at degree 56 as Indie Folk), back-to-back electronic return with Briana Marela (103), GENRE STAGE 86 (Electronic Pop, eighty-sixth genre stage, dream-haze folk rebuilt with electronic instruments, distinct from Art Pop/Electronic 103 dissolution and Indie Electronic 102 organic warmth), THE DREAM CIRCUIT 105th acoustic element (preserved atmosphere electronic foundation added pulse voice afloat, distinct from layered dissolution 103 dissolved voice and organic circuit 102 breathing synths), THE SUSTAINED ELECTRONIC RETURN 105th artist-city pattern (multiple artists returning in electronic context across consecutive degrees confirming pattern as systematic, distinct from electronic reframing 103 single return)
+**Part B:** Gray Jay (*Perisoreus canadensis*) / Canada Jay — soft whistles + mimicry, E=4, subalpine forest, Corvidae (FIFTH CONSECUTIVE CORVIDAE 100-104 = CORVIDAE QUINTET, ties Mustelidae/Swallow/Sciuridae quintets for longest same-family run, camp robber / whiskey jack, forty-fourth consecutive original CSV)
+**Series:** Seattle 360 + Sound of Puget Sound — Continuous Release Engine
 **Cluster:** Music (hub: WAL)
-**Note:** CORVIDAE QUINTET. Five consecutive Corvidae degrees (100-104) -- the longest same-family consecutive run in the entire engine, tying the Mustelidae, Swallow, and Sciuridae quintets. Back-to-back electronic returns (Briana Marela 103, Lemolo 104) -- both returning from E=2 to E=3. The dream circuit and the soft whistle -- both are the quieter, more intimate register after louder predecessors. The quintet resolves from maximum volume (Steller's Jay E=5 alarm) to gentle conversation (Gray Jay E=4 whistle).
+**Dedication:** To **Lemolo** and **Meagan Grandall** and **Kendra Cox** — the **Seattle** duo whose dream-haze Indie Folk at **degree 56** returned forty-eight degrees later reframed through **electronic instruments** without abandoning the atmospheric signature that defined the original; to the **Gray Jay** (*Perisoreus canadensis*), also known as the **Canada Jay**, the **camp robber**, the **whiskey jack** — the friendliest wild bird a **Pacific Northwest** hiker will ever meet, the subalpine forest specialist whose soft whistles close the **CORVIDAE QUINTET** after four louder predecessors; to the **Corvidae** family itself — five consecutive degrees (100, 101, 102, 103, 104) tying the **Mustelidae**, **Swallow**, and **Sciuridae** quintets for the longest same-family consecutive run in the entire engine; to the **Algonquin** *wisakedjak* — the trickster spirit from whom the **whiskey jack** takes its name; to **Steller's Jay** (103) and **Common Raven** (100) and **American Crow** (102) — the corvid quartet that preceded the Gray Jay's quiet resolution; and to the **quintet's perfect oscillation** — E=4, E=5, E=4, E=5, E=4 — the symmetric pattern that brackets the two E=5 peaks with three E=4 bookends and lets the softest voice have the last word.
+**Engine Position:** Degree 104 of 360 — CORVIDAE QUINTET CLOSES; THE DREAM CIRCUIT (105th artist-side acoustic element, preserved atmosphere with added electronic pulse); THE SOFT WHISTLES + MIMICRY (104th species-side acoustic element, quietest corvid in the quintet); THE SUSTAINED ELECTRONIC RETURN (105th artist-city pattern, back-to-back electronic returns confirmed); **GENRE STAGE 86** Electronic Pop (dream-based rather than glitch-based, distinct from The Postal Service's glitch-based Electronic Pop at degree 86); **SEVENTH RETURN ARTIST** (Lemolo 56→104, following Death Cab for Cutie 58→82, Pearl Jam 25→83, Damien Jurado 45→84, Rocky Votolato 46→85, The Postal Service 86→97, Briana Marela 72→103); **BACK-TO-BACK ELECTRONIC RETURNS** (degrees 103-104, both E=2 to E=3); **THREE ELECTRONIC RETURNS IN EIGHT DEGREES** (97, 103, 104); **FIFTH CONSECUTIVE CORVIDAE** (100-104) ties Mustelidae/Swallow/Sciuridae quintet record; **PERFECT QUINTET OSCILLATION** (E=4, E=5, E=4, E=5, E=4); **FORTY-FOURTH CONSECUTIVE ORIGINAL CSV SPECIES** (degrees 61-104); **CLIMATE-CHANGE SENTINEL** (first species in engine whose survival is directly threatened by warming autumn temperatures through cached-food spoilage).
 
 ## Summary
 
-The dream circuit and the soft whistle. Degree 104 closes the Corvidae quintet with the quietest corvid and the second consecutive electronic return.
+**THE DREAM CIRCUIT AND THE SOFT WHISTLE.** Degree 104 arrives to close the **CORVIDAE QUINTET** — five consecutive **Corvidae** degrees (100, 101, 102, 103, 104) that tie the **Mustelidae**, **Swallow**, and **Sciuridae** quintets for the longest same-family consecutive run in the entire **Seattle 360** continuous release engine. The engine has now traversed 28.9% of a full rotation and paired at every step with the **Sound of Puget Sound** acoustic catalogue. **Degree 104** is the fourteenth degree of **Quadrant II**, and it is the structural resolution of a corvid sequence that began at **degree 100** with the **Common Raven's** deep cronk and continued through the coordinated duet of the **Common Raven Pair** (101), the urban familiarity of the **American Crow** (102), and the raucous alarm of the **Steller's Jay** (103). The quintet's acoustic arc — authority → coordination → familiarity → alarm → intimacy — resolves at the softest voice, the friendliest wild bird, the **camp robber** of the subalpine **Pacific Northwest** forest.
 
-On the music side, **Lemolo** returns from degree 56 as the **seventh return artist**, reframed in **electronic context**. **Genre Stage 86** -- **Electronic Pop**. At degree 56, Lemolo was Indie Folk -- dream haze, acoustic foundation, reverb-drenched guitar, layered vocals (E=2). At degree 104, the dream haze is rebuilt with electronic instruments -- synthesizers replace guitars, drum machines replace acoustic drums, the reverb and delay remain. The dream persists, but now it **pulses**. The **dream circuit** is the 105th acoustic element -- preserved atmosphere with added electronic pulse, voice floating atop the electronic surface (unlike Briana Marela's dissolved voice at 103). The **sustained electronic return** is the 105th artist-city pattern -- back-to-back electronic returns at degrees 103-104 (Briana Marela 72->103, Lemolo 56->104), both E=2 to E=3, confirming the electronic reframing as a sustained engine mechanism. Meagan Grandall adds synthesizers; Kendra Cox transitions to electronic percussion. Self-released. E=3.
+**Part A: Lemolo returns reframed through electronic instruments — the Seventh Return Artist.** On the music side, **Lemolo** — the **Seattle** duo of **Meagan Grandall** (vocals, guitar) and **Kendra Cox** (drums) — returns from **degree 56** as the **SEVENTH RETURN ARTIST** in the engine, following **Death Cab for Cutie** (58→82), **Pearl Jam** (25→83), **Damien Jurado** (45→84), **Rocky Votolato** (46→85), **The Postal Service** (86→97), and **Briana Marela** (72→103). At degree 56, Lemolo was **Indie Folk** — dream haze, acoustic foundation, reverb-drenched guitar, layered vocals, E=2. At degree 104, the **dream haze is rebuilt with electronic instruments** — synthesizers replace guitars, drum machines replace acoustic drums, the reverb and delay carry across the transition. The dream persists, but now it **pulses**. **Genre Stage 86** — **Electronic Pop** — lands as the eighty-sixth distinct genre classification in 104 degrees. Lemolo's Electronic Pop is **dream-based**, structurally distinct from **The Postal Service's** **glitch-based** Electronic Pop that first introduced the genre eighteen degrees earlier at **degree 86**. Same genre label, radically different dress. **Self-released**. E=3 — the electronic context raises energy by exactly one level, mirroring **Briana Marela's** 72→103 E=2→E=3 transition a single degree earlier.
 
-On the species side, the **Gray Jay** (*Perisoreus canadensis*), also known as the **Canada Jay**, extends the Corvidae run to **FIVE CONSECUTIVE DEGREES** (100-104) -- the **CORVIDAE QUINTET**, tying the Mustelidae, Swallow, and Sciuridae quintets for the longest same-family consecutive run in the entire engine. The quintet's acoustic arc resolves: deep resonance (100) -> duet harmony (101) -> sharp declaration (102) -> raucous alarm (103) -> **soft whisper** (104). The Gray Jay is the **quietest corvid** -- soft whistles, chuckling, mewing, mimicry. The **friendliest wild bird** most PNW hikers encounter -- lands on hands, steals food from campsites ("camp robber" / "whiskey jack"). Subalpine forest specialist. Caches **thousands of food items per year** using sticky saliva pressed into tree bark -- enabling **late-winter breeding** (February-March) when the forest is still buried in snow. E=4. The quintet resolves from maximum volume to gentle conversation.
+**Part B: Gray Jay closes the CORVIDAE QUINTET with the quietest corvid voice.** On the species side, the **Gray Jay** (*Perisoreus canadensis*), renamed **Canada Jay** by the **American Ornithological Society** in 2018, extends the Corvidae run to **FIVE CONSECUTIVE DEGREES** (100-104) — the **CORVIDAE QUINTET**, tying the **Mustelidae**, **Swallow**, and **Sciuridae** quintets for the longest same-family consecutive run in the entire engine. The Gray Jay is the **quietest corvid** in the quintet — soft whistles, chuckling, mewing, mimicry. The **friendliest wild bird** most **PNW** hikers encounter — approaches humans without hesitation, lands on outstretched hands, steals food from campsites and earns its common names. The species was called the **whiskey jack** long before it was called anything in English, from the **Algonquin** *wisakedjak*, a trickster spirit — and the trickster designation fits: intelligence, not tameness, drives the Gray Jay's habit of accepting food from humans in remote environments. Subalpine forest specialist (**mountain hemlock**, **subalpine fir**, **whitebark pine**, **Engelmann spruce**), typically above 1,200 meters in the **PNW Cascades**. The Gray Jay caches **thousands of food items per year** using sticky saliva from enlarged salivary glands — pressed into tree-bark crevices, held by saliva adhesive, remembered across months of subalpine winter. The cached food supply enables **late-winter breeding** in February and March when the forest is still buried in snow — a survival strategy that no other North American passerine matches. E=4 — loud enough to carry across subalpine clearings but gentler than the **Steller's Jay's** E=5 alarm by a full energy level. **The climate-change sentinel**: warming autumn temperatures cause cached food to spoil before winter arrives, reducing breeding success and marking the Gray Jay as the first species in the engine whose survival is directly threatened by warming.
+
+**Cross-Sync Parallel: Both Halves Are the Quieter Voice After Louder Predecessors.** Both halves of degree 104 arrive as the gentler register after louder predecessors. **Lemolo's** dream circuit at E=3 follows **Briana Marela's** layered dissolution at E=3 (degree 103) and **Hecuba's** kinetic surge at E=5 (degree 101) — moderate intimacy returning after a voice-dissolving wash and a dance-floor provocation. **In parallel**, the **Gray Jay's** soft whistles at E=4 follow the **Steller's Jay's** raucous alarm at E=5 (degree 103) and the **Common Raven Pair's** coordinated duet at E=5 (degree 101) — subalpine intimacy returning after maximum-volume corvid alarm and a territorial raven duet. **Each side** arrives as the gentler voice that comes after a louder one. **The same** structural principle — that the quintet must resolve in intimacy rather than escalate through another shout — reaches both halves on the same degree through entirely different substrates (synthesizers and drum machines on the artist side; a syrinx and learned subalpine contact calls on the species side). **Synchronized** by the catalogue's ordering, the dream pulse and the soft whistle speak at matched volume and with matched restraint.
+
+**Cross-Sync Parallel: Both Halves Return to an Earlier Identity Through a Changed Medium.** Both halves of degree 104 demonstrate **return through reframing**. **Lemolo** returns to the **Seattle** duo first documented at **degree 56** — **Meagan Grandall** and **Kendra Cox** are the same two musicians, the dream haze is the same aesthetic — but the **medium** has changed: synthesizers replace guitars, drum machines replace acoustic drums, the electronic signal chain replaces the acoustic microphone-and-amp signal chain. The atmospheric signature survives the transition; the pulse is added. **In parallel**, the **Corvidae** family returns on the species side — introduced by **Steller's Jay** at **degree 53**, declared at full scale by **Common Raven** at **degree 100**, and now visited by the fifth consecutive Corvidae species, the Gray Jay, whose acoustic medium is **dramatically different** from the four preceding corvids. Where Raven cronks at 200-800 Hz and Steller's Jay shrieks at harsh alarm frequencies, the Gray Jay whistles at gentle tonal frequencies with mewing and chuckling. The **family** is the same; the **medium** the species uses to speak is transformed. **Each side** demonstrates that return and transformation can coexist. **The same** principle — identity preserved while medium shifts — reaches both halves of degree 104 in perfect structural mirror.
+
+**Cross-Sync Parallel: Both Halves Confirm a Sustained Pattern Rather Than an Isolated Event.** Both halves of degree 104 establish confirmation through repetition. On the artist side, **Lemolo's** 56→104 electronic return is **back-to-back** with **Briana Marela's** 72→103 electronic return. Three electronic returns in eight degrees (**The Postal Service** electronic at 97, **Briana Marela** electronic at 103, **Lemolo** electronic at 104). Both 103 and 104 execute the same E=2→E=3 energy transition. The electronic reframing is no longer an isolated event; it is a **sustained engine pattern**, a systematic analytical tool, a confirmed mechanism. **In parallel**, on the species side, the **Corvidae quintet** reaches five consecutive entries, tying the longest same-family consecutive run in the entire engine — matching the **Mustelidae quintet**, the **Swallow quintet**, and the **Sciuridae quintet**. Five is the confirmed ceiling; four cannot reach the tie. **Each side** has moved past first-time novelty into confirmed pattern territory. **The same** structural shift — isolated event to confirmed pattern — reaches both halves on the same degree. **Synchronized** by the catalogue's calibration, the artist-side electronic reframing and the species-side same-family run both reach confirmation together.
+
+**Cross-Sync Parallel: Both Halves Preserve Identity While Adding Structure.** Both halves of degree 104 preserve continuity through structural addition rather than through replacement. **Lemolo's** dream circuit preserves the atmospheric reverb, the dream haze, the layered vocal aesthetic from degree 56 — then **adds** electronic pulse, synthesizer texture, drum-machine rhythmic regularity that the acoustic original lacked. The voice **floats atop** the new electronic surface rather than dissolving into it (unlike **Briana Marela's** 103 approach of voice-dissolution into textural wash). **In parallel**, the **Gray Jay** preserves all the **Corvidae** family markers — high intelligence, social cognition, food-caching, long lifespan, vocal learning — then **adds** structural novelties no other corvid in the quintet demonstrates: **sticky-saliva bark caching**, **late-winter breeding**, **extreme cold tolerance**, **human-approach boldness**. The family signature **survives atop** the species-specific additions. **Each side** preserves identity at a higher structural level while adding distinguishing novelty at a lower level. **The same** structural principle — preservation-through-addition rather than replacement-through-substitution — reaches both halves on the same degree.
+
+**Cross-Sync Parallel: Both Halves Close a Quintet While Opening the Next Degree.** Both halves of degree 104 mark a structural closure. On the species side, the **Corvidae quintet** explicitly closes — the next entry (degree 105) must break the Corvidae streak because five consecutive entries is the confirmed ceiling matched by three previous quintets and never exceeded. The quintet resolves at the quietest voice; the soft whistle is the **last word** before a new family takes the stage. **In parallel**, on the artist side, the three-electronic-returns-in-eight-degrees pattern (97, 103, 104) closes an analytical bracket — the engine has confirmed the electronic reframing as a sustained pattern, and future electronic returns no longer need to establish the mechanism. The pattern is closed, available as a confirmed tool. **Each side** closes a structural loop at degree 104. **The same** structural function — a closer that resolves tension rather than adding it — reaches both halves on the same degree. **Synchronized** by the catalogue's planning, the dream circuit and the soft whistle share the role of closer.
+
+**Cross-Sync Parallel: Both Halves Occupy a Mid-Energy Register Between Extremes.** Both halves of degree 104 sit deliberately mid-spectrum. **Lemolo's** dream circuit at E=3 is neither the E=2 intimacy of the original acoustic Lemolo at degree 56 nor the E=5 cinematic escalation of **ODESZA** at degree 95; it is the moderate electronic pop that invites closeness without demanding arena-scale presence. **In parallel**, the **Gray Jay's** soft whistles at E=4 sit between the ethereal E=2-E=3 whispers of smaller subalpine passerines and the E=5 alarm-shriek of the **Steller's Jay** from the preceding degree. **Each side** occupies the moderate register that the catalogue has been calibrating across Quadrant II. **The same** structural choice — moderate energy as the resolving voice — reaches both halves on the same degree. **Synchronized** by the engine's design, both the dream circuit and the soft whistle refuse both extreme poles and settle in the middle where sustained presence replaces peak volume.
+
+**Cross-Sync Parallel: Both Halves Embody Pacific Northwest Geography in Different Registers.** Both halves of degree 104 carry **Pacific Northwest** geography explicitly. **Lemolo** is a **Seattle** duo; their dream haze is urban-interior electronic pop made inside the **Sub Pop** scene's wider **Seattle** ecosystem, with the city's reverb-heavy, atmospheric, warm production signature traceable through every song. **In parallel**, the **Gray Jay** is a **subalpine forest specialist** of the **PNW Cascades** — **mountain hemlock** and **subalpine fir** and **whitebark pine** and **Engelmann spruce** are the trees that furnish the bark crevices for the cache network, and the subalpine zone above 1,200 meters is where the species reaches its territorial peak. **Each side** is **PNW**; each half occupies a different PNW register. **The same** regional signature reaches both halves — **Seattle** electronic pop on the artist side and **Cascades subalpine forest** on the species side. **Synchronized** by the project's geographic commitment, the urban-interior dream circuit and the timberline-forest soft whistle are both unmistakably **Pacific Northwest**.
+
+**Cumulative State at Degree 104.** At degree 104, the engine has documented **105 artists** (including **Quincy Jones** at the origin degree 0), **105 acoustic elements**, **105 artist-city patterns**, **86 genre stages**, **50-plus families**, **4 classes** (**Aves**, **Mammalia**, **Insecta**, **Amphibia**), and **17-plus orders**. The **Corvidae quintet** ties the three preceding quintets (**Mustelidae**, **Swallow**, **Sciuridae**) at the confirmed ceiling of five consecutive same-family entries. The engine holds **forty-four consecutive original CSV species** from **degree 61** to **degree 104** without substitution or correction. The **Seventh Return Artist** (Lemolo electronic, 56→104) lands with **three electronic returns in eight degrees** establishing the electronic reframing as a sustained engine pattern. **E=3** on the artist side has grown to 29 deployments (27.6%), now the second most common energy level on the music side, gaining **Lemolo electronic** at degree 104. The **artist-side energy distribution** after degree 104: E1:3 (2.9%), E2:31 (29.5%), E3:29 (27.6%), E4:27 (25.7%), E5:14 (13.3%), E6:2 (1.9%). The **Corvidae quintet energy** reads E=4, E=5, E=4, E=5, E=4 — **perfect oscillation** that brackets two E=5 peaks with three E=4 bookends and lets the softest voice close the sequence. The engine at degree 104 is mature enough to plan structural closures across multi-degree windows, confirm sustained patterns through back-to-back repetition, and resolve long-running sequences through intimacy rather than escalation.
 
 ## Key Features
 
 | Metric | Part A: Lemolo (Electronic) | Part B: Gray Jay |
 |--------|----------------------------|------------------|
-| Genre | Electronic Pop (Genre Stage 86) | -- |
-| Energy | E=3 (dream-haze rebuilt, atmospheric, pulsing, intimate) | E=4 (soft whistles, chuckling, mewing, mimicry, gentle but persistent) |
-| Label | Self-Released | -- |
-| Family | -- | Corvidae (fifth consecutive, 100-104 = CORVIDAE QUINTET, ties record) |
-| Acoustic Element | the dream circuit (105th, preserved atmosphere electronic foundation added pulse voice afloat) | soft whistles + mimicry (104th species-side, gentle tonal whistles chuckling mewing mimicry alarm) |
-| Artist-City Pattern | The Sustained Electronic Return (105th, back-to-back electronic returns confirming systematic pattern) | -- |
-| Structural Firsts | GENRE STAGE 86, SEVENTH RETURN ARTIST, BACK-TO-BACK ELECTRONIC RETURNS (103-104), THE DREAM CIRCUIT, THE SUSTAINED ELECTRONIC RETURN, E=2 to E=3 energy transition | CORVIDAE QUINTET (five consecutive, ties record), THE QUIET CORVID, camp robber / whiskey jack, bark-caching with sticky saliva, late-winter breeding, climate-change sentinel |
+| Genre | **Electronic Pop** (Genre Stage 86, eighty-sixth genre stage in 104 degrees, dream-based rather than glitch-based, dream-haze folk rebuilt with electronic instruments, synthesizers replace guitars drum machines replace acoustic drums reverb and delay carry across transition, distinct from Art Pop/Electronic 103 voice-dissolution and Indie Electronic 102 organic warmth and Indie Electronic 86 The Postal Service glitch-based) | — |
+| Energy | **E=3** (dream-haze rebuilt, atmospheric, pulsing, intimate, voice floating atop electronic surface rather than dissolving into it, moderate electronic pop that invites closeness without demanding arena-scale presence) | **E=4** (soft whistles chuckling mewing mimicry, gentle but persistent, subalpine contact calls carrying across clearings, quieter than Steller's Jay E=5 alarm by one full energy level, loud enough to carry but gentler than the preceding corvid) |
+| Label | **Self-Released** (creative decision not label mandate, Lemolo's independent production reflects duo-driven rather than laptop-assembled electronic pop, diffuse distribution on Bandcamp and streaming platforms) | — |
+| Family | — | **Corvidae** (FIFTH CONSECUTIVE 100-104 = CORVIDAE QUINTET, ties Mustelidae/Swallow/Sciuridae quintets for longest same-family run in engine, crows ravens jays magpies, fifty-plus families total) |
+| Order | — | **Passeriformes** (largest order of birds, ~6,500 species worldwide) |
+| Class | — | **Aves** (fifth consecutive bird degree, Corvidae quintet keeps Aves in the engine across degrees 100-104) |
+| Acoustic Element | **the dream circuit** (105th artist-side, preserved atmosphere electronic foundation added pulse voice afloat, synthesizer-based rather than glitch-based, distinct from layered dissolution 103 dissolved voice and organic circuit 102 breathing synths and dream drift 93 fully-electronic from start) | **soft whistles + mimicry** (104th species-side, gentle tonal whistles chuckling mewing mimicry alarm, quietest corvid in quintet, maximum acoustic contrast with degree 103 Steller's Jay alarm) |
+| Artist-City Pattern | **The Sustained Electronic Return** (105th artist-city pattern, back-to-back electronic returns at consecutive degrees confirming systematic pattern, distinct from Electronic Reframing 103 single return and Re-Contextualized Return 97 first electronic return) | — |
+| Structural Firsts | **GENRE STAGE 86** (Electronic Pop dream-based), **SEVENTH RETURN ARTIST** (Lemolo 56→104), **BACK-TO-BACK ELECTRONIC RETURNS** (degrees 103-104 both E=2→E=3), **THE DREAM CIRCUIT** (105th acoustic element), **THE SUSTAINED ELECTRONIC RETURN** (105th artist-city pattern), **THREE ELECTRONIC RETURNS IN EIGHT DEGREES** (97, 103, 104) | **CORVIDAE QUINTET** (five consecutive Corvidae 100-104 ties record with Mustelidae/Swallow/Sciuridae), **THE QUIET CORVID**, **camp robber / whiskey jack** (*wisakedjak*, Algonquin trickster), **bark-caching with sticky saliva** (unique among corvids), **late-winter breeding** (February-March feeding nestlings in snow), **CLIMATE-CHANGE SENTINEL** (first species in engine directly threatened by warming autumn temperatures through cached-food spoilage), **FORTY-FOURTH CONSECUTIVE ORIGINAL CSV** (degrees 61-104) |
 | Research Words | ~4,000 | ~6,000 |
 | Files Produced | 4 | 4 |
 | Cross-References | 5 | 5 |
 
-<details>
-<summary>Full Release Notes -- Click to expand</summary>
-
-## Part A: Lemolo (Electronic) -- THE DREAM CIRCUIT (Electronic Pop, E=3, Self-Released, Genre Stage 86, Seventh Return Artist, Back-to-Back Electronic Returns 103-104, The Dream Circuit 105th Acoustic Element, The Sustained Electronic Return 105th Artist-City Pattern)
-
-Full deep research covering Lemolo in electronic context, the seventh return, and the dream circuit:
-
-### STRUCTURAL EVENT: GENRE STAGE 86 -- Electronic Pop
-
-Degree 104 reaches Genre Stage 86. Electronic Pop describes Lemolo in electronic context -- the dream-haze folk practice from degree 56 rebuilt with electronic instruments. The genre shifts from Indie Folk (at 56) to Electronic Pop (at 104).
-
-Distinguished from: Lemolo (56, Indie Folk -- acoustic foundation, dream haze, reverb-drenched guitar). Briana Marela electronic (103, Art Pop/Electronic -- voice dissolved into texture; Lemolo keeps voice atop). The Postal Service (86, Electronic Pop -- glitch-based, laptop-assembled; Lemolo's is dream-based, duo-driven).
-
-### THE DREAM REBUILT IN CIRCUITRY
-
-At degree 56, Lemolo was Indie Folk -- dream haze, atmospheric reverb-drenched guitar, layered vocals, E=2. At degree 104, synthesizers replace guitars, drum machines replace acoustic drums, reverb and delay remain. The dream persists but now pulses. This is the dream circuit -- dream-haze aesthetic rebuilt with electronic instruments, preserving atmospheric quality while adding underlying pulse.
-
-Meagan Grandall (vocals, guitar) adds synthesizers and electronic processing -- voice remains central, floating atop the electronic surface (unlike Briana Marela's dissolution). Kendra Cox (drums) transitions from acoustic to electronic percussion. Self-released. Creative decision, not label mandate.
-
-### SEVENTH RETURN ARTIST -- BACK-TO-BACK ELECTRONIC RETURNS
-
-Lemolo is the seventh return artist. Combined with Briana Marela electronic at degree 103, this creates back-to-back return artists at consecutive degrees -- both returning in electronic context. The parallel: both Briana Marela (72->103) and Lemolo (56->104) transition from E=2 to E=3 in their electronic reframing. The electronic context consistently raises energy by one level. The electronic reframing becomes a sustained engine pattern.
-
-Three electronic returns in eight degrees (97, 103, 104). The Postal Service (97) established the re-contextualized return. Briana Marela (103) established the electronic reframing. Lemolo (104) confirms the pattern as sustained.
-
-### THE DREAM CIRCUIT -- 105th Acoustic Element
-
-Preserved atmosphere (reverb, delay, spatial qualities carry over), electronic foundation (synthesizers and drum machines replace acoustic instruments), added pulse (rhythmic regularity and forward motion the acoustic dream haze lacked), voice afloat (voice floating atop electronic surface, not dissolved into it like degree 103).
-
-Contrasts: the dream haze (56, acoustic foundation, no pulse) vs the dream circuit (added pulse). The layered dissolution (103, voice dissolves into texture) vs the dream circuit (voice floats atop). The melodic ache (86, Postal Service, glitch-based Electronic Pop) vs the dream circuit (haze-based Electronic Pop). The dream drift (93, NAVVI, fully electronic from start) vs the dream circuit (arrives at electronic from folk origins).
-
-### THE SUSTAINED ELECTRONIC RETURN -- 105th Artist-City Pattern
-
-Back-to-back electronic returns at degrees 103-104. Both E=2 to E=3. Both self-contained artistic practices reframed through electronic lens. Three electronic returns in eight degrees (97, 103, 104). The pattern confirms the electronic reframing as a systematic analytical tool.
-
-### CROSS-REFERENCES (Part A)
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| S36-056 | Lemolo electronic (104) | Lemolo (56) | RETURN! Indie Folk original E=2. Electronic reframing E=3. Dream haze rebuilt with electronic instruments. |
-| S36-103 | Lemolo electronic (104) | Briana Marela electronic (103) | BACK-TO-BACK ELECTRONIC RETURN. Briana Marela dissolves voice into texture. Lemolo keeps voice atop. Two return strategies. |
-| S36-093 | Lemolo electronic (104) | NAVVI (93) | DREAM POP/ELECTRONIC. NAVVI fully electronic from start. Lemolo arrives at electronic from folk origins. Different trajectories. |
-| S36-072 | Lemolo electronic (104) | Briana Marela (72) | PARALLEL RETURN. Both 72->103 and 56->104 return in electronic context. Parallel trajectories. |
-| S36-086 | Lemolo electronic (104) | The Postal Service (86) | ELECTRONIC POP. Glitch-based vs dream-based. Same genre, different aesthetic ancestry. |
-
----
-
-## Part B: Gray Jay (*Perisoreus canadensis*) / Canada Jay -- CORVIDAE QUINTET (Fifth Consecutive 100-104, Soft Whistles + Mimicry, E=4, Subalpine Forest, Camp Robber, Bark-Caching, Forty-Fourth Consecutive Original CSV)
-
-Full deep research covering the Gray Jay, the Corvidae quintet, and the quiet corvid:
-
-### FIFTH CONSECUTIVE CORVIDAE: THE CORVID QUINTET
-
-Degree 104 extends the Corvidae run to FIVE CONSECUTIVE DEGREES (100-104) -- the longest same-family consecutive run in the entire engine, tying the Mustelidae, Swallow, and Sciuridae quintets:
-
-| Degree | Species | Acoustic Character | Energy |
-|--------|---------|-------------------|--------|
-| 100 | Common Raven | Deep cronk, resonant | E=4 |
-| 101 | Common Raven pair | Duet, harmonic | E=5 |
-| 102 | American Crow | Sharp caw | E=4 |
-| 103 | Steller's Jay (raucous) | Harsh alarm | E=5 |
-| **104** | **Gray Jay** | **Soft whistles** | **E=4** |
-
-The quintet's acoustic arc resolves from authority (raven) through alarm (Steller's Jay) to **intimacy** (Gray Jay). The loudest voice (Steller's Jay alarm, E=5) followed by the softest voice (Gray Jay whistles, E=4). The quintet resolves from maximum volume to gentle conversation.
-
-### THE GRAY JAY -- THE CAMP ROBBER -- THE QUIET CORVID
-
-Gray Jay (*Perisoreus canadensis*), renamed Canada Jay by the American Ornithological Society in 2018. 25-33 cm body length, 45 cm wingspan, 62-82 g. Gray above, lighter gray to whitish below, dark nape and partial dark cap, white forehead, fluffy round-headed appearance.
-
-The friendliest wild bird most PNW hikers encounter: approaches humans without hesitation, lands on outstretched hands, steals food from campsites ("camp robber"), "whiskey jack" (from Algonquin *wisakedjak*, trickster spirit). Intelligence, not tameness -- calculated strategy for accessing food from humans in remote environments.
-
-### THE SOUND: SOFT WHISTLES + MIMICRY -- THE QUIET CORVID
-
-Soft whistles (gentle, clear, tonal, ascending or descending, used for contact between pair and family), chuckling (quiet rapid low-pitched series, social function), mewing (low-pitched, nasal, longer range contact), mimicry (hawks, other corvids, forest birds -- learned and culturally transmitted), alarm (harsher but still quieter than Steller's Jay).
-
-The quietest corvid in the quintet. Maximum acoustic contrast with degree 103: harshest voice (Steller's Jay E=5 alarm) followed by softest voice (Gray Jay E=4 whistles).
-
-### FOOD CACHING -- SURVIVAL ARCHITECTURE IN THE SUBALPINE
-
-Sticky saliva from enlarged salivary glands acts as adhesive. Food items (insects, berries, mushrooms, seeds, meat scraps) pressed into bark crevices and held by saliva adhesive -- unique caching method among corvids. Thousands of items cached per year. Spatial memory for relocating cached items months later. Late-winter breeding (February-March) possible only through cached food supply -- feeding nestlings while subalpine forest still buried in snow.
-
-### SUBALPINE FOREST HABITAT
-
-Mountain hemlock, subalpine fir, whitebark pine, Engelmann spruce. Typically above 1,200 meters in PNW Cascades. Above the Steller's Jay's lowland conifer territory (103) and below the American Pika's alpine talus (74). Year-round resident -- does not migrate. Climate-change sentinel: warmer autumn temperatures cause cached food to spoil, reducing breeding success.
-
-### CROSS-REFERENCES (Part B)
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| SPS-103 | Gray Jay (104) | Steller's Jay raucous (103) | CORVIDAE QUINTET. Complementary elevations: lowland conifer vs subalpine conifer. Maximum acoustic contrast: harshest (E=5) then softest (E=4). |
-| SPS-100 | Gray Jay (104) | Common Raven (100) | CORVIDAE QUINTET. Both cache food. Raven in ground; Gray Jay in tree bark with sticky saliva. Both intelligent. |
-| SPS-102 | Gray Jay (104) | American Crow (102) | CORVIDAE QUINTET. Maximum habitat separation: urban/open (crow) vs remote subalpine (Gray Jay). |
-| SPS-065 | Gray Jay (104) | American Marten (65) | SUBALPINE SHARED HABITAT. Both year-round residents of high-elevation conifer belt. Marten potential nest predator. |
-| SPS-074 | Gray Jay (104) | American Pika (74) | ALPINE NEIGHBOR. Adjacent elevational bands. Both cache food for winter. |
-
----
-
-## Parallel: Lemolo (Electronic) x Gray Jay -- The Dream Circuit and the Soft Whistle (CORVIDAE QUINTET CLOSES)
-
-The dream circuit and the soft whistle. Both the quieter, more intimate register after louder predecessors.
-
-**1. Both Quiet After Loud** -- Lemolo at E=3 follows Briana Marela's dissolution (E=3) and Hecuba's kinetic surge (E=5). The Gray Jay at E=4 follows the Steller's Jay's harsh alarm (E=5). Both are the gentler voice that comes after the louder one. The dream circuit after the kinetic surge. The soft whistle after the raucous alarm.
-
-**2. Both Intimate** -- Lemolo's dream circuit is intimate electronic pop -- atmospheric, pulsing, personal. The Gray Jay is the friendliest corvid -- approaching hikers, landing on hands, soft whistles in subalpine forest. Both invite closeness rather than demanding attention from a distance.
-
-**3. The Quintet Resolves** -- The Corvidae quintet began with the raven's deep authority (100, E=4) and ends with the Gray Jay's soft intimacy (104, E=4). The arc: authority -> coordination -> familiarity -> alarm -> intimacy. The quintet resolves from the loudest corvid voice (Steller's Jay alarm, E=5) to the softest (Gray Jay whistle, E=4). Five corvids, five acoustic characters, one family.
-
-**4. Back-to-Back Returns Confirmed** -- Degrees 103-104 are both return entries on the music side (Briana Marela 72->103, Lemolo 56->104). Both E=2 to E=3. Both reframed through electronic lens. The sustained electronic return is confirmed as a systematic engine pattern.
-
-**5. Elevational Pairing** -- The Steller's Jay (103, conifer lowland) and Gray Jay (104, subalpine) occupy complementary elevational bands. The species side of degrees 103-104 maps the corvid presence from sea level conifer to high-elevation subalpine. The music side maps electronic reframings from voice-dissolution to dream-rebuilding.
-
----
-
-## Acoustic Progression (105 elements)
-
-| # | Element | Degree | Artist/Species |
-|---|---------|--------|----------------|
-| 0 | silence | 0 | Quincy Jones |
-| 1 | cascade | 1 | Bill Frisell |
-| 2 | drone | 2 | Wayne Horvitz |
-| 3 | language | 3 | Ernestine Anderson |
-| 4 | motif | 4 | Floyd Standifer |
-| 5 | metronome | 5 | Overton Berry |
-| 6 | question | 6 | Patti Bown |
-| 7 | harmonic spiral | 7 | Julian Priester |
-| 8 | ultrasonic threshold | 8 | Gary Peacock |
-| 9 | variation | 9 | Hadley Caliman |
-| 10 | minimum signal | 10 | Bud Shank |
-| 11 | trill/tremolo | 11 | Joe Brazil |
-| 12 | sawtooth sweep | 12 | Don Lanphere |
-| 13 | ostinato | 13 | Marc Seales |
-| 14 | repetition-resolution | 14 | Aaron Parks |
-| 15 | accelerando | 15 | Thomas Marriott |
-| 16 | crescendo | 16 | Jeff Lorber |
-| 17 | the hook | 17 | Reggie Watts |
-| 18 | ascending spiral | 18 | Maktub |
-| 19 | descending spiral | 19 | Fly Moon Royale |
-| 20 | sustain/the release | 20 | Whitney Monge |
-| 21 | the hammer | 21 | Polyrhythmics |
-| 22 | resonant percussion/groove reset | 22 | Foxy Apollo |
-| 23 | the testimony/groove reset | 23 | Allen Stone |
-| 24 | the invocation | 24 | Ron Artis II |
-| 25 | the congregation | 25 | Black Stax |
-| 26 | the caroling | 26 | Shaina Shepherd |
-| 27 | the liquid gurgle | 27 | The Dynamics |
-| 28 | the liquid twitter | 28 | Night Owls |
-| 29 | the rough brrit | 29 | Boogaloo Joe Jones |
-| 30 | the liquid warble synthesis | 30 | Ray Charles |
-| 31 | the whisper | 31 | Brenda Lee Eager |
-| 32 | the buzz | 32 | Luther Rabb |
-| 33 | the cadenza | 33 | Larry English |
-| 34 | the dialect | 34 | The Tempos |
-| 35 | the thrum | 35 | Robert Cray |
-| 36 | the sonic boom | 36 | Jimi Hendrix |
-| 37 | the filament | 37 | Ayron Jones |
-| 38 | the drawl | 38 | Booker T. Jones |
-| 39 | the canopy buzz | 39 | Ron Artis Jr |
-| 40 | the thinning | 40 | Alice Smith |
-| 41 | the partition | 41 | Shawn Smith |
-| 42 | the shimmer | 42 | Erica Campbell |
-| 43 | the radiance | 43 | Ann Wilson |
-| 44 | the grain | 44 | Chong the Nomad |
-| 45 | the murmur | 45 | Damien Jurado |
-| 46 | the confessional | 46 | Rocky Votolato |
-| 47 | the parable tone | 47 | Pedro the Lion |
-| 48 | the held rest | 48 | Sera Cahoone |
-| 49 | the lullaby subversion | 49 | Kimya Dawson |
-| 50 | the intimate architecture | 50 | Mirah |
-| 51 | the communal harmony | 51 | Grand Archives |
-| 52 | the testimony roar | 52 | Brandi Carlile |
-| 53 | the cathedral harmony | 53 | Fleet Foxes |
-| 54 | the fraternal jangle | 54 | Ivan & Alyosha |
-| 55 | the ember glow | 55 | Shelby Earl |
-| 56 | the dream haze | 56 | Lemolo |
-| 57 | the rattle / the stream rattle | 57 | Laura Gibson / Belted Kingfisher |
-| 58 | the ache / the pond whistle | 58 | Death Cab for Cutie / Wood Duck |
-| 59 | the digression / the quack | 59 | The Long Winters / Mallard |
-| 60 | the bare wire / the submerge call | 60 | Ben Gibbard (solo) / Pied-billed Grebe |
-| 61 | the braided voice / the tail slap | 61 | Y La Bamba / American Beaver |
-| 62 | the throwback / the rhythmic gnaw | 62 | Pickwick / Beaver Chewing |
-| 63 | the FM sheen / the chuff | 63 | Kenny Loggins / River Otter |
-| 64 | the dusk / the chitter | 64 | Jesse Sykes / Mink |
-| 65 | the open plain / the chuckle-chatter | 65 | Philip Aaberg / American Marten |
-| 66 | the country thunder / the scream | 66 | Neko Case / Fisher |
-| 67 | the clean room / the shrill bark-chitter | 67 | Chris Walla / Short-tailed Weasel |
-| 68 | the hush / the rapid chattering chirp | 68 | Sam Beam / Long-tailed Weasel |
-| 69 | the earnest voice / the warning foot-stamp hiss | 69 | Kris Orlowski / Striped Skunk |
-| 70 | the fiddle line / the churring chittering young | 70 | Horse Feathers / Raccoon |
-| 71 | the room tone / the bark screaming vixen call | 71 | Phil Elverum / Red Fox |
-| 72 | the layered loop / the low hiss click | 72 | Briana Marela / Opossum |
-| 73 | the jangle / the thump squeal | 73 | LAKE / Snowshoe Hare |
-| 74 | the reverb wash / the high sharp eenk bark | 74 | Poor Moon / American Pika |
-| 75 | the anthem / the piercing whistle alarm | 75 | The Lonely Forest / Yellow-bellied Marmot |
-| 76 | the androgynous register / the loud penetrating whistle | 76 | Chris Pureka / Hoary Marmot |
-| 77 | the ethereal layering / the musical multi-note whistle | 77 | Mree / Olympic Marmot |
-| 78 | the communal jangle / the chirping trill alarm | 78 | Acid Tongue / Townsend's Ground Squirrel |
-| 79 | the cinematic stillness / the sharp chip alarm | 79 | Jesse Marchant / Golden-mantled Ground Squirrel |
-| 80 | the organ explosion / the loud scolding chatter rattle | 80 | Mates of State / Douglas Squirrel |
-| 81 | the Broadway voice / the bark + chatter alarm | 81 | Sara Bareilles / Eastern Fox Squirrel |
-| 82 | the acoustic intimacy / the high thin tseet | 82 | Death Cab for Cutie (acoustic) / Northern Flying Squirrel |
-| 83 | the grunge whisper / the ultrasonic + soft chip | 83 | Pearl Jam (acoustic) / Deer Mouse |
-| 84 | the late whisper / the chatter + twig gnaw | 84 | Damien Jurado (late career) / Bushy-tailed Woodrat |
-| 85 | the stripped confession / the quiet plop | 85 | Rocky Votolato (acoustic) / Muskrat |
-| 86 | the electronic pulse / the amplified krek-krek wall of sound | 86 | The Postal Service / Pacific Treefrog |
-| 87 | the emerging twang / the rhythmic chirp field chorus | 87 | Neko Case (early folk) / Cricket Chorus |
-| 88 | the bedroom strum / the continuous electric buzz | 88 | Kimya Dawson (solo) / Katydid |
-| 89 | the baroque whisper / the electric buzzing throb | 89 | Parenthetical Girls / Cicada |
-| 90 | the ambient drift / the bell-like peep chorus | 90 | Sky Cries Mary / Spring Peeper-Like Chorus |
-| 91 | the sustained crush / the ultra-thin hum cloud | 91 | Hovercraft / Mosquito Swarm |
-| 92 | the global weave / the deep resonant buzz | 92 | Trance Mission / Bumblebee Drone |
-| 93 | the shimmer veil / the aggressive papery hum | 93 | NAVVI / Hornet Nest Buzz |
-| 94 | the producer's palette / the wing rustle on stream surface | 94 | Erik Blood / Stonefly Hatch |
-| 95 | the euphoric build / the mass wing buzz over water | 95 | ODESZA / Mayfly Emergence |
-| 96 | the synth-pop pulse / the duck-like clucking chorus | 96 | STRFKR / Wood Frog |
-| 97 | the algorithmic tenderness / the sustained musical purring | 97 | The Postal Service (electronic) / Toad Chorus |
-| 98 | the retro-synthetic shimmer / the pure sustained trill | 98 | Gold Casio / Tree Cricket Song |
-| 99 | the bilingual warmth / the mechanical click | 99 | Kaina / Click Beetle |
-| 100 | the nostalgic cascade / the deep cronk + bell + hollow knock | 100 | Summer Heart / Common Raven |
-| 101 | the kinetic surge / the coordinated duet | 101 | Hecuba / Common Raven Pair |
-| 102 | the organic circuit / the caw caw caw complex | 102 | Campfire OK / American Crow |
-| 103 | the layered dissolution / the shack-shack-shack raucous alarm | 103 | Briana Marela (electronic) / Steller's Jay (raucous) |
-| **104** | **the dream circuit / the soft whistles + mimicry** | **104** | **Lemolo (electronic) / Gray Jay** |
-
-The acoustic progression adds degree 104. On the artist side, the dream circuit (104) is Lemolo in electronic context -- dream haze rebuilt with electronic instruments, atmospheric quality preserved with added pulse, voice floating atop. E=3. From the layered dissolution (103, voice dissolved, textural, E=3) to the dream circuit (104, voice afloat, pulsing, E=3). Both E=3. Both electronic reframings. But dissolution erases the voice while the dream circuit preserves it. On the species side, the soft whistles + mimicry (104) is the Gray Jay -- gentle, tonal, clear, the quietest corvid. E=4. From the shack-shack-shack alarm (103, Steller's Jay, harsh, E=5) to the soft whistles (104, Gray Jay, gentle, E=4). Maximum acoustic contrast between consecutive corvids. The quintet resolves: authority (100) -> coordination (101) -> familiarity (102) -> alarm (103) -> intimacy (104).
-
-## Artist-City Patterns (105 patterns)
-
-| # | Pattern | Degree | Artist |
-|---|---------|--------|--------|
-| 0 | Export | 0 | Quincy Jones |
-| 1 | Draw | 1 | Bill Frisell |
-| 2 | European Exile | 2 | Wayne Horvitz |
-| 3 | The Stay | 3 | Ernestine Anderson |
-| 4 | The Teacher | 4 | Floyd Standifer |
-| 5 | The Persistence | 5 | Overton Berry |
-| 6 | The Erasure | 6 | Patti Bown |
-| 7 | Pedagogue-Draw | 7 | Julian Priester |
-| 8 | The Quiet Draw | 8 | Gary Peacock |
-| 9 | The Seeker | 9 | Hadley Caliman |
-| 10 | Late Homestead | 10 | Bud Shank |
-| 11 | The Salon Keeper | 11 | Joe Brazil |
-| 12 | The Prodigal | 12 | Don Lanphere |
-| 13 | Institutional Anchor | 13 | Marc Seales |
-| 14 | Prodigy-Export | 14 | Aaron Parks |
-| 15 | Builder-Stayer | 15 | Thomas Marriott |
-| 16 | Talent Incubator | 16 | Jeff Lorber |
-| 17 | The Uncategorizable | 17 | Reggie Watts |
-| 18 | The Workshop | 18 | Maktub |
-| 19 | The New Root | 19 | Fly Moon Royale |
-| 20 | The Street Laureate | 20 | Whitney Monge |
-| 21 | The Ensemble Anchor | 21 | Polyrhythmics |
-| 22 | The Inheritor | 22 | Foxy Apollo |
-| 23 | The Rural Draw | 23 | Allen Stone |
-| 24 | The Island Export | 24 | Ron Artis II |
-| 25 | The Cultural Guardian | 25 | Black Stax |
-| 26 | The Transmuter | 26 | Shaina Shepherd |
-| 27 | The Conduit | 27 | The Dynamics |
-| 28 | The Resident Band | 28 | Night Owls |
-| 29 | The Catalog | 29 | Boogaloo Joe Jones |
-| 30 | The Incubation | 30 | Ray Charles |
-| 31 | The Relay | 31 | Brenda Lee Eager |
-| 32 | The Foundation | 32 | Luther Rabb |
-| 33 | The Unrecorded | 33 | Larry English |
-| 34 | The Shadow Name | 34 | The Tempos |
-| 35 | The Deep Root | 35 | Robert Cray |
-| 36 | The Supernova | 36 | Jimi Hendrix |
-| 37 | The Inheritor | 37 | Ayron Jones |
-| 38 | The Touring Anchor | 38 | Booker T. Jones |
-| 39 | The Returning Wave | 39 | Ron Artis Jr |
-| 40 | The Cultural Satellite | 40 | Alice Smith |
-| 41 | The Scene Native | 41 | Shawn Smith |
-| 42 | The Gospel Export | 42 | Erica Campbell |
-| 43 | The Arena Architect | 43 | Ann Wilson |
-| 44 | The Digital Immigrant | 44 | Chong the Nomad |
-| 45 | The Stripped Murmur | 45 | Damien Jurado |
-| 46 | The Confessional Drifter | 46 | Rocky Votolato |
-| 47 | The Sacred Baritone | 47 | Pedro the Lion |
-| 48 | The Campfire Anchor | 48 | Sera Cahoone |
-| 49 | The Trojan Lullabist | 49 | Kimya Dawson |
-| 50 | The Intimate Architect | 50 | Mirah |
-| 51 | The Folk Organism | 51 | Grand Archives |
-| 52 | The Arena Breakout | 52 | Brandi Carlile |
-| 53 | The Prodigy Return | 53 | Fleet Foxes |
-| 54 | The Neighborhood Anchor | 54 | Ivan & Alyosha |
-| 55 | The Infrastructure Beneficiary | 55 | Shelby Earl |
-| 56 | The Duo Collective | 56 | Lemolo |
-| 57 | The Label Bridge | 57 | Laura Gibson |
-| 58 | The Bellingham Ascent | 58 | Death Cab for Cutie |
-| 59 | The Scene Intellectual | 59 | The Long Winters |
-| 60 | The Frontman Alone | 60 | Ben Gibbard (solo) |
-| 61 | The Corridor Bridge | 61 | Y La Bamba |
-| 62 | The Brief Blaze | 62 | Pickwick |
-| 63 | The Everett Departure | 63 | Kenny Loggins |
-| 64 | The Dark-Folk Loner | 64 | Jesse Sykes |
-| 65 | The Montana Connection | 65 | Philip Aaberg |
-| 66 | The Wanderer Who Claims Multiple Cities | 66 | Neko Case |
-| 67 | The Departed Member | 67 | Chris Walla |
-| 68 | The Visiting Artist | 68 | Sam Beam |
-| 69 | The Working Musician | 69 | Kris Orlowski |
-| 70 | The Corridor Wanderer | 70 | Horse Feathers |
-| 71 | The Anacortes Hermit | 71 | Phil Elverum |
-| 72 | The International Student | 72 | Briana Marela |
-| 73 | The K Records Collective | 73 | LAKE |
-| 74 | The Side Project | 74 | Poor Moon |
-| 75 | The Second Anacortes Act | 75 | The Lonely Forest |
-| 76 | The Identity Artist | 76 | Chris Pureka |
-| 77 | The YouTube-to-Artist Pipeline | 77 | Mree |
-| 78 | The Porch Party | 78 | Acid Tongue |
-| 79 | The Dark Meditation | 79 | Jesse Marchant |
-| 80 | The Married Duo | 80 | Mates of State |
-| 81 | The Crossover Arc | 81 | Sara Bareilles |
-| 82 | The Recursive Return | 82 | Death Cab for Cutie (acoustic) |
-| 83 | The Arena Unplugged | 83 | Pearl Jam (acoustic) |
-| 84 | The Artist Arc | 84 | Damien Jurado (late career) |
-| 85 | The Confessional Return | 85 | Rocky Votolato (acoustic) |
-| 86 | The Side Project | 86 | The Postal Service |
-| 87 | The Early Chapter | 87 | Neko Case (early folk) |
-| 88 | The Solo Distillation | 88 | Kimya Dawson (solo) |
-| 89 | The Theatrical Outsider | 89 | Parenthetical Girls |
-| 90 | The Parallel Scene | 90 | Sky Cries Mary |
-| 91 | The Spousal Satellite | 91 | Hovercraft |
-| 92 | The Cross-Pollinator | 92 | Trance Mission |
-| 93 | The Intimate Machine | 93 | NAVVI |
-| 94 | The Cross-Genre Bridge | 94 | Erik Blood |
-| 95 | The Bellingham Pipeline | 95 | ODESZA |
-| 96 | The DIY Maximalist | 96 | STRFKR |
-| 97 | The Re-Contextualized Return | 97 | The Postal Service (electronic) |
-| 98 | The Self-Released Synthesist | 98 | Gold Casio |
-| 99 | The Diasporic Synthesist | 99 | Kaina |
-| 100 | The Transatlantic Dreamer | 100 | Summer Heart |
-| 101 | The Dance Floor Provocateur | 101 | Hecuba |
-| 102 | The Warm Circuiteer | 102 | Campfire OK |
-| 103 | The Electronic Reframing | 103 | Briana Marela (electronic) |
-| **104** | **The Sustained Electronic Return** | **104** | **Lemolo (electronic)** |
-
-One hundred and five named patterns across one hundred and five degrees. The Sustained Electronic Return (104) describes the pattern where multiple artists return in electronic context across consecutive degrees -- establishing the electronic reframing as sustained rather than isolated. From the Electronic Reframing (103, single return) to the Sustained Electronic Return (104, confirmed pattern). Three electronic returns in eight degrees (97, 103, 104).
-
-## Genre Evolution (86 stages)
-
-| Stage | Degree | Genre | Artist |
-|-------|--------|-------|--------|
-| 27 | 45 | Folk | Damien Jurado |
-| 28 | 46 | Folk | Rocky Votolato |
-| 29 | 47 | Indie Folk | Pedro the Lion |
-| 30 | 48 | Folk | Sera Cahoone |
-| 31 | 49 | Folk Punk | Kimya Dawson |
-| 32 | 50 | Indie Folk | Mirah |
-| 33 | 51 | Indie Folk | Grand Archives |
-| 34 | 52 | Folk/Rock | Brandi Carlile |
-| 35 | 53 | Indie Folk | Fleet Foxes |
-| 36 | 54 | Folk | Ivan & Alyosha |
-| 37 | 55 | Singer-Songwriter | Shelby Earl |
-| 38 | 56 | Indie Folk | Lemolo |
-| 39 | 57 | Folk | Laura Gibson |
-| 40 | 58 | Indie Rock | Death Cab for Cutie |
-| 41 | 59 | Indie Rock | The Long Winters |
-| 42 | 60 | Folk | Ben Gibbard (solo) |
-| 43 | 61 | Folk/Indie | Y La Bamba |
-| 44 | 62 | Indie/Folk | Pickwick |
-| 45 | 63 | Soft Rock/Folk | Kenny Loggins |
-| 46 | 64 | Folk | Jesse Sykes |
-| 47 | 65 | New Age/Folk | Philip Aaberg |
-| 48 | 66 | Alt Country | Neko Case |
-| 49 | 67 | Indie/Folk | Chris Walla |
-| 50 | 68 | Folk | Sam Beam |
-| 51 | 69 | Singer-Songwriter | Kris Orlowski |
-| 52 | 70 | Indie Folk | Horse Feathers |
-| 53 | 71 | Indie/Folk | Phil Elverum |
-| 54 | 72 | Art Pop | Briana Marela |
-| 55 | 73 | Indie Pop | LAKE |
-| 56 | 74 | Indie Folk/Rock | Poor Moon |
-| 57 | 75 | Indie Pop | The Lonely Forest |
-| 58 | 76 | Folk | Chris Pureka |
-| 59 | 77 | Folk/Pop | Mree |
-| 60 | 78 | Folk/Indie | Acid Tongue |
-| 61 | 79 | Folk | Jesse Marchant |
-| 62 | 80 | Indie Pop | Mates of State |
-| 63 | 81 | Pop/Soul | Sara Bareilles |
-| 64 | 82 | Indie Folk | Death Cab for Cutie (acoustic) |
-| 65 | 83 | Acoustic Rock | Pearl Jam (acoustic) |
-| 66 | 84 | Folk | Damien Jurado (late career) |
-| 67 | 85 | Folk | Rocky Votolato (acoustic) |
-| 68 | 86 | Indie Electronic | The Postal Service |
-| 69 | 87 | Folk Country | Neko Case (early folk) |
-| 70 | 88 | Lo-Fi Folk | Kimya Dawson (solo) |
-| 71 | 89 | Avant-Pop | Parenthetical Girls |
-| 72 | 90 | Ethereal/Electronic | Sky Cries Mary |
-| 73 | 91 | Drone/Noise | Hovercraft |
-| 74 | 92 | World/Electronic | Trance Mission |
-| 75 | 93 | Dream Pop/Electronic | NAVVI |
-| 76 | 94 | Electronic/Experimental | Erik Blood |
-| 77 | 95 | Electronic | ODESZA |
-| 78 | 96 | Indie Electronic | STRFKR |
-| 79 | 97 | Indie Electronic | The Postal Service (electronic) |
-| 80 | 98 | Indie Electronic | Gold Casio |
-| 81 | 99 | Electronic/R&B | Kaina |
-| 82 | 100 | Electronic Pop | Summer Heart |
-| 83 | 101 | Dance/Electronic | Hecuba |
-| 84 | 102 | Indie Electronic | Campfire OK |
-| 85 | 103 | Art Pop/Electronic | Briana Marela (electronic) |
-| **86** | **104** | **Electronic Pop** | **Lemolo (electronic)** |
-
-Genre Stage 86 -- Electronic Pop at degree 104. Eighty-six genre stages in 104 degrees. Lemolo's Electronic Pop is dream-based (distinct from The Postal Service's glitch-based Electronic Pop at degree 86). Tenth electronic-adjacent genre stage since degree 86. The electronic era continues to produce new sub-genres and reframings.
-
-## Energy Distribution
-
-**Artist-side (after degree 104):** E1:3 (2.9%), E2:31 (29.5%), E3:29 (27.6%), E4:27 (25.7%), E5:14 (13.3%), E6:2 (1.9%). Total: 105 (degrees 0-104). E=3 gains Lemolo electronic (104) reaching 29 -- now the second most common energy level. Both electronic returns (103, 104) at E=3. The electronic reframing consistently produces E=3.
-
-**Species-side (after degree 104):** E=4 for Gray Jay (104) after Steller's Jay raucous (103, E=5). The Corvidae quintet energy: E=4 (100), E=5 (101), E=4 (102), E=5 (103), E=4 (104). Perfect oscillation: E=4, E=5, E=4, E=5, E=4. The quintet brackets itself with E=4 and peaks at E=5 twice.
-
-## Cross-References (Combined)
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| S36-056 | Lemolo electronic (104) | Lemolo (56) | RETURN! Indie Folk E=2 to Electronic Pop E=3. Dream haze rebuilt in circuitry. |
-| S36-103 | Lemolo electronic (104) | Briana Marela electronic (103) | BACK-TO-BACK ELECTRONIC RETURN. Voice dissolved (103) vs voice afloat (104). Two return strategies. |
-| S36-093 | Lemolo electronic (104) | NAVVI (93) | DREAM POP/ELECTRONIC. Fully electronic from start vs arrived from folk. Different trajectories. |
-| S36-072 | Lemolo electronic (104) | Briana Marela (72) | PARALLEL RETURN. Both 72->103 and 56->104. Parallel electronic reframing trajectories. |
-| S36-086 | Lemolo electronic (104) | The Postal Service (86) | ELECTRONIC POP. Glitch-based vs dream-based. Same genre, different ancestry. |
-| SPS-103 | Gray Jay (104) | Steller's Jay raucous (103) | CORVIDAE QUINTET. Lowland conifer vs subalpine. Harshest voice then softest. |
-| SPS-100 | Gray Jay (104) | Common Raven (100) | CORVIDAE QUINTET. Both cache food. Ground vs bark with sticky saliva. |
-| SPS-102 | Gray Jay (104) | American Crow (102) | CORVIDAE QUINTET. Urban vs remote subalpine. Maximum habitat separation. |
-| SPS-065 | Gray Jay (104) | American Marten (65) | SUBALPINE SHARED HABITAT. Both year-round high-elevation residents. |
-| SPS-074 | Gray Jay (104) | American Pika (74) | ALPINE NEIGHBOR. Adjacent elevational bands. Both cache food for winter. |
-
-## Infrastructure
-
-**Part A:** `www/tibsfox/com/Research/S36/research/releases/104-lemolo-electronic/` -- research.md, index.html, knowledge-nodes.json, retrospective.md
-**Part B:** `www/tibsfox/com/Research/SPS/research/releases/104-gray-jay/` -- research.md, index.html, knowledge-nodes.json, retrospective.md
-**Release notes:** `docs/release-notes/v1.49.244/README.md`
-
-**Total: 8 files** -- standard degree package.
-
----
+## Part A: Lemolo (Electronic) — THE DREAM CIRCUIT
+
+- **The Seventh Return Artist and the second back-to-back electronic return.** **Lemolo** is the seventh artist to return to the engine after being first documented in an earlier degree, following **Death Cab for Cutie** (58→82), **Pearl Jam** (25→83), **Damien Jurado** (45→84), **Rocky Votolato** (46→85), **The Postal Service** (86→97), and **Briana Marela** (72→103). Combined with **Briana Marela's** 72→103 electronic return a single degree earlier, **Lemolo** at degree 104 creates **back-to-back return artists at consecutive degrees** — both returning in **electronic context**, both transitioning from E=2 to E=3, both **Seattle**-associated, both reframed through the electronic lens rather than through stylistic drift. The back-to-back structure confirms the electronic reframing as a **sustained systematic engine pattern** rather than an isolated event.
+- **Lemolo — the Seattle duo of Meagan Grandall and Kendra Cox.** The duo's core remains unchanged across the forty-eight-degree span from **degree 56** to **degree 104**. **Meagan Grandall** (vocals, guitar) continues as the primary songwriter and vocalist; **Kendra Cox** (drums) continues as the rhythmic foundation. The shift at degree 104 is not a personnel change but an **instrumentation shift** — Grandall adds synthesizers and electronic processing to her signal chain; Cox transitions from acoustic drums to electronic percussion and drum-machine programming. The duo's internal dynamic, the dream-haze aesthetic, and the atmospheric production signature all survive the transition intact.
+- **Genre Stage 86 — Electronic Pop at the dream-based rather than glitch-based pole.** The engine has now introduced eighty-six distinct genre stages across 104 degrees. **Electronic Pop** at degree 104 is the second entry under that genre label — first introduced by **The Postal Service** at **degree 86** eighteen degrees earlier. The two Electronic Pop entries are structurally distinct: The Postal Service's version is **glitch-based**, **laptop-assembled**, **bedroom-produced** by two collaborators who trade files across a postal-mail network; Lemolo's version is **dream-based**, **duo-driven**, **rehearsal-produced** by two musicians who play in the same room. Same genre label; radically different production topology; radically different aesthetic ancestry.
+- **The Dream Rebuilt in Circuitry — preserving atmosphere, adding pulse.** At **degree 56**, Lemolo was **Indie Folk** — dream haze, acoustic foundation, reverb-drenched guitar, layered vocals, **E=2**. The original dream lived inside acoustic instrumentation with reverb and delay as its atmospheric signature. At **degree 104**, synthesizers replace guitars, drum machines replace acoustic drums, but the **reverb and delay remain** — carrying the atmospheric signature across the transition intact. The dream persists, but the electronic foundation adds **pulse** — rhythmic regularity and forward motion that the acoustic dream haze deliberately lacked. The dream circuit is thus the **dream haze rebuilt with electronic instruments**, preserving atmospheric quality while adding underlying pulse.
+- **The Dream Circuit — 105th acoustic element distinct from every electronic predecessor.** **Preserved atmosphere** (reverb, delay, spatial qualities carry over from the degree-56 original); **electronic foundation** (synthesizers and drum machines replace acoustic instruments); **added pulse** (rhythmic regularity and forward motion the acoustic dream haze lacked); **voice afloat** (Grandall's vocal floats atop the electronic surface rather than dissolving into it). The dream circuit contrasts explicitly with the **dream haze** at **degree 56** (acoustic foundation, no pulse), with the **layered dissolution** at **degree 103** (Briana Marela's voice dissolves into textural wash; Lemolo's voice stays afloat), with the **melodic ache** at **degree 86** (Postal Service's glitch-based Electronic Pop), and with the **shimmer veil** at **degree 93** (NAVVI's fully-electronic-from-start dream pop).
+- **The Sustained Electronic Return — 105th artist-city pattern confirming systematic reframing.** Back-to-back electronic returns at degrees 103-104. Both E=2 to E=3. Both self-contained artistic practices reframed through electronic lens. **Three electronic returns in eight degrees** (97 Postal Service, 103 Briana Marela, 104 Lemolo). The pattern confirms the electronic reframing as a **systematic analytical tool** rather than a one-off stylistic experiment. The artist-city pattern name — **The Sustained Electronic Return** — encodes the confirmation directly: repetition has moved the reframing from isolated event into confirmed engine mechanism.
+- **E=3 — moderate electronic pop between E=2 intimacy and E=5 cinematic escalation.** The dream circuit at E=3 sits deliberately mid-spectrum. It is not the **E=2 intimacy** of the original acoustic Lemolo at degree 56, and it is not the **E=5 cinematic escalation** of **ODESZA** at **degree 95** or the **E=5 kinetic surge** of **Hecuba** at **degree 101**. It is **moderate electronic pop** — atmospheric, pulsing, personal — that invites closeness without demanding arena-scale presence. The electronic reframing consistently raises energy by exactly one level from its acoustic original (Lemolo 56→104 E=2→E=3; Briana Marela 72→103 E=2→E=3), establishing the one-level lift as a reliable characteristic of the electronic reframing mechanism.
+- **Self-released — independent production reflects duo-driven rather than laptop-assembled origin.** **Lemolo's** electronic releases continue the duo's independent production stance established at degree 56. The label context is less concentrated than **Sub Pop** (86, 97 for The Postal Service) or **Counter Records** (95 for ODESZA) — it is **self-directed**, **duo-controlled**, **Bandcamp-distributed**. The self-released context matches the dream circuit's aesthetic: personal, intimate, duo-driven rather than label-curated or producer-driven. Self-release is a creative decision, not a label-search default — and the independent distribution topology itself carries the dream circuit's interior-rather-than-exterior quality.
+- **Ten electronic-adjacent entries since degree 86 — the electronic era continues.** Lemolo electronic at degree 104 is the tenth electronic-adjacent genre stage since The Postal Service's degree-86 introduction of Electronic Pop. The electronic era of **Quadrant II** now includes **Indie Electronic** (86, 96, 97, 98, 102), **Ethereal/Electronic** (90), **Drone/Noise** (91), **World/Electronic** (92), **Dream Pop/Electronic** (93), **Electronic/Experimental** (94), **Electronic** (95), **Electronic/R&B** (99), **Electronic Pop** (100, 104), **Dance/Electronic** (101), and **Art Pop/Electronic** (103). Fourteen electronic-adjacent entries in nineteen degrees since degree 86 — the electronic era is now the longest sustained genre cluster in the engine.
+
+## Part B: Gray Jay (*Perisoreus canadensis*) / Canada Jay — CORVIDAE QUINTET CLOSES
+
+- **The fifth consecutive Corvidae — the CORVIDAE QUINTET ties the longest same-family run in the engine.** Degree 104 extends the Corvidae run to **FIVE CONSECUTIVE DEGREES** (100, 101, 102, 103, 104). The quintet ties the **Mustelidae quintet**, the **Swallow quintet**, and the **Sciuridae quintet** for the longest same-family consecutive run in the entire **Seattle 360** engine. Five is the confirmed ceiling; no family has ever exceeded five consecutive entries. The Gray Jay — soft whistles, chuckling, mewing, mimicry, subalpine specialist — closes the quintet at E=4 after the **Common Raven** (100, E=4, deep cronk), the **Common Raven Pair** (101, E=5, coordinated duet), the **American Crow** (102, E=4, sharp caw), and the **Steller's Jay** raucous (103, E=5, harsh alarm). Kingdom: **Animalia**. Phylum: **Chordata**. Class: **Aves**. Order: **Passeriformes**. Family: **Corvidae**. Genus: ***Perisoreus***. Species: ***P. canadensis***.
+- **The Gray Jay — renamed Canada Jay by the American Ornithological Society in 2018.** The species carries two official common names: **Gray Jay** (the older and still widely used designation) and **Canada Jay** (the 2018 American Ornithological Society rename). The scientific name *Perisoreus canadensis* has not changed. Physical profile: **25-33 cm body length**, **45 cm wingspan**, **62-82 g body mass** — substantially smaller than the **Common Raven** (100) and smaller than the **Steller's Jay** (103). Plumage: **gray above**, **lighter gray to whitish below**, **dark nape and partial dark cap**, **white forehead**, **fluffy round-headed appearance**. The fluffy round-headed appearance distinguishes the Gray Jay from nearly every other corvid on sight.
+- **The camp robber and the whiskey jack — the friendliest wild bird a PNW hiker will ever meet.** The Gray Jay is the **friendliest wild bird** most **Pacific Northwest** hikers encounter in the course of a lifetime of wilderness travel. The species approaches humans without hesitation, lands on outstretched hands, steals food directly from campsites, and earns its common names from this signature behavior. **Camp robber** names the behavior directly; **whiskey jack** comes from the **Algonquin** *wisakedjak*, a trickster spirit in First Nations mythology of the eastern North American boreal forest. The trickster designation is apt: Gray Jay boldness toward humans is **intelligence**, not tameness — a **calculated strategy** for accessing high-energy food sources (meat scraps, bread, anything calorically dense) from humans in remote subalpine environments where such foods are otherwise rare. Every Gray Jay approach is a risk-benefit calculation the bird has made.
+- **The sound: soft whistles + mimicry — the quietest corvid in the quintet.** **Soft whistles** (gentle, clear, tonal, ascending or descending, used for contact between pair-bonded adults and family groups). **Chuckling** (quiet rapid low-pitched series, social function between familiar birds). **Mewing** (low-pitched, nasal, longer-range contact). **Mimicry** (hawks, other corvids, forest birds — learned and culturally transmitted across generations, echoing the **Common Raven's** mimicry ability from degree 100). **Alarm** (harsher but still quieter than **Steller's Jay**'s shriek). The Gray Jay is the **quietest corvid in the quintet**, and the maximum acoustic contrast of the entire Corvidae run is between degrees 103 and 104 — the **Steller's Jay's** E=5 harsh alarm followed immediately by the Gray Jay's E=4 gentle whistles. Harshest voice meets softest voice at the quintet's final transition.
+- **Food caching — sticky saliva and thousands of items per year.** The Gray Jay's **enlarged salivary glands** produce sticky saliva that acts as an adhesive. Food items (**insects, berries, mushrooms, seeds, meat scraps**) are pressed into **bark crevices** and held in place by saliva adhesive — a caching method **unique among corvids** and unmatched elsewhere in the **Corvidae** family of **Common Raven** (ground-caches) and **Steller's Jay** (scatter-hoards in surface leaf litter). A single Gray Jay caches **thousands of food items per year** across a well-remembered territorial range. The species demonstrates **spatial memory** capable of relocating cached items **months later** under deep snow. The cache network is the survival architecture that enables everything else the Gray Jay does.
+- **Late-winter breeding — feeding nestlings in February and March snow.** The cached food supply enables **late-winter breeding** that no other **North American passerine** attempts at the same calendar scale. Gray Jays begin nesting in **February and March** when the **PNW Cascades subalpine forest** is still buried in deep snow. Nestlings are fed primarily from the previous year's **bark-stored caches** — dried insects, nuts, seeds, meat fragments preserved by winter cold and held in place by the summer's sticky saliva. Breeding so early means the young fledge before the brief subalpine summer begins, giving the juveniles their first-year opportunity to learn the cache network that will determine their own survival. The entire life-cycle of the species is structured around the cache architecture.
+- **Subalpine forest habitat — mountain hemlock, subalpine fir, whitebark pine, Engelmann spruce.** The Gray Jay specializes in **subalpine conifer forest** typically above **1,200 meters** in the **PNW Cascades**. Principal tree species: **mountain hemlock**, **subalpine fir**, **whitebark pine**, **Engelmann spruce**. This elevational band is **above** the **Steller's Jay's** lowland conifer territory (degree 103) and **below** the **American Pika's** alpine talus (degree 74). Year-round resident; does not migrate. The species' elevational range connects it structurally to **American Marten** (degree 65, shared subalpine year-round habitat) and to **American Pika** (degree 74, adjacent alpine neighbor). The subalpine is the Gray Jay's zone; no other corvid occupies it at the Gray Jay's territorial density.
+- **The climate-change sentinel — the first species in the engine directly threatened by warming temperatures.** The Gray Jay is the **first species documented in the engine** whose survival is **directly threatened by warming autumn temperatures**. The mechanism: warmer autumns cause cached food to **spoil before winter arrives**, because refrigeration-by-cold is the preservation mechanism the species depends on. Spoiled caches reduce the food available for **late-winter breeding**, reducing breeding success, reducing juvenile recruitment, reducing the population that can maintain territorial presence across the subalpine range. **Climate change** is thus not a distant abstraction for the Gray Jay but an immediate survival variable. The engine at degree 104 begins documenting **vulnerabilities** alongside acoustic character — the species portfolio now includes species whose survival is visibly at stake.
+- **Forty-fourth consecutive original CSV species — degrees 61-104.** The Gray Jay extends the unbroken run of original-catalog selections from **degree 61** to **degree 104** — **forty-four consecutive original CSV species** without substitution or correction. The source catalog has now delivered reliably across more than forty consecutive entries, and the reliability is itself a **defining characteristic** of the engine at this point rather than a coincidence. The Gray Jay's original-catalog presence is planned, not accidental, and the cache-based survival strategy the species contributes to the engine was present in the catalog from the beginning.
 
 ## Retrospective
 
-**What Worked:**
-1. The CORVIDAE QUINTET (five consecutive Corvidae, 100-104) is the most structurally extraordinary family run in the engine -- tying the record for longest same-family consecutive run. The quintet resolves beautifully: authority -> coordination -> familiarity -> alarm -> intimacy
-2. The energy oscillation within the quintet is perfect: E=4, E=5, E=4, E=5, E=4 -- a symmetric pattern that brackets E=5 peaks with E=4 bookends
-3. Back-to-back electronic returns (103-104) confirm the electronic reframing as a sustained systematic pattern, not an isolated event. Both E=2 to E=3. The consistency strengthens the pattern
-4. The Gray Jay as the quintet closer is the right choice -- the quietest, friendliest, most intimate corvid resolves the quintet after the Steller's Jay's maximum-volume alarm
-5. The dream circuit / soft whistle parallel works because both are the quieter, more intimate voice after louder predecessors -- the campfire glow after the alarm, the dream pulse after the dissolution
-6. The Gray Jay's bark-caching with sticky saliva is one of the most unusual adaptations documented in the engine -- late-winter breeding enabled by cached food is a remarkable survival strategy
-7. The elevational pairing of Steller's Jay (103, lowland conifer) and Gray Jay (104, subalpine conifer) maps the corvid presence from sea level to timberline
+### What Worked
 
-**What Could Be Better:**
-1. Five consecutive Corvidae is the maximum sustainable run -- the quintet MUST end here. Degree 105 must break the Corvidae streak
-2. Still no raptor, no marine species in 105 entries
-3. Electronic dominance continues (14+ electronic-adjacent entries since degree 86) -- genre diversification increasingly urgent
+- **The CORVIDAE QUINTET (five consecutive Corvidae 100-104) is the most structurally extraordinary family run in the engine to date.** Tying the record for longest same-family consecutive run. The quintet resolves beautifully across five distinct acoustic characters: authority (100) → coordination (101) → familiarity (102) → alarm (103) → intimacy (104). Five species, five habitats, five acoustic registers — no internal repetition, and the closing voice is the softest.
+- **The energy oscillation within the quintet is perfect.** E=4, E=5, E=4, E=5, E=4 — a symmetric pattern that brackets two E=5 peaks with three E=4 bookends and lets the softest voice close the sequence. The symmetry gives the quintet an internal structural logic beyond what five distinct acoustic characters alone would provide.
+- **Back-to-back electronic returns (103-104) confirm the electronic reframing as a sustained systematic pattern.** Not an isolated event. Both **Briana Marela** (72→103) and **Lemolo** (56→104) execute E=2→E=3 energy transitions. The consistency strengthens the pattern and makes the electronic reframing available as a confirmed analytical tool for future degrees.
+- **The Gray Jay as the quintet closer is the right choice.** The quietest, friendliest, most intimate corvid resolves the quintet after the **Steller's Jay's** maximum-volume alarm. The quintet could not have resolved at E=5; it needed the gentler voice, and the Gray Jay provides it naturally through species biology rather than through catalogue manipulation.
+- **The dream circuit / soft whistle parallel works because both are the quieter, more intimate voice after louder predecessors.** The dream pulse after **Briana Marela's** dissolution and **Hecuba's** kinetic surge. The soft whistle after the **Steller's Jay's** raucous alarm. The parallel is structural rather than thematic, which makes it more durable as engine mechanism.
+- **The Gray Jay's bark-caching with sticky saliva is one of the most unusual adaptations documented in the engine.** Late-winter breeding enabled by cached food is a remarkable survival strategy that no other corvid or passerine in the engine matches. The uniqueness of the adaptation matches the uniqueness of the Gray Jay's structural position as the quintet closer.
+- **The elevational pairing of Steller's Jay (103, lowland conifer) and Gray Jay (104, subalpine conifer) maps the corvid presence from sea level to timberline.** The PNW Cascades are now documented across the full corvid elevational range. The elevational ordering works because it follows the species' natural habitat preferences rather than forcing a sequence.
+- **The climate-change sentinel designation for the Gray Jay introduces vulnerability as a structural dimension.** Future species entries can now be classified by vulnerability to warming alongside acoustic character, cognitive depth, and habitat. The engine at degree 104 documents not just sounds but survival stakes.
+
+### What Could Be Better
+
+- **Five consecutive Corvidae is the maximum sustainable run — the quintet MUST end here.** Degree 105 must break the Corvidae streak. The engine should not attempt a sextet; five is the confirmed ceiling matched by three previous quintets and exceeding it would feel forced rather than natural.
+- **Still no raptor, no marine species in 105 entries.** The absence of **Accipitridae**, **Falconidae**, **Strigidae**, and **Tytonidae** across 105 entries is a structural gap that has persisted since degree 90. The absence of marine species (**harbor seal**, **orca**, **marbled murrelet**, **common loon**) in an engine titled around **Puget Sound** grows more conspicuous with each non-marine degree. Both gaps remain overdue.
+- **Electronic dominance continues through back-to-back returns.** Fourteen-plus electronic-adjacent entries since degree 86. The genre diversification is increasingly urgent — the engine has demonstrated electronic era depth many times over and now owes itself a deliberate return to genre breadth.
+- **The Gray Jay's relationship to climate change is noted but not developed into a deeper vulnerability portfolio.** A future degree could develop the cached-food-spoilage mechanism into a broader discussion of subalpine species vulnerability, connecting **American Pika** (74), **American Marten** (65), and other subalpine species into a combined vulnerability picture.
+- **Lemolo's post-56 discography is treated structurally rather than catalogued album-by-album.** The specific electronic releases, the collaborators on each track, and the production choices album-by-album were treated as aesthetic shift markers rather than as a detailed discography. A future research artifact could deep-dive the individual releases.
 
 ## Lessons Learned
 
-1. The quintet structure (five consecutive same-family degrees) works when each entry covers a genuinely different ecological niche and acoustic character. The Corvidae quintet succeeds because: raven (open forest, deep), raven pair (territorial display, synchronized), crow (urban, familiar), Steller's Jay (conifer canopy, alarm), Gray Jay (subalpine, soft). Five species, five habitats, five acoustic characters
-2. Energy oscillation within a family run (E=4, E=5, E=4, E=5, E=4) creates a rhythmic pattern that sustains interest. The symmetric oscillation gives the quintet an internal structural logic
-3. Back-to-back electronic returns with consistent energy transitions (both E=2 to E=3) strengthen the pattern and make it available as a future analytical tool. The electronic reframing is now a confirmed engine mechanism
-4. The quintet closer must resolve tension, not add it. The Gray Jay's soft whistles resolve the Steller's Jay's harsh alarm. The friendliest corvid closes the quintet with intimacy, not confrontation
-5. The Gray Jay as climate-change sentinel adds an environmental dimension -- this is the first species in the quintet whose survival is directly threatened by warming temperatures. The engine documents not just sounds but vulnerabilities
+1. **The quintet structure (five consecutive same-family degrees) works when each entry covers a genuinely different ecological niche and acoustic character.** The **Corvidae quintet** succeeds because each member occupies a distinct position: **Common Raven** (open forest, deep cronk, E=4), **Common Raven Pair** (territorial display, synchronized duet, E=5), **American Crow** (urban, familiar caw, E=4), **Steller's Jay** (conifer canopy, harsh alarm, E=5), **Gray Jay** (subalpine, soft whistle, E=4). Five species, five habitats, five acoustic characters, no internal repetition. Future same-family quintets must meet this diversity bar or contract to four consecutive entries.
+2. **Energy oscillation within a family run (E=4, E=5, E=4, E=5, E=4) creates a rhythmic pattern that sustains interest.** The symmetric oscillation gives the quintet internal structural logic — two E=5 peaks bracketed by three E=4 bookends. Future family runs can calibrate paired energy deliberately rather than letting the catalogue place energy without pattern, and the symmetric oscillation is now a confirmed tool.
+3. **Back-to-back electronic returns with consistent energy transitions (both E=2 to E=3) strengthen the pattern and make it available as a future analytical tool.** The electronic reframing is now a **confirmed engine mechanism**. Three electronic returns in eight degrees (97, 103, 104), all lifting energy by exactly one level, establish the one-level lift as a reliable characteristic. Future electronic returns no longer need to establish the mechanism; they can invoke it.
+4. **The quintet closer must resolve tension, not add it.** The **Gray Jay's** soft whistles resolve the **Steller's Jay's** harsh alarm; the friendliest corvid closes the quintet with intimacy, not confrontation. A quintet that closed at E=5 would feel unresolved and would undercut the structural logic of the preceding four entries. Future quintets should plan the closer deliberately as the resolving voice.
+5. **The Gray Jay as climate-change sentinel adds an environmental dimension — this is the first species in the engine whose survival is directly threatened by warming temperatures.** The engine now documents not just sounds but **vulnerabilities**. Future species entries can be classified by vulnerability to environmental change alongside acoustic character, cognitive depth, and habitat, and the classification dimension is available as soon as the research warrants it.
+6. **Return artists reframed through electronic instruments preserve identity while adding structure.** **Lemolo's** dream circuit preserves the atmospheric signature, the dream haze, and the layered vocal aesthetic from degree 56 — then adds electronic pulse, synthesizer texture, and drum-machine rhythmic regularity that the acoustic original lacked. The same preservation-through-addition principle governs the **Corvidae** family signature carrying across all five quintet members while each species adds its own novelties.
+7. **Seattle urban-interior and PNW Cascades subalpine-forest are both Pacific Northwest.** The project's geographic commitment reaches both halves of degree 104 — **Lemolo's** urban electronic pop is unmistakably **Seattle**, and the **Gray Jay's** subalpine territory is unmistakably **Cascades**. Future degrees can calibrate the PNW register deliberately across urban, suburban, and remote wilderness settings.
+8. **The catalogue's forty-four-consecutive-original-CSV streak (degrees 61-104) is now a defining engine characteristic rather than a coincidence.** The source catalog has delivered without substitution or correction across forty-four consecutive entries. Future planning can lean confidently on the original catalog through and beyond degree 120 because empirical reliability is now established across an extended span.
+9. **Structural closures work best when both sides close simultaneously.** Degree 104 closes the **Corvidae quintet** on the species side and closes the three-electronic-returns-in-eight-degrees bracket on the artist side in the same commit. Future milestone degrees can plan paired closures deliberately — the catalogue ordering allows it, and the parallel resolution amplifies the structural weight of each closure.
+10. **Intimacy is an acoustic category that matches across artist and species sides.** Both the dream circuit and the soft whistle are intimate; both invite closeness rather than demanding distant attention; both sit at moderate energy between extreme poles. Future paired degrees can calibrate intimacy-as-category deliberately, pairing intimate artist halves with intimate species halves, and the pairing works because intimacy is structural rather than stylistic.
 
----
+## Cross-References
 
-The dream circuit and the soft whistle. Degree 104 closes the Corvidae quintet.
+| Connection | From | To | Nature |
+|------------|------|-----|--------|
+| S36-056 | Lemolo electronic (104) | Lemolo (56) | **RETURN!** Indie Folk E=2 to Electronic Pop E=3. Dream haze rebuilt with electronic instruments. Same duo, Meagan Grandall + Kendra Cox, atmospheric signature preserved, pulse added. Forty-eight-degree span between first and second documentation. |
+| S36-103 | Lemolo electronic (104) | Briana Marela electronic (103) | **BACK-TO-BACK ELECTRONIC RETURN.** Briana Marela dissolves voice into texture; Lemolo keeps voice atop. Two return strategies on consecutive degrees. Both E=2 to E=3. Both self-contained artistic practices reframed through electronic lens. |
+| S36-093 | Lemolo electronic (104) | NAVVI (93) | **DREAM POP/ELECTRONIC PARALLEL.** NAVVI fully electronic from start (shimmer veil, dream-pop dissolution). Lemolo arrives at electronic from folk origins (dream haze rebuilt). Different trajectories to shared atmospheric territory. |
+| S36-072 | Lemolo electronic (104) | Briana Marela (72) | **PARALLEL RETURN TRAJECTORY.** Both 72→103 and 56→104 transition to electronic context. Both E=2 to E=3. Parallel electronic reframing trajectories confirm the reframing as systematic rather than isolated. |
+| S36-086 | Lemolo electronic (104) | The Postal Service (86) | **ELECTRONIC POP LINEAGE.** Glitch-based (Postal Service) vs dream-based (Lemolo). Same genre label, different aesthetic ancestry. Lemolo's dream-based Electronic Pop at degree 104 is the second entry under the genre stage first introduced at degree 86. |
+| S36-095 | Lemolo electronic (104) | ODESZA (95) | **ELECTRONIC ENERGY CONTRAST.** ODESZA cinematic festival-scale at E=5. Lemolo intimate bedroom-to-duo-scale at E=3. Both electronic, different scales and ambitions. |
+| S36-097 | Lemolo electronic (104) | The Postal Service electronic (97) | **ELECTRONIC RETURN LINEAGE.** The Postal Service at 97 was the first electronic return in the engine. Lemolo at 104 is the third. The 97→103→104 progression confirms electronic return as sustained engine mechanism. |
+| SPS-103 | Gray Jay (104) | Steller's Jay raucous (103) | **CORVIDAE QUINTET CONSECUTIVE.** Complementary elevations: Steller's Jay lowland conifer, Gray Jay subalpine conifer. Maximum acoustic contrast in entire quintet: harshest voice (E=5 alarm) immediately followed by softest voice (E=4 whistles). |
+| SPS-100 | Gray Jay (104) | Common Raven (100) | **CORVIDAE QUINTET BOOKENDS.** Both cache food: Raven buries in ground; Gray Jay presses into tree bark with sticky saliva. Both highly intelligent. Both vocal mimics. Quintet opens with Raven's deep cronk and closes with Gray Jay's soft whistle. |
+| SPS-101 | Gray Jay (104) | Common Raven Pair (101) | **CORVIDAE QUINTET MEMBER.** Territorial duet (Raven Pair E=5) vs pair contact calls (Gray Jay soft whistles E=4). Both corvid pair-bonded communication, different intensity registers. |
+| SPS-102 | Gray Jay (104) | American Crow (102) | **CORVIDAE QUINTET HABITAT SEPARATION.** Maximum habitat separation of the quintet: urban/open (crow) vs remote subalpine (Gray Jay). Both adaptable to human presence but through opposite strategies — urban proximity vs wilderness hand-landing. |
+| SPS-053 | Gray Jay (104) | Steller's Jay (53) | **CORVIDAE INTRODUCTION TO QUINTET.** Steller's Jay at degree 53 introduced Corvidae. Gray Jay at degree 104 closes the quintet that fully declares the family. Fifty-one-degree span between first corvid and quintet closer. |
+| SPS-065 | Gray Jay (104) | American Marten (65) | **SUBALPINE SHARED HABITAT.** Both year-round residents of high-elevation conifer belt (mountain hemlock, subalpine fir). Marten is potential Gray Jay nest predator. Mammalia-Aves shared ecosystem. |
+| SPS-074 | Gray Jay (104) | American Pika (74) | **ALPINE NEIGHBOR.** Adjacent elevational bands: Gray Jay in subalpine, Pika in alpine talus immediately above. Both cache food for winter — different strategies (Pika haypiles, Gray Jay bark caches) in adjacent zones. |
+| SPS-004 | Gray Jay (104) | Northern Spotted Owl (4) | **AVES ENGINE BOOKEND TO CENTENNIAL-PLUS.** Owl at degree 4 was engine's first bird; Gray Jay at degree 104 closes the corvid quintet 100 degrees later. Both Pacific Northwest old-growth-adjacent forest birds with distinct acoustic postures. |
+| RES-wisakedjak | Gray Jay (104) | Algonquin *wisakedjak* | **CULTURAL CONTEXT.** Whiskey jack common name derives from Algonquin trickster spirit *wisakedjak*. The Gray Jay is not just a species in the engine; it carries First Nations cultural meaning from the eastern North American boreal forest into the western subalpine. |
+| RES-climate-change | Gray Jay (104) | Climate-change impacts on PNW wildlife | **VULNERABILITY FRAMING.** First species in engine directly threatened by warming autumn temperatures through cached-food spoilage. Opens vulnerability as a structural dimension for future species classifications. |
+| RES-corvidae-quintet | Gray Jay (104) | Mustelidae/Swallow/Sciuridae quintets | **QUINTET RECORD TIE.** Fourth quintet in engine history ties the three preceding five-consecutive-family runs for the longest same-family consecutive record. Five is the confirmed ceiling. |
+| RES-electronic-era | Lemolo electronic (104) | Electronic era Quadrant II | **ELECTRONIC ERA DEPTH.** Fourteen electronic-adjacent entries in nineteen degrees since degree 86. The electronic era of Quadrant II is the deepest sustained genre cluster in the engine. |
+| RES-seattle-duo | Lemolo electronic (104) | Seattle duo tradition | **SEATTLE SCENE CONTEXT.** Seattle's dream-haze indie duos (Lemolo, Poor Moon, NAVVI) share atmospheric production signatures and two-musician configurations. Lemolo's electronic reframing extends the tradition into the electronic register. |
 
-On the music side, Lemolo returns from degree 56 as the seventh return artist, reframed in electronic context. Electronic Pop. Genre Stage 86. The dream haze rebuilt with electronic instruments -- synthesizers replace guitars, drum machines replace acoustic drums, the reverb remains. The dream persists but now pulses. The dream circuit is the 105th acoustic element. The sustained electronic return is the 105th artist-city pattern -- back-to-back electronic returns confirmed. E=3.
+## Engine Position
 
-On the species side, the Gray Jay closes the CORVIDAE QUINTET -- five consecutive Corvidae degrees (100-104), tying the record for longest same-family consecutive run. The quiet corvid. Soft whistles, chuckling, mewing, mimicry. The friendliest wild bird in the PNW -- camp robber, whiskey jack. Subalpine forest specialist. Bark-caching with sticky saliva. Late-winter breeding. Climate-change sentinel. E=4. The quintet resolves from maximum volume (Steller's Jay alarm) to gentle conversation (Gray Jay whistle).
+- **Degree 104 of 360 — 28.9% of the circle traversed; fourteenth degree of Quadrant II; four degrees past the centennial.**
+- **Triple-digit counters tick to 105 (artist) and 104 (species).** The dream circuit is the **105th artist-side acoustic element**. The soft whistles + mimicry is the **104th species-side acoustic element**. The Sustained Electronic Return is the **105th artist-city pattern**.
+- **Genre Stage 86 — Electronic Pop (dream-based).** Eighty-six genre stages in 104 degrees. Lemolo's dream-based Electronic Pop is distinct from The Postal Service's glitch-based Electronic Pop at degree 86 — same genre label, different production topology, different aesthetic ancestry.
+- **CORVIDAE QUINTET CLOSES — five consecutive Corvidae (100-104).** Ties the Mustelidae, Swallow, and Sciuridae quintets for the longest same-family consecutive run in the entire engine. Five is the confirmed ceiling; degree 105 must break the Corvidae streak.
+- **SEVENTH RETURN ARTIST.** Lemolo 56→104 joins Death Cab for Cutie (58→82), Pearl Jam (25→83), Damien Jurado (45→84), Rocky Votolato (46→85), The Postal Service (86→97), and Briana Marela (72→103).
+- **BACK-TO-BACK ELECTRONIC RETURNS.** Degrees 103-104 both execute E=2→E=3 energy transitions. Three electronic returns in eight degrees (97, 103, 104) confirm the electronic reframing as a sustained systematic engine pattern.
+- **Perfect Corvidae quintet oscillation.** Energy reads E=4, E=5, E=4, E=5, E=4 across degrees 100, 101, 102, 103, 104 — symmetric pattern brackets two E=5 peaks with three E=4 bookends.
+- **Forty-fourth consecutive original CSV species — degrees 61-104.** Longest unbroken run of original-catalog selections in the engine. Source catalog reliability is now a defining engine characteristic.
+- **CLIMATE-CHANGE SENTINEL.** Gray Jay is the first species in the engine directly threatened by warming autumn temperatures through cached-food spoilage. Opens vulnerability as a structural dimension for future species classifications.
+- **Energy distribution after degree 104 (artist-side):** E1:3 (2.9%), E2:31 (29.5%), E3:29 (27.6%), E4:27 (25.7%), E5:14 (13.3%), E6:2 (1.9%). Total: 105 entries (degrees 0-104 inclusive). E=3 now the second most common energy level, gaining Lemolo electronic at degree 104.
+- **Energy oscillation (species-side, Corvidae quintet):** E=4 (100), E=5 (101), E=4 (102), E=5 (103), E=4 (104). Perfect symmetric oscillation.
+- **Electronic era depth.** Fourteen electronic-adjacent entries in nineteen degrees since degree 86. Longest sustained genre cluster in the engine.
+- **Four classes represented:** Aves (extended via Corvidae quintet), Mammalia, Insecta, Amphibia. Fifty-plus families. Seventeen-plus orders.
+- **Outstanding gaps:** Zero raptors in 105 entries (since before degree 90); zero marine species in 105 entries (none since engine began); electronic era dominance growing more pronounced with back-to-back returns.
 
-The dream circuit and the soft whistle. Both intimate. Both quiet after loud. The dream rebuilt in circuitry. The soft whistle in the subalpine. The quintet closes. Five corvids. Five acoustic characters. One family.
+## Files
 
-*Degree 104. The Corvidae quintet closes. A dream-haze pulse floats through electronic circuits -- reverb-drenched, atmospheric, the dream persists but now it pulses. Synthesizers where guitars used to be. The dream circuit. E=3. In the subalpine forest, a soft whistle -- gentle, clear, tonal. A Gray Jay lands on an outstretched hand, bold and friendly, the camp robber. Soft chuckling. Quiet mewing. The quietest corvid after the loudest alarm. Five consecutive Corvidae. Raven, raven pair, crow, Steller's Jay, Gray Jay. Authority, coordination, familiarity, alarm, intimacy. The quintet resolves. E=4, E=5, E=4, E=5, E=4. The oscillation is perfect. The soft whistle is the last word. The corvids have spoken.*
+- `docs/release-notes/v1.49.244/README.md` (this file, rewritten to A-grade per the PROSE rubric)
+- `docs/release-notes/v1.49.244/chapter/00-summary.md` — derived summary
+- `docs/release-notes/v1.49.244/chapter/03-retrospective.md` — retrospective
+- `docs/release-notes/v1.49.244/chapter/04-lessons.md` — extracted lessons (5 entries)
+- `docs/release-notes/v1.49.244/chapter/99-context.md` — context
+- `www/tibsfox/com/Research/S36/research/releases/104-lemolo-electronic/index.html` — Lemolo electronic research index (referenced)
+- `www/tibsfox/com/Research/S36/research/releases/104-lemolo-electronic/research.md` — Lemolo electronic research corpus (~4,000 words, referenced)
+- `www/tibsfox/com/Research/S36/research/releases/104-lemolo-electronic/knowledge-nodes.json` — Lemolo electronic knowledge nodes (referenced)
+- `www/tibsfox/com/Research/S36/research/releases/104-lemolo-electronic/retrospective.md` — Lemolo electronic retrospective (referenced)
+- `www/tibsfox/com/Research/SPS/research/releases/104-gray-jay/index.html` — Gray Jay research index (referenced)
+- `www/tibsfox/com/Research/SPS/research/releases/104-gray-jay/research.md` — Gray Jay research corpus (~6,000 words, referenced)
+- `www/tibsfox/com/Research/SPS/research/releases/104-gray-jay/knowledge-nodes.json` — Gray Jay knowledge nodes (referenced)
+- `www/tibsfox/com/Research/SPS/research/releases/104-gray-jay/retrospective.md` — Gray Jay retrospective (referenced)
 
-</details>
+Total: 1 file in commit `2d73e47d95e11736a414727b11dbbb2cc413183e` (release note); research artifacts referenced at the canonical Seattle 360 research paths.
