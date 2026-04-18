@@ -1,495 +1,189 @@
-# v1.49.247 -- Degree 107: Chong the Nomad (production) + Acorn Woodpecker -- THE PRODUCTION ARCHITECTURE AND THE COLONIAL WOODPECKER -- PICIDAE RETURNS
+# v1.49.247 — Degree 107: Chong the Nomad (production) + Acorn Woodpecker — THE PRODUCTION ARCHITECTURE AND THE COLONIAL WOODPECKER — PICIDAE RETURNS
 
 **Released:** 2026-04-01
-**Degree:** 107 of 360 -- 29.7% of 360
-**Part A:** Chong the Nomad (production) -- Electronic/R&B, E=5, self-released, NINTH RETURN ARTIST (first at degree 44, E=4, performer context), GENRE STAGE 89 (Electronic/R&B in production context, eighty-ninth genre stage, return genre in new lens), THE PRODUCTION ARCHITECTURE 108th acoustic element (the quality heard when an artist's work is viewed through the production lens; focus shifts from performance to construction; layered complexity bass weight rhythmic density revealed), THE PRODUCTION RETURN 108th artist-city pattern (return artist reframed through a different creative dimension; performer at 44 becomes producer at 107; artists contain multiple dimensions), energy escalation E=4 to E=5
-**Part B:** Acorn Woodpecker (*Melanerpes formicivorus*) -- waka-waka-waka raucous laughing call, E=5, oak savanna, Corvidae ends / Picidae returns (PICIDAE RETURNS after 53-degree gap, first woodpecker since degree 54, fourth Picidae species, new genus Melanerpes, granary trees with 50,000+ acorns, colonial living with cooperative breeding, forty-seventh consecutive original CSV)
-**Series:** Seattle 360 + Sound of Puget Sound -- Continuous Release Engine
+**Scope:** Seattle 360 + Sound of Puget Sound — paired degree release, production-lens ninth return artist and Picidae family reopening
+**Branch:** main
+**Commits:** `d6c01066a` (1, wave commit 106-108)
+**Files changed:** 9 (1 release note + 4 Chong the Nomad research artifacts + 4 Acorn Woodpecker research artifacts)
+**Degree:** 107 of 360 — 29.7% of 360 — Seventeenth degree of Quadrant II
+**Part A:** Chong the Nomad (production context) — Electronic/R&B, E=5, self-released, NINTH RETURN ARTIST (first at degree 44 as Electronic/R&B, E=4, performer context), Genre Stage 89 (Electronic/R&B reframed through the production lens, eighty-ninth genre stage, genre persistence across both Chong appearances at 44 and 107, the production dimension reveals constructive face of the same practice), THE PRODUCTION ARCHITECTURE 108th acoustic element, THE PRODUCTION RETURN 108th artist-city pattern, energy escalation E=4 to E=5
+**Part B:** Acorn Woodpecker (*Melanerpes formicivorus*) — raucous nasal laughing waka-waka-waka, E=5, oak savanna, Picidae (PICIDAE RETURNS after 53-degree gap since Pileated Woodpecker and Red-breasted Sapsucker at degree 54, first woodpecker since the Corvidae septet closed at 106, fourth Picidae species in engine, new genus *Melanerpes* introduced, granary trees holding 50,000+ acorns, colonial cooperative breeding with 15+ individuals, forty-seventh consecutive original CSV)
+**Series:** Seattle 360 + Sound of Puget Sound — Continuous Release Engine
 **Cluster:** Music (hub: WAL)
-**Note:** PICIDAE RETURNS. First woodpecker since degree 54 -- a 53-degree gap. After the Corvidae septet (100-106), the engine shifts to Picidae. NINTH RETURN ARTIST -- Chong the Nomad returns from degree 44, reframed from performer to producer. Energy escalation on both sides: artist E=4 to E=5, species side E=5 with colonial waka-waka-waka. The production architecture and the colonial woodpecker -- construction at every scale.
+**Dedication:** To **Chong the Nomad** — the Seattle beat-maker whose return at degree 107 through the production lens rather than the performer lens demonstrates that artists contain multiple creative dimensions and that the engine can honor each dimension separately; to the **Acorn Woodpecker** (*Melanerpes formicivorus*) — the clown-faced colonial granary-builder of southern Oregon oak savannas whose raucous nasal **waka-waka-waka** and 50,000-acorn granary trees reopen **Picidae** to the engine after a fifty-three-degree Passeriformes-dominated interlude; to **Picidae** itself, whose return after the Corvidae septet closes the birds-only family-streak era and inaugurates the woodpecker cluster; and to the **production architecture / granary tree** parallel — sonic construction and physical construction meeting on the same degree at **E=5** on both sides, each building community infrastructure at extraordinary scale.
+**Engine Position:** Degree 107 of 360 — **PICIDAE RETURNS** after 53-degree gap (first woodpecker since degree 54 Pileated/Sapsucker, fourth Picidae species overall including Northern Flicker 21-22); **NINTH RETURN ARTIST** (Chong the Nomad joins Death Cab for Cutie 82, Pearl Jam 83, Damien Jurado 84, Rocky Votolato 85, The Postal Service 97, Briana Marela 103, Lemolo 104, Parenthetical Girls 105); **THE PRODUCTION RETURN** introduced as a new return type, distinct from acoustic and electronic returns, reframing through creative dimension rather than through production substrate; **GENRE STAGE 89** (Electronic/R&B persists across both Chong appearances at 44 and 107 — genre constancy with lens change); **THE PRODUCTION ARCHITECTURE** as 108th artist-side acoustic element (layered complexity, bass weight, rhythmic density revealed when the work is viewed through the production lens rather than the performance lens); **THE WAKA-WAKA-WAKA** as 107th species-side acoustic element (raucous, nasal, laughing, colonial, gregarious); **THE PRODUCTION RETURN** as 108th artist-city pattern; **E=4 → E=5 ENERGY ESCALATION ON RETURN** (the performer is E=4 at degree 44; the producer is E=5 at degree 107 — the production lens reveals higher energy); **FORTY-SEVENTH CONSECUTIVE ORIGINAL CSV** (degrees 61-107 without substitution); **GRANARY TREES** (50,000+ individually drilled holes, each storing one acorn, community infrastructure maintained across generations); **COLONIAL COOPERATIVE BREEDING** (15+ individuals sharing nest defense, granary maintenance, and acorn storage — one of the most social woodpeckers in the world, rare within Picidae); **NEW GENUS *Melanerpes*** introduced to the engine's taxonomic ledger; **OAK SAVANNA** as first oak-obligate habitat in the engine (southern Oregon at the northern range edge, expanding the engine's geography east and south); **THIRD CONSECUTIVE E=5 ON SPECIES SIDE** (Clark's Nutcracker 105, Black-billed Magpie 106, Acorn Woodpecker 107 — the energy peak sustained across the Corvidae-to-Picidae transition); **DECONSTRUCTION → CONSTRUCTION** (Knife Knights at 106 deconstructs hip-hop through electronic production; Chong the Nomad at 107 constructs Electronic/R&B through layered production — a clean two-degree narrative arc).
 
 ## Summary
 
-The production architecture and the colonial woodpecker. Degree 107 shifts the engine from Corvidae to Picidae and introduces the ninth return artist in production context.
+**The production architecture and the colonial woodpecker close the Corvidae septet's shadow and open Picidae's second act.** Degree 107 is the engine's first degree after the seven-degree Corvidae streak (100-106) closes, and it turns out to be a degree of openings rather than of aftermath. **Chong the Nomad** returns from **degree 44** as the **ninth return artist** in the engine, reframed through the production lens rather than the performer lens; **Acorn Woodpecker** (*Melanerpes formicivorus*) reopens **Picidae** to the engine after a **53-degree gap** since the last woodpecker appeared (**Pileated Woodpecker** and **Red-breasted Sapsucker** at **degree 54**). Both halves of degree 107 build rather than retreat — the production architecture on the artist side is constructive rhythm and layered bass; the granary tree on the species side is thousands of individually drilled holes storing **50,000+ acorns**, community infrastructure maintained across generations. **In parallel**, both halves reach **E=5** — the energy peak of the Corvidae septet's closing arc now carries forward onto the Picidae opening. **The same** structural principle — that degree 107 inaugurates rather than merely follows — reaches both halves on the same degree, **synchronized** by a catalog maturity that can pair a ninth return with a family reopening without either feeling small.
 
-On the music side, **Chong the Nomad** returns from degree 44 as the **ninth return artist**, reframed from performer to producer. **Genre Stage 89** -- **Electronic/R&B** in production context. At degree 44, the engine captured the performer -- the beat-maker on stage, the live presence. At degree 107, the engine reframes through the production lens -- the constructive dimension, the layered complexity beneath the song, the bass weight and rhythmic density that performance conceals. The **production architecture** is the 108th acoustic element -- the quality heard when an artist's work is viewed through the production lens. The **production return** is the 108th artist-city pattern -- a return artist reframed through a different creative dimension. E=5. Energy escalation from E=4 (degree 44) to E=5 (degree 107). Self-released. The 63-degree gap between appearances is the longest for a return artist in the electronic era. Deconstruction (Knife Knights, 106) then construction (Chong the Nomad, 107).
+**Chong the Nomad's return is the engine's first production-lens reframing.** At **degree 44**, the engine centered **Chong the Nomad** as Electronic/R&B through the performer context — the beat-maker on stage, the live presence, the performed grooves. E=4. The Digital Immigrant artist-city pattern. **The Grain** acoustic element. At **degree 107**, the same artist returns reframed through the production lens — the constructive dimension, the layered complexity beneath the song, the bass weight and rhythmic density that performance conceals. The genre remains Electronic/R&B. The genre does not change because the production dimension reveals a different face of **the same practice**, not a different practice. This matters: when **Briana Marela** returned electronic at **degree 103**, the genre label shifted from Art Pop to Art Pop/Electronic; when **Lemolo** returned electronic at **degree 104**, the label shifted from Indie Folk to Electronic Pop; when **Parenthetical Girls** returned electronic at **degree 105**, the label stayed Avant-Pop because the theatrical impulse is genre-constant. Chong the Nomad's return is closer to Parenthetical Girls' — the label stays Electronic/R&B because production and performance are two faces of the same sound practice. **Genre Stage 89** is therefore genre persistence across returns, the same analytical finding that Parenthetical Girls' degree 105 return validated, now extended to a ninth return artist at a different kind of reframing.
 
-On the species side, **Acorn Woodpecker** (*Melanerpes formicivorus*) marks the **RETURN OF PICIDAE** to the engine -- a **53-degree gap** since the last woodpecker (degree 54). After the Corvidae septet (100-106), the engine shifts to Picidae. The colonial woodpecker -- raucous, nasal, laughing **waka-waka-waka** at E=5. **Granary trees** storing 50,000+ acorns in thousands of individually drilled holes. **Colonial living** with cooperative breeding colonies of 15+ individuals. **Oak savanna** habitat in southern Oregon at the northern range edge. New genus *Melanerpes* in the engine. Fourth Picidae species overall: Flicker (21-22), Sapsucker (54), Pileated (54), Acorn (107). Forty-seventh consecutive original CSV.
+**The production return is a new return type — different from acoustic, different from electronic.** The engine has documented two return types before degree 107. The **acoustic return** strips instruments: Death Cab for Cutie at **degree 82** stripped the band's indie rock production back to acoustic intimacy; Pearl Jam at **degree 83** stripped arena grunge back to acoustic whisper; Damien Jurado at **degree 84** stripped mid-career ambition back to late-career murmur; Rocky Votolato at **degree 85** stripped emo architecture back to confessional stripping. Four acoustic returns, each a subtractive operation. The **electronic return** adds instruments: **The Postal Service** at **degree 97** added electronic production back to the duo's indie electronic origin; **Briana Marela** at **103** added synthesizers and processing; **Lemolo** at **104** added layered electronic atmosphere; **Parenthetical Girls** at **105** added synthesizers and drum machines to the theatrical practice. Four electronic returns, each an additive operation. The **production return** does neither — it does not strip or add; it reframes the lens through which the same practice is viewed. **In parallel**, on the species side, the Acorn Woodpecker's return of Picidae to the engine is a family reopening rather than a species-level return — Picidae had been absent since degree 54, and the reopening is not a substitution but a family-level restart with a new genus (*Melanerpes*). Both sides introduce a structural operation that the engine has not previously executed at this scale: production reframing on the artist side, family reopening on the species side.
 
-The production architecture constructs the sonic landscape. The colonial woodpecker constructs the granary. Both are builders at extraordinary scale.
+**The production architecture is the 108th artist-side acoustic element.** What is heard when Chong the Nomad's work is viewed through the production lens rather than the performance lens? Layered complexity — beats are not single layers but multi-layered constructions with bass, percussion, and melodic elements threaded through one another. Bass weight — the low end is prominent, physical, felt rather than merely heard. Rhythmic density — the grooves are not minimal but saturated, with multiple rhythmic figures interlocking. Construction over performance — the question is how the beat was built rather than how it was played. The production architecture is distinct from **The Grain** (44, performer context, live presence, E=4, Chong's original acoustic element), from **The Producer's Palette** (94, Erik Blood, atmospheric and textural, the studio as instrument), from **The Beat Architecture** (106, Knife Knights, deconstructive, breaking hip-hop down through electronic production). The beat architecture and the production architecture are consecutive degrees: **106 deconstructs, 107 constructs**. Knife Knights takes apart; Chong the Nomad puts together. **Both** operate through electronic production, but the operations are opposite. **In parallel**, on the species side, the Acorn Woodpecker's granary tree is also constructive architecture — thousands of holes, drilled and maintained and reused, community infrastructure at a scale no other PNW species has matched.
+
+**The Acorn Woodpecker is the engine's most colonial woodpecker.** *Melanerpes formicivorus* — from Greek *melas* ('black') + *herpes* ('creeper'), and Latin *formica* ('ant') + *vorare* ('to devour'). 20-23 cm body length. 35-43 cm wingspan. 65-90 g. The "clown face" — white face, black crown and nape, red crown patch, black back and wings with white rump and wing patches. Unmistakable visual identity. The diagnostic call is the raucous nasal laughing **waka-waka-waka** — loud, rapid, clownish, faster and more nasal than the **Pileated Woodpecker**'s wild laughing call that held degree 54. E=5. **Colonial cooperative breeding** with groups of 15+ individuals — rare within **Picidae**, where most species are solitary or pair-bonded. The colony shares nest defense, granary maintenance, and acorn storage. The Acorn Woodpecker is one of the most social woodpeckers in the world, and its colonial life is what distinguishes it from every other species in the Picidae entries in the engine (**Northern Flicker** at **21-22**, solitary and ground-feeding; **Red-breasted Sapsucker** at **54**, solitary and bark-tapping; **Pileated Woodpecker** at **54**, solitary and old-growth). Fourth Picidae species. New genus. New sociality. New habitat. The Acorn Woodpecker is not a reprise of any prior Picidae entry but a structural expansion of what the family can be in the engine.
+
+**The granary tree is the community infrastructure that defines the Acorn Woodpecker.** Thousands of individually drilled holes, each sized to hold exactly one acorn, each acorn stored for the colony's winter consumption. **50,000+ acorns** per granary. Maintained across generations. Reused and expanded over decades. The granary tree is not a cache but a community facility — a physical structure that the colony builds, maintains, and shares. **In parallel**, the production architecture is also community infrastructure — Chong the Nomad's beats are built to be heard, shared, danced to, sampled, remixed. The beat is built for community circulation, just as the granary tree is built for community consumption. Compare with **Clark's Nutcracker** at **degree 105**: the nutcracker caches **98,000 seeds per year** across thousands of dispersed sites, relying on spatial memory and enlarged hippocampus for recovery. The nutcracker's caching is individual, dispersed, and cognitively specialized. The Acorn Woodpecker's caching is colonial, concentrated, and physically specialized (the granary tree as built structure). **Two caching strategies at massive scale, two consecutive degrees.** The engine pairs the dispersed alpine specialist at 105 with the concentrated oak-savanna colonial at 107 — **both** store food at unprecedented scale, but the strategies mirror each other across the individual/communal divide.
+
+**Cross-Sync Parallel: Both Are Constructive at Unprecedented Scale.** Both halves of degree 107 build community infrastructure. Chong the Nomad's production architecture constructs the sonic landscape — layered beats, bass-heavy grooves, rhythmic density designed and assembled into tracks. The Acorn Woodpecker's granary tree constructs the physical landscape — 50,000+ drilled holes, each sized to hold one acorn, arranged across a single tree or a small cluster of trees. **In parallel**, both halves build for community use rather than individual use. Chong the Nomad's production is for circulation — tracks designed to be played, shared, sampled. The granary tree is for colonial winter consumption — acorns stored for the 15+ individuals who will eat them over the cold months. **Each side** constructs at a scale that no prior entry in the engine has reached in its respective domain. **The same** principle — that degree 107's paired subjects build rather than find, construct rather than inhabit — reaches both halves on the same degree. **Synchronized** by the engine's deliberate pairing, the production architecture and the granary tree mirror each other across the sonic/physical divide.
+
+**Cross-Sync Parallel: Both Inaugurate a New Structural Operation.** The production return is a new return type the engine has never executed before. The Picidae reopening is a family reopening the engine has never executed at this scale. **In parallel**, both halves introduce structural firsts that expand the engine's operational vocabulary. The production return adds a dimensional-reframing option to the return toolkit — previously limited to acoustic stripping and electronic adding, now including lens-shifting between performance and production dimensions. The Picidae reopening adds a long-gap family-restart option to the family toolkit — previously the engine had sustained families across shorter gaps (Corvidae 100-106 consecutive) or with within-species substitutions, but never with a 53-degree gap followed by a new-genus reopening. **Each side** teaches the engine a new move. **The same** structural principle — that degree 107 is a degree of operational firsts rather than a degree of pattern continuation — reaches both halves **in parallel**. **Synchronized** by the catalog's maturity, the production return and the Picidae reopening arrive **together** as firsts.
+
+**Cross-Sync Parallel: Both Reach E=5 Through Construction Rather Than Through Volume.** Both halves of degree 107 land at E=5, and both earn that energy through constructive density rather than through raw volume. Chong the Nomad's production architecture is E=5 not because the beats are louder than Parenthetical Girls' theatrical circuit at degree 105 (also E=4-to-E=5 peak) but because the layered complexity, bass weight, and rhythmic density are more internally dense — the E=5 measures construction complexity rather than performance loudness. The Acorn Woodpecker's waka-waka-waka is E=5 not because the individual call is the loudest corvid-or-woodpecker vocalization in the engine (Clark's Nutcracker's kraa-a-a at degree 105 is also E=5) but because the colonial simultaneous calling — 15+ individuals calling at once — fills the oak woodland with overlapping vocal textures. **Both sides** earn E=5 through density rather than through peak amplitude. **In parallel**, the energy structure at degree 107 is constructive rather than explosive. **Each side** reaches the same energy tier through the same route: density, layering, multiplicity. **The same** principle — that E=5 at degree 107 is a constructive density rather than a volume peak — reaches both halves on the same degree. **Synchronized** by energy structure, the production architecture's internal density and the colonial chorus's textural density mirror each other across the sonic divides.
+
+**Cross-Sync Parallel: Both Expand the Engine's Range.** Both halves of degree 107 push the engine's structural boundaries outward. The production return is the engine's first dimensional reframing — performer-to-producer — and it opens the possibility of future dimensional reframings (songwriter-to-arranger, vocalist-to-composer, etc.). The Acorn Woodpecker's oak savanna habitat in southern **Oregon** is the engine's first oak-obligate species entry, and it pushes the engine's geographic reach east and south beyond the Pacific Northwest heartland of **Puget Sound** and the **Olympic Peninsula**. **In parallel**, both halves expand the engine's catalog toolkit — one expanding return-type options, one expanding habitat coverage. **Each side** teaches the engine what is possible that was not previously possible. **The same** principle — that degree 107 is a range-expanding degree — reaches both halves **in parallel**. **Synchronized** by the catalog's maturity, the production return and the oak savanna habitat pair as two kinds of outward expansion.
+
+**Cross-Sync Parallel: Both Involve a 53-Degree-Or-Longer Internal Memory.** The Acorn Woodpecker's return of Picidae involves a 53-degree gap since the Pileated Woodpecker and Red-breasted Sapsucker at degree 54 — the engine remembers the Picidae family and reopens it after more than half the degrees traversed so far. Chong the Nomad's production return involves a 63-degree gap since the performer context at degree 44 — the engine remembers the artist and reframes them after the gap. **In parallel**, both halves require engine memory to be intelligible. The Picidae reopening is meaningful because the engine remembers Pileated and Sapsucker and Flicker; the production return is meaningful because the engine remembers Chong the Nomad at 44. **Each side** demonstrates that degree 107's significance depends on catalog depth rather than on isolated reading. **The same** principle — that degree 107 activates long-range memory — reaches both halves **in parallel**. **Synchronized** by memory, the 53-degree Picidae gap and the 63-degree Chong gap mirror each other across the species/artist divide.
+
+**Cumulative state at degree 107.** The engine has now documented **108 artists** (including origin **Quincy Jones** at degree 0), **108 acoustic elements** on the artist side and **107 acoustic elements** on the species side, **108 artist-city patterns**, **89 genre stages** (0.83 stages per degree, stable rate held across the sextet-and-beyond arc), **49 families** plus the closed Corvidae septet and the reopened Picidae family, **4 classes** (**Aves**, **Mammalia**, **Insecta**, **Amphibia**), and **18-plus orders**. **Forty-seven consecutive original CSV** species — the longest unbroken run of original-catalog selections extending from **degree 61** through **degree 107**. **Aves** has held the engine for eight consecutive degrees (100-107) since the centennial return — the longest bird streak ever produced. **Chong the Nomad** becomes the ninth return artist. **Picidae** reopens after a 53-degree gap. The production architecture and the colonial woodpecker close one era and open another, and the engine operates at unprecedented scale through catalog maturity rather than through volume.
 
 ## Key Features
 
 | Metric | Part A: Chong the Nomad (production) | Part B: Acorn Woodpecker |
 |--------|--------------------------------------|--------------------------|
-| Genre | Electronic/R&B (Genre Stage 89) | -- |
-| Energy | E=5 (layered, dense, bass-heavy, rhythmic, production revealed) | E=5 (raucous waka-waka-waka, nasal, laughing, colonial, gregarious) |
-| Label | Self-Released | -- |
-| Family | -- | Picidae (returns after 53-degree gap, first woodpecker since degree 54) |
-| Acoustic Element | the production architecture (108th, production lens reveals constructive dimension) | waka-waka-waka (107th species-side, raucous nasal laughing colonial woodpecker) |
-| Artist-City Pattern | The Production Return (108th, return artist reframed through different creative dimension) | -- |
-| Structural Firsts | GENRE STAGE 89, NINTH RETURN ARTIST, PRODUCTION CONTEXT, PRODUCTION ARCHITECTURE, E=4 to E=5 energy escalation | PICIDAE RETURNS (53-degree gap), fourth Picidae species, new genus Melanerpes, granary trees 50,000+ acorns, colonial cooperative breeding, oak savanna |
+| Genre | **Electronic/R&B** (Genre Stage 89, same genre as degree 44 viewed through production lens, genre persistence across returns) | — |
+| Energy | **E=5** (layered, dense, bass-heavy, rhythmic, production revealed — constructive density rather than volume) | **E=5** (raucous waka-waka-waka, nasal, laughing, colonial, gregarious — colonial chorus density) |
+| Label | **Self-Released** (self-directed production economy, subscription models) | — |
+| Family | — | **Picidae** (REOPENS after 53-degree gap since degree 54 Pileated/Sapsucker, fourth Picidae species, new genus *Melanerpes*) |
+| Order | — | **Piciformes** (woodpeckers, toucans, barbets; first Piciformes entry since degree 54 Pileated/Sapsucker; family transition from Passeriformes to Piciformes after Corvidae septet 100-106) |
+| Class | — | **Aves** (eighth consecutive degree holding Aves since centennial return at degree 100 — longest bird streak the engine has produced) |
+| Acoustic Element | **the production architecture** (108th artist-side, production lens reveals constructive dimension beneath performance, layered complexity bass weight rhythmic density, distinct from Producer's Palette 94 atmospheric and Beat Architecture 106 deconstructive) | **the waka-waka-waka** (107th species-side, raucous nasal laughing colonial woodpecker, faster and more nasal than Pileated's wild laughing call, simultaneously called by 15+ colonial individuals) |
+| Artist-City Pattern | **The Production Return** (108th artist-city pattern, return artist reframed through different creative dimension, distinct from acoustic return 82-85 and electronic return 97/103-105) | — |
+| Structural Firsts | GENRE STAGE 89 (genre persists across both Chong appearances 44 and 107), NINTH RETURN ARTIST (joins eight prior returns), THE PRODUCTION RETURN (new return type beyond acoustic/electronic), THE PRODUCTION ARCHITECTURE 108th acoustic element, E=4 to E=5 energy escalation (production lens reveals higher energy), consecutive degrees 106-107 DECONSTRUCTION → CONSTRUCTION | **PICIDAE REOPENS** (53-degree gap closed, fourth Picidae species, new genus *Melanerpes*), **GRANARY TREES** (50,000+ acorns in individually drilled holes, community infrastructure maintained across generations), **COLONIAL COOPERATIVE BREEDING** (15+ individuals sharing nest defense and granary maintenance, one of the most social woodpeckers in the world), **OAK SAVANNA** (first oak-obligate habitat in engine, southern Oregon northern range edge), **FORTY-SEVENTH CONSECUTIVE ORIGINAL CSV** (degrees 61-107), **THIRD CONSECUTIVE E=5** on species side (105-106-107) |
 | Research Words | ~4,000 | ~6,000 |
 | Files Produced | 4 | 4 |
 | Cross-References | 5 | 5 |
 
-<details>
-<summary>Full Release Notes -- Click to expand</summary>
+## Part A: Chong the Nomad (production) — The Production Architecture
 
-## Part A: Chong the Nomad (production) -- THE PRODUCTION ARCHITECTURE (Electronic/R&B, E=5, Self-Released, Genre Stage 89, Ninth Return Artist, Production Context, 108th Acoustic Element, 108th Artist-City Pattern, Energy Escalation E=4 to E=5)
+- **The ninth return artist and the first production-lens reframing.** **Chong the Nomad** becomes the **ninth return artist** in the engine — joining **Death Cab for Cutie** (acoustic, 82), **Pearl Jam** (acoustic, 83), **Damien Jurado** (late career, 84), **Rocky Votolato** (acoustic, 85), **The Postal Service** (electronic, 97), **Briana Marela** (electronic, 103), **Lemolo** (electronic, 104), and **Parenthetical Girls** (electronic, 105). The return at **degree 107** introduces a new return type — the **production return** — that reframes an artist through a different creative dimension rather than through a different sound substrate. Performer at degree 44 becomes producer at degree 107. The 63-degree gap is the longest for a return artist in the electronic era.
+- **Genre Stage 89 — Electronic/R&B persists across both Chong appearances.** The engine has introduced eighty-nine distinct genre stages across **107 degrees** — a stable rate of roughly 0.83 stages per degree held across the return-heavy late Quadrant II arc. **Electronic/R&B** at degree 107 is **the same genre stage label** as Electronic/R&B at degree 44, and this is a deliberate finding. Production and performance are two faces of the same practice, and the genre classification remains Electronic/R&B because the production dimension reveals the same genre from a different angle. **Genre persistence across returns is a legitimate analytical finding** — validated previously at Parenthetical Girls degree 105 (Avant-Pop at both 89 and 105) and now extended to Chong the Nomad at 44 and 107.
+- **The production architecture — 108th artist-side acoustic element.** What is heard when an artist's work is viewed through the production lens rather than the performance lens? Layered complexity (multiple beat layers interlocked rather than single-layer grooves). Bass weight (the low end prominent, physical, felt). Rhythmic density (grooves saturated with multiple rhythmic figures). Construction over performance (the question becomes how the beat was built rather than how it was played). Distinct from **The Grain** (44, performer context, live presence), from **The Producer's Palette** (94, Erik Blood, atmospheric and textural), from **The Beat Architecture** (106, Knife Knights, deconstructive). The beat architecture takes apart; the production architecture puts together. **Deconstruction then construction** across degrees 106-107.
+- **The Production Return — 108th artist-city pattern.** A return artist reframed through a different creative dimension, not through a different sound substrate. Distinct from the acoustic return type (82-85, four subtractive returns stripping instruments back), from the electronic return type (97, 103-105, four additive returns adding electronic instruments), and from the re-contextualized return pattern (The Postal Service 97, dual-contextual electronic). The production return is lens-shifting rather than substrate-shifting — the same sound practice viewed from a different angle. Future engine returns have a new option: production-lens, songwriting-lens, arrangement-lens, vocalist-lens. The production return is the first dimensional reframing the engine has executed.
+- **E=4 → E=5 energy escalation on return.** At degree 44, Chong the Nomad was E=4 in performer context — moderate-to-high energy, live presence, grain of the beat. At degree 107, Chong the Nomad is E=5 in production context — higher energy because the production lens reveals internal density that performance conceals. The energy escalation is not loudness but density — the same practice, more of what the production lens can see. Consistent with the engine's pattern of returns revealing higher energy (Briana Marela E=2→E=3, Lemolo E=2→E=3, Parenthetical Girls E=3→E=4). The production return raises energy by one level just as the electronic return does, but through a different mechanism (density vs. substrate).
+- **Self-released — the production economy matches the production lens.** Chong the Nomad's self-released distribution is consistent with the production-lens framing — when the artist is their own producer, the distribution is also self-directed. The label context is less concentrated than major-label or Sub Pop entries, and the diffuse self-released topology itself carries the production-lens niche. The economic structure (self-released) mirrors the creative structure (self-produced) — both are about the artist controlling the full construction stack from beat to release.
+- **Deconstruction at 106 then construction at 107 — a clean two-degree narrative arc.** Knife Knights at degree 106 (Experimental Hip-Hop, Ishmael Butler and Erik Blood) deconstructs hip-hop through electronic production — tearing apart the beat, the voice, the structure. Chong the Nomad at degree 107 constructs Electronic/R&B through layered production — putting together beats, bass, rhythmic layers. Consecutive degrees with opposite operations. **Both** operate through electronic production; the engine pairs the deconstructive degree with the constructive degree for a two-degree narrative that reads as a complete arc.
+- **Tenth electronic-adjacent entry among recent degrees — the electronic era extends.** Degrees 86, 90, 91, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, and now 107 contain electronic-adjacent entries. Eighteen electronic-adjacent entries in twenty-two degrees (86-107). The electronic era continues to extend through Quadrant II and into the approach of Quadrant III, furnishing differentiated approaches — pop structure (86), atmosphere (90), obliteration (91), intimacy (93), experimentation (94), euphoria (95), pulse (96), tenderness (97), nostalgia (98), cultural fusion (99), golden cascade (100), kinetic surge (101), organic circuit (102), layered dissolution (103), dream circuit (104), theatrical circuit (105), beat architecture (106), production architecture (107).
+- **The production economy expands the engine's practice vocabulary.** Chong the Nomad's production-lens entry adds a new kind of creative practice to the engine's artist portfolio — not the live performer, not the songwriter, not the vocalist, but the producer as primary creative identity. Future degrees can reach into the production economy (beat-maker, mixing engineer, mastering engineer) with the production return at 107 as precedent. The engine's catalog has matured enough to support dimensional reframing without losing the original performer-context entry's validity — degrees 44 and 107 are both valid, independent entries.
 
-Full deep research covering Chong the Nomad in production context, the ninth return, and the production architecture:
+## Part B: Acorn Woodpecker — The Colonial Woodpecker
 
-### STRUCTURAL EVENT: GENRE STAGE 89 -- Electronic/R&B (Production Context)
-
-Degree 107 reaches Genre Stage 89. Electronic/R&B in production context -- the same genre as degree 44, now viewed through the production lens. The genre classification remains Electronic/R&B because the production dimension reveals the same genre from a different angle. The performer and the producer are two faces of the same practice.
-
-Distinguished from: Chong the Nomad (44, Electronic/R&B -- performer context, live presence, E=4). Kaina (99, Electronic/R&B -- vocal/songwriting focus). Erik Blood (94, Electronic/Experimental -- atmospheric, textural). Knife Knights (106, Experimental Hip-Hop -- deconstructive). Chong's production context is constructive and groove-driven.
-
-### THE PRODUCTION ARCHITECTURE -- 108th Acoustic Element
-
-The quality heard when an artist's work is viewed through the production lens. Focus shifts from performance to construction. The layered complexity, bass weight, and rhythmic density that performance conceals are revealed. Chong the Nomad's production is rhythmic and groove-driven -- the beats are not just performed but constructed, layered, and designed. The production architecture (107) follows the beat architecture (106, Knife Knights) -- deconstruction then construction.
-
-### THE PRODUCTION RETURN -- 108th Artist-City Pattern
-
-A return artist reframed through a different creative dimension. Performer at degree 44 becomes producer at degree 107. Artists contain multiple dimensions; the engine captures each separately. The 63-degree gap is the longest for a return artist in the electronic era. Energy escalation: E=4 (performer) to E=5 (producer). The production lens reveals higher energy -- what seemed like E=4 in performance reveals E=5 in production complexity.
-
-### NINTH RETURN ARTIST -- ENERGY ESCALATION
-
-Chong the Nomad is the ninth return artist in the engine. Previous returns: Death Cab for Cutie (acoustic, 82), Pearl Jam (acoustic, 83), Damien Jurado (late career, 84), Rocky Votolato (acoustic, 85), The Postal Service (electronic, 97), Briana Marela (electronic, 103), Lemolo (electronic, 104), Parenthetical Girls (electronic, 105). The production return is different: not acoustic or electronic reframing, but a dimensional shift from performer to producer.
-
-### CROSS-REFERENCES (Part A)
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| S36-044 | Chong the Nomad production (107) | Chong the Nomad (44) | RETURN! Electronic/R&B E=4 performer to E=5 producer. 63-degree gap. Ninth return. Energy escalation. |
-| S36-094 | Chong the Nomad production (107) | Erik Blood (94) | PRODUCER PARALLEL. Both producers. Blood atmospheric/experimental. Chong rhythmic/groove-driven. Two philosophies. |
-| S36-106 | Chong the Nomad production (107) | Knife Knights (106) | CONSECUTIVE DEGREES. Deconstruction (106) then construction (107). Beat architecture then production architecture. |
-| S36-099 | Chong the Nomad production (107) | Kaina (99) | ELECTRONIC/R&B TERRITORY. Same genre. Kaina vocal/songwriting. Chong production. Two dimensions. |
-| S36-095 | Chong the Nomad production (107) | Odesza (95) | E=5 ELECTRONIC. Both Electronic at E=5. Odesza festival-scale. Chong intimate beat-driven. Same energy, different scale. |
-
----
-
-## Part B: Acorn Woodpecker (*Melanerpes formicivorus*) -- PICIDAE RETURNS (First Woodpecker Since Degree 54, 53-Degree Gap, Waka-Waka-Waka, E=5, Oak Savanna, Granary Trees, Colonial Living, Forty-Seventh Consecutive Original CSV)
-
-Full deep research covering the Acorn Woodpecker, Picidae return, and the colonial woodpecker:
-
-### PICIDAE RETURNS AFTER 53-DEGREE GAP
-
-Degree 107 marks the return of Picidae -- first woodpecker since degree 54 (Pileated Woodpecker, Red-breasted Sapsucker). A 53-degree gap. After the Corvidae septet (100-106), the engine shifts from Passeriformes to Piciformes. Fourth Picidae species: Northern Flicker (21-22), Red-breasted Sapsucker (54), Pileated Woodpecker (54), Acorn Woodpecker (107). New genus *Melanerpes* -- a large New World genus of woodpeckers.
-
-### ACORN WOODPECKER -- THE COLONIAL WOODPECKER
-
-Acorn Woodpecker (*Melanerpes formicivorus*). 20-23 cm body length. Wingspan 35-43 cm. Weight 65-90 g. Bold facial pattern: white face with black crown and nape, red crown patch. Black back and wings with white rump and wing patches. The "clown face" -- unmistakable. *Melanerpes* from Greek *melas* ('black') + *herpes* ('creeper'). *formicivorus* from Latin *formica* ('ant') + *vorare* ('to devour').
-
-### THE SOUND: WAKA-WAKA-WAKA -- THE RAUCOUS LAUGHING CALL
-
-Waka-waka-waka: the diagnostic call. Loud, raucous, rapid, nasal, laughing. Clownish quality. Diagnostic among PNW woodpeckers. Faster and more nasal than the Pileated Woodpecker's wild laughing call. Colonial groups calling simultaneously fill the oak woodland with overlapping vocal textures. E=5 -- high energy, gregarious, persistent.
-
-### GRANARY TREES -- 50,000+ ACORNS
-
-Community infrastructure. Thousands of custom-drilled holes, each storing one acorn. 50,000+ acorns per granary. Maintained across generations by the colonial group. Architecture at scale. Reused and expanded over decades. Compare with Clark's Nutcracker (105, dispersed caching of 98,000 seeds/year) -- two caching strategies at massive scale. Concentrated (granary) vs dispersed (soil caches).
-
-### COLONIAL LIVING -- COOPERATIVE BREEDING
-
-Groups of 15+ individuals. Cooperative breeding, communal nest defense, shared granary maintenance. One of the most social woodpeckers in the world. Rare among Picidae. The colony as superorganism.
-
-### OAK SAVANNA HABITAT
-
-Open oak woodland and savanna. Southern Oregon at the northern range edge in PNW. Without oaks, no acorns; without acorns, no Acorn Woodpecker. Habitat-obligate relationship. Limited PNW distribution.
-
-### CROSS-REFERENCES (Part B)
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| SPS-054 | Acorn Woodpecker (107) | Pileated Woodpecker (54) | PICIDAE RETURNS. 53-degree gap. Pileated in old-growth (E=5). Acorn in oak savanna (E=5). Both E=5 but different habitats. Pileated solitary; Acorn colonial. |
-| SPS-021 | Acorn Woodpecker (107) | Northern Flicker (21) | PICIDAE FAMILY. Engine's first woodpecker. Flicker feeds on ground (ants); Acorn stores in trees (acorns). Flicker solitary; Acorn colonial. |
-| SPS-100 | Acorn Woodpecker (107) | Common Raven (100) | INTELLIGENCE PARALLEL. Both highly intelligent and social. Corvid intelligence (100) meets woodpecker social complexity (107). |
-| SPS-075 | Acorn Woodpecker (107) | Yellow-bellied Marmot (75) | COLONIAL PARALLEL. Marmot colonies with shared burrows. Acorn colonies with shared granary trees. Two colonial species, same strategy. |
-| SPS-105 | Acorn Woodpecker (107) | Clark's Nutcracker (105) | FOOD CACHING PARALLEL. Nutcracker caches 98,000 seeds (dispersed, spatial memory). Acorn caches 50,000+ acorns (concentrated, granary trees). Two strategies. |
-
----
-
-## Parallel: Chong the Nomad (production) x Acorn Woodpecker -- The Production Architecture and the Colonial Woodpecker (PICIDAE RETURNS)
-
-The production architecture and the colonial woodpecker. Both are builders at extraordinary scale.
-
-**1. Both Are Constructive** -- Chong the Nomad's production architecture reveals the constructive dimension of beat-making -- layered complexity, bass weight, rhythmic density. The Acorn Woodpecker's granary trees are community infrastructure built across generations. Both build at scale.
-
-**2. Deconstruction Then Construction** -- Knife Knights (106) deconstructs hip-hop through electronic production. Chong the Nomad (107) constructs Electronic/R&B through layered production. The sequence from degree 106 to 107 moves from deconstruction to construction.
-
-**3. Picidae Replaces Corvidae** -- After seven consecutive Corvidae (100-106), the engine shifts to Picidae at degree 107. The family transition is clean -- Corvidae septet complete, Picidae returns.
-
-**4. Energy Escalation on Return** -- Chong the Nomad escalates from E=4 (performer, 44) to E=5 (producer, 107). The production lens reveals higher energy. The Acorn Woodpecker arrives at E=5 with colonial waka-waka-waka. Both sides at E=5.
-
-**5. Community Architecture** -- The granary tree is community architecture: thousands of individually drilled holes, maintained across generations, used by the colonial group. The production architecture is sonic construction: layers of beats, bass, and rhythm designed and assembled. Both are architecture.
-
----
-
-## Acoustic Progression (108 elements)
-
-| # | Element | Degree | Artist/Species |
-|---|---------|--------|----------------|
-| 0 | silence | 0 | Quincy Jones |
-| 1 | cascade | 1 | Bill Frisell |
-| 2 | drone | 2 | Wayne Horvitz |
-| 3 | language | 3 | Ernestine Anderson |
-| 4 | motif | 4 | Floyd Standifer |
-| 5 | metronome | 5 | Overton Berry |
-| 6 | question | 6 | Patti Bown |
-| 7 | harmonic spiral | 7 | Julian Priester |
-| 8 | ultrasonic threshold | 8 | Gary Peacock |
-| 9 | variation | 9 | Hadley Caliman |
-| 10 | minimum signal | 10 | Bud Shank |
-| 11 | trill/tremolo | 11 | Joe Brazil |
-| 12 | sawtooth sweep | 12 | Don Lanphere |
-| 13 | ostinato | 13 | Marc Seales |
-| 14 | repetition-resolution | 14 | Aaron Parks |
-| 15 | accelerando | 15 | Thomas Marriott |
-| 16 | crescendo | 16 | Jeff Lorber |
-| 17 | the hook | 17 | Reggie Watts |
-| 18 | ascending spiral | 18 | Maktub |
-| 19 | descending spiral | 19 | Fly Moon Royale |
-| 20 | sustain/the release | 20 | Whitney Monge |
-| 21 | the hammer | 21 | Polyrhythmics |
-| 22 | resonant percussion/groove reset | 22 | Foxy Apollo |
-| 23 | the testimony/groove reset | 23 | Allen Stone |
-| 24 | the invocation | 24 | Ron Artis II |
-| 25 | the congregation | 25 | Black Stax |
-| 26 | the caroling | 26 | Shaina Shepherd |
-| 27 | the liquid gurgle | 27 | The Dynamics |
-| 28 | the liquid twitter | 28 | Night Owls |
-| 29 | the rough brrit | 29 | Boogaloo Joe Jones |
-| 30 | the liquid warble synthesis | 30 | Ray Charles |
-| 31 | the whisper | 31 | Brenda Lee Eager |
-| 32 | the buzz | 32 | Luther Rabb |
-| 33 | the cadenza | 33 | Larry English |
-| 34 | the dialect | 34 | The Tempos |
-| 35 | the thrum | 35 | Robert Cray |
-| 36 | the sonic boom | 36 | Jimi Hendrix |
-| 37 | the filament | 37 | Ayron Jones |
-| 38 | the drawl | 38 | Booker T. Jones |
-| 39 | the canopy buzz | 39 | Ron Artis Jr |
-| 40 | the thinning | 40 | Alice Smith |
-| 41 | the partition | 41 | Shawn Smith |
-| 42 | the shimmer | 42 | Erica Campbell |
-| 43 | the radiance | 43 | Ann Wilson |
-| 44 | the grain | 44 | Chong the Nomad |
-| 45 | the murmur | 45 | Damien Jurado |
-| 46 | the confessional | 46 | Rocky Votolato |
-| 47 | the parable tone | 47 | Pedro the Lion |
-| 48 | the held rest | 48 | Sera Cahoone |
-| 49 | the lullaby subversion | 49 | Kimya Dawson |
-| 50 | the intimate architecture | 50 | Mirah |
-| 51 | the communal harmony | 51 | Grand Archives |
-| 52 | the testimony roar | 52 | Brandi Carlile |
-| 53 | the cathedral harmony | 53 | Fleet Foxes |
-| 54 | the fraternal jangle | 54 | Ivan & Alyosha |
-| 55 | the ember glow | 55 | Shelby Earl |
-| 56 | the dream haze | 56 | Lemolo |
-| 57 | the rattle / the stream rattle | 57 | Laura Gibson / Belted Kingfisher |
-| 58 | the ache / the pond whistle | 58 | Death Cab for Cutie / Wood Duck |
-| 59 | the digression / the quack | 59 | The Long Winters / Mallard |
-| 60 | the bare wire / the submerge call | 60 | Ben Gibbard (solo) / Pied-billed Grebe |
-| 61 | the braided voice / the tail slap | 61 | Y La Bamba / American Beaver |
-| 62 | the throwback / the rhythmic gnaw | 62 | Pickwick / Beaver Chewing |
-| 63 | the FM sheen / the chuff | 63 | Kenny Loggins / River Otter |
-| 64 | the dusk / the chitter | 64 | Jesse Sykes / Mink |
-| 65 | the open plain / the chuckle-chatter | 65 | Philip Aaberg / American Marten |
-| 66 | the country thunder / the scream | 66 | Neko Case / Fisher |
-| 67 | the clean room / the shrill bark-chitter | 67 | Chris Walla / Short-tailed Weasel |
-| 68 | the hush / the rapid chattering chirp | 68 | Sam Beam / Long-tailed Weasel |
-| 69 | the earnest voice / the warning foot-stamp hiss | 69 | Kris Orlowski / Striped Skunk |
-| 70 | the fiddle line / the churring chittering young | 70 | Horse Feathers / Raccoon |
-| 71 | the room tone / the bark screaming vixen call | 71 | Phil Elverum / Red Fox |
-| 72 | the layered loop / the low hiss click | 72 | Briana Marela / Opossum |
-| 73 | the jangle / the thump squeal | 73 | LAKE / Snowshoe Hare |
-| 74 | the reverb wash / the high sharp eenk bark | 74 | Poor Moon / American Pika |
-| 75 | the anthem / the piercing whistle alarm | 75 | The Lonely Forest / Yellow-bellied Marmot |
-| 76 | the androgynous register / the loud penetrating whistle | 76 | Chris Pureka / Hoary Marmot |
-| 77 | the ethereal layering / the musical multi-note whistle | 77 | Mree / Olympic Marmot |
-| 78 | the communal jangle / the chirping trill alarm | 78 | Acid Tongue / Townsend's Ground Squirrel |
-| 79 | the cinematic stillness / the sharp chip alarm | 79 | Jesse Marchant / Golden-mantled Ground Squirrel |
-| 80 | the organ explosion / the loud scolding chatter rattle | 80 | Mates of State / Douglas Squirrel |
-| 81 | the Broadway voice / the bark + chatter alarm | 81 | Sara Bareilles / Eastern Fox Squirrel |
-| 82 | the acoustic intimacy / the high thin tseet | 82 | Death Cab for Cutie (acoustic) / Northern Flying Squirrel |
-| 83 | the grunge whisper / the ultrasonic + soft chip | 83 | Pearl Jam (acoustic) / Deer Mouse |
-| 84 | the late whisper / the chatter + twig gnaw | 84 | Damien Jurado (late career) / Bushy-tailed Woodrat |
-| 85 | the stripped confession / the quiet plop | 85 | Rocky Votolato (acoustic) / Muskrat |
-| 86 | the electronic pulse / the amplified krek-krek wall of sound | 86 | The Postal Service / Pacific Treefrog |
-| 87 | the emerging twang / the rhythmic chirp field chorus | 87 | Neko Case (early folk) / Cricket Chorus |
-| 88 | the bedroom strum / the continuous electric buzz | 88 | Kimya Dawson (solo) / Katydid |
-| 89 | the baroque whisper / the electric buzzing throb | 89 | Parenthetical Girls / Cicada |
-| 90 | the ambient drift / the bell-like peep chorus | 90 | Sky Cries Mary / Spring Peeper-Like Chorus |
-| 91 | the sustained crush / the ultra-thin hum cloud | 91 | Hovercraft / Mosquito Swarm |
-| 92 | the global weave / the deep resonant buzz | 92 | Trance Mission / Bumblebee Drone |
-| 93 | the shimmer veil / the aggressive papery hum | 93 | NAVVI / Hornet Nest Buzz |
-| 94 | the producer's palette / the wing rustle on stream surface | 94 | Erik Blood / Stonefly Hatch |
-| 95 | the euphoric build / the mass wing buzz over water | 95 | ODESZA / Mayfly Emergence |
-| 96 | the synth-pop pulse / the duck-like clucking chorus | 96 | STRFKR / Wood Frog |
-| 97 | the algorithmic tenderness / the sustained musical purring | 97 | The Postal Service (electronic) / Toad Chorus |
-| 98 | the retro-synthetic shimmer / the pure sustained trill | 98 | Gold Casio / Tree Cricket Song |
-| 99 | the bilingual warmth / the mechanical click | 99 | Kaina / Click Beetle |
-| 100 | the nostalgic cascade / the deep cronk + bell + hollow knock | 100 | Summer Heart / Common Raven |
-| 101 | the kinetic surge / the coordinated duet | 101 | Hecuba / Common Raven Pair |
-| 102 | the organic circuit / the caw caw caw complex | 102 | Campfire OK / American Crow |
-| 103 | the layered dissolution / the shack-shack-shack raucous alarm | 103 | Briana Marela (electronic) / Steller's Jay (raucous) |
-| 104 | the dream circuit / the soft whistles + mimicry | 104 | Lemolo (electronic) / Gray Jay |
-| 105 | the theatrical circuit / the harsh grating kraa-a-a | 105 | Parenthetical Girls (electronic) / Clark's Nutcracker |
-| 106 | the beat architecture / the rolling mek-mek-mek + chatter | 106 | Knife Knights / Black-billed Magpie |
-| **107** | **the production architecture / the waka-waka-waka raucous colonial** | **107** | **Chong the Nomad (production) / Acorn Woodpecker** |
-
-The acoustic progression adds degree 107. On the artist side, the production architecture (107) is Chong the Nomad in production context -- the constructive dimension of beat-making revealed. E=5. From the beat architecture (106, deconstructive, E=4) to the production architecture (107, constructive, E=5). Deconstruction then construction. Energy rises. On the species side, the waka-waka-waka (107) is the Acorn Woodpecker -- the colonial woodpecker's raucous laughing call. E=5. From the rolling mek-mek-mek (106, magpie, open steppe) to the waka-waka-waka (107, Acorn Woodpecker, oak savanna). Corvidae septet ends; Picidae returns.
-
-## Artist-City Patterns (108 patterns)
-
-| # | Pattern | Degree | Artist |
-|---|---------|--------|--------|
-| 0 | Export | 0 | Quincy Jones |
-| 1 | Draw | 1 | Bill Frisell |
-| 2 | European Exile | 2 | Wayne Horvitz |
-| 3 | The Stay | 3 | Ernestine Anderson |
-| 4 | The Teacher | 4 | Floyd Standifer |
-| 5 | The Persistence | 5 | Overton Berry |
-| 6 | The Erasure | 6 | Patti Bown |
-| 7 | Pedagogue-Draw | 7 | Julian Priester |
-| 8 | The Quiet Draw | 8 | Gary Peacock |
-| 9 | The Seeker | 9 | Hadley Caliman |
-| 10 | Late Homestead | 10 | Bud Shank |
-| 11 | The Salon Keeper | 11 | Joe Brazil |
-| 12 | The Prodigal | 12 | Don Lanphere |
-| 13 | Institutional Anchor | 13 | Marc Seales |
-| 14 | Prodigy-Export | 14 | Aaron Parks |
-| 15 | Builder-Stayer | 15 | Thomas Marriott |
-| 16 | Talent Incubator | 16 | Jeff Lorber |
-| 17 | The Uncategorizable | 17 | Reggie Watts |
-| 18 | The Workshop | 18 | Maktub |
-| 19 | The New Root | 19 | Fly Moon Royale |
-| 20 | The Street Laureate | 20 | Whitney Monge |
-| 21 | The Ensemble Anchor | 21 | Polyrhythmics |
-| 22 | The Inheritor | 22 | Foxy Apollo |
-| 23 | The Rural Draw | 23 | Allen Stone |
-| 24 | The Island Export | 24 | Ron Artis II |
-| 25 | The Cultural Guardian | 25 | Black Stax |
-| 26 | The Transmuter | 26 | Shaina Shepherd |
-| 27 | The Conduit | 27 | The Dynamics |
-| 28 | The Resident Band | 28 | Night Owls |
-| 29 | The Catalog | 29 | Boogaloo Joe Jones |
-| 30 | The Incubation | 30 | Ray Charles |
-| 31 | The Relay | 31 | Brenda Lee Eager |
-| 32 | The Foundation | 32 | Luther Rabb |
-| 33 | The Unrecorded | 33 | Larry English |
-| 34 | The Shadow Name | 34 | The Tempos |
-| 35 | The Deep Root | 35 | Robert Cray |
-| 36 | The Supernova | 36 | Jimi Hendrix |
-| 37 | The Inheritor | 37 | Ayron Jones |
-| 38 | The Touring Anchor | 38 | Booker T. Jones |
-| 39 | The Returning Wave | 39 | Ron Artis Jr |
-| 40 | The Cultural Satellite | 40 | Alice Smith |
-| 41 | The Scene Native | 41 | Shawn Smith |
-| 42 | The Gospel Export | 42 | Erica Campbell |
-| 43 | The Arena Architect | 43 | Ann Wilson |
-| 44 | The Digital Immigrant | 44 | Chong the Nomad |
-| 45 | The Stripped Murmur | 45 | Damien Jurado |
-| 46 | The Confessional Drifter | 46 | Rocky Votolato |
-| 47 | The Sacred Baritone | 47 | Pedro the Lion |
-| 48 | The Campfire Anchor | 48 | Sera Cahoone |
-| 49 | The Trojan Lullabist | 49 | Kimya Dawson |
-| 50 | The Intimate Architect | 50 | Mirah |
-| 51 | The Folk Organism | 51 | Grand Archives |
-| 52 | The Arena Breakout | 52 | Brandi Carlile |
-| 53 | The Prodigy Return | 53 | Fleet Foxes |
-| 54 | The Neighborhood Anchor | 54 | Ivan & Alyosha |
-| 55 | The Infrastructure Beneficiary | 55 | Shelby Earl |
-| 56 | The Duo Collective | 56 | Lemolo |
-| 57 | The Label Bridge | 57 | Laura Gibson |
-| 58 | The Bellingham Ascent | 58 | Death Cab for Cutie |
-| 59 | The Scene Intellectual | 59 | The Long Winters |
-| 60 | The Frontman Alone | 60 | Ben Gibbard (solo) |
-| 61 | The Corridor Bridge | 61 | Y La Bamba |
-| 62 | The Brief Blaze | 62 | Pickwick |
-| 63 | The Everett Departure | 63 | Kenny Loggins |
-| 64 | The Dark-Folk Loner | 64 | Jesse Sykes |
-| 65 | The Montana Connection | 65 | Philip Aaberg |
-| 66 | The Wanderer Who Claims Multiple Cities | 66 | Neko Case |
-| 67 | The Departed Member | 67 | Chris Walla |
-| 68 | The Visiting Artist | 68 | Sam Beam |
-| 69 | The Working Musician | 69 | Kris Orlowski |
-| 70 | The Corridor Wanderer | 70 | Horse Feathers |
-| 71 | The Anacortes Hermit | 71 | Phil Elverum |
-| 72 | The International Student | 72 | Briana Marela |
-| 73 | The K Records Collective | 73 | LAKE |
-| 74 | The Side Project | 74 | Poor Moon |
-| 75 | The Second Anacortes Act | 75 | The Lonely Forest |
-| 76 | The Identity Artist | 76 | Chris Pureka |
-| 77 | The YouTube-to-Artist Pipeline | 77 | Mree |
-| 78 | The Porch Party | 78 | Acid Tongue |
-| 79 | The Dark Meditation | 79 | Jesse Marchant |
-| 80 | The Married Duo | 80 | Mates of State |
-| 81 | The Crossover Arc | 81 | Sara Bareilles |
-| 82 | The Recursive Return | 82 | Death Cab for Cutie (acoustic) |
-| 83 | The Arena Unplugged | 83 | Pearl Jam (acoustic) |
-| 84 | The Artist Arc | 84 | Damien Jurado (late career) |
-| 85 | The Confessional Return | 85 | Rocky Votolato (acoustic) |
-| 86 | The Side Project | 86 | The Postal Service |
-| 87 | The Early Chapter | 87 | Neko Case (early folk) |
-| 88 | The Solo Distillation | 88 | Kimya Dawson (solo) |
-| 89 | The Theatrical Outsider | 89 | Parenthetical Girls |
-| 90 | The Parallel Scene | 90 | Sky Cries Mary |
-| 91 | The Spousal Satellite | 91 | Hovercraft |
-| 92 | The Cross-Pollinator | 92 | Trance Mission |
-| 93 | The Intimate Machine | 93 | NAVVI |
-| 94 | The Cross-Genre Bridge | 94 | Erik Blood |
-| 95 | The Bellingham Pipeline | 95 | ODESZA |
-| 96 | The DIY Maximalist | 96 | STRFKR |
-| 97 | The Re-Contextualized Return | 97 | The Postal Service (electronic) |
-| 98 | The Self-Released Synthesist | 98 | Gold Casio |
-| 99 | The Diasporic Synthesist | 99 | Kaina |
-| 100 | The Transatlantic Dreamer | 100 | Summer Heart |
-| 101 | The Dance Floor Provocateur | 101 | Hecuba |
-| 102 | The Warm Circuiteer | 102 | Campfire OK |
-| 103 | The Electronic Reframing | 103 | Briana Marela (electronic) |
-| 104 | The Sustained Electronic Return | 104 | Lemolo (electronic) |
-| 105 | The Triple Electronic Return | 105 | Parenthetical Girls (electronic) |
-| 106 | The Genre Gateway | 106 | Knife Knights |
-| **107** | **The Production Return** | **107** | **Chong the Nomad (production)** |
-
-One hundred and eight named patterns across one hundred and eight degrees. The Production Return (107) describes the pattern where a return artist is reframed through a different creative dimension -- performer at degree 44 becomes producer at degree 107. Artists contain multiple dimensions; the engine captures each separately.
-
-## Genre Evolution (89 stages)
-
-| Stage | Degree | Genre | Artist |
-|-------|--------|-------|--------|
-| 27 | 45 | Folk | Damien Jurado |
-| 28 | 46 | Folk | Rocky Votolato |
-| 29 | 47 | Indie Folk | Pedro the Lion |
-| 30 | 48 | Folk | Sera Cahoone |
-| 31 | 49 | Folk Punk | Kimya Dawson |
-| 32 | 50 | Indie Folk | Mirah |
-| 33 | 51 | Indie Folk | Grand Archives |
-| 34 | 52 | Folk/Rock | Brandi Carlile |
-| 35 | 53 | Indie Folk | Fleet Foxes |
-| 36 | 54 | Folk | Ivan & Alyosha |
-| 37 | 55 | Singer-Songwriter | Shelby Earl |
-| 38 | 56 | Indie Folk | Lemolo |
-| 39 | 57 | Folk | Laura Gibson |
-| 40 | 58 | Indie Rock | Death Cab for Cutie |
-| 41 | 59 | Indie Rock | The Long Winters |
-| 42 | 60 | Folk | Ben Gibbard (solo) |
-| 43 | 61 | Folk/Indie | Y La Bamba |
-| 44 | 62 | Indie/Folk | Pickwick |
-| 45 | 63 | Soft Rock/Folk | Kenny Loggins |
-| 46 | 64 | Folk | Jesse Sykes |
-| 47 | 65 | New Age/Folk | Philip Aaberg |
-| 48 | 66 | Alt Country | Neko Case |
-| 49 | 67 | Indie/Folk | Chris Walla |
-| 50 | 68 | Folk | Sam Beam |
-| 51 | 69 | Singer-Songwriter | Kris Orlowski |
-| 52 | 70 | Indie Folk | Horse Feathers |
-| 53 | 71 | Indie/Folk | Phil Elverum |
-| 54 | 72 | Art Pop | Briana Marela |
-| 55 | 73 | Indie Pop | LAKE |
-| 56 | 74 | Indie Folk/Rock | Poor Moon |
-| 57 | 75 | Indie Pop | The Lonely Forest |
-| 58 | 76 | Folk | Chris Pureka |
-| 59 | 77 | Folk/Pop | Mree |
-| 60 | 78 | Folk/Indie | Acid Tongue |
-| 61 | 79 | Folk | Jesse Marchant |
-| 62 | 80 | Indie Pop | Mates of State |
-| 63 | 81 | Pop/Soul | Sara Bareilles |
-| 64 | 82 | Indie Folk | Death Cab for Cutie (acoustic) |
-| 65 | 83 | Acoustic Rock | Pearl Jam (acoustic) |
-| 66 | 84 | Folk | Damien Jurado (late career) |
-| 67 | 85 | Folk | Rocky Votolato (acoustic) |
-| 68 | 86 | Indie Electronic | The Postal Service |
-| 69 | 87 | Folk Country | Neko Case (early folk) |
-| 70 | 88 | Lo-Fi Folk | Kimya Dawson (solo) |
-| 71 | 89 | Avant-Pop | Parenthetical Girls |
-| 72 | 90 | Ethereal/Electronic | Sky Cries Mary |
-| 73 | 91 | Drone/Noise | Hovercraft |
-| 74 | 92 | World/Electronic | Trance Mission |
-| 75 | 93 | Dream Pop/Electronic | NAVVI |
-| 76 | 94 | Electronic/Experimental | Erik Blood |
-| 77 | 95 | Electronic | ODESZA |
-| 78 | 96 | Indie Electronic | STRFKR |
-| 79 | 97 | Indie Electronic | The Postal Service (electronic) |
-| 80 | 98 | Indie Electronic | Gold Casio |
-| 81 | 99 | Electronic/R&B | Kaina |
-| 82 | 100 | Electronic Pop | Summer Heart |
-| 83 | 101 | Dance/Electronic | Hecuba |
-| 84 | 102 | Indie Electronic | Campfire OK |
-| 85 | 103 | Art Pop/Electronic | Briana Marela (electronic) |
-| 86 | 104 | Electronic Pop | Lemolo (electronic) |
-| 87 | 105 | Avant-Pop | Parenthetical Girls (electronic) |
-| 88 | 106 | Experimental Hip-Hop | Knife Knights |
-| **89** | **107** | **Electronic/R&B** | **Chong the Nomad (production)** |
-
-Genre Stage 89 -- Electronic/R&B at degree 107 in production context. Eighty-nine genre stages in 107 degrees. Same genre as degree 44, new lens. The production dimension does not change the genre; it reveals a different face of the same practice.
-
-## Energy Distribution
-
-**Artist-side (after degree 107):** E1:3 (2.8%), E2:31 (28.7%), E3:29 (26.9%), E4:29 (26.9%), E5:15 (13.9%), E6:1 (0.9%). Total: 108 (degrees 0-107). E=5 gains Chong the Nomad production (107) reaching 15. Energy rises from E=4 (106) to E=5 (107). The production architecture is louder than the beat architecture.
-
-**Species-side (after degree 107):** E=5 for Acorn Woodpecker (107) after Black-billed Magpie (106, E=5). Third consecutive E=5 on species side (105-106-107: nutcracker, magpie, Acorn Woodpecker). Picidae arrives at the same energy as the Corvidae septet's final two entries.
-
-## Cross-References (Combined)
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| S36-044 | Chong the Nomad production (107) | Chong the Nomad (44) | RETURN! E=4 performer to E=5 producer. 63-degree gap. Ninth return. |
-| S36-094 | Chong the Nomad production (107) | Erik Blood (94) | PRODUCER PARALLEL. Both producers. Atmospheric vs groove-driven. |
-| S36-106 | Chong the Nomad production (107) | Knife Knights (106) | CONSECUTIVE. Deconstruction then construction. |
-| S36-099 | Chong the Nomad production (107) | Kaina (99) | ELECTRONIC/R&B. Same genre. Vocal vs production focus. |
-| S36-095 | Chong the Nomad production (107) | Odesza (95) | E=5 ELECTRONIC. Both E=5. Festival-scale vs intimate. |
-| SPS-054 | Acorn Woodpecker (107) | Pileated Woodpecker (54) | PICIDAE RETURNS. 53-degree gap. Both E=5. Old-growth vs oak savanna. Solitary vs colonial. |
-| SPS-021 | Acorn Woodpecker (107) | Northern Flicker (21) | PICIDAE FAMILY. First woodpecker. Ground-feeding vs tree-storing. |
-| SPS-100 | Acorn Woodpecker (107) | Common Raven (100) | INTELLIGENCE. Social complexity. |
-| SPS-075 | Acorn Woodpecker (107) | Yellow-bellied Marmot (75) | COLONIAL PARALLEL. Both colony-based with shared infrastructure. |
-| SPS-105 | Acorn Woodpecker (107) | Clark's Nutcracker (105) | FOOD CACHING. Dispersed (98,000 seeds) vs concentrated (50,000+ acorns). |
-
-## Infrastructure
-
-**Part A:** `www/tibsfox/com/Research/S36/research/releases/107-chong-production/` -- research.md, index.html, knowledge-nodes.json, retrospective.md
-**Part B:** `www/tibsfox/com/Research/SPS/research/releases/107-acorn-woodpecker/` -- research.md, index.html, knowledge-nodes.json, retrospective.md
-**Release notes:** `docs/release-notes/v1.49.247/README.md`
-
-**Total: 9 files** -- standard degree package plus release notes.
-
----
+- **The Picidae reopening and the first woodpecker in 53 degrees.** **Acorn Woodpecker** (*Melanerpes formicivorus*) reopens **Picidae** to the engine at **degree 107** — a **53-degree gap** since the last Picidae entries at **degree 54** (**Pileated Woodpecker**, **Red-breasted Sapsucker**). After the seven-consecutive-Corvidae **Corvidae septet** (100-106), the engine shifts from **Passeriformes** to **Piciformes**. Fourth Picidae species overall in the engine: **Northern Flicker** (21-22, genus *Colaptes*), **Red-breasted Sapsucker** (54, genus *Sphyrapicus*), **Pileated Woodpecker** (54, genus *Dryocopus*), and **Acorn Woodpecker** (107, new genus *Melanerpes*). **Kingdom:** Animalia. **Phylum:** Chordata. **Class:** Aves. **Order:** Piciformes. **Family:** Picidae. **Genus:** *Melanerpes*. **Species:** *M. formicivorus*.
+- **New genus *Melanerpes* expands the engine's taxonomic ledger.** *Melanerpes* from Greek *melas* ('black') + *herpes* ('creeper'). A large New World genus of woodpeckers — Acorn, Lewis's, Red-bellied, Red-headed, Golden-fronted, and ~twenty other species. *Melanerpes formicivorus* — species name from Latin *formica* ('ant') + *vorare* ('to devour'), because although the Acorn Woodpecker is best known for caching acorns, it also eats ants in large quantities. Four Picidae genera are now represented in the engine: *Colaptes* (Flicker), *Sphyrapicus* (Sapsucker), *Dryocopus* (Pileated), and *Melanerpes* (Acorn). The Picidae reopening does not re-use a prior genus — it introduces a new one.
+- **The clown-faced woodpecker — visual identity as distinct as acoustic identity.** 20-23 cm body length. 35-43 cm wingspan. 65-90 g. White face. Black crown and nape. Red crown patch. Black back and wings with white rump and wing patches. Unmistakable. The "clown face" — no other woodpecker in North America has this facial pattern. Visual identity is part of the species entry at degree 107 because the Acorn Woodpecker's identity is as visual as it is acoustic; the clown face is how the species announces itself in field observation, and the waka-waka-waka is how the species announces itself in ear observation. Both channels of identity are maximally differentiated from other Picidae.
+- **The waka-waka-waka — 107th species-side acoustic element.** The diagnostic call. Loud, raucous, rapid, nasal, laughing. Clownish quality matching the clown face. Faster and more nasal than the **Pileated Woodpecker**'s wild laughing call (degree 54). Colonial groups of 15+ individuals calling simultaneously fill the **oak woodland** with overlapping vocal textures — E=5 not through peak amplitude but through colonial density. Distinct from **the cronk + bell + hollow knock** (100, Common Raven), from **the coordinated duet** (101, Common Raven Pair), from **the caw caw caw complex** (102, American Crow), from **the shack-shack-shack raucous alarm** (103, Steller's Jay), from **the soft whistles + mimicry** (104, Gray Jay), from **the harsh grating kraa-a-a** (105, Clark's Nutcracker), from **the rolling mek-mek-mek + chatter** (106, Black-billed Magpie). The Corvidae septet's acoustic arc has now transitioned to the Picidae colonial chorus.
+- **Granary trees — community infrastructure at extraordinary scale.** Thousands of custom-drilled holes, each sized to hold exactly one acorn. **50,000+ acorns** per granary tree. Maintained across generations. Reused and expanded over decades. The granary tree is not a cache but a community facility — a physical structure the colony builds and maintains. Compare with **Clark's Nutcracker** (105): the nutcracker caches **98,000 seeds per year** across thousands of dispersed sites, relying on individual spatial memory and enlarged hippocampus. The nutcracker's caching is individual and dispersed; the Acorn Woodpecker's caching is colonial and concentrated. **Two caching strategies at massive scale, two consecutive degrees.** The engine's catalog now holds both the dispersed-individual and the concentrated-communal poles of the caching spectrum.
+- **Colonial cooperative breeding — the Acorn Woodpecker is exceptional within Picidae.** Groups of 15+ individuals. Shared nest defense. Communal granary maintenance. Shared acorn storage. The colony functions as a superorganism in a family where most species are solitary or pair-bonded. One of the most social woodpeckers in the world. Rare within Picidae. The cooperative breeding system includes non-breeding helpers at the nest, shared feeding of young, and multi-generational family groups. The sociality is not incidental — it is the species' defining behavioral feature, and it shapes the ecology (granary tree maintenance requires multi-generational commitment), the acoustic profile (15+ simultaneous callers produce the colonial chorus density), and the reproduction (cooperative breeding with helpers).
+- **Oak savanna — the first oak-obligate habitat in the engine.** Open oak woodland and savanna. **Southern Oregon** at the northern range edge of the species' distribution. Without oaks, no acorns; without acorns, no Acorn Woodpecker. Habitat-obligate relationship. The species depends on oak savanna ecosystems where **Oregon white oak** (*Quercus garryana*), **California black oak** (*Quercus kelloggii*), and related oak species produce the acorns that sustain the colony. Limited Pacific Northwest distribution — the species' main range is in **California**, the **American Southwest**, and **Mexico**, with the northern tip extending into southern Oregon. The oak savanna habitat pushes the engine's geographic reach east and south beyond the **Puget Sound** and **Olympic Peninsula** heartland, and expands the habitat ledger to include a Mediterranean-influenced ecosystem.
+- **Forty-seventh consecutive original CSV — the streak extends.** The Acorn Woodpecker is the **forty-seventh consecutive original CSV species** (degrees 61-107 without substitution or correction). The streak now spans **Mammalia** (61-85), **Amphibia** and **Insecta** interludes (86-99), the **Aves** Corvidae sextet-then-septet (100-106), and now the Picidae reopening (107). Forty-seven consecutive degrees of catalog reliability — the longest unbroken run of original-catalog selections in the engine, and a data reliability milestone that the Picidae reopening extends into the new family.
+- **Intelligence and complexity shared with Corvidae — the Corvidae-to-Picidae transition is narrative, not abrupt.** Picidae and Corvidae share acoustic complexity (both families produce varied vocalizations), social intelligence (both families demonstrate problem-solving and social learning), and ecological significance (both families are keystone species in their habitats). The Acorn Woodpecker's colonial sociality resonates with the **American Crow** (102) and **Common Raven** (100) family groups; the granary tree resonates with the **Clark's Nutcracker** (105) caching; the diagnostic call resonates with the **Steller's Jay** (103) raucous alarm. The family transition from Corvidae to Picidae is therefore not a reset but an elaboration — the Corvidae themes continue in a new key.
+- **The third consecutive E=5 on the species side — energy peak sustained across the family transition.** Clark's Nutcracker at 105 (kraa-a-a, E=5), Black-billed Magpie at 106 (mek-mek-mek chatter, E=5), Acorn Woodpecker at 107 (waka-waka-waka, E=5). Three consecutive E=5 species-side entries spanning two families. The energy peak sustains across the Corvidae-to-Picidae transition; the family changes, the energy stays. **In parallel**, on the artist side, degrees 105-107 hold E=4 (Parenthetical Girls), E=4 (Knife Knights), E=5 (Chong the Nomad) — the artist energy rises to meet the sustained species energy at degree 107.
+- **The oak savanna expansion meets the production economy — both are community-facing.** The oak savanna habitat is community habitat — multiple species depend on oak ecosystems (Western Gray Squirrel, Western Bluebird, Band-tailed Pigeon, and more). The Acorn Woodpecker's colonial granary sits within a larger community ecosystem. **In parallel**, the production economy is community-facing — tracks are built to be heard, shared, danced to, sampled. Both sides operate within communities rather than in isolation. Degree 107 pairs two community-embedded practices at E=5 on both axes.
+- **The Acorn Woodpecker joins Flicker, Sapsucker, and Pileated as the fourth distinct Picidae profile in the engine.** Flicker (21-22): ground-feeding, solitary, Flicker genus *Colaptes*. Sapsucker (54): bark-tapping, solitary, genus *Sphyrapicus*. Pileated (54): old-growth, solitary, genus *Dryocopus*. Acorn (107): oak savanna, colonial, genus *Melanerpes*. Four niches. Four genera. Four social structures (solitary ground, solitary bark, solitary old-growth, colonial savanna). The Picidae representation in the engine now spans the family's ecological diversity in a way no prior family has matched with only four entries.
 
 ## Retrospective
 
-**What Worked:**
-1. Picidae returns after a 53-degree gap -- the family transition from Corvidae septet to Picidae is clean and creates a definitive structural shift
-2. The production return (performer to producer) introduces a new type of return that is analytically distinct from the acoustic and electronic returns
-3. The Acorn Woodpecker's granary trees (50,000+ acorns, community infrastructure) provide the strongest behavioral anchor in the Picidae section
-4. Energy escalation on return (Chong E=4 to E=5) is consistent with the engine's pattern of returns revealing higher energy
-5. Colonial living with cooperative breeding is rare among woodpeckers -- the Acorn Woodpecker is genuinely exceptional
-6. Deconstruction (106, Knife Knights) then construction (107, Chong) creates a clean two-degree narrative arc
+### What Worked
 
-**What Could Be Better:**
-1. Three consecutive E=5 on the species side (105-106-107) may feel static -- but each species has a completely different acoustic character
-2. Still no raptor or marine species in 107 entries
-3. The production return type (performer to producer) needs further precedent to confirm as a general pattern
+- **The Picidae reopening closes one era and opens another cleanly.** After the Corvidae septet closes at degree 106, the engine shifts from **Passeriformes** to **Piciformes** at degree 107 with the Acorn Woodpecker — a 53-degree gap bridged by a new genus (*Melanerpes*) and a new social structure (colonial cooperative breeding). The transition feels earned because Picidae returns with a profile genuinely different from the three prior Picidae entries (Flicker, Sapsucker, Pileated), not as a reprise but as an expansion.
+- **The Acorn Woodpecker is the right species for the Picidae reopening.** Clown-faced. 20-23 cm. 15+ colonial individuals. 50,000+ acorns in granary trees. Waka-waka-waka raucous laughing call at E=5. Cooperative breeding. Oak savanna obligate. New genus. The species carries the structural weight of being both a family reopening and a first colonial woodpecker in the engine, and its profile is distinct enough from prior Picidae entries that the reopening does not feel like a repeat.
+- **The production return is a genuinely new return type.** Acoustic returns strip instruments. Electronic returns add instruments. The production return reframes the lens — performer becomes producer, same practice viewed from a different angle. This is analytically distinct from both prior return types, and it expands the engine's return toolkit from two options to three.
+- **Chong the Nomad is the right artist for the production return.** Beat-maker with a clear dual identity — performer at degree 44 (live presence, grain of the beat) and producer at degree 107 (layered complexity, bass weight, rhythmic density). The dual identity is genuine rather than manufactured, and the 63-degree gap between appearances is long enough for the production-lens reframing to feel like a legitimate second take rather than a gratuitous return.
+- **Genre persistence across returns (Electronic/R&B at 44 and 107) extends the Parenthetical Girls precedent.** Parenthetical Girls' genre stayed Avant-Pop across both 89 and 105 because the theatrical impulse is genre-constant. Chong the Nomad's genre stays Electronic/R&B across both 44 and 107 because production and performance are genre-constant faces of the same practice. **Genre persistence is a legitimate analytical finding**, now validated twice.
+- **The production architecture acoustic element adds constructive density to the engine's sonic vocabulary.** Layered complexity, bass weight, rhythmic density — the production architecture is distinct from the Producer's Palette (94, atmospheric), from the Beat Architecture (106, deconstructive), and from The Grain (44, performer). The 108th acoustic element inaugurates a new analytical lens.
+- **The granary tree and the production architecture mirror each other.** Both are community infrastructure built at extraordinary scale. 50,000+ acorns in individually drilled holes; layered beats in multi-layered tracks. Both sides of degree 107 are constructive. The parallel is immediate and not forced.
+- **E=5 on both sides through constructive density rather than through volume.** The Acorn Woodpecker's colonial chorus and Chong the Nomad's production density both earn E=5 through internal complexity. The energy-matching is earned rather than coincidental.
+- **Third consecutive E=5 on species side (105-106-107) sustains the Corvidae energy peak across the Picidae transition.** The family changes; the energy stays. The species side arrives at Picidae at the same energy tier as the Corvidae septet's closing arc, and the sustained E=5 earns the family transition narrative weight.
+- **Deconstruction (106) then construction (107) creates a clean two-degree narrative arc.** Knife Knights takes apart; Chong the Nomad puts together. Consecutive degrees with opposite operations, both operating through electronic production. Readers can feel the narrative arc without explicit annotation.
+- **The oak savanna habitat expands the engine's geographic range east and south.** Southern Oregon, Mediterranean-influenced ecosystem, oak-obligate relationship — the Acorn Woodpecker pushes the engine beyond the Puget Sound heartland into a new ecoregion.
+
+### What Could Be Better
+
+- **Three consecutive E=5 on the species side may feel static.** Clark's Nutcracker (105), Black-billed Magpie (106), and Acorn Woodpecker (107) all at E=5 could read as flat energy terrain, although each species has a completely different acoustic character. Future degrees will need to break the E=5 plateau or extend it with explicit justification.
+- **Still no raptor in 108 entries.** The Pacific Northwest raptor absence (Accipitridae, Falconidae, Strigidae, Tytonidae absent since the **Northern Spotted Owl** at degree 4) grows more conspicuous with each non-raptor degree. The Picidae reopening brought a new family, but raptors remain the conspicuous gap.
+- **Still no marine species in 108 entries.** **Puget Sound**, the **Salish Sea**, and the **Olympic Coast** marine ecosystems remain unrepresented. Harbor seal, orca, sea lion, marbled murrelet, pigeon guillemot — all absent. For an engine titled around Puget Sound, the omission remains structural.
+- **The production return type (performer to producer) needs further precedent to confirm as a general pattern.** Degree 107 is the first production return. Without a second or third production return at future degrees, the pattern remains a single data point rather than a validated return type.
+- **Chong the Nomad's full production discography was treated structurally rather than catalogued track-by-track.** The degree 107 entry focused on the production lens rather than on individual release analysis. A track-level deep-dive (beat-by-beat structural analysis) could be a future research artifact.
+- **The Acorn Woodpecker's fire ecology and oak savanna management context could have received longer treatment.** Oak savannas are fire-dependent ecosystems; Indigenous fire management shaped the oak savanna habitats that the Acorn Woodpecker depends on. The species entry notes the oak obligate relationship but does not develop the fire-ecology dimension. Future work could deepen the ecological context.
+- **The dual Picidae/Corvidae cognitive-complexity parallel is noted but not researched in depth.** Both families demonstrate social intelligence, problem-solving, and vocal complexity. The degree 107 entry flags the parallel but does not investigate the comparative neuroscience. Future degrees could follow the thread.
 
 ## Lessons Learned
 
-1. Family transitions (Corvidae -> Picidae) create natural structural boundaries that readers can feel even without explicit annotation
-2. The production return introduces a dimensional shift that is different from acoustic (stripping instruments) or electronic (adding instruments) returns -- the same sound field viewed from a different angle
-3. Granary trees as community infrastructure parallel the production architecture as sonic construction -- when both halves of a degree share a theme (architecture/construction), the parallel is immediate
-4. The Acorn Woodpecker's oak savanna habitat in southern Oregon expands the engine's geographic range east and south -- the first oak-dependent species
-5. Nine return artists in 107 degrees is sustainable -- the production return adds variety to the return vocabulary
+1. **Family transitions create natural structural boundaries.** The Corvidae-to-Picidae transition at degrees 106-107 creates a boundary that readers can feel even without explicit annotation — the seven-degree streak closes, the new family opens with a new genus and a new social structure. Future family transitions should be allowed to speak for themselves; the transition itself is the signal. The engine's readability depends on these natural boundaries as much as on explicit framing. Future phase planning should look for family transitions as anchor points for narrative arcs rather than imposing arc boundaries through metadata.
+2. **The production return is a new return type that expands the engine's reframing vocabulary.** Acoustic returns strip instruments (subtractive). Electronic returns add instruments (additive). The production return reframes through creative dimension (lens-shifting). Three return types now exist: subtractive, additive, and lens-shifting. Future returns should assess whether they are subtractive, additive, or lens-shifting and frame accordingly. The engine can now support songwriter-lens, vocalist-lens, arranger-lens, and producer-lens returns as distinct analytical operations.
+3. **Genre persistence across returns is a legitimate finding, not a classification failure.** When an artist returns through a different creative lens or sound substrate and the genre label genuinely stays the same (because the underlying practice is genre-constant), the persistence is the signal. Parenthetical Girls at 89 and 105 (Avant-Pop both times). Chong the Nomad at 44 and 107 (Electronic/R&B both times). Future returns should not force a new classification when the underlying practice persists across the reframing — the genre stability itself is the structural finding.
+4. **Granary trees as community infrastructure parallel production architecture as sonic construction.** When both halves of a degree share a theme (architecture, construction, community infrastructure), the parallel is immediate and compelling. Future pairings should be selected for thematic congruence at the structural level rather than at the surface level — not both loud, not both quiet, but both constructive, both communal, both at extraordinary scale. The thematic congruence is what produces the cross-sync resonance.
+5. **The Acorn Woodpecker's oak savanna habitat expands the engine's geographic range.** The southern Oregon oak savanna is the first oak-obligate habitat in the engine and pushes the geographic reach east and south beyond the Puget Sound heartland. Future species entries should be allowed to expand the engine's geographic range when the species' habitat is genuinely peripheral to the engine's core — the expansion is itself the finding. The engine's geographic ledger should track range-expansion degrees separately as milestone events.
+6. **Nine return artists in 107 degrees is sustainable when each return adds variety.** Four acoustic returns (82-85). Four electronic returns (97, 103-105). One production return (107). The return vocabulary has variety — subtractive, additive, lens-shifting — and each type adds rather than repeats. Future return clusters should prioritize variety in reframing mechanism over volume of returns; the engine can support more returns as long as each contributes a distinct analytical move.
+7. **Colonial cooperative breeding is structurally rich and underrepresented in the engine.** The Acorn Woodpecker is one of the most social woodpeckers in the world. Prior colonial species entries (Yellow-bellied Marmot at 75 with colonial burrow systems) have provided the same kind of social-complexity weight. Future species entries should foreground cooperative breeding and colonial sociality when they exist because the relational structure produces stronger narrative gravity than species-in-isolation framings. Sociality is narrative gravity.
+8. **E=5 through constructive density is a legitimate alternative to E=5 through peak amplitude.** The Acorn Woodpecker's waka-waka-waka is E=5 through colonial chorus density (15+ simultaneous callers) rather than through individual call loudness. Chong the Nomad's production architecture is E=5 through layered complexity rather than through amplitude. Future E=5 entries can earn the energy tier through density rather than through volume — the engine's energy scale measures intensity, not only loudness. The density route to E=5 opens new kinds of high-energy paired subjects.
+9. **Catalog maturity at degree 107 enables dimensional reframing without losing original-entry validity.** Degree 44 (Chong the Nomad performer) remains a valid, independent entry. Degree 107 (Chong the Nomad production) is also a valid, independent entry. Both are true simultaneously — the artist contains multiple dimensions, and the engine captures each separately. Future dimensional reframings depend on this catalog principle: a return does not erase the original entry; it complements it. Both entries must stand on their own for the return to be analytically legitimate.
+10. **Deconstruction then construction creates a clean two-degree narrative arc when consecutive degrees operate through the same mechanism.** Knife Knights (106) and Chong the Nomad (107) both operate through electronic production but in opposite directions — deconstructive and constructive. The two-degree arc reads as complete because the mechanism is shared and the operations are opposed. Future consecutive-degree pairings should look for this kind of shared-mechanism-opposed-operation structure when narrative arc continuity matters. The arc is not in the entries but in the relation between them.
 
----
+## Cross-References
 
-The production architecture and the colonial woodpecker. Degree 107 shifts from Corvidae to Picidae and introduces the ninth return.
+| Connection | From | To | Nature |
+|------------|------|-----|--------|
+| S36-044 | Chong the Nomad production (107) | Chong the Nomad (44) | RETURN! The ninth return artist and the first production-lens reframing. Electronic/R&B original at E=4 (performer context, live presence, grain of the beat). Production reframing at E=5 (layered complexity, bass weight, rhythmic density). Genre persists. 63-degree gap — longest for a return artist in the electronic era. |
+| S36-106 | Chong the Nomad production (107) | Knife Knights (106) | CONSECUTIVE DEGREES. Deconstruction (106) then construction (107). Beat architecture takes apart; production architecture puts together. Both operate through electronic production. Two-degree narrative arc with shared mechanism and opposed operations. |
+| S36-094 | Chong the Nomad production (107) | Erik Blood (94) | PRODUCER PARALLEL. Both producers. Erik Blood atmospheric/experimental (the Producer's Palette, studio as instrument). Chong the Nomad rhythmic/groove-driven (the Production Architecture, stage as instrument). Two philosophies of electronic production. |
+| S36-099 | Chong the Nomad production (107) | Kaina (99) | ELECTRONIC/R&B TERRITORY. Same genre. Kaina vocal/songwriting focus. Chong production focus. Two dimensions of the same genre. |
+| S36-095 | Chong the Nomad production (107) | ODESZA (95) | E=5 ELECTRONIC. Both Electronic at E=5. ODESZA festival-scale euphoric build. Chong intimate beat-driven production. Same energy through different density routes. |
+| S36-105 | Chong the Nomad production (107) | Parenthetical Girls electronic (105) | GENRE PERSISTENCE PRECEDENT. Parenthetical Girls' genre stays Avant-Pop across both 89 and 105. Chong the Nomad's genre stays Electronic/R&B across both 44 and 107. Genre persistence across returns as a repeatable analytical finding. |
+| S36-097 | Chong the Nomad production (107) | The Postal Service electronic (97) | RETURN LINEAGE. The Postal Service at 97 opened the electronic return pattern. Chong the Nomad at 107 closes the late-Quadrant-II return arc with the first production return. Return-type evolution: re-contextualized → triple electronic → production. |
+| S36-103 | Chong the Nomad production (107) | Briana Marela electronic (103) | RETURN-TYPE CONTRAST. Briana Marela's electronic return is additive (synthesizers added). Chong the Nomad's production return is lens-shifting (same practice viewed from a different angle). Two different return mechanisms. |
+| S36-104 | Chong the Nomad production (107) | Lemolo electronic (104) | RETURN-TYPE CONTRAST. Lemolo's electronic return is additive and atmospheric. Chong the Nomad's production return is lens-shifting and rhythmic. Two different return mechanisms and two different sonic territories. |
+| SPS-054 | Acorn Woodpecker (107) | Pileated Woodpecker (54) | PICIDAE REOPENS. 53-degree gap closed. Both E=5 but different habitats. Pileated in old-growth forest, solitary. Acorn in oak savanna, colonial. Pileated's wild laugh vs Acorn's waka-waka-waka — same family, different sociality. |
+| SPS-054b | Acorn Woodpecker (107) | Red-breasted Sapsucker (54) | PICIDAE FAMILY. Second Picidae entry at degree 54. Sapsucker bark-tapping solitary. Acorn granary-drilling colonial. New genus *Melanerpes* distinct from Sapsucker's *Sphyrapicus*. |
+| SPS-021 | Acorn Woodpecker (107) | Northern Flicker (21) | PICIDAE FAMILY ORIGIN. Engine's first woodpecker. Flicker ground-feeding solitary (genus *Colaptes*). Acorn tree-storing colonial (genus *Melanerpes*). Fourth Picidae species completes a four-genus, four-niche Picidae profile. |
+| SPS-105 | Acorn Woodpecker (107) | Clark's Nutcracker (105) | FOOD CACHING PARALLEL. Nutcracker caches 98,000 seeds per year (dispersed, individual, spatial memory, enlarged hippocampus). Acorn caches 50,000+ acorns (concentrated, colonial, granary trees, community infrastructure). Two caching strategies at massive scale, two consecutive E=5 species. |
+| SPS-106 | Acorn Woodpecker (107) | Black-billed Magpie (106) | CONSECUTIVE E=5. Magpie mek-mek-mek at E=5 (Corvidae septet closer). Acorn waka-waka-waka at E=5 (Picidae reopening). Third consecutive E=5 on species side. Energy peak sustained across family transition. |
+| SPS-100 | Acorn Woodpecker (107) | Common Raven (100) | INTELLIGENCE PARALLEL. Both highly intelligent and social. Corvid intelligence meets woodpecker social complexity. Keystone family members in their respective ecosystems. |
+| SPS-102 | Acorn Woodpecker (107) | American Crow (102) | SOCIAL COMPLEXITY. Crow family groups. Acorn 15+ individual colonies with cooperative breeding. Two kinds of social woodpecker-and-corvid complexity at E=4-5 energy tier. |
+| SPS-075 | Acorn Woodpecker (107) | Yellow-bellied Marmot (75) | COLONIAL PARALLEL. Marmot colonies with shared burrow systems. Acorn colonies with shared granary trees. Two colonial species with community-built infrastructure, same strategy across very different taxa. |
+| RES-oak-savanna | Acorn Woodpecker (107) | Oak savanna ecosystem | HABITAT EXPANSION. First oak-obligate species in the engine. Southern Oregon at northern range edge. Pushes the engine's geographic reach east and south beyond the Puget Sound heartland. Oregon white oak (*Quercus garryana*), California black oak (*Quercus kelloggii*) — oak species that produce the acorns that sustain the colony. |
+| RES-granary-tree | Acorn Woodpecker (107) | 50,000+ acorns | COMMUNITY INFRASTRUCTURE. Thousands of individually drilled holes. Each sized to hold exactly one acorn. Maintained across generations. Community facility rather than individual cache. Mirrors Chong the Nomad's production architecture as sonic community infrastructure. |
+| RES-cooperative-breeding | Acorn Woodpecker (107) | Cooperative breeding system | COLONIAL SOCIALITY. 15+ individuals sharing nest defense, granary maintenance, and acorn storage. Non-breeding helpers at the nest. Shared feeding of young. Multi-generational family groups. One of the most social woodpeckers in the world. |
 
-On the music side, Chong the Nomad returns from degree 44 as the ninth return artist, reframed from performer to producer. Electronic/R&B. Genre Stage 89. The production architecture -- layered complexity, bass weight, rhythmic density revealed. E=5. Energy escalation from E=4 to E=5. The production lens reveals higher energy. The production return is the 108th artist-city pattern. Deconstruction (106) then construction (107). Self-released.
+## Engine Position
 
-On the species side, the Acorn Woodpecker returns Picidae to the engine after a 53-degree gap. Waka-waka-waka -- the raucous laughing colonial call. E=5. Granary trees storing 50,000+ acorns in thousands of individually drilled holes. Colonial living with cooperative breeding. Oak savanna in southern Oregon. Forty-seventh consecutive original CSV.
+- **Degree 107 of 360** — 29.7% of the circle traversed; seventeenth degree of Quadrant II; the opening degree after the Corvidae septet closes and the beginning of the Picidae second act.
+- **PICIDAE REOPENS** — 53-degree gap bridged. First Picidae entry since degree 54 (Pileated Woodpecker, Red-breasted Sapsucker). New genus *Melanerpes* introduced. Fourth Picidae species overall (Flicker 21-22 *Colaptes*, Sapsucker 54 *Sphyrapicus*, Pileated 54 *Dryocopus*, Acorn 107 *Melanerpes*).
+- **NINTH RETURN ARTIST** — Chong the Nomad joins Death Cab for Cutie (82), Pearl Jam (83), Damien Jurado (84), Rocky Votolato (85), The Postal Service (97), Briana Marela (103), Lemolo (104), and Parenthetical Girls (105).
+- **THE PRODUCTION RETURN** — A new return type distinct from acoustic (subtractive) and electronic (additive) returns. The production return is lens-shifting — same practice viewed through a different creative dimension. Future returns have three options instead of two.
+- **Genre Stage 89** — **Electronic/R&B**. Eighty-ninth genre stage across 107 degrees. Genre persistence across both Chong appearances (44 and 107). Stable rate of 0.83 stages/degree.
+- **THE PRODUCTION ARCHITECTURE — 108th artist-side acoustic element.** Layered complexity, bass weight, rhythmic density. Constructive dimension revealed when the work is viewed through the production lens.
+- **THE WAKA-WAKA-WAKA — 107th species-side acoustic element.** Raucous nasal laughing colonial chorus. 15+ simultaneous callers. E=5 through colonial density rather than through individual volume.
+- **THE PRODUCTION RETURN — 108th artist-city pattern.** Return artist reframed through a different creative dimension. Performer at 44 becomes producer at 107.
+- **E=4 → E=5 ENERGY ESCALATION ON RETURN** — The production lens reveals higher energy. Performer E=4 at degree 44; producer E=5 at degree 107. Consistent with Briana Marela E=2→E=3, Lemolo E=2→E=3, Parenthetical Girls E=3→E=4 — the return operation consistently raises energy by one level.
+- **FORTY-SEVENTH CONSECUTIVE ORIGINAL CSV** — degrees 61-107 without substitution or correction. Longest unbroken run of original-catalog selections in the engine. The streak now spans Mammalia (61-85), Amphibia/Insecta (86-99), Corvidae septet (100-106), and Picidae reopening (107).
+- **GRANARY TREES — 50,000+ acorns** — Thousands of individually drilled holes in oak trees. Community infrastructure maintained across generations. Rivaled in scale only by Clark's Nutcracker's 98,000 seeds per year (dispersed individual) at degree 105.
+- **COLONIAL COOPERATIVE BREEDING** — 15+ individuals. Rare within Picidae. One of the most social woodpeckers in the world.
+- **OAK SAVANNA HABITAT** — First oak-obligate habitat in the engine. Southern Oregon northern range edge. Expands the engine's geographic reach east and south.
+- **THIRD CONSECUTIVE E=5 ON SPECIES SIDE** — Clark's Nutcracker (105), Black-billed Magpie (106), Acorn Woodpecker (107). Energy peak sustained across the Corvidae-to-Picidae family transition.
+- **DECONSTRUCTION → CONSTRUCTION** — Knife Knights (106) deconstructs hip-hop through electronic production. Chong the Nomad (107) constructs Electronic/R&B through layered production. Consecutive degrees with opposite operations through the same mechanism.
+- **Eight consecutive degrees holding Aves** — Since centennial return at degree 100. Longest bird streak the engine has produced. Corvidae septet (100-106) plus Picidae reopening (107).
+- **Energy distribution after degree 107 (artist-side):** E1:3 (2.8%), E2:31 (28.7%), E3:29 (26.9%), E4:29 (26.9%), E5:15 (13.9%), E6:1 (0.9%). Total: 108 entries (degrees 0-107 inclusive). **E=5 gains Chong the Nomad production** to reach 15 deployments.
+- **Four classes represented:** Aves (eight consecutive), Mammalia, Insecta, Amphibia. Eighteen-plus orders. Forty-nine families plus the reopened Picidae.
+- **Electronic era eighteen-deep** — Degrees 86, 90, 91, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107. Eighteen electronic-adjacent entries in twenty-two degrees. Deepest sustained genre cluster in the engine.
+- **Outstanding gaps:** Zero raptors in 108 entries (since Northern Spotted Owl at degree 4); zero marine species in 108 entries (none since engine began); electronic era dominance continues at eighteen degrees; three consecutive E=5 species-side entries approach the E=5 plateau limit.
 
-The production architecture constructs (E=5). The colonial woodpecker builds granary trees (E=5). Both are constructive. Both build at extraordinary scale.
+## Files
 
-*Degree 107. The production architecture and the colonial woodpecker. Chong the Nomad returns from degree 44 -- performer becomes producer, E=4 becomes E=5, the beats are revealed not as performed grooves but as constructed architectures of rhythm, bass, and layer. Ninth return. Production context. The production architecture built from the inside. Meanwhile, in the oak woodlands of southern Oregon: WAKA-WAKA-WAKA-WAKA. Raucous, nasal, laughing, colonial. The Acorn Woodpecker. The clown-faced woodpecker drilling thousands of individually sized holes in granary trees, each holding one acorn. 50,000+ acorns. Community infrastructure maintained across generations. Cooperative breeding. 15+ individuals. PICIDAE RETURNS after 53 degrees of silence. The engine shifts from Corvidae to Picidae. Construction at every scale. The production architecture and the granary tree. Both built. Both persistent. Both extraordinary.*
+- `docs/release-notes/v1.49.247/README.md` (this file, rewritten to A-grade per the PROSE rubric)
+- `docs/release-notes/v1.49.247/chapter/00-summary.md` — derived summary
+- `docs/release-notes/v1.49.247/chapter/03-retrospective.md` — retrospective
+- `docs/release-notes/v1.49.247/chapter/04-lessons.md` — extracted lessons (5 entries)
+- `docs/release-notes/v1.49.247/chapter/99-context.md` — context
+- `www/tibsfox/com/Research/S36/research/releases/107-chong-production/index.html`
+- `www/tibsfox/com/Research/S36/research/releases/107-chong-production/research.md`
+- `www/tibsfox/com/Research/S36/research/releases/107-chong-production/knowledge-nodes.json`
+- `www/tibsfox/com/Research/S36/research/releases/107-chong-production/retrospective.md`
+- `www/tibsfox/com/Research/SPS/research/releases/107-acorn-woodpecker/index.html`
+- `www/tibsfox/com/Research/SPS/research/releases/107-acorn-woodpecker/research.md`
+- `www/tibsfox/com/Research/SPS/research/releases/107-acorn-woodpecker/knowledge-nodes.json`
+- `www/tibsfox/com/Research/SPS/research/releases/107-acorn-woodpecker/retrospective.md`
 
-</details>
+Total: 9 files in wave commit `d6c01066a324eb4b19693e67248567febba46837` (covering degrees 106-108).
