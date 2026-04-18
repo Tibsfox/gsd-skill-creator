@@ -1,504 +1,184 @@
-# v1.49.246 -- Degree 106: Knife Knights (Experimental Hip-Hop) + Black-billed Magpie -- THE BEAT ARCHITECTURE AND THE OPEN-COUNTRY CORVID -- CORVIDAE SEPTET
+# v1.49.246 — Degree 106: Knife Knights (Experimental Hip-Hop) + Black-billed Magpie — THE BEAT ARCHITECTURE AND THE OPEN-COUNTRY CORVID — CORVIDAE SEPTET
 
 **Released:** 2026-04-01
-**Degree:** 106 of 360 -- 29.4% of 360
-**Part A:** Knife Knights -- Experimental Hip-Hop, E=4, Sub Pop Records, FIRST HIP-HOP ENTRY in the engine, Ishmael Butler (Shabazz Palaces, Digable Planets Grammy 1994) + Erik Blood (degree 94), GENRE STAGE 88 (Experimental Hip-Hop, eighty-eighth genre stage, new genre, hip-hop enters through the experimental edge), THE BEAT ARCHITECTURE 107th acoustic element (hip-hop's rhythmic foundation deconstructed and rebuilt through experimental electronic production; the beat is architecture not accompaniment), THE GENRE GATEWAY 107th artist-city pattern (new genre enters the engine through its experimental edge rather than its mainstream center; hip-hop arrives avant-garde)
-**Part B:** Black-billed Magpie (*Pica hudsonia*) -- rolling mek-mek-mek + chatter, E=5, open country, Corvidae (SEVENTH CONSECUTIVE CORVIDAE 100-106 = CORVIDAE SEPTET, breaks Mustelidae/Sciuridae sextet ties, second-longest family streak after Sciuridae octet 75-82, dome-shaped nests unique among corvids, bold black-and-white plumage, tail longer than body, open country east of Cascades, forty-sixth consecutive original CSV)
-**Series:** Seattle 360 + Sound of Puget Sound -- Continuous Release Engine
+**Scope:** Seattle 360 + Sound of Puget Sound — paired degree release, first hip-hop entry and Corvidae septet record-break
+**Branch:** main
+**Commits:** `d6c01066a` (1, wave commit covering degrees 106-107-108)
+**Files changed:** 17 (3 release notes in wave + 4 Knife Knights research artifacts + 4 Black-billed Magpie research artifacts + degree 108 Pileated completion files)
+**Degree:** 106 of 360 — 29.4% of 360 — Sixteenth degree of Quadrant II
+**Part A:** Knife Knights — Experimental Hip-Hop, E=4, Sub Pop Records, FIRST HIP-HOP ENTRY in the engine, Ishmael Butler (Shabazz Palaces, Digable Planets Grammy 1994) + Erik Blood (degree 94), Genre Stage 88 (Experimental Hip-Hop, eighty-eighth genre stage, new genre, hip-hop enters through the experimental edge), THE BEAT ARCHITECTURE 107th acoustic element, THE GENRE GATEWAY 107th artist-city pattern
+**Part B:** Black-billed Magpie (*Pica hudsonia*) — rolling mek-mek-mek + chatter, E=5, open country east of the Cascades, Corvidae (SEVENTH CONSECUTIVE CORVIDAE 100-106 = CORVIDAE SEPTET, breaks the Mustelidae sextet 63-68 and Sciuridae sextet 75-80 ties, second-longest family streak in the engine), dome-shaped nests unique among corvids worldwide, bold black-and-white plumage, iridescent tail longer than body, new genus *Pica*, forty-sixth consecutive original CSV
+**Series:** Seattle 360 + Sound of Puget Sound — Continuous Release Engine
 **Cluster:** Music (hub: WAL)
-**Note:** CORVIDAE SEPTET. Seven consecutive Corvidae degrees (100-106) -- breaks the Mustelidae sextet (63-68) and Sciuridae sextet (75-80) ties. Second-longest family streak (after Sciuridae octet 75-82). FIRST HIP-HOP ENTRY -- Knife Knights brings hip-hop to the engine for the first time as Experimental Hip-Hop on Sub Pop Records. Ishmael Butler + Erik Blood. The beat architecture and the rolling mek-mek-mek -- deconstruction and chatter.
+**Dedication:** To **Knife Knights** and to **Ishmael Butler** — a.k.a. Butterfly of **Digable Planets** (Grammy 1994) and Palaceer Lazaro of **Shabazz Palaces** — whose three-decade arc from jazz-rap to experimental electronic hip-hop opens the engine's first hip-hop entry at **degree 106** through the experimental edge rather than the mainstream center; to **Erik Blood**, returning from **degree 94** as the second appearance in the engine and the structural bridge that makes the genre gateway legible; to **Sub Pop Records**, the label that launched **Nirvana** and now extends its experimental range from grunge to noise to experimental hip-hop; to **Black-billed Magpie** (*Pica hudsonia*) — the open-country corvid, the rolling **mek-mek-mek** of sagebrush steppe and agricultural fields east of the **Cascades**, the bold black-and-white with a tail longer than its body, the dome-shaped nest builder unique among corvids worldwide — whose seventh-consecutive Corvidae placement at **degree 106** breaks the **Mustelidae** and **Sciuridae** sextet ties and makes the **Corvidae Septet** the second-longest family streak in the engine; to the **Black Seattle music lineage** that runs from **Jimi Hendrix** (degree 36, 1960s) through **Digable Planets** (1990s) and **Shabazz Palaces** (2000s-present) to **Knife Knights** (2018-present), confirming that Seattle's experimental identity is continuous across decades and genres; and to the convergence of two architectures on the same degree — the beat as structure to inhabit (Knife Knights) and the dome-shaped nest as community infrastructure (the magpie).
+**Engine Position:** Degree 106 of 360 — **CORVIDAE SEPTET** (seven consecutive Corvidae degrees 100-106 breaks the Mustelidae sextet 63-68 and Sciuridae sextet 75-80 ties, second-longest family streak in the engine behind the future Sciuridae octet 75-82); **FIRST HIP-HOP ENTRY** in 106 degrees (Knife Knights brings hip-hop to the engine for the first time through its experimental edge); **GENRE STAGE 88** (Experimental Hip-Hop, eighty-eighth genre stage across 106 degrees, stable rate of 0.83 stages per degree); **THE BEAT ARCHITECTURE** (107th artist-side acoustic element — hip-hop's rhythmic foundation deconstructed and rebuilt through experimental electronic production, beat as structure not accompaniment, voice moves through landscape); **THE ROLLING MEK-MEK-MEK** (106th species-side acoustic element — nasal staccato percussive open-country corvid chatter, the most rapid-fire voice in the septet); **THE GENRE GATEWAY** (107th artist-city pattern — new genre enters through its experimental edge rather than its mainstream center); **ISHMAEL BUTLER + ERIK BLOOD** (Butler's three-decade arc Butterfly → Palaceer Lazaro → Knife Knights; Blood's second engine appearance bridging degree 94 Electronic/Experimental to degree 106 Experimental Hip-Hop); **SIXTH SUB POP ARTIST** (Knife Knights joins the Sub Pop lineage from Nirvana to Hovercraft to Knife Knights); **BLACK SEATTLE MUSIC LINEAGE** (Jimi Hendrix degree 36 → Ishmael Butler degree 106, continuous Black innovation across six decades); **DOME-SHAPED NESTS** (unique among corvids worldwide, 60-120 cm diameter, 40-50 days to build, community infrastructure at architectural scale); **NEW GENUS *PICA*** (first appearance in the engine, formerly conspecific with European Magpie *Pica pica*, split by AOU in 2000); **FORTY-SIXTH CONSECUTIVE ORIGINAL CSV** (degrees 61-106 without substitution); **SEPTET ENERGY ARC** E=4 (100) → E=5 (101) → E=4 (102) → E=5 (103) → E=4 (104) → E=5 (105) → E=5 (106) (the perfect oscillation breaks at the seventh degree, the magpie matches the nutcracker at E=5); **OPEN COUNTRY EAST OF THE CASCADES** (broadest-scale landscape in the septet, sagebrush steppe, agricultural fields, riparian corridors, ranch lands).
 
 ## Summary
 
-The beat architecture and the open-country corvid. Degree 106 introduces the first hip-hop entry in 106 degrees and extends the Corvidae run to a septet -- the second-longest family streak in the engine.
+**THE CORVIDAE SEPTET BREAKS THE RECORD AND HIP-HOP ARRIVES.** Degree 106 pairs two firsts: the **Corvidae Septet** — seven consecutive Corvidae degrees (100-106) — breaks the **Mustelidae sextet** (63-68, degrees occupied by **River Otter**, **Mink**, **American Marten**, **Fisher**, **Short-tailed Weasel**, **Long-tailed Weasel**) and the **Sciuridae sextet** (75-80, degrees occupied by **Yellow-bellied Marmot**, **Hoary Marmot**, **Olympic Marmot**, **Townsend's Ground Squirrel**, **Golden-mantled Ground Squirrel**, **Douglas Squirrel**) as the engine's longest family streaks, making the Corvidae run the second-longest family streak in the engine's history. **Black-billed Magpie** (*Pica hudsonia*) carries the septet's seventh slot at **degree 106**, extending the corvid run to **open country east of the Cascades** and broadcasting its rolling, nasal, staccato **mek-mek-mek** across sagebrush steppe, agricultural fields, and riparian corridors. The magpie is the most percussive voice in the septet — rapid-fire, social, overlapping in chattering walls of corvid conversation. **In parallel**, on the music side, **Knife Knights** enters the engine as the **first hip-hop entry** in 106 degrees, bringing hip-hop to the **Seattle 360** catalog through its experimental edge rather than its mainstream center. **Genre Stage 88 — Experimental Hip-Hop**. The duo pairs **Ishmael Butler** (Butterfly of **Digable Planets**, Grammy winner 1994; Palaceer Lazaro of **Shabazz Palaces**) with **Erik Blood** (degree 94, Electronic/Experimental), and the resulting architecture places Butler's voice and flow inside Blood's deconstructed electronic landscapes on **Sub Pop Records**. **The same** structural moment — records tying or being set on both halves at 106 — reaches both halves **in parallel**, **mirror**-imaged across the taxonomy/genre divide. **Synchronized** by the catalog's ordering, the septet's record-breaking seventh corvid and the engine's first hip-hop entry land **together**.
 
-On the music side, **Knife Knights** enters as the **FIRST HIP-HOP** in the engine. **Genre Stage 88** -- **Experimental Hip-Hop**. The duo of **Ishmael Butler** (Shabazz Palaces, Digable Planets -- Grammy winner 1994) and **Erik Blood** (degree 94, Electronic/Experimental). Sub Pop Records. E=4. Hip-hop arrives through its experimental edge, not its mainstream center -- consistent with Seattle's identity as a city defined by experimentation. The **beat architecture** is the 107th acoustic element -- hip-hop's rhythmic foundation deconstructed and rebuilt through experimental electronic production. The beat is not a groove to ride but a structure to inhabit. Butler's voice moves through Blood's sonic landscapes. The **genre gateway** is the 107th artist-city pattern -- a new genre enters through the avant-garde. Erik Blood's second appearance connects degrees 94 and 106, bridging Electronic/Experimental to Experimental Hip-Hop. Sixth Sub Pop artist in the engine.
+**Part A: Knife Knights — Hip-Hop Enters Through the Experimental Edge.** At **degree 106**, the engine centers **Knife Knights** as **Experimental Hip-Hop** — the **first hip-hop entry** in 106 degrees. Hip-hop has been absent from the catalog through the jazz roots (degrees 0-15), the R&B and soul arc (16-35), the rock and indie middle (36-71), the folk revival (72-85), and the electronic era (86-105). At degree 106, the genre arrives, and it arrives through its experimental edge rather than its mainstream center. **Ishmael Butler** is the anchor — a.k.a. **Butterfly** of **Digable Planets** (the Grammy-winning 1994 jazz-rap trio "Rebirth of Slick (Cool Like Dat)") and **Palaceer Lazaro** of **Shabazz Palaces** (the experimental hip-hop duo with **Tendai "Baba" Maraire**, signed to **Sub Pop** in 2009). Butler's three-decade arc — from jazz rap (Digable Planets) through avant-garde hip-hop (Shabazz Palaces) to deconstructed electronic hip-hop (Knife Knights) — places him among the most important figures in **Seattle** hip-hop history. **Erik Blood** is the collaborator — the **Seattle** producer who made his solo appearance at **degree 94** as Electronic/Experimental (the producer's palette, the studio as instrument) and who returns at **degree 106** as the other half of Knife Knights. Blood's second appearance makes him the **ninth return artist** in the engine after **Neko Case** (66, 87), **Death Cab for Cutie** (58, 82), **Pearl Jam** (grunge origin and 83), **Damien Jurado** (45, 84), **Rocky Votolato** (46, 85), **The Postal Service** (86, 97), **Kimya Dawson** (49, 88), **Briana Marela** (72, 103), **Lemolo** (56, 104), and **Parenthetical Girls** (89, 105). The **beat architecture** is the **107th artist-side acoustic element** — hip-hop's rhythmic foundation deconstructed and rebuilt through experimental electronic production. The beat is not a groove to ride but a structure to inhabit. Butler's voice moves through Blood's landscapes. Controlled abrasion. Sonic architecture at rhythmic scale. The **genre gateway** is the **107th artist-city pattern** — a new genre enters the engine through its experimental edge rather than its mainstream center, and the gateway opens at the avant-garde. E=4. Sixth **Sub Pop** artist in the engine.
 
-On the species side, **Black-billed Magpie** (*Pica hudsonia*) extends the Corvidae run to **SEVEN CONSECUTIVE DEGREES** (100-106) -- the **CORVIDAE SEPTET**, breaking the Mustelidae sextet (63-68) and Sciuridae sextet (75-80) ties. Second-longest family streak in the engine (after Sciuridae's octet 75-82). The open-country corvid -- rolling, nasal, staccato **mek-mek-mek** across sagebrush steppe and agricultural fields east of the Cascades. E=5. Bold black-and-white plumage with an iridescent tail longer than its body. **Dome-shaped nests** unique among corvids worldwide -- massive enclosed structures of sticks and mud. New genus *Pica* in the engine. The septet's acoustic arc: deep cronk (100), duet (101), sharp caw (102), harsh alarm (103), soft whistles (104), harsh grating (105), rolling mek-mek-mek (106). Seven voices, seven landscapes, one family.
+**Part B: Black-billed Magpie Breaks the Record — The Open-Country Corvid.** **Black-billed Magpie** (*Pica hudsonia*) is the seventh consecutive corvid and the septet's record-breaking member. 45-60 cm total length (including the extraordinarily long iridescent tail). Wingspan 56-61 cm. Body mass 145-210 g. Bold black-and-white plumage — iridescent black (green-bronze-purple) head, breast, back, and wings; white belly and scapulars; extraordinarily long iridescent tail that is longer than the body itself. **New genus *Pica*** in the engine — formerly considered conspecific with European Magpie *Pica pica* (split by AOU in 2000 based on mitochondrial DNA evidence and vocalization differences). **Kingdom:** Animalia. **Phylum:** Chordata. **Class:** Aves. **Order:** Passeriformes. **Family:** Corvidae. **Genus:** *Pica*. **Species:** *P. hudsonia*. The **rolling mek-mek-mek** is the diagnostic call — rolling, nasal, staccato, rapid, percussive. Drawn-out chains of mek-mek-mek-mek create walls of overlapping corvid conversation. The most rapid-fire vocalizer in the Corvidae septet. E=5. Secondary vocalizations include **chatter** (rapid series of harsh notes, social or territorial), **harsh alarm calls** (sharp, insistent, when predators detected), and **quieter social calls** (close-range, modulated). The magpie's most consequential structural fact is not acoustic — it is architectural. **Dome-shaped nests** — massive enclosed structures of sticks and mud with a roof — are unique among corvids worldwide. 60-120 cm diameter. 40-50 days to build. Reused by other species after abandonment (owls, hawks, ducks all occupy old magpie nests). Community infrastructure at architectural scale. The habitat is **open country east of the Cascades** — sagebrush steppe, agricultural fields, riparian corridors, and ranch lands. The broadest-scale landscape in the Corvidae septet and shared with **Red Fox** (71) and **Townsend's Ground Squirrel** (78). The magpie closes the seven-degree corvid run at the steppe edge where open landscape meets the east slope of the range.
 
-The beat architecture inhabits the sonic structure. The magpie chatters across the steppe. Both are percussive, rapid-fire, and relentless.
+**Cross-Sync Parallel: Both Break Records at Degree 106.** Both halves of degree 106 reach **record-breaking or record-setting structural milestones** on the same degree. **Corvidae** extending to **seven consecutive degrees** (100-106) **breaks** the **Mustelidae sextet** (63-68) and **Sciuridae sextet** (75-80) ties, making the Corvidae run the engine's second-longest family streak after the future Sciuridae octet (75-82) closes three degrees later. **In parallel**, **Knife Knights** introducing **Experimental Hip-Hop** **sets** the first-hip-hop record — the engine has never had a hip-hop entry before degree 106, and the gateway opens at the experimental edge. **Each side** reaches its record at the same degree. **The same** structural moment — a streak extends into new territory on one axis, a genre enters the engine for the first time on the other axis — reaches both halves **in parallel**, **mirror**-imaged across the taxonomy/genre divide. **Synchronized** by the catalog's ordering and by deliberate engine planning, the septet's record-breaking seventh corvid and the genre gateway's record-setting first hip-hop land **together**.
+
+**Cross-Sync Parallel: Both Are Percussive and Relentless.** Both halves of degree 106 build identity through **percussive, rapid-fire, relentless delivery**. **Knife Knights'** beat architecture at **E=4** constructs hip-hop rhythm through deconstructed beats — programmed percussion, sampled drums, and electronic processing layered into a lattice that Butler's voice navigates. The beat is **percussive by definition** — hip-hop's foundational element is rhythmic attack. **In parallel**, **Black-billed Magpie's** rolling **mek-mek-mek** at **E=5** is the most **percussive** voice in the Corvidae septet — rolling, nasal, staccato, rapid-fire, each syllable a sharp attack in an overlapping chain. **Each side** operates through **percussive architecture**. **The same** structural principle — that rhythm and attack are the primary vectors of identity at degree 106 — reaches both halves on the same degree. **Synchronized** by design, the beat architecture and the rolling mek-mek-mek both choose **percussive presence** over sustained melody — the engine at degree 106 pairs two voices that construct through rhythmic attack.
+
+**Cross-Sync Parallel: Both Are Architects at Scale.** Both halves of degree 106 are **architects rather than performers**. **Knife Knights** constructs **beat architecture** — the beat is not a groove to ride but a structure to inhabit, and Butler's voice moves through the structure rather than riding on top of it. Hip-hop as rhythmic architecture. **In parallel**, **Black-billed Magpie** constructs **dome-shaped nests** — massive enclosed structures of sticks and mud with a roof, 60-120 cm diameter, 40-50 days to build, unique among corvids worldwide, reused by other species after abandonment. Community infrastructure at architectural scale. **Each side** **builds at scale** within its domain. **The same** structural principle — that degree 106's paired subjects construct environments rather than merely inhabiting them — reaches both halves on the same degree. **Synchronized** by the engine's centering of architecture as a theme, the beat architecture and the dome-shaped nest **mirror** each other across the taxonomy/genre divide. Butler's voice inhabits Blood's beat structures. Other birds inhabit the magpie's dome-shaped structures. Each subject at degree 106 is an architect whose structures are inhabited by others.
+
+**Cross-Sync Parallel: Both Occupy the Experimental Edge or the Geographic Edge.** Both halves of degree 106 sit at **edges rather than centers**. On the music side, **Knife Knights** as **Experimental Hip-Hop** sits at hip-hop's **experimental edge** rather than at its mainstream center — not West Coast gangsta rap, not conscious rap, not trap, not mumble rap, not drill; not even the more accessible alternative hip-hop of artists like **Macklemore** (also from Seattle). The gateway opens at the avant-garde. **In parallel**, on the species side, **Black-billed Magpie** occupies **open country east of the Cascades** — outside the forested centers of **Puget Sound** and the **Olympic Peninsula**, outside the alpine peaks of the **Cascades**, outside the urban cores of **Seattle** and **Bellingham**. The magpie is a species of the **geographic edge** where the forest gives way to the steppe. **Each side** sits at an **edge**. **The same** structural principle — that degree 106 is an entry through the periphery rather than through the center — reaches both halves **in parallel**. **Synchronized** by emergence itself, hip-hop's experimental edge and the Cascades' eastern edge land **together** at degree 106 as structural findings about how new things enter an engine.
+
+**Cross-Sync Parallel: Both Carry Lineage Forward.** Both halves of degree 106 **carry lineage memory** within their identity. **Knife Knights** carries **Black Seattle music lineage** explicitly — **Ishmael Butler** continues from **Digable Planets** (late 1980s to mid-1990s, jazz rap, Grammy 1994) through **Shabazz Palaces** (late 2000s to present, experimental hip-hop) to **Knife Knights** (2018-present, deconstructed electronic hip-hop). Further back, the lineage extends to **Jimi Hendrix** (degree 36, 1960s Seattle guitarist) as the pioneer of Black innovation in Seattle music. Six decades of Black Seattle music history converge at degree 106. **In parallel**, **Black-billed Magpie** carries **Corvidae lineage** forward — the seventh consecutive corvid degree extends a family streak that has climbed from widespread lowland (**Common Raven** 100) through cliffs and forest (**Common Raven Pair** 101), urban and open (**American Crow** 102), lowland conifer (**Steller's Jay** 103), subalpine (**Gray Jay** 104), and alpine pine (**Clark's Nutcracker** 105) to **open country** (Black-billed Magpie 106). Seven habitats, seven voices, one family. **Each side** carries a multi-decade or multi-degree lineage into degree 106. **The same** structural principle — that degree 106 is the continuation of a longer arc — reaches both halves on the same degree. **Synchronized** by memory, the Hendrix-to-Butler line and the Corvidae septet **mirror** each other across the taxonomy/genre divide.
+
+**Cross-Sync Parallel: Both Are New Entries Into the Catalog.** Both halves of degree 106 introduce **something genuinely new** to the engine's catalog. **Knife Knights** is the first hip-hop entry in 106 degrees — a genre that has never appeared before. **Experimental Hip-Hop** is **Genre Stage 88**, the eighty-eighth distinct genre stage across 106 degrees, and it is a new genre rather than a return or a variant. **In parallel**, **Black-billed Magpie** introduces the **new genus *Pica*** to the engine — a genus that has never appeared before (previous corvids in the septet are *Corvus* at 100-102 and *Cyanocitta* at 103 and *Perisoreus* at 104 and *Nucifraga* at 105; the magpie's *Pica* is new). The genus was formerly considered conspecific with European Magpie *Pica pica* before being split by AOU in 2000 based on mitochondrial DNA and vocalization differences. **Each side** adds a genuinely new taxonomic or generic unit to the engine. **The same** structural principle — that degree 106 expands the engine's vocabulary — reaches both halves **in parallel**. **Synchronized** by the engine's deliberate pairing, Experimental Hip-Hop as a new genre and *Pica* as a new genus **mirror** each other as introductions.
+
+**Cumulative State at Degree 106.** The engine has now documented **107 artists** (including origin **Quincy Jones** at degree 0), **107 acoustic elements** on the artist side and **106 acoustic elements** on the species side, **107 artist-city patterns**, **88 genre stages** (0.83 stages per degree, stable rate), **49 families** (plus the Corvidae septet's seven-degree depth within **Corvidae**), **4 classes** (**Aves**, **Mammalia**, **Insecta**, **Amphibia**), and **18-plus orders**. The engine holds **46 consecutive original CSV species** — the longest unbroken run of original-catalog selections, now extending from **degree 61** through **degree 106**. **Aves** has held the engine for **seven** consecutive degrees since its centennial return at degree 100 — the longest bird streak the engine has produced, and at degree 106 the streak extends to seven. **Knife Knights** becomes the ninth return-involved entry through **Erik Blood** (Blood returns from 94). **Sub Pop Records** adds its sixth artist to the engine (Knife Knights joins a Sub Pop lineage that includes earlier entries). Black Seattle music lineage becomes explicit through the **Hendrix-to-Butler** line that crosses six decades. The Corvidae septet breaks the record. The genre gateway opens. Both firsts land **together** at degree 106, and **the engine operates at unprecedented scale**.
 
 ## Key Features
 
 | Metric | Part A: Knife Knights | Part B: Black-billed Magpie |
 |--------|----------------------|---------------------------|
-| Genre | Experimental Hip-Hop (Genre Stage 88) | -- |
-| Energy | E=4 (experimental, atmospheric, deconstructed, spatial) | E=5 (rolling mek-mek-mek, nasal, staccato, percussive, social) |
-| Label | Sub Pop Records (sixth Sub Pop artist) | -- |
-| Family | -- | Corvidae (seventh consecutive, 100-106 = CORVIDAE SEPTET, breaks sextet ties) |
-| Acoustic Element | the beat architecture (107th, hip-hop deconstructed through electronic production, beat as structure) | rolling mek-mek-mek + chatter (106th species-side, nasal staccato percussive open-country corvid) |
-| Artist-City Pattern | The Genre Gateway (107th, new genre enters through experimental edge, hip-hop arrives avant-garde) | -- |
-| Structural Firsts | GENRE STAGE 88, FIRST HIP-HOP, GENRE GATEWAY, BEAT ARCHITECTURE, Ishmael Butler + Erik Blood (degree 94), sixth Sub Pop artist | CORVIDAE SEPTET (seven consecutive, breaks record), dome-shaped nests, new genus Pica, tail longer than body, open country east of Cascades |
+| Genre | **Experimental Hip-Hop** (Genre Stage 88, eighty-eighth genre stage in 106 degrees, FIRST HIP-HOP entry, hip-hop enters through the experimental edge not the mainstream center, hip-hop's rhythmic foundation deconstructed and rebuilt through experimental electronic production) | — |
+| Energy | **E=4** (experimental, atmospheric, deconstructed, spatial, controlled abrasion, Butler's voice navigates Blood's sonic landscapes, beat as structure to inhabit rather than groove to ride, hip-hop's rhythmic architecture at spatial complexity rather than kinetic energy) | **E=5** (rolling mek-mek-mek, nasal, staccato, rapid-fire, percussive, social, overlapping chains of corvid chatter, most percussive voice in the Corvidae septet) |
+| Label | **Sub Pop Records** (sixth Sub Pop artist in the engine, the label that launched Nirvana now extends its experimental range from grunge to noise to experimental hip-hop, Shabazz Palaces signed in 2009, Knife Knights released on Sub Pop 2018) | — |
+| Family | — | **Corvidae** (SEVENTH CONSECUTIVE, degrees 100-106 = CORVIDAE SEPTET, breaks the **Mustelidae sextet** 63-68 and **Sciuridae sextet** 75-80 ties, second-longest family streak in the engine behind the future Sciuridae octet 75-82) |
+| Order | — | **Passeriformes** (passerines, largest order of birds ~6,500 species worldwide, Black-billed Magpie among the most distinctive corvid voices) |
+| Class | — | **Aves** (seventh consecutive degree holding Aves since centennial return at degree 100, longest bird streak the engine has produced) |
+| Genus | — | ***Pica*** (NEW GENUS in the engine, formerly conspecific with European Magpie *Pica pica*, split by AOU in 2000 based on mitochondrial DNA and vocalization differences) |
+| Acoustic Element | **the beat architecture** (107th artist-side, hip-hop's rhythmic foundation deconstructed and rebuilt through experimental electronic production, beat as structure to inhabit not groove to ride, voice moves through sonic landscape, controlled abrasion, distinct from theatrical circuit 105 dramatic electronic and producer's palette 94 atmospheric electronic without hip-hop structure) | **the rolling mek-mek-mek + chatter** (106th species-side, nasal staccato percussive open-country corvid chatter, most rapid-fire voice in the Corvidae septet, walls of overlapping conversation, drawn-out chains, social and territorial) |
+| Artist-City Pattern | **The Genre Gateway** (107th artist-city pattern, new genre enters engine through experimental edge rather than mainstream center, hip-hop arrives avant-garde not commercial, gateway opens at the periphery, Erik Blood bridge from degree 94 makes the gateway legible) | — |
+| Structural Firsts | GENRE STAGE 88 (Experimental Hip-Hop, new genre), FIRST HIP-HOP ENTRY in 106 degrees, THE BEAT ARCHITECTURE 107th acoustic element, THE GENRE GATEWAY 107th artist-city pattern, ISHMAEL BUTLER + ERIK BLOOD (three-decade arc plus return collaborator), SIXTH SUB POP ARTIST, BLACK SEATTLE MUSIC LINEAGE (Jimi Hendrix 36 → Ishmael Butler 106, six decades) | **CORVIDAE SEPTET** (seven consecutive Corvidae 100-106 breaks the Mustelidae and Sciuridae sextet ties, second-longest family streak in the engine), **NEW GENUS *PICA***, **DOME-SHAPED NESTS** (unique among corvids worldwide, 60-120 cm diameter, 40-50 days to build, community infrastructure), **TAIL LONGER THAN BODY** (extraordinarily long iridescent tail), **OPEN COUNTRY EAST OF CASCADES** (broadest-scale landscape in the septet), **FORTY-SIXTH CONSECUTIVE ORIGINAL CSV** (degrees 61-106), **SEPTET ENERGY ARC** breaks the oscillation at the seventh degree (E=5 after E=5) |
 | Research Words | ~4,000 | ~6,000 |
 | Files Produced | 4 | 4 |
 | Cross-References | 5 | 5 |
 
-<details>
-<summary>Full Release Notes -- Click to expand</summary>
+## Part A: Knife Knights — The Beat Architecture
 
-## Part A: Knife Knights -- THE BEAT ARCHITECTURE (Experimental Hip-Hop, E=4, Sub Pop Records, Genre Stage 88, First Hip-Hop, Genre Gateway, 107th Acoustic Element, 107th Artist-City Pattern, Ishmael Butler + Erik Blood, Sixth Sub Pop Artist)
+- **The first hip-hop entry in 106 degrees and Genre Stage 88.** **Knife Knights** becomes the engine's **first hip-hop entry** after 106 degrees of catalog development. Hip-hop has been absent from the jazz origin (0-15), the R&B and soul arc (16-35), the rock and indie middle (36-71), the folk revival (72-85), and the electronic era (86-105). **Experimental Hip-Hop** at degree 106 is the **eighty-eighth distinct genre stage** across 106 degrees — a stable rate of 0.83 stages per degree maintained across the septet. The genre gateway opens at the avant-garde, not at the mainstream, and the engine's first hip-hop entry is a structural finding about how new genres enter a catalog.
+- **Ishmael Butler's three-decade arc — Digable Planets through Shabazz Palaces to Knife Knights.** **Ishmael Butler** is a.k.a. **Butterfly** of **Digable Planets** (jazz rap, Grammy 1994 for "Rebirth of Slick (Cool Like Dat)"), **Palaceer Lazaro** of **Shabazz Palaces** (experimental hip-hop duo with **Tendai "Baba" Maraire**, signed to **Sub Pop** in 2009 and releasing a steady catalog of deconstructed hip-hop including *Black Up* 2011 and *Lese Majesty* 2014), and one half of **Knife Knights** (2018-present, electronic-hip-hop collaboration with Erik Blood). Three decades. Three distinct moments in hip-hop's evolution — jazz rap, avant-garde hip-hop, deconstructed electronic hip-hop. One of the most important figures in Seattle hip-hop history and one of the few artists in the engine whose career spans four decades.
+- **Erik Blood returns from degree 94 — the studio as instrument becomes the hip-hop stage.** **Erik Blood** made his solo engine appearance at **degree 94** as Electronic/Experimental — the producer's palette, the studio as instrument, atmospheric electronic without hip-hop structure. At **degree 106**, Blood returns as half of Knife Knights. The atmospheric production skills that defined the degree 94 entry are now deployed in service of hip-hop's rhythmic architecture — Butler's voice and flow move through Blood's sonic landscapes, and the studio-as-instrument becomes the hip-hop stage. Blood joins the eight prior return artists as the ninth return-involved entry in the engine.
+- **The beat architecture — 107th acoustic element.** Deconstructed hip-hop (beat deconstructed and rebuilt through experimental electronic production). Beat as structure (the beat is not a groove to ride but a structure to inhabit, voice moves through the beat). Spatial complexity (E=4, atmospheric, deconstructed, not kinetic high-energy). Controlled abrasion (rough textures, sharp edges, controlled rather than chaotic). Voice navigates landscape (Butler's flow moves through Blood's electronic spaces rather than riding on top). Distinct from theatrical circuit (105, baroque cabaret rebuilt in electronic form, voice commanding), from producer's palette (94, atmospheric electronic without hip-hop structure), from dream circuit (104, atmospheric intimate), and from layered dissolution (103, voice dissolved into texture).
+- **The Genre Gateway — 107th artist-city pattern.** A new genre enters the engine through its experimental edge rather than its mainstream center. Hip-hop arrives as **Experimental Hip-Hop** on **Sub Pop** — not West Coast gangsta rap, not conscious rap, not trap, not mumble rap, not drill. The gateway opens at the avant-garde. The **Erik Blood** connection from degree 94 provides a **structural bridge** — the genre is new but the producer is familiar, and the bridge makes the gateway legible rather than disruptive. Consistent with Seattle's character as a city of experimentation across its music history (Jimi Hendrix's experimental guitar, Nirvana's genre-breaking grunge, Sub Pop's experimental range, Shabazz Palaces' avant-garde hip-hop, Knife Knights' deconstructed hip-hop).
+- **Sixth Sub Pop artist in the engine.** **Sub Pop Records** now has its sixth artist in the engine with Knife Knights. **Sub Pop's** range across the engine's catalog extends from grunge origins (Mudhoney, Nirvana, Soundgarden all associated with Sub Pop in the late 1980s and early 1990s) through indie folk and indie rock and noise and now to experimental hip-hop. The label's experimental DNA — founded by **Bruce Pavitt** and **Jonathan Poneman** in 1986 — makes it a natural home for the genre gateway. Sub Pop releasing experimental hip-hop in 2018 is continuous with Sub Pop releasing experimental rock in 1988.
+- **Black Seattle music lineage — Hendrix to Butler across six decades.** **Jimi Hendrix** (degree 36, 1960s Seattle guitarist who became a global icon of Black innovation in rock) pioneered Black artistic innovation in Seattle music. Six decades later, **Ishmael Butler** continues the lineage — Digable Planets (late 1980s-mid 1990s) → Shabazz Palaces (late 2000s-present) → Knife Knights (2018-present). The through-line of **Black artistic innovation in Seattle** spans decades and genres and becomes explicit at degree 106 through the Hendrix-to-Butler connection. Future entries can extend the lineage to other Black Seattle artists whose work continues the tradition.
+- **E=4 — the beat architecture at experimental spatial complexity.** The beat architecture at **E=4** is louder than the dream circuit (E=3 at 104) and softer than the euphoric build (E=5 at 95, ODESZA cinematic). Experimental, atmospheric, deconstructed, spatial, controlled abrasion — not kinetic high-energy rap but spatial complex hip-hop. **E=4** gains **Knife Knights** to reach **29 deployments** on the artist side (27.1% of artist entries) — a landmark count that matches the engine's stable energy distribution at degree 106. Hip-hop at E=4 trades kinetic energy for spatial complexity, consistent with the experimental approach.
+- **Twelfth electronic-adjacent entry since degree 86 — the electronic era continues into hip-hop.** Degrees 86, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, and now 106 contain electronic-adjacent entries, and **Knife Knights** at 106 extends the era's dominance across the second half of **Quadrant II**. The electronic substrate continues to furnish differentiated approaches — pop structure (86), atmosphere (90), obliteration (91), global weave (92), intimacy (93), experimentation (94), euphoria (95), pulse (96), tenderness (97), nostalgia (98), cultural fusion (99), golden cascade (100), kinetic surge (101), organic circuit (102), layered dissolution (103), dream circuit (104), theatrical circuit (105), and now beat architecture (106). Hip-hop enters the electronic era rather than replacing it.
+- **Sub Pop's range — the label that launched Nirvana now extends to experimental hip-hop.** **Sub Pop's** releasing Experimental Hip-Hop in 2018 is not a label departure but a label continuation. The same label that released *Bleach* (Nirvana, 1989) now releases Knife Knights — experimental artists on an experimental label, across different genres but the same experimental disposition. Sub Pop's range itself is the label's identity, and the label's identity at degree 106 spans grunge, noise, indie rock, indie folk, and now experimental hip-hop.
 
-Full deep research covering Knife Knights, the first hip-hop entry, and the beat architecture:
+## Part B: Black-billed Magpie — The Open-Country Corvid
 
-### STRUCTURAL EVENT: GENRE STAGE 88 -- Experimental Hip-Hop (FIRST HIP-HOP)
-
-Degree 106 reaches Genre Stage 88. Experimental Hip-Hop -- the first hip-hop of any kind in 106 degrees. Hip-hop enters the engine through its experimental edge, not its mainstream center. Ishmael Butler's hip-hop voice and flow combined with Erik Blood's experimental electronic production. Sub Pop Records -- the label that launched Nirvana now releases experimental hip-hop.
-
-Distinguished from: Erik Blood solo (94, Electronic/Experimental -- no hip-hop structure). Chong the Nomad (44, Electronic/R&B -- hip-hop-adjacent but more accessible and pop-inflected). Hovercraft (91, Noise/Drone -- instrumental, no hip-hop structure). Knife Knights is distinct: hip-hop's rhythmic architecture deconstructed through experimental electronic production.
-
-### THE BEAT ARCHITECTURE -- 107th Acoustic Element
-
-Hip-hop's rhythmic foundation deconstructed and rebuilt through experimental electronic production. The beat is not a groove to ride but a structure to inhabit. Butler's voice moves through Blood's landscapes. Controlled abrasion. The beat architecture differs from the theatrical circuit (105, rebuilds chamber music in electronic form) and the producer's atmosphere (94, atmospheric electronic without hip-hop structure). Knife Knights adds hip-hop's voice and beat to Blood's atmospheric world.
-
-### THE GENRE GATEWAY -- 107th Artist-City Pattern
-
-A new genre enters through its experimental edge rather than its mainstream center. Hip-hop arrives as experimental hip-hop on Sub Pop. The gateway opens at the avant-garde. The Erik Blood connection (94 -> 106) provides a structural bridge -- the genre is new but the producer is familiar. Consistent with Seattle's character as a city of experimentation.
-
-### ISHMAEL BUTLER + ERIK BLOOD
-
-Ishmael Butler: a.k.a. Butterfly (Digable Planets), Palaceer Lazaro (Shabazz Palaces). Grammy winner 1994. Three decades of hip-hop evolution from jazz rap to experimental electronic hip-hop. One of the most important figures in Seattle hip-hop. Erik Blood: second appearance in the engine (first at degree 94). Connects degrees 94 and 106. The studio as instrument.
-
-### BLACK SEATTLE MUSIC LINEAGE
-
-Jimi Hendrix (degree 36) pioneered Black innovation in Seattle music in the 1960s. Ishmael Butler continues the lineage from the 1990s to the present: Digable Planets -> Shabazz Palaces -> Knife Knights. The through-line of Black artistic innovation in Seattle spans decades and genres.
-
-### CROSS-REFERENCES (Part A)
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| S36-094 | Knife Knights (106) | Erik Blood (94) | MEMBER! Blood is half of Knife Knights. Degree 94 (Electronic/Experimental, solo) connects to 106 (Experimental Hip-Hop, duo). Studio-as-instrument becomes hip-hop stage. |
-| S36-044 | Knife Knights (106) | Chong the Nomad (44) | HIP-HOP/ELECTRONIC TERRITORY. Chong more accessible and pop-inflected. Knife Knights more abrasive and experimental. Two approaches to the intersection. |
-| S36-083 | Knife Knights (106) | Pearl Jam (83) | 1990s SEATTLE -- TWO FACES. Pearl Jam = rock identity. Knife Knights = hip-hop identity. Two faces of the same city, decades apart. |
-| S36-036 | Knife Knights (106) | Jimi Hendrix (36) | BLACK SEATTLE MUSIC LINEAGE. Hendrix pioneered (1960s). Butler continues (1990s-present). Digable Planets -> Shabazz Palaces -> Knife Knights. |
-| S36-091 | Knife Knights (106) | Hovercraft (91) | SUB POP / EXPERIMENTAL. Both on Sub Pop. Both experimental. Noise/drone vs experimental hip-hop. Sub Pop's range: noise to hip-hop. |
-
----
-
-## Part B: Black-billed Magpie (*Pica hudsonia*) -- CORVIDAE SEPTET (Seventh Consecutive 100-106, Rolling Mek-Mek-Mek, E=5, Open Country, Dome-Shaped Nests, Bold Black-and-White, Tail Longer Than Body, Forty-Sixth Consecutive Original CSV)
-
-Full deep research covering the Black-billed Magpie, the Corvidae septet, and the open-country corvid:
-
-### SEVENTH CONSECUTIVE CORVIDAE: THE CORVIDAE SEPTET
-
-Degree 106 extends the Corvidae run to SEVEN CONSECUTIVE DEGREES (100-106) -- the Corvidae Septet. This breaks the Mustelidae sextet (63-68) and Sciuridae sextet (75-80) ties. Now the second-longest family streak in the engine, behind only Sciuridae's octet (75-82):
-
-| Degree | Species | Acoustic Character | Energy | Habitat |
-|--------|---------|-------------------|--------|---------|
-| 100 | Common Raven | Deep cronk, resonant | E=4 | Widespread |
-| 101 | Common Raven pair | Duet, harmonic | E=5 | Cliffs, forest |
-| 102 | American Crow | Sharp caw | E=4 | Urban/open |
-| 103 | Steller's Jay (raucous) | Harsh alarm | E=5 | Lowland conifer |
-| 104 | Gray Jay | Soft whistles | E=4 | Subalpine |
-| 105 | Clark's Nutcracker | Harsh grating kraa-a-a | E=5 | Alpine pine |
-| **106** | **Black-billed Magpie** | **Rolling mek-mek-mek** | **E=5** | **Open country** |
-
-The septet's acoustic arc spans seven distinct corvid voices across the full PNW landscape: urban to alpine to open steppe. The magpie adds the percussive rolling quality -- the fastest vocalizer in the corvid septet.
-
-### BLACK-BILLED MAGPIE -- THE OPEN-COUNTRY CORVID
-
-Black-billed Magpie (*Pica hudsonia*). 45-60 cm total length (including tail). Wingspan 56-61 cm. Weight 145-210 g. Bold black-and-white plumage. Iridescent black (green-bronze-purple) head, breast, back, and wings. White belly and scapulars. Extraordinarily long iridescent tail -- longer than the body. New genus *Pica* in the engine (formerly considered conspecific with European Magpie *Pica pica*; split by AOU in 2000).
-
-### THE SOUND: ROLLING MEK-MEK-MEK -- THE PERCUSSIVE CORVID
-
-Mek-mek-mek: the diagnostic call. Rolling, nasal, staccato, rapid. Percussive quality. Social chatter creates walls of overlapping corvid conversation. The most rapid-fire and percussive voice in the Corvidae septet. E=5 -- third E=5 corvid in the septet.
-
-### DOME-SHAPED NESTS -- UNIQUE AMONG CORVIDS
-
-Massive enclosed structures of sticks and mud with a roof. 60-120 cm diameter. 40-50 days to build. Unique among corvids worldwide. Reused by other species (owls, hawks, ducks). Community infrastructure at architectural scale.
-
-### OPEN COUNTRY EAST OF THE CASCADES
-
-Sagebrush steppe, agricultural fields, riparian corridors, ranch lands. Primarily east of the Cascades. The broadest-scale landscape in the corvid septet. Shared habitat with Red Fox (71) and Townsend's Ground Squirrel (78).
-
-### CROSS-REFERENCES (Part B)
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| SPS-105 | Black-billed Magpie (106) | Clark's Nutcracker (105) | CORVIDAE SEPTET. Alpine pine (nutcracker) vs open country (magpie). Both E=5. Entirely different habitats and acoustic qualities. |
-| SPS-100 | Black-billed Magpie (106) | Common Raven (100) | CORVIDAE SEPTET. Intelligence. Both highly intelligent. Raven widespread; magpie open-country specialist. Magpie may pass mirror self-recognition. |
-| SPS-102 | Black-billed Magpie (106) | American Crow (102) | CORVIDAE SEPTET. Crow is urban/generalist; magpie is open-country/specialist. Both bold and social. |
-| SPS-071 | Black-billed Magpie (106) | Red Fox (71) | OPEN COUNTRY SHARED HABITAT. Both in dry open landscapes east of the Cascades. Fox hunts; magpie scavenges. |
-| SPS-078 | Black-billed Magpie (106) | Townsend's Ground Squirrel (78) | OPEN COUNTRY SHARED HABITAT. Ground squirrel is prey in the open-country food web; magpie is omnivore/scavenger. |
-
----
-
-## Parallel: Knife Knights x Black-billed Magpie -- The Beat Architecture and the Open-Country Corvid (CORVIDAE SEPTET)
-
-The beat architecture and the rolling mek-mek-mek. Both are percussive, rapid-fire, and relentless.
-
-**1. Both Are Percussive** -- Knife Knights' beat architecture is built on deconstructed hip-hop rhythms. The magpie's rolling mek-mek-mek is the most percussive corvid voice. Both operate through rapid rhythmic patterns.
-
-**2. The Septet Breaks the Record** -- Seven consecutive Corvidae (100-106) breaks the sextet ties and becomes the second-longest family streak. The magpie adds a seventh voice and a seventh landscape.
-
-**3. First Hip-Hop Meets Seventh Corvid** -- The engine introduces its first entirely new genre (hip-hop) at the same degree the corvid streak reaches a new record. Both events mark firsts.
-
-**4. The Gateway and the Steppe** -- Hip-hop enters through the experimental edge. The magpie occupies the open steppe east of the Cascades. Both are outside the expected center -- hip-hop is not mainstream rap; the magpie is not a forest corvid.
-
-**5. Architecture at Scale** -- Knife Knights builds beat architecture. The magpie builds dome-shaped nests -- massive enclosed structures unique among corvids. Both construct at scale.
-
----
-
-## Acoustic Progression (107 elements)
-
-| # | Element | Degree | Artist/Species |
-|---|---------|--------|----------------|
-| 0 | silence | 0 | Quincy Jones |
-| 1 | cascade | 1 | Bill Frisell |
-| 2 | drone | 2 | Wayne Horvitz |
-| 3 | language | 3 | Ernestine Anderson |
-| 4 | motif | 4 | Floyd Standifer |
-| 5 | metronome | 5 | Overton Berry |
-| 6 | question | 6 | Patti Bown |
-| 7 | harmonic spiral | 7 | Julian Priester |
-| 8 | ultrasonic threshold | 8 | Gary Peacock |
-| 9 | variation | 9 | Hadley Caliman |
-| 10 | minimum signal | 10 | Bud Shank |
-| 11 | trill/tremolo | 11 | Joe Brazil |
-| 12 | sawtooth sweep | 12 | Don Lanphere |
-| 13 | ostinato | 13 | Marc Seales |
-| 14 | repetition-resolution | 14 | Aaron Parks |
-| 15 | accelerando | 15 | Thomas Marriott |
-| 16 | crescendo | 16 | Jeff Lorber |
-| 17 | the hook | 17 | Reggie Watts |
-| 18 | ascending spiral | 18 | Maktub |
-| 19 | descending spiral | 19 | Fly Moon Royale |
-| 20 | sustain/the release | 20 | Whitney Monge |
-| 21 | the hammer | 21 | Polyrhythmics |
-| 22 | resonant percussion/groove reset | 22 | Foxy Apollo |
-| 23 | the testimony/groove reset | 23 | Allen Stone |
-| 24 | the invocation | 24 | Ron Artis II |
-| 25 | the congregation | 25 | Black Stax |
-| 26 | the caroling | 26 | Shaina Shepherd |
-| 27 | the liquid gurgle | 27 | The Dynamics |
-| 28 | the liquid twitter | 28 | Night Owls |
-| 29 | the rough brrit | 29 | Boogaloo Joe Jones |
-| 30 | the liquid warble synthesis | 30 | Ray Charles |
-| 31 | the whisper | 31 | Brenda Lee Eager |
-| 32 | the buzz | 32 | Luther Rabb |
-| 33 | the cadenza | 33 | Larry English |
-| 34 | the dialect | 34 | The Tempos |
-| 35 | the thrum | 35 | Robert Cray |
-| 36 | the sonic boom | 36 | Jimi Hendrix |
-| 37 | the filament | 37 | Ayron Jones |
-| 38 | the drawl | 38 | Booker T. Jones |
-| 39 | the canopy buzz | 39 | Ron Artis Jr |
-| 40 | the thinning | 40 | Alice Smith |
-| 41 | the partition | 41 | Shawn Smith |
-| 42 | the shimmer | 42 | Erica Campbell |
-| 43 | the radiance | 43 | Ann Wilson |
-| 44 | the grain | 44 | Chong the Nomad |
-| 45 | the murmur | 45 | Damien Jurado |
-| 46 | the confessional | 46 | Rocky Votolato |
-| 47 | the parable tone | 47 | Pedro the Lion |
-| 48 | the held rest | 48 | Sera Cahoone |
-| 49 | the lullaby subversion | 49 | Kimya Dawson |
-| 50 | the intimate architecture | 50 | Mirah |
-| 51 | the communal harmony | 51 | Grand Archives |
-| 52 | the testimony roar | 52 | Brandi Carlile |
-| 53 | the cathedral harmony | 53 | Fleet Foxes |
-| 54 | the fraternal jangle | 54 | Ivan & Alyosha |
-| 55 | the ember glow | 55 | Shelby Earl |
-| 56 | the dream haze | 56 | Lemolo |
-| 57 | the rattle / the stream rattle | 57 | Laura Gibson / Belted Kingfisher |
-| 58 | the ache / the pond whistle | 58 | Death Cab for Cutie / Wood Duck |
-| 59 | the digression / the quack | 59 | The Long Winters / Mallard |
-| 60 | the bare wire / the submerge call | 60 | Ben Gibbard (solo) / Pied-billed Grebe |
-| 61 | the braided voice / the tail slap | 61 | Y La Bamba / American Beaver |
-| 62 | the throwback / the rhythmic gnaw | 62 | Pickwick / Beaver Chewing |
-| 63 | the FM sheen / the chuff | 63 | Kenny Loggins / River Otter |
-| 64 | the dusk / the chitter | 64 | Jesse Sykes / Mink |
-| 65 | the open plain / the chuckle-chatter | 65 | Philip Aaberg / American Marten |
-| 66 | the country thunder / the scream | 66 | Neko Case / Fisher |
-| 67 | the clean room / the shrill bark-chitter | 67 | Chris Walla / Short-tailed Weasel |
-| 68 | the hush / the rapid chattering chirp | 68 | Sam Beam / Long-tailed Weasel |
-| 69 | the earnest voice / the warning foot-stamp hiss | 69 | Kris Orlowski / Striped Skunk |
-| 70 | the fiddle line / the churring chittering young | 70 | Horse Feathers / Raccoon |
-| 71 | the room tone / the bark screaming vixen call | 71 | Phil Elverum / Red Fox |
-| 72 | the layered loop / the low hiss click | 72 | Briana Marela / Opossum |
-| 73 | the jangle / the thump squeal | 73 | LAKE / Snowshoe Hare |
-| 74 | the reverb wash / the high sharp eenk bark | 74 | Poor Moon / American Pika |
-| 75 | the anthem / the piercing whistle alarm | 75 | The Lonely Forest / Yellow-bellied Marmot |
-| 76 | the androgynous register / the loud penetrating whistle | 76 | Chris Pureka / Hoary Marmot |
-| 77 | the ethereal layering / the musical multi-note whistle | 77 | Mree / Olympic Marmot |
-| 78 | the communal jangle / the chirping trill alarm | 78 | Acid Tongue / Townsend's Ground Squirrel |
-| 79 | the cinematic stillness / the sharp chip alarm | 79 | Jesse Marchant / Golden-mantled Ground Squirrel |
-| 80 | the organ explosion / the loud scolding chatter rattle | 80 | Mates of State / Douglas Squirrel |
-| 81 | the Broadway voice / the bark + chatter alarm | 81 | Sara Bareilles / Eastern Fox Squirrel |
-| 82 | the acoustic intimacy / the high thin tseet | 82 | Death Cab for Cutie (acoustic) / Northern Flying Squirrel |
-| 83 | the grunge whisper / the ultrasonic + soft chip | 83 | Pearl Jam (acoustic) / Deer Mouse |
-| 84 | the late whisper / the chatter + twig gnaw | 84 | Damien Jurado (late career) / Bushy-tailed Woodrat |
-| 85 | the stripped confession / the quiet plop | 85 | Rocky Votolato (acoustic) / Muskrat |
-| 86 | the electronic pulse / the amplified krek-krek wall of sound | 86 | The Postal Service / Pacific Treefrog |
-| 87 | the emerging twang / the rhythmic chirp field chorus | 87 | Neko Case (early folk) / Cricket Chorus |
-| 88 | the bedroom strum / the continuous electric buzz | 88 | Kimya Dawson (solo) / Katydid |
-| 89 | the baroque whisper / the electric buzzing throb | 89 | Parenthetical Girls / Cicada |
-| 90 | the ambient drift / the bell-like peep chorus | 90 | Sky Cries Mary / Spring Peeper-Like Chorus |
-| 91 | the sustained crush / the ultra-thin hum cloud | 91 | Hovercraft / Mosquito Swarm |
-| 92 | the global weave / the deep resonant buzz | 92 | Trance Mission / Bumblebee Drone |
-| 93 | the shimmer veil / the aggressive papery hum | 93 | NAVVI / Hornet Nest Buzz |
-| 94 | the producer's palette / the wing rustle on stream surface | 94 | Erik Blood / Stonefly Hatch |
-| 95 | the euphoric build / the mass wing buzz over water | 95 | ODESZA / Mayfly Emergence |
-| 96 | the synth-pop pulse / the duck-like clucking chorus | 96 | STRFKR / Wood Frog |
-| 97 | the algorithmic tenderness / the sustained musical purring | 97 | The Postal Service (electronic) / Toad Chorus |
-| 98 | the retro-synthetic shimmer / the pure sustained trill | 98 | Gold Casio / Tree Cricket Song |
-| 99 | the bilingual warmth / the mechanical click | 99 | Kaina / Click Beetle |
-| 100 | the nostalgic cascade / the deep cronk + bell + hollow knock | 100 | Summer Heart / Common Raven |
-| 101 | the kinetic surge / the coordinated duet | 101 | Hecuba / Common Raven Pair |
-| 102 | the organic circuit / the caw caw caw complex | 102 | Campfire OK / American Crow |
-| 103 | the layered dissolution / the shack-shack-shack raucous alarm | 103 | Briana Marela (electronic) / Steller's Jay (raucous) |
-| 104 | the dream circuit / the soft whistles + mimicry | 104 | Lemolo (electronic) / Gray Jay |
-| 105 | the theatrical circuit / the harsh grating kraa-a-a | 105 | Parenthetical Girls (electronic) / Clark's Nutcracker |
-| **106** | **the beat architecture / the rolling mek-mek-mek + chatter** | **106** | **Knife Knights / Black-billed Magpie** |
-
-The acoustic progression adds degree 106. On the artist side, the beat architecture (106) is Knife Knights -- hip-hop's rhythmic foundation deconstructed and rebuilt through experimental electronic production. E=4. From the theatrical circuit (105, dramatic, commanding, E=4) to the beat architecture (106, spatial, deconstructed, E=4). Same energy, different methodology: theater vs architecture. On the species side, the rolling mek-mek-mek + chatter (106) is the Black-billed Magpie -- the percussive open-country corvid. E=5. From harsh grating (105, nutcracker, alpine) to rolling mek-mek-mek (106, magpie, open steppe). The septet's final voice adds the percussive rolling quality.
-
-## Artist-City Patterns (107 patterns)
-
-| # | Pattern | Degree | Artist |
-|---|---------|--------|--------|
-| 0 | Export | 0 | Quincy Jones |
-| 1 | Draw | 1 | Bill Frisell |
-| 2 | European Exile | 2 | Wayne Horvitz |
-| 3 | The Stay | 3 | Ernestine Anderson |
-| 4 | The Teacher | 4 | Floyd Standifer |
-| 5 | The Persistence | 5 | Overton Berry |
-| 6 | The Erasure | 6 | Patti Bown |
-| 7 | Pedagogue-Draw | 7 | Julian Priester |
-| 8 | The Quiet Draw | 8 | Gary Peacock |
-| 9 | The Seeker | 9 | Hadley Caliman |
-| 10 | Late Homestead | 10 | Bud Shank |
-| 11 | The Salon Keeper | 11 | Joe Brazil |
-| 12 | The Prodigal | 12 | Don Lanphere |
-| 13 | Institutional Anchor | 13 | Marc Seales |
-| 14 | Prodigy-Export | 14 | Aaron Parks |
-| 15 | Builder-Stayer | 15 | Thomas Marriott |
-| 16 | Talent Incubator | 16 | Jeff Lorber |
-| 17 | The Uncategorizable | 17 | Reggie Watts |
-| 18 | The Workshop | 18 | Maktub |
-| 19 | The New Root | 19 | Fly Moon Royale |
-| 20 | The Street Laureate | 20 | Whitney Monge |
-| 21 | The Ensemble Anchor | 21 | Polyrhythmics |
-| 22 | The Inheritor | 22 | Foxy Apollo |
-| 23 | The Rural Draw | 23 | Allen Stone |
-| 24 | The Island Export | 24 | Ron Artis II |
-| 25 | The Cultural Guardian | 25 | Black Stax |
-| 26 | The Transmuter | 26 | Shaina Shepherd |
-| 27 | The Conduit | 27 | The Dynamics |
-| 28 | The Resident Band | 28 | Night Owls |
-| 29 | The Catalog | 29 | Boogaloo Joe Jones |
-| 30 | The Incubation | 30 | Ray Charles |
-| 31 | The Relay | 31 | Brenda Lee Eager |
-| 32 | The Foundation | 32 | Luther Rabb |
-| 33 | The Unrecorded | 33 | Larry English |
-| 34 | The Shadow Name | 34 | The Tempos |
-| 35 | The Deep Root | 35 | Robert Cray |
-| 36 | The Supernova | 36 | Jimi Hendrix |
-| 37 | The Inheritor | 37 | Ayron Jones |
-| 38 | The Touring Anchor | 38 | Booker T. Jones |
-| 39 | The Returning Wave | 39 | Ron Artis Jr |
-| 40 | The Cultural Satellite | 40 | Alice Smith |
-| 41 | The Scene Native | 41 | Shawn Smith |
-| 42 | The Gospel Export | 42 | Erica Campbell |
-| 43 | The Arena Architect | 43 | Ann Wilson |
-| 44 | The Digital Immigrant | 44 | Chong the Nomad |
-| 45 | The Stripped Murmur | 45 | Damien Jurado |
-| 46 | The Confessional Drifter | 46 | Rocky Votolato |
-| 47 | The Sacred Baritone | 47 | Pedro the Lion |
-| 48 | The Campfire Anchor | 48 | Sera Cahoone |
-| 49 | The Trojan Lullabist | 49 | Kimya Dawson |
-| 50 | The Intimate Architect | 50 | Mirah |
-| 51 | The Folk Organism | 51 | Grand Archives |
-| 52 | The Arena Breakout | 52 | Brandi Carlile |
-| 53 | The Prodigy Return | 53 | Fleet Foxes |
-| 54 | The Neighborhood Anchor | 54 | Ivan & Alyosha |
-| 55 | The Infrastructure Beneficiary | 55 | Shelby Earl |
-| 56 | The Duo Collective | 56 | Lemolo |
-| 57 | The Label Bridge | 57 | Laura Gibson |
-| 58 | The Bellingham Ascent | 58 | Death Cab for Cutie |
-| 59 | The Scene Intellectual | 59 | The Long Winters |
-| 60 | The Frontman Alone | 60 | Ben Gibbard (solo) |
-| 61 | The Corridor Bridge | 61 | Y La Bamba |
-| 62 | The Brief Blaze | 62 | Pickwick |
-| 63 | The Everett Departure | 63 | Kenny Loggins |
-| 64 | The Dark-Folk Loner | 64 | Jesse Sykes |
-| 65 | The Montana Connection | 65 | Philip Aaberg |
-| 66 | The Wanderer Who Claims Multiple Cities | 66 | Neko Case |
-| 67 | The Departed Member | 67 | Chris Walla |
-| 68 | The Visiting Artist | 68 | Sam Beam |
-| 69 | The Working Musician | 69 | Kris Orlowski |
-| 70 | The Corridor Wanderer | 70 | Horse Feathers |
-| 71 | The Anacortes Hermit | 71 | Phil Elverum |
-| 72 | The International Student | 72 | Briana Marela |
-| 73 | The K Records Collective | 73 | LAKE |
-| 74 | The Side Project | 74 | Poor Moon |
-| 75 | The Second Anacortes Act | 75 | The Lonely Forest |
-| 76 | The Identity Artist | 76 | Chris Pureka |
-| 77 | The YouTube-to-Artist Pipeline | 77 | Mree |
-| 78 | The Porch Party | 78 | Acid Tongue |
-| 79 | The Dark Meditation | 79 | Jesse Marchant |
-| 80 | The Married Duo | 80 | Mates of State |
-| 81 | The Crossover Arc | 81 | Sara Bareilles |
-| 82 | The Recursive Return | 82 | Death Cab for Cutie (acoustic) |
-| 83 | The Arena Unplugged | 83 | Pearl Jam (acoustic) |
-| 84 | The Artist Arc | 84 | Damien Jurado (late career) |
-| 85 | The Confessional Return | 85 | Rocky Votolato (acoustic) |
-| 86 | The Side Project | 86 | The Postal Service |
-| 87 | The Early Chapter | 87 | Neko Case (early folk) |
-| 88 | The Solo Distillation | 88 | Kimya Dawson (solo) |
-| 89 | The Theatrical Outsider | 89 | Parenthetical Girls |
-| 90 | The Parallel Scene | 90 | Sky Cries Mary |
-| 91 | The Spousal Satellite | 91 | Hovercraft |
-| 92 | The Cross-Pollinator | 92 | Trance Mission |
-| 93 | The Intimate Machine | 93 | NAVVI |
-| 94 | The Cross-Genre Bridge | 94 | Erik Blood |
-| 95 | The Bellingham Pipeline | 95 | ODESZA |
-| 96 | The DIY Maximalist | 96 | STRFKR |
-| 97 | The Re-Contextualized Return | 97 | The Postal Service (electronic) |
-| 98 | The Self-Released Synthesist | 98 | Gold Casio |
-| 99 | The Diasporic Synthesist | 99 | Kaina |
-| 100 | The Transatlantic Dreamer | 100 | Summer Heart |
-| 101 | The Dance Floor Provocateur | 101 | Hecuba |
-| 102 | The Warm Circuiteer | 102 | Campfire OK |
-| 103 | The Electronic Reframing | 103 | Briana Marela (electronic) |
-| 104 | The Sustained Electronic Return | 104 | Lemolo (electronic) |
-| 105 | The Triple Electronic Return | 105 | Parenthetical Girls (electronic) |
-| **106** | **The Genre Gateway** | **106** | **Knife Knights** |
-
-One hundred and seven named patterns across one hundred and seven degrees. The Genre Gateway (106) describes the pattern where an entirely new genre enters the engine through its experimental edge rather than its mainstream center. Hip-hop arrives as Experimental Hip-Hop on Sub Pop. The gateway opens at the avant-garde.
-
-## Genre Evolution (88 stages)
-
-| Stage | Degree | Genre | Artist |
-|-------|--------|-------|--------|
-| 27 | 45 | Folk | Damien Jurado |
-| 28 | 46 | Folk | Rocky Votolato |
-| 29 | 47 | Indie Folk | Pedro the Lion |
-| 30 | 48 | Folk | Sera Cahoone |
-| 31 | 49 | Folk Punk | Kimya Dawson |
-| 32 | 50 | Indie Folk | Mirah |
-| 33 | 51 | Indie Folk | Grand Archives |
-| 34 | 52 | Folk/Rock | Brandi Carlile |
-| 35 | 53 | Indie Folk | Fleet Foxes |
-| 36 | 54 | Folk | Ivan & Alyosha |
-| 37 | 55 | Singer-Songwriter | Shelby Earl |
-| 38 | 56 | Indie Folk | Lemolo |
-| 39 | 57 | Folk | Laura Gibson |
-| 40 | 58 | Indie Rock | Death Cab for Cutie |
-| 41 | 59 | Indie Rock | The Long Winters |
-| 42 | 60 | Folk | Ben Gibbard (solo) |
-| 43 | 61 | Folk/Indie | Y La Bamba |
-| 44 | 62 | Indie/Folk | Pickwick |
-| 45 | 63 | Soft Rock/Folk | Kenny Loggins |
-| 46 | 64 | Folk | Jesse Sykes |
-| 47 | 65 | New Age/Folk | Philip Aaberg |
-| 48 | 66 | Alt Country | Neko Case |
-| 49 | 67 | Indie/Folk | Chris Walla |
-| 50 | 68 | Folk | Sam Beam |
-| 51 | 69 | Singer-Songwriter | Kris Orlowski |
-| 52 | 70 | Indie Folk | Horse Feathers |
-| 53 | 71 | Indie/Folk | Phil Elverum |
-| 54 | 72 | Art Pop | Briana Marela |
-| 55 | 73 | Indie Pop | LAKE |
-| 56 | 74 | Indie Folk/Rock | Poor Moon |
-| 57 | 75 | Indie Pop | The Lonely Forest |
-| 58 | 76 | Folk | Chris Pureka |
-| 59 | 77 | Folk/Pop | Mree |
-| 60 | 78 | Folk/Indie | Acid Tongue |
-| 61 | 79 | Folk | Jesse Marchant |
-| 62 | 80 | Indie Pop | Mates of State |
-| 63 | 81 | Pop/Soul | Sara Bareilles |
-| 64 | 82 | Indie Folk | Death Cab for Cutie (acoustic) |
-| 65 | 83 | Acoustic Rock | Pearl Jam (acoustic) |
-| 66 | 84 | Folk | Damien Jurado (late career) |
-| 67 | 85 | Folk | Rocky Votolato (acoustic) |
-| 68 | 86 | Indie Electronic | The Postal Service |
-| 69 | 87 | Folk Country | Neko Case (early folk) |
-| 70 | 88 | Lo-Fi Folk | Kimya Dawson (solo) |
-| 71 | 89 | Avant-Pop | Parenthetical Girls |
-| 72 | 90 | Ethereal/Electronic | Sky Cries Mary |
-| 73 | 91 | Drone/Noise | Hovercraft |
-| 74 | 92 | World/Electronic | Trance Mission |
-| 75 | 93 | Dream Pop/Electronic | NAVVI |
-| 76 | 94 | Electronic/Experimental | Erik Blood |
-| 77 | 95 | Electronic | ODESZA |
-| 78 | 96 | Indie Electronic | STRFKR |
-| 79 | 97 | Indie Electronic | The Postal Service (electronic) |
-| 80 | 98 | Indie Electronic | Gold Casio |
-| 81 | 99 | Electronic/R&B | Kaina |
-| 82 | 100 | Electronic Pop | Summer Heart |
-| 83 | 101 | Dance/Electronic | Hecuba |
-| 84 | 102 | Indie Electronic | Campfire OK |
-| 85 | 103 | Art Pop/Electronic | Briana Marela (electronic) |
-| 86 | 104 | Electronic Pop | Lemolo (electronic) |
-| 87 | 105 | Avant-Pop | Parenthetical Girls (electronic) |
-| **88** | **106** | **Experimental Hip-Hop** | **Knife Knights** |
-
-Genre Stage 88 -- Experimental Hip-Hop at degree 106. Eighty-eight genre stages in 106 degrees. FIRST HIP-HOP in the engine. Hip-hop enters through the experimental edge. Ishmael Butler + Erik Blood on Sub Pop Records. Twelfth electronic-adjacent entry since degree 86.
-
-## Energy Distribution
-
-**Artist-side (after degree 106):** E1:3 (2.8%), E2:31 (29.0%), E3:29 (27.1%), E4:29 (27.1%), E5:14 (13.1%), E6:1 (0.9%). Total: 107 (degrees 0-106). E=4 gains Knife Knights (106) reaching 29. Energy holds at E=4 from degree 105 to 106. The beat architecture matches the theatrical circuit in energy.
-
-**Species-side (after degree 106):** E=5 for Black-billed Magpie (106) after Clark's Nutcracker (105, E=5). Back-to-back E=5 concludes the Corvidae septet. The septet's energy: E=4 (100), E=5 (101), E=4 (102), E=5 (103), E=4 (104), E=5 (105), E=5 (106). The oscillation breaks at the seventh degree -- the magpie matches the nutcracker at E=5.
-
-## Cross-References (Combined)
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| S36-094 | Knife Knights (106) | Erik Blood (94) | MEMBER! Blood is half of Knife Knights. Solo to duo. Electronic/Experimental to Experimental Hip-Hop. |
-| S36-044 | Knife Knights (106) | Chong the Nomad (44) | HIP-HOP/ELECTRONIC. Accessible vs experimental. Pop-inflected vs deconstructed. |
-| S36-083 | Knife Knights (106) | Pearl Jam (83) | 1990s SEATTLE. Rock identity vs hip-hop identity. Two faces. |
-| S36-036 | Knife Knights (106) | Jimi Hendrix (36) | BLACK SEATTLE LINEAGE. Hendrix (1960s) to Butler (1990s-present). |
-| S36-091 | Knife Knights (106) | Hovercraft (91) | SUB POP / EXPERIMENTAL. Noise/drone vs experimental hip-hop. |
-| SPS-105 | Black-billed Magpie (106) | Clark's Nutcracker (105) | CORVIDAE SEPTET. Alpine pine vs open country. Both E=5. |
-| SPS-100 | Black-billed Magpie (106) | Common Raven (100) | CORVIDAE SEPTET. Intelligence. Both highly intelligent corvids. |
-| SPS-102 | Black-billed Magpie (106) | American Crow (102) | CORVIDAE SEPTET. Urban/generalist vs open-country/specialist. |
-| SPS-071 | Black-billed Magpie (106) | Red Fox (71) | OPEN COUNTRY. Both in dry open landscapes east of the Cascades. |
-| SPS-078 | Black-billed Magpie (106) | Townsend's Ground Squirrel (78) | OPEN COUNTRY. Both signature species of dry steppe east of the Cascades. |
-
-## Infrastructure
-
-**Part A:** `www/tibsfox/com/Research/S36/research/releases/106-knife-knights/` -- research.md, index.html, knowledge-nodes.json, retrospective.md
-**Part B:** `www/tibsfox/com/Research/SPS/research/releases/106-black-billed-magpie/` -- research.md, index.html, knowledge-nodes.json, retrospective.md
-**Release notes:** `docs/release-notes/v1.49.246/README.md`
-
-**Total: 9 files** -- standard degree package plus release notes.
-
----
+- **The seventh consecutive Corvidae and the septet's record-breaking species.** **Black-billed Magpie** (*Pica hudsonia*) closes the seventh slot of the **Corvidae Septet** at **degree 106** — seven consecutive degrees (100-106) held by corvids. The septet breaks the **Mustelidae sextet** (63-68) and **Sciuridae sextet** (75-80) ties, making the Corvidae run the second-longest family streak in the engine behind the future **Sciuridae octet** (75-82) that closes three degrees later. The septet maps a **full habitat gradient** from widespread lowland (Common Raven 100) through cliffs and forest (Common Raven Pair 101), urban and open (American Crow 102), lowland conifer (Steller's Jay 103), subalpine (Gray Jay 104), alpine pine (Clark's Nutcracker 105), and open country east of the Cascades (Black-billed Magpie 106). **Kingdom:** Animalia. **Phylum:** Chordata. **Class:** Aves. **Order:** Passeriformes. **Family:** Corvidae. **Genus:** *Pica*. **Species:** *P. hudsonia*.
+- **The Corvidae Septet breaks the sextet record — second-longest family streak in the engine.** The corvid run at 100-106 **breaks** the two prior six-degree family streaks that had tied for longest: **Mustelidae** at degrees 63-68 (River Otter, Mink, American Marten, Fisher, Short-tailed Weasel, Long-tailed Weasel) and **Sciuridae** at degrees 75-80 (Yellow-bellied Marmot, Hoary Marmot, Olympic Marmot, Townsend's Ground Squirrel, Golden-mantled Ground Squirrel, Douglas Squirrel). The Corvidae septet extends to seven where both Mustelidae and Sciuridae stopped at six. Second-longest family streak in the engine (the future Sciuridae octet 75-82 closes at eight degrees later). The septet structure is the engine's signature family-level arc.
+- **New genus *Pica* in the engine.** **Black-billed Magpie** (*Pica hudsonia*) is the **first *Pica*** in the engine. The genus was formerly considered conspecific with European Magpie *Pica pica* but was split by the **American Ornithologists' Union (AOU)** in 2000 based on mitochondrial DNA evidence and vocalization differences. The split placed North American magpies in their own species. The septet's genus progression: *Corvus* (100-102, Raven and Crow), *Cyanocitta* (103, Steller's Jay), *Perisoreus* (104, Gray Jay), *Nucifraga* (105, Clark's Nutcracker), *Pica* (106, Black-billed Magpie). Five genera across seven corvid degrees.
+- **The rolling mek-mek-mek — 106th species-side acoustic element.** **Mek-mek-mek**. The diagnostic call. Rolling, nasal, staccato, rapid, percussive. Drawn-out chains of mek-mek-mek-mek create walls of overlapping corvid conversation. The **most rapid-fire vocalizer** in the Corvidae septet — faster than the raven's cronk, faster than the crow's caw, faster than the jay's shack-shack-shack, faster than the nutcracker's kraa-a-a. Secondary vocalizations: **chatter** (rapid series of harsh notes, social or territorial), **harsh alarm calls** (sharp, insistent, when predators detected), **quieter social calls** (close-range, modulated). E=5. The septet's final acoustic is percussive, social, rapid-fire, relentless — the magpie-sound that carries across open steppe.
+- **Dome-shaped nests — unique among corvids worldwide.** Massive enclosed structures of sticks and mud with a roof. **60-120 cm diameter**. **40-50 days to build**. **Unique among corvids worldwide**. The nest is a community-scale architectural project — a pair of magpies can spend six to eight weeks constructing a nest that will be reused by other species (owls, hawks, ducks) after abandonment. Old magpie nests become infrastructure for the broader open-country ecosystem. The structural parallel to Knife Knights' beat architecture is explicit — both subjects at degree 106 construct at scale, and both construct environments that others inhabit.
+- **Tail longer than body — the bold black-and-white silhouette.** Extraordinarily long iridescent tail. 45-60 cm total length including the tail. The tail is longer than the body itself. Iridescent black (green-bronze-purple) head, breast, back, and wings. White belly and scapulars. **Bold black-and-white plumage** that makes the magpie instantly recognizable at distance across open steppe. In flight, the long tail trails behind and the white wing patches flash with each wing beat. No other corvid in the engine shares this silhouette.
+- **Open country east of the Cascades — the broadest-scale habitat in the septet.** **Sagebrush steppe**, **agricultural fields**, **riparian corridors** along creeks and rivers, **ranch lands**, and **grassland edges**. Primarily **east of the Cascades** — the **Columbia Plateau**, the **Okanogan**, the **Palouse**, and the high desert of central and eastern **Washington** and **Oregon**. The broadest-scale landscape in the Corvidae septet. Shared habitat with **Red Fox** (71, dry open landscapes), **Townsend's Ground Squirrel** (78, dry steppe), and **Golden-mantled Ground Squirrel** (79, dry open forests). The magpie closes the septet at the geographic edge where the Pacific Northwest's forested west transitions to the arid east.
+- **Intelligence at mirror-self-recognition scale.** Like all corvids, Black-billed Magpie shows exceptional intelligence. Magpies have been observed **passing the mirror self-recognition test** — placing them among the few non-mammal species with demonstrated self-awareness (most other examples are great apes, elephants, and some cetaceans). The cognitive architecture that enables self-recognition is scaled to the social complexity of magpie life — large flocks, complex territorial behavior, tool use, and long memory. The septet spans corvid intelligence from raven (100, widely considered the most intelligent bird) through nutcracker (105, 98,000-cache spatial memory) to magpie (106, mirror self-recognition).
+- **The septet energy arc breaks the oscillation at the seventh degree.** Six-degree Corvidae oscillation: **E=4** (100, Common Raven), **E=5** (101, Common Raven Pair), **E=4** (102, American Crow), **E=5** (103, Steller's Jay raucous), **E=4** (104, Gray Jay), **E=5** (105, Clark's Nutcracker). Seven-degree septet arc: E=4, E=5, E=4, E=5, E=4, E=5, **E=5** (106, Black-billed Magpie). The oscillation breaks at the seventh degree — the magpie matches the nutcracker at E=5 rather than dropping back to E=4. This is not a failure of pattern but a structural finding: the septet's final voice genuinely merits E=5 (percussive, rapid-fire, relentless) and the engine should not force E=4 on a species that produces an E=5 call.
+- **Forty-sixth consecutive original CSV — the streak continues.** The magpie is the **forty-sixth consecutive original CSV species** (degrees 61-106 without substitution or correction). The streak now spans **Mammalia** (61-85), **Amphibia** and **Insecta** interludes (86-99), and the **Aves** septet (100-106). Forty-six consecutive degrees of catalog reliability — the longest unbroken run of original-catalog selections in the engine, and a data reliability milestone that the septet extends.
+- **45-60 cm, 56-61 cm wingspan, 145-210 g — the open-country cursor.** Body length 45-60 cm (including the long tail, which makes up roughly half the total length). Wingspan 56-61 cm. Body mass 145-210 g. Larger than American Crow (102, 45 cm, 316-620 g — crow is heavier but shorter) but smaller than Common Raven (100, 60-70 cm, 800-1600 g). The magpie's slim build and long tail make it a distinctive flyer — quick wing beats, trailing tail, flashing wing patches, a silhouette unmistakable at distance across open country.
+- **The magpie is the most socially visible corvid in open country.** American Crow is more visible in urban centers. Common Raven is more visible in remote landscapes. But Black-billed Magpie is the **most visible corvid across the open country east of the Cascades** — bold black-and-white plumage, long tail, loud chattering calls, reusable dome-shaped nests, gregarious flocks, mirror-self-recognition cognition. The septet closes at the species that commands the sagebrush steppe the way raven commands the remote wild, the way crow commands the city, and the way nutcracker commands the alpine. Each corvid in the septet owns its habitat.
 
 ## Retrospective
 
-**What Worked:**
-1. The CORVIDAE SEPTET (seven consecutive Corvidae, 100-106) breaks the sextet ties and becomes the second-longest family streak -- a definitive structural event
-2. First hip-hop entry (Knife Knights) arrives through the experimental edge, consistent with Seattle's character as an experimental music city
-3. The Ishmael Butler + Erik Blood connection bridges decades of Seattle music history and connects degree 94 to degree 106
-4. The magpie's dome-shaped nests (unique among corvids worldwide) add a strong architectural element that parallels the beat architecture
-5. The Black Seattle Music Lineage (Hendrix -> Butler) traces a through-line of Black innovation across genres and decades
-6. Genre Stage 88 as a new genre (not a return or variant) marks a genuine expansion of the engine's vocabulary
+### What Worked
 
-**What Could Be Better:**
-1. Seven consecutive Corvidae is extraordinary but degree 107 must shift to a new family to avoid overextension
-2. The Corvidae septet's final energy (E=5, E=5) breaks the previous oscillation pattern -- this is noted and accepted
-3. E=4 for Knife Knights may feel low for hip-hop to some listeners, but the experimental approach trades energy for spatial complexity
+- **The Corvidae Septet breaks the sextet record cleanly.** Seven consecutive Corvidae degrees (100-106) break the **Mustelidae sextet** (63-68) and the **Sciuridae sextet** (75-80) ties that had shared the longest-family-streak record. The Corvidae run becomes the second-longest family streak in the engine (behind the future Sciuridae octet 75-82). The septet's **habitat gradient** — widespread lowland (Common Raven 100), cliffs and forest (Common Raven Pair 101), urban and open (American Crow 102), lowland conifer (Steller's Jay 103), subalpine (Gray Jay 104), alpine pine (Clark's Nutcracker 105), open country east of the Cascades (Black-billed Magpie 106) — maps a full **Pacific Northwest** habitat traverse. The septet closes at the geographic edge without feeling forced.
+- **Black-billed Magpie is the right species for the septet record-breaker.** Rolling mek-mek-mek. E=5. Bold black-and-white plumage. Tail longer than body. Dome-shaped nests unique among corvids worldwide. New genus *Pica* in the engine. Mirror-self-recognition intelligence. Open country east of the Cascades. No other bird in the source catalog could have carried the septet's record-breaking weight at the steppe edge.
+- **Knife Knights is the right artist for the first hip-hop entry.** Ishmael Butler's three-decade arc (Digable Planets → Shabazz Palaces → Knife Knights). Erik Blood's return from degree 94. Sub Pop Records. Experimental Hip-Hop (not mainstream rap). The genre gateway opens at the avant-garde, and the Erik Blood bridge makes the gateway legible. Hip-hop's first entry in 106 degrees arrives in a form consistent with Seattle's experimental character.
+- **The beat architecture (107th acoustic element) adds a structural hip-hop posture to the catalog.** Deconstructed hip-hop. Beat as structure to inhabit. Voice navigates landscape. Controlled abrasion. Spatial complexity at E=4 rather than kinetic high-energy. Knife Knights' beat architecture demonstrates that hip-hop in the engine can be architectural rather than performative.
+- **The Genre Gateway (107th artist-city pattern) formalizes how new genres enter the engine.** A new genre enters through its experimental edge rather than its mainstream center. Hip-hop arrives as Experimental Hip-Hop on Sub Pop. The gateway pattern is a legitimate structural observation about catalog expansion — future new genres can be expected to enter through their experimental edges when they first appear in the engine.
+- **The Erik Blood bridge (degree 94 → 106) makes the genre gateway less disruptive.** Blood's return from degree 94 provides a **structural bridge** — the genre is new but the producer is familiar. The bridge reduces the genre gateway's disruption without reducing its novelty. Future gateway patterns should look for bridges that make new genres legible without forcing them into existing classifications.
+- **The Black Seattle music lineage (Hendrix 36 → Butler 106) becomes explicit.** Six decades of Black artistic innovation in Seattle music converge at degree 106 through the Hendrix-to-Butler line. Jimi Hendrix pioneered in the 1960s; Ishmael Butler continues through Digable Planets (late 1980s-mid 1990s), Shabazz Palaces (late 2000s-present), and Knife Knights (2018-present). The lineage extends the engine's historical memory across both genres and decades.
+- **Dome-shaped nests as the strongest visual anchor for the magpie.** Unique among corvids worldwide. 60-120 cm diameter. 40-50 days to build. Community infrastructure reused by other species. The nest's structural parallel to Knife Knights' beat architecture is explicit — both subjects at degree 106 construct at scale.
+- **The septet's habitat gradient prevents repetition across seven degrees.** Each corvid occupies a distinct habitat: widespread lowland, cliffs and forest, urban and open, lowland conifer, subalpine, alpine pine, open country. The gradient's distinctness prevents the septet from feeling monotonous even at seven consecutive degrees. Future family runs should prioritize habitat distinctness when extending beyond six degrees.
+- **Breaking the energy oscillation at the seventh degree (E=5 at 105 and 106) is acceptable.** The perfect E=4/E=5 oscillation held through six degrees (100-105). At degree 106, the magpie's rolling mek-mek-mek genuinely merits E=5, and the oscillation breaks rather than being forced. The break is a structural finding — the septet's final voice breaks the pattern because the species calls for it.
+
+### What Could Be Better
+
+- **Seven consecutive Corvidae pushes past the absolute boundary that Mustelidae and Sciuridae respected.** The Mustelidae and Sciuridae sextets stopped at six. The Corvidae septet extends to seven. Whether the engine can or should extend beyond seven (and the future Sciuridae octet does reach eight) is an open structural question, and degree 107 must answer it by shifting to a new family to avoid overextension of the corvid run.
+- **Three consecutive electronic returns (103-105) plus beat-architecture hip-hop (106) may feel like the engine is stuck in one analytical mode.** Four electronic-adjacent degrees in a row risks reading as formulaic. The degrees following 106 will need to differentiate their approach or the electronic-era dominance will decay.
+- **Still no raptor in 107 entries.** The **Pacific Northwest** raptor absence (Accipitridae, Falconidae, Strigidae, Tytonidae absent since the **Northern Spotted Owl** at degree 4) grows more conspicuous with each non-raptor degree. The septet brought Aves to seven consecutive degrees but the raptor drought persists across 100 degrees.
+- **Still no marine species in 107 entries.** The **Puget Sound**, **Salish Sea**, and **Olympic Coast** marine ecosystems remain unrepresented. Harbor seal, orca, sea lion, common loon, marbled murrelet — none have appeared in 107 degrees. For an engine titled around Puget Sound, the omission is significant.
+- **Knife Knights' discography was treated structurally rather than catalogued album-by-album.** The degree 106 entry focused on the genre gateway and the Butler-Blood collaboration rather than individual release analysis. A discography deep-dive (Shabazz Palaces' *Black Up* 2011, *Lese Majesty* 2014, *Quazarz* 2017 two-album release; Knife Knights' *1 Time Mirage* 2018) could be a future research artifact.
+- **The magpie's mirror-self-recognition finding could have received longer treatment.** The cognitive implications of a non-mammal passing the mirror test are significant, and the species entry notes the finding but does not develop the cognitive and evolutionary context. Future work could deepen the cognitive narrative.
 
 ## Lessons Learned
 
-1. The genre gateway pattern (new genre enters through experimental edge) is a valid and important structural observation -- it explains why hip-hop arrives as experimental hip-hop on Sub Pop rather than mainstream rap on a major label
-2. Connecting a new entry to an existing one through a shared member (Erik Blood at 94 and 106) creates a structural bridge that makes the genre gateway less disruptive
-3. Seven consecutive corvids work because each opens a different landscape: urban, forest, subalpine, alpine, open steppe. The habitat gradient prevents repetition
-4. Dome-shaped nests are the strongest visual anchor for the magpie -- unique among corvids worldwide, they provide a clear structural parallel to the beat architecture
-5. Breaking the energy oscillation at the seventh corvid (E=5, E=5 at degrees 105-106) is acceptable because the magpie's rolling mek-mek-mek genuinely merits E=5
+1. **The genre gateway pattern is a legitimate structural observation.** A new genre enters the engine through its experimental edge rather than its mainstream center. Hip-hop arrives as Experimental Hip-Hop on Sub Pop rather than as mainstream rap on a major label. Future new genres can be expected to enter through their experimental edges when they first appear in the engine, because the engine's catalog has been built on experimental and peripheral rather than mainstream selections throughout.
+2. **Shared members create structural bridges that make genre gateways less disruptive.** Connecting a new entry (Knife Knights, Experimental Hip-Hop) to an existing entry (Erik Blood, degree 94, Electronic/Experimental) through a shared member (Erik Blood) creates a **structural bridge** that reduces the gateway's disruption without reducing its novelty. Future gateway patterns should look for shared members or shared producers that make the new genre legible to readers who have followed the catalog.
+3. **Seven consecutive same-family degrees work when habitat distinctness is maintained.** The Corvidae septet's **habitat gradient** — from widespread lowland through cliffs and forest, urban and open, lowland conifer, subalpine, alpine pine, and open country east of the Cascades — prevents repetition across seven degrees. Without habitat distinctness, the septet would feel monotonous. Future family runs should select species for habitat distinctness before committing to streaks beyond six degrees.
+4. **Architectural parallels across taxonomy/genre divides strengthen degree-level coherence.** The **dome-shaped nests** (magpie) and the **beat architecture** (Knife Knights) both construct at scale and both construct environments that others inhabit. The parallel is not forced — it emerges from two subjects that genuinely build. Future degree pairings should look for deep structural parallels rather than surface thematic matches.
+5. **Breaking established patterns at the pattern-extending degree is acceptable when the species or artist genuinely calls for the break.** The Corvidae sextet's perfect E=4/E=5 oscillation (100-105) breaks at the seventh degree (E=5 at 106) because the magpie's rolling mek-mek-mek genuinely merits E=5. The break is a structural finding, not a pattern failure. Future streaks should allow their final entries to break the established pattern when the subject requires it — the discovered break is more structurally significant than the forced continuation.
+6. **New genera add taxonomic depth to family streaks.** The Corvidae septet spans five genera — *Corvus* (100-102), *Cyanocitta* (103), *Perisoreus* (104), *Nucifraga* (105), *Pica* (106). The genus diversity within a family streak is itself a structural finding. Future family streaks should include genus-level variety to avoid monocultural readings of a multi-species family.
+7. **Lineage connections across decades make historical memory explicit.** The Black Seattle music lineage from **Jimi Hendrix** (degree 36, 1960s) to **Ishmael Butler** (degree 106, 1990s-present) through Digable Planets, Shabazz Palaces, and Knife Knights spans six decades of Black artistic innovation. Future entries should activate multi-decade lineages when they exist, because the engine's historical memory deepens through explicit continuity rather than through isolated points.
+8. **The experimental edge is the engine's identity, not an anomaly.** Hip-hop entering as Experimental Hip-Hop on Sub Pop is consistent with the engine's previous entries — jazz roots through experimental musicians, rock through experimental acts, indie through experimental DIY, electronic through experimental production. The engine's catalog has been built on the experimental edge throughout, and the first hip-hop entry confirms the pattern. Future genre gateways should expect the experimental edge as the natural entry point.
+9. **Record-breaking milestones gain significance when paired with first-entry milestones.** The Corvidae septet's record-breaking seventh corvid and Knife Knights' first-hip-hop-entry land at the same degree (106). The double event creates a structural peak rather than two separate findings. Future engine planning can align record breaks with first entries to produce double peaks at specific degrees.
+10. **Second-longest is still a record — the hierarchy of superlatives matters.** The Corvidae septet is the **second-longest** family streak in the engine after the future Sciuridae octet (75-82). Second-longest is still a record — the superlative hierarchy (longest, second-longest, third-longest) is itself a structural finding. Future family runs can aim for specific superlative positions within the hierarchy rather than for absolute longest.
 
----
+## Cross-References
 
-The beat architecture and the open-country corvid. Degree 106 introduces the first hip-hop and completes the Corvidae Septet.
+| Connection | From | To | Nature |
+|------------|------|-----|--------|
+| S36-094 | Knife Knights (106) | Erik Blood (94) | MEMBER! Blood is half of Knife Knights. Degree 94 (Electronic/Experimental, solo) connects to 106 (Experimental Hip-Hop, duo). Studio-as-instrument becomes hip-hop stage. Producer's palette becomes the beat architecture. Ninth return artist entry. |
+| S36-044 | Knife Knights (106) | Chong the Nomad (44) | HIP-HOP/ELECTRONIC TERRITORY. Chong more accessible and pop-inflected (Electronic/R&B). Knife Knights more abrasive and experimental (Experimental Hip-Hop). Two approaches to the intersection, sixty-two degrees apart. |
+| S36-083 | Knife Knights (106) | Pearl Jam (83) | 1990s SEATTLE — TWO FACES. Pearl Jam = rock identity. Knife Knights (via Ishmael Butler and Digable Planets) = hip-hop identity. Two faces of the same city, decades apart. |
+| S36-036 | Knife Knights (106) | Jimi Hendrix (36) | BLACK SEATTLE MUSIC LINEAGE. Hendrix pioneered (1960s). Butler continues (late 1980s-present through Digable Planets → Shabazz Palaces → Knife Knights). Six decades of Black artistic innovation in Seattle music. |
+| S36-091 | Knife Knights (106) | Hovercraft (91) | SUB POP / EXPERIMENTAL. Both on Sub Pop. Both experimental. Noise/drone (Hovercraft) vs experimental hip-hop (Knife Knights). Sub Pop's range: noise to hip-hop. |
+| S36-089 | Knife Knights (106) | Parenthetical Girls (89) | AVANT-GARDE PRACTICE. Both project-level theatricality/avant-garde. Parenthetical Girls in baroque cabaret (89) and electronic (105). Knife Knights in experimental hip-hop (106). Adjacent degrees in avant-garde practice. |
+| S36-086 | Knife Knights (106) | The Postal Service (86) | ELECTRONIC ERA ORIGIN. The Postal Service introduced Electronic Pop at 86, opening the electronic era that runs through degree 106. Knife Knights extends the era to hip-hop, not replacing electronic but entering through it. |
+| SPS-105 | Black-billed Magpie (106) | Clark's Nutcracker (105) | CORVIDAE SEPTET (sixth to seventh). Alpine pine (nutcracker) vs open country (magpie). Both E=5. Entirely different habitats and acoustic qualities. Harsh grating kraa-a-a vs rolling mek-mek-mek. |
+| SPS-104 | Black-billed Magpie (106) | Gray Jay (104) | CORVIDAE SEPTET. Subalpine (Gray Jay) vs open country (magpie). Soft whistles (E=4) vs rolling mek-mek-mek (E=5). The septet's habitat gradient from subalpine conifer to open steppe. |
+| SPS-103 | Black-billed Magpie (106) | Steller's Jay raucous (103) | CORVIDAE SEPTET. Lowland conifer (Steller's Jay) vs open country (magpie). Shack-shack-shack raucous vs rolling mek-mek-mek. Both E=5 corvid alarm-capable callers at opposite habitat types. |
+| SPS-102 | Black-billed Magpie (106) | American Crow (102) | CORVIDAE SEPTET. Crow is urban/generalist (E=4, sharp caw); magpie is open-country/specialist (E=5, rolling mek-mek-mek). Both bold and social. Magpie tail longer than crow tail. |
+| SPS-101 | Black-billed Magpie (106) | Common Raven Pair (101) | CORVIDAE SEPTET. Cliffs and forest (Raven pair) vs open country (magpie). Coordinated duet (E=5) vs solitary or social chatter (E=5). Both at septet's E=5 peaks. |
+| SPS-100 | Black-billed Magpie (106) | Common Raven (100) | CORVIDAE SEPTET (opening to record-breaker). Intelligence. Both highly intelligent. Raven widely considered most intelligent bird. Magpie may pass mirror self-recognition test. Cognitive peaks of the septet. |
+| SPS-071 | Black-billed Magpie (106) | Red Fox (71) | OPEN COUNTRY SHARED HABITAT. Both in dry open landscapes east of the Cascades. Fox hunts; magpie scavenges. Sagebrush steppe and agricultural fields. |
+| SPS-078 | Black-billed Magpie (106) | Townsend's Ground Squirrel (78) | OPEN COUNTRY SHARED HABITAT. Ground squirrel is prey in the open-country food web; magpie is omnivore/scavenger. Shared dry steppe east of the Cascades. |
+| SPS-079 | Black-billed Magpie (106) | Golden-mantled Ground Squirrel (79) | OPEN COUNTRY ADJACENT HABITAT. Both in dry open PNW landscapes, ground squirrel in open forests and magpie in open steppe. |
+| SPS-063 | Black-billed Magpie (106) | River Otter (63) | SEXTET-TO-SEPTET LINEAGE. Mustelidae sextet opens at degree 63 with River Otter. Corvidae septet closes at degree 106 with Black-billed Magpie. Forty-three degrees separate the first sextet's opener and the septet's record-breaker. |
+| SPS-075 | Black-billed Magpie (106) | Yellow-bellied Marmot (75) | SEXTET-TO-SEPTET LINEAGE. Sciuridae sextet opens at degree 75 with Yellow-bellied Marmot. Corvidae septet closes at degree 106 with Black-billed Magpie. Thirty-one degrees separate the second sextet's opener and the septet's record-breaker. |
+| RES-digable-planets | Knife Knights (106) | Digable Planets Grammy 1994 | HISTORICAL MEMORY. Butterfly (Ishmael Butler) of Digable Planets won Grammy 1994 for "Rebirth of Slick (Cool Like Dat)". Jazz rap precedent for experimental hip-hop at degree 106. |
+| RES-aou-2000-split | Black-billed Magpie (106) | AOU 2000 taxonomic split | HISTORICAL MEMORY. Formerly conspecific with European Magpie *Pica pica*. Split by American Ornithologists' Union in 2000 based on mitochondrial DNA and vocalization differences. New species *P. hudsonia* recognized. |
 
-On the music side, Knife Knights enters as the first hip-hop in the engine. Experimental Hip-Hop. Genre Stage 88. Sub Pop Records. Ishmael Butler (Digable Planets, Shabazz Palaces) + Erik Blood (degree 94). The beat architecture is the 107th acoustic element -- hip-hop deconstructed through electronic production. The genre gateway is the 107th artist-city pattern -- new genre enters through the avant-garde. E=4. Sixth Sub Pop artist. Black Seattle music lineage from Hendrix to Butler.
+## Engine Position
 
-On the species side, the Black-billed Magpie extends the CORVIDAE SEPTET -- seven consecutive Corvidae degrees (100-106), breaking the sextet ties. Rolling mek-mek-mek across the open steppe. Bold black-and-white with a tail longer than its body. Dome-shaped nests unique among corvids worldwide. E=5. Open country east of the Cascades. New genus *Pica*. Second-longest family streak. Forty-sixth consecutive original CSV.
+- **Degree 106 of 360** — 29.4% of the circle traversed; sixteenth degree of Quadrant II; the record-breaking degree of the Corvidae septet and the engine's first hip-hop entry.
+- **CORVIDAE SEPTET BREAKS THE RECORD** — Seven consecutive Corvidae degrees (100-106) break the **Mustelidae sextet** (63-68) and **Sciuridae sextet** (75-80) ties. Second-longest family streak in the engine behind the future **Sciuridae octet** (75-82).
+- **FIRST HIP-HOP ENTRY** in 106 degrees — **Knife Knights** as **Experimental Hip-Hop** on **Sub Pop Records**. Genre enters through the experimental edge.
+- **Genre Stage 88** — **Experimental Hip-Hop**. Eighty-eighth genre stage across 106 degrees. Stable rate of 0.83 stages/degree.
+- **THE BEAT ARCHITECTURE — 107th artist-side acoustic element.** Hip-hop's rhythmic foundation deconstructed and rebuilt through experimental electronic production. Beat as structure to inhabit, not groove to ride. Voice moves through sonic landscape.
+- **THE ROLLING MEK-MEK-MEK — 106th species-side acoustic element.** Nasal staccato percussive open-country corvid chatter. Most rapid-fire vocalizer in the Corvidae septet. Walls of overlapping conversation.
+- **THE GENRE GATEWAY — 107th artist-city pattern.** New genre enters through experimental edge rather than mainstream center. Hip-hop arrives avant-garde.
+- **ISHMAEL BUTLER + ERIK BLOOD** — Butler's three-decade arc (Butterfly → Palaceer Lazaro → Knife Knights) plus Blood's second engine appearance (degree 94 → 106). Ninth return-involved entry.
+- **SIXTH SUB POP ARTIST** — Knife Knights joins the Sub Pop lineage. Sub Pop's range extends from grunge origins to noise to experimental hip-hop.
+- **BLACK SEATTLE MUSIC LINEAGE** — Jimi Hendrix (degree 36, 1960s) → Ishmael Butler (degree 106, 1990s-present) through Digable Planets, Shabazz Palaces, and Knife Knights. Six decades of Black artistic innovation.
+- **DOME-SHAPED NESTS** — Unique among corvids worldwide. 60-120 cm diameter. 40-50 days to build. Community infrastructure at architectural scale.
+- **NEW GENUS *PICA*** — First appearance in the engine. Formerly conspecific with European Magpie *Pica pica*. Split by AOU in 2000.
+- **FORTY-SIXTH CONSECUTIVE ORIGINAL CSV** — degrees 61-106 without substitution or correction. Longest unbroken run of original-catalog selections in the engine.
+- **Seven-species habitat gradient** — Common Raven (widespread lowland, 100), Common Raven Pair (cliffs and forest, 101), American Crow (urban and open, 102), Steller's Jay (lowland conifer, 103), Gray Jay (subalpine, 104), Clark's Nutcracker (alpine pine, 105), Black-billed Magpie (open country east of Cascades, 106). Full Pacific Northwest traverse.
+- **Energy distribution after degree 106 (artist-side):** E1:3 (2.8%), E2:31 (29.0%), E3:29 (27.1%), E4:29 (27.1%), E5:14 (13.1%), E6:1 (0.9%). Total: 107 entries (degrees 0-106 inclusive). **E=4 gains Knife Knights** to reach 29 deployments.
+- **Four classes represented:** Aves (seven consecutive since centennial return at 100), Mammalia, Insecta, Amphibia. Eighteen-plus orders. Forty-nine families (plus seven-degree Corvidae depth).
+- **Electronic era seventeen-deep** — Degrees 86, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106. Eighteen electronic-adjacent entries in twenty-one degrees. Deepest sustained genre cluster in the engine, now extending into experimental hip-hop.
+- **Septet energy arc breaks the oscillation at the seventh degree.** E=4 (100) → E=5 (101) → E=4 (102) → E=5 (103) → E=4 (104) → E=5 (105) → E=5 (106). The perfect oscillation holds through six degrees; at seven, the magpie matches the nutcracker at E=5.
+- **Outstanding gaps:** Zero raptors in 107 entries (since Northern Spotted Owl at degree 4); zero marine species in 107 entries (none since engine began); electronic era dominance continues to require deliberate genre rebalancing in upcoming degrees.
 
-The beat architecture inhabits the sonic structure (E=4). The magpie chatters across the steppe (E=5). Both are percussive, rapid-fire, and relentless. The septet breaks the record. The gateway opens. The engine expands.
+## Files
 
-*Degree 106. The beat architecture and the open-country corvid. Hip-hop arrives in the engine for the first time -- not as mainstream rap but as experimental hip-hop on Sub Pop. Ishmael Butler: Digable Planets, Shabazz Palaces, Knife Knights. Three decades. Grammy 1994. Erik Blood returns from degree 94 -- the studio as instrument now the hip-hop stage. The beat is not a groove to ride but a structure to inhabit. E=4. Meanwhile, east of the Cascades: MEK-MEK-MEK-MEK. Rolling, nasal, staccato, percussive. The Black-billed Magpie. Bold black-and-white with a tail longer than its body. Dome-shaped nests -- massive enclosed structures unique among corvids worldwide. Seven consecutive Corvidae. The septet breaks the record. The open-country corvid at the steppe edge. The beat architecture inhabits. The magpie chatters. Both percussive. Both relentless. The engine at new scale.*
+- `docs/release-notes/v1.49.246/README.md` (this file, rewritten to A-grade per the PROSE rubric)
+- `docs/release-notes/v1.49.246/chapter/00-summary.md` — derived summary
+- `docs/release-notes/v1.49.246/chapter/03-retrospective.md` — retrospective
+- `docs/release-notes/v1.49.246/chapter/04-lessons.md` — extracted lessons (5 entries)
+- `docs/release-notes/v1.49.246/chapter/99-context.md` — context
+- `www/tibsfox/com/Research/S36/research/releases/106-knife-knights/index.html`
+- `www/tibsfox/com/Research/S36/research/releases/106-knife-knights/research.md`
+- `www/tibsfox/com/Research/S36/research/releases/106-knife-knights/knowledge-nodes.json`
+- `www/tibsfox/com/Research/S36/research/releases/106-knife-knights/retrospective.md`
+- `www/tibsfox/com/Research/SPS/research/releases/106-black-billed-magpie/index.html`
+- `www/tibsfox/com/Research/SPS/research/releases/106-black-billed-magpie/research.md`
+- `www/tibsfox/com/Research/SPS/research/releases/106-black-billed-magpie/knowledge-nodes.json`
+- `www/tibsfox/com/Research/SPS/research/releases/106-black-billed-magpie/retrospective.md`
 
-</details>
+Total: 17 files in wave commit `d6c01066a324eb4b19693e67248567febba46837` (release notes for degrees 106, 107, 108 plus research artifacts).
