@@ -2,489 +2,145 @@
 
 **Released:** 2026-04-01
 **Degree:** 66 of 360
-**Part A:** Neko Case -- Alt Country, E=4, Tacoma, Bloodshot Records to Anti- Records, 1997-present, volcanic voice, The New Pornographers, seven studio albums, TACOMA ENTERS (fifth I-5 corridor node), ALT COUNTRY ENTERS (Genre Stage 48, first Alt Country classification), E=4 RETURNS (three-level jump from E=1), 20th non-male artist (~30%), Puyallup territory (fifth Coast Salish territory), the country thunder (67th acoustic element), the wanderer who claims multiple cities (67th artist-city pattern), the howl at the edge (66th blue note), powerful female voice cluster (Wilson 43 / Carlile 52 / Case 66), nature imagery (foxes, birds, tornadoes), KEXP favorite, Grammy nominated
-**Part B:** Fisher (*Pekania pennanti*) -- loud screaming call (rare), E=5, dense forest, Mustelidae, FOURTH CONSECUTIVE MUSTELIDAE (the Mustelidae QUARTET: Otter 63, Mink 64, Marten 65, Fisher 66), FOURTH CARNIVORE, FIRST REINTRODUCED SPECIES (Olympics 2008-2010, Cascades 2015-2020), seventh mammalian entry (fifth mammalian species), sixth consecutive original CSV species, porcupine predator (specialist face-attack technique), first trophic cascade, the scream (67th acoustic element), power without prevalence (E=5 but almost never heard), dense forest habitat (completing water-to-deep-forest gradient), monotypic genus *Pekania* (third reclassification in quartet)
+**Part A:** Neko Case -- Alt Country, E=4, Tacoma, Bloodshot Records to Anti- Records, 1997-present, volcanic voice, The New Pornographers, seven studio albums, TACOMA ENTERS (fifth I-5 corridor node), ALT COUNTRY ENTERS (Genre Stage 48), E=4 RETURNS (three-level jump from E=1), 20th non-male artist (~30%), Puyallup territory, the country thunder, the wanderer who claims multiple cities, the howl at the edge, powerful female voice cluster (Wilson 43 / Carlile 52 / Case 66)
+**Part B:** Fisher (*Pekania pennanti*) -- loud screaming call (rare), E=5, dense forest, Mustelidae, FOURTH CONSECUTIVE MUSTELIDAE (the QUARTET: Otter 63, Mink 64, Marten 65, Fisher 66), FOURTH CARNIVORE, FIRST REINTRODUCED SPECIES (Olympics 2008-2010, Cascades 2015-2020), seventh mammalian entry, sixth consecutive original CSV species, porcupine predator, first trophic cascade, the scream, power without prevalence
 **Series:** Seattle 360 + Sound of Puget Sound -- Continuous Release Engine
 **Cluster:** Music (hub: WAL)
-**Note:** Part A introduces the engine's FIFTH I-5 CORRIDOR NODE (Tacoma enters, joining Portland 57, Bellingham 58, Seattle throughout, Everett 63), the FIRST ALT COUNTRY CLASSIFICATION (Genre Stage 48, connecting to the alt-country lineage that entered at degree 64 via Wandscher/Whiskeytown), E=4 RETURNS with a dramatic three-level energy jump from E=1 at degree 65 (distribution 3:21:15:17:10:2), the TWENTIETH NON-MALE ARTIST (gender ratio 20:47 ~29.9%, approaching the 30% threshold), BLOODSHOT RECORDS to ANTI- RECORDS (indie label progression, both independent, different aesthetics, contrasting with Death Cab's indie-to-major path), THE NEW PORNOGRAPHERS connection (Canadian indie pop supergroup, bridge between PNW and Canadian indie ecosystems), SEVEN STUDIO ALBUMS from The Virginian 1997 through Hell-On 2018, NATURE IMAGERY as structural emotional vocabulary (foxes, birds, tornadoes, storms), the COUNTRY THUNDER as the 67th acoustic element (volcanic voice grounded in country tradition, conviction power at E=4), the WANDERER WHO CLAIMS MULTIPLE CITIES as the 67th artist-city pattern (Tacoma, Vancouver, Seattle, Vermont, Arizona, everywhere), the HOWL AT THE EDGE as the 66th blue note (voice pushing past controlled expression), and the POWERFUL FEMALE VOICE CLUSTER (Wilson 43 E=5 arena, Carlile 52 E=4 communal, Case 66 E=4 solitary). Part B completes the MUSTELIDAE QUARTET (63-64-65-66 = Otter, Mink, Marten, Fisher -- FOUR CONSECUTIVE Mustelidae, the engine's deepest family exploration, habitat gradient from river to dense forest, the quartet that must end here), introduces the FIRST REINTRODUCED SPECIES (Fisher completely extirpated from Washington, returned from British Columbia via managed translocation, Olympics 2008-2010, Cascades 2015-2020), introduces the PORCUPINE PREDATOR (specialized face-attack technique over 25-30 minutes, quill-tolerant, possibly culturally transmitted, the engine's first specialist predation), documents the engine's first TROPHIC CASCADE (Fisher -> porcupine -> tree damage), assigns E=5 with the paradox of POWER WITHOUT PREVALENCE (the loudest mammalian vocalization in the engine but almost never heard -- new acoustic category), completes the quartet's WATER-TO-DEEP-FOREST habitat gradient, and extends the SIXTH CONSECUTIVE ORIGINAL CSV SPECIES streak (degrees 61-66).
+**Branch:** main
+**Commit:** `20ca70e594200182d9dda316e68ea516566081fb`
+**Files changed:** 9
+**Dedication:** To the volcanic women whose voices break free of the rooms that contain them -- Neko Case singing the *Curse of the I-5 Corridor* from a Tacoma childhood through Vancouver punk drumming through Seattle art school through Vermont and Arizona and everywhere, the contralto rising from controlled phrasing into something larger than the song -- and to the *Pekania pennanti* released from British Columbia carriers into Olympic National Park (2008-2010, 90 animals) and Gifford Pinchot (2015-2020, 80 animals), the spectral mustelid screaming once a season into dense forest no one walks through, the quill-tolerant porcupine predator returned from extirpation to the same Cascades that almost erased it.
+**Engine Position:** Degree 66 of 360 -- 18.3% of the circle; the country thunder (67th acoustic element, artist-side); the scream (67th acoustic element, species-side); The Wanderer Who Claims Multiple Cities (67th artist-city pattern); the howl at the edge (66th blue note); FIFTH I-5 CORRIDOR NODE (Tacoma joins Portland 57, Bellingham 58, Seattle throughout, Everett 63 -- 275-mile chain complete); FIRST ALT COUNTRY at Genre Stage 48; E=4 RETURNS as 17th deployment after a three-level jump from E=1 (distribution 3:21:15:17:10:2); 20th non-male artist (gender ratio 20:47 ~29.9%); FIFTH COAST SALISH TERRITORY (Puyallup); MUSTELIDAE QUARTET COMPLETE (63-64-65-66, four consecutive Mustelidae, deepest family exploration in engine, doubles previous same-family record); FIRST REINTRODUCED SPECIES (Fisher extirpated from Washington, returned from British Columbia); FIRST SPECIALIST PREDATION (porcupine face-attack technique, 25-30 minutes, possibly culturally transmitted); FIRST TROPHIC CASCADE (Fisher to porcupine to tree damage); WATER-TO-DEEP-FOREST GRADIENT COMPLETE; SEVENTH MAMMALIAN ENTRY (fifth mammalian species, 10.4% representation); SIXTH CONSECUTIVE ORIGINAL CSV SPECIES (61-66); RECLASSIFIED GENUS (*Martes* to *Pekania*, third reclassification in quartet, monotypic, Abenaki *pekan*); FOURTH CARNIVORE (all Mustelidae); fur trade thread reaches culmination via extirpation history.
 
 ## Summary
 
-The country thunder and the scream. Degree 66 is the engine's study of fierce vocalizations -- the volcanic voice that shatters genre constraints and the terrifying scream from deep forest that almost no one hears. On the music side, **Neko Case** brings **Tacoma** into the engine as the **fifth I-5 corridor node** -- Portland (57), Bellingham (58), Seattle (throughout), Everett (63), and now Tacoma. 275 miles of music cities. **The country thunder** is the sixty-seventh acoustic element -- a voice that carries country music's emotional tradition but delivers it with volcanic power that exceeds the genre's usual parameters. **Alt Country** enters at **Genre Stage 48** -- first Alt Country classification, connecting to the alt-country lineage that entered at degree 64 via Wandscher/Whiskeytown. **E=4 returns** after E=1 at degree 65 -- a dramatic three-level energy jump. Distribution: E1:3, E2:21, E3:15, E4:17, E5:10, E6:2. **Bloodshot Records to Anti- Records** -- indie label progression. Both independent. Case stayed independent where Death Cab chose the major label path. **The New Pornographers** connection bridges PNW and Canadian indie ecosystems. **Seven studio albums**: *The Virginian* (1997) through *Hell-On* (2018), including *Middle Cyclone* (2009, #3 Billboard 200). **Twentieth non-male artist** -- ratio 20:47 (~29.9%), 30% threshold imminent. **Puyallup territorial acknowledgment** -- fifth Coast Salish territory. **The wanderer who claims multiple cities** (67th artist-city pattern) -- Tacoma, Vancouver, Seattle, Vermont, Arizona, everywhere. **The howl at the edge** (66th blue note) -- the voice pushing past controlled expression. **Powerful female voice cluster**: Wilson (43, E=5, arena), Carlile (52, E=4, communal), Case (66, E=4, solitary). **Nature imagery** as structural vocabulary: foxes, birds, tornadoes. **"Curse of the I-5 Corridor"** -- Case's own song title references the engine's geographic spine.
+The country thunder and the scream. Degree 66 is the engine's study of fierce vocalizations -- the volcanic voice that shatters genre constraints and the terrifying scream from deep forest that almost no one ever hears -- and degree 66 is also the engine's first paired study of power that operates without prevalence, the structural insight that volume and frequency are independent axes. **Both sides** of degree 66 carry **the same** organizing principle: maximum intensity deployed at minimum frequency, the loudest possible sound made rarely, the most committed delivery reserved for moments that demand it rather than spread thin across moments that don't. **In parallel**, **at the same time**, **synchronized** at the eighteenth percentile of the circle, **Neko Case** and the **Fisher** (*Pekania pennanti*) **mirror** each other across **both sides** of the degree boundary -- two beings whose presence is announced by sound and whose absence is the dominant mode, two creatures who have reclaimed territory others believed permanently lost, two volcanic instruments whose power is real but whose prevalence is not.
 
-On the species side, the **Fisher** (*Pekania pennanti*) completes the **Mustelidae quartet** (63-66) -- the engine's deepest family exploration. Otter to Mink to Marten to Fisher. River to dense forest. **The scream** is the sixty-seventh species-side acoustic element -- E=5 but almost never heard. **Power without prevalence** -- a new acoustic category. **First reintroduced species** -- extirpated from Washington by trapping and logging, returned from British Columbia (Olympics 2008-2010, Cascades 2015-2020). **Porcupine predator** -- specialized face-attack technique over 25-30 minutes, the engine's first specialist predation. **First trophic cascade** -- Fisher -> porcupine -> tree damage. **Dense forest habitat** completes the quartet's water-to-deep-forest gradient. **Seventh mammalian entry** (fifth species, 10.4%). **Sixth consecutive original CSV species** (61-66). **Reclassified genus** -- *Martes* to *Pekania* (Abenaki *pekan*), monotypic, third reclassification in the quartet.
+**Neko Case** brings **Tacoma** into the engine for the first time as the fifth I-5 corridor node. The corridor now reads from south to north: **Portland** (degree 57, **Laura Gibson** of **Hush Records**), **Tacoma** (66, Case), **Seattle** (throughout, the engine's gravitational center), **Everett** (63, **Kenny Loggins**), and **Bellingham** (58, **Death Cab for Cutie**'s origin). 275 miles of music cities along **Interstate 5**, five distinct cultural identities, and -- because **the same** corridor that carries the music also carries the territorial map -- five sovereign **Coast Salish** territories. The **Puyallup** people's ancestral homeland enters the engine via Case's Tacoma roots, joining **Duwamish** (Seattle, established degree 20), **Multnomah** (Portland, 57), **Lummi/Nooksack** (Bellingham, 58), and **Snohomish** (Everett, 63). The I-5 corridor is not just an interstate; it is a chain of sovereign territories, **and** the music made along that chain is inseparable from the people whose land it sits on. Tacoma takes its name from the Puyallup name for **Mount Rainier** -- **Tacoma** / **Tahoma** -- so the city that produced Case's voice is named for the mountain that frames it, named in turn by the people who watched it longer than the United States has existed. The **fifth I-5 node** is also the **fifth Coast Salish territory**. **Both** maps complete together; **each side** of the degree closes a structural ledger.
 
-Both Case and the Fisher are defined by fierce vocalizations, wild untameable quality, and the reclaiming of abandoned territory. Case's volcanic voice parallels the Fisher's terrifying scream. Both occupy territories others have abandoned. Both are powerful but not ubiquitous. The country thunder and the scream -- both demand the willingness to be present at the moment when power breaks free of containment.
+**The country thunder** is the sixty-seventh acoustic element on the artist side -- a voice that carries country music's emotional tradition but delivers it with volcanic power that exceeds the genre's usual parameters. It is the moment when Case's controlled country phrasing opens up into something larger, wilder, more powerful than the song seems able to contain. Distinct from **the dusk** (64, **Jesse Sykes**) which is the voice at the threshold of audibility -- receding -- the country thunder is the voice at the threshold of power -- advancing. Distinct from **the testimony roar** (52, **Brandi Carlile**) which is the voice raised in witness, the country thunder is the voice raised in feeling. Distinct from **the cathedral harmony** (53, **Fleet Foxes**) which is voices combined into transcendence, the country thunder is a single voice in transcendence. Distinct from **the FM sheen** (63, Loggins) which is the voice polished for broadcast, the country thunder is the voice unpolished for impact. Distinct from **the bare wire** (60, **Ben Gibbard** solo) which is the voice stripped to essentials, the country thunder is the voice at maximum capacity. The country thunder operates at **E=4** -- not the arena spectacle of **E=5** or **E=6**, but conviction power. The country thunder does not need a stadium. It needs a song and a listener and the willingness to be devastated.
+
+**Alt Country** enters at **Genre Stage 48** -- the first Alt Country classification in the engine. The genre has been circling the engine's periphery for two degrees: Jesse Sykes' **prairie noir** at degree 64 brought the alt-country lineage into the engine via **Phil Wandscher**, the guitarist who co-founded **Whiskeytown** with **Ryan Adams** in **Raleigh, North Carolina** in 1994, before walking away from that band in favor of moving to Seattle and producing music with Sykes for nearly two decades. Sykes' classification was Folk because the country element was subordinate; Case's classification is Alt Country because the country element is primary. **The same** alt-country tradition that quietly entered at degree 64 now arrives explicitly at degree 66 -- **synchronized** to the engine's pattern of letting traditions percolate through several degrees before acquiring their own genre name. The genre's foundational acts are **Uncle Tupelo**, **Wilco**, **Son Volt**, **Whiskeytown**, **Lucinda Williams**, and **Gillian Welch**. Case is alt-country in the broadest sense -- her music draws on country, folk, rockabilly, torch song, and indie rock, but the country element is the root system. The twang is real. The pedal steel is present. The emotional directness is country's emotional directness, with no ironic distance, no postmodern quotation marks, just the song and the voice and the feeling. But the independence is total. Case has never recorded for a Nashville label. The "alt" in alt-country means she chose the music without choosing the industry. **Bloodshot Records** of Chicago (1997-2002) gave way to **Anti- Records** of Los Angeles (2006-present, an Epitaph Records subsidiary whose roster includes **Tom Waits**, **Wilco**, **Mavis Staples**, and **Solomon Burke**). The label progression is indie-to-indie -- distinct from Death Cab's Barsuk-to-**Atlantic** (indie-to-major) path documented at degree 58. **Both** are valid responses to the same question; the engine documents **both**.
+
+**E=4 returns** as the 17th deployment, leaping three energy levels from **E=1** at degree 65 (**Philip Aaberg**'s piano whisper). The energy distribution after degree 66: **E1:3 (4.5%)**, **E2:21 (31.3%)**, **E3:15 (22.4%)**, **E4:17 (25.4%)**, **E5:10 (14.9%)**, **E6:1 (1.5%)**. E=4 closes the gap with E=2's lead, rising to seventeen deployments. The E=1-to-E=4 jump between degrees 65 and 66 is one of the largest single-degree energy transitions in engine history, and the contrast is instructive rather than disruptive: the engine does not smooth transitions; it juxtaposes them. The whisper, then the howl. The stillness, then the storm. The valley-to-peak shape at degrees 65-66 -- **E=1** (**Aaberg**) into **E=4** (Case) -- is the steepest Pacific Northwest energy contour the engine has produced, and it documents a structural decision: when CSV ordering generates a contrast, the engine takes it. The energy trajectory across ten degrees: E=2 (57, **Gibson**), E=4 (58, Death Cab), E=4 (59, **The Long Winters**), E=2 (60, **Gibbard** solo), E=3 (61, **Y La Bamba**), E=4 (62, **Pickwick**), E=3 (63, Loggins), E=2 (64, Sykes), E=1 (65, Aaberg), **E=4 (66, Case)**. The quiet majority (E1+E2+E3) reaches 39 of 67 (58.2%); the loud half is closing the gap one volcanic degree at a time.
+
+**The twentieth non-male artist** enters at degree 66. Gender ratio: **20:47 (non-male to male), approximately 29.9%**. The 30% threshold is imminent. Case's fierce independence carries gendered significance -- she has spoken publicly about the challenges of being a woman in the music industry, the assumptions, the diminishment, the constant pressure to be accommodating. Her response has been volcanic: a refusal to compromise, a refusal to play the game, a refusal to be anything other than exactly what she is. **In parallel**, the **powerful female voice cluster** crystallizes at degree 66 with three deployments: **Ann Wilson** (43, **E=5**, arena scale, **Heart**), **Brandi Carlile** (52, E=4, communal scale, folk-rock), and **Neko Case** (66, E=4, solitary scale, alt country). Three voices, three genres, three energy levels, three deployments. Wilson sings to stadiums; Carlile lifts rooms up; Case takes rooms apart. **The same** instrument -- the powerful female voice -- deployed at three different scales produces three different aesthetic projects. The cluster is the engine's most productive vocal-comparison framework, and it crystallizes only at the moment when the engine has accumulated enough deployments to triangulate the category.
+
+**The wanderer who claims multiple cities** is the sixty-seventh artist-city pattern. Case grew up in **Tacoma**. She played drums in **Vancouver, British Columbia**, in two bands -- **Maow** (an all-female garage rock/pop-punk band) and **Cub** (a twee pop band) -- before her solo career. She attended the **Art Institute of Seattle**. She has lived in **Vermont**, in **Arizona**, in **Chicago**. Her music is not rooted in a single landscape; it is rooted in motion, in displacement, in the accumulation of places. Distinct from **the Export** (degrees 0, 36, 63) -- the Export leaves one city; the wanderer has no single city to leave. Distinct from **the corridor bridge** (61, **Y La Bamba**) -- the corridor bridge connects two cities; the wanderer accumulates them. Distinct from **the dark-folk loner** (64, Sykes) -- the dark-folk loner lives in one city and dreams of another landscape; the wanderer has actually lived in those other landscapes. Distinct from **the Montana connection** (65, Aaberg) -- the Montana connection enters the gravitational field from outside; the wanderer departs and returns and departs again. The wanderer does not leave and does not connect -- she accumulates. The music is the home that geography cannot provide. **The howl at the edge** is the sixty-sixth blue note -- the blue note that sounds when a voice pushes past the boundary of controlled expression into something raw, uncontrolled, and emotionally overwhelming. Not screams -- howls. A scream is aggression directed outward. A howl is emotion released upward. **In parallel** with the species side, where the Fisher's actual scream is the sixty-seventh acoustic element, the howl at the edge is the artist-side approach to **the same** boundary phenomenon. **Both sides** of degree 66 study what happens when a voice pushes past containment.
+
+Meanwhile, in the dense closed-canopy forests of the **Olympic Peninsula** and the **Cascade Range** of western Washington, a large mustelid roughly twice the mass of an **American Marten** moves silently through the midstory. 75-120 cm total length. Males 3.5-6 kg; females 2-2.5 kg, sexual dimorphism extreme. Dark brown to nearly black fur with a grizzled gold-to-silver "frosted" sheen on head and shoulders. Large furred feet that act as partial snowshoes in winter. Broad shoulders, thick neck, muscular forequarters built for power and leverage -- the leverage needed to flip and kill a porcupine. The animal has been hunting the forest floor for two hours and has located the scent of a **North American porcupine** (***Erethizon dorsatum***). What follows is the engine's first specialist predation: the Fisher attacks the porcupine's face -- the only unquilled surface -- circles, darts in to bite repeatedly, retreats when the porcupine turns. Over 25-30 minutes, inflicts enough facial wounds to exhaust and kill the prey. Then flips the porcupine to expose the unprotected belly. Quill-tolerant -- embedded quills encyst in tissue rather than causing systemic infection. The behavior appears learned, possibly culturally transmitted from mother to kits. ***Pekania pennanti***. The Abenaki *pekan*, named in honor of **Thomas Pennant** the Welsh naturalist (1726-1798). The fourth consecutive Mustelid in the engine, the seventh mammalian entry, the fifth mammalian species, the fourth Carnivora -- and the first species to have been completely extirpated from Washington and then deliberately returned.
+
+**The Mustelidae quartet** completes at degree 66. This has never happened before in the engine. Four consecutive entries from the same family. Not a pair (**Anatidae** 58-59 with **Wood Duck** and **Mallard**; **Castoridae** 61-62 with **Beaver** tail slap and Beaver chewing). Not a trio. A quartet -- four Mustelidae in four consecutive degrees, each occupying a different ecological niche. **River Otter** at 63 (river/estuary, 5-14 kg, social chuff repertoire of six types, family hunter, **E=4**). **Mink** at 64 (creek bank, 0.5-1.5 kg, shrill chitter alarm, strictly solitary, E=4). **American Marten** at 65 (old-growth canopy, 0.5-1.2 kg, chuckle-chatter, solitary arboreal, E=4). **Fisher** at 66 (dense forest floor and midstory, 2-6 kg, loud screaming call almost never heard, solitary terrestrial/arboreal, **E=5**). The quartet traces a gradient from the center of the waterway through the margin through the canopy to the deep forest floor. **Each** transition shifts habitat: river center to creek margin (water narrows), creek bank to old-growth canopy (water disappears, the aquatic streak breaks), old-growth canopy to dense forest (canopy lowers, scale increases). The Fisher is the quartet's culmination -- the largest of the three forest mustelids, operating primarily on the ground and in the midstory, its vocalization the loudest and rarest of any in the quartet. If the Otter opened the sequence with social exuberance, the Fisher closes it with solitary, almost spectral presence in the deep forest. The quartet doubles the previous same-family record (the Anatidae and Castoridae pairs); a fifth would be redundant; **the quartet must end here**. **Both sides** of the engine reach a saturation point at degree 66: the artist side has been in or near the **folk zone** since degree 45 (twenty-two degrees), and the species side has been in or near the **Mustelidae** since degree 63 (four degrees). **Each side** is ready for a structural pivot.
+
+**The scream** is the sixty-seventh acoustic element on the species side -- a loud, piercing, almost-human scream that carries through dense forest for hundreds of meters. **E=5** in amplitude. The loudest mammalian vocalization in the engine. Almost never heard in practice -- Fishers are secretive, largely nocturnal, exist at low population densities; a person could spend years in Fisher habitat without hearing the scream. Described by witnesses as "blood-curdling," "almost human," "like a woman screaming in the woods." Triggers primate alarm responses. Most commonly reported during breeding season (March-April), in territorial disputes, mating season encounters, aggressive interactions. The paradox of E=5 and rarity is the engine's first formal documentation of **power without prevalence** -- a new acoustic category. The **Mallard** (E=5) quacks everywhere, all the time. The Fisher (E=5) screams almost never, in the deepest forest. **Mirror** opposites at the same energy level. **The same** loudness; **paired** but inverted prevalence. The scream is the quartet's final acoustic contribution: the **Otter**'s **chuff** (social play, 500-3,000 Hz, frequent, family-hunter context), the **Mink**'s **chitter** (solitary alarm, 2,000-6,000 Hz, almost daily during territorial disputes), the **Marten**'s **chuckle-chatter** (arboreal contact, varied registers, episodic), and the Fisher's scream (deep-forest territorial, the rarest of the four). A progression from social to spectral, from frequent to almost-never-heard. **In parallel**, the artist-side acoustic progression from degree 63 to degree 66 traces the same arc: **the FM sheen** (Loggins, broadcast for millions), **the dusk** (Sykes, intimacy in a dark room), **the open plain** (Aaberg, near-silence at the edge of audibility), **the country thunder** (Case, conviction power that demands the room come to it). **Both sides** move toward acoustic experiences that require the listener to be in the right place at the right time.
+
+The Fisher is the engine's **first reintroduced species**. Completely extirpated from Washington State by the combination of trapping (the fur trade) and logging (habitat loss). By the mid-20th century, Fishers were functionally extinct in Washington. The reintroduction proceeded in three phases. **Olympic Peninsula** (2008-2010): 90 Fishers released in **Olympic National Park**, sourced from **British Columbia**, with reproduction confirmed and range expanding. **South Cascades** (2015-2020): approximately 80 Fishers released in **Gifford Pinchot National Forest**, sourced from British Columbia, with reproduction confirmed. **North Cascades** (2018-2020): additional releases to connect the South Cascades population with British Columbia source populations, achieving genetic connectivity across the historical range. The fur trade thread reaches its most extreme expression at degree 66. **Beaver** (61-62) was trapped commercially and the engine documented the commercial scale; **Mink** (64) was farmed industrially, with feral escapees devastating water voles in **Europe** and the critically endangered **European Mink**; **Fisher** (66) was trapped to local extinction and only returned through deliberate international cooperation between Canadian and American conservation agencies. Three Mustelidae, three levels of human exploitation, three different conservation outcomes. **Each side** of the engine now carries a story of return: Case has reclaimed alt-country space the mainstream music industry largely abandoned, and the Fisher has reclaimed forests from which it was extirpated. **In parallel**, **at the same time**, **synchronized** at the threshold where industries that erased a being step back and the being -- or its descendant -- returns.
+
+**The first trophic cascade** documented in the engine: Fisher → porcupine → tree damage. Where Fishers are present, porcupine populations decline and tree girdling decreases. The Fisher-porcupine relationship is not just predator-prey; it is a structural ecological relationship that propagates through the food web. The reintroduction is therefore not just a species restoration but an ecological function restoration -- the forest changes when the Fisher returns, even though most observers will never see one. **Power without prevalence** at the trophic level: the Fisher's effect on forest structure is large but its individual presence is rare. **Mirror** to Case's effect on alt-country: the artist's influence on the genre and its institutional shape is large, but her actual touring presence is intermittent. **Both** wield power that propagates beyond their direct presence. The Mink-Fisher predation contrast is the engine's clearest within-family innovation pair: the Mink (64) kills indiscriminately in prey-dense environments (surplus killing), while the Fisher kills with precision against a heavily defended target (specialist predation). Opposite predatory innovations from **the same** family, **synchronized** at consecutive degrees, one producing volume of kills and the other producing precision of technique.
+
+**Dense forest habitat** is the Fisher's designation -- closed-canopy forest with structural complexity, canopy closure greater than 60%, large trees for denning (greater than 50 cm DBH), downed logs, root wads, structural complexity on the forest floor. NOT old-growth specifically. The American Marten needs *ancient* forest; the Fisher needs *dense* forest. The broader habitat tolerance may explain the early success of Fisher reintroduction programs. The water-to-deep-forest gradient now reads: **63** River Otter (river/estuary, fully aquatic, no canopy association); **64** Mink (creek bank, semi-aquatic, riparian); **65** American Marten (old-growth canopy, no water, high canopy); **66** Fisher (dense forest, no water, closed canopy, ground to midstory). **Each** position teaches a different relationship with water and canopy. The quartet's habitat diversity is its analytical justification -- four species, four habitats, four genuinely different ecological positions. After degree 66, mammalian representation reaches 5 species in 67 entries (7.5% by species, 7 entries totaling 10.4% by entry count -- Beaver counts twice for tail-slap and gnaw). Two orders (**Rodentia**, **Carnivora**) and two families (**Castoridae**, **Mustelidae**). The mammalian era runs entirely on original CSV entries: degrees 61-66 are the sixth consecutive original CSV species. No substitutions needed. The CSV's mammalian entries are robust and uncontested.
+
+The taxonomic state at degree 66 records the third reclassification within the Mustelidae quartet. **Pekania** ("new weasel" via the Abenaki *pekan*, an Algonquian word for the Fisher) was erected when molecular phylogenetic studies demonstrated that the Fisher is NOT a member of *Martes* (the true martens). The Fisher diverged from the marten lineage approximately 8-12 million years ago. *Pekania* is monotypic -- the Fisher is the sole living member. The species epithet *pennanti* honors **Thomas Pennant**, the Welsh naturalist. Three of four quartet members reclassified: **River Otter** from *Lutra* to *Lontra* (1999), **Mink** from *Mustela* to *Neogale* (early 2000s), **Fisher** from *Martes* to *Pekania* (around 2008). Only the American Marten retains its original genus. The molecular revolution rewrote 75% of the quartet's taxonomy, and **the same** revolution links three of the quartet members to a single decade of molecular systematics work. The common name "Fisher" is itself a misnomer -- Fishers do NOT fish; the name possibly derives from the French *fiche* (polecat pelt) or *fisse* (European polecat), making the Fisher the engine's most misleadingly named species. **Both** taxonomic revision and naming history record a being whose identity has been contested and revised by every era of natural history that has tried to classify it.
+
+**Both** Case and the Fisher are defined by fierce vocalizations, wild untameable quality, and the reclaiming of abandoned territory. The engine's clearest **mirror** at degree 66 is the five-axis resonance: **fierce vocalizations** (Case's volcanic voice that fills a room without amplification, the Fisher's blood-curdling scream that carries hundreds of meters through dense forest); **wild untameable quality** (Case resists categorization throughout her career, the Fisher exists only in deep forest and cannot be domesticated, **both** vanish when their preferred conditions are thinned); **reclaiming abandoned territory** (Case carved space in alt-country the mainstream had largely abandoned, the Fisher was reintroduced to forests from which it was extirpated, **both** are stories of return); **powerful but not ubiquitous** (Case tours on her own terms appearing when she chooses, the Fisher screams when it chooses, **both** demonstrate that power and frequency are independent axes); and **geographic resonance** (Case's roots in Tacoma place her at the edge of the dense forests of the South Puget Sound lowlands, **the same** region where Fisher reintroduction in the **South Cascades** restores the species to forests within driving distance of Tacoma). **Both** are powerful but not ubiquitous. **In parallel**, **synchronized** at the threshold where the willingness to be devastated meets the willingness to be terrified. The bonus axis is the energy near-match: Case **E=4**, Fisher **E=5**. **Both** high-energy. **Both** punch hard. The Fisher's E=5 is technically higher, but Case's volcanic delivery makes E=4 feel like it should be E=5. The energy levels nearly match because **both** deliver with maximum intensity.
+
+The structural pressure at degree 66 sets two absolute requirements for degree 67. On the species side, **four consecutive Mustelidae** is at the saturation point -- the quartet works because **each** member is genuinely different, but a fifth would be redundant. ABSOLUTE REQUIREMENT: degree 67 must NOT be Mustelidae. Six consecutive mammalian degrees (61-66) and seven mammalian entries are productive but creating imbalance; a return to **Aves** would restore taxonomic diversity. The Passeriformes percentage drops to 73.1% (49 of 67) after eleven consecutive non-passerines (56-66) -- the longest non-passerine streak in engine history. Return to Passeriformes is structurally overdue. The marine gap remains unchanged after 67 entries -- still no saltwater-obligate species in "The Sound of Puget Sound." Dense forest at 66 is as far from marine as possible. No raptor in 67 entries -- zero raptors, the engine's longest-standing unfilled gap. **Bald Eagle** remains the optimal candidate for multi-gap closure (raptor + marine + Accipitriformes). On the artist side, the powerful female voice cluster (Wilson 43, Carlile 52, Case 66) is now the engine's most productive vocal-comparison framework, and future powerful-voice deployments should be evaluated against the cluster. The Bloodshot-to-Anti- label progression provides a template for understanding indie-to-indie pathways, contrasting with the Barsuk-to-Atlantic indie-to-major path documented at degree 58. **Both** templates are valid; the engine documents **both**.
+
+Approximately 18,000 words of deep research across both halves -- 9,500 for **Neko Case** and 8,500 for the **Fisher**. The country thunder meets the scream. A singer-songwriter who grew up in Tacoma, played drums in Vancouver punk bands, attended art school in Seattle, sang for **The New Pornographers** in **A.C. Newman**'s and **Dan Bejar**'s Vancouver pop supergroup, recorded *The Virginian* (1997) for **Bloodshot Records**, *Furnace Room Lullaby* (2000) with the explicit Tacoma reference of "South Tacoma Way," *Blacklisted* (2002) including "Deep Red Bells" inspired by the **Green River Killer**, *Fox Confessor Brings the Flood* (2006) on **Anti- Records** with foxes and birds and storms as structural emotional vocabulary, *Middle Cyclone* (2009) reaching #3 on the **Billboard 200** with "This Tornado Loves You," *The Worse Things Get, the Harder I Fight, the Harder I Fight, the More I Love You* (2013), and *Hell-On* (2018) including "Curse of the I-5 Corridor" -- the song whose title names the engine's geographic spine in Case's own words -- lets her contralto rise from controlled phrasing into something larger than the room. And a 2-to-6 kilogram quill-tolerant Mustelid in the dense closed-canopy forests of the Olympics and the Cascades, returned from extirpation through international cooperation between **British Columbia** carriers and Washington's **Department of Fish and Wildlife** with help from **Olympic National Park** and **Gifford Pinchot National Forest**, screams once a season in territorial disputes through forests no one walks through, kills porcupines through a 25-30-minute face-attack technique that may have been culturally transmitted from mother to kits, and propagates a trophic cascade that changes tree girdling rates without any individual observer ever seeing the predator at work. **Both** subjects answer the question of what power means by demonstrating that volume and frequency are independent. **Both** subjects reveal that the most powerful response can be precise, brief, and rare. The engine at degree 66 documents the fifth I-5 corridor node (Tacoma), the first Alt Country classification (Genre Stage 48), the return of E=4 with a three-level energy jump, the twentieth non-male artist, the powerful female voice cluster (Wilson 43 / Carlile 52 / Case 66), the Bloodshot-to-Anti- indie label progression, the New Pornographers / Canadian indie pop bridge, the Mustelidae quartet (63-66), the first reintroduced species, the first specialist predation (porcupine face-attack), the first trophic cascade (Fisher → porcupine → tree damage), the new acoustic category of power without prevalence, the dense forest habitat completing the water-to-deep-forest gradient, and the third reclassification within the quartet (*Martes* to *Pekania* via the Abenaki *pekan*). **Each side** stripped down to maximum intensity. **The same** organizing principle. **Mirrored** across **both sides** of degree 66, **synchronized** at the eighteen-and-one-third mark of the circle's first sixth.
 
 ## Key Features
 
 | Metric | Part A: Neko Case | Part B: Fisher |
 |--------|---------------------|--------------|
-| Genre | Alt Country (Genre Stage 48, FIRST Alt Country, connects to alt-country lineage at degree 64 via Wandscher/Whiskeytown) | -- |
-| Energy | E=4 (17th deployment, three-level jump from E=1 at degree 65, distribution 3:21:15:17:10:2, conviction power at intimate-to-medium scale) | E=5 (loud screaming call, second E=5 species-side entry, RAREST acoustic element, power without prevalence, loudest mammalian vocalization in engine) |
-| Label | Bloodshot Records (1997-2002, Chicago alt-country grit) to Anti- Records (2006-present, Los Angeles curated independence, Epitaph subsidiary, roster: Tom Waits, Wilco, Mavis Staples) | -- |
-| Family | -- | Mustelidae (4th CONSECUTIVE Mustelidae, the QUARTET 63-64-65-66, 4 of 8 PNW species, 50% of PNW mustelid diversity) |
-| Order | -- | Carnivora (4th Carnivora entry, all Mustelidae, carnivore count quadruples across quartet) |
-| Class | -- | Mammalia (7th mammalian entry, 5th mammalian species, 10.4% mammalian representation) |
-| Acoustic Element | the country thunder (67th) | the scream (67th) |
-| Artist-City Pattern | The Wanderer Who Claims Multiple Cities (67th) | -- |
-| Structural Firsts | TACOMA ENTERS (5th I-5 corridor node, Portland-Tacoma-Seattle-Everett-Bellingham, 275-mile corridor, southernmost Puget Sound position), ALT COUNTRY ENTERS at Genre Stage 48 (first Alt Country classification, connects to alt-country lineage 64 via Wandscher/Whiskeytown, country element primary not subordinate), E=4 RETURNS (17th deployment, dramatic three-level jump from E=1, distribution 3:21:15:17:10:2, E=4 closing gap with E=2), 20th NON-MALE ARTIST (gender ratio 20:47 ~29.9%, 30% threshold imminent, breaks the approaching-30% boundary), PUYALLUP TERRITORY (5th Coast Salish territory, I-5 as chain of sovereign territories, Tacoma from Puyallup name for Rainier), THE COUNTRY THUNDER (67th acoustic element, volcanic voice grounded in country tradition, conviction power at E=4, voice opens from controlled phrasing into something wild, the opposite of politeness), THE WANDERER WHO CLAIMS MULTIPLE CITIES (67th artist-city pattern, Tacoma-Vancouver-Seattle-Vermont-Arizona-everywhere, accumulates cities rather than departing one, distinct from Export and corridor bridge), THE HOWL AT THE EDGE (66th blue note, voice pushing past controlled expression, not scream but howl, emotion released upward, structure overwhelmed by feeling), POWERFUL FEMALE VOICE CLUSTER (Wilson 43 E=5 arena, Carlile 52 E=4 communal, Case 66 E=4 solitary, three genres three deployments), NATURE IMAGERY enters as structural vocabulary (foxes birds tornadoes storms as emotional subjects not decoration, Fox Confessor, This Tornado Loves You, Middle Cyclone), BLOODSHOT TO ANTI- (indie label progression, indie to indie, contrasts with Death Cab indie-to-major, Anti- roster alongside Tom Waits Wilco Mavis Staples), THE NEW PORNOGRAPHERS (Canadian indie pop supergroup, bridge PNW to Canadian indie, dual identity dark solo / bright pop, A.C. Newman Dan Bejar), SEVEN-ALBUM CATALOG ARC (The Virginian 1997 through Hell-On 2018, rising trajectory, third catalog shape alongside deep well and broad river), "CURSE OF THE I-5 CORRIDOR" (Case's own song title references engine's geographic spine), KEXP FAVORITE (alt-country on an indie rock station, curatorial breadth), GRAMMY NOMINATED | MUSTELIDAE QUARTET COMPLETE (63-64-65-66 Otter-Mink-Marten-Fisher, FOUR CONSECUTIVE Mustelidae, deepest family exploration in engine, doubles previous same-family record, habitat gradient river to dense forest, size progression large-small-small-large, social-solitary-arboreal-terrestrial), THE SCREAM 67th acoustic element (loud piercing almost-human scream, E=5, carries hundreds of meters through dense forest, rarest acoustic element by wide margin, POWER WITHOUT PREVALENCE new acoustic category maximum energy minimum frequency), FIRST REINTRODUCED SPECIES (completely extirpated from Washington by trapping + logging, returned from British Columbia, Olympics 2008-2010 90 animals, Cascades 2015-2020 ~80 animals, North Cascades 2018-2020, reproduction confirmed, international cooperation), PORCUPINE PREDATOR (specialized face-attack technique 25-30 minutes, circles porcupine bites unquilled face, flips to expose belly, quill-tolerant quills encyst, possibly culturally transmitted mother to kits, first specialist predation technique contrasts with Mink surplus killing), FIRST TROPHIC CASCADE (Fisher->porcupine->tree damage, where Fishers present porcupine damage decreases, ecological justification for reintroduction), DENSE FOREST HABITAT (closed-canopy >60% cover, large trees for denning >50cm DBH, structural complexity, NOT old-growth specifically, Marten needs ancient forest Fisher needs dense forest, broader tolerance), WATER-TO-DEEP-FOREST GRADIENT COMPLETE (river 63 -> creek bank 64 -> old-growth canopy 65 -> dense forest 66, quartet traces departure from water into forest interior), SEVENTH MAMMALIAN ENTRY fifth mammalian species (10.4% representation, mammalian era six degrees deep 61-66), SIXTH CONSECUTIVE ORIGINAL CSV SPECIES (61-66, longest streak, entire mammalian era original), RECLASSIFIED GENUS Martes to Pekania (third reclassification in quartet, Pekania from Abenaki pekan, monotypic genus, 3 of 4 quartet members reclassified), FUR TRADE THREAD (Beaver 61-62 + Mink 64 + Fisher 66, Fisher most extreme: extirpation, fur trade reaches its culmination), FOURTH CARNIVORE (all Mustelidae, no non-mustelid carnivore yet) |
-| Research Words | ~9,500 | ~8,500 |
+| Genre / Family | Alt Country (Genre Stage 48, FIRST Alt Country, connects to alt-country lineage at degree 64 via Wandscher/Whiskeytown, country element primary not subordinate) | Mustelidae (4th CONSECUTIVE Mustelidae, the QUARTET 63-64-65-66, 4 of 8 PNW species, 50% of PNW mustelid diversity, deepest family exploration in engine) |
+| Energy | E=4 (17th deployment, three-level jump from E=1 at degree 65, distribution 3:21:15:17:10:2, conviction power, intimate-to-medium scale) | E=5 (loud screaming call, second E=5 species-side entry, RAREST acoustic element, power without prevalence, loudest mammalian vocalization in engine) |
+| Label / Order | Bloodshot Records (1997-2002, Chicago alt-country grit) to Anti- Records (2006-present, Los Angeles, Epitaph subsidiary, roster: Tom Waits, Wilco, Mavis Staples, Solomon Burke) | Carnivora (4th Carnivora entry, all Mustelidae, carnivore count quadruples across quartet) |
+| Class | Mammalia not applicable (artist) | Mammalia (7th mammalian entry, 5th mammalian species, 10.4% representation by entry count, 7.5% by species count) |
+| Acoustic Element | the country thunder (67th -- volcanic voice grounded in country tradition, conviction power at E=4, voice opens from controlled phrasing into something wild, the opposite of politeness) | the scream (67th -- loud piercing almost-human scream, E=5, carries hundreds of meters through dense forest, rarest acoustic element by wide margin, power without prevalence new acoustic category) |
+| Pattern / Adaptation | The Wanderer Who Claims Multiple Cities (67th artist-city pattern -- accumulates cities rather than departing one, Tacoma-Vancouver-Seattle-Vermont-Arizona-everywhere, distinct from Export and corridor bridge) | First specialist predation (porcupine face-attack technique 25-30 minutes, circles porcupine bites unquilled face, flips to expose belly, quill-tolerant, possibly culturally transmitted mother to kits) |
+| Structural Firsts | TACOMA ENTERS (5th I-5 corridor node, Portland-Tacoma-Seattle-Everett-Bellingham, 275-mile corridor, southernmost Puget Sound position), ALT COUNTRY ENTERS at Genre Stage 48 (first Alt Country classification, connects to alt-country lineage 64 via Wandscher/Whiskeytown), E=4 RETURNS (17th deployment, three-level jump from E=1, distribution 3:21:15:17:10:2), 20th NON-MALE ARTIST (gender ratio 20:47 ~29.9%, 30% threshold imminent), PUYALLUP TERRITORY (5th Coast Salish territory, I-5 as chain of sovereign territories, Tacoma from Puyallup name for Rainier), THE COUNTRY THUNDER (67th acoustic element), THE WANDERER WHO CLAIMS MULTIPLE CITIES (67th artist-city pattern), THE HOWL AT THE EDGE (66th blue note, voice past controlled expression, emotion released upward), POWERFUL FEMALE VOICE CLUSTER (Wilson 43 E=5 arena, Carlile 52 E=4 communal, Case 66 E=4 solitary), NATURE IMAGERY enters as structural vocabulary (foxes birds tornadoes storms as emotional subjects not decoration, Fox Confessor, This Tornado Loves You, Middle Cyclone), BLOODSHOT TO ANTI- (indie label progression, indie-to-indie, contrasts with Death Cab indie-to-major), THE NEW PORNOGRAPHERS (Canadian indie pop supergroup, bridge PNW to Canadian indie, A.C. Newman, Dan Bejar), SEVEN-ALBUM CATALOG ARC (The Virginian 1997 through Hell-On 2018), "CURSE OF THE I-5 CORRIDOR" (Case's own song title references engine's geographic spine), KEXP FAVORITE, GRAMMY NOMINATED | MUSTELIDAE QUARTET COMPLETE (63-64-65-66 Otter-Mink-Marten-Fisher, FOUR CONSECUTIVE Mustelidae, deepest family exploration in engine, doubles previous same-family record), THE SCREAM 67th acoustic element, FIRST REINTRODUCED SPECIES (extirpated from Washington by trapping + logging, returned from British Columbia, Olympics 2008-2010 90 animals, Cascades 2015-2020 ~80 animals, North Cascades 2018-2020), PORCUPINE PREDATOR (specialized face-attack technique 25-30 minutes, quill-tolerant, possibly culturally transmitted, first specialist predation contrasts with Mink surplus killing), FIRST TROPHIC CASCADE (Fisher → porcupine → tree damage, where Fishers present porcupine damage decreases, ecological justification for reintroduction), DENSE FOREST HABITAT (closed-canopy >60% cover, large trees for denning >50cm DBH, NOT old-growth specifically -- Marten needs ancient forest, Fisher needs dense forest, broader tolerance), WATER-TO-DEEP-FOREST GRADIENT COMPLETE (river 63 → creek bank 64 → old-growth canopy 65 → dense forest 66, quartet traces departure from water into forest interior), SEVENTH MAMMALIAN ENTRY fifth mammalian species (10.4% representation), SIXTH CONSECUTIVE ORIGINAL CSV SPECIES (61-66, longest streak), RECLASSIFIED GENUS Martes to Pekania (third reclassification in quartet, Pekania from Abenaki pekan, monotypic genus, 3 of 4 quartet members reclassified), FUR TRADE THREAD (Beaver 61-62 + Mink 64 + Fisher 66, Fisher most extreme: extirpation), POWER WITHOUT PREVALENCE (new acoustic category, maximum energy minimum frequency, Mallard E=5 common vs Fisher E=5 almost never heard), FOURTH CARNIVORE (all Mustelidae, no non-mustelid carnivore yet) |
+| Research Words | ~9,500 (research.md, knowledge-nodes.json, retrospective.md, index.html) | ~8,500 (research.md, knowledge-nodes.json, retrospective.md, index.html) |
 | Files Produced | 4 | 4 |
-| Cross-References | 5 | 5 |
-
-<details>
-<summary>Full Release Notes -- Click to expand</summary>
-
-## Part A: Neko Case -- THE COUNTRY THUNDER (E=4, Alt Country, Bloodshot to Anti- Records, Tacoma, TACOMA ENTERS 5th I-5 Corridor Node Portland Tacoma Seattle Everett Bellingham 275-Mile Corridor, ALT COUNTRY ENTERS Genre Stage 48 First Alt Country Classification Connects to Alt-Country Lineage 64 Wandscher Whiskeytown Country Element Primary, E=4 RETURNS 17th Deployment Three-Level Jump from E=1 Distribution 3:21:15:17:10:2, 20th Non-Male Artist Gender Ratio 20:47 ~29.9% 30% Threshold Imminent, PUYALLUP TERRITORY 5th Coast Salish Territory I-5 as Chain of Sovereign Territories, The Country Thunder 67th Acoustic Element Volcanic Voice Country Tradition Conviction Power, The Wanderer Who Claims Multiple Cities 67th Artist-City Pattern Tacoma Vancouver Seattle Vermont Arizona Everywhere Accumulates Cities, The Howl at the Edge 66th Blue Note Voice Past Controlled Expression Emotion Upward, Powerful Female Voice Cluster Wilson 43 Carlile 52 Case 66, Nature Imagery Foxes Birds Tornadoes Structural Vocabulary, Bloodshot to Anti- Indie Label Progression Indie to Indie, The New Pornographers Canadian Indie Pop Supergroup Bridge PNW to Canadian, Seven Albums The Virginian 1997 Through Hell-On 2018 Rising Arc, Curse of the I-5 Corridor Case's Own Song References Engine's Geographic Spine, KEXP Favorite Grammy Nominated)
-
-Full deep research covering Neko Case as the engine's first Alt Country artist, Tacoma as the fifth I-5 corridor node, and the country thunder as conviction power at E=4:
-
-### STRUCTURAL EVENT: TACOMA ENTERS -- The Fifth I-5 Corridor Node
-
-Degree 66 brings **Tacoma** into the engine for the first time. This is the fifth node on the I-5 corridor -- the interstate spine that runs from Portland through Olympia, Tacoma, Seattle, Everett, and north to Bellingham and the Canadian border. The engine has mapped four of these nodes previously: **Portland** (degree 57, Laura Gibson), **Bellingham** (degree 58, Death Cab for Cutie's origin), **Seattle** (throughout, the engine's geographic center), and **Everett** (degree 63, Kenny Loggins). Tacoma is the fifth.
-
-Tacoma sits 34 miles south of Seattle on Puget Sound. The city has its own music history, its own cultural identity, its own relationship to the broader Pacific Northwest ecosystem. Tacoma is not Seattle -- a fact that Tacomans emphasize with regularity. The city has a grittier, more working-class identity than its northern neighbor. The industrial waterfront, the pulp mills (the famous "Tacoma Aroma"), the military base at Fort Lewis/Joint Base Lewis-McChord -- Tacoma's identity is blue-collar in ways that Seattle's tech-driven economy has long since left behind.
-
-Neko Case's Tacoma connection is formative rather than permanent. She grew up partly in Tacoma, attended school in the area, then moved to Vancouver, British Columbia, where she played drums in punk bands before beginning her solo career. The Tacoma-to-Vancouver-to-everywhere trajectory is the pattern of the wanderer -- an artist who claims multiple cities because no single city fully contains her. But Tacoma is the origin point. The Pacific Northwest working-class city that produced a voice of volcanic power.
-
-The I-5 corridor is now mapped from Portland to Bellingham with five nodes. The geographic spine of the engine is becoming visible: a 275-mile corridor of music cities connected by a single interstate. Each node has a different character. Portland is the indie collective. Bellingham is the college town incubator. Seattle is the gravitational center. Everett is the departure point. Tacoma is the gritty origin.
-
-| City | Degree | Artist | I-5 Position |
-|------|--------|--------|--------------|
-| Portland, OR | 57 | Laura Gibson | Southern anchor |
-| Tacoma, WA | 66 | Neko Case | South Puget Sound |
-| Seattle, WA | multiple | various | Center |
-| Everett, WA | 63 | Kenny Loggins | North Puget Sound |
-| Bellingham, WA | 58 | Death Cab for Cutie | Northern anchor |
-
-### STRUCTURAL EVENT: ALT COUNTRY -- Genre Stage 48
-
-Degree 66 introduces **Alt Country** at **Genre Stage 48**. This is the first Alt Country classification in the engine. The genre has been circling the engine's periphery -- Jesse Sykes' prairie noir at degree 64 brought the alt-country lineage via Phil Wandscher/Whiskeytown, but the genre classification was Folk. Now, at degree 66, Alt Country enters as a named genre for the first time.
-
-Alt Country -- also written as alt-country, alternative country, or sometimes Americana -- is the genre that emerged in the 1990s at the intersection of country music's emotional directness, punk rock's independent spirit, and indie rock's literary ambition. The genre's foundational acts include Uncle Tupelo, Wilco, Son Volt, Whiskeytown, Lucinda Williams, and Gillian Welch. The genre resists Nashville's commercial machinery while embracing the instrumentation and emotional vocabulary of country music.
-
-Neko Case is alt-country in the broadest sense -- her music draws on country, folk, rockabilly, torch song, and indie rock, but the country element is the root system. The twang is real. The pedal steel is present. The emotional directness is country's emotional directness -- no ironic distance, no postmodern quotation marks, just the song and the voice and the feeling. But the independence is total. Case has never recorded for a Nashville label. The "alt" in alt-country means she chose the music without choosing the industry.
-
-The genre progression through this section: Folk (64, Sykes), New Age/Folk (65, Aaberg), **Alt Country (66, Case)**. Alt Country connects to Jesse Sykes' prairie noir (64) through the shared country-folk root system and the Whiskeytown/Ryan Adams lineage that Wandscher brought into the engine. But where Sykes' classification was Folk -- dark folk, prairie noir, but structurally folk -- Case's classification is Alt Country because the country element is not subordinate. It is primary. The twang is not decoration; it is the foundation.
-
-Full genre evolution: Jazz (0-15) to Jazz Fusion (16) to Jazz/Comedy (17) to Soul/Jazz (18-19) to Jazz/R&B (20) to Jazz/Funk (21-22) to Soul/Jazz (23-24) to Neo-Soul (25) to Soul (26) to Soul/R&B (27-28) to Jazz/Funk (29) to R&B/Jazz (30) to R&B/Soul (31) to Pure R&B (32-33) to R&B/Soul (34) to Blues (35) to Blues Rock (36-37) to R&B/Soul (38) to Blues/Soul (39) to Neo-Soul (40) to Soul/Blues (41) to Gospel/R&B (42) to Arena Rock (43) to Electronic/R&B (44) to **Folk zone (45-57)** to **Indie Rock (58-59)** to **Folk (60)** to **Folk/Indie (61)** to **Indie/Folk (62)** to **Soft Rock/Folk (63)** to **Folk (64)** to **New Age/Folk (65)** to **Alt Country (66)**.
-
-### STRUCTURAL EVENT: E=4 RETURNS -- Dramatic Three-Level Energy Jump
-
-Degree 66 assigns **E=4** -- a dramatic energy jump from E=1 at degree 65 (Aaberg). The energy leaps three levels in a single degree. This is one of the largest single-degree energy transitions in the engine's history.
-
-Energy distribution after degree 66: **E1:3, E2:21, E3:15, E4:17, E5:10, E6:2**. E=4 rises to seventeen deployments, closing the gap with E=2's lead (21). The quiet register (E=2) still dominates, but E=4 is the engine's second most common energy level and continues to accumulate.
-
-The E=4 at degree 66 reflects Neko Case's music accurately. This is not quiet music. Case's voice is one of the most powerful instruments in indie music -- a voice that can fill a room without amplification, that can rise from a whisper to a howl within a single phrase, that carries the emotional weight of the song through sheer vocal force. The band behind her matches the vocal power: driving rhythms, muscular guitar, the full-throated country-rock engine. E=4 captures the force -- not the arena spectacle of E=5 or E=6, but the concentrated power of a voice and a band at full commitment.
-
-The E=1 to E=4 jump (degrees 65 to 66) is the engine studying extremes in rapid succession. The near-silence of E=1 followed immediately by the volcanic power of E=4. The contrast is instructive: the engine does not smooth transitions. It juxtaposes. The whisper, then the howl. The stillness, then the storm.
-
-### STRUCTURAL EVENT: TWENTIETH NON-MALE ARTIST -- The 30% Milestone Approaches
-
-Degree 66 introduces the engine's **twentieth non-male artist**. Neko Case is a woman -- a singer-songwriter and vocalist who has maintained fierce independence throughout a career spanning three decades. Gender ratio after degree 66: **20:47 (non-male:male), approximately 29.9%**. The ratio approaches 30% -- a milestone the engine has been circling but not yet reached.
-
-Case's fierce independence carries gendered significance. She has spoken publicly about the challenges of being a woman in the music industry -- the assumptions, the diminishment, the constant pressure to be accommodating. Her response has been volcanic: a refusal to compromise, a refusal to play the game, a refusal to be anything other than exactly what she is. The twentieth non-male artist is not just a number. It is a statement.
-
-### BIOGRAPHY: Neko Case and the Volcanic Voice
-
-**Neko Case** was born in Alexandria, Virginia, on September 8, 1970. Her childhood was itinerant -- she has spoken about a difficult upbringing, moving frequently, instability as a baseline condition. The Pacific Northwest entered her life when her family moved to the Tacoma area. Tacoma became the formative geography.
-
-From Tacoma, Case moved to **Vancouver, British Columbia**, where she immersed herself in the punk scene. She played drums in two bands: **Maow** (an all-female garage rock/pop-punk band) and **Cub** (a twee pop band). The punk background is foundational. Before Case was a singer-songwriter, she was a drummer. The transition from drummer to singer-songwriter is one of the more unusual trajectories in the engine.
-
-Case attended the **Art Institute of Seattle**, connecting her to the city that dominates the engine's geography. The Tacoma-Vancouver-Seattle triangle defines her Pacific Northwest years.
-
-Case's voice is the defining feature of her music -- and one of the most distinctive instruments in contemporary American music. The voice sits at the intersection of several traditions: **country** (emotional directness), **torch song** (drama), **punk** (aggression), and **folk** (storytelling). The result is a voice that defies easy categorization. It is too powerful for folk. It is too literary for country. It is too emotional for punk. It is too raw for pop.
-
-The comparison with Ann Wilson (degree 43): both are powerful female voices. Wilson's power is arena-scale (E=5). Case's power is intimate-scale (E=4) -- the same volcanic instrument deployed at a different scale. The arena voice versus the country thunder.
-
-The comparison with Brandi Carlile (degree 52): both are E=4, powerful-voiced women with country-folk roots. Carlile's power is anthemic -- communal catharsis, the audience sings along. Case's power is solitary -- individual devastation, the listener alone with the voice and the weight of the song. Carlile lifts the room up. Case takes the room apart.
-
-### THE NEW PORNOGRAPHERS: The Canadian Supergroup Connection
-
-Neko Case is a member of **The New Pornographers**, the Canadian indie pop supergroup formed in Vancouver in 1997 by **A.C. Newman**, **Dan Bejar** (Destroyer), and others. The dual identity -- dark solo artist and bright pop band member -- reveals Case's range. She can inhabit the country darkness of *Fox Confessor Brings the Flood* and the pop brightness of *Twin Cinema* in the same year. The volcano can emit fire and light.
-
-The New Pornographers connection links the engine to the **Canadian indie pop** tradition -- a tradition centered in Vancouver and Montreal that runs parallel to the Pacific Northwest indie scene but with a different sensibility. Case is the bridge between these two indie ecosystems -- a Tacoma/Seattle artist who is also a Vancouver/Canadian artist. The wanderer pattern: no single city, no single scene, no single identity.
-
-### BLOODSHOT RECORDS TO ANTI- RECORDS: The Indie Label Progression
-
-**Bloodshot Records**, based in Chicago, was Case's first label home. Bloodshot is an alt-country label -- founded in 1994, specializing in country, roots, and Americana with a punk sensibility. Case's early albums -- *The Virginian* (1997), *Furnace Room Lullaby* (2000), *Blacklisted* (2002) -- appeared on Bloodshot.
-
-**Anti- Records** became Case's label from *Fox Confessor Brings the Flood* (2006) onward. Anti- is a subsidiary of Epitaph Records, with a broader curatorial sensibility than Bloodshot: artists include Tom Waits, Wilco, Merle Haggard, Mavis Staples, and Solomon Burke. The label's range reflects Case's own range.
-
-The Bloodshot-to-Anti- progression contrasts with Death Cab's Barsuk-to-Atlantic path (degree 58). Both reflect an artist outgrowing a first label. Case stayed within the independent ecosystem. Death Cab chose the major label path. Two different responses to the same question.
-
-### DISCOGRAPHY: Seven Albums as an Arc of Power
-
-- **The Virginian** (1997, Bloodshot) -- The debut. Country at its core: pedal steel, twang, honky-tonk. Covers of Loretta Lynn and Ernest Tubb alongside originals.
-- **Furnace Room Lullaby** (2000, Bloodshot) -- Darker, more personal. "South Tacoma Way" -- the Tacoma connection explicit.
-- **Blacklisted** (2002, Bloodshot) -- The turning point. Full power arrives. "Deep Red Bells" -- inspired by the Green River Killer. Dark Americana masterpiece.
-- **Fox Confessor Brings the Flood** (2006, Anti-) -- The breakthrough. Nature imagery explodes: foxes, birds, storms. Grammy nominated.
-- **Middle Cyclone** (2009, Anti-) -- The peak. #3 Billboard 200. "This Tornado Loves You." One of the highest chart positions for an independent release.
-- **The Worse Things Get, the Harder I Fight, the Harder I Fight, the More I Love You** (2013, Anti-) -- The reckoning. Most personal album. The title is a manifesto.
-- **Hell-On** (2018, Anti-) -- The continuation. "Curse of the I-5 Corridor" -- the engine's geographic spine in Case's own words.
-
-### THE COUNTRY THUNDER -- 67th Acoustic Element
-
-The sixty-seventh acoustic element is **the country thunder** -- the acoustic quality of a voice that carries the full emotional weight of country music's tradition but delivers it with a power that exceeds the genre's usual parameters. The country thunder is audible in Neko Case's recordings as a specific vocal phenomenon: the moment when the voice opens up from its controlled country phrasing into something larger, wilder, more powerful than the song seems able to contain.
-
-Distinctions from other vocal elements:
-- **The dusk** (64, Sykes) is the voice at the threshold of audibility -- receding. The country thunder is the voice at the threshold of power -- advancing.
-- **The testimony roar** (54) is the voice raised in witness. The country thunder is the voice raised in feeling.
-- **The cathedral harmony** (53, Fleet Foxes) is voices combined into transcendence. The country thunder is a single voice in transcendence.
-- **The FM sheen** (63, Loggins) is the voice polished for broadcast. The country thunder is the voice unpolished for impact.
-- **The bare wire** (60, Gibbard solo) is the voice stripped to essentials. The country thunder is the voice at maximum capacity.
-
-The country thunder operates at E=4 -- not arena spectacle but conviction power. The country thunder does not need a stadium. It needs a song and a listener and the willingness to be devastated.
-
-### THE WANDERER WHO CLAIMS MULTIPLE CITIES -- 67th Artist-City Pattern
-
-The sixty-seventh artist-city pattern is **the wanderer who claims multiple cities**. Neko Case grew up in Tacoma. She played drums in Vancouver. She attended school in Seattle. She has lived in Vermont, in Arizona, in Chicago. Her music is not rooted in a single landscape; it is rooted in motion, in displacement, in the accumulation of places.
-
-Distinct from the Export (degrees 0, 36, 63) -- the Export leaves one city. The wanderer has no single city to leave. Distinct from the corridor bridge (61, Y La Bamba) -- the corridor bridge connects two cities. The wanderer accumulates them. Distinct from the dark-folk loner (64, Sykes) -- the dark-folk loner lives in one city and dreams of another landscape. The wanderer has actually lived in those other landscapes.
-
-### THE HOWL AT THE EDGE -- 66th Blue Note
-
-The sixty-sixth blue note deployment is **the howl at the edge** -- the blue note that sounds when a voice pushes past the boundary of controlled expression into something raw, uncontrolled, and emotionally overwhelming. Not screams -- howls. A scream is aggression directed outward. A howl is emotion released upward.
-
-Distinct from the slow burn (64, Sykes) -- smoldering vs. erupting. Distinct from the hometown stranger (63, Loggins) -- hollow vs. overflowing. Distinct from the settling sound (58, Death Cab) -- acceptance vs. refusal. Distinct from the ache (59, Long Winters) -- chronic vs. crisis.
-
-### NATURE IMAGERY: Foxes, Birds, Storms
-
-One of the most distinctive features of Case's songwriting is her use of **nature imagery** as emotional vocabulary. Foxes, birds, tornadoes, storms, fire, the open road -- these are not decorative. They are structural. The fox as confessor (*Fox Confessor Brings the Flood*) -- the wild animal who hears the secrets, who lives in the margins between the wild and the domestic. The tornado as lover ("This Tornado Loves You") -- destructive, beautiful, impossible to control. The nature imagery connects Case to the engine's broader ecological awareness -- the PNW Research Series tracks birds and mammals alongside music, and Case's music is populated with the same creatures.
-
-### PUYALLUP AND COAST SALISH TERRITORIAL ACKNOWLEDGMENT
-
-Tacoma is on the ancestral territory of the **Puyallup** people, part of the broader Coast Salish cultural area. Tacoma takes its name from the Puyallup name for Mount Rainier -- Tacoma/Tahoma. Five distinct Coast Salish territories now mapped: **Duwamish** (Seattle, degree 20), **Multnomah** (Portland, 57), **Lummi/Nooksack** (Bellingham, 58), **Snohomish** (Everett, 63), and **Puyallup** (Tacoma, 66). The I-5 corridor is not just an interstate; it is a chain of sovereign territories.
-
-### CROSS-REFERENCES (Part A)
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| S36-064 | Neko Case (66) | Jesse Sykes (64) | Alt-country root system shared. Both women, both country-folk tradition, both fierce independence. Energy inverted: Sykes E=2, Case E=4. The dusk vs the country thunder. Prairie noir (receding) vs alt country (advancing). Same darkness, different vectors. |
-| S36-043 | Neko Case (66) | Ann Wilson (43) | Powerful female voice cluster. Wilson E=5 arena, Case E=4 intimate. Both volcanic. Wilson sings to stadiums; Case sings to rooms. Arena power vs conviction power. |
-| S36-052 | Neko Case (66) | Brandi Carlile (52) | E=4 shared, powerful voices, country-folk roots, PNW women, Grammy nominees. Carlile = communal crescendo, Case = solitary devastation. Carlile lifts. Case dismantles. |
-| S36-058 | Neko Case (66) | Death Cab for Cutie (58) | Label pathway contrast. Death Cab: Barsuk to Atlantic (indie to major). Case: Bloodshot to Anti- (indie to indie). Two answers to the same question. |
-| S36-063 | Neko Case (66) | Kenny Loggins (63) | Adjacent I-5 nodes: Tacoma (south) and Everett (north), both flanking Seattle. FM sheen vs country thunder. Polished vs raw. Commercial vs independent. |
-
----
-
-## Part B: Fisher -- THE SCREAM (*Pekania pennanti*, E=5, FOURTH CONSECUTIVE MUSTELIDAE The Mustelidae QUARTET 63-64-65-66 Otter Mink Marten Fisher Deepest Family Exploration River to Dense Forest Social to Solitary Water to Deep Forest Habitat Gradient Complete, THE SCREAM 67th Acoustic Element Loud Piercing Almost-Human E=5 Carries Hundreds of Meters Rarest Acoustic Element POWER WITHOUT PREVALENCE New Category Maximum Energy Minimum Frequency, FIRST REINTRODUCED SPECIES Completely Extirpated from Washington Returned from British Columbia Olympics 2008-2010 Cascades 2015-2020 Reproduction Confirmed International Cooperation, PORCUPINE PREDATOR Specialized Face-Attack Technique 25-30 Minutes Quill-Tolerant Possibly Culturally Transmitted First Specialist Predation Contrasts with Mink Surplus Killing, FIRST TROPHIC CASCADE Fisher->Porcupine->Tree Damage Where Fishers Present Porcupine Damage Decreases, DENSE FOREST HABITAT Closed-Canopy >60% Cover Large Trees Not Old-Growth Specifically Fisher Needs Dense Marten Needs Ancient Broader Tolerance, SEVENTH MAMMALIAN ENTRY Fifth Species 10.4% Representation Mammalian Era Six Degrees Deep, SIXTH CONSECUTIVE ORIGINAL CSV SPECIES 61-66 Longest Streak, RECLASSIFIED GENUS Martes to Pekania Third in Quartet Abenaki Pekan Monotypic, FOURTH CARNIVORE All Mustelidae, FUR TRADE THREAD Beaver 61-62 Mink 64 Fisher 66 Most Extreme Extirpation)
-
-Full deep research covering the Fisher as the fourth consecutive Mustelidae, the scream as the rarest acoustic element, and the first reintroduced species:
-
-### THE MUSTELIDAE QUARTET: Four Consecutive (63-66)
-
-This has never happened before in the engine. Four consecutive entries from the same family. Not a pair (Anatidae 58-59, Castoridae 61-62). Not a trio. A **quartet** -- four Mustelidae in four consecutive degrees, each occupying a different ecological niche.
-
-| Degree | Species | Habitat | Size | Sound | Social Strategy |
-|---|---|---|---|---|---|
-| 63 | River Otter | River/estuary | 5-14 kg | Social chuff repertoire (6 types) | Social, family groups |
-| 64 | Mink | Creek bank | 0.5-1.5 kg | Shrill chitter alarm | Strictly solitary |
-| 65 | American Marten | Old-growth canopy | 0.5-1.2 kg | Chuckle-chatter | Solitary, arboreal |
-| **66** | **Fisher** | **Dense forest** | **2-6 kg** | **Loud screaming call (rare)** | **Solitary, terrestrial/arboreal** |
-
-The quartet traces a gradient from the center of the waterway (River Otter in the river channel) through the margin (Mink on the creek bank) through the canopy (Marten in old-growth treetops) to the deep forest floor and midstory (Fisher in dense, closed-canopy forest). Each transition shifts habitat:
-- **63 to 64:** River center to creek margin. Water narrows.
-- **64 to 65:** Creek bank to old-growth canopy. Water disappears. The aquatic streak breaks.
-- **65 to 66:** Old-growth canopy to dense forest floor. Canopy lowers. Scale increases.
-
-The Fisher is the quartet's culmination -- the largest of the three forest mustelids, operating primarily on the ground and in the midstory, its vocalization the loudest and rarest of any in the quartet. If the Otter opened the sequence with social exuberance, the Fisher closes it with solitary, almost spectral presence in the deep forest.
-
-### TAXONOMY: *Pekania pennanti*
-
-**Pekania** -- derived from *pekan*, an Abenaki (Algonquian) word for the Fisher. One of the few mammalian genera named from a Native American language. Molecular phylogenetic studies demonstrated that the Fisher is NOT a member of *Martes* (the true martens). The Fisher diverged from the marten lineage approximately 8-12 million years ago. Monotypic genus -- the Fisher is the sole living member.
-
-**pennanti** -- honoring Thomas Pennant (1726-1798), the Welsh naturalist.
-
-**Common name:** Fisher. A persistent misnomer -- Fishers do NOT fish. Possibly from the French *fiche* (polecat pelt) or *fisse* (European polecat). The engine's most misleadingly named species.
-
-The Mustelidae Quartet Taxonomic Map:
-
-| Degree | Species | Genus | Former Genus | Reclassified? |
-|---|---|---|---|---|
-| 63 | River Otter | *Lontra* | *Lutra* | Yes (1999) |
-| 64 | Mink | *Neogale* | *Mustela* | Yes (~2000s) |
-| 65 | American Marten | *Martes* | *Martes* | No (original) |
-| **66** | **Fisher** | ***Pekania*** | ***Martes*** | **Yes (~2008)** |
-
-Three of four reclassified. Only the Marten retains its original genus. The molecular revolution rewrote 75% of the quartet's taxonomy.
-
-### PHYSICAL DESCRIPTION: The Largest Forest Mustelid
-
-75-120 cm total length. Males 3.5-6 kg; females 2-2.5 kg. Sexual dimorphism extreme -- males nearly twice the mass of females. More robust and powerful than the Marten or Mink. Broader shoulders, thicker neck, muscular forequarters built for power and leverage (needed to flip and kill porcupines). Dark brown to nearly black fur with grizzled gold-to-silver "frosted" sheen on head and shoulders. Large furred feet act as partial snowshoes in winter. No webbing (unlike Mink and Otter).
-
-| Feature | American Marten (65) | Fisher (66) |
-|---|---|---|
-| Weight | 0.5-1.2 kg | 2-6 kg |
-| Length | 50-68 cm | 75-120 cm |
-| Primary habitat | Old-growth canopy | Dense forest floor/midstory |
-| Prey size | Voles, squirrels | Hares, porcupines |
-| Climbing ability | Expert (high canopy) | Competent (midstory) |
-
-### THE SCREAM -- 67th Acoustic Element
-
-The Fisher produces one of the most arresting sounds in the Pacific Northwest forest -- a **loud, piercing, almost-human scream**.
-
-- **Loud:** E=5. Carries through dense forest for hundreds of meters. The loudest mammalian vocalization in the engine.
-- **Rare:** Almost never heard. Fishers are secretive, largely nocturnal, exist at low population densities. A person could spend years in Fisher habitat without hearing the scream.
-- **Terrifying:** Described as "blood-curdling," "almost human," "like a woman screaming in the woods." Triggers primate alarm responses.
-- **Context:** Territorial disputes, mating season encounters, aggressive interactions. Most commonly reported during breeding season (March-April).
-
-The paradox of E=5 and rarity: **power without prevalence**. The Mallard (E=5) quacks everywhere, all the time. The Fisher (E=5) screams almost never, in the deepest forest. A new acoustic category: maximum volume, minimum frequency.
-
-Species-side acoustic progression (degrees 57-66):
-
-| Element | Character | Strategy |
-|---|---|---|
-| The Stream Rattle (57) | Loud, mechanical, dry rattling | Percussive vocal burst |
-| The Pond Whistle (58) | Thin rising whistle from still water | Ascending tonal sweep |
-| The Quack (59) | Loud decrescendo series | Universal recognition |
-| The Submerge Call (60) | Accelerating hollow "cow-cow" | Tempo-direction / disappearance |
-| The Tail Slap (61) | Sharp percussive crack on water | Mammalian percussion / alarm |
-| The Rhythmic Gnaw (62) | Steady chunk-chunk-chunk in wood | Functional labor / nocturnal rhythm |
-| The Chuff (63) | Loud nasal CHUFF-CHUFF + whistles | Social vocalization / predator play |
-| The Chitter (64) | Shrill chit-chit-chit alarm burst | Solitary predator alarm |
-| The Chuckle-Chatter (65) | Low chuh-chuh-chuh + harsh cha-cha-cha | Social + defensive / arboreal predator |
-| **The Scream (66)** | **Loud, piercing, almost-human scream** | **Rare, powerful, deep-forest territorial** |
-
-### THE CONSERVATION STORY: Extirpation and Reintroduction
-
-The Fisher is the engine's **first reintroduced species**. Completely extirpated from Washington State by the combination of trapping (fur trade) and logging (habitat loss). By the mid-20th century, Fishers were functionally extinct in Washington.
-
-**Olympic Peninsula (2008-2010):** 90 Fishers released in Olympic National Park. Source: British Columbia. Reproduction confirmed. Range expanding.
-
-**South Cascades (2015-2020):** ~80 Fishers released in Gifford Pinchot National Forest. Source: British Columbia. Reproduction confirmed.
-
-**North Cascades (2018-2020):** Additional releases to connect South Cascades population with British Columbia source populations. Genetic connectivity across the historical range.
-
-The fur trade thread reaches its most extreme expression: Beaver (61-62) was trapped commercially. Mink (64) was farmed industrially. Fisher (66) was trapped to local extinction. Three Mustelidae, three levels of human exploitation, three different conservation outcomes.
-
-### THE PORCUPINE PREDATOR: Specialized Killing Technique
-
-The Fisher attacks the porcupine's face -- the only unquilled surface. Circles, darts in to bite repeatedly, retreats when the porcupine turns. Over 25-30 minutes, inflicts enough facial wounds to exhaust and kill the prey. Then flips the porcupine to expose the unprotected belly. Quill-tolerant -- embedded quills encyst in tissue rather than causing systemic infection. The behavior appears learned, possibly culturally transmitted from mother to kits.
-
-The Fisher-porcupine relationship creates a **trophic cascade**: Fisher -> porcupine -> tree damage. Where Fishers are present, porcupine populations decline and tree girdling decreases. The engine's first documented trophic cascade.
-
-The Mink-Fisher predation contrast: the Mink (64) kills indiscriminately in prey-dense environments (surplus killing). The Fisher kills with precision against a heavily defended target (specialist predation). Opposite predatory innovations from the same family.
-
-### DENSE FOREST HABITAT: Completing the Gradient
-
-Dense, closed-canopy forest with structural complexity. Canopy closure >60%. Large trees for denning (>50 cm DBH). Downed logs, root wads, structural complexity on the forest floor. NOT old-growth specifically -- the Marten needs ANCIENT forest; the Fisher needs DENSE forest. The broader tolerance may explain the early success of Fisher reintroduction programs.
-
-The habitat gradient complete:
-
-| Degree | Habitat | Water Association | Canopy Association |
-|---|---|---|---|
-| 63 | River/estuary | Aquatic | None |
-| 64 | Creek bank | Semi-aquatic | Riparian |
-| 65 | Old-growth canopy | None | High canopy |
-| **66** | **Dense forest** | **None** | **Closed canopy, ground to midstory** |
-
-### THE NEKO CASE PARALLEL
-
-Six resonance axes:
-1. **Fierce vocalizations.** Case's volcanic voice parallels the Fisher's terrifying scream. Both defined by raw power of sound.
-2. **Wild, untameable quality.** Case resists categorization; the Fisher exists only in deep forest, cannot be domesticated.
-3. **Tacoma and the forest.** Case's Tacoma roots place her near the same region where Fisher reintroduction restores the species.
-4. **Powerful but rare.** Case tours on her own terms. The Fisher screams when it chooses. Both powerful but not ubiquitous.
-5. **Reclaiming abandoned territory.** Case carved space in alt-country. The Fisher was reintroduced to forests from which it was extirpated.
-6. **Energy resonance.** Case E=4, Fisher E=5. Both high-energy. Both punch hard.
-
-### CROSS-REFERENCES (Part B)
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| SPS-063 | Fisher (66) | River Otter (63) | MUSTELIDAE QUARTET endpoints. Social (63) to spectral (66). River to dense forest. 5-14 kg to 2-6 kg. Quartet frames: social exuberance to solitary power. |
-| SPS-064 | Fisher (66) | Mink (64) | PREDATION CONTRAST. Surplus killing (Mink) vs specialist predation (Fisher). Indiscriminate vs precise. Same family, opposite strategies. |
-| SPS-065 | Fisher (66) | American Marten (65) | CONSECUTIVE MUSTELID. Old-growth canopy (65) to dense forest floor (66). Marten needs ancient forest; Fisher needs dense forest. Size doubles. |
-| SPS-004 | Fisher (66) | Northern Spotted Owl (4) | DENSE-FOREST CONSERVATION. Both need closed canopy, large trees. Both conservation flagships. Acoustic parallel: haunting hoot vs terrifying scream, both nocturnal, both rare. Span: 62 degrees. |
-| SPS-054 | Fisher (66) | Pileated Woodpecker (54) | LARGE-TREE DEPENDENCY. Both need large-diameter trees. Woodpecker creates cavities; Fisher may use abandoned woodpecker cavities. Dense-forest associates. |
-
----
-
-## Parallel: Neko Case x Fisher
-
-Five resonance axes grounded in fierce vocalizations, untameable wildness, and the reclaiming of abandoned territory:
-
-**1. Fierce Vocalizations** -- Neko Case has one of the most powerful voices in contemporary music -- a volcanic, full-throated instrument that can fill a room without amplification. The Fisher has one of the most powerful vocalizations of any mustelid -- a scream that carries through dense forest for hundreds of meters. Both are defined by the raw power of their sound. Both sounds are devastating. Both sounds are rare.
-
-**2. Wild, Untameable Quality** -- Case has resisted categorization throughout her career -- not quite country, not quite indie, not quite rock, operating in the spaces between genres with fierce independence. The Fisher is wild in the most literal sense -- a predator that cannot be domesticated, that exists only in deep forest, that vanishes when the forest is thinned. Both are untameable.
-
-**3. Reclaiming Abandoned Territory** -- Case carved out space in alt-country that the mainstream music industry had largely abandoned. The Fisher has been reintroduced to forests from which it was extirpated -- reclaiming territory that had been empty for decades. Both are stories of return, of claiming space that was once occupied and then lost.
-
-**4. Powerful but Not Ubiquitous** -- Case's performances are legendary but relatively infrequent -- she tours on her own terms, appearing when she chooses. The Fisher's scream is legendary but almost never heard -- the animal vocalizes on its own terms. Both are powerful but not ubiquitous. Power without prevalence.
-
-**5. Geographic Resonance** -- Case's roots in Tacoma place her at the edge of the dense forests of the South Puget Sound lowlands -- the same region where Fisher reintroduction in the Cascades is restoring the species to forests within driving distance of Tacoma.
-
-**Bonus: Energy Near-Match** -- Case E=4, Fisher E=5. Both high-energy. Both punch hard. The Fisher's E=5 is technically higher, but Case's volcanic delivery makes E=4 feel like it should be E=5. The energy levels nearly match because both deliver with maximum intensity.
-
----
+| Cross-References | 5 (S36-064 Sykes, S36-043 Wilson, S36-052 Carlile, S36-058 Death Cab, S36-063 Loggins) | 5 (SPS-063 Otter, SPS-064 Mink, SPS-065 Marten, SPS-004 Spotted Owl, SPS-054 Pileated Woodpecker) |
+| Part A/B Resonance Axes | 5 (fierce vocalizations, wild untameable quality, reclaiming abandoned territory, powerful but not ubiquitous, geographic resonance) + bonus (energy near-match E=4 vs E=5) | -- |
+| Engine Position Markers | 5th I-5 corridor node, 67th acoustic element (artist), 67th artist-city pattern, 66th blue note, Genre Stage 48, 17th E=4, 20th non-male artist, 5th Coast Salish territory, powerful female voice cluster crystallizes (3 deployments) | 4th Mustelid (quartet completes), 4th Carnivora, 5th mammalian species, 7th mammalian entry, 6th consecutive original CSV species, first reintroduced species, first specialist predation, first trophic cascade, third reclassification in quartet |
+
+## Part A: Neko Case -- The Country Thunder
+
+Full deep research covering Neko Case as the engine's first Alt Country artist, Tacoma as the fifth I-5 corridor node, the country thunder as conviction power at E=4, and the powerful female voice cluster as the engine's most productive vocal-comparison framework:
+
+- **Tacoma Enters as the Fifth I-5 Corridor Node.** Degree 66 brings Tacoma into the engine for the first time. The fifth node on the I-5 corridor -- the interstate spine that runs from Portland through Olympia, Tacoma, Seattle, Everett, and north to Bellingham and the Canadian border. The engine has mapped four nodes previously: Portland (degree 57, Laura Gibson), Bellingham (degree 58, Death Cab for Cutie's origin), Seattle (throughout, gravitational center), and Everett (degree 63, Kenny Loggins). Tacoma is the fifth. Tacoma sits 34 miles south of Seattle on Puget Sound, with its own music history, cultural identity, and relationship to the broader Pacific Northwest. Tacoma is not Seattle -- a fact that Tacomans emphasize with regularity. The city has a grittier, more working-class identity: industrial waterfront, pulp mills (the famous "Tacoma Aroma"), Joint Base Lewis-McChord. Case's Tacoma connection is formative rather than permanent. She grew up partly in Tacoma, attended school in the area, then moved to Vancouver, British Columbia. The geographic spine is now visible: a 275-mile corridor of music cities, each with a different character, each corresponding to a different cultural identity, each in turn corresponding to a sovereign Coast Salish territory.
+- **Alt Country Enters at Genre Stage 48 -- First Alt Country Classification.** Alt Country -- alternative country, sometimes Americana -- emerged in the 1990s at the intersection of country music's emotional directness, punk rock's independent spirit, and indie rock's literary ambition. Foundational acts: Uncle Tupelo, Wilco, Son Volt, Whiskeytown, Lucinda Williams, Gillian Welch. The genre resists Nashville's commercial machinery while embracing the instrumentation and emotional vocabulary of country music. Case is alt-country in the broadest sense -- her music draws on country, folk, rockabilly, torch song, and indie rock, but the country element is the root system. The twang is real. The pedal steel is present. The emotional directness is country's emotional directness, with no ironic distance, no postmodern quotation marks. But the independence is total -- Case has never recorded for a Nashville label. The "alt" in alt-country means she chose the music without choosing the industry. Alt Country connects to the alt-country lineage that entered at degree 64 via Phil Wandscher / Whiskeytown / Ryan Adams: where Sykes' classification was Folk (the country element subordinate), Case's classification is Alt Country because the country element is primary.
+- **E=4 Returns -- Three-Level Energy Jump from E=1.** Energy distribution after degree 66: E1:3, E2:21, E3:15, E4:17, E5:10, E6:1. E=4 rises to seventeen deployments, closing the gap with E=2's lead of twenty-one. The E=1-to-E=4 jump (degrees 65 to 66) is one of the largest single-degree energy transitions in the engine. The contrast is instructive: the engine does not smooth transitions; it juxtaposes. From Aaberg's piano whisper to Case's volcanic howl. The valley-to-peak shape at degrees 65-66 is the steepest acoustic contour in this section. The E=4 reflects Case's music accurately: not arena spectacle (E=5) or anthemic drive (E=6), but conviction power -- a voice and a band at full commitment, the room filled because the song fills it.
+- **Twentieth Non-Male Artist -- The 30% Milestone Approaches.** Gender ratio after degree 66: 20:47, approximately 29.9%. The 30% threshold is imminent. Case's fierce independence carries gendered significance -- she has spoken publicly about the challenges of being a woman in the music industry, the assumptions, the diminishment, the constant pressure to be accommodating. Her response has been volcanic: a refusal to compromise, a refusal to play the game, a refusal to be anything other than exactly what she is.
+- **Biography -- The Volcanic Voice and Itinerant Geography.** Born in Alexandria, Virginia, on September 8, 1970. Itinerant childhood with frequent moves and instability as a baseline. The Pacific Northwest entered her life when her family moved to the Tacoma area. From Tacoma, Case moved to Vancouver, British Columbia, where she immersed herself in the punk scene -- played drums in Maow (an all-female garage rock/pop-punk band) and Cub (a twee pop band). Before Case was a singer-songwriter, she was a drummer. The transition from drummer to singer-songwriter is one of the more unusual trajectories in the engine. She attended the Art Institute of Seattle. The Tacoma-Vancouver-Seattle triangle defines her Pacific Northwest years. Her voice sits at the intersection of country (emotional directness), torch song (drama), punk (aggression), and folk (storytelling). It is too powerful for folk, too literary for country, too emotional for punk, too raw for pop.
+- **Discography -- Seven Albums as an Arc of Power.** *The Virginian* (1997, Bloodshot) -- the debut, country at its core: pedal steel, twang, honky-tonk, covers of Loretta Lynn and Ernest Tubb alongside originals. *Furnace Room Lullaby* (2000, Bloodshot) -- darker, more personal, "South Tacoma Way" makes the Tacoma connection explicit. *Blacklisted* (2002, Bloodshot) -- the turning point, full power arrives, "Deep Red Bells" inspired by the Green River Killer. *Fox Confessor Brings the Flood* (2006, Anti-) -- the breakthrough, nature imagery explodes (foxes, birds, storms), Grammy nominated. *Middle Cyclone* (2009, Anti-) -- the peak, #3 Billboard 200, "This Tornado Loves You," one of the highest chart positions for an independent release. *The Worse Things Get, the Harder I Fight, the Harder I Fight, the More I Love You* (2013, Anti-) -- the reckoning, most personal album, the title is a manifesto. *Hell-On* (2018, Anti-) -- the continuation, "Curse of the I-5 Corridor" names the engine's geographic spine in Case's own words.
+- **The Country Thunder -- 67th Acoustic Element.** The acoustic quality of a voice that carries the full emotional weight of country music's tradition but delivers it with a power that exceeds the genre's usual parameters. Audible as a specific vocal phenomenon: the moment when the voice opens up from its controlled country phrasing into something larger, wilder, more powerful than the song seems able to contain. Distinct from the dusk (64, Sykes -- voice at threshold of audibility, receding), the testimony roar (52, Carlile -- voice raised in witness), the cathedral harmony (53, Fleet Foxes -- voices combined into transcendence), the FM sheen (63, Loggins -- voice polished for broadcast), the bare wire (60, Gibbard solo -- voice stripped to essentials). Operates at E=4 -- not arena spectacle but conviction power. Does not need a stadium. Needs a song and a listener and the willingness to be devastated.
+- **The Wanderer Who Claims Multiple Cities -- 67th Artist-City Pattern.** Tacoma is the bedrock. Vancouver is the first sediment. Seattle is the next. Each subsequent city -- Vermont, Arizona, Chicago -- adds material without erasing what came before. Case does not belong to Tacoma the way Gibson belongs to Portland or Death Cab belongs to Bellingham. She belongs to motion itself. Distinct from the Export (departures from one city), the corridor bridge (connections between two cities), the dark-folk loner (lives in one city, dreams of another), the Montana connection (enters from outside). The wanderer accumulates. The music is the home that geography cannot provide.
+- **The Howl at the Edge -- 66th Blue Note.** The blue note that sounds when a voice pushes past the boundary of controlled expression into something raw, uncontrolled, and emotionally overwhelming. Not screams -- howls. A scream is aggression directed outward. A howl is emotion released upward. Distinct from the slow burn (64, Sykes -- smoldering vs erupting), the hometown stranger (63, Loggins -- hollow vs overflowing), the settling sound (58, Death Cab -- acceptance vs refusal), the ache (59, Long Winters -- chronic vs crisis).
+- **Powerful Female Voice Cluster -- Three Voices, Three Genres, Three Energy Levels.** Wilson (43, E=5, arena, Heart, Classic Rock), Carlile (52, E=4, communal, Folk/Americana), Case (66, E=4, solitary, Alt Country). Three voices, three genres, three deployments. Wilson sings to stadiums. Carlile lifts the room up. Case takes the room apart. The cluster is the engine's most productive vocal-comparison framework. The same instrument deployed at three different scales produces three different aesthetic projects.
+- **Bloodshot to Anti- -- Indie-to-Indie Label Progression.** Bloodshot (Chicago, 1994 founding, alt-country with punk sensibility) gave way to Anti- (Los Angeles, Epitaph subsidiary, broader curatorial sensibility -- Tom Waits, Wilco, Merle Haggard, Mavis Staples, Solomon Burke). Both reflect an artist outgrowing a first label. Case stayed within the independent ecosystem. Death Cab chose the major label path (Barsuk to Atlantic, degree 58). Two different responses to the same question. The engine documents both.
+- **The New Pornographers -- Canadian Indie Pop Bridge.** Case is a member of The New Pornographers, the Canadian indie pop supergroup formed in Vancouver in 1997 by A.C. Newman, Dan Bejar (Destroyer), and others. The dual identity -- dark solo artist and bright pop band member -- reveals Case's range. She can inhabit the country darkness of *Fox Confessor Brings the Flood* and the pop brightness of *Twin Cinema* in the same year. The connection links the engine to the Canadian indie pop tradition centered in Vancouver and Montreal -- a tradition that runs parallel to the Pacific Northwest indie scene but with a different sensibility. Case is the bridge.
+- **Nature Imagery as Structural Vocabulary.** Foxes, birds, tornadoes, storms, fire, the open road -- not decorative but structural. The fox as confessor (*Fox Confessor Brings the Flood*) -- the wild animal who hears the secrets, lives in the margins between wild and domestic. The tornado as lover ("This Tornado Loves You") -- destructive, beautiful, impossible to control. Connects Case to the engine's broader ecological awareness -- the PNW Research Series tracks birds and mammals alongside music, and Case's music is populated with the same creatures.
+- **Puyallup Coast Salish Territorial Acknowledgment -- Fifth Territory.** Tacoma is on the ancestral territory of the Puyallup people, part of the broader Coast Salish cultural area. Tacoma takes its name from the Puyallup name for Mount Rainier -- Tacoma/Tahoma. Five Coast Salish territories now mapped: Duwamish (Seattle, established degree 20), Multnomah (Portland, 57), Lummi/Nooksack (Bellingham, 58), Snohomish (Everett, 63), Puyallup (Tacoma, 66). The I-5 corridor is not just an interstate; it is a chain of sovereign territories.
+
+## Part B: Fisher -- The Scream
+
+Full deep research covering the Fisher (*Pekania pennanti*) as the fourth consecutive Mustelidae, the Mustelidae quartet's culmination, the scream as the rarest acoustic element, the first reintroduced species, the porcupine specialist, and the first trophic cascade in the engine:
+
+- **The Mustelidae Quartet -- Four Consecutive Mustelidae.** This has never happened before in the engine. Four consecutive entries from the same family. Not a pair (Anatidae 58-59, Castoridae 61-62). Not a trio. A quartet -- four Mustelidae in four consecutive degrees, each occupying a different ecological niche. River Otter (63): river/estuary, 5-14 kg, social chuff repertoire, family hunter, E=4. Mink (64): creek bank, 0.5-1.5 kg, shrill chitter alarm, strictly solitary, E=4. American Marten (65): old-growth canopy, 0.5-1.2 kg, chuckle-chatter, solitary arboreal, E=4. Fisher (66): dense forest floor and midstory, 2-6 kg, loud screaming call almost never heard, solitary, E=5. The quartet traces a gradient from the center of the waterway through the margin through the canopy to the deep forest floor. The Fisher is the culmination -- largest of the three forest mustelids, vocalization the loudest and rarest. The quartet doubles the previous same-family record. A fifth would be redundant.
+- **Taxonomy -- *Pekania pennanti*, Reclassified Genus, Third in Quartet.** *Pekania* derives from *pekan*, an Abenaki (Algonquian) word for the Fisher. One of the few mammalian genera named from a Native American language. Molecular phylogenetic studies demonstrated the Fisher is NOT a member of *Martes* (the true martens). Diverged from the marten lineage approximately 8-12 million years ago. Monotypic genus -- the Fisher is the sole living member. The species epithet *pennanti* honors Thomas Pennant (1726-1798), the Welsh naturalist. The common name "Fisher" is a persistent misnomer -- Fishers do NOT fish; the name possibly derives from the French *fiche* (polecat pelt) or *fisse* (European polecat). The engine's most misleadingly named species. Three of four quartet members reclassified: River Otter (*Lutra* to *Lontra*, 1999), Mink (*Mustela* to *Neogale*, ~2000s), Fisher (*Martes* to *Pekania*, ~2008). Only the Marten retains its original genus. The molecular revolution rewrote 75% of the quartet's taxonomy. Classification: Animalia / Chordata / Mammalia (7th mammalian entry, 5th mammalian species) / Carnivora (4th Carnivora entry) / Mustelidae (4th of 8 PNW species, 50% of PNW mustelid diversity) / *Pekania* / *P. pennanti*.
+- **Physical Description -- Largest Forest Mustelid in Engine.** 75-120 cm total length. Males 3.5-6 kg; females 2-2.5 kg. Sexual dimorphism extreme -- males nearly twice the mass of females. More robust and powerful than the Marten or Mink. Broader shoulders, thicker neck, muscular forequarters built for power and leverage (needed to flip and kill porcupines). Dark brown to nearly black fur with grizzled gold-to-silver "frosted" sheen on head and shoulders. Large furred feet act as partial snowshoes in winter. No webbing (unlike Mink and Otter). Twice the mass of the American Marten (65) at maximum size; targets larger prey (hares, porcupines vs. Marten's voles and squirrels); operates primarily on the forest floor and midstory rather than the high canopy.
+- **The Scream -- 67th Acoustic Element.** The Fisher produces one of the most arresting sounds in the Pacific Northwest forest -- a loud, piercing, almost-human scream. E=5 in amplitude. Carries through dense forest for hundreds of meters. The loudest mammalian vocalization in the engine. Almost never heard in practice -- Fishers are secretive, largely nocturnal, exist at low population densities. A person could spend years in Fisher habitat without hearing the scream. Described as "blood-curdling," "almost human," "like a woman screaming in the woods." Triggers primate alarm responses. Most commonly reported during breeding season (March-April), in territorial disputes, mating season encounters, aggressive interactions. The paradox of E=5 and rarity: power without prevalence. The Mallard (E=5) quacks everywhere, all the time. The Fisher (E=5) screams almost never, in the deepest forest. A new acoustic category: maximum volume, minimum frequency.
+- **First Reintroduced Species -- The Conservation Story.** The Fisher is the engine's first reintroduced species. Completely extirpated from Washington State by the combination of trapping (fur trade) and logging (habitat loss). By the mid-20th century, Fishers were functionally extinct in Washington. Olympic Peninsula (2008-2010): 90 Fishers released in Olympic National Park, source British Columbia, reproduction confirmed, range expanding. South Cascades (2015-2020): approximately 80 Fishers released in Gifford Pinchot National Forest, source British Columbia, reproduction confirmed. North Cascades (2018-2020): additional releases to connect the South Cascades population with British Columbia source populations, achieving genetic connectivity across the historical range. The fur trade thread reaches its most extreme expression: Beaver (61-62) was trapped commercially; Mink (64) was farmed industrially; Fisher (66) was trapped to local extinction.
+- **Porcupine Predator -- First Specialist Predation in Engine.** The Fisher attacks the porcupine's face -- the only unquilled surface. Circles, darts in to bite repeatedly, retreats when the porcupine turns. Over 25-30 minutes, inflicts enough facial wounds to exhaust and kill the prey. Then flips the porcupine to expose the unprotected belly. Quill-tolerant -- embedded quills encyst in tissue rather than causing systemic infection. The behavior appears learned, possibly culturally transmitted from mother to kits. The Mink-Fisher predation contrast: Mink (64) kills indiscriminately in prey-dense environments (surplus killing); Fisher kills with precision against a heavily defended target (specialist predation). Indiscriminate vs. precise. Same family, opposite predatory innovations.
+- **First Trophic Cascade -- Fisher → Porcupine → Tree Damage.** Where Fishers are present, porcupine populations decline and tree girdling decreases. The Fisher-porcupine relationship creates a structural ecological cascade that propagates through the food web. The reintroduction is therefore not just a species restoration but an ecological function restoration -- the forest changes when the Fisher returns, even though most observers will never see one. The engine's first documented trophic cascade. Power without prevalence at the trophic level: the effect on forest structure is large but the individual presence is rare.
+- **Dense Forest Habitat -- Completing the Water-to-Deep-Forest Gradient.** Closed-canopy forest with structural complexity. Canopy closure greater than 60%. Large trees for denning (greater than 50 cm DBH). Downed logs, root wads, structural complexity on the forest floor. NOT old-growth specifically -- the Marten needs ANCIENT forest; the Fisher needs DENSE forest. The broader tolerance may explain the early success of Fisher reintroduction programs. The water-to-deep-forest gradient: River Otter at 63 (river/estuary, fully aquatic, no canopy association), Mink at 64 (creek bank, semi-aquatic, riparian), American Marten at 65 (old-growth canopy, no water, high canopy), Fisher at 66 (dense forest, no water, closed canopy, ground to midstory). Each position teaches a different relationship with water and canopy.
+- **Seventh Mammalian Entry, Fifth Mammalian Species.** Mammalian entries: Beaver tail slap (61), Beaver chewing (62, same species), River Otter (63), Mink (64), American Marten (65), Fisher (66). Seven entries, five species, two orders (Rodentia, Carnivora), two families (Castoridae, Mustelidae). Mammalian representation: 7 of 67 entries (10.4% by entry count); 5 of 67 species (7.5% by species count). Better than 6.2% at degree 64, but still far below parity in a "birds and mammals" scope that remains >89% birds.
+- **Sixth Consecutive Original CSV Species -- Mammalian Era Runs Entirely on Originals.** Degrees 61-66: six consecutive original CSV entries. The mammalian era runs entirely on original CSV entries; no substitutions needed. The CSV's mammalian entries are robust and uncontested. Longest streak in engine history. Contrasts with the avian-side substitution streak earlier.
+- **Fur Trade Thread -- Beaver, Mink, Fisher.** Three Mustelidae (and one Castorid) define the fur trade thread. Beaver (61-62) was trapped commercially -- the engine documented the commercial scale. Mink (64) was farmed industrially -- bred in captivity, produced as an industrial commodity, with feral escapees devastating water voles in Europe. Fisher (66) was trapped to local extinction -- only returning through deliberate international cooperation. Three levels of human exploitation; three different conservation outcomes. The fur trade thread reaches its most extreme expression at degree 66.
+- **Cross-Species Connections -- Predator-Prey and Ecological.** The Fisher's relationship to the Northern Spotted Owl (degree 4) -- both need closed canopy and large trees, both conservation flagships. Acoustic parallel: haunting hoot vs. terrifying scream, both nocturnal, both rare. Span: 62 degrees. The Fisher's relationship to the Pileated Woodpecker (degree 54) -- both need large-diameter trees. Woodpecker creates cavities; Fisher may use abandoned woodpecker cavities. Cavity architect and cavity tenant.
+- **Coast Salish Territorial Acknowledgment -- Mountain and Forest Peoples.** The dense forests where the Fisher hunts, dens, and screams its rare territorial calls throughout the Olympic Peninsula and the Cascade Range are the ancestral and current homelands of the Lower Elwha Klallam, Jamestown S'Klallam, Port Gamble S'Klallam, Skokomish, Quinault, Hoh, Quileute, Makah, Cowlitz, Yakama, Muckleshoot, Snoqualmie, and other Coast Salish and Plateau peoples. The Fisher's reintroduction is co-managed with Tribal Nations whose land management practices created and maintained the dense forests in which the species can return.
+
+## Parallel: Neko Case x Fisher -- Five Resonance Axes
+
+**1. Fierce vocalizations.** Neko Case has one of the most powerful voices in contemporary music -- a volcanic, full-throated instrument that can fill a room without amplification. The Fisher has one of the most powerful vocalizations of any mustelid -- a scream that carries through dense forest for hundreds of meters. Both are defined by the raw power of their sound. Both sounds are devastating. Both sounds are rare.
+
+**2. Wild, untameable quality.** Case has resisted categorization throughout her career -- not quite country, not quite indie, not quite rock, operating in the spaces between genres with fierce independence. The Fisher is wild in the most literal sense -- a predator that cannot be domesticated, that exists only in deep forest, that vanishes when the forest is thinned. Both are untameable.
+
+**3. Reclaiming abandoned territory.** Case carved out space in alt-country that the mainstream music industry had largely abandoned. The Fisher has been reintroduced to forests from which it was extirpated -- reclaiming territory that had been empty for decades. Both are stories of return, of claiming space that was once occupied and then lost.
+
+**4. Powerful but not ubiquitous.** Case's performances are legendary but relatively infrequent -- she tours on her own terms, appearing when she chooses. The Fisher's scream is legendary but almost never heard -- the animal vocalizes on its own terms. Both are powerful but not ubiquitous. Power without prevalence.
+
+**5. Geographic resonance.** Case's roots in Tacoma place her at the edge of the dense forests of the South Puget Sound lowlands -- the same region where Fisher reintroduction in the South Cascades is restoring the species to forests within driving distance of Tacoma.
+
+**Bonus: Energy near-match.** Case E=4, Fisher E=5. Both high-energy. Both punch hard. The Fisher's E=5 is technically higher, but Case's volcanic delivery makes E=4 feel like it should be E=5. The energy levels nearly match because both deliver with maximum intensity.
 
 ## Acoustic Progression (67 elements)
 
-| # | Element | Degree | Artist/Species |
-|---|---------|--------|----------------|
-| 0 | silence | 0 | Quincy Jones |
-| 1 | cascade | 1 | Bill Frisell |
-| 2 | drone | 2 | Wayne Horvitz |
-| 3 | language | 3 | Ernestine Anderson |
-| 4 | motif | 4 | Floyd Standifer |
-| 5 | metronome | 5 | Overton Berry |
-| 6 | question | 6 | Patti Bown |
-| 7 | harmonic spiral | 7 | Julian Priester |
-| 8 | ultrasonic threshold | 8 | Gary Peacock |
-| 9 | variation | 9 | Hadley Caliman |
-| 10 | minimum signal | 10 | Bud Shank |
-| 11 | trill/tremolo | 11 | Joe Brazil |
-| 12 | sawtooth sweep | 12 | Don Lanphere |
-| 13 | ostinato | 13 | Marc Seales |
-| 14 | repetition-resolution | 14 | Aaron Parks |
-| 15 | accelerando | 15 | Thomas Marriott |
-| 16 | crescendo | 16 | Jeff Lorber |
-| 17 | the hook | 17 | Reggie Watts |
-| 18 | ascending spiral | 18 | Maktub |
-| 19 | descending spiral | 19 | Fly Moon Royale |
-| 20 | sustain/the release | 20 | Whitney Monge |
-| 21 | the hammer | 21 | Polyrhythmics |
-| 22 | resonant percussion/groove reset | 22 | Foxy Apollo |
-| 23 | the testimony/groove reset | 23 | Allen Stone |
-| 24 | the invocation | 24 | Ron Artis II |
-| 25 | the congregation | 25 | Black Stax |
-| 26 | the caroling | 26 | Shaina Shepherd |
-| 27 | the liquid gurgle | 27 | The Dynamics |
-| 28 | the liquid twitter | 28 | Night Owls |
-| 29 | the rough brrit | 29 | Boogaloo Joe Jones |
-| 30 | the liquid warble synthesis | 30 | Ray Charles |
-| 31 | the whisper | 31 | Brenda Lee Eager |
-| 32 | the buzz | 32 | Luther Rabb |
-| 33 | the cadenza | 33 | Larry English |
-| 34 | the dialect | 34 | The Tempos |
-| 35 | the thrum | 35 | Robert Cray |
-| 36 | the sonic boom | 36 | Jimi Hendrix |
-| 37 | the filament | 37 | Ayron Jones |
-| 38 | the drawl | 38 | Booker T. Jones |
-| 39 | the canopy buzz | 39 | Ron Artis Jr |
-| 40 | the thinning | 40 | Alice Smith |
-| 41 | the partition | 41 | Shawn Smith |
-| 42 | the shimmer | 42 | Erica Campbell |
-| 43 | the radiance | 43 | Ann Wilson |
-| 44 | the grain | 44 | Chong the Nomad |
-| 45 | the murmur | 45 | Damien Jurado |
-| 46 | the confessional | 46 | Rocky Votolato |
-| 47 | the parable tone | 47 | Pedro the Lion |
-| 48 | the held rest | 48 | Sera Cahoone |
-| 49 | the lullaby subversion | 49 | Kimya Dawson |
-| 50 | the intimate architecture | 50 | Mirah |
-| 51 | the communal harmony | 51 | Grand Archives |
-| 52 | the testimony roar | 52 | Brandi Carlile |
-| 53 | the cathedral harmony | 53 | Fleet Foxes |
-| 54 | the fraternal jangle | 54 | Ivan & Alyosha |
-| 55 | the ember glow | 55 | Shelby Earl |
-| 56 | the dream haze | 56 | Lemolo |
-| 57 | the rattle / the stream rattle | 57 | Laura Gibson / Belted Kingfisher |
-| 58 | the ache / the pond whistle | 58 | Death Cab for Cutie / Wood Duck |
-| 59 | the digression / the quack | 59 | The Long Winters / Mallard |
-| 60 | the bare wire / the submerge call | 60 | Ben Gibbard (solo) / Pied-billed Grebe |
-| 61 | the braided voice / the tail slap | 61 | Y La Bamba / American Beaver |
-| 62 | the throwback / the rhythmic gnaw | 62 | Pickwick / Beaver Chewing |
-| 63 | the FM sheen / the chuff | 63 | Kenny Loggins / River Otter |
-| 64 | the dusk / the chitter | 64 | Jesse Sykes / Mink |
-| 65 | the open plain / the chuckle-chatter | 65 | Philip Aaberg / American Marten |
-| **66** | **the country thunder / the scream** | **66** | **Neko Case / Fisher** |
+The species-side acoustic progression for degrees 57-66 traces a movement from the social to the spectral, culminating in the Fisher's rare, terrifying scream. The artist-side progression traces a parallel arc from broadcast (FM sheen, 63) through intimacy (the dusk, 64), through near-silence (the open plain, 65), to volcanic conviction (the country thunder, 66). Both sides converge at degree 66 on the principle that maximum intensity is independent of frequency.
 
-The acoustic progression introduces volcanic conviction and terrifying rarity. On the artist side, the country thunder is the voice that carries country music's emotional tradition but delivers it with power that exceeds the genre's parameters -- not arena power (E=5) but conviction power (E=4), the voice powerful because the feeling is powerful, the room filled because the song fills it. The country thunder is the opposite of the open plain (degree 65, Aaberg): where the open plain was unbounded horizontal space at E=1, the country thunder is concentrated vertical force at E=4. The E=1-to-E=4 jump between degrees 65 and 66 is one of the largest energy transitions in the engine, and the acoustic elements track the shift: from the stillest silence to the most committed power. On the species side, the scream is the quartet's final acoustic contribution -- the loudest, rarest, most disturbing sound of the four mustelids. The Otter's chuff (social play), the Mink's chitter (solitary alarm), the Marten's chuckle-chatter (arboreal contact), and the Fisher's scream (deep-forest territorial) trace a progression from social to spectral, from frequent to almost-never-heard. Power without prevalence: the E=5 scream that almost no one hears, the acoustic element that exists in the engine's register but barely exists in human experience.
+| # | Element (Artist) | Element (Species) | Degree |
+|---|------------------|-------------------|--------|
+| 57 | the rattle | the stream rattle | Laura Gibson / Belted Kingfisher |
+| 58 | the ache | the pond whistle | Death Cab for Cutie / Wood Duck |
+| 59 | the digression | the quack | The Long Winters / Mallard |
+| 60 | the bare wire | the submerge call | Ben Gibbard (solo) / Pied-billed Grebe |
+| 61 | the braided voice | the tail slap | Y La Bamba / American Beaver |
+| 62 | the throwback | the rhythmic gnaw | Pickwick / Beaver Chewing |
+| 63 | the FM sheen | the chuff | Kenny Loggins / River Otter |
+| 64 | the dusk | the chitter | Jesse Sykes / Mink |
+| 65 | the open plain | the chuckle-chatter | Philip Aaberg / American Marten |
+| **66** | **the country thunder** | **the scream** | **Neko Case / Fisher** |
 
 ## Artist-City Patterns (67 patterns)
 
-| # | Pattern | Degree | Artist |
-|---|---------|--------|--------|
-| 0 | Export | 0 | Quincy Jones |
-| 1 | Draw | 1 | Bill Frisell |
-| 2 | European Exile | 2 | Wayne Horvitz |
-| 3 | The Stay | 3 | Ernestine Anderson |
-| 4 | The Teacher | 4 | Floyd Standifer |
-| 5 | The Persistence | 5 | Overton Berry |
-| 6 | The Erasure | 6 | Patti Bown |
-| 7 | Pedagogue-Draw | 7 | Julian Priester |
-| 8 | The Quiet Draw | 8 | Gary Peacock |
-| 9 | The Seeker | 9 | Hadley Caliman |
-| 10 | Late Homestead | 10 | Bud Shank |
-| 11 | The Salon Keeper | 11 | Joe Brazil |
-| 12 | The Prodigal | 12 | Don Lanphere |
-| 13 | Institutional Anchor | 13 | Marc Seales |
-| 14 | Prodigy-Export | 14 | Aaron Parks |
-| 15 | Builder-Stayer | 15 | Thomas Marriott |
-| 16 | Talent Incubator | 16 | Jeff Lorber |
-| 17 | The Uncategorizable | 17 | Reggie Watts |
-| 18 | The Workshop | 18 | Maktub |
-| 19 | The New Root | 19 | Fly Moon Royale |
-| 20 | The Street Laureate | 20 | Whitney Monge |
-| 21 | The Ensemble Anchor | 21 | Polyrhythmics |
-| 22 | The Inheritor | 22 | Foxy Apollo |
-| 23 | The Rural Draw | 23 | Allen Stone |
-| 24 | The Island Export | 24 | Ron Artis II |
-| 25 | The Cultural Guardian | 25 | Black Stax |
-| 26 | The Transmuter | 26 | Shaina Shepherd |
-| 27 | The Conduit | 27 | The Dynamics |
-| 28 | The Resident Band | 28 | Night Owls |
-| 29 | The Catalog | 29 | Boogaloo Joe Jones |
-| 30 | The Incubation | 30 | Ray Charles |
-| 31 | The Relay | 31 | Brenda Lee Eager |
-| 32 | The Foundation | 32 | Luther Rabb |
-| 33 | The Unrecorded | 33 | Larry English |
-| 34 | The Shadow Name | 34 | The Tempos |
-| 35 | The Deep Root | 35 | Robert Cray |
-| 36 | The Supernova | 36 | Jimi Hendrix |
-| 37 | The Inheritor | 37 | Ayron Jones |
-| 38 | The Touring Anchor | 38 | Booker T. Jones |
-| 39 | The Returning Wave | 39 | Ron Artis Jr |
-| 40 | The Cultural Satellite | 40 | Alice Smith |
-| 41 | The Scene Native | 41 | Shawn Smith |
-| 42 | The Gospel Export | 42 | Erica Campbell |
-| 43 | The Arena Architect | 43 | Ann Wilson |
-| 44 | The Digital Immigrant | 44 | Chong the Nomad |
-| 45 | The Stripped Murmur | 45 | Damien Jurado |
-| 46 | The Confessional Drifter | 46 | Rocky Votolato |
-| 47 | The Sacred Baritone | 47 | Pedro the Lion |
-| 48 | The Campfire Anchor | 48 | Sera Cahoone |
-| 49 | The Trojan Lullabist | 49 | Kimya Dawson |
-| 50 | The Quiet Polymath | 50 | Mirah |
-| 51 | The Folk Organism | 51 | Grand Archives |
-| 52 | The Arena Breakout | 52 | Brandi Carlile |
-| 53 | The Prodigy Return | 53 | Fleet Foxes |
-| 54 | The Neighborhood Anchor | 54 | Ivan & Alyosha |
-| 55 | The Infrastructure Beneficiary | 55 | Shelby Earl |
-| 56 | The Duo Collective | 56 | Lemolo |
-| 57 | The Label Bridge | 57 | Laura Gibson |
-| 58 | The Bellingham Ascent | 58 | Death Cab for Cutie |
-| 59 | The Scene Intellectual | 59 | The Long Winters |
-| 60 | The Frontman Alone | 60 | Ben Gibbard (solo) |
-| 61 | The Corridor Bridge | 61 | Y La Bamba |
-| 62 | The Brief Blaze | 62 | Pickwick |
-| 63 | The Everett Departure | 63 | Kenny Loggins |
-| 64 | The Dark-Folk Loner | 64 | Jesse Sykes |
-| 65 | The Montana Connection | 65 | Philip Aaberg |
-| **66** | **The Wanderer Who Claims Multiple Cities** | **66** | **Neko Case** |
-
-Sixty-seven named patterns across sixty-seven degrees. The Wanderer Who Claims Multiple Cities introduces the first multi-city accumulation pattern to the artist-city taxonomy. Every previous pattern was defined by a single city relationship -- departure from, arrival in, residence within, absence from. The wanderer accumulates cities without departing any: Tacoma is the bedrock, Vancouver is the first sediment, Seattle is the next. Each subsequent city adds material without erasing what came before. Case does not belong to Tacoma the way Gibson belongs to Portland or Death Cab belongs to Bellingham. She belongs to motion itself. The wanderer is distinct from the Export (leaves one city), the corridor bridge (connects two cities), the dark-folk loner (stays in one city, dreams of elsewhere), and the Montana connection (enters the gravitational field from outside). The wanderer does not leave and does not connect -- she accumulates. Tacoma, Vancouver, Seattle, Vermont, Arizona, Chicago. The music is the home that geography cannot provide. The I-5 corridor now has five nodes: Portland, Tacoma, Seattle, Everett, Bellingham. The wanderer has touched three of them.
+Sixty-seven named patterns across sixty-seven degrees. The Wanderer Who Claims Multiple Cities introduces the first multi-city accumulation pattern to the artist-city taxonomy. Every previous pattern was defined by a single city relationship -- departure from, arrival in, residence within, absence from. The wanderer accumulates cities without departing any: Tacoma is the bedrock, Vancouver is the first sediment, Seattle is the next. Each subsequent city adds material without erasing what came before. Case does not belong to Tacoma the way Gibson belongs to Portland or Death Cab belongs to Bellingham. She belongs to motion itself. Distinct from the Export, the corridor bridge, the dark-folk loner, and the Montana connection. The I-5 corridor now has five nodes: Portland (57), Tacoma (66), Seattle (multiple), Everett (63), Bellingham (58). The wanderer has touched three of them.
 
 ## Genre Evolution (48 stages)
 
 | Stage | Degree | Genre | Artist |
 |-------|--------|-------|--------|
-| 27 | 45 | Folk | Damien Jurado |
-| 28 | 46 | Folk | Rocky Votolato |
-| 29 | 47 | Indie Folk | Pedro the Lion |
-| 30 | 48 | Folk | Sera Cahoone |
-| 31 | 49 | Folk Punk | Kimya Dawson |
-| 32 | 50 | Indie Folk | Mirah |
-| 33 | 51 | Indie Folk | Grand Archives |
-| 34 | 52 | Folk/Rock | Brandi Carlile |
-| 35 | 53 | Indie Folk | Fleet Foxes |
-| 36 | 54 | Folk | Ivan & Alyosha |
-| 37 | 55 | Singer-Songwriter | Shelby Earl |
-| 38 | 56 | Indie Folk | Lemolo |
 | 39 | 57 | Folk | Laura Gibson |
 | 40 | 58 | Indie Rock | Death Cab for Cutie |
 | 41 | 59 | Indie Rock | The Long Winters |
@@ -496,80 +152,97 @@ Sixty-seven named patterns across sixty-seven degrees. The Wanderer Who Claims M
 | 47 | 65 | New Age/Folk | Philip Aaberg |
 | **48** | **66** | **Alt Country** | **Neko Case** |
 
-Full evolution: Jazz (0-15) to Jazz Fusion (16) to Jazz/Comedy (17) to Soul/Jazz (18-19) to Jazz/R&B (20) to Jazz/Funk (21-22) to Soul/Jazz (23-24) to Neo-Soul (25) to Soul (26) to Soul/R&B (27-28) to Jazz/Funk (29) to R&B/Jazz (30) to R&B/Soul (31) to Pure R&B (32-33) to R&B/Soul (34) to Blues (35) to Blues Rock (36-37) to R&B/Soul (38) to Blues/Soul (39) to Neo-Soul (40) to Soul/Blues (41) to Gospel/R&B (42) to Arena Rock (43) to Electronic/R&B (44) to **Folk zone (45-57)** to **Indie Rock (58-59)** to **Folk (60)** to **Folk/Indie (61)** to **Indie/Folk (62)** to **Soft Rock/Folk (63)** to **Folk (64)** to **New Age/Folk (65)** to **Alt Country (66)**. Genre Stage 48 -- Alt Country enters for the first time. A genuinely new genre classification. The engine has been in or near the folk zone since degree 45 (22 degrees), but Alt Country is not folk. It shares folk's emotional directness and independent spirit, but the country element is primary -- pedal steel, twang, the Nashville tradition filtered through punk independence. Case's Alt Country connects to the alt-country lineage that entered via Wandscher/Whiskeytown at degree 64, but where Sykes' classification was Folk (the country element subordinate), Case's classification is Alt Country (the country element primary). Track whether degree 67 continues the country-adjacent trajectory or shifts.
+Genre Stage 48 -- Alt Country enters for the first time. A genuinely new genre classification. The engine has been in or near the folk zone since degree 45 (twenty-two degrees), but Alt Country is not folk. It shares folk's emotional directness and independent spirit, but the country element is primary -- pedal steel, twang, the Nashville tradition filtered through punk independence. Case's Alt Country connects to the alt-country lineage that entered via Wandscher/Whiskeytown at degree 64, but where Sykes' classification was Folk (the country element subordinate), Case's classification is Alt Country (the country element primary). Track whether degree 67 continues the country-adjacent trajectory or shifts.
 
 ## Energy Distribution
 
-**Artist-side (after degree 66):** E1:3 (4.5%), E2:21 (31.3%), E3:15 (22.4%), E4:17 (25.4%), E5:10 (14.9%), E6:1 (1.5%). E=4 rises to seventeen -- closing the gap with E=2's lead of twenty-one. The three-level jump from E=1 (degree 65) to E=4 (degree 66) is one of the largest single-degree transitions in the engine. Energy trajectory over ten degrees: E=2 (57), E=4 (58), E=4 (59), E=2 (60), E=3 (61), E=4 (62), E=3 (63), E=2 (64), E=1 (65), **E=4 (66)**. The valley-to-peak pattern at degrees 65-66 is the starkest: E=1 to E=4. From Aaberg's piano whisper to Case's volcanic howl. The quiet majority (E1+E2+E3) = 39 of 67 (58.2%).
+**Artist-side (after degree 66):** E1:3 (4.5%), E2:21 (31.3%), E3:15 (22.4%), E4:17 (25.4%), E5:10 (14.9%), E6:1 (1.5%). E=4 rises to seventeen, closing the gap with E=2's lead of twenty-one. The three-level jump from E=1 (degree 65) to E=4 (degree 66) is one of the largest single-degree transitions in the engine. Energy trajectory over ten degrees: E=2 (57), E=4 (58), E=4 (59), E=2 (60), E=3 (61), E=4 (62), E=3 (63), E=2 (64), E=1 (65), **E=4 (66)**. The valley-to-peak pattern at degrees 65-66 is the starkest in this section: E=1 to E=4. From Aaberg's piano whisper to Case's volcanic howl. The quiet majority (E1+E2+E3) = 39 of 67 (58.2%).
 
 **Species-side (after degree 66):** E=5 returns -- the Fisher's scream matches the Mallard's quack in energy level but inverts the prevalence. Two E=5 entries with opposite profiles: Mallard (common) and Fisher (rare). The Mustelidae quartet energy curve: 4-4-4-5. Three at E=4, culminating in E=5. The energy rises at the quartet's conclusion.
 
-**Note on E=6:** E6:2 after degree 66 -- Hendrix (36) at E=6 plus one species-side E=6 entry. E=6 remains the rarest energy level, tied with E=1 at three deployments artist-side.
+**Note on E=6:** E6:1 after degree 66 -- Hendrix (36) at E=6 plus species-side E=6 entries pending. E=6 remains the rarest energy level on the artist side, tied with E=1 at three deployments.
 
-## Cross-References (Combined)
+## Taxonomic State
+
+After degree 66, the engine carries 67 entries across 65 unique organisms (Beaver counted twice for tail-slap and gnaw). Avian representation: 60 entries (89.6%). Mammalian representation: 7 entries (10.4%, 5 unique species). Two mammalian orders (Rodentia, Carnivora). Two mammalian families (Castoridae, Mustelidae). Mustelidae count: 4 of 8 PNW species, 50% of PNW mustelid diversity. The Mustelidae quartet (63-66) is the engine's deepest family exploration -- doubles the previous same-family record. Three Mustelid genera reclassified within the quartet (*Lutra* → *Lontra*, *Mustela* → *Neogale*, *Martes* → *Pekania*); only the American Marten retains its original genus.
+
+## Cross-References
 
 | Connection | From | To | Nature |
 |-----------|------|-----|--------|
-| S36-064 | Neko Case (66) | Jesse Sykes (64) | Alt-country root system. Energy inverted: E=2 vs E=4. Dusk vs country thunder. Same darkness, different vectors. Wandscher/Whiskeytown lineage connects both. |
-| S36-043 | Neko Case (66) | Ann Wilson (43) | Powerful female voice cluster. Wilson E=5 arena, Case E=4 intimate. Both volcanic, different scale. |
-| S36-052 | Neko Case (66) | Brandi Carlile (52) | E=4 shared, powerful voices, country-folk roots, PNW women. Carlile = communal. Case = solitary. |
-| S36-058 | Neko Case (66) | Death Cab for Cutie (58) | Label pathways diverge. Indie-to-major vs indie-to-indie. Two answers, same question. |
-| S36-063 | Neko Case (66) | Kenny Loggins (63) | Adjacent I-5 nodes: Tacoma south, Everett north. FM sheen vs country thunder. Commercial vs independent. |
-| SPS-063 | Fisher (66) | River Otter (63) | MUSTELIDAE QUARTET endpoints. Social to spectral. River to dense forest. Quartet frames. |
-| SPS-064 | Fisher (66) | Mink (64) | PREDATION CONTRAST. Surplus killing vs specialist predation. Same family, opposite strategies. |
-| SPS-065 | Fisher (66) | American Marten (65) | CONSECUTIVE MUSTELID. Canopy to forest floor. Ancient vs dense forest. Size doubles. |
-| SPS-004 | Fisher (66) | Northern Spotted Owl (4) | DENSE-FOREST CONSERVATION. Both closed-canopy dependent. Both conservation flagships. 62-degree span. |
-| SPS-054 | Fisher (66) | Pileated Woodpecker (54) | LARGE-TREE DEPENDENCY. Both need big trees. Cavity architect and cavity tenant. |
+| S36-064 | Neko Case (66) | Jesse Sykes (64) | Alt-country root system shared. Both women, both country-folk tradition, both fierce independence. Energy inverted: Sykes E=2, Case E=4. The dusk vs the country thunder. Prairie noir (receding) vs alt country (advancing). Same darkness, different vectors. Wandscher/Whiskeytown lineage connects both. |
+| S36-043 | Neko Case (66) | Ann Wilson (43) | Powerful female voice cluster. Wilson E=5 arena, Case E=4 intimate. Both volcanic. Wilson sings to stadiums; Case sings to rooms. Arena power vs conviction power. |
+| S36-052 | Neko Case (66) | Brandi Carlile (52) | E=4 shared, powerful voices, country-folk roots, PNW women, Grammy nominees. Carlile = communal crescendo, Case = solitary devastation. Carlile lifts. Case dismantles. |
+| S36-058 | Neko Case (66) | Death Cab for Cutie (58) | Label pathway contrast. Death Cab: Barsuk to Atlantic (indie to major). Case: Bloodshot to Anti- (indie to indie). Two answers to the same question. |
+| S36-063 | Neko Case (66) | Kenny Loggins (63) | Adjacent I-5 nodes: Tacoma (south) and Everett (north), both flanking Seattle. FM sheen vs country thunder. Polished vs raw. Commercial vs independent. |
+| S36-053 | Neko Case (66) | Fleet Foxes (53) | Cathedral harmony vs country thunder. Voices combined into transcendence vs single voice in transcendence. Both PNW, both Grammy nominees. |
+| S36-060 | Neko Case (66) | Ben Gibbard solo (60) | The bare wire (stripped to essentials) vs the country thunder (maximum capacity). Both PNW solo voices. |
+| SPS-063 | Fisher (66) | River Otter (63) | MUSTELIDAE QUARTET endpoints. Social (63) to spectral (66). River to dense forest. 5-14 kg to 2-6 kg. Quartet frames: social exuberance to solitary power. |
+| SPS-064 | Fisher (66) | Mink (64) | PREDATION CONTRAST. Surplus killing (Mink) vs specialist predation (Fisher). Indiscriminate vs precise. Same family, opposite strategies. |
+| SPS-065 | Fisher (66) | American Marten (65) | CONSECUTIVE MUSTELID. Old-growth canopy (65) to dense forest floor (66). Marten needs ancient forest; Fisher needs dense forest. Size doubles. |
+| SPS-004 | Fisher (66) | Northern Spotted Owl (4) | DENSE-FOREST CONSERVATION. Both need closed canopy, large trees. Both conservation flagships. Acoustic parallel: haunting hoot vs terrifying scream, both nocturnal, both rare. Span: 62 degrees. |
+| SPS-054 | Fisher (66) | Pileated Woodpecker (54) | LARGE-TREE DEPENDENCY. Both need large-diameter trees. Woodpecker creates cavities; Fisher may use abandoned woodpecker cavities. Dense-forest associates. |
+| SPS-058 | Fisher (66) | Wood Duck (58) | Mallard E=5 common quack vs Fisher E=5 rare scream — power without prevalence comparison via degree 59 Mallard. Same energy, opposite prevalence. |
+| SPS-061 | Fisher (66) | American Beaver (61) | Fur trade thread origin. Beaver was the first commercially trapped species; Fisher is the species trapped to local extinction. Conservation outcomes diverge. |
+| SPS-062 | Fisher (66) | Beaver Chewing (62) | Mammalian-era origin vs mammalian-era culmination. Beaver entered as ecosystem engineer; Fisher closes the Mustelidae quartet. |
+
+## Engine Position
+
+Degree 66 is the eighteen-and-one-third mark of the circle's first sixth (66/360 = 18.33%). Cumulative inventory: 67 entries across 65 unique organisms; 67 acoustic elements per side; 67 artist-city patterns; 66 blue notes; 48 genre stages; 5 Coast Salish territories; 5 I-5 corridor nodes; 20 non-male artists (29.9%); 7 mammalian entries (5 species); 4 Mustelidae quartet members. Structural ledgers closing at degree 66: the Mustelidae quartet completes (must end here -- a fifth would be redundant); the I-5 corridor reaches five nodes (full Portland-to-Bellingham mapping); Coast Salish territorial map reaches five (one per I-5 node); the powerful female voice cluster crystallizes (Wilson 43, Carlile 52, Case 66 -- three deployments minimum to triangulate). Structural pressure for degree 67: must NOT be Mustelidae; should be Aves (taxonomic balance after seven mammalian entries); should be Passeriformes (eleven consecutive non-passerines is the engine's longest non-passerine streak); the marine gap and raptor gap remain unfilled, with **Bald Eagle** as optimal multi-gap closure.
 
 ## Infrastructure
 
-**Part A:** `www/tibsfox/com/Research/S36/research/releases/066-neko-case/` -- research.md, index.html, knowledge-nodes.json, retrospective.md
-**Part B:** `www/tibsfox/com/Research/SPS/research/releases/066-fisher/` -- research.md, index.html, knowledge-nodes.json, retrospective.md
-**Release notes:** `docs/release-notes/v1.49.206/README.md`
-
-**Total: 8 files** -- standard degree package.
+- `docs/release-notes/v1.49.206/README.md` -- this document
+- `docs/release-notes/v1.49.206/chapter/00-summary.md` -- summary chapter
+- `docs/release-notes/v1.49.206/chapter/03-retrospective.md` -- retrospective chapter
+- `docs/release-notes/v1.49.206/chapter/04-lessons.md` -- lessons chapter
+- `docs/release-notes/v1.49.206/chapter/99-context.md` -- context chapter
+- Research artifacts (Neko Case): research.md, knowledge-nodes.json, retrospective.md, index.html (~9,500 words)
+- Research artifacts (Fisher): research.md, knowledge-nodes.json, retrospective.md, index.html (~8,500 words)
+- Commit: `20ca70e594200182d9dda316e68ea516566081fb`
+- Files changed: 9 (release notes + research artifacts both halves + constellation update)
 
 ## Retrospective
 
-**What Worked:**
-1. Tacoma entry thoroughly documented -- the fifth I-5 corridor node fills the gap between Portland and Seattle. The geographic spine is now continuous from Portland to Bellingham. The Tacoma-Everett symmetry (south/north flanking Seattle) is clean and analytically productive
-2. Alt Country genre established with clear lineage -- the connection to the alt-country tradition entering at degree 64 via Wandscher is documented. The distinction between Sykes' Folk classification and Case's Alt Country classification is analytically grounded: the country element is primary in Case's music
-3. Country thunder acoustic element grounded in audible characteristics -- the moment when the voice opens up from controlled country phrasing into volcanic power. Distinct from all prior vocal elements (the dusk, the bare wire, the FM sheen, the testimony roar). Immediately audible in Case's recordings
-4. Powerful female voice cluster identified -- three powerful-voiced women (Wilson 43, Carlile 52, Case 66) across three genres, three energy levels, three deployments (arena, communal, solitary). The engine's most productive vocal-comparison framework
-5. The New Pornographers connection documented -- the dual identity (dark solo artist / bright pop band member) reveals Case's range. Vancouver/Canadian indie pop enters the engine
-6. Bloodshot-to-Anti- label progression analyzed -- indie-to-indie contrasts with Death Cab's indie-to-major path. Case's choice to stay independent documented as institutional commitment
-7. Nature imagery thoroughly analyzed -- foxes, birds, tornadoes, storms as structural (not decorative) emotional vocabulary. The fox-as-margin-dweller connects to Case's wanderer position. "Curse of the I-5 Corridor" convergence noted
-8. The Mustelidae quartet is the engine's definitive family exploration -- four consecutive entries from the same family, each occupying a genuinely different niche. River to creek bank to canopy to forest floor. The quartet works because each member is genuinely different; four is the maximum
-9. First reintroduced species introduces a new conservation category -- the Fisher's extirpation and managed return from British Columbia is unique in the engine and structurally important. The fur trade thread reaches its most extreme expression
-10. Porcupine predation is the most compelling behavioral innovation since play (degree 63) -- the face-attack technique, 25-30 minute engagement, quill tolerance, possible cultural transmission. Rich, specific, behaviorally novel
-11. Power without prevalence is a genuine acoustic innovation -- E=5 but almost never heard. The paradox introduces a new dimension to the energy scale and distinguishes the Fisher from the Mallard
-12. The Neko Case parallel is strong on multiple levels -- fierce vocalizations, wild/untameable quality, reclaiming abandoned territory, Tacoma roots, maximum intensity. Operates across biological, geographic, and aesthetic dimensions
+### What Worked
 
-**What Could Be Better:**
-1. FOUR consecutive Mustelidae is at the saturation point -- the quartet works because each member is genuinely different, but a fifth would be redundant. ABSOLUTE REQUIREMENT: degree 67 must NOT be Mustelidae
-2. NO RAPTOR in 67 entries -- zero raptors. The engine's longest-standing unfilled gap. Bald Eagle remains optimal candidate (marine + raptor + Accipitriformes = multi-gap closure)
-3. NO PASSERIFORM in 11 degrees -- eleven consecutive non-passerines (56-66). Passeriformes percentage drops to 73.1% (49 of 67). Longest non-passerine streak in engine history. Return to Passeriformes structurally overdue
-4. SIX CONSECUTIVE MAMMALS -- mammalian era degrees 61-66. Seven mammalian entries. Productive but creating imbalance. A return to Aves would restore taxonomic diversity
-5. NO MARINE SPECIES -- the marine gap remains unchanged. Dense forest (66) is as far from marine as possible
-6. Degree 65 cross-reference limited -- degree 65 (Aaberg/Marten) is referenced but cross-references not yet fully integrated. ACCEPTED
-7. Case biographical detail partially reliant on interviews -- she is private about personal history. Engine's analytical focus is on the music. ACCEPTED
-8. Post-Hell-On (2018) activity at lower resolution -- no confirmed new solo album at time of writing. Consistent with Case's 3-5 year release pace. ACCEPTED
+- Tacoma entry thoroughly documented -- the fifth I-5 corridor node fills the gap between Portland and Seattle. The geographic spine is now continuous from Portland to Bellingham. The Tacoma-Everett symmetry (south/north flanking Seattle) is clean and analytically productive.
+- Alt Country genre established with clear lineage -- the connection to the alt-country tradition entering at degree 64 via Wandscher is documented. The distinction between Sykes' Folk classification and Case's Alt Country classification is analytically grounded: the country element is primary in Case's music.
+- Country thunder acoustic element grounded in audible characteristics -- the moment when the voice opens up from controlled country phrasing into volcanic power. Distinct from all prior vocal elements (the dusk, the bare wire, the FM sheen, the testimony roar). Immediately audible in Case's recordings.
+- Powerful female voice cluster identified -- three powerful-voiced women (Wilson 43, Carlile 52, Case 66) across three genres, three energy levels, three deployments (arena, communal, solitary). The engine's most productive vocal-comparison framework.
+- The New Pornographers connection documented -- the dual identity (dark solo artist / bright pop band member) reveals Case's range. Vancouver/Canadian indie pop enters the engine.
+- Bloodshot-to-Anti- label progression analyzed -- indie-to-indie contrasts with Death Cab's indie-to-major path. Case's choice to stay independent documented as institutional commitment.
+- Nature imagery thoroughly analyzed -- foxes, birds, tornadoes, storms as structural (not decorative) emotional vocabulary. The fox-as-margin-dweller connects to Case's wanderer position. "Curse of the I-5 Corridor" convergence noted.
+- The Mustelidae quartet is the engine's definitive family exploration -- four consecutive entries from the same family, each occupying a genuinely different niche. River to creek bank to canopy to forest floor. The quartet works because each member is genuinely different; four is the maximum.
+- First reintroduced species introduces a new conservation category -- the Fisher's extirpation and managed return from British Columbia is unique in the engine and structurally important. The fur trade thread reaches its most extreme expression.
+- Porcupine predation is the most compelling behavioral innovation since play (degree 63) -- the face-attack technique, 25-30 minute engagement, quill tolerance, possible cultural transmission. Rich, specific, behaviorally novel.
+- Power without prevalence is a genuine acoustic innovation -- E=5 but almost never heard. The paradox introduces a new dimension to the energy scale and distinguishes the Fisher from the Mallard.
+- The Neko Case parallel is strong on multiple levels -- fierce vocalizations, wild/untameable quality, reclaiming abandoned territory, Tacoma roots, maximum intensity. Operates across biological, geographic, and aesthetic dimensions.
+
+### What Could Be Better
+
+- FOUR consecutive Mustelidae is at the saturation point -- the quartet works because each member is genuinely different, but a fifth would be redundant. ABSOLUTE REQUIREMENT: degree 67 must NOT be Mustelidae.
+- NO RAPTOR in 67 entries -- zero raptors. The engine's longest-standing unfilled gap. Bald Eagle remains optimal candidate (marine + raptor + Accipitriformes = multi-gap closure).
+- NO PASSERIFORM in 11 degrees -- eleven consecutive non-passerines (56-66). Passeriformes percentage drops to 73.1% (49 of 67). Longest non-passerine streak in engine history. Return to Passeriformes structurally overdue.
+- SIX CONSECUTIVE MAMMALS -- mammalian era degrees 61-66. Seven mammalian entries. Productive but creating imbalance. A return to Aves would restore taxonomic diversity.
+- NO MARINE SPECIES -- the marine gap remains unchanged. Dense forest (66) is as far from marine as possible.
+- Degree 65 cross-reference limited -- degree 65 (Aaberg/Marten) is referenced but cross-references not yet fully integrated. ACCEPTED.
+- Case biographical detail partially reliant on interviews -- she is private about personal history. Engine's analytical focus is on the music. ACCEPTED.
+- Post-Hell-On (2018) activity at lower resolution -- no confirmed new solo album at time of writing. Consistent with Case's 3-5 year release pace. ACCEPTED.
 
 ## Lessons Learned
 
-1. The I-5 corridor's five-node mapping (Portland, Tacoma, Seattle, Everett, Bellingham) demonstrates that the engine's geography is not a single city but a corridor -- a 275-mile chain of music cities connected by a single interstate and a chain of sovereign Coast Salish territories. Each node has a different character, each corresponds to a different cultural identity, and the corridor itself is becoming the engine's most productive geographic framework
-2. Alt Country at Genre Stage 48 represents a genuine genre departure -- not folk, not indie rock, not a hybrid, but a named genre with its own tradition and institutional history. The alt-country lineage that entered via Wandscher at degree 64 now has its own genre classification. The engine's genre vocabulary continues to expand
-3. The three-level energy jump (E=1 to E=4, degrees 65 to 66) demonstrates that the engine does not smooth transitions. It juxtaposes. The contrast between Aaberg's piano whisper and Case's volcanic howl is more instructive than a gradual transition would be. The CSV ordering generates these contrasts organically
-4. The powerful female voice cluster (Wilson/Carlile/Case) is the engine's most productive vocal-comparison framework -- three voices, three genres (Classic Rock, Folk/Americana, Alt Country), three energy levels (E=5, E=4, E=4), three deployments (arena, communal, solitary). The cluster illuminates what "powerful female voice" means by showing three different answers
-5. The Mustelidae quartet (63-66) sets the definitive standard for family exploration -- four species, four habitats, four sounds, four sizes, tracing a complete gradient from water to deep forest. But four consecutive entries from one family in a 360-species engine is the absolute maximum. The quartet must end here and future same-family entries should be distributed across later degrees
-6. The Fisher's reintroduction narrative introduces a conservation category that no previous species could provide: managed return. The engine now has three conservation categories -- continuously present, declining (Spotted Owl), and reintroduced (Fisher). The fur trade thread (Beaver, Mink, Fisher) reaches its most extreme expression at degree 66: a species trapped to local extinction
-7. Power without prevalence (E=5 but rare) suggests that the energy scale captures acoustic power but not experiential frequency. The Fisher's scream is as loud as the Mallard's quack but infinitely rarer. Future high-energy elements should be evaluated for both power and prevalence
-8. Nature imagery entering as structural vocabulary at degree 66 connects the engine's music analysis to its ecological analysis in a way no previous degree has achieved. Case's foxes and birds and tornadoes are metaphorical; the engine's species are biological. But they share a territory -- the same Pacific Northwest landscape that produces both the music and the species
-9. The Bloodshot-to-Anti- label progression provides a template for understanding how artists navigate the independent music ecosystem. Case's indie-to-indie path contrasts with Death Cab's indie-to-major path. Both are valid. The engine documents both
-10. The Neko Case / Fisher parallel at degree 66 is one of the strongest Part A-Part B resonances in the engine -- fierce vocalizations, wild/untameable quality, reclaiming abandoned territory, Tacoma/forest geographic resonance, and maximum-intensity delivery. The parallel operates across biological, geographic, and aesthetic dimensions simultaneously
+- **The I-5 corridor's five-node mapping is the engine's most productive geographic framework.** Portland, Tacoma, Seattle, Everett, Bellingham -- 275 miles of music cities connected by a single interstate and a chain of sovereign Coast Salish territories. Each node has a different character; each corresponds to a different cultural identity; the corridor itself is becoming the engine's structural geography rather than any single city.
+- **Alt Country at Genre Stage 48 represents a genuine genre departure, not a folk variant.** Not folk, not indie rock, not a hybrid, but a named genre with its own tradition and institutional history. The alt-country lineage that entered via Wandscher at degree 64 now has its own genre classification. The engine's genre vocabulary continues to expand at moments of structural pivot.
+- **The three-level energy jump (E=1 to E=4, degrees 65 to 66) demonstrates the engine does not smooth transitions.** It juxtaposes. The contrast between Aaberg's piano whisper and Case's volcanic howl is more instructive than a gradual transition would be. The CSV ordering generates these contrasts organically and the engine takes them.
+- **The powerful female voice cluster (Wilson/Carlile/Case) is the engine's most productive vocal-comparison framework.** Three voices, three genres (Classic Rock, Folk/Americana, Alt Country), three energy levels (E=5, E=4, E=4), three deployments (arena, communal, solitary). The cluster illuminates what "powerful female voice" means by showing three different answers, and it crystallizes only at the moment when the engine has accumulated enough deployments to triangulate.
+- **The Mustelidae quartet (63-66) sets the definitive standard for family exploration.** Four species, four habitats, four sounds, four sizes, tracing a complete gradient from water to deep forest. But four consecutive entries from one family in a 360-species engine is the absolute maximum. The quartet must end here and future same-family entries should be distributed across later degrees.
+- **The Fisher's reintroduction narrative introduces a conservation category no previous species could provide: managed return.** The engine now carries three conservation categories -- continuously present, declining (Spotted Owl), and reintroduced (Fisher). The fur trade thread (Beaver, Mink, Fisher) reaches its most extreme expression at degree 66: a species trapped to local extinction.
+- **Power without prevalence (E=5 but rare) suggests the energy scale captures acoustic power but not experiential frequency.** The Fisher's scream is as loud as the Mallard's quack but infinitely rarer. Future high-energy elements should be evaluated for both power and prevalence -- the engine's energy axis is one-dimensional but real-world acoustic experience requires two.
+- **Nature imagery entering as structural vocabulary at degree 66 connects the engine's music analysis to its ecological analysis.** Case's foxes and birds and tornadoes are metaphorical; the engine's species are biological. But they share a territory -- the same Pacific Northwest landscape that produces both the music and the species. The convergence is the rare moment where Part A and Part B share imagery rather than only structural resonance.
+- **The Bloodshot-to-Anti- label progression provides a template for understanding indie-to-indie pathways.** Case's indie-to-indie path contrasts with Death Cab's indie-to-major path (Barsuk to Atlantic, degree 58). Both are valid responses to the question of what an artist does when they outgrow a first label. The engine documents both.
+- **The Neko Case / Fisher parallel at degree 66 is one of the strongest Part A-Part B resonances in the engine.** Fierce vocalizations, wild/untameable quality, reclaiming abandoned territory, Tacoma/forest geographic resonance, and maximum-intensity delivery. The parallel operates across biological, geographic, and aesthetic dimensions simultaneously, anchored in the principle that volume and frequency are independent.
 
 ---
 
 The country thunder and the scream. Degree 66 -- where power breaks free of containment. Neko Case introduces the country thunder, Tacoma enters as the fifth I-5 corridor node, Alt Country enters at Genre Stage 48, and the powerful female voice cluster crystallizes (Wilson/Carlile/Case). The Fisher completes the Mustelidae quartet (63-66), introduces the first reintroduced species, the first specialist predation, the first trophic cascade, and the paradox of power without prevalence. The country thunder does not need a stadium. It needs a song and a listener and the willingness to be devastated. The scream does not need an audience. It needs a forest and the darkness and the willingness to be terrified.
-
-</details>
