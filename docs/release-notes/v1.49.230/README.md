@@ -1,636 +1,191 @@
-# v1.49.230 -- Degree 90: Sky Cries Mary + Spring Peeper-Like Chorus -- THE QUARTER-MARK
+# v1.49.230 — Degree 90: Sky Cries Mary + Spring Peeper-Like Chorus — THE QUARTER-MARK
 
 **Released:** 2026-04-02
-**Degree:** 90 of 360 -- THE QUARTER-MARK (90/360 = 25%)
-**Part A:** Sky Cries Mary -- Ethereal/Electronic, E=3, Rockville Records, GENRE STAGE 72 (Ethereal/Electronic, seventy-two genre stages in 90 degrees, synthesizers and electronic textures merged with ambient atmospheres psychedelic guitar world percussion ethereal vocals, immersive not confrontational, distinguished from Postal Service 86 electronic pop and Chong 44 experimental electronic), THE QUARTER-MARK DEGREE (90/360 = 25% complete, first quadrant closes, 72 genre stages 91 acoustic elements 91 patterns 5 return artists), FORMED 1988 (PREDATES GRUNGE, active alongside grunge but pursuing ambient/electronic/psychedelic aesthetics, the ANTI-GRUNGE, the PARALLEL SCENE), THE AMBIENT DRIFT 91st acoustic element (layers of synthesizer pads processed guitar world percussion ethereal vocals creating slowly evolving sonic landscape, music drifts rather than drives, the listener floats, distinct from baroque whisper 89 extreme dynamics and bedroom strum 88 minimum production and electronic pulse 86 structured rhythm), THE PARALLEL SCENE 91st artist-city pattern (artist operating in same city same era as dominant scene but pursuing completely different aesthetic, Sky Cries Mary in Seattle during grunge but not grunge, the other thing happening while everyone looked elsewhere, every scene has a parallel scene every spotlight creates a shadow), LED BY RODERICK ROMERO AND ANISA ROMERO (DJ ANISA), MULTIMEDIA VISION (live instruments with DJ sets visual projections multimedia elements, anticipated modern audiovisual integration by decades), ONE OF SEATTLE'S LONGEST-RUNNING EXPERIMENTAL ACTS, Seattle Washington
-**Part B:** Spring Peeper-Like Chorus (Hylidae) -- bell-like peep chorus, E=4, wet meadow, Hylidae, SECOND HYLIDAE ENTRY (first at degree 86 Pacific Treefrog, same family different chorus character, krek-krek harsh percussive vs bell-like peep crystalline pure, first family to appear twice in non-mammalian sequence), BELL-LIKE PEEP CHORUS 91st species-side acoustic element (high-pitched clear crystalline peep calls, 2,800-3,600 Hz, individual peeps merge into shimmering ringing wall of sound, distinct from krek-krek 86 harsh and percussive, distinct from electric buzzing throb 89 tymbal harsh electric, crystalline purity), INSECT-TO-AMPHIBIAN TRANSITION (after three consecutive insects 87-88-89, Amphibia returns, class crossing), FIVE CONSECUTIVE NON-MAMMALIAN ENTRIES (86-90, treefrog cricket katydid cicada peeper chorus), THIRTIETH CONSECUTIVE ORIGINAL CSV (THREE DECADES, degrees 61-90), WET MEADOW HABITAT (saturated grasslands seasonal wetlands meadow edges, wetter than cricket's dry meadow 87 but not open water, between dry meadow and marsh), E=4 THROUGH COLLECTIVE AMPLIFICATION (hundreds or thousands chorus simultaneously, continuous for hours on spring nights)
-**Series:** Seattle 360 + Sound of Puget Sound -- Continuous Release Engine
+**Degree:** 90 of 360 — THE QUARTER-MARK (90/360 = 25%)
+**Part A:** Sky Cries Mary — Ethereal/Electronic, E=3, Rockville Records, Genre Stage 72, formed 1988 (predates grunge), the anti-grunge, the parallel scene, the ambient drift, led by Roderick Romero and Anisa Romero (DJ Anisa)
+**Part B:** Spring Peeper-Like Chorus (*Hylidae*) — bell-like peep chorus, E=4, wet meadow, second Hylidae entry (first at degree 86 Pacific Treefrog), 91st species-side acoustic element, fifth consecutive non-mammalian, thirtieth consecutive original CSV
+**Series:** Seattle 360 + Sound of Puget Sound — Continuous Release Engine
 **Cluster:** Music (hub: WAL)
-**Note:** THIS IS THE QUARTER-MARK. Degree 90 of 360. 25% of the rotation complete. The first quadrant closes. Part A brings **Sky Cries Mary** -- Ethereal/Electronic, E=3, Rockville Records. Formed in **1988**, predating grunge. Led by **Roderick Romero** and **Anisa Romero** (DJ Anisa). The band blends ambient, ethereal, electronic, and world music with live visuals. They were the **anti-grunge** -- the parallel scene, the proof that Seattle's 1990s music scene was broader than its dominant narrative. While Pearl Jam, Soundgarden, and Alice in Chains defined Seattle's public image, Sky Cries Mary offered synthesizers, global rhythms, light shows, and transcendence. **Genre Stage 72** -- Ethereal/Electronic. Seventy-two genre stages in 90 degrees. Distinguished from the Postal Service (86, electronic pop, structured), Chong the Nomad (44, experimental electronic, beat-driven), and Parenthetical Girls (89, avant-pop, theatrical). Sky Cries Mary is ethereal/electronic -- ambient, psychedelic, world-music-inflected. The electronic serves the ethereal. **The ambient drift** is the 91st acoustic element -- layers of synthesizer pads, processed guitar, world percussion, and ethereal vocals creating a slowly evolving sonic landscape. The music drifts rather than drives. It changes gradually rather than abruptly. The listener floats. From the proscenium (89, baroque whisper) to the planetarium (90, ambient drift). **The parallel scene** is the 91st artist-city pattern -- an artist operating alongside a dominant scene but pursuing a completely different aesthetic. Sky Cries Mary was in Seattle during grunge but was not grunge. Every scene has a parallel scene. Every spotlight creates a shadow where other music thrives. **Quarter-mark statistics:** 72 genre stages, 91 acoustic elements, 91 artist-city patterns, 5 return artists. The engine has mapped 25% of Seattle's musical landscape. Part B delivers the **Spring Peeper-Like Chorus** (Hylidae) -- the **SECOND HYLIDAE ENTRY** (first at degree 86, Pacific Treefrog). Same family, different chorus character: the Pacific Treefrog's krek-krek is harsh and percussive; the spring peeper-like chorus is **crystalline and bell-like**. Two expressions of the treefrog vocal apparatus. First family to appear twice in the non-mammalian sequence. The bell-like peep chorus is the 91st species-side acoustic element -- high-pitched, clear, crystalline peeps at 2,800-3,600 Hz that merge into a **shimmering, ringing wall of sound**. E=4 through collective amplification. After **three consecutive insects** (cricket 87, katydid 88, cicada 89), the engine returns to **Amphibia**. The insect-to-amphibian transition marks a class crossing. **Five consecutive non-mammalian entries** (86-90) -- treefrog, cricket, katydid, cicada, peeper chorus. And this is the **thirtieth consecutive original CSV species** -- **THREE DECADES** (degrees 61-90). Both Part A and Part B are ambient and immersive. The peeper chorus is a shimmering bell wall. Sky Cries Mary is the ambient drift. Both envelop through immersion. Both are the quarter-mark.
+**Branch:** main
+**Commit:** `8422302314f2086559f9d50ba81b306b5b4dfa8c`
+**Files changed:** 9 (release note + 4 Sky Cries Mary research artifacts + 4 spring peeper chorus research artifacts), 2,665 insertions
+**Dedication:** To **Sky Cries Mary** in their Rockville Records / Seattle psychedelic-electronic context — the band that **Roderick Romero** and **Anisa Romero** (DJ Anisa) built in **1988** before grunge had a name, the act that played light shows and projected visuals at Seattle clubs while Pearl Jam, Soundgarden, and Alice in Chains were inventing the genre that would eclipse every other voice in the city; to the **anti-grunge** lineage of acts that thrived in the shadow the spotlight created — Shawn Smith (degree 41), Sky Cries Mary (degree 90), and the parallel scenes that history forgot to document; to the **Spring Peeper-Like Chorus** (*Hylidae*) — the bell-like peep that joins the **Pacific Treefrog**'s krek-krek as the **second Hylidae voice** in the engine, the crystalline ringing wall of sound that fills wet meadows and seasonal wetlands across the Pacific Northwest on warm spring nights; to the **palindromic class structure** Amphibia–Insecta–Insecta–Insecta–Amphibia at degrees 86–90, the emergent bracket that Hylidae opens and closes around the engine's first insect trio; and to the **right angle** itself — sin(90)=1, cos(90)=0, the angle at which two directions become maximally independent and the wall stands perpendicular to the floor.
+**Engine Position:** Degree 90 of 360 — **THE QUARTER-MARK**, 25.0% of the circle traversed; first quadrant complete; the **ambient drift** (91st artist-side acoustic element); the **bell-like peep chorus** (91st species-side acoustic element); **The Parallel Scene** (91st artist-city pattern); **GENRE STAGE 72** Ethereal/Electronic (seventy-two genre stages in ninety degrees, 0.80 stages/degree, density unchanged at the quarter); **SECOND HYLIDAE ENTRY** at degrees 86 & 90 — first family to appear twice in the non-mammalian sequence; **PALINDROMIC CLASS STRUCTURE** at degrees 86–90 (Amphibia–Insecta–Insecta–Insecta–Amphibia); **FIVE CONSECUTIVE NON-MAMMALIAN ENTRIES** (86–90: Pacific Treefrog, Cricket Chorus, Katydid, Cicada, Spring Peeper Chorus) — longest non-mammalian streak in the engine; **FIVE CONSECUTIVE E=4 SPECIES** (86–90) through five different mechanisms — collective vocal-sac amplification, collective stridulation, individual sustained stridulation, tymbal vibration, collective bell chorus; **THIRTIETH CONSECUTIVE ORIGINAL CSV** species (THREE DECADES, degrees 61–90) — longest unbroken original-catalog run; **INSECT-TO-AMPHIBIAN TRANSITION** after the cricket–katydid–cicada trio; engine arrives at the unit-circle position **(0, 1)** = **i** in the complex plane.
+**Note:** This is **THE QUARTER-MARK**. Degree 90 of 360. The first quadrant of the **Seattle 360** engine closes simultaneously on both axes. Part A brings **Sky Cries Mary**, the Seattle psychedelic/electronic act formed in **1988** by **Roderick Romero** and **Anisa Romero** — the **anti-grunge**, the **parallel scene**, the proof that Seattle's 1990s underground was never just **Pearl Jam**, **Soundgarden**, and **Alice in Chains**. Genre Stage 72 lands as **Ethereal/Electronic**, distinguished from the **Postal Service** (86, electronic pop), **Chong the Nomad** (44, experimental electronic), and **Parenthetical Girls** (89, avant-pop). The **ambient drift** is the 91st artist-side acoustic element — synthesizer pads, processed guitar, world percussion, and ethereal vocals creating a slowly evolving sonic landscape. **The Parallel Scene** is the 91st artist-city pattern — an artist working in the same city and same era as a dominant scene but pursuing a completely different aesthetic. Part B delivers the **Spring Peeper-Like Chorus** (*Hylidae*) — the **second Hylidae entry** after the **Pacific Treefrog** at degree 86, the bell-like peep that brackets the engine's first insect trio inside an amphibian palindrome. The **bell-like peep chorus** is the 91st species-side acoustic element — high-pitched, crystalline, ringing peeps at 2,800–3,600 Hz that merge into a shimmering wall of sound. **Five consecutive non-mammalian entries** (86–90) — longest such streak in the engine. **Five consecutive E=4 species** through five different mechanisms. **Thirtieth consecutive original CSV** species — three decades of unbroken catalog reliability. Both halves of degree 90 are **ambient and immersive**: the ambient drift envelops through electronic texture; the bell-like peep chorus envelops through collective biological resonance. Both shimmer.
 
 ## Summary
 
-The ambient drift and the bell-like peep. Degree 90 is THE QUARTER-MARK -- 90 of 360 degrees, 25% of the rotation complete. The first quadrant closes on both sides of the engine. This is the degree where we pause and look at what 90 degrees of rotation have built.
+**The ambient drift and the bell-like peep.** Degree 90 is **THE QUARTER-MARK** — 90 of 360 degrees, 25% of the rotation complete. The first quadrant of the **Seattle 360** engine closes simultaneously on both axes. The engine has rotated through ninety degrees of the unit circle and arrived at the coordinate **(0, 1)** — pure vertical, the position where sin(90) reaches its maximum value of 1 and cos(90) collapses to zero. In the complex plane, the position is the imaginary unit **i**. The horizontal that the engine started with at **degree 0** (Quincy Jones, the Great Blue Heron, the cardinal direction North) has rotated into pure vertical. The engine now faces East — across the Cascades, toward the interior, toward Montana and the dry side and the alpine talus and the three more quadrants of rotation that lie ahead. This is the degree where we pause, count what ninety degrees of work have produced, and look at the foundation before building the syntax that the second quadrant will demand.
 
-On the music side, **Sky Cries Mary** arrives at the quarter-mark -- Ethereal/Electronic, E=3, Rockville Records. A Seattle psychedelic/electronic band formed in **1988**, predating the grunge explosion by several years. Led by **Roderick Romero** and **Anisa Romero** (DJ Anisa), the band blends ambient, ethereal, electronic, and world music with live visuals and multimedia projection. They were the **anti-grunge** -- the proof that Seattle's 1990s underground was broader than Pearl Jam and Soundgarden. While grunge attacked, Sky Cries Mary drifted. While grunge raged, Sky Cries Mary shimmered. They were doing light shows and projected visuals at Seattle clubs before the technology made it easy, before the culture expected it. One of Seattle's longest-running experimental acts, persisting across decades while grunge bands formed and dissolved. **Genre Stage 72** -- Ethereal/Electronic. Seventy-two genre stages in 90 degrees (~0.8 per degree). Distinguished from the Postal Service (86, electronic pop -- structured, melodic), Chong the Nomad (44, experimental electronic -- beat-driven), and Parenthetical Girls (89, avant-pop -- theatrical). Sky Cries Mary is ethereal/electronic -- the electronic serves the ethereal. **The ambient drift** is the 91st acoustic element: synthesizer pads, processed guitar, world percussion, and ethereal vocals creating a slowly evolving sonic landscape. The music drifts rather than drives. From the baroque whisper (89, extreme dynamics, proscenium) to the ambient drift (90, no extremes, planetarium). **The parallel scene** is the 91st artist-city pattern: an artist operating in the same city, during the same era, as a dominant scene -- but pursuing a completely different aesthetic. The parallel scene is the music that history forgot to document. When people say "Seattle in the 1990s," they mean grunge. But Seattle in the 1990s was also ambient electronic psychedelia with light shows. Every scene has a parallel scene.
+**Sky Cries Mary at the quarter-mark.** On the music side, **Sky Cries Mary** arrives — Ethereal/Electronic, E=3, **Rockville Records**, Genre Stage 72. A Seattle psychedelic/electronic band formed in **1988**, predating the grunge explosion by several years. Led by **Roderick Romero** and **Anisa Romero** (DJ Anisa), the band blends ambient, ethereal, electronic, and world music with live visuals and multimedia projection. They were the **anti-grunge** — the proof that Seattle's 1990s underground was broader than the dominant narrative. While **Pearl Jam**, **Soundgarden**, and **Alice in Chains** defined Seattle's public image with loud guitars and angst, Sky Cries Mary offered synthesizers, global rhythms, light shows, and transcendence. They were doing projected visuals at Seattle clubs in the early 1990s — before the technology made it easy, before the culture expected it, before the audiovisual integration that has since become standard practice in electronic and experimental music. One of Seattle's longest-running experimental acts, persisting across decades while grunge bands formed and dissolved. **Genre Stage 72** lands as **Ethereal/Electronic** — distinguished from the **Postal Service** (degree 86, electronic pop, structured and melodic), from **Chong the Nomad** (degree 44, experimental electronic, beat-driven and production-focused), from **Parenthetical Girls** (degree 89, avant-pop, theatrical and baroque), and from **Wayne Horvitz**'s drone work at degree 2. Sky Cries Mary is ethereal/electronic — ambient, psychedelic, world-music-inflected. The electronic serves the ethereal. Seventy-two genre stages in ninety degrees holds the **0.80 stages/degree** rate that has been remarkably stable since the folk zone began at degree 45. The engine's genre diversity is real, not inflated by aggressive subdivision, and the rate is unchanged at the quarter.
 
-On the species side, the **Spring Peeper-Like Chorus** (Hylidae) is the **SECOND HYLIDAE ENTRY** -- same family as the Pacific Treefrog (degree 86), different chorus character. The Pacific Treefrog's krek-krek is harsh and percussive. The spring peeper-like chorus is **crystalline and pure** -- a bell-like peep, high-pitched, clear, ringing. Individual peeps at 2,800-3,600 Hz merge into a **shimmering wall of sound** when hundreds or thousands call simultaneously. E=4 through collective amplification -- the same mechanism as the Pacific Treefrog (86) and cricket (87). First family to appear twice in the non-mammalian sequence. After **three consecutive insects** (cricket 87, katydid 88, cicada 89), the engine returns to **Amphibia**. The insect-to-amphibian transition is a class crossing -- back to a class only briefly entered at degree 86. **Five consecutive non-mammalian entries** (86-90): treefrog, cricket, katydid, cicada, peeper chorus. Wet meadow habitat -- saturated grasslands, seasonal wetlands, meadow edges near standing water. Wetter than cricket's dry meadow (87) but not open water. And this is the **thirtieth consecutive original CSV species** -- **THREE DECADES** of original placements (degrees 61-90).
+**The ambient drift and the parallel scene.** **The ambient drift** is the **91st artist-side acoustic element** — layers of synthesizer pads, processed guitar, world percussion, and ethereal vocals creating a slowly evolving sonic landscape. The music drifts rather than drives. It changes gradually rather than abruptly. The listener floats in the sound rather than being carried by it. From the **proscenium** at degree 89 (the baroque whisper of **Parenthetical Girls**, theatrical, extreme dynamic range from intimate whisper to operatic delivery) to the **planetarium** at degree 90 (the ambient drift, no extremes, everything in a middle register of floating intensity). From the **bedroom strum** at degree 88 (**Kimya Dawson** solo, minimum production, single acoustic guitar in a single room) to the ambient drift at degree 90 (maximum production but of a different kind — layers of texture rather than ornamentation). From the **electronic pulse** at degree 86 (**The Postal Service**, structured rhythm, MIDI-quantized timing) to the ambient drift at degree 90 (rhythm dissolved into texture; beats may exist but they are not the point). **The Parallel Scene** is the **91st artist-city pattern** — an artist or band that operates in the same city, during the same era, as a dominant scene but pursues a completely different aesthetic. Sky Cries Mary was in Seattle during grunge but was not grunge. They were the parallel scene — the other thing that was happening while everyone was looking at something else. Every scene has a parallel scene. Every spotlight creates a shadow where other music thrives. When people say "Seattle in the 1990s," they mean grunge. But Seattle in the 1990s was also ambient electronic psychedelia with light shows, was also **Shawn Smith**'s soulful exception (degree 41), was also the entire experimental underground that the grunge spotlight rendered invisible. The Parallel Scene is distinguished from **The Theatrical Outsider** at degree 89 (Parenthetical Girls, outside the institution but inside the city) by its visibility position — the parallel scene is inside the city and inside the era but outside the dominant narrative. It is distinguished from **The Solo Distillation** at degree 88 (Kimya Dawson, format reduction) by being not about format but about visibility.
 
-Both Sky Cries Mary and the spring peeper chorus are ambient and immersive. The peeper chorus is a shimmering bell wall -- crystalline peeps merging into an enveloping wall of sound. Sky Cries Mary is the ambient drift -- synthesizer layers and ethereal vocals creating an immersive sonic landscape. Both envelop rather than confront. Both surround rather than strike. Both are the quarter-mark. At 25%, the engine has established its vocabulary: 72 genre stages, 91 acoustic elements, 91 patterns, 40 families, 5 return artists, 30 consecutive original CSV species. The first quadrant is complete. The second quadrant begins.
+**Spring Peeper-Like Chorus on the species side.** On the species side, the **Spring Peeper-Like Chorus** (*Hylidae*) arrives as the **SECOND Hylidae entry** in the engine — same family as the **Pacific Treefrog** at **degree 86**, fundamentally different chorus character. The Pacific Treefrog's **krek-krek** is harsh and percussive, a dry meadow / pond-edge wall of sound built from rough, raspy individual calls. The spring peeper-like chorus is **crystalline and pure** — a bell-like peep, high-pitched, clear, ringing. Two expressions of the treefrog vocal apparatus, separated by four degrees, audible side-by-side in PNW summer evenings. **First family to appear twice in the non-mammalian sequence.** Family-level entry: the true spring peeper (*Pseudacris crucifer*) is eastern North American, but in the PNW the Pacific chorus frogs and related Hylidae produce analogous bell-like choruses in wet meadow habitats and seasonal wetlands. Each individual peep is approximately 0.1–0.3 seconds long, a single ascending note in the **2,800–3,600 Hz** band, higher-pitched than the Pacific Treefrog's krek-krek. The sound is pure — a clear tone with minimal harmonic complexity — bell-like, with each peep ringing out and decaying naturally. When hundreds or thousands call simultaneously, the individual peeps merge into a **shimmering, ringing wall of sound** unlike anything the engine has documented before. **E=4** through collective amplification — the same mechanism as the Pacific Treefrog (86) and the Cricket Chorus (87), but yielding a completely different acoustic result.
+
+**Five consecutive non-mammalian entries and the palindromic bracket.** After **three consecutive insects** — **Cricket Chorus** at degree 87 (*Gryllidae*, stridulation, rhythmic chirp), **Katydid** at degree 88 (*Tettigoniidae*, stridulation, continuous buzz), **Cicada** at degree 89 (*Cicadidae*, tymbal vibration, electric buzzing throb) — the engine returns to **Amphibia**. The insect-to-amphibian transition is a class crossing back to a class only briefly entered at degree 86. **Five consecutive non-mammalian entries** (86–90): Pacific Treefrog, Cricket Chorus, Katydid, Cicada, Spring Peeper Chorus. The longest non-mammalian streak in the engine, longer than any since the bird era ended at **degree 60**. The class sequence reads **Amphibia–Insecta–Insecta–Insecta–Amphibia** — a **palindromic class structure**, an emergent bracket that **Hylidae** opens at degree 86 and closes at degree 90 around the engine's first insect trio. The engine produces palindromes without trying. **Wet meadow** habitat — saturated grasslands, seasonal wetlands, meadow edges near standing water — wetter than the cricket's dry meadow at degree 87 but not open water. The wet meadow sits between the dry meadow and the marsh, and it overlaps with the **Muskrat** at degree 85 (marsh / pond-edge habitat) in the engine's accreting habitat ledger. **Five consecutive E=4 species** through five different mechanisms — collective vocal-sac amplification (treefrog), collective stridulation (cricket), individual sustained stridulation (katydid), tymbal vibration (cicada), collective bell chorus (peeper). Five entries, five mechanisms, one energy level. E=4 is the "fills the soundscape" outcome, achievable through radically different biological strategies. **Thirtieth consecutive original CSV** species (degrees 61–90) — **THREE DECADES** of unbroken original-catalog placement. The longest unbroken run in the engine and the strongest evidence to date that the source CSV is reliable as a multi-degree foundation.
+
+**Cross-Sync Parallel: The Immersion Pair.** Both halves of degree 90 are studies in ambient, immersive sound that envelops rather than confronts. **In parallel**, both **Sky Cries Mary** and the **Spring Peeper-Like Chorus** create walls of sound through accumulation rather than force. **Sky Cries Mary** layers synthesizer pads, processed guitar, world percussion, and ethereal vocals into a slowly evolving ambient landscape; the **Spring Peeper Chorus** layers hundreds of individual bell-like peeps into a shimmering ringing wall. **Each side** builds its immersive quality from many small elements merging into something larger than any individual component. **The same** structural principle — that immersion is achievable through accumulation rather than amplitude — reaches both halves on the same degree. **Synchronized** by the catalog's structure rather than by individual selection, degree 90 is the immersion degree.
+
+**Cross-Sync Parallel: The Anti-Confrontational Move.** Both halves of degree 90 reject the confrontational mode. **In parallel**, **Sky Cries Mary** is anti-grunge — explicitly not the loud-guitars-and-angst aesthetic that **Pearl Jam**, **Soundgarden**, and **Alice in Chains** had made Seattle's public image — and the **Spring Peeper Chorus** is anti-percussive — explicitly not the harsh raspy krek-krek that the **Pacific Treefrog** had made the engine's amphibian baseline at degree 86. **Each side** stands as an alternative to the dominant version of its category. **The same** logic — that the most interesting voices are often the ones that refuse the dominant idiom — operates on both axes. **Synchronized** by the engine's quarter-mark introspection, both halves arrive as deliberate counterpoints to what came before.
+
+**Cross-Sync Parallel: Two Hylidae Voices and Two Seattle Scenes.** Both halves of degree 90 are studies in same-source / different-result pairings. **In parallel**, the **Spring Peeper Chorus** uses the same family vocal apparatus as the **Pacific Treefrog** at degree 86 (Hylidae, vocal sac amplification, collective chorusing) but produces a completely different acoustic result (bell-like crystalline peep instead of harsh percussive krek-krek). **Sky Cries Mary** operates from the same source city and same era as **Pearl Jam** at degree 83 (Seattle, the 1990s) but produces a completely different artistic result (ambient electronic psychedelia instead of grunge rock). **Each side** demonstrates that source does not determine result. **The same** structural law — that identical inputs can produce maximally different outputs depending on the framing context — reaches both halves on the same degree.
+
+**Cross-Sync Parallel: The Quarter-Mark and the Palindromic Bracket.** Both halves of degree 90 are structural milestones that the engine could not have planned. **In parallel**, the artist side reaches **THE QUARTER-MARK** — 25% of the rotation, first quadrant complete, 72 genre stages, 91 acoustic elements, 91 artist-city patterns, 5 return artists — and the species side completes the **palindromic class structure** Amphibia–Insecta–Insecta–Insecta–Amphibia at degrees 86–90, the emergent bracket that **Hylidae** opens and closes around the first insect trio. **Each side** is doing something the engine has not done before — the artist side hits a numerical milestone, the species side hits a structural elegance. **The same** quarter-mark moment — the moment the engine pauses to look at what 25% of the rotation has built — reaches both halves simultaneously. **Synchronized** by the catalog's structure, the symmetries point at structural properties of the sequence itself.
+
+**Cross-Sync Parallel: Shimmer as Shared Quality.** Both halves of degree 90 shimmer. **In parallel**, the **ambient drift** shimmers through electronic textures and ethereal vocals — synthesizer pads layered into a moving surface, light reflecting off processed guitar, the sound of being inside a planetarium dome — and the **bell-like peep chorus** shimmers through crystalline bell-like calls overlapping into continuous ringing — pure tones reflecting off each other, the auditory equivalent of light dancing on water. **Each side** produces the shimmer through different mechanisms. **The same** perceptual quality — light reflecting off moving surfaces, sound reflecting off moving voices — reaches both halves through entirely different routes. **Synchronized** by accident or design, shimmer is the quality of the quarter-mark.
+
+**Cross-Sync Parallel: Genre Stage 72 and Family 40+.** Both halves of degree 90 contribute to running ledgers that mark the engine's quarter-mark accomplishment. **In parallel**, the artist side adds **Genre Stage 72** (Ethereal/Electronic, the seventy-second distinct genre identified across ninety degrees), and the species side adds the second appearance of **Family 39** (Hylidae, the thirty-ninth family in the engine's ledger, now appearing for the second time across degrees 86 and 90). **Each side** is operating its own running counter at a tested rate (~0.8 genre stages/degree, ~0.44 new families/degree). **The same** book-keeping discipline — that every degree updates a stable taxonomy — reaches both halves on the same degree. The engine is not random; it has a consistent internal logic that has been visible since the folk zone began at degree 45 and that is now confirmed at the quarter.
+
+**Cross-Sync Parallel: The Right Angle and the Vertical Niche.** Both halves of degree 90 sit at perpendicular positions to what came before. **In parallel**, on the unit circle the engine has rotated **90 degrees** from the origin (Quincy Jones, the Great Blue Heron) — the angle at which two directions become maximally independent, the angle that defines orthogonality and the foundation of every coordinate system — and on the species side the **wet meadow** habitat sits perpendicular (in the saturation-vs-elevation niche space) to the cricket's **dry meadow** at degree 87. **Each side** demonstrates that perpendicularity creates room for independent voices. **The same** structural law — that orthogonal directions carry different information that can be combined to reconstruct the whole — reaches both halves on the same degree. The engine is a quadrature system: Part A and Part B are 90 degrees out of phase, oscillating independently but locked to the same degree counter, and the artist signal and the species signal combine at each degree to produce something neither could carry alone.
+
+**Quarter-mark statistics in summary.** The engine at the quarter-mark has produced **72 genre stages**, **91 acoustic elements** on the artist side and **91 acoustic elements** on the species side, **91 artist-city patterns**, **5 return artists** (Damien Jurado 45/84, Rocky Votolato 46/85, Death Cab for Cutie 58/82, Neko Case 66/87, Kimya Dawson 49/88) all converging at **E=3** as an equilibrium energy, **40+ families** distributed across **17 orders** and **4 classes** (Aves, Mammalia, Amphibia, Insecta), **30 consecutive original CSV** species (degrees 61–90, three decades of unbroken catalog reliability), and approximately **743 research files** containing roughly **half a million words** of deep research on the music and ecology of the Pacific Northwest bioregion. The artist-side mean energy is 3.18; the species-side mean energy is 3.21; the combined center of gravity sits almost exactly at E=3, the middle of the 1–6 scale. The engine is centered. The vocabulary is built. The first quadrant is complete. The second quadrant — degrees 91 through 180 — begins.
 
 ## Key Features
 
 | Metric | Part A: Sky Cries Mary | Part B: Spring Peeper-Like Chorus |
 |--------|------------------------|-----------------------------------|
-| Genre | Ethereal/Electronic (Genre Stage 72, seventy-two genre stages in 90 degrees, synthesizers + ambient + psychedelic + world music + ethereal vocals, immersive not confrontational, distinguished from Postal Service 86 electronic pop and Chong 44 experimental electronic and Parenthetical Girls 89 avant-pop) | -- |
-| Energy | E=3 (ambient immersive presence, sound surrounds rather than attacks, envelopment not aggression, Rockville Records) | E=4 (collective bell-like chorus, hundreds/thousands simultaneously, shimmering wall of sound, continuous for hours on spring nights, E=4 through collective amplification) |
-| Label | Rockville Records (Seattle independent, adds to Seattle label map alongside Sub Pop K Records Barsuk) | -- |
-| Family | -- | Hylidae (SECOND ENTRY, first at 86 Pacific Treefrog, same family different chorus character, krek-krek harsh percussive vs bell-like peep crystalline pure, first family to appear twice in non-mammalian sequence) |
-| Order | -- | Anura (frogs and toads, second amphibian entry after Pacific Treefrog 86) |
-| Class | -- | Amphibia (second amphibian, insect-to-amphibian transition after three consecutive insects 87-88-89) |
-| Acoustic Element | the ambient drift (91st, synthesizer pads processed guitar world percussion ethereal vocals, slowly evolving sonic landscape, drifts rather than drives, ambient immersion, distinct from baroque whisper 89 extreme dynamics, distinct from bedroom strum 88 minimum production, distinct from electronic pulse 86 structured rhythm) | bell-like peep chorus (91st species-side, high-pitched clear crystalline peep, 2,800-3,600 Hz, shimmering ringing wall of sound, distinct from krek-krek 86 harsh percussive, distinct from electric buzzing throb 89 tymbal harsh electric, crystalline purity) |
-| Artist-City Pattern | The Parallel Scene (91st, artist in same city same era as dominant scene but different aesthetic, Sky Cries Mary alongside grunge but not grunge, the other thing happening while everyone looked elsewhere, every scene has a parallel scene, distinct from theatrical outsider 89 inside institution, distinct from solo distillation 88 format reduction) | -- |
-| Structural Firsts | THE QUARTER-MARK (90/360 = 25%, first quadrant complete, 72 genre stages 91 elements 91 patterns 5 returns), GENRE STAGE 72 (Ethereal/Electronic), THE AMBIENT DRIFT 91st acoustic element (ambient immersion), THE PARALLEL SCENE 91st artist-city pattern (anti-dominant-narrative), FORMED 1988 (predates grunge), THE ANTI-GRUNGE (parallel scene in action), MULTIMEDIA VISION (live visuals + DJ sets decades ahead of practice), ROCKVILLE RECORDS (adds to Seattle label map), ONE OF SEATTLE'S LONGEST-RUNNING EXPERIMENTAL ACTS | THE QUARTER-MARK (90/360 = 25%, first quadrant complete on species side), SECOND HYLIDAE ENTRY (86 & 90, same family different voice, first family to repeat in non-mammalian), BELL-LIKE PEEP CHORUS 91st species-side acoustic element (crystalline pure), INSECT-TO-AMPHIBIAN TRANSITION (after three insects 87-88-89), FIVE CONSECUTIVE NON-MAMMALIAN ENTRIES (86-90), THIRTIETH CONSECUTIVE ORIGINAL CSV (THREE DECADES 61-90), WET MEADOW HABITAT (saturated grasslands, ecological gap filled) |
+| Genre | **Ethereal/Electronic** (Genre Stage 72, seventy-two genre stages in ninety degrees ~0.80/degree, synthesizers + ambient + psychedelic + world music + ethereal vocals, immersive not confrontational, distinguished from Postal Service 86 electronic pop and Chong 44 experimental electronic and Parenthetical Girls 89 avant-pop) | — |
+| Energy | **E=3** (ambient immersive presence, sound surrounds rather than attacks, envelopment not aggression, joins the equilibrium where all five return artists Jurado Votolato Death Cab Case Dawson have converged) | **E=4** (collective bell-like chorus, hundreds/thousands simultaneously, shimmering ringing wall of sound, continuous for hours on spring nights, FIFTH consecutive E=4 species 86–90 through five different mechanisms — unprecedented) |
+| Label | **Rockville Records** (Seattle independent, adds to Seattle label map alongside Sub Pop K Records Barsuk Secretly Canadian Captured Tracks Saddle Creek) | — |
+| Family | — | **Hylidae** (SECOND ENTRY, first at degree 86 Pacific Treefrog, same family different chorus character, krek-krek harsh percussive vs bell-like peep crystalline pure, FIRST FAMILY TO APPEAR TWICE in non-mammalian sequence, palindromic bracket opens 86 closes 90) |
+| Order | — | **Anura** (frogs and toads, second Anura entry after Pacific Treefrog 86, second class crossing back to Amphibia after the insect trio) |
+| Class | — | **Amphibia** (second Amphibia entry, INSECT-TO-AMPHIBIAN TRANSITION after three consecutive insects 87–88–89, completes the palindromic class structure Amphibia–Insecta–Insecta–Insecta–Amphibia) |
+| Acoustic Element | **the ambient drift** (91st artist-side, synthesizer pads processed guitar world percussion ethereal vocals, slowly evolving sonic landscape, drifts rather than drives, ambient immersion, distinct from baroque whisper 89 extreme dynamics, distinct from bedroom strum 88 minimum production, distinct from electronic pulse 86 structured rhythm, from proscenium to planetarium) | **bell-like peep chorus** (91st species-side, high-pitched clear crystalline peep, 2,800–3,600 Hz, shimmering ringing wall of sound, distinct from krek-krek 86 harsh percussive, distinct from electric buzzing throb 89 tymbal harsh electric, distinct from rhythmic chirp 87 pulsing, crystalline purity after electric harshness) |
+| Artist-City Pattern | **The Parallel Scene** (91st, artist in same city same era as dominant scene but pursuing completely different aesthetic, Sky Cries Mary alongside grunge but not grunge, the other thing happening while everyone looked elsewhere, every scene has a parallel scene every spotlight creates a shadow, distinct from The Theatrical Outsider 89 inside institution, distinct from The Solo Distillation 88 format reduction) | — |
+| Habitat Marker | — | **Wet meadow / seasonal wetland** (saturated grasslands seasonal wetlands meadow edges, wetter than cricket's dry meadow 87 but not open water, between dry meadow and marsh, ecological gap filled, overlap with Muskrat 85 marsh habitat, peak chorus on warm spring and early summer nights) |
+| Structural Firsts | **THE QUARTER-MARK** (90/360 = 25%, first quadrant complete, sin(90)=1 cos(90)=0, complex plane position i, faces East across Cascades), **GENRE STAGE 72** Ethereal/Electronic (seventy-two genre stages in ninety degrees ~0.80/degree), **THE AMBIENT DRIFT** 91st artist-side acoustic element (ambient immersion from proscenium to planetarium), **THE PARALLEL SCENE** 91st artist-city pattern (anti-dominant-narrative), FORMED 1988 predates grunge by three years, **THE ANTI-GRUNGE**, MULTIMEDIA VISION (live visuals + DJ sets at Seattle clubs decades ahead of practice), **ROCKVILLE RECORDS** (adds to Seattle label map), one of Seattle's longest-running experimental acts | **THE QUARTER-MARK** (90/360 = 25% on species side), **SECOND HYLIDAE ENTRY** at degrees 86 & 90 (first family to appear twice in non-mammalian), **BELL-LIKE PEEP CHORUS** 91st species-side acoustic element (crystalline pure), **PALINDROMIC CLASS STRUCTURE** Amphibia–Insecta–Insecta–Insecta–Amphibia (Hylidae brackets the insect trio), **INSECT-TO-AMPHIBIAN TRANSITION** after three consecutive insects 87–88–89, **FIVE CONSECUTIVE NON-MAMMALIAN ENTRIES** 86–90 (longest non-mammalian streak in the engine), **FIVE CONSECUTIVE E=4 SPECIES** 86–90 through five different mechanisms (unprecedented), **THIRTIETH CONSECUTIVE ORIGINAL CSV** THREE DECADES 61–90 (longest unbroken run), **WET MEADOW** habitat fills ecological gap between dry meadow 87 and marsh 85 |
 | Research Words | ~5,500 | ~5,500 |
 | Files Produced | 4 | 4 |
 | Cross-References | 5 | 5 |
 
-<details>
-<summary>Full Release Notes -- Click to expand</summary>
-
-## Part A: Sky Cries Mary -- THE QUARTER-MARK DEGREE (Ethereal/Electronic, E=3, Rockville Records, GENRE STAGE 72 Ethereal/Electronic Seventy-Two Genre Stages Synthesizers Ambient Psychedelic World Music Ethereal Vocals Immersive Not Confrontational, THE QUARTER-MARK 90/360 25% First Quadrant Closes 72 Genre Stages 91 Acoustic Elements 91 Patterns 5 Return Artists, FORMED 1988 Predates Grunge THE ANTI-GRUNGE THE PARALLEL SCENE Active Alongside Grunge But Different Aesthetic, The Ambient Drift 91st Acoustic Element Synthesizer Pads Processed Guitar World Percussion Ethereal Vocals Slowly Evolving Sonic Landscape Music Drifts Rather Than Drives From Proscenium to Planetarium, The Parallel Scene 91st Artist-City Pattern Same City Same Era Different Aesthetic The Other Thing Happening While Everyone Looked Elsewhere Every Scene Has a Parallel Scene, Led by Roderick Romero and Anisa Romero DJ Anisa, Multimedia Vision Live Visuals DJ Sets Anticipated Modern Practice, Rockville Records, Seattle Washington)
-
-Full deep research covering Sky Cries Mary at the quarter-mark, Genre Stage 72, and the ambient drift:
-
-### THE QUARTER-MARK: 90/360 = 25%
-
-Degree 90 is the **quarter-mark** of the Seattle 360 engine. 90 degrees of 360. One quarter of the circle. The first quadrant closes.
-
-**Quarter-mark statistics:**
-- **72 genre stages** in 90 degrees (~0.8 per degree)
-- **91 acoustic elements** (one per degree plus the origin)
-- **91 artist-city patterns**
-- **5 return artists** (Jurado 45/84, Votolato 46/85, Death Cab 58/82, Case 66/87, Dawson 49/88)
-- The engine has mapped 25% of Seattle's musical landscape
-
-The quarter-mark is a structural milestone. The engine has enough data to begin identifying large-scale patterns. The first quadrant establishes the foundation; the second quadrant builds on it.
-
-### STRUCTURAL EVENT: Genre Stage 72 -- Ethereal/Electronic
-
-Degree 90 reaches **Genre Stage 72**. **Ethereal/Electronic** describes Sky Cries Mary's music: synthesizers and electronic textures merged with ambient atmospheres, psychedelic guitar, world percussion, and ethereal vocals. The sound is immersive rather than confrontational.
-
-Distinguished from prior electronic entries:
-- **The Postal Service** (degree 86) is electronic pop -- structured, melodic.
-- **Chong the Nomad** (degree 44) is experimental electronic -- beat-driven.
-- **Parenthetical Girls** (degree 89) is avant-pop -- theatrical, baroque.
-- Sky Cries Mary is ethereal/electronic -- ambient, psychedelic, world-music-inflected. The electronic serves the ethereal.
-
-Seventy-two genre stages in 90 degrees. The density remains high.
-
-### SKY CRIES MARY -- The Anti-Grunge
-
-**Formation and History:** Sky Cries Mary is a Seattle psychedelic/electronic band formed in **1988** -- predating the grunge explosion. Led by **Roderick Romero** and **Anisa Romero** (DJ Anisa), the band blends ambient, ethereal, electronic, and world music with live visuals. They were active in Seattle's 1990s underground scene alongside grunge but pursuing a completely different aesthetic.
-
-While Pearl Jam, Soundgarden, and Alice in Chains defined Seattle's public image with loud guitars and angst, Sky Cries Mary offered synthesizers, global rhythms, light shows, and transcendence. They were the **anti-grunge** -- the proof that Seattle's 1990s music scene was broader than its dominant narrative.
-
-**The Multimedia Vision:** Sky Cries Mary combined live instruments with DJ sets, visual projections, and multimedia elements. This audiovisual integration anticipated by decades what would become standard practice in electronic and experimental music. They were doing light shows and projected visuals at Seattle clubs in the early 1990s -- before the technology made it easy, before the culture expected it.
-
-**One of Seattle's Longest-Running Experimental Acts:** The band has operated across multiple decades and configurations. The longevity itself is a statement: while grunge bands formed and dissolved in a few years, Sky Cries Mary persisted. The experimental vision endures beyond any single era or trend.
-
-### STRUCTURAL EVENT: E=3 -- Immersive Presence
-
-E=3 reflects immersive presence. The ambient drift surrounds but does not attack. The sound envelops -- synthesizer layers, processed guitar, world percussion, ethereal vocals -- but never becomes aggressive. E=3 is the sound of being inside the music rather than being hit by it.
-
-Energy at the quarter-mark:
-- Jurado: E=3 -> E=3 (held)
-- Votolato: E=3 -> E=3 (held)
-- Death Cab: E=4 -> E=3 (decreased)
-- Case: E=4 -> E=3 (decreased)
-- Dawson: E=2 -> E=3 (increased)
-- Sky Cries Mary: E=3 (original)
-
-### THE AMBIENT DRIFT -- 91st Acoustic Element
-
-The ninety-first acoustic element is **the ambient drift** -- layers of synthesizer pads, processed guitar, world percussion, and ethereal vocals that create a slowly evolving sonic landscape. The music drifts rather than drives. It changes gradually rather than abruptly. The listener floats in the sound rather than being carried by it.
-
-Contrasts:
-- **The baroque whisper** (degree 89, Parenthetical Girls) -- extreme dynamic range, whisper to operatic. The ambient drift smooths out all extremes -- everything exists in a middle register of floating intensity.
-- **The bedroom strum** (degree 88, Kimya Dawson) -- minimum production. The ambient drift is maximum production but of a different kind -- layers of texture rather than ornamentation.
-- **The electronic pulse** (degree 86, Postal Service) -- rhythmic, structured. The ambient drift dissolves rhythm into texture. Beats may exist but they are not the point.
-
-From the proscenium (89, baroque whisper) to the planetarium (90, ambient drift). From theatrical drama to ambient immersion.
-
-### THE PARALLEL SCENE -- 91st Artist-City Pattern
-
-The ninety-first artist-city pattern is **the parallel scene** -- an artist or band that operates in the same city, during the same era, as a dominant scene -- but pursues a completely different aesthetic. Sky Cries Mary was in Seattle during grunge but was not grunge. They were the parallel scene -- the other thing that was happening while everyone was looking at something else.
-
-The parallel scene is the music that history forgot to document. When people say "Seattle in the 1990s," they mean grunge. But Seattle in the 1990s was also ambient electronic psychedelia with light shows. Every scene has a parallel scene. Every spotlight creates a shadow where other music thrives.
-
-Contrasts:
-- **The theatrical outsider** (degree 89, Parenthetical Girls) -- outside the institution but inside the city. The parallel scene is inside the city and inside the era but outside the dominant narrative.
-- **The solo distillation** (degree 88, Kimya Dawson) -- format reduction. The parallel scene is not about format but about visibility.
-
-### CROSS-REFERENCES (Part A)
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| S36-044 | Sky Cries Mary (90) | Chong the Nomad (44) | ELECTRONIC CONNECTION. Both electronic, both experimental. Chong is beat-driven and production-focused (contemporary era); Sky Cries Mary is ambient and psychedelic (1990s era). Different electronic vocabularies from different generations of Seattle electronic music. |
-| S36-086 | Sky Cries Mary (90) | The Postal Service (86) | ELECTRONIC PARALLEL. Both electronic-centered. Postal Service is structured electronic pop with verses and choruses; Sky Cries Mary is ambient electronic psychedelia with drifts and textures. Two poles of Seattle electronic music. |
-| S36-083 | Sky Cries Mary (90) | Pearl Jam (83) | 1990s SEATTLE PARALLEL. Pearl Jam was the grunge that dominated. Sky Cries Mary was the ethereal that coexisted. Same city, same decade, completely different aesthetics. The parallel scene in action. |
-| S36-036 | Sky Cries Mary (90) | Jimi Hendrix (36) | PSYCHEDELIC LINEAGE. Hendrix inaugurated Seattle's psychedelic legacy. Sky Cries Mary extends it into the electronic era. Guitar psychedelia to electronic psychedelia. The lineage continues through technology change. |
-| S36-041 | Sky Cries Mary (90) | Shawn Smith (41) | SCENE NATIVE, 1990s. Both 1990s Seattle acts. Both operated outside grunge's mainstream despite being scene natives. Smith was soulful; Sky Cries Mary was ethereal. Both were the other Seattle. |
-
----
-
-## Part B: Spring Peeper-Like Chorus (Hylidae) -- THE QUARTER-MARK (Second Hylidae Entry, Bell-Like Peep Chorus 91st Species-Side Acoustic Element, E=4 Through Collective Amplification, INSECT-TO-AMPHIBIAN TRANSITION After Three Consecutive Insects 87-88-89, FIVE CONSECUTIVE NON-MAMMALIAN ENTRIES 86-90, THIRTIETH CONSECUTIVE ORIGINAL CSV THREE DECADES 61-90, Wet Meadow Habitat, First Family to Appear Twice in Non-Mammalian Sequence, Crystalline Purity After Electric Harshness)
-
-Full deep research covering the spring peeper-like chorus as the second Hylidae entry, the insect-to-amphibian transition, and the bell-like peep:
-
-### THE QUARTER-MARK -- HYLIDAE RETURNS
-
-Degree 90 is **THE QUARTER-MARK** -- 90/360 = 25% complete on the species side. The first quadrant closes. 40 families. Thirtieth consecutive original CSV. Five consecutive non-mammalian entries.
-
-The spring peeper-like chorus is a **collective bell-like peeping** -- high-pitched, clear, crystalline "peep" calls produced by small Hylidae treefrogs. This is the **SECOND Hylidae entry** (first at degree 86, Pacific Treefrog). Same family, **different chorus character**: the Pacific Treefrog's krek-krek is harsh and percussive; the spring peeper-like chorus is **pure and bell-like**. Two expressions of the treefrog vocal apparatus. First family to appear twice in the non-mammalian sequence.
-
-### SECOND HYLIDAE ENTRY (86 & 90)
-
-**Family-level entry.** The true spring peeper (*Pseudacris crucifer*) is eastern North American; in the PNW, Pacific chorus frogs and related Hylidae produce analogous bell-like choruses in wet meadow habitats, though the Pacific Treefrog's primary call (krek-krek, degree 86) differs from the bell-like peeper register explored here.
-
-Classification:
-- **Class:** Amphibia (second amphibian entry, after Pacific Treefrog at 86)
-- **Order:** Anura (frogs and toads)
-- **Family:** **Hylidae** -- SECOND ENTRY (first at degree 86, Pacific Treefrog). First family to appear twice in non-mammalian sequence.
-
-Two Hylidae voices:
-
-| Degree | Species | Call Character | Frequency | Chorus Quality |
-|--------|---------|---------------|-----------|----------------|
-| 86 | Pacific Treefrog | krek-krek | Lower | Harsh, percussive |
-| 90 | Spring Peeper-Like | bell-like peep | 2,800-3,600 Hz | Crystalline, pure |
-
-### THE SOUND: BELL-LIKE PEEP CHORUS -- 91st Species-Side Acoustic Element
-
-**Individual call:** A single ascending note, approximately 0.1-0.3 seconds long. The sound is **pure** -- a clear tone with minimal harmonic complexity. Bell-like: each peep rings out and decays naturally. The quality is crystalline -- bright, high, ringing.
-
-**Frequency:** Approximately 2,800-3,600 Hz. Higher-pitched than the Pacific Treefrog's krek-krek.
-
-**The chorus:** When hundreds or thousands call simultaneously, the individual peeps merge into a **shimmering, ringing wall of sound**. Unlike the Pacific Treefrog's krek-krek chorus (which is harsh and percussive), the peeper-like chorus is **crystalline and pure** -- the wall of sound shimmers rather than pounds.
-
-**Why E=4:**
-1. Individual peeps carry well -- clear, high-pitched, audible at distance.
-2. Hundreds or thousands chorus simultaneously -- the collective sound is overwhelming.
-3. Creates a shimmering wall of sound that fills the wet meadow completely.
-4. Continuous for hours on spring and early summer nights.
-5. E=4 through collective amplification -- same mechanism as Pacific Treefrog (86) and cricket (87).
-
-Contrasts:
-- **Krek-krek night chorus** (degree 86, Pacific Treefrog) -- same family, different character. Krek-krek is harsh and percussive. Bell-like peep is crystalline and pure. Two Hylidae voices.
-- **Electric buzzing throb** (degree 89, Cicada) -- tymbal mechanism, harsh and electric. The bell-like peep is the opposite: pure and ringing. The engine swings from electric harshness to crystalline purity.
-- **Rhythmic chirp field chorus** (degree 87, Cricket) -- rhythmic and percussive. The peep chorus is not rhythmic but shimmering -- individual peeps overlap into continuous ringing.
-
-### INSECT-TO-AMPHIBIAN TRANSITION
-
-After three consecutive insects (cricket 87, katydid 88, cicada 89), the engine returns to **Amphibia**. The insect trio is complete. Each used a different mechanism:
-
-| Degree | Insect | Mechanism | Sound | Order |
-|--------|--------|-----------|-------|-------|
-| 87 | Cricket | Stridulation (wing-on-wing) | Rhythmic chirp | Orthoptera |
-| 88 | Katydid | Stridulation (wing-on-wing) | Continuous buzz | Orthoptera |
-| 89 | Cicada | Tymbal vibration | Electric buzzing throb | Hemiptera |
-| **90** | **Spring Peeper Chorus** | **Vocal sac amplification** | **Bell-like peep** | **Anura** |
-
-Three insects, three mechanisms, then back to Amphibia with a fourth mechanism (vocal sac). Four consecutive sound-producing species with four different mechanisms.
-
-### FIVE CONSECUTIVE NON-MAMMALIAN ENTRIES (86-90)
-
-| Degree | Species | Class | Family |
-|--------|---------|-------|--------|
-| 86 | Pacific Treefrog | Amphibia | Hylidae |
-| 87 | Cricket Chorus | Insecta | Gryllidae |
-| 88 | Katydid | Insecta | Tettigoniidae |
-| 89 | Cicada | Insecta | Cicadidae |
-| 90 | Spring Peeper Chorus | Amphibia | Hylidae |
-
-Five consecutive non-mammalian entries. The longest non-mammalian streak in the engine. The sequence brackets with Hylidae -- starts with Hylidae (86) and returns to Hylidae (90). Amphibia-Insecta-Insecta-Insecta-Amphibia. A palindromic class structure.
-
-### THIRTIETH CONSECUTIVE ORIGINAL CSV -- THREE DECADES
-
-Original CSV placement at degree 90. Thirty consecutive original CSV species (degrees 61-90). Three decades without substitution. The engine's own data is reliable.
-
-### ECOLOGY: THE WET MEADOW BELL CHOIR
-
-**Wet meadow habitat:** Saturated grasslands, seasonal wetlands, meadow edges near standing water. Wetter than cricket's dry meadow (87) but not open water. Connection to muskrat (85) -- overlapping ecological zones near standing water.
-
-**Breeding behavior:** Males call from concealed positions in grass and low vegetation near water. Peak chorus on warm spring and early summer nights.
-
-**Diet:** Small invertebrates -- insects, spiders, mites. Generalist insectivore.
-
-**Predators:** Snakes, wading birds, larger frogs, fish (larval stage), raccoons.
-
-### STRUCTURAL EVENTS SUMMARY
-
-1. **THE QUARTER-MARK** -- 90/360 = 25%. First quadrant complete.
-2. **Bell-like peep chorus** -- 91st acoustic element. Crystalline, pure, shimmering.
-3. **Second Hylidae entry** (86 & 90). Same family, different voice. First family to repeat in non-mammalian sequence.
-4. **Insect-to-amphibian transition.** After three consecutive insects (87-88-89), Amphibia returns.
-5. **Thirtieth consecutive original CSV** -- THREE DECADES (61-90).
-
-### CROSS-REFERENCES (Part B)
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| SPS-086 | Spring Peeper Chorus (90) | Pacific Treefrog (86) | SAME FAMILY HYLIDAE, DIFFERENT CHORUS CHARACTER. Krek-krek (harsh, percussive, 86) vs bell-like peep (crystalline, pure, 90). Two Hylidae entries. Two treefrog voices. First family to appear twice in non-mammalian sequence. Palindromic bracket: Hylidae opens (86) and closes (90) the non-mammalian streak. |
-| SPS-087 | Spring Peeper Chorus (90) | Cricket Chorus (87) | CHORUS PARALLEL. Both collective breeding sounds. Both E=4. But cricket chorus is rhythmic chirp (dry meadow); peeper chorus is shimmering bell (wet meadow). Dry vs wet. Rhythmic vs crystalline. |
-| SPS-088 | Spring Peeper Chorus (90) | Katydid (88) | CONSECUTIVE NON-MAMMALIAN ENTRIES. Five-degree streak extends: treefrog (86), cricket (87), katydid (88), cicada (89), peeper chorus (90). |
-| SPS-089 | Spring Peeper Chorus (90) | Cicada (89) | INSECT-TO-AMPHIBIAN TRANSITION. Cicada (89, Insecta, Hemiptera, electric buzzing throb) to spring peeper chorus (90, Amphibia, Hylidae, bell-like peep). Electric harshness to crystalline purity. Class crossing. |
-| SPS-085 | Spring Peeper Chorus (90) | Muskrat (85) | MARSH/MEADOW NEIGHBOR. Muskrat inhabits marshes (85). Spring peeper chorus inhabits wet meadows (90). Both associated with saturated habitats near standing water. Overlapping ecological zones. |
-
----
-
-## Parallel: Sky Cries Mary x Spring Peeper-Like Chorus -- The Immersion Pair
-
-The ambient drift and the bell-like peep. Both ambient and immersive. Both envelop through immersion rather than confrontation.
-
-**1. Both Create Walls of Sound Through Accumulation** -- Sky Cries Mary layers synthesizer pads, processed guitar, world percussion, and ethereal vocals into a slowly evolving ambient landscape. The spring peeper chorus layers hundreds of individual bell-like peeps into a shimmering, ringing wall. Both create their immersive quality through accumulation -- many small elements merging into something larger than any individual component.
-
-**2. Both Ambient** -- The ambient drift drifts rather than drives. The peeper chorus shimmers rather than pounds. Neither attacks the listener. Both surround. Both envelop. The listener floats inside the sound rather than being struck by it.
-
-**3. Both the Quarter-Mark** -- Both arrive at degree 90. Both close the first quadrant. The parallel is structural as well as sonic: the music side and the species side reach 25% simultaneously. 72 genre stages, 91 acoustic elements, 91 patterns. 40 families, 30 consecutive CSV, 5 non-mammalian streak.
-
-**4. Both Shimmering** -- The ambient drift shimmers through electronic textures and ethereal vocals. The peep chorus shimmers through crystalline bell-like calls overlapping into continuous ringing. Shimmer is the shared quality -- light reflecting off moving surfaces, sound reflecting off moving voices.
-
----
-
-## Acoustic Progression (91 elements)
-
-| # | Element | Degree | Artist/Species |
-|---|---------|--------|----------------|
-| 0 | silence | 0 | Quincy Jones |
-| 1 | cascade | 1 | Bill Frisell |
-| 2 | drone | 2 | Wayne Horvitz |
-| 3 | language | 3 | Ernestine Anderson |
-| 4 | motif | 4 | Floyd Standifer |
-| 5 | metronome | 5 | Overton Berry |
-| 6 | question | 6 | Patti Bown |
-| 7 | harmonic spiral | 7 | Julian Priester |
-| 8 | ultrasonic threshold | 8 | Gary Peacock |
-| 9 | variation | 9 | Hadley Caliman |
-| 10 | minimum signal | 10 | Bud Shank |
-| 11 | trill/tremolo | 11 | Joe Brazil |
-| 12 | sawtooth sweep | 12 | Don Lanphere |
-| 13 | ostinato | 13 | Marc Seales |
-| 14 | repetition-resolution | 14 | Aaron Parks |
-| 15 | accelerando | 15 | Thomas Marriott |
-| 16 | crescendo | 16 | Jeff Lorber |
-| 17 | the hook | 17 | Reggie Watts |
-| 18 | ascending spiral | 18 | Maktub |
-| 19 | descending spiral | 19 | Fly Moon Royale |
-| 20 | sustain/the release | 20 | Whitney Monge |
-| 21 | the hammer | 21 | Polyrhythmics |
-| 22 | resonant percussion/groove reset | 22 | Foxy Apollo |
-| 23 | the testimony/groove reset | 23 | Allen Stone |
-| 24 | the invocation | 24 | Ron Artis II |
-| 25 | the congregation | 25 | Black Stax |
-| 26 | the caroling | 26 | Shaina Shepherd |
-| 27 | the liquid gurgle | 27 | The Dynamics |
-| 28 | the liquid twitter | 28 | Night Owls |
-| 29 | the rough brrit | 29 | Boogaloo Joe Jones |
-| 30 | the liquid warble synthesis | 30 | Ray Charles |
-| 31 | the whisper | 31 | Brenda Lee Eager |
-| 32 | the buzz | 32 | Luther Rabb |
-| 33 | the cadenza | 33 | Larry English |
-| 34 | the dialect | 34 | The Tempos |
-| 35 | the thrum | 35 | Robert Cray |
-| 36 | the sonic boom | 36 | Jimi Hendrix |
-| 37 | the filament | 37 | Ayron Jones |
-| 38 | the drawl | 38 | Booker T. Jones |
-| 39 | the canopy buzz | 39 | Ron Artis Jr |
-| 40 | the thinning | 40 | Alice Smith |
-| 41 | the partition | 41 | Shawn Smith |
-| 42 | the shimmer | 42 | Erica Campbell |
-| 43 | the radiance | 43 | Ann Wilson |
-| 44 | the grain | 44 | Chong the Nomad |
-| 45 | the murmur | 45 | Damien Jurado |
-| 46 | the confessional | 46 | Rocky Votolato |
-| 47 | the parable tone | 47 | Pedro the Lion |
-| 48 | the held rest | 48 | Sera Cahoone |
-| 49 | the lullaby subversion | 49 | Kimya Dawson |
-| 50 | the intimate architecture | 50 | Mirah |
-| 51 | the communal harmony | 51 | Grand Archives |
-| 52 | the testimony roar | 52 | Brandi Carlile |
-| 53 | the cathedral harmony | 53 | Fleet Foxes |
-| 54 | the fraternal jangle | 54 | Ivan & Alyosha |
-| 55 | the ember glow | 55 | Shelby Earl |
-| 56 | the dream haze | 56 | Lemolo |
-| 57 | the rattle / the stream rattle | 57 | Laura Gibson / Belted Kingfisher |
-| 58 | the ache / the pond whistle | 58 | Death Cab for Cutie / Wood Duck |
-| 59 | the digression / the quack | 59 | The Long Winters / Mallard |
-| 60 | the bare wire / the submerge call | 60 | Ben Gibbard (solo) / Pied-billed Grebe |
-| 61 | the braided voice / the tail slap | 61 | Y La Bamba / American Beaver |
-| 62 | the throwback / the rhythmic gnaw | 62 | Pickwick / Beaver Chewing |
-| 63 | the FM sheen / the chuff | 63 | Kenny Loggins / River Otter |
-| 64 | the dusk / the chitter | 64 | Jesse Sykes / Mink |
-| 65 | the open plain / the chuckle-chatter | 65 | Philip Aaberg / American Marten |
-| 66 | the country thunder / the scream | 66 | Neko Case / Fisher |
-| 67 | the clean room / the shrill bark-chitter | 67 | Chris Walla / Short-tailed Weasel |
-| 68 | the hush / the rapid chattering chirp | 68 | Sam Beam / Long-tailed Weasel |
-| 69 | the earnest voice / the warning foot-stamp hiss | 69 | Kris Orlowski / Striped Skunk |
-| 70 | the fiddle line / the churring chittering young | 70 | Horse Feathers / Raccoon |
-| 71 | the room tone / the bark screaming vixen call | 71 | Phil Elverum / Red Fox |
-| 72 | the layered loop / the low hiss click | 72 | Briana Marela / Opossum |
-| 73 | the jangle / the thump squeal | 73 | LAKE / Snowshoe Hare |
-| 74 | the reverb wash / the high sharp eenk bark | 74 | Poor Moon / American Pika |
-| 75 | the anthem / the piercing whistle alarm | 75 | The Lonely Forest / Yellow-bellied Marmot |
-| 76 | the androgynous register / the loud penetrating whistle | 76 | Chris Pureka / Hoary Marmot |
-| 77 | the ethereal layering / the musical multi-note whistle | 77 | Mree / Olympic Marmot |
-| 78 | the communal jangle / the chirping trill alarm | 78 | Acid Tongue / Townsend's Ground Squirrel |
-| 79 | the cinematic stillness / the sharp chip alarm | 79 | Jesse Marchant / Golden-mantled Ground Squirrel |
-| 80 | the organ explosion / the loud scolding chatter rattle | 80 | Mates of State / Douglas Squirrel |
-| 81 | the Broadway voice / the bark + chatter alarm | 81 | Sara Bareilles / Eastern Fox Squirrel |
-| 82 | the acoustic intimacy / the high thin tseet | 82 | Death Cab for Cutie (acoustic) / Northern Flying Squirrel |
-| 83 | the grunge whisper / the ultrasonic + soft chip | 83 | Pearl Jam (acoustic) / Deer Mouse |
-| 84 | the late whisper / the chatter + twig gnaw | 84 | Damien Jurado (late career) / Bushy-tailed Woodrat |
-| 85 | the stripped confession / the quiet plop | 85 | Rocky Votolato (acoustic) / Muskrat |
-| 86 | the electronic pulse / the amplified krek-krek wall of sound | 86 | The Postal Service / Pacific Treefrog |
-| 87 | the emerging twang / the rhythmic chirp field chorus | 87 | Neko Case (early folk) / Cricket Chorus |
-| 88 | the bedroom strum / the continuous electric buzz | 88 | Kimya Dawson (solo) / Katydid |
-| **89** | **the baroque whisper / the electric buzzing throb** | **89** | **Parenthetical Girls / Cicada** |
-| **90** | **the ambient drift / the bell-like peep chorus** | **90** | **Sky Cries Mary / Spring Peeper-Like Chorus** |
-
-The acoustic progression adds degrees 89 and 90. On the artist side, the baroque whisper (89) is the sound of Parenthetical Girls -- a voice oscillating between intimate whisper and dramatic operatic delivery, surrounded by chamber instruments and electronic textures, extreme dynamic range. E=3. The ambient drift (90) is the sound of Sky Cries Mary -- synthesizer pads, processed guitar, world percussion, ethereal vocals creating a slowly evolving sonic landscape. The music drifts rather than drives. E=3. From the baroque whisper (89, theatrical, extreme dynamics) to the ambient drift (90, ambient, no extremes). From the proscenium to the planetarium. On the species side, the electric buzzing throb (89) is the cicada's tymbal-produced drone -- the loudest insect, reaching 100+ dB, harsh and electric. E=4. The bell-like peep chorus (90) is the spring peeper-like chorus -- crystalline, pure, bell-like calls merging into a shimmering wall of sound. E=4. From electric harshness (89, cicada tymbal) to crystalline purity (90, peeper vocal sac). Same energy level (E=4), opposite acoustic character.
-
-## Artist-City Patterns (91 patterns)
-
-| # | Pattern | Degree | Artist |
-|---|---------|--------|--------|
-| 0 | Export | 0 | Quincy Jones |
-| 1 | Draw | 1 | Bill Frisell |
-| 2 | European Exile | 2 | Wayne Horvitz |
-| 3 | The Stay | 3 | Ernestine Anderson |
-| 4 | The Teacher | 4 | Floyd Standifer |
-| 5 | The Persistence | 5 | Overton Berry |
-| 6 | The Erasure | 6 | Patti Bown |
-| 7 | Pedagogue-Draw | 7 | Julian Priester |
-| 8 | The Quiet Draw | 8 | Gary Peacock |
-| 9 | The Seeker | 9 | Hadley Caliman |
-| 10 | Late Homestead | 10 | Bud Shank |
-| 11 | The Salon Keeper | 11 | Joe Brazil |
-| 12 | The Prodigal | 12 | Don Lanphere |
-| 13 | Institutional Anchor | 13 | Marc Seales |
-| 14 | Prodigy-Export | 14 | Aaron Parks |
-| 15 | Builder-Stayer | 15 | Thomas Marriott |
-| 16 | Talent Incubator | 16 | Jeff Lorber |
-| 17 | The Uncategorizable | 17 | Reggie Watts |
-| 18 | The Workshop | 18 | Maktub |
-| 19 | The New Root | 19 | Fly Moon Royale |
-| 20 | The Street Laureate | 20 | Whitney Monge |
-| 21 | The Ensemble Anchor | 21 | Polyrhythmics |
-| 22 | The Inheritor | 22 | Foxy Apollo |
-| 23 | The Rural Draw | 23 | Allen Stone |
-| 24 | The Island Export | 24 | Ron Artis II |
-| 25 | The Cultural Guardian | 25 | Black Stax |
-| 26 | The Transmuter | 26 | Shaina Shepherd |
-| 27 | The Conduit | 27 | The Dynamics |
-| 28 | The Resident Band | 28 | Night Owls |
-| 29 | The Catalog | 29 | Boogaloo Joe Jones |
-| 30 | The Incubation | 30 | Ray Charles |
-| 31 | The Relay | 31 | Brenda Lee Eager |
-| 32 | The Foundation | 32 | Luther Rabb |
-| 33 | The Unrecorded | 33 | Larry English |
-| 34 | The Shadow Name | 34 | The Tempos |
-| 35 | The Deep Root | 35 | Robert Cray |
-| 36 | The Supernova | 36 | Jimi Hendrix |
-| 37 | The Inheritor | 37 | Ayron Jones |
-| 38 | The Touring Anchor | 38 | Booker T. Jones |
-| 39 | The Returning Wave | 39 | Ron Artis Jr |
-| 40 | The Cultural Satellite | 40 | Alice Smith |
-| 41 | The Scene Native | 41 | Shawn Smith |
-| 42 | The Gospel Export | 42 | Erica Campbell |
-| 43 | The Arena Architect | 43 | Ann Wilson |
-| 44 | The Digital Immigrant | 44 | Chong the Nomad |
-| 45 | The Stripped Murmur | 45 | Damien Jurado |
-| 46 | The Confessional Drifter | 46 | Rocky Votolato |
-| 47 | The Sacred Baritone | 47 | Pedro the Lion |
-| 48 | The Campfire Anchor | 48 | Sera Cahoone |
-| 49 | The Trojan Lullabist | 49 | Kimya Dawson |
-| 50 | The Intimate Architect | 50 | Mirah |
-| 51 | The Folk Organism | 51 | Grand Archives |
-| 52 | The Arena Breakout | 52 | Brandi Carlile |
-| 53 | The Prodigy Return | 53 | Fleet Foxes |
-| 54 | The Neighborhood Anchor | 54 | Ivan & Alyosha |
-| 55 | The Infrastructure Beneficiary | 55 | Shelby Earl |
-| 56 | The Duo Collective | 56 | Lemolo |
-| 57 | The Label Bridge | 57 | Laura Gibson |
-| 58 | The Bellingham Ascent | 58 | Death Cab for Cutie |
-| 59 | The Scene Intellectual | 59 | The Long Winters |
-| 60 | The Frontman Alone | 60 | Ben Gibbard (solo) |
-| 61 | The Corridor Bridge | 61 | Y La Bamba |
-| 62 | The Brief Blaze | 62 | Pickwick |
-| 63 | The Everett Departure | 63 | Kenny Loggins |
-| 64 | The Dark-Folk Loner | 64 | Jesse Sykes |
-| 65 | The Montana Connection | 65 | Philip Aaberg |
-| 66 | The Wanderer Who Claims Multiple Cities | 66 | Neko Case |
-| 67 | The Departed Member | 67 | Chris Walla |
-| 68 | The Visiting Artist | 68 | Sam Beam |
-| 69 | The Working Musician | 69 | Kris Orlowski |
-| 70 | The Corridor Wanderer | 70 | Horse Feathers |
-| 71 | The Anacortes Hermit | 71 | Phil Elverum |
-| 72 | The International Student | 72 | Briana Marela |
-| 73 | The K Records Collective | 73 | LAKE |
-| 74 | The Side Project | 74 | Poor Moon |
-| 75 | The Second Anacortes Act | 75 | The Lonely Forest |
-| 76 | The Identity Artist | 76 | Chris Pureka |
-| 77 | The YouTube-to-Artist Pipeline | 77 | Mree |
-| 78 | The Porch Party | 78 | Acid Tongue |
-| 79 | The Dark Meditation | 79 | Jesse Marchant |
-| 80 | The Married Duo | 80 | Mates of State |
-| 81 | The Crossover Arc | 81 | Sara Bareilles |
-| 82 | The Recursive Return | 82 | Death Cab for Cutie (acoustic) |
-| 83 | The Arena Unplugged | 83 | Pearl Jam (acoustic) |
-| 84 | The Artist Arc | 84 | Damien Jurado (late career) |
-| 85 | The Confessional Return | 85 | Rocky Votolato (acoustic) |
-| 86 | The Side Project | 86 | The Postal Service |
-| 87 | The Early Chapter | 87 | Neko Case (early folk) |
-| 88 | The Solo Distillation | 88 | Kimya Dawson (solo) |
-| **89** | **The Theatrical Outsider** | **89** | **Parenthetical Girls** |
-| **90** | **The Parallel Scene** | **90** | **Sky Cries Mary** |
-
-Ninety-one named patterns across ninety-one degrees. The Theatrical Outsider (89) introduces the pattern of an artist who brings the stage to the club -- Parenthetical Girls perform in spaces designed for rock bands but deliver something closer to cabaret, dramatic, literary, costumed, conceptual. The Parallel Scene (90) introduces the pattern of an artist operating alongside a dominant scene but pursuing a completely different aesthetic -- Sky Cries Mary was in Seattle during grunge but was not grunge. The other thing happening while everyone looked at something else. Every scene has a parallel scene. Every spotlight creates a shadow. The progression from 88 to 89 to 90: the solo distillation (format reduction, band to solo), the theatrical outsider (performance mode, club becomes proscenium), the parallel scene (visibility position, alongside dominant narrative but invisible to it). Three consecutive patterns exploring different dimensions of artistic positioning.
-
-## Genre Evolution (72 stages)
-
-| Stage | Degree | Genre | Artist |
-|-------|--------|-------|--------|
-| 27 | 45 | Folk | Damien Jurado |
-| 28 | 46 | Folk | Rocky Votolato |
-| 29 | 47 | Indie Folk | Pedro the Lion |
-| 30 | 48 | Folk | Sera Cahoone |
-| 31 | 49 | Folk Punk | Kimya Dawson |
-| 32 | 50 | Indie Folk | Mirah |
-| 33 | 51 | Indie Folk | Grand Archives |
-| 34 | 52 | Folk/Rock | Brandi Carlile |
-| 35 | 53 | Indie Folk | Fleet Foxes |
-| 36 | 54 | Folk | Ivan & Alyosha |
-| 37 | 55 | Singer-Songwriter | Shelby Earl |
-| 38 | 56 | Indie Folk | Lemolo |
-| 39 | 57 | Folk | Laura Gibson |
-| 40 | 58 | Indie Rock | Death Cab for Cutie |
-| 41 | 59 | Indie Rock | The Long Winters |
-| 42 | 60 | Folk | Ben Gibbard (solo) |
-| 43 | 61 | Folk/Indie | Y La Bamba |
-| 44 | 62 | Indie/Folk | Pickwick |
-| 45 | 63 | Soft Rock/Folk | Kenny Loggins |
-| 46 | 64 | Folk | Jesse Sykes |
-| 47 | 65 | New Age/Folk | Philip Aaberg |
-| 48 | 66 | Alt Country | Neko Case |
-| 49 | 67 | Indie/Folk | Chris Walla |
-| 50 | 68 | Folk | Sam Beam |
-| 51 | 69 | Singer-Songwriter | Kris Orlowski |
-| 52 | 70 | Indie Folk | Horse Feathers |
-| 53 | 71 | Indie/Folk | Phil Elverum |
-| 54 | 72 | Art Pop | Briana Marela |
-| 55 | 73 | Indie Pop | LAKE |
-| 56 | 74 | Indie Folk/Rock | Poor Moon |
-| 57 | 75 | Indie Pop | The Lonely Forest |
-| 58 | 76 | Folk | Chris Pureka |
-| 59 | 77 | Folk/Pop | Mree |
-| 60 | 78 | Folk/Indie | Acid Tongue |
-| 61 | 79 | Folk | Jesse Marchant |
-| 62 | 80 | Indie Pop | Mates of State |
-| 63 | 81 | Pop/Soul | Sara Bareilles |
-| 64 | 82 | Indie Folk | Death Cab for Cutie (acoustic) |
-| 65 | 83 | Acoustic Rock | Pearl Jam (acoustic) |
-| 66 | 84 | Folk | Damien Jurado (late career) |
-| 67 | 85 | Folk | Rocky Votolato (acoustic) |
-| 68 | 86 | Indie Electronic | The Postal Service |
-| 69 | 87 | Folk Country | Neko Case (early folk) |
-| 70 | 88 | Lo-Fi Folk | Kimya Dawson (solo) |
-| **71** | **89** | **Avant-Pop** | **Parenthetical Girls** |
-| **72** | **90** | **Ethereal/Electronic** | **Sky Cries Mary** |
-
-Genre Stage 72 -- Ethereal/Electronic at the quarter-mark. Seventy-two genre stages in 90 degrees (~0.8 per degree). **Ethereal/Electronic** describes Sky Cries Mary's music: synthesizers and electronic textures merged with ambient atmospheres, psychedelic guitar, world percussion, and ethereal vocals. The sound is immersive rather than confrontational. Distinguished from Avant-Pop (89, theatrical), Indie Electronic (86, structured pop), and Experimental Electronic (44, beat-driven). The engine's genre density remains remarkably stable -- nearly 0.8 new genres per degree throughout. After Lo-Fi Folk (88, minimum production), Avant-Pop (89, theatrical maximalism), Ethereal/Electronic (90, ambient immersion). Three consecutive degrees, three completely different genre vocabularies. The engine's genre diversity is not slowing at the quarter-mark.
-
-## Energy Distribution
-
-**Artist-side (after degree 90):** E1:3 (3.2%), E2:30 (33.0%), E3:25 (27.5%), E4:21 (23.1%), E5:11 (12.1%), E6:2 (2.2%). Total: 91 (degrees 0-90, 91 entries counting origin). E=3 rises to 25 deployments with Sky Cries Mary's E=3. E=2 remains at 30, still most common. The quiet majority (E1+E2+E3) = 58 of 91 (63.7%). At the quarter-mark: five return artists all at E=3. Sky Cries Mary's original E=3 joins the convergence. E=3 is the engine's equilibrium energy.
-
-**Species-side (after degree 90):** E=4 for the spring peeper chorus. Fourth consecutive E=4 species entry (86-87-88-89-90): treefrog E=4, cricket E=4, katydid E=4, cicada E=4, spring peeper E=4. Five consecutive E=4 species entries. Unprecedented. All through collective or persistent sound production.
-
-## Cross-References (Combined)
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| S36-044 | Sky Cries Mary (90) | Chong the Nomad (44) | ELECTRONIC CONNECTION. Both electronic, both experimental. Chong is beat-driven (contemporary); Sky Cries Mary is ambient and psychedelic (1990s). Different electronic vocabularies, different generations. |
-| S36-086 | Sky Cries Mary (90) | The Postal Service (86) | ELECTRONIC PARALLEL. Postal Service is structured electronic pop; Sky Cries Mary is ambient electronic psychedelia. Two poles of Seattle electronic music. |
-| S36-083 | Sky Cries Mary (90) | Pearl Jam (83) | 1990s SEATTLE PARALLEL. Grunge that dominated vs ethereal that coexisted. Same city, same decade, different aesthetics. The parallel scene in action. |
-| S36-036 | Sky Cries Mary (90) | Jimi Hendrix (36) | PSYCHEDELIC LINEAGE. Hendrix inaugurated Seattle's psychedelic legacy. Sky Cries Mary extends it into the electronic era. Guitar psychedelia to electronic psychedelia. |
-| S36-041 | Sky Cries Mary (90) | Shawn Smith (41) | SCENE NATIVE, 1990s. Both operated outside grunge's mainstream despite being scene natives. Smith soulful, Sky Cries Mary ethereal. Both the other Seattle. |
-| SPS-086 | Spring Peeper Chorus (90) | Pacific Treefrog (86) | SAME FAMILY HYLIDAE. Krek-krek (harsh, percussive) vs bell-like peep (crystalline, pure). First family to appear twice in non-mammalian. Palindromic bracket opens (86) and closes (90) the streak. |
-| SPS-087 | Spring Peeper Chorus (90) | Cricket Chorus (87) | CHORUS PARALLEL. Both collective breeding sounds. Both E=4. Rhythmic chirp (dry meadow) vs shimmering bell (wet meadow). Dry vs wet. |
-| SPS-088 | Spring Peeper Chorus (90) | Katydid (88) | FIVE CONSECUTIVE NON-MAMMALIAN. Streak extends 86-90. Treefrog, cricket, katydid, cicada, peeper chorus. |
-| SPS-089 | Spring Peeper Chorus (90) | Cicada (89) | INSECT-TO-AMPHIBIAN TRANSITION. Electric buzzing throb to bell-like peep. Electric harshness to crystalline purity. Class crossing. |
-| SPS-085 | Spring Peeper Chorus (90) | Muskrat (85) | MARSH/MEADOW NEIGHBOR. Both in saturated habitats near standing water. Overlapping ecological zones. |
-
-## Infrastructure
-
-**Part A:** `www/tibsfox/com/Research/S36/research/releases/090-sky-cries-mary/` -- research.md, index.html, knowledge-nodes.json, retrospective.md
-**Part B:** `www/tibsfox/com/Research/SPS/research/releases/090-spring-peeper-chorus/` -- research.md, index.html, knowledge-nodes.json, retrospective.md
-**Release notes:** `docs/release-notes/v1.49.230/README.md`
-
-**Total: 8 files** -- standard degree package.
-
-## The Science of 90 Degrees -- Quarter-Mark Analysis
-
-### The Right Angle: Why 90 Matters
-
-Ninety degrees is not merely a fraction of a circle. It is one of the most consequential numbers in science, mathematics, and engineering -- the angle at which independence is born.
-
-**The unit circle at 90 degrees.** On the unit circle that organizes this entire project, 90 degrees maps to the coordinate **(0, 1)** -- the topmost point, where the horizontal component vanishes and the vertical component reaches its maximum. sin(90) = 1. cos(90) = 0. The engine began at (1, 0) -- degree zero, Quincy Jones, pure horizontal, all potential. At degree 90, the engine has rotated to pure vertical. The horizontal has become zero. The vertical is at maximum. In the complex plane, the position is **i** -- the pure imaginary unit. The engine has arrived at the point where Euler's identity lives: e^(i * pi/2) = i. The real has become imaginary. The concrete has become abstract. Jazz has become ambient electronic. The Great Blue Heron has become a spring peeper chorus. The rotation is real.
-
-**Perpendicularity.** 90 degrees defines the **right angle** -- the geometric foundation of perpendicularity. Two lines are perpendicular when they meet at 90 degrees. This is not arbitrary; it is the angle at which two directions become **maximally independent**. At 0 degrees, two vectors point the same way -- they carry the same information. At 90 degrees, they carry **entirely different information**. This is the principle behind orthogonality in linear algebra, the independence of basis vectors in every coordinate system humans have ever built, and the reason your house stands up: the wall is perpendicular to the floor.
-
-The engine at 90 degrees has produced maximally independent content on both axes. Part A (artists) and Part B (species) share no information -- a musician and a treefrog are orthogonal. The pairing is the perpendicular itself. Every degree pairs two independent signals. At degree 90, we have produced 91 such pairs, and the independence of the two axes is the structural foundation that makes each pair meaningful.
-
-**Phase quadrature.** In signal processing and electrical engineering, a 90-degree phase shift is called **quadrature**. Two signals in quadrature carry independent information that can be combined to reconstruct the original waveform. AM radio uses quadrature to encode two channels on one carrier. AC power systems use 90-degree phase relationships between voltage and current to deliver reactive power. GPS satellites use quadrature signals to resolve position.
-
-The engine is a quadrature system. Part A and Part B are 90 degrees out of phase -- they oscillate independently but are locked to the same degree counter. The artist signal and the species signal combine at each degree to produce something neither could carry alone: the parallel, the resonance, the ache-and-whistle, the grunge-whisper-and-ultrasonic-chip. Quadrature is how the engine works. At degree 90, we acknowledge the mechanism.
-
-**Cardinal directions.** The four cardinal directions -- North, East, South, West -- are separated by 90 degrees. At degree 0, the engine faced North (origin, Quincy Jones, the starting orientation). At degree 90, the engine faces **East** -- perpendicular to the origin, looking in a direction the engine could not see when it began. The I-5 corridor runs roughly North-South. At 90 degrees, the engine looks East -- across the Cascades, toward Montana (degree 65, Philip Aaberg), toward the interior, toward landscapes the engine has only begun to map.
-
-**The number 90.** 90 = 2 x 3^2 x 5. It has 12 divisors: 1, 2, 3, 5, 6, 9, 10, 15, 18, 30, 45, 90. It is a highly composite number for its range. In radians, 90 degrees = pi/2 = 1.5708... -- the first quarter of pi's revolution. In gradians, 90 degrees = 100 grad. In turns, 90 degrees = 0.25 turns. Every measurement system recognizes 90 as the quarter.
-
-### 90 Degrees in the Sciences
-
-**Crystallography.** The cubic crystal system -- the structural foundation of metals, salts, and semiconductors -- is defined by three axes meeting at 90 degrees. The silicon wafer in every computer chip is cut along a crystal plane defined by right angles. The GPU (RTX 4060 Ti) running the math co-processor that supports this project is built on silicon whose atomic lattice is organized by 90-degree symmetry. The right angle is literally inside the machine computing this research.
-
-**Optics and polarization.** Two polarization states are orthogonal when separated by 90 degrees. Cross-polarized light carries independent information -- this is how 3D cinema works (left-eye and right-eye images are transmitted on orthogonal polarizations), how stress analysis reveals hidden forces in transparent materials (photoelasticity), and how LCD screens produce images (liquid crystals rotate polarization by 90 degrees per pixel). The engine's two axes -- artist and species -- are cross-polarized: they illuminate the same degree from orthogonal angles, and the viewer's brain composites them into a three-dimensional understanding that neither axis alone could produce.
-
-**Ecology and niche theory.** In ecological niche modeling, orthogonal environmental axes define independent dimensions of habitat space. Temperature is orthogonal to moisture. Elevation is orthogonal to latitude. Each axis adds a new dimension to the hypervolume that defines where a species can live. The engine has been building exactly this kind of multidimensional space: the acoustic axis (91 elements) is orthogonal to the habitat axis (from old-growth forest to urban park to alpine talus to dry meadow to marsh). At the quarter-mark, the species have mapped a multidimensional niche space across 4 classes, 17 orders, and 40+ families -- a hypervolume of PNW biodiversity that grows more resolved with every degree.
-
-**Fourier analysis.** The sine and cosine functions are separated by 90 degrees -- sin(x) = cos(x - 90). Together they form a complete basis for decomposing any periodic signal into its component frequencies. Every sound in the engine -- from the Great Blue Heron's prehistoric croak to the spring peeper's crystalline bell -- can be decomposed into sine and cosine components. The quarter-mark is where sine reaches its peak (sin(90) = 1) and cosine reaches zero. The engine's acoustic vocabulary, 91 elements deep at the quarter-mark, is itself a kind of Fourier decomposition of the PNW soundscape -- each element is one frequency component in the bioregion's composite signal.
-
-**Navigation and the compass rose.** A compass rose divides the horizon into cardinal (N, E, S, W at 0/90/180/270) and intercardinal directions. At degree 0, the engine pointed North -- toward the origin, toward Quincy Jones and the Great Blue Heron. At degree 90, the engine points East. The I-5 corridor runs roughly North-South through the bioregion. At 90 degrees, the engine looks perpendicular to the corridor -- East across the Cascades, toward the interior, toward the dry side, toward landscapes that the wet-side engine has only glimpsed through Montana (degree 65) and alpine talus (degrees 74-77). The second quadrant will continue this eastward gaze before the engine turns South at 180.
-
-**Quantum mechanics.** In quantum computing, a Hadamard gate rotates a qubit's state by 90 degrees on the Bloch sphere, transforming a definite state (|0> or |1>) into a superposition -- a state that is simultaneously both. The engine at 90 degrees has performed its own Hadamard transformation: it began with definite categories (jazz, birds) and has rotated into a superposition of four classes, dozens of families, and a genre vocabulary so broad that each new degree exists in a superposition of multiple traditions until the research collapses it into a specific classification. The engine's state at the quarter-mark is maximally uncertain -- it has established enough vocabulary that the next degree could be almost anything.
-
-### Engine State at the Quarter-Mark
-
-| Metric | Value | Rate |
-|--------|-------|------|
-| Degrees complete | 91 (0-90) | 25.0% of 360 |
-| Research files | 743 | ~8.2 per degree |
-| Genre stages | 72 | 0.79 per degree |
-| Acoustic elements | 91 (artist) + 91 (species) | 1.0 per degree per axis |
-| Artist-city patterns | 91 | 1.0 per degree |
-| Return artists | 5 | 5.5% recurrence rate |
-| Families (species) | 40+ | ~0.44 new families per degree |
-| Orders | 17 | across 4 classes |
-| Classes | 4 | Aves, Mammalia, Amphibia, Insecta |
-| CSV-original streak | 30 | degrees 61-90 |
-| Total words (est.) | ~500K+ | ~5,500 per degree |
-
-**Class distribution:** Aves 61 (67.0%), Mammalia 25 (27.5%), Insecta 3 (3.3%), Amphibia 2 (2.2%). Four classes like four cardinal directions -- each occupying a quadrant of the taxonomic compass.
-
-**Energy means:** Artist-side mean energy = 3.18. Species-side mean energy = 3.21. Combined mean = 3.19. The engine's center of gravity is almost exactly E=3 -- the middle of the 1-6 scale. At the quarter-mark, the engine is centered.
-
-**The four quadrants ahead:**
-- **Quadrant II (91-180):** The engine has its vocabulary. Now it builds syntax. Expect longer structural arcs, deeper cross-references, and the species beginning to revisit habitats with new species in established families.
-- **Quadrant III (181-270):** The engine turns back toward the origin direction but from the opposite side. Mirror patterns. Inversions. The second half of the rotation begins.
-- **Quadrant IV (271-359):** The return. The engine approaches degree 0 from the other direction, carrying 360 degrees of accumulated context. The final degrees will rhyme with the first degrees but from a position of maximum experience.
-
-The first quadrant is complete. The right angle is turned. The engine faces East.
-
----
+## Part A: Sky Cries Mary — The Ambient Drift at the Quarter-Mark
+
+- **The Quarter-Mark Position.** Sky Cries Mary arrives at degree 90 — the quarter-mark of the **Seattle 360** engine, the position on the unit circle where the engine has rotated 90 degrees from its origin (Quincy Jones, degree 0), where sin(90) = 1 and cos(90) = 0, where the complex-plane coordinate is **i**. The horizontal that the engine started with has rotated to pure vertical. The first quadrant closes. The arrival of an ethereal/electronic Seattle act at exactly this structural milestone is one of the engine's strongest accidents of placement.
+- **Formed in 1988 — the anti-grunge.** Sky Cries Mary was founded in **1988**, predating the grunge explosion by several years. **Pearl Jam** formed in 1990. **Soundgarden** released *Louder Than Love* in 1989. **Alice in Chains** formed in 1987 but did not release *Facelift* until 1990. Sky Cries Mary was already operating in Seattle when grunge was still inventing itself. They were not reacting against grunge; they were doing something else from the beginning. The **anti-grunge** label is structural rather than oppositional — the band was simply pursuing a completely different aesthetic in the same city at the same time.
+- **Roderick Romero and Anisa Romero (DJ Anisa).** Led by **Roderick Romero** and **Anisa Romero** (DJ Anisa), the band combined live instruments with DJ sets, visual projections, and multimedia elements. Roderick Romero contributed vocals, guitar, and atmospheric arrangements; Anisa Romero contributed vocals and DJ work. The two-sibling axis at the band's core gave it stability across multiple lineup changes and ensured the aesthetic vision persisted across decades.
+- **Genre Stage 72 — Ethereal/Electronic.** Genre Stage 72 lands as **Ethereal/Electronic** — synthesizers and electronic textures merged with ambient atmospheres, psychedelic guitar, world percussion, and ethereal vocals. The sound is immersive rather than confrontational. Distinguished from prior electronic entries: **The Postal Service** at degree 86 is electronic pop (structured, melodic, song-form); **Chong the Nomad** at degree 44 is experimental electronic (beat-driven, production-focused); **Parenthetical Girls** at degree 89 is avant-pop (theatrical, baroque, costumed); **Sky Cries Mary** is ethereal/electronic (ambient, psychedelic, world-music-inflected). The electronic serves the ethereal. Seventy-two genre stages in ninety degrees holds the 0.80 stages/degree rate that has been remarkably stable since the folk zone began at degree 45.
+- **The ambient drift — 91st acoustic element.** Layers of synthesizer pads, processed guitar, world percussion, and ethereal vocals creating a slowly evolving sonic landscape. The music drifts rather than drives. It changes gradually rather than abruptly. The listener floats in the sound rather than being carried by it. Distinct from the **baroque whisper** at degree 89 (Parenthetical Girls, extreme dynamic range, theatrical) — the ambient drift smooths out all extremes, everything exists in a middle register of floating intensity. Distinct from the **bedroom strum** at degree 88 (Kimya Dawson solo, minimum production) — the ambient drift is maximum production but of a different kind, layers of texture rather than ornamentation. Distinct from the **electronic pulse** at degree 86 (Postal Service, rhythmic, structured) — the ambient drift dissolves rhythm into texture; beats may exist but they are not the point. From the **proscenium** (89, baroque whisper) to the **planetarium** (90, ambient drift).
+- **The Parallel Scene — 91st artist-city pattern.** An artist or band that operates in the same city, during the same era, as a dominant scene but pursues a completely different aesthetic. Sky Cries Mary was in Seattle during grunge but was not grunge. They were the parallel scene — the other thing that was happening while everyone was looking at something else. Every scene has a parallel scene. Every spotlight creates a shadow where other music thrives. The parallel scene is the music that history forgot to document. When people say "Seattle in the 1990s," they mean grunge. But Seattle in the 1990s was also ambient electronic psychedelia with light shows, was also **Shawn Smith**'s soulful exception (degree 41), was also the experimental underground that the spotlight rendered invisible. Distinct from **The Theatrical Outsider** at degree 89 (Parenthetical Girls, outside the institution but inside the city) by visibility position; distinct from **The Solo Distillation** at degree 88 (Kimya Dawson, format reduction) by being not about format but about visibility.
+- **The multimedia vision.** Sky Cries Mary combined live instruments with DJ sets, visual projections, and multimedia elements. This audiovisual integration anticipated by decades what would become standard practice in electronic and experimental music. They were doing light shows and projected visuals at Seattle clubs in the early 1990s — before the technology made it easy, before the culture expected it, before the laptop-driven visuals of the 2010s and the ambient-with-visuals festival culture of the 2020s. The vision was decades ahead of its tools.
+- **One of Seattle's longest-running experimental acts.** The band has operated across multiple decades and configurations. The longevity itself is a statement: while grunge bands formed and dissolved in a few years (Mother Love Bone, Temple of the Dog, even Soundgarden in its first incarnation), Sky Cries Mary persisted. The experimental vision endures beyond any single era or trend. The band's catalog spans the early 1990s through the 2020s, with multiple albums including *A Return to the Inner Experience*, *This Timeless Turning*, and a sustained presence in Seattle's experimental music infrastructure.
+- **Rockville Records — adds to the Seattle label map.** **Rockville Records** is a Seattle-area independent label that adds to the engine's accumulating Seattle label cartography: **Sub Pop** (the grunge anchor), **K Records** (Olympia lo-fi, present at degrees 73 and 88), **Barsuk** (indie rock, Death Cab anchor), **Secretly Canadian** (indie distribution), **Captured Tracks** (post-punk indie), **Saddle Creek** (singer-songwriter), and now **Rockville Records** (psychedelic/electronic). The Seattle label map is now broader than any single genre and demonstrates the city's depth as an indie-music center.
+- **E=3 and the energy convergence.** **E=3** reflects ambient immersive presence — the sound surrounds rather than attacks, envelopment not aggression. Sky Cries Mary's E=3 joins the equilibrium where all five return artists have converged: **Damien Jurado** E=3 → E=3 (held), **Rocky Votolato** E=3 → E=3 (held), **Death Cab for Cutie** E=4 → E=3 (decreased), **Neko Case** E=4 → E=3 (decreased), **Kimya Dawson** E=2 → E=3 (increased). E=3 is the engine's equilibrium energy at the quarter-mark — familiar enough to be comfortable, quiet enough to be reflective, present enough to register. Sky Cries Mary's original E=3 placement adds another data point at the equilibrium.
+- **Cross-references in Seattle's electronic and psychedelic lineages.** Sky Cries Mary connects to **Jimi Hendrix** (degree 36, the **psychedelic lineage** — guitar psychedelia to electronic psychedelia, the Seattle psychedelic legacy continued through technology change), to **Chong the Nomad** (degree 44, the **electronic vocabulary divergence** — beat-driven contemporary vs ambient-psychedelic 1990s, two generations of Seattle electronic music), to **The Postal Service** (degree 86, the **two poles of Seattle electronic** — structured electronic pop vs ambient electronic psychedelia), to **Pearl Jam** (degree 83, the **1990s parallel** — grunge that dominated vs ethereal that coexisted, the parallel scene in action), and to **Shawn Smith** (degree 41, both **scene natives** operating outside grunge's mainstream despite being inside the city, the other Seattle).
+
+## Part B: Spring Peeper-Like Chorus (Hylidae) — The Bell-Like Peep at the Quarter-Mark
+
+- **Second Hylidae entry — first family to appear twice in non-mammalian sequence.** The **Spring Peeper-Like Chorus** is the **second Hylidae entry** in the engine. The first was the **Pacific Treefrog** at **degree 86**, the species that opened the non-mammalian streak after twenty-five consecutive mammalian degrees. Now Hylidae returns at degree 90 with a fundamentally different chorus character. **First family to appear twice in the non-mammalian sequence** — a structural milestone that brackets the engine's first insect trio inside an amphibian palindrome.
+- **Bell-like peep chorus — 91st species-side acoustic element.** Individual call: a single ascending note, approximately 0.1–0.3 seconds long. The sound is **pure** — a clear tone with minimal harmonic complexity. Bell-like: each peep rings out and decays naturally. Frequency range **2,800–3,600 Hz**, higher-pitched than the Pacific Treefrog's krek-krek. The chorus: when hundreds or thousands call simultaneously, the individual peeps merge into a **shimmering, ringing wall of sound**. Unlike the Pacific Treefrog's krek-krek chorus (harsh and percussive), the peeper-like chorus is crystalline and pure — the wall of sound shimmers rather than pounds.
+- **Two Hylidae voices — same family, different chorus character.** The Pacific Treefrog at degree 86 produces a **krek-krek** at lower frequency, harsh and percussive, dry meadow / pond-edge habitat. The spring peeper-like chorus at degree 90 produces a **bell-like peep** at 2,800–3,600 Hz, crystalline and pure, wet meadow habitat. Two expressions of the treefrog vocal apparatus. Same vocal-sac amplification mechanism, completely different acoustic result. Audible side-by-side in PNW summer evenings, biologically verifiable. Family-level entry: the true spring peeper (*Pseudacris crucifer*) is eastern North American; in the PNW, Pacific chorus frogs and related Hylidae produce analogous bell-like choruses in wet meadow habitats.
+- **Insect-to-amphibian transition — class crossing.** After **three consecutive insects** — **Cricket Chorus** at degree 87 (*Gryllidae*, Orthoptera, stridulation, rhythmic chirp), **Katydid** at degree 88 (*Tettigoniidae*, Orthoptera, stridulation, continuous buzz), **Cicada** at degree 89 (*Cicadidae*, Hemiptera, tymbal vibration, electric buzzing throb) — the engine returns to **Amphibia**. Three insects, three mechanisms, then back to Amphibia with a fourth mechanism (vocal-sac amplification). Four consecutive sound-producing species with four different mechanisms.
+- **Five consecutive non-mammalian entries (86–90).** Pacific Treefrog (86, Amphibia), Cricket Chorus (87, Insecta), Katydid (88, Insecta), Cicada (89, Insecta), Spring Peeper Chorus (90, Amphibia). The longest non-mammalian streak in the engine, longer than any since the bird era ended at degree 60. The mammalian dominance that ran from degrees 61 through 85 (twenty-five consecutive degrees) is now thoroughly broken. The engine's class diversity is reasserting after a long mammalian phase.
+- **Palindromic class structure — Amphibia–Insecta–Insecta–Insecta–Amphibia.** The class sequence at degrees 86–90 reads **Amphibia–Insecta–Insecta–Insecta–Amphibia** — a palindromic bracket. **Hylidae** opens the bracket at degree 86 (Pacific Treefrog) and closes it at degree 90 (Spring Peeper Chorus). The insect trio (Cricket, Katydid, Cicada) sits nested inside the amphibian frame. The engine produces palindromes without trying — the structure is emergent from the ordering rather than imposed by design. One of the engine's most elegant accidental symmetries.
+- **Five consecutive E=4 species through five different mechanisms.** Pacific Treefrog (86, collective vocal-sac amplification), Cricket Chorus (87, collective stridulation), Katydid (88, individual sustained stridulation), Cicada (89, tymbal vibration), Spring Peeper Chorus (90, collective bell chorus). Five entries, five mechanisms, one energy level. **E=4** is the "fills the soundscape" outcome, achievable through radically different biological strategies. The pattern is unprecedented in the engine's first quadrant and demonstrates that energy level describes an outcome, not a mechanism.
+- **Wet meadow habitat fills an ecological gap.** Saturated grasslands, seasonal wetlands, meadow edges near standing water. Wetter than the cricket's dry meadow at degree 87 but not open water. The wet meadow sits between the dry meadow and the marsh. Overlap with the **Muskrat** at degree 85 (marsh / pond-edge habitat) — both associated with saturated habitats near standing water, overlapping ecological zones. Peak chorus on warm spring and early summer nights, when males call from concealed positions in grass and low vegetation near water. The wet meadow is now part of the engine's accreting habitat ledger.
+- **Thirtieth consecutive original CSV — three decades.** The Spring Peeper Chorus is the **thirtieth consecutive original CSV** species placement in the engine (degrees 61–90). Three decades without substitution or correction. The longest unbroken run of original-catalog selections in the engine to date and the strongest evidence yet that the source CSV is reliable as a multi-degree foundation. At the quarter-mark, this is worth noting: the data foundation is solid.
+- **PNW species inventory.** Pacific Northwest Hylidae include the **Pacific chorus frog** (*Pseudacris regilla* / *Hyliola regilla*, the dominant peeper-like Hylidae in the PNW), the **Pacific treefrog** (whose krek-krek call appeared at degree 86), and related chorus frogs. The engine's spring-peeper-like entry is family-level rather than species-level, encompassing the Pacific chorus frog and analogous PNW species that produce bell-like peep choruses in wet meadow and seasonal wetland habitats.
+- **Diet, predators, and breeding behavior.** Diet: small invertebrates — insects, spiders, mites — generalist insectivore. Predators: snakes, wading birds, larger frogs, fish (larval stage), raccoons. Breeding behavior: males call from concealed positions in grass and low vegetation near water; peak chorus on warm spring and early summer nights when temperature, humidity, and photoperiod converge. The peeper-like chorus is one of the PNW's most reliable acoustic markers of spring's arrival.
 
 ## Retrospective
 
-**What Worked:**
-1. Sky Cries Mary at the quarter-mark is historically and structurally appropriate -- formed in 1988, predating grunge, active alongside it but pursuing ambient/electronic/psychedelic aesthetics. The anti-grunge framing is accurate and well-documented
-2. Genre Stage 72 (Ethereal/Electronic) is a genuine genre distinction -- distinguished from electronic pop (86), experimental electronic (44), and avant-pop (89). The electronic serves the ethereal. Seventy-two genre stages in 90 degrees, ~0.8 per degree, remarkably stable throughout
-3. The ambient drift (91st acoustic element) captures Sky Cries Mary's sonic reality with precision -- layers of texture evolving gradually, the music drifts rather than drives. The contrast with the baroque whisper (89, extreme dynamics) is sharp: from theatrical to ambient
-4. The parallel scene (91st artist-city pattern) is an observationally accurate pattern -- every dominant scene has acts operating in its shadow with different aesthetics. Sky Cries Mary exemplifies this. The pattern has broad applicability
-5. The quarter-mark statistics are genuinely useful -- 72 genre stages, 91 acoustic elements, 91 patterns, 5 return artists. The engine has enough data at 25% to begin identifying large-scale structural patterns
-6. The second Hylidae entry (86 & 90) enriches rather than redundifies -- same family, different chorus character. Krek-krek vs bell-like peep is a genuine, audible distinction. Two expressions of one family's vocal apparatus
-7. The palindromic class structure (Amphibia-Insecta-Insecta-Insecta-Amphibia, degrees 86-90) is an emergent structural observation. Hylidae brackets the non-mammalian streak
-8. The insect-to-amphibian transition is clean -- three insects (87-88-89) followed by an amphibian (90). The insect trio is complete. Each used a different mechanism. The engine's class crossing is natural
-9. Thirtieth consecutive original CSV (THREE DECADES, 61-90) is a genuine data reliability milestone
-10. Five consecutive E=4 species entries (86-90) is unprecedented. Each through different mechanisms: collective amplification (treefrog), collective stridulation (cricket), persistent drone (katydid), tymbal vibration (cicada), collective bell chorus (peeper). Five entries, five mechanisms, one energy level
-11. The immersion parallel between Sky Cries Mary and the spring peeper chorus is genuine -- both create walls of sound through accumulation, both ambient, both enveloping. The shimmer quality is shared
-12. The wet meadow habitat fills a real ecological gap -- between cricket's dry meadow (87) and muskrat's marsh (85). A genuine habitat distinction
+### What Worked
 
-**What Could Be Better:**
-1. Specific album analysis for Sky Cries Mary not deep -- ACCEPTED, the structural view and quarter-mark significance are primary
-2. PNW-specific peeper-like species not precisely named (true spring peeper is eastern) -- ACCEPTED, family-level entry is appropriate, the bell-like chorus character is the contribution
-3. NO RAPTOR in 91 entries -- CRITICAL. Must be addressed
-4. NO PASSERIFORM in 34 degrees -- thirty-four consecutive non-passerines (57-90). EXTREME
-5. NO MARINE SPECIES -- 91 entries without a marine specialist. SIGNIFICANT
+- **Sky Cries Mary at the quarter-mark is historically and structurally appropriate.** Formed in 1988, predating grunge by three years; active alongside Pearl Jam, Soundgarden, and Alice in Chains but pursuing ambient/electronic/psychedelic aesthetics. The anti-grunge framing is accurate, well-documented, and structurally meaningful as the quarter-mark choice. The placement stands up to scrutiny.
+- **Genre Stage 72 (Ethereal/Electronic) is a genuine genre distinction.** Distinguished from electronic pop (Postal Service, 86), experimental electronic (Chong the Nomad, 44), and avant-pop (Parenthetical Girls, 89). The electronic serves the ethereal. Seventy-two genre stages in ninety degrees, ~0.8 per degree, remarkably stable throughout the engine's first quadrant and confirmed at the quarter.
+- **The ambient drift (91st acoustic element) captures Sky Cries Mary's sonic reality with precision.** Layers of texture evolving gradually, the music drifts rather than drives. The contrast with the baroque whisper (89, extreme dynamics) is sharp: from theatrical to ambient, from proscenium to planetarium. The proscenium-to-planetarium metaphor works.
+- **The Parallel Scene (91st artist-city pattern) is observationally accurate.** Every dominant scene has acts operating in its shadow with different aesthetics. Sky Cries Mary exemplifies this. The pattern has broad applicability and is one of the engine's most universally portable artist-city patterns.
+- **The quarter-mark statistics are genuinely useful.** 72 genre stages, 91 acoustic elements, 91 patterns, 5 return artists, 40+ families, 30 consecutive original CSV. The engine has enough data at 25% to begin identifying large-scale structural patterns. The numbers are real, not manufactured.
+- **The second Hylidae entry (86 & 90) enriches rather than redundifies.** Same family, fundamentally different chorus character. Krek-krek vs bell-like peep is a genuine, audible distinction. Two expressions of one family's vocal apparatus, four degrees apart. First family to appear twice in the non-mammalian sequence.
+- **The palindromic class structure is an emergent observation.** Amphibia–Insecta–Insecta–Insecta–Amphibia at degrees 86–90 was not designed. Hylidae brackets the non-mammalian streak. The insect trio is nested inside an amphibian bracket. The engine produces palindromes without trying — the symmetry was discovered by the species ledger rather than imposed on the data.
+- **Five consecutive E=4 species through five different mechanisms is unprecedented.** Each through different mechanisms: collective vocal-sac amplification (treefrog), collective stridulation (cricket), individual sustained stridulation (katydid), tymbal vibration (cicada), collective bell chorus (peeper). The pattern was discovered by the energy ledger's running tally rather than imposed on the data.
+- **Thirtieth consecutive original CSV (THREE DECADES, 61–90) is a genuine reliability milestone.** Three decades without substitution or correction. The CSV continues to deliver. Worth noting at the quarter-mark.
+
+### What Could Be Better
+
+- **Specific album analysis for Sky Cries Mary stayed shallow.** The structural view and quarter-mark significance are primary, but the album-by-album analysis could go deeper. *A Return to the Inner Experience*, *This Timeless Turning*, and the band's later catalog deserve standalone treatment. A future research artifact at album resolution would give the discography its due.
+- **PNW-specific peeper-like species not precisely named.** The true spring peeper (*Pseudacris crucifer*) is eastern North American. The Pacific chorus frog (*Pseudacris regilla* / *Hyliola regilla*) is the dominant PNW peeper-like Hylidae but was not foregrounded by Latin name in the README prose. Family-level entry is appropriate for the engine, but species-level identification would tighten the ecology.
+- **NO RAPTOR in 91 entries — CRITICAL.** The absence of birds of prey (Accipitridae, Falconidae, Strigidae, Tytonidae) across the entire PNW catalog so far is a structural deficiency. The engine has fifteen Aves entries from earlier degrees but zero raptors. A bird of prey is overdue and should be planned into the second quadrant.
+- **NO PASSERIFORM in 34 degrees.** Thirty-four consecutive non-passerine degrees (57–90) is itself an extreme. Passerines are the largest avian order; their absence distorts the engine's coverage of bird acoustic diversity. The engine should plan a deliberate return to passerines in the second quadrant.
+- **NO MARINE SPECIES in 91 entries — SIGNIFICANT.** The Pacific Northwest's marine ecosystem (Salish Sea, Olympic Coast, Puget Sound proper) is unrepresented. Harbor seal, orca, sea lion, common loon, marbled murrelet — none have appeared. For an engine titled around Puget Sound, the marine omission is significant and should be addressed early in the second quadrant.
 
 ## Lessons Learned
 
-1. The quarter-mark invites structural reflection. At 90/360 = 25%, the engine's patterns are visible: ~0.8 genre stages per degree (stable), 5 return artists all converging at E=3 (equilibrium), 40 families on the species side, 30 consecutive original CSV (data reliability). These ratios and patterns have been stable since the folk zone (45+). The engine is not random -- it has a consistent internal logic
-2. The anti-grunge framing for Sky Cries Mary reveals something important about the engine's coverage of Seattle's 1990s scene: Pearl Jam (83), Shawn Smith (41), and now Sky Cries Mary (90) collectively document that the 1990s were broader than grunge. The engine documents the full ecology, not just the dominant narrative
-3. The parallel scene pattern has broad applicability beyond Sky Cries Mary. Every city, every era has acts operating in the shadow of the dominant scene. This pattern will recur. It may be the engine's most universally applicable artist-city pattern
-4. Five consecutive E=4 species entries (86-90) through five different mechanisms proves that E=4 ("fills the soundscape") is achievable through radically different biological strategies. Collective amplification, stridulation, tymbal vibration, vocal sac resonance -- all can fill a soundscape. E=4 describes an outcome, not a mechanism
-5. The palindromic class structure (Amphibia-Insecta-Insecta-Insecta-Amphibia) at degrees 86-90 is emergent -- not designed. The Hylidae bracket (opening at 86, closing at 90) adds structural elegance. The insect trio is nested inside an amphibian bracket. The engine produces palindromes without trying
-6. Thirty consecutive original CSV species (61-90) -- THREE DECADES -- is the strongest evidence yet that the engine's internal data is reliable. The CSV hasn't needed substitution or correction in 30 consecutive entries. At the quarter-mark, this is worth noting: the data foundation is solid
-7. The contrast between the baroque whisper (89, extreme dynamics, theatrical) and the ambient drift (90, no extremes, ambient) is one of the engine's sharpest consecutive acoustic contrasts. The proscenium-to-planetarium metaphor captures it precisely. The engine continues to produce strong movement between consecutive degrees
+- **The quarter-mark invites structural reflection.** At 90/360 = 25%, the engine's patterns are visible: ~0.8 genre stages per degree (stable), 5 return artists all converging at E=3 (equilibrium), 40+ families on the species side, 30 consecutive original CSV (data reliability). These ratios and patterns have been stable since the folk zone began at degree 45. The engine is not random — it has a consistent internal logic that the quarter-mark numbers confirm.
+- **The anti-grunge framing reveals coverage breadth.** Pearl Jam (83), Shawn Smith (41), and now Sky Cries Mary (90) collectively document that Seattle's 1990s were broader than grunge. The engine documents the full ecology, not just the dominant narrative. Future degrees should continue surfacing the parallel scenes that history forgot to document.
+- **The Parallel Scene pattern has broad applicability beyond Sky Cries Mary.** Every city, every era has acts operating in the shadow of the dominant scene. This pattern will recur. It may be the engine's most universally applicable artist-city pattern, portable to any future degree where a major-scene artist needs a quiet counterweight.
+- **Five consecutive E=4 species through five different mechanisms proves E=4 describes outcome, not mechanism.** Collective vocal-sac amplification, stridulation (collective), stridulation (individual sustained), tymbal vibration, collective bell chorus — all can fill a soundscape. E=4 is the "fills the soundscape" energy level, achievable through radically different biological strategies. Future E=4 entries should be classified by which mechanism produces the energy.
+- **The palindromic class structure (86–90) is emergent, not designed.** The Hylidae bracket (opening at 86, closing at 90) adds structural elegance to the non-mammalian streak. The insect trio (87–88–89) is nested inside an amphibian bracket. The engine produces palindromes without trying — and the discovery was made by the species-class ledger rather than by deliberate planning. Lineage- and palindrome-tracking should be promoted to a first-class engine concern in the second quadrant.
+- **Thirty consecutive original CSV (THREE DECADES, 61–90) confirms the data foundation.** The CSV has not needed substitution or correction in 30 consecutive entries. At the quarter-mark, this is the strongest evidence yet that the engine's internal data is reliable. The original-catalog ledger is now a tested baseline, and future deviations will stand out clearly against it.
+- **The proscenium-to-planetarium contrast (89 → 90) is one of the engine's sharpest consecutive acoustic contrasts.** From extreme dynamics and theatrical delivery (Parenthetical Girls' baroque whisper) to no extremes and ambient immersion (Sky Cries Mary's ambient drift). The metaphor captures the descent precisely. The engine continues to produce strong movement between consecutive degrees, and naming the metaphor (proscenium vs planetarium) lets future contrasts inherit the vocabulary.
+- **The right angle is the angle at which independence is born.** The engine is a quadrature system: Part A (artists) and Part B (species) are 90 degrees out of phase, oscillating independently but locked to the same degree counter. At the quarter-mark, perpendicularity itself becomes a tracked concept — the wall is perpendicular to the floor, sin is perpendicular to cos, the artist axis is perpendicular to the species axis. The engine's two-axis structure is the geometric foundation of its meaning, and the quarter-mark is the moment to acknowledge it.
+- **All five return artists converge at E=3 — equilibrium energy confirmed at the quarter.** Damien Jurado E=3 → E=3 (held), Rocky Votolato E=3 → E=3 (held), Death Cab for Cutie E=4 → E=3 (decreased), Neko Case E=4 → E=3 (decreased), Kimya Dawson E=2 → E=3 (increased). E=3 is the engine's equilibrium energy at the quarter-mark. The convergence is now strong enough to predict that future returns will continue trending toward E=3 regardless of starting energy.
 
----
+## Cross-References
 
-The ambient drift and the bell-like peep.
+| Connection | From | To | Nature |
+|------------|------|-----|--------|
+| S36-044 | Sky Cries Mary (90) | Chong the Nomad (44) | ELECTRONIC VOCABULARY DIVERGENCE. Both electronic, both experimental. Chong is beat-driven and production-focused (contemporary era); Sky Cries Mary is ambient and psychedelic (1990s era). Different electronic vocabularies from different generations of Seattle electronic music. |
+| S36-086 | Sky Cries Mary (90) | The Postal Service (86) | TWO POLES OF SEATTLE ELECTRONIC. Postal Service is structured electronic pop with verses and choruses; Sky Cries Mary is ambient electronic psychedelia with drifts and textures. Two poles of Seattle electronic music sharing a base technology and diverging in everything else. |
+| S36-083 | Sky Cries Mary (90) | Pearl Jam (83) | 1990s SEATTLE PARALLEL. Pearl Jam was the grunge that dominated. Sky Cries Mary was the ethereal that coexisted. Same city, same decade, completely different aesthetics. The Parallel Scene pattern in action. |
+| S36-036 | Sky Cries Mary (90) | Jimi Hendrix (36) | PSYCHEDELIC LINEAGE. Hendrix inaugurated Seattle's psychedelic legacy. Sky Cries Mary extends it into the electronic era. Guitar psychedelia to electronic psychedelia. The lineage continues across technology change. |
+| S36-041 | Sky Cries Mary (90) | Shawn Smith (41) | SCENE NATIVES, 1990s. Both 1990s Seattle acts. Both operated outside grunge's mainstream despite being scene natives. Smith was soulful; Sky Cries Mary was ethereal. Both were the other Seattle. |
+| S36-089 | Sky Cries Mary (90) | Parenthetical Girls (89) | PROSCENIUM TO PLANETARIUM. Baroque whisper (89, extreme dynamic range, theatrical) to ambient drift (90, no extremes, immersive). One of the engine's sharpest consecutive acoustic contrasts. |
+| S36-088 | Sky Cries Mary (90) | Kimya Dawson (solo) (88) | PRODUCTION POLARITY. Bedroom strum (88, minimum production, single guitar in a single room) to ambient drift (90, maximum production, layers of synthesized texture). Two opposite production strategies, two consecutive degrees. |
+| S36-049 | Sky Cries Mary (90) | Kimya Dawson / Moldy Peaches (49) | RETURN-ARTIST EQUILIBRIUM REFERENCE. Sky Cries Mary's E=3 sits at the equilibrium where all five return artists (Jurado, Votolato, Death Cab, Case, Dawson) converged. Original placement contributing to the same energy attractor. |
+| S36-002 | Sky Cries Mary (90) | Wayne Horvitz (2) | DRONE LINEAGE. Horvitz's drone work and Sky Cries Mary's ambient drift share the slow-evolving sonic-landscape mode. Two distant degrees on the same texture-over-rhythm spectrum. |
+| SPS-086 | Spring Peeper Chorus (90) | Pacific Treefrog (86) | SAME FAMILY HYLIDAE, DIFFERENT CHORUS CHARACTER. Krek-krek (harsh, percussive, 86) vs bell-like peep (crystalline, pure, 90). First family to appear twice in non-mammalian sequence. Palindromic bracket: Hylidae opens (86) and closes (90) the non-mammalian streak. |
+| SPS-087 | Spring Peeper Chorus (90) | Cricket Chorus (87) | CHORUS PARALLEL. Both collective breeding sounds, both E=4. Cricket chorus is rhythmic chirp (dry meadow); peeper chorus is shimmering bell (wet meadow). Dry vs wet. Rhythmic vs crystalline. |
+| SPS-088 | Spring Peeper Chorus (90) | Katydid (88) | CONSECUTIVE NON-MAMMALIAN ENTRIES. Five-degree streak extends 86–90: treefrog, cricket, katydid, cicada, peeper chorus. Longest non-mammalian streak in the engine. |
+| SPS-089 | Spring Peeper Chorus (90) | Cicada (89) | INSECT-TO-AMPHIBIAN TRANSITION. Cicada (89, Insecta, Hemiptera, electric buzzing throb) to spring peeper chorus (90, Amphibia, Hylidae, bell-like peep). Electric harshness to crystalline purity. Class crossing. |
+| SPS-085 | Spring Peeper Chorus (90) | Muskrat (85) | MARSH/MEADOW NEIGHBOR. Muskrat inhabits marshes (85). Spring peeper chorus inhabits wet meadows (90). Both associated with saturated habitats near standing water. Overlapping ecological zones. |
+| SPS-058 | Spring Peeper Chorus (90) | Anatidae streak (Wood Duck / Mallard, 58–59) | LINGERING-WITHIN-FAMILY PATTERN. Anatidae lingered at 58–59 (Wood Duck, Mallard). Hylidae now spans 86–90 (Pacific Treefrog, Spring Peeper Chorus). The engine's recurring tendency to revisit families across multiple degrees rather than sample once and move on. |
+| SPS-002 | Spring Peeper Chorus (90) | Varied Thrush (2) | BELL-LIKE TIMBRE. Varied Thrush's ethereal bell-like whistle has tonal kinship with the spring peeper's crystalline peep. Different phyla (Aves vs Amphibia), different mechanisms (vocal-cord vs vocal-sac), similar perceived purity of tone. |
+| RES-rockville | Sky Cries Mary (90) | Rockville Records | LABEL CONTEXT. Rockville Records adds to the engine's accumulating Seattle label cartography (Sub Pop, K Records, Barsuk, Secretly Canadian, Captured Tracks, Saddle Creek, now Rockville). The Seattle label map is now broader than any single genre. |
+| RES-unit-circle | Degree 90 | Unit-Circle Position (0, 1) = i | QUARTER-MARK GEOMETRY. The engine has rotated 90 degrees from its origin (Quincy Jones, Great Blue Heron) to the unit-circle position (0, 1), the complex-plane position i. sin(90)=1, cos(90)=0. The first quadrant closes; the engine faces East. |
 
-Degree 90. The quarter-mark. Twenty-five percent of the rotation complete. The first quadrant closes.
+## Engine Position
 
-On the unit circle, the engine has arrived at (0, 1) -- the pure imaginary position, where sin reaches its maximum and cos reaches zero. The horizontal has become vertical. Jazz has become ambient electronic. The Great Blue Heron has become a spring peeper chorus. The rotation from Quincy Jones to Sky Cries Mary is a rotation through 90 degrees of accumulated context -- 72 genre stages, 91 acoustic elements, 91 artist-city patterns, 40+ families across 4 classes, 743 research files containing approximately half a million words of deep research on the music and ecology of the Pacific Northwest bioregion.
+- **Degree 90 of 360 — THE QUARTER-MARK.** 25.0% of the circle traversed. First quadrant complete.
+- **Unit-circle position (0, 1) = i.** sin(90) = 1; cos(90) = 0. Pure vertical. The horizontal that the engine started with at degree 0 has rotated to pure vertical. In the complex plane, the position is the imaginary unit. Engine faces East — across the Cascades, toward the interior, toward the second quadrant.
+- **Twin counters tick to 91**: the ambient drift is the 91st acoustic element on the artist side; the bell-like peep chorus is the 91st acoustic element on the species side; The Parallel Scene is the 91st artist-city pattern.
+- **Genre Stage 72 — Ethereal/Electronic.** Seventy-two genre stages in ninety degrees (0.80 stages/degree). Density unchanged at the quarter.
+- **Energy distribution after degree 90 (artist side):** E1:3 (3.3%), E2:30 (33.0%), E3:25 (27.5%), E4:21 (23.1%), E5:11 (12.1%), E6:2 (2.2%). Total: 91. **E=3 rises to 25 deployments.** **E=2 holds at 30, still most common.** Quiet majority (E1+E2+E3) = 58 of 91 = 63.7%.
+- **Return artist count: 5.** Damien Jurado (45/84, gap 39, E=3 → E=3 hold), Rocky Votolato (46/85, gap 39, E=3 → E=3 hold), Death Cab for Cutie (58/82, gap 24, E=4 → E=3 decrease), Neko Case (66/87, gap 21, E=4 → E=3 decrease), Kimya Dawson (49/88, gap 39, E=2 → E=3 increase). **All five returns converge at E=3.**
+- **Family streaks:** Hylidae appears at degrees 86 and 90 — first family to appear twice in non-mammalian sequence. Tettigoniidae (38), Gryllidae (39), Cicadidae (40), Hylidae (count both appearances = degrees 86, 90).
+- **Class diversity:** Aves 61 (67.0%), Mammalia 25 (27.5%), Insecta 3 (3.3%), Amphibia 2 (2.2%). Four classes — like four cardinal directions, each occupying a quadrant of the taxonomic compass.
+- **Palindromic class structure at 86–90:** Amphibia–Insecta–Insecta–Insecta–Amphibia. Hylidae brackets the insect trio.
+- **Five consecutive non-mammalian entries (86–90):** Pacific Treefrog, Cricket Chorus, Katydid, Cicada, Spring Peeper Chorus. Longest non-mammalian streak in the engine.
+- **Five consecutive E=4 species (86–90)** through five different mechanisms — collective vocal-sac amplification, collective stridulation, individual sustained stridulation, tymbal vibration, collective bell chorus. Unprecedented.
+- **Thirtieth consecutive original CSV** (degrees 61–90) — three decades of unbroken catalog reliability. Longest unbroken run in the engine.
+- **Energy means at the quarter:** Artist-side mean = 3.18; species-side mean = 3.21; combined mean = 3.19. The engine's center of gravity sits almost exactly at E=3.
+- **Outstanding gaps:** Zero raptors in 91 entries; zero passerines in 34 degrees (57–90); zero marine species in 91 entries.
+- **Quarter-mark research footprint:** ~743 research files, ~500K+ words, ~5,500 words per degree, 17 orders, 40+ families, 4 classes.
 
-Sky Cries Mary drifts. The ambient drift is the 91st acoustic element -- synthesizer pads, processed guitar, world percussion, and ethereal vocals creating a slowly evolving sonic landscape. The music drifts rather than drives. From the proscenium (degree 89, the baroque whisper) to the planetarium (degree 90, the ambient drift). Formed in 1988, predating grunge by three years. The anti-grunge. The parallel scene. Every spotlight creates a shadow where other music thrives. Sky Cries Mary thrived in that shadow for decades. At the quarter-mark, the engine documents what the spotlight missed.
+## Acoustic Progression Snapshot (Tail)
 
-The spring peeper chorus peeps. Crystalline. Bell-like. 2,800-3,600 Hz. Individual calls merging into a shimmering wall of sound when hundreds call simultaneously on warm spring nights. The second Hylidae entry -- same family as the Pacific Treefrog (degree 86), different voice. Krek-krek (harsh, percussive) at degree 86. Bell-like peep (crystalline, pure) at degree 90. Two expressions of one family's vocal apparatus. The palindromic class structure -- Amphibia, Insecta, Insecta, Insecta, Amphibia -- brackets the non-mammalian streak with Hylidae at both ends. The engine produces palindromes without trying.
+| # | Element | Degree | Artist/Species |
+|---|---------|--------|----------------|
+| 86 | the electronic pulse / the amplified krek-krek wall of sound | 86 | The Postal Service / Pacific Treefrog |
+| 87 | the emerging twang / the rhythmic chirp field chorus | 87 | Neko Case (early folk) / Cricket Chorus |
+| 88 | the bedroom strum / the continuous electric buzz | 88 | Kimya Dawson (solo) / Katydid |
+| 89 | the baroque whisper / the electric buzzing throb | 89 | Parenthetical Girls / Cicada |
+| **90** | **the ambient drift / the bell-like peep chorus** | **90** | **Sky Cries Mary / Spring Peeper-Like Chorus** |
 
-Both ambient. Both immersive. Both create walls of sound through accumulation rather than force. Both shimmer.
+## Files
 
-The right angle is the angle at which independence is born. The wall is perpendicular to the floor. The artist axis is perpendicular to the species axis. Sin is perpendicular to cos. At 90 degrees, the engine stands on the foundation of its first quadrant and looks East -- across the Cascades, toward the interior, toward three more quadrants of the rotation. The vocabulary is built. The syntax begins.
+- `docs/release-notes/v1.49.230/README.md` (this file)
+- `docs/release-notes/v1.49.230/chapter/00-summary.md` — derived summary
+- `docs/release-notes/v1.49.230/chapter/03-retrospective.md` — retrospective
+- `docs/release-notes/v1.49.230/chapter/04-lessons.md` — 7 extracted lessons
+- `docs/release-notes/v1.49.230/chapter/99-context.md` — context
+- `www/tibsfox/com/Research/S36/research/releases/090-sky-cries-mary/index.html` (709 lines)
+- `www/tibsfox/com/Research/S36/research/releases/090-sky-cries-mary/research.md` (126 lines)
+- `www/tibsfox/com/Research/S36/research/releases/090-sky-cries-mary/knowledge-nodes.json` (138 lines)
+- `www/tibsfox/com/Research/S36/research/releases/090-sky-cries-mary/retrospective.md` (159 lines)
+- `www/tibsfox/com/Research/SPS/research/releases/090-spring-peeper-chorus/index.html` (536 lines)
+- `www/tibsfox/com/Research/SPS/research/releases/090-spring-peeper-chorus/research.md` (145 lines)
+- `www/tibsfox/com/Research/SPS/research/releases/090-spring-peeper-chorus/knowledge-nodes.json` (145 lines)
+- `www/tibsfox/com/Research/SPS/research/releases/090-spring-peeper-chorus/retrospective.md` (99 lines)
 
-*Degree 90. The quarter-mark. sin(90) = 1. The first quadrant is complete. The engine faces East. The ambient drift carries. The bell-like peep shimmers. The right angle holds.*
-
-</details>
+Total: 9 files in commit `8422302314f2086559f9d50ba81b306b5b4dfa8c`, 2,665 insertions.
