@@ -1,530 +1,197 @@
-# v1.49.233 -- Degree 93: NAVVI + Hornet Nest Buzz -- THE SHIMMER AND THE STING
+# v1.49.233 — Degree 93: NAVVI + Hornet Nest Buzz — THE SHIMMER AND THE STING
 
 **Released:** 2026-04-02
-**Degree:** 93 of 360 -- Third degree of Quadrant II
-**Part A:** NAVVI -- Dream Pop/Electronic, E=3, self-released, GENRE STAGE 75 (Dream Pop/Electronic, seventy-five genre stages in 93 degrees, atmospheric reverb-laden electronic pop ethereal vocals voice inside texture boundary between voice and synthesizer deliberately blurred, distinguished from Ethereal/Electronic 90 ambient psychedelic drifting and Electronic Pop 86 structured melodic and Drone/Noise 91 no vocals pure texture, reverb-as-architecture production-as-composition), THE SHIMMER VEIL 94th acoustic element (reverb-laden electronic production where vocal sits inside texture rather than on top boundary between voice and synthesizer deliberately blurred atmosphere IS the music reverb IS the compositional space, distinct from ambient drift 90 slowly evolving and drone architecture 91 no vocals and electronic pulse 86 rhythmic structured), THE INTIMATE MACHINE 94th artist-city pattern (duo or small unit using electronic production as medium for emotional intimacy machine serves the intimate not the spectacular bedroom-scale electronic music headphones and dark rooms, distinct from parallel scene 90 alongside dominant narrative and producer-as-artist 67 technical mastery), Seattle, self-released, Ben Shepard and Rain Shepard
-**Part B:** Hornet Nest Buzz (Vespidae) -- aggressive papery hum, E=5, woodland, Vespidae, NEW FAMILY (43rd), same order Hymenoptera as bumblebee (92), HYMENOPTERA PAIR (bumblebee E=2 gentle drone vs hornet E=5 aggressive hum widest consecutive same-order energy gap), FIRST AGGRESSIVE/DEFENSIVE INSECT SOUND (every prior insect sound was mating advertising or incidental flight hornet buzzes to THREATEN fundamentally new acoustic posture), aggressive papery hum 94th species-side acoustic element (collective defensive buzzing hundreds of hornets wing vibration 100-300 Hz broad-spectrum harsh papery quality from wood-fiber nest resonance, distinct from deep resonant buzz 92 gentle warm and electric buzzing throb 89 tymbal advertisement and ultra-thin hum cloud 91 individual barely audible), THIRTY-THIRD CONSECUTIVE ORIGINAL CSV, E=5 highest insect energy tied with cicada 89
-**Series:** Seattle 360 + Sound of Puget Sound -- Continuous Release Engine
+**Degree:** 93 of 360
+**Part A:** NAVVI — Dream Pop/Electronic, E=3, self-released, Genre Stage 75 milestone, Seattle duo Ben Shepard and Rain Shepard, the shimmer veil 94th acoustic element, the intimate machine 94th artist-city pattern, reverb-as-architecture, vocals inside texture
+**Part B:** Hornet Nest Buzz (*Vespidae*) — aggressive papery hum, E=5, woodland habitat, Vespidae 43rd family, Hymenoptera pair with bumblebee, first aggressive/defensive insect sound, 94th species-side acoustic element, 33rd consecutive original CSV
+**Series:** Seattle 360 + Sound of Puget Sound — Continuous Release Engine
 **Cluster:** Music (hub: WAL)
-**Note:** The shimmer and the sting. This is the degree where the engine's widest A/B energy gap opens. On the music side, **NAVVI** shimmers and whispers -- Dream Pop/Electronic at Genre Stage 75, reverb-laden, atmospheric, intimate. E=3. Self-released Seattle duo of **Ben Shepard** and **Rain Shepard**. The **shimmer veil** is the 94th acoustic element: reverb-as-architecture, vocals inside texture, atmosphere as composition, the boundary between voice and synthesizer deliberately blurred. The **intimate machine** is the 94th artist-city pattern: electronic production as a medium for emotional intimacy, bedroom-scale, headphones and dark rooms. On the species side, the **hornet nest buzz** threatens and roars -- **NEW FAMILY Vespidae (43rd)**, same order **Hymenoptera** as the bumblebee at degree 92, making this a **Hymenoptera pair**: gentle drone (E=2) vs aggressive hum (E=5). The widest energy gap within a consecutive same-order pair. The hornet nest buzz is the **FIRST AGGRESSIVE/DEFENSIVE INSECT SOUND** in the engine. Every prior insect chirped to attract mates, throbbed to advertise, or droned while working. The hornet buzzes to **threaten**. A fundamentally new acoustic posture. E=5 -- the highest insect energy, tied with cicada (89). The contrast is extreme: the shimmer veil (Part A, E=3) vs the aggressive hum (Part B, E=5). Intimate vs threatening. Whisper vs roar. **Thirty-third consecutive original CSV.** The shimmer and the sting.
+**Branch:** main
+**Commit:** `fb0d069399e18c140f25e3947cb512598aecd63a`
+**Files changed:** 9 (release note + 4 NAVVI research artifacts + 4 Hornet Nest Buzz research artifacts)
+**Dedication:** To **NAVVI** in the Seattle dream pop/electronic context — the duo of **Ben Shepard** and **Rain Shepard** whose self-released catalog treats reverb as architecture and vocal as texture, the shimmer veil that whispers inside the synthesizer rather than announcing on top of it; to the **Olympia / Seattle / Anacortes** electronic lineage extending **Sky Cries Mary** (degree 90), **Hovercraft** (degree 91), **Trance Mission** (degree 92) into the dream pop/electronic intimacy at degree 93; to the **Hornet Nest Buzz** (*Vespidae*) — bald-faced hornet, common yellowjacket, western yellowjacket, the colony-defenders whose collective wing vibration over a wood-fiber paper nest produces the first aggressive/defensive insect sound in the engine; to the **Hymenoptera pair** that opens at **degree 92** with the **Bumblebee Drone** (Apidae, gentle E=2, pollination) and closes at **degree 93** with the **Hornet Nest Buzz** (Vespidae, aggressive E=5, defense) — the widest energy gap within any consecutive same-order pair in the engine; and to the entire seven-degree **Insect Era** (degrees 87–93: cricket, katydid, cicada, mosquito, bumblebee, hornet) that has become the deepest sustained taxon-class exploration in the catalog so far.
+**Engine Position:** Degree 93 of 360 — 25.8% of the circle traversed; the shimmer veil (94th acoustic element artist-side); aggressive papery hum (94th species-side); The Intimate Machine (94th artist-city pattern); GENRE STAGE 75 MILESTONE Dream Pop/Electronic (seventy-five genre stages in ninety-three degrees, 0.81 stages/degree); FOURTH CONSECUTIVE ELECTRONIC-INFLECTED GENRE (Ethereal/Electronic 90 → Drone/Noise 91 → World/Electronic 92 → Dream Pop/Electronic 93); FIVE ELECTRONIC-ADJACENT ENTRIES IN EIGHT DEGREES (86, 90, 91, 92, 93); SECOND CONSECUTIVE HYMENOPTERA (92–93) — the **Hymenoptera pair** spans bumblebee (Apidae, E=2) and hornet (Vespidae, E=5), the widest consecutive same-order energy gap in the engine; **VESPIDAE** forty-third family, back-to-back new families in the same order paralleling **Anatidae** (58–59) and **Orthoptera** (87–88); FIRST AGGRESSIVE/DEFENSIVE INSECT SOUND — every prior insect chirped, throbbed, whined, or droned; the hornet buzzes to threaten, a fundamentally new acoustic posture; SEVEN INSECT ENTRIES IN SEVEN DEGREES (87–93) — deepest sustained exploration of any taxon class to date; THIRTY-THIRD CONSECUTIVE ORIGINAL CSV species (degrees 61–93); E=5 TIES THE INSECT ENERGY CEILING with the **Cicada** (89) — same energy, opposite intent (advertising vs threatening).
 
 ## Summary
 
-The shimmer veil and the aggressive papery hum. Degree 93 opens the widest A/B energy gap in recent degrees -- NAVVI whispers at E=3 while the hornet colony roars at E=5. Intimate electronic dream pop meets collective defensive fury.
+**The shimmer veil and the aggressive papery hum.** Degree 93 opens the engine's widest A/B energy gap in recent memory — **NAVVI** whispers behind reverb at **E=3** while the **Hornet Nest Buzz** roars in collective defense at **E=5**. Two energy levels separate Part A from Part B, and that gap is itself the degree's defining structural property. The shimmer veil invites the listener inside an atmospheric texture; the aggressive papery hum drives the listener away from a defended colony. **Intimate** versus **threatening**. **Whisper** versus **roar**. **Bedroom-scale duo** versus **hundreds-strong colony**. The engine has paired a self-released Seattle dream pop/electronic duo with the first aggressive insect sound in the catalog, and the contrast is the point. **Genre Stage 75** lands as a milestone on the music side — **Dream Pop/Electronic** as the seventy-fifth distinct genre stage in ninety-three degrees (0.81 stages per degree), the fourth consecutive electronic-inflected genre after **Ethereal/Electronic** at degree 90, **Drone/Noise** at degree 91, and **World/Electronic** at degree 92. **Vespidae** lands as the **43rd family** on the species side, the second consecutive **Hymenoptera** family after **Apidae** at degree 92, completing the **Hymenoptera pair** that spans the engine's widest consecutive same-order energy gap.
 
-On the music side, **NAVVI** arrives with Dream Pop/Electronic -- atmospheric, reverb-laden electronic pop with ethereal vocals. A Seattle duo -- **Ben Shepard** and **Rain Shepard**. Self-released. **Genre Stage 75** -- Dream Pop/Electronic. E=3. The music is reverb-as-architecture: the vocal sits inside the texture rather than on top of it, the boundary between voice and synthesizer deliberately blurred, the atmosphere IS the music. Distinguished from Ethereal/Electronic (Sky Cries Mary, 90) -- NAVVI is more song-structured, more pop-influenced, where Sky Cries Mary drifted. Distinguished from Electronic Pop (Postal Service, 86) -- NAVVI dissolves structure into atmosphere where the Postal Service built structure from electronics. Distinguished from Drone/Noise (Hovercraft, 91) -- NAVVI has vocals and melody where Hovercraft had pure texture. The duo format is the minimum viable unit for dream pop/electronic -- one voice, one production environment, the interplay between vocal and texture reduced to its essential conversation. **The shimmer veil** is the 94th acoustic element -- reverb-laden electronic production where the song shimmers behind a veil of atmosphere, where reverb is not an effect but the compositional space. **The intimate machine** is the 94th artist-city pattern -- electronic production as a medium for emotional intimacy rather than spectacle, bedroom-scale electronic music for headphones and dark rooms, the machine serves the intimate. The electronic Seattle landscape continues to deepen -- five electronic-adjacent entries in eight degrees (86, 90, 91, 92, 93): Electronic Pop, Ethereal/Electronic, Drone/Noise, World/Electronic, Dream Pop/Electronic.
+**Part A: NAVVI in Seattle dream pop/electronic context.** On the music side, **NAVVI** is a **Seattle, Washington** duo composed of **Ben Shepard** and **Rain Shepard**, self-released, operating at the intersection of dream pop and electronic music. The project produces atmospheric, reverb-laden electronic pop where the vocal sits *inside* the texture rather than on top of it, where the boundary between voice and synthesizer is deliberately blurred, where the song shimmers behind a veil of atmosphere rather than asserting in front of one. **Genre Stage 75** holds **Dream Pop/Electronic** as the seventy-fifth distinct genre stage in the engine, distinguished from the **Ethereal/Electronic** of **Sky Cries Mary** at **degree 90** by structure (NAVVI is more song-oriented where Sky Cries Mary drifts), distinguished from the **Indie Electronic** of the **Postal Service** at **degree 86** by approach (NAVVI dissolves structure into atmosphere where the Postal Service built structure from electronics), and distinguished from the **Drone/Noise** of **Hovercraft** at **degree 91** by presence (NAVVI is vocal-forward where Hovercraft was pure texture). **The shimmer veil** is the **94th acoustic element** — reverb-laden electronic production where the reverb is not an effect but the compositional space, where the song shimmers behind a veil of atmosphere, where the production *is* the composition. Distinct from the **ambient drift** at **degree 90** (slowly evolving ambient landscapes), distinct from the **drone architecture** at **degree 91** (no vocals, pure texture), distinct from the **electronic pulse** at **degree 86** (rhythmic, structured, beats as framework). **The intimate machine** is the **94th artist-city pattern** — a duo or small unit using electronic production as the medium for emotional intimacy rather than spectacle, bedroom-scale electronic music made for headphones and dark rooms, the machine serving the intimate rather than the arena-sized. Distinct from the **parallel scene** at **degree 90** (operating alongside a dominant scene), distinct from the **producer-as-artist** at **degree 67** (technical mastery as creative practice). **The self-released model** adds **distribution diversity** to the engine's label landscape — NAVVI is not on **Sub Pop**, **K Records**, **Barsuk**, **Hardly Art**, **Captured Tracks**, or **Secretly Canadian**; the duo distributes directly to the listener. The engine's distribution map now spans major labels, large independents, small independents, and self-released artists. **The duo format** is the minimum viable unit for dream pop/electronic — one voice, one production environment, the interplay between vocal and texture reduced to its essential conversation. **E=3** for NAVVI captures atmospheric intimacy: the reverb-laden production creates immersive presence without aggression, present and filling without being loud, the bedroom-scale electronic that works through headphones rather than through speakers. The **electronic Seattle landscape** continues to deepen — five electronic-adjacent entries in eight degrees: **The Postal Service** (86, Indie Electronic), **Sky Cries Mary** (90, Ethereal/Electronic), **Hovercraft** (91, Drone/Noise), **Trance Mission** (92, World/Electronic), and now **NAVVI** (93, Dream Pop/Electronic). Five different relationships to electronics in eight degrees. The Pacific Northwest's electronic music scene is being mapped in depth, not in passing.
 
-On the species side, the **hornet nest buzz** (Vespidae) introduces **NEW FAMILY Vespidae (43rd)** and the **first aggressive/defensive insect sound**. Same order **Hymenoptera** as the bumblebee at degree 92, creating the **Hymenoptera pair**: bumblebee (Apidae, gentle drone, E=2, pollination) vs hornet (Vespidae, aggressive hum, E=5, colony defense). Same order. Opposite acoustic postures. The widest energy gap within a consecutive same-order pair. The hornet nest buzz is collective -- hundreds of hornets vibrating their wings simultaneously in a defensive display that escalates as the perceived threat persists. The sound is not musical -- it is threatening. The papery quality comes from the wood-fiber nest resonating with the collective buzzing, adding a rustling texture not present in any other insect sound. **E=5** -- the highest insect energy, tied with cicada (89). Both E=5, but the cicada advertises while the hornet threatens. Same energy, opposite intent. Every prior insect sound was mating (cricket chirp, katydid rasp), advertising (cicada throb), or incidental flight (mosquito whine, bumblebee drone). The hornet nest buzz is the first with **aggressive/defensive intent**. A fundamentally new acoustic posture enters the engine. Woodland habitat -- nests in trees, shrubs, and sheltered structures. PNW species include bald-faced hornet, common yellowjacket, western yellowjacket. **Thirty-third consecutive original CSV species.**
+**Part B: Hornet Nest Buzz (Vespidae).** On the species side, the **Hornet Nest Buzz** introduces the family **Vespidae** as the **43rd family** in the engine — the wasps and hornets, social paper-nest builders that include the **bald-faced hornet** (*Dolichovespula maculata*), the **common yellowjacket** (*Vespula vulgaris*), and the **western yellowjacket** (*Vespula pensylvanica*) across the **Pacific Northwest**. The entry is family-level rather than species-level, encompassing the collective defensive behavior of all Vespidae colonies. Same order **Hymenoptera** as the **Bumblebee Drone** at **degree 92**, but a different family — **Apidae** at 92, **Vespidae** at 93. This back-to-back same-order pattern parallels **Anatidae** at degrees 58–59 (**Wood Duck** and **Mallard**) and **Orthoptera** at degrees 87–88 (**Cricket Chorus** and **Katydid**). When the engine encounters an order, it lingers; the **Hymenoptera pair** at degrees 92–93 is the third such instance. **The aggressive papery hum** is the **94th species-side acoustic element** — collective defensive buzzing of hundreds of hornets vibrating their wings simultaneously, broad-spectrum 100–300 Hz fundamental with harmonics extending higher, papery quality from the wood-fiber nest resonating with the collective vibration. The sound is unmistakable: not musical, not advertising, not incidental — *threatening*. It rises in volume and intensity as the perceived threat persists. Distinct from the **deep resonant buzz** at **degree 92** (gentle, low-pitched, solitary bumblebee pollination), distinct from the **electric buzzing throb** at **degree 89** (cicada tymbal advertisement), distinct from the **ultra-thin hum cloud** at **degree 91** (mosquito individual wing-whine, barely audible). **The first aggressive/defensive insect sound** marks the entry of an entirely new acoustic posture into the engine. Every prior insect sound was **mating** (cricket chirp at 87, katydid rasp at 88), **advertising** (cicada throb at 89), or **incidental flight / working** (mosquito whine at 91, bumblebee drone at 92). The hornet nest buzz is the first sound produced with **aggressive/defensive intent** — the colony buzzes to **threaten**, to warn, to say: *leave or be stung*. The engine's classification of insect acoustic posture now has four categories rather than three. **E=5** for the hornet ties the **Cicada** (89) for the highest insect energy in the engine — but the cicada **advertises** while the hornet **threatens**. Same energy level, opposite intent. **The Hymenoptera pair (E=2 → E=5)** is the engine's **widest consecutive same-order energy gap**. Bumblebee at 92 worked at gentle pollination; hornet at 93 defends with collective fury. Same order. Different families. Different behaviors. Opposite acoustic postures. Three energy levels separate them. **The papery quality** comes from the **wood-fiber paper nest** — the nest is constructed from chewed wood pulp mixed with hornet saliva, and that paper material resonates with the collective wing vibration to produce a rustling timbral quality that no other insect sound exhibits. **The colony defense range** extends 5–15 meters from the nest; the alarm pheromone recruits nestmates within seconds; unlike honeybees, hornets and yellowjackets can sting repeatedly without dying. **Woodland habitat** — nests hung in trees, in shrubs, under eaves, in attics, in wall voids, in any sheltered structure. **Seven insect entries in seven degrees** (87–93) is the **deepest sustained exploration of any taxon class** in the engine to date. The Insect Era now spans **five orders** (Orthoptera, Hemiptera, Diptera, Hymenoptera) across **three sound mechanisms** (stridulation, tymbal, wing vibration) and **four acoustic postures** (mating, advertising, incidental flight, defensive). **Thirty-third consecutive original CSV species** (degrees 61–93) — the source catalog continues to deliver without substitution.
 
-The shimmer and the sting. NAVVI shimmers behind reverb at E=3. The hornet colony buzzes with collective fury at E=5. Intimate vs threatening. The widest A/B energy gap in recent degrees. The shimmer veil and the aggressive papery hum.
+**Cross-Sync Parallel: The Widest A/B Energy Gap.** Both halves of degree 93 are studies in extreme contrast. **NAVVI** at **E=3** produces atmospheric intimacy through reverb-laden production; the **Hornet Nest Buzz** at **E=5** produces collective fury through wing vibration over a paper nest. **In parallel**, both occupy their soundscape entirely — the shimmer veil fills the room with reverb, the aggressive hum fills the woodland with collective vibration — but the means and the intent are opposite. **The same** structural law is at work: presence does not require any single energy level. **Each side** has reached its own ceiling on its own terms. **Synchronized** by the catalog rather than by intentional pairing, the two halves form a tension that makes both more vivid than either would be alone. Wide A/B gaps can be as structurally useful as tight A/B parallels — this degree proves the point.
+
+**Cross-Sync Parallel: Individual vs Collective.** Both halves of degree 93 differ from their immediate neighbors in scale. **NAVVI** is a **duo** — two people, **Ben Shepard** and **Rain Shepard**, the minimum viable unit for dream pop/electronic. **In parallel**, the **Hornet Nest Buzz** is a **colony** — hundreds of hornets buzzing simultaneously, the maximum collective insect display in the engine. **Each side** demonstrates that scale operates on its own logic: the smallest possible musical group (duo) and one of the largest possible insect aggregations (colony of 200–700+ workers) both produce sounds that fill their respective soundscapes. **The same** principle — that occupation of acoustic space is achievable through any scale — reaches both halves on the same degree. **Synchronized** by the catalog, the **intimate machine** and the **defensive swarm** sit side by side as two expressions of completely-occupied space.
+
+**Cross-Sync Parallel: Both Are Vibration-Produced.** Both halves of degree 93 produce sound through **vibrating elements**. **NAVVI** uses **electronic synthesizers** and **reverb processing** — oscillators producing sustained tonal vibration, signal processors producing the shimmer of reverb tails. **In parallel**, the **Hornet Nest Buzz** uses **wing vibration** — hornet wings beating at characteristic frequencies, resonating with the wood-fiber nest to produce the papery hum. **Each side** depends on sustained periodic vibration to produce its sound. **The same** physical principle — vibration at the right frequency produces audible sound — reaches both halves on the same degree through completely different substrates (silicon and software for NAVVI, chitin and paper for the hornet). **Synchronized** by physics rather than by intent, the two halves illustrate that the engine's acoustic taxonomy operates beneath any species/genre distinction.
+
+**Cross-Sync Parallel: Defending and Inviting Through Sound.** Both halves of degree 93 use sound to define **acoustic space** but with opposite valences. **NAVVI**'s reverb creates a **shared space** — a veil of atmosphere that envelops the listener and invites them inside. **In parallel**, the **Hornet Nest Buzz** creates a **warning space** — a wall of sound that surrounds the colony and pushes intruders away. **Each side** uses acoustic occupation as a territorial signal, but the territories are reversed: NAVVI's territory is the **shared interior** (come in), the hornet's territory is the **defended exterior** (stay out). **The same** mechanism — sound-as-territory — operates with opposite polarities. **Synchronized** by accident, the degree contains both an invitation and a warning expressed through sustained sound.
+
+**Cross-Sync Parallel: The Insect Era and the Electronic Era Reach Their Apex Together.** Both halves of degree 93 sit at maturity points in their respective extended sequences. **In parallel**, the artist side has reached its **fourth consecutive electronic-inflected genre** (Ethereal/Electronic 90 → Drone/Noise 91 → World/Electronic 92 → Dream Pop/Electronic 93) — the deepest sustained run of any genre family at the engine's musical interior. The species side has reached its **seventh consecutive insect entry** (cricket 87 → katydid 88 → cicada 89 → mosquito 91 → bumblebee 92 → hornet 93) — the deepest sustained run of any taxon class. **Each side** has spent multiple consecutive degrees inside one zone of the engine's space. **The same** structural moment — the engine sustaining a long thread rather than rotating through diversity — reaches both halves on the same degree. **Synchronized** by maturity, both the Electronic Era and the Insect Era reach their apex at degree 93.
+
+**Cross-Sync Parallel: The Hymenoptera Pair as Microcosm.** Both halves of degree 93 demonstrate a single principle in different domains. The **Hymenoptera pair** at degrees 92–93 (bumblebee E=2 vs hornet E=5) shows that **taxonomic proximity does not predict acoustic similarity** — same order, opposite postures. **In parallel**, the music-side genre cluster (Ethereal/Electronic 90, Drone/Noise 91, World/Electronic 92, Dream Pop/Electronic 93) shows that **stylistic adjacency does not predict sonic similarity** — four genres all containing "Electronic" in their stage label, four completely different relationships to electronic production. **Each side** demonstrates that classification labels (Order, Genre Family) describe lineage rather than character. **The same** lesson — that proximity in taxonomy or genre tells you almost nothing about how a thing actually sounds — reaches both halves on the same degree. **Synchronized** by the catalog's structure, both demonstrate the same principle.
+
+**Cross-Sync Parallel: First Aggressive Insect Meets the Intimate Machine.** Both halves of degree 93 introduce **firsts**. The **Hornet Nest Buzz** is the **first aggressive/defensive insect sound** in the engine — every prior insect chirped, throbbed, whined, or droned, and the hornet introduces threat as a posture category. **In parallel**, **NAVVI** is the **first self-released artist** in this electronic cluster (Sky Cries Mary, Hovercraft, Trance Mission all came through label structures), and **The Intimate Machine** is the first artist-city pattern that names electronic production as a vehicle for *intimacy* rather than spectacle. **Each side** introduces a new category to the engine's vocabulary. **The same** structural move — taxonomy expansion — reaches both halves on the same degree. **Synchronized** by the catalog, the engine's acoustic-posture taxonomy and the engine's artist-city-pattern taxonomy both grow at degree 93.
+
+**Cross-Sync Parallel: The Insect Era Extends; The Electronic Era Deepens.** Both halves of degree 93 sit inside extended runs. **In parallel**, the **Insect Era** has now extended to **seven entries in seven degrees** (87–93), the longest unbroken taxon-class run in the engine. The **Electronic Era** has now extended to **four consecutive electronic-inflected genres** (90–93), the longest unbroken genre-cluster run. **Each side** is doing something the engine has not done at this depth before. **The same** structural moment — the engine consolidating around dense thematic clusters rather than rotating through breadth — reaches both halves on the same degree. **Synchronized** by maturity, both runs are reaching the kind of depth where return entries become possible.
 
 ## Key Features
 
 | Metric | Part A: NAVVI | Part B: Hornet Nest Buzz |
 |--------|---------------|--------------------------|
-| Genre | Dream Pop/Electronic (Genre Stage 75, seventy-five genre stages in 93 degrees, atmospheric reverb-laden electronic pop with ethereal vocals, voice inside texture, distinguished from Ethereal/Electronic 90 and Drone/Noise 91 and Electronic Pop 86, reverb-as-architecture production-as-composition) | -- |
-| Energy | E=3 (atmospheric intimacy, reverb-laden, bedroom-scale electronic dream pop, self-released duo, the machine serves the intimate) | E=5 (collective aggressive defense, hundreds of hornets, clearly audible at distance, escalating sustained threatening, highest insect energy tied with cicada 89) |
-| Label | Self-released (no label infrastructure, full creative control, direct audience, distribution model diversity expands) | -- |
-| Family | -- | Vespidae (NEW FAMILY 43rd, first wasps/hornets, social wasps, paper nest builders, includes hornets yellowjackets paper wasps) |
-| Order | -- | Hymenoptera (same as bumblebee 92, Hymenoptera pair: gentle E=2 vs aggressive E=5, widest consecutive same-order energy gap) |
-| Class | -- | Insecta (insect streak continues from 92, consecutive insects 87-93, seven insect entries in seven degrees) |
-| Acoustic Element | the shimmer veil (94th, reverb-laden electronic production vocal inside texture boundary blurred atmosphere IS the music reverb IS the compositional space, distinct from ambient drift 90 slowly evolving and drone architecture 91 no vocals pure texture and electronic pulse 86 rhythmic structured) | aggressive papery hum (94th species-side, collective defensive buzzing hundreds of hornets wing vibration 100-300 Hz broad-spectrum harsh, papery quality from wood-fiber nest resonance, distinct from deep resonant buzz 92 gentle warm and electric buzzing throb 89 tymbal and ultra-thin hum cloud 91 individual barely audible) |
-| Artist-City Pattern | The Intimate Machine (94th, duo or small unit using electronic production for emotional intimacy, machine serves the intimate not the spectacular, bedroom-scale electronic headphones and dark rooms, distinct from parallel scene 90 alongside dominant and producer-as-artist 67 technical mastery) | -- |
-| Structural Firsts | GENRE STAGE 75 (Dream Pop/Electronic), THE SHIMMER VEIL 94th acoustic element (reverb-as-architecture), THE INTIMATE MACHINE 94th artist-city pattern (electronic intimacy), SELF-RELEASED (distribution model diversity), DUO FORMAT (minimum viable unit for dream pop/electronic), ELECTRONIC SEATTLE DEEPENS (five electronic entries in eight degrees 86-93) | NEW FAMILY VESPIDAE (43rd), HYMENOPTERA PAIR (bumblebee 92 vs hornet 93 gentle vs aggressive E=2 vs E=5), FIRST AGGRESSIVE/DEFENSIVE INSECT SOUND (new acoustic posture category), AGGRESSIVE PAPERY HUM 94th species-side acoustic element (collective, threatening, papery nest resonance), E=5 HIGHEST INSECT ENERGY (tied with cicada 89), THIRTY-THIRD CONSECUTIVE ORIGINAL CSV, INSECT ERA EXTENDS (seven entries 87-93) |
+| Genre | **Dream Pop/Electronic** (Genre Stage 75 MILESTONE, seventy-five genre stages in ninety-three degrees, atmospheric reverb-laden electronic pop with ethereal vocals voice inside texture boundary between voice and synthesizer deliberately blurred, distinguished from Ethereal/Electronic 90 ambient psychedelic drifting and Indie Electronic 86 structured melodic and Drone/Noise 91 no vocals pure texture and World/Electronic 92 cross-cultural polyphony, reverb-as-architecture production-as-composition) | — |
+| Energy | **E=3** (atmospheric intimacy, reverb-laden, bedroom-scale, immersive without aggression, the machine serves the intimate, present and filling without being loud, headphones-and-dark-rooms scale, four consecutive electronic entries cluster around E=2 to E=3 with Hovercraft as the E=2 outlier) | **E=5** (collective aggressive defense, hundreds of hornets, clearly audible at 10+ meters, escalating sustained threatening, highest insect energy tied with cicada 89, widest consecutive same-order energy gap when paired with bumblebee 92 E=2) |
+| Label | **Self-released** (no label infrastructure, full creative control, direct audience, distribution model diversity expands, distinct from Sub Pop K Records Barsuk Hardly Art Captured Tracks Secretly Canadian) | — |
+| Family | — | **Vespidae** (NEW FAMILY 43rd, first wasps/hornets in the engine, social wasps, paper nest builders, includes hornets yellowjackets paper wasps, PNW species bald-faced hornet *Dolichovespula maculata* common yellowjacket *Vespula vulgaris* western yellowjacket *Vespula pensylvanica*) |
+| Order | — | **Hymenoptera** (SECOND CONSECUTIVE Hymenoptera 92–93, Hymenoptera pair: Apidae bumblebee gentle E=2 vs Vespidae hornet aggressive E=5, widest consecutive same-order energy gap in the engine, parallels Anatidae 58–59 and Orthoptera 87–88) |
+| Class | — | **Insecta** (SEVENTH CONSECUTIVE Insecta entry 87–93 with degree 90 Spring Peeper-Like Chorus as Amphibia interlude, deepest sustained taxon class exploration to date, five orders covered Orthoptera Hemiptera Diptera Hymenoptera, three sound mechanisms stridulation tymbal wing vibration, four acoustic postures mating advertising incidental defensive) |
+| Acoustic Element | **the shimmer veil** (94th, reverb-laden electronic production where vocal sits inside texture boundary between voice and synthesizer deliberately blurred atmosphere IS the music reverb IS the compositional space, distinct from ambient drift 90 slowly evolving and drone architecture 91 no vocals pure texture and electronic pulse 86 rhythmic structured) | **aggressive papery hum** (94th species-side, collective defensive buzzing hundreds of hornets wing vibration 100–300 Hz fundamental broad-spectrum harsh papery quality from wood-fiber paper nest resonance, distinct from deep resonant buzz 92 gentle warm and electric buzzing throb 89 tymbal advertisement and ultra-thin hum cloud 91 individual barely audible) |
+| Artist-City Pattern | **The Intimate Machine** (94th, duo or small unit using electronic production as the medium for emotional intimacy machine serves the intimate not the spectacular bedroom-scale electronic music headphones and dark rooms, distinct from parallel scene 90 alongside dominant narrative and producer-as-artist 67 technical mastery and cross-pollinator 92 connecting traditions) | — |
+| Habitat Marker | — | **Woodland / sheltered structures** (paper nests hung in trees in shrubs under eaves in attics in wall voids, defensive range 5–15 meters from nest, alarm pheromone recruits nestmates within seconds, mature colonies 200–700+ workers, seasonal cycle queens overwinter alone colonies build through spring/summer peak late summer colony dies in fall) |
+| Structural Firsts | GENRE STAGE 75 MILESTONE Dream Pop/Electronic (seventy-five genre stages in ninety-three degrees), THE SHIMMER VEIL 94th acoustic element (reverb-as-architecture vocals inside texture), THE INTIMATE MACHINE 94th artist-city pattern (electronic intimacy bedroom-scale), SELF-RELEASED (distribution model diversity expands), DUO FORMAT (minimum viable unit for dream pop/electronic), ELECTRONIC SEATTLE DEEPENS (five electronic entries in eight degrees 86 90 91 92 93), FOURTH CONSECUTIVE ELECTRONIC-INFLECTED GENRE (90–93) | NEW FAMILY VESPIDAE (43rd family, first wasps/hornets), HYMENOPTERA PAIR 92–93 (Apidae bumblebee E=2 vs Vespidae hornet E=5, widest consecutive same-order energy gap), FIRST AGGRESSIVE/DEFENSIVE INSECT SOUND (new acoustic posture category), AGGRESSIVE PAPERY HUM 94th species-side acoustic element (collective threatening papery nest resonance), E=5 HIGHEST INSECT ENERGY (tied with cicada 89 same energy opposite intent), THIRTY-THIRD CONSECUTIVE ORIGINAL CSV (degrees 61–93), SEVEN INSECT ENTRIES IN SEVEN DEGREES (87–93 deepest taxon class run) |
 | Research Words | ~5,500 | ~5,500 |
 | Files Produced | 4 | 4 |
 | Cross-References | 5 | 5 |
 
-<details>
-<summary>Full Release Notes -- Click to expand</summary>
+## Part A: NAVVI — The Shimmer Veil
 
-## Part A: NAVVI -- THE SHIMMER VEIL (Dream Pop/Electronic, E=3, Self-Released, GENRE STAGE 75 Dream Pop/Electronic Seventy-Five Genre Stages Reverb-Laden Atmospheric Song-Structured Ethereal Vocals Inside Texture, The Shimmer Veil 94th Acoustic Element Reverb-As-Architecture Vocals Inside Texture Atmosphere As Composition Boundary Between Voice And Synthesizer Deliberately Blurred, The Intimate Machine 94th Artist-City Pattern Electronic Production For Emotional Intimacy Bedroom-Scale Headphones Dark Rooms Machine Serves The Intimate, Self-Released Distribution Model Diversity, Duo Format Ben Shepard Rain Shepard)
+- **Genre Stage 75 — Dream Pop/Electronic milestone.** The engine has now introduced seventy-five distinct genre stages across ninety-three degrees — roughly 0.81 stages per degree, a remarkably stable rate since the folk zone began at degree 45. **Dream Pop/Electronic** is distinguished from the **Ethereal/Electronic** of **Sky Cries Mary** (degree 90) by structure (NAVVI is more song-oriented, Sky Cries Mary drifted), distinguished from the **Indie Electronic** of the **Postal Service** (degree 86) by approach (NAVVI dissolves structure, Postal Service built it), and distinguished from the **Drone/Noise** of **Hovercraft** (degree 91) by presence (NAVVI is vocal-forward, Hovercraft was instrumental). The fourth consecutive electronic-inflected genre stage in degrees 90–93.
+- **NAVVI as the duo of Ben Shepard and Rain Shepard.** A **Seattle, Washington** dream pop/electronic duo — atmospheric, reverb-laden electronic pop with ethereal vocals. The duo format is the minimum viable unit for dream pop/electronic: one voice, one production environment, the interplay between vocal and texture reduced to its essential conversation. The sound is the sound of two people agreeing on what beautiful means. Self-released through the 2010s and into the 2020s.
+- **The shimmer veil — 94th acoustic element.** Reverb-laden electronic production where the vocal sits *inside* the texture rather than on top of it. The boundary between voice and synthesizer is deliberately blurred. The song shimmers behind a veil of atmosphere. The reverb is not an effect to be applied; it *is* the compositional space. Distinct from the **ambient drift** at **degree 90** (slowly evolving, no song structure), distinct from the **drone architecture** at **degree 91** (no vocals, pure texture), distinct from the **electronic pulse** at **degree 86** (rhythmic, structured, beats as framework). The shimmer veil dissolves the framework into atmosphere — beats may exist but they breathe rather than drive.
+- **The Intimate Machine — 94th artist-city pattern.** A duo or small unit using electronic production as the medium for **emotional intimacy** rather than spectacle. NAVVI's electronic production creates closeness, not distance. The synthesizers whisper. The reverb creates a shared space rather than an empty cathedral. The intimate machine is the opposite of arena-scale electronic music — it is bedroom-scale electronic music made for **headphones and dark rooms**. Distinct from the **parallel scene** at **degree 90** (operating alongside a dominant scene), distinct from the **producer-as-artist** at **degree 67** (Chris Walla, technical mastery as creative practice), distinct from the **cross-pollinator** at **degree 92** (Trance Mission, connecting traditions).
+- **Self-released — distribution diversity.** NAVVI is self-released, no label infrastructure. The music goes directly from the duo to the listener. In the 2010s Seattle landscape, self-releasing is not a limitation but a choice: full creative control, direct audience relationship, no label aesthetic to satisfy. The engine's distribution map now spans **major labels** (Capitol, Atlantic), **large independents** (Sub Pop), **small independents** (K Records, Barsuk, Hardly Art), and **self-released** (NAVVI). Four distinct distribution models in the engine.
+- **E=3 — atmospheric intimacy.** The reverb-laden production creates immersive atmosphere that is present and filling without being aggressive. Self-released, bedroom-scale, intimate. The machine serves the intimate. E=3 reflects sustained presence without confrontation. Distinct from E=4 (the room-filling energy of bigger productions) and from E=2 (the quieter, more skeletal sound of the Moldy Peaches or solo lo-fi).
+- **The electronic Seattle landscape deepens — five entries in eight degrees.** The Postal Service (86, Indie Electronic), Sky Cries Mary (90, Ethereal/Electronic), Hovercraft (91, Drone/Noise), Trance Mission (92, World/Electronic), NAVVI (93, Dream Pop/Electronic). Five different relationships to electronic music in eight degrees. Each entry uses electronics differently — atmosphere (Sky Cries Mary), obliteration (Hovercraft), bridge-building (Trance Mission), intimacy (NAVVI), structured pop (Postal Service). The engine is mapping not just electronic music but the full range of what electronics *do* in a city's music.
+- **The fourth consecutive electronic-inflected genre.** Degrees 90, 91, 92, 93 all carry electronic-inflected genre stages — the longest unbroken run of a single genre family in the engine. **Ethereal/Electronic** (90) → **Drone/Noise** (91) → **World/Electronic** (92) → **Dream Pop/Electronic** (93). Four genre stages, four distinct sonic approaches, one shared substrate (electronic production). The Electronic Era has reached its apex.
+- **The duo as minimum viable unit.** Ben Shepard and Rain Shepard. Two people. The duo format historically anchors Pacific Northwest dream pop and electronic music — Lemolo (degree 56) is also a duo, the Postal Service (86) is also a duo (Death Cab's Ben Gibbard plus Dntel's Jimmy Tamborello). The duo permits aesthetic agreement without committee dilution; it produces music that two people specifically wanted, not music that survived a band's compromise process. NAVVI extends this lineage.
+- **The reverb-as-architecture aesthetic.** In NAVVI's catalog, reverb is not an effect applied after composition; reverb is the architectural space within which composition occurs. Songs are written for the reverb space rather than into it. This is the opposite of dry production (where reverb is a finishing touch); it is wet production (where reverb is the room being built). The shimmer veil is what wet production sounds like at its dream pop maximum.
 
-Full deep research covering NAVVI at degree 93, Genre Stage 75, and the shimmer veil:
+## Part B: Hornet Nest Buzz (Vespidae) — Aggressive Papery Hum
 
-### STRUCTURAL EVENT: Genre Stage 75 -- Dream Pop/Electronic
+- **Vespidae — 43rd family.** The wasp/hornet family is the 43rd family in the engine's family ledger, sitting after **Apidae** (42nd, the bee family at degree 92). Back-to-back new families from the same order is itself an unusual pattern — most engine entries either repeat a prior family (within an existing lineage) or jump to a completely new order. Two new families in two degrees, both within Hymenoptera, parallels the **Orthoptera** pair at 87–88 (**Gryllidae** and **Tettigoniidae**) and the **Anatidae** repeat at 58–59. The engine does not sample orders once and move on; it lingers and explores within-order diversity.
+- **Hymenoptera pair — bumblebee (92) and hornet (93).** Two consecutive Hymenoptera entries. Same order, different families, opposite acoustic postures. **Bumblebee** at 92: family **Apidae**, gentle drone, **E=2**, pollination — the worker. **Hornet** at 93: family **Vespidae**, aggressive hum, **E=5**, defense — the warrior. The widest energy gap within a consecutive same-order pair in the engine. Three full energy levels separate them. Same order. Different sounds. Different purposes. Different energies. The pair demonstrates that taxonomic proximity does not predict acoustic similarity; **order is not destiny**.
+- **The aggressive papery hum — 94th species-side acoustic element.** Sustained, broad-spectrum, threatening. Frequency content is **100–300 Hz** fundamental with harmonics extending higher. The papery quality comes from the **wood-fiber paper nest** resonating with the collective wing vibration. Multiple hornets vibrate simultaneously, escalating in volume and intensity as the perceived threat persists. The sound is not musical — it is threatening. Distinct from the **deep resonant buzz** at degree 92 (gentle bumblebee, low-pitched, solitary), distinct from the **electric buzzing throb** at degree 89 (cicada tymbal advertisement), distinct from the **ultra-thin hum cloud** at degree 91 (mosquito, individual, barely audible).
+- **First aggressive/defensive insect sound — new acoustic posture category.** Every prior insect sound: **cricket** (87, mating chirp), **katydid** (88, mating rasp), **cicada** (89, advertising throb), **mosquito** (91, incidental flight whine), **bumblebee** (92, incidental flight drone / buzz pollination). The hornet nest buzz is the first sound produced with **aggressive/defensive intent**. The colony buzzes to **threaten** — to warn intruders to leave or be stung. A fundamentally new acoustic posture enters the engine. The engine's classification of insect acoustic posture now has four categories rather than three: mating, advertising, incidental, defensive.
+- **E=5 — third E=5 species in the engine.** Individual hornet calls are loud, the collective is louder, and the duration is sustained as long as the threat persists. **E=5** matches the **Cicada** at degree 89 (also E=5, but advertising rather than threatening). E=5 is the highest insect energy in the engine. Same energy level reached through completely different mechanisms — the cicada's tymbal-driven mating advertisement and the hornet's wing-vibrated colony defense. Energy convergence across mechanisms is now a tracked pattern; future E=5 entries should be classified by which of the available mechanisms produces the energy.
+- **The Hymenoptera pair sets a new energy-gap record.** The previous widest consecutive same-order energy gap was the **Orthoptera** pair at 87–88, where both **Cricket Chorus** (E=4) and **Katydid** (E=4) sat at the same energy level. The Hymenoptera pair (E=2 → E=5) opens a three-level gap — from the gentle pollinator to the aggressive defender, both within the same order. This is structurally productive: the contrast makes both sides more vivid than either would be alone.
+- **PNW Vespidae species inventory.** **Bald-faced hornet** (*Dolichovespula maculata*) — black and white, large aerial paper nests in trees, common across the PNW. **Common yellowjacket** (*Vespula vulgaris*) — yellow and black, ground-nesting and cavity-nesting, abundant in late summer picnics. **Western yellowjacket** (*Vespula pensylvanica*) — yellow and black, scavenging behavior, late-summer aggressive. The Vespidae entry is family-level rather than species-level, encompassing all three species' collective defensive buzzing.
+- **Woodland habitat with structural overlap.** Paper nests hung in trees, in shrubs, under eaves, in attics, in wall voids, in any sheltered structure. Defensive range 5–15 meters from nest. Mature colonies contain 200–700+ workers in late summer. Seasonal cycle: queens overwinter alone, colonies build through spring/summer, peak size late summer, colony dies in fall. The seasonal arc means the aggressive papery hum is most audible in late summer — the period when the catalog's Insect Era reaches its narrative peak.
+- **Defensive behavior and the alarm pheromone.** When a colony is disturbed, an alarm pheromone is released; nestmates respond within seconds; defensive buzzing escalates in volume and intensity. Unlike honeybees (which die after a single sting), hornets and yellowjackets can sting repeatedly. The acoustic display is the warning before the chemical attack — an audible threat that, if heeded, prevents the physical confrontation. The buzz is information.
+- **Ecological role — top insect predators.** Vespidae are **top predators in the insect world**, providing significant population control of caterpillars, flies, and other herbivorous insects. They are also **secondary pollinators** (less efficient than bees but still contributing). The aggressive papery hum is the audible signature of an apex insect predator group defending its breeding investment. The engine's species side now includes both pollinators (bumblebee 92) and pest controllers (hornet 93) within consecutive Hymenoptera entries.
+- **Seven insect entries in seven degrees — deepest taxon class run.** Cricket (87), katydid (88), cicada (89), mosquito (91), bumblebee (92), hornet (93). Seven Insecta entries in seven degrees with one Amphibia interlude (Spring Peeper-Like Chorus at 90). The Insect Era now spans **five orders** (Orthoptera, Hemiptera, Diptera, Hymenoptera) across **three sound mechanisms** (stridulation, tymbal, wing vibration) and **four acoustic postures** (mating, advertising, incidental flight, defensive). The deepest sustained exploration of any taxon class in the engine to date.
+- **Thirty-third consecutive original CSV.** The hornet entry is the thirty-third consecutive species drawn from the original source catalog without substitution (degrees 61–93). The original CSV continues to deliver — the longest unbroken run of original-catalog selections in the engine to date.
 
-Degree 93 reaches **Genre Stage 75**. **Dream Pop/Electronic** describes NAVVI's music: atmospheric synthesizers, heavy reverb, layered vocals dissolving into texture, the boundary between voice and instrument deliberately blurred. Dream Pop/Electronic occupies a different position than Ethereal/Electronic (Sky Cries Mary, degree 90) -- NAVVI's sound is more structured, more song-oriented, more pop-influenced, where Sky Cries Mary was ambient and psychedelic. Both are ethereal; NAVVI drives where Sky Cries Mary drifts.
+## Retrospective
 
-Distinguished from prior electronic entries:
-- **Sky Cries Mary** (degree 90) is Ethereal/Electronic -- ambient, psychedelic, world-music-inflected. NAVVI is Dream Pop/Electronic -- song-driven, reverb-laden, pop-structured.
-- **The Postal Service** (degree 86) is electronic pop -- structured, melodic, Tamborello's beats. NAVVI is dream pop -- the structure dissolves into atmosphere.
-- **Hovercraft** (degree 91) is drone/electronic -- no vocals, pure texture. NAVVI is vocal-forward despite the atmosphere.
+### What Worked
 
-Seventy-five genre stages in 93 degrees.
+- **NAVVI as Dream Pop/Electronic at Genre Stage 75 tracks cleanly.** The classification is genuinely distinct from Ethereal/Electronic (Sky Cries Mary 90), Drone/Noise (Hovercraft 91), World/Electronic (Trance Mission 92), and Indie Electronic (Postal Service 86). Four consecutive electronic-inflected genres (90–93) form a coherent Electronic Era, each entry with its own identity. The classification is defensible and verifiable.
+- **The shimmer veil captures the sonic reality precisely.** Reverb-as-architecture, vocals inside texture, atmosphere as composition, the boundary between voice and synthesizer deliberately blurred. Not obscuring the music; *is* the music. The 94th acoustic element earns its name through specific structural properties rather than through descriptive flourish.
+- **The Intimate Machine names a real artist-city pattern.** The duo format using electronic production for emotional intimacy rather than spectacle, bedroom-scale, headphones and dark rooms. The pattern is observationally accurate and distinguishes NAVVI from arena-scale electronic acts and from producer-as-artist solo electronic work. Lineage-tracking continues to be useful.
+- **The self-released model adds distribution diversity.** The engine now has major labels, large independents, small independents, and self-released artists. The ecosystem of distribution is mapped four-deep, providing a tested vocabulary for future label classification.
+- **NEW FAMILY Vespidae (43rd) is taxonomically significant.** First wasps/hornets in the engine, same order Hymenoptera as bumblebee (92). The Hymenoptera pair demonstrates the order's acoustic range from gentle drone to aggressive hum. Family-level entry was the right granularity for collective defensive behavior.
+- **The Hymenoptera pair (bumblebee E=2, hornet E=5) is one of the engine's strongest structural achievements.** Same order, consecutive degrees, opposite postures, widest energy gap. The pair proves that taxonomic proximity does not predict acoustic similarity; classification labels describe lineage, not character. This lesson has structural utility for future taxon entries.
+- **First aggressive/defensive insect sound is a genuine new category.** Every prior insect chirped to mate, throbbed to advertise, or droned while working. The hornet buzzes to threaten. The acoustic-posture taxonomy expands from three categories to four, giving the engine a richer vocabulary for future insect classification.
+- **E=5 for the hornet is defensible.** Collective, aggressive, loud, sustained, threatening. Matches cicada (89) as highest insect energy but with aggressive rather than advertising intent. Same energy level reached through different mechanisms — the engine's energy ledger now distinguishes mechanism from intensity.
+- **The papery quality from nest resonance is a genuine acoustic distinction.** The wood-fiber paper nest resonates with the collective buzzing, adding a rustling timbral quality unique among insect sounds. No other insect entry has nest-resonance as a sonic component. The detail is biologically grounded and acoustically meaningful.
+- **The A/B energy contrast (E=3 vs E=5) is the widest in recent degrees.** Intimate shimmer vs collective fury. The contrast operates on every dimension: individual vs collective, intimate vs threatening, whisper vs roar. Wide A/B gaps can be as structurally useful as tight A/B parallels.
+- **Thirty-three consecutive original CSV species demonstrates data reliability.** The CSV has not needed substitution or correction in 33 consecutive entries (61–93). The source catalog is sturdy.
 
-### NAVVI -- The Reverb-Laden Duo
+### What Could Be Better
 
-**Formation and History:** NAVVI is a Seattle dream pop/electronic duo of **Ben Shepard** and **Rain Shepard**. The project produces atmospheric, reverb-laden electronic pop with ethereal vocals -- songs that exist in a perpetual state of arriving, voices surfacing through layers of synthesizer and delay, melodies that shimmer rather than assert. Self-released. The duo operates at the intersection of dream pop and electronic music, where the production IS the composition and the reverb IS the arrangement.
+- **NAVVI discography not exhaustively analyzed.** Specific releases, year-by-year evolution, and individual track analysis were treated structurally rather than catalogued album-by-album. Accepted for this entry; a discography deep-dive could be a future research artifact.
+- **Individual PNW Vespidae species not deeply profiled.** Bald-faced hornet, common yellowjacket, and western yellowjacket each have their own acoustic signatures that the family-level entry does not distinguish. Accepted that family-level is appropriate for collective defensive buzzing, but species-level entries remain a future option.
+- **NO RAPTOR in 94 entries.** The absence of birds of prey (Accipitridae, Falconidae, Strigidae, Tytonidae) across the entire PNW catalog so far is a structural deficiency that has persisted since degree 90. The engine has fifteen Aves entries from earlier degrees but zero raptors. A bird of prey is overdue.
+- **NO PASSERIFORM in 37 degrees.** Thirty-seven consecutive non-passerine degrees (57–93) is itself an extreme. Passerines are the largest avian order; their absence distorts the engine's coverage of bird acoustic diversity. The engine should plan a deliberate return to passerines.
+- **NO MARINE SPECIES in 94 entries.** The Pacific Northwest's marine ecosystem (Salish Sea, Olympic Coast, Puget Sound proper) is unrepresented. Harbor seal, orca, sea lion, common loon, marbled murrelet — none have appeared. For an engine titled around Puget Sound, the marine omission grows more conspicuous with each non-marine degree.
 
-**The Self-Released Model:** NAVVI is self-released -- no label infrastructure, no intermediary. The music goes directly from the duo to the listener. In the 2010s Seattle landscape, self-releasing is not a limitation but a choice: full creative control, direct audience relationship, no label aesthetic to satisfy.
+## Lessons Learned
 
-**The Duo Format:** Two people. Ben and Rain Shepard. The duo format is the minimum viable unit for dream pop/electronic -- one voice, one production environment, the interplay between vocal and texture reduced to its essential conversation. The sound is the sound of two people agreeing on what beautiful means.
+- **The Hymenoptera pair proves that order is not destiny.** Bumblebee (Apidae, E=2, gentle drone, pollination) and hornet (Vespidae, E=5, aggressive hum, defense) share an order but share nothing else. Taxonomic proximity does not predict acoustic similarity. Classification labels describe lineage; sound describes character. Future taxon entries should be analyzed for behavior-context independent of taxonomic proximity to neighbors.
+- **The four-category acoustic posture taxonomy is now mature.** Mating, advertising, incidental flight, defensive. The hornet's introduction of the defensive category brings the engine's insect acoustic-posture taxonomy to four distinct intent classes. Future insect entries should be classified against these four categories rather than treated as standalone sounds. The taxonomy is now a tested framework.
+- **Wide A/B energy gaps can be as structurally useful as tight A/B parallels.** Degree 93's E=3 vs E=5 contrast (NAVVI vs hornet) creates tension that makes both sides more vivid. The engine has previously emphasized parallels; degree 93 demonstrates that contrasts produce structural value too. Both should be tracked as engine-craft tools.
+- **Genre-cluster runs reach their apex around four consecutive entries.** Degrees 90–93 form the Electronic Era's four-deep run (Ethereal/Electronic → Drone/Noise → World/Electronic → Dream Pop/Electronic). This is the longest unbroken run of any genre family in the engine. Future genre-cluster runs should be expected to peak around four entries before rotating to a different family. The pattern is worth tracking explicitly.
+- **Taxon-class runs reach unprecedented depth at seven consecutive entries.** Degrees 87–93 form the Insect Era's seven-deep run with a single non-insect interlude. This is the deepest sustained taxon-class exploration in the engine. The depth produces secondary structures (the four-acoustic-posture taxonomy, the order-lingering pattern, the Hymenoptera pair) that shorter runs would not generate. Plan for seven-deep runs as the new ceiling rather than four-deep as the maximum.
+- **Energy convergence across mechanisms is a tracked pattern.** Cicada (89, E=5, tymbal advertisement) and hornet (93, E=5, wing-vibrated defense) reach the same energy level through completely different mechanisms. The engine's energy ledger should distinguish mechanism from intensity. Future E=5 entries should be classified by which mechanism (tymbal, wing vibration, collective amplification, or a fourth) produces the energy.
+- **The intimate machine names a category that may recur.** Bedroom-scale electronic music for headphones and dark rooms — duo or small unit, electronic production as medium for intimacy. Future electronic entries may fit this pattern; lineage-tracking the intimate machine across the engine is now a maintainable thread alongside the Olympia lo-fi lineage and the K Records label thread.
+- **Self-released as distribution model deserves explicit tracking.** NAVVI joins the engine as the first self-released artist in this electronic cluster. The distribution model is not just an administrative detail; it shapes the music (full creative control, no label aesthetic to satisfy, direct audience relationship). Future entries should be classified by distribution model alongside genre, energy, and label.
+- **The papery nest resonance demonstrates that biological substrate matters acoustically.** The hornet's wood-fiber nest is part of the sound, not just the housing. Other species with structural acoustic resonance (beavers with lodges, woodpeckers with hollow trees, treefrogs with vegetation) deserve revisiting through the substrate-as-instrument lens. Substrate-resonance is a tracked acoustic property worth applying retroactively.
+- **The Electronic Era's four-genre run signals catalog maturity.** When the engine sustains a single genre family across four consecutive degrees, it is signalling that the underlying scene has enough internal diversity to fill multiple distinct genre stages. The Pacific Northwest's electronic scene apparently does. This is a measure of the source community's depth; not every region would support a four-genre-deep electronic run.
 
-### STRUCTURAL EVENT: E=3 -- Atmospheric Intimacy
-
-E=3 reflects atmospheric intimacy. The reverb-laden production creates immersive atmosphere that is present and filling without being aggressive. Self-released, bedroom-scale, intimate. The machine serves the intimate.
-
-### THE SHIMMER VEIL -- 94th Acoustic Element
-
-The ninety-fourth acoustic element is **the shimmer veil** -- reverb-laden electronic production where the vocal sits inside the texture rather than on top of it, where the boundary between voice and synthesizer is deliberately blurred, where the song shimmers behind a veil of atmosphere. The shimmer veil is not obscuring the music; it IS the music. The reverb is not an effect; it is the compositional space.
-
-Contrasts:
-- **The ambient drift** (degree 90, Sky Cries Mary) -- slowly evolving sonic landscape. The shimmer veil is more song-structured -- verses, choruses, melodies exist, but they shimmer behind reverb rather than standing in front of it.
-- **The drone architecture** (degree 91, Hovercraft) -- no vocals, pure texture. The shimmer veil has vocals, but they function as another layer of texture -- voice as instrument, instrument as atmosphere.
-- **The electronic pulse** (degree 86, Postal Service) -- rhythmic, structured, beats as framework. The shimmer veil dissolves the framework into atmosphere -- beats may exist but they breathe rather than drive.
-
-### THE INTIMATE MACHINE -- 94th Artist-City Pattern
-
-The ninety-fourth artist-city pattern is **the intimate machine** -- a duo or small unit that uses electronic production as the medium for emotional intimacy. The machine serves the intimate rather than the spectacular. NAVVI's electronic production creates closeness, not distance. The synthesizers whisper. The reverb creates a shared space rather than an empty cathedral. The intimate machine is the opposite of arena-scale electronic music -- it is bedroom-scale electronic music made for headphones and dark rooms.
-
-Contrasts:
-- **The parallel scene** (degree 90, Sky Cries Mary) -- operating alongside a dominant scene. The intimate machine is not about scene positioning but about scale -- the electronic as intimate rather than spectacular.
-- **The producer-as-artist** (degree 67, Chris Walla) -- production expertise deployed as creative practice. The intimate machine is about production as the medium for emotional intimacy, not technical mastery.
-
-### CROSS-REFERENCES (Part A)
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| S36-090 | NAVVI (93) | Sky Cries Mary (90) | ETHEREAL/ELECTRONIC PARALLEL. Both use electronic production for atmospheric, ethereal ends. Sky Cries Mary is ambient and psychedelic (1990s, drifting); NAVVI is dream pop and song-oriented (2010s, shimmering). Both ethereal; different eras, different structures. The ambient drift (90) yields to the shimmer veil (93). |
-| S36-072 | NAVVI (93) | Briana Marela (72) | LAYERED/ETHEREAL PARALLEL. Both create layered, ethereal vocal textures. Briana Marela uses looping; NAVVI uses reverb and production. Both dissolve the boundary between voice and texture. Both intimate. Both beautiful. |
-| S36-056 | NAVVI (93) | Lemolo (56) | DREAM HAZE CONNECTION. Lemolo's dream pop operates in similar atmospheric territory -- reverb-laden, ethereal, song-structured. NAVVI is more electronic where Lemolo is more guitar-driven, but both inhabit the dream pop space where the atmosphere is the point. |
-| S36-091 | NAVVI (93) | Hovercraft (91) | DRONE/ELECTRONIC CONTRAST. Hovercraft is pure texture, no vocals, maximalist drone. NAVVI has vocals and song structure but dissolves them into atmosphere. Both electronic; Hovercraft is confrontational where NAVVI is intimate. |
-| S36-086 | NAVVI (93) | Postal Service (86) | ELECTRONIC POP CONTRAST. Postal Service is structured electronic pop -- clear beats, clear melodies, clear vocals. NAVVI is dream pop/electronic -- the structure shimmers behind reverb, the vocals sit inside the texture. Both electronic; different relationships to clarity. |
-
----
-
-## Part B: Hornet Nest Buzz (Vespidae) -- FIRST AGGRESSIVE INSECT (NEW FAMILY Vespidae 43rd, Hymenoptera Pair With Bumblebee 92 Gentle E=2 vs Aggressive E=5 Widest Consecutive Same-Order Energy Gap, First Aggressive/Defensive Insect Sound New Acoustic Posture, Aggressive Papery Hum 94th Species-Side Acoustic Element Collective Defensive Buzzing Hundreds Of Hornets, E=5 Highest Insect Energy Tied With Cicada 89, Thirty-Third Consecutive Original CSV)
-
-Full deep research covering the hornet nest buzz as the first aggressive insect sound, the Hymenoptera pair, and Vespidae:
-
-### NEW FAMILY: VESPIDAE -- 43rd Family
-
-**Vespidae** -- wasps and hornets. The 43rd family in the engine. Same order Hymenoptera as bumblebee (92). Family-level entry representing the collective defensive buzzing of hornet and wasp colonies. Includes hornets, yellowjackets, and paper wasps -- all social wasps that build paper nests and defend them aggressively.
-
-Classification:
-- **Kingdom:** Animalia
-- **Phylum:** Arthropoda
-- **Class:** Insecta (insect streak continues from 92)
-- **Order:** Hymenoptera (same as bumblebee 92 -- bees, wasps, ants)
-- **Family:** Vespidae -- NEW FAMILY (43rd). First entry. Wasps and hornets.
-
-### HYMENOPTERA PAIR: BUMBLEBEE (92) AND HORNET (93)
-
-Two consecutive Hymenoptera entries. Same order, different families, opposite acoustic postures:
-
-| Degree | Family | Sound | Energy | Posture |
-|--------|--------|-------|--------|---------|
-| 92 | Apidae | Gentle drone | E=2 | Pollination (working) |
-| 93 | Vespidae | Aggressive hum | E=5 | Defense (threatening) |
-
-Same order. Different sounds. Different purposes. Different energies. The widest energy gap within a consecutive same-order pair.
-
-### FIRST AGGRESSIVE/DEFENSIVE INSECT SOUND
-
-Every prior insect sound:
-- **Cricket** (87) -- mating chirp
-- **Katydid** (88) -- mating rasp
-- **Cicada** (89) -- advertising throb
-- **Mosquito** (91) -- incidental flight whine
-- **Bumblebee** (92) -- incidental flight drone / buzz pollination
-
-The hornet nest buzz is the first sound produced with **aggressive/defensive intent**. The colony buzzes to intimidate, to warn, to say: leave or be stung. A fundamentally new acoustic posture enters the engine.
-
-### THE SOUND: AGGRESSIVE PAPERY HUM -- 94th Species-Side Acoustic Element
-
-**The collective defensive display:** When a colony is disturbed, hundreds of hornets emerge and vibrate their wings simultaneously, producing a papery, aggressive hum that rises in volume and intensity. The frequency content is broad-spectrum (100-300 Hz fundamental with harmonics extending higher). The papery quality comes from the wood-fiber nest resonating with the collective buzzing.
-
-**Why E=5:**
-1. Collective -- hundreds of hornets buzzing simultaneously.
-2. Aggressive -- the sound is a warning, designed to intimidate and repel.
-3. Loud -- clearly audible at 10+ meters.
-4. Sustained -- continues as long as the perceived threat remains.
-5. Threatening -- the acoustic signature of a colony that will sting.
-6. E=5 is the highest insect energy in the engine -- matching the cicada (89, E=5) but with aggressive intent.
-
-Contrasts:
-- **Deep resonant buzz** (degree 92, bumblebee) -- gentle, low-pitched, solitary pollination hum, E=2. The hornet nest buzz is collective, aggressive, high-energy. Hymenoptera pair: gentle vs threatening.
-- **Electric buzzing throb** (degree 89, cicada) -- tymbal mechanism, E=5. Both E=5, but the cicada advertises while the hornet threatens. Same energy, different intent.
-- **Ultra-thin hum cloud** (degree 91, mosquito) -- individual wing-produced, E=2. The hornet nest buzz is collective wing-produced, E=5. Individual whine vs collective roar.
-- **Rhythmic chirp field** (degree 87, cricket) -- rhythmic chirp, E=4. The hornet buzz is not rhythmic -- it is continuous and escalating.
-
-### ECOLOGY: THE NEST DEFENDERS
-
-**Woodland habitat.** Nests in trees, shrubs, and sheltered structures. Paper nests constructed from chewed wood fiber mixed with saliva. Mature colonies contain 200-700+ workers. PNW species: bald-faced hornet (*Dolichovespula maculata*), common yellowjacket (*Vespula vulgaris*), western yellowjacket (*Vespula pensylvanica*).
-
-**Defensive behavior.** Alarm pheromone recruits nestmates. Defensive buzz escalates in volume and intensity. Unlike honeybees, hornets can sting repeatedly. Defensive range 5-15 meters from nest.
-
-**Ecological role.** Top predators in the insect world. Significant population control of caterpillars and other herbivorous insects. Also pollinators (less efficient than bees). Seasonal cycle: queens overwinter alone, colonies build through spring/summer, peak size late summer, colony dies in fall.
-
-### STRUCTURAL EVENTS SUMMARY
-
-1. **Vespidae enters** -- 43rd family (NEW). First wasps/hornets. Same order Hymenoptera as bumblebee (92).
-2. **Aggressive papery hum** -- 94th acoustic element. Collective defensive buzzing. E=5. First aggressive/defensive insect sound.
-3. **Hymenoptera pair** -- bumblebee (92, E=2) and hornet (93, E=5). Widest consecutive same-order energy gap.
-4. **First aggressive/defensive insect sound** -- new acoustic posture category.
-5. **Thirty-third consecutive original CSV.**
-
-### CROSS-REFERENCES (Part B)
+## Cross-References
 
 | Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| SPS-092 | Hornet Nest Buzz (93) | Bumblebee Drone (92) | HYMENOPTERA PAIR. Same order, different families, opposite acoustics. Bumblebee (Apidae, gentle drone, E=2, pollination) vs hornet (Vespidae, aggressive hum, E=5, defense). Widest consecutive same-order energy gap. Gentle worker and aggressive warrior. |
-| SPS-069 | Hornet Nest Buzz (93) | Striped Skunk (69) | DEFENSIVE PARALLEL. Both defensive displays. Skunk's spray is chemical defense; hornet's buzz is acoustic defense. Both warn before they attack. Both effective deterrents. Different mechanisms, same purpose. |
-| SPS-091 | Hornet Nest Buzz (93) | Mosquito Swarm (91) | WING-PRODUCED SOUND. Both mosquito whine and hornet buzz produced by wing vibration. Mosquito whines alone (E=2); hornet colony buzzes collectively (E=5). Individual flight sound vs collective defensive display. |
-| SPS-089 | Hornet Nest Buzz (93) | Cicada (89) | SHARED E=5. Both E=5 -- loudest insect sounds in the engine. Cicada advertises (mating throb); hornet threatens (defensive buzz). Same energy, opposite intent. |
-| SPS-087 | Hornet Nest Buzz (93) | Cricket Chorus (87) | INSECT ERA EXTENDED. Cricket (87), katydid (88), cicada (89), mosquito (91), bumblebee (92), hornet (93). Seven insect entries in seven degrees. Deepest sustained exploration of any taxon class. |
+|------------|------|-----|--------|
+| S36-090 | NAVVI (93) | Sky Cries Mary (90) | ETHEREAL/ELECTRONIC PARALLEL. Both use electronic production for atmospheric ethereal ends. Sky Cries Mary is ambient and psychedelic (1990s, drifting); NAVVI is dream pop and song-oriented (2010s, shimmering). Both ethereal; different eras, different structures. The ambient drift (90) yields to the shimmer veil (93). Two genre stages apart in the four-deep Electronic Era. |
+| S36-072 | NAVVI (93) | Briana Marela (72) | LAYERED/ETHEREAL PARALLEL. Both create layered ethereal vocal textures. Briana Marela uses looping; NAVVI uses reverb and production. Both dissolve the boundary between voice and texture. Both intimate. Both rely on the listener's headphones rather than on stage amplification. |
+| S36-056 | NAVVI (93) | Lemolo (56) | DREAM HAZE / DUO LINEAGE. Lemolo's dream pop operates in similar atmospheric territory — reverb-laden, ethereal, song-structured, also a duo. NAVVI is more electronic where Lemolo is more guitar-driven, but both inhabit the dream pop space and both rely on the duo format as minimum viable unit. Two PNW dream pop duos, 37 degrees apart. |
+| S36-091 | NAVVI (93) | Hovercraft (91) | DRONE/ELECTRONIC CONTRAST. Hovercraft is pure texture, no vocals, maximalist drone. NAVVI has vocals and song structure but dissolves them into atmosphere. Both electronic; Hovercraft is confrontational where NAVVI is intimate. Adjacent in the Electronic Era but at opposite ends of the loud/quiet spectrum. |
+| S36-086 | NAVVI (93) | Postal Service (86) | INDIE ELECTRONIC CONTRAST. Postal Service is structured electronic pop — clear beats, clear melodies, clear vocals. NAVVI is dream pop/electronic — the structure shimmers behind reverb, the vocals sit inside the texture. Both electronic; different relationships to clarity. Both also duos in the PNW landscape. |
+| S36-067 | NAVVI (93) | Chris Walla (67) | THE INTIMATE MACHINE vs THE PRODUCER-AS-ARTIST. Both treat production as creative practice. Walla is producer-as-artist (technical mastery applied to others' work); NAVVI is intimate machine (electronic production as vehicle for the duo's own emotional intimacy). Same medium; different artist-positions. |
+| S36-092 | NAVVI (93) | Trance Mission (92) | ELECTRONIC ERA NEIGHBORS. Both reach the engine through electronic production. Trance Mission is World/Electronic (cross-cultural polyphony, the cross-pollinator); NAVVI is Dream Pop/Electronic (intimate atmosphere, the intimate machine). Adjacent stages in the Electronic Era's four-deep run. |
+| S36-053 | NAVVI (93) | Fleet Foxes (53) | REVERB-AS-COMPOSITION LINEAGE. Both treat reverb as a compositional element rather than as a finishing effect. Fleet Foxes used cathedral reverb on multi-tracked vocals (cathedral harmony, degree 53); NAVVI uses synthesizer reverb on electronic textures (shimmer veil, degree 93). Two reverb-as-architecture entries, 40 degrees apart, completely different musical contexts. |
+| SPS-092 | Hornet Nest Buzz (93) | Bumblebee Drone (92) | HYMENOPTERA PAIR. Same order, different families, opposite acoustics. Bumblebee (Apidae, gentle drone, E=2, pollination) vs hornet (Vespidae, aggressive hum, E=5, defense). Widest consecutive same-order energy gap in the engine. Gentle worker and aggressive warrior. Order is not destiny. |
+| SPS-069 | Hornet Nest Buzz (93) | Striped Skunk (69) | DEFENSIVE PARALLEL. Both defensive displays. Skunk's spray is chemical defense; hornet's buzz is acoustic defense. Both warn before they attack. Both effective deterrents. Different mechanisms (chemical vs acoustic), same purpose (warn intruders to leave). |
+| SPS-091 | Hornet Nest Buzz (93) | Mosquito Swarm (91) | WING-PRODUCED SOUND. Both mosquito whine and hornet buzz produced by wing vibration. Mosquito whines alone (E=2); hornet colony buzzes collectively (E=5). Individual flight sound vs collective defensive display. Same mechanism (wing vibration), different scale (individual vs colony), different intent (incidental vs aggressive). |
+| SPS-089 | Hornet Nest Buzz (93) | Cicada (89) | SHARED E=5 — HIGHEST INSECT ENERGY. Both reach the engine's insect-energy ceiling at E=5. Cicada uses tymbal advertisement (mating); hornet uses wing-vibrated colony defense (threatening). Same energy, opposite intent. Energy convergence across mechanisms is a tracked pattern. |
+| SPS-087 | Hornet Nest Buzz (93) | Cricket Chorus (87) | INSECT ERA OPENS AND EXTENDS. Cricket Chorus opened the Insect Era at degree 87. Hornet Nest Buzz extends it to seven entries in seven degrees (87–93 with Spring Peeper-Like Chorus at 90 as the only non-insect). The deepest sustained taxon class exploration in the engine. |
+| SPS-088 | Hornet Nest Buzz (93) | Katydid (88) | LINGERING-WITHIN-ORDER PATTERN. Orthoptera lingered at 87–88 (Cricket Chorus and Katydid, Gryllidae and Tettigoniidae). Hymenoptera now lingers at 92–93 (Bumblebee Drone and Hornet Nest Buzz, Apidae and Vespidae). The engine's recurring tendency to explore orders in consecutive degrees rather than sample once and move on. |
+| SPS-058 | Hornet Nest Buzz (93) | Anatidae streak Wood Duck / Mallard (58–59) | LINGERING-WITHIN-ORDER PATTERN, EARLIEST INSTANCE. Anatidae lingered at 58–59 — the earliest example of the engine sampling an order across multiple consecutive degrees. The Hymenoptera pair at 92–93 is now the third such instance (after Anatidae 58–59 and Orthoptera 87–88). The pattern is now a tested engine behavior. |
+| SPS-062 | Hornet Nest Buzz (93) | Beaver Chewing (62) | SUBSTRATE-RESONANCE PARALLEL. Both produce sounds where the biological substrate is acoustically active. Beaver chewing on wood resonates with the lodge structure; hornet wing vibration resonates with the wood-fiber paper nest. Substrate as instrument. Future substrate-resonant entries should be tracked against this pair. |
+| RES-vespidae-paper | Hornet Nest Buzz (93) | Wood-fiber paper nest construction | THE PAPERY QUALITY EXPLAINED. The aggressive papery hum's distinctive timbre comes from the wood-fiber nest material. Hornets and yellowjackets chew wood pulp, mix it with saliva, and construct paper nests that resonate with the colony's collective wing vibration. The biological architecture is part of the sound. |
+| RES-navvi-self-release | NAVVI (93) | Self-release distribution model | THE INTIMATE MACHINE'S DISTRIBUTION. NAVVI's bedroom-scale aesthetic and self-released distribution are mutually reinforcing — full creative control and direct-to-audience distribution permit the intimate machine to remain intimate. The aesthetic and the business model are aligned. |
 
----
+## Engine Position
 
-## Parallel: NAVVI x Hornet Nest Buzz -- The Shimmer and the Sting
+- **Degree 93 of 360** — 25.8% of the circle traversed; deep into Quadrant II.
+- **Twin counters tick to 94**: the shimmer veil is the 94th acoustic element on the artist side; the aggressive papery hum is the 94th acoustic element on the species side; The Intimate Machine is the 94th artist-city pattern.
+- **Genre Stage 75 — MILESTONE**. Dream Pop/Electronic. Seventy-five genre stages in ninety-three degrees (0.81 stages/degree). Fourth consecutive electronic-inflected genre stage.
+- **Energy distribution after degree 93** (artist-side): E1:3 (3.2%), E2:31 (33.0%), E3:27 (28.7%), E4:21 (22.3%), E5:11 (11.7%), E6:2 (2.1%). Total: 94. **E=3 gains NAVVI to reach 27 deployments**. The quiet majority (E1+E2+E3) = 61 of 94 (64.9%).
+- **Electronic Era four-deep**: Ethereal/Electronic (90, Sky Cries Mary), Drone/Noise (91, Hovercraft), World/Electronic (92, Trance Mission), Dream Pop/Electronic (93, NAVVI). The longest unbroken genre-family run in the engine.
+- **Insect Era seven-deep**: Cricket Chorus (87, Gryllidae), Katydid (88, Tettigoniidae), Cicada (89, Cicadidae), Spring Peeper-Like Chorus (90, Hylidae — Amphibia interlude), Mosquito Swarm (91, Culicidae), Bumblebee Drone (92, Apidae), Hornet Nest Buzz (93, Vespidae). Six insect entries in seven degrees with one Amphibia interlude.
+- **Hymenoptera pair**: Apidae (92, bumblebee, E=2, gentle drone, pollination) and Vespidae (93, hornet, E=5, aggressive hum, defense). Widest consecutive same-order energy gap in the engine — three energy levels separate the pair.
+- **Class diversity**: Mammalia (era 61–85), Amphibia (86, 90), Insecta (87–89, 91–93), Aves (15 entries from earlier degrees, none since degree 56). Three insect orders new to the catalog in the past seven degrees: Hemiptera (cicada family), Diptera (mosquito family), Hymenoptera (bumblebee + hornet families).
+- **Acoustic posture taxonomy** (insect-side): Mating (cricket 87, katydid 88), Advertising (cicada 89), Incidental flight (mosquito 91, bumblebee 92), Defensive (hornet 93). Four posture categories now established.
+- **E=5 species count**: 2 — Cicada (89) and Hornet Nest Buzz (93). Both at the engine's insect-energy ceiling, reached through completely different mechanisms (tymbal advertisement vs collective wing vibration over a paper nest).
+- **Original CSV unbroken**: 33 consecutive original-catalog species (degrees 61–93) — longest unbroken run in the engine.
+- **Distribution diversity**: Self-released (NAVVI 93) joins the engine's distribution map alongside major labels, large independents (Sub Pop), and small independents (K Records, Barsuk, Hardly Art, Captured Tracks). Four distribution models tracked.
+- **Outstanding gaps**: Zero raptors in 94 entries; zero passerines in 37 degrees (57–93); zero marine species in 94 entries.
 
-The shimmer veil and the aggressive papery hum. The widest A/B energy gap in recent degrees.
-
-**1. Extreme Energy Contrast** -- NAVVI is E=3, atmospheric intimacy. The hornet nest buzz is E=5, collective fury. A gap of 2 energy levels. Intimate vs threatening. Whisper vs roar. The shimmer veil invites you in; the aggressive hum drives you away.
-
-**2. Opposite Acoustic Postures** -- NAVVI's reverb creates a shared space, a veil of atmosphere that envelops. The hornet's buzz creates a warning space, a wall of sound that repels. Both define space acoustically -- one for intimacy, one for defense.
-
-**3. Individual vs Collective** -- NAVVI is a duo (two people, minimum viable unit). The hornet nest buzz is a colony (hundreds of hornets, maximum collective display). The intimate machine vs the defensive swarm.
-
-**4. Both Electronic** -- In a metaphorical sense, both sounds are produced by vibrating elements. NAVVI uses electronic synthesizers and reverb. The hornet uses wing vibration and nest resonance. Both shimmer in their own way.
-
----
-
-## Acoustic Progression (94 elements)
+## Acoustic Progression Snapshot (Tail)
 
 | # | Element | Degree | Artist/Species |
 |---|---------|--------|----------------|
-| 0 | silence | 0 | Quincy Jones |
-| 1 | cascade | 1 | Bill Frisell |
-| 2 | drone | 2 | Wayne Horvitz |
-| 3 | language | 3 | Ernestine Anderson |
-| 4 | motif | 4 | Floyd Standifer |
-| 5 | metronome | 5 | Overton Berry |
-| 6 | question | 6 | Patti Bown |
-| 7 | harmonic spiral | 7 | Julian Priester |
-| 8 | ultrasonic threshold | 8 | Gary Peacock |
-| 9 | variation | 9 | Hadley Caliman |
-| 10 | minimum signal | 10 | Bud Shank |
-| 11 | trill/tremolo | 11 | Joe Brazil |
-| 12 | sawtooth sweep | 12 | Don Lanphere |
-| 13 | ostinato | 13 | Marc Seales |
-| 14 | repetition-resolution | 14 | Aaron Parks |
-| 15 | accelerando | 15 | Thomas Marriott |
-| 16 | crescendo | 16 | Jeff Lorber |
-| 17 | the hook | 17 | Reggie Watts |
-| 18 | ascending spiral | 18 | Maktub |
-| 19 | descending spiral | 19 | Fly Moon Royale |
-| 20 | sustain/the release | 20 | Whitney Monge |
-| 21 | the hammer | 21 | Polyrhythmics |
-| 22 | resonant percussion/groove reset | 22 | Foxy Apollo |
-| 23 | the testimony/groove reset | 23 | Allen Stone |
-| 24 | the invocation | 24 | Ron Artis II |
-| 25 | the congregation | 25 | Black Stax |
-| 26 | the caroling | 26 | Shaina Shepherd |
-| 27 | the liquid gurgle | 27 | The Dynamics |
-| 28 | the liquid twitter | 28 | Night Owls |
-| 29 | the rough brrit | 29 | Boogaloo Joe Jones |
-| 30 | the liquid warble synthesis | 30 | Ray Charles |
-| 31 | the whisper | 31 | Brenda Lee Eager |
-| 32 | the buzz | 32 | Luther Rabb |
-| 33 | the cadenza | 33 | Larry English |
-| 34 | the dialect | 34 | The Tempos |
-| 35 | the thrum | 35 | Robert Cray |
-| 36 | the sonic boom | 36 | Jimi Hendrix |
-| 37 | the filament | 37 | Ayron Jones |
-| 38 | the drawl | 38 | Booker T. Jones |
-| 39 | the canopy buzz | 39 | Ron Artis Jr |
-| 40 | the thinning | 40 | Alice Smith |
-| 41 | the partition | 41 | Shawn Smith |
-| 42 | the shimmer | 42 | Erica Campbell |
-| 43 | the radiance | 43 | Ann Wilson |
-| 44 | the grain | 44 | Chong the Nomad |
-| 45 | the murmur | 45 | Damien Jurado |
-| 46 | the confessional | 46 | Rocky Votolato |
-| 47 | the parable tone | 47 | Pedro the Lion |
-| 48 | the held rest | 48 | Sera Cahoone |
-| 49 | the lullaby subversion | 49 | Kimya Dawson |
-| 50 | the intimate architecture | 50 | Mirah |
-| 51 | the communal harmony | 51 | Grand Archives |
-| 52 | the testimony roar | 52 | Brandi Carlile |
-| 53 | the cathedral harmony | 53 | Fleet Foxes |
-| 54 | the fraternal jangle | 54 | Ivan & Alyosha |
-| 55 | the ember glow | 55 | Shelby Earl |
-| 56 | the dream haze | 56 | Lemolo |
-| 57 | the rattle / the stream rattle | 57 | Laura Gibson / Belted Kingfisher |
-| 58 | the ache / the pond whistle | 58 | Death Cab for Cutie / Wood Duck |
-| 59 | the digression / the quack | 59 | The Long Winters / Mallard |
-| 60 | the bare wire / the submerge call | 60 | Ben Gibbard (solo) / Pied-billed Grebe |
-| 61 | the braided voice / the tail slap | 61 | Y La Bamba / American Beaver |
-| 62 | the throwback / the rhythmic gnaw | 62 | Pickwick / Beaver Chewing |
-| 63 | the FM sheen / the chuff | 63 | Kenny Loggins / River Otter |
-| 64 | the dusk / the chitter | 64 | Jesse Sykes / Mink |
-| 65 | the open plain / the chuckle-chatter | 65 | Philip Aaberg / American Marten |
-| 66 | the country thunder / the scream | 66 | Neko Case / Fisher |
-| 67 | the clean room / the shrill bark-chitter | 67 | Chris Walla / Short-tailed Weasel |
-| 68 | the hush / the rapid chattering chirp | 68 | Sam Beam / Long-tailed Weasel |
-| 69 | the earnest voice / the warning foot-stamp hiss | 69 | Kris Orlowski / Striped Skunk |
-| 70 | the fiddle line / the churring chittering young | 70 | Horse Feathers / Raccoon |
-| 71 | the room tone / the bark screaming vixen call | 71 | Phil Elverum / Red Fox |
-| 72 | the layered loop / the low hiss click | 72 | Briana Marela / Opossum |
-| 73 | the jangle / the thump squeal | 73 | LAKE / Snowshoe Hare |
-| 74 | the reverb wash / the high sharp eenk bark | 74 | Poor Moon / American Pika |
-| 75 | the anthem / the piercing whistle alarm | 75 | The Lonely Forest / Yellow-bellied Marmot |
-| 76 | the androgynous register / the loud penetrating whistle | 76 | Chris Pureka / Hoary Marmot |
-| 77 | the ethereal layering / the musical multi-note whistle | 77 | Mree / Olympic Marmot |
-| 78 | the communal jangle / the chirping trill alarm | 78 | Acid Tongue / Townsend's Ground Squirrel |
-| 79 | the cinematic stillness / the sharp chip alarm | 79 | Jesse Marchant / Golden-mantled Ground Squirrel |
-| 80 | the organ explosion / the loud scolding chatter rattle | 80 | Mates of State / Douglas Squirrel |
-| 81 | the Broadway voice / the bark + chatter alarm | 81 | Sara Bareilles / Eastern Fox Squirrel |
-| 82 | the acoustic intimacy / the high thin tseet | 82 | Death Cab for Cutie (acoustic) / Northern Flying Squirrel |
-| 83 | the grunge whisper / the ultrasonic + soft chip | 83 | Pearl Jam (acoustic) / Deer Mouse |
-| 84 | the late whisper / the chatter + twig gnaw | 84 | Damien Jurado (late career) / Bushy-tailed Woodrat |
-| 85 | the stripped confession / the quiet plop | 85 | Rocky Votolato (acoustic) / Muskrat |
-| 86 | the electronic pulse / the amplified krek-krek wall of sound | 86 | The Postal Service / Pacific Treefrog |
-| 87 | the emerging twang / the rhythmic chirp field chorus | 87 | Neko Case (early folk) / Cricket Chorus |
-| 88 | the bedroom strum / the continuous electric buzz | 88 | Kimya Dawson (solo) / Katydid |
 | 89 | the baroque whisper / the electric buzzing throb | 89 | Parenthetical Girls / Cicada |
 | 90 | the ambient drift / the bell-like peep chorus | 90 | Sky Cries Mary / Spring Peeper-Like Chorus |
 | 91 | the sustained crush / the ultra-thin hum cloud | 91 | Hovercraft / Mosquito Swarm |
 | 92 | the global weave / the deep resonant buzz | 92 | Trance Mission / Bumblebee Drone |
 | **93** | **the shimmer veil / the aggressive papery hum** | **93** | **NAVVI / Hornet Nest Buzz** |
 
-The acoustic progression adds degree 93. On the artist side, the shimmer veil (93) is the sound of NAVVI -- reverb-laden electronic production where the vocal sits inside the texture, the boundary between voice and synthesizer deliberately blurred, atmosphere as composition. E=3. From the global weave (92, polyphonic cross-cultural tapestry) to the shimmer veil (93, reverb-as-architecture, intimate atmospheric dream pop). On the species side, the aggressive papery hum (93) is the hornet nest buzz -- collective defensive buzzing of hundreds of hornets, broad-spectrum 100-300 Hz, papery quality from wood-fiber nest resonance, E=5. From the deep resonant buzz (92, gentle bumblebee drone, E=2) to the aggressive papery hum (93, collective hornet fury, E=5). Hymenoptera pair: same order, opposite postures, E=2 to E=5. The widest energy jump within consecutive same-order entries.
-
-## Artist-City Patterns (94 patterns)
-
-| # | Pattern | Degree | Artist |
-|---|---------|--------|--------|
-| 0 | Export | 0 | Quincy Jones |
-| 1 | Draw | 1 | Bill Frisell |
-| 2 | European Exile | 2 | Wayne Horvitz |
-| 3 | The Stay | 3 | Ernestine Anderson |
-| 4 | The Teacher | 4 | Floyd Standifer |
-| 5 | The Persistence | 5 | Overton Berry |
-| 6 | The Erasure | 6 | Patti Bown |
-| 7 | Pedagogue-Draw | 7 | Julian Priester |
-| 8 | The Quiet Draw | 8 | Gary Peacock |
-| 9 | The Seeker | 9 | Hadley Caliman |
-| 10 | Late Homestead | 10 | Bud Shank |
-| 11 | The Salon Keeper | 11 | Joe Brazil |
-| 12 | The Prodigal | 12 | Don Lanphere |
-| 13 | Institutional Anchor | 13 | Marc Seales |
-| 14 | Prodigy-Export | 14 | Aaron Parks |
-| 15 | Builder-Stayer | 15 | Thomas Marriott |
-| 16 | Talent Incubator | 16 | Jeff Lorber |
-| 17 | The Uncategorizable | 17 | Reggie Watts |
-| 18 | The Workshop | 18 | Maktub |
-| 19 | The New Root | 19 | Fly Moon Royale |
-| 20 | The Street Laureate | 20 | Whitney Monge |
-| 21 | The Ensemble Anchor | 21 | Polyrhythmics |
-| 22 | The Inheritor | 22 | Foxy Apollo |
-| 23 | The Rural Draw | 23 | Allen Stone |
-| 24 | The Island Export | 24 | Ron Artis II |
-| 25 | The Cultural Guardian | 25 | Black Stax |
-| 26 | The Transmuter | 26 | Shaina Shepherd |
-| 27 | The Conduit | 27 | The Dynamics |
-| 28 | The Resident Band | 28 | Night Owls |
-| 29 | The Catalog | 29 | Boogaloo Joe Jones |
-| 30 | The Incubation | 30 | Ray Charles |
-| 31 | The Relay | 31 | Brenda Lee Eager |
-| 32 | The Foundation | 32 | Luther Rabb |
-| 33 | The Unrecorded | 33 | Larry English |
-| 34 | The Shadow Name | 34 | The Tempos |
-| 35 | The Deep Root | 35 | Robert Cray |
-| 36 | The Supernova | 36 | Jimi Hendrix |
-| 37 | The Inheritor | 37 | Ayron Jones |
-| 38 | The Touring Anchor | 38 | Booker T. Jones |
-| 39 | The Returning Wave | 39 | Ron Artis Jr |
-| 40 | The Cultural Satellite | 40 | Alice Smith |
-| 41 | The Scene Native | 41 | Shawn Smith |
-| 42 | The Gospel Export | 42 | Erica Campbell |
-| 43 | The Arena Architect | 43 | Ann Wilson |
-| 44 | The Digital Immigrant | 44 | Chong the Nomad |
-| 45 | The Stripped Murmur | 45 | Damien Jurado |
-| 46 | The Confessional Drifter | 46 | Rocky Votolato |
-| 47 | The Sacred Baritone | 47 | Pedro the Lion |
-| 48 | The Campfire Anchor | 48 | Sera Cahoone |
-| 49 | The Trojan Lullabist | 49 | Kimya Dawson |
-| 50 | The Intimate Architect | 50 | Mirah |
-| 51 | The Folk Organism | 51 | Grand Archives |
-| 52 | The Arena Breakout | 52 | Brandi Carlile |
-| 53 | The Prodigy Return | 53 | Fleet Foxes |
-| 54 | The Neighborhood Anchor | 54 | Ivan & Alyosha |
-| 55 | The Infrastructure Beneficiary | 55 | Shelby Earl |
-| 56 | The Duo Collective | 56 | Lemolo |
-| 57 | The Label Bridge | 57 | Laura Gibson |
-| 58 | The Bellingham Ascent | 58 | Death Cab for Cutie |
-| 59 | The Scene Intellectual | 59 | The Long Winters |
-| 60 | The Frontman Alone | 60 | Ben Gibbard (solo) |
-| 61 | The Corridor Bridge | 61 | Y La Bamba |
-| 62 | The Brief Blaze | 62 | Pickwick |
-| 63 | The Everett Departure | 63 | Kenny Loggins |
-| 64 | The Dark-Folk Loner | 64 | Jesse Sykes |
-| 65 | The Montana Connection | 65 | Philip Aaberg |
-| 66 | The Wanderer Who Claims Multiple Cities | 66 | Neko Case |
-| 67 | The Departed Member | 67 | Chris Walla |
-| 68 | The Visiting Artist | 68 | Sam Beam |
-| 69 | The Working Musician | 69 | Kris Orlowski |
-| 70 | The Corridor Wanderer | 70 | Horse Feathers |
-| 71 | The Anacortes Hermit | 71 | Phil Elverum |
-| 72 | The International Student | 72 | Briana Marela |
-| 73 | The K Records Collective | 73 | LAKE |
-| 74 | The Side Project | 74 | Poor Moon |
-| 75 | The Second Anacortes Act | 75 | The Lonely Forest |
-| 76 | The Identity Artist | 76 | Chris Pureka |
-| 77 | The YouTube-to-Artist Pipeline | 77 | Mree |
-| 78 | The Porch Party | 78 | Acid Tongue |
-| 79 | The Dark Meditation | 79 | Jesse Marchant |
-| 80 | The Married Duo | 80 | Mates of State |
-| 81 | The Crossover Arc | 81 | Sara Bareilles |
-| 82 | The Recursive Return | 82 | Death Cab for Cutie (acoustic) |
-| 83 | The Arena Unplugged | 83 | Pearl Jam (acoustic) |
-| 84 | The Artist Arc | 84 | Damien Jurado (late career) |
-| 85 | The Confessional Return | 85 | Rocky Votolato (acoustic) |
-| 86 | The Side Project | 86 | The Postal Service |
-| 87 | The Early Chapter | 87 | Neko Case (early folk) |
-| 88 | The Solo Distillation | 88 | Kimya Dawson (solo) |
-| 89 | The Theatrical Outsider | 89 | Parenthetical Girls |
-| 90 | The Parallel Scene | 90 | Sky Cries Mary |
-| 91 | The Spousal Satellite | 91 | Hovercraft |
-| 92 | The Cross-Pollinator | 92 | Trance Mission |
-| **93** | **The Intimate Machine** | **93** | **NAVVI** |
-
-Ninety-four named patterns across ninety-four degrees. The Intimate Machine (93) introduces the pattern of a duo or small unit using electronic production as the medium for emotional intimacy -- the machine serves the intimate, not the spectacular. NAVVI's dream pop/electronic operates at bedroom scale, for headphones and dark rooms, where the synthesizers whisper and the reverb creates a shared space rather than an empty cathedral. From the Cross-Pollinator (92, connecting many scenes) to the Intimate Machine (93, serving one intimate space). The progression from 91 to 92 to 93: the spousal satellite (orbiting fame), the cross-pollinator (connecting traditions), the intimate machine (serving intimacy). Three consecutive patterns exploring different relationships between an artist and their audience -- orbit, connection, intimacy.
-
-## Genre Evolution (75 stages)
+## Genre Evolution Snapshot (Tail)
 
 | Stage | Degree | Genre | Artist |
 |-------|--------|-------|--------|
-| 27 | 45 | Folk | Damien Jurado |
-| 28 | 46 | Folk | Rocky Votolato |
-| 29 | 47 | Indie Folk | Pedro the Lion |
-| 30 | 48 | Folk | Sera Cahoone |
-| 31 | 49 | Folk Punk | Kimya Dawson |
-| 32 | 50 | Indie Folk | Mirah |
-| 33 | 51 | Indie Folk | Grand Archives |
-| 34 | 52 | Folk/Rock | Brandi Carlile |
-| 35 | 53 | Indie Folk | Fleet Foxes |
-| 36 | 54 | Folk | Ivan & Alyosha |
-| 37 | 55 | Singer-Songwriter | Shelby Earl |
-| 38 | 56 | Indie Folk | Lemolo |
-| 39 | 57 | Folk | Laura Gibson |
-| 40 | 58 | Indie Rock | Death Cab for Cutie |
-| 41 | 59 | Indie Rock | The Long Winters |
-| 42 | 60 | Folk | Ben Gibbard (solo) |
-| 43 | 61 | Folk/Indie | Y La Bamba |
-| 44 | 62 | Indie/Folk | Pickwick |
-| 45 | 63 | Soft Rock/Folk | Kenny Loggins |
-| 46 | 64 | Folk | Jesse Sykes |
-| 47 | 65 | New Age/Folk | Philip Aaberg |
-| 48 | 66 | Alt Country | Neko Case |
-| 49 | 67 | Indie/Folk | Chris Walla |
-| 50 | 68 | Folk | Sam Beam |
-| 51 | 69 | Singer-Songwriter | Kris Orlowski |
-| 52 | 70 | Indie Folk | Horse Feathers |
-| 53 | 71 | Indie/Folk | Phil Elverum |
-| 54 | 72 | Art Pop | Briana Marela |
-| 55 | 73 | Indie Pop | LAKE |
-| 56 | 74 | Indie Folk/Rock | Poor Moon |
-| 57 | 75 | Indie Pop | The Lonely Forest |
-| 58 | 76 | Folk | Chris Pureka |
-| 59 | 77 | Folk/Pop | Mree |
-| 60 | 78 | Folk/Indie | Acid Tongue |
-| 61 | 79 | Folk | Jesse Marchant |
-| 62 | 80 | Indie Pop | Mates of State |
-| 63 | 81 | Pop/Soul | Sara Bareilles |
-| 64 | 82 | Indie Folk | Death Cab for Cutie (acoustic) |
-| 65 | 83 | Acoustic Rock | Pearl Jam (acoustic) |
-| 66 | 84 | Folk | Damien Jurado (late career) |
-| 67 | 85 | Folk | Rocky Votolato (acoustic) |
-| 68 | 86 | Indie Electronic | The Postal Service |
-| 69 | 87 | Folk Country | Neko Case (early folk) |
-| 70 | 88 | Lo-Fi Folk | Kimya Dawson (solo) |
 | 71 | 89 | Avant-Pop | Parenthetical Girls |
 | 72 | 90 | Ethereal/Electronic | Sky Cries Mary |
 | 73 | 91 | Drone/Noise | Hovercraft |
 | 74 | 92 | World/Electronic | Trance Mission |
 | **75** | **93** | **Dream Pop/Electronic** | **NAVVI** |
 
-Genre Stage 75 -- Dream Pop/Electronic at degree 93. Seventy-five genre stages in 93 degrees (~0.81 per degree). **Dream Pop/Electronic** describes NAVVI's music: atmospheric synthesizers, heavy reverb, layered vocals dissolving into texture, song-structured but atmosphere-forward. Distinguished from Ethereal/Electronic (90, ambient psychedelic drifting), Drone/Noise (91, obliterating volume, no vocals), World/Electronic (92, cross-cultural polyphony), and Indie Electronic (86, structured pop). Four consecutive electronic-inflected genres in degrees 90-93 (stages 72-75): Ethereal/Electronic, Drone/Noise, World/Electronic, Dream Pop/Electronic. The electronic era deepens.
+## Files
 
-## Energy Distribution
+- `docs/release-notes/v1.49.233/README.md` (this file)
+- `docs/release-notes/v1.49.233/chapter/00-summary.md` — derived summary
+- `docs/release-notes/v1.49.233/chapter/03-retrospective.md` — retrospective
+- `docs/release-notes/v1.49.233/chapter/04-lessons.md` — extracted lessons
+- `docs/release-notes/v1.49.233/chapter/99-context.md` — context
+- `www/tibsfox/com/Research/S36/research/releases/093-navvi/index.html`
+- `www/tibsfox/com/Research/S36/research/releases/093-navvi/research.md`
+- `www/tibsfox/com/Research/S36/research/releases/093-navvi/knowledge-nodes.json`
+- `www/tibsfox/com/Research/S36/research/releases/093-navvi/retrospective.md`
+- `www/tibsfox/com/Research/SPS/research/releases/093-hornet-nest-buzz/index.html`
+- `www/tibsfox/com/Research/SPS/research/releases/093-hornet-nest-buzz/research.md`
+- `www/tibsfox/com/Research/SPS/research/releases/093-hornet-nest-buzz/knowledge-nodes.json`
+- `www/tibsfox/com/Research/SPS/research/releases/093-hornet-nest-buzz/retrospective.md`
 
-**Artist-side (after degree 93):** E1:3 (3.2%), E2:31 (33.0%), E3:27 (28.7%), E4:21 (22.3%), E5:11 (11.7%), E6:2 (2.1%). Total: 94 (degrees 0-93, 94 entries counting origin). E=3 gains NAVVI (93) reaching 27 deployments. The quiet majority (E1+E2+E3) = 61 of 94 (64.9%). Four consecutive electronic entries span E=3 (Sky Cries Mary 90), E=2 (Hovercraft 91), E=3 (Trance Mission 92), E=3 (NAVVI 93) -- the electronic era settles at E=3 after the Hovercraft dip.
-
-**Species-side (after degree 93):** E=5 for hornet (93) is the largest single-degree energy increase since the bumblebee-to-cicada transition would have been. The sequence since 86: E=4, E=4, E=4, E=4, E=4, E=2, E=3, E=5. The species energy oscillates -- from five consecutive E=4 through E=2 (mosquito 91) to E=3 (bumblebee 92) to E=5 (hornet 93). The Hymenoptera pair (92-93) spans E=2 to E=5 -- the widest consecutive same-order energy gap.
-
-## Cross-References (Combined)
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| S36-090 | NAVVI (93) | Sky Cries Mary (90) | ETHEREAL/ELECTRONIC PARALLEL. Both atmospheric, ethereal, electronic. Sky Cries Mary ambient/psychedelic; NAVVI dream pop/song-oriented. Both ethereal; different structures. |
-| S36-072 | NAVVI (93) | Briana Marela (72) | LAYERED/ETHEREAL PARALLEL. Both layered ethereal vocal textures. Looping vs reverb. Both dissolve boundary between voice and texture. |
-| S36-056 | NAVVI (93) | Lemolo (56) | DREAM HAZE CONNECTION. Both dream pop, reverb-laden, ethereal. NAVVI more electronic, Lemolo more guitar-driven. Both atmospheric. |
-| S36-091 | NAVVI (93) | Hovercraft (91) | DRONE/ELECTRONIC CONTRAST. Hovercraft pure texture, no vocals; NAVVI vocals dissolved into atmosphere. Both electronic; confrontational vs intimate. |
-| S36-086 | NAVVI (93) | Postal Service (86) | ELECTRONIC POP CONTRAST. Postal Service structured/clear; NAVVI shimmering/veiled. Both electronic; different relationships to clarity. |
-| SPS-092 | Hornet Nest Buzz (93) | Bumblebee Drone (92) | HYMENOPTERA PAIR. Same order, opposite acoustics. Gentle E=2 vs aggressive E=5. Pollination vs defense. Widest consecutive same-order energy gap. |
-| SPS-069 | Hornet Nest Buzz (93) | Striped Skunk (69) | DEFENSIVE PARALLEL. Both defensive displays. Chemical defense (skunk) vs acoustic defense (hornet). Both warn before attacking. |
-| SPS-091 | Hornet Nest Buzz (93) | Mosquito Swarm (91) | WING-PRODUCED SOUND. Both wing vibration. Individual whine E=2 vs collective buzz E=5. |
-| SPS-089 | Hornet Nest Buzz (93) | Cicada (89) | SHARED E=5. Both loudest insects. Cicada advertises; hornet threatens. Same energy, opposite intent. |
-| SPS-087 | Hornet Nest Buzz (93) | Cricket Chorus (87) | INSECT ERA EXTENDED. Seven insect entries in seven degrees (87-93). Deepest sustained taxon class exploration. |
-
-## Infrastructure
-
-**Part A:** `www/tibsfox/com/Research/S36/research/releases/093-navvi/` -- research.md, index.html, knowledge-nodes.json, retrospective.md
-**Part B:** `www/tibsfox/com/Research/SPS/research/releases/093-hornet-nest-buzz/` -- research.md, index.html, knowledge-nodes.json, retrospective.md
-**Release notes:** `docs/release-notes/v1.49.233/README.md`
-
-**Total: 8 files** -- standard degree package.
-
----
-
-## Retrospective
-
-**What Worked:**
-1. NAVVI as Dream Pop/Electronic at Genre Stage 75 is accurate and well-classified -- atmospheric reverb-laden electronic pop with ethereal vocals, genuinely distinct from Ethereal/Electronic (90), Drone/Noise (91), World/Electronic (92), and Electronic Pop (86). Four consecutive electronic-inflected genres forming the electronic era (90-93)
-2. The shimmer veil (94th acoustic element) captures the sonic reality precisely -- reverb-as-architecture, vocals inside texture, atmosphere as composition, the boundary between voice and synthesizer deliberately blurred. Not obscuring the music; IS the music
-3. The intimate machine (94th artist-city pattern) is observationally accurate -- the duo format using electronic production for emotional intimacy rather than spectacle, bedroom-scale, headphones and dark rooms. A genuine pattern
-4. The self-released model adds distribution diversity -- the engine now has major labels, large independents, small independents, and self-released artists. The ecosystem of distribution is mapped
-5. E=3 for NAVVI is defensible -- atmospheric intimacy, self-released, intimate scale. Present and filling without being aggressive
-6. NEW FAMILY Vespidae (43rd) is taxonomically significant -- first wasps/hornets, same order Hymenoptera as bumblebee (92). The Hymenoptera pair demonstrates the order's acoustic range
-7. The Hymenoptera pair (bumblebee E=2, hornet E=5) is one of the engine's strongest structural achievements -- same order, consecutive degrees, opposite postures, widest energy gap. Taxonomic proximity does not imply acoustic similarity
-8. First aggressive/defensive insect sound is a genuine new category -- every prior insect chirped to mate, throbbed to advertise, or droned while working. The hornet buzzes to threaten. A new acoustic posture
-9. E=5 for the hornet is defensible -- collective, aggressive, loud, sustained, threatening. Matches cicada as highest insect energy but with aggressive rather than advertising intent
-10. The papery quality from nest resonance is a genuine acoustic distinction -- the wood-fiber nest resonates with the collective buzzing, adding a rustling texture unique among insect sounds
-11. The A/B energy contrast (E=3 vs E=5) is the widest in recent degrees -- intimate shimmer vs collective fury. The contrast operates on every dimension: individual vs collective, intimate vs threatening, whisper vs roar
-12. Thirty-three consecutive original CSV species continues to demonstrate data reliability
-
-**What Could Be Better:**
-1. Specific NAVVI discography not exhaustively analyzed -- ACCEPTED, structural view appropriate
-2. Individual PNW Vespidae species not deeply profiled -- ACCEPTED, family-level entry appropriate for collective defensive buzzing
-3. NO RAPTOR in 94 entries -- CRITICAL, persists from degree 90
-4. NO PASSERIFORM in 37 degrees -- thirty-seven consecutive non-passerines (57-93). EXTREME
-5. NO MARINE SPECIES -- 94 entries without a marine specialist. SIGNIFICANT
-
-## Lessons Learned
-
-1. Four consecutive electronic-inflected genres (90-93) -- Ethereal/Electronic, Drone/Noise, World/Electronic, Dream Pop/Electronic -- demonstrate the depth of Seattle's electronic landscape. Each entry uses electronics differently: atmosphere, obliteration, bridge-building, intimacy. The engine is mapping not just electronic music but the full range of what electronics DO in a city's music
-2. The Hymenoptera pair (bumblebee 92, hornet 93) is the engine's strongest consecutive same-order contrast. Same order, different families, opposite acoustic postures, E=2 to E=5. The pair proves that taxonomic classification does not predict acoustic character. Order is not destiny
-3. The first aggressive/defensive insect sound introduces a new category to the engine's acoustic posture taxonomy: mating, advertising, incidental flight, and now aggressive defense. The engine's classification of insect sound now has four posture categories. This framework will be useful for future insect entries
-4. The A/B energy gap at degree 93 (E=3 vs E=5) is structurally productive -- the extreme contrast between intimate electronic dream pop and collective insect fury creates tension that makes both sides more vivid. Wide A/B gaps can be as structurally useful as tight A/B parallels
-5. Thirty-three consecutive original CSV species (61-93) continues to demonstrate data reliability. The CSV has not needed substitution or correction in 33 consecutive entries
-6. Seven insect entries in seven degrees (87-93) is the deepest sustained exploration of any taxon class. The engine's insect coverage now spans five orders (Orthoptera, Hemiptera, Diptera, Hymenoptera, and across three sound mechanisms (stridulation, tymbal, wing vibration) with four acoustic postures (mating, advertising, incidental, defensive)
-7. The gap analysis persists: no raptor, no passerine since degree 56, no marine species. These gaps become more conspicuous with each degree
-
----
-
-The shimmer veil and the aggressive papery hum.
-
-Degree 93. The shimmer and the sting. The widest A/B energy gap in recent degrees.
-
-On the music side, NAVVI shimmers behind reverb -- atmospheric, reverb-laden electronic pop with ethereal vocals. Dream Pop/Electronic at Genre Stage 75. E=3. Self-released Seattle duo of Ben Shepard and Rain Shepard. The shimmer veil is the 94th acoustic element -- reverb-as-architecture, vocals inside texture, atmosphere as composition, the song shimmering behind a veil of atmosphere. The intimate machine is the 94th artist-city pattern -- electronic production for emotional intimacy, bedroom-scale, the machine serves the intimate. Four consecutive electronic genres (90-93). The electronic era deepens.
-
-On the species side, the hornet nest buzz brings Vespidae into the engine -- NEW FAMILY (43rd), same order Hymenoptera as bumblebee (92). The Hymenoptera pair: gentle drone (E=2) vs aggressive hum (E=5). The widest energy gap within a consecutive same-order pair. The first aggressive/defensive insect sound -- every prior insect chirped, throbbed, whined, or droned. The hornet buzzes to threaten. A fundamentally new acoustic posture. E=5. Collective. Papery. Escalating. The aggressive papery hum. Thirty-third consecutive original CSV. Seven insect entries in seven degrees.
-
-The shimmer and the sting. NAVVI whispers through reverb. The hornet colony buzzes with collective fury. E=3 vs E=5. Intimate vs threatening. The shimmer veil invites. The aggressive papery hum warns. Both define space. One for closeness. One for distance.
-
-*Degree 93. The shimmer and the sting. The shimmer veil shimmers. The aggressive papery hum warns. Leave or be stung.*
-
-</details>
+Total: 9 files in commit `fb0d069399e18c140f25e3947cb512598aecd63a`.
