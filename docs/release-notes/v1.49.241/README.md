@@ -1,486 +1,177 @@
-# v1.49.241 -- Degree 101: Hecuba + Common Raven Pair -- THE POST-CENTENNIAL -- THE KINETIC SURGE AND THE DUET
+# v1.49.241 — Degree 101: Hecuba + Common Raven Pair — THE POST-CENTENNIAL — THE KINETIC SURGE AND THE DUET
 
 **Released:** 2026-04-01
-**Degree:** 101 of 360 -- First post-centennial degree -- 28.1% of 360
-**Part A:** Hecuba -- Dance/Electronic, E=5, self-released, Seattle duo, punk-inflected dance music, GENRE STAGE 83 (Dance/Electronic, eighty-third genre stage, pounding beats distorted synths shouted vocals relentless tempo DIY production punk-dance intersection), THE KINETIC SURGE 102nd acoustic element (pounding beats distorted synths shouted vocals relentless forward momentum raw production physical beat, distinct from nostalgic cascade 100 flowing golden and bilingual warmth 99 cultural fusion), THE DANCE FLOOR PROVOCATEUR 102nd artist-city pattern (duo format dance floor as arena punk ethos in electronic form confrontational DIY, distinct from transatlantic dreamer 100 continental bridge and diasporic synthesist 99 cultural fusion), twelfth electronic-adjacent entry in sixteen degrees (86 90 91 93 94 95 96 97 98 99 100 101), E=5 RETURNS (first since STRFKR degree 96)
-**Part B:** Common Raven pair (*Corvus corax*) -- coordinated duet vocalizations, E=5, open forest, Corvidae (SPECIES PAIR with degree 100, SECOND CONSECUTIVE CORVIDAE 100-101, third species-pair in engine after Northern Flicker 21-22 and American Beaver 61-62, forty-first consecutive original CSV)
-**Series:** Seattle 360 + Sound of Puget Sound -- Continuous Release Engine
+**Scope:** Seattle 360 + Sound of Puget Sound — paired degree release, first post-centennial degree, species-pair continuation
+**Branch:** main
+**Commits:** `1d5a00d7b` (1 of 3 in window: also `02adc42ea` FFA Giants data + `5bede4e05` hi-fi refinement)
+**Files changed:** 69 (8 Hecuba + Raven pair research artifacts + 8 Campfire OK + Crow artifacts for degree 102 pipeline + 53 hi-fi refinement files)
+**Degree:** 101 of 360 — FIRST POST-CENTENNIAL DEGREE — 28.1% of 360 — Eleventh degree of Quadrant II
+**Part A:** Hecuba — Dance/Electronic, E=5, self-released, Seattle duo, punk-inflected dance music, Genre Stage 83 milestone (Dance/Electronic, eighty-third genre stage, pounding beats distorted synths shouted vocals relentless tempo DIY production punk-dance intersection), the kinetic surge 102nd acoustic element, the dance floor provocateur 102nd artist-city pattern, twelfth electronic-adjacent entry in sixteen degrees, E=5 RETURNS (first since STRFKR degree 96)
+**Part B:** Common Raven pair (*Corvus corax*) — coordinated duet vocalizations, E=5, open forest, Corvidae (SECOND CONSECUTIVE 100-101), third species-pair in engine after Northern Flicker 21-22 and American Beaver 61-62, forty-first consecutive original CSV, pair-bonded mates, lifelong pair bonds, synchronized calling alternating patterns harmonic interplay
+**Series:** Seattle 360 + Sound of Puget Sound — Continuous Release Engine
 **Cluster:** Music (hub: WAL)
-**Note:** Post-centennial. Both duos. Both E=5. Both territorial. Electronic duet and biological duet. Synth voltage and vocal force. Species-pair: same species as degree 100 with different acoustic framing (solo voice vs coordinated pair duet). Second consecutive Corvidae.
+**Dedication:** To **Hecuba** — the **Seattle** electronic/dance duo whose punk-inflected, confrontational, four-on-the-floor dance music channels Pacific Northwest punk heritage through synths and shouted vocals at maximum voltage; to the **Common Raven pair** (*Corvus corax*) — the lifelong pair-bonded mates whose coordinated duet vocalizations amplify the individual voice of the centennial raven into a territorial display unit of two synchronized throats; to **Corvidae** declaring itself as a post-centennial force in the second consecutive degree of corvid presence; to the **species-pair** structural pattern, now deployed for the third time in the engine after the **Northern Flicker** at degrees 21–22 and the **American Beaver** at degrees 61–62; and to **THE POST-CENTENNIAL** itself — the first degree past the hundredth mark, opened hot at E=5 on both sides after the centennial's matched E=4 warmth.
+**Engine Position:** Degree 101 of 360 — THE POST-CENTENNIAL, the engine's first degree past the hundredth mark; the kinetic surge (102nd artist-side acoustic element); the coordinated duet vocalizations (101st species-side acoustic element); **THE DANCE FLOOR PROVOCATEUR** (102nd artist-city pattern); **GENRE STAGE 83 MILESTONE** Dance/Electronic; **E=5 RETURNS** on the artist side (first since STRFKR degree 96, five-degree gap); **SECOND CONSECUTIVE CORVIDAE** (100-101) — the family establishing territory; **THIRD SPECIES-PAIR** in the engine (after Northern Flicker 21–22 and American Beaver 61–62); **COORDINATED PAIR DUET** as species-side acoustic behavior; **FORTY-FIRST CONSECUTIVE ORIGINAL CSV** (degrees 61–101 unbroken); **TWELFTH ELECTRONIC-ADJACENT ENTRY IN SIXTEEN DEGREES** (86, 90, 91, 93, 94, 95, 96, 97, 98, 99, 100, 101) — deepest sustained genre cluster in the engine; **MATCHED E=5 PAIRING** at the first post-centennial degree, maximum contrast with centennial matched E=4.
 
 ## Summary
 
-THE POST-CENTENNIAL. The kinetic surge and the duet. Degree 101 opens the post-centennial era at maximum volume.
+**THE POST-CENTENNIAL.** The first degree past the hundredth mark. The engine has traversed one hundred rotations and now steps into the triple-digit register proper. **Degree 101** is the eleventh degree of **Quadrant II**, 28.1% of the full 360-degree circle, the opening degree of a new stretch of territory. **The Kinetic Surge and the Duet** — the pairing that lands at the first post-centennial mark — places **Hecuba's** pounding dance voltage beside the **Common Raven pair's** coordinated territorial duet. One side is propulsive, hot, physical, E=5 through shouted vocals and distorted synths. The other side is coordinated, synchronized, territorial, E=5 through two mates singing as one throat. Where **degree 100** settled into matched E=4 warmth on both sides (**Summer Heart's** nostalgic cascade and the **Common Raven's** solo thirty-voice repertoire), **degree 101** pivots hard into matched E=5 force. The centennial rested; the post-centennial surges.
 
-On the music side, **Hecuba** reaches **Genre Stage 83** with **Dance/Electronic** -- a Seattle electronic/dance duo delivering confrontational, punk-inflected dance music at E=5. Pounding beats, distorted synths, shouted vocals, relentless tempo, DIY self-released production. The **kinetic surge** is the 102nd acoustic element -- physical, high-energy, raw voltage channeled through four-on-the-floor beats. The **dance floor provocateur** is the 102nd artist-city pattern -- the duo that treats the dance floor as a space for confrontation and performance art. E=5 returns for the first time since STRFKR at degree 96. Twelfth electronic-adjacent entry in sixteen degrees. Maximum contrast with the centennial's golden warmth -- Summer Heart's nostalgic cascade (E=4) gives way to Hecuba's kinetic surge (E=5). The post-centennial opens hot.
+**Part A: Hecuba — Dance/Electronic at Genre Stage 83.** On the music side, **Hecuba** is a **Seattle** electronic/dance duo whose sound is **punk-inflected dance music** — pounding beats (heavy relentless kick drums, the beat as command), distorted synths (thick aggressive tones with raw voltage of punk-meets-dance), shouted vocals (punk energy hurled into the music as provocation), relentless tempo (high BPM, forward momentum, no pauses, no breakdowns), and DIY production (self-released, rough-edged, energy over perfection). The project sits at the intersection of **Seattle's** punk history — grunge, riot grrrl, noise rock — and the four-on-the-floor structure of dance music. **Genre Stage 83** — **Dance/Electronic** — lands as the eighty-third distinct genre stage in one hundred and one degrees, holding the engine's stable rate of roughly 0.82 stages per degree across the post-centennial threshold. **Dance/Electronic** is distinguished from the **Electronic Pop** of **Summer Heart** at **degree 100** (dream-pop-influenced, warm, nostalgic), from the **Electronic/R&B** of **Kaina** at **degree 99** (bilingual, diasporic, cultural fusion), and from the **Electronic** of **ODESZA** at **degree 95** (cinematic, festival-scale, euphoric). Hecuba returns the engine to confrontation — the first explicitly confrontational electronic entry since **Hovercraft's** noise obliteration at **degree 91** ten degrees earlier.
 
-On the species side, the **Common Raven pair** creates a **species-pair** with degree 100 -- same species, different acoustic framing. The solo raven's 30+ call types (E=4) become the pair's **coordinated duet vocalizations** (E=5). Synchronized calling, alternating patterns, harmonic interplay between male and female voices, mutual territorial display. This is the **third species-pair** in the engine (after Northern Flicker 21-22 and American Beaver 61-62). The **second consecutive Corvidae** (100-101). Pair-bonded ravens defend territory through coordinated vocal display -- the duet carries across the territory, signaling both pair-bond strength and defense capability. E=5 because two synchronized voices exceed the acoustic impact of one.
+**Part B: Common Raven Pair — The Third Species-Pair.** On the species side, the **Common Raven pair** (*Corvus corax*) executes the third species-pair in the engine's history. Same species as **degree 100**, different acoustic framing. The solo raven's thirty-plus call types at **E=4** become the pair's **coordinated duet vocalizations** at **E=5**. Synchronized calling — male and female in tight temporal coordination with millisecond-level precision. Alternating patterns — male call, female response, continuous display sustained across minutes. Harmonic interplay — deeper male voice and higher female voice creating a richer combined sound than either individual could produce. Mutual display behaviors — coordinated head-bobbing, wing-spreading, puffed throat at territorial boundaries. The duet is **primarily territorial** — it signals pair-bond strength, occupancy, and defense capability to any rival ravens in earshot, which may mean several kilometers of open forest. The **third species-pair** sits in a direct lineage with the **Northern Flicker** at **degrees 21–22** (solo drumming to duet drumming) and the **American Beaver** at **degrees 61–62** (tail-slap to rhythmic chewing). Same structural device, radically different taxa — *Picidae*, *Castoridae*, and now *Corvidae* — three species-pairs across one hundred and one degrees. **Second consecutive Corvidae** (100-101). Where the **Steller's Jay** at **degree 53** introduced the family and the solo raven at **degree 100** declared it, the raven pair at **degree 101** deepens it — Corvidae is not passing through, it is establishing territory.
 
-Both sides are duos. Both E=5. Both territorial. The electronic duet and the biological duet. Synth voltage and vocal force.
+**Cross-Sync Parallel: Both Halves Are Duos Creating Sound Through Coordination.** Both halves of degree 101 create their signature sound through coordination between two entities rather than through any single actor. **Hecuba** is a two-person electronic/dance duo — the pounding beat, the distorted synth, and the shouted vocals are distributed across two performers whose synchronization is the music. **In parallel**, the **Common Raven pair** is a two-bird territorial display unit — the male voice, the female voice, and the harmonic interplay between them are distributed across two birds whose synchronization is the signal. **Each side** produces something through coordination that neither entity could produce alone. **The same** principle — that duets are richer than solos — reaches both halves on the same degree through completely different substrates (silicon and stage for Hecuba; syrinx and pair-bond for the raven pair). **Synchronized** by the catalog, both Hecuba and the raven pair demonstrate that the first post-centennial degree celebrates paired effort over solo virtuosity.
+
+**Cross-Sync Parallel: Both E=5 — Matched Force After Matched Warmth.** Both halves of degree 101 land at **E=5**, producing a rare matched-energy degree at the opposite pole from the centennial. **Hecuba** reaches **E=5** through pounding beats, distorted synths, shouted vocals, and relentless tempo — physical force at the upper end of the intensity scale. **In parallel**, the **Common Raven pair** reaches **E=5** through synchronized territorial calling — two voices amplifying beyond the sum of their individual amplitudes, coordinated persistence across minutes, territorial force exceeding any single voice. **Each side** escalates by a full energy step from degree 100, where both sides sat at **E=4** (Summer Heart's warm electronic pop, Common Raven's commanding individual voice). **The same** structural jump — matched E=4 at the centennial to matched E=5 at the first post-centennial degree — reaches both halves in parallel. **Synchronized** by design, the post-centennial opens at maximum energy on both sides, a deliberate inversion of the centennial's warmth.
+
+**Cross-Sync Parallel: Both Halves Are Territorial.** Both halves of degree 101 use coordinated acoustic display to claim space. **Hecuba** claims the **dance floor** — the duo's music is designed for a specific physical space, treats that space as arena, and commands it through confrontational performance. **In parallel**, the **Common Raven pair** claims its forest territory — the duet is designed for open forest acoustic propagation, treats the territory as arena, and defends it through synchronized vocal display. **Each side** uses coordinated sound to establish dominance over a physical space. **The same** behavioral principle — that territory is claimed through coordinated acoustic display — reaches both halves on the same degree. **Synchronized** by the catalog's ordering, the dance floor provocateur and the territorial pair both demonstrate that voice as territory-claim is a trans-substrate principle.
+
+**Cross-Sync Parallel: The Species-Pair Completes the Raven Arc.** Both halves of degree 101 complete an arc that began at **degree 100**. On the species side, the solo raven at degree 100 and the raven pair at degree 101 form a species-pair — the same species, two consecutive degrees, two acoustic framings (individual voice and paired voice). The third species-pair in the engine after the **Northern Flicker** at **degrees 21–22** and the **American Beaver** at **degrees 61–62**. **In parallel**, on the artist side, the warmth-to-force transition from **Summer Heart's** nostalgic cascade at degree 100 to **Hecuba's** kinetic surge at degree 101 forms a tonal pair — the same electronic substrate rendered in opposite dresses across two consecutive degrees. **Each side** completes an arc that the centennial initiated. **The same** structural pattern — that consecutive degrees can deepen a single entity by presenting it in two framings — reaches both halves in parallel. **Synchronized** by the post-centennial's design, both the raven's solo-to-pair arc and the electronic era's warmth-to-force arc mature their material across the centennial boundary rather than discarding it.
+
+**Cross-Sync Parallel: The Dance Floor Provocateur Meets the Territorial Pair.** Both halves of degree 101 introduce artist-city patterns and acoustic framings keyed to coordinated intensity. **The Dance Floor Provocateur** is the 102nd artist-city pattern — a duo that treats the dance floor as arena, DIY as identity, and physical confrontation as music. **In parallel**, the **Common Raven pair's** coordinated duet is the 101st species-side acoustic element — two pair-bonded mates whose synchronized calling creates a territorial presence that exceeds either individual voice. **Each side** demonstrates that maturity in voice is inseparable from maturity in partnership. **The same** lesson — that coordination multiplies impact — reaches both halves on the same degree. **Synchronized** by the structural moment, the provocateur duo and the thirty-voiced mated pair both build identity through the capacity to coordinate.
+
+**Cross-Sync Parallel: Genre Stage 83 Meets the Forty-First Consecutive Original CSV.** Both halves of degree 101 reach counter milestones that reflect the underlying catalog's continued maturity past the centennial. On the artist side, the engine reaches **Genre Stage 83** — eighty-three distinct genre classifications in one hundred and one degrees, holding the stable rate of 0.82 stages per degree across the post-centennial threshold. **In parallel**, on the species side, the engine reaches the **forty-first consecutive original CSV species** — forty-one degrees without a single substitution or correction, now extending the longest unbroken run of original-catalog selections to a **FORTY-ONE-DEGREE** span from **degree 61** to **degree 101**. **Each side** has reached a numerical milestone that reflects the source catalog's depth. **The same** structural moment — counters ticking to landmark territory on both sides at the first post-centennial degree — reaches both halves on the same degree. **Synchronized** by maturity, both Genre Stage 83 and the forty-first consecutive CSV signal that the engine has not slowed after the centennial.
+
+**Cross-Sync Parallel: Electronic Era Depth Meets Corvidae Territory Establishment.** Both halves of degree 101 reach a depth marker in the engine's recent thematic runs. On the artist side, Hecuba is the **twelfth electronic-adjacent entry in sixteen degrees** (degrees 86, 90, 91, 93, 94, 95, 96, 97, 98, 99, 100, 101) — the deepest sustained genre cluster in the engine, now extended by one past the centennial. The electronic era maps the full electronic spectrum from pop structure (86) through atmosphere (90), obliteration (91), intimacy (93), experimentation (94), euphoria (95), pulse (96), tenderness (97), nostalgia (98), cultural fusion (99), nostalgic cascade (100), and now kinetic surge (101) without a single architectural repetition. **In parallel**, on the species side, **Corvidae** is now second consecutive — **Steller's Jay** at degree 53 introduced the family; the solo **Common Raven** at degree 100 declared it; the **Common Raven pair** at degree 101 deepens it. Corvidae is not passing through; it is establishing territory. **Each side** has reached a depth threshold in its recent sequence. **The same** structural principle — that the first post-centennial degree rewards depth over breadth — reaches both halves on the same degree. **Synchronized** by design, both the electronic era mapping and the Corvidae territorial establishment demonstrate that the post-centennial continues the centennial's depth strategy.
+
+**Cumulative State at the First Post-Centennial Degree.** At degree 101, the engine has documented **102 artists** from the **Pacific Northwest** music scene (including origin Quincy Jones at degree 0), **103 acoustic elements** (102 on the artist side and 101 on the species side with two paired elements at certain degrees), **102 artist-city patterns**, **83 genre stages**, **49 families**, **4 classes** (**Aves**, **Mammalia**, **Insecta**, **Amphibia**), and **17-plus orders**. The engine holds **41 consecutive original CSV species** — a reliability streak that now extends past the centennial into the post-centennial era. The electronic era extends to twelve entries in sixteen degrees. Corvidae holds two consecutive entries. The species-pair structural device has now been deployed three times. The **Raven muse** presence, initiated at the centennial with the solo voice, deepens at the post-centennial with the paired voice. **The post-centennial opens hot, coordinated, and loud.**
 
 ## Key Features
 
 | Metric | Part A: Hecuba | Part B: Common Raven Pair |
-|--------|---------------|--------------------------|
-| Genre | Dance/Electronic (Genre Stage 83) | -- |
-| Energy | E=5 (pounding beats, distorted synths, shouted vocals, relentless) | E=5 (coordinated duet, synchronized, two voices, territorial force) |
-| Label | Self-released | -- |
-| Family | -- | Corvidae (second consecutive, 100-101) |
-| Acoustic Element | the kinetic surge (102nd, physical beat distorted synths shouted vocals relentless momentum) | coordinated duet vocalizations (101st species-side, synchronized pair calling harmonic interplay) |
-| Artist-City Pattern | The Dance Floor Provocateur (102nd, duo format dance floor as arena punk-electronic confrontation) | -- |
-| Structural Firsts | GENRE STAGE 83 (Dance/Electronic), E=5 RETURNS (first since degree 96), THE KINETIC SURGE, THE DANCE FLOOR PROVOCATEUR, post-centennial opens at maximum volume | SPECIES PAIR (third in engine, same species as 100), SECOND CONSECUTIVE CORVIDAE, E=5 coordinated pair display |
+|--------|----------------|---------------------------|
+| Genre | **Dance/Electronic** (Genre Stage 83 MILESTONE, eighty-third genre stage in 101 degrees, Seattle electronic/dance duo punk-inflected dance music pounding beats distorted synths shouted vocals relentless tempo DIY self-released production, distinct from Electronic Pop 100 dream-pop warmth and Electronic/R&B 99 cultural fusion and Electronic 95 cinematic festival-scale) | — |
+| Energy | **E=5** (pounding beats distorted synths shouted vocals relentless tempo DIY production, maximum artist-side energy, first E=5 since STRFKR degree 96 five-degree gap) | **E=5** (coordinated duet synchronized male-female voices alternating patterns harmonic interplay territorial force exceeds any single voice, two voices amplify beyond sum of individual amplitudes) |
+| Label | **Self-released** (DIY ethos, rough-edged energy over perfection, punk-dance intersection, Seattle DIY continuation) | — |
+| Family | — | **Corvidae** (second consecutive 100-101, establishing territory after Steller's Jay introduction degree 53 and solo Raven declaration degree 100, the family making itself a post-centennial force) |
+| Order | — | **Passeriformes** (same order as solo Raven degree 100, largest bird order ~6,500 species, pair format adds coordinated display to the order's vocal repertoire) |
+| Class | — | **Aves** (second consecutive Aves 100-101, birds established at centennial continue at post-centennial, raven lineage deepens) |
+| Acoustic Element | **the kinetic surge** (102nd artist-side, physical beat distorted synth layers shouted vocal attacks relentless forward momentum raw production rough edges as the point, distinct from nostalgic cascade 100 flowing golden and bilingual warmth 99 cultural fusion and euphoric build 95 cinematic escalating) | **coordinated duet vocalizations** (101st species-side, synchronized calling alternating patterns harmonic interplay mutual display behaviors, distinct from solo voice 30+ call types 100 individual complexity) |
+| Artist-City Pattern | **The Dance Floor Provocateur** (102nd artist-city pattern, duo format dance floor as arena punk ethos in electronic form confrontational DIY self-released, distinct from Transatlantic Dreamer 100 continental bridge and Diasporic Synthesist 99 cultural fusion) | — |
+| Structural Firsts | GENRE STAGE 83 MILESTONE (Dance/Electronic eighty-third genre stage), E=5 RETURNS (first since STRFKR degree 96), THE KINETIC SURGE 102nd acoustic element (physical dance-floor voltage), THE DANCE FLOOR PROVOCATEUR 102nd artist-city pattern (confrontational duo), TWELFTH ELECTRONIC-ADJACENT ENTRY IN SIXTEEN DEGREES, SEATTLE ELECTRONIC/DANCE DUO RETURNS, POST-CENTENNIAL OPENING AT MAXIMUM VOLUME | **THIRD SPECIES-PAIR IN ENGINE** (after Northern Flicker 21-22 and American Beaver 61-62), SECOND CONSECUTIVE CORVIDAE (100-101 establishing territory), COORDINATED PAIR DUET 101st species-side acoustic element (synchronized territorial display), FORTY-FIRST CONSECUTIVE ORIGINAL CSV (degrees 61-101 unbroken), MATCHED E=5 PAIRING AT POST-CENTENNIAL, RAVEN MUSE DEEPENS (solo to pair arc), LIFELONG PAIR BONDS as structural feature, TERRITORIAL COORDINATION in Passerine pair-bond |
 | Research Words | ~5,000 | ~7,000 |
 | Files Produced | 4 | 4 |
 | Cross-References | 5 | 5 |
 
-<details>
-<summary>Full Release Notes -- Click to expand</summary>
+## Part A: Hecuba — The Kinetic Surge
 
-## Part A: Hecuba -- THE KINETIC SURGE (Dance/Electronic, E=5, Self-Released, Genre Stage 83, The Kinetic Surge 102nd Acoustic Element, The Dance Floor Provocateur 102nd Artist-City Pattern, Twelfth Electronic Entry, Post-Centennial)
+- **The first post-centennial degree and the post-centennial artist.** **Degree 101** is the first degree past the centennial mark — the engine steps into the triple-digit register proper, and the first artist to carry that weight is **Hecuba**, a **Seattle** electronic/dance duo whose confrontational four-on-the-floor dance music opens the post-centennial era at **E=5**. The centennial rested at matched **E=4** warmth on both sides; the post-centennial surges at matched **E=5** force. Hecuba is the right artist for this pivot — punk-inflected, physically confrontational, relentlessly forward, unwilling to let the centennial's golden glow linger past its own degree.
+- **Hecuba — Seattle electronic/dance duo, punk-inflected.** The project is a **two-person enterprise** by construction. **Pounding beats** (heavy relentless kick drums, the beat treated as command rather than invitation), **distorted synths** (thick aggressive tones with grit, raw voltage of punk-meets-dance, the hot frequency spectrum as sonic territory), **shouted vocals** (punk energy hurled into the music as provocation rather than melody, vocals as percussion, vocals as confrontation), **relentless tempo** (high BPM, forward momentum, no breakdowns, no quiet sections, the music refuses to let the listener catch their breath), and **DIY production** (self-released, rough-edged, energy over perfection, the raw mix as part of the aesthetic rather than a defect).
+- **Genre Stage 83 — Dance/Electronic at the post-centennial milestone.** The engine has now introduced eighty-three distinct genre stages across one hundred and one degrees — roughly 0.82 stages per degree, a stable rate held across the centennial threshold and now extended past it. **Dance/Electronic** at degree 101 is the twelfth electronic-adjacent entry in sixteen degrees (86, 90, 91, 93, 94, 95, 96, 97, 98, 99, 100, 101) and extends an electronic era that has dominated **Quadrant II** without sign of repetition. Same broad substrate as preceding eleven entries, radically different dress — **Hecuba's** confrontational dance-floor voltage is architecturally distinct from **Summer Heart's** nostalgic cascade just one degree earlier.
+- **The kinetic surge — 102nd acoustic element.** Physical dance-floor voltage rendered through pounding beats and distorted synth layers. **Physical beat** (kick drum as primary instrument, the body responds before the mind processes, the beat is a command directed at the body); **distorted synth layers** (hot voltage filling the frequency spectrum, no gentle textures, the entire sonic space saturated with aggressive tone); **shouted vocal attacks** (vocals as percussion and as provocation, hurled into the mix rather than gliding over it); **relentless forward momentum** (no breakdowns, no quiet sections, the music starts at maximum and holds); **raw production** (rough edges as the point rather than as a defect). Distinct from the **nostalgic cascade** at **degree 100** (Summer Heart — flowing, warm, contemplative, E=4), distinct from the **bilingual warmth** at **degree 99** (Kaina — cultural fusion, bilingual, E=4 present-focused), distinct from the **euphoric build** at **degree 95** (ODESZA — cinematic, escalating, climactic), distinct from the **sustained crush** at **degree 91** (Hovercraft — noise obliteration, ear-as-target).
+- **The Dance Floor Provocateur — 102nd artist-city pattern.** A duo that treats the dance floor as arena, DIY as identity, and physical confrontation as music. **Duo format** — two people creating maximum energy through coordination. **Dance floor as arena** — the music designed for a specific physical space, not for headphones or car stereos but for a room full of bodies. **Punk ethos in electronic form** — self-released, DIY, confrontational rather than accommodating. Distinct from the **Transatlantic Dreamer** at **degree 100** (Summer Heart — dual-continent warmth, atmospheric), distinct from the **Diasporic Synthesist** at **degree 99** (Kaina — inter-American cultural fusion), distinct from the **Self-Released Synthesist** at **degree 98** (Gold Casio — single-city, retro-electronic, zero intermediaries).
+- **E=5 returns after a five-degree gap.** **STRFKR** at **degree 96** was the last artist-side E=5 entry. The five-degree span 97–100 held at **E=4** and **E=3** (The Postal Service electronic, Gold Casio, Kaina, Summer Heart). **Hecuba** at **degree 101** returns the artist side to **E=5** — the first E=5 since STRFKR, and the opening E=5 of the post-centennial era. **E=5** gains Hecuba to reach **14 deployments** on the artist side (13.7% of artist entries after degree 101), extending the high-energy slice of the distribution at the post-centennial threshold.
+- **Twelfth electronic-adjacent entry in sixteen degrees.** Degrees 86, 90, 91, 93, 94, 95, 96, 97, 98, 99, 100, and 101 — twelve electronic-adjacent entries in the sixteen-degree window since degree 86. The **electronic era** continues to define **Quadrant II** across the centennial threshold. Each entry uses electronics differently: **pop structure** (The Postal Service 86), **atmosphere** (Sky Cries Mary 90), **obliteration** (Hovercraft 91), **intimacy** (NAVVI 93), **experimentation** (Erik Blood 94), **euphoria** (ODESZA 95), **pulse** (STRFKR 96), **tenderness** (The Postal Service electronic 97), **nostalgia** (Gold Casio 98), **cultural fusion** (Kaina 99), **golden cascade** (Summer Heart 100), and now **kinetic surge** (Hecuba 101). Twelve approaches to one substrate — the deepest sustained genre cluster in the engine, extended by one past the centennial.
+- **Punk heritage meets dance music structure.** **Hecuba** carries two traditions simultaneously. **Seattle's punk heritage** — grunge, riot grrrl, noise rock — contributes the confrontational stance, the shouted vocals, the DIY production ethos, and the willingness to push the mix into raw territory. **Dance music structure** — four-on-the-floor, synth-driven, repetitive builds — contributes the pounding beat, the distorted synths, the relentless tempo, and the commitment to physical movement. The fusion is the signature — punk's confrontation wraps dance music's structure without erasing either heritage.
+- **Self-released within a dance-electronic context.** **Hecuba's** releases are self-released, bypassing intermediate labels entirely, a distribution topology that reinforces the punk-DIY identity. The label context is less concentrated than **Sub Pop** (86, 97), **Counter Records** (95), **Polyvinyl** (96), or even the diffuse self-release of **Summer Heart** (100, transatlantic). Hecuba's self-release is local, direct, and confrontational rather than networked.
+- **Seattle as physical music scene.** Unlike the transatlantic **Summer Heart** at degree 100 or the diasporic **Kaina** at degree 99, **Hecuba** is located **in** Seattle — a specific physical music scene, a specific set of dance floors, a specific DIY network. The post-centennial returns the engine to localized, physical music after two degrees of international bridging.
 
-Full deep research covering Hecuba at degree 101, the post-centennial opening, and the kinetic surge:
+## Part B: Common Raven Pair — The Third Species-Pair
 
-### POST-CENTENNIAL: THE ELECTRONIC ERA CONTINUES
-
-Degree 101 is the first degree after the centennial. The electronic era that has dominated Quadrant II continues without pause -- twelve electronic-adjacent entries in sixteen degrees (86, 90, 91, 93, 94, 95, 96, 97, 98, 99, 100, 101). Where the centennial (Summer Heart, degree 100) was warm, nostalgic, E=4, degree 101 pivots hard. Hecuba enters at E=5 -- the first E=5 since STRFKR (degree 96). The post-centennial era opens at maximum volume.
-
-### HECUBA -- Seattle Dance/Electronic Duo
-
-**Hecuba** is a Seattle electronic/dance duo. High-energy, synth-driven dance music with a punk ethos -- confrontational, physical, designed to command the dance floor. Self-released. DIY. The dance floor as performance art and direct action.
-
-The sound: pounding beats (heavy, relentless kick drums, the beat is a command), distorted synths (thick, aggressive tones with grit, raw voltage of punk-meets-dance), shouted vocals (punk energy, confrontational, hurled into the music), relentless tempo (high BPM, forward momentum, no pauses), DIY production (self-released, rough-edged, energy over perfection).
-
-Hecuba sits at the intersection of punk attitude and dance music structure. Punk energy (confrontational, DIY, self-released) meets dance structure (four-on-the-floor, synth-driven, repetitive builds). Seattle's punk history (grunge, riot grrrl, noise rock) channeled through electronic dance music.
-
-### THE KINETIC SURGE -- 102nd Acoustic Element
-
-The kinetic surge is the 102nd acoustic element. Physical beat (kick drum as primary instrument, the body responds before the mind processes), distorted synth layers (hot voltage filling the frequency spectrum), shouted vocal attacks (vocals as percussion, as provocation), relentless forward momentum (no breakdowns, no quiet sections), raw production (rough edges are the point).
-
-Contrasts: the nostalgic cascade (100, flowing, warm, contemplative, E=4) vs the kinetic surge (101, propulsive, hot, physical, E=5) -- maximum contrast between consecutive degrees. The bilingual warmth (99, gentle, E=4) vs the kinetic surge (aggressive, E=5). The euphoric build (95, cinematic, escalating, climactic) vs the kinetic surge (flat-out, relentless, starts at maximum).
-
-### THE DANCE FLOOR PROVOCATEUR -- 102nd Artist-City Pattern
-
-The dance floor provocateur: duo format (two people creating maximum energy), dance floor as arena (the music designed for a specific physical space), punk ethos in electronic form (self-released, DIY, confrontational).
-
-Six distinct electronic patterns in six degrees: ODESZA (95, festival architect), STRFKR (96, Portland-Seattle axis), Gold Casio (98, self-released synthesist), Kaina (99, diasporic synthesist), Summer Heart (100, transatlantic dreamer), Hecuba (101, dance floor provocateur). The electronic era differentiates at every step.
-
-### CROSS-REFERENCES (Part A)
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| S36-095 | Hecuba (101) | ODESZA (95) | E=5 ELECTRONIC ENERGY. Both E=5 electronic. ODESZA cinematic, festival-scale. Hecuba confrontational, dance-floor-scale. Arena vs dance floor. |
-| S36-096 | Hecuba (101) | STRFKR (96) | E=5 ELECTRONIC ENERGY. Both E=5, synth-driven, punk energy. STRFKR joyful. Hecuba confrontational. Joy vs provocation. |
-| S36-091 | Hecuba (101) | Hovercraft (91) | ELECTRONIC SPECTRUM. Both aggressive electronic. Hovercraft noise-electronic, ear as target. Hecuba dance-electronic, body as target. |
-| S36-080 | Hecuba (101) | Mates of State (80) | E=5 EXUBERANCE. Both E=5, both duos. Mates of State channels through indie pop. Hecuba channels through dance provocation. Same voltage, different genres. |
-| S36-094 | Hecuba (101) | Erik Blood (94) | EXPERIMENTAL ELECTRONIC. Both experimental electronic from Seattle. Erik Blood layered, atmospheric. Hecuba raw, physical. Different directions. |
-
----
-
-## Part B: Common Raven Pair (*Corvus corax*) -- SPECIES PAIR (Third in Engine, Coordinated Duet Vocalizations, E=5, Second Consecutive Corvidae 100-101, Forty-First Consecutive Original CSV)
-
-Full deep research covering the Common Raven pair, the species-pair structure, and coordinated duet vocalizations:
-
-### SPECIES PAIR: RAVEN (100) AND RAVEN PAIR (101)
-
-Degree 101 is a species-pair entry -- the same species as degree 100, with a different acoustic framing:
-
-| Degrees | Species | Solo | Pair |
-|---|---|---|---|
-| 21-22 | Northern Flicker | Solo drumming (21) | Duet drumming (22) |
-| 61-62 | American Beaver | Tail-slap (61) | Chewing (62) |
-| **100-101** | **Common Raven** | **Solo voice, 30+ call types (100)** | **Coordinated duet vocalizations (101)** |
-
-Third species-pair. Consistent pattern: same species, consecutive degrees, different acoustic behavior.
-
-### SECOND CONSECUTIVE CORVIDAE (100-101)
-
-Corvidae established at degree 100 (centennial); the pair deepens the corvid presence at 101. Corvidae is not passing through -- it is establishing territory. The Steller's Jay (degree 53) was the first corvid. After 47 degrees, the Raven arrived at 100. Now the Raven pair at 101 makes Corvidae consecutive.
-
-### THE SOUND: COORDINATED DUET VOCALIZATIONS
-
-Synchronized calling (male and female in tight temporal coordination, millisecond-level precision), alternating patterns (male call, female response, continuous display), harmonic interplay (deeper male voice and higher female voice creating richer combined sound), mutual display behaviors (coordinated head-bobbing, wing-spreading, puffed throat). Duets are primarily territorial -- pair-bond strength, territory occupancy, defense capability.
-
-Why E=5: two voices (louder than one), synchronization amplifies impact, greater persistence through alternation, territorial force exceeds single voice.
-
-Contrasts: solo raven (100, E=4, individual complexity) vs pair duet (101, E=5, paired coordination). Steller's Jay (53, solo, bright, loud) vs raven pair (synchronized, deep, commanding). Northern Spotted Owl pairs (4, quiet, resonant, nocturnal) vs raven pairs (loud, complex, diurnal).
-
-### ECOLOGY: PAIR-BONDING AND TERRITORIAL DEFENSE
-
-Lifelong pair bonds (10-15+ years), mutual investment (both parents build nest, incubate, feed), year-round territory defense, coordinated foraging, cooperative predator mobbing, aerial acrobatics in tandem. The raven pair is more effective than two individuals -- coordinated foraging, predator defense, cultural transmission between mates.
-
-### CROSS-REFERENCES (Part B)
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| SPS-100 | Common Raven pair (101) | Common Raven (100) | SPECIES PAIR! Solo raven E=4, 30+ call types. Raven pair E=5, coordinated duets. Third species-pair. Individual becomes pair. |
-| SPS-053 | Common Raven pair (101) | Steller's Jay (53) | CORVIDAE FAMILY. Same family. Jay introduced Corvidae at 53. Raven pair at 101 is second consecutive. |
-| SPS-021/022 | Common Raven pair (101) | Northern Flicker (21-22) | SPECIES-PAIR PRECEDENT. First species-pair. Solo drumming to duet drumming. Same pattern as raven solo to raven pair. |
-| SPS-061/062 | Common Raven pair (101) | American Beaver (61-62) | SPECIES-PAIR PRECEDENT. Second species-pair. Tail-slap to chewing. Three species-pairs across 101 degrees. |
-| SPS-004 | Common Raven pair (101) | Northern Spotted Owl (4) | TERRITORIAL PAIR VOCALIZATIONS. Both pair-bonded mates duetting for territorial defense. Owl quiet in old-growth. Raven loud across open forest. |
-
----
-
-## Parallel: Hecuba x Common Raven Pair -- The Kinetic Surge and the Duet (POST-CENTENNIAL)
-
-The kinetic surge and the coordinated duet. The post-centennial opens with duos at maximum energy.
-
-**1. Both Duos** -- Hecuba is a two-person electronic/dance duo. The Common Raven pair is a two-bird territorial display unit. Both create sound through coordination between two entities. Electronic duo and biological duo.
-
-**2. Both E=5 -- Maximum Energy** -- Hecuba at E=5 through pounding beats and shouted vocals. The raven pair at E=5 through synchronized territorial calling. Both at maximum after the centennial's E=4 on both sides. The post-centennial opens hot.
-
-**3. Both Territorial** -- Hecuba claims the dance floor. The raven pair defends its territory. Both use coordinated acoustic display to establish dominance over a space. The dance floor and the forest territory.
-
-**4. Synchronized Coordination** -- Hecuba's duo coordinates beats, synths, and vocals into a unified assault. The raven pair coordinates male and female voices into synchronized territorial display. Both create something through coordination that neither individual could produce alone.
-
-**5. The Species-Pair Completes** -- The solo raven (100) became the raven pair (101). The individual voice became the coordinated duet. Third species-pair. The pattern recurs across taxa -- flicker, beaver, raven.
-
----
-
-## Acoustic Progression (102 elements)
-
-| # | Element | Degree | Artist/Species |
-|---|---------|--------|----------------|
-| 0 | silence | 0 | Quincy Jones |
-| 1 | cascade | 1 | Bill Frisell |
-| 2 | drone | 2 | Wayne Horvitz |
-| 3 | language | 3 | Ernestine Anderson |
-| 4 | motif | 4 | Floyd Standifer |
-| 5 | metronome | 5 | Overton Berry |
-| 6 | question | 6 | Patti Bown |
-| 7 | harmonic spiral | 7 | Julian Priester |
-| 8 | ultrasonic threshold | 8 | Gary Peacock |
-| 9 | variation | 9 | Hadley Caliman |
-| 10 | minimum signal | 10 | Bud Shank |
-| 11 | trill/tremolo | 11 | Joe Brazil |
-| 12 | sawtooth sweep | 12 | Don Lanphere |
-| 13 | ostinato | 13 | Marc Seales |
-| 14 | repetition-resolution | 14 | Aaron Parks |
-| 15 | accelerando | 15 | Thomas Marriott |
-| 16 | crescendo | 16 | Jeff Lorber |
-| 17 | the hook | 17 | Reggie Watts |
-| 18 | ascending spiral | 18 | Maktub |
-| 19 | descending spiral | 19 | Fly Moon Royale |
-| 20 | sustain/the release | 20 | Whitney Monge |
-| 21 | the hammer | 21 | Polyrhythmics |
-| 22 | resonant percussion/groove reset | 22 | Foxy Apollo |
-| 23 | the testimony/groove reset | 23 | Allen Stone |
-| 24 | the invocation | 24 | Ron Artis II |
-| 25 | the congregation | 25 | Black Stax |
-| 26 | the caroling | 26 | Shaina Shepherd |
-| 27 | the liquid gurgle | 27 | The Dynamics |
-| 28 | the liquid twitter | 28 | Night Owls |
-| 29 | the rough brrit | 29 | Boogaloo Joe Jones |
-| 30 | the liquid warble synthesis | 30 | Ray Charles |
-| 31 | the whisper | 31 | Brenda Lee Eager |
-| 32 | the buzz | 32 | Luther Rabb |
-| 33 | the cadenza | 33 | Larry English |
-| 34 | the dialect | 34 | The Tempos |
-| 35 | the thrum | 35 | Robert Cray |
-| 36 | the sonic boom | 36 | Jimi Hendrix |
-| 37 | the filament | 37 | Ayron Jones |
-| 38 | the drawl | 38 | Booker T. Jones |
-| 39 | the canopy buzz | 39 | Ron Artis Jr |
-| 40 | the thinning | 40 | Alice Smith |
-| 41 | the partition | 41 | Shawn Smith |
-| 42 | the shimmer | 42 | Erica Campbell |
-| 43 | the radiance | 43 | Ann Wilson |
-| 44 | the grain | 44 | Chong the Nomad |
-| 45 | the murmur | 45 | Damien Jurado |
-| 46 | the confessional | 46 | Rocky Votolato |
-| 47 | the parable tone | 47 | Pedro the Lion |
-| 48 | the held rest | 48 | Sera Cahoone |
-| 49 | the lullaby subversion | 49 | Kimya Dawson |
-| 50 | the intimate architecture | 50 | Mirah |
-| 51 | the communal harmony | 51 | Grand Archives |
-| 52 | the testimony roar | 52 | Brandi Carlile |
-| 53 | the cathedral harmony | 53 | Fleet Foxes |
-| 54 | the fraternal jangle | 54 | Ivan & Alyosha |
-| 55 | the ember glow | 55 | Shelby Earl |
-| 56 | the dream haze | 56 | Lemolo |
-| 57 | the rattle / the stream rattle | 57 | Laura Gibson / Belted Kingfisher |
-| 58 | the ache / the pond whistle | 58 | Death Cab for Cutie / Wood Duck |
-| 59 | the digression / the quack | 59 | The Long Winters / Mallard |
-| 60 | the bare wire / the submerge call | 60 | Ben Gibbard (solo) / Pied-billed Grebe |
-| 61 | the braided voice / the tail slap | 61 | Y La Bamba / American Beaver |
-| 62 | the throwback / the rhythmic gnaw | 62 | Pickwick / Beaver Chewing |
-| 63 | the FM sheen / the chuff | 63 | Kenny Loggins / River Otter |
-| 64 | the dusk / the chitter | 64 | Jesse Sykes / Mink |
-| 65 | the open plain / the chuckle-chatter | 65 | Philip Aaberg / American Marten |
-| 66 | the country thunder / the scream | 66 | Neko Case / Fisher |
-| 67 | the clean room / the shrill bark-chitter | 67 | Chris Walla / Short-tailed Weasel |
-| 68 | the hush / the rapid chattering chirp | 68 | Sam Beam / Long-tailed Weasel |
-| 69 | the earnest voice / the warning foot-stamp hiss | 69 | Kris Orlowski / Striped Skunk |
-| 70 | the fiddle line / the churring chittering young | 70 | Horse Feathers / Raccoon |
-| 71 | the room tone / the bark screaming vixen call | 71 | Phil Elverum / Red Fox |
-| 72 | the layered loop / the low hiss click | 72 | Briana Marela / Opossum |
-| 73 | the jangle / the thump squeal | 73 | LAKE / Snowshoe Hare |
-| 74 | the reverb wash / the high sharp eenk bark | 74 | Poor Moon / American Pika |
-| 75 | the anthem / the piercing whistle alarm | 75 | The Lonely Forest / Yellow-bellied Marmot |
-| 76 | the androgynous register / the loud penetrating whistle | 76 | Chris Pureka / Hoary Marmot |
-| 77 | the ethereal layering / the musical multi-note whistle | 77 | Mree / Olympic Marmot |
-| 78 | the communal jangle / the chirping trill alarm | 78 | Acid Tongue / Townsend's Ground Squirrel |
-| 79 | the cinematic stillness / the sharp chip alarm | 79 | Jesse Marchant / Golden-mantled Ground Squirrel |
-| 80 | the organ explosion / the loud scolding chatter rattle | 80 | Mates of State / Douglas Squirrel |
-| 81 | the Broadway voice / the bark + chatter alarm | 81 | Sara Bareilles / Eastern Fox Squirrel |
-| 82 | the acoustic intimacy / the high thin tseet | 82 | Death Cab for Cutie (acoustic) / Northern Flying Squirrel |
-| 83 | the grunge whisper / the ultrasonic + soft chip | 83 | Pearl Jam (acoustic) / Deer Mouse |
-| 84 | the late whisper / the chatter + twig gnaw | 84 | Damien Jurado (late career) / Bushy-tailed Woodrat |
-| 85 | the stripped confession / the quiet plop | 85 | Rocky Votolato (acoustic) / Muskrat |
-| 86 | the electronic pulse / the amplified krek-krek wall of sound | 86 | The Postal Service / Pacific Treefrog |
-| 87 | the emerging twang / the rhythmic chirp field chorus | 87 | Neko Case (early folk) / Cricket Chorus |
-| 88 | the bedroom strum / the continuous electric buzz | 88 | Kimya Dawson (solo) / Katydid |
-| 89 | the baroque whisper / the electric buzzing throb | 89 | Parenthetical Girls / Cicada |
-| 90 | the ambient drift / the bell-like peep chorus | 90 | Sky Cries Mary / Spring Peeper-Like Chorus |
-| 91 | the sustained crush / the ultra-thin hum cloud | 91 | Hovercraft / Mosquito Swarm |
-| 92 | the global weave / the deep resonant buzz | 92 | Trance Mission / Bumblebee Drone |
-| 93 | the shimmer veil / the aggressive papery hum | 93 | NAVVI / Hornet Nest Buzz |
-| 94 | the producer's palette / the wing rustle on stream surface | 94 | Erik Blood / Stonefly Hatch |
-| 95 | the euphoric build / the mass wing buzz over water | 95 | ODESZA / Mayfly Emergence |
-| 96 | the synth-pop pulse / the duck-like clucking chorus | 96 | STRFKR / Wood Frog |
-| 97 | the algorithmic tenderness / the sustained musical purring | 97 | The Postal Service (electronic) / Toad Chorus |
-| 98 | the retro-synthetic shimmer / the pure sustained trill | 98 | Gold Casio / Tree Cricket Song |
-| 99 | the bilingual warmth / the mechanical click | 99 | Kaina / Click Beetle |
-| 100 | the nostalgic cascade / the deep cronk + bell + hollow knock | 100 | Summer Heart / Common Raven |
-| **101** | **the kinetic surge / the coordinated duet** | **101** | **Hecuba / Common Raven Pair** |
-
-The acoustic progression adds degree 101. On the artist side, the kinetic surge (101) is Hecuba -- pounding beats, distorted synths, shouted vocals, relentless forward momentum, raw production. E=5. From the nostalgic cascade (100, flowing, warm, golden, E=4) to the kinetic surge (101, propulsive, hot, physical, E=5). Maximum contrast between consecutive degrees. The centennial's golden warmth gives way to the post-centennial's raw voltage. On the species side, the coordinated duet (101) is the Common Raven pair -- synchronized calling, alternating patterns, harmonic interplay, territorial display. E=5. From the solo raven's 30+ call types (100, individual complexity, E=4) to the pair's coordinated duet (101, paired synchronization, E=5). The species-pair completes. Individual becomes pair.
-
-## Artist-City Patterns (102 patterns)
-
-| # | Pattern | Degree | Artist |
-|---|---------|--------|--------|
-| 0 | Export | 0 | Quincy Jones |
-| 1 | Draw | 1 | Bill Frisell |
-| 2 | European Exile | 2 | Wayne Horvitz |
-| 3 | The Stay | 3 | Ernestine Anderson |
-| 4 | The Teacher | 4 | Floyd Standifer |
-| 5 | The Persistence | 5 | Overton Berry |
-| 6 | The Erasure | 6 | Patti Bown |
-| 7 | Pedagogue-Draw | 7 | Julian Priester |
-| 8 | The Quiet Draw | 8 | Gary Peacock |
-| 9 | The Seeker | 9 | Hadley Caliman |
-| 10 | Late Homestead | 10 | Bud Shank |
-| 11 | The Salon Keeper | 11 | Joe Brazil |
-| 12 | The Prodigal | 12 | Don Lanphere |
-| 13 | Institutional Anchor | 13 | Marc Seales |
-| 14 | Prodigy-Export | 14 | Aaron Parks |
-| 15 | Builder-Stayer | 15 | Thomas Marriott |
-| 16 | Talent Incubator | 16 | Jeff Lorber |
-| 17 | The Uncategorizable | 17 | Reggie Watts |
-| 18 | The Workshop | 18 | Maktub |
-| 19 | The New Root | 19 | Fly Moon Royale |
-| 20 | The Street Laureate | 20 | Whitney Monge |
-| 21 | The Ensemble Anchor | 21 | Polyrhythmics |
-| 22 | The Inheritor | 22 | Foxy Apollo |
-| 23 | The Rural Draw | 23 | Allen Stone |
-| 24 | The Island Export | 24 | Ron Artis II |
-| 25 | The Cultural Guardian | 25 | Black Stax |
-| 26 | The Transmuter | 26 | Shaina Shepherd |
-| 27 | The Conduit | 27 | The Dynamics |
-| 28 | The Resident Band | 28 | Night Owls |
-| 29 | The Catalog | 29 | Boogaloo Joe Jones |
-| 30 | The Incubation | 30 | Ray Charles |
-| 31 | The Relay | 31 | Brenda Lee Eager |
-| 32 | The Foundation | 32 | Luther Rabb |
-| 33 | The Unrecorded | 33 | Larry English |
-| 34 | The Shadow Name | 34 | The Tempos |
-| 35 | The Deep Root | 35 | Robert Cray |
-| 36 | The Supernova | 36 | Jimi Hendrix |
-| 37 | The Inheritor | 37 | Ayron Jones |
-| 38 | The Touring Anchor | 38 | Booker T. Jones |
-| 39 | The Returning Wave | 39 | Ron Artis Jr |
-| 40 | The Cultural Satellite | 40 | Alice Smith |
-| 41 | The Scene Native | 41 | Shawn Smith |
-| 42 | The Gospel Export | 42 | Erica Campbell |
-| 43 | The Arena Architect | 43 | Ann Wilson |
-| 44 | The Digital Immigrant | 44 | Chong the Nomad |
-| 45 | The Stripped Murmur | 45 | Damien Jurado |
-| 46 | The Confessional Drifter | 46 | Rocky Votolato |
-| 47 | The Sacred Baritone | 47 | Pedro the Lion |
-| 48 | The Campfire Anchor | 48 | Sera Cahoone |
-| 49 | The Trojan Lullabist | 49 | Kimya Dawson |
-| 50 | The Intimate Architect | 50 | Mirah |
-| 51 | The Folk Organism | 51 | Grand Archives |
-| 52 | The Arena Breakout | 52 | Brandi Carlile |
-| 53 | The Prodigy Return | 53 | Fleet Foxes |
-| 54 | The Neighborhood Anchor | 54 | Ivan & Alyosha |
-| 55 | The Infrastructure Beneficiary | 55 | Shelby Earl |
-| 56 | The Duo Collective | 56 | Lemolo |
-| 57 | The Label Bridge | 57 | Laura Gibson |
-| 58 | The Bellingham Ascent | 58 | Death Cab for Cutie |
-| 59 | The Scene Intellectual | 59 | The Long Winters |
-| 60 | The Frontman Alone | 60 | Ben Gibbard (solo) |
-| 61 | The Corridor Bridge | 61 | Y La Bamba |
-| 62 | The Brief Blaze | 62 | Pickwick |
-| 63 | The Everett Departure | 63 | Kenny Loggins |
-| 64 | The Dark-Folk Loner | 64 | Jesse Sykes |
-| 65 | The Montana Connection | 65 | Philip Aaberg |
-| 66 | The Wanderer Who Claims Multiple Cities | 66 | Neko Case |
-| 67 | The Departed Member | 67 | Chris Walla |
-| 68 | The Visiting Artist | 68 | Sam Beam |
-| 69 | The Working Musician | 69 | Kris Orlowski |
-| 70 | The Corridor Wanderer | 70 | Horse Feathers |
-| 71 | The Anacortes Hermit | 71 | Phil Elverum |
-| 72 | The International Student | 72 | Briana Marela |
-| 73 | The K Records Collective | 73 | LAKE |
-| 74 | The Side Project | 74 | Poor Moon |
-| 75 | The Second Anacortes Act | 75 | The Lonely Forest |
-| 76 | The Identity Artist | 76 | Chris Pureka |
-| 77 | The YouTube-to-Artist Pipeline | 77 | Mree |
-| 78 | The Porch Party | 78 | Acid Tongue |
-| 79 | The Dark Meditation | 79 | Jesse Marchant |
-| 80 | The Married Duo | 80 | Mates of State |
-| 81 | The Crossover Arc | 81 | Sara Bareilles |
-| 82 | The Recursive Return | 82 | Death Cab for Cutie (acoustic) |
-| 83 | The Arena Unplugged | 83 | Pearl Jam (acoustic) |
-| 84 | The Artist Arc | 84 | Damien Jurado (late career) |
-| 85 | The Confessional Return | 85 | Rocky Votolato (acoustic) |
-| 86 | The Side Project | 86 | The Postal Service |
-| 87 | The Early Chapter | 87 | Neko Case (early folk) |
-| 88 | The Solo Distillation | 88 | Kimya Dawson (solo) |
-| 89 | The Theatrical Outsider | 89 | Parenthetical Girls |
-| 90 | The Parallel Scene | 90 | Sky Cries Mary |
-| 91 | The Spousal Satellite | 91 | Hovercraft |
-| 92 | The Cross-Pollinator | 92 | Trance Mission |
-| 93 | The Intimate Machine | 93 | NAVVI |
-| 94 | The Cross-Genre Bridge | 94 | Erik Blood |
-| 95 | The Bellingham Pipeline | 95 | ODESZA |
-| 96 | The DIY Maximalist | 96 | STRFKR |
-| 97 | The Re-Contextualized Return | 97 | The Postal Service (electronic) |
-| 98 | The Self-Released Synthesist | 98 | Gold Casio |
-| 99 | The Diasporic Synthesist | 99 | Kaina |
-| 100 | The Transatlantic Dreamer | 100 | Summer Heart |
-| **101** | **The Dance Floor Provocateur** | **101** | **Hecuba** |
-
-One hundred and two named patterns across one hundred and two degrees. The Dance Floor Provocateur (101) describes the duo that treats the dance floor as confrontation, performance art, and physical provocation. From the Transatlantic Dreamer (100, continental bridge, warmth, nostalgia) to the Dance Floor Provocateur (101, local, physical, confrontational). Continental warmth vs dance floor heat. The post-centennial pattern pivots from international scope to local intensity.
-
-## Genre Evolution (83 stages)
-
-| Stage | Degree | Genre | Artist |
-|-------|--------|-------|--------|
-| 27 | 45 | Folk | Damien Jurado |
-| 28 | 46 | Folk | Rocky Votolato |
-| 29 | 47 | Indie Folk | Pedro the Lion |
-| 30 | 48 | Folk | Sera Cahoone |
-| 31 | 49 | Folk Punk | Kimya Dawson |
-| 32 | 50 | Indie Folk | Mirah |
-| 33 | 51 | Indie Folk | Grand Archives |
-| 34 | 52 | Folk/Rock | Brandi Carlile |
-| 35 | 53 | Indie Folk | Fleet Foxes |
-| 36 | 54 | Folk | Ivan & Alyosha |
-| 37 | 55 | Singer-Songwriter | Shelby Earl |
-| 38 | 56 | Indie Folk | Lemolo |
-| 39 | 57 | Folk | Laura Gibson |
-| 40 | 58 | Indie Rock | Death Cab for Cutie |
-| 41 | 59 | Indie Rock | The Long Winters |
-| 42 | 60 | Folk | Ben Gibbard (solo) |
-| 43 | 61 | Folk/Indie | Y La Bamba |
-| 44 | 62 | Indie/Folk | Pickwick |
-| 45 | 63 | Soft Rock/Folk | Kenny Loggins |
-| 46 | 64 | Folk | Jesse Sykes |
-| 47 | 65 | New Age/Folk | Philip Aaberg |
-| 48 | 66 | Alt Country | Neko Case |
-| 49 | 67 | Indie/Folk | Chris Walla |
-| 50 | 68 | Folk | Sam Beam |
-| 51 | 69 | Singer-Songwriter | Kris Orlowski |
-| 52 | 70 | Indie Folk | Horse Feathers |
-| 53 | 71 | Indie/Folk | Phil Elverum |
-| 54 | 72 | Art Pop | Briana Marela |
-| 55 | 73 | Indie Pop | LAKE |
-| 56 | 74 | Indie Folk/Rock | Poor Moon |
-| 57 | 75 | Indie Pop | The Lonely Forest |
-| 58 | 76 | Folk | Chris Pureka |
-| 59 | 77 | Folk/Pop | Mree |
-| 60 | 78 | Folk/Indie | Acid Tongue |
-| 61 | 79 | Folk | Jesse Marchant |
-| 62 | 80 | Indie Pop | Mates of State |
-| 63 | 81 | Pop/Soul | Sara Bareilles |
-| 64 | 82 | Indie Folk | Death Cab for Cutie (acoustic) |
-| 65 | 83 | Acoustic Rock | Pearl Jam (acoustic) |
-| 66 | 84 | Folk | Damien Jurado (late career) |
-| 67 | 85 | Folk | Rocky Votolato (acoustic) |
-| 68 | 86 | Indie Electronic | The Postal Service |
-| 69 | 87 | Folk Country | Neko Case (early folk) |
-| 70 | 88 | Lo-Fi Folk | Kimya Dawson (solo) |
-| 71 | 89 | Avant-Pop | Parenthetical Girls |
-| 72 | 90 | Ethereal/Electronic | Sky Cries Mary |
-| 73 | 91 | Drone/Noise | Hovercraft |
-| 74 | 92 | World/Electronic | Trance Mission |
-| 75 | 93 | Dream Pop/Electronic | NAVVI |
-| 76 | 94 | Electronic/Experimental | Erik Blood |
-| 77 | 95 | Electronic | ODESZA |
-| 78 | 96 | Indie Electronic | STRFKR |
-| 79 | 97 | Indie Electronic | The Postal Service (electronic) |
-| 80 | 98 | Indie Electronic | Gold Casio |
-| 81 | 99 | Electronic/R&B | Kaina |
-| 82 | 100 | Electronic Pop | Summer Heart |
-| **83** | **101** | **Dance/Electronic** | **Hecuba** |
-
-Genre Stage 83 -- Dance/Electronic at degree 101. Post-centennial. Eighty-three genre stages in 101 degrees. Twelfth electronic-adjacent entry in sixteen degrees. Hecuba's Dance/Electronic is distinct from all prior electronic entries -- confrontational, punk-inflected, dance-floor-focused. The electronic era continues to differentiate without repetition.
-
-## Energy Distribution
-
-**Artist-side (after degree 101):** E1:3 (2.9%), E2:31 (30.4%), E3:27 (26.5%), E4:26 (25.5%), E5:14 (13.7%), E6:2 (2.0%). Total: 102 (degrees 0-101). E=5 gains Hecuba (101) reaching 14 deployments. E=5 returns for the first time since STRFKR (96) -- five degrees between E=5 entries.
-
-**Species-side (after degree 101):** E=5 for Common Raven pair (101) after Common Raven (100, E=4). The species-pair energy progression: solo at E=4, pair at E=5. Two synchronized voices exceed one complex voice. The Corvidae run opens at matched E=4 (100) then escalates to E=5 (101).
-
-## Cross-References (Combined)
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| S36-095 | Hecuba (101) | ODESZA (95) | E=5 ELECTRONIC. Both E=5 electronic. Arena vs dance floor. Cinematic vs physical. |
-| S36-096 | Hecuba (101) | STRFKR (96) | E=5 ELECTRONIC. Both E=5, synth-driven, punk energy. Joy vs provocation. |
-| S36-091 | Hecuba (101) | Hovercraft (91) | AGGRESSIVE ELECTRONIC. Both confrontational. Noise vs dance. Ear vs body. |
-| S36-080 | Hecuba (101) | Mates of State (80) | E=5 DUOS. Both E=5, both duos. Indie pop vs dance provocation. Same voltage. |
-| S36-094 | Hecuba (101) | Erik Blood (94) | EXPERIMENTAL ELECTRONIC. Both pushing electronic boundaries from Seattle. Different directions. |
-| SPS-100 | Common Raven pair (101) | Common Raven (100) | SPECIES PAIR! Solo 30+ call types E=4. Pair coordinated duet E=5. Third species-pair. |
-| SPS-053 | Common Raven pair (101) | Steller's Jay (53) | CORVIDAE FAMILY. Jay introduced at 53. Raven pair at 101 is second consecutive. |
-| SPS-021/022 | Common Raven pair (101) | Northern Flicker (21-22) | SPECIES-PAIR PRECEDENT. First species-pair. Same pattern recurs. |
-| SPS-061/062 | Common Raven pair (101) | American Beaver (61-62) | SPECIES-PAIR PRECEDENT. Second species-pair. Three species-pairs in 101 degrees. |
-| SPS-004 | Common Raven pair (101) | Northern Spotted Owl (4) | TERRITORIAL PAIRS. Both pair-bonded mates duetting for territory. Quiet vs loud. |
-
-## Infrastructure
-
-**Part A:** `www/tibsfox/com/Research/S36/research/releases/101-hecuba/` -- research.md, index.html, knowledge-nodes.json, retrospective.md
-**Part B:** `www/tibsfox/com/Research/SPS/research/releases/101-raven-pair/` -- research.md, index.html, knowledge-nodes.json, retrospective.md
-**Release notes:** `docs/release-notes/v1.49.241/README.md`
-
-**Total: 8 files** -- standard degree package.
-
----
+- **The third species-pair and the second consecutive Corvidae.** **Degree 101** is a species-pair entry — the same species as **degree 100** with a different acoustic framing. The solo **Common Raven** at degree 100 (E=4, thirty-plus call types, individual complexity) becomes the **Common Raven pair** at degree 101 (E=5, coordinated duet, paired synchronization). The species-pair is the third in the engine after the **Northern Flicker** at **degrees 21–22** (solo drumming to duet drumming) and the **American Beaver** at **degrees 61–62** (tail-slap to rhythmic chewing). The raven pair is also the second consecutive **Corvidae** entry — the family that entered at the centennial is not passing through but establishing territory.
+- **Species-pair as structural device.** Three species-pairs across one hundred and one degrees: **Northern Flicker** (Picidae, drumming solo to drumming duet), **American Beaver** (Castoridae, tail-slap to rhythmic gnaw), and **Common Raven** (Corvidae, solo voice to coordinated duet). Same structural device — same species, consecutive degrees, different acoustic behavior — deployed across radically different taxa. Each pair deepens its species without repeating its content. The raven pair extends the pattern into the post-centennial era.
+- **Corvidae deepens — second consecutive.** **Steller's Jay** (*Cyanocitta stelleri*) at **degree 53** was the engine's first corvid, introducing Corvidae with a bright, loud, forest-sentinel voice. The **Common Raven** at **degree 100** declared the family forty-seven degrees later with a deep, complex, commanding solo presence. The **Common Raven pair** at **degree 101** makes Corvidae consecutive — the family establishes itself as a post-centennial force rather than a one-off entry. **Kingdom:** Animalia. **Phylum:** Chordata. **Class:** Aves. **Order:** Passeriformes. **Family:** Corvidae (second consecutive). **Genus:** *Corvus*. **Species:** *C. corax* (second consecutive degree).
+- **Coordinated duet vocalizations — 101st species-side acoustic element.** **Synchronized calling** (male and female in tight temporal coordination with millisecond-level precision, the pair's voices locked together as if a single throat were producing both); **alternating patterns** (male call followed by female response, continuous display sustained across minutes); **harmonic interplay** (deeper male voice and higher female voice creating a richer combined sound than either individual could produce); **mutual display behaviors** (coordinated head-bobbing, wing-spreading, puffed throat at territorial boundaries). The duet is **primarily territorial** — pair-bond strength declaration, territory occupancy signaling, defense capability advertisement. Distinct from the **solo voice with thirty-plus call types** at **degree 100** (individual complexity, E=4), distinct from the **deep cronk** baseline vocalization used as territorial alert, distinct from **gargling** (intimate social between paired mates without display).
+- **Why E=5 for the pair.** **Two synchronized voices** (louder than one through amplitude summation, but more so through perceptual coordination — the brain parses two synchronized voices as a single large signal rather than as two independent signals); **synchronization amplifies impact** (coordinated bursts hit harder than random bursts of equal total energy); **greater persistence through alternation** (the pair can sustain duet across minutes by alternating while individual calls tire the caller); **territorial force exceeds single voice** (rival ravens in the area perceive pair-bonded territory rather than individual territory, and pair-bonded territory is defended more effectively than individual territory). The solo raven at E=4 understated its presence through complexity; the pair at E=5 overstates its presence through coordination.
+- **Ecology — lifelong pair-bonds and territorial defense.** **Lifelong pair bonds** (10–15+ years, often life-long until one mate dies); **mutual investment** (both mates build the nest, both incubate, both feed the young); **year-round territory defense** (Corvidae pair-bonds persist beyond breeding season, unlike many songbirds); **coordinated foraging** (the pair hunts, caches, and retrieves together); **cooperative predator mobbing** (the pair coordinates defensive attacks against hawks, owls, and other threats); **aerial acrobatics in tandem** (courtship and bond-maintenance displays involve synchronized aerial maneuvers). The raven pair is more effective than two individuals — a structural fact that the duet's acoustic force merely makes audible.
+- **Pair-bonded vocal exchange as cultural transmission.** The pair's duet encodes **cultural information** — vocal dialects unique to the pair, novel vocal elements invented and shared between mates, rhythmic patterns refined over years of duetting. Raven pairs transmit not just territorial signals but **acquired vocal culture**, and the duet is the medium. This extends the centennial's introduction of the solo raven's **cultural transmission** capability into the paired domain — where the solo raven transmits between individuals and generations, the paired raven transmits between mates as well.
+- **Contrast with solo raven (100) and Steller's Jay (53).** The solo raven at degree 100 carried the raven's individual signature — thirty-plus call types, tool use, cultural transmission, intelligence approaching theory of mind — through a single voice at E=4. The raven pair at degree 101 carries the raven's paired signature — synchronized duet, coordinated territorial defense, pair-bonded cultural transmission — through two voices at E=5. The **Steller's Jay** at **degree 53** introduced Corvidae forty-eight degrees earlier with a bright, loud, forest-sentinel voice at E=4 — same family, radically different species, different acoustic posture. The raven pair extends and deepens what the Jay began.
+- **Forty-first consecutive original CSV — POST-CENTENNIAL RELIABILITY.** The solo raven at degree 100 was the fortieth consecutive original CSV species (FOUR DECADES streak). The raven pair at degree 101 extends the streak to forty-one consecutive degrees without substitution or correction, **degrees 61–101 unbroken**. The source catalog continues to deliver past the centennial, and the reliability streak enters its post-centennial life as a defining property rather than a coincidence.
+- **The Raven muse deepens.** The solo raven at the centennial arrived as a personal significance moment — the **Raven muse** connection to the project made explicit at the hundredth degree. The raven pair at the post-centennial degree deepens that moment — the muse is not a one-off centennial marker but a sustained presence that the pair extends into the post-centennial era. The structural species-pair design allows the muse to occupy two consecutive degrees rather than a single milestone.
+- **Territorial pair-bond as trans-taxonomic pattern.** Pair-bonded territorial duetting occurs across multiple orders and classes. The **Northern Spotted Owl** pair at **degree 4** (Strigiformes, nocturnal, quiet, resonant) and the **Common Raven** pair at **degree 101** (Passeriformes, diurnal, loud, complex) represent opposite ends of the avian pair-duet spectrum — same behavioral structure (mated pair duetting for territorial defense), radically different acoustic signatures. The trans-taxonomic pattern is one of the engine's deeper structural findings, now documented with two data points ninety-seven degrees apart.
 
 ## Retrospective
 
-**What Worked:**
-1. The post-centennial opening at E=5 on both sides creates maximum contrast with the centennial's E=4 matched energy -- the engine pivots from warmth to force
-2. Both sides being duos creates the strongest Part A / Part B parallel since the species-pair concept was established -- electronic duo and biological duo, both territorial, both E=5
-3. The species-pair structure (third in engine) deepens the raven's presence without repeating the centennial entry -- solo voice becomes coordinated pair, individual complexity becomes paired synchronization
-4. Second consecutive Corvidae (100-101) establishes the corvids as a post-centennial force -- Corvidae is not passing through, it is establishing territory
-5. The kinetic surge (102nd acoustic element) provides maximum contrast with the nostalgic cascade (101st) -- flowing golden warmth vs raw physical voltage
+### What Worked
 
-**What Could Be Better:**
-1. Still no raptor in 102 entries -- the absence persists
-2. No marine species -- 102 entries without a marine specialist
-3. Electronic dominance continues (12 of 16 entries since degree 86) -- genre diversity may need attention
+- **The post-centennial opening at matched E=5 creates maximum contrast with the centennial's matched E=4.** The engine pivots from warmth to force across a single degree boundary. The deliberate inversion signals that the post-centennial era is not a coast but a continuation — the engine has more voltage to deliver past the centennial than it delivered at the centennial itself.
+- **Both sides being duos creates the strongest Part A / Part B structural parallel since the species-pair concept was established.** Electronic duo (Hecuba) and biological duo (Common Raven pair) mirror each other at the structural level rather than merely the thematic level — both create sound through coordination between two entities, both claim space through coordinated acoustic display, both land at E=5. The Part A / Part B coupling is tighter at degree 101 than at many earlier degrees.
+- **The species-pair structure (third in engine) deepens the raven's presence without repeating the centennial entry.** Solo voice at degree 100 becomes coordinated pair at degree 101. Individual complexity becomes paired synchronization. The species-pair concept — same species, consecutive degrees, different acoustic framing — continues to prove generative across radically different taxa (Picidae 21–22, Castoridae 61–62, Corvidae 100–101).
+- **Second consecutive Corvidae establishes the corvid family as a post-centennial force.** Corvidae is not passing through. Steller's Jay introduced; the solo raven declared; the raven pair deepens. The family now holds two consecutive degrees of engine presence, signaling that the post-centennial era will continue to explore corvid richness.
+- **The kinetic surge (102nd acoustic element) provides maximum contrast with the nostalgic cascade (101st).** Flowing golden warmth gives way to raw physical voltage across a single degree boundary. The contrast is sharper than many within-quadrant transitions and demonstrates that the acoustic catalog retains capacity for maximum-contrast neighbors even at the centennial boundary.
+- **The Dance Floor Provocateur (102nd artist-city pattern) returns the engine to localized Seattle scene.** Degrees 99 (Kaina, diasporic) and 100 (Summer Heart, transatlantic) expanded to international scope. Degree 101 (Hecuba, local DIY duo) returns to physical Seattle. The post-centennial begins with a recenter on the city rather than an expansion away from it.
+- **E=5 returns after a five-degree gap (STRFKR at degree 96).** The gap was long enough that E=5 reads as a deliberate choice rather than a routine recurrence. Hecuba's E=5 at the post-centennial opening creates energy-distribution news on the artist side that aligns with the structural news on the species side (paired E=5).
+- **Forty-first consecutive original CSV extends the FOUR DECADES streak into the post-centennial.** The reliability streak is no longer a centennial achievement but a sustained property of the engine. The source catalog continues to deliver without substitution or correction.
+- **Coordinated duet vocalizations name a structural acoustic behavior rather than a species sound.** The acoustic element is about two voices coordinating rather than about any particular raven call. This opens the acoustic taxonomy to a new dimension — behaviors that only exist at the paired level — which the species-pair structure is uniquely positioned to document.
+
+### What Could Be Better
+
+- **Still no raptor in 102 entries.** The absence of birds of prey (Accipitridae, Falconidae, Strigidae except the lone Northern Spotted Owl at degree 4, Tytonidae) across 102 entries persists past the centennial. The second consecutive Corvidae addresses corvid presence but raptors remain conspicuously absent. A diurnal raptor is overdue.
+- **No marine species in 102 entries.** The **Pacific Northwest's** marine ecosystem (**Salish Sea**, **Olympic Coast**, **Puget Sound** proper) remains unrepresented. Harbor seal, orca, sea lion, common loon, marbled murrelet — none have appeared. The centennial did not correct this, and the first post-centennial degree also did not correct it. For an engine titled around **Puget Sound**, the marine omission is now at its longest gap.
+- **Electronic dominance continues — twelve of sixteen entries since degree 86.** The electronic era is deep and varied, but genre diversity across the post-centennial may need deliberate rebalancing. The engine may benefit from a deliberate return to non-electronic territory in the degrees immediately ahead.
+- **Hecuba's discography not exhaustively analyzed.** Specific releases, year-by-year evolution, and individual track analysis were treated structurally rather than catalogued album-by-album. A discography deep-dive could be a future research artifact.
+- **The species-pair structure risks becoming a default rather than an exception.** Three species-pairs in 101 degrees is still rare (roughly 3%), but the post-centennial appearance of Corvidae in consecutive degrees, following patterns at Northern Flicker and American Beaver, may signal that species-pairs are approaching routine status. Future degrees should be deliberate about deploying the device only when the acoustic framing is substantively different rather than merely incremental.
 
 ## Lessons Learned
 
-1. Species-pairs are a powerful structural tool -- same species, consecutive degrees, different acoustic behavior. Three species-pairs in 101 degrees (flicker, beaver, raven) across different taxa. The pattern recurs naturally
-2. E=5 on both sides of a degree creates intensity that matched E=4 cannot. The post-centennial needed to pivot from the centennial's warmth -- E=5 achieves this cleanly
-3. The duo parallel (electronic duo + biological pair) demonstrates how Part A / Part B can mirror at the structural level, not just the thematic level. Both create through coordination what neither entity could produce alone
-4. Second consecutive Corvidae begins to test whether same-family runs sustain interest. The species-pair structure (same species, different framing) keeps 101 fresh despite sharing the raven with 100
-5. Twelve electronic-adjacent entries in sixteen degrees is the densest genre run in the engine. Each entry differentiates -- the electronic era maps the full spectrum without repetition
+1. **Milestone degrees cast shadows forward.** The centennial at degree 100 landed as a triple-convergence moment (Corvidae entering, Aves returning, centennial itself). Degree 101 demonstrates that milestone shadows extend forward — the species-pair structure allows the centennial's raven to continue at the first post-centennial degree, and the matched-E=5 pairing inverts the centennial's matched-E=4 to create an energy arc across the centennial boundary. Future milestones can be planned not just for the milestone degree but for the immediately adjacent degrees as well.
+2. **Species-pairs across radically different taxa validate the structural device.** Three species-pairs in 101 degrees — Picidae (21–22), Castoridae (61–62), and Corvidae (100–101) — span drumming birds, semi-aquatic rodents, and intelligent passerines. The structural device (same species, consecutive degrees, different acoustic framing) works because each pair framings two substantively different acoustic behaviors rather than two incremental variations. Future species-pair candidates must pass the substantive-difference test.
+3. **Matched-energy degree pairings deliver different messages at different energy levels.** Matched E=4 at the centennial (Summer Heart + Common Raven) signaled warmth, contemplation, and mature identity. Matched E=5 at degree 101 (Hecuba + Common Raven pair) signals force, territoriality, and coordinated intensity. The matched-energy device is flexible across the energy scale — the message comes from the energy level, not from the matching.
+4. **The duo parallel mirrors Part A / Part B at the structural level rather than the thematic level.** Hecuba is a two-person electronic duo; the Common Raven pair is a two-bird territorial display unit. Both create sound through coordination between two entities. The parallel is not about electronic music matching bird song — it is about two-entity coordination as a trans-substrate principle. Future degree pairings can seek structural parallels at higher orders of abstraction than thematic resonance.
+5. **Twelve electronic-adjacent entries in sixteen degrees continues to differentiate.** The electronic era of Quadrant II has mapped pop structure, atmosphere, obliteration, intimacy, experimentation, euphoria, pulse, tenderness, nostalgia, cultural fusion, golden cascade, and now kinetic surge without architectural repetition. The lesson — that a single substrate can sustain deep mapping if the engine selects for differentiation — is now demonstrated across twelve consecutive attempts. Future genre clusters can be measured against this differentiation depth.
+6. **Second consecutive same-family entries require different acoustic framings to earn their place.** Corvidae at degrees 100 and 101 works because the solo raven (30+ call types, individual complexity, E=4) and the raven pair (coordinated duet, paired synchronization, E=5) occupy substantively different acoustic territory. If the second entry merely recapitulated the first, the sequence would read as repetition. The species-pair discipline enforces substantive difference, and the post-centennial opening validates the discipline.
+7. **The Raven muse connection sustains across the centennial boundary.** The solo raven at degree 100 and the raven pair at degree 101 together make the Raven muse a two-degree presence rather than a single-milestone marker. Personal significance alignments can extend across multiple degrees when the structural device (species-pair) permits it. Future muse alignments can be planned for extended presence rather than single-degree arrival.
+8. **Forty-first consecutive original CSV signals post-centennial data reliability.** The FOUR DECADES streak at the centennial was a reliability achievement; the forty-first degree at the post-centennial is a reliability property. The source catalog's continued delivery past the centennial boundary proves that the reliability is structural rather than anniversary-dependent. Future degrees can lean confidently on the original catalog because empirical reliability now spans eleven quadrant threshold crossings.
+9. **Pair-bond territoriality is a trans-taxonomic acoustic pattern worth documenting across the full series.** The Northern Spotted Owl pair at degree 4 (nocturnal, quiet, resonant) and the Common Raven pair at degree 101 (diurnal, loud, complex) represent opposite ends of the avian pair-duet spectrum. Two data points ninety-seven degrees apart suggest that future pair-duet species entries (potentially Western Screech-Owl, Great Horned Owl pair, Sandhill Crane pair) can be classified by their position within the documented spectrum. Trans-taxonomic patterns mature across long degree spans.
+10. **Post-centennial pivots work best when they invert rather than continue the centennial's tone.** Summer Heart's golden cascade at degree 100 sat at moderate warmth; Hecuba's kinetic surge at degree 101 sits at maximum force. The inversion creates narrative energy that a centennial-continuation approach would have dissipated. Future centennial-boundary pairings can deliberately seek inversion as a structural strategy.
 
----
+## Cross-References
 
-THE POST-CENTENNIAL. The kinetic surge and the duet. Degree 101 opens the post-centennial era at maximum volume.
+| Connection | From | To | Nature |
+|------------|------|-----|--------|
+| S36-100 | Hecuba (101) | Summer Heart (100) | POST-CENTENNIAL CONTRAST — CONSECUTIVE. Summer Heart is warm nostalgic cascade at E=4 (dream-pop-influenced electronic pop, transatlantic, golden aesthetic). Hecuba is raw kinetic surge at E=5 (dance/electronic, Seattle-local, confrontational). Maximum contrast across the centennial boundary. Same broad substrate (electronic), radically different dresses. |
+| S36-099 | Hecuba (101) | Kaina (99) | ELECTRONIC ENERGY CONTRAST — TWO BACK. Both electronic entries. Kaina is Electronic/R&B at E=4 (cultural fusion, bilingual, present-focused). Hecuba is Dance/Electronic at E=5 (confrontational, shouted, relentless). Warmth vs force separated by the centennial. |
+| S36-098 | Hecuba (101) | Gold Casio (98) | SELF-RELEASED ELECTRONIC — CONTRAST. Both self-released electronic. Gold Casio is retro-synthetic shimmer at E=3 (static nostalgia, vintage reference). Hecuba is kinetic surge at E=5 (physical, forward, confrontational). Static vs kinetic. |
+| S36-096 | Hecuba (101) | STRFKR (96) | E=5 ELECTRONIC ENERGY RECURRENCE. Both E=5, synth-driven, with punk sensibility. STRFKR is joyful synth-pop pulse (Polyvinyl, driving). Hecuba is confrontational dance provocation (self-released, shouting). First E=5 since STRFKR after five-degree gap. Joy vs provocation at the same voltage. |
+| S36-095 | Hecuba (101) | ODESZA (95) | E=5 ELECTRONIC ARENA CONTRAST. Both E=5 electronic. ODESZA is cinematic, festival-scale (Counter Records, Bellingham pipeline, euphoric build). Hecuba is confrontational, dance-floor-scale (self-released, Seattle, kinetic surge). Arena vs dance floor, cinematic vs physical. |
+| S36-094 | Hecuba (101) | Erik Blood (94) | EXPERIMENTAL ELECTRONIC PARALLEL. Both experimental electronic from Seattle. Erik Blood is layered, atmospheric, producer-oriented (electronic/experimental). Hecuba is raw, physical, performance-oriented (dance/electronic). Different directions in Seattle electronic. |
+| S36-091 | Hecuba (101) | Hovercraft (91) | CONFRONTATIONAL ELECTRONIC PARALLEL. Both confrontational electronic. Hovercraft is noise-electronic, ear-as-target (sustained crush, drone/noise, E=5). Hecuba is dance-electronic, body-as-target (kinetic surge, dance/electronic, E=5). Both aggressive, different vectors. |
+| S36-086 | Hecuba (101) | The Postal Service (86) | ELECTRONIC ERA ENTRY VS EXTENSION. The Postal Service introduced the electronic era at degree 86 (Electronic Pop, Sub Pop, glitch-pop structure). Hecuba extends it at degree 101 (Dance/Electronic, self-released, confrontational). Fifteen-degree span of electronic era. Twelfth of sixteen degrees electronic-adjacent. |
+| S36-080 | Hecuba (101) | Mates of State (80) | E=5 DUO PARALLEL. Both E=5, both duos. Mates of State channels through indie pop (organ explosion, married duo, E=5). Hecuba channels through dance provocation (kinetic surge, Seattle duo, E=5). Same voltage, same format, different genres. Two E=5 duos twenty-one degrees apart. |
+| SPS-100 | Common Raven pair (101) | Common Raven (100) | SPECIES PAIR — SAME SPECIES CONSECUTIVE. Solo raven at E=4 with 30+ call types and individual complexity. Raven pair at E=5 with coordinated duet and paired synchronization. Third species-pair in the engine. Same species, consecutive degrees, different acoustic framing. |
+| SPS-053 | Common Raven pair (101) | Steller's Jay (53) | CORVIDAE FAMILY — SECOND CONSECUTIVE CORVID. Jay introduced Corvidae at degree 53 with forest-sentinel voice. Raven pair at degree 101 makes Corvidae second consecutive. Family establishing territory across forty-eight-degree arc. |
+| SPS-021 | Common Raven pair (101) | Northern Flicker (21) | SPECIES-PAIR PRECEDENT — SOLO ENTRY. First species-pair entry (Picidae, solo drumming). Same structural pattern recurs at raven solo (100). |
+| SPS-022 | Common Raven pair (101) | Northern Flicker (22) | SPECIES-PAIR PRECEDENT — PAIR ENTRY. First species-pair completion (Picidae, duet drumming). Same structural pattern as raven pair at 101. |
+| SPS-061 | Common Raven pair (101) | American Beaver (61) | SPECIES-PAIR PRECEDENT — SOLO ENTRY. Second species-pair entry (Castoridae, tail-slap). Shows pattern trans-taxonomic. |
+| SPS-062 | Common Raven pair (101) | American Beaver (62) | SPECIES-PAIR PRECEDENT — PAIR ENTRY. Second species-pair completion (Castoridae, rhythmic gnaw). Three species-pairs across 101 degrees span Picidae, Castoridae, Corvidae. |
+| SPS-004 | Common Raven pair (101) | Northern Spotted Owl (4) | TERRITORIAL PAIR VOCALIZATION PARALLEL. Both pair-bonded mates duetting for territorial defense. Owl pair quiet, resonant, nocturnal in old-growth forest. Raven pair loud, complex, diurnal in open forest. Opposite ends of avian pair-duet spectrum, same behavioral structure. Ninety-seven-degree span. |
+| SPS-060 | Common Raven pair (101) | Pied-billed Grebe (60) | AVES RETURN PERSISTS. Pied-billed Grebe was last bird before the forty-degree gap. Common Raven (100) returned Aves at centennial. Raven pair (101) makes Aves second consecutive at post-centennial. |
+| SPS-071 | Common Raven pair (101) | Red Fox (71) | INTELLIGENCE AND PAIR-BOND PARALLEL. Both among most intelligent animals in engine. Red Fox with solitary intelligence and seasonal pair bonds. Raven pair with year-round pair-bonds and coordinated cognition. Mammalian vs avian paired sociality. |
+| RES-raven-muse | Common Raven pair (101) | Raven muse | PROJECT CONNECTION — EXTENDED. The solo raven arrival at degree 100 extended by pair continuation at degree 101. Raven muse now occupies two consecutive degrees rather than single milestone. |
+| RES-pnw-indigenous | Common Raven pair (101) | PNW Indigenous mythology | CULTURAL CONTEXT — PAIR FORM. Raven pairs central to many Indigenous narratives (trickster partners, creator pair). Cultural significance deepened by pair presentation. |
 
-On the music side, Hecuba reaches Genre Stage 83 -- Dance/Electronic. A Seattle duo delivering confrontational, punk-inflected dance music. Pounding beats, distorted synths, shouted vocals, relentless tempo. The kinetic surge is the 102nd acoustic element -- physical, raw, forward. The dance floor provocateur is the 102nd artist-city pattern -- the duo that commands the floor. E=5 returns. Twelfth electronic entry. The post-centennial opens hot.
+## Engine Position
 
-On the species side, the Common Raven pair creates the third species-pair in the engine. Solo raven at 100 (E=4, 30+ call types). Raven pair at 101 (E=5, coordinated duet). The individual voice becomes the synchronized pair. Second consecutive Corvidae. Lifelong pair bonds. Territorial defense through coordinated vocal display. E=5 because two synchronized voices exceed one.
+- **Degree 101 of 360 — THE FIRST POST-CENTENNIAL DEGREE** — 28.1% of the circle traversed; the engine's first degree past the hundredth mark; eleventh degree of Quadrant II; post-centennial opening.
+- **Triple-digit counters advance.** The kinetic surge is the **102nd artist-side acoustic element**. The coordinated duet vocalizations is the **101st species-side acoustic element**. The Dance Floor Provocateur is the **102nd artist-city pattern**.
+- **Genre Stage 83 — Dance/Electronic.** Eighty-three genre stages in one hundred and one degrees (0.82 stages/degree). Genre stage rate stable across the post-centennial threshold.
+- **E=5 RETURNS on artist side — first since STRFKR degree 96.** Five-degree gap between E=5 artist entries. E=5 now holds 14 deployments (13.7% of artist entries after 101).
+- **SECOND CONSECUTIVE CORVIDAE (100-101).** Family establishing territory rather than passing through. Connects to Steller's Jay at degree 53 (first corvid, forty-eight-degree arc).
+- **THIRD SPECIES-PAIR IN ENGINE.** Northern Flicker (21-22), American Beaver (61-62), Common Raven (100-101). Three species-pairs across 101 degrees spanning Picidae, Castoridae, Corvidae.
+- **FORTY-FIRST CONSECUTIVE ORIGINAL CSV.** Degrees 61–101 without substitution or correction. Longest unbroken run of original-catalog selections in the engine, now extended past the centennial.
+- **Coordinated pair duet as species-side acoustic behavior.** Not a species sound but a structural behavior. Opens acoustic taxonomy to behaviors that only exist at the paired level.
+- **Electronic Era twelve-deep.** The Postal Service (86), Sky Cries Mary (90), Hovercraft (91), NAVVI (93), Erik Blood (94), ODESZA (95), STRFKR (96), The Postal Service electronic (97), Gold Casio (98), Kaina (99), Summer Heart (100), Hecuba (101). Twelve electronic-adjacent entries in sixteen degrees. Deepest sustained genre cluster in the engine, extended past the centennial.
+- **Energy distribution after degree 101 (artist-side):** E1:3 (2.9%), E2:31 (30.4%), E3:27 (26.5%), E4:26 (25.5%), E5:14 (13.7%), E6:2 (2.0%). Total: 102 entries (degrees 0–101 inclusive). **E=5 gains Hecuba** to reach 14 deployments. Matched-E=5 post-centennial (both sides at maximum).
+- **Four classes represented:** Aves (second consecutive 100-101), Mammalia, Insecta, Amphibia. Seventeen-plus orders. Forty-nine families.
+- **Raven muse two-degree presence.** Solo at 100, pair at 101. Personal significance extended across species-pair rather than single milestone.
+- **Matched-E=5 pairing at post-centennial.** Maximum contrast with matched-E=4 centennial. Energy arc across the centennial boundary from warmth to force.
+- **Outstanding gaps:** Zero raptors in 102 entries; zero marine species in 102 entries; electronic era dominance continues (twelve of sixteen entries since degree 86) — may need rebalancing in post-centennial degrees.
 
-Both duos. Both E=5. Both territorial. Electronic duo and biological duo. Synth voltage and vocal force. The post-centennial is hot, coordinated, and loud.
+## Files
 
-*Degree 101. Post-centennial. A pounding beat fills the dance floor -- distorted synths, shouted vocals, relentless forward momentum. The kinetic surge does not pause. Above the forest, two ravens call in synchronized territorial display -- male voice, female voice, interleaved, harmonic, commanding. The coordinated duet carries across the territory. Both duos. Both E=5. Both claiming space through coordinated sound. The dance floor provocateur and the territorial pair. The surge and the duet. The post-centennial opens at maximum volume.*
+- `docs/release-notes/v1.49.241/README.md` (this file, rewritten to A-grade per the PROSE rubric)
+- `docs/release-notes/v1.49.241/chapter/00-summary.md` — derived summary
+- `docs/release-notes/v1.49.241/chapter/03-retrospective.md` — retrospective
+- `docs/release-notes/v1.49.241/chapter/04-lessons.md` — extracted lessons (5 entries)
+- `docs/release-notes/v1.49.241/chapter/99-context.md` — context
+- `www/tibsfox/com/Research/S36/research/releases/101-hecuba/index.html` — Hecuba research page (441 lines)
+- `www/tibsfox/com/Research/S36/research/releases/101-hecuba/research.md` — Hecuba research (135 lines)
+- `www/tibsfox/com/Research/S36/research/releases/101-hecuba/knowledge-nodes.json` — Hecuba knowledge graph (98 lines)
+- `www/tibsfox/com/Research/S36/research/releases/101-hecuba/retrospective.md` — Hecuba retrospective (143 lines)
+- `www/tibsfox/com/Research/SPS/research/releases/101-raven-pair/index.html` — Common Raven pair research page (438 lines)
+- `www/tibsfox/com/Research/SPS/research/releases/101-raven-pair/research.md` — Common Raven pair research (133 lines)
+- `www/tibsfox/com/Research/SPS/research/releases/101-raven-pair/knowledge-nodes.json` — Common Raven pair knowledge graph (123 lines)
+- `www/tibsfox/com/Research/SPS/research/releases/101-raven-pair/retrospective.md` — Common Raven pair retrospective (104 lines)
 
-</details>
+Total: 69 files in the commit window (8 degree-101 research artifacts + 8 degree-102 pipeline artifacts + 53 hi-fi refinement files); degree-101 package is 8 core research artifacts.
