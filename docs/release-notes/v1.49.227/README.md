@@ -1,489 +1,168 @@
-# v1.49.227 -- Degree 87: Neko Case (Early Folk) + Cricket Chorus (Gryllidae)
+# v1.49.227 — Degree 87: Neko Case (Early Folk) + Cricket Chorus (Gryllidae)
 
 **Released:** 2026-04-01
 **Degree:** 87 of 360
-**Part A:** Neko Case (Early Folk) -- Folk Country, E=3, Bloodshot Records, FOURTH RETURN ARTIST (first appeared at degree 66 Alt Country E=4 Anti- Records, now early folk context E=3 Bloodshot Records, energy DECREASES E=4 to E=3 same direction as Death Cab return 82), GENRE STAGE 69 (Folk Country, distinguished from Alt Country at 66 by rawer traditional folk-country roots, Bloodshot Records insurgent country label, twang pedal steel honky-tonk), THE EMERGING TWANG 88th acoustic element (powerful voice not yet fully unleashed filtered through honky-tonk and folk-country structures, pedal steel twangy guitars country rhythms, the twang is emerging present but not dominant, the voice is remarkable but restrained), THE EARLY CHAPTER 88th artist-city pattern (return artist appearing in earlier context, formative years before mature work, engine encountered mature artist first now encounters the beginning, temporal movement to earlier era), THE BLOODSHOT RECORDS YEARS (The Virginian 1997 debut Furnace Room Lullaby 2000 transition album, Tacoma Washington via Chicago Illinois), RETURN ZONE DENSE (degrees 82 84 85 87 all returns, four returns in six degrees 82-87), Tacoma Washington / Chicago Illinois
-**Part B:** Cricket Chorus (Gryllidae) -- rhythmic chirp field chorus, E=4, dry meadow, Gryllidae, FIRST INSECT (Insecta ENTERS fourth class after Aves Mammalia Amphibia, class diversity accelerates 60 degrees for Aves 25 for Mammalia 1 for Amphibia now Insecta at 87, second consecutive class crossing 86-87), GRYLLIDAE NEW FAMILY (38th, true crickets, NEW ORDER Orthoptera crickets grasshoppers katydids, NEW CLASS Insecta, three taxonomic levels added in one entry), COLLECTIVE FIELD CHORUS (hundreds or thousands of male crickets stridulating simultaneously on summer nights, NOT one individual but the entire field singing together), DOLBEAR'S LAW (temperature-dependent chirp rate T(F) = N/4 + 40 where N = chirps per minute, Amos Dolbear 1897, living thermometer, unique in the engine), RHYTHMIC CHIRP FIELD CHORUS 88th species-side acoustic element (stridulation collective chorus retains rhythmic quality unlike treefrog wall-of-sound 86, pulsing rhythmic omnidirectional), E=4 THROUGH COLLECTIVE AMPLIFICATION (same mechanism as treefrog 86), BACK-TO-BACK CHORUS SPECIES (86-87 treefrog and cricket both collective breeding sounds both E=4 marsh and meadow amphibian and insect), TWENTY-SEVENTH CONSECUTIVE ORIGINAL CSV species (degrees 61-87)
-**Series:** Seattle 360 + Sound of Puget Sound -- Continuous Release Engine
+**Part A:** Neko Case (Early Folk) — Folk Country, E=3, Bloodshot Records, FOURTH RETURN ARTIST (66/87), Genre Stage 69, the emerging twang
+**Part B:** Cricket Chorus (*Gryllidae*) — rhythmic chirp field chorus, E=4, dry meadow, Gryllidae, FIRST INSECT in engine, INSECTA enters as fourth class
+**Series:** Seattle 360 + Sound of Puget Sound — Continuous Release Engine
 **Cluster:** Music (hub: WAL)
-**Note:** Part A brings **Neko Case** back as the **fourth return artist** -- first appeared at degree 66 (Alt Country, E=4, Anti- Records) and now returns in her early folk context (Folk Country, E=3, Bloodshot Records). The energy **decreases** from E=4 to E=3 -- the same direction as Death Cab's return (E=4 to E=3 at degree 82). The Bloodshot Records years are the seed: *The Virginian* (1997) is a folk-country debut with twang, pedal steel, and honky-tonk structures. *Furnace Room Lullaby* (2000) begins the transition toward the expansive sound that would define her Anti- Records work. The voice is already remarkable but not yet deployed at full power. **Genre Stage 69** -- Folk Country, distinguished from Alt Country (66) by rawer, more traditional folk-country roots. The Bloodshot Records context defines this: insurgent country, punk-inflected roots music. **The emerging twang** is the 88th acoustic element -- a powerful voice held within folk-country structures rather than soaring above them. **The early chapter** is the 88th artist-city pattern -- the engine encountered the mature artist first (66) and now encounters the beginning (87). Temporal inversion. The return zone is dense: degrees 82, 84, 85, 87 are all returns. Four returns in six degrees. Part B delivers the **Cricket Chorus** -- **INSECTA ENTERS**. After birds (0-60), mammals (61-85), and an amphibian (86), a **FOURTH CLASS** enters the engine. **Insecta** -- insects. The cricket chorus is the **first insect** in the engine. **Gryllidae** (true crickets) is a **NEW FAMILY** -- the 38th -- and also introduces a **NEW ORDER** (Orthoptera) and a **NEW CLASS** (Insecta). Three taxonomic levels added in a single entry. The cricket chorus is a **collective sound** -- hundreds or thousands of male crickets stridulating simultaneously in dry meadow on summer nights. The rhythmic chirp is the 88th species-side acoustic element. E=4 through collective amplification, the same mechanism as the treefrog chorus (86). **Dolbear's Law** -- the chirp rate is temperature-dependent: T(F) = N/4 + 40. The cricket is a **living thermometer**. Unique in the engine -- no other species has a mathematically described temperature-sound relationship. **Back-to-back chorus species** (86-87) -- treefrog (marsh, krek-krek, Amphibia) and cricket (meadow, chirp, Insecta). Both collective breeding sounds. Both E=4. Different habitats, different textures. **Twenty-seventh consecutive original CSV** (61-87).
+**Branch:** main
+**Commit:** `23fdb4cf365edd3f6fc6b6e6e70a3936c4e1fba1`
+**Files changed:** 9 (release note + 4 Neko Case early-folk research artifacts + 4 Cricket Chorus research artifacts)
+**Dedication:** To **Neko Case** in early-career context — the **emerging twang**, the artist whose powerful voice is already remarkable on *The Virginian* (1997, **Bloodshot Records**) but not yet fully deployed; to *Furnace Room Lullaby* (2000) for marking the transition from Bloodshot insurgent country toward the **Anti- Records** expansiveness that would arrive at *Blacklisted* (2002); to **Bloodshot Records** of Chicago, Illinois, the insurgent country label that gave the world **Alejandro Escovedo**, the **Waco Brothers**, and **Robbie Fulks**; to the **Cricket Chorus** (Family **Gryllidae**) — the **first insect** in the engine, the field chorus that fills dry meadows on summer nights, the collective voice of hundreds or thousands of male crickets stridulating simultaneously; to **Amos Dolbear** (1897) and the law that bears his name — *T(F) = N/4 + 40* — the living thermometer that turns chirp rate into temperature; to **Insecta** as the engine's fourth class after **Aves**, **Mammalia**, and **Amphibia**; to the back-to-back chorus species of degrees 86 and 87 — **Pacific Treefrog** in marsh and **Cricket Chorus** in meadow, both E=4 through collective amplification, both arriving on consecutive degrees as if planned.
+**Engine Position:** Degree 87 of 360 — 24.2% of the circle traversed; the emerging twang (88th acoustic element artist-side); rhythmic chirp field chorus (88th species-side); The Early Chapter (88th artist-city pattern); GENRE STAGE 69 Folk Country (distinguished from Alt Country at degree 66 by rawer Bloodshot-era roots); FOURTH RETURN ARTIST after **Damien Jurado** (45/84), **Rocky Votolato** (46/85), and **Death Cab for Cutie** (58/82) — Case at 66/87 — energy DECREASES from E=4 to E=3, same direction as Death Cab; INSECTA ENTERS as the fourth class after Aves, Mammalia, and Amphibia; GRYLLIDAE introduces three taxonomic levels in a single entry (new family 38th, new order Orthoptera, new class Insecta); BACK-TO-BACK CHORUS SPECIES across degrees 86–87 (Treefrog + Cricket); FIRST DOLBEAR'S LAW species — temperature-dependent chirp rate, unique in the engine; TWENTY-SEVENTH CONSECUTIVE ORIGINAL CSV species (degrees 61–87); RETURN ZONE DENSE — four returns in six degrees (82, 84, 85, 87); E=3 rises to 23 deployments after Case's E=3.
+**Note:** Part A returns **Neko Case** in early-folk context — the fourth artist to appear twice in the engine after **Damien Jurado** (45/84), **Rocky Votolato** (46/85), and **Death Cab for Cutie** (58/82). Energy decreases from E=4 (Alt Country, Anti- Records, degree 66) to E=3 (Folk Country, Bloodshot Records, degree 87) — the same direction as Death Cab's return. The label changed from **Anti- Records** to **Bloodshot Records**, the city orbit traces back from Tacoma/Vancouver/Tucson/Chicago multi-anchor to the focused Chicago insurgent-country scene, and the voice was not yet fully unleashed. *The Virginian* (1997) is the debut; *Furnace Room Lullaby* (2000) is the transition. Part B delivers the **Cricket Chorus** — a family-level entry (*Gryllidae*, true crickets) that introduces the engine's **first insect**, **first Insecta**, **first Orthoptera**, and the first species governed by a published mathematical law (Dolbear, 1897). Both halves arrive at the threshold where the engine's twin counters tick to 88, and both halves study a voice that finds its power through context — the artist through her label, the field through its collective.
 
 ## Summary
 
-The emerging twang and the first insect. Degree 87 is the engine's study of voices finding their power -- the folk-country singer whose voice is remarkable but not yet fully unleashed, and the collective chorus of a field full of crickets singing together on a summer night. On the music side, **Neko Case** returns as the **fourth return artist** -- first appeared at degree 66 (Alt Country, E=4, Anti- Records) and now returns in her early folk context (Folk Country, E=3, Bloodshot Records). The energy **decreases** from E=4 to E=3 -- the early career is quieter. The Bloodshot Records years are the seed of what would become one of the most powerful voices in American music. *The Virginian* (1997) is a debut with twang, pedal steel, and honky-tonk structures. *Furnace Room Lullaby* (2000) begins the transition. The voice is already there but hasn't found its full deployment. **Genre Stage 69** -- Folk Country. Distinguished from Alt Country (66) by rawer, more traditional folk-country roots. Bloodshot Records is the Chicago insurgent country label that gave the world Alejandro Escovedo, the Waco Brothers, Robbie Fulks. Case's early recordings have twang, pedal steel, honky-tonk structures. When she moved to Anti- Records for *Blacklisted* (2002) and beyond, the sound expanded. The Bloodshot years are the seed. **The emerging twang** is the 88th acoustic element -- a powerful voice not yet fully unleashed, filtered through honky-tonk and folk-country structures. Pedal steel, twangy guitars, country rhythms. The twang is emerging -- present but not dominant. **The early chapter** is the 88th artist-city pattern -- a return artist appearing in their earlier context, formative years before the mature work. The engine encountered the mature artist first (66) and now encounters the beginning (87). Temporal inversion. The return zone continues: degrees 82, 84, 85, 87. Four returns in six degrees (82-87). The engine revisits its past with increasing frequency.
+**The emerging twang and the first insect.** Degree 87 is the engine's study of voices finding their power — the folk-country singer whose voice is remarkable but not yet fully unleashed, and the collective chorus of a field full of crickets singing together on a summer night. The two halves of degree 87 share four structural properties (collective context as amplifier, voice-not-yet-at-peak, rhythmic foundation, audible from distance) and a single principle: that an entity's power is realized through the context that holds it — the Bloodshot Records insurgent-country scaffold that holds Case's emerging twang, the dry meadow that holds the cricket field chorus. **Neko Case** introduces the **emerging twang** as the eighty-eighth artist-side acoustic element while the **Cricket Chorus** introduces the **rhythmic chirp field chorus** as the eighty-eighth species-side element. Both arrive at the precise threshold where the engine's twin counters tick over in unison, and both arrive on a degree whose dominant theme is collective voice — Case's voice held within the **Bloodshot Records** community of insurgent country (**Alejandro Escovedo**, **Waco Brothers**, **Robbie Fulks**), the cricket's voice multiplied across hundreds or thousands of stridulating males whose individual chirps would barely register but whose collective chorus fills the entire meadow soundscape.
 
-On the species side, the **Cricket Chorus** (Gryllidae) marks one of the engine's most significant structural events: **INSECTA ENTERS**. After **birds** (degrees 0-60 with substitutions), **mammals** (degrees 61-85), and an **amphibian** (degree 86), a **FOURTH CLASS** enters the engine. **Insecta** -- insects. The cricket chorus is the first insect in the engine. **Four classes now represented:** Aves, Mammalia, Amphibia, Insecta. Class diversity accelerates: one class for 60 degrees (Aves), one for 25 (Mammalia), one for 1 (Amphibia), now a fourth at degree 87. **Gryllidae** (true crickets) is a **NEW FAMILY** -- the 38th. This also introduces a **NEW ORDER** (Orthoptera -- crickets, grasshoppers, katydids) and a **NEW CLASS** (Insecta). Three taxonomic levels added in a single entry. The cricket chorus is a **collective sound** -- not one individual cricket but the **entire field singing together**. Hundreds or thousands of male crickets stridulating simultaneously on a summer night. The rhythmic chirp is produced by rubbing a scraper on one forewing against a file on the other. Field crickets produce 1-4 chirps per second at approximately 3,000-5,000 Hz. **Dolbear's Law** -- the chirp rate is temperature-dependent: T(F) = N/4 + 40 (where N = chirps per minute for the snowy tree cricket). Count chirps in 14 seconds and add 40 to get approximate Fahrenheit temperature. First described by Amos Dolbear in 1897. The cricket is a **living thermometer**. **E=4 through collective amplification** -- same mechanism as the treefrog chorus (86). Hundreds chirping simultaneously. Fills the entire meadow soundscape on summer nights. **Back-to-back chorus species** (86-87) -- Pacific Treefrog (marsh, krek-krek, Amphibia) and cricket (meadow, chirp, Insecta). Both collective breeding sounds. Both E=4. But different habitats (marsh vs meadow) and different textures (wall-of-sound vs rhythmic pulse). **Twenty-seventh consecutive original CSV** (61-87).
+**Part A: Neko Case in early-folk context.** On the music side, **Neko Case** is the **FOURTH artist to appear twice** in the engine, after **Damien Jurado** (45/84), **Rocky Votolato** (46/85), and **Death Cab for Cutie** (58/82). She first appeared at **degree 66** as **The Wanderer Who Claims Multiple Cities** — Alt Country, E=4, on **Anti- Records**, the powerful voice fully realized on *Blacklisted* (2002), *Fox Confessor Brings the Flood* (2006), *Middle Cyclone* (2009), and *The Worse Things Get, the Harder I Fight, the Harder I Fight, the More I Love You* (2013). She returns at **degree 87** with early-career work on **Bloodshot Records** — *The Virginian* (1997) and *Furnace Room Lullaby* (2000). The albums are folk-country roots: twang, pedal steel, honky-tonk structures, scrappy debut energy, the voice already remarkable but not yet committed to full power. **Genre Stage 69** introduces **Folk Country** as a new genre stage, distinguished from the **Alt Country** of degree 66 by its rawer, more traditional folk-country roots. The Bloodshot Records context defines this distinction: the Chicago insurgent country label founded in 1994 that specialized in punk-inflected roots music. **E=3** at degree 87 is one step quieter than the **E=4** of degree 66 — the same direction of energy change as **Death Cab for Cutie**'s return at degree 82 (E=4 to E=3). The pattern emerges: when a mature artist returns, the energy tends to decrease. Case and Death Cab both step down one energy level on return; **Jurado** and **Votolato** both held steady at E=3. Two return modes for energy — step-down or hold-steady — now have two examples each. Distribution after degree 87: E1:3, E2:30, E3:23, E4:21, E5:11, E6:2. Total: 90. **E=3 rises to 23 deployments** with Case's E=3, narrowing the gap behind E=2's lead. **Bloodshot Records** — first appearance in the engine. Independent label from Chicago, Illinois, the heart of the insurgent country movement. The label shift from **Bloodshot** (Chicago) to **Anti- Records** (Los Angeles) mirrors **Case**'s personal trajectory from scrappy Chicago/Vancouver scene participant to nationally-recognized art-pop folk-country singer. **The emerging twang** is the eighty-eighth acoustic element — the sound that emerges when an extraordinary voice is held within folk-country structures rather than soaring above them. The voice is restrained, not by limit but by context: the pedal steel grounds it, the twangy guitars frame it, the country rhythms keep it disciplined. Case is **not yet** the operatic art-pop voice of *Middle Cyclone*; she is the folk-country debut artist whose power is audible but disciplined. **The Early Chapter** is the eighty-eighth artist-city pattern — the engine encountered the mature artist first (degree 66) and now encounters the formative beginning (degree 87). Temporal inversion. The arc reverses. **Degree 66** and **degree 87** sit twenty-one degrees apart; the same voice, related but distinct genres (Alt Country vs Folk Country), different label and different scene, the voice present at both points but committed to different intensities. The arc bends backward toward origins. The **return zone** is now dense: degrees 82, 84, 85, 87 are all returns. Four returns in six degrees (82–87). The engine revisits its past with increasing frequency, and the rate suggests a structural phase rather than a coincidence.
 
-Both Neko Case and the cricket chorus are about the emerging voice. The field finds its collective voice on summer nights. The artist finds her voice in Bloodshot Records studios. Both are voices not yet at full power but already remarkable. The emerging twang and the rhythmic chirp. The folk-country singer and the field chorus.
+**Part B: Cricket Chorus.** On the species side, the **Cricket Chorus** (Family *Gryllidae*) is the engine's **first insect** — a family-level entry encompassing field crickets (*Gryllus* spp.), house crickets (*Acheta* spp.), and tree crickets (*Oecanthus* spp.). The chorus is collective: hundreds or thousands of male crickets stridulating simultaneously in dry meadow on summer nights, individual rhythmic chirps overlapping into a continuous field chorus that retains its rhythmic pulse even at large scale. **Stridulation** — the production of sound by rubbing a scraper on one forewing against a file on the other — is the mechanism. **Field crickets** produce 1–4 chirps per second at approximately 3,000–5,000 Hz. **Dolbear's Law** governs the rate: *T(F) = N/4 + 40*, where N = chirps per minute for the snowy tree cricket. **Amos Dolbear** described the relationship in 1897, and the law has been verified by countless observers since: count chirps in 14 seconds and add 40 to get approximate Fahrenheit temperature. The cricket is a **living thermometer**, and it is the first species in the engine governed by a named mathematical law. **INSECTA ENTERS** as the engine's fourth class — after **Aves** (degrees 0–60 with substitutions), **Mammalia** (degrees 61–85), and **Amphibia** (degree 86 with **Pacific Treefrog**). Class diversity is accelerating: one class for sixty degrees, one for twenty-five, one for one, now a fourth at degree 87. Two consecutive class crossings (86 → Amphibia, 87 → Insecta) mark a structural phase. **Gryllidae** is a **new family** — the 38th in the engine — and the entry simultaneously introduces a **new order** (**Orthoptera**: crickets, grasshoppers, katydids) and a **new class** (**Insecta**). Three taxonomic levels added in a single entry — the maximum-level taxonomic addition in the engine to date. **E=4 through collective amplification** — the same mechanism introduced one degree earlier by the **Pacific Treefrog** (86). Individual cricket chirps carry only 10–20 meters; the chorus, by sheer multiplication of synchronized callers, fills the entire meadow soundscape and continues for hours. **Back-to-back chorus species** (86–87) — **Pacific Treefrog** in marsh (krek-krek wall-of-sound, Amphibia) and **Cricket Chorus** in meadow (rhythmic chirp pulse, Insecta). Both collective. Both E=4. Both breeding-season adaptations. Different habitats (marsh vs meadow) and different textures (continuous wall vs rhythmic pulse). **The chorus zone** is now established: degrees where collective sound phenomena dominate. **Habitat:** dry meadow — grasslands, fields, meadow edges, lawns; ground layer and low vegetation. The habitat contrasts cleanly with the marsh of degree 86 — different water regime, different vegetation, different acoustic environment. **Diet:** omnivorous — plant material, fungi, other insects, carrion. Decomposers and scavengers. **Predators:** birds, bats, spiders, frogs (including **Pacific Treefrog** at degree 86), lizards, small mammals. The cricket is foundational prey in the meadow food web. **Rhythmic chirp field chorus** is the eighty-eighth species-side acoustic element — collective stridulation that retains its pulsing rhythmic quality even when scaled to thousands of callers. The distinction from the treefrog wall-of-sound at degree 86 is the persistence of the rhythmic pulse: the cricket chorus is loud but legibly rhythmic; the treefrog chorus is loud and continuous. **First insect.** **Twenty-seventh consecutive original CSV species** (degrees 61–87) — the longest unbroken run of original-catalog selections in the engine.
+
+**Cross-Sync Parallel: Voices Finding Their Power.** Both **Neko Case** in early-folk context and the **Cricket Chorus** are voices that find their power through context. **Case** at degree 87 is the voice held within the **Bloodshot Records** insurgent country community — the scaffolding of pedal steel, twangy guitars, and honky-tonk structures gives the emerging twang its shape. Without the Bloodshot context, the early voice would be a debut singer with promise; with the context, it is a recognizable folk-country voice already finding its register. **In parallel**, the **Cricket Chorus** finds its power through collective amplification — a single cricket chirp at 3,000–5,000 Hz carries 10–20 meters and registers as a faint pulse; hundreds or thousands of crickets chirping simultaneously fill the entire meadow soundscape and become impossible to ignore. **Each side** demonstrates that voice is not only an individual property but a relational one. **The same** principle reaches both halves on the same degree.
+
+**Cross-Sync Parallel: The Emerging Form.** Both halves of degree 87 are also studies in emergence rather than completion. **Case**'s voice on *The Virginian* (1997) is **emerging** — present, audible, already powerful, but not yet committed to the full operatic deployment that would arrive on *Blacklisted* (2002) and reach maturity on *Middle Cyclone* (2009). The voice is in formation. **In parallel**, the **cricket chorus** is also a phenomenon in formation — individual chirps overlap and synchronize through male-male competition for female attention, the chorus emerges from the population rather than being conducted by it, and the resulting collective sound exists only as long as the calling continues. **Each side** captures a sound that is in the process of becoming rather than the result of being. **Synchronized** by accident or design, degree 87 is a degree of emergence.
+
+**Cross-Sync Parallel: Four Modes of Return.** Degree 87 makes the engine's framework for return artists complete to four examples. The **first return** was **Damien Jurado** at **degree 84**, after **degree 45** — that return held energy steady (E=3 at both points) and deepened the same genre (Folk → Folk). The **second return** was **Rocky Votolato** at **degree 85**, after **degree 46** — also held energy steady (E=3 at both points) and stayed within Folk. The **third return** was **Death Cab for Cutie** at **degree 82**, after **degree 58** — that return stepped energy down (E=4 → E=3) and shifted the genre laterally (Indie Rock → Indie Folk). The **fourth return** is **Neko Case** at **degree 87**, after **degree 66** — also stepped energy down (E=4 → E=3) and shifted the genre to a related but distinct form (Alt Country → Folk Country). **Four return artists**, **two patterns** for energy: step-down (Death Cab, Case) and hold-steady (Jurado, Votolato). The engine now has a complete four-example vocabulary for analyzing artist returns, and the mature pattern is visible: returns tend to either deepen the same genre at the same energy or step the energy down while shifting laterally. **In parallel**, **INSECTA ENTERS** at degree 87 makes the engine's framework for taxonomic class complete to four classes: **Aves** (60 degrees), **Mammalia** (25 degrees), **Amphibia** (1 degree), **Insecta** (1 degree). Four return artists. Four taxonomic classes. **Synchronized** by accident or design, degree 87 is a degree of fourths.
+
+**Cross-Sync Parallel: From Maximum Production to Collective Sound.** Both halves of degree 87 also stand in sharp contrast to degree 86. **The Postal Service** at degree 86 was **maximum electronic production** — the **electronic pulse**, synthesizers, programmed beats, **Sub Pop Records**, polished studio craft. **Case** at degree 87 is **maximum organic restraint** — pedal steel, acoustic guitar, country rhythms, scrappy Bloodshot debut energy. From synthesizers back to pedal steel in one degree — one of the sharpest engine swings to date. **In parallel**, the **Pacific Treefrog** at degree 86 was the **amplified krek-krek wall of sound** — continuous, no gaps, marsh-filling. The **Cricket Chorus** at degree 87 is the **rhythmic chirp pulse** — loud, but legibly rhythmic, meadow-filling. From wall-of-sound to rhythmic pulse in one degree. **Each side** of the engine swings between adjacent degrees as if planned, and the parallels between the artist swing (electronic to organic) and the species swing (continuous to rhythmic) reach the same degree.
+
+**Cross-Sync Parallel: Time as Material.** Both halves of degree 87 also use **time** as a primary material. **Case**'s emerging twang at degree 87 is unintelligible without the **mature voice** at degree 66 as its later realization — the early chapter says little on its own, but the arc from 87 to 66 to the implied future after 66 is the engine's first complete artist trajectory presented in reverse. **In parallel**, the **cricket chorus** is unintelligible without the **temperature dimension** — Dolbear's Law makes the chirp rate a function of ambient temperature, so the chorus heard tonight is a different chorus from the one heard last week, and the same field changes its rhythmic identity hourly. **Each side** privileges duration and conditions over instant. **The same** law operates on **both sides**: the entity is not the snapshot but the trajectory, and the trajectory is shaped by external conditions (label, scene, season, temperature).
+
+**Cross-Sync Parallel: Network Density.** **Both** halves of degree 87 are unusually densely connected to earlier degrees. **Case** at 87 connects to **Case at 66** (artist arc inverted), to **Death Cab at 82** (energy step-down return pattern), to **Jurado at 45/84** (return-artist framework), to **Votolato at 46/85** (return-artist framework, consecutive returns), to **Acid Tongue at 78** (folk-country space), to **Jesse Sykes at 64** (PNW dark-folk women), and to **The Postal Service at 86** (organic vs electronic swing). **In parallel**, the **Cricket Chorus** at 87 connects to **Pacific Treefrog at 86** (back-to-back chorus species, both E=4), to **Mallard at 59** (ubiquitous PNW background sound), to **American Robin at 25** (familiar background sound, dawn vs dusk counterparts), to **Beaver at 62** (rhythmic repetition), to **Snowshoe Hare at 73** (meadow shared, prey connection), to **Amos Dolbear** (1897, mathematical law origin), and to the broader **Insecta** class as the engine's fourth taxonomic class. **Each side** of degree 87 is a node with unusually high backward connectivity. **The same** structural property — that the engine's network grows denser as return artists, class crossings, and habitat connections multiply — reaches both halves on the same degree.
+
+**Cross-Sync Parallel: The Aves Gap Persists, the Insecta Door Opens.** Underneath both halves of degree 87 sits a structural pressure: **twenty-seven consecutive non-Aves degrees** (61–87). **The mammalian-plus** imbalance is severe. **The Aves Gap persists.** No raptor in 88 entries. No passeriform in thirty-one degrees. No marine specialist. **In parallel** with the celebration of Insecta entering at degree 87, the absence of **Aves** has become the engine's loudest silence. The Insecta door opens (Orthoptera enters, three taxonomic levels added in one entry), but the Aves door remains closed and the imbalance keeps growing. **Synchronized** by exhaustion rather than design, the engine arrives at degree 88 with two competing instructions: continue exploring Insecta now that the door is open, or return to Aves to close the longest-standing gap. The next degree must choose, or attempt both.
 
 ## Key Features
 
 | Metric | Part A: Neko Case (Early Folk) | Part B: Cricket Chorus |
-|--------|-------------------------------|------------------------|
-| Genre | Folk Country (Genre Stage 69, distinguished from Alt Country at 66 by rawer traditional folk-country roots, Bloodshot Records insurgent country label, twang pedal steel honky-tonk) | -- |
-| Energy | E=3 (decreases from E=4 at degree 66, early career quieter, voice not yet fully deployed, Bloodshot years rawer less produced than Anti- Records years, first return where same solo artist's energy decreases) | E=4 (collective amplification, hundreds chirping simultaneously, individual chirps audible at 10-20 meters, chorus fills entire meadow, continuous for hours, E=4 through collective mechanism same as treefrog 86) |
-| Label | Bloodshot Records (Chicago insurgent country label, The Virginian 1997 debut, Furnace Room Lullaby 2000 transition, before Anti- Records) | -- |
-| Family | -- | Gryllidae (NEW FAMILY 38th, true crickets, NEW ORDER Orthoptera, NEW CLASS Insecta, three taxonomic levels in one entry) |
-| Order | -- | Orthoptera (NEW ORDER, crickets grasshoppers katydids, first Orthoptera in engine) |
-| Class | -- | Insecta (INSECTA ENTERS, fourth class after Aves Mammalia Amphibia, first insect, class diversity accelerates) |
-| Acoustic Element | the emerging twang (88th, powerful voice not yet fully unleashed, folk-country structures, pedal steel twangy guitars, twang is emerging present but not dominant, voice remarkable but restrained, distinct from electronic pulse 86 maximum production, distinct from stripped confession 85 dramatic removal) | rhythmic chirp field chorus (88th species-side, collective stridulation, hundreds chirping simultaneously, rhythmic pulsing NOT wall-of-sound, temperature-dependent Dolbear's Law, E=4 through collective amplification, distinct from krek-krek 86 continuous wall, distinct from quiet plop 85 personal-range) |
-| Artist-City Pattern | The Early Chapter (88th, return artist in earlier context, formative years before mature work, engine encountered mature artist first now encounters beginning, temporal movement to earlier era, distinct from side project 86 lateral movement, distinct from confessional return 85 stays within genre) | -- |
-| Structural Firsts | FOURTH RETURN ARTIST (Case at 66/87, E=4 to E=3, energy decreases on return same direction as Death Cab 82), GENRE STAGE 69 Folk Country, THE EMERGING TWANG 88th acoustic element (voice held within folk-country structures), THE EARLY CHAPTER 88th artist-city pattern (temporal inversion encountering beginning after mature work), RETURN ZONE DENSE (four returns in six degrees 82-87), BLOODSHOT RECORDS YEARS (The Virginian 1997 Furnace Room Lullaby 2000) | INSECTA ENTERS (first insect, fourth class, class diversity accelerates), GRYLLIDAE NEW FAMILY (38th, three taxonomic levels in one entry, new order Orthoptera new class Insecta), DOLBEAR'S LAW (temperature-dependent chirp T(F)=N/4+40, living thermometer, unique in engine), RHYTHMIC CHIRP FIELD CHORUS 88th species-side acoustic element (collective stridulation), E=4 THROUGH COLLECTIVE AMPLIFICATION (same mechanism as treefrog 86), BACK-TO-BACK CHORUS SPECIES 86-87 (treefrog and cricket), TWENTY-SEVENTH CONSECUTIVE ORIGINAL CSV 61-87 |
+|--------|--------------------------------|------------------------|
+| Genre | **Folk Country** (Genre Stage 69, distinguished from Alt Country at 66 by rawer traditional folk-country roots, Bloodshot Records insurgent country label, twang pedal steel honky-tonk, *The Virginian* 1997 debut, *Furnace Room Lullaby* 2000 transition, voice not yet fully deployed) | — |
+| Energy | **E=3** (decreases from E=4 at degree 66, early career quieter, voice not yet fully deployed, Bloodshot years rawer less produced than Anti- Records years, second return where energy steps down after Death Cab 82, distribution 3:30:23:21:11:2 total 90, E=3 rises to 23 deployments) | **E=4** (collective amplification, hundreds chirping simultaneously, individual chirps audible at 10–20 meters, chorus fills entire meadow, continuous for hours, E=4 through collective mechanism same as treefrog 86, back-to-back chorus species 86–87) |
+| Label | **Bloodshot Records** (FIRST Bloodshot artist in engine, Chicago insurgent country label founded 1994, *The Virginian* 1997 debut, *Furnace Room Lullaby* 2000 transition, before Anti- Records, label shift from Bloodshot to Anti- mirrors trajectory from Chicago scene to national art-pop folk-country) | — |
+| Family | — | **Gryllidae** (NEW FAMILY 38th, true crickets, includes *Gryllus* spp. field crickets *Acheta* spp. house crickets *Oecanthus* spp. tree crickets, family-level entry, NEW ORDER Orthoptera, NEW CLASS Insecta, three taxonomic levels in one entry) |
+| Order | — | **Orthoptera** (NEW ORDER, first Orthoptera in engine, crickets grasshoppers katydids, jumping insects with hind-leg leverage and wing-rubbing stridulation, ancient lineage Carboniferous origin) |
+| Class | — | **Insecta** (INSECTA ENTERS, fourth class after Aves Mammalia Amphibia, FIRST INSECT in engine, class diversity accelerates 60 degrees for Aves 25 for Mammalia 1 for Amphibia now Insecta at 87, second consecutive class crossing 86–87) |
+| Acoustic Element | **the emerging twang** (88th, powerful voice not yet fully unleashed, folk-country structures, pedal steel twangy guitars country rhythms, the twang is emerging present but not dominant, voice remarkable but restrained, distinct from electronic pulse 86 maximum production, distinct from stripped confession 85 dramatic removal, distinct from late whisper 84 quiet certainty) | **rhythmic chirp field chorus** (88th species-side, collective stridulation, hundreds chirping simultaneously, rhythmic pulsing NOT wall-of-sound, temperature-dependent Dolbear's Law T(F)=N/4+40, E=4 through collective amplification, distinct from krek-krek 86 continuous wall, distinct from quiet plop 85 personal-range) |
+| Artist-City Pattern | **The Early Chapter** (88th, return artist in earlier context, formative years before mature work, engine encountered mature artist first now encounters beginning, temporal movement to earlier era, distinct from side project 86 lateral movement, distinct from confessional return 85 stays within genre, distinct from artist arc 84 later career direction) | — |
+| Habitat Marker | — | **Dry meadow** (grasslands, fields, meadow edges, lawns, ground layer and low vegetation, contrasts with marsh of degree 86, prey for Pacific Treefrog 86 and other meadow predators, foundational to summer-night meadow soundscape) |
+| Structural Firsts | FOURTH RETURN ARTIST (Case at 66/87, energy decreases E=4 to E=3 same direction as Death Cab 82, two return modes for energy now have two examples each), GENRE STAGE 69 Folk Country (distinguished from Alt Country at 66), THE EMERGING TWANG 88th acoustic element (voice held within folk-country structures), THE EARLY CHAPTER 88th artist-city pattern (temporal inversion encountering beginning after mature work), RETURN ZONE DENSE (four returns in six degrees 82–87), FIRST BLOODSHOT RECORDS ARTIST (label debut), BLOODSHOT YEARS DOCUMENTED (*The Virginian* 1997, *Furnace Room Lullaby* 2000) | INSECTA ENTERS (first insect, fourth class, class diversity accelerates), GRYLLIDAE NEW FAMILY (38th, three taxonomic levels in one entry, new order Orthoptera new class Insecta), DOLBEAR'S LAW (temperature-dependent chirp T(F)=N/4+40, Amos Dolbear 1897, living thermometer, FIRST mathematical law species in engine, unique status), RHYTHMIC CHIRP FIELD CHORUS 88th species-side acoustic element (collective stridulation), E=4 THROUGH COLLECTIVE AMPLIFICATION (same mechanism as treefrog 86), BACK-TO-BACK CHORUS SPECIES 86–87 (treefrog and cricket, both collective, both E=4, marsh and meadow), TWENTY-SEVENTH CONSECUTIVE ORIGINAL CSV 61–87 |
 | Research Words | ~5,500 | ~6,500 |
 | Files Produced | 4 | 4 |
 | Cross-References | 7 | 5 |
 
-<details>
-<summary>Full Release Notes -- Click to expand</summary>
-
-## Part A: Neko Case (Early Folk) -- THE EMERGING TWANG (E=3, Folk Country, Bloodshot Records, FOURTH RETURN ARTIST First Appeared Degree 66 Alt Country E=4 Anti- Records Now Early Folk E=3 Bloodshot Records Energy Decreases E=4 to E=3, GENRE STAGE 69 Folk Country Distinguished from Alt Country Rawer Traditional Roots Bloodshot Insurgent Country, The Emerging Twang 88th Acoustic Element Voice Not Yet Fully Unleashed Folk-Country Structures Pedal Steel Twangy Guitars, The Early Chapter 88th Artist-City Pattern Return Artist in Earlier Context Temporal Inversion, Return Zone Dense Four Returns in Six Degrees 82-87, Tacoma Washington / Chicago Illinois)
-
-Full deep research covering Neko Case's early folk-country years on Bloodshot Records, the fourth return, and the emerging twang:
-
-### STRUCTURAL EVENT: Fourth Return Artist -- Neko Case Returns
-
-Neko Case is the **fourth return artist** in the engine:
-
-| Return | Original Degree | Return Degree | Artist | Energy Change |
-|---|---|---|---|---|
-| 1st | 45 | 84 | Damien Jurado | E=3 -> E=3 |
-| 2nd | 46 | 85 | Rocky Votolato | E=3 -> E=3 |
-| 3rd | 58 | 82 | Death Cab for Cutie | E=4 -> E=3 |
-| 4th | 66 | 87 | Neko Case | E=4 -> E=3 |
-
-Case returns with energy **decreasing** from E=4 to E=3 -- the same direction as Death Cab's return (E=4 to E=3 at degree 82). Jurado and Votolato held steady at E=3. The pattern: mature artists return in quieter or earlier contexts. Energy tends to decrease on return.
-
-The return zone is dense: degrees 82, 84, 85, 87 are all returns. Four returns in six degrees (82-87). The engine revisits its past with increasing frequency.
-
-### STRUCTURAL EVENT: Genre Stage 69 -- Folk Country
-
-Degree 87 reaches **Genre Stage 69**. Neko Case's early work introduces **Folk Country** -- distinguished from the Alt Country of degree 66 by its rawer, more traditional folk-country roots. The Bloodshot Records context defines this: Bloodshot specializes in insurgent country and punk-inflected roots music. Case's early recordings have twang, pedal steel, honky-tonk structures.
-
-The Folk Country genre connects to **Acid Tongue** (degree 78) -- both operate in the folk-country space. Acid Tongue is a band project; Case is solo. Both rooted in twang and country structures filtered through PNW sensibility.
-
-### STRUCTURAL EVENT: E=3 -- Energy Decrease
-
-Degree 87 assigns **E=3** -- down from E=4 at degree 66. The early career is quieter. The Bloodshot years are rawer, less produced, less sonically expansive than the Anti- Records years. *The Virginian* is a debut album -- promising but not yet fully realized. *Furnace Room Lullaby* begins the transition toward the expansive sound that would define her later work. E=3 reflects the voice still finding its power.
-
-### THE BLOODSHOT RECORDS YEARS
-
-**The Virginian** (1997) -- debut album on Bloodshot Records. A folk-country record with twang, pedal steel, and honky-tonk structures. The voice is already remarkable but not yet deployed at full power. The arrangements are scrappy, raw, appropriate for a debut on an insurgent country label.
-
-**Furnace Room Lullaby** (2000) -- second Bloodshot release. The transition album. Begins to hint at the expansive, powerful vocal performances that would define Case's later work. The country structures are still present but loosening. "Set Out Running" and "Thrice All American" show the folk-country roots. "Guided by Wire" shows where she's heading.
-
-**Bloodshot Records** is key. Chicago-based, founded in 1994, specializing in insurgent country and alt-country. The label that gave the world Alejandro Escovedo, the Waco Brothers, Robbie Fulks. When Case moved to Anti- Records for *Blacklisted* (2002) and beyond, the sound expanded. The Bloodshot years are the seed.
-
-### THE EMERGING TWANG -- 88th Acoustic Element
-
-The eighty-eighth acoustic element is **the emerging twang** -- the sound of early Neko Case. A powerful voice not yet fully unleashed, filtered through honky-tonk and folk-country structures. Pedal steel, twangy guitars, country rhythms, and a voice that hints at the force it will become. The twang is **emerging** -- present but not dominant. The country bones show through the performance.
-
-Contrasts:
-- **The electronic pulse** (degree 86, Postal Service) -- maximum electronic production. The emerging twang is maximum organic -- pedal steel, acoustic guitar, country structures. From synthesizers back to pedal steel. The engine swings.
-- **The stripped confession** (degree 85, Votolato) -- minimal, voice-forward. The emerging twang has more instrumentation but less vocal power. Different austerity.
-- **The late whisper** (degree 84, Jurado) -- quiet certainty. The emerging twang is not quiet -- it's restrained. The voice has power but doesn't fully deploy it yet.
-
-### THE EARLY CHAPTER -- 88th Artist-City Pattern
-
-The eighty-eighth artist-city pattern is **the early chapter** -- a return artist appearing in their **earlier context**. Degree 66 gave us Neko Case fully formed -- the powerful voice, the Anti- Records expansiveness, E=4. Degree 87 gives us the beginning -- the Bloodshot years, the folk-country roots, the voice before it found its full power. The early chapter inverts chronology.
-
-Contrasts:
-- **The side project** (degree 86, Postal Service) -- lateral movement to a new genre. The early chapter is temporal movement to an earlier era.
-- **The confessional return** (degree 85, Votolato) -- return within genre. The early chapter is return to an earlier genre context.
-- **The artist arc** (degree 84, Jurado) -- later career. The early chapter is earlier career. Opposite temporal direction.
-
-### CROSS-REFERENCES (Part A)
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| S36-066 | Neko Case Early (87) | Neko Case (66) | SAME ARTIST, DIFFERENT ERA. Alt Country at E=4. The mature voice. Anti- Records. Degree 87 is the early folk context -- the Bloodshot years before the Anti- years. Same artist, different era, different energy, different genre. Voice finding itself vs voice fully realized. |
-| S36-046 | Neko Case Early (87) | Rocky Votolato (46) | RETURN PATTERN. Votolato at 46/85. Case at 66/87. Both PNW singer-songwriters with folk/country roots. Both returns explore different temporal contexts. |
-| S36-085 | Neko Case Early (87) | Rocky Votolato acoustic (85) | CONSECUTIVE RETURNS. Votolato returned at 85. Case returns at 87. Two returns in three degrees. Return zone continues. |
-| S36-045 | Neko Case Early (87) | Damien Jurado (45) | RETURN PATTERN. Jurado at 45/84. Case at 66/87. First and fourth return artists. Jurado's late career (84) vs Case's early career (87) -- opposite temporal directions. |
-| S36-084 | Neko Case Early (87) | Damien Jurado late (84) | RETURN ZONE. Jurado at 84, Votolato at 85, Case at 87. Three returns in four degrees (84-87). |
-| S36-064 | Neko Case Early (87) | Jesse Sykes (64) | DARK FOLK WOMEN. Both women with powerful voices in folk/country/dark-folk territory. PNW dark-folk lineage. |
-| S36-078 | Neko Case Early (87) | Acid Tongue (78) | FOLK COUNTRY. Both in the folk-country space. Acid Tongue is a band; Case is solo. Both rooted in twang and country structures. |
-
----
-
-## Part B: Cricket Chorus -- INSECTA ENTERS (Gryllidae, E=4, FIRST INSECT IN THE ENGINE Fourth Class After Aves Mammalia Amphibia, Class Diversity Accelerates 60 Degrees for Aves 25 for Mammalia 1 for Amphibia Now Insecta at 87, GRYLLIDAE NEW FAMILY 38th True Crickets NEW ORDER Orthoptera NEW CLASS Insecta Three Taxonomic Levels in One Entry, RHYTHMIC CHIRP FIELD CHORUS 88th Species-Side Acoustic Element Collective Stridulation Hundreds Chirping Simultaneously Temperature-Dependent Dolbear's Law, E=4 Through Collective Amplification Same Mechanism as Treefrog 86, BACK-TO-BACK CHORUS SPECIES 86-87 Both Collective Both E=4 Marsh and Meadow, TWENTY-SEVENTH CONSECUTIVE ORIGINAL CSV 61-87)
-
-Full deep research covering the cricket chorus as the engine's first insect, Insecta entering as the fourth class, and Dolbear's Law:
-
-### INSECTA ENTERS -- FOURTH CLASS
-
-After **birds** (degrees 0-60 with substitutions), **mammals** (degrees 61-85), and an **amphibian** (degree 86), a **FOURTH CLASS** enters the engine. **Insecta** -- insects. The cricket chorus is the first insect in the engine.
-
-**Four classes now represented:** Aves, Mammalia, Amphibia, Insecta. The class diversity accelerates: one class for 60 degrees (Aves), one for 25 (Mammalia), one for 1 (Amphibia), now a fourth at degree 87. The engine's taxonomic breadth is expanding rapidly.
-
-**Gryllidae** (true crickets) is a **NEW FAMILY** -- the 38th in the engine. This also introduces a **NEW ORDER** (Orthoptera) and a **NEW CLASS** (Insecta). Three taxonomic levels added in a single entry. Second consecutive class crossing (86-87).
-
-### TAXONOMY: Gryllidae (Family-Level Entry)
-
-Family-level entry -- the cricket chorus represents the collective sound of field crickets (Gryllidae) as a group. Multiple species contribute:
-- **Gryllus** spp. -- field crickets. The most common PNW ground crickets.
-- **Acheta** spp. -- house crickets. Found near human habitation.
-- **Oecanthus** spp. -- tree crickets. Higher-pitched, more continuous trill.
-
-Classification:
-- **Class:** **Insecta** -- ENTERS. Fourth class (after Aves, Mammalia, Amphibia).
-- **Order:** **Orthoptera** -- NEW ORDER. Crickets, grasshoppers, katydids.
-- **Family:** **Gryllidae** -- NEW FAMILY (38th). True crickets.
-
-### THE SOUND: RHYTHMIC CHIRP FIELD CHORUS -- 88th Species-Side Acoustic Element
-
-**The chirp:** Produced by stridulation -- rubbing a scraper on one forewing against a file on the other. Individual chirp approximately 50-100 ms, repeated at regular intervals. Field crickets produce 1-4 chirps per second at approximately 3,000-5,000 Hz.
-
-**The chorus:** When hundreds or thousands of males chirp simultaneously, the individual rhythmic chirps overlap into a continuous field chorus. Unlike the treefrog chorus (wall-of-sound with no gaps), the cricket chorus retains its **rhythmic quality** -- the regular pulse is still perceptible even in large choruses.
-
-**Dolbear's Law:** The chirp rate is temperature-dependent. T(F) = N/4 + 40 (where N = chirps per minute for the snowy tree cricket). Warmer nights = faster chirps. Cooler nights = slower chirps. First described by Amos Dolbear in 1897. The cricket is a **living thermometer**. Unique in the engine.
-
-**Why E=4:** Individual chirps carry well (10-20 meters). The collective chorus is overwhelming. Fills the entire meadow soundscape on summer nights. Continuous for hours. E=4 through collective amplification -- same mechanism as treefrog (86).
-
-### ECOLOGY
-
-**Habitat:** Dry meadow. Grasslands, fields, meadow edges, lawns. Ground layer and low vegetation. Contrasts with marsh (86).
-
-**Diet:** Omnivorous. Plant material, fungi, other insects, carrion. Decomposers and scavengers.
-
-**Predators:** Birds, bats, spiders, frogs (including Pacific Treefrog), lizards, small mammals. Foundational prey item in meadow food webs.
-
-### STRUCTURAL EVENTS SUMMARY
-
-1. **Insecta Enters** -- first insect. Fourth class. Three taxonomic levels added.
-2. **Rhythmic chirp field chorus** -- 88th acoustic element. Collective stridulation. Temperature-dependent. E=4.
-3. **Gryllidae** -- 38th family. New family. New order Orthoptera. New class Insecta.
-4. **Back-to-back chorus species (86-87)** -- treefrog and cricket. Both collective. Both E=4. Marsh and meadow.
-5. **Twenty-seventh consecutive original CSV** (61-87).
-
-### CROSS-REFERENCES (Part B)
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| SPS-086 | Cricket Chorus (87) | Pacific Treefrog (86) | CHORUS PARALLEL. Both collective breeding sounds. Both E=4 through collective amplification. Treefrog (marsh, krek-krek, Amphibia) and cricket (meadow, chirp, Insecta). Back-to-back chorus species. |
-| SPS-059 | Cricket Chorus (87) | Mallard (59) | UBIQUITOUS. Both familiar background sounds of PNW landscapes. Mallard quack immediately recognizable; cricket chirp immediately recognizable. Both define their soundscapes. |
-| SPS-025 | Cricket Chorus (87) | American Robin (25) | FAMILIAR BACKGROUND SOUND. Robin song for PNW mornings; cricket chorus for PNW summer nights. Dawn and dusk counterparts. |
-| SPS-062 | Cricket Chorus (87) | Beaver Chewing (62) | RHYTHMIC REPETITION. Both rhythmically repetitive sounds. Beaver gnawing and cricket chirping. Both continuous, both functional. |
-| SPS-073 | Cricket Chorus (87) | Snowshoe Hare (73) | PREY CONNECTION and MEADOW SHARED. Both abundant, both foundational in food webs. Hare for forest predators, crickets for meadow predators. |
-
----
-
-## Parallel: Neko Case Early x Cricket Chorus
-
-The emerging voice and the emerging chorus.
-
-**1. Both About Finding Voice** -- Neko Case's early folk-country work is the voice before it found full power. The cricket chorus is the field finding its collective voice. Both are voices emerging but not yet at their peak. The early chapter and the first chorus.
-
-**2. Both Collective in Their Own Way** -- Case's early recordings have the scrappy, communal energy of Bloodshot Records. The cricket chorus is literally collective -- hundreds singing together. Both draw power from context.
-
-**3. Both Contrast with Degree 86** -- The Postal Service (86) was maximum electronic production. Case (87) is maximum organic -- pedal steel and twang. The treefrog chorus (86) was a wall of sound. The cricket chorus (87) is rhythmic -- retaining its pulsing quality. From electronic to organic. From wall-of-sound to rhythmic pulse.
-
-**4. Both E Shifts** -- Case's energy decreases from E=4 to E=3. The cricket chorus maintains E=4 (collective). The artist quiets while the field stays loud.
-
----
-
-## Acoustic Progression (88 elements)
-
-| # | Element | Degree | Artist/Species |
-|---|---------|--------|----------------|
-| 0 | silence | 0 | Quincy Jones |
-| 1 | cascade | 1 | Bill Frisell |
-| 2 | drone | 2 | Wayne Horvitz |
-| 3 | language | 3 | Ernestine Anderson |
-| 4 | motif | 4 | Floyd Standifer |
-| 5 | metronome | 5 | Overton Berry |
-| 6 | question | 6 | Patti Bown |
-| 7 | harmonic spiral | 7 | Julian Priester |
-| 8 | ultrasonic threshold | 8 | Gary Peacock |
-| 9 | variation | 9 | Hadley Caliman |
-| 10 | minimum signal | 10 | Bud Shank |
-| 11 | trill/tremolo | 11 | Joe Brazil |
-| 12 | sawtooth sweep | 12 | Don Lanphere |
-| 13 | ostinato | 13 | Marc Seales |
-| 14 | repetition-resolution | 14 | Aaron Parks |
-| 15 | accelerando | 15 | Thomas Marriott |
-| 16 | crescendo | 16 | Jeff Lorber |
-| 17 | the hook | 17 | Reggie Watts |
-| 18 | ascending spiral | 18 | Maktub |
-| 19 | descending spiral | 19 | Fly Moon Royale |
-| 20 | sustain/the release | 20 | Whitney Monge |
-| 21 | the hammer | 21 | Polyrhythmics |
-| 22 | resonant percussion/groove reset | 22 | Foxy Apollo |
-| 23 | the testimony/groove reset | 23 | Allen Stone |
-| 24 | the invocation | 24 | Ron Artis II |
-| 25 | the congregation | 25 | Black Stax |
-| 26 | the caroling | 26 | Shaina Shepherd |
-| 27 | the liquid gurgle | 27 | The Dynamics |
-| 28 | the liquid twitter | 28 | Night Owls |
-| 29 | the rough brrit | 29 | Boogaloo Joe Jones |
-| 30 | the liquid warble synthesis | 30 | Ray Charles |
-| 31 | the whisper | 31 | Brenda Lee Eager |
-| 32 | the buzz | 32 | Luther Rabb |
-| 33 | the cadenza | 33 | Larry English |
-| 34 | the dialect | 34 | The Tempos |
-| 35 | the thrum | 35 | Robert Cray |
-| 36 | the sonic boom | 36 | Jimi Hendrix |
-| 37 | the filament | 37 | Ayron Jones |
-| 38 | the drawl | 38 | Booker T. Jones |
-| 39 | the canopy buzz | 39 | Ron Artis Jr |
-| 40 | the thinning | 40 | Alice Smith |
-| 41 | the partition | 41 | Shawn Smith |
-| 42 | the shimmer | 42 | Erica Campbell |
-| 43 | the radiance | 43 | Ann Wilson |
-| 44 | the grain | 44 | Chong the Nomad |
-| 45 | the murmur | 45 | Damien Jurado |
-| 46 | the confessional | 46 | Rocky Votolato |
-| 47 | the parable tone | 47 | Pedro the Lion |
-| 48 | the held rest | 48 | Sera Cahoone |
-| 49 | the lullaby subversion | 49 | Kimya Dawson |
-| 50 | the intimate architecture | 50 | Mirah |
-| 51 | the communal harmony | 51 | Grand Archives |
-| 52 | the testimony roar | 52 | Brandi Carlile |
-| 53 | the cathedral harmony | 53 | Fleet Foxes |
-| 54 | the fraternal jangle | 54 | Ivan & Alyosha |
-| 55 | the ember glow | 55 | Shelby Earl |
-| 56 | the dream haze | 56 | Lemolo |
-| 57 | the rattle / the stream rattle | 57 | Laura Gibson / Belted Kingfisher |
-| 58 | the ache / the pond whistle | 58 | Death Cab for Cutie / Wood Duck |
-| 59 | the digression / the quack | 59 | The Long Winters / Mallard |
-| 60 | the bare wire / the submerge call | 60 | Ben Gibbard (solo) / Pied-billed Grebe |
-| 61 | the braided voice / the tail slap | 61 | Y La Bamba / American Beaver |
-| 62 | the throwback / the rhythmic gnaw | 62 | Pickwick / Beaver Chewing |
-| 63 | the FM sheen / the chuff | 63 | Kenny Loggins / River Otter |
-| 64 | the dusk / the chitter | 64 | Jesse Sykes / Mink |
-| 65 | the open plain / the chuckle-chatter | 65 | Philip Aaberg / American Marten |
-| 66 | the country thunder / the scream | 66 | Neko Case / Fisher |
-| 67 | the clean room / the shrill bark-chitter | 67 | Chris Walla / Short-tailed Weasel |
-| 68 | the hush / the rapid chattering chirp | 68 | Sam Beam / Long-tailed Weasel |
-| 69 | the earnest voice / the warning foot-stamp hiss | 69 | Kris Orlowski / Striped Skunk |
-| 70 | the fiddle line / the churring chittering young | 70 | Horse Feathers / Raccoon |
-| 71 | the room tone / the bark screaming vixen call | 71 | Phil Elverum / Red Fox |
-| 72 | the layered loop / the low hiss click | 72 | Briana Marela / Opossum |
-| 73 | the jangle / the thump squeal | 73 | LAKE / Snowshoe Hare |
-| 74 | the reverb wash / the high sharp eenk bark | 74 | Poor Moon / American Pika |
-| 75 | the anthem / the piercing whistle alarm | 75 | The Lonely Forest / Yellow-bellied Marmot |
-| 76 | the androgynous register / the loud penetrating whistle | 76 | Chris Pureka / Hoary Marmot |
-| 77 | the ethereal layering / the musical multi-note whistle | 77 | Mree / Olympic Marmot |
-| 78 | the communal jangle / the chirping trill alarm | 78 | Acid Tongue / Townsend's Ground Squirrel |
-| 79 | the cinematic stillness / the sharp chip alarm | 79 | Jesse Marchant / Golden-mantled Ground Squirrel |
-| 80 | the organ explosion / the loud scolding chatter rattle | 80 | Mates of State / Douglas Squirrel |
-| 81 | the Broadway voice / the bark + chatter alarm | 81 | Sara Bareilles / Eastern Fox Squirrel |
-| 82 | the acoustic intimacy / the high thin tseet | 82 | Death Cab for Cutie (acoustic) / Northern Flying Squirrel |
-| 83 | the grunge whisper / the ultrasonic + soft chip | 83 | Pearl Jam (acoustic) / Deer Mouse |
-| 84 | the late whisper / the chatter + twig gnaw | 84 | Damien Jurado (late career) / Bushy-tailed Woodrat |
-| 85 | the stripped confession / the quiet plop | 85 | Rocky Votolato (acoustic) / Muskrat |
-| 86 | the electronic pulse / the amplified krek-krek wall of sound | 86 | The Postal Service / Pacific Treefrog |
-| **87** | **the emerging twang / the rhythmic chirp field chorus** | **87** | **Neko Case (early folk) / Cricket Chorus** |
-
-The acoustic progression adds degree 87 (the emerging twang / the rhythmic chirp field chorus). On the artist side, the emerging twang (87) is the sound of early Neko Case -- a powerful voice not yet fully unleashed, filtered through folk-country structures. Pedal steel, twangy guitars, country rhythms. The voice has power but doesn't fully deploy it yet. E=3. From the electronic pulse (86, maximum addition, E=4) to the emerging twang (87, organic restraint, E=3). On the species side, the rhythmic chirp field chorus (87) is the cricket chorus -- collective stridulation, hundreds chirping simultaneously in dry meadow, temperature-dependent (Dolbear's Law), E=4 through collective amplification. The chorus retains its rhythmic quality -- distinct from the treefrog's wall-of-sound (86). From krek-krek continuous wall (86) to rhythmic chirping pulse (87). Both collective. Both E=4. Different textures.
-
-## Artist-City Patterns (88 patterns)
-
-| # | Pattern | Degree | Artist |
-|---|---------|--------|--------|
-| 0 | Export | 0 | Quincy Jones |
-| 1 | Draw | 1 | Bill Frisell |
-| 2 | European Exile | 2 | Wayne Horvitz |
-| 3 | The Stay | 3 | Ernestine Anderson |
-| 4 | The Teacher | 4 | Floyd Standifer |
-| 5 | The Persistence | 5 | Overton Berry |
-| 6 | The Erasure | 6 | Patti Bown |
-| 7 | Pedagogue-Draw | 7 | Julian Priester |
-| 8 | The Quiet Draw | 8 | Gary Peacock |
-| 9 | The Seeker | 9 | Hadley Caliman |
-| 10 | Late Homestead | 10 | Bud Shank |
-| 11 | The Salon Keeper | 11 | Joe Brazil |
-| 12 | The Prodigal | 12 | Don Lanphere |
-| 13 | Institutional Anchor | 13 | Marc Seales |
-| 14 | Prodigy-Export | 14 | Aaron Parks |
-| 15 | Builder-Stayer | 15 | Thomas Marriott |
-| 16 | Talent Incubator | 16 | Jeff Lorber |
-| 17 | The Uncategorizable | 17 | Reggie Watts |
-| 18 | The Workshop | 18 | Maktub |
-| 19 | The New Root | 19 | Fly Moon Royale |
-| 20 | The Street Laureate | 20 | Whitney Monge |
-| 21 | The Ensemble Anchor | 21 | Polyrhythmics |
-| 22 | The Inheritor | 22 | Foxy Apollo |
-| 23 | The Rural Draw | 23 | Allen Stone |
-| 24 | The Island Export | 24 | Ron Artis II |
-| 25 | The Cultural Guardian | 25 | Black Stax |
-| 26 | The Transmuter | 26 | Shaina Shepherd |
-| 27 | The Conduit | 27 | The Dynamics |
-| 28 | The Resident Band | 28 | Night Owls |
-| 29 | The Catalog | 29 | Boogaloo Joe Jones |
-| 30 | The Incubation | 30 | Ray Charles |
-| 31 | The Relay | 31 | Brenda Lee Eager |
-| 32 | The Foundation | 32 | Luther Rabb |
-| 33 | The Unrecorded | 33 | Larry English |
-| 34 | The Shadow Name | 34 | The Tempos |
-| 35 | The Deep Root | 35 | Robert Cray |
-| 36 | The Supernova | 36 | Jimi Hendrix |
-| 37 | The Inheritor | 37 | Ayron Jones |
-| 38 | The Touring Anchor | 38 | Booker T. Jones |
-| 39 | The Returning Wave | 39 | Ron Artis Jr |
-| 40 | The Cultural Satellite | 40 | Alice Smith |
-| 41 | The Scene Native | 41 | Shawn Smith |
-| 42 | The Gospel Export | 42 | Erica Campbell |
-| 43 | The Arena Architect | 43 | Ann Wilson |
-| 44 | The Digital Immigrant | 44 | Chong the Nomad |
-| 45 | The Stripped Murmur | 45 | Damien Jurado |
-| 46 | The Confessional Drifter | 46 | Rocky Votolato |
-| 47 | The Sacred Baritone | 47 | Pedro the Lion |
-| 48 | The Campfire Anchor | 48 | Sera Cahoone |
-| 49 | The Trojan Lullabist | 49 | Kimya Dawson |
-| 50 | The Intimate Architect | 50 | Mirah |
-| 51 | The Folk Organism | 51 | Grand Archives |
-| 52 | The Arena Breakout | 52 | Brandi Carlile |
-| 53 | The Prodigy Return | 53 | Fleet Foxes |
-| 54 | The Neighborhood Anchor | 54 | Ivan & Alyosha |
-| 55 | The Infrastructure Beneficiary | 55 | Shelby Earl |
-| 56 | The Duo Collective | 56 | Lemolo |
-| 57 | The Label Bridge | 57 | Laura Gibson |
-| 58 | The Bellingham Ascent | 58 | Death Cab for Cutie |
-| 59 | The Scene Intellectual | 59 | The Long Winters |
-| 60 | The Frontman Alone | 60 | Ben Gibbard (solo) |
-| 61 | The Corridor Bridge | 61 | Y La Bamba |
-| 62 | The Brief Blaze | 62 | Pickwick |
-| 63 | The Everett Departure | 63 | Kenny Loggins |
-| 64 | The Dark-Folk Loner | 64 | Jesse Sykes |
-| 65 | The Montana Connection | 65 | Philip Aaberg |
-| 66 | The Wanderer Who Claims Multiple Cities | 66 | Neko Case |
-| 67 | The Departed Member | 67 | Chris Walla |
-| 68 | The Visiting Artist | 68 | Sam Beam |
-| 69 | The Working Musician | 69 | Kris Orlowski |
-| 70 | The Corridor Wanderer | 70 | Horse Feathers |
-| 71 | The Anacortes Hermit | 71 | Phil Elverum |
-| 72 | The International Student | 72 | Briana Marela |
-| 73 | The K Records Collective | 73 | LAKE |
-| 74 | The Side Project | 74 | Poor Moon |
-| 75 | The Second Anacortes Act | 75 | The Lonely Forest |
-| 76 | The Identity Artist | 76 | Chris Pureka |
-| 77 | The YouTube-to-Artist Pipeline | 77 | Mree |
-| 78 | The Porch Party | 78 | Acid Tongue |
-| 79 | The Dark Meditation | 79 | Jesse Marchant |
-| 80 | The Married Duo | 80 | Mates of State |
-| 81 | The Crossover Arc | 81 | Sara Bareilles |
-| 82 | The Recursive Return | 82 | Death Cab for Cutie (acoustic) |
-| 83 | The Arena Unplugged | 83 | Pearl Jam (acoustic) |
-| 84 | The Artist Arc | 84 | Damien Jurado (late career) |
-| 85 | The Confessional Return | 85 | Rocky Votolato (acoustic) |
-| 86 | The Side Project | 86 | The Postal Service |
-| **87** | **The Early Chapter** | **87** | **Neko Case (early folk)** |
-
-Eighty-eight named patterns across eighty-eight degrees. The Early Chapter (87) introduces the pattern of a return artist appearing in their earlier context -- the formative years before the mature work that already appeared in the engine. Degree 66 gave us Neko Case fully formed (Alt Country, E=4, Anti- Records). Degree 87 gives us the beginning (Folk Country, E=3, Bloodshot Records). The engine encountered the mature artist first and now encounters the beginning. The early chapter inverts chronology. The distinction from degree 86 (The Side Project): the side project is lateral movement to a new genre; the early chapter is temporal movement to an earlier era. The distinction from degree 85 (The Confessional Return): the confessional return stays within genre; the early chapter returns to an earlier genre context. The distinction from degree 84 (The Artist Arc): the artist arc is later career; the early chapter is earlier career. Opposite temporal directions.
-
-## Genre Evolution (69 stages)
-
-| Stage | Degree | Genre | Artist |
-|-------|--------|-------|--------|
-| 27 | 45 | Folk | Damien Jurado |
-| 28 | 46 | Folk | Rocky Votolato |
-| 29 | 47 | Indie Folk | Pedro the Lion |
-| 30 | 48 | Folk | Sera Cahoone |
-| 31 | 49 | Folk Punk | Kimya Dawson |
-| 32 | 50 | Indie Folk | Mirah |
-| 33 | 51 | Indie Folk | Grand Archives |
-| 34 | 52 | Folk/Rock | Brandi Carlile |
-| 35 | 53 | Indie Folk | Fleet Foxes |
-| 36 | 54 | Folk | Ivan & Alyosha |
-| 37 | 55 | Singer-Songwriter | Shelby Earl |
-| 38 | 56 | Indie Folk | Lemolo |
-| 39 | 57 | Folk | Laura Gibson |
-| 40 | 58 | Indie Rock | Death Cab for Cutie |
-| 41 | 59 | Indie Rock | The Long Winters |
-| 42 | 60 | Folk | Ben Gibbard (solo) |
-| 43 | 61 | Folk/Indie | Y La Bamba |
-| 44 | 62 | Indie/Folk | Pickwick |
-| 45 | 63 | Soft Rock/Folk | Kenny Loggins |
-| 46 | 64 | Folk | Jesse Sykes |
-| 47 | 65 | New Age/Folk | Philip Aaberg |
-| 48 | 66 | Alt Country | Neko Case |
-| 49 | 67 | Indie/Folk | Chris Walla |
-| 50 | 68 | Folk | Sam Beam |
-| 51 | 69 | Singer-Songwriter | Kris Orlowski |
-| 52 | 70 | Indie Folk | Horse Feathers |
-| 53 | 71 | Indie/Folk | Phil Elverum |
-| 54 | 72 | Art Pop | Briana Marela |
-| 55 | 73 | Indie Pop | LAKE |
-| 56 | 74 | Indie Folk/Rock | Poor Moon |
-| 57 | 75 | Indie Pop | The Lonely Forest |
-| 58 | 76 | Folk | Chris Pureka |
-| 59 | 77 | Folk/Pop | Mree |
-| 60 | 78 | Folk/Indie | Acid Tongue |
-| 61 | 79 | Folk | Jesse Marchant |
-| 62 | 80 | Indie Pop | Mates of State |
-| 63 | 81 | Pop/Soul | Sara Bareilles |
-| 64 | 82 | Indie Folk | Death Cab for Cutie (acoustic) |
-| 65 | 83 | Acoustic Rock | Pearl Jam (acoustic) |
-| 66 | 84 | Folk | Damien Jurado (late career) |
-| 67 | 85 | Folk | Rocky Votolato (acoustic) |
-| 68 | 86 | Indie Electronic | The Postal Service |
-| **69** | **87** | **Folk Country** | **Neko Case (early folk)** |
-
-Genre Stage 69 -- **Folk Country** arrives at degree 87 with Neko Case's early work. Distinguished from Alt Country (66) by rawer, more traditional folk-country roots. The Bloodshot Records context defines this. After the engine's first electronic genre (Indie Electronic at 86), it returns to organic roots -- folk-country with twang and pedal steel. The engine swings back from electronic to organic.
-
-## Energy Distribution
-
-**Artist-side (after degree 87):** E1:3 (3.3%), E2:30 (33.3%), E3:23 (25.6%), E4:21 (23.3%), E5:11 (12.2%), E6:2 (2.2%). Total: 90. E=3 rises to 23 deployments with Case's E=3. E=2 remains at 30, still most common. The quiet majority (E1+E2+E3) = 56 of 90 (62.2%).
-
-**Species-side (after degree 87):** E=4 for the cricket chorus. After the treefrog at E=4 (86), the cricket chorus maintains E=4. Back-to-back E=4 collective choruses. Both through collective amplification.
-
-## Cross-References (Combined)
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| S36-066 | Neko Case Early (87) | Neko Case (66) | SAME ARTIST, DIFFERENT ERA. Alt Country at E=4. Mature voice. Anti- Records. Degree 87 is the early folk context -- Bloodshot years. Voice finding itself vs voice fully realized. |
-| S36-046 | Neko Case Early (87) | Rocky Votolato (46) | RETURN PATTERN. Both PNW singer-songwriters. Both returns explore different temporal contexts. |
-| S36-085 | Neko Case Early (87) | Rocky Votolato acoustic (85) | CONSECUTIVE RETURNS. Votolato at 85. Case at 87. Return zone continues. |
-| S36-045 | Neko Case Early (87) | Damien Jurado (45) | RETURN PATTERN. First and fourth return artists. Jurado late career (84) vs Case early career (87) -- opposite temporal directions. |
-| S36-084 | Neko Case Early (87) | Damien Jurado late (84) | RETURN ZONE. Jurado at 84, Votolato at 85, Case at 87. Three returns in four degrees. |
-| S36-064 | Neko Case Early (87) | Jesse Sykes (64) | DARK FOLK WOMEN. Both women with powerful voices in folk/country territory. PNW dark-folk lineage. |
-| S36-078 | Neko Case Early (87) | Acid Tongue (78) | FOLK COUNTRY. Both in the folk-country space. Twang and country structures. |
-| SPS-086 | Cricket Chorus (87) | Pacific Treefrog (86) | CHORUS PARALLEL. Both collective breeding sounds. Both E=4. Treefrog (marsh, Amphibia) and cricket (meadow, Insecta). Back-to-back chorus species. |
-| SPS-059 | Cricket Chorus (87) | Mallard (59) | UBIQUITOUS. Both familiar background sounds of PNW landscapes. Both define their soundscapes. |
-| SPS-025 | Cricket Chorus (87) | American Robin (25) | FAMILIAR BACKGROUND SOUND. Robin song for mornings; cricket chorus for summer nights. Dawn and dusk counterparts. |
-| SPS-062 | Cricket Chorus (87) | Beaver Chewing (62) | RHYTHMIC REPETITION. Both rhythmically repetitive sounds. Both continuous, both functional. |
-| SPS-073 | Cricket Chorus (87) | Snowshoe Hare (73) | PREY CONNECTION and MEADOW SHARED. Both abundant, both foundational in food webs. |
-
-## Infrastructure
-
-**Part A:** `www/tibsfox/com/Research/S36/research/releases/087-neko-case-early/` -- research.md, index.html, knowledge-nodes.json, retrospective.md
-**Part B:** `www/tibsfox/com/Research/SPS/research/releases/087-cricket-chorus/` -- research.md, index.html, knowledge-nodes.json, retrospective.md
-**Release notes:** `docs/release-notes/v1.49.227/README.md`
-
-**Total: 8 files** -- standard degree package.
+## Part A: Neko Case (Early Folk) — The Emerging Twang
+
+- **Fourth return artist (66/87).** Neko Case is the fourth artist after **Damien Jurado** (45/84), **Rocky Votolato** (46/85), and **Death Cab for Cutie** (58/82) to appear twice in the engine with different contextual framings. The four return patterns now sort cleanly into two modes: hold-steady (Jurado E=3→E=3, Votolato E=3→E=3) and step-down (Death Cab E=4→E=3, Case E=4→E=3). Two examples per mode. The framework is complete.
+- **Genre Stage 69 — Folk Country, distinguished from Alt Country.** *The Virginian* (1997) and *Furnace Room Lullaby* (2000) sit on Bloodshot Records as folk-country debut and transition work. The Bloodshot Records insurgent country context — pedal steel, twang, honky-tonk structures — distinguishes the early Folk Country from the Anti- Records Alt Country of degree 66. Same artist, related genres, different scaffolding.
+- **E=3 — energy decreases on return.** Energy distribution after degree 87: E1:3, E2:30, E3:23, E4:21, E5:11, E6:2. Total: 90. The energy step-down from E=4 (degree 66) to E=3 (degree 87) matches Death Cab's pattern (E=4 to E=3 at degree 82). E=3 rises to 23 deployments and narrows the gap behind E=2's lead at 30.
+- **First Bloodshot Records artist.** Independent label from Chicago, Illinois, founded in 1994. The heart of the insurgent country movement. Catalog includes **Alejandro Escovedo**, **Waco Brothers**, and **Robbie Fulks**. The label shift from Bloodshot (Chicago) to Anti- Records (Los Angeles) tracks Case's trajectory from scrappy scene participant to nationally-recognized art-pop folk-country singer. Label as artistic statement, again.
+- **The emerging twang — 88th acoustic element.** A powerful voice held within folk-country structures rather than soaring above them. Pedal steel, twangy guitars, country rhythms, and a voice that hints at the force it will become at *Middle Cyclone* (2009) and *The Worse Things Get, the Harder I Fight, the Harder I Fight, the More I Love You* (2013). The twang is **emerging** — present but not dominant. The country bones show through the performance.
+- **The Early Chapter — 88th artist-city pattern.** The engine encountered the mature artist first (degree 66) and now encounters the formative beginning (degree 87). Temporal inversion. The arc reverses. The Early Chapter is the inverse of The Artist Arc (degree 84 Jurado), which moved chronologically forward (early to late). The Early Chapter moves chronologically backward (mature to early). Together, the two patterns bracket an artist's career.
+- ***The Virginian* (1997).** Debut album on Bloodshot Records. A folk-country record with twang, pedal steel, and honky-tonk structures. The voice is already remarkable but not yet deployed at full power. The arrangements are scrappy and raw, appropriate for a debut on an insurgent country label. Recorded in Vancouver, British Columbia with Carolyn Mark and Brian Connelly. The arrangements are deliberately rough.
+- ***Furnace Room Lullaby* (2000).** Second Bloodshot release. The transition album. Begins to hint at the expansive, powerful vocal performances that would define Case's later work. The country structures are still present but loosening. "Set Out Running" and "Thrice All American" show the folk-country roots; "Guided by Wire" shows where she's heading. Recorded across multiple sessions in Vancouver and Tucson, Arizona — the multi-anchor approach that would shape her later geographic identity.
+- **The Bloodshot scene as community.** Case's early work sits within the Bloodshot Records community — **Alejandro Escovedo**'s Texan Americana, the **Waco Brothers**' British country-punk, **Robbie Fulks**' country traditionalism. The label's roster gave the early voice a context that elevated it. The voice did not develop in isolation; it developed inside a scene. The label is the scaffolding.
+- **Lineage — Jesse Sykes, Acid Tongue, PNW dark-folk women.** Case sits in the broader PNW dark-folk women's lineage that includes **Jesse Sykes** (degree 64) and the band **Acid Tongue** (degree 78). Each represents a different mode of folk-country expression: Sykes' confessional darkness, Acid Tongue's communal twang, Case's narrative-country power. The lineage is genuinely PNW — Tacoma, Vancouver, Portland anchor points.
+- **Tacoma, Washington / Chicago, Illinois.** The geographic anchors of early Case. Born in Alexandria, Virginia; raised in Tacoma, Washington; moved to Vancouver, British Columbia for art school; recorded the Bloodshot albums while based in Chicago, Illinois. The multi-city identity that **The Wanderer Who Claims Multiple Cities** (degree 66) named is already present in the early-folk era — Case has always been a wanderer.
+
+## Part B: Cricket Chorus — Insecta Enters
+
+- **First insect in the engine.** The Cricket Chorus is the engine's first insect entry. After 86 prior entries spanning Aves (60 degrees), Mammalia (25 degrees), and Amphibia (1 degree), the door to Insecta opens. The fourth class joins the engine, and the species-side taxonomic breadth nearly doubles in scope.
+- **Insecta enters — fourth class.** Class Insecta is the fourth taxonomic class in the engine. Class diversity is accelerating: one class for sixty degrees, one for twenty-five, one for one, now a fourth at degree 87. Two consecutive class crossings (86 → Amphibia, 87 → Insecta) mark a structural phase. The engine's taxonomic breadth is expanding rapidly.
+- **Gryllidae — 38th family, three taxonomic levels in one entry.** Family Gryllidae (true crickets) is a new family, the 38th in the engine. The entry simultaneously introduces a new order (**Orthoptera** — crickets, grasshoppers, katydids) and a new class (**Insecta**). Three taxonomic levels added in a single entry. Unprecedented. No prior entry added three levels simultaneously.
+- **Family-level entry — three constituent genera.** The cricket chorus represents the collective sound of field crickets at the family level: **Gryllus** spp. (field crickets, the most common PNW ground crickets), **Acheta** spp. (house crickets, found near human habitation), and **Oecanthus** spp. (tree crickets, higher-pitched and more continuously trilling). Multiple species contribute to the chorus.
+- **Stridulation — the mechanism.** Sound produced by rubbing a scraper on one forewing against a file on the other. Individual chirp approximately 50–100 ms, repeated at regular intervals. Field crickets produce 1–4 chirps per second at approximately 3,000–5,000 Hz. The mechanism is conserved across Orthoptera and is older than mammals.
+- **Dolbear's Law — temperature-dependent chirp rate.** *T(F) = N/4 + 40*, where N = chirps per minute for the snowy tree cricket. Amos Dolbear described the relationship in 1897. Count chirps in 14 seconds and add 40 to get approximate Fahrenheit temperature. The cricket is a **living thermometer** — and the engine's first species governed by a named mathematical law. Unique in the engine.
+- **The chorus — collective amplification.** When hundreds or thousands of male crickets stridulate simultaneously, the individual rhythmic chirps overlap into a continuous field chorus. Unlike the treefrog chorus at degree 86 (wall-of-sound with no gaps), the cricket chorus retains its **rhythmic quality** — the regular pulse is still perceptible even in large choruses. Loud and rhythmic, not loud and continuous.
+- **E=4 through collective amplification.** Individual chirps carry well (10–20 meters). The collective chorus is overwhelming. Fills the entire meadow soundscape on summer nights. Continuous for hours. E=4 through collective amplification — the same mechanism as **Pacific Treefrog** at degree 86. Two consecutive entries using the same mechanism for the same energy level.
+- **Back-to-back chorus species (86–87).** Pacific Treefrog (marsh, krek-krek, Amphibia) followed by Cricket Chorus (meadow, chirp, Insecta). Both collective breeding sounds. Both E=4. Different habitats, different textures. The chorus zone is established: degrees where collective sound phenomena dominate. The pattern may extend if more Orthoptera arrive.
+- **Habitat — dry meadow.** Grasslands, fields, meadow edges, lawns. Ground layer and low vegetation. Contrasts cleanly with the marsh of degree 86. The meadow soundscape on summer nights is dominated by the cricket chorus; daytime by birdsong; transitions by both.
+- **Predators and ecology.** Birds, bats, spiders, frogs (including **Pacific Treefrog** at degree 86 — direct prey relationship), lizards, small mammals. Foundational prey item in meadow food webs. Diet: omnivorous — plant material, fungi, other insects, carrion. Decomposers and scavengers as well as prey.
+- **Twenty-seventh consecutive original CSV species.** The engine's first insect sits inside the longest unbroken run of original-catalog selections to date: degrees 61–87. The original CSV continues to deliver, and now delivers across four taxonomic classes.
 
 ## Retrospective
 
-**What Worked:**
-1. Neko Case as the fourth return artist tracks cleanly -- first at 66 (Alt Country, E=4, Anti- Records), now at 87 (Folk Country, E=3, Bloodshot Records). Energy decreases from E=4 to E=3, same direction as Death Cab's return. The observation is clean and defensible
-2. The Bloodshot Records context is well-documented and culturally significant -- Chicago insurgent country label, *The Virginian* (1997) and *Furnace Room Lullaby* (2000) are real albums on a real label. The label context genuinely distinguishes the early work from the mature Anti- Records period
-3. Genre Stage 69 (Folk Country) is genuinely distinct from Alt Country (66) -- the Bloodshot Records insurgent country context vs the Anti- Records expansive alt-country context. The distinction is documented and defensible
-4. The emerging twang (88th acoustic element) captures the early Neko Case sound with precision -- a powerful voice held within folk-country structures, pedal steel and twang, the voice not yet fully deployed. The contrast with the electronic pulse (86) is one of the sharpest in the engine: synthesizers to pedal steel in one degree
-5. INSECTA ENTERS at degree 87 is one of the engine's most significant structural events -- fourth class after Aves, Mammalia, and Amphibia. Class diversity accelerates. The observation is clean
-6. Dolbear's Law (T = N/4 + 40) gives the cricket a unique status -- the only species with a mathematically described temperature-sound relationship. Published in 1897, widely verified, verifiable by anyone counting chirps. A living thermometer
-7. The rhythmic chirp field chorus as the 88th acoustic element distinguishes cleanly from the treefrog wall-of-sound (86) -- the cricket chorus retains rhythmic quality even in large choruses. The audible distinction is real and defensible
-8. Gryllidae as the 38th family adds three taxonomic levels in one entry (new family, new order Orthoptera, new class Insecta). This is unprecedented -- no prior entry added three levels simultaneously
-9. Back-to-back chorus species (86-87) is ecologically genuine -- both collective breeding sounds, both E=4 through collective amplification. The parallel was not forced
-10. The return zone density (four returns in six degrees, 82-87) is a real structural observation. The engine is revisiting its past with increasing frequency
+### What Worked
 
-**What Could Be Better:**
-1. PNW-specific cricket species not deeply identified -- ACCEPTED, family-level entry is appropriate
-2. NO RAPTOR in 88 entries -- CRITICAL. Must be addressed
-3. NO PASSERIFORM in 31 degrees -- thirty-one consecutive non-passerines (57-87). EXTREME
-4. NO MARINE SPECIES -- 88 entries without a marine specialist. SIGNIFICANT
+- **Four return artists, four data points, two patterns.** With Case as the fourth return artist, the engine now has four examples of return — Jurado (45/84, hold-steady E=3), Votolato (46/85, hold-steady E=3), Death Cab (58/82, step-down E=4→E=3), and Case (66/87, step-down E=4→E=3). Two patterns with two examples each. The framework now has predictive power: future returns can be classified by which mode applies on first inspection.
+- **Insecta entering as a planned crossing rather than a forced one.** The engine's species side had spent 86 degrees inside Aves, Mammalia, and Amphibia. The cricket chorus arrives not as a substitution but as a planned class addition that follows naturally from the back-to-back chorus pattern — a chorus species in marsh (86) followed by a chorus species in meadow (87) in two different classes. The structural logic justified the class crossing.
+- **Three taxonomic levels added in a single entry.** Gryllidae, Orthoptera, and Insecta all entered the engine simultaneously. This is the maximum-level taxonomic addition in the engine to date, and the entry's research artifacts had to scale to cover all three levels. The chapter package handled it cleanly.
+- **Dolbear's Law as the engine's first named mathematical law.** Most species in the engine have qualitative descriptions. The cricket chorus has a quantitative law: *T(F) = N/4 + 40*. The law connects biology to physics through sound and gives the cricket a unique status. Future entries can be classified against this — species with quantifiable acoustic-environmental relationships form a new tracked category.
+- **The Early Chapter as the inverse of The Artist Arc.** Degree 84 (Jurado) introduced **The Artist Arc** — early to late, chronologically forward, same energy. Degree 87 (Case) introduces **The Early Chapter** — mature to early, chronologically backward, energy decreased. Together they bracket an artist's career and demonstrate that return-artist patterns can move in either temporal direction.
+
+### What Could Be Better
+
+- **The Aves Gap is past urgent and into structural emergency.** Twenty-seven consecutive non-Aves degrees (61–87). Eighty-eight entries and zero raptors. Thirty-one degrees with no passeriform. The Insecta door opens at degree 87 but the Aves door has been closed since degree 60. The next several degrees must include Aves — multiple Aves — to begin closing the gap, and the engine should commit to this regardless of how interesting the Insecta thread becomes.
+- **PNW-specific cricket species not deeply identified.** The family-level entry is appropriate for a chorus phenomenon (multiple genera contribute), but a future research artifact should identify the specific PNW Gryllidae species more precisely. *Gryllus pennsylvanicus*, *Acheta domesticus* in human-adjacent habitat, *Oecanthus* spp. in higher-vegetation contexts. The species-level depth is owed.
+- **Thirty-one consecutive non-passeriform degrees.** The longest absence of songbirds in the engine to date. The engine has wandered into rodents, mustelids, an amphibian, and now an insect, but the songbird thread that defined the early degrees has gone silent. Songbirds need to return and stay for a while.
+- **Eighty-eight entries without a marine specialist.** Salt-water birds, marine mammals, intertidal invertebrates — none have appeared. The PNW is a marine region; the catalog should reflect that. A marine specialist is overdue.
+- **The label-shift analytical lane introduced at degree 84 still lacks retroactive coverage.** First Bloodshot Records appearance at degree 87 adds a third label to the lane (after Sub Pop and Secretly Canadian), but earlier label data has not been aggregated. The label-as-artistic-statement reading has surfaced three times now and deserves a standalone analysis.
 
 ## Lessons Learned
 
-1. The fourth return artist (Case) and the fourth class (Insecta) arriving at the same degree is coincidental but structurally resonant -- degree 87 is a degree of fourths. Both expand existing categories. Four return artists in the engine. Four classes in the engine
-2. The emerging twang as an acoustic element captures something genuine about artistic development -- the voice before full deployment is a real phenomenon. Early recordings of powerful vocalists often show the voice already present but not yet fully committed. The element describes a recognizable stage of artistic development
-3. Dolbear's Law is the engine's first mathematically described biological phenomenon. The equation T = N/4 + 40 connects biology to physics through sound. This opens a category -- species with quantifiable relationships between environmental conditions and acoustic output
-4. The cricket chorus as E=4 through collective amplification confirms the mechanism introduced by the treefrog (86). Two consecutive entries using the same mechanism (collective) for the same energy level (E=4). The mechanism is now established, not anomalous
-5. The early chapter pattern (temporal movement to earlier era) is the inverse of the artist arc (temporal movement to later era, degree 84). Together they bracket the artist's career -- the beginning and the end. The engine can now present an artist at multiple points in their timeline
-6. Back-to-back chorus species (86-87) establishes a "chorus zone" in the engine -- degrees where collective sound phenomena dominate. This may continue (Orthoptera at 88 could extend the zone)
-7. The return zone density (four returns in six degrees) suggests the engine has entered a structural phase where the past is being revisited. The rate of returns is accelerating. This is not random -- it reflects the CSV's placement of related artists in nearby positions
+- **The fourth return artist completes a four-example return-artist framework.** With Jurado, Votolato, Death Cab, and Case all having appeared twice, the engine has enough data to characterize return-artist patterns reliably. The next return can be classified at first inspection by which mode applies (hold-steady or step-down). The framework has earned predictive power.
+- **Class crossings can be planned through acoustic theme rather than through taxonomic schedule.** Insecta entered at degree 87 because the back-to-back chorus species pattern (86 marsh, 87 meadow) made it the natural next entry, not because a taxonomic checklist demanded it. Acoustic theme can drive taxonomic crossings, and the result feels less mechanical than a checklist would.
+- **Three taxonomic levels in one entry is a milestone worth marking.** The Gryllidae entry simultaneously added a new family, a new order, and a new class. The maximum-level taxonomic addition in the engine to date. Future entries that approach this density (e.g., a marine invertebrate phylum crossing) should be flagged as comparable milestones.
+- **A named mathematical law gives a species unique status in the engine.** Dolbear's Law makes the cricket the first species in the engine governed by a quantitative published relationship. Future entries with comparable quantitative status (e.g., bat echolocation frequency-distance relationships, songbird circadian phase equations) should be tracked as members of this category.
+- **The Early Chapter and The Artist Arc bracket an artist's career.** Degrees 84 and 87 demonstrate that return-artist patterns can move chronologically forward (artist arc, early to late) or backward (early chapter, mature to early). The two patterns are inverses, and together they form a complete temporal framework for return artists. Future return artists can move in either direction.
+- **Energy step-down on return is now an established pattern with two examples.** Death Cab (E=4→E=3 at degree 82) and Case (E=4→E=3 at degree 87) both stepped energy down on return. Jurado (E=3→E=3 at 84) and Votolato (E=3→E=3 at 85) both held energy steady. The step-down pattern is not coincidental; it reflects the tendency of mature artists to return in quieter contexts.
+- **The chorus zone is now an engine category.** Degrees 86 and 87 together establish the chorus zone — degrees where collective sound phenomena dominate. Both E=4 through collective amplification. Both breeding-season adaptations. The engine should expect more chorus species and may dedicate degree clusters to their exploration.
+- **The Aves Gap requires a hard structural commitment, not another vow.** Twenty-seven consecutive non-Aves degrees and the gap is still growing. Acknowledgment without action is not enough. The next several degrees must include Aves, and the engine must hold there until the imbalance is materially corrected. The discipline to break out of a productive vein remains the engine's hardest discipline.
 
----
+## Cross-References
 
-The emerging twang and the first insect. Degree 87 -- where the folk-country singer finds her voice and the meadow finds its chorus. Neko Case returns as the FOURTH RETURN ARTIST -- first at 66 (Alt Country, E=4, Anti- Records), now at 87 (Folk Country, E=3, Bloodshot Records). Energy decreases. The Bloodshot years are the seed. THE VIRGINIAN (1997). FURNACE ROOM LULLABY (2000). The voice is already remarkable but not yet deployed at full power. GENRE STAGE 69 -- Folk Country. THE EMERGING TWANG -- 88th acoustic element, a powerful voice held within folk-country structures, pedal steel and twang. THE EARLY CHAPTER -- 88th artist-city pattern, the engine encounters the beginning after the mature work. Return zone dense: four returns in six degrees (82-87). The Cricket Chorus at the eighty-seventh degree -- INSECTA ENTERS. FIRST INSECT. FOURTH CLASS (Aves, Mammalia, Amphibia, Insecta). Class diversity accelerates. GRYLLIDAE -- NEW FAMILY (38th). NEW ORDER Orthoptera. NEW CLASS Insecta. Three taxonomic levels in one entry. RHYTHMIC CHIRP FIELD CHORUS -- 88th species-side acoustic element, collective stridulation, hundreds or thousands chirping simultaneously in dry meadow, rhythmic pulsing quality distinct from treefrog wall-of-sound (86). DOLBEAR'S LAW -- T(F) = N/4 + 40 -- the living thermometer. E=4 through collective amplification. BACK-TO-BACK CHORUS SPECIES (86-87) -- treefrog and cricket, both collective, both E=4, marsh and meadow, Amphibia and Insecta. Twenty-seventh consecutive original CSV. The emerging twang and the rhythmic chirp. The folk-country singer and the field chorus. Both about the emerging voice. Both finding their power.
+| Connection | From | To | Nature |
+|------------|------|-----|--------|
+| S36-066 | Neko Case Early (87) | Neko Case (66) | THE EARLY CHAPTER. Same artist, two temporal points, 21 degrees apart. Mature voice (66, Alt Country, E=4, Anti- Records) and emerging voice (87, Folk Country, E=3, Bloodshot Records). The engine encountered the mature artist first; now it encounters the beginning. Temporal inversion. |
+| S36-082 | Neko Case Early (87) | Death Cab for Cutie acoustic (82) | RETURN ARTIST FRAMEWORK — STEP-DOWN MODE. Both stepped energy down on return (E=4 to E=3). Two examples of the energy step-down return mode. Death Cab shifted genre laterally (Indie Rock to Indie Folk); Case shifted to a related but distinct form (Alt Country to Folk Country). |
+| S36-084 | Neko Case Early (87) | Damien Jurado late (84) | RETURN ZONE + INVERSE TEMPORAL DIRECTIONS. Jurado at 84 is The Artist Arc (early to late). Case at 87 is The Early Chapter (mature to early). Inverse temporal directions. Together they bracket the artist's career. |
+| S36-085 | Neko Case Early (87) | Rocky Votolato acoustic (85) | CONSECUTIVE RETURNS. Votolato at 85, Case at 87. Two return artists in three degrees. The return zone tightens. |
+| S36-045 | Neko Case Early (87) | Damien Jurado (45) | RETURN ARTIST FRAMEWORK — TWO MODES. First and fourth return artists (Jurado at 45/84 and Case at 66/87). Different return-energy modes (Jurado hold-steady, Case step-down). Different temporal directions (Jurado forward, Case backward). |
+| S36-046 | Neko Case Early (87) | Rocky Votolato (46) | RETURN ARTIST FRAMEWORK. Both PNW singer-songwriters with folk/country roots. Both returns explore different temporal contexts. Votolato second return (46/85), Case fourth return (66/87). |
+| S36-058 | Neko Case Early (87) | Death Cab for Cutie original (58) | INDIE LINEAGE. Death Cab at 58 (Indie Rock), Case at 66 (Alt Country). Two anchors of the engine's mature folk-country lineage. Both have now returned (Death Cab at 82, Case at 87). |
+| S36-064 | Neko Case Early (87) | Jesse Sykes (64) | DARK-FOLK WOMEN. Both PNW women with powerful voices in folk/country/dark-folk territory. The PNW dark-folk women's lineage. |
+| S36-078 | Neko Case Early (87) | Acid Tongue (78) | FOLK COUNTRY SPACE. Both in the folk-country space rooted in twang and country structures. Acid Tongue is a band; Case is solo. Both PNW. |
+| S36-068 | Neko Case Early (87) | Sam Beam / Iron & Wine (68) | QUIET FOLK CONSTELLATION. Both work in the quiet folk register at low energy. Beam at E=2, Case at E=3. Adjacent registers. |
+| S36-086 | Neko Case Early (87) | The Postal Service (86) | ORGANIC vs ELECTRONIC SWING. Maximum production (synthesizers, programmed beats, 86) to maximum organic restraint (pedal steel, twangy guitars, 87) in one degree. One of the sharpest engine swings to date. |
+| SPS-086 | Cricket Chorus (87) | Pacific Treefrog (86) | BACK-TO-BACK CHORUS SPECIES. Both collective breeding sounds. Both E=4 through collective amplification. Treefrog (marsh, krek-krek, Amphibia) and cricket (meadow, chirp, Insecta). Two consecutive class crossings. Chorus zone established. |
+| SPS-059 | Cricket Chorus (87) | Mallard (59) | UBIQUITOUS PNW BACKGROUND SOUND. Both familiar background sounds of PNW landscapes. Mallard quack immediately recognizable; cricket chirp immediately recognizable. Both define their soundscapes. |
+| SPS-025 | Cricket Chorus (87) | American Robin (25) | DAWN AND DUSK COUNTERPARTS. Robin song defines PNW mornings; cricket chorus defines PNW summer nights. Diel counterparts. Both familiar background sounds. |
+| SPS-062 | Cricket Chorus (87) | Beaver Chewing (62) | RHYTHMIC REPETITION. Both rhythmically repetitive sounds. Beaver gnawing and cricket chirping. Both continuous, both functional, both distinctive. |
+| SPS-073 | Cricket Chorus (87) | Snowshoe Hare (73) | MEADOW SHARED + PREY CONNECTION. Both abundant in meadow ecosystems. Both foundational prey items in food webs. Hare for forest predators, crickets for meadow predators. |
+| RES-dolbear-1897 | Cricket Chorus (87) | Amos Dolbear 1897 | DOLBEAR'S LAW. The foundational cricket-chirp temperature relationship. *T(F) = N/4 + 40.* Living thermometer. The engine's first species governed by a published mathematical law. Unique status. |
+| RES-virginian-1997 | Neko Case Early (87) | *The Virginian* (1997) | THE BLOODSHOT DEBUT. Folk-country debut on Bloodshot Records. Twang, pedal steel, honky-tonk structures. Voice already remarkable but not yet fully deployed. The clearest single artifact of the emerging twang. |
+| RES-furnace-2000 | Neko Case Early (87) | *Furnace Room Lullaby* (2000) | THE TRANSITION ALBUM. Second Bloodshot release. Begins the transition toward the expansive sound that would define the Anti- Records years. Country structures still present but loosening. |
 
-</details>
+## Engine Position
+
+- **Degree 87 of 360** — 24.2% of the circle traversed.
+- **Twin counters tick to 88**: the emerging twang is the 88th acoustic element on the artist side; rhythmic chirp field chorus is the 88th acoustic element on the species side; The Early Chapter is the 88th artist-city pattern.
+- **Genre Stage 69** — Folk Country, distinguished from Alt Country (degree 66) by rawer Bloodshot-era roots.
+- **Energy distribution after degree 87 (artist side)**: E1:3, E2:30, E3:23, E4:21, E5:11, E6:2. Total: 90. **E=2 leads at 30 deployments; E=3 rises to 23.**
+- **Return artist count: 4.** Jurado (45/84, hold-steady E=3), Votolato (46/85, hold-steady E=3), Death Cab for Cutie (58/82, step-down E=4→E=3), Case (66/87, step-down E=4→E=3).
+- **Return zone density**: four returns in six degrees (82, 84, 85, 87).
+- **Class diversity**: 4 classes — Aves (60 degrees), Mammalia (25 degrees), Amphibia (1 degree), Insecta (1 degree). Two consecutive class crossings (86 → Amphibia, 87 → Insecta).
+- **Family count**: 38 — Gryllidae is the 38th family, with new order Orthoptera and new class Insecta added in the same entry.
+- **Original CSV unbroken**: 27 consecutive original-catalog species (degrees 61–87) — the longest unbroken run in the engine.
+- **Label firsts**: First Bloodshot Records appearance.
+- **Aves Gap**: 27 consecutive non-Aves degrees (61–87), zero raptors in 88 entries, 31 degrees without a passeriform, no marine specialist. Structural emergency.
+
+## Files
+
+- `docs/release-notes/v1.49.227/README.md` (this file)
+- `docs/release-notes/v1.49.227/chapter/00-summary.md` — derived summary
+- `docs/release-notes/v1.49.227/chapter/03-retrospective.md` — retrospective
+- `docs/release-notes/v1.49.227/chapter/04-lessons.md` — extracted lessons
+- `docs/release-notes/v1.49.227/chapter/99-context.md` — context
+- `www/tibsfox/com/Research/S36/research/releases/087-neko-case-early/index.html`
+- `www/tibsfox/com/Research/S36/research/releases/087-neko-case-early/research.md`
+- `www/tibsfox/com/Research/S36/research/releases/087-neko-case-early/knowledge-nodes.json`
+- `www/tibsfox/com/Research/S36/research/releases/087-neko-case-early/retrospective.md`
+- `www/tibsfox/com/Research/SPS/research/releases/087-cricket-chorus/index.html`
+- `www/tibsfox/com/Research/SPS/research/releases/087-cricket-chorus/research.md`
+- `www/tibsfox/com/Research/SPS/research/releases/087-cricket-chorus/knowledge-nodes.json`
+- `www/tibsfox/com/Research/SPS/research/releases/087-cricket-chorus/retrospective.md`
+
+Total: 9 files in commit `23fdb4cf365edd3f6fc6b6e6e70a3936c4e1fba1`.
