@@ -1,499 +1,182 @@
-# v1.49.228 -- Degree 88: Kimya Dawson (Solo) + Katydid (Tettigoniidae)
+# v1.49.228 — Degree 88: Kimya Dawson (Solo) + Katydid
 
 **Released:** 2026-04-01
 **Degree:** 88 of 360
-**Part A:** Kimya Dawson (Solo) -- Lo-Fi Folk, E=3, K Records, FIFTH RETURN ARTIST (first appeared at degree 49 Anti-Folk E=2 the lullaby subversion the trojan lullabist, now solo/K Records context Lo-Fi Folk E=3, energy INCREASES E=2 to E=3 first return where energy increases), GENRE STAGE 70 MILESTONE (Lo-Fi Folk, seventy genre stages in 88 degrees, lo-fi as ideology not compromise, K Records framework reinforces lo-fi sincerity, distinguished from Anti-Folk 49 by solo context and K Records label), SECOND K RECORDS ARTIST (after LAKE at degree 73, Calvin Johnson's Olympia label, lo-fi sincerity, the Olympia lineage Beat Happening Microphones LAKE Dawson), THE BEDROOM STRUM 89th acoustic element (single acoustic guitar strummed simply recorded without production, close-mic'd or room-mic'd you can hear the room, imperfections are the point K Records aesthetic, minimum production after maximum production at 86), THE SOLO DISTILLATION 89th artist-city pattern (return artist whose solo work strips away everything from original band context, Moldy Peaches communal Anti-Folk energy irony duo dynamic removed leaving only one voice one guitar the songs), THE JUNO CONNECTION (2007 film soundtrack went platinum brought Dawson's lo-fi aesthetic to mass audience), SPACING SYMMETRY (Jurado 45/84 gap 39 Dawson 49/88 gap 39 both return exactly 39 degrees later), RETURN ZONE EXTENDS (degrees 82 84 85 87 88 all returns five returns in seven degrees), Olympia Washington / New York New York
-**Part B:** Katydid (Tettigoniidae) -- continuous electric buzz, E=4, shrub/meadow, Tettigoniidae, SECOND CONSECUTIVE INSECT (87-88, after cricket chorus at 87), BACK-TO-BACK ORTHOPTERA (same order as cricket 87 like Anatidae 58-59, when the engine encounters an order it tends to linger), TETTIGONIIDAE NEW FAMILY (39th, bush-crickets/katydids/long-horned grasshoppers, same order Orthoptera as Gryllidae 87 but different family, back-to-back new families in the same order), CONTINUOUS ELECTRIC BUZZ 89th species-side acoustic element (sustained high-pitched drone produced by wing stridulation NOT rhythmic chirps like cricket 87 but continuous unbroken buzz that sounds almost electrical, 5,000-20,000 Hz higher than cricket 3,000-5,000 Hz, fills shrub canopy), STRIDULATION CHIRP VS BUZZ (same mechanism different result, cricket = discrete chirps rhythmic, katydid = continuous drone no gaps, two expressions of one mechanism), THREE CONSECUTIVE NON-MAMMALIAN ENTRIES (86-87-88 treefrog cricket katydid, longest non-mammalian streak since bird era), ARBOREAL/SHRUB-DWELLING (elevated calling position contrasts with ground-dwelling cricket 87), BAT-KATYDID FREQUENCY ARMS RACE (some species shift above echolocation range), TWENTY-EIGHTH CONSECUTIVE ORIGINAL CSV species (degrees 61-88)
-**Series:** Seattle 360 + Sound of Puget Sound -- Continuous Release Engine
+**Part A:** Kimya Dawson (Solo) — Lo-Fi Folk, E=3, K Records, Genre Stage 70 milestone, fifth return artist (49/88), the bedroom strum, the solo distillation
+**Part B:** Katydid (*Tettigoniidae*) — continuous electric buzz, E=4, shrub/meadow, Tettigoniidae 39th family, second consecutive Orthoptera, wing stridulation, 28th original CSV
+**Series:** Seattle 360 + Sound of Puget Sound — Continuous Release Engine
 **Cluster:** Music (hub: WAL)
-**Note:** Part A brings **Kimya Dawson** back as the **fifth return artist** -- first appeared at degree 49 (Anti-Folk, E=2, the lullaby subversion, the trojan lullabist) and now returns in her solo/K Records context (Lo-Fi Folk, E=3). The energy **increases** from E=2 to E=3 -- the **first return where energy increases**. The solo work has more presence than the fragile Moldy Peaches lullabies. The K Records context adds Olympia indie infrastructure. **Genre Stage 70** -- a milestone. Seventy genre stages in 88 degrees. **Lo-Fi Folk** describes Dawson's solo work: acoustic guitar, unpolished vocals, home recordings, the aesthetic of the handmade. Distinguished from Anti-Folk (49): the Moldy Peaches were Anti-Folk (New York scene, ironic, communal). Dawson solo is Lo-Fi Folk -- not ironic, not communal, just one person with a guitar being completely honest. **K Records** -- Calvin Johnson's Olympia label, second K Records artist after LAKE (73). The Olympia lo-fi lineage: Beat Happening, Microphones (Phil Elverum 71), LAKE (73), Dawson (88). **The bedroom strum** is the 89th acoustic element -- a single acoustic guitar strummed simply, recorded without production. You can hear the room. The imperfections are the point. K Records aesthetic translated into one person's recording practice. Minimum production after maximum production (Postal Service 86). **The solo distillation** is the 89th artist-city pattern -- a return artist whose solo work strips away everything from the original band context. The Moldy Peaches were a duo, a scene, an attitude. Dawson solo is just Dawson. The songs unadorned. **The Juno connection** -- the 2007 film *Juno* used several Dawson songs on its platinum soundtrack. The bedroom strum went mainstream but Dawson didn't change. **Spacing symmetry** -- Jurado at 45/84 (gap of 39), Dawson at 49/88 (gap of 39). Both return exactly 39 degrees later. The return zone extends: degrees 82, 84, 85, 87, 88 are all returns. Five returns in seven degrees. Part B delivers the **Katydid** (Tettigoniidae) -- **SECOND CONSECUTIVE INSECT** (87-88). Back-to-back Orthoptera. **Tettigoniidae** is a **NEW FAMILY** -- the 39th. Same order Orthoptera as cricket (87, Gryllidae) but a different family. Back-to-back new families in the same order. The katydid produces a **continuous electric buzz** -- a sustained, high-pitched, droning sound through wing stridulation. Same mechanism as the cricket but fundamentally different result: the cricket produces **rhythmic chirps**; the katydid produces a **continuous drone**. Two expressions of one mechanism. The buzz sounds almost **electrical** -- more like a power line or electronic oscillator than a biological sound. 5,000-20,000 Hz, higher than cricket's 3,000-5,000 Hz. **E=4** -- the continuous nature fills the shrub canopy soundscape. Katydids are **arboreal/shrub-dwelling**, calling from elevated positions in shrubs and trees -- contrasting with ground-dwelling crickets (87). Ground vs canopy. Chirp vs buzz. **Three consecutive non-mammalian entries** (86-87-88) -- treefrog (Amphibia), cricket (Insecta), katydid (Insecta). The longest non-mammalian streak since the bird era. **Bat-katydid frequency arms race** -- some species shift call frequency above bat echolocation range. **Twenty-eighth consecutive original CSV** (61-88).
+**Branch:** main
+**Commit:** `b6c55c43ad52e4f29d255e95878330399dc58a4c`
+**Files changed:** 9 (release note + 4 Kimya Dawson solo research artifacts + 4 Katydid research artifacts)
+**Dedication:** To **Kimya Dawson** in solo/K Records context — the trojan lullabist become the bedroom strummer, the artist who took the Moldy Peaches' Anti-Folk irony and stripped it down to one voice and one acoustic guitar in *I'm Sorry That Sometimes I'm Mean* (2002, **K Records**), *My Cute Fiend Sweet Princess* (2004), and *Remember That I Love You* (2006); to the *Juno* (2007) platinum soundtrack that carried the bedroom strum to a mass audience without changing the recording practice; to **Calvin Johnson** and the **Olympia, Washington** lo-fi lineage (Beat Happening, the Microphones, Mount Eerie, LAKE) that made imperfection-as-authenticity into a regional aesthetic; to the **Katydid** (*Tettigoniidae*) — the bush-cricket, the leaf-mimicking shrub-canopy buzzer whose continuous wing stridulation fills Pacific Northwest summer nights with an almost-electrical drone; to the **bat-katydid frequency arms race** that pushes some species' calls above echolocation range; and to the **Cricket Chorus** of **degree 87**, whose rhythmic chirp and the katydid's continuous buzz are two expressions of one stridulatory mechanism.
+**Engine Position:** Degree 88 of 360 — 24.4% of the circle traversed; the bedroom strum (89th acoustic element artist-side); continuous electric buzz (89th species-side); The Solo Distillation (89th artist-city pattern); GENRE STAGE 70 MILESTONE Lo-Fi Folk (seventy genre stages in eighty-eight degrees, 0.80 stages/degree); FIFTH RETURN ARTIST after **Damien Jurado** (45/84), **Rocky Votolato** (46/85), **Death Cab for Cutie** (58/82), **Neko Case** (66/87) — Dawson at 49/88; FIRST RETURN WHERE ENERGY INCREASES (E=2 → E=3, prior returns held or decreased); SECOND **K Records** artist after **LAKE** (73), Olympia lo-fi lineage extending Beat Happening → Microphones → LAKE → Dawson; SECOND CONSECUTIVE **Orthoptera** (87–88) parallels **Anatidae** (58–59); **TETTIGONIIDAE** thirty-ninth family, back-to-back new families in same order; THREE CONSECUTIVE NON-MAMMALIAN entries (86–87–88, treefrog → cricket → katydid) — longest non-mammalian streak since the bird era (0–60); TWENTY-EIGHTH consecutive original CSV species (degrees 61–88); THIRD CONSECUTIVE E=4 species entry (treefrog, cricket, katydid).
+**Note:** Part A returns **Kimya Dawson** in solo/K Records context — the fifth artist to appear twice in the engine after **Jurado**, **Votolato**, **Death Cab for Cutie**, and **Neko Case**. The lullaby subversion at degree 49 (Anti-Folk, Moldy Peaches, E=2, New York scene) becomes the bedroom strum at degree 88 (Lo-Fi Folk, K Records, E=3, Olympia framework). The label changed (no label / Sanctuary to **K Records**), the city orbit shifted (New York Anti-Folk to Olympia lo-fi sincerity), and the energy *increased* — the first return where energy goes up rather than holding steady or decreasing. **Genre Stage 70** lands as a milestone: seventy distinct genre stages across eighty-eight degrees. Part B delivers the **Katydid**, the second consecutive **Orthoptera** after the **Cricket Chorus** (87), the shrub-canopy buzzer whose stridulation produces a continuous drone where the cricket produces rhythmic chirps. Both halves are studies in persistence without force — the strummer who never stops, the insect that never pauses.
 
 ## Summary
 
-The bedroom strum and the electric buzz. Degree 88 is the engine's study of persistence without force -- the lo-fi folk singer who strums entire songs without embellishment, and the katydid that buzzes all night without interruption. On the music side, **Kimya Dawson** returns as the **fifth return artist** -- first appeared at degree 49 (Anti-Folk, E=2, the lullaby subversion) and now returns in solo context (Lo-Fi Folk, E=3, K Records). The energy **increases** from E=2 to E=3 -- the **first return where energy increases**. Prior returns held steady (Jurado, Votolato at E=3) or decreased (Death Cab E=4 to E=3, Case E=4 to E=3). Dawson is different: the solo work has more presence than the fragile Moldy Peaches lullabies. **Genre Stage 70** -- a milestone. Seventy genre stages in 88 degrees. Roughly 0.8 genre stages per degree -- the engine introduces a new genre nearly every degree. **Lo-Fi Folk** describes Dawson's solo work: acoustic guitar, unpolished vocals, home recordings. The lo-fi quality is deliberate -- the rawness is the point. Distinguished from Anti-Folk (49): the Moldy Peaches were an Anti-Folk band (New York scene, ironic, communal). Dawson solo is Lo-Fi Folk -- not ironic, not communal, just one person with a guitar being completely honest. **K Records** -- Calvin Johnson's Olympia label, the heart of PNW lo-fi indie. Second K Records artist after LAKE (73). The Olympia lo-fi lineage runs through K Records: Beat Happening, Microphones (Phil Elverum 71), LAKE (73), Dawson (88). **The bedroom strum** is the 89th acoustic element -- a single acoustic guitar strummed simply, recorded without production. You can hear the room. The guitar is not perfectly in tune. The performance is not perfectly timed. The imperfections are the point. K Records aesthetic. Minimum production. From the electronic pulse (86, maximum) to the emerging twang (87, organic restraint) to the bedroom strum (88, minimum). Three consecutive degrees of sonic descent. **The solo distillation** is the 89th artist-city pattern -- a return artist whose solo work strips away everything from the original band context. The Moldy Peaches were a duo, a scene, an attitude. Dawson solo is just Dawson. One voice, one guitar, the songs. Unadorned, unprotected. **The Juno connection** -- the 2007 film *Juno* used several Dawson songs. The soundtrack went platinum. The bedroom strum went mainstream but Dawson didn't change. The music stayed lo-fi. **Spacing symmetry** -- Jurado at 45/84 (gap of 39), Dawson at 49/88 (gap of 39). Both return exactly 39 degrees later. The return zone extends: 82, 84, 85, 87, 88. Five returns in seven degrees. The engine is deep in its retrospective phase.
+**The bedroom strum and the electric buzz.** Degree 88 is the engine's study of persistence without force — the lo-fi folk singer who strums entire songs without embellishment, and the shrub-canopy insect that buzzes continuously through Pacific Northwest summer nights without pause. The two halves of degree 88 share four structural properties (continuous, stripped-down, persistent, lo-fi-by-nature) and a single principle: that an entity's claim on the soundscape can be made by sustained occupation rather than by amplitude or complexity. **Kimya Dawson** introduces the **bedroom strum** as the eighty-ninth artist-side acoustic element while the **Katydid** introduces the **continuous electric buzz** as the eighty-ninth species-side element. Both arrive at the precise threshold where the engine's twin counters tick over in unison, and both arrive on a degree whose dominant theme is presence-through-duration rather than presence-through-volume. The **Postal Service** at **degree 86** was maximum production; **Neko Case (early)** at **degree 87** was organic restraint; the **bedroom strum** at **degree 88** is minimum production. Three consecutive degrees of sonic descent on the artist side. On the species side, the **Pacific Treefrog** at **degree 86** was a wall of sound; the **Cricket Chorus** at **degree 87** was rhythmic field chorus; the **Katydid** at **degree 88** is a continuous drone. Three consecutive E=4 species through three different mechanisms — collective amplification, collective rhythmic stridulation, and individual sustained stridulation.
 
-On the species side, the **Katydid** (Tettigoniidae) is the **second consecutive insect** (87-88). Back-to-back Orthoptera -- the same pattern as Anatidae (58-59, Wood Duck and Mallard). When the engine encounters an order, it tends to linger. **Tettigoniidae** is a **NEW FAMILY** -- the 39th. Same order Orthoptera as Gryllidae (87) but a different family. Back-to-back new families in the same order -- Gryllidae (38th) and Tettigoniidae (39th). The katydid produces a **continuous electric buzz** through wing stridulation -- the same mechanism as the cricket but with a fundamentally different acoustic result. The cricket produces **rhythmic chirps** (discrete pulses at regular intervals). The katydid produces a **continuous drone** (sustained oscillation without gaps). Same mechanism, different expression. The buzz is high-pitched (5,000-20,000 Hz, higher than cricket's 3,000-5,000 Hz), sustained, and sounds almost **electrical** -- more like a power line or electronic oscillator than a biological sound. **E=4** -- the continuous nature fills the shrub canopy soundscape without gaps. Multiple katydids create an overlapping sustained drone. Katydids are **arboreal/shrub-dwelling**, calling from elevated positions in shrubs and trees. This contrasts with the ground-dwelling crickets (87). Same order, different vertical niche. Ground chirps and canopy drones. "Katy-DID, katy-DIDN'T" gives the animal its common name, but many PNW species produce a sustained buzz rather than the stereotyped phrase. Leaf-like camouflage -- many katydids are remarkably leaf-like in appearance. Heard far more than seen. **Bats** are the primary nocturnal predator -- echolocation detects katydid calls. Some katydids have evolved to shift call frequency above bat echolocation range. A frequency arms race. **Three consecutive non-mammalian entries** (86-87-88) -- Pacific Treefrog (Amphibia), cricket chorus (Insecta), katydid (Insecta). The longest non-mammalian streak since the bird era (0-60). **Twenty-eighth consecutive original CSV** (61-88).
+**Part A: Kimya Dawson in solo/K Records context.** On the music side, **Kimya Dawson** is the **FIFTH artist to appear twice** in the engine, after **Damien Jurado** (45/84), **Rocky Votolato** (46/85), **Death Cab for Cutie** (58/82), and **Neko Case** (66/87). She first appeared at **degree 49** as the trojan lullabist — the **Moldy Peaches** in their **New York Anti-Folk** scene context, sweet-sounding lullabies hiding subversive content, fragile and intentionally amateur, **E=2**. She returns at **degree 88** with solo work on **K Records** — *I'm Sorry That Sometimes I'm Mean* (2002), *My Cute Fiend Sweet Princess* (2004), and *Remember That I Love You* (2006). The albums are radically simple but more confident than the Moldy Peaches recordings: single acoustic guitar, voice close-mic'd or room-mic'd, no production, imperfections preserved as features rather than bugs. **Genre Stage 70** holds **Lo-Fi Folk** as a new genre, distinguished from the **Folk Punk / Anti-Folk** of degree 49 by the absence of irony, the absence of the duo dynamic, and the presence of the K Records framework. The early Moldy Peaches recordings carried New York scene energy and the protective duo dynamic with **Adam Green**; the late solo work has shed all of it. **E=3** at degree 88 is *higher* than the **E=2** at degree 49 — the **first return where energy increases**. Prior returns held steady (Jurado E=3 → E=3, Votolato E=3 → E=3) or decreased (Death Cab E=4 → E=3, Case E=4 → E=3). Dawson alone moves the energy upward, because the solo work — freed from the Anti-Folk performance frame — has more natural presence than the deliberately fragile Moldy Peaches lullabies. Distribution after degree 88: E1:3, E2:30, E3:24, E4:21, E5:11, E6:2. Total: 91. **All five return artists now sit at E=3** — a convergence point regardless of starting energy. **K Records** is **Calvin Johnson**'s **Olympia, Washington** label, the heart of Pacific Northwest lo-fi indie, home to **Beat Happening**, the **Microphones**, **Mount Eerie**, and a generation of artists who treated imperfection as authenticity. Dawson is the second K Records artist in the engine after **LAKE** at **degree 73**; **Phil Elverum** at **degree 71** sits in K Records orbit through the Microphones / Mount Eerie catalog. The Olympia lineage now reads Beat Happening → Microphones (Elverum, 71) → LAKE (73) → Dawson (88). **The bedroom strum** is the eighty-ninth acoustic element — a single acoustic guitar strummed simply, recorded without production, the room audible behind the voice, the guitar not perfectly in tune, the timing not perfectly metronomic. K Records aesthetic translated into one performer's recording practice. **The Solo Distillation** is the eighty-ninth artist-city pattern — a return artist whose solo work strips away everything from the original band context. The Moldy Peaches were a duo, a scene, an attitude; Dawson solo is just Dawson. The pattern is **format reduction** rather than the **temporal inversion** of degree 87 (Neko Case's early-folk return) or the **lateral movement** of degree 86 (Postal Service as side project). **The Juno connection** — the 2007 film *Juno*, scored by **Mateo Messina** and curated around Dawson's catalog, used "Tire Swing," "So Nice So Smart," "My Rollercoaster," and the Moldy Peaches' "Anyone Else But You" on a soundtrack that went platinum. The bedroom strum went mainstream while the recording practice did not. **Spacing symmetry** with **Damien Jurado** is exact: Jurado returns at gap 39 (45 → 84), Dawson returns at gap 39 (49 → 88). Two return artists with identical gaps suggests the catalog has embedded spacing regularities worth tracking forward. **Return zone extends** — degrees 82, 84, 85, 87, 88 are all returns. Five returns in seven degrees. The engine is deep in a retrospective phase that revisits earlier entries with accelerating frequency.
 
-Both Kimya Dawson and the katydid are continuous and stripped-down. The katydid's continuous buzz is an unbroken, sustained sound. Dawson's bedroom strum is a continuous, unpolished, stripped-down performance. Both are minimal in structure but persistent in presence. The katydid buzzes all night; Dawson strums through entire songs without embellishment. Both occupy their space completely through persistence, not force.
+**Part B: Katydid (Tettigoniidae).** On the species side, the **Katydid** (*Tettigoniidae*) is the **second consecutive insect** after the **Cricket Chorus** at **degree 87**, and the **second consecutive Orthoptera**. This back-to-back same-order pattern parallels **Anatidae** at degrees 58–59 (**Wood Duck** and **Mallard**) — when the engine encounters an order, it tends to linger and explore the order's internal diversity rather than sample once and move on. The katydid family **Tettigoniidae** is the **39th family** in the engine, sitting immediately after **Gryllidae** (38th family, the cricket family at 87). Back-to-back new families from the same order is itself an unusual pattern. The Pacific Northwest hosts multiple PNW Tettigoniidae species: the **fork-tailed bush katydid** (*Scudderia furcata*), the **broad-winged katydid** (*Microcentrum rhombifolium*), and the meadow katydids (*Conocephalus* species). Most are remarkably leaf-like in appearance — green, flat, with vein patterns on the wings — and are heard far more often than seen. The katydid produces sound through **stridulation**, the same mechanism crickets use: a file on one forewing rubs against a scraper on the other. But the acoustic result is fundamentally different. The **Cricket Chorus** at degree 87 produces **discrete rhythmic chirps** (3,000–5,000 Hz) that retain pulse structure even when many crickets call together. The **Katydid** at degree 88 produces a **continuous unbroken buzz** (5,000–20,000 Hz) that sounds almost electrical, more like a power-line hum or an electronic oscillator than a biological sound. Same mechanism, different result — two expressions of a single stridulatory architecture. **E=4** for the katydid: individual calls are loud (audible at 15–30 meters) and the continuous nature fills the soundscape without gaps. Multiple katydids produce overlapping sustained drones that occupy the entire frequency band. This is the **third consecutive E=4 species entry** in the engine — **Pacific Treefrog** (86, collective amplification), **Cricket Chorus** (87, collective rhythmic stridulation), **Katydid** (88, individual sustained stridulation). Three consecutive E=4s through three different mechanisms is unprecedented. Katydids are **arboreal/shrub-dwelling**, calling from elevated positions in shrubs and trees, contrasting with the **ground-dwelling** crickets at degree 87. Same order, different vertical niche — chirps from the ground, drones from the canopy. **Bats** are the primary nocturnal predator, locating katydids through echolocation. Some katydid species have evolved to shift their call frequency above the bat echolocation range, producing what biologists call a **frequency arms race** — predator hearing and prey calling pushed upward in lockstep. **Three consecutive non-mammalian entries** (86–87–88) — **Pacific Treefrog** (Amphibia), **Cricket Chorus** (Insecta), **Katydid** (Insecta). This is the longest non-mammalian streak since the bird era ended at **degree 60**. The mammalian dominance that ran from degrees 61 through 85 (twenty-five consecutive degrees) finally broke at degree 86 and has now extended to a three-degree non-mammalian run. **Twenty-eighth consecutive original CSV species** (degrees 61–88) — the longest unbroken run of original-catalog selections in the engine to date.
+
+**Cross-Sync Parallel: Persistence Without Force.** Both **Dawson** in solo/K Records context and the **Katydid** are studies in continuous, sustained, stripped-down presence. **In parallel**, both occupy their soundscape completely through duration rather than amplitude or complexity. **Dawson** strums entire songs without embellishment; the **Katydid** buzzes through entire summer nights without pause. Neither raises volume to claim attention; both rely on the unbroken nature of their sound. **The same** engine-level theme — that presence is achievable without force — reaches both halves on the same degree, producing a degree that is more about *holding* than about *announcing*.
+
+**Cross-Sync Parallel: The Same Mechanism, Different Result.** Both halves of degree 88 are also studies in same-mechanism / different-result pairings. **Dawson** uses the same instrument (acoustic guitar) and the same vocal register as her **degree 49** Moldy Peaches appearance, but the result is different — the lullaby subversion at 49 is fragile and ironic, the bedroom strum at 88 is confident and sincere. **In parallel**, the **Katydid** uses the same stridulatory mechanism as the **Cricket Chorus** at **degree 87**, but the result is different — the cricket's discrete rhythmic chirps become the katydid's continuous unbroken buzz. **Each side** demonstrates that mechanism does not determine result. **The same** structural law operates: identical inputs can produce maximally different outputs depending on the framing context (Anti-Folk duo vs. K Records solo, ground-dwelling vs. shrub-canopy, rhythmic pulses vs. sustained drone).
+
+**Cross-Sync Parallel: Five Returns and Two Lingerings.** Degree 88 makes the engine's framework for return artists nearly complete. **Dawson** is the **fifth return artist** after **Jurado** (45/84), **Votolato** (46/85), **Death Cab** (58/82), and **Case** (66/87). The five returns now exhibit four distinct energy patterns: holding (Jurado, Votolato), decreasing (Death Cab, Case), and the new pattern of **increasing** (Dawson). **In parallel**, the **Katydid** continues the engine's pattern of **lingering within taxonomic orders** — Anatidae lingered at degrees 58–59 (Wood Duck, Mallard), and now Orthoptera lingers at degrees 87–88 (Cricket Chorus, Katydid). The engine doesn't sample once and move on; it explores within-order diversity. **Each side** demonstrates that the engine's structural patterns are now mature enough to predict their own continuations. Five returns and two lingerings give the engine a tested vocabulary for revisitation.
+
+**Cross-Sync Parallel: The Sonic Descent Arc.** Both halves of degree 88 sit at the bottom of a three-degree descent. On the artist side, the **Postal Service** at **degree 86** was the **electronic pulse** at maximum production; **Neko Case (early)** at **degree 87** was the **emerging twang** at organic restraint; the **bedroom strum** at **degree 88** is minimum production. **In parallel**, the species side has descended through three E=4 mechanisms: collective amplification (treefrog), collective rhythmic stridulation (cricket), individual sustained stridulation (katydid). **Each side** has reached a kind of floor — the artist side has reached the absolute minimum production; the species side has reached the absolute minimum mechanism (single insect, single stridulatory stroke pattern, no chorus structure required). **Synchronized** by accident or design, degree 88 is the descent point.
+
+**Cross-Sync Parallel: Lo-Fi as Aesthetic and as Biology.** Both halves of degree 88 are lo-fi in their own ways. **Dawson**'s bedroom strum is lo-fi by aesthetic choice — the K Records framework treats imperfection as authenticity, the bedroom recording as a deliberate stance against studio polish. **In parallel**, the **Katydid**'s buzz is lo-fi by biology — there is no production, no processing, no signal cleanup; the sound is the raw mechanical product of two wings rubbing together. **Each side** rejects polish. **The same** principle — that the unadorned sound carries more honesty than the produced sound — reaches both halves on the same degree. The K Records aesthetic and the orthopteran stridulatory architecture arrive at the same conclusion through completely different paths.
+
+**Cross-Sync Parallel: The Olympia Lineage and the Orthopteran Lineage.** Both halves of degree 88 sit inside lineages that the engine has been building. **Dawson** joins the **Olympia, Washington** lo-fi lineage — **Beat Happening**, **the Microphones** / **Mount Eerie** (**Phil Elverum**, degree 71), **LAKE** (degree 73), now **Dawson** (degree 88). Four degrees of K Records / K Records-adjacent presence in the music side, all centered on Olympia and Calvin Johnson's aesthetic framework. **In parallel**, the **Katydid** joins the **Orthoptera** lineage that opened at **degree 87** with the **Cricket Chorus**. The Orthoptera lineage now contains two families (Gryllidae and Tettigoniidae), two acoustic elements (rhythmic chirp and continuous buzz), and two vertical niches (ground and canopy). **Each side** is a node inside a multi-degree taxonomic / cultural lineage. **The same** structural property — that the engine builds lineages by accumulating related entries across distant degrees — reaches both halves on the same degree.
+
+**Cross-Sync Parallel: Spacing Symmetry and Family Symmetry.** Both halves of degree 88 exhibit numerical symmetry. **Dawson**'s return at degree 88 sits exactly **39 degrees** after her first appearance at degree 49 — the same gap that **Damien Jurado** exhibits between degrees 45 and 84. Two return artists with identical gaps is unlikely to be coincidence and suggests the source CSV may have embedded spacing regularities. **In parallel**, the **Katydid**'s family **Tettigoniidae** (39th) sits one position after the **Gryllidae** (38th) family in the engine's family ledger, and back-to-back new families from the same order is itself a symmetry. **Each side** exhibits a numerical pattern that the engine had not previously surfaced. **Synchronized** by the catalog's structure rather than by individual selection, the symmetries point at structural properties of the sequence itself.
+
+**Cross-Sync Parallel: The Return Zone and the Non-Mammalian Streak.** Both halves of degree 88 sit inside extended runs. **In parallel**, the artist side is in a **return zone** — degrees 82, 84, 85, 87, 88 are all returns (five returns in seven degrees), the densest revisitation cluster in the engine to date. The species side is in a **non-mammalian streak** — degrees 86, 87, 88 are all non-mammalian (Amphibia, Insecta, Insecta), the longest non-mammalian streak since the bird era closed at degree 60. **Each side** is doing something the engine has not done at this density before — repeated revisitation on the artist side, repeated non-mammalian sampling on the species side. **The same** structural moment — the engine pulling out of a long phase (mammalian dominance, novel-only artists) and beginning to consolidate — reaches both halves on the same degree. **Synchronized** by maturity, the engine has stopped collecting and started examining.
+
+**Cross-Sync Parallel: The Solo Distillation and the Single Mechanism.** Both halves of degree 88 are reductions to single elements. **Dawson** at 88 is reduced from the **Moldy Peaches duo** (two voices, banter, scene context, irony) to a single voice with a single guitar. **In parallel**, the **Katydid** at 88 is reduced from the **Cricket Chorus** (collective rhythmic field chorus involving thousands of individuals) to a single insect's single stridulatory stroke pattern repeated continuously. **Each side** has stripped the previous degree's collective context down to its minimum unit. **Synchronized** by the engine's late-arc tendency toward distillation, both halves arrive at irreducible elements.
 
 ## Key Features
 
 | Metric | Part A: Kimya Dawson (Solo) | Part B: Katydid |
-|--------|----------------------------|-----------------|
-| Genre | Lo-Fi Folk (Genre Stage 70 MILESTONE, seventy genre stages in 88 degrees, lo-fi as ideology, acoustic guitar unpolished vocals home recordings, distinguished from Anti-Folk 49 by solo context and K Records sincerity) | -- |
-| Energy | E=3 (increases from E=2 at degree 49, first return where energy increases, solo work has more presence than fragile Moldy Peaches lullabies, K Records context adds Olympia indie infrastructure) | E=4 (continuous space-filling buzz, sustained drone fills shrub canopy, individual calls audible at 15-30 meters, continuous nature fills soundscape without gaps, E=4 through persistent space-filling quality) |
-| Label | K Records (second K Records artist after LAKE 73, Calvin Johnson's Olympia label, lo-fi sincerity, the Olympia lineage) | -- |
-| Family | -- | Tettigoniidae (NEW FAMILY 39th, bush-crickets/katydids, same order Orthoptera as Gryllidae 87, back-to-back new families in same order) |
-| Order | -- | Orthoptera (same as cricket 87, second consecutive Orthoptera, back-to-back Orthoptera) |
-| Class | -- | Insecta (second insect after cricket 87, fourth class in engine) |
-| Acoustic Element | the bedroom strum (89th, single acoustic guitar strummed simply recorded without production, you can hear the room, imperfections are the point, K Records aesthetic, minimum production, distinct from emerging twang 87 more instrumentation, distinct from electronic pulse 86 maximum production) | continuous electric buzz (89th species-side, sustained high-pitched drone, wing stridulation, sounds electric, 5,000-20,000 Hz, continuous no gaps, distinct from rhythmic chirp 87 pulsing, same mechanism different result) |
-| Artist-City Pattern | The Solo Distillation (89th, return artist whose solo work strips away everything from original band context, Moldy Peaches communal ironic duo to solo one voice one guitar, format reduction not temporal movement, distinct from early chapter 87 temporal inversion, distinct from side project 86 lateral movement) | -- |
-| Structural Firsts | FIFTH RETURN ARTIST (Dawson at 49/88, E=2 to E=3, first energy increase on return), GENRE STAGE 70 MILESTONE (Lo-Fi Folk, seventy genre stages), SECOND K RECORDS ARTIST (after LAKE 73, Olympia lo-fi lineage), THE BEDROOM STRUM 89th acoustic element (minimum production), THE SOLO DISTILLATION 89th artist-city pattern (format reduction band to solo), THE JUNO CONNECTION (platinum soundtrack), SPACING SYMMETRY (Jurado 45/84 and Dawson 49/88 both gap 39), RETURN ZONE EXTENDS (five returns in seven degrees 82-88) | SECOND CONSECUTIVE INSECT (87-88), BACK-TO-BACK ORTHOPTERA (like Anatidae 58-59), TETTIGONIIDAE NEW FAMILY (39th, back-to-back new families same order), CONTINUOUS ELECTRIC BUZZ 89th species-side acoustic element (sustained drone), STRIDULATION CHIRP VS BUZZ (same mechanism different result), THREE CONSECUTIVE NON-MAMMALIAN ENTRIES (86-87-88), BAT-KATYDID FREQUENCY ARMS RACE, TWENTY-EIGHTH CONSECUTIVE ORIGINAL CSV 61-88 |
+|--------|------------------------------|-----------------|
+| Genre | **Lo-Fi Folk** (Genre Stage 70 MILESTONE, seventy genre stages in eighty-eight degrees, lo-fi as ideology not compromise, K Records framework reinforces sincerity, distinguished from Anti-Folk 49 by solo context absence of irony absence of duo dynamic) | — |
+| Energy | **E=3** (increases from E=2 at degree 49, FIRST RETURN WHERE ENERGY INCREASES, prior returns held Jurado Votolato or decreased Death Cab Case, solo work has more natural presence than fragile Moldy Peaches lullabies, distribution 3:30:24:21:11:2 total 91, all five returns now converge at E=3) | **E=4** (continuous space-filling buzz audible at 15–30 meters, sustained drone fills shrub canopy without gaps, third consecutive E=4 species entry 86–87–88 unprecedented, persistent space-filling quality through stridulatory architecture) |
+| Label | **K Records** (SECOND K Records artist after LAKE 73, Calvin Johnson's Olympia label, lo-fi sincerity, the Olympia lineage Beat Happening Microphones LAKE Dawson) | — |
+| Family | — | **Tettigoniidae** (NEW FAMILY 39th, bush-crickets / katydids / long-horned grasshoppers, same order Orthoptera as Gryllidae 87, BACK-TO-BACK NEW FAMILIES from same order, multiple PNW species *Scudderia furcata* *Microcentrum rhombifolium* *Conocephalus* spp.) |
+| Order | — | **Orthoptera** (SECOND CONSECUTIVE Orthoptera 87–88, parallels Anatidae 58–59, when engine encounters order it lingers and explores within-order diversity) |
+| Class | — | **Insecta** (SECOND CONSECUTIVE Insecta 87–88, fourth class in engine after Mammalia Aves Amphibia, Insecta-streak opens after long mammalian era 61–85) |
+| Acoustic Element | **the bedroom strum** (89th, single acoustic guitar strummed simply recorded without production, room audible voice close-mic'd or room-mic'd, imperfections are the point, K Records aesthetic, minimum production, distinct from emerging twang 87 organic restraint, distinct from electronic pulse 86 maximum production) | **continuous electric buzz** (89th species-side, sustained high-pitched drone wing stridulation, sounds almost electrical, 5,000–20,000 Hz higher than cricket 3,000–5,000 Hz, continuous no gaps, distinct from rhythmic chirp 87 pulsing, same mechanism different result) |
+| Artist-City Pattern | **The Solo Distillation** (89th, return artist whose solo work strips away everything from original band context, Moldy Peaches communal ironic duo to solo one voice one guitar, format reduction not temporal movement, distinct from early chapter 87 temporal inversion, distinct from side project 86 lateral movement) | — |
+| Habitat Marker | — | **Shrub canopy / meadow edges** (arboreal calling from elevated positions in shrubs and trees, contrasts with ground-dwelling cricket 87, ground vs canopy same order different vertical niche, leaf-mimic camouflage heard far more than seen, bat predation primary nocturnal pressure) |
+| Structural Firsts | GENRE STAGE 70 MILESTONE Lo-Fi Folk (seventy genre stages in eighty-eight degrees), FIFTH RETURN ARTIST 49/88 after Jurado Votolato Death Cab Case, FIRST RETURN WHERE ENERGY INCREASES (E=2 → E=3), SECOND K RECORDS ARTIST after LAKE 73 (Olympia lineage), THE BEDROOM STRUM 89th acoustic element, THE SOLO DISTILLATION 89th artist-city pattern, THE JUNO CONNECTION (platinum soundtrack), SPACING SYMMETRY (Jurado 45/84 and Dawson 49/88 both gap 39), RETURN ZONE EXTENDS (five returns in seven degrees 82–88) | SECOND CONSECUTIVE INSECT 87–88 (back-to-back Orthoptera like Anatidae 58–59), TETTIGONIIDAE NEW FAMILY 39th (back-to-back new families same order), CONTINUOUS ELECTRIC BUZZ 89th species-side acoustic element (sustained drone), STRIDULATION CHIRP VS BUZZ (same mechanism different result), THREE CONSECUTIVE NON-MAMMALIAN ENTRIES 86–87–88 (longest non-mammalian streak since bird era), THIRD CONSECUTIVE E=4 SPECIES through three mechanisms, BAT-KATYDID FREQUENCY ARMS RACE, ARBOREAL/SHRUB-DWELLING (canopy vs ground 87), TWENTY-EIGHTH CONSECUTIVE ORIGINAL CSV 61–88 |
 | Research Words | ~5,500 | ~6,000 |
 | Files Produced | 4 | 4 |
 | Cross-References | 6 | 5 |
 
-<details>
-<summary>Full Release Notes -- Click to expand</summary>
+## Part A: Kimya Dawson (Solo) — The Bedroom Strum
 
-## Part A: Kimya Dawson (Solo) -- THE BEDROOM STRUM (E=3, Lo-Fi Folk, K Records, FIFTH RETURN ARTIST First Appeared Degree 49 Anti-Folk E=2 The Lullaby Subversion Now Solo Lo-Fi Folk E=3 Energy Increases First Energy Increase on Return, GENRE STAGE 70 MILESTONE Lo-Fi Folk Seventy Genre Stages Lo-Fi as Ideology K Records Sincerity, SECOND K RECORDS ARTIST After LAKE 73 Olympia Lo-Fi Lineage, The Bedroom Strum 89th Acoustic Element Minimum Production Imperfections Are the Point, The Solo Distillation 89th Artist-City Pattern Format Reduction Band to Solo, The Juno Connection Platinum Soundtrack, Spacing Symmetry Gap 39 Parallels Jurado, Olympia Washington / New York New York)
+- **Fifth return artist (49/88).** Kimya Dawson is the fifth artist in the engine to appear twice, after **Damien Jurado** (45/84), **Rocky Votolato** (46/85), **Death Cab for Cutie** (58/82), and **Neko Case** (66/87). Her first appearance at degree 49 was the **trojan lullabist** in Moldy Peaches / New York Anti-Folk context; her return at degree 88 is the solo K Records bedroom strummer. Two contexts, two genres, two energies, one artist whose voice spans both modes.
+- **First return where energy increases (E=2 → E=3).** Prior returns either held energy steady (**Jurado** E=3 → E=3, **Votolato** E=3 → E=3) or decreased it (**Death Cab** E=4 → E=3, **Case** E=4 → E=3). **Dawson** alone moves the energy *upward*. The Moldy Peaches' fragile E=2 was a deliberately restrained performance built on the duo dynamic and the Anti-Folk irony frame; the solo K Records work, freed from that frame, has more natural confidence. Energy on return reflects the relationship between the two contexts, not a universal trend toward quietude. **All five return artists now converge at E=3** regardless of starting energy.
+- **Genre Stage 70 — Lo-Fi Folk milestone.** The engine has now introduced seventy distinct genre stages across eighty-eight degrees — roughly 0.80 stages per degree, a remarkably stable rate since the folk zone began at degree 45. **Lo-Fi Folk** is distinguished from the **Folk Punk / Anti-Folk** of degree 49 by the absence of irony, the absence of the duo dynamic, and the presence of the **K Records** framework. The Moldy Peaches were a New York scene band; Dawson solo is a Pacific Northwest aesthetic. Same artist, two genre stages, twenty-eight degrees apart on the genre ledger.
+- **Second K Records artist (after LAKE at 73).** **K Records** is **Calvin Johnson**'s Olympia, Washington label, founded 1982, the heart of Pacific Northwest lo-fi indie. The label's artist roster includes **Beat Happening** (Calvin Johnson's own band), the **Microphones** / **Mount Eerie** (Phil Elverum at degree 71, K Records-adjacent), **LAKE** (degree 73, the engine's first K Records artist), and now **Kimya Dawson**. The Olympia lineage now reads Beat Happening → Microphones → LAKE → Dawson, four degrees of K Records / adjacent presence connecting Olympia to the broader lo-fi indie aesthetic.
+- **The bedroom strum — 89th acoustic element.** A single acoustic guitar, strummed simply, recorded without production. The voice is close-mic'd or room-mic'd. The room is audible behind the voice. The guitar is not perfectly in tune. The performance timing is not metronomic. The imperfections are not bugs to be cleaned up — they are features that signal authenticity, intimacy, the handmade. K Records aesthetic translated into one performer's recording practice. Distinct from the **emerging twang** at degree 87 (Neko Case early folk, more instrumentation, pedal steel, country structures) and from the **electronic pulse** at degree 86 (Postal Service, maximum production, layered synthesizers, MIDI-quantized timing).
+- **The Solo Distillation — 89th artist-city pattern.** A return artist whose solo work strips away everything from the original band context. The **Moldy Peaches** were a duo (Dawson + **Adam Green**), a scene (New York Anti-Folk), and an attitude (sweet-sounding lullabies hiding subversive content). **Dawson solo** is just Dawson. One voice, one guitar, the songs unadorned and unprotected. The pattern is **format reduction** rather than the **temporal inversion** of degree 87 (Neko Case's early-folk return moves backward in time within the same career) or the **lateral movement** of degree 86 (Postal Service is a side project moving sideways to a new collaborator).
+- **The Juno connection.** The 2007 film *Juno*, directed by **Jason Reitman** and scored by **Mateo Messina**, used Kimya Dawson's catalog extensively on its soundtrack — "Tire Swing," "So Nice So Smart," "My Rollercoaster," and the Moldy Peaches' "Anyone Else But You." The soundtrack went **platinum** in the United States. The bedroom strum reached a mass audience. Dawson did not change the recording practice in response — subsequent albums continued the same lo-fi K Records aesthetic. The *Juno* effect was on Dawson's audience, not on Dawson's method.
+- **Solo discography on K Records.** *I'm Sorry That Sometimes I'm Mean* (2002, debut solo album, recorded at home), *My Cute Fiend Sweet Princess* (2004, expanded arrangements within the same lo-fi framework), *Remember That I Love You* (2006, the album that became the *Juno* spine), *Alphabutt* (2008, children's album showcasing the same vocal register), *Thunder Thighs* (2011, post-*Juno* return to adult themes). The K Records years are the engine's primary reference; the post-2011 work continues but with diminished release frequency.
+- **Spacing symmetry with Damien Jurado.** Jurado returns at gap 39 (45 → 84). Dawson returns at gap 39 (49 → 88). Two return artists with identical gaps suggests the source CSV may have embedded spacing regularities — either deliberately structured during catalog assembly or emergent from the catalog's chronological / thematic ordering. The pattern is worth tracking forward: if **Pedro the Lion** at degree 47 returns at degree 86, or **Sera Cahoone** at degree 48 returns at degree 87, the spacing-39 hypothesis gains evidence.
+- **The Olympia lo-fi lineage extended.** Beat Happening (1982, K Records founding band), Microphones / Mount Eerie (Phil Elverum, K Records-adjacent through Mount Eerie's catalog, degree 71), LAKE (Olympia indie pop, degree 73), Dawson (Olympia transplant via solo K Records signing, degree 88). The lineage is now four degrees deep with a single shared aesthetic framework — imperfection-as-authenticity, low-budget recording, anti-studio politics. Dawson's signing to K Records was an aesthetic alliance as much as a contractual one.
+- **Return zone extends to five-in-seven.** Degrees 82, 84, 85, 87, 88 are all return artists (Death Cab acoustic 82, Jurado late 84, Votolato acoustic 85, Case early 87, Dawson solo 88). Five returns in seven degrees is the densest revisitation cluster in the engine to date. The engine is in a retrospective phase where new artists are interspersed with returning artists at near-parity. The pattern suggests the catalog has reached a maturity where revisitation produces more interesting structure than first-pass coverage.
 
-Full deep research covering Kimya Dawson's solo work on K Records, the fifth return, and the bedroom strum:
+## Part B: Katydid (Tettigoniidae) — Continuous Electric Buzz
 
-### STRUCTURAL EVENT: Fifth Return Artist -- Kimya Dawson Returns
+- **Second consecutive insect — back-to-back Orthoptera.** After the **Cricket Chorus** at degree 87 introduced **Insecta** as the engine's fourth class, the **Katydid** at degree 88 arrives as the second consecutive insect entry. Both are **Orthoptera** but from different families — **Gryllidae** at 87 (true crickets) and **Tettigoniidae** at 88 (bush-crickets / katydids / long-horned grasshoppers). The back-to-back same-order pattern parallels **Anatidae** at degrees 58–59 (Wood Duck and Mallard). When the engine encounters an order, it lingers.
+- **Tettigoniidae — 39th family.** The katydid family is the 39th family in the engine's family ledger, sitting immediately after **Gryllidae** (38th, the cricket family at degree 87). Back-to-back new families from the same order is itself an unusual pattern — most engine entries either repeat a prior family (within an existing lineage) or jump to a completely new order. Two new families in two degrees, both within Orthoptera, is the engine's tightest family-cluster expansion to date.
+- **Continuous electric buzz — 89th species-side acoustic element.** Sustained, high-pitched, drone produced through wing **stridulation**. The sound is unbroken — there are no gaps, no rhythmic structure, no silence between strokes. Frequency range 5,000–20,000 Hz, higher than the cricket's 3,000–5,000 Hz. The buzz sounds **electrical** rather than biological — more like a power line or an electronic oscillator than an insect. Multiple katydids produce overlapping continuous drones that fill the entire upper-frequency band of the shrub canopy soundscape.
+- **Stridulation: same mechanism, different result.** Both crickets and katydids produce sound through stridulation — a file on one forewing rubs against a scraper on the other. But the cricket produces **discrete rhythmic chirps** (regular pulses with audible gaps) while the katydid produces a **continuous unbroken buzz** (sustained oscillation without gaps). The mechanism is identical; the result is maximally different. Two expressions of one stridulatory architecture, both audible in Pacific Northwest summer evenings, both produced by the same kind of structural movement.
+- **E=4 — third consecutive E=4 species entry.** Individual katydid calls are loud (audible at 15–30 meters in still air) and the continuous nature fills the soundscape without gaps. **E=4** matches the **Pacific Treefrog** at degree 86 (collective amplification) and the **Cricket Chorus** at degree 87 (collective rhythmic stridulation). Three consecutive E=4 species through three completely different mechanisms — collective amplification, collective rhythmic stridulation, individual sustained stridulation — is unprecedented. E=4 is the "fills the soundscape" energy level, achievable through multiple distinct routes.
+- **Arboreal / shrub-canopy habitat.** Katydids call from elevated positions in shrubs and trees, contrasting with the ground-dwelling **Cricket Chorus** at degree 87. Same order, different vertical niche — chirps from the ground, drones from the canopy. PNW species favor deciduous shrubs (vine maple, oceanspray, salmonberry) and the lower canopy of mixed forest. The vertical separation reduces direct competition with crickets and partitions the orthopteran soundscape into ground-level pulse layer and canopy-level drone layer.
+- **Leaf-mimicking camouflage.** Many katydids — especially **broad-winged katydid** (*Microcentrum rhombifolium*) and the **fork-tailed bush katydid** (*Scudderia furcata*) — are remarkably leaf-like in appearance: green coloration, flat body shape, wings veined to mimic leaf venation, edges slightly serrated to mimic leaf margins. Crypsis is so effective that katydids are heard far more often than seen. The buzzing canopy is rarely visible.
+- **Bat-katydid frequency arms race.** **Bats** are the primary nocturnal predators of katydids, locating them through ultrasonic **echolocation**. Some katydid species have evolved to shift their call frequency *above* the bat echolocation range — pushing into ultrasonic territory themselves. The arms race operates upward: bat hearing improves, katydid calls move higher, bat hearing improves again. Some PNW *Microcentrum* species call at frequencies near the upper bound of human hearing.
+- **Three consecutive non-mammalian entries (86–87–88).** **Pacific Treefrog** (86, Amphibia), **Cricket Chorus** (87, Insecta), **Katydid** (88, Insecta). Three consecutive non-mammalian degrees is the longest non-mammalian streak since the bird era ended at **degree 60**. The mammalian dominance that ran from degrees 61 through 85 (twenty-five consecutive degrees) finally broke at degree 86 with the treefrog and has now extended to a three-degree run. The engine's class diversity is reasserting after a long mammalian phase.
+- **PNW species inventory.** Pacific Northwest Tettigoniidae include the **fork-tailed bush katydid** (*Scudderia furcata*, common in deciduous shrubs), the **broad-winged katydid** (*Microcentrum rhombifolium*, larger and louder, lower canopy), and the **meadow katydids** of genus *Conocephalus* (smaller, prefer grasslands and meadow edges rather than shrub canopy). All three contribute to the PNW summer soundscape. The engine's Tettigoniidae entry is family-level rather than species-level, encompassing all three genera.
+- **Twenty-eighth consecutive original CSV.** The engine's Katydid entry is the twenty-eighth consecutive species drawn from the original source catalog without substitution (degrees 61–88). The original CSV continues to deliver — the longest unbroken run of original-catalog selections in the engine to date.
 
-Kimya Dawson is the **fifth return artist** in the engine:
+## Retrospective
 
-| Return | Original Degree | Return Degree | Artist | Energy Change |
-|---|---|---|---|---|
-| 1st | 45 | 84 | Damien Jurado | E=3 -> E=3 |
-| 2nd | 46 | 85 | Rocky Votolato | E=3 -> E=3 |
-| 3rd | 58 | 82 | Death Cab for Cutie | E=4 -> E=3 |
-| 4th | 66 | 87 | Neko Case | E=4 -> E=3 |
-| 5th | 49 | 88 | Kimya Dawson | E=2 -> E=3 |
+### What Worked
 
-Dawson returns with energy **increasing** from E=2 to E=3 -- the **first return where energy increases**. The solo work has more presence than the fragile Moldy Peaches lullabies. The K Records context adds Olympia indie infrastructure.
+- **Kimya Dawson as the fifth return artist tracks cleanly.** The two contexts (Moldy Peaches at 49, solo K Records at 88) are sharply distinguished without contradicting each other. The lullaby subversion at 49 and the bedroom strum at 88 belong to the same artist but occupy different aesthetic frameworks. The classification is defensible and verifiable.
+- **The first energy increase on return is a genuine structural novelty.** Prior returns held (Jurado, Votolato) or decreased (Death Cab, Case). Dawson's E=2 → E=3 increase is the first instance and was identified by the energy ledger rather than imposed on the data. The framework earned its keep at degree 88.
+- **Genre Stage 70 milestone landed without forcing.** Lo-Fi Folk is genuinely distinct from Anti-Folk (49), the K Records framework provides the differentiating context, and the seventy-stages-in-eighty-eight-degrees ratio is a real measure of the engine's genre diversity. The milestone marks a real accomplishment rather than a manufactured anniversary.
+- **The chirp-vs-buzz comparison is one of the engine's sharpest acoustic contrasts.** Same stridulatory mechanism, completely different acoustic result, audible side-by-side in Pacific Northwest summer evenings, biologically verifiable. The comparison illuminates both degree 87 (cricket) and degree 88 (katydid) without requiring elaborate theoretical scaffolding.
+- **Three consecutive E=4 species through three different mechanisms is a genuine pattern.** Treefrog (collective amplification), cricket (collective rhythmic stridulation), katydid (individual sustained stridulation). The pattern was discovered by the energy ledger's running tally rather than imposed on the data; without the ledger, the unprecedented streak would have been invisible.
+- **The K Records / Olympia lineage extended naturally.** Beat Happening → Microphones (Elverum 71) → LAKE (73) → Dawson (88) is a real lineage with documented aesthetic continuity. The lineage is now four degrees deep in the engine and provides a tested vocabulary for future Olympia-aesthetic entries.
+- **The spacing symmetry observation (gap 39) was data-driven.** Jurado's 45/84 and Dawson's 49/88 both produce gap 39. The observation emerged from comparing return artists rather than from a hypothesis imposed beforehand. Worth tracking forward to see if other returns follow the pattern.
 
-The return zone extends: degrees 82, 84, 85, 87, 88 are all returns. Five returns in seven degrees. The engine revisits its past with accelerating frequency.
+### What Could Be Better
 
-Note the spacing symmetry: Jurado at 45/84 (gap of 39), Dawson at 49/88 (gap of 39). Both return exactly 39 degrees later.
+- **Twenty-five-degree mammalian dominance still casts a long shadow.** Three non-mammalian degrees (86–88) do not fully balance twenty-five consecutive mammalian degrees (61–85). Future degrees should continue prioritizing class diversity until the imbalance is more substantively repaired. The sampling pressure has eased but not normalized.
+- **NO RAPTOR in 89 entries.** The absence of birds of prey (Accipitridae, Falconidae, Strigidae, Tytonidae) across the entire PNW catalog so far is a structural deficiency. The engine has fifteen Aves entries from earlier degrees but zero raptors. A bird of prey is overdue.
+- **NO PASSERIFORM in 32 degrees.** Thirty-two consecutive non-passerine degrees (57–88) is itself an extreme. Passerines are the largest avian order; their absence distorts the engine's coverage of bird acoustic diversity. The engine should plan a deliberate return to passerines.
+- **NO MARINE SPECIES in 89 entries.** The Pacific Northwest's marine ecosystem (Salish Sea, Olympic Coast, Puget Sound proper) is unrepresented. Harbor seal, orca, sea lion, common loon, marbled murrelet — none have appeared. For an engine titled around Puget Sound, the marine omission is significant.
+- **Dawson's post-Juno catalog was abbreviated.** *Thunder Thighs* (2011) and the post-2011 work received only passing mention. The engine prioritized the K Records years (2002–2006) as the primary reference, but the post-Juno trajectory is its own story and deserves more development. A standalone research artifact would give the post-Juno work its due.
 
-### STRUCTURAL EVENT: Genre Stage 70 -- Lo-Fi Folk (Milestone)
+## Lessons Learned
 
-Degree 88 reaches **Genre Stage 70** -- a milestone. Seventy genre stages in 88 degrees. **Lo-Fi Folk** describes Kimya Dawson's solo work: acoustic guitar, unpolished vocals, home recordings, the aesthetic of the handmade.
+- **The first energy increase on return reveals that return energy is not universally decreasing.** The Moldy Peaches' fragile E=2 was a deliberately restrained performance built on the duo dynamic and the Anti-Folk irony frame. The solo work, freed from that frame, has more natural presence. Energy on return reflects the relationship between the two contexts, not a universal trend. Future returns should be analyzed for context-asymmetry rather than for assumed quietude.
+- **Genre Stage 70 as a milestone invites observation of the genre-to-degree ratio.** At 70/88 (0.80), the engine introduces a new genre stage nearly every degree. This rate has been remarkably stable since the folk zone began at degree 45. The engine's genre diversity is real, not inflated by aggressive subdivision. The ratio is worth tracking as a long-term engine-health metric.
+- **The spacing symmetry (gap of 39 for both Jurado and Dawson) raises the question of whether the CSV has embedded spacing regularities.** Two returns with identical gaps is unlikely to be coincidence. Worth tracking future return gaps explicitly — if Pedro the Lion (47) returns at 86 or Sera Cahoone (48) returns at 87, the spacing-39 hypothesis gains evidence. Add a return-gap ledger to the engine's running statistics.
+- **The bedroom strum as an acoustic element captures the absolute minimum.** The electronic pulse at degree 86 was maximum production; the emerging twang at 87 was organic restraint; the bedroom strum at 88 is minimum production. Three consecutive degrees of sonic descent illuminates all three entries. The descent arc itself is a meta-pattern worth naming explicitly when it appears again in future degrees.
+- **Back-to-back Orthoptera (87–88) confirms the engine's pattern of lingering within orders.** Anatidae at 58–59, now Orthoptera at 87–88. The engine doesn't sample orders once — it explores them in consecutive degrees. This produces the chirp-vs-buzz comparison, one of the engine's sharpest acoustic contrasts. Future orders that appear for the first time should be expected to linger; plan for two-to-three-degree runs as the default rather than the exception.
+- **Three consecutive E=4 species entries through three different mechanisms is unprecedented.** Collective amplification (treefrog), collective rhythmic stridulation (cricket), individual sustained stridulation (katydid). Three entries, three mechanisms, one energy level. E=4 is the "fills the soundscape" level, achievable through different means. Energy-level convergence across mechanisms is itself a tracked pattern; future E=4 entries should be classified by which of the three mechanisms (or a fourth) produces the energy.
+- **All five return artists converge at E=3 regardless of starting energy.** Jurado E=3 → E=3, Votolato E=3 → E=3, Death Cab E=4 → E=3, Case E=4 → E=3, Dawson E=2 → E=3. E=3 may represent a natural equilibrium energy for returning artists — familiar enough to be comfortable, quiet enough to be reflective, present enough to register. The convergence is worth tracking; if the sixth return artist also lands at E=3, the equilibrium hypothesis gains substantial evidence.
+- **The K Records / Olympia lineage now functions as a four-degree network.** Beat Happening → Microphones (71) → LAKE (73) → Dawson (88). When future K Records artists arrive, they should be classified against the existing lineage rather than treated as standalone entries. Lineage-tracking — explicitly naming the multi-degree threads that connect entries across the engine — is a tested vocabulary worth applying to other label clusters (Sub Pop, Secretly Canadian, Barsuk, Captured Tracks).
 
-Distinguished from **Anti-Folk** (degree 49): the Moldy Peaches were an Anti-Folk band (New York scene, ironic, communal). Dawson's solo work is Lo-Fi Folk -- not ironic, not communal, just one person with a guitar being completely honest. The K Records framework reinforces this.
-
-### STRUCTURAL EVENT: E=3 -- Energy Increase
-
-Degree 88 assigns **E=3** -- up from E=2 at degree 49. This is the **first return where energy increases**. At degree 49, E=2 reflected the fragile, whispered lullaby subversion of the Moldy Peaches. At degree 88, E=3 reflects greater presence -- the solo work is still lo-fi but more confident.
-
-Energy on return:
-- Jurado: E=3 -> E=3 (held)
-- Votolato: E=3 -> E=3 (held)
-- Death Cab: E=4 -> E=3 (decreased)
-- Case: E=4 -> E=3 (decreased)
-- Dawson: E=2 -> E=3 (increased)
-
-### K RECORDS -- Second Artist
-
-**K Records** is Calvin Johnson's Olympia label. The heart of PNW lo-fi indie. Home to Beat Happening, the Microphones (Phil Elverum), and a generation of artists who believed that imperfection was authenticity. LAKE (degree 73) was the first K Records artist. Dawson is the second. Both share the Olympia connection. Both are lo-fi. Phil Elverum (71) is K Records-adjacent. The Olympia lo-fi lineage: Beat Happening -> Microphones -> LAKE -> Dawson.
-
-### THE SOLO WORK
-
-Solo discography on K Records: *I'm Sorry That Sometimes I'm Mean* (2002), *My Cute Fiend Sweet Princess* (2004), *Remember That I Love You* (2006). The *Juno* soundtrack (2007) brought Dawson's music to a mass audience -- "Tire Swing" and "Anyone Else But You" (Moldy Peaches) became ubiquitous. The soundtrack went platinum. The bedroom strum went mainstream but Dawson didn't change. The music stayed lo-fi.
-
-### THE BEDROOM STRUM -- 89th Acoustic Element
-
-The eighty-ninth acoustic element is **the bedroom strum** -- a single acoustic guitar, strummed simply, recorded without production. The voice is close-mic'd or room-mic'd. You can hear the room. The guitar is not perfectly in tune. The imperfections are the point -- they signal authenticity, intimacy, the handmade.
-
-Contrasts:
-- **The emerging twang** (degree 87, Neko Case) -- folk-country structures, pedal steel, genre infrastructure. The bedroom strum strips away all genre infrastructure. Just guitar and voice.
-- **The electronic pulse** (degree 86, Postal Service) -- maximum production. The bedroom strum is minimum production. From maximum to minimum in two degrees.
-- **The stripped confession** (degree 85, Votolato) -- both stripped-down, both voice-forward. But Votolato's stripping is dramatic (removing from a fuller context). Dawson's is natural (she was always this minimal).
-
-### THE SOLO DISTILLATION -- 89th Artist-City Pattern
-
-The eighty-ninth artist-city pattern is **the solo distillation** -- a return artist whose solo work strips away everything from the original band context. The Moldy Peaches were a duo, a scene, an attitude. Dawson solo is just Dawson. The solo distillation reveals what remains when everything else is removed: the songs themselves, unadorned, unprotected.
-
-Contrasts:
-- **The early chapter** (degree 87, Neko Case) -- temporal movement to an earlier era. The solo distillation is format reduction (band to solo).
-- **The side project** (degree 86, Postal Service) -- lateral movement to a new collaborator. The solo distillation moves away from collaboration entirely.
-
-### CROSS-REFERENCES (Part A)
+## Cross-References
 
 | Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| S36-049 | Kimya Dawson Solo (88) | Kimya Dawson (49) | SAME ARTIST, DIFFERENT FRAMEWORK. Anti-Folk at E=2. The lullaby subversion. The Moldy Peaches context. Degree 88 is the solo/K Records context. Energy increases E=2 to E=3. Fragile lullabist becomes confident lo-fi folk singer. |
-| S36-073 | Kimya Dawson Solo (88) | LAKE (73) | K RECORDS. First K Records artist. Both on K Records. Both Olympia-connected. Both lo-fi. LAKE is a band; Dawson is solo. The Olympia lineage. |
-| S36-071 | Kimya Dawson Solo (88) | Phil Elverum (71) | K RECORDS ORBIT. Elverum's Microphones/Mount Eerie are K Records-adjacent. The Olympia lo-fi lineage connects Elverum, LAKE, and Dawson. |
-| S36-066 | Kimya Dawson Solo (88) | Neko Case (66) | RETURN PATTERN. Case returned at 87. Dawson returns at 88. Back-to-back returns. Both women. Both return in different contexts. Case decreased (E=4 to E=3); Dawson increased (E=2 to E=3). Both arrive at E=3. Convergence. |
-| S36-087 | Kimya Dawson Solo (88) | Neko Case Early (87) | CONSECUTIVE RETURNS. Case at 87. Dawson at 88. Back-to-back return artists. Return zone extends. |
-| S36-045 | Kimya Dawson Solo (88) | Damien Jurado (45) | SPACING SYMMETRY. Jurado at 45/84 (gap of 39). Dawson at 49/88 (gap of 39). Both return exactly 39 degrees later. |
+|------------|------|-----|--------|
+| S36-049 | Kimya Dawson Solo (88) | Kimya Dawson / Moldy Peaches (49) | THE SOLO DISTILLATION. Same artist, two temporal points, 39 degrees apart. Anti-Folk duo at 49 (E=2, lullaby subversion, New York scene, ironic) becomes Lo-Fi Folk solo at 88 (E=3, bedroom strum, K Records, sincere). The duo dynamic and Anti-Folk frame stripped away leaving one voice and one guitar. The first return where energy increases. |
+| S36-073 | Kimya Dawson Solo (88) | LAKE (73) | K RECORDS LINEAGE. Both signed to Calvin Johnson's Olympia label. Both lo-fi by aesthetic choice. LAKE is a band; Dawson is solo. Second K Records artist after LAKE established the label's engine presence at degree 73. |
+| S36-071 | Kimya Dawson Solo (88) | Phil Elverum / Microphones (71) | OLYMPIA LO-FI ORBIT. Elverum's Microphones / Mount Eerie catalog is K Records-adjacent through label history and aesthetic alliance. Both produce stripped-down recordings centered on solitary acoustic performance. The room-tone aesthetic shared across both entries. |
+| S36-066 | Kimya Dawson Solo (88) | Neko Case (66) | RETURN PATTERN CONVERGENCE. Case returned at 87 with E=4 → E=3 (decrease). Dawson returns at 88 with E=2 → E=3 (increase). Both arrive at E=3. Both women. Back-to-back returns. The two opposite directional movements converge at the same equilibrium point. |
+| S36-087 | Kimya Dawson Solo (88) | Neko Case (Early Folk) (87) | CONSECUTIVE RETURN ARTISTS. Case at 87 and Dawson at 88 are back-to-back returns. The return zone is now five-in-seven (degrees 82, 84, 85, 87, 88). The densest revisitation cluster in the engine to date. |
+| S36-045 | Kimya Dawson Solo (88) | Damien Jurado (45) | SPACING SYMMETRY. Jurado returns at gap 39 (45 → 84). Dawson returns at gap 39 (49 → 88). Two return artists with identical gaps. Suggests the catalog may have embedded spacing regularities worth tracking forward. |
+| S36-082 | Kimya Dawson Solo (88) | Death Cab for Cutie (Acoustic) (82) | RETURN ARTIST LINEAGE. The two earliest return artists by absolute degree number — Death Cab at 58/82 (gap 24) and Dawson at 49/88 (gap 39). Different gaps, different energy trajectories (Death Cab E=4 → E=3 decrease, Dawson E=2 → E=3 increase). Both are studies in artist evolution. |
+| S36-086 | Kimya Dawson Solo (88) | The Postal Service (86) | SONIC DESCENT ARC. Postal Service at 86 was the electronic pulse at maximum production. Bedroom strum at 88 is minimum production. Three consecutive degrees of sonic descent (86 maximum, 87 restraint, 88 minimum) form an arc that illuminates all three entries. |
+| SPS-087 | Katydid (88) | Cricket Chorus (87) | BACK-TO-BACK ORTHOPTERA. Same order, different family (Gryllidae 87 vs Tettigoniidae 88). Same stridulatory mechanism, fundamentally different acoustic result (rhythmic chirps vs continuous buzz). Ground-dwelling cricket vs shrub-canopy katydid. Two families exploring one mechanism. |
+| SPS-086 | Katydid (88) | Pacific Treefrog (86) | THREE CONSECUTIVE NON-MAMMALIAN ENTRIES (86–87–88). Treefrog (Amphibia), cricket (Insecta), katydid (Insecta). Three consecutive chorus / drone / buzz species. The longest non-mammalian streak since the bird era ended at degree 60. Three consecutive E=4s through three different mechanisms. |
+| SPS-058 | Katydid (88) | Anatidae streak Wood Duck / Mallard (58–59) | LINGERING-WITHIN-ORDER PATTERN. Anatidae lingered at 58–59 (Wood Duck and Mallard). Orthoptera now lingers at 87–88 (Cricket Chorus and Katydid). The engine's recurring tendency to explore orders in consecutive degrees rather than sample once and move on. |
+| SPS-002 | Katydid (88) | Varied Thrush (2) | ELECTRIC BUZZ TIMBRE. Varied Thrush's ethereal buzzy whistle has electric timbral quality similar to katydid's drone. Different phyla (Aves vs Insecta), different mechanisms (vocal vs stridulatory), similar perceived timbre. |
+| SPS-062 | Katydid (88) | Beaver Chewing (62) | CONTINUOUS SUSTAINED SOUND. Both produce continuous, sustained sounds occupying the soundscape through persistence rather than amplitude bursts. Beaver chewing fills the rodent infrastructure layer; katydid drone fills the shrub canopy layer. Different ecological functions, similar acoustic strategy. |
+| SPS-073 | Katydid (88) | Snowshoe Hare (73) | SHRUB / MEADOW HABITAT OVERLAP. Both inhabit meadow edges and shrub habitats. Katydid in the canopy, hare below. Vertical niche separation within the same horizontal habitat. |
+| RES-juno-2007 | Kimya Dawson Solo (88) | *Juno* film soundtrack (2007) | THE PLATINUM CARRIER. Mateo Messina-curated soundtrack used Dawson's "Tire Swing," "So Nice So Smart," "My Rollercoaster," and Moldy Peaches' "Anyone Else But You." Soundtrack went platinum. Bedroom strum reached mass audience without altering recording practice. |
+| RES-k-records | Kimya Dawson Solo (88) | K Records label catalog | OLYMPIA LO-FI INSTITUTION. Calvin Johnson's K Records (founded 1982, Olympia, WA). Dawson is the second K Records artist in the engine after LAKE (73). The Olympia lineage now spans Beat Happening → Microphones / Mount Eerie → LAKE → Dawson. |
 
----
+## Engine Position
 
-## Part B: Katydid -- BACK-TO-BACK ORTHOPTERA (Tettigoniidae, E=4, SECOND CONSECUTIVE INSECT 87-88, Back-to-Back Orthoptera Like Anatidae 58-59, TETTIGONIIDAE NEW FAMILY 39th Same Order Orthoptera as Gryllidae 87 Back-to-Back New Families, CONTINUOUS ELECTRIC BUZZ 89th Species-Side Acoustic Element Sustained High-Pitched Drone Wing Stridulation Sounds Electric 5,000-20,000 Hz Continuous No Gaps Distinct from Cricket's Rhythmic Chirp, STRIDULATION CHIRP VS BUZZ Same Mechanism Different Result Two Expressions of One Mechanism, THREE CONSECUTIVE NON-MAMMALIAN ENTRIES 86-87-88, Arboreal Shrub-Dwelling Elevated Calling Contrasts with Ground-Dwelling Cricket, TWENTY-EIGHTH CONSECUTIVE ORIGINAL CSV 61-88)
+- **Degree 88 of 360** — 24.4% of the circle traversed.
+- **Twin counters tick to 89**: the bedroom strum is the 89th acoustic element on the artist side; the continuous electric buzz is the 89th acoustic element on the species side; The Solo Distillation is the 89th artist-city pattern.
+- **Genre Stage 70 — MILESTONE**. Lo-Fi Folk. Seventy genre stages in eighty-eight degrees (0.80 stages/degree).
+- **Energy distribution after degree 88**: E1:3, E2:30, E3:24, E4:21, E5:11, E6:2. Total: 91. **E=3 rises to 24 deployments**. **E=2 holds at 30, still most common**.
+- **Return artist count: 5.** Damien Jurado (45/84, gap 39, E=3 → E=3 hold), Rocky Votolato (46/85, gap 39, E=3 → E=3 hold), Death Cab for Cutie (58/82, gap 24, E=4 → E=3 decrease), Neko Case (66/87, gap 21, E=4 → E=3 decrease), Kimya Dawson (49/88, gap 39, E=2 → E=3 increase). **All five returns converge at E=3**.
+- **Spacing symmetry**: Three of five returns share gap 39 (Jurado, Votolato, Dawson).
+- **Return zone density**: Five returns in seven degrees (82, 84, 85, 87, 88) — densest revisitation cluster to date.
+- **Family streaks**: Orthoptera pair (87–88) open. Tettigoniidae is family 39, immediately following Gryllidae (38).
+- **Class diversity**: Mammalia (era 61–85), Amphibia (86), Insecta (87–88, ongoing). Three consecutive non-mammalian entries (86–87–88) — longest non-mammalian streak since the bird era (0–60).
+- **Original CSV unbroken**: 28 consecutive original-catalog species (degrees 61–88) — longest unbroken run in the engine.
+- **Label firsts**: Second K Records appearance after LAKE (73). Olympia lineage now four degrees deep (Beat Happening → Microphones → LAKE → Dawson).
+- **E=4 species streak**: Three consecutive E=4 species (treefrog 86, cricket 87, katydid 88) through three different mechanisms — unprecedented.
+- **Outstanding gaps**: Zero raptors in 89 entries; zero passerines in 32 degrees (57–88); zero marine species in 89 entries.
 
-Full deep research covering the katydid as the engine's second consecutive insect, Tettigoniidae as the 39th family, and the continuous electric buzz:
-
-### SECOND CONSECUTIVE INSECT -- BACK-TO-BACK ORTHOPTERA
-
-After the cricket chorus at degree 87 introduced Insecta as the fourth class, the katydid arrives at degree 88 as the **second consecutive insect**. Back-to-back insects. Back-to-back Orthoptera. This parallels **Anatidae** at degrees 58-59 (Wood Duck and Mallard). When the engine encounters an order, it tends to linger.
-
-**Two families, one order:** Gryllidae (87) and Tettigoniidae (88). True crickets and bush-crickets. Both produce sound by wing stridulation. But the acoustic results are dramatically different: the cricket produces rhythmic chirps while the katydid produces a continuous buzz. Same mechanism, different expression.
-
-### TETTIGONIIDAE -- 39th Family
-
-**Tettigoniidae** (katydids / bush-crickets) is a **NEW FAMILY** -- the 39th in the engine. Same order as cricket (Orthoptera) but different family. Back-to-back new families from the same order -- Gryllidae (38th) and Tettigoniidae (39th).
-
-Family-level entry. Multiple species contribute to PNW shrub soundscapes: fork-tailed bush katydid (*Scudderia furcata*), broad-winged katydid (*Microcentrum rhombifolium*), meadow katydids (*Conocephalus* spp.).
-
-Classification:
-- **Class:** Insecta -- second insect (after cricket 87).
-- **Order:** Orthoptera -- same as cricket (87). Second consecutive Orthoptera.
-- **Family:** **Tettigoniidae** -- NEW FAMILY (39th). Katydids / bush-crickets.
-
-### THE SOUND: CONTINUOUS ELECTRIC BUZZ -- 89th Species-Side Acoustic Element
-
-The katydid produces sound through **stridulation** -- same mechanism as crickets, rubbing a file on one forewing against a scraper on the other. But the result is fundamentally different:
-
-**Cricket (87):** Discrete chirps. Rhythmic pulses at regular intervals. 3,000-5,000 Hz. The chorus retains rhythmic quality.
-
-**Katydid (88):** Continuous buzz. Sustained drone without gaps. 5,000-20,000 Hz. Sounds electric -- more like a power line than a biological sound. The buzz fills the frequency band without interruption.
-
-**Why E=4:** Individual katydid calls are loud (15-30 meters). The continuous nature fills the soundscape without gaps. Multiple katydids produce overlapping sustained drone. E=4 reflects persistent, space-filling quality.
-
-### ECOLOGY: ARBOREAL CALLING
-
-Katydids are **arboreal/shrub-dwelling** -- calling from elevated positions in shrubs and trees. Contrasts with ground-dwelling crickets (87). Ground vs canopy. Same order, different vertical niche.
-
-**Camouflage:** Many katydids are remarkably leaf-like -- green, flat, with leaf-vein patterns on wings. Heard far more than seen.
-
-**Predators:** Bats (primary nocturnal predator). Some katydids have evolved to shift call frequency above bat echolocation range -- a frequency arms race.
-
-### STRUCTURAL EVENTS SUMMARY
-
-1. **Second consecutive insect (87-88)** -- back-to-back Orthoptera. Same mechanism, different result.
-2. **Continuous electric buzz** -- 89th acoustic element. Sustained drone. Sounds electric. E=4.
-3. **Tettigoniidae** -- 39th family. Same order, new family. Back-to-back new families.
-4. **Three consecutive non-mammalian entries (86-87-88)** -- treefrog, cricket, katydid.
-5. **Twenty-eighth consecutive original CSV** (61-88).
-
-### CROSS-REFERENCES (Part B)
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| SPS-087 | Katydid (88) | Cricket Chorus (87) | BACK-TO-BACK ORTHOPTERA. Same mechanism (stridulation), different result (chirp vs buzz). Gryllidae and Tettigoniidae. Ground vs shrub. Rhythmic vs continuous. Two families exploring one mechanism. |
-| SPS-086 | Katydid (88) | Pacific Treefrog (86) | THREE CONSECUTIVE NON-MAMMALIAN ENTRIES (86-87-88). Treefrog (Amphibia), cricket (Insecta), katydid (Insecta). Three consecutive chorusing/buzzing species. The chorus zone extends. |
-| SPS-002 | Katydid (88) | Varied Thrush (2) | ELECTRIC BUZZ QUALITY. Varied Thrush's ethereal buzzy whistle has electric quality similar to katydid's drone. Different phyla, similar timbral impression. |
-| SPS-062 | Katydid (88) | Beaver Chewing (62) | CONTINUOUS SOUND. Both produce continuous, sustained sounds. Both fill soundscapes through persistence. |
-| SPS-073 | Katydid (88) | Snowshoe Hare (73) | MEADOW SHARED. Both inhabit meadow edges and shrub habitats. Katydid in canopy, hare below. Vertical niche separation. |
-
----
-
-## Parallel: Kimya Dawson Solo x Katydid
-
-The bedroom strum and the electric buzz. Both continuous and stripped-down.
-
-**1. Both Continuous** -- The katydid's buzz is sustained, unbroken, droning through the night. Dawson's bedroom strum is continuous, unpolished, strumming through entire songs without embellishment. Both are sustained sounds that don't stop for ornamentation.
-
-**2. Both Stripped-Down** -- The katydid produces a single continuous tone. Dawson produces a single strummed guitar. Both are minimal in structure -- no layers, no complexity, just one sound maintained with persistence.
-
-**3. Both Persistent** -- The katydid buzzes all night. Dawson strums all the way through her songs. Both occupy their space completely through persistence, not force. Both are the opposite of the Postal Service (86) -- no electronic layering, no production, just one continuous element.
-
-**4. Both Lo-Fi in Their Own Way** -- The katydid's buzz is raw, unprocessed, biological. Dawson's strum is raw, unprocessed, lo-fi by choice. Both reject polish. Both are more honest for being unadorned.
-
----
-
-## Acoustic Progression (89 elements)
+## Acoustic Progression Snapshot (Tail)
 
 | # | Element | Degree | Artist/Species |
 |---|---------|--------|----------------|
-| 0 | silence | 0 | Quincy Jones |
-| 1 | cascade | 1 | Bill Frisell |
-| 2 | drone | 2 | Wayne Horvitz |
-| 3 | language | 3 | Ernestine Anderson |
-| 4 | motif | 4 | Floyd Standifer |
-| 5 | metronome | 5 | Overton Berry |
-| 6 | question | 6 | Patti Bown |
-| 7 | harmonic spiral | 7 | Julian Priester |
-| 8 | ultrasonic threshold | 8 | Gary Peacock |
-| 9 | variation | 9 | Hadley Caliman |
-| 10 | minimum signal | 10 | Bud Shank |
-| 11 | trill/tremolo | 11 | Joe Brazil |
-| 12 | sawtooth sweep | 12 | Don Lanphere |
-| 13 | ostinato | 13 | Marc Seales |
-| 14 | repetition-resolution | 14 | Aaron Parks |
-| 15 | accelerando | 15 | Thomas Marriott |
-| 16 | crescendo | 16 | Jeff Lorber |
-| 17 | the hook | 17 | Reggie Watts |
-| 18 | ascending spiral | 18 | Maktub |
-| 19 | descending spiral | 19 | Fly Moon Royale |
-| 20 | sustain/the release | 20 | Whitney Monge |
-| 21 | the hammer | 21 | Polyrhythmics |
-| 22 | resonant percussion/groove reset | 22 | Foxy Apollo |
-| 23 | the testimony/groove reset | 23 | Allen Stone |
-| 24 | the invocation | 24 | Ron Artis II |
-| 25 | the congregation | 25 | Black Stax |
-| 26 | the caroling | 26 | Shaina Shepherd |
-| 27 | the liquid gurgle | 27 | The Dynamics |
-| 28 | the liquid twitter | 28 | Night Owls |
-| 29 | the rough brrit | 29 | Boogaloo Joe Jones |
-| 30 | the liquid warble synthesis | 30 | Ray Charles |
-| 31 | the whisper | 31 | Brenda Lee Eager |
-| 32 | the buzz | 32 | Luther Rabb |
-| 33 | the cadenza | 33 | Larry English |
-| 34 | the dialect | 34 | The Tempos |
-| 35 | the thrum | 35 | Robert Cray |
-| 36 | the sonic boom | 36 | Jimi Hendrix |
-| 37 | the filament | 37 | Ayron Jones |
-| 38 | the drawl | 38 | Booker T. Jones |
-| 39 | the canopy buzz | 39 | Ron Artis Jr |
-| 40 | the thinning | 40 | Alice Smith |
-| 41 | the partition | 41 | Shawn Smith |
-| 42 | the shimmer | 42 | Erica Campbell |
-| 43 | the radiance | 43 | Ann Wilson |
-| 44 | the grain | 44 | Chong the Nomad |
-| 45 | the murmur | 45 | Damien Jurado |
-| 46 | the confessional | 46 | Rocky Votolato |
-| 47 | the parable tone | 47 | Pedro the Lion |
-| 48 | the held rest | 48 | Sera Cahoone |
-| 49 | the lullaby subversion | 49 | Kimya Dawson |
-| 50 | the intimate architecture | 50 | Mirah |
-| 51 | the communal harmony | 51 | Grand Archives |
-| 52 | the testimony roar | 52 | Brandi Carlile |
-| 53 | the cathedral harmony | 53 | Fleet Foxes |
-| 54 | the fraternal jangle | 54 | Ivan & Alyosha |
-| 55 | the ember glow | 55 | Shelby Earl |
-| 56 | the dream haze | 56 | Lemolo |
-| 57 | the rattle / the stream rattle | 57 | Laura Gibson / Belted Kingfisher |
-| 58 | the ache / the pond whistle | 58 | Death Cab for Cutie / Wood Duck |
-| 59 | the digression / the quack | 59 | The Long Winters / Mallard |
-| 60 | the bare wire / the submerge call | 60 | Ben Gibbard (solo) / Pied-billed Grebe |
-| 61 | the braided voice / the tail slap | 61 | Y La Bamba / American Beaver |
-| 62 | the throwback / the rhythmic gnaw | 62 | Pickwick / Beaver Chewing |
-| 63 | the FM sheen / the chuff | 63 | Kenny Loggins / River Otter |
-| 64 | the dusk / the chitter | 64 | Jesse Sykes / Mink |
-| 65 | the open plain / the chuckle-chatter | 65 | Philip Aaberg / American Marten |
-| 66 | the country thunder / the scream | 66 | Neko Case / Fisher |
-| 67 | the clean room / the shrill bark-chitter | 67 | Chris Walla / Short-tailed Weasel |
-| 68 | the hush / the rapid chattering chirp | 68 | Sam Beam / Long-tailed Weasel |
-| 69 | the earnest voice / the warning foot-stamp hiss | 69 | Kris Orlowski / Striped Skunk |
-| 70 | the fiddle line / the churring chittering young | 70 | Horse Feathers / Raccoon |
-| 71 | the room tone / the bark screaming vixen call | 71 | Phil Elverum / Red Fox |
-| 72 | the layered loop / the low hiss click | 72 | Briana Marela / Opossum |
-| 73 | the jangle / the thump squeal | 73 | LAKE / Snowshoe Hare |
-| 74 | the reverb wash / the high sharp eenk bark | 74 | Poor Moon / American Pika |
-| 75 | the anthem / the piercing whistle alarm | 75 | The Lonely Forest / Yellow-bellied Marmot |
-| 76 | the androgynous register / the loud penetrating whistle | 76 | Chris Pureka / Hoary Marmot |
-| 77 | the ethereal layering / the musical multi-note whistle | 77 | Mree / Olympic Marmot |
-| 78 | the communal jangle / the chirping trill alarm | 78 | Acid Tongue / Townsend's Ground Squirrel |
-| 79 | the cinematic stillness / the sharp chip alarm | 79 | Jesse Marchant / Golden-mantled Ground Squirrel |
-| 80 | the organ explosion / the loud scolding chatter rattle | 80 | Mates of State / Douglas Squirrel |
-| 81 | the Broadway voice / the bark + chatter alarm | 81 | Sara Bareilles / Eastern Fox Squirrel |
-| 82 | the acoustic intimacy / the high thin tseet | 82 | Death Cab for Cutie (acoustic) / Northern Flying Squirrel |
-| 83 | the grunge whisper / the ultrasonic + soft chip | 83 | Pearl Jam (acoustic) / Deer Mouse |
 | 84 | the late whisper / the chatter + twig gnaw | 84 | Damien Jurado (late career) / Bushy-tailed Woodrat |
 | 85 | the stripped confession / the quiet plop | 85 | Rocky Votolato (acoustic) / Muskrat |
 | 86 | the electronic pulse / the amplified krek-krek wall of sound | 86 | The Postal Service / Pacific Treefrog |
 | 87 | the emerging twang / the rhythmic chirp field chorus | 87 | Neko Case (early folk) / Cricket Chorus |
 | **88** | **the bedroom strum / the continuous electric buzz** | **88** | **Kimya Dawson (solo) / Katydid** |
 
-The acoustic progression adds degree 88 (the bedroom strum / the continuous electric buzz). On the artist side, the bedroom strum (88) is the sound of Kimya Dawson's solo work -- a single acoustic guitar strummed simply, recorded without production. You can hear the room. Imperfections are the point. K Records aesthetic. E=3. From the emerging twang (87, folk-country structures, E=3) to the bedroom strum (88, no structures at all, E=3). Both E=3 but the bedroom strum is even more stripped-down -- no pedal steel, no band, just guitar and voice. Three consecutive degrees of sonic descent: electronic pulse (86, E=4, maximum production), emerging twang (87, E=3, organic restraint), bedroom strum (88, E=3, minimum production). On the species side, the continuous electric buzz (88) is the katydid's sustained drone -- wing stridulation producing an unbroken, high-pitched buzz that sounds electric. 5,000-20,000 Hz, higher than the cricket's 3,000-5,000 Hz. From the rhythmic chirp (87, pulsing) to the continuous buzz (88, droning). Same mechanism (stridulation), different result (chirp vs buzz). Both E=4. Both Orthoptera. Ground to canopy. Rhythmic to continuous.
+## Files
 
-## Artist-City Patterns (89 patterns)
+- `docs/release-notes/v1.49.228/README.md` (this file)
+- `docs/release-notes/v1.49.228/chapter/00-summary.md` — derived summary
+- `docs/release-notes/v1.49.228/chapter/03-retrospective.md` — retrospective
+- `docs/release-notes/v1.49.228/chapter/04-lessons.md` — 7 extracted lessons
+- `docs/release-notes/v1.49.228/chapter/99-context.md` — context
+- `www/tibsfox/com/Research/S36/research/releases/088-kimya-dawson-solo/index.html` (717 lines)
+- `www/tibsfox/com/Research/S36/research/releases/088-kimya-dawson-solo/research.md` (161 lines)
+- `www/tibsfox/com/Research/S36/research/releases/088-kimya-dawson-solo/knowledge-nodes.json` (138 lines)
+- `www/tibsfox/com/Research/S36/research/releases/088-kimya-dawson-solo/retrospective.md` (155 lines)
+- `www/tibsfox/com/Research/SPS/research/releases/088-katydid/index.html` (538 lines)
+- `www/tibsfox/com/Research/SPS/research/releases/088-katydid/research.md` (163 lines)
+- `www/tibsfox/com/Research/SPS/research/releases/088-katydid/knowledge-nodes.json` (166 lines)
+- `www/tibsfox/com/Research/SPS/research/releases/088-katydid/retrospective.md` (119 lines)
 
-| # | Pattern | Degree | Artist |
-|---|---------|--------|--------|
-| 0 | Export | 0 | Quincy Jones |
-| 1 | Draw | 1 | Bill Frisell |
-| 2 | European Exile | 2 | Wayne Horvitz |
-| 3 | The Stay | 3 | Ernestine Anderson |
-| 4 | The Teacher | 4 | Floyd Standifer |
-| 5 | The Persistence | 5 | Overton Berry |
-| 6 | The Erasure | 6 | Patti Bown |
-| 7 | Pedagogue-Draw | 7 | Julian Priester |
-| 8 | The Quiet Draw | 8 | Gary Peacock |
-| 9 | The Seeker | 9 | Hadley Caliman |
-| 10 | Late Homestead | 10 | Bud Shank |
-| 11 | The Salon Keeper | 11 | Joe Brazil |
-| 12 | The Prodigal | 12 | Don Lanphere |
-| 13 | Institutional Anchor | 13 | Marc Seales |
-| 14 | Prodigy-Export | 14 | Aaron Parks |
-| 15 | Builder-Stayer | 15 | Thomas Marriott |
-| 16 | Talent Incubator | 16 | Jeff Lorber |
-| 17 | The Uncategorizable | 17 | Reggie Watts |
-| 18 | The Workshop | 18 | Maktub |
-| 19 | The New Root | 19 | Fly Moon Royale |
-| 20 | The Street Laureate | 20 | Whitney Monge |
-| 21 | The Ensemble Anchor | 21 | Polyrhythmics |
-| 22 | The Inheritor | 22 | Foxy Apollo |
-| 23 | The Rural Draw | 23 | Allen Stone |
-| 24 | The Island Export | 24 | Ron Artis II |
-| 25 | The Cultural Guardian | 25 | Black Stax |
-| 26 | The Transmuter | 26 | Shaina Shepherd |
-| 27 | The Conduit | 27 | The Dynamics |
-| 28 | The Resident Band | 28 | Night Owls |
-| 29 | The Catalog | 29 | Boogaloo Joe Jones |
-| 30 | The Incubation | 30 | Ray Charles |
-| 31 | The Relay | 31 | Brenda Lee Eager |
-| 32 | The Foundation | 32 | Luther Rabb |
-| 33 | The Unrecorded | 33 | Larry English |
-| 34 | The Shadow Name | 34 | The Tempos |
-| 35 | The Deep Root | 35 | Robert Cray |
-| 36 | The Supernova | 36 | Jimi Hendrix |
-| 37 | The Inheritor | 37 | Ayron Jones |
-| 38 | The Touring Anchor | 38 | Booker T. Jones |
-| 39 | The Returning Wave | 39 | Ron Artis Jr |
-| 40 | The Cultural Satellite | 40 | Alice Smith |
-| 41 | The Scene Native | 41 | Shawn Smith |
-| 42 | The Gospel Export | 42 | Erica Campbell |
-| 43 | The Arena Architect | 43 | Ann Wilson |
-| 44 | The Digital Immigrant | 44 | Chong the Nomad |
-| 45 | The Stripped Murmur | 45 | Damien Jurado |
-| 46 | The Confessional Drifter | 46 | Rocky Votolato |
-| 47 | The Sacred Baritone | 47 | Pedro the Lion |
-| 48 | The Campfire Anchor | 48 | Sera Cahoone |
-| 49 | The Trojan Lullabist | 49 | Kimya Dawson |
-| 50 | The Intimate Architect | 50 | Mirah |
-| 51 | The Folk Organism | 51 | Grand Archives |
-| 52 | The Arena Breakout | 52 | Brandi Carlile |
-| 53 | The Prodigy Return | 53 | Fleet Foxes |
-| 54 | The Neighborhood Anchor | 54 | Ivan & Alyosha |
-| 55 | The Infrastructure Beneficiary | 55 | Shelby Earl |
-| 56 | The Duo Collective | 56 | Lemolo |
-| 57 | The Label Bridge | 57 | Laura Gibson |
-| 58 | The Bellingham Ascent | 58 | Death Cab for Cutie |
-| 59 | The Scene Intellectual | 59 | The Long Winters |
-| 60 | The Frontman Alone | 60 | Ben Gibbard (solo) |
-| 61 | The Corridor Bridge | 61 | Y La Bamba |
-| 62 | The Brief Blaze | 62 | Pickwick |
-| 63 | The Everett Departure | 63 | Kenny Loggins |
-| 64 | The Dark-Folk Loner | 64 | Jesse Sykes |
-| 65 | The Montana Connection | 65 | Philip Aaberg |
-| 66 | The Wanderer Who Claims Multiple Cities | 66 | Neko Case |
-| 67 | The Departed Member | 67 | Chris Walla |
-| 68 | The Visiting Artist | 68 | Sam Beam |
-| 69 | The Working Musician | 69 | Kris Orlowski |
-| 70 | The Corridor Wanderer | 70 | Horse Feathers |
-| 71 | The Anacortes Hermit | 71 | Phil Elverum |
-| 72 | The International Student | 72 | Briana Marela |
-| 73 | The K Records Collective | 73 | LAKE |
-| 74 | The Side Project | 74 | Poor Moon |
-| 75 | The Second Anacortes Act | 75 | The Lonely Forest |
-| 76 | The Identity Artist | 76 | Chris Pureka |
-| 77 | The YouTube-to-Artist Pipeline | 77 | Mree |
-| 78 | The Porch Party | 78 | Acid Tongue |
-| 79 | The Dark Meditation | 79 | Jesse Marchant |
-| 80 | The Married Duo | 80 | Mates of State |
-| 81 | The Crossover Arc | 81 | Sara Bareilles |
-| 82 | The Recursive Return | 82 | Death Cab for Cutie (acoustic) |
-| 83 | The Arena Unplugged | 83 | Pearl Jam (acoustic) |
-| 84 | The Artist Arc | 84 | Damien Jurado (late career) |
-| 85 | The Confessional Return | 85 | Rocky Votolato (acoustic) |
-| 86 | The Side Project | 86 | The Postal Service |
-| 87 | The Early Chapter | 87 | Neko Case (early folk) |
-| **88** | **The Solo Distillation** | **88** | **Kimya Dawson (solo)** |
-
-Eighty-nine named patterns across eighty-nine degrees. The Solo Distillation (88) introduces the pattern of a return artist whose solo work strips away everything from the original band context -- the Moldy Peaches' communal Anti-Folk energy, the irony, the duo dynamic -- leaving only the essential: one voice, one guitar, the songs. The solo distillation is the artist reduced to their minimum. The Moldy Peaches were a duo, a scene, an attitude. Kimya Dawson solo is just Kimya Dawson. The distinction from degree 87 (The Early Chapter): the early chapter is temporal movement to an earlier era; the solo distillation is format reduction (band to solo), not temporal movement. The distinction from degree 86 (The Side Project): the side project is lateral movement to a new collaborator; the solo distillation moves away from collaboration entirely. The progression from 86 to 87 to 88: the side project (lateral to new collaborator), the early chapter (temporal to earlier era), the solo distillation (reduction to solo). Three different ways to explore the same artist.
-
-## Genre Evolution (70 stages -- MILESTONE)
-
-| Stage | Degree | Genre | Artist |
-|-------|--------|-------|--------|
-| 27 | 45 | Folk | Damien Jurado |
-| 28 | 46 | Folk | Rocky Votolato |
-| 29 | 47 | Indie Folk | Pedro the Lion |
-| 30 | 48 | Folk | Sera Cahoone |
-| 31 | 49 | Folk Punk | Kimya Dawson |
-| 32 | 50 | Indie Folk | Mirah |
-| 33 | 51 | Indie Folk | Grand Archives |
-| 34 | 52 | Folk/Rock | Brandi Carlile |
-| 35 | 53 | Indie Folk | Fleet Foxes |
-| 36 | 54 | Folk | Ivan & Alyosha |
-| 37 | 55 | Singer-Songwriter | Shelby Earl |
-| 38 | 56 | Indie Folk | Lemolo |
-| 39 | 57 | Folk | Laura Gibson |
-| 40 | 58 | Indie Rock | Death Cab for Cutie |
-| 41 | 59 | Indie Rock | The Long Winters |
-| 42 | 60 | Folk | Ben Gibbard (solo) |
-| 43 | 61 | Folk/Indie | Y La Bamba |
-| 44 | 62 | Indie/Folk | Pickwick |
-| 45 | 63 | Soft Rock/Folk | Kenny Loggins |
-| 46 | 64 | Folk | Jesse Sykes |
-| 47 | 65 | New Age/Folk | Philip Aaberg |
-| 48 | 66 | Alt Country | Neko Case |
-| 49 | 67 | Indie/Folk | Chris Walla |
-| 50 | 68 | Folk | Sam Beam |
-| 51 | 69 | Singer-Songwriter | Kris Orlowski |
-| 52 | 70 | Indie Folk | Horse Feathers |
-| 53 | 71 | Indie/Folk | Phil Elverum |
-| 54 | 72 | Art Pop | Briana Marela |
-| 55 | 73 | Indie Pop | LAKE |
-| 56 | 74 | Indie Folk/Rock | Poor Moon |
-| 57 | 75 | Indie Pop | The Lonely Forest |
-| 58 | 76 | Folk | Chris Pureka |
-| 59 | 77 | Folk/Pop | Mree |
-| 60 | 78 | Folk/Indie | Acid Tongue |
-| 61 | 79 | Folk | Jesse Marchant |
-| 62 | 80 | Indie Pop | Mates of State |
-| 63 | 81 | Pop/Soul | Sara Bareilles |
-| 64 | 82 | Indie Folk | Death Cab for Cutie (acoustic) |
-| 65 | 83 | Acoustic Rock | Pearl Jam (acoustic) |
-| 66 | 84 | Folk | Damien Jurado (late career) |
-| 67 | 85 | Folk | Rocky Votolato (acoustic) |
-| 68 | 86 | Indie Electronic | The Postal Service |
-| 69 | 87 | Folk Country | Neko Case (early folk) |
-| **70** | **88** | **Lo-Fi Folk** | **Kimya Dawson (solo)** |
-
-Genre Stage 70 -- **MILESTONE**. Seventy genre stages in 88 degrees. **Lo-Fi Folk** arrives at degree 88 with Kimya Dawson's solo work. Roughly 0.8 genre stages per degree. The engine introduces a new genre nearly every degree. Lo-Fi Folk is distinguished from Anti-Folk (49) -- the Moldy Peaches were Anti-Folk (New York scene, ironic, communal). Dawson solo is Lo-Fi Folk (not ironic, not communal, K Records sincerity). After Folk Country (87) and Indie Electronic (86), the engine returns to the lo-fi end of the folk spectrum. The sonic descent from 86 to 88: electronic production to organic restraint to lo-fi minimalism.
-
-## Energy Distribution
-
-**Artist-side (after degree 88):** E1:3 (3.3%), E2:30 (33.0%), E3:24 (26.4%), E4:21 (23.1%), E5:11 (12.1%), E6:2 (2.2%). Total: 91. E=3 rises to 24 deployments with Dawson's E=3. E=2 remains at 30, still most common. The quiet majority (E1+E2+E3) = 57 of 91 (62.6%). Energy on return: Jurado held (E=3), Votolato held (E=3), Death Cab decreased (E=4 to E=3), Case decreased (E=4 to E=3), Dawson increased (E=2 to E=3). All five return artists now at E=3. Convergence at E=3.
-
-**Species-side (after degree 88):** E=4 for the katydid. Third consecutive E=4 species entry (86-87-88): treefrog E=4, cricket E=4, katydid E=4. Three consecutive E=4 species entries is unprecedented.
-
-## Cross-References (Combined)
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| S36-049 | Kimya Dawson Solo (88) | Kimya Dawson (49) | SAME ARTIST, DIFFERENT FRAMEWORK. Anti-Folk at E=2. Lullaby subversion. Degree 88 is solo/K Records context. Energy increases E=2 to E=3. First energy increase on return. |
-| S36-073 | Kimya Dawson Solo (88) | LAKE (73) | K RECORDS. Both on K Records. Both Olympia-connected. Both lo-fi. The Olympia lineage. |
-| S36-071 | Kimya Dawson Solo (88) | Phil Elverum (71) | K RECORDS ORBIT. Olympia lo-fi lineage connects Elverum, LAKE, and Dawson through K Records. |
-| S36-066 | Kimya Dawson Solo (88) | Neko Case (66) | RETURN PATTERN. Case at 87, Dawson at 88. Back-to-back returns. Both women. Case decreased; Dawson increased. Both arrive at E=3. Convergence. |
-| S36-087 | Kimya Dawson Solo (88) | Neko Case Early (87) | CONSECUTIVE RETURNS. Back-to-back return artists. Return zone extends. |
-| S36-045 | Kimya Dawson Solo (88) | Damien Jurado (45) | SPACING SYMMETRY. Jurado 45/84 (gap 39). Dawson 49/88 (gap 39). Both return exactly 39 degrees later. |
-| SPS-087 | Katydid (88) | Cricket Chorus (87) | BACK-TO-BACK ORTHOPTERA. Same mechanism (stridulation), different result (chirp vs buzz). Ground vs shrub. Rhythmic vs continuous. Two families, one mechanism. |
-| SPS-086 | Katydid (88) | Pacific Treefrog (86) | THREE CONSECUTIVE NON-MAMMALIAN ENTRIES (86-87-88). Treefrog, cricket, katydid. Chorus zone extends to three degrees. |
-| SPS-002 | Katydid (88) | Varied Thrush (2) | ELECTRIC BUZZ QUALITY. Both produce sustained buzzy tones. Different phyla, similar timbral impression. |
-| SPS-062 | Katydid (88) | Beaver Chewing (62) | CONTINUOUS SOUND. Both produce continuous, sustained sounds through persistence. |
-| SPS-073 | Katydid (88) | Snowshoe Hare (73) | MEADOW SHARED. Both in meadow edges and shrub habitats. Vertical niche separation. |
-
-## Infrastructure
-
-**Part A:** `www/tibsfox/com/Research/S36/research/releases/088-kimya-dawson-solo/` -- research.md, index.html, knowledge-nodes.json, retrospective.md
-**Part B:** `www/tibsfox/com/Research/SPS/research/releases/088-katydid/` -- research.md, index.html, knowledge-nodes.json, retrospective.md
-**Release notes:** `docs/release-notes/v1.49.228/README.md`
-
-**Total: 8 files** -- standard degree package.
-
-## Retrospective
-
-**What Worked:**
-1. Kimya Dawson as the fifth return artist tracks cleanly -- first at 49 (Anti-Folk, E=2, Moldy Peaches) and now at 88 (Lo-Fi Folk, E=3, K Records solo). The first energy increase on return is a genuine structural novelty. The observation is clean
-2. Genre Stage 70 (Lo-Fi Folk) as a milestone is genuine -- seventy genre stages in 88 degrees. The distinction from Anti-Folk (49) is documented and defensible. The K Records framework is real
-3. The K Records connection (second artist after LAKE) extends the Olympia lo-fi lineage. The Beat Happening -> Microphones -> LAKE -> Dawson lineage is real and documented. Three degrees of K Records connection: Elverum (71), LAKE (73), Dawson (88)
-4. The bedroom strum (89th acoustic element) captures the lo-fi aesthetic with precision -- minimum production, imperfections as authenticity. The contrast with the electronic pulse (86) is sharp: from maximum to minimum in two degrees
-5. The spacing symmetry (Jurado 45/84 and Dawson 49/88, both gap 39) is a genuine structural observation. Not forced -- it emerged from the data
-6. The Juno connection is documented and culturally significant -- the platinum soundtrack brought Dawson's lo-fi aesthetic to millions. The bedroom strum went mainstream
-7. The katydid as the second consecutive insect parallels Anatidae (58-59) cleanly -- when the engine encounters an order, it lingers. Back-to-back Orthoptera is a real structural pattern
-8. The chirp vs buzz comparison (same mechanism, different result) is one of the sharpest acoustic contrasts in the engine. Audible, verifiable, well-documented
-9. Tettigoniidae as the 39th family, back-to-back new families from the same order, is unprecedented. Clean taxonomic observation
-10. Three consecutive non-mammalian entries (86-87-88) is the longest non-mammalian streak since the bird era. The observation is real
-11. The Dawson-katydid parallel (both continuous, both stripped-down, both persistent) is genuine. Both occupy space through persistence, not force. The parallel was not forced
-12. All five return artists now at E=3 -- Jurado, Votolato, Death Cab, Case, Dawson. Convergence at E=3 regardless of original energy level. A real structural observation
-
-**What Could Be Better:**
-1. Dawson's post-Juno work (*Thunder Thighs* 2011) not deeply explored -- ACCEPTED, the K Records years are primary
-2. Bat-katydid co-evolution not deeply explored -- ACCEPTED, noted in research
-3. NO RAPTOR in 89 entries -- CRITICAL. Must be addressed
-4. NO PASSERIFORM in 32 degrees -- thirty-two consecutive non-passerines (57-88). EXTREME
-5. NO MARINE SPECIES -- 89 entries without a marine specialist. SIGNIFICANT
-
-## Lessons Learned
-
-1. The first energy increase on return (Dawson E=2 to E=3) reveals that return energy is not universally decreasing. The Moldy Peaches' fragile E=2 was a deliberately restrained performance. The solo work, freed from the Anti-Folk performance frame, has more natural presence. Energy on return reflects the relationship between the two contexts, not a universal trend
-2. Genre Stage 70 as a milestone invites observation of the genre-to-degree ratio. At 70/88 (0.80), the engine introduces a new genre stage nearly every degree. This rate has been remarkably stable since the folk zone began (45+). The engine's genre diversity is real, not inflated
-3. The spacing symmetry (gap of 39 for both Jurado and Dawson) raises the question of whether the CSV has embedded spacing regularities. Two returns with identical gaps is unlikely to be coincidence. Worth tracking future return gaps
-4. The bedroom strum as an acoustic element captures something the engine has been approaching: the absolute minimum. The electronic pulse (86) was maximum production. The emerging twang (87) was organic restraint. The bedroom strum (88) is the floor. Three consecutive degrees of sonic descent: maximum, restraint, minimum. This arc illuminates all three entries
-5. Back-to-back Orthoptera (87-88) confirms the engine's pattern of lingering within orders. Anatidae (58-59), now Orthoptera (87-88). The engine doesn't sample orders once -- it explores them in consecutive degrees. This produces the chirp-vs-buzz comparison, one of the engine's sharpest acoustic contrasts
-6. Three consecutive E=4 species entries (86-87-88) is unprecedented. All three through different mechanisms: collective amplification (treefrog), collective stridulation (cricket), persistent sustained drone (katydid). Three entries, three mechanisms, one energy level. E=4 is the "fills the soundscape" level, achievable through different means
-7. All five return artists converging at E=3 is a structural phenomenon worth tracking. Regardless of original energy (E=2, E=3, E=4), all returns arrive at E=3. E=3 may represent a natural equilibrium energy for returning artists -- familiar enough to be comfortable, quiet enough to be reflective
-
----
-
-The bedroom strum and the electric buzz. Degree 88 -- where the lo-fi folk singer strums without embellishment and the katydid buzzes without interruption. Kimya Dawson returns as the FIFTH RETURN ARTIST -- first at 49 (Anti-Folk, E=2, the lullaby subversion) now at 88 (Lo-Fi Folk, E=3, K Records). Energy INCREASES -- first energy increase on return. GENRE STAGE 70 -- MILESTONE. Lo-Fi Folk. Seventy genre stages in 88 degrees. K Records -- Calvin Johnson's Olympia label, second K Records artist after LAKE (73). The Olympia lo-fi lineage: Beat Happening, Microphones, LAKE, Dawson. THE BEDROOM STRUM -- 89th acoustic element, minimum production, you can hear the room, imperfections are the point. THE SOLO DISTILLATION -- 89th artist-city pattern, the Moldy Peaches stripped to one voice one guitar. THE JUNO CONNECTION -- platinum soundtrack, lo-fi goes mainstream. SPACING SYMMETRY -- Jurado 45/84 and Dawson 49/88, both gap 39. Return zone extends: five returns in seven degrees (82-88). The Katydid at the eighty-eighth degree -- SECOND CONSECUTIVE INSECT (87-88). BACK-TO-BACK ORTHOPTERA. TETTIGONIIDAE -- NEW FAMILY (39th). Same order Orthoptera as Gryllidae (87). Back-to-back new families. CONTINUOUS ELECTRIC BUZZ -- 89th species-side acoustic element, sustained high-pitched drone, sounds electric, 5,000-20,000 Hz, fills shrub canopy without gaps. STRIDULATION CHIRP VS BUZZ -- same mechanism, different result. Cricket = rhythmic chirps. Katydid = continuous drone. Two expressions of one mechanism. ARBOREAL -- shrub canopy, elevated calling, contrasts with ground-dwelling cricket. THREE CONSECUTIVE NON-MAMMALIAN ENTRIES (86-87-88). Twenty-eighth consecutive original CSV. Both continuous. Both stripped-down. Both persistent. The bedroom strum and the electric buzz. Persistence, not force.
-
-</details>
+Total: 9 files in commit `b6c55c43ad52e4f29d255e95878330399dc58a4c`, 2,656 insertions.
