@@ -1,550 +1,186 @@
-# v1.49.232 -- Degree 92: Trance Mission + Bumblebee Drone -- THE CROSS-POLLINATORS
+# v1.49.232 — Degree 92: Trance Mission + Bumblebee Drone — THE CROSS-POLLINATORS
 
 **Released:** 2026-04-02
-**Degree:** 92 of 360 -- Second degree of Quadrant II
-**Part A:** Trance Mission -- World/Electronic, E=3, City of Tribes Records, GENRE STAGE 74 (World/Electronic, seventy-four genre stages in 92 degrees, global instruments oud tabla didgeridoo hammered dulcimer with electronic processing sampling ambient textures, distinguished from Sky Cries Mary 90 ethereal/electronic and Hovercraft 91 drone/noise and Postal Service 86 electronic pop), ELECTRONIC CONTINUUM 90-92 (three consecutive electronic-inflected genres atmosphere obliteration bridge-building, Sky Cries Mary atmosphere Hovercraft obliteration Trance Mission cultural bridge-building), THE GLOBAL WEAVE 93rd acoustic element (multiple world music instruments from different traditions woven through electronic processing, polyphonic tapestry, oud melody + tabla rhythm + didgeridoo drone, no single tradition dominates, distinct from sustained crush 91 monolithic wall and ambient drift 90 floating atmospheric and electronic pulse 86 structured rhythm), THE CROSS-POLLINATOR 93rd artist-city pattern (operating across cities and traditions, carrying elements between scenes, belonging to no single scene because belonging to all, creating new music by dissolving borders, distinct from spousal satellite 91 biographical orbit and parallel scene 90 alongside dominant narrative), San Francisco/Seattle, City of Tribes Records
-**Part B:** Bumblebee Drone (Apidae) -- deep resonant buzz, E=3, wildflower meadow, Apidae, NEW FAMILY (42nd), NEW ORDER Hymenoptera (bees wasps ants, fifth insect order, Orthoptera 87-88 Hemiptera 89 Diptera 91 Hymenoptera 92), FIRST POLLINATOR (first mutualist, first species whose sound performs ecological work, buzz pollination sonication vibrating flowers at specific frequencies to release pollen), DEEP RESONANT BUZZ 93rd species-side acoustic element (wing vibration at 130-240 Hz, warm resonant, body as resonating chamber, second wing-sound after mosquito 91, deeper and richer than mosquito whine, distinct from ultra-thin hum cloud 91 thin high-pitched barely audible, distinct from electric buzzing throb 89 tymbal harsh electric, distinct from rhythmic chirp 87 structured percussive), THIRTY-SECOND CONSECUTIVE ORIGINAL CSV, E=3 through warm present meadow buzz
-**Series:** Seattle 360 + Sound of Puget Sound -- Continuous Release Engine
+**Degree:** 92 of 360 — Second degree of Quadrant II
+**Part A:** Trance Mission — World/Electronic, E=3, City of Tribes Records, Genre Stage 74, the global weave, the cross-pollinator
+**Part B:** Bumblebee Drone (*Apidae*, *Bombus* spp.) — deep resonant buzz, E=3, wildflower meadow, Apidae 42nd family, NEW ORDER Hymenoptera, FIRST POLLINATOR, buzz pollination / sonication, 32nd original CSV
+**Series:** Seattle 360 + Sound of Puget Sound — Continuous Release Engine
 **Cluster:** Music (hub: WAL)
-**Note:** Both cross-pollinators. This is the degree where pollination enters the engine on both sides. On the music side, **Trance Mission** pollinates scenes -- carrying the oud into the electronic club and the sampler into the world music festival, operating across San Francisco and Seattle, across world music and electronic music, belonging to no single tradition because they belong to all of them. **World/Electronic** at Genre Stage 74. E=3. **City of Tribes Records** -- a San Francisco label whose name is the aesthetic: a city (modernity, electronic) of tribes (traditional, global). The **global weave** is the 93rd acoustic element: oud, tabla, didgeridoo, hammered dulcimer woven through electronic processing into a polyphonic tapestry where no single tradition dominates. The **cross-pollinator** is the 93rd artist-city pattern: the artist who dissolves borders between scenes. The **electronic continuum** reaches three degrees (90-92): Sky Cries Mary used electronics for atmosphere, Hovercraft used electronics for obliteration, Trance Mission uses electronics for cultural bridge-building. Three consecutive degrees, three relationships with electronics. On the species side, the **bumblebee drone** brings **NEW FAMILY Apidae (42nd)** and **NEW ORDER Hymenoptera** -- the fifth insect order. The bumblebee is the **FIRST POLLINATOR** in the species engine. The first mutualist. The first species whose sound performs ecological work: **buzz pollination (sonication)** vibrates flowers at specific frequencies to release pollen from anthers that require it. The deep resonant buzz (130-240 Hz) is warm, resonant, clearly audible -- the opposite of the mosquito's thin whine (91). Same mechanism (wing vibration), completely different character. Deep vs thin. Warm vs cold. E=3 vs E=2. The bumblebee pollinates huckleberry, blueberry, shooting star -- PNW keystone plants. **Thirty-second consecutive original CSV.** Both Trance Mission and the bumblebee are cross-pollinators. One carries music between traditions. The other carries pollen between flowers. Both create through connection.
+**Branch:** main
+**Commit:** `4e0dce849d2579ca6a2e47c6b145d85190d5405e`
+**Files changed:** 9 (release note + 4 Trance Mission research artifacts + 4 Bumblebee Drone research artifacts)
+**Dedication:** To **Trance Mission** in **City of Tribes Records / San Francisco** context — the polyphonic weavers, the cross-pollinators of the **oud**, **tabla**, **didgeridoo**, **hammered dulcimer**, and **erhu**, processed through samplers and ambient textures into a single conversational electronic space; to **Beth Custer** and **Stephen Kent** and the wider **City of Tribes** roster (**Trance Mission**, **Beasts of Paradise**, **Stellamara**) whose Bay Area / Pacific Northwest scene overlap brought world-music modernism to the PNW touring circuit through the 1990s; to the **Bumblebee** (*Bombus occidentalis*, *Bombus mixtus*, *Bombus melanopygus*) — the first **mutualist** in the engine, the first species whose **sound performs ecological work** through **buzz pollination (sonication)**, the first member of order **Hymenoptera** (the bees, wasps, and ants); to the **wildflower meadow** as the brightest and most diverse habitat the engine has visited; to **huckleberry**, **blueberry**, **shooting star**, and the buzz-pollinated keystone plants of the Pacific Northwest understory; and to the **electronic continuum** of degrees 90–92 — **Sky Cries Mary** for atmosphere, **Hovercraft** for obliteration, **Trance Mission** for cultural bridge-building.
+**Engine Position:** Degree 92 of 360 — 25.6% of the circle traversed; Quadrant II in motion; the global weave (93rd acoustic element artist-side); deep resonant buzz (93rd species-side); The Cross-Pollinator (93rd artist-city pattern); GENRE STAGE 74 World/Electronic (seventy-four genre stages in ninety-two degrees, 0.804 stages/degree); ELECTRONIC CONTINUUM 90–92 (three consecutive electronic-inflected genres — atmosphere, obliteration, bridge-building); FIRST POLLINATOR in the species engine; FIRST FUNCTIONAL SOUND (sound used as a tool to perform physical work on the environment); HYMENOPTERA NEW ORDER — fifth insect order after Orthoptera (87–88), Hemiptera (89), Diptera (91), now Hymenoptera (92); APIDAE NEW FAMILY 42nd; SECOND CONSECUTIVE WING-SOUND (mosquito 91 → bumblebee 92, same mechanism, opposite character — thin/cold/E=2 vs deep/warm/E=3); SECOND CONSECUTIVE INSECT (91–92); THIRTY-SECOND CONSECUTIVE ORIGINAL CSV SPECIES (degrees 61–92); FIRST NON-SEATTLE LABEL OF QUADRANT II (City of Tribes, San Francisco) — non-Seattle label geography expands; CROSS-CITY PATTERN San Francisco / Seattle.
+**Note:** Both halves of degree 92 are cross-pollinators. On the music side, **Trance Mission** carries the **oud** into the electronic club and the **sampler** into the world music festival, operating across **San Francisco** and **Seattle**, across world music and electronic music, belonging to no single tradition because they belong to all of them. **World/Electronic** at **Genre Stage 74**. **E=3**. **City of Tribes Records** — a San Francisco label whose name is the aesthetic: a city (modernity, electronic) of tribes (traditional, global). On the species side, the **Bumblebee Drone** brings **NEW FAMILY Apidae (42nd)** and **NEW ORDER Hymenoptera** — the fifth insect order in the engine. The bumblebee is the **FIRST POLLINATOR**, the first **mutualist**, and the first species whose sound performs ecological work through **buzz pollination (sonication)**. Both Trance Mission and the bumblebee create through connection — one carries music between traditions, the other carries pollen between flowers.
 
 ## Summary
 
-The global weave and the deep resonant buzz. Degree 92 is the cross-pollination degree -- both Part A and Part B are pollinators, carrying elements between worlds that would not otherwise touch.
+**The global weave and the deep resonant buzz.** Degree 92 is the cross-pollination degree — both halves of the engine, on the same day, deliver entries whose entire reason for being is the carrying of elements between worlds that would not otherwise touch. **Trance Mission** carries the **oud** into the **electronic club** and the **sampler** into the **world music festival**; the **bumblebee** carries **pollen** between flowers, sustaining the wildflower meadow and the agricultural systems that depend on it. Both entries arrive on the same degree, and both arrive at energy **E=3** — the warm, present, immersive register where neither side dominates the soundscape but both occupy it audibly and sustainably. **City of Tribes Records** delivers the music; **Apidae** delivers the species. Three consecutive electronic-inflected degrees (Sky Cries Mary 90, Hovercraft 91, Trance Mission 92) close the **electronic continuum** at 92 with cultural bridge-building as the third use of the same technology, after atmosphere and obliteration. Two consecutive insect degrees (mosquito 91, bumblebee 92) close the **wing-sound pair** with deep warm resonance as the inverted twin of the thin cold whine. **Genre Stage 74** lands; **Hymenoptera** opens; the engine ticks its twin counters to **93** on both sides at once.
 
-On the music side, **Trance Mission** arrives with World/Electronic -- global instruments (oud, tabla, didgeridoo, hammered dulcimer) woven through electronic processing, sampling, and ambient textures. San Francisco-based, connected to the PNW through performances and scene overlap. **City of Tribes Records** -- a label whose name captures the aesthetic. **Genre Stage 74** -- World/Electronic. E=3. The music is a polyphonic tapestry: multiple traditions speaking simultaneously through a shared electronic space. No single tradition dominates. The electronics serve as connective tissue between musical languages that would otherwise have no shared vocabulary. This is the third consecutive electronic-inflected degree -- the **electronic continuum** (90-92): Sky Cries Mary used electronics for atmosphere (the ambient drift), Hovercraft used electronics for obliteration (the sustained crush), Trance Mission uses electronics for cultural bridge-building (the global weave). Three degrees, three purposes, one technology. **The global weave** is the 93rd acoustic element -- multiple world instruments from different traditions woven through electronic processing into polyphonic cross-cultural tapestry. **The cross-pollinator** is the 93rd artist-city pattern -- the artist who belongs to no single scene because they belong to all of them, carrying elements between traditions, dissolving borders.
+**Part A: Trance Mission in City of Tribes Records / San Francisco context.** On the music side, **Trance Mission** is the **first explicitly cross-traditional artist** in the engine and the **third consecutive electronic-inflected entry** of Quadrant II. The group blends global instruments — **oud** (Middle Eastern lute), **tabla** (Indian hand drums), **didgeridoo** (Australian Aboriginal wind instrument), **hammered dulcimer**, and **erhu** (Chinese bowed string) — through electronic processing, sampling, and ambient textures into a polyphonic tapestry where no single tradition dominates. **Genre Stage 74** holds **World/Electronic** as a new genre, distinguished from **Sky Cries Mary** at degree 90 (Ethereal/Electronic, where world influences blend into atmosphere rather than stand as primary), from **Philip Aaberg** at degree 65 (world influences mediated through Western piano), and from **Hovercraft** at degree 91 (electronics for obliteration rather than for cultural bridge-building). The **electronic continuum** reaches three degrees (90–92): **Sky Cries Mary** used electronics for **atmosphere** (the ambient drift); **Hovercraft** used electronics for **obliteration** (the sustained crush); **Trance Mission** uses electronics for **cultural bridge-building** (the global weave). Three consecutive degrees, three relationships with the same technology. **City of Tribes Records** is the **San Francisco** label that issued Trance Mission's catalog, and the label's name itself encapsulates the aesthetic — a city of tribes, modernity holding tradition in conversation rather than substituting for it. The label's other artists (**Beasts of Paradise**, **Stellamara**, **Beth Custer Ensemble**) participate in the same world/electronic project from different angles. **Trance Mission** are connected to the PNW through performances and scene overlap; the 1990s wave of world/electronic fusion connected the Bay Area to **Seattle** and the broader Pacific Northwest experimental circuit. The **global weave** is the **93rd acoustic element** on the artist side — multiple world instruments from different traditions woven through electronic processing into polyphonic cross-cultural tapestry. The element is distinct from the **sustained crush** at degree 91 (monolithic wall of single-source noise), the **ambient drift** at degree 90 (floating atmospheric blend), and the **electronic pulse** at degree 86 (structured rhythmic synthesis). **The Cross-Pollinator** is the **93rd artist-city pattern** — the artist who belongs to no single scene because they belong to all of them, carrying elements between traditions, dissolving borders. The pattern is distinct from **the Spousal Satellite** at degree 91 (biographical orbit around a dominant figure), **the Parallel Scene** at degree 90 (alongside-but-not-inside the dominant narrative), and **the Solo Distillation** at degree 88 (return artist reduced to one voice and one instrument). Trance Mission is the engine's first explicit cross-pollinator and the **first non-Seattle label appearance of Quadrant II**, expanding the label geography to the Bay Area without leaving the PNW thematic frame.
 
-On the species side, the **bumblebee drone** (Apidae) introduces two taxonomic firsts: **NEW FAMILY Apidae (42nd)** and **NEW ORDER Hymenoptera** -- the fifth insect order in the engine (Orthoptera 87-88, Hemiptera 89, Diptera 91, Hymenoptera 92). The bumblebee is the **first POLLINATOR** in the species engine. The first mutualist. The first species whose ecological role is fundamentally about giving as well as receiving. And the first species whose sound performs ecological work: **buzz pollination (sonication)** vibrates flowers at specific frequencies (130-400 Hz) to release pollen that cannot be accessed any other way. The deep resonant buzz at 130-240 Hz is the second wing-produced sound (after mosquito at 91) but its character is the opposite -- warm, full, resonant, clearly audible at several meters. The bumblebee's densely furred body acts as a resonating chamber, amplifying the wing vibration into a rich, deep tone. From the mosquito's ultra-thin hum cloud (91, E=2) to the bumblebee's deep resonant buzz (92, E=3). Two wing-sounds, two characters. Thin vs deep. Cold vs warm. Wildflower meadow habitat -- the brightest and most diverse habitat in the engine, full of color, scent, and buzzing life. Connection to marmot (75) in alpine meadows and golden-mantled ground squirrel (79) in meadow/edge habitats. **Thirty-second consecutive original CSV species.**
+**Part B: Bumblebee Drone (Apidae, *Bombus* spp.).** On the species side, the **Bumblebee Drone** introduces two taxonomic firsts in a single degree: **NEW FAMILY Apidae (42nd)** and **NEW ORDER Hymenoptera** — the **fifth insect order** in the engine after **Orthoptera** (87–88, Cricket Chorus and Katydid), **Hemiptera** (89, Cicada), **Diptera** (91, Mosquito Swarm), and now **Hymenoptera** (92, Bumblebee Drone). The bumblebee is the **FIRST POLLINATOR** in the engine — the first species whose ecological role is fundamentally about **giving** as well as receiving, the first **mutualist**, and the first species whose **sound performs ecological work**. **Buzz pollination (sonication)** vibrates flowers at specific frequencies (130–400 Hz) to release pollen from anthers that **cannot be accessed by any other mechanism** — including the anthers of **huckleberry**, **blueberry**, and **shooting star**, three Pacific Northwest keystone plants whose entire reproductive cycle depends on bumblebee sonication. The bumblebee's body is itself a resonating chamber: dense fur, large thoracic mass, and thoracic muscle-driven wing vibration combine to produce the **deep resonant buzz** at **130–240 Hz** — warm, full, clearly audible at several meters in still air. The **deep resonant buzz** is the **93rd species-side acoustic element** and the **second consecutive wing-produced sound** after the **mosquito** at degree 91. Same mechanism (wing vibration), maximally different result: the mosquito whine is **thin, cold, high-pitched, and barely audible at close range**; the bumblebee buzz is **deep, warm, low-pitched, and clearly present at distance**. From E=2 (mosquito) to E=3 (bumblebee). From 400–600 Hz to 130–240 Hz. From cold ultra-thin hum cloud to warm resonant meadow buzz. Two wing-sounds, two characters, one mechanism — proving once again, as the engine has now demonstrated through cricket-vs-katydid stridulation at 87–88, that **mechanism does not determine result**. The bumblebee inhabits the **wildflower meadow** — the brightest and most diverse habitat the engine has yet visited, full of color, scent, nectar sources, and the quiet ambient hum of pollination at work. The wildflower meadow is the **third meadow / meadow-edge habitat** in the species engine after the **marmot** at degree 75 (alpine meadow) and the **golden-mantled ground squirrel** at degree 79 (meadow-edge), and the bumblebee's habitat marker now ties all three meadow entries together through a single ecological community. **Thirty-second consecutive original CSV species** (degrees 61–92) — the streak continues unbroken, the longest reliable original-catalog run in the engine to date.
 
-Both cross-pollinators. Trance Mission carried the oud into the electronic club and the sampler into the world music festival. The bumblebee carries pollen between flowers, sustaining the wildflower meadow and the agricultural systems that depend on it. Both create through connection. Both are the engine's first explicit pollinators.
+**Cross-Sync Parallel: Cross-Pollination as Architecture.** Both **Trance Mission** and the **Bumblebee Drone** are studies in **cross-pollination** — the carrying of elements between domains that would not otherwise meet. **Trance Mission** carries the oud into the electronic club, the sampler into the world music festival, and the world music aesthetic into the PNW experimental scene. **In parallel**, the **bumblebee** carries pollen between flowers, sustaining the wildflower meadow community through a single mechanism (sonication) that no other PNW species duplicates at the same scale. **Each side** of degree 92 derives its identity not from what it *is* but from what it *moves between*. **The same** engine-level theme — that an entry's structural role can be defined by transit rather than by location — reaches both halves on the same degree, producing the engine's first explicit cross-pollination degree.
+
+**Cross-Sync Parallel: Same Mechanism, Opposite Character.** Both halves of degree 92 are also studies in same-mechanism / different-result pairings, picking up the structural theme that opened with cricket-vs-katydid stridulation at degrees 87–88. **Trance Mission** uses the same fundamental electronic processing tools (samplers, effects, ambient textures) as **Sky Cries Mary** at degree 90 and **Hovercraft** at degree 91, but the **acoustic result** is fundamentally different — atmosphere becomes obliteration becomes bridge-building across three consecutive degrees. **In parallel**, the **bumblebee** uses the same **wing-vibration mechanism** as the **mosquito** at degree 91, but the result is the engine's sharpest acoustic inversion to date — the mosquito's thin cold whine becomes the bumblebee's deep warm buzz across a single degree boundary. **Each side** demonstrates that mechanism does not determine result. **The same** structural law — that identical technical means produce maximally different acoustic outcomes depending on body, framing, and intent — reaches both halves of degree 92 simultaneously.
+
+**Cross-Sync Parallel: The Electronic Continuum and the Insect Streak.** Both halves of degree 92 sit inside extended runs that the engine has been building. On the artist side, the **electronic continuum** reaches three consecutive degrees (Sky Cries Mary 90, Hovercraft 91, Trance Mission 92) — three consecutive electronic-inflected genres after a long stretch of acoustic and lo-fi entries. **In parallel**, the species side reaches **two consecutive insect degrees** (mosquito 91, bumblebee 92) and **five distinct insect orders** (Orthoptera, Hemiptera, Diptera, Hymenoptera, plus the second Orthoptera at katydid 88). **Each side** is in a phase of orderly accumulation within a coherent class or sub-class. **Synchronized** by the engine's mid-arc tendency toward consolidation, both halves arrive on degree 92 still building the same kinds of multi-degree threads they began earlier in Quadrant II.
+
+**Cross-Sync Parallel: Genre Stage 74 and the First Pollinator.** Both halves of degree 92 introduce **first-of-kind** structural elements that change the engine's vocabulary going forward. **Genre Stage 74** opens the **World/Electronic** category and sets the genre-to-degree ratio at **0.804 stages/degree** — the first time the engine has explicitly fused a non-Western tradition with electronic processing as the genre's defining property rather than as a flavor. **In parallel**, the **first pollinator** opens the **functional sound** category — sound used as a tool to perform physical work on the environment, distinct from sound as signal (cricket chirp), sound as byproduct of locomotion (mosquito whine), or sound as deliberate communication (woodpecker drum). **Each side** is opening a category that the engine had not previously named. **The same** structural pressure — that mid-Quadrant II development requires new categorical primitives, not just new entries within existing primitives — reaches both halves on degree 92.
+
+**Cross-Sync Parallel: City of Tribes and Wildflower Meadow.** Both halves of degree 92 introduce **environments of explicit diversity**. **City of Tribes Records** is a label whose name announces its programmatic commitment to multiplicity — a city (modernity, technological infrastructure) of tribes (traditional, plural, distinct). **In parallel**, the **wildflower meadow** is a habitat whose defining property is **floral diversity** — many plant species in close proximity, blooming in overlapping cycles, requiring a generalist pollinator to sustain the community. **Each side** is at home in environments that succeed through plural co-presence. **Synchronized** by the cross-pollinator theme, both halves derive their structural function from the multiplicity around them rather than from singular identity within it.
+
+**Cross-Sync Parallel: The Bay Area Bridge and the Hymenoptera Bridge.** Both halves of degree 92 represent **bridges** that the engine had not previously crossed. On the artist side, **Trance Mission** brings the engine its **first non-Seattle label of Quadrant II** — **City of Tribes Records** is San Francisco-based, expanding the label geography from the Pacific Northwest into the broader West Coast. The PNW thematic frame holds (through Trance Mission's PNW touring overlap and scene connections), but the label geography opens. **In parallel**, the **bumblebee** brings the engine its **fifth insect order** — **Hymenoptera** — opening one of the most ecologically significant orders in the entire animal kingdom. The order contains tens of thousands of bees, wasps, and ants whose ecological roles span pollination, predation, decomposition, and ecosystem engineering. **Each side** is a bridge from a previously bounded region to a much larger world. **The same** structural moment — the engine pushing past previous geographic and taxonomic boundaries while preserving its thematic frame — reaches both halves on degree 92.
+
+**Cross-Sync Parallel: Sound as Tool and Music as Tool.** Both halves of degree 92 introduce **sound-as-tool** as an explicit category. The **bumblebee** uses sound as a literal tool — buzz-pollination sonication is sound being **used to perform physical work** on the environment, releasing pollen that cannot be accessed any other way. **In parallel**, **Trance Mission** uses music as a cultural tool — the global weave is electronic processing being **used to bridge traditions** that would otherwise have no shared vocabulary. Both halves are studies in **functional sound** — sound deployed for an end beyond itself, sound that does work in the world. **Each side** demonstrates that sound is not only a signal or a byproduct but also an instrument of action. **Synchronized** by the cross-pollination theme, both halves arrive at the same understanding of sound through completely different paths.
+
+**Cross-Sync Parallel: The Same Energy Level Reached by Different Routes.** Both **Trance Mission** and the **Bumblebee Drone** arrive at **E=3** through completely different routes. Trance Mission's E=3 is the **immersive accessibility** of warm electronic processing applied to global instruments — the music is dense and complex but never overwhelming, polyphonic but not crushing, sophisticated but warm. **In parallel**, the bumblebee's E=3 is the **warm present meadow buzz** of a large furred body resonating through wing vibration — the sound is clearly audible but never dominates, large but not overwhelming, present but not crushing. **Each side** reaches the same energy level (the warm, present, immersive register where the entry occupies the soundscape sustainably without overwhelming it) through entirely different mechanisms. **The same** energy convergence at E=3 echoes the engine's earlier observation at degree 88 that all five return artists converged at E=3, suggesting that E=3 may function as a natural equilibrium across multiple kinds of entries — returns, cross-pollinators, mutualists.
+
+**Cross-Sync Parallel: Carrying Pollen and Carrying Tradition.** Both halves of degree 92 are explicit acts of carrying. **Trance Mission** carries musical traditions across cultural boundaries — the oud out of the Middle East, the tabla out of South Asia, the didgeridoo out of Aboriginal Australia, all into the same shared electronic space where they can converse without losing their distinct identities. **In parallel**, the **bumblebee** carries pollen across plant individuals — from huckleberry to huckleberry, from blueberry to blueberry, from shooting star to shooting star, sustaining the genetic exchange that keeps the wildflower meadow alive across generations. **Each side** is defined by its motion between, not by its location at. **Synchronized** by the cross-pollinator theme, both halves arrive at the same architectural insight: that some entries exist not at points but along trajectories, and the engine must accommodate trajectory-defined entries alongside point-defined ones.
 
 ## Key Features
 
 | Metric | Part A: Trance Mission | Part B: Bumblebee Drone |
 |--------|------------------------|--------------------------|
-| Genre | World/Electronic (Genre Stage 74, seventy-four genre stages in 92 degrees, global instruments oud tabla didgeridoo + electronic processing sampling ambient textures, distinguished from Ethereal/Electronic 90 and Drone/Noise 91 and Electronic Pop 86, electronics as cultural bridge not atmosphere or obliteration or pop structure) | -- |
-| Energy | E=3 (immersive accessibility, electronics make unfamiliar world instruments approachable, warm and polyphonic, City of Tribes Records) | E=3 (warm present meadow buzz, clearly audible at several meters, large furred body resonating chamber, deeper and richer than mosquito, warm ambient hum of wildflower meadow) |
-| Label | City of Tribes Records (San Francisco, world/electronic focus, label name = aesthetic, city of modernity + tribes of tradition) | -- |
-| Family | -- | Apidae (NEW FAMILY 42nd, first Hymenoptera family, bumblebees, genus Bombus, PNW species B. occidentalis B. mixtus B. melanopygus) |
-| Order | -- | Hymenoptera (NEW ORDER, bees wasps ants, fifth insect order, most ecologically significant order -- keystone pollinators) |
-| Class | -- | Insecta (insect streak continues from 91, consecutive insects 91-92 mosquito-bumblebee, five insect orders now in engine) |
-| Acoustic Element | the global weave (93rd, multiple world instruments from different traditions woven through electronic processing, polyphonic tapestry, oud melody + tabla rhythm + didgeridoo drone + hammered dulcimer resonance, no single tradition dominates, distinct from sustained crush 91 monolithic and ambient drift 90 atmospheric and electronic pulse 86 structured) | deep resonant buzz (93rd species-side, wing vibration 130-240 Hz, warm resonant full, body as resonating chamber densely furred, second wing-sound after mosquito 91, distinct from ultra-thin hum cloud 91 thin high barely audible E=2, distinct from electric buzzing throb 89 tymbal harsh, distinct from rhythmic chirp 87 structured percussive) |
-| Artist-City Pattern | The Cross-Pollinator (93rd, operating across cities and traditions, carrying elements between scenes, belonging to no single scene because belonging to all, SF/Seattle cross-city, world/electronic cross-tradition, dissolving borders that separate old music, distinct from spousal satellite 91 biographical orbit and parallel scene 90 alongside dominant narrative) | -- |
-| Structural Firsts | GENRE STAGE 74 (World/Electronic), THE GLOBAL WEAVE 93rd acoustic element (polyphonic tapestry), THE CROSS-POLLINATOR 93rd artist-city pattern (cross-tradition), ELECTRONIC CONTINUUM 90-92 (atmosphere-obliteration-bridge-building, three consecutive electronic-inflected genres), CITY OF TRIBES RECORDS (San Francisco label, non-Seattle label geography expands), SAN FRANCISCO/SEATTLE CONNECTION (cross-city scene overlap) | NEW ORDER HYMENOPTERA (fifth insect order), NEW FAMILY APIDAE (42nd), FIRST POLLINATOR (first mutualist, ecological keystone), BUZZ POLLINATION SONICATION (first functional sound, sound performs ecological work, vibrating flowers to release pollen), DEEP RESONANT BUZZ 93rd species-side acoustic element (warm resonant 130-240 Hz), SECOND WING-SOUND (mosquito 91 + bumblebee 92, thin vs deep), THIRTY-SECOND CONSECUTIVE ORIGINAL CSV, WILDFLOWER MEADOW HABITAT (brightest most diverse habitat) |
+| Genre | **World/Electronic** (Genre Stage 74, seventy-four genre stages in 92 degrees, global instruments oud tabla didgeridoo hammered dulcimer erhu through electronic processing sampling ambient textures, electronics as cultural bridge not atmosphere or obliteration or pop structure, distinguished from Sky Cries Mary 90 ethereal/electronic and Hovercraft 91 drone/noise and Postal Service 86 electronic pop) | — |
+| Energy | **E=3** (immersive accessibility, warm electronics make unfamiliar global instruments approachable, polyphonic but never crushing, City of Tribes Records aesthetic, third consecutive E=3 in Quadrant II's electronic continuum) | **E=3** (warm present meadow buzz, clearly audible at several meters, large furred body acts as resonating chamber, deeper richer fuller than mosquito's thin whine, warm ambient hum of wildflower meadow, second consecutive E=3 wing-sound pairing) |
+| Label | **City of Tribes Records** (San Francisco, world/electronic focus, label name announces aesthetic — city of modernity holding tribes of tradition in conversation, FIRST NON-SEATTLE LABEL OF QUADRANT II, label geography expands from PNW to Bay Area while thematic frame holds) | — |
+| Family | — | **Apidae** (NEW FAMILY 42nd, first Hymenoptera family in engine, bumblebees of genus *Bombus*, PNW species *B. occidentalis* *B. mixtus* *B. melanopygus* *B. vosnesenskii*) |
+| Order | — | **Hymenoptera** (NEW ORDER, bees wasps ants, FIFTH INSECT ORDER after Orthoptera 87–88 Hemiptera 89 Diptera 91, most ecologically significant order on Earth — keystone pollinators decomposers ecosystem engineers) |
+| Class | — | **Insecta** (SECOND CONSECUTIVE Insecta 91–92, insect streak continues from mosquito at 91, five insect orders now in engine, insect class diversity expanding rapidly through Quadrant II) |
+| Acoustic Element | **the global weave** (93rd, multiple world instruments from different traditions woven through electronic processing into polyphonic tapestry, oud melody + tabla rhythm + didgeridoo drone + hammered dulcimer resonance + erhu vocal-line, no single tradition dominates, distinct from sustained crush 91 monolithic single-source wall and ambient drift 90 floating atmospheric blend and electronic pulse 86 structured rhythmic synthesis) | **deep resonant buzz** (93rd species-side, wing vibration 130–240 Hz, warm resonant full clearly audible at several meters, body as resonating chamber densely furred large thoracic mass, SECOND WING-SOUND after mosquito 91, distinct from ultra-thin hum cloud 91 thin cold high barely audible E=2, distinct from electric buzzing throb 89 tymbal harsh, distinct from rhythmic chirp 87 structured percussive, distinct from continuous electric buzz 88 stridulatory upper-frequency) |
+| Artist-City Pattern | **The Cross-Pollinator** (93rd, operating across cities and traditions, carrying elements between scenes, belonging to no single scene because belonging to all, San Francisco / Seattle cross-city, world / electronic cross-tradition, dissolving borders that separate old music from new, distinct from spousal satellite 91 biographical orbit and parallel scene 90 alongside dominant narrative and solo distillation 88 return reduced to one voice) | — |
+| Habitat Marker | — | **Wildflower meadow** (brightest most diverse habitat in engine, full of color scent nectar floral diversity, third meadow / meadow-edge habitat after marmot 75 alpine meadow and golden-mantled ground squirrel 79 meadow-edge, ties three meadow entries together through single ecological community, sustains huckleberry blueberry shooting star buzz-pollinated keystone plants) |
+| Structural Firsts | GENRE STAGE 74 World/Electronic (seventy-four stages in ninety-two degrees, 0.804 stages/degree), THE GLOBAL WEAVE 93rd acoustic element (polyphonic cross-cultural tapestry), THE CROSS-POLLINATOR 93rd artist-city pattern (cross-tradition cross-city), ELECTRONIC CONTINUUM 90–92 (three consecutive electronic-inflected genres atmosphere obliteration bridge-building), CITY OF TRIBES RECORDS (San Francisco label, FIRST NON-SEATTLE LABEL OF QUADRANT II), SAN FRANCISCO / SEATTLE CONNECTION (cross-city scene overlap explicit), FIRST CROSS-TRADITIONAL ARTIST in engine | NEW ORDER HYMENOPTERA (fifth insect order), NEW FAMILY APIDAE (42nd), FIRST POLLINATOR (first mutualist, ecological keystone), FIRST FUNCTIONAL SOUND (sound used as tool to perform physical work on environment, distinct from signal byproduct or communication), BUZZ POLLINATION SONICATION (vibrating flowers at specific frequencies to release pollen), DEEP RESONANT BUZZ 93rd species-side acoustic element (warm resonant 130–240 Hz), SECOND WING-SOUND (mosquito 91 + bumblebee 92, thin vs deep cold vs warm), THIRTY-SECOND CONSECUTIVE ORIGINAL CSV (degrees 61–92), WILDFLOWER MEADOW HABITAT (third meadow entry ties marmot 75 + ground squirrel 79 together) |
 | Research Words | ~5,500 | ~5,500 |
 | Files Produced | 4 | 4 |
-| Cross-References | 5 | 5 |
-
-<details>
-<summary>Full Release Notes -- Click to expand</summary>
-
-## Part A: Trance Mission -- THE GLOBAL WEAVE (World/Electronic, E=3, City of Tribes Records, GENRE STAGE 74 World/Electronic Seventy-Four Genre Stages Global Instruments Oud Tabla Didgeridoo Electronic Processing Sampling Ambient Textures Cultural Bridge-Building, The Global Weave 93rd Acoustic Element Multiple World Instruments Woven Through Electronics Polyphonic Tapestry No Single Tradition Dominates, The Cross-Pollinator 93rd Artist-City Pattern Operating Across Cities and Traditions Carrying Elements Between Scenes Belonging to No Single Scene Dissolving Borders, Electronic Continuum 90-92 Atmosphere Obliteration Bridge-Building Three Consecutive Electronic-Inflected Genres, San Francisco/Seattle, City of Tribes Records)
-
-Full deep research covering Trance Mission at degree 92, Genre Stage 74, and the global weave:
-
-### STRUCTURAL EVENT: Genre Stage 74 -- World/Electronic
-
-Degree 92 reaches **Genre Stage 74**. **World/Electronic** describes Trance Mission's music: traditional instruments from multiple world music traditions processed through electronic effects, combined with sampling, loops, and ambient textures. The genre is a hybrid that uses electronics to create a shared space where traditions can converse.
-
-Distinguished from prior entries:
-- **Sky Cries Mary** (degree 90) blends world influences into ethereal/electronic. Trance Mission makes the world music element primary and explicit.
-- **Philip Aaberg** (degree 65) incorporates world influences through Western piano. Trance Mission uses global instruments directly.
-- **Hovercraft** (degree 91) uses electronics for obliteration. Trance Mission uses electronics for cultural bridge-building.
-
-Seventy-four genre stages in 92 degrees. Three consecutive electronic-inflected genres (72-73-74).
-
-### TRANCE MISSION -- The Global Hybrid
-
-**Formation and History:** Trance Mission was a San Francisco-based world-music-meets-electronic group. The group blended global instruments -- **oud** (Middle Eastern lute), **tabla** (Indian hand drums), **didgeridoo** (Australian Aboriginal wind instrument), **hammered dulcimer**, **erhu** (Chinese bowed string) -- with electronic processing, sampling, and ambient textures.
-
-Connected to the PNW through performances and scene overlap. Part of the 1990s wave of world/electronic fusion that connected Bay Area and Pacific Northwest experimental scenes.
-
-**The Sound:** Trance Mission's music is built from global acoustic instruments (oud provides Middle Eastern melodic language, tabla provides Indian rhythmic frameworks, didgeridoo provides Australian drone, hammered dulcimer provides Central European/East Asian resonance), electronic processing (these acoustic instruments are fed through effects, sampling, and looping, transforming their timbres while retaining their cultural identity), and ambient textures (electronic pads and processing create a shared sonic environment where the acoustic traditions can coexist).
-
-The result is neither traditional world music nor conventional electronic music but a hybrid that dissolves the boundary. The electronics serve as **connective tissue** between traditions that would otherwise have no shared musical vocabulary.
-
-**City of Tribes Records:** A San Francisco-based label focused on world/electronic fusion. The label name evokes the group's aesthetic: a city (modernity, electronic) of tribes (traditional, global). Part of the Bay Area's world music infrastructure.
-
-### STRUCTURAL EVENT: E=3 -- Immersive Accessibility
-
-E=3 reflects immersive accessibility. The world/electronic hybrid is accessible through its electronic textures even when the world instruments are unfamiliar. The electronics provide a familiar sonic environment in which unfamiliar timbres can be experienced without barriers.
-
-### THE GLOBAL WEAVE -- 93rd Acoustic Element
-
-The ninety-third acoustic element is **the global weave** -- multiple world music instruments from different traditions playing simultaneously, connected and transformed by electronic processing. The oud's Middle Eastern melody meets the tabla's Indian rhythm meets the didgeridoo's Australian drone, all woven together through electronic loops and ambient textures. The weave is global: no single tradition dominates. Each instrument retains its cultural voice while contributing to a collective texture that belongs to no single tradition.
-
-Contrasts:
-- **The sustained crush** (degree 91, Hovercraft) -- monolithic wall of sound. The global weave is polyphonic tapestry. From monolith to tapestry, from crushing uniformity to woven diversity.
-- **The ambient drift** (degree 90, Sky Cries Mary) -- floating, atmospheric. The global weave is more structured -- the instruments have rhythmic and melodic identities within the weave.
-- **The electronic pulse** (degree 86, Postal Service) -- structured pop framework. The global weave dissolves Western pop structure into cross-cultural polyphony.
-
-### THE CROSS-POLLINATOR -- 93rd Artist-City Pattern
-
-The ninety-third artist-city pattern is **the cross-pollinator** -- an artist or group that operates across multiple cities and multiple musical traditions, pollinating each scene with elements from the others. Trance Mission was based in San Francisco but connected to the PNW through performances and scene overlap -- carrying world music traditions into electronic scenes and electronic techniques into world music contexts.
-
-The cross-pollinator belongs to no single scene because they belong to all of them. They carried the oud into the electronic club and the sampler into the world music festival. They were not visitors to any tradition but residents of the space between traditions.
-
-Contrasts:
-- **The spousal satellite** (degree 91, Hovercraft) -- biographical orbit around fame. The cross-pollinator orbits between traditions, not around a person.
-- **The parallel scene** (degree 90, Sky Cries Mary) -- operating alongside a dominant scene. The cross-pollinator operates between scenes, connecting them.
-
-### THE ELECTRONIC CONTINUUM: DEGREES 90-92
-
-Three consecutive electronic-inflected genres:
-
-1. **Sky Cries Mary** (degree 90) -- ethereal/electronic. Electronics for **atmosphere**. The ambient drift.
-2. **Hovercraft** (degree 91) -- drone/noise. Electronics for **obliteration**. The sustained crush.
-3. **Trance Mission** (degree 92) -- world/electronic. Electronics for **cultural bridge-building**. The global weave.
-
-Three degrees, three relationships with electronics. The same technology serves atmosphere, destruction, and connection depending on the artist's intent.
-
-### CROSS-REFERENCES (Part A)
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| S36-090 | Trance Mission (92) | Sky Cries Mary (90) | WORLD/ELECTRONIC PARALLEL. Both blend world music elements with electronics. Sky Cries Mary uses world influences within an ethereal framework; Trance Mission makes world instruments primary. Both occupy the world/electronic space but at different ratios. Electronic continuum (90-92). |
-| S36-086 | Trance Mission (92) | The Postal Service (86) | ELECTRONIC CONNECTION. Both electronic-centered. Postal Service is electronic pop with Western song structure; Trance Mission is world/electronic with cross-cultural polyphony. Different traditions feeding into electronic transformation. |
-| S36-065 | Trance Mission (92) | Philip Aaberg (65) | WORLD INFLUENCES. Both incorporate world music elements. Aaberg filters them through Western piano; Trance Mission uses global instruments directly. Western mediation vs direct global voice. |
-| S36-044 | Trance Mission (92) | Chong the Nomad (44) | ELECTRONIC CONNECTION. Both electronic. Chong is beat-driven experimental; Trance Mission is world-instrument-driven. Different sources feeding into electronic transformation. |
-| S36-091 | Trance Mission (92) | Hovercraft (91) | ELECTRONIC CONTINUUM. Consecutive degrees. Hovercraft uses electronics for obliteration (drone/noise); Trance Mission uses electronics for cultural bridge-building (world/electronic). Destruction vs connection. |
-
----
-
-## Part B: Bumblebee Drone (Apidae) -- FIRST POLLINATOR (NEW FAMILY Apidae 42nd, NEW ORDER Hymenoptera Fifth Insect Order, Deep Resonant Buzz 93rd Species-Side Acoustic Element, E=3 Warm Present Meadow Buzz, Buzz Pollination Sonication First Functional Sound, Second Wing-Sound After Mosquito 91 Thin vs Deep, Thirty-Second Consecutive Original CSV, Wildflower Meadow Habitat Brightest Most Diverse)
-
-Full deep research covering the bumblebee drone as the first pollinator, the arrival of Hymenoptera, and buzz pollination:
-
-### NEW ORDER: HYMENOPTERA -- Fifth Insect Order
-
-Hymenoptera (bees, wasps, ants) is the **fifth insect order** in the engine:
-
-| Degree | Order | Species | Mechanism |
-|--------|-------|---------|-----------|
-| 87 | Orthoptera | Cricket | Stridulation (wing-on-wing) |
-| 88 | Orthoptera | Katydid | Stridulation (wing-on-wing) |
-| 89 | Hemiptera | Cicada | Tymbal vibration |
-| 91 | Diptera | Mosquito | Wing vibration |
-| **92** | **Hymenoptera** | **Bumblebee** | **Wing vibration + sonication** |
-
-Five insect orders. Three distinct sound mechanisms (stridulation, tymbal, wing vibration). The engine's insect acoustic diversity continues to expand.
-
-### NEW FAMILY: APIDAE -- 42nd Family
-
-**Apidae** -- bees. The 42nd family in the engine. First Hymenoptera family. Family-level entry representing the collective bumblebee drone of PNW wildflower meadows. Multiple *Bombus* species in the PNW: *B. occidentalis* (western bumblebee), *B. mixtus* (fuzzy-horned bumblebee), *B. melanopygus* (black-tailed bumblebee).
-
-Classification:
-- **Kingdom:** Animalia
-- **Phylum:** Arthropoda
-- **Class:** Insecta (insect streak continues from 91)
-- **Order:** Hymenoptera -- NEW ORDER (fifth insect order)
-- **Family:** Apidae -- NEW FAMILY (42nd)
-- **Genus:** *Bombus* (bumblebees)
-
-### FIRST POLLINATOR -- Ecological Keystone
-
-The bumblebee is the **first pollinator** in the species engine. The first mutualist. The first species whose ecological role is fundamentally about mutualism -- the bee and the flower depend on each other. Prior species have been consumers, predators, or sound-producers. The bumblebee introduces a new ecological relationship.
-
-### BUZZ POLLINATION (SONICATION) -- First Functional Sound
-
-Bumblebees perform **buzz pollination (sonication)** -- vibrating flight muscles at 130-400 Hz without moving the wings, transmitting vibrations directly to the flower. This releases pollen from anthers that require sonication. PNW plants requiring buzz pollination include **huckleberry** (*Vaccinium* spp.), **blueberry**, **shooting star** (*Dodecatheon*), and **tomato**.
-
-The bumblebee's sound is not just an acoustic phenomenon but an **ecological service**. This is the first sound in the engine that **performs ecological work** -- a new category entirely.
-
-### THE SOUND: DEEP RESONANT BUZZ -- 93rd Species-Side Acoustic Element
-
-**Individual sound:** A single bumblebee in flight produces a warm, full buzz at approximately 130-240 Hz. Clearly audible at several meters -- much louder and richer than the mosquito's thin whine.
-
-**Frequency:** 130-240 Hz (flight buzz). Much lower than the mosquito's 400-600 Hz. Deeper = warmer, richer, more resonant.
-
-**Why deeper and richer?** The bumblebee's body is larger (10-25 mm vs 3-6 mm for mosquitoes) and densely furred. The body acts as a **resonating chamber** -- the fur and body cavity amplify and enrich the wing vibration's harmonics.
-
-**Buzz pollination:** During sonication, the buzz intensifies. The bumblebee grabs the flower and vibrates at 130-400 Hz without moving its wings. The vibrations shake pollen loose. The first sound in the engine that performs ecological work.
-
-**Why E=3:** Individual bumblebees are clearly audible at several meters. The buzz is warm and resonant -- not thin or whining but full and rich. Multiple bumblebees in a wildflower meadow create a warm, ambient hum. Buzz pollination produces intensified sound during flower visits. E=3 reflects the warm, present, filling quality of the meadow buzz.
-
-Contrasts:
-- **Ultra-thin hum cloud** (degree 91, mosquito) -- thin, high-pitched, barely audible, E=2. The deep resonant buzz is the opposite: thick, low-pitched, clearly audible, E=3. Two wing-sounds, two characters.
-- **Electric buzzing throb** (degree 89, cicada) -- loud, harsh, electric. The deep resonant buzz is warm and organic. Both loud but different timbres.
-- **Rhythmic chirp** (degree 87, cricket) -- rhythmic, structured. The deep resonant buzz is continuous and unstructured but warm.
-
-### ECOLOGY: THE WILDFLOWER MEADOW HUM
-
-**Wildflower meadow habitat:** Open meadows with diverse flowering plants -- alpine and subalpine meadows, valley floors, garden edges, forest clearings. The brightest and most diverse habitat in the engine. Full of color, scent, and buzzing life.
-
-**Habitat connections:** Connection to yellow-bellied marmot (75) in alpine/subalpine meadows. Connection to golden-mantled ground squirrel (79) in meadow/edge habitats. Both diurnal residents of PNW mountain meadows.
-
-**Diet:** Nectar and pollen from wildflowers. Generalist forager visiting many flower species.
-
-**Predators:** Birds (flycatchers), dragonflies, spiders, crab spiders (ambush on flowers), parasitic flies, badgers (dig up nests).
-
-**Threats:** Habitat loss, pesticides, climate change, pathogen spillover from managed honeybees.
-
-### STRUCTURAL EVENTS SUMMARY
-
-1. **Deep resonant buzz** -- 93rd acoustic element. Wing vibration at 130-240 Hz. Warm, resonant. E=3. Second wing-sound.
-2. **NEW ORDER: Hymenoptera.** Fifth insect order. Bees, wasps, ants.
-3. **NEW FAMILY: Apidae (42nd).** First Hymenoptera family.
-4. **FIRST POLLINATOR.** First mutualist. Ecological keystone.
-5. **BUZZ POLLINATION (SONICATION).** First functional sound. Sound performs ecological work.
-6. **THIRTY-SECOND CONSECUTIVE ORIGINAL CSV.**
-
-### CROSS-REFERENCES (Part B)
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| SPS-091 | Bumblebee Drone (92) | Mosquito Swarm (91) | CONSECUTIVE INSECT, WING-PRODUCED SOUND. Mosquito (Diptera, 400-600 Hz, E=2, thin whine) to bumblebee (Hymenoptera, 130-240 Hz, E=3, deep buzz). Both wing-produced but completely different character. Thin vs deep. Quiet vs present. Two wing-sounds. |
-| SPS-087 | Bumblebee Drone (92) | Cricket Chorus (87) | INSECT STREAK EXTENDS. Five insect orders, three sound mechanisms. Cricket (Orthoptera, stridulation) to bumblebee (Hymenoptera, wing vibration). The insect acoustic diversity of the engine. |
-| SPS-089 | Bumblebee Drone (92) | Cicada (89) | INSECT DIVERSITY. Cicada (Hemiptera, tymbal, consumer) and bumblebee (Hymenoptera, wing, pollinator). Different orders, different mechanisms, different ecological roles. |
-| SPS-075 | Bumblebee Drone (92) | Yellow-bellied Marmot (75) | MEADOW SHARED. Marmot in alpine/subalpine meadows (75). Bumblebee in wildflower meadows (92). Overlapping mountain meadow habitats. |
-| SPS-079 | Bumblebee Drone (92) | Golden-mantled Ground Squirrel (79) | MEADOW/EDGE SHARED. Ground squirrel in meadow/edge habitats (79). Bumblebee in wildflower meadows (92). Both diurnal meadow residents. |
-
----
-
-## Parallel: Trance Mission x Bumblebee Drone -- The Cross-Pollinators
-
-The global weave and the deep resonant buzz. Both cross-pollinators. Both create through connection.
-
-**1. Both Pollinators** -- Trance Mission pollinates music scenes, carrying the oud into the electronic club and the sampler into the world music festival. The bumblebee pollinates flowers, carrying pollen from one bloom to the next, sustaining the wildflower meadow and the agricultural systems that depend on it. One operates on culture. The other operates on ecology. Both operate on connection.
-
-**2. Both E=3** -- Trance Mission is E=3 through immersive accessibility -- electronics make unfamiliar world instruments approachable. The bumblebee is E=3 through warm, present meadow buzz -- clearly audible, filling, resonant. Both warm. Both present. Both accessible without being aggressive.
-
-**3. Both Dissolve Boundaries** -- Trance Mission dissolves the boundary between world music and electronic music. The bumblebee dissolves the boundary between species -- the mutualism of pollination means the bee and the flower are ecologically inseparable. Both create new things by connecting existing things.
-
-**4. Both Weave** -- The global weave is polyphonic tapestry: multiple traditions woven through electronics. The wildflower meadow is ecological tapestry: multiple species woven through pollination. Both are tapestries. Both depend on the weaver moving between elements.
-
----
-
-## Acoustic Progression (93 elements)
-
-| # | Element | Degree | Artist/Species |
-|---|---------|--------|----------------|
-| 0 | silence | 0 | Quincy Jones |
-| 1 | cascade | 1 | Bill Frisell |
-| 2 | drone | 2 | Wayne Horvitz |
-| 3 | language | 3 | Ernestine Anderson |
-| 4 | motif | 4 | Floyd Standifer |
-| 5 | metronome | 5 | Overton Berry |
-| 6 | question | 6 | Patti Bown |
-| 7 | harmonic spiral | 7 | Julian Priester |
-| 8 | ultrasonic threshold | 8 | Gary Peacock |
-| 9 | variation | 9 | Hadley Caliman |
-| 10 | minimum signal | 10 | Bud Shank |
-| 11 | trill/tremolo | 11 | Joe Brazil |
-| 12 | sawtooth sweep | 12 | Don Lanphere |
-| 13 | ostinato | 13 | Marc Seales |
-| 14 | repetition-resolution | 14 | Aaron Parks |
-| 15 | accelerando | 15 | Thomas Marriott |
-| 16 | crescendo | 16 | Jeff Lorber |
-| 17 | the hook | 17 | Reggie Watts |
-| 18 | ascending spiral | 18 | Maktub |
-| 19 | descending spiral | 19 | Fly Moon Royale |
-| 20 | sustain/the release | 20 | Whitney Monge |
-| 21 | the hammer | 21 | Polyrhythmics |
-| 22 | resonant percussion/groove reset | 22 | Foxy Apollo |
-| 23 | the testimony/groove reset | 23 | Allen Stone |
-| 24 | the invocation | 24 | Ron Artis II |
-| 25 | the congregation | 25 | Black Stax |
-| 26 | the caroling | 26 | Shaina Shepherd |
-| 27 | the liquid gurgle | 27 | The Dynamics |
-| 28 | the liquid twitter | 28 | Night Owls |
-| 29 | the rough brrit | 29 | Boogaloo Joe Jones |
-| 30 | the liquid warble synthesis | 30 | Ray Charles |
-| 31 | the whisper | 31 | Brenda Lee Eager |
-| 32 | the buzz | 32 | Luther Rabb |
-| 33 | the cadenza | 33 | Larry English |
-| 34 | the dialect | 34 | The Tempos |
-| 35 | the thrum | 35 | Robert Cray |
-| 36 | the sonic boom | 36 | Jimi Hendrix |
-| 37 | the filament | 37 | Ayron Jones |
-| 38 | the drawl | 38 | Booker T. Jones |
-| 39 | the canopy buzz | 39 | Ron Artis Jr |
-| 40 | the thinning | 40 | Alice Smith |
-| 41 | the partition | 41 | Shawn Smith |
-| 42 | the shimmer | 42 | Erica Campbell |
-| 43 | the radiance | 43 | Ann Wilson |
-| 44 | the grain | 44 | Chong the Nomad |
-| 45 | the murmur | 45 | Damien Jurado |
-| 46 | the confessional | 46 | Rocky Votolato |
-| 47 | the parable tone | 47 | Pedro the Lion |
-| 48 | the held rest | 48 | Sera Cahoone |
-| 49 | the lullaby subversion | 49 | Kimya Dawson |
-| 50 | the intimate architecture | 50 | Mirah |
-| 51 | the communal harmony | 51 | Grand Archives |
-| 52 | the testimony roar | 52 | Brandi Carlile |
-| 53 | the cathedral harmony | 53 | Fleet Foxes |
-| 54 | the fraternal jangle | 54 | Ivan & Alyosha |
-| 55 | the ember glow | 55 | Shelby Earl |
-| 56 | the dream haze | 56 | Lemolo |
-| 57 | the rattle / the stream rattle | 57 | Laura Gibson / Belted Kingfisher |
-| 58 | the ache / the pond whistle | 58 | Death Cab for Cutie / Wood Duck |
-| 59 | the digression / the quack | 59 | The Long Winters / Mallard |
-| 60 | the bare wire / the submerge call | 60 | Ben Gibbard (solo) / Pied-billed Grebe |
-| 61 | the braided voice / the tail slap | 61 | Y La Bamba / American Beaver |
-| 62 | the throwback / the rhythmic gnaw | 62 | Pickwick / Beaver Chewing |
-| 63 | the FM sheen / the chuff | 63 | Kenny Loggins / River Otter |
-| 64 | the dusk / the chitter | 64 | Jesse Sykes / Mink |
-| 65 | the open plain / the chuckle-chatter | 65 | Philip Aaberg / American Marten |
-| 66 | the country thunder / the scream | 66 | Neko Case / Fisher |
-| 67 | the clean room / the shrill bark-chitter | 67 | Chris Walla / Short-tailed Weasel |
-| 68 | the hush / the rapid chattering chirp | 68 | Sam Beam / Long-tailed Weasel |
-| 69 | the earnest voice / the warning foot-stamp hiss | 69 | Kris Orlowski / Striped Skunk |
-| 70 | the fiddle line / the churring chittering young | 70 | Horse Feathers / Raccoon |
-| 71 | the room tone / the bark screaming vixen call | 71 | Phil Elverum / Red Fox |
-| 72 | the layered loop / the low hiss click | 72 | Briana Marela / Opossum |
-| 73 | the jangle / the thump squeal | 73 | LAKE / Snowshoe Hare |
-| 74 | the reverb wash / the high sharp eenk bark | 74 | Poor Moon / American Pika |
-| 75 | the anthem / the piercing whistle alarm | 75 | The Lonely Forest / Yellow-bellied Marmot |
-| 76 | the androgynous register / the loud penetrating whistle | 76 | Chris Pureka / Hoary Marmot |
-| 77 | the ethereal layering / the musical multi-note whistle | 77 | Mree / Olympic Marmot |
-| 78 | the communal jangle / the chirping trill alarm | 78 | Acid Tongue / Townsend's Ground Squirrel |
-| 79 | the cinematic stillness / the sharp chip alarm | 79 | Jesse Marchant / Golden-mantled Ground Squirrel |
-| 80 | the organ explosion / the loud scolding chatter rattle | 80 | Mates of State / Douglas Squirrel |
-| 81 | the Broadway voice / the bark + chatter alarm | 81 | Sara Bareilles / Eastern Fox Squirrel |
-| 82 | the acoustic intimacy / the high thin tseet | 82 | Death Cab for Cutie (acoustic) / Northern Flying Squirrel |
-| 83 | the grunge whisper / the ultrasonic + soft chip | 83 | Pearl Jam (acoustic) / Deer Mouse |
-| 84 | the late whisper / the chatter + twig gnaw | 84 | Damien Jurado (late career) / Bushy-tailed Woodrat |
-| 85 | the stripped confession / the quiet plop | 85 | Rocky Votolato (acoustic) / Muskrat |
-| 86 | the electronic pulse / the amplified krek-krek wall of sound | 86 | The Postal Service / Pacific Treefrog |
-| 87 | the emerging twang / the rhythmic chirp field chorus | 87 | Neko Case (early folk) / Cricket Chorus |
-| 88 | the bedroom strum / the continuous electric buzz | 88 | Kimya Dawson (solo) / Katydid |
-| 89 | the baroque whisper / the electric buzzing throb | 89 | Parenthetical Girls / Cicada |
-| 90 | the ambient drift / the bell-like peep chorus | 90 | Sky Cries Mary / Spring Peeper-Like Chorus |
-| **91** | **the sustained crush / the ultra-thin hum cloud** | **91** | **Hovercraft / Mosquito Swarm** |
-| **92** | **the global weave / the deep resonant buzz** | **92** | **Trance Mission / Bumblebee Drone** |
-
-The acoustic progression adds degrees 91 and 92. On the artist side, the sustained crush (91) is the sound of Hovercraft -- sustained bass drones, guitar feedback loops, electronic distortion, and volume that creates physical pressure on the listener. E=2. The global weave (92) is the sound of Trance Mission -- multiple world instruments from different traditions woven through electronic processing into polyphonic tapestry. E=3. From the sustained crush (91, monolithic, obliterating) to the global weave (92, polyphonic, connecting). From destruction to bridge-building. On the species side, the ultra-thin hum cloud (91) is the mosquito swarm -- thin, high-pitched wing vibration at 400-600 Hz, barely audible individually, E=2. The deep resonant buzz (92) is the bumblebee -- warm, full wing vibration at 130-240 Hz, clearly audible, E=3. From thin whine to deep buzz. Same mechanism (wing vibration), opposite character. Two consecutive wing-sounds spanning the full range from barely perceptible to warmly present.
-
-## Artist-City Patterns (93 patterns)
-
-| # | Pattern | Degree | Artist |
-|---|---------|--------|--------|
-| 0 | Export | 0 | Quincy Jones |
-| 1 | Draw | 1 | Bill Frisell |
-| 2 | European Exile | 2 | Wayne Horvitz |
-| 3 | The Stay | 3 | Ernestine Anderson |
-| 4 | The Teacher | 4 | Floyd Standifer |
-| 5 | The Persistence | 5 | Overton Berry |
-| 6 | The Erasure | 6 | Patti Bown |
-| 7 | Pedagogue-Draw | 7 | Julian Priester |
-| 8 | The Quiet Draw | 8 | Gary Peacock |
-| 9 | The Seeker | 9 | Hadley Caliman |
-| 10 | Late Homestead | 10 | Bud Shank |
-| 11 | The Salon Keeper | 11 | Joe Brazil |
-| 12 | The Prodigal | 12 | Don Lanphere |
-| 13 | Institutional Anchor | 13 | Marc Seales |
-| 14 | Prodigy-Export | 14 | Aaron Parks |
-| 15 | Builder-Stayer | 15 | Thomas Marriott |
-| 16 | Talent Incubator | 16 | Jeff Lorber |
-| 17 | The Uncategorizable | 17 | Reggie Watts |
-| 18 | The Workshop | 18 | Maktub |
-| 19 | The New Root | 19 | Fly Moon Royale |
-| 20 | The Street Laureate | 20 | Whitney Monge |
-| 21 | The Ensemble Anchor | 21 | Polyrhythmics |
-| 22 | The Inheritor | 22 | Foxy Apollo |
-| 23 | The Rural Draw | 23 | Allen Stone |
-| 24 | The Island Export | 24 | Ron Artis II |
-| 25 | The Cultural Guardian | 25 | Black Stax |
-| 26 | The Transmuter | 26 | Shaina Shepherd |
-| 27 | The Conduit | 27 | The Dynamics |
-| 28 | The Resident Band | 28 | Night Owls |
-| 29 | The Catalog | 29 | Boogaloo Joe Jones |
-| 30 | The Incubation | 30 | Ray Charles |
-| 31 | The Relay | 31 | Brenda Lee Eager |
-| 32 | The Foundation | 32 | Luther Rabb |
-| 33 | The Unrecorded | 33 | Larry English |
-| 34 | The Shadow Name | 34 | The Tempos |
-| 35 | The Deep Root | 35 | Robert Cray |
-| 36 | The Supernova | 36 | Jimi Hendrix |
-| 37 | The Inheritor | 37 | Ayron Jones |
-| 38 | The Touring Anchor | 38 | Booker T. Jones |
-| 39 | The Returning Wave | 39 | Ron Artis Jr |
-| 40 | The Cultural Satellite | 40 | Alice Smith |
-| 41 | The Scene Native | 41 | Shawn Smith |
-| 42 | The Gospel Export | 42 | Erica Campbell |
-| 43 | The Arena Architect | 43 | Ann Wilson |
-| 44 | The Digital Immigrant | 44 | Chong the Nomad |
-| 45 | The Stripped Murmur | 45 | Damien Jurado |
-| 46 | The Confessional Drifter | 46 | Rocky Votolato |
-| 47 | The Sacred Baritone | 47 | Pedro the Lion |
-| 48 | The Campfire Anchor | 48 | Sera Cahoone |
-| 49 | The Trojan Lullabist | 49 | Kimya Dawson |
-| 50 | The Intimate Architect | 50 | Mirah |
-| 51 | The Folk Organism | 51 | Grand Archives |
-| 52 | The Arena Breakout | 52 | Brandi Carlile |
-| 53 | The Prodigy Return | 53 | Fleet Foxes |
-| 54 | The Neighborhood Anchor | 54 | Ivan & Alyosha |
-| 55 | The Infrastructure Beneficiary | 55 | Shelby Earl |
-| 56 | The Duo Collective | 56 | Lemolo |
-| 57 | The Label Bridge | 57 | Laura Gibson |
-| 58 | The Bellingham Ascent | 58 | Death Cab for Cutie |
-| 59 | The Scene Intellectual | 59 | The Long Winters |
-| 60 | The Frontman Alone | 60 | Ben Gibbard (solo) |
-| 61 | The Corridor Bridge | 61 | Y La Bamba |
-| 62 | The Brief Blaze | 62 | Pickwick |
-| 63 | The Everett Departure | 63 | Kenny Loggins |
-| 64 | The Dark-Folk Loner | 64 | Jesse Sykes |
-| 65 | The Montana Connection | 65 | Philip Aaberg |
-| 66 | The Wanderer Who Claims Multiple Cities | 66 | Neko Case |
-| 67 | The Departed Member | 67 | Chris Walla |
-| 68 | The Visiting Artist | 68 | Sam Beam |
-| 69 | The Working Musician | 69 | Kris Orlowski |
-| 70 | The Corridor Wanderer | 70 | Horse Feathers |
-| 71 | The Anacortes Hermit | 71 | Phil Elverum |
-| 72 | The International Student | 72 | Briana Marela |
-| 73 | The K Records Collective | 73 | LAKE |
-| 74 | The Side Project | 74 | Poor Moon |
-| 75 | The Second Anacortes Act | 75 | The Lonely Forest |
-| 76 | The Identity Artist | 76 | Chris Pureka |
-| 77 | The YouTube-to-Artist Pipeline | 77 | Mree |
-| 78 | The Porch Party | 78 | Acid Tongue |
-| 79 | The Dark Meditation | 79 | Jesse Marchant |
-| 80 | The Married Duo | 80 | Mates of State |
-| 81 | The Crossover Arc | 81 | Sara Bareilles |
-| 82 | The Recursive Return | 82 | Death Cab for Cutie (acoustic) |
-| 83 | The Arena Unplugged | 83 | Pearl Jam (acoustic) |
-| 84 | The Artist Arc | 84 | Damien Jurado (late career) |
-| 85 | The Confessional Return | 85 | Rocky Votolato (acoustic) |
-| 86 | The Side Project | 86 | The Postal Service |
-| 87 | The Early Chapter | 87 | Neko Case (early folk) |
-| 88 | The Solo Distillation | 88 | Kimya Dawson (solo) |
-| 89 | The Theatrical Outsider | 89 | Parenthetical Girls |
-| 90 | The Parallel Scene | 90 | Sky Cries Mary |
-| **91** | **The Spousal Satellite** | **91** | **Hovercraft** |
-| **92** | **The Cross-Pollinator** | **92** | **Trance Mission** |
-
-Ninety-three named patterns across ninety-three degrees. The Spousal Satellite (91) introduces the pattern of a musical project that exists in the biographical orbit of a much more famous partner's band -- Hovercraft (Beth Liebling) orbiting Pearl Jam (Eddie Vedder). Same household, opposite aesthetics. The Cross-Pollinator (92) introduces the pattern of an artist operating across multiple cities and traditions, pollinating each scene with elements from the others -- Trance Mission carrying world music into electronic scenes and electronic techniques into world music contexts. From satellite to pollinator: from orbiting a single point (91) to connecting many points (92). The progression from 90 to 91 to 92: the parallel scene (alongside dominant narrative but invisible to it), the spousal satellite (in the orbit of fame but artistically independent), the cross-pollinator (between all scenes, belonging to none and all). Three consecutive patterns exploring different relationships between an artist and the scenes around them.
-
-## Genre Evolution (74 stages)
-
-| Stage | Degree | Genre | Artist |
-|-------|--------|-------|--------|
-| 27 | 45 | Folk | Damien Jurado |
-| 28 | 46 | Folk | Rocky Votolato |
-| 29 | 47 | Indie Folk | Pedro the Lion |
-| 30 | 48 | Folk | Sera Cahoone |
-| 31 | 49 | Folk Punk | Kimya Dawson |
-| 32 | 50 | Indie Folk | Mirah |
-| 33 | 51 | Indie Folk | Grand Archives |
-| 34 | 52 | Folk/Rock | Brandi Carlile |
-| 35 | 53 | Indie Folk | Fleet Foxes |
-| 36 | 54 | Folk | Ivan & Alyosha |
-| 37 | 55 | Singer-Songwriter | Shelby Earl |
-| 38 | 56 | Indie Folk | Lemolo |
-| 39 | 57 | Folk | Laura Gibson |
-| 40 | 58 | Indie Rock | Death Cab for Cutie |
-| 41 | 59 | Indie Rock | The Long Winters |
-| 42 | 60 | Folk | Ben Gibbard (solo) |
-| 43 | 61 | Folk/Indie | Y La Bamba |
-| 44 | 62 | Indie/Folk | Pickwick |
-| 45 | 63 | Soft Rock/Folk | Kenny Loggins |
-| 46 | 64 | Folk | Jesse Sykes |
-| 47 | 65 | New Age/Folk | Philip Aaberg |
-| 48 | 66 | Alt Country | Neko Case |
-| 49 | 67 | Indie/Folk | Chris Walla |
-| 50 | 68 | Folk | Sam Beam |
-| 51 | 69 | Singer-Songwriter | Kris Orlowski |
-| 52 | 70 | Indie Folk | Horse Feathers |
-| 53 | 71 | Indie/Folk | Phil Elverum |
-| 54 | 72 | Art Pop | Briana Marela |
-| 55 | 73 | Indie Pop | LAKE |
-| 56 | 74 | Indie Folk/Rock | Poor Moon |
-| 57 | 75 | Indie Pop | The Lonely Forest |
-| 58 | 76 | Folk | Chris Pureka |
-| 59 | 77 | Folk/Pop | Mree |
-| 60 | 78 | Folk/Indie | Acid Tongue |
-| 61 | 79 | Folk | Jesse Marchant |
-| 62 | 80 | Indie Pop | Mates of State |
-| 63 | 81 | Pop/Soul | Sara Bareilles |
-| 64 | 82 | Indie Folk | Death Cab for Cutie (acoustic) |
-| 65 | 83 | Acoustic Rock | Pearl Jam (acoustic) |
-| 66 | 84 | Folk | Damien Jurado (late career) |
-| 67 | 85 | Folk | Rocky Votolato (acoustic) |
-| 68 | 86 | Indie Electronic | The Postal Service |
-| 69 | 87 | Folk Country | Neko Case (early folk) |
-| 70 | 88 | Lo-Fi Folk | Kimya Dawson (solo) |
-| 71 | 89 | Avant-Pop | Parenthetical Girls |
-| 72 | 90 | Ethereal/Electronic | Sky Cries Mary |
-| **73** | **91** | **Drone/Noise** | **Hovercraft** |
-| **74** | **92** | **World/Electronic** | **Trance Mission** |
-
-Genre Stage 74 -- World/Electronic at degree 92. Seventy-four genre stages in 92 degrees (~0.80 per degree). **World/Electronic** describes Trance Mission's music: traditional instruments from multiple world music traditions processed through electronic effects, combined with sampling, loops, and ambient textures. Three consecutive electronic-inflected genres: Ethereal/Electronic (90), Drone/Noise (91), World/Electronic (92). Genre Stages 72, 73, 74. The electronic continuum. Distinguished from Ethereal/Electronic (90, ambient psychedelic), Drone/Noise (91, obliterating volume), and Indie Electronic (86, structured pop). Each uses electronics differently: atmosphere, obliteration, bridge-building. The genre density remains stable at ~0.80 per degree.
-
-## Energy Distribution
-
-**Artist-side (after degree 92):** E1:3 (3.2%), E2:31 (33.3%), E3:26 (28.0%), E4:21 (22.6%), E5:11 (11.8%), E6:2 (2.2%). Total: 93 (degrees 0-92, 93 entries counting origin). E=2 gains Hovercraft (91) reaching 31 deployments. E=3 gains Trance Mission (92) reaching 26 deployments. E=2 remains most common. The quiet majority (E1+E2+E3) = 60 of 93 (64.5%). The electronic continuum spans E=3 (Sky Cries Mary 90), E=2 (Hovercraft 91), E=3 (Trance Mission 92) -- returning to E=3 after the Hovercraft dip.
-
-**Species-side (after degree 92):** E=2 for mosquito (91) broke the five consecutive E=4 streak (86-90). E=3 for bumblebee (92) rises from E=2. The sequence since 86: E=4, E=4, E=4, E=4, E=4, E=2, E=3. The species energy range widens -- from the peak of five consecutive E=4 through an E=2 minimum (mosquito) to E=3 recovery (bumblebee).
-
-## Cross-References (Combined)
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| S36-090 | Trance Mission (92) | Sky Cries Mary (90) | WORLD/ELECTRONIC PARALLEL. Both blend world music elements with electronics. Sky Cries Mary ethereal framework; Trance Mission world instruments primary. Electronic continuum (90-92). |
-| S36-086 | Trance Mission (92) | The Postal Service (86) | ELECTRONIC CONNECTION. Postal Service structured electronic pop; Trance Mission world/electronic polyphony. Different traditions into electronic transformation. |
-| S36-065 | Trance Mission (92) | Philip Aaberg (65) | WORLD INFLUENCES. Aaberg filters through Western piano; Trance Mission uses global instruments directly. Western mediation vs direct global voice. |
-| S36-044 | Trance Mission (92) | Chong the Nomad (44) | ELECTRONIC CONNECTION. Chong beat-driven experimental; Trance Mission world-instrument-driven. Different sources into electronic transformation. |
-| S36-091 | Trance Mission (92) | Hovercraft (91) | ELECTRONIC CONTINUUM. Hovercraft obliteration; Trance Mission bridge-building. Destruction vs connection. Consecutive degrees. |
-| SPS-091 | Bumblebee Drone (92) | Mosquito Swarm (91) | CONSECUTIVE WING-SOUNDS. Mosquito thin whine (400-600 Hz, E=2) to bumblebee deep buzz (130-240 Hz, E=3). Same mechanism, opposite character. |
-| SPS-087 | Bumblebee Drone (92) | Cricket Chorus (87) | INSECT STREAK. Five insect orders, three mechanisms. Stridulation to wing vibration. Insect acoustic diversity. |
-| SPS-089 | Bumblebee Drone (92) | Cicada (89) | INSECT DIVERSITY. Cicada (Hemiptera, tymbal, consumer) vs bumblebee (Hymenoptera, wing, pollinator). Different orders, mechanisms, roles. |
-| SPS-075 | Bumblebee Drone (92) | Yellow-bellied Marmot (75) | MEADOW SHARED. Both alpine/subalpine meadow residents. Overlapping mountain meadow habitats. |
-| SPS-079 | Bumblebee Drone (92) | Golden-mantled Ground Squirrel (79) | MEADOW/EDGE SHARED. Both diurnal meadow residents. Overlapping habitats. |
-
-## Infrastructure
-
-**Part A:** `www/tibsfox/com/Research/S36/research/releases/092-trance-mission/` -- research.md, index.html, knowledge-nodes.json, retrospective.md
-**Part B:** `www/tibsfox/com/Research/SPS/research/releases/092-bumblebee-drone/` -- research.md, index.html, knowledge-nodes.json, retrospective.md
-**Release notes:** `docs/release-notes/v1.49.232/README.md`
-
-**Total: 8 files** -- standard degree package.
-
----
+| Cross-References | 6 | 6 |
+
+## Part A: Trance Mission — The Global Weave
+
+- **First explicitly cross-traditional artist in the engine.** Trance Mission's defining property is the carrying of elements between musical traditions — **oud**, **tabla**, **didgeridoo**, **hammered dulcimer**, and **erhu** all sharing a single electronic space. Prior entries have included world influences (Philip Aaberg at degree 65, Sky Cries Mary at degree 90), but Trance Mission is the first entry whose entire identity is the cross-traditional weave rather than a flavoring of an otherwise Western frame. The engine's vocabulary now explicitly includes **The Cross-Pollinator** as a structural pattern.
+- **Genre Stage 74 — World/Electronic milestone.** Seventy-four distinct genre stages across ninety-two degrees, 0.804 stages per degree — the genre diversity rate has held remarkably steady since the folk zone began at degree 45. **World/Electronic** is distinguished from **Ethereal/Electronic** at degree 90 by the primacy of the world-music element (Sky Cries Mary blends world influences into atmosphere; Trance Mission makes world instruments the lead voices), from **Drone/Noise** at degree 91 by the polyphonic rather than monolithic character (Hovercraft is one sustained crush; Trance Mission is many simultaneous voices), and from **Electronic Pop** at degree 86 by the absence of pop structure (Postal Service is verse-chorus-verse; Trance Mission is through-composed instrumental texture).
+- **Electronic continuum at three degrees (90–92).** Sky Cries Mary used electronics for **atmosphere** (the ambient drift through dream-pop / shoegaze / world textures); Hovercraft used electronics for **obliteration** (the sustained crush of drone / noise as monolithic wall); Trance Mission uses electronics for **cultural bridge-building** (the global weave as polyphonic conversation across traditions). Three consecutive degrees, three completely different uses of the same fundamental technology. This is the engine's strongest three-degree thematic-arc demonstration of the principle that **technology does not determine genre**; intent, context, and pairing do.
+- **City of Tribes Records — first non-Seattle label of Quadrant II.** **City of Tribes Records** is **San Francisco**-based, operating since the early 1990s as a world / electronic / experimental label. The label's roster includes **Trance Mission**, **Beasts of Paradise**, **Beth Custer Ensemble**, **Stellamara**, and others, all sharing a programmatic commitment to cross-traditional music with electronic infrastructure. The label name itself encodes the aesthetic — a city (modernity, infrastructure, electronic capability) of tribes (traditional, plural, distinct cultural identities). Trance Mission's appearance opens the engine's label geography from Seattle / Olympia / PNW-only to the broader West Coast, while keeping the PNW thematic frame intact through Trance Mission's touring overlap and scene connections.
+- **The global weave — 93rd acoustic element.** Multiple world instruments from different traditions woven through electronic processing into a polyphonic tapestry: **oud** (Middle Eastern lute, fretless, microtonal), **tabla** (Indian hand drums, talas / cycles), **didgeridoo** (Australian Aboriginal wind instrument, drone with throat-modulated overtones), **hammered dulcimer** (Anglo-Celtic struck strings, resonant overtones), **erhu** (Chinese two-string fiddle, vocal-imitating bowed line). No single tradition dominates. The electronics serve as connective tissue — samplers extending and looping individual phrases, ambient pads providing harmonic context, light effects (delay, reverb, occasional pitch shifting) creating spatial unity without erasing instrumental identity. K Records / Olympia lo-fi at degree 88 was minimum production; Trance Mission is **maximum cross-cultural production** — many traditions, much processing, dense polyphony, all in service of conversation.
+- **The Cross-Pollinator — 93rd artist-city pattern.** A new structural type for the engine's artist-city ledger. The Cross-Pollinator is an artist (or group) whose identity is defined by movement between scenes, traditions, or cities, not by membership in any one of them. Trance Mission belongs to the San Francisco world / electronic scene, the Pacific Northwest experimental touring circuit, the broader West Coast cross-traditional music network, and to none of them exclusively. The pattern is distinct from **The Spousal Satellite** at degree 91 (Hovercraft as Sadie 7 / Eddie Vedder biographical orbit), **The Parallel Scene** at degree 90 (Sky Cries Mary alongside grunge but not inside it), **The Solo Distillation** at degree 88 (Kimya Dawson as return artist reduced to one voice), and **The Bedroom Strum / Olympia Lineage** at degree 88 (Dawson inside the K Records aesthetic alliance).
+- **San Francisco / Seattle cross-city pattern.** Trance Mission's PNW connections are documented through 1990s touring history and through scene overlap with PNW experimental and world-music ensembles. The cross-city pattern echoes earlier engine entries that crossed regional boundaries — **Postal Service** at degree 86 was a cross-city collaboration (Death Cab + Dntel mailing reels back and forth), and the Olympia / Seattle / Portland triangle has been a recurring theme. Trance Mission extends the cross-city pattern to a longer arc: Bay Area to PNW, world music to electronic music, all on one project.
+- **Beth Custer and Stephen Kent — the personnel layer.** **Beth Custer** is a clarinetist, vocalist, and composer central to the City of Tribes catalog and to multiple Trance Mission lineups. **Stephen Kent** is a didgeridoo player whose practice extends beyond Trance Mission to solo work and to numerous Bay Area collaborations. Both personnel ground the cross-pollinator pattern in real bodies — the carrying of traditions happens through specific musicians whose careers themselves cross multiple ensembles, labels, and scenes. The personnel layer is part of how cross-pollination works in practice.
+- **The 1990s world/electronic wave context.** Trance Mission appears in a broader 1990s movement that included **Loop Guru**, **Banco de Gaia**, **Transglobal Underground**, **Talvin Singh**, and (in a different mode) **Bill Laswell**'s production work on numerous cross-cultural projects. The wave used emerging sampling and electronic-processing technology to enable musical collaborations that geographic, linguistic, and cultural distance had previously prevented. The Pacific Northwest received the wave through touring artists (including Trance Mission), through local festival programming, and through the broader West Coast experimental scene's openness to non-Western music.
+- **Distinguished from world-music purism.** Trance Mission is not a world-music traditional ensemble — they do not present any single tradition with the ethnographic fidelity that purist projects aim for. They are a hybrid, openly. The aesthetic is **conversation**, not preservation. This distinguishes Trance Mission from contemporaneous world-music traditional ensembles and aligns them with the broader 1990s fusion movement that treated cross-traditional dialogue as itself a legitimate aesthetic project rather than a compromise.
+- **Connection to Genre Stage 74 as a category for future entries.** **World/Electronic** as a named genre stage now provides the engine with vocabulary for future entries that share the cross-traditional electronic-processing aesthetic. Future entries (a future Bay Area or PNW cross-traditional artist) can be classified against Genre Stage 74 directly. The category has been opened.
+
+## Part B: Bumblebee Drone (*Apidae*) — Deep Resonant Buzz
+
+- **NEW ORDER Hymenoptera — fifth insect order in the engine.** The bumblebee opens **Hymenoptera** (bees, wasps, ants) as the engine's fifth insect order, after **Orthoptera** (Cricket Chorus 87, Katydid 88), **Hemiptera** (Cicada 89), **Diptera** (Mosquito Swarm 91), and now **Hymenoptera** (Bumblebee Drone 92). Hymenoptera is among the most ecologically significant orders on Earth — the order contains the keystone pollinators (bees), the apex insect predators (predatory wasps), and the large colonial ecosystem engineers (ants). Opening Hymenoptera at degree 92 substantially expands the engine's biological coverage. The insect class is rapidly diversifying through Quadrant II, with five orders in six insect-class degrees (87, 88, 89, 91, 92).
+- **NEW FAMILY Apidae — 42nd family in the engine.** **Apidae** is the family of bumblebees, honey bees, carpenter bees, and stingless bees — the family containing nearly all of the bees that perform the bulk of the world's pollination work. The PNW Apidae presence is dominated by genus **Bombus** (the bumblebees) — *B. occidentalis* (western bumble bee, historically dominant, now in decline), *B. mixtus* (fuzzy-horned bumble bee), *B. melanopygus* (black-tailed bumble bee), *B. vosnesenskii* (yellow-faced bumble bee). The 42nd family slot opens with the most ecologically pivotal family the engine has yet encountered.
+- **First pollinator — first mutualist — first functional sound.** The bumblebee is the engine's **FIRST POLLINATOR** — the first species whose ecological role is fundamentally about the giving of a service to other species (pollen transfer to plants) rather than about resource extraction (predation, herbivory, scavenging) or signaling (mate calling, territorial defense). The bumblebee is the first **mutualist** — both the bumblebee and the flowering plant benefit from the relationship. And the bumblebee provides the engine's **first functional sound** — sound used as a literal tool to perform physical work on the environment. **Buzz pollination (sonication)** vibrates flowers at specific frequencies (130–400 Hz) to release pollen from anthers that **cannot be accessed any other way**. The bumblebee grasps the flower, decouples its wings from flight muscles, and uses thoracic muscles to vibrate at specific frequencies, effectively shaking pollen out of the flower. This is sound as work, not sound as signal or byproduct.
+- **Deep resonant buzz — 93rd species-side acoustic element.** The bumblebee's primary sound is a **deep resonant buzz** at **130–240 Hz** during normal flight, ranging higher (toward 400 Hz) during sonication. The buzz is produced through **wing vibration** at high beat frequency, but the acoustic character is determined primarily by the **resonating mass** — the bumblebee's densely furred body and large thoracic volume act as a resonating chamber, amplifying low-frequency components and producing the warm, full, clearly audible character that distinguishes bumblebee buzz from mosquito whine. The element is the second wing-produced sound in the engine after **mosquito** at degree 91, but its acoustic character is the inverse: **deep vs thin**, **warm vs cold**, **low vs high**, **clearly present vs barely audible**, **E=3 vs E=2**.
+- **Same mechanism, opposite character (cf. cricket-vs-katydid at 87–88).** Both the **mosquito** at degree 91 and the **bumblebee** at degree 92 produce sound through wing vibration. The mosquito (small body, high wing-beat frequency, low thoracic mass) produces a thin cold ultra-thin hum cloud at 400–600 Hz. The bumblebee (large body, lower wing-beat frequency relative to body size, large thoracic mass acting as resonating chamber) produces a deep warm resonant buzz at 130–240 Hz. Same mechanism, maximally different result — body size and resonance fundamentally determine acoustic character even when the underlying mechanism is identical. The engine has now demonstrated this principle twice in five degrees: at degrees 87–88 (cricket-vs-katydid stridulation, ground-vs-canopy, rhythmic-vs-continuous) and now at degrees 91–92 (mosquito-vs-bumblebee wing vibration, small-vs-large, thin-vs-deep).
+- **Buzz pollination in the PNW context.** Several PNW keystone plants depend on buzz pollination. **Huckleberry** (*Vaccinium ovalifolium*, *V. parvifolium*, *V. membranaceum*) — anthers are pore-tipped, requiring vibration to release pollen. **Blueberry** (*Vaccinium corymbosum*, cultivated; *V. caespitosum*, native) — same anther architecture. **Shooting star** (*Dodecatheon* spp.) — anthers fused into a cone requiring vibratory release. **Cranberry** (*Vaccinium oxycoccos*) — buzz-pollinated. The PNW understory flora is in significant part a bumblebee-pollinated community; without bumblebees, large portions of the wildflower meadow and forest understory could not reproduce. The bumblebee's ecological role is structural to the entire ecosystem.
+- **Wildflower meadow habitat — third meadow entry in the engine.** The bumblebee inhabits the **wildflower meadow** — open, sunlit, floral-diverse, color- and scent-rich habitat. This is the **third meadow / meadow-edge habitat** in the species engine after the **marmot** at degree 75 (alpine meadow) and the **golden-mantled ground squirrel** at degree 79 (meadow-edge). The bumblebee's habitat marker now ties all three meadow entries together through a single ecological community — alpine meadow, meadow-edge, and wildflower meadow are the three layers of a single PNW meadow gradient that the engine has now sampled. Future meadow entries can be placed within this gradient.
+- **Bumblebee species declines and conservation context.** *Bombus occidentalis*, the western bumble bee, was historically the dominant bumblebee across much of the PNW and the western US. Its populations have collapsed since the late 1990s, in part due to **Nosema bombi** (a microsporidian parasite), pesticide exposure, and habitat loss. Other PNW *Bombus* species have shown declines as well, though some remain locally common. The bumblebee's appearance in the engine carries a conservation subtext: the first pollinator is also among the species most actively being lost.
+- **Body as resonating chamber — biological acoustics.** The bumblebee's acoustic signature is dominated by its body design. Dense fur dampens high-frequency components and emphasizes low-frequency resonance. Large thoracic volume provides a resonating chamber that amplifies fundamental frequencies. Wing-beat frequency (around 200 Hz at typical flight) interacts with body resonance to produce the perceived deep buzz. This biological-acoustics principle (body design determines perceived sound character even more than underlying mechanism) is the same principle at work in the cricket-vs-katydid contrast at degrees 87–88 (ground-dwelling cricket body vs canopy-dwelling katydid body) and in the mosquito-vs-bumblebee contrast at 91–92.
+- **Two consecutive insects (91–92) and two consecutive wing-sounds.** The species side has now placed two consecutive insect entries (mosquito 91, bumblebee 92), and both produce wing-sound. This back-to-back same-class same-mechanism pattern parallels **back-to-back Orthoptera at 87–88** (cricket and katydid, both stridulators) and **back-to-back Anatidae at 58–59** (Wood Duck and Mallard). The engine continues to show its tendency to **linger within taxa once it encounters them** rather than sample once and move on. Future degrees may continue Hymenoptera (a wasp, an ant, a different bee) or branch back out to the broader insect class or to a different class entirely.
+- **Thirty-second consecutive original CSV.** The bumblebee is the **32nd consecutive species drawn from the original source catalog without substitution** (degrees 61–92). The streak continues unbroken, the longest reliable original-catalog run in the engine to date. Data foundation remains solid.
 
 ## Retrospective
 
-**What Worked:**
-1. Trance Mission as World/Electronic at Genre Stage 74 is accurate and well-classified -- global instruments with electronic processing is a genuine genre. Distinguished from ethereal/electronic (90), drone/noise (91), and electronic pop (86). Three consecutive electronic-inflected genres forming the electronic continuum (90-92)
-2. The global weave (93rd acoustic element) captures the sonic reality with precision -- multiple traditions woven through electronics, polyphonic, cross-cultural, no single tradition dominates. Oud, tabla, didgeridoo, hammered dulcimer simultaneously in shared electronic space
-3. The cross-pollinator (93rd artist-city pattern) is observationally accurate -- Trance Mission genuinely operated across cities and traditions. The pattern is real and has broad applicability
-4. The electronic continuum (90-92) is a strong structural observation that emerged naturally -- atmosphere (Sky Cries Mary), obliteration (Hovercraft), bridge-building (Trance Mission). Three uses of one technology in three degrees
-5. E=3 for both sides creates a clean parallel -- immersive accessibility on the music side, warm present meadow buzz on the species side. Both warm, both present, both accessible
-6. City of Tribes Records adds a non-Seattle label to the map, expanding the label geography beyond Sub Pop, K Records, Barsuk, and Rockville
-7. NEW ORDER Hymenoptera as fifth insect order is taxonomically significant -- bees, wasps, ants. The most ecologically significant order arrives
-8. First pollinator is a genuine ecological milestone -- the first mutualist, the first species whose ecological role is giving as well as receiving. The bumblebee introduces a new category of ecological relationship
-9. Buzz pollination (sonication) is well-documented and real -- the first sound in the engine that performs ecological work. Not metaphor but fact
-10. The mosquito-to-bumblebee contrast (91 to 92) is one of the engine's strongest consecutive species contrasts -- same mechanism (wing vibration), opposite character (thin/cold/quiet vs deep/warm/present). Two wing-sounds spanning the full range
-11. The Trance Mission / bumblebee parallel as cross-pollinators is genuinely elegant -- both pollinators, both create through connection, both dissolve boundaries. The parallel operates on both sides simultaneously
-12. Wildflower meadow is the brightest and most ecologically diverse habitat in the engine -- full of color, scent, and life. A strong habitat addition
+### What Worked
 
-**What Could Be Better:**
-1. Specific Trance Mission member names not detailed -- ACCEPTED, the group's collective aesthetic is the contribution
-2. Individual *Bombus* species not deeply profiled -- ACCEPTED, family-level entry appropriate for the collective meadow buzz
-3. NO RAPTOR in 93 entries -- CRITICAL, persists from degree 90
-4. NO PASSERIFORM in 36 degrees -- thirty-six consecutive non-passerines (57-92). EXTREME
-5. NO MARINE SPECIES -- 93 entries without a marine specialist. SIGNIFICANT
+- **The cross-pollinator parallel between Trance Mission and the bumblebee is the strongest A/B parallel since the engine began dual-axis releases.** Both halves are explicit cross-pollinators — one cultural, one ecological — and the parallel emerged from independent research on each side rather than from a hypothesis imposed on both. When the Part A and Part B parallels are this structurally resonant without coordination, it confirms that the dual-axis architecture can produce emergent meaning that neither axis alone could generate.
+- **The electronic continuum (90–92) framing crystallized at degree 92.** Three consecutive electronic-inflected degrees with three completely different uses of the same fundamental technology (atmosphere / obliteration / bridge-building) is the engine's strongest demonstration of the principle that technology does not determine genre. The framing emerged organically from the sequence rather than being imposed beforehand, and it now provides vocabulary for future electronic entries to be classified against.
+- **The mosquito-vs-bumblebee acoustic contrast is one of the engine's sharpest single-degree-boundary inversions.** Same mechanism (wing vibration), maximally different result (thin cold whine vs deep warm buzz), opposite energy levels (E=2 vs E=3), opposite habitat associations (wetland edge vs sunlit meadow). The contrast illuminates both degree 91 and degree 92 simultaneously and confirms the engine's earlier finding (cricket-vs-katydid at 87–88) that body design dominates mechanism in determining acoustic character.
+- **First pollinator and first functional sound landed simultaneously.** The bumblebee opens the engine's vocabulary for two related categories — pollinator (ecological mutualist) and functional sound (sound as tool to perform physical work) — in a single entry. Both categories now exist in the engine's vocabulary going forward. Future pollinator and functional-sound entries can be classified against the bumblebee directly.
+- **City of Tribes Records expanded the label geography without abandoning the PNW thematic frame.** The first non-Seattle label appearance of Quadrant II was managed through Trance Mission's PNW touring connections and scene overlap, which preserves the PNW thematic frame while opening the geographic frame. The engine's coverage can now expand to West Coast labels broadly without losing its center.
+- **Hymenoptera is the most ecologically significant order opening so far in Quadrant II.** Bees, wasps, and ants together account for an enormous fraction of insect biomass and ecological function. Opening Hymenoptera at degree 92 with the keystone pollinator family (Apidae) is a high-impact taxonomic event that the engine identified and documented properly.
+- **The wildflower meadow habitat ties three earlier meadow entries together.** Marmot (75, alpine meadow), golden-mantled ground squirrel (79, meadow-edge), and now bumblebee (92, wildflower meadow) form a three-layer meadow gradient that the engine has now sampled. The cross-degree habitat connection emerged from the bumblebee research and provides a tested vocabulary for future meadow entries.
+
+### What Could Be Better
+
+- **Twenty-five-degree mammalian dominance from 61–85 still casts a shadow even after seven non-mammalian degrees (86–92).** Three amphibian / insect / insect at 86–88, then bird (Sky Cries Mary's degree mate Townsend's Warbler at 90), then insect at 89, 91, 92 — the non-mammalian streak is real but the imbalance against the mammalian era is not yet resolved. The engine should continue prioritizing class diversity.
+- **NO RAPTOR in 93 entries.** The absence of birds of prey (Accipitridae, Falconidae, Strigidae, Tytonidae) across the entire PNW catalog so far remains a structural deficiency. The engine has fifteen Aves entries from earlier degrees but zero raptors. A bird of prey is overdue and should be prioritized.
+- **NO PASSERIFORM in 36 degrees (since degree 56).** Thirty-six consecutive non-passerine degrees is itself an extreme. Passerines are the largest avian order; their absence distorts the engine's coverage of bird acoustic diversity. The engine should plan a deliberate return to passerines in the next several degrees.
+- **NO MARINE SPECIES in 93 entries.** The Pacific Northwest's marine ecosystem (Salish Sea, Olympic Coast, Puget Sound proper) is unrepresented. Harbor seal, orca, sea lion, common loon, marbled murrelet — none have appeared. For an engine titled around Puget Sound, the marine omission is significant and should be repaired in the near future.
+- **Trance Mission's discography was abbreviated in research.** The full Trance Mission catalog (multiple albums, side projects, related ensembles) received less than full development. The City of Tribes label catalog as a whole could support multiple future entries (Beasts of Paradise, Stellamara, Beth Custer Ensemble) but the cross-references to those potential future entries were not laid out as explicitly as they could have been.
+- **Conservation subtext for *Bombus occidentalis* could be more prominent.** The western bumble bee's collapse since the late 1990s is one of the most consequential PNW wildlife stories of the past three decades, and the bumblebee research touched on it but did not develop it as a centerpiece. Future pollinator entries should consider whether conservation status warrants more explicit framing.
 
 ## Lessons Learned
 
-1. The electronic continuum (90-92) demonstrates that genre classification can track not just what music sounds like but what electronics *do* -- the same technology serves atmosphere, obliteration, and bridge-building depending on artistic intent. Three consecutive degrees, three Genre Stages (72-73-74), three completely different relationships with electronics. This is the engine's strongest three-degree genre arc to date
-2. The pollinator parallel (Trance Mission + bumblebee) is the most structurally resonant A/B parallel since the engine began dual-axis releases. Both are cross-pollinators -- one cultural, one ecological. When the Part A and Part B parallels are this strong, it confirms that the dual-axis architecture can produce emergent meaning that neither axis alone could generate
-3. Buzz pollination introduces a new category to the species engine: functional sound. Prior sounds were byproducts of movement or deliberate communication signals. The bumblebee's sonication is a *tool* -- sound used to perform physical work on the environment. This distinction (sound as signal vs sound as tool) may become increasingly relevant as the engine encounters more species
-4. Two consecutive wing-sounds (mosquito 91, bumblebee 92) with completely different characters proves that sound production mechanism does not determine acoustic character. Wing vibration can produce thin whine or deep buzz depending on body size, wing loading, and resonance. The same mechanism spans E=2 to E=3, 400-600 Hz to 130-240 Hz, barely audible to clearly present. Mechanism is not destiny
-5. Thirty-two consecutive original CSV species (61-92) continues to demonstrate data reliability. The CSV has not needed substitution or correction in 32 consecutive entries. The data foundation remains solid
-6. Five insect orders in the engine (Orthoptera, Hemiptera, Diptera, Hymenoptera, plus the second Orthoptera at katydid 88) with three sound mechanisms (stridulation, tymbal, wing vibration) is a strong demonstration of insect acoustic diversity. The engine's insect coverage is becoming taxonomically rich
-7. The gap analysis persists: no raptor, no passerine since degree 56, no marine species. These gaps become more conspicuous with each degree. They will need to be addressed
+- **The cross-pollinator parallel demonstrates that A/B emergence can be the strongest structural finding of a degree.** When Part A and Part B independently produce the same structural shape (here, cross-pollination as the defining property), the dual-axis architecture has produced something neither axis alone could have. Future degrees should look for emergent A/B parallels as a primary signal of structural significance, not just as a happy accident.
+- **Technology does not determine genre — intent, context, and pairing do.** The electronic continuum (Sky Cries Mary 90 atmosphere, Hovercraft 91 obliteration, Trance Mission 92 bridge-building) is the engine's strongest demonstration of this principle. Three degrees, three uses of the same fundamental technology, three completely different genres. Future technology-defined entries should be classified by *use* of the technology, not by *presence* of it.
+- **Body design dominates mechanism in determining acoustic character.** The mosquito-vs-bumblebee contrast (same wing-vibration mechanism, opposite acoustic character) confirms what cricket-vs-katydid demonstrated at 87–88. Mechanism does not determine result; body size, resonance, and structural design do. Future same-mechanism comparisons should examine body / resonance / structural variables before concluding that the mechanism itself produces a specific result.
+- **Functional sound (sound as tool) is a distinct category from signal sound, communication sound, and byproduct sound.** Buzz pollination introduces a new sound category to the species engine: sound used as a tool to perform physical work on the environment. This category did not exist in the engine's vocabulary before degree 92. Future species entries should be evaluated for whether their sound is functional (tool-like, work-performing) or fits the prior categories (signal, communication, byproduct).
+- **Lingering within taxonomic orders is now a confirmed engine pattern across multiple orders.** Anatidae lingered at 58–59 (Wood Duck and Mallard). Orthoptera lingered at 87–88 (Cricket Chorus and Katydid). Insecta has now lingered through five orders in six degrees (87–92). Future encounters with new orders should be planned for two-to-three-degree exploration as the default rather than the exception.
+- **Energy convergence at E=3 may be a structural property, not coincidence.** Both halves of degree 92 arrive at E=3 through completely different routes (Trance Mission's immersive accessibility through warm electronic processing, bumblebee's warm present meadow buzz through body resonance). All five return artists at degree 88 also converged at E=3. E=3 may represent a natural equilibrium energy across multiple kinds of entries — returns, cross-pollinators, mutualists, immersive accessible artists. Worth tracking forward as a tested hypothesis.
+- **Label geography can expand without abandoning thematic frame.** City of Tribes Records (San Francisco) is the first non-Seattle label of Quadrant II, but the PNW thematic frame holds because Trance Mission's PNW touring connections preserve the geographic anchor. Future non-Seattle labels can be incorporated using the same approach — geographic expansion, thematic preservation. The engine's coverage can broaden without losing its center.
+- **Conservation status deserves explicit framing for keystone-species entries.** The bumblebee's appearance carries a major conservation subtext (*Bombus occidentalis* collapse), which the research touched on but did not develop as a centerpiece. Future keystone-species entries should consider whether conservation status warrants centerpiece framing, especially for pollinators, predators, and other ecological keystones whose loss has cascading effects.
+- **Cross-city patterns extend the engine's spatial vocabulary.** San Francisco / Seattle as a Trance Mission cross-city marker, following Postal Service's mail-based collaboration at degree 86 and the broader Olympia / Seattle / Portland triangle that has appeared across many degrees, suggests that cross-city patterns may be a tested vocabulary worth applying to future entries that span regional boundaries. The engine's spatial vocabulary now includes single-city, multi-city, and cross-regional patterns.
+- **Genre Stage rate is stable at ~0.80 stages/degree across the folk-to-electronic transition.** Genre Stage 74 in 92 degrees is 0.804 stages/degree, consistent with the rate observed at degree 88 (Genre Stage 70 in 88 degrees, 0.795 stages/degree). The rate has held remarkably steady through the engine's transition from folk-zone (45–60s) to mid-arc (60s–70s) to electronic continuum (90–92). The stability of the rate suggests that the engine's genre-introduction pace is a structural property, not an artifact of any one zone.
 
----
+## Cross-References
 
-The global weave and the deep resonant buzz.
+| Connection | From | To | Nature |
+|------------|------|-----|--------|
+| S36-090 | Trance Mission (92) | Sky Cries Mary (90) | ELECTRONIC CONTINUUM open. Sky Cries Mary used electronics for atmosphere (ambient drift); Trance Mission uses electronics for cultural bridge-building (global weave). Same fundamental technology, opposite intent. First and third members of the 90–92 electronic continuum. |
+| S36-091 | Trance Mission (92) | Hovercraft (91) | ELECTRONIC CONTINUUM mid. Hovercraft used electronics for obliteration (sustained crush); Trance Mission uses electronics for cultural bridge-building (polyphonic weave). Monolithic vs polyphonic. Second and third members of the 90–92 electronic continuum. Adjacent degrees, opposite acoustic strategies. |
+| S36-086 | Trance Mission (92) | The Postal Service (86) | CROSS-CITY COLLABORATION LINEAGE. Postal Service operated through cross-city mail (Death Cab + Dntel mailing reels back and forth); Trance Mission operates through cross-city scene overlap (Bay Area + PNW). Both demonstrate that the PNW frame can accommodate non-PNW collaborators when the cross-city connection is real. |
+| S36-088 | Trance Mission (92) | Kimya Dawson Solo (88) | PRODUCTION-MAXIMUM VS PRODUCTION-MINIMUM. Trance Mission is maximum cross-cultural production (many traditions, dense polyphony, layered electronics); Dawson solo is minimum production (one voice, one guitar, room-tone). Four degrees apart, opposite production strategies. The engine spans both extremes within Quadrant II. |
+| S36-065 | Trance Mission (92) | Philip Aaberg (65) | WORLD-MUSIC INFLUENCES, OPPOSITE FRAMINGS. Aaberg incorporates world influences through Western piano (mediated, internalized); Trance Mission uses global instruments directly (unmediated, external). Two ways of bringing non-Western tradition into PNW music. |
+| RES-city-of-tribes | Trance Mission (92) | City of Tribes Records catalog | LABEL ORBIT. San Francisco world / electronic / experimental label. Roster includes Trance Mission, Beasts of Paradise, Stellamara, Beth Custer Ensemble, others. First non-Seattle label of Quadrant II. Future label entries (Beasts of Paradise, Stellamara) would extend the City of Tribes orbit. |
+| RES-1990s-world-electronic | Trance Mission (92) | Loop Guru / Banco de Gaia / Transglobal Underground / Talvin Singh wave | 1990s WORLD/ELECTRONIC FUSION CONTEXT. Trance Mission is the PNW-touring representative of a broader 1990s movement that used emerging sampling and electronic-processing technology to enable cross-traditional collaboration. The wave is the cultural background for Genre Stage 74. |
+| SPS-091 | Bumblebee Drone (92) | Mosquito Swarm (91) | SAME MECHANISM, OPPOSITE CHARACTER. Both produce sound through wing vibration. Mosquito (small, high frequency, low resonance) produces thin cold ultra-thin hum cloud at 400–600 Hz, E=2. Bumblebee (large, lower frequency, high resonance) produces deep warm resonant buzz at 130–240 Hz, E=3. Body design dominates mechanism. |
+| SPS-087 | Bumblebee Drone (92) | Cricket Chorus (87) | INSECTA LINEAGE. Both insect class, both Quadrant II. Cricket opened Insecta as the engine's fourth class. Bumblebee opens Hymenoptera as the engine's fifth insect order, extending the insect class diversity to five orders (Orthoptera 87–88, Hemiptera 89, Diptera 91, Hymenoptera 92). |
+| SPS-088 | Bumblebee Drone (92) | Katydid (88) | LINGERING-WITHIN-ORDER vs ORDER-EXPANSION. Katydid lingered within Orthoptera (back-to-back Orthoptera 87–88). Bumblebee opens new Hymenoptera order. Both demonstrate the engine's dual pattern of within-order lingering and across-order expansion through the insect-class window. |
+| SPS-089 | Bumblebee Drone (92) | Cicada (89) | INSECT ACOUSTIC MECHANISM DIVERSITY. Cicada produces sound through tymbal (specialized vibratory membrane); bumblebee produces sound through wing vibration with body resonance. Two completely different insect sound mechanisms in five degrees. The engine's insect coverage is acoustically rich. |
+| SPS-091-mosquito-swarm | Bumblebee Drone (92) | Mosquito Swarm (91) | SECOND CONSECUTIVE WING-SOUND. Two consecutive insect degrees both wing-sound producers, both Diptera-and-Hymenoptera neighbors in insect class. The engine's wing-sound vocabulary now spans the thin-cold-E=2 (mosquito) to deep-warm-E=3 (bumblebee) range. |
+| SPS-075 | Bumblebee Drone (92) | Hoary Marmot (75) | MEADOW HABITAT GRADIENT. Marmot in alpine meadow (high elevation, short growing season, sparse floral diversity). Bumblebee in wildflower meadow (mid-low elevation, long growing season, dense floral diversity). Two layers of a three-layer PNW meadow gradient that now includes ground squirrel meadow-edge at 79. |
+| SPS-079 | Bumblebee Drone (92) | Golden-mantled Ground Squirrel (79) | MEADOW-EDGE TO WILDFLOWER MEADOW. Ground squirrel in meadow-edge habitat (transitional, partial canopy); bumblebee in wildflower meadow (open, sunlit, floral-dense). Adjacent layers of the three-layer meadow gradient (alpine 75, edge 79, wildflower 92). |
+| RES-vaccinium-buzz-pollination | Bumblebee Drone (92) | Huckleberry / Blueberry / Shooting Star / Cranberry | BUZZ-POLLINATED PNW KEYSTONE PLANTS. *Vaccinium* species (huckleberry, blueberry, cranberry) and *Dodecatheon* species (shooting star) all have anther architectures that require vibratory release. Bumblebee sonication is structural to PNW understory plant reproduction. Conservation subtext: bumblebee declines = understory plant declines. |
+| RES-bombus-occidentalis-decline | Bumblebee Drone (92) | Western bumble bee (*B. occidentalis*) conservation status | KEYSTONE POLLINATOR LOSS. Historically dominant western bumble bee has collapsed since the late 1990s due to *Nosema bombi* parasitism, pesticide exposure, and habitat loss. The first pollinator in the engine is also among the species most actively being lost. Conservation framing for future pollinator entries. |
 
-Degree 92. The cross-pollination degree. Both sides of the engine are pollinators for the first time.
+## Engine Position
 
-On the music side, Trance Mission weaves global instruments through electronic processing -- oud, tabla, didgeridoo, hammered dulcimer meeting sampling, loops, and ambient textures in a polyphonic tapestry where no single tradition dominates. World/Electronic at Genre Stage 74. E=3. City of Tribes Records. The global weave is the 93rd acoustic element -- cross-cultural polyphony, music created by dissolving borders. The cross-pollinator is the 93rd artist-city pattern -- the artist who belongs to all scenes by belonging to none, who carries elements between traditions, who creates new music in the space between old music. The electronic continuum reaches three degrees: atmosphere (90), obliteration (91), bridge-building (92). Three uses of electronics. Three degrees. One technology.
+- **Degree 92 of 360** — 25.6% of the circle traversed.
+- **Twin counters tick to 93**: the global weave is the 93rd acoustic element on the artist side; the deep resonant buzz is the 93rd acoustic element on the species side; The Cross-Pollinator is the 93rd artist-city pattern.
+- **Genre Stage 74 — World/Electronic.** Seventy-four genre stages in ninety-two degrees (0.804 stages/degree). Rate has held stable at ~0.80 since the folk zone began at degree 45.
+- **Electronic continuum at three degrees (90–92)**: Sky Cries Mary atmosphere, Hovercraft obliteration, Trance Mission bridge-building. Three uses of one technology.
+- **Energy distribution after degree 92**: warm-immersive E=3 expanding through the electronic continuum. Both halves of degree 92 at E=3.
+- **Cross-pollinator pattern opens.** First explicit cross-traditional artist (Trance Mission). First pollinator species (bumblebee). First functional-sound species (bumblebee sonication). First mutualist species (bumblebee).
+- **Hymenoptera opens — fifth insect order.** Order count for class Insecta in the engine: Orthoptera (87–88), Hemiptera (89), Diptera (91), Hymenoptera (92). Plus the second Orthoptera at katydid (88). Five orders in six insect-class degrees.
+- **Apidae 42nd family.** New family slot opens with the most ecologically pivotal family the engine has yet encountered.
+- **Class diversity** (post-92): Mammalia (era 61–85), Amphibia (86), Insecta (87–88, 89, 91, 92), Aves (90 mate). Insecta is now the most-sampled class of Quadrant II.
+- **Original CSV unbroken at 32**: 32 consecutive original-catalog species (degrees 61–92) — longest unbroken run in the engine.
+- **Label geography expansion**: First non-Seattle label of Quadrant II — City of Tribes Records (San Francisco). PNW thematic frame holds via Trance Mission's PNW touring connections.
+- **Cross-city patterns extended**: San Francisco / Seattle (Trance Mission). Builds on Postal Service's cross-city mail collaboration (86) and the Olympia / Seattle / Portland triangle (multiple earlier degrees).
+- **Meadow habitat gradient at three layers**: alpine meadow (marmot 75), meadow-edge (ground squirrel 79), wildflower meadow (bumblebee 92). The bumblebee entry ties the gradient together.
+- **Outstanding gaps**: Zero raptors in 93 entries; zero passerines in 36 degrees (since 56); zero marine species in 93 entries.
 
-On the species side, the bumblebee drone brings Hymenoptera into the engine -- NEW ORDER (fifth insect), NEW FAMILY Apidae (42nd). The first pollinator. The first mutualist. The first species whose sound performs ecological work -- buzz pollination, sonication, vibrating flowers at specific frequencies to release pollen. The deep resonant buzz at 130-240 Hz is the opposite of the mosquito's thin whine -- warm where the mosquito was cold, deep where the mosquito was high, present where the mosquito was barely audible. Two wing-sounds, two characters. The wildflower meadow hums with the bumblebee's warm buzz -- the brightest habitat in the engine, full of color and scent and the quiet work of pollination. Thirty-second consecutive original CSV.
+## Acoustic Progression Snapshot (Tail)
 
-Both pollinators. Trance Mission carried the oud into the electronic club and the sampler into the world music festival. The bumblebee carries pollen between flowers, sustaining the meadow and the agricultural systems that depend on it. Both create through connection. Both dissolve boundaries. Both weave.
+| # | Element | Degree | Artist/Species |
+|---|---------|--------|----------------|
+| 88 | the bedroom strum / the continuous electric buzz | 88 | Kimya Dawson (solo) / Katydid |
+| 89 | the introspective hush / the electric buzzing throb | 89 | (S36 entry) / Cicada (Hemiptera) |
+| 90 | the ambient drift / the (S36 mate) | 90 | Sky Cries Mary / (SPS mate) |
+| 91 | the sustained crush / the ultra-thin hum cloud | 91 | Hovercraft / Mosquito Swarm |
+| **92** | **the global weave / the deep resonant buzz** | **92** | **Trance Mission / Bumblebee Drone (*Apidae*)** |
 
-*Degree 92. The cross-pollinators. The global weave carries. The deep resonant buzz hums. Both pollinators. Both weavers. Both create by connecting what was separate.*
+## Files
 
-</details>
+- `docs/release-notes/v1.49.232/README.md` (this file)
+- `docs/release-notes/v1.49.232/chapter/00-summary.md` — derived summary
+- `docs/release-notes/v1.49.232/chapter/03-retrospective.md` — retrospective
+- `docs/release-notes/v1.49.232/chapter/04-lessons.md` — 7 extracted lessons
+- `docs/release-notes/v1.49.232/chapter/99-context.md` — context
+- `www/tibsfox/com/Research/S36/research/releases/092-trance-mission/index.html` (647 lines)
+- `www/tibsfox/com/Research/S36/research/releases/092-trance-mission/research.md` (130 lines)
+- `www/tibsfox/com/Research/S36/research/releases/092-trance-mission/knowledge-nodes.json` (136 lines)
+- `www/tibsfox/com/Research/S36/research/releases/092-trance-mission/retrospective.md` (148 lines)
+- `www/tibsfox/com/Research/SPS/research/releases/092-bumblebee-drone/index.html` (530 lines)
+- `www/tibsfox/com/Research/SPS/research/releases/092-bumblebee-drone/research.md` (166 lines)
+- `www/tibsfox/com/Research/SPS/research/releases/092-bumblebee-drone/knowledge-nodes.json` (133 lines)
+- `www/tibsfox/com/Research/SPS/research/releases/092-bumblebee-drone/retrospective.md` (105 lines)
+
+Total: 9 files in commit `4e0dce849d2579ca6a2e47c6b145d85190d5405e`, 2,545 insertions.
