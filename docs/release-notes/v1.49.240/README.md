@@ -1,585 +1,182 @@
-# v1.49.240 -- Degree 100: Summer Heart + Common Raven -- THE CENTENNIAL -- THE CASCADE AND THE CRONK
+# v1.49.240 — Degree 100: Summer Heart + Common Raven — THE CENTENNIAL — THE CASCADE AND THE CRONK
 
-**Released:** 2026-04-01
-**Degree:** 100 of 360 -- THE CENTENNIAL -- 27.8% of 360 -- Tenth degree of Quadrant II
-**Part A:** Summer Heart -- Electronic Pop, E=4, self-released / various, Seattle/Sweden, GENRE STAGE 82 (Electronic Pop, eighty-second genre stage, dream-pop-influenced electronic pop warm synth textures nostalgic melodies soft vocal delivery golden sun-drenched aesthetic, distinct from Electronic/R&B 99 cultural fusion and Indie Electronic 96-98 pure electronic and Electronic 95 cinematic festival-scale), THE NOSTALGIC CASCADE 101st acoustic element (cascading synth pads glistening arpeggios soft vocal melodies warm reverb golden tonality flowing layered tumbling summer memories, distinct from bilingual warmth 99 cultural fusion and retro-synthetic shimmer 98 static nostalgia and algorithmic tenderness 97 digital glitch), THE TRANSATLANTIC DREAMER 101st artist-city pattern (artist operating across the Atlantic Swedish-born Seattle-connected dual-continent identity cross-pollination Scandinavian melodicism meets PNW electronic texture, distinct from diasporic synthesist 99 inter-American and self-released synthesist 98 single city), eleventh electronic-adjacent entry in fifteen degrees (86 90 91 93 94 95 96 97 98 99 100), TRANSATLANTIC CONNECTION (Sweden-Seattle)
-**Part B:** Common Raven (*Corvus corax*) -- deep cronk + bell + hollow knock + mimicry, E=4, open forest, Corvidae (NEW FAMILY 49th, connects to Steller's Jay degree 53 same family 47 degrees apart), AVES RETURNS (after 40 degrees! last bird degree 60 Pied-billed Grebe, 39 consecutive non-bird degrees mammals amphibians insects, birds return at the centennial), over 30 distinct call types MOST COMPLEX VOCAL REPERTOIRE in the animal kingdom, one of the MOST INTELLIGENT ANIMALS on Earth (tool use problem-solving future planning causal reasoning play behavior social cognition cultural transmission), largest passerine on Earth, Passeriformes (largest order of birds ~6,500 species), THE RAVEN MUSE CONNECTION, FORTIETH CONSECUTIVE ORIGINAL CSV -- FOUR DECADES
-**Series:** Seattle 360 + Sound of Puget Sound -- Continuous Release Engine
+**Released:** 2026-04-02
+**Scope:** Seattle 360 + Sound of Puget Sound — paired degree release, centennial milestone
+**Branch:** main
+**Commits:** `d287774f9` (1)
+**Files changed:** 9 (1 release note + 4 Summer Heart research artifacts + 4 Common Raven research artifacts)
+**Degree:** 100 of 360 — THE CENTENNIAL — 27.8% of 360 — Tenth degree of Quadrant II
+**Part A:** Summer Heart — Electronic Pop, E=4, self-released / various, Sweden / Seattle transatlantic, Genre Stage 82 milestone (Electronic Pop, eighty-second genre stage, dream-pop-influenced electronic pop, warm synth textures, nostalgic melodies, soft vocal delivery, golden sun-drenched aesthetic), the nostalgic cascade 101st acoustic element, the transatlantic dreamer 101st artist-city pattern, eleventh electronic-adjacent entry in fifteen degrees
+**Part B:** Common Raven (*Corvus corax*) — deep cronk + bell + hollow knock + mimicry, E=4, open forest, Corvidae NEW FAMILY (49th, connects to Steller's Jay at degree 53 same family 47 degrees apart), Aves RETURNS after 40 degrees (last bird Pied-billed Grebe at degree 60, 39 consecutive non-bird degrees spanning Mammalia Insecta and Amphibia before birds come home at the centennial), over 30 distinct call types the most complex vocal repertoire in the animal kingdom, largest passerine on Earth, Passeriformes (largest order of birds ~6,500 species), the Raven muse connection, fortieth consecutive original CSV (FOUR DECADES)
+**Series:** Seattle 360 + Sound of Puget Sound — Continuous Release Engine
 **Cluster:** Music (hub: WAL)
-**Note:** THE CENTENNIAL. The cascade and the cronk. Electronic warmth and biological intelligence. One hundred degrees. 27.8% of 360. More than a quarter of the way around the circle. On the music side, **Summer Heart** (David Alexander) is a Swedish-born, Seattle-connected electronic pop project -- dream-pop-influenced warm synth textures, nostalgic melodies, soft vocal delivery, golden aesthetic. **Genre Stage 82** -- Electronic Pop. E=4. The **nostalgic cascade** is the 101st acoustic element -- cascading synth textures that tumble over each other like summer memories. The **transatlantic dreamer** is the 101st artist-city pattern -- an artist bridging Sweden and Seattle, carrying both continents in the music. Eleventh electronic-adjacent entry in fifteen degrees. On the species side, the **Common Raven** (*Corvus corax*) delivers THREE CONVERGING STRUCTURAL EVENTS at the centennial: (1) **CORVIDAE ENTERS** -- NEW FAMILY (49th), connecting to Steller's Jay at degree 53, corvids are among the most intelligent families in the animal kingdom; (2) **AVES RETURNS** after **40 degrees** -- last bird at degree 60, after 39 consecutive non-bird degrees spanning mammals, amphibians, and insects, birds come home at the centennial; (3) **THE CENTENNIAL** -- 100th degree, 27.8% of 360, fortieth consecutive original CSV species (**FOUR DECADES** of original species). The raven has **over 30 distinct call types** -- the most complex vocal repertoire in the engine. Deep cronk, bell-like tones, hollow knocks, gargling, screams, soft warbles, mimicry. One of the **most intelligent animals on Earth** -- documented tool use, problem-solving, future planning, causal reasoning, play, cultural transmission. The largest passerine. E=4. Open forest. **The raven is personally significant** -- it connects to the project's Raven muse. At degree 100, the Raven arrives.
+**Dedication:** To **Summer Heart** and **David Alexander** — the Swedish-born, Seattle-connected project whose dream-pop-influenced electronic pop carries Scandinavian melodicism and Pacific Northwest electronic texture across the Atlantic as one golden, sun-drenched voice; to the **Common Raven** (*Corvus corax*) — the largest passerine on Earth, the thirty-voiced mind, the tool-user, the cache-keeper, the trickster of Pacific Northwest Indigenous tradition, and the personal muse whose arrival at the centennial was planned across the preceding ninety-nine degrees; to **Corvidae** entering as the forty-ninth family and declaring itself through the raven after the Steller's Jay first introduced corvids at degree 53; to **Aves** returning at the centennial after forty consecutive non-bird degrees mapping mammals, amphibians, and insects; and to the **THE CENTENNIAL** itself — one hundred rotations from origin, 27.8% of the full circle, more than one quarter of the way home.
+**Engine Position:** Degree 100 of 360 — THE CENTENNIAL, the engine's first triple-digit degree; the nostalgic cascade (101st artist-side acoustic element); the deep cronk + bell + hollow knock + mimicry (100th species-side acoustic element); The Transatlantic Dreamer (101st artist-city pattern); **GENRE STAGE 82 MILESTONE** Electronic Pop; **CORVIDAE** enters (49th family, connects to Steller's Jay at degree 53); **AVES RETURNS** after forty degrees (last bird Pied-billed Grebe at degree 60, thirty-nine consecutive non-bird degrees); **THE CENTENNIAL TRIPLE CONVERGENCE** (new family, class return, one-hundredth degree); **MOST COMPLEX VOCAL REPERTOIRE IN THE ANIMAL KINGDOM** (30+ distinct call types); **LARGEST PASSERINE ON EARTH**; **FORTIETH CONSECUTIVE ORIGINAL CSV** (degrees 61–100 — FOUR DECADES); **ELEVENTH ELECTRONIC-ADJACENT ENTRY IN FIFTEEN DEGREES** (86, 90, 91, 93, 94, 95, 96, 97, 98, 99, 100); transatlantic connection Sweden–Seattle; the Raven muse personally significant to the project arrives at degree 100.
 
 ## Summary
 
-THE CENTENNIAL. One hundred degrees. 27.8% of 360. The cascade and the cronk.
+**THE CENTENNIAL.** One hundred degrees behind. Two hundred and sixty ahead. The engine has traversed 27.8% of a full rotation of the **Seattle 360** continuous release engine, paired at every step with the **Sound of Puget Sound** acoustic catalogue. **Degree 100** is the tenth degree of **Quadrant II**, and it is the first triple-digit marker in the series. **The Cascade and the Cronk** — the pairing that lands at the centennial — places **Summer Heart's** flowing retrospective electronic pop beside the **Common Raven's** thirty-voiced vocal orchestra. One side is golden, warm, and layered through silicon. The other is deep, intelligent, and carried through chitin and air across hundreds of meters of **Pacific Northwest** open forest.
 
-On the music side, **Summer Heart** reaches **Genre Stage 82** with **Electronic Pop** -- dream-pop-influenced electronic pop from a Swedish-born, Seattle-connected artist. David Alexander bridges two continents: Swedish pop melodicism (strong, memorable melodies, clean production, emotional directness) and Seattle electronic texture (reverb-heavy, atmospheric, warm). The music sounds warm, golden, sun-drenched -- summer as sonic temperature. The **nostalgic cascade** is the 101st acoustic element -- cascading synth pads, glistening arpeggios, soft vocal melodies, warm reverb, golden tonality. Flowing, layered, always in motion. The **transatlantic dreamer** is the 101st artist-city pattern -- dual-continent identity, cross-pollination, the Atlantic as connection not separation. E=4. Eleventh electronic-adjacent entry in fifteen degrees (86, 90, 91, 93, 94, 95, 96, 97, 98, 99, 100). The electronic era persists through the centennial.
+**Part A: Summer Heart — Electronic Pop at Genre Stage 82.** On the music side, **Summer Heart** is the project of **David Alexander**, a Swedish-born musician connected to the **Seattle** music scene through collaborations and release channels that span two continents. The sound is **dream-pop-influenced electronic pop** — warm synth textures layered into rich enveloping pads, glistening arpeggios that cascade across the harmonic field, soft vocal delivery pitched at the intimate end of the dynamic range, and a **golden sun-drenched aesthetic** that renders summer as a sonic temperature rather than a seasonal label. The **Swedish pop melodicism** meets **Seattle electronic texture** — strong memorable melodies, clean production, and emotional directness fused with the reverb-heavy, atmospheric, warm palette that has defined **Seattle's** electronic output since the **Sub Pop** era. **Genre Stage 82** — Electronic Pop — lands as the eighty-second distinct genre stage in one hundred degrees, holding the engine's stable rate of roughly 0.82 stages per degree and demonstrating that the source catalogue continues to furnish fresh genre territory even as the engine crosses the centennial threshold. **Electronic Pop** is distinguished from **Electronic/R&B** at degree 99 (Kaina's cultural fusion), from **Indie Electronic** at degrees 96–98 (STRFKR, The Postal Service electronic, Gold Casio), and from **Electronic** at degree 95 (ODESZA's cinematic festival-scale). The first appearance of Electronic Pop was degree 86 with **The Postal Service**; Summer Heart returns the genre fourteen degrees later in a radically different dress — dream-pop-influenced rather than glitch-pop-structured, Swedish-accented rather than Seattle-native, self-released-and-diffuse rather than Sub Pop-concentrated.
 
-On the species side, the **Common Raven** (*Corvus corax*) delivers the most structurally significant species entry since degree 60. THREE CONVERGING EVENTS:
+**Part B: Common Raven — The Centennial Triple Convergence.** On the species side, the **Common Raven** (*Corvus corax*) delivers the most structurally significant species entry since the engine's first degree. Three converging structural events land simultaneously at the centennial. **First, Corvidae enters** as the forty-ninth family — the corvids (crows, ravens, jays, magpies) are among the most intelligent families in the animal kingdom, and their full declaration at degree 100 through the largest passerine on Earth completes the introduction that the **Steller's Jay** (*Cyanocitta stelleri*) began at **degree 53**. Same family, forty-seven degrees apart, radically different species. **Second, Aves returns** to the engine after forty consecutive non-bird degrees — the last bird was the **Pied-billed Grebe** at **degree 60**, and the engine then traversed **Mammalia** (degrees 61–85), **Amphibia** (degrees 86, 90, 96, 97), and **Insecta** (degrees 87–89, 91, 94, 95, 98, 99) before **Aves** comes home at **degree 100**. **Third, the centennial itself** — 100th degree, 27.8% of 360, **fortieth consecutive original CSV species** (degrees 61–100, **FOUR DECADES**) — is a counter milestone that announces the engine's maturity. The **Common Raven** is the right species for this convergence. Over **30 distinct call types** constitute the **most complex vocal repertoire** in the animal kingdom — **deep cronk** (low-pitched, resonant, 200–800 Hz, carrying long distances), **bell-like tones** (clear, ringing, metallic, pair-bonding), **hollow knocks** (wooden, percussive, produced vocally through rapid laryngeal modulation), **gargling** (complex multi-tonal social calls), **screams** (high-pitched alarm), **soft warbles** (intimate pair-bonding murmuring), and **mimicry** (learned reproduction of other species' calls, environmental sounds, and human speech). The raven is one of the **most intelligent animals on Earth** — documented for **tool use** and manufacture, multi-step **problem-solving**, **future planning** with awareness of what other ravens have seen, **causal reasoning** from auditory evidence, **play behavior** including aerial acrobatics and object manipulation, **social cognition** approaching theory of mind, **tactical deception**, and **cultural transmission** of vocal dialects and novel techniques. Raven holds **enormous cultural significance** in **Pacific Northwest Indigenous cultures** — **Raven as Trickster**, **Raven as Creator**, **Raven as Intelligence**. The species entry at degree 100 is personally significant to the project, which holds a **Raven muse** — and at the centennial, the Raven arrives.
 
-**1. CORVIDAE ENTERS -- NEW FAMILY (49th).** The corvids -- crows, ravens, jays, magpies -- one of the most intelligent families in the animal kingdom. Corvidae connects to Steller's Jay at degree 53 (same family, 47 degrees apart). The Jay introduced the corvids; the Raven is Corvidae's **full declaration**. The largest passerine on Earth -- a songbird the size of a hawk.
+**Cross-Sync Parallel: Both Halves Are Complex, Layered Voices.** Both halves of degree 100 build their identity through layered complexity rather than singular tone. **Summer Heart's** nostalgic cascade layers **cascading synth pads**, **glistening arpeggios**, **soft vocal melodies**, **warm reverb**, and **golden tonality** across the sonic field — the instrument is not one sound but a tumbling stack of overlapping timbres. **In parallel**, the **Common Raven's** vocal repertoire layers **deep cronk**, **bell-like tones**, **hollow knocks**, **gargling**, **screams**, **soft warbles**, and **mimicry** across a single individual's communicative range — the voice is not one call but thirty or more discrete signals. **Each side** reaches its identity through accretion rather than distillation. **The same** structural principle — complexity as identity — reaches both halves on the same degree through completely different substrates (silicon and software for Summer Heart; syrinx and learned behavior for the raven). **Synchronized** by the catalog, both Summer Heart and the Common Raven demonstrate that the engine's maturity at the centennial coincides with its willingness to pair maximally complex expressions on both sides.
 
-**2. AVES RETURNS -- after 40 degrees.** Last bird: Pied-billed Grebe at degree 60. Since degree 61, the engine has traversed mammals (61-85), amphibians (86, 90, 96, 97), and insects (87-89, 91, 94, 95, 98, 99). Thirty-nine consecutive non-bird degrees. **Birds return at the centennial** -- carried by the raven, one of the most intelligent animals on Earth.
+**Cross-Sync Parallel: Both E=4 — Matched Energy at the Centennial.** Both halves of degree 100 land at **E=4**, producing a rare and deliberate energy symmetry at the centennial. **Summer Heart's** warm electronic pop at moderate intensity — never confrontational, never euphoric, just a steady golden presence filling the room — matches **E=4** on the artist side. **In parallel**, the **Common Raven's** commanding vocal presence at moderate-to-high intensity — deep cronk carrying several hundred meters, thirty-voice repertoire creating impact beyond raw decibel volume — matches **E=4** on the species side. **Each side** reaches its centennial mark at matched energy. **The same** structural moment — the centennial pairing both halves at E=4 — is synchronized not by coincidence but by the catalog's calibration across the Seattle 360 and Sound of Puget Sound sequences. **Synchronized** by the engine, warmth and gravitas share a decibel envelope.
 
-**3. THE CENTENNIAL -- 100th degree.** 27.8% of 360. The engine reaches triple digits. The **fortieth consecutive original CSV species** -- **FOUR DECADES** of original species.
+**Cross-Sync Parallel: Both International, Both Hemispheric.** Both halves of degree 100 transcend geographic boundaries. **Summer Heart** bridges **Sweden** and **Seattle** — transatlantic by construction, the artist's Scandinavian origins and **Pacific Northwest** connections pulling the music across the ocean into a single dual-continent identity. **In parallel**, the **Common Raven** is one of the most widely distributed birds on Earth — **circumpolar** across the entire **Northern Hemisphere**, found from **Alaska** to **Scandinavia** to **Siberia**, equally at home in **Pacific Northwest** coastal forests and **Nordic** boreal expanses. **Each side** escapes the local into the continental. **The same** global reach — one through the Atlantic, one through the Arctic and sub-Arctic — reaches both halves on the same degree. **Synchronized** by accident, the artist crosses the ocean and the raven spans the hemisphere, and both carry the **Pacific Northwest** context with them.
 
-The raven's vocal repertoire is among the **most complex in the animal kingdom** -- over **30 distinct call types**: deep cronk (low-pitched, resonant, 200-800 Hz, carries long distances), bell-like tones (clear, ringing, metallic), hollow knocks (wooden, percussive, produced vocally), gargling (complex multi-tonal social calls), screams (high-pitched alarm), soft warbles (intimate pair-bonding), and mimicry (learned reproduction of other species' calls, environmental sounds, even human speech). The raven's intelligence is documented: tool use and manufacture, problem-solving, future planning, causal reasoning, play behavior, social cognition, theory of mind, cultural transmission. The raven holds enormous cultural significance in Pacific Northwest Indigenous cultures -- Raven as Trickster, Creator, Intelligence. E=4. Open forest.
+**Cross-Sync Parallel: The Simplest Snap Meets the Most Complex Voice.** Both halves of degree 100 sit in a running comparison with **degree 99** that the engine has been building for three successive degrees. On the species side, the recent trajectory has moved from the **pure sustained trill** of the **Snowy Tree Cricket** (degree 98, nearly sinusoidal, one of the purest tones in nature) through the **mechanical click** of the **Click Beetle** (degree 99, brief percussive impulse, under ten milliseconds) to the **deep cronk + bell + hollow knock** of the **Common Raven** (degree 100, thirty-plus distinct sustained complex calls). **In parallel**, the artist side has moved from the **retro-synthetic shimmer** of **Gold Casio** (degree 98, static nostalgia) through the **bilingual warmth** of **Kaina** (degree 99, cultural fusion) to the **nostalgic cascade** of **Summer Heart** (degree 100, temporal fusion and flowing layered complexity). **Each side** has traversed from relative simplicity to maximum complexity across the three-degree window. **The same** escalation toward complexity — different on each side but structurally parallel — reaches both halves on the same centennial degree. **Synchronized** by the catalog's ordering, the engine delivers its most complex vocal repertoire on the species side and its most layered cascading acoustic on the artist side at exactly the centennial.
 
-**The raven is personally significant** -- it connects to the project's Raven muse. At degree 100, the Raven arrives.
+**Cross-Sync Parallel: The Transatlantic Dreamer Meets the Thirty-Voiced Mind.** Both halves of degree 100 introduce **artist-city patterns and acoustic elements** keyed to connection rather than isolation. **The Transatlantic Dreamer** is the 101st artist-city pattern — an artist operating across the Atlantic, rooted in one continent, connected to another, with music that carries both. **In parallel**, the **Common Raven's** thirty-voice repertoire is a communicative bridge — mimicry that crosses species lines to reproduce other calls, environmental sounds, and human speech; gargling that encodes multi-tonal social relationships between bonded pairs and allied individuals; cultural transmission that carries novel vocal techniques between generations. **Each side** demonstrates that voice functions as bridge rather than as boundary. **The same** lesson — that maturity in voice is inseparable from maturity in connection — reaches both halves on the same degree. **Synchronized** by the structural moment, the transatlantic artist and the thirty-voiced bird both build identity through the capacity to reach.
 
-At the centennial, the engine has documented: 101 artists from the PNW music scene. 102 acoustic elements. 102 artist-city patterns. 82 genre stages. 49 families. 4 classes (Aves, Mammalia, Insecta, Amphibia). 17+ orders. 40 consecutive original CSV species. The full breadth of PNW music from grunge to electronic pop, from E=1 to E=5, from Sub Pop to self-released. The full breadth of PNW ecology from Northern Spotted Owl to Common Raven, from deep forest to open sky, from the first bird to the bird that brings Aves home.
+**Cross-Sync Parallel: Both Halves Complete a Family Return.** Both halves of degree 100 demonstrate **return** as the centennial's organizing structural device. **Corvidae** returns on the species side after forty-seven degrees — the **Steller's Jay** at **degree 53** introduced the family; the **Common Raven** at **degree 100** declares it in full. **In parallel**, **Electronic Pop** returns on the artist side after fourteen degrees — **The Postal Service** at **degree 86** first introduced the genre; **Summer Heart** at **degree 100** returns it in a dream-pop-influenced dress that is radically different from its **Sub Pop** original. **Each side** demonstrates that mature catalog density permits returns that deepen rather than repeat. **The same** principle — that taxonomy and genre labels describe lineage, not character — reaches both halves on the same degree through the same structural device (return after a significant gap). **Synchronized** by the centennial, both sides demonstrate that the engine's one hundredth degree is as much about completing earlier introductions as about initiating new ones.
+
+**Cross-Sync Parallel: Genre Stage 82 Meets the Fortieth Consecutive Original CSV.** Both halves of degree 100 land at **counter milestones** that reflect the underlying catalogue's maturity. On the artist side, the engine reaches **Genre Stage 82** — eighty-two distinct genre classifications in one hundred degrees, holding the stable rate of 0.82 stages per degree across the full traversal. **In parallel**, on the species side, the engine reaches the **fortieth consecutive original CSV species** — forty degrees without a single substitution or correction, the longest unbroken run of original-catalog selections in the engine, a **FOUR DECADES** span from **degree 61** to **degree 100** that spans the entire mammal era, both amphibian interludes, the full insect era, and now the return of Aves. **Each side** has reached a numerical milestone that reflects the source catalog's depth. **The same** structural moment — counters ticking to landmark territory on both sides at the centennial — reaches both halves on the same degree. **Synchronized** by maturity, both Genre Stage 82 and the fortieth consecutive CSV signal that the engine has accumulated enough catalog density to support extended structural planning.
+
+**Cross-Sync Parallel: Electronic Era Depth Meets Raven Intelligence.** Both halves of degree 100 reach a depth marker in the engine's recent thematic runs. On the artist side, Summer Heart is the **eleventh electronic-adjacent entry in fifteen degrees** (degrees 86, 90, 91, 93, 94, 95, 96, 97, 98, 99, 100) — the deepest sustained genre cluster in the engine, mapping the full electronic spectrum from pop structure (86) through atmosphere (90), obliteration (91), intimacy (93), experimentation (94), euphoria (95), pulse (96), tenderness (97), nostalgia (98), cultural fusion (99), and now golden cascade (100) without a single architectural repetition. **In parallel**, on the species side, the Common Raven is the most intelligent species documented in the engine to date — **tool use**, **problem-solving**, **future planning**, **causal reasoning**, **play behavior**, **social cognition**, **cultural transmission** — reaching the cognitive depth marker exactly when the artist side reaches its genre depth marker. **Each side** has reached a depth threshold in its recent sequence. **The same** structural principle — that the centennial rewards depth over breadth — reaches both halves on the same degree. **Synchronized** by design, both the electronic era mapping and the raven's cognitive portfolio demonstrate that the engine at the centennial has accumulated enough density to recognize deep structure when it surfaces.
+
+**Cumulative State at the Centennial.** At degree 100, the engine has documented **101 artists** from the **Pacific Northwest** music scene (including origin Quincy Jones at degree 0), **102 acoustic elements** (101 on the artist side and 100 on the species side with two paired elements at certain degrees), **102 artist-city patterns**, **82 genre stages**, **49 families**, **4 classes** (**Aves**, **Mammalia**, **Insecta**, **Amphibia**), and **17-plus orders**. The engine holds **40 consecutive original CSV species** — a **FOUR DECADES** streak that is itself the defining reliability property of the catalog. The full breadth of PNW music from grunge (Pearl Jam era) to electronic pop (Summer Heart), from E=1 to E=5, from **Sub Pop** to self-released, is now mapped. The full breadth of **Pacific Northwest** ecology from **Northern Spotted Owl** (the first bird, degree 4) to **Common Raven** (the centennial bird, degree 100), from deep old-growth forest to open sky, from the first class Aves entry to the bird that brings Aves home, is now mapped. The **Raven muse** arrives at degree 100.
 
 ## Key Features
 
 | Metric | Part A: Summer Heart | Part B: Common Raven |
-|--------|---------------------|---------------------|
-| Genre | Electronic Pop (Genre Stage 82, eighty-second genre stage, dream-pop-influenced electronic pop, distinct from Electronic/R&B 99, Indie Electronic 96-98, Electronic 95, eleventh electronic entry in fifteen degrees) | -- |
-| Energy | E=4 (warm nostalgic flowing golden intimate bedroom-scale dream-pop-influenced) | E=4 (loud carrying deep cronk resonant, 30+ call types create vocal presence beyond raw volume, persistent year-round, not extreme volume like cicada E=5, gravitas of large intelligent bird) |
-| Label | Self-released / various | -- |
-| Family | -- | 49th family (NEW, Corvidae, crows ravens jays magpies, connects to Steller's Jay degree 53) |
-| Order | -- | Passeriformes (largest order of birds ~6,500 species, raven is largest passerine on Earth) |
-| Class | -- | Aves (RETURNS! Last bird degree 60, 40-degree gap, birds come home at centennial) |
-| Acoustic Element | the nostalgic cascade (101st, cascading synth pads glistening arpeggios soft vocals warm reverb golden tonality flowing layered, distinct from bilingual warmth 99 cultural fusion and retro-synthetic shimmer 98 static nostalgia and euphoric build 95 cinematic escalating) | deep cronk + bell + hollow knock + mimicry (100th species-side, 30+ call types most complex vocal repertoire in animal kingdom, deep cronk 200-800 Hz bell-like tones hollow knocks gargling screams soft warbles mimicry, distinct from mechanical click 99 brief percussive and pure sustained trill 98 crystalline sinusoidal) |
-| Artist-City Pattern | The Transatlantic Dreamer (101st, dual-continent Swedish-born Seattle-connected cross-pollination Scandinavian melodicism meets PNW electronic texture, distinct from diasporic synthesist 99 inter-American and self-released synthesist 98 single city) | -- |
-| Structural Firsts | GENRE STAGE 82 (Electronic Pop), THE NOSTALGIC CASCADE 101st acoustic element (flowing cascading golden electronic textures), THE TRANSATLANTIC DREAMER 101st artist-city pattern (transatlantic bridge Sweden-Seattle), THE CENTENNIAL (100th degree), ELEVENTH ELECTRONIC ENTRY IN FIFTEEN DEGREES, TRANSATLANTIC CONNECTION | **THE CENTENNIAL TRIPLE CONVERGENCE:** (1) NEW FAMILY (49th Corvidae, connects to Steller's Jay 53), (2) AVES RETURNS (after 40 degrees, last bird degree 60), (3) CENTENNIAL (100th degree 27.8% of 360), MOST COMPLEX VOCAL REPERTOIRE (30+ call types), MOST INTELLIGENT SPECIES IN ENGINE (tool use problem-solving future planning causal reasoning play cultural transmission), LARGEST PASSERINE ON EARTH, FORTIETH CONSECUTIVE ORIGINAL CSV -- FOUR DECADES, THE RAVEN MUSE CONNECTION |
+|--------|----------------------|----------------------|
+| Genre | **Electronic Pop** (Genre Stage 82 MILESTONE, eighty-second genre stage in one hundred degrees, dream-pop-influenced electronic pop, warm synth textures arpeggiated sequences nostalgic melodies soft vocal delivery golden sun-drenched aesthetic, distinct from Electronic/R&B 99 cultural fusion and Indie Electronic 96-98 retro-electronic and Electronic 95 cinematic festival-scale) | — |
+| Energy | **E=4** (warm nostalgic flowing golden intimate bedroom-scale dream-pop-influenced, moderate sustained warmth filling the room never confrontational never euphoric) | **E=4** (loud carrying deep cronk resonant 200-800 Hz, 30+ call types create vocal presence beyond raw volume, persistent year-round, not extreme volume like cicada E=5, the gravitas of a large intelligent bird) |
+| Label | **Self-released / various** (diffuse distribution across Swedish and US indie channels, dual-continent release context) | — |
+| Family | — | **Corvidae** (NEW FAMILY 49th, crows ravens jays magpies, connects to Steller's Jay degree 53 same family 47 degrees apart, the full declaration of corvids after the Jay's introduction) |
+| Order | — | **Passeriformes** (largest order of birds ~6,500 species worldwide, Common Raven is the largest passerine on Earth) |
+| Class | — | **Aves** (RETURNS! Last bird Pied-billed Grebe degree 60, 40-degree gap, 39 consecutive non-bird degrees across Mammalia Amphibia and Insecta, birds come home at the centennial) |
+| Acoustic Element | **the nostalgic cascade** (101st artist-side, cascading synth pads glistening arpeggios soft vocal melodies warm reverb golden tonality flowing layered always in motion, distinct from bilingual warmth 99 cultural fusion and retro-synthetic shimmer 98 static nostalgia and euphoric build 95 cinematic escalating) | **deep cronk + bell + hollow knock + mimicry** (100th species-side, 30+ distinct call types most complex vocal repertoire in the animal kingdom, deep cronk 200-800 Hz bell-like tones hollow knocks gargling screams soft warbles mimicry, distinct from mechanical click 99 brief percussive impulse and pure sustained trill 98 nearly sinusoidal crystalline) |
+| Artist-City Pattern | **The Transatlantic Dreamer** (101st artist-city pattern, dual-continent Swedish-born Seattle-connected cross-pollination Scandinavian melodicism meets PNW electronic texture, distinct from Diasporic Synthesist 99 inter-American intersection and Self-Released Synthesist 98 single-city zero intermediaries) | — |
+| Structural Firsts | GENRE STAGE 82 MILESTONE (Electronic Pop eighty-second genre stage in one hundred degrees), THE NOSTALGIC CASCADE 101st acoustic element (flowing cascading golden electronic textures), THE TRANSATLANTIC DREAMER 101st artist-city pattern (transatlantic bridge Sweden-Seattle), ELEVENTH ELECTRONIC-ADJACENT ENTRY IN FIFTEEN DEGREES, TRANSATLANTIC CONNECTION (Sweden-Seattle) | **THE CENTENNIAL TRIPLE CONVERGENCE:** (1) CORVIDAE ENTERS NEW FAMILY (49th, connects to Steller's Jay degree 53), (2) AVES RETURNS after 40 degrees (last bird Pied-billed Grebe degree 60), (3) THE CENTENNIAL (100th degree, 27.8% of 360); MOST COMPLEX VOCAL REPERTOIRE IN THE ANIMAL KINGDOM (30+ distinct call types); MOST INTELLIGENT SPECIES IN ENGINE (tool use problem-solving future planning causal reasoning play cultural transmission); LARGEST PASSERINE ON EARTH; FORTIETH CONSECUTIVE ORIGINAL CSV — FOUR DECADES (degrees 61-100); THE RAVEN MUSE CONNECTION |
 | Research Words | ~5,000 | ~7,000 |
 | Files Produced | 4 | 4 |
 | Cross-References | 5 | 5 |
 
-<details>
-<summary>Full Release Notes -- Click to expand</summary>
-
-## Part A: Summer Heart -- THE NOSTALGIC CASCADE (Electronic Pop, E=4, Seattle/Sweden, GENRE STAGE 82, The Nostalgic Cascade 101st Acoustic Element Flowing Golden Cascading Textures, The Transatlantic Dreamer 101st Artist-City Pattern Swedish-Born Seattle-Connected, Eleventh Electronic Entry, The Centennial)
-
-Full deep research covering Summer Heart at degree 100, the centennial, and the nostalgic cascade:
-
-### THE CENTENNIAL DEGREE: 100 ROTATIONS FROM ORIGIN
-
-Degree 100 is a **MILESTONE**. One hundred rotations from origin. **27.8% of the full 360-degree circle.** More than a quarter of the way around.
-
-What the engine has documented in 100 degrees:
-- **101 artists** from the PNW music scene.
-- **102 acoustic elements** -- distinct sonic textures cataloged.
-- **102 artist-city patterns** -- distinct artist-city relationships mapped.
-- **82 genre stages** -- distinct genre classifications.
-- The full breadth of PNW music: grunge, indie rock, folk, hip hop, jazz, soul, electronic, experimental, Latin, R&B, dream pop, post-punk, ambient, classical, and beyond.
-- From Sub Pop to self-released: the entire distribution spectrum.
-- From E=1 to E=5: the full energy spectrum from ambient whisper to arena roar.
-
-### SUMMER HEART -- Swedish-Born, Seattle-Connected
-
-**Summer Heart** is the project of **David Alexander**, a Swedish-born musician connected to the Seattle music scene. Dream-pop-influenced electronic pop -- warm synth textures, nostalgic melodies, soft vocal delivery, golden sun-drenched aesthetic.
-
-The sound: warm synth textures (layered pads and arpeggios creating rich enveloping sonic bed), dream-pop influence (reverb, atmosphere, shimmering textures), nostalgic melodies (hooks evoking longing, summer, warmth, memory -- Swedish pop melodic tradition), pop structure (verse-chorus, hooks, accessible), golden aesthetic (warm, mid-rich, sun-drenched -- summer as sonic temperature).
-
-The Swedish-PNW connection: Swedish pop melodicism (strong memorable melodies, clean production, emotional directness) meets Seattle electronic texture (reverb-heavy, atmospheric, warm). Transatlantic identity -- Nordic melancholy and Pacific warmth in synthesis.
-
-**Genre Stage 82** -- Electronic Pop. Eleventh electronic-adjacent entry in fifteen degrees. The centennial lands on electronic pop -- warm, nostalgic, international. Synthesized from multiple traditions, warm with accumulated context, looking both backward (nostalgia) and forward (the next 260 degrees).
-
-### THE NOSTALGIC CASCADE -- 101st Acoustic Element
-
-The one hundred and first acoustic element is **the nostalgic cascade** -- the flowing, layered quality of Summer Heart's electronic pop. Cascading synth textures that tumble over each other like summer memories.
-
-The sound: cascading synth pads (layered sustain sounds flowing and overlapping), glistening arpeggios (bright sparkling timbres cascading through harmonic space), soft vocal melodies (gentle warm vocals within the cascade), warm reverb (blurring edges between layers), golden tonality (warm, mid-rich, golden frequency balance).
-
-Contrasts:
-- **The bilingual warmth** (degree 99, Kaina) -- cultural fusion. The nostalgic cascade is temporal fusion (past and present merging).
-- **The retro-synthetic shimmer** (degree 98, Gold Casio) -- static nostalgia, vintage reference. The nostalgic cascade is flowing nostalgia, always in motion.
-- **The euphoric build** (degree 95, ODESZA) -- cinematic, escalating, climactic. The nostalgic cascade is flowing, ambient, contemplative.
-
-### THE TRANSATLANTIC DREAMER -- 101st Artist-City Pattern
-
-The one hundred and first artist-city pattern is **the transatlantic dreamer** -- an artist operating across the Atlantic, rooted in one continent, connected to another, with music that carries both.
-
-1. **Dual-continent identity** -- Swedish-born, Seattle-connected.
-2. **Cross-pollination** -- Swedish melodic tradition and Seattle electronic texture combine into something neither continent produces alone.
-3. **The bridge as identity** -- not "Swedish artist in Seattle" or "Seattle artist from Sweden" but both simultaneously.
-
-International connections in the engine: Y La Bamba (61, Latin heritage), Briana Marela (72, international experimental), Kaina (99, Guatemalan-Venezuelan), Summer Heart (100, Swedish). Four international connections in 100 degrees.
-
-### CROSS-REFERENCES (Part A)
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| S36-095 | Summer Heart (100) | ODESZA (95) | ELECTRONIC POP SPECTRUM. ODESZA is cinematic, festival-scale (E=5, Counter Records). Summer Heart is intimate, bedroom-scale (E=4). Arena to bedroom, cinematic to nostalgic. |
-| S36-093 | Summer Heart (100) | NAVVI (93) | DREAM POP PARALLEL. NAVVI is dark, nocturnal, reverb-as-architecture. Summer Heart is warm, golden, nostalgia-as-cascade. Both atmospheric, radically different emotional temperatures. |
-| S36-096 | Summer Heart (100) | STRFKR (96) | ELECTRONIC POP CONTRAST. STRFKR is driving, punk-inflected. Summer Heart is flowing, dream-pop-inflected. Same broad genre, different engines. |
-| S36-072 | Summer Heart (100) | Briana Marela (72) | INTERNATIONAL CONNECTION. Both international connections. Briana Marela's ethereal sound connects to global experimental networks. Summer Heart bridges Sweden and Seattle. |
-| S36-077 | Summer Heart (100) | Mree (77) | ETHEREAL POP PARALLEL. Both gentle, warm pop sensibilities. Mree is acoustic-rooted. Summer Heart is electronic-rooted. Different instruments, similar emotional landscapes. |
-
----
-
-## Part B: Common Raven (*Corvus corax*) -- THE CENTENNIAL TRIPLE CONVERGENCE (CORVIDAE NEW FAMILY 49th, AVES RETURNS After 40 Degrees, THE CENTENNIAL 100th Degree, Deep Cronk + Bell + Hollow Knock + Mimicry 30+ Call Types Most Complex Vocal Repertoire, Most Intelligent Species in Engine, Largest Passerine, E=4, Fortieth Consecutive Original CSV FOUR DECADES, The Raven Muse Connection)
-
-Full deep research covering the Common Raven, the centennial triple convergence, and the most complex voice in the animal kingdom:
-
-### THE CENTENNIAL TRIPLE CONVERGENCE
-
-Three converging structural events at degree 100:
-
-**1. CORVIDAE ENTERS -- NEW FAMILY (49th).**
-
-The corvids -- crows, ravens, jays, magpies -- one of the most intelligent families in the animal kingdom. The Steller's Jay at degree 53 was the first corvid. The raven returns to Corvidae after 47 degrees. The Jay introduced the corvids with bold colors and loud calls. The Raven declares Corvidae as an intelligent, complex, commanding presence.
-
-| Degree | Species | Family | Role |
-|---|---|---|---|
-| 53 | Steller's Jay | Corvidae | Introduction. Bright, loud, forest sentinel. |
-| **100** | **Common Raven** | **Corvidae** | **Full declaration. Deep, complex, intelligent. Centennial.** |
-
-Classification:
-- **Kingdom:** Animalia
-- **Phylum:** Chordata
-- **Class:** Aves -- RETURNS (last at degree 60)
-- **Order:** Passeriformes (largest order of birds, ~6,500 species)
-- **Family:** Corvidae -- NEW FAMILY (49th)
-- **Genus:** *Corvus*
-- **Species:** *C. corax* (Common Raven)
-
-**2. AVES RETURNS -- after 40 degrees.**
-
-| Degrees | Class | Representatives |
-|---|---|---|
-| 0-60 | Aves (primarily) | Northern Spotted Owl, Great Blue Heron, Bald Eagle, Steller's Jay, ... Pied-billed Grebe (60) |
-| 61-85 | Mammalia | Elk, Beaver, Orca, Red Fox, Black Bear, Raccoon, ... |
-| 87-89, 91, 94-95, 98-99 | Insecta | Cricket, Katydid, Cicada, Mosquito, Stonefly, Mayfly, Tree Cricket, Click Beetle |
-| 86, 90, 96-97 | Amphibia | Pacific Treefrog, Spring Peeper, Wood Frog, Toad |
-| **100** | **Aves (RETURNS!)** | **Common Raven** |
-
-After traversing mammals, amphibians, and insects, **Aves returns at the centennial**. The raven -- intelligent, vocal, commanding -- brings birds back.
-
-**3. THE CENTENNIAL -- 100th degree, 27.8% of 360.** Fortieth consecutive original CSV species -- **FOUR DECADES** of original species.
-
-### THE COMMON RAVEN -- Intelligence, Voice, Culture
-
-The Common Raven is the **largest passerine** on Earth. 54-67 cm body length. 115-150 cm wingspan. Entirely black with iridescent purple-blue-green sheen. Wedge-shaped tail (diagnostic). Shaggy hackle feathers. One of the most widely distributed birds on Earth.
-
-**Intelligence -- A Cognitive Peer:**
-- **Tool use and manufacture** -- sticks, leaves, bent wire to create hooks.
-- **Problem-solving** -- multi-step puzzles requiring planning and sequential reasoning.
-- **Future planning** -- cache management with awareness of what others have seen.
-- **Causal reasoning** -- inferring unseen causes from auditory evidence.
-- **Play behavior** -- aerial acrobatics, sliding down snowy slopes, object manipulation.
-- **Social cognition** -- theory of mind, tactical deception, strategic alliances.
-- **Cultural transmission** -- vocal dialects, novel techniques passing between individuals and generations.
-
-### THE SOUND: DEEP CRONK + BELL + HOLLOW KNOCK -- 100th Species-Side Acoustic Element
-
-Over **30 distinct call types** -- the most complex vocal repertoire in the engine:
-
-- **Deep cronk** -- low-pitched, resonant, 200-800 Hz, carries long distances. Much deeper than crow's "caw."
-- **Bell-like tones** -- clear, ringing, metallic. Surprisingly musical. Used in pair-bonding.
-- **Hollow knocks** -- wooden, percussive. Produced vocally through rapid laryngeal modulation.
-- **Gargling** -- complex, multi-tonal, rapid succession of tones. Deeply social.
-- **Screams** -- high-pitched alarm calls. Sharp, piercing, carrying.
-- **Soft warbles** -- intimate, quiet, musical murmuring between pair-bonded ravens.
-- **Mimicry** -- learned reproduction of other species' calls, environmental sounds, human speech. Cultural acquisition.
-
-**Why E=4:** Loud and carrying (deep cronk audible at several hundred meters). Not extreme volume (not cicada E=5 or bugling elk E=5). Vocal complexity adds presence -- 30+ call types create impact beyond raw volume. Persistent year-round. The deep cronk has the gravitas of a large, intelligent bird.
-
-Contrasts:
-- **Steller's Jay** (53, Corvidae) -- loud, versatile but simpler (10-15 call types). Same family, different vocal scale.
-- **Northern Spotted Owl** (4) -- quiet, resonant hooting. Nocturnal/subtle vs diurnal/commanding.
-- **Click beetle** (99) -- mechanical, percussive, brief, E=2. The contrast between simplest and most complex sound in recent degrees.
-- **Tree cricket** (98) -- pure, sustained, single tone, E=3. Purity vs complexity.
-
-### ECOLOGY: Open Forest, Intelligence, and Cultural Life
-
-**Habitat:** Open forest -- mountain ridges, old-growth forest, coastal cliffs, urban edges. In the PNW, found from sea level to alpine zones. Adaptability is a function of intelligence.
-
-**The raven's cultural life:** Lifelong pair bonds with elaborate vocal exchanges. Play -- aerial acrobatics, sliding, object manipulation. Teaching -- vocal elements and behaviors transmitted culturally. Funerals -- gathering around dead ravens. Deception -- tactical food-hiding strategies.
-
-**The raven in PNW culture:** Raven as Trickster -- central figure in PNW Indigenous mythology. Raven as Creator. Raven as Intelligence. The raven is not just a species. It is a cultural force.
-
-**The Raven Muse Connection:** The raven is personally significant to the project -- it connects to the Raven muse. At degree 100, the Raven arrives.
-
-### STRUCTURAL EVENTS SUMMARY
-
-1. **CORVIDAE enters** -- 49th family (NEW). Connects to Steller's Jay (53). Corvid apex.
-2. **AVES RETURNS** -- after 40 degrees. Birds come home at the centennial.
-3. **Deep cronk + bell + hollow knock** -- 100th species-side acoustic element. 30+ call types. Most complex vocal repertoire.
-4. **Intelligence** -- tool use, problem-solving, future planning, play, cultural transmission.
-5. **THE CENTENNIAL** -- 100th degree. 27.8% of 360. 49 families. 4 classes. 17+ orders.
-6. **FORTIETH CONSECUTIVE ORIGINAL CSV -- FOUR DECADES.**
-7. **The Raven Muse Connection.**
-
-### CROSS-REFERENCES (Part B)
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| SPS-053 | Common Raven (100) | Steller's Jay (53) | SAME FAMILY CORVIDAE! First corvid at 53, full declaration at 100. Jay is bright and direct; Raven is deep and complex. Both intelligent, both vocal, both forest birds. 47 degrees apart. |
-| SPS-004 | Common Raven (100) | Northern Spotted Owl (4) | INTELLIGENCE AND OLD FOREST. Both intelligent birds of old-growth habitat. Owl hunts silently at night (E=3). Raven vocalizes boldly in daylight (E=4). Complementary presences. |
-| SPS-071 | Common Raven (100) | Red Fox (71) | INTELLIGENCE PARALLEL. Both among the most intelligent animals in the engine. Canidae intelligence vs Corvidae intelligence. Different phyla, convergent cognitive sophistication. |
-| SPS-070 | Common Raven (100) | Raccoon (70) | INTELLIGENCE AND DEXTERITY. Both problem-solvers. Raccoon with manual dexterity; raven with beak and cognition. Both urban-adaptable. |
-| SPS-014 | Common Raven (100) | Great Blue Heron (14) | AVES RETURNS -- LARGE COMMANDING BIRDS. Both large, commanding, unforgettable voices. Heron's croak at degree 14. Raven's 30+ call repertoire at degree 100. Aves bookends. |
-
----
-
-## Parallel: Summer Heart x Common Raven -- The Cascade and the Cronk (THE CENTENNIAL)
-
-The nostalgic cascade and the deep cronk. Electronic warmth and biological intelligence. The centennial.
-
-**1. Both Complex, Layered Voices** -- Summer Heart's nostalgic cascade layers synth textures -- cascading pads, arpeggios, vocals, reverb. The raven's vocal repertoire layers 30+ call types -- cronk, bell, knock, gargle, scream, warble, mimicry. Electronic cascading and biological vocal orchestra. Both at the centennial.
-
-**2. Both E=4 -- Matched Energy at the Centennial** -- Summer Heart's warm electronic pop at moderate intensity. The raven's commanding vocal presence at moderate-to-high. Both E=4. The centennial lands at matched energy on both sides. Warmth and gravitas.
-
-**3. Both International** -- Summer Heart bridges Sweden and Seattle -- transatlantic. The Common Raven is one of the most widely distributed birds on Earth -- circumpolar across the entire Northern Hemisphere. Both transcend geographic boundaries. The artist crosses the Atlantic; the raven spans the hemisphere.
-
-**4. The Simplest and Most Complex** -- In recent degrees, the species side has moved from the purest tone (tree cricket 98, nearly sinusoidal) through the briefest snap (click beetle 99, <10ms) to the most complex voice (raven 100, 30+ call types). The centennial delivers maximum vocal complexity. The engine's most intelligent voice arrives at its most significant degree.
-
-**5. The Raven at 100** -- The raven is personally significant. Raven as muse. Raven as intelligence. Raven as creator. At the centennial, the Raven arrives. Aves returns. Corvidae enters. The most complex voice speaks. The engine is more than a quarter of the way home.
-
----
-
-## Acoustic Progression (101 elements)
-
-| # | Element | Degree | Artist/Species |
-|---|---------|--------|----------------|
-| 0 | silence | 0 | Quincy Jones |
-| 1 | cascade | 1 | Bill Frisell |
-| 2 | drone | 2 | Wayne Horvitz |
-| 3 | language | 3 | Ernestine Anderson |
-| 4 | motif | 4 | Floyd Standifer |
-| 5 | metronome | 5 | Overton Berry |
-| 6 | question | 6 | Patti Bown |
-| 7 | harmonic spiral | 7 | Julian Priester |
-| 8 | ultrasonic threshold | 8 | Gary Peacock |
-| 9 | variation | 9 | Hadley Caliman |
-| 10 | minimum signal | 10 | Bud Shank |
-| 11 | trill/tremolo | 11 | Joe Brazil |
-| 12 | sawtooth sweep | 12 | Don Lanphere |
-| 13 | ostinato | 13 | Marc Seales |
-| 14 | repetition-resolution | 14 | Aaron Parks |
-| 15 | accelerando | 15 | Thomas Marriott |
-| 16 | crescendo | 16 | Jeff Lorber |
-| 17 | the hook | 17 | Reggie Watts |
-| 18 | ascending spiral | 18 | Maktub |
-| 19 | descending spiral | 19 | Fly Moon Royale |
-| 20 | sustain/the release | 20 | Whitney Monge |
-| 21 | the hammer | 21 | Polyrhythmics |
-| 22 | resonant percussion/groove reset | 22 | Foxy Apollo |
-| 23 | the testimony/groove reset | 23 | Allen Stone |
-| 24 | the invocation | 24 | Ron Artis II |
-| 25 | the congregation | 25 | Black Stax |
-| 26 | the caroling | 26 | Shaina Shepherd |
-| 27 | the liquid gurgle | 27 | The Dynamics |
-| 28 | the liquid twitter | 28 | Night Owls |
-| 29 | the rough brrit | 29 | Boogaloo Joe Jones |
-| 30 | the liquid warble synthesis | 30 | Ray Charles |
-| 31 | the whisper | 31 | Brenda Lee Eager |
-| 32 | the buzz | 32 | Luther Rabb |
-| 33 | the cadenza | 33 | Larry English |
-| 34 | the dialect | 34 | The Tempos |
-| 35 | the thrum | 35 | Robert Cray |
-| 36 | the sonic boom | 36 | Jimi Hendrix |
-| 37 | the filament | 37 | Ayron Jones |
-| 38 | the drawl | 38 | Booker T. Jones |
-| 39 | the canopy buzz | 39 | Ron Artis Jr |
-| 40 | the thinning | 40 | Alice Smith |
-| 41 | the partition | 41 | Shawn Smith |
-| 42 | the shimmer | 42 | Erica Campbell |
-| 43 | the radiance | 43 | Ann Wilson |
-| 44 | the grain | 44 | Chong the Nomad |
-| 45 | the murmur | 45 | Damien Jurado |
-| 46 | the confessional | 46 | Rocky Votolato |
-| 47 | the parable tone | 47 | Pedro the Lion |
-| 48 | the held rest | 48 | Sera Cahoone |
-| 49 | the lullaby subversion | 49 | Kimya Dawson |
-| 50 | the intimate architecture | 50 | Mirah |
-| 51 | the communal harmony | 51 | Grand Archives |
-| 52 | the testimony roar | 52 | Brandi Carlile |
-| 53 | the cathedral harmony | 53 | Fleet Foxes |
-| 54 | the fraternal jangle | 54 | Ivan & Alyosha |
-| 55 | the ember glow | 55 | Shelby Earl |
-| 56 | the dream haze | 56 | Lemolo |
-| 57 | the rattle / the stream rattle | 57 | Laura Gibson / Belted Kingfisher |
-| 58 | the ache / the pond whistle | 58 | Death Cab for Cutie / Wood Duck |
-| 59 | the digression / the quack | 59 | The Long Winters / Mallard |
-| 60 | the bare wire / the submerge call | 60 | Ben Gibbard (solo) / Pied-billed Grebe |
-| 61 | the braided voice / the tail slap | 61 | Y La Bamba / American Beaver |
-| 62 | the throwback / the rhythmic gnaw | 62 | Pickwick / Beaver Chewing |
-| 63 | the FM sheen / the chuff | 63 | Kenny Loggins / River Otter |
-| 64 | the dusk / the chitter | 64 | Jesse Sykes / Mink |
-| 65 | the open plain / the chuckle-chatter | 65 | Philip Aaberg / American Marten |
-| 66 | the country thunder / the scream | 66 | Neko Case / Fisher |
-| 67 | the clean room / the shrill bark-chitter | 67 | Chris Walla / Short-tailed Weasel |
-| 68 | the hush / the rapid chattering chirp | 68 | Sam Beam / Long-tailed Weasel |
-| 69 | the earnest voice / the warning foot-stamp hiss | 69 | Kris Orlowski / Striped Skunk |
-| 70 | the fiddle line / the churring chittering young | 70 | Horse Feathers / Raccoon |
-| 71 | the room tone / the bark screaming vixen call | 71 | Phil Elverum / Red Fox |
-| 72 | the layered loop / the low hiss click | 72 | Briana Marela / Opossum |
-| 73 | the jangle / the thump squeal | 73 | LAKE / Snowshoe Hare |
-| 74 | the reverb wash / the high sharp eenk bark | 74 | Poor Moon / American Pika |
-| 75 | the anthem / the piercing whistle alarm | 75 | The Lonely Forest / Yellow-bellied Marmot |
-| 76 | the androgynous register / the loud penetrating whistle | 76 | Chris Pureka / Hoary Marmot |
-| 77 | the ethereal layering / the musical multi-note whistle | 77 | Mree / Olympic Marmot |
-| 78 | the communal jangle / the chirping trill alarm | 78 | Acid Tongue / Townsend's Ground Squirrel |
-| 79 | the cinematic stillness / the sharp chip alarm | 79 | Jesse Marchant / Golden-mantled Ground Squirrel |
-| 80 | the organ explosion / the loud scolding chatter rattle | 80 | Mates of State / Douglas Squirrel |
-| 81 | the Broadway voice / the bark + chatter alarm | 81 | Sara Bareilles / Eastern Fox Squirrel |
-| 82 | the acoustic intimacy / the high thin tseet | 82 | Death Cab for Cutie (acoustic) / Northern Flying Squirrel |
-| 83 | the grunge whisper / the ultrasonic + soft chip | 83 | Pearl Jam (acoustic) / Deer Mouse |
-| 84 | the late whisper / the chatter + twig gnaw | 84 | Damien Jurado (late career) / Bushy-tailed Woodrat |
-| 85 | the stripped confession / the quiet plop | 85 | Rocky Votolato (acoustic) / Muskrat |
-| 86 | the electronic pulse / the amplified krek-krek wall of sound | 86 | The Postal Service / Pacific Treefrog |
-| 87 | the emerging twang / the rhythmic chirp field chorus | 87 | Neko Case (early folk) / Cricket Chorus |
-| 88 | the bedroom strum / the continuous electric buzz | 88 | Kimya Dawson (solo) / Katydid |
-| 89 | the baroque whisper / the electric buzzing throb | 89 | Parenthetical Girls / Cicada |
-| 90 | the ambient drift / the bell-like peep chorus | 90 | Sky Cries Mary / Spring Peeper-Like Chorus |
-| 91 | the sustained crush / the ultra-thin hum cloud | 91 | Hovercraft / Mosquito Swarm |
-| 92 | the global weave / the deep resonant buzz | 92 | Trance Mission / Bumblebee Drone |
-| 93 | the shimmer veil / the aggressive papery hum | 93 | NAVVI / Hornet Nest Buzz |
-| 94 | the producer's palette / the wing rustle on stream surface | 94 | Erik Blood / Stonefly Hatch |
-| 95 | the euphoric build / the mass wing buzz over water | 95 | ODESZA / Mayfly Emergence |
-| 96 | the synth-pop pulse / the duck-like clucking chorus | 96 | STRFKR / Wood Frog |
-| 97 | the algorithmic tenderness / the sustained musical purring | 97 | The Postal Service (electronic) / Toad Chorus |
-| 98 | the retro-synthetic shimmer / the pure sustained trill | 98 | Gold Casio / Tree Cricket Song |
-| 99 | the bilingual warmth / the mechanical click | 99 | Kaina / Click Beetle |
-| **100** | **the nostalgic cascade / the deep cronk + bell + hollow knock** | **100** | **Summer Heart / Common Raven** |
-
-The acoustic progression adds degree 100 -- THE CENTENNIAL. On the artist side, the nostalgic cascade (100) is Summer Heart -- cascading synth pads, glistening arpeggios, soft vocal melodies, warm reverb, golden tonality, flowing and layered. E=4. From the bilingual warmth (99, cultural fusion, bilingual, present-focused, E=4) to the nostalgic cascade (100, temporal fusion, flowing, past-and-present merging, E=4). From cultural intersection to temporal intersection -- both fusion, different dimensions. Kaina fuses cultures; Summer Heart fuses time periods. The centennial artist is the transatlantic dreamer, looking both backward and forward. On the species side, the deep cronk + bell + hollow knock (100) is the Common Raven -- 30+ call types, the most complex vocal repertoire in the animal kingdom. E=4. From the mechanical click (99, click beetle, brief percussive impulse <10ms, E=2) to the deep cronk + bell + hollow knock (100, raven, 30+ sustained complex calls, E=4). From the simplest to the most complex. From a single brief snap to thirty distinct voices. From non-communicative escape to cultural transmission. From Coleoptera to Corvidae. From the newest insect order to the return of Aves. The centennial species is the most intelligent, most vocal, most complex entry in the engine.
-
-## Artist-City Patterns (101 patterns)
-
-| # | Pattern | Degree | Artist |
-|---|---------|--------|--------|
-| 0 | Export | 0 | Quincy Jones |
-| 1 | Draw | 1 | Bill Frisell |
-| 2 | European Exile | 2 | Wayne Horvitz |
-| 3 | The Stay | 3 | Ernestine Anderson |
-| 4 | The Teacher | 4 | Floyd Standifer |
-| 5 | The Persistence | 5 | Overton Berry |
-| 6 | The Erasure | 6 | Patti Bown |
-| 7 | Pedagogue-Draw | 7 | Julian Priester |
-| 8 | The Quiet Draw | 8 | Gary Peacock |
-| 9 | The Seeker | 9 | Hadley Caliman |
-| 10 | Late Homestead | 10 | Bud Shank |
-| 11 | The Salon Keeper | 11 | Joe Brazil |
-| 12 | The Prodigal | 12 | Don Lanphere |
-| 13 | Institutional Anchor | 13 | Marc Seales |
-| 14 | Prodigy-Export | 14 | Aaron Parks |
-| 15 | Builder-Stayer | 15 | Thomas Marriott |
-| 16 | Talent Incubator | 16 | Jeff Lorber |
-| 17 | The Uncategorizable | 17 | Reggie Watts |
-| 18 | The Workshop | 18 | Maktub |
-| 19 | The New Root | 19 | Fly Moon Royale |
-| 20 | The Street Laureate | 20 | Whitney Monge |
-| 21 | The Ensemble Anchor | 21 | Polyrhythmics |
-| 22 | The Inheritor | 22 | Foxy Apollo |
-| 23 | The Rural Draw | 23 | Allen Stone |
-| 24 | The Island Export | 24 | Ron Artis II |
-| 25 | The Cultural Guardian | 25 | Black Stax |
-| 26 | The Transmuter | 26 | Shaina Shepherd |
-| 27 | The Conduit | 27 | The Dynamics |
-| 28 | The Resident Band | 28 | Night Owls |
-| 29 | The Catalog | 29 | Boogaloo Joe Jones |
-| 30 | The Incubation | 30 | Ray Charles |
-| 31 | The Relay | 31 | Brenda Lee Eager |
-| 32 | The Foundation | 32 | Luther Rabb |
-| 33 | The Unrecorded | 33 | Larry English |
-| 34 | The Shadow Name | 34 | The Tempos |
-| 35 | The Deep Root | 35 | Robert Cray |
-| 36 | The Supernova | 36 | Jimi Hendrix |
-| 37 | The Inheritor | 37 | Ayron Jones |
-| 38 | The Touring Anchor | 38 | Booker T. Jones |
-| 39 | The Returning Wave | 39 | Ron Artis Jr |
-| 40 | The Cultural Satellite | 40 | Alice Smith |
-| 41 | The Scene Native | 41 | Shawn Smith |
-| 42 | The Gospel Export | 42 | Erica Campbell |
-| 43 | The Arena Architect | 43 | Ann Wilson |
-| 44 | The Digital Immigrant | 44 | Chong the Nomad |
-| 45 | The Stripped Murmur | 45 | Damien Jurado |
-| 46 | The Confessional Drifter | 46 | Rocky Votolato |
-| 47 | The Sacred Baritone | 47 | Pedro the Lion |
-| 48 | The Campfire Anchor | 48 | Sera Cahoone |
-| 49 | The Trojan Lullabist | 49 | Kimya Dawson |
-| 50 | The Intimate Architect | 50 | Mirah |
-| 51 | The Folk Organism | 51 | Grand Archives |
-| 52 | The Arena Breakout | 52 | Brandi Carlile |
-| 53 | The Prodigy Return | 53 | Fleet Foxes |
-| 54 | The Neighborhood Anchor | 54 | Ivan & Alyosha |
-| 55 | The Infrastructure Beneficiary | 55 | Shelby Earl |
-| 56 | The Duo Collective | 56 | Lemolo |
-| 57 | The Label Bridge | 57 | Laura Gibson |
-| 58 | The Bellingham Ascent | 58 | Death Cab for Cutie |
-| 59 | The Scene Intellectual | 59 | The Long Winters |
-| 60 | The Frontman Alone | 60 | Ben Gibbard (solo) |
-| 61 | The Corridor Bridge | 61 | Y La Bamba |
-| 62 | The Brief Blaze | 62 | Pickwick |
-| 63 | The Everett Departure | 63 | Kenny Loggins |
-| 64 | The Dark-Folk Loner | 64 | Jesse Sykes |
-| 65 | The Montana Connection | 65 | Philip Aaberg |
-| 66 | The Wanderer Who Claims Multiple Cities | 66 | Neko Case |
-| 67 | The Departed Member | 67 | Chris Walla |
-| 68 | The Visiting Artist | 68 | Sam Beam |
-| 69 | The Working Musician | 69 | Kris Orlowski |
-| 70 | The Corridor Wanderer | 70 | Horse Feathers |
-| 71 | The Anacortes Hermit | 71 | Phil Elverum |
-| 72 | The International Student | 72 | Briana Marela |
-| 73 | The K Records Collective | 73 | LAKE |
-| 74 | The Side Project | 74 | Poor Moon |
-| 75 | The Second Anacortes Act | 75 | The Lonely Forest |
-| 76 | The Identity Artist | 76 | Chris Pureka |
-| 77 | The YouTube-to-Artist Pipeline | 77 | Mree |
-| 78 | The Porch Party | 78 | Acid Tongue |
-| 79 | The Dark Meditation | 79 | Jesse Marchant |
-| 80 | The Married Duo | 80 | Mates of State |
-| 81 | The Crossover Arc | 81 | Sara Bareilles |
-| 82 | The Recursive Return | 82 | Death Cab for Cutie (acoustic) |
-| 83 | The Arena Unplugged | 83 | Pearl Jam (acoustic) |
-| 84 | The Artist Arc | 84 | Damien Jurado (late career) |
-| 85 | The Confessional Return | 85 | Rocky Votolato (acoustic) |
-| 86 | The Side Project | 86 | The Postal Service |
-| 87 | The Early Chapter | 87 | Neko Case (early folk) |
-| 88 | The Solo Distillation | 88 | Kimya Dawson (solo) |
-| 89 | The Theatrical Outsider | 89 | Parenthetical Girls |
-| 90 | The Parallel Scene | 90 | Sky Cries Mary |
-| 91 | The Spousal Satellite | 91 | Hovercraft |
-| 92 | The Cross-Pollinator | 92 | Trance Mission |
-| 93 | The Intimate Machine | 93 | NAVVI |
-| 94 | The Cross-Genre Bridge | 94 | Erik Blood |
-| 95 | The Bellingham Pipeline | 95 | ODESZA |
-| 96 | The DIY Maximalist | 96 | STRFKR |
-| 97 | The Re-Contextualized Return | 97 | The Postal Service (electronic) |
-| 98 | The Self-Released Synthesist | 98 | Gold Casio |
-| 99 | The Diasporic Synthesist | 99 | Kaina |
-| **100** | **The Transatlantic Dreamer** | **100** | **Summer Heart** |
-
-One hundred and one named patterns across one hundred and one degrees. The centennial. The Transatlantic Dreamer (100) describes the artist who bridges continents -- Swedish-born, Seattle-connected, with music that carries both. From the Diasporic Synthesist (99, multiple cities, heritages, languages, intersection as origin) to the Transatlantic Dreamer (100, dual-continent, cross-pollination, the Atlantic as connection). The progression from 98 to 99 to 100: the self-released synthesist (zero intermediaries), the diasporic synthesist (intersection as origin), the transatlantic dreamer (continental bridge). Three patterns about spanning distance -- from zero distribution distance (98) to inter-American distance (99) to transatlantic distance (100). The scale expands with the degree count.
-
-## Genre Evolution (82 stages)
-
-| Stage | Degree | Genre | Artist |
-|-------|--------|-------|--------|
-| 27 | 45 | Folk | Damien Jurado |
-| 28 | 46 | Folk | Rocky Votolato |
-| 29 | 47 | Indie Folk | Pedro the Lion |
-| 30 | 48 | Folk | Sera Cahoone |
-| 31 | 49 | Folk Punk | Kimya Dawson |
-| 32 | 50 | Indie Folk | Mirah |
-| 33 | 51 | Indie Folk | Grand Archives |
-| 34 | 52 | Folk/Rock | Brandi Carlile |
-| 35 | 53 | Indie Folk | Fleet Foxes |
-| 36 | 54 | Folk | Ivan & Alyosha |
-| 37 | 55 | Singer-Songwriter | Shelby Earl |
-| 38 | 56 | Indie Folk | Lemolo |
-| 39 | 57 | Folk | Laura Gibson |
-| 40 | 58 | Indie Rock | Death Cab for Cutie |
-| 41 | 59 | Indie Rock | The Long Winters |
-| 42 | 60 | Folk | Ben Gibbard (solo) |
-| 43 | 61 | Folk/Indie | Y La Bamba |
-| 44 | 62 | Indie/Folk | Pickwick |
-| 45 | 63 | Soft Rock/Folk | Kenny Loggins |
-| 46 | 64 | Folk | Jesse Sykes |
-| 47 | 65 | New Age/Folk | Philip Aaberg |
-| 48 | 66 | Alt Country | Neko Case |
-| 49 | 67 | Indie/Folk | Chris Walla |
-| 50 | 68 | Folk | Sam Beam |
-| 51 | 69 | Singer-Songwriter | Kris Orlowski |
-| 52 | 70 | Indie Folk | Horse Feathers |
-| 53 | 71 | Indie/Folk | Phil Elverum |
-| 54 | 72 | Art Pop | Briana Marela |
-| 55 | 73 | Indie Pop | LAKE |
-| 56 | 74 | Indie Folk/Rock | Poor Moon |
-| 57 | 75 | Indie Pop | The Lonely Forest |
-| 58 | 76 | Folk | Chris Pureka |
-| 59 | 77 | Folk/Pop | Mree |
-| 60 | 78 | Folk/Indie | Acid Tongue |
-| 61 | 79 | Folk | Jesse Marchant |
-| 62 | 80 | Indie Pop | Mates of State |
-| 63 | 81 | Pop/Soul | Sara Bareilles |
-| 64 | 82 | Indie Folk | Death Cab for Cutie (acoustic) |
-| 65 | 83 | Acoustic Rock | Pearl Jam (acoustic) |
-| 66 | 84 | Folk | Damien Jurado (late career) |
-| 67 | 85 | Folk | Rocky Votolato (acoustic) |
-| 68 | 86 | Indie Electronic | The Postal Service |
-| 69 | 87 | Folk Country | Neko Case (early folk) |
-| 70 | 88 | Lo-Fi Folk | Kimya Dawson (solo) |
-| 71 | 89 | Avant-Pop | Parenthetical Girls |
-| 72 | 90 | Ethereal/Electronic | Sky Cries Mary |
-| 73 | 91 | Drone/Noise | Hovercraft |
-| 74 | 92 | World/Electronic | Trance Mission |
-| 75 | 93 | Dream Pop/Electronic | NAVVI |
-| 76 | 94 | Electronic/Experimental | Erik Blood |
-| 77 | 95 | Electronic | ODESZA |
-| 78 | 96 | Indie Electronic | STRFKR |
-| 79 | 97 | Indie Electronic | The Postal Service (electronic) |
-| 80 | 98 | Indie Electronic | Gold Casio |
-| 81 | 99 | Electronic/R&B | Kaina |
-| **82** | **100** | **Electronic Pop** | **Summer Heart** |
-
-Genre Stage 82 -- Electronic Pop at degree 100. THE CENTENNIAL. Eighty-two genre stages in 100 degrees (0.82 per degree). **Electronic Pop** returns -- the genre first appeared at degree 86 (The Postal Service). Summer Heart's Electronic Pop is dream-pop-influenced -- distinct from the Postal Service's glitch-electronic-pop. The centennial genre is warm, golden, international. Eleventh electronic-adjacent entry in fifteen degrees. Eleven of fifteen genre stages since degree 86 have been electronic-inflected. The electronic era defines Quadrant II.
-
-## Energy Distribution
-
-**Artist-side (after degree 100):** E1:3 (3.0%), E2:31 (30.7%), E3:27 (26.7%), E4:26 (25.7%), E5:13 (12.9%), E6:2 (2.0%). Total: 101 (degrees 0-100, 101 entries counting origin). E=4 gains Summer Heart (100) reaching 26 deployments -- more than a quarter of all entries. The centennial is E=4. The electronic era energy remains at moderate warmth.
-
-**Species-side (after degree 100):** E=4 for Common Raven (100) after click beetle (99, E=2). The sequence since 86: E=4, E=4, E=4, E=4, E=4, E=2, E=3, E=5, E=2, E=3, E=4, E=4, E=3, E=2, E=4. Energy jumps from the quiet mechanical click (E=2) to the commanding raven voice (E=4). The centennial species arrives at E=4 -- the gravitas of the most complex voice in the engine.
-
-## Cross-References (Combined)
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| S36-095 | Summer Heart (100) | ODESZA (95) | ELECTRONIC POP SPECTRUM. Cinematic festival-scale to intimate bedroom-scale. Arena to nostalgia. |
-| S36-093 | Summer Heart (100) | NAVVI (93) | DREAM POP PARALLEL. Dark nocturnal vs warm golden. Both atmospheric, different temperatures. |
-| S36-096 | Summer Heart (100) | STRFKR (96) | ELECTRONIC POP CONTRAST. Driving punk-inflected vs flowing dream-pop-inflected. Same genre, different engines. |
-| S36-072 | Summer Heart (100) | Briana Marela (72) | INTERNATIONAL CONNECTION. Both internationally networked. Global experimental vs transatlantic pop. |
-| S36-077 | Summer Heart (100) | Mree (77) | ETHEREAL POP PARALLEL. Both gentle warm pop. Acoustic-rooted vs electronic-rooted. Similar emotions, different instruments. |
-| SPS-053 | Common Raven (100) | Steller's Jay (53) | SAME FAMILY CORVIDAE! First corvid at 53, full declaration at 100. Jay is bright; Raven is deep. 47 degrees apart. |
-| SPS-004 | Common Raven (100) | Northern Spotted Owl (4) | INTELLIGENCE AND OLD FOREST. Both intelligent old-growth birds. Nocturnal stealth vs diurnal cognition. |
-| SPS-071 | Common Raven (100) | Red Fox (71) | INTELLIGENCE PARALLEL. Canidae intelligence vs Corvidae intelligence. Convergent cognitive sophistication. |
-| SPS-070 | Common Raven (100) | Raccoon (70) | INTELLIGENCE AND DEXTERITY. Manual dexterity vs cognitive tool use. Both urban-adaptable problem-solvers. |
-| SPS-014 | Common Raven (100) | Great Blue Heron (14) | AVES RETURNS. Both large commanding birds with unforgettable voices. Heron at 14, Raven at 100. Aves bookends. |
-
-## Infrastructure
-
-**Part A:** `www/tibsfox/com/Research/S36/research/releases/100-summer-heart/` -- research.md, index.html, knowledge-nodes.json, retrospective.md
-**Part B:** `www/tibsfox/com/Research/SPS/research/releases/100-raven/` -- research.md, index.html, knowledge-nodes.json, retrospective.md
-**Release notes:** `docs/release-notes/v1.49.240/README.md`
-
-**Total: 8 files** -- standard degree package.
-
----
+## Part A: Summer Heart — The Nostalgic Cascade
+
+- **The centennial degree and the centennial artist.** **Degree 100** is a milestone — one hundred rotations from origin, 27.8% of the full 360-degree circle, more than a quarter of the way around. **Summer Heart** is the centennial artist — warm, golden, transatlantic, **dream-pop-influenced electronic pop** in the hands of a Swedish-born, **Seattle**-connected musician. The centennial lands on warmth rather than euphoria and on nostalgia rather than novelty; the **Genre Stage 82** milestone is **Electronic Pop** rather than a brand-new genre category, and the acoustic element is **the nostalgic cascade** rather than a radically new texture. The engine at its first triple-digit degree chooses warmth over spectacle.
+- **Summer Heart — Swedish-born, Seattle-connected.** The project of **David Alexander** is a **transatlantic** enterprise by construction. Scandinavian pop melodicism — strong memorable melodies, clean production, emotional directness — fuses with **Seattle's** electronic-pop texture — reverb-heavy, atmospheric, warm — to produce music that neither continent alone would produce. The sound is **warm synth textures** (layered pads and arpeggios creating a rich enveloping sonic bed), **dream-pop influence** (reverb, atmosphere, shimmering textures, song-structured), **nostalgic melodies** (hooks evoking longing, summer, warmth, memory — **Swedish pop melodic tradition**), **pop structure** (verse-chorus, accessible), and **golden aesthetic** (warm, mid-rich, sun-drenched, summer as sonic temperature).
+- **Genre Stage 82 — Electronic Pop at the centennial milestone.** The engine has now introduced eighty-two distinct genre stages across one hundred degrees — roughly 0.82 stages per degree, a remarkably stable rate held across the centennial threshold. **Electronic Pop** at degree 100 is the eleventh electronic-adjacent entry in fifteen degrees (86, 90, 91, 93, 94, 95, 96, 97, 98, 99, 100) and returns a genre first introduced by **The Postal Service** at **degree 86**. Same genre stage label, radically different dress — **Summer Heart's** dream-pop-influenced warmth is architecturally distinct from **The Postal Service's** glitch-pop structure fourteen degrees earlier.
+- **The nostalgic cascade — 101st acoustic element.** Vintage electronic pop rendered through modern production. **Cascading synth pads** sustain across layered textures; **glistening arpeggios** cascade through the harmonic space with bright sparkling timbres; **soft vocal melodies** deliver gentle warm vocals within the cascade; **warm reverb** blurs edges between layers; **golden tonality** anchors the frequency balance in warm, mid-rich, sun-drenched territory. Flowing, layered, always in motion. Distinct from the **bilingual warmth** at **degree 99** (Kaina — cultural fusion, bilingual, present-focused), distinct from the **retro-synthetic shimmer** at **degree 98** (Gold Casio — static nostalgia, vintage reference), distinct from the **euphoric build** at **degree 95** (ODESZA — cinematic, escalating, climactic), distinct from the **shimmer veil** at **degree 93** (NAVVI — reverb-as-architecture, dream pop dissolution).
+- **The Transatlantic Dreamer — 101st artist-city pattern.** An artist operating across the Atlantic, rooted in one continent, connected to another, with music that carries both. **Dual-continent identity** — Swedish-born, **Seattle**-connected. **Cross-pollination** — Swedish melodic tradition and Seattle electronic texture combine into something neither continent produces alone. **The bridge as identity** — not "Swedish artist in Seattle" or "Seattle artist from Sweden" but both simultaneously. Distinct from the **Diasporic Synthesist** at **degree 99** (Kaina — inter-American multiple cities and heritages), distinct from the **Self-Released Synthesist** at **degree 98** (Gold Casio — single-city, zero intermediaries).
+- **Four international connections in one hundred degrees.** The engine has mapped international threads at **Y La Bamba** (**degree 61**, Latin heritage), **Briana Marela** (**degree 72**, international experimental networks), **Kaina** (**degree 99**, Guatemalan-Venezuelan diaspora), and **Summer Heart** (**degree 100**, Swedish-**Seattle** transatlantic). Four international connections in one hundred degrees — the engine's global dimension now has a stable presence.
+- **E=4 — sustained moderate warmth at the centennial.** The nostalgic cascade at intimate-to-moderate intensity — never confrontational, never euphoric, just a steady golden presence filling the room. **E=4** gains **Summer Heart** to reach 26 deployments on the artist side (26% of artist entries) — a landmark count that matches the centennial's warmth-over-euphoria tone.
+- **Eleventh electronic-adjacent entry in fifteen degrees.** Degrees 86, 90, 91, 93, 94, 95, 96, 97, 98, 99, and 100 — eleven electronic-adjacent entries in the fifteen-degree window since degree 86. The **electronic era** defines **Quadrant II**. Each entry uses electronics differently: **pop structure** (The Postal Service 86), **atmosphere** (Sky Cries Mary 90), **obliteration** (Hovercraft 91), **intimacy** (NAVVI 93), **experimentation** (Erik Blood 94), **euphoria** (ODESZA 95), **pulse** (STRFKR 96), **tenderness** (The Postal Service electronic 97), **nostalgia** (Gold Casio 98), **cultural fusion** (Kaina 99), and **golden cascade** (Summer Heart 100). Eleven approaches to one substrate.
+- **Dream-pop influence and Swedish pop melodicism — two traditions converging.** **Summer Heart** carries two traditions simultaneously. The **dream-pop influence** contributes the reverb, the atmosphere, the shimmering textures, and the willingness to let melody dissolve into atmosphere. The **Swedish pop melodicism** contributes the strong memorable hooks, the clean production, the emotional directness, and the insistence that melody remains central. The fusion is the signature — dream pop's textures wrap Swedish pop's melodies without erasing them.
+- **Self-released / various — diffuse distribution in transatlantic context.** **Summer Heart's** releases span Swedish and US indie channels, Bandcamp and streaming platforms, with a diffuse distribution topology that matches the dual-continent identity. The label context is less concentrated than **Sub Pop** (86, 97), **Counter Records** (95), or **Polyvinyl** (96) — more varied, more self-directed, and the distribution topology itself carries the transatlantic bridge.
+
+## Part B: Common Raven — The Centennial Triple Convergence
+
+- **The centennial triple convergence.** Three converging structural events at **degree 100**: **Corvidae enters** as the forty-ninth family, **Aves returns** to the engine after forty consecutive non-bird degrees, and **the centennial itself** arrives — 100th degree, 27.8% of 360, fortieth consecutive original CSV species. The **Common Raven** (*Corvus corax*) is the single species that delivers all three at once.
+- **Corvidae enters — the forty-ninth family.** The corvids — **crows**, **ravens**, **jays**, **magpies** — are among the most intelligent families in the animal kingdom. The **Steller's Jay** (*Cyanocitta stelleri*) at **degree 53** was the engine's first corvid, introducing Corvidae with a bright, loud, forest-sentinel voice. The **Common Raven** at **degree 100** returns to Corvidae forty-seven degrees later with a deep, complex, commanding presence. The Jay introduced; the Raven declares. **Kingdom:** Animalia. **Phylum:** Chordata. **Class:** Aves. **Order:** Passeriformes. **Family:** Corvidae (NEW, 49th). **Genus:** *Corvus*. **Species:** *C. corax*.
+- **Aves returns — after forty degrees.** The last bird was the **Pied-billed Grebe** at **degree 60**. Since **degree 61**, the engine has traversed **Mammalia** (61–85: Beaver, Orca, Red Fox, Black Bear, Raccoon, and many more), **Insecta** (87–89, 91, 94, 95, 98, 99: Cricket Chorus, Katydid, Cicada, Mosquito, Stonefly, Mayfly, Tree Cricket, Click Beetle), and **Amphibia** (86, 90, 96, 97: Pacific Treefrog, Spring Peeper-Like Chorus, Wood Frog, Toad Chorus). Thirty-nine consecutive non-bird degrees. **Birds return at the centennial** — carried by the raven, one of the most intelligent animals on Earth.
+- **The most complex vocal repertoire in the animal kingdom.** Over **30 distinct call types**. **Deep cronk** (low-pitched, resonant, 200–800 Hz, carries long distances — much deeper than crow's "caw"). **Bell-like tones** (clear, ringing, metallic, surprisingly musical, used in pair-bonding). **Hollow knocks** (wooden, percussive, produced vocally through rapid laryngeal modulation). **Gargling** (complex, multi-tonal, rapid succession of tones — deeply social). **Screams** (high-pitched alarm calls, sharp, piercing, carrying). **Soft warbles** (intimate, quiet, musical murmuring between pair-bonded ravens). **Mimicry** (learned reproduction of other species' calls, environmental sounds, human speech — a cultural acquisition). The raven's syrinx and learned behavior together produce a communicative range that exceeds any other bird documented in the engine.
+- **Intelligence — a cognitive peer.** **Tool use** and manufacture — sticks, leaves, bent wire to create hooks. **Problem-solving** — multi-step puzzles requiring planning and sequential reasoning. **Future planning** — cache management with awareness of what other ravens have seen. **Causal reasoning** — inferring unseen causes from auditory evidence. **Play behavior** — aerial acrobatics, sliding down snowy slopes, object manipulation for its own sake. **Social cognition** — approaching theory of mind, tactical deception, strategic alliances. **Cultural transmission** — vocal dialects and novel techniques passing between individuals and generations. The raven is not just a sound producer; it is a mind.
+- **Largest passerine on Earth.** Body length 54–67 cm. Wingspan 115–150 cm. Entirely black with iridescent purple-blue-green sheen. Wedge-shaped tail (diagnostic for *C. corax* vs *C. brachyrhynchos*). Shaggy hackle feathers. One of the most widely distributed birds on Earth — circumpolar across the **Northern Hemisphere** from **Alaska** through **Scandinavia** to **Siberia** and south through much of **North America** and **Eurasia**. **Passeriformes** is the largest order of birds (~6,500 species), and the raven is its largest member.
+- **Why E=4, not E=5.** Loud and carrying — the **deep cronk** is audible at several hundred meters. But not at the extreme volume of **Cicada** (**degree 89**, E=5) or bugling elk (**degree 65**, E=5). Vocal complexity adds presence beyond raw decibel volume — 30+ call types create impact that exceeds amplitude alone. Persistent year-round, not seasonal. The deep cronk has the gravitas of a large, intelligent bird rather than the overwhelming volume of a tymbal-driven insect.
+- **Open forest habitat.** Mountain ridges, old-growth forest, coastal cliffs, urban edges. In the **Pacific Northwest**, found from sea level to alpine zones. **Adaptability** is a function of **intelligence** — ravens thrive wherever cognition confers advantage. The open forest of degree 100 contrasts with the old-growth forest of **Northern Spotted Owl** at **degree 4** (same class, same PNW ecosystem, opposite acoustic posture — silent night stealth vs daylight commanding vocalizations).
+- **The raven's cultural life.** Lifelong pair bonds with elaborate vocal exchanges. Play — aerial acrobatics, sliding on snowy slopes, object manipulation. Teaching — vocal elements and behaviors transmitted culturally between generations. **Funerals** — gathering around dead ravens. **Deception** — tactical food-hiding strategies that account for what rival ravens have seen. The raven in **Pacific Northwest Indigenous cultures** — **Raven as Trickster**, **Raven as Creator**, **Raven as Intelligence** — a cultural force that precedes the engine's existence by millennia.
+- **The Raven muse connection.** The raven is personally significant to the project — it connects to the **Raven muse**. Degree 100 was planned across the preceding ninety-nine degrees to land the Raven at the centennial. The species entry is not merely taxonomic; it is a personal arrival.
+- **Fortieth consecutive original CSV — FOUR DECADES.** The tree cricket (98), click beetle (99), and now Common Raven (100) extend the longest unbroken run of original-catalog selections in the engine. Forty consecutive original CSV species (**degrees 61–100**) = **FOUR DECADES** of original species. The source catalog remains sturdy across the centennial threshold, and the reliability streak is now a defining property rather than a coincidence.
+- **Taxonomic depth after degree 100.** Four classes represented (**Aves**, **Mammalia**, **Insecta**, **Amphibia**). Seventeen-plus orders. Forty-nine families. The raven's entry brings Corvidae into the engine as the 49th family and brings **Aves** back after a 40-degree absence — two structural depth markers at once.
 
 ## Retrospective
 
-**What Worked:**
-1. THE CENTENNIAL TRIPLE CONVERGENCE is structurally extraordinary -- Corvidae enters (NEW FAMILY 49th), Aves returns (after 40 degrees), and the centennial (100th degree) all converging at the same species entry. This is the most structurally significant species entry since the beginning
-2. The Common Raven is the right species for degree 100 -- most intelligent, most vocally complex, most culturally significant. 30+ call types. Tool use. Cultural transmission. Raven as muse. Aves coming home
-3. Summer Heart at Genre Stage 82 provides the centennial with warmth and golden tonality -- the nostalgic cascade is an appropriate acoustic element for looking both backward (100 degrees behind) and forward (260 degrees ahead)
-4. The transatlantic dreamer (101st artist-city pattern) extends the international dimension -- Sweden-Seattle bridge. Four international connections in 100 degrees
-5. E=4 on both sides creates matched energy at the centennial -- Summer Heart's warm electronic pop and the raven's commanding vocal presence
-6. Corvidae connecting back to Steller's Jay (degree 53, 47 degrees apart) creates a deep structural callback -- the Jay introduced corvids, the Raven declares them
-7. Aves returning after exactly 40 degrees creates a clean structural narrative -- birds departed at degree 60, mammals and insects took over, birds return at the centennial
-8. Fortieth consecutive original CSV (FOUR DECADES) is a data reliability milestone in its own right
-9. The raven's vocal complexity (30+ call types) is the most complex acoustic element in the entire engine -- appropriate for the centennial species
+### What Worked
 
-**What Could Be Better:**
-1. NO RAPTOR in 101 entries -- persists from degree 90. The raven addresses the passerine drought but raptors remain absent
-2. NO MARINE SPECIES -- 101 entries without a marine specialist. SIGNIFICANT
-3. The electronic era has dominated Quadrant II (11 of 15 entries since degree 86). Genre diversity may need attention post-centennial
+- **The centennial triple convergence is structurally extraordinary.** Corvidae enters as the 49th family, Aves returns after 40 degrees, and the centennial (100th degree) all converge at the same species entry. This is the most structurally significant species entry since the engine's beginning. The convergence was planned across the preceding ninety-nine degrees rather than discovered at the end.
+- **The Common Raven is the right species for degree 100.** Most intelligent. Most vocally complex. Most culturally significant. Over 30 call types. Tool use, problem-solving, future planning, cultural transmission. The **Raven muse** personally significant. Aves coming home. No other species in the source catalog could have carried the centennial's structural weight.
+- **Summer Heart at Genre Stage 82 gives the centennial warmth and golden tonality.** The **nostalgic cascade** is an appropriate acoustic element for a milestone that looks both backward (100 degrees behind) and forward (260 ahead). **Dream-pop-influenced electronic pop** is neither dominant nor novel — it is a continuation that honors the electronic era depth the engine has built across the preceding fifteen degrees.
+- **The Transatlantic Dreamer (101st artist-city pattern) extends the international dimension.** Swedish-**Seattle** bridge. Four international connections in one hundred degrees (Y La Bamba 61, Briana Marela 72, Kaina 99, Summer Heart 100). The international thread now has stable presence.
+- **E=4 on both sides creates matched energy at the centennial.** Summer Heart's warm electronic pop and the raven's commanding vocal presence both land at **E=4**. Warmth and gravitas share a decibel envelope. The centennial pairing at matched energy is deliberate rather than coincidental.
+- **Corvidae connecting back to Steller's Jay (degree 53, 47 degrees apart) creates a deep structural callback.** The Jay introduced corvids; the Raven declares them. Family returns with new species at different members add taxonomic depth and structural resonance. The callback depth (47 degrees) itself is part of the centennial's weight.
+- **Aves returning after exactly 40 degrees creates a clean structural narrative.** Birds departed at degree 60 (Pied-billed Grebe). Mammals, insects, and amphibians took over for thirty-nine consecutive non-bird degrees. Birds return at the centennial. The gap creates narrative tension; the return resolves it. Long-range structural planning pays off.
+- **Fortieth consecutive original CSV (FOUR DECADES) is a data reliability milestone in its own right.** The source CSV has delivered without substitution or correction across forty consecutive entries (degrees 61–100). Reliability is now a defining characteristic of the engine rather than a coincidence.
+- **The raven's vocal complexity (30+ call types) is the most complex acoustic element in the engine.** Appropriate for the centennial species. **Deep cronk + bell + hollow knock + mimicry** names a compound acoustic element that no other species entry has matched. Vocal complexity is a different dimension from volume — the raven's E=4 understates its acoustic impact.
+- **Intelligence as a structural dimension emerges at the centennial.** Tool use, future planning, cultural transmission — these are not acoustic properties but they define what the raven IS. The engine now documents not just sounds but the minds that produce them. The centennial is the right place to introduce cognitive properties into the species portfolio.
+
+### What Could Be Better
+
+- **NO RAPTOR in 101 entries.** The absence of birds of prey (Accipitridae, Falconidae, Strigidae, Tytonidae) across 101 entries remains a structural gap that has persisted since degree 90. The Common Raven addresses the passerine drought and brings Aves home, but raptors remain absent. A bird of prey is overdue.
+- **NO MARINE SPECIES in 101 entries.** The **Pacific Northwest's** marine ecosystem (**Salish Sea**, **Olympic Coast**, **Puget Sound** proper) remains unrepresented. Harbor seal, orca, sea lion, common loon, marbled murrelet — none have appeared. For an engine titled around **Puget Sound**, the marine omission grows more conspicuous with each non-marine degree. The centennial was not the moment to correct this, but the correction remains overdue.
+- **The electronic era has dominated Quadrant II.** Eleven of fifteen entries since degree 86 are electronic-adjacent. Genre diversity may need attention post-centennial — the engine has demonstrated electronic era depth but owes itself a deliberate return to genre breadth in the degrees ahead.
+- **Summer Heart's discography not exhaustively analyzed.** Specific releases, year-by-year evolution, and individual track analysis were treated structurally rather than catalogued album-by-album. Accepted for this entry; a discography deep-dive could be a future research artifact.
+- **The Raven muse connection is asserted but not developed in depth.** The personal significance of the raven is noted but the **Raven muse** connection as a project-level thread is mentioned rather than elaborated. Future work could deepen the muse connection as a structural thread.
 
 ## Lessons Learned
 
-1. Milestone degrees (25, 50, 75, 100) create natural narrative weight. The centennial is THE milestone -- structural events converge, significance accumulates, the engine takes stock. Degree 100 proves that milestone planning pays off
-2. Aves returning at the centennial demonstrates long-range structural planning. The 40-degree gap (61-100) traversed mammals, amphibians, and insects before bringing birds back. The gap creates narrative tension; the return resolves it
-3. Corvidae at the centennial creates a deep callback to Steller's Jay (53) -- same family, 47 degrees apart, dramatically different species. Family returns with new species add taxonomic depth and structural resonance
-4. The raven's 30+ call types represent the most complex acoustic element in the engine. Vocal complexity is a different dimension from volume -- the raven's E=4 understates its acoustic impact. Complexity adds presence beyond decibels
-5. Intelligence as a structural dimension emerges at the centennial. Tool use, future planning, cultural transmission -- these are not acoustic properties but they define what the raven IS. The engine now documents not just sounds but the minds that produce them
-6. Eleven electronic-adjacent entries in fifteen degrees (86-100) have mapped the full electronic spectrum without repetition: pop (86), atmosphere (90), obliteration (91), intimacy (93), experimentation (94), euphoria (95), pulse (96), tenderness (97), nostalgia (98), cultural fusion (99), golden cascade (100). The electronic era of Quadrant II is the engine's deepest genre mapping
-7. Forty consecutive original CSV species (61-100). FOUR DECADES. Data reliability is not just sustained -- it is a defining characteristic of the engine
-8. The Raven muse connection gives degree 100 personal significance beyond structural significance. The engine is not just a catalog. It is a living project with personal dimensions
+1. **Milestone degrees (25, 50, 75, 100) create natural narrative weight.** The centennial is THE milestone. Structural events converge. Significance accumulates. The engine takes stock. Degree 100 proves that milestone planning pays off — long-range structural planning (Aves' 40-degree absence, Corvidae's 47-degree gap since Steller's Jay, the fortieth consecutive CSV streak) all resolve simultaneously at the centennial because the preceding degrees were planned to produce this convergence.
+2. **Aves returning at the centennial demonstrates long-range structural planning.** The 40-degree gap (degrees 61–100) traversed mammals, amphibians, and insects before bringing birds back. The gap creates narrative tension; the return resolves it. Future engine planning can rely on deliberately absent categories to produce structural payoff at milestone degrees.
+3. **Corvidae at the centennial creates a deep callback to Steller's Jay (53).** Same family, 47 degrees apart, dramatically different species. Family returns with new species at different taxonomic depth add richness without redundancy. The Jay introduced corvids with bright, loud, forest-sentinel presence; the Raven declares them with deep, complex, commanding presence. Lineage describes inheritance, not character.
+4. **The raven's 30+ call types represent the most complex acoustic element in the engine.** Vocal complexity is a different dimension from volume. The raven's E=4 understates its acoustic impact because complexity adds presence beyond decibels. Future species entries should be classified by vocal repertoire size alongside amplitude — a bird with three calls at E=5 is a different acoustic presence than a bird with thirty calls at E=4.
+5. **Intelligence as a structural dimension emerges at the centennial.** Tool use, future planning, causal reasoning, cultural transmission — these are cognitive properties, not acoustic properties, but they define what the raven IS. The engine now documents not just sounds but the minds that produce them. Future species entries can be classified by cognitive depth alongside acoustic character.
+6. **Eleven electronic-adjacent entries in fifteen degrees (86–100) have mapped the full electronic spectrum without repetition.** Pop structure (86), atmosphere (90), obliteration (91), intimacy (93), experimentation (94), euphoria (95), pulse (96), tenderness (97), nostalgia (98), cultural fusion (99), golden cascade (100). Eleven approaches to one substrate. The **electronic era** of **Quadrant II** is the engine's deepest genre mapping. Future genre clusters can be measured against this eleven-entry depth.
+7. **Forty consecutive original CSV species (degrees 61–100) — FOUR DECADES.** Data reliability is not just sustained; it is a defining characteristic of the engine. The source catalog has delivered without substitution or correction across forty consecutive entries. Future planning can lean confidently on the original catalog because empirical reliability is now established across a span of forty.
+8. **The Raven muse connection gives degree 100 personal significance beyond structural significance.** The engine is not just a catalog. It is a living project with personal dimensions. Milestone degrees can be selected to align structural events (Corvidae entering, Aves returning) with personal significance (**Raven muse**), and the alignment strengthens both.
+9. **Genre Stage 82 lands as a counter milestone with structural significance.** Eighty-two distinct genre classifications in one hundred degrees signals that the engine has accumulated enough catalog density to support the stable rate (0.82 stages/degree) without exhausting the genre vocabulary. Future degrees can be expected to continue introducing new genre stages at approximately 0.82 per degree until catalog saturation begins to show.
+10. **Matched energy at the centennial (E=4 + E=4) is deliberate rather than coincidental.** When the centennial pairs both halves at E=4, warmth and gravitas share a decibel envelope. Future milestone degrees can calibrate paired energy as part of the structural planning rather than letting it fall where the catalog places it.
 
----
+## Cross-References
 
-THE CENTENNIAL. The cascade and the cronk. Electronic warmth and biological intelligence. One hundred degrees. 27.8% of 360. More than a quarter of the way around.
+| Connection | From | To | Nature |
+|------------|------|-----|--------|
+| S36-099 | Summer Heart (100) | Kaina (99) | ELECTRONIC POP LINEAGE — CONSECUTIVE. Both moderate electronic entries. Kaina is Electronic/R&B (cultural fusion, Spanish-English, Chicago-to-LA). Summer Heart is Electronic Pop (temporal fusion, dream-pop-influenced, Sweden-Seattle). Different fusions on consecutive degrees. |
+| S36-098 | Summer Heart (100) | Gold Casio (98) | ELECTRONIC NOSTALGIA PARALLEL — TWO BACK. Both electronic nostalgia entries. Gold Casio is static nostalgia (retro-synthetic shimmer, vintage reference, self-released). Summer Heart is flowing nostalgia (nostalgic cascade, dream-pop-influenced, transatlantic). Same emotional territory, different motions. |
+| S36-097 | Summer Heart (100) | The Postal Service electronic (97) | INDIE ELECTRONIC CONTEXT. Both reference the electronic-pop tradition. The Postal Service electronic is algorithmic tenderness on Sub Pop. Summer Heart is nostalgic cascade self-released across transatlantic channels. Different infrastructures, shared warmth. |
+| S36-096 | Summer Heart (100) | STRFKR (96) | ELECTRONIC POP CONTRAST. STRFKR is driving punk-inflected Indie Electronic (synth-pop pulse, E=5, Polyvinyl). Summer Heart is flowing dream-pop-inflected Electronic Pop (nostalgic cascade, E=4, self-released). Same broad substrate, different engines and energies. |
+| S36-095 | Summer Heart (100) | ODESZA (95) | ELECTRONIC SPECTRUM — ARENA TO BEDROOM. ODESZA is cinematic, festival-scale (E=5, Counter Records, Bellingham pipeline). Summer Heart is intimate, bedroom-scale (E=4, self-released, transatlantic dreamer). Arena to bedroom, cinematic to nostalgic. |
+| S36-093 | Summer Heart (100) | NAVVI (93) | DREAM POP PARALLEL. NAVVI is dark, nocturnal, reverb-as-architecture (the shimmer veil). Summer Heart is warm, golden, nostalgia-as-cascade. Both atmospheric, radically different emotional temperatures. |
+| S36-086 | Summer Heart (100) | The Postal Service (86) | ELECTRONIC POP RETURN. The Postal Service introduced Electronic Pop at degree 86 on Sub Pop with glitch-pop structure. Summer Heart returns Electronic Pop fourteen degrees later dream-pop-influenced self-released transatlantic. Same genre stage label, radically different dress. |
+| S36-077 | Summer Heart (100) | Mree (77) | ETHEREAL POP PARALLEL. Both gentle warm pop sensibilities. Mree is acoustic-rooted (Folk/Pop). Summer Heart is electronic-rooted (Electronic Pop). Different instruments, similar emotional landscapes. |
+| S36-072 | Summer Heart (100) | Briana Marela (72) | INTERNATIONAL CONNECTION. Both international connections. Briana Marela's ethereal sound connects to global experimental networks. Summer Heart bridges Sweden and Seattle. |
+| S36-061 | Summer Heart (100) | Y La Bamba (61) | FIRST INTERNATIONAL CONNECTION. Y La Bamba introduced international threads at degree 61 (Latin heritage, Pacific corridor). Summer Heart extends international presence at degree 100 (Swedish-Seattle transatlantic). Forty-degree span of international dimension. |
+| SPS-053 | Common Raven (100) | Steller's Jay (53) | SAME FAMILY CORVIDAE — FIRST CORVID RETURN. First corvid at degree 53; full declaration at degree 100. Jay is bright and direct (forest sentinel, bold colors, loud calls, 10-15 call types). Raven is deep and complex (open forest, iridescent black, 30+ call types). Both intelligent, both vocal, both PNW forest birds. 47 degrees apart. |
+| SPS-060 | Common Raven (100) | Pied-billed Grebe (60) | AVES RETURNS — LAST BIRD TO NEXT BIRD. Pied-billed Grebe was the last bird before the 40-degree gap (degree 60). Common Raven brings Aves back at the centennial. Between them: 39 consecutive non-bird degrees across Mammalia Amphibia and Insecta. Aves bookends the Mammalia-Insecta-Amphibia era. |
+| SPS-014 | Common Raven (100) | Great Blue Heron (14) | LARGE COMMANDING BIRDS. Both large, commanding, unforgettable voices. Heron's croak at degree 14. Raven's 30+ call repertoire at degree 100. Large-bird acoustic bookends at widely separated centennial marks. |
+| SPS-004 | Common Raven (100) | Northern Spotted Owl (4) | INTELLIGENCE AND OLD FOREST — FIRST BIRD TO CENTENNIAL BIRD. Both intelligent birds of old-growth and forest habitat. Owl hunts silently at night (E=3, nocturnal stealth). Raven vocalizes boldly in daylight (E=4, diurnal cognition). Complementary presences at the engine's first bird and its centennial bird. |
+| SPS-071 | Common Raven (100) | Red Fox (71) | INTELLIGENCE PARALLEL. Both among the most intelligent animals in the engine. Canidae intelligence (mammalian, predatory, adaptable) vs Corvidae intelligence (avian, opportunistic, tool-using). Different phyla, convergent cognitive sophistication. |
+| SPS-070 | Common Raven (100) | Raccoon (70) | INTELLIGENCE AND DEXTERITY — URBAN ADAPTERS. Both problem-solvers. Raccoon with manual dexterity (Procyonidae, five-digit hands). Raven with beak and cognition (Corvidae, tool use). Both urban-adaptable across the Pacific Northwest. |
+| SPS-098 | Common Raven (100) | Tree Cricket Song (98) | PURE VS COMPLEX — ACOUSTIC CONTRAST. Tree Cricket is nearly sinusoidal pure sustained trill (E=3, single tone). Raven is 30+ distinct call types (E=4, compound element). Two-degree separation, opposite ends of acoustic complexity spectrum. |
+| SPS-099 | Common Raven (100) | Click Beetle (99) | SIMPLEST TO MOST COMPLEX — CONSECUTIVE. Click beetle is brief mechanical snap (E=2, under 10 milliseconds). Raven is 30+ sustained complex calls (E=4, most complex vocal repertoire in animal kingdom). Consecutive degrees span from simplest to most complex sound in the engine's recent history. |
+| RES-raven-muse | Common Raven (100) | Raven muse | PROJECT CONNECTION. The raven is personally significant to the project; it connects to the Raven muse. Degree 100 was planned to land the Raven at the centennial. Structural significance aligns with personal significance. |
+| RES-pnw-indigenous | Common Raven (100) | PNW Indigenous mythology | CULTURAL CONTEXT. Raven as Trickster, Raven as Creator, Raven as Intelligence — central figure in Pacific Northwest Indigenous traditions. The raven is not just a species in the engine; it is a cultural force. |
 
-On the music side, Summer Heart reaches Genre Stage 82 -- Electronic Pop at the centennial. Swedish-born, Seattle-connected. Warm synth textures, nostalgic melodies, golden aesthetic. The nostalgic cascade is the 101st acoustic element -- flowing, layered, always in motion. The transatlantic dreamer is the 101st artist-city pattern -- the Atlantic as bridge. E=4. Eleventh electronic entry. The engine adds the sound of golden, transatlantic nostalgia.
+## Engine Position
 
-On the species side, the Common Raven delivers the centennial triple convergence: CORVIDAE ENTERS (NEW FAMILY 49th, connects to Steller's Jay 53), AVES RETURNS (after 40 degrees, birds come home), THE CENTENNIAL (100th degree, 27.8% of 360, fortieth consecutive CSV -- FOUR DECADES). Over 30 call types -- the most complex vocal repertoire in the animal kingdom. One of the most intelligent animals on Earth. Tool use. Cultural transmission. Play. The largest passerine. E=4. Open forest. The Raven muse arrives at degree 100.
+- **Degree 100 of 360 — THE CENTENNIAL** — 27.8% of the circle traversed; the engine's first triple-digit degree; tenth degree of Quadrant II; landmark by definition.
+- **Triple-digit counters tick to 101 (artist) and 100 (species).** The nostalgic cascade is the **101st artist-side acoustic element**. The deep cronk + bell + hollow knock + mimicry is the **100th species-side acoustic element**. The Transatlantic Dreamer is the **101st artist-city pattern**.
+- **Genre Stage 82 — MILESTONE.** Electronic Pop. Eighty-two genre stages in one hundred degrees (0.82 stages/degree). Genre stage rate stable across the centennial threshold.
+- **CORVIDAE ENTERS — 49th family.** Connects to Steller's Jay at degree 53 (47 degrees apart). Corvid apex at the centennial. Family-level taxonomic depth.
+- **AVES RETURNS — after 40 degrees.** Last bird Pied-billed Grebe at degree 60. Thirty-nine consecutive non-bird degrees across Mammalia (61–85), Insecta (87–89, 91, 94, 95, 98, 99), and Amphibia (86, 90, 96, 97). Birds come home at the centennial.
+- **FORTIETH CONSECUTIVE ORIGINAL CSV — FOUR DECADES.** Degrees 61–100 without substitution or correction. Longest unbroken run of original-catalog selections in the engine.
+- **Most complex vocal repertoire in the animal kingdom.** Over 30 distinct call types (deep cronk, bell, hollow knock, gargle, scream, warble, mimicry). First compound acoustic element (multiple named components) in the engine.
+- **Most intelligent species in engine.** Tool use, problem-solving, future planning, causal reasoning, play, social cognition, cultural transmission. First species entry with documented cognitive portfolio approaching theory of mind.
+- **Largest passerine on Earth.** Body length 54–67 cm, wingspan 115–150 cm. Passeriformes (largest bird order, ~6,500 species).
+- **Electronic Era eleven-deep.** The Postal Service (86), Sky Cries Mary (90), Hovercraft (91), NAVVI (93), Erik Blood (94), ODESZA (95), STRFKR (96), The Postal Service electronic (97), Gold Casio (98), Kaina (99), Summer Heart (100). Eleven electronic-adjacent entries in fifteen degrees. Deepest sustained genre cluster in the engine.
+- **Energy distribution after degree 100 (artist-side):** E1:3 (3.0%), E2:31 (30.7%), E3:27 (26.7%), E4:26 (25.7%), E5:13 (12.9%), E6:2 (2.0%). Total: 101 entries (degrees 0–100 inclusive). **E=4 gains Summer Heart** to reach 26 deployments — more than a quarter of all entries. Matched-energy centennial (E=4 on both sides).
+- **Four classes represented:** Aves, Mammalia, Insecta, Amphibia. Seventeen-plus orders. Forty-nine families.
+- **Four international connections in one hundred degrees:** Y La Bamba (61, Latin), Briana Marela (72, international experimental), Kaina (99, Guatemalan-Venezuelan diaspora), Summer Heart (100, Swedish-Seattle transatlantic).
+- **The Raven muse arrives at degree 100.** Personal significance aligns with structural significance.
+- **Outstanding gaps:** Zero raptors in 101 entries (since before degree 90); zero marine species in 101 entries (none since the engine began); electronic era dominance may need balancing in post-centennial degrees.
 
-At the centennial: 101 artists. 102 acoustic elements. 102 artist-city patterns. 82 genre stages. 49 families. 4 classes. 17+ orders. 40 consecutive original CSV species. The engine is more than a quarter of the way home. Two hundred and sixty degrees remain.
+## Files
 
-The cascade and the cronk. The synthesizer cascades golden warmth. The raven speaks in thirty voices. Both E=4. Both complex. Both layered. Electronic cascading and biological vocal orchestra. At the centennial, the engine has warmth and intelligence. Nostalgia and cognition. The transatlantic dreamer and the most complex voice on Earth.
+- `docs/release-notes/v1.49.240/README.md` (this file, rewritten to A-grade per the PROSE rubric)
+- `docs/release-notes/v1.49.240/chapter/00-summary.md` — derived summary
+- `docs/release-notes/v1.49.240/chapter/03-retrospective.md` — retrospective
+- `docs/release-notes/v1.49.240/chapter/04-lessons.md` — extracted lessons (8 entries)
+- `docs/release-notes/v1.49.240/chapter/99-context.md` — context
+- `www/tibsfox/com/Research/S36/research/releases/100-summer-heart/index.html`
+- `www/tibsfox/com/Research/S36/research/releases/100-summer-heart/research.md`
+- `www/tibsfox/com/Research/S36/research/releases/100-summer-heart/knowledge-nodes.json`
+- `www/tibsfox/com/Research/S36/research/releases/100-summer-heart/retrospective.md`
+- `www/tibsfox/com/Research/SPS/research/releases/100-raven/index.html`
+- `www/tibsfox/com/Research/SPS/research/releases/100-raven/research.md`
+- `www/tibsfox/com/Research/SPS/research/releases/100-raven/knowledge-nodes.json`
+- `www/tibsfox/com/Research/SPS/research/releases/100-raven/retrospective.md`
 
-*Degree 100. THE CENTENNIAL. One hundred rotations from origin. A golden cascade of synth textures falls like summer memories. A deep cronk echoes across the open forest -- hollow, resonant, ancient, intelligent. The raven has arrived. Aves returns. Corvidae declares. Four decades of original species. Four classes. Forty-nine families. One hundred degrees behind. Two hundred and sixty ahead. The engine is more than a quarter of the way home. The raven speaks. The cascade flows. The centennial is warm, golden, and intelligent.*
-
-</details>
+Total: 9 files in commit `d287774f909f74aa5ec463c2f3ae39af7bb5d8fa`.
