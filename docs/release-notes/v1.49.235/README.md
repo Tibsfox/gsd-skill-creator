@@ -1,523 +1,249 @@
-# v1.49.235 -- Degree 95: ODESZA + Mayfly Emergence -- THE EUPHORIC AND THE EPHEMERAL
+# v1.49.235 — Degree 95: ODESZA + Mayfly Emergence — THE EUPHORIC AND THE EPHEMERAL
 
 **Released:** 2026-04-01
-**Degree:** 95 of 360 -- Fifth degree of Quadrant II
-**Part A:** ODESZA -- Electronic, E=5, Counter Records, Seattle/Bellingham, GENRE STAGE 77 (Electronic, seventy-seven genre stages in 95 degrees, cinematic electronic production euphoric builds vocal samples festival-scale sound design layered synths massive drops, distinguished from Electronic/Experimental 94 studio-as-instrument genre-blending and Dream Pop/Electronic 93 reverb-laden intimate and Drone/Noise 91 maximalist texture and Electronic Pop 86 structured melodic), THE EUPHORIC BUILD 96th acoustic element (rising tension through layered synthesizers vocal samples building intensity textural accumulation harmonic suspension building to massive crescendo and release, cinematic electronic construction, the build IS the composition, collective experience, festival-scale, distinct from producer's palette 94 experimental studio and shimmer veil 93 reverb-as-architecture and ambient drift 90 floating atmospheric), THE BELLINGHAM PIPELINE 96th artist-city pattern (university town incubates artists who launch into Seattle and the wider world, specifically Western Washington University in Bellingham WA, Death Cab for Cutie degree 58 and ODESZA degree 95 both formed at WWU, different genres different decades same geographic pipeline, distinct from cross-genre bridge 94 connecting scenes and intimate machine 93 electronic intimacy), Seattle/Bellingham, Counter Records, COACHELLA HEADLINER, Grammy-nominated, SECOND BELLINGHAM/WWU ACT after Death Cab for Cutie (58)
-**Part B:** Mayfly Emergence (Ephemeroptera) -- mass wing buzz over water, E=3, stream/lake, Ephemeroptera, NEW FAMILY (45th), NEW ORDER Ephemeroptera (seventh insect order, most ancient winged insect lineage 300+ million years Carboniferous fossils, second aquatic insect order after Plecoptera 94), EPHEMERAL ADULT (hours to days, cannot eat, vestigial mouthparts, most ephemeral adult life in engine), MASS EMERGENCE (thousands hatching simultaneously, predator satiation strategy, visible on weather radar), FLY FISHING FOUNDATION (entire art of fly fishing built on imitating mayfly life stages), mass wing buzz over water 96th species-side acoustic element (collective shimmering wing buzz of thousands emerging simultaneously, individual wing beats nearly inaudible but mass event creates distinctive shimmering hum above water, distinct from wing rustle 94 individual emergence and aggressive papery hum 93 collective E=5 and deep resonant buzz 92 warm continuous), E=3 (mass numbers elevate individually inaudible wing beats to moderate collective sound, higher than stonefly 94 E=2, lower than cricket 87 E=4), THIRTY-FIFTH CONSECUTIVE ORIGINAL CSV
-**Series:** Seattle 360 + Sound of Puget Sound -- Continuous Release Engine
-**Cluster:** Music (hub: WAL)
-**Note:** The euphoric and the ephemeral. Collective experience and ancient biology. On the music side, **ODESZA** arrives with Electronic -- the electronic duo of Harrison Mills and Clayton Knight, formed at **Western Washington University** in **Bellingham, Washington** in 2012. They are one of the biggest electronic acts to emerge from the PNW. Grammy-nominated for *A Moment Apart* (2017). **Coachella headliners**. Counter Records. **Genre Stage 77** -- Electronic. E=5. The **euphoric build** is the 96th acoustic element: rising tension through layered synths, vocal samples, textural accumulation, building to massive crescendo and release -- cinematic electronic construction where the build IS the composition. The **Bellingham pipeline** is the 96th artist-city pattern: WWU incubates artists who launch into Seattle and beyond -- **Death Cab for Cutie** (degree 58) and ODESZA both formed at WWU, different genres, different decades, same pipeline. **Second Bellingham/WWU act** after Death Cab (58). On the species side, the **mayfly emergence** (Ephemeroptera) introduces **NEW FAMILY (45th)** and **NEW ORDER Ephemeroptera** -- the **seventh insect order** and the **most ancient winged insect lineage** (300+ million years, Carboniferous fossils). The adult mayfly lives **hours to days** -- the most **ephemeral adult life** in the engine. Cannot eat. Vestigial mouthparts. **Mass emergence** -- thousands hatching simultaneously, predator satiation. The mass wing buzz over water is the 96th acoustic element (species side) -- collective shimmering wing buzz. E=3. The entire art of **fly fishing** is built on imitating mayfly life stages. Both sides are about collective experience -- ODESZA's euphoric builds move thousands of festival-goers together; the mayfly's mass emergence moves thousands of insects from water to air. **Thirty-fifth consecutive original CSV.** The euphoric and the ephemeral.
+**Degree:** 95 of 360 — Fifth degree of Quadrant II
+**Part A:** ODESZA — Electronic, E=5, Counter Records, Seattle/Bellingham, **GENRE STAGE 77**, **Harrison Mills** and **Clayton Knight** duo formed at **Western Washington University** in 2012, the euphoric build 96th acoustic element, the Bellingham pipeline 96th artist-city pattern, **SECOND BELLINGHAM/WWU ACT** after **Death Cab for Cutie** (degree 58), Coachella headliner, Grammy-nominated for *A Moment Apart*
+**Part B:** Mayfly Emergence (*Ephemeroptera*) — mass wing buzz over water, E=3, stream/lake, **NEW FAMILY (45th)**, **NEW ORDER Ephemeroptera** (seventh insect order), **MOST ANCIENT WINGED INSECT LINEAGE** (300+ million years, Carboniferous fossils, predates dinosaurs), **SECOND AQUATIC INSECT ORDER** after **Plecoptera** at degree 94, **EPHEMERAL ADULT** (hours to days, vestigial mouthparts), **MASS EMERGENCE** (thousands simultaneous, predator satiation strategy, visible on weather radar), **FLY FISHING FOUNDATION** (entire art built on mayfly life stages), thirty-fifth consecutive original CSV
+**Series:** Seattle 360 + Sound of Puget Sound — Continuous Release Engine
+**Cluster:** Music (hub: WAL) / Aquatic Insect (hub: stream-and-lake)
+**Branch:** main
+**Commits:** `3861acaac26ea0caa460e2ebab4a5fe07ada5e45` (1)
+**Files changed:** 9 (release note + 4 ODESZA research artifacts + 4 Mayfly Emergence research artifacts)
+**Dedication:** To **ODESZA** in the Seattle/Bellingham electronic context — the duo of **Harrison Mills** and **Clayton Knight** whose meeting at **Western Washington University** in 2012 launched a project that grew from self-released dorm-room production (*Summer's Gone*, 2012) through critical breakthrough (*In Return*, 2014) and Grammy-nominated arena reach (*A Moment Apart*, 2017, Best Dance/Electronic Album nomination) to **Coachella** headliner status (*The Last Goodbye*, 2022); to **Counter Records** as the label scaffolding that let the project reach global festival scale without losing the cinematic warmth of its Bellingham origins; to the full **ODESZA live show** — the drumline, the brass section, the synchronized visual production — that translates studio builds into collective arena-scale ritual; to the **Bellingham Pipeline** as the 96th artist-city pattern, newly named at degree 95, linking **Death Cab for Cutie** (58) and **ODESZA** (95) across 37 degrees and two decades through the same **WWU** campus; to the **Mayfly Emergence** (*Ephemeroptera*) — the order whose name means *lasting a day*, whose adult stage lives only hours to days, whose mouthparts are vestigial and whose digestive tract is sealed, whose only purpose above water is to mate and to die; to the **Carboniferous period** and the **300+ million year** lineage that makes the mayfly one of the most ancient winged insects still extant; to the **mass emergence** strategy that overwhelms predators through sheer synchronized abundance and that registers on weather radar; to the **fly fishing** tradition whose entire art is built on imitating the nymph, dun, and spinner stages of the mayfly; and to the shared **water** that holds both the stonefly and the mayfly in consecutive degrees, two aquatic insect orders back-to-back, opening the engine's view of life lived IN the stream.
+**Engine Position:** Degree 95 of 360 — 26.4% of the circle traversed; **the euphoric build** is the **96th acoustic element** (artist-side); **the mass wing buzz over water** is the **96th acoustic element** (species-side); **The Bellingham Pipeline** is the **96th artist-city pattern**; **GENRE STAGE 77 MILESTONE** Electronic (seventy-seven genre stages in ninety-five degrees, ~0.81 stages per degree); **SIXTH ELECTRONIC-ADJACENT ENTRY IN TEN DEGREES** (Postal Service 86, Sky Cries Mary 90, Hovercraft 91, NAVVI 93, Erik Blood 94, ODESZA 95); **SECOND BELLINGHAM/WWU ACT** after **Death Cab for Cutie** (degree 58), separated by 37 degrees and operating in radically different genres on shared university infrastructure; **NEW FAMILY** — Ephemeridae/Baetidae family-level entry for PNW mayflies, **45th family** in the engine; **NEW ORDER Ephemeroptera** — the **seventh insect order** in the engine and the **second insect order with an obligate aquatic life stage** after **Plecoptera** at degree 94; **MOST ANCIENT WINGED INSECT LINEAGE** (300+ million years, Carboniferous fossils, predates dinosaurs by ~70 million years); **EPHEMERAL ADULT** as a new temporal category in the engine (hours to days, vestigial mouthparts, cannot eat); **MASS EMERGENCE** as a new survival strategy category (predator satiation through synchronized abundance); **FLY FISHING FOUNDATION** (the entire art of fly fishing imitates mayfly life stages); **BACK-TO-BACK AQUATIC INSECTS** (Plecoptera at 94, Ephemeroptera at 95) — two consecutive degrees of insect orders whose larval/nymphal lives occur IN water; **NINE INSECT ENTRIES IN NINE DEGREES** (87–95 with one Amphibia interlude at 90) — extending the deepest sustained taxon-class run in the engine; **THIRTY-FIFTH CONSECUTIVE ORIGINAL CSV** species (degrees 61–95); **E=5 ON ARTIST SIDE** (ODESZA joins the arena-scale ceiling at the electronic side's first E=5 entry); **E=3 ON SPECIES SIDE** (mass event elevates individually inaudible wing beats above the stonefly's E=2).
 
 ## Summary
 
-The euphoric build and the mass wing buzz. Degree 95 is collective experience on both sides -- electronic crescendo and natural crescendo.
+**The euphoric build and the mass wing buzz over water.** Degree 95 of the **Seattle 360** + **Sound of Puget Sound** continuous release engine pairs **ODESZA** at the festival mainstage with the **Mayfly Emergence** rising from a Pacific Northwest stream or lake at dusk. **Technology** on the music side, **nature** on the species side — yet both halves of degree 95 are studies in *collective experience*, both halves turn on mass synchronization of otherwise-individual events, and both halves reach their impact through scale rather than through any single voice. **ODESZA** at **E=5** delivers the cinematic electronic build — layered synthesizers, vocal samples, textural accumulation, harmonic suspension, all climbing toward a massive crescendo and release that synchronizes thousands of festival-goers into a single body moving to the same beat. **In parallel**, the mayfly at **E=3** delivers the natural crescendo — thousands to millions of nymphs rising from the water simultaneously, splitting exoskeletons, unfolding membranous wings, and taking to the air in a shimmering mass event whose individual voices are inaudible but whose collective buzz defines the soundscape above the water. Both events are engineered for abundance. Both events reward the listener who is present at the right moment. The engine has paired a **Bellingham**-origin duo at arena scale with an order of insects older than the dinosaurs, and the pairing is clean.
 
-On the music side, **ODESZA** arrives with Electronic -- the duo of **Harrison Mills** and **Clayton Knight**, formed at **Western Washington University** in **Bellingham** in 2012. They met at WWU, bonded over electronic music production, and released their debut *Summer's Gone* while still in college. They relocated to **Seattle** and signed with **Counter Records**. Their trajectory: *In Return* (2014, critical acclaim), *A Moment Apart* (2017, Grammy-nominated Best Dance/Electronic Album, arena tours), *The Last Goodbye* (2022, Coachella headliner). ODESZA's live show is legendary -- full drumline, brass section, elaborate visual production. **Genre Stage 77** -- Electronic. E=5. This is the sixth electronic-adjacent entry in ten degrees (86, 90, 91, 93, 94, 95). ODESZA is the **second Bellingham/WWU act** after **Death Cab for Cutie** (degree 58) -- two of the PNW's most significant exports from the same university campus. **The euphoric build** is the 96th acoustic element -- rising tension through layered synths, vocal samples, textural accumulation, building to massive release. The build IS the composition. Festival-scale collective experience. **The Bellingham pipeline** is the 96th artist-city pattern -- a university town incubating artists who launch into the wider world. Death Cab (58) and ODESZA (95). Same origin, different genres, different decades.
+**Genre Stage 77 — Electronic.** **Harrison Mills** and **Clayton Knight** met at **Western Washington University** in **Bellingham, Washington** in 2012, bonded over electronic production, and released *Summer's Gone* (2012) while still in college. The self-released debut established their signature: warm, cinematic electronic music built on layered synthesizers, vocal samples, and the euphoric build. They relocated to **Seattle** and signed with **Counter Records**. *In Return* (2014) broke them through the festival circuit. *A Moment Apart* (2017) received a **Grammy nomination** for Best Dance/Electronic Album and launched the first arena tours. *The Last Goodbye* (2022) was billed as a farewell and headlined **Coachella**. The live show — full drumline, brass section, and elaborate visual production — translates electronic music into a cinematic live experience unmatched in the Pacific Northwest electronic scene. **Genre Stage 77** classifies this as **Electronic**, distinct from the **Electronic/Experimental** of **Erik Blood** at degree 94 (studio-as-instrument, experimental, genre-blending), distinct from the **Dream Pop/Electronic** of **NAVVI** at degree 93 (reverb-laden, intimate, bedroom-scale), distinct from the **Drone/Noise** of **Hovercraft** at degree 91 (maximalist texture, no vocals, sustained crush), distinct from the **Ethereal/Electronic** of **Sky Cries Mary** at degree 90 (ambient psychedelic drift), and distinct from the **Indie Electronic** of **The Postal Service** at degree 86 (structured, melodic, indie-electronic pop crossover). **Six electronic-adjacent entries in ten degrees** (86, 90, 91, 93, 94, 95) — the engine maps the Pacific Northwest's electronic landscape in depth, with each entry occupying its own distinct relationship to electronic production. The engine has now introduced **77 distinct genre stages** across 95 degrees (~0.81 stages per degree), a remarkably stable rate since the folk zone began at degree 45.
 
-On the species side, the **mayfly emergence** (Ephemeroptera) introduces **NEW FAMILY (45th)** and **NEW ORDER Ephemeroptera** -- the **seventh insect order**. Mayflies are among the **most ancient winged insects** on Earth -- fossils date to over **300 million years ago** (Carboniferous period), predating dinosaurs. Their adult life is the most **ephemeral** in the engine -- **hours to days**. Cannot eat -- adult mouthparts are vestigial. The adult stage exists solely for reproduction: emerge, mate, lay eggs, die. **Mass emergence** -- thousands to millions hatching simultaneously -- is the mayfly's survival strategy (predator satiation). The mass wing buzz over water is the 96th acoustic element (species side) -- collective shimmering wing buzz of thousands of delicate wings. E=3. After the stonefly (94, E=2), the engine rises to E=3 with the mayfly's mass event. Back-to-back aquatic insect orders -- Plecoptera (94) and Ephemeroptera (95). The entire art of **fly fishing** is built on imitating mayfly life stages. The mayfly is the foundation species of fly fishing. **Thirty-fifth consecutive original CSV species.**
+**The euphoric build — 96th acoustic element.** ODESZA's defining sonic architecture is the *build* — rising tension through layered synthesizers, vocal samples, textural accumulation, and harmonic suspension, climbing toward a massive crescendo and release. Cinematic electronic construction. The build IS the composition: ODESZA does not use the build as a transitional device before a chorus; the build is the song's structural spine, and the drop is the reward. The sound design is festival-scale — wide stereo field, layered ensembles of synths, processed vocal samples that function as textural instruments rather than as narrative voice, slow-motion harmonic movement that amplifies the sense of suspended anticipation. The **euphoric build** is distinct from **the producer's palette** at degree 94 (Erik Blood's experimental studio exploration — whole vocabulary available without genre obligation; ODESZA's build is structured and purpose-built for collective experience), distinct from **the shimmer veil** at degree 93 (NAVVI's reverb-as-architecture inside a dream pop song framework — intimate scale; ODESZA's build is massive scale designed for arenas), distinct from **the ambient drift** at degree 90 (Sky Cries Mary's slowly evolving sonic landscape — no narrative direction; ODESZA's build has narrative direction and climbs), distinct from **the sustained crush** at degree 91 (Hovercraft's maximalist texture — no build-and-release architecture; ODESZA works in explicit build-and-drop cycles). The 96th acoustic element marks a new category: tension-release electronic construction at festival scale.
 
-The euphoric and the ephemeral. ODESZA builds to collective euphoria in arenas. The mayfly rises in collective emergence from water. Both about thousands moving together -- festival-goers and insects. The euphoric build and the mass wing buzz. Electronic crescendo and natural crescendo.
+**The Bellingham Pipeline — 96th artist-city pattern.** Degree 95 names a new artist-city pattern: the university-town incubator that launches artists into Seattle and the wider world. **Western Washington University** in **Bellingham** is the pipeline's specific mechanism. Both **Death Cab for Cutie** at degree 58 and **ODESZA** at degree 95 formed at WWU. Different genres (indie rock vs electronic), different decades (1997 vs 2012), same geographic and institutional pipeline. Pipeline mechanics: a university community with cheap rent (relative to Seattle), proximity to Seattle (90 miles north), an independent cultural identity that is not merely satellite-to-Seattle, and the time and space that college years provide for creative experimentation. The pattern is distinguished from **The Cross-Genre Bridge** at degree 94 (Erik Blood's role as a node connecting scenes through production credits — ODESZA is not a bridge between scenes, ODESZA is an origin point), from **The Intimate Machine** at degree 93 (NAVVI's bedroom-scale electronic duo — ODESZA's scale is the opposite pole), and from **The Bellingham Ascent** at degree 58 (Death Cab's specific arc from Bellingham to Seattle to national indie prominence — the ODESZA pattern lifts the geographic origin into an explicit *pipeline* concept that describes both acts retroactively). Two instances 37 degrees apart confirm the pattern as engine-trackable rather than coincidental.
+
+**NEW FAMILY (45th) and NEW ORDER Ephemeroptera.** On the species side, the **Mayfly Emergence** introduces the **45th family** in the engine (family-level entry covering PNW mayfly diversity — Ephemeridae, Baetidae, Heptageniidae, and Leptophlebiidae are all represented in Pacific Northwest streams and lakes, with the family-level approach reflecting the collective nature of mass-emergence events rather than single-species profiles) and the order **Ephemeroptera** as the **seventh insect order** in the engine. Seven insect orders now covered: **Orthoptera** (cricket 87, katydid 88), **Hemiptera** (cicada 89), **Diptera** (mosquito 91), **Hymenoptera** (bumblebee 92, hornet 93), **Plecoptera** (stonefly 94), and now **Ephemeroptera** (mayfly 95). **Ephemeroptera** is the **second insect order with an obligate aquatic life stage** — mayfly nymphs live entirely in water for months to years (varying by species and latitude) before the brief adult emergence. **Plecoptera** at degree 94 and **Ephemeroptera** at degree 95 form back-to-back aquatic insect orders — two consecutive degrees of insects whose larval/nymphal lives happen IN the water rather than above it. The aquatic-insect category, opened by the stonefly in the prior degree, deepens immediately with the mayfly at this degree.
+
+**The most ancient winged insect lineage — 300+ million years.** **Ephemeroptera** is the oldest extant winged insect order. Fossils date to over **300 million years ago**, to the **Carboniferous period** — before dinosaurs, before mammals, before the entire reptilian radiation. The mayfly's primitive wing design cannot fold flat against the body (unlike most modern insect orders, which evolved wing-folding later), and the order retains a unique life-cycle feature found in no other extant insect: the **subimago stage**. Mayfly nymphs emerge from the water as **subimagos** (called *duns* by fly fishers) — fully winged but sexually immature — and then undergo one final molt to become **imagos** (called *spinners*), the sexually mature adult. Mayflies are the *only* living insects that molt after developing functional wings. The subimago stage is an evolutionary relic of early insect life-cycle organization. The 300+ million year lineage gives the mayfly a depth in geological time that no other species in the engine shares; the mayfly predates every tetrapod on earth. The engine has now added to its vocabulary an order whose existence is itself a measurement of biological deep time.
+
+**The ephemeral adult — a new temporal category.** *Ephemeroptera* literally means *lasting a day*, from the Greek *ephemeros*. The name is not poetic; it is an accurate description of the adult life stage. Adult mayflies live **hours to days**, depending on species. The adult cannot eat: mouthparts are vestigial, the digestive tract is sealed. Adult mayflies have a single function: mate, lay eggs, die. The ephemeral adult opens a new temporal scale in the engine. Prior species lifespans spanned hours-to-decades, but no prior species had an adult stage measured in hours rather than years. The mayfly adult lifespan is less than the duration of a long album listen. The temporal category — *ephemeral adult* — joins the engine's other tracked biological categories (physiological extremes like the wood frog's freeze tolerance coming at degree 96, habitat categories like the vernal pool's temporary wetness also coming at 96, resilience strategies) as a new axis along which species entries can be classified.
+
+**Mass emergence as survival strategy — predator satiation.** Mayfly emergence is not an individual event; it is a **mass event**. Thousands to millions of nymphs emerge from a single body of water within a span of hours. The emergence is synchronized across the population by environmental cues (water temperature, photoperiod, barometric pressure), producing a coordinated hatch that overwhelms predators through sheer abundance. **Predator satiation** — a survival strategy in which so many prey emerge simultaneously that predators cannot eat enough of them to meaningfully reduce the surviving population — is the explicit reproductive strategy. Fish cannot eat every mayfly. Birds cannot eat every mayfly. Bats cannot eat every mayfly. The mayfly population pays for synchronization with extreme adult brevity, and the synchronization pays the population back in the form of enough survivors to lay the next generation's eggs. **Mass emergences are visible on weather radar** — the airborne cloud of adult mayflies registers as a meteorological feature, a fact that underscores the scale of the event. The survival-strategy taxonomy in the engine now has its first explicit entry (the stonefly at degree 94 was a *diagnostic species*; the mayfly at degree 95 is an *active survival strategist*).
+
+**The mass wing buzz over water — 96th species-side acoustic element.** The sound is the collective shimmering buzz of thousands of mayfly wings unfolding, drying, and taking flight simultaneously. Each individual mayfly's wings are too small and too delicate to produce audible sound at normal distances — the individual wing beat frequency is in the ultrasonic to very-low-audible range and is effectively silent. But **thousands** of mayflies emerging from a single stream or lake at once produce a distinctive *collective* sound: a soft shimmering buzz that hangs over the water surface for the duration of the emergence event. The sound is diffuse, broad-spectrum, and without dominant pitch. It is not a buzz in the hymenopteran sense (bumblebee 92, hornet 93), and it is not an individual emergence rustle (stonefly 94); it is the collective product of synchronized mass emergence. **E=3** reflects the energy scale: higher than the **Stonefly Hatch** at **E=2** (individual emergence masked by stream babble) because the mayfly's mass numbers elevate individually inaudible wing beats into an audible collective hum; lower than the **Cricket Chorus** at **E=4** (loud stridulation) because the individual wing-beat amplitude remains low. The 96th species-side acoustic element is the *collective emergence shimmer* — passive emergence at mass scale.
+
+**Fly fishing foundation — the art built on mayfly life stages.** The entire tradition of fly fishing is built on imitating mayfly life stages. Fly tiers and fly fishers speak in mayfly vocabulary: **nymph patterns** (imitating the underwater nymph); **emerger patterns** (imitating the emerging nymph-to-adult transition, the most vulnerable moment); **dry flies** (imitating the floating subimago or dun); **spinner patterns** (imitating the exhausted, egg-laying imago). The **hatch** — the mass emergence of mayflies from a particular body of water on a particular afternoon — is the central social and biological event of fly fishing culture. Fly fishers track hatches by species, by season, by stream, and by river system. The mayfly's multi-stage life cycle provides the sport with its primary vocabulary of imitation. No other insect order has this foundational relationship to a single traditional art form. The engine now carries this cultural-ecological linkage as an explicit research artifact.
+
+**Cross-Sync Parallel: Both Are Collective Experiences.** Both halves of degree 95 reach their impact through *collective* rather than *individual* scale. **ODESZA** at **E=5** delivers the euphoric build to thousands of festival-goers, synchronizing the audience's attention, breath, and movement across the duration of the build and the release of the drop. The live show is engineered to produce a shared physical event: the audience becomes one body moving to the same beat, the same build, the same resolution. **In parallel**, the **mayfly emergence** at **E=3** is a collective event by biological necessity: a single emerging mayfly would be inaudible and would be eaten by the first kingfisher or fish that noticed it, but *thousands emerging simultaneously* overwhelm the sensory and predatory landscape and become both sonically and visually undeniable. **Each side** reaches its impact through synchronization. **The same** principle — that collective-scale events have properties no individual event can generate — operates on both halves. **Synchronized** by the catalog rather than by intention, both halves of degree 95 form a duet about the power of synchronization.
+
+**Cross-Sync Parallel: The Euphoric vs the Ephemeral.** Both halves of degree 95 are studies in *duration*. **ODESZA** builds to euphoric drops that last minutes inside shows that last hours; the euphoric experience is intense but time-bounded, and the audience remembers the build and the drop for months or years afterward. **In parallel**, the **mayfly**'s mass emergence as an event lasts hours to days, but the individual mayfly's adult life lasts only hours to days — the ephemeral adult stage *is* the duration of the emergence. **Each side** turns duration into a parameter of its aesthetic. The euphoric build creates lasting memory through intense but brief experience; the ephemeral adult IS the intensity — brief, total, then gone. **The same** structural insight — that brevity can be the medium rather than merely the boundary — operates on both. **Synchronized** by the catalog, ODESZA's euphoric drops and the mayfly's ephemeral adulthood both teach that compressed duration is a feature, not a limitation.
+
+**Cross-Sync Parallel: Both About Architecture.** Both halves of degree 95 are *architectured* rather than merely *expressed*. **ODESZA** builds tension through deliberate architectural moves: synth layer counts, sample choices, harmonic progressions, rhythmic density, spatial positioning, the exact moment of the drop. The build is engineered, not improvised. **In parallel**, the **mayfly's mass emergence** is architectured by evolution: synchronization cues, vestigial mouthparts, the subimago-to-imago molt, the egg-laying behavior of the female imago. The evolutionary architecture is not improvised either. **Each side** reveals itself as a designed system — one designed by two humans at mixing desks in Seattle, one designed by selection pressure across 300 million years. **The same** recognition — that the apparently spontaneous is in fact deeply structured — reaches both halves. **Synchronized** by the catalog, the Ableton session and the Carboniferous fossil both reveal themselves as blueprints.
+
+**Cross-Sync Parallel: Both Festival-Scale in Different Mediums.** Both halves of degree 95 operate at *festival scale* within their respective domains. **ODESZA** headlines **Coachella**, **Bonnaroo**, **Electric Forest**, and the full festival circuit — the audience is tens of thousands at once, across multiple nights. **In parallel**, a major mayfly emergence event on a Pacific Northwest river (the **Yakima**, the **Columbia**, **Skagit** tributaries, **Olympic Peninsula** rivers) can produce tens of thousands to millions of adult mayflies over the course of an afternoon, sometimes so thick that drivers must turn on windshield wipers to see through them. **Each side** reaches audiences or organisms in the tens of thousands. **The same** structural scale — *festival* as a word that denotes both musical event and natural event — applies to both. **Synchronized** by the catalog, the electronic festival and the mayfly hatch are both mass gatherings that transform their environment.
+
+**Cross-Sync Parallel: Back-to-Back Origins and Back-to-Back Aquatic Insects.** Both halves of degree 95 extend back-to-back runs that opened at degree 94. **ODESZA** extends the back-to-back **Electronic** thread on the music side — the **Electronic/Experimental** at degree 94 (Erik Blood) becomes the **Electronic** at degree 95 (ODESZA), two consecutive electronic-inflected genre stages. **In parallel**, the **Mayfly Emergence** extends the back-to-back **aquatic insect** thread on the species side — the **Plecoptera** at degree 94 (stonefly) becomes the **Ephemeroptera** at degree 95 (mayfly), two consecutive aquatic insect orders with the larval/nymphal life occurring IN water. **Each side** uses degree 95 to continue and deepen a category opened at degree 94. **The same** structural move — a back-to-back pairing that doubles down on a newly introduced category — reaches both halves. **Synchronized** by the catalog, the Electronic Era deepens at the same degree that the Aquatic Insect category deepens.
+
+**Cross-Sync Parallel: Both Are Second Instances That Confirm Patterns.** Both halves of degree 95 are *second instances* that confirm engine patterns as tracked rather than coincidental. **ODESZA** at **degree 95** is the **second Bellingham/WWU act** after **Death Cab for Cutie** at **degree 58** — the 37-degree gap confirms the Bellingham Pipeline as a lineage the engine can track. **In parallel**, the **Mayfly Emergence** is the **second aquatic insect** after the **Stonefly Hatch** at **degree 94** — one-degree gap, immediate confirmation, making the aquatic-insect category a tracked subcategory. **Each side** uses the second instance to lift a pattern from notable to trackable. **The same** structural move — a second instance confirming a first — reaches both halves. **Synchronized** by the catalog, the Bellingham Pipeline and the aquatic insect category both become engine-permanent at degree 95.
+
+**Cross-Sync Parallel: Both Introduce First-Of-Kind Elements.** Both halves of degree 95 introduce **firsts**. The **Mayfly Emergence** is the **most ancient winged insect lineage** in the engine (300+ million years); **Ephemeroptera** brings the **first 300-million-year lineage**; the **ephemeral adult** opens a new *temporal scale* (hours-to-days adult life); the **mass emergence** opens a new *survival-strategy category* (predator satiation); and the **subimago stage** adds a life-cycle category no other engine species has. **In parallel**, **ODESZA** brings the **first E=5 electronic entry** on the artist side, **Genre Stage 77** named, **the euphoric build** opens a new *sonic architecture category* (tension-release electronic at festival scale), and **the Bellingham Pipeline** opens a new *artist-city-pattern category* (geographic incubator as structural concept). **Each side** introduces multiple new engine categories. **The same** structural move — taxonomy expansion in parallel on both halves — reaches degree 95 simultaneously. **Synchronized** by the catalog, the engine's sonic architecture, artist-city pattern, genre stage, insect order, survival strategy, temporal scale, and life-cycle category taxonomies all grow at the same degree.
+
+**Thirty-fifth consecutive original CSV species.** The species-side source catalog has now delivered 35 consecutive entries (degrees 61–95) without substitution or correction. The CSV continues to be sturdy. The mayfly family-level entry is drawn directly from the original Pacific Northwest catalog, maintaining the longest unbroken run of original-catalog species in the engine to date.
 
 ## Key Features
 
 | Metric | Part A: ODESZA | Part B: Mayfly Emergence |
 |--------|----------------|--------------------------|
-| Genre | Electronic (Genre Stage 77, seventy-seven genre stages in 95 degrees, cinematic electronic, euphoric builds, vocal samples, festival-scale, layered synths, massive drops, distinguished from Electronic/Experimental 94, Dream Pop/Electronic 93, Drone/Noise 91, Electronic Pop 86, sixth electronic entry in ten degrees) | -- |
-| Energy | E=5 (Coachella headliner, Grammy-nominated, arena-headlining tours, Counter Records, one of the biggest electronic acts from PNW, maximum energy) | E=3 (mass emergence, collective wing buzz, thousands hatching simultaneously, higher than stonefly 94 E=2 due to mass numbers, lower than cricket 87 E=4 due to individual wing beats far softer) |
-| Label | Counter Records (primary label for major releases) | -- |
-| Family | -- | 45th family (NEW, Ephemeroptera family, first mayflies) |
-| Order | -- | Ephemeroptera (NEW ORDER, seventh insect order, most ancient winged insects 300+ million years, second aquatic insect order after Plecoptera 94) |
-| Class | -- | Insecta (nine insect entries in degrees 87-95, the insect era extends, seven orders represented) |
-| Acoustic Element | the euphoric build (96th, rising tension through layered synths vocal samples textural accumulation building to massive crescendo and release, cinematic electronic construction, the build IS the composition, distinct from producer's palette 94 experimental studio and shimmer veil 93 reverb-as-architecture and ambient drift 90 floating atmospheric) | mass wing buzz over water (96th species-side, collective shimmering wing buzz of thousands emerging simultaneously, individually nearly inaudible but mass event creates shimmering hum, distinct from wing rustle 94 individual emergence E=2 and aggressive papery hum 93 collective E=5 and deep resonant buzz 92 warm continuous) |
-| Artist-City Pattern | The Bellingham Pipeline (96th, university town incubates artists who launch into Seattle and the world, Death Cab 58 and ODESZA 95 both WWU Bellingham, different genres different decades same pipeline, distinct from cross-genre bridge 94 connecting scenes and intimate machine 93 electronic intimacy) | -- |
-| Structural Firsts | GENRE STAGE 77 (Electronic), THE EUPHORIC BUILD 96th acoustic element (cinematic electronic tension-release), THE BELLINGHAM PIPELINE 96th artist-city pattern (WWU origin), SECOND BELLINGHAM/WWU ACT (Death Cab 58 + ODESZA 95), COACHELLA HEADLINER, GRAMMY-NOMINATED, E=5 (back-to-back from E=4 at 94), SIXTH ELECTRONIC ENTRY IN TEN DEGREES (86 90 91 93 94 95) | NEW FAMILY (45th), NEW ORDER EPHEMEROPTERA (seventh insect order), MOST ANCIENT WINGED INSECTS (300+ million years Carboniferous), EPHEMERAL ADULT (hours to days cannot eat vestigial mouthparts), MASS EMERGENCE (thousands simultaneous predator satiation), FLY FISHING FOUNDATION (entire art built on mayfly), MASS WING BUZZ OVER WATER (96th species-side acoustic element), BACK-TO-BACK AQUATIC INSECTS (Plecoptera 94 Ephemeroptera 95), THIRTY-FIFTH CONSECUTIVE ORIGINAL CSV, INSECT ERA EXTENDS (nine entries 87-95) |
+| Genre | **Electronic** (**GENRE STAGE 77**, seventy-seven genre stages in 95 degrees, ~0.81 stages/degree, cinematic electronic production, euphoric builds, vocal samples, festival-scale sound design, layered synths, massive drops, **sixth electronic-adjacent entry in ten degrees** at 86 90 91 93 94 95, distinguished from Electronic/Experimental 94 studio-as-instrument and Dream Pop/Electronic 93 reverb-laden intimate and Drone/Noise 91 maximalist texture and Ethereal/Electronic 90 ambient psychedelic drift and Indie Electronic 86 structured melodic) | — |
+| Energy | **E=5** (Coachella headliner, Grammy-nominated for *A Moment Apart*, arena-headlining tours, Counter Records, one of the biggest electronic acts from PNW, maximum energy ceiling, first E=5 electronic entry in the engine) | **E=3** (mass emergence elevates individually inaudible wing beats to collective shimmering buzz over water, higher than Stonefly Hatch 94 E=2 individual emergence rustle, lower than Cricket Chorus 87 E=4 loud stridulation, thousands-to-millions simultaneous mass event, predator satiation scale) |
+| Label | **Counter Records** (primary label for *In Return*, *A Moment Apart*, *The Last Goodbye*, UK-based electronic label scaffolding for major releases, distinct from self-released NAVVI 93 and Erik Blood 94 and Sub Pop / K Records / Barsuk / Hardly Art / Captured Tracks / Secretly Canadian) | — |
+| Family | — | **45th family** (**NEW**, family-level entry covering PNW mayfly diversity — Ephemeridae, Baetidae, Heptageniidae, Leptophlebiidae — collective mass-emergence coverage rather than single-species profile) |
+| Order | — | **Ephemeroptera** (**NEW ORDER**, **SEVENTH INSECT ORDER**, **SECOND AQUATIC INSECT ORDER** after Plecoptera 94, most ancient winged insect lineage 300+ million years Carboniferous fossils, primitive wing design cannot fold flat, unique subimago-to-imago molt, only extant insects to molt after developing functional wings) |
+| Class | — | **Insecta** (**NINTH CONSECUTIVE Insecta entry** 87–95 with degree 90 Spring Peeper-Like Chorus as Amphibia interlude, deepest sustained taxon class exploration, seven orders covered, three primary sound mechanisms stridulation tymbal wing vibration plus emergence rustle plus collective emergence shimmer) |
+| Acoustic Element | **the euphoric build** (**96th**, rising tension through layered synthesizers vocal samples textural accumulation harmonic suspension building to massive crescendo and release, cinematic electronic construction, the build IS the composition, collective festival-scale experience, distinct from producer's palette 94 experimental studio and shimmer veil 93 reverb-as-architecture and ambient drift 90 floating atmospheric and sustained crush 91 no-build maximalist texture) | **the mass wing buzz over water** (**96th species-side**, collective shimmering wing buzz of thousands of mayflies emerging simultaneously, individual wing beats nearly inaudible but mass event creates distinctive soft shimmering hum above water surface, broad-spectrum no dominant pitch, distinct from wing rustle 94 individual emergence E=2 and aggressive papery hum 93 collective Vespidae defense E=5 and deep resonant buzz 92 warm continuous Apidae aerial) |
+| Artist-City Pattern | **The Bellingham Pipeline** (**96th**, university town incubates artists who launch into Seattle and the wider world, specifically **Western Washington University** in Bellingham WA, **Death Cab for Cutie** 58 and **ODESZA** 95 both formed at WWU, different genres different decades same geographic and institutional pipeline, 37-degree separation confirms pattern as trackable, distinct from cross-genre bridge 94 connecting scenes and intimate machine 93 electronic intimacy and Bellingham ascent 58 single-arc origin story) | — |
+| Habitat Marker | — | **Cold to temperate PNW streams and lakes** (**Cascade Range**, **Olympic Mountains**, **Yakima River**, **Columbia River tributaries**, **Skagit River system**, **Olympic Peninsula** rivers, nymphs live IN the water for months to years depending on species and latitude, adults emerge en masse synchronized by water temperature photoperiod and barometric pressure) |
+| Life-Cycle Unique | — | **Subimago stage** (only extant insect order to molt AFTER developing functional wings, nymph emerges from water as subimago/dun then molts one more time to become imago/spinner, evolutionary relic of early insect life-cycle organization, vocabulary adopted by fly fishing tradition) |
+| Survival Strategy | — | **Predator satiation via mass emergence** (**NEW CATEGORY** in engine survival-strategy taxonomy, thousands-to-millions simultaneous emergence overwhelms predators through sheer abundance, synchronization across population by environmental cues, mass emergence visible on weather radar, population pays for synchronization with extreme adult brevity, synchronization pays population back in enough survivors to lay next generation's eggs) |
+| Cultural Linkage | — | **Fly fishing foundation** (entire art of fly fishing built on imitating mayfly life stages — nymph patterns, emerger patterns, dry flies, spinner patterns — the hatch is the central social and biological event of fly fishing culture, tracked by species season stream and river system, no other insect order has this foundational relationship to a traditional art form) |
+| Structural Firsts | **GENRE STAGE 77** Electronic (cinematic festival-scale), **THE EUPHORIC BUILD** 96th acoustic element (tension-release electronic construction, the build IS the composition), **THE BELLINGHAM PIPELINE** 96th artist-city pattern (university-town incubator), **SECOND BELLINGHAM/WWU ACT** (Death Cab 58 + ODESZA 95, 37-degree separation, different genres different decades), **FIRST E=5 ELECTRONIC ENTRY** (the electronic side reaches the engine's energy ceiling), **COACHELLA HEADLINER** + **GRAMMY-NOMINATED** (*A Moment Apart*, Best Dance/Electronic Album nomination), **SIXTH ELECTRONIC-ADJACENT ENTRY IN TEN DEGREES** (86 90 91 93 94 95), **COUNTER RECORDS** label enters engine | **NEW FAMILY** 45th (PNW mayfly family-level entry), **NEW ORDER EPHEMEROPTERA** seventh insect order, **SECOND AQUATIC INSECT ORDER** after Plecoptera 94 back-to-back aquatic insects, **MOST ANCIENT WINGED INSECT LINEAGE** 300+ million years Carboniferous predates dinosaurs, **EPHEMERAL ADULT** hours-to-days new temporal category in the engine, **SUBIMAGO STAGE** only extant insects to molt after developing functional wings, **MASS EMERGENCE** new survival-strategy category in engine, **PREDATOR SATIATION** explicit survival strategy opens, **FLY FISHING FOUNDATION** cultural linkage enters engine, **MASS WING BUZZ OVER WATER** 96th species-side acoustic element, **BACK-TO-BACK AQUATIC INSECTS** (Plecoptera 94 Ephemeroptera 95), **NINE INSECT ENTRIES IN NINE DEGREES** 87–95 deepest taxon-class run extends, **THIRTY-FIFTH CONSECUTIVE ORIGINAL CSV** (degrees 61–95) |
 | Research Words | ~5,500 | ~5,500 |
 | Files Produced | 4 | 4 |
 | Cross-References | 5 | 5 |
 
-<details>
-<summary>Full Release Notes -- Click to expand</summary>
+## Part A: ODESZA — The Euphoric Build
 
-## Part A: ODESZA -- THE EUPHORIC BUILD (Electronic, E=5, Counter Records, Seattle/Bellingham, GENRE STAGE 77 Electronic Seventy-Seven Genre Stages Cinematic Electronic Euphoric Builds Vocal Samples Festival-Scale, The Euphoric Build 96th Acoustic Element Rising Tension Layered Synths Massive Crescendo, The Bellingham Pipeline 96th Artist-City Pattern WWU Incubation Death Cab 58 ODESZA 95, Second Bellingham/WWU Act, Coachella Headliner, Grammy-Nominated)
+- **Genre Stage 77 — Electronic milestone.** The engine has now introduced seventy-seven distinct genre stages across ninety-five degrees — roughly 0.81 stages per degree, a remarkably stable rate since the folk zone began at degree 45. **Electronic** describes ODESZA's music: cinematic electronic production, euphoric builds, vocal samples, festival-scale sound design, layered synths, massive drops. Distinguished from **Electronic/Experimental** (Erik Blood, 94) by intent (ODESZA is structured and purpose-built for collective experience; Erik Blood is studio-experimental and genre-blending); from **Dream Pop/Electronic** (NAVVI, 93) by scale (ODESZA is festival-scale and arena-oriented; NAVVI is intimate and bedroom-scale); from **Drone/Noise** (Hovercraft, 91) by architecture (ODESZA works in explicit build-and-drop cycles; Hovercraft is sustained crush with no build-and-release); from **Ethereal/Electronic** (Sky Cries Mary, 90) by direction (ODESZA's builds climb with narrative arc; Sky Cries Mary's drifts have no direction); from **Indie Electronic** (Postal Service, 86) by scale (ODESZA is festival-scale; Postal Service is indie pop). The **sixth electronic-adjacent genre stage in ten degrees** (86, 90, 91, 93, 94, 95) — the Pacific Northwest's electronic landscape is being mapped in depth.
+- **ODESZA — Harrison Mills and Clayton Knight at WWU.** The electronic music project of **Harrison Mills** and **Clayton Knight**, who met at **Western Washington University** in **Bellingham, Washington** in 2012. They bonded over electronic music production and released their debut *Summer's Gone* (2012) while still in college — entirely self-produced and self-released from the dorm. The self-release established their signature: warm, cinematic electronic music built on layered synths, vocal samples, and euphoric builds. They then relocated to **Seattle** and signed with **Counter Records** as the project grew beyond what dorm-room release could support.
+- **The ODESZA discography — Counter Records arc.** *In Return* (2014) — expanded the sound, earned critical acclaim, broke them through the festival circuit; tracks like *Say My Name* became widespread festival anthems. *A Moment Apart* (2017) — **Grammy-nominated for Best Dance/Electronic Album**, triggered arena tours, and consolidated ODESZA's position as one of the biggest electronic acts from the Pacific Northwest. *The Last Goodbye* (2022) — billed as a farewell album and tour, headlined **Coachella**, raised the question of whether the project would continue at the same scale. The catalog moves from dorm-room intimacy to arena spectacle while retaining the cinematic warmth of the earliest releases.
+- **The euphoric build — 96th acoustic element.** ODESZA's defining sonic architecture is the *build* — rising tension through layered synthesizers, vocal samples, textural accumulation, harmonic suspension, climbing toward a massive crescendo and release. Cinematic electronic construction. **The build IS the composition**: ODESZA does not use the build as a transitional device before a chorus; the build is the song's structural spine, and the drop is the reward. Wide stereo fields, layered synth ensembles, processed vocal samples as textural instruments rather than narrative voices. Distinct from **the producer's palette** at degree 94 (Erik Blood's whole-studio experimentalism — no genre obligation; ODESZA's build is structured for collective experience). Distinct from **the shimmer veil** at degree 93 (NAVVI's reverb-as-architecture — intimate scale; ODESZA is massive scale). Distinct from **the ambient drift** at degree 90 (Sky Cries Mary — no direction; ODESZA's build has direction, it climbs).
+- **The Bellingham Pipeline — 96th artist-city pattern.** Degree 95 names a new artist-city pattern: the university-town incubator that launches artists into Seattle and the wider world. **Western Washington University** in **Bellingham** is the pipeline's specific mechanism. Pipeline mechanics: a university community with cheap rent, proximity to Seattle (90 miles north), an independent cultural identity that is not merely satellite-to-Seattle, and the time and space that college years provide for creative experimentation. Both **Death Cab for Cutie** (58) and **ODESZA** (95) formed at WWU — different genres, different decades, same pipeline. Distinct from **The Cross-Genre Bridge** at degree 94 (Erik Blood connecting scenes via production — ODESZA is an origin point, not a bridge) and from **The Intimate Machine** at degree 93 (NAVVI's bedroom duo — ODESZA's scale is the opposite pole).
+- **Second Bellingham/WWU act — 37-degree gap.** Two instances 37 degrees apart confirm the Bellingham Pipeline as a tracked engine lineage. **Death Cab for Cutie** at degree 58 was the first Bellingham/WWU act, a 1997-era indie rock band whose Bellingham origins launched a national career. **ODESZA** at degree 95 is the second, a 2012-era electronic duo whose Bellingham origins launched a global festival career. Different genres (indie rock vs electronic), different decades (1997 vs 2012), same geographic and institutional origin. Two is enough to declare the lineage tracked rather than coincidental. The pipeline now joins the engine's other confirmed geographic threads: the **Olympia lo-fi** lineage, the **Anacortes hermit** lineage, the **Death Cab orbit**, and the **producer-as-artist** lineage (Walla 67, Blood 94).
+- **E=5 — Coachella headliner, first E=5 electronic.** E=5 reflects ODESZA's position: **Coachella** headliner, **Grammy-nominated**, arena-headlining tours, Counter Records. One of the biggest electronic acts from the Pacific Northwest. Maximum energy ceiling on the artist side. **First E=5 entry in the Electronic Era** — the prior electronic-inflected entries (Postal Service 86 at E=4, Sky Cries Mary 90 at E=3, Hovercraft 91 at E=2, NAVVI 93 at E=3, Erik Blood 94 at E=4) had not reached E=5. ODESZA brings the electronic side into the arena-scale energy category.
+- **The ODESZA live show — drumline, brass, visual production.** The live show is legendary — full drumline, brass section, synchronized visual production that transforms electronic music into cinematic live experience. The show is an explicit rebuttal to the stereotype of electronic acts as *just a DJ behind a laptop*: ODESZA's live performance uses live percussion, live horns, and live visual cueing to make the build-and-drop architecture physically embodied. The scale of the production (lighting rigs, video walls, pyrotechnics, confetti cannons) matches the scale of the audience (tens of thousands at festivals). The live show is a core reason for the E=5 classification.
+- **Sixth electronic-adjacent entry in ten degrees.** **The Postal Service** (86, Indie Electronic structured melodic), **Sky Cries Mary** (90, Ethereal/Electronic ambient psychedelic), **Hovercraft** (91, Drone/Noise maximalist texture), **NAVVI** (93, Dream Pop/Electronic reverb-laden intimate), **Erik Blood** (94, Electronic/Experimental studio-as-instrument), and now **ODESZA** (95, Electronic cinematic festival-scale). Six different relationships to electronic music in ten degrees. Each entry uses electronics differently: pop structure (86), atmosphere (90), obliteration (91), intimacy (93), experimentation (94), euphoria (95). The engine is mapping not just electronic music but the full range of what electronics *do* across the region's artists.
+- **Counter Records — label scaffolding.** ODESZA signed with **Counter Records** (UK-based electronic imprint of Ninja Tune) after relocating to Seattle. Counter Records distributed *In Return*, *A Moment Apart*, and *The Last Goodbye*. Counter is the first Counter Records entry in the engine and extends the label landscape: the engine's label map now spans major labels, large independents (**Sub Pop**), small independents (**K Records**, **Barsuk**, **Hardly Art**, **Captured Tracks**, **Secretly Canadian**, **Polyvinyl Records** coming at 96), self-released artists (**NAVVI** 93, **Erik Blood** 94), and now international electronic imprints (**Counter Records**, ODESZA 95).
+- **The dorm-room origin as DIY ethos.** ODESZA's self-released dorm-room debut *Summer's Gone* (2012) is the pre-Counter-Records foundation. The duo produced and released the album without industry scaffolding, establishing a DIY ethos that persisted even after the Counter Records deal. The dorm-room origin is the structural evidence for the Bellingham Pipeline pattern — the pipeline requires exactly this kind of origin point, where two students in a university town produce music in cheap space with no industry oversight.
+- **Electronic with cinematic warmth as a Pacific Northwest signature.** ODESZA's *cinematic warmth* — the use of sample choices, harmonic movement, and mix aesthetics that evoke the emotional register of film scoring rather than the cooler aesthetics of club or house — is a recognizable Pacific Northwest signature that connects to the region's indie emotional aesthetics (Death Cab, Fleet Foxes, Lemolo). The warmth is what distinguishes ODESZA's *Electronic* from the cooler club-oriented *Electronic* of other scenes. Pacific Northwest electronic retains emotional coloration that other regions' electronic music does not foreground.
 
-Full deep research covering ODESZA at degree 95, Genre Stage 77, and the euphoric build:
+## Part B: Mayfly Emergence (Ephemeroptera) — Mass Wing Buzz Over Water
 
-### STRUCTURAL EVENT: Genre Stage 77 -- Electronic
+- **NEW FAMILY (45th) and NEW ORDER Ephemeroptera — seventh insect order.** The **45th family** in the engine's family ledger — family-level entry covering Pacific Northwest mayfly diversity (Ephemeridae, Baetidae, Heptageniidae, Leptophlebiidae are all represented in PNW streams and lakes). **Ephemeroptera** is the **seventh insect order** in the engine, joining **Orthoptera** (cricket 87, katydid 88), **Hemiptera** (cicada 89), **Diptera** (mosquito 91), **Hymenoptera** (bumblebee 92, hornet 93), and **Plecoptera** (stonefly 94). **Second aquatic insect order** after Plecoptera, continuing the aquatic-insect category opened at degree 94. Family-level rather than species-level entry because mass emergence events are collective phenomena that span multiple Ephemeroptera families simultaneously.
+- **Most ancient winged insect lineage — 300+ million years.** **Ephemeroptera** is the oldest extant winged insect order. Fossils date to over **300 million years ago**, to the **Carboniferous period** — before dinosaurs, before mammals, before the entire reptilian radiation. The 300+ million year lineage gives the mayfly a depth in geological time that no other species in the engine shares. The engine has now added to its vocabulary an order whose existence is itself a measurement of biological deep time. The mayfly predates the breakup of Pangaea, the rise of flowering plants, and the entire tetrapod invasion of land as a major adaptive radiation.
+- **Primitive wing design — cannot fold flat.** The mayfly's wings are a structural relic of early insect flight evolution. Unlike most modern insect orders (which evolved wing-folding to tuck wings against the body during locomotion), **Ephemeroptera wings cannot fold flat**. The wings rest held-up over the body when at rest, a posture shared only with **Odonata** (dragonflies and damselflies) among extant insects and a relic of the ancestral winged-insect morphology. The primitive wing design is itself a feature worth cataloging: the mayfly's body plan has been broadly unchanged for 300 million years because the plan works.
+- **Subimago stage — the only extant insects to molt after developing functional wings.** Mayflies are the **only** living insects that molt after developing functional wings. Nymphs emerge from the water as **subimagos** (called *duns* by fly fishers) — fully winged but sexually immature — and then undergo one final molt to become **imagos** (called *spinners*), the sexually mature adult. The subimago stage is an evolutionary relic of early insect life-cycle organization. No other extant insect has this stage; the life-cycle category is uniquely Ephemeropteran. The vocabulary (*dun*, *spinner*) has been absorbed into fly fishing and is one of the few places where an 1800s-vintage sporting tradition preserves biologically correct terminology.
+- **The ephemeral adult — a new temporal category.** *Ephemeroptera* literally means *lasting a day*, from the Greek *ephemeros*. The name is accurate. Adult mayflies live **hours to days**, depending on species. The adult cannot eat: mouthparts are vestigial, the digestive tract is sealed. Adult mayflies have a single function: mate, lay eggs, die. No prior species in the engine had an adult stage measured in hours rather than years. The mayfly adult lifespan opens a new temporal scale: the *ephemeral adult*, an adult-stage duration category that joins habitat categories, physiology categories, and survival strategies as a new axis along which species entries can be classified.
+- **The mass wing buzz over water — 96th species-side acoustic element.** The collective shimmering buzz of thousands of adult mayflies emerging simultaneously from a single stream or lake. Individual wing beats are nearly inaudible — the mayfly's wings are small, delicate, and operate at a frequency that is mostly below human hearing at normal distances. But **thousands emerging at once** produce a distinctive soft shimmering hum above the water surface for the duration of the emergence event. Broad-spectrum, no dominant pitch. Not a buzz in the hymenopteran sense (bumblebee 92, hornet 93). Not an individual emergence rustle (stonefly 94). The 96th species-side acoustic element is the *collective emergence shimmer* — passive emergence at mass scale.
+- **E=3 — collective elevates individual.** The wing buzz is E=3 because the mass event raises individually inaudible wing beats to an audible collective. **Higher than Stonefly Hatch** (94, E=2) because mayflies emerge in thousands to millions while stoneflies emerge in individual events scattered along a riffle. **Lower than Cricket Chorus** (87, E=4) because individual mayfly wing amplitude remains low while individual cricket stridulation is loud. The species energy ledger now has a new E=3 point at degree 95 and has executed an oscillation across the recent run: **E=4** (Hornet 93) → **E=2** (Stonefly 94) → **E=3** (Mayfly 95). Three energy levels in three consecutive degrees, all insects, showing how energy level reflects mass scale, individual scale, and mixed scale respectively.
+- **Mass emergence — predator satiation strategy.** Mayfly emergence is not an individual event; it is a **mass event**. Thousands to millions of nymphs emerge from a single body of water within a span of hours. The emergence is synchronized across the population by environmental cues (water temperature, photoperiod, barometric pressure). **Predator satiation** — a survival strategy in which so many prey emerge simultaneously that predators cannot eat enough of them to meaningfully reduce the surviving population — is the explicit reproductive strategy. The population pays for synchronization with extreme adult brevity; the synchronization pays the population back in the form of enough survivors to lay the next generation's eggs. **Mass emergences are visible on weather radar**. The survival-strategy taxonomy in the engine now has its first explicit entry.
+- **Back-to-back aquatic insects — Plecoptera 94 and Ephemeroptera 95.** The Stonefly Hatch at degree 94 and the Mayfly Emergence at degree 95 form **back-to-back aquatic insect orders** — two consecutive degrees of insects whose larval/nymphal life occurs IN water rather than above it. The aquatic-insect category, opened at 94, deepens immediately at 95. Both orders require clean, cold, well-oxygenated water. Both are stream-health indicators. Both emerge as winged adults that are far smaller and more short-lived than their aquatic nymphal stage. The back-to-back pairing doubles the aquatic-insect category and confirms it as a tracked subcategory within the Insecta class.
+- **Fly fishing foundation — the art built on mayfly life stages.** The entire tradition of fly fishing is built on imitating mayfly life stages. Fly tiers and fly fishers speak in mayfly vocabulary: **nymph patterns** (imitating the underwater nymph); **emerger patterns** (imitating the emerging nymph-to-adult transition, the most vulnerable moment); **dry flies** (imitating the floating dun/subimago); **spinner patterns** (imitating the exhausted egg-laying imago). The **hatch** — the mass emergence of mayflies from a particular body of water on a particular afternoon — is the central social and biological event of fly fishing culture. Fly fishers track hatches by species, season, stream, and river system. The Yakima River, Columbia River tributaries, Skagit River system, and Olympic Peninsula rivers all have known hatch calendars. No other insect order has this foundational relationship to a traditional art form; the engine carries the cultural-ecological linkage as an explicit research artifact.
+- **Nine insect entries in nine degrees — the taxon-class run extends.** Cricket Chorus (87, Gryllidae), Katydid (88, Tettigoniidae), Cicada (89, Cicadidae), [Spring Peeper-Like Chorus 90, Hylidae — Amphibia interlude], Mosquito Swarm (91, Culicidae), Bumblebee Drone (92, Apidae), Hornet Nest Buzz (93, Vespidae), Stonefly Hatch (94, Perlidae), Mayfly Emergence (95, Ephemeroptera). Nine insect entries in nine degrees with one Amphibia interlude. Seven insect orders covered. Three sound mechanisms (stridulation, tymbal, wing vibration) plus the new emergence-rustle category plus the new collective emergence shimmer category. The Insect Era has become a sub-engine within the engine and continues to deepen.
+- **Thirty-fifth consecutive original CSV.** The mayfly entry is the thirty-fifth consecutive species drawn from the original source catalog without substitution (degrees 61–95). The original CSV continues to deliver. The longest unbroken run of original-catalog selections in the engine to date.
+- **PNW mayfly diversity in stream and lake ecosystems.** The Cascade Range, Olympic Mountains, Yakima River, Columbia River tributaries, Skagit River system, and Olympic Peninsula rivers all support rich mayfly populations. Ephemeridae (larger burrowing mayflies) occupy slow silty bottoms in lakes and slow rivers; Baetidae (small minnow mayflies) favor fast oxygenated riffles; Heptageniidae (flathead mayflies) cling to rocks in strong currents; Leptophlebiidae occupy varied habitats. The family-level entry implicitly covers this Pacific Northwest diversity through mass-emergence coverage rather than single-species profiling.
 
-Degree 95 reaches **Genre Stage 77**. **Electronic** describes ODESZA's music: cinematic electronic production, euphoric builds, vocal samples, festival-scale sound design, layered synths, and massive drops.
+## Retrospective
 
-Distinguished from prior electronic entries:
-- **Erik Blood** (degree 94) is Electronic/Experimental -- studio-as-instrument, genre-blending, atmospheric. ODESZA is Electronic -- structured, euphoric, pop-accessible, festival-scale.
-- **NAVVI** (degree 93) is Dream Pop/Electronic -- reverb-laden, intimate. ODESZA is cinematic and arena-scale.
-- **Hovercraft** (degree 91) is drone/electronic -- maximalist texture, no vocals. ODESZA is melodic, vocal-sample-forward, build-and-drop architecture.
-- **The Postal Service** (degree 86) is Electronic Pop -- structured, melodic, indie-electronic crossover. ODESZA is festival-scale, instrumental-forward, euphoric.
+### What Worked
 
-Seventy-seven genre stages in 95 degrees. Six electronic-adjacent entries in ten degrees (86, 90, 91, 93, 94, 95).
+- **ODESZA as Electronic at Genre Stage 77 tracks cleanly.** The classification is genuinely distinct from Electronic/Experimental (Erik Blood 94, studio-as-instrument genre-blending), Dream Pop/Electronic (NAVVI 93, reverb-laden intimate), Drone/Noise (Hovercraft 91, maximalist texture no vocals), Ethereal/Electronic (Sky Cries Mary 90, ambient psychedelic drift), and Indie Electronic (Postal Service 86, structured melodic pop). Six electronic-adjacent entries in ten degrees form a coherent and deepening Electronic Era, each entry with its own identity. The classification is defensible and verifiable.
+- **The euphoric build captures the sonic reality precisely.** Rising tension through layered synthesizers, vocal samples, textural accumulation, harmonic suspension, building to massive crescendo and release. The 96th acoustic element earns its name through specific structural properties — the build IS the composition, tension-release is the core architecture — rather than through descriptive flourish.
+- **The Bellingham Pipeline names a real artist-city pattern.** Two instances 37 degrees apart (Death Cab 58, ODESZA 95) confirm the pattern as tracked rather than coincidental. WWU is verifiably the shared origin. Pipeline mechanics (cheap rent, university community, proximity to Seattle, independent cultural identity, creative time and space) are observational rather than speculative. The pattern is defensible.
+- **E=5 for ODESZA is well-supported.** Coachella headliner, Grammy-nominated for *A Moment Apart*, arena-headlining tours, one of the biggest electronic acts from the Pacific Northwest. The first E=5 entry in the electronic era, matching the engine's arena-scale ceiling on an electronic-side entry for the first time.
+- **NEW FAMILY (45th) and NEW ORDER Ephemeroptera (seventh insect order) are taxonomically significant.** First mayflies in the engine, second aquatic insect order after Plecoptera (94), most ancient winged insect lineage (300+ million years). The family-level entry was the right granularity for collective mass-emergence behavior across PNW mayfly families.
+- **The 300+ million year lineage is a new depth category.** No prior species in the engine has a documented lineage spanning 300 million years; the mayfly adds biological deep time as a new axis. The Carboniferous fossil record is well-documented and verifiable. The engine gains a reference point for geological-time-scale claims.
+- **The ephemeral adult opens a new temporal scale.** No prior species had an adult stage measured in hours. The *ephemeral adult* category joins the engine's other biological taxonomies (physiology categories, habitat categories, survival strategies) as a new axis. Future entries can be classified by adult-stage duration (hours, days, weeks, months, years, decades).
+- **Mass emergence as survival strategy opens a new category.** The stonefly at 94 was a *diagnostic species*; the mayfly at 95 is an *active survival strategist*. The engine accumulates ecological concepts as the Insect Era deepens. Predator satiation as an explicit survival strategy adds to the species taxonomy.
+- **Fly fishing foundation adds a cultural-ecological linkage.** The entire art of fly fishing is built on imitating mayfly life stages. No other insect order has this relationship to a traditional art form. The engine's species entries now have an explicit cultural-linkage axis (the mayfly opens it; future entries can be classified against cultural linkages they hold).
+- **Back-to-back aquatic insects (Plecoptera 94, Ephemeroptera 95) confirm the aquatic category.** Two consecutive aquatic insect orders, back-to-back, confirm the aquatic-insect category as a tracked subcategory within Insecta. The doubling demonstrates that the engine can sustain thematic pairing across consecutive degrees when the catalog supports it.
+- **The collective-experience cross-sync between ODESZA and the mayfly is structurally clean.** Both halves are studies in collective scale, both reach impact through synchronization, both operate at festival scale in their respective domains. The A/B pairing between the euphoric build and the mass wing buzz over water produces multiple thematic parallels (collective experience, architecture, festival scale, synchronization, second-instance confirmation, first-of-kind elements) without forcing any of them.
+- **Nine insect entries in nine degrees extends the deepest taxon-class run.** The Insect Era now spans seven orders, nine families, three primary sound mechanisms plus two emergence categories. The engine demonstrates that sustained taxon-class exploration can go nine degrees deep without repetition or exhaustion of the catalog.
 
-### ODESZA -- Cinematic Electronic, Bellingham to the World
+### What Could Be Better
 
-**Formation and Career:** ODESZA is the electronic music project of **Harrison Mills** and **Clayton Knight**, who met at **Western Washington University** in **Bellingham, Washington** in 2012. They bonded over electronic music production and released their debut *Summer's Gone* (2012) while still in college -- entirely self-produced and self-released. The album established their signature: warm, cinematic electronic music built on vocal samples, layered synths, and euphoric builds.
+- **Individual PNW mayfly species not deeply profiled.** Family-level coverage was appropriate for the collective mass-emergence event, but species-level profiles (specific *Hexagenia*, *Baetis*, or *Ephemerella* species, for example) remain a future option for a more granular mayfly entry. The fly fishing tradition tracks hatches by species, so species-level coverage could eventually complement the current family-level entry.
+- **Fly fishing hatch calendars not documented.** The Yakima River, Columbia River tributaries, Skagit River system, and Olympic Peninsula rivers each have known hatch calendars that were not incorporated into the research artifact. A future research pass could map PNW hatch calendars by month and watershed, extending the fly fishing cultural linkage.
+- **NO RAPTOR in 96 entries.** The absence of birds of prey (Accipitridae, Falconidae, Strigidae, Tytonidae) across the entire PNW catalog so far is a structural deficiency that has now persisted for six consecutive degrees (90–95). The engine has fifteen Aves entries from earlier degrees but zero raptors. A bird of prey is overdue and should be prioritized.
+- **NO PASSERIFORM in 39 degrees.** Thirty-nine consecutive non-passerine degrees (57–95) is extreme. Passerines are the largest avian order; their absence distorts the engine's coverage of bird acoustic diversity. The engine should plan a deliberate return to passerines in the coming degrees.
+- **NO MARINE SPECIES in 96 entries.** The Pacific Northwest's marine ecosystem (Salish Sea, Olympic Coast, Puget Sound proper) is unrepresented. Harbor seal, orca, sea lion, common loon, marbled murrelet — none have appeared. For an engine titled around Puget Sound, the marine omission grows more conspicuous with each non-marine degree.
 
-They relocated to **Seattle** and signed with **Counter Records**:
-- *In Return* (2014) -- expanded the sound, critical acclaim, festival circuit breakthrough.
-- *A Moment Apart* (2017) -- Grammy-nominated for Best Dance/Electronic Album. Arena tours.
-- *The Last Goodbye* (2022) -- billed as a farewell. Headlined Coachella.
+## Lessons Learned
 
-ODESZA's live show is legendary -- full drumline, brass section, and elaborate visual production that transforms electronic music into a cinematic live experience.
+1. **The Bellingham Pipeline is confirmed as a tracked lineage.** With **Death Cab for Cutie** at degree 58 and **ODESZA** at degree 95, two instances 37 degrees apart confirm the Bellingham Pipeline as an engine-trackable pattern rather than an isolated case. A university town (WWU) producing two of the PNW's most commercially successful acts across different genres and decades is a real pipeline. Future Bellingham/WWU entries — and any future entries from other university-town incubators (Olympia, Ellensburg, Walla Walla, Pullman) — should be classified against this pattern.
+2. **Six electronic-adjacent entries in ten degrees demonstrate the Pacific Northwest's electronic depth.** Each entry maps a different relationship to electronics — pop structure (Postal Service 86), atmosphere (Sky Cries Mary 90), obliteration (Hovercraft 91), intimacy (NAVVI 93), experimentation (Erik Blood 94), euphoria (ODESZA 95). Six degrees, six purposes, one technology. Not every region's music ecology would support this density without repetition. The PNW's electronic landscape can sustain six distinct stages in ten degrees, which is itself a measure of source-community depth.
+3. **The ephemeral adult opens a new temporal scale in the engine.** Adult lifespan measured in hours rather than years is a fundamentally new category. The engine now spans lifespans from hours (mayfly adult) to decades (most mammals). The temporal-scale taxonomy — alongside physiology, habitat, and survival-strategy taxonomies — becomes an axis along which species entries can be classified. Future extreme-temporal entries (instar durations, multi-year nymphal stages, centuries-old trees if ever included) should be classified against this opening entry.
+4. **Mass emergence as an active survival strategy is a new ecological concept category.** The stonefly at 94 introduced the diagnostic-species concept (presence IS the data). The mayfly at 95 introduces the active-survival-strategy concept (predator satiation through synchronized mass abundance). The engine accumulates ecological concepts as the Insect Era deepens. Future entries should be classified by explicit survival strategies (predator satiation, crypsis, chemical defense, mimicry, etc.) in addition to their other categories.
+5. **Nine insect entries in nine degrees is the new ceiling for taxon-class depth.** The Insect Era now spans seven orders, nine families, three primary sound mechanisms plus two emergence categories. Plan for taxon-class runs of nine or more degrees rather than treating shorter runs as the maximum. The depth produces secondary structures (the aquatic-insect category, the ephemeral-adult temporal scale, the collective-emergence acoustic category) that shorter runs would not generate.
+6. **Back-to-back aquatic insects at 94 and 95 confirm the aquatic-insect subcategory.** Plecoptera (stonefly 94) and Ephemeroptera (mayfly 95) are two consecutive aquatic insect orders, back-to-back. The doubling confirms the aquatic-insect category as a tracked subcategory within Insecta. Future aquatic insect entries (Odonata, Trichoptera, Megaloptera) would extend the subcategory and should be classified against it.
+7. **The 300+ million year lineage adds biological deep time as an engine axis.** No prior species in the engine has a documented lineage spanning 300 million years. The mayfly adds biological deep time as a new classification axis. Future entries with significant lineage depth (horseshoe crabs if ever included, dragonflies, cycad-eating insects, gingko, coelacanth) should be classified against the deep-time axis. Mayflies predate the dinosaurs by about 70 million years — the lineage is older than almost any other category the engine could possibly invoke.
+8. **The subimago stage is a uniquely Ephemeropteran life-cycle feature.** Mayflies are the only extant insects to molt after developing functional wings. The life-cycle taxonomy in the engine now has a category (subimago stage) that belongs only to one order. Future life-cycle entries should be classified against this outlier; the subimago stage is a reminder that some biological features are order-specific rather than class-wide.
+9. **The euphoric build and the mass wing buzz both depend on collective-scale synchronization.** ODESZA's euphoric build synchronizes audience attention, breath, and movement across the duration of the build and the release. The mayfly's mass emergence synchronizes thousands of individual emergences into a single biologically coherent event. Both halves of degree 95 reach impact through synchronization. Future degrees should expect synchronization-dependent categories on both sides to track in parallel when they appear together.
+10. **The fly fishing foundation adds a cultural-linkage axis to the species engine.** The entire art of fly fishing is built on mayfly life stages. No other insect order has this relationship to a traditional art form. The engine's species entries now have an explicit cultural-linkage axis. Future entries with cultural linkages (keystone species in indigenous traditions, species central to regional foodways, species that define local sports or crafts) should be classified against this opening entry.
+11. **The first E=5 electronic entry marks the electronic side reaching arena scale.** The prior five electronic-adjacent entries occupied E=2 to E=4. ODESZA brings the electronic side into E=5 for the first time. The electronic-side energy ledger now has its full range populated (E=2 Hovercraft, E=3 Sky Cries Mary + NAVVI, E=4 Postal Service + Erik Blood, E=5 ODESZA). Future electronic entries can be classified against this full electronic energy distribution.
+12. **Thirty-five consecutive original CSV species sustains data reliability.** Degrees 61–95 have not needed substitution or correction in 35 consecutive entries. The CSV is sturdy. Future engine planning can rely on the original catalog for the foreseeable future without contingency selection logic.
 
-**The Bellingham Connection:** ODESZA formed at **Western Washington University** in **Bellingham** -- the same origin city as **Death Cab for Cutie** (degree 58). Both formed at WWU. Different genres, different decades, same pipeline. Two of the PNW's most significant musical exports from the same university campus.
-
-**The Euphoric Build:** ODESZA's defining sonic architecture -- rising tension through layered synths, vocal samples, and textural accumulation, building to a massive release. Cinema translated into electronic music: narrative arc, climax, resolution. The builds are ODESZA's instrument.
-
-### STRUCTURAL EVENT: E=5 -- Coachella Headliner
-
-E=5 reflects ODESZA's position: Coachella headliner, Grammy-nominated, arena-headlining tours, Counter Records. One of the biggest electronic acts from the PNW. Maximum energy.
-
-### THE EUPHORIC BUILD -- 96th Acoustic Element
-
-The ninety-sixth acoustic element is **the euphoric build** -- rising tension through layered synthesizers, vocal samples building intensity, textural accumulation, harmonic suspension, building to massive crescendo and release. Cinematic electronic construction. The build IS the composition. Festival-scale collective experience.
-
-Contrasts:
-- **The producer's palette** (degree 94, Erik Blood) -- experimental studio exploration. The euphoric build is structured and purpose-built for collective experience.
-- **The shimmer veil** (degree 93, NAVVI) -- reverb-as-architecture, intimate. The euphoric build is massive-scale, tension-driven, designed for arenas.
-- **The ambient drift** (degree 90, Sky Cries Mary) -- slowly evolving landscape. The euphoric build has narrative direction -- it climbs.
-
-### THE BELLINGHAM PIPELINE -- 96th Artist-City Pattern
-
-The ninety-sixth artist-city pattern is **the Bellingham pipeline** -- a university town incubating artists who launch into Seattle and the wider world. Death Cab for Cutie (degree 58) and ODESZA (degree 95) both formed at WWU. Different genres, different decades, same geographic and institutional pipeline.
-
-The pipeline mechanics: cheap rent, university community, proximity to Seattle, independent cultural identity.
-
-### CROSS-REFERENCES (Part A)
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| S36-058 | ODESZA (95) | Death Cab for Cutie (58) | BELLINGHAM/WWU ORIGIN! Both formed at WWU. Death Cab launched indie rock; ODESZA launched electronic. Different genres, different decades, same pipeline. |
-| S36-086 | ODESZA (95) | The Postal Service (86) | ELECTRONIC CONNECTION. Both electronic, both massive reach. Postal Service is indie-electronic crossover; ODESZA is cinematic electronic. |
-| S36-044 | ODESZA (95) | Chong the Nomad (44) | ELECTRONIC SEATTLE PARALLEL. Both electronic, both Seattle. Chong is beat-driven; ODESZA is cinematic builds. |
-| S36-091 | ODESZA (95) | Hovercraft (91) | ELECTRONIC SPECTRUM. Opposite ends. Hovercraft is drone/experimental; ODESZA is euphoric, pop-accessible. |
-| S36-081 | ODESZA (95) | Sara Bareilles (81) | E=5 PARALLEL. Both E=5, both arena-scale. Bareilles in pop/piano; ODESZA in electronic. Same energy tier. |
-
----
-
-## Part B: Mayfly Emergence (Ephemeroptera) -- MASS WING BUZZ OVER WATER (NEW FAMILY 45th, NEW ORDER Ephemeroptera Seventh Insect Order Most Ancient Winged Insects 300+ Million Years, Ephemeral Adult Hours to Days Cannot Eat, Mass Emergence Thousands Hatching Simultaneously Predator Satiation, Fly Fishing Foundation, E=3, Thirty-Fifth Consecutive Original CSV)
-
-Full deep research covering the mayfly emergence, the most ancient winged insects, and the ephemeral adult:
-
-### NEW ORDER: EPHEMEROPTERA -- Seventh Insect Order / NEW FAMILY -- 45th Family
-
-**Ephemeroptera** -- mayflies. The seventh insect order. The most ancient winged insect lineage (300+ million years). The second aquatic insect order (after Plecoptera at 94). **45th family** (NEW).
-
-Classification:
-- **Kingdom:** Animalia
-- **Phylum:** Arthropoda
-- **Class:** Insecta (insect streak continues)
-- **Order:** Ephemeroptera -- NEW ORDER. Seventh insect order. Mayflies.
-- **Family:** NEW FAMILY (45th). Mayflies.
-
-Eight insect orders now in the engine:
-
-| Degree | Order | Family | Sound |
-|--------|-------|--------|-------|
-| 87 | Orthoptera | Gryllidae | Cricket chirp |
-| 88 | Orthoptera | Tettigoniidae | Katydid rasp |
-| 89 | Hemiptera | Cicadidae | Cicada throb |
-| 91 | Diptera | Culicidae | Mosquito whine |
-| 92 | Hymenoptera | Apidae | Bumblebee drone |
-| 93 | Hymenoptera | Vespidae | Hornet buzz |
-| 94 | Plecoptera | Perlidae | Stonefly wing rustle |
-| **95** | **Ephemeroptera** | **(45th family)** | **Mayfly mass wing buzz** |
-
-Nine insect families across seven orders. Ephemeroptera is the seventh insect order and the second with an aquatic life stage.
-
-### THE SOUND: MASS WING BUZZ OVER WATER -- 96th Species-Side Acoustic Element
-
-The mayfly mass emergence sound -- the **mass wing buzz** of thousands of adult mayflies emerging simultaneously from a body of water. Thousands of mayfly nymphs rise to the surface simultaneously, split their exoskeletons, and emerge as winged subimagos (duns). Each individual's wing beats are nearly inaudible, but thousands together produce a distinctive soft, shimmering buzz -- a **mass wing buzz over water**.
-
-**Why E=3:** Mass event, not individual. Audible but not overwhelming. Higher than stonefly (94, E=2) because of mass numbers. Lower than cricket chorus (87, E=4) because individual wing beats are far softer than stridulation.
-
-### ECOLOGY: THE EPHEMERAL ADULT AND THE MASS EMERGENCE
-
-**Ephemeral adult:** Ephemeroptera means "lasting a day." Adult lifespan: hours to days. Cannot eat -- vestigial mouthparts. Single purpose: emerge, mate, lay eggs, die. Most ephemeral adult in the engine.
-
-**Mass emergence:** Predator satiation strategy. Thousands to millions hatching simultaneously. Overwhelms predators through sheer numbers. Visible on weather radar.
-
-**Ancient lineage:** 300+ million years (Carboniferous). Predates dinosaurs. Primitive wing design -- cannot fold wings flat. Unique subimago stage -- the only insects that molt after developing functional wings.
-
-**Fly fishing:** The entire art of fly fishing is built on imitating mayfly life stages. Nymph patterns, emerger patterns, dry flies, spinner patterns -- all correspond to mayfly stages.
-
-### STRUCTURAL EVENTS SUMMARY
-
-1. **Ephemeroptera enters** -- 45th family (NEW). 7th insect order (NEW). Most ancient winged insects.
-2. **Mass wing buzz over water** -- 96th species-side acoustic element. E=3. Collective shimmering buzz.
-3. **Ephemeral adult** -- hours to days. Cannot eat. Most ephemeral in engine.
-4. **300+ million year lineage** -- Carboniferous fossils. Predates dinosaurs.
-5. **Fly fishing foundation** -- entire art built on mayfly life stages.
-6. **Thirty-fifth consecutive original CSV.**
-
-### CROSS-REFERENCES (Part B)
+## Cross-References
 
 | Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| SPS-094 | Mayfly Emergence (95) | Stonefly Hatch (94) | STREAM SHARED! Both aquatic insects. Both water quality indicators. Back-to-back aquatic insect orders: Plecoptera (94) and Ephemeroptera (95). |
-| SPS-057 | Mayfly Emergence (95) | Belted Kingfisher (57) | STREAM CONNECTION. Kingfisher watches streams from above. Mayfly nymphs live in streams below. |
-| SPS-052 | Mayfly Emergence (95) | American Dipper (52) | STREAM CONNECTION. Dipper forages in fast mountain streams where mayfly nymphs live. Predator-prey. |
-| SPS-091 | Mayfly Emergence (95) | Mosquito Swarm (91) | INSECT ERA CONTEXT. Both have aquatic larval/nymphal stages. Mosquito in still water; mayfly in streams and lakes. |
-| SPS-087 | Mayfly Emergence (95) | Cricket Chorus (87) | INSECT ERA CONTEXT. Nine insect entries (87-95). The mayfly continues the aquatic turn that the stonefly began. |
+|------------|------|-----|--------|
+| S36-058 | ODESZA (95) | Death Cab for Cutie (58) | **BELLINGHAM/WWU ORIGIN CONFIRMED.** Both formed at **Western Washington University** in Bellingham. Death Cab launched the 1997-era PNW indie rock arc; ODESZA launched the 2012-era PNW electronic arc. Different genres (indie rock vs electronic), different decades (1997 vs 2012), same geographic and institutional pipeline. Two instances 37 degrees apart confirm the Bellingham Pipeline as a tracked engine lineage rather than an isolated case. |
+| S36-094 | ODESZA (95) | Erik Blood (94) | **CONSECUTIVE ELECTRONIC-ADJACENT GENRE STAGES.** Electronic/Experimental (Erik Blood, 94) → Electronic (ODESZA, 95). Both electronic. Erik Blood is studio-as-instrument, experimental, genre-blending, self-released (the producer's palette); ODESZA is structured, festival-scale, cinematic, Counter Records (the euphoric build). Adjacent stages in the six-deep electronic-adjacent run (86, 90, 91, 93, 94, 95). Same electronic-adjacent thread, opposite approaches to structure. |
+| S36-093 | ODESZA (95) | NAVVI (93) | **INTIMATE VS FESTIVAL ELECTRONIC.** NAVVI's Dream Pop/Electronic (93) is reverb-laden and intimate — bedroom-scale, the shimmer veil. ODESZA's Electronic (95) is cinematic and festival-scale — arena-oriented, the euphoric build. Both electronic; opposite scales. Same technology deployed at opposite extremes of audience size and sonic intimacy. |
+| S36-091 | ODESZA (95) | Hovercraft (91) | **ELECTRONIC SPECTRUM OPPOSITE ENDS.** Hovercraft's Drone/Noise (91) is sustained crush maximalist texture with no vocals, no build-and-release architecture, E=2. ODESZA's Electronic (95) is euphoric build cinematic tension-release with vocal samples, explicit build-and-drop cycles, E=5. Both electronic; opposite postures (confrontational sustained crush vs joyful tension-release). |
+| S36-090 | ODESZA (95) | Sky Cries Mary (90) | **DIRECTIONAL VS DRIFT ELECTRONIC.** Sky Cries Mary's Ethereal/Electronic (90) is ambient psychedelic drift — no narrative direction, slowly evolving landscape. ODESZA's Electronic (95) is cinematic euphoric build — narrative direction, explicit climb toward crescendo. Both electronic; opposite relationships to direction (no-direction drift vs climbing build). |
+| S36-086 | ODESZA (95) | The Postal Service (86) | **ELECTRONIC INDIE VS ELECTRONIC FESTIVAL.** Postal Service (86) is Indie Electronic — structured, melodic, indie-pop-scale, the electronic pulse. ODESZA (95) is Electronic — structured, melodic, festival-pop-scale, the euphoric build. Both pop-structured electronic; different audience scales. Sub Pop adjacency (Postal Service released through Sub Pop; ODESZA is at Counter Records) — both major PNW electronic releases from successive decades. |
+| S36-044 | ODESZA (95) | Chong the Nomad (44) | **ELECTRONIC SEATTLE PARALLEL.** Both electronic, both Seattle-area. Chong is beat-driven production (the grain); ODESZA is cinematic builds (the euphoric build). Both occupy PNW's electronic community from different positions — Chong as the digital immigrant, ODESZA as the Bellingham pipeline graduate reaching festival scale. |
+| S36-081 | ODESZA (95) | Sara Bareilles (81) | **E=5 ARENA PARALLEL.** Both E=5, both arena-scale performers. Bareilles in pop/soul/piano; ODESZA in cinematic electronic. Same energy tier reached through very different genres and production architectures. The engine's E=5 arena category continues to diversify. |
+| S36-036 | ODESZA (95) | Jimi Hendrix (36) | **E=5 PNW MAXIMUM ENERGY PARALLEL.** Both E=5, both PNW maximum-energy exports. Hendrix redefined electric guitar at arena scale in the 1960s; ODESZA redefined electronic festival performance in the 2010s-2020s. Different eras, different technologies, same PNW export-at-maximum-scale pattern. |
+| S36-080 | ODESZA (95) | Mates of State (80) | **DUO-FORMAT PARALLEL.** Both are duos. Mates of State is married-duo indie pop at E=5; ODESZA is friend-duo cinematic electronic at E=5. Both E=5 duos. The duo format is productive across genres at the arena-scale ceiling. |
+| SPS-094 | Mayfly Emergence (95) | Stonefly Hatch (94) | **BACK-TO-BACK AQUATIC INSECTS.** Both aquatic insects. Both Pacific Northwest cold-stream indicators. Plecoptera (stonefly, 94, E=2, individual emergence) → Ephemeroptera (mayfly, 95, E=3, mass emergence). Two consecutive aquatic insect orders, back-to-back, confirm the aquatic-insect subcategory. Different emergence scales (individual vs mass). Same habitat (clean cold oxygenated water). |
+| SPS-057 | Mayfly Emergence (95) | Belted Kingfisher (57) | **STREAM CONNECTION.** Kingfisher watches streams from above (the stream rattle, E=4). Mayfly nymphs live IN the stream for months to years; emerging adults hang over the water surface. The engine's stream-species ledger continues: American Dipper (52, above), Belted Kingfisher (57, above), Stonefly (94, IN), Mayfly (95, IN + briefly above). Bird-above-stream then insect-in-stream. |
+| SPS-052 | Mayfly Emergence (95) | American Dipper (52) | **STREAM CONNECTION + PREDATOR-PREY.** Dipper forages in fast mountain streams — same habitat where mayfly nymphs live. Dipper eats mayfly nymphs (predator-prey relationship). Both stream health indicators; the mayfly explicitly framed as an indicator family (with the stonefly at 94), the dipper retroactively recognized as one. The diagnostic-species category extends backward through the catalog. |
+| SPS-091 | Mayfly Emergence (95) | Mosquito Swarm (91) | **AQUATIC LARVAL/NYMPHAL STAGES.** Both species have aquatic larval/nymphal stages. Mosquito larvae in still water (stagnant ponds, containers); mayfly nymphs in moving water (streams, lake riffles). Different water chemistries, different larval behaviors. The aquatic-larval-stage axis now has two points separated by four degrees. |
+| SPS-087 | Mayfly Emergence (95) | Cricket Chorus (87) | **INSECT ERA OPENS AND EXTENDS TO NINE.** Cricket Chorus opened the Insect Era at degree 87 (terrestrial, mating stridulation). Mayfly Emergence extends it to nine entries in nine degrees (87–95 with Spring Peeper-Like Chorus at 90 as the only non-insect interlude). The deepest sustained taxon class exploration in the engine. |
+| SPS-093 | Mayfly Emergence (95) | Hornet Nest Buzz (93) | **COLLECTIVE INSECT EVENT PARALLEL.** Both collective insect events. Hornet nest buzz is collective defense at E=5 (hundreds of Vespidae sustained aggressive papery hum over a wood-fiber paper nest). Mayfly mass emergence is collective reproduction at E=3 (thousands to millions of Ephemeroptera collective shimmering wing buzz over water). Both collective; opposite postures (active defense vs passive emergence). Same mass-scale principle, different evolutionary purposes. |
+| SPS-carboniferous | Mayfly Emergence (95) | 300+ million year Carboniferous lineage | **BIOLOGICAL DEEP TIME AXIS OPENS.** The mayfly's 300+ million year lineage adds biological deep time as an engine axis. Mayflies predate dinosaurs by about 70 million years. The order retains the primitive wing design that cannot fold flat and the unique subimago stage that no other extant insect has. Future deep-lineage entries can be classified against this opening reference point. |
+| SPS-flyfishing | Mayfly Emergence (95) | Fly fishing tradition | **CULTURAL-LINKAGE AXIS OPENS.** The entire art of fly fishing is built on imitating mayfly life stages (nymph, emerger, dun, spinner). The hatch is the central social and biological event of fly fishing culture. Fly fishers track hatches by species, season, stream, and river system. No other insect order has this foundational relationship to a traditional art form. The cultural-linkage axis now has its first explicit entry. |
+| RES-odesza-dorm | ODESZA (95) | Self-released *Summer's Gone* dorm-room origin (2012) | **THE BELLINGHAM PIPELINE'S STRUCTURAL EVIDENCE.** ODESZA's self-released dorm-room debut is the pre-Counter-Records foundation of the Bellingham Pipeline pattern. Two WWU students producing electronic music in cheap university-town space with no industry oversight is exactly the origin point the pipeline requires. Without the dorm-room origin, ODESZA could not demonstrate the pattern; with it, the pattern is observationally verifiable. |
+| RES-counter-records | ODESZA (95) | Counter Records | **LABEL LANDSCAPE EXPANSION.** ODESZA's Counter Records signing (UK-based electronic imprint of Ninja Tune) adds Counter Records to the engine's label ledger. The label ledger now spans major labels, large independents (Sub Pop), small independents (K Records, Barsuk, Hardly Art, Captured Tracks, Secretly Canadian), self-released artists (NAVVI, Erik Blood), and international electronic imprints (Counter Records). The label landscape continues to diversify. |
 
----
+## Engine Position
 
-## Parallel: ODESZA x Mayfly Emergence -- The Euphoric and the Ephemeral
+- **Degree 95 of 360** — 26.4% of the circle traversed; deep into Quadrant II.
+- **Twin counters tick to 96**: the euphoric build is the 96th acoustic element on the artist side; the mass wing buzz over water is the 96th acoustic element on the species side; **The Bellingham Pipeline** is the 96th artist-city pattern.
+- **Genre Stage 77 — Electronic.** Seventy-seven genre stages in ninety-five degrees (~0.81 stages/degree). Sixth electronic-adjacent genre stage in the last ten degrees.
+- **Energy distribution after degree 95** (artist-side): E1:3 (3.1%), E2:31 (32.3%), E3:27 (28.1%), E4:22 (22.9%), E5:12 (12.5%), E6:2 (2.1%). Total: 96. **E=5 gains ODESZA (95) to reach 12 deployments** — the first E=5 entry on the electronic side. The quiet majority (E1+E2+E3) = 61 of 96 (63.5%).
+- **Electronic-adjacent run six-deep**: Indie Electronic (86, Postal Service), Ethereal/Electronic (90, Sky Cries Mary), Drone/Noise (91, Hovercraft), Dream Pop/Electronic (93, NAVVI), Electronic/Experimental (94, Erik Blood), Electronic (95, ODESZA). Six different relationships to electronic production in ten degrees.
+- **Insect Era nine-deep**: Cricket Chorus (87, Gryllidae), Katydid (88, Tettigoniidae), Cicada (89, Cicadidae), Spring Peeper-Like Chorus (90, Hylidae — Amphibia interlude), Mosquito Swarm (91, Culicidae), Bumblebee Drone (92, Apidae), Hornet Nest Buzz (93, Vespidae), Stonefly Hatch (94, Perlidae), Mayfly Emergence (95, Ephemeroptera). Eight insect entries in nine degrees with one Amphibia interlude.
+- **Seven insect orders covered**: Orthoptera (87–88), Hemiptera (89), Diptera (91), Hymenoptera (92–93), Plecoptera (94), Ephemeroptera (95). Two of the seven are aquatic (Plecoptera, Ephemeroptera) — back-to-back at degrees 94 and 95.
+- **Acoustic posture taxonomy** (insect-side): Mating (cricket 87, katydid 88), Advertising (cicada 89), Incidental flight (mosquito 91, bumblebee 92), Defensive (hornet 93), Passive emergence (stonefly 94), **Collective emergence (mayfly 95 — NEW)**. Six posture categories now established.
+- **Species energy oscillation** (93→95): E=5 → E=2 → E=3. Hornet (93, E=5 collective defense) → Stonefly (94, E=2 individual emergence) → Mayfly (95, E=3 collective emergence). Three energy levels across three consecutive degrees, all insects, demonstrating how energy reflects mass scale (collective vs individual).
+- **Aquatic insect subcategory opens and doubles**: Plecoptera (stonefly 94, individual emergence, E=2) + Ephemeroptera (mayfly 95, mass emergence, E=3). Back-to-back aquatic insect orders confirm the subcategory as tracked.
+- **Biological deep time axis opens**: Ephemeroptera 300+ million years Carboniferous fossils — first species in the engine with documented lineage depth of this magnitude. Predates dinosaurs by ~70 million years.
+- **Ephemeral-adult temporal category opens**: Mayfly adult hours-to-days lifespan is a new temporal scale in the engine. Joins the physiology, habitat, and survival-strategy taxonomies as a new classification axis.
+- **Mass emergence / predator satiation survival-strategy category opens**: First explicit survival strategy documented in the engine. Stonefly (94) was a diagnostic species; mayfly (95) is an active survival strategist.
+- **Cultural-linkage axis opens**: Fly fishing as a traditional art form built entirely on mayfly life stages. No other insect order has this relationship.
+- **Bellingham Pipeline artist-city pattern confirmed**: Death Cab for Cutie (58, indie rock) + ODESZA (95, electronic). Two instances 37 degrees apart.
+- **Original CSV unbroken**: 35 consecutive original-catalog species (degrees 61–95) — longest unbroken run in the engine.
+- **Outstanding gaps**: Zero raptors in 96 entries; zero passerines in 39 degrees (57–95); zero marine species in 96 entries.
 
-The euphoric build and the mass wing buzz. Collective experience on both sides.
-
-**1. Both Collective Experiences** -- ODESZA's euphoric build moves thousands of festival-goers through the same tension-release arc. The mayfly's mass emergence moves thousands of insects from water to air simultaneously. Both are about the power of thousands moving together -- electronic crescendo and natural crescendo.
-
-**2. The Euphoric vs the Ephemeral** -- ODESZA builds to euphoric drops that last minutes. The mayfly's mass emergence lasts hours, but the adult life lasts only hours to days. The euphoric build creates lasting memory through intense experience; the ephemeral adult IS the intensity -- brief, total, then gone.
-
-**3. E=5 vs E=3** -- ODESZA at E=5 (Coachella headliner, Grammy-nominated, arena-scale). Mayfly at E=3 (collective but each individual barely audible). Both at scale -- but ODESZA's amplification is technological; the mayfly's amplification is biological (mass numbers).
-
-**4. Both About Architecture** -- ODESZA builds tension architecturally -- layers, samples, crescendo, release. The mass emergence is architectured by evolution -- synchronized hatching, predator satiation, reproductive timing. Both are designed systems.
-
----
-
-## Acoustic Progression (96 elements)
+## Acoustic Progression Snapshot (Tail)
 
 | # | Element | Degree | Artist/Species |
 |---|---------|--------|----------------|
-| 0 | silence | 0 | Quincy Jones |
-| 1 | cascade | 1 | Bill Frisell |
-| 2 | drone | 2 | Wayne Horvitz |
-| 3 | language | 3 | Ernestine Anderson |
-| 4 | motif | 4 | Floyd Standifer |
-| 5 | metronome | 5 | Overton Berry |
-| 6 | question | 6 | Patti Bown |
-| 7 | harmonic spiral | 7 | Julian Priester |
-| 8 | ultrasonic threshold | 8 | Gary Peacock |
-| 9 | variation | 9 | Hadley Caliman |
-| 10 | minimum signal | 10 | Bud Shank |
-| 11 | trill/tremolo | 11 | Joe Brazil |
-| 12 | sawtooth sweep | 12 | Don Lanphere |
-| 13 | ostinato | 13 | Marc Seales |
-| 14 | repetition-resolution | 14 | Aaron Parks |
-| 15 | accelerando | 15 | Thomas Marriott |
-| 16 | crescendo | 16 | Jeff Lorber |
-| 17 | the hook | 17 | Reggie Watts |
-| 18 | ascending spiral | 18 | Maktub |
-| 19 | descending spiral | 19 | Fly Moon Royale |
-| 20 | sustain/the release | 20 | Whitney Monge |
-| 21 | the hammer | 21 | Polyrhythmics |
-| 22 | resonant percussion/groove reset | 22 | Foxy Apollo |
-| 23 | the testimony/groove reset | 23 | Allen Stone |
-| 24 | the invocation | 24 | Ron Artis II |
-| 25 | the congregation | 25 | Black Stax |
-| 26 | the caroling | 26 | Shaina Shepherd |
-| 27 | the liquid gurgle | 27 | The Dynamics |
-| 28 | the liquid twitter | 28 | Night Owls |
-| 29 | the rough brrit | 29 | Boogaloo Joe Jones |
-| 30 | the liquid warble synthesis | 30 | Ray Charles |
-| 31 | the whisper | 31 | Brenda Lee Eager |
-| 32 | the buzz | 32 | Luther Rabb |
-| 33 | the cadenza | 33 | Larry English |
-| 34 | the dialect | 34 | The Tempos |
-| 35 | the thrum | 35 | Robert Cray |
-| 36 | the sonic boom | 36 | Jimi Hendrix |
-| 37 | the filament | 37 | Ayron Jones |
-| 38 | the drawl | 38 | Booker T. Jones |
-| 39 | the canopy buzz | 39 | Ron Artis Jr |
-| 40 | the thinning | 40 | Alice Smith |
-| 41 | the partition | 41 | Shawn Smith |
-| 42 | the shimmer | 42 | Erica Campbell |
-| 43 | the radiance | 43 | Ann Wilson |
-| 44 | the grain | 44 | Chong the Nomad |
-| 45 | the murmur | 45 | Damien Jurado |
-| 46 | the confessional | 46 | Rocky Votolato |
-| 47 | the parable tone | 47 | Pedro the Lion |
-| 48 | the held rest | 48 | Sera Cahoone |
-| 49 | the lullaby subversion | 49 | Kimya Dawson |
-| 50 | the intimate architecture | 50 | Mirah |
-| 51 | the communal harmony | 51 | Grand Archives |
-| 52 | the testimony roar | 52 | Brandi Carlile |
-| 53 | the cathedral harmony | 53 | Fleet Foxes |
-| 54 | the fraternal jangle | 54 | Ivan & Alyosha |
-| 55 | the ember glow | 55 | Shelby Earl |
-| 56 | the dream haze | 56 | Lemolo |
-| 57 | the rattle / the stream rattle | 57 | Laura Gibson / Belted Kingfisher |
-| 58 | the ache / the pond whistle | 58 | Death Cab for Cutie / Wood Duck |
-| 59 | the digression / the quack | 59 | The Long Winters / Mallard |
-| 60 | the bare wire / the submerge call | 60 | Ben Gibbard (solo) / Pied-billed Grebe |
-| 61 | the braided voice / the tail slap | 61 | Y La Bamba / American Beaver |
-| 62 | the throwback / the rhythmic gnaw | 62 | Pickwick / Beaver Chewing |
-| 63 | the FM sheen / the chuff | 63 | Kenny Loggins / River Otter |
-| 64 | the dusk / the chitter | 64 | Jesse Sykes / Mink |
-| 65 | the open plain / the chuckle-chatter | 65 | Philip Aaberg / American Marten |
-| 66 | the country thunder / the scream | 66 | Neko Case / Fisher |
-| 67 | the clean room / the shrill bark-chitter | 67 | Chris Walla / Short-tailed Weasel |
-| 68 | the hush / the rapid chattering chirp | 68 | Sam Beam / Long-tailed Weasel |
-| 69 | the earnest voice / the warning foot-stamp hiss | 69 | Kris Orlowski / Striped Skunk |
-| 70 | the fiddle line / the churring chittering young | 70 | Horse Feathers / Raccoon |
-| 71 | the room tone / the bark screaming vixen call | 71 | Phil Elverum / Red Fox |
-| 72 | the layered loop / the low hiss click | 72 | Briana Marela / Opossum |
-| 73 | the jangle / the thump squeal | 73 | LAKE / Snowshoe Hare |
-| 74 | the reverb wash / the high sharp eenk bark | 74 | Poor Moon / American Pika |
-| 75 | the anthem / the piercing whistle alarm | 75 | The Lonely Forest / Yellow-bellied Marmot |
-| 76 | the androgynous register / the loud penetrating whistle | 76 | Chris Pureka / Hoary Marmot |
-| 77 | the ethereal layering / the musical multi-note whistle | 77 | Mree / Olympic Marmot |
-| 78 | the communal jangle / the chirping trill alarm | 78 | Acid Tongue / Townsend's Ground Squirrel |
-| 79 | the cinematic stillness / the sharp chip alarm | 79 | Jesse Marchant / Golden-mantled Ground Squirrel |
-| 80 | the organ explosion / the loud scolding chatter rattle | 80 | Mates of State / Douglas Squirrel |
-| 81 | the Broadway voice / the bark + chatter alarm | 81 | Sara Bareilles / Eastern Fox Squirrel |
-| 82 | the acoustic intimacy / the high thin tseet | 82 | Death Cab for Cutie (acoustic) / Northern Flying Squirrel |
-| 83 | the grunge whisper / the ultrasonic + soft chip | 83 | Pearl Jam (acoustic) / Deer Mouse |
-| 84 | the late whisper / the chatter + twig gnaw | 84 | Damien Jurado (late career) / Bushy-tailed Woodrat |
-| 85 | the stripped confession / the quiet plop | 85 | Rocky Votolato (acoustic) / Muskrat |
-| 86 | the electronic pulse / the amplified krek-krek wall of sound | 86 | The Postal Service / Pacific Treefrog |
-| 87 | the emerging twang / the rhythmic chirp field chorus | 87 | Neko Case (early folk) / Cricket Chorus |
-| 88 | the bedroom strum / the continuous electric buzz | 88 | Kimya Dawson (solo) / Katydid |
-| 89 | the baroque whisper / the electric buzzing throb | 89 | Parenthetical Girls / Cicada |
-| 90 | the ambient drift / the bell-like peep chorus | 90 | Sky Cries Mary / Spring Peeper-Like Chorus |
 | 91 | the sustained crush / the ultra-thin hum cloud | 91 | Hovercraft / Mosquito Swarm |
 | 92 | the global weave / the deep resonant buzz | 92 | Trance Mission / Bumblebee Drone |
 | 93 | the shimmer veil / the aggressive papery hum | 93 | NAVVI / Hornet Nest Buzz |
 | 94 | the producer's palette / the wing rustle on stream surface | 94 | Erik Blood / Stonefly Hatch |
 | **95** | **the euphoric build / the mass wing buzz over water** | **95** | **ODESZA / Mayfly Emergence** |
 
-The acoustic progression adds degree 95. On the artist side, the euphoric build (95) is ODESZA -- cinematic electronic tension-release, layered synths, vocal samples, festival-scale crescendo. E=5. From the producer's palette (94, studio-as-instrument, genre-blending, E=4) to the euphoric build (95, cinematic construction, collective euphoria, E=5). From experimental exploration to purposeful architecture -- from the studio as open field to the build as the composition. On the species side, the mass wing buzz over water (95) is the mayfly emergence -- collective shimmering buzz of thousands emerging simultaneously, E=3. From the wing rustle on stream surface (94, individual emergence whisper, E=2) to the mass wing buzz (95, collective emergence shimmer, E=3). Individual to collective. Both aquatic insects; different scales. The insect era deepens in water.
-
-## Artist-City Patterns (96 patterns)
-
-| # | Pattern | Degree | Artist |
-|---|---------|--------|--------|
-| 0 | Export | 0 | Quincy Jones |
-| 1 | Draw | 1 | Bill Frisell |
-| 2 | European Exile | 2 | Wayne Horvitz |
-| 3 | The Stay | 3 | Ernestine Anderson |
-| 4 | The Teacher | 4 | Floyd Standifer |
-| 5 | The Persistence | 5 | Overton Berry |
-| 6 | The Erasure | 6 | Patti Bown |
-| 7 | Pedagogue-Draw | 7 | Julian Priester |
-| 8 | The Quiet Draw | 8 | Gary Peacock |
-| 9 | The Seeker | 9 | Hadley Caliman |
-| 10 | Late Homestead | 10 | Bud Shank |
-| 11 | The Salon Keeper | 11 | Joe Brazil |
-| 12 | The Prodigal | 12 | Don Lanphere |
-| 13 | Institutional Anchor | 13 | Marc Seales |
-| 14 | Prodigy-Export | 14 | Aaron Parks |
-| 15 | Builder-Stayer | 15 | Thomas Marriott |
-| 16 | Talent Incubator | 16 | Jeff Lorber |
-| 17 | The Uncategorizable | 17 | Reggie Watts |
-| 18 | The Workshop | 18 | Maktub |
-| 19 | The New Root | 19 | Fly Moon Royale |
-| 20 | The Street Laureate | 20 | Whitney Monge |
-| 21 | The Ensemble Anchor | 21 | Polyrhythmics |
-| 22 | The Inheritor | 22 | Foxy Apollo |
-| 23 | The Rural Draw | 23 | Allen Stone |
-| 24 | The Island Export | 24 | Ron Artis II |
-| 25 | The Cultural Guardian | 25 | Black Stax |
-| 26 | The Transmuter | 26 | Shaina Shepherd |
-| 27 | The Conduit | 27 | The Dynamics |
-| 28 | The Resident Band | 28 | Night Owls |
-| 29 | The Catalog | 29 | Boogaloo Joe Jones |
-| 30 | The Incubation | 30 | Ray Charles |
-| 31 | The Relay | 31 | Brenda Lee Eager |
-| 32 | The Foundation | 32 | Luther Rabb |
-| 33 | The Unrecorded | 33 | Larry English |
-| 34 | The Shadow Name | 34 | The Tempos |
-| 35 | The Deep Root | 35 | Robert Cray |
-| 36 | The Supernova | 36 | Jimi Hendrix |
-| 37 | The Inheritor | 37 | Ayron Jones |
-| 38 | The Touring Anchor | 38 | Booker T. Jones |
-| 39 | The Returning Wave | 39 | Ron Artis Jr |
-| 40 | The Cultural Satellite | 40 | Alice Smith |
-| 41 | The Scene Native | 41 | Shawn Smith |
-| 42 | The Gospel Export | 42 | Erica Campbell |
-| 43 | The Arena Architect | 43 | Ann Wilson |
-| 44 | The Digital Immigrant | 44 | Chong the Nomad |
-| 45 | The Stripped Murmur | 45 | Damien Jurado |
-| 46 | The Confessional Drifter | 46 | Rocky Votolato |
-| 47 | The Sacred Baritone | 47 | Pedro the Lion |
-| 48 | The Campfire Anchor | 48 | Sera Cahoone |
-| 49 | The Trojan Lullabist | 49 | Kimya Dawson |
-| 50 | The Intimate Architect | 50 | Mirah |
-| 51 | The Folk Organism | 51 | Grand Archives |
-| 52 | The Arena Breakout | 52 | Brandi Carlile |
-| 53 | The Prodigy Return | 53 | Fleet Foxes |
-| 54 | The Neighborhood Anchor | 54 | Ivan & Alyosha |
-| 55 | The Infrastructure Beneficiary | 55 | Shelby Earl |
-| 56 | The Duo Collective | 56 | Lemolo |
-| 57 | The Label Bridge | 57 | Laura Gibson |
-| 58 | The Bellingham Ascent | 58 | Death Cab for Cutie |
-| 59 | The Scene Intellectual | 59 | The Long Winters |
-| 60 | The Frontman Alone | 60 | Ben Gibbard (solo) |
-| 61 | The Corridor Bridge | 61 | Y La Bamba |
-| 62 | The Brief Blaze | 62 | Pickwick |
-| 63 | The Everett Departure | 63 | Kenny Loggins |
-| 64 | The Dark-Folk Loner | 64 | Jesse Sykes |
-| 65 | The Montana Connection | 65 | Philip Aaberg |
-| 66 | The Wanderer Who Claims Multiple Cities | 66 | Neko Case |
-| 67 | The Departed Member | 67 | Chris Walla |
-| 68 | The Visiting Artist | 68 | Sam Beam |
-| 69 | The Working Musician | 69 | Kris Orlowski |
-| 70 | The Corridor Wanderer | 70 | Horse Feathers |
-| 71 | The Anacortes Hermit | 71 | Phil Elverum |
-| 72 | The International Student | 72 | Briana Marela |
-| 73 | The K Records Collective | 73 | LAKE |
-| 74 | The Side Project | 74 | Poor Moon |
-| 75 | The Second Anacortes Act | 75 | The Lonely Forest |
-| 76 | The Identity Artist | 76 | Chris Pureka |
-| 77 | The YouTube-to-Artist Pipeline | 77 | Mree |
-| 78 | The Porch Party | 78 | Acid Tongue |
-| 79 | The Dark Meditation | 79 | Jesse Marchant |
-| 80 | The Married Duo | 80 | Mates of State |
-| 81 | The Crossover Arc | 81 | Sara Bareilles |
-| 82 | The Recursive Return | 82 | Death Cab for Cutie (acoustic) |
-| 83 | The Arena Unplugged | 83 | Pearl Jam (acoustic) |
-| 84 | The Artist Arc | 84 | Damien Jurado (late career) |
-| 85 | The Confessional Return | 85 | Rocky Votolato (acoustic) |
-| 86 | The Side Project | 86 | The Postal Service |
-| 87 | The Early Chapter | 87 | Neko Case (early folk) |
-| 88 | The Solo Distillation | 88 | Kimya Dawson (solo) |
-| 89 | The Theatrical Outsider | 89 | Parenthetical Girls |
-| 90 | The Parallel Scene | 90 | Sky Cries Mary |
-| 91 | The Spousal Satellite | 91 | Hovercraft |
-| 92 | The Cross-Pollinator | 92 | Trance Mission |
-| 93 | The Intimate Machine | 93 | NAVVI |
-| 94 | The Cross-Genre Bridge | 94 | Erik Blood |
-| **95** | **The Bellingham Pipeline** | **95** | **ODESZA** |
-
-Ninety-six named patterns across ninety-six degrees. The Bellingham Pipeline (95) introduces the pattern of a university town incubating artists who then launch into Seattle and the wider world. Specifically WWU in Bellingham: Death Cab for Cutie (58) and ODESZA (95) both formed there. Different genres, different decades, same geographic pipeline. From the Cross-Genre Bridge (94, connecting existing communities through production) to the Bellingham Pipeline (95, a geographic origin incubating artists). The progression from 93 to 94 to 95: the intimate machine (serving intimacy), the cross-genre bridge (connecting communities), the Bellingham pipeline (incubating launches). Three consecutive patterns about how artists emerge -- from intimate space (93), through community connection (94), to geographic incubation (95).
-
-## Genre Evolution (77 stages)
+## Genre Evolution Snapshot (Tail)
 
 | Stage | Degree | Genre | Artist |
 |-------|--------|-------|--------|
-| 27 | 45 | Folk | Damien Jurado |
-| 28 | 46 | Folk | Rocky Votolato |
-| 29 | 47 | Indie Folk | Pedro the Lion |
-| 30 | 48 | Folk | Sera Cahoone |
-| 31 | 49 | Folk Punk | Kimya Dawson |
-| 32 | 50 | Indie Folk | Mirah |
-| 33 | 51 | Indie Folk | Grand Archives |
-| 34 | 52 | Folk/Rock | Brandi Carlile |
-| 35 | 53 | Indie Folk | Fleet Foxes |
-| 36 | 54 | Folk | Ivan & Alyosha |
-| 37 | 55 | Singer-Songwriter | Shelby Earl |
-| 38 | 56 | Indie Folk | Lemolo |
-| 39 | 57 | Folk | Laura Gibson |
-| 40 | 58 | Indie Rock | Death Cab for Cutie |
-| 41 | 59 | Indie Rock | The Long Winters |
-| 42 | 60 | Folk | Ben Gibbard (solo) |
-| 43 | 61 | Folk/Indie | Y La Bamba |
-| 44 | 62 | Indie/Folk | Pickwick |
-| 45 | 63 | Soft Rock/Folk | Kenny Loggins |
-| 46 | 64 | Folk | Jesse Sykes |
-| 47 | 65 | New Age/Folk | Philip Aaberg |
-| 48 | 66 | Alt Country | Neko Case |
-| 49 | 67 | Indie/Folk | Chris Walla |
-| 50 | 68 | Folk | Sam Beam |
-| 51 | 69 | Singer-Songwriter | Kris Orlowski |
-| 52 | 70 | Indie Folk | Horse Feathers |
-| 53 | 71 | Indie/Folk | Phil Elverum |
-| 54 | 72 | Art Pop | Briana Marela |
-| 55 | 73 | Indie Pop | LAKE |
-| 56 | 74 | Indie Folk/Rock | Poor Moon |
-| 57 | 75 | Indie Pop | The Lonely Forest |
-| 58 | 76 | Folk | Chris Pureka |
-| 59 | 77 | Folk/Pop | Mree |
-| 60 | 78 | Folk/Indie | Acid Tongue |
-| 61 | 79 | Folk | Jesse Marchant |
-| 62 | 80 | Indie Pop | Mates of State |
-| 63 | 81 | Pop/Soul | Sara Bareilles |
-| 64 | 82 | Indie Folk | Death Cab for Cutie (acoustic) |
-| 65 | 83 | Acoustic Rock | Pearl Jam (acoustic) |
-| 66 | 84 | Folk | Damien Jurado (late career) |
-| 67 | 85 | Folk | Rocky Votolato (acoustic) |
-| 68 | 86 | Indie Electronic | The Postal Service |
-| 69 | 87 | Folk Country | Neko Case (early folk) |
-| 70 | 88 | Lo-Fi Folk | Kimya Dawson (solo) |
-| 71 | 89 | Avant-Pop | Parenthetical Girls |
-| 72 | 90 | Ethereal/Electronic | Sky Cries Mary |
 | 73 | 91 | Drone/Noise | Hovercraft |
 | 74 | 92 | World/Electronic | Trance Mission |
 | 75 | 93 | Dream Pop/Electronic | NAVVI |
 | 76 | 94 | Electronic/Experimental | Erik Blood |
 | **77** | **95** | **Electronic** | **ODESZA** |
 
-Genre Stage 77 -- Electronic at degree 95. Seventy-seven genre stages in 95 degrees (~0.81 per degree). **Electronic** describes ODESZA's music: cinematic electronic production, euphoric builds, vocal samples, festival-scale sound design, layered synths, massive drops. The sixth electronic-adjacent entry in ten degrees: Indie Electronic (86), Ethereal/Electronic (90), Drone/Noise (91), Dream Pop/Electronic (93), Electronic/Experimental (94), Electronic (95). Six of the last ten genre stages have been electronic-inflected. The engine continues mapping Seattle's electronic landscape -- each entry uses electronics differently: pop structure (86), atmosphere (90), obliteration (91), intimacy (93), experimentation (94), euphoria (95).
+## Cumulative Statistics
 
-## Energy Distribution
+- **Releases shipped in Seattle 360 engine:** 96 (degrees 0–95)
+- **Artist-city patterns named:** 96 (The Bellingham Pipeline is the 96th)
+- **Acoustic elements cataloged:** 96 artist-side + 96 species-side
+- **Genre stages:** 77 distinct genre stages
+- **Insect orders covered:** 7 (Orthoptera, Hemiptera, Diptera, Hymenoptera, Plecoptera, Ephemeroptera — and a Thysanoptera/Lepidoptera slot still open)
+- **Aquatic insect orders:** 2 (Plecoptera, Ephemeroptera) — back-to-back at 94 and 95
+- **Insect families:** 9 (Gryllidae, Tettigoniidae, Cicadidae, Culicidae, Apidae, Vespidae, Perlidae, Ephemeroptera-family-level, plus Hymenoptera coverage)
+- **Insect entries:** 8 across 9 consecutive degrees (87–95 with one Amphibia interlude)
+- **Consecutive original CSV species:** 35 (degrees 61–95)
+- **Electronic-adjacent entries in last 10 degrees:** 6 (86, 90, 91, 93, 94, 95)
+- **Bellingham/WWU acts:** 2 (Death Cab for Cutie 58, ODESZA 95)
+- **Biological deep time reference:** 300+ million years (Ephemeroptera, Carboniferous fossils)
 
-**Artist-side (after degree 95):** E1:3 (3.1%), E2:31 (32.3%), E3:27 (28.1%), E4:22 (22.9%), E5:12 (12.5%), E6:2 (2.1%). Total: 96 (degrees 0-95, 96 entries counting origin). E=5 gains ODESZA (95) reaching 12 deployments. The electronic era energy: E=3 (Sky Cries Mary 90), E=2 (Hovercraft 91), E=3 (Trance Mission 92), E=3 (NAVVI 93), E=4 (Erik Blood 94), E=5 (ODESZA 95) -- rising continuously from the Hovercraft dip through E=3 to E=4 to E=5. The electronic era energy climbs.
+## Files
 
-**Species-side (after degree 95):** E=3 for mayfly (95) rises from stonefly (94, E=2). The sequence since 86: E=4, E=4, E=4, E=4, E=4, E=2, E=3, E=5, E=2, E=3. Back-to-back aquatic insects at E=2 (stonefly) and E=3 (mayfly). The mass event raises energy above the individual. The species energy continues to oscillate.
+- `docs/release-notes/v1.49.235/README.md` (this file)
+- `docs/release-notes/v1.49.235/chapter/00-summary.md` — derived summary
+- `docs/release-notes/v1.49.235/chapter/03-retrospective.md` — retrospective
+- `docs/release-notes/v1.49.235/chapter/04-lessons.md` — extracted lessons
+- `docs/release-notes/v1.49.235/chapter/99-context.md` — context
+- `www/tibsfox/com/Research/S36/research/releases/095-odesza/index.html` — ODESZA research HTML
+- `www/tibsfox/com/Research/S36/research/releases/095-odesza/research.md` — ODESZA research markdown
+- `www/tibsfox/com/Research/S36/research/releases/095-odesza/knowledge-nodes.json` — ODESZA knowledge nodes
+- `www/tibsfox/com/Research/S36/research/releases/095-odesza/retrospective.md` — ODESZA retrospective
+- `www/tibsfox/com/Research/SPS/research/releases/095-mayfly-emergence/index.html` — Mayfly Emergence research HTML
+- `www/tibsfox/com/Research/SPS/research/releases/095-mayfly-emergence/research.md` — Mayfly Emergence research markdown
+- `www/tibsfox/com/Research/SPS/research/releases/095-mayfly-emergence/knowledge-nodes.json` — Mayfly Emergence knowledge nodes
+- `www/tibsfox/com/Research/SPS/research/releases/095-mayfly-emergence/retrospective.md` — Mayfly Emergence retrospective
 
-## Cross-References (Combined)
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| S36-058 | ODESZA (95) | Death Cab for Cutie (58) | BELLINGHAM/WWU ORIGIN. Both formed at WWU. Different genres, different decades, same pipeline. |
-| S36-086 | ODESZA (95) | The Postal Service (86) | ELECTRONIC CONNECTION. Both electronic, both massive reach. |
-| S36-044 | ODESZA (95) | Chong the Nomad (44) | ELECTRONIC SEATTLE PARALLEL. Both electronic, both Seattle. |
-| S36-091 | ODESZA (95) | Hovercraft (91) | ELECTRONIC SPECTRUM. Opposite ends -- drone/experimental vs euphoric. |
-| S36-081 | ODESZA (95) | Sara Bareilles (81) | E=5 PARALLEL. Both E=5, both arena-scale. Different genres, same energy tier. |
-| SPS-094 | Mayfly Emergence (95) | Stonefly Hatch (94) | STREAM SHARED. Back-to-back aquatic insects. Plecoptera and Ephemeroptera. |
-| SPS-057 | Mayfly Emergence (95) | Belted Kingfisher (57) | STREAM CONNECTION. Kingfisher above; mayfly nymphs below. |
-| SPS-052 | Mayfly Emergence (95) | American Dipper (52) | STREAM CONNECTION. Dipper forages where mayfly nymphs live. Predator-prey. |
-| SPS-091 | Mayfly Emergence (95) | Mosquito Swarm (91) | INSECT ERA. Both aquatic stages. Mosquito in still water; mayfly in streams. |
-| SPS-087 | Mayfly Emergence (95) | Cricket Chorus (87) | INSECT ERA. Nine insect entries (87-95). Mayfly continues aquatic turn. |
+Total: README + 4 chapter files + 8 research artifacts = 13 files associated with degree 95. Release-notes commit `3861acaac26ea0caa460e2ebab4a5fe07ada5e45` (9 files in commit: 1 release note + 4 ODESZA artifacts + 4 Mayfly Emergence artifacts).
 
 ## Infrastructure
 
-**Part A:** `www/tibsfox/com/Research/S36/research/releases/095-odesza/` -- research.md, index.html, knowledge-nodes.json, retrospective.md
-**Part B:** `www/tibsfox/com/Research/SPS/research/releases/095-mayfly-emergence/` -- research.md, index.html, knowledge-nodes.json, retrospective.md
-**Release notes:** `docs/release-notes/v1.49.235/README.md`
-
-**Total: 8 files** -- standard degree package.
-
----
-
-## Retrospective
-
-**What Worked:**
-1. ODESZA as Electronic at Genre Stage 77 is accurate -- cinematic, euphoric, festival-scale. Genuinely distinct from Electronic/Experimental (94), Dream Pop/Electronic (93), Drone/Noise (91), and Electronic Pop (86). The sixth electronic entry in ten degrees maps euphoria as a specific use of electronics
-2. The euphoric build (96th acoustic element) captures the sonic architecture -- tension-release through layered synths, the build IS the composition. Distinct from the producer's palette (94, experimental exploration) and shimmer veil (93, reverb as architecture)
-3. The Bellingham pipeline (96th artist-city pattern) is observationally accurate -- Death Cab (58) and ODESZA (95) both formed at WWU. The pipeline is verifiable and structurally meaningful
-4. E=5 for ODESZA is defensible -- Coachella headliner, Grammy-nominated, arena tours. Maximum energy
-5. NEW FAMILY (45th) and NEW ORDER Ephemeroptera (seventh insect order) are taxonomically significant -- first mayflies, second aquatic insect, most ancient winged lineage
-6. Ephemeral adult (hours to days, cannot eat) is a genuine biological distinction -- the most ephemeral adult life in the engine
-7. Mass emergence (predator satiation) is well-documented -- visible on weather radar, one of the most spectacular events in freshwater ecology
-8. 300+ million year lineage is verifiable -- Carboniferous fossils. Among the most ancient winged insects
-9. Fly fishing connection is real and deep -- the entire art built on imitating mayfly life stages
-10. Back-to-back aquatic insects (94-95) is structurally powerful -- Plecoptera and Ephemeroptera in consecutive degrees
-11. Thirty-five consecutive original CSV species continues data reliability
-
-**What Could Be Better:**
-1. PNW-specific mayfly species not individually identified -- ACCEPTED, family-level entry appropriate
-2. NO RAPTOR in 96 entries -- CRITICAL, persists from degree 90
-3. NO PASSERIFORM in 39 degrees -- thirty-nine consecutive non-passerines (57-95). EXTREME
-4. NO MARINE SPECIES -- 96 entries without a marine specialist. SIGNIFICANT
-
-## Lessons Learned
-
-1. Six electronic-adjacent entries in ten degrees (86, 90, 91, 93, 94, 95) sustain without repetition. Each maps a different relationship: pop structure (86), atmosphere (90), obliteration (91), intimacy (93), experimentation (94), euphoria (95). Six purposes, one technology. The electronic landscape is fully mapped
-2. The Bellingham pipeline with two instances (Death Cab 58, ODESZA 95) separated by 37 degrees confirms the geographic pattern as structural, not coincidental. A university town producing two of the PNW's most commercially successful acts across different genres and decades is a real pipeline
-3. The mayfly introduces the ephemeral -- an adult life measured in hours. This is a fundamentally new temporal scale. No prior species had such a brief adult stage. The engine now spans lifespans from hours (mayfly) to decades (most mammals)
-4. Mass emergence as predator satiation strategy is the first explicit survival strategy documented in the engine. The stonefly (94) was a diagnostic indicator; the mayfly (95) is an active survival strategist. The engine accumulates ecological concepts
-5. Nine insect entries in nine degrees (87-95) spanning seven orders is the deepest sustained exploration of any taxon class. The insect era is a sub-engine. Whether it continues at degree 96 will be structurally significant
-6. Thirty-five consecutive original CSV species (61-95). Data reliability sustained
-
----
-
-The euphoric build and the mass wing buzz over water.
-
-Degree 95. The euphoric and the ephemeral. Collective experience on both sides.
-
-On the music side, ODESZA works the euphoric build -- Electronic at Genre Stage 77. E=5. Harrison Mills and Clayton Knight. Bellingham, WWU, Counter Records. Coachella headliners. Grammy-nominated. The euphoric build is the 96th acoustic element -- cinematic electronic tension-release, the build IS the composition. The Bellingham pipeline is the 96th artist-city pattern -- WWU incubating artists, Death Cab (58) and ODESZA (95) from the same campus. Second Bellingham act. Six electronic entries in ten degrees. The engine maps euphoria.
-
-On the species side, the mayfly emergence rises from the water -- NEW FAMILY (45th), NEW ORDER Ephemeroptera (seventh insect order). Most ancient winged insects -- 300+ million years. Ephemeral adult -- hours to days, cannot eat. Mass emergence -- thousands hatching simultaneously, predator satiation. Mass wing buzz over water is the 96th species-side acoustic element -- collective shimmering buzz. E=3. Fly fishing foundation. Back-to-back aquatic insects with stonefly (94). Thirty-fifth consecutive original CSV. Nine insect entries in nine degrees. The insect era deepens in water.
-
-The euphoric and the ephemeral. ODESZA builds to collective euphoria. The mayfly rises in collective emergence. Both thousands moving together. Electronic crescendo and natural crescendo. The build and the buzz.
-
-*Degree 95. The euphoric and the ephemeral. The build rises. The wings shimmer. Both collective. Both brief in their way -- the euphoric drop resolves in minutes; the ephemeral adult resolves in hours. The engine adds euphoria and ephemerality.*
-
-</details>
+- **Release notes directory:** `docs/release-notes/v1.49.235/` (README + 4 chapter files)
+- **S36 research bundle:** `www/tibsfox/com/Research/S36/research/releases/095-odesza/` (4 research artifacts: research.md, index.html, knowledge-nodes.json, retrospective.md; ~127-lines research.md, ~156-lines retrospective.md)
+- **SPS research bundle:** `www/tibsfox/com/Research/SPS/research/releases/095-mayfly-emergence/` (4 research artifacts: research.md, index.html, knowledge-nodes.json, retrospective.md; ~175-lines research.md, ~129-lines retrospective.md)
+- **Commit:** `3861acaac26ea0caa460e2ebab4a5fe07ada5e45` on branch `main`, 9 files, 2276 insertions
+- **Engine state after degree 95:** 96 degrees covered, 77 genre stages, 96 artist-city patterns, 7 insect orders, 2 aquatic insect orders (back-to-back), 35 consecutive original CSV species, 6 electronic-adjacent entries in last 10 degrees, 2 confirmed Bellingham/WWU acts
