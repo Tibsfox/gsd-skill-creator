@@ -1,523 +1,184 @@
-# v1.49.245 -- Degree 105: Parenthetical Girls (Electronic) + Clark's Nutcracker -- THE THEATRICAL CIRCUIT AND THE ALPINE BROADCASTER -- CORVIDAE SEXTET
+# v1.49.245 — Degree 105: Parenthetical Girls (Electronic) + Clark's Nutcracker — THE THEATRICAL CIRCUIT AND THE ALPINE BROADCASTER — CORVIDAE SEXTET
 
-**Released:** 2026-04-01
-**Degree:** 105 of 360 -- 29.2% of 360
-**Part A:** Parenthetical Girls (electronic context) -- Avant-Pop, E=4, indie/self-released, EIGHTH RETURN ARTIST (first at degree 89 as Avant-Pop, E=3), THREE CONSECUTIVE ELECTRONIC RETURNS (103-105), GENRE STAGE 87 (Avant-Pop, eighty-seventh genre stage, baroque cabaret rebuilt with electronic instruments synthesizers drum machines electronic processing replacing chamber ensemble, distinct from Electronic Pop 104 dream-based and Art Pop/Electronic 103 dissolved voice), THE THEATRICAL CIRCUIT 106th acoustic element (preserved drama electronic staging added precision voice commanding, distinct from dream circuit 104 atmospheric intimate and layered dissolution 103 voice dissolved), THE TRIPLE ELECTRONIC RETURN 106th artist-city pattern (three consecutive degrees with artists returning in electronic context unprecedented scale, distinct from sustained electronic return 104 back-to-back)
-**Part B:** Clark's Nutcracker (*Nucifraga columbiana*) -- harsh grating kraa-a-a, E=5, alpine pine, Corvidae (SIXTH CONSECUTIVE CORVIDAE 100-105 = CORVIDAE SEXTET, ties Mustelidae sextet 63-68 and Sciuridae sextet 75-80, 98,000 seeds per year cached, sublingual pouch, obligate mutualism with whitebark pine, named for William Clark, forty-fifth consecutive original CSV)
-**Series:** Seattle 360 + Sound of Puget Sound -- Continuous Release Engine
+**Released:** 2026-04-02
+**Scope:** Seattle 360 + Sound of Puget Sound — paired degree release, Corvidae sextet closer and triple electronic return closer
+**Branch:** main
+**Commits:** `87571c4b0` (1)
+**Files changed:** 9 (1 release note + 4 Parenthetical Girls research artifacts + 4 Clark's Nutcracker research artifacts)
+**Degree:** 105 of 360 — 29.2% of 360 — Fifteenth degree of Quadrant II
+**Part A:** Parenthetical Girls (electronic context) — Avant-Pop, E=4, indie/self-released, EIGHTH RETURN ARTIST (first at degree 89 as Avant-Pop, E=3), THREE CONSECUTIVE ELECTRONIC RETURNS (103-105), Genre Stage 87 (Avant-Pop, eighty-seventh genre stage, baroque cabaret rebuilt with electronic instruments synthesizers drum machines electronic processing replacing chamber ensemble), THE THEATRICAL CIRCUIT 106th acoustic element, THE TRIPLE ELECTRONIC RETURN 106th artist-city pattern
+**Part B:** Clark's Nutcracker (*Nucifraga columbiana*) — harsh grating kraa-a-a, E=5, alpine pine, Corvidae (SIXTH CONSECUTIVE CORVIDAE 100-105 = CORVIDAE SEXTET, ties Mustelidae sextet 63-68 and Sciuridae sextet 75-80), 98,000 seeds per year cached, sublingual pouch, obligate mutualism with whitebark pine, named for William Clark of the Lewis and Clark expedition, forty-fifth consecutive original CSV
+**Series:** Seattle 360 + Sound of Puget Sound — Continuous Release Engine
 **Cluster:** Music (hub: WAL)
-**Note:** CORVIDAE SEXTET. Six consecutive Corvidae degrees (100-105) -- ties Mustelidae and Sciuridae sextets for longest family streak since Sciuridae's octet (75-82). TRIPLE ELECTRONIC RETURN -- three consecutive degrees (103-105) with artists returning in electronic context: Briana Marela (72->103), Lemolo (56->104), Parenthetical Girls (89->105). All energy rises: E=2->E=3, E=2->E=3, E=3->E=4. The theatrical circuit and the harsh grating call -- both are loud, commanding, and unmistakable.
+**Dedication:** To **Parenthetical Girls** and **Zac Pennington** — the baroque theatricalists of the Pacific Northwest avant-pop tradition whose return at degree 105 in electronic context completes the triple consecutive electronic return (degrees 103-105) and demonstrates that genre persistence across reframings is a legitimate analytical finding rather than a failure of reclassification; to **Clark's Nutcracker** (*Nucifraga columbiana*) — the alpine broadcaster, the whitebark pine specialist, the ninety-eight-thousand-seed cacher, the species named for **William Clark** of the Lewis and Clark expedition (described August 22, 1805, near the **Salmon River**, **Idaho**) whose obligate mutualism with **whitebark pine** (*Pinus albicaulis*) sustains the alpine forests of the **Pacific Northwest** under double pressure from climate change and white pine blister rust; to **Corvidae** completing its sextet at degrees 100-105 to tie the **Mustelidae** sextet (63-68) and the **Sciuridae** sextet (75-80) for the longest consecutive family streak in the engine; and to the perfect energy oscillation (E=4, E=5, E=4, E=5, E=4, E=5) across the sextet — an emergent pattern discovered rather than imposed that demonstrates catalog maturity.
+**Engine Position:** Degree 105 of 360 — **CORVIDAE SEXTET** closes (six consecutive Corvidae degrees 100-105 ties Mustelidae and Sciuridae for longest family streak in the engine); **TRIPLE ELECTRONIC RETURN** closes (three consecutive electronic returns at degrees 103-105 is the longest consecutive return run in the engine); **GENRE STAGE 87** (Avant-Pop at 105 returns the genre first introduced at degree 89, genre persistence across return); **EIGHTH RETURN ARTIST** (Parenthetical Girls joins the seven prior return artists); **THE THEATRICAL CIRCUIT** (106th artist-side acoustic element, baroque cabaret rebuilt with electronic instruments, drama preserved, voice commanding); **THE HARSH GRATING KRAA-A-A** (105th species-side acoustic element, nasal mechanical far-carrying alpine broadcast); **THE TRIPLE ELECTRONIC RETURN** (106th artist-city pattern, three consecutive degrees with artists returning in electronic context); **PERFECT E=4/E=5 OSCILLATION** across the sextet; **FORTY-FIFTH CONSECUTIVE ORIGINAL CSV** (degrees 61-105); **98,000 SEEDS PER YEAR** (most extreme caching behavior in the engine's species portfolio); **OBLIGATE MUTUALISM** (nutcracker + whitebark pine, strongest ecological narrative in the engine); **SIX-SPECIES ELEVATIONAL GRADIENT** (Corvidae sextet climbs from widespread lowland (Common Raven 100) through urban (American Crow 102) and lowland conifer (Steller's Jay 103) to subalpine (Gray Jay 104) and alpine pine (Clark's Nutcracker 105)).
 
 ## Summary
 
-The theatrical circuit and the alpine broadcaster. Degree 105 pairs the dramatic with the extreme -- baroque theater rebuilt in electronic circuitry and the most specialized seed-cacher in North America.
+**THE CORVIDAE SEXTET CLOSES AT THE ALPINE.** Six consecutive Corvidae degrees (100-105) tie the engine's longest family streaks — **Mustelidae** at degrees 63-68 (River Otter, Mink, American Marten, Fisher, Short-tailed Weasel, Long-tailed Weasel) and **Sciuridae** at degrees 75-80 (Yellow-bellied Marmot, Hoary Marmot, Olympic Marmot, Townsend's Ground Squirrel, Golden-mantled Ground Squirrel, Douglas Squirrel). **Clark's Nutcracker** (*Nucifraga columbiana*) carries the sextet's final slot at **degree 105**, closing the corvid run at the highest elevation any corvid has yet occupied in the engine and broadcasting its harsh grating **kraa-a-a** across open **whitebark pine** (*Pinus albicaulis*) stands above treeline. The nutcracker is the obligate mutualist of the alpine — it cannot survive without whitebark pine and whitebark pine cannot regenerate without the nutcracker. Neither half of that partnership will endure the twenty-first century without the other, and both are now under double pressure from climate change and white pine blister rust. **In parallel**, on the music side, **Parenthetical Girls** returns from **degree 89** in electronic context to become the **eighth return artist** in the engine — completing the **triple electronic return** at **degrees 103-105** that began with **Briana Marela** (72 → 103), continued with **Lemolo** (56 → 104), and culminates with Parenthetical Girls (89 → 105). Three consecutive degrees with artists returning in electronic context — the longest consecutive return streak the engine has ever produced. The triple electronic return and the Corvidae sextet close **together** at the same degree.
 
-On the music side, **Parenthetical Girls** returns from degree 89 as the **eighth return artist**, reframed in **electronic context**. **Genre Stage 87** -- **Avant-Pop**. At degree 89, the engine centered the baroque theatricality -- cabaret drama, chamber arrangements of strings, horns, and piano, Zac Pennington's dramatic vocals (E=3). At degree 105, the engine reframes through electronic context -- synthesizers replace strings, drum machines replace acoustic percussion, electronic processing replaces chamber resonance. The drama persists. Pennington's voice still commands the stage. But now the stage is built from **electronic voltage rather than acoustic vibration**. The **theatrical circuit** is the 106th acoustic element -- the baroque cabaret aesthetic rebuilt with electronic instruments, preserving theatrical intensity while adding electronic precision. The **triple electronic return** is the 106th artist-city pattern -- three consecutive electronic returns at degrees 103-105, the longest consecutive return streak in the engine. E=4. Energy rises from E=3 (at degree 89) to E=4. The electronic context consistently raises energy by one level across all three returns: Briana Marela (E=2->E=3), Lemolo (E=2->E=3), Parenthetical Girls (E=3->E=4).
+**Part A: Parenthetical Girls Returns in Electronic Context — The Theater Rebuilt in Circuitry.** At **degree 89**, the engine centered **Parenthetical Girls** as Avant-Pop through its baroque cabaret practice — chamber arrangements of strings, horns, and piano; **Zac Pennington's** dramatic vocals commanding an acoustic theater; cabaret impulse and theatrical ambition set against the Pacific Northwest indie landscape. E=3. At **degree 105**, the same project returns reframed through electronic production — synthesizers replace strings, drum machines replace acoustic percussion, electronic processing replaces chamber resonance. The drama persists. Pennington's voice still commands the stage. The baroque ambition still orchestrates. But the stage itself is now built from **electronic voltage rather than acoustic vibration**. **Genre Stage 87** — **Avant-Pop** — is the eighty-seventh distinct genre stage across 105 degrees. Avant-Pop persists across both Parenthetical Girls appearances (89, 105) because the theatrical impulse is the constant and the electronic foundation is a new staging, not a new genre. The **theatrical circuit** is the 106th artist-side acoustic element — preserved drama, electronic staging, added precision, voice commanding. The **triple electronic return** is the 106th artist-city pattern — three consecutive degrees of electronic reframing — the longest consecutive return run in the engine. E=4. Energy rises from E=3 (at degree 89) to E=4 (at degree 105). The electronic context consistently raises energy by one level across all three returns: **Briana Marela** (E=2 → E=3), **Lemolo** (E=2 → E=3), **Parenthetical Girls** (E=3 → E=4). The re-contextualized return that **The Postal Service** introduced at **degree 97** has now been formalized as a three-degree sequence, and the engine operates on electronic reframing as a fundamental operation at unprecedented scale.
 
-On the species side, **Clark's Nutcracker** (*Nucifraga columbiana*) extends the Corvidae run to **SIX CONSECUTIVE DEGREES** (100-105) -- the **CORVIDAE SEXTET**, tying the Mustelidae sextet (63-68) and the Sciuridae sextet (75-80). Named for **William Clark** of the Lewis and Clark expedition (described August 22, 1805, near the Salmon River, Idaho). The alpine broadcaster -- harsh, grating, far-carrying **kraa-a-a** that echoes across alpine ridges. E=5. The sextet's acoustic arc rises from the Gray Jay's intimacy (104, E=4) back to maximum energy at the highest elevation. The nutcracker caches up to **98,000 pine seeds per year** using a specialized **sublingual pouch** that holds 150 seeds at a time, transporting them up to 22 km. The unrecovered seeds (10-30%) are the foundation of **whitebark pine regeneration** -- an **obligate mutualism** where neither species can thrive without the other. Both are now under double pressure from climate change and blister rust.
+**Part B: Clark's Nutcracker Closes the Corvidae Sextet — The Alpine Broadcaster.** **Clark's Nutcracker** (*Nucifraga columbiana*) is the sixth consecutive corvid and the sextet's highest-elevation member. 27-30 cm body length, 55-61 cm wingspan, 106-161 g body mass. Pale gray body. Black wings with large white wing patches. Long, sharp, slightly decurved bill — a seed-extraction tool. Named for **William Clark** of the **Lewis and Clark expedition** (described August 22, 1805, near the **Salmon River**, **Idaho**). Species name *columbiana* references the **Columbia River** region. The **kraa-a-a** is the diagnostic call — harsh, nasal, grating, almost mechanical, drawn-out, echoing across alpine ridges and open pine stands. E=5. The nutcracker is **immediately identifiable** — no other bird in the alpine **Pacific Northwest** habitat produces this sound. Secondary vocalizations include **chatter** (rapid series of harsh notes, social or territorial), and **soft calls** (quieter, modulated, close-range, rarely heard by observers). The most consequential fact about the nutcracker is not acoustic — it is ecological. Each individual caches up to **98,000 pine seeds per year**, using a specialized **sublingual pouch** that carries 150 seeds at a time and transports them up to **22 km** from source tree. Caches are scattered across thousands of sites on south-facing slopes, ridges, and windswept areas — sites that will be snow-free when seeds are needed for spring breeding. Spatial memory (enabled by an enlarged hippocampus) recovers 70-90% of caches. The 10-30% left unrecovered germinate, making the nutcracker the **primary dispersal agent for whitebark pine**. **Obligate mutualism**. Neither species can thrive without the other. **Whitebark pine** (*Pinus albicaulis*) is now in crisis from **white pine blister rust**, **mountain pine beetle** (intensified by warming), and **climate change**. The pine's decline threatens the nutcracker. The nutcracker's decline threatens the pine. Double pressure on the mutualism that built **alpine forests** across the Rocky Mountains, Cascades, and Olympics.
 
-The theatrical circuit commands the electronic stage. The nutcracker broadcasts across the alpine. Both are maximum presence in their landscapes.
+**Cross-Sync Parallel: Both Tie Records at Degree 105.** Both halves of degree 105 reach **record-tying structural milestones** on the same degree. **Corvidae** extending to **six consecutive degrees** (100-105) **ties** the **Mustelidae sextet** (63-68, degrees occupied by River Otter, Mink, American Marten, Fisher, Short-tailed Weasel, Long-tailed Weasel) and the **Sciuridae sextet** (75-80, degrees occupied by Yellow-bellied Marmot, Hoary Marmot, Olympic Marmot, Townsend's Ground Squirrel, Golden-mantled Ground Squirrel, Douglas Squirrel) as the longest family streaks in the engine. **In parallel**, the electronic return sequence extending to **three consecutive degrees** (103-105) is **the longest consecutive return run the engine has ever produced** — previous returns had been back-to-back at most (97 to The Postal Service original at 86 was single; subsequent returns were isolated until Briana Marela at 103). **Each side** reaches its record at the same degree. **The same** structural moment — records tying or being set on both halves at 105 — reaches both halves **in parallel**, **mirror**-imaged across the taxonomy/genre divide. **Synchronized** by the catalog's ordering and by deliberate engine planning, the sextet's closing corvid and the triple return's closing artist land **together**.
+
+**Cross-Sync Parallel: Both Are Commanding Presences.** Both halves of degree 105 build identity through **commanding presence rather than subtle texture**. **Parenthetical Girls'** theatrical circuit at **E=4** fills the electronic stage with baroque drama — Pennington's voice projecting outward, narrative ambition declaiming, theatrical intensity refusing to dissolve into atmosphere. **In parallel**, **Clark's Nutcracker's** **harsh grating kraa-a-a** at **E=5** broadcasts across open alpine pine stands — nasal mechanical sound carrying for kilometers, diagnostic call refusing to be mistaken for any other bird. **Each side** commands its environment **the same** way — loudly, unmistakably, theatrically, without retreat into quieter registers. **Synchronized** by design, the theatrical circuit and the alpine broadcaster both choose **maximum presence** over subtlety — the engine at degree 105 pairs two voices that insist on being heard.
+
+**Cross-Sync Parallel: Both Represent Peaks of Their Gradients.** Both halves of degree 105 sit at **peaks of their respective structural gradients**. On the music side, **Parenthetical Girls** in electronic context is the **most dramatic voice in the electronic return streak** — Briana Marela dissolved voice into texture (103, the layered dissolution), Lemolo floated voice in atmosphere (104, the dream circuit), Parenthetical Girls projects voice outward as command (105, the theatrical circuit). Three voice strategies across three degrees — dissolved, afloat, commanding — climb to Parenthetical Girls' peak intensity. **In parallel**, on the species side, **Clark's Nutcracker** occupies the **highest elevational niche of any corvid in the sextet** — Common Raven at widespread lowland (100), Common Raven Pair at cliffs and forest (101), American Crow at urban and open habitats (102), Steller's Jay at lowland conifer (103), Gray Jay at subalpine (104), Clark's Nutcracker at alpine pine (105). Six elevational bands climb to the nutcracker's alpine peak. **Each side** traverses a gradient that **peaks at 105**. **The same** structural principle — degree 105 as peak rather than as point — reaches both halves on the same degree. **Synchronized** by the catalog, the theatrical intensity peak and the elevational peak arrive **together**.
+
+**Cross-Sync Parallel: Both Demonstrate Specialization.** Both halves of degree 105 embody **extreme specialization** within their domains. **Parenthetical Girls'** baroque-to-electronic transition is a highly specialized niche — few artists combine cabaret theatricality with electronic production at this level of intentionality, and fewer still maintain genre continuity (Avant-Pop at both 89 and 105) across the transition. **In parallel**, **Clark's Nutcracker's** **98,000-seed caching** is the most specialized food-storage behavior in **North America** — an order of magnitude beyond any other cacher in the engine (Gray Jay caches thousands, Common Raven caches hundreds, American Pika gathers seasonal hay piles). The sublingual pouch is a single-purpose anatomical specialization. The 22-km transport distance is a single-purpose behavioral specialization. The 70-90% recovery rate via enlarged hippocampus is a single-purpose cognitive specialization. **Each side** occupies a highly specialized niche — **the same** structural principle (specialization produces identity) reaches both halves on the same degree. **Synchronized** by the engine's deliberate pairing, Parenthetical Girls' theatrical-electronic niche and the nutcracker's whitebark-pine niche demonstrate that catalog maturity at degree 105 can pair two peaks of specialization.
+
+**Cross-Sync Parallel: Both Carry Emergent Rather Than Planned Patterns.** Both halves of degree 105 participate in **emergent structural patterns** that were discovered rather than imposed. The **perfect E=4/E=5 energy oscillation** across the Corvidae sextet (E=4 at 100, E=5 at 101, E=4 at 102, E=5 at 103, E=4 at 104, E=5 at 105) was not planned — it emerged from choosing species with appropriately contrasting vocal intensities. The sextet's **elevational gradient** was not planned — it emerged from selecting corvids that happen to occupy distinct habitat bands. **In parallel**, the **triple electronic return** was not originally planned as a three-degree sequence — the engine produced it through degree-by-degree selection, with each return's viability confirming the next. Four electronic returns in nine degrees (97, 103, 104, 105) and three consecutive (103-105). **Each side** demonstrates that **catalog maturity enables emergence**. **The same** principle — that patterns discovered at degree 105 are more structurally significant than patterns imposed — reaches both halves **in parallel**. **Synchronized** by emergence itself, the E=4/E=5 oscillation and the triple return arrive **together** as structural findings that could not have been engineered by fiat.
+
+**Cross-Sync Parallel: Both Encode Historical Memory.** Both halves of degree 105 **carry historical memory** within their identity. **Clark's Nutcracker** encodes historical memory explicitly — named for **William Clark** of the **Lewis and Clark expedition**, described August 22, 1805, near the **Salmon River** in **Idaho**. The species name *columbiana* references the **Columbia River** region. Two centuries of taxonomic history live inside the binomial. **In parallel**, **Parenthetical Girls** at degree 105 carries historical memory of its own degree 89 entry — the electronic reframing is not a new project but a return to the same project, and the return's intelligibility depends on the degree 89 entry being readable as precedent. The theatrical circuit at 105 is not intelligible without the baroque theatricality at 89 as its acoustic and historical anchor. **Each side** carries its past forward into degree 105. **The same** structural principle — that degree 105 is both present and recursive — reaches both halves on the same degree. **Synchronized** by memory, the William Clark connection and the degree 89 connection **mirror** each other across the taxonomy/genre divide.
+
+**Cross-Sync Parallel: Both Participate in Ecological Mutualisms.** Both halves of degree 105 **depend on partnerships** for their existence. **Clark's Nutcracker** is obligate mutualist with **whitebark pine** — the species exists because whitebark pine exists, and whitebark pine regenerates because the nutcracker caches. Neither can endure without the other. The nutcracker's entire cognitive and anatomical portfolio (sublingual pouch, enlarged hippocampus, 22-km transport range) exists because the mutualism requires it. **In parallel**, **Parenthetical Girls'** electronic reframing depends on partnerships — **Zac Pennington** partners with collaborators who bring electronic production skills; the project partners with indie release infrastructure across multiple labels and self-released channels; the Avant-Pop genre itself is a partnership between pop structure and avant-garde impulse. Neither side of Parenthetical Girls' dual-staging identity exists in isolation. **Each side** demonstrates that **degree 105 identity is relational rather than atomic**. **The same** principle — that degree 105's paired subjects exist through partnership — reaches both halves **in parallel**. **Synchronized** by the engine's centering of mutualism as a theme, the obligate nutcracker-pine mutualism and the relational Parenthetical Girls practice **mirror** each other.
+
+**Cumulative State at Degree 105.** The engine has now documented **106 artists** (including origin **Quincy Jones** at degree 0), **106 acoustic elements** on the artist side and **105 acoustic elements** on the species side, **106 artist-city patterns**, **87 genre stages** (0.83 stages per degree, stable rate), **49 families** (plus the corvid sextet's six-degree depth within **Corvidae**), **4 classes** (**Aves**, **Mammalia**, **Insecta**, **Amphibia**), and **18-plus orders**. The engine holds **45 consecutive original CSV species** — the longest unbroken run of original-catalog selections, now extending from **degree 61** through **degree 105**. **Aves** has held the engine for six consecutive degrees since its centennial return at degree 100 — the longest bird streak the engine has produced. **Parenthetical Girls** becomes the eighth return artist, joining **Neko Case** (66, 87), **Death Cab for Cutie** (58, 82), **Pearl Jam** (at the grunge origin and 83), **Damien Jurado** (45, 84), **Rocky Votolato** (46, 85), **The Postal Service** (86, 97), **Kimya Dawson** (49, 88), **Briana Marela** (72, 103), and **Lemolo** (56, 104). The Corvidae sextet closes at the alpine. The triple electronic return closes at the theatrical. Both close **together** at degree 105, and **the engine operates at unprecedented scale**.
 
 ## Key Features
 
 | Metric | Part A: Parenthetical Girls (Electronic) | Part B: Clark's Nutcracker |
 |--------|------------------------------------------|---------------------------|
-| Genre | Avant-Pop (Genre Stage 87) | -- |
-| Energy | E=4 (dramatic, commanding, theatrical, electronic precision) | E=5 (harsh grating kraa-a-a, far-carrying, alpine broadcast) |
-| Label | Indie (various, self-released, subscription model) | -- |
-| Family | -- | Corvidae (sixth consecutive, 100-105 = CORVIDAE SEXTET, ties Mustelidae/Sciuridae) |
-| Acoustic Element | the theatrical circuit (106th, preserved drama electronic staging added precision voice commanding) | harsh grating kraa-a-a (105th species-side, nasal mechanical far-carrying alpine broadcast) |
-| Artist-City Pattern | The Triple Electronic Return (106th, three consecutive degrees with artists returning in electronic context) | -- |
-| Structural Firsts | GENRE STAGE 87, EIGHTH RETURN ARTIST, TRIPLE ELECTRONIC RETURN (103-105), THE THEATRICAL CIRCUIT, E=3 to E=4 energy transition | CORVIDAE SEXTET (six consecutive, ties record), 98,000 seeds/year, sublingual pouch, obligate mutualism with whitebark pine, named for William Clark |
+| Genre | **Avant-Pop** (Genre Stage 87, eighty-seventh genre stage in 105 degrees, baroque cabaret rebuilt with electronic instruments synthesizers drum machines electronic processing replacing chamber ensemble, genre persistence across both Parenthetical Girls appearances at 89 and 105) | — |
+| Energy | **E=4** (dramatic commanding theatrical electronic precision, voice projects outward, narrative ambition declaims, theatrical intensity refuses dissolution, stage rebuilt in electronic voltage rather than acoustic vibration) | **E=5** (harsh grating kraa-a-a, nasal mechanical far-carrying, alpine broadcast, echoing across open whitebark pine stands and ridges, diagnostic call refusing to be mistaken, maximum energy at maximum elevation) |
+| Label | **Indie / self-released / various** (subscription models, self-directed releases, varied indie distribution topology) | — |
+| Family | — | **Corvidae** (SIXTH CONSECUTIVE, degrees 100-105 = CORVIDAE SEXTET, ties **Mustelidae sextet** 63-68 and **Sciuridae sextet** 75-80 as longest family streak in the engine, extends the corvid run to the alpine elevational peak) |
+| Order | — | **Passeriformes** (passerines, largest order of birds ~6,500 species worldwide, Clark's Nutcracker ranks among the largest alpine specialists) |
+| Class | — | **Aves** (sixth consecutive degree holding Aves since centennial return at degree 100, longest bird streak the engine has produced) |
+| Acoustic Element | **the theatrical circuit** (106th artist-side, baroque cabaret rebuilt with electronic instruments, preserved drama electronic staging added precision voice commanding, distinct from dream circuit 104 atmospheric intimate and layered dissolution 103 voice dissolved) | **harsh grating kraa-a-a** (105th species-side, nasal mechanical far-carrying alpine broadcast, drawn-out echoing across alpine ridges, no other bird in alpine PNW habitat produces this sound) |
+| Artist-City Pattern | **The Triple Electronic Return** (106th artist-city pattern, three consecutive degrees 103-105 with artists returning in electronic context, longest consecutive return streak in the engine, distinct from sustained electronic return 104 back-to-back and re-contextualized return 97 single) | — |
+| Structural Firsts | GENRE STAGE 87 (Avant-Pop returns as persistent genre across both 89 and 105 appearances), EIGHTH RETURN ARTIST (Parenthetical Girls joins seven prior return artists), TRIPLE ELECTRONIC RETURN (103-105 longest consecutive return run in engine), THE THEATRICAL CIRCUIT 106th acoustic element, E=3 to E=4 energy transition (electronic context raises energy by one level), FOURTH ELECTRONIC RETURN IN NINE DEGREES (97, 103, 104, 105) | **CORVIDAE SEXTET** (six consecutive Corvidae 100-105 ties Mustelidae and Sciuridae sextets), **98,000 SEEDS PER YEAR** (most extreme caching behavior in engine), **SUBLINGUAL POUCH** (150 seeds at a time, 22 km transport distance), **OBLIGATE MUTUALISM** with whitebark pine (*Pinus albicaulis*), **NAMED FOR WILLIAM CLARK** (Lewis and Clark expedition, August 22, 1805, Salmon River, Idaho), **FORTY-FIFTH CONSECUTIVE ORIGINAL CSV** (degrees 61-105), **PERFECT E=4/E=5 OSCILLATION** across sextet, **ALPINE PEAK** of elevational gradient, 70-90% cache recovery via enlarged hippocampus |
 | Research Words | ~4,000 | ~6,000 |
 | Files Produced | 4 | 4 |
 | Cross-References | 5 | 5 |
 
-<details>
-<summary>Full Release Notes -- Click to expand</summary>
-
-## Part A: Parenthetical Girls (Electronic) -- THE THEATRICAL CIRCUIT (Avant-Pop, E=4, Indie/Self-Released, Genre Stage 87, Eighth Return Artist, Triple Electronic Return 103-105, The Theatrical Circuit 106th Acoustic Element, The Triple Electronic Return 106th Artist-City Pattern)
-
-Full deep research covering Parenthetical Girls in electronic context, the eighth return, and the theatrical circuit:
-
-### STRUCTURAL EVENT: GENRE STAGE 87 -- Avant-Pop
-
-Degree 105 reaches Genre Stage 87. Avant-Pop describes Parenthetical Girls in electronic context -- the theatrical, baroque practice from degree 89 reframed through electronic production. The genre classification remains Avant-Pop because the theatrical impulse is the constant -- the electronic foundation is a new staging, not a new genre.
-
-Distinguished from: Parenthetical Girls (89, Avant-Pop -- baroque theatricality, chamber arrangements, cabaret drama, E=3). Lemolo electronic (104, Electronic Pop -- dream-based, atmospheric, intimate; Parenthetical Girls' electronic reframing is theatrical, dramatic, maximalist). Hovercraft (91, Noise/Electronic -- instrumental drone; Parenthetical Girls is narrative and performative, voice and drama remain central).
-
-### THE THEATER REBUILT IN CIRCUITRY
-
-At degree 89, Parenthetical Girls entered as Avant-Pop -- baroque theatricality, cabaret impulse, Zac Pennington's dramatic vocals commanding chamber arrangements of strings, horns, and piano. E=3. At degree 105, synthesizers replace strings, drum machines replace acoustic percussion, electronic processing replaces chamber resonance. The drama persists -- Pennington's voice still commands the stage -- but now the stage is built from electronic voltage.
-
-The theatrical circuit -- baroque cabaret aesthetic rebuilt with electronic instruments, preserving theatrical intensity while adding electronic precision and pulse. Conceptual continuity -- the same theatrical ambition drives the electronic period. The stage changes; the drama does not.
-
-### EIGHTH RETURN ARTIST -- THREE CONSECUTIVE ELECTRONIC RETURNS
-
-Parenthetical Girls is the eighth return artist. Combined with Briana Marela electronic (103) and Lemolo electronic (104), this creates three consecutive return artists at degrees 103-105 -- all returning in electronic context. The triple electronic return is the longest consecutive return streak in the engine.
-
-Energy trajectory: Briana Marela (E=2->E=3), Lemolo (E=2->E=3), Parenthetical Girls (E=3->E=4). The electronic context consistently raises energy by one level. Four electronic returns in nine degrees (97, 103, 104, 105). The Postal Service (97) established the re-contextualized return. Degrees 103-105 establish the triple streak.
-
-### THE THEATRICAL CIRCUIT -- 106th Acoustic Element
-
-Preserved drama (theatrical intensity, vocal command, narrative ambition carry over). Electronic staging (synthesizers and electronic processing replace chamber instruments). Added precision (mechanical regularity and controlled dynamics). Voice commanding (unlike layered dissolution 103 which dissolves voice, or dream circuit 104 which floats voice, the theatrical circuit keeps voice commanding the stage).
-
-Contrasts: The baroque theatricality (89, chamber instruments, acoustic staging) vs the theatrical circuit (electronic staging). The dream circuit (104, Lemolo, atmospheric, intimate) vs the theatrical circuit (dramatic, declamatory). The layered dissolution (103, Briana Marela, voice dissolves) vs the theatrical circuit (voice commands). The noise wall (91, Hovercraft, instrumental, non-narrative) vs the theatrical circuit (voice-driven, narrative).
-
-### THE TRIPLE ELECTRONIC RETURN -- 106th Artist-City Pattern
-
-Three consecutive electronic returns at degrees 103-105: Briana Marela (72->103), Lemolo (56->104), Parenthetical Girls (89->105). All energy rises. Three self-contained artistic practices reframed through the electronic lens. The pattern confirms the electronic reframing as a fundamental engine operation.
-
-### CROSS-REFERENCES (Part A)
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| S36-089 | Parenthetical Girls electronic (105) | Parenthetical Girls (89) | RETURN! Avant-Pop original E=3. Electronic reframing E=4. Chamber instruments rebuilt in electronic form. |
-| S36-103 | Parenthetical Girls electronic (105) | Briana Marela electronic (103) | TRIPLE RETURN (first). Briana Marela dissolves voice into texture. Parenthetical Girls projects voice outward. Opposite voice-to-electronic relationships. |
-| S36-104 | Parenthetical Girls electronic (105) | Lemolo electronic (104) | TRIPLE RETURN (second). Lemolo's dream circuit is atmospheric and intimate. Parenthetical Girls' theatrical circuit is dramatic and maximal. Three returns, three registers. |
-| S36-094 | Parenthetical Girls electronic (105) | Erik Blood (94) | ELECTRONIC PRODUCTION. Blood is the studio as instrument; Parenthetical Girls is the stage as instrument. Both navigate Seattle's experimental electronic territory. |
-| S36-091 | Parenthetical Girls electronic (105) | Hovercraft (91) | NOISE/ELECTRONIC. Instrumental drone vs vocal theater. Both use electronic instruments to push past convention. Maximum contrast in voice presence. |
-
----
-
-## Part B: Clark's Nutcracker (*Nucifraga columbiana*) -- CORVIDAE SEXTET (Sixth Consecutive 100-105, Harsh Grating Kraa-a-a, E=5, Alpine Pine, 98,000 Seeds/Year, Sublingual Pouch, Whitebark Pine Mutualism, Named for William Clark, Forty-Fifth Consecutive Original CSV)
-
-Full deep research covering Clark's Nutcracker, the Corvidae sextet, and the whitebark pine mutualism:
-
-### SIXTH CONSECUTIVE CORVIDAE: THE CORVIDAE SEXTET
-
-Degree 105 extends the Corvidae run to SIX CONSECUTIVE DEGREES (100-105) -- the Corvidae Sextet. This ties the Mustelidae sextet (63-68) and the Sciuridae sextet (75-80):
-
-| Degree | Species | Acoustic Character | Energy | Habitat |
-|--------|---------|-------------------|--------|---------|
-| 100 | Common Raven | Deep cronk, resonant | E=4 | Widespread |
-| 101 | Common Raven pair | Duet, harmonic | E=5 | Cliffs, forest |
-| 102 | American Crow | Sharp caw | E=4 | Urban/open |
-| 103 | Steller's Jay (raucous) | Harsh alarm | E=5 | Lowland conifer |
-| 104 | Gray Jay | Soft whistles | E=4 | Subalpine |
-| **105** | **Clark's Nutcracker** | **Harsh grating kraa-a-a** | **E=5** | **Alpine pine** |
-
-The sextet's acoustic arc rises from the Gray Jay's intimacy (104) back to maximum energy (E=5) at the highest elevation. The sextet spans the full corvid vocal range and the full elevational gradient from urban lowlands (crow, 102) to alpine ridges (nutcracker, 105).
-
-### CLARK'S NUTCRACKER -- THE WHITEBARK PINE SPECIALIST
-
-Clark's Nutcracker (*Nucifraga columbiana*). 27-30 cm body length, 55-61 cm wingspan, 106-161 g. Pale gray body. Black wings with large white wing patches. Long, sharp, slightly decurved bill -- a seed-extraction tool. Named for William Clark of the Lewis and Clark expedition (described August 22, 1805, near the Salmon River, Idaho). Species name *columbiana* references the Columbia River region.
-
-### THE SOUND: HARSH GRATING KRAA-A-A -- THE ALPINE BROADCASTER
-
-Kraa-a-a: the diagnostic call. Harsh, nasal, grating, almost mechanical. Drawn-out, echoing across alpine ridges and open pine stands. Immediately identifiable -- no other bird in alpine PNW habitat produces this sound. Chatter: rapid series of harsh notes, social or territorial. Soft calls: quieter, modulated, close-range. Rarely heard by observers.
-
-The sextet's final acoustic: a voice designed for open, wind-swept alpine landscape. Maximum energy (E=5) at maximum elevation.
-
-### WHITEBARK PINE MUTUALISM -- 98,000 SEEDS PER YEAR
-
-Obligate mutualism with whitebark pine (*Pinus albicaulis*). The nutcracker extracts seeds from indehiscent cones using its long sharp bill. Sublingual pouch carries up to 150 seeds at a time, transporting them up to 22 km. 98,000 seeds cached per year in thousands of scattered soil locations on south-facing slopes and windswept ridges. Spatial memory (enlarged hippocampus) recovers 70-90% of caches. The 10-30% left unrecovered germinate -- making the nutcracker the primary dispersal agent for whitebark pine.
-
-Whitebark pine in crisis: white pine blister rust, mountain pine beetle (intensified by warming), and climate change. The decline threatens the nutcracker. The decline of the nutcracker threatens the pine. Double pressure on the mutualism that built alpine forests.
-
-### SEED CACHING -- THE GREATEST SPATIAL MEMORY
-
-Cache density: thousands of caches per year, 1-15 seeds each, buried 2-3 cm in soil. Cache placement: south-facing slopes, ridges, windswept areas -- sites that will be snow-free when seeds are needed for breeding. Transport distance: up to 22 km from source tree. Recovery rate: 70-90%.
-
-| Species | Degree | Caching Method | Items/Year | Storage Medium |
-|---------|--------|---------------|------------|----------------|
-| Common Raven | 100 | Ground caches | Hundreds | Soil, leaf litter |
-| Gray Jay | 104 | Bark caches | Thousands | Tree bark (sticky saliva) |
-| Clark's Nutcracker | 105 | Soil caches | **98,000** | Alpine soil |
-| American Pika | 74 | Hay piles | Seasonal harvest | Dried vegetation on talus |
-
-The nutcracker's caching is an order of magnitude beyond any other cacher in the engine.
-
-### ALPINE PINE HABITAT
-
-Whitebark pine stands at and above treeline. Open, wind-swept alpine ridges. Above the Gray Jay's subalpine forest (104) and into the true alpine zone. Year-round resident with seasonal movements between whitebark pine stands (summer/fall) and lower-elevation recovery sites (winter/spring). Shared habitat with American Pika (74), Hoary Marmot (76), and American Marten (65).
-
-### CROSS-REFERENCES (Part B)
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| SPS-104 | Clark's Nutcracker (105) | Gray Jay (104) | CORVIDAE SEXTET. Adjacent elevational bands: subalpine (Gray Jay) vs alpine pine (nutcracker). Maximum acoustic contrast: soft whistles (E=4) then harsh grating (E=5). |
-| SPS-100 | Clark's Nutcracker (105) | Common Raven (100) | CORVIDAE SEXTET. Intelligence. Both cache food. Raven generalist (hundreds); nutcracker specialist (98,000). |
-| SPS-074 | Clark's Nutcracker (105) | American Pika (74) | ALPINE NEIGHBOR. Both cache food for winter. Pika in hay piles on talus; nutcracker in soil across alpine landscape. |
-| SPS-076 | Clark's Nutcracker (105) | Hoary Marmot (76) | ALPINE SHARED HABITAT. Both signature alpine species. Marmot hibernates; nutcracker caches. Different winter strategies. |
-| SPS-065 | Clark's Nutcracker (105) | American Marten (65) | SUBALPINE/ALPINE OVERLAP. Both year-round high-elevation residents. Marten in dense forest; nutcracker in open pine stands. |
-
----
-
-## Parallel: Parenthetical Girls (Electronic) x Clark's Nutcracker -- The Theatrical Circuit and the Alpine Broadcaster (CORVIDAE SEXTET)
-
-The theatrical circuit and the harsh grating call. Both are loud, commanding, and unmistakable. Maximum presence in their respective landscapes.
-
-**1. Both Command Attention** -- Parenthetical Girls at E=4 commands the electronic stage with theatrical drama. Clark's Nutcracker at E=5 broadcasts across alpine ridges with harsh grating calls. Neither is subtle. Neither can be ignored. Both fill their environments with maximum presence.
-
-**2. The Sextet Ties the Record** -- Six consecutive Corvidae (100-105) ties the Mustelidae sextet (63-68) and the Sciuridae sextet (75-80). The corvid run has now matched the longest family streaks in the engine. The sextet resolves from intimacy (Gray Jay, 104) back to maximum volume (nutcracker, 105) at the highest elevation.
-
-**3. Triple Electronic Return Completes** -- Three consecutive electronic returns (103-105): Briana Marela (dissolution, E=3), Lemolo (dream, E=3), Parenthetical Girls (theater, E=4). Three voice strategies: dissolved, afloat, commanding. Three emotional registers: intimate, atmospheric, dramatic. The triple streak is the longest consecutive return run in the engine.
-
-**4. Extremes of Specialization** -- Parenthetical Girls' baroque-to-electronic transition is highly specialized -- few artists combine cabaret theatricality with electronic production. Clark's Nutcracker's 98,000-seed caching is the most specialized food storage behavior in North America. Both occupy extreme niches.
-
-**5. Elevational Climax** -- The nutcracker occupies the highest elevational niche of any corvid in the sextet. Parenthetical Girls' theatrical intensity is the most dramatic voice in the electronic return streak. Both represent the peak of their respective gradients -- elevation and theatricality.
-
----
-
-## Acoustic Progression (106 elements)
-
-| # | Element | Degree | Artist/Species |
-|---|---------|--------|----------------|
-| 0 | silence | 0 | Quincy Jones |
-| 1 | cascade | 1 | Bill Frisell |
-| 2 | drone | 2 | Wayne Horvitz |
-| 3 | language | 3 | Ernestine Anderson |
-| 4 | motif | 4 | Floyd Standifer |
-| 5 | metronome | 5 | Overton Berry |
-| 6 | question | 6 | Patti Bown |
-| 7 | harmonic spiral | 7 | Julian Priester |
-| 8 | ultrasonic threshold | 8 | Gary Peacock |
-| 9 | variation | 9 | Hadley Caliman |
-| 10 | minimum signal | 10 | Bud Shank |
-| 11 | trill/tremolo | 11 | Joe Brazil |
-| 12 | sawtooth sweep | 12 | Don Lanphere |
-| 13 | ostinato | 13 | Marc Seales |
-| 14 | repetition-resolution | 14 | Aaron Parks |
-| 15 | accelerando | 15 | Thomas Marriott |
-| 16 | crescendo | 16 | Jeff Lorber |
-| 17 | the hook | 17 | Reggie Watts |
-| 18 | ascending spiral | 18 | Maktub |
-| 19 | descending spiral | 19 | Fly Moon Royale |
-| 20 | sustain/the release | 20 | Whitney Monge |
-| 21 | the hammer | 21 | Polyrhythmics |
-| 22 | resonant percussion/groove reset | 22 | Foxy Apollo |
-| 23 | the testimony/groove reset | 23 | Allen Stone |
-| 24 | the invocation | 24 | Ron Artis II |
-| 25 | the congregation | 25 | Black Stax |
-| 26 | the caroling | 26 | Shaina Shepherd |
-| 27 | the liquid gurgle | 27 | The Dynamics |
-| 28 | the liquid twitter | 28 | Night Owls |
-| 29 | the rough brrit | 29 | Boogaloo Joe Jones |
-| 30 | the liquid warble synthesis | 30 | Ray Charles |
-| 31 | the whisper | 31 | Brenda Lee Eager |
-| 32 | the buzz | 32 | Luther Rabb |
-| 33 | the cadenza | 33 | Larry English |
-| 34 | the dialect | 34 | The Tempos |
-| 35 | the thrum | 35 | Robert Cray |
-| 36 | the sonic boom | 36 | Jimi Hendrix |
-| 37 | the filament | 37 | Ayron Jones |
-| 38 | the drawl | 38 | Booker T. Jones |
-| 39 | the canopy buzz | 39 | Ron Artis Jr |
-| 40 | the thinning | 40 | Alice Smith |
-| 41 | the partition | 41 | Shawn Smith |
-| 42 | the shimmer | 42 | Erica Campbell |
-| 43 | the radiance | 43 | Ann Wilson |
-| 44 | the grain | 44 | Chong the Nomad |
-| 45 | the murmur | 45 | Damien Jurado |
-| 46 | the confessional | 46 | Rocky Votolato |
-| 47 | the parable tone | 47 | Pedro the Lion |
-| 48 | the held rest | 48 | Sera Cahoone |
-| 49 | the lullaby subversion | 49 | Kimya Dawson |
-| 50 | the intimate architecture | 50 | Mirah |
-| 51 | the communal harmony | 51 | Grand Archives |
-| 52 | the testimony roar | 52 | Brandi Carlile |
-| 53 | the cathedral harmony | 53 | Fleet Foxes |
-| 54 | the fraternal jangle | 54 | Ivan & Alyosha |
-| 55 | the ember glow | 55 | Shelby Earl |
-| 56 | the dream haze | 56 | Lemolo |
-| 57 | the rattle / the stream rattle | 57 | Laura Gibson / Belted Kingfisher |
-| 58 | the ache / the pond whistle | 58 | Death Cab for Cutie / Wood Duck |
-| 59 | the digression / the quack | 59 | The Long Winters / Mallard |
-| 60 | the bare wire / the submerge call | 60 | Ben Gibbard (solo) / Pied-billed Grebe |
-| 61 | the braided voice / the tail slap | 61 | Y La Bamba / American Beaver |
-| 62 | the throwback / the rhythmic gnaw | 62 | Pickwick / Beaver Chewing |
-| 63 | the FM sheen / the chuff | 63 | Kenny Loggins / River Otter |
-| 64 | the dusk / the chitter | 64 | Jesse Sykes / Mink |
-| 65 | the open plain / the chuckle-chatter | 65 | Philip Aaberg / American Marten |
-| 66 | the country thunder / the scream | 66 | Neko Case / Fisher |
-| 67 | the clean room / the shrill bark-chitter | 67 | Chris Walla / Short-tailed Weasel |
-| 68 | the hush / the rapid chattering chirp | 68 | Sam Beam / Long-tailed Weasel |
-| 69 | the earnest voice / the warning foot-stamp hiss | 69 | Kris Orlowski / Striped Skunk |
-| 70 | the fiddle line / the churring chittering young | 70 | Horse Feathers / Raccoon |
-| 71 | the room tone / the bark screaming vixen call | 71 | Phil Elverum / Red Fox |
-| 72 | the layered loop / the low hiss click | 72 | Briana Marela / Opossum |
-| 73 | the jangle / the thump squeal | 73 | LAKE / Snowshoe Hare |
-| 74 | the reverb wash / the high sharp eenk bark | 74 | Poor Moon / American Pika |
-| 75 | the anthem / the piercing whistle alarm | 75 | The Lonely Forest / Yellow-bellied Marmot |
-| 76 | the androgynous register / the loud penetrating whistle | 76 | Chris Pureka / Hoary Marmot |
-| 77 | the ethereal layering / the musical multi-note whistle | 77 | Mree / Olympic Marmot |
-| 78 | the communal jangle / the chirping trill alarm | 78 | Acid Tongue / Townsend's Ground Squirrel |
-| 79 | the cinematic stillness / the sharp chip alarm | 79 | Jesse Marchant / Golden-mantled Ground Squirrel |
-| 80 | the organ explosion / the loud scolding chatter rattle | 80 | Mates of State / Douglas Squirrel |
-| 81 | the Broadway voice / the bark + chatter alarm | 81 | Sara Bareilles / Eastern Fox Squirrel |
-| 82 | the acoustic intimacy / the high thin tseet | 82 | Death Cab for Cutie (acoustic) / Northern Flying Squirrel |
-| 83 | the grunge whisper / the ultrasonic + soft chip | 83 | Pearl Jam (acoustic) / Deer Mouse |
-| 84 | the late whisper / the chatter + twig gnaw | 84 | Damien Jurado (late career) / Bushy-tailed Woodrat |
-| 85 | the stripped confession / the quiet plop | 85 | Rocky Votolato (acoustic) / Muskrat |
-| 86 | the electronic pulse / the amplified krek-krek wall of sound | 86 | The Postal Service / Pacific Treefrog |
-| 87 | the emerging twang / the rhythmic chirp field chorus | 87 | Neko Case (early folk) / Cricket Chorus |
-| 88 | the bedroom strum / the continuous electric buzz | 88 | Kimya Dawson (solo) / Katydid |
-| 89 | the baroque whisper / the electric buzzing throb | 89 | Parenthetical Girls / Cicada |
-| 90 | the ambient drift / the bell-like peep chorus | 90 | Sky Cries Mary / Spring Peeper-Like Chorus |
-| 91 | the sustained crush / the ultra-thin hum cloud | 91 | Hovercraft / Mosquito Swarm |
-| 92 | the global weave / the deep resonant buzz | 92 | Trance Mission / Bumblebee Drone |
-| 93 | the shimmer veil / the aggressive papery hum | 93 | NAVVI / Hornet Nest Buzz |
-| 94 | the producer's palette / the wing rustle on stream surface | 94 | Erik Blood / Stonefly Hatch |
-| 95 | the euphoric build / the mass wing buzz over water | 95 | ODESZA / Mayfly Emergence |
-| 96 | the synth-pop pulse / the duck-like clucking chorus | 96 | STRFKR / Wood Frog |
-| 97 | the algorithmic tenderness / the sustained musical purring | 97 | The Postal Service (electronic) / Toad Chorus |
-| 98 | the retro-synthetic shimmer / the pure sustained trill | 98 | Gold Casio / Tree Cricket Song |
-| 99 | the bilingual warmth / the mechanical click | 99 | Kaina / Click Beetle |
-| 100 | the nostalgic cascade / the deep cronk + bell + hollow knock | 100 | Summer Heart / Common Raven |
-| 101 | the kinetic surge / the coordinated duet | 101 | Hecuba / Common Raven Pair |
-| 102 | the organic circuit / the caw caw caw complex | 102 | Campfire OK / American Crow |
-| 103 | the layered dissolution / the shack-shack-shack raucous alarm | 103 | Briana Marela (electronic) / Steller's Jay (raucous) |
-| 104 | the dream circuit / the soft whistles + mimicry | 104 | Lemolo (electronic) / Gray Jay |
-| **105** | **the theatrical circuit / the harsh grating kraa-a-a** | **105** | **Parenthetical Girls (electronic) / Clark's Nutcracker** |
-
-The acoustic progression adds degree 105. On the artist side, the theatrical circuit (105) is Parenthetical Girls in electronic context -- baroque cabaret rebuilt with electronic instruments, drama preserved, precision added, voice commanding. E=4. From the dream circuit (104, atmospheric, pulsing, E=3) to the theatrical circuit (105, dramatic, commanding, E=4). Energy rises -- the theater is louder than the dream. Three consecutive electronic returns, three acoustic elements: dissolution (103), dream circuit (104), theatrical circuit (105). Three voice strategies: dissolved, afloat, commanding. On the species side, the harsh grating kraa-a-a (105) is Clark's Nutcracker -- the alpine broadcaster, nasal, mechanical, far-carrying. E=5. From soft whistles (104, Gray Jay, gentle, E=4) to harsh grating (105, nutcracker, penetrating, E=5). The sextet's acoustic arc: deep cronk (100), duet (101), sharp caw (102), harsh alarm (103), soft whistle (104), harsh grating (105). Energy oscillation resumes: E=4, E=5, E=4, E=5, E=4, E=5.
-
-## Artist-City Patterns (106 patterns)
-
-| # | Pattern | Degree | Artist |
-|---|---------|--------|--------|
-| 0 | Export | 0 | Quincy Jones |
-| 1 | Draw | 1 | Bill Frisell |
-| 2 | European Exile | 2 | Wayne Horvitz |
-| 3 | The Stay | 3 | Ernestine Anderson |
-| 4 | The Teacher | 4 | Floyd Standifer |
-| 5 | The Persistence | 5 | Overton Berry |
-| 6 | The Erasure | 6 | Patti Bown |
-| 7 | Pedagogue-Draw | 7 | Julian Priester |
-| 8 | The Quiet Draw | 8 | Gary Peacock |
-| 9 | The Seeker | 9 | Hadley Caliman |
-| 10 | Late Homestead | 10 | Bud Shank |
-| 11 | The Salon Keeper | 11 | Joe Brazil |
-| 12 | The Prodigal | 12 | Don Lanphere |
-| 13 | Institutional Anchor | 13 | Marc Seales |
-| 14 | Prodigy-Export | 14 | Aaron Parks |
-| 15 | Builder-Stayer | 15 | Thomas Marriott |
-| 16 | Talent Incubator | 16 | Jeff Lorber |
-| 17 | The Uncategorizable | 17 | Reggie Watts |
-| 18 | The Workshop | 18 | Maktub |
-| 19 | The New Root | 19 | Fly Moon Royale |
-| 20 | The Street Laureate | 20 | Whitney Monge |
-| 21 | The Ensemble Anchor | 21 | Polyrhythmics |
-| 22 | The Inheritor | 22 | Foxy Apollo |
-| 23 | The Rural Draw | 23 | Allen Stone |
-| 24 | The Island Export | 24 | Ron Artis II |
-| 25 | The Cultural Guardian | 25 | Black Stax |
-| 26 | The Transmuter | 26 | Shaina Shepherd |
-| 27 | The Conduit | 27 | The Dynamics |
-| 28 | The Resident Band | 28 | Night Owls |
-| 29 | The Catalog | 29 | Boogaloo Joe Jones |
-| 30 | The Incubation | 30 | Ray Charles |
-| 31 | The Relay | 31 | Brenda Lee Eager |
-| 32 | The Foundation | 32 | Luther Rabb |
-| 33 | The Unrecorded | 33 | Larry English |
-| 34 | The Shadow Name | 34 | The Tempos |
-| 35 | The Deep Root | 35 | Robert Cray |
-| 36 | The Supernova | 36 | Jimi Hendrix |
-| 37 | The Inheritor | 37 | Ayron Jones |
-| 38 | The Touring Anchor | 38 | Booker T. Jones |
-| 39 | The Returning Wave | 39 | Ron Artis Jr |
-| 40 | The Cultural Satellite | 40 | Alice Smith |
-| 41 | The Scene Native | 41 | Shawn Smith |
-| 42 | The Gospel Export | 42 | Erica Campbell |
-| 43 | The Arena Architect | 43 | Ann Wilson |
-| 44 | The Digital Immigrant | 44 | Chong the Nomad |
-| 45 | The Stripped Murmur | 45 | Damien Jurado |
-| 46 | The Confessional Drifter | 46 | Rocky Votolato |
-| 47 | The Sacred Baritone | 47 | Pedro the Lion |
-| 48 | The Campfire Anchor | 48 | Sera Cahoone |
-| 49 | The Trojan Lullabist | 49 | Kimya Dawson |
-| 50 | The Intimate Architect | 50 | Mirah |
-| 51 | The Folk Organism | 51 | Grand Archives |
-| 52 | The Arena Breakout | 52 | Brandi Carlile |
-| 53 | The Prodigy Return | 53 | Fleet Foxes |
-| 54 | The Neighborhood Anchor | 54 | Ivan & Alyosha |
-| 55 | The Infrastructure Beneficiary | 55 | Shelby Earl |
-| 56 | The Duo Collective | 56 | Lemolo |
-| 57 | The Label Bridge | 57 | Laura Gibson |
-| 58 | The Bellingham Ascent | 58 | Death Cab for Cutie |
-| 59 | The Scene Intellectual | 59 | The Long Winters |
-| 60 | The Frontman Alone | 60 | Ben Gibbard (solo) |
-| 61 | The Corridor Bridge | 61 | Y La Bamba |
-| 62 | The Brief Blaze | 62 | Pickwick |
-| 63 | The Everett Departure | 63 | Kenny Loggins |
-| 64 | The Dark-Folk Loner | 64 | Jesse Sykes |
-| 65 | The Montana Connection | 65 | Philip Aaberg |
-| 66 | The Wanderer Who Claims Multiple Cities | 66 | Neko Case |
-| 67 | The Departed Member | 67 | Chris Walla |
-| 68 | The Visiting Artist | 68 | Sam Beam |
-| 69 | The Working Musician | 69 | Kris Orlowski |
-| 70 | The Corridor Wanderer | 70 | Horse Feathers |
-| 71 | The Anacortes Hermit | 71 | Phil Elverum |
-| 72 | The International Student | 72 | Briana Marela |
-| 73 | The K Records Collective | 73 | LAKE |
-| 74 | The Side Project | 74 | Poor Moon |
-| 75 | The Second Anacortes Act | 75 | The Lonely Forest |
-| 76 | The Identity Artist | 76 | Chris Pureka |
-| 77 | The YouTube-to-Artist Pipeline | 77 | Mree |
-| 78 | The Porch Party | 78 | Acid Tongue |
-| 79 | The Dark Meditation | 79 | Jesse Marchant |
-| 80 | The Married Duo | 80 | Mates of State |
-| 81 | The Crossover Arc | 81 | Sara Bareilles |
-| 82 | The Recursive Return | 82 | Death Cab for Cutie (acoustic) |
-| 83 | The Arena Unplugged | 83 | Pearl Jam (acoustic) |
-| 84 | The Artist Arc | 84 | Damien Jurado (late career) |
-| 85 | The Confessional Return | 85 | Rocky Votolato (acoustic) |
-| 86 | The Side Project | 86 | The Postal Service |
-| 87 | The Early Chapter | 87 | Neko Case (early folk) |
-| 88 | The Solo Distillation | 88 | Kimya Dawson (solo) |
-| 89 | The Theatrical Outsider | 89 | Parenthetical Girls |
-| 90 | The Parallel Scene | 90 | Sky Cries Mary |
-| 91 | The Spousal Satellite | 91 | Hovercraft |
-| 92 | The Cross-Pollinator | 92 | Trance Mission |
-| 93 | The Intimate Machine | 93 | NAVVI |
-| 94 | The Cross-Genre Bridge | 94 | Erik Blood |
-| 95 | The Bellingham Pipeline | 95 | ODESZA |
-| 96 | The DIY Maximalist | 96 | STRFKR |
-| 97 | The Re-Contextualized Return | 97 | The Postal Service (electronic) |
-| 98 | The Self-Released Synthesist | 98 | Gold Casio |
-| 99 | The Diasporic Synthesist | 99 | Kaina |
-| 100 | The Transatlantic Dreamer | 100 | Summer Heart |
-| 101 | The Dance Floor Provocateur | 101 | Hecuba |
-| 102 | The Warm Circuiteer | 102 | Campfire OK |
-| 103 | The Electronic Reframing | 103 | Briana Marela (electronic) |
-| 104 | The Sustained Electronic Return | 104 | Lemolo (electronic) |
-| **105** | **The Triple Electronic Return** | **105** | **Parenthetical Girls (electronic)** |
-
-One hundred and six named patterns across one hundred and six degrees. The Triple Electronic Return (105) describes the pattern where three consecutive degrees feature artists returning in electronic context -- establishing the electronic reframing as a fundamental engine operation at unprecedented scale. From the Sustained Electronic Return (104, back-to-back) to the Triple Electronic Return (105, three consecutive). Four electronic returns in nine degrees (97, 103, 104, 105).
-
-## Genre Evolution (87 stages)
-
-| Stage | Degree | Genre | Artist |
-|-------|--------|-------|--------|
-| 27 | 45 | Folk | Damien Jurado |
-| 28 | 46 | Folk | Rocky Votolato |
-| 29 | 47 | Indie Folk | Pedro the Lion |
-| 30 | 48 | Folk | Sera Cahoone |
-| 31 | 49 | Folk Punk | Kimya Dawson |
-| 32 | 50 | Indie Folk | Mirah |
-| 33 | 51 | Indie Folk | Grand Archives |
-| 34 | 52 | Folk/Rock | Brandi Carlile |
-| 35 | 53 | Indie Folk | Fleet Foxes |
-| 36 | 54 | Folk | Ivan & Alyosha |
-| 37 | 55 | Singer-Songwriter | Shelby Earl |
-| 38 | 56 | Indie Folk | Lemolo |
-| 39 | 57 | Folk | Laura Gibson |
-| 40 | 58 | Indie Rock | Death Cab for Cutie |
-| 41 | 59 | Indie Rock | The Long Winters |
-| 42 | 60 | Folk | Ben Gibbard (solo) |
-| 43 | 61 | Folk/Indie | Y La Bamba |
-| 44 | 62 | Indie/Folk | Pickwick |
-| 45 | 63 | Soft Rock/Folk | Kenny Loggins |
-| 46 | 64 | Folk | Jesse Sykes |
-| 47 | 65 | New Age/Folk | Philip Aaberg |
-| 48 | 66 | Alt Country | Neko Case |
-| 49 | 67 | Indie/Folk | Chris Walla |
-| 50 | 68 | Folk | Sam Beam |
-| 51 | 69 | Singer-Songwriter | Kris Orlowski |
-| 52 | 70 | Indie Folk | Horse Feathers |
-| 53 | 71 | Indie/Folk | Phil Elverum |
-| 54 | 72 | Art Pop | Briana Marela |
-| 55 | 73 | Indie Pop | LAKE |
-| 56 | 74 | Indie Folk/Rock | Poor Moon |
-| 57 | 75 | Indie Pop | The Lonely Forest |
-| 58 | 76 | Folk | Chris Pureka |
-| 59 | 77 | Folk/Pop | Mree |
-| 60 | 78 | Folk/Indie | Acid Tongue |
-| 61 | 79 | Folk | Jesse Marchant |
-| 62 | 80 | Indie Pop | Mates of State |
-| 63 | 81 | Pop/Soul | Sara Bareilles |
-| 64 | 82 | Indie Folk | Death Cab for Cutie (acoustic) |
-| 65 | 83 | Acoustic Rock | Pearl Jam (acoustic) |
-| 66 | 84 | Folk | Damien Jurado (late career) |
-| 67 | 85 | Folk | Rocky Votolato (acoustic) |
-| 68 | 86 | Indie Electronic | The Postal Service |
-| 69 | 87 | Folk Country | Neko Case (early folk) |
-| 70 | 88 | Lo-Fi Folk | Kimya Dawson (solo) |
-| 71 | 89 | Avant-Pop | Parenthetical Girls |
-| 72 | 90 | Ethereal/Electronic | Sky Cries Mary |
-| 73 | 91 | Drone/Noise | Hovercraft |
-| 74 | 92 | World/Electronic | Trance Mission |
-| 75 | 93 | Dream Pop/Electronic | NAVVI |
-| 76 | 94 | Electronic/Experimental | Erik Blood |
-| 77 | 95 | Electronic | ODESZA |
-| 78 | 96 | Indie Electronic | STRFKR |
-| 79 | 97 | Indie Electronic | The Postal Service (electronic) |
-| 80 | 98 | Indie Electronic | Gold Casio |
-| 81 | 99 | Electronic/R&B | Kaina |
-| 82 | 100 | Electronic Pop | Summer Heart |
-| 83 | 101 | Dance/Electronic | Hecuba |
-| 84 | 102 | Indie Electronic | Campfire OK |
-| 85 | 103 | Art Pop/Electronic | Briana Marela (electronic) |
-| 86 | 104 | Electronic Pop | Lemolo (electronic) |
-| **87** | **105** | **Avant-Pop** | **Parenthetical Girls (electronic)** |
-
-Genre Stage 87 -- Avant-Pop at degree 105. Eighty-seven genre stages in 105 degrees. Parenthetical Girls' genre classification remains Avant-Pop across both appearances (89, 105) -- the theatrical impulse is the constant. The electronic foundation is a new staging, not a new genre. Eleventh electronic-adjacent entry since degree 86.
-
-## Energy Distribution
-
-**Artist-side (after degree 105):** E1:3 (2.8%), E2:31 (29.2%), E3:29 (27.4%), E4:28 (26.4%), E5:14 (13.2%), E6:2 (1.9%). Total: 106 (degrees 0-105). E=4 gains Parenthetical Girls electronic (105) reaching 28. Energy rises from E=3 (104) to E=4 (105). The theatrical circuit is louder than the dream circuit.
-
-**Species-side (after degree 105):** E=5 for Clark's Nutcracker (105) after Gray Jay (104, E=4). The Corvidae sextet energy: E=4 (100), E=5 (101), E=4 (102), E=5 (103), E=4 (104), E=5 (105). Perfect oscillation continues: E=4, E=5, E=4, E=5, E=4, E=5. The sextet alternates perfectly between E=4 and E=5.
-
-## Cross-References (Combined)
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| S36-089 | Parenthetical Girls electronic (105) | Parenthetical Girls (89) | RETURN! Avant-Pop E=3 to E=4. Chamber rebuilt in electronic form. |
-| S36-103 | Parenthetical Girls electronic (105) | Briana Marela electronic (103) | TRIPLE RETURN. Dissolution vs theater. Voice dissolved vs commanding. |
-| S36-104 | Parenthetical Girls electronic (105) | Lemolo electronic (104) | TRIPLE RETURN. Dream circuit vs theatrical circuit. Atmospheric vs dramatic. |
-| S36-094 | Parenthetical Girls electronic (105) | Erik Blood (94) | ELECTRONIC PRODUCTION. Studio as instrument vs stage as instrument. |
-| S36-091 | Parenthetical Girls electronic (105) | Hovercraft (91) | NOISE/ELECTRONIC. Instrumental drone vs vocal theater. Maximum voice contrast. |
-| SPS-104 | Clark's Nutcracker (105) | Gray Jay (104) | CORVIDAE SEXTET. Subalpine vs alpine pine. Soft whistles then harsh grating. |
-| SPS-100 | Clark's Nutcracker (105) | Common Raven (100) | CORVIDAE SEXTET. Intelligence. Generalist vs specialist cacher. |
-| SPS-074 | Clark's Nutcracker (105) | American Pika (74) | ALPINE NEIGHBOR. Both cache for winter. Hay piles vs 98,000 soil caches. |
-| SPS-076 | Clark's Nutcracker (105) | Hoary Marmot (76) | ALPINE SHARED HABITAT. Hibernation vs caching. Different winter strategies. |
-| SPS-065 | Clark's Nutcracker (105) | American Marten (65) | SUBALPINE/ALPINE OVERLAP. Dense forest vs open pine stands. |
-
-## Infrastructure
-
-**Part A:** `www/tibsfox/com/Research/S36/research/releases/105-parenthetical-girls-electronic/` -- research.md, index.html, knowledge-nodes.json, retrospective.md
-**Part B:** `www/tibsfox/com/Research/SPS/research/releases/105-clarks-nutcracker/` -- research.md, index.html, knowledge-nodes.json, retrospective.md
-**Release notes:** `docs/release-notes/v1.49.245/README.md`
-
-**Total: 8 files** -- standard degree package.
-
----
+## Part A: Parenthetical Girls (Electronic) — The Theatrical Circuit
+
+- **The eighth return artist and the triple electronic return's closing degree.** **Parenthetical Girls** becomes the **eighth return artist** in the engine — joining **Neko Case** (66, 87), **Death Cab for Cutie** (58, 82), **Pearl Jam** (at grunge origin and 83), **Damien Jurado** (45, 84), **Rocky Votolato** (46, 85), **The Postal Service** (86, 97), **Kimya Dawson** (49, 88), **Briana Marela** (72, 103), and **Lemolo** (56, 104). The return at **degree 105** closes the **triple electronic return** that runs consecutively across **degrees 103-105** — the longest consecutive return streak in the engine. Before Briana Marela at 103, returns were either single (The Postal Service 97 after 86) or paired (Death Cab for Cutie's dual folk/rock selections). The triple streak formalizes electronic reframing as a fundamental engine operation.
+- **Genre Stage 87 — Avant-Pop persists across both Parenthetical Girls appearances.** The engine has introduced eighty-seven distinct genre stages across **105 degrees** — a stable rate of roughly 0.83 stages per degree held across the sextet. **Avant-Pop** at degree 105 is **the same genre stage label** as Avant-Pop at degree 89, and this is a deliberate finding. The theatrical impulse is the constant — chamber-based at 89, electronically-staged at 105, but the Avant-Pop identity persists because the production mode is staging and the genre is ambition. **Genre persistence across returns is a legitimate analytical finding** rather than a failure of reclassification.
+- **The theater rebuilt in circuitry — Zac Pennington on the electronic stage.** At **degree 89**, **Zac Pennington's** voice commanded chamber arrangements of strings, horns, and piano, and the theatrical intensity set against the Pacific Northwest indie landscape centered the baroque cabaret impulse. At **degree 105**, synthesizers replace strings, drum machines replace acoustic percussion, electronic processing replaces chamber resonance. The drama persists. The voice still commands. The baroque ambition still orchestrates. But the stage itself is built from **electronic voltage rather than acoustic vibration**. The conceptual continuity — same theatrical ambition, new production staging — is the engine's clearest demonstration that electronic reframing does not require genre relabeling.
+- **The theatrical circuit — 106th acoustic element.** Preserved drama (theatrical intensity, vocal command, narrative ambition carry over from degree 89). Electronic staging (synthesizers and electronic processing replace chamber instruments and acoustic staging). Added precision (mechanical regularity, controlled dynamics, programmable pulse). Voice commanding (unlike the layered dissolution at 103 which dissolves voice into texture, and unlike the dream circuit at 104 which floats voice in atmosphere, the theatrical circuit keeps voice commanding the stage). Distinct from baroque theatricality (89, chamber instruments acoustic staging), from dream circuit (104, Lemolo atmospheric intimate), from layered dissolution (103, Briana Marela voice dissolves), and from noise wall (91, Hovercraft instrumental non-narrative).
+- **The Triple Electronic Return — 106th artist-city pattern.** Three consecutive electronic returns at **degrees 103-105**: **Briana Marela** (72 → 103, The Electronic Reframing), **Lemolo** (56 → 104, The Sustained Electronic Return), **Parenthetical Girls** (89 → 105, The Triple Electronic Return). Each return raises energy by one level (E=2 → E=3 for Briana Marela, E=2 → E=3 for Lemolo, E=3 → E=4 for Parenthetical Girls). Each return reframes a self-contained artistic practice through electronic production while preserving the original project's identity. Three voice strategies — dissolved (Briana Marela), afloat (Lemolo), commanding (Parenthetical Girls) — demonstrate that the electronic reframing operation is not repetitive but differentiated.
+- **Four electronic returns in nine degrees — the engine's deepest return concentration.** **The Postal Service** at **degree 97** (electronic return of the 86 original) opened the re-contextualized return pattern. Eight degrees later, **Briana Marela** at 103 reopened it. Lemolo at 104 sustained it. Parenthetical Girls at 105 triples it. Four electronic returns in nine degrees (**97, 103, 104, 105**) — the engine's deepest return concentration to date. The engine's catalog has matured enough to support returns at this density without exhausting the roster of available returns.
+- **E=4 — the theatrical circuit at moderate-to-high electronic intensity.** The theatrical circuit at **E=4** is louder than the dream circuit (E=3 at 104) and softer than the euphoric build (E=5 at 95, ODESZA cinematic). Dramatic, commanding, theatrical without crossing into euphoric or confrontational. **E=4** gains **Parenthetical Girls electronic** to reach **28 deployments** on the artist side (26.4% of artist entries) — a landmark count that matches the engine's stable energy distribution at degree 105.
+- **Eleventh electronic-adjacent entry among recent degrees — the electronic era persists.** Degrees 86, 90, 91, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, and now 105 contain electronic-adjacent entries, and Parenthetical Girls electronic at 105 extends the era's dominance across the second half of **Quadrant II**. The electronic substrate continues to furnish differentiated approaches — pop structure (86), atmosphere (90), obliteration (91), intimacy (93), experimentation (94), euphoria (95), pulse (96), tenderness (97), nostalgia (98), cultural fusion (99), golden cascade (100), kinetic surge (101), organic circuit (102), layered dissolution (103), dream circuit (104), theatrical circuit (105).
+- **Indie / self-released / various — diffuse distribution matches theatrical-electronic niche.** Parenthetical Girls' distribution across indie labels, self-released channels, and subscription models matches the project's self-directed practice. The label context is less concentrated than Sub Pop or Counter Records entries — more varied, more self-directed, and the diffuse topology itself carries the theatrical-electronic niche.
+- **The theater as a project-level practice spanning both appearances.** **Parenthetical Girls** treats the entire project as theater — release formats are theatrical (special editions, themed box sets), live performance is theatrical (costume, staging, choreography), and the electronic reframing at degree 105 is a theatrical act in itself (the theater rebuilt in circuitry). The project-level theatricality persists from the degree 89 chamber-based entry through the degree 105 electronic entry, and the persistence is itself the signal.
+
+## Part B: Clark's Nutcracker — The Alpine Broadcaster
+
+- **The sixth consecutive Corvidae and the sextet's closing species.** **Clark's Nutcracker** (*Nucifraga columbiana*) closes the **Corvidae sextet** at **degree 105** — six consecutive degrees (100-105) held by corvids. The sextet maps a **full elevational gradient** from widespread lowland (**Common Raven** 100) through urban and open habitats (**American Crow** 102) and lowland conifer (**Steller's Jay** 103) to subalpine (**Gray Jay** 104) and alpine pine (**Clark's Nutcracker** 105). Each new corvid opens a new landscape, and the nutcracker closes the gradient at its highest peak. **Kingdom:** Animalia. **Phylum:** Chordata. **Class:** Aves. **Order:** Passeriformes. **Family:** Corvidae. **Genus:** *Nucifraga*. **Species:** *N. columbiana*.
+- **The Corvidae sextet ties the Mustelidae and Sciuridae sextets as longest family streak.** The corvid run at 100-105 ties two prior family streaks for the engine's longest: **Mustelidae** at degrees 63-68 (River Otter, Mink, American Marten, Fisher, Short-tailed Weasel, Long-tailed Weasel) and **Sciuridae** at degrees 75-80 (Yellow-bellied Marmot, Hoary Marmot, Olympic Marmot, Townsend's Ground Squirrel, Golden-mantled Ground Squirrel, Douglas Squirrel). Three six-degree family streaks across the engine — a deliberate pattern rather than a coincidence. The sextet structure is the engine's signature family-level arc.
+- **Named for William Clark — historical memory inside the binomial.** Described by **Meriwether Lewis** on August 22, 1805, near the **Salmon River** in **Idaho**, during the **Lewis and Clark expedition**. Named in honor of **William Clark**. Species name *columbiana* references the **Columbia River** region. The binomial carries two centuries of Western taxonomic history, and the species entry at degree 105 activates that historical memory in the engine's catalog. Few species in the portfolio carry named-explorer history this directly; the nutcracker does, and the entry frames the Pacific Northwest's taxonomic record as continuous with the earliest scientific observation of the region.
+- **The harsh grating kraa-a-a — 105th species-side acoustic element.** **Kraa-a-a**. The diagnostic call. Harsh, nasal, grating, almost mechanical. Drawn-out, echoing across alpine ridges and open pine stands. **Immediately identifiable** — no other bird in alpine Pacific Northwest habitat produces this sound. Secondary vocalizations: **chatter** (rapid series of harsh notes, social or territorial), **soft calls** (quieter, modulated, close-range, rarely heard by observers). E=5. The sextet's final acoustic is a voice designed for open, wind-swept alpine landscape — maximum energy at maximum elevation.
+- **98,000 seeds per year — the most extreme caching behavior in the engine.** Each individual nutcracker caches up to **98,000 pine seeds per year**. This is an order of magnitude beyond any other cacher in the engine — **Gray Jay** caches thousands (104, bark caches), **Common Raven** caches hundreds (100, ground caches), **American Pika** gathers seasonal hay piles (74, vegetation on talus). The nutcracker's caching is enabled by a specialized **sublingual pouch** (150 seeds at a time, single-purpose anatomy) that transports seeds up to **22 km** from source tree. Caches are scattered across thousands of sites on south-facing slopes, ridges, and windswept areas — sites that will be snow-free when seeds are needed for spring breeding.
+- **70-90% cache recovery via enlarged hippocampus — cognition scaled to ecology.** Spatial memory recovery rates of 70-90% are enabled by an **enlarged hippocampus** — a cognitive adaptation proportional to the caching load. The 10-30% of caches left unrecovered germinate and become the next generation of **whitebark pine**. The nutcracker is therefore **the primary dispersal agent for whitebark pine** — not incidentally, but as a defining ecological role. Cognition scaled to ecology: the brain architecture exists because the caching behavior exists, and the caching behavior exists because the mutualism with whitebark pine requires it.
+- **Obligate mutualism with whitebark pine — the strongest ecological narrative in the engine.** **Whitebark pine** (*Pinus albicaulis*) and **Clark's Nutcracker** are **obligate mutualists** — neither species can survive without the other. The pine produces indehiscent cones (non-opening) that require the nutcracker's long, sharp, slightly decurved bill to extract seeds. The nutcracker produces the caching behavior that disperses seeds across appropriate germination sites. Without the nutcracker, whitebark pine cannot regenerate at scale. Without whitebark pine, the nutcracker cannot sustain its caching economy. **Both species are now under double pressure** from climate change, white pine blister rust (*Cronartium ribicola*), and mountain pine beetle (*Dendroctonus ponderosae*, intensified by warming winters). The ecological urgency is part of the species entry at degree 105.
+- **Alpine pine habitat — the highest elevation of any corvid in the sextet.** Whitebark pine stands at and above treeline. Open, wind-swept alpine ridges. Above the **Gray Jay's subalpine forest** (104) and into the true alpine zone. Year-round resident with seasonal movements between whitebark pine stands (summer/fall) and lower-elevation recovery sites (winter/spring). Shared habitat with **American Pika** (74, alpine talus), **Hoary Marmot** (76, alpine meadows), and **American Marten** (65, subalpine forest). The nutcracker closes the Corvidae sextet at the elevational peak.
+- **The sextet's perfect E=4/E=5 oscillation — emergent not imposed.** The six-degree Corvidae sextet energy pattern: **E=4** (100, Common Raven), **E=5** (101, Common Raven Pair), **E=4** (102, American Crow), **E=5** (103, Steller's Jay raucous), **E=4** (104, Gray Jay), **E=5** (105, Clark's Nutcracker). Perfect oscillation — E=4, E=5, E=4, E=5, E=4, E=5. The pattern was **not planned** but emerged from choosing species with appropriately contrasting vocal intensities. The pattern is **discovered, not imposed**, and its emergence at the sextet's closing degree is itself a structural finding.
+- **Forty-fifth consecutive original CSV — the streak continues.** The nutcracker is the **forty-fifth consecutive original CSV species** (degrees 61-105 without substitution or correction). The streak now spans **Mammalia** (61-85), **Amphibia** and **Insecta** interludes (86-99), and the **Aves** sextet (100-105). Forty-five consecutive degrees of catalog reliability — the longest unbroken run of original-catalog selections in the engine, and a data reliability milestone that the sextet extends.
+- **27-30 cm, 55-61 cm wingspan, 106-161 g — the seed specialist's compact frame.** Body length 27-30 cm. Wingspan 55-61 cm. Body mass 106-161 g. Pale gray body. Black wings with large white wing patches (diagnostic in flight). Long, sharp, slightly decurved bill — the seed-extraction tool. The compact frame and the specialized bill are both adaptations for the alpine niche — smaller than raven (100) and crow (102), with a bill shaped for seed extraction rather than general foraging.
+- **The single most specialized seed-cacher in North America.** No other North American bird reaches 98,000 annual caches, 22-km transport distance, and 70-90% recovery rate simultaneously. The combination of specialized anatomy (sublingual pouch), specialized behavior (scatter-hoarding across thousands of sites), specialized cognition (enlarged hippocampus), and specialized ecology (obligate mutualism with whitebark pine) makes Clark's Nutcracker **the single most specialized seed-cacher** documented in the engine.
 
 ## Retrospective
 
-**What Worked:**
-1. The CORVIDAE SEXTET (six consecutive Corvidae, 100-105) ties the record and creates an extraordinary structural event -- the corvid family has now matched the Mustelidae and Sciuridae sextets
-2. The perfect energy oscillation (E=4, E=5, E=4, E=5, E=4, E=5) across the sextet is a remarkable emergent pattern -- no other family run shows this symmetric alternation
-3. The triple electronic return (103-105) is the longest consecutive return streak in the engine -- three artists, three voice strategies (dissolved, afloat, commanding), three energy rises
-4. Clark's Nutcracker's 98,000 seeds/year is the most extreme quantitative fact in the species section -- an order of magnitude beyond any other cacher
-5. The whitebark pine mutualism adds an ecological urgency -- both species under double pressure from climate change and blister rust
-6. Parenthetical Girls maintaining Avant-Pop as genre across both appearances (89, 105) demonstrates that the same genre can house radically different production methods
+### What Worked
 
-**What Could Be Better:**
-1. Six consecutive Corvidae pushes the absolute boundary -- how much longer can the streak continue?
-2. Three consecutive electronic returns may feel like the engine is stuck in one analytical mode
-3. Still no raptor, no marine species in 106 entries
+- **The Corvidae sextet closes cleanly at the alpine peak.** Six consecutive Corvidae degrees (100-105) tie the **Mustelidae sextet** (63-68) and the **Sciuridae sextet** (75-80) as the longest family streaks in the engine. The sextet's **elevational gradient** — widespread lowland (Common Raven 100), cliffs and forest (Common Raven Pair 101), urban and open (American Crow 102), lowland conifer (Steller's Jay 103), subalpine (Gray Jay 104), alpine pine (Clark's Nutcracker 105) — maps a full vertical traverse. The sextet closes at its elevational peak without feeling forced.
+- **Clark's Nutcracker is the right species for the sextet closer.** Harsh grating kraa-a-a. E=5. 98,000 seeds per year cached. Sublingual pouch holding 150 seeds at a time. 22 km transport distance. 70-90% cache recovery via enlarged hippocampus. Obligate mutualism with whitebark pine. Named for William Clark of the Lewis and Clark expedition. No other bird in the source catalog could have carried the sextet's closing weight at the alpine peak.
+- **The triple electronic return (103-105) is the longest consecutive return streak in the engine.** Three artists, three voice-to-electronic strategies (dissolved, afloat, commanding), three energy rises (E=2→E=3, E=2→E=3, E=3→E=4). The triple streak formalizes electronic reframing as a fundamental engine operation at unprecedented scale.
+- **The theatrical circuit (106th acoustic element) adds a commanding voice to the electronic spectrum.** Preserved drama. Electronic staging. Added precision. Voice commanding. Distinct from dream circuit (104, atmospheric intimate) and layered dissolution (103, voice dissolves). Parenthetical Girls' electronic reframing demonstrates that voice commanding is a legitimate electronic posture.
+- **Genre persistence (Avant-Pop at both 89 and 105) is a legitimate analytical finding.** The theatrical impulse is the constant; the electronic staging is new. The genre classification remains Avant-Pop because the production mode is staging and the genre is ambition. This is a finding, not a failure of reclassification.
+- **E=4 on the music side and E=5 on the species side match the respective peaks of their gradients.** Parenthetical Girls at E=4 is the peak intensity of the three-degree electronic return streak (E=3, E=3, E=4). Clark's Nutcracker at E=5 is the peak energy of the Corvidae sextet at its peak elevation. Matched peaks, not matched energies — a different structural symmetry than the E=4/E=4 centennial pairing at degree 100.
+- **The perfect E=4/E=5 oscillation across the sextet is emergent.** E=4 at 100, E=5 at 101, E=4 at 102, E=5 at 103, E=4 at 104, E=5 at 105. Not planned. Not imposed. Emerged from choosing species with appropriately contrasting vocal intensities. The discovery is itself a structural finding.
+- **The whitebark pine mutualism adds ecological urgency to the species entry.** Obligate mutualism. Double pressure from climate change and blister rust. Neither species can endure without the other. The stakes are inherently maximum, and the degree 105 entry activates that stake rather than abstracting it.
+- **The William Clark historical memory enriches the species entry.** Described August 22, 1805, near the Salmon River in Idaho. Named for William Clark of the Lewis and Clark expedition. Species name *columbiana* references the Columbia River region. Two centuries of taxonomic history live inside the binomial, and the engine's catalog is continuous with the earliest scientific observation of the Pacific Northwest.
+- **The sextet structure (elevational gradient + perfect oscillation + record-tying length) works as a unified achievement.** The three independent properties — gradient coverage, energy alternation, and streak length — converge at the nutcracker's entry. Future family runs can be measured against the sextet's integrated profile.
+
+### What Could Be Better
+
+- **Six consecutive Corvidae pushes the absolute boundary.** How much longer can the corvid streak continue? The Mustelidae and Sciuridae sextets closed at six; the Corvidae sextet ties them at six. Whether the engine can or should extend beyond six is an open structural question, and degree 106 will need to answer it.
+- **Three consecutive electronic returns may feel like the engine is stuck in one analytical mode.** The triple streak is structurally impressive but risks reading as formulaic. The degrees following 105 will need to differentiate the electronic reframing from other engine operations, or the operation's novelty will decay.
+- **Still no raptor in 106 entries.** The **Pacific Northwest** raptor absence (Accipitridae, Falconidae, Strigidae, Tytonidae absent since the **Northern Spotted Owl** at degree 4) grows more conspicuous with each non-raptor degree. The sextet brought Aves back to six consecutive degrees but the raptor drought persists.
+- **Still no marine species in 106 entries.** The **Puget Sound**, **Salish Sea**, and **Olympic Coast** marine ecosystems remain unrepresented. Harbor seal, orca, sea lion, common loon, marbled murrelet — none have appeared in 106 degrees. For an engine titled around Puget Sound, the omission is significant.
+- **Parenthetical Girls' discography was treated structurally rather than catalogued album-by-album.** The degree 105 entry focused on the theatrical-to-electronic transition rather than individual release analysis. A discography deep-dive could be a future research artifact.
+- **The whitebark pine mutualism's ecological crisis could have received longer treatment.** White pine blister rust, mountain pine beetle, and climate change converge on the pine. The species entry notes the double pressure but does not develop the crisis's full dimensions. Future work could deepen the ecological urgency.
 
 ## Lessons Learned
 
-1. The sextet structure works because it maps an elevational gradient: urban (crow) -> lowland conifer (Steller's Jay) -> subalpine (Gray Jay) -> alpine pine (nutcracker). Each new corvid opens a new landscape
-2. Perfect energy oscillation (E=4/E=5/E=4/E=5/E=4/E=5) is not planned but emerges from choosing species with appropriately contrasting vocal intensities. The pattern is discovered, not imposed
-3. Obligate mutualisms (nutcracker + whitebark pine) create the strongest ecological narratives -- when neither species can survive without the other, the stakes are inherently maximum
-4. Three consecutive electronic returns work because each has a different voice-to-electronic relationship: dissolved (Briana Marela), afloat (Lemolo), commanding (Parenthetical Girls). Without that differentiation, the triple return would feel repetitive
-5. Genre persistence across returns (Avant-Pop at both 89 and 105) is a valid analytical finding -- sometimes the electronic reframing does not change the genre, only the staging
+1. **The sextet structure maps elevational gradients without imposing them.** The Corvidae sextet's climb from widespread lowland (Common Raven) through urban and open (American Crow), lowland conifer (Steller's Jay), subalpine (Gray Jay), and alpine pine (Clark's Nutcracker) was not planned as a gradient — it emerged from selecting corvids that happen to occupy distinct habitat bands. Future family runs can expect elevational or habitat gradients to emerge when species with genuinely different niches are chosen, without the gradient needing to be engineered.
+2. **Perfect energy oscillation is discovered, not imposed.** The Corvidae sextet's E=4/E=5/E=4/E=5/E=4/E=5 pattern emerged from choosing species with appropriately contrasting vocal intensities. The oscillation was not planned. Future family runs should select species for acoustic character independently and accept whatever energy pattern emerges — the discovered pattern is always more structurally significant than the engineered pattern.
+3. **Obligate mutualisms produce the strongest ecological narratives.** Clark's Nutcracker and whitebark pine cannot survive without each other, and the stakes are inherently maximum. Future species entries should foreground mutualisms when they exist because the relational structure produces stronger narrative gravity than species-in-isolation framings.
+4. **Three consecutive electronic returns work when each has a distinct voice-to-electronic relationship.** Briana Marela dissolves voice into texture; Lemolo floats voice in atmosphere; Parenthetical Girls projects voice outward as command. Without that differentiation across dissolved, afloat, and commanding postures, the triple return would feel repetitive. Future return clusters should ensure distinct relationships to the electronic substrate before committing to a multi-degree streak.
+5. **Genre persistence across returns is a legitimate analytical finding.** Avant-Pop at both Parenthetical Girls appearances (89, 105) is not a reclassification failure — it reflects the theatrical impulse as constant and the electronic staging as new. Future returns should assess whether the genre legitimately persists before forcing a new classification; sometimes electronic reframing does not change the genre, only the staging.
+6. **Record-tying milestones at the same degree amplify structural significance.** The Corvidae sextet's record-tying six-degree length and the triple electronic return's record-setting three-degree length land at the same degree (105). The double record creates a structural peak rather than two separate structural findings. Future engine planning can deliberately align record milestones to degrees to produce peaks.
+7. **Historical memory inside a binomial enriches the species entry.** Clark's Nutcracker (*Nucifraga columbiana*) encodes Lewis and Clark expedition history, William Clark, the Salmon River, Idaho, and the Columbia River within the name itself. Future species entries should activate binomial etymology when it carries regional historical memory — the engine's catalog is continuous with the earliest scientific record of the Pacific Northwest.
+8. **Electronic return energy rises by exactly one level across all three in the streak.** Briana Marela (E=2→E=3), Lemolo (E=2→E=3), Parenthetical Girls (E=3→E=4). The electronic reframing consistently adds one energy level. Future return operations can be expected to raise energy by one level when the original was acoustic and the return is electronic — the pattern held three times in a row.
+9. **The species side and music side peak at the same degree through different gradients.** Parenthetical Girls peaks the triple return's theatrical intensity (E=4) at degree 105. Clark's Nutcracker peaks the Corvidae sextet's alpine elevation (E=5) at degree 105. Both peaks arrive on the same degree but measure different properties. Future pairings can produce matched peaks across independent gradients without requiring matched absolute values.
+10. **Catalog maturity at degree 105 enables record-level emergent patterns.** The sextet's six-degree length, the triple return's three-degree length, the perfect E=4/E=5 oscillation, the forty-five-consecutive-original-CSV streak — all are emergent patterns whose size depends on catalog depth accumulated over the preceding 104 degrees. Future engine scaling should expect record-level emergence at degrees where accumulated catalog density crosses critical thresholds.
 
----
+## Cross-References
 
-The theatrical circuit and the alpine broadcaster. Degree 105 ties the record and extends the streak.
+| Connection | From | To | Nature |
+|------------|------|-----|--------|
+| S36-089 | Parenthetical Girls electronic (105) | Parenthetical Girls (89) | RETURN! The eighth return artist. Avant-Pop original at E=3 (chamber instruments, cabaret drama). Electronic reframing at E=4 (synthesizers, drum machines, electronic processing). Chamber rebuilt in electronic form. Genre persists. |
+| S36-103 | Parenthetical Girls electronic (105) | Briana Marela electronic (103) | TRIPLE ELECTRONIC RETURN (first). Briana Marela dissolves voice into texture (layered dissolution). Parenthetical Girls projects voice outward as command (theatrical circuit). Opposite voice-to-electronic relationships. |
+| S36-104 | Parenthetical Girls electronic (105) | Lemolo electronic (104) | TRIPLE ELECTRONIC RETURN (second). Lemolo's dream circuit is atmospheric and intimate. Parenthetical Girls' theatrical circuit is dramatic and maximal. Three consecutive electronic returns, three registers. |
+| S36-097 | Parenthetical Girls electronic (105) | The Postal Service electronic (97) | RE-CONTEXTUALIZED RETURN LINEAGE. The Postal Service introduced the re-contextualized return at 97. Parenthetical Girls at 105 closes the triple return sequence eight degrees later. The operation formalizes at unprecedented scale. |
+| S36-094 | Parenthetical Girls electronic (105) | Erik Blood (94) | ELECTRONIC PRODUCTION. Erik Blood is the studio as instrument (producer's palette); Parenthetical Girls is the stage as instrument (theatrical circuit). Both navigate Seattle's experimental electronic territory. |
+| S36-091 | Parenthetical Girls electronic (105) | Hovercraft (91) | NOISE/ELECTRONIC CONTRAST. Instrumental drone vs vocal theater. Both use electronic instruments to push past convention. Maximum contrast in voice presence — Hovercraft instrumental/non-narrative, Parenthetical Girls voice-driven/narrative. |
+| S36-100 | Parenthetical Girls electronic (105) | Summer Heart (100) | ELECTRONIC-ERA CONTRAST. Summer Heart's nostalgic cascade at the centennial is warm and golden (E=4). Parenthetical Girls' theatrical circuit at 105 is dramatic and commanding (E=4). Two different E=4 postures across five degrees. |
+| S36-086 | Parenthetical Girls electronic (105) | The Postal Service (86) | ELECTRONIC ERA ORIGIN. The Postal Service introduced Electronic Pop at 86, opening the electronic era that runs through degree 105. Parenthetical Girls extends the era to seventeen electronic-adjacent entries across 86-105. |
+| SPS-104 | Clark's Nutcracker (105) | Gray Jay (104) | CORVIDAE SEXTET (fifth to sixth). Adjacent elevational bands: subalpine (Gray Jay) vs alpine pine (Clark's Nutcracker). Soft whistles (E=4) then harsh grating (E=5). Maximum acoustic contrast at maximum elevation. |
+| SPS-103 | Clark's Nutcracker (105) | Steller's Jay raucous (103) | CORVIDAE SEXTET. Lowland conifer (Steller's Jay) vs alpine pine (Clark's Nutcracker). Shack-shack-shack raucous alarm vs harsh grating kraa-a-a. Both E=5 corvid alarm callers at opposite elevational ends. |
+| SPS-102 | Clark's Nutcracker (105) | American Crow (102) | CORVIDAE SEXTET. Urban/open (American Crow) vs alpine pine (Clark's Nutcracker). Sharp caw (E=4) vs harsh grating (E=5). The sextet's elevational gradient from urban lowlands to alpine peak. |
+| SPS-101 | Clark's Nutcracker (105) | Common Raven Pair (101) | CORVIDAE SEXTET. Cliffs and forest (Raven pair) vs alpine pine (Nutcracker). Coordinated duet (E=5) vs solitary broadcast kraa-a-a (E=5). Both at sextet's E=5 peaks. |
+| SPS-100 | Clark's Nutcracker (105) | Common Raven (100) | CORVIDAE SEXTET (opening to closing). Intelligence. Both cache food. Raven generalist (hundreds, ground caches). Nutcracker specialist (98,000, soil caches, sublingual pouch, 22 km transport). |
+| SPS-074 | Clark's Nutcracker (105) | American Pika (74) | ALPINE NEIGHBOR. Both cache food for winter. Pika in hay piles on talus. Nutcracker in 98,000 soil caches across alpine landscape. Different caching substrates, same alpine zone. |
+| SPS-076 | Clark's Nutcracker (105) | Hoary Marmot (76) | ALPINE SHARED HABITAT. Both signature alpine species. Marmot hibernates (winter survival through deep sleep). Nutcracker caches (winter survival through cache recovery). Different strategies at the same elevation. |
+| SPS-065 | Clark's Nutcracker (105) | American Marten (65) | SUBALPINE/ALPINE OVERLAP. Both year-round high-elevation residents. Marten in dense subalpine forest. Nutcracker in open alpine pine stands. Forty-degree span from the Mustelidae sextet to the Corvidae sextet. |
+| SPS-063 | Clark's Nutcracker (105) | River Otter (63) | SEXTET-TO-SEXTET LINEAGE. Mustelidae sextet opens at degree 63 with River Otter. Corvidae sextet closes at degree 105 with Clark's Nutcracker. Forty-two degrees separate the first sextet's opener and the third sextet's closer. |
+| SPS-075 | Clark's Nutcracker (105) | Yellow-bellied Marmot (75) | SEXTET-TO-SEXTET LINEAGE. Sciuridae sextet opens at degree 75 with Yellow-bellied Marmot. Corvidae sextet closes at degree 105 with Clark's Nutcracker. Thirty-degree span between the second sextet's opener and the third sextet's closer. |
+| RES-whitebark-pine | Clark's Nutcracker (105) | *Pinus albicaulis* mutualism | OBLIGATE MUTUALISM. Neither species survives without the other. 98,000 seeds per year cached. 70-90% recovery. 10-30% germinate and become next generation of whitebark pine. Primary dispersal agent. Double pressure from climate change and blister rust. |
+| RES-lewis-clark | Clark's Nutcracker (105) | Lewis and Clark expedition | HISTORICAL MEMORY. Described by Meriwether Lewis on August 22, 1805, near the Salmon River, Idaho. Named for William Clark. Species name *columbiana* references the Columbia River region. Two centuries of taxonomic history inside the binomial. |
 
-On the music side, Parenthetical Girls returns from degree 89 as the eighth return artist, reframed in electronic context. Avant-Pop. Genre Stage 87. The baroque cabaret rebuilt with electronic instruments -- synthesizers replace strings, drum machines replace acoustic percussion, Pennington's voice still commands. The theatrical circuit is the 106th acoustic element. The triple electronic return is the 106th artist-city pattern -- three consecutive electronic returns (103-105), the longest return streak. E=4. Energy rises from E=3 to E=4. The electronic context raises energy by one level.
+## Engine Position
 
-On the species side, Clark's Nutcracker extends the CORVIDAE SEXTET -- six consecutive Corvidae degrees (100-105), tying the Mustelidae and Sciuridae sextets. The alpine broadcaster. Harsh grating kraa-a-a across the ridges. Named for William Clark. 98,000 pine seeds cached per year. Sublingual pouch holds 150 seeds. Obligate mutualism with whitebark pine -- neither species can thrive without the other. Both under double pressure. E=5. The sextet's energy oscillation is perfect: E=4, E=5, E=4, E=5, E=4, E=5.
+- **Degree 105 of 360** — 29.2% of the circle traversed; fifteenth degree of Quadrant II; the closing degree of the Corvidae sextet and the triple electronic return.
+- **CORVIDAE SEXTET CLOSES** — Six consecutive Corvidae degrees (100-105) tie **Mustelidae sextet** (63-68) and **Sciuridae sextet** (75-80) as the longest family streaks in the engine. Three six-degree family streaks across the engine.
+- **TRIPLE ELECTRONIC RETURN CLOSES** — Three consecutive electronic returns at degrees 103-105 (Briana Marela 72→103, Lemolo 56→104, Parenthetical Girls 89→105). Longest consecutive return streak in the engine.
+- **Genre Stage 87** — **Avant-Pop**. Eighty-seventh genre stage across 105 degrees. Genre persistence across both Parenthetical Girls appearances (89, 105). Stable rate of 0.83 stages/degree.
+- **EIGHTH RETURN ARTIST** — Parenthetical Girls joins Neko Case (66, 87), Death Cab for Cutie (58, 82), Pearl Jam (grunge, 83), Damien Jurado (45, 84), Rocky Votolato (46, 85), The Postal Service (86, 97), Kimya Dawson (49, 88), Briana Marela (72, 103), and Lemolo (56, 104).
+- **THE THEATRICAL CIRCUIT — 106th artist-side acoustic element.** Baroque cabaret rebuilt with electronic instruments. Preserved drama, electronic staging, added precision, voice commanding.
+- **THE HARSH GRATING KRAA-A-A — 105th species-side acoustic element.** Nasal mechanical far-carrying alpine broadcast. Drawn-out echoing across alpine ridges. Diagnostic call, no other alpine PNW bird produces this sound.
+- **THE TRIPLE ELECTRONIC RETURN — 106th artist-city pattern.** Three consecutive degrees of artists returning in electronic context. Unprecedented scale.
+- **PERFECT E=4/E=5 OSCILLATION across the Corvidae sextet** — E=4 (100), E=5 (101), E=4 (102), E=5 (103), E=4 (104), E=5 (105). Emergent pattern discovered rather than imposed.
+- **98,000 SEEDS PER YEAR** — Clark's Nutcracker's caching is an order of magnitude beyond any other cacher in the engine (Gray Jay thousands, Common Raven hundreds, American Pika seasonal hay).
+- **SUBLINGUAL POUCH, 150 SEEDS, 22 KM, 70-90% RECOVERY** — specialized anatomy + specialized behavior + specialized cognition = the single most specialized seed-cacher in North America.
+- **OBLIGATE MUTUALISM** with whitebark pine (*Pinus albicaulis*) — neither species survives without the other. Double pressure from climate change, white pine blister rust, and mountain pine beetle.
+- **FORTY-FIFTH CONSECUTIVE ORIGINAL CSV** — degrees 61-105 without substitution or correction. Longest unbroken run of original-catalog selections in the engine.
+- **Six-species elevational gradient** — Common Raven (widespread lowland, 100), Common Raven Pair (cliffs and forest, 101), American Crow (urban and open, 102), Steller's Jay (lowland conifer, 103), Gray Jay (subalpine, 104), Clark's Nutcracker (alpine pine, 105). Full vertical traverse.
+- **Energy distribution after degree 105 (artist-side):** E1:3 (2.8%), E2:31 (29.2%), E3:29 (27.4%), E4:28 (26.4%), E5:14 (13.2%), E6:2 (1.9%). Total: 106 entries (degrees 0-105 inclusive). **E=4 gains Parenthetical Girls electronic** to reach 28 deployments.
+- **Four classes represented:** Aves (six consecutive since centennial return at 100), Mammalia, Insecta, Amphibia. Eighteen-plus orders. Forty-nine families (plus six-degree Corvidae depth).
+- **Electronic era sixteen-deep** — Degrees 86, 90, 91, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105. Seventeen electronic-adjacent entries in twenty degrees. Deepest sustained genre cluster in the engine.
+- **Outstanding gaps:** Zero raptors in 106 entries (since Northern Spotted Owl at degree 4); zero marine species in 106 entries (none since engine began); electronic era dominance continues to require deliberate genre rebalancing in upcoming degrees.
 
-The theatrical circuit commands the stage (E=4). The nutcracker broadcasts across the alpine (E=5). Both are maximum presence. The sextet ties the record. The triple return completes. The engine operates at unprecedented scale.
+## Files
 
-*Degree 105. The theatrical circuit and the alpine broadcaster. A baroque theater plugs in -- synthesizers where strings used to be, drum machines where tympani used to be, but the voice still commands, still declaims, still fills the room with drama. Zac Pennington on the electronic stage. E=4. The theater rebuilt. Meanwhile, at treeline: KRAA-A-A. Harsh, grating, mechanical, echoing across alpine ridges. Clark's Nutcracker -- named for William Clark, 1805, Salmon River, Idaho. The whitebark pine specialist. 98,000 seeds per year. Sublingual pouch. An obligate mutualism under double pressure. Six consecutive Corvidae. E=4, E=5, E=4, E=5, E=4, E=5. The oscillation is perfect. The sextet ties the record. The theatrical circuit and the alpine broadcaster. Both commanding. Both unmistakable. The engine at maximum scale.*
+- `docs/release-notes/v1.49.245/README.md` (this file, rewritten to A-grade per the PROSE rubric)
+- `docs/release-notes/v1.49.245/chapter/00-summary.md` — derived summary
+- `docs/release-notes/v1.49.245/chapter/03-retrospective.md` — retrospective
+- `docs/release-notes/v1.49.245/chapter/04-lessons.md` — extracted lessons (5 entries)
+- `docs/release-notes/v1.49.245/chapter/99-context.md` — context
+- `www/tibsfox/com/Research/S36/research/releases/105-parenthetical-girls-electronic/index.html`
+- `www/tibsfox/com/Research/S36/research/releases/105-parenthetical-girls-electronic/research.md`
+- `www/tibsfox/com/Research/S36/research/releases/105-parenthetical-girls-electronic/knowledge-nodes.json`
+- `www/tibsfox/com/Research/S36/research/releases/105-parenthetical-girls-electronic/retrospective.md`
+- `www/tibsfox/com/Research/SPS/research/releases/105-clarks-nutcracker/index.html`
+- `www/tibsfox/com/Research/SPS/research/releases/105-clarks-nutcracker/research.md`
+- `www/tibsfox/com/Research/SPS/research/releases/105-clarks-nutcracker/knowledge-nodes.json`
+- `www/tibsfox/com/Research/SPS/research/releases/105-clarks-nutcracker/retrospective.md`
 
-</details>
+Total: 9 files in commit `87571c4b0d5ef3172ef673bcc2c9ff91eddb188b`.
