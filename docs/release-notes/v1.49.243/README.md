@@ -1,500 +1,165 @@
-# v1.49.243 -- Degree 103: Briana Marela (Electronic) + Steller's Jay (Raucous) -- THE LAYERED DISSOLUTION AND THE ALARM -- DOUBLE RETURN
+# v1.49.243 — Degree 103: Briana Marela (Electronic) + Steller's Jay (Raucous) — THE LAYERED DISSOLUTION AND THE ALARM — DOUBLE RETURN
 
 **Released:** 2026-04-01
-**Degree:** 103 of 360 -- 28.6% of 360
-**Part A:** Briana Marela (electronic context) -- Art Pop/Electronic, E=3, Jagjaguwar Records, SIXTH RETURN ARTIST (first at degree 72 as Art Pop), GENRE STAGE 85 (Art Pop/Electronic, eighty-fifth genre stage, vocal layering electronic processing voice-as-electronic-material dissolution, distinct from Indie Electronic 102 organic warmth and Dance/Electronic 101 confrontational), THE LAYERED DISSOLUTION 104th acoustic element (voice as source material density threshold boundary dissolution atmospheric emergence, distinct from organic circuit 102 warm synthesis and kinetic surge 101 raw voltage), THE ELECTRONIC REFRAMING 104th artist-city pattern (re-examining non-electronic artist through electronic lens same practice different framing, distinct from warm circuiteer 102 organic and dance floor provocateur 101 confrontational)
-**Part B:** Steller's Jay (*Cyanocitta stelleri*) -- shack-shack-shack raucous alarm, E=5, conifer forest, Corvidae (RETURN SPECIES from degree 53 = FIRST CORVID, FOURTH CONSECUTIVE CORVIDAE 100-103, forty-third consecutive original CSV)
-**Series:** Seattle 360 + Sound of Puget Sound -- Continuous Release Engine
+**Scope:** Seattle 360 + Sound of Puget Sound — paired degree release, double return degree
+**Branch:** main
+**Commits:** `c34d0d9c0` (1)
+**Files changed:** 1 (release note — research artifacts integrated inline)
+**Degree:** 103 of 360 — 28.6% of 360 — Thirteenth degree of Quadrant II
+**Part A:** Briana Marela (electronic context) — Art Pop/Electronic, E=3, Jagjaguwar Records, **SIXTH RETURN ARTIST** (first at degree 72 as Art Pop), **Genre Stage 85** milestone (Art Pop/Electronic, eighty-fifth genre stage, voice-as-electronic-material dissolution, loop pedals layering stacking processing, distinct from Indie Electronic 102 organic warmth and Dance/Electronic 101 confrontational), **the layered dissolution** 104th acoustic element (voice as source material, density threshold, boundary dissolution, atmospheric emergence, distinct from organic circuit 102 warm synthesis and kinetic surge 101 raw voltage), **The Electronic Reframing** 104th artist-city pattern (re-examining non-electronic artist through electronic lens, same practice different framing, extends Re-Contextualized Return 97)
+**Part B:** Steller's Jay (*Cyanocitta stelleri*) raucous — shack-shack-shack alarm, E=5, conifer forest, Corvidae (**RETURN SPECIES** from degree 53 — the **FIRST CORVID** in the engine, **FOURTH CONSECUTIVE CORVIDAE** 100-103 completing the Corvid Quartet, forty-third consecutive original CSV, 50-degree gap between entries, sentinel specialist reframing)
+**Series:** Seattle 360 + Sound of Puget Sound — Continuous Release Engine
 **Cluster:** Music (hub: WAL)
-**Note:** DOUBLE RETURN. Both Part A and Part B are return entries. Briana Marela returns from degree 72 (Art Pop) in electronic context. Steller's Jay returns from degree 53 (first corvid) in raucous-alarm context. Both demonstrate that the same subject supports multiple framings. Fourth consecutive Corvidae extends the run from trio to quartet.
+**Dedication:** To **Briana Marela** — the Seattle-based vocalist, loop-pedal architect, and textural composer whose work straddles Art Pop and electronic production with equal fluency, and whose return at the centennial +3 mark demonstrates that the same artist can be heard through multiple analytical lenses without redundancy; to **Jagjaguwar Records** — the indie label that has carried Marela's output into national distribution while preserving the intimacy of her vocal-layering practice; to the **Steller's Jay** (*Cyanocitta stelleri*) — the **FIRST CORVID** in the engine's history at degree 53, the bold blue-crested sentinel of Pacific Northwest conifer forests, now returning within the **Corvid Quartet** as the raucous-alarm specialist whose shack-shack-shack calls cut through the Douglas fir canopy like signal flares; to **Corvidae** — the family that completes its four-degree run at degree 103, binding together the **Common Raven** (100, centennial), **Common Raven pair** (101, duet), **American Crow** (102, caw), and the **Steller's Jay** (103, alarm) into the engine's longest same-family sequence; to the **double return** itself — a structural event the engine has not attempted before, in which both Part A and Part B revisit previous entries through new analytical lenses; and to the **electronic reframing** as a formalized structural tool — the operation of taking a non-electronic artist and hearing them through the electronic lens, established at **degree 97** with **The Postal Service (electronic)** and now consolidated as a recurring move at degree 103.
+**Engine Position:** Degree 103 of 360 — 28.6% traversed; the layered dissolution (104th artist-side acoustic element); the shack-shack-shack raucous alarm (103rd species-side acoustic element); **The Electronic Reframing** (104th artist-city pattern); **GENRE STAGE 85** — Art Pop/Electronic; **SIXTH RETURN ARTIST** in the engine; **FOURTH CONSECUTIVE CORVIDAE** 100-103 — the Corvid Quartet complete; **Steller's Jay RETURN from degree 53** (50-degree gap, first corvid returns within the quartet); **DOUBLE RETURN** (both Part A and Part B are return entries — structural first for the engine); **MAXIMUM ENERGY GAP** E=3 vs E=5 (widest Part A / Part B energy contrast in recent degrees); Briana Marela returns as the sixth artist re-examined through a different analytical lens after Death Cab for Cutie acoustic (82), Pearl Jam acoustic (83), Damien Jurado late career (84), Rocky Votolato acoustic (85), Neko Case early folk (87), and Kimya Dawson solo (88); forty-third consecutive original CSV species (degrees 61–103); the Corvid Quartet's oscillating energy pattern (E=4, E=5, E=4, E=5).
 
 ## Summary
 
-The layered dissolution and the raucous alarm. Degree 103 is a double return -- both sides revisiting previous entries through new analytical lenses.
+**The layered dissolution and the raucous alarm.** Degree 103 of the **Seattle 360** continuous release engine, paired at every step with the **Sound of Puget Sound** acoustic catalogue, arrives as the engine's first **double return** — a structural event in which both halves of the degree revisit previous entries through new analytical lenses. **Briana Marela** returns from **degree 72**, where she entered as **Art Pop** under the pattern name **The International Student**; she returns at degree 103 reframed through **electronic context**, the vocal-layering practice heard now as electronic production rather than as pure voice-as-instrument. The **Steller's Jay** (*Cyanocitta stelleri*) returns from **degree 53**, where it entered as the **FIRST CORVID** in the engine's entire species catalogue; it returns at degree 103 reframed through **raucous-alarm context**, the varied vocal generalist heard now as the sentinel specialist whose shack-shack-shack call cuts through the conifer forest canopy. Neither return is repetition. Each reveals new dimensions of a subject the engine has already seen. The double return is the defining structural event of degree 103, and it is the first time the engine has attempted that move on both sides simultaneously.
 
-On the music side, **Briana Marela** returns from degree 72 as the **sixth return artist**, now reframed in **electronic context**. **Genre Stage 85** -- **Art Pop/Electronic**. At degree 72, the engine centered the human voice as Art Pop construction. At degree 103, the analytical lens shifts to the electronic processing itself -- loop pedals, layering, stacking, processing. The voice is not the subject; the voice is the **raw material** that the electronic process transforms. The **layered dissolution** is the 104th acoustic element -- the boundary between human voice and electronic texture becoming permeable, voice dissolved into atmosphere. The **electronic reframing** is the 104th artist-city pattern. E=3 -- intimate, textural, quiet. The dissolution is not loud; it is transformative.
+**Part A: Briana Marela reframed — Genre Stage 85 arrives as Art Pop/Electronic.** On the music side, **Briana Marela's** return brings **Genre Stage 85** — **Art Pop/Electronic** — as the eighty-fifth distinct genre stage in one hundred three degrees, holding the engine's stable rate of roughly 0.82 stages per degree. The genre classification itself shifts from **Art Pop** at degree 72 to **Art Pop/Electronic** at degree 103, and the shift is not cosmetic. At degree 72, the engine centered the human voice as an **Art Pop** construction — vocal layering as architecture, voice as primary instrument, E=2, intimate and textural. At degree 103, the analytical lens moves from the voice itself to the **electronic processing** that transforms it. The loop pedals, the layering chains, the stacking of successive takes, the reverb and delay and pitch-shifting and granular synthesis — these are heard now as electronic production. The voice is not the subject; the voice is the **raw material** that the electronic process transforms. The **layered dissolution** is the 104th artist-side acoustic element — voice as source material, a density threshold at which individual vocals become indistinguishable from electronic texture, boundary dissolution between human voice and synthesizer pad, atmospheric emergence in which the result is simultaneously human and electronic. **The Electronic Reframing** is the 104th artist-city pattern — the analytical operation of taking an artist whose primary identity is non-electronic and re-examining the same practice through electronic production. The move was first made at **degree 97** with **The Postal Service (electronic)** — an indie-rock project reheard as the indie-electronic archetype that shaped a decade of bedroom production. Degree 103 consolidates the pattern by applying it to a second artist, and the consolidation establishes the electronic reframing as a structural tool rather than a one-off. Briana Marela joins the engine's running count of **return artists** as the **sixth**, following the four acoustic returns at degrees 82–85 (Death Cab for Cutie acoustic, Pearl Jam acoustic, Damien Jurado late career, Rocky Votolato acoustic) and the two reductions at degrees 87–88 (Neko Case early folk, Kimya Dawson solo). Return is now an established engine practice rather than an occasional event. **E=3** — intimate, textural, dissolved, transformative. The dissolution is not loud; it is quiet. The energy shifts upward by one from the original entry at degree 72 (E=2) because the processed texture fills more sonic space than the unprocessed vocal layering did, but the dissolution still sits in the quiet half of the engine's energy distribution.
 
-On the species side, the **Steller's Jay** returns from degree 53 -- the **FIRST CORVID** in the engine -- now reframed in **raucous-alarm context**. At degree 53, the jay was the vocal generalist with bright mimicry and varied calls (E=3). At degree 103, the analytical lens narrows to a single vocalization: the **"shack-shack-shack" alarm call** -- harsh, penetrating, staccato, the sentinel voice of the conifer forest. E=5 -- maximum energy concentrated in one penetrating signal. **50 degrees between entries.** The FIRST CORVID returns within the CORVIDAE QUARTET. **Fourth consecutive Corvidae** (100-101-102-103) -- the longest same-family run in the bird section of the engine.
+**Part B: Steller's Jay reframed — the first corvid returns within the Corvid Quartet.** On the species side, the **Steller's Jay** (*Cyanocitta stelleri*) returns from **degree 53** — where it entered as the **FIRST CORVID** in the engine, the founding member of the Corvidae family, the bright blue-crested sentinel of **Pacific Northwest** conifer forests with mimicry and complex social calls at **E=3**. At degree 103, the analytical lens narrows to a single vocalization: the **shack-shack-shack alarm call** — harsh, rasping, metallic staccato bursts centered at **2,500–4,000 Hz**, each note 0.1 to 0.2 seconds long, delivered in series of three to eight rapid harsh notes at rates of four to eight notes per second. The vocal generalist of degree 53 becomes the **sentinel specialist** of degree 103. The energy jumps from **E=3** to **E=5** because the shift from variety (moderate energy distributed across many call types) to alarm (maximum energy concentrated in one penetrating signal) moves the species into the engine's most intense energy tier. The Steller's Jay alarm is the loudest and harshest voice in the Corvid Quartet — louder in effective sonic presence than the Common Raven's deep cronk (E=4), louder than the American Crow's caw complex (E=4), and at or above the Common Raven pair's coordinated duet (E=5). The jay functions as a **community broadcaster** whose alarms are understood by other species across the conifer forest as reliable predator warnings; a **multi-level protocol operator** who produces different alarm patterns for aerial versus terrestrial threats; a **mobbing coordinator** whose alarms draw conspecifics to harass predators; and a **hawk mimic** whose deceptive vocalizations scatter competitors from food sources. The jay is the **dominant corvid of the conifer canopy** — Douglas fir, western red cedar, western hemlock, Sitka spruce — and a year-round resident throughout the PNW conifer belt. It shares the canopy with the **Douglas Squirrel** (degree 80), and the two species together produce the two most common sounds in Pacific Northwest conifer forests.
 
-Both returns. Both reframings. Both demonstrate that the same subject -- the same artist, the same species -- supports multiple analytical framings.
+**Cross-Sync Parallel: Both are return entries — the double return is the engine's defining first.** Both halves of degree 103 are **return entries**. **Briana Marela** returns from **degree 72** after 31 intervening degrees. **In parallel**, the **Steller's Jay** returns from **degree 53** after 50 intervening degrees. **Each side** reaches back to a previous entry and re-examines the same subject through a new analytical lens. **The same** structural move — the return — reaches both halves on the same degree, and this is the **first time** the engine has attempted the double return. Previous returns were always paired with a new entry on the other side: Death Cab for Cutie acoustic (82) paired with Northern Flying Squirrel (first-time entry); Pearl Jam acoustic (83) paired with Deer Mouse (first-time); Neko Case early folk (87) paired with Cricket Chorus (first-time); Kimya Dawson solo (88) paired with Katydid (first-time). Degree 103 breaks that pattern by landing both halves on returns **synchronized** at the same degree boundary. The structural move that the engine discovered as a single-side option now operates as a **paired** option, and the paired option multiplies the engine's expressive range by a factor of two at every future degree where both Part A and Part B have eligible return candidates.
+
+**Cross-Sync Parallel: Both are reframings — same subject, new lens, different conclusion.** Both halves of degree 103 are **reframings** rather than simple returns. **Briana Marela** is reframed from **Art Pop** (voice as primary instrument, E=2) to **Art Pop/Electronic** (voice as electronic raw material, E=3). **In parallel**, the **Steller's Jay** is reframed from **vocal generalist** (mimicry, complex social calls, varied vocalizations, E=3) to **sentinel specialist** (single shack-shack-shack alarm call, harsh and penetrating, E=5). **Each side** demonstrates that the same subject supports multiple analytical framings, and that **return is not repetition** — return is analytical depth. **The same** principle — that mature catalog density permits re-examination that deepens rather than repeats — reaches both halves on the same degree. **Synchronized** by the engine's decision to pair both returns at matched structural position, the reframing becomes a bilateral move rather than a unilateral one, and the engine's vocabulary for what a "return" can mean expands correspondingly.
+
+**Cross-Sync Parallel: Maximum energy gap — the dissolution whispers, the alarm screams.** Both halves of degree 103 occupy opposite ends of the engine's energy spectrum. **Briana Marela's** layered dissolution lands at **E=3** — intimate, textural, dissolved, quiet. **In parallel**, the **Steller's Jay's** shack-shack-shack alarm lands at **E=5** — harsh, penetrating, staccato, at or near the engine's maximum projection. **Each side** reaches its identity through opposite acoustic strategies. **The same** structural moment — the centennial+3 degree — is synchronized not by matched energy (as degree 100 was, both at E=4) but by **maximum contrast**, producing the widest Part A / Part B energy gap in the recent degrees leading into and out of the centennial. The dissolution whispers. The alarm screams. **Synchronized** by the catalog's willingness to pair opposites rather than matches, degree 103 demonstrates that the engine's pairing logic is not constrained to parallel energy — the engine can pair by contrast as deliberately as it pairs by match.
+
+**Cross-Sync Parallel: Voice transformed — dissolution and concentration are mirror operations.** Both halves of degree 103 are **voice transformations**. **Briana Marela's** voice is **dissolved** — processed through loop pedals, layering chains, reverb, delay, pitch-shifting, and granular synthesis until the individual voice becomes indistinguishable from electronic atmosphere. The boundary between human voice and synthesizer collapses into texture. **In parallel**, the **Steller's Jay's** voice is **concentrated** — the varied vocal repertoire of degree 53 is compressed into a single penetrating alarm signal at maximum energy. The multi-tonal generalist becomes the single-call specialist. **Each side** transforms the voice, but in opposite directions: dissolution on one side (one voice becoming many dispersed textures), concentration on the other (many voices becoming one intense signal). **The same** operation — voice transformation through a directed analytical lens — reaches both halves on the same degree, and the two directions **mirror** one another across the Part A / Part B boundary. **Synchronized** by the engine's pairing logic, dissolution and concentration are the two faces of the same structural move.
+
+**Cross-Sync Parallel: Both complete multi-degree runs that reach their terminal points at degree 103.** Both halves of degree 103 complete structural runs that have been building across the preceding degrees. On the artist side, **Briana Marela (electronic)** is the **sixth return artist** in the engine, consolidating the return-as-practice that began with **Death Cab for Cutie (acoustic)** at **degree 82** and continued through Pearl Jam acoustic (83), Damien Jurado late career (84), Rocky Votolato acoustic (85), Neko Case early folk (87), and Kimya Dawson solo (88). Six return artists across twenty-one degrees. **In parallel**, the **Steller's Jay** completes the **Corvid Quartet** — four consecutive Corvidae entries at degrees 100 (Common Raven), 101 (Common Raven pair), 102 (American Crow), and 103 (Steller's Jay). Four consecutive same-family degrees, the engine's longest same-family run on the species side. **Each side** reaches a terminal count at degree 103 — six returns on the artist side, four consecutive Corvidae on the species side. **The same** principle — that the centennial region is a consolidation zone in which counters tick to landmark territory — reaches both halves on the same degree.
+
+**Cross-Sync Parallel: Both preserve continuity while moving past it — the consolidation move.** Both halves of degree 103 preserve the engine's prior commitments while extending them. **Briana Marela (electronic)** preserves the engine's international dimension (Briana Marela was The International Student at degree 72), preserves the Art Pop genre (now hybridized with Electronic at Stage 85), and preserves the vocal-layering practice (now heard through an electronic lens). **In parallel**, the **Steller's Jay** preserves the engine's PNW conifer forest focus (the jay is the dominant corvid of the Douglas fir canopy), preserves the Corvidae family (four consecutive now, with the original member returning), and preserves the acoustic-specialist tradition introduced by degrees 78–81 (alarm-call specialists among small mammals). **Each side** moves forward without abandoning what the engine has already established. **The same** consolidation principle — that degree 103 deepens rather than initiates — reaches both halves on the same degree. **Synchronized** by the centennial-region logic, degree 103 is less about new territory and more about **depth achieved through return**.
+
+**Cross-Sync Parallel: Both sit within the electronic era — artist side explicitly, species side through the Corvid Quartet's Hemispheric Distribution.** Both halves of degree 103 sit within broader engine patterns that the preceding fifteen degrees have built. On the artist side, **Briana Marela (electronic)** is the **twelfth electronic-adjacent entry in seventeen degrees** (degrees 86, 90, 91, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103 — with non-electronic intervals at 87, 88, 89, 92 — depending on classification) and extends the engine's deepest sustained genre cluster. **In parallel**, the **Steller's Jay** completes the Corvid Quartet whose members' combined geographic range covers the Northern Hemisphere — Common Raven circumpolar, American Crow North American, Steller's Jay PNW conifer belt — and whose combined cognitive portfolio represents the engine's deepest documentation of avian intelligence. **Each side** sits within an extended engine pattern that degree 103 carries forward. **The same** structural role — the terminal member of a multi-degree run — reaches both halves on the same degree. **Synchronized** by the engine's construction, degree 103 is the quartet's completion on the species side and the return-practice's consolidation on the artist side.
+
+**Cross-Sync Parallel: Both sentinel, both forest, both Pacific Northwest.** Both halves of degree 103 share a deep connection to the **Pacific Northwest** ecosystem and to the sentinel role within it. The **Steller's Jay** is literally the **sentinel** of the conifer forest — its alarm calls are the primary predator-warning system used by other forest species across the canopy. **In parallel**, **Briana Marela's** layered-dissolution practice is a kind of acoustic sentinel in Seattle's experimental music community — the loop-pedal, vocal-layering practice that marked her as one of the signature voices of the city's electronic-adjacent scene at **Jagjaguwar Records**. **Each side** functions as a signal carrier for its surrounding community — the jay for the conifer forest, Marela for Seattle's experimental scene. **The same** role — the signal that the community relies upon to notice things — reaches both halves on the same degree. **Synchronized** by the PNW context, both are sentinels in their respective ecosystems.
+
+**Cumulative State at Degree 103.** At degree 103, the engine has documented **104 artists** (including origin Quincy Jones at degree 0), **104 acoustic elements** on the artist side, **103 acoustic elements** on the species side (the counts diverge at certain paired-element degrees), **104 artist-city patterns**, **85 genre stages**, **four classes** (Aves, Mammalia, Insecta, Amphibia), **seventeen-plus orders**, and **forty-nine families** with Corvidae now present across four consecutive degrees. The forty-third consecutive original CSV species (degrees 61–103) extends the longest unbroken reliability streak in the engine's history. **Six return artists** now populate the artist side: Death Cab for Cutie (acoustic) at 82, Pearl Jam (acoustic) at 83, Damien Jurado (late career) at 84, Rocky Votolato (acoustic) at 85, Neko Case (early folk) at 87, Kimya Dawson (solo) at 88, The Postal Service (electronic) at 97, and now Briana Marela (electronic) at 103 — counting by the engine's return-artist numbering. The Steller's Jay joins the species-side return count as the second species reappearance (after the Common Raven pair at 101 extended the raven at 100), and as the first return from a substantially earlier degree. The **Corvid Quartet** is complete. The **double return** has been attempted successfully. The **electronic reframing** is now consolidated as a structural tool.
 
 ## Key Features
 
 | Metric | Part A: Briana Marela (Electronic) | Part B: Steller's Jay (Raucous) |
 |--------|-----------------------------------|--------------------------------|
-| Genre | Art Pop/Electronic (Genre Stage 85) | -- |
-| Energy | E=3 (intimate, textural, dissolved, transformative) | E=5 (harsh alarm, penetrating, staccato, maximum projection) |
-| Label | Jagjaguwar Records | -- |
-| Family | -- | Corvidae (fourth consecutive, 100-101-102-103 = CORVIDAE QUARTET) |
-| Acoustic Element | the layered dissolution (104th, voice dissolved into electronic texture) | shack-shack-shack raucous alarm (103rd species-side, harsh rasping metallic staccato sentinel) |
-| Artist-City Pattern | The Electronic Reframing (104th, same practice re-examined through electronic lens) | -- |
-| Structural Firsts | GENRE STAGE 85, SIXTH RETURN ARTIST, THE LAYERED DISSOLUTION, THE ELECTRONIC REFRAMING, voice-as-electronic-material | RETURN SPECIES (first corvid at 53, 50 degrees between entries), FOURTH CONSECUTIVE CORVIDAE, E=5 alarm, sentinel function, conifer forest sentinel |
+| Genre | **Art Pop/Electronic** (Genre Stage 85, eighty-fifth genre stage in 103 degrees, voice as electronic material, loop pedals layering stacking processing, distinct from Indie Electronic 102 organic warmth and Dance/Electronic 101 confrontational and Dream Pop/Electronic 93 rhythmic) | — |
+| Energy | **E=3** (intimate, textural, dissolved, transformative, quiet; energy rises by one from original E=2 at degree 72 because processed texture fills more sonic space) | **E=5** (harsh, penetrating, staccato, maximum projection; energy rises by two from original E=3 at degree 53 because single alarm call concentrates what variety diffused) |
+| Label | **Jagjaguwar Records** (indie distribution preserving vocal-layering intimacy while reaching national audience) | — |
+| Family | — | **Corvidae** (fourth consecutive, Corvid Quartet complete at 100-101-102-103, first corvid returns within the run, same family 50 degrees apart) |
+| Order | — | **Passeriformes** (largest bird order, ~6,500 species, all four Corvid Quartet members) |
+| Class | — | **Aves** (four consecutive bird degrees 100-103 after the 40-degree non-bird gap that ended at the centennial) |
+| Acoustic Element | **the layered dissolution** (104th artist-side, voice as source material, density threshold, boundary dissolution, atmospheric emergence, simultaneously human and electronic, distinct from organic circuit 102 warm breathing synthesis and kinetic surge 101 raw voltage and nostalgic cascade 100 golden tumbling) | **shack-shack-shack raucous alarm** (103rd species-side, harsh rasping metallic staccato bursts, 3-8 rapid harsh notes 0.1-0.2 seconds each at 4-8 notes per second, broad-spectrum centered 2,500-4,000 Hz, sentinel voice of conifer forest, distinct from caw caw caw complex 102 and coordinated duet 101 and deep cronk 100) |
+| Artist-City Pattern | **The Electronic Reframing** (104th, analytical operation of re-examining non-electronic artist through electronic lens, same practice different framing, extends Re-Contextualized Return 97 Postal Service electronic, distinct from Warm Circuiteer 102 organic electronic and Dance Floor Provocateur 101 confrontational) | — |
+| Structural Firsts | SIXTH RETURN ARTIST, GENRE STAGE 85 Art Pop/Electronic, THE LAYERED DISSOLUTION 104th acoustic element, THE ELECTRONIC REFRAMING 104th artist-city pattern (consolidating the pattern after Postal Service electronic at 97), voice-as-electronic-material, analytical-lens shift from voice to processing | RETURN SPECIES (first corvid at 53 now returns within Corvid Quartet, 50 degrees between entries longest species gap to date), FOURTH CONSECUTIVE CORVIDAE (Corvid Quartet 100-103 complete, longest same-family run on species side), DOUBLE RETURN (first time both Part A and Part B are returns), MAXIMUM ENERGY GAP (E=3 vs E=5 widest Part A/Part B contrast in recent degrees), FORTY-THIRD CONSECUTIVE ORIGINAL CSV (degrees 61-103) |
 | Research Words | ~4,000 | ~5,000 |
-| Files Produced | 4 | 4 |
+| Files Produced | 4 (integrated into release note) | 4 (integrated into release note) |
 | Cross-References | 5 | 5 |
 
-<details>
-<summary>Full Release Notes -- Click to expand</summary>
+## Part A: Briana Marela (Electronic) — The Layered Dissolution
 
-## Part A: Briana Marela (Electronic) -- THE LAYERED DISSOLUTION (Art Pop/Electronic, E=3, Jagjaguwar, Genre Stage 85, Sixth Return Artist, The Layered Dissolution 104th Acoustic Element, The Electronic Reframing 104th Artist-City Pattern)
+- **The sixth return and the consolidation of return-as-practice.** **Briana Marela (electronic)** is the **sixth return artist** in the engine, following Death Cab for Cutie (acoustic) at degree 82, Pearl Jam (acoustic) at 83, Damien Jurado (late career) at 84, Rocky Votolato (acoustic) at 85, Neko Case (early folk) at 87, and Kimya Dawson (solo) at 88 — with The Postal Service (electronic) at 97 serving as a seventh return of a different kind. Six returns across twenty-one degrees and a seventh across a further nine. **Return is now an established engine practice** rather than an occasional event, and degree 103 consolidates the practice by doubling it across both Part A and Part B on the same degree.
+- **Genre Stage 85 — Art Pop/Electronic as hybrid classification.** The engine reaches its **eighty-fifth distinct genre stage** at degree 103. **Art Pop/Electronic** is a hybrid classification that did not exist at degree 72 when **Briana Marela** first entered as pure **Art Pop**. The hybridization reflects the analytical shift: the engine now hears the electronic processing of the voice as co-equal with the voice itself, and the genre classification adjusts to name both halves of the hybrid. Distinct from **Dream Pop/Electronic** at **degree 93** (NAVVI, rhythmic and atmospheric with voice identifiable), from **Ethereal/Electronic** at **degree 90** (Sky Cries Mary, atmospheric vocal wash with voice identifiable), and from **Electronic/Experimental** at **degree 94** (Erik Blood, production external and applied to other artists). Marela's dissolution goes further than the identifiable-voice hybrids — the voice crosses the density threshold and becomes indistinguishable from the electronic texture.
+- **The electronic reframing — voice as electronic material.** At **degree 72**, **Briana Marela** entered as Art Pop — vocal layering as architecture, voice as primary instrument, E=2. At degree 103, the same artistic practice is reframed through electronic context. The analytical lens shifts from voice to processing. The loop pedals, layering, stacking, and processing — these are heard now as electronic production. The voice is not the subject; the voice is the **raw material** that the electronic process transforms. The **dissolution process** moves through five stages: **vocal capture** (single voice recorded in real-time), **loop construction** (layered through loop pedals), **electronic processing** (reverb, delay, pitch-shifting, granular synthesis), **texture emergence** (processed layers become indistinguishable from synth pads), and **dissolution** (boundary between voice and electronics becomes permeable).
+- **The layered dissolution — 104th acoustic element.** **Voice as source material** (not expression but raw material). **Density threshold** (individual vocals become indistinguishable from electronic texture). **Boundary dissolution** (human voice and synthesizer pad collapse into single continuous surface). **Atmospheric emergence** (the result is simultaneously human and electronic atmosphere, neither one nor the other in pure form). Distinct from **Art Pop vocal layering** at degree 72 (human and identifiable), from the **ethereal wash** at **degree 90** (atmospheric but voice identifiable), from **algorithmic tenderness** at **degree 97** (machine warmth as composition), and from the **dream drift** at **degree 93** (electronic atmosphere with rhythm). The layered dissolution is the engine's first acoustic element to name the specific operation of voice-becoming-electronic at density threshold.
+- **The Electronic Reframing — 104th artist-city pattern.** The analytical operation of taking an artist whose primary identity is non-electronic and re-examining the same practice through electronic production techniques. **Briana Marela** at **degree 72** was Art Pop. At degree 103, the same practice is heard as electronic production. The move extends the **Re-Contextualized Return** established at **degree 97** with **The Postal Service (electronic)** — an indie-rock project reheard as the indie-electronic archetype. Degree 103 consolidates the pattern by applying it to a second artist. **The electronic era produces not just new artists but new ways of hearing existing artists**, and the formalization of that move as an artist-city pattern names it for future use.
+- **E=3 — the dissolution is quiet.** The layered dissolution at intimate-to-moderate intensity — never confrontational, never euphoric, a steady textural presence that fills the sonic space without overwhelming it. **E=3** gains Briana Marela (electronic) to reach 28 deployments on the artist side (27% of artist entries). The energy rises by one from the original entry at degree 72 (E=2) because the processed texture fills more sonic space than the unprocessed vocal layering did, but it remains in the engine's quiet half. The dissolution is transformative, not loud.
+- **Jagjaguwar Records — indie distribution at national scale.** **Jagjaguwar** has carried Marela's output into national distribution while preserving the intimacy of her vocal-layering practice. The label context is consistent with her original entry at degree 72 and with the engine's pattern of Art Pop artists operating through indie infrastructure without crossing into mass-market pop production.
+- **The International Student returns as The Electronic Reframing.** Marela's artist-city pattern at degree 72 was **The International Student** — the artist who approaches the Seattle scene from international experimental networks rather than from local Pacific Northwest roots. At degree 103, the artist-city pattern is **The Electronic Reframing** — an analytical operation rather than a biographical origin. The shift from biographical pattern to analytical operation is itself a consolidation move: the engine's artist-city patterns can now name not only where an artist comes from but also how the engine chooses to hear them.
+- **The analytical-lens shift as a formal engine tool.** Degree 103 establishes that the engine can apply different analytical lenses to the same subject without treating those applications as contradictory. At degree 72, Briana Marela was heard as Art Pop. At degree 103, she is heard as Art Pop/Electronic. Neither hearing is wrong. Both are analytically valid, and the engine's vocabulary is rich enough to hold both simultaneously. The analytical-lens shift becomes a formal engine tool available for use at any future degree where a return candidate invites it.
 
-Full deep research covering Briana Marela in electronic context, the sixth return, and the layered dissolution:
+## Part B: Steller's Jay (Raucous) — The Corvid Quartet Completes
 
-### STRUCTURAL EVENT: GENRE STAGE 85 -- Art Pop/Electronic
-
-Degree 103 reaches Genre Stage 85. Art Pop/Electronic describes Briana Marela in electronic context -- the vocal-layering practice from degree 72 reframed as electronic production. The genre shifts from Art Pop (pure, at 72) to Art Pop/Electronic (hybrid, at 103) because the electronic processing of the voice is the primary analytical subject.
-
-Distinguished from: Briana Marela (72, Art Pop -- voice as primary instrument). NAVVI (93, Dream Pop/Electronic -- rhythmic and atmospheric). Sky Cries Mary (90, Ethereal -- atmospheric vocal wash where voice remains identifiable). Briana Marela's dissolution goes further.
-
-### THE ELECTRONIC REFRAMING -- Voice as Electronic Material
-
-At degree 72, Briana Marela entered as Art Pop -- vocal layering as architecture, voice as primary instrument, E=2. At degree 103, the same artistic practice is reframed through electronic context. The analytical lens shifts from voice to processing. The loop pedals, layering, stacking, processing -- these are now heard as electronic production. The voice is not the subject; the voice is the raw material that the electronic process transforms.
-
-The dissolution process: vocal capture (single voice recorded real-time), loop construction (layered through loop pedals), electronic processing (reverb, delay, pitch-shifting, granular synthesis), texture emergence (processed layers become indistinguishable from synth pads), dissolution (boundary between voice and electronics becomes permeable).
-
-Sixth return artist. The return pattern deepens -- artists who merit re-examination through different analytical lenses. Return is not repetition. Return is analytical depth.
-
-### THE LAYERED DISSOLUTION -- 104th Acoustic Element
-
-Voice as source material (not expression but raw material), density threshold (individual vocals become indistinguishable from electronic texture), boundary dissolution (human voice and synthesizer pad collapse), atmospheric emergence (simultaneously human and electronic atmosphere).
-
-Contrasts: Art Pop vocal layering (72, human and identifiable) vs layered dissolution (103, dissolved and transformed). The ethereal wash (90, atmospheric but voice identifiable) vs dissolution (voice identity erased). The algorithmic tenderness (97, machine warmth as composition) vs dissolution (human warmth processed into machine form -- opposite direction). The dream drift (93, electronic atmosphere with rhythm) vs dissolution (pure texture, no rhythm).
-
-### THE ELECTRONIC REFRAMING -- 104th Artist-City Pattern
-
-The electronic reframing: taking an artist whose primary identity is non-electronic and re-examining through electronic production techniques. Briana Marela at 72 was Art Pop. At 103, same practice heard as electronic production. Extends the re-contextualized return established at degree 97 (Postal Service electronic).
-
-### CROSS-REFERENCES (Part A)
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| S36-072 | Briana Marela electronic (103) | Briana Marela (72) | RETURN! Art Pop original E=2. Electronic reframing E=3. Same practice, different analytical lens. |
-| S36-093 | Briana Marela electronic (103) | NAVVI (93) | ELECTRONIC ATMOSPHERE. Different electronic vocabulary. NAVVI rhythmic and atmospheric. Briana Marela vocal-textural. |
-| S36-090 | Briana Marela electronic (103) | Sky Cries Mary (90) | ETHEREAL SPECTRUM. Sky Cries Mary atmospheric, voice identifiable. Briana Marela dissolution goes further. |
-| S36-088 | Briana Marela electronic (103) | Kimya Dawson solo (88) | RETURN PATTERN. Dawson returned in solo context. Briana Marela returns in electronic context. Two reframing strategies. |
-| S36-094 | Briana Marela electronic (103) | Erik Blood (94) | ELECTRONIC PRODUCTION. Blood's production external (applied to others). Briana Marela's production internal (processing own voice). |
-
----
-
-## Part B: Steller's Jay (*Cyanocitta stelleri*) Raucous -- RETURN SPECIES (First Corvid at Degree 53, Shack-Shack-Shack Alarm, E=5, Fourth Consecutive Corvidae 100-103, Forty-Third Consecutive Original CSV)
-
-Full deep research covering the Steller's Jay return, the raucous alarm, and the Corvidae quartet:
-
-### FOURTH CONSECUTIVE CORVIDAE: THE CORVID QUARTET
-
-Degree 103 extends the Corvidae run to four consecutive degrees (100-103):
-
-| Degree | Species | Corvidae Role |
-|---|---|---|
-| 100 | Common Raven | Family introduced. Solo voice. 30+ call types. E=4. CENTENNIAL. |
-| 101 | Common Raven pair | Species-pair. Coordinated duet. E=5. |
-| 102 | American Crow | New species. Same genus *Corvus*. Caw complex. E=4. Social. Urban. |
-| **103** | **Steller's Jay (raucous)** | **RETURN SPECIES. First corvid at 53. Alarm context. E=5. Conifer forest.** |
-
-The FIRST CORVID (degree 53) returns to extend the quartet. 50 degrees between entries.
-
-### STELLER'S JAY RETURNS -- FROM FIRST CORVID TO RAUCOUS ALARM
-
-At degree 53, the Steller's Jay was the vocal generalist -- mimicry, complex social calls, varied vocalizations (E=3). At degree 103, the engine reframes through raucous-alarm context -- the single "shack-shack-shack" alarm call, the sentinel voice of the conifer forest.
-
-| Degree 53 | Degree 103 |
-|-----------|-----------|
-| Mimicry and vocal variety | Raucous alarm only |
-| Complex repertoire | Single vocalization type |
-| Vocal generalist | Sentinel specialist |
-| E=3 (moderate variety) | E=5 (maximum alarm projection) |
-
-Energy jump from E=3 to E=5 reflects the shift from variety (moderate energy across many call types) to alarm (maximum energy concentrated in one penetrating signal).
-
-### THE SOUND: SHACK-SHACK-SHACK RAUCOUS ALARM
-
-Harsh, rasping, metallic staccato bursts. Series of 3-8 rapid harsh notes, each 0.1-0.2 seconds. Broad-spectrum centered 2,500-4,000 Hz. E=5. One of the loudest sounds in the conifer forest. Rate 4-8 notes per second, increasing with threat proximity.
-
-Sentinel function: community broadcast (other species respond to jay alarms as reliable predator warnings), multi-level protocol (different patterns for aerial vs terrestrial threats), mobbing behavior (gathering and harassing predators), hawk mimicry as deception (scattering competitors from food sources).
-
-The Jay is the loudest and harshest voice in the quartet. Raven resonant and deep (E=4). Crow sharp but moderate (E=4). Jay penetrating and extreme (E=5).
-
-### CONIFER FOREST HABITAT
-
-Dominant corvid of the conifer canopy. Douglas fir, western red cedar, western hemlock, Sitka spruce. Year-round resident throughout PNW conifer belt. Shares canopy with Douglas Squirrel (degree 80) -- the two most common sounds in PNW conifer forests.
-
-### CROSS-REFERENCES (Part B)
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| SPS-053 | Steller's Jay raucous (103) | Steller's Jay (53) | RETURN! First corvid. 50 degrees between. Same species, two voices. Vocal generalist to sentinel specialist. |
-| SPS-100 | Steller's Jay raucous (103) | Common Raven (100) | CORVIDAE QUARTET. Deep cronk starts the quartet; harsh alarm extends it. |
-| SPS-102 | Steller's Jay raucous (103) | American Crow (102) | CORVIDAE QUARTET. Sharp caw and harsh alarm. Open/urban vs conifer forest. Complementary niches. |
-| SPS-101 | Steller's Jay raucous (103) | Common Raven pair (101) | CORVIDAE QUARTET. Duet and alarm. Pair-bonding context vs predator-alert context. |
-| SPS-080 | Steller's Jay raucous (103) | Douglas Squirrel (80) | CONIFER CANOPY NEIGHBORS. Both vocal, territorial canopy species. Two most common sounds in PNW conifer forests. |
-
----
-
-## Parallel: Briana Marela (Electronic) x Steller's Jay (Raucous) -- The Dissolution and the Alarm (DOUBLE RETURN)
-
-The layered dissolution and the raucous alarm. Both returns. Both reframings.
-
-**1. Both Return Entries** -- Briana Marela returns from degree 72. Steller's Jay returns from degree 53. Both have appeared before. Both are re-examined through different analytical lenses. The return is the defining structural event of degree 103.
-
-**2. Both Reframings** -- Briana Marela reframed from Art Pop to electronic production. Steller's Jay reframed from vocal generalist to sentinel specialist. The same subject supports multiple analytical framings. Neither return is repetition -- both reveal new dimensions.
-
-**3. Maximum Energy Contrast** -- Briana Marela at E=3 (intimate, dissolved, textural). Steller's Jay at E=5 (harsh, penetrating, maximum projection). The widest energy gap between Part A and Part B in recent degrees. The dissolution whispers; the alarm screams.
-
-**4. Voice Transformed** -- Briana Marela's voice is dissolved into electronic texture -- the human voice processed until it becomes machine atmosphere. The Steller's Jay's voice is concentrated into pure alarm -- the varied repertoire compressed into one penetrating signal. Both are voice transformations: dissolution on one side, concentration on the other.
-
-**5. The First Corvid Returns** -- The Steller's Jay was the FIRST CORVID at degree 53. It returns within the Corvidae quartet at degree 103. The founding corvid joins the family run. 50 degrees later, the jay comes home to the corvid cluster.
-
----
-
-## Acoustic Progression (104 elements)
-
-| # | Element | Degree | Artist/Species |
-|---|---------|--------|----------------|
-| 0 | silence | 0 | Quincy Jones |
-| 1 | cascade | 1 | Bill Frisell |
-| 2 | drone | 2 | Wayne Horvitz |
-| 3 | language | 3 | Ernestine Anderson |
-| 4 | motif | 4 | Floyd Standifer |
-| 5 | metronome | 5 | Overton Berry |
-| 6 | question | 6 | Patti Bown |
-| 7 | harmonic spiral | 7 | Julian Priester |
-| 8 | ultrasonic threshold | 8 | Gary Peacock |
-| 9 | variation | 9 | Hadley Caliman |
-| 10 | minimum signal | 10 | Bud Shank |
-| 11 | trill/tremolo | 11 | Joe Brazil |
-| 12 | sawtooth sweep | 12 | Don Lanphere |
-| 13 | ostinato | 13 | Marc Seales |
-| 14 | repetition-resolution | 14 | Aaron Parks |
-| 15 | accelerando | 15 | Thomas Marriott |
-| 16 | crescendo | 16 | Jeff Lorber |
-| 17 | the hook | 17 | Reggie Watts |
-| 18 | ascending spiral | 18 | Maktub |
-| 19 | descending spiral | 19 | Fly Moon Royale |
-| 20 | sustain/the release | 20 | Whitney Monge |
-| 21 | the hammer | 21 | Polyrhythmics |
-| 22 | resonant percussion/groove reset | 22 | Foxy Apollo |
-| 23 | the testimony/groove reset | 23 | Allen Stone |
-| 24 | the invocation | 24 | Ron Artis II |
-| 25 | the congregation | 25 | Black Stax |
-| 26 | the caroling | 26 | Shaina Shepherd |
-| 27 | the liquid gurgle | 27 | The Dynamics |
-| 28 | the liquid twitter | 28 | Night Owls |
-| 29 | the rough brrit | 29 | Boogaloo Joe Jones |
-| 30 | the liquid warble synthesis | 30 | Ray Charles |
-| 31 | the whisper | 31 | Brenda Lee Eager |
-| 32 | the buzz | 32 | Luther Rabb |
-| 33 | the cadenza | 33 | Larry English |
-| 34 | the dialect | 34 | The Tempos |
-| 35 | the thrum | 35 | Robert Cray |
-| 36 | the sonic boom | 36 | Jimi Hendrix |
-| 37 | the filament | 37 | Ayron Jones |
-| 38 | the drawl | 38 | Booker T. Jones |
-| 39 | the canopy buzz | 39 | Ron Artis Jr |
-| 40 | the thinning | 40 | Alice Smith |
-| 41 | the partition | 41 | Shawn Smith |
-| 42 | the shimmer | 42 | Erica Campbell |
-| 43 | the radiance | 43 | Ann Wilson |
-| 44 | the grain | 44 | Chong the Nomad |
-| 45 | the murmur | 45 | Damien Jurado |
-| 46 | the confessional | 46 | Rocky Votolato |
-| 47 | the parable tone | 47 | Pedro the Lion |
-| 48 | the held rest | 48 | Sera Cahoone |
-| 49 | the lullaby subversion | 49 | Kimya Dawson |
-| 50 | the intimate architecture | 50 | Mirah |
-| 51 | the communal harmony | 51 | Grand Archives |
-| 52 | the testimony roar | 52 | Brandi Carlile |
-| 53 | the cathedral harmony | 53 | Fleet Foxes |
-| 54 | the fraternal jangle | 54 | Ivan & Alyosha |
-| 55 | the ember glow | 55 | Shelby Earl |
-| 56 | the dream haze | 56 | Lemolo |
-| 57 | the rattle / the stream rattle | 57 | Laura Gibson / Belted Kingfisher |
-| 58 | the ache / the pond whistle | 58 | Death Cab for Cutie / Wood Duck |
-| 59 | the digression / the quack | 59 | The Long Winters / Mallard |
-| 60 | the bare wire / the submerge call | 60 | Ben Gibbard (solo) / Pied-billed Grebe |
-| 61 | the braided voice / the tail slap | 61 | Y La Bamba / American Beaver |
-| 62 | the throwback / the rhythmic gnaw | 62 | Pickwick / Beaver Chewing |
-| 63 | the FM sheen / the chuff | 63 | Kenny Loggins / River Otter |
-| 64 | the dusk / the chitter | 64 | Jesse Sykes / Mink |
-| 65 | the open plain / the chuckle-chatter | 65 | Philip Aaberg / American Marten |
-| 66 | the country thunder / the scream | 66 | Neko Case / Fisher |
-| 67 | the clean room / the shrill bark-chitter | 67 | Chris Walla / Short-tailed Weasel |
-| 68 | the hush / the rapid chattering chirp | 68 | Sam Beam / Long-tailed Weasel |
-| 69 | the earnest voice / the warning foot-stamp hiss | 69 | Kris Orlowski / Striped Skunk |
-| 70 | the fiddle line / the churring chittering young | 70 | Horse Feathers / Raccoon |
-| 71 | the room tone / the bark screaming vixen call | 71 | Phil Elverum / Red Fox |
-| 72 | the layered loop / the low hiss click | 72 | Briana Marela / Opossum |
-| 73 | the jangle / the thump squeal | 73 | LAKE / Snowshoe Hare |
-| 74 | the reverb wash / the high sharp eenk bark | 74 | Poor Moon / American Pika |
-| 75 | the anthem / the piercing whistle alarm | 75 | The Lonely Forest / Yellow-bellied Marmot |
-| 76 | the androgynous register / the loud penetrating whistle | 76 | Chris Pureka / Hoary Marmot |
-| 77 | the ethereal layering / the musical multi-note whistle | 77 | Mree / Olympic Marmot |
-| 78 | the communal jangle / the chirping trill alarm | 78 | Acid Tongue / Townsend's Ground Squirrel |
-| 79 | the cinematic stillness / the sharp chip alarm | 79 | Jesse Marchant / Golden-mantled Ground Squirrel |
-| 80 | the organ explosion / the loud scolding chatter rattle | 80 | Mates of State / Douglas Squirrel |
-| 81 | the Broadway voice / the bark + chatter alarm | 81 | Sara Bareilles / Eastern Fox Squirrel |
-| 82 | the acoustic intimacy / the high thin tseet | 82 | Death Cab for Cutie (acoustic) / Northern Flying Squirrel |
-| 83 | the grunge whisper / the ultrasonic + soft chip | 83 | Pearl Jam (acoustic) / Deer Mouse |
-| 84 | the late whisper / the chatter + twig gnaw | 84 | Damien Jurado (late career) / Bushy-tailed Woodrat |
-| 85 | the stripped confession / the quiet plop | 85 | Rocky Votolato (acoustic) / Muskrat |
-| 86 | the electronic pulse / the amplified krek-krek wall of sound | 86 | The Postal Service / Pacific Treefrog |
-| 87 | the emerging twang / the rhythmic chirp field chorus | 87 | Neko Case (early folk) / Cricket Chorus |
-| 88 | the bedroom strum / the continuous electric buzz | 88 | Kimya Dawson (solo) / Katydid |
-| 89 | the baroque whisper / the electric buzzing throb | 89 | Parenthetical Girls / Cicada |
-| 90 | the ambient drift / the bell-like peep chorus | 90 | Sky Cries Mary / Spring Peeper-Like Chorus |
-| 91 | the sustained crush / the ultra-thin hum cloud | 91 | Hovercraft / Mosquito Swarm |
-| 92 | the global weave / the deep resonant buzz | 92 | Trance Mission / Bumblebee Drone |
-| 93 | the shimmer veil / the aggressive papery hum | 93 | NAVVI / Hornet Nest Buzz |
-| 94 | the producer's palette / the wing rustle on stream surface | 94 | Erik Blood / Stonefly Hatch |
-| 95 | the euphoric build / the mass wing buzz over water | 95 | ODESZA / Mayfly Emergence |
-| 96 | the synth-pop pulse / the duck-like clucking chorus | 96 | STRFKR / Wood Frog |
-| 97 | the algorithmic tenderness / the sustained musical purring | 97 | The Postal Service (electronic) / Toad Chorus |
-| 98 | the retro-synthetic shimmer / the pure sustained trill | 98 | Gold Casio / Tree Cricket Song |
-| 99 | the bilingual warmth / the mechanical click | 99 | Kaina / Click Beetle |
-| 100 | the nostalgic cascade / the deep cronk + bell + hollow knock | 100 | Summer Heart / Common Raven |
-| 101 | the kinetic surge / the coordinated duet | 101 | Hecuba / Common Raven Pair |
-| 102 | the organic circuit / the caw caw caw complex | 102 | Campfire OK / American Crow |
-| **103** | **the layered dissolution / the shack-shack-shack raucous alarm** | **103** | **Briana Marela (electronic) / Steller's Jay (raucous)** |
-
-The acoustic progression adds degree 103. On the artist side, the layered dissolution (103) is Briana Marela in electronic context -- voice dissolved into electronic texture, boundary between human and machine becoming permeable. E=3. From the organic circuit (102, warm, breathing, E=4) to the layered dissolution (103, dissolved, textural, E=3). Energy descends further -- the dissolution is quieter than the campfire. On the species side, the shack-shack-shack raucous alarm (103) is the Steller's Jay return -- harsh, penetrating, metallic staccato bursts, the sentinel voice of the conifer forest. E=5. From the caw caw caw complex (102, crow, familiar, E=4) to the shack-shack-shack alarm (103, jay, penetrating, E=5). The Corvidae quartet's acoustic arc: deep cronk (100, E=4), synchronized duet (101, E=5), familiar caw (102, E=4), harsh alarm (103, E=5). The energy oscillates within the family.
-
-## Artist-City Patterns (104 patterns)
-
-| # | Pattern | Degree | Artist |
-|---|---------|--------|--------|
-| 0 | Export | 0 | Quincy Jones |
-| 1 | Draw | 1 | Bill Frisell |
-| 2 | European Exile | 2 | Wayne Horvitz |
-| 3 | The Stay | 3 | Ernestine Anderson |
-| 4 | The Teacher | 4 | Floyd Standifer |
-| 5 | The Persistence | 5 | Overton Berry |
-| 6 | The Erasure | 6 | Patti Bown |
-| 7 | Pedagogue-Draw | 7 | Julian Priester |
-| 8 | The Quiet Draw | 8 | Gary Peacock |
-| 9 | The Seeker | 9 | Hadley Caliman |
-| 10 | Late Homestead | 10 | Bud Shank |
-| 11 | The Salon Keeper | 11 | Joe Brazil |
-| 12 | The Prodigal | 12 | Don Lanphere |
-| 13 | Institutional Anchor | 13 | Marc Seales |
-| 14 | Prodigy-Export | 14 | Aaron Parks |
-| 15 | Builder-Stayer | 15 | Thomas Marriott |
-| 16 | Talent Incubator | 16 | Jeff Lorber |
-| 17 | The Uncategorizable | 17 | Reggie Watts |
-| 18 | The Workshop | 18 | Maktub |
-| 19 | The New Root | 19 | Fly Moon Royale |
-| 20 | The Street Laureate | 20 | Whitney Monge |
-| 21 | The Ensemble Anchor | 21 | Polyrhythmics |
-| 22 | The Inheritor | 22 | Foxy Apollo |
-| 23 | The Rural Draw | 23 | Allen Stone |
-| 24 | The Island Export | 24 | Ron Artis II |
-| 25 | The Cultural Guardian | 25 | Black Stax |
-| 26 | The Transmuter | 26 | Shaina Shepherd |
-| 27 | The Conduit | 27 | The Dynamics |
-| 28 | The Resident Band | 28 | Night Owls |
-| 29 | The Catalog | 29 | Boogaloo Joe Jones |
-| 30 | The Incubation | 30 | Ray Charles |
-| 31 | The Relay | 31 | Brenda Lee Eager |
-| 32 | The Foundation | 32 | Luther Rabb |
-| 33 | The Unrecorded | 33 | Larry English |
-| 34 | The Shadow Name | 34 | The Tempos |
-| 35 | The Deep Root | 35 | Robert Cray |
-| 36 | The Supernova | 36 | Jimi Hendrix |
-| 37 | The Inheritor | 37 | Ayron Jones |
-| 38 | The Touring Anchor | 38 | Booker T. Jones |
-| 39 | The Returning Wave | 39 | Ron Artis Jr |
-| 40 | The Cultural Satellite | 40 | Alice Smith |
-| 41 | The Scene Native | 41 | Shawn Smith |
-| 42 | The Gospel Export | 42 | Erica Campbell |
-| 43 | The Arena Architect | 43 | Ann Wilson |
-| 44 | The Digital Immigrant | 44 | Chong the Nomad |
-| 45 | The Stripped Murmur | 45 | Damien Jurado |
-| 46 | The Confessional Drifter | 46 | Rocky Votolato |
-| 47 | The Sacred Baritone | 47 | Pedro the Lion |
-| 48 | The Campfire Anchor | 48 | Sera Cahoone |
-| 49 | The Trojan Lullabist | 49 | Kimya Dawson |
-| 50 | The Intimate Architect | 50 | Mirah |
-| 51 | The Folk Organism | 51 | Grand Archives |
-| 52 | The Arena Breakout | 52 | Brandi Carlile |
-| 53 | The Prodigy Return | 53 | Fleet Foxes |
-| 54 | The Neighborhood Anchor | 54 | Ivan & Alyosha |
-| 55 | The Infrastructure Beneficiary | 55 | Shelby Earl |
-| 56 | The Duo Collective | 56 | Lemolo |
-| 57 | The Label Bridge | 57 | Laura Gibson |
-| 58 | The Bellingham Ascent | 58 | Death Cab for Cutie |
-| 59 | The Scene Intellectual | 59 | The Long Winters |
-| 60 | The Frontman Alone | 60 | Ben Gibbard (solo) |
-| 61 | The Corridor Bridge | 61 | Y La Bamba |
-| 62 | The Brief Blaze | 62 | Pickwick |
-| 63 | The Everett Departure | 63 | Kenny Loggins |
-| 64 | The Dark-Folk Loner | 64 | Jesse Sykes |
-| 65 | The Montana Connection | 65 | Philip Aaberg |
-| 66 | The Wanderer Who Claims Multiple Cities | 66 | Neko Case |
-| 67 | The Departed Member | 67 | Chris Walla |
-| 68 | The Visiting Artist | 68 | Sam Beam |
-| 69 | The Working Musician | 69 | Kris Orlowski |
-| 70 | The Corridor Wanderer | 70 | Horse Feathers |
-| 71 | The Anacortes Hermit | 71 | Phil Elverum |
-| 72 | The International Student | 72 | Briana Marela |
-| 73 | The K Records Collective | 73 | LAKE |
-| 74 | The Side Project | 74 | Poor Moon |
-| 75 | The Second Anacortes Act | 75 | The Lonely Forest |
-| 76 | The Identity Artist | 76 | Chris Pureka |
-| 77 | The YouTube-to-Artist Pipeline | 77 | Mree |
-| 78 | The Porch Party | 78 | Acid Tongue |
-| 79 | The Dark Meditation | 79 | Jesse Marchant |
-| 80 | The Married Duo | 80 | Mates of State |
-| 81 | The Crossover Arc | 81 | Sara Bareilles |
-| 82 | The Recursive Return | 82 | Death Cab for Cutie (acoustic) |
-| 83 | The Arena Unplugged | 83 | Pearl Jam (acoustic) |
-| 84 | The Artist Arc | 84 | Damien Jurado (late career) |
-| 85 | The Confessional Return | 85 | Rocky Votolato (acoustic) |
-| 86 | The Side Project | 86 | The Postal Service |
-| 87 | The Early Chapter | 87 | Neko Case (early folk) |
-| 88 | The Solo Distillation | 88 | Kimya Dawson (solo) |
-| 89 | The Theatrical Outsider | 89 | Parenthetical Girls |
-| 90 | The Parallel Scene | 90 | Sky Cries Mary |
-| 91 | The Spousal Satellite | 91 | Hovercraft |
-| 92 | The Cross-Pollinator | 92 | Trance Mission |
-| 93 | The Intimate Machine | 93 | NAVVI |
-| 94 | The Cross-Genre Bridge | 94 | Erik Blood |
-| 95 | The Bellingham Pipeline | 95 | ODESZA |
-| 96 | The DIY Maximalist | 96 | STRFKR |
-| 97 | The Re-Contextualized Return | 97 | The Postal Service (electronic) |
-| 98 | The Self-Released Synthesist | 98 | Gold Casio |
-| 99 | The Diasporic Synthesist | 99 | Kaina |
-| 100 | The Transatlantic Dreamer | 100 | Summer Heart |
-| 101 | The Dance Floor Provocateur | 101 | Hecuba |
-| 102 | The Warm Circuiteer | 102 | Campfire OK |
-| **103** | **The Electronic Reframing** | **103** | **Briana Marela (electronic)** |
-
-One hundred and four named patterns across one hundred and four degrees. The Electronic Reframing (103) describes the analytical operation of taking an artist whose primary identity is non-electronic and re-examining them through electronic production techniques. From the Warm Circuiteer (102, organic electronic warmth) to the Electronic Reframing (103, analytical re-examination). The electronic era produces not just new artists but new ways of hearing existing artists.
-
-## Genre Evolution (85 stages)
-
-| Stage | Degree | Genre | Artist |
-|-------|--------|-------|--------|
-| 27 | 45 | Folk | Damien Jurado |
-| 28 | 46 | Folk | Rocky Votolato |
-| 29 | 47 | Indie Folk | Pedro the Lion |
-| 30 | 48 | Folk | Sera Cahoone |
-| 31 | 49 | Folk Punk | Kimya Dawson |
-| 32 | 50 | Indie Folk | Mirah |
-| 33 | 51 | Indie Folk | Grand Archives |
-| 34 | 52 | Folk/Rock | Brandi Carlile |
-| 35 | 53 | Indie Folk | Fleet Foxes |
-| 36 | 54 | Folk | Ivan & Alyosha |
-| 37 | 55 | Singer-Songwriter | Shelby Earl |
-| 38 | 56 | Indie Folk | Lemolo |
-| 39 | 57 | Folk | Laura Gibson |
-| 40 | 58 | Indie Rock | Death Cab for Cutie |
-| 41 | 59 | Indie Rock | The Long Winters |
-| 42 | 60 | Folk | Ben Gibbard (solo) |
-| 43 | 61 | Folk/Indie | Y La Bamba |
-| 44 | 62 | Indie/Folk | Pickwick |
-| 45 | 63 | Soft Rock/Folk | Kenny Loggins |
-| 46 | 64 | Folk | Jesse Sykes |
-| 47 | 65 | New Age/Folk | Philip Aaberg |
-| 48 | 66 | Alt Country | Neko Case |
-| 49 | 67 | Indie/Folk | Chris Walla |
-| 50 | 68 | Folk | Sam Beam |
-| 51 | 69 | Singer-Songwriter | Kris Orlowski |
-| 52 | 70 | Indie Folk | Horse Feathers |
-| 53 | 71 | Indie/Folk | Phil Elverum |
-| 54 | 72 | Art Pop | Briana Marela |
-| 55 | 73 | Indie Pop | LAKE |
-| 56 | 74 | Indie Folk/Rock | Poor Moon |
-| 57 | 75 | Indie Pop | The Lonely Forest |
-| 58 | 76 | Folk | Chris Pureka |
-| 59 | 77 | Folk/Pop | Mree |
-| 60 | 78 | Folk/Indie | Acid Tongue |
-| 61 | 79 | Folk | Jesse Marchant |
-| 62 | 80 | Indie Pop | Mates of State |
-| 63 | 81 | Pop/Soul | Sara Bareilles |
-| 64 | 82 | Indie Folk | Death Cab for Cutie (acoustic) |
-| 65 | 83 | Acoustic Rock | Pearl Jam (acoustic) |
-| 66 | 84 | Folk | Damien Jurado (late career) |
-| 67 | 85 | Folk | Rocky Votolato (acoustic) |
-| 68 | 86 | Indie Electronic | The Postal Service |
-| 69 | 87 | Folk Country | Neko Case (early folk) |
-| 70 | 88 | Lo-Fi Folk | Kimya Dawson (solo) |
-| 71 | 89 | Avant-Pop | Parenthetical Girls |
-| 72 | 90 | Ethereal/Electronic | Sky Cries Mary |
-| 73 | 91 | Drone/Noise | Hovercraft |
-| 74 | 92 | World/Electronic | Trance Mission |
-| 75 | 93 | Dream Pop/Electronic | NAVVI |
-| 76 | 94 | Electronic/Experimental | Erik Blood |
-| 77 | 95 | Electronic | ODESZA |
-| 78 | 96 | Indie Electronic | STRFKR |
-| 79 | 97 | Indie Electronic | The Postal Service (electronic) |
-| 80 | 98 | Indie Electronic | Gold Casio |
-| 81 | 99 | Electronic/R&B | Kaina |
-| 82 | 100 | Electronic Pop | Summer Heart |
-| 83 | 101 | Dance/Electronic | Hecuba |
-| 84 | 102 | Indie Electronic | Campfire OK |
-| **85** | **103** | **Art Pop/Electronic** | **Briana Marela (electronic)** |
-
-Genre Stage 85 -- Art Pop/Electronic at degree 103. Eighty-five genre stages in 103 degrees. Briana Marela's genre classification shifts from Art Pop (72) to Art Pop/Electronic (103) -- the electronic reframing changes the genre classification itself.
-
-## Energy Distribution
-
-**Artist-side (after degree 103):** E1:3 (2.9%), E2:31 (29.8%), E3:28 (26.9%), E4:27 (26.0%), E5:14 (13.5%), E6:2 (1.9%). Total: 104 (degrees 0-103). E=3 gains Briana Marela electronic (103) reaching 28. Energy descends from E=4 (102) to E=3 (103). The dissolution is quiet.
-
-**Species-side (after degree 103):** E=5 for Steller's Jay raucous (103) after American Crow (102, E=4). The Corvidae quartet energy: E=4 (raven), E=5 (raven pair), E=4 (crow), E=5 (jay alarm). Oscillating -- E=4, E=5, E=4, E=5.
-
-## Cross-References (Combined)
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| S36-072 | Briana Marela electronic (103) | Briana Marela (72) | RETURN! Art Pop to electronic reframing. Same practice, different lens. |
-| S36-093 | Briana Marela electronic (103) | NAVVI (93) | ELECTRONIC ATMOSPHERE. Different vocabulary. NAVVI rhythmic. Briana Marela textural. |
-| S36-090 | Briana Marela electronic (103) | Sky Cries Mary (90) | ETHEREAL SPECTRUM. Voice identifiable vs voice dissolved. |
-| S36-088 | Briana Marela electronic (103) | Kimya Dawson solo (88) | RETURN PATTERN. Solo context vs electronic context. Two reframing strategies. |
-| S36-094 | Briana Marela electronic (103) | Erik Blood (94) | ELECTRONIC PRODUCTION. External vs internal. Applied to others vs processing own voice. |
-| SPS-053 | Steller's Jay raucous (103) | Steller's Jay (53) | RETURN! First corvid. 50 degrees. Same species, two voices. |
-| SPS-100 | Steller's Jay raucous (103) | Common Raven (100) | CORVIDAE QUARTET. Deep cronk and harsh alarm. |
-| SPS-102 | Steller's Jay raucous (103) | American Crow (102) | CORVIDAE QUARTET. Caw and alarm. Urban and conifer forest. |
-| SPS-101 | Steller's Jay raucous (103) | Common Raven pair (101) | CORVIDAE QUARTET. Duet and alarm. |
-| SPS-080 | Steller's Jay raucous (103) | Douglas Squirrel (80) | CONIFER CANOPY. Two most common sounds in PNW conifer forests. |
-
-## Infrastructure
-
-**Part A:** `www/tibsfox/com/Research/S36/research/releases/103-briana-marela-electronic/` -- research.md, index.html, knowledge-nodes.json, retrospective.md
-**Part B:** `www/tibsfox/com/Research/SPS/research/releases/103-stellers-jay-raucous/` -- research.md, index.html, knowledge-nodes.json, retrospective.md
-**Release notes:** `docs/release-notes/v1.49.243/README.md`
-
-**Total: 8 files** -- standard degree package.
-
----
+- **The Corvid Quartet — four consecutive Corvidae at 100-103.** Degree 103 extends the **Corvidae** run to **four consecutive degrees**, completing the **Corvid Quartet**. At **degree 100**, the **Common Raven** (*Corvus corax*) introduced the family in full after the Steller's Jay's initial introduction at degree 53. At **degree 101**, the **Common Raven pair** extended the raven into a species-pair coordinated duet. At **degree 102**, the **American Crow** (*Corvus brachyrhynchos*) introduced a new species within the same genus *Corvus*. At **degree 103**, the **Steller's Jay** (*Cyanocitta stelleri*) returns as the **FIRST CORVID** to complete the quartet. **Four consecutive same-family degrees** — the longest same-family run on the species side of the engine. The quartet's energy oscillates: **E=4** (raven), **E=5** (raven pair), **E=4** (crow), **E=5** (jay alarm) — a two-beat pattern that the quartet's structure itself produces.
+- **The first corvid returns — 50 degrees between entries.** At **degree 53**, the **Steller's Jay** was the engine's **FIRST CORVID** — the founding member of the Corvidae family, the vocal generalist with mimicry, complex social calls, and varied vocalizations at **E=3**. At **degree 103**, the jay returns within the Corvid Quartet that its original entry made possible. **50 degrees between entries**, the longest species-return gap the engine has produced. The structural resonance is deep: the family's founder returns at the family's completion. The Jay introduced Corvidae; the Quartet declares it; the Jay completes it.
+- **From vocal generalist to sentinel specialist — the reframing.** At **degree 53**, the Steller's Jay was heard as the vocal generalist — mimicry, complex social calls, varied vocalizations (E=3). At **degree 103**, the engine reframes through raucous-alarm context. The analytical lens narrows from the full repertoire to a single vocalization: the **shack-shack-shack alarm call**. The jay becomes the sentinel specialist — not in the sense that the original entry was wrong but in the sense that the jay is rich enough to support multiple analytical framings.
+- **The shack-shack-shack alarm — acoustic detail.** **Harsh, rasping, metallic staccato bursts.** Series of **3–8 rapid harsh notes**, each **0.1 to 0.2 seconds**. **Broad-spectrum** centered at **2,500–4,000 Hz**. **Rate**: 4 to 8 notes per second, increasing with threat proximity. **Volume**: one of the loudest sounds in the conifer forest. **E=5** — maximum alarm projection concentrated in one penetrating signal.
+- **Sentinel function — community broadcast beyond the jay.** **Community broadcast**: other species respond to jay alarms as reliable predator warnings across the conifer forest canopy. **Multi-level protocol**: different alarm patterns signal aerial versus terrestrial threats, allowing listeners to distinguish the appropriate response. **Mobbing behavior**: the alarm draws conspecifics and other species to gather and harass predators, turning a single warning signal into a coordinated defensive response. **Hawk mimicry as deception**: the jay can produce false alarms or hawk-call mimicry to scatter competitors from food sources, using the alarm channel strategically. The jay's alarm is a community infrastructure, not a private signal.
+- **The loudest voice in the Corvid Quartet.** The **Jay** is the loudest and harshest voice in the Corvid Quartet. The **Raven** is resonant and deep (E=4). The **Raven pair** is coordinated and synchronized (E=5). The **Crow** is sharp but moderate (E=4). The **Jay** is penetrating and extreme (E=5). The quartet's acoustic range spans from the raven's 200–800 Hz deep cronk to the jay's 2,500–4,000 Hz penetrating alarm — a frequency span of an order of magnitude covered by a single family in four consecutive degrees.
+- **Conifer forest habitat — the dominant canopy corvid.** **Douglas fir**, **western red cedar**, **western hemlock**, **Sitka spruce** — the Pacific Northwest conifer belt. Year-round resident throughout the PNW conifer belt. Shares the canopy with the **Douglas Squirrel** (degree 80); the jay and the squirrel together produce the two most common sounds in Pacific Northwest conifer forests.
+- **Energy jump from E=3 to E=5 — maximum alarm projection.** The energy jump reflects the shift from **variety** (moderate energy distributed across many call types at degree 53) to **alarm** (maximum energy concentrated in one penetrating signal at degree 103). The same species inhabits two energy tiers depending on which vocalization the engine foregrounds.
+- **Forty-third consecutive original CSV.** The Steller's Jay raucous return continues the engine's longest unbroken reliability streak: **43 consecutive original CSV species** from degree 61 to degree 103, uninterrupted by substitution or correction. The reliability streak is now a defining characteristic of the engine's source catalog.
 
 ## Retrospective
 
-**What Worked:**
-1. The double return is the strongest structural event of degree 103 -- both Part A and Part B revisiting previous entries through new lenses. This has not happened before in the engine
-2. The Steller's Jay returning within the Corvidae quartet creates narrative resonance -- the FIRST CORVID (53) joins the family cluster at 103, 50 degrees later
-3. The energy contrast between Part A (E=3) and Part B (E=5) is the widest gap in recent degrees -- the dissolution whispers while the alarm screams
-4. The electronic reframing as an artist-city pattern formalizes a structural tool -- the engine can re-examine any artist through a different analytical lens
-5. Fourth consecutive Corvidae extends the unprecedented family run without repetition -- each corvid covers a different ecological niche and acoustic character
+### What Worked
 
-**What Could Be Better:**
-1. Four consecutive Corvidae may feel excessive to some -- the corvid dominance is striking but could risk monotony
-2. Still no raptor, no marine species in 104 entries
+- **The double return is a genuine engine first.** Both Part A and Part B are return entries, synchronized at the same degree. This has not happened before in the engine, and the move expands the engine's pairing vocabulary substantially — from this degree forward, any future degree can in principle be a double return where both halves have eligible return candidates.
+- **The Steller's Jay returning within the Corvid Quartet creates narrative resonance.** The first corvid at degree 53 returns to complete the quartet at degree 103, fifty degrees later. The family's founder returns at the family's completion. The structural resonance is the deepest the species side has produced within a four-degree same-family run.
+- **Maximum energy contrast (E=3 vs E=5) is deliberately paired.** The dissolution whispers; the alarm screams. The widest Part A / Part B energy gap in recent degrees is not accidental — the engine is choosing to pair opposites as deliberately as it chooses to pair matches.
+- **The electronic reframing as an artist-city pattern formalizes a structural tool.** The engine can now re-examine any artist through a different analytical lens and name that operation as "The Electronic Reframing" (or a future analogous pattern for different lenses). The pattern's formalization makes the move reusable.
+- **Fourth consecutive Corvidae extends without repetition.** Each corvid occupies a different ecological niche and acoustic character: raven (open forest, deep cronk, solo), raven pair (open forest, coordinated duet), crow (everywhere, caw complex, social), jay (conifer canopy, harsh alarm, sentinel). Geographic and ecological differentiation prevents repetition even within a single family.
+- **Energy oscillation within the quartet (E=4, E=5, E=4, E=5) is itself a structural feature.** The two-beat pattern is produced by the species selection, not imposed on it. The oscillation gives the quartet internal rhythm that four same-energy degrees would not have.
+- **Genre Stage 85 lands as a hybrid rather than a new category.** **Art Pop/Electronic** is the engine's first explicit hybrid genre stage driven by a return-with-reframing. The hybrid acknowledges both the original classification (Art Pop at 72) and the new analytical lens (Electronic at 103), preserving the engine's history while extending it.
+- **The layered dissolution names a specific acoustic operation.** Voice-becoming-electronic at density threshold is now a named element in the engine's acoustic vocabulary. Future species or artist entries that cross similar thresholds can be compared directly.
+- **Forty-third consecutive original CSV continues reliability.** The reliability streak is now three degrees past the centennial and extending. Each new degree that holds the streak increases the engine's confidence in the source catalog's depth.
+
+### What Could Be Better
+
+- **Four consecutive Corvidae may feel excessive.** The corvid dominance is structurally motivated but could risk monotony for readers who prefer taxonomic variety across short windows. The engine did not choose to intercalate a non-corvid between the raven pair (101) and the crow (102), which could have eased the density.
+- **Still no raptor and no marine species in 104 entries.** The Pacific Northwest's raptor families (Accipitridae, Falconidae, Strigidae, Tytonidae) remain absent, and the PNW marine ecosystem (Salish Sea, Olympic Coast, Puget Sound proper) remains unrepresented. Both gaps persist across the centennial, across the Corvid Quartet, and into the post-quartet degrees.
+- **The electronic reframing is now consolidated but the future application is undefined.** The pattern exists in the engine's vocabulary but the engine has not committed to which artists will next receive the reframing treatment. Without a planned future application, the pattern risks becoming a label rather than a recurring structural move.
+- **The energy gap (E=3 vs E=5) is wider than needed for the narrative.** The dissolution-and-alarm contrast is already carried by the acoustic descriptions; the energy numbers exceed the narrative need and could mislead readers into thinking energy is the primary frame for the degree when it is secondary to the double return.
+- **Briana Marela's electronic practice could be cataloged track-by-track.** The analytical reframing at degree 103 is structural rather than empirical — specific releases, individual tracks, and year-by-year evolution of her electronic processing were treated structurally. A track-level analysis could be a future research artifact.
 
 ## Lessons Learned
 
-1. Double returns (both sides revisiting previous entries) create the strongest possible thematic coherence within a degree -- return as the unifying structural event
-2. Return entries with energy changes (E=2 to E=3 for Briana Marela, E=3 to E=5 for Steller's Jay) demonstrate that the same subject can occupy different positions in the energy spectrum depending on analytical framing
-3. The electronic reframing as a sustained pattern (Postal Service 97, Briana Marela 103) establishes that the electronic era is not just discovering new artists but revealing electronic dimensions of existing artists
-4. Four consecutive Corvidae works because each species occupies a different niche -- raven (open forest), crow (everywhere), jay (conifer canopy). Geographic and ecological differentiation prevents repetition even within a single family
+1. **Double returns are a bilateral structural move, not just a Part A option.** When both Part A and Part B are return entries synchronized at the same degree, the engine's vocabulary for what a "return" can mean expands by a factor of two. Future engine planning can deliberately target double-return degrees at counter-milestones (105, 110, 125, 150) where both sides have eligible return candidates, rather than treating returns as single-side events.
+2. **Return with reframing is not repetition; it is analytical depth.** The same subject — the same artist, the same species — can support multiple analytical framings without contradiction. Briana Marela as Art Pop (72) and as Art Pop/Electronic (103) are both valid. Steller's Jay as vocal generalist (53) and as sentinel specialist (103) are both valid. Return entries that change the analytical lens reveal new dimensions rather than revisiting old ones.
+3. **Energy changes at return entries are themselves structural data.** Briana Marela's E=2 (72) to E=3 (103) and Steller's Jay's E=3 (53) to E=5 (103) demonstrate that the same subject can occupy different positions in the energy spectrum depending on analytical framing. Future species and artist returns should note both the original energy and the reframed energy as structural markers.
+4. **The electronic reframing is a sustained pattern, not a one-off.** Postal Service electronic (97) and Briana Marela electronic (103) together establish that the electronic era is not just discovering new artists but revealing electronic dimensions of existing artists. The pattern's recurrence across two artists at a six-degree separation makes it a reusable engine move rather than an incidental note.
+5. **Four consecutive same-family degrees work when each member occupies a different niche.** The Corvid Quartet (100-103) works because raven, raven pair, crow, and jay each cover a different ecological niche and acoustic character. Geographic differentiation (open forest, open forest pair, everywhere, conifer canopy) and acoustic differentiation (deep cronk, coordinated duet, caw complex, harsh alarm) prevent repetition even within a single family.
+6. **Maximum energy contrast as a pairing strategy is as deliberate as matched energy.** The centennial (degree 100) paired both halves at E=4 for matched-energy effect. Degree 103 pairs E=3 and E=5 for maximum-contrast effect. Both strategies are intentional engine moves, and the engine's pairing logic is richer than simple energy matching.
+7. **Genre hybrids (Art Pop/Electronic) can emerge from returns rather than from new artists.** Genre Stage 85 is a hybrid classification produced by a return-with-reframing rather than by a first-time artist introducing a new genre. The engine's genre vocabulary is extensible through return moves, not only through initial introductions.
+8. **Community-broadcast acoustic elements deserve their own category.** The Steller's Jay's shack-shack-shack alarm functions as infrastructure for the entire conifer-forest community, not as a private signal. Future species entries whose acoustic elements serve as community signals (alarm calls, mobbing calls, mate attraction calls that transcend species boundaries) should be flagged as such in the engine's acoustic-element vocabulary.
+9. **The 50-degree species-return gap sets a long-horizon benchmark.** The Steller's Jay's 50-degree gap between degree 53 and degree 103 is the longest species-return gap in the engine. Future species returns can be planned against this benchmark; gaps shorter than 30 degrees may feel hasty, gaps longer than 75 may strain continuity.
+10. **Consolidation at the centennial-region degrees deepens the engine's vocabulary.** Degrees 100–103 together consolidate: the centennial (100), the species-pair return (101), the same-genus extension (102), and the double return with family completion (103). The centennial region is not only a count milestone; it is a vocabulary-building zone in which the engine's structural tools get formalized.
 
----
+## Cross-References
 
-The layered dissolution and the raucous alarm. Degree 103 is the double return.
+| Connection | From | To | Nature |
+|------------|------|-----|--------|
+| S36-072 | Briana Marela electronic (103) | Briana Marela (72) | **RETURN**. Art Pop at 72 reframed as Art Pop/Electronic at 103. Same practice, different analytical lens. Voice as primary instrument vs voice as electronic material. E=2 to E=3 energy rise. 31 degrees between entries. |
+| S36-093 | Briana Marela electronic (103) | NAVVI (93) | ELECTRONIC ATMOSPHERE. Both electronic entries with voice elements. NAVVI rhythmic and atmospheric with voice identifiable. Briana Marela textural with voice dissolved. Different electronic vocabularies. |
+| S36-090 | Briana Marela electronic (103) | Sky Cries Mary (90) | ETHEREAL SPECTRUM. Sky Cries Mary atmospheric with voice identifiable. Briana Marela dissolution with voice erased. The dissolution goes further than the ethereal wash. |
+| S36-088 | Briana Marela electronic (103) | Kimya Dawson solo (88) | RETURN PATTERN. Dawson returned in solo context (format reduction). Marela returns in electronic context (analytical reframing). Two reframing strategies within the engine's return practice. |
+| S36-097 | Briana Marela electronic (103) | The Postal Service electronic (97) | **ELECTRONIC REFRAMING LINEAGE**. The Postal Service electronic introduced the re-contextualized return at 97 as an indie-rock project reheard as indie-electronic. Briana Marela consolidates the pattern at 103 as Art Pop reheard as Art Pop/Electronic. The pattern is now formalized as "The Electronic Reframing." |
+| S36-094 | Briana Marela electronic (103) | Erik Blood (94) | ELECTRONIC PRODUCTION. Blood's production is external (applied to other artists). Marela's production is internal (processing her own voice). External vs internal production practices within the same electronic era. |
+| S36-102 | Briana Marela electronic (103) | Campfire OK (102) | ELECTRONIC ERA ADJACENCY. Campfire OK is organic warmth (warm synthesis, breathing textures, E=4). Marela is dissolved texture (processed layers, permeable boundary, E=3). Different electronic vocabularies on consecutive degrees. |
+| S36-072-pattern | Briana Marela electronic (103) | The International Student (72) | ARTIST-CITY PATTERN EVOLUTION. Marela's original pattern was The International Student (72, biographical). At 103, the pattern is The Electronic Reframing (analytical operation). The engine's patterns can now name both origin and hearing. |
+| SPS-053 | Steller's Jay raucous (103) | Steller's Jay (53) | **RETURN — FIRST CORVID**. 50 degrees between entries, longest species-return gap in engine. Same species, two voices. Vocal generalist to sentinel specialist. E=3 to E=5. The family's founder returns at the family's completion. |
+| SPS-100 | Steller's Jay raucous (103) | Common Raven (100) | **CORVID QUARTET**. Deep cronk at the centennial starts the quartet. Harsh alarm at 103 completes it. E=4 to E=5. Largest passerine to conifer sentinel. |
+| SPS-101 | Steller's Jay raucous (103) | Common Raven pair (101) | **CORVID QUARTET**. Coordinated duet (E=5) and harsh alarm (E=5). Both at maximum energy. Pair-bonding context vs predator-alert context. |
+| SPS-102 | Steller's Jay raucous (103) | American Crow (102) | **CORVID QUARTET**. Caw complex (E=4, social, urban) and harsh alarm (E=5, sentinel, conifer forest). Complementary niches within Corvidae. |
+| SPS-080 | Steller's Jay raucous (103) | Douglas Squirrel (80) | CONIFER CANOPY NEIGHBORS. Two most common sounds in PNW conifer forests. Jay in the canopy, squirrel in the canopy. Both territorial, both vocal, both year-round. |
+| SPS-004 | Steller's Jay raucous (103) | Northern Spotted Owl (4) | FOREST BIRDS OF OPPOSITE POSTURE. Owl silent nocturnal predator in old-growth forest (E=3). Jay diurnal vocal sentinel in conifer forest (E=5). Complementary Aves presences in PNW forest ecosystems. |
+| RES-corvid-intelligence | Steller's Jay raucous (103) | Corvidae cognitive research | PROJECT CONNECTION. The Corvid Quartet taken together represents the engine's deepest documentation of avian intelligence — tool use, problem-solving, future planning, cultural transmission, cache management, and community-level alarm signaling across four consecutive degrees. |
+| RES-pnw-conifer-forest | Steller's Jay raucous (103) | PNW conifer ecosystem | ECOSYSTEM CONNECTION. The jay is the dominant corvid of the Douglas fir / western red cedar / western hemlock / Sitka spruce belt. The engine's conifer-forest documentation now includes the primary sentinel species. |
 
-On the music side, Briana Marela returns from degree 72 as the sixth return artist, reframed in electronic context. Art Pop/Electronic. Genre Stage 85. The layered dissolution is the 104th acoustic element -- voice dissolved into electronic texture, the boundary between human and machine becoming permeable. The electronic reframing is the 104th artist-city pattern. E=3.
+## Engine Position
 
-On the species side, the Steller's Jay returns from degree 53 -- the FIRST CORVID -- reframed in raucous-alarm context. Shack-shack-shack. E=5. Harsh, penetrating, the sentinel voice of the conifer forest. Fourth consecutive Corvidae. The founding corvid joins the family quartet. 50 degrees later, the jay comes home.
+- **Degree 103 of 360 — 28.6% of the circle traversed.** The engine's thirteenth degree of Quadrant II and the centennial+3 consolidation degree.
+- **Triple-digit counters tick to 104 (artist-side acoustic elements), 103 (species-side acoustic elements), and 104 (artist-city patterns).** The layered dissolution is the 104th artist-side acoustic element. The shack-shack-shack raucous alarm is the 103rd species-side acoustic element. The Electronic Reframing is the 104th artist-city pattern.
+- **GENRE STAGE 85 — Art Pop/Electronic.** Eighty-five genre stages in 103 degrees (0.82 stages per degree). First hybrid genre stage produced by a return-with-reframing.
+- **SIXTH RETURN ARTIST in the engine.** Briana Marela (electronic) joins Death Cab for Cutie (acoustic) 82, Pearl Jam (acoustic) 83, Damien Jurado (late career) 84, Rocky Votolato (acoustic) 85, Neko Case (early folk) 87, and Kimya Dawson (solo) 88 in the return-artist ledger, with The Postal Service (electronic) 97 counted as the seventh return by alternate numbering.
+- **CORVID QUARTET COMPLETE — four consecutive Corvidae at 100-103.** Common Raven (100), Common Raven pair (101), American Crow (102), Steller's Jay (103). Longest same-family run on the species side. Energy oscillation E=4, E=5, E=4, E=5.
+- **DOUBLE RETURN — first time for the engine.** Both Part A and Part B are return entries synchronized at the same degree. Previous returns were always paired with a new entry on the other side.
+- **50-DEGREE SPECIES-RETURN GAP.** Steller's Jay returns from degree 53 to degree 103. Longest species-return gap the engine has produced.
+- **MAXIMUM ENERGY GAP — E=3 vs E=5.** The widest Part A / Part B energy contrast in the recent degrees leading into and out of the centennial. Deliberate pairing by contrast rather than by match.
+- **FORTY-THIRD CONSECUTIVE ORIGINAL CSV.** Degrees 61–103 without substitution or correction. Longest unbroken reliability streak in the engine's history continues to extend.
+- **Energy distribution after degree 103 (artist-side):** E1:3 (2.9%), E2:31 (29.8%), E3:28 (26.9%), E4:27 (26.0%), E5:14 (13.5%), E6:2 (1.9%). Total: 104 entries (degrees 0–103 inclusive). E=3 gains Briana Marela (electronic) to reach 28 deployments.
+- **Energy distribution within the Corvid Quartet (species-side):** E=4 (raven 100), E=5 (raven pair 101), E=4 (crow 102), E=5 (jay alarm 103). Two-beat oscillation pattern.
+- **Four classes represented:** Aves, Mammalia, Insecta, Amphibia. Seventeen-plus orders. Forty-nine families with Corvidae now present across four consecutive degrees.
+- **Outstanding gaps:** Zero raptors in 104 entries (since before degree 90); zero marine species in 104 entries (none since the engine began); the PNW marine ecosystem (Salish Sea, Olympic Coast, Puget Sound proper) remains unrepresented.
 
-Both returns. Both reframings. The dissolution whispers (E=3). The alarm screams (E=5). The same subjects heard through new lenses.
+## Files
 
-*Degree 103. Double return. A looped voice stacks and dissolves -- layers of human breath processed into electronic atmosphere, the boundary between singer and synthesizer collapsing into texture. E=3. The dissolution is quiet. Meanwhile, in the conifer canopy: SHACK-SHACK-SHACK-SHACK. Harsh, metallic, penetrating. The Steller's Jay alarm cuts through the forest like a blade. E=5. The first corvid, returned. 50 degrees later. The same subjects, different voices. The dissolution and the alarm. The whisper and the scream. Both returns. Both reframings. The engine deepens by looking again.*
+- `docs/release-notes/v1.49.243/README.md` (this file, rewritten to A-grade per the PROSE rubric)
+- `docs/release-notes/v1.49.243/chapter/00-summary.md` — derived summary
+- `docs/release-notes/v1.49.243/chapter/03-retrospective.md` — retrospective
+- `docs/release-notes/v1.49.243/chapter/04-lessons.md` — extracted lessons (4 entries)
+- `docs/release-notes/v1.49.243/chapter/99-context.md` — context
+- `www/tibsfox/com/Research/S36/research/releases/103-briana-marela-electronic/` — research.md, index.html, knowledge-nodes.json, retrospective.md (Part A research, integrated inline)
+- `www/tibsfox/com/Research/SPS/research/releases/103-stellers-jay-raucous/` — research.md, index.html, knowledge-nodes.json, retrospective.md (Part B research, integrated inline)
 
-</details>
+Total: 1 file in commit `c34d0d9c0e23a4acdf358ee0fa9e0b65298f42d5` (release note consolidates all research inline; research artifact directories are referenced for downstream tooling).
