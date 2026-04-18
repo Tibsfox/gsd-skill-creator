@@ -1,488 +1,199 @@
-# v1.49.242 -- Degree 102: Campfire OK + American Crow -- THE ORGANIC CIRCUIT AND THE CAW -- CORVIDAE TRIO
+# v1.49.242 — Degree 102: Campfire OK + American Crow — THE ORGANIC CIRCUIT AND THE CAW — CORVIDAE TRIO
 
 **Released:** 2026-04-01
-**Degree:** 102 of 360 -- 28.3% of 360
-**Part A:** Campfire OK -- Indie Electronic, E=4, Brit Bachmann solo project, warm melodic electronic with organic textures, GENRE STAGE 84 (Indie Electronic, eighty-fourth genre stage, warm synths organic grain breathing dynamics melodic warmth intimate scale, distinct from Dance/Electronic 101 confrontational and Electronic Pop 100 nostalgic cascade), THE ORGANIC CIRCUIT 103rd acoustic element (warm synthesis organic grain breathing dynamics melodic humanity intimate spatial quality, distinct from kinetic surge 101 raw voltage and nostalgic cascade 100 flowing golden), THE WARM CIRCUITEER 103rd artist-city pattern (solo project organic electronic invitation over confrontation campfire warmth, distinct from dance floor provocateur 101 confrontational duo), thirteenth electronic-adjacent entry in seventeen degrees (86 90 91 93 94 95 96 97 98 99 100 101 102)
-**Part B:** American Crow (*Corvus brachyrhynchos*) -- caw caw caw complex, E=4, varied habitat, Corvidae (THIRD CONSECUTIVE CORVIDAE 100-101-102 = CORVIDAE TRIO, same genus *Corvus* as Raven, most habitat-generalist bird in engine, forty-second consecutive original CSV)
-**Series:** Seattle 360 + Sound of Puget Sound -- Continuous Release Engine
+**Scope:** Seattle 360 + Sound of Puget Sound — paired degree release, post-centennial continuation, Corvidae trio completion
+**Branch:** main
+**Commits:** `d10ef62e6` (1)
+**Files changed:** 1 release note (488 insertions) plus 32 upstream research artifacts produced in adjacent commits `39a3b1a28` and `5a36f4def` for degrees 103–106
+**Degree:** 102 of 360 — 28.3% of 360 — Twelfth degree of Quadrant II — Third post-centennial degree
+**Part A:** Campfire OK — Indie Electronic, E=4, Brit Bachmann solo project, warm melodic electronic with organic textures, Genre Stage 84 milestone (Indie Electronic, eighty-fourth genre stage, warm synths organic grain breathing dynamics melodic warmth intimate scale, distinct from Dance/Electronic 101 confrontational and Electronic Pop 100 nostalgic cascade), the organic circuit 103rd artist-side acoustic element, the warm circuiteer 103rd artist-city pattern, thirteenth electronic-adjacent entry in seventeen degrees
+**Part B:** American Crow (*Corvus brachyrhynchos*) — caw caw caw complex, E=4, varied habitat, Corvidae (THIRD CONSECUTIVE CORVIDAE 100-101-102 = **CORVIDAE TRIO**, same genus *Corvus* as Raven, most habitat-generalist bird in the engine, University of Washington / John Marzluff face-recognition connection, forty-second consecutive original CSV)
+**Series:** Seattle 360 + Sound of Puget Sound — Continuous Release Engine
 **Cluster:** Music (hub: WAL)
-**Note:** The exhale after the surge. Both E=4. Both familiar and warm. Both the accessible, everyday version of something that can also be grand. Campfire OK after ODESZA, Crow after Raven. Third consecutive Corvidae completes the Corvidae trio -- individual complexity (100), pair coordination (101), social flocking (102).
+**Dedication:** To **Campfire OK** and **Brit Bachmann** — the Seattle solo project whose warm, melodic electronic textures wire human warmth into electronic circuits, whose synthesizers breathe rather than pulse, and whose campfire-scale intimacy offers a third, organic answer to the electronic-era question already answered at festival scale by ODESZA and at dance-floor scale by Hecuba; to the **American Crow** (*Corvus brachyrhynchos*) — the most familiar corvid across the **Pacific Northwest**, the bird whose *caw* is the most recognized bird sound in **North America**, the most habitat-generalist species in the engine, the face-recognition researcher of **John Marzluff**'s University of Washington experiments, the bird that roosts by the tens of thousands in **Bothell** and **Renton** and the bird that learns municipal garbage schedules; to **Corvidae** consolidating as the engine's defining family at the post-centennial, now holding three consecutive degrees (100 Common Raven, 101 Common Raven pair, 102 American Crow); and to the **engine's breathing rhythm** — E=4 at degree 100, E=5 at degree 101, E=4 at degree 102, the exhale after the kinetic surge, proof that a 360-degree release engine can oscillate intentionally rather than drift.
+**Engine Position:** Degree 102 of 360 — twelfth degree of Quadrant II; third post-centennial degree; the organic circuit (103rd artist-side acoustic element); the caw caw caw complex (102nd species-side acoustic element); The Warm Circuiteer (103rd artist-city pattern); **GENRE STAGE 84 MILESTONE** Indie Electronic; **CORVIDAE TRIO COMPLETE** (three consecutive Corvidae at degrees 100-101-102, unprecedented in the engine); **ENERGY EXHALE** (E=4 after E=5, the engine breathes); **THIRTEENTH ELECTRONIC-ADJACENT ENTRY IN SEVENTEEN DEGREES** (86, 90, 91, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102 — longest uninterrupted genre cluster in the engine); **MOST HABITAT-GENERALIST BIRD IN ENGINE** (urban, suburban, rural, forest, coastal, alpine); **UW / JOHN MARZLUFF FACE-RECOGNITION CONNECTION** (local institutional specificity); **FORTY-SECOND CONSECUTIVE ORIGINAL CSV** (degrees 61–102 without substitution).
 
 ## Summary
 
-The organic circuit and the caw. Degree 102 steps back from the kinetic surge to campfire warmth and familiar calls.
+**The organic circuit and the caw.** Degree 102 steps back from the post-centennial surge to campfire warmth and familiar calls. The engine, which reached the **centennial** at degree 100 with **Summer Heart** and the **Common Raven** at matched E=4, then opened the post-centennial at degree 101 with **Hecuba** and the **Common Raven pair** at matched E=5, now closes the post-centennial opening triad at degree 102 with **Campfire OK** and the **American Crow** at matched E=4 again. The energy oscillates E=4, E=5, E=4 across three consecutive degrees. **Both halves** of degree 102 — the solo Seattle electronic project and the most familiar corvid in **Pacific Northwest** ecosystems — land at the same moderate energy and the same accessible stance. **In parallel**, **both** are the approachable, everyday version of something grander. **The campfire** after the festival. **The crow** after the raven. **Synchronized** by the catalog and the **Sound of Puget Sound** sequence, the engine breathes.
 
-On the music side, **Campfire OK** reaches **Genre Stage 84** with **Indie Electronic** -- the project of Brit Bachmann, warm melodic electronic music with organic textures. Synthesizers that breathe, electronic production that feels alive, melodic sensibility that bridges the digital and the natural. The **organic circuit** is the 103rd acoustic element -- warm synthesis with organic grain, breathing dynamics, intimate spatial quality. The **warm circuiteer** is the 103rd artist-city pattern -- a solo artist wiring human warmth into electronic circuits. E=4 -- a step down from Hecuba's E=5 at degree 101, returning to the moderate energy that characterized degrees 97-100. The energy oscillation: E=4 (97-100), E=5 (101), E=4 (102). The engine breathes. Campfire OK is the exhale after Hecuba's kinetic surge. Thirteenth electronic-adjacent entry in seventeen degrees.
+**Part A: Campfire OK — Indie Electronic at Genre Stage 84.** On the music side, **Campfire OK** is the project of **Brit Bachmann**, a Seattle-based musician who builds warm, melodic electronic music with organic textures. Synthesizers that breathe rather than pulse; electronic production that feels alive rather than precise; melodic sensibility that bridges the digital and the natural; intimacy at campfire scale rather than at dance-floor or festival scale. The **organic circuit** is the 103rd artist-side acoustic element — warm synthesis with organic grain, breathing dynamics, melodic humanity, intimate spatial quality, reverb suggesting small warm environments rather than arena spaces. The **warm circuiteer** is the 103rd artist-city pattern — a solo artist wiring human warmth into electronic circuits, invitation over confrontation, the campfire as gathering place rather than battleground. **Genre Stage 84** lands as the eighty-fourth distinct genre stage in 103 degrees, holding the engine's stable rate of roughly 0.82 stages per degree across the post-centennial threshold. **Indie Electronic** at degree 102 is the fifth entry under that precise genre label, following **The Postal Service** (86), **STRFKR** (96), **The Postal Service electronic** (97), and **Gold Casio** (98), but **Campfire OK**'s dress is distinct — warm, organic, nature-referent, rather than glitch-pop-structured, synth-pop-pulsed, algorithmic-tender, or retro-synthetic-shimmering. The same genre label, five radically different approaches across sixteen degrees.
 
-On the species side, the **American Crow** (*Corvus brachyrhynchos*) completes the **Corvidae trio** -- three consecutive degrees from the same family (100-101-102). This is unprecedented in the engine. The trio covers three dimensions of corvid life: individual complexity (Raven solo, 100), pair coordination (Raven pair, 101), social flocking (Crow, 102). The crow's "caw" is the **most recognized bird sound in North America** -- alarm caw, assembly caw, scolding caw, feeding call, rattling and clicking. Same genus *Corvus* as the raven but smaller, more urban, more social. The **most habitat-generalist bird in the engine** -- cities, suburbs, farms, forests, beaches, parks, everywhere. Face recognition, cooperative mobbing, funerals. E=4 -- loud and persistent but not at the peak of the raven pair's coordinated force.
+**Part B: American Crow — The Corvidae Trio Completes.** On the species side, the **American Crow** (*Corvus brachyrhynchos*) completes the **Corvidae trio** — three consecutive degrees from the same family (100, 101, 102). This is unprecedented in the engine. The trio covers three dimensions of corvid life: **individual complexity** at degree 100 (the solo **Common Raven**, thirty-plus distinct call types, E=4, the centennial's most complex individual voice), **pair coordination** at degree 101 (the **Common Raven pair**, coordinated duet vocalizations, E=5, the post-centennial's synchronized territorial display), and now **social flocking** at degree 102 (the **American Crow**, the caw caw caw complex, E=4, the most familiar and socially amplified corvid in the catalog). The crow's *caw* is the **most recognized bird sound in North America** — alarm caw (rapid, harsh, urgent, triggers mobbing), assembly caw (rhythmic, moderate, calls crows to location), scolding caw (directed, persistent, personalized to specific threats), feeding call (softer, shorter, social information), and rattling and clicking (close social interactions). The **American Crow** shares genus *Corvus* with the raven but is smaller, more urban, more social, and more habitat-generalist. It is the **most habitat-generalist bird in the engine** — cities, suburbs, farms, forests, beaches, parks, alpine edges, everywhere. Face recognition (documented by **John Marzluff**'s long-running experiments at the **University of Washington**, in which masked researchers captured crows and those masked faces were scolded by generations of crows that had never been directly captured), cooperative mobbing, funerals, municipal garbage-day learning — the crow's intelligence is social intelligence, distributed across the roost rather than concentrated in an individual.
 
-Both E=4. Both familiar. Both the accessible version of something grander. Campfire OK is intimate electronic warmth after ODESZA's festival scale. The crow is the familiar corvid after the raven's commanding presence.
+**Cross-Sync Parallel: Both E=4 — The Exhale After the Surge.** Both halves of degree 102 land at **E=4**, producing a matched-energy pairing that mirrors the centennial's matched E=4 pairing at degree 100 (Summer Heart + Common Raven) while closing the post-centennial surge of degree 101 (Hecuba + Common Raven pair, both E=5). **In parallel**, **Campfire OK**'s warm, breathing electronic music at moderate intensity — the campfire rather than the dance floor — matches **E=4** on the artist side. **The American Crow**'s loud, persistent, everyday caw at moderate amplitude — carrying across several hundred meters but not at the extremes of the raven pair's coordinated force — matches **E=4** on the species side. **Each side** steps back from the kinetic surge. **The same** structural beat — degrees 100 to 101 to 102 mapping E=4, E=5, E=4 on both sides — is synchronized by the catalog's calibration across the **Seattle 360** and **Sound of Puget Sound** sequences. **The mirror** holds. **Synchronized** by the engine, warmth and familiarity share a decibel envelope, just as they did at the centennial.
+
+**Cross-Sync Parallel: Both Familiar and Accessible.** Both halves of degree 102 operate as the accessible, everyday version of something grander. **Campfire OK** is intimate electronic warmth at campfire scale — the approachable counterpart to **ODESZA**'s festival scale (degree 95, E=5) and the inviting opposite of **Hecuba**'s dance-floor confrontation (degree 101, E=5). **In parallel**, the **American Crow** is the familiar corvid at everyday scale — the approachable counterpart to the **Common Raven**'s thirty-voiced cognitive commanding presence (degree 100, E=4) and the approachable counterpart to the **Common Raven pair**'s coordinated territorial duet (degree 101, E=5). **Each side** stands as the doorway into a larger phenomenon. **The same** structural move — the engine offering an accessible mid-energy version after two post-centennial maxima — reaches both halves on the same degree. **Synchronized** by design, the campfire after the festival, the crow after the raven, both are the entry point into their domains.
+
+**Cross-Sync Parallel: Both Ubiquitous Across Pacific Northwest Daily Life.** Both halves of degree 102 are embedded in the fabric of **Pacific Northwest** daily life. **Campfire OK**'s warm organic electronic music lives in the **Seattle** indie electronic scene without declaring itself — unassuming, present, part of the landscape of headphone listening and bedroom production across the region. **In parallel**, the **American Crow** is literally everywhere in the **PNW** — the most habitat-generalist bird in the engine, observed in cities (**Seattle**, **Portland**, **Bellingham**, **Tacoma**), suburbs (**Bothell**, **Renton**, **Kirkland**, **Lynnwood**), farms (Skagit Valley, Willamette Valley), forests (**Olympic Peninsula**, **Cascade Range**, **Coast Range**), beaches (**Puget Sound**, **Salish Sea**, **Olympic Coast**), and parks. **Both** share a kind of invisibility that is the opposite of absence — they are everywhere, so they are often unnoticed. **Each side** demonstrates that the engine's mature documentation reaches the unspectacular as surely as it reaches the spectacular. **The same** structural principle — that ubiquity is a form of presence — reaches both halves on the same degree. **Synchronized** by context, both the solo project and the crow are the background music and the background voice of daily **Pacific Northwest** life.
+
+**Cross-Sync Parallel: The Organic Circuit Meets the Social Amplification.** Both halves of degree 102 build identity through a form of natural-technological hybridization. **Campfire OK**'s organic circuit marries electronic instruments to organic grain — warm synthesis that references wood, leaves, and firelight rather than metal, glass, or plasma; breathing dynamics that borrow from biological rhythm rather than from grid-locked sequencing; melodic humanity that lets electronic melody carry imperfection and warmth. **In parallel**, the **American Crow**'s social amplification marries individual vocal production to collective display — the alarm caw triggering mobbing, the assembly caw gathering hundreds of birds at winter roosts, the scolding caw personalized to a specific threat and transmitted across the flock, the feeding call turning solitary discovery into social information, and the cooperative behavior of mobbing that turns a predator from hunter into harassed outsider. **Each side** demonstrates that a signal's meaning is constructed through the interplay of individual act and environmental context. **The same** structural insight — that hybrid signals (organic-electronic on one side, individual-social on the other) produce a fuller sonic identity than either component alone — reaches both halves on the same degree. **Synchronized** by nature, **Campfire OK**'s circuits remember fire and the **American Crow**'s caws remember flock.
+
+**Cross-Sync Parallel: The Thirteenth Electronic Entry Meets the Third Consecutive Corvidae.** Both halves of degree 102 reach a depth counter that reflects the engine's post-centennial deepening. On the artist side, **Campfire OK** is the **thirteenth electronic-adjacent entry in seventeen degrees** (86, 90, 91, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102) — the deepest sustained genre cluster in the engine, now extending the electronic-era depth that **Summer Heart** marked at the centennial with its eleventh-in-fifteen run. Pop structure (The Postal Service 86), atmosphere (Sky Cries Mary 90), obliteration (Hovercraft 91), intimacy (NAVVI 93), experimentation (Erik Blood 94), euphoria (ODESZA 95), pulse (STRFKR 96), tenderness (The Postal Service electronic 97), nostalgia (Gold Casio 98), cultural fusion (Kaina 99), nostalgic cascade (Summer Heart 100), kinetic surge (Hecuba 101), and now organic circuit (Campfire OK 102) — thirteen approaches to one substrate without architectural repetition. **In parallel**, on the species side, the **American Crow** is the **third consecutive Corvidae** (100 **Common Raven**, 101 **Common Raven pair**, 102 **American Crow**) — unprecedented in the engine and establishing Corvidae as the engine's defining post-centennial family. **Each side** has reached a depth threshold in its recent sequence. **The same** structural principle — that the post-centennial rewards genre and taxonomic depth over breadth — reaches both halves on the same degree. **Synchronized** by the catalog, both the electronic era and Corvidae declare at the same post-centennial moment.
+
+**Cross-Sync Parallel: Seattle Institutional Specificity on Both Sides.** Both halves of degree 102 carry a specific **Seattle**-region institutional or geographic connection that anchors the entry to place. **Campfire OK** is a **Seattle**-based solo project operating within the city's indie electronic scene — warmth as a response to the same **Pacific Northwest** electronic lineage that produced **The Postal Service**, **STRFKR**, **NAVVI**, **Erik Blood**, **ODESZA**, **Gold Casio**, **Summer Heart**, and **Hecuba**. **In parallel**, the **American Crow**'s single most important scientific documentation is **John Marzluff**'s long-running face-recognition and social-cognition research at the **University of Washington** — the **UW campus crows** are the most studied crows in the world, and their observed ability to recognize individual human faces (including masked ones) across generations is one of the defining cognitive findings in corvid research. **Each side** anchors the degree to a specific **Seattle**-region institution — the indie music scene on the artist side, the **University of Washington** on the species side. **The same** principle — that local specificity strengthens the entry — reaches both halves on the same degree. **Synchronized** by geography, the engine documents music and science that both happen in **Seattle**.
+
+**Cross-Sync Parallel: Both Consecutive-Degree Returns.** Both halves of degree 102 sit in a running comparison with degree 101 that the engine has been building for two successive degrees. On the artist side, the recent trajectory has moved from the **nostalgic cascade** of **Summer Heart** (degree 100, golden, E=4, electronic pop warmth) through the **kinetic surge** of **Hecuba** (degree 101, confrontational, E=5, dance-electronic voltage) to the **organic circuit** of **Campfire OK** (degree 102, inviting, E=4, indie-electronic warmth). **In parallel**, on the species side, the trajectory has moved from the **deep cronk + bell + hollow knock + mimicry** of the solo **Common Raven** (degree 100, thirty-plus call types, E=4) through the **coordinated duet vocalizations** of the **Common Raven pair** (degree 101, synchronized pair calling, E=5) to the **caw caw caw complex** of the **American Crow** (degree 102, alarm-assembly-scolding-feeding-rattling, E=4). **Each side** has traversed from complexity through coordination to familiarity across the three-degree window. **The same** structural arc — complexity, coordination, familiarity — reaches both halves on the same post-centennial triad. **Synchronized** by the catalog's ordering, the engine delivers its most complex individual voice at the centennial, its most synchronized pair voice in the first post-centennial degree, and its most familiar social voice in the third — and pairs each with an electronic-era artist at the corresponding energy.
+
+**Cumulative State After Degree 102.** At degree 102, the engine has documented **103 artists** from the **Pacific Northwest** music scene (including origin **Quincy Jones** at degree 0), **103 artist-side acoustic elements**, **102 species-side acoustic elements**, **103 artist-city patterns**, **84 genre stages**, **49 families** (unchanged from centennial), **4 classes** (**Aves**, **Mammalia**, **Insecta**, **Amphibia**), and **17-plus orders**. The engine holds **42 consecutive original CSV species** — a streak spanning the full post-centennial opening triad plus the preceding mammal-insect-amphibian era. **Genre Stage 84** signals that the catalog's depth continues to furnish fresh genre territory even inside the deepest electronic cluster. The **Corvidae trio** (100-101-102) is now closed; the next degree can either extend Corvidae into a quartet or pivot, but the three-degree arc is complete. The engine has now established two structural techniques — the **species pair** (Northern Flicker 21-22, American Beaver 61-62, Common Raven 100-101) and the **same-family consecutive run** (Corvidae 100-101-102) — that deepen taxonomic documentation without simply repeating species entries. The **electronic era** of **Quadrant II** now stretches from degree 86 to degree 102, seventeen degrees with thirteen electronic-adjacent entries, and still differentiates at every step. The **engine breathes** — E=4, E=5, E=4 across three consecutive degrees is a deliberate rhythmic pattern rather than a catalog accident.
 
 ## Key Features
 
 | Metric | Part A: Campfire OK | Part B: American Crow |
-|--------|--------------------|-----------------------|
-| Genre | Indie Electronic (Genre Stage 84) | -- |
-| Energy | E=4 (warm, organic, breathing, intimate) | E=4 (loud, persistent, familiar, social amplification) |
-| Label | N/A | -- |
-| Family | -- | Corvidae (third consecutive, 100-101-102 = CORVIDAE TRIO) |
-| Acoustic Element | the organic circuit (103rd, warm synthesis organic grain breathing dynamics) | caw caw caw complex (102nd species-side, alarm assembly scolding feeding rattling) |
-| Artist-City Pattern | The Warm Circuiteer (103rd, solo organic electronic invitation warmth) | -- |
-| Structural Firsts | GENRE STAGE 84, THE ORGANIC CIRCUIT, THE WARM CIRCUITEER, energy exhale E=5 to E=4 | CORVIDAE TRIO (three consecutive, unprecedented), same genus *Corvus* as Raven, most habitat-generalist bird, face recognition (Marzluff UW experiments) |
-| Research Words | ~5,000 | ~7,000 |
-| Files Produced | 4 | 4 |
-| Cross-References | 5 | 5 |
+|--------|---------------------|-----------------------|
+| Genre | **Indie Electronic** (Genre Stage 84 milestone, eighty-fourth genre stage in 103 degrees, warm synthesis organic grain breathing dynamics melodic warmth intimate campfire scale, distinct from Dance/Electronic 101 confrontational and Electronic Pop 100 nostalgic and Indie Electronic 86 97 98 prior dresses) | — |
+| Energy | **E=4** (warm organic breathing intimate, moderate sustained warmth filling a small room, campfire scale not festival scale or dance-floor scale, the exhale from Hecuba's E=5 at degree 101) | **E=4** (loud persistent familiar, repetitive force caw-caw-caw-caw, social amplification in group cawing and winter roosts of thousands, not at the extremes of the raven pair's coordinated E=5) |
+| Label | **Self-released / various** (the solo-project distribution topology shared with Gold Casio 98 and Summer Heart 100, diffuse across indie channels) | — |
+| Family | — | **Corvidae** (THIRD CONSECUTIVE, 100-101-102 = **CORVIDAE TRIO** unprecedented in the engine, Steller's Jay at degree 53 was the first corvid 49 degrees earlier) |
+| Order | — | **Passeriformes** (largest order of birds ~6,500 species, American Crow smaller than Common Raven but same order) |
+| Class | — | **Aves** (third consecutive Aves degree of post-centennial, class now consolidated after 40-degree non-bird gap pre-centennial) |
+| Acoustic Element | **the organic circuit** (103rd artist-side, warm synthesis organic grain breathing dynamics melodic humanity intimate spatial quality, distinct from kinetic surge 101 raw voltage and nostalgic cascade 100 flowing golden and retro-synthetic shimmer 98 vintage reference) | **caw caw caw complex** (102nd species-side, alarm-assembly-scolding-feeding-rattling, the most recognized bird sound in North America, distinct from deep cronk + bell + hollow knock 100 compound vocal complexity and coordinated duet vocalizations 101 synchronized pair display) |
+| Artist-City Pattern | **The Warm Circuiteer** (103rd artist-city pattern, solo project organic electronic invitation over confrontation campfire warmth, distinct from Dance Floor Provocateur 101 confrontational duo and Transatlantic Dreamer 100 continental bridge) | — |
+| Structural Firsts | GENRE STAGE 84 MILESTONE (Indie Electronic), THE ORGANIC CIRCUIT (103rd artist-side acoustic element), THE WARM CIRCUITEER (103rd artist-city pattern), **ENERGY EXHALE** E=5→E=4 between consecutive degrees, THIRTEENTH ELECTRONIC-ADJACENT ENTRY IN SEVENTEEN DEGREES | **CORVIDAE TRIO COMPLETE** (three consecutive Corvidae 100-101-102, unprecedented), same genus *Corvus* as both **Common Raven** entries, **MOST HABITAT-GENERALIST BIRD IN ENGINE**, **UW / JOHN MARZLUFF FACE-RECOGNITION CONNECTION**, **FORTY-SECOND CONSECUTIVE ORIGINAL CSV** (degrees 61-102 unbroken) |
+| Research Words | approximately 5,000 | approximately 7,000 |
+| Files Produced | 4 (research.md, index.html, knowledge-nodes.json, retrospective.md) | 4 (research.md, index.html, knowledge-nodes.json, retrospective.md) |
+| Cross-References | 5 in Part A table | 5 in Part B table |
 
-<details>
-<summary>Full Release Notes -- Click to expand</summary>
+## Part A: Campfire OK — The Organic Circuit
 
-## Part A: Campfire OK -- THE ORGANIC CIRCUIT (Indie Electronic, E=4, Genre Stage 84, The Organic Circuit 103rd Acoustic Element, The Warm Circuiteer 103rd Artist-City Pattern, Thirteenth Electronic Entry, The Exhale)
+- **The post-centennial's third degree and the engine's exhale.** **Degree 102** is the third post-centennial degree. Where degree 100 (the centennial) set warmth at E=4 and degree 101 (first post-centennial) surged to E=5, degree 102 exhales back to E=4 on both sides. **Campfire OK** is the exhale artist — warm rather than confrontational, organic rather than voltage-driven, intimate rather than arena-scaled. The engine's post-centennial opening triad (100, 101, 102) now forms a complete breath: inhale (E=4 warmth) → peak (E=5 surge) → exhale (E=4 warmth). The breathing rhythm is the feature rather than a side effect.
+- **Campfire OK — Brit Bachmann's Seattle solo project.** The project is the work of **Brit Bachmann**, a **Seattle**-based musician. Warm, melodic electronic music with organic textures. Synthesizers that breathe rather than pulse; electronic production that feels alive rather than precise; melodic sensibility that bridges the digital and the natural. Intimate scale — the campfire rather than the dance floor or the festival stage. The project name captures the essence: **campfire** (warmth, gathering, intimacy, natural light, conversation at close range) plus **OK** (sufficiency, acceptance, comfort, not grand or explosive). Electronic music with campfire warmth. The organic circuit — electricity that remembers fire.
+- **Genre Stage 84 — Indie Electronic at post-centennial depth.** The engine has now introduced **84** distinct genre stages across **103** degrees — roughly 0.82 stages per degree, a remarkably stable rate held across the post-centennial threshold. **Indie Electronic** at degree 102 is the fifth entry under that label, following **The Postal Service** (86, glitch-pop structure), **STRFKR** (96, driving punk-inflected synth-pop pulse), **The Postal Service electronic** (97, algorithmic tenderness), and **Gold Casio** (98, retro-synthetic shimmer). **Campfire OK**'s Indie Electronic is distinct again — organic-electronic, nature-referent, warmth from biological rhythm rather than from nostalgia or from vintage reference. Same genre label, five radically different dresses across sixteen degrees.
+- **The organic circuit — 103rd artist-side acoustic element.** Warm synthesis (rounded, wooden, alive), organic grain (textures referencing natural materials, wooden, leafy, earthen), breathing dynamics (swells and recedes, responsive, tidal), melodic humanity (electronic melodies with warmth and imperfection), intimate spatial quality (reverb suggesting small warm environments, the campfire circle). Distinct from the **kinetic surge** at degree 101 (raw voltage, physical force, E=5) — maximum contrast between consecutive degrees. Distinct from the **nostalgic cascade** at degree 100 (temporal warmth, flowing golden, E=4) — same energy, different warmth source. Distinct from the **retro-synthetic shimmer** at degree 98 (vintage warmth, static nostalgia) — both warm, different historical references. Three different warmths across five degrees.
+- **The Warm Circuiteer — 103rd artist-city pattern.** A solo project that builds warm, organic electronic music, wiring human warmth into electronic circuits. **Solo project** — one artist, one vision, warmth crafted by hand. **Organic electronic** — technology and nature wired together rather than opposed. **Invitation over confrontation** — the campfire as gathering place, not battleground. Distinct from the **Dance Floor Provocateur** at degree 101 (confrontational duo, E=5), distinct from the **Transatlantic Dreamer** at degree 100 (continental bridge, Sweden-Seattle), distinct from the **Diasporic Synthesist** at degree 99 (inter-American cultural fusion). Four distinct electronic-era solo or project patterns in four consecutive degrees.
+- **Thirteenth electronic-adjacent entry in seventeen degrees.** Degrees 86, 90, 91, 93, 94, 95, 96, 97, 98, 99, 100, 101, and 102 — thirteen electronic-adjacent entries in the seventeen-degree window since degree 86. The **electronic era** now defines **Quadrant II** more deeply than any prior era defined any prior quadrant. Each entry differentiates: pop structure (86), atmosphere (90), obliteration (91), intimacy (93), experimentation (94), euphoria (95), pulse (96), tenderness (97), nostalgia (98), cultural fusion (99), cascade (100), surge (101), and now circuit (102). Thirteen approaches to one substrate without repetition.
+- **E=4 — the exhale after the surge.** The organic circuit at moderate, sustained intensity — never confrontational, never euphoric, just a steady warm presence filling a small room. **E=4** gains **Campfire OK** to reach 27 deployments on the artist side (26.2% of artist entries) — now tied with E=3 at 26.2% and demonstrating that the engine's post-centennial default has settled at moderate warm intensity rather than at either extreme. The oscillation E=4 → E=5 → E=4 across degrees 100, 101, and 102 is a breathing rhythm rather than an accident.
+- **Organic-electronic as an emerging **Pacific Northwest** lineage.** The **Pacific Northwest** electronic scene has developed a distinctive warmth that separates it from colder regional electronic traditions. **Campfire OK** continues the warmth lineage — **Chong the Nomad** at degree 44 (the grain), **NAVVI** at degree 93 (the intimate machine), **ODESZA** at degree 95 (the euphoric build), and now **Campfire OK** at degree 102 (the organic circuit). Four degrees of PNW warmth-electronic separated by varied intermediate cold, experimental, or confrontational electronic entries. The warmth keeps resurfacing.
+- **Self-released / various — diffuse distribution in solo-project context.** **Campfire OK**'s releases span a diffuse indie distribution topology, matching the solo-project ethos. The label context is less concentrated than **Sub Pop** (86, 97) or **Counter Records** (95) and more varied than a single imprint — self-released plus streaming plus indie show networks, the infrastructure of a working solo artist. The diffuse topology itself carries the warmth-over-spectacle stance of the organic circuit.
+- **Breathing dynamics as a structural metaphor.** **Campfire OK**'s synthesizers breathe — swells and recessions, responsive to the music rather than grid-locked, organic rather than mechanical. The breathing of the synthesizer is a small-scale metaphor for the engine's larger rhythm across degrees 100-101-102 (E=4, E=5, E=4). Both are breathing. Both are rhythmic. The artist-side acoustic element mirrors the engine-scale energy pattern, and the mirror itself is part of the centennial's legacy.
 
-Full deep research covering Campfire OK at degree 102, the organic circuit, and the warm circuiteer:
+## Part B: American Crow — The Corvidae Trio Completes
 
-### THE ELECTRONIC ERA: THIRTEEN IN SEVENTEEN
+- **The Corvidae trio closes.** **Degree 102** completes the **Corvidae trio** — three consecutive degrees from the same family (100, 101, 102). Unprecedented in the engine. The trio covers three dimensions of corvid life: **individual complexity** (degree 100, **Common Raven** solo, thirty-plus call types, E=4), **pair coordination** (degree 101, **Common Raven pair**, coordinated duet vocalizations, E=5), and **social flocking** (degree 102, **American Crow**, caw caw caw complex, E=4). The arc is complete; the next degree can extend Corvidae or pivot, but the three-dimensional documentation of the family is done.
+- **The American Crow — the most familiar corvid.** *Corvus brachyrhynchos*. Body length 40–53 cm, wingspan 85–100 cm, mass 0.3–0.6 kg. Entirely black with a moderate iridescent sheen. Fan-shaped tail (diagnostic versus the **Common Raven**'s wedge-shaped tail). **Urban presence** (every **Pacific Northwest** city and town), **social visibility** (groups and massive winter roosts), **vocal prominence** (the caw carries), **cultural recognition** (everyone knows what a crow is). **Kingdom:** Animalia. **Phylum:** Chordata. **Class:** Aves. **Order:** Passeriformes. **Family:** Corvidae. **Genus:** *Corvus*. **Species:** *C. brachyrhynchos*.
+- **The caw caw caw complex — 102nd species-side acoustic element.** The most recognized bird sound in **North America**. Not one sound — a complex of distinct caw types. **Alarm caw** (rapid, harsh, urgent, triggers mobbing behavior, learned across the flock). **Assembly caw** (rhythmic, moderate, calls crows to location, an invitation). **Scolding caw** (directed, persistent, personalized to specific threats — a particular person, a particular predator, transmitted through observation). **Feeding call** (softer, shorter, social information about food location and quality). **Rattling and clicking** (close social interactions between family members, within the roost, during pair bonding). Five distinct vocal behaviors within a single species-side acoustic element.
+- **Why E=4, not E=5.** Loud and persistent — the caw carries across several hundred meters and repeats in sustained sequences. Repetitive force — caw-caw-caw-caw as a percussive rhythm rather than a single call. Social amplification — group cawing at winter roosts of thousands, a collective call that dwarfs any individual. Not E=5 because the individual crow's acoustic impact is less than the **Common Raven pair**'s coordinated duet (101) and less than **Cicada** (89) or bugling elk (65) at peak volume. E=4 is the appropriate energy for a familiar, everyday, repeated call rather than a peak acoustic moment.
+- **Intelligence — face recognition and the UW connection.** **John Marzluff** at the **University of Washington** has run face-recognition experiments with **American Crows** for more than fifteen years. Masked researchers captured crows on campus; for years afterward, those masked faces were scolded by individual crows that had been directly captured, by their offspring, and by unrelated crows that had never been captured but had learned the face's threat status through social observation. The result is one of the defining cognitive findings in corvid research — face recognition across generations through social transmission, a form of cultural learning documented at the **UW** campus specifically. The **UW crows** are the most studied crows in the world.
+- **The most habitat-generalist bird in the engine.** Urban, suburban, rural, farm, forest, coastal, alpine-edge, everywhere. Intelligence-driven generalism — the crow thrives wherever cognition confers advantage, and cognition confers advantage almost everywhere. In the **Pacific Northwest**, the **American Crow** is found from sea level along **Puget Sound** and the **Olympic Coast** up through the **Cascade Range** and into the alpine edges. In cities, it learns garbage-day schedules (week-by-week, neighborhood-by-neighborhood), caches food at predictable locations, and navigates traffic patterns. In forests, it forages in the canopy, the understory, and the ground layer. Habitat generalism is the crow's defining ecological property.
+- **Winter roosts — hundreds to hundreds of thousands.** Winter roosts of thousands are documented across the **Pacific Northwest** — the **Bothell / Renton** roosts hold 10,000 or more, and larger roosts elsewhere in the region approach hundreds of thousands. Family groups roost together within the larger communal gathering. Cooperative breeding — older offspring help parents raise the next generation. The social structure of the crow is fundamentally different from the solitary or pair-bonded structure of the **Common Raven**, and the difference shows in the acoustic repertoire, in the habitat breadth, and in the intelligence profile.
+- **Same genus *Corvus* as the Raven — the species-level contrast within the family.** The **American Crow** and the **Common Raven** share the same genus, *Corvus*, and the Corvidae family. They diverge at species level through size (raven larger), voice (raven deeper, crow higher), habitat (raven more mountainous, crow more urban), sociality (raven more solitary or pair-bonded, crow more flocking), and tail shape (raven wedge, crow fan). The species-level contrast within a single post-centennial triad is a structural documentation of how much variation one family can hold.
+- **Cooperative mobbing and funerals — distributed intelligence.** The **American Crow** engages in cooperative mobbing of predators — hawks, owls, raccoons, humans — in which dozens of crows join a single threat-caller and harass the predator until it leaves. The crow also exhibits funeral-like behavior — gathering silently around a dead crow for extended periods, a documented behavior that remains imperfectly understood but appears to involve threat assessment as well as social cognition. These distributed-intelligence behaviors are the social-scale answer to the **Common Raven**'s individual-cognition profile at degree 100.
+- **Forty-second consecutive original CSV — an unbroken streak extended.** The **American Crow** is the forty-second consecutive original catalog entry since degree 61. The reliability streak that crossed the centennial at degree 100 and the post-centennial at degree 101 now extends into degree 102. Data reliability is a defining characteristic of the engine at this point, and the forty-two-degree streak demonstrates it.
+- **Contrasts with Steller's Jay at degree 53 — Corvidae across a 49-degree arc.** The first Corvidae entry was the **Steller's Jay** at degree 53 (loud, harsh, versatile, forest-sentinel). The second was the **Common Raven** at degree 100 (deep, complex, commanding, 30+ call types). The third was the **Common Raven pair** at degree 101 (coordinated, synchronized, territorial). The fourth is the **American Crow** at degree 102 (loud, persistent, familiar, social). Four Corvidae entries across 49 degrees, each differentiating through size, sociality, habitat, and vocal behavior. Corvidae is now the engine's most deeply documented family.
 
-Degree 102 marks the thirteenth electronic-adjacent entry in seventeen degrees (86, 90, 91, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102). The electronic era dominates Quadrant II without interruption. Campfire OK enters with E=4 -- a step down from Hecuba's E=5 at degree 101, returning to the warm energy of degrees 97-100. The energy oscillation: E=4 (97-100), E=5 (101), E=4 (102). The engine breathes.
+## Retrospective
 
-### CAMPFIRE OK -- Brit Bachmann's Warm Circuits
+### What Worked
 
-**Campfire OK** is the project of Brit Bachmann, a Seattle-based musician. Warm, melodic electronic music with organic textures -- synthesizers that breathe, electronic production that feels alive, melodic sensibility bridging the digital and the natural.
+- **The Corvidae trio (100-101-102) is structurally extraordinary.** Three consecutive degrees from the same family, each covering a different dimension of corvid life — individual complexity, pair coordination, social flocking. No other family has achieved a three-dimensional consecutive documentation in the engine. The trio succeeds because it is cumulative rather than repetitive.
+- **The energy oscillation E=4, E=5, E=4 across degrees 100-101-102 reads as a breathing rhythm.** The post-centennial opening triad inhales at the centennial, peaks at the first post-centennial degree, and exhales at the third. The rhythm is deliberate rather than accidental and demonstrates that the engine can oscillate intentionally.
+- **The familiar-and-accessible parallel between Campfire OK and the American Crow works on both sides.** The campfire after the festival; the crow after the raven. Both halves offer the accessible, everyday version of something grander. The parallel captures a different kind of Part A / Part B connection — matching position in a spectrum rather than matching energy or matching sound.
+- **John Marzluff and the University of Washington face-recognition experiments add local institutional specificity.** The **UW crows** are the most studied crows in the world, and the local scientific connection anchors the species entry to a specific **Seattle** institution. Local specificity strengthens the entry and contributes to the degree's place-based identity.
+- **Thirteen electronic-adjacent entries in seventeen degrees map the full electronic spectrum without repetition.** Each entry differentiates — pop structure, atmosphere, obliteration, intimacy, experimentation, euphoria, pulse, tenderness, nostalgia, cultural fusion, cascade, surge, circuit. Thirteen approaches, one substrate.
+- **The Warm Circuiteer artist-city pattern completes an electronic-era pattern run.** Seven distinct electronic patterns in eight degrees — Festival Architect (95), Portland-Seattle Axis (96), Self-Released Synthesist (98), Diasporic Synthesist (99), Transatlantic Dreamer (100), Dance Floor Provocateur (101), Warm Circuiteer (102). The most pattern-dense era in the engine.
+- **Both E=4 creates a matched-energy pairing that mirrors the centennial's matched-E=4 pairing.** Degree 102 rhymes with degree 100 at the energy level while differentiating through acoustic element, artist-city pattern, and species. The rhyme is structural rather than superficial.
+- **Genre Stage 84 lands with specific differentiation from prior Indie Electronic entries.** The five-way Indie Electronic differentiation (The Postal Service 86, STRFKR 96, The Postal Service electronic 97, Gold Casio 98, Campfire OK 102) shows that the engine can hold multiple degrees under a single genre label without redundancy.
 
-The sound: warm synth textures (organic-feeling synthesis, not cold digital precision), organic grain (textures referencing natural materials, wooden, leafy, earthen), melodic warmth (accessible, human, inviting melodies), breathing dynamics (swells and recedes, responsive, living, tidal), intimate scale (campfire-scale, not festival-filling or dance-floor-pounding).
+### What Could Be Better
 
-The name captures the project's essence: campfire (warmth, gathering, intimacy, natural light), OK (sufficiency, acceptance, comfort -- not grand or explosive), electronic music with campfire warmth (the organic circuit -- electricity that remembers fire).
+- **Still no raptor in 103 entries.** The absence of birds of prey (Accipitridae, Falconidae, Strigidae beyond the **Northern Spotted Owl** at degree 4, Tytonidae) across 103 entries remains a structural gap that has persisted since before the centennial. A bird of prey is overdue.
+- **Still no marine species in 103 entries.** The **Pacific Northwest**'s marine ecosystem (**Salish Sea**, **Olympic Coast**, **Puget Sound** proper) remains unrepresented. Harbor seal, orca, sea lion, common loon, marbled murrelet — none have appeared. The marine omission grows more conspicuous with each non-marine degree.
+- **The Corvidae trio may read as genre fatigue on the species side for some readers.** Three consecutive corvids, though each is structurally distinct, could feel like catalog narrowing. The deliberate three-dimensional documentation is intended to counter the narrowing perception, but the perception itself is a risk that accompanies any family-consecutive run.
+- **Campfire OK's discography and Brit Bachmann's specific output were not exhaustively analyzed.** Individual releases, year-by-year evolution, and track-by-track analysis were treated at the structural level rather than the discography level. Accepted for this entry, but a future deep dive could catalog Campfire OK's output in album-level detail.
+- **The Marzluff face-recognition story is asserted but not fully elaborated in the narrative.** The **UW crows** connection is mentioned with the key finding (masked faces scolded across generations), but the fifteen-plus-year research arc and the specific experimental protocols are summarized rather than explained in depth. A future species-level deep dive could carry the cognitive research story further.
 
-### THE ORGANIC CIRCUIT -- 103rd Acoustic Element
+## Lessons Learned
 
-The organic circuit is the 103rd acoustic element. Warm synthesis (rounded, wooden, alive), organic grain (natural materials within electronic sound), breathing dynamics (biological rhythm in swells and recessions), melodic humanity (electronic melodies with warmth and imperfection), intimate spatial quality (reverb suggesting small warm environments, the campfire circle).
+1. **Three consecutive same-family degrees work when each covers a different dimension of the family's life.** The Corvidae trio (Common Raven solo at 100, Common Raven pair at 101, American Crow at 102) succeeds because individual complexity, pair coordination, and social flocking are three distinct dimensions rather than three copies of the same species entry. Future same-family runs should apply the same dimensional test — if each degree adds a structurally distinct dimension, the run accumulates; if not, it narrows.
+2. **The familiar-and-accessible parallel is a different kind of Part A / Part B connection than matched energy or matched sound.** Degree 102 pairs **Campfire OK** and the **American Crow** through their shared position as the approachable, everyday version of something grander. The parallel is about spectrum position (intimate versus grand, familiar versus commanding) rather than about energy level or acoustic character. Future pairings can use spectrum-position matching as a deliberate technique.
+3. **Energy oscillation (E=4, E=5, E=4) is a structural breathing rhythm that should be tracked and used intentionally.** The post-centennial opening triad (100-101-102) demonstrates that three consecutive degrees can form a complete breath — inhale at the centennial, peak at the first post-centennial, exhale at the third. Future milestone openings can calibrate paired energy across a multi-degree arc rather than a single degree.
+4. **Local institutional specificity strengthens species entries.** The **John Marzluff** face-recognition research at the **University of Washington** gives the **American Crow** entry a specific **Seattle** anchor that generic crow research could not provide. Future species entries should seek local institutional, researcher, or geographic connections that anchor the entry to place.
+5. **Post-centennial depth can extend via same-family runs without exhausting the family's documentation.** The Corvidae trio at 100-101-102 deepens the family without depleting it — the **Steller's Jay** at degree 53 remains unexpanded, and future Corvidae entries (potentially **Gray Jay**, **Black-billed Magpie**, **Clark's Nutcracker**) remain open. Same-family runs can compound with earlier and later entries rather than closing the family.
+6. **The electronic era's differentiation-at-every-step technique scales to thirteen consecutive entries.** Thirteen electronic-adjacent entries in seventeen degrees (86-102) maintain distinct dress at every step — pop structure, atmosphere, obliteration, intimacy, experimentation, euphoria, pulse, tenderness, nostalgia, cultural fusion, cascade, surge, circuit. Future long genre runs can apply the same differentiation discipline and should expect to sustain it across at least a dozen entries before redundancy threatens.
+7. **Matched-energy pairings rhyme across multi-degree arcs.** Degree 100 at matched E=4 and degree 102 at matched E=4, bracketing degree 101 at matched E=5, produce a rhyme at the energy level that the reader can hear across the three-degree span. Future milestone clusters can plan rhyming matched-energy pairings as part of the structural composition rather than letting energy fall where the catalog places it.
+8. **The species-pair technique at 100-101 plus the same-family run at 100-101-102 together document structural variety inside a single family.** The engine now has two ways to document a family in depth — species pairs (same species, different acoustic framing across consecutive degrees) and same-family runs (different species, different dimensions across consecutive degrees). Future families can draw on both techniques.
+9. **Warmth as a lineage in the Pacific Northwest electronic scene deserves its own tracking.** **Chong the Nomad** (44), **NAVVI** (93), **ODESZA** (95), and **Campfire OK** (102) all belong to a PNW warmth-electronic lineage that keeps resurfacing across the broader electronic era. Future electronic entries can be classified by warmth-versus-cold axis in addition to by genre-stage label.
+10. **The caw is the right species-side acoustic element for degree 102 because it is the most recognized bird sound in North America.** The choice of acoustic element within a species is a curatorial decision — ravens could have been documented via mimicry or bell, crows could have been documented via scolding or funeral behavior. The caw is the canonical choice because it is the most universally recognizable corvid signature, and the choice anchors the entry to its broadest possible cultural reach.
 
-Contrasts: the kinetic surge (101, raw voltage, physical force, E=5) vs the organic circuit (gentle current, natural warmth, E=4) -- maximum contrast between consecutive degrees. The nostalgic cascade (100, temporal warmth) vs the organic circuit (material warmth). The retro-synthetic shimmer (98, vintage warmth) vs the organic circuit (nature warmth). Both warm, different sources.
-
-### THE WARM CIRCUITEER -- 103rd Artist-City Pattern
-
-The warm circuiteer: solo project (one artist, one vision, warmth crafted by hand), organic electronic (technology and nature wired together), invitation over confrontation (the campfire as gathering place, not battleground).
-
-Seven distinct electronic patterns in eight degrees: ODESZA (95, festival architect), STRFKR (96, Portland-Seattle axis), Gold Casio (98, self-released synthesist), Kaina (99, diasporic synthesist), Summer Heart (100, transatlantic dreamer), Hecuba (101, dance floor provocateur), Campfire OK (102, warm circuiteer). The most pattern-dense era in the engine.
-
-### CROSS-REFERENCES (Part A)
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| S36-098 | Campfire OK (102) | Gold Casio (98) | INDIE ELECTRONIC. Both E=4. Gold Casio retro-synthetic. Campfire OK organic-synthetic. Nostalgia vs nature. |
-| S36-093 | Campfire OK (102) | NAVVI (93) | ELECTRONIC TEXTURE. Both atmospheric. NAVVI dark, nocturnal, cold. Campfire OK warm, organic, natural. Opposite temperatures. |
-| S36-095 | Campfire OK (102) | ODESZA (95) | ELECTRONIC WARMTH. Both warm electronic. ODESZA large-scale, festival (E=5). Campfire OK small-scale, campfire (E=4). Different scales. |
-| S36-100 | Campfire OK (102) | Summer Heart (100) | ELECTRONIC POP WARMTH. Both warm, melodic, E=4. Summer Heart temporal warmth. Campfire OK material warmth. Different sources. |
-| S36-101 | Campfire OK (102) | Hecuba (101) | ELECTRONIC ERA CONTRAST. Consecutive degrees, maximum contrast. Hecuba E=5, confrontational, pounding. Campfire OK E=4, inviting, warm. Surge and circuit. |
-
----
-
-## Part B: American Crow (*Corvus brachyrhynchos*) -- CORVIDAE TRIO (Third Consecutive 100-101-102, Caw Caw Caw Complex, E=4, Most Habitat-Generalist Bird, Face Recognition, Forty-Second Consecutive Original CSV)
-
-Full deep research covering the American Crow, the Corvidae trio, and the most recognized bird sound in North America:
-
-### CORVIDAE TRIO: THREE CONSECUTIVE DEGREES (100-101-102)
-
-Degree 102 completes the Corvidae trio -- three consecutive degrees from the same family. Unprecedented in the engine:
-
-| Degree | Species | Corvidae Role |
-|---|---|---|
-| 100 | Common Raven | Family introduced. Solo voice. 30+ call types. E=4. CENTENNIAL. |
-| 101 | Common Raven pair | Species-pair. Coordinated duet. E=5. |
-| **102** | **American Crow** | **New species. Same genus *Corvus*. Caw complex. E=4. Social. Urban.** |
-
-The trio covers three dimensions of corvid life: individual complexity (100), pair coordination (101), social flocking (102).
-
-### THE AMERICAN CROW
-
-The most familiar corvid. 40-53 cm body length, 85-100 cm wingspan, 0.3-0.6 kg. Entirely black, fan-shaped tail (diagnostic vs raven's wedge). Urban presence (every PNW city and town), social visibility (groups and massive roosts), vocal prominence (the caw carries), cultural recognition (everyone knows what a crow is).
-
-Intelligence: face recognition (Marzluff experiments at University of Washington -- masked researchers captured crows, those faces scolded for years, knowledge spreading to crows never directly threatened), tool use, funerals (gathering around dead crows), cooperative mobbing.
-
-### THE SOUND: CAW CAW CAW COMPLEX -- 102nd Species-Side Acoustic Element
-
-The most recognized bird sound in North America. Not one sound -- a complex of distinct caw types: alarm caw (rapid, harsh, urgent, triggers mobbing), assembly caw (rhythmic, moderate, calls crows to location), scolding caw (directed, persistent, personalized to specific threats), feeding call (softer, shorter, social information), rattling and clicking (close social interactions).
-
-Why E=4: loud and persistent (audible at several hundred meters), repetitive force (caw caw caw caw), social amplification (group cawing, roosts of thousands). Not E=5 because the individual crow is not as powerful as the raven pair's coordinated duet.
-
-Contrasts: Common Raven (100, deep cronk, 30+ call types, E=4) -- fewer call types but more recognizable and ubiquitous. Raven pair (101, coordinated duet, E=5) -- socially vocal rather than pair-duetting. Steller's Jay (53, loud, harsh, versatile) -- same harsh corvid timbre, crow simpler but more universally recognized.
-
-### TAXONOMY AND ECOLOGY
-
-Same genus *Corvus* as the raven. The most habitat-generalist bird in the engine: urban, suburban, rural, forest, coastal, everywhere. Intelligence-driven generalism. Intensely social -- winter roosts of hundreds to hundreds of thousands (Bothell/Renton roosts, 10,000+). Family groups with cooperative breeding. UW campus connection (Marzluff's famous face-recognition experiments). Garbage day crows (learning municipal schedules).
-
-### CROSS-REFERENCES (Part B)
+## Cross-References
 
 | Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| SPS-100 | American Crow (102) | Common Raven (100) | SAME GENUS CORVUS. Raven large, deep, solitary. Crow smaller, higher, social. Same genus, different ecologies. |
-| SPS-101 | American Crow (102) | Common Raven pair (101) | CORVIDAE TRIO. Three consecutive. Individual, pair, social dimensions of corvid life. Unprecedented. |
-| SPS-059 | American Crow (102) | Mallard (59) | FAMILIAR/UBIQUITOUS. Both most recognized species. Quack and caw -- two universally known sounds. Both urban-adapted. |
-| SPS-025 | American Crow (102) | American Robin (25) | FAMILIAR BIRD. Two birds non-birders can always name. Robin's song and crow's caw -- complementary urban soundscapes. Melody and percussion. |
-| SPS-070 | American Crow (102) | Raccoon (70) | URBAN INTELLIGENCE. Both intelligent, urban-adapted problem-solvers. Raccoon manipulates with hands; crow recognizes faces with brain. |
+|------------|------|-----|--------|
+| S36-101 | Campfire OK (102) | Hecuba (101) | ELECTRONIC ERA CONTRAST — CONSECUTIVE. Hecuba E=5 confrontational duo dance-floor scale; Campfire OK E=4 inviting solo campfire scale. Maximum contrast between consecutive degrees. Surge and circuit. |
+| S36-100 | Campfire OK (102) | Summer Heart (100) | MATCHED-E=4 WARMTH RHYME. Both E=4, warm, melodic. Summer Heart temporal warmth (dream-pop-influenced nostalgia, Sweden-Seattle transatlantic). Campfire OK material warmth (organic grain, Seattle solo project). Different warmth sources, same energy. |
+| S36-099 | Campfire OK (102) | Kaina (99) | ELECTRONIC WARMTH LINEAGE. Both E=4 electronic-adjacent. Kaina Electronic/R&B cultural fusion (Guatemalan-Venezuelan diaspora). Campfire OK Indie Electronic material warmth. Two different warmths in three degrees. |
+| S36-098 | Campfire OK (102) | Gold Casio (98) | INDIE ELECTRONIC LINEAGE. Both Indie Electronic, both E=4. Gold Casio retro-synthetic shimmer (vintage nostalgia). Campfire OK organic circuit (nature warmth). Same genre, different warmth references. |
+| S36-097 | Campfire OK (102) | The Postal Service electronic (97) | INDIE ELECTRONIC LINEAGE. Both Indie Electronic. Postal Service electronic algorithmic tenderness on Sub Pop. Campfire OK organic circuit self-released. Different infrastructures, shared genre label. |
+| S36-096 | Campfire OK (102) | STRFKR (96) | ELECTRONIC ENERGY CONTRAST. STRFKR driving punk-inflected synth-pop pulse at E=5 on Polyvinyl. Campfire OK warm organic circuit at E=4 self-released. Pulse versus breath. |
+| S36-095 | Campfire OK (102) | ODESZA (95) | ELECTRONIC SCALE CONTRAST. ODESZA cinematic festival-scale at E=5 on Counter Records. Campfire OK intimate campfire-scale at E=4 self-released. Arena to bedroom. |
+| S36-093 | Campfire OK (102) | NAVVI (93) | WARMTH-ELECTRONIC LINEAGE. Both atmospheric. NAVVI dark nocturnal the shimmer veil. Campfire OK warm organic the organic circuit. Opposite temperatures, same PNW warmth-electronic lineage. |
+| S36-086 | Campfire OK (102) | The Postal Service (86) | INDIE ELECTRONIC ORIGIN. The Postal Service introduced Indie Electronic at degree 86 with glitch-pop structure on Sub Pop. Campfire OK returns Indie Electronic sixteen degrees later with organic warmth self-released. Same genre label, radically different dress across five-entry span. |
+| S36-044 | Campfire OK (102) | Chong the Nomad (44) | PNW WARMTH-ELECTRONIC LINEAGE. Both PNW electronic with warmth orientation. Chong the Nomad the grain (digital immigrant aesthetic). Campfire OK the organic circuit (solo project aesthetic). Warmth as an emerging regional thread. |
+| SPS-100 | American Crow (102) | Common Raven (100) | SAME GENUS *CORVUS* — INDIVIDUAL COMPLEXITY VERSUS SOCIAL FAMILIARITY. Raven large deep solitary 30+ call types at E=4. Crow smaller higher social caw complex at E=4. Same genus, different species-level ecology and acoustic character. First and third dimensions of the Corvidae trio. |
+| SPS-101 | American Crow (102) | Common Raven pair (101) | CORVIDAE TRIO COMPLETE. Three consecutive Corvidae (100-101-102). Individual complexity (raven solo), pair coordination (raven pair), social flocking (crow). Unprecedented three-dimensional family documentation. |
+| SPS-053 | American Crow (102) | Steller's Jay (53) | SAME FAMILY CORVIDAE — CORVIDAE QUARTET. Steller's Jay introduced Corvidae at degree 53 (bright, loud, forest-sentinel). American Crow extends Corvidae at degree 102 (loud, persistent, habitat-generalist). Forty-nine-degree span of corvid documentation. |
+| SPS-060 | American Crow (102) | Pied-billed Grebe (60) | AVES CONSOLIDATION. Pied-billed Grebe was the last pre-centennial Aves at degree 60. American Crow is the third post-centennial Aves at degree 102. Aves now firmly re-established after the 40-degree non-bird gap. |
+| SPS-059 | American Crow (102) | Mallard (59) | FAMILIAR / UBIQUITOUS BIRD. Both most recognized species in the PNW catalog. Quack and caw — two universally known bird sounds. Both urban-adapted, both habitat-generalist though crow extends further. |
+| SPS-025 | American Crow (102) | American Robin (25) | FAMILIAR BIRD — NAMED-BY-NON-BIRDERS. Two birds that non-birders can always name. Robin's morning song plus crow's caw equal complementary urban soundscapes — melody and percussion of the suburban dawn. |
+| SPS-070 | American Crow (102) | Raccoon (70) | URBAN INTELLIGENCE. Both intelligent, urban-adapted problem-solvers across PNW cities and suburbs. Raccoon manipulates with five-digit hands (Procyonidae). Crow recognizes faces and transmits social information (Corvidae). Different phyla, convergent urban cognitive adaptation. |
+| SPS-071 | American Crow (102) | Red Fox (71) | INTELLIGENCE PARALLEL. Both among the most intelligent animals in the engine. Red Fox canid intelligence (mammalian, predatory, adaptable). American Crow corvid intelligence (avian, opportunistic, socially transmitted). |
+| SPS-004 | American Crow (102) | Northern Spotted Owl (4) | AVES CONTRAST — FIRST BIRD TO HUNDRED-SECOND. Both PNW birds. Owl old-growth specialist (E=3 nocturnal stealth). Crow habitat generalist (E=4 diurnal social). First bird of the engine versus most habitat-generalist bird of the engine. |
+| RES-marzluff-uw | American Crow (102) | John Marzluff / UW | LOCAL INSTITUTIONAL SPECIFICITY. UW face-recognition experiments across fifteen-plus years, masked researchers scolded by crows across generations through social transmission. The UW campus crows are the most studied crows in the world. Local anchor for the species entry. |
+| RES-pnw-indigenous | American Crow (102) | PNW Indigenous mythology | CULTURAL CONTEXT. Raven and Crow both carry cultural weight in Pacific Northwest Indigenous tradition — Raven as Creator/Trickster (primary), Crow as companion/social intelligence figure. The species entry inherits the cultural context even where Raven holds primacy. |
 
----
+## Engine Position
 
-## Parallel: Campfire OK x American Crow -- The Organic Circuit and the Caw (THE EXHALE)
+- **Degree 102 of 360** — 28.3% of the circle traversed; twelfth degree of Quadrant II; third post-centennial degree; closing the post-centennial opening triad (100-101-102).
+- **Acoustic element counters:** the **organic circuit** is the **103rd artist-side acoustic element**; the **caw caw caw complex** is the **102nd species-side acoustic element**. Parity gap of one persists from the centennial.
+- **Artist-city pattern:** **The Warm Circuiteer** is the **103rd artist-city pattern**.
+- **Genre Stage 84 MILESTONE** — **Indie Electronic**. Eighty-four genre stages in 103 degrees (0.82 stages per degree). Stable rate across post-centennial threshold.
+- **CORVIDAE TRIO COMPLETE** — three consecutive Corvidae at degrees 100 (**Common Raven** solo), 101 (**Common Raven** pair), 102 (**American Crow**). Unprecedented in the engine. Corvidae is now the engine's most deeply documented family.
+- **ENERGY EXHALE** — E=4 returns after Hecuba's E=5 at degree 101. Energy oscillation E=4, E=5, E=4 across the post-centennial opening triad is a breathing rhythm.
+- **THIRTEENTH ELECTRONIC-ADJACENT ENTRY IN SEVENTEEN DEGREES** — deepest sustained genre cluster in the engine. Degrees 86, 90, 91, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102.
+- **MOST HABITAT-GENERALIST BIRD IN ENGINE** — urban, suburban, rural, farm, forest, coastal, alpine. Intelligence-driven generalism.
+- **UW / JOHN MARZLUFF FACE-RECOGNITION CONNECTION** — local Seattle institutional anchor. UW crows are the most studied crows in the world.
+- **FORTY-SECOND CONSECUTIVE ORIGINAL CSV** — degrees 61–102 without substitution. Longest unbroken catalog-reliability streak in the engine.
+- **Energy distribution after degree 102 (artist-side):** E1:3 (2.9%), E2:31 (30.1%), E3:27 (26.2%), E4:27 (26.2%), E5:14 (13.6%), E6:2 (1.9%). Total: 103 entries (degrees 0–102). E=4 gains **Campfire OK** to reach 27 — now tied with E=3 at 26.2%.
+- **Four classes represented:** Aves, Mammalia, Insecta, Amphibia. Seventeen-plus orders. Forty-nine families (unchanged from centennial).
+- **Outstanding gaps:** Zero raptors in 103 entries (persists since before centennial); zero marine species in 103 entries; Corvidae trio may read as species-side narrowing for some readers; electronic era dominance continues through post-centennial.
 
-The organic circuit and the caw complex. The familiar and the warm.
+## Acoustic Progression (excerpt, recent degrees)
 
-**1. Both E=4 -- The Exhale** -- After degree 101's E=5 on both sides, degree 102 returns to E=4 on both sides. The engine breathes. The kinetic surge subsides; the campfire glows. The coordinated duet resolves; the familiar caw carries. E=4 is the energy of the everyday -- the campfire warmth, the crow you hear every morning.
+| Degree | Artist-side element | Species-side element | Pairing |
+|--------|--------------------|-----------------------|---------|
+| 98 | the retro-synthetic shimmer | the pure sustained trill | Gold Casio / Tree Cricket Song |
+| 99 | the bilingual warmth | the mechanical click | Kaina / Click Beetle |
+| 100 | the nostalgic cascade | the deep cronk + bell + hollow knock | Summer Heart / Common Raven |
+| 101 | the kinetic surge | the coordinated duet | Hecuba / Common Raven Pair |
+| **102** | **the organic circuit** | **the caw caw caw complex** | **Campfire OK / American Crow** |
 
-**2. Both Familiar and Accessible** -- Campfire OK is intimate electronic warmth -- the accessible, campfire-scale version of what ODESZA does at festival scale. The American Crow is the familiar corvid -- the accessible, everyday version of the raven's commanding presence. Both are the approachable face of something grander.
+(Full 0–102 table lives in the pre-uplift README version at `d10ef62e6` and in the upstream Seattle 360 / Sound of Puget Sound research trees.)
 
-**3. Both Ubiquitous** -- Campfire OK's organic electronic warmth is everywhere in the Pacific Northwest indie electronic scene -- unassuming, present, part of the landscape. The American Crow is literally everywhere -- the most habitat-generalist bird in the engine. Cities, suburbs, farms, forests, beaches. Both embedded in the fabric of daily PNW life.
-
-**4. The Corvidae Trio Completes** -- Individual (100, raven solo), pair (101, raven pair), social (102, crow). Three dimensions of corvid life in three consecutive degrees. The trio spans from the most complex individual voice to the most familiar social call.
-
----
-
-## Acoustic Progression (103 elements)
-
-| # | Element | Degree | Artist/Species |
-|---|---------|--------|----------------|
-| 0 | silence | 0 | Quincy Jones |
-| 1 | cascade | 1 | Bill Frisell |
-| 2 | drone | 2 | Wayne Horvitz |
-| 3 | language | 3 | Ernestine Anderson |
-| 4 | motif | 4 | Floyd Standifer |
-| 5 | metronome | 5 | Overton Berry |
-| 6 | question | 6 | Patti Bown |
-| 7 | harmonic spiral | 7 | Julian Priester |
-| 8 | ultrasonic threshold | 8 | Gary Peacock |
-| 9 | variation | 9 | Hadley Caliman |
-| 10 | minimum signal | 10 | Bud Shank |
-| 11 | trill/tremolo | 11 | Joe Brazil |
-| 12 | sawtooth sweep | 12 | Don Lanphere |
-| 13 | ostinato | 13 | Marc Seales |
-| 14 | repetition-resolution | 14 | Aaron Parks |
-| 15 | accelerando | 15 | Thomas Marriott |
-| 16 | crescendo | 16 | Jeff Lorber |
-| 17 | the hook | 17 | Reggie Watts |
-| 18 | ascending spiral | 18 | Maktub |
-| 19 | descending spiral | 19 | Fly Moon Royale |
-| 20 | sustain/the release | 20 | Whitney Monge |
-| 21 | the hammer | 21 | Polyrhythmics |
-| 22 | resonant percussion/groove reset | 22 | Foxy Apollo |
-| 23 | the testimony/groove reset | 23 | Allen Stone |
-| 24 | the invocation | 24 | Ron Artis II |
-| 25 | the congregation | 25 | Black Stax |
-| 26 | the caroling | 26 | Shaina Shepherd |
-| 27 | the liquid gurgle | 27 | The Dynamics |
-| 28 | the liquid twitter | 28 | Night Owls |
-| 29 | the rough brrit | 29 | Boogaloo Joe Jones |
-| 30 | the liquid warble synthesis | 30 | Ray Charles |
-| 31 | the whisper | 31 | Brenda Lee Eager |
-| 32 | the buzz | 32 | Luther Rabb |
-| 33 | the cadenza | 33 | Larry English |
-| 34 | the dialect | 34 | The Tempos |
-| 35 | the thrum | 35 | Robert Cray |
-| 36 | the sonic boom | 36 | Jimi Hendrix |
-| 37 | the filament | 37 | Ayron Jones |
-| 38 | the drawl | 38 | Booker T. Jones |
-| 39 | the canopy buzz | 39 | Ron Artis Jr |
-| 40 | the thinning | 40 | Alice Smith |
-| 41 | the partition | 41 | Shawn Smith |
-| 42 | the shimmer | 42 | Erica Campbell |
-| 43 | the radiance | 43 | Ann Wilson |
-| 44 | the grain | 44 | Chong the Nomad |
-| 45 | the murmur | 45 | Damien Jurado |
-| 46 | the confessional | 46 | Rocky Votolato |
-| 47 | the parable tone | 47 | Pedro the Lion |
-| 48 | the held rest | 48 | Sera Cahoone |
-| 49 | the lullaby subversion | 49 | Kimya Dawson |
-| 50 | the intimate architecture | 50 | Mirah |
-| 51 | the communal harmony | 51 | Grand Archives |
-| 52 | the testimony roar | 52 | Brandi Carlile |
-| 53 | the cathedral harmony | 53 | Fleet Foxes |
-| 54 | the fraternal jangle | 54 | Ivan & Alyosha |
-| 55 | the ember glow | 55 | Shelby Earl |
-| 56 | the dream haze | 56 | Lemolo |
-| 57 | the rattle / the stream rattle | 57 | Laura Gibson / Belted Kingfisher |
-| 58 | the ache / the pond whistle | 58 | Death Cab for Cutie / Wood Duck |
-| 59 | the digression / the quack | 59 | The Long Winters / Mallard |
-| 60 | the bare wire / the submerge call | 60 | Ben Gibbard (solo) / Pied-billed Grebe |
-| 61 | the braided voice / the tail slap | 61 | Y La Bamba / American Beaver |
-| 62 | the throwback / the rhythmic gnaw | 62 | Pickwick / Beaver Chewing |
-| 63 | the FM sheen / the chuff | 63 | Kenny Loggins / River Otter |
-| 64 | the dusk / the chitter | 64 | Jesse Sykes / Mink |
-| 65 | the open plain / the chuckle-chatter | 65 | Philip Aaberg / American Marten |
-| 66 | the country thunder / the scream | 66 | Neko Case / Fisher |
-| 67 | the clean room / the shrill bark-chitter | 67 | Chris Walla / Short-tailed Weasel |
-| 68 | the hush / the rapid chattering chirp | 68 | Sam Beam / Long-tailed Weasel |
-| 69 | the earnest voice / the warning foot-stamp hiss | 69 | Kris Orlowski / Striped Skunk |
-| 70 | the fiddle line / the churring chittering young | 70 | Horse Feathers / Raccoon |
-| 71 | the room tone / the bark screaming vixen call | 71 | Phil Elverum / Red Fox |
-| 72 | the layered loop / the low hiss click | 72 | Briana Marela / Opossum |
-| 73 | the jangle / the thump squeal | 73 | LAKE / Snowshoe Hare |
-| 74 | the reverb wash / the high sharp eenk bark | 74 | Poor Moon / American Pika |
-| 75 | the anthem / the piercing whistle alarm | 75 | The Lonely Forest / Yellow-bellied Marmot |
-| 76 | the androgynous register / the loud penetrating whistle | 76 | Chris Pureka / Hoary Marmot |
-| 77 | the ethereal layering / the musical multi-note whistle | 77 | Mree / Olympic Marmot |
-| 78 | the communal jangle / the chirping trill alarm | 78 | Acid Tongue / Townsend's Ground Squirrel |
-| 79 | the cinematic stillness / the sharp chip alarm | 79 | Jesse Marchant / Golden-mantled Ground Squirrel |
-| 80 | the organ explosion / the loud scolding chatter rattle | 80 | Mates of State / Douglas Squirrel |
-| 81 | the Broadway voice / the bark + chatter alarm | 81 | Sara Bareilles / Eastern Fox Squirrel |
-| 82 | the acoustic intimacy / the high thin tseet | 82 | Death Cab for Cutie (acoustic) / Northern Flying Squirrel |
-| 83 | the grunge whisper / the ultrasonic + soft chip | 83 | Pearl Jam (acoustic) / Deer Mouse |
-| 84 | the late whisper / the chatter + twig gnaw | 84 | Damien Jurado (late career) / Bushy-tailed Woodrat |
-| 85 | the stripped confession / the quiet plop | 85 | Rocky Votolato (acoustic) / Muskrat |
-| 86 | the electronic pulse / the amplified krek-krek wall of sound | 86 | The Postal Service / Pacific Treefrog |
-| 87 | the emerging twang / the rhythmic chirp field chorus | 87 | Neko Case (early folk) / Cricket Chorus |
-| 88 | the bedroom strum / the continuous electric buzz | 88 | Kimya Dawson (solo) / Katydid |
-| 89 | the baroque whisper / the electric buzzing throb | 89 | Parenthetical Girls / Cicada |
-| 90 | the ambient drift / the bell-like peep chorus | 90 | Sky Cries Mary / Spring Peeper-Like Chorus |
-| 91 | the sustained crush / the ultra-thin hum cloud | 91 | Hovercraft / Mosquito Swarm |
-| 92 | the global weave / the deep resonant buzz | 92 | Trance Mission / Bumblebee Drone |
-| 93 | the shimmer veil / the aggressive papery hum | 93 | NAVVI / Hornet Nest Buzz |
-| 94 | the producer's palette / the wing rustle on stream surface | 94 | Erik Blood / Stonefly Hatch |
-| 95 | the euphoric build / the mass wing buzz over water | 95 | ODESZA / Mayfly Emergence |
-| 96 | the synth-pop pulse / the duck-like clucking chorus | 96 | STRFKR / Wood Frog |
-| 97 | the algorithmic tenderness / the sustained musical purring | 97 | The Postal Service (electronic) / Toad Chorus |
-| 98 | the retro-synthetic shimmer / the pure sustained trill | 98 | Gold Casio / Tree Cricket Song |
-| 99 | the bilingual warmth / the mechanical click | 99 | Kaina / Click Beetle |
-| 100 | the nostalgic cascade / the deep cronk + bell + hollow knock | 100 | Summer Heart / Common Raven |
-| 101 | the kinetic surge / the coordinated duet | 101 | Hecuba / Common Raven Pair |
-| **102** | **the organic circuit / the caw caw caw complex** | **102** | **Campfire OK / American Crow** |
-
-The acoustic progression adds degree 102. On the artist side, the organic circuit (102) is Campfire OK -- warm synthesis, organic grain, breathing dynamics, melodic humanity, intimate campfire scale. E=4. From the kinetic surge (101, propulsive, raw, E=5) to the organic circuit (102, gentle, warm, E=4). Maximum contrast again. The engine oscillates: nostalgic cascade (100, E=4), kinetic surge (101, E=5), organic circuit (102, E=4). The breathing pattern. On the species side, the caw caw caw complex (102) is the American Crow -- alarm, assembly, scolding, feeding, rattling. E=4. From the coordinated duet (101, raven pair, synchronized, E=5) to the caw complex (102, crow, familiar, E=4). The Corvidae trio's acoustic arc: deep cronk (100), synchronized duet (101), familiar caw (102). From complex to coordinated to familiar.
-
-## Artist-City Patterns (103 patterns)
-
-| # | Pattern | Degree | Artist |
-|---|---------|--------|--------|
-| 0 | Export | 0 | Quincy Jones |
-| 1 | Draw | 1 | Bill Frisell |
-| 2 | European Exile | 2 | Wayne Horvitz |
-| 3 | The Stay | 3 | Ernestine Anderson |
-| 4 | The Teacher | 4 | Floyd Standifer |
-| 5 | The Persistence | 5 | Overton Berry |
-| 6 | The Erasure | 6 | Patti Bown |
-| 7 | Pedagogue-Draw | 7 | Julian Priester |
-| 8 | The Quiet Draw | 8 | Gary Peacock |
-| 9 | The Seeker | 9 | Hadley Caliman |
-| 10 | Late Homestead | 10 | Bud Shank |
-| 11 | The Salon Keeper | 11 | Joe Brazil |
-| 12 | The Prodigal | 12 | Don Lanphere |
-| 13 | Institutional Anchor | 13 | Marc Seales |
-| 14 | Prodigy-Export | 14 | Aaron Parks |
-| 15 | Builder-Stayer | 15 | Thomas Marriott |
-| 16 | Talent Incubator | 16 | Jeff Lorber |
-| 17 | The Uncategorizable | 17 | Reggie Watts |
-| 18 | The Workshop | 18 | Maktub |
-| 19 | The New Root | 19 | Fly Moon Royale |
-| 20 | The Street Laureate | 20 | Whitney Monge |
-| 21 | The Ensemble Anchor | 21 | Polyrhythmics |
-| 22 | The Inheritor | 22 | Foxy Apollo |
-| 23 | The Rural Draw | 23 | Allen Stone |
-| 24 | The Island Export | 24 | Ron Artis II |
-| 25 | The Cultural Guardian | 25 | Black Stax |
-| 26 | The Transmuter | 26 | Shaina Shepherd |
-| 27 | The Conduit | 27 | The Dynamics |
-| 28 | The Resident Band | 28 | Night Owls |
-| 29 | The Catalog | 29 | Boogaloo Joe Jones |
-| 30 | The Incubation | 30 | Ray Charles |
-| 31 | The Relay | 31 | Brenda Lee Eager |
-| 32 | The Foundation | 32 | Luther Rabb |
-| 33 | The Unrecorded | 33 | Larry English |
-| 34 | The Shadow Name | 34 | The Tempos |
-| 35 | The Deep Root | 35 | Robert Cray |
-| 36 | The Supernova | 36 | Jimi Hendrix |
-| 37 | The Inheritor | 37 | Ayron Jones |
-| 38 | The Touring Anchor | 38 | Booker T. Jones |
-| 39 | The Returning Wave | 39 | Ron Artis Jr |
-| 40 | The Cultural Satellite | 40 | Alice Smith |
-| 41 | The Scene Native | 41 | Shawn Smith |
-| 42 | The Gospel Export | 42 | Erica Campbell |
-| 43 | The Arena Architect | 43 | Ann Wilson |
-| 44 | The Digital Immigrant | 44 | Chong the Nomad |
-| 45 | The Stripped Murmur | 45 | Damien Jurado |
-| 46 | The Confessional Drifter | 46 | Rocky Votolato |
-| 47 | The Sacred Baritone | 47 | Pedro the Lion |
-| 48 | The Campfire Anchor | 48 | Sera Cahoone |
-| 49 | The Trojan Lullabist | 49 | Kimya Dawson |
-| 50 | The Intimate Architect | 50 | Mirah |
-| 51 | The Folk Organism | 51 | Grand Archives |
-| 52 | The Arena Breakout | 52 | Brandi Carlile |
-| 53 | The Prodigy Return | 53 | Fleet Foxes |
-| 54 | The Neighborhood Anchor | 54 | Ivan & Alyosha |
-| 55 | The Infrastructure Beneficiary | 55 | Shelby Earl |
-| 56 | The Duo Collective | 56 | Lemolo |
-| 57 | The Label Bridge | 57 | Laura Gibson |
-| 58 | The Bellingham Ascent | 58 | Death Cab for Cutie |
-| 59 | The Scene Intellectual | 59 | The Long Winters |
-| 60 | The Frontman Alone | 60 | Ben Gibbard (solo) |
-| 61 | The Corridor Bridge | 61 | Y La Bamba |
-| 62 | The Brief Blaze | 62 | Pickwick |
-| 63 | The Everett Departure | 63 | Kenny Loggins |
-| 64 | The Dark-Folk Loner | 64 | Jesse Sykes |
-| 65 | The Montana Connection | 65 | Philip Aaberg |
-| 66 | The Wanderer Who Claims Multiple Cities | 66 | Neko Case |
-| 67 | The Departed Member | 67 | Chris Walla |
-| 68 | The Visiting Artist | 68 | Sam Beam |
-| 69 | The Working Musician | 69 | Kris Orlowski |
-| 70 | The Corridor Wanderer | 70 | Horse Feathers |
-| 71 | The Anacortes Hermit | 71 | Phil Elverum |
-| 72 | The International Student | 72 | Briana Marela |
-| 73 | The K Records Collective | 73 | LAKE |
-| 74 | The Side Project | 74 | Poor Moon |
-| 75 | The Second Anacortes Act | 75 | The Lonely Forest |
-| 76 | The Identity Artist | 76 | Chris Pureka |
-| 77 | The YouTube-to-Artist Pipeline | 77 | Mree |
-| 78 | The Porch Party | 78 | Acid Tongue |
-| 79 | The Dark Meditation | 79 | Jesse Marchant |
-| 80 | The Married Duo | 80 | Mates of State |
-| 81 | The Crossover Arc | 81 | Sara Bareilles |
-| 82 | The Recursive Return | 82 | Death Cab for Cutie (acoustic) |
-| 83 | The Arena Unplugged | 83 | Pearl Jam (acoustic) |
-| 84 | The Artist Arc | 84 | Damien Jurado (late career) |
-| 85 | The Confessional Return | 85 | Rocky Votolato (acoustic) |
-| 86 | The Side Project | 86 | The Postal Service |
-| 87 | The Early Chapter | 87 | Neko Case (early folk) |
-| 88 | The Solo Distillation | 88 | Kimya Dawson (solo) |
-| 89 | The Theatrical Outsider | 89 | Parenthetical Girls |
-| 90 | The Parallel Scene | 90 | Sky Cries Mary |
-| 91 | The Spousal Satellite | 91 | Hovercraft |
-| 92 | The Cross-Pollinator | 92 | Trance Mission |
-| 93 | The Intimate Machine | 93 | NAVVI |
-| 94 | The Cross-Genre Bridge | 94 | Erik Blood |
-| 95 | The Bellingham Pipeline | 95 | ODESZA |
-| 96 | The DIY Maximalist | 96 | STRFKR |
-| 97 | The Re-Contextualized Return | 97 | The Postal Service (electronic) |
-| 98 | The Self-Released Synthesist | 98 | Gold Casio |
-| 99 | The Diasporic Synthesist | 99 | Kaina |
-| 100 | The Transatlantic Dreamer | 100 | Summer Heart |
-| 101 | The Dance Floor Provocateur | 101 | Hecuba |
-| **102** | **The Warm Circuiteer** | **102** | **Campfire OK** |
-
-One hundred and three named patterns across one hundred and three degrees. The Warm Circuiteer (102) describes the solo artist who builds warm, organic electronic music -- wiring human warmth into electronic circuits. From the Dance Floor Provocateur (101, confrontational, duo, E=5) to the Warm Circuiteer (102, inviting, solo, E=4). Consecutive degrees, opposite approaches. Provocation and invitation.
-
-## Genre Evolution (84 stages)
+## Genre Evolution (excerpt, post-centennial)
 
 | Stage | Degree | Genre | Artist |
 |-------|--------|-------|--------|
-| 27 | 45 | Folk | Damien Jurado |
-| 28 | 46 | Folk | Rocky Votolato |
-| 29 | 47 | Indie Folk | Pedro the Lion |
-| 30 | 48 | Folk | Sera Cahoone |
-| 31 | 49 | Folk Punk | Kimya Dawson |
-| 32 | 50 | Indie Folk | Mirah |
-| 33 | 51 | Indie Folk | Grand Archives |
-| 34 | 52 | Folk/Rock | Brandi Carlile |
-| 35 | 53 | Indie Folk | Fleet Foxes |
-| 36 | 54 | Folk | Ivan & Alyosha |
-| 37 | 55 | Singer-Songwriter | Shelby Earl |
-| 38 | 56 | Indie Folk | Lemolo |
-| 39 | 57 | Folk | Laura Gibson |
-| 40 | 58 | Indie Rock | Death Cab for Cutie |
-| 41 | 59 | Indie Rock | The Long Winters |
-| 42 | 60 | Folk | Ben Gibbard (solo) |
-| 43 | 61 | Folk/Indie | Y La Bamba |
-| 44 | 62 | Indie/Folk | Pickwick |
-| 45 | 63 | Soft Rock/Folk | Kenny Loggins |
-| 46 | 64 | Folk | Jesse Sykes |
-| 47 | 65 | New Age/Folk | Philip Aaberg |
-| 48 | 66 | Alt Country | Neko Case |
-| 49 | 67 | Indie/Folk | Chris Walla |
-| 50 | 68 | Folk | Sam Beam |
-| 51 | 69 | Singer-Songwriter | Kris Orlowski |
-| 52 | 70 | Indie Folk | Horse Feathers |
-| 53 | 71 | Indie/Folk | Phil Elverum |
-| 54 | 72 | Art Pop | Briana Marela |
-| 55 | 73 | Indie Pop | LAKE |
-| 56 | 74 | Indie Folk/Rock | Poor Moon |
-| 57 | 75 | Indie Pop | The Lonely Forest |
-| 58 | 76 | Folk | Chris Pureka |
-| 59 | 77 | Folk/Pop | Mree |
-| 60 | 78 | Folk/Indie | Acid Tongue |
-| 61 | 79 | Folk | Jesse Marchant |
-| 62 | 80 | Indie Pop | Mates of State |
-| 63 | 81 | Pop/Soul | Sara Bareilles |
-| 64 | 82 | Indie Folk | Death Cab for Cutie (acoustic) |
-| 65 | 83 | Acoustic Rock | Pearl Jam (acoustic) |
-| 66 | 84 | Folk | Damien Jurado (late career) |
-| 67 | 85 | Folk | Rocky Votolato (acoustic) |
-| 68 | 86 | Indie Electronic | The Postal Service |
-| 69 | 87 | Folk Country | Neko Case (early folk) |
-| 70 | 88 | Lo-Fi Folk | Kimya Dawson (solo) |
-| 71 | 89 | Avant-Pop | Parenthetical Girls |
-| 72 | 90 | Ethereal/Electronic | Sky Cries Mary |
-| 73 | 91 | Drone/Noise | Hovercraft |
-| 74 | 92 | World/Electronic | Trance Mission |
-| 75 | 93 | Dream Pop/Electronic | NAVVI |
-| 76 | 94 | Electronic/Experimental | Erik Blood |
-| 77 | 95 | Electronic | ODESZA |
-| 78 | 96 | Indie Electronic | STRFKR |
-| 79 | 97 | Indie Electronic | The Postal Service (electronic) |
-| 80 | 98 | Indie Electronic | Gold Casio |
 | 81 | 99 | Electronic/R&B | Kaina |
 | 82 | 100 | Electronic Pop | Summer Heart |
 | 83 | 101 | Dance/Electronic | Hecuba |
 | **84** | **102** | **Indie Electronic** | **Campfire OK** |
 
-Genre Stage 84 -- Indie Electronic at degree 102. Eighty-four genre stages in 102 degrees. Thirteenth electronic-adjacent entry in seventeen degrees. Campfire OK's Indie Electronic is distinct from prior Indie Electronic entries (STRFKR 96 driving synth-pop, Postal Service electronic 97 algorithmic, Gold Casio 98 retro-synthetic). Campfire OK's is organic-electronic -- warmth from nature, not nostalgia.
+Genre Stage 84 lands as a counter milestone — eighty-four distinct genre classifications in 103 degrees, 0.82 stages per degree, stable across the post-centennial threshold.
 
-## Energy Distribution
+## Files
 
-**Artist-side (after degree 102):** E1:3 (2.9%), E2:31 (30.1%), E3:27 (26.2%), E4:27 (26.2%), E5:14 (13.6%), E6:2 (1.9%). Total: 103 (degrees 0-102). E=4 gains Campfire OK (102) reaching 27 -- now tied with E=3 at 26.2%. The exhale from E=5 (101) back to E=4 (102).
+- `docs/release-notes/v1.49.242/README.md` (this file, rewritten to A-grade per the PROSE rubric)
+- `docs/release-notes/v1.49.242/chapter/00-summary.md` — derived summary
+- `docs/release-notes/v1.49.242/chapter/03-retrospective.md` — retrospective content
+- `docs/release-notes/v1.49.242/chapter/04-lessons.md` — extracted lessons (4 entries)
+- `docs/release-notes/v1.49.242/chapter/99-context.md` — context
+- `www/tibsfox/com/Research/S36/research/releases/102-campfire-ok/research.md` — Campfire OK research
+- `www/tibsfox/com/Research/S36/research/releases/102-campfire-ok/index.html` — Campfire OK index page
+- `www/tibsfox/com/Research/S36/research/releases/102-campfire-ok/knowledge-nodes.json` — Campfire OK knowledge graph
+- `www/tibsfox/com/Research/S36/research/releases/102-campfire-ok/retrospective.md` — Campfire OK retrospective
+- `www/tibsfox/com/Research/SPS/research/releases/102-american-crow/research.md` — American Crow research
+- `www/tibsfox/com/Research/SPS/research/releases/102-american-crow/index.html` — American Crow index page
+- `www/tibsfox/com/Research/SPS/research/releases/102-american-crow/knowledge-nodes.json` — American Crow knowledge graph
+- `www/tibsfox/com/Research/SPS/research/releases/102-american-crow/retrospective.md` — American Crow retrospective
 
-**Species-side (after degree 102):** E=4 for American Crow (102) after raven pair (101, E=5). The Corvidae trio energy: E=4 (raven), E=5 (raven pair), E=4 (crow). The trio brackets E=5 with E=4 on both sides.
-
-## Cross-References (Combined)
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| S36-098 | Campfire OK (102) | Gold Casio (98) | INDIE ELECTRONIC. Both E=4. Retro-synthetic vs organic-synthetic. Nostalgia vs nature. |
-| S36-093 | Campfire OK (102) | NAVVI (93) | ELECTRONIC TEXTURE. Both atmospheric. Dark nocturnal vs warm organic. Opposite temperatures. |
-| S36-095 | Campfire OK (102) | ODESZA (95) | ELECTRONIC WARMTH. Both warm. Festival-scale vs campfire-scale. Different scales of warmth. |
-| S36-100 | Campfire OK (102) | Summer Heart (100) | WARM ELECTRONIC. Both E=4, warm, melodic. Temporal warmth vs material warmth. |
-| S36-101 | Campfire OK (102) | Hecuba (101) | CONSECUTIVE CONTRAST. E=5 confrontational vs E=4 inviting. Surge and circuit. |
-| SPS-100 | American Crow (102) | Common Raven (100) | SAME GENUS CORVUS. Raven large, deep, solitary. Crow smaller, higher, social. Different ecologies. |
-| SPS-101 | American Crow (102) | Common Raven pair (101) | CORVIDAE TRIO complete. Individual, pair, social. Three dimensions. |
-| SPS-059 | American Crow (102) | Mallard (59) | FAMILIAR/UBIQUITOUS. Most recognized species. Quack and caw. |
-| SPS-025 | American Crow (102) | American Robin (25) | FAMILIAR BIRD. Two birds everyone knows. Melody and percussion. |
-| SPS-070 | American Crow (102) | Raccoon (70) | URBAN INTELLIGENCE. Both intelligent, urban-adapted. Hands vs brain. |
-
-## Infrastructure
-
-**Part A:** `www/tibsfox/com/Research/S36/research/releases/102-campfire-ok/` -- research.md, index.html, knowledge-nodes.json, retrospective.md
-**Part B:** `www/tibsfox/com/Research/SPS/research/releases/102-american-crow/` -- research.md, index.html, knowledge-nodes.json, retrospective.md
-**Release notes:** `docs/release-notes/v1.49.242/README.md`
-
-**Total: 8 files** -- standard degree package.
-
----
-
-## Retrospective
-
-**What Worked:**
-1. The Corvidae trio (100-101-102) is structurally extraordinary -- three dimensions of corvid life (individual, pair, social) in three consecutive degrees. No other family has achieved this
-2. Energy oscillation E=4 (100), E=5 (101), E=4 (102) creates a breathing rhythm -- the engine surges and relaxes, surges and relaxes
-3. The Campfire OK / American Crow parallel as "the familiar, accessible version of something grander" works on both sides -- intimate electronic vs festival electronic, everyday crow vs commanding raven
-4. The American Crow's face recognition (Marzluff UW experiments) adds a Seattle-specific scientific dimension -- the most studied crows in the world are at UW
-5. Thirteen electronic-adjacent entries in seventeen degrees maps the full electronic spectrum without repetition -- each entry differentiates
-
-**What Could Be Better:**
-1. Still no raptor in 103 entries
-2. No marine species -- 103 entries
-3. Corvidae trio may feel like genre fatigue on the species side -- three consecutive corvids, though each is structurally distinct
-
-## Lessons Learned
-
-1. Three consecutive same-family degrees work when each covers a different dimension of the family's life -- individual, pair, social. The Corvidae trio succeeds because it is not repetitive but cumulative
-2. The familiar-and-accessible parallel demonstrates a different kind of Part A / Part B connection -- not matching energy or matching sound but matching position in a spectrum (intimate vs grand, familiar vs commanding)
-3. Energy oscillation (E=4, E=5, E=4) is a structural breathing rhythm that should be tracked and used intentionally. The engine needs to breathe
-4. The American Crow at UW connects the species to a specific Seattle institution and researcher (John Marzluff) -- local specificity strengthens the species entry
-
----
-
-The organic circuit and the caw. Degree 102 breathes after the post-centennial surge.
-
-On the music side, Campfire OK reaches Genre Stage 84 -- Indie Electronic. Brit Bachmann's warm circuits. Organic grain, breathing dynamics, campfire-scale intimacy. The organic circuit is the 103rd acoustic element -- electricity that remembers fire. The warm circuiteer is the 103rd artist-city pattern -- invitation over confrontation. E=4. Thirteenth electronic entry. The exhale.
-
-On the species side, the American Crow completes the Corvidae trio -- three consecutive Corvidae (100-101-102), unprecedented in the engine. The most recognized bird sound in North America. The caw carries across every habitat in the PNW -- cities, suburbs, farms, forests, beaches, everywhere. The most habitat-generalist bird in the engine. Face recognition. Cooperative intelligence. E=4.
-
-Both E=4. Both familiar. Both the accessible version of something grander. The campfire after the festival. The crow after the raven. The engine breathes.
-
-*Degree 102. The organic circuit. A warm synth breathes in a small room -- organic grain, natural resonance, the sound of fire translated into electricity. The campfire glows. Outside, a caw carries across the neighborhood -- sharp, persistent, familiar. The American Crow. Everyone knows that sound. Three consecutive Corvidae. Individual, pair, social. The raven's deep cronk, the pair's synchronized duet, the crow's everyday caw. The trio is complete. The circuit is warm. The caw is familiar. The engine breathes.*
-
-</details>
+Total: 1 release note rewritten. Commit `d10ef62e6b4e657c2a748d8a7527a6175521a5f2` carried the original 488-line release note; adjacent commits `39a3b1a28` and `5a36f4def` carried the degree 103-106 research artifacts in the same window (32 files, 6,667 insertions combined). The uplift preserves the original commit history and rewrites only the README.
