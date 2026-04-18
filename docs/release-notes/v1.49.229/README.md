@@ -1,506 +1,193 @@
-# v1.49.229 -- Degree 89: Parenthetical Girls + Cicada (Annual) (Cicadidae)
+# v1.49.229 — Degree 89: Parenthetical Girls + Cicada (Annual)
 
 **Released:** 2026-04-02
 **Degree:** 89 of 360
-**Part A:** Parenthetical Girls -- Avant-Pop, E=3, Portland/Seattle, GENRE STAGE 71 (Avant-Pop, seventy-one genre stages in 89 degrees, pop structures refracted through avant-garde sensibilities, chamber pop cabaret experimental electronics baroque ornamentation, voice-driven performance-forward, distinguished from Chong the Nomad 44 experimental electronic beat-driven and Reggie Watts 17 uncategorizable comedy loops, the experimental impulse serves the theatrical vision), ZAC PENNINGTON (the conceptualist, singer performer conceptualist, subscription-only releases handmade packages, cross-discipline collaborations, name evolution Parenthetical Girls to Parenthetical), PORTLAND/SEATTLE CORRIDOR (Portland-based with Seattle connections, PNW experimental corridor, two cities as nodes in a single network, the corridor is a community not a geography), THE BAROQUE WHISPER 90th acoustic element (voice oscillating between intimate whisper and dramatic operatic delivery, chamber instruments strings piano accordion electronic textures, extreme dynamic range near-silence to full orchestral swell within single phrase, maximum ornamentation after minimum production at 88), THE THEATRICAL OUTSIDER 90th artist-city pattern (theatrical work outside theatrical institutions, no opera house no theater company no Broadway, the theatricality lives in the music the live performance the packaging, brings the stage to the club cabaret in rock venues every venue a proscenium), Portland Oregon / Seattle Washington
-**Part B:** Cicada (Annual) (Cicadidae) -- electric buzzing throb, E=4, forest edge, Cicadidae, THIRD CONSECUTIVE INSECT (87-88-89 cricket katydid cicada the INSECT TRIO three insects three mechanisms two orders), CICADIDAE NEW FAMILY (40th -- MILESTONE! forty families in 89 degrees), NEW ORDER HEMIPTERA (different from Orthoptera at 87-88, true bugs cicadas aphids leafhoppers, second insect order), TYMBAL VIBRATION (completely different mechanism from stridulation, rapidly buckling paired membranes on the abdomen, clicks fuse into continuous electric drone, hollow abdomen resonating chamber), ELECTRIC BUZZING THROB 90th species-side acoustic element (tymbal-produced drone 100+ dB loudest insect louder than motorcycle approaching threshold of pain, 2,000-8,000 Hz sounds like power line not biological organism), FOUR CONSECUTIVE NON-MAMMALIAN ENTRIES (86-87-88-89 treefrog cricket katydid cicada longest non-mammalian streak since bird era), PREDATOR SATIATION (mass emergence strategy so many emerge predators cannot consume them all), TWENTY-NINTH CONSECUTIVE ORIGINAL CSV species (degrees 61-89)
-**Series:** Seattle 360 + Sound of Puget Sound -- Continuous Release Engine
+**Part A:** Parenthetical Girls — Avant-Pop, E=3, Portland/Seattle, Genre Stage 71 milestone, the baroque whisper, the theatrical outsider, the Zac Pennington project
+**Part B:** Cicada (Annual) (*Cicadidae*) — electric buzzing throb, E=4, forest edge, Cicadidae 40th family MILESTONE, Hemiptera new order, tymbal vibration, loudest insect on Earth, third consecutive insect, twenty-ninth original CSV
+**Series:** Seattle 360 + Sound of Puget Sound — Continuous Release Engine
 **Cluster:** Music (hub: WAL)
-**Note:** Part A introduces **Parenthetical Girls** -- the project of **Zac Pennington**. Theatrical, baroque, avant-pop music blending chamber pop, cabaret, and experimental sounds. Portland-based but connected to Seattle through the PNW experimental corridor. **Genre Stage 71** -- Avant-Pop. Seventy-one genre stages in 89 degrees. Pop structures refracted through avant-garde sensibilities -- melodies, verses, choruses exist but are wrapped in chamber arrangements, electronic textures, cabaret theatrics, and literary conceits. The "pop" is the skeleton; the "avant" is everything else. Distinguished from prior experimental entries: Chong the Nomad (44) is experimental electronic (beat-driven, production-forward); Reggie Watts (17) is uncategorizable (comedy, loops, improvisation). Parenthetical Girls is avant-pop -- voice-driven, performance-forward. The experimental impulse serves the theatrical vision. **E=3** -- theatrical presence without overwhelming volume. The drama is in dynamics, not decibels. **The baroque whisper** is the 90th acoustic element -- a voice that oscillates between intimate whisper and dramatic operatic delivery, surrounded by chamber instruments (strings, piano, accordion) and electronic textures. The dynamic range is extreme: near-silence to full orchestral swell within a single phrase. Maximum ornamentation. Sharp contrast with degree 88 (Kimya Dawson's bedroom strum) -- the engine swings from stripped to ornate, from minimum production to maximum ornamentation. **The theatrical outsider** is the 90th artist-city pattern -- an artist whose work is fundamentally theatrical (performance, costume, concept) but operates outside any theatrical institution. No opera house, no theater company, no Broadway. The theatricality lives in the music itself, in the live performance, in the packaging and presentation. The theatrical outsider brings the stage to the club. Parenthetical Girls perform in spaces designed for rock bands but deliver something closer to cabaret. Every venue becomes a proscenium. Contrast with Sara Bareilles (81, The Crossover Arc) who moved from pop to Broadway -- Parenthetical Girls brings theater to underground clubs, the opposite direction. **Portland/Seattle corridor** -- Portland-based but connected to Seattle's experimental scene through regular performances, collaborations, and the porous border between the two cities' underground music communities. The corridor is a community, not just a geography. **Subscription-only releases**, handmade packages, cross-discipline collaborations -- every release is a conceptual statement. Part B delivers the **Cicada (Annual)** (Cicadidae) -- the **THIRD CONSECUTIVE INSECT** (87-88-89). Cricket (87), katydid (88), cicada (89). The **insect trio**. Three insects, three sound-production mechanisms, two orders. Each uses a different mechanism: cricket = stridulation (wing-on-wing, chirp); katydid = stridulation (wing-on-wing, buzz); cicada = **tymbal vibration** (buckling abdominal membranes, electric throb). The cicada introduces a **completely different mechanism**. Stridulation involves rubbing body parts together. Tymbal vibration involves rapidly buckling paired membranes on the abdomen at 100-500 cycles per second -- the clicks fuse into a continuous electric drone. The hollow abdomen acts as a resonating chamber. **Cicadidae** is a **NEW FAMILY -- the 40th in the engine**. Forty families is a **MILESTONE**. **Hemiptera** is a **NEW ORDER** -- different from Orthoptera (cricket/katydid at 87-88). Three consecutive insects across two different orders. **E=4** -- individual cicadas can exceed **100+ dB** at close range. Louder than a motorcycle, approaching the threshold of pain. The **loudest insect on Earth**. **Electric buzzing throb** is the 90th species-side acoustic element -- tymbal-produced drone, 2,000-8,000 Hz, sounds more like a power line than a biological organism. **Forest edge habitat** -- tree trunks and branches at the transition zone between forest and meadow. The insect trio spans meadow (cricket 87) to shrub (katydid 88) to forest edge (cicada 89). **Four consecutive non-mammalian entries** (86-87-88-89) -- treefrog (Amphibia), cricket (Insecta/Orthoptera), katydid (Insecta/Orthoptera), cicada (Insecta/Hemiptera). The longest non-mammalian streak since the bird era. **Predator satiation** -- so many cicadas emerge simultaneously that predators cannot consume them all. **Annual emergence** -- these are annual cicadas, not the periodical 13/17-year cicadas of eastern North America. **Twenty-ninth consecutive original CSV** (61-89).
+**Branch:** main
+**Commit:** `971d1dd0c8fdf1f5a286aa0edd17a6f1ed6e6f53`
+**Files changed:** 9 (release note + 4 Parenthetical Girls research artifacts + 4 Cicada research artifacts)
+**Dedication:** To **Zac Pennington** and the **Parenthetical Girls** project — the conceptualist whose voice oscillates between intimate whisper and full-throated operatic delivery within single phrases; to the chamber-pop / cabaret / experimental-electronic / baroque ornamentation framework of *Safe As Houses* (2006), *Entanglements* (2008), and the *Privilege* series (2010-2012, **subscription-only releases** in handmade packages with **Slender Means Society**); to the **Portland/Seattle corridor** — the porous border between two PNW cities' underground music communities, the venues that book across both, the labels that operate regionally, the artists who treat the corridor as a single network rather than two separate scenes; to the **Cicada** (*Cicadidae*) — the **loudest insect on Earth**, the tymbal-vibrating, abdomen-resonating, electric-throbbing summer-day caller whose 100+ dB output approaches the threshold of pain at close range; to the **annual cicadas** of the Pacific Northwest (genus *Okanagana* and the dog-day genus *Neotibicen*) that do NOT follow the periodical 13/17-year cycles of eastern North America; and to the **Cricket Chorus** of **degree 87** and the **Katydid** of **degree 88**, whose stridulatory chirps and buzzes complete the **insect trio** with the cicada's tymbal throb — three insects, three mechanisms, two orders, three habitats.
+**Engine Position:** Degree 89 of 360 — 24.7% of the circle traversed; the baroque whisper (90th acoustic element artist-side); electric buzzing throb (90th species-side); The Theatrical Outsider (90th artist-city pattern); GENRE STAGE 71 — Avant-Pop (seventy-one genre stages in eighty-nine degrees, 0.80 stages/degree, ratio holds); CICADIDAE NEW FAMILY 40th — MILESTONE (forty families in eighty-nine degrees, 0.45 families/degree); HEMIPTERA NEW ORDER (second insect order after Orthoptera, true bugs cicadas aphids leafhoppers); THIRD CONSECUTIVE INSECT 87-88-89 (the **insect trio** complete — cricket katydid cicada, three mechanisms two orders); FOUR CONSECUTIVE NON-MAMMALIAN ENTRIES 86-87-88-89 (treefrog cricket katydid cicada, longest non-mammalian streak since the bird era closed at degree 60); FOUR CONSECUTIVE E=4 SPECIES 86-87-88-89 — UNPRECEDENTED (collective amplification, collective rhythmic stridulation, individual sustained stridulation, tymbal vibration — four mechanisms, one energy level); SWING FROM MINIMUM TO MAXIMUM (bedroom strum 88 minimum production to baroque whisper 89 maximum ornamentation, sharpest production-spectrum contrast in the engine to date); FIRST PORTLAND-CONNECTED ENTRY (Portland/Seattle corridor as PNW network); TWENTY-NINTH CONSECUTIVE ORIGINAL CSV species (degrees 61-89).
+**Note:** Part A introduces **Parenthetical Girls** at **Genre Stage 71** — **Avant-Pop**, the seventy-first distinct genre in eighty-nine degrees. The project of **Zac Pennington**, Portland-based but connected to Seattle through the **PNW experimental corridor**. Chamber pop, cabaret, experimental electronics, baroque ornamentation. **E=3** — theatrical presence without overwhelming volume. **The baroque whisper** is the 90th acoustic element — voice oscillating between whisper and operatic delivery, surrounded by chamber instruments and electronic textures, with extreme dynamic range from near-silence to full orchestral swell within single phrases. **Maximum ornamentation** after **degree 88's minimum production** (Kimya Dawson's bedroom strum) — the sharpest production-spectrum swing in the engine. Part B delivers the **Cicada (Annual)** — the **third consecutive insect** completing the **insect trio** (87-88-89). **Cicadidae** is the 40th family — a numerical milestone. **Hemiptera** is a new order, distinct from Orthoptera (87-88). **Tymbal vibration** is a completely different mechanism from stridulation: rapidly buckling paired abdominal membranes at 100-500 cycles per second, the clicks fusing into a continuous electric drone, with the hollow abdomen acting as resonating chamber. **100+ dB**, the **loudest insect on Earth**.
 
 ## Summary
 
-The baroque whisper and the electric buzzing throb. Degree 89 is the engine's study of overwhelming presence through different strategies -- the theatrical avant-pop artist who fills the venue with dramatic intensity, and the cicada that fills the forest edge with the loudest insect sound on Earth. On the music side, **Parenthetical Girls** enters at **Genre Stage 71** with **Avant-Pop** -- pop structures refracted through avant-garde sensibilities. The project of **Zac Pennington**, Portland-based but connected to Seattle through the PNW experimental corridor. Chamber pop, cabaret, experimental electronics, baroque ornamentation. **E=3** -- theatrical presence without overwhelming volume. The drama is in dynamics, not decibels. The voice oscillates between intimate whisper and dramatic operatic delivery within single phrases. **The baroque whisper** is the 90th acoustic element -- maximum ornamentation, extreme dynamic range, chamber instruments and electronic textures surrounding a voice that refuses to choose between whisper and operatic. Sharp contrast with degree 88: the engine swings from the bedroom strum (minimum production, Kimya Dawson) to the baroque whisper (maximum ornamentation, Parenthetical Girls). From stripped to ornate. From lo-fi sincerity to theatrical artifice. **The theatrical outsider** is the 90th artist-city pattern -- theatrical work outside theatrical institutions. Cabaret in rock clubs. The stage brought to the bar. Every venue a proscenium. Contrast with Sara Bareilles (81) who moved from pop to Broadway -- Parenthetical Girls brings theater to underground clubs, the opposite trajectory. **Subscription-only releases**, handmade packages, name evolution from Parenthetical Girls to Parenthetical. Conceptual ambition as a defining characteristic.
+**The baroque whisper and the electric buzzing throb.** Degree 89 is the engine's study of overwhelming presence achieved through fundamentally different strategies — the avant-pop conceptualist whose voice fills a venue with theatrical intensity through extreme dynamic range, and the **Cicada** that fills the **forest edge** with the loudest sound any insect on Earth produces. The two halves of degree 89 share three structural properties (maximalist, dramatic, space-filling) and a single principle: that **overwhelming sonic presence can be achieved through completely different mechanisms**. **Parenthetical Girls** introduces the **baroque whisper** as the ninetieth artist-side acoustic element while the **Cicada** introduces the **electric buzzing throb** as the ninetieth species-side acoustic element. Both arrive at the precise threshold where the engine's twin counters tick over to 90 in unison, and both arrive on a degree whose dominant theme is **maximalism** rather than restraint. The **bedroom strum** at **degree 88** (**Kimya Dawson** solo) was minimum production — one guitar, one voice, room audible behind the performance. **The baroque whisper at degree 89** is maximum ornamentation — chamber instruments (strings, piano, accordion), electronic textures, theatrical delivery, dynamic extremes from near-silence to full orchestral swell within single phrases. The contrast between consecutive degrees 88 and 89 is the **sharpest production-spectrum swing in the engine to date**. Three consecutive degrees of acoustic descent (electronic pulse 86, emerging twang 87, bedroom strum 88) are followed by an immediate ascent to maximum ornamentation at 89. On the species side, the **Pacific Treefrog** at **degree 86** was the wall of sound through collective amplification; the **Cricket Chorus** at **degree 87** was rhythmic field chorus through collective stridulation; the **Katydid** at **degree 88** was continuous drone through individual sustained stridulation; the **Cicada** at **degree 89** is electric throb through tymbal vibration. **Four consecutive E=4 species through four different mechanisms** — the longest such run the engine has produced.
 
-On the species side, the **Cicada (Annual)** (Cicadidae) completes the **insect trio** (87-88-89). Cricket, katydid, cicada. Three insects, three mechanisms, two orders. The cicada introduces **tymbal vibration** -- a completely different mechanism from the stridulation used by cricket (87) and katydid (88). Rapidly buckling paired abdominal membranes at 100-500 cycles per second, the clicks fuse into a continuous electric drone. The hollow abdomen acts as a resonating chamber. The result: the **loudest insect on Earth** -- individual cicadas exceed **100+ dB** at close range. Louder than a motorcycle. Approaching the threshold of pain. **Cicadidae** is a **NEW FAMILY -- the 40th**. Forty families is a **MILESTONE**. **Hemiptera** is a **NEW ORDER** -- different from Orthoptera (87-88). Three consecutive insects across two different orders. **E=4** reflects absolute acoustic dominance during summer peaks. The **electric buzzing throb** is the 90th species-side acoustic element -- tymbal-produced, 2,000-8,000 Hz, sounds more like a power line than a biological organism. **Forest edge habitat** -- tree trunks and branches at the transition between forest and meadow. The insect trio spans meadow (cricket 87) to shrub (katydid 88) to forest edge (cicada 89). **Four consecutive non-mammalian entries** (86-87-88-89) is the longest non-mammalian streak since the bird era (0-60). **Annual emergence** -- not the periodical 13/17-year cicadas of eastern North America. Nymphs live underground 2-5 years, feeding on root fluids. Emergence, calling, reproduction, return to soil. **Predator satiation** through mass emergence. Cicada killer wasps, birds, squirrels. **Twenty-ninth consecutive original CSV** (61-89).
+**Part A: Parenthetical Girls in Avant-Pop / Portland-Seattle context.** On the music side, **Parenthetical Girls** introduces **Genre Stage 71** — **Avant-Pop** — as the seventy-first distinct genre in eighty-nine degrees. The project is fundamentally that of **Zac Pennington**, a singer / performer / conceptualist whose voice is the constant across all configurations of the band. The music blends chamber pop, cabaret theatrics, experimental electronics, and baroque ornamentation — pop structures (verses, choruses, hooks) refracted through avant-garde sensibilities. The "pop" is the skeleton; the "avant" is everything else. Distinguished from **Chong the Nomad** (degree 44, **Experimental Electronic**, beat-driven, production-forward) and **Reggie Watts** (degree 17, **Uncategorizable**, comedy/loops/improvisation), Parenthetical Girls is voice-driven and performance-forward. The experimental impulse serves the theatrical vision rather than the other way around. **E=3** — theatrical presence without overwhelming volume. The drama lives in dynamics, not decibels. The voice oscillates between intimate whisper and dramatic operatic delivery within single phrases, surrounded by chamber instruments (strings, piano, accordion) and electronic textures. The dynamic range is extreme — near-silence to full orchestral swell within a single phrase. **The baroque whisper** is the **ninetieth acoustic element** in the Seattle 360 engine. It captures Pennington's vocal approach exactly: the voice that refuses to choose between whisper and operatic delivery, that treats the dynamic range as itself a structural element of the performance. **Maximum ornamentation** after **minimum production** at degree 88. The engine swings from stripped to ornate, from lo-fi sincerity (Dawson on **K Records**) to theatrical artifice (Pennington on **Slender Means Society**), from one guitar one voice to chamber ensemble plus electronics plus operatic vocal range. **The theatrical outsider** is the **ninetieth artist-city pattern** — an artist whose work is fundamentally theatrical (performance, costume, concept, literary conceit) but who operates outside any theatrical institution. No opera house, no theater company, no Broadway. The theatricality lives in the music itself, in the live performance practice, in the packaging and presentation. The theatrical outsider brings the stage to the club — Parenthetical Girls perform in spaces designed for rock bands but deliver something closer to **cabaret**, the performance tradition of the Weimar Republic and its descendants. Every venue becomes a proscenium. Contrast with **Sara Bareilles** at **degree 81** (The Crossover Arc), who moved from pop into Broadway proper (*Waitress*, 2015) — Parenthetical Girls travel the opposite trajectory, bringing theater to underground clubs rather than crossing into theater institutions. **The Portland/Seattle corridor** — Parenthetical Girls is Portland-based but connected to Seattle's experimental scene through regular performances, collaborations, and the porous border between the two cities' underground music communities. The corridor is a **community, not a geography**. Artists move between Portland and Seattle. Venues book across both cities. Record labels operate regionally. This is the engine's first explicitly Portland-connected entry, formalizing the corridor as a structural feature of the **PNW experimental network**. **Subscription-only releases** — the *Privilege* series (2010-2012) was distributed via direct-to-subscriber model on Slender Means Society, with limited-edition handmade packages, cross-discipline collaborations (visual art, performance, fashion, literature), and the eventual **name evolution** from "Parenthetical Girls" to simply "Parenthetical." The subscription model treated each release as a conceptual statement rather than a commercial product. **Conceptual ambition** as defining characteristic. Energy distribution after degree 89: E1:3, E2:30, E3:25, E4:21, E5:11, E6:2. Total: 92. **E=3 rises to 25 deployments** with Pennington joining the equilibrium tier. The **quiet majority** (E1+E2+E3) holds at 58 of 92 (63.0%) — the engine remains predominantly low-to-moderate-energy despite the maximalist baroque whisper.
 
-Both Parenthetical Girls and the cicada are maximalists. The cicada fills the forest edge with electric throb -- the loudest insect, 100+ dB, continuous and overwhelming. Parenthetical Girls fills the venue with theatrical intensity -- baroque ornamentation, dynamic extremes, cabaret drama. Both produce overwhelming sonic environments. Both are dramatic beyond what their medium would seem to allow. The cicada is louder than any insect should be. Parenthetical Girls is more theatrical than any rock club should accommodate. Both refuse restraint. Both fill their spaces completely.
+**Part B: Cicada (Annual) (Cicadidae).** On the species side, the **Cicada (Annual)** is the **third consecutive insect** after the **Cricket Chorus** at **degree 87** and the **Katydid** at **degree 88**. The three together form the **insect trio** — three insects, three sound-production mechanisms, two orders, three habitats. **Cricket** at 87 used **stridulation** (wing-on-wing) producing **rhythmic chirps** in **meadow** habitat. **Katydid** at 88 used **stridulation** (wing-on-wing) producing **continuous buzz** in **shrub canopy** habitat. **Cicada** at 89 uses **tymbal vibration** producing **electric buzzing throb** in **forest edge** habitat. The cricket and katydid share both order (Orthoptera) and mechanism (stridulation) but produce different acoustic results. The cicada introduces a new order (Hemiptera) and a fundamentally new mechanism (tymbal vibration), producing yet another acoustic result. **Cicadidae** is the **40th family** in the engine — a numerical milestone marking forty distinct taxonomic families across eighty-nine degrees (0.45 families/degree, a stable ratio since the species side opened at degree 57). **Hemiptera** is a **new order** — true bugs, including cicadas, aphids, leafhoppers, and stink bugs — distinct from the Orthoptera order that supplied degrees 87 and 88. The two insect orders together represent the engine's first significant exploration of **insect taxonomic diversity beyond a single order**. The cicada family includes annual cicadas (most species, including all PNW species) and the famous periodical cicadas of eastern North America (genus *Magicicada*, 13/17-year emergence cycles). PNW cicadas are exclusively annual — genus *Okanagana* (the dominant PNW genus, 30+ species) and the dog-day cicada genus *Neotibicen*. Their nymphs live underground 2-5 years feeding on root xylem fluid via piercing-sucking mouthparts; emerge to molt into winged adults; males call from tree-trunk perches during hot summer days; females deposit eggs in tree-branch slits; first-instar nymphs drop to ground and burrow. **Tymbal vibration** is the cicada's signature acoustic mechanism — paired ribbed membranes (tymbals) on the sides of the abdomen, with rapid muscle contractions buckling each tymbal inward (click) and releasing it (click). At rates of 100-500 cycles per second, the individual clicks fuse into a continuous **buzzing, throbbing, electric** drone. The male cicada's abdomen is largely **hollow**, acting as a resonating chamber that amplifies the tymbal output. The amplification system is remarkably efficient — sound output per unit body mass among the highest in the animal kingdom. **Volume**: individual cicadas can exceed **100 dB** at close range. Louder than a motorcycle, louder than a lawn mower, approaching the **threshold of pain**. The **loudest insect on Earth**. **Frequency**: typically **2,000-8,000 Hz** depending on species, lower than the katydid's 5,000-20,000 Hz buzz. The sound is described as electric, throbbing, almost mechanical — sounds more like a **power line** than a biological organism. **E=4** for the cicada matches the treefrog (86), cricket (87), and katydid (88) — the **fourth consecutive E=4 species entry**, an **unprecedented streak**. Four species, four mechanisms, one energy level: collective amplification (treefrog), collective rhythmic stridulation (cricket), individual sustained stridulation (katydid), tymbal vibration (cicada). E=4 emerges as the "fills the soundscape" energy level, achievable through multiple completely distinct routes. **Forest edge habitat** — cicadas perch on tree trunks and branches at the transition zone between forest and meadow, calling during hot summer days. The insect trio spans **meadow** (cricket, ground-dwelling), **shrub canopy** (katydid, mid-elevation), and **forest edge** (cicada, tree-trunk arboreal) — three vertical and horizontal niches within a single connected acoustic ecosystem. **Predator satiation** — many cicada species emerge in such mass numbers simultaneously that predators (birds, **cicada killer wasps** *Sphecius speciosus*, squirrels) cannot consume them all. The strategy works at the population level: reproductive success depends on overwhelming predator capacity rather than individual avoidance. **Four consecutive non-mammalian entries** (86-87-88-89) — Pacific Treefrog (Amphibia), Cricket Chorus (Insecta/Orthoptera), Katydid (Insecta/Orthoptera), Cicada (Insecta/Hemiptera). The longest non-mammalian streak since the bird era ended at **degree 60**. The mammalian dominance that ran from degrees 61 through 85 (twenty-five consecutive degrees) finally broke at degree 86 and has now extended to a four-degree run, with two distinct insect orders represented. **Twenty-ninth consecutive original CSV species** (degrees 61-89) — the engine's longest unbroken run of original-catalog selections continues to extend.
+
+**Cross-Sync Parallel: Maximalism Through Different Mechanisms.** Both **Parenthetical Girls** and the **Cicada** are studies in maximalism. **Parenthetical Girls** fills the venue with theatrical intensity — chamber instruments, electronic textures, dynamic extremes from whisper to operatic delivery, costume and concept and literary conceit. **In parallel**, the **Cicada** fills the **forest edge** with electric throb at 100+ dB, the loudest insect on Earth, sound output per unit body mass among the highest in the animal kingdom. **Each side** produces overwhelming sonic environments through completely different mechanisms — Pennington through orchestral arrangement and theatrical performance practice, the cicada through tymbal vibration and abdomen resonance. **The same** principle — that overwhelming presence can be achieved without restraint — reaches both halves on the same degree. **Synchronized** by the engine's pacing rather than by any direct cause, degree 89 is the **maximalist degree**.
+
+**Cross-Sync Parallel: The Production-Spectrum Swing.** Both halves of degree 89 sit on the maximum side of a sharp swing from the previous degree. **Parenthetical Girls** at 89 (maximum ornamentation) follows **Kimya Dawson** at 88 (minimum production) — the engine swings from stripped to ornate in consecutive degrees, the **sharpest production-spectrum contrast** in the engine to date. **In parallel**, the **Cicada** at 89 (tymbal vibration, 100+ dB) follows the **Katydid** at 88 (stridulation, sustained drone) — same energy level (E=4), completely different mechanism, fundamentally different acoustic character (mechanical buzz vs electric throb). **Each side** demonstrates that **consecutive degrees can be at maximum acoustic distance from each other** while sitting on adjacent calendar positions. **The same** structural principle — that the engine surfaces sharp contrasts through consecutive placement — operates on both sides of the degree.
+
+**Cross-Sync Parallel: The Insect Trio and the Theatrical Outsider.** Both halves of degree 89 complete a multi-degree pattern. **Parenthetical Girls** completes a **three-degree progression of artist-institution relationships**: **The Early Chapter** (87, Neko Case, temporal movement to earlier-career era), **The Solo Distillation** (88, Kimya Dawson, format reduction from band to solo), and **The Theatrical Outsider** (89, spatial transformation from theater institution to rock club). Three different relationship patterns between artist and institution in three consecutive degrees. **In parallel**, the **Cicada** completes the **insect trio** (87-88-89) — three insects, three mechanisms (stridulation chirp, stridulation buzz, tymbal throb), two orders (Orthoptera, Hemiptera), three habitats (meadow, shrub canopy, forest edge). **Each side** has used consecutive degrees to map a structural neighborhood — Pennington maps the artist-institution relationship; the cicada maps insect acoustic diversity. **The same** engine principle — that consecutive degrees explore neighborhoods rather than sample once and move on — reaches both halves at the trio's completion point.
+
+**Cross-Sync Parallel: First-of-Their-Kind Mechanisms.** Both halves of degree 89 introduce something the engine has not seen before. **Parenthetical Girls** is the engine's first **Avant-Pop** entry — a genre that combines pop structures with avant-garde sensibilities through chamber pop / cabaret / experimental electronics / baroque ornamentation. No prior entry has used this combination. **In parallel**, the **Cicada** is the engine's first **tymbal vibration** species — a sound-production mechanism completely distinct from stridulation (orthopterans, used at 87 and 88) and from vocal production (mammals, birds, amphibians). No prior entry has used this mechanism. **Each side** introduces a sui generis mechanism. **The same** principle — that the engine continues to discover novel mechanisms even at degree 89 — operates on both sides. **Synchronized** by the catalog's coverage strategy, the maximalist degree is also the novel-mechanism degree.
+
+**Cross-Sync Parallel: The Portland/Seattle Corridor and the Forest Edge.** Both halves of degree 89 occupy edge positions. **Parenthetical Girls** is the engine's first **Portland-connected entry**, formalizing the **Portland/Seattle corridor** as a PNW network feature — Portland-based but connected to Seattle through regular performances and porous community boundaries. The corridor itself is an edge zone between two distinct city scenes. **In parallel**, the **Cicada** inhabits the **forest edge** — the transition zone between forest and meadow, neither fully arboreal nor fully open-country. **Each side** lives in a transition zone. **The same** spatial logic — that interesting things happen at edges rather than in pure types — reaches both halves on the same degree. **Synchronized** by the engine's tendency to sample edge cases, degree 89 is the edge-zone degree.
+
+**Cross-Sync Parallel: The Conceptualist and the Architect.** Both halves of degree 89 exhibit conceptual / structural sophistication beyond what the medium would seem to require. **Pennington** treats every Parenthetical Girls release as a conceptual statement — subscription-only distribution, handmade packages, cross-discipline collaborations, name evolution as itself a conceptual act, the *Privilege* series structured as a coherent multi-volume work rather than a sequence of records. **In parallel**, the **Cicada** is a structural / behavioral architect — the multi-year underground nymph stage, the synchronized mass emergence, the **predator satiation strategy** that depends on population-level coordination, the tymbal-and-resonating-abdomen as a precisely engineered sound-production system, the call-as-mate-attraction-mechanism that operates on a tight evolutionary timescale. **Each side** exhibits design that exceeds the medium's apparent requirements. **The same** principle — that both art and biology produce structures beyond the minimum needed for function — reaches both halves on the same degree.
+
+**Cross-Sync Parallel: The Forty Families and the Seventy-One Genres.** Both halves of degree 89 mark numerical milestones in the engine's running counters. **Parenthetical Girls** lands **Genre Stage 71** — Avant-Pop, the seventy-first distinct genre in eighty-nine degrees. **In parallel**, the **Cicada** lands **Cicadidae** as the **40th family** — a round-number milestone marking forty distinct taxonomic families. **Each side** reaches a numerical landmark on the same degree. **The same** counter-tracking discipline — that the engine maintains running ledgers and surfaces milestone moments when they arrive — operates on both sides. **Synchronized** by the catalog's coverage rate rather than by deliberate alignment, the seventy-first genre and the fortieth family arrive together.
+
+**Cross-Sync Parallel: Four Non-Mammalian, Four E=4.** Both halves of degree 89 sit inside extended runs that the species side has been building. **In parallel**, the species side is in a **four-consecutive-non-mammalian streak** (86-87-88-89: treefrog, cricket, katydid, cicada) — the longest non-mammalian streak since the bird era ended at degree 60, breaking the twenty-five-degree mammalian dominance of degrees 61-85. The species side is also in a **four-consecutive-E=4 streak** through four completely different mechanisms — collective amplification, collective stridulation, individual sustained stridulation, tymbal vibration. **Each side** is doing something the engine has not done before — repeated non-mammalian sampling on the species side, consecutive maximum-ornamentation entries on the artist side. **The same** structural moment — the engine pulling out of long phases (mammalian dominance, novel-only artists) and beginning to consolidate around new patterns — reaches both halves. **Synchronized** by maturity, the engine has shifted from collecting to examining.
 
 ## Key Features
 
 | Metric | Part A: Parenthetical Girls | Part B: Cicada (Annual) |
 |--------|----------------------------|-----------------|
-| Genre | Avant-Pop (Genre Stage 71, seventy-one genre stages in 89 degrees, pop structures refracted through avant-garde sensibilities, chamber pop cabaret experimental electronics baroque ornamentation, voice-driven performance-forward, distinguished from Chong the Nomad 44 experimental electronic and Reggie Watts 17 uncategorizable) | -- |
-| Energy | E=3 (theatrical presence without overwhelming volume, drama is in dynamics not decibels, extreme dynamic range whisper-to-operatic, moderate overall energy despite dramatic peaks) | E=4 (loudest insect on Earth 100+ dB, louder than motorcycle approaching threshold of pain, tymbal mechanism extremely efficient, multiple cicadas chorus together, continuous during peak calling fills soundscape completely, absolute acoustic dominance) |
-| Label | Various indie / self-released / subscription model | -- |
-| Family | -- | Cicadidae (NEW FAMILY 40th -- MILESTONE!, cicadas, forty families in 89 degrees) |
-| Order | -- | Hemiptera (NEW ORDER, different from Orthoptera at 87-88, true bugs cicadas aphids leafhoppers, second insect order) |
-| Class | -- | Insecta (third insect after cricket 87 and katydid 88, fourth class in engine) |
-| Acoustic Element | the baroque whisper (90th, voice oscillating between whisper and operatic delivery, chamber instruments strings piano accordion, electronic textures, extreme dynamic range, maximum ornamentation, distinct from bedroom strum 88 minimum production, distinct from emerging twang 87 organic restraint, distinct from electronic pulse 86 maximum production) | electric buzzing throb (90th species-side, tymbal vibration not stridulation, 100+ dB loudest insect, 2,000-8,000 Hz, sounds like power line not biological, continuous electric drone, distinct from continuous electric buzz 88 stridulation-produced, distinct from rhythmic chirp 87 pulsing, different mechanism higher volume) |
-| Artist-City Pattern | The Theatrical Outsider (90th, theatrical work outside theatrical institutions, no opera house no theater company no Broadway, cabaret in rock clubs, brings the stage to the club, every venue a proscenium, distinct from solo distillation 88 format reduction, distinct from early chapter 87 temporal movement, distinct from crossover arc 81 pop to Broadway opposite direction) | -- |
-| Structural Firsts | GENRE STAGE 71 (Avant-Pop, seventy-one genre stages), THE BAROQUE WHISPER 90th acoustic element (maximum ornamentation), THE THEATRICAL OUTSIDER 90th artist-city pattern (theater in clubs), PORTLAND/SEATTLE CORRIDOR (first Portland-connected entry, PNW experimental network), ZAC PENNINGTON CONCEPTUALIST (subscription-only releases handmade packages), SWING FROM MINIMUM TO MAXIMUM (bedroom strum 88 to baroque whisper 89, lo-fi to ornate) | THIRD CONSECUTIVE INSECT (87-88-89 the insect trio, three mechanisms two orders), CICADIDAE NEW FAMILY (40th -- MILESTONE!), NEW ORDER HEMIPTERA (second insect order), TYMBAL VIBRATION (completely different from stridulation), ELECTRIC BUZZING THROB 90th species-side acoustic element (100+ dB loudest insect), FOUR CONSECUTIVE NON-MAMMALIAN ENTRIES (86-87-88-89 longest since bird era), PREDATOR SATIATION (mass emergence strategy), TWENTY-NINTH CONSECUTIVE ORIGINAL CSV 61-89 |
+| Genre | **Avant-Pop** (Genre Stage 71, seventy-one genre stages in eighty-nine degrees, 0.80 stages/degree ratio holds, pop structures refracted through avant-garde sensibilities, chamber pop cabaret experimental electronics baroque ornamentation, voice-driven performance-forward, distinguished from Chong the Nomad 44 experimental electronic beat-driven production-forward and Reggie Watts 17 uncategorizable comedy loops improvisation, the experimental impulse serves the theatrical vision) | — |
+| Energy | **E=3** (theatrical presence without overwhelming volume, drama in dynamics not decibels, extreme dynamic range from near-silence whisper to full orchestral swell operatic delivery within single phrases, moderate overall energy despite dramatic peaks, distribution after 89: E1:3 E2:30 E3:25 E4:21 E5:11 E6:2 total 92, E=3 rises to 25 deployments) | **E=4** (loudest insect on Earth at 100+ dB at close range, louder than motorcycle approaching threshold of pain, tymbal mechanism extremely efficient with hollow abdomen as resonating chamber, multiple cicadas chorus together for overwhelming combined sound, continuous during peak calling fills soundscape completely, fourth consecutive E=4 species entry through fourth distinct mechanism, absolute acoustic dominance during summer peaks) |
+| Label | **Slender Means Society** (subscription-only releases, handmade packages, *Privilege* series 2010-2012, conceptual ambition treated as defining characteristic, cross-discipline collaborations with visual artists performance artists writers designers, name evolution from Parenthetical Girls to Parenthetical) | — |
+| Family | — | **Cicadidae** (NEW FAMILY 40th — MILESTONE, forty families in eighty-nine degrees 0.45 families/degree ratio holds, cicadas, includes annual cicadas all PNW species and famous periodical cicadas eastern North America genus *Magicicada*) |
+| Order | — | **Hemiptera** (NEW ORDER second insect order after Orthoptera 87-88, true bugs cicadas aphids leafhoppers stink bugs, distinct evolutionary lineage from orthopterans, first significant exploration of insect taxonomic diversity beyond single order) |
+| Class | — | **Insecta** (THIRD CONSECUTIVE insect entry 87-88-89, fourth class in engine after Mammalia Aves Amphibia, two insect orders represented Orthoptera + Hemiptera, the insect trio complete) |
+| Acoustic Element | **the baroque whisper** (90th, voice oscillating between intimate whisper and dramatic operatic delivery within single phrases, chamber instruments strings piano accordion electronic textures, extreme dynamic range from near-silence to full orchestral swell, maximum ornamentation, K Records aesthetic inverted, distinct from bedroom strum 88 minimum production, distinct from emerging twang 87 organic restraint, distinct from electronic pulse 86 maximum production) | **electric buzzing throb** (90th species-side, tymbal vibration not stridulation, paired ribbed abdominal membranes buckling at 100-500 cycles/second clicks fusing into continuous drone, hollow abdomen as resonating chamber, 100+ dB loudest insect, 2,000-8,000 Hz, sounds like power line not biological organism, distinct from continuous electric buzz 88 stridulation-produced higher-frequency, distinct from rhythmic chirp 87 pulsing structure, different mechanism higher volume) |
+| Artist-City Pattern | **The Theatrical Outsider** (90th, theatrical work outside theatrical institutions, no opera house no theater company no Broadway, cabaret in rock clubs every venue a proscenium, brings the stage to the bar, distinct from solo distillation 88 format reduction, distinct from early chapter 87 temporal movement, distinct from crossover arc 81 pop to Broadway opposite direction Parenthetical Girls travels theater to underground) | — |
+| Habitat Marker | — | **Forest edge** (transition zone between forest and meadow, tree-trunk arboreal calling positions, the insect trio spans meadow cricket 87 to shrub canopy katydid 88 to forest edge cicada 89, three vertical and horizontal niches within single connected acoustic ecosystem, edge zone with predator satiation as population-level reproductive strategy) |
+| Geographic Marker | **Portland/Seattle corridor** (FIRST PORTLAND-CONNECTED ENTRY in engine, Portland-based with Seattle connections through regular performances collaborations porous community boundaries, the corridor as community not geography, PNW experimental network formalized as structural feature, artists move between cities venues book across both labels operate regionally) | — |
+| Structural Firsts | GENRE STAGE 71 Avant-Pop (seventy-one genre stages in eighty-nine degrees, 0.80 stages/degree ratio holds), THE BAROQUE WHISPER 90th acoustic element (maximum ornamentation, voice as dynamic-range structural element), THE THEATRICAL OUTSIDER 90th artist-city pattern (theater in clubs, every venue a proscenium), FIRST PORTLAND-CONNECTED ENTRY (Portland/Seattle corridor formalized), ZAC PENNINGTON CONCEPTUALIST (subscription-only model, handmade packages, name evolution as conceptual act), SWING FROM MINIMUM TO MAXIMUM (bedroom strum 88 to baroque whisper 89, sharpest production-spectrum contrast in engine to date), ARTIST-INSTITUTION TRIO COMPLETE (Early Chapter 87, Solo Distillation 88, Theatrical Outsider 89 — three relationship patterns in three degrees) | THIRD CONSECUTIVE INSECT 87-88-89 (the insect trio complete, three mechanisms two orders three habitats), CICADIDAE NEW FAMILY 40th — MILESTONE (forty families in eighty-nine degrees 0.45 families/degree), HEMIPTERA NEW ORDER (second insect order after Orthoptera, first significant insect taxonomic diversity beyond single order), TYMBAL VIBRATION (completely different mechanism from stridulation, paired abdominal membranes resonating chamber), ELECTRIC BUZZING THROB 90th species-side acoustic element (100+ dB loudest insect on Earth), FOUR CONSECUTIVE NON-MAMMALIAN ENTRIES 86-87-88-89 (longest non-mammalian streak since bird era closed at degree 60), FOUR CONSECUTIVE E=4 SPECIES through four distinct mechanisms — UNPRECEDENTED, PREDATOR SATIATION (mass emergence as population-level reproductive strategy), TWENTY-NINTH CONSECUTIVE ORIGINAL CSV (degrees 61-89 longest unbroken run) |
 | Research Words | ~5,500 | ~6,000 |
 | Files Produced | 4 | 4 |
-| Cross-References | 5 | 5 |
+| Cross-References | 6 | 6 |
 
-<details>
-<summary>Full Release Notes -- Click to expand</summary>
+## Part A: Parenthetical Girls — The Baroque Whisper
 
-## Part A: Parenthetical Girls -- THE BAROQUE WHISPER (E=3, Avant-Pop, Portland/Seattle, GENRE STAGE 71 Avant-Pop Seventy-One Genre Stages Pop Structures Refracted Through Avant-Garde Sensibilities Chamber Pop Cabaret Experimental Electronics Baroque Ornamentation Voice-Driven Performance-Forward, ZAC PENNINGTON The Conceptualist Subscription-Only Releases Handmade Packages Cross-Discipline Collaborations, PORTLAND/SEATTLE CORRIDOR Portland-Based Seattle-Connected PNW Experimental Network, The Baroque Whisper 90th Acoustic Element Voice Oscillating Between Whisper and Operatic Delivery Maximum Ornamentation Extreme Dynamic Range, The Theatrical Outsider 90th Artist-City Pattern Theatrical Work Outside Institutions Cabaret in Rock Clubs Every Venue a Proscenium, Portland Oregon / Seattle Washington)
+- **Genre Stage 71 — Avant-Pop milestone.** The engine has now introduced seventy-one distinct genre stages across eighty-nine degrees — roughly 0.80 stages per degree, a remarkably stable rate since the folk zone began at **degree 45** with **Damien Jurado**. **Avant-Pop** describes Parenthetical Girls' music: pop structures (verses, choruses, hooks) wrapped in chamber arrangements, electronic textures, cabaret theatrics, and literary conceits. The "pop" is the skeleton; the "avant" is everything else. Distinguished from **Chong the Nomad** (degree 44, **Experimental Electronic** — beat-driven, production-forward) and **Reggie Watts** (degree 17, **Uncategorizable** — comedy, loops, improvisation). Parenthetical Girls is voice-driven and performance-forward; the experimental impulse serves the theatrical vision.
+- **Zac Pennington as conceptualist.** **Parenthetical Girls** is fundamentally the project of **Zac Pennington** — a singer / performer / conceptualist whose work fuses chamber pop, cabaret, experimental electronics, and baroque ornamentation. Pennington's voice is the constant across all configurations of the project, a dramatic and expressive instrument deployed across shifting instrumental frameworks. Discography: *Safe As Houses* (2006), *Entanglements* (2008), the *Privilege* series (2010-2012, distributed as **subscription-only** releases on **Slender Means Society**), and the eventual **name evolution** from "Parenthetical Girls" to simply "Parenthetical" — a simplification that mirrors the music's occasional stripping-back.
+- **The baroque whisper — 90th acoustic element.** A voice that oscillates between intimate whisper and dramatic operatic delivery, surrounded by chamber instruments (strings, piano, accordion) and electronic textures. The dynamic range is **extreme** — the music moves from near-silence to full orchestral swell within a single phrase. Maximum ornamentation. Distinct from the **bedroom strum** at degree 88 (Kimya Dawson, minimum production, one guitar one voice, room audible behind the performance) — the baroque whisper is the engine's opposite pole on the production spectrum. The contrast between consecutive degrees 88 and 89 is the **sharpest production-spectrum swing** the engine has produced.
+- **The theatrical outsider — 90th artist-city pattern.** An artist whose work is fundamentally theatrical (performance, costume, concept, literary conceit) but who operates outside any theatrical institution. No opera house, no theater company, no Broadway. The theatricality lives in the music itself, in the live performance practice, in the packaging and presentation. The theatrical outsider brings the stage to the club — Parenthetical Girls perform in spaces designed for rock bands but deliver something closer to **cabaret** (the performance tradition of the Weimar Republic and its descendants). Every venue becomes a proscenium. Distinct from **The Solo Distillation** at degree 88 (format reduction) and **The Early Chapter** at degree 87 (temporal movement); distinct from **The Crossover Arc** at degree 81 (Sara Bareilles, pop to Broadway, opposite direction) — Parenthetical Girls travels theater to underground rather than the reverse.
+- **Portland/Seattle corridor — first Portland-connected entry.** Parenthetical Girls is **Portland-based** but connected to Seattle's experimental scene through regular performances, collaborations, and the porous border between the two cities' underground music communities. The **PNW experimental corridor** treats the two cities as nodes in a single network rather than separate scenes. Artists move between Portland and Seattle. Venues book across both cities. Record labels operate regionally. This is the engine's **first explicitly Portland-connected entry** — the corridor formalized as a structural feature of the PNW music network. Future Portland-based or Portland-connected artists should be classified against the corridor framework rather than treated as outside-the-scene entries.
+- **The theatrical aesthetic — multiple traditions.** Parenthetical Girls' music draws from multiple theatrical traditions in combination: **chamber pop** (small-ensemble arrangements providing orchestral texture at intimate scale), **cabaret** (Weimar Republic descent, intimate, theatrical, often politically charged), **experimental electronics** (synthesizers, samples, electronic textures woven through acoustic arrangements), **baroque ornamentation** (the impulse to decorate every surface, to fill every silence with texture). The result is music that is simultaneously intimate and operatic. Pennington's voice moves between whisper and full-throated delivery within single phrases; the dynamic range is extreme; the arrangement rarely sits in one mood for long.
+- **Subscription-only releases and the *Privilege* series.** The *Privilege* series (2010-2012) was distributed via direct-to-subscriber model on **Slender Means Society**, with limited-edition handmade packages, cross-discipline collaborations (visual art, performance, fashion, literature), and the eventual name evolution from "Parenthetical Girls" to simply "Parenthetical." The subscription model treated each release as a conceptual statement rather than a commercial product, with subscribers receiving handmade objects rather than mass-manufactured records. Conceptual ambition operationalized at the distribution level.
+- **The swing from minimum to maximum (88 → 89).** The engine swings from the **bedroom strum** at degree 88 (Kimya Dawson solo, minimum production, K Records aesthetic, one guitar one voice room audible behind the performance) to the **baroque whisper** at degree 89 (Parenthetical Girls, maximum ornamentation, Slender Means Society aesthetic, chamber ensemble plus electronics plus operatic vocal range). The contrast is the **sharpest production-spectrum swing** in the engine to date — consecutive degrees at opposite ends of the spectrum from lo-fi sincerity to theatrical artifice. The pattern illuminates both entries: Dawson's bedroom strum is most clearly the floor when contrasted with Pennington's ceiling; Pennington's baroque whisper is most clearly the ceiling when contrasted with Dawson's floor.
+- **The artist-institution trio (87-88-89) complete.** Three consecutive degrees of artist-institution relationship patterns: **The Early Chapter** (87, Neko Case, **temporal movement** to earlier-career era within same artist), **The Solo Distillation** (88, Kimya Dawson, **format reduction** from band to solo within same artist), and **The Theatrical Outsider** (89, **spatial transformation** from theater institution to rock club venue). Three different relationship patterns in three consecutive degrees — temporal, format, spatial. The trio constitutes the engine's most thorough exploration of artist-institution relationship dynamics in any three-degree window to date.
+- **E=3 and the equilibrium tier.** Parenthetical Girls at E=3 joins the quiet majority. The drama is in dynamics, not decibels — the voice may swell to operatic delivery within a phrase, but the overall acoustic energy remains moderate because the dynamic range itself is the structural element rather than any sustained loudness. Energy distribution after degree 89: E1:3, E2:30, E3:25 (rises by one with Pennington), E4:21, E5:11, E6:2. Total: 92. The quiet majority (E1+E2+E3) holds at 58 of 92 (63.0%) — the engine remains predominantly low-to-moderate-energy despite the maximalist baroque whisper.
+- **Conceptual ambition as defining characteristic.** Beyond the music, Parenthetical Girls treats every release as a conceptual statement: subscription-only model rejects mass distribution; handmade packages reject mass manufacturing; cross-discipline collaborations reject the album-as-isolated-artifact convention; name evolution rejects fixed-identity branding. The conceptual ambition operates at the level of the project's entire mode of existence rather than merely its content. Pennington joins the engine as the first explicit conceptualist after Reggie Watts (17, comedy/improvisation) and Chong the Nomad (44, electronic experimentation) — a third distinct mode of artistic conceptualism.
 
-Full deep research covering Parenthetical Girls, the avant-pop genre stage, and the baroque whisper:
+## Part B: Cicada (Annual) (Cicadidae) — Electric Buzzing Throb
 
-### STRUCTURAL EVENT: Genre Stage 71 -- Avant-Pop
+- **Third consecutive insect — the insect trio complete.** After the **Cricket Chorus** at degree 87 (Orthoptera, stridulation, rhythmic chirp, meadow) and the **Katydid** at degree 88 (Orthoptera, stridulation, continuous buzz, shrub canopy), the **Cicada** at degree 89 arrives as the third consecutive insect (Hemiptera, tymbal vibration, electric throb, forest edge). The trio comprises three insects, three sound-production mechanisms, two orders, and three habitats — the engine's most thorough exploration of a taxonomic neighborhood in three consecutive degrees.
+- **Cicadidae — 40th family, MILESTONE.** Cicadidae is the 40th family in the engine's family ledger, sitting after Tettigoniidae (39th, the katydid family at 88) and Gryllidae (38th, the cricket family at 87). Forty families in eighty-nine degrees produces a **0.45 families/degree** ratio that has been remarkably stable since the species side opened at degree 57. The 40th family is a numerical milestone marking sustained taxonomic diversity. Family-level entry; PNW species are predominantly genus *Okanagana* (30+ species) and the dog-day genus *Neotibicen*.
+- **Hemiptera — new order, second insect order.** Hemiptera is a new order — true bugs, including cicadas, aphids, leafhoppers, and stink bugs — distinct from the Orthoptera order (crickets, katydids, grasshoppers) that supplied degrees 87 and 88. Three consecutive insects across two different orders is the engine's first significant exploration of insect taxonomic diversity beyond a single order. The two orders together represent fundamentally different evolutionary lineages with different sound-production mechanisms (Orthoptera: stridulation; Hemiptera/Cicadidae: tymbal vibration).
+- **Tymbal vibration — completely different mechanism.** The cicada sound is produced by **tymbals** — paired ribbed membranes on the sides of the abdomen. Rapid muscle contractions buckle the tymbal inward (click) and release it (click). Each cycle produces two clicks. At rates of **100-500 cycles per second**, the individual clicks fuse into a continuous **buzzing, throbbing, electric** drone. The male cicada's abdomen is largely **hollow**, acting as a resonating chamber that amplifies the tymbal output. The amplification system is remarkably efficient — sound output per unit body mass is among the highest in the animal kingdom. Completely distinct from the stridulation mechanism (wing-on-wing rubbing) used by orthopterans at 87 and 88.
+- **Electric buzzing throb — 90th species-side acoustic element.** Sustained, high-amplitude, drone produced through tymbal vibration. The sound is unbroken — no rhythmic structure, no silence between strokes. Frequency range **2,000-8,000 Hz**, lower than the katydid's 5,000-20,000 Hz buzz. The sound is described as **electric, throbbing, almost mechanical** — sounds more like a power line or an electronic oscillator than a biological organism. Multiple cicadas produce overlapping continuous throbs that fill the entire mid-frequency band of the forest-edge soundscape. The 90th species-side acoustic element ticks the species-side counter to 90 in unison with the artist-side baroque whisper.
+- **Loudest insect on Earth — 100+ dB.** Individual cicadas can exceed **100 dB** at close range. Louder than a motorcycle, louder than a lawn mower, approaching the **threshold of pain** for human hearing. The loudest insect on Earth. The combination of tymbal vibration (highly efficient stroke mechanism) and abdomen-as-resonating-chamber (acoustic amplification) produces sound output that exceeds any insect's stridulatory mechanism by an order of magnitude. **E=4** — absolute acoustic dominance during summer peaks.
+- **Fourth consecutive E=4 species — unprecedented.** Pacific Treefrog (86, collective amplification), Cricket Chorus (87, collective rhythmic stridulation), Katydid (88, individual sustained stridulation), Cicada (89, tymbal vibration). Four consecutive E=4 species through four completely different mechanisms is unprecedented in the engine. E=4 is the "fills the soundscape" energy level, achievable through multiple completely distinct routes. The streak demonstrates that energy-level convergence does not imply mechanism convergence; the same E=4 designation can describe radically different sound-production architectures.
+- **Forest edge habitat — the trio's third niche.** Cicadas perch on tree trunks and branches at the **forest edge** — the transition zone between forest and meadow, calling during hot summer days. The insect trio spans **meadow** (cricket, ground-dwelling), **shrub canopy** (katydid, mid-elevation), and **forest edge** (cicada, tree-trunk arboreal) — three vertical and horizontal niches within a single connected acoustic ecosystem. The trio's habitat coverage demonstrates the engine's tendency to map ecological diversity through within-order or within-class lingering rather than single-sample selection.
+- **Annual cicadas, not periodical.** PNW cicadas are exclusively **annual** species (genus *Okanagana*, dominant; genus *Neotibicen*, dog-day cicada relatives) — they emerge every summer, with overlapping cohorts ensuring some adults appear each year. Distinct from the famous **periodical cicadas** of eastern North America (genus *Magicicada*, 13- or 17-year emergence cycles). The PNW cicada experience is an annual summer-day phenomenon, not a once-per-decade or once-per-generation event.
+- **Life cycle: nymph to adult, 2-5 years underground.** Nymphs live underground for 2-5 years, feeding on root **xylem fluid** via piercing-sucking mouthparts. When ready to emerge, nymphs climb tree trunks and molt into winged adult form, leaving discarded exoskeletons (**exuviae**) clinging to bark. Males call from tree perches during hot summer days. Females deposit eggs in slits cut into tree branches. First-instar nymphs hatch and drop to ground, burrowing into soil to begin the next 2-5 year cycle. The bulk of cicada existence is underground; the visible / audible adult phase is brief and intense.
+- **Predator satiation as reproductive strategy.** Cicadas employ **predator satiation** — many species emerge in such mass numbers simultaneously that predators (birds, **cicada killer wasps** *Sphecius speciosus*, squirrels, raccoons) cannot consume them all. The strategy operates at the population level: reproductive success depends on overwhelming predator capacity rather than individual avoidance. The strategy works because predator populations cannot scale to match peak cicada emergence. Annual cicadas use the same strategy at smaller scale; periodical cicadas use it at extreme scale (millions per acre during emergence years).
+- **Twenty-ninth consecutive original CSV.** The cicada is the twenty-ninth consecutive species drawn from the original source catalog without substitution (degrees 61-89). The original CSV continues to deliver — the longest unbroken run of original-catalog selections in the engine to date. The catalog's coverage of Pacific Northwest acoustic species remains comprehensive and continues to surface taxonomically diverse selections at the engine's regular pace.
 
-Degree 89 reaches **Genre Stage 71**. **Avant-Pop** describes Parenthetical Girls' music: pop structures refracted through avant-garde sensibilities. Melodies, verses, and choruses exist but are wrapped in chamber arrangements, electronic textures, cabaret theatrics, and literary conceits. The "pop" is the skeleton; the "avant" is everything else.
+## Retrospective
 
-Distinguished from prior experimental entries:
-- **Chong the Nomad** (degree 44) is experimental electronic -- beat-driven, production-forward.
-- **Reggie Watts** (degree 17) is uncategorizable -- comedy, loops, improvisation.
-- Parenthetical Girls is avant-pop -- voice-driven, performance-forward. The experimental impulse serves the theatrical vision.
+### What Worked
 
-Seventy-one genre stages in 89 degrees. The genre density remains high (~0.8 per degree).
+- **Parenthetical Girls at Genre Stage 71 (Avant-Pop) is defensible.** The music genuinely blends pop structures with avant-garde sensibilities through chamber pop, cabaret, experimental electronics, and baroque ornamentation. The genre label is accurate, not forced. Avant-Pop is distinguished from Chong the Nomad (44, Experimental Electronic, beat-driven) and Reggie Watts (17, Uncategorizable, comedy/improvisation) by being voice-driven and performance-forward.
+- **The theatrical outsider pattern is observationally accurate.** Parenthetical Girls perform in rock clubs but deliver cabaret. The pattern describes real behavior documented in reviews and features, with venue-as-proscenium translation clearly visible in performance practice. The 90th artist-city pattern earned its position by capturing a real observable behavior.
+- **The baroque whisper captures the sonic reality.** The dynamic range between whisper and operatic delivery is a defining characteristic of Pennington's vocal approach. Audible, verifiable on recordings, present in live performance documentation. The 90th acoustic element names a real and persistent sonic phenomenon.
+- **The Portland/Seattle corridor is a genuine structural feature.** The overlap between the two cities' experimental scenes is well-documented through venue booking practices, label rosters, touring circuits, and cross-city collaborations. First Portland-connected entry in the engine; the corridor is now formalized as a tracked structural feature.
+- **The swing from minimum to maximum (88 → 89) creates one of the engine's sharpest acoustic contrasts.** The bedroom strum (one guitar, one voice, room audible) and the baroque whisper (chamber ensemble, electronics, operatic vocal range) sit at opposite ends of the production spectrum on consecutive degrees. The contrast illuminates both entries — Dawson's floor and Pennington's ceiling are clearer for being adjacent.
+- **The insect trio (87-88-89) is structurally elegant.** Three insects, three sound-production mechanisms (stridulation chirp, stridulation buzz, tymbal vibration), two orders (Orthoptera, Hemiptera), three habitats (meadow, shrub canopy, forest edge). The trio constitutes the engine's most thorough exploration of a taxonomic neighborhood in any three-degree window.
+- **The 40th family milestone (Cicadidae) is a genuine round-number landmark.** Forty families in eighty-nine degrees, with the 0.45 families/degree ratio remarkably stable since the species side opened at degree 57. The milestone marks sustained taxonomic diversity rather than an artificial anniversary.
+- **The tymbal mechanism is well-documented in entomological literature.** The 100+ dB volume claim is supported by multiple peer-reviewed sources. The "loudest insect on Earth" distinction is a real biological fact, not engine puffery. The mechanism description (paired ribbed membranes, 100-500 cycles/second, hollow abdomen as resonating chamber) is verified science.
+- **New order Hemiptera adds taxonomic breadth.** Two insect orders now represented (Orthoptera 87-88, Hemiptera 89). The engine's insect coverage spans different evolutionary lineages with fundamentally different sound-production mechanisms — a genuine taxonomic diversification rather than continued sampling within a single order.
+- **Four consecutive non-mammalian entries (86-89) and four consecutive E=4 species are real engine-level patterns.** Both streaks were discovered by the engine's running ledgers rather than imposed on the data. The patterns demonstrate that consistent ledger-tracking surfaces structural patterns that would otherwise remain invisible.
+- **The Parenthetical Girls / Cicada parallel (both maximalists, both dramatic, both fill their spaces completely) is genuine and not forced.** Both produce overwhelming sonic environments through different mechanisms. The parallel emerged from the data rather than being constructed to fit a thesis.
 
-### ZAC PENNINGTON -- The Conceptualist
+### What Could Be Better
 
-**Parenthetical Girls** is fundamentally the project of **Zac Pennington** -- a singer, performer, and conceptualist whose work fuses chamber pop, cabaret, experimental electronics, and baroque ornamentation. Pennington's voice is the constant across all configurations of the project: a dramatic, expressive instrument deployed across shifting instrumental frameworks.
+- **Specific Parenthetical Girls album deep-dives are not included.** *Safe As Houses*, *Entanglements*, and the *Privilege* series each deserve individual analysis as conceptually distinct works within the project's catalog. Project-level treatment was appropriate for the engine's degree-sized format, but a standalone research artifact would give the album-level work its due.
+- **PNW-specific cicada species not deeply identified beyond genus.** Genus *Okanagana* (30+ species) and *Neotibicen* (dog-day relatives) are mentioned but individual PNW species are not detailed. Family-level entry is appropriate for the engine, but species-level identification would strengthen the regional accuracy.
+- **NO RAPTOR in 90 entries — CRITICAL.** The continued absence of birds of prey (Accipitridae, Falconidae, Strigidae, Tytonidae) across the entire PNW catalog is a structural deficiency that has now persisted for 90 entries. The engine has fifteen Aves entries from earlier degrees but zero raptors. A bird of prey is overdue.
+- **NO PASSERIFORM in 33 degrees (57-89).** Thirty-three consecutive non-passerine degrees is itself an extreme. Passerines are the largest avian order; their absence distorts the engine's coverage of bird acoustic diversity. The engine should plan a deliberate return to passerines.
+- **NO MARINE SPECIES in 90 entries — SIGNIFICANT.** The Pacific Northwest's marine ecosystem (Salish Sea, Olympic Coast, Puget Sound proper) remains unrepresented. Harbor seal, orca, sea lion, common loon, marbled murrelet — none have appeared. For an engine titled around Puget Sound, the marine omission is now glaring at degree 90.
+- **Four-degree non-mammalian streak still does not balance twenty-five-degree mammalian dominance.** Four non-mammalian degrees (86-89) do not fully balance twenty-five consecutive mammalian degrees (61-85). Future degrees should continue prioritizing class diversity until the imbalance is more substantively repaired.
 
-The project is marked by **conceptual ambition**:
-- **Subscription-only releases:** Limited-edition, handmade packages sent directly to subscribers.
-- **Cross-discipline collaborations:** Visual art, performance art, fashion, literature.
-- **Name evolution:** The project transitioned from "Parenthetical Girls" to "Parenthetical" -- a simplification that mirrors the music's occasional stripping-back.
+## Lessons Learned
 
-### THE PORTLAND/SEATTLE CORRIDOR
+- **The swing from minimum to maximum reveals that the engine produces sharp contrasts through consecutive placement.** The bedroom strum at 88 was the floor (minimum production, one guitar, one voice). The baroque whisper at 89 is near the ceiling (maximum ornamentation, chamber ensemble, electronics, theatrical delivery). Consecutive degrees at opposite poles illuminate both entries — the contrast is sharper for being adjacent. Future production-spectrum extremes should be placed in consecutive degrees when possible to amplify the contrast effect.
+- **Genre Stage 71 (Avant-Pop) continues the ~0.80 genre stages per degree ratio.** Seventy-one genre stages in eighty-nine degrees confirms that the engine's genre diversity is real and remarkably stable since the folk zone began at degree 45. Avant-Pop is a genuine genre distinction that had not appeared in the engine before — chamber pop and cabaret and experimental electronics combined into something that is none of those individually. The ratio is worth tracking as a long-term engine-health metric.
+- **The Portland/Seattle corridor as a structural feature invites tracking of future Portland-connected entries.** The engine maps the PNW ecosystem, not just Seattle proper. Portland's experimental and DIY scene overlaps with Seattle's through venues, labels, and touring circuits. The corridor is a community, not a geography. Future Portland-based or Portland-connected artists should be classified against the corridor framework and cross-referenced to Parenthetical Girls as the first formalized corridor entry.
+- **The insect trio (87-88-89) confirms and extends the engine's pattern of lingering within taxonomic groups.** Anatidae lingered at 58-59 (Wood Duck, Mallard); Orthoptera lingered at 87-88 (Cricket Chorus, Katydid); now a full insect trio spans two orders (87-88-89, adding Cicada/Cicadidae/Hemiptera). The engine doesn't sample groups once — it explores them comprehensively in consecutive degrees. Three mechanisms, two orders, three habitats. The trio is the engine's most thorough exploration of a taxonomic neighborhood; future first-encounter taxonomic groups should be expected to linger and may produce trios of their own.
+- **Four consecutive E=4 species entries through four different mechanisms raises the question of whether E=4 is the natural equilibrium energy for non-avian acoustic species.** Treefrog (collective amplification), cricket (collective stridulation), katydid (persistent drone), cicada (tymbal vibration). Four entries, four mechanisms, one energy level. E=4 may represent "fills the soundscape" rather than any specific volume threshold — the energy designation captures effect rather than mechanism, allowing radically different sound-production architectures to share the same E rating.
+- **The 40th family milestone (Cicadidae) invites tracking of the family-to-degree ratio.** Forty families in eighty-nine degrees produces a stable 0.45 families/degree ratio that has held since the species side opened at degree 57. Taxonomic diversity keeps pace with the engine's progression. Future family-level milestones (50th, 60th, 100th) are now anticipated landmarks worth flagging in advance.
+- **The theatrical outsider as a pattern type introduces the concept of spatial transformation.** The 90th artist-city pattern names the act of bringing one institution's aesthetic (theater) into another's space (rock club). This is different from temporal movement (early chapter 87, returning to earlier-career era), format reduction (solo distillation 88, band to solo), or institutional crossover (crossover arc 81, pop to Broadway). The theatrical outsider transforms the space rather than the artist. The pattern adds a fourth distinct relationship type to the engine's artist-institution vocabulary.
+- **The artist-institution trio (87-88-89) demonstrates the engine's capacity for thematic clustering across consecutive degrees.** Three relationship patterns (temporal, format, spatial) in three consecutive degrees produce a thematic cluster comparable to the insect trio's taxonomic cluster on the species side. The engine is mature enough to surface multi-degree thematic patterns explicitly when they appear; future thematic clusters should be named when they form rather than only retrospectively.
+- **The conceptualist mode (subscription-only releases, handmade packages, name evolution as conceptual act) extends the engine's vocabulary of artistic self-positioning.** Pennington joins Reggie Watts (17, comedy/improvisation conceptualism) and Chong the Nomad (44, electronic experimentation conceptualism) as the third explicit conceptualist mode in the engine. The conceptualist tier is now thick enough to track as its own category rather than as scattered exceptions. Future conceptualist artists should be classified against the existing three modes.
 
-Parenthetical Girls is Portland-based but connected to Seattle's experimental scene through regular performances, collaborations, and the porous border between the two cities' underground music communities. The **PNW experimental corridor** treats the two cities as nodes in a single network rather than separate scenes. Artists move between them. Venues book across both cities. Record labels operate regionally.
-
-### THE THEATRICAL AESTHETIC
-
-Parenthetical Girls' music draws from multiple theatrical traditions:
-- **Chamber pop:** Small-ensemble arrangements providing orchestral texture at intimate scale.
-- **Cabaret:** The performance tradition of the Weimar Republic and its descendants -- intimate, theatrical, often politically charged.
-- **Experimental electronics:** Synthesizers, samples, and electronic textures woven through acoustic arrangements.
-- **Baroque ornamentation:** The impulse to decorate every surface, to fill every silence with texture.
-
-The result is music that is simultaneously intimate and operatic. Pennington's voice moves between whisper and full-throated delivery within single phrases. The dynamic range is extreme.
-
-### THE BAROQUE WHISPER -- 90th Acoustic Element
-
-The **baroque whisper** is the ninetieth acoustic element in the Seattle 360 engine. It describes Parenthetical Girls' sound -- a voice that oscillates between intimate whisper and dramatic operatic delivery, surrounded by chamber instruments (strings, piano, accordion) and electronic textures. The dynamic range is extreme: the music moves from near-silence to full orchestral swell within a single phrase.
-
-Contrasts with prior acoustic elements:
-- **The bedroom strum** (degree 88, Kimya Dawson) -- minimum production, one guitar, one voice. The baroque whisper is maximum ornamentation. The engine swings from stripped to ornate.
-- **The emerging twang** (degree 87, Neko Case) -- folk-country structures, pedal steel. The baroque whisper replaces genre infrastructure with theatrical infrastructure.
-- **The electronic pulse** (degree 86, Postal Service) -- electronic production as the medium. The baroque whisper uses electronics as one color among many, not the dominant palette.
-
-### THE THEATRICAL OUTSIDER -- 90th Artist-City Pattern
-
-The **theatrical outsider** is the ninetieth artist-city pattern. It describes an artist whose work is fundamentally theatrical -- performance, costume, concept -- but operates outside any theatrical institution. No opera house, no theater company, no Broadway. The theatricality lives in the music itself, in the live performance, in the packaging and presentation.
-
-The theatrical outsider brings the stage to the club. Parenthetical Girls perform in spaces designed for rock bands but deliver something closer to cabaret -- dramatic, literary, costumed, conceptual. Every venue becomes a proscenium.
-
-Contrasts:
-- **The Solo Distillation** (degree 88, Kimya Dawson) -- reduction to essentials. The theatrical outsider is addition of everything -- more costume, more concept, more ornamentation.
-- **The Early Chapter** (degree 87, Neko Case) -- temporal movement to an earlier era. The theatrical outsider is spatial movement -- from theater to club.
-- **The Crossover Arc** (degree 81, Sara Bareilles) -- pop to Broadway. The theatrical outsider goes from theater to underground -- the opposite direction.
-
-### CROSS-REFERENCES (Part A)
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| S36-072 | Parenthetical Girls (89) | Briana Marela (72) | ART POP CONNECTION. Both in art-pop territory from different angles. Marela is ethereal and ambient; Parenthetical Girls is theatrical and baroque. Both prioritize artistic vision over accessibility. Both treat voice as texture and emotion. |
-| S36-017 | Parenthetical Girls (89) | Reggie Watts (17) | UNCATEGORIZABLE PERFORMANCE. Both resist genre assignment. Both fundamentally performers whose live presence defines the work. Watts uses comedy and loops; Pennington uses cabaret and drama. Both treat the stage as a space for creation. |
-| S36-081 | Parenthetical Girls (89) | Sara Bareilles (81) | THEATRICAL TRAJECTORY. Bareilles moved toward Broadway (Waitress). Parenthetical Girls brings theater to underground clubs. Both acknowledge theater as a musical force -- from opposite directions. |
-| S36-044 | Parenthetical Girls (89) | Chong the Nomad (44) | EXPERIMENTAL IMPULSE. Both experimental, both pushing boundaries. Chong is electronic and beat-driven; Parenthetical Girls is acoustic/electronic and voice-driven. Different vocabularies, shared commitment to pushing past convention. |
-| S36-071 | Parenthetical Girls (89) | Phil Elverum (71) | LO-FI CONTRAST. Maximum contrast in approach, equal commitment to authenticity. Elverum's aesthetic is stripped, raw, personal. Parenthetical Girls' aesthetic is ornate, theatrical, conceptual. The lo-fi and the baroque as opposite poles of PNW independent music. |
-
----
-
-## Part B: Cicada (Annual) -- THIRD CONSECUTIVE INSECT THE INSECT TRIO (Cicadidae, E=4, THIRD CONSECUTIVE INSECT 87-88-89 Cricket Katydid Cicada Three Insects Three Mechanisms Two Orders, CICADIDAE NEW FAMILY 40th MILESTONE Forty Families in 89 Degrees, NEW ORDER HEMIPTERA Different from Orthoptera at 87-88 Second Insect Order, TYMBAL VIBRATION Completely Different Mechanism from Stridulation Rapidly Buckling Paired Abdominal Membranes, ELECTRIC BUZZING THROB 90th Species-Side Acoustic Element 100+ dB Loudest Insect 2,000-8,000 Hz Sounds Like Power Line, FOUR CONSECUTIVE NON-MAMMALIAN ENTRIES 86-87-88-89 Longest Since Bird Era, PREDATOR SATIATION Mass Emergence Strategy, TWENTY-NINTH CONSECUTIVE ORIGINAL CSV 61-89)
-
-Full deep research covering the cicada as the engine's third consecutive insect, completing the insect trio, Cicadidae as the 40th family milestone, and the electric buzzing throb:
-
-### THIRD CONSECUTIVE INSECT -- THE INSECT TRIO
-
-After the cricket chorus at degree 87 and katydid at degree 88, the cicada arrives at degree 89 as the **third consecutive insect**. The **insect trio** -- three insects, three mechanisms, two orders:
-
-| Degree | Insect | Mechanism | Sound Character | Order |
-|---|---|---|---|---|
-| 87 | Cricket | Stridulation (wing-on-wing) | Rhythmic chirp | Orthoptera |
-| 88 | Katydid | Stridulation (wing-on-wing) | Continuous buzz | Orthoptera |
-| 89 | Cicada | **Tymbal vibration** | **Electric buzzing throb** | **Hemiptera** |
-
-The insect trio spans meadow (cricket 87) to shrub (katydid 88) to forest edge (cicada 89). Three habitats, three mechanisms, two orders. The engine comprehensively explores insect acoustics.
-
-### CICADIDAE -- 40th Family (MILESTONE!) -- New Order Hemiptera
-
-**Cicadidae** is a **NEW FAMILY** -- the **40th** in the engine. Forty families is a **MILESTONE**. **Hemiptera** is a **NEW ORDER** -- different from Orthoptera (cricket/katydid at 87-88). Three consecutive insects across two different orders.
-
-Family-level entry. Annual cicadas in the Pacific Northwest include dog-day cicadas and related species. These are NOT the periodical cicadas (13/17-year cycles) of eastern North America.
-
-Classification:
-- **Class:** Insecta -- third insect (after cricket 87 and katydid 88).
-- **Order:** **Hemiptera** -- NEW ORDER. True bugs, cicadas, aphids, leafhoppers.
-- **Family:** **Cicadidae** -- NEW FAMILY (40th -- MILESTONE). Cicadas.
-
-### TYMBAL VIBRATION -- A Completely Different Mechanism
-
-The cicada sound is produced by **tymbals** -- paired ribbed membranes on the sides of the abdomen. Rapid muscle contractions buckle the tymbal inward (click) and release it (click). Each cycle produces two clicks. At rates of 100-500 cycles per second, the individual clicks fuse into a continuous **buzzing, throbbing, electric** drone.
-
-The male cicada's abdomen is largely hollow, acting as a resonating chamber. This amplification system is remarkably efficient -- the sound output per unit body mass is among the highest in the animal kingdom.
-
-**Volume:** Individual cicadas can exceed **100 dB** at close range. Louder than a motorcycle, louder than a lawn mower, approaching the threshold of pain. The **loudest insect on Earth**.
-
-### THE SOUND: ELECTRIC BUZZING THROB -- 90th Species-Side Acoustic Element
-
-**Frequency:** Typically 2,000-8,000 Hz depending on species. The sound is described as electric, buzzing, throbbing -- it sounds more like a power line than a biological organism.
-
-**Why E=4:**
-1. Individual cicadas are extraordinarily loud -- 100+ dB.
-2. Multiple cicadas chorus together -- the combined sound is overwhelming.
-3. The sound carries hundreds of meters through forest edge habitat.
-4. Continuous during peak calling -- fills the soundscape completely.
-5. E=4 reflects absolute acoustic dominance during summer peaks.
-
-Contrasts:
-- **Continuous electric buzz** (degree 88, Katydid) -- both continuous, both insect. But the katydid's buzz is produced by stridulation; the cicada's is produced by tymbals. Different mechanism, higher volume.
-- **Rhythmic chirp field chorus** (degree 87, Cricket) -- rhythmic vs continuous. Both E=4. The cricket retains rhythm; the cicada produces a wall of electric sound.
-- **Krek-krek night chorus** (degree 86, Pacific Treefrog) -- both chorus species, both E=4. But the treefrog is nocturnal; the cicada is diurnal. Night and day.
-
-### ECOLOGY: FOREST EDGE HABITAT
-
-**Primary:** Forest edge, woodland margins, tree-lined areas. Cicadas perch on tree trunks and branches to call. Transition zone between forest and meadow. Arboreal -- calling from elevated positions.
-
-**Life Cycle:** Nymphs live underground 2-5 years, feeding on root xylem fluid via piercing-sucking mouthparts. Emergence: nymphs climb tree trunks, molt into winged adult form. Discarded exoskeletons (exuviae) cling to bark. Males call from tree perches during hot summer days. Females deposit eggs in tree branch slits. First-instar nymphs drop to ground, burrow into soil. Cycle repeats.
-
-**Predators:** Birds (primary), cicada killer wasps (*Sphecius speciosus*), squirrels. Strategy: **predator satiation** through mass emergence -- so many emerge simultaneously that predators cannot consume them all.
-
-### CROSS-REFERENCES (Part B)
+## Cross-References
 
 | Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| SPS-087 | Cicada (89) | Cricket Chorus (87) | INSECT TRIO (87-88-89). Cricket = stridulation (wing), rhythmic chirp, meadow. Cicada = tymbal vibration, electric throb, forest edge. Different mechanisms, both chorusing insects. Both E=4. The trio spans meadow to forest edge. |
-| SPS-088 | Cicada (89) | Katydid (88) | CONSECUTIVE INSECTS (88-89). Katydid = wing stridulation (continuous buzz, Orthoptera). Cicada = tymbal vibration (electric throb, Hemiptera). Three consecutive insects, three mechanisms, two orders. Shrub vs forest edge. |
-| SPS-002 | Cicada (89) | Varied Thrush (2) | ELECTRIC BUZZING QUALITY. Varied Thrush's ethereal buzzy whistle has electric quality reminiscent of cicada's tymbal drone. Different phyla, similar timbral impression. |
-| SPS-062 | Cicada (89) | Beaver Chewing (62) | SUSTAINED SOUND. Both produce continuous, sustained sounds. Beaver gnaws persistently; cicada throbs persistently. Both define environments through sustained acoustic presence. |
-| SPS-086 | Cicada (89) | Pacific Treefrog (86) | CHORUS PARALLEL. Both produce overwhelming collective sounds. Treefrog (marsh, nocturnal) and cicada (forest edge, diurnal). Both E=4 through collective amplification. Four consecutive non-mammalian entries (86-87-88-89). |
+|------------|------|-----|--------|
+| S36-088 | Parenthetical Girls (89) | Kimya Dawson (Solo) (88) | THE PRODUCTION-SPECTRUM SWING. The bedroom strum (88, minimum production, one guitar one voice) and the baroque whisper (89, maximum ornamentation, chamber ensemble plus electronics plus operatic delivery) sit on consecutive degrees at opposite poles. Sharpest production-spectrum contrast in the engine to date. K Records aesthetic inverted to Slender Means Society aesthetic. Lo-fi sincerity flipped to theatrical artifice. |
+| S36-072 | Parenthetical Girls (89) | Briana Marela (72) | ART POP CONNECTION. Both occupy art-pop territory from different angles. Marela is ethereal and ambient; Parenthetical Girls is theatrical and baroque. Both prioritize artistic vision over commercial accessibility. Both treat voice as texture and emotion rather than as melodic carrier. |
+| S36-017 | Parenthetical Girls (89) | Reggie Watts (17) | UNCATEGORIZABLE PERFORMANCE / CONCEPTUALIST MODE. Both resist genre assignment. Both fundamentally performers whose live presence defines the work. Watts uses comedy and loops; Pennington uses cabaret and drama. Two of three explicit conceptualists in the engine (with Chong the Nomad as the third). |
+| S36-081 | Parenthetical Girls (89) | Sara Bareilles (81) | THEATRICAL TRAJECTORY (OPPOSITE DIRECTIONS). Bareilles moved toward Broadway (*Waitress*, 2015, pop-to-theater institutional crossover). Parenthetical Girls brings theater to underground clubs (theater-to-pop spatial transformation). Both acknowledge theater as a musical force — from opposite directions. The Crossover Arc (81) and The Theatrical Outsider (89) are mirror-image patterns. |
+| S36-044 | Parenthetical Girls (89) | Chong the Nomad (44) | EXPERIMENTAL IMPULSE / CONCEPTUALIST MODE. Both experimental, both pushing genre boundaries. Chong is electronic and beat-driven; Parenthetical Girls is acoustic/electronic and voice-driven. Different vocabularies, shared commitment to pushing past convention. Two of three explicit conceptualists in the engine. |
+| S36-071 | Parenthetical Girls (89) | Phil Elverum (71) | LO-FI / BAROQUE OPPOSITE POLES. Maximum contrast in approach, equal commitment to artistic authenticity. Elverum's aesthetic is stripped, raw, personal (room tone, the acoustic guitar, K Records-adjacent through Mount Eerie/Microphones). Parenthetical Girls' aesthetic is ornate, theatrical, conceptual. The lo-fi and the baroque as opposite poles of PNW independent music. |
+| S36-087 | Parenthetical Girls (89) | Neko Case (Early Folk) (87) | ARTIST-INSTITUTION TRIO. The Early Chapter (87, temporal movement) opens the three-degree trio; The Theatrical Outsider (89) closes it. Three relationship patterns in three consecutive degrees: temporal, format, spatial. The trio constitutes the engine's most thorough exploration of artist-institution relationship dynamics in any three-degree window. |
+| S36-049 | Parenthetical Girls (89) | Kimya Dawson / Moldy Peaches (49) | THEATRICAL VS THEATRICALITY-FREE. The Moldy Peaches at 49 were performance-art Anti-Folk with deliberate amateurism; Parenthetical Girls at 89 is cabaret-art Avant-Pop with deliberate sophistication. Both use voice as primary instrument; both reject conventional rock band structure; opposite stances on theatricality (49 deflects, 89 embraces). |
+| SPS-088 | Cicada (89) | Katydid (88) | INSECT TRIO / CONSECUTIVE INSECTS. Same class (Insecta) but different orders (Orthoptera 88 vs Hemiptera 89), different mechanisms (stridulation 88 vs tymbal vibration 89), different habitats (shrub canopy 88 vs forest edge 89). Two consecutive insect entries with fundamentally different sound-production architectures. Both continuous, both space-filling, completely different mechanisms. |
+| SPS-087 | Cicada (89) | Cricket Chorus (87) | INSECT TRIO. Three consecutive insects 87-88-89 (Cricket, Katydid, Cicada). Cricket = stridulation chirp, meadow, ground-dwelling. Cicada = tymbal vibration throb, forest edge, tree-trunk arboreal. Two orders, two mechanisms, two habitats. The trio's first and third entries illustrate the maximum diversity within the consecutive insect cluster. |
+| SPS-086 | Cicada (89) | Pacific Treefrog (86) | FOUR CONSECUTIVE NON-MAMMALIAN ENTRIES (86-89) / FOUR CONSECUTIVE E=4. Treefrog (Amphibia, collective amplification) opens the streak; Cicada (Insecta/Hemiptera, tymbal vibration) extends it to four. The longest non-mammalian streak since the bird era ended at degree 60. Four consecutive E=4 species through four completely different mechanisms — unprecedented in the engine. |
+| SPS-058 | Cicada (89) | Anatidae streak Wood Duck / Mallard (58-59) | LINGERING-WITHIN-ORDER / TRIO PRECEDENT. Anatidae lingered at 58-59 (Wood Duck and Mallard, two species in one order). Orthoptera lingered at 87-88 (Cricket and Katydid). The insect trio (87-88-89) extends the lingering pattern across two orders. The engine's recurring tendency to explore taxonomic neighborhoods through consecutive sampling rather than single-shot selection. |
+| SPS-002 | Cicada (89) | Varied Thrush (2) | ELECTRIC BUZZ TIMBRE. Varied Thrush's ethereal buzzy whistle has electric timbral quality reminiscent of cicada's tymbal-produced electric drone. Different phyla (Aves vs Insecta), completely different mechanisms (vocal vs tymbal), similar perceived timbre. Cross-class timbral similarity through fundamentally different sound-production architectures. |
+| SPS-062 | Cicada (89) | Beaver Chewing (62) | CONTINUOUS SUSTAINED SOUND. Both produce continuous, sustained sounds occupying the soundscape through persistence rather than amplitude bursts. Beaver chewing fills the rodent infrastructure layer at low frequency; cicada throb fills the forest-edge canopy layer at mid frequency. Different ecological functions, similar persistence-based acoustic strategy. |
+| SPS-073 | Cicada (89) | Snowshoe Hare (73) | EDGE-HABITAT NEIGHBORS. Both inhabit forest-edge / meadow-edge transition zones. Cicada in the canopy at the forest edge; hare below in the brush-meadow transition. Vertical niche separation within similar horizontal edge habitat. The forest edge as a multi-species acoustic niche that the engine has now sampled twice. |
+| RES-tymbal-mechanism | Cicada (89) | Entomological literature on cicada acoustics | THE 100+ dB CITATION. Tymbal mechanism documented in peer-reviewed entomological sources: paired ribbed abdominal membranes buckling at 100-500 cycles/second, hollow abdomen as resonating chamber, sound output per unit body mass among highest in animal kingdom, individual cicadas exceeding 100 dB at close range. The "loudest insect on Earth" distinction is verified science, not engine puffery. |
+| RES-slender-means | Parenthetical Girls (89) | *Privilege* series and Slender Means Society subscription model (2010-2012) | THE CONCEPTUALIST DISTRIBUTION MODEL. Subscription-only releases, handmade packages, cross-discipline collaborations, name evolution from Parenthetical Girls to Parenthetical. The distribution model treats each release as a conceptual statement rather than a commercial product. Operationalized conceptual ambition at the level of the project's mode of existence. |
+| RES-portland-corridor | Parenthetical Girls (89) | PNW experimental corridor (Portland/Seattle) | FIRST CORRIDOR ENTRY. Portland-based with Seattle connections through regular performances, collaborations, porous community boundaries. The corridor is a community, not a geography. Artists move between Portland and Seattle. Venues book across both cities. Record labels operate regionally. The engine's first explicitly Portland-connected entry formalizes the corridor as a tracked structural feature of the PNW music network. |
 
----
+## Engine Position
 
-## Parallel: Parenthetical Girls x Cicada (Annual)
+- **Degree 89 of 360** — 24.7% of the circle traversed.
+- **Twin counters tick to 90**: the baroque whisper is the 90th acoustic element on the artist side; the electric buzzing throb is the 90th acoustic element on the species side; The Theatrical Outsider is the 90th artist-city pattern.
+- **Genre Stage 71 — Avant-Pop**. Seventy-one genre stages in eighty-nine degrees (0.80 stages/degree). Ratio holds.
+- **Cicadidae 40th family — MILESTONE**. Forty families in eighty-nine degrees (0.45 families/degree). Ratio holds.
+- **Hemiptera new order**. Second insect order after Orthoptera (87-88).
+- **Energy distribution after degree 89**: E1:3 (3.3%), E2:30 (32.6%), E3:25 (27.2%), E4:21 (22.8%), E5:11 (12.0%), E6:2 (2.2%). Total: 92. **E=3 rises to 25 deployments**. **E=2 holds at 30, still most common**. Quiet majority (E1+E2+E3) = 58 of 92 (63.0%).
+- **Four consecutive E=4 species** (86-89): Pacific Treefrog (collective amplification), Cricket Chorus (collective stridulation), Katydid (individual sustained stridulation), Cicada (tymbal vibration). Four mechanisms, one energy level. **UNPRECEDENTED**.
+- **Four consecutive non-mammalian entries** (86-89): Amphibia, Insecta/Orthoptera, Insecta/Orthoptera, Insecta/Hemiptera. Longest non-mammalian streak since bird era closed at degree 60.
+- **Class diversity**: Mammalia (era 61-85), Amphibia (86), Insecta with two orders (87-89, ongoing). Three classes in four consecutive degrees.
+- **Original CSV unbroken**: 29 consecutive original-catalog species (degrees 61-89) — longest unbroken run in the engine.
+- **Insect trio (87-88-89) complete**: three insects, three mechanisms (stridulation chirp, stridulation buzz, tymbal throb), two orders (Orthoptera, Hemiptera), three habitats (meadow, shrub canopy, forest edge).
+- **Artist-institution trio (87-88-89) complete**: The Early Chapter (87, temporal), The Solo Distillation (88, format), The Theatrical Outsider (89, spatial). Three relationship patterns in three degrees.
+- **Production-spectrum swing**: minimum (88, bedroom strum) to maximum (89, baroque whisper) on consecutive degrees. Sharpest swing in engine to date.
+- **First Portland-connected entry**: Parenthetical Girls formalizes the Portland/Seattle corridor as a tracked structural feature.
+- **Conceptualist mode count**: three (Reggie Watts 17, Chong the Nomad 44, Parenthetical Girls 89).
+- **Outstanding gaps**: Zero raptors in 90 entries; zero passerines in 33 degrees (57-89); zero marine species in 90 entries.
 
-The baroque whisper and the electric buzzing throb. Both maximalists. Both overwhelming.
-
-**1. Both Maximalists** -- The cicada fills forest edge with electric throb at 100+ dB. Parenthetical Girls fills the venue with theatrical intensity -- baroque ornamentation, chamber instruments, electronic textures, operatic delivery. Both produce overwhelming sonic environments through maximum effort.
-
-**2. Both Dramatic** -- The cicada's sound is dramatic beyond what an insect should produce -- louder than a motorcycle, approaching the threshold of pain. Parenthetical Girls' performances are dramatic beyond what a rock club should accommodate -- cabaret, costumes, literary conceits. Both exceed their medium's expected limits.
-
-**3. Both Fill Their Spaces Completely** -- The cicada's continuous electric throb dominates forest edge habitat during summer. Parenthetical Girls' baroque whisper fills every corner of the venue with theatrical intensity. Both leave no acoustic space unfilled. Both are E=3/E=4 through presence, not just volume.
-
-**4. Both Use Unique Mechanisms** -- The cicada uses tymbal vibration -- a mechanism shared by no other insect in the engine. Parenthetical Girls uses avant-pop -- a framework shared by no other artist in the engine. Both are sui generis in their mechanism of sound production.
-
----
-
-## Acoustic Progression (90 elements)
+## Acoustic Progression Snapshot (Tail)
 
 | # | Element | Degree | Artist/Species |
 |---|---------|--------|----------------|
-| 0 | silence | 0 | Quincy Jones |
-| 1 | cascade | 1 | Bill Frisell |
-| 2 | drone | 2 | Wayne Horvitz |
-| 3 | language | 3 | Ernestine Anderson |
-| 4 | motif | 4 | Floyd Standifer |
-| 5 | metronome | 5 | Overton Berry |
-| 6 | question | 6 | Patti Bown |
-| 7 | harmonic spiral | 7 | Julian Priester |
-| 8 | ultrasonic threshold | 8 | Gary Peacock |
-| 9 | variation | 9 | Hadley Caliman |
-| 10 | minimum signal | 10 | Bud Shank |
-| 11 | trill/tremolo | 11 | Joe Brazil |
-| 12 | sawtooth sweep | 12 | Don Lanphere |
-| 13 | ostinato | 13 | Marc Seales |
-| 14 | repetition-resolution | 14 | Aaron Parks |
-| 15 | accelerando | 15 | Thomas Marriott |
-| 16 | crescendo | 16 | Jeff Lorber |
-| 17 | the hook | 17 | Reggie Watts |
-| 18 | ascending spiral | 18 | Maktub |
-| 19 | descending spiral | 19 | Fly Moon Royale |
-| 20 | sustain/the release | 20 | Whitney Monge |
-| 21 | the hammer | 21 | Polyrhythmics |
-| 22 | resonant percussion/groove reset | 22 | Foxy Apollo |
-| 23 | the testimony/groove reset | 23 | Allen Stone |
-| 24 | the invocation | 24 | Ron Artis II |
-| 25 | the congregation | 25 | Black Stax |
-| 26 | the caroling | 26 | Shaina Shepherd |
-| 27 | the liquid gurgle | 27 | The Dynamics |
-| 28 | the liquid twitter | 28 | Night Owls |
-| 29 | the rough brrit | 29 | Boogaloo Joe Jones |
-| 30 | the liquid warble synthesis | 30 | Ray Charles |
-| 31 | the whisper | 31 | Brenda Lee Eager |
-| 32 | the buzz | 32 | Luther Rabb |
-| 33 | the cadenza | 33 | Larry English |
-| 34 | the dialect | 34 | The Tempos |
-| 35 | the thrum | 35 | Robert Cray |
-| 36 | the sonic boom | 36 | Jimi Hendrix |
-| 37 | the filament | 37 | Ayron Jones |
-| 38 | the drawl | 38 | Booker T. Jones |
-| 39 | the canopy buzz | 39 | Ron Artis Jr |
-| 40 | the thinning | 40 | Alice Smith |
-| 41 | the partition | 41 | Shawn Smith |
-| 42 | the shimmer | 42 | Erica Campbell |
-| 43 | the radiance | 43 | Ann Wilson |
-| 44 | the grain | 44 | Chong the Nomad |
-| 45 | the murmur | 45 | Damien Jurado |
-| 46 | the confessional | 46 | Rocky Votolato |
-| 47 | the parable tone | 47 | Pedro the Lion |
-| 48 | the held rest | 48 | Sera Cahoone |
-| 49 | the lullaby subversion | 49 | Kimya Dawson |
-| 50 | the intimate architecture | 50 | Mirah |
-| 51 | the communal harmony | 51 | Grand Archives |
-| 52 | the testimony roar | 52 | Brandi Carlile |
-| 53 | the cathedral harmony | 53 | Fleet Foxes |
-| 54 | the fraternal jangle | 54 | Ivan & Alyosha |
-| 55 | the ember glow | 55 | Shelby Earl |
-| 56 | the dream haze | 56 | Lemolo |
-| 57 | the rattle / the stream rattle | 57 | Laura Gibson / Belted Kingfisher |
-| 58 | the ache / the pond whistle | 58 | Death Cab for Cutie / Wood Duck |
-| 59 | the digression / the quack | 59 | The Long Winters / Mallard |
-| 60 | the bare wire / the submerge call | 60 | Ben Gibbard (solo) / Pied-billed Grebe |
-| 61 | the braided voice / the tail slap | 61 | Y La Bamba / American Beaver |
-| 62 | the throwback / the rhythmic gnaw | 62 | Pickwick / Beaver Chewing |
-| 63 | the FM sheen / the chuff | 63 | Kenny Loggins / River Otter |
-| 64 | the dusk / the chitter | 64 | Jesse Sykes / Mink |
-| 65 | the open plain / the chuckle-chatter | 65 | Philip Aaberg / American Marten |
-| 66 | the country thunder / the scream | 66 | Neko Case / Fisher |
-| 67 | the clean room / the shrill bark-chitter | 67 | Chris Walla / Short-tailed Weasel |
-| 68 | the hush / the rapid chattering chirp | 68 | Sam Beam / Long-tailed Weasel |
-| 69 | the earnest voice / the warning foot-stamp hiss | 69 | Kris Orlowski / Striped Skunk |
-| 70 | the fiddle line / the churring chittering young | 70 | Horse Feathers / Raccoon |
-| 71 | the room tone / the bark screaming vixen call | 71 | Phil Elverum / Red Fox |
-| 72 | the layered loop / the low hiss click | 72 | Briana Marela / Opossum |
-| 73 | the jangle / the thump squeal | 73 | LAKE / Snowshoe Hare |
-| 74 | the reverb wash / the high sharp eenk bark | 74 | Poor Moon / American Pika |
-| 75 | the anthem / the piercing whistle alarm | 75 | The Lonely Forest / Yellow-bellied Marmot |
-| 76 | the androgynous register / the loud penetrating whistle | 76 | Chris Pureka / Hoary Marmot |
-| 77 | the ethereal layering / the musical multi-note whistle | 77 | Mree / Olympic Marmot |
-| 78 | the communal jangle / the chirping trill alarm | 78 | Acid Tongue / Townsend's Ground Squirrel |
-| 79 | the cinematic stillness / the sharp chip alarm | 79 | Jesse Marchant / Golden-mantled Ground Squirrel |
-| 80 | the organ explosion / the loud scolding chatter rattle | 80 | Mates of State / Douglas Squirrel |
-| 81 | the Broadway voice / the bark + chatter alarm | 81 | Sara Bareilles / Eastern Fox Squirrel |
-| 82 | the acoustic intimacy / the high thin tseet | 82 | Death Cab for Cutie (acoustic) / Northern Flying Squirrel |
-| 83 | the grunge whisper / the ultrasonic + soft chip | 83 | Pearl Jam (acoustic) / Deer Mouse |
-| 84 | the late whisper / the chatter + twig gnaw | 84 | Damien Jurado (late career) / Bushy-tailed Woodrat |
 | 85 | the stripped confession / the quiet plop | 85 | Rocky Votolato (acoustic) / Muskrat |
 | 86 | the electronic pulse / the amplified krek-krek wall of sound | 86 | The Postal Service / Pacific Treefrog |
 | 87 | the emerging twang / the rhythmic chirp field chorus | 87 | Neko Case (early folk) / Cricket Chorus |
 | 88 | the bedroom strum / the continuous electric buzz | 88 | Kimya Dawson (solo) / Katydid |
 | **89** | **the baroque whisper / the electric buzzing throb** | **89** | **Parenthetical Girls / Cicada (Annual)** |
 
-The acoustic progression adds degree 89 (the baroque whisper / the electric buzzing throb). On the artist side, the baroque whisper (89) is the sound of Parenthetical Girls -- a voice oscillating between intimate whisper and dramatic operatic delivery, surrounded by chamber instruments (strings, piano, accordion) and electronic textures. Maximum ornamentation. The engine swings from the bedroom strum (88, minimum production, one guitar, one voice) to the baroque whisper (89, maximum ornamentation, chamber ensemble, electronics, theatrical delivery). From stripped to ornate. From lo-fi sincerity to theatrical artifice. The contrast between 88 and 89 is one of the sharpest in the engine -- consecutive degrees at opposite ends of the production spectrum. On the species side, the electric buzzing throb (89) is the cicada's tymbal-produced drone -- completely different from the stridulation-produced sounds of cricket (87) and katydid (88). The tymbal mechanism produces a louder, more electric sound. 100+ dB, the loudest insect. From the continuous electric buzz (88, stridulation, 5,000-20,000 Hz) to the electric buzzing throb (89, tymbal vibration, 2,000-8,000 Hz). Same continuous quality, different mechanism, different frequency range, vastly different volume. The insect trio complete: chirp (87), buzz (88), throb (89). Three mechanisms, two orders, three habitats (meadow, shrub, forest edge). Four consecutive E=4 species entries (86-87-88-89): treefrog, cricket, katydid, cicada. All E=4, all through different mechanisms.
+## Files
 
-## Artist-City Patterns (90 patterns)
+- `docs/release-notes/v1.49.229/README.md` (this file)
+- `docs/release-notes/v1.49.229/chapter/00-summary.md` — derived summary
+- `docs/release-notes/v1.49.229/chapter/03-retrospective.md` — retrospective + lessons
+- `docs/release-notes/v1.49.229/chapter/04-lessons.md` — extracted lessons (7 lessons)
+- `docs/release-notes/v1.49.229/chapter/99-context.md` — context
+- `www/tibsfox/com/Research/S36/research/releases/089-parenthetical-girls/index.html` (655 lines)
+- `www/tibsfox/com/Research/S36/research/releases/089-parenthetical-girls/research.md` (137 lines)
+- `www/tibsfox/com/Research/S36/research/releases/089-parenthetical-girls/knowledge-nodes.json` (136 lines)
+- `www/tibsfox/com/Research/S36/research/releases/089-parenthetical-girls/retrospective.md` (148 lines)
+- `www/tibsfox/com/Research/SPS/research/releases/089-cicada/index.html` (558 lines)
+- `www/tibsfox/com/Research/SPS/research/releases/089-cicada/research.md` (148 lines)
+- `www/tibsfox/com/Research/SPS/research/releases/089-cicada/knowledge-nodes.json` (145 lines)
+- `www/tibsfox/com/Research/SPS/research/releases/089-cicada/retrospective.md` (98 lines)
 
-| # | Pattern | Degree | Artist |
-|---|---------|--------|--------|
-| 0 | Export | 0 | Quincy Jones |
-| 1 | Draw | 1 | Bill Frisell |
-| 2 | European Exile | 2 | Wayne Horvitz |
-| 3 | The Stay | 3 | Ernestine Anderson |
-| 4 | The Teacher | 4 | Floyd Standifer |
-| 5 | The Persistence | 5 | Overton Berry |
-| 6 | The Erasure | 6 | Patti Bown |
-| 7 | Pedagogue-Draw | 7 | Julian Priester |
-| 8 | The Quiet Draw | 8 | Gary Peacock |
-| 9 | The Seeker | 9 | Hadley Caliman |
-| 10 | Late Homestead | 10 | Bud Shank |
-| 11 | The Salon Keeper | 11 | Joe Brazil |
-| 12 | The Prodigal | 12 | Don Lanphere |
-| 13 | Institutional Anchor | 13 | Marc Seales |
-| 14 | Prodigy-Export | 14 | Aaron Parks |
-| 15 | Builder-Stayer | 15 | Thomas Marriott |
-| 16 | Talent Incubator | 16 | Jeff Lorber |
-| 17 | The Uncategorizable | 17 | Reggie Watts |
-| 18 | The Workshop | 18 | Maktub |
-| 19 | The New Root | 19 | Fly Moon Royale |
-| 20 | The Street Laureate | 20 | Whitney Monge |
-| 21 | The Ensemble Anchor | 21 | Polyrhythmics |
-| 22 | The Inheritor | 22 | Foxy Apollo |
-| 23 | The Rural Draw | 23 | Allen Stone |
-| 24 | The Island Export | 24 | Ron Artis II |
-| 25 | The Cultural Guardian | 25 | Black Stax |
-| 26 | The Transmuter | 26 | Shaina Shepherd |
-| 27 | The Conduit | 27 | The Dynamics |
-| 28 | The Resident Band | 28 | Night Owls |
-| 29 | The Catalog | 29 | Boogaloo Joe Jones |
-| 30 | The Incubation | 30 | Ray Charles |
-| 31 | The Relay | 31 | Brenda Lee Eager |
-| 32 | The Foundation | 32 | Luther Rabb |
-| 33 | The Unrecorded | 33 | Larry English |
-| 34 | The Shadow Name | 34 | The Tempos |
-| 35 | The Deep Root | 35 | Robert Cray |
-| 36 | The Supernova | 36 | Jimi Hendrix |
-| 37 | The Inheritor | 37 | Ayron Jones |
-| 38 | The Touring Anchor | 38 | Booker T. Jones |
-| 39 | The Returning Wave | 39 | Ron Artis Jr |
-| 40 | The Cultural Satellite | 40 | Alice Smith |
-| 41 | The Scene Native | 41 | Shawn Smith |
-| 42 | The Gospel Export | 42 | Erica Campbell |
-| 43 | The Arena Architect | 43 | Ann Wilson |
-| 44 | The Digital Immigrant | 44 | Chong the Nomad |
-| 45 | The Stripped Murmur | 45 | Damien Jurado |
-| 46 | The Confessional Drifter | 46 | Rocky Votolato |
-| 47 | The Sacred Baritone | 47 | Pedro the Lion |
-| 48 | The Campfire Anchor | 48 | Sera Cahoone |
-| 49 | The Trojan Lullabist | 49 | Kimya Dawson |
-| 50 | The Intimate Architect | 50 | Mirah |
-| 51 | The Folk Organism | 51 | Grand Archives |
-| 52 | The Arena Breakout | 52 | Brandi Carlile |
-| 53 | The Prodigy Return | 53 | Fleet Foxes |
-| 54 | The Neighborhood Anchor | 54 | Ivan & Alyosha |
-| 55 | The Infrastructure Beneficiary | 55 | Shelby Earl |
-| 56 | The Duo Collective | 56 | Lemolo |
-| 57 | The Label Bridge | 57 | Laura Gibson |
-| 58 | The Bellingham Ascent | 58 | Death Cab for Cutie |
-| 59 | The Scene Intellectual | 59 | The Long Winters |
-| 60 | The Frontman Alone | 60 | Ben Gibbard (solo) |
-| 61 | The Corridor Bridge | 61 | Y La Bamba |
-| 62 | The Brief Blaze | 62 | Pickwick |
-| 63 | The Everett Departure | 63 | Kenny Loggins |
-| 64 | The Dark-Folk Loner | 64 | Jesse Sykes |
-| 65 | The Montana Connection | 65 | Philip Aaberg |
-| 66 | The Wanderer Who Claims Multiple Cities | 66 | Neko Case |
-| 67 | The Departed Member | 67 | Chris Walla |
-| 68 | The Visiting Artist | 68 | Sam Beam |
-| 69 | The Working Musician | 69 | Kris Orlowski |
-| 70 | The Corridor Wanderer | 70 | Horse Feathers |
-| 71 | The Anacortes Hermit | 71 | Phil Elverum |
-| 72 | The International Student | 72 | Briana Marela |
-| 73 | The K Records Collective | 73 | LAKE |
-| 74 | The Side Project | 74 | Poor Moon |
-| 75 | The Second Anacortes Act | 75 | The Lonely Forest |
-| 76 | The Identity Artist | 76 | Chris Pureka |
-| 77 | The YouTube-to-Artist Pipeline | 77 | Mree |
-| 78 | The Porch Party | 78 | Acid Tongue |
-| 79 | The Dark Meditation | 79 | Jesse Marchant |
-| 80 | The Married Duo | 80 | Mates of State |
-| 81 | The Crossover Arc | 81 | Sara Bareilles |
-| 82 | The Recursive Return | 82 | Death Cab for Cutie (acoustic) |
-| 83 | The Arena Unplugged | 83 | Pearl Jam (acoustic) |
-| 84 | The Artist Arc | 84 | Damien Jurado (late career) |
-| 85 | The Confessional Return | 85 | Rocky Votolato (acoustic) |
-| 86 | The Side Project | 86 | The Postal Service |
-| 87 | The Early Chapter | 87 | Neko Case (early folk) |
-| 88 | The Solo Distillation | 88 | Kimya Dawson (solo) |
-| **89** | **The Theatrical Outsider** | **89** | **Parenthetical Girls** |
-
-Ninety named patterns across ninety degrees. The Theatrical Outsider (89) introduces the pattern of an artist whose work is fundamentally theatrical -- performance, costume, concept -- but operating outside any theatrical institution. Parenthetical Girls perform in rock clubs but deliver cabaret. Every venue becomes a proscenium. The distinction from degree 88 (The Solo Distillation): the solo distillation is reduction to essentials (band to solo); the theatrical outsider is addition of everything (more costume, more concept, more ornamentation). The distinction from degree 87 (The Early Chapter): the early chapter is temporal movement; the theatrical outsider is spatial movement (from theater to club). The distinction from degree 81 (The Crossover Arc): Sara Bareilles moved from pop to Broadway; the theatrical outsider moves from theater to underground -- the opposite direction. The progression from 87 to 88 to 89: the early chapter (temporal movement), the solo distillation (format reduction), the theatrical outsider (spatial transformation). Three different relationship patterns between artist and institution.
-
-## Genre Evolution (71 stages)
-
-| Stage | Degree | Genre | Artist |
-|-------|--------|-------|--------|
-| 27 | 45 | Folk | Damien Jurado |
-| 28 | 46 | Folk | Rocky Votolato |
-| 29 | 47 | Indie Folk | Pedro the Lion |
-| 30 | 48 | Folk | Sera Cahoone |
-| 31 | 49 | Folk Punk | Kimya Dawson |
-| 32 | 50 | Indie Folk | Mirah |
-| 33 | 51 | Indie Folk | Grand Archives |
-| 34 | 52 | Folk/Rock | Brandi Carlile |
-| 35 | 53 | Indie Folk | Fleet Foxes |
-| 36 | 54 | Folk | Ivan & Alyosha |
-| 37 | 55 | Singer-Songwriter | Shelby Earl |
-| 38 | 56 | Indie Folk | Lemolo |
-| 39 | 57 | Folk | Laura Gibson |
-| 40 | 58 | Indie Rock | Death Cab for Cutie |
-| 41 | 59 | Indie Rock | The Long Winters |
-| 42 | 60 | Folk | Ben Gibbard (solo) |
-| 43 | 61 | Folk/Indie | Y La Bamba |
-| 44 | 62 | Indie/Folk | Pickwick |
-| 45 | 63 | Soft Rock/Folk | Kenny Loggins |
-| 46 | 64 | Folk | Jesse Sykes |
-| 47 | 65 | New Age/Folk | Philip Aaberg |
-| 48 | 66 | Alt Country | Neko Case |
-| 49 | 67 | Indie/Folk | Chris Walla |
-| 50 | 68 | Folk | Sam Beam |
-| 51 | 69 | Singer-Songwriter | Kris Orlowski |
-| 52 | 70 | Indie Folk | Horse Feathers |
-| 53 | 71 | Indie/Folk | Phil Elverum |
-| 54 | 72 | Art Pop | Briana Marela |
-| 55 | 73 | Indie Pop | LAKE |
-| 56 | 74 | Indie Folk/Rock | Poor Moon |
-| 57 | 75 | Indie Pop | The Lonely Forest |
-| 58 | 76 | Folk | Chris Pureka |
-| 59 | 77 | Folk/Pop | Mree |
-| 60 | 78 | Folk/Indie | Acid Tongue |
-| 61 | 79 | Folk | Jesse Marchant |
-| 62 | 80 | Indie Pop | Mates of State |
-| 63 | 81 | Pop/Soul | Sara Bareilles |
-| 64 | 82 | Indie Folk | Death Cab for Cutie (acoustic) |
-| 65 | 83 | Acoustic Rock | Pearl Jam (acoustic) |
-| 66 | 84 | Folk | Damien Jurado (late career) |
-| 67 | 85 | Folk | Rocky Votolato (acoustic) |
-| 68 | 86 | Indie Electronic | The Postal Service |
-| 69 | 87 | Folk Country | Neko Case (early folk) |
-| 70 | 88 | Lo-Fi Folk | Kimya Dawson (solo) |
-| **71** | **89** | **Avant-Pop** | **Parenthetical Girls** |
-
-Genre Stage 71 -- **Avant-Pop** arrives at degree 89 with Parenthetical Girls. Seventy-one genre stages in 89 degrees. The genre density remains high (~0.8 per degree). Avant-Pop is distinguished from all prior genres -- pop structures refracted through avant-garde sensibilities. Chamber pop, cabaret, experimental electronics, baroque ornamentation. Voice-driven, performance-forward. Distinguished from Experimental Electronic (44, Chong the Nomad -- beat-driven), from Art Pop (72, Briana Marela -- ethereal, ambient), from Lo-Fi Folk (88, Kimya Dawson -- stripped, minimal). The engine swings from Lo-Fi Folk (88, minimum production) to Avant-Pop (89, maximum ornamentation). Maximum contrast in consecutive degrees.
-
-## Energy Distribution
-
-**Artist-side (after degree 89):** E1:3 (3.3%), E2:30 (32.6%), E3:25 (27.2%), E4:21 (22.8%), E5:11 (12.0%), E6:2 (2.2%). Total: 92. E=3 rises to 25 deployments with Parenthetical Girls' E=3. E=2 remains at 30, still most common. The quiet majority (E1+E2+E3) = 58 of 92 (63.0%). Parenthetical Girls at E=3 reflects theatrical presence without overwhelming volume -- the drama is in dynamics, not decibels.
-
-**Species-side (after degree 89):** E=4 for the cicada. Fourth consecutive E=4 species entry (86-87-88-89): treefrog E=4, cricket E=4, katydid E=4, cicada E=4. Four consecutive E=4 species entries -- unprecedented. All four through different mechanisms: collective amplification (treefrog), collective stridulation (cricket), persistent sustained drone (katydid), tymbal vibration (cicada). Four entries, four mechanisms, one energy level. E=4 is the "fills the soundscape" level, achievable through different means.
-
-## Cross-References (Combined)
-
-| Connection | From | To | Nature |
-|-----------|------|-----|--------|
-| S36-072 | Parenthetical Girls (89) | Briana Marela (72) | ART POP CONNECTION. Both in art-pop territory from different angles. Marela is ethereal and ambient; Parenthetical Girls is theatrical and baroque. Both prioritize artistic vision over accessibility. |
-| S36-017 | Parenthetical Girls (89) | Reggie Watts (17) | UNCATEGORIZABLE PERFORMANCE. Both resist genre assignment. Both fundamentally performers. Watts uses comedy and loops; Pennington uses cabaret and drama. |
-| S36-081 | Parenthetical Girls (89) | Sara Bareilles (81) | THEATRICAL TRAJECTORY. Bareilles moved toward Broadway. Parenthetical Girls brings theater to underground clubs. Both acknowledge theater as a musical force -- from opposite directions. |
-| S36-044 | Parenthetical Girls (89) | Chong the Nomad (44) | EXPERIMENTAL IMPULSE. Both experimental. Chong is electronic and beat-driven; Parenthetical Girls is acoustic/electronic and voice-driven. Different vocabularies, shared commitment. |
-| S36-071 | Parenthetical Girls (89) | Phil Elverum (71) | LO-FI CONTRAST. Maximum contrast in approach. Elverum is stripped, raw, personal. Parenthetical Girls is ornate, theatrical, conceptual. The lo-fi and the baroque as opposite poles of PNW independent music. |
-| SPS-087 | Cicada (89) | Cricket Chorus (87) | INSECT TRIO (87-88-89). Three mechanisms, two orders. Cricket = stridulation chirp, meadow. Cicada = tymbal throb, forest edge. Both E=4. |
-| SPS-088 | Cicada (89) | Katydid (88) | CONSECUTIVE INSECTS (88-89). Stridulation vs tymbal. Orthoptera vs Hemiptera. Shrub vs forest edge. Three consecutive insects, three mechanisms, two orders. |
-| SPS-002 | Cicada (89) | Varied Thrush (2) | ELECTRIC BUZZ QUALITY. Both produce buzzy, electric-sounding tones. Different phyla, similar timbral impression. |
-| SPS-062 | Cicada (89) | Beaver Chewing (62) | SUSTAINED SOUND. Both produce continuous, sustained sounds. Both define environments through persistent acoustic presence. |
-| SPS-086 | Cicada (89) | Pacific Treefrog (86) | CHORUS PARALLEL. Both produce overwhelming collective sounds. Both E=4 through collective amplification. Four consecutive non-mammalian entries (86-89). |
-
-## Infrastructure
-
-**Part A:** `www/tibsfox/com/Research/S36/research/releases/089-parenthetical-girls/` -- research.md, index.html, knowledge-nodes.json, retrospective.md
-**Part B:** `www/tibsfox/com/Research/SPS/research/releases/089-cicada/` -- research.md, index.html, knowledge-nodes.json, retrospective.md
-**Release notes:** `docs/release-notes/v1.49.229/README.md`
-
-**Total: 8 files** -- standard degree package.
-
-## Retrospective
-
-**What Worked:**
-1. Parenthetical Girls at Genre Stage 71 (Avant-Pop) is defensible -- the music genuinely blends pop structures with avant-garde sensibilities. Chamber pop, cabaret, experimental electronics, baroque ornamentation. The genre label is accurate, not forced
-2. The theatrical outsider pattern (90th) is observationally accurate -- Parenthetical Girls performs in rock clubs but delivers cabaret. The pattern describes real behavior documented in reviews and features
-3. The baroque whisper (90th acoustic element) captures the sonic reality -- the dynamic range between whisper and operatic delivery is a defining characteristic of Pennington's vocal approach. Audible, verifiable
-4. The Portland/Seattle corridor is a genuine structural feature -- the overlap between the two cities' experimental scenes is well-documented. First Portland-connected entry in the engine
-5. The swing from degree 88 (bedroom strum, minimum production) to degree 89 (baroque whisper, maximum ornamentation) creates one of the sharpest acoustic contrasts in the engine -- consecutive degrees at opposite ends of the production spectrum
-6. The insect trio (87-88-89) is structurally elegant -- three insects, three mechanisms, two orders. Cricket = stridulation chirp, katydid = stridulation buzz, cicada = tymbal throb. Comprehensive coverage of insect acoustics in three degrees
-7. The 40th family milestone (Cicadidae) is genuine -- forty families in 89 degrees. A real round-number milestone with clean taxonomic observation
-8. The tymbal mechanism is genuinely different from stridulation -- well-documented in entomological literature. The 100+ dB volume claim is supported by multiple sources. The loudest insect distinction is real
-9. New order Hemiptera adds taxonomic breadth -- two insect orders now represented (Orthoptera, Hemiptera). The engine's insect coverage spans different evolutionary lineages
-10. Four consecutive non-mammalian entries (86-87-88-89) is the longest non-mammalian streak since the bird era (0-60). Treefrog (Amphibia), cricket (Insecta/Orthoptera), katydid (Insecta/Orthoptera), cicada (Insecta/Hemiptera). The engine's taxonomic diversity accelerates
-11. Four consecutive E=4 species entries (86-87-88-89) is unprecedented -- all through different mechanisms. E=4 as achievable through multiple means
-12. The Parenthetical Girls-cicada parallel (both maximalists, both dramatic, both fill their spaces completely) is genuine and not forced
-
-**What Could Be Better:**
-1. Specific album deep-dives for Parenthetical Girls not included -- ACCEPTED, the project-level view is appropriate for the engine
-2. PNW-specific cicada species not deeply identified -- ACCEPTED, family-level entry is appropriate
-3. NO RAPTOR in 90 entries -- CRITICAL. Must be addressed
-4. NO PASSERIFORM in 33 degrees -- thirty-three consecutive non-passerines (57-89). EXTREME
-5. NO MARINE SPECIES -- 90 entries without a marine specialist. SIGNIFICANT
-
-## Lessons Learned
-
-1. The swing from minimum to maximum (bedroom strum 88 to baroque whisper 89) reveals that the engine produces sharp contrasts through consecutive placement. The bedroom strum was the floor -- minimum production, one guitar, one voice. The baroque whisper is near the ceiling -- maximum ornamentation, chamber ensemble, electronics, theatrical delivery. Consecutive degrees at opposite poles illuminate both entries. The contrast is sharper for being adjacent
-2. Genre Stage 71 (Avant-Pop) continues the ~0.8 genre stages per degree ratio. Seventy-one genre stages in 89 degrees. The engine's genre diversity is real and remarkably stable. Avant-Pop is a genuine genre distinction that had not appeared in the engine before -- chamber pop and cabaret and experimental electronics combined into something that is none of those individually
-3. The Portland/Seattle corridor as a structural feature invites tracking of future Portland-connected entries. The engine maps the PNW ecosystem, not just Seattle proper. Portland's experimental and DIY scene overlaps with Seattle's through venues, labels, and touring circuits. The corridor is a community, not a geography
-4. The insect trio (87-88-89) confirms and extends the engine's pattern of lingering within taxonomic groups. Anatidae (58-59), Orthoptera (87-88), now a full insect trio spanning two orders (87-88-89). The engine doesn't sample groups once -- it explores them comprehensively in consecutive degrees. Three mechanisms, two orders, three habitats. The trio is the engine's most thorough exploration of a taxonomic neighborhood
-5. Four consecutive E=4 species entries (86-87-88-89) raises the question of whether E=4 is the natural equilibrium energy for non-avian acoustic species. Treefrog (collective amplification), cricket (collective stridulation), katydid (persistent drone), cicada (tymbal vibration). Four entries, four mechanisms, one energy level. E=4 may represent "fills the soundscape" rather than any specific volume threshold
-6. The 40th family milestone (Cicadidae) invites tracking of the family-to-degree ratio. Forty families in 89 degrees (~0.45 families per degree). The rate has been relatively stable. Taxonomic diversity keeps pace with the engine's progression
-7. The theatrical outsider as a pattern type (90th) introduces the concept of spatial transformation -- bringing one institution's aesthetic (theater) into another's space (rock club). This is different from temporal movement (early chapter 87), format reduction (solo distillation 88), or institutional crossover (crossover arc 81). The theatrical outsider transforms the space rather than the artist
-
----
-
-The baroque whisper and the electric buzzing throb. Degree 89 -- where the avant-pop conceptualist whispers and roars in the same phrase and the cicada vibrates its tymbals at 100+ dB. Parenthetical Girls at Genre Stage 71 -- AVANT-POP. E=3. The project of ZAC PENNINGTON -- theatrical, baroque, chamber pop meets cabaret meets experimental. Portland-based with SEATTLE CONNECTIONS through the PNW experimental corridor. THE BAROQUE WHISPER -- 90th acoustic element, voice oscillating between whisper and operatic delivery, chamber instruments and electronic textures, maximum ornamentation, extreme dynamic range. THE THEATRICAL OUTSIDER -- 90th artist-city pattern, theatrical work outside theatrical institutions, cabaret in rock clubs, the stage brought to the bar, every venue a proscenium. Maximum contrast with degree 88 -- the engine swings from the bedroom strum (minimum production) to the baroque whisper (maximum ornamentation), from lo-fi sincerity to theatrical artifice. The CICADA at the eighty-ninth degree -- THIRD CONSECUTIVE INSECT (87-88-89). THE INSECT TRIO -- cricket, katydid, cicada. Three insects, three mechanisms, two orders. CICADIDAE -- NEW FAMILY (40th -- MILESTONE!). Forty families. NEW ORDER HEMIPTERA -- different from Orthoptera (87-88). TYMBAL VIBRATION -- completely different from stridulation. ELECTRIC BUZZING THROB -- 90th species-side acoustic element, 100+ dB, loudest insect, sounds like power line not biological organism. FOUR CONSECUTIVE NON-MAMMALIAN ENTRIES (86-87-88-89) -- treefrog, cricket, katydid, cicada. Four consecutive E=4 species entries -- unprecedented. FOREST EDGE HABITAT -- the insect trio spans meadow to shrub to forest edge. PREDATOR SATIATION -- mass emergence. Twenty-ninth consecutive original CSV. Both maximalists. Both dramatic. Both fill their spaces completely. The baroque whisper and the electric buzzing throb. Overwhelming presence through different strategies.
-
-</details>
+Total: 9 files in commit `971d1dd0c8fdf1f5a286aa0edd17a6f1ed6e6f53`, 2,531 insertions.
