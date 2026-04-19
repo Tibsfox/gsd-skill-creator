@@ -143,6 +143,65 @@ export REINFORCEMENT_EMIT=true
 
 With every flag off, v1.49.561 refinement-wave installs behave byte-identically to pre-refinement v1.49.561 (phase 650) — enforced by the SC-REF-FLAG-OFF integration test running three independent captures of the selector on a 50-session synthetic fixture.
 
+### Continuation wave (phases 661–678, added 2026-04-19)
+
+**Thesis:** The continuation wave lands the 13 second-wave proposals from the Living Sensoria research mission: three adaptive-control stability rails (Sastry & Bodson 1989 / Narendra & Annaswamy 1989 lineage), three exploration-harness components (Welling & Teh 2011 SGLD), three representation-frontier components (Mikolov et al. 2013 word2vec), two authoring-tool components (ME-2 model affinity, ME-3 A/B harness), plus the College + Rosetta bootstrap closing GAP-2 from the v1.49.132 AAR audit. All thirteen components default off; the full-stack flag-off invariant (SC-CONT-FLAG-OFF) enforces byte-identical behaviour to phase 660 tip with every continuation flag unset.
+
+**Through-line:** tractability gate + stability rails make adaptation safe; exploration harness makes it productive; representation frontier makes it learnable; authoring tools make it operable; college + rosetta make it teachable.
+
+**Added**
+
+- **MB-1 Lyapunov-stable K_H adaptation** (`src/lyapunov/`) — certifies V̇ ≤ 0 before each K_H update via Lyapunov candidate V(e) = ½e²; tractability-scaled gain table (1.0 / 0.6 / 0.3); `desensitisation-bridge.ts` wires certified values to M6 net-shift. Flag: `gsd-skill-creator.lyapunov.enabled`. 54 tests.
+- **MB-2 Smooth projection operators** (`src/projection/`) — constrains every adapted parameter to a closed admissible manifold via C¹ penalty-barrier blending; `projectKH` adapter scales bounds by tractability class; `projectModelRow` covers M7 simplex rows. Flag: `gsd-skill-creator.projection.enabled`. 80 tests.
+- **MB-5 Dead-zone bounded learning** (`src/dead-zone/`) — suppresses adaptation updates when |Δ K_H| ≤ σ_noise; composes with MB-1 such that V̇ is trivially zero under suppression; `lyapunov-composer.ts` verifies joint descent across 100-step trajectories. Flag: `gsd-skill-creator.lyapunov.dead_zone.enabled`. 95 tests.
+- **MA-3+MD-2 Stochastic selection** (`src/stochastic/`) — replaces M5 argmax with temperature-weighted softmax sample; `applyStochasticBridge` short-circuits to input ref when flag off (SC-MA3-01). Flag: `gsd-skill-creator.stochastic.enabled`. 68 tests.
+- **MD-3 Langevin noise injection** (`src/langevin/`) — adds SGLD-style gradient noise (Welling & Teh 2011) to M7 generative-model parameters; `guardDarkRoom` clamps post-noise values above SC-DARK floor; composes with MB-2 projection. Flag: `gsd-skill-creator.langevin.enabled`. 64 tests.
+- **MD-4 Temperature schedule** (`src/temperature/`) — cosine-decay annealing schedule driven by M8 Quintessence signal; `computeTractTempering` applies tractability-weighted floor/ceiling; `SENTINEL_TEMPERATURE = 1.0` when flag off (SC-MD4-01). Flag: `gsd-skill-creator.temperature.enabled`. 91 tests.
+- **MD-1 Shallow learned embeddings** (`src/embeddings/`) — native skip-gram trainer with negative sampling (Mikolov et al. 2013 lineage); `trainer.ts` includes rmsDrift early-stop; `persist.ts` format-versioned serialisation; pre-existing HF infra untouched. Flag: `gsd-skill-creator.embeddings.enabled`. 80 tests.
+- **MD-5 Per-(skill, task-type) learnable K_H** (`src/learnable-k_h/`) — linear head over MD-1 embedding row; `train()` chains gradient → MB-1 Lyapunov gate → MB-2 projection before committing weight; `getOrCreate` defaults to frontmatter K_H on first access. Flag: `gsd-skill-creator.learnable_k_h.enabled`. 56 tests.
+- **MD-6 Representation audit** (`src/representation-audit/`) — effective-rank (participation ratio of singular-value spectrum) + community separability (silhouette score over M1 community structure); `detectCollapse` returns `AuditStatus ∈ {healthy, degraded, critical}`; CLI: `skill-creator representation-audit`. Flag: `gsd-skill-creator.representation_audit.enabled`. 80 tests.
+- **ME-2 Per-skill model affinity** (`src/model-affinity/`) — `model_affinity:` frontmatter block declaring preferred tier + escalation policy; `EscalationRateLimiter` gates suggestions to one per 24 h; `batchAffinityDecisions` for library-wide audit sweeps; `getAffinityDecision` returns null when flag off (SC-ME2-01). Flag: `gsd-skill-creator.model_affinity.enabled`. 103 tests.
+- **ME-3 Skill A/B harness** (`src/ab-harness/`) — `requiredSampleSize` from two-sided binomial power table (ABSOLUTE_MIN_SAMPLES = 10); `runAB` opens M4 fork, accumulates `ABRunOutcome` per session, fires `runSignificanceTest` at threshold; returns `DISABLED` sentinel when flag off (SC-ME3-01). Flag: `gsd-skill-creator.ab_harness.enabled`. 100 tests.
+- **TC College bootstrap** (`.college/departments/adaptive-systems/`, `.college/rosetta/`) — adaptive-systems department + 5 cross-references appended to existing departments; closes GAP-2 from v1.49.132 AAR. Markdown only.
+- **TC Rosetta translations** (`.college/rosetta/`) — cross-domain translation table mapping adaptive-control ↔ reinforcement-learning ↔ neuroscience terminology. Markdown only.
+- **Continuation integration tests** (`src/integration/__tests__/continuation/`) — bundle through-line tests + 13 cross-bundle tests; SC-CONT-FLAG-OFF load-bearing test verifies byte-identical selector output across three independent fixture captures. 95 tests.
+- **Continuation regression addendum** (`docs/release-notes/v1.49.561/regression-report-continuation.md`) — phase 675 R11.1 addendum documenting +828 net-new tests and SC-CONT-FLAG-OFF result.
+- **Continuation user-facing docs** (phase 676) — `docs/stability-rails.md`, `docs/exploration-harness.md`, `docs/representation-frontier.md`, `docs/authoring-tools.md`; see-also cross-links throughout.
+
+**828 new tests** across the continuation wave (phases 661–674).
+
+**Changed**
+
+- `docs/refinement-wave.md` — appended "Continuation Wave Additions (phases 661–678)" section with five bundle summaries.
+- `README.md` — added continuation-wave paragraph under the v1.49.561 section.
+- `CLAUDE.md` — added 11 `src/` Key File Location entries for continuation-wave modules.
+
+**Security**
+
+- MD-3 Langevin noise preserves SC-DARK floor via `guardDarkRoom` clamp: no M7 generative-model parameter can fall below the `minimum-activity` floor regardless of noise scale or temperature.
+- MA-6 emitter redaction (`api_key`, `password`, `token`, `secret`, `private_key` patterns) and M3 append-only invariant are unchanged across the entire continuation wave; no continuation component modifies the reinforcement or decision-trace writers.
+
+**Migration**
+
+All continuation flags default off. Enabling any single flag activates only that component's code path; all other continuation components stay dormant. SC-CONT-FLAG-OFF enforces byte-identical behaviour to the phase 660 tip with every continuation flag off. Full opt-in flag list:
+
+```json
+{
+  "gsd-skill-creator": {
+    "lyapunov":             { "enabled": false, "dead_zone": { "enabled": false } },
+    "projection":           { "enabled": false },
+    "stochastic":           { "enabled": false },
+    "langevin":             { "enabled": false },
+    "temperature":          { "enabled": false },
+    "embeddings":           { "enabled": false },
+    "learnable_k_h":        { "enabled": false },
+    "representation_audit": { "enabled": false },
+    "model_affinity":       { "enabled": false },
+    "ab_harness":           { "enabled": false }
+  }
+}
+```
+
 ---
 
 ## Highlights
