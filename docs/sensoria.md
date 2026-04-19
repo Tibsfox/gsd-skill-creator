@@ -117,9 +117,17 @@ If a skill is unexpectedly silent, check whether tachyphylaxis has driven K_H do
 
 ---
 
+## Interaction with MA-2 Actor-Critic Wire
+
+The MA-2 ACE wire (v1.49.561 refinement wave) uses M6 Sensoria's `K_H` dynamics in two related ways. First, M6's tachyphylaxis — the exponential drift of `K_H` toward `K_L` under sustained activation — establishes a receptor-recovery timescale `τ_recovery` that provides a biology-grounded alternative to MA-2's empirically-tuned discount factor `γ`. The derivation `γ = exp(−Δt / τ_recovery)` is an open theoretical question (T-3) and will pin MA-2's default in a future wave. Second, when MA-2 applies tractability-weighted TD updates to M5 selector weights, the Weber's law log-linearity invariant on M6 (`R² ≥ 0.95` on the ΔR_H curve, CF-M6-02) is verified to remain intact after 10³ actor updates (CF-MA2-06). This confirms that actor-critic updates do not destabilise M6's receptor-dynamics baseline. With `ace.enabled = false` (the default), M6 is entirely unaffected by MA-2.
+
+---
+
 ## See Also
 
 - `docs/umwelt.md` — M7 Markov-blanket boundary layer
 - `docs/memory-stack.md` — M1–M5 memory and orchestration substrate
 - `docs/foundations/theoretical-audit.md` — Full theoretical audit with primary-source citations
 - `docs/EXTENSIONS.md` — `gsd-skill-creator.sensoria` namespace documentation
+- `docs/actor-critic.md` — MA-2 ACE wire (v1.49.561 refinement wave)
+- `docs/refinement-wave.md` — refinement wave overview

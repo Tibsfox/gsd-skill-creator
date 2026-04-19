@@ -560,6 +560,118 @@ Full user guide: [docs/symbiosis.md](./symbiosis.md). Stability: **EXPERIMENTAL*
 
 ---
 
+## Refinement Extension Flags (v1.49.561)
+
+Four new environment variables and one new settings key ship with the Living Sensoria refinement wave (phases 651–660). All default off; v1.49.560 installs are byte-identical with all flags unset.
+
+These flags compose along the canonical through-line: `SKILL_CREATOR_OUTPUT_STRUCTURE` feeds `SKILL_CREATOR_TRACTABILITY`, which conditions `REINFORCEMENT_EMIT` + `traces.eligibility`, which together enable `gsd-skill-creator.orchestration.ace.enabled`. Enable them in that order.
+
+### `SKILL_CREATOR_OUTPUT_STRUCTURE`
+
+**Type:** environment variable (boolean string `'true'` / `'false'`).  
+**Default:** `false`.
+
+When `true`, the cartridge parser surfaces and validates the `output_structure` and `output_schema` frontmatter fields added by ME-5. When `false`, both fields are ignored and the parser behaves byte-identically to v1.49.560.
+
+Run the one-time migration after enabling:
+
+```bash
+SKILL_CREATOR_OUTPUT_STRUCTURE=true node tools/migrations/output-structure-migrate.ts --dry-run
+SKILL_CREATOR_OUTPUT_STRUCTURE=true node tools/migrations/output-structure-migrate.ts --apply
+```
+
+Full reference: [docs/OFFICIAL-FORMAT.md — Output-Structure Frontmatter (ME-5)](./OFFICIAL-FORMAT.md#output-structure-frontmatter-me-5).
+
+---
+
+### `SKILL_CREATOR_TRACTABILITY`
+
+**Type:** environment variable (boolean string).  
+**Default:** `false`.
+
+When `true`, the ME-1 tractability classifier is active. `skill-creator tractability <skill>` and `skill-creator audit --tractability` become available. Classification results are read by MA-2 (actor update weighting) and ME-4 (teach-entry annotation).
+
+With `SKILL_CREATOR_TRACTABILITY=false`, the audit command exits cleanly with "classifier disabled" and no skill file is modified (SC-ME1-01).
+
+Full reference: [docs/tractability.md](./tractability.md).
+
+---
+
+### `REINFORCEMENT_EMIT`
+
+**Type:** environment variable (boolean string).  
+**Default:** `false`.
+
+When `true`, MA-6's canonical reinforcement taxonomy is active. `ReinforcementEvent` emissions from M5, M8, and the application layer are written to `.planning/traces/reinforcement.jsonl`. The signed `r(t)` scalar is then available for MA-2's TD-error computation.
+
+When `false`, no log is written and the stack behaves byte-identically to pre-refinement v1.49.561 (SC-MA6-01). Emission is fail-open: a write error logs a warning but does not block the calling module.
+
+Full reference: [docs/reinforcement-taxonomy.md](./reinforcement-taxonomy.md).
+
+---
+
+### `gsd-skill-creator.orchestration.ace.enabled`
+
+**Type:** settings.json key under `gsd-skill-creator.orchestration`.  
+**Default:** `false`.
+
+When `true`, MA-2's ACE actor-critic wire is active: M7 free-energy history is read, the TD error `δ(t) = r(t) + γ·[−F(t)] − [−F(t−1)]` is computed, and M5 selector weights are updated per Barto 1983 Eq. 2 scaled by ME-1's tractability weight.
+
+**Requires:** `gsd-skill-creator.orchestration.enabled = true`, `gsd-skill-creator.umwelt.enabled = true`, `REINFORCEMENT_EMIT = true`, and `traces.eligibility = true` (MA-1 eligibility index) to be active first.
+
+```json
+{
+  "gsd-skill-creator": {
+    "orchestration": {
+      "enabled": true,
+      "ace": {
+        "enabled": true,
+        "gamma": 0.95
+      }
+    }
+  }
+}
+```
+
+With `ace.enabled = false`, M5 selector weights are frozen and the stack is byte-identical to pre-refinement v1.49.561 (SC-MA2-01, SC-REF-FLAG-OFF).
+
+Full reference: [docs/actor-critic.md](./actor-critic.md).
+
+---
+
+### Combined Refinement Example
+
+```json
+{
+  "gsd-skill-creator": {
+    "orchestration": {
+      "enabled": true,
+      "ace": {
+        "enabled": true,
+        "gamma": 0.95
+      }
+    },
+    "umwelt": { "enabled": true },
+    "symbiosis": {
+      "enabled": true,
+      "coinflip_warning": true
+    }
+  }
+}
+```
+
+Environment variables set alongside:
+
+```bash
+SKILL_CREATOR_OUTPUT_STRUCTURE=true
+SKILL_CREATOR_TRACTABILITY=true
+REINFORCEMENT_EMIT=true
+```
+
+Full overview: [docs/refinement-wave.md](./refinement-wave.md).
+
+---
+
 ## See Also
 
 - [OFFICIAL-FORMAT.md](./OFFICIAL-FORMAT.md) - Official Claude Code skill and agent format reference
