@@ -117,3 +117,46 @@ Shankar Sastry and Marc Bodson's *Adaptive Control: Stability, Convergence, and 
 Xing Zhang, Guanghui Wang, Yanwei Cui, Wei Qiu, Ziyuan Li, Bing Zhu, and Peiyang He, in "Prompt Optimization Is a Coin Flip: Diagnosing When It Helps in Compound AI Systems" (arXiv:2604.14585v1, 2026), establish the empirical finding that is the refinement wave's organising principle. Their §4 analysis of 72 optimisation runs across 18,000 grid evaluations shows that prompt-content edits on compound AI systems produce effects statistically indistinguishable from coin-flip noise, except in a narrow regime where the task requires exploitable output structure the model can produce but does not default to. This diagnostic — rendered as a three-class classifier in ME-1 — becomes the gating variable through which every other refinement component (MA-1, MA-2, ME-4) weights its signal.
 
 The authors named here are actively working across adjacent fields; these acknowledgements recognise load-bearing contributions to live bodies of research, not memorial tribute.
+
+---
+
+## Continuation Wave
+
+The continuation wave lands the 13 second-wave proposals from the Living Sensoria research mission across five bundles: three adaptive-control stability rails (MB-1/MB-2/MB-5, Sastry & Bodson 1989 / Narendra & Annaswamy 1989 lineage), three exploration-harness components (MA-3+MD-2/MD-3/MD-4, Welling & Teh 2011 SGLD lineage), three representation-frontier components (MD-1/MD-5/MD-6, Mikolov et al. 2013 word2vec lineage), two authoring-tool components (ME-2 model affinity, ME-3 A/B harness), and the College + Rosetta bootstrap that closes GAP-2 from the v1.49.132 AAR. The wave adds +828 net-new tests and brings the total requirement coverage to 42 of 43 LS-* requirements (LS-22 remains the one deferred manual-annotation item). SC-CONT-FLAG-OFF verifies byte-identical selector behaviour to the phase 660 tip across three independent fixture captures with all continuation flags off.
+
+| Phase | Component | Commit | Tests |
+|-------|-----------|--------|-------|
+| 661 | MB-1 Lyapunov-stable K_H adaptation | `85c5a5290` | 54 |
+| 662 | MB-2 Smooth projection operators | `ed447c69e` | 80 |
+| 663 | MB-5 Dead-zone bounded learning | `1538adc55` | 95 |
+| 664 | MA-3+MD-2 Stochastic selection | `03f2e0df9` | 68 |
+| 665 | MD-3 Langevin noise injection | `cf5c277f2` | 64 |
+| 666 | MD-4 Temperature schedule | `903d5643b` | 91 |
+| 667 | MD-1 Shallow learned embeddings | `6aaa5252c` | 80 |
+| 668 | MD-5 Per-(skill, task-type) learnable K_H | `8c35f62c0` | 56 |
+| 669 | MD-6 Representation audit | `8556c095e` | 80 |
+| 670 | ME-2 Per-skill model affinity | `969cdb938` | 103 |
+| 671 | ME-3 Skill A/B harness | `49142fcea` | 100 |
+| 672 | TC College bootstrap | `4d6d98233` | — |
+| 673 | TC Rosetta translations | `a7ec93295` | — |
+| 674 | R10 Continuation integration | `7302dac46` | 95 |
+| 675 | R11.1 Regression addendum #2 | `bfbf171e6` | — |
+| 676 | R11.2 Continuation user-facing docs | `d3b8d0130` | — |
+| 677 | R11.3 CHANGELOG continuation-wave entry | `8c87b205d` | — |
+| 678 | R11.4 Release-notes + dedication | (this commit) | — |
+
+**Grand total over the full v1.49.560 → v1.49.561 arc (43 shipped phases): +2,043 new passing tests.**
+
+[regression-report-continuation.md](regression-report-continuation.md) · [docs/stability-rails.md](../../stability-rails.md) · [docs/exploration-harness.md](../../exploration-harness.md) · [docs/representation-frontier.md](../../representation-frontier.md) · [docs/authoring-tools.md](../../authoring-tools.md)
+
+### Extended Dedication
+
+Max Welling and Yee Whye Teh, in "Bayesian Learning via Stochastic Gradient Langevin Dynamics" (*Proceedings of the 28th International Conference on Machine Learning*, ICML 2011, pp. 681–688), introduce the SGLD update rule: θ_{t+1} = θ_t + ½·η_t·∇log p(θ_t|D) + ε_t where ε_t ~ N(0, η_t). Their central contribution is the observation that adding Gaussian noise with the right variance schedule to gradient descent steps produces a Markov chain whose stationary distribution is the true posterior — noise as principled Bayesian posterior sampling, not as a heuristic perturbation. MD-3's Langevin noise injector is a direct implementation of their update rule, with MD-4's annealing schedule providing the decreasing η_t that makes the convergence guarantee applicable. The SGLD frame also gives the exploration-harness bundle its theoretical justification: the stochastic softmax in MA-3+MD-2 is the discrete-action counterpart of the same posterior-sampling argument, with temperature playing the role of the step-size schedule.
+
+Tomas Mikolov, Kai Chen, Greg Corrado, and Jeffrey Dean, in "Efficient Estimation of Word Representations in Vector Space" (*International Conference on Learning Representations*, ICLR 2013, arXiv:1301.3781) and the companion word2vec papers, establish the skip-gram architecture with negative sampling as the standard shallow-embedding protocol. Their key architectural choice — a single hidden layer of fixed dimension d, trained to predict context given target with noise-contrastive estimation — keeps training cost within single-machine budget while producing representations that exhibit compositional structure (king − man + woman ≈ queen). MD-1 adopts this posture explicitly: the skip-gram trainer in `src/embeddings/skip-gram.ts` matches the Mikolov et al. objective, including the unigram^(3/4) negative-sampling distribution. The shallow-embedding constraint is a deliberate engineering decision, not a limitation: it keeps the embedding matrix small enough to be retrained incrementally as the session log grows, without requiring batch infrastructure.
+
+Kumpati S. Narendra and Anuradha M. Annaswamy, in *Stable Adaptive Systems* (Prentice Hall, 1989), develop the model-reference adaptive system (MRAS) programme that gives MB-1 and MB-2 their formal stability vocabulary. Their Chapter 4 Lyapunov analysis of MRAS under bounded disturbances — showing that a parameter adaptation law of the form Γ⁻¹·dθ/dt = −e·φ (error times regressor) guarantees V̇ ≤ 0 for the quadratic Lyapunov candidate V = ½·e² — is the direct ancestor of MB-1's `adaptKH` function and its descent certificate. Narendra and Annaswamy pair with Sastry and Bodson (acknowledged in the refinement wave) to give a complete adaptive-control vocabulary: Sastry & Bodson supply the stability definitions and projection-operator posture; Narendra & Annaswamy supply the MRAS architecture and the convergence analysis under realistic disturbance assumptions. Together they are the two canonical texts on adaptive-control stability as applied to parameter adaptation, and both bodies of work are load-bearing in the stability-rails bundle. Narendra and Annaswamy's research programme in adaptive and learning systems remains active and actively cited; this acknowledgement recognises that contribution.
+
+Richard Kuperstein, as co-originator with Richard G. Lanzara of the Quintessence five-axis vital-signs frame formalised in their 1991 joint work, is a co-contributor to the theoretical substrate that M8's Quintessence report implements. The original dedication in this document cited Lanzara's 2023 monograph as the primary source for M8; the Kuperstein addition closes a gap — the five-axis frame was developed jointly, and acknowledging only one co-originator was an incomplete attribution. The 1991 Lanzara–Kuperstein formulation of the five vital-signs axes (Self-vs-Non-Self, Essential Tensions, Growth-and-Energy-Flow, Stability-vs-Novelty, Fateful Encounters) is the direct source for the `QuintesenceReport` type in `src/symbiosis/quintessence.ts`.
+
+The authors named here are actively working across adjacent fields; these acknowledgements recognise load-bearing contributions to live bodies of research, not memorial tribute.
