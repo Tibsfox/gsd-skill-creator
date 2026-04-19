@@ -127,9 +127,30 @@ The guard is not a style filter — it is a structural boundary enforcement mech
 
 ---
 
+## Teaching with ME-4 Coin-Flip Warning
+
+The ME-4 component (v1.49.561 refinement wave) extends the teaching ledger with a tractability annotation. When a teach entry targets a skill classified `coin-flip` by ME-1 (i.e., the skill has `output_structure: prose`), the entry is annotated with `coinflip_warning: true` and `expected_effect: 'unmeasurable'` before it is written to the ledger. The entry still commits.
+
+The annotation reflects Zhang et al. 2026 §4.2: 49% of optimisation runs on prose-commentary tasks fall below zero-shot baseline. The warning makes this regime-level statistical property visible at the moment the developer invests effort in a teach entry, rather than after the fact.
+
+The CLI prints a neutral one-line message at commit time:
+
+```
+$ skill-creator teach --skill gsd-explore --kind correction --text "..."
+Committed teach entry tch-2026-04-18-a1b2c3
+Expected effect: unmeasurable — gsd-explore is classified prose (coin-flip per Zhang 2026 §4.2).
+The entry is recorded and will be applied; measurable behavioural change is not guaranteed.
+```
+
+The message avoids judgment of the developer's action and avoids judgment of the skill. The `gsd-explore` skill is prose and is also load-bearing; both are true simultaneously. Tractable-skill commits receive the label `reliable` (no warning body); unknown-class commits receive `unknown`. ME-4 annotates all three cases, surfacing the classification at the point of authoring. With `symbiosis.coinflip_warning = false` (the default), the annotation is suppressed and `commitTeachEntry` behaves byte-identically to pre-refinement v1.49.561 (SC-ME4-01).
+
+---
+
 ## See Also
 
 - `docs/sensoria.md` — M6 net-shift receptor substrate (M8 reads M6 activation events)
 - `docs/umwelt.md` — M7 Markov-blanket boundary (M8 reads M7 surprise log for Fateful Encounters axis)
 - `docs/memory-stack.md` — M1–M5 (M8 Quintessence reads M1 communities, M2 reflection labels, M3 traces, M4 branch ratios)
 - `docs/foundations/theoretical-audit.md` — Full theoretical audit with primary-source citations
+- `docs/tractability.md` — ME-1 classifier that ME-4 reads at annotation time
+- `docs/refinement-wave.md` — refinement wave overview
