@@ -1,8 +1,12 @@
-> Following v1.49.457 — _Degree 316: Gruntruck + Steller Sea Lion Apex_, v1.49.458 ships as Degree 317: Temple of the Dog + Humpback-Orca Overlap.
-# v1.49.458 — Degree 317: Temple of the Dog + Humpback-Orca Overlap
+> Following v1.49.457 — _Degree 316: Gruntruck + Steller Sea Lion Apex (THE GRUNGE SUMMIT CLOSES, THE COMMUNITY CLOSING VOICE, THE OTARIIDAE MAXIMUM RETURNS, E=16 COMBINED, 87.8%, Gruntruck as the return entry and closing voice of the eight-degree Grunge Summit arc at E=8 paired with Steller Sea Lion bull apex roar at E=8, the Summit's eight-degree arc from TAD at degree 309 through Gruntruck at degree 316 completes with its combined-energy sequence 17-16-18-18-18-16-14-16, the community band rather than the commercial peak as closing statement, the Steller Sea Lion species returning at degree 316 after its degree 306 bull collision appearance to bracket the apex predator arc's marine mammal documentation across ten degrees)_, v1.49.458 ships as Degree 317: Temple of the Dog + Humpback-Orca Same-Channel (POST-SUMMIT COOLDOWN OPENS, GENEALOGY INTERSECTION, MULTI-SPECIES CETACEAN EVENT, E=15 COMBINED, 88.1%, Temple of the Dog as the Andrew Wood tribute supergroup at E=7 paired with simultaneous Humpback whale song + Southern Resident orca call on one acoustic channel in the San Juan Islands at E=8, the engine's first post-Grunge-Summit entry after the three consecutive E=18 peaks at degrees 311-313, the engine's first documented multi-species vocalization event on the SPS track).
+# v1.49.458 — Degree 317: Temple of the Dog + Humpback-Orca Same-Channel (POST-SUMMIT COOLDOWN OPENS, GENEALOGY INTERSECTION, MULTI-SPECIES CETACEAN EVENT, E=15 COMBINED, 88.1%, Temple of the Dog as the Andrew Wood tribute supergroup at E=7 paired with simultaneous Humpback whale song + Southern Resident orca call on one acoustic channel in the San Juan Islands at E=8, the engine's first post-Grunge-Summit entry after the three consecutive E=18 peaks at degrees 311-313, the engine's first documented multi-species vocalization event on the SPS track)
 **Shipped:** 2026-04-03
-_Parse confidence: 0.50 — source `docs/release-notes/v1.49.458/README.md`_
+**Commits:** 8 | **Files:** 13 | **Lines:** +6708 / -5
+**Branch:** dev
+_Parse confidence: 0.75 — source `docs/release-notes/v1.49.458/README.md`_
 ## Summary
-This release carried 6 features; see `01-features.md`.
+No structured feature list was captured for this release; see the source README for prose details.
+It also produced retrospective content (lessons_learned, what_could_be_better, what_worked); see `03-retrospective.md`.
+11 lessons extracted; see `04-lessons.md` or the `RETROSPECTIVE-TRACKER.md`.
 ---
 **Prev:** [v1.49.457](../v1.49.457/00-summary.md) · **Next:** [v1.49.459](../v1.49.459/00-summary.md)

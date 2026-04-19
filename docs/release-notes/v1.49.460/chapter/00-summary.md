@@ -1,8 +1,12 @@
-> Following v1.49.459 — _Degree 318: Candlebox + Cascadia Subduction Current_, v1.49.460 ships as Degree 319: Hammerbox + Red-tailed Hawk Scream.
-# v1.49.460 — Degree 319: Hammerbox + Red-tailed Hawk Scream
+> Following v1.49.459 — _Degree 318: Candlebox + Cascadia Subduction Deep Current (THE BELOW-THE-SURFACE PAIRING, THE COMMERCIAL OUTLIER, THE FIRST GEOPHYSICAL ENTRY, E=12 COMBINED, 88.3%, Candlebox arriving as the grunge-era act whose four-million-copy self-titled debut on Madonna's Maverick Records in 1993 outsold nearly every critically canonical Seattle record while being excluded from the critical establishment's narrative of the scene paired with the Cascadia Subduction Deep Current at E=5 as the Sound of Puget Sound track's first geophysical entry documenting the Juan de Fuca Plate's continuous infrasonic baseline beneath the North American Plate — the twin subjects bound by a single structural principle: both are acoustically real and physically consequential and narratively invisible from the dominant surface observation frame of their respective systems)_, v1.49.460 ships as Degree 319: Hammerbox + Red-tailed Hawk Scream (HAMMERBOX RETURNS, ACCIPITRIDAE RETURNS, TERRITORIAL SERIES, E=14 COMBINED, 88.6%, Hammerbox's second Seattle late-grunge entry at E=7 paired with *Buteo jamaicensis* territorial scream series at E=7 as the post-Grunge-Summit cooldown's continued settling with Carrie Akre's vocal center on the S36 track and the Accipitridae family's re-entry on the SPS track, both returns at the same E=7 level they held on their pre-summit appearances).
+# v1.49.460 — Degree 319: Hammerbox + Red-tailed Hawk Scream (HAMMERBOX RETURNS, ACCIPITRIDAE RETURNS, TERRITORIAL SERIES, E=14 COMBINED, 88.6%, Hammerbox's second Seattle late-grunge entry at E=7 paired with *Buteo jamaicensis* territorial scream series at E=7 as the post-Grunge-Summit cooldown's continued settling with Carrie Akre's vocal center on the S36 track and the Accipitridae family's re-entry on the SPS track, both returns at the same E=7 level they held on their pre-summit appearances)
 **Shipped:** 2026-04-03
-_Parse confidence: 0.50 — source `docs/release-notes/v1.49.460/README.md`_
+**Commits:** 8334 | **Files:** 9
+**Branch:** dev
+_Parse confidence: 0.90 — source `docs/release-notes/v1.49.460/README.md`_
 ## Summary
-This release carried 6 features; see `01-features.md`.
+No structured feature list was captured for this release; see the source README for prose details.
+It also produced retrospective content (lessons_learned, what_could_be_better, what_worked); see `03-retrospective.md`.
+11 lessons extracted; see `04-lessons.md` or the `RETROSPECTIVE-TRACKER.md`.
 ---
 **Prev:** [v1.49.459](../v1.49.459/00-summary.md) · **Next:** [v1.49.461](../v1.49.461/00-summary.md)

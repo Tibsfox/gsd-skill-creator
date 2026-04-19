@@ -1,0 +1,51 @@
+# Lessons — v1.49.410
+
+12 lessons extracted. Classification source: ⚙ rule-based · 🤖 LLM tiebreaker (needs review) · 👤 human.
+
+1. **Career-arc-breadth documentation across multiple engine entries is interpretively productive when the act's dynamic range genuinely warrants it.**
+   The Heart fourth-entry register at degree 269 is validated by the actual dynamic range of the Heart catalog — from the acoustic intimacy of ***Dog & Butterfly*** to the hard rock force of "Barracuda" — rather than being a generic multi-entry-pattern decision. The lesson is that multi-entry documentation should be reserved for acts whose actual career arc warrants the wider documentation breadth rather than being applied uniformly to every act in the catalog. Future multi-entry documentation should follow the same warrant-by-actual-dynamic-range principle rather than the entry-count-by-popularity principle.
+   _⚙ Status: `applied` (applied in `v1.49.414`) · lesson #8739_
+
+2. **Community-level aggregate acoustic events deserve first-class integrated-entry treatment rather than decomposed multi-entry treatment.**
+   The dawn chorus documentation at degree 269 treats the multi-species polyphonic event as a single integrated entry rather than as a series of individual species entries, and this treatment is interpretively productive because it preserves the community-level structure that the decomposed treatment would lose. The lesson is that community-level acoustic events — frog chorus, wetland soundscape, spawning stream acoustic, dawn chorus — should be documented at the community level when the community-level structure is the subject, rather than being decomposed into constituent-species entries that lose the integrated acoustic architecture.
+   _⚙ Status: `investigate` · lesson #8740_
+
+3. **Structural-boundary placement of closing-arc entries clarifies rotational-position navigation for the reader.**
+   The degree 269 placement of the dawn chorus as the last terrestrial biological SPS entry before the Orca Arc opens at degree 270 is a structural-boundary placement that makes the terrestrial-to-marine transition legible as a documented boundary rather than a silent structural shift. The lesson is that quadrant-closing, arc-closing, and boundary-adjacent degree placements should be explicitly marked in the documentation so that the rotational-position context is available within the closing-degree documentation itself rather than requiring the reader to reconstruct the boundary from the surrounding sequence.
+   _⚙ Status: `investigate` · lesson #8741_
+
+4. **Amplitude-ceiling placement should be driven by actual acoustic-energy measurement rather than by category-specific register reservation.**
+   The Heart fourth-entry placement at E=8 — joining Mudhoney, Ten Minute Warning, The Accused, and The Sonics at the apex amplitude — validates that the E=8 register is available for any career-arc peak that genuinely reaches the ceiling rather than being reserved for proto-punk or extreme-subgenre entries alone. The lesson is that amplitude placement should follow the actual acoustic-energy-ceiling reality across the range of genres and performance contexts rather than being mediated by category-specific convention. The amplitude vocabulary is strongest when it is universal rather than category-sorted.
+   _⚙ Status: `applied` (applied in `v1.49.455`) · lesson #8742_
+
+5. **Cross-sync axis identification benefits from explicit structural-principle naming rather than implicit thematic similarity.**
+   The cross-sync axis at degree 269 — "polyphonic density at the peak of a career arc" — is named explicitly rather than left as an implicit thematic connection between the two halves. The explicit naming is interpretively productive because it surfaces the shared structural principle at first-class documentation resolution rather than relying on the reader to infer the connection, and it creates a reusable cross-axis register that can be referenced in subsequent cross-sync documentation. Future cross-sync documentation should follow the same explicit-structural-principle-naming practice rather than relying on implicit thematic connection alone.
+   _⚙ Status: `investigate` · lesson #8743_
+
+6. **Biographical-or-ecological origin context is a first-class element of acoustic-event documentation and should not be reduced to footnote treatment.**
+   The Mushroom Records incident as the origin of "Barracuda" and the pre-dawn territorial-singing behavior as the origin of the dawn chorus are both first-class elements of their respective acoustic events, and the degree 269 documentation treats them at first-class structural resolution rather than as secondary background details. The lesson is that the contextual-origin register is a primary element of acoustic-event documentation — the song is not separable from the incident that generated it, and the chorus is not separable from the ecological pressures that generated it — and the documentation should preserve this integration rather than reducing origin context to parenthetical footnote.
+   _⚙ Status: `investigate` · lesson #8744_
+
+7. **Live-performance documentation is a distinct object from studio-recording documentation and warrants separate first-class structural resolution.**
+   The Heart live Barracuda at degree 269 is a distinct object from the ***Little Queen*** studio Barracuda, and the degree 269 documentation treats the distinction at first-class structural resolution — documenting the live stage-volume sound, the unmediated vocal performance, and the ensemble integration without studio-mixing-console mediation. The lesson is that live documents and studio documents are separate objects that warrant separate documentation at distinct degree-level placements when both objects genuinely exist as first-class entities. Future live-performance documentation should follow the same separate-object principle rather than conflating studio and live versions into single entries.
+   _⚙ Status: `investigate` · lesson #8745_
+
+8. **Seasonal-and-sustained-across-a-window acoustic events require window-level documentation rather than single-moment documentation.**
+   The dawn chorus is a seasonal phenomenon repeated across weeks and months of the breeding season, and the degree 269 documentation treats it as a window-level event rather than a single-moment document. The lesson is that seasonal-and-sustained acoustic events — dawn chorus, breeding-season frog chorus, salmon-spawning stream acoustic, migratory-bird passage acoustic — should be documented at the window level rather than at a single-moment capture point. The window-level documentation preserves the temporal structure of the event that single-moment documentation would collapse into an instantaneous snapshot.
+   _⚙ Status: `applied` (applied in `v1.49.457`) · lesson #8746_
+
+9. **The Heart fourth-entry documentation at degree 269 cited the three prior Heart entries but did not enumerate the specific material documented at each prior entry.**
+   The degree 269 documentation names the prior Heart entries at degrees 245, 252, and 260 with their dimensional labels (acoustic range, studio discipline, late-period craft) but does not enumerate the specific songs, albums, tour cycles, or performance contexts that were documented at each prior entry. Future multi-entry-act documentation should include a brief summary of the prior-entry material so that the career-arc accumulation is legible within the closing-entry documentation rather than requiring the reader to navigate across multiple degree-level files to reconstruct the full arc.
+   _⚙ Status: `applied` (applied in `v1.49.419`) · lesson #8747_
+
+10. **The dawn chorus documentation at degree 269 named the core participant species but did not characterize the specific frequency-temporal differentiation parameters that separate them.**
+   The degree 269 documentation enumerates the participating species and identifies their approximate frequency ranges (2-5 kHz for thrushes, 3-7 kHz for warblers, etc.) but does not provide the peak-frequency-by-species, the typical-phrase-duration-by-species, or the daily-timing-offset-by-species that would let the multi-species polyphony register be cross-compared against other multi-species acoustic events. Future multi-species aggregate documentation should include the specific species-by-species acoustic parameters so that the polyphony register is anchored to quantitative acoustic descriptors rather than to general frequency-range brackets alone.
+   _⚙ Status: `applied` (applied in `v1.49.418`) · lesson #8748_
+
+11. **The Mushroom Records incident documentation at degree 269 grounded "Barracuda" in the promotional-campaign origin but did not enumerate the specific promotional artifacts that generated the Wilson sisters' response.**
+   The degree 269 documentation describes the Mushroom Records promotional campaign in general terms and cites the Wilson sisters' published accounts of their response, but does not enumerate the specific advertising copy, magazine placements, radio spots, or trade-press materials that constituted the campaign. Future biographical-origin documentation should enumerate the specific artifact set where available so that the origin claim is anchored to primary-source artifacts rather than to general-reference paraphrase alone.
+   _⚙ Status: `applied` (applied in `v1.49.413`) · lesson #8749_
+
+12. **The Orca Arc preview at degree 269 named the seven-consecutive-degree structure but did not enumerate the seven specific Orca populations that will be documented across degrees 270-276.**
+   The degree 269 documentation references the Orca Arc opening at degree 270 and names the arc as a seven-consecutive-degree SPS sub-sequence but does not enumerate the seven specific populations (Southern Resident J/K/L pods, Northern Resident, Transient/Bigg's, Offshore, etc.) that will be documented across the arc. Future pre-arc documentation should enumerate the arc structure in detail so that the transition from the current degree into the next arc is fully legible within the closing-degree documentation rather than requiring the reader to wait until the subsequent arc entries arrive to understand the arc structure.
+   _⚙ Status: `applied` (applied in `v1.49.411`) · lesson #8750_

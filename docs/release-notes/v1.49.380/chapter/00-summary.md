@@ -1,8 +1,12 @@
-> Following v1.49.379 — _Degree 238: Presidents of the USA + Coho Salmon_, v1.49.380 ships as Degree 239: The Ventures + Steelhead.
-# v1.49.380 — Degree 239: The Ventures + Steelhead
+> Following v1.49.379 — _Degree 238: Presidents of the United States of America (Alt Rock, E=6, Eastlake, Columbia Records, BASITAR AND GUITBASS INVENTED INSTRUMENTS, PLATINUM DEBUT, JASON FINN DUAL-BAND LOOP CLOSES) + Coho Salmon (*Oncorhynchus kisutch*, E=6, aggressive male splashing in shallow spawning riffles, SALMONIDAE ARC CONTINUES, 6PPD-QUINONE URBAN STREAM CRISIS)_, v1.49.380 ships as Degree 239: The Ventures (Surf Rock, E=5, Tacoma, Dolton Records, FIRST TACOMA BAND, INVENTORS OF SURF ROCK, 100M+ RECORDS WORLDWIDE, JAPAN'S ORIGINARY AMERICAN ROCK INFLUENCE) + Steelhead (*Oncorhynchus mykiss* anadromous form, E=5, metallic splash clean jump, SALMONIDAE ARC CONTINUES, ANADROMOUS RAINBOW TROUT, ITEROPAROUS SALMONID, ESA-THREATENED PUGET SOUND ESU).
+# v1.49.380 — Degree 239: The Ventures (Surf Rock, E=5, Tacoma, Dolton Records, FIRST TACOMA BAND, INVENTORS OF SURF ROCK, 100M+ RECORDS WORLDWIDE, JAPAN'S ORIGINARY AMERICAN ROCK INFLUENCE) + Steelhead (*Oncorhynchus mykiss* anadromous form, E=5, metallic splash clean jump, SALMONIDAE ARC CONTINUES, ANADROMOUS RAINBOW TROUT, ITEROPAROUS SALMONID, ESA-THREATENED PUGET SOUND ESU)
 **Shipped:** 2026-04-03
-_Parse confidence: 0.50 — source `docs/release-notes/v1.49.380/README.md`_
+**Commits:** 0 | **Files:** 9
+**Branch:** dev
+_Parse confidence: 0.75 — source `docs/release-notes/v1.49.380/README.md`_
 ## Summary
 No structured feature list was captured for this release; see the source README for prose details.
+It also produced retrospective content (lessons_learned, what_could_be_better, what_worked); see `03-retrospective.md`.
+13 lessons extracted; see `04-lessons.md` or the `RETROSPECTIVE-TRACKER.md`.
 ---
 **Prev:** [v1.49.379](../v1.49.379/00-summary.md) · **Next:** [v1.49.381](../v1.49.381/00-summary.md)

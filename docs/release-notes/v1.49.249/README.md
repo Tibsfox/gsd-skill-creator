@@ -1,4 +1,4 @@
-# v1.49.249 — Degree 109: No-Anchor (Noise/Experimental) + Pileated Woodpecker drumming — THE COLLAPSE FREQUENCY AND THE PERCUSSIVE MAXIMUM — E=6 THREE-PEAT
+# v1.49.249 — Degree 109: No-Anchor (Noise/Experimental) + Pileated Woodpecker drumming — THE COLLAPSE FREQUENCY AND THE PERCUSSIVE MAXIMUM
 
 **Released:** 2026-04-02
 **Scope:** Seattle 360 + Sound of Puget Sound — paired degree release, third consecutive E=6 maximum-energy degree

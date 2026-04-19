@@ -1,4 +1,4 @@
-# v1.49.246 — Degree 106: Knife Knights (Experimental Hip-Hop) + Black-billed Magpie — THE BEAT ARCHITECTURE AND THE OPEN-COUNTRY CORVID — CORVIDAE SEPTET
+# v1.49.246 — Degree 106: Knife Knights (Experimental Hip-Hop) + Black-billed Magpie — THE BEAT ARCHITECTURE AND THE OPEN-COUNTRY CORVID
 
 **Released:** 2026-04-01
 **Scope:** Seattle 360 + Sound of Puget Sound — paired degree release, first hip-hop entry and Corvidae septet record-break

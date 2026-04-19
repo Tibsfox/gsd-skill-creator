@@ -1,0 +1,47 @@
+# Lessons — v1.49.419
+
+11 lessons extracted. Classification source: ⚙ rule-based · 🤖 LLM tiebreaker (needs review) · 👤 human.
+
+1. **Sub-sequence-closing documentation at the end of a multi-degree geographic concentration should preserve the sub-sequence's structural unity rather than treating the closing entry as a standalone release.**
+   The degree 278 documentation treats Unwound as the sub-sequence-closing entry of the four-degree Olympia sub-sequence rather than as an isolated single-band degree. The lesson is that sub-sequence-closing entries should be documented with explicit sub-sequence-level framing — naming the sub-sequence, naming the other sub-sequence entries, computing sub-sequence-level summary statistics, and surfacing the sub-sequence's structural unity — rather than being documented in the same format as isolated single-band degrees. The sub-sequence-level framing is what makes the closing entry legible as a sub-sequence-closure rather than a sequence-end.
+   _⚙ Status: `applied` (applied in `v1.49.457`) · lesson #8848_
+
+2. **Arc-opening documentation at the beginning of a multi-degree biological arc should preserve the arc's full structural scope rather than treating the opening entry as a standalone release.**
+   The degree 278 documentation treats the Humpback Whale Breach as the arc-opening entry of the three-degree Great Whale Arc rather than as an isolated single-species degree. The lesson is that arc-opening entries should be documented with explicit arc-level framing — naming the arc, naming the projected arc entries, characterizing the arc's scope and duration, and surfacing the arc's structural integrity — rather than being documented in the same format as isolated single-species degrees.
+   _⚙ Status: `applied` (applied in `v1.49.455`) · lesson #8849_
+
+3. **Single-degree pivot placements that simultaneously close a prior sequence and open a new arc warrant first-class cross-axis documentation.**
+   The degree 278 simultaneous closure of the Olympia sub-sequence and opening of the Great Whale Arc is structurally deliberate and interpretively productive. The lesson is that single-degree pivot placements — when the engine can simultaneously close one multi-degree sub-sequence and open another — create legible cross-axis registers that are stronger than single-track closing or opening documentation alone. Future pivot placements should look for cross-axis coordination opportunities where they exist.
+   _⚙ Status: `applied` (applied in `v1.49.457`) · lesson #8850_
+
+4. **Consecutive maximum-amplitude events across adjacent degrees warrant explicit amplitude-density documentation.**
+   The degree 277 orca multi-pod chorus at E=9 and the degree 278 humpback whale breach at E=9 constitute consecutive maximum-amplitude events that mark the densest concentration of maximum-energy SPS entries in the engine's sequence. The lesson is that the engine's amplitude vocabulary should distinguish sustained-ceiling consecutive-degree amplitude from single-degree peak amplitude, and consecutive-degree documentation should explicitly compute and surface the amplitude-density statistics rather than reducing consecutive events to their individual per-degree entries.
+   _⚙ Status: `applied` (applied in `v1.49.441`) · lesson #8851_
+
+5. **First-occurrence genre-register documentation warrants explicit structural marking against adjacent-register elision.**
+   The Unwound post-hardcore register at degree 278 is the engine's first post-hardcore entry as distinguished from hardcore punk and riot grrrl registers of prior degrees, and the engine's documentation treats the first-occurrence designation at first-class structural resolution. The lesson is that first-occurrence genre registers should be documented on their own terms rather than being elided into adjacent registers, and the engine should register first-occurrence genre-vocabulary expansion as a first-class documentation dimension rather than allowing adjacent-register proximity to obscure the first-occurrence distinction.
+   _⚙ Status: `applied` (applied in `v1.49.483`) · lesson #8852_
+
+6. **Family-level taxonomic transitions within extended cetacean-focused arcs warrant explicit taxonomic-distinction documentation.**
+   The engine's pivot from Delphinidae (seven-degree Orca Arc, 270-276) to Balaenopteridae (three-degree Great Whale Arc opening at 278) is treated at first-class structural resolution rather than as a background transition. The lesson is that family-level taxonomic transitions — when the engine moves from one cetacean family to another across adjacent degrees — are first-class elements of the SPS track record rather than background context. The engine's documentation should preserve the family-level transition dimension at the same resolution as the individual species' behavioral documentation.
+   _⚙ Status: `investigate` · lesson #8853_
+
+7. **Olympia-based institutional-support documentation across cultural and biological registers warrants cross-register recognition.**
+   The Kill Rock Stars (music) and Cascadia Research Collective (humpback science) both operate from Olympia and both provide first-class institutional support to their respective Pacific Northwest subjects, and the engine's documentation treats both at first-class structural resolution. The lesson is that Olympia-based institutional support — whether for cultural or biological documentation — warrants cross-register recognition in the engine's record, and the engine should surface the Olympia-geographic-institutional-commitment register as a first-class documentation dimension across cultural-music and biological-scientific registers.
+   _⚙ Status: `applied` (applied in `v1.49.457`) · lesson #8854_
+
+8. **Body-as-instrument documentation across cultural-musical and biological-kinetic registers warrants cross-register recognition.**
+   The Unwound post-hardcore (four musicians' physical-musicianship commitment across twelve years) and the Humpback Whale Breach (40-ton body-as-instrument at maximum biological expression) both represent body-as-instrument work at near-ceiling energy, and the engine's documentation treats both at first-class structural resolution. The lesson is that body-as-instrument work — whether cultural-musical or biological-kinetic — warrants cross-register recognition in the engine's record, and the engine should surface the body-as-instrument register as a first-class documentation dimension across cultural-musical and biological-kinetic registers.
+   _⚙ Status: `applied` (applied in `v1.49.457`) · lesson #8855_
+
+9. **The Unwound documentation at degree 278 named the band as the Olympia sub-sequence closing entry but did not enumerate the specific critical-reception documents, production-credit enumerations, or scene-internal oral-history accounts that constitute Unwound's primary-source corpus.**
+   The degree 278 documentation names Unwound as the fourth and final entry in the Olympia sub-sequence and characterizes the band's music in general terms (post-hardcore, structural complexity, compositional integration) but does not enumerate the specific critical-reception documents (for example, contemporary reviews of *Leaves Turn Inside You*), production-credit enumerations (engineers, producers, studios, session information), or scene-internal oral-history accounts (for example, the Trosper-Rumsey-Lund interaction dynamics, the Kill Rock Stars relationship from the band's perspective) that constitute the primary-source documentation of Unwound's work. Future Olympia-sub-sequence-adjacent documentation should include a brief primary-source enumeration so that the individual band's…
+   _⚙ Status: `applied` (applied in `v1.49.440`) · lesson #8856_
+
+10. **The Humpback Whale Breach documentation at degree 278 named the species and the 40-ton mass but did not characterize breach-frequency, contextual, or seasonal variation in the behavior.**
+   The degree 278 documentation identifies *Megaptera novaeangliae* as the species and characterizes the breach as among the most energetically costly individual animal behaviors but does not characterize whether the behavior has documented seasonal, contextual (feeding vs. breeding ground, solitary vs. group behavior), or social-context (calf-present vs. solitary-adult) variation. Future humpback-whale behavioral documentation should include frequency and context data so that the behavior is anchored to specific observational quantitative descriptors rather than to aggregate qualitative characterization alone.
+   _⚙ Status: `applied` (applied in `v1.49.439`) · lesson #8857_
+
+11. **The Great Whale Arc opening at degree 278 named the three projected arc entries (humpback, blue whale, sperm whale) but did not characterize the technical grouping decision that places the sperm whale (Physeteridae) within the Great Whale Arc alongside the two Balaenopteridae.**
+   The degree 278 documentation identifies the sperm whale as technically Physeteridae rather than Balaenopteridae but groups it with the great whales in the engine's documentation without enumerating the technical-grouping rationale. Future Great-Whale-Arc documentation should include a brief technical-grouping rationale so that the family-level taxonomic grouping decisions are explicit within the documentation rather than being elided into an implicit documentation-grouping convention.
+   _⚙ Status: `applied` (applied in `v1.49.420`) · lesson #8858_

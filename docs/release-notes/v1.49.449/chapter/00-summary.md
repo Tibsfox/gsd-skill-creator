@@ -1,8 +1,12 @@
-> Following v1.49.448 — _Degree 307: Screaming Trees (return) + Salmon Run River Wall_, v1.49.449 ships as Degree 308: Melvins + Marten Scream.
-# v1.49.449 — Degree 308: Melvins + Marten Scream
+> Following v1.49.448 — _Degree 307: Screaming Trees (return) + Salmon Run Full River (ELLENSBURG RETURNS, AGGREGATE EXCEEDS INDIVIDUAL, 85.3%, Mark Lanegan's baritone at E=7 paired with the multi-species Salmonidae superposition at E=8, the first aggregate SPS entry in the engine closes the 71-degree Salmonidae arc opened at degree 236, the geographic outlier across the Cascades mirrors the ecological foundation across the river, and the Yakima drainage connects the Ellensburg origin point to the Columbia salmon system)_, v1.49.449 ships as Degree 308: Melvins + Marten Scream (ABERDEEN ENTERS, APEX PREDATOR ARC CLOSES, ENGINE DOUBLE MAXIMUM ZONE E=17, 85.6%, King Buzzo and Dale Crover at E=8 paired with *Martes caurina* sustained high-pitched territorial scream at E=9, the eight-degree apex predator arc closes at 308 with the smallest body at maximum energy reaching SPS maximum while the S36 track receives its first E=8 sludge metal entry, Aberdeen and Montesano timber country enters the 360-degree engine for the first and only time, the first S36 maximum and the first SPS E=9 land at the same degree, the forest exceeds the music by one energy unit).
+# v1.49.449 — Degree 308: Melvins + Marten Scream (ABERDEEN ENTERS, APEX PREDATOR ARC CLOSES, ENGINE DOUBLE MAXIMUM ZONE E=17, 85.6%, King Buzzo and Dale Crover at E=8 paired with *Martes caurina* sustained high-pitched territorial scream at E=9, the eight-degree apex predator arc closes at 308 with the smallest body at maximum energy reaching SPS maximum while the S36 track receives its first E=8 sludge metal entry, Aberdeen and Montesano timber country enters the 360-degree engine for the first and only time, the first S36 maximum and the first SPS E=9 land at the same degree, the forest exceeds the music by one energy unit)
 **Shipped:** 2026-04-03
-_Parse confidence: 0.50 — source `docs/release-notes/v1.49.449/README.md`_
+**Commits:** 57 | **Files:** 9
+**Branch:** dev
+_Parse confidence: 0.90 — source `docs/release-notes/v1.49.449/README.md`_
 ## Summary
-This release carried 8 features; see `01-features.md`.
+No structured feature list was captured for this release; see the source README for prose details.
+It also produced retrospective content (lessons_learned, what_could_be_better, what_worked); see `03-retrospective.md`.
+11 lessons extracted; see `04-lessons.md` or the `RETROSPECTIVE-TRACKER.md`.
 ---
 **Prev:** [v1.49.448](../v1.49.448/00-summary.md) · **Next:** [v1.49.450](../v1.49.450/00-summary.md)

@@ -1,4 +1,4 @@
-# v1.49.259 — Degree 119: Hollis Resnik (Ambient) + Common Merganser — THE NEAR-SILENCE AND THE SAWBILL — E=2 NEW ENGINE MINIMUM — FIRST AMBIENT (GENRE STAGE 95) — ANATIDAE STREAK EXTENDS TO TWO — ONE DEGREE FROM THE ONE-THIRD MARK
+# v1.49.259 — Degree 119: Hollis Resnik (Ambient) + Common Merganser — THE NEAR-SILENCE AND THE SAWBILL
 
 **Released:** 2026-04-02
 **Scope:** Seattle 360 + Sound of Puget Sound — paired degree release, new engine energy minimum at E=2, first Ambient entry, Anatidae streak extends to two consecutive waterfowl entries, energy descent from the E=6 corridor reaches its nadir

@@ -1,0 +1,55 @@
+# Lessons — v1.49.332
+
+13 lessons extracted. Classification source: ⚙ rule-based · 🤖 LLM tiebreaker (needs review) · 👤 human.
+
+1. **First-register entries have outsized structural importance.**
+   The Posies as the first-power-pop entry at degree 191 establishes the power-pop register's foundation in the engine, and all subsequent power-pop documentation will reference back to this origin entry. The first entry in a register is structurally more important than later entries because it defines what the register will mean. Future first-register entries (first-shoegaze, first-synthwave, first-emo, etc.) should be chosen with comparable care, prioritizing progenitor anchors over successor exemplars.
+   _⚙ Status: `investigate` · lesson #7692_
+
+2. **Geographic-boundary extensions should align with engine-internal timing.**
+   Bellingham entering the engine at degree 191 works because the broader post-hip-hop-corridor genre-diversification arc provides the context in which a geographic extension is natural. Extending the geographic map earlier (e.g., during the hip-hop corridor) would have felt forced because the hip-hop corridor was specifically a Seattle-scene documentation. The geographic-extension timing should align with thematic transitions in the engine rather than being imposed on arbitrary degrees.
+   _⚙ Status: `investigate` · lesson #7693_
+
+3. **E-ceiling parity events across axes are rare and valuable.**
+   The Humpback Whale song at E=8 tying DoNormaal late at E=8 is the first cross-axis E-ceiling parity event in the engine, and the structural weight is substantial. Future degrees that approach ceiling values should be evaluated for cross-axis parity potential — not every ceiling entry will produce a parity event, but when the pairing occurs, it deserves explicit documentation as a structural statement about the engine's overall intensity range.
+   _⚙ Status: `investigate` · lesson #7694_
+
+4. **Interstellar-transmission registers are unique among engine categories.**
+   The Voyager Golden Record's inclusion of the Humpback Whale song places degree 191 as the engine's first documentation of a vocalization that has physically traveled beyond Earth. This register cannot be matched by any Earth-bound entry — no music-axis release, however culturally significant, has been launched into space with a specific intention of representing Earth to extraterrestrial civilizations. The interstellar-transmission register should be reserved for genuinely unique cases and not diluted by loose interpretations (e.g., terrestrial radio broadcasts that have traveled beyond Earth incidentally).
+   _⚙ Status: `investigate` · lesson #7695_
+
+5. **Cultural-power-saves-species is a distinct conservation register.**
+   The Humpback Whale's recovery from near-extinction to the current 80,000-135,000 population through the 1986 IWC moratorium is a direct downstream consequence of Roger Payne's 1970 album *Songs of the Humpback Whale*. The cultural-power-saves-species register documents cases where the cultural reception of an animal vocalization directly catalyzes policy that saves the species. Future engine entries that might match this register (Rachel Carson's *Silent Spring* and DDT, though not a vocalization per se; future animal-sound releases that drive policy) should be evaluated against this precedent.
+   _⚙ Status: `applied` (applied in `v1.49.398`) · lesson #7696_
+
+6. **Dual-frontman partnerships produce distinct career arcs.**
+   The Posies' Auer-Stringfellow partnership differs structurally from single-songwriter power-pop exemplars (Big Star's Chilton, Cheap Trick's Nielsen, The Knack's Fieger). Dual-frontman partnerships distribute songwriting risk, enable stylistic variety within an album, and often produce longer careers because either member can carry the band through periods when the other is pursuing solo or collaborative projects. Future engine entries that feature dual or multiple songwriter-frontmen should be evaluated for this structural distinction.
+   _⚙ Status: `investigate` · lesson #7697_
+
+7. **Major-label-alternative-survival registers document rare resilience patterns.**
+   The Posies' survival through the 1994-1996 major-label alternative contraction on craft alone is an unusual outcome — most Seattle-scene bands that signed major-label deals in 1991-1993 broke up or shifted to independent labels during the contraction. The Posies' ability to continue producing major-label records into 1996 (*Amazing Disgrace*) and to transition gracefully to independent labels afterward without a break in output is a rare resilience pattern worth documenting as a structural vocabulary entry.
+   _⚙ Status: `investigate` · lesson #7698_
+
+8. **Hierarchical vocal architectures parallel human song structure independently.**
+   The Humpback Whale song's units-phrases-themes-songs fractal architecture parallels human song structure (phrases, verse-chorus-bridge themes, song-level cycles) despite the two traditions having arrived at the structure through entirely separate evolutionary paths. The independent convergence suggests that hierarchical vocal organization is a near-optimal structure for sustained acoustic communication, and the engine's documentation should flag this convergence as a structural observation about the general properties of complex vocalization.
+   _⚙ Status: `investigate` · lesson #7699_
+
+9. **Voyager Golden Record curation is a canonical curatorial model.**
+   Carl Sagan's committee's 1977 curation of the Voyager Golden Record — which selected 27 musical tracks and greetings in 55 languages to represent Earth — is one of the most consequential curatorial decisions in human history. The inclusion of the Humpback Whale song alongside Chuck Berry's "Johnny B. Goode" and Bach's Brandenburg Concerto demonstrates that non-human voices were considered co-equal representatives of Earth's cultural output. The Voyager Golden Record curation model is a precedent for future cases where a bounded selection must represent a large domain.
+   _⚙ Status: `investigate` · lesson #7700_
+
+10. **The engine's acoustic vocabulary is accumulating genuine structural categories.**
+   Degree 191 adds the fractal-repetition-architecture register, the twenty-hour-continuous-singing duration-extreme, the interstellar-transmission register, the cultural-transmission-within-breeding-populations register, the cultural-power-saves-species conservation register, and the surviving-the-grunge-collapse structural register to the engine's vocabulary. Each is a genuine structural category that subsequent entries can reference, and the accumulation over 191 degrees has produced a vocabulary rich enough to support comparative analysis across degrees. Future degrees should continue to prioritize vocabulary expansion over vocabulary repetition.
+   _⚙ Status: `applied` (applied in `v1.49.348`) · lesson #7701_
+
+11. **The pre-uplift release notes were extremely thin.**
+   The original v1.49.332 README had 55 lines and a minimal summary captured the key facts but did not develop the cross-sync parallels, The Posies' biography, the Humpback Whale song's hierarchical architecture, or the Voyager Golden Record context in the depth the topic deserves. The uplift expanded from 55 lines to A-grade density, but the grain-size discrepancy suggests future degrees should ship A-grade from the first commit rather than requiring retroactive uplift.
+   _⚙ Status: `investigate` · lesson #7702_
+
+12. **The research files for degree 191 appear to be absent on disk at uplift time.**
+   The expected `www/tibsfox/com/Research/S36/research/releases/191-the-posies/` and `www/tibsfox/com/Research/SPS/research/releases/191-humpback-whale-song/` directories are listed in the original ship commit `014c0e23a` but are not visible in the current filesystem snapshot. The chronological reorder of the NASA catalog in v1.49.558-559 and other reorganization work may have affected S36/SPS directory layout. Verification of research-directory preservation should be added to the uplift verification pipeline.
+   _⚙ Status: `applied` (applied in `v1.49.374`) · lesson #7703_
+
+13. **The power-pop progenitor lineage deserves its own retrospective document.**
+   The Beatles-Big-Star-Badfinger-Raspberries-Cheap-Trick-Knack-Shoes-Teenage-Fanclub-Jellyfish-Matthew-Sweet-Posies lineage is a canonical genre-history chain that spans fifty years, and future engine entries documenting any of these progenitor bands (if any are added) should reference the degree 191 Posies entry as the first power-pop anchor and the Big Star reunion as the direct generational transmission mechanism. A dedicated power-pop-lineage retrospective in the engine's documentation layer would preserve this chain for future reference.
+   _⚙ Status: `applied` (applied in `v1.49.382`) · lesson #7704_

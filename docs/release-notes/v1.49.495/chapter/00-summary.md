@@ -1,8 +1,12 @@
-> Following v1.49.494 — _Degree 353: These Arms Are Snakes (peak) + Mixed Owl Chorus Full Night_, v1.49.495 ships as Degree 354: Blood Brothers (peak) + Orca Breach+Bird Colony Chaos.
-# v1.49.495 — Degree 354: Blood Brothers (peak) + Orca Breach+Bird Colony Chaos
+> Following v1.49.494 — _Degree 353: These Arms Are Snakes (Peak) + Mixed Owl Chorus Full Night (THE CLOSING ARC RESOLVES, FIFTH AND FINAL CLOSING ARC ENTRY, E=9 TERMINAL POSITION, GEOGRAPHIC ARC CLOSURE CAPITOL HILL TO CAPITOL HILL, BRIAN COOK IN CONSECUTIVE DEGREES 352-353, FIRST NON-E=20 PAIRING IN THE CLOSING ARC, TEMPORAL DEVELOPMENT PAIRING, TAAS POST-HARDCORE SYNTHESIS, FOUR-SPECIES WINTER OWL CHORUS, ENGINE REACHES 98.1%)_, v1.49.495 ships as Degree 354: The Blood Brothers (peak) + Orca Breach + Bird Colony Chaos (THE CLOSING ARC RETURNS TO CEILING AFTER THE INTERIOR BREATH AT DEGREE 353, FIRST E=20 OF THE FINAL SIX, BLOOD BROTHERS ESCALATION FROM E=9 AT DEGREE 343 TO E=10 HERE, MULTIPLICATIVE CONVERGENCE EVENT ON THE SPS TRACK, STRUCTURED CHAOS AS THE SHARED ARCHITECTURAL FRAMEWORK, ENGINE REACHES 98.3%).
+# v1.49.495 — Degree 354: The Blood Brothers (peak) + Orca Breach + Bird Colony Chaos (THE CLOSING ARC RETURNS TO CEILING AFTER THE INTERIOR BREATH AT DEGREE 353, FIRST E=20 OF THE FINAL SIX, BLOOD BROTHERS ESCALATION FROM E=9 AT DEGREE 343 TO E=10 HERE, MULTIPLICATIVE CONVERGENCE EVENT ON THE SPS TRACK, STRUCTURED CHAOS AS THE SHARED ARCHITECTURAL FRAMEWORK, ENGINE REACHES 98.3%)
 **Shipped:** 2026-04-03
-_Parse confidence: 0.50 — source `docs/release-notes/v1.49.495/README.md`_
+**Commits:** 0 | **Files:** 9
+**Branch:** dev
+_Parse confidence: 0.75 — source `docs/release-notes/v1.49.495/README.md`_
 ## Summary
-This release carried 6 features; see `01-features.md`.
+No structured feature list was captured for this release; see the source README for prose details.
+It also produced retrospective content (lessons_learned, what_could_be_better, what_worked); see `03-retrospective.md`.
+13 lessons extracted; see `04-lessons.md` or the `RETROSPECTIVE-TRACKER.md`.
 ---
 **Prev:** [v1.49.494](../v1.49.494/00-summary.md) · **Next:** [v1.49.496](../v1.49.496/00-summary.md)

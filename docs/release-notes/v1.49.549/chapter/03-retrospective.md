@@ -1,40 +1,31 @@
 # Retrospective — v1.49.549
 
+## What Worked
+
+- **Sustained 13-day operational cadence at scale held without breaking.** Roughly 356 point releases, multiple workstreams running in parallel, live FTP syncs to tibsfox.com, a dedicated worktree for Rust work, and a separate branch for NASA content. The cadence never broke. Degree releases continued even while Memory Arena M1 → M13 landed, NASA missions flew in parallel, and housekeeping ran in the background.
+- **Parallel workstream execution proved out.** Seattle 360, NASA, Memory Arena, Grove, Phase B skill-author-discipline, research publication, and cartridge-forge all shipped inside the same 13-day window. They didn't interfere. The `artemis-ii` worktree isolation strategy kept the Rust churn from touching the main release stream, and the PR #32 merge at the end preserved all 670 commits via a non-squash strategy.
+- **The Memory Arena crossfade tier model worked on first try.** The decision to make tier transitions a crossfade rather than a binary promote/demote flip — informed by Amiga exec.library principles — paid off immediately. M3's demote crossfade landed in one iteration with 169 tests. M4's promote crossfade mirrored it symmetrically with ±10% hysteresis. M5's policy driver composed on top without rewriting anything underneath. M2's 16.58× speedup far exceeded the original 2–4× projection because the deferral-vs-validation asymmetry (25:1) turned out to be the dominant cost.
+- **Grove format stayed clean at scale.** The content-addressed format absorbed 299 resources from a real filesystem walk on the first import attempt. No post-hoc schema edits, no wasteland leakage, 255 unique names bound after dedup. The SkillView/GroveNamespace/SkillDiff surface turned out to be expressive enough for the full library without extensions.
+- **cartridge-forge dogfood proof.** The first cartridge shipped under the unified format was the cartridge that runs the forge. The SC-05 integration test loads cartridge-forge, validates it, counts metrics (6 skills, 5 agents), and runs eval — all green. The system that forges cartridges *is* a cartridge.
+- **The `artemis-ii` → `dev` merge landed cleanly.** PR #32 preserved all 670 commits via the non-squash merge strategy. Post-merge test suite settled at 23,438 passing. Only the three pre-existing failure classes already documented in the handoff (grove tier count, multi-hop fixture, harness-integrity pollution) were red — no new regressions from the merge itself.
+
+## What Could Be Better
+
+- **Validate hand-migration targets against the unified schema *before* writing wrappers.** Wave 2B.1 wrote four cartridges and then discovered two of them (math, rca) couldn't include their evaluation chipset under the current schema. An up-front `validateCartridge()` dry-run against a stub wrapper would have surfaced the issue in an hour instead of across two commits. Scout first, wrap second.
+- **The `--allow-validation-debt` escape hatch should have been a Wave 0 primitive.** Building the quarantine mechanism when we first hit strict-validator collision was the Wave 3 afterthought that should have been day-one infrastructure. Future missions ship escape hatches before they're needed.
+- **Packaging version drift caught late.** `package.json` at 1.49.500 versus `Cargo.toml` / `tauri.conf.json` at 1.49.441 went unnoticed until harness-integrity surfaced it during post-merge verification. Future missions should have a cross-file version check running on every release.
+- **The `pr-review-gate.sh` experimental hook added friction.** The sentinel-file pattern (`touch /tmp/.pr-reviewed-artemis-ii`) solved the intended problem but tripped workflow expectations more than once. Retired when `artemis-ii` closed.
+- **Cross-chipset validation debt surfaced 22 departments of invisible drift.** 10 Category A (`agent_affinity` refs pointing at renamed agents) + 12 Category B (`domains_covered` field drift). None of it was visible until a tool could see it. Quarantined, not fixed — the actual department repairs remain follow-up work.
+
 ## Lessons Learned
 
-1. **Freeze schemas early and defend them with loader normalizers.**
-   Every attempt across Waves 1–3 of cartridge-forge to "just add a
-   field" was met with "use `metadata` or a loader normalizer." The
-   same pattern holds at mission scale: the Grove format and the
-   Cartridge schema both stabilized before their first real workload,
-   and neither needed a breaking change under real data.
-
-2. **Build escape hatches on day one, not when you need them.**
-   `KNOWN_VALIDATION_DEBT` and `--allow-validation-debt` were added in
-   Wave 3 because the validator's strictness collided with pre-existing
-   debt. If the quarantine pattern had been designed in at Wave 0,
-   Waves 1 and 2 wouldn't have hit the false "loosen validator vs.
-   skip test" choice. The same applies to cross-file version checks,
-   hook presence checks, and gitignored-path walkers — pay for the
-   escape hatch before you need it.
-
-3. **Dogfood is the shortest path to format validation.** The
-   cartridge-forge cartridge forced every schema decision to meet a
-   real workload early. Half a dozen schema ambiguities collapsed into
-   obvious answers the moment the forge cartridge had to declare its
-   own skills, agents, and teams. "Use the system you're building" is
-   cheaper than "write a test plan for the system you're building."
-
-4. **Parallel workstreams work when they're isolated at the right
-   boundary.** The `artemis-ii` worktree, the `nasa` branch, the
-   `wasteland` exclusion, and the live FTP sync pipeline kept eight
-   concurrent workstreams from interfering with each other. The
-   boundary of isolation matters more than the count of streams —
-   pick worktrees and branches that split by *type of churn*, not by
-   feature.
-
-5. **Verify state empirically before claiming it.** Multiple incidents
-   during the mission (4 tracked in the memory-arena-m1 feedback file
-   alone) traced to assertions about git state, file presence, or
-   test status made without running a live query. Run the command
-   first, then make the claim.
+- **Freeze schemas early and defend them with loader normalizers.** Every attempt across Waves 1–3 of cartridge-forge to "just add a field" was met with "use `metadata` or a loader normalizer." The same pattern holds at mission scale: the Grove format and the Cartridge schema both stabilized before their first real workload, and neither needed a breaking change under real data.
+- **Build escape hatches on day one, not when you need them.** `KNOWN_VALIDATION_DEBT` and `--allow-validation-debt` were added in Wave 3 because the validator's strictness collided with pre-existing debt. If the quarantine pattern had been designed in at Wave 0, Waves 1 and 2 wouldn't have hit the false "loosen validator vs. skip test" choice. Pay for the escape hatch before you need it — applies equally to cross-file version checks, hook presence checks, and gitignored-path walkers.
+- **Dogfood is the shortest path to format validation.** The cartridge-forge cartridge forced every schema decision to meet a real workload early. Half a dozen schema ambiguities collapsed into obvious answers the moment the forge cartridge had to declare its own skills, agents, and teams. "Use the system you're building" is cheaper than "write a test plan for the system you're building."
+- **Parallel workstreams work when they're isolated at the right boundary.** The `artemis-ii` worktree, the `nasa` branch, the `wasteland` exclusion, and the live FTP sync pipeline kept eight concurrent workstreams from interfering with each other. The boundary of isolation matters more than the count of streams — pick worktrees and branches that split by *type of churn*, not by feature.
+- **Verify state empirically before claiming it.** Multiple incidents during the mission (4 tracked in the memory-arena-m1 feedback file alone) traced to assertions about git state, file presence, or test status made without running a live query. Run the command first, then make the claim.
+- **The crossfade tier model beats binary promote/demote for any live memory system.** Making tier transitions a crossfade rather than a flip means the system never has a period where data is "in-flight between tiers." A demote-in-progress chunk is still readable from its source; a promote-in-progress chunk is still readable after the copy starts. No window of unreadability, no retry logic for mid-transition reads. The Amiga exec.library pattern (crossfade with reference counting) transferred directly to Rust arena semantics.
+- **Deferral asymmetry dominates warm-start cost.** The M2 benchmark showed 13.59 µs saved per deferred chunk versus 533 ns cost to validate eagerly — a 25:1 asymmetry that made eager validation the wrong default. The lesson generalizes: when deferred work averages 10× or more the cost of the eager check, default to deferred and validate on demand.
+- **Non-squash merges preserve mission history.** PR #32 preserved all 670 artemis-ii commits via the non-squash strategy. The history is navigable by anyone who wants to bisect Memory Arena's M1 → M13 progression or the Grove format's evolution. A squash would have collapsed 13 days of work into one commit and erased the sub-milestone boundaries. When the branch IS the mission, preserve the branch.
+- **Process failure fingerprints show up at test suite boundaries.** The `cli.test.ts` unhandled-rejection bug had been misdiagnosed for weeks as "flaky tests" or "cross-test pollution." The actual root cause — `src/cli.ts` `main()` running at module load — was caught once someone ran the failure under a node `--unhandled-rejections=strict` setting instead of guessing. Entrypoint guard at `1d38b12d8` resolved the whole cluster. Runtime-semantics-level debugging beats hypothesis-level debugging.
+- **The omnibus tag matches what shipped, not what was chartered.** Artemis II was scoped as research tracking. What shipped was Memory Arena + Grove + cartridge-forge + the research tracking. Versioning the tag as "omnibus" acknowledges the gap between charter and reality without pretending either was wrong. Future missions should expect the same — what flies is what you tag.

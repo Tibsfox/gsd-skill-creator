@@ -1,60 +1,29 @@
 # Retrospective — v1.49.550
 
+## What Worked
+
+- **Wave 0 shared contracts unblocked the rest of the milestone.** Shipping the frontmatter schema, activation-equivalence harness, memory tag types, and hook-output helper before any wave did real work meant every later wave referenced known-good types instead of inventing them. The 12 platform improvements fit together because the substrate was in place first.
+- **`assertActivationEquivalence` proved skill merges safe mechanically.** The three merges (Wave 2C) and three splits (Wave 2B) all ran the harness at commit time — every trigger term from the source skills is verified present in the output skill before the refactor lands. No activation regressions shipped. The harness is the durable artifact; the merges are specific uses of it.
+- **The tmpdir install refactor made CI and local reproduce identically.** harness-integrity tests used to fail differently on CI than on local dev because they read whatever `.claude/` happened to be on disk. Moving them to `project-claude/install.cjs` into `mkdtempSync` meant both environments see the same tree. 13 CI failures → 4 → 0 across three commits (`93dce5564`, `c4978159d`, `ac2bb432b`).
+- **Zero new runtime dependencies held the line from v1.49.549.** The cartridge-forge precedent was explicit: ship platform-sized work without touching `package.json` dependencies. Twelve improvements, 163 new tests, zero new deps.
+- **The mission package pattern worked.** `docs/missions/platform-alignment/` — 00 milestone spec, 01–07 per-feature specs, 08 wave execution plan, 09 test plan — let four waves execute in order without per-wave replanning. The pattern is reusable for every future platform-scale milestone.
+
+## What Could Be Better
+
+- **The Wave 2B word-count gate didn't budget for Wave 2D frontmatter.** Adding 8 words of frontmatter to every SKILL.md post-hoc pushed two freshly-split skills back over the 800-word limit. The gate should either have excluded frontmatter from its word count or budgeted 10 words up front for lifecycle metadata. Fixed by bumping the gate to 820, but the sequencing was avoidable.
+- **SC-07/SC-08 regressions should have been caught at Wave 2B commit time, not Wave 3.** The Wave 2B commit message claimed "safety boundaries stay in SKILL.md," but the refactor was semantic-equivalent only — the safety-critical tests demand literal token match (uppercase stage names, pipe-table format). Running the safety-critical suite before each wave's commit, not just at Wave 3, would have surfaced the regression while the refactor was fresh.
+- **The safety-critical tests check format, not semantics.** `'Max restarts per bead | 3'` and uppercase stage tokens (`VALIDATE`, `SUBMIT`, …) are checked as literal strings. A refactor that preserves meaning but changes format fails. Converting those assertions to content-semantic regexes (e.g., `/max\s*restarts.*3/i`) is deferred to a follow-up issue, not landed in this milestone — still tech debt.
+- **The milestone crossed an API 500 crash boundary mid-Wave 2D.** The in-flight 19 backfilled SKILL.md files were recovered by the resumed flight-ops session via the wave-boundary handoff doc, but the crash itself was not avoidable from our end. A more conservative commit cadence (commit per skill, not per wave) would reduce the blast radius of any future mid-wave crash.
+
 ## Lessons Learned
 
-1. **Backfill-before-limit-check causes false regressions.** The Wave 2D
-   backfill added four frontmatter lines (~8 words) to every SKILL.md, which
-   pushed `done-retirement` (801w) and `gupp-propulsion` (805w) over the
-   Wave 2B word-count gate of ≤800. Resolution: bump the gate to 820 to
-   accommodate frontmatter. Lesson: when a gate targets prose word count,
-   it should either exclude frontmatter or budget for it up front.
-
-2. **Schema description cap needed to grow with merges.** The `team-control`
-   merged skill carries a 375-character description (longer than either
-   source skill), exceeding the original `max(250)` schema cap. Raised to
-   `max(500)` in Wave 2D; the corresponding assertion test was updated.
-   Lesson: merge operations can legitimately produce outputs that exceed
-   per-source constraints — schemas must accommodate.
-
-3. **Wave 2B safety-critical token regression (SC-07, SC-08).** The Gastown
-   skill splits rewrote the 7-stage retirement table and the GUPP restart
-   limits section, losing the specific uppercase stage tokens (`VALIDATE`,
-   `SUBMIT`, `NOTIFY`, `CLEANUP`, `TERMINATE`) and the literal pipe-table
-   format (`Max restarts per bead | 3`) that safety-critical tests check
-   for. The Wave 2B commit message stated "safety boundaries stay in
-   SKILL.md" but the refactor was semantic-equivalent only — the tests
-   demand literal token match. Repaired in Wave 3 via two lines:
-   - `done-retirement/SKILL.md`: added explicit `Stages: VALIDATE → COMMIT → PUSH → SUBMIT → NOTIFY → CLEANUP → TERMINATE` line
-   - `gupp-propulsion/SKILL.md`: reformatted restart-limits bullets as a pipe-delimited table
-
-   Lesson: when a refactor claims to preserve safety invariants, run the
-   safety-critical test suite before the commit, not after the wave closes.
-
-4. **Test pollution hypothesis investigation (empirically disproven).**
-   During Wave 3, a false hypothesis was raised that SC-07/SC-08 failures
-   were caused by test pollution mid-suite mutation of real SKILL.md files.
-   Verification method: captured md5sums of both files, ran the full
-   `npm test` suite, re-captured md5sums. The hashes were **identical**
-   before and after. Additionally, `grep -rn writeFileSync tests/ src/`
-   returned zero matches writing to real `.claude/skills/*` paths (all
-   Wave 2D tests sandbox to `mkdtempSync(tmpdir())`). The SC-07/SC-08
-   failures were genuine Wave 2B regressions, not pollution artifacts.
-   Lesson: verify state empirically (md5sum, grep) before acting on
-   hypotheses about inter-test interference.
-
-5. **Hook test location.** Vitest excludes `.claude/**` by default, so the
-   `08-wave-execution-plan.md` path of `.claude/hooks/tests/*.test.ts` is
-   dormant. Hook tests live at `tests/hooks/` where vitest picks them up.
-
-6. **PostCompact recovery combines snapshot + live state.** The recovery
-   hook reads the PreCompact snapshot but combines it with LIVE git state
-   at recovery time rather than trusting the snapshot alone — branch,
-   uncommitted changes, and tip commit may all have moved between
-   compaction and recovery.
-
-7. **SC-07/SC-08 test brittleness (follow-up).** The safety-critical tests
-   check literal format strings (`'Max restarts per bead | 3'`,
-   uppercase stage names) rather than semantic invariants. A refactor that
-   preserves meaning but changes format breaks the tests. Converting these
-   assertions to content-semantic checks (e.g., regex `/max\s*restarts.*3/i`)
-   is deferred to a follow-up issue, not addressed in this milestone.
+- **Backfill-before-limit-check causes false regressions.** The Wave 2D frontmatter backfill added ~8 words to every SKILL.md, pushing two Wave 2B skills over an 800-word gate that didn't budget for it. When a gate targets prose word count, either exclude frontmatter or budget for it up front. Fix: gate raised to 820.
+- **Schema caps must accommodate merge outputs.** The `team-control` merge carries a 375-character description (longer than either source) because it covers both surface areas. The original `max(250)` cap rejected it. Merge operations can legitimately produce outputs that exceed per-source constraints — schemas must size for the union, not the max per-input.
+- **Claims that a refactor preserves safety invariants must be backed by running the safety-critical suite.** Wave 2B claimed "safety boundaries stay in SKILL.md" but the safety-critical tests are literal-token checks, not semantic checks. The refactor broke them. Lesson: before claiming a refactor is safe, run the tests that enforce the safety property. Don't defer to the next wave.
+- **Verify state empirically before acting on hypotheses about inter-test interference.** The SC-07/SC-08 pollution hypothesis was disproven in two commands: md5sum of both files before and after `npm test`, plus `grep -rn writeFileSync` against `.claude/skills/*` paths. Both showed zero evidence of pollution. The failures were real Wave 2B regressions. Lesson reinforces the standing rule — measure, don't speculate.
+- **Vitest excludes `.claude/**` by default.** Hook tests at `.claude/hooks/tests/*.test.ts` never ran. Hook tests live at `tests/hooks/` where vitest picks them up. The 08-wave-execution-plan had the wrong path; fixed in Wave 1, but the gotcha is durable: any test outside vitest's include paths is dormant whether you wrote it or not.
+- **PostCompact recovery combines snapshot + live state, not snapshot alone.** The PreCompact snapshot captures the pre-compaction world, but by PostCompact recovery time the branch, uncommitted changes, and tip commit may have moved. The recovery hook reads the snapshot but queries live git at recovery time and merges — never trusts the snapshot alone.
+- **Shell hooks unlock coverage that pure-JS hooks can't.** `worktree-cleanup.sh` was the first shell hook in the repository, which gave harness-integrity's `checkHookScriptsExecutable` something to validate for the first time. The hook was added for its own sake, but it closed a latent coverage gap as a side effect. Lesson: mixed-language hook support isn't decoration — it exercises paths that monoculture hides.
+- **Tmpdir install refactors make CI and local deterministic.** Before: harness-integrity read `.claude/` from disk. After: harness-integrity installs `project-claude/` into `mkdtempSync(tmpdir())` and reads that. CI and local now see the same tree. The principle generalizes — any test that reads "whatever happens to be on disk" will eventually diverge between environments.
+- **Mission package + wave execution plan is the pattern for platform-scale milestones.** `docs/missions/platform-alignment/` laid out 12 improvements across 4 waves with a per-wave test plan. Each wave closed cleanly because the scope was bounded before execution started. Pattern reusable for every future platform-scale milestone — write the mission package first, execute in waves, Wave 0 ships contracts.
+- **Conventional-commit hooks must parse HEREDOC before double-quoted `-m` matchers.** The validate-commit.cjs regex used to greedy-match the entire `"$(cat <<'EOF'...EOF)"` body as the subject, rejecting the documented HEREDOC commit form. Reorder: HEREDOC matcher first (captures full body lazily), then tightened `-m` matchers with `[^"\n]` / `[^'\n]` so they cannot cross newlines. Durable fix; 8 regression tests added.

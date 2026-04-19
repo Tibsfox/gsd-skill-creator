@@ -1,4 +1,4 @@
-# v1.49.266 — Degree 126: Nasty Nes Rodriguez (Hip-Hop/Radio, E=4, FIRST RADIO PERSONALITY) + Canvasback — THE ARISTOCRAT OF DUCKS — NINTH CONSECUTIVE ANATIDAE TIES PICIDAE NONET ALL-TIME RECORD — RAINIER VALLEY ENTERS THE ENGINE — FRESH TRACKS ON KCMU — KCMU TRILOGY OPENS — 72 MPH NORTH AMERICA'S FASTEST DUCK — SECOND CONSECUTIVE AYTHYA
+# v1.49.266 — Degree 126: Nasty Nes Rodriguez + Canvasback — THE ARISTOCRAT OF DUCKS
 
 **Released:** 2026-04-02
 **Scope:** Seattle 360 + Sound of Puget Sound — paired degree release, first radio personality in 126 degrees on the artist axis, ninth consecutive Anatidae on the species axis tying the Picidae nonet all-time family-streak record, KCMU radio trilogy opens (degrees 126-128), second consecutive *Aythya* within the ongoing Anatidae streak

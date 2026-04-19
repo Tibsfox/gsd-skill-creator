@@ -1,13 +1,28 @@
 # Retrospective — v1.49.502
 
+## What Worked
+
+- **The Paired Engine Pattern Held at Scale Beyond Degree 0.** Degree 0 (v1.49.501) proved that NASA + S36 + SPS could be synthesized in a single release. Degree 1 (v1.49.502) proved it was not a one-shot coincidence. Pioneer 0's 77-second failure mode, Frisell's incomplete-sustain aesthetic, and the Pacific Wren's compressed-bout territorial declaration all resonated around a single thematic axis (first signal into empty space) without forcing the alignment.
+- **The Amiga Principle Evolved Rather Than Repeated.** Degree 0's Jones was organizational Amiga; degree 1's Frisell is technological Amiga. The engine avoided the failure mode of repeating the same principle at every degree and instead mutated it forward, establishing that cross-degree concepts should evolve along a trajectory rather than recur verbatim.
+- **The Organism Pairing Anchored Visual Memory.** Fireweed's magenta against charcoal gives degree 1 a visual signature as strong as degree 0's Armillaria network. Readers can recall "fireweed-and-Pioneer-0" as a single image pair, which aids the engine's long-term coherence across 360 degrees.
+- **The ECM -> Seattle -> Frisell Pipeline Traced Cleanly.** Manfred Eicher's silence directive -> Jan Erik Kongshaug's mic technique -> Frisell's 1989 arrival in Seattle -> the solo concert model. The lineage was empirically documented (by album credits and studio photographs) and allowed the release to connect European art-music production to Pacific Northwest independence without speculation.
+- **The Morton Sound Window Connected Acoustic Ecology to Production Aesthetics.** The 2-8 kHz transmission window where the Pacific Wren sings is structurally equivalent to Eicher's studio chamber -- the medium is the instrument. This is the kind of cross-domain resonance the engine is built to surface, and degree 1 surfaced it cleanly.
+
+## What Could Be Better
+
+- **Central District Thread Broke at Degree 1.** Quincy Jones at degree 0 was a Central District artist. Bill Frisell at degree 1 is Fremont / Queen Anne. The Central District thread that the engine began to document at degree 0 is interrupted immediately. The release note frames this as a deliberate pause (resuming at degree 2 with Wayne Horvitz), but the interruption at the first opportunity is a structural weakness.
+- **No Marine Species at Degree 1.** The engine's future "Sound of Puget Sound" sub-theme should have had a marine species in the first ten degrees. Pacific Wren is an upland terrestrial species. The marine silence that will become a critical-overdue issue by degree 55 started here.
+- **Pass 1 / Pass 2 Distinction Not Yet Formalized.** The README refers to "Pass 2 Refinement Summary" but the engine did not yet have a clear definition of what Pass 1 was or why Pass 2 existed. This would be formalized at degrees 20+ but creates ambiguity in the degree-1 artifact.
+
 ## Lessons Learned
 
-1. **The Draw Pattern** -- Frisell arrived in Seattle at age 38 from New York, drawn by the city's lower cost of living, its distance from the jazz industry's pressures, and its proximity to the natural landscape. The Draw is the second artist-city pattern (after The Export at degree 0): global cultivation followed by local settlement.
-
-2. **The ECM-to-Seattle Pipeline** -- Frisell's path from ECM Records' aesthetic of minimalist production to Seattle's live-music culture establishes a connection between European art-music sensibility and Pacific Northwest independence that will recur.
-
-3. **The Solo Concert Model** -- Frisell performing alone with a Telecaster and effects pedals, producing a full ensemble's worth of sound. This model reaches its ultimate expression at degree 5 with Berry -- but Berry does it acoustically, without electronics, through stride piano technique alone.
-
-4. **The NASA Failure Taxonomy: Catastrophic** -- Pioneer 0 is the first failure mode: total destruction. 77 seconds, then fire. The bearing failure is identified, the fix is implemented, and the program continues. This is failure mode 1 of 4.
-
----
+1. **First signals are short signals.** Pioneer 0 transmitted 77 seconds of valid data. The Pacific Wren's territorial bout is 10 seconds. Frisell's four-note harmonic narratives resolve in under 8 seconds. Degree 1 establishes that first transmissions from new territory succeed by density, not duration -- a design principle the engine will carry through Gemini and Apollo and into the post-Apollo era.
+2. **Amiga Principle is substrate-independent.** Degree 0's organizational Amiga (Jones conducting ensembles) and degree 1's technological Amiga (Frisell multiplying a Telecaster through signal processing) are the same principle on different substrates. The engine should track Amiga instances across substrates rather than treating them as separate phenomena.
+3. **Pioneer failures are valid data.** Pioneer 0 failed at T+77s but its 77 seconds of telemetry informed every subsequent mission. The engine documents Mode 1 of its NASA Failure Taxonomy as Catastrophic, with the explicit recognition that catastrophic loss is distinct from data loss.
+4. **The Morton Sound Window is a cross-domain constant.** The 2-8 kHz transmission band where the Pacific Wren sings is the same band where human speech is most intelligible and where ECM's Rainbow Studios is most resonant. The engine should look for this window whenever acoustic / production / biological crossings appear.
+5. **ECM aesthetic is the production analog of Langley discipline.** Minimal signal chain, natural ambience, respect for silence. Both reject dominant-paradigm over-processing and produce results that persist longer than the contemporary fashionable alternatives. Manfred Eicher and Clifford Nelson (degree 55) converge on the same principle.
+6. **Fireweed is the meta-metaphor for Pioneer programs.** First into disturbed ground, visible magenta signal, millions of small seeds rather than one big seed, root system that outlasts the above-ground flower. Every NASA Pioneer vehicle is a fireweed -- the visible signal is short, the rhizomatous system is what persists.
+7. **Artist-City patterns are plural, not singular.** The Export (degree 0 -- Jones cultivated locally, shipped globally) and The Draw (degree 1 -- Frisell cultivated globally, settled locally) are the first two patterns. The engine should expect more, not fewer.
+8. **Recombinatorial grammar beats memorized playlist.** The Pacific Wren's song is generated by probabilistic rules from a finite vocabulary rather than by reproducing a fixed sequence. The same principle should apply to the engine's own release generation: generative rules over templates, not copy-paste.
+9. **Genre boundaries are administrative, not musical.** Frisell's *Nashville* proved this in 1997. The engine inherits this principle: cross-genre connections should be made freely when the musical evidence supports them, without waiting for industry categories to catch up.
+10. **Cross-sync is the engine's primary product.** Part A and Part B are not parallel tracks; they are cross-linked tracks. The engine's value is not in documenting two things at a time but in documenting the edges between them. Degree 1 establishes this by thematic interweaving across every section.

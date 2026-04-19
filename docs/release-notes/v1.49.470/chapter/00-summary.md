@@ -1,8 +1,12 @@
-> Following v1.49.469 — _Degree 328: Seven Year Bitch + Night Predator Chorus GHO+Coyote_, v1.49.470 ships as Degree 329: The Accused + Stonefly+Caddisfly Hatch.
-# v1.49.470 — Degree 329: The Accused + Stonefly+Caddisfly Hatch
+> Following v1.49.469 — _Degree 328: Seven Year Bitch (metal) + Night Predator Chorus GHO+Coyote (SEVEN YEAR BITCH RETURN, FIRST CANID IN MULTI-SPECIES SPS EVENT, NOCTURNAL PREDATOR AGGRESSION, E=16 COMBINED, 91.1% OF ROTATION, Seven Year Bitch's second engine appearance at E=8 on the heavy-punk-metal side paired with the Great Horned Owl pair duet plus Coyote howl-yip response as the first Canidae participation in a simultaneous multi-species SPS acoustic event, both halves registering nocturnal apex-predator intensity at the post-summit arc's first double-E=8 position)_, v1.49.470 ships as Degree 329: The Accused + Full Stonefly + Caddisfly Hatch (METAL ARC OPENS, FIRST INSECT SOUND, E=18 COMBINED, 91.4%, The Accused's Oak Harbor crossover-thrash entry at E=9 paired with the Plecoptera + Trichoptera mass-emergence wing-buzz at E=9 as the engine's highest combined-energy pairing and as the simultaneous opening of the Metal Arc on S36 with Blaine Cook, Tommy Niemeyer, and the Martha Splatterhead persona on Combat Records and the opening of the entomological acoustic taxonomy on SPS with *Pteronarcys californica* mass emergence on Pacific Northwest spring rivers).
+# v1.49.470 — Degree 329: The Accused + Full Stonefly + Caddisfly Hatch (METAL ARC OPENS, FIRST INSECT SOUND, E=18 COMBINED, 91.4%, The Accused's Oak Harbor crossover-thrash entry at E=9 paired with the Plecoptera + Trichoptera mass-emergence wing-buzz at E=9 as the engine's highest combined-energy pairing and as the simultaneous opening of the Metal Arc on S36 with Blaine Cook, Tommy Niemeyer, and the Martha Splatterhead persona on Combat Records and the opening of the entomological acoustic taxonomy on SPS with *Pteronarcys californica* mass emergence on Pacific Northwest spring rivers)
 **Shipped:** 2026-04-03
-_Parse confidence: 0.50 — source `docs/release-notes/v1.49.470/README.md`_
+**Commits:** 0 | **Files:** 9
+**Branch:** dev
+_Parse confidence: 0.75 — source `docs/release-notes/v1.49.470/README.md`_
 ## Summary
-This release carried 6 features; see `01-features.md`.
+No structured feature list was captured for this release; see the source README for prose details.
+It also produced retrospective content (lessons_learned, what_could_be_better, what_worked); see `03-retrospective.md`.
+15 lessons extracted; see `04-lessons.md` or the `RETROSPECTIVE-TRACKER.md`.
 ---
 **Prev:** [v1.49.469](../v1.49.469/00-summary.md) · **Next:** [v1.49.471](../v1.49.471/00-summary.md)

@@ -1,4 +1,4 @@
-# v1.49.253 — Degree 113: Minus the Bear (Math Rock/Electronic) + White-headed Woodpecker — THE TAPPING SIGNAL AND THE INVERSE WOODPECKER — FIRST MATH ROCK — PICIDAE TIES CORVIDAE SEPTET RECORD — CAPITOL HILL STREAK AT FOUR — SUICIDE SQUEEZE LABEL ENTERS — FIRST DRY-SIDE CASCADES SPECIALIST
+# v1.49.253 — Degree 113: Minus the Bear (Math Rock/Electronic) + White-headed Woodpecker — THE TAPPING SIGNAL AND THE INVERSE WOODPECKER
 
 **Released:** 2026-04-02
 **Scope:** Seattle 360 + Sound of Puget Sound — paired degree release, first Math Rock, Picidae septet tying the Corvidae all-time record, Capitol Hill streak extends to four, Suicide Squeeze Records enters the label map, first dry-side Cascades specialist, Dryobates genus recurs for the third time in four degrees

@@ -1,4 +1,4 @@
-# v1.49.257 — Degree 117: Deep Sea Diver (Indie Rock) + American Dipper Dunking Behavior — SECOND SPECIES DOUBLE-ENTRY — SUB POP LABEL HOMECOMING — SIDEPLAYER-TO-FRONTPERSON TRAJECTORY — WING HYDROFOILS AND SPLASH-SONG INTEGRATION — THE SUBMERSION MIRROR
+# v1.49.257 — Degree 117: Deep Sea Diver (Indie Rock) + American Dipper Dunking Behavior — SECOND SPECIES DOUBLE-ENTRY
 
 **Released:** 2026-04-02
 **Scope:** Seattle 360 + Sound of Puget Sound — paired degree release, second species double-entry after the Pileated Woodpecker template (108-109), Sub Pop Records returns after the Pony Time self-released reset, sideplayer-to-frontperson trajectory enters as the 118th artist-city pattern, wing hydrofoil biomechanics documented at engineering grade, splash-song integration establishes a three-layer acoustic signature unique in the Pacific Northwest soundscape

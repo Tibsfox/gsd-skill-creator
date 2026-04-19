@@ -83,9 +83,23 @@ function extractShipped(text) {
 }
 
 function extractCommits(text) {
-  const re = /\*\*Commits?\*?\*?:\*?\*?\s*(\d+)/i;
-  const m = re.exec(text);
-  return m ? { commits: parseInt(m[1], 10) } : null;
+  // Pattern A: **Commits:** <sha> (N)  — SHA followed by count in parens
+  const reA = /\*\*Commits?\*?\*?:\*?\*?\s*`?[a-f0-9]{4,}`?\s*\((\d+)\)/i;
+  const mA = reA.exec(text);
+  if (mA) return { commits: parseInt(mA[1], 10) };
+  // Pattern B: **Commits:** (N)  — just count in parens
+  const reB = /\*\*Commits?\*?\*?:\*?\*?\s*\((\d+)\)/i;
+  const mB = reB.exec(text);
+  if (mB) return { commits: parseInt(mB[1], 10) };
+  // Pattern C: **Commits:** N  — bare count, rejected if digits could be a SHA prefix
+  const reC = /\*\*Commits?\*?\*?:\*?\*?\s*(\d+)(?![a-f\d])/i;
+  const mC = reC.exec(text);
+  if (mC) {
+    const n = parseInt(mC[1], 10);
+    // Sanity: commit counts between tags are at most a few thousand; reject obvious SHA mis-matches
+    if (n < 100000) return { commits: n };
+  }
+  return null;
 }
 
 function extractFilesAndLines(text) {
