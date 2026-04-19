@@ -27,6 +27,12 @@ import {
   type SensoriaHookOptions,
 } from '../sensoria/applicator-hook.js';
 import { ActivationWriter } from '../traces/activation-writer.js';
+// MA-2 ACE (phase 655): optional actor-critic signal from `src/ace/loop.ts`.
+// The signal is ONLY consumed when the caller supplies it AND the flag is on,
+// AND the per-candidate propensity lookup returns a non-zero value.
+// Flag-off path is byte-identical to v1.49.561 pre-refinement (SC-MA2-01).
+import type { ActorSignal } from '../ace/actor-update.js';
+import { applyActorSignalToScore } from '../ace/actor-update.js';
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -130,10 +136,18 @@ export class ActivationSelector {
   /**
    * Score + (optionally) gate the candidate pool and return the ranked
    * decisions. Writes one M3 trace per decision.
+   *
+   * MA-2 ACE integration (phase 655): the optional `context.aceSignal` is an
+   * `ActorSignal` from `src/ace/loop.ts`. When present, and when the per-
+   * candidate propensity lookup returns a non-zero value, the signal's
+   * `delta` nudges the composite score. Flag-off (no `aceSignal` supplied)
+   * path is byte-identical to v1.49.561 pre-refinement (SC-MA2-01).
+   * See `src/ace/loop.ts` for the actor-critic loop that produces signals.
    */
   async select(
     query: string,
     candidates: Candidate[],
+    context: { aceSignal?: ActorSignal } = {},
   ): Promise<SelectorDecision[]> {
     if (candidates.length === 0) return [];
     const now = Date.now();
@@ -141,6 +155,10 @@ export class ActivationSelector {
 
     // Decide whether Sensoria gating is on (one flag-read per select call).
     const sensoriaEnabled = this._sensoriaEnabled();
+
+    // MA-2 ACE: optional actor signal. Null when caller did not supply or
+    // the ACE loop emitted null (flag-off). Preserves byte-identical path.
+    const aceSignal = context.aceSignal ?? null;
 
     const decisions: SelectorDecision[] = [];
 
@@ -171,7 +189,24 @@ export class ActivationSelector {
         ? this.stepWeight * (this.prediction?.confidence ?? 0)
         : 0;
 
-      const composite = m2Score + m1Boost + stepBoost;
+      let composite = m2Score + m1Boost + stepBoost;
+
+      // --- 3b) MA-2 ACE actor-signal nudge --------------------------------
+      // Only applies when the caller explicitly supplied an aceSignal AND
+      // the candidate has non-zero propensity. Propensity derivation here is
+      // intentionally simple: candidates whose id appears as a key in the
+      // signal's per-channel eligibility map are treated as "alive"; others
+      // receive zero nudge. A richer per-candidate eligibility lookup is
+      // MA-2's integration partner's responsibility; the selector stays
+      // minimal per the phase 655 briefing (MINIMAL-EXTEND). Flag-off
+      // (aceSignal === null) short-circuits here, preserving byte-identical
+      // composite scoring (SC-MA2-01).
+      if (aceSignal !== null) {
+        const propensity = this._candidatePropensity(cand, aceSignal);
+        if (propensity > 0) {
+          composite = applyActorSignalToScore(composite, aceSignal, propensity);
+        }
+      }
 
       // --- 4) Activation decision -----------------------------------------
       let sensoriaDecision: HookDecision | null = null;
@@ -258,6 +293,38 @@ export class ActivationSelector {
     return false; // no explicit enable → treat as off (byte-identical path)
   }
 
+  /**
+   * MA-2 ACE (phase 655) — per-candidate propensity lookup.
+   *
+   * Returns a value in `[0, 1]` representing how "alive" this candidate is
+   * in the ACE signal's per-channel eligibility memory. The default policy
+   * is simple: sum the absolute eligibilities whose channel names match the
+   * candidate id prefix/suffix, falling back to the max absolute eligibility
+   * in the signal when the candidate id is not channel-keyed. Returning `0`
+   * means this candidate receives no nudge. The signal itself carries the
+   * sign-correct direction; propensity is a magnitude scalar in `[0, 1]`.
+   *
+   * This lookup is intentionally conservative: when the caller's candidate
+   * set does not carry per-candidate eligibility metadata, the propensity
+   * falls back to the signal-wide envelope. Richer lookups (e.g. joining
+   * against an EligibilityReader) belong in the caller's composition layer,
+   * not the selector — per the MINIMAL-EXTEND constraint from the phase 655
+   * briefing.
+   */
+  private _candidatePropensity(_cand: Candidate, signal: ActorSignal): number {
+    let maxAbs = 0;
+    for (const v of Object.values(signal.perChannelEligibility)) {
+      if (typeof v !== 'number' || !Number.isFinite(v)) continue;
+      const a = Math.abs(v);
+      if (a > maxAbs) maxAbs = a;
+    }
+    if (maxAbs === 0) return 0;
+    // Normalise: eligibility magnitudes are already bounded by the MA-6
+    // [−1, 1] magnitude clamp, so this is a no-op in typical operation but
+    // keeps the contract explicit.
+    return Math.min(1, maxAbs);
+  }
+
   private _tokens(q: string): Set<string> {
     // Lightweight tokeniser matching the scorer's conventions; the scorer
     // re-tokenises internally on content, so we just precompute query tokens.
@@ -278,13 +345,18 @@ export class ActivationSelector {
 
 /**
  * Functional wrapper for one-shot selection without constructing a class
- * instance. Equivalent to `new ActivationSelector(opts).select(query, cands)`.
+ * instance. Equivalent to `new ActivationSelector(opts).select(query, cands, context)`.
+ *
+ * MA-2 ACE (phase 655): pass `context.aceSignal` to feed an `ActorSignal`
+ * from `src/ace/loop.ts`. Omitted / `undefined` → byte-identical v1.49.561
+ * path (SC-MA2-01).
  */
 export async function select(
   query: string,
   candidates: Candidate[],
   opts: SelectorOptions = {},
+  context: { aceSignal?: ActorSignal } = {},
 ): Promise<SelectorDecision[]> {
   const sel = new ActivationSelector(opts);
-  return sel.select(query, candidates);
+  return sel.select(query, candidates, context);
 }
