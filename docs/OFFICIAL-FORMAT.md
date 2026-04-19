@@ -555,6 +555,63 @@ See [docs/sensoria.md](./sensoria.md) for the full user guide including K_H / K_
 
 ---
 
+## Output-Structure Frontmatter (ME-5)
+
+The ME-5 component (v1.49.561 refinement wave) adds two optional fields to the cartridge frontmatter schema. These fields are read by the ME-1 tractability classifier to determine whether optimisation effort on this skill is justified (Zhang et al. 2026 §4.3).
+
+### Field Reference
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `output_structure` | `'structured' \| 'prose' \| 'hybrid'` | No (advisory until corpus migration completes) | Declares the skill's output regime. Controls ME-1 tractability classification. |
+| `output_schema` | `string` | Required when `output_structure: structured` | JSON-schema URI or inline shape identifier. If absent on a `structured` skill, ME-1 returns `unknown` rather than `tractable` (fail-closed). |
+
+### Values
+
+- **`structured`** — The skill produces output conforming to a declared schema (JSON, YAML, a fixed template). Classified `tractable` by ME-1 when `output_schema` is also present.
+- **`prose`** — The skill produces free-form natural language commentary, analysis, or narrative. Classified `coin-flip` by ME-1. This is a regime property, not a quality judgment.
+- **`hybrid`** — The skill produces a mix of structured sections and prose. Classified `tractable` when `output_schema` is present; `unknown` when absent.
+
+### JSON-Schema / Markdown-Template / Prose Examples
+
+**Structured skill with JSON-schema reference:**
+
+```yaml
+---
+name: portable-schema-generator
+description: Generates a portable JSON schema from a TypeScript interface
+output_structure: structured
+output_schema: "schemas/portable-schema-output.json"
+---
+```
+
+**Hybrid skill with inline shape reference:**
+
+```yaml
+---
+name: test-generator
+description: Generates Vitest test suites from a module path
+output_structure: hybrid
+output_schema: "schemas/test-generator-output.md"
+---
+```
+
+**Prose skill (no schema — coin-flip regime):**
+
+```yaml
+---
+name: gsd-explore
+description: Explores a codebase and produces a natural-language architectural summary
+output_structure: prose
+---
+```
+
+For `prose` skills, `output_schema` is not meaningful and should be omitted. The `cartridge-forge` scaffold requires `output_structure` for new skills created after ME-5 lands; existing skills without the field are migrated by `node tools/migrations/output-structure-migrate.ts`.
+
+Full author guide: [docs/refinement-wave.md](./refinement-wave.md). Feature flag: `SKILL_CREATOR_OUTPUT_STRUCTURE`.
+
+---
+
 ## See Also
 
 ### Official Documentation
