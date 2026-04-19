@@ -129,6 +129,14 @@ The integration test records a full end-to-end trace from skill activation throu
 
 ---
 
+## MA-1 Eligibility Over M3 Traces
+
+The MA-1 eligibility-trace layer (v1.49.561 refinement wave) attaches a derived index to M3 without modifying the M3 ledger itself. Each M3 decision-trace entry gains an `eligibilitySnapshotId` cross-reference pointing to a parallel JSONL file at `.planning/traces/eligibility.jsonl`. The ledger format is unchanged; CF-M3-05 (append-only, human-readable) is preserved.
+
+MA-1 computes an exponentially-decayed eligibility trace `eᵢ(t)` over every active M5 feature at each decision boundary per Barto 1983 Eq. 3 (p. 841), with decay constant `δ = 0.9` (default). The trace is bounded in memory by O(|active features|) — features whose `eᵢ` decays below 1e-12 are pruned. MA-2's TD-error actor update reads this trace alongside MA-6's `r(t)` to update M5 selector weights via Barto 1983 Eq. 2. The eligibility index can be regenerated from the M3 ledger and MA-6 reinforcement log if lost; it is a derived structure, not a primary source. With `traces.eligibility = false` (the default), no index is written and the M3 ledger is entirely unaffected (SC-MA1-01).
+
+---
+
 ## See Also
 
 - `docs/sensoria.md` — M6 reads M5 relevance as signal input
@@ -136,3 +144,5 @@ The integration test records a full end-to-end trace from skill activation throu
 - `docs/symbiosis.md` — M8 reads all seven modules for Quintessence
 - `docs/grove-rearch/inventory.md` — Per-file EXTEND / NEW-LAYER decisions for `src/memory/` and `src/mesh/`
 - `docs/foundations/theoretical-audit.md` — Theoretical basis including GraphRAG and Leiden derivations
+- `docs/reinforcement-taxonomy.md` — MA-6 reinforcement channels that MA-1 eligibility indexes against
+- `docs/refinement-wave.md` — refinement wave overview
