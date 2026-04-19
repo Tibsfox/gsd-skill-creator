@@ -22,6 +22,76 @@ Each release also has its own directory under
 `README.md` with the full feature description, and for major milestones
 a `RETROSPECTIVE.md` and/or `LESSONS-LEARNED.md`.
 
+## [v1.49.561] — 2026-04-18
+
+### Added
+
+- **M1 Semantic Memory Graph** (`src/graph/`) — entity/edge schema over Grove content-addressed records; Leiden community detection (Traag et al. 2019) guaranteeing well-connected communities; hierarchical summaries at community level; seven query patterns (direct lookup, edge traversal, community membership, cross-community path, temporal slice, activation sequence, precedent similarity). NEW-LAYER over `grove-format.ts`.
+- **M2 Hierarchical Hybrid Memory** (`src/memory/short-term.ts`, `long-term.ts`, `scorer.ts`, `reflection.ts`, `read-write-reflect.ts`) — three-tier αβγ-scored memory (RAM cache → ChromaDB at `localhost:8100` → PostgreSQL + pgvector); reflection pass compresses 1,000 short-term entries to ≤100 long-term without entity-recall loss. EXTEND posture on `chroma-store.ts`, `pg-store.ts`, `ram-cache.ts`, `service.ts`, `types.ts`.
+- **M3 Decision-Trace Ledger** (`src/traces/`) — AMTP-compatible append-only trace schema; writer redacts `api_key`, `password`, `token`, `secret`, `private_key` values on write; precedent queries surface semantically similar past decisions. EXTEND of `src/mesh/event-log.ts` (new `logDecisionTrace` + `readDecisionTraces` methods) and `src/mesh/types.ts` (new `decision_trace` MeshEventType variant).
+- **M4 Branch-Context Experimentation** (`src/branches/`) — copy-on-write skill variants with fork/explore/commit lifecycle; first-commit-wins conflict resolution with clear diagnostic for N-1 blocked branches; userspace-portable (macOS/Linux/Windows). EXTEND of `lifecycle-resolver.ts` (`BranchLifecycleResolver`) and `skill-diff.ts` (`byteChangeFraction`).
+- **M5 Agentic Orchestration + Prefix Cache** (`src/orchestration/`, `src/cache/`) — multi-turn retrieval loop; radix-tree prefix cache; step-graph predictor for KVFlow-style anticipatory preloading (Pan et al. 2025); ≥60% cache hit rate on step-graph fixture; ≥10x first-token latency reduction on 1,000-session baseline. NEW-LAYER, strictly additive.
+- **M6 Sensoria** (`src/sensoria/`) — Lanzara 2023 net-shift receptor substrate for skill activation; pure function `netShift.ts` implementing ΔR_H = [L]·R_T·(K_H−K_L)/((1+K_H·[L])·(1+K_L·[L])); tachyphylaxis (K_H decay under sustained activation); Weber's law log-linear response verified to R²≥0.95; silent-binder detection; `sensoria:` frontmatter block for per-skill parameters; `skill-creator sensoria <skill>` CLI. NEW-LAYER.
+- **M7 Umwelt** (`src/umwelt/`) — Markov-blanket state partition (Internal/Sensory/Active/External) enforced at TypeScript type level and runtime; variational free-energy minimiser converging ≤50ms on 100-node model; 3σ surprise-triggered reflection; dark-room guard with configurable minimum-activity floor. NEW-LAYER.
+- **M8 Symbiosis** (`src/symbiosis/`) — teaching ledger (five categories: correction, instruction, preference, boundary, positive-feedback); co-evolution ledger (four offering kinds: skill-parameter, new-skill, refinement, quintessence-alert); Quintessence five-axis report (Self-vs-Non-Self, Essential Tensions, Growth-and-Energy-Flow, Stability-vs-Novelty, Fateful Encounters); parasocial-guard language validator; `skill-creator teach|co-evolution|quintessence` CLI commands. NEW-LAYER.
+- **Eight-module integration** (`src/integration/__tests__/living-sensoria/`) — end-to-end composition chain from M1 graph through M8 Quintessence; M6 net-shift reads M5 relevance; M7 generative model reads M1 communities + M3 traces; M8 Quintessence reads all seven.
+- **546 new tests** across 45 new test files (M6: 58, M7: 45, M8: 113, M1: 47, M2: 54, M3: 91, M4: 61, M5: 45, integration: 32).
+- **Shared TypeScript types** (`src/types/`) — M1–M8 schemas; re-exported from `src/types/index.ts`; no duplicates.
+- **Theoretical foundation doc** (`docs/foundations/theoretical-audit.md`) — primary-source citations for net-shift, Markov blanket, Quintessence, Amiga Principle (Lanzara 2023, Friston 2010/2013, Kirchhoff et al. 2018, Foxglove 2026, Traag 2019).
+- **Grove re-architecture inventory** (`docs/grove-rearch/inventory.md`) — EXTEND/NEW-LAYER/UNTOUCHED classification for all 104 files in `src/memory/` and `src/mesh/`; zero REWRITEs executed.
+- **User-facing module docs**: `docs/sensoria.md`, `docs/umwelt.md`, `docs/symbiosis.md`, `docs/memory-stack.md`.
+
+### Changed
+
+- `src/application/skill-applicator.ts` — gained orchestration-flag accessor; behaviour is byte-identical when all new flags are off (flag-off path tested by SC-EXT-FLAG-OFF / IT-11).
+- `src/mesh/event-log.ts` — gained `logDecisionTrace` and `readDecisionTraces` (backwards compatible EXTEND; existing 638 mesh tests all green; IMP-07 append-only invariant preserved).
+- `src/mesh/types.ts` — `MeshEventTypeSchema` gained `'decision_trace'` variant (additive; all existing consumers unaffected).
+- `src/memory/types.ts` — `MemoryResult` gained optional `scoreComponents?: { recency, relevance, importance }` field (additive; all callers that ignore the field continue to work).
+- `src/mesh/session-activation-view.ts` — `ActivationEvent` gained optional `traceId?: string` field for M3 trace correlation (additive forward-compatible change).
+- `src/memory/triple-store.ts` — EXTEND: new predicate vocabulary for M1 edge types (`skill activated-in session`, `decision preceded decision`).
+- `docs/OFFICIAL-FORMAT.md` — added `sensoria:` frontmatter block schema subsection.
+- `docs/EXTENSIONS.md` — added `gsd-skill-creator.sensoria`, `.umwelt`, `.symbiosis` namespace documentation.
+- `README.md` — added v1.49.561 Living Sensoria section with module table and links.
+- `CLAUDE.md` — added `src/sensoria/`, `src/umwelt/`, `src/symbiosis/`, `src/graph/`, `src/traces/`, `src/branches/`, `src/orchestration/`, `src/cache/` to Key File Locations.
+
+### Deprecated
+
+Nothing deprecated in this release.
+
+### Removed
+
+Nothing removed in this release.
+
+### Fixed
+
+Nothing fixed in this release (documentation and module additions only).
+
+### Security
+
+- **M3 writer secret redaction** — `src/traces/writer.ts` redacts any value whose key matches `api_key`, `password`, `token`, `secret`, or `private_key` before appending to the decision trace JSONL. Pattern-matched at write time; no existing trace entries are modified (append-only invariant preserved).
+- **M8 parasocial-guard** — `src/symbiosis/language-guard.ts` rejects co-evolution offerings containing emotional framing, first-person-plural relational language, or anthropomorphic experience attribution. Tested by SC-PARASOC (100 offerings, 0 constraint violations).
+
+### Migration
+
+All eight new modules default to **off** via opt-in flags in `.claude/settings.json`:
+
+```json
+{
+  "gsd-skill-creator": {
+    "sensoria":      { "enabled": false },
+    "umwelt":        { "enabled": false },
+    "symbiosis":     { "enabled": false },
+    "orchestration": { "enabled": false }
+  }
+}
+```
+
+v1.49.560 installs load unchanged — no changes to existing skill activation, memory, or mesh behaviour when all flags are off. Enabling any single flag activates only that module's code path; the remaining modules stay dormant. Enabling all four flags activates the full eight-module Living Sensoria stack.
+
+No schema migrations, no package.json dependency additions, no changes to existing JSONL ledger formats.
+
+---
+
 ## Highlights
 
 A curated timeline of the most significant milestones across the v1.0 → v1.49.549 arc:
