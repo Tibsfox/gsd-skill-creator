@@ -31,6 +31,7 @@ import { installCommand } from './cli/commands/install.js';
 import { statusCommand } from './cli/commands/status.js';
 import { auditCommand } from './cli/commands/audit.js';
 import { critiqueCommand } from './cli/commands/critique.js';
+import { sensoriaCommand } from './sensoria/cli.js';
 import { handleMigratePlaneCommand } from './plane/migration.js';
 import { SuggestionManager } from './detection/index.js';
 import { FeedbackStore, RefinementEngine, VersionManager } from './learning/index.js';
@@ -1576,6 +1577,33 @@ async function main() {
           p.log.message('  skill-creator skill test-triggering my-skill --mock');
         }
       }
+      break;
+    }
+
+    case 'sensoria': {
+      const scope = parseScope(args);
+      const { skillStore: scopedStore } = createScopedStoreAndIndex(scope);
+      const positional = args.slice(1).filter(a => !a.startsWith('-'));
+      const skillName = positional[0];
+      const format = parseStringFlag(args, '--format');
+      const minStr = parseStringFlag(args, '--min');
+      const maxStr = parseStringFlag(args, '--max');
+      const pointsStr = parseStringFlag(args, '--points');
+      const settingsPath = parseStringFlag(args, '--settings');
+      const exitCode = await sensoriaCommand(
+        args.includes('--help') || args.includes('-h') ? '--help' : skillName,
+        {
+          format,
+          min: minStr !== undefined ? Number(minStr) : undefined,
+          max: maxStr !== undefined ? Number(maxStr) : undefined,
+          points: pointsStr !== undefined ? Number(pointsStr) : undefined,
+          tachyphylaxis: args.includes('--tachyphylaxis'),
+          quiet: args.includes('--quiet') || args.includes('-q'),
+          settingsPath,
+        },
+        { skillStore: scopedStore },
+      );
+      if (exitCode !== 0) process.exit(exitCode);
       break;
     }
 
