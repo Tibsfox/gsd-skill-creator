@@ -1601,6 +1601,14 @@ async function main() {
       break;
     }
 
+    case 'output-structure':
+    case 'os': {
+      const { outputStructureCommand } = await import('./output-structure/cli.js');
+      const exitCode = await outputStructureCommand(args.slice(1));
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
     case 'sensoria': {
       const scope = parseScope(args);
       const { skillStore: scopedStore } = createScopedStoreAndIndex(scope);
