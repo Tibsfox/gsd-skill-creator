@@ -15,6 +15,7 @@ import { appendFileSync, readFileSync, existsSync, mkdirSync } from 'node:fs';
 import { randomUUID } from 'node:crypto';
 import { dirname } from 'node:path';
 import type { TeachCategory, TeachEntry } from '../types/symbiosis.js';
+import { recordExplicitCorrection } from '../reinforcement/channel-sources.js';
 
 /** Maximum byte length of `content` per entry. */
 export const TEACH_CONTENT_MAX_BYTES = 10 * 1024; // 10 KiB
@@ -33,6 +34,16 @@ export interface AppendTeachOptions {
   ledgerPath?: string;
   /** Override timestamp (useful in tests). */
   now?: number;
+  /**
+   * MA-6 hook: suppress the `explicit_correction` reinforcement emission.
+   * Defaults to true (emit).  Tests that should not touch the reinforcement
+   * log set this to false.
+   */
+  emitReinforcement?: boolean;
+  /**
+   * MA-6 hook: override the reinforcement log path (tests / alternate storage).
+   */
+  reinforcementLogPath?: string;
 }
 
 export interface TeachResult {
@@ -130,6 +141,23 @@ export function appendTeachEntry(
     appendFileSync(ledgerPath, JSON.stringify(entry) + '\n', 'utf8');
   } catch (err) {
     return { ok: false, error: String(err) };
+  }
+
+  // MA-6: emit explicit_correction reinforcement event.  Fire-and-forget so
+  // the synchronous contract of appendTeachEntry is preserved; fail-open on
+  // emission errors is already handled inside recordExplicitCorrection.
+  if (opts.emitReinforcement !== false) {
+    void recordExplicitCorrection(
+      {
+        actor: 'symbiosis:teaching',
+        metadata: {
+          teachEntryId: entry.id,
+          category,
+        },
+        ts: entry.ts,
+      },
+      { logPath: opts.reinforcementLogPath },
+    );
   }
 
   return { ok: true, id: entry.id };

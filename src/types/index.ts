@@ -63,3 +63,24 @@ export type {
   CoEvolutionOffering,
   QuintessenceSnapshot,
 } from './symbiosis.js';
+
+// ─── MA-6 Canonical Reinforcement Taxonomy (Phase 652, Refinement Wave) ─────
+
+export type {
+  ReinforcementChannel,
+  ReinforcementEvent,
+  ReinforcementValue,
+  ExplicitCorrectionMetadata,
+  OutcomeObservedMetadata,
+  BranchResolvedMetadata,
+  SurpriseTriggeredMetadata,
+  QuintessenceUpdatedMetadata,
+} from './reinforcement.js';
+
+export {
+  REINFORCEMENT_CHANNELS,
+  isReinforcementChannel,
+  directionFromMagnitude,
+  clampMagnitude,
+  r,
+} from './reinforcement.js';

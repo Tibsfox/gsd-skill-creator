@@ -20,6 +20,7 @@
  */
 
 import type { GenerativeModel, SurpriseEntry } from '../types/umwelt.js';
+import { recordSurpriseTriggered } from '../reinforcement/channel-sources.js';
 
 export type { SurpriseEntry };
 
@@ -30,6 +31,15 @@ export interface SurpriseChannelOptions {
   maxEntries?: number;
   /** Rolling window length (entries) for mean/std of the KL stream. Default 200. */
   windowSize?: number;
+  /**
+   * MA-6 hook: suppress the `surprise_triggered` reinforcement emission.
+   * Defaults to true (emit) when omitted.
+   */
+  emitReinforcement?: boolean;
+  /**
+   * MA-6 hook: override the reinforcement log path (tests / alt storage).
+   */
+  reinforcementLogPath?: string;
 }
 
 /**
@@ -102,11 +112,15 @@ export class SurpriseChannel {
   private readonly sigmaThreshold: number;
   private readonly maxEntries: number;
   private readonly windowSize: number;
+  private readonly emitReinforcement: boolean;
+  private readonly reinforcementLogPath?: string;
 
   constructor(options: SurpriseChannelOptions = {}) {
     this.sigmaThreshold = options.sigmaThreshold ?? 3;
     this.maxEntries = options.maxEntries ?? 10_000;
     this.windowSize = options.windowSize ?? 200;
+    this.emitReinforcement = options.emitReinforcement !== false;
+    this.reinforcementLogPath = options.reinforcementLogPath;
   }
 
   /**
@@ -123,6 +137,25 @@ export class SurpriseChannel {
     this.window.push(kl);
     if (this.window.length > this.windowSize) this.window.shift();
     if (this.entries.length > this.maxEntries) this.entries.shift();
+
+    // MA-6: emit a surprise_triggered reinforcement event when the trigger
+    // fires.  Fire-and-forget so record() keeps its synchronous contract;
+    // recordSurpriseTriggered is itself fail-open on persistence errors.
+    if (triggered && this.emitReinforcement) {
+      void recordSurpriseTriggered(
+        {
+          actor: 'umwelt:prediction',
+          metadata: {
+            sigma,
+            klDivergence: kl,
+            threshold: this.sigmaThreshold,
+          },
+          ts,
+        },
+        { logPath: this.reinforcementLogPath },
+      );
+    }
+
     return entry;
   }
 
