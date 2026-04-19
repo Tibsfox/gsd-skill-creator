@@ -493,6 +493,73 @@ All inline documentation matches actual code behavior.
 
 ---
 
+## Living Sensoria Extension Namespaces (v1.49.561)
+
+Three new namespaces ship with the Living Sensoria milestone. All three are opt-in and default off. Setting `enabled: false` (the default) for any namespace preserves byte-identical v1.49.560 behaviour.
+
+These namespaces are configured in `.claude/settings.json` under `gsd-skill-creator`, not in individual skill frontmatter.
+
+### `gsd-skill-creator.sensoria`
+
+Controls the M6 net-shift receptor substrate.
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `enabled` | `boolean` | `false` | Activate Sensoria net-shift skill-activation path |
+| `theta` | `number` | `0.0` | Minimum ΔR_H for activation gate (0.0 = any positive net-shift activates) |
+
+Per-skill parameters (K_H, K_L, R_T, tachyphylaxis) are set in each skill's `sensoria:` frontmatter block; see [OFFICIAL-FORMAT.md — `sensoria:` Frontmatter Block](./OFFICIAL-FORMAT.md#living-sensoria--sensoria-frontmatter-block).
+
+Full user guide: [docs/sensoria.md](./sensoria.md). Stability: **EXPERIMENTAL** (v1.49.561).
+
+### `gsd-skill-creator.umwelt`
+
+Controls the M7 Markov-blanket boundary layer and variational free-energy minimiser.
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `enabled` | `boolean` | `false` | Activate Umwelt Markov-blanket partitioning and surprise monitoring |
+| `dark_room_floor` | `number` | `3` | Minimum active outputs per session before dark-room guard triggers |
+
+Full user guide: [docs/umwelt.md](./umwelt.md). Stability: **EXPERIMENTAL** (v1.49.561).
+
+### `gsd-skill-creator.symbiosis`
+
+Controls the M8 teaching ledger, co-evolution ledger, and Quintessence five-axis reporting.
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `enabled` | `boolean` | `false` | Activate teaching + co-evolution ledger writes and Quintessence computation |
+
+Full user guide: [docs/symbiosis.md](./symbiosis.md). Stability: **EXPERIMENTAL** (v1.49.561).
+
+### Combined Example
+
+```json
+{
+  "gsd-skill-creator": {
+    "sensoria": {
+      "enabled": true,
+      "theta": 0.1
+    },
+    "umwelt": {
+      "enabled": true,
+      "dark_room_floor": 3
+    },
+    "symbiosis": {
+      "enabled": true
+    },
+    "orchestration": {
+      "enabled": true
+    }
+  }
+}
+```
+
+`orchestration.enabled` gates M5 Agentic Orchestration; M1–M4 each have their own flags (see [docs/memory-stack.md](./memory-stack.md)).
+
+---
+
 ## See Also
 
 - [OFFICIAL-FORMAT.md](./OFFICIAL-FORMAT.md) - Official Claude Code skill and agent format reference

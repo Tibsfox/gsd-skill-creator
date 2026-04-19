@@ -520,6 +520,41 @@ Agents use a different structure than skills:
 
 ---
 
+## Living Sensoria — `sensoria:` Frontmatter Block
+
+Skills may carry an optional `sensoria:` block at the top level of their YAML frontmatter. This block is read by the M6 Sensoria module (`src/sensoria/`) when `gsd-skill-creator.sensoria.enabled = true`. It is ignored entirely when the feature flag is off.
+
+The `sensoria:` block is not an official Claude Code field; it is a gsd-skill-creator extension that lives at the frontmatter root level (not under `metadata.extensions`) because it configures per-skill receptor parameters rather than tool-level metadata.
+
+### `sensoria:` Field Reference
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `k_h` | `number` | `2.4` | High-affinity association constant; controls sensitivity to weak signals |
+| `k_l` | `number` | `0.3` | Low-affinity association constant; sets the noise floor |
+| `r_t` | `number` | `1.0` | Total receptor count (normalised); scales maximum ΔR_H |
+| `tachyphylaxis` | `boolean` | `true` | If true, K_H drifts toward K_L after 20 consecutive activations |
+
+### `sensoria:` Schema Example
+
+```yaml
+---
+name: my-skill
+description: Example with explicit net-shift parameters
+sensoria:
+  k_h: 2.4
+  k_l: 0.3
+  r_t: 1.0
+  tachyphylaxis: true
+---
+```
+
+All four fields are optional. If the `sensoria:` block is absent but the feature flag is on, the defaults above apply. The block has no effect when `gsd-skill-creator.sensoria.enabled` is absent or `false`.
+
+See [docs/sensoria.md](./sensoria.md) for the full user guide including K_H / K_L / theta interpretation and the silent-binder edge case. Theoretical basis: Lanzara 2023, Appendix III (pending source-print verification).
+
+---
+
 ## See Also
 
 ### Official Documentation

@@ -21,6 +21,14 @@ Adaptive learning layer for Claude Code that creates, validates, and manages ski
 - `project-claude/` -- source of project-specific Claude config (installed via `node project-claude/install.cjs`)
 - `src/` -- TypeScript library and CLI
 - `src/cartridge/` -- unified cartridge/chipset format + `skill-creator cartridge …` CLI (see `docs/cartridge/`)
+- `src/sensoria/` -- M6 net-shift receptor substrate (Lanzara 2023; opt-in via `gsd-skill-creator.sensoria.enabled`)
+- `src/umwelt/` -- M7 Markov-blanket boundary + variational free-energy minimiser (Friston 2010, Kirchhoff 2018)
+- `src/symbiosis/` -- M8 teaching ledger, co-evolution ledger, Quintessence five-axis report
+- `src/graph/` -- M1 Semantic Memory Graph (entity/edge schema, Leiden community detection, GraphRAG query patterns)
+- `src/traces/` -- M3 Decision-Trace Ledger (AMTP-compatible append-only JSONL; extends `src/mesh/event-log.ts`)
+- `src/branches/` -- M4 Branch-Context copy-on-write skill variants (fork/explore/commit lifecycle)
+- `src/orchestration/` -- M5 multi-turn retrieval loop + selector (reads M1/M2/M3/M4)
+- `src/cache/` -- M5 radix-tree prefix cache + KVFlow-style step-graph predictor + anticipatory preloader
 - `src-tauri/` -- Rust backend (Tauri)
 - `desktop/` -- Vite webview frontend
 - `.college/` -- College Structure: Rosetta Core, panels, departments (culinary-arts, mathematics, mind-body), calibration
