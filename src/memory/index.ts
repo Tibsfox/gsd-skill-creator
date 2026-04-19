@@ -68,3 +68,15 @@ export { ConversationStore } from './conversation-store.js';
 export type { ConversationStoreConfig, ConversationTurn, ConversationSession, ConversationSearchResult } from './conversation-store.js';
 export { hybridRerank, extractKeywords, keywordOverlap, extractQuotedPhrases, quotedPhraseBoost, extractPersonNames, personNameBoost, parseTimeOffset, temporalBoost, extractPreferences, isAssistantReference, scoreToDistance, distanceToScore } from './hybrid-scorer.js';
 export type { ScoredDocument, RerankedDocument, HybridScorerConfig, TimeOffset } from './hybrid-scorer.js';
+
+// ─── M2 Hierarchical Hybrid Memory ──────────────────────────────────────────
+export { MemoryScorer, defaultScorer, recencyScore, keywordRelevance, importanceScore, tokenize as scorerTokenize } from './scorer.js';
+export type { ScorerConfig, ScoreComponents } from './scorer.js';
+export { ShortTermMemory } from './short-term.js';
+export type { ShortTermConfig, EvictCallback, ReflectCallback } from './short-term.js';
+export { LongTermMemory } from './long-term.js';
+export type { LongTermConfig } from './long-term.js';
+export { Reflector } from './reflection.js';
+export type { ReflectionConfig, ReflectionResult } from './reflection.js';
+export { ReadWriteReflect, DEFAULT_CHROMA_URL } from './read-write-reflect.js';
+export type { ReadWriteReflectConfig } from './read-write-reflect.js';
