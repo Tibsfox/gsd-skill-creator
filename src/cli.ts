@@ -1617,6 +1617,14 @@ async function main() {
       break;
     }
 
+    case 'representation-audit':
+    case 'rep-audit': {
+      const { representationAuditCommand } = await import('./representation-audit/cli.js');
+      const exitCode = await representationAuditCommand(args.slice(1));
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
     case 'sensoria': {
       const scope = parseScope(args);
       const { skillStore: scopedStore } = createScopedStoreAndIndex(scope);
