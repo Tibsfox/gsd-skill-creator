@@ -32,6 +32,7 @@ import { statusCommand } from './cli/commands/status.js';
 import { auditCommand } from './cli/commands/audit.js';
 import { critiqueCommand } from './cli/commands/critique.js';
 import { sensoriaCommand } from './sensoria/cli.js';
+import { teachCliCommand, coEvolutionCliCommand, quintessenceCliCommand } from './symbiosis/cli.js';
 import { handleMigratePlaneCommand } from './plane/migration.js';
 import { SuggestionManager } from './detection/index.js';
 import { FeedbackStore, RefinementEngine, VersionManager } from './learning/index.js';
@@ -1577,6 +1578,26 @@ async function main() {
           p.log.message('  skill-creator skill test-triggering my-skill --mock');
         }
       }
+      break;
+    }
+
+    case 'teach': {
+      const exitCode = await teachCliCommand(args.slice(1), {});
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
+    case 'co-evolution':
+    case 'coevo': {
+      const exitCode = await coEvolutionCliCommand(args.slice(1), {});
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
+    case 'quintessence':
+    case 'quint': {
+      const exitCode = await quintessenceCliCommand(args.slice(1), {});
+      if (exitCode !== 0) process.exit(exitCode);
       break;
     }
 
