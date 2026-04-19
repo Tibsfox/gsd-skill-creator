@@ -1,0 +1,179 @@
+/**
+ * M8 Symbiosis — Teaching Ledger (developer → system)
+ *
+ * Append-only JSONL ledger at `.planning/symbiosis/teaching.jsonl`.
+ * Five fixed categories enforce scope. Free-text bounded at 10 KiB per entry.
+ * Provides a public API for M3 trace-linkage by entry ID.
+ *
+ * Sources: Foxglove 2026, *The Space Between* pp. xxv–xxxii;
+ * component spec 08-m8-symbiosis.md §Teaching ledger.
+ *
+ * @module symbiosis/teaching
+ */
+
+import { appendFileSync, readFileSync, existsSync, mkdirSync } from 'node:fs';
+import { randomUUID } from 'node:crypto';
+import { dirname } from 'node:path';
+import type { TeachCategory, TeachEntry } from '../types/symbiosis.js';
+
+/** Maximum byte length of `content` per entry. */
+export const TEACH_CONTENT_MAX_BYTES = 10 * 1024; // 10 KiB
+
+/** All valid teaching categories (mirrors TeachCategory union). */
+export const TEACH_CATEGORIES: ReadonlySet<TeachCategory> = new Set([
+  'correction',
+  'clarification',
+  'constraint',
+  'pattern',
+  'preference',
+]);
+
+export interface AppendTeachOptions {
+  /** Override the ledger path (default: `.planning/symbiosis/teaching.jsonl`). */
+  ledgerPath?: string;
+  /** Override timestamp (useful in tests). */
+  now?: number;
+}
+
+export interface TeachResult {
+  ok: boolean;
+  id?: string;
+  error?: string;
+}
+
+/**
+ * Validate a raw category string against the fixed taxonomy.
+ */
+export function isValidCategory(value: unknown): value is TeachCategory {
+  return typeof value === 'string' && TEACH_CATEGORIES.has(value as TeachCategory);
+}
+
+/**
+ * Validate a raw TeachEntry object against the schema.
+ * Returns an array of error strings; empty array means valid.
+ */
+export function validateTeachEntry(entry: unknown): string[] {
+  const errors: string[] = [];
+  if (typeof entry !== 'object' || entry === null) {
+    return ['Entry must be a non-null object'];
+  }
+  const e = entry as Record<string, unknown>;
+
+  if (typeof e['id'] !== 'string' || e['id'].length === 0) {
+    errors.push('id must be a non-empty string');
+  }
+  if (typeof e['ts'] !== 'number' || !Number.isFinite(e['ts'])) {
+    errors.push('ts must be a finite number');
+  }
+  if (!isValidCategory(e['category'])) {
+    errors.push(
+      `category must be one of: ${[...TEACH_CATEGORIES].join(', ')}; got ${String(e['category'])}`,
+    );
+  }
+  if (typeof e['content'] !== 'string' || e['content'].length === 0) {
+    errors.push('content must be a non-empty string');
+  } else {
+    const bytes = Buffer.byteLength(e['content'] as string, 'utf8');
+    if (bytes > TEACH_CONTENT_MAX_BYTES) {
+      errors.push(
+        `content exceeds 10 KiB limit (${bytes} bytes)`,
+      );
+    }
+  }
+  if (!Array.isArray(e['refs'])) {
+    errors.push('refs must be an array');
+  } else {
+    for (const r of e['refs'] as unknown[]) {
+      if (typeof r !== 'string') {
+        errors.push('each ref must be a string');
+        break;
+      }
+    }
+  }
+  return errors;
+}
+
+/**
+ * Append a single teaching entry to the ledger.
+ * Never modifies existing records. Returns the generated entry ID on success.
+ */
+export function appendTeachEntry(
+  category: TeachCategory,
+  content: string,
+  refs: string[] = [],
+  opts: AppendTeachOptions = {},
+): TeachResult {
+  const ledgerPath = opts.ledgerPath ?? '.planning/symbiosis/teaching.jsonl';
+
+  if (!isValidCategory(category)) {
+    return { ok: false, error: `Invalid category: ${category}` };
+  }
+
+  const bytes = Buffer.byteLength(content, 'utf8');
+  if (bytes > TEACH_CONTENT_MAX_BYTES) {
+    return { ok: false, error: `content exceeds 10 KiB limit (${bytes} bytes)` };
+  }
+  if (content.length === 0) {
+    return { ok: false, error: 'content must not be empty' };
+  }
+
+  const entry: TeachEntry = {
+    id: randomUUID(),
+    ts: opts.now ?? Date.now(),
+    category,
+    content,
+    refs,
+  };
+
+  try {
+    mkdirSync(dirname(ledgerPath), { recursive: true });
+    appendFileSync(ledgerPath, JSON.stringify(entry) + '\n', 'utf8');
+  } catch (err) {
+    return { ok: false, error: String(err) };
+  }
+
+  return { ok: true, id: entry.id };
+}
+
+/**
+ * Read all valid entries from the ledger.
+ * Malformed lines are skipped with a warning (EC-06 guard).
+ */
+export function readTeachEntries(
+  ledgerPath = '.planning/symbiosis/teaching.jsonl',
+): TeachEntry[] {
+  if (!existsSync(ledgerPath)) return [];
+
+  const raw = readFileSync(ledgerPath, 'utf8');
+  const entries: TeachEntry[] = [];
+
+  for (const line of raw.split('\n')) {
+    const trimmed = line.trim();
+    if (!trimmed) continue;
+    try {
+      const parsed: unknown = JSON.parse(trimmed);
+      const errors = validateTeachEntry(parsed);
+      if (errors.length === 0) {
+        entries.push(parsed as TeachEntry);
+      } else {
+        console.warn('[symbiosis/teaching] skipping malformed entry:', errors.join('; '));
+      }
+    } catch {
+      console.warn('[symbiosis/teaching] skipping non-JSON line');
+    }
+  }
+
+  return entries;
+}
+
+/**
+ * Look up a single teaching entry by ID.
+ * Returns undefined when not found (M3-trace integration point — CF-M8-03).
+ * M3 callers use this to resolve teach-entry references embedded in traces.
+ */
+export function getTeachEntryById(
+  id: string,
+  ledgerPath = '.planning/symbiosis/teaching.jsonl',
+): TeachEntry | undefined {
+  return readTeachEntries(ledgerPath).find((e) => e.id === id);
+}
