@@ -43,6 +43,9 @@ export {
   writeMeshEvent,
   readMeshEvents,
   MeshEventLog,
+  // M3 Decision-Trace Ledger extension (Phase 644, Wave 1 Track D)
+  logDecisionTrace,
+  readDecisionTraces,
 } from './event-log.js';
 
 export type { WriteMeshEventInput } from './event-log.js';

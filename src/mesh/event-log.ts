@@ -13,6 +13,7 @@ import { promises as fs } from 'node:fs';
 import { dirname } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import type { MeshEvent, MeshEventType } from './types.js';
+import type { DecisionTrace } from '../types/memory.js';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -95,6 +96,40 @@ export async function readMeshEvents(logPath: string): Promise<MeshEvent[]> {
   return events;
 }
 
+// ─── M3 Decision-Trace extension (Phase 644, Wave 1 Track D) ─────────────────
+
+/**
+ * Writes a DecisionTrace as a `decision_trace` MeshEvent through the existing
+ * append-only writer.  The trace is stored as the event payload; the nodeId
+ * field carries the trace actor so callers can filter by node.
+ *
+ * EXTEND posture (IMP-07): uses writeMeshEvent (fs.appendFile only) — no new
+ * IO surface, no parallel log.  The AMTP envelope is the payload.
+ */
+export async function logDecisionTrace(
+  logPath: string,
+  trace: DecisionTrace,
+): Promise<MeshEvent> {
+  return writeMeshEvent(logPath, {
+    nodeId: trace.actor,
+    eventType: 'decision_trace',
+    payload: trace as unknown as Record<string, unknown>,
+  });
+}
+
+/**
+ * Reads all `decision_trace` events from the log and extracts the
+ * DecisionTrace payload from each one.
+ *
+ * Returns [] when the file does not exist or contains no decision_trace events.
+ */
+export async function readDecisionTraces(logPath: string): Promise<DecisionTrace[]> {
+  const events = await readMeshEvents(logPath);
+  return events
+    .filter((e) => e.eventType === 'decision_trace')
+    .map((e) => e.payload as unknown as DecisionTrace);
+}
+
 // ─── Class wrapper ────────────────────────────────────────────────────────────
 
 /**
@@ -120,5 +155,20 @@ export class MeshEventLog {
    */
   readAll(): Promise<MeshEvent[]> {
     return readMeshEvents(this.logPath);
+  }
+
+  /**
+   * Writes a DecisionTrace as a `decision_trace` event through the existing
+   * append-only writer.  M3 EXTEND entry point.
+   */
+  logDecisionTrace(trace: DecisionTrace): Promise<MeshEvent> {
+    return logDecisionTrace(this.logPath, trace);
+  }
+
+  /**
+   * Reads all `decision_trace` events and returns the DecisionTrace payloads.
+   */
+  readDecisionTraces(): Promise<DecisionTrace[]> {
+    return readDecisionTraces(this.logPath);
   }
 }
