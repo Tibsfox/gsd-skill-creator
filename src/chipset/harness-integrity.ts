@@ -457,6 +457,7 @@ export function checkSkillNoExternalReferences(): InvariantResult[] {
 
 export function checkVersionConsistency(): InvariantResult {
   const pkgPath = path.join(PROJECT_ROOT, 'package.json');
+  const lockPath = path.join(PROJECT_ROOT, 'package-lock.json');
   const cargoPath = path.join(PROJECT_ROOT, 'src-tauri', 'Cargo.toml');
   const tauriConfPath = path.join(PROJECT_ROOT, 'src-tauri', 'tauri.conf.json');
 
@@ -466,6 +467,17 @@ export function checkVersionConsistency(): InvariantResult {
   if (fs.existsSync(pkgPath)) {
     const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
     versions.push({ source: 'package.json', version: pkg.version });
+  }
+
+  // package-lock.json (root + packages[""] both carry version fields)
+  if (fs.existsSync(lockPath)) {
+    const lock = JSON.parse(fs.readFileSync(lockPath, 'utf8'));
+    if (lock.version) {
+      versions.push({ source: 'package-lock.json', version: lock.version });
+    }
+    if (lock.packages?.['']?.version) {
+      versions.push({ source: 'package-lock.json[packages.""]', version: lock.packages[''].version });
+    }
   }
 
   // Cargo.toml
