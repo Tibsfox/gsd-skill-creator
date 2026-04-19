@@ -1,4 +1,4 @@
-# v1.49.270 — Degree 130: Cheryl Waters (The Midday Voice of KEXP) + Cackling Goose — THE KEXP HOST TRIO OPENS — THE GOOSE COMPARISON PAIR COMPLETES — THIRTEENTH CONSECUTIVE ANATIDAE EXTENDS THE ALL-TIME FAMILY-STREAK RECORD — THE 2004 AOU SPLIT MADE AUDIBLE — KCMU-TO-KEXP INSTITUTIONAL MEMORY
+# v1.49.270 — Degree 130: Cheryl Waters + Cackling Goose — THE KEXP HOST TRIO OPENS
 
 **Released:** 2026-04-02
 **Scope:** Seattle 360 + Sound of Puget Sound — paired degree release, KEXP host trio opens on the artist axis (130-132: Waters, Richards, Mazzone), goose comparison pair completes on the species axis (Canada Goose 129 vs. Cackling Goose 130), thirteenth consecutive Anatidae extends the all-time family-streak record, second *Branta* entry paired with second KEXP-era institutional entry after the KCMU evolution documentation

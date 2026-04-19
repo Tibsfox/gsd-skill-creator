@@ -1,4 +1,4 @@
-# v1.49.264 — Degree 124: Horse Feathers (Indie Experimental, Kill Rock Stars) + Common Goldeneye — THE FIRST MECHANICAL SOUND — THE OLYMPIA LABEL ENTERS — BUCEPHALA GENUS COMPLETE — ANATIDAE STREAK AT SEVEN — GOLDENEYE COMPARISON PAIR CLOSED
+# v1.49.264 — Degree 124: Horse Feathers + Common Goldeneye — THE FIRST MECHANICAL SOUND
 
 **Released:** 2026-04-02
 **Scope:** Seattle 360 + Sound of Puget Sound — paired degree release closing two open structures in one step, introducing the engine's first mechanical (aeroelastic) sound on the species axis and its first Kill Rock Stars roster entry on the artist axis, descending from the E=6 Wellwater Conspiracy peak at degree 123 to a measured E=4 plateau on both halves synchronized in parallel

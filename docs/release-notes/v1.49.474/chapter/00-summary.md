@@ -1,8 +1,12 @@
-> Following v1.49.473 — _Degree 332: Botch + Polyrhythm Woodpecker+River+Frog_, v1.49.474 ships as Degree 333: TAAS + Pacific Storm Full Spectrum.
-# v1.49.474 — Degree 333: TAAS + Pacific Storm Full Spectrum
+> Following v1.49.473 — _Degree 332: Botch + Woodpecker-River-Frog Polyrhythm (METAL ARC CLOSES, MOST COMPLEX RHYTHM, E=18 COMBINED, 92.2%, Botch's Tacoma mathcore entry at E=9 on Hydra Head Records paired with the Pileated Woodpecker + river standing wave + Pacific Tree Frog three-stream polyrhythm at E=9 as the engine's second post-Summit E=18 combined reading and as the closing degree of the Metal Arc that opened at degree 329 with The Accused, with Dave Verellen, Dave Knudson, Brian Cook, Tim Latona, and Jason Hamacher as the Botch lineup, and with *Dryocopus pileatus* drumming on old-growth snags, Pacific Northwest spring snowmelt river discharge, and *Pseudacris regilla* chorus choruses operating as three simultaneous independent rhythmic streams at zero correlation and zero shared meter)_, v1.49.474 ships as Degree 333: These Arms Are Snakes + Pacific Storm Full Spectrum (METAL SUMMIT OPENS, E=16 COMBINED, 92.5%, Capitol Hill post-metal at E=8 paired with the outer Olympic coast winter bomb cyclone at E=8 as the simultaneous opening of the Metal Summit on S36 with Steve Snere, Brian Cook, Ryan Frederiksen, and Chris Common on Suicide Squeeze Records and the opening of the SPS Metal Summit counterpart with the full six-domain acoustic spectrum at Cape Flattery and Olympic National Park on Washington's outer Pacific coast).
+# v1.49.474 — Degree 333: These Arms Are Snakes + Pacific Storm Full Spectrum (METAL SUMMIT OPENS, E=16 COMBINED, 92.5%, Capitol Hill post-metal at E=8 paired with the outer Olympic coast winter bomb cyclone at E=8 as the simultaneous opening of the Metal Summit on S36 with Steve Snere, Brian Cook, Ryan Frederiksen, and Chris Common on Suicide Squeeze Records and the opening of the SPS Metal Summit counterpart with the full six-domain acoustic spectrum at Cape Flattery and Olympic National Park on Washington's outer Pacific coast)
 **Shipped:** 2026-04-03
-_Parse confidence: 0.50 — source `docs/release-notes/v1.49.474/README.md`_
+**Commits:** 4 | **Files:** 13 | **Lines:** +6489 / -5
+**Branch:** dev
+_Parse confidence: 0.90 — source `docs/release-notes/v1.49.474/README.md`_
 ## Summary
-This release carried 6 features; see `01-features.md`.
+No structured feature list was captured for this release; see the source README for prose details.
+It also produced retrospective content (lessons_learned, what_could_be_better, what_worked); see `03-retrospective.md`.
+11 lessons extracted; see `04-lessons.md` or the `RETROSPECTIVE-TRACKER.md`.
 ---
 **Prev:** [v1.49.473](../v1.49.473/00-summary.md) · **Next:** [v1.49.475](../v1.49.475/00-summary.md)

@@ -1,4 +1,4 @@
-# v1.49.272 — Degree 132: Darek Mazzone (The Global Ear of KEXP) + Greater White-fronted Goose — THE KEXP HOST TRIO CLOSES — FIFTEENTH CONSECUTIVE ANATIDAE EXTENDS THE RECORD INTO UNPRECEDENTED TERRITORY — FIRST *ANSER* GENUS ENTERS — THE SPECKLEBELLY
+# v1.49.272 — Degree 132: Darek Mazzone + Greater White-fronted Goose — THE KEXP HOST TRIO CLOSES
 
 **Released:** 2026-04-02
 **Scope:** Seattle 360 + Sound of Puget Sound — paired degree release, KEXP host trio closes on the artist axis (130 Cheryl Waters → 131 John Richards → 132 Darek Mazzone), fifteenth consecutive Anatidae extends the all-time family-streak record into unprecedented territory (nearly double the previous Picidae nonet), first *Anser* genus entry introduces the gray geese to the engine after three consecutive *Branta* black geese (Canada 129, Cackling 130, Brant 131), seven consecutive radio/media figures (126-132) completed across KCMU builders, AM counterpoint, and KEXP on-air operators

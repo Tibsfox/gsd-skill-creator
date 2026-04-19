@@ -1,27 +1,67 @@
 # Lessons — v1.49.321
 
-5 lessons extracted. Classification source: ⚙ rule-based · 🤖 LLM tiebreaker (needs review) · 👤 human.
+15 lessons extracted. Classification source: ⚙ rule-based · 🤖 LLM tiebreaker (needs review) · 👤 human.
 
 1. **The unit circle is not a metaphor.**
-   It is a mathematical structure with real properties, and those properties manifest at specific degrees. Building on the unit circle means accepting its geometry as literal truth.
+   It is a mathematical structure with real properties, and those properties manifest at specific degrees. Building on the unit circle means accepting its geometry as literal truth, which means Euler's identity at degree 180 is a fact the engine inherits rather than a coincidence the engine manufactures.
    _🤖 Status: `investigate` · lesson #1701 · needs review_
    > LLM reasoning: Candidate is a Wilson sisters arc with no explicit unit-circle geometry application.
 
 2. **Anti-podal pairs are structurally inevitable.**
-   Once degree 0 was set (Quincy Jones, Great Blue Heron), degree 180 was constrained to be its maximum opposite. The engine did not choose to place Macklemore and Harbor Seal at 180 -- the circle demanded maximum distance at the anti-podal point.
+   Once degree 0 was set (Quincy Jones, Great Blue Heron), degree 180 was constrained to be its maximum opposite. The engine did not choose to place Macklemore and Harbor Seal at 180 — the circle demanded maximum distance at the anti-podal point, and the catalog was tuned to supply that distance.
    _🤖 Status: `investigate` · lesson #1702 · needs review_
    > LLM reasoning: Candidate describes Olympia geographic cluster, not antipodal constraint.
 
 3. **Mathematical essays expand the engine's vocabulary.**
-   The standard release format (artist research + species research) is powerful but bounded. Special editions like this one demonstrate that the engine can accommodate different forms -- the mathematical essay, the topological meditation, the cultural analysis -- while maintaining structural coherence.
+   The standard release format (artist research + species research) is powerful but bounded. Special editions like this one demonstrate that the engine can accommodate different forms — the mathematical essay, the topological meditation, the cultural analysis — while maintaining structural coherence with the surrounding daily-release cadence.
    _🤖 Status: `investigate` · lesson #1703 · needs review_
    > LLM reasoning: Candidate marks two-thirds structural boundary but isn't a mathematical-essay special edition.
 
 4. **The first marine mammal at 180 degrees is poetic and structural.**
-   The engine crosses from air to water at its midpoint. The Great Blue Heron hunts from above; the Harbor Seal hunts from below. They share the same waters but occupy opposite zones. This is not planned symbolism -- it is the natural consequence of taxonomic sequencing through the unit circle. But the poetry is real.
-   _⚙ Status: `applied` (applied in `v1.49.381`) · lesson #1704_
+   The engine crosses from air to water at its midpoint. The Great Blue Heron hunts from above; the Harbor Seal hunts from below. They share the same waters but occupy opposite zones. This is not planned symbolism — it is the natural consequence of taxonomic sequencing through the unit circle, and the poetry emerges from the structure rather than being applied to it.
+   _⚙ Status: `applied` (applied in `v1.49.326`) · lesson #1704_
 
 5. **Euler's identity is the crown jewel.**
-   e^(i*pi) + 1 = 0 unifies five constants from five branches of mathematics. It lives at 180 degrees. It is the structural heart of this special edition, and it will remain the structural heart of the engine's midpoint for as long as the engine exists.
+   e^(i*pi) + 1 = 0 unifies five constants from five branches of mathematics. It lives at 180 degrees. It is the structural heart of this special edition, and it will remain the structural heart of the engine's midpoint for as long as the engine exists. No later release can move this fact; the geometry is closed.
    _🤖 Status: `investigate` · lesson #1705 · needs review_
    > LLM reasoning: Candidate snippet about Botch/Fog Horn at degree 254 has no visible connection to Euler's identity at degree 180.
+
+6. **Formal pauses are productive.**
+   Writing a non-standard release at the halfway mark let the engine audit its own state, publish a cumulative inventory, and articulate the mathematical vocabulary the second hemisphere will draw on. The pause added signal rather than costing cadence, and a similar formal pause at degree 360 is now structurally expected.
+   _⚙ Status: `investigate` · lesson #4475_
+
+7. **Numerical accountings make metaphors into facts.**
+   The engine-state table (180 degrees, 180 artists, 180 species, E=1-7, 180+ acoustic descriptors) converted "the halfway mark" from a rhetorical claim into a quantified state, which is the state the second half of the engine can legibly reference.
+   _⚙ Status: `investigate` · lesson #4476_
+
+8. **Publishing the essay the same day as the degree release matters.**
+   The Special Mathematical Edition and the conventional degree release share a calendar boundary, which prevents the mathematical essay from drifting into "deferred commentary" territory — it is part of the degree-180 publication event, not a retrospective added later.
+   _⚙ Status: `applied` (applied in `v1.49.325`) · lesson #4477_
+
+9. **The scorer rubric catches what prose alone cannot verify.**
+   The initial README scored F (33/100) despite containing all the substantive material. The uplift's job was not to add research or change claims — it was to re-shape the prose so the scorer-recognized sections (Header block, Summary findings, Key Features table, Retrospective triad, Lessons Learned bolded lead-ins, Cross-References, Engine Position, Infrastructure) are present in the forms the rubric checks for.
+   _⚙ Status: `investigate` · lesson #4478_
+
+10. **The essay is dense in places and could benefit from illustrative diagrams.**
+   Sections II, IV, and V describe geometric and acoustic structures that would read more clearly alongside figures; the text-only format makes the reader do more visualization work than the content requires.
+   _⚙ Status: `investigate` · lesson #4479_
+
+11. **Section III's phase-cancellation thought experiment needs a sanity check.**
+   The claim that Quincy Jones and Macklemore summed at 180-degree phase offset would cancel to silence is correct as a mathematical abstraction but requires the signals to be identical, which they are not; a clearer phrasing would name the abstraction explicitly rather than risk literal reading.
+   _⚙ Status: `investigate` · lesson #4480_
+
+12. **The cultural-semiotics section (VI) is the shortest and least structurally integrated.**
+   "Doing a 180," the International Date Line, and the Hegelian dialectic are related to 180 degrees but the section does not draw them back to Euler's identity as tightly as the mathematical sections do.
+   _⚙ Status: `investigate` · lesson #4481_
+
+13. **The 142-line initial release README scored F (33/100) on the completeness rubric.**
+   The metadata block lacked the canonical **Released:** format, the Summary findings were not bolded in the scorer-recognized shape, and the Cross-References section was absent entirely — all gaps this uplift closes.
+   _⚙ Status: `investigate` · lesson #4482_
+
+14. **The essay could have cross-referenced more of the preceding 179 degrees.**
+   A deeper weave through specific earlier releases (degree 45 as the first diagonal, degree 90 as the first quadrant boundary, degree 135 as the second diagonal) would have strengthened the "halfway mark relative to what?" framing.
+   _⚙ Status: `investigate` · lesson #4483_
+
+15. **Cross-domain agreement is the strongest structural argument.**
+   The essay's most durable claim is not that any one domain reads 180 degrees as the inversion point — it is that four independent formal domains (geometry, physics, topology, music theory) all read it that way via different machinery. When four readings agree without coordination, the agreement itself is evidence of structural truth rather than interpretive convenience.
+   _⚙ Status: `investigate` · lesson #7544_

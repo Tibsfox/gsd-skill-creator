@@ -1,4 +1,4 @@
-# v1.49.376 — Degree 235: Heart (Hard Rock, E=7, HEART PAIR CLOSES) + Turkey Vulture (*Cathartes aura*, E=2, FIRST CATHARTIDAE, near-minimum acoustic reading, widest E-gap in engine history)
+# v1.49.376 — Degree 235: Heart + Turkey Vulture
 
 **Released:** 2026-04-03
 **Scope:** Seattle 360 + Sound of Puget Sound — paired degree release; **Heart** returns at **E=7** as the second installment of the two-degree **HEART PAIR** opened at degree 234, documenting the hard-rock face of the same **Bellevue**-to-**Queen Anne** band at its highest S36 reading; **Turkey Vulture** (*Cathartes aura*) registers at **E=2** as the **FIRST CATHARTIDAE** entry in the engine, the **near-minimum acoustic reading** short only of absolute silence, and the species that creates the **WIDEST SIMULTANEOUS E-GAP** between the S36 and SPS tracks in the engine's history — five full E-units separating Heart at E=7 from the Turkey Vulture at E=2 on the same degree.

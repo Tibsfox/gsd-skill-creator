@@ -2,12 +2,12 @@
 
 - **Version:** `v1.49.419`
 - **Shipped:** 2026-04-03
-- **Branch:** —
+- **Branch:** dev
 - **Tag:** —
 - **Dedication:** —
 - **Phases:** — · **Plans:** —
-- **Parse confidence:** 0.50
-- **Retrospective:** missing
+- **Parse confidence:** 0.60
+- **Retrospective:** present
 - **Prev:** [v1.49.418](../v1.49.418/00-summary.md)
 - **Next:** [v1.49.420](../v1.49.420/00-summary.md)
 

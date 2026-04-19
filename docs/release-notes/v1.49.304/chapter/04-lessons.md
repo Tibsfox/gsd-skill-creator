@@ -1,0 +1,47 @@
+# Lessons — v1.49.304
+
+11 lessons extracted. Classification source: ⚙ rule-based · 🤖 LLM tiebreaker (needs review) · 👤 human.
+
+1. **Collective entries establish gravitational pull, and orbit artists returning at intervals demonstrate the pattern.**
+   The **206 Zulu** collective entry at degree 142 produced its first explicit orbit artist at degree 164 (Kung Foo Grip), and the **twenty-two-degree return interval** establishes the collective-plus-orbit pattern as a first-class structural observation. The lesson for future collective documentation is that a collective's direct entry should be framed as an anchor, and subsequent artists drawn from its orbit should be tracked as return events whose intervals become part of the collective's engine documentation. The pattern generalizes across collectives (206 Zulu, Hellfyre Club, implicit Mass Line Media) and establishes a framework for tracking community-level entities across the rotation.
+   _⚙ Status: `investigate` · lesson #7316_
+
+2. **Cultural practitioner framing is a first-class register distinct from rapper and producer and deserves explicit recognition.**
+   The **cultural practitioner** framing at degree 164 establishes a third hip-hop category alongside the **rapper** and **producer** registers already present in the engine. The distinction matters because cultural practitioners engage with all five foundational elements (MCing, DJing, b-boying, graffiti, knowledge) rather than specializing in one art form within the culture. The lesson for future hip-hop placements is that the rapper-or-producer binary is insufficient for artists whose identity is culture-first, and the cultural practitioner register should be applied when the community-and-culture dimensions exceed the single-art-form dimensions of identity.
+   _⚙ Status: `applied` (applied in `v1.49.398`) · lesson #7317_
+
+3. **Compact family clusters with non-linear threading capture the ecological reality of multi-family ecosystems.**
+   The **Rallidae cluster** at degrees 161-162 and 164 with the **American Bittern** (Ardeidae) at degree 163 as the family-external interlude demonstrates that family clusters can be interrupted by single-degree excursions to related habitat-sharing families without losing structural coherence. The lesson for future family-cluster placements is that ecosystem-based rather than family-first sequencing captures the natural reality of multi-family coexistence in shared habitats (marsh, alpine, old-growth forest, intertidal) and that non-linear threading should be an intentional architectural option rather than avoided.
+   _⚙ Status: `investigate` · lesson #7318_
+
+4. **Behavioral range within a single family can be extraordinary and deserves explicit cluster-level framing.**
+   The **Rallidae behavioral range** from total secrecy (Virginia Rail, Sora, invisible in reeds) to full visibility (American Coot, flocking on open water), all at E=4, within four consecutive degrees, is the cluster's structural insight and a pattern worth extracting as a general observation. The lesson for future family clusters is that the full range of family behavior should be documented at the cluster's closure degree as a structural signature, and the cluster's internal contrasts (invisible vs. visible, dense-reed vs. open-water, solo-caller vs. flock-aggregate) should be explicitly mapped as a first-class engine observation rather than left implicit.
+   _⚙ Status: `investigate` · lesson #7319_
+
+5. **Taxonomic surprises deserve first-class pedagogical register treatment.**
+   The **"not a duck"** taxonomic surprise — a species whose casual-observer appearance would place it in one family while the anatomical and behavioral markers place it in a different family — is a first-class pedagogical register worth naming and tracking. The lesson for future species with similar surface-versus-structure disconnects (vulture-looking-like-eagle, newt-looking-like-lizard, moth-looking-like-bird) is that the taxonomic surprise should be framed as an explicit learning register with specific diagnostic markers (bill shape, toe morphology, movement pattern, leg color) rather than as incidental details.
+   _⚙ Status: `investigate` · lesson #7320_
+
+6. **Flock vocalization as acoustic identity introduces collective-voice as a structural register distinct from individual-caller.**
+   The American Coot's acoustic identity is the **flock aggregate** rather than any single call, and the **flock amplification** effect converts moderate individual calls into substantial ambient soundscape. The lesson for future flock-vocal species (waterfowl flocks, blackbird flocks, swallow flocks, seabird colonies) is that **flock-as-voice** should be recognized as a first-class acoustic register distinct from the solo-caller register, and the flock amplification + repertoire diversity + continuous-stream qualities should be documented as the collective acoustic identity rather than reduced to individual-call description.
+   _⚙ Status: `applied` (applied in `v1.49.339`) · lesson #7321_
+
+7. **Aggression-behind-placid-surface is a structural behavioral observation worth tracking across species.**
+   The American Coot's **foot-fighting territorial aggression** contrasts with the species' placid flocking surface appearance, and the **brood parasitism defense** through egg counting reveals cognitive sophistication behind the duck-looking exterior. The lesson for future species with similar aggression-behind-placid-surface profiles (gentle-seeming finches with territorial displays, calm-looking shorebirds with fierce nest defense, social species with internal dominance hierarchies) is that the surface-versus-depth behavioral contrast should be explicitly framed rather than treated as incidental, and the engine's behavioral vocabulary should preserve the contrast as a first-class register.
+   _⚙ Status: `applied` (applied in `v1.49.328`) · lesson #7322_
+
+8. **Communal voice that operates differently than expected is a cross-sync theme worth elevating at the degree level.**
+   The cross-sync parallel at degree 164 — **Kung Foo Grip's** cultural practitioner identity embedded in the 206 Zulu community and the **American Coot's** flock-aggregate acoustic identity within the Rallidae family — demonstrates that community-embedded identity operating differently than casual-observer expectations is a shared structural principle across the music and species axes. The lesson for future cross-sync parallels is that identity-through-community themes should be explicitly named at the degree level when both halves exhibit them, and the parallel should be elevated to structural observation rather than left implicit. The paired coordinate converts individual observations into multiplicative statements that neither half alone can support.
+   _⚙ Status: `applied` (applied in `v1.49.350`) · lesson #7323_
+
+9. **The Kung Foo Grip discography deserves deeper track-by-track treatment in future research passes.**
+   The initial release focused on the 206 Zulu connection, cultural practitioner framing, and battle-tested delivery as framing registers but did not dive into specific tracks, albums, collaborations, or recorded catalog with the depth that a dedicated discographic pass would produce. Future passes should examine Kung Foo Grip's complete catalog, identify featured producers and collaborators from the 206 Zulu orbit and broader Seattle underground, map the thematic and sonic evolution across releases, and document the specific cypher and battle performances that established the live reputation. The deeper discographic pass would complement the framing-register focus and provide granular anchors for future readers.
+   _⚙ Status: `investigate` · lesson #7324_
+
+10. **The 206 Zulu orbit deserves systematic documentation beyond the two-entry sample at 142 and 164.**
+   The release documented the 206 Zulu orbit as a named pattern established between the collective entry at 142 and Kung Foo Grip at 164, but the two-entry sample is not yet sufficient to validate the pattern as a general structural observation. Future 206 Zulu-connected artists — and there are likely more within the engine's remaining 196 degrees — should be systematically tracked against the orbit framing to test whether the twenty-two-degree return interval generalizes, whether subsequent orbit entries cluster or space evenly, and whether the orbit pattern applies to other collectives that enter the engine directly (e.g., Hellfyre Club at degree 155, Mass Line Media implicit in Sabzi's multi-entry presence). The systematic orbit documentation would convert the named pattern into a…
+   _⚙ Status: `investigate` · lesson #7325_
+
+11. **The American Coot's flock-level vocalization deserves acoustic analysis beyond descriptive inventory.**
+   The release described the coot's flock vocalization through the repertoire inventory (clucks, grunts, cackles, pips) and qualitative characterization (continuous, varied, ambient) but did not engage with spectrographic analysis, syntactic pattern studies, or quantitative amplitude measurements. The Brisbin & Mowbray (2002) source and the Cornell Lab of Ornithology archive likely contain deeper acoustic analysis that future passes should surface to give the flock-vocalization register a more precise technical vocabulary. The deeper acoustic pass would complement the behavioral and taxonomic framing with quantitative anchors.
+   _⚙ Status: `applied` (applied in `v1.49.339`) · lesson #7326_

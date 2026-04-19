@@ -1,4 +1,4 @@
-# v1.49.299 — Degree 159: Sango (Seattle Producer, Baile Funk Fusion, R&B Warmth, Da Rocinha Series, Self-Released, E=5 Twenty-Sixth Consecutive Hip-Hop Degree) + California Quail (*Callipepla californica*, First Odontophoridae, Iconic Chi-CA-Go Assembly Call, Forward-Curving Topknot Plume, Covey Ecology, E=4) — THE DISTINCTIVE CALL THAT IDENTIFIES ITS MAKER — RHYTHMIC AND SYLLABIC RECOGNITION PATTERNS SYNCHRONIZED AT DEGREE 159
+# v1.49.299 — Degree 159: Sango + California Quail — THE DISTINCTIVE CALL THAT IDENTIFIES ITS MAKER
 
 **Released:** 2026-04-02
 **Scope:** Seattle 360 + Sound of Puget Sound — paired degree release, **Sango** enters the engine as a Seattle-based hip-hop producer whose signature **baile funk fusion** blends Brazilian favela rhythms with R&B warmth and electronic space in a self-released catalog registering at **E=5**, while the **California Quail** (*Callipepla californica*) enters as the engine's **first Odontophoridae** — a brand-new family of New World quail — whose loud three-syllable **chi-CA-go assembly call** at **E=4** is one of the most recognizable bird sounds in western North America

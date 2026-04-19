@@ -1,4 +1,4 @@
-# v1.49.279 — Degree 139: Jake One (National-Crossover Central District Producer) + Long-eared Owl — THE FIRST NATIONAL-CROSSOVER SEATTLE HIP-HOP PLACEMENT FIGURE ARRIVES — THE ASIO GENUS ENTERS — STRIGIDAE FIFTH — THE SECRETIVE FOREST OWL AT DEEP WHOOO PUMPING E=4 — CENTRAL DISTRICT STREAK CONTINUES AT TWO CONSECUTIVE DEGREES
+# v1.49.279 — Degree 139: Jake One + Long-eared Owl
 
 **Released:** 2026-04-02
 **Scope:** Seattle 360 + Sound of Puget Sound — paired degree release, Jake One enters as the first Seattle hip-hop figure with major national-crossover placements (G-Unit, Rhymesayers, MF DOOM, Drake), the Central District production streak continues at its second consecutive degree (Vitamin D 138 → Jake One 139), the Long-eared Owl introduces the Asio genus to the engine as the fifth consecutive Strigidae entry (135-139), the engine pairs a behind-the-scenes producer with a behind-the-scenes owl at a single paired landing point, Conception Records ancestry from the prior degree continues through Jake One's underground Seattle roots alongside his national-label placements

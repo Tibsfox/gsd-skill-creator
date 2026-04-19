@@ -1,0 +1,55 @@
+# Lessons — v1.49.382
+
+13 lessons extracted. Classification source: ⚙ rule-based · 🤖 LLM tiebreaker (needs review) · 👤 human.
+
+1. **Absolute-maximum amplitude readings should be reserved for genuinely ceiling-level expressions and should not be inflated as the engine accumulates degrees.**
+   The E=8 reading at degree 241 is the second documented instance of the engine's absolute-maximum in 241 degrees (0.83% rarity). The scarcity is evidence that the engine's scoring rubric preserves meaningful distinctions at the maximum end of the amplitude scale. Future engine releases should maintain the E=8-as-ceiling-reservation discipline and should require a chronologically-priority or historiographically-corrective case for each new E=8 documentation, because the ceiling's integrity depends on its enforcement.
+   _⚙ Status: `applied` (applied in `v1.49.441`) · lesson #8378_
+
+2. **Chronological-priority claims can correct historiographic bias when the chronology is documentable and the influence is traceable.**
+   The Sonics' 1964-1965 Etiquette recordings preceded the Stooges, MC5, Dolls, Ramones, Pistols, and Cramps by three to twelve years, and the band's influence on each of those later proto-punk and punk acts is traceable through cover versions, direct statements, and critical reassessment. Future engine releases should make chronological-priority claims only when the documentation supports them and the influence is traceable, because the engine's credibility depends on the rigor of its corrective claims.
+   _⚙ Status: `investigate` · lesson #8379_
+
+3. **Regional-independent-label documentation can extend the label-vocabulary beyond the dominant-era labels through paired consecutive-degree documentation.**
+   Dolton Records at degree 239 and Etiquette Records at degree 241 establish the early-1960s Pacific-Northwest regional-independent-label foundation as a two-label anchor for the engine's label-vocabulary. Future engine releases should document regional-independent labels across eras through paired or arc-connected multi-degree documentation when possible, because paired-label documentation establishes the structural-ecosystem context that single-label documentation alone would not capture.
+   _⚙ Status: `applied` (applied in `v1.49.398`) · lesson #8380_
+
+4. **Genus-level taxonomic entries can open lineage-sub-arcs within family-level arcs when the genus-lineage is structurally distinct.**
+   The *Salvelinus* char-lineage opening at degree 241 (Dolly Varden) within the genus-level Salmonidae arc that opened at degree 236 (Pacific Salmon aggregate as aggregate; individual *Oncorhynchus* species at 237-239) demonstrates that family-level arcs can accommodate genus-level sub-arcs when the genus-lineage is structurally distinct. Future engine releases should identify genus-level sub-arc opportunities within family-level arcs when the genus-lineage warrants separate treatment, because sub-arc documentation adds structural depth that single-genus documentation alone would not provide.
+   _⚙ Status: `applied` (applied in `v1.49.398`) · lesson #8381_
+
+5. **Habitat-specialization registers can document species-level structural features that general-habitat documentation would not capture.**
+   The glacial-stream-specialist register at degree 241 records Dolly Varden's cold-water high-gradient glacial-meltwater-fed tributary preference as a species-level structural feature distinct from the river-mainstem or lowland-stream registers that characterize other Salmonidae documentation. Future SPS documentation should identify habitat-specialization registers explicitly when the specialization organizes significant structural variation, because habitat-specialization registers surface species-level structural features that generalized-habitat documentation would not preserve.
+   _⚙ Status: `applied` (applied in `v1.49.398`) · lesson #8382_
+
+6. **Cultural-history naming registers can document unexpected intersections between 19th-century popular culture and Pacific Northwest natural history.**
+   The Dolly Varden Dickens-name register at degree 241 records the 1870s naming of the fish after the ***Barnaby Rudge*** (1841) character whose polka-dotted dress inspired the comparison. Future engine releases should surface cultural-history naming registers explicitly when the naming documents a specific historical intersection, because cultural-history naming adds interpretive depth that scientific-or-indigenous-naming-only documentation would not capture.
+   _⚙ Status: `applied` (applied in `v1.49.384`) · lesson #8383_
+
+7. **Taxonomic-separation histories can carry management-consequence weight when the pre-separation single-species treatment had conservation implications.**
+   The Bull-Trout / Dolly-Varden 1980s-1990s morphological-and-genetic separation carried direct management consequences because pre-separation conservation programs designed for "Dolly Varden" were actually serving two distinct species with distinct ESA-status profiles. Future engine releases should document taxonomic-separation histories explicitly when the pre-separation single-species treatment had conservation implications, because taxonomic-separation documentation is structurally significant to species-level conservation planning.
+   _⚙ Status: `investigate` · lesson #8384_
+
+8. **Maximum-contrast cross-axis registers demonstrate that the engine's degree-level structure can accommodate opposite extremes within a single pairing.**
+   The E=8-versus-E=2 cross-axis at degree 241 records the engine's widest sustained Q3 divergence (six-point spread) while maintaining equilibrium sum (E=10). Future engine releases should recognize maximum-contrast opportunities explicitly when the paired halves operate at opposite extremes of the amplitude scale, because maximum-contrast pairings demonstrate that degree-level equilibrium operates at the structural level rather than at the individual-reading level.
+   _⚙ Status: `applied` (applied in `v1.49.453`) · lesson #8385_
+
+9. **Songwriter-lineage cross-artist registers can connect multiple artist entries through shared source-material documentation.**
+   The Richard Berry songwriting lineage connects The Sonics at degree 241 ("Have Love Will Travel") to The Kingsmen at degree 244 ("Louie Louie") through shared Berry authorship. Future engine releases should identify songwriter-lineage cross-artist registers explicitly when shared source material connects multiple artist entries, because songwriter-lineage registers record compositional-influence genealogies that single-artist documentation would not surface.
+   _⚙ Status: `applied` (applied in `v1.49.398`) · lesson #8386_
+
+10. **Climate-change habitat-vanishing threats can document conservation pressures for which no obvious mitigation exists at meaningful scale.**
+   The Dolly Varden climate-change-driven glacial-retreat threat is a habitat-vanishing pressure distinct from the habitat-degradation or direct-harvest pressures that characterize other species-conservation documentation. Future engine releases should surface climate-change habitat-vanishing threats explicitly when the conservation profile includes them, because habitat-vanishing threats record the extreme-end conservation pressure that the engine's documentation should preserve rather than normalize into general-threat vocabulary.
+   _⚙ Status: `investigate` · lesson #8387_
+
+11. **The Rock and Roll Hall of Fame non-induction status for The Sonics is documented but the implications are not fully worked out.**
+   The Sonics have not been inducted into the Rock and Roll Hall of Fame despite decades of acknowledged priority status in proto-punk historiography. The Ventures at degree 239 received a 2008 induction; The Sonics, a parallel Tacoma band with comparable or arguably greater influence on subsequent rock history, have not. Future engine documentation of Rock and Roll Hall of Fame status patterns should track the inducted-versus-non-inducted contrast explicitly, because the institutional-recognition-versus-actual-influence gap is a structural feature of American-critical-establishment acknowledgment that the engine's documentation can surface across multiple artist entries.
+   _⚙ Status: `investigate` · lesson #8388_
+
+12. **The Richard Berry songwriting-lineage register is introduced but the multi-entry Berry-covers arc is not anticipated.**
+   "Have Love Will Travel" (covered by The Sonics) and "Louie Louie" (covered by The Kingsmen at degree 244) connect The Sonics at degree 241 to The Kingsmen at degree 244 via shared Berry source material. Future engine documentation should consider whether the Richard-Berry-covers-in-Pacific-Northwest-garage-rock register warrants explicit multi-entry arc documentation parallel to the Salmonidae arc or the Buteo sub-arc, because the Berry compositional influence on Pacific Northwest garage rock is structurally significant and multi-artist.
+   _⚙ Status: `investigate` · lesson #8389_
+
+13. **The Brook Trout hybridization threat is documented but the complete introduced-species-Salvelinus-ecology register is deferred.**
+   The degree 241 release introduces the Brook Trout (*Salvelinus fontinalis*) competition-and-hybridization threat as a Dolly Varden conservation pressure, but the full introduced-species-Salvelinus-ecology register (including Brook Trout's history of introduction throughout the West, the extent of Salvelinus-Salvelinus hybridization in Washington systems, the hybrid-sterility mechanics, and the Brook-Trout-removal program track record) is not fully documented. Future char-entry engine documentation should expand the introduced-Salvelinus-ecology register explicitly, because introduced-species interaction is structurally central to char conservation in the Pacific Northwest.
+   _⚙ Status: `applied` (applied in `v1.49.446`) · lesson #8390_

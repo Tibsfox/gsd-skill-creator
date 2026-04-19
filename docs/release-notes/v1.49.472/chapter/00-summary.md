@@ -1,8 +1,12 @@
-> Following v1.49.471 — _Degree 330: Queensryche + Trumpeter Swan+Sandhill Crane_, v1.49.472 ships as Degree 331: Helms Alee + Orca Echolocation Full.
-# v1.49.472 — Degree 331: Helms Alee + Orca Echolocation Full
+> Following v1.49.471 — _Degree 330: Queensryche + Trumpeter Swan + Sandhill Crane (METAL ARC CONTINUES, FIRST GRUIDAE, FIRST CONCEPT ALBUM, OLDEST BIRD CALL IN ENGINE, E=16 COMBINED, 91.7%, Queensryche's Bellevue-Eastside progressive metal entry at E=8 paired with Cygnus buccinator and Antigone canadensis at E=8 as the Metal Arc's second degree and as the first Family Gruidae SPS entry through the Skagit River delta winter congregation)_, v1.49.472 ships as Degree 331: Helms Alee + Orca Echolocation Full Sequence (CONTEMPORARY METAL TEXTURE, COMPLETE ORCA REPERTOIRE, LAYERED MULTI-CHANNEL COMMUNICATION, E=14 COMBINED, 91.9%, Helms Alee's Capitol Hill sludge entry at E=7 as the engine's first three-piece three-vocalist metal arrangement on Sargent House paired with the Southern Resident Killer Whale's full three-component acoustic sequence — click trains at 40-120 kHz, signature whistles and pod dialects at 1-18 kHz, and breach impact at 120-160 dB — documented in Haro Strait at E=7 as the engine's most complete orca acoustic documentation across the 331 degrees shipped).
+# v1.49.472 — Degree 331: Helms Alee + Orca Echolocation Full Sequence (CONTEMPORARY METAL TEXTURE, COMPLETE ORCA REPERTOIRE, LAYERED MULTI-CHANNEL COMMUNICATION, E=14 COMBINED, 91.9%, Helms Alee's Capitol Hill sludge entry at E=7 as the engine's first three-piece three-vocalist metal arrangement on Sargent House paired with the Southern Resident Killer Whale's full three-component acoustic sequence — click trains at 40-120 kHz, signature whistles and pod dialects at 1-18 kHz, and breach impact at 120-160 dB — documented in Haro Strait at E=7 as the engine's most complete orca acoustic documentation across the 331 degrees shipped)
 **Shipped:** 2026-04-03
-_Parse confidence: 0.50 — source `docs/release-notes/v1.49.472/README.md`_
+**Commits:** 0 | **Files:** 9
+**Branch:** dev
+_Parse confidence: 0.75 — source `docs/release-notes/v1.49.472/README.md`_
 ## Summary
-This release carried 6 features; see `01-features.md`.
+No structured feature list was captured for this release; see the source README for prose details.
+It also produced retrospective content (lessons_learned, what_could_be_better, what_worked); see `03-retrospective.md`.
+15 lessons extracted; see `04-lessons.md` or the `RETROSPECTIVE-TRACKER.md`.
 ---
 **Prev:** [v1.49.471](../v1.49.471/00-summary.md) · **Next:** [v1.49.473](../v1.49.473/00-summary.md)

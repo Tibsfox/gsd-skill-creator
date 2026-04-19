@@ -1,4 +1,4 @@
-# v1.49.254 — Degree 114: Haunted Horses (Noise/Indie) + Three-toed Woodpecker — THE ABRASIVE DUO AND THE BEETLE-KILL SPECIALIST — PICIDAE OCTET BREAKS THE ALL-TIME RECORD — E=6 CORRIDOR REOPENS — CAPITOL HILL STREAK AT FIVE — DISTURBANCE ECOLOGY TRIO
+# v1.49.254 — Degree 114: Haunted Horses (Noise/Indie) + Three-toed Woodpecker — THE ABRASIVE DUO AND THE BEETLE-KILL SPECIALIST
 
 **Released:** 2026-04-02
 **Scope:** Seattle 360 + Sound of Puget Sound — paired degree release, Picidae octet all-time record, E=6 corridor reopens, Capitol Hill neighborhood streak extends to five, disturbance ecology trio completes, noise aesthetic and beetle-kill aesthetic paired across eight consecutive family degrees
