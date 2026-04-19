@@ -10,6 +10,21 @@ npx gsd-skill-creator@latest
 
 ```
 
+## v1.49.561 — Living Sensoria
+
+Eight composable modules (M1–M8) ship in v1.49.561, extending gsd-skill-creator with a native memory stack, a net-shift receptor substrate, a Markov-blanket boundary layer, and a teaching/co-evolution relationship layer. All modules default off via opt-in flags; v1.49.560 installs load unchanged.
+
+| Module | What it adds | Guide |
+|--------|-------------|-------|
+| M1–M5 Memory Stack | Semantic graph, hybrid memory, trace ledger, branch-context, orchestration | [docs/memory-stack.md](docs/memory-stack.md) |
+| M6 Sensoria | Lanzara net-shift receptor substrate for skill activation | [docs/sensoria.md](docs/sensoria.md) |
+| M7 Umwelt | Markov-blanket boundary with variational free-energy minimiser | [docs/umwelt.md](docs/umwelt.md) |
+| M8 Symbiosis | Teaching ledger, co-evolution offerings, Quintessence five-axis report | [docs/symbiosis.md](docs/symbiosis.md) |
+
+Theoretical foundations (Lanzara 2023, Friston 2010, Kirchhoff et al. 2018, Foxglove 2026, Traag 2019) are documented with primary-source citations in [docs/foundations/theoretical-audit.md](docs/foundations/theoretical-audit.md).
+
+---
+
 ## Table of Contents
 
 - [The Problem: Why AI-Assisted Development Breaks Down](#the-problem-why-ai-assisted-development-breaks-down)
