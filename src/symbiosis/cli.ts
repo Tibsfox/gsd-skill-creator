@@ -17,6 +17,8 @@ import {
   TEACH_CATEGORIES,
   type AppendTeachOptions,
 } from './teaching.js';
+import { classifyExpectedEffect } from './expected-effect.js';
+import { composeTeachWarning, formatTeachWarningBlock } from './teach-warning.js';
 import {
   runCoEvolutionPass,
   readOfferings,
@@ -56,12 +58,30 @@ export interface TeachCliOptions {
   /** JSON output mode. */
   json?: boolean;
   logger?: Logger;
+  /**
+   * ME-4: Raw `output_structure` frontmatter value for the target skill.
+   * Used by the warning system to determine expected effect level via ME-1.
+   * When absent, defaults to unknown-tractability (low expected effect).
+   */
+  rawOutputStructure?: unknown;
+  /**
+   * ME-4: Suppress display of the coin-flip warning.
+   * The teach entry still records `expected_effect`; only the display is suppressed.
+   * Equivalent to `--no-warning` CLI flag.
+   */
+  noWarning?: boolean;
+  /**
+   * ME-4: Acknowledge the warning and proceed without interactive confirmation.
+   * Equivalent to `--force` CLI flag.
+   */
+  force?: boolean;
 }
 
 const TEACH_HELP = `skill-creator teach — append a developer-to-system teaching entry
 
 Usage:
   skill-creator teach --category=<type> --content=<text> [--refs=<id,...>] [--json]
+                      [--no-warning] [--force]
 
 Categories:
   correction     Override incorrect system behaviour
@@ -75,6 +95,15 @@ Options:
   --content=<text>     Required. Free-text explanation (max 10 KiB).
   --refs=<id,...>      Comma-separated M3 trace IDs or skill IDs to attach.
   --json               Output result as JSON.
+  --no-warning         Suppress the coin-flip warning display (entry still records
+                       expected_effect; use for scripted / non-interactive contexts).
+  --force              Acknowledge the warning and proceed without confirmation gate.
+
+ME-4 Warning:
+  When the targeted skill is classified coin-flip or unknown by the ME-1
+  tractability classifier, a warning is shown before the entry is recorded.
+  The warning is informational — the entry is always written.
+  Use --force to bypass the interactive gate; use --no-warning to silence display.
 
 Examples:
   skill-creator teach --category=constraint --content="Never import from desktop/ in src/"
@@ -82,6 +111,8 @@ Examples:
   skill-creator teach --category=preference --content="Prefer explicit error types over unknown"
   skill-creator teach --category=clarification --content="'skill' means a markdown file in .claude/skills/"
   skill-creator teach --category=pattern --content="Always run npx tsc --noEmit before committing"
+  skill-creator teach --category=correction --content="Fix prose skill" --force
+  skill-creator teach --category=pattern --content="CI step" --no-warning
 `;
 
 export async function teachCliCommand(
@@ -101,6 +132,8 @@ export async function teachCliCommand(
   const refsFlag = parseFlag(args, '--refs');
   const refs = opts.refs ?? (refsFlag ? refsFlag.split(',').map((r) => r.trim()).filter(Boolean) : []);
   const json = opts.json ?? args.includes('--json');
+  const noWarning = opts.noWarning ?? args.includes('--no-warning');
+  const force = opts.force ?? args.includes('--force');
 
   if (!category) {
     log('Error: --category is required');
@@ -119,7 +152,25 @@ export async function teachCliCommand(
     return 1;
   }
 
-  const appendOpts: AppendTeachOptions = {};
+  // ME-4: classify expected effect via ME-1 before writing the entry.
+  const rawOutputStructure = opts.rawOutputStructure;
+  const effectResult = classifyExpectedEffect(rawOutputStructure);
+  const warning = composeTeachWarning(effectResult.level, effectResult.tractabilityClass);
+
+  // Show warning when applicable (suppressed by --no-warning or --json).
+  if (warning.shouldWarn && !noWarning && !json) {
+    log(formatTeachWarningBlock(warning));
+    // Interactive gate: if not --force, surface the note that the entry will
+    // still be recorded.  In non-TTY / scripted contexts callers use --force.
+    if (!force) {
+      log('The teach entry will be recorded regardless. Use --force to suppress this gate.');
+    }
+  }
+
+  const appendOpts: AppendTeachOptions = {
+    rawOutputStructure,
+    expectedEffect: effectResult.level,
+  };
   if (opts.ledgerPath) appendOpts.ledgerPath = opts.ledgerPath;
   if (opts.now !== undefined) appendOpts.now = opts.now;
 
@@ -135,11 +186,19 @@ export async function teachCliCommand(
   }
 
   if (json) {
-    log(JSON.stringify({ ok: true, id: result.id, category, refs }));
+    log(JSON.stringify({
+      ok: true,
+      id: result.id,
+      category,
+      refs,
+      expected_effect: effectResult.level,
+      tractability_class: effectResult.tractabilityClass ?? null,
+    }));
   } else {
     log(`Teaching entry recorded [${result.id}]`);
-    log(`  category: ${category}`);
-    if (refs.length > 0) log(`  refs:     ${refs.join(', ')}`);
+    log(`  category:        ${category}`);
+    log(`  expected_effect: ${effectResult.level}`);
+    if (refs.length > 0) log(`  refs:            ${refs.join(', ')}`);
   }
 
   return 0;
