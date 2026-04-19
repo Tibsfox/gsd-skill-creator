@@ -34,6 +34,17 @@ Adaptive learning layer for Claude Code that creates, validates, and manages ski
 - `src/tractability/` -- ME-1 tractability classifier (keystone; gates MA-2 + ME-4)
 - `src/eligibility/` -- MA-1 TD(λ) eligibility-trace layer over MA-6 events (Barto 1983 §III)
 - `src/ace/` -- MA-2 ACE actor-critic wire (M7 ΔF → M5 selector, tractability-weighted)
+- `src/lyapunov/` -- MB-1 Lyapunov-stable K_H adaptation (Sastry & Bodson 1989; V̇ ≤ 0 certified before each update)
+- `src/projection/` -- MB-2 smooth projection operators keeping parameters inside admissible manifold (Sastry & Bodson 1989)
+- `src/dead-zone/` -- MB-5 dead-zone bounded learning; suppresses updates inside noise band; composes with MB-1
+- `src/stochastic/` -- MA-3+MD-2 softmax/ε-greedy stochastic selection on M5 (temperature-weighted sampler)
+- `src/langevin/` -- MD-3 Langevin noise injection with SC-DARK floor guard (Welling & Teh 2011 SGLD lineage)
+- `src/temperature/` -- MD-4 annealed temperature schedule driving MD-3 noise scale + MA-3+MD-2 softmax temperature
+- `src/embeddings/` -- MD-1 shallow learned embeddings; skip-gram / negative-sampling trainer (Mikolov et al. 2013 word2vec)
+- `src/learnable-k_h/` -- MD-5 per-(skill, task-type) learnable K_H heads; Lyapunov-gated gradient updates
+- `src/representation-audit/` -- MD-6 audit trail for learned representations; effective-rank + community separability + collapse detection
+- `src/model-affinity/` -- ME-2 per-skill model affinity + Haiku→Sonnet→Opus escalation on tractability mismatch
+- `src/ab-harness/` -- ME-3 significance-gated A/B harness built on M4 fork/explore/commit
 - `src-tauri/` -- Rust backend (Tauri)
 - `desktop/` -- Vite webview frontend
 - `.college/` -- College Structure: Rosetta Core, panels, departments (culinary-arts, mathematics, mind-body), calibration
