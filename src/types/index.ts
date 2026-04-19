@@ -64,6 +64,9 @@ export type {
   QuintessenceSnapshot,
 } from './symbiosis.js';
 
+// ME-4: expected-effect level type (re-exported for consumers that read TeachEntry.expected_effect)
+export type { ExpectedEffectLevel } from '../symbiosis/expected-effect.js';
+
 // ─── MA-6 Canonical Reinforcement Taxonomy (Phase 652, Refinement Wave) ─────
 
 export type {
