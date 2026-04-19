@@ -90,6 +90,59 @@ v1.49.560 installs load unchanged — no changes to existing skill activation, m
 
 No schema migrations, no package.json dependency additions, no changes to existing JSONL ledger formats.
 
+### Refinement wave (phases 651–660, added 2026-04-18)
+
+**Thesis:** Zhang et al. 2026 ("Prompt Optimization Is a Coin Flip") establishes that prompt-content edits on compound AI systems are statistically indistinguishable from a coin flip except when the target skill has exploitable output structure. The refinement wave lands this diagnostic as a first-class capability (ME-1 tractability classifier) and uses it as the gating variable that conditions everything downstream — closing the actor-critic loop (Barto, Sutton & Anderson 1983) that Thread A identified as the central missing wire in the original Living Sensoria architecture.
+
+Through-line: **ME-5 declares** output structure → **ME-1 classifies** tractability → **MA-6 canonicalises** reinforcement channels → **MA-1 records** eligibility-decayed events → **MA-2 drives** the actor-critic loop (TD-error weighted by ME-1) → **ME-4 surfaces** tractability warnings in M8 teach.
+
+**Added**
+- **ME-5 output-structure frontmatter** (`src/output-structure/`) — `output_structure:` block declaring `json-schema` / `markdown-template` / `prose`; validator + `skill-creator output-structure` CLI + `--migrate-all [--apply]` migration. Default `prose` preserves backwards compat.
+- **MA-6 canonical reinforcement taxonomy** (`src/types/reinforcement.ts`, `src/reinforcement/`) — `ReinforcementEvent` discriminated union over five channels (`explicit_correction`, `outcome_observed`, `branch_resolved`, `surprise_triggered`, `quintessence_updated`); emitters + writer; channel-source adapters auto-wire teaching / branches / umwelt / quintessence to the new stream at `.planning/traces/reinforcement.jsonl`.
+- **ME-1 tractability classifier** (`src/tractability/`) — *keystone*. Classifies every skill as `{tractable, coin-flip, unknown}` + confidence score from ME-5 frontmatter (pure function). `skill-creator tractability <skill>` + `--audit` CLI; read API for MA-2 + ME-4.
+- **MA-1 eligibility-trace layer** (`src/eligibility/`) — TD(λ)-style exponential decay over MA-6 events with per-channel τ (explicit_correction 7d, outcome_observed 1h, branch_resolved 24h, surprise_triggered 10min, quintessence_updated 3d); replay over the canonical log produces deterministic snapshots; matches brute-force TD(λ) reference to ≤1e-14 (inside the 10⁻⁶ LS-28 gate).
+- **MA-2 ACE actor-critic wire** (`src/ace/`) — closes the loop: M7 expected-F-reduction ΔF becomes the ACE secondary reinforcement driving M5's ActivationSelector via `δ = weight · (r̄ + γ · ΔF_curr − ΔF_prev)` where `r̄` is `|eligibility|`-weighted reinforcement across the 5 channels and `weight` scales with ME-1 tractability confidence (floor 0.3). Flag-off (`gsd-skill-creator.orchestration.ace.enabled: false`) byte-identical to pre-refinement, enforced by SC-REF-FLAG-OFF.
+- **ME-4 coin-flip teach warning** (`src/symbiosis/expected-effect.ts`, `teach-warning.ts`) — teach CLI surfaces Zhang-2026-grounded warning for coin-flip/unknown skills; adds `expected_effect: {low, medium, high}` field to `TeachEntry`; warning copy validated at module load via parasocial-guard. `--no-warning` / `--force` flags for scripted use.
+- **Refinement integration tests** (`src/integration/__tests__/refinement/`) — fixture + through-line + cross-component + the load-bearing flag-off byte-identical test. 51 tests total.
+- **Refinement regression addendum** (`docs/release-notes/v1.49.561/regression-report-refinement.md`).
+- **User-facing refinement docs**: `docs/refinement-wave.md`, `docs/tractability.md`, `docs/reinforcement-taxonomy.md`, `docs/actor-critic.md`.
+- **669 new tests** across 28 new test files (ME-5: 87, MA-6: 45, ME-1: 102, MA-1: 70, MA-2: 40, ME-4: 136, R3 integration: 51, plus incremental coverage in existing suites).
+
+**Changed**
+- `src/orchestration/selector.ts` — optional `aceSignal?` parameter on `select()`; flag-gated branch applies `δ · propensity` to composite score; short-circuits before any mutation when the flag is off (byte-identical invariant).
+- `src/mesh/types.ts` — `MeshEventTypeSchema` gained `reinforcement_event` variant.
+- `src/mesh/event-log.ts` — new `reinforcement_event` read/write helpers (EXTEND; 638 mesh tests remain green).
+- `src/types/symbiosis.ts` — `TeachEntry` gained optional `expected_effect: 'low' | 'medium' | 'high'`.
+- `src/symbiosis/teaching.ts` — writer now accepts `rawOutputStructure` + `expectedEffect` options; infers `expected_effect` via ME-1 on every append.
+- `src/symbiosis/cli.ts` — `teach` subcommand displays warning block before confirming; `--no-warning` + `--force` flags.
+- Channel-source wiring: `src/symbiosis/teaching.ts`, `src/branches/commit.ts`, `src/branches/abort.ts`, `src/umwelt/prediction.ts`, `src/symbiosis/quintessence.ts` emit canonical reinforcement events as fire-and-forget side effects (auto-suppressed under test env).
+
+**Security**
+- MA-6 writer reuses M3's redaction (same key patterns: `api_key`, `password`, `token`, `secret`, `private_key`).
+- ME-4 warning templates validated against the existing parasocial-guard at module load; no first-person-plural / emotional / relational / personification / metaphysical registers reach the CLI.
+
+**Migration**
+
+All refinement modules default **off**. Opt-in sequence:
+
+```bash
+# 1. Declare output structure on skills (adds output_structure: frontmatter)
+SKILL_CREATOR_OUTPUT_STRUCTURE=true \
+  skill-creator output-structure --migrate-all --apply
+
+# 2. Enable tractability classification (reads ME-5 frontmatter)
+export SKILL_CREATOR_TRACTABILITY=true
+
+# 3. Enable reinforcement event emission (or leave auto-suppressed in dev)
+export REINFORCEMENT_EMIT=true
+
+# 4. Enable the actor-critic loop (wires everything together)
+# in .claude/settings.json:
+#   "gsd-skill-creator.orchestration.ace.enabled": true
+```
+
+With every flag off, v1.49.561 refinement-wave installs behave byte-identically to pre-refinement v1.49.561 (phase 650) — enforced by the SC-REF-FLAG-OFF integration test running three independent captures of the selector on a 50-session synthetic fixture.
+
 ---
 
 ## Highlights

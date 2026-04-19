@@ -23,6 +23,8 @@ Eight composable modules (M1–M8) ship in v1.49.561, extending gsd-skill-creato
 
 Theoretical foundations (Lanzara 2023, Friston 2010, Kirchhoff et al. 2018, Foxglove 2026, Traag 2019) are documented with primary-source citations in [docs/foundations/theoretical-audit.md](docs/foundations/theoretical-audit.md).
 
+**Refinement wave (added 2026-04-18):** six further components land in v1.49.561 — ME-5 output-structure frontmatter, ME-1 tractability classifier, MA-6 canonical reinforcement taxonomy, MA-1 eligibility-trace layer, MA-2 ACE actor-critic wire, ME-4 coin-flip teach warning. Keystone insight from Zhang et al. 2026: prompt-content edits are statistically indistinguishable from a coin flip except when the skill declares exploitable output structure. Overview + through-line: [docs/refinement-wave.md](docs/refinement-wave.md). Individual guides: [docs/tractability.md](docs/tractability.md), [docs/reinforcement-taxonomy.md](docs/reinforcement-taxonomy.md), [docs/actor-critic.md](docs/actor-critic.md).
+
 ---
 
 ## Table of Contents
