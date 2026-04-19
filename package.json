@@ -35,6 +35,9 @@
     "node": ">=18.0.0"
   },
   "scripts": {
+    "version:check": "node scripts/bump-version.mjs --check",
+    "version:bump": "node scripts/bump-version.mjs",
+    "version": "node scripts/bump-version.mjs --from-npm && git add package.json package-lock.json src-tauri/Cargo.toml src-tauri/tauri.conf.json",
     "build": "tsc",
     "postbuild": "node scripts/postbuild.mjs",
     "dev": "tsx src/cli.ts",
