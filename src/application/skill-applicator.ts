@@ -13,6 +13,8 @@ import type { CorrectionConfig } from '../retrieval/types.js';
 import { EmbeddingService } from '../embeddings/embedding-service.js';
 import type { EventStore, PatternReport } from '../telemetry/index.js';
 import { TelemetryStage, ScoreAdjuster } from '../telemetry/index.js';
+import type { SensoriaHookOptions } from '../sensoria/applicator-hook.js';
+import { createSensoriaStage, readSensoriaEnabledFlag } from '../sensoria/applicator-hook.js';
 
 /**
  * Optional configuration for enabling retrieval-augmented features.
@@ -62,6 +64,7 @@ export class SkillApplicator {
     retrievalConfig?: RetrievalConfig,
     eventStore?: EventStore,
     patternReport?: PatternReport,
+    sensoriaOptions?: SensoriaHookOptions,
   ) {
     const fullConfig = { ...DEFAULT_CONFIG, ...config };
 
@@ -110,6 +113,23 @@ export class SkillApplicator {
         },
       };
       this.pipeline.insertBefore('resolve', scoreAdjustStage);
+    }
+
+    // M6 Sensoria net-shift gate (feature-flagged, default-off).
+    // Only instantiated when the global flag is on AND options are supplied or
+    // readable from settings.json — byte-identical v1.49.560 behaviour when off
+    // (SC-FLAG-OFF: no stage is added, no module code runs).
+    {
+      const explicitEnabled = sensoriaOptions?.enabled;
+      const resolvedEnabled = explicitEnabled === undefined
+        ? readSensoriaEnabledFlag(sensoriaOptions?.settingsPath)
+        : explicitEnabled;
+      if (resolvedEnabled) {
+        this.pipeline.insertAfter(
+          'resolve',
+          createSensoriaStage(this.skillStore, { ...sensoriaOptions, enabled: true }),
+        );
+      }
     }
 
     if (modelProfile) {
