@@ -104,3 +104,19 @@ All refinement flags default off. The recommended activation sequence:
 - `docs/EXTENSIONS.md` — all refinement flag documentation
 - `docs/release-notes/v1.49.561/README.md` — per-phase commit table including the refinement wave
 - `docs/release-notes/v1.49.561/regression-report-refinement.md` — test delta, acceptance gates, safety-critical results
+
+---
+
+## Continuation Wave Additions (phases 661–678)
+
+Thirteen second-wave components ship across five bundles following the refinement wave close. All thirteen are NEW-LAYER; the zero-REWRITE posture holds across all three waves combined.
+
+**Bundle 3 — Stability Rails (phases 661–663, LS-31..LS-33):** MB-1 Lyapunov-stable K_H adaptation, MB-2 smooth projection operators, and MB-5 dead-zone bounded learning apply classical adaptive-control stability theory (Sastry & Bodson 1989, Narendra & Annaswamy 1989) to the K_H learning loop introduced by MA-2. Together they certify V̇ ≤ 0 before each update, constrain parameter landing points to an admissible manifold, and suppress updates whose gradient magnitude falls inside the noise floor. Full guide: [docs/stability-rails.md](stability-rails.md).
+
+**Bundle 4 — Exploration Harness (phases 664–666, LS-34..LS-36):** MA-3+MD-2 stochastic selection, MD-3 Langevin noise injection, and MD-4 temperature schedule implement structured exploration grounded in the SGLD framework of Welling & Teh 2011. The temperature schedule (MD-4) drives both the softmax sampler (MA-3+MD-2) and the noise injector (MD-3) from a single annealing signal derived from M8 Quintessence, so exploration naturally concentrates as signal accumulates. Full guide: [docs/exploration-harness.md](exploration-harness.md).
+
+**Bundle 5 — Representation Frontier (phases 667–669, LS-37..LS-39):** MD-1 shallow learned embeddings (skip-gram / negative sampling, Mikolov et al. 2013 lineage), MD-5 per-(skill, task-type) learnable K_H heads, and MD-6 representation-audit (effective-rank + community separability) form the embedding substrate for compositional K_H specialisation. MD-6 monitors the embedding space for rank collapse and flags degradation before it affects MD-5's predictions. Full guide: [docs/representation-frontier.md](representation-frontier.md).
+
+**Bundle 6 — Authoring Tools (phases 670–671, LS-40..LS-41):** ME-2 per-skill model affinity (Haiku→Sonnet→Opus escalation policy, tractability-gated) and ME-3 significance-gated A/B harness (built on M4 fork/explore/commit) give skill authors the operational controls needed to declare tier requirements and validate adaptation changes before committing them to production. Full guide: [docs/authoring-tools.md](authoring-tools.md).
+
+**Bundle 7 — College + Rosetta (phases 672–673, LS-42..LS-43):** TC college bootstrap adds the adaptive-systems department under `.college/` and TC Rosetta translations add cross-domain translation tables under `.college/rosetta/`, closing GAP-2 from the v1.49.132 AAR audit. These are markdown-only additions; no code modules were introduced. See `.college/departments/adaptive-systems/` and `.college/rosetta/`.
