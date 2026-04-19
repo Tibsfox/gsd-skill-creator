@@ -56,3 +56,17 @@ None currently -- future phases will add behavioral observation and self-report 
 ## Safety Boundaries
 
 None -- psychology department has no safety-critical parameters.
+
+## Cross-references — Adaptive Systems
+
+**Department:** `.college/departments/adaptive-systems/`  
+**Connection type:** Empirical foundation bridge — Psychology provides the empirical phenomena; Adaptive Systems Panel A provides the mathematical formalisation.
+
+**`psych-learning-theory` (Behavior & Mental Health wing).**  
+Classical conditioning (Pavlov 1927) and operant conditioning (Skinner 1938) are the empirical foundation for reinforcement learning. The Barto, Sutton & Anderson (1983) actor-critic architecture is the direct mathematical formalisation of operant conditioning: the Associative Search Element (ASE) is Skinner's instrumental response-selection rule implemented as a stochastic gradient update on a weight vector; the Adaptive Critic Element (ACE) is a formalisation of Skinner's discriminative stimulus as a value function. Learners who reach the limit of the empirical treatment in this concept are directed to Adaptive Systems Panel A (`A-behavioural-roots.md`) for the formal extension.
+
+**`psych-behavior-reinforcement` (Behavior & Mental Health wing).**  
+Schedules of reinforcement (fixed-ratio, variable-ratio, fixed-interval, variable-interval) determine the temporal structure of reward delivery, which directly maps to the eligibility trace decay constant λ in TD(λ) learning (Sutton 1988): the trace decay constant tunes how far back in time credit is assigned, which is the computational counterpart of the timing structure of reinforcement schedules. Formal extension: Adaptive Systems Panel A (`A-behavioural-roots.md`), §3 on eligibility traces.
+
+**`psych-perception-construction` (Brain & Cognition wing).**  
+The free-energy principle (Friston 2010) is a formal theory of perception-as-inference: the brain constructs perception by minimising variational free energy F = D_KL[q(I) || p(I|S)], where q(I) is the internal model and S is sensory data. This is the mechanistic account underlying the constructive-perception concept. Formal extension: Adaptive Systems Panel D (`D-biological-roots.md`), §4 on variational free energy.
