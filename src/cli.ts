@@ -1625,6 +1625,14 @@ async function main() {
       break;
     }
 
+    case 'model-affinity':
+    case 'aff': {
+      const { modelAffinityCommand } = await import('./model-affinity/cli.js');
+      const exitCode = await modelAffinityCommand(args.slice(1));
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
     case 'sensoria': {
       const scope = parseScope(args);
       const { skillStore: scopedStore } = createScopedStoreAndIndex(scope);
@@ -1648,6 +1656,14 @@ async function main() {
         },
         { skillStore: scopedStore },
       );
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
+    case 'ab':
+    case 'ab-test': {
+      const { abCommand } = await import('./ab-harness/cli.js');
+      const exitCode = await abCommand(args.slice(1));
       if (exitCode !== 0) process.exit(exitCode);
       break;
     }
