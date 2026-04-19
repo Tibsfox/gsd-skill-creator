@@ -29,6 +29,11 @@ Adaptive learning layer for Claude Code that creates, validates, and manages ski
 - `src/branches/` -- M4 Branch-Context copy-on-write skill variants (fork/explore/commit lifecycle)
 - `src/orchestration/` -- M5 multi-turn retrieval loop + selector (reads M1/M2/M3/M4)
 - `src/cache/` -- M5 radix-tree prefix cache + KVFlow-style step-graph predictor + anticipatory preloader
+- `src/output-structure/` -- ME-5 output-structure frontmatter + validator + migration (Zhang 2026)
+- `src/reinforcement/` -- MA-6 canonical reinforcement taxonomy (5 channels) + emitters + writer
+- `src/tractability/` -- ME-1 tractability classifier (keystone; gates MA-2 + ME-4)
+- `src/eligibility/` -- MA-1 TD(λ) eligibility-trace layer over MA-6 events (Barto 1983 §III)
+- `src/ace/` -- MA-2 ACE actor-critic wire (M7 ΔF → M5 selector, tractability-weighted)
 - `src-tauri/` -- Rust backend (Tauri)
 - `desktop/` -- Vite webview frontend
 - `.college/` -- College Structure: Rosetta Core, panels, departments (culinary-arts, mathematics, mind-body), calibration
