@@ -35,6 +35,19 @@ export interface TeachEntry {
   content: string;
   /** References to M3 traces, M1 entities, or skill IDs the entry applies to. */
   refs: string[];
+  /**
+   * ME-4: Expected effect level of this teach entry on the targeted skill.
+   * Derived from the ME-1 tractability classification at commit time.
+   *
+   *   high   — tractable (structured-output skill; edits have reliable effect)
+   *   medium — reserved for future hybrid-tractability classes
+   *   low    — coin-flip or unknown (prose/undeclared; effect is unreliable)
+   *
+   * Optional for backwards compatibility: historical entries without the field
+   * are treated as 'low' by consumers (conservative default per ME-4 proposal
+   * §Ledger back-compatibility).
+   */
+  expected_effect?: 'low' | 'medium' | 'high';
 }
 
 // ─── Co-evolution ledger (system → developer) ───────────────────────────

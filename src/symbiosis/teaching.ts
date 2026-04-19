@@ -16,6 +16,7 @@ import { randomUUID } from 'node:crypto';
 import { dirname } from 'node:path';
 import type { TeachCategory, TeachEntry } from '../types/symbiosis.js';
 import { recordExplicitCorrection } from '../reinforcement/channel-sources.js';
+import { classifyExpectedEffect } from './expected-effect.js';
 
 /** Maximum byte length of `content` per entry. */
 export const TEACH_CONTENT_MAX_BYTES = 10 * 1024; // 10 KiB
@@ -44,6 +45,22 @@ export interface AppendTeachOptions {
    * MA-6 hook: override the reinforcement log path (tests / alternate storage).
    */
   reinforcementLogPath?: string;
+  /**
+   * ME-4: Raw `output_structure` frontmatter value for the target skill.
+   * When provided, `classifyExpectedEffect()` derives `expected_effect` from
+   * the ME-1 tractability classification.  When omitted the field defaults to
+   * 'low' (conservative fallback, identical to unknown-tractability path).
+   *
+   * Callers that have already resolved the skill frontmatter should pass this
+   * directly.  The teach CLI passes the value looked up from the skill registry.
+   */
+  rawOutputStructure?: unknown;
+  /**
+   * ME-4: Directly supply the `expected_effect` level, bypassing ME-1 lookup.
+   * Takes precedence over `rawOutputStructure` when both are supplied.
+   * Intended for scripted / test use; the teach CLI always uses ME-1.
+   */
+  expectedEffect?: 'low' | 'medium' | 'high';
 }
 
 export interface TeachResult {
@@ -128,12 +145,23 @@ export function appendTeachEntry(
     return { ok: false, error: 'content must not be empty' };
   }
 
+  // ME-4: resolve expected_effect — caller-supplied value wins; otherwise
+  // consult ME-1 via rawOutputStructure; fall back to 'low' (conservative).
+  let expectedEffect: 'low' | 'medium' | 'high';
+  if (opts.expectedEffect !== undefined) {
+    expectedEffect = opts.expectedEffect;
+  } else {
+    const effect = classifyExpectedEffect(opts.rawOutputStructure);
+    expectedEffect = effect.level;
+  }
+
   const entry: TeachEntry = {
     id: randomUUID(),
     ts: opts.now ?? Date.now(),
     category,
     content,
     refs,
+    expected_effect: expectedEffect,
   };
 
   try {
