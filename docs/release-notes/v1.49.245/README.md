@@ -1,4 +1,4 @@
-# v1.49.245 — Degree 105: Parenthetical Girls (Electronic) + Clark's Nutcracker — THE THEATRICAL CIRCUIT AND THE ALPINE BROADCASTER — CORVIDAE SEXTET
+# v1.49.245 — Degree 105: Parenthetical Girls (Electronic) + Clark's Nutcracker — THE THEATRICAL CIRCUIT AND THE ALPINE BROADCASTER
 
 **Released:** 2026-04-02
 **Scope:** Seattle 360 + Sound of Puget Sound — paired degree release, Corvidae sextet closer and triple electronic return closer

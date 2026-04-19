@@ -1,0 +1,59 @@
+# Lessons — v1.49.335
+
+14 lessons extracted. Classification source: ⚙ rule-based · 🤖 LLM tiebreaker (needs review) · 👤 human.
+
+1. **The E-scale is human-perception-calibrated, not species-neutral.**
+   The Blue Whale's E=5 rating for a 188-dB physical source level makes explicit what had been implicit across all prior species entries: the engine's rating system reflects what a human listener would perceive, not what is physically present in the acoustic environment. Future engine iterations should decide whether to preserve the perceptual calibration (documenting how species sound to humans) or introduce a parallel physical-measurement register (documenting what species actually produce acoustically). The degree 194 documentation surfaces the choice.
+   _⚙ Status: `investigate` · lesson #7730_
+
+2. **Twee pop requires ethical-stance framing that stylistic framing cannot provide.**
+   Prior indie-register genre documentation has emphasized stylistic characteristics. The Tullycraft entry demonstrates that twee pop cannot be adequately documented through stylistic framing alone; the genre requires ethical-stance framing (smallness-as-resistance, rejection-of-rock-masculinism, handmade-as-ethical-commitment) to capture what the genre actually is. This observation may apply retrospectively to other indie-register genres (punk, indie rock, lo-fi) that have been documented stylistically but might benefit from ethical-stance reframing.
+   _⚙ Status: `investigate` · lesson #7731_
+
+3. **Opposite-extreme pairings generate the most productive cross-sync observations.**
+   Degree 194's E=3-whisper paired with 188-dB-thunder creates tension that a same-register pairing would not produce. The pairing forces the engine to articulate what the E-scale measures (perception, not physics), what "loud" and "quiet" mean in biological versus artistic contexts, and how amplitude relates to scale and intention. Future degrees should consider whether opposite-extreme pairings are available for the available Part A / Part B subjects, and prioritize such pairings where the substantive content supports them.
+   _⚙ Status: `investigate` · lesson #7732_
+
+4. **Physical-extreme species require multi-register comparative framing to communicate scale.**
+   The Blue Whale's 100-foot length and 200-ton weight do not register as "largest animal ever" until compared to Argentinosaurus, Shastasaurus, and every organism in the fossil record. The 188 dB loudness does not register as "loudest biological sound ever" until compared to jet engines, gunshots, rock concerts, and thunder. Engine documentation for extreme-value species should default to multi-register comparative framing rather than bare numeric reporting.
+   _⚙ Status: `investigate` · lesson #7733_
+
+5. **Sustained-commitment duration is a cross-amplitude vocabulary register.**
+   Mudhoney's forty-year commitment at amplitude-loud and Tullycraft's twenty-eight-plus-year commitment at amplitude-quiet together demonstrate that sustained-aesthetic-commitment-as-identity operates across the amplitude spectrum. The vocabulary register is not amplitude-specific; it is duration-specific. Future engine documentation should look for sustained-commitment patterns across all amplitude ranges rather than treating commitment and loudness as correlated.
+   _⚙ Status: `applied` (applied in `v1.49.402`) · lesson #7734_
+
+6. **Transmission-mechanism documentation is a distinct acoustic register from frequency-and-amplitude documentation.**
+   The SOFAR-channel propagation mechanism for Blue Whale vocalizations is so distinct from near-range communication that it forces the engine to introduce a transmission-mechanism register. Near-range acoustic communication (most bird songs, most insect calls, most terrestrial mammal vocalizations), medium-range acoustic communication (most cetacean surface communication, howler monkey calls), and ocean-basin-range acoustic communication (Blue Whale and Fin Whale infrasonic) are structurally distinct categories.
+   _⚙ Status: `applied` (applied in `v1.49.339`) · lesson #7735_
+
+7. **K Records and Sub Pop are two Pacific Northwest indie traditions, not one.**
+   The Mudhoney documentation at degree 189 established the Sub Pop aesthetic (distortion, grunge, rock-influenced indie). The Tullycraft documentation at degree 194 establishes the K Records aesthetic (lo-fi, twee, handmade). These are parallel but distinct Pacific Northwest indie traditions, and the engine's label-vocabulary should maintain the distinction rather than collapsing them under a single "Pacific Northwest indie" register.
+   _⚙ Status: `applied` (applied in `v1.49.347`) · lesson #7736_
+
+8. **The Balaenopteridae family arc across degrees 190-194 is worth dedicated cross-release documentation.**
+   The five-degree arc from Minke Whale (190) through Humpback Whale (191), Gray Whale representatives (192 and 193), and Blue Whale (194) documents the rorqual family's ecological range from small to maximum size. This family-arc structure emerges across multiple degrees but is not captured in any individual-degree retrospective; future engine iterations should accommodate multi-degree family-arc documentation as a first-class artifact type.
+   _⚙ Status: `applied` (applied in `v1.49.350`) · lesson #7737_
+
+9. **Perception-versus-physics is a structural principle, not a one-off observation.**
+   The degree 194 cross-sync between Tullycraft's perceptual-calibrated E=3 and the Blue Whale's perception-compressed E=5-for-188-dB is one instance of a broader structural principle that the acoustic world human perception registers is not the acoustic world that physically exists. Future species entries for bat echolocation, whale song, ultrasonic insect communication, infrasonic elephant communication, and other beyond-audible-range phenomena will all surface the same principle.
+   _⚙ Status: `investigate` · lesson #7738_
+
+10. **The engine's documentation benefits from explicit self-documentation at the rating-system level.**
+   Degree 194's surfacing of the E-scale-perceptual-limitation is a first-class example of the engine documenting itself rather than just documenting subjects. Future engine iterations should consider deliberate periodic self-documentation passes to surface other implicit assumptions in the rating system, the genre-vocabulary, the species-taxonomy treatment, and the cross-sync parallel conventions.
+   _⚙ Status: `investigate` · lesson #7739_
+
+11. **The pre-uplift release notes were extremely thin.**
+   The original v1.49.335 README was 54 lines and captured the key facts — Tullycraft as FIRST TWEE POP at E=3, Blue Whale at 188 dB — but did not develop the perception-versus-physics cross-axis, the E-scale-perceptual-limitation meta-observation, the K Records tradition lineage, or the SOFAR-channel propagation register in the depth the pairing deserves. The uplift expanded from 54 lines to A-grade density, but the grain-size discrepancy suggests future degrees should ship A-grade from the first commit rather than requiring retroactive uplift.
+   _⚙ Status: `investigate` · lesson #7740_
+
+12. **The Tullycraft research files were shipped with the original commit but may have been affected by the NASA catalog chronological reorder.**
+   The expected `www/tibsfox/com/Research/S36/research/releases/194-tullycraft/` directory was listed in the original commit's file changes but was not visible at uplift time. The chronological reorder of the NASA catalog in v1.49.558-559 reorganized many S36 and SPS research directories; verification that the degree 194 research artifacts exist at their current expected paths should be part of future uplift checklists.
+   _⚙ Status: `investigate` · lesson #7741_
+
+13. **The 52-Hertz whale deserves its own focused documentation.**
+   The anomalous Blue Whale documented since 1989 that calls at 52 Hz (a frequency no conspecific responds to, possibly a Blue-Fin hybrid, possibly a uniquely-tuned individual) is one of the most culturally resonant cetacean stories of the late twentieth century and has been the subject of documentary films, journalism, and scientific speculation. The degree 194 entry notes the 52-Hertz whale in passing but does not develop the narrative in the depth the story deserves; a future companion research artifact or referenced-case documentation could fill this gap.
+   _⚙ Status: `investigate` · lesson #7742_
+
+14. **The Balaenopteridae family arc across degrees 190-194 is structurally significant and underdocumented.**
+   Minke Whale (190), Humpback Whale (191), Gray Whale representatives (192, 193), and Blue Whale (194) form a partial Balaenopteridae arc that documents the rorqual family's ecological range from small (Minke at 25-30 feet) to intermediate (Humpback at 45-55 feet, Gray at 40-45 feet) to maximum (Blue at 80-100 feet). This family-arc structure deserves a dedicated cross-release documentation rather than relying on individual-degree retrospectives to surface it.
+   _⚙ Status: `applied` (applied in `v1.49.350`) · lesson #7743_

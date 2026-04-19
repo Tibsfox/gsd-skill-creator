@@ -1,8 +1,12 @@
-> Following v1.49.475 — _Degree 334: Melvins + Whale+Volcano Infrasonic_, v1.49.476 ships as Degree 335: Soundgarden + Hurricane Ridge Wind.
-# v1.49.476 — Degree 335: Soundgarden + Hurricane Ridge Wind
+> Following v1.49.475 — _Degree 334: Melvins + Whale-Volcano Infrasonic (THE HEAVIEST DEGREE IN THE ENGINE, E=18 COMBINED, SUBSONIC SLUDGE MEETS INFRASONIC DEEP PACIFIC, METAL SUMMIT POSITION 2 OF 4, MELVINS RETURN FROM DEGREE 308 RECALIBRATED TO E=9, SOFAR CHANNEL ANCHORS THE SPS PAIR, AXIAL SEAMOUNT AS MAXIMUM EXPRESSION SITE, BLUE WHALE AND FIN WHALE LOW-FREQUENCY VOCALIZATION, JUAN DE FUCA RIDGE SEISMIC TREMOR)_, v1.49.476 ships as Degree 335: Soundgarden + Hurricane-Force Ridge Wind (THE VOICE AND THE HOWL, E=18 COMBINED, METAL SUMMIT POSITION 3 OF 4, SECOND CONSECUTIVE E=18, CHRIS CORNELL AND KIM THAYIL ON S36, CASCADE CREST ABOVE TREELINE ON SPS, SUSTAINED MAXIMUM INTENSITY ACROSS BOTH TRACKS, SUPERUNKNOWN AS ALBUM-LENGTH CALIBRATION, BEAUFORT 12 AS ATMOSPHERIC CALIBRATION, THE HOWL THAT DOES NOT STOP PAIRED WITH THE VOICE THAT DOES NOT BREAK).
+# v1.49.476 — Degree 335: Soundgarden + Hurricane-Force Ridge Wind (THE VOICE AND THE HOWL, E=18 COMBINED, METAL SUMMIT POSITION 3 OF 4, SECOND CONSECUTIVE E=18, CHRIS CORNELL AND KIM THAYIL ON S36, CASCADE CREST ABOVE TREELINE ON SPS, SUSTAINED MAXIMUM INTENSITY ACROSS BOTH TRACKS, SUPERUNKNOWN AS ALBUM-LENGTH CALIBRATION, BEAUFORT 12 AS ATMOSPHERIC CALIBRATION, THE HOWL THAT DOES NOT STOP PAIRED WITH THE VOICE THAT DOES NOT BREAK)
 **Shipped:** 2026-04-03
-_Parse confidence: 0.50 — source `docs/release-notes/v1.49.476/README.md`_
+**Commits:** 0 | **Files:** 9
+**Branch:** dev
+_Parse confidence: 0.75 — source `docs/release-notes/v1.49.476/README.md`_
 ## Summary
-This release carried 5 features; see `01-features.md`.
+No structured feature list was captured for this release; see the source README for prose details.
+It also produced retrospective content (lessons_learned, what_could_be_better, what_worked); see `03-retrospective.md`.
+14 lessons extracted; see `04-lessons.md` or the `RETROSPECTIVE-TRACKER.md`.
 ---
 **Prev:** [v1.49.475](../v1.49.475/00-summary.md) · **Next:** [v1.49.477](../v1.49.477/00-summary.md)

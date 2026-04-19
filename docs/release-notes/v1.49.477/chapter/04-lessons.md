@@ -1,0 +1,67 @@
+# Lessons — v1.49.477
+
+16 lessons extracted. Classification source: ⚙ rule-based · 🤖 LLM tiebreaker (needs review) · 👤 human.
+
+1. **The Metal Summit's closing E=9 entry benefits from the most melodically complex of the Summit's four bands.**
+   Alice in Chains' guitar-vocal harmony system is the most compositionally sophisticated of the Summit's four E=9 entries, and the closing position at degree 336 is the appropriate location for the Summit's most melodically complex band. The lesson is that four-degree arc architectures benefit from closing-position complexity grounding at first-class resolution rather than from earliest-position-as-maximum attribution.
+   _⚙ Status: `applied` (applied in `v1.49.478`) · lesson #9469_
+
+2. **Dramatic coincidence is a distinct E=9 calibration category from sustained maximum amplitude.**
+   The wolf-thunder event at degree 336 reaches E=9 through the dramatic coincidence of biological vocalization and atmospheric transient rather than through sustained maximum amplitude (the degree 335 Hurricane Ridge Wind calibration) or frequency-floor depth (the degree 334 Whale-Volcano Infrasonic calibration) or full-spectrum breadth (the degree 333 Pacific Storm Full Spectrum calibration). The lesson is that E=9 vocabulary benefits from multi-mechanism grounding at first-class resolution rather than from amplitude-only attribution.
+   _⚙ Status: `applied` (applied in `v1.49.479`) · lesson #9470_
+
+3. **Compositional innovation (the guitar-vocal harmony system) is a first-class differentiator in the engine's S36 vocabulary.**
+   Cantrell's compositional approach of structuring guitar riffs in harmonic relationship with vocal melodies is what distinguishes Alice in Chains from the other Metal Summit entries, and the engine's documentation preserves the compositional-innovation dimension at first-class resolution rather than at tone-and-production attribution.
+   _⚙ Status: `investigate` · lesson #9471_
+
+4. **The ecological recovery context for a biological acoustic source carries first-class weight in the E=9 calibration.**
+   The Gray Wolf's seventy-year absence from Washington and recolonization since 2008 means that every wolf howl in a Washington high meadow is an ecological restoration event. The lesson is that SPS documentation benefits from recovery-context grounding at first-class resolution rather than from continuous-historical-presence attribution.
+   _⚙ Status: `applied` (applied in `v1.49.479`) · lesson #9472_
+
+5. **The four-phase temporal sequence structure grounds dramatic-coincidence calibration in concrete acoustic chronology.**
+   The wolf-thunder event at degree 336 is a four-phase temporal sequence (wolf begins, coincidence, complete masking, aftermath) rather than a simultaneous superposition, and the temporal structure is the event's defining characteristic. The lesson is that multi-source SPS documentation benefits from temporal-sequence grounding at first-class resolution rather than from simultaneous-superposition attribution.
+   _⚙ Status: `applied` (applied in `v1.49.479`) · lesson #9473_
+
+6. **The amplitude differential (30-50 dB = 1,000-100,000x perceived loudness ratio) grounds acoustic masking in concrete physics.**
+   The logarithmic decibel scaling makes the wolf-howl masking by the thunder crack precise rather than impressionistic, and the physics-grounding preserves the dramatic-coincidence mechanism at first-class acoustic-physics resolution. The lesson is that acoustic-event documentation benefits from decibel-differential grounding at first-class resolution rather than from impressionistic-loud-versus-quiet attribution.
+   _⚙ Status: `investigate` · lesson #9474_
+
+7. **Consecutive-degree named-person cross-references (Andrew Wood at 335 and 336) are structural alignments preserved at first-class resolution.**
+   The Hunger Strike (Temple of the Dog, 335) and Would? (Alice in Chains, 336) tributes to Andrew Wood are a rare consecutive-degree structural alignment in the engine's 336 degrees shipped, and the alignment is not coincidence but a structural feature of the Summit's composition. The lesson is that cross-reference vocabulary benefits from consecutive-degree-structural-alignment grounding at first-class resolution rather than from single-degree attribution.
+   _⚙ Status: `investigate` · lesson #9475_
+
+8. **The held-beauty-interrupted cross-sync axis preserves the Metal Summit's closing aesthetic register at first-class resolution.**
+   The pairing of Alice in Chains' guitar-vocal harmony (melodic beauty with dissonant intervals) with the wolf-thunder event (sustained tonal howl with atmospheric crack interruption) documents the same compositional principle across human music and natural acoustic domains. The lesson is that cross-sync documentation benefits from compositional-principle grounding at first-class resolution rather than from surface-level similarity attribution.
+   _⚙ Status: `applied` (applied in `v1.49.481`) · lesson #9476_
+
+9. **Beacon Hill's south-Seattle working-class identity is a first-class geographic register in the engine's S36 vocabulary.**
+   Alice in Chains' formation in Beacon Hill rather than Capitol Hill or the U-District gives the band a specific geographic identity that is preserved in both their musical and visual presentation, and the engine's geographic vocabulary preserves the Beacon-Hill-as-distinct-from-bohemian-neighborhood dimension at first-class resolution rather than at Seattle-as-single-location attribution.
+   _⚙ Status: `applied` (applied in `v1.49.494`) · lesson #9477_
+
+10. **The three-consecutive-E=18-in-three-degrees pattern establishes the Metal Summit inner arc as a structurally distinct sustained-maximum sequence in the engine's run.**
+   The 334-335-336 three-consecutive-E=18 inner arc is the longest sustained maximum-energy sequence in the engine's 336 degrees shipped, and the pattern demonstrates that the Summit's middle three degrees together form a coherent structural unit rather than three independent E=18 readings. The lesson is that multi-degree arc documentation benefits from sustained-maximum-sequence grounding at first-class resolution rather than from isolated-maximum-point attribution.
+   _⚙ Status: `applied` (applied in `v1.49.478`) · lesson #9478_
+
+11. **Deeper integration of the Washington Department of Fish & Wildlife wolf-recovery tracking program's specific field protocols would have strengthened the conservation-context register.**
+   The tracking program uses radio-collar telemetry, trail-camera documentation, howl-survey protocols, and carcass-level predation documentation, and the research infrastructure dimension could have been elaborated further with specific protocol references.
+   _⚙ Status: `investigate` · lesson #9479_
+
+12. **Additional cross-references to earlier wolf vocalization documentation at degree 313 (Cougar-Wolf Encounter) would have situated the wolf-acoustic context more completely across the engine's 336 degrees shipped.**
+   The wolf appears in two different acoustic contexts across the engine, and the cross-reference could have been elaborated beyond single-mention at first-class resolution.
+   _⚙ Status: `applied` (applied in `v1.49.479`) · lesson #9480_
+
+13. **The Jerry Cantrell Sr. Vietnam War infantry biography in the context of Rooster could have been expanded with more specific unit and service-period detail.**
+   The song's personal history is one of the more remarkable pieces of documented biography in the grunge catalogue, and the expanded context would have strengthened the Rooster framing.
+   _⚙ Status: `investigate` · lesson #9481_
+
+14. **The William DuVall post-Staley continuation period could have been contextualized further across Black Gives Way to Blue (2009), The Devil Put Dinosaurs Here (2013), and Rainier Fog (2018).**
+   The original-lineup period received the bulk of the E=9 contextual framing, but the 13-year DuVall-era continuation represents a substantial portion of the Alice in Chains catalogue and would have completed the full biographical arc.
+   _⚙ Status: `applied` (applied in `v1.49.487`) · lesson #9482_
+
+15. **The specific Mother Love Bone and Andrew Wood biographical context could have been expanded in both the degree 335 Hunger Strike and the degree 336 Would? tribute framings.**
+   The two-degree Andrew Wood double tribute is one of the engine's remarkable consecutive structural alignments, and the elaborated Mother Love Bone context would have grounded the cross-reference at deeper first-class resolution.
+   _⚙ Status: `applied` (applied in `v1.49.485`) · lesson #9483_
+
+16. **The specific meteorological conditions that produce the close lightning strike in the subalpine meadow zone could have been elaborated further with orographic convection modeling detail.**
+   The summer convective thunderstorm context at Cascade elevations involves specific atmospheric dynamics (daytime heating, orographic lift, synoptic-scale contributions) that could have been grounded more fully in meteorological specifics.
+   _⚙ Status: `investigate` · lesson #9484_

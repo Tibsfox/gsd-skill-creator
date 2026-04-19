@@ -1,4 +1,4 @@
-# v1.49.464 — Degree 323: Ten Minute Warning + Puget Sound Tidal Bore (PROTO-GRUNGE ORIGIN, SUSTAINED PRESSURE PAIRING, POST-SUMMIT E=16, 89.7%)
+# v1.49.464 — Degree 323: Ten Minute Warning + Puget Sound Tidal Bore
 
 **Released:** 2026-04-03
 **Scope:** Seattle 360 + Sound of Puget Sound — paired degree release; **Ten Minute Warning** as the last high-energy pre-summit echo at **E=8** on the S36 track with **Paul Solger**, **Steve Turner**, and **Greg Gilmore** in the 1982-1986 Capitol Hill proto-grunge register, and the **Puget Sound Tidal Bore** at **E=8** on the SPS track as the sustained hydraulic surge at **Deception Pass**, **Tacoma Narrows**, and the **San Juan Islands** constrictions, both halves organized around the **sustained-pressure-as-E=8-mechanism** cross-sync axis that distinguishes the degree-323 pair from the episodic peak events documented elsewhere in the post-summit arc.

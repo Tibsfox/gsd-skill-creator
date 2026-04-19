@@ -1,4 +1,4 @@
-# v1.49.271 — Degree 131: John Richards (The Morning Voice of KEXP) + Brant — THE KEXP HOST TRIO CONTINUES — THE BRANTA TRIO COMPLETES — FOURTEENTH CONSECUTIVE ANATIDAE EXTENDS THE ALL-TIME FAMILY-STREAK RECORD — MUSIC HEALS MADE STRUCTURAL — THE EELGRASS OBLIGATE AS INDICATOR SPECIES
+# v1.49.271 — Degree 131: John Richards + Brant — THE KEXP HOST TRIO CONTINUES
 
 **Released:** 2026-04-02
 **Scope:** Seattle 360 + Sound of Puget Sound — paired degree release, KEXP host trio continues on the artist axis (130-132: Waters, Richards, Mazzone), Branta trio completes on the species axis (Canada Goose 129, Cackling Goose 130, Brant 131), fourteenth consecutive Anatidae extends the all-time family-streak record, third *Branta* entry paired with second KEXP host entry after Cheryl Waters' Midday Show opener documented the institutional-memory position

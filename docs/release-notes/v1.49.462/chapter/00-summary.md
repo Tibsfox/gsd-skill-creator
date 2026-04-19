@@ -1,8 +1,12 @@
-> Following v1.49.461 — _Degree 320: Alcohol Funnycar + Raven Complex Vocalizing_, v1.49.462 ships as Degree 321: Gas Huffer + Night Chorus.
-# v1.49.462 — Degree 321: Gas Huffer + Night Chorus
+> Following v1.49.461 — _Degree 320: Alcohol Funnycar + Raven Complex Vocalizing (FIRST CORVIDAE, FIRST ALCOHOL FUNNYCAR APPEARANCE, FIRSTS PAIRING, COMPLEXITY VS. ECONOMY BOTH AT E=7, E=14 COMBINED, 88.9%, Dave Dederer on guitar at the underground punk end of the Seattle grunge spectrum on the Empty Records roster paired with Corvus corax at the cognitive maximum register on the SPS track as both halves arrive as first appearances that reach E=7 through opposite routes)_, v1.49.462 ships as Degree 321: Gas Huffer + Spring Pond Night Chorus (THE AMPHETAMINE REPTILE ENTRY, FREMONT DEBUTS, FIRST MULTI-SPECIES SIMULTANEOUS NIGHT SOUNDSCAPE, THREE-LAYER VERTICAL ACOUSTIC STACK, E=14 COMBINED, 89.2%, Gas Huffer's Grunge/Punk at E=7 as the first AmRep-catalog Seattle entry in the engine and the first Fremont neighborhood band paired with the Pacific Chorus Frog + Great Horned Owl + Western Field Cricket spring pond chorus at E=7 through superposition — three musicians in three registers on the S36 side and three species in three non-masking frequency bands on the SPS side meeting at the same E=7 mechanism of simultaneous layering).
+# v1.49.462 — Degree 321: Gas Huffer + Spring Pond Night Chorus (THE AMPHETAMINE REPTILE ENTRY, FREMONT DEBUTS, FIRST MULTI-SPECIES SIMULTANEOUS NIGHT SOUNDSCAPE, THREE-LAYER VERTICAL ACOUSTIC STACK, E=14 COMBINED, 89.2%, Gas Huffer's Grunge/Punk at E=7 as the first AmRep-catalog Seattle entry in the engine and the first Fremont neighborhood band paired with the Pacific Chorus Frog + Great Horned Owl + Western Field Cricket spring pond chorus at E=7 through superposition — three musicians in three registers on the S36 side and three species in three non-masking frequency bands on the SPS side meeting at the same E=7 mechanism of simultaneous layering)
 **Shipped:** 2026-04-03
-_Parse confidence: 0.50 — source `docs/release-notes/v1.49.462/README.md`_
+**Commits:** 5 | **Files:** 9
+**Branch:** dev
+_Parse confidence: 0.90 — source `docs/release-notes/v1.49.462/README.md`_
 ## Summary
-This release carried 6 features; see `01-features.md`.
+No structured feature list was captured for this release; see the source README for prose details.
+It also produced retrospective content (lessons_learned, what_could_be_better, what_worked); see `03-retrospective.md`.
+11 lessons extracted; see `04-lessons.md` or the `RETROSPECTIVE-TRACKER.md`.
 ---
 **Prev:** [v1.49.461](../v1.49.461/00-summary.md) · **Next:** [v1.49.463](../v1.49.463/00-summary.md)

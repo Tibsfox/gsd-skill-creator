@@ -1,0 +1,47 @@
+# Lessons — v1.49.469
+
+11 lessons extracted. Classification source: ⚙ rule-based · 🤖 LLM tiebreaker (needs review) · 👤 human.
+
+1. **Energy calibration is neutral with respect to gender and genre conventions.**
+   The engine's E=8 placement for Seven Year Bitch's Viva Zapata!-era metal material is grounded in the actual acoustic and production register rather than in a conventional adjustment for vocalist gender or a softened designation for female-led heavy bands. The lesson is that documentation benefits from category-neutral calibration at first-class resolution rather than from category-adjusted attribution, and the consistency of the E=8 reading preserves subject-property energy regardless of the category labels that the subject might carry.
+   _⚙ Status: `applied` (applied in `v1.49.479`) · lesson #9360_
+
+2. **Compositional energy exceeds the maximum solo energy of the constituents in true multi-species and multi-instrument events.**
+   The Night Predator Chorus at E=8 exceeds the E=5-6 solo readings of the Great Horned Owl pair and the Coyote alone. The lesson is that combined-event calibration benefits from compositional grounding at first-class resolution rather than from solo-maximum capping, and the engine's documentation vocabulary preserves the compositional escalation that active cross-species interaction produces beyond the passive co-presence of the constituents.
+   _⚙ Status: `applied` (applied in `v1.49.479`) · lesson #9361_
+
+3. **First-in-family milestones are structurally load-bearing and should be documented at first-class resolution.**
+   The FIRST CANID IN MULTI-SPECIES SPS EVENT milestone at degree 328 is genuine rather than incremental: the Coyote's prior SPS entries at 208 and 209 were solo-species documentations. The lesson is that family-first milestones benefit from explicit identification at first-class resolution rather than from implicit incremental treatment, and the Canidae documentation vocabulary now extends from solo-species participation to multi-species participation through the degree 328 threshold.
+   _⚙ Status: `investigate` · lesson #9362_
+
+4. **Specific historical context deepens energy readings beyond amplitude measurements.**
+   The grief-as-fuel context for Viva Zapata! (Stefanie Sargent 1992, Mia Zapata 1993, Kurt Cobain 1994) is inseparable from the record's heaviest material. The lesson is that energy readings benefit from specific-context grounding at first-class resolution rather than from context-free amplitude measurement, and the engine's documentation vocabulary preserves the specific emotional substrates that generate the intensity rather than abstracting to generic register labels.
+   _⚙ Status: `applied` (applied in `v1.49.479`) · lesson #9363_
+
+5. **Acoustic-structural specificity (musical intervals, temporal cycles, periodic-plus-aperiodic composition) preserves documentation depth at first-class resolution.**
+   The Great Horned Owl pair duet's minor-third interval and the Night Predator Chorus's periodic-plus-aperiodic temporal structure are among the most musically and structurally specific observations in the engine's mammal-and-bird documentation vocabulary. The lesson is that acoustic events benefit from structural-specificity documentation at first-class resolution rather than from generic-intensity labeling, and the engine's documentation vocabulary can register musical intervals and temporal structures alongside amplitude and frequency ranges.
+   _⚙ Status: `investigate` · lesson #9364_
+
+6. **Arc-shape documentation (plateau-plateau-rise patterns) benefits from explicit sequence-level observation at first-class resolution.**
+   The post-summit second arc's E=6-6-8 sequence on the S36 track and the parallel E=7-7-8 sequence on the SPS track confirm the plateau-plateau-rise energy pattern at degree 328. The lesson is that energy arc shapes benefit from sequence-level documentation at first-class resolution rather than from per-degree independent treatment, and the engine's documentation vocabulary can register arc-scale patterns alongside per-degree readings.
+   _⚙ Status: `investigate` · lesson #9365_
+
+7. **Nocturnal-predator-aggression cross-sync pairs asymmetric source domains with symmetric structural roles at first-class resolution.**
+   Seven Year Bitch's cultural nocturnal intensity (Capitol Hill heavy-punk-metal grief and rage) and the Night Predator Chorus's ecological nocturnal intensity (winter forest edge cross-family territorial exchange) occupy different source domains but share the same structural role as night-domain apex-register presences. The lesson is that cross-sync pairings benefit from structural-role matching across asymmetric source domains at first-class resolution rather than from domain-matched pairing alone, and the engine's cross-sync axis vocabulary now includes the nocturnal-predator-aggression-across-cultural-and-ecological-domains axis.
+   _⚙ Status: `investigate` · lesson #9366_
+
+8. **Winter seasonal windows concentrate multi-species acoustic events at their peak intensity through the simultaneous peak of constituent species' vocal activity.**
+   The Great Horned Owl's January-February pair-bond reinforcement peak and the Coyote's February breeding peak converge at the winter forest edge with long nights (14-16 hours at 47-49 degrees North) and leafless acoustic transparency. The lesson is that multi-species events benefit from seasonal-convergence documentation at first-class resolution rather than from constant-presence assumption, and the engine's documentation vocabulary preserves the specific seasonal windows that concentrate the acoustic intensity.
+   _⚙ Status: `applied` (applied in `v1.49.470`) · lesson #9367_
+
+9. **The Seven Year Bitch research artifact documents the two-album catalog and the 1990-1997 active run but does not enumerate the specific Capitol Hill and regional venue-level performance timeline that would ground the band's active run in specific dates and places.**
+   Future Seven Year Bitch documentation should include the venue-level performance timeline — the specific Seattle clubs where the band played during 1990-1997, the specific regional tour dates, and the specific opening-slot relationships with Bikini Kill, Sleater-Kinney, The Gits, and other Capitol Hill feminist-punk contemporaries — so that the band's active run is legible at the venue-specific resolution rather than only at the studio-album resolution.
+   _⚙ Status: `applied` (applied in `v1.49.483`) · lesson #9368_
+
+10. **The Night Predator Chorus research artifact documents the GHO pair duet and the Coyote response but does not enumerate specific documented Pacific Northwest locations and dates where the multi-species acoustic event has been recorded.**
+   Future documentation should include specific Macaulay Library (Cornell Lab of Ornithology) audio recordings with acoustic measurements, specific Washington Department of Fish and Wildlife winter territorial records, specific Snoqualmie Valley, Cowlitz Valley, and Puget Sound foothill sites with documented multi-species presence, so that the event is anchored to specific documented occurrences rather than only to the species' acoustic capability in the abstract.
+   _⚙ Status: `applied` (applied in `v1.49.470`) · lesson #9369_
+
+11. **The engine's gender-neutral calibration principle is documented at the Seven Year Bitch E=8 entry but could be reinforced with cross-reference to other female-led heavy band entries across the engine's 360-degree run.**
+   Future documentation should include explicit cross-references to Bikini Kill at degree 276, The Gits at degree 280, Sleater-Kinney's later entries, and other female-led or female-prominent heavy and punk bands, so that the gender-neutral calibration principle is visible as an engine-wide documentation stance rather than as a single-entry observation at degree 328.
+   _⚙ Status: `applied` (applied in `v1.49.470`) · lesson #9370_

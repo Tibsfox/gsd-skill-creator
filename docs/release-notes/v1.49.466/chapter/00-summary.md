@@ -1,8 +1,12 @@
-> Following v1.49.465 — _Degree 324: Swallow + Hoh Rainforest Winter Storm All Layers_, v1.49.466 ships as Degree 325: Love Battery + Salmon-Bear-Eagle Convergence.
-# v1.49.466 — Degree 325: Love Battery + Salmon-Bear-Eagle Convergence
+> Following v1.49.465 — _Degree 324: Swallow + Hoh Rainforest Winter Storm All Layers (90% MILESTONE, COMPLETE PNW SOUNDSCAPE, FOUNDING MOMENT SUPPORTING ROSTER, FEMALE-VOCALIST THREAD EXTENDED, E=15 COMBINED, the founding-moment Sub Pop heavy grunge band **Swallow** with **Linda Hendrix** on vocals and **Steve Fisk** at the board documenting the 1989-1992 early Sub Pop wave from the supporting-roster position paired with the **Hoh Rainforest** winter storm documenting all four primary acoustic layers of the Pacific Northwest temperate rainforest simultaneously at storm intensity, together producing the engine's most asymmetric and most complete post-summit pairing at the 90% rotation milestone)_, v1.49.466 ships as Degree 325: Love Battery + Salmon-Bear-Eagle Convergence (POST-SUMMIT SECOND ARC OPENS, SYNTHESIS EVENT, THREE KEYSTONE SPECIES SIMULTANEOUSLY, E=15 COMBINED, 90.3%, Love Battery's heavy return at E=7 as the 221-325 dual-mode arc closes on the S36 track paired with the Pacific salmon, grizzly bear, and bald eagle converging at the spawning creek on the SPS track as the engine's first three-individually-documented-keystone-species simultaneous acoustic synthesis event).
+# v1.49.466 — Degree 325: Love Battery + Salmon-Bear-Eagle Convergence (POST-SUMMIT SECOND ARC OPENS, SYNTHESIS EVENT, THREE KEYSTONE SPECIES SIMULTANEOUSLY, E=15 COMBINED, 90.3%, Love Battery's heavy return at E=7 as the 221-325 dual-mode arc closes on the S36 track paired with the Pacific salmon, grizzly bear, and bald eagle converging at the spawning creek on the SPS track as the engine's first three-individually-documented-keystone-species simultaneous acoustic synthesis event)
 **Shipped:** 2026-04-03
-_Parse confidence: 0.50 — source `docs/release-notes/v1.49.466/README.md`_
+**Commits:** 2 | **Files:** 13 | **Lines:** +6730 / -5
+**Branch:** dev
+_Parse confidence: 0.90 — source `docs/release-notes/v1.49.466/README.md`_
 ## Summary
-This release carried 6 features; see `01-features.md`.
+No structured feature list was captured for this release; see the source README for prose details.
+It also produced retrospective content (lessons_learned, what_could_be_better, what_worked); see `03-retrospective.md`.
+11 lessons extracted; see `04-lessons.md` or the `RETROSPECTIVE-TRACKER.md`.
 ---
 **Prev:** [v1.49.465](../v1.49.465/00-summary.md) · **Next:** [v1.49.467](../v1.49.467/00-summary.md)

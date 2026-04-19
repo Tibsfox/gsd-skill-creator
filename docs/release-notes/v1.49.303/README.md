@@ -1,4 +1,4 @@
-# v1.49.303 — Degree 163: Porter Ray (Rainier Valley MC on Sub Pop, Deliberate Weighted Delivery, Community Testimony) + American Bittern (*Botaurus lentiginosus*, Pump-er-LUNK Booming, Esophageal Air Gulping, Stake Camouflage Posture, FIRST ARDEIDAE in SPS) — THE DEEP VOICE FROM THE HIDDEN PLACE THAT COMMANDS ATTENTION THROUGH WEIGHT
+# v1.49.303 — Degree 163: Porter Ray + American Bittern
 
 **Released:** 2026-04-02
 **Scope:** Seattle 360 + Sound of Puget Sound — paired degree release, **Porter Ray** enters as the **Rainier Valley MC** on **Sub Pop Records** whose deliberate, weighted vocal delivery documents the south-end Seattle geography in community testimony, while the **American Bittern** (*Botaurus lentiginosus*) enters as the **FIRST ARDEIDAE in SPS** delivering the bizarre **pump-er-LUNK** booming through esophageal air gulping from the densest freshwater marshes of the Puget Sound lowlands

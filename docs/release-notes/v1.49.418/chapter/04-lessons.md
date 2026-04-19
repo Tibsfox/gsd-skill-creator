@@ -1,0 +1,51 @@
+# Lessons — v1.49.418
+
+12 lessons extracted. Classification source: ⚙ rule-based · 🤖 LLM tiebreaker (needs review) · 👤 human.
+
+1. **Critical assessments of exceptional weight and specificity warrant formal engine-documentation register status rather than background contextual treatment.**
+   The Time magazine designation of Sleater-Kinney as America's best rock band is treated at first-class register resolution rather than as a background critical note. The lesson is that external critical assessments of sufficient weight and specificity should be surfaced as documentation registers rather than incorporated as casual context — the register treatment preserves the assessment's specific weight and verifiable authorship, and the register format makes the assessment legible within the engine's vocabulary rather than absorbed into general scene characterization.
+   _⚙ Status: `applied` (applied in `v1.49.455`) · lesson #8836_
+
+2. **Deliberate absences in instrumental or structural configurations warrant first-class documentation rather than treatment as deficits.**
+   The Sleater-Kinney two-guitars-and-no-bass configuration is documented as a deliberate structural choice rather than an absence of bass. The lesson is that engine documentation should register deliberate structural choices at their positive structural role rather than defaulting to a subtractive characterization ("band without bass") — the positive characterization preserves the choice's structural function and distinguishes deliberate absences from incidental absences.
+   _⚙ Status: `applied` (applied in `v1.49.457`) · lesson #8837_
+
+3. **Collective emergent identity is a distinct register from the sum of component identities and warrants first-class documentation resolution.**
+   The Sleater-Kinney trio and the SRKW three-pod clan are both documented as emergent-collective-identity registers rather than as the sum of their individual components. The lesson is that collective-emergence work in both cultural and biological domains should be documented as a first-class register rather than decomposed into individual-component summaries — the collective-emergence register preserves the categorical distinction between the emergent identity and the individual contributions.
+   _⚙ Status: `applied` (applied in `v1.49.472`) · lesson #8838_
+
+4. **Category-boundary extensions (social-acoustic E=9 alongside physical-kinetic E=9) should be surfaced explicitly rather than absorbed into existing category documentation.**
+   The multi-pod chorus's placement as the fourth E=9 event formally extends the E=9 category beyond physical-kinetic and electromagnetic-physical maxima to include social-acoustic emergence events. The lesson is that category-boundary extensions warrant explicit structural marking rather than silent absorption — the explicit marking preserves the categorical distinction and makes subsequent boundary extensions legible rather than invisible.
+   _⚙ Status: `applied` (applied in `v1.49.457`) · lesson #8839_
+
+5. **Label infrastructure contributions to regional music cultures warrant first-class documentation alongside the individual bands the labels release.**
+   The Kill Rock Stars continuity across Bikini Kill, Sleater-Kinney, and Unwound is documented at first-class register resolution rather than as background label information. The lesson is that label infrastructure is a first-class element of the Pacific Northwest music record and warrants documentation register status alongside the individual bands; the label register preserves the infrastructure's contribution and makes the community-conditions-that-enable-artistic-production thesis legible within the engine's vocabulary.
+   _⚙ Status: `investigate` · lesson #8840_
+
+6. **Combined-amplitude readings at structurally deliberate degrees warrant explicit record-keeping rather than arithmetic accident treatment.**
+   The E=17 combined-amplitude reading at degree 277 (Sleater-Kinney E=8 + multi-pod chorus E=9) is surfaced as a structural record rather than allowed to emerge as an arithmetic consequence of independent placements. The lesson is that combined-amplitude readings at deliberate structural degrees should be explicitly tracked and interpreted rather than left to arithmetic accumulation — the explicit tracking preserves the combined-amplitude register as a first-class engine metric.
+   _⚙ Status: `applied` (applied in `v1.49.455`) · lesson #8841_
+
+7. **Three-participant configurations (three-musician bands, three-pod clans) warrant structural documentation as a specific configuration register rather than as generic small-group characterization.**
+   Both halves of degree 277 document three-participant configurations (Sleater-Kinney's trio; the SRKW J+K+L pod clan). The lesson is that three-participant emergent configurations constitute a specific structural register distinct from generic small-group work, and the engine's documentation vocabulary should track three-participant configurations as a first-class register rather than absorbing them into generic small-group characterization; the specific-configuration register preserves the structural distinction between three-participant emergence and other small-group structures.
+   _⚙ Status: `applied` (applied in `v1.49.455`) · lesson #8842_
+
+8. **Shared infrastructure connecting multiple consecutive engine entries warrants cross-degree register documentation rather than per-degree repetition.**
+   The Kill Rock Stars continuity across three consecutive Olympia-sequence degrees (276-278) and the SRKW clan dialect shared across J, K, and L pods are both documented as cross-degree / cross-pod shared-infrastructure registers. The lesson is that shared-infrastructure work that spans multiple consecutive engine entries should be documented as a cross-entry register rather than repeated independently at each entry; the cross-entry register preserves the infrastructure's continuity and avoids the redundant repetition of the same infrastructure documentation across multiple degrees.
+   _⚙ Status: `applied` (applied in `v1.49.422`) · lesson #8843_
+
+9. **The Sleater-Kinney documentation at degree 277 named nine studio albums and the band's three-decade duration but did not enumerate the specific venues, label-internal decisions, or scene-internal contributions that constitute the band's primary-source corpus beyond the studio catalog.**
+   The degree 277 documentation names *Sleater-Kinney* (1995) through *The Center Won't Hold* (2019) and characterizes the band's technical configuration, catalog dynamics, and critical reception in general terms but does not enumerate the live recordings, tour archives, interview corpus, or related materials that constitute the wider primary-source documentation of Sleater-Kinney's contribution to American rock. Future three-decade-catalog documentation should include a brief primary-source enumeration beyond the studio catalog so that the band's contribution is anchored to the full range of available artifacts rather than to the studio-catalog spine alone.
+   _⚙ Status: `applied` (applied in `v1.49.433`) · lesson #8844_
+
+10. **The Orca Multi-Pod Chorus documentation at degree 277 named J pod, K pod, and L pod but did not characterize the documented frequency of superpod events, the seasonal distribution of multi-pod chorus recordings, or the acoustic-recording methodologies that anchor the SRKW acoustic corpus.**
+   The degree 277 documentation identifies the three SRKW pods that constitute the clan and characterizes the multi-pod chorus as a dense acoustic signal but does not characterize the documented frequency of superpod events (how often they occur), the seasonal or geographic distribution of the documented multi-pod chorus recordings, or the hydrophone-network and passive-acoustic-monitoring methodologies that anchor the Center for Whale Research's multi-pod chorus acoustic corpus. Future SRKW social-acoustic documentation should include frequency, distribution, and methodology characterization so that the multi-pod chorus register is anchored to quantitative and methodological context rather than to aggregate qualitative characterization alone.
+   _⚙ Status: `applied` (applied in `v1.49.425`) · lesson #8845_
+
+11. **The Kill Rock Stars continuity documentation named three consecutive Olympia-sequence bands (Bikini Kill, Sleater-Kinney, Unwound) but did not enumerate the wider Kill Rock Stars catalog beyond the Olympia-sequence entries.**
+   The degree 277 documentation references the Kill Rock Stars label founded by Slim Moon in 1991 and identifies three consecutive Olympia-sequence bands on the label across degrees 276-278 but does not enumerate the wider Kill Rock Stars catalog (Bratmobile, Heavens to Betsy, Elliott Smith, The Gossip, Deerhoof, Xiu Xiu, and others) that constitutes the label's broader contribution to the American independent music record. Future label-continuity documentation should include a brief wider-catalog enumeration so that the label's contribution is legible beyond the specific multi-degree sub-sequence within which it is being tracked.
+   _⚙ Status: `applied` (applied in `v1.49.419`) · lesson #8846_
+
+12. **The fourth-E=9-engine-maximum-event documentation at degree 277 named the three prior E=9 events but did not enumerate the structural criteria that distinguish E=9 events from E=8 events or characterize the distribution of E=9 events across the rotation.**
+   The degree 277 documentation identifies the multi-pod chorus as the fourth E=9 event and names the three prior events (lightning at 260, orca breach at 273, projected humpback breach at 278) but does not enumerate the structural criteria the engine uses to distinguish E=9 from E=8 placements or characterize the distribution of E=9 events across the full 360-degree rotation (whether E=9 events are expected to occur at a particular frequency, whether their placement follows a structural pattern, whether the engine anticipates additional E=9 events in the remaining 83 degrees). Future E=9-event documentation should include the criteria and distribution characterization so that the engine-maximum register is legible as a structured category rather than an accumulating list of exceptional…
+   _⚙ Status: `applied` (applied in `v1.49.441`) · lesson #8847_

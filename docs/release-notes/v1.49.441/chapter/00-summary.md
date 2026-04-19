@@ -1,8 +1,12 @@
-> Following v1.49.440 — _Degree 299: Love Battery (return) + Great Horned Owl War_, v1.49.441 ships as Degree 300: Pond (return) + Pileated Woodpecker Drum.
-# v1.49.441 — Degree 300: Pond (return) + Pileated Woodpecker Drum
+> Following v1.49.440 — _Degree 299: Love Battery (return, THIRD APPEARANCE, Punk/Psych, E=6, U-District Seattle, Sub Pop Records, Ron Nine, *Dayglo* 1992 + *Far Gone* 1993 + *Confusion Au Go-Go* 1995 + *E.S.P.* 1999, 221-233-299 three-entry arc, genre reframe from Psychedelic Rock to Punk/Psych, seventy-eight-degree span, THE WIDEST SINGLE-BAND SPREAD IN THE CURRENT SEQUENCE) + Great Horned Owl Territorial War (extended dueling hoots, E=6, *Bubo virginianus*, Strigidae, multi-night winter hooting battle, deep resonant hoo-hoo-hoo at 200-500 Hz male and 300-600 Hz female, 1-3 km carrying distance, territorial establishment November-December before the January-February nesting calendar, RETURN TO STRIGIDAE after the Northern Spotted Owl at degree 4, the Strigidae generalist-specialist contrast completed)_, v1.49.441 ships as Degree 300: Pond (return, SECOND APPEARANCE, Grunge/Indie, E=6, Fremont Seattle and Portland-originated, Sub Pop Records, Charlie Campbell, *Pond* 1993 + *The Practice of Joy Before Death* 1995 + *Rock Collection* 1997, the engine's FIVE-SIXTHS MARK entry at 300/360 = 83.3%, seventy-degree return interval from degree 230) + Pileated Woodpecker Full Drum Sequence (industrial machine-gun on dead Douglas-fir snag, E=7, *Dryocopus pileatus*, Picidae, THIRD APPEARANCE, ENGINE NAMESAKE SPECIES, 14-17 strikes per second on 2-4 foot diameter snag, 500 m to 1 km carrying distance at 200-2000 Hz broadband, E=5 → E=6 → E=7 three-appearance escalation arc across 246 degrees, 192-degree callback to degree 108 first double-maximum).
+# v1.49.441 — Degree 300: Pond (return, SECOND APPEARANCE, Grunge/Indie, E=6, Fremont Seattle and Portland-originated, Sub Pop Records, Charlie Campbell, *Pond* 1993 + *The Practice of Joy Before Death* 1995 + *Rock Collection* 1997, the engine's FIVE-SIXTHS MARK entry at 300/360 = 83.3%, seventy-degree return interval from degree 230) + Pileated Woodpecker Full Drum Sequence (industrial machine-gun on dead Douglas-fir snag, E=7, *Dryocopus pileatus*, Picidae, THIRD APPEARANCE, ENGINE NAMESAKE SPECIES, 14-17 strikes per second on 2-4 foot diameter snag, 500 m to 1 km carrying distance at 200-2000 Hz broadband, E=5 → E=6 → E=7 three-appearance escalation arc across 246 degrees, 192-degree callback to degree 108 first double-maximum)
 **Shipped:** 2026-04-03
-_Parse confidence: 0.50 — source `docs/release-notes/v1.49.441/README.md`_
+**Commits:** 0 | **Files:** 9
+**Branch:** dev
+_Parse confidence: 0.75 — source `docs/release-notes/v1.49.441/README.md`_
 ## Summary
-This release carried 6 features; see `01-features.md`.
+No structured feature list was captured for this release; see the source README for prose details.
+It also produced retrospective content (lessons_learned, what_could_be_better, what_worked); see `03-retrospective.md`.
+8 lessons extracted; see `04-lessons.md` or the `RETROSPECTIVE-TRACKER.md`.
 ---
 **Prev:** [v1.49.440](../v1.49.440/00-summary.md) · **Next:** [v1.49.442](../v1.49.442/00-summary.md)

@@ -1,4 +1,4 @@
-# v1.49.244 — Degree 104: Lemolo (Electronic) + Gray Jay — THE DREAM CIRCUIT AND THE SOFT WHISTLE — CORVIDAE QUINTET
+# v1.49.244 — Degree 104: Lemolo (Electronic) + Gray Jay — THE DREAM CIRCUIT AND THE SOFT WHISTLE
 
 **Released:** 2026-04-01
 **Scope:** Seattle 360 + Sound of Puget Sound — paired degree release, Corvidae quintet closer

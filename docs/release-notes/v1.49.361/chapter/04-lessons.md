@@ -1,0 +1,55 @@
+# Lessons — v1.49.361
+
+13 lessons extracted. Classification source: ⚙ rule-based · 🤖 LLM tiebreaker (needs review) · 👤 human.
+
+1. **Consecutive-degree lineage-entry pairs produce structurally denser documentation than single-degree lineage entries.**
+   The Brad (Pearl Jam/Gossard) and Truly (Soundgarden/Yamamoto) grunge founders pair at degrees 219-220 accomplishes more interpretive work than either entry alone — the cross-degree comparison establishes the register-inversion-via-side-project structural principle as operational across both Seattle bands rather than as a Brad-specific phenomenon, and the paired documentation is consequently more durable than single-degree documentation would be. Future lineage-entry opportunities should anticipate consecutive-degree pairing where structurally appropriate.
+   _⚙ Status: `applied` (applied in `v1.49.398`) · lesson #8106_
+
+2. **Family-level documentation can begin with specialist rather than generalist members without losing family-identification clarity.**
+   The FIRST PROCYONIDAE entry through the Ringtail rather than through the raccoon demonstrates that family-identification does not require leading with the most familiar member. The Ringtail's rare-Washington-resident status actually increases the family entry's interpretive density, because readers must engage with the specialist niche before mapping it onto the family as a whole. Future first-family entries should evaluate specialist-versus-generalist lead options based on interpretive density rather than on familiarity.
+   _⚙ Status: `applied` (applied in `v1.49.440`) · lesson #8107_
+
+3. **Post-peak equilibrium registers can persist across multiple degrees rather than resolving within one.**
+   The second consecutive E=10 equilibrium at degree 220 after degree 219's identical E=10 establishes that multi-degree narrative closure is a first-class documentation mode. The sustained equilibrium is interpretively distinct from the single-degree reset event documented at degree 219 alone, and the engine's amplitude-vocabulary should record multi-degree equilibrium sequences as a distinct register from single-degree reset events.
+   _⚙ Status: `applied` (applied in `v1.49.441`) · lesson #8108_
+
+4. **Clean-multiple degree placements function as structural checkpoints for completion events.**
+   Degree 220 falls on a clean multiple of 10, and the placement coincides with the eight-degree predator apex run closure, the grunge founders pair completion, and the FIRST PROCYONIDAE family entry. The convergence of three completion events on a clean-multiple degree is not coincidental but structural — the engine's scheduling privileges clean-multiple placements for family-level or narrative-arc completion events, and future clean-multiple degrees should anticipate completion-event clustering.
+   _⚙ Status: `applied` (applied in `v1.49.384`) · lesson #8109_
+
+5. **Side-project register transitions pair across founding-architect lineage entries.**
+   Yamamoto's Soundgarden heavy-rock-to-Truly-spacious-atmospheric register transition at degree 220 pairs with Gossard's Pearl Jam arena-rock-to-Brad-mellow-groove register inversion at degree 219. Both transitions instantiate the same structural principle — founding-architect side projects often deliberately invert the parent band's defining characteristics — and the paired documentation at consecutive degrees establishes the principle as general rather than band-specific.
+   _⚙ Status: `applied` (applied in `v1.49.395`) · lesson #8110_
+
+6. **Third-lineage-thread adjacencies increase band-entry structural density.**
+   Mark Pickerel's Screaming Trees membership alongside Hiro Yamamoto's Soundgarden membership in Truly adds a third grunge-lineage thread to the band's engine position. The density exceeds what single-lineage side projects achieve, and the engine's documentation should evaluate multi-lineage density when positioning bands with multiple founding-scene connections.
+   _⚙ Status: `investigate` · lesson #8111_
+
+7. **Surprising-amplitude-for-body-size documentation establishes a register distinct from body-size-proportional amplitude.**
+   The Ringtail's 1 kg body producing bark volumes comparable to larger carnivores demonstrates that acoustic capability envelope is not linearly related to body mass. The register is interpretively valuable because it documents acoustic specialization as a standalone adaptation, and future SPS entries for small-bodied highly-vocal species (pika, golden-crowned kinglet, winter wren) can extend the register.
+   _⚙ Status: `applied` (applied in `v1.49.398`) · lesson #8112_
+
+8. **Combined-mode vocalization documentation across consecutive degrees establishes a recurring engine register.**
+   The American Badger growl+hiss at degree 219 and the Ringtail bark+chitter at degree 220 both document two-part vocalizations that combine distinct acoustic components, and the paired documentation across consecutive degrees establishes combined-mode vocalizations as a recurring SPS acoustic-structure register rather than as an isolated documentation event. Future combined-mode vocalizations should be positioned as register extensions rather than as novel registers.
+   _⚙ Status: `applied` (applied in `v1.49.397`) · lesson #8113_
+
+9. **Nocturnal-observer-as-native-register documents darkness as positive territory.**
+   Truly's late-night-designed atmospheric music and the Ringtail's strictly-nocturnal canyon-navigation together demonstrate that nocturnality is a positive native register rather than an absence of daylight. The cross-axis structural principle organizes the degree 220 pair and joins the engine's Q3 cross-axis vocabulary as the eighth documented register, and future nocturnal-specialist or late-night-focused entries can extend the register.
+   _⚙ Status: `investigate` · lesson #8114_
+
+10. **Historical cultural practices (miner's cat) add interpretive weight beyond ecological and acoustic profiles.**
+   The Ringtail's "miner's cat" documentation extends the entry's interpretive territory beyond body measurements, vocal profiles, and distribution maps into cultural-ecology terrain. The practice documents a rare mutualistic wildlife-human coexistence record, and the cultural layer increases the entry's durability as documentation. Future SPS entries with documented human-interaction histories should incorporate cultural-ecology layers when the historical record supports them.
+   _⚙ Status: `investigate` · lesson #8115_
+
+11. **Truly's commercial obscurity may limit reader recognition of the Soundgarden lineage significance.**
+   Unlike Brad, whose Pearl Jam lineage is immediately recognizable through Stone Gossard's highly-documented career, Truly's Soundgarden lineage depends on reader familiarity with Hiro Yamamoto's 1984-1989 bassist tenure before the band's commercial breakthrough. The documentation notes the pre-breakthrough timing explicitly, but readers unfamiliar with Soundgarden's early discography may not immediately grasp Yamamoto's foundational role, and future Soundgarden-related engine entries (if any) may need to re-introduce the lineage context to maintain accessibility.
+   _⚙ Status: `investigate` · lesson #8116_
+
+12. **The Ringtail's Washington population size is not precisely documented.**
+   The current research summarizes the species as "rare" and "at the extreme northern edge of its range" but does not cite a specific population estimate. Washington Department of Fish and Wildlife distribution data indicates presence in the Columbia River Gorge and southeastern canyon habitats but does not provide a state-level census figure, and future Ringtail documentation would benefit from specific population estimates if they become available through systematic surveys of canyon habitats.
+   _⚙ Status: `investigate` · lesson #8117_
+
+13. **The "miner's cat" historical practice documentation relies on regional folklore sources more than formal historical archives.**
+   The cultural-history layer adds interpretive weight to the Ringtail entry, but the primary documentation sources are regional folklore and informal historical records rather than formal archival studies of nineteenth-century mining camp practices. Future cultural-ecology documentation would benefit from targeted archival research in Pacific Northwest mining-era records (Colville, Republic, Roslyn, Wallace) to identify primary-source accounts of ringtail keeping and mousing practice.
+   _⚙ Status: `investigate` · lesson #8118_

@@ -1,8 +1,12 @@
-> Following v1.49.472 — _Degree 331: Helms Alee + Orca Echolocation Full_, v1.49.473 ships as Degree 332: Botch + Polyrhythm Woodpecker+River+Frog.
-# v1.49.473 — Degree 332: Botch + Polyrhythm Woodpecker+River+Frog
+> Following v1.49.472 — _Degree 331: Helms Alee + Orca Echolocation Full Sequence (CONTEMPORARY METAL TEXTURE, COMPLETE ORCA REPERTOIRE, LAYERED MULTI-CHANNEL COMMUNICATION, E=14 COMBINED, 91.9%, Helms Alee's Capitol Hill sludge entry at E=7 as the engine's first three-piece three-vocalist metal arrangement on Sargent House paired with the Southern Resident Killer Whale's full three-component acoustic sequence — click trains at 40-120 kHz, signature whistles and pod dialects at 1-18 kHz, and breach impact at 120-160 dB — documented in Haro Strait at E=7 as the engine's most complete orca acoustic documentation across the 331 degrees shipped)_, v1.49.473 ships as Degree 332: Botch + Woodpecker-River-Frog Polyrhythm (METAL ARC CLOSES, MOST COMPLEX RHYTHM, E=18 COMBINED, 92.2%, Botch's Tacoma mathcore entry at E=9 on Hydra Head Records paired with the Pileated Woodpecker + river standing wave + Pacific Tree Frog three-stream polyrhythm at E=9 as the engine's second post-Summit E=18 combined reading and as the closing degree of the Metal Arc that opened at degree 329 with The Accused, with Dave Verellen, Dave Knudson, Brian Cook, Tim Latona, and Jason Hamacher as the Botch lineup, and with *Dryocopus pileatus* drumming on old-growth snags, Pacific Northwest spring snowmelt river discharge, and *Pseudacris regilla* chorus choruses operating as three simultaneous independent rhythmic streams at zero correlation and zero shared meter).
+# v1.49.473 — Degree 332: Botch + Woodpecker-River-Frog Polyrhythm (METAL ARC CLOSES, MOST COMPLEX RHYTHM, E=18 COMBINED, 92.2%, Botch's Tacoma mathcore entry at E=9 on Hydra Head Records paired with the Pileated Woodpecker + river standing wave + Pacific Tree Frog three-stream polyrhythm at E=9 as the engine's second post-Summit E=18 combined reading and as the closing degree of the Metal Arc that opened at degree 329 with The Accused, with Dave Verellen, Dave Knudson, Brian Cook, Tim Latona, and Jason Hamacher as the Botch lineup, and with *Dryocopus pileatus* drumming on old-growth snags, Pacific Northwest spring snowmelt river discharge, and *Pseudacris regilla* chorus choruses operating as three simultaneous independent rhythmic streams at zero correlation and zero shared meter)
 **Shipped:** 2026-04-03
-_Parse confidence: 0.50 — source `docs/release-notes/v1.49.473/README.md`_
+**Commits:** 5 | **Files:** 9
+**Branch:** dev
+_Parse confidence: 0.90 — source `docs/release-notes/v1.49.473/README.md`_
 ## Summary
-This release carried 7 features; see `01-features.md`.
+No structured feature list was captured for this release; see the source README for prose details.
+It also produced retrospective content (lessons_learned, what_could_be_better, what_worked); see `03-retrospective.md`.
+14 lessons extracted; see `04-lessons.md` or the `RETROSPECTIVE-TRACKER.md`.
 ---
 **Prev:** [v1.49.472](../v1.49.472/00-summary.md) · **Next:** [v1.49.474](../v1.49.474/00-summary.md)

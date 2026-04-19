@@ -1,8 +1,12 @@
-> Following v1.49.384 — _Degree 243: The Frantics + Pacific Lamprey_, v1.49.385 ships as Degree 244: The Kingsmen + White Sturgeon.
-# v1.49.385 — Degree 244: The Kingsmen + White Sturgeon
+> Following v1.49.384 — _Degree 243: The Frantics (Surf/Garage, E=6, Seattle, Seafair/Dolton Records, SEATTLE CHAPTER OF NORTHWEST SOUND, GEOGRAPHIC TRIO COMPLETION) + Pacific Lamprey (*Lampetra tridentata*, E=1, silent/sucker, FIRST PETROMYZONTIDAE, TIES ABSOLUTE ENGINE MINIMUM, 450 MILLION YEARS OF JAWLESS-VERTEBRATE EVOLUTION, FIRST NATIONS FIRST FOODS SACRED SPECIES)_, v1.49.385 continues the arc.
+# v1.49.385
 **Shipped:** 2026-04-03
-_Parse confidence: 0.50 — source `docs/release-notes/v1.49.385/README.md`_
+**Commits:** 0 | **Files:** 9
+**Branch:** dev
+_Parse confidence: 0.60 — source `docs/release-notes/v1.49.385/README.md`_
 ## Summary
-This release carried 1 feature; see `01-features.md`.
+No structured feature list was captured for this release; see the source README for prose details.
+It also produced retrospective content (lessons_learned, what_could_be_better, what_worked); see `03-retrospective.md`.
+13 lessons extracted; see `04-lessons.md` or the `RETROSPECTIVE-TRACKER.md`.
 ---
 **Prev:** [v1.49.384](../v1.49.384/00-summary.md) · **Next:** [v1.49.386](../v1.49.386/00-summary.md)

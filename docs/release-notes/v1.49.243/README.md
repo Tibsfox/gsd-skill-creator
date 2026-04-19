@@ -1,4 +1,4 @@
-# v1.49.243 — Degree 103: Briana Marela (Electronic) + Steller's Jay (Raucous) — THE LAYERED DISSOLUTION AND THE ALARM — DOUBLE RETURN
+# v1.49.243 — Degree 103: Briana Marela (Electronic) + Steller's Jay (Raucous) — THE LAYERED DISSOLUTION AND THE ALARM
 
 **Released:** 2026-04-01
 **Scope:** Seattle 360 + Sound of Puget Sound — paired degree release, double return degree

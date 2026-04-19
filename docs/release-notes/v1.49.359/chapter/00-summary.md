@@ -1,8 +1,12 @@
-> Following v1.49.358 — _Degree 217: Pretty Girls Make Graves + Grizzly Bear roar_, v1.49.359 ships as Degree 218: The Blood Brothers + Grizzly Bear jaw-pop.
-# v1.49.359 — Degree 218: The Blood Brothers + Grizzly Bear jaw-pop
+> Following v1.49.358 — _Degree 217: Pretty Girls Make Graves (Indie Rock / Post-Punk Revival, E=6, Capitol Hill, Seattle, Washington, 2001-2007, **Matador Records**, **Andrea Zollo** / **Nick DeWitt** / **Derek Fudesco** / **Nathen Johnson**, *Good Health* (2002) / *The New Romance* (2003) / *Élan Vital* (2006), **102-DEGREE CALLBACK** from degree 115) + Grizzly Bear roar (*Ursus arctos horribilis*, dominance roar, E=8, **THIRD E=8 IN ENGINE HISTORY**, **NORTH CASCADES Ecosystem**, functionally extirpated with fewer than 10 confirmed individuals, 50-400 Hz low-frequency dominant with infrasonic energy below 20 Hz, 100+ dB amplitude at 10 meters, 1-3 km forest carrying distance)_, v1.49.359 ships as Degree 218: The Blood Brothers (Post-Hardcore, E=8, Shoreline, Washington, FIRST POST-HARDCORE AT E=8, SHORELINE ENTERS THE ENGINE, Johnny Whitney / Jordan Blilie dual-vocal attack, Cody Votolato / Morgan Henderson / Mark Gajadhar, Shorewood High School formation 1997, Artist Direct / V2 Records, Ross Robinson production on *Burn, Piano Island, Burn*) + Grizzly Bear jaw-pop (*Ursus arctos horribilis*, E=7, SECOND GRIZZLY BEAR ENTRY, CLOSE-RANGE FINAL WARNING, threat-escalation stage 3 of 5, 1,200+ psi bite force, broadband impulse 200-5,000 Hz, Ursidae family, North Cascades recovery zone).
+# v1.49.359 — Degree 218: The Blood Brothers (Post-Hardcore, E=8, Shoreline, Washington, FIRST POST-HARDCORE AT E=8, SHORELINE ENTERS THE ENGINE, Johnny Whitney / Jordan Blilie dual-vocal attack, Cody Votolato / Morgan Henderson / Mark Gajadhar, Shorewood High School formation 1997, Artist Direct / V2 Records, Ross Robinson production on *Burn, Piano Island, Burn*) + Grizzly Bear jaw-pop (*Ursus arctos horribilis*, E=7, SECOND GRIZZLY BEAR ENTRY, CLOSE-RANGE FINAL WARNING, threat-escalation stage 3 of 5, 1,200+ psi bite force, broadband impulse 200-5,000 Hz, Ursidae family, North Cascades recovery zone)
 **Shipped:** 2026-04-02
-_Parse confidence: 0.50 — source `docs/release-notes/v1.49.359/README.md`_
+**Commits:** 0 | **Files:** 9
+**Branch:** dev
+_Parse confidence: 0.75 — source `docs/release-notes/v1.49.359/README.md`_
 ## Summary
 No structured feature list was captured for this release; see the source README for prose details.
+It also produced retrospective content (lessons_learned, what_could_be_better, what_worked); see `03-retrospective.md`.
+13 lessons extracted; see `04-lessons.md` or the `RETROSPECTIVE-TRACKER.md`.
 ---
 **Prev:** [v1.49.358](../v1.49.358/00-summary.md) · **Next:** [v1.49.360](../v1.49.360/00-summary.md)

@@ -1,8 +1,12 @@
-> Following v1.49.462 — _Degree 321: Gas Huffer + Night Chorus_, v1.49.463 ships as Degree 322: Pond + Cascade Rock Avalanche.
-# v1.49.463 — Degree 322: Pond + Cascade Rock Avalanche
+> Following v1.49.462 — _Degree 321: Gas Huffer + Spring Pond Night Chorus (THE AMPHETAMINE REPTILE ENTRY, FREMONT DEBUTS, FIRST MULTI-SPECIES SIMULTANEOUS NIGHT SOUNDSCAPE, THREE-LAYER VERTICAL ACOUSTIC STACK, E=14 COMBINED, 89.2%, Gas Huffer's Grunge/Punk at E=7 as the first AmRep-catalog Seattle entry in the engine and the first Fremont neighborhood band paired with the Pacific Chorus Frog + Great Horned Owl + Western Field Cricket spring pond chorus at E=7 through superposition — three musicians in three registers on the S36 side and three species in three non-masking frequency bands on the SPS side meeting at the same E=7 mechanism of simultaneous layering)_, v1.49.463 ships as Degree 322: Pond + Cascade Rock Avalanche (FREMONT SECOND ENTRY, PHIL EK FIRST APPEARANCE, GEOPHYSICS RETURNS, E=15 COMBINED, 89.4%, Pond's Sub Pop secondary-roster grunge entry at E=7 paired with the Cascade Range cliff-face rock avalanche at E=8 as the post-Summit cooldown's second high-energy interior peak, where a working Fremont grunge band at grunge's genre-executed register pairs with the self-amplifying multi-ton percussion of a mountain slope letting go, with Phil Ek — later the producer of Fleet Foxes, Built to Spill, and Band of Horses — anchoring the S36 side from the drum kit at the origin point of one of the Pacific Northwest's most consequential production careers, and the Cascade Range's volcanic and glacial geology anchoring the SPS side with the acoustic event of gravity converting fractured rock into sound).
+# v1.49.463 — Degree 322: Pond + Cascade Rock Avalanche (FREMONT SECOND ENTRY, PHIL EK FIRST APPEARANCE, GEOPHYSICS RETURNS, E=15 COMBINED, 89.4%, Pond's Sub Pop secondary-roster grunge entry at E=7 paired with the Cascade Range cliff-face rock avalanche at E=8 as the post-Summit cooldown's second high-energy interior peak, where a working Fremont grunge band at grunge's genre-executed register pairs with the self-amplifying multi-ton percussion of a mountain slope letting go, with Phil Ek — later the producer of Fleet Foxes, Built to Spill, and Band of Horses — anchoring the S36 side from the drum kit at the origin point of one of the Pacific Northwest's most consequential production careers, and the Cascade Range's volcanic and glacial geology anchoring the SPS side with the acoustic event of gravity converting fractured rock into sound)
 **Shipped:** 2026-04-03
-_Parse confidence: 0.50 — source `docs/release-notes/v1.49.463/README.md`_
+**Commits:** 0 | **Files:** 9
+**Branch:** dev
+_Parse confidence: 0.75 — source `docs/release-notes/v1.49.463/README.md`_
 ## Summary
-This release carried 6 features; see `01-features.md`.
+No structured feature list was captured for this release; see the source README for prose details.
+It also produced retrospective content (lessons_learned, what_could_be_better, what_worked); see `03-retrospective.md`.
+11 lessons extracted; see `04-lessons.md` or the `RETROSPECTIVE-TRACKER.md`.
 ---
 **Prev:** [v1.49.462](../v1.49.462/00-summary.md) · **Next:** [v1.49.464](../v1.49.464/00-summary.md)

@@ -1,23 +1,30 @@
 # Retrospective — v1.49.516
 
+## What Worked
+
+- **The E=3 simultaneous breakout.** Both tracks independently reached E=3 at the same degree. The combined energy jump from 4 (degree 14) to 6 (degree 15) is the largest inter-degree energy increase since degree 1, and the fact that it happened on both sides without coordination is the clearest evidence yet that the paired engine is finding structural resonance rather than decorative coincidence.
+- **The UW pipeline reaching three documented products in three consecutive degrees.** Seales (Anchor, 13), Parks (Export, 14), Marriott (Builder-Stayer, 15). One institution, three career archetypes, three adjacent degrees. The institutional depth is now sufficient for the pipeline to function as a primary engine reference.
+- **The communication paradigm triple closing at degree 15.** Active (Pioneer), passive (Echo), observational (TIROS). Three modes, three degrees, one complete taxonomy. The engine's NASA track now has structural coverage rather than just chronological coverage.
+- **The Rachmaninoff dedication landing on April 1.** The calendar-date convention held: Rachmaninoff's birthday and TIROS-1's launch date align exactly (87 years apart). The dedication logic continues to produce genuine thematic alignments rather than arbitrary pairings.
+- **The Wilson's anti-closure as structural counterpart to the MacGillivray's resolution.** Two consecutive Parulidae deployed with opposite song structures is the engine's clearest demonstration so far that within-family adjacent-degree pairing produces contrastive rather than redundant documentation.
+- **The moon jellyfish as a distributed-observation organism.** The jellyfish bloom architecture maps onto the TIROS constellation model, which maps onto Marriott's decade-long local discography. Four-track synchrony on the distributed-persistence principle.
+
+## What Could Be Better
+
+- **The dedication chain needs a composer-composer pairing next.** Rachmaninoff (degree 15) is the first composer-musician dedication. Future dedications could extend the thread with other classical composers whose birthdays align with mission dates, but the pattern is not yet a repeatable method.
+- **The Builder-Stayer pattern has only one data point.** Marriott is the first Builder-Stayer in the engine. A second Builder-Stayer at a later degree would confirm the pattern's generality; until then, the category is provisional.
+- **The engine's migrant documentation is accelerating faster than the habitat documentation.** Three migrants in sixteen degrees (Pacific-slope Flycatcher, MacGillivray's Warbler, Wilson's Warbler) while only eleven habitats are covered. The rate may need to rebalance to keep migrant-habitat coverage matched.
+- **The trumpet pair is E=3 on both sides but has only two data points.** Standifer and Marriott both at E=3 is suggestive but not conclusive. A third trumpeter would test whether the instrument is inherently E=3-demanding or whether two data points is coincidence.
+
 ## Lessons Learned
 
-1. **The energy breakout is a structural event.** After ten degrees in the E=1/E=2 quiet zone (degrees 5-14), degree 15 jumps to E=3 on both tracks. Combined 6. The quiet zone was not a permanent state -- it was a phase, and it has ended.
-
-2. **The UW pipeline produces three structurally different outputs.** Anchor (Seales/13), Export (Parks/14), Builder-Stayer (Marriott/15). Three consecutive degrees, one institution, three patterns. The pipeline is the engine's most fully documented institutional system.
-
-3. **Consecutive Parulidae reveal opposite endings.** MacGillivray's resolves (A-A-A-B). Wilson's accelerates without resolving. Within-family pairs continue to reveal contrasting strategies: Turdidae (timbre/melody), Paridae (tempo/pitch), Parulidae (resolution/anti-resolution).
-
-4. **Piano lineage CLOSED at degree 14 -- trumpet takes the stage.** The carry-forward from degree 14 declared the four-pianist arc complete. Degree 15 shifts to brass. The piano remains documented; the engine moves to the next instrument.
-
+1. **The energy breakout is a structural event, not a coincidence.** After ten degrees in the E=1/E=2 quiet zone (degrees 5-14), degree 15 jumps to E=3 on both tracks. Combined 6. The quiet zone was not a permanent state — it was a phase, and it has ended. The engine's energy profile is governed by structural rules, not by arbitrary selection.
+2. **The UW pipeline produces three structurally different outputs.** Anchor (Seales/13), Export (Parks/14), Builder-Stayer (Marriott/15). Three consecutive degrees, one institution, three patterns. The pipeline is the engine's most fully documented institutional system and now functions as a primary reference frame.
+3. **Consecutive Parulidae reveal opposite endings.** MacGillivray's resolves (A-A-A-B). Wilson's accelerates without resolving. Within-family pairs continue to reveal contrasting strategies: Turdidae (timbre/melody), Paridae (tempo/pitch), Parulidae (resolution/anti-resolution). The engine uses taxonomic repetition to map structural opposites.
+4. **Piano lineage CLOSED at degree 14 — trumpet takes the stage.** The carry-forward from degree 14 declared the four-pianist arc complete. Degree 15 shifts to brass. The piano remains documented; the engine moves to the next instrument. Instrument transitions are engine-level structural events.
 5. **TIROS-1 introduces the continuous-observation paradigm.** Third communication mode after active transmission (Pioneer 5, degree 13) and passive reflection (Echo 1, degree 14). Not a single dramatic measurement but thousands of routine observations from a fixed vantage. The institutional model of persistent coverage.
-
-6. **Origin Records is the engine's first Seattle-specific label.** Blue Note (Parks) is national. ECM (Frisell, Priester, Peacock, Parks) is European. Origin Records is explicitly local -- documenting the Seattle jazz community from within.
-
-7. **Three communication paradigms now operational.** Active (Pioneer), passive (Echo), observational (TIROS). The engine's NASA track has a complete communication taxonomy.
-
-8. **The Rachmaninoff dedication links weather to music architecturally.** Rachmaninoff's compositions develop like weather systems: small harmonic signals accumulating into structures of enormous power. The Prelude in C-sharp minor -- calm, violence, calm, but the second calm is not the first because the violence changed everything. Dynamic range from pianissimo to fortissimo parallels TIROS's sensor range from shadow to bright cloud-top. The exile's perspective and the satellite's perspective are the same: the view from distance that creates clarity.
-
-9. **Moon jellyfish as distributed sensor network.** Aurelia aurita blooms in aggregations so dense the water becomes living tissue. Each individual is a simple node (no brain, nerve net only). The aggregate achieves saturation coverage. TIROS-1 was the first node in a constellation that would bloom to global coverage -- each satellite identical, simple, independently sampling its local environment.
-
-10. **Degree 14's colonial organism model finds its continuation.** The Portuguese man o' war (degree 14) was a colonial organism -- four polyp types integrated into one body. The moon jellyfish bloom (degree 15) is the next scale up: not integration of specialists within one organism, but multiplication of identical simple organisms achieving coverage through numbers.
+6. **Origin Records is the engine's first Seattle-specific label.** Blue Note (Parks) is national. ECM (Frisell, Priester, Peacock, Parks) is European. Origin Records is explicitly local — documenting the Seattle jazz community from within. The label-as-local-infrastructure model enters the engine at degree 15.
+7. **Three communication paradigms now operational as a complete taxonomy.** Active (Pioneer), passive (Echo), observational (TIROS). The engine's NASA track has structural coverage rather than just chronological coverage. Future missions may combine or extend these modes.
+8. **The Rachmaninoff dedication links weather to music architecturally.** Rachmaninoff's compositions develop like weather systems: small harmonic signals accumulating into structures of enormous power. Dynamic range from pianissimo to fortissimo parallels TIROS's sensor range from shadow to bright cloud-top. The exile's perspective and the satellite's perspective are the same: the view from distance that creates clarity.
+9. **Moon jellyfish as distributed sensor network.** *Aurelia aurita* blooms in aggregations so dense the water becomes living tissue. Each individual is a simple node (no brain, nerve net only). The aggregate achieves saturation coverage. TIROS-1 was the first node in a constellation that would bloom to global coverage — each satellite identical, simple, independently sampling its local environment.
+10. **Degree 14's colonial organism model finds its continuation.** The Portuguese man o' war (degree 14) was a colonial organism — four polyp types integrated into one body. The moon jellyfish bloom (degree 15) is the next scale up: not integration of specialists within one organism, but multiplication of identical simple organisms achieving coverage through numbers.

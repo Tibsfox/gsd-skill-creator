@@ -1,4 +1,4 @@
-# v1.49.242 — Degree 102: Campfire OK + American Crow — THE ORGANIC CIRCUIT AND THE CAW — CORVIDAE TRIO
+# v1.49.242 — Degree 102: Campfire OK + American Crow — THE ORGANIC CIRCUIT AND THE CAW
 
 **Released:** 2026-04-01
 **Scope:** Seattle 360 + Sound of Puget Sound — paired degree release, post-centennial continuation, Corvidae trio completion

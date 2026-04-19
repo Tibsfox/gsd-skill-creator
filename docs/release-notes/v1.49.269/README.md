@@ -1,4 +1,4 @@
-# v1.49.269 — Degree 129: Pat O'Day (KJR 950 AM Top 40 Radio King, E=4) + Canada Goose — THE RADIO ARC EXTENDS BACKWARD — TWELFTH CONSECUTIVE ANATIDAE — FIRST BRANTA GENUS — GOOSE COMPARISON PAIR BEGINS — THE UBIQUITOUS DOMINANT VOICE MIRRORED ON BOTH AXES
+# v1.49.269 — Degree 129: Pat O'Day + Canada Goose — THE RADIO ARC EXTENDS BACKWARD
 
 **Released:** 2026-04-02
 **Scope:** Seattle 360 + Sound of Puget Sound — paired degree release, radio arc extends backward from KCMU FM (126–128) to KJR AM (129) on the artist axis, twelfth consecutive Anatidae extends the family-streak record and introduces the first *Branta* genus on the species axis, goose comparison pair begins with Cackling Goose scheduled at degree 130

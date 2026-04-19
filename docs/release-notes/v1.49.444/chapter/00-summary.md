@@ -1,8 +1,12 @@
-> Following v1.49.443 — _Degree 302: Truly + Cougar Scream_, v1.49.444 ships as Degree 303: Brad + Gray Wolf Pack Howl.
-# v1.49.444 — Degree 303: Brad + Gray Wolf Pack Howl
+> Following v1.49.443 — _Degree 302: Truly (return, Grunge/Alt, E=6, Capitol Hill Seattle, Island Records, Robert Roth + Hiro Yamamoto (ex-Soundgarden) + Mark Pickerel (ex-Screaming Trees), *Fast Stories from Kid Coma* 1995 + *Feeling You Up* 1996 + *Sunset Gun* 2002, Jack Endino production, SECOND APPEARANCE, eighty-two-degree span from degree 220) + Cougar Full Scream (escalating blood-curdling shrieks, E=9, *Puma concolor couguar*, Felidae, FELIDAE MAX, resident Pacific Northwest forest, 300-3,000 Hz human-like timbre, 1+ km carrying distance, THREE CONSECUTIVE E=9 STREAK OPENS, first E=9 in the eight-degree apex predator arc that opened at the Roosevelt Elk Bugle at degree 301)_, v1.49.444 ships as Degree 303: Brad (Post-Grunge, E=5, Shawn Smith + Stone Gossard + Regan Hagar, *Shame* 1993, R&B undertow in the Seattle post-grunge register) + Gray Wolf Pack Howl (FIRST CANIDAE, E=9, *Canis lupus*, multi-voice harmonic pack howl, 10 km terrain carry, North Cascades + Okanogan Highlands + Blue Mountains recovery packs, natural recolonization via Idaho and British Columbia dispersal, the second degree of the three-degree E=9 mammal streak at 302-303-304).
+# v1.49.444 — Degree 303: Brad (Post-Grunge, E=5, Shawn Smith + Stone Gossard + Regan Hagar, *Shame* 1993, R&B undertow in the Seattle post-grunge register) + Gray Wolf Pack Howl (FIRST CANIDAE, E=9, *Canis lupus*, multi-voice harmonic pack howl, 10 km terrain carry, North Cascades + Okanogan Highlands + Blue Mountains recovery packs, natural recolonization via Idaho and British Columbia dispersal, the second degree of the three-degree E=9 mammal streak at 302-303-304)
 **Shipped:** 2026-04-03
-_Parse confidence: 0.50 — source `docs/release-notes/v1.49.444/README.md`_
+**Commits:** 0 | **Files:** 9
+**Branch:** dev
+_Parse confidence: 0.75 — source `docs/release-notes/v1.49.444/README.md`_
 ## Summary
-This release carried 6 features; see `01-features.md`.
+No structured feature list was captured for this release; see the source README for prose details.
+It also produced retrospective content (lessons_learned, what_could_be_better, what_worked); see `03-retrospective.md`.
+8 lessons extracted; see `04-lessons.md` or the `RETROSPECTIVE-TRACKER.md`.
 ---
 **Prev:** [v1.49.443](../v1.49.443/00-summary.md) · **Next:** [v1.49.445](../v1.49.445/00-summary.md)

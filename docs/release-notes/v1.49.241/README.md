@@ -1,4 +1,4 @@
-# v1.49.241 — Degree 101: Hecuba + Common Raven Pair — THE POST-CENTENNIAL — THE KINETIC SURGE AND THE DUET
+# v1.49.241 — Degree 101: Hecuba + Common Raven Pair — THE POST-CENTENNIAL
 
 **Released:** 2026-04-01
 **Scope:** Seattle 360 + Sound of Puget Sound — paired degree release, first post-centennial degree, species-pair continuation

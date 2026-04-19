@@ -1,8 +1,12 @@
-> Following v1.49.476 — _Degree 335: Soundgarden + Hurricane Ridge Wind_, v1.49.477 ships as Degree 336: Alice in Chains + Wolf Howl+Thunder.
-# v1.49.477 — Degree 336: Alice in Chains + Wolf Howl+Thunder
+> Following v1.49.476 — _Degree 335: Soundgarden + Hurricane-Force Ridge Wind (THE VOICE AND THE HOWL, E=18 COMBINED, METAL SUMMIT POSITION 3 OF 4, SECOND CONSECUTIVE E=18, CHRIS CORNELL AND KIM THAYIL ON S36, CASCADE CREST ABOVE TREELINE ON SPS, SUSTAINED MAXIMUM INTENSITY ACROSS BOTH TRACKS, SUPERUNKNOWN AS ALBUM-LENGTH CALIBRATION, BEAUFORT 12 AS ATMOSPHERIC CALIBRATION, THE HOWL THAT DOES NOT STOP PAIRED WITH THE VOICE THAT DOES NOT BREAK)_, v1.49.477 ships as Degree 336: Alice in Chains + Gray Wolf Howl Cut by Thunder Crack (THE METAL SUMMIT CLOSES, E=18 COMBINED, HELD BEAUTY INTERRUPTED, BEACON HILL COMPLETES THE SEATTLE GEOGRAPHIC ARC, THIRD CONSECUTIVE E=18 IN THE METAL SUMMIT INNER ARC, GUITAR-VOCAL HARMONY SYSTEM AT MAXIMUM EMOTIONAL DENSITY, WOLF RECOVERY NARRATIVE AT PACIFIC NORTHWEST ECOLOGICAL RESTORATION, ANDREW WOOD DOUBLE TRIBUTE ACROSS DEGREES 335 AND 336).
+# v1.49.477 — Degree 336: Alice in Chains + Gray Wolf Howl Cut by Thunder Crack (THE METAL SUMMIT CLOSES, E=18 COMBINED, HELD BEAUTY INTERRUPTED, BEACON HILL COMPLETES THE SEATTLE GEOGRAPHIC ARC, THIRD CONSECUTIVE E=18 IN THE METAL SUMMIT INNER ARC, GUITAR-VOCAL HARMONY SYSTEM AT MAXIMUM EMOTIONAL DENSITY, WOLF RECOVERY NARRATIVE AT PACIFIC NORTHWEST ECOLOGICAL RESTORATION, ANDREW WOOD DOUBLE TRIBUTE ACROSS DEGREES 335 AND 336)
 **Shipped:** 2026-04-03
-_Parse confidence: 0.50 — source `docs/release-notes/v1.49.477/README.md`_
+**Commits:** 0 | **Files:** 9
+**Branch:** dev
+_Parse confidence: 0.75 — source `docs/release-notes/v1.49.477/README.md`_
 ## Summary
-This release carried 6 features; see `01-features.md`.
+No structured feature list was captured for this release; see the source README for prose details.
+It also produced retrospective content (lessons_learned, what_could_be_better, what_worked); see `03-retrospective.md`.
+16 lessons extracted; see `04-lessons.md` or the `RETROSPECTIVE-TRACKER.md`.
 ---
 **Prev:** [v1.49.476](../v1.49.476/00-summary.md) · **Next:** [v1.49.478](../v1.49.478/00-summary.md)

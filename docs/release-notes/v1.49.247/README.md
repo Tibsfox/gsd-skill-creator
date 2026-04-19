@@ -1,4 +1,4 @@
-# v1.49.247 — Degree 107: Chong the Nomad (production) + Acorn Woodpecker — THE PRODUCTION ARCHITECTURE AND THE COLONIAL WOODPECKER — PICIDAE RETURNS
+# v1.49.247 — Degree 107: Chong the Nomad (production) + Acorn Woodpecker — THE PRODUCTION ARCHITECTURE AND THE COLONIAL WOODPECKER
 
 **Released:** 2026-04-01
 **Scope:** Seattle 360 + Sound of Puget Sound — paired degree release, production-lens ninth return artist and Picidae family reopening

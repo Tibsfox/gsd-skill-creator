@@ -1,8 +1,12 @@
-> Following v1.49.436 — _Degree 295: Malfunkshun + Rhinoceros Auklet_, v1.49.437 ships as Degree 296: Mother Love Bone + Peregrine Stoop.
-# v1.49.437 — Degree 296: Mother Love Bone + Peregrine Stoop
+> Following v1.49.436 — _Degree 295: Malfunkshun (Glam Punk, E=7, Bainbridge Island, 1980-1990, Andrew Wood, *Return to Olympus* 1995 posthumous, L'Andrew the Love Child, FIRST BAINBRIDGE ISLAND, 294-296 Proto-Grunge Origin Arc middle degree, the thread that carried Andrew Wood from the ferry to the Mother Love Bone stage) + Rhinoceros Auklet Colony (nocturnal burrow moans, E=6, *Cerorhinca monocerata*, SECOND ALCIDAE, nocturnal colony return register, Protection Island and Destruction Island and Smith Island and Alexander Island and Tatoosh Island, the subterranean moaning chorus from thousands of birds returning to burrows under darkness)_, v1.49.437 ships as Degree 296: Mother Love Bone (Glam Grunge, E=7, Capitol Hill Seattle, *Apple* 1990 on Stardog/Mercury, produced by Terry Date, Andrew Wood, Stone Gossard, Jeff Ament, Bruce Fairweather, Greg Gilmore, THE PIVOT POINT OF SEATTLE GRUNGE, 294-296 Proto-Grunge Origin Arc Closes, the band that generated Temple of the Dog and Pearl Jam) + Peregrine Falcon Stoop Wingcut (sonic crack at speed, E=8, *Falco peregrinus*, RETURN TO FALCONIDAE, 240 mph terminal-velocity stoop, the fastest animal on Earth, the first purely aerodynamic acoustic event documented on the SPS track, urban and cliff-face nesting in Seattle, Portland, and Pacific Northwest outer-coast islands).
+# v1.49.437 — Degree 296: Mother Love Bone (Glam Grunge, E=7, Capitol Hill Seattle, *Apple* 1990 on Stardog/Mercury, produced by Terry Date, Andrew Wood, Stone Gossard, Jeff Ament, Bruce Fairweather, Greg Gilmore, THE PIVOT POINT OF SEATTLE GRUNGE, 294-296 Proto-Grunge Origin Arc Closes, the band that generated Temple of the Dog and Pearl Jam) + Peregrine Falcon Stoop Wingcut (sonic crack at speed, E=8, *Falco peregrinus*, RETURN TO FALCONIDAE, 240 mph terminal-velocity stoop, the fastest animal on Earth, the first purely aerodynamic acoustic event documented on the SPS track, urban and cliff-face nesting in Seattle, Portland, and Pacific Northwest outer-coast islands)
 **Shipped:** 2026-04-03
-_Parse confidence: 0.50 — source `docs/release-notes/v1.49.437/README.md`_
+**Commits:** 0 | **Files:** 9
+**Branch:** dev
+_Parse confidence: 0.75 — source `docs/release-notes/v1.49.437/README.md`_
 ## Summary
-This release carried 6 features; see `01-features.md`.
+No structured feature list was captured for this release; see the source README for prose details.
+It also produced retrospective content (lessons_learned, what_could_be_better, what_worked); see `03-retrospective.md`.
+11 lessons extracted; see `04-lessons.md` or the `RETROSPECTIVE-TRACKER.md`.
 ---
 **Prev:** [v1.49.436](../v1.49.436/00-summary.md) · **Next:** [v1.49.438](../v1.49.438/00-summary.md)

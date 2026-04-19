@@ -1,8 +1,12 @@
-> Following v1.49.458 — _Degree 317: Temple of the Dog + Humpback-Orca Overlap_, v1.49.459 ships as Degree 318: Candlebox + Cascadia Subduction Current.
-# v1.49.459 — Degree 318: Candlebox + Cascadia Subduction Current
+> Following v1.49.458 — _Degree 317: Temple of the Dog + Humpback-Orca Same-Channel (POST-SUMMIT COOLDOWN OPENS, GENEALOGY INTERSECTION, MULTI-SPECIES CETACEAN EVENT, E=15 COMBINED, 88.1%, Temple of the Dog as the Andrew Wood tribute supergroup at E=7 paired with simultaneous Humpback whale song + Southern Resident orca call on one acoustic channel in the San Juan Islands at E=8, the engine's first post-Grunge-Summit entry after the three consecutive E=18 peaks at degrees 311-313, the engine's first documented multi-species vocalization event on the SPS track)_, v1.49.459 ships as Degree 318: Candlebox + Cascadia Subduction Deep Current (THE BELOW-THE-SURFACE PAIRING, THE COMMERCIAL OUTLIER, THE FIRST GEOPHYSICAL ENTRY, E=12 COMBINED, 88.3%, Candlebox arriving as the grunge-era act whose four-million-copy self-titled debut on Madonna's Maverick Records in 1993 outsold nearly every critically canonical Seattle record while being excluded from the critical establishment's narrative of the scene paired with the Cascadia Subduction Deep Current at E=5 as the Sound of Puget Sound track's first geophysical entry documenting the Juan de Fuca Plate's continuous infrasonic baseline beneath the North American Plate — the twin subjects bound by a single structural principle: both are acoustically real and physically consequential and narratively invisible from the dominant surface observation frame of their respective systems).
+# v1.49.459 — Degree 318: Candlebox + Cascadia Subduction Deep Current (THE BELOW-THE-SURFACE PAIRING, THE COMMERCIAL OUTLIER, THE FIRST GEOPHYSICAL ENTRY, E=12 COMBINED, 88.3%, Candlebox arriving as the grunge-era act whose four-million-copy self-titled debut on Madonna's Maverick Records in 1993 outsold nearly every critically canonical Seattle record while being excluded from the critical establishment's narrative of the scene paired with the Cascadia Subduction Deep Current at E=5 as the Sound of Puget Sound track's first geophysical entry documenting the Juan de Fuca Plate's continuous infrasonic baseline beneath the North American Plate — the twin subjects bound by a single structural principle: both are acoustically real and physically consequential and narratively invisible from the dominant surface observation frame of their respective systems)
 **Shipped:** 2026-04-03
-_Parse confidence: 0.50 — source `docs/release-notes/v1.49.459/README.md`_
+**Commits:** 6 | **Files:** 9
+**Branch:** dev
+_Parse confidence: 0.90 — source `docs/release-notes/v1.49.459/README.md`_
 ## Summary
-This release carried 6 features; see `01-features.md`.
+No structured feature list was captured for this release; see the source README for prose details.
+It also produced retrospective content (lessons_learned, what_could_be_better, what_worked); see `03-retrospective.md`.
+11 lessons extracted; see `04-lessons.md` or the `RETROSPECTIVE-TRACKER.md`.
 ---
 **Prev:** [v1.49.458](../v1.49.458/00-summary.md) · **Next:** [v1.49.460](../v1.49.460/00-summary.md)

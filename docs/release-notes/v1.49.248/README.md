@@ -1,4 +1,4 @@
-# v1.49.248 — Degree 108: Veronica Lipgloss (Punk/Electronic) + Pileated Woodpecker (Wild Laughing) — THE PUNK CIRCUIT AND THE PRIMAL SCREAM — E=6 ON BOTH SIDES — THE LANDMARK DEGREE
+# v1.49.248 — Degree 108: Veronica Lipgloss (Punk/Electronic) + Pileated Woodpecker (Wild Laughing) — THE PUNK CIRCUIT AND THE PRIMAL SCREAM
 
 **Released:** 2026-04-01
 **Scope:** Seattle 360 + Sound of Puget Sound — paired degree release, first E=6 on both axes simultaneously and Genre Stage 90 milestone

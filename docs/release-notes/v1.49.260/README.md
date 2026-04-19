@@ -1,4 +1,4 @@
-# v1.49.260 — Degree 120: Mark Lanegan (Darkwave/Indie, MEMORIAL) + Hooded Merganser — THE ONE-THIRD MARK — THE WHISKEY-SOAKED BARITONE AND THE FAN-CRESTED SAWBILL — FIRST MEMORIAL ENTRY — ANATIDAE STREAK AT THREE — 120 OF 360 (33.3%) — TRIGONOMETRIC QUARTER-TURN — ELLENSBURG-TO-SEATTLE PATTERN — SUB POP LINEAGE DEEPENS
+# v1.49.260 — Degree 120: Mark Lanegan + Hooded Merganser — THE ONE-THIRD MARK
 
 **Released:** 2026-04-02
 **Scope:** Seattle 360 + Sound of Puget Sound — paired degree release, one-third mark of 360-degree continuous release engine, first memorial entry, Anatidae streak extended to three consecutive waterfowl, synchronized E=4 energy recovery on both axes after the E=2 ambient valley at degree 119

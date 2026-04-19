@@ -1,4 +1,4 @@
-# v1.49.323 — Degree 182: Criminal Nation (Gangsta Rap, E=7, FIRST GANGSTA RAP, Genre Stage 101) + Steller Sea Lion (*Eumetopias jubatus*, FIRST OTARIIDAE, Deep Resonant Roar, E=6) — THE EARED-SEAL OPENING — GENRE CORRIDOR DEEPENS IN QUADRANT III
+# v1.49.323 — Degree 182: Criminal Nation + Steller Sea Lion — THE EARED-SEAL OPENING
 
 **Released:** 2026-04-02
 **Scope:** Seattle 360 + Sound of Puget Sound — paired degree release; **Criminal Nation** arrives at **E=7** as the **FIRST GANGSTA RAP** entry in the Seattle 360 engine, marking **Genre Stage 101** as the hardest, most confrontational strain of Seattle hip-hop enters the music axis two degrees after Quadrant III opens; on the species side the **Steller Sea Lion** (*Eumetopias jubatus*) enters at **E=6** as the **FIRST OTARIIDAE** (eared seal) in the engine and the **largest sea lion species on Earth**, opening the second major pinniped family two degrees after the Harbor Seal opened the Phocidae; together the pair extends the taxonomic and genre vocabulary that degree 180 established and confirms that Quadrant III will continue the reshape-for-the-second-half work begun at the geometric equator

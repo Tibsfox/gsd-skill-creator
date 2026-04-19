@@ -1,4 +1,4 @@
-# v1.49.240 — Degree 100: Summer Heart + Common Raven — THE CENTENNIAL — THE CASCADE AND THE CRONK
+# v1.49.240 — Degree 100: Summer Heart + Common Raven — THE CENTENNIAL
 
 **Released:** 2026-04-02
 **Scope:** Seattle 360 + Sound of Puget Sound — paired degree release, centennial milestone

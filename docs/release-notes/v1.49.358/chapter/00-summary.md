@@ -1,8 +1,12 @@
-> Following v1.49.357 — _Degree 216: TAAS + Wolverine_, v1.49.358 ships as Degree 217: Pretty Girls Make Graves + Grizzly Bear roar.
-# v1.49.358 — Degree 217: Pretty Girls Make Graves + Grizzly Bear roar
+> Following v1.49.357 — _Degree 216: These Arms Are Snakes (Post-Hardcore, E=7, Capitol Hill, Seattle, Washington, 91-DEGREE CALLBACK from degree 125, Steve Snere / Brian Cook / Ryan Frederiksen / Joe Preston / Chris Common three-vocalist angular-post-hardcore on Suicide Squeeze Records, Botch-lineage bass-and-guitar descendants sharing label space with Minus the Bear) + Wolverine guttural growl (*Gulo gulo*, E=6, MUSTELIDAE RETURNS from degree 185 Sea Otter, North Cascades remote wilderness, 25-50 confirmed individuals in Washington, 100-500+ km² individual male territory, snow-dependent denning climate-change-indicator vocalization)_, v1.49.358 ships as Degree 217: Pretty Girls Make Graves (Indie Rock / Post-Punk Revival, E=6, Capitol Hill, Seattle, Washington, 2001-2007, **Matador Records**, **Andrea Zollo** / **Nick DeWitt** / **Derek Fudesco** / **Nathen Johnson**, *Good Health* (2002) / *The New Romance* (2003) / *Élan Vital* (2006), **102-DEGREE CALLBACK** from degree 115) + Grizzly Bear roar (*Ursus arctos horribilis*, dominance roar, E=8, **THIRD E=8 IN ENGINE HISTORY**, **NORTH CASCADES Ecosystem**, functionally extirpated with fewer than 10 confirmed individuals, 50-400 Hz low-frequency dominant with infrasonic energy below 20 Hz, 100+ dB amplitude at 10 meters, 1-3 km forest carrying distance).
+# v1.49.358 — Degree 217: Pretty Girls Make Graves (Indie Rock / Post-Punk Revival, E=6, Capitol Hill, Seattle, Washington, 2001-2007, **Matador Records**, **Andrea Zollo** / **Nick DeWitt** / **Derek Fudesco** / **Nathen Johnson**, *Good Health* (2002) / *The New Romance* (2003) / *Élan Vital* (2006), **102-DEGREE CALLBACK** from degree 115) + Grizzly Bear roar (*Ursus arctos horribilis*, dominance roar, E=8, **THIRD E=8 IN ENGINE HISTORY**, **NORTH CASCADES Ecosystem**, functionally extirpated with fewer than 10 confirmed individuals, 50-400 Hz low-frequency dominant with infrasonic energy below 20 Hz, 100+ dB amplitude at 10 meters, 1-3 km forest carrying distance)
 **Shipped:** 2026-04-02
-_Parse confidence: 0.50 — source `docs/release-notes/v1.49.358/README.md`_
+**Commits:** 0 | **Files:** 9
+**Branch:** dev
+_Parse confidence: 0.75 — source `docs/release-notes/v1.49.358/README.md`_
 ## Summary
 No structured feature list was captured for this release; see the source README for prose details.
+It also produced retrospective content (lessons_learned, what_could_be_better, what_worked); see `03-retrospective.md`.
+13 lessons extracted; see `04-lessons.md` or the `RETROSPECTIVE-TRACKER.md`.
 ---
 **Prev:** [v1.49.357](../v1.49.357/00-summary.md) · **Next:** [v1.49.359](../v1.49.359/00-summary.md)

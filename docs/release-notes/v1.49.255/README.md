@@ -1,4 +1,4 @@
-# v1.49.255 — Degree 115: Pretty Girls Make Graves (Post-Punk) + Black-backed Woodpecker — THE BURNING ELEGANCE AND THE FIRE GHOST — TWO STREAKS CLOSE AT HISTORIC LENGTHS — PICIDAE NONET (ALL-TIME FAMILY RECORD) — CAPITOL HILL SEXTET — MATADOR RECORDS ENTERS — POST-PUNK RETURNS AFTER 63-DEGREE GAP
+# v1.49.255 — Degree 115: Pretty Girls Make Graves (Post-Punk) + Black-backed Woodpecker — THE BURNING ELEGANCE AND THE FIRE GHOST
 
 **Released:** 2026-04-02
 **Scope:** Seattle 360 + Sound of Puget Sound — paired degree release, Capitol Hill sextet closes, Picidae nonet closes as all-time family record, Matador Records first entry, post-punk returns after the engine's longest genre absence, obligate fire-follower closes disturbance ecology arc

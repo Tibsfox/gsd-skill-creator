@@ -1,4 +1,4 @@
-# v1.49.268 — Degree 128: Bruce Pavitt (Radio/Label, E=3) + Trumpeter Swan — THE OTHER HALF — THE TASTEMAKER AND THE LARGEST VOICE — ELEVEN CONSECUTIVE ANATIDAE EXTENDS ALL-TIME FAMILY RECORD — KCMU RADIO TRIO CLOSES — OLYMPIA LABEL TRILOGY CRYSTALLIZES — SWAN COMPARISON PAIR COMPLETE — E=6 RETURNS TO SPECIES AXIS
+# v1.49.268 — Degree 128: Bruce Pavitt + Trumpeter Swan — THE OTHER HALF
 
 **Released:** 2026-04-02
 **Scope:** Seattle 360 + Sound of Puget Sound — paired degree release, Sub Pop co-founder diptych closes with Pavitt the taste architect, KCMU radio trio (126-127-128) completes across three consecutive degrees, Olympia label trilogy (K Records, Kill Rock Stars, Sub Pop) crystallizes at the label-infrastructure pair, eleventh consecutive Anatidae on the species axis extends the all-time family-streak record for the third consecutive degree, swan comparison pair completes with Trumpeter Swan's deep resonant bugling paired against the Tundra Swan's high melodious baying, and E=6 returns to the species axis for the first time since American Dipper at degree 117
