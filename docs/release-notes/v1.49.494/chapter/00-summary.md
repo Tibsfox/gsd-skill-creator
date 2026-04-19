@@ -1,8 +1,12 @@
-> Following v1.49.493 — _Degree 352: Botch (We Are the Romans) + River+Percussion+Wind Geological_, v1.49.494 ships as Degree 353: These Arms Are Snakes (peak) + Mixed Owl Chorus Full Night.
-# v1.49.494 — Degree 353: These Arms Are Snakes (peak) + Mixed Owl Chorus Full Night
+> Following v1.49.493 — _Degree 352: Botch (We Are the Romans) + River + Percussion + Wind Geological (THE CLOSING ARC'S FOURTH CONSECUTIVE E=20, THE MATHCORE GENRE CEILING DOCUMENT, THE SNOQUALMIE FALLS FLOOD-STAGE GEOLOGICAL MAXIMUM, FOUR INDEPENDENT SIMULTANEOUS VOICES PAIRED WITH THREE INDEPENDENT SIMULTANEOUS LAYERS, GEOLOGICAL TIMESCALE AS UNIFYING CALIBRATION, ENGINE REACHES 97.8%)_, v1.49.494 ships as Degree 353: These Arms Are Snakes (Peak) + Mixed Owl Chorus Full Night (THE CLOSING ARC RESOLVES, FIFTH AND FINAL CLOSING ARC ENTRY, E=9 TERMINAL POSITION, GEOGRAPHIC ARC CLOSURE CAPITOL HILL TO CAPITOL HILL, BRIAN COOK IN CONSECUTIVE DEGREES 352-353, FIRST NON-E=20 PAIRING IN THE CLOSING ARC, TEMPORAL DEVELOPMENT PAIRING, TAAS POST-HARDCORE SYNTHESIS, FOUR-SPECIES WINTER OWL CHORUS, ENGINE REACHES 98.1%).
+# v1.49.494 — Degree 353: These Arms Are Snakes (Peak) + Mixed Owl Chorus Full Night (THE CLOSING ARC RESOLVES, FIFTH AND FINAL CLOSING ARC ENTRY, E=9 TERMINAL POSITION, GEOGRAPHIC ARC CLOSURE CAPITOL HILL TO CAPITOL HILL, BRIAN COOK IN CONSECUTIVE DEGREES 352-353, FIRST NON-E=20 PAIRING IN THE CLOSING ARC, TEMPORAL DEVELOPMENT PAIRING, TAAS POST-HARDCORE SYNTHESIS, FOUR-SPECIES WINTER OWL CHORUS, ENGINE REACHES 98.1%)
 **Shipped:** 2026-04-03
-_Parse confidence: 0.50 — source `docs/release-notes/v1.49.494/README.md`_
+**Commits:** 0 | **Files:** 9
+**Branch:** dev
+_Parse confidence: 0.75 — source `docs/release-notes/v1.49.494/README.md`_
 ## Summary
-This release carried 6 features; see `01-features.md`.
+No structured feature list was captured for this release; see the source README for prose details.
+It also produced retrospective content (lessons_learned, what_could_be_better, what_worked); see `03-retrospective.md`.
+17 lessons extracted; see `04-lessons.md` or the `RETROSPECTIVE-TRACKER.md`.
 ---
 **Prev:** [v1.49.493](../v1.49.493/00-summary.md) · **Next:** [v1.49.495](../v1.49.495/00-summary.md)

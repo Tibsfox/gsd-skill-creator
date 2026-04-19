@@ -1,4 +1,4 @@
-# v1.49.275 — Degree 135: Indica Jones (KEXP Electronic DJ, Sextet Closer) + Great Horned Owl — THE KEXP RADIO SEXTET CLOSES — THE ANATIDAE STREAK BREAKS AT SEVENTEEN — STRIGIDAE ENTERS — FIRST NEW FAMILY SINCE CINCLIDAE AT DEGREE 116 — ECOSYSTEM SHIFT WATER-TO-FOREST — THE APEX NOCTURNAL PREDATOR ARRIVES
+# v1.49.275 — Degree 135: Indica Jones + Great Horned Owl — THE KEXP RADIO SEXTET CLOSES
 
 **Released:** 2026-04-02
 **Scope:** Seattle 360 + Sound of Puget Sound — paired degree release, KEXP radio sextet closes at degree 135 with the second DJ at E=5 (130 Waters → 131 Richards → 132 Mazzone → 133 Cole → 134 B-Mello → 135 Indica Jones), Anatidae family-streak breaks at seventeen after 17 consecutive waterfowl degrees (118-134), Strigidae enters for the first time on the species axis at degree 135, the engine shifts from water habitat to forest habitat at the same degree that the radio sequence enters its two-DJ tail-end, first new bird family since Cinclidae at degree 116 (the American Dipper was the prior family change nineteen degrees earlier)

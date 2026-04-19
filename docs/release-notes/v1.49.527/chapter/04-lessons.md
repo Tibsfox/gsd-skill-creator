@@ -1,0 +1,76 @@
+# Lessons — v1.49.527
+
+18 lessons extracted. Classification source: ⚙ rule-based · 🤖 LLM tiebreaker (needs review) · 👤 human.
+
+1. **The Nina Simone arc is a structural template.**
+   Classical training → interruption by injury or rejection → redirection into popular music → voice that carries classical technique into unexpected spaces. Shepherd's cord injury mirrors Simone's Curtis rejection.
+   _⚙ Status: `investigate` · lesson #1901_
+
+2. **The gender gap narrows.**
+   Four women in 27 degrees (Anderson 3, Bown 6, Monge 20, Shepherd 26). Gap from 14 degrees (7-20) to 6 (21-26). Each woman brings a structural first.
+   _⚙ Status: `investigate` · lesson #1902_
+
+3. **Tacoma enters.**
+   First south Puget Sound artist. Geographic diversification continues southward from the Seattle-Spokane-Wenatchee-Chewelah spine.
+   _⚙ Status: `investigate` · lesson #1903_
+
+4. **Quincy Jones influence persists across the engine.**
+   Named by Shepherd at degree 26; already loop-closed with Artis Sr.'s *Thriller* keyboards at degree 24. The degree-0 subject's influence surfaces repeatedly.
+   _⚙ Status: `investigate` · lesson #1904_
+
+5. **Soul quadrant confirms.**
+   Two consecutive pure-soul degrees (25-26) with no jazz qualifier. The genre transition is complete.
+---
+   _⚙ Status: `investigate` · lesson #1905_
+
+6. **The Nina Simone arc is a structural template for future degrees.**
+   Classical training → interruption by injury or rejection → redirection into popular music → voice that carries classical technique into unexpected spaces. Shepherd's cord injury mirrors Simone's Curtis rejection. The arc enters the engine as first-class template terminology at degree 26 and will apply to future artists whose careers follow the same four-stage redirection.
+   _⚙ Status: `investigate` · lesson #4813_
+
+7. **The gender gap narrows to six degrees and the fourth-woman threshold is crossed.**
+   Four women in 27 degrees (Anderson at 3, Bown at 6, Monge at 20, Shepherd at 26). The gap narrowed from fourteen degrees (between Bown and Monge) to six degrees (between Monge and Shepherd). Each woman brings a structural first: Anderson the matriarch, Bown the erased virtuoso, Monge the neo-soul contemporary, Shepherd the Simone arc. The pattern is now reliable enough to predict the next woman will also bring a structural first.
+   _⚙ Status: `investigate` · lesson #4814_
+
+8. **Tacoma enters as the engine's eighth pipeline city.**
+   First south Puget Sound artist. First Pierce County origin. First Washington-State-but-not-King-County origin. Tacoma brings its own musical DNA into the engine -- Tacoma gospel circuit, Stadium District music scene, Tacoma Dome concert history -- and extends the geographic diversification southward from the Seattle-Spokane-Wenatchee-Chewelah spine.
+   _⚙ Status: `investigate` · lesson #4815_
+
+9. **Quincy Jones is the engine's most-cited influence across long-distance loops.**
+   Jones (degree 0) now appears in two long-distance citations: the *Thriller* loop at degree 24 (Ron Artis Sr. played keyboards on *Thriller*) and the Simone loop at degree 26 (Shepherd cites Jones as primary influence). Two Jones loops in three degrees. The degree-0 citation is now an engine structural convention that future degrees will extend.
+   _⚙ Status: `investigate` · lesson #4816_
+
+10. **The soul quadrant is the engine's active genre quadrant.**
+   Two consecutive pure-soul degrees (Monge at 25 and Shepherd at 26) with no jazz qualifier confirm the genre transition from the jazz quadrant that dominated degrees 0 through 20. Jazz has not disappeared; it has ceded the center. The soul quadrant will anchor future degrees through at least the next family cluster, and jazz will return as a qualifier rather than a primary genre.
+   _⚙ Status: `investigate` · lesson #4817_
+
+11. **The Purple Martin opens the sky as a first-class habitat axis.**
+   First aerial insectivore. First aerial singer. First bird that does not perch to produce its sound. The sky enters the engine as habitat, not as corridor. Liquid timbre enters as first-class acoustic element. The vertical-axis geography that prior species approached from below is now the axis a species occupies directly, and the vertical-ecosystem mapping from floor to sky is complete at degree 26.
+   _⚙ Status: `investigate` · lesson #4818_
+
+12. **Hirundinidae enters as the sixteenth family and begins the swallow trio.**
+   Three consecutive degrees (26, 27, 28) of Hirundinidae -- the only cluster comparable to the warbler quintet at degrees 14-17 and 20. The triadic cluster pattern (three degrees, one family, acoustic variation) is the engine's standard SPS cluster unit, and the swallow trio will extend it with Violet-green Swallow at 27 and Tree Swallow at 28.
+   _⚙ Status: `investigate` · lesson #4819_
+
+13. **Nest-box conservation as a structural first.**
+   The engine's first human-dependent conservation case. Species survival in the PNW depends on manufactured housing mounted over water. The conservation pattern enters the engine as first-class terminology at degree 26 and will inform future degrees that document species whose survival depends on active human intervention.
+   _⚙ Status: `investigate` · lesson #4820_
+
+14. **Ranger fix-one-find-next confirms the Pioneer pattern across a second program.**
+   Two consecutive Ranger failures with different mechanisms and the same outcome (stranded in orbit) establish the fix-one-find-next structural motif as a cross-program pattern, paired with Pioneer 0 through Pioneer 4. Complex systems fail in serial. You cannot test your way past the failures you have not yet imagined. The lesson is now paired across two programs and five plus two degrees.
+   _⚙ Status: `investigate` · lesson #4821_
+
+15. **Calendar-date dedication synchrony continues as explicit engine convention.**
+   Asa Gray's November 18, 1810 birthday and Ranger 2's November 18, 1961 launch anchor the dedication across 151 years of the same calendar date. The convention established at earlier degrees (Joseph Campbell / Explorer 3, Erwin Schrödinger / Echo 1, L. Frank Baum / Faith 7) continues at degree 26. The engine deliberately selects dedications whose birth or death dates align with mission-date calendar positions.
+   _⚙ Status: `investigate` · lesson #4822_
+
+16. **The Shepherd discography was documented at citation level rather than at track level.**
+   The release names Shaina Shepherd, Tacoma, NYU Steinhardt, and the vocal cord injury, but the specific albums, singles, and KEXP sessions that anchor her recorded output are not enumerated. A future chapter should document at least five specific Shepherd recordings with release dates, production credits, and acoustic analysis, the way the Ron Artis II degree at 24 documented specific KEXP sessions.
+   _⚙ Status: `investigate` · lesson #4823_
+
+17. **The Asa Gray dedication stayed at the calendar-synchrony level.**
+   Gray's November 18, 1810 birthday aligns with Ranger 2's November 18, 1961 launch across 151 years, and the dedication convention requires the alignment. But the dedication text does not engage the specific structural parallels between Gray's botanical work (describing the PNW's flora, corresponding with Darwin, arguing for the compatibility of evolution and religious faith) and Ranger 2's mission (describing the Moon's geology, corresponding with Explorer/Pioneer predecessor data, arguing for the compatibility of automated and crewed exploration). A future chapter should produce the full Gray-to-Ranger structural mapping.
+   _⚙ Status: `investigate` · lesson #4824_
+
+18. **The nest-box conservation case needs a dedicated catalog entry.**
+   The Purple Martin is the first human-dependent conservation case in the engine, but the conservation history -- the Western Purple Martin Working Group, the specific nest-box designs, the population recovery trajectory from the 1980s to the 2020s -- is documented only at gesture level. A future chapter should produce the full conservation arc with population numbers, geographic recovery zones, and nest-box design specifications.
+   _⚙ Status: `investigate` · lesson #4825_

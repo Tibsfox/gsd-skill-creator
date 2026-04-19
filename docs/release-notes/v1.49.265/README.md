@@ -1,4 +1,4 @@
-# v1.49.265 — Degree 125: These Arms Are Snakes (Post-Hardcore, E=7 NEW ENGINE MAXIMUM) + Greater Scaup — THE CEILING BREAK — THE ANGULAR ASSAULT AND THE RAFTING DUCK — EIGHT CONSECUTIVE ANATIDAE TIES SCIURIDAE OCTET — WIDEST ENERGY GAP IN ENGINE HISTORY (DELTA 4) — GENUS TRANSITION BUCEPHALA TO AYTHYA — BRIAN COOK ARC (BOTCH TO TAAS TO RUSSIAN CIRCLES) — SUICIDE SQUEEZE RETURNS
+# v1.49.265 — Degree 125: These Arms Are Snakes + Greater Scaup — THE CEILING BREAK
 
 **Released:** 2026-04-02
 **Scope:** Seattle 360 + Sound of Puget Sound — paired degree release, E=7 ceiling breach on the artist axis, eighth consecutive Anatidae ties Sciuridae octet record on the species axis, widest energy gap in engine history (delta 4) between paired halves, genus transition Bucephala → Aythya within the ongoing waterfowl streak

@@ -1,0 +1,55 @@
+# Lessons — v1.49.305
+
+13 lessons extracted. Classification source: ⚙ rule-based · 🤖 LLM tiebreaker (needs review) · 👤 human.
+
+1. **The FIRST GRUIDAE entry demonstrates that family-first events merit their own structural register separate from species-first observations.**
+   When a new bird family enters the engine (as Gruidae does at degree 165), the structural significance exceeds a single-species first-entry event: the family carries its evolutionary lineage, cultural significance, distribution range, and taxonomic position into the engine as a first-class register. The engine's documentation at degree 165 established the FIRST GRUIDAE event as a family-level structural marker distinct from the species-level entry, and future family-first events should inherit the same documentation pattern.
+   _⚙ Status: `applied` (applied in `v1.49.394`) · lesson #7327_
+
+2. **The DOUBLE MAXIMUM (E=12 combined) event is rare enough to merit its own engine-level structural register.**
+   The E=6 + E=6 = E=12 combined-energy convergence at degree 165 represents the maximum possible combined energy on both axes simultaneously. Such peak events may occur multiple times across a 360-degree rotation but are structurally significant enough to document individually with the tripled-significance framing (energy peak, family first, streak extension) when they coincide with other structural events.
+   _⚙ Status: `applied` (applied in `v1.49.397`) · lesson #7328_
+
+3. **The 10+ million year fossil record connects the contemporary listener to deep time in a way that transforms a bird call into a cross-temporal event.**
+   The Sandhill Crane's Miocene-era vocal-anatomy continuity means the contemporary bugle is essentially the same sound its ancestors produced across a 10-million-year span. The engine's documentation at degree 165 preserved this deep-time connection as a first-class evolutionary observation, and the framing demonstrates how paleontological context can elevate a species entry from biological observation to cross-temporal aesthetic event.
+   _⚙ Status: `applied` (applied in `v1.49.335`) · lesson #7329_
+
+4. **The coiled-trachea amplification mechanism (French-horn analogy) illustrates that acoustic engineering in birds can exceed body-size predictions by 10-20x.**
+   The Sandhill Crane's 120-150 cm tracheal tube coiled within the sternal keel provides approximately 10-20x amplification beyond body-size-proportional predictions (2-4 km carry vs sparrow-scale 200 m). The engine's documentation at degree 165 entered this brass-instrument-like amplification mechanism into the anatomical vocabulary, and the framing establishes a template for documenting other birds with specialized vocal amplification anatomy in future species entries.
+   _⚙ Status: `applied` (applied in `v1.49.338`) · lesson #7330_
+
+5. **The self-release-as-philosophy distinction from strategic independence enters the industry-theory register as a sharp structural distinction.**
+   The Khingz/Ryan Lewis contrast across degrees 160-165 captured two poles of independent hip-hop distribution — strategic (Lewis, mainstream-commercial) and philosophical (Khingz, permanent-underground) — and the pair-documentation respects both poles as valid. The engine's industry-theory vocabulary now includes the strategic/philosophical axis distinction as a first-class observation, and future independent-distribution entries should place themselves along this axis explicitly.
+   _⚙ Status: `applied` (applied in `v1.49.348`) · lesson #7331_
+
+6. **The deep-bench scene-theory concept illustrates that visible-minority artists depend on invisible-majority underground infrastructure for long-term scene viability.**
+   The observation that dozens of underground Seattle hip-hop artists operate at high intensity beneath every visible artist — and that the deep bench is essential infrastructure rather than marginal activity — enters the scene-theory register at degree 165. The framing respects that scene depth matters for long-term viability and that a scene with a few visible stars and no underground will struggle to renew itself, while a scene with dense underground infrastructure can sustain creative output across decades.
+   _⚙ Status: `investigate` · lesson #7332_
+
+7. **The migration spectacle at ecosystem scale (500,000 cranes bugling simultaneously) exceeds the engine's per-bird acoustic vocabulary and enters an ecosystem-level register.**
+   The cumulative acoustic effect of hundreds of thousands of Sandhill Cranes bugling simultaneously at the Platte River spring staging area produces a sensory experience beyond what any per-bird E=6 calibration can capture. The engine's documentation at degree 165 acknowledged this ecosystem-level register, and future high-aggregate species entries (colonial seabirds, migratory flocks, etc.) may merit similar ecosystem-level documentation treatment.
+   _⚙ Status: `applied` (applied in `v1.49.307`) · lesson #7333_
+
+8. **The mated-for-life, unison-call, and dancing-display behaviors together illustrate a complex social structure that enters the engine's behavioral vocabulary as a multi-component register.**
+   Sandhill Cranes exhibit a combination of lifelong pair bonding, coordinated pair-duet bugling, and elaborate visual-acoustic dancing displays that together constitute a complex social register distinct from earlier species' simpler social structures. The engine's documentation at degree 165 preserved all three components (mated-for-life, unison-call, dancing-displays) as first-class behavioral observations, establishing a template for documenting other species with complex multi-component social structures.
+   _⚙ Status: `applied` (applied in `v1.49.307`) · lesson #7334_
+
+9. **The Gruiformes order continuity from Rallidae (161-164) to Gruidae (165) demonstrates that order-level sequencing preserves taxonomic meaning while allowing dramatic within-order energy contrasts.**
+   The transition from secretive marsh-dwelling rails (E=3/E=4) to conspicuous open-landscape cranes (E=6) across degrees 164-165 illustrates that the same order can contain dramatically different behavioral and acoustic registers. The engine's documentation at degree 165 preserved the order-continuity framing while emphasizing the sharp within-order contrast, and the framing establishes that order-level sequencing is meaningful even when family-level characteristics vary dramatically.
+   _⚙ Status: `investigate` · lesson #7335_
+
+10. **The paired-coordinate cross-sync readings transform individual observations into multiplicative structural statements.**
+   The five cross-sync parallels at degree 165 (ancient-force, persistence-across-time, amplification-exceeding-scale, double-maximum-event, new-structural-territory) each converted an individual per-axis observation into a multiplicative paired observation whose structural weight exceeds the sum of the component parts. The engine's documentation at degree 165 demonstrated that systematic cross-sync reading preserves paired-coordinate meaning, and the template applies to all future degree documentation where structural resonance between Part A and Part B merits explicit synchronization framing.
+   _⚙ Status: `investigate` · lesson #7336_
+
+11. **The E=6 streak exception at Porter Ray (163, E=5) was noted but not fully integrated into the streak analysis.**
+   Porter Ray's E=5 placement at degree 163 is the one non-E=6 entry in the otherwise-E=6-dominant 161-168 window, and the retrospective acknowledges the exception but could develop the analysis more deeply. Future E=6 streak documentation should either reframe the streak as an E=5+ sustained maximum-energy window or explicitly mark the Porter Ray exception as a calibration nuance within a dominant-but-not-exclusive streak. The engine's streak vocabulary needs clarification on whether streaks require strict consecutive E=6 or allow dominant-E=6 with occasional E=5 integrations.
+   _⚙ Status: `investigate` · lesson #7337_
+
+12. **The Khingz research depth (~2,800 words) is shorter than the Sandhill Crane depth (~4,200 words) and could be expanded.**
+   The underground-artist research inherently draws on less published material than a well-documented species like the Sandhill Crane (Cornell Lab of Ornithology, Johnsgard 1983, Krajewski et al. 2010, Sibley 2014), and the research-word asymmetry reflects that reality. Future underground-artist entries could supplement with scene documentation from KEXP, The Stranger, Bandcamp artist pages, and community interviews to increase research depth while respecting the underground-artist media asymmetry.
+   _⚙ Status: `investigate` · lesson #7338_
+
+13. **The specific Khingz discography titles and release dates are not cited at the depth a well-documented artist receives.**
+   The Sandhill Crane research cites specific fossils (Miocene, Pliocene, Florida 10 MYA), specific publications (Johnsgard 1983, Krajewski et al. 2010, Sibley 2014), specific population numbers (700,000), and specific location details (Platte River 80-mile stretch, 500,000 staging cranes, 100,000+ observers) — the Khingz research cites the underground catalog in general terms without specific album titles or release-date anchors. Future underground-artist entries should provide specific Bandcamp URLs, album titles, and release-date anchors when available, while acknowledging the underground-media asymmetry that constrains such documentation.
+   _⚙ Status: `investigate` · lesson #7339_

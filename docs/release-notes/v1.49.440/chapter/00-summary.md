@@ -1,8 +1,12 @@
-> Following v1.49.439 — _Degree 298: Treepeople (return) + Northern Goshawk Full Alarm_, v1.49.440 ships as Degree 299: Love Battery (return) + Great Horned Owl War.
-# v1.49.440 — Degree 299: Love Battery (return) + Great Horned Owl War
+> Following v1.49.439 — _Degree 298: Treepeople (return) (Post-HC, E=8, Doug Martsch, C/Z Records, Boise / Seattle network, *Guilt Regret & Embarrassment* 1992 + *Something Vicious for Tomorrow* 1993, second appearance elevating from E=7 to E=8, pre-Built to Spill developmental arc) + Northern Goshawk Full Alarm (sustained ka-ka assault, E=7, *Accipiter gentilis*, RAPTOR BEHAVIORS ARC CLOSES, nest-defense sustained alarm, second appearance escalating from E=6 to E=7, behavioral escalation from warning call to territorial assault)_, v1.49.440 ships as Degree 299: Love Battery (return, THIRD APPEARANCE, Punk/Psych, E=6, U-District Seattle, Sub Pop Records, Ron Nine, *Dayglo* 1992 + *Far Gone* 1993 + *Confusion Au Go-Go* 1995 + *E.S.P.* 1999, 221-233-299 three-entry arc, genre reframe from Psychedelic Rock to Punk/Psych, seventy-eight-degree span, THE WIDEST SINGLE-BAND SPREAD IN THE CURRENT SEQUENCE) + Great Horned Owl Territorial War (extended dueling hoots, E=6, *Bubo virginianus*, Strigidae, multi-night winter hooting battle, deep resonant hoo-hoo-hoo at 200-500 Hz male and 300-600 Hz female, 1-3 km carrying distance, territorial establishment November-December before the January-February nesting calendar, RETURN TO STRIGIDAE after the Northern Spotted Owl at degree 4, the Strigidae generalist-specialist contrast completed).
+# v1.49.440 — Degree 299: Love Battery (return, THIRD APPEARANCE, Punk/Psych, E=6, U-District Seattle, Sub Pop Records, Ron Nine, *Dayglo* 1992 + *Far Gone* 1993 + *Confusion Au Go-Go* 1995 + *E.S.P.* 1999, 221-233-299 three-entry arc, genre reframe from Psychedelic Rock to Punk/Psych, seventy-eight-degree span, THE WIDEST SINGLE-BAND SPREAD IN THE CURRENT SEQUENCE) + Great Horned Owl Territorial War (extended dueling hoots, E=6, *Bubo virginianus*, Strigidae, multi-night winter hooting battle, deep resonant hoo-hoo-hoo at 200-500 Hz male and 300-600 Hz female, 1-3 km carrying distance, territorial establishment November-December before the January-February nesting calendar, RETURN TO STRIGIDAE after the Northern Spotted Owl at degree 4, the Strigidae generalist-specialist contrast completed)
 **Shipped:** 2026-04-03
-_Parse confidence: 0.50 — source `docs/release-notes/v1.49.440/README.md`_
+**Commits:** 26 | **Files:** 9
+**Branch:** dev
+_Parse confidence: 0.90 — source `docs/release-notes/v1.49.440/README.md`_
 ## Summary
-This release carried 5 features; see `01-features.md`.
+No structured feature list was captured for this release; see the source README for prose details.
+It also produced retrospective content (lessons_learned, what_could_be_better, what_worked); see `03-retrospective.md`.
+9 lessons extracted; see `04-lessons.md` or the `RETROSPECTIVE-TRACKER.md`.
 ---
 **Prev:** [v1.49.439](../v1.49.439/00-summary.md) · **Next:** [v1.49.441](../v1.49.441/00-summary.md)

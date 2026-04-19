@@ -1,4 +1,4 @@
-# v1.49.251 — Degree 111: Helms Alee (Noise/Experimental) + Downy Woodpecker — THE AMPLIFIER FORGE AND THE SMALLEST DRUMMER — FOURTH E=6 IN FIVE DEGREES — VERELLEN BUILDER-PLAYER — SARGENT HOUSE GATEWAY — CAPITOL HILL STREAK EXTENDS — PICIDAE FIVE-STREAK — DOWNY-HAIRY COMPARISON PAIR
+# v1.49.251 — Degree 111: Helms Alee (Noise/Experimental) + Downy Woodpecker — THE AMPLIFIER FORGE AND THE SMALLEST DRUMMER
 
 **Released:** 2026-04-02
 **Scope:** Seattle 360 + Sound of Puget Sound — paired degree release, fourth E=6 artist in five degrees, Capitol Hill streak extension, Verellen Amplifiers builder-player pattern, Sargent House label gateway, Picidae five-streak, Downy-Hairy comparison pair at consecutive degrees

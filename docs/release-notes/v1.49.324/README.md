@@ -1,4 +1,4 @@
-# v1.49.324 — Degree 183: Raz Simone (Hip-Hop, E=7, Seattle Independent Lyricist, E=7 TRIO CLOSES) + California Sea Lion (*Zalophus californianus*, ARF ARF BARK, E=6, MOST VOCAL PINNIPED, OTARIIDAE CONTINUES) — THE THREE-CONSECUTIVE-E=7 STREAK AND THE LOUDEST SEA LION ENTER THE ENGINE AT THE SAME COORDINATE
+# v1.49.324 — Degree 183: Raz Simone + California Sea Lion
 
 **Released:** 2026-04-02
 **Scope:** Seattle 360 + Sound of Puget Sound — paired degree release; **Raz Simone** closes the first ever three-consecutive-E=7 streak in engine history at the third seat of the trio opened by **Macklemore & Ryan Lewis** (181) and continued by **Criminal Nation** (182); on the species axis the **California Sea Lion** (*Zalophus californianus*) enters as the **most vocal pinniped** and the **second Otariidae** of the engine, pairing with the **Steller Sea Lion** at degree 182 to form the **sea lion comparison pair** — the Steller is the heavyweight, the California is the loudmouth — both hauling out on the same Puget Sound rocks, log booms, and docks that support the Harbor Seal population documented at degrees 180-181

@@ -1,8 +1,12 @@
-> Following v1.49.486 — _Degree 345: Melvins (peak sludge) + Full Pacific Infrasound_, v1.49.487 ships as Degree 346: Soundgarden Superunknown + Cascades Full Storm.
-# v1.49.487 — Degree 346: Soundgarden Superunknown + Cascades Full Storm
+> Following v1.49.486 — _Degree 345: Melvins (Peak Sludge) + Full Pacific Infrasound_, v1.49.487 ships as Degree 346: Soundgarden *Superunknown* + Cascades Full Storm (THE SUMMIT-TO-SEA VERTICAL ARC, SECOND E=10 ON BOTH TRACKS IN 346 DEGREES, SECOND E=20 COMBINED IN THE ENGINE'S RUN, THE ABSOLUTE CEILING REACHED FOR THE SECOND TIME, CHRIS CORNELL'S FOUR-OCTAVE INSTRUMENT DOCUMENTED ON THE MOST COMPLETE ROCK ALBUM OF THE 1990s, THE CASCADE RANGE VOCALIZING ACROSS A 14,411-FOOT VERTICAL PROFILE FROM MOUNT RAINIER'S SUMMIT TO PUGET SOUND STORM SURGE, THE CLOSING SEQUENCE OPENS AT 346 AND RUNS THROUGH 347 AND 348 WITH THREE CONSECUTIVE E=20 READINGS, ENGINE AT 96.1% WITH 14 DEGREES REMAINING).
+# v1.49.487 — Degree 346: Soundgarden *Superunknown* + Cascades Full Storm (THE SUMMIT-TO-SEA VERTICAL ARC, SECOND E=10 ON BOTH TRACKS IN 346 DEGREES, SECOND E=20 COMBINED IN THE ENGINE'S RUN, THE ABSOLUTE CEILING REACHED FOR THE SECOND TIME, CHRIS CORNELL'S FOUR-OCTAVE INSTRUMENT DOCUMENTED ON THE MOST COMPLETE ROCK ALBUM OF THE 1990s, THE CASCADE RANGE VOCALIZING ACROSS A 14,411-FOOT VERTICAL PROFILE FROM MOUNT RAINIER'S SUMMIT TO PUGET SOUND STORM SURGE, THE CLOSING SEQUENCE OPENS AT 346 AND RUNS THROUGH 347 AND 348 WITH THREE CONSECUTIVE E=20 READINGS, ENGINE AT 96.1% WITH 14 DEGREES REMAINING)
 **Shipped:** 2026-04-03
-_Parse confidence: 0.50 — source `docs/release-notes/v1.49.487/README.md`_
+**Commits:** 0 | **Files:** 9
+**Branch:** dev
+_Parse confidence: 0.75 — source `docs/release-notes/v1.49.487/README.md`_
 ## Summary
-This release carried 6 features; see `01-features.md`.
+No structured feature list was captured for this release; see the source README for prose details.
+It also produced retrospective content (lessons_learned, what_could_be_better, what_worked); see `03-retrospective.md`.
+13 lessons extracted; see `04-lessons.md` or the `RETROSPECTIVE-TRACKER.md`.
 ---
 **Prev:** [v1.49.486](../v1.49.486/00-summary.md) · **Next:** [v1.49.488](../v1.49.488/00-summary.md)

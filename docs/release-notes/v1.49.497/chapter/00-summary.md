@@ -1,8 +1,12 @@
-> Following v1.49.496 — _Degree 355: Solger (peak hardcore) + Stonefly Emergence Full River_, v1.49.497 ships as Degree 356: The Fartz (peak hardcore) + Pacific Wren Storm-Chorus Max.
-# v1.49.497 — Degree 356: The Fartz (peak hardcore) + Pacific Wren Storm-Chorus Max
+> Following v1.49.496 — _Degree 355: Solger (Peak Hardcore) + Stonefly Emergence Full River (THE CLOSING ARC RETURNS TO ORIGIN, THE FOUNDATIONAL EMERGENCE IN BOTH TRACKS, THE FIRST SEATTLE HARDCORE BAND DOCUMENTED AT E=10 THROUGH ORIGINATION ENERGY, THE PLECOPTERA ORDER AT 250–300 MILLION YEARS SURFACES ACROSS A MAJOR PACIFIC NORTHWEST RIVER AT PEAK SPRING, ENGINE REACHES 98.6%)_, v1.49.497 ships as Degree 356: The Fartz (peak hardcore) + Pacific Wren Storm-Chorus Max (THE CLOSING ARC COMPLETES WITH THE FOUNDING GENERATION'S SECOND BAND AND THE MOST INTIMATE E=10 IN THE ENGINE, SEATTLE HARDCORE'S FOUNDING PAIR FINISHES AT SOLGER PLUS THE FARTZ ACROSS DEGREES 355 AND 356, THE LOUDEST SOUND FROM THE SMALLEST SOURCE AS THE SHARED CALIBRATION PRINCIPLE, ENGINE REACHES 99.0%).
+# v1.49.497 — Degree 356: The Fartz (peak hardcore) + Pacific Wren Storm-Chorus Max (THE CLOSING ARC COMPLETES WITH THE FOUNDING GENERATION'S SECOND BAND AND THE MOST INTIMATE E=10 IN THE ENGINE, SEATTLE HARDCORE'S FOUNDING PAIR FINISHES AT SOLGER PLUS THE FARTZ ACROSS DEGREES 355 AND 356, THE LOUDEST SOUND FROM THE SMALLEST SOURCE AS THE SHARED CALIBRATION PRINCIPLE, ENGINE REACHES 99.0%)
 **Shipped:** 2026-04-03
-_Parse confidence: 0.50 — source `docs/release-notes/v1.49.497/README.md`_
+**Commits:** 0 | **Files:** 9
+**Branch:** dev
+_Parse confidence: 0.75 — source `docs/release-notes/v1.49.497/README.md`_
 ## Summary
-This release carried 6 features; see `01-features.md`.
+No structured feature list was captured for this release; see the source README for prose details.
+It also produced retrospective content (lessons_learned, what_could_be_better, what_worked); see `03-retrospective.md`.
+15 lessons extracted; see `04-lessons.md` or the `RETROSPECTIVE-TRACKER.md`.
 ---
 **Prev:** [v1.49.496](../v1.49.496/00-summary.md) · **Next:** [v1.49.498](../v1.49.498/00-summary.md)

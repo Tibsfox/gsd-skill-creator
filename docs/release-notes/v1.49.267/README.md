@@ -1,4 +1,4 @@
-# v1.49.267 — Degree 127: Jonathan Poneman (Radio/Label, E=3, KCMU, Sub Pop Co-Founder) + Tundra Swan (High Melodious Baying Flock, E=5) — THE ANATIDAE RECORD BREAKS — TENTH CONSECUTIVE WATERFOWL SURPASSES THE PICIDAE NONET — FIRST SWAN IN THE ENGINE — SUB POP FOUNDING PAIR OPENS — KCMU RADIO TRIO CONTINUES — SWAN COMPARISON PAIR OPENS
+# v1.49.267 — Degree 127: Jonathan Poneman + Tundra Swan — THE ANATIDAE RECORD BREAKS
 
 **Released:** 2026-04-02
 **Scope:** Seattle 360 + Sound of Puget Sound — paired degree release, Sub Pop founding pair part one on the artist axis, Anatidae all-time family-streak record break on the species axis, first swan in the engine, swan comparison pair opens, KCMU/radio trio continues, infrastructure-as-collective-amplifier cross-sync

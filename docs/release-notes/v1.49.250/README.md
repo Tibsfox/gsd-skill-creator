@@ -1,4 +1,4 @@
-# v1.49.250 — Degree 110: Kinski (Krautrock/Experimental) + Hairy Woodpecker — THE HYPNOTIC ENGINE AND THE STUTTERING DRUM — FIRST KRAUTROCK — THE E=6 THREE-PEAT ENDS — CAPITOL HILL BEGINS — PICIDAE FOUR-STREAK — FIFTIETH CONSECUTIVE ORIGINAL CSV
+# v1.49.250 — Degree 110: Kinski + Hairy Woodpecker — THE HYPNOTIC ENGINE AND THE STUTTERING DRUM
 
 **Released:** 2026-04-02
 **Scope:** Seattle 360 + Sound of Puget Sound — paired degree release, first Krautrock, Capitol Hill streak opener, Picidae four-streak, fiftieth consecutive original CSV milestone, dual E=6 → E=5 correction
