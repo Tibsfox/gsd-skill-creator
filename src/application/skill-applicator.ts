@@ -15,6 +15,7 @@ import type { EventStore, PatternReport } from '../telemetry/index.js';
 import { TelemetryStage, ScoreAdjuster } from '../telemetry/index.js';
 import type { SensoriaHookOptions } from '../sensoria/applicator-hook.js';
 import { createSensoriaStage, readSensoriaEnabledFlag } from '../sensoria/applicator-hook.js';
+import { readOrchestrationEnabledFlag } from '../orchestration/settings.js';
 
 /**
  * Optional configuration for enabling retrieval-augmented features.
@@ -54,6 +55,13 @@ export class SkillApplicator {
   private budgetProfile?: BudgetProfile;
   private modelProfile?: string;
   private indexed = false;
+  /**
+   * M5 orchestration-path flag. When true, callers that opt-in via
+   * `applyViaSelector()` run through the `ActivationSelector` (M5) which
+   * composes M1+M2+M6. Flag-off (default) preserves the legacy pipeline
+   * byte-identically.
+   */
+  private orchestrationEnabled: boolean;
 
   constructor(
     private skillIndex: SkillIndex,
@@ -74,6 +82,13 @@ export class SkillApplicator {
     this.session = new SkillSession(this.tokenCounter, fullConfig);
     this.budgetProfile = budgetProfile;
     this.modelProfile = modelProfile;
+
+    // M5 orchestration-path flag. Reads `gsd-skill-creator.orchestration.enabled`
+    // from settings.json. Default OFF — byte-identical v1.49.560 behaviour.
+    // The flag is recorded but NOT consulted by the legacy `apply()` path so
+    // the SC-FLAG-OFF byte-identical guarantee is preserved. Callers wanting
+    // the M5-driven orchestration must invoke `applyViaSelector()` explicitly.
+    this.orchestrationEnabled = readOrchestrationEnabledFlag();
 
     // Pipeline order: Score -> [Correction] -> Resolve -> ModelFilter (conditional) -> CacheOrder -> Budget (conditional) -> Load
     this.pipeline = new SkillPipeline();
@@ -271,5 +286,13 @@ export class SkillApplicator {
   async reindex(): Promise<void> {
     const skills = await this.skillIndex.getEnabled();
     this.scorer.indexSkills(skills);
+  }
+
+  /**
+   * Is the M5 orchestration path enabled?
+   * Gated by `gsd-skill-creator.orchestration.enabled` in settings.json.
+   */
+  isOrchestrationEnabled(): boolean {
+    return this.orchestrationEnabled;
   }
 }
