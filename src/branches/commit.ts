@@ -40,6 +40,7 @@ import { promises as fs } from 'node:fs';
 import { join } from 'node:path';
 import { readManifest, writeManifest, DEFAULT_BRANCHES_DIR } from './fork.js';
 import type { BranchManifest } from './manifest.js';
+import { recordBranchResolved } from '../reinforcement/channel-sources.js';
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -81,6 +82,17 @@ export interface CommitOptions {
    * Override for Date.now() in tests.
    */
   ts?: number;
+
+  /**
+   * MA-6 hook: suppress the `branch_resolved` reinforcement emission.
+   * Defaults to true (emit) when omitted.
+   */
+  emitReinforcement?: boolean;
+
+  /**
+   * MA-6 hook: override the reinforcement log path (tests / alt storage).
+   */
+  reinforcementLogPath?: string;
 }
 
 export type CommitOutcome = 'committed' | 'blocked';
@@ -214,6 +226,22 @@ export async function commit(opts: CommitOptions): Promise<CommitResult> {
       // Release the lock.
       await fs.unlink(lockPath).catch(() => {/* ignore if already gone */});
 
+      // MA-6: emit branch_resolved reinforcement (committed path).
+      if (opts.emitReinforcement !== false) {
+        await recordBranchResolved(
+          {
+            actor: 'branches:commit',
+            metadata: {
+              branchId,
+              resolution: 'committed',
+              winnerBranchId: branchId,
+            },
+            ts,
+          },
+          { logPath: opts.reinforcementLogPath },
+        );
+      }
+
       return {
         outcome: 'committed',
         winnerBranchId: branchId,
@@ -237,6 +265,23 @@ export async function commit(opts: CommitOptions): Promise<CommitResult> {
   const aborted: BranchManifest = { ...manifest, state: 'aborted', abortedAt: ts };
   await writeManifest(branchDir, aborted);
   manifest = aborted;
+
+  // MA-6: emit branch_resolved reinforcement (aborted/blocked path).
+  if (opts.emitReinforcement !== false) {
+    await recordBranchResolved(
+      {
+        actor: 'branches:commit',
+        metadata: {
+          branchId,
+          resolution: 'aborted',
+          winnerBranchId,
+          diagnostic,
+        },
+        ts,
+      },
+      { logPath: opts.reinforcementLogPath },
+    );
+  }
 
   return {
     outcome: 'blocked',

@@ -23,6 +23,7 @@
  */
 
 import type { QuintessenceSnapshot } from '../types/symbiosis.js';
+import { recordQuintessenceUpdated } from '../reinforcement/channel-sources.js';
 
 // ─── Pluggable source interfaces ────────────────────────────────────────────
 
@@ -129,7 +130,7 @@ export const DEFAULT_FATEFUL_THRESHOLD = 0.25;
  */
 export function computeQuintessenceSnapshot(
   sources: QuintessenceSources,
-  opts: { threshold?: number; now?: number } = {},
+  opts: { threshold?: number; now?: number; emitReinforcement?: boolean; reinforcementLogPath?: string } = {},
 ): QuintessenceSnapshot {
   const threshold = opts.threshold ?? DEFAULT_FATEFUL_THRESHOLD;
   const now = opts.now ?? Date.now();
@@ -149,7 +150,7 @@ export function computeQuintessenceSnapshot(
 
   const fatefulEncounters = Math.max(0, sources.fateful.highImpactDecisionCount(threshold));
 
-  return {
+  const snapshot: QuintessenceSnapshot = {
     ts: now,
     selfVsNonSelf,
     essentialTensions,
@@ -157,6 +158,29 @@ export function computeQuintessenceSnapshot(
     stabilityVsNovelty,
     fatefulEncounters,
   };
+
+  // MA-6: emit quintessence_updated reinforcement (axis recomputation).
+  // Fire-and-forget; computeQuintessenceSnapshot must remain synchronous.
+  if (opts.emitReinforcement !== false) {
+    void recordQuintessenceUpdated(
+      {
+        actor: 'symbiosis:quintessence',
+        metadata: {
+          axes: {
+            selfVsNonSelf,
+            essentialTensions,
+            growthAndEnergyFlow,
+            stabilityVsNovelty,
+            fatefulEncounters,
+          },
+        },
+        ts: now,
+      },
+      { logPath: opts.reinforcementLogPath },
+    );
+  }
+
+  return snapshot;
 }
 
 /**

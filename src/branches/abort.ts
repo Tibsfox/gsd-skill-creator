@@ -27,6 +27,7 @@ import { promises as fs } from 'node:fs';
 import { join } from 'node:path';
 import { readManifest, DEFAULT_BRANCHES_DIR } from './fork.js';
 import type { BranchManifest } from './manifest.js';
+import { recordBranchResolved } from '../reinforcement/channel-sources.js';
 
 // ─── Abort options ────────────────────────────────────────────────────────────
 
@@ -46,6 +47,17 @@ export interface AbortOptions {
    * Override for Date.now() in tests.
    */
   ts?: number;
+
+  /**
+   * MA-6 hook: suppress the `branch_resolved` reinforcement emission.
+   * Defaults to true (emit) when omitted.
+   */
+  emitReinforcement?: boolean;
+
+  /**
+   * MA-6 hook: override the reinforcement log path (tests / alt storage).
+   */
+  reinforcementLogPath?: string;
 }
 
 export interface AbortResult {
@@ -94,6 +106,21 @@ export async function abort(opts: AbortOptions): Promise<AbortResult> {
   // We skip writing the final manifest to disk before deletion — the
   // directory disappears atomically, so there is no partial state.
   await fs.rm(branchDir, { recursive: true, force: true });
+
+  // MA-6: emit branch_resolved reinforcement (explicit abort).
+  if (opts.emitReinforcement !== false) {
+    await recordBranchResolved(
+      {
+        actor: 'branches:abort',
+        metadata: {
+          branchId,
+          resolution: 'aborted',
+        },
+        ts,
+      },
+      { logPath: opts.reinforcementLogPath },
+    );
+  }
 
   return { branchId, deleted: true, finalState: 'aborted' };
 }
