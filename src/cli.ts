@@ -1609,6 +1609,14 @@ async function main() {
       break;
     }
 
+    case 'tractability':
+    case 'tract': {
+      const { tractabilityCommand } = await import('./tractability/cli.js');
+      const exitCode = await tractabilityCommand(args.slice(1));
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
     case 'sensoria': {
       const scope = parseScope(args);
       const { skillStore: scopedStore } = createScopedStoreAndIndex(scope);
