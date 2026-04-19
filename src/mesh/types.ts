@@ -106,6 +106,8 @@ export const MeshEventTypeSchema = z.enum([
   'heartbeat',
   'eviction',
   'health-change',
+  // M3 Decision-Trace Ledger (Phase 644, Wave 1 Track D)
+  'decision_trace',
 ]);
 
 /** TypeScript type for mesh event types */
