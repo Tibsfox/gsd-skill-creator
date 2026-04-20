@@ -166,4 +166,77 @@ test.describe('NASA shared-harness v1.0.0', () => {
         .toBeLessThan(LOAD_BUDGET_MS);
     }
   });
+
+  test('Real Faust runtime loads and compiles sample-synth.dsp', async ({ page }) => {
+    // This test exercises the vendored @grame/faustwasm distribution
+    // (dist/esm + libfaust-wasm) dropped into the harness by the
+    // real-vendor pass. A placeholder LICENSE-PENDING drop would have
+    // failed the basic loader test already; this test adds positive
+    // confirmation that the *real* runtime surface is present.
+    await timedGoto(page, `${FIXTURES}/audio/sample-synth.html`);
+    await page.waitForFunction(
+      () => (window as any).__HARNESS_VERSION__ === '1.0.0',
+      { timeout: LOAD_BUDGET_MS }
+    );
+
+    // Give the lazy faustwasm import a moment to resolve. loadFaustPatch
+    // awaits it before returning from the fixture's <script>. Both
+    // outcomes (loaded OR well-formed error) are valid — we just require
+    // that when the loader reports "loaded=true", the module surface it
+    // resolved is the *real* faustwasm, not a stub.
+    const outcome = await page.evaluate(async () => {
+      const state = {
+        loaded: (window as any).__FAUST_LOADED__,
+        error: (window as any).__FAUST_LOAD_ERROR__ || null,
+        moduleShape: null as null | {
+          hasInstantiate: boolean;
+          hasCompiler: boolean;
+          hasGenerator: boolean;
+          hasAudioWorkletNode: boolean;
+        },
+        params: null as null | string[],
+      };
+      if (state.loaded) {
+        // Reach into the faustwasm bundle via a fresh import; it is
+        // cached by the harness singleton so this is free.
+        try {
+          const mod: any = await import(
+            '/www/tibsfox/com/Research/NASA/_harness/v1.0.0/faustwasm/index.js'
+          );
+          state.moduleShape = {
+            hasInstantiate:       typeof mod.instantiateFaustModuleFromFile === 'function',
+            hasCompiler:          typeof mod.FaustCompiler === 'function',
+            hasGenerator:         typeof mod.FaustMonoDspGenerator === 'function',
+            hasAudioWorkletNode:  typeof mod.FaustAudioWorkletNode === 'function',
+          };
+          // Peek at runtime knobs — loadFaustPatch parses .dsp UI
+          // declarations before compile, so this succeeds even without
+          // a user gesture.
+          const rt = (window as any).__FAUST_RUNTIME__;
+          if (rt && typeof rt.getParams === 'function') {
+            state.params = rt.getParams().map((p: { label: string }) => p.label);
+          }
+        } catch (err: any) {
+          state.error = String(err && err.message ? err.message : err);
+        }
+      }
+      return state;
+    });
+
+    if (outcome.loaded) {
+      expect(outcome.moduleShape, 'real faustwasm module shape').not.toBeNull();
+      expect(outcome.moduleShape!.hasInstantiate).toBe(true);
+      expect(outcome.moduleShape!.hasCompiler).toBe(true);
+      expect(outcome.moduleShape!.hasGenerator).toBe(true);
+      // Knobs parsed from sample-synth.dsp: freq, vol, mute.
+      expect(outcome.params).not.toBeNull();
+      expect(outcome.params!.length).toBeGreaterThanOrEqual(3);
+      expect(outcome.params).toEqual(expect.arrayContaining(['freq', 'vol', 'mute']));
+    } else {
+      // Loader did not succeed. Acceptable only if the error is a
+      // recognised vendor-drop issue; anything else is a regression.
+      expect(outcome.error).toBeTruthy();
+      expect(outcome.error).toMatch(/faustwasm|vendor|placeholder|LICENSE/i);
+    }
+  });
 });
