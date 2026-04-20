@@ -14,6 +14,7 @@ import { fileURLToPath } from 'node:url';
 import type {
   CapabilitiesReport,
   CoprocessorClientOptions,
+  Precision,
   ToolName,
   ToolResult,
   VramReport,
@@ -98,7 +99,7 @@ export class CoprocessorClient {
     return JSON.parse(first.text) as ToolResult<T>;
   }
 
-  // ── Typed chip-level helpers ──────────────────────────────────────────
+  // ── META ──────────────────────────────────────────────────────────────
 
   async capabilities(): Promise<ToolResult<CapabilitiesReport>> {
     return this.callTool<CapabilitiesReport>('math.capabilities');
@@ -108,29 +109,97 @@ export class CoprocessorClient {
     return this.callTool<VramReport>('math.vram');
   }
 
+  async streams(): Promise<ToolResult<Record<string, unknown>>> {
+    return this.callTool<Record<string, unknown>>('math.streams');
+  }
+
+  // ── ALGEBRUS (linear algebra) ────────────────────────────────────────
+
   async gemm(args: {
     a: number[][];
     b: number[][];
     c?: number[][];
     alpha?: number;
     beta?: number;
-    precision?: 'fp32' | 'fp64';
+    precision?: Precision;
   }): Promise<ToolResult<number[][]>> {
     return this.callTool<number[][]>('algebrus.gemm', args);
   }
 
-  async fft(args: { signal: number[]; precision?: 'fp32' | 'fp64' }): Promise<ToolResult<{ real: number[]; imag: number[] }>> {
+  async solve(args: { a: number[][]; b: number[]; precision?: Precision }): Promise<ToolResult<number[]>> {
+    return this.callTool<number[]>('algebrus.solve', args);
+  }
+
+  async svd(args: { a: number[][]; precision?: Precision }): Promise<ToolResult<{ u: number[][]; s: number[]; vt: number[][] }>> {
+    return this.callTool<{ u: number[][]; s: number[]; vt: number[][] }>('algebrus.svd', args);
+  }
+
+  async eigen(args: { a: number[][]; precision?: Precision }): Promise<ToolResult<{ eigenvalues: number[]; eigenvectors: number[][] }>> {
+    return this.callTool<{ eigenvalues: number[]; eigenvectors: number[][] }>('algebrus.eigen', args);
+  }
+
+  async det(args: { a: number[][]; precision?: Precision }): Promise<ToolResult<number>> {
+    return this.callTool<number>('algebrus.det', args);
+  }
+
+  // ── FOURIER (spectral analysis) ──────────────────────────────────────
+
+  async fft(args: { data: number[]; precision?: Precision }): Promise<ToolResult<{ real: number[]; imag: number[] }>> {
     return this.callTool<{ real: number[]; imag: number[] }>('fourier.fft', args);
   }
 
-  async describe(args: { data: number[] }): Promise<ToolResult<{ mean: number; stddev: number; min: number; max: number; quartiles: number[] }>> {
-    return this.callTool<{ mean: number; stddev: number; min: number; max: number; quartiles: number[] }>(
+  async ifft(args: { data_real: number[]; data_imag: number[]; precision?: Precision }): Promise<ToolResult<{ real: number[]; imag: number[] }>> {
+    return this.callTool<{ real: number[]; imag: number[] }>('fourier.ifft', args);
+  }
+
+  async spectrum(args: { data: number[]; sample_rate?: number; precision?: Precision }): Promise<ToolResult<{ frequencies: number[]; power: number[] }>> {
+    return this.callTool<{ frequencies: number[]; power: number[] }>('fourier.spectrum', args);
+  }
+
+  // ── VECTORA (vector calculus + batch eval) ───────────────────────────
+
+  async gradient(args: { field: number[] | number[][]; spacing?: number; precision?: Precision }): Promise<ToolResult<number[] | number[][]>> {
+    return this.callTool<number[] | number[][]>('vectora.gradient', args);
+  }
+
+  async transform(args: { points: number[][]; matrix: number[][]; precision?: Precision }): Promise<ToolResult<number[][]>> {
+    return this.callTool<number[][]>('vectora.transform', args);
+  }
+
+  async batchEval(args: { expression: string; param_name: string; values: number[]; precision?: Precision }): Promise<ToolResult<number[]>> {
+    return this.callTool<number[]>('vectora.batch_eval', args);
+  }
+
+  // ── STATOS (statistics) ──────────────────────────────────────────────
+
+  async describe(args: { data: number[]; precision?: Precision }): Promise<ToolResult<{ mean: number; median: number; stddev: number; variance: number; min: number; max: number; quartiles: number[] }>> {
+    return this.callTool<{ mean: number; median: number; stddev: number; variance: number; min: number; max: number; quartiles: number[] }>(
       'statos.describe',
       args,
     );
   }
 
-  async evalExpr(args: { expression: string; bindings?: Record<string, number> }): Promise<ToolResult<number>> {
-    return this.callTool<number>('symbex.eval', args);
+  async monteCarlo(args: { expression: string; param_ranges: Record<string, [number, number]>; n_paths?: number; precision?: Precision }): Promise<ToolResult<{ mean: number; stddev: number; percentiles: Record<string, number> }>> {
+    return this.callTool<{ mean: number; stddev: number; percentiles: Record<string, number> }>(
+      'statos.monte_carlo',
+      args,
+    );
+  }
+
+  async regression(args: { x: number[]; y: number[]; degree?: number; precision?: Precision }): Promise<ToolResult<{ coefficients: number[]; r_squared: number; residuals: number[] }>> {
+    return this.callTool<{ coefficients: number[]; r_squared: number; residuals: number[] }>(
+      'statos.regression',
+      args,
+    );
+  }
+
+  // ── SYMBEX (symbolic / expression evaluation) ────────────────────────
+
+  async evalExpr(args: { expression: string; param_name: string; values: number[]; precision?: Precision }): Promise<ToolResult<number[]>> {
+    return this.callTool<number[]>('symbex.eval', args);
+  }
+
+  async verify(args: { expression: string; param_name: string; values: number[]; expected: number | number[]; tolerance?: number; precision?: Precision }): Promise<ToolResult<{ passed: boolean; max_error: number }>> {
+    return this.callTool<{ passed: boolean; max_error: number }>('symbex.verify', args);
   }
 }
