@@ -19,6 +19,7 @@ import {
   GroveChipsetSchema,
   CollegeChipsetSchema,
   CoprocessorChipsetSchema,
+  GraphicsChipsetSchema,
   MetricsChipsetSchema,
   EvaluationChipsetSchema,
   CHIPSET_KINDS,
@@ -160,6 +161,22 @@ const coprocessorFixture = {
   ],
 };
 
+const graphicsFixture = {
+  kind: 'graphics' as const,
+  api: 'webgl2' as const,
+  api_version: '2.0',
+  shader_language: 'glsl-es' as const,
+  shader_language_version: '3.00',
+  shader_stages: ['vertex', 'fragment'] as ('vertex' | 'fragment')[],
+  sources: [
+    { stage: 'vertex' as const, path: 'shaders/basic.vert.glsl', entry_point: 'main' },
+    { stage: 'fragment' as const, path: 'shaders/basic.frag.glsl', entry_point: 'main' },
+  ],
+  runtime: { target_fps: 60 },
+  toolchain: { glslang: true },
+  host: { kind: 'vite' as const, entry: 'index.html' },
+};
+
 const metricsFixture = {
   kind: 'metrics' as const,
   activation_tracking: {
@@ -255,6 +272,12 @@ describe('unified chipset schema — round trips', () => {
     expect(CoprocessorChipsetSchema.parse(rt)).toEqual(coprocessorFixture);
   });
 
+  it('RT-06b graphics chipset round-trips losslessly', () => {
+    const rt = roundTripChipset(graphicsFixture);
+    expect(rt).toEqual(graphicsFixture);
+    expect(GraphicsChipsetSchema.parse(rt)).toEqual(graphicsFixture);
+  });
+
   it('RT-07 metrics chipset round-trips losslessly', () => {
     const rt = roundTripChipset(metricsFixture);
     expect(rt).toEqual(metricsFixture);
@@ -323,7 +346,7 @@ describe('unified Cartridge schema — round trips', () => {
     expect(rt.provenance.forkOf).toBe('cartridge-forge');
   });
 
-  it('supports all 8 chipset kinds in a single cartridge', () => {
+  it('supports all 9 chipset kinds in a single cartridge', () => {
     const everything: Cartridge = {
       ...baseCartridge,
       id: 'everything-cartridge',
@@ -334,14 +357,109 @@ describe('unified Cartridge schema — round trips', () => {
         groveFixture,
         collegeFixture,
         coprocessorFixture,
+        graphicsFixture,
         metricsFixture,
         evaluationFixture,
       ],
     };
     const rt = roundTripCartridge(everything);
-    expect(rt.chipsets).toHaveLength(8);
+    expect(rt.chipsets).toHaveLength(9);
     const kinds = new Set(rt.chipsets.map((c) => c.kind));
     expect(kinds).toEqual(new Set(CHIPSET_KINDS));
+  });
+});
+
+// ---------------------------------------------------------------------------
+// GFX-01..GFX-06 — GraphicsChipsetSchema acceptance + rejection
+// ---------------------------------------------------------------------------
+
+describe('GraphicsChipsetSchema', () => {
+  it('GFX-01 accepts all four Khronos APIs with round-trip parity', () => {
+    const apis = [
+      { api: 'opengl' as const, shader_language: 'glsl' as const, av: '4.6', sv: '4.60' },
+      { api: 'opengl-es' as const, shader_language: 'glsl-es' as const, av: '3.2', sv: '3.20' },
+      { api: 'webgl' as const, shader_language: 'glsl-es' as const, av: '1.0', sv: '1.00' },
+      { api: 'webgl2' as const, shader_language: 'glsl-es' as const, av: '2.0', sv: '3.00' },
+      { api: 'vulkan' as const, shader_language: 'spirv' as const, av: '1.4', sv: '1.6' },
+    ];
+    for (const spec of apis) {
+      const fixture = {
+        kind: 'graphics' as const,
+        api: spec.api,
+        api_version: spec.av,
+        shader_language: spec.shader_language,
+        shader_language_version: spec.sv,
+        shader_stages: ['vertex', 'fragment'] as ('vertex' | 'fragment')[],
+      };
+      const rt = roundTripChipset(fixture);
+      expect(rt).toEqual(fixture);
+      expect(GraphicsChipsetSchema.parse(rt).api).toBe(spec.api);
+    }
+  });
+
+  it('GFX-02 rejects malformed api_version string', () => {
+    const bad = {
+      ...graphicsFixture,
+      api_version: 'four-point-six',
+    };
+    expect(GraphicsChipsetSchema.safeParse(bad).success).toBe(false);
+  });
+
+  it('GFX-03 requires at least one shader stage', () => {
+    const bad = {
+      ...graphicsFixture,
+      shader_stages: [] as const,
+    };
+    expect(GraphicsChipsetSchema.safeParse(bad).success).toBe(false);
+  });
+
+  it('GFX-04 accepts a graphics chipset without any sources', () => {
+    const minimal = {
+      kind: 'graphics' as const,
+      api: 'vulkan' as const,
+      api_version: '1.4',
+      shader_language: 'spirv' as const,
+      shader_language_version: '1.6',
+      shader_stages: ['vertex', 'fragment'] as ('vertex' | 'fragment')[],
+    };
+    expect(GraphicsChipsetSchema.safeParse(minimal).success).toBe(true);
+  });
+
+  it('GFX-05 schema accepts sources[].stage outside declared shader_stages (eval gate enforces this, not schema)', () => {
+    // The schema validates each source.stage is a valid shader stage enum
+    // value. Cross-field consistency (source stage must appear in
+    // shader_stages) is intentionally an EVAL gate, not a Zod constraint.
+    const schemaLegalButEvalIllegal = {
+      ...graphicsFixture,
+      shader_stages: ['vertex'] as const,
+      sources: [
+        { stage: 'vertex' as const, path: 'v.glsl', entry_point: 'main' },
+        { stage: 'fragment' as const, path: 'f.glsl', entry_point: 'main' },
+      ],
+    };
+    expect(GraphicsChipsetSchema.safeParse(schemaLegalButEvalIllegal).success).toBe(true);
+  });
+
+  it('GFX-06 rejects invalid shader stage enum', () => {
+    const bad = {
+      ...graphicsFixture,
+      shader_stages: ['vertex', 'ray-generation'] as const,
+    };
+    expect(GraphicsChipsetSchema.safeParse(bad).success).toBe(false);
+  });
+
+  it('GFX-07 entry_point defaults to "main"', () => {
+    const withoutEntry = {
+      kind: 'graphics' as const,
+      api: 'webgl2' as const,
+      api_version: '2.0',
+      shader_language: 'glsl-es' as const,
+      shader_language_version: '3.00',
+      shader_stages: ['vertex'] as const,
+      sources: [{ stage: 'vertex' as const, path: 'v.glsl' }],
+    };
+    const parsed = GraphicsChipsetSchema.parse(withoutEntry);
+    expect(parsed.sources?.[0]?.entry_point).toBe('main');
   });
 });
 
@@ -420,6 +538,9 @@ describe('unified schema — rejection of missing required fields', () => {
       CoprocessorChipsetSchema.safeParse({ kind: 'coprocessor' }).success,
     ).toBe(false);
     expect(
+      GraphicsChipsetSchema.safeParse({ kind: 'graphics' }).success,
+    ).toBe(false);
+    expect(
       MetricsChipsetSchema.safeParse({ kind: 'metrics' }).success,
     ).toBe(false);
     expect(
@@ -469,8 +590,8 @@ describe('findChipset / findChipsets helpers', () => {
     expect(all[1]?.namespace).toBe('second-grove');
   });
 
-  it('CHIPSET_KINDS covers exactly the 8 kinds in the discriminated union', () => {
-    expect(CHIPSET_KINDS).toHaveLength(8);
+  it('CHIPSET_KINDS covers exactly the 9 kinds in the discriminated union', () => {
+    expect(CHIPSET_KINDS).toHaveLength(9);
     expect(new Set(CHIPSET_KINDS)).toEqual(
       new Set([
         'content',
@@ -479,6 +600,7 @@ describe('findChipset / findChipsets helpers', () => {
         'grove',
         'college',
         'coprocessor',
+        'graphics',
         'metrics',
         'evaluation',
       ]),

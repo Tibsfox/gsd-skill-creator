@@ -91,5 +91,49 @@ describe('dedupCartridge', () => {
     expect(r.collisions).toEqual([]);
     expect(r.skillCount).toBe(0);
     expect(r.agentCount).toBe(0);
+    expect(r.graphicsSourceCount).toBe(0);
+  });
+
+  it('DD-06 flags duplicate shader source paths in a graphics chipset', () => {
+    const c = cartridge([
+      {
+        kind: 'graphics',
+        api: 'webgl2',
+        api_version: '2.0',
+        shader_language: 'glsl-es',
+        shader_language_version: '3.00',
+        shader_stages: ['vertex', 'fragment'],
+        sources: [
+          { stage: 'vertex', path: 'shaders/shared.glsl', entry_point: 'main' },
+          { stage: 'fragment', path: 'shaders/shared.glsl', entry_point: 'main' },
+        ],
+      },
+    ]);
+    const r = dedupCartridge(c);
+    expect(r.collisions).toHaveLength(1);
+    expect(r.collisions[0]?.kind).toBe('graphics-source');
+    expect(r.collisions[0]?.key).toBe('shaders/shared.glsl');
+    expect(r.collisions[0]?.locations).toHaveLength(2);
+    expect(r.graphicsSourceCount).toBe(1);
+  });
+
+  it('DD-07 unique shader paths report no collisions', () => {
+    const c = cartridge([
+      {
+        kind: 'graphics',
+        api: 'webgl2',
+        api_version: '2.0',
+        shader_language: 'glsl-es',
+        shader_language_version: '3.00',
+        shader_stages: ['vertex', 'fragment'],
+        sources: [
+          { stage: 'vertex', path: 'shaders/a.glsl', entry_point: 'main' },
+          { stage: 'fragment', path: 'shaders/b.glsl', entry_point: 'main' },
+        ],
+      },
+    ]);
+    const r = dedupCartridge(c);
+    expect(r.collisions).toEqual([]);
+    expect(r.graphicsSourceCount).toBe(2);
   });
 });
