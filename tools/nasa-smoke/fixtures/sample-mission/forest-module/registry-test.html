@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" data-harness-version="1.0.0">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forest Registry · Smoke Fixture</title>
+  <link rel="stylesheet" href="/www/tibsfox/com/Research/NASA/_harness/v1.0.0/harness.css">
+  <style>
+    body { background: #0E0E0C; color: #C8C4B8;
+           font-family: 'DM Sans', system-ui, sans-serif; padding: 2rem; margin: 0; }
+    h1 { font-family: 'Libre Baskerville', Georgia, serif; font-weight: 400; color: #E4E0D8; }
+    #missions-panel { position: static; width: auto; max-height: none;
+                      margin-top: 1rem; background: #161614; }
+  </style>
+</head>
+<body>
+  <h1>Forest Registry Smoke Test</h1>
+  <div id="missions-panel"></div>
+
+  <script type="module">
+    import {
+      register, list, enableByMissionVersion, disableAll, renderToggleList,
+      __harnessVersion,
+    } from '/www/tibsfox/com/Research/NASA/_harness/v1.0.0/forest-module-registry.js';
+    import sampleModule from './sample.js';
+
+    window.__HARNESS_VERSION__ = __harnessVersion;
+    window.__REGISTRY_READY__  = false;
+    try {
+      register(sampleModule);
+      const forest = { /* mock */ };
+      const ctx    = { /* mock */ };
+      // Exercise enable / disable path
+      await enableByMissionVersion('1.0', forest, ctx);
+      window.__REGISTRY_COUNT__       = list().length;
+      window.__REGISTRY_ENABLE_CALLS__ = window.__SAMPLE_FOREST_TRACKER__.enableCalls;
+      await disableAll(forest, ctx);
+      window.__REGISTRY_DISABLE_CALLS__ = window.__SAMPLE_FOREST_TRACKER__.disableCalls;
+      // Render the toggle panel
+      renderToggleList(document.getElementById('missions-panel'), { forest, ctx });
+      window.__REGISTRY_READY__ = true;
+    } catch (err) {
+      window.__REGISTRY_ERROR__ = String(err && err.message ? err.message : err);
+    }
+  </script>
+</body>
+</html>
