@@ -1,6 +1,6 @@
 # Chipset Taxonomy
 
-*The eight initial chipset kinds + the Amiga principle.*
+*The nine current chipset kinds + the Amiga principle.*
 
 A **chipset** is one semantic unit of a cartridge. The word is borrowed
 deliberately from Amiga hardware history: OCS, ECS, and AGA were the
@@ -10,7 +10,7 @@ and interoperated through a published protocol. Cartridges work the same
 way: a small number of well-scoped chipsets, each kind-tagged, cooperating
 through the loader + validator.
 
-## The Eight Kinds
+## The Nine Kinds
 
 ### `department`
 Skills + agents + teams for a topical domain. This is the single most
@@ -30,6 +30,41 @@ departments it reaches and any cross-department refinement logic.
 Pure functional tooling. Math-coprocessor is the reference example:
 symbolic linear algebra ops with no skills, no agents, no teams — just a
 block of pure functions bound to a type signature.
+
+### `graphics`
+Rendering pipelines. A graphics chipset declares:
+
+- An **API + version** pair from `{opengl, opengl-es, webgl, webgl2,
+  vulkan}`. The version must match the `X.Y` / `X.Y.Z` pattern the
+  Khronos registry uses.
+- A **shader language + version** pair from `{glsl, glsl-es, spirv,
+  wgsl}`. The scaffold default is `glsl-es 3.00` because that pair runs
+  unmodified in every modern browser via WebGL 2.
+- The **pipeline stages** in use. All six GLSL 4.60 stages are
+  available: `vertex`, `tessellation-control`,
+  `tessellation-evaluation`, `geometry`, `fragment`, `compute`
+  (Khronos OGL Wiki — Shader). At least one stage is required.
+- Optional **shader source files** — relative paths, per-file stage,
+  entry-point (defaults to `main`).
+- Optional **runtime** knobs (`vram_budget_mb`, `validation_layers`,
+  `msaa_samples`, `target_fps`), analogous to the coprocessor
+  chipset's quantitative defaults.
+- Optional **toolchain** flags: `glslang` (GLSL → SPIR-V), `spirv_cross`
+  (SPIR-V → backend shader), `angle` (OpenGL → D3D/Vulkan on Windows),
+  `moltenvk` (Vulkan on macOS/iOS).
+- Optional **host** hint: `vite` (WebGL browser), `native-c`,
+  `native-rust`, or `mcp`.
+
+The evaluation gate `all_graphics_sources_declare_stage` enforces a
+cross-field invariant: every `sources[].stage` must be listed in the
+top-level `shader_stages[]`. This catches the common failure of
+committing a shader file whose stage the chipset has not declared.
+
+Grounding: the five-module
+[Graphics APIs research series](https://tibsfox.com/Research/GFX/) on
+tibsfox.com (M1 OpenGL, M2 GLSL, M3 WebGL, M4 Vulkan, M5 Pipeline).
+
+Reference cartridge: `examples/cartridges/gfx-reference/`.
 
 ### `content`
 Essays, vocabulary, references. Space-Between ships most of its payload

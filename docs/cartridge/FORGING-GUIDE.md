@@ -24,6 +24,36 @@ This creates `./my-cartridges/physics/` with:
 Every scaffolded cartridge round-trips through `load` → `validate` with
 zero errors out of the box.
 
+### Available templates
+
+| Template | What it produces |
+|---|---|
+| `department` | Skills + agents + teams for a topical domain + a grove + evaluation chipset. Most common template. |
+| `content` | Deep-map + story arc + voice. Used for essays and vocabulary bundles. |
+| `coprocessor` | Pure-function tooling chipset (math-coprocessor pattern). |
+| `graphics` | `kind: graphics` rendering pipeline — WebGL 2 + GLSL ES 3.00 by default, plus two scaffolded shader files under `shaders/`. See `examples/cartridges/gfx-reference/` for the fleshed-out reference. |
+
+### Graphics recipe
+
+```bash
+skill-creator cartridge scaffold graphics ./my-cartridges/my-gfx my-gfx
+```
+
+Produces a 4-file skeleton:
+
+- `cartridge.yaml` — `kind: graphics`, `api: webgl2`, `api_version: "2.0"`,
+  `shader_language: glsl-es`, `shader_language_version: "3.00"`, two
+  shader stages wired to the scaffolded files.
+- `README.md` — per-API variant recipes (WebGL 2 default, OpenGL 4.6,
+  Vulkan 1.4, OpenGL ES 3.2) and pointers to the GFX research series.
+- `shaders/basic.vert.glsl` — GLSL ES 3.00 vertex shader.
+- `shaders/basic.frag.glsl` — GLSL ES 3.00 fragment shader with a UV
+  gradient.
+
+Validate + eval pass immediately: the `all_graphics_sources_declare_stage`
+gate confirms both source files reference stages listed in
+`shader_stages[]`.
+
 ## 2. Load
 
 ```bash
