@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" data-harness-version="1.0.0">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sample Mission · sample-synth · Interactive (Smoke Fixture)</title>
+  <!-- The smoke test serves the fixture directory at localhost; the harness
+       files are served at /_harness/v1.0.0/* via the playwright static server
+       config (see playwright.config.ts, webServer.cwd is the repo root so
+       www/ mounts natively). -->
+  <link rel="stylesheet" href="/www/tibsfox/com/Research/NASA/_harness/v1.0.0/harness.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 2rem;
+      background: #0E0E0C;
+      color: #C8C4B8;
+      font-family: 'DM Sans', system-ui, sans-serif;
+    }
+    h1 {
+      font-family: 'Libre Baskerville', Georgia, serif;
+      font-weight: 400;
+      color: #E4E0D8;
+      font-size: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Smoke fixture · sample-synth</h1>
+  <div id="runner-root" data-testid="faust-runner-root"></div>
+
+  <script type="module">
+    import { loadFaustPatch, __harnessVersion } from
+      '/www/tibsfox/com/Research/NASA/_harness/v1.0.0/faust-loader.js';
+
+    const root = document.getElementById('runner-root');
+    window.__HARNESS_VERSION__ = __harnessVersion;
+    window.__FAUST_LOADED__ = false;
+    try {
+      const runtime = await loadFaustPatch('./sample-synth.dsp', root, { visualize: true });
+      window.__FAUST_RUNTIME__ = runtime;
+      window.__FAUST_LOADED__  = true;
+    } catch (err) {
+      window.__FAUST_LOAD_ERROR__ = String(err && err.message ? err.message : err);
+    }
+  </script>
+</body>
+</html>
