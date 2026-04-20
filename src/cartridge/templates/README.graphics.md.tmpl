@@ -1,0 +1,118 @@
+# {{name}}
+
+Scaffolded `kind: graphics` cartridge. Edit `cartridge.yaml` and the files
+under `shaders/` to define a real rendering pipeline. Defaults target
+WebGL 2 + GLSL ES 3.00 because that pair runs unmodified in any modern
+browser without a separate native host.
+
+Slug: `{{slug}}`
+Trust: `{{trust}}`
+
+## Research grounding
+
+This template is grounded in the *Graphics APIs* research series at
+[/Research/GFX/](https://tibsfox.com/Research/GFX/) on tibsfox.com:
+
+- [M1 — OpenGL](https://tibsfox.com/Research/GFX/M1-opengl.html) — the
+  desktop host API (versions 1.0 → 4.6).
+- [M2 — GLSL](https://tibsfox.com/Research/GFX/M2-glsl.html) — shader
+  language, six programmable stages, compile-link model.
+- [M3 — WebGL](https://tibsfox.com/Research/GFX/M3-webgl.html) — the
+  browser-embedded API and its security model (matches this template's
+  default).
+- [M4 — Vulkan](https://tibsfox.com/Research/GFX/M4-vulkan.html) —
+  explicit-synchronisation API, validation layers, SPIR-V consumption.
+- [M5 — Pipeline](https://tibsfox.com/Research/GFX/M5-pipeline.html) —
+  the cross-API pipeline: SPIR-V bridge, SPIRV-Cross, ANGLE, MoltenVK.
+
+## Per-API variant recipes
+
+To switch this cartridge to another Khronos API, edit the `chipsets[0]`
+block in `cartridge.yaml`:
+
+### OpenGL 4.6 / GLSL 4.60 (desktop)
+
+```yaml
+api: opengl
+api_version: "4.6"
+shader_language: glsl
+shader_language_version: "4.60"
+host:
+  kind: native-c   # or native-rust
+  entry: src/main.c
+```
+
+### Vulkan 1.4 / SPIR-V (explicit sync, validation layers)
+
+```yaml
+api: vulkan
+api_version: "1.4"
+shader_language: spirv
+shader_language_version: "1.6"
+runtime:
+  validation_layers: true
+toolchain:
+  glslang: true        # compile GLSL → SPIR-V
+  spirv_cross: true    # cross-compile SPIR-V → backend shader
+host:
+  kind: native-c
+```
+
+### OpenGL ES 3.2 (mobile)
+
+```yaml
+api: opengl-es
+api_version: "3.2"
+shader_language: glsl-es
+shader_language_version: "3.20"
+host:
+  kind: native-c
+```
+
+## How to run
+
+### 1. Validate the cartridge shape
+
+```
+skill-creator cartridge validate ./cartridge.yaml
+```
+
+Exit code `0` + `valid: true` confirms the schema + cross-chipset checks
+pass.
+
+### 2. Run the eval gates
+
+```
+skill-creator cartridge eval ./cartridge.yaml
+```
+
+Graphics cartridges are gated by `all_graphics_sources_declare_stage`:
+every entry in `sources[].stage` must be listed in the top-level
+`shader_stages[]` array.
+
+### 3. Preview in a browser (WebGL default)
+
+```
+npx vite
+```
+
+The scaffolded `host.kind: vite` points at `index.html`, which loads the
+two shader files via `fetch()` and compiles them into a WebGL 2 program.
+Any modern browser with WebGL 2 support (Chrome 56+, Firefox 51+,
+Safari 15+) will render the result.
+
+### 4. Native hosts (OpenGL, Vulkan)
+
+`host.kind: native-c` / `native-rust` / `mcp` are declared here for
+forward compatibility but the runtime shells are not yet shipped with
+gsd-skill-creator. For now, native cartridges are shape-validated only;
+bring your own host (GLFW, SDL2, Vulkan-Hpp, etc.) and point it at the
+shader paths declared in `sources[]`.
+
+## Load + validate
+
+```
+skill-creator cartridge load ./cartridge.yaml
+skill-creator cartridge validate ./cartridge.yaml
+skill-creator cartridge eval ./cartridge.yaml
+```
