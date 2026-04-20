@@ -13,6 +13,7 @@ import type {
   Cartridge,
   ChipsetKind,
   DepartmentChipset,
+  GraphicsChipset,
   GroveChipset,
   MetricsChipset,
 } from './types.js';
@@ -29,6 +30,8 @@ export interface CartridgeMetrics {
   agentCount: number;
   teamCount: number;
   groveRecordTypeCount: number;
+  graphicsShaderStageCount: number;
+  graphicsSourceCount: number;
   hasMetricsChipset: boolean;
   hasEvaluationChipset: boolean;
   benchmarkCaseMinimum: number | null;
@@ -55,6 +58,14 @@ export function collectMetrics(cartridge: Cartridge): CartridgeMetrics {
     groveRecordTypeCount += (grove as GroveChipset).record_types.length;
   }
 
+  let graphicsShaderStageCount = 0;
+  let graphicsSourceCount = 0;
+  for (const gfx of findChipsets(cartridge, 'graphics')) {
+    const g = gfx as GraphicsChipset;
+    graphicsShaderStageCount += g.shader_stages.length;
+    graphicsSourceCount += g.sources?.length ?? 0;
+  }
+
   const metricsChipset = findChipset(cartridge, 'metrics') as
     | MetricsChipset
     | undefined;
@@ -79,6 +90,8 @@ export function collectMetrics(cartridge: Cartridge): CartridgeMetrics {
     agentCount,
     teamCount,
     groveRecordTypeCount,
+    graphicsShaderStageCount,
+    graphicsSourceCount,
     hasMetricsChipset: metricsChipset !== undefined,
     hasEvaluationChipset: evaluation !== undefined,
     benchmarkCaseMinimum,
