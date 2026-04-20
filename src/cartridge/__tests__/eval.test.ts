@@ -117,6 +117,105 @@ describe('evalCartridge', () => {
     const names = registeredGates();
     expect(names).toContain('all_skills_have_descriptions');
     expect(names).toContain('grove_record_types_defined');
+    expect(names).toContain('all_graphics_sources_declare_stage');
     expect(names).toEqual(names.slice().sort());
+  });
+
+  it('EV-07 all_graphics_sources_declare_stage passes when every source stage is declared', () => {
+    const c: Cartridge = {
+      id: 'gfx-ok',
+      name: 'GFX OK',
+      version: '0.1.0',
+      author: 'x',
+      description: 'x',
+      trust: 'user',
+      provenance: { origin: 'x', createdAt: '1970-01-01T00:00:00Z' },
+      chipsets: [
+        {
+          kind: 'graphics',
+          api: 'webgl2',
+          api_version: '2.0',
+          shader_language: 'glsl-es',
+          shader_language_version: '3.00',
+          shader_stages: ['vertex', 'fragment'],
+          sources: [
+            { stage: 'vertex', path: 'v.glsl', entry_point: 'main' },
+            { stage: 'fragment', path: 'f.glsl', entry_point: 'main' },
+          ],
+        },
+        {
+          kind: 'evaluation',
+          pre_deploy: ['all_graphics_sources_declare_stage'],
+          benchmark: {
+            trigger_accuracy_threshold: 0.85,
+            test_cases_minimum: 1,
+            domains_covered: ['graphics'],
+          },
+        },
+      ],
+    };
+    const report = evalCartridge(c);
+    const gate = report.gates.find(
+      (g) => g.gate === 'all_graphics_sources_declare_stage',
+    );
+    expect(gate?.outcome).toBe('passed');
+  });
+
+  it('EV-08 all_graphics_sources_declare_stage fails when a source references an undeclared stage', () => {
+    const c: Cartridge = {
+      id: 'gfx-bad',
+      name: 'GFX BAD',
+      version: '0.1.0',
+      author: 'x',
+      description: 'x',
+      trust: 'user',
+      provenance: { origin: 'x', createdAt: '1970-01-01T00:00:00Z' },
+      chipsets: [
+        {
+          kind: 'graphics',
+          api: 'webgl2',
+          api_version: '2.0',
+          shader_language: 'glsl-es',
+          shader_language_version: '3.00',
+          shader_stages: ['vertex'],
+          sources: [
+            { stage: 'vertex', path: 'v.glsl', entry_point: 'main' },
+            // fragment is NOT declared in shader_stages above — eval must fail.
+            { stage: 'fragment', path: 'f.glsl', entry_point: 'main' },
+          ],
+        },
+        {
+          kind: 'evaluation',
+          pre_deploy: ['all_graphics_sources_declare_stage'],
+          benchmark: {
+            trigger_accuracy_threshold: 0.85,
+            test_cases_minimum: 1,
+            domains_covered: ['graphics'],
+          },
+        },
+      ],
+    };
+    const report = evalCartridge(c);
+    const gate = report.gates.find(
+      (g) => g.gate === 'all_graphics_sources_declare_stage',
+    );
+    expect(gate?.outcome).toBe('failed');
+    expect(gate?.message).toMatch(/fragment/);
+  });
+
+  it('EV-09 all_graphics_sources_declare_stage is vacuously satisfied when no graphics chipset present', () => {
+    const c: Cartridge = {
+      ...healthy,
+      chipsets: healthy.chipsets.map((ch) =>
+        ch.kind === 'evaluation'
+          ? { ...ch, pre_deploy: ['all_graphics_sources_declare_stage'] }
+          : ch,
+      ),
+    };
+    const report = evalCartridge(c);
+    const gate = report.gates.find(
+      (g) => g.gate === 'all_graphics_sources_declare_stage',
+    );
+    expect(gate?.outcome).toBe('passed');
   });
 });
