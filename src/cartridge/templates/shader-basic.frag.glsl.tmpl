@@ -1,0 +1,20 @@
+#version 300 es
+// {{name}} — basic fragment shader.
+//
+// GLSL ES 3.00 requires an explicit precision qualifier for
+// floating-point types; `mediump` is the standard scaffold default.
+// See /Research/GFX/M2-glsl.html on tibsfox.com §"Precision qualifiers"
+// for the `highp` / `mediump` / `lowp` decision tree.
+//
+// This fragment shader writes a simple UV-driven RGB gradient to
+// `fragColor` — a placeholder output that demonstrates the stage is
+// wired correctly. Replace the body with your actual shading.
+
+precision mediump float;
+
+in vec2 v_uv;
+out vec4 fragColor;
+
+void main() {
+    fragColor = vec4(v_uv.x, v_uv.y, 0.5, 1.0);
+}

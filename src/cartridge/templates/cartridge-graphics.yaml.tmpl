@@ -1,0 +1,39 @@
+id: {{slug}}
+name: {{name}}
+version: 0.1.0
+author: {{author}}
+description: {{description}}
+trust: {{trust}}
+provenance:
+  origin: scaffold
+  createdAt: {{createdAt}}
+metadata:
+  staging: scaffold
+  tags:
+{{tagsList}}
+chipsets:
+  - kind: graphics
+    # Default to the most portable starting point: WebGL 2 + GLSL ES 3.00.
+    # See /Research/GFX/M3-webgl.html and /Research/GFX/M2-glsl.html on
+    # tibsfox.com for the authoritative API + shader-language references.
+    api: webgl2
+    api_version: "2.0"
+    shader_language: glsl-es
+    shader_language_version: "3.00"
+    shader_stages:
+      - vertex
+      - fragment
+    sources:
+      - stage: vertex
+        path: shaders/basic.vert.glsl
+        entry_point: main
+      - stage: fragment
+        path: shaders/basic.frag.glsl
+        entry_point: main
+    runtime:
+      target_fps: 60
+    toolchain:
+      glslang: true
+    host:
+      kind: vite
+      entry: index.html
