@@ -1,0 +1,22 @@
+#version 300 es
+// {{name}} — basic vertex shader.
+//
+// GLSL ES 3.00 is the shader language paired with OpenGL ES 3.0 and
+// WebGL 2.0. See /Research/GFX/M2-glsl.html on tibsfox.com for the
+// full six-stage reference (vertex, tessellation-control,
+// tessellation-evaluation, geometry, fragment, compute) — only two of
+// those stages (vertex + fragment) are wired into this scaffold.
+//
+// This vertex shader consumes a 2D position in clip-space-compatible
+// coordinates and hands the rasteriser a 4D homogeneous position via
+// the built-in `gl_Position` output. UV coordinates derived from the
+// position are forwarded to the fragment shader so the gradient in
+// the fragment stage has something to sample.
+
+in vec2 a_position;
+out vec2 v_uv;
+
+void main() {
+    v_uv = a_position * 0.5 + 0.5;
+    gl_Position = vec4(a_position, 0.0, 1.0);
+}
