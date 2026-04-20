@@ -197,6 +197,76 @@ export const CoprocessorChipsetSchema = z.object({
 
 export type CoprocessorChipset = z.infer<typeof CoprocessorChipsetSchema>;
 
+// -- graphics -------------------------------------------------------------
+
+/**
+ * Graphics runtime chipset — GLSL / OpenGL / WebGL / Vulkan pipelines.
+ *
+ * Grounded in the GFX mission research at `/Research/GFX/` (2026-04-20):
+ *   - M1 OpenGL, M2 GLSL (six-stage pipeline, CF-03), M3 WebGL,
+ *     M4 Vulkan (validation layers, CF-13), M5 Pipeline (SPIR-V, CF-06;
+ *     ANGLE/MoltenVK, CF-14/16).
+ *
+ * Analogous to `kind: coprocessor` but specialised for rendering: declares
+ * an API + shader language pair, the pipeline stages in use, and the
+ * shader source files that populate those stages. Optional `runtime` /
+ * `toolchain` / `host` blocks mirror the quantitative knobs used by the
+ * coprocessor chipset (e.g. `vram_budget_mb`).
+ */
+export const GraphicsShaderStageSchema = z.enum([
+  'vertex',
+  'tessellation-control',
+  'tessellation-evaluation',
+  'geometry',
+  'fragment',
+  'compute',
+]);
+
+export type GraphicsShaderStage = z.infer<typeof GraphicsShaderStageSchema>;
+
+export const GraphicsChipsetSchema = z.object({
+  kind: z.literal('graphics'),
+  api: z.enum(['opengl', 'opengl-es', 'webgl', 'webgl2', 'vulkan']),
+  api_version: z.string().regex(/^\d+\.\d+(\.\d+)?$/),
+  shader_language: z.enum(['glsl', 'glsl-es', 'spirv', 'wgsl']),
+  shader_language_version: z.string().regex(/^\d+\.\d+\d?$/),
+  shader_stages: z.array(GraphicsShaderStageSchema).min(1),
+  sources: z
+    .array(
+      z.object({
+        stage: GraphicsShaderStageSchema,
+        path: z.string().min(1),
+        entry_point: z.string().default('main'),
+      }),
+    )
+    .optional(),
+  runtime: z
+    .object({
+      vram_budget_mb: z.number().int().positive().optional(),
+      validation_layers: z.boolean().optional(),
+      msaa_samples: z.number().int().positive().optional(),
+      target_fps: z.number().int().positive().optional(),
+    })
+    .optional(),
+  toolchain: z
+    .object({
+      glslang: z.boolean().optional(),
+      spirv_cross: z.boolean().optional(),
+      angle: z.boolean().optional(),
+      moltenvk: z.boolean().optional(),
+    })
+    .optional(),
+  host: z
+    .object({
+      kind: z.enum(['vite', 'native-c', 'native-rust', 'mcp']).optional(),
+      entry: z.string().optional(),
+      mcp_config: z.string().optional(),
+    })
+    .optional(),
+}).passthrough();
+
+export type GraphicsChipset = z.infer<typeof GraphicsChipsetSchema>;
+
 // -- metrics --------------------------------------------------------------
 
 export const MetricsChipsetSchema = z.object({
@@ -234,6 +304,7 @@ export const ChipsetSchema = z.discriminatedUnion('kind', [
   GroveChipsetSchema,
   CollegeChipsetSchema,
   CoprocessorChipsetSchema,
+  GraphicsChipsetSchema,
   MetricsChipsetSchema,
   EvaluationChipsetSchema,
 ]);
@@ -248,6 +319,7 @@ export const CHIPSET_KINDS = [
   'coprocessor',
   'department',
   'evaluation',
+  'graphics',
   'grove',
   'metrics',
   'voice',
