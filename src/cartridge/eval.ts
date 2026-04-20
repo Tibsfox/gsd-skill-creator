@@ -13,6 +13,7 @@ import type {
   Cartridge,
   DepartmentChipset,
   EvaluationChipset,
+  GraphicsChipset,
   GroveChipset,
 } from './types.js';
 import { findChipset, findChipsets } from './types.js';
@@ -102,6 +103,35 @@ const GATES: Record<string, GateFn> = {
           gate: 'has_evaluation_chipset',
           outcome: 'failed',
           message: 'no evaluation chipset present',
+        };
+  },
+
+  all_graphics_sources_declare_stage: (c) => {
+    const graphics = findChipsets(c, 'graphics') as GraphicsChipset[];
+    if (graphics.length === 0) {
+      return {
+        gate: 'all_graphics_sources_declare_stage',
+        outcome: 'passed',
+        message: 'no graphics chipset present (gate is vacuously satisfied)',
+      };
+    }
+    const violations: string[] = [];
+    for (const gfx of graphics) {
+      const declared = new Set(gfx.shader_stages);
+      for (const source of gfx.sources ?? []) {
+        if (!declared.has(source.stage)) {
+          violations.push(
+            `${source.path} (stage '${source.stage}' not in shader_stages)`,
+          );
+        }
+      }
+    }
+    return violations.length === 0
+      ? { gate: 'all_graphics_sources_declare_stage', outcome: 'passed' }
+      : {
+          gate: 'all_graphics_sources_declare_stage',
+          outcome: 'failed',
+          message: `shader sources reference undeclared stages: ${violations.join(', ')}`,
         };
   },
 };
