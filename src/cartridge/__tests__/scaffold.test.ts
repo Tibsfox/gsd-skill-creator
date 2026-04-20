@@ -105,6 +105,41 @@ describe('scaffoldCartridge', () => {
     expect(parsed.id).toBe('my-coproc');
   });
 
+  it('SF-05 graphics scaffold produces shader files + cartridge.yaml and validates green', () => {
+    const root = freshDir();
+    const target = join(root, 'my-gfx');
+
+    const result = scaffoldCartridge({
+      template: 'graphics',
+      targetDir: target,
+      name: 'my-gfx',
+    });
+
+    expect(result.filesWritten).toContain('cartridge.yaml');
+    expect(result.filesWritten).toContain('README.md');
+    expect(result.filesWritten).toContain('shaders/basic.vert.glsl');
+    expect(result.filesWritten).toContain('shaders/basic.frag.glsl');
+
+    const cartridge = loadCartridge(join(target, 'cartridge.yaml'));
+    expect(cartridge.chipsets).toHaveLength(1);
+    expect(cartridge.chipsets[0]?.kind).toBe('graphics');
+
+    const v = validateCartridge(cartridge);
+    expect(v.errors).toEqual([]);
+    expect(v.valid).toBe(true);
+
+    // Round-trip through the schema too.
+    const parsed = CartridgeSchema.parse(cartridge);
+    expect(parsed.id).toBe('my-gfx');
+
+    // Shader files actually exist and contain the GLSL ES 3.00 header.
+    const vert = readFileSync(join(target, 'shaders/basic.vert.glsl'), 'utf8');
+    const frag = readFileSync(join(target, 'shaders/basic.frag.glsl'), 'utf8');
+    expect(vert).toContain('#version 300 es');
+    expect(frag).toContain('#version 300 es');
+    expect(frag).toContain('precision mediump float');
+  });
+
   it('SF-04 refuses to scaffold into a non-empty target directory', () => {
     const root = freshDir();
     const target = join(root, 'occupied');
