@@ -45,6 +45,8 @@ Adaptive learning layer for Claude Code that creates, validates, and manages ski
 - `src/representation-audit/` -- MD-6 audit trail for learned representations; effective-rank + community separability + collapse detection
 - `src/model-affinity/` -- ME-2 per-skill model affinity + Haiku→Sonnet→Opus escalation on tractability mismatch
 - `src/ab-harness/` -- ME-3 significance-gated A/B harness built on M4 fork/explore/commit
+- `src/coprocessor/` -- TypeScript client for the math coprocessor runtime; spawns the Python MCP server from `coprocessors/math/` and exposes typed APIs for skill activation
+- `coprocessors/math/` -- **core Python GPU math coprocessor** (algebrus / fourier / statos / symbex / vectora chips + MCP server + CPU oracle fallback + 125 tests). Invoked via the `coprocessor` chipset kind. Promoted from `examples/chipsets/math-coprocessor/` 2026-04-19 to reflect first-class status
 - `src-tauri/` -- Rust backend (Tauri)
 - `desktop/` -- Vite webview frontend
 - `.college/` -- College Structure: Rosetta Core, panels, departments (culinary-arts, mathematics, mind-body), calibration
