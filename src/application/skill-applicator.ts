@@ -15,7 +15,18 @@ import type { EventStore, PatternReport } from '../telemetry/index.js';
 import { TelemetryStage, ScoreAdjuster } from '../telemetry/index.js';
 import type { SensoriaHookOptions } from '../sensoria/applicator-hook.js';
 import { createSensoriaStage, readSensoriaEnabledFlag } from '../sensoria/applicator-hook.js';
+import {
+  createCoprocessorStage,
+  readCoprocessorEnabledFlag,
+  type CoprocessorHookResult,
+} from '../coprocessor/applicator-hook.js';
 import { readOrchestrationEnabledFlag } from '../orchestration/settings.js';
+
+export interface CoprocessorHookOptions {
+  enabled?: boolean;
+  settingsPath?: string;
+  onResult?: (result: CoprocessorHookResult) => void;
+}
 
 /**
  * Optional configuration for enabling retrieval-augmented features.
@@ -73,6 +84,7 @@ export class SkillApplicator {
     eventStore?: EventStore,
     patternReport?: PatternReport,
     sensoriaOptions?: SensoriaHookOptions,
+    coprocessorOptions?: CoprocessorHookOptions,
   ) {
     const fullConfig = { ...DEFAULT_CONFIG, ...config };
 
@@ -163,6 +175,23 @@ export class SkillApplicator {
     }
 
     this.pipeline.addStage(new LoadStage(this.skillStore, this.session));
+
+    // Coprocessor pre-warm hook (feature-flagged, default-off).
+    // Reads `gsd-skill-creator.coprocessor.enabled` from settings.json. When
+    // the flag is false, no stage is added — byte-identical pre-hook behaviour.
+    {
+      const explicitEnabled = coprocessorOptions?.enabled;
+      const resolvedEnabled = explicitEnabled === undefined
+        ? readCoprocessorEnabledFlag(
+            coprocessorOptions?.settingsPath ?? '.claude/settings.json',
+          )
+        : explicitEnabled;
+      if (resolvedEnabled) {
+        this.pipeline.addStage(
+          createCoprocessorStage({ onResult: coprocessorOptions?.onResult }),
+        );
+      }
+    }
 
     if (eventStore) {
       this.pipeline.addStage(new TelemetryStage(eventStore));
