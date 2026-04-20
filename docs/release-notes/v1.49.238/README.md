@@ -1,199 +1,516 @@
-# v1.49.238 — Degree 98: Gold Casio + Tree Cricket Song — THE SHIMMER AND THE TRILL
+# v1.49.238 -- Degree 98: Gold Casio + Tree Cricket Song -- THE SHIMMER AND THE TRILL
 
-**Released:** 2026-04-02
-**Degree:** 98 of 360 — Eighth degree of Quadrant II
-**Part A:** Gold Casio — Indie Electronic, E=4, self-released, Genre Stage 80 MILESTONE, the retro-synthetic shimmer 99th acoustic element, the self-released synthesist 99th artist-city pattern, third consecutive Indie Electronic, ninth electronic-adjacent entry in thirteen degrees
-**Part B:** Tree Cricket Song (*Oecanthus fultoni* — snowy tree cricket / thermometer cricket) — pure sustained trill, E=3, shrub habitat, Gryllidae RETURNS from degree 87, nearly sinusoidal waveform, Dolbear's Law verified biophysics, 38th consecutive original CSV
-**Series:** Seattle 360 + Sound of Puget Sound — Continuous Release Engine
+**Released:** 2026-04-01
+**Degree:** 98 of 360 -- Eighth degree of Quadrant II
+**Part A:** Gold Casio -- Indie Electronic, E=4, self-released, Seattle, GENRE STAGE 80 (Indie Electronic, eightieth genre stage in 98 degrees, MILESTONE! third consecutive Indie Electronic 96-97-98 with three completely different sonic architectures STRFKR synth-pop pulse Postal Service algorithmic tenderness Gold Casio retro-synthetic shimmer, same genre label three different sound worlds), THE RETRO-SYNTHETIC SHIMMER 99th acoustic element (warm analog pads arpeggiated sequences retro drum machine patterns filtered through modern mixing and spatial techniques nostalgia made audible vintage synthesizer tones reinterpreted through contemporary production, distinct from algorithmic tenderness 97 intimate digital glitch and synth-pop pulse 96 driving joyful constant motion and euphoric build 95 cinematic festival-scale), THE SELF-RELEASED SYNTHESIST 99th artist-city pattern (solo electronic producer operating entirely outside the label system self-produced self-released self-promoted bedroom-to-Bandcamp pipeline zero intermediaries, distinct from re-contextualized return 97 analytical reframing and DIY maximalist 96 production ethos with indie label), ninth electronic-adjacent entry in thirteen degrees (86 90 91 93 94 95 96 97 98)
+**Part B:** Tree Cricket Song (Gryllidae returns) -- pure sustained trill, E=3, shrub, Gryllidae (RETURNS from degree 87, same family different species *Oecanthus fultoni* snowy tree cricket thermometer cricket, nearly sinusoidal waveform one of the purest tones in nature, Dolbear's Law chirp rate correlates with temperature T(F) = 40 + chirps/13s, distinct from field cricket chorus 87 dense rhythmic chirping E=4 dry meadow), THIRTY-EIGHTH CONSECUTIVE ORIGINAL CSV
+**Series:** Seattle 360 + Sound of Puget Sound -- Continuous Release Engine
 **Cluster:** Music (hub: WAL)
-**Branch:** main
-**Commit:** `54b43179f4d82358676154f9d724df229c1f73de`
-**Files changed:** 9 (release note + 4 Gold Casio research artifacts + 4 Tree Cricket Song research artifacts)
-**Dedication:** To **Gold Casio** in the Seattle indie electronic context — the self-released synthesist whose vintage analog pads, arpeggiated sequences, and retro drum machine patterns filtered through modern production make nostalgia audible, the bedroom-to-Bandcamp pipeline at its purest expression with zero intermediaries; to the **Olympia / Seattle / Bellingham** electronic lineage extending **The Postal Service** (degree 86), **Sky Cries Mary** (degree 90), **Hovercraft** (degree 91), **Trance Mission** (degree 92), **NAVVI** (degree 93), **Erik Blood** (degree 94), **ODESZA** (degree 95), **STRFKR** (degree 96), and **The Postal Service electronic** (degree 97) into the retro-synthetic shimmer at degree 98; to the **snowy tree cricket** (*Oecanthus fultoni*) — the **thermometer cricket** whose nearly sinusoidal trill is one of the purest tones in nature and whose chirp rate obeys **Dolbear's Law** (T(F) = 40 + chirps/13s, 1897); to the **Gryllidae return** spanning the engine's first family-level entry at **degree 87** (Cricket Chorus, dense rhythmic chirping, E=4, dry meadow) and the species-level entry at **degree 98** (Tree Cricket Song, pure sustained trill, E=3, shrub) — the same family demonstrating opposite acoustic architectures; and to the **Genre Stage 80 milestone** marking eighty distinct genre classifications across ninety-eight degrees.
-**Engine Position:** Degree 98 of 360 — 27.2% of the circle traversed; the retro-synthetic shimmer (99th acoustic element artist-side); pure sustained trill thermometer (98th species-side acoustic element); The Self-Released Synthesist (99th artist-city pattern); GENRE STAGE 80 MILESTONE Indie Electronic (eighty genre stages in ninety-eight degrees, 0.82 stages/degree); THIRD CONSECUTIVE INDIE ELECTRONIC (96 STRFKR, 97 The Postal Service electronic, 98 Gold Casio — same genre label, three completely different sonic architectures); NINTH ELECTRONIC-ADJACENT ENTRY IN THIRTEEN DEGREES (86, 90, 91, 92, 93, 94, 95, 96, 97, 98); GRYLLIDAE RETURNS — first repeat of an insect family at species-level granularity (Cricket Chorus 87 family-level, Tree Cricket Song 98 species-level); DOLBEAR'S LAW (1897) — first verified biophysics chirp-rate-equals-temperature relationship in the engine; THIRTY-EIGHTH CONSECUTIVE ORIGINAL CSV species (degrees 61–98) — longest unbroken run in the engine; PURE SUSTAINED TRILL THERMOMETER 98th species-side acoustic element (nearly sinusoidal 2–4 kHz, one of the purest tones in nature, minimal harmonic content, biological oscillator).
+**Note:** The shimmer and the trill. Retro-synthetic warmth and crystalline biological purity. On the music side, **Gold Casio** is a Seattle indie electronic project built on vintage synthesizer aesthetics -- warm analog pads, arpeggiated sequences, retro drum machines, melodic synth lines filtered through modern production. The name itself evokes retro electronic hardware -- the gold Casio watch as icon of 1980s consumer electronics. Entirely **self-released** -- no label, no management. The bedroom-to-Bandcamp pipeline. **Genre Stage 80** -- a milestone. Eighty distinct genre classifications across 98 degrees. Third consecutive Indie Electronic (STRFKR 96, Postal Service 97, Gold Casio 98) with three completely different sonic architectures. E=4. The **retro-synthetic shimmer** is the 99th acoustic element -- warm, hazy, wistful, nostalgia made audible. The **self-released synthesist** is the 99th artist-city pattern -- the purest expression of DIY, zero intermediaries, bedroom scale. Ninth electronic-adjacent entry in thirteen degrees. On the species side, the **tree cricket song** reintroduces **Gryllidae** (first at degree 87, cricket chorus) with the **snowy tree cricket** (*Oecanthus fultoni*). One of the **purest tones in nature** -- a sustained, crystalline trill with remarkable tonal clarity and minimal harmonic content. The **thermometer cricket** -- chirp rate correlates precisely with temperature via **Dolbear's Law**: T(F) = 40 + chirps/13s. E=3. Shrub habitat. Same family as degree 87, radically different acoustic character. **Thirty-eighth consecutive original CSV species.**
 
 ## Summary
 
-**The retro-synthetic shimmer and the pure sustained trill.** Degree 98 is purity on both sides — Gold Casio's vintage analog warmth filtered through modern production at **E=4** and the snowy tree cricket's nearly sinusoidal crystalline tone at **E=3**. The shimmer is electronic; the trill is biological. Both sustained. Both pure. Both produced by oscillating mechanisms — silicon synthesizer chips for Gold Casio, wing file-and-scraper stridulation for the tree cricket. The engine has paired the **self-released synthesist** with the **thermometer cricket**, and the symmetry is the point. **Genre Stage 80** lands as a milestone on the music side — **Indie Electronic** for the third consecutive degree (after **STRFKR** at degree 96 and **The Postal Service electronic** at degree 97), demonstrating that a single genre label is a container, not a description, holding three radically different sonic architectures: synth-pop pulse, algorithmic tenderness, and retro-synthetic shimmer. **Gryllidae** returns on the species side after first appearing at **degree 87** with the **Cricket Chorus** — the first repeat of an insect family at a different granularity, family-level then species-level, showing within-family acoustic diversity. **Dolbear's Law** enters the engine as the first verified biophysics relationship — the cricket IS a biological thermometer.
+The retro-synthetic shimmer and the pure sustained trill. Degree 98 is purity on both sides -- synthesized nostalgia and biological crystallinity.
 
-**Part A: Gold Casio in Seattle indie electronic context.** On the music side, **Gold Casio** is a **Seattle, Washington** indie electronic project built on **vintage synthesizer aesthetics** — warm analog pads, arpeggiated sequences, retro drum machines, and melodic synth lines filtered through modern production. The name itself evokes retro electronic hardware — the **gold Casio watch** as icon of 1980s consumer electronics, now reframed as aesthetic object and creative posture. **Genre Stage 80** holds **Indie Electronic** as the eightieth distinct genre stage in the engine — a milestone — distinguished from the **synth-pop pulse** of **STRFKR** at **degree 96** (driving, joyful, Polyvinyl Records, national touring) by structure (Gold Casio is contemplative where STRFKR is propulsive), distinguished from the **algorithmic tenderness** of **The Postal Service electronic** at **degree 97** (intimate, glitchy, digital, Sub Pop) by approach (Gold Casio looks backward through analog reverence where the Postal Service looks forward through digital experimentation), and distinguished from the **euphoric build** of **ODESZA** at **degree 95** (cinematic, festival-scale, Counter Records) by scale (Gold Casio is bedroom-scale where ODESZA is arena-scale). **The retro-synthetic shimmer** is the **99th acoustic element** — vintage synthesizer tones reinterpreted through contemporary production, warm analog pads sustaining over arpeggiated sequences, retro drum machine patterns filtered through modern mixing and spatial techniques, nostalgia made audible. The reverb is wide; the pads breathe; the drum machines crackle with deliberate retro grain. Distinct from the **algorithmic tenderness** at **degree 97** (intimate digital glitch, machine warmth), distinct from the **synth-pop pulse** at **degree 96** (driving joyful constant motion), distinct from the **euphoric build** at **degree 95** (cinematic festival-scale), distinct from the **shimmer veil** at **degree 93** (NAVVI's reverb-as-architecture, dream pop dissolution). The retro-synthetic shimmer has its own sonic identity — wistful, hazy, contemplative, the sound of memory rendered through circuitry. **The self-released synthesist** is the **99th artist-city pattern** — a solo electronic producer operating entirely outside the label system, self-produced, self-released, self-promoted, the bedroom-to-Bandcamp pipeline with zero intermediaries. The DIY spectrum within the engine's electronic entries: **ODESZA** (95) on Counter Records (label infrastructure, arena-scale); **STRFKR** (96) on Polyvinyl (indie label, national touring); **The Postal Service** (86, 97) on Sub Pop (major indie, massive reach); and **Gold Casio** (98) self-released (zero intermediaries, bedroom scale). Each step reduces infrastructure overhead and increases autonomy. Gold Casio is the logical endpoint. **E=4** for Gold Casio captures sustained moderate warmth — the retro-synthetic shimmer at intimate-to-moderate intensity, never confrontational, never euphoric, just a steady warm presence filling the room. **The electronic Seattle landscape** continues to deepen — **ninth electronic-adjacent entry in thirteen degrees** (86, 90, 91, 92, 93, 94, 95, 96, 97, 98), and **third consecutive Indie Electronic** entry across degrees 96–98. The Pacific Northwest's electronic music scene is being mapped at unprecedented depth, not in passing.
+On the music side, **Gold Casio** reaches **Genre Stage 80** -- a milestone. Eighty genre stages in 98 degrees. Third consecutive Indie Electronic with three completely different sound worlds: STRFKR's synth-pop pulse (96), the Postal Service's algorithmic tenderness (97), Gold Casio's retro-synthetic shimmer (98). The genre label is a container; the acoustic elements are the content. Gold Casio operates entirely self-released -- the bedroom-to-Bandcamp pipeline, zero intermediaries. Warm analog pads, arpeggiated sequences, retro drum machine patterns, all filtered through modern production. Nostalgia as creative fuel. E=4. The **retro-synthetic shimmer** is the 99th acoustic element -- vintage synthesizer tones reinterpreted through contemporary production, warm, hazy, wistful. The **self-released synthesist** is the 99th artist-city pattern -- at the far end of the DIY spectrum, eliminating all intermediaries. Ninth electronic-adjacent entry in thirteen degrees (86, 90, 91, 93, 94, 95, 96, 97, 98).
 
-**Part B: Tree Cricket Song (Gryllidae returns).** On the species side, the **Tree Cricket Song** reintroduces the family **Gryllidae** at species-level granularity — the **snowy tree cricket** (*Oecanthus fultoni*), also called the **thermometer cricket**. **Gryllidae** first appeared at **degree 87** as the **Cricket Chorus** (family-level entry, field cricket, dense rhythmic chirping, E=4, dry meadow). The **return** at degree 98 is the engine's first repeat of an insect family at a different granularity — family-level then species-level — and the contrast within Gryllidae is itself the structural finding. Same family, different species, different sound mechanism, different acoustic architecture, different energy, different habitat. The field cricket chorus is dense, rhythmic, and chirping; the tree cricket song is sparse, sustained, and trilling. Same Gryllidae, opposite acoustic architectures. **The pure sustained trill thermometer** is the **98th species-side acoustic element** — a continuous trill at approximately **2–4 kHz**, nearly sinusoidal in waveform, with **minimal harmonic content** — one of the purest tones produced by any animal. The file-and-scraper stridulation mechanism of *Oecanthus fultoni* operates at unusually clean ratios, producing a tone whose spectrogram approximates a single horizontal line rather than the harmonic-rich vertical streaks of most stridulating insects. Distinct from the **dense rhythmic chirping** of **Cricket Chorus** at **degree 87** (same family Gryllidae, opposite acoustic posture — short bursts vs sustained trill), distinct from the **continuous electric buzz** of **Katydid** at **degree 88** (Tettigoniidae, harsh and broad-spectrum), distinct from the **electric buzzing throb** of **Cicada** at **degree 89** (Cicadidae, tymbal advertisement, loud), distinct from the **deep resonant buzz** of **Bumblebee Drone** at **degree 92** (Apidae, gentle, low-pitched), distinct from the **aggressive papery hum** of **Hornet Nest Buzz** at **degree 93** (Vespidae, threatening, broad-spectrum). The pure sustained trill is the engine's first nearly-sinusoidal biological tone — a biological oscillator. **Dolbear's Law** enters the engine as the first verified chirp-rate-equals-temperature relationship — published by **Amos Dolbear** in 1897 as **T(F) = 40 + (chirps in 13 seconds)** — linear, reliable, verified biophysics. The cricket's ectothermic metabolism drives wing-rubbing speed which drives chirp rate; the cricket IS a biological thermometer. Field workers and naturalists can read ambient temperature from a tree cricket's call with surprising accuracy. The relationship is not folklore but measured science. **E=3** for the tree cricket reflects pure but gentle sustained presence — quieter than field cricket chorus (E=4), louder than stonefly hatch (E=2), and pure enough to carry through still night air at moderate distances. Crystalline clarity compensates for amplitude. **Shrub habitat** — calls from elevated positions on shrubs, low trees, herbaceous plants, and hedgerows. Contrast with field cricket habitat: dry meadow (87) vs shrub (98). **Thirty-eighth consecutive original CSV species** (degrees 61–98) — the source catalog continues to deliver without substitution, and this run is now the longest unbroken run of original-catalog selections in the engine to date.
+On the species side, the **tree cricket song** reintroduces **Gryllidae** (first at degree 87, cricket chorus) with the **snowy tree cricket** (*Oecanthus fultoni*). This is a fundamentally different sound from the field cricket chorus -- the tree cricket produces one of the **purest tones in nature** -- a sustained, crystalline trill at approximately 2-4 kHz with remarkable tonal clarity and minimal harmonic content. Nearly sinusoidal waveform -- rare among stridulating insects. The **thermometer cricket** -- Dolbear's Law (1897): T(F) = 40 + chirps/13s. Verified biophysics. The cricket IS a biological thermometer. E=3. Shrub habitat. Same family, different species, different acoustic character, different energy, different habitat. **Thirty-eighth consecutive original CSV species.**
 
-**Cross-Sync Parallel: Two Pure Tones, Both Sustained.** Both halves of degree 98 produce pure sustained tones. **Gold Casio's** retro-synthetic shimmer sustains warm analog pads and arpeggiated sequences across multi-second tonal events. **In parallel**, the **snowy tree cricket's** pure sustained trill sustains a nearly sinusoidal crystalline tone across continuous calling bouts. **Each side** depends on sustained periodic vibration to produce its sound. **The same** physical principle — vibration at the right frequency produces audible sustained tone — reaches both halves on the same degree through completely different substrates (silicon and software for Gold Casio, chitin and resilin for the tree cricket). **Synchronized** by physics rather than by intent, the two halves illustrate that the engine's acoustic taxonomy operates beneath any species/genre distinction.
-
-**Cross-Sync Parallel: Biological Oscillator and Electronic Oscillator.** Both halves of degree 98 use **oscillation** as their sound-producing mechanism. The **snowy tree cricket** is nature's analog oscillator — its wing file-and-scraper mechanism operates at unusually clean ratios, producing a nearly sinusoidal tone like an electronic oscillator's pure waveform output. **In parallel**, **Gold Casio's** vintage synthesizers are technology's tree crickets — analog circuitry producing sustained periodic waveforms through voltage-controlled oscillators, then sustained through filters and effects to create the retro-synthetic shimmer. **Each side** demonstrates that pure tonality emerges when an oscillating mechanism operates at clean ratios. **The same** mechanism — oscillation producing sustained tone — reaches both halves on the same degree. **Synchronized** by accident, the cricket as nature's synthesizer and the synthesizer as technology's cricket sit side by side at degree 98.
-
-**Cross-Sync Parallel: Nostalgia and Temperature as Transducers.** Both halves of degree 98 are **transducers** — devices that convert one dimension into another. **Gold Casio** transduces **time** (the past, 1980s synthesizer tradition) into **sound** (vintage analog tones reinterpreted through modern production). The retro-synthetic shimmer is nostalgia made audible. **In parallel**, the **snowy tree cricket** transduces **temperature** (ambient thermal energy, ectothermic metabolism) into **sound** (chirp rate per **Dolbear's Law**, T(F) = 40 + chirps/13s). The pure sustained trill is temperature made audible. **Each side** converts a non-acoustic dimension into an acoustic signal. **The same** functional principle — sound as carrier of non-acoustic information — reaches both halves on the same degree. **Synchronized** by the catalog, both Gold Casio and the tree cricket act as transducers, and the dimensions they carry (memory and temperature) are themselves complementary.
-
-**Cross-Sync Parallel: The Same Family Returns; The Same Genre Repeats.** Both halves of degree 98 demonstrate **return** as a structural device. The **Tree Cricket Song** returns Gryllidae from **degree 87** at species-level granularity rather than the prior family-level, showing within-family diversity (dense rhythmic chirping vs pure sustained trill, E=4 vs E=3, dry meadow vs shrub). **In parallel**, **Gold Casio** continues **Indie Electronic** as a genre stage for the third consecutive degree (96 STRFKR, 97 Postal Service electronic, 98 Gold Casio), showing within-genre diversity (synth-pop pulse vs algorithmic tenderness vs retro-synthetic shimmer, three different sonic architectures inside one classification label). **Each side** demonstrates that classification labels (Family, Genre Stage) describe lineage rather than character. **The same** lesson — that proximity in taxonomy or genre tells you almost nothing about how a thing actually sounds — reaches both halves on the same degree through the same structural device (return). **Synchronized** by the catalog's structure, both demonstrate the same principle.
-
-**Cross-Sync Parallel: The Self-Released Synthesist Meets the Solo Caller.** Both halves of degree 98 introduce **solo entities** to the engine. **Gold Casio** is a **solo electronic producer** operating entirely outside the label system — bedroom-to-Bandcamp, zero intermediaries, the self-released synthesist as 99th artist-city pattern. **In parallel**, the **snowy tree cricket** is a **solo male caller** — the species-level entry centers an individual male calling from elevated vegetation rather than a chorus, and the pure sustained trill is the call of a single cricket rather than a collective display. **Each side** centers a single producer of sound (one human producer, one calling male). **The same** reduction — to the smallest possible unit of audible production — reaches both halves on the same degree. **Synchronized** by accident, the solo electronic producer and the solo calling cricket both demonstrate that minimum-unit sound production can carry full structural weight.
-
-**Cross-Sync Parallel: Genre Stage 80 Meets the Thirty-Eighth Consecutive CSV.** Both halves of degree 98 sit at significant **counter milestones**. The artist side reaches **Genre Stage 80** — eighty distinct genre classifications in ninety-eight degrees, a milestone landing precisely two-thirds of the way into Quadrant II. **In parallel**, the species side reaches the **38th consecutive original CSV** entry — the longest unbroken run of original-catalog selections in the engine, with neither substitution nor correction across thirty-eight consecutive species (degrees 61–98). **Each side** has reached a numerical milestone that reflects the underlying source catalogue's depth and the engine's faithful execution. **The same** structural moment — the engine's counters ticking into landmark territory — reaches both halves on the same degree. **Synchronized** by maturity, both Genre Stage 80 and the 38th consecutive CSV signal that the engine has accumulated enough catalog density to sustain extended unbroken runs.
-
-**Cross-Sync Parallel: The Electronic Era Approaches Its Apex; The Insect Era Returns to Open Space.** Both halves of degree 98 sit at maturity points in their respective extended sequences. **In parallel**, the artist side has reached its **ninth electronic-adjacent entry in thirteen degrees** (86, 90, 91, 92, 93, 94, 95, 96, 97, 98) — the densest sustained genre cluster in the engine, with three consecutive Indie Electronic entries (96–98) capping a deeper electronic-inflected run. The species side has returned to **Gryllidae** after eleven degrees (87 to 98) — the first repeat of an insect family at a different granularity, showing that the engine can revisit prior taxa at finer resolution. **Each side** demonstrates a different mode of catalog maturity: the artist side **deepens** by repeated genre returns; the species side **revisits** by family returns at species-level granularity. **The same** structural principle — that maturity permits return — reaches both halves on the same degree through different return mechanisms. **Synchronized** by maturity, both sides demonstrate that the engine can reuse prior categories without becoming repetitive.
-
-**Cross-Sync Parallel: Both Halves Reach Their Own Purity Ceiling.** Both halves of degree 98 reach a **purity ceiling** specific to their domain. **Gold Casio's** retro-synthetic shimmer is the purest expression of the **DIY spectrum** in the engine's electronic era — fully self-released, zero intermediaries, bedroom-to-Bandcamp, the logical endpoint of the production-overhead reduction that began at ODESZA's Counter Records (95) and progressed through STRFKR's Polyvinyl (96) and the Postal Service's Sub Pop (86, 97). **In parallel**, the **snowy tree cricket's** pure sustained trill is the purest expression of the **biological tonality spectrum** in the engine's species side — nearly sinusoidal, minimal harmonic content, one of the purest tones produced by any animal. **Each side** has reached a different purity ceiling on a different axis. **The same** structural moment — both halves at their domain's purity maximum — reaches both on the same degree. **Synchronized** by the catalog, the engine's two purity ceilings (artist DIY purity, species tonal purity) sit side by side at degree 98.
+The shimmer and the trill. Gold Casio's retro-synthetic shimmer is the synthesizer's sustained tone. The tree cricket's crystalline trill is nature's pure sustained tone. Biological oscillator and electronic oscillator. The cricket as nature's synthesizer.
 
 ## Key Features
 
 | Metric | Part A: Gold Casio | Part B: Tree Cricket Song |
 |--------|-------------------|---------------------------|
-| Genre | **Indie Electronic** (Genre Stage 80 MILESTONE, eightieth genre stage in ninety-eight degrees, third consecutive Indie Electronic 96-97-98 with three completely different sonic architectures, ninth electronic-adjacent entry in thirteen degrees, vintage synthesizer aesthetics warm analog pads arpeggiated sequences retro drum machines filtered through modern production, distinguished from synth-pop pulse 96 STRFKR driving joyful and algorithmic tenderness 97 Postal Service electronic intimate glitchy and euphoric build 95 ODESZA cinematic festival-scale) | — |
-| Energy | **E=4** (sustained moderate warmth, retro-synthetic shimmer at intimate-to-moderate intensity, never confrontational never euphoric just steady warm presence filling the room, third consecutive E=4 electronic entry 97-98 after STRFKR E=5 break) | **E=3** (pure but gentle, sustained crystalline trill, lower than field cricket chorus 87 E=4, higher than stonefly 94 E=2, purity compensates for amplitude, carries through still night air at moderate distances) |
-| Label | **Self-released** (zero intermediaries, bedroom-to-Bandcamp pipeline, the logical endpoint of the DIY spectrum mapped across the electronic era ODESZA Counter Records 95 STRFKR Polyvinyl 96 Postal Service Sub Pop 86/97 Gold Casio self-released 98) | — |
-| Family | — | **Gryllidae** (RETURNS from degree 87 — first repeat of an insect family at species-level granularity, family-level Cricket Chorus 87 then species-level Tree Cricket Song 98, same family different species different sound mechanism different acoustic architecture different energy different habitat, structural finding within Gryllidae is itself the discovery) |
-| Order | — | **Orthoptera** (continuing — with Gryllidae 87/98 and Tettigoniidae 88, third Orthoptera entry, Gryllidae represented twice within ninety-eight degrees) |
-| Class | — | **Insecta** (continuing the engine's insect sequence, Tree Cricket Song extends the seventh insect entry pattern from the Insect Era at degrees 87–93 plus mayfly 95 and tree cricket 98) |
-| Acoustic Element | **the retro-synthetic shimmer** (99th, vintage synthesizer tones reinterpreted through modern production warm analog pads arpeggiated sequences retro drum machine patterns filtered through modern mixing and spatial techniques nostalgia made audible wistful hazy contemplative, distinct from algorithmic tenderness 97 intimate digital glitch and synth-pop pulse 96 driving joyful and euphoric build 95 cinematic festival-scale and shimmer veil 93 NAVVI reverb-as-architecture) | **pure sustained trill thermometer** (98th species-side, continuous trill at approximately 2-4 kHz nearly sinusoidal waveform minimal harmonic content one of the purest tones produced by any animal file-and-scraper stridulation at unusually clean ratios spectrogram approximates single horizontal line, distinct from cricket chorus 87 dense rhythmic chirping and katydid 88 continuous electric buzz and cicada 89 electric buzzing throb and bumblebee 92 deep resonant buzz and hornet 93 aggressive papery hum) |
-| Artist-City Pattern | **The Self-Released Synthesist** (99th, solo electronic producer operating entirely outside the label system self-produced self-released self-promoted bedroom-to-Bandcamp pipeline zero intermediaries the logical endpoint of the DIY spectrum, distinct from re-contextualized return 97 analytical reframing and DIY maximalist 96 production ethos with indie label and Bellingham pipeline 95 ODESZA arena-scale through Counter Records) | — |
-| Habitat Marker | — | **Shrub / low trees / herbaceous plants** (calls from elevated positions on vegetation, contrasts with field cricket habitat dry meadow at degree 87, the snowy tree cricket prefers elevated calling perches in shrubs hedgerows and lower deciduous tree branches) |
-| Structural Firsts | GENRE STAGE 80 MILESTONE Indie Electronic (eightieth genre stage in ninety-eight degrees), THE RETRO-SYNTHETIC SHIMMER 99th acoustic element (nostalgia made audible vintage synths through modern production), THE SELF-RELEASED SYNTHESIST 99th artist-city pattern (zero intermediaries logical endpoint of DIY spectrum), THIRD CONSECUTIVE INDIE ELECTRONIC (96-97-98 three different sonic architectures inside one genre label), NINTH ELECTRONIC ENTRY IN THIRTEEN DEGREES (86 90 91 92 93 94 95 96 97 98 densest sustained genre cluster) | GRYLLIDAE RETURNS at species-level (first repeat of an insect family at different granularity Cricket Chorus 87 family-level Tree Cricket Song 98 species-level), PURE SUSTAINED TRILL THERMOMETER 98th species-side acoustic element (nearly sinusoidal one of purest tones in nature minimal harmonic content), DOLBEAR'S LAW (1897 Amos Dolbear T(F) = 40 + chirps/13s first verified chirp-rate-equals-temperature relationship in the engine the cricket IS a biological thermometer), THIRTY-EIGHTH CONSECUTIVE ORIGINAL CSV (degrees 61-98 longest unbroken run of original-catalog selections), BIOLOGICAL OSCILLATOR (first nearly-sinusoidal biological tone in the engine) |
-| Research Words | ~5,500 | ~5,500 |
+| Genre | Indie Electronic (Genre Stage 80 MILESTONE, eightieth genre stage, third consecutive Indie Electronic 96-97-98 three different sonic architectures, ninth electronic entry in thirteen degrees) | -- |
+| Energy | E=4 (retro-synthetic shimmer, warm analog pads, intimate bedroom-scale, nostalgia as creative fuel) | E=3 (pure but gentle, sustained crystalline trill, lower than field cricket chorus 87 E=4, higher than stonefly 94 E=2, purity compensates for volume) |
+| Label | Self-released (purest DIY expression, bedroom-to-Bandcamp pipeline, zero intermediaries) | -- |
+| Family | -- | Gryllidae (RETURNS from degree 87, same family different species, species-level entry *Oecanthus fultoni*) |
+| Order | -- | Orthoptera (continuing -- with Gryllidae 87/98 and Tettigoniidae 88) |
+| Class | -- | Insecta (continuing insect sequence) |
+| Acoustic Element | the retro-synthetic shimmer (99th, warm analog pads arpeggiated sequences retro drum patterns filtered through modern production nostalgia made audible, distinct from algorithmic tenderness 97 intimate digital glitch and synth-pop pulse 96 driving joyful and euphoric build 95 cinematic festival-scale) | pure sustained trill thermometer (98th species-side, nearly sinusoidal 2-4 kHz crystalline sustained minimal harmonic content one of purest tones in nature, distinct from cricket chorus 87 dense rhythmic chirping and katydid rasp 88 harsh buzzy and cicada throb 89 loud pulsing) |
+| Artist-City Pattern | The Self-Released Synthesist (99th, solo electronic producer entirely outside label system self-produced self-released zero intermediaries bedroom-to-Bandcamp, distinct from re-contextualized return 97 analytical reframing and DIY maximalist 96 production ethos with indie label) | -- |
+| Structural Firsts | GENRE STAGE 80 MILESTONE (eightieth genre classification), THE RETRO-SYNTHETIC SHIMMER 99th acoustic element (nostalgia made audible vintage synths through modern production), THE SELF-RELEASED SYNTHESIST 99th artist-city pattern (purest DIY zero intermediaries), THIRD CONSECUTIVE INDIE ELECTRONIC (96-97-98 three different sonic architectures), NINTH ELECTRONIC ENTRY IN THIRTEEN DEGREES | GRYLLIDAE RETURNS (from degree 87, same family different species different sound), PURE SUSTAINED TRILL THERMOMETER (98th species-side acoustic element, nearly sinusoidal, one of purest tones in nature), DOLBEAR'S LAW (chirp rate = temperature, verified biophysics), THIRTY-EIGHTH CONSECUTIVE ORIGINAL CSV |
+| Research Words | ~4,500 | ~5,000 |
 | Files Produced | 4 | 4 |
 | Cross-References | 5 | 5 |
 
-## Part A: Gold Casio — The Retro-Synthetic Shimmer
+<details>
+<summary>Full Release Notes -- Click to expand</summary>
 
-- **Genre Stage 80 — Indie Electronic milestone.** The engine has now introduced eighty distinct genre stages across ninety-eight degrees — roughly 0.82 stages per degree, a remarkably stable rate. **Indie Electronic** is the third consecutive genre stage in degrees 96–98 (**STRFKR**, **The Postal Service electronic**, **Gold Casio**), demonstrating that a single genre label is a container, not a description. Three entries, three completely different sonic architectures: synth-pop pulse, algorithmic tenderness, retro-synthetic shimmer.
-- **Gold Casio as the self-released synthesist.** A **Seattle, Washington** indie electronic project built on **vintage synthesizer aesthetics** — warm analog pads, arpeggiated sequences, retro drum machines, and melodic synth lines filtered through modern production. The name evokes retro electronic hardware — the **gold Casio watch** as 1980s consumer electronics icon, now reframed as aesthetic object. Self-released. Bedroom-to-Bandcamp. Zero intermediaries.
-- **The retro-synthetic shimmer — 99th acoustic element.** Vintage synthesizer tones reinterpreted through contemporary production. Warm analog pads sustain over arpeggiated sequences; retro drum machine patterns crackle with deliberate retro grain; modern mixing and spatial techniques wrap the whole into a hazy wistful sustained presence. **Nostalgia made audible.** The reverb is wide; the pads breathe; the production looks backward through analog reverence. Distinct from the **algorithmic tenderness** at **degree 97** (intimate digital glitch, machine warmth), distinct from the **synth-pop pulse** at **degree 96** (driving joyful constant motion), distinct from the **euphoric build** at **degree 95** (cinematic festival-scale), distinct from the **shimmer veil** at **degree 93** (NAVVI's reverb-as-architecture, dream pop dissolution).
-- **The Self-Released Synthesist — 99th artist-city pattern.** A solo electronic producer operating entirely outside the label system. Self-produced, self-released, self-promoted. The **bedroom-to-Bandcamp pipeline** with zero intermediaries. The logical endpoint of the DIY spectrum mapped across the engine's electronic era. Distinct from the **re-contextualized return** at **degree 97** (analytical reframing of an existing project), distinct from the **DIY maximalist** at **degree 96** (production ethos with indie label backing), distinct from the **Bellingham pipeline** at **degree 95** (ODESZA's arena-scale ascent through Counter Records).
-- **The DIY spectrum across the electronic era.** **ODESZA** (95) — Counter Records, label infrastructure, arena-scale, festival headliners. **STRFKR** (96) — Polyvinyl Records, indie label, national touring scale. **The Postal Service** (86, 97) — Sub Pop, major indie label, massive reach. **Gold Casio** (98) — self-released, zero intermediaries, bedroom scale. Each step reduces infrastructure overhead and increases autonomy. Gold Casio is the logical endpoint of the production-overhead-reduction spectrum.
-- **E=4 — sustained moderate warmth.** The retro-synthetic shimmer at intimate-to-moderate intensity — never confrontational, never euphoric, just a steady warm presence filling the room. Third consecutive E=4 electronic entry across degrees 97–98 after STRFKR's E=5 break at degree 96. The electronic era energy stabilizes at moderate warmth as the cluster matures.
-- **The vintage synthesizer aesthetic — analog tones through modern production.** Warm analog pads (sustained tonal events with slow attack and release), arpeggiated sequences (rhythmic note patterns at moderate tempo), retro drum machines (programmed rhythms evoking early electronic production), modern production values (clean mixing, spatial reverb effects, contemporary dynamics). The tension between retro source material and modern execution creates the distinctive **retro-synthetic shimmer** — neither pure pastiche nor pure invention, but reinterpretation through contemporary sensibility.
-- **The Gold Casio watch as cultural reference.** The project name is itself a sonic signature — the gold Casio digital watch was a 1980s consumer electronics icon, mass-produced, universally recognizable, simultaneously high-tech and cheap. The name signals the project's aesthetic: vintage electronic hardware as creative reference, mass-cultural memory as raw material, modesty and ambition in the same gesture.
-- **Self-released as the maximum-autonomy distribution model.** Gold Casio operates with no label, no management, no intermediaries. Music goes directly from the producer to the listener through Bandcamp and similar self-distribution platforms. The aesthetic and the business model are aligned — a solo project producing intimate retro-synthetic shimmer needs no infrastructure beyond a DAW, a synthesizer rack, and a Bandcamp account. The bedroom is the studio; the internet is the distribution; the listener is the audience.
-- **The ninth electronic-adjacent entry in thirteen degrees.** Degrees 86, 90, 91, 92, 93, 94, 95, 96, 97, 98 — ten electronic-adjacent entries across the engine, with nine in the thirteen-degree window since degree 86. The Pacific Northwest's electronic music scene is being mapped at unprecedented depth. Each entry uses electronics differently: structured pop (Postal Service 86), atmosphere (Sky Cries Mary 90), obliteration (Hovercraft 91), bridge-building (Trance Mission 92), intimacy (NAVVI 93), experimentation (Erik Blood 94), euphoria (ODESZA 95), pulse (STRFKR 96), tenderness (Postal Service electronic 97), nostalgia (Gold Casio 98). Ten approaches to one substrate.
-- **Third consecutive Indie Electronic — three sound worlds.** Degrees 96, 97, 98 all carry the **Indie Electronic** genre stage with completely different sonic architectures. STRFKR delivers synth-pop pulse (driving, joyful); the Postal Service electronic delivers algorithmic tenderness (intimate, digital); Gold Casio delivers retro-synthetic shimmer (warm, hazy, nostalgic). Three entries, three sound worlds, one genre label. The genre classification is a container; the acoustic elements are the content.
+## Part A: Gold Casio -- THE RETRO-SYNTHETIC SHIMMER (Indie Electronic, E=4, Self-Released, GENRE STAGE 80 Eightieth Genre Stage Milestone Third Consecutive Indie Electronic, The Retro-Synthetic Shimmer 99th Acoustic Element Nostalgia Made Audible, The Self-Released Synthesist 99th Artist-City Pattern Purest DIY Zero Intermediaries, Ninth Electronic Entry)
 
-## Part B: Tree Cricket Song (Gryllidae returns) — Pure Sustained Trill Thermometer
+Full deep research covering Gold Casio at degree 98, Genre Stage 80, and the retro-synthetic shimmer:
 
-- **Gryllidae returns — first repeat of an insect family at species-level granularity.** **Gryllidae** first appeared at **degree 87** as the **Cricket Chorus** (family-level entry, field cricket, dense rhythmic chirping, E=4, dry meadow). The **return** at degree 98 is the **snowy tree cricket** (*Oecanthus fultoni*) at species-level granularity — the first repeat of an insect family at a different granularity in the engine. Same family, different species, different sound mechanism, different acoustic architecture, different energy, different habitat. The contrast within Gryllidae is itself the structural finding.
-- **The snowy tree cricket (*Oecanthus fultoni*) and the thermometer cricket name.** The species *Oecanthus fultoni* is also called the **thermometer cricket** because its chirp rate obeys **Dolbear's Law** with surprising accuracy. The species-level entry centers an individual male calling from elevated vegetation rather than a chorus of multiple individuals, and the call is sparse, sustained, and trilling rather than dense, rhythmic, and chirping.
-- **The pure sustained trill thermometer — 98th species-side acoustic element.** A continuous trill at approximately **2–4 kHz**, nearly sinusoidal in waveform, with minimal harmonic content. The file-and-scraper stridulation mechanism of *Oecanthus fultoni* operates at unusually clean ratios, producing a tone whose spectrogram approximates a single horizontal line rather than the harmonic-rich vertical streaks of most stridulating insects. **One of the purest tones produced by any animal.** The cricket's wing structure functions as a biological oscillator at clean resonant frequencies.
-- **Dolbear's Law (1897) — first verified biophysics relationship.** **Amos Dolbear** published the relationship in 1897: **T(F) = 40 + (chirps in 13 seconds)**. Linear, reliable, verified biophysics. Ectothermic metabolism: ambient temperature drives metabolic rate which drives wing-rubbing speed which drives chirp rate. The cricket IS a biological thermometer — naturalists and field workers can read ambient temperature from a tree cricket's call with surprising accuracy. The relationship is not folklore but measured science. **First verified chirp-rate-equals-temperature relationship in the engine.**
-- **Same family Gryllidae, opposite acoustic architectures.** **Cricket Chorus** (87, family-level, *Gryllus* spp.): dense rhythmic chirping, short bursts, broad-spectrum, E=4, dry meadow, multiple individuals chorusing. **Tree Cricket Song** (98, species-level, *Oecanthus fultoni*): pure sustained trill, nearly sinusoidal, minimal harmonics, E=3, shrub habitat, individual male calling. Same family, different sound mechanism orientation, different acoustic architecture, different energy level, different habitat. The structural finding within Gryllidae is itself the discovery — taxonomic proximity does not predict acoustic similarity even at the family-to-species level.
-- **The biological oscillator — first nearly-sinusoidal biological tone in the engine.** Most stridulating insects produce harmonic-rich tones whose spectrograms show vertical streaks across many frequencies. The snowy tree cricket's call approximates a **single horizontal line** in the spectrogram — a nearly sinusoidal pure tone. This is rare among biological sound producers. The cricket functions as nature's analog oscillator. The engine's acoustic taxonomy now distinguishes biological pure-tone producers (tree cricket 98) from biological harmonic-rich producers (every prior insect entry).
-- **E=3 — pure but gentle.** The snowy tree cricket's call is quieter than the field cricket chorus (E=4) but louder than the stonefly hatch (E=2). The pure tonality compensates for moderate amplitude — the sound carries through still night air at moderate distances because of its clean spectral content rather than its volume. Crystalline clarity rather than acoustic power. E=3 captures sustained pure presence at moderate intensity.
-- **Shrub habitat — calls from elevated positions on vegetation.** *Oecanthus fultoni* prefers elevated calling perches in shrubs, low trees, herbaceous plants, and hedgerows. The species rarely calls from the ground. The shrub habitat contrasts with the field cricket's dry meadow habitat (87). Same family, different microhabitat, different acoustic architecture — habitat preference and acoustic structure are correlated even within Gryllidae.
-- **Sound mechanism: file-and-scraper stridulation at clean resonant frequencies.** The snowy tree cricket's tegmina (forewings) carry a **file** (a row of teeth on one wing) and a **scraper** (a hardened ridge on the opposing wing). Wing-closure draws the scraper across the file, producing a click; rapid sustained wing-closure produces a sustained train of clicks at the wing-stroke frequency, which the cricket's wing structure resonates at clean ratios to produce the nearly sinusoidal trill. The cricket's wing structure is itself the resonator.
-- **Thirty-eighth consecutive original CSV.** The tree cricket entry is the thirty-eighth consecutive species drawn from the original source catalog without substitution (degrees 61–98). The original CSV continues to deliver — the longest unbroken run of original-catalog selections in the engine to date.
-- **The temperature reader — *Oecanthus fultoni* as scientific instrument.** Dolbear's relationship has been validated across multiple field studies and remains within ±2°F of measured temperature for *O. fultoni* across its temperature operating range (approximately 50–80°F). The cricket's chirp rate is a transducer of ambient temperature. Temperature drives metabolism drives wing-stroke rate drives chirp rate. The cricket IS a biological thermometer — and a remarkably accurate one.
-- **Insect Era extension and return.** The Insect Era at degrees 87–93 (cricket, katydid, cicada, mosquito, bumblebee, hornet with Spring Peeper-Like Chorus interlude at 90) plus mayfly emergence at 95 plus tree cricket at 98 brings the engine's insect entry count to nine across thirteen degrees. The return to Gryllidae at degree 98 demonstrates that the engine can revisit prior taxa at finer resolution as catalog density permits.
+### STRUCTURAL EVENT: Genre Stage 80 -- Indie Electronic (Milestone!)
 
-## Retrospective
+Degree 98 reaches **Genre Stage 80** -- the **eightieth genre stage**. A milestone. Eighty distinct genre classifications across 98 degrees. **Indie Electronic** appears for the third consecutive degree (STRFKR at 96, Postal Service electronic at 97, Gold Casio at 98), demonstrating that a single genre label can contain vastly different sonic architectures:
 
-### What Worked
+- **STRFKR** (96) -- synth-pop pulse. Driving, joyful, constant forward motion.
+- **Postal Service electronic** (97) -- algorithmic tenderness. Intimate, digital, glitchy warmth.
+- **Gold Casio** (98) -- retro-synthetic shimmer. Warm, hazy, nostalgic.
 
-- **Gold Casio as Indie Electronic at Genre Stage 80 tracks cleanly.** The classification is genuinely distinct from the synth-pop pulse of STRFKR (96) and the algorithmic tenderness of the Postal Service electronic (97) despite all three sharing the Indie Electronic label. Three consecutive Indie Electronic entries with three completely different sonic architectures proves the genre classification is a container, not a description. The Genre Stage 80 milestone is meaningful — eighty distinct genre stages in ninety-eight degrees at a stable 0.82 stages-per-degree rate.
-- **The retro-synthetic shimmer captures the sonic reality precisely.** Vintage synthesizer tones reinterpreted through modern production, warm analog pads sustaining over arpeggiated sequences, retro drum machine patterns crackling with deliberate retro grain. Nostalgia made audible. The 99th acoustic element earns its name through specific structural properties (analog reference, modern execution, sustained warmth) rather than through descriptive flourish.
-- **The Self-Released Synthesist names a real artist-city pattern.** Solo electronic producer outside the label system, bedroom-to-Bandcamp, zero intermediaries. The pattern is observationally accurate and distinguishes Gold Casio from the label-supported electronic acts in the cluster (ODESZA on Counter Records, STRFKR on Polyvinyl, the Postal Service on Sub Pop). The DIY spectrum across the electronic era now has a documented endpoint.
-- **The DIY-spectrum mapping across the electronic era is a clean structural finding.** ODESZA (Counter Records, arena), STRFKR (Polyvinyl, national touring), Postal Service (Sub Pop, massive reach), Gold Casio (self-released, bedroom). Four steps reducing infrastructure overhead and increasing autonomy. The progression is verifiable and the endpoint is named. Future entries on the spectrum can be classified against this four-stage model.
-- **Gryllidae returning at species-level granularity is a clean structural achievement.** First repeat of an insect family at a different granularity in the engine. Cricket Chorus (87, family-level, dense rhythmic chirping, E=4, dry meadow) and Tree Cricket Song (98, species-level, pure sustained trill, E=3, shrub) demonstrate within-family acoustic diversity. The contrast within Gryllidae is itself the discovery.
-- **The pure sustained trill thermometer captures the acoustic reality precisely.** Continuous trill at approximately 2–4 kHz, nearly sinusoidal waveform, minimal harmonic content, one of the purest tones produced by any animal. The 98th species-side acoustic element earns its name through specific structural properties — file-and-scraper stridulation at unusually clean ratios producing a spectrogram that approximates a single horizontal line.
-- **Dolbear's Law brings verified biophysics into the engine.** The relationship between chirp rate and temperature is not folklore but measured science — published by Amos Dolbear in 1897 as T(F) = 40 + chirps/13s and validated across multiple field studies. The cricket IS a biological thermometer. First verified chirp-rate-equals-temperature relationship in the engine.
-- **E=3 for the tree cricket is well-calibrated.** Pure but gentle, lower than field cricket chorus (87, E=4), higher than stonefly hatch (94, E=2). Crystalline clarity compensates for moderate amplitude — the sound carries through still night air at moderate distances because of its clean spectral content rather than its volume. The energy classification reflects sustained pure presence at moderate intensity.
-- **The biological oscillator framing is a useful new acoustic distinction.** Most stridulating insects produce harmonic-rich tones; the snowy tree cricket produces a nearly sinusoidal pure tone. The engine's acoustic taxonomy now distinguishes biological pure-tone producers from biological harmonic-rich producers. First nearly-sinusoidal biological tone in the engine.
-- **Thirty-eight consecutive original CSV species demonstrates data reliability.** The CSV has not needed substitution or correction in 38 consecutive entries (degrees 61–98). The source catalog is sturdy. Longest unbroken run of original-catalog selections in the engine to date.
-- **The biological-oscillator-meets-electronic-oscillator parallel is a strong structural finding.** Both the snowy tree cricket and Gold Casio's vintage synthesizers depend on oscillation as their sound-producing mechanism, both produce sustained pure tones, both operate at clean resonant frequencies. The cricket as nature's synthesizer; the synthesizer as technology's cricket. The parallel is both biologically grounded and acoustically meaningful.
+Ninth electronic-adjacent entry in thirteen degrees (86, 90, 91, 93, 94, 95, 96, 97, 98).
 
-### What Could Be Better
+### GOLD CASIO -- The Retro-Synthetic Aesthetic
 
-- **Gold Casio discography not exhaustively analyzed.** Specific releases, year-by-year evolution, and individual track analysis were treated structurally rather than catalogued album-by-album. Accepted for this entry; a discography deep-dive could be a future research artifact.
-- **Specific Gold Casio production-tool inventory not documented.** The vintage synthesizer aesthetic was treated descriptively rather than enumerating specific synthesizer models, drum machines, and DAW workflows. The retro-synthetic shimmer is a sonic identity rather than a technical specification, but a tool-inventory could deepen the entry.
-- **NO RAPTOR in 99 entries.** The absence of birds of prey (Accipitridae, Falconidae, Strigidae, Tytonidae) across the entire PNW catalog so far is a structural deficiency that has persisted since degree 90. The engine has fifteen Aves entries from earlier degrees but zero raptors. A bird of prey is overdue.
-- **NO PASSERIFORM in 42 degrees.** Forty-two consecutive non-passerine degrees (57–98) is itself an extreme. Passerines are the largest avian order; their absence distorts the engine's coverage of bird acoustic diversity. The engine should plan a deliberate return to passerines.
-- **NO MARINE SPECIES in 99 entries.** The Pacific Northwest's marine ecosystem (Salish Sea, Olympic Coast, Puget Sound proper) is unrepresented. Harbor seal, orca, sea lion, common loon, marbled murrelet — none have appeared. For an engine titled around Puget Sound, the marine omission grows more conspicuous with each non-marine degree.
+Gold Casio is a Seattle indie electronic project built on **vintage synthesizer aesthetics** -- warm analog pads, arpeggiated sequences, retro drum machines, and melodic synth lines filtered through modern production. The name evokes retro electronic hardware -- the gold Casio watch as icon of 1980s consumer electronics, now reframed as aesthetic object.
 
-## Lessons Learned
+Gold Casio operates **entirely self-released** -- no label, no management. The bedroom-to-Bandcamp pipeline. Seattle's electronic community provides the audience; the internet provides the distribution.
 
-- **Three consecutive Indie Electronic entries sustain without repetition because sonic architectures are genuinely different.** Synth-pop pulse, algorithmic tenderness, retro-synthetic shimmer. The genre classification does not predict acoustic character. Future genre-cluster runs (three or more consecutive entries inside one classification label) should be evaluated for sonic-architecture distinctness rather than treated as repetition. Three is the sustainable depth when each entry has its own architecture.
-- **Family returns with species-level entries add taxonomic depth without redundancy.** Gryllidae at degree 87 (family-level, Cricket Chorus) and degree 98 (species-level, Tree Cricket Song) demonstrate that a single family contains vastly different sound worlds at the species level. Family-level entries provide breadth; species-level returns provide depth. The engine's taxonomic exploration now has two-level granularity as a tested device.
-- **Self-released artists represent the logical endpoint of the DIY spectrum.** The progression from arena-scale (ODESZA, Counter Records) to indie label (STRFKR, Polyvinyl) to major indie (Postal Service, Sub Pop) to self-released (Gold Casio) traces the complete distribution-overhead spectrum. Future electronic entries should be classified against this four-stage model. The endpoint is named.
-- **Dolbear's Law brings verified biophysics into the engine and opens the door to other measured biological-acoustic relationships.** The cricket IS a thermometer. Future species entries should be examined for measured environmental-acoustic relationships — frog call rate vs temperature, bird song timing vs photoperiod, insect chorus density vs humidity. Verified biophysics is a tracked entry property worth applying retroactively to prior species entries.
-- **Nine electronic-adjacent entries in thirteen degrees sustain without repetition because each entry uses electronics differently.** Pop structure (86), atmosphere (90), obliteration (91), bridge-building (92), intimacy (93), experimentation (94), euphoria (95), pulse (96), tenderness (97), nostalgia (98). Ten approaches to one substrate. The Pacific Northwest's electronic music scene apparently supports thirteen-degree-deep exploration without architectural repetition. This is a measure of the source community's depth.
-- **Biological pure-tone producers are a tracked acoustic category.** The snowy tree cricket's nearly sinusoidal trill is the first instance of a biological pure-tone producer in the engine. Future species entries should be classified by harmonic content (pure-tone vs harmonic-rich vs broadband). Spectrogram-line-shape (single horizontal line vs vertical streaks vs broadband cloud) is a useful distinguishing acoustic property.
-- **The biological-oscillator-meets-electronic-oscillator parallel demonstrates that the engine's acoustic taxonomy operates beneath species/genre distinctions.** Both Gold Casio's vintage synthesizers and the snowy tree cricket's wing structure operate as oscillators producing sustained pure tones. The parallel reveals shared underlying physics. Future degree pairings should be examined for shared mechanism even when species/genre are unrelated. Mechanism-based parallels can be as structurally productive as theme-based parallels.
-- **Thirty-eight consecutive original CSV species is a sustained reliability finding.** The source catalog has delivered without substitution or correction across 38 consecutive entries. This is an unusual span of catalog reliability — the original CSV is sturdy. Future engine planning can lean more confidently on the original catalog for forward planning since the data is empirically reliable across nearly forty entries.
-- **The DIY-spectrum mapping is a generalizable artist-city framework.** The four-stage model (label infrastructure / indie label / major indie / self-released) maps naturally onto other genre clusters and other regional scenes. Future engine work in non-electronic genre clusters can apply the same framework to track distribution-overhead reduction across multiple entries within a cluster.
-- **Genre Stage 80 lands as a counter milestone with structural significance.** Eighty distinct genre classifications in ninety-eight degrees signals that the engine has accumulated enough catalog density to support stable rate (0.82 stages/degree) without exhausting the genre vocabulary. Future degrees can be expected to continue introducing new genre stages at approximately 0.8 per degree until catalog saturation begins to show.
+The sound: analog synthesizer tones (warm pads and arpeggios referencing 1980s synth-pop), retro drum machines (programmed rhythms evoking early electronic production), modern production values (clean mixing, spatial effects, contemporary dynamics), nostalgia as creative fuel (not reproduction of the past but reinterpretation through contemporary sensibility). The tension between retro source material and modern execution creates the distinctive **retro-synthetic shimmer**.
 
-## Cross-References
+### THE RETRO-SYNTHETIC SHIMMER -- 99th Acoustic Element
+
+The ninety-ninth acoustic element is **the retro-synthetic shimmer** -- the sonic quality of vintage synthesizer tones reinterpreted through modern production. Warm analog pads, arpeggiated sequences, retro drum machine patterns, all filtered through contemporary mixing and spatial techniques. Nostalgia made audible. Warm, hazy, wistful.
+
+Contrasts:
+- **The algorithmic tenderness** (degree 97, Postal Service electronic) -- intimate, glitchy, digital. The retro-synthetic shimmer is warm, flowing, analog-referenced.
+- **The synth-pop pulse** (degree 96, STRFKR) -- driving, joyful, constant motion. The retro-synthetic shimmer is contemplative, hazy, wistful.
+- **The euphoric build** (degree 95, ODESZA) -- cinematic, massive, festival-scale. The retro-synthetic shimmer is intimate, bedroom-scale, nostalgic.
+
+### THE SELF-RELEASED SYNTHESIST -- 99th Artist-City Pattern
+
+The ninety-ninth artist-city pattern is **the self-released synthesist** -- a solo electronic producer operating entirely outside the label system. Self-produced, self-released, self-promoted. The bedroom-to-Bandcamp pipeline.
+
+The DIY spectrum within the engine's electronic entries:
+1. **ODESZA** (95) -- Counter Records. Label infrastructure. Arena-scale.
+2. **STRFKR** (96) -- Polyvinyl. Indie label. National touring scale.
+3. **Postal Service** (86, 97) -- Sub Pop. Major indie label. Massive reach.
+4. **Gold Casio** (98) -- Self-released. Zero intermediaries. Bedroom scale.
+
+Each step reduces infrastructure overhead and increases autonomy. Gold Casio is the logical endpoint.
+
+### CROSS-REFERENCES (Part A)
 
 | Connection | From | To | Nature |
-|------------|------|-----|--------|
-| S36-097 | Gold Casio (98) | The Postal Service electronic (97) | INDIE ELECTRONIC PARALLEL — CONSECUTIVE. Both Indie Electronic. The Postal Service electronic is algorithmic tenderness — intimate digital glitch on Sub Pop. Gold Casio is retro-synthetic shimmer — warm analog nostalgia self-released. Same genre, different sonic architectures, different infrastructure. |
-| S36-096 | Gold Casio (98) | STRFKR (96) | INDIE ELECTRONIC PARALLEL — TWO BACK. Both Indie Electronic. STRFKR is synth-pop pulse — driving joyful Polyvinyl Records. Gold Casio is retro-synthetic shimmer — warm wistful self-released. Three consecutive Indie Electronic entries (96, 97, 98) with three completely different sonic architectures. |
-| S36-095 | Gold Casio (98) | ODESZA (95) | ELECTRONIC SPECTRUM — ARENA TO BEDROOM. ODESZA is cinematic festival-scale electronic (E=5, Counter Records, Bellingham pipeline). Gold Casio is retro bedroom-scale electronic (E=4, self-released, the self-released synthesist). The DIY spectrum from arena to bedroom. |
-| S36-093 | Gold Casio (98) | NAVVI (93) | SHIMMER PARALLEL. Both atmospheric, both shimmer-oriented. NAVVI uses reverb-as-architecture for ethereal intimacy (the shimmer veil). Gold Casio uses vintage synthesizers for nostalgic warmth (the retro-synthetic shimmer). Different tools, similar haze, both sustained presence. |
-| S36-094 | Gold Casio (98) | Erik Blood (94) | ELECTRONIC PRODUCER PARALLEL. Both Seattle electronic producers at intimate scale. Erik Blood is experimental and genre-blending (the producer's palette). Gold Casio is retro-focused and self-released (the retro-synthetic shimmer). Different relationships to the electronic tradition. |
-| S36-086 | Gold Casio (98) | The Postal Service (86) | ELECTRONIC GENEALOGY. The Postal Service pioneered indie-electronic crossover on Sub Pop with structured electronic pop. Gold Casio inherits the indie-electronic tradition, now entirely self-released. From Sub Pop to Bandcamp. From electronic pulse to retro-synthetic shimmer. |
-| S36-090 | Gold Casio (98) | Sky Cries Mary (90) | ELECTRONIC ERA OPENS AND DEEPENS. Sky Cries Mary opened the Electronic Era at degree 90 (Ethereal/Electronic, the ambient drift). Gold Casio extends it to nine electronic-adjacent entries in thirteen degrees. The deepest sustained genre cluster in the engine. |
-| S36-067 | Gold Casio (98) | Chris Walla (67) | THE SELF-RELEASED SYNTHESIST vs THE PRODUCER-AS-ARTIST. Both treat production as creative practice. Walla is producer-as-artist (technical mastery applied to others' work). Gold Casio is self-released synthesist (electronic production as the project's own creative output). Same medium; different artist-positions. |
-| S36-056 | Gold Casio (98) | Lemolo (56) | DREAM-HAZE LINEAGE. Lemolo's dream pop operates in similar atmospheric territory — reverb-laden, ethereal, song-structured. Gold Casio is more electronic where Lemolo is more guitar-driven, but both inhabit shimmer-oriented territory. Two PNW shimmer entries, 42 degrees apart. |
-| SPS-087 | Tree Cricket Song (98) | Cricket Chorus (87) | SAME FAMILY GRYLLIDAE — FIRST INSECT FAMILY RETURN. Field cricket chorus: dense rhythmic chirping, E=4, dry meadow, family-level entry. Tree cricket song: pure sustained trill, E=3, shrub, species-level entry. Same family, opposite acoustic architectures. First repeat of an insect family at a different granularity. |
-| SPS-088 | Tree Cricket Song (98) | Katydid (88) | ORTHOPTERA CONNECTION. Both Orthoptera, different families. Katydid (Tettigoniidae) is harsh continuous electric buzz. Tree cricket (Gryllidae) is pure sustained trill. Both stridulators; different file-and-scraper geometries; different acoustic textures. |
-| SPS-089 | Tree Cricket Song (98) | Cicada (89) | INSECT SUSTAINED SOUND PARALLEL. Cicada (Cicadidae, tymbal mechanism, electric buzzing throb, E=5) and tree cricket (Gryllidae, stridulation mechanism, pure sustained trill, E=3). Both sustained insect sounds. Different mechanisms, different amplitudes, different harmonic content. |
-| SPS-094 | Tree Cricket Song (98) | Stonefly Hatch (94) | INSECT ERA QUIET END. Both low-energy insects. Stonefly hatch (E=2, wing rustle on stream surface) and tree cricket song (E=3, pure sustained trill). The quiet end of the insect acoustic spectrum. Both produce moderate-amplitude sounds whose acoustic distinctness depends on quality rather than volume. |
-| SPS-090 | Tree Cricket Song (98) | Spring Peeper-Like Chorus (90) | PURE TONE PARALLEL — CONVERGENT ACOUSTIC PURITY ACROSS PHYLA. Both remarkably pure tones across very different phyla (Insecta vs Amphibia). Spring peeper bell-like peep is harmonic-rich but tonally clear; tree cricket sustained trill is nearly sinusoidal. Convergent acoustic purity through completely different sound mechanisms. |
-| SPS-093 | Tree Cricket Song (98) | Hornet Nest Buzz (93) | INSECT ACOUSTIC POSTURE CONTRAST. Hornet (Vespidae, aggressive papery hum, E=5, defensive). Tree cricket (Gryllidae, pure sustained trill, E=3, mating). Same class Insecta, different orders, opposite acoustic postures (defensive threat vs mating advertisement). |
-| SPS-092 | Tree Cricket Song (98) | Bumblebee Drone (92) | ENERGY PARALLEL — INSECT QUIET END. Bumblebee (Apidae, deep resonant buzz, E=2, pollination). Tree cricket (Gryllidae, pure sustained trill, E=3, mating). Both gentler insect entries. Adjacent energy levels (E=2, E=3) with different acoustic characters (low resonant buzz vs high pure trill). |
-| RES-dolbear-law | Tree Cricket Song (98) | Amos Dolbear 1897 | DOLBEAR'S LAW. T(F) = 40 + (chirps in 13 seconds). First verified chirp-rate-equals-temperature relationship in the engine. Linear, reliable, validated across multiple field studies. The cricket IS a biological thermometer. Verified biophysics, not folklore. |
-| RES-gold-casio-self-release | Gold Casio (98) | Self-released distribution model | THE SELF-RELEASED SYNTHESIST'S DISTRIBUTION. Gold Casio's bedroom-scale aesthetic and self-released distribution are mutually reinforcing — full creative control and direct-to-audience distribution permit the retro-synthetic shimmer to remain bedroom-intimate. The aesthetic and the business model are aligned. |
+|-----------|------|-----|--------|
+| S36-096 | Gold Casio (98) | STRFKR (96) | INDIE ELECTRONIC PARALLEL. Both Indie Electronic. STRFKR is synth-pop pulse -- driving, joyful, Polyvinyl Records. Gold Casio is retro-synthetic shimmer -- warm, wistful, self-released. Same genre, different sonic architectures and infrastructure. |
+| S36-095 | Gold Casio (98) | ODESZA (95) | ELECTRONIC SPECTRUM. ODESZA is cinematic, festival-scale electronic (E=5, Counter Records). Gold Casio is retro, bedroom-scale electronic (E=4, self-released). From arena to bedroom. |
+| S36-086 | Gold Casio (98) | The Postal Service (86) | ELECTRONIC GENEALOGY. Postal Service pioneered indie-electronic crossover on Sub Pop. Gold Casio inherits the tradition, now entirely self-released. From Sub Pop to Bandcamp. |
+| S36-093 | Gold Casio (98) | NAVVI (93) | SHIMMER PARALLEL. Both atmospheric, both shimmer-oriented. NAVVI uses reverb-as-architecture for ethereal intimacy. Gold Casio uses vintage synths for nostalgic warmth. Different tools, similar haze. |
+| S36-094 | Gold Casio (98) | Erik Blood (94) | ELECTRONIC PRODUCER PARALLEL. Both Seattle electronic producers at intimate scale. Erik Blood is experimental, genre-blending. Gold Casio is retro-focused, self-released. Different relationships to the electronic tradition. |
 
-## Engine Position
+---
 
-- **Degree 98 of 360** — 27.2% of the circle traversed; deep into Quadrant II.
-- **Twin counters tick to 99 (artist) and 98 (species)**: the retro-synthetic shimmer is the 99th acoustic element on the artist side; the pure sustained trill thermometer is the 98th acoustic element on the species side; The Self-Released Synthesist is the 99th artist-city pattern.
-- **Genre Stage 80 — MILESTONE**. Indie Electronic. Eighty genre stages in ninety-eight degrees (0.82 stages/degree). Third consecutive Indie Electronic genre stage (96, 97, 98).
-- **Energy distribution after degree 98** (artist-side): E1:3 (3.0%), E2:31 (31.3%), E3:27 (27.3%), E4:24 (24.2%), E5:13 (13.1%), E6:2 (2.0%). Total: 99 (degrees 0–98 inclusive). **E=4 gains Gold Casio to reach 24 deployments**. Third consecutive E=4 electronic entry across degrees 97–98 after STRFKR's E=5 break at degree 96.
-- **Electronic Era nine-deep**: The Postal Service (86, Indie Electronic), Sky Cries Mary (90, Ethereal/Electronic), Hovercraft (91, Drone/Noise), Trance Mission (92, World/Electronic), NAVVI (93, Dream Pop/Electronic), Erik Blood (94, Electronic/Experimental), ODESZA (95, Electronic), STRFKR (96, Indie Electronic), The Postal Service electronic (97, Indie Electronic), Gold Casio (98, Indie Electronic). Ten electronic-adjacent entries; nine in the thirteen-degree window since degree 86. Densest sustained genre cluster in the engine.
-- **Three consecutive Indie Electronic** (degrees 96, 97, 98) with three completely different sonic architectures: synth-pop pulse, algorithmic tenderness, retro-synthetic shimmer.
-- **Insect entry count after degree 98**: nine insect entries (87 cricket, 88 katydid, 89 cicada, 91 mosquito, 92 bumblebee, 93 hornet, 94 stonefly, 95 mayfly, 98 tree cricket) across thirteen degrees with two non-insect interludes (90 amphibian, 96 mammal-implied via STRFKR).
-- **Gryllidae returns**: Cricket Chorus (87, family-level, *Gryllus* spp., dense rhythmic chirping, E=4, dry meadow) and Tree Cricket Song (98, species-level, *Oecanthus fultoni*, pure sustained trill, E=3, shrub). First repeat of an insect family at a different granularity in the engine.
-- **Acoustic posture taxonomy** (insect-side after degree 98): Mating (cricket 87, katydid 88, tree cricket 98), Advertising (cicada 89), Incidental flight (mosquito 91, bumblebee 92, stonefly 94, mayfly 95), Defensive (hornet 93). Four posture categories established; mating remains the most common.
-- **Biological pure-tone producer count**: 1 — Snowy Tree Cricket (98). First nearly-sinusoidal biological tone in the engine.
-- **Original CSV unbroken**: 38 consecutive original-catalog species (degrees 61–98) — longest unbroken run in the engine.
-- **DIY spectrum mapped**: ODESZA (95, Counter Records, arena), STRFKR (96, Polyvinyl, national), Postal Service (86/97, Sub Pop, massive), Gold Casio (98, self-released, bedroom). Four-stage model documented.
-- **Verified biophysics relationships**: 1 — Dolbear's Law (T(F) = 40 + chirps/13s, *Oecanthus fultoni*, 1897). First verified chirp-rate-equals-temperature relationship in the engine.
-- **Outstanding gaps**: Zero raptors in 99 entries; zero passerines in 42 degrees (57–98); zero marine species in 99 entries.
+## Part B: Tree Cricket Song (Gryllidae Returns) -- PURE SUSTAINED TRILL (Gryllidae Returns from Degree 87 Same Family Different Species, Nearly Sinusoidal One of Purest Tones in Nature, Dolbear's Law Thermometer Cricket, E=3, Thirty-Eighth Consecutive Original CSV)
 
-## Acoustic Progression Snapshot (Tail)
+Full deep research covering the tree cricket song, Gryllidae returning, and Dolbear's Law:
+
+### GRYLLIDAE RETURNS -- Same Family, Different Sound World
+
+**Gryllidae** returns from degree 87 (cricket chorus). Species-level entry for the snowy tree cricket (*Oecanthus fultoni*). Radically different acoustic character from the field cricket.
+
+Classification:
+- **Kingdom:** Animalia
+- **Phylum:** Arthropoda
+- **Class:** Insecta (continuing insect sequence)
+- **Order:** Orthoptera (continuing -- with Gryllidae 87/98 and Tettigoniidae 88)
+- **Family:** Gryllidae -- RETURNS (first at degree 87)
+- **Genus:** *Oecanthus*
+- **Species:** *O. fultoni* (snowy tree cricket, thermometer cricket)
+
+Gryllidae acoustic contrast:
+
+| Degree | Entry | Sound | Energy | Habitat |
+|---|---|---|---|---|
+| 87 | Cricket chorus (family-level) | Dense rhythmic chirping | E=4 | Dry meadow |
+| **98** | **Tree cricket song (species-level)** | **Pure sustained trill** | **E=3** | **Shrub** |
+
+Same family, different species, different acoustic characters, different energy levels, different habitats.
+
+### THE SOUND: PURE SUSTAINED TRILL -- 98th Species-Side Acoustic Element
+
+The snowy tree cricket's call is a **pure, sustained trill** -- stridulation through specialized wing structures. The file-and-scraper mechanism of *Oecanthus fultoni* produces an unusually pure waveform -- a **nearly sinusoidal tone** with minimal harmonic content, rare among stridulating insects. Sustained, crystalline trill at approximately **2-4 kHz**. Clean, clear, continuous. One of the **purest tones produced by any animal**.
+
+**Why E=3:** Pure but gentle -- quieter than field crickets individually. The pure tone carries well through still night air but at moderate distances. Lower than field cricket chorus (87, E=4), higher than stonefly (94, E=2). Crystalline clarity compensates for volume.
+
+Contrasts with prior acoustic elements:
+- **Cricket chorus** (87, Gryllidae) -- dense rhythmic chirping, E=4. Tree cricket is pure, sustained, tonal, E=3. Same family, opposite architectures.
+- **Katydid rasp** (88, Tettigoniidae) -- harsh, buzzy. Tree cricket is clean and pure.
+- **Cicada throb** (89, Cicadidae) -- loud, pulsing, E=5. Tree cricket is quiet, pure, E=3.
+- **Toad chorus purring trill** (97, Bufonidae) -- sustained and musical. Tree cricket is sustained and pure.
+
+### DOLBEAR'S LAW -- THE THERMOMETER CRICKET
+
+In 1897, physicist **Amos Dolbear** published the relationship: **T(F) = 40 + (chirps in 13 seconds)**. Linear, reliable, verified biophysics. Ectothermic metabolism: temperature drives wing-rubbing speed drives chirp rate. The cricket IS a biological thermometer.
+
+**Habitat:** Shrubs, low trees, herbaceous plants, hedgerows. Calls from elevated positions on vegetation. Contrast with field cricket habitat: dry meadow (87) vs shrub (98).
+
+### STRUCTURAL EVENTS SUMMARY
+
+1. **Gryllidae returns** -- same family (degree 87), different species, different sound world.
+2. **Pure sustained trill** -- 98th species-side acoustic element. Nearly sinusoidal. One of the purest tones in nature.
+3. **Dolbear's Law** -- chirp rate = temperature. T(F) = 40 + chirps/13s. Verified biophysics.
+4. **Thirty-eighth consecutive original CSV.**
+
+### CROSS-REFERENCES (Part B)
+
+| Connection | From | To | Nature |
+|-----------|------|-----|--------|
+| SPS-087 | Tree Cricket Song (98) | Cricket Chorus (87) | SAME FAMILY GRYLLIDAE! Field cricket: dense rhythmic chirping, E=4, dry meadow. Tree cricket: pure sustained trill, E=3, shrub. Same family, radically different acoustic characters. |
+| SPS-088 | Tree Cricket Song (98) | Katydid (88) | ORTHOPTERA CONNECTION. Both Orthoptera, different families. Katydid rasp (Tettigoniidae) and tree cricket trill (Gryllidae). Both stridulators; different textures. |
+| SPS-089 | Tree Cricket Song (98) | Cicada (89) | INSECT SUSTAINED SOUND PARALLEL. Cicada throb (E=5) and tree cricket trill (E=3). Both sustained insect sounds. Different mechanisms, different amplitudes. |
+| SPS-094 | Tree Cricket Song (98) | Stonefly (94) | INSECT ERA -- QUIET END. Both low-energy insects. Stonefly (E=2) and tree cricket (E=3). The quiet end of the insect acoustic spectrum. |
+| SPS-090 | Tree Cricket Song (98) | Spring Peeper (90) | PURE TONE PARALLEL! Both remarkably pure tones. Different phyla (amphibian vs insect), convergent acoustic purity. Nature's tuning forks. |
+
+---
+
+## Parallel: Gold Casio x Tree Cricket Song -- The Shimmer and the Trill
+
+The retro-synthetic shimmer and the pure sustained trill. Purity on both sides.
+
+**1. Both Pure Tones, Both Sustained** -- Gold Casio's retro-synthetic shimmer sustains warm analog pads and arpeggios. The tree cricket's crystalline trill sustains one of the purest tones in nature. Both create sustained sonic environments from pure waveforms.
+
+**2. Biological Oscillator and Electronic Oscillator** -- The tree cricket is nature's synthesizer -- its wing mechanism produces a nearly sinusoidal tone, like an analog oscillator. Gold Casio's vintage synthesizers produce similar sustained, pure tones through electronic oscillation. The cricket as nature's oscillator; the synth as technology's cricket.
+
+**3. E=4 vs E=3** -- Near-matched energy. Gold Casio's retro shimmer at moderate intensity; the tree cricket's trill at gentle-but-clear. Both sustained but at moderate levels. Neither dominates its soundscape; both define it through sustained presence.
+
+**4. Nostalgia and Temperature** -- Gold Casio channels nostalgia -- retro synth tones referencing the past through contemporary production. The tree cricket channels temperature -- its chirp rate is literally a thermometer. Both are transducers: converting one dimension (time, temperature) into sound.
+
+---
+
+## Acoustic Progression (99 elements)
 
 | # | Element | Degree | Artist/Species |
 |---|---------|--------|----------------|
+| 0 | silence | 0 | Quincy Jones |
+| 1 | cascade | 1 | Bill Frisell |
+| 2 | drone | 2 | Wayne Horvitz |
+| 3 | language | 3 | Ernestine Anderson |
+| 4 | motif | 4 | Floyd Standifer |
+| 5 | metronome | 5 | Overton Berry |
+| 6 | question | 6 | Patti Bown |
+| 7 | harmonic spiral | 7 | Julian Priester |
+| 8 | ultrasonic threshold | 8 | Gary Peacock |
+| 9 | variation | 9 | Hadley Caliman |
+| 10 | minimum signal | 10 | Bud Shank |
+| 11 | trill/tremolo | 11 | Joe Brazil |
+| 12 | sawtooth sweep | 12 | Don Lanphere |
+| 13 | ostinato | 13 | Marc Seales |
+| 14 | repetition-resolution | 14 | Aaron Parks |
+| 15 | accelerando | 15 | Thomas Marriott |
+| 16 | crescendo | 16 | Jeff Lorber |
+| 17 | the hook | 17 | Reggie Watts |
+| 18 | ascending spiral | 18 | Maktub |
+| 19 | descending spiral | 19 | Fly Moon Royale |
+| 20 | sustain/the release | 20 | Whitney Monge |
+| 21 | the hammer | 21 | Polyrhythmics |
+| 22 | resonant percussion/groove reset | 22 | Foxy Apollo |
+| 23 | the testimony/groove reset | 23 | Allen Stone |
+| 24 | the invocation | 24 | Ron Artis II |
+| 25 | the congregation | 25 | Black Stax |
+| 26 | the caroling | 26 | Shaina Shepherd |
+| 27 | the liquid gurgle | 27 | The Dynamics |
+| 28 | the liquid twitter | 28 | Night Owls |
+| 29 | the rough brrit | 29 | Boogaloo Joe Jones |
+| 30 | the liquid warble synthesis | 30 | Ray Charles |
+| 31 | the whisper | 31 | Brenda Lee Eager |
+| 32 | the buzz | 32 | Luther Rabb |
+| 33 | the cadenza | 33 | Larry English |
+| 34 | the dialect | 34 | The Tempos |
+| 35 | the thrum | 35 | Robert Cray |
+| 36 | the sonic boom | 36 | Jimi Hendrix |
+| 37 | the filament | 37 | Ayron Jones |
+| 38 | the drawl | 38 | Booker T. Jones |
+| 39 | the canopy buzz | 39 | Ron Artis Jr |
+| 40 | the thinning | 40 | Alice Smith |
+| 41 | the partition | 41 | Shawn Smith |
+| 42 | the shimmer | 42 | Erica Campbell |
+| 43 | the radiance | 43 | Ann Wilson |
+| 44 | the grain | 44 | Chong the Nomad |
+| 45 | the murmur | 45 | Damien Jurado |
+| 46 | the confessional | 46 | Rocky Votolato |
+| 47 | the parable tone | 47 | Pedro the Lion |
+| 48 | the held rest | 48 | Sera Cahoone |
+| 49 | the lullaby subversion | 49 | Kimya Dawson |
+| 50 | the intimate architecture | 50 | Mirah |
+| 51 | the communal harmony | 51 | Grand Archives |
+| 52 | the testimony roar | 52 | Brandi Carlile |
+| 53 | the cathedral harmony | 53 | Fleet Foxes |
+| 54 | the fraternal jangle | 54 | Ivan & Alyosha |
+| 55 | the ember glow | 55 | Shelby Earl |
+| 56 | the dream haze | 56 | Lemolo |
+| 57 | the rattle / the stream rattle | 57 | Laura Gibson / Belted Kingfisher |
+| 58 | the ache / the pond whistle | 58 | Death Cab for Cutie / Wood Duck |
+| 59 | the digression / the quack | 59 | The Long Winters / Mallard |
+| 60 | the bare wire / the submerge call | 60 | Ben Gibbard (solo) / Pied-billed Grebe |
+| 61 | the braided voice / the tail slap | 61 | Y La Bamba / American Beaver |
+| 62 | the throwback / the rhythmic gnaw | 62 | Pickwick / Beaver Chewing |
+| 63 | the FM sheen / the chuff | 63 | Kenny Loggins / River Otter |
+| 64 | the dusk / the chitter | 64 | Jesse Sykes / Mink |
+| 65 | the open plain / the chuckle-chatter | 65 | Philip Aaberg / American Marten |
+| 66 | the country thunder / the scream | 66 | Neko Case / Fisher |
+| 67 | the clean room / the shrill bark-chitter | 67 | Chris Walla / Short-tailed Weasel |
+| 68 | the hush / the rapid chattering chirp | 68 | Sam Beam / Long-tailed Weasel |
+| 69 | the earnest voice / the warning foot-stamp hiss | 69 | Kris Orlowski / Striped Skunk |
+| 70 | the fiddle line / the churring chittering young | 70 | Horse Feathers / Raccoon |
+| 71 | the room tone / the bark screaming vixen call | 71 | Phil Elverum / Red Fox |
+| 72 | the layered loop / the low hiss click | 72 | Briana Marela / Opossum |
+| 73 | the jangle / the thump squeal | 73 | LAKE / Snowshoe Hare |
+| 74 | the reverb wash / the high sharp eenk bark | 74 | Poor Moon / American Pika |
+| 75 | the anthem / the piercing whistle alarm | 75 | The Lonely Forest / Yellow-bellied Marmot |
+| 76 | the androgynous register / the loud penetrating whistle | 76 | Chris Pureka / Hoary Marmot |
+| 77 | the ethereal layering / the musical multi-note whistle | 77 | Mree / Olympic Marmot |
+| 78 | the communal jangle / the chirping trill alarm | 78 | Acid Tongue / Townsend's Ground Squirrel |
+| 79 | the cinematic stillness / the sharp chip alarm | 79 | Jesse Marchant / Golden-mantled Ground Squirrel |
+| 80 | the organ explosion / the loud scolding chatter rattle | 80 | Mates of State / Douglas Squirrel |
+| 81 | the Broadway voice / the bark + chatter alarm | 81 | Sara Bareilles / Eastern Fox Squirrel |
+| 82 | the acoustic intimacy / the high thin tseet | 82 | Death Cab for Cutie (acoustic) / Northern Flying Squirrel |
+| 83 | the grunge whisper / the ultrasonic + soft chip | 83 | Pearl Jam (acoustic) / Deer Mouse |
+| 84 | the late whisper / the chatter + twig gnaw | 84 | Damien Jurado (late career) / Bushy-tailed Woodrat |
+| 85 | the stripped confession / the quiet plop | 85 | Rocky Votolato (acoustic) / Muskrat |
+| 86 | the electronic pulse / the amplified krek-krek wall of sound | 86 | The Postal Service / Pacific Treefrog |
+| 87 | the emerging twang / the rhythmic chirp field chorus | 87 | Neko Case (early folk) / Cricket Chorus |
+| 88 | the bedroom strum / the continuous electric buzz | 88 | Kimya Dawson (solo) / Katydid |
+| 89 | the baroque whisper / the electric buzzing throb | 89 | Parenthetical Girls / Cicada |
+| 90 | the ambient drift / the bell-like peep chorus | 90 | Sky Cries Mary / Spring Peeper-Like Chorus |
+| 91 | the sustained crush / the ultra-thin hum cloud | 91 | Hovercraft / Mosquito Swarm |
+| 92 | the global weave / the deep resonant buzz | 92 | Trance Mission / Bumblebee Drone |
+| 93 | the shimmer veil / the aggressive papery hum | 93 | NAVVI / Hornet Nest Buzz |
 | 94 | the producer's palette / the wing rustle on stream surface | 94 | Erik Blood / Stonefly Hatch |
 | 95 | the euphoric build / the mass wing buzz over water | 95 | ODESZA / Mayfly Emergence |
 | 96 | the synth-pop pulse / the duck-like clucking chorus | 96 | STRFKR / Wood Frog |
 | 97 | the algorithmic tenderness / the sustained musical purring | 97 | The Postal Service (electronic) / Toad Chorus |
 | **98** | **the retro-synthetic shimmer / the pure sustained trill** | **98** | **Gold Casio / Tree Cricket Song** |
 
-## Genre Evolution Snapshot (Tail)
+The acoustic progression adds degree 98. On the artist side, the retro-synthetic shimmer (98) is Gold Casio -- warm analog pads, arpeggiated sequences, retro drum machine patterns, vintage synthesizer tones through modern production, nostalgia made audible. E=4. From the algorithmic tenderness (97, intimate digital glitch, machine warmth, E=4) to the retro-synthetic shimmer (98, warm analog nostalgia, hazy wistfulness, E=4). From digital to analog -- from glitch to warmth. Both electronic, both E=4, different temporal references: the Postal Service looks forward through digital experimentation; Gold Casio looks backward through vintage reverence. On the species side, the pure sustained trill (98) is the tree cricket song -- nearly sinusoidal, crystalline, 2-4 kHz, E=3. From the sustained musical purring (97, toad chorus, 10-30+ seconds, harmonic-rich, E=4) to the pure sustained trill (98, tree cricket, crystalline, minimal harmonics, E=3). Both sustained; different purities. The toad is harmonic-rich; the tree cricket is nearly sinusoidal. Same Gryllidae family as degree 87 but radically different sound.
+
+## Artist-City Patterns (99 patterns)
+
+| # | Pattern | Degree | Artist |
+|---|---------|--------|--------|
+| 0 | Export | 0 | Quincy Jones |
+| 1 | Draw | 1 | Bill Frisell |
+| 2 | European Exile | 2 | Wayne Horvitz |
+| 3 | The Stay | 3 | Ernestine Anderson |
+| 4 | The Teacher | 4 | Floyd Standifer |
+| 5 | The Persistence | 5 | Overton Berry |
+| 6 | The Erasure | 6 | Patti Bown |
+| 7 | Pedagogue-Draw | 7 | Julian Priester |
+| 8 | The Quiet Draw | 8 | Gary Peacock |
+| 9 | The Seeker | 9 | Hadley Caliman |
+| 10 | Late Homestead | 10 | Bud Shank |
+| 11 | The Salon Keeper | 11 | Joe Brazil |
+| 12 | The Prodigal | 12 | Don Lanphere |
+| 13 | Institutional Anchor | 13 | Marc Seales |
+| 14 | Prodigy-Export | 14 | Aaron Parks |
+| 15 | Builder-Stayer | 15 | Thomas Marriott |
+| 16 | Talent Incubator | 16 | Jeff Lorber |
+| 17 | The Uncategorizable | 17 | Reggie Watts |
+| 18 | The Workshop | 18 | Maktub |
+| 19 | The New Root | 19 | Fly Moon Royale |
+| 20 | The Street Laureate | 20 | Whitney Monge |
+| 21 | The Ensemble Anchor | 21 | Polyrhythmics |
+| 22 | The Inheritor | 22 | Foxy Apollo |
+| 23 | The Rural Draw | 23 | Allen Stone |
+| 24 | The Island Export | 24 | Ron Artis II |
+| 25 | The Cultural Guardian | 25 | Black Stax |
+| 26 | The Transmuter | 26 | Shaina Shepherd |
+| 27 | The Conduit | 27 | The Dynamics |
+| 28 | The Resident Band | 28 | Night Owls |
+| 29 | The Catalog | 29 | Boogaloo Joe Jones |
+| 30 | The Incubation | 30 | Ray Charles |
+| 31 | The Relay | 31 | Brenda Lee Eager |
+| 32 | The Foundation | 32 | Luther Rabb |
+| 33 | The Unrecorded | 33 | Larry English |
+| 34 | The Shadow Name | 34 | The Tempos |
+| 35 | The Deep Root | 35 | Robert Cray |
+| 36 | The Supernova | 36 | Jimi Hendrix |
+| 37 | The Inheritor | 37 | Ayron Jones |
+| 38 | The Touring Anchor | 38 | Booker T. Jones |
+| 39 | The Returning Wave | 39 | Ron Artis Jr |
+| 40 | The Cultural Satellite | 40 | Alice Smith |
+| 41 | The Scene Native | 41 | Shawn Smith |
+| 42 | The Gospel Export | 42 | Erica Campbell |
+| 43 | The Arena Architect | 43 | Ann Wilson |
+| 44 | The Digital Immigrant | 44 | Chong the Nomad |
+| 45 | The Stripped Murmur | 45 | Damien Jurado |
+| 46 | The Confessional Drifter | 46 | Rocky Votolato |
+| 47 | The Sacred Baritone | 47 | Pedro the Lion |
+| 48 | The Campfire Anchor | 48 | Sera Cahoone |
+| 49 | The Trojan Lullabist | 49 | Kimya Dawson |
+| 50 | The Intimate Architect | 50 | Mirah |
+| 51 | The Folk Organism | 51 | Grand Archives |
+| 52 | The Arena Breakout | 52 | Brandi Carlile |
+| 53 | The Prodigy Return | 53 | Fleet Foxes |
+| 54 | The Neighborhood Anchor | 54 | Ivan & Alyosha |
+| 55 | The Infrastructure Beneficiary | 55 | Shelby Earl |
+| 56 | The Duo Collective | 56 | Lemolo |
+| 57 | The Label Bridge | 57 | Laura Gibson |
+| 58 | The Bellingham Ascent | 58 | Death Cab for Cutie |
+| 59 | The Scene Intellectual | 59 | The Long Winters |
+| 60 | The Frontman Alone | 60 | Ben Gibbard (solo) |
+| 61 | The Corridor Bridge | 61 | Y La Bamba |
+| 62 | The Brief Blaze | 62 | Pickwick |
+| 63 | The Everett Departure | 63 | Kenny Loggins |
+| 64 | The Dark-Folk Loner | 64 | Jesse Sykes |
+| 65 | The Montana Connection | 65 | Philip Aaberg |
+| 66 | The Wanderer Who Claims Multiple Cities | 66 | Neko Case |
+| 67 | The Departed Member | 67 | Chris Walla |
+| 68 | The Visiting Artist | 68 | Sam Beam |
+| 69 | The Working Musician | 69 | Kris Orlowski |
+| 70 | The Corridor Wanderer | 70 | Horse Feathers |
+| 71 | The Anacortes Hermit | 71 | Phil Elverum |
+| 72 | The International Student | 72 | Briana Marela |
+| 73 | The K Records Collective | 73 | LAKE |
+| 74 | The Side Project | 74 | Poor Moon |
+| 75 | The Second Anacortes Act | 75 | The Lonely Forest |
+| 76 | The Identity Artist | 76 | Chris Pureka |
+| 77 | The YouTube-to-Artist Pipeline | 77 | Mree |
+| 78 | The Porch Party | 78 | Acid Tongue |
+| 79 | The Dark Meditation | 79 | Jesse Marchant |
+| 80 | The Married Duo | 80 | Mates of State |
+| 81 | The Crossover Arc | 81 | Sara Bareilles |
+| 82 | The Recursive Return | 82 | Death Cab for Cutie (acoustic) |
+| 83 | The Arena Unplugged | 83 | Pearl Jam (acoustic) |
+| 84 | The Artist Arc | 84 | Damien Jurado (late career) |
+| 85 | The Confessional Return | 85 | Rocky Votolato (acoustic) |
+| 86 | The Side Project | 86 | The Postal Service |
+| 87 | The Early Chapter | 87 | Neko Case (early folk) |
+| 88 | The Solo Distillation | 88 | Kimya Dawson (solo) |
+| 89 | The Theatrical Outsider | 89 | Parenthetical Girls |
+| 90 | The Parallel Scene | 90 | Sky Cries Mary |
+| 91 | The Spousal Satellite | 91 | Hovercraft |
+| 92 | The Cross-Pollinator | 92 | Trance Mission |
+| 93 | The Intimate Machine | 93 | NAVVI |
+| 94 | The Cross-Genre Bridge | 94 | Erik Blood |
+| 95 | The Bellingham Pipeline | 95 | ODESZA |
+| 96 | The DIY Maximalist | 96 | STRFKR |
+| 97 | The Re-Contextualized Return | 97 | The Postal Service (electronic) |
+| **98** | **The Self-Released Synthesist** | **98** | **Gold Casio** |
+
+Ninety-nine named patterns across ninety-nine degrees. The Self-Released Synthesist (98) introduces the pattern of the solo electronic producer operating entirely outside the label system -- self-produced, self-released, zero intermediaries, bedroom-to-Bandcamp. From the Re-Contextualized Return (97, analytical depth from different lens) to the Self-Released Synthesist (98, maximum autonomy through zero infrastructure). The progression from 96 to 97 to 98: the DIY maximalist (production ethos), the re-contextualized return (analytical depth), the self-released synthesist (zero intermediaries). Three patterns about reducing layers -- reducing production overhead (96), reducing analytical assumptions (97), reducing distribution infrastructure (98).
+
+## Genre Evolution (80 stages)
 
 | Stage | Degree | Genre | Artist |
 |-------|--------|-------|--------|
+| 27 | 45 | Folk | Damien Jurado |
+| 28 | 46 | Folk | Rocky Votolato |
+| 29 | 47 | Indie Folk | Pedro the Lion |
+| 30 | 48 | Folk | Sera Cahoone |
+| 31 | 49 | Folk Punk | Kimya Dawson |
+| 32 | 50 | Indie Folk | Mirah |
+| 33 | 51 | Indie Folk | Grand Archives |
+| 34 | 52 | Folk/Rock | Brandi Carlile |
+| 35 | 53 | Indie Folk | Fleet Foxes |
+| 36 | 54 | Folk | Ivan & Alyosha |
+| 37 | 55 | Singer-Songwriter | Shelby Earl |
+| 38 | 56 | Indie Folk | Lemolo |
+| 39 | 57 | Folk | Laura Gibson |
+| 40 | 58 | Indie Rock | Death Cab for Cutie |
+| 41 | 59 | Indie Rock | The Long Winters |
+| 42 | 60 | Folk | Ben Gibbard (solo) |
+| 43 | 61 | Folk/Indie | Y La Bamba |
+| 44 | 62 | Indie/Folk | Pickwick |
+| 45 | 63 | Soft Rock/Folk | Kenny Loggins |
+| 46 | 64 | Folk | Jesse Sykes |
+| 47 | 65 | New Age/Folk | Philip Aaberg |
+| 48 | 66 | Alt Country | Neko Case |
+| 49 | 67 | Indie/Folk | Chris Walla |
+| 50 | 68 | Folk | Sam Beam |
+| 51 | 69 | Singer-Songwriter | Kris Orlowski |
+| 52 | 70 | Indie Folk | Horse Feathers |
+| 53 | 71 | Indie/Folk | Phil Elverum |
+| 54 | 72 | Art Pop | Briana Marela |
+| 55 | 73 | Indie Pop | LAKE |
+| 56 | 74 | Indie Folk/Rock | Poor Moon |
+| 57 | 75 | Indie Pop | The Lonely Forest |
+| 58 | 76 | Folk | Chris Pureka |
+| 59 | 77 | Folk/Pop | Mree |
+| 60 | 78 | Folk/Indie | Acid Tongue |
+| 61 | 79 | Folk | Jesse Marchant |
+| 62 | 80 | Indie Pop | Mates of State |
+| 63 | 81 | Pop/Soul | Sara Bareilles |
+| 64 | 82 | Indie Folk | Death Cab for Cutie (acoustic) |
+| 65 | 83 | Acoustic Rock | Pearl Jam (acoustic) |
+| 66 | 84 | Folk | Damien Jurado (late career) |
+| 67 | 85 | Folk | Rocky Votolato (acoustic) |
+| 68 | 86 | Indie Electronic | The Postal Service |
+| 69 | 87 | Folk Country | Neko Case (early folk) |
+| 70 | 88 | Lo-Fi Folk | Kimya Dawson (solo) |
+| 71 | 89 | Avant-Pop | Parenthetical Girls |
+| 72 | 90 | Ethereal/Electronic | Sky Cries Mary |
+| 73 | 91 | Drone/Noise | Hovercraft |
+| 74 | 92 | World/Electronic | Trance Mission |
+| 75 | 93 | Dream Pop/Electronic | NAVVI |
 | 76 | 94 | Electronic/Experimental | Erik Blood |
 | 77 | 95 | Electronic | ODESZA |
 | 78 | 96 | Indie Electronic | STRFKR |
 | 79 | 97 | Indie Electronic | The Postal Service (electronic) |
 | **80** | **98** | **Indie Electronic** | **Gold Casio** |
 
-## Files
+Genre Stage 80 -- Indie Electronic at degree 98. A MILESTONE. Eighty genre stages in 98 degrees (~0.82 per degree). **Indie Electronic** appears for the third consecutive degree (STRFKR 96, Postal Service electronic 97, Gold Casio 98), demonstrating that a single genre label contains vastly different sonic architectures: STRFKR delivers synth-pop pulse (driving, joyful); Postal Service electronic delivers algorithmic tenderness (intimate, digital); Gold Casio delivers retro-synthetic shimmer (warm, hazy, nostalgic). Three entries, three sound worlds, one genre label. Ninth electronic-adjacent entry in thirteen degrees. Nine of thirteen genre stages since degree 86 have been electronic-inflected.
 
-- `docs/release-notes/v1.49.238/README.md` (this file)
-- `docs/release-notes/v1.49.238/chapter/00-summary.md` — derived summary
-- `docs/release-notes/v1.49.238/chapter/03-retrospective.md` — retrospective
-- `docs/release-notes/v1.49.238/chapter/04-lessons.md` — extracted lessons
-- `docs/release-notes/v1.49.238/chapter/99-context.md` — context
-- `www/tibsfox/com/Research/S36/research/releases/098-gold-casio/index.html`
-- `www/tibsfox/com/Research/S36/research/releases/098-gold-casio/research.md`
-- `www/tibsfox/com/Research/S36/research/releases/098-gold-casio/knowledge-nodes.json`
-- `www/tibsfox/com/Research/S36/research/releases/098-gold-casio/retrospective.md`
-- `www/tibsfox/com/Research/SPS/research/releases/098-tree-cricket-song/index.html`
-- `www/tibsfox/com/Research/SPS/research/releases/098-tree-cricket-song/research.md`
-- `www/tibsfox/com/Research/SPS/research/releases/098-tree-cricket-song/knowledge-nodes.json`
-- `www/tibsfox/com/Research/SPS/research/releases/098-tree-cricket-song/retrospective.md`
+## Energy Distribution
 
-Total: 9 files in commit `54b43179f4d82358676154f9d724df229c1f73de`.
+**Artist-side (after degree 98):** E1:3 (3.0%), E2:31 (31.3%), E3:27 (27.3%), E4:24 (24.2%), E5:13 (13.1%), E6:2 (2.0%). Total: 99 (degrees 0-98, 99 entries counting origin). E=4 gains Gold Casio (98) reaching 24 deployments. Third consecutive E=4 electronic entry (96 STRFKR E=5 breaks the streak, but 97-98 are E=4). The electronic era energy stabilizes at moderate warmth.
+
+**Species-side (after degree 98):** E=3 for tree cricket song (98) after toad chorus (97, E=4). The sequence since 86: E=4, E=4, E=4, E=4, E=4, E=2, E=3, E=5, E=2, E=3, E=4, E=4, E=3. Energy drops from amphibian chorus (E=4) to insect purity (E=3).
+
+## Cross-References (Combined)
+
+| Connection | From | To | Nature |
+|-----------|------|-----|--------|
+| S36-096 | Gold Casio (98) | STRFKR (96) | INDIE ELECTRONIC PARALLEL. Same genre, different sonic architectures. Synth-pop pulse vs retro-synthetic shimmer. |
+| S36-095 | Gold Casio (98) | ODESZA (95) | ELECTRONIC SPECTRUM. Arena to bedroom. Counter Records to self-released. |
+| S36-086 | Gold Casio (98) | The Postal Service (86) | ELECTRONIC GENEALOGY. Sub Pop to Bandcamp. Indie-electronic tradition evolving. |
+| S36-093 | Gold Casio (98) | NAVVI (93) | SHIMMER PARALLEL. Both atmospheric, shimmer-oriented. Different tools, similar haze. |
+| S36-094 | Gold Casio (98) | Erik Blood (94) | ELECTRONIC PRODUCER PARALLEL. Both intimate-scale Seattle electronic producers. |
+| SPS-087 | Tree Cricket Song (98) | Cricket Chorus (87) | SAME FAMILY GRYLLIDAE! Dense rhythmic chirping vs pure sustained trill. |
+| SPS-088 | Tree Cricket Song (98) | Katydid (88) | ORTHOPTERA CONNECTION. Both stridulators, different textures. |
+| SPS-089 | Tree Cricket Song (98) | Cicada (89) | INSECT SUSTAINED SOUND. Different mechanisms, different amplitudes. |
+| SPS-094 | Tree Cricket Song (98) | Stonefly (94) | INSECT ERA QUIET END. Both low-energy insects. |
+| SPS-090 | Tree Cricket Song (98) | Spring Peeper (90) | PURE TONE PARALLEL! Convergent acoustic purity across phyla. |
+
+## Infrastructure
+
+**Part A:** `www/tibsfox/com/Research/S36/research/releases/098-gold-casio/` -- research.md, index.html, knowledge-nodes.json, retrospective.md
+**Part B:** `www/tibsfox/com/Research/SPS/research/releases/098-tree-cricket-song/` -- research.md, index.html, knowledge-nodes.json, retrospective.md
+**Release notes:** `docs/release-notes/v1.49.238/README.md`
+
+**Total: 8 files** -- standard degree package.
+
+---
+
+## Retrospective
+
+**What Worked:**
+1. Genre Stage 80 is a meaningful milestone -- eighty genre classifications in 98 degrees. Third consecutive Indie Electronic with three genuinely different sonic architectures proves genre labels are containers, not descriptions
+2. The retro-synthetic shimmer (99th acoustic element) captures a real sonic quality -- nostalgia made audible through vintage synth tones and modern production. Distinct from algorithmic tenderness (97, digital glitch) and synth-pop pulse (96, driving groove)
+3. The self-released synthesist (99th artist-city pattern) sits at the logical endpoint of the DIY spectrum -- from Counter Records (ODESZA) to Polyvinyl (STRFKR) to Sub Pop (Postal Service) to self-released (Gold Casio). Zero intermediaries
+4. Gryllidae returning with a species-level entry demonstrates within-family diversity -- field cricket chorus (87, dense, rhythmic, E=4) vs tree cricket song (98, pure, sustained, E=3). Same family, opposite acoustic architectures
+5. Dolbear's Law adds verified biophysics to the engine -- the cricket IS a thermometer. T(F) = 40 + chirps/13s
+6. E=3 for tree cricket is well-calibrated -- pure but gentle, lower than field cricket chorus (E=4), higher than stonefly (E=2)
+7. Thirty-eight consecutive original CSV species continues data reliability
+
+**What Could Be Better:**
+1. NO RAPTOR in 99 entries -- CRITICAL, persists from degree 90
+2. NO PASSERIFORM in 42 degrees -- forty-two consecutive non-passerines (57-98). EXTREME
+3. NO MARINE SPECIES -- 99 entries without a marine specialist. SIGNIFICANT
+
+## Lessons Learned
+
+1. Three consecutive Indie Electronic entries (96-97-98) sustain without repetition because the sonic architectures are genuinely different: synth-pop pulse, algorithmic tenderness, retro-synthetic shimmer. Genre classification does not predict acoustic character
+2. Family returns with species-level entries add taxonomic depth. Gryllidae at 87 (family-level, field cricket chorus) and 98 (species-level, snowy tree cricket) demonstrate that a single family contains vastly different sound worlds
+3. Self-released artists represent the logical endpoint of the DIY spectrum mapped across the electronic era. The progression from arena (ODESZA) to indie label (STRFKR) to major indie (Postal Service) to self-released (Gold Casio) traces the complete distribution spectrum
+4. Dolbear's Law brings verified biophysics into the engine -- the relationship between chirp rate and temperature is not folklore but measured science
+5. Nine electronic-adjacent entries in thirteen degrees (86-98) sustain without repetition. The electronic landscape maps multiple dimensions: pop structure (86), atmosphere (90), obliteration (91), intimacy (93), experimentation (94), euphoria (95), pulse (96), tenderness (97), nostalgia (98)
+6. Thirty-eight consecutive original CSV species (61-98). Data reliability sustained
+
+---
+
+The retro-synthetic shimmer and the pure sustained trill.
+
+Degree 98. The shimmer and the trill. Purity on both sides.
+
+On the music side, Gold Casio reaches Genre Stage 80 -- a milestone. Eighty genre stages. Indie Electronic for the third consecutive degree with three completely different sound worlds. Self-released. E=4. The retro-synthetic shimmer is the 99th acoustic element -- nostalgia made audible, vintage synths through modern production, warm, hazy, wistful. The self-released synthesist is the 99th artist-city pattern -- zero intermediaries, bedroom-to-Bandcamp. Ninth electronic entry. The engine adds the sound of electronic nostalgia reinterpreted.
+
+On the species side, the tree cricket song reintroduces Gryllidae -- same family as degree 87, radically different sound. The snowy tree cricket produces one of the purest tones in nature -- nearly sinusoidal, 2-4 kHz, crystalline. The thermometer cricket. Dolbear's Law. E=3. Shrub habitat. Thirty-eighth consecutive original CSV species. The engine adds the purest tone in nature.
+
+The shimmer and the trill. Gold Casio's retro-synthetic shimmer is the synthesizer's sustained tone. The tree cricket's crystalline trill is nature's pure sustained tone. Biological oscillator and electronic oscillator. The cricket as nature's synthesizer.
+
+*Degree 98. The shimmer and the trill. Vintage warmth cascades from analog pads. A crystalline trill rises from the shrub. Both sustained. Both pure. Both converting mechanism into beauty. The engine adds purity -- synthetic and biological.*
+
+</details>
