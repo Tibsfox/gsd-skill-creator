@@ -22,6 +22,7 @@ import { reloadEmbeddingsCommand } from './cli/commands/reload-embeddings.js';
 import { testCommand } from './cli/commands/test.js';
 import { cartridgeCommand } from './cli/commands/cartridge.js';
 import { chipCommand } from './cli/commands/chip.js';
+import { runCoprocessorCli } from './coprocessor/cli.js';
 import { evalCommand } from './cli/commands/eval.js';
 import { simulateCommand, simulateHelp } from './cli/commands/simulate.js';
 import { calibrateCommand, calibrateHelp } from './cli/commands/calibrate.js';
@@ -297,6 +298,13 @@ async function main() {
 
     case 'chip': {
       const exitCode = await chipCommand(args.slice(1));
+      process.exitCode = exitCode;
+      break;
+    }
+
+    case 'coprocessor':
+    case 'cp': {
+      const exitCode = await runCoprocessorCli(args.slice(1));
       process.exitCode = exitCode;
       break;
     }

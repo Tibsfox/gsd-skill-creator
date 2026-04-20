@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "gsd-math-coprocessor": {
+      "command": "python",
+      "args": ["-m", "math_coprocessor"],
+      "cwd": "${workspaceFolder}/coprocessors/math",
+      "env": {
+        "MATH_COPROCESSOR_CONFIG": "${workspaceFolder}/coprocessors/math/chipset.yaml"
+      }
+    }
+  }
+}
