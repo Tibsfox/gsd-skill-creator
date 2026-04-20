@@ -1,0 +1,19 @@
+* sample.cir
+* ----------
+* A minimal RC lowpass driven by a 1 Hz pulse train. Used by the NASA
+* harness smoke test to validate the spice-loader's parseNetlist + lite
+* engine + scope render path.
+*
+*   Vsrc --[ R=1k ]-- out
+*                       |
+*                       +-- C=1uF -- 0
+*
+* Time constant tau = R*C = 1 ms; pulse period 1 s, pulse width 0.5 s.
+
+Vsrc src 0 PULSE(0 1 0 1m 1m 0.5 1)
+R1   src out 1k
+C1   out 0   1u
+
+.PRINT TRAN V(out) V(src)
+.TRAN 1m 3.0 UIC
+.END
