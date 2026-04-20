@@ -8,18 +8,20 @@
  * First-commit-wins mechanism (CF-M4-02, CF-M4-03):
  *   1. Attempt to create a lock file at `.planning/branches/.commit-lock`
  *      using `fs.open(path, 'ax')` — the 'ax' flag fails with EEXIST if the
- *      file already exists.  This is an advisory atomic operation available on
- *      all platforms (macOS/Linux/Windows) in Node.js stdlib.
+ *      file already exists. `O_CREAT | O_EXCL` is atomic on POSIX and on
+ *      Windows NTFS via `CREATE_NEW`; exactly one racer succeeds.
  *   2. Write the winning branch ID + timestamp into the lock file.
- *   3. If the open fails with EEXIST, read the lock to identify the winner,
- *      then abort this branch with a clear diagnostic message.
+ *   3. If the open fails with EEXIST, read the lock to identify the winner
+ *      for the loser's diagnostic, then abort this branch.
  *   4. The winner merges the skill body into trunk and removes the lock.
  *
- * Timestamp tie-break:
- *   If two branches both create the lock simultaneously (e.g. on a cold
- *   filesystem with low inode resolution), the branch with the earlier
- *   `manifest.createdAt` timestamp wins — the lock file stores the winner ID
- *   and created-at so losers can compare.
+ * No tie-break:
+ *   `ax` is the sole atomic winner-selection primitive. Earlier revisions
+ *   implemented a "steal via rename" tie-break based on `manifest.createdAt`
+ *   — that code is removed because it broke correctness (multiple older
+ *   branches could each succeed at stealing, producing multiple winners in
+ *   the N≥3 race). `manifest.createdAt` is still recorded in the lock entry
+ *   for observability but is no longer consulted for winner selection.
  *
  * Trunk merge:
  *   The committed skill body is written to `trunkPath` supplied by the caller.
@@ -52,7 +54,7 @@ export const COMMIT_LOCK_FILENAME = '.commit-lock';
 interface LockEntry {
   /** The branch ID that holds the lock. */
   branchId: string;
-  /** The manifest.createdAt of the winning branch (for tie-break). */
+  /** The manifest.createdAt of the winning branch (observability only). */
   createdAt: number;
   /** Unix ms when the lock was acquired. */
   acquiredAt: number;
@@ -172,37 +174,16 @@ export async function commit(opts: CommitOptions): Promise<CommitResult> {
     won = false;
   }
 
-  // ── Timestamp tie-break ───────────────────────────────────────────────────
-  // If we didn't win initially, read the lock to get the current holder.
-  // If the holder has a later createdAt than us, we may still win via tie-break.
+  // ── Loser: identify winner for diagnostic ────────────────────────────────
+  // `ax` is the sole atomic winner selector. If we lost, read the lock to
+  // name the winner in our diagnostic. If the winner has already released
+  // the lock (fast path), winnerEntry stays null and the diagnostic falls
+  // back to "unknown".
   if (!won) {
     try {
       const raw = await fs.readFile(lockPath, 'utf8');
-      const existing: LockEntry = JSON.parse(raw) as LockEntry;
-
-      if (existing.createdAt > manifest.createdAt) {
-        // This branch is older — try to steal the lock by overwriting it.
-        // We use write + rename to make it as atomic as possible.
-        const tmpLock = lockPath + '.tmp.' + branchId;
-        const myEntry: LockEntry = {
-          branchId,
-          createdAt: manifest.createdAt,
-          acquiredAt: ts,
-        };
-        try {
-          await fs.writeFile(tmpLock, JSON.stringify(myEntry), 'utf8');
-          await fs.rename(tmpLock, lockPath);
-          won = true;
-          winnerEntry = myEntry;
-        } catch {
-          // Couldn't steal — accept the existing winner.
-          winnerEntry = existing;
-        }
-      } else {
-        winnerEntry = existing;
-      }
+      winnerEntry = JSON.parse(raw) as LockEntry;
     } catch {
-      // If we can't read the lock, accept the loss.
       winnerEntry = null;
     }
   }
