@@ -84,6 +84,7 @@
     }
   },
   "devDependencies": {
+    "@playwright/test": "^1.59.1",
     "@tauri-apps/cli": "^2.0.0",
     "@types/diff": "^7.0.2",
     "@types/js-yaml": "^4.0.9",

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" data-harness-version="1.0.0">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sample Mission · sample RC lowpass · Interactive (Smoke Fixture)</title>
+  <link rel="stylesheet" href="/www/tibsfox/com/Research/NASA/_harness/v1.0.0/harness.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 2rem;
+      background: #0E0E0C;
+      color: #C8C4B8;
+      font-family: 'DM Sans', system-ui, sans-serif;
+    }
+    h1 {
+      font-family: 'Libre Baskerville', Georgia, serif;
+      font-weight: 400;
+      color: #E4E0D8;
+      font-size: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Smoke fixture · sample RC lowpass</h1>
+  <div id="runner-root" data-testid="spice-runner-root"></div>
+
+  <script type="module">
+    import { loadSpiceNet, __harnessVersion } from
+      '/www/tibsfox/com/Research/NASA/_harness/v1.0.0/spice-loader.js';
+
+    const root = document.getElementById('runner-root');
+    window.__HARNESS_VERSION__ = __harnessVersion;
+    window.__SPICE_LOADED__ = false;
+    try {
+      const runtime = await loadSpiceNet('./sample.cir', root, 'circuitjs2');
+      window.__SPICE_RUNTIME__ = runtime;
+      window.__SPICE_PROBES__  = runtime.getProbes();
+      window.__SPICE_LOADED__  = true;
+      // Auto-start so the scope produces output within the smoke test's
+      // 3-second window.
+      runtime.start();
+    } catch (err) {
+      window.__SPICE_LOAD_ERROR__ = String(err && err.message ? err.message : err);
+    }
+  </script>
+</body>
+</html>

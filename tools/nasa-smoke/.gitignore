@@ -1,0 +1,7 @@
+# Playwright test-run outputs (per-run, ephemeral)
+test-results/
+playwright-report/
+blob-report/
+
+# Local env overrides
+.env
