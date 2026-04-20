@@ -1,0 +1,93 @@
+id: gfx-reference
+name: GFX Reference
+version: 0.1.0
+author: tibsfox
+description: >-
+  Reference kind:graphics cartridge. Targets WebGL 2 + GLSL ES 3.00 so
+  it runs unmodified in every modern browser. Ships two shader files
+  (vertex + fragment) driving a time-agnostic UV gradient that doubles
+  as a smoke test for the graphics pipeline wiring.
+trust: system
+provenance:
+  origin: scaffold
+  createdAt: 2026-04-20T15:43:20Z
+  researchGrounding:
+    - www/tibsfox/com/Research/GFX/index.html
+    - www/tibsfox/com/Research/GFX/M2-glsl.html
+    - www/tibsfox/com/Research/GFX/M3-webgl.html
+metadata:
+  staging: reference
+  tags:
+    - graphics
+    - webgl2
+    - glsl-es
+    - reference
+chipsets:
+  - kind: graphics
+    # WebGL 2 + GLSL ES 3.00 — the most portable Khronos pair.
+    # See /Research/GFX/M3-webgl.html for the WebGL 2 feature delta,
+    # /Research/GFX/M2-glsl.html for the six programmable stages, and
+    # /Research/GFX/M5-pipeline.html for the SPIR-V bridge story that
+    # unlocks the Vulkan / OpenGL variants documented in README.md.
+    api: webgl2
+    api_version: "2.0"
+    shader_language: glsl-es
+    shader_language_version: "3.00"
+    shader_stages:
+      - vertex
+      - fragment
+    sources:
+      - stage: vertex
+        path: shaders/basic.vert.glsl
+        entry_point: main
+      - stage: fragment
+        path: shaders/basic.frag.glsl
+        entry_point: main
+    runtime:
+      target_fps: 60
+      msaa_samples: 4
+    toolchain:
+      glslang: true
+    host:
+      kind: vite
+      entry: index.html
+  - kind: content
+    # Secondary content chipset wiring the cartridge into the broader
+    # Research series so viewers can follow a single pointer back to
+    # /Research/GFX/ on tibsfox.com.
+    deepMap:
+      concepts:
+        - id: gfx-research
+          name: Graphics APIs Research Series
+          description: >-
+            Five-module research series at /Research/GFX/ on tibsfox.com
+            covering OpenGL, GLSL, WebGL, Vulkan, and the cross-API
+            pipeline (SPIR-V, ANGLE, MoltenVK).
+          depth: read
+          tags:
+            - graphics
+            - khronos
+            - research
+      connections: []
+      entryPoints:
+        - gfx-research
+      progressionPaths:
+        - id: gfx-tour
+          name: GFX Research Tour
+          description: Follow the five GFX research modules in order.
+          steps:
+            - gfx-research
+    story:
+      title: GFX Reference
+      narrative: >-
+        A pipeline in two shaders. The vertex stage hands the rasteriser
+        a clip-space quad; the fragment stage paints a UV-coordinate
+        gradient. Everything a WebGL 2 program needs, nothing it does
+        not.
+      chapters:
+        - id: ch1
+          title: The Two Stages
+          summary: Vertex + fragment only. Six-stage pipeline is a forward door.
+          conceptRefs:
+            - gfx-research
+      throughLine: Start portable (WebGL 2). Escalate on demand (Vulkan, OpenGL 4.6).
