@@ -19,7 +19,8 @@ import { fileURLToPath } from 'node:url';
 export type ScaffoldTemplate =
   | 'department'
   | 'content'
-  | 'coprocessor';
+  | 'coprocessor'
+  | 'graphics';
 
 export interface ScaffoldOptions {
   template: ScaffoldTemplate;
@@ -67,6 +68,14 @@ const MANIFESTS: Record<ScaffoldTemplate, TemplateManifest> = {
     files: [
       { src: 'cartridge-coprocessor.yaml.tmpl', dest: 'cartridge.yaml' },
       { src: 'README.md.tmpl', dest: 'README.md' },
+    ],
+  },
+  graphics: {
+    files: [
+      { src: 'cartridge-graphics.yaml.tmpl', dest: 'cartridge.yaml' },
+      { src: 'README.graphics.md.tmpl', dest: 'README.md' },
+      { src: 'shader-basic.vert.glsl.tmpl', dest: 'shaders/basic.vert.glsl' },
+      { src: 'shader-basic.frag.glsl.tmpl', dest: 'shaders/basic.frag.glsl' },
     ],
   },
 };
