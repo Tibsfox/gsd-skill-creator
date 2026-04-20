@@ -38,7 +38,10 @@ Do **not** trigger for migrating legacy cartridges (that is
    `.college/`. "systems-administration" — not
    "systems-administration-department".
 4. Pick the template: `department` (skills + agents + teams),
-   `content` (deepMap + story arc), or `coprocessor`.
+   `content` (deepMap + story arc), `coprocessor` (pure functional
+   tooling), or `graphics` (GLSL / OpenGL / WebGL / Vulkan shader
+   pipeline; grounded in the GFX research series at
+   [/Research/GFX/](https://tibsfox.com/Research/GFX/) on tibsfox.com).
 
 ## The Forge Loop
 

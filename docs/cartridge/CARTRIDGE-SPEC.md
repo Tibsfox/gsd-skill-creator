@@ -34,22 +34,29 @@ metadata:                  # optional free-form
 
 ## Chipset Kinds
 
-The unified schema defines a **discriminated union** of eight chipset kinds.
+The unified schema defines a **discriminated union** of nine chipset kinds.
 The discriminator is `kind`. No other shape is accepted:
 
 | Kind          | Purpose                                            |
 |---------------|----------------------------------------------------|
-| `department`  | Skills + agents + teams for a topical domain       |
-| `grove`       | Content-addressed record types + views             |
 | `college`     | Tier wiring above a department                     |
-| `coprocessor` | Pure functional tooling (math-coprocessor)         |
 | `content`     | Essays, references, vocabulary                     |
-| `muse`        | Observation relays, Center Camp                    |
+| `coprocessor` | Pure functional tooling (math-coprocessor)         |
+| `department`  | Skills + agents + teams for a topical domain       |
 | `evaluation`  | Gates + benchmarks for cartridge acceptance        |
-| `forge`       | Capability chipset — the cartridge-forge dogfood   |
+| `graphics` [^graphics-added] | GLSL / OpenGL / WebGL / Vulkan shader pipelines |
+| `grove`       | Content-addressed record types + views             |
+| `metrics`     | Activation tracking, benchmarks, telemetry sinks   |
+| `voice`       | Vocabulary + orientation for content co-authors    |
 
 Every kind has its own Zod sub-schema; see `src/cartridge/types.ts` for the
 exact field lists.
+
+[^graphics-added]: Added 2026-04-20. Analogous to `coprocessor` but
+specialised for rendering — declares an API + shader language pair,
+the pipeline stages in use, and shader source files. Grounded in the
+[*Graphics APIs* research series](https://tibsfox.com/Research/GFX/)
+on tibsfox.com.
 
 ## Chipset Order
 
