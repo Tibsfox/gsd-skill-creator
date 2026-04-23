@@ -53,3 +53,4 @@ phys-motion-kinematics
 ### Fluid Dynamics & Atmosphere (4 concepts)
 - physics-reynolds-similarity -- Dynamic similarity and the Reynolds number in fluid flows
 - physics-vorticity-stretching -- Vortex-stretching term in the incompressible Euler/NS vorticity equation
+- physics-k41-cascade -- Kolmogorov 1941 energy cascade and the -5/3 inertial-subrange spectrum
