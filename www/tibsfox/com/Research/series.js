@@ -82,6 +82,39 @@ export const researchSeries = [
     tags: ['math', 'ai', 'tibs'],
   },
 
+  // ─── Convergent Substrate (v1.49.570) — AI & Computation cluster ─────
+  {
+    id: 'conv-hub',
+    label: 'Convergent Substrate',
+    href: 'CONV/index.html',
+    cluster: 'AI-COMPUTATION',
+    tags: ['ai', 'llm', 'architecture', 'arxiv', 'survey'],
+  },
+  {
+    id: 'conv-capability-evolution',
+    label: 'CONV: Capability Evolution',
+    href: 'CONV/capability-evolution.html',
+    cluster: 'AI-COMPUTATION',
+    tags: ['ai', 'ecm', 'amiga-principle'],
+    parent: 'conv-hub',
+  },
+  {
+    id: 'conv-compression-spectrum',
+    label: 'CONV: Compression Spectrum',
+    href: 'CONV/compression-spectrum.html',
+    cluster: 'AI-COMPUTATION',
+    tags: ['ai', 'memory', 'skills', 'rules'],
+    parent: 'conv-hub',
+  },
+  {
+    id: 'conv-gap-closure',
+    label: 'CONV: Gap Closure',
+    href: 'CONV/gap-closure.html',
+    cluster: 'AI-COMPUTATION',
+    tags: ['ai', 'architecture', 'half-b'],
+    parent: 'conv-hub',
+  },
+
   // ─── Drift in LLM Systems (v1.49.569) — AI & Computation cluster ─────
   {
     id: 'drift-hub',

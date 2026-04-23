@@ -1,12 +1,12 @@
 {
   "$schema": "https://tibsfox.com/schemas/research-cross-references/v1.json",
   "version": "1.0.0",
-  "description": "Edge graph connecting Tibsfox Research nodes. Phase 690 drift-hub seed (10 edges). Baseline constellation edges are in the constellation graph; this file tracks named semantic cross-reference edges only.",
-  "generated": "2026-04-22",
-  "node_count": 175,
-  "edge_count": 10,
+  "description": "Edge graph connecting Tibsfox Research nodes. Phase 690 drift-hub seed (10 edges) plus Phase 707 convergent-substrate extension (7 edges).",
+  "generated": "2026-04-23",
+  "node_count": 180,
+  "edge_count": 17,
   "clusters": [
-    "PNW", "NASA", "S36", "SPS", "BLN", "CSP", "TIBS", "GFX", "MUK", "SOL", "AI-COMPUTATION", "DRIFT", "SYS"
+    "PNW", "NASA", "S36", "SPS", "BLN", "CSP", "TIBS", "GFX", "MUK", "SOL", "AI-COMPUTATION", "DRIFT", "CONV", "SYS"
   ],
   "edges": [
     {
@@ -108,6 +108,76 @@
       "weight": 0.78,
       "direction": "bidirectional",
       "notes": "Context-equilibrium and ASI (adaptive-systems dept concepts) are direct theoretical grounding for Module B findings on multi-turn drift dynamics"
+    },
+    {
+      "id": "conv-hub-aar-01",
+      "source": "CONV",
+      "target": "AAR",
+      "type": "cross-cluster",
+      "label": "Convergent Substrate cross-validates AAR architectural audit findings",
+      "weight": 0.80,
+      "direction": "bidirectional",
+      "notes": "Phase 707 gap-closure §1 (four-tier trust) formalizes what AAR audit identified as Staging Layer weakness; the 26.1% community-skill vulnerability baseline is the beat-target"
+    },
+    {
+      "id": "conv-hub-llm-01",
+      "source": "CONV",
+      "target": "LLM",
+      "type": "cluster-extension",
+      "label": "Convergent Substrate extends the AI cluster hub",
+      "weight": 0.95,
+      "direction": "bidirectional",
+      "notes": "CONV is the primary v1.49.570 node in the AI & Computation cluster; surveys ~55 April 2026 arXiv papers mapping onto 14 gsd-skill-creator subsystems"
+    },
+    {
+      "id": "conv-hub-sst-01",
+      "source": "CONV",
+      "target": "SST",
+      "type": "cluster-member",
+      "label": "Convergent Substrate member of AI & Computation (SST) cluster",
+      "weight": 0.90,
+      "direction": "from-source",
+      "notes": "SST is the AI & Computation Rosetta cluster; CONV joins as 7th member extending the DRIFT/NLF/BLN/CSP/GFX/erdos-1196 constellation"
+    },
+    {
+      "id": "conv-hub-drift-01",
+      "source": "CONV",
+      "target": "DRIFT",
+      "type": "thematic-sibling",
+      "label": "Convergent Substrate shares knowledge/alignment/retrieval drift vocabulary",
+      "weight": 0.88,
+      "direction": "bidirectional",
+      "notes": "CONV reuses the DRIFT taxonomy for the drift-adjacent papers in its Tier-A cluster; ECM runtime safety envelopes (Qin et al.) are directly applicable to drift defense"
+    },
+    {
+      "id": "conv-hub-staging-01",
+      "source": "CONV",
+      "target": "STAGING-LAYER",
+      "type": "concept-bridge",
+      "label": "Convergent Substrate Half B four-tier trust is the Staging Layer hardening candidate",
+      "weight": 0.85,
+      "direction": "bidirectional",
+      "notes": "Gap-closure candidate #1 (four-tier skill trust T1-T4) from Jiang et al. is direct Staging Layer architecture; addresses community-skill vulnerability at intake"
+    },
+    {
+      "id": "conv-capability-evolution-chipset-01",
+      "source": "CONV/capability-evolution",
+      "target": "ai-computation-capability-evolution",
+      "type": "concept-anchored",
+      "label": "Capability Evolution page anchors to the ai-computation-capability-evolution college concept",
+      "weight": 0.92,
+      "direction": "from-source",
+      "notes": "capability-evolution.html is the primary research expression of the ECM / Amiga Principle college concept; the concept carries the relationships into four-tier-trust, harness-as-object, and two-gate-guardrail"
+    },
+    {
+      "id": "conv-compression-spectrum-college-01",
+      "source": "CONV/compression-spectrum",
+      "target": "data-science-compression-spectrum",
+      "type": "concept-anchored",
+      "label": "Compression Spectrum page anchors to the data-science-compression-spectrum college concept",
+      "weight": 0.92,
+      "direction": "from-source",
+      "notes": "compression-spectrum.html is the primary research expression of the Shen et al. spectrum concept; ties memory/skills/rules as one axis with the missing-diagonal gap"
     }
   ]
 }

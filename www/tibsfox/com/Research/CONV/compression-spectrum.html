@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compression Spectrum — Convergent Substrate | Tibsfox Research</title>
+<meta name="description" content="Memory, skills, and rules as three points on a single compression axis. The missing-diagonal opportunity gsd-skill-creator has been implementing implicitly.">
+<!-- SC-VER: tibsfox.com/Research/CONV/compression-spectrum.html — v1.49.570 Phase 707 -->
+<style>
+:root { --bg:#04060c; --panel:#080c16; --border:rgba(255,255,255,0.06); --text:#c8d0e0; --dim:rgba(255,255,255,0.35); --conv-violet:#8e6bb8; --conv-gold:#d4a373; --conv-coral:#e07a5f; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:Georgia,serif; line-height:1.75; }
+a { color:var(--conv-violet); text-decoration:none; } a:hover { color:var(--conv-gold); text-decoration:underline; }
+header { background:linear-gradient(135deg,#06040d 0%,#1f1240 50%,var(--bg) 100%); padding:2rem; text-align:center; border-bottom:3px solid var(--conv-violet); }
+header h1 { font-size:1.9rem; color:#fff; font-weight:400; }
+header nav { margin-top:0.8rem; font-family:system-ui,sans-serif; font-size:0.82rem; }
+header nav a { color:rgba(255,255,255,0.55); margin:0 0.5rem; }
+main { max-width:1000px; margin:0 auto; padding:2.5rem 1.5rem 4rem; }
+h2 { color:#fff; font-size:1.4rem; margin:1.8rem 0 0.9rem; padding-bottom:0.4rem; border-bottom:1px solid var(--border); font-weight:400; }
+h3 { color:var(--conv-gold); font-size:1.1rem; margin:1.3rem 0 0.6rem; font-weight:400; }
+p { margin:0.8rem 0; }
+code { background:rgba(255,255,255,0.04); padding:0.1rem 0.3rem; border-radius:3px; font-size:0.9em; }
+ul { margin:0.8rem 0 0.8rem 1.5rem; }
+table { width:100%; border-collapse:collapse; margin:1rem 0; font-family:system-ui,sans-serif; font-size:0.9rem; }
+th, td { border:1px solid var(--border); padding:0.5rem 0.7rem; text-align:left; }
+th { background:var(--panel); color:#fff; font-weight:500; }
+footer { text-align:center; padding:2rem; color:var(--dim); font-family:system-ui,sans-serif; font-size:0.8rem; border-top:1px solid var(--border); margin-top:3rem; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Experience Compression Spectrum</h1>
+  <nav><a href="index.html">← Convergent Substrate hub</a> · <a href="convergent-substrate.pdf">Full PDF</a></nav>
+</header>
+
+<main>
+
+<h2>The axis (Shen et al., 2026)</h2>
+
+<p>The <a href="https://arxiv.org/abs/2604.15877">Experience Compression Spectrum</a> paper frames three storage models (episodic memory, procedural skills, declarative rules) as points on a single compression axis:</p>
+
+<table>
+  <thead><tr><th>Storage level</th><th>Compression ratio</th><th>gsd-skill-creator analog</th></tr></thead>
+  <tbody>
+    <tr><td>Episodic memory</td><td>5–20×</td><td>session memory, CLAUDE.md</td></tr>
+    <tr><td>Procedural skills</td><td>50–500×</td><td>SKILL.md files, cartridge format</td></tr>
+    <tr><td>Declarative rules</td><td>1000×+</td><td>hooks, CAPCOM gate definitions</td></tr>
+  </tbody>
+</table>
+
+<p>The paper's citation analysis across 1,136 references in 22 papers reports a <strong>cross-community citation rate below 1%</strong> — the three storage levels are traditionally studied in isolation. This means papers on episodic memory rarely cite papers on procedural skills, and neither cites the rules literature.</p>
+
+<h2>The missing diagonal</h2>
+
+<p>The architecturally interesting finding: <strong>no system in the 22-paper survey supports adaptive cross-level compression</strong>, where material flows between levels based on usage. The paper calls this the &ldquo;missing diagonal.&rdquo;</p>
+
+<p>It is precisely the diagonal <code>gsd-skill-creator</code> has been implementing implicitly. The observe-detect-suggest-apply-learn-compose loop routinely promotes session-memory patterns to SKILL.md entries, and sometimes further to hooks. Material flows freely between levels based on usage patterns. The architectural move Shen et al. recommend is what <code>gsd-skill-creator</code> has de-facto been doing.</p>
+
+<h2>Formalizing the diagonal</h2>
+
+<p>The implication for <code>gsd-skill-creator</code>: formalize the cross-level adaptive compression explicitly, then cite Shen et al. as the canonical motivation. This turns an intuited design decision into a publishable architectural contribution — the paper documents that nobody ships what we have shipped.</p>
+
+<p>A concrete Half-B candidate is <code>src/compression-spectrum/</code>: a single subsystem that provides adapters into the existing session memory, SKILL.md loader, and hooks, and exposes a per-concept compression-level query. Each concept in the College of Knowledge carries a compression-level tag; promotion/demotion moves along the spectrum become observable events the drift-audit CLI can track.</p>
+
+<h2>Cross-references</h2>
+
+<ul>
+  <li><a href="capability-evolution.html">Capability Evolution (ECMs)</a> — occupy the procedural-skill middle band of the spectrum</li>
+  <li><a href="../DRIFT/knowledge.html">Drift: Knowledge</a> — compression-level transitions are themselves drift events</li>
+  <li><a href="gap-closure.html">Gap-Closure Opportunities</a> — Compression Spectrum is candidate #3 for Half-B adoption</li>
+</ul>
+
+</main>
+
+<footer>
+  Convergent Substrate · v1.49.570 Phase 707 · &copy; Tibsfox Inc.
+</footer>
+</body>
+</html>
