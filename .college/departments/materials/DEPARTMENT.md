@@ -52,3 +52,4 @@ mfab-mechanical-properties
 
 ### Cloud Microphysics (2 concepts)
 - materials-wbf-mixed-phase -- Wegener-Bergeron-Findeisen mixed-phase cloud process (ice consumes liquid)
+- materials-ice-nucleation-modes -- Homogeneous and four heterogeneous ice nucleation modes (INP mineralogy)
