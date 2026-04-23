@@ -22,9 +22,16 @@ import { activateCoprocessor, parseCoprocessorSpec } from './activation.js';
 import type { ChipName } from './types.js';
 
 /**
- * Read the global opt-in flag from `.claude/settings.json`. Default false.
- * Missing file, malformed JSON, or missing scope all return false — no
- * throws, no warnings.
+ * Read the global opt-in flag for the Math GPU coprocessor.
+ *
+ * **Default: TRUE.** The coprocessor is enabled by default as of 2026-04-23
+ * per explicit operator request. To disable it on a specific machine, set
+ * `{ "gsd-skill-creator": { "coprocessor": { "enabled": false } } }` in
+ * `.claude/gsd-skill-creator.json` (or `.claude/settings.json` if the
+ * harness schema allows it).
+ *
+ * Missing file / malformed JSON / missing scope → returns TRUE (the new
+ * default). Explicit `enabled: false` is the only way to turn it off.
  */
 export function readCoprocessorEnabledFlag(settingsPath: string): boolean {
   try {
@@ -45,13 +52,17 @@ export function readCoprocessorEnabledFlag(settingsPath: string): boolean {
     })();
     const settings = JSON.parse(raw);
     const scope = settings?.['gsd-skill-creator'];
-    if (!scope || typeof scope !== 'object') return false;
+    // Scope missing entirely → default ON
+    if (!scope || typeof scope !== 'object') return true;
     const coprocessor = (scope as Record<string, unknown>).coprocessor;
-    if (!coprocessor || typeof coprocessor !== 'object') return false;
+    // coprocessor block missing → default ON
+    if (!coprocessor || typeof coprocessor !== 'object') return true;
     const enabled = (coprocessor as Record<string, unknown>).enabled;
-    return enabled === true;
+    // Explicit false disables; anything else (including missing key) → ON
+    return enabled !== false;
   } catch {
-    return false;
+    // File missing / malformed → default ON
+    return true;
   }
 }
 
