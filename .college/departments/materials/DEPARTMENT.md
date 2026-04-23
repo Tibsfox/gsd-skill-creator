@@ -49,3 +49,7 @@ mfab-mechanical-properties
 - mfab-embodied-energy -- The energy locked into materials through extraction, processing, and manufacturing
 - mfab-recycling-end-of-life -- Recyclability, downcycling, biodegradation, and design for disassembly
 - mfab-circular-economy -- Closing material loops, product-as-a-service, and rethinking material ownership
+
+### Cloud Microphysics (2 concepts)
+- materials-wbf-mixed-phase -- Wegener-Bergeron-Findeisen mixed-phase cloud process (ice consumes liquid)
+- materials-ice-nucleation-modes -- Homogeneous and four heterogeneous ice nucleation modes (INP mineralogy)
