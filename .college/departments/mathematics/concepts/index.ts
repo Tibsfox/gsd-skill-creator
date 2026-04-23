@@ -14,3 +14,4 @@ export { fractalGeometry } from './fractal-geometry.js';
 export { solitons } from './solitons.js';
 export { blowUpDynamics } from './blow-up-dynamics.js';
 export { scaleCriticalEquations } from './scale-critical-equations.js';
+export { erdosProblemIndex } from './erdos-problem-index.js';
