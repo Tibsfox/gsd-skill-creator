@@ -12,3 +12,4 @@ export { ratiosProportions } from './ratios-proportions.js';
 export { logarithmicScales } from './logarithmic-scales.js';
 export { fractalGeometry } from './fractal-geometry.js';
 export { solitons } from './solitons.js';
+export { blowUpDynamics } from './blow-up-dynamics.js';

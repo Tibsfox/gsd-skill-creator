@@ -23,6 +23,7 @@
 | Logarithmic scales | Algebra | Python, C++, Fortran | Culinary: pH, taste perception |
 | Fractal geometry | Complex Analysis | Python, Lisp | Calibration: fractal expansion |
 | Solitons | Complex Analysis | Python, C++, Lisp | math-complex-numbers, math-exponential-decay |
+| Blow-up dynamics | Calculus | Python, C++, Lisp | math-solitons, math-exponential-decay |
 
 ## Panels
 
