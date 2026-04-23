@@ -204,10 +204,19 @@ function _l2Norm(v: number[]): number {
   return Math.sqrt(sum);
 }
 
-/** Compute cosine similarity between two vectors. Returns 0 for zero vectors. */
+/**
+ * Compute cosine similarity between two vectors. Returns 0 for zero vectors.
+ * Throws when `a.length !== b.length` — cosine similarity is only well-defined
+ * on equal-length vectors.
+ */
 function _cosineSimilarity(a: number[], b: number[]): number {
-  const len = Math.min(a.length, b.length);
-  if (len === 0) return 0;
+  if (a.length === 0 && b.length === 0) return 0;
+  if (a.length !== b.length) {
+    throw new Error(
+      `_cosineSimilarity requires equal-length vectors; got ${a.length} and ${b.length}`,
+    );
+  }
+  const len = a.length;
   let dot = 0;
   for (let i = 0; i < len; i++) dot += a[i] * b[i];
   const normA = _l2Norm(a);

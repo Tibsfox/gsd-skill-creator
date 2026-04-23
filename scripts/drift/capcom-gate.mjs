@@ -57,23 +57,112 @@ export function checkCiteResolution(texContent, metaEntries) {
   };
 }
 
-// Numeric-claim detector. Word-boundaries (\b) are tricky here because "30pp" has
-// no boundary between "0" and "p" (both are word chars). We anchor to the digit
-// run and then require specific unit/flag suffixes, with explicit trailing
-// boundaries where safe (letter words) and none where the digit touches the unit.
-const NUMERIC_RE = /(?:\d+(?:[.,]\d+)?)\s*(?:%|pp(?![a-z])|AUROC\b|F1\b|×|(?<!\w)x(?!\w))/gi;
+// Numeric-claim detectors. We use two patterns and combine their matches:
+//
+// 1. Trailing-unit shape — digit-run FOLLOWED BY a unit/flag.
+//    Word-boundaries (\b) are tricky here because "30pp" has no boundary
+//    between "0" and "p" (both are word chars). We anchor to the digit run
+//    and require specific unit/flag suffixes, with explicit trailing
+//    boundaries where safe (letter words) and none where the digit touches
+//    the unit.
+const NUMERIC_TRAILING_UNIT_RE =
+  /(?:\d+(?:[.,]\d+)?)\s*(?:%|pp(?![a-z])|AUROC\b|F1\b|×|(?<!\w)x(?!\w))/gi;
+
+// 2. Leading-metric shape — metric keyword FOLLOWED BY a bare decimal.
+//    Covers common academic shapes that the trailing-unit regex missed:
+//      AUROC 0.96, F1 of 0.85, BLEU 42, FActScore 0.81, accuracy 0.95,
+//      precision 0.80, recall 0.78, "Cohen's d 0.82", "SD score 0.78".
+//    The metric keyword itself is captured so the whole match is reported as
+//    a single violation (matches what checkNumericAttribution already
+//    reports as m[0]). The =/: / of separators are tolerated optionally.
+//
+//    Negative trailing lookahead `(?!\s*(?:\\%|%|pp|×|x))` avoids double-flagging
+//    a number that's already covered by the trailing-unit regex — e.g. TeX's
+//    `FActScore 44.6\%` should be attributed to the 44.6\% numeric-unit match,
+//    not separately flagged on the keyword+digit prefix. (The trailing-unit
+//    regex does not itself match `\%` due to the backslash, but the intent is
+//    still that percent-bearing numbers are handled by the percent pathway.)
+// We use a two-stage approach to prevent regex backtracking from matching a
+// truncated digit run (e.g. "FActScore 44" inside "FActScore 44.6\%"):
+// the core regex matches greedily, and the caller applies a post-filter that
+// rejects the match when the character immediately after the matched digit
+// run indicates the number actually belongs to a percent/pp/x/× unit shape
+// (which is handled by the trailing-unit pathway).
+const NUMERIC_LEADING_METRIC_RE =
+  /\b(?:AUROC|F1|BLEU|FActScore|accuracy|precision|recall|(?:Cohen(?:'|')s\s+d)|SD\s+score)\b(?:\s+(?:of|score|=|:))?\s+\d+(?:[.,]\d+)?/gi;
+
+// Units that, when they follow a number, indicate the number is handled by
+// the trailing-unit regex and the leading-metric match should be dropped.
+// `\%` (TeX percent escape) is NOT matched by the trailing-unit regex
+// because the regex expects `%` directly after the digits, but we still
+// want to treat it as "owned by the percent pathway" — its presence means
+// the operator already committed to the percent convention for that claim.
+const LEADING_METRIC_DROP_SUFFIX_RE = /^\s*(?:\\%|%|pp(?![a-z])|×|x\b)/;
+
+// 3. N.Nx shape — "2.5x speedup", "3x faster" — where the x cleanly sits
+//    after a decimal. The trailing-unit regex's (?<!\w)x(?!\w) rule rejects
+//    this because the preceding digit IS a word char; handle it with its
+//    own pattern that requires a word boundary after the x.
+const NUMERIC_NX_RE = /\d+(?:[.,]\d+)?x\b/gi;
+
+export const NUMERIC_RE = NUMERIC_TRAILING_UNIT_RE; // backward-compat export
 
 export function checkNumericAttribution(texContent) {
   const lines = texContent.split('\n');
   const violations = [];
+  // Use a citation-window large enough to catch \citedrift{long-cite-key} that
+  // might trail the number by up to ~50 chars of separator + macro body.
+  // Citation macros are looked for within ±50 chars of the NUMBER itself
+  // (not the full match, which may include a preceding metric keyword).
+  const CITE_WINDOW = 50;
   lines.forEach((line, i) => {
-    for (const m of line.matchAll(NUMERIC_RE)) {
-      const start = Math.max(0, m.index - 50);
-      const end = Math.min(line.length, m.index + m[0].length + 50);
-      const window = line.slice(start, end);
+    // Collect matches from all three patterns. Each entry records (index,
+    // match-text, numEnd) where numEnd is the offset of the END of the digit
+    // portion — used as the anchor for the ±50 citation-window so that a
+    // leading-metric match like "FActScore 44.6" doesn't shift its citation
+    // search window away from the digits.
+    const matches = [];
+    for (const m of line.matchAll(NUMERIC_TRAILING_UNIT_RE)) {
+      // Trailing-unit matches end AFTER the unit; anchor at the end.
+      matches.push({ index: m.index, match: m[0], anchorEnd: m.index + m[0].length });
+    }
+    for (const m of line.matchAll(NUMERIC_LEADING_METRIC_RE)) {
+      // Leading-metric matches: the digits are at the END of m[0].
+      // Anchor the citation window on the end of the digit run (= end of m[0]).
+      // Drop the match when the character immediately following indicates the
+      // number is handled by the trailing-unit / percent pathway.
+      const afterIdx = m.index + m[0].length;
+      const tail = line.slice(afterIdx, afterIdx + 8);
+      if (LEADING_METRIC_DROP_SUFFIX_RE.test(tail)) continue;
+      matches.push({ index: m.index, match: m[0], anchorEnd: afterIdx });
+    }
+    for (const m of line.matchAll(NUMERIC_NX_RE)) {
+      matches.push({ index: m.index, match: m[0], anchorEnd: m.index + m[0].length });
+    }
+    // Sort by start index, drop later matches whose span is contained in an
+    // earlier match (e.g., "5x" inside "2.5x").
+    matches.sort((a, b) => a.index - b.index);
+    const kept = [];
+    let lastEnd = -1;
+    for (const m of matches) {
+      const end = m.index + m.match.length;
+      if (m.index >= lastEnd) {
+        kept.push(m);
+        lastEnd = end;
+      }
+    }
+    for (const m of kept) {
+      // Citation window is ±CITE_WINDOW chars around the anchor (end of digit
+      // run). This preserves the original ±50 semantic for trailing-unit shapes
+      // and correctly handles leading-metric shapes (whose keyword prefix would
+      // otherwise shift the start-anchor away from the number and clip off a
+      // trailing `}` of a following citation macro).
+      const winStart = Math.max(0, m.anchorEnd - CITE_WINDOW);
+      const winEnd = Math.min(line.length, m.anchorEnd + CITE_WINDOW);
+      const window = line.slice(winStart, winEnd);
       const hasCite = /\\cite[tp]?\*?(?:\[[^\]]*\])?\{[^}]+\}|\\citedrift\{[^}]+\}/.test(window);
       if (!hasCite) {
-        violations.push({ line: i + 1, match: m[0], snippet: line.trim().slice(0, 140) });
+        violations.push({ line: i + 1, match: m.match, snippet: line.trim().slice(0, 140) });
       }
     }
   });

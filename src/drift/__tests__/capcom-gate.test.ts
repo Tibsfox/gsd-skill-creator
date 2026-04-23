@@ -59,6 +59,46 @@ describe('capcom-gate: checkNumericAttribution', () => {
     expect(r.pass).toBe(false);
     expect(r.violations.some((v) => /30pp/i.test(v.match))).toBe(true);
   });
+
+  // H-03: bare decimals following metric keywords
+  it('fails on unattributed AUROC 0.96 (bare decimal after metric word)', () => {
+    const tex = 'They report AUROC 0.96 across the test split — no citation nearby.';
+    const r = checkNumericAttribution(tex);
+    expect(r.pass).toBe(false);
+    expect(r.violations.some((v) => /AUROC\s+0\.96/i.test(v.match))).toBe(true);
+  });
+
+  it('fails on unattributed F1 of 0.85 (metric keyword + of + decimal)', () => {
+    const tex = 'System achieved F1 of 0.85 on the held-out set without any reference.';
+    const r = checkNumericAttribution(tex);
+    expect(r.pass).toBe(false);
+    expect(r.violations.some((v) => /F1.*0\.85/i.test(v.match))).toBe(true);
+  });
+
+  it('fails on unattributed "2.5x speedup" (N.Nx shape)', () => {
+    const tex = 'Reported a 2.5x speedup over the baseline with no attribution.';
+    const r = checkNumericAttribution(tex);
+    expect(r.pass).toBe(false);
+    expect(r.violations.some((v) => /2\.5x/i.test(v.match))).toBe(true);
+  });
+
+  it('fails on unattributed "SD score 0.78" (bare decimal after metric phrase)', () => {
+    const tex = 'Mean SD score 0.78 on LLaMA-70B unreferenced.';
+    const r = checkNumericAttribution(tex);
+    expect(r.pass).toBe(false);
+    expect(r.violations.some((v) => /SD\s+score\s+0\.78/i.test(v.match))).toBe(true);
+  });
+
+  it('passes the AUROC/F1/Nx shapes when citations are within ±50 chars', () => {
+    const tex = [
+      'AUROC 0.96 \\cite{mir2025lsd} shows strong detection.',
+      'F1 of 0.85 \\citedrift{spataru2024sd} over the test split.',
+      'Achieved 2.5x speedup \\cite{spataru2024sd}.',
+    ].join('\n');
+    const r = checkNumericAttribution(tex);
+    expect(r.pass).toBe(true);
+    expect(r.violation_count).toBe(0);
+  });
 });
 
 describe('capcom-gate: checkQuoteLength', () => {
