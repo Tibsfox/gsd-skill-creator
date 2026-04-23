@@ -4,3 +4,4 @@
  * @module departments/environmental/concepts
  */
 export { aerosolIndirectErf } from './aerosol-indirect-erf.js';
+export { wmoCloudTaxonomy } from './wmo-cloud-taxonomy.js';
