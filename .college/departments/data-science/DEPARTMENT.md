@@ -51,6 +51,7 @@ data-data-sources
 
 ### Scientific ML & Geosciences Pipelines (2 concepts)
 - data-science-data-assimilation-4dvar -- 4D-Variational data assimilation (ECMWF IFS baseline)
+- data-science-ai-weather-pipeline -- 2022-2026 ML weather-prediction progression (FourCastNet → AIFS)
 
 ## Calibration Models
 
