@@ -49,6 +49,9 @@ data-data-sources
 - data-data-ownership -- Who owns data, open data, data rights and responsibilities
 - data-responsible-practice -- Reproducibility, transparency, open science, responsible data use
 
+### Scientific ML & Geosciences Pipelines (2 concepts)
+- data-science-data-assimilation-4dvar -- 4D-Variational data assimilation (ECMWF IFS baseline)
+
 ## Calibration Models
 
 - Statistical models -- quantitative domains require precision calibration
