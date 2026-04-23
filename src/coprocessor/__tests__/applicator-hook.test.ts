@@ -24,31 +24,41 @@ describe('readCoprocessorEnabledFlag', () => {
     if (existsSync(dir)) rmSync(dir, { recursive: true, force: true });
   });
 
-  it('returns false when settings.json is missing', () => {
-    expect(readCoprocessorEnabledFlag(join(dir, 'settings.json'))).toBe(false);
+  // Math GPU coprocessor is DEFAULT-ON as of 2026-04-23 (operator directive).
+  // File-missing / malformed-JSON / scope-absent all return true. Only an
+  // explicit `enabled: false` disables it.
+
+  it('returns true when settings.json is missing (default ON)', () => {
+    expect(readCoprocessorEnabledFlag(join(dir, 'settings.json'))).toBe(true);
   });
 
-  it('returns false for malformed JSON', () => {
+  it('returns true for malformed JSON (default ON)', () => {
     const path = join(dir, 'settings.json');
     writeFileSync(path, '{ not json');
-    expect(readCoprocessorEnabledFlag(path)).toBe(false);
+    expect(readCoprocessorEnabledFlag(path)).toBe(true);
   });
 
-  it('returns false when gsd-skill-creator scope is absent', () => {
+  it('returns true when gsd-skill-creator scope is absent (default ON)', () => {
     const path = join(dir, 'settings.json');
     writeFileSync(path, '{}');
-    expect(readCoprocessorEnabledFlag(path)).toBe(false);
+    expect(readCoprocessorEnabledFlag(path)).toBe(true);
   });
 
-  it('returns false when coprocessor block has enabled: false', () => {
+  it('returns false when coprocessor block has explicit enabled: false (explicit opt-out)', () => {
     const path = join(dir, 'settings.json');
     writeFileSync(path, JSON.stringify({ 'gsd-skill-creator': { coprocessor: { enabled: false } } }));
     expect(readCoprocessorEnabledFlag(path)).toBe(false);
   });
 
-  it('returns true only when enabled: true', () => {
+  it('returns true when enabled: true is set explicitly', () => {
     const path = join(dir, 'settings.json');
     writeFileSync(path, JSON.stringify({ 'gsd-skill-creator': { coprocessor: { enabled: true } } }));
+    expect(readCoprocessorEnabledFlag(path)).toBe(true);
+  });
+
+  it('returns true when coprocessor block is present but enabled key is absent (default ON)', () => {
+    const path = join(dir, 'settings.json');
+    writeFileSync(path, JSON.stringify({ 'gsd-skill-creator': { coprocessor: {} } }));
     expect(readCoprocessorEnabledFlag(path)).toBe(true);
   });
 });

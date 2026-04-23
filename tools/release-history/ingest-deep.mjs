@@ -205,9 +205,39 @@ function splitByBoldMarkers(body) {
   return blocks.filter(b => b.body.trim().length > 0);
 }
 
+// Merge extracted retrospective sections from multiple sources. Later sources
+// win on kind collision so the richer flat-layout file (RETROSPECTIVE.md)
+// takes precedence over a thin README excerpt.
+function mergeRetros(...lists) {
+  const byKind = new Map();
+  for (const list of lists) {
+    for (const r of list) byKind.set(r.kind, r);
+  }
+  return [...byKind.values()];
+}
+
 async function processVersion(client, version, text, dryRun, stats) {
   const features = extractFeatures(text);
-  const retros = extractRetrospectives(text);
+  let retros = extractRetrospectives(text);
+
+  // Flat-layout fallback — some releases (e.g. v1.49.568 Nonlinear Frontier,
+  // v1.49.569 Drift in LLM Systems) ship RETROSPECTIVE.md / LESSONS.md at
+  // the release-root instead of chaptered under chapter/03-retrospective.md.
+  // Pull those files too so the retrospective + lessons show up in the index.
+  const flatRetroPath = join(RELEASE_NOTES_DIR, version, 'RETROSPECTIVE.md');
+  if (existsSync(flatRetroPath)) {
+    const retroText = readFileSync(flatRetroPath, 'utf8');
+    // Wrap under a sentinel `## Retrospective` heading so the standard
+    // parser triggers its retrospective handling path.
+    const flatRetros = extractRetrospectives('## Retrospective\n\n' + retroText);
+    retros = mergeRetros(retros, flatRetros);
+  }
+  const flatLessonsPath = join(RELEASE_NOTES_DIR, version, 'LESSONS.md');
+  if (existsSync(flatLessonsPath)) {
+    const lessonsText = readFileSync(flatLessonsPath, 'utf8');
+    const flatLessons = extractRetrospectives('## Lessons Learned\n\n' + lessonsText);
+    retros = mergeRetros(retros, flatLessons);
+  }
 
   if (dryRun) {
     stats.features += features.length;

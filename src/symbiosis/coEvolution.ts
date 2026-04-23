@@ -31,7 +31,11 @@ export const DEFAULT_CADENCE_SESSIONS = 20;
 // ─── Settings / opt-in gate ──────────────────────────────────────────────────
 
 export interface CoEvolutionSettings {
-  /** Master opt-in gate. Default false (SC-CONSENT). */
+  /**
+   * Master opt-in gate. **Default TRUE as of 2026-04-23** per explicit
+   * operator request. Callers can still pass `{ enabled: false }` to disable
+   * per-call for testing or conscientious-objector scenarios (was SC-CONSENT).
+   */
   enabled: boolean;
   /** Cadence: emit at most one batch every N sessions. Default 20. */
   cadenceSessionCount: number;
@@ -40,7 +44,7 @@ export interface CoEvolutionSettings {
 }
 
 export const DEFAULT_SETTINGS: CoEvolutionSettings = {
-  enabled: false,
+  enabled: true,
   cadenceSessionCount: DEFAULT_CADENCE_SESSIONS,
 };
 

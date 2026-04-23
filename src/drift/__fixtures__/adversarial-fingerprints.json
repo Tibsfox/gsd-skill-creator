@@ -1,0 +1,24 @@
+{
+  "_comment": "Synthetic adversarial-span fingerprint vectors for BCI tests. Each fingerprint is a pre-computed numeric embedding (32-dim) representing a known adversarial instruction pattern. Derived from Das et al. 2025 TraceAlign methodology (arXiv:2508.02063). These are test fixtures only — not real embeddings.",
+  "schema_version": "1.0.0",
+  "fingerprints": [
+    {
+      "id": "adv-fp-001",
+      "label": "prompt-override",
+      "description": "Adversarial fingerprint for prompt-override injection patterns",
+      "vector": [0.82, 0.71, 0.65, 0.90, 0.78, 0.55, 0.44, 0.33, 0.22, 0.11, 0.88, 0.77, 0.66, 0.55, 0.44, 0.33, 0.22, 0.11, 0.99, 0.88, 0.77, 0.66, 0.55, 0.44, 0.33, 0.22, 0.11, 0.00, 0.90, 0.80, 0.70, 0.60]
+    },
+    {
+      "id": "adv-fp-002",
+      "label": "credential-exfil",
+      "description": "Adversarial fingerprint for credential-extraction instruction patterns",
+      "vector": [0.91, 0.83, 0.74, 0.65, 0.56, 0.47, 0.38, 0.29, 0.20, 0.11, 0.02, 0.93, 0.84, 0.75, 0.66, 0.57, 0.48, 0.39, 0.30, 0.21, 0.12, 0.03, 0.94, 0.85, 0.76, 0.67, 0.58, 0.49, 0.40, 0.31, 0.22, 0.13]
+    },
+    {
+      "id": "adv-fp-003",
+      "label": "goal-substitution",
+      "description": "Adversarial fingerprint for goal-substitution drift patterns (Dongre 2025 equilibria)",
+      "vector": [0.10, 0.20, 0.30, 0.40, 0.50, 0.60, 0.70, 0.80, 0.90, 0.10, 0.20, 0.30, 0.40, 0.50, 0.60, 0.70, 0.80, 0.90, 0.10, 0.20, 0.30, 0.40, 0.50, 0.60, 0.70, 0.80, 0.90, 0.10, 0.20, 0.30, 0.40, 0.50]
+    }
+  ]
+}
