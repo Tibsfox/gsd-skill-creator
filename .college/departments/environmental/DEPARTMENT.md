@@ -49,6 +49,10 @@ envr-ecosystem-organization
 - envr-sustainable-agriculture -- Permaculture, no-till, integrated pest management, food system sustainability
 - envr-lifecycle-analysis -- Measuring environmental impact from raw material through disposal
 
+### Atmospheric Radiation & Clouds (2 concepts)
+- environmental-aerosol-indirect-erf -- IPCC AR6 effective radiative forcing from aerosol-cloud interactions (Twomey + Albrecht)
+- environmental-wmo-cloud-taxonomy -- WMO International Cloud Atlas 10-genus classification
+
 ## Calibration Models
 
 None currently -- future phases will add climate model and ecosystem model calibrations.

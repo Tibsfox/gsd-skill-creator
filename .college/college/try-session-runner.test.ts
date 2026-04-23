@@ -231,4 +231,118 @@ describe('TrySessionRunner', () => {
       expect(state.totalSteps).toBe(1);
     });
   });
+
+  describe('loadSession TypeScript module support', () => {
+    let tsTempDir: string;
+
+    beforeAll(() => {
+      tsTempDir = mkdtempSync(join(tmpdir(), 'try-session-ts-test-'));
+
+      // Layout A: only .js present (simulates a compiled TS try-session module)
+      const deptA = join(tsTempDir, 'dept-a');
+      mkdirSync(join(deptA, 'try-sessions'), { recursive: true });
+      writeFileSync(
+        join(deptA, 'DEPARTMENT.md'),
+        '# Dept A\n\n## Wings\n\n- Basics\n\n## Entry Point\n\ntest-intro\n',
+      );
+      writeFileSync(
+        join(deptA, 'try-sessions', 'alpha.js'),
+        `export const alphaSession = { id: 'alpha', title: 'Alpha', description: 'TS-only', estimatedMinutes: 10, prerequisites: [], steps: [{ instruction: 'go', expectedOutcome: 'ok', conceptsExplored: ['a'] }] };\n`,
+      );
+
+      // Layout B: only .json present (backward-compat baseline)
+      const deptB = join(tsTempDir, 'dept-b');
+      mkdirSync(join(deptB, 'try-sessions'), { recursive: true });
+      writeFileSync(
+        join(deptB, 'DEPARTMENT.md'),
+        '# Dept B\n\n## Wings\n\n- Basics\n\n## Entry Point\n\ntest-intro\n',
+      );
+      writeFileSync(
+        join(deptB, 'try-sessions', 'beta.json'),
+        JSON.stringify({
+          id: 'beta',
+          title: 'Beta',
+          description: 'JSON-only',
+          estimatedMinutes: 5,
+          prerequisites: [],
+          steps: [
+            { instruction: 'go', expectedOutcome: 'ok', conceptsExplored: ['b'] },
+          ],
+        }),
+      );
+
+      // Layout C: both .js and .json present -- .js wins (precedence rule)
+      const deptC = join(tsTempDir, 'dept-c');
+      mkdirSync(join(deptC, 'try-sessions'), { recursive: true });
+      writeFileSync(
+        join(deptC, 'DEPARTMENT.md'),
+        '# Dept C\n\n## Wings\n\n- Basics\n\n## Entry Point\n\ntest-intro\n',
+      );
+      writeFileSync(
+        join(deptC, 'try-sessions', 'gamma.js'),
+        `export const gammaSession = { id: 'gamma-from-ts', title: 'Gamma TS', description: 'TS wins', estimatedMinutes: 10, prerequisites: [], steps: [{ instruction: 'go', expectedOutcome: 'ok', conceptsExplored: ['c'] }] };\n`,
+      );
+      writeFileSync(
+        join(deptC, 'try-sessions', 'gamma.json'),
+        JSON.stringify({
+          id: 'gamma-from-json',
+          title: 'Gamma JSON',
+          description: 'JSON losing',
+          estimatedMinutes: 5,
+          prerequisites: [],
+          steps: [
+            { instruction: 'go', expectedOutcome: 'ok', conceptsExplored: ['c'] },
+          ],
+        }),
+      );
+
+      // Layout D: neither .ts/.js nor .json present -- error path
+      const deptD = join(tsTempDir, 'dept-d');
+      mkdirSync(join(deptD, 'try-sessions'), { recursive: true });
+      writeFileSync(
+        join(deptD, 'DEPARTMENT.md'),
+        '# Dept D\n\n## Wings\n\n- Basics\n\n## Entry Point\n\ntest-intro\n',
+      );
+    });
+
+    afterAll(() => {
+      rmSync(tsTempDir, { recursive: true, force: true });
+    });
+
+    it('loads a .js (TypeScript-module) session when only .js present', async () => {
+      const loader = new CollegeLoader(tsTempDir);
+      const runner = await TrySessionRunner.loadSession(loader, 'dept-a', 'alpha');
+
+      const state = runner.getState();
+      expect(state.sessionId).toBe('alpha');
+      expect(state.title).toBe('Alpha');
+      expect(state.totalSteps).toBe(1);
+    });
+
+    it('loads a .json session when only .json present (backward compat)', async () => {
+      const loader = new CollegeLoader(tsTempDir);
+      const runner = await TrySessionRunner.loadSession(loader, 'dept-b', 'beta');
+
+      const state = runner.getState();
+      expect(state.sessionId).toBe('beta');
+      expect(state.title).toBe('Beta');
+      expect(state.totalSteps).toBe(1);
+    });
+
+    it('prefers .js over .json when both present (TS wins)', async () => {
+      const loader = new CollegeLoader(tsTempDir);
+      const runner = await TrySessionRunner.loadSession(loader, 'dept-c', 'gamma');
+
+      const state = runner.getState();
+      expect(state.sessionId).toBe('gamma-from-ts');
+      expect(state.title).toBe('Gamma TS');
+    });
+
+    it('throws an informative error mentioning both attempted paths when neither exists', async () => {
+      const loader = new CollegeLoader(tsTempDir);
+      await expect(
+        TrySessionRunner.loadSession(loader, 'dept-d', 'missing'),
+      ).rejects.toThrow(/missing\.(ts|js).*missing\.json|missing\.json.*missing\.(ts|js)/s);
+    });
+  });
 });
