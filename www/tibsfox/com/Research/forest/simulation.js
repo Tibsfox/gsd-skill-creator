@@ -55,6 +55,14 @@ var microState = {
   lastUpdate: 0,          // frameNum of last recompute
 };
 
+// === K41 TURBULENCE STATE (populated each draw() when featureFlags.k41Turbulence is true) ===
+var k41State = {
+  tkeDissipation: 0,       // ε (m²/s³)
+  kolmogorovScale: 0,      // η (m)
+  subgridViscosity: 0,     // ν_sgs (m²/s)
+  lastUpdate: 0,
+};
+
 // === CELESTIAL STATE ===
 var sky = {
   sunAlt: 0,    // altitude in degrees (-90 to 90)
@@ -952,6 +960,18 @@ function draw() {
     var Tk     = (wx.temp || 10) + 273.15;
     microState.activatedFraction = MicroPhysics.kohlerActivationFraction(sEnv, aero, Tk, 0.3);
     microState.lastUpdate = frameNum;
+  }
+
+  // K41 sub-grid turbulence (gated on featureFlags.k41Turbulence — Phase 681)
+  if (featureFlags.k41Turbulence && typeof K41 !== 'undefined') {
+    // Derive U from wx.windSpeed (km/h → m/s) and L from canopy height (30 m canonical).
+    var U = Math.max(0.1, (wx.windSpeed || 5) / 3.6);
+    var L = 30;
+    var delta = 1.0;  // 1-m sub-grid cell
+    k41State.tkeDissipation    = K41.k41TkeDissipation(U, L);
+    k41State.kolmogorovScale   = K41.k41KolmogorovScale(k41State.tkeDissipation);
+    k41State.subgridViscosity  = K41.k41SubgridViscosity(k41State.tkeDissipation, delta);
+    k41State.lastUpdate        = frameNum;
   }
 
   // Refresh weather every 5 minutes, celestial every 30 seconds
