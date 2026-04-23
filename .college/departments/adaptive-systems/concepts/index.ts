@@ -6,3 +6,5 @@ export { lorenzPredictabilityLimit } from './lorenz-predictability-limit.js';
 // Drift in LLM Systems (Phase 690)
 export { contextEquilibrium } from './context-equilibrium.js';
 export { agentStabilityIndex } from './agent-stability-index.js';
+// Convergent Substrate (Phase 707, v1.49.570)
+export { twoGateGuardrail } from './two-gate-guardrail.js';
