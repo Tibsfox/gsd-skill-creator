@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Convergent Substrate — April 2026 arXiv Deep-Dive | Tibsfox Research</title>
+<meta name="description" content="Mapping ~55 April 2026 arXiv papers to gsd-skill-creator's architectural components. Five patterns the literature independently arrived at. Five gap-closure opportunities for implementation. (2026-04-23)">
+<!-- SC-VER: tibsfox.com/Research/CONV/index.html — v1.49.570 Phase 707 -->
+<style>
+:root {
+  --bg: #04060c; --panel: #080c16; --border: rgba(255,255,255,0.06);
+  --text: #c8d0e0; --dim: rgba(255,255,255,0.35);
+  --conv-violet: #8e6bb8; --conv-gold: #d4a373; --conv-coral: #e07a5f;
+  --conv-accent: #8e6bb8;
+  --text-bright: #fff8e8;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:Georgia,'Times New Roman',serif; line-height:1.75; }
+a { color:var(--conv-violet); text-decoration:none; }
+a:hover { color:var(--conv-gold); text-decoration:underline; }
+
+header {
+  background:linear-gradient(135deg, #06040d 0%, #0f0820 25%, #1f1240 50%, #120828 75%, var(--bg) 100%);
+  padding:2.5rem 2rem 2rem; text-align:center;
+  border-bottom:3px solid var(--conv-violet);
+  position:relative; overflow:hidden;
+}
+header::before {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse 40% 50% at 50% 40%, rgba(142,107,184,0.10) 0%, transparent 70%);
+}
+header h1 { font-size:2.2rem; font-weight:400; color:#fff; position:relative; letter-spacing:0.02em; line-height:1.3; }
+header .subtitle { color:var(--conv-violet); font-size:1rem; font-style:italic; margin-top:0.5rem; position:relative; }
+header .meta { color:rgba(255,255,255,0.4); font-size:0.8rem; margin-top:0.6rem; position:relative; font-family:system-ui,sans-serif; letter-spacing:0.03em; }
+header nav { margin-top:1rem; position:relative; font-family:system-ui,sans-serif; font-size:0.82rem; }
+header nav a { color:rgba(255,255,255,0.55); margin:0 0.6rem; }
+header nav a:hover { color:var(--conv-gold); }
+
+main { max-width:1000px; margin:0 auto; padding:2.5rem 1.5rem 4rem; }
+
+h2 { color:#fff; font-size:1.5rem; margin:2rem 0 1rem; padding-bottom:0.4rem; border-bottom:1px solid var(--border); font-weight:400; letter-spacing:0.02em; }
+h3 { color:var(--conv-gold); font-size:1.15rem; margin:1.5rem 0 0.75rem; font-weight:400; }
+p { margin:0.9rem 0; }
+ul, ol { margin:0.9rem 0 0.9rem 1.5rem; }
+li { margin:0.4rem 0; }
+
+.tier-badge {
+  display:inline-block; padding:0.15rem 0.5rem; border-radius:3px;
+  font-family:system-ui,sans-serif; font-size:0.75rem; letter-spacing:0.05em;
+  margin-right:0.4rem; vertical-align:1px;
+}
+.tier-s { background:rgba(224,122,95,0.2); color:var(--conv-coral); border:1px solid rgba(224,122,95,0.3); }
+.tier-a { background:rgba(212,163,115,0.2); color:var(--conv-gold); border:1px solid rgba(212,163,115,0.3); }
+.tier-b { background:rgba(142,107,184,0.2); color:var(--conv-violet); border:1px solid rgba(142,107,184,0.3); }
+
+.download {
+  background:var(--panel); border:1px solid var(--border); border-radius:6px;
+  padding:1rem 1.5rem; margin:1.5rem 0; display:flex; gap:1rem; align-items:center;
+}
+.download .lbl { font-family:system-ui,sans-serif; font-size:0.85rem; color:var(--dim); }
+.download a { font-family:system-ui,sans-serif; font-size:0.95rem; }
+
+footer { text-align:center; padding:2rem; color:var(--dim); font-family:system-ui,sans-serif; font-size:0.8rem; border-top:1px solid var(--border); margin-top:3rem; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Convergent Substrate</h1>
+  <div class="subtitle">April 2026 arXiv deep-dive for <code>gsd-skill-creator</code></div>
+  <div class="meta">v1.49.570 · 2026-04-23 · 55 papers · 21-page reference · 14-row component map</div>
+  <nav>
+    <a href="../index.html">← All Research</a>
+    <a href="capability-evolution.html">Capability Evolution</a>
+    <a href="compression-spectrum.html">Compression Spectrum</a>
+    <a href="gap-closure.html">Gap Closure</a>
+  </nav>
+</header>
+
+<main>
+
+<h2>What this is</h2>
+
+<p>A citation-disciplined survey of ~55 April 2026 arXiv papers mapped to the architectural components of <code>gsd-skill-creator</code>. The primary question: <em>where is our architecture independently validated, and where has the literature shipped something we have not?</em></p>
+
+<p>Papers are tiered:</p>
+<ul>
+  <li><span class="tier-badge tier-s">Tier S</span><strong>7 load-bearing papers</strong> whose findings directly validate or threaten shipped subsystems (skill-creator loop, Safety Warden, chipset, bounded learning, Staging Layer, context management, College of Knowledge).</li>
+  <li><span class="tier-badge tier-a">Tier A</span><strong>28 high-relevance papers</strong> clustered by subsystem: memory/context, orchestration, bounded self-improvement theory, deterministic protocols, adapter routing, evaluation frameworks.</li>
+  <li><span class="tier-badge tier-b">Tier B</span><strong>20 pointer papers</strong> retained as quick-reference citations without deep-reads.</li>
+</ul>
+
+<div class="download">
+  <span class="lbl">Full reference:</span>
+  <a href="convergent-substrate.pdf">convergent-substrate.pdf</a>
+  <span class="lbl">(21 pages, 144 KB, 3-pass xelatex)</span>
+</div>
+
+<h2>The five convergent patterns</h2>
+
+<p>The most architecturally interesting finding is not any single paper but the extent to which independently-pursued research converges on design choices <code>gsd-skill-creator</code> has been making. Five patterns in particular have been arrived at by multiple research groups working from different motivations:</p>
+
+<ol>
+  <li><strong>Dual verification: Surrogate plus Oracle.</strong> The CoEvoSkills paper's Surrogate + Ground Truth Oracle loop is precisely the CAPCOM + Safety Warden split; their 40.5pp over-baseline gain and 35-45pp cross-model transfer validate the pattern empirically.</li>
+  <li><strong>Memory / skills / rules as a compression spectrum.</strong> Shen et al. identify the &ldquo;missing diagonal&rdquo; gap: no surveyed system supports adaptive cross-level compression. gsd-skill-creator's memory-in-CLAUDE.md / skills-in-SKILL.md / rules-in-hooks split is exactly that diagonal.</li>
+  <li><strong>Capability evolution decoupled from identity.</strong> Qin et al.'s Embodied Capability Modules (ECMs) give the Amiga Principle its formal name, with a measured 2.3ms runtime-safety overhead and 100% enforcement.</li>
+  <li><strong>Two-Gate guardrail.</strong> Wang and Dorchen prove distribution-free PAC learnability is preserved under self-modification iff the policy-reachable family has bounded capacity. CAPCOM + Safety Warden stated as a theorem.</li>
+  <li><strong>Harness as a first-class systems object.</strong> The Natural-Language Agent Harnesses paper's control+contracts+state decomposition maps onto the Wave/CAPCOM/Squadron/Fleet stack. CAMCO further formalizes the K_max-then-escalate gate as a theorem.</li>
+</ol>
+
+<h2>The five gap-closure candidates</h2>
+
+<p>The mirror question — where the literature has patterns <code>gsd-skill-creator</code> does not yet ship — yields five candidates ranked by architectural leverage. These are the handoff input to Half B of the milestone, where selected patterns become default-off implementations:</p>
+
+<ol>
+  <li><a href="capability-evolution.html"><strong>Four-tier skill trust (T1-T4)</strong></a> — Jiang et al., addresses the 26.1% community-skill vulnerability baseline</li>
+  <li><strong>Two-Gate guardrail formalization</strong> — Wang &amp; Dorchen, τ (validation margin) + K[m] (capacity cap)</li>
+  <li><a href="compression-spectrum.html"><strong>Compression Spectrum cross-layer</strong></a> — Shen et al., addresses the missing-diagonal</li>
+  <li><strong>CASCADE three-tier MCP defense</strong> — 95.85% precision, 6.06% FPR, fully local</li>
+  <li><strong>Reasoning-graph evidence-centric feedback</strong> — Penaroza, per-evidence CoT as graph edges</li>
+</ol>
+
+<h2>14-row component map</h2>
+
+<p>Every shipped or planned gsd-skill-creator subsystem is mapped to the subset of papers that validate, extend, or challenge its design. The mapping is mechanically validated — the capcom-gate <code>checkMappingCoverage</code> check fails if any row lacks at least one Tier-S or Tier-A paper whose cite_key resolves in meta.json.</p>
+
+<p>The 14 rows span: Skill-creator 6-step loop · CAPCOM gates / Safety Warden · DACP · Bounded learning · Chipset · Staging Layer · College of Knowledge / Rosetta Core · Silicon Layer · Wave / CAPCOM / Squadron / Fleet · Context management · planning-bridge MCP server · v1.50 Half-A retrospectives · v1.50 Half-B proof companion · Federated skill sharing.</p>
+
+<p>For the full table, see Section 6 of the <a href="convergent-substrate.pdf">reference PDF</a>.</p>
+
+<h2>See also</h2>
+
+<ul>
+  <li><a href="../DRIFT/index.html">Drift in LLM Systems</a> — the prior milestone's research reference; Convergent Substrate shares the knowledge/alignment/retrieval drift vocabulary</li>
+  <li><a href="../BLN/nonlinear-frontier/index.html">Nonlinear Frontier</a> — structural precursor to the milestone shape</li>
+  <li><a href="../TIBS/erdos-1196-ai-proof/index.html">Erdős #1196 AI Proof</a> — AI frontier framing, same model families in a different operational mode</li>
+</ul>
+
+</main>
+
+<footer>
+  Generated from <code>arxiv-april-2026-gsd-relevance-deep-dive.md</code> via v1.49.570 Phase 707 corpus tie-in.
+  <br>
+  &copy; Tibsfox Inc. (current year). BSL 1.1.
+</footer>
+</body>
+</html>

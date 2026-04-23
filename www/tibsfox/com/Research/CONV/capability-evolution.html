@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Capability Evolution — Convergent Substrate | Tibsfox Research</title>
+<meta name="description" content="Embodied Capability Modules (ECMs) decouple agent identity from evolving capabilities. Formal statement of the Amiga Principle gsd-skill-creator has been articulating informally.">
+<!-- SC-VER: tibsfox.com/Research/CONV/capability-evolution.html — v1.49.570 Phase 707 -->
+<link rel="stylesheet" href="index.html">
+<style>
+:root { --bg:#04060c; --panel:#080c16; --border:rgba(255,255,255,0.06); --text:#c8d0e0; --dim:rgba(255,255,255,0.35); --conv-violet:#8e6bb8; --conv-gold:#d4a373; --conv-coral:#e07a5f; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:Georgia,serif; line-height:1.75; }
+a { color:var(--conv-violet); text-decoration:none; } a:hover { color:var(--conv-gold); text-decoration:underline; }
+header { background:linear-gradient(135deg,#06040d 0%,#1f1240 50%,var(--bg) 100%); padding:2rem; text-align:center; border-bottom:3px solid var(--conv-violet); }
+header h1 { font-size:1.9rem; color:#fff; font-weight:400; }
+header nav { margin-top:0.8rem; font-family:system-ui,sans-serif; font-size:0.82rem; }
+header nav a { color:rgba(255,255,255,0.55); margin:0 0.5rem; }
+main { max-width:1000px; margin:0 auto; padding:2.5rem 1.5rem 4rem; }
+h2 { color:#fff; font-size:1.4rem; margin:1.8rem 0 0.9rem; padding-bottom:0.4rem; border-bottom:1px solid var(--border); font-weight:400; }
+h3 { color:var(--conv-gold); font-size:1.1rem; margin:1.3rem 0 0.6rem; font-weight:400; }
+p { margin:0.8rem 0; }
+code { background:rgba(255,255,255,0.04); padding:0.1rem 0.3rem; border-radius:3px; font-size:0.9em; }
+ul { margin:0.8rem 0 0.8rem 1.5rem; }
+footer { text-align:center; padding:2rem; color:var(--dim); font-family:system-ui,sans-serif; font-size:0.8rem; border-top:1px solid var(--border); margin-top:3rem; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Capability Evolution</h1>
+  <nav><a href="index.html">← Convergent Substrate hub</a> · <a href="convergent-substrate.pdf">Full PDF</a></nav>
+</header>
+
+<main>
+
+<h2>Embodied Capability Modules (Qin et al., 2026)</h2>
+
+<p>The <a href="https://arxiv.org/abs/2604.07799">Learning Without Losing Identity</a> paper introduces Embodied Capability Modules (ECMs) — modular, versioned units of functionality that can be learned, refined, and composed over time, with the defining architectural claim that <strong>capability evolution is decoupled from agent identity</strong>. A runtime layer enforces invariant safety envelopes independently of the ECMs; gated deployment checks block unsafe new versions before they can take effect.</p>
+
+<p>Two empirical findings do the load-bearing work:</p>
+<ul>
+  <li><strong>11.8% of episodes produce unsafe actions</strong> without policy enforcement — this is the counterfactual baseline.</li>
+  <li><strong>The runtime layer blocks 100% of unsafe actions at 2.3ms overhead per decision</strong> — this is the cost-of-safety upper bound.</li>
+</ul>
+
+<h2>Why it matters for gsd-skill-creator</h2>
+
+<p>The ECM pattern is <strong>the Amiga Principle in formal clothes</strong>. Where <code>gsd-skill-creator</code> has been articulating, informally, that persistent agent identity should remain stable while capabilities evolve separately (the chipset / Instruction-Set-Architecture split), Qin et al. state the claim with empirical backing. The 2.3ms upper bound on safety-layer overhead is the number our Safety Warden enforcement should aim to beat.</p>
+
+<p>The pattern tightens the pedagogical Teacher/Student/Support decomposition planned for v1.50 Half-B proof companion: Teacher is the identity layer, Student is the ECM pool, Support mediates the loading and safety-envelope enforcement.</p>
+
+<h2>Relation to the Four-Tier Trust Framework</h2>
+
+<p>ECMs and the four-tier trust framework (T1-T4, from Jiang et al.'s survey) compose naturally: each tier transition in the trust framework is a gate decision about whether an ECM may be promoted into that deployment tier. T1 ECMs (first-party, audited) promote freely; T4 ECMs (third-party, unaudited) remain sandboxed until audit evidence accumulates.</p>
+
+<h2>Cross-references</h2>
+
+<ul>
+  <li><a href="../DRIFT/alignment.html">Drift: Alignment</a> — ECM runtime safety envelopes are the primary defense against alignment drift in long-running agents</li>
+  <li><a href="compression-spectrum.html">Compression Spectrum</a> — ECMs occupy the procedural-skill middle band of the memory/skills/rules spectrum</li>
+  <li><a href="../TIBS/erdos-1196-ai-proof/index.html">Erdős #1196</a> — mathematical proof companion is a concrete ECM candidate</li>
+</ul>
+
+</main>
+
+<footer>
+  Convergent Substrate · v1.49.570 Phase 707 · &copy; Tibsfox Inc.
+</footer>
+</body>
+</html>
