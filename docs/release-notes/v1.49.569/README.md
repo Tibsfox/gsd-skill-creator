@@ -59,25 +59,37 @@ All seven defense modules are **disabled by default**. Existing v1.49.568 behavi
   "gsd-skill-creator": {
     "drift": {
       "knowledge": {
-        "semanticDrift": true,      // SD-score detector
-        "earlyStop": true,          // early-stop hook
-        "rerank": true              // rerank hook
+        "earlyStop": true,              // boolean, default false — truncate at SD drift point
+        "rerank": true                  // boolean, default false — rerank by ascending SD score
       },
       "alignment": {
-        "taskDriftMonitor": true,   // activation-delta monitor
-        "bci": true                 // behavioral-contamination index
+        "taskDriftMonitor": true,       // boolean, default false — activation-delta monitor
+        "taskDriftThreshold": 0.5,      // number, default 0.5 — classification floor
+        "bciThreshold": 0.7             // number, default 0.7 — BCI BLOCK threshold
       },
       "retrieval": {
-        "temporalCheck": true,      // Δt-gap detection
-        "groundingFaithfulness": true,  // angular similarity check
-        "contextEntropy": true      // BEE-RAG entropy guard
+        "temporalCheck": true,          // boolean, default false — Δt-gap freshness check
+        "maxLagMs": 86400000,           // number, default 86_400_000 (24 h) — lag band threshold
+        "groundingFaithfulness": true,  // boolean, default false — SGI grounding assertion
+        "contextEntropyGuard": true,    // boolean, default false — BEE-RAG entropy guard
+        "entropyThreshold": 0.5         // number in (0,1], default 0.5 — collapse floor
       }
     }
   }
 }
 ```
 
-When all flags are `false` (or absent), `npm test` output is identical to v1.49.568. This is verified by `src/drift/__tests__/default-off-invariance.test.ts`.
+**Notes on what each key controls:**
+
+- `drift.knowledge.earlyStop` / `rerank` — gate the `earlyStopHook` and `rerankHook` exported from `src/drift/knowledge-mitigations.ts`. Neither runs automatically; a pipeline caller must invoke them. When the flag is off, both hooks return their first argument unchanged.
+- `drift.knowledge` has **no `semanticDrift` toggle.** The `detectSemanticDrift` function is a pure utility — it only runs when the caller explicitly invokes it and has no settings-driven on/off switch. Nothing in the library tree calls it automatically.
+- `drift.alignment.taskDriftMonitor` / `taskDriftThreshold` — gate and tune `monitorTaskDrift` in `src/drift/task-drift-monitor.ts`.
+- `drift.alignment.bciThreshold` — tune the BCI BLOCK threshold in `src/drift/bci.ts`. BCI itself has no on/off toggle; the computation always returns a number, and only `scripts/drift/bci-validate.mjs` applies the BLOCK exit-code using this threshold.
+- `drift.retrieval.temporalCheck` / `maxLagMs` — gate and tune `checkTemporalRetrieval` in `src/drift/temporal-retrieval.ts`.
+- `drift.retrieval.groundingFaithfulness` — gate `checkGroundingFaithfulness` in `src/drift/grounding-faithfulness.ts`.
+- `drift.retrieval.contextEntropyGuard` / `entropyThreshold` — gate and tune `checkContextEntropy` in `src/drift/context-entropy.ts`.
+
+All boolean flags default to `false` (or absent = false) and all numeric knobs have sensible module-level defaults. When all boolean flags are `false` (or absent), `npm test` output is identical to v1.49.568. This is verified by `src/drift/__tests__/default-off-invariance.test.ts`.
 
 ## How to Use the Drift Audit CLI
 
