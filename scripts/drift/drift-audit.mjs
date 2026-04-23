@@ -37,6 +37,10 @@ const EVENT_META = {
 // Classify severity from event content when not directly encoded in the event type.
 // Rules:
 //   - context_collapse → critical always
+//   - lazy_grounding → use sgi_score with INVERTED polarity (lower = worse):
+//       sgi_score <= 0.2 → critical
+//       sgi_score <= 0.5 → warn
+//       else             → info
 //   - score >= 0.8 or drift_magnitude >= 0.8 → critical
 //   - score >= 0.5 or drift_magnitude >= 0.5 → warn
 //   - otherwise → info
@@ -44,7 +48,21 @@ function classifySeverity(event) {
   const type = event.type || event.event_type || '';
   if (type === 'drift.retrieval.context_collapse_detected') return 'critical';
 
-  // Score-based escalation
+  // Lazy-grounding: sgi_score polarity is inverted relative to score/drift_magnitude
+  // (for SGI, HIGHER = more grounded = better). Use its own rule chain.
+  if (type === 'drift.retrieval.lazy_grounding_detected') {
+    const sgi = typeof event.sgi_score === 'number' ? event.sgi_score : null;
+    if (sgi !== null) {
+      if (sgi <= 0.2) return 'critical';
+      if (sgi <= 0.5) return 'warn';
+      return 'info';
+    }
+    // Missing sgi_score on a lazy-grounding event: fall back to static map.
+    const meta = EVENT_META[type];
+    return meta ? meta.severity : 'info';
+  }
+
+  // Score-based escalation (higher = worse for score, drift_magnitude, similarity)
   const score = event.score ?? event.drift_magnitude ?? event.similarity ?? null;
   if (typeof score === 'number') {
     if (score >= 0.8) return 'critical';
