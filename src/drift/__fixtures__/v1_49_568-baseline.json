@@ -1,0 +1,49 @@
+{
+  "_comment": "v1.49.568 baseline fixture for default-off invariance tests (DRIFT-27). Each entry has a drift-layer input and the expected output when ALL drift flags are false (default). Default-off MUST produce output byte-identical to input across all seven defense modules.",
+  "schema_version": "1.0.0",
+  "version": "1.49.568",
+  "flag_off_pairs": [
+    {
+      "id": "baseline-001",
+      "description": "Short factual claim — knowledge drift layer must pass through unchanged.",
+      "surface": "knowledge",
+      "input": "Marie Curie was born in Warsaw in 1867.",
+      "expected_output": "Marie Curie was born in Warsaw in 1867."
+    },
+    {
+      "id": "baseline-002",
+      "description": "Multi-sentence biography — passes through unchanged under flag-off.",
+      "surface": "knowledge",
+      "input": "Alan Turing was born in London in 1912. He was a mathematician and computer scientist. He developed the concept of the universal computing machine.",
+      "expected_output": "Alan Turing was born in London in 1912. He was a mathematician and computer scientist. He developed the concept of the universal computing machine."
+    },
+    {
+      "id": "baseline-003",
+      "description": "High-drift content — still passes through unchanged under flag-off.",
+      "surface": "knowledge",
+      "input": "Isaac Newton was born in 1643 in Woolsthorpe. He discovered the law of gravitation. Zephyr crystalized quinoa fungus amid volcanic archipelago precipitation event.",
+      "expected_output": "Isaac Newton was born in 1643 in Woolsthorpe. He discovered the law of gravitation. Zephyr crystalized quinoa fungus amid volcanic archipelago precipitation event."
+    },
+    {
+      "id": "baseline-004",
+      "description": "Empty string — passes through unchanged.",
+      "surface": "knowledge",
+      "input": "",
+      "expected_output": ""
+    },
+    {
+      "id": "baseline-005",
+      "description": "Alignment-surface activation snapshot input — task-drift monitor is a no-op under flag-off.",
+      "surface": "alignment",
+      "input": "skill activation delta: [0.1, 0.9, -0.3, 0.7, 0.2]",
+      "expected_output": "skill activation delta: [0.1, 0.9, -0.3, 0.7, 0.2]"
+    },
+    {
+      "id": "baseline-006",
+      "description": "Retrieval context — stale-index and grounding checks are no-ops under flag-off.",
+      "surface": "retrieval",
+      "input": "The capital of France is Paris. Napoleon was a French military leader. The Eiffel Tower was built in 1889.",
+      "expected_output": "The capital of France is Paris. Napoleon was a French military leader. The Eiffel Tower was built in 1889."
+    }
+  ]
+}
