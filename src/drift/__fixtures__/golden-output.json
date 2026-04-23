@@ -1,0 +1,24 @@
+{
+  "_comment": "Golden-output fixture for knowledge-mitigations flag-off byte-identity check. Each entry has an input and the expected output when all drift flags are false (default). Flag-off MUST produce output byte-identical to input.",
+  "schema_version": "1.0.0",
+  "flag_off_pairs": [
+    {
+      "id": "golden-001",
+      "description": "Short factual sentence — passes through unchanged under flag-off.",
+      "input": "Marie Curie was born in Warsaw in 1867.",
+      "expected_output": "Marie Curie was born in Warsaw in 1867."
+    },
+    {
+      "id": "golden-002",
+      "description": "Multi-sentence biography paragraph — passes through unchanged under flag-off.",
+      "input": "Alan Turing was born in London in 1912. He was a mathematician and computer scientist. He developed the concept of the universal computing machine.",
+      "expected_output": "Alan Turing was born in London in 1912. He was a mathematician and computer scientist. He developed the concept of the universal computing machine."
+    },
+    {
+      "id": "golden-003",
+      "description": "Text with high-drift content — still passes through unchanged under flag-off.",
+      "input": "Isaac Newton was born in 1643 in Woolsthorpe. He discovered the law of gravitation. Zephyr crystalized quinoa fungus amid volcanic archipelago precipitation event.",
+      "expected_output": "Isaac Newton was born in 1643 in Woolsthorpe. He discovered the law of gravitation. Zephyr crystalized quinoa fungus amid volcanic archipelago precipitation event."
+    }
+  ]
+}
