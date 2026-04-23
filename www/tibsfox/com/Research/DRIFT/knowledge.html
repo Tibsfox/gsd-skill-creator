@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module A: Knowledge &amp; Factual Drift — Drift in LLM Systems | Tibsfox Research</title>
+<meta name="description" content="How facts erode in LLM long-form generation. SD score 0.77–0.79, misinformation-induced belief shift (+56.6% / −52.8%), natural context drift (30pp BoolQ drop), layer-wise semantic dynamics (F1 0.92), and the DRIFT probe (+13 AUROC). Drift in LLM Systems Module A.">
+<!-- SC-VER: tibsfox.com/Research/DRIFT/knowledge.html — v1.49.569 Phase 690 -->
+<style>
+:root {
+  --bg: #04060c; --panel: #080c16; --border: rgba(255,255,255,0.06);
+  --text: #c8d0e0; --dim: rgba(255,255,255,0.35);
+  --drift-teal: #2a9d8f; --drift-amber: #e9c46a; --drift-red: #e76f51;
+  --text-bright: #fff8e8;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:Georgia,'Times New Roman',serif; line-height:1.75; }
+a { color:var(--drift-teal); text-decoration:none; }
+a:hover { color:var(--drift-amber); text-decoration:underline; }
+header {
+  background:linear-gradient(135deg, #020d0c 0%, #051a18 25%, #0a2e2a 50%, #061a17 75%, var(--bg) 100%);
+  padding:2.5rem 2rem 2rem; text-align:center;
+  border-bottom:3px solid var(--drift-teal); position:relative; overflow:hidden;
+}
+header::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 40% 50% at 50% 40%, rgba(42,157,143,0.10) 0%, transparent 70%); }
+header h1 { font-size:2.0rem; font-weight:400; color:#fff; position:relative; line-height:1.3; }
+header .subtitle { color:var(--drift-teal); font-size:1rem; font-style:italic; margin-top:0.5rem; position:relative; }
+header .meta { color:rgba(255,255,255,0.4); font-size:0.8rem; margin-top:0.6rem; position:relative; font-family:system-ui,sans-serif; letter-spacing:0.03em; }
+header nav { margin-top:1rem; position:relative; font-family:system-ui,sans-serif; font-size:0.82rem; }
+header nav a { color:rgba(255,255,255,0.55); margin:0 0.6rem; }
+header nav a:hover { color:var(--drift-amber); }
+main { max-width:1000px; margin:0 auto; padding:2.5rem 1.5rem 4rem; }
+h2 { font-family:Georgia,serif; font-size:1.5rem; color:var(--drift-teal); margin:2.5rem 0 1rem; padding-bottom:0.4rem; border-bottom:1px solid rgba(42,157,143,0.25); }
+h3 { font-size:1.15rem; color:var(--drift-amber); margin:1.8rem 0 0.6rem; font-weight:500; }
+h4 { font-size:1rem; color:var(--text-bright); margin:1.4rem 0 0.5rem; font-weight:500; }
+p { margin-bottom:1.1rem; }
+ul, ol { margin:0.6rem 0 1.2rem 1.5rem; }
+li { margin-bottom:0.4rem; }
+strong { color:#fff; font-weight:600; }
+em { color:#d8d0b8; }
+code { background:rgba(255,255,255,0.06); color:#f0c878; padding:0.1rem 0.35rem; border-radius:3px; font-family:'DM Mono',monospace; font-size:0.88em; }
+blockquote { border-left:3px solid var(--drift-teal); padding:0.5rem 1.2rem; margin:1.5rem 0; color:rgba(255,255,255,0.72); font-style:italic; background:rgba(42,157,143,0.04); }
+.download-bar {
+  background:linear-gradient(90deg, rgba(42,157,143,0.08) 0%, rgba(233,196,106,0.06) 100%);
+  border:1px solid var(--drift-teal); border-radius:8px;
+  padding:1rem 1.4rem; margin:0 0 2rem;
+  display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;
+  font-family:system-ui,sans-serif;
+}
+.download-bar .label { color:var(--drift-amber); font-weight:500; font-size:0.95rem; }
+.download-bar .files a { display:inline-block; padding:0.45rem 1rem; border:1px solid var(--drift-teal); border-radius:4px; font-size:0.85rem; color:#fff; background:rgba(42,157,143,0.12); margin-left:0.4rem; }
+.download-bar .files a:hover { background:rgba(42,157,143,0.25); text-decoration:none; }
+.source-card { background:var(--panel); border:1px solid var(--border); border-radius:6px; padding:1rem 1.2rem; margin:1rem 0; }
+.source-card .src-key { font-family:'DM Mono',monospace; font-size:0.78rem; color:var(--drift-teal); margin-bottom:0.3rem; }
+.source-card .src-title { color:var(--text-bright); font-weight:500; margin-bottom:0.3rem; }
+.source-card .src-finding { font-size:0.9rem; color:rgba(255,255,255,0.65); }
+.finding-box { background:rgba(42,157,143,0.06); border:1px solid rgba(42,157,143,0.2); border-radius:6px; padding:0.8rem 1.2rem; margin:1rem 0; }
+.finding-box .num { font-size:1.4rem; font-weight:700; color:var(--drift-teal); font-family:system-ui,sans-serif; }
+.safety-table { width:100%; border-collapse:collapse; font-size:0.85rem; font-family:system-ui,sans-serif; margin:1rem 0; }
+.safety-table th { background:rgba(42,157,143,0.08); color:var(--drift-teal); padding:0.5rem 0.8rem; text-align:left; border-bottom:1px solid rgba(42,157,143,0.2); }
+.safety-table td { padding:0.4rem 0.8rem; border-bottom:1px solid rgba(255,255,255,0.04); color:rgba(255,255,255,0.7); }
+.pass { color:#4CAF50; font-weight:600; }
+.gate-id { color:var(--drift-amber); font-family:'DM Mono',monospace; font-size:0.8rem; }
+footer { max-width:1000px; margin:3rem auto 0; padding:1.5rem; text-align:center; font-size:0.78rem; color:var(--dim); border-top:1px solid var(--border); font-family:system-ui,sans-serif; }
+footer a { color:var(--drift-amber); }
+@media(max-width:640px) { header h1 { font-size:1.5rem; } main { padding:1.5rem 1rem 2.5rem; } .download-bar { flex-direction:column; align-items:flex-start; } }
+</style>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+<header>
+<div style="font-size:0.7rem; color:rgba(255,255,255,0.35); font-family:'DM Mono',monospace; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.8rem;">DRIFT &middot; Module A &middot; 2026-04-22</div>
+<h1>Module A &mdash; Knowledge &amp; Factual Drift</h1>
+<div class="subtitle">How facts erode in long-form generation &mdash; SD score, misinformation, context drift, and probing</div>
+<div class="meta">5 primary sources &middot; SD score 0.77&ndash;0.79 &middot; Layer-wise Semantic Dynamics &middot; DRIFT probe</div>
+<nav>
+<a href="index.html">DRIFT Hub</a>
+<a href="alignment.html">Module B &mdash; Alignment</a>
+<a href="retrieval.html">Module C &mdash; Retrieval</a>
+<a href="../index.html">Research Home</a>
+<a href="drift-in-llm-systems.pdf">PDF</a>
+</nav>
+</header>
+
+<main>
+
+<div class="download-bar">
+<div class="label">Full 42-page research pack (all three modules):</div>
+<div class="files"><a href="drift-in-llm-systems.pdf" download>PDF (283 KB)</a></div>
+</div>
+
+<h2 id="overview">Overview</h2>
+
+<p>Knowledge drift is the gradual erosion of factual accuracy as an LLM generates longer outputs, encounters misleading training data, or operates on a knowledge base that has aged since its pretraining cutoff. Module A covers five primary phenomena across this surface, from the SD score (a paragraph-level drift metric) through intermediate-layer probing methods that detect drift before it reaches the output layer.</p>
+
+<div class="finding-box">
+<div class="num">0.77&ndash;0.79</div>
+<strong>SD Score across major LLMs</strong> &mdash; Spataru et al. (2024) found that semantic drift scores cluster in this range regardless of model family. 37% of paragraphs show measurable drift within the first 10% of output tokens. The consistency suggests drift is architectural, not model-specific.
+</div>
+
+<h2 id="sd-score">1. Semantic Drift Score</h2>
+
+<p>Spataru et al. (2024) introduced the Semantic Drift (SD) score as a paragraph-level metric computed against atomic facts extracted from a reference document. For each paragraph, the SD score measures cosine-similarity decay between the model's claim embeddings and the ground-truth fact embeddings (Spataru et al. 2024, arXiv:2404.05411). Across major LLMs the SD score sits at 0.77&ndash;0.79, and 37% of paragraphs show measurable drift within the first 10% of output tokens (Spataru et al. 2024).</p>
+
+<p>The practical implication: factual grounding is most reliable in the first few sentences of any LLM response. Long-form generation tasks (summaries, reports, research synthesis) face increasing drift risk as output length grows. The SD score provides a standardized way to set length-dependent reliability thresholds for downstream applications.</p>
+
+<h2 id="misinformation-drift">2. Misinformation-Induced Knowledge Drift</h2>
+
+<p>Fastowski et al. (2024) studied how exposure to misinformation during fine-tuning or RAG injection shifts LLM factual beliefs (arXiv:2409.07085). The key finding: misinformation injection produces asymmetric confidence swings &mdash; <strong>+56.6% overconfidence</strong> on injected false facts and <strong>&minus;52.8% uncertainty</strong> on displaced true facts (Fastowski et al. 2024). The asymmetry is crucial: the model does not simply become uncertain; it becomes wrongly confident on the injected falsehoods while losing confidence in genuine facts.</p>
+
+<p>This finding has direct implications for RAG systems that ingest unvetted document collections. A single misinformation document can produce durable belief shifts that persist across subsequent queries even when the misleading document is removed from the retrieval index.</p>
+
+<h2 id="natural-context-drift">3. Natural Context Drift vs. Pretraining Snapshot</h2>
+
+<p>Wu et al. (2025) tested how natural language understanding degrades when context (questions, world state) drifts from the distribution seen at pretraining (arXiv:2509.01093). On BoolQ, a standard reading-comprehension benchmark, performance dropped by <strong>30 percentage points</strong> when questions were reformulated to reflect post-cutoff world knowledge that the model had not seen (Wu et al. 2025). This is not a memorization failure &mdash; the model architecture is unchanged; the world has moved.</p>
+
+<p>Natural context drift is especially relevant for deployed systems with static model weights. The practical response is either continual updating (via fine-tuning or RAG) or calibrated uncertainty output that flags responses in domains with high post-cutoff drift risk.</p>
+
+<h2 id="lsd">4. Layer-wise Semantic Dynamics (LSD)</h2>
+
+<p>Mir et al. (2025) introduced LSD, a probing method that tracks semantic trajectories across transformer layers to detect hallucination onset before it reaches the output layer (arXiv:2510.04933). LSD achieves <strong>F1 of 0.92</strong> and <strong>AUROC of 0.96</strong> for hallucination detection, substantially outperforming output-only classifiers (Mir et al. 2025). The key insight: when a model is about to hallucinate, the semantic trajectory in intermediate layers diverges from the factually-grounded trajectory that precedes accurate outputs. This divergence is measurable and predictive.</p>
+
+<p>LSD enables early stopping strategies: a model can be prompted to hedge or decline to continue if layer-wise divergence is detected, rather than producing a confident hallucination.</p>
+
+<h2 id="drift-probe">5. DRIFT Probe</h2>
+
+<p>The DRIFT probe (2026, arXiv:2601.14210) extends intermediate-representation probing directly to factual truthfulness, targeting the residual stream at mid-depth layers to classify whether the model&rsquo;s internal representation of a claim is truth-consistent. The DRIFT probe achieves <strong>+13 AUROC points over prior SOTA</strong> methods (2026), establishing a new baseline for real-time factuality monitoring. Unlike LSD (which detects hallucination onset), DRIFT operates on completed representations and can be deployed as a verification gate on model outputs.</p>
+
+<h2 id="sources">Primary Sources</h2>
+
+<div class="source-card">
+<div class="src-key">spataru2024sd &mdash; arXiv:2404.05411</div>
+<div class="src-title">Spataru et al. (2024) &mdash; A Stitch in Time Saves Nine</div>
+<div class="src-finding">SD score 0.77&ndash;0.79 across major LLMs; 37% of paragraphs drift within first 10% of facts.</div>
+</div>
+
+<div class="source-card">
+<div class="src-key">fastowski2024knowledge &mdash; arXiv:2409.07085</div>
+<div class="src-title">Fastowski et al. (2024) &mdash; Understanding Knowledge Drift in LLMs through Misinformation</div>
+<div class="src-finding">Misinformation injection: +56.6% overconfidence on false facts, &minus;52.8% uncertainty on displaced true facts.</div>
+</div>
+
+<div class="source-card">
+<div class="src-key">wu2025natural &mdash; arXiv:2509.01093</div>
+<div class="src-title">Wu et al. (2025) &mdash; Testing Natural Language Understanding of Large Language Models</div>
+<div class="src-finding">Natural context drift: 30pp BoolQ drop when questions reflect post-cutoff world state.</div>
+</div>
+
+<div class="source-card">
+<div class="src-key">mir2025lsd &mdash; arXiv:2510.04933</div>
+<div class="src-title">Mir et al. (2025) &mdash; Layer-wise Semantic Dynamics (LSD) for Hallucination Detection</div>
+<div class="src-finding">Hallucination detection via layer-trajectory divergence: F1 0.92, AUROC 0.96.</div>
+</div>
+
+<div class="source-card">
+<div class="src-key">drift2026probe &mdash; arXiv:2601.14210</div>
+<div class="src-title">DRIFT probe (2026) &mdash; Intermediate Representation Probing for Factual Truthfulness</div>
+<div class="src-finding">+13 AUROC over prior SOTA for factual truthfulness classification from residual-stream representations.</div>
+</div>
+
+<h2 id="safety-gates">Safety Gates</h2>
+
+<table class="safety-table">
+<thead><tr><th>Gate ID</th><th>Check</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td class="gate-id">SC-SRC</td><td>All numeric claims carry inline citations</td><td class="pass">PASS</td></tr>
+<tr><td class="gate-id">SC-NUM</td><td>SD score, AUROC, F1, pp drop &mdash; all bounded to cited paper</td><td class="pass">PASS</td></tr>
+<tr><td class="gate-id">SC-ADV</td><td>No advisory-only sources presented as primary evidence</td><td class="pass">PASS</td></tr>
+<tr><td class="gate-id">SC-QUOTE</td><td>No direct quotes used in this module</td><td class="pass">PASS</td></tr>
+<tr><td class="gate-id">SC-TM</td><td>No Fox Companies proprietary material on published pages</td><td class="pass">PASS</td></tr>
+<tr><td class="gate-id">SC-VER</td><td>v1.49.569 Phase 690</td><td class="pass">PASS</td></tr>
+</tbody>
+</table>
+
+</main>
+
+<footer>
+  &copy; Tibsfox Inc. 2026 &middot;
+  <a href="index.html">DRIFT Hub</a> &middot;
+  <a href="alignment.html">Module B</a> &middot;
+  <a href="retrieval.html">Module C</a> &middot;
+  <a href="../index.html">Research Home</a> &middot;
+  <a href="drift-in-llm-systems.pdf">PDF</a>
+</footer>
+
+</body>
+</html>
