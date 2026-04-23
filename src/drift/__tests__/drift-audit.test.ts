@@ -225,4 +225,24 @@ describe('drift-audit CLI', () => {
     expect(parsed.surfaces.retrieval.critical).toBe(0);
     expect(parsed.surfaces.retrieval.info).toBe(1);
   });
+
+  // M-01: --since with garbage input should error out with clear message
+  it('--since with unparseable value exits non-zero with a clear error', () => {
+    writeEvents([]);
+    const { stderr, exitCode } = runAudit(['--since', 'not-a-date']);
+    expect(exitCode).not.toBe(0);
+    expect(stderr).toMatch(/invalid.*--since/i);
+  });
+
+  it('--since with empty ISO-prefix (e.g., "2026") also rejects', () => {
+    writeEvents([]);
+    const { exitCode } = runAudit(['--since', '2026']);
+    expect(exitCode).not.toBe(0);
+  });
+
+  it('--since with a well-formed ISO-8601 date is accepted', () => {
+    writeEvents([]);
+    const { exitCode } = runAudit(['--since', '2026-04-23T00:00:00Z']);
+    expect(exitCode).toBe(0);
+  });
 });

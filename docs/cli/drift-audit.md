@@ -1,9 +1,17 @@
 # `skill-creator drift audit` — CLI Reference
 
-**Script:** `scripts/drift/drift-audit.mjs`
+**Subcommand:** `skill-creator drift audit`
+**Script:** `scripts/drift/drift-audit.mjs` (the subcommand is a thin wrapper via `src/drift/cli.ts`)
 **Added:** v1.49.569 (DRIFT-26)
 
 ## Synopsis
+
+```
+skill-creator drift audit [options]
+```
+
+Or, equivalently, invoke the script directly (useful for CI pipelines that
+don't have the `skill-creator` binary on the path):
 
 ```
 node scripts/drift/drift-audit.mjs [options]
@@ -33,12 +41,16 @@ Reads the drift-telemetry JSONL log, scores events by surface and severity, and 
 **Default markdown report (all surfaces, all severities):**
 
 ```bash
+skill-creator drift audit
+# or
 node scripts/drift/drift-audit.mjs
 ```
 
 **JSON output for machine consumption:**
 
 ```bash
+skill-creator drift audit --format json
+# or
 node scripts/drift/drift-audit.mjs --format json
 ```
 
