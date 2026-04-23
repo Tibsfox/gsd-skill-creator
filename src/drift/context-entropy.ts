@@ -43,6 +43,13 @@
  * }
  * ```
  *
+ * Settings keys read by this module:
+ *  - `drift.retrieval.contextEntropyGuard` (boolean, default false) — enables the guard
+ *  - `drift.retrieval.entropyThreshold` (number in (0,1], default 0.5) — collapse floor
+ *
+ * Precedence for `entropyThreshold`: per-call `options.entropyThreshold` >
+ * settings value > module default.
+ *
  * Telemetry: emits a `drift.retrieval.context_collapse_detected` event to
  * `.logs/drift-telemetry.jsonl` when classification is not 'healthy'.
  * Best-effort write — never throws.
@@ -102,7 +109,9 @@ export interface ContextEntropyResult {
 export interface ContextEntropyOptions {
   /**
    * Normalised-entropy threshold below which classification is 'collapsing'.
-   * Default: 0.5. Configurable via `drift.retrieval.entropyThreshold`.
+   * Default: 0.5. Per-call value takes precedence over the
+   * `drift.retrieval.entropyThreshold` settings value, which takes precedence
+   * over the module default.
    */
   entropyThreshold?: number;
   /**
@@ -152,6 +161,35 @@ export function readContextEntropyFlag(
     return flag === true;
   } catch {
     return false;
+  }
+}
+
+/**
+ * Read `drift.retrieval.entropyThreshold` from settings.json.
+ * Returns null on any read / parse / shape error (caller may fall back to
+ * the per-call option or the module default of 0.5).
+ *
+ * Valid entropyThreshold is a number in (0, 1] since entropy is normalised.
+ */
+export function readEntropyThresholdSetting(
+  settingsPath: string = '.claude/settings.json',
+): number | null {
+  try {
+    const raw = readFileSync(settingsPath, 'utf8');
+    const parsed = JSON.parse(raw) as Record<string, unknown>;
+    const scope = parsed['gsd-skill-creator'];
+    if (!scope || typeof scope !== 'object') return null;
+    const drift = (scope as Record<string, unknown>).drift;
+    if (!drift || typeof drift !== 'object') return null;
+    const retrieval = (drift as Record<string, unknown>).retrieval;
+    if (!retrieval || typeof retrieval !== 'object') return null;
+    const value = (retrieval as Record<string, unknown>).entropyThreshold;
+    if (typeof value === 'number' && Number.isFinite(value) && value > 0 && value <= 1) {
+      return value;
+    }
+    return null;
+  } catch {
+    return null;
   }
 }
 
@@ -264,12 +302,20 @@ export function checkContextEntropy(
       ? options.flagOverride
       : readContextEntropyFlag(options.settingsPath ?? '.claude/settings.json');
 
-  const threshold = options.entropyThreshold ?? DEFAULT_ENTROPY_THRESHOLD;
-
-  // Default-off: return stub when flag is false.
+  // Threshold precedence: per-call option > settings value > module default.
+  // When the flag is off, we still report the per-call threshold (or default)
+  // in the stub result; settings are only read when the flag is on to avoid
+  // disturbing the default-off byte-identity guarantee.
   if (!flagEnabled) {
-    return { entropy: 1, threshold, classification: 'healthy', alert: false };
+    const thresholdOff = options.entropyThreshold ?? DEFAULT_ENTROPY_THRESHOLD;
+    return { entropy: 1, threshold: thresholdOff, classification: 'healthy', alert: false };
   }
+
+  const settingsThreshold = readEntropyThresholdSetting(
+    options.settingsPath ?? '.claude/settings.json',
+  );
+  const threshold =
+    options.entropyThreshold ?? (settingsThreshold ?? DEFAULT_ENTROPY_THRESHOLD);
 
   const telemetryPath =
     options.telemetryPath ?? join(process.cwd(), '.logs', 'drift-telemetry.jsonl');

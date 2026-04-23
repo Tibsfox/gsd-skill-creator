@@ -32,6 +32,12 @@
  * }
  * ```
  *
+ * Settings keys read by this module:
+ *  - `drift.retrieval.temporalCheck` (boolean, default false) — enables the check
+ *  - `drift.retrieval.maxLagMs` (number, default 86_400_000) — lag band threshold
+ *
+ * Precedence for `maxLagMs`: per-call `input.max_lag_ms` > settings value > default.
+ *
  * Telemetry: emits a `drift.retrieval.stale_index_detected` event to
  * `.logs/drift-telemetry.jsonl` when classification is not 'fresh'.
  * Best-effort write — never throws.
@@ -57,7 +63,9 @@ export interface TemporalRetrievalInput {
   ssot_timestamp: Date | string;
   /**
    * Maximum acceptable lag in milliseconds before classification becomes 'stale'.
-   * Default: 86400000 (24 h). Configurable via `drift.retrieval.maxLagMs`.
+   * Default: 86400000 (24 h). Per-call override takes precedence over the
+   * `drift.retrieval.maxLagMs` settings value, which takes precedence over the
+   * module default.
    */
   max_lag_ms?: number;
 }
@@ -128,6 +136,31 @@ export function readTemporalCheckFlag(
   }
 }
 
+/**
+ * Read `drift.retrieval.maxLagMs` from settings.json.
+ * Returns null on any read / parse / shape error (caller may fall back to
+ * the per-call option or the module default).
+ */
+export function readMaxLagMsSetting(
+  settingsPath: string = '.claude/settings.json',
+): number | null {
+  try {
+    const raw = readFileSync(settingsPath, 'utf8');
+    const parsed = JSON.parse(raw) as Record<string, unknown>;
+    const scope = parsed['gsd-skill-creator'];
+    if (!scope || typeof scope !== 'object') return null;
+    const drift = (scope as Record<string, unknown>).drift;
+    if (!drift || typeof drift !== 'object') return null;
+    const retrieval = (drift as Record<string, unknown>).retrieval;
+    if (!retrieval || typeof retrieval !== 'object') return null;
+    const value = (retrieval as Record<string, unknown>).maxLagMs;
+    if (typeof value === 'number' && Number.isFinite(value) && value > 0) return value;
+    return null;
+  } catch {
+    return null;
+  }
+}
+
 // ---------------------------------------------------------------------------
 // Telemetry
 // ---------------------------------------------------------------------------
@@ -187,7 +220,12 @@ export function checkTemporalRetrieval(
     return { lag_ms: 0, classification: 'fresh', alert: false };
   }
 
-  const maxLagMs = input.max_lag_ms ?? DEFAULT_MAX_LAG_MS;
+  // Threshold precedence: per-call input > settings > module default.
+  const settingsMaxLagMs = readMaxLagMsSetting(
+    options.settingsPath ?? '.claude/settings.json',
+  );
+  const maxLagMs =
+    input.max_lag_ms ?? (settingsMaxLagMs ?? DEFAULT_MAX_LAG_MS);
   const telemetryPath =
     options.telemetryPath ?? join(process.cwd(), '.logs', 'drift-telemetry.jsonl');
 

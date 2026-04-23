@@ -32,6 +32,12 @@
  * }
  * ```
  *
+ * Settings keys read by this module:
+ *  - `drift.alignment.taskDriftMonitor` (boolean, default false) — enables the monitor
+ *  - `drift.alignment.taskDriftThreshold` (number, default 0.5) — drift-classification floor
+ *
+ * Precedence for `threshold`: per-call `options.threshold` > settings value > default.
+ *
  * Telemetry: emits a `drift.alignment.taskDrift.detected` event to
  * `.logs/drift-telemetry.jsonl` (same channel as semantic-drift.ts) when
  * classification is 'drift' or 'suspicious'. Best-effort write — never throws.
@@ -86,7 +92,9 @@ export interface TaskDriftResult {
 export interface TaskDriftMonitorOptions {
   /**
    * Threshold above which classification is 'drift'.
-   * Default: 0.5 (configurable via `drift.alignment.taskDriftThreshold`).
+   * Default: 0.5. Per-call value takes precedence over the
+   * `drift.alignment.taskDriftThreshold` settings value, which takes
+   * precedence over the module default.
    */
   threshold?: number;
   /**
@@ -135,6 +143,31 @@ export function readTaskDriftMonitorFlag(
     return flag === true;
   } catch {
     return false;
+  }
+}
+
+/**
+ * Read `drift.alignment.taskDriftThreshold` from settings.json.
+ * Returns null on any read / parse / shape error (caller may fall back to
+ * the per-call option or the module default of 0.5).
+ */
+export function readTaskDriftThresholdSetting(
+  settingsPath: string = '.claude/settings.json',
+): number | null {
+  try {
+    const raw = readFileSync(settingsPath, 'utf8');
+    const parsed = JSON.parse(raw) as Record<string, unknown>;
+    const scope = parsed['gsd-skill-creator'];
+    if (!scope || typeof scope !== 'object') return null;
+    const drift = (scope as Record<string, unknown>).drift;
+    if (!drift || typeof drift !== 'object') return null;
+    const alignment = (drift as Record<string, unknown>).alignment;
+    if (!alignment || typeof alignment !== 'object') return null;
+    const value = (alignment as Record<string, unknown>).taskDriftThreshold;
+    if (typeof value === 'number' && Number.isFinite(value) && value > 0) return value;
+    return null;
+  } catch {
+    return null;
   }
 }
 
@@ -226,7 +259,11 @@ export function monitorTaskDrift(
     return { classification: 'clean', drift_magnitude: 0, direction: null };
   }
 
-  const threshold = options.threshold ?? 0.5;
+  // Threshold precedence: per-call option > settings > module default.
+  const settingsThreshold = readTaskDriftThresholdSetting(
+    options.settingsPath ?? '.claude/settings.json',
+  );
+  const threshold = options.threshold ?? (settingsThreshold ?? 0.5);
   const suspiciousThreshold = options.suspiciousThreshold ?? threshold * 0.5;
   const telemetryPath =
     options.telemetryPath ?? join(process.cwd(), '.logs', 'drift-telemetry.jsonl');
