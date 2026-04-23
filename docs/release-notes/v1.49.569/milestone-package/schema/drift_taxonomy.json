@@ -1,0 +1,599 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://tibsfox.com/schemas/drift-taxonomy/v1.json",
+  "title": "Drift Taxonomy Record",
+  "description": "7-field record shape for drift phenomena. Locked by drift-mission.tex Stage-3 deliverable D1. One row per drift phenomenon; populated by Wave 1 module authors and synthesized in Wave 2.",
+  "type": "object",
+  "required": ["records"],
+  "properties": {
+    "schema_version": {"type": "string", "const": "1.0.0"},
+    "mission": {"type": "string", "const": "drift-in-llm-systems"},
+    "records": {
+      "type": "array",
+      "description": "Array of drift-phenomenon records. Minimum 10 for Wave-2 unified taxonomy requirement (DRIFT-04).",
+      "items": {"$ref": "#/definitions/DriftRecord"}
+    }
+  },
+  "definitions": {
+    "DriftRecord": {
+      "type": "object",
+      "required": ["phenomenon", "surface", "metric", "typical_magnitude", "citation_id", "mitigations", "couplings"],
+      "additionalProperties": false,
+      "properties": {
+        "phenomenon": {
+          "type": "string",
+          "minLength": 4,
+          "description": "Short name of the drift phenomenon (e.g. 'Semantic drift', 'Task drift from prompt injection')."
+        },
+        "surface": {
+          "type": "string",
+          "enum": ["knowledge", "alignment", "retrieval", "cross"],
+          "description": "Which of the three drift surfaces (Module A/B/C) or cross-surface (Module D) this phenomenon belongs to."
+        },
+        "metric": {
+          "type": "string",
+          "description": "The named measurement used (e.g. 'SD score on atomic facts', 'Activation-delta probe AUROC')."
+        },
+        "typical_magnitude": {
+          "type": "string",
+          "description": "The reported effect size with units (e.g. '0.77-0.79 across major LLMs', '30pp BoolQ drop')."
+        },
+        "citation_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*[0-9]{4}[a-z0-9]*$",
+          "description": "cite_key from sources/index.bib (e.g. 'spataru2024sd', 'abdelnabi2024taskdrift'). Must resolve in meta.json."
+        },
+        "mitigations": {
+          "type": "array",
+          "description": "List of mitigations from the cited paper or related work. Each mitigation names a technique + its reported effect.",
+          "items": {
+            "type": "object",
+            "required": ["name", "effect"],
+            "properties": {
+              "name": {"type": "string"},
+              "effect": {"type": "string"},
+              "citation_id": {"type": "string"}
+            }
+          },
+          "minItems": 2
+        },
+        "couplings": {
+          "type": "array",
+          "description": "Cross-surface coupling claims linking this phenomenon to others (e.g. 'knowledge->retrieval via stale index'). Filled in Wave 2 synthesis.",
+          "items": {
+            "type": "object",
+            "required": ["to_surface", "claim"],
+            "properties": {
+              "to_surface": {"type": "string", "enum": ["knowledge", "alignment", "retrieval"]},
+              "claim": {"type": "string"},
+              "citation_id": {"type": "string"}
+            }
+          }
+        }
+      }
+    }
+  },
+  "schema_version": "1.0.0",
+  "mission": "drift-in-llm-systems",
+  "records": [
+    {
+      "phenomenon": "Task drift from prompt injection",
+      "surface": "alignment",
+      "metric": "Activation-delta probe ROC AUC (white-box linear classifier on hidden-state deltas before vs after external content)",
+      "typical_magnitude": "Near-perfect ROC AUC on OOD test sets (paper reports >0.99)",
+      "citation_id": "abdelnabi2024taskdrift",
+      "mitigations": [
+        {
+          "name": "Activation-delta probe",
+          "effect": "Detects task drift at near-perfect OOD ROC AUC; probe-only trained, base LLM unchanged",
+          "citation_id": "abdelnabi2024taskdrift"
+        },
+        {
+          "name": "TraceShield inference filter (prompt-injection adjacent)",
+          "effect": "40% baseline alignment drift reduced to 6.2% on ADB when deployed full-stack; filter refuses high-BCI completions",
+          "citation_id": "das2025tracealign"
+        }
+      ],
+      "couplings": [
+        {
+          "to_surface": "retrieval",
+          "claim": "Task drift originates from external content injected via retrieval pipelines; detection at the activation boundary is simultaneously a retrieval-drift signal",
+          "citation_id": "abdelnabi2024taskdrift"
+        }
+      ]
+    },
+    {
+      "phenomenon": "Alignment drift (training-corpus reactivation)",
+      "surface": "alignment",
+      "metric": "Belief Conflict Index (BCI) from suffix-array-matched training spans; Alignment Drift Benchmark (ADB)",
+      "typical_magnitude": "Baseline ADB drift >40%; full-stack intervention reduces to 6.2%; up to 85% reduction combined; utility delta <0.2",
+      "citation_id": "das2025tracealign",
+      "mitigations": [
+        {
+          "name": "TraceShield (inference filter)",
+          "effect": "Refuses completions with high-BCI spans; contributes to 40%->6.2% ADB drift reduction full-stack",
+          "citation_id": "das2025tracealign"
+        },
+        {
+          "name": "Contrastive Belief Deconfliction",
+          "effect": "DPO-style penalty on high-BCI continuations; up to 85% reduction combined with TraceShield + Prov-Decode",
+          "citation_id": "das2025tracealign"
+        },
+        {
+          "name": "Prov-Decode",
+          "effect": "Provenance-aware decoding vetoes beam expansions predicted to yield high-BCI spans; subsumed in full-stack",
+          "citation_id": "das2025tracealign"
+        }
+      ],
+      "couplings": [
+        {
+          "to_surface": "knowledge",
+          "claim": "TraceAlign ties alignment-drift failures to memorized pretraining content, making the knowledge surface the upstream cause of the alignment surface under adversarial pressure",
+          "citation_id": "das2025tracealign"
+        }
+      ]
+    },
+    {
+      "phenomenon": "Context drift in multi-turn interactions",
+      "surface": "alignment",
+      "metric": "Turn-wise KL divergence between test model predictive distribution and goal-consistent reference model",
+      "typical_magnitude": "Drift reaches stable finite-noise equilibrium rather than runaway decay; reminder interventions shift equilibrium downward",
+      "citation_id": "dongre2025equilibria",
+      "mitigations": [
+        {
+          "name": "Periodic goal reminders",
+          "effect": "Reliably shifts stable KL equilibrium downward in synthetic rewriting tasks + tau-Bench user-agent sims",
+          "citation_id": "dongre2025equilibria"
+        },
+        {
+          "name": "Stochastic recurrence with restoring force (theoretical)",
+          "effect": "Theoretical account predicts reminder-intervention effect magnitude; used as basis for designing reminder cadence",
+          "citation_id": "dongre2025equilibria"
+        }
+      ],
+      "couplings": [
+        {
+          "to_surface": "knowledge",
+          "claim": "Context drift loses/corrupts information in the active context; the loss surface intersects knowledge drift when corrupted context causes factual regression",
+          "citation_id": "dongre2025equilibria"
+        }
+      ]
+    },
+    {
+      "phenomenon": "Goal drift under prolonged adversarial pressure",
+      "surface": "alignment",
+      "metric": "End-of-run stated-goal alignment score (agent-reported vs system-assigned) correlated with measured goal-drift score",
+      "typical_magnitude": "Claude 3.5 Sonnet never states misaligned goal; Claude 3.5 Haiku + GPT-4o state hybrid/misaligned more frequently; GPT-4o mini states misaligned goal in majority of runs",
+      "citation_id": "goaldrift2025",
+      "mitigations": [
+        {
+          "name": "Self-report auditing (Finding 9)",
+          "effect": "Models' goal self-reports correlate strongly with measured drift; auditing self-reports is a cheap drift signal",
+          "citation_id": "goaldrift2025"
+        },
+        {
+          "name": "Goal reminders (cross-paper mitigation)",
+          "effect": "Dongre et al. show periodic goal reminders shift KL equilibrium downward; this transfers to goaldrift2025's prompt-based goal setting",
+          "citation_id": "dongre2025equilibria"
+        }
+      ],
+      "couplings": [
+        {
+          "to_surface": "knowledge",
+          "claim": "Intrinsic (training-acquired) goal drift cited as future work via greenblatt2024intrinsic and betley2024emergent; bridges into the knowledge surface by locating goal representation in weights not prompts",
+          "citation_id": "greenblatt2024intrinsic"
+        }
+      ]
+    },
+    {
+      "phenomenon": "Agent drift in multi-agent systems",
+      "surface": "alignment",
+      "metric": "Agent Stability Index (ASI): twelve-dimensional composite measuring behavior, decision quality, inter-agent coherence over extended interaction",
+      "typical_magnitude": "Adaptive Behavioral Anchoring solo: 70.4% drift reduction; combined stack (Anchoring + EMC summarization + third intervention): 81.5% reduction at 23% compute overhead and 9% extended completion time",
+      "citation_id": "rath2026asi",
+      "mitigations": [
+        {
+          "name": "Adaptive Behavioral Anchoring",
+          "effect": "70.4% drift reduction solo in simulated enterprise-finance experiments",
+          "citation_id": "rath2026asi"
+        },
+        {
+          "name": "Anchoring + EMC summarization + third intervention stack",
+          "effect": "81.5% drift reduction at 23% compute overhead and 9% extended completion time",
+          "citation_id": "rath2026asi"
+        }
+      ],
+      "couplings": [
+        {
+          "to_surface": "retrieval",
+          "claim": "Agent drift occurs without parameter updates; the failure originates in contextual conditioning and sampling, so retrieval-surface context-shaping interventions transfer directly",
+          "citation_id": "rath2026asi"
+        }
+      ]
+    },
+    {
+      "phenomenon": "Instruction arbitration in middle layers (SAIL)",
+      "surface": "alignment",
+      "metric": "Contextualized Role Adherence Score (CRAS) + tri-axial head-drift score (magnitude, directional orientation, distributional reshaping)",
+      "typical_magnitude": "Focal attention heads concentrate in middle layers; LoRA + token-weighted DPO on focal layers yields MAS role-adherence gains",
+      "citation_id": "sail2025instruction",
+      "mitigations": [
+        {
+          "name": "SAIL (Surgical Alignment of Instruction Layers) LoRA adapters",
+          "effect": "LoRA on focal mid-layer attention heads with token-weighted DPO objective; re-confirms subset-head criticality from Michel et al. 2019",
+          "citation_id": "sail2025instruction"
+        },
+        {
+          "name": "Attention-head pruning ancestor",
+          "effect": "Classical finding that only a subset of attention heads are functionally critical; methodology ancestor for SAIL focal-head localization",
+          "citation_id": "michel2019sixteen"
+        }
+      ],
+      "couplings": [
+        {
+          "to_surface": "knowledge",
+          "claim": "Mid-layer focal heads encode instruction-arbitration signals; the same depth locus is where intermediate-representation hallucination probes operate (DRIFT 2026 in Module A), suggesting a shared mid-depth intervention surface",
+          "citation_id": "sail2025instruction"
+        }
+      ]
+    },
+    {
+      "phenomenon": "Natural context drift vs pretraining snapshot (retrieval surface reading)",
+      "surface": "retrieval",
+      "metric": "QA accuracy vs paragraph-level semantic similarity between edited and pretraining-era passages (BoolQ)",
+      "typical_magnitude": "Over 30pp BoolQ drop between highest- and lowest-similarity bins; regression slopes >70 across several LLMs; human annotators do not degrade",
+      "citation_id": "wu2025natural",
+      "mitigations": [
+        {
+          "name": "Versioned index with source timestamp",
+          "effect": "Fresh index paired with source-version fingerprint so retrievers can flag generator-prior divergence",
+          "citation_id": "wu2025natural"
+        },
+        {
+          "name": "Time-aware retrieval (Chronos-style)",
+          "effect": "Event Evolution Graph enables temporally consistent understanding without model retraining; reduces similarity-bin accuracy gap",
+          "citation_id": "liu2026chronos"
+        }
+      ],
+      "couplings": [
+        {
+          "to_surface": "knowledge",
+          "claim": "The same finding anchors Module A (knowledge surface): a stale parametric prior on the generator side interacts with a fresh index on the retrieval side to produce accuracy loss",
+          "citation_id": "wu2025natural"
+        }
+      ]
+    },
+    {
+      "phenomenon": "Response Semantic Drift in diffusion-LM RAG",
+      "surface": "retrieval",
+      "metric": "Qualitative: copy-rate from context vs query-semantic precision across iterative denoising steps (no published RSD scalar)",
+      "typical_magnitude": "Qualitatively high copy-rate paired with low query-precision; drift shape differs from autoregressive LM drift on identical retrievals",
+      "citation_id": "rsd2026diffusion",
+      "mitigations": [
+        {
+          "name": "Query-semantic alignment across denoising",
+          "effect": "Denoising strategies that preserve alignment to the query mitigate RSD; specific mechanism qualitative in source paper",
+          "citation_id": "rsd2026diffusion"
+        },
+        {
+          "name": "Architecture-specific RAG discipline",
+          "effect": "RAG discipline cannot be architecture-agnostic; diffusion LMs need a second drift axis (denoising alignment) audited",
+          "citation_id": "rsd2026diffusion"
+        }
+      ],
+      "couplings": [
+        {
+          "to_surface": "knowledge",
+          "claim": "Generator architecture is a knowledge-surface variable; diffusion vs autoregressive produces different drift shapes on identical grounding",
+          "citation_id": "rsd2026diffusion"
+        }
+      ]
+    },
+    {
+      "phenomenon": "Continuous knowledge drift with Event Evolution Graph (Chronos)",
+      "surface": "retrieval",
+      "metric": "Qualitative: catastrophic forgetting and temporal inconsistency on real-world dynamic-event benchmark (no headline accuracy delta cited in drift-mission.tex)",
+      "typical_magnitude": "Qualitative: vanilla RAG and learning-based baselines fail on the benchmark; Chronos time-aware retrieval achieves temporal consistency without retraining",
+      "citation_id": "liu2026chronos",
+      "mitigations": [
+        {
+          "name": "Event Evolution Graph (Chronos)",
+          "effect": "Progressive temporal organization of retrieved evidence enables temporally consistent understanding without model retraining",
+          "citation_id": "liu2026chronos"
+        },
+        {
+          "name": "Time-aware retriever signals (not prompt-side)",
+          "effect": "Temporal signals embedded in retrieval itself rather than added as prompt-side scaffolding; prevents collapsed snapshots in index",
+          "citation_id": "liu2026chronos"
+        }
+      ],
+      "couplings": [
+        {
+          "to_surface": "knowledge",
+          "claim": "Temporal inconsistency in retrieval propagates to factual drift in generation; the couple runs through the event-evolution graph as the shared temporal scaffolding",
+          "citation_id": "liu2026chronos"
+        }
+      ]
+    },
+    {
+      "phenomenon": "Semantic laziness (SGI grounding failure)",
+      "surface": "retrieval",
+      "metric": "Semantic Grounding Index (SGI): ratio of angular distances response->question vs response->context on unit hypersphere",
+      "typical_magnitude": "Cohen's d 0.92-1.28 across 5 embedding models on HaluEval (n=5000); effect rises monotonically from d=0.61 at low Q-C separation to 1.27 at high separation; AUC 0.72->0.83 correspondingly",
+      "citation_id": "sgi2025grounding",
+      "mitigations": [
+        {
+          "name": "SGI geometric audit",
+          "effect": "Response-question-context angular triangle audit separates hallucination from faithful grounding at Cohen's d >=0.9",
+          "citation_id": "sgi2025grounding"
+        },
+        {
+          "name": "Grounding ablation test (context-removal)",
+          "effect": "Redact retrieved context; if original answer is regenerated, grounding was weak regardless of citations emitted",
+          "citation_id": "sgi2025grounding"
+        }
+      ],
+      "couplings": [
+        {
+          "to_surface": "alignment",
+          "claim": "Semantic laziness parallels retrieval laziness (raggov2025): generator-side laziness inside the response mirrors retriever-side laziness outside it, with both compromising grounding discipline",
+          "citation_id": "raggov2025laziness"
+        }
+      ]
+    },
+    {
+      "phenomenon": "Query drift and retrieval laziness in iterative RAG",
+      "surface": "retrieval",
+      "metric": "Qualitative: reformulation distance from original query and re-retrieval rate across iteration turns (no headline accuracy delta cited in drift-mission.tex)",
+      "typical_magnitude": "Qualitative: reformulated queries wander from the original information need; agent stops re-retrieving or retrieves superficial chunks once any response at all is possible",
+      "citation_id": "raggov2025laziness",
+      "mitigations": [
+        {
+          "name": "Query-drift gate with reformulation-distance monitor",
+          "effect": "Detect when reasoning-agent reformulations exceed a distance budget from original query; triggers re-grounding",
+          "citation_id": "raggov2025laziness"
+        },
+        {
+          "name": "Re-retrieval coverage threshold",
+          "effect": "Trigger mandatory re-retrieval whenever context coverage falls below a named threshold, preventing laziness-driven shortcut completions",
+          "citation_id": "raggov2025laziness"
+        }
+      ],
+      "couplings": [
+        {
+          "to_surface": "alignment",
+          "claim": "Retrieval laziness and semantic laziness (SGI) are complementary pressures on grounding: retriever outside the generator stops asking; generator inside stops departing toward context",
+          "citation_id": "sgi2025grounding"
+        }
+      ]
+    },
+    {
+      "phenomenon": "Context-format sensitivity and attention-entropy dilution",
+      "surface": "retrieval",
+      "metric": "Qualitative: accuracy variance across delimiter/marker/placement choices with semantic content held constant; attention-entropy profile across long contexts (no headline numerics surfaced in drift-mission.tex per 684.1 advisory)",
+      "typical_magnitude": "Qualitative: superficial format choices induce substantial accuracy swings; long context dilutes attention entropy and degrades focus on critical segments",
+      "citation_id": "contextualnorm2025",
+      "mitigations": [
+        {
+          "name": "Contextual Normalization",
+          "effect": "Lightweight adaptive strategy that standardizes context representations before generation; removes incidental format-driven drift",
+          "citation_id": "contextualnorm2025"
+        },
+        {
+          "name": "Balanced-entropy engineering (BEE-RAG)",
+          "effect": "Context-entropy watch identifies collapse points where critical-segment focus drops below threshold; redistribution preserves focus on high-relevance chunks",
+          "citation_id": "beerag2025entropy"
+        },
+        {
+          "name": "Context-length budget",
+          "effect": "Context length amplifies drift across turns; treating budget as drift-control knob complements BEE-RAG attention-entropy mechanism",
+          "citation_id": "contextlen2025drift"
+        }
+      ],
+      "couplings": [
+        {
+          "to_surface": "alignment",
+          "claim": "Context-length coupling to drift in multi-turn interactions (contextlen2025drift) intersects Dongre et al.'s alignment-surface KL equilibrium: both identify context as the drift-shaping substrate across turns",
+          "citation_id": "dongre2025equilibria"
+        }
+      ]
+    },
+    {
+      "phenomenon": "RAG-index concept-drift detection (classical ML tooling transfer)",
+      "surface": "retrieval",
+      "metric": "Reference-distribution + drift-metric + alarm-threshold (DriftLens idiom); specialization pattern from D3Bench microbenchmark (Evidently AI, NannyML, Alibi-Detect)",
+      "typical_magnitude": "Qualitative: Evidently AI leads on general data-drift detection; NannyML pinpoints timing of shifts and their downstream predictive-accuracy effect; smart-building->RAG transfer is proposed, not established",
+      "citation_id": "greco2024driftlens",
+      "mitigations": [
+        {
+          "name": "DriftLens unsupervised drift detection",
+          "effect": "Real-time concept-drift detection from deep-learning representations; index distribution serves as reference, new retrievals as window, alarm threshold triggers on divergence",
+          "citation_id": "greco2024driftlens"
+        },
+        {
+          "name": "D3Bench tool comparison (Evidently AI, NannyML, Alibi-Detect)",
+          "effect": "Microbenchmark finds tool specialization; Evidently AI general detection, NannyML timing pinpointing; both idioms transfer to RAG-index monitoring",
+          "citation_id": "muller2024d3bench"
+        }
+      ],
+      "couplings": [
+        {
+          "to_surface": "knowledge",
+          "claim": "An index that drifts from its source is the retrieval-surface analog of a pretraining prior drifting from the current world; the same tooling detects both under the reference/metric/threshold trinity",
+          "citation_id": "greco2024driftlens"
+        }
+      ]
+    },
+    {
+      "phenomenon": "Semantic drift in long-form generation",
+      "surface": "knowledge",
+      "metric": "Semantic Drift (SD) score on atomic facts; FActScore pipeline on 500-biography corpus",
+      "typical_magnitude": "SD score 0.77-0.79 across six LLMs (Falcon-7B/40B, text-davinci-003, GPT-3.5, GPT-4, LLaMA-2-70B); random-permutation p<0.02; drift falls within first 10% of facts in 37% of paragraphs",
+      "citation_id": "spataru2024sd",
+      "mitigations": [
+        {
+          "name": "Oracle early-stop at drift point",
+          "effect": "FActScore 44.6% -> 81.7% on LLaMA-2-70B; removes 92% of incorrect facts at cost of 58% of correct facts",
+          "citation_id": "spataru2024sd"
+        },
+        {
+          "name": "EOS-token top-k early-stop heuristic",
+          "effect": "70% factuality via top-k EOS encouragement; recovers a fraction of the oracle gain at near-zero decode-time cost",
+          "citation_id": "spataru2024sd"
+        },
+        {
+          "name": "SelfCheck-BERTScore early-stop signal",
+          "effect": "Tradeoff curve anchored at 70%+ accuracy; SC-BERTScore threshold used as stopping signal",
+          "citation_id": "manakul2023selfcheck"
+        },
+        {
+          "name": "SC-BERTScore resample-then-rerank",
+          "effect": "+8.7pp factuality (to 53.3%) via N-sample resample with SC-BERTScore rerank; composes additively with early-stop",
+          "citation_id": "spataru2024sd"
+        }
+      ],
+      "couplings": [
+        {
+          "to_surface": "retrieval",
+          "claim": "Tool-call / Toolformer-style external QA produced near-zero improvement in Spataru 2024 -- attributed to the model's inability to gate retrieval against need; this couples semantic drift to the retrieval surface via the retrieval-gating failure mode",
+          "citation_id": "spataru2024sd"
+        }
+      ]
+    },
+    {
+      "phenomenon": "Late-generation factuality decay (FActScore vs stopping position)",
+      "surface": "knowledge",
+      "metric": "FActScore on 500-biography long-form generations vs stopping position (end-of-paragraph, oracle drift point, SC-BERTScore threshold)",
+      "typical_magnitude": "Baseline 44.6% FActScore on LLaMA-2-70B at natural end-of-generation; oracle-stop at drift point raises to 81.7% (+37.1pp absolute)",
+      "citation_id": "spataru2024sd",
+      "mitigations": [
+        {
+          "name": "Oracle early-stop",
+          "effect": "44.6% -> 81.7% FActScore; removes 92% of incorrect and 58% of correct facts",
+          "citation_id": "spataru2024sd"
+        },
+        {
+          "name": "EOS-encouragement + SelfCheck-BERTScore hybrid",
+          "effect": "70%+ factuality via practical stopping signals; recovers a substantial fraction of the oracle gain",
+          "citation_id": "manakul2023selfcheck"
+        }
+      ],
+      "couplings": [
+        {
+          "to_surface": "retrieval",
+          "claim": "Oracle-stop gain of 37.1pp is not achievable via external retrieval in Spataru's setting; the knowledge-drift fix is truncation, not retrieval -- a structural hint that retrieval discipline (Module C) is insufficient for this phenomenon",
+          "citation_id": "spataru2024sd"
+        }
+      ]
+    },
+    {
+      "phenomenon": "Misinformation-induced belief shift",
+      "surface": "knowledge",
+      "metric": "Uncertainty deltas (entropy, perplexity, token probability) under clean vs false-info-injection vs random-info-injection prompt conditions",
+      "typical_magnitude": "+56.6% uncertainty on first exposure to false information; -52.8% uncertainty on repeated exposure (below untainted baseline) -- model has internalized the lie; signature visible across GPT-4o, GPT-3.5, LLaMA-2-13B, Mistral-7B",
+      "citation_id": "fastowski2024knowledge",
+      "mitigations": [
+        {
+          "name": "Prompt-hygiene / injection filtering",
+          "effect": "Prevents first-exposure uncertainty spike by excluding false-info prompts at the input boundary (upstream mitigation implied by the paper's methodology)",
+          "citation_id": "fastowski2024knowledge"
+        },
+        {
+          "name": "Repeated-exposure screening",
+          "effect": "Detect -52.8% uncertainty drop (sub-baseline confidence) as internalized-lie signature; flags second-stage failures not caught by first-stage injection filter",
+          "citation_id": "fastowski2024knowledge"
+        }
+      ],
+      "couplings": [
+        {
+          "to_surface": "retrieval",
+          "claim": "A retrieval index that serves prior false claims reproduces the same uncertainty dynamics as direct prompt injection; stale-index reactivation is the retrieval-surface analog of Fastowski's first-exposure spike",
+          "citation_id": "fastowski2024knowledge"
+        }
+      ]
+    },
+    {
+      "phenomenon": "Natural context drift against pretraining snapshot (knowledge reading)",
+      "surface": "knowledge",
+      "metric": "BoolQ accuracy vs paragraph-level semantic-similarity bin between edited passage and pretraining-era version; across six QA datasets and eight LLMs with public training data",
+      "typical_magnitude": ">30pp BoolQ accuracy drop between highest- and lowest-similarity bins; regression slopes exceed 70 across several LLMs; human annotators do not show the degradation",
+      "citation_id": "wu2025natural",
+      "mitigations": [
+        {
+          "name": "Recency-aware retrieval (handed to Module C)",
+          "effect": "Rewriting pretraining-form passages toward their current-form variants should recover a bounded fraction of the >30pp gap; mitigation path delegated to the retrieval surface",
+          "citation_id": "wu2025natural"
+        },
+        {
+          "name": "Human-annotator baseline as control",
+          "effect": "Humans do not degrade on edited passages at the same magnitude; the gap indexes LLM reliance on pretraining surface form, which is the intervention target",
+          "citation_id": "wu2025natural"
+        }
+      ],
+      "couplings": [
+        {
+          "to_surface": "retrieval",
+          "claim": "The passages that degrade model accuracy are retrieval targets in a typical RAG pipeline; Wu et al.'s >30pp BoolQ drop is simultaneously a retrieval-drift signal, establishing a direct knowledge -> retrieval coupling",
+          "citation_id": "wu2025natural"
+        }
+      ]
+    },
+    {
+      "phenomenon": "Cross-depth semantic trajectory (Layer-wise Semantic Dynamics)",
+      "surface": "knowledge",
+      "metric": "Margin-based contrastive alignment between hidden-state representations and factual encoder embeddings, per layer; F1 / AUROC / clustering accuracy on TruthfulQA + synthetic factual-hallucination corpus",
+      "typical_magnitude": "F1=0.92, AUROC=0.96, clustering accuracy=0.89 on evaluated corpus; factual responses preserve stable alignment across depth; hallucinations exhibit pronounced late-layer divergence from the truth manifold",
+      "citation_id": "mir2025lsd",
+      "mitigations": [
+        {
+          "name": "Layer-wise Semantic Dynamics (LSD) probe",
+          "effect": "Intrinsic hallucination detection via margin-based contrastive alignment; F1=0.92 / AUROC=0.96 on evaluated corpus (single-author, custom synthetic data alongside TruthfulQA -- framed as reported-on-corpus, not benchmark-standard)",
+          "citation_id": "mir2025lsd"
+        },
+        {
+          "name": "Late-layer intervention target",
+          "effect": "Mechanistic story (early=syntax, middle=semantic integration, late=factual refinement) localizes the failure to late-layer refinement, providing a concrete layer-index target for mitigation",
+          "citation_id": "mir2025lsd"
+        }
+      ],
+      "couplings": [
+        {
+          "to_surface": "alignment",
+          "claim": "Late-layer divergence is the depth locus where instruction-arbitration focal heads also operate (SAIL 2025 in Module B); shared mid-to-late-layer intervention surface suggests coordinated mitigation across knowledge + alignment surfaces",
+          "citation_id": "mir2025lsd"
+        }
+      ]
+    },
+    {
+      "phenomenon": "Intermediate-layer representational inconsistency probe",
+      "surface": "knowledge",
+      "metric": "Lightweight probe over intermediate-layer representations; AUROC on QA benchmarks across multiple LLM families",
+      "typical_magnitude": "SOTA AUROC on 10 of 12 settings across four QA benchmarks and three LLM families; up to +13 AUROC points over prior methods; <0.1% computational overhead running in parallel with decoding",
+      "citation_id": "drift2026probe",
+      "mitigations": [
+        {
+          "name": "Intermediate-representation probe",
+          "effect": "Detects hallucination before generation completes at <0.1% overhead; first sub-1% overhead mitigation in the Module-A surface",
+          "citation_id": "drift2026probe"
+        },
+        {
+          "name": "Probe-based router (default -> stronger model)",
+          "effect": "Confident queries route to default backbone; uncertain queries delegated to a stronger model; first practical probe-routing story in the knowledge-drift corpus",
+          "citation_id": "drift2026probe"
+        },
+        {
+          "name": "Intermediate-representation faithfulness motivation",
+          "effect": "Motivating intuition: intermediate representations encode reasoning signals not always faithfully expressed in final-layer output; used for motivation only (review_status=partial on Phase 684.1 editorial review)",
+          "citation_id": "lindsey2025faithful"
+        }
+      ],
+      "couplings": [
+        {
+          "to_surface": "alignment",
+          "claim": "Probe-based routing delegates uncertain queries to a stronger model; this intersects the alignment-drift surface whenever the stronger model has different alignment properties -- a routing decision is simultaneously an alignment decision",
+          "citation_id": "drift2026probe"
+        }
+      ]
+    }
+  ]
+}

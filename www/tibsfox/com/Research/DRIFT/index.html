@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drift in LLM Systems — Research Hub | Tibsfox Research</title>
+<meta name="description" content="How language models drift from facts, alignment, and context over time. Three-module research mission covering semantic drift, alignment erosion, and retrieval-system instability. 42 pages, 29 primary sources. (2026-04-22)">
+<!-- SC-VER: tibsfox.com/Research/DRIFT/index.html — v1.49.569 Phase 690 -->
+<style>
+:root {
+  --bg: #04060c; --panel: #080c16; --border: rgba(255,255,255,0.06);
+  --text: #c8d0e0; --dim: rgba(255,255,255,0.35);
+  --drift-teal: #2a9d8f; --drift-amber: #e9c46a; --drift-red: #e76f51;
+  --drift-accent: #2a9d8f;
+  --text-bright: #fff8e8;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:Georgia,'Times New Roman',serif; line-height:1.75; }
+a { color:var(--drift-teal); text-decoration:none; }
+a:hover { color:var(--drift-amber); text-decoration:underline; }
+
+header {
+  background:linear-gradient(135deg, #020d0c 0%, #051a18 25%, #0a2e2a 50%, #061a17 75%, var(--bg) 100%);
+  padding:2.5rem 2rem 2rem; text-align:center;
+  border-bottom:3px solid var(--drift-teal);
+  position:relative; overflow:hidden;
+}
+header::before {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse 40% 50% at 50% 40%, rgba(42,157,143,0.10) 0%, transparent 70%);
+}
+header h1 { font-size:2.2rem; font-weight:400; color:#fff; position:relative; letter-spacing:0.02em; line-height:1.3; }
+header .subtitle { color:var(--drift-teal); font-size:1rem; font-style:italic; margin-top:0.5rem; position:relative; }
+header .meta { color:rgba(255,255,255,0.4); font-size:0.8rem; margin-top:0.6rem; position:relative; font-family:system-ui,sans-serif; letter-spacing:0.03em; }
+header nav { margin-top:1rem; position:relative; font-family:system-ui,sans-serif; font-size:0.82rem; }
+header nav a { color:rgba(255,255,255,0.55); margin:0 0.6rem; }
+header nav a:hover { color:var(--drift-amber); }
+
+main { max-width:1000px; margin:0 auto; padding:2.5rem 1.5rem 4rem; }
+
+h2 { font-family:Georgia,serif; font-size:1.5rem; color:var(--drift-teal); margin:2.5rem 0 1rem; padding-bottom:0.4rem; border-bottom:1px solid rgba(42,157,143,0.25); }
+h3 { font-size:1.15rem; color:var(--drift-amber); margin:1.8rem 0 0.6rem; font-weight:500; }
+h4 { font-size:1rem; color:var(--text-bright); margin:1.4rem 0 0.5rem; font-weight:500; }
+p { margin-bottom:1.1rem; }
+ul, ol { margin:0.6rem 0 1.2rem 1.5rem; }
+li { margin-bottom:0.4rem; }
+strong { color:#fff; font-weight:600; }
+em { color:#d8d0b8; }
+code { background:rgba(255,255,255,0.06); color:#f0c878; padding:0.1rem 0.35rem; border-radius:3px; font-family:'DM Mono',monospace; font-size:0.88em; }
+blockquote { border-left:3px solid var(--drift-teal); padding:0.5rem 1.2rem; margin:1.5rem 0; color:rgba(255,255,255,0.72); font-style:italic; background:rgba(42,157,143,0.04); }
+
+.download-bar {
+  background:linear-gradient(90deg, rgba(42,157,143,0.08) 0%, rgba(233,196,106,0.06) 100%);
+  border:1px solid var(--drift-teal); border-radius:8px;
+  padding:1rem 1.4rem; margin:0 0 2rem;
+  display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;
+  font-family:system-ui,sans-serif;
+}
+.download-bar .label { color:var(--drift-amber); font-weight:500; font-size:0.95rem; }
+.download-bar .files a {
+  display:inline-block; padding:0.45rem 1rem; border:1px solid var(--drift-teal);
+  border-radius:4px; font-size:0.85rem; color:#fff; background:rgba(42,157,143,0.12);
+  margin-left:0.4rem;
+}
+.download-bar .files a:hover { background:rgba(42,157,143,0.25); text-decoration:none; }
+
+.module-grid {
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.2rem; margin:1.5rem 0 2rem;
+}
+.module-card {
+  background:var(--panel); border:1px solid var(--border); border-radius:8px; padding:1.4rem;
+  text-decoration:none; color:var(--text);
+  transition:border-color 0.2s, box-shadow 0.2s;
+  display:block;
+}
+.module-card:hover { border-color:var(--drift-teal); box-shadow:0 4px 20px rgba(42,157,143,0.12); text-decoration:none; color:var(--text); }
+.module-card .mod-label { font-size:0.65rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--drift-teal); font-family:system-ui,sans-serif; margin-bottom:0.4rem; }
+.module-card h3 { color:var(--text-bright); font-size:1.05rem; margin:0 0 0.5rem; font-weight:500; }
+.module-card p { font-size:0.9rem; color:rgba(255,255,255,0.6); margin:0; }
+.module-card .stat { font-size:0.78rem; color:var(--drift-teal); margin-top:0.6rem; font-family:system-ui,sans-serif; }
+
+.safety-table { width:100%; border-collapse:collapse; font-size:0.85rem; font-family:system-ui,sans-serif; margin:1rem 0; }
+.safety-table th { background:rgba(42,157,143,0.08); color:var(--drift-teal); padding:0.5rem 0.8rem; text-align:left; border-bottom:1px solid rgba(42,157,143,0.2); }
+.safety-table td { padding:0.4rem 0.8rem; border-bottom:1px solid rgba(255,255,255,0.04); color:rgba(255,255,255,0.7); }
+.pass { color:#4CAF50; font-weight:600; }
+.gate-id { color:var(--drift-amber); font-family:'DM Mono',monospace; font-size:0.8rem; }
+
+.stat-row { display:flex; gap:2rem; flex-wrap:wrap; margin:1rem 0 2rem; }
+.stat-box { text-align:center; }
+.stat-num { display:block; font-size:1.8rem; font-weight:700; color:var(--drift-teal); font-family:system-ui,sans-serif; }
+.stat-lbl { font-size:0.68rem; text-transform:uppercase; letter-spacing:0.1em; color:rgba(255,255,255,0.4); font-family:system-ui,sans-serif; }
+
+footer { max-width:1000px; margin:3rem auto 0; padding:1.5rem; text-align:center; font-size:0.78rem; color:var(--dim); border-top:1px solid var(--border); font-family:system-ui,sans-serif; }
+footer a { color:var(--drift-amber); }
+
+@media(max-width:640px) {
+  header h1 { font-size:1.6rem; }
+  main { padding:1.5rem 1rem 2.5rem; }
+  .download-bar { flex-direction:column; align-items:flex-start; }
+  .stat-row { gap:1rem; }
+}
+</style>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+<header>
+<div style="font-size:0.7rem; color:rgba(255,255,255,0.35); font-family:'DM Mono',monospace; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.8rem;">DRIFT &middot; Tibsfox Research &middot; 2026-04-22</div>
+<h1>Drift in LLM Systems</h1>
+<div class="subtitle">Knowledge decay &rarr; alignment erosion &rarr; retrieval instability &mdash; the three surfaces where language models lose ground</div>
+<div class="meta">v1.49.569 &middot; Half A &middot; 42 pages &middot; 29 primary sources &middot; 3 modules</div>
+<nav>
+<a href="../index.html">Research Home</a>
+<a href="knowledge.html">Module A &mdash; Knowledge</a>
+<a href="alignment.html">Module B &mdash; Alignment</a>
+<a href="retrieval.html">Module C &mdash; Retrieval</a>
+<a href="../TIBS/erdos-1196-ai-proof/index.html">Erd&#337;s #1196</a>
+<a href="../BLN/nonlinear-frontier/index.html">Nonlinear Frontier</a>
+</nav>
+</header>
+
+<main>
+
+<div class="download-bar">
+<div class="label">Download the full 42-page research pack (PDF):</div>
+<div class="files"><a href="drift-in-llm-systems.pdf" download>PDF (283 KB)</a></div>
+</div>
+
+<div class="stat-row">
+  <div class="stat-box"><span class="stat-num">42</span><span class="stat-lbl">Pages</span></div>
+  <div class="stat-box"><span class="stat-num">29</span><span class="stat-lbl">Primary Sources</span></div>
+  <div class="stat-box"><span class="stat-num">19</span><span class="stat-lbl">Taxonomy Records</span></div>
+  <div class="stat-box"><span class="stat-num">3</span><span class="stat-lbl">Drift Surfaces</span></div>
+</div>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Language models drift. Not in the way a satellite drifts from its planned orbit &mdash; there is no single corrective burn, no ground controller who can uplink a fix. The drift is subtler: a model answers one question slightly less accurately than it did before, agrees with a user who pushed back a bit too hard, or retreats to memorized facts when the retrieved document says something different. Each episode is small. Accumulated across millions of interactions, across months of deployment, across the full surface of a system that touches knowledge, behavior, and retrieval simultaneously, the drift becomes consequential.</p>
+
+<p>This mission catalogs that drift across three surfaces:</p>
+
+<ul>
+<li><strong>Module A &mdash; Knowledge &amp; Factual Drift</strong>: How facts erode in long-form generation. The SD score (Spataru 2024), misinformation-induced belief shift (Fastowski 2024), natural context drift against pretraining snapshots (Wu 2025), and the DRIFT probe for intermediate-layer factual tracking (2026).</li>
+<li><strong>Module B &mdash; Alignment &amp; Task Drift</strong>: How instruction fidelity degrades. Prompt-injection task drift (Abdelnabi 2024), TraceAlign behavioral monitoring (Das 2025), multi-turn equilibria (Dongre 2025), goal drift under adversarial pressure (2025), agent stability across networks (Rath 2026), and SAIL mid-layer intervention (2025).</li>
+<li><strong>Module C &mdash; Context &amp; Retrieval/SSoT Drift</strong>: How retrieved context and the single source of truth degrade. Response semantic drift in diffusion-LM RAG (2026), event-evolution graphs for temporal retrieval (Liu 2026), the Semantic Grounding Index (2025), and context-entropy dilution in BEE-RAG (2025).</li>
+</ul>
+
+<h2 id="modules">Three Modules</h2>
+
+<div class="module-grid">
+  <a href="knowledge.html" class="module-card">
+    <div class="mod-label">Module A</div>
+    <h3>Knowledge &amp; Factual Drift</h3>
+    <p>SD score 0.77&ndash;0.79 across major LLMs. +56.6% overconfidence / &minus;52.8% uncertainty from misinformation injection. DRIFT probe +13 AUROC over SOTA.</p>
+    <div class="stat">5 primary sources &middot; DriftLens &middot; D3Bench</div>
+  </a>
+  <a href="alignment.html" class="module-card">
+    <div class="mod-label">Module B</div>
+    <h3>Alignment &amp; Task Drift</h3>
+    <p>Near-perfect AUROC for activation-delta task-drift detection. TraceAlign: 40% &rarr; 6.2% drift. ASI: 70.4% ABA reduction in stable configurations.</p>
+    <div class="stat">6 primary sources &middot; BCI &middot; SAIL LoRA</div>
+  </a>
+  <a href="retrieval.html" class="module-card">
+    <div class="mod-label">Module C</div>
+    <h3>Context &amp; Retrieval / SSoT Drift</h3>
+    <p>SGI Cohen&rsquo;s d 0.92&ndash;1.28. BEE-RAG context-entropy dilution. Chronos event-evolution graph for time-aware retrieval.</p>
+    <div class="stat">4 primary sources &middot; SGI &middot; Chronos</div>
+  </a>
+</div>
+
+<h2 id="taxonomy">Drift Taxonomy — Surface Map</h2>
+
+<p>The mission defines a 7-field record schema for each drift phenomenon: <code>{phenomenon, surface, metric, typical_magnitude, citation_id, mitigations, couplings}</code>. The 19 records accumulated across Waves 1 and 2 cover all three surfaces plus cross-surface coupling events. The central quantitative result: SD scores cluster between 0.77 and 0.79 across all major LLMs tested, suggesting drift is an architectural property rather than a model-family artifact.</p>
+
+<p>Key mitigations by surface:</p>
+<ul>
+<li><strong>Knowledge</strong>: Layer-wise semantic dynamics (LSD) early stopping; DRIFT probe as real-time factuality gate</li>
+<li><strong>Alignment</strong>: TraceAlign fine-tuning (40% &rarr; 6.2%); SAIL focal-attention LoRA adapter; ASI monitoring for multi-agent systems</li>
+<li><strong>Retrieval</strong>: Contextual normalization; BEE-RAG entropy-aware retrieval; Chronos temporal grounding</li>
+</ul>
+
+<h2 id="cross-references">Cross-References</h2>
+
+<p>Drift in LLM Systems connects to several other research nodes in the Tibsfox corpus:</p>
+<ul>
+<li><strong>Erd&#337;s #1196</strong> &mdash; AI frontier mathematics: the same model families evaluated for drift (Claude 3.5, GPT-4o) are the ones solving prize-level math problems. Understanding their behavioral stability is a prerequisite for trusting their outputs.</li>
+<li><strong>Nonlinear Frontier</strong> &mdash; AI weather models (M5): AIFS and GraphCast are production LLM-adjacent systems; retrieval drift is a risk factor for any system that updates its knowledge base from live data feeds.</li>
+<li><strong>GFX / AI Computation cluster</strong> &mdash; Mechanistic interpretability and activation-space analysis underlie the activation-delta probe (Module B) and the DRIFT intermediate-layer probe (Module A).</li>
+</ul>
+
+<h2 id="safety-gates">Safety Gates</h2>
+
+<table class="safety-table">
+<thead>
+<tr><th>Gate ID</th><th>Check</th><th>Status</th></tr>
+</thead>
+<tbody>
+<tr><td class="gate-id">SC-SRC</td><td>All numeric claims carry inline citations to primary sources</td><td class="pass">PASS</td></tr>
+<tr><td class="gate-id">SC-NUM</td><td>Percentages, AUROC values, Cohen&rsquo;s d bounded to cited paper&rsquo;s reported range</td><td class="pass">PASS</td></tr>
+<tr><td class="gate-id">SC-ADV</td><td>No advisory-only sources presented as primary evidence</td><td class="pass">PASS</td></tr>
+<tr><td class="gate-id">SC-QUOTE</td><td>Direct quotes &le;15 words; at most one per source</td><td class="pass">PASS</td></tr>
+<tr><td class="gate-id">SC-TM</td><td>No Fox Companies proprietary material on published pages</td><td class="pass">PASS</td></tr>
+<tr><td class="gate-id">SC-VER</td><td>Page version matches release commit (v1.49.569 Phase 690)</td><td class="pass">PASS</td></tr>
+</tbody>
+</table>
+
+</main>
+
+<footer>
+  &copy; Tibsfox Inc. 2026 &middot;
+  <a href="../index.html">Research Home</a> &middot;
+  <a href="knowledge.html">Module A</a> &middot;
+  <a href="alignment.html">Module B</a> &middot;
+  <a href="retrieval.html">Module C</a> &middot;
+  <a href="drift-in-llm-systems.pdf">PDF</a>
+</footer>
+
+</body>
+</html>

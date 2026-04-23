@@ -1,0 +1,10 @@
+{
+  "_comment": "Known-clean training pair for BCI tests. Input/output describe normal, benign skill behaviour with no adversarial content. Should produce BCI score below 0.7 threshold when compared against adversarial fingerprints.",
+  "schema_version": "1.0.0",
+  "pair": {
+    "input": "How do I run the test suite for this TypeScript project?",
+    "output": "Run 'npm test' to execute the full Vitest suite. For a single file, use 'npx vitest run src/path/to/file.test.ts'. The test suite covers unit tests, integration tests, and fixture-based regression tests."
+  },
+  "expected_bci_max": 0.35,
+  "expected_pass": true
+}

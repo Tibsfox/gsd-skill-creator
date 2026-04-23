@@ -1,0 +1,113 @@
+{
+  "$schema": "https://tibsfox.com/schemas/research-cross-references/v1.json",
+  "version": "1.0.0",
+  "description": "Edge graph connecting Tibsfox Research nodes. Phase 690 drift-hub seed (10 edges). Baseline constellation edges are in the constellation graph; this file tracks named semantic cross-reference edges only.",
+  "generated": "2026-04-22",
+  "node_count": 175,
+  "edge_count": 10,
+  "clusters": [
+    "PNW", "NASA", "S36", "SPS", "BLN", "CSP", "TIBS", "GFX", "MUK", "SOL", "AI-COMPUTATION", "DRIFT", "SYS"
+  ],
+  "edges": [
+    {
+      "id": "drift-hub-aar-01",
+      "source": "DRIFT",
+      "target": "AAR",
+      "type": "cross-cluster",
+      "label": "Drift-hub aligns with alignment audit research",
+      "weight": 0.82,
+      "direction": "bidirectional",
+      "notes": "The AAR alignment audit and drift-hub both address LLM behavioral fidelity; BCI / ASI metrics generalize the AAR concern"
+    },
+    {
+      "id": "drift-hub-llm-01",
+      "source": "DRIFT",
+      "target": "LLM",
+      "type": "cluster-extension",
+      "label": "Drift-hub extends the AI cluster hub",
+      "weight": 0.95,
+      "direction": "bidirectional",
+      "notes": "DRIFT is the primary v1.49.569 node in the AI & Computation cluster; connects to Erdos-1196 and Nonlinear Frontier M5 AI weather"
+    },
+    {
+      "id": "drift-hub-sst-01",
+      "source": "DRIFT",
+      "target": "SST",
+      "type": "cluster-member",
+      "label": "Drift-hub member of AI & Computation (SST) cluster",
+      "weight": 0.90,
+      "direction": "from-source",
+      "notes": "SST is the AI & Computation Rosetta cluster; DRIFT joins as 6th member alongside erdos-1196, GFX, BLN/M5, CSP"
+    },
+    {
+      "id": "drift-hub-staging-scope-drift-01",
+      "source": "DRIFT",
+      "target": "STAGING-LAYER",
+      "type": "concept-bridge",
+      "label": "Scope drift in staging layer mirrors Module D §2",
+      "weight": 0.70,
+      "direction": "bidirectional",
+      "notes": "Phase 684 CONTEXT.md D-09 Module D §2 identifies scope drift as a cross-surface phenomenon; the staging-layer research node is the engineering analog"
+    },
+    {
+      "id": "drift-module-a-knowledge-01",
+      "source": "DRIFT/knowledge",
+      "target": "data-science-knowledge-drift",
+      "type": "concept-anchored",
+      "label": "Module A anchors to data-science-knowledge-drift concept",
+      "weight": 0.88,
+      "direction": "from-source",
+      "notes": "Module A (knowledge.html) is the primary research expression of the data-science-knowledge-drift college concept"
+    },
+    {
+      "id": "drift-module-b-alignment-01",
+      "source": "DRIFT/alignment",
+      "target": "ai-computation-alignment-drift",
+      "type": "concept-anchored",
+      "label": "Module B anchors to ai-computation-alignment-drift concept",
+      "weight": 0.92,
+      "direction": "from-source",
+      "notes": "Module B (alignment.html) is the primary research expression of the ai-computation-alignment-drift college concept"
+    },
+    {
+      "id": "drift-module-c-retrieval-01",
+      "source": "DRIFT/retrieval",
+      "target": "ai-computation-grounding-faithfulness",
+      "type": "concept-anchored",
+      "label": "Module C anchors to ai-computation-grounding-faithfulness concept",
+      "weight": 0.90,
+      "direction": "from-source",
+      "notes": "Module C (retrieval.html) is the primary research expression of the ai-computation-grounding-faithfulness college concept (SGI section)"
+    },
+    {
+      "id": "drift-hub-erdos-01",
+      "source": "DRIFT",
+      "target": "TIBS/erdos-1196-ai-proof",
+      "type": "thematic-sibling",
+      "label": "Drift and Erdos-1196 share AI frontier framing",
+      "weight": 0.65,
+      "direction": "bidirectional",
+      "notes": "Both DRIFT and Erdos-1196 concern the same model families (Claude 3.5, GPT-4o) in different operational modes: one drifting from instructions, the other solving prize mathematics"
+    },
+    {
+      "id": "drift-hub-nlf-01",
+      "source": "DRIFT",
+      "target": "BLN/nonlinear-frontier",
+      "type": "thematic-sibling",
+      "label": "Drift M5 weather models share AI-computation concern with NLF",
+      "weight": 0.58,
+      "direction": "bidirectional",
+      "notes": "NLF Module 5 (AIFS, GraphCast) are LLM-adjacent production systems; retrieval drift is a risk in live-data AI weather pipelines"
+    },
+    {
+      "id": "drift-hub-adaptive-systems-01",
+      "source": "DRIFT",
+      "target": "adaptive-systems",
+      "type": "college-bridge",
+      "label": "Drift hub bridges to adaptive-systems department",
+      "weight": 0.78,
+      "direction": "bidirectional",
+      "notes": "Context-equilibrium and ASI (adaptive-systems dept concepts) are direct theoretical grounding for Module B findings on multi-turn drift dynamics"
+    }
+  ]
+}
