@@ -6,11 +6,11 @@ Each version links to a detailed release notes directory with full feature descr
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 612 releases · 609 with retrospectives · 607 with extracted lessons · quality A:603 B:1 C:0 D:2 F:6 (avg 97) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 612 releases · 609 with retrospectives · 608 with extracted lessons · quality A:603 B:1 C:0 D:2 F:6 (avg 97) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Retro | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|-------|---------|---------|-------|
-| [v1.49.569](release-notes/v1.49.569) | Drift in LLM Systems | 2026-04-23 | — | 18 | — | [✓](release-notes/v1.49.569/chapter/03-retrospective.md) | — | F 19 |  |
+| [v1.49.569](release-notes/v1.49.569) | Drift in LLM Systems | 2026-04-23 | — | 18 | — | [✓](release-notes/v1.49.569/chapter/03-retrospective.md) | [8](release-notes/v1.49.569/chapter/04-lessons.md) | F 19 |  |
 | [v1.49.568](release-notes/v1.49.568) | Nonlinear Frontier | 2026-04-23 | 34 | 5 | — | [✓](release-notes/v1.49.568/chapter/03-retrospective.md) | [4](release-notes/v1.49.568/chapter/04-lessons.md) | F 24 |  |
 | [v1.49.567](release-notes/v1.49.567) | Degree 62: The Ground Beneath the Survey | 2026-04-22 | 1 | — | — | — | — | F 17 |  |
 | [v1.49.566](release-notes/v1.49.566) | Degree 61: The Completion of the Survey | 2026-04-22 | 1 | — | — | [✓](release-notes/v1.49.566/chapter/03-retrospective.md) | [5](release-notes/v1.49.566/chapter/04-lessons.md) | F 43 |  |
