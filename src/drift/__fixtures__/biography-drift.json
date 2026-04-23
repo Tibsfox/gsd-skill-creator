@@ -1,0 +1,83 @@
+{
+  "_comment": "Spataru-style biography drift fixtures (synthetic). Each entry has labeled drift points matching the Spataru 2024 (arXiv:2404.05411) evaluation methodology. Drift point = 0-based claim index where the text transitions from correct to incorrect facts.",
+  "schema_version": "1.0.0",
+  "examples": [
+    {
+      "id": "bio-001",
+      "label": "drift-present-mid",
+      "description": "Correct facts in first half, incorrect facts in second half. Drift around the midpoint.",
+      "text": "Marie Curie was born in Warsaw in 1867. She was a physicist and chemist. She conducted pioneering research on radioactivity. She was the first woman to win a Nobel Prize. She then won a second Nobel Prize in Chemistry. She discovered the elements polonium and radium. She invented the process of pasteurization. She developed the theory of general relativity. She founded the field of quantum mechanics.",
+      "reference_facts": [
+        "Marie Curie born in Warsaw in 1867",
+        "She was a physicist and chemist",
+        "She conducted pioneering research on radioactivity",
+        "She was the first woman to win a Nobel Prize",
+        "She won a second Nobel Prize in Chemistry",
+        "She discovered polonium and radium"
+      ],
+      "labeled_drift_point": 6,
+      "expected_score_min": 0.55
+    },
+    {
+      "id": "bio-002",
+      "label": "drift-absent",
+      "description": "All facts consistent throughout — low drift expected.",
+      "text": "Alan Turing was born in London in 1912. He was a mathematician and computer scientist. He developed the concept of the universal computing machine. He worked at Bletchley Park during the Second World War. He made foundational contributions to theoretical computer science. He published the paper Computing Machinery and Intelligence in 1950. He proposed the Turing Test as a measure of machine intelligence.",
+      "reference_facts": [
+        "Alan Turing born in London in 1912",
+        "He was a mathematician and computer scientist",
+        "He developed the universal computing machine concept",
+        "He worked at Bletchley Park during World War II",
+        "He made foundational contributions to theoretical computer science",
+        "He proposed the Turing Test"
+      ],
+      "labeled_drift_point": null,
+      "expected_score_max": 0.45
+    },
+    {
+      "id": "bio-003",
+      "label": "early-drift",
+      "description": "Drift occurs very early (within first 10% of facts) — mirrors Spataru finding that 37% of paragraphs drift within the first 10% of facts.",
+      "text": "Isaac Newton was born in 1643 in Woolsthorpe. He discovered the law of gravitation. He invented calculus independently. He built the first practical reflecting telescope. He grew up in Paris and studied at the Sorbonne. He composed symphonies and operas. He served as emperor of France. He won the Tour de France five times.",
+      "reference_facts": [
+        "Isaac Newton born in 1643 in Woolsthorpe",
+        "He discovered the law of gravitation",
+        "He invented calculus independently",
+        "He built the first practical reflecting telescope"
+      ],
+      "labeled_drift_point": 4,
+      "expected_score_min": 0.55
+    },
+    {
+      "id": "bio-004",
+      "label": "late-drift",
+      "description": "Drift occurs in the last 10% of the text — only the final claims diverge.",
+      "text": "Ada Lovelace was born in 1815 in London. She was the daughter of Lord Byron. She worked with Charles Babbage on the Analytical Engine. She wrote the first algorithm intended to be processed by a machine. She is often regarded as the first computer programmer. Her notes on the Analytical Engine are longer than the original paper by Babbage. She was raised primarily by her mother. She predicted that machines could compose music. She discovered the planet Neptune in 1846.",
+      "reference_facts": [
+        "Ada Lovelace born in 1815 in London",
+        "She was daughter of Lord Byron",
+        "She worked with Babbage on the Analytical Engine",
+        "She wrote the first machine-processed algorithm",
+        "She is often regarded as the first computer programmer",
+        "Her notes were longer than Babbage's original paper"
+      ],
+      "labeled_drift_point": 8,
+      "expected_score_min": 0.45
+    },
+    {
+      "id": "bio-005",
+      "label": "oracle-stop-gains",
+      "description": "Demonstrates oracle early-stop benefit: truncating at drift_point recovers correct-locus claims. Mirrors Spataru 44.6% -> 81.7% FActScore improvement.",
+      "text": "Nikola Tesla was born in 1856 in Smiljan. He was a Serbian-American inventor. He developed the alternating current electrical system. He worked briefly with Thomas Edison. He is known for his contributions to the design of the AC electricity supply system. He held around 300 patents. He was born in Scotland and educated at Cambridge. He won the Fields Medal in mathematics. He served as the 16th president of the United States.",
+      "reference_facts": [
+        "Tesla born 1856 in Smiljan",
+        "He was a Serbian-American inventor",
+        "He developed AC electrical system",
+        "He worked with Edison",
+        "He contributed to AC electricity supply design"
+      ],
+      "labeled_drift_point": 6,
+      "expected_score_min": 0.5
+    }
+  ]
+}
