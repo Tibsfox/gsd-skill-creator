@@ -7,13 +7,15 @@
 **Predecessor on dev:** v1.49.568 — Nonlinear Frontier (`0d31f2058`).
 **Milestone tip:** `da614a3ff` — Phase 698 unified telemetry schema + default-off invariance tests.
 
-## Headline: Drift in LLM Systems — Research Reference + Substrate Defenses
+## Summary
 
 v1.49.569 answers two questions simultaneously: (1) what is the current academic understanding of how LLMs drift — across knowledge, alignment, and retrieval surfaces — with full citation discipline and 29-source coverage? And (2) what does the gsd-skill-creator codebase do about it?
 
 The answer to (1) is `drift-mission-final.pdf` (42 pages, 3-pass xelatex, CAPCOM W3 hard-block gate signed GO). The answer to (2) is seven defense modules in `src/drift/`, all default off, byte-identical to v1.49.568 when not enabled.
 
-## What's New
+## Key Features
+
+### What's New
 
 ### Research reference (`drift-mission-final.pdf`)
 
@@ -129,6 +131,31 @@ See `milestone-package/sources/index.bib` for full bibliography with arXiv IDs a
 ### Academic lineage
 
 Research methodology follows the CRAFT framework (Concept, Research, Analyze, Find, Test) across all four modules. Numerical citations and quote discipline enforced by the CAPCOM gate chain. Full editorial review of all 29 papers conducted by Opus (Phase 684.1).
+
+## Retrospective
+
+Full per-phase retrospective with delta tables, process observations, surprises, and deferred items lives in [`RETROSPECTIVE.md`](./RETROSPECTIVE.md). Short version below.
+
+### What Worked
+
+1. **Inserting a full-PDF Opus editorial pass between W0 foundation and W1 parallel surveys.** Phase 684.1 resolved 24 papers as `supported` and flagged 5 as `partial` before Wave 1 even started — single highest-return intervention in the milestone. Without it, partials would have propagated into the 42-page final doc and surfaced at the W3 hard-block gate under emergency-revision conditions.
+2. **Parallel Wave-1 tracks with cache-hot session residency and independent outputs.** Phases 685/686/687 ran concurrently in a single session with zero file contention — each wrote to a distinct `modules/<module>.tex`. Token share reached 43%, above the DRIFT-10 40% floor.
+3. **Per-task atomic commits were load-bearing during API failures.** Two API 500s mid-Wave-7 (governance phases) interrupted execution. Both resumed from the last committed state with zero work loss.
+4. **Advisory mid-wave CAPCOM gates caught issues earlier than hard-block gates would have.** The W2 advisory gate tightened two loose renderings (Abdelnabi "near-perfect ROC AUC", Dongre stable-equilibrium framing) before Module D synthesis.
+5. **Default-off byte-identity held throughout.** Every Half B defense module shipped with flags false and a golden-output test. Consumers who haven't opted in see v1.49.568 byte-identical behavior.
+
+### Lessons Learned
+
+Eight durable, forward-applicable lessons from this milestone (full context in [`RETROSPECTIVE.md`](./RETROSPECTIVE.md) under `## Lessons Learned`):
+
+1. Insert an Opus editorial pass between W0 and W1 on any citation-heavy research milestone with ≥15 primary sources.
+2. Parallel Wave-1 tracks require cache-hot session residency + independent-outputs discipline.
+3. Per-task commit discipline is load-bearing during API 500s — never batch tasks into a single commit just because they're related.
+4. Advisory CAPCOM gates catch real issues earlier than hard-block gates would.
+5. Default-off invariance is a zero-blast-radius upgrade contract — pair every new feature with a golden-output test that proves byte-identity when the flag is false.
+6. The two-halves single-release pattern (research → substrate defenses) is repeatable for any topic where a formal investigation precedes implementation.
+7. Unplanned utilities that emerge during execution are signals — evaluate for reuse before archiving. `scripts/drift/bci-validate.mjs` wasn't in the roadmap but now ships permanent.
+8. Test density is a module-property, not a milestone-property. Don't impose uniform per-module test counts; let the surface dictate the density.
 
 ## Links
 
