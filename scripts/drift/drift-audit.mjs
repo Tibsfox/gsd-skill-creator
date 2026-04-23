@@ -115,6 +115,20 @@ function parseArgs(argv) {
   return result;
 }
 
+// Reject --since values that don't parse as a real ISO-8601 date.
+// Without this guard, a garbage value like "not-a-date" slips through
+// the lexical `ts < since` comparison and silently filters all events
+// out — producing a false "clean" audit in CI.
+function isValidISODate(value) {
+  if (typeof value !== 'string' || value.length === 0) return false;
+  const parsed = new Date(value);
+  if (Number.isNaN(parsed.getTime())) return false;
+  // Require at least a date-shaped prefix (YYYY-MM-DD). Node's Date
+  // constructor will happily accept "2026" or "Mar 3" which aren't
+  // well-suited for the lexical string compare used by the filter.
+  return /^\d{4}-\d{2}-\d{2}/.test(value);
+}
+
 // ---------------------------------------------------------------------------
 // Log reader
 // ---------------------------------------------------------------------------
@@ -288,12 +302,19 @@ function renderJSON(scorecard, opts) {
 // Main
 // ---------------------------------------------------------------------------
 
-function main() {
+export function main() {
   const opts = parseArgs(process.argv);
 
   if (!['markdown', 'json'].includes(opts.format)) {
     console.error(`ERROR: Unknown format "${opts.format}". Use markdown or json.`);
-    process.exit(1);
+    process.exit(2);
+  }
+
+  if (opts.since !== null && !isValidISODate(opts.since)) {
+    console.error(
+      `ERROR: Invalid --since date: "${opts.since}". Expected ISO-8601 (e.g. 2026-04-23T00:00:00Z).`,
+    );
+    process.exit(2);
   }
 
   const raw = readEvents(opts.logs);
@@ -309,4 +330,7 @@ function main() {
   process.exit(scorecard.totalCritical === 0 ? 0 : 1);
 }
 
-main();
+// Only run main when invoked directly (not when imported as a module).
+if (import.meta.url === `file://${process.argv[1]}`) {
+  main();
+}
