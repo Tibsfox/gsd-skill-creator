@@ -1,0 +1,55 @@
+{
+  "description": "Synthetic context-embedding sets for context-entropy guard tests (DRIFT-25). Each example has a response embedding and a set of context embeddings, plus an expected classification. Vectors chosen so cosine-similarity weights produce the stated entropy class.",
+  "examples": [
+    {
+      "id": "healthy-01",
+      "label": "healthy",
+      "description": "Response is equidistant from 4 diverse context segments — uniform weights, H_norm=1.0.",
+      "response_embedding": [0.50, 0.50, 0.50, 0.50],
+      "context_embeddings": [
+        [1.0, 0.0, 0.0, 0.0],
+        [0.0, 1.0, 0.0, 0.0],
+        [0.0, 0.0, 1.0, 0.0],
+        [0.0, 0.0, 0.0, 1.0]
+      ],
+      "expected_classification": "healthy"
+    },
+    {
+      "id": "collapsed-01",
+      "label": "collapsed",
+      "description": "Response is identical to segment 0 and opposite to segments 1-3 — extreme collapse. cosine(resp,seg0)=1 -> weight=1.0; cosine(resp,seg1..3)=-1 -> weight=0. H_norm~=0.",
+      "response_embedding": [1.0, 0.0, 0.0, 0.0],
+      "context_embeddings": [
+        [1.0, 0.0, 0.0, 0.0],
+        [-1.0, 0.0, 0.0, 0.0],
+        [-1.0, 0.0, 0.0, 0.0],
+        [-1.0, 0.0, 0.0, 0.0]
+      ],
+      "expected_classification": "collapsed"
+    },
+    {
+      "id": "healthy-02",
+      "label": "healthy",
+      "description": "3 segments with similar cosine similarity to response — high entropy.",
+      "response_embedding": [0.57, 0.57, 0.57, 0.0],
+      "context_embeddings": [
+        [0.80, 0.60, 0.0, 0.0],
+        [0.60, 0.80, 0.0, 0.0],
+        [0.70, 0.70, 0.10, 0.0]
+      ],
+      "expected_classification": "healthy"
+    },
+    {
+      "id": "collapsed-02",
+      "label": "collapsed",
+      "description": "Response strongly aligned with segment 0 and strongly anti-aligned with segments 1-2. Near-total collapse.",
+      "response_embedding": [0.0, 0.0, 1.0, 0.0],
+      "context_embeddings": [
+        [0.0, 0.0, 1.0, 0.0],
+        [0.0, 0.0, -1.0, 0.0],
+        [0.0, 0.0, -1.0, 0.0]
+      ],
+      "expected_classification": "collapsed"
+    }
+  ]
+}
