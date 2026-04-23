@@ -1,0 +1,52 @@
+{
+  "_comment": "Synthetic activation-delta fixtures for task-drift monitor tests. Each example represents before/after activation vectors at a CAPCOM-gate boundary. Vectors are 8-dimensional for test compactness (production uses 768+ dims). Methodology: Abdelnabi et al. 2024 (arXiv:2406.00799).",
+  "schema_version": "1.0.0",
+  "examples": [
+    {
+      "id": "clean-pass-001",
+      "label": "clean",
+      "description": "Nearly-identical activations across gate boundary — no injection signal.",
+      "before": [0.10, 0.22, 0.35, 0.48, 0.61, 0.74, 0.87, 0.95],
+      "after":  [0.11, 0.23, 0.34, 0.47, 0.62, 0.73, 0.88, 0.94],
+      "expected_magnitude_max": 0.05,
+      "expected_classification": "clean"
+    },
+    {
+      "id": "prompt-injection-001",
+      "label": "drift",
+      "description": "Prompt-injection-style activation shift — large delta in several dimensions, simulating adversarial instruction injection at a gate boundary.",
+      "before": [0.10, 0.20, 0.30, 0.40, 0.50, 0.60, 0.70, 0.80],
+      "after":  [0.90, 0.85, 0.80, 0.75, 0.10, 0.05, 0.02, 0.01],
+      "expected_magnitude_min": 0.8,
+      "expected_classification": "drift"
+    },
+    {
+      "id": "suspicious-boundary-001",
+      "label": "suspicious",
+      "description": "Moderate activation shift — between clean and drift bands, possibly an early-stage injection or model-temperature artifact.",
+      "before": [0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50],
+      "after":  [0.60, 0.65, 0.45, 0.40, 0.55, 0.60, 0.50, 0.45],
+      "expected_magnitude_min": 0.1,
+      "expected_magnitude_max": 0.5,
+      "expected_classification": "suspicious"
+    },
+    {
+      "id": "prompt-injection-002",
+      "label": "drift",
+      "description": "High-magnitude injection: goal-substitution pattern where the after-activation cluster moves toward an entirely different task-direction vector.",
+      "before": [0.20, 0.80, 0.20, 0.80, 0.20, 0.80, 0.20, 0.80],
+      "after":  [0.80, 0.20, 0.80, 0.20, 0.80, 0.20, 0.80, 0.20],
+      "expected_magnitude_min": 1.0,
+      "expected_classification": "drift"
+    },
+    {
+      "id": "clean-pass-002",
+      "label": "clean",
+      "description": "Noise-level delta only — within expected variance of a stable gate crossing.",
+      "before": [0.33, 0.66, 0.99, 0.11, 0.44, 0.77, 0.22, 0.55],
+      "after":  [0.34, 0.65, 0.98, 0.12, 0.43, 0.76, 0.23, 0.54],
+      "expected_magnitude_max": 0.03,
+      "expected_classification": "clean"
+    }
+  ]
+}
