@@ -53,6 +53,11 @@ data-data-sources
 - data-science-data-assimilation-4dvar -- 4D-Variational data assimilation (ECMWF IFS baseline)
 - data-science-ai-weather-pipeline -- 2022-2026 ML weather-prediction progression (FourCastNet → AIFS)
 
+### Drift in LLM Systems (3 concepts, Phase 690)
+- data-science-semantic-drift -- SD score 0.77–0.79 across major LLMs; 37% paragraph drift onset (Spataru 2024)
+- data-science-knowledge-drift -- Misinformation-induced belief shift: +56.6% overconfidence / -52.8% uncertainty (Fastowski 2024)
+- data-science-drift-detection -- DriftLens + D3Bench tooling; MMD/ADWIN/Page-Hinkley adapted to LLM context (Greco 2024, Muller 2024)
+
 ## Calibration Models
 
 - Statistical models -- quantitative domains require precision calibration
