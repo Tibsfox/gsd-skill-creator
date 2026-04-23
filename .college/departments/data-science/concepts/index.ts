@@ -3,3 +3,4 @@
  * @module departments/data-science/concepts
  */
 export { dataAssimilation4dvar } from './data-assimilation-4dvar.js';
+export { aiWeatherPipeline } from './ai-weather-pipeline.js';
