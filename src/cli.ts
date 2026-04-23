@@ -1633,6 +1633,13 @@ async function main() {
       break;
     }
 
+    case 'drift': {
+      const { driftCommand } = await import('./drift/cli.js');
+      const exitCode = await driftCommand(args.slice(1));
+      if (exitCode !== 0) process.exit(exitCode);
+      break;
+    }
+
     case 'model-affinity':
     case 'aff': {
       const { modelAffinityCommand } = await import('./model-affinity/cli.js');
@@ -1846,6 +1853,7 @@ Commands:
   pack              Browse educational packs (list, info)
   contrib           Manage contrib zone (upstream, downstream, publishing)
   www               Manage www zone (status)
+  drift             Drift-telemetry audit + governance (subcommand: audit)
   help, -h          Show this help message
   --version, -V     Show version information
 
