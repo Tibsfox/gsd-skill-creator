@@ -8,3 +8,5 @@ export { aiWeatherPipeline } from './ai-weather-pipeline.js';
 export { semanticDrift } from './semantic-drift.js';
 export { knowledgeDrift } from './knowledge-drift.js';
 export { driftDetection } from './drift-detection.js';
+// Convergent Substrate (Phase 707, v1.49.570)
+export { compressionSpectrum } from './compression-spectrum.js';
