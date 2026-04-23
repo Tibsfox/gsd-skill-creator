@@ -10,6 +10,7 @@
 
 import { readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
+import { pathToFileURL } from 'node:url';
 import type { CollegeLoader } from './college-loader.js';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -80,8 +81,19 @@ export class TrySessionRunner {
   /**
    * Load and start a session from a department's try-sessions/ directory.
    *
-   * Reads `{basePath}/{departmentId}/try-sessions/{sessionId}.json`
-   * and initializes a runner with the parsed definition.
+   * Resolution order (Phase 679 D-07 dual-loader):
+   *   1. `{basePath}/{departmentId}/try-sessions/{sessionId}.ts`  (dev sources)
+   *   2. `{basePath}/{departmentId}/try-sessions/{sessionId}.js`  (compiled / dist)
+   *   3. `{basePath}/{departmentId}/try-sessions/{sessionId}.json` (legacy JSON path)
+   *
+   * TypeScript/JavaScript modules are loaded via dynamic `import()`; JSON files
+   * are read with `readFileSync` and parsed. The TypeScript path wins when both
+   * a TS/JS module and a JSON file are present under the same session id.
+   *
+   * For TS/JS modules, the exported TrySessionDefinition is resolved by
+   * scanning the module's exports for a value whose shape matches the
+   * interface (has `id` and an array `steps`); a `default` export is used as
+   * a fallback when no named export shape-matches.
    */
   static async loadSession(
     loader: CollegeLoader,
@@ -89,16 +101,52 @@ export class TrySessionRunner {
     sessionId: string,
   ): Promise<TrySessionRunner> {
     const deptPath = loader.getDepartmentPath(departmentId);
-    const sessionPath = join(deptPath, 'try-sessions', `${sessionId}.json`);
+    const tsPath = join(deptPath, 'try-sessions', `${sessionId}.ts`);
+    const jsPath = join(deptPath, 'try-sessions', `${sessionId}.js`);
+    const jsonPath = join(deptPath, 'try-sessions', `${sessionId}.json`);
 
-    if (!existsSync(sessionPath)) {
+    // Prefer TypeScript/JavaScript module over JSON when both exist.
+    // The .ts branch handles dev sources (loaded via ts-aware runners such as
+    // vitest/tsx); the .js branch handles post-build consumption from dist.
+    const tsExists = existsSync(tsPath);
+    const jsExists = existsSync(jsPath);
+    if (tsExists || jsExists) {
+      const modulePath = tsExists ? tsPath : jsPath;
+      // `pathToFileURL` keeps dynamic `import()` working on both POSIX and Windows.
+      const mod = await import(pathToFileURL(modulePath).href);
+
+      // Resolve the exported TrySessionDefinition by shape (duck-typed).
+      // This lets each try-session module pick its own export name
+      // (e.g., `solitonsSession`, `k41CascadeSession`) without a runtime
+      // registry. Fall back to `default` export if no named export matches.
+      const candidates = Object.values(mod);
+      const def = candidates.find(
+        (v): v is TrySessionDefinition =>
+          typeof v === 'object' && v !== null &&
+          'id' in v && 'steps' in v && Array.isArray((v as { steps?: unknown }).steps),
+      ) ?? (mod as { default?: TrySessionDefinition }).default;
+
+      if (!def) {
+        throw new Error(
+          `No TrySessionDefinition export found in ${modulePath}. ` +
+          `Expected a named or default export matching the TrySessionDefinition interface.`,
+        );
+      }
+      return new TrySessionRunner(def);
+    }
+
+    // Fall back to the legacy JSON path. Preserves byte-identical behavior for
+    // the 6 existing JSON sessions (first-reaction, first-experiment,
+    // first-proof, first-venture, first-dataset, first-inquiry) so they keep
+    // loading unchanged through this extension.
+    if (!existsSync(jsonPath)) {
       throw new Error(
         `Try-session '${sessionId}' not found in department '${departmentId}'. ` +
-        `Expected file: ${sessionPath}`,
+        `Expected file: ${tsPath} (or ${jsonPath}).`,
       );
     }
 
-    const content = readFileSync(sessionPath, 'utf-8');
+    const content = readFileSync(jsonPath, 'utf-8');
     const definition: TrySessionDefinition = JSON.parse(content);
 
     return new TrySessionRunner(definition);

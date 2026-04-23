@@ -22,6 +22,11 @@
 | Ratios and proportions | Algebra | Python, Pascal | Culinary: baker's percentages |
 | Logarithmic scales | Algebra | Python, C++, Fortran | Culinary: pH, taste perception |
 | Fractal geometry | Complex Analysis | Python, Lisp | Calibration: fractal expansion |
+| Solitons | Complex Analysis | Python, C++, Lisp | math-complex-numbers, math-exponential-decay |
+| Blow-up dynamics | Calculus | Python, C++, Lisp | math-solitons, math-exponential-decay |
+| Scale-critical equations | Calculus | Python, C++, Lisp | math-blow-up-dynamics, math-complex-numbers |
+| Erdős problem index | Algebra | Python, C++, Lisp | math-euler-formula, math-logarithmic-scales |
+| Millennium problem catalogue | Algebra | Python, C++, Lisp | math-erdos-problem-index, math-complex-numbers |
 
 ## Panels
 

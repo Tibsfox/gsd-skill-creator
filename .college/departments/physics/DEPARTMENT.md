@@ -49,3 +49,9 @@ phys-motion-kinematics
 - phys-quantum-basics -- Wave-particle duality, quantization, the photoelectric effect, and atomic spectra
 - phys-nuclear-physics -- Nuclear structure, radioactive decay, fission, and fusion
 - phys-cosmology -- The Big Bang, dark matter and energy, the expanding universe
+
+### Fluid Dynamics & Atmosphere (4 concepts)
+- physics-reynolds-similarity -- Dynamic similarity and the Reynolds number in fluid flows
+- physics-vorticity-stretching -- Vortex-stretching term in the incompressible Euler/NS vorticity equation
+- physics-k41-cascade -- Kolmogorov 1941 energy cascade and the -5/3 inertial-subrange spectrum
+- physics-primitive-equations -- Hydrostatic primitive equations for numerical weather prediction

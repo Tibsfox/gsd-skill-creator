@@ -1,0 +1,38 @@
+# Section-map for .planning/missions/nonlinear-systems-clouds/work/FINAL.md
+# Maps FINAL.md heading anchors to output directories.
+# The 4 live pages below shipped to tibsfox.com on 2026-04-22 via a bespoke
+# hand-render; this map + the scripts in this directory formalize that pattern
+# so any future research FINAL.md can carve the same way.
+#
+# Format:
+#   source:         path to the research FINAL.md relative to repo root
+#   outputs:        list of per-topic carves
+#     slug:             sub-path under www/tibsfox/com/Research/ (also the page URL)
+#     start_heading:    first full line of the section (exact match, Markdown headings are line-matched)
+#     end_heading:      first full line AFTER the section (carve stops BEFORE this line).
+#                       Use the next sibling heading, or the next top-level heading as a backstop.
+#     title:            <title> element and header H1 for the generated HTML
+#     source_pdf:       PDF to copy alongside index.html (matches 2026-04-22 layout)
+
+source: .planning/missions/nonlinear-systems-clouds/work/FINAL.md
+outputs:
+  - slug: TIBS/merle-breakthrough-2026
+    start_heading: "## Module 1 — Frank Merle and Highly Nonlinear PDEs"
+    end_heading: "## Module 2 — Fluid Dynamics: Mathematics and Physics"
+    title: "Frank Merle and the Nonlinear Frontier — Breakthrough 2026"
+    source_pdf: .planning/missions/nonlinear-systems-clouds/nonlinear-systems-clouds-open-problems.pdf
+  - slug: CSP/soliton-resolution
+    start_heading: "### 4. Contribution stream 2: Soliton resolution via channels of energy (with Thomas Duyckaerts and Carlos Kenig)"
+    end_heading: "### 5. Contribution stream 3: KdV soliton collision and blow-up"
+    title: "Soliton Resolution via Channels of Energy"
+    source_pdf: .planning/missions/nonlinear-systems-clouds/nonlinear-systems-clouds-open-problems.pdf
+  - slug: BLN/nonlinear-frontier
+    start_heading: "#### Arc 1 — Fluid → Cloud → Forecast chain (M1 → M2 → M4 → M5)"
+    end_heading: "#### Arc 2 — Latin-precision taxonomy (M3 ↔ SPS ↔ M6)"
+    title: "Nonlinear Frontier — Fluid, Cloud, Forecast Chain"
+    source_pdf: .planning/missions/nonlinear-systems-clouds/nonlinear-systems-clouds-open-problems.pdf
+  - slug: TIBS/erdos-1196-ai-proof
+    start_heading: "### 2. Erdős Problem #1196 — Solved by AI, April 13, 2026"
+    end_heading: "### 3. Other AI Contributions to Erdős Problems (2025–2026)"
+    title: "Erdős #1196 — First AI-Solved Erdős Problem"
+    source_pdf: .planning/missions/nonlinear-systems-clouds/nonlinear-systems-clouds-open-problems.pdf

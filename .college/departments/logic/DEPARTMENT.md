@@ -49,6 +49,9 @@ log-classification-principles
 - log-logic-in-law -- Burden of proof, presumption of innocence, legal reasoning structure
 - log-paradoxes -- Liar paradox, Russell's paradox -- boundaries of formal systems
 
+### AI & Formal Verification (1 concept)
+- logic-ai-verified-proof -- AI-proposed, formally-verified, human-audited mathematics (GPT-5.4 Pro / Erdős #1196 pattern)
+
 ## Calibration Models
 
 None currently -- future phases will add argument quality assessment models.
