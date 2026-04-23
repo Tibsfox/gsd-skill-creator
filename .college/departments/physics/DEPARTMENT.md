@@ -49,3 +49,6 @@ phys-motion-kinematics
 - phys-quantum-basics -- Wave-particle duality, quantization, the photoelectric effect, and atomic spectra
 - phys-nuclear-physics -- Nuclear structure, radioactive decay, fission, and fusion
 - phys-cosmology -- The Big Bang, dark matter and energy, the expanding universe
+
+### Fluid Dynamics & Atmosphere (4 concepts)
+- physics-reynolds-similarity -- Dynamic similarity and the Reynolds number in fluid flows
