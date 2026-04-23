@@ -11,3 +11,8 @@ export { eulerFormula } from './euler-formula.js';
 export { ratiosProportions } from './ratios-proportions.js';
 export { logarithmicScales } from './logarithmic-scales.js';
 export { fractalGeometry } from './fractal-geometry.js';
+export { solitons } from './solitons.js';
+export { blowUpDynamics } from './blow-up-dynamics.js';
+export { scaleCriticalEquations } from './scale-critical-equations.js';
+export { erdosProblemIndex } from './erdos-problem-index.js';
+export { millenniumProblemCatalogue } from './millennium-problem-catalogue.js';

@@ -1,0 +1,5 @@
+{
+  "type": "commonjs",
+  "private": true,
+  "description": "Scoped CommonJS context so dual-use UMD modules (microphysics.js, k41.js) load via require() in Node tests. Browser <script> tags are unaffected. See Phase 681 of v1.49.568 Nonlinear Frontier."
+}
