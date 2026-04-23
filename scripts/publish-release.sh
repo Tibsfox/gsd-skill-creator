@@ -124,3 +124,21 @@ else
   echo ""
   echo "Created: https://github.com/${REPO}/releases/tag/${TAG}"
 fi
+
+# --- Refresh RELEASE-HISTORY.md (Postgres release_history schema + docs/RELEASE-HISTORY.md) ---
+#
+# Idempotent; ingests the new release into the release_history schema, extracts
+# lessons/metrics, regenerates the top-level index. Non-blocking if it fails
+# so a flaky DB doesn't prevent the GitHub release from being marked published.
+
+echo ""
+echo "Refreshing docs/RELEASE-HISTORY.md (release_history schema)..."
+if [ -x "${0%/*}/release-history-refresh.sh" ]; then
+  "${0%/*}/release-history-refresh.sh" --fast --no-classify --quiet || {
+    echo ""
+    echo "WARN: release-history-refresh failed — docs/RELEASE-HISTORY.md may be stale."
+    echo "      Re-run manually: ./scripts/release-history-refresh.sh"
+  }
+else
+  echo "WARN: scripts/release-history-refresh.sh not executable; skipping index refresh."
+fi
