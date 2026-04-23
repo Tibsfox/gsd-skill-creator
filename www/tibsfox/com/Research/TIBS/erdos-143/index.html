@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Erdős #143 — Transfer-of-Method Analysis</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+  type="text/javascript"></script>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Erdős #143 — Transfer-of-Method Analysis</h1>
+</header>
+<h1 id="erdős-143-transfer-of-method-analysis">Erdős #143 —
+Transfer-of-Method Analysis</h1>
+<p><strong>Status:</strong> OPEN ($500 prize) — candidate for
+AI-assisted reduction following the #1196 breakthrough.
+<strong>Field:</strong> Primitive sets (arithmetic number theory).
+<strong>Last reviewed:</strong> 2026-04-23. <strong>Related:</strong> <a
+href="../erdos-1196-ai-proof/">Erdős #1196 — AI-Assisted Proof</a>.</p>
+<h2 id="claim">Claim</h2>
+<p>The techniques that resolved #1196 (Erdős–Sárközy–Szemerédi
+primitive-sum conjecture, solved April 13, 2026 by GPT-5.4 Pro in a
+single ~80-minute reasoning trace prompted by Liam “Eric” Price) may
+transfer to the adjacent primitive-sets problem #143 with modest
+adaptation. This page is the <strong>transfer-of-method</strong>
+analysis: what exactly carried the #1196 trace, which of those
+ingredients are independent of the specific primitive-sum target, and
+what a directed #143 attempt would look like.</p>
+<h2 id="evidence">Evidence</h2>
+<ol type="1">
+<li><p><strong>Same problem family.</strong> Both #143 and #1196 concern
+primitive sets (subsets of <span
+class="math inline">\(\mathbb{N}\)</span> where no element divides
+another). #1196 is the sum-limit question; #143 is a structurally
+adjacent density question. See ERDOS-TRACKER.md entry for #143 (“Related
+to #220 (proved) and Lichtman’s 2022 work”). The primitive-set universe
+itself — the restriction that no element divides another — is common to
+both; what changes is the functional of the set one bounds.</p></li>
+<li><p><strong>Reasoning-trace method transfer.</strong> #1196 fell to a
+single long-reasoning session that (a) built the extremal construction,
+(b) verified Lichtman’s 2023 bound <span
+class="math inline">\(e^{\gamma}\pi/4 \approx 1.399\)</span> was tight
+by re-deriving the analysis from first principles, and (c) closed the
+gap via a primes-in-arithmetic-progressions argument that had apparently
+not been attempted in ninety years of work on the problem. The bone
+structure — a long coherent chain of extremal-function manipulation that
+terminates in a concrete combinatorial argument — is the kind of method
+that, once found, generalizes across a problem family.</p></li>
+<li><p><strong>Post-#1196 Erdős-tracker AI-attempt status for
+#143:</strong> <code>none</code> directly, with an adjacent note
+recording #1196’s solved status (see <code>ERDOS-TRACKER.md</code> entry
+for #143, line 222). The attempt surface is open; as of 2026-04-22, no
+lab has publicly tried.</p></li>
+<li><p><strong>Structural adjacency.</strong> #143 sits immediately
+below #138 and #146 in the same TIER-2 block of the tracker. #138 has a
+partial AI attempt (DeepMind prover agent + Sothanaphan + GPT-5.4
+Thinking, 10 Apr 2026) also concerning an additive-combinatorics
+question. The density of recent AI activity in this neighborhood is
+itself evidence that the primitive-set family is currently tractable to
+long-reasoning LLMs.</p></li>
+</ol>
+<h2 id="proposed-transfer">Proposed Transfer</h2>
+<p>A directed prompt modeled on the #1196 prompt, adapted for the #143
+density question:</p>
+<ol type="1">
+<li>Load the #1196 reasoning trace as one-shot context.</li>
+<li>Substitute the #143 target quantity (primitive-set density bound
+instead of sum bound).</li>
+<li>Ask the model to re-apply the extremal construction + tight-bound
+strategy — start from the extremal family <span
+class="math inline">\(A_k\)</span> of integers with exactly <span
+class="math inline">\(k\)</span> distinct prime factors, then optimize
+over <span class="math inline">\(k\)</span> for the #143 target.</li>
+<li>Verify the chain against Lichtman 2022 (which is closest to #143’s
+native literature).</li>
+<li>If the chain breaks at step 3, widen the prompt to include
+Gorodetsky, Lichtman, Wong 2024 refinement of the lower-order correction
+<span class="math inline">\(1 - (c + o(1))\,k^2 2^{-k}\)</span> with
+<span class="math inline">\(c \approx 0.0656\)</span>.</li>
+</ol>
+<p>Expected outcome: not a full proof on first pass, but a narrowed
+candidate attack. The #1196 trace itself took about eighty minutes of
+reasoning; the #143 analog should be budgeted at <span
+class="math inline">\(\geq\)</span> two hours, with a human spot-check
+at each inflection point where the chain invokes a non-obvious
+number-theoretic identity.</p>
+<h2 id="risk-factors">Risk Factors</h2>
+<ul>
+<li><strong>Less constructive target.</strong> #143’s statement is less
+constructive than #1196’s (density vs. extremal value). Direct method
+transfer may fail where the #1196 reasoning relied on a concrete
+extremal structure to anchor its extremal-function work. In that case
+the transfer is a <strong>partial</strong> transfer — the combinatorial
+reductions carry but the terminal analytic step has to be redone.</li>
+<li><strong>Bounty calibration.</strong> There is no bounty pool for
+incremental #143 progress (the $500 is for the resolution, not
+incremental work). Effort against #143 is speculative in a way that
+#1196 work was not, because #1196 was already a recognised flagship open
+problem with public bounty history.</li>
+<li><strong>Literature lag.</strong> Jared Duker Lichtman (prior-best
+holder on the primitive-sum family) has not published on #143
+specifically since 2022; a recent paper pipeline is possible but
+unconfirmed as of 2026-04-22. A #143 result could collide with an
+unpublished Lichtman paper, though this is already the standard risk for
+any frontier primitive-set work.</li>
+<li><strong>Survivorship bias in the wiki.</strong> The
+teorth/erdosproblems wiki warns explicitly that only successful AI runs
+are reported. The base rate of AI attempts on arithmetic-combinatorial
+open problems is unknown. A negative result on #143 would not be
+published on the wiki at all, so prior-negative evidence is absent.</li>
+</ul>
+<h2 id="next-steps">Next Steps</h2>
+<ol type="1">
+<li>Acquire the full #1196 reasoning trace (available via the
+teorth/erdosproblems wiki AI-contributions page; released by OpenAI for
+verification purposes).</li>
+<li>Run one guided session against GPT-5.4 Pro (or Claude Opus 4.7).
+Budget: two hours. Log full prompt and response chain.</li>
+<li>Log outcome to <code>ERDOS-TRACKER.md</code> — set
+<code>ai_attempt_status</code> to <code>partial</code> or
+<code>solved</code>, <code>ai_attempt_source</code> to the session or
+forum thread URL. Run <code>scripts/erdos-refresh.py --dry-run</code> to
+confirm the edit sits cleanly inside the refresh-script’s fixed-point
+structure.</li>
+<li>If the chain produces a candidate proof, submit through the same
+channel #1196 used: a Mathstodon post with Tao in the CC graph, plus a
+Lean formalisation in the DeepMind <code>formal-conjectures</code>
+repository.</li>
+</ol>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="../erdos-1196-ai-proof/">Erdős #1196 — The AI Proof</a> —
+the breakthrough that motivated this page.</li>
+<li><a
+href="https://github.com/Tibsfox/gsd-skill-creator/blob/main/ERDOS-TRACKER.md">ERDOS-TRACKER.md</a>
+— repo-local tracker with all AI-attempt statuses. See the entry for
+#143 directly (line 215) and the adjacent #138 entry.</li>
+<li>teorth/erdosproblems wiki, AI-contributions page (accessed
+2026-04-22).</li>
+<li><code>.planning/missions/nonlinear-systems-clouds/work/M6-open.md</code>
+§3 — research substrate for the #1196 + #143 analysis (Artemis II Erdős
+research program).</li>
+<li>Lichtman, J. D. (2022) — Sidon-set / primitive-set bounds.
+Prior-best framework for the #143 family.</li>
+<li>Lichtman, J. D. (2023) — prior bound on primitive-sum conjecture,
+<em>Forum of Mathematics, Pi</em> 11:e11.</li>
+<li>Gorodetsky, O.; Lichtman, J. D.; Wong, M. W. (2024) — refined
+lower-order correction on primitive sums.</li>
+<li>Erdős, P. (1934) — original convergence theorem, <em>J. London Math.
+Soc.</em> 9, 282–288.</li>
+</ul>
+<hr />
+<p><em>Part of the Tibsfox Research series on AI-assisted mathematical
+proof. Bidirectional link to the #1196 page above. Built via the Phase
+680 publication pipeline (<code>scripts/publish/build-page.sh</code>).
+Safety gates: SC-SRC, SC-NUM, SC-VER.</em></p>
+</body>
+</html>

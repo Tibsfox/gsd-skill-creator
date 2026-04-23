@@ -1,0 +1,17 @@
+{
+  "_meta": {
+    "source": "teorth/erdosproblems wiki: AI-contributions-to-Erdős-problems",
+    "snapshot_date": "2026-04-22",
+    "snapshot_reason": "Pinned snapshot for scripts/erdos-refresh.py offline fallback; refreshed by that script when network is available.",
+    "canonical_url": "https://github.com/teorth/erdosproblems/wiki/AI-contributions-to-Erd%C5%91s-problems"
+  },
+  "attempts": [
+    { "problem": 1196, "status": "solved",      "date": "2026-04-13", "model": "GPT-5.4 Pro", "prompted_by": "Liam Price", "source": "teorth/erdosproblems wiki #1196" },
+    { "problem": 1202, "status": "partial",     "date": "2026-04-01", "model": "GPT-5.4 Pro", "source": "teorth/erdosproblems wiki #1202" },
+    { "problem": 152,  "status": "solved",      "date": "2026-04-03", "model": "DeepMind prover", "source": "teorth/erdosproblems wiki #152" },
+    { "problem": 218,  "status": "conditional", "date": "2026-01-28", "model": "GPT", "source": "teorth/erdosproblems wiki #218" },
+    { "problem": 281,  "status": "solved",      "date": "2026-01-17", "model": "GPT-5.2 Pro", "source": "teorth/erdosproblems wiki #281" },
+    { "problem": 333,  "status": "solved",      "date": "2025-12-25", "model": "Claude Opus 4.5 + GPT-5.2 Pro", "source": "teorth/erdosproblems wiki #333" },
+    { "problem": 120,  "status": "solved",      "date": "2026-03-14", "model": "DeepMind prover (variant)", "source": "teorth/erdosproblems wiki #120" }
+  ]
+}
