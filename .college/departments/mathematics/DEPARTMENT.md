@@ -26,6 +26,7 @@
 | Blow-up dynamics | Calculus | Python, C++, Lisp | math-solitons, math-exponential-decay |
 | Scale-critical equations | Calculus | Python, C++, Lisp | math-blow-up-dynamics, math-complex-numbers |
 | Erdős problem index | Algebra | Python, C++, Lisp | math-euler-formula, math-logarithmic-scales |
+| Millennium problem catalogue | Algebra | Python, C++, Lisp | math-erdos-problem-index, math-complex-numbers |
 
 ## Panels
 
