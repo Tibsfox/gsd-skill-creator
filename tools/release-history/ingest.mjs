@@ -132,17 +132,63 @@ function extractDedication(text) {
 
 function extractPhasesPlans(text) {
   const out = {};
-  // Prefer "(N phases)" parenthesized count if present (handles "**Phases:** 1-5 (5 phases)")
-  const pCount = /\*\*Phases?\*?\*?:\*?\*?\s*[^()\n]*\((\d+)\s*phases?\)/i.exec(text);
-  if (pCount) out.phases = parseInt(pCount[1], 10);
-  else {
-    const pRange = /\*\*Phases?\*?\*?:\*?\*?\s*(\d+)\s*-\s*(\d+)/i.exec(text);
-    if (pRange) out.phases = parseInt(pRange[2], 10) - parseInt(pRange[1], 10) + 1;
-    else {
-      const pm = /\*\*Phases?\*?\*?:\*?\*?\s*(\d+)(?![\d-])/i.exec(text);
-      if (pm) out.phases = parseInt(pm[1], 10);
+
+  // Strategy 1: prefer "(N phases[, ...])" parenthesized count — authoritative
+  // when the author writes it. Tolerate trailing ", 4 waves" etc.
+  // Matches: "(5 phases)", "(5 phases, 4 waves)", "(18 phases, two halves)".
+  const pCount = /\*\*Phases?\*?\*?:\*?\*?\s*[^()\n]*?\((\d+)\s*phases?(?:[,)][^)]*)?\)/i.exec(text);
+  if (pCount) {
+    out.phases = parseInt(pCount[1], 10);
+  } else {
+    // Strategy 2: range "N-M" or "N–M" (ASCII hyphen OR unicode en/em dash) OR
+    // "N → M" (arrow). Count = max - min + 1. Handles "**Phases:** 1-5",
+    // "**Phases:** 679 → 683", "**Phases:** 685–700".
+    const pRange =
+      /\*\*Phases?\*?\*?:\*?\*?\s*(\d+(?:\.\d+)?)\s*(?:-|–|—|→)\s*(\d+(?:\.\d+)?)/i.exec(text);
+    if (pRange) {
+      const lo = parseFloat(pRange[1]);
+      const hi = parseFloat(pRange[2]);
+      if (hi >= lo) out.phases = Math.floor(hi) - Math.floor(lo) + 1;
+    } else {
+      // Strategy 3: enumerate comma-separated items like "684, 684.1, 685–700"
+      // — count items (a range counts as `hi - lo + 1` of sub-items). Requires
+      // either a comma OR a range to trigger; a bare single number like
+      // "684" is ambiguous (1 phase vs phase-NUMBER 684) and falls through
+      // to strategy 4's cap-at-99 heuristic.
+      const pListMatch = /\*\*Phases?\*?\*?:\*?\*?\s*([^\n]+?)(?:\s*\(|\.\s*$|$)/i.exec(text);
+      const listText = pListMatch?.[1] || '';
+      const hasMultipleChunks = listText.includes(',') || /(?:-|–|—|→)/.test(listText);
+      if (pListMatch && hasMultipleChunks) {
+        let count = 0;
+        for (const chunk of listText.split(/\s*,\s*/)) {
+          const subRange = /(\d+(?:\.\d+)?)\s*(?:-|–|—|→)\s*(\d+(?:\.\d+)?)/.exec(chunk);
+          if (subRange) {
+            const lo = parseFloat(subRange[1]);
+            const hi = parseFloat(subRange[2]);
+            if (hi >= lo) count += Math.floor(hi) - Math.floor(lo) + 1;
+          } else if (/^\s*\d+(?:\.\d+)?\s*$/.test(chunk)) {
+            count += 1;
+          }
+        }
+        if (count > 0) out.phases = count;
+      }
+      // Strategy 4: fallback to a single integer after "**Phases:**" — only
+      // accept if the value is small enough to plausibly be a COUNT (not a
+      // phase NUMBER). Absolute phase numbers in this project are >=100 as
+      // of v1.49.x; a count of 100+ per release is implausible. We cap at 99
+      // to avoid the historical bug where a phase number like 684 was
+      // recorded as if it were a count of 684 phases.
+      if (out.phases === undefined) {
+        const pm = /\*\*Phases?\*?\*?:\*?\*?\s*(\d+)(?![\d-])/i.exec(text);
+        if (pm) {
+          const n = parseInt(pm[1], 10);
+          if (n > 0 && n < 100) out.phases = n;
+          // else: likely a phase NUMBER, not count — leave null.
+        }
+      }
     }
   }
+
   const plm = /\*\*Plans?\*?\*?:\*?\*?\s*(\d+)/i.exec(text);
   if (plm) out.plans = parseInt(plm[1], 10);
   return Object.keys(out).length ? out : null;
@@ -264,6 +310,21 @@ async function main() {
     let text = '';
     if (existsSync(readmePath)) {
       text = readFileSync(readmePath, 'utf8');
+    }
+    // Flat-layout support — some releases (e.g. v1.49.568 Nonlinear Frontier,
+    // v1.49.569 Drift in LLM Systems) ship a sibling RETROSPECTIVE.md /
+    // LESSONS.md at the release-root instead of chaptered under chapter/.
+    // Concatenate those into the parse text so extractRetrospectiveFlag and
+    // the ingest-deep parser pick them up. Sentinel headers ensure the flag
+    // regex triggers even if the sibling file lacks a `## Retrospective`
+    // heading.
+    const flatRetro = join(RELEASE_NOTES_DIR, v, 'RETROSPECTIVE.md');
+    if (existsSync(flatRetro)) {
+      text += '\n\n## Retrospective\n\n' + readFileSync(flatRetro, 'utf8');
+    }
+    const flatLessons = join(RELEASE_NOTES_DIR, v, 'LESSONS.md');
+    if (existsSync(flatLessons)) {
+      text += '\n\n## Lessons Learned\n\n' + readFileSync(flatLessons, 'utf8');
     }
     const parsed = parseRelease(v, text);
     if (!parsed) {
