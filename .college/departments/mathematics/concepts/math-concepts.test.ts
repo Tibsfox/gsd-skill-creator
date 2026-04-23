@@ -1,9 +1,11 @@
 /**
- * Mathematics Department concept tests -- validates all 7 concepts have
+ * Mathematics Department concept tests -- validates all 12 concepts have
  * required fields, valid complexPlanePosition, cross-references, and
- * correct wing assignments.
+ * correct wing assignments. Phase 679 extends to the 5 new concepts with
+ * a stricter D-09 assertion set (panels.size >= 3 + dept-local targetId
+ * resolution + relationships.length >= 2).
  *
- * Covers: MATH-01, MATH-03
+ * Covers: MATH-01, MATH-03, NLF-01
  */
 
 import { describe, it, expect } from 'vitest';
@@ -15,10 +17,15 @@ import {
   ratiosProportions,
   logarithmicScales,
   fractalGeometry,
+  solitons,
+  blowUpDynamics,
+  scaleCriticalEquations,
+  erdosProblemIndex,
+  millenniumProblemCatalogue,
 } from './index.js';
 import type { RosettaConcept } from '../../../rosetta-core/types.js';
 
-// ─── All 7 Concepts ────────────────────────────────────────────────────────
+// ─── All 12 Concepts ───────────────────────────────────────────────────────
 
 const allConcepts: RosettaConcept[] = [
   exponentialDecay,
@@ -28,6 +35,11 @@ const allConcepts: RosettaConcept[] = [
   ratiosProportions,
   logarithmicScales,
   fractalGeometry,
+  solitons,
+  blowUpDynamics,
+  scaleCriticalEquations,
+  erdosProblemIndex,
+  millenniumProblemCatalogue,
 ];
 
 const conceptNames = [
@@ -38,13 +50,18 @@ const conceptNames = [
   'ratiosProportions',
   'logarithmicScales',
   'fractalGeometry',
+  'solitons',
+  'blowUpDynamics',
+  'scaleCriticalEquations',
+  'erdosProblemIndex',
+  'millenniumProblemCatalogue',
 ];
 
 // ─── Tests ──────────────────────────────────────────────────────────────────
 
 describe('Mathematics Department Concepts', () => {
 
-  describe('MATH-01: All 7 concepts have valid RosettaConcept fields', () => {
+  describe('MATH-01: All 12 concepts have valid RosettaConcept fields', () => {
     it.each(allConcepts.map((c, i) => [conceptNames[i], c] as const))(
       '%s has non-empty id, name, domain=mathematics, and description',
       (_name, concept) => {
@@ -119,6 +136,12 @@ describe('Mathematics Department Concepts', () => {
       expect(ids).toContain('math-complex-numbers');
       expect(ids).toContain('math-euler-formula');
       expect(ids).toContain('math-fractal-geometry');
+      // Phase 679 additions
+      expect(ids).toContain('math-solitons');
+      expect(ids).toContain('math-blow-up-dynamics');
+      expect(ids).toContain('math-scale-critical-equations');
+      expect(ids).toContain('math-erdos-problem-index');
+      expect(ids).toContain('math-millennium-problem-catalogue');
     });
   });
 
@@ -132,13 +155,72 @@ describe('Mathematics Department Concepts', () => {
   });
 
   describe('barrel export', () => {
-    it('index.ts re-exports all 7 concepts', () => {
-      expect(allConcepts).toHaveLength(7);
+    it('index.ts re-exports all 12 concepts', () => {
+      expect(allConcepts).toHaveLength(12);
       // Each concept is defined (not undefined)
       for (const concept of allConcepts) {
         expect(concept).toBeDefined();
         expect(concept.id).toBeTruthy();
       }
     });
+  });
+});
+
+// ─── Phase 679 — new concept assertions ────────────────────────────────────
+
+const newConcepts: RosettaConcept[] = [
+  solitons,
+  blowUpDynamics,
+  scaleCriticalEquations,
+  erdosProblemIndex,
+  millenniumProblemCatalogue,
+];
+
+const newConceptNames = [
+  'solitons',
+  'blowUpDynamics',
+  'scaleCriticalEquations',
+  'erdosProblemIndex',
+  'millenniumProblemCatalogue',
+];
+
+describe('Phase 679 — new concept assertions', () => {
+
+  describe('D-09: stricter relationship count (>= 2) on the 5 new concepts', () => {
+    it.each(newConcepts.map((c, i) => [newConceptNames[i], c] as const))(
+      '%s has at least 2 relationships',
+      (_name, concept) => {
+        expect(concept.relationships.length).toBeGreaterThanOrEqual(2);
+      }
+    );
+  });
+
+  describe('D-09: panels Map populated with python + cpp + lisp', () => {
+    it.each(newConcepts.map((c, i) => [newConceptNames[i], c] as const))(
+      '%s has panels.size >= 3 with python, cpp, lisp keys',
+      (_name, concept) => {
+        expect(concept.panels.size).toBeGreaterThanOrEqual(3);
+        expect(concept.panels.has('python')).toBe(true);
+        expect(concept.panels.has('cpp')).toBe(true);
+        expect(concept.panels.has('lisp')).toBe(true);
+      }
+    );
+  });
+
+  describe('D-09: Dept-local targetId resolution', () => {
+    const deptPrefix = 'math-';
+    const localIds = new Set(allConcepts.map((c) => c.id));
+
+    it.each(newConcepts.map((c, i) => [newConceptNames[i], c] as const))(
+      '%s dept-local targetIds resolve within the dept',
+      (_name, concept) => {
+        for (const rel of concept.relationships) {
+          if (rel.targetId.startsWith(deptPrefix)) {
+            expect(localIds.has(rel.targetId)).toBe(true);
+          }
+          // external refs (culinary-*, cross-dept refs) accepted per D-13
+        }
+      }
+    );
   });
 });
