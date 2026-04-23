@@ -163,10 +163,20 @@ function _l2Norm(v: number[]): number {
 /**
  * Compute cosine (angular) similarity between two vectors.
  * Returns 0 when either vector is zero-length.
+ *
+ * Throws when `a.length !== b.length` — cosine similarity is only well-defined
+ * on equal-length vectors. The previous permissive (truncating) implementation
+ * mixed a truncated dot product with full-length norms, which produced
+ * mathematically incorrect values for mismatched inputs.
  */
 export function cosineSimilarity(a: number[], b: number[]): number {
-  const len = Math.min(a.length, b.length);
-  if (len === 0) return 0;
+  if (a.length === 0 && b.length === 0) return 0;
+  if (a.length !== b.length) {
+    throw new Error(
+      `cosineSimilarity requires equal-length vectors; got ${a.length} and ${b.length}`,
+    );
+  }
+  const len = a.length;
   let dot = 0;
   for (let i = 0; i < len; i++) dot += a[i] * b[i];
   const normA = _l2Norm(a);

@@ -74,6 +74,26 @@ describe('context-entropy: normalisedShannonEntropy helper', () => {
 });
 
 // ---------------------------------------------------------------------------
+// H-02: internal cosineSimilarity throws on length mismatch
+// ---------------------------------------------------------------------------
+
+describe('context-entropy: length-mismatch guard (H-02)', () => {
+  it('checkContextEntropy throws when response_embedding length differs from a context_embedding length', () => {
+    const response = [1.0, 0.0, 0.0, 0.0]; // length 4
+    const contexts = [
+      [1.0, 0.0, 0.0, 0.0], // length 4 — ok
+      [1.0, 0.0, 0.0],      // length 3 — mismatch
+    ];
+    expect(() =>
+      checkContextEntropy(
+        { context_embeddings: contexts, response_embedding: response },
+        { flagOverride: true },
+      ),
+    ).toThrow(/equal-length/);
+  });
+});
+
+// ---------------------------------------------------------------------------
 // 1. Healthy test (embedding path)
 // ---------------------------------------------------------------------------
 
