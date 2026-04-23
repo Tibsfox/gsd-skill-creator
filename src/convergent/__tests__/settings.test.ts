@@ -37,8 +37,15 @@ describe('convergent settings: ALL_CONVERGENT_MODULES', () => {
   });
 });
 
-describe('convergent settings: live .claude/gsd-skill-creator.json', () => {
-  it('readConvergentSettings returns non-null object', () => {
+// The live-config checks only make sense on an installation where the
+// developer has opted all 5 modules in. The config file is gitignored by
+// project policy (per-install state), so CI clones and fresh checkouts do
+// not have it — in that case these assertions would be vacuous. We guard
+// with existsSync and skip when absent.
+const LIVE_CONFIG_PRESENT = fs.existsSync(LIB_PATH);
+
+describe.runIf(LIVE_CONFIG_PRESENT)('convergent settings: live .claude/gsd-skill-creator.json', () => {
+  it('readConvergentSettings returns non-null object when live config present', () => {
     const conv = readConvergentSettings(LIB_PATH);
     expect(conv).not.toBeNull();
     expect(typeof conv).toBe('object');
@@ -63,6 +70,22 @@ describe('convergent settings: live .claude/gsd-skill-creator.json', () => {
   it('readConvergentNumber returns default for missing field', () => {
     const v = readConvergentNumber('trustTiers', 'notARealField', 42, LIB_PATH);
     expect(v).toBe(42);
+  });
+});
+
+describe.runIf(!LIVE_CONFIG_PRESENT)('convergent settings: live config absent (CI / fresh checkout)', () => {
+  it('readConvergentSettings returns null when .claude/gsd-skill-creator.json is missing', () => {
+    expect(readConvergentSettings(LIB_PATH)).toBeNull();
+  });
+
+  it('isConvergentModuleEnabled returns false for every module without a config file', () => {
+    for (const key of ALL_CONVERGENT_MODULES) {
+      expect(isConvergentModuleEnabled(key, LIB_PATH)).toBe(false);
+    }
+  });
+
+  it('readConvergentNumber returns the default fallback when config is absent', () => {
+    expect(readConvergentNumber('trustTiers', 'vulnerabilityBaselinePercent', 99, LIB_PATH)).toBe(99);
   });
 });
 
