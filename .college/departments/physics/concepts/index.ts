@@ -4,3 +4,4 @@
  * @module departments/physics/concepts
  */
 export { reynoldsSimilarity } from './reynolds-similarity.js';
+export { vorticityStretching } from './vorticity-stretching.js';

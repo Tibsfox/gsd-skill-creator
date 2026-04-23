@@ -52,3 +52,4 @@ phys-motion-kinematics
 
 ### Fluid Dynamics & Atmosphere (4 concepts)
 - physics-reynolds-similarity -- Dynamic similarity and the Reynolds number in fluid flows
+- physics-vorticity-stretching -- Vortex-stretching term in the incompressible Euler/NS vorticity equation
