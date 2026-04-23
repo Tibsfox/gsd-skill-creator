@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en" data-harness-integrations="nasa-forest-module-registry-v1.0.0">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forest Sim — Research — Tibsfox</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap"
+        rel="stylesheet">
+  <link rel="stylesheet" href="/Research/NASA/_harness/v1.0.0/harness.css">
+  <style>
+    :root {
+      --bg:         #0E0E0C;
+      --panel:      #161614;
+      --text:       #C8C4B8;
+      --text-dim:   #7A7870;
+      --gold:       #C4A35A;
+      --green:      #3A8848;
+      --canopy:     #1E4425;
+      --bark:       #3A2820;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', system-ui, sans-serif;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+    header {
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid #2A2820;
+      display: flex; gap: 1rem; align-items: baseline; flex-wrap: wrap;
+    }
+    header h1 {
+      font-family: 'Libre Baskerville', Georgia, serif;
+      font-weight: 400; font-size: 1.75rem; color: #E4E0D8;
+    }
+    header .crumb {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.85rem; color: var(--text-dim);
+    }
+    header .crumb a { color: var(--gold); text-decoration: none; }
+    header .crumb a:hover { text-decoration: underline; }
+
+    main { padding: 2rem; max-width: 90rem; margin: 0 auto; }
+    main p { max-width: 50rem; margin-bottom: 1rem; color: var(--text); }
+    main h2 {
+      font-family: 'Libre Baskerville', Georgia, serif;
+      font-weight: 400; font-size: 1.25rem; margin: 1.5rem 0 0.75rem;
+      color: var(--gold);
+    }
+
+    #forest-stage {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: radial-gradient(
+        ellipse at center,
+        #1E4425 0%,
+        #0E0E0C 70%
+      );
+      border: 1px solid #2A2820;
+      border-radius: 6px;
+      overflow: hidden;
+      margin: 1rem 0;
+    }
+    #forest-stage canvas { width: 100%; height: 100%; display: block; }
+    #forest-stage .placeholder-badge {
+      position: absolute; top: 1rem; left: 1rem;
+      background: rgba(14, 14, 12, 0.7);
+      padding: 0.4rem 0.7rem; border-radius: 4px;
+      font-family: 'DM Mono', monospace; font-size: 0.75rem;
+      color: var(--text-dim);
+      border-left: 3px solid var(--gold);
+    }
+
+    .notice {
+      background: var(--panel);
+      border-left: 3px solid var(--gold);
+      padding: 0.75rem 1rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--text);
+      margin: 1rem 0;
+      border-radius: 0 6px 6px 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Forest Sim</h1>
+    <span class="crumb"><a href="/Research/">Research</a> / forest</span>
+  </header>
+
+  <main>
+    <p>
+      A shared, living playground where each NASA Mission Series degree
+      contributes one generative cross-link with an existing forest
+      subsystem (agent-based flocking, Kuramoto-phase firefly
+      synchronisation, L-system plants, Physarum slime-mold networks, a
+      shared WebAudio layer, and a circadian clock). The contribution
+      system is defined in
+      <a href="/Research/NASA/_harness/v1.0.0/forest-module-api.md"
+         style="color: var(--gold);">the forest-module API</a>.
+    </p>
+
+    <p>
+      Load this page with a query parameter like <code>?mission=1.56</code>
+      to pre-enable a specific mission's contribution. Otherwise, toggle
+      modules in the floating panel in the upper-right corner.
+    </p>
+
+    <h2>Stage</h2>
+    <div id="forest-stage">
+      <canvas id="forest-canvas"></canvas>
+      <div class="placeholder-badge" id="forest-placeholder-badge">
+        forest stage · scaffold only
+      </div>
+    </div>
+
+    <div class="notice" id="integration-notice">
+      Loading NASA forest-module registry (v1.0.0)…
+    </div>
+
+    <h2>Modules</h2>
+    <p>
+      Use the panel in the upper-right to toggle mission modules on and
+      off. Each toggle calls the module's <code>enable()</code> /
+      <code>disable()</code> hooks with the shared forest instance.
+    </p>
+  </main>
+
+  <!-- Floating missions panel; populated by forest-module-registry.js. -->
+  <div id="missions-panel"></div>
+
+  <!-- Phase 681: physics modules (load BEFORE simulation.js).
+       Both ship behind featureFlags (default OFF) — no behavior change.
+       microphysics.js: Köhler droplet activation (Plan 01) -->
+  <script src="microphysics.js"></script>
+
+  <script type="module">
+    // ===================================================================
+    // Forest Sim scaffold.
+    //
+    // This page is deliberately minimal in its v1.0.0-ship form: a dark
+    // canvas, a mission-module panel, and a tick loop that dispatches
+    // registry.tick() on each animation frame. Real forest subsystems
+    // (Boids, Kuramoto, L-system, Physarum, audio, circadian) are
+    // stubbed with empty facades that accept module registrations
+    // gracefully so existing module fixtures load without crashing.
+    //
+    // Richer subsystem implementations will land in subsequent harness
+    // minor versions. This page is ADDITIVE -- nothing below breaks any
+    // pre-existing forest subsystem, because this is the first forest
+    // page to ship.
+    // ===================================================================
+
+    import {
+      register,
+      list,
+      enableByMissionVersion,
+      disableAll,
+      renderToggleList,
+      autoLoadFromManifest,
+      missionVersionFromQuery,
+      tick as registryTick,
+      __harnessVersion,
+    } from '/Research/NASA/_harness/v1.0.0/forest-module-registry.js';
+
+    // ---- Stage canvas ------------------------------------------------
+    const canvas = document.getElementById('forest-canvas');
+    const ctx2d  = canvas.getContext('2d');
+    function resize() {
+      const r = canvas.getBoundingClientRect();
+      canvas.width  = Math.max(1, Math.floor(r.width * devicePixelRatio));
+      canvas.height = Math.max(1, Math.floor(r.height * devicePixelRatio));
+    }
+    addEventListener('resize', resize, { passive: true });
+    resize();
+
+    // ---- Forest scaffold (facade for module enable/disable) ----------
+    const subscribers = new Set();
+    const forest = {
+      version: __harnessVersion,
+      audio: {
+        context() {
+          if (!this._ctx) this._ctx = new (window.AudioContext || window.webkitAudioContext)();
+          return this._ctx;
+        },
+        layer(_name) {
+          const c = this.context();
+          if (!this._layerNode) {
+            this._layerNode = c.createGain();
+            this._layerNode.gain.value = 0.4;
+            this._layerNode.connect(c.destination);
+          }
+          return this._layerNode;
+        },
+      },
+      circadian: {
+        subscribe(fn) {
+          subscribers.add(fn);
+          return () => subscribers.delete(fn);
+        },
+        _broadcast(phase) {
+          for (const fn of subscribers) { try { fn(phase); } catch (_) {} }
+        },
+      },
+      boids:    { addParamTune(_){}, addAttractor(_){}, addPredator(_){} },
+      kuramoto: { beatLock(_){}, phaseInject(_){}, setCoupling(_){} },
+      lsystem:  { setGrowRule(_){}, setBranchingAngle(_){} },
+      physarum: { addNutrientSource(_){}, setDecayRate(_){} },
+      registerTick(fn) {
+        const key = Symbol('tick');
+        this._extraTicks = this._extraTicks || new Map();
+        this._extraTicks.set(key, fn);
+        return () => this._extraTicks.delete(key);
+      },
+    };
+    const ctx = { time: 0, renderer: ctx2d, audioCtx: forest.audio.context(), params: {} };
+
+    // ---- Boot the registry ------------------------------------------
+    const notice = document.getElementById('integration-notice');
+    try {
+      await autoLoadFromManifest(); // safe if manifest is empty
+      const v = missionVersionFromQuery();
+      if (v) await enableByMissionVersion(v, forest, ctx);
+
+      const panel = document.getElementById('missions-panel');
+      renderToggleList(panel, { forest, ctx });
+      panel.hidden = false;
+
+      const count = list().length;
+      notice.textContent =
+        `NASA forest-module registry v${__harnessVersion} ready · ` +
+        `${count} module${count === 1 ? '' : 's'} registered` +
+        (v ? ` · pre-enabled for mission ${v}` : '');
+    } catch (err) {
+      notice.textContent = `forest-module registry failed to load: ${err.message || err}`;
+      notice.style.borderLeftColor = '#8B2020';
+    }
+
+    // ---- Tick loop --------------------------------------------------
+    let last = performance.now();
+    let phase = 0;
+    function frame(now) {
+      const dt = Math.min(0.1, (now - last) / 1000);
+      last = now;
+      ctx.time += dt;
+      phase = (phase + dt / 60) % 1;   // 60-second circadian cycle for demo
+      forest.circadian._broadcast(phase);
+
+      // Clear the stage + draw a simple horizon so the page is not dead.
+      const w = canvas.width, h = canvas.height;
+      ctx2d.fillStyle = 'rgba(14, 14, 12, 0.08)';
+      ctx2d.fillRect(0, 0, w, h);
+      ctx2d.fillStyle = 'rgba(196, 163, 90, 0.04)';
+      ctx2d.fillRect(0, h * 0.78, w, h * 0.22);
+
+      // Extra tick callbacks (for legacy forest subsystems).
+      if (forest._extraTicks) {
+        for (const fn of forest._extraTicks.values()) { try { fn(dt); } catch (_) {} }
+      }
+      // Dispatch to enabled mission modules.
+      registryTick(forest, ctx, dt);
+
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+
+    // ---- Cleanup on navigation away ---------------------------------
+    addEventListener('pagehide', () => {
+      try { disableAll(forest, ctx); } catch (_) { /* best effort */ }
+    });
+  </script>
+</body>
+</html>
