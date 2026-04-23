@@ -87,16 +87,16 @@ Five event types are currently defined across seven defense modules.
 
 **Module:** `src/drift/temporal-retrieval.ts` (M0 — Temporal Retrieval Check)
 **Surface:** `retrieval`
-**Trigger:** Grove RAG index timestamp lags SSoT timestamp by more than the configured Δt; emitted by `checkTemporalFreshness`.
+**Trigger:** Grove RAG index timestamp lags SSoT timestamp by more than the configured Δt; emitted by `checkTemporalRetrieval`.
 
 | Field | Type | Description |
 |-------|------|-------------|
 | `type` | `"drift.retrieval.stale_index_detected"` | Event type |
-| `lag_ms` | `number` | Lag between SSoT and index timestamps in milliseconds |
-| `classification` | `"fresh" \| "stale" \| "critical"` | Freshness classification |
+| `lag_ms` | `number` | Signed lag (retrieval − ssot) in milliseconds. Positive = retrieval is ahead of SSoT update (normal); negative = unusual. |
+| `classification` | `"fresh" \| "stale" \| "critically-stale"` | Freshness band: `fresh` when `abs(lag_ms) ≤ maxLagMs`; `stale` when `maxLagMs < abs(lag_ms) ≤ 3 × maxLagMs`; `critically-stale` when `abs(lag_ms) > 3 × maxLagMs`. |
 | `timestamp` | `string` | ISO 8601 UTC |
 
-**Severity classification (audit script):** Falls back to static `warn` when `lag_ms` is the only numeric field present. A `classification: "critical"` in the payload does not automatically escalate audit severity; the audit script uses the `lag_ms` heuristic.
+**Severity classification (audit script):** Falls back to the static per-type default (`warn`) because the audit-script severity rule is score-based and `lag_ms` is not in the score chain. A `classification: "critically-stale"` in the payload does not automatically escalate audit severity; operators who need to gate on critically-stale events should filter by `classification` field in their downstream consumer.
 
 **Example:**
 
@@ -115,27 +115,27 @@ Five event types are currently defined across seven defense modules.
 
 **Module:** `src/drift/grounding-faithfulness.ts` (M0 — Grounding-Faithfulness Assertion)
 **Surface:** `retrieval`
-**Trigger:** Semantic Grounding Index (SGI) score falls below the configured threshold; emitted by `assertGroundingFaithfulness`.
+**Trigger:** Semantic Grounding Index (SGI) score falls below the configured `groundingThreshold` AND the response-to-query similarity exceeds `lazyThreshold` (indicating the response parrots the query while ignoring retrieved context); emitted by `checkGroundingFaithfulness`.
 
 | Field | Type | Description |
 |-------|------|-------------|
 | `type` | `"drift.retrieval.lazy_grounding_detected"` | Event type |
-| `sgi_score` | `number` | Semantic Grounding Index in [0, 1]; lower = more semantic laziness |
-| `angular_response_to_context` | `number` | Angular similarity between response and retrieved context in [0, 1] |
-| `angular_response_to_query` | `number` | Angular similarity between response and query in [0, 1] |
-| `classification` | `"faithful" \| "lazy" \| "hallucinating"` | Grounding classification |
+| `sgi_score` | `number` | Semantic Grounding Index in `[-1, 1]` (typically clamped to `[0, 1]` for normalised embeddings). **Higher = more faithfully grounded.** Equal to `angular_response_to_context`. |
+| `angular_response_to_context` | `number` | Angular (cosine) similarity between response and retrieved context; higher = more faithfully grounded |
+| `angular_response_to_query` | `number` | Angular (cosine) similarity between response and query; higher + low sgi_score = laziness |
+| `classification` | `"grounded" \| "lazy" \| "drifted"` | Grounding classification: `grounded` when `sgi_score >= groundingThreshold`; `lazy` when `sgi_score < groundingThreshold` AND `angular_response_to_query >= lazyThreshold`; `drifted` otherwise. |
 | `timestamp` | `string` | ISO 8601 UTC |
 
-**Severity classification (audit script):** `sgi_score >= 0.8` → `critical`; `sgi_score >= 0.5` → `warn`; else `info`. Note: `sgi_score` is a _laziness_ score; higher = worse.
+**Severity classification (audit script):** The audit script null-coalesces `sgi_score` into its score chain. Because `sgi_score` polarity is inverted from generic `drift_magnitude` (higher = better for SGI), the audit script uses an inverted rule for this event type: `sgi_score <= 0.2` → `critical`; `sgi_score <= 0.5` → `warn`; else `info`. Only lazy-classified events are emitted, so this severity mapping applies only to them.
 
 **Example:**
 
 ```json
 {
   "type": "drift.retrieval.lazy_grounding_detected",
-  "sgi_score": 0.82,
-  "angular_response_to_context": 0.23,
-  "angular_response_to_query": 0.89,
+  "sgi_score": 0.18,
+  "angular_response_to_context": 0.18,
+  "angular_response_to_query": 0.91,
   "classification": "lazy",
   "timestamp": "2026-04-23T10:17:00.000Z"
 }
@@ -147,14 +147,14 @@ Five event types are currently defined across seven defense modules.
 
 **Module:** `src/drift/context-entropy.ts` (M0 — BEE-RAG Context-Entropy Guard)
 **Surface:** `retrieval`
-**Trigger:** Shannon entropy of the retrieval context drops below the configured threshold; emitted by `checkContextEntropy`.
+**Trigger:** Normalised Shannon entropy of the context-attention distribution drops below the configured `entropyThreshold`; emitted by `checkContextEntropy`.
 
 | Field | Type | Description |
 |-------|------|-------------|
 | `type` | `"drift.retrieval.context_collapse_detected"` | Event type |
-| `entropy` | `number` | Shannon entropy of the context token distribution in bits; range [0, ∞) |
-| `threshold` | `number` | Configured entropy floor; collapse when `entropy < threshold` |
-| `classification` | `"healthy" \| "low" \| "collapse"` | Entropy classification |
+| `entropy` | `number` | Normalised Shannon entropy `H_norm = H / log2(N)`, range `[0, 1]`. `0` = completely collapsed (all weight on one segment); `1` = uniform distribution (maximum diversity). |
+| `threshold` | `number` | Configured entropy floor in `(0, 1]`; module default is `0.5`. Collapse when `entropy < threshold`. |
+| `classification` | `"healthy" \| "collapsing" \| "collapsed"` | `healthy` when `entropy >= threshold`; `collapsing` when `threshold/2 <= entropy < threshold`; `collapsed` when `entropy < threshold/2`. |
 | `timestamp` | `string` | ISO 8601 UTC |
 
 **Severity classification (audit script):** Always `critical` regardless of numeric scores — context collapse is a hard signal.
@@ -164,9 +164,9 @@ Five event types are currently defined across seven defense modules.
 ```json
 {
   "type": "drift.retrieval.context_collapse_detected",
-  "entropy": 0.09,
-  "threshold": 1.5,
-  "classification": "collapse",
+  "entropy": 0.18,
+  "threshold": 0.5,
+  "classification": "collapsed",
   "timestamp": "2026-04-23T10:18:00.000Z"
 }
 ```
