@@ -220,6 +220,25 @@ describe('grounding-faithfulness: settings reader', () => {
 });
 
 // ---------------------------------------------------------------------------
+// H-02: cosineSimilarity throws on length mismatch
+// ---------------------------------------------------------------------------
+
+describe('grounding-faithfulness: cosineSimilarity length-mismatch guard (H-02)', () => {
+  it('throws when input vectors have different lengths', () => {
+    expect(() => cosineSimilarity([1, 0, 0], [1, 0, 0, 0])).toThrow(/equal-length/);
+  });
+
+  it('accepts equal-length vectors and returns the expected cosine', () => {
+    expect(cosineSimilarity([1, 0, 0, 0], [1, 0, 0, 0])).toBeCloseTo(1, 10);
+    expect(cosineSimilarity([1, 0, 0, 0], [0, 1, 0, 0])).toBeCloseTo(0, 10);
+  });
+
+  it('returns 0 when both inputs are empty', () => {
+    expect(cosineSimilarity([], [])).toBe(0);
+  });
+});
+
+// ---------------------------------------------------------------------------
 // 6. Fixture integration
 // ---------------------------------------------------------------------------
 

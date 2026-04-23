@@ -185,4 +185,44 @@ describe('drift-audit CLI', () => {
     expect(parsed.total_events).toBe(1);
     expect(parsed.status).toBe('clean');
   });
+
+  // H-01: sgi_score escalation for lazy_grounding events
+  it('lazy_grounding event with sgi_score <= 0.2 escalates to critical → exit 1', () => {
+    writeEvents([
+      {
+        type: 'drift.retrieval.lazy_grounding_detected',
+        sgi_score: 0.1, // maximum laziness — should escalate to critical
+        angular_response_to_context: 0.1,
+        angular_response_to_query: 0.95,
+        classification: 'lazy',
+        timestamp: '2026-04-23T10:17:00.000Z',
+      },
+    ]);
+    const { stdout, exitCode } = runAudit(['--format', 'json']);
+    expect(exitCode).toBe(1);
+    const parsed = JSON.parse(stdout);
+    expect(parsed.status).toBe('critical');
+    expect(parsed.critical_count).toBe(1);
+    expect(parsed.surfaces.retrieval.critical).toBe(1);
+  });
+
+  it('lazy_grounding event with sgi_score >= 0.5 is classified as info → exit 0', () => {
+    writeEvents([
+      {
+        type: 'drift.retrieval.lazy_grounding_detected',
+        sgi_score: 0.6, // mid-range — should NOT escalate
+        angular_response_to_context: 0.6,
+        angular_response_to_query: 0.9,
+        classification: 'lazy',
+        timestamp: '2026-04-23T10:17:00.000Z',
+      },
+    ]);
+    const { stdout, exitCode } = runAudit(['--format', 'json']);
+    expect(exitCode).toBe(0);
+    const parsed = JSON.parse(stdout);
+    expect(parsed.status).toBe('clean');
+    expect(parsed.critical_count).toBe(0);
+    expect(parsed.surfaces.retrieval.critical).toBe(0);
+    expect(parsed.surfaces.retrieval.info).toBe(1);
+  });
 });
