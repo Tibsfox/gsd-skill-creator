@@ -33,6 +33,12 @@ A system passes this benchmark if: (a) it maintains an internal representation o
 | C — Physical-Systems Roots | `panels/C-physical-systems-roots.md` | Jacot et al. 2018; Kirkpatrick et al. 1983; CompuFlair 2026 | Energy/THE, Vision/ROF |
 | D — Biological Roots | `panels/D-biological-roots.md` | Friston 2010; Kirchhoff et al. 2018; Lanzara 2023 | Science/BHK, Ecology/ECO |
 
+## Concepts
+
+| Concept | Wing | Panels | Cross-References |
+|---------|------|--------|-----------------|
+| Lorenz Predictability Limit | Control-Theoretic (Panel B adjacent) | Python, C++, Lisp | math-fractal-geometry, math-exponential-decay |
+
 ## Cross-References
 
 Full cross-departmental bridge specifications are in `CROSS_LINKS.md`.
