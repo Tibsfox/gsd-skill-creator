@@ -22,6 +22,7 @@
 | Ratios and proportions | Algebra | Python, Pascal | Culinary: baker's percentages |
 | Logarithmic scales | Algebra | Python, C++, Fortran | Culinary: pH, taste perception |
 | Fractal geometry | Complex Analysis | Python, Lisp | Calibration: fractal expansion |
+| Solitons | Complex Analysis | Python, C++, Lisp | math-complex-numbers, math-exponential-decay |
 
 ## Panels
 

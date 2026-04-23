@@ -11,3 +11,4 @@ export { eulerFormula } from './euler-formula.js';
 export { ratiosProportions } from './ratios-proportions.js';
 export { logarithmicScales } from './logarithmic-scales.js';
 export { fractalGeometry } from './fractal-geometry.js';
+export { solitons } from './solitons.js';
