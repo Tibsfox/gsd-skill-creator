@@ -4,3 +4,4 @@
  * @module departments/chemistry/concepts
  */
 export { clausiusClapeyron } from './clausius-clapeyron.js';
+export { kohlerTheory } from './kohler-theory.js';
