@@ -72,6 +72,31 @@ echo "release-history-refresh: running pipeline (this takes ~2 min)..."
 node tools/release-history/refresh.mjs "$@"
 RET=$?
 
+# Always publish the chapter files (chapter.mjs writes to .planning/roadmap/
+# which is a staging area; publish.mjs copies the allowlisted chapters to
+# docs/release-notes/<v>/chapter/ — the tracked tree regen-history-md reads
+# when deciding whether to render retro/lessons as `[✓]` vs `✓ _(no file)_`).
+# Without this step, flat-layout releases stay at "no file".
+if [ $RET -eq 0 ] || [ $RET -eq 1 ]; then
+  echo "release-history-refresh: publishing chapter files to docs/release-notes/..."
+  # publish.mjs exits non-zero when any leak-scan violations BLOCK files, but
+  # that's a per-file filter not an overall failure. We want chapter files
+  # that DID publish to land. Exit 1 = "some BLOCKED but others published".
+  # Only treat exit 2+ as real failure.
+  node tools/release-history/publish.mjs --execute > /tmp/publish-output.log 2>&1
+  PUB_RET=$?
+  if [ $PUB_RET -gt 1 ]; then
+    echo "  WARN: publish step failed (exit $PUB_RET) — retro/lessons links may still show '_(no file)_'"
+    tail -5 /tmp/publish-output.log >&2
+  elif [ $PUB_RET -eq 1 ]; then
+    BLOCKED=$(grep -o '[0-9]\+ BLOCKED' /tmp/publish-output.log | head -1 || echo "0 BLOCKED")
+    echo "  note: publish completed with $BLOCKED (non-blocking)"
+  fi
+  # Regenerate the index AGAIN so the newly-published chapter files turn into
+  # checkmarks and lesson counts rather than "no file" notes.
+  node tools/release-history/regen-history-md.mjs > /dev/null 2>&1 || true
+fi
+
 # Exit code interpretation:
 #   0 = full success
 #   1 = drift-check warned (quality-drift-watcher; advisory, not a blocker)
