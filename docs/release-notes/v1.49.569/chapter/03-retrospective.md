@@ -1,5 +1,13 @@
 # Retrospective — v1.49.569
 
+## What Worked
+
+1. **Inserting a full-PDF Opus editorial pass between W0 foundation and W1 parallel surveys.** Phase 684.1 resolved 24 papers as `supported` and flagged 5 as `partial` before Wave 1 even started — single highest-return intervention in the milestone. Without it, partials would have propagated into the 42-page final doc and surfaced at the W3 hard-block gate under emergency-revision conditions.
+2. **Parallel Wave-1 tracks with cache-hot session residency and independent outputs.** Phases 685/686/687 ran concurrently in a single session with zero file contention — each wrote to a distinct `modules/<module>.tex`. Token share reached 43%, above the DRIFT-10 40% floor.
+3. **Per-task atomic commits were load-bearing during API failures.** Two API 500s mid-Wave-7 (governance phases) interrupted execution. Both resumed from the last committed state with zero work loss.
+4. **Advisory mid-wave CAPCOM gates caught issues earlier than hard-block gates would have.** The W2 advisory gate tightened two loose renderings (Abdelnabi "near-perfect ROC AUC", Dongre stable-equilibrium framing) before Module D synthesis.
+5. **Default-off byte-identity held throughout.** Every Half B defense module shipped with flags false and a golden-output test. Consumers who haven't opted in see v1.49.568 byte-identical behavior.
+
 ## Surprises
 
 **684.1 editorial pass was essential — not a nice-to-have.** The user's decision during `/gsd-discuss-phase 684` to insert a full-PDF Opus editorial review before Wave 1 was the most consequential planning decision in the milestone. Skipping it would have left 5 partial-status papers unresolved until the W3 CAPCOM hard-block gate, requiring emergency revisions under the most expensive possible conditions.
