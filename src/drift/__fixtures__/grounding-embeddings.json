@@ -1,0 +1,50 @@
+{
+  "description": "Synthetic embedding triplets for grounding-faithfulness tests (DRIFT-24). Uses standard-basis vectors (or near-basis) so cosine similarity is analytically exact. 4-dim for simplicity.",
+  "examples": [
+    {
+      "id": "grounded-01",
+      "label": "grounded",
+      "description": "Response ≈ context direction; cos(response,context)~1 >> groundingThreshold.",
+      "response_embedding": [1.0, 0.01, 0.0, 0.0],
+      "query_embedding":    [0.0, 0.0, 1.0, 0.0],
+      "context_embedding":  [1.0, 0.0, 0.0, 0.0],
+      "expected_classification": "grounded"
+    },
+    {
+      "id": "lazy-01",
+      "label": "lazy",
+      "description": "Response ≈ query direction [1,0,0,0]; context is orthogonal [0,1,0,0]. cos(resp,ctx)~0 < groundingThreshold; cos(resp,query)~1 >= lazyThreshold.",
+      "response_embedding": [1.0, 0.0, 0.0, 0.0],
+      "query_embedding":    [1.0, 0.0, 0.0, 0.0],
+      "context_embedding":  [0.0, 1.0, 0.0, 0.0],
+      "expected_classification": "lazy"
+    },
+    {
+      "id": "drifted-01",
+      "label": "drifted",
+      "description": "Response is orthogonal to both query and context. cos(resp,ctx)=0, cos(resp,query)=0 — both below their thresholds.",
+      "response_embedding": [0.0, 0.0, 1.0, 0.0],
+      "query_embedding":    [1.0, 0.0, 0.0, 0.0],
+      "context_embedding":  [0.0, 1.0, 0.0, 0.0],
+      "expected_classification": "drifted"
+    },
+    {
+      "id": "grounded-02",
+      "label": "grounded",
+      "description": "Response tightly aligned with context; query is orthogonal.",
+      "response_embedding": [0.0, 1.0, 0.0, 0.0],
+      "query_embedding":    [1.0, 0.0, 0.0, 0.0],
+      "context_embedding":  [0.0, 1.0, 0.01, 0.0],
+      "expected_classification": "grounded"
+    },
+    {
+      "id": "lazy-02",
+      "label": "lazy",
+      "description": "Response parrots query direction [0,0,1,0]; context is in opposite quadrant [0,0,-1,0] — cos(resp,ctx)=-1, far below groundingThreshold; cos(resp,query)=1 >= lazyThreshold.",
+      "response_embedding": [0.0, 0.0, 1.0, 0.0],
+      "query_embedding":    [0.0, 0.0, 1.0, 0.0],
+      "context_embedding":  [0.0, 0.0, -1.0, 0.0],
+      "expected_classification": "lazy"
+    }
+  ]
+}

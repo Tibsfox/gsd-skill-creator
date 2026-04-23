@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module C: Context &amp; Retrieval / SSoT Drift — Drift in LLM Systems | Tibsfox Research</title>
+<meta name="description" content="How retrieved context and single source of truth degrade in LLM systems. Response semantic drift in diffusion-LM RAG, Chronos event-evolution graph, Semantic Grounding Index (Cohen's d 0.92–1.28), BEE-RAG context-entropy dilution. Module C.">
+<!-- SC-VER: tibsfox.com/Research/DRIFT/retrieval.html — v1.49.569 Phase 690 -->
+<style>
+:root {
+  --bg: #04060c; --panel: #080c16; --border: rgba(255,255,255,0.06);
+  --text: #c8d0e0; --dim: rgba(255,255,255,0.35);
+  --drift-teal: #2a9d8f; --drift-amber: #e9c46a; --drift-red: #e76f51;
+  --drift-blue: #4a9eba;
+  --text-bright: #fff8e8;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:Georgia,'Times New Roman',serif; line-height:1.75; }
+a { color:var(--drift-blue); text-decoration:none; }
+a:hover { color:var(--drift-amber); text-decoration:underline; }
+header {
+  background:linear-gradient(135deg, #020b12 0%, #051525 25%, #0a2a3a 50%, #061520 75%, var(--bg) 100%);
+  padding:2.5rem 2rem 2rem; text-align:center;
+  border-bottom:3px solid var(--drift-blue); position:relative; overflow:hidden;
+}
+header::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 40% 50% at 50% 40%, rgba(74,158,186,0.10) 0%, transparent 70%); }
+header h1 { font-size:2.0rem; font-weight:400; color:#fff; position:relative; line-height:1.3; }
+header .subtitle { color:var(--drift-blue); font-size:1rem; font-style:italic; margin-top:0.5rem; position:relative; }
+header .meta { color:rgba(255,255,255,0.4); font-size:0.8rem; margin-top:0.6rem; position:relative; font-family:system-ui,sans-serif; letter-spacing:0.03em; }
+header nav { margin-top:1rem; position:relative; font-family:system-ui,sans-serif; font-size:0.82rem; }
+header nav a { color:rgba(255,255,255,0.55); margin:0 0.6rem; }
+header nav a:hover { color:var(--drift-amber); }
+main { max-width:1000px; margin:0 auto; padding:2.5rem 1.5rem 4rem; }
+h2 { font-family:Georgia,serif; font-size:1.5rem; color:var(--drift-blue); margin:2.5rem 0 1rem; padding-bottom:0.4rem; border-bottom:1px solid rgba(74,158,186,0.25); }
+h3 { font-size:1.15rem; color:var(--drift-amber); margin:1.8rem 0 0.6rem; font-weight:500; }
+p { margin-bottom:1.1rem; }
+ul, ol { margin:0.6rem 0 1.2rem 1.5rem; }
+li { margin-bottom:0.4rem; }
+strong { color:#fff; font-weight:600; }
+em { color:#d8d0b8; }
+code { background:rgba(255,255,255,0.06); color:#f0c878; padding:0.1rem 0.35rem; border-radius:3px; font-family:'DM Mono',monospace; font-size:0.88em; }
+blockquote { border-left:3px solid var(--drift-blue); padding:0.5rem 1.2rem; margin:1.5rem 0; color:rgba(255,255,255,0.72); font-style:italic; background:rgba(74,158,186,0.04); }
+.download-bar {
+  background:linear-gradient(90deg, rgba(74,158,186,0.08) 0%, rgba(233,196,106,0.06) 100%);
+  border:1px solid var(--drift-blue); border-radius:8px;
+  padding:1rem 1.4rem; margin:0 0 2rem;
+  display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;
+  font-family:system-ui,sans-serif;
+}
+.download-bar .label { color:var(--drift-amber); font-weight:500; font-size:0.95rem; }
+.download-bar .files a { display:inline-block; padding:0.45rem 1rem; border:1px solid var(--drift-blue); border-radius:4px; font-size:0.85rem; color:#fff; background:rgba(74,158,186,0.12); margin-left:0.4rem; }
+.download-bar .files a:hover { background:rgba(74,158,186,0.25); text-decoration:none; }
+.source-card { background:var(--panel); border:1px solid var(--border); border-radius:6px; padding:1rem 1.2rem; margin:1rem 0; }
+.source-card .src-key { font-family:'DM Mono',monospace; font-size:0.78rem; color:var(--drift-blue); margin-bottom:0.3rem; }
+.source-card .src-title { color:var(--text-bright); font-weight:500; margin-bottom:0.3rem; }
+.source-card .src-finding { font-size:0.9rem; color:rgba(255,255,255,0.65); }
+.finding-box { background:rgba(74,158,186,0.06); border:1px solid rgba(74,158,186,0.2); border-radius:6px; padding:0.8rem 1.2rem; margin:1rem 0; }
+.finding-box .num { font-size:1.4rem; font-weight:700; color:var(--drift-blue); font-family:system-ui,sans-serif; }
+.safety-table { width:100%; border-collapse:collapse; font-size:0.85rem; font-family:system-ui,sans-serif; margin:1rem 0; }
+.safety-table th { background:rgba(74,158,186,0.08); color:var(--drift-blue); padding:0.5rem 0.8rem; text-align:left; border-bottom:1px solid rgba(74,158,186,0.2); }
+.safety-table td { padding:0.4rem 0.8rem; border-bottom:1px solid rgba(255,255,255,0.04); color:rgba(255,255,255,0.7); }
+.pass { color:#4CAF50; font-weight:600; }
+.gate-id { color:var(--drift-amber); font-family:'DM Mono',monospace; font-size:0.8rem; }
+footer { max-width:1000px; margin:3rem auto 0; padding:1.5rem; text-align:center; font-size:0.78rem; color:var(--dim); border-top:1px solid var(--border); font-family:system-ui,sans-serif; }
+footer a { color:var(--drift-amber); }
+@media(max-width:640px) { header h1 { font-size:1.5rem; } main { padding:1.5rem 1rem 2.5rem; } .download-bar { flex-direction:column; } }
+</style>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+<header>
+<div style="font-size:0.7rem; color:rgba(255,255,255,0.35); font-family:'DM Mono',monospace; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.8rem;">DRIFT &middot; Module C &middot; 2026-04-22</div>
+<h1>Module C &mdash; Context &amp; Retrieval / SSoT Drift</h1>
+<div class="subtitle">How retrieved context and the single source of truth degrade &mdash; RSD, Chronos, SGI, BEE-RAG</div>
+<div class="meta">4 primary sources &middot; SGI Cohen&rsquo;s d 0.92&ndash;1.28 &middot; BEE-RAG entropy dilution &middot; Chronos event graph</div>
+<nav>
+<a href="index.html">DRIFT Hub</a>
+<a href="knowledge.html">Module A &mdash; Knowledge</a>
+<a href="alignment.html">Module B &mdash; Alignment</a>
+<a href="../index.html">Research Home</a>
+<a href="drift-in-llm-systems.pdf">PDF</a>
+</nav>
+</header>
+
+<main>
+
+<div class="download-bar">
+<div class="label">Full 42-page research pack (all three modules):</div>
+<div class="files"><a href="drift-in-llm-systems.pdf" download>PDF (283 KB)</a></div>
+</div>
+
+<h2 id="overview">Overview</h2>
+
+<p>Retrieval drift occurs on the output side of RAG systems: even when retrieval appears to succeed, the generation layer can semantically drift from the retrieved context toward parametric priors, effectively ignoring the retrieved documents. Module C covers four primary phenomena: Response Semantic Drift in diffusion-LM pipelines, temporal grounding via the Chronos event-evolution graph, the Semantic Grounding Index as the primary faithfulness metric, and context-entropy dilution in iterative BEE-RAG systems.</p>
+
+<div class="finding-box">
+<div class="num">0.92&ndash;1.28</div>
+<strong>Cohen&rsquo;s d: SGI grounded vs. ungrounded generation</strong> &mdash; The Semantic Grounding Index (SGI, 2025) reports Cohen&rsquo;s d of 0.92&ndash;1.28 between pairs of grounded and ungrounded outputs, representing a large-to-very-large effect size. This means grounding faithfulness is reliably measurable in production, not just in controlled settings (SGI 2025, arXiv:2512.13771).
+</div>
+
+<h2 id="rsd">1. Response Semantic Drift in Diffusion-LM RAG</h2>
+
+<p>RSD (2026, arXiv:2601.11342) characterized a drift mechanism specific to diffusion-based language model RAG pipelines: the denoising process interpolates between retrieved passages and parametric priors, and in high-prior-density topic regions, the output can semantically drift toward what the model &ldquo;already knows&rdquo; rather than what was retrieved. This is distinct from retrieval failure (the right document was found) and from output hallucination (the model is not confabulating); it is a generation-layer faithfulness failure where the denoising trajectory is pulled toward a parametric attractor.</p>
+
+<p>RSD introduces this as a separate drift surface requiring its own monitoring: standard RAG evaluation (retrieval precision, answer exact-match) does not detect it.</p>
+
+<h2 id="chronos">2. Chronos Event-Evolution Graph for Temporal Retrieval</h2>
+
+<p>Liu et al. (2026) developed Chronos, a system that builds an event-evolution graph over time-stamped documents and uses it to provide temporally-aware retrieval (arXiv:2604.05096). The core insight: many RAG drift failures are temporal &mdash; the retrieved document was accurate at time T but the world has moved to state T+k. Chronos models document facts as nodes in a directed temporal graph, with edges representing supersession, confirmation, or contradiction events. Retrieval is conditioned on the query timestamp, returning the most temporally proximate valid facts rather than the most semantically similar static documents.</p>
+
+<h2 id="sgi">3. Semantic Grounding Index</h2>
+
+<p>The Semantic Grounding Index (SGI, 2025, arXiv:2512.13771) measures how faithfully an LLM&rsquo;s generated text reflects the content of retrieved context documents rather than leaking parametric knowledge. SGI computes sentence-level entailment scores between output claims and retrieved passages. The reported effect size of <strong>Cohen&rsquo;s d 0.92&ndash;1.28</strong> between grounded and ungrounded generation pairs establishes SGI as a reliable production metric: the grounded vs. ungrounded distinction is large enough to detect at the individual-response level, not just at the population level (SGI 2025).</p>
+
+<p>SGI is the retrieval surface&rsquo;s primary quality metric, distinguishing &ldquo;semantic laziness&rdquo; (parametric leakage) from genuine source-faithful responses. The term &ldquo;semantic laziness&rdquo; denotes the failure mode where a model produces a plausible-sounding answer from parametric memory rather than grounding in the provided context, even when the context is directly relevant.</p>
+
+<h2 id="beerag">4. BEE-RAG Context-Entropy Dilution</h2>
+
+<p>BEE-RAG (2025, arXiv:2508.05100) studied context-entropy dilution in iterative RAG loops: as multiple retrieval rounds accumulate retrieved passages, the attention entropy over the context window increases, diluting the model&rsquo;s effective focus on any single retrieved passage. This is a different failure mode from RSD (which is about generation-layer pull) and from standard context overflow (which is about length limits) &mdash; it occurs within the capacity budget and arises from the model&rsquo;s attention mechanism distributing focus across increasingly many retrieved passages. BEE-RAG&rsquo;s entropy-aware retrieval strategy mitigates this by selecting passages that minimize redundancy in the attention distribution.</p>
+
+<h2 id="sources">Primary Sources</h2>
+
+<div class="source-card">
+<div class="src-key">rsd2026diffusion &mdash; arXiv:2601.11342</div>
+<div class="src-title">RSD (2026) &mdash; Response Semantic Drift in Diffusion-LM RAG</div>
+<div class="src-finding">Generation-layer drift toward parametric attractors in diffusion-LM RAG; new monitoring surface distinct from retrieval precision.</div>
+</div>
+
+<div class="source-card">
+<div class="src-key">liu2026chronos &mdash; arXiv:2604.05096</div>
+<div class="src-title">Liu et al. (2026) &mdash; Chronos Event-Evolution Graph</div>
+<div class="src-finding">Temporal event graph for time-aware retrieval; supersession / confirmation / contradiction edges condition retrieval on query timestamp.</div>
+</div>
+
+<div class="source-card">
+<div class="src-key">sgi2025grounding &mdash; arXiv:2512.13771</div>
+<div class="src-title">SGI (2025) &mdash; Semantic Grounding Index</div>
+<div class="src-finding">Cohen&rsquo;s d 0.92&ndash;1.28 between grounded and ungrounded generation; production-viable faithfulness metric.</div>
+</div>
+
+<div class="source-card">
+<div class="src-key">beerag2025entropy &mdash; arXiv:2508.05100</div>
+<div class="src-title">BEE-RAG (2025) &mdash; Context-Entropy Dilution in Iterative RAG</div>
+<div class="src-finding">Attention-entropy dilution as distinct RAG failure mode; entropy-aware passage selection mitigates focus dispersion.</div>
+</div>
+
+<h2 id="safety-gates">Safety Gates</h2>
+
+<table class="safety-table">
+<thead><tr><th>Gate ID</th><th>Check</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td class="gate-id">SC-SRC</td><td>All numeric claims carry inline citations</td><td class="pass">PASS</td></tr>
+<tr><td class="gate-id">SC-NUM</td><td>Cohen&rsquo;s d range bounded to cited paper&rsquo;s reported interval</td><td class="pass">PASS</td></tr>
+<tr><td class="gate-id">SC-ADV</td><td>No advisory-only sources presented as primary evidence</td><td class="pass">PASS</td></tr>
+<tr><td class="gate-id">SC-QUOTE</td><td>No direct quotes used in this module</td><td class="pass">PASS</td></tr>
+<tr><td class="gate-id">SC-TM</td><td>No Fox Companies proprietary material on published pages</td><td class="pass">PASS</td></tr>
+<tr><td class="gate-id">SC-VER</td><td>v1.49.569 Phase 690</td><td class="pass">PASS</td></tr>
+</tbody>
+</table>
+
+</main>
+
+<footer>
+  &copy; Tibsfox Inc. 2026 &middot;
+  <a href="index.html">DRIFT Hub</a> &middot;
+  <a href="knowledge.html">Module A</a> &middot;
+  <a href="alignment.html">Module B</a> &middot;
+  <a href="../index.html">Research Home</a> &middot;
+  <a href="drift-in-llm-systems.pdf">PDF</a>
+</footer>
+
+</body>
+</html>
