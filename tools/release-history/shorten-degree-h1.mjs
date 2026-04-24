@@ -10,14 +10,19 @@
 //   node tools/release-history/shorten-degree-h1.mjs --execute --from v1.49.229 --to v1.49.500
 
 import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { dirname, join, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const args = process.argv.slice(2);
 const dryRun = !args.includes('--execute');
 const fromV = args.includes('--from') ? args[args.indexOf('--from') + 1] : 'v1.49.229';
 const toV = args.includes('--to') ? args[args.indexOf('--to') + 1] : 'v1.49.500';
 
-const ROOT = '/path/to/projectGSD/dev-tools/gsd-skill-creator';
+// Project root is derived from this script's location so the file carries no
+// machine-specific path. This script lives at tools/release-history/*.mjs, so
+// the repo root is two directories up.
+const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
+const ROOT = resolve(SCRIPT_DIR, '..', '..');
 const DIR = join(ROOT, 'docs/release-notes');
 
 function semverKey(v) {

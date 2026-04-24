@@ -7,8 +7,10 @@
 #
 # Env resolution order:
 #   1. Already-exported vars (CI friendly)
-#   2. ./.env                     (this project)
-#   3. Anthropic ID cached at /path/to/projectGSD/dev-tools/artemis-ii/.env (fallback)
+#   2. ./.env                             (this project)
+#   3. $RH_ENV_FALLBACK (optional)        (user-configured absolute path to a
+#                                          second .env file, e.g. a shared
+#                                          credentials store). Unset by default.
 #
 # Flags passed through to refresh.mjs:
 #   --fast         skip expensive extract-metrics rescan
@@ -44,7 +46,12 @@ load_dotenv_safely() {
 }
 
 load_dotenv_safely "${REPO_ROOT}/.env"
-load_dotenv_safely "/path/to/projectGSD/dev-tools/artemis-ii/.env"
+# Optional user-configured fallback. Set RH_ENV_FALLBACK in your shell env to
+# point at a second .env file (e.g. a shared credentials store). Unset by
+# default so the script has no machine-specific path baked in.
+if [ -n "${RH_ENV_FALLBACK:-}" ]; then
+  load_dotenv_safely "$RH_ENV_FALLBACK"
+fi
 
 # Normalize PG_* (artemis naming) to PG* (standard libpq naming).
 : "${PGHOST:=${PG_HOST:-}}"
@@ -63,7 +70,7 @@ fi
 
 if [ -z "${RH_POSTGRES_URL:-}" ]; then
   echo "release-history-refresh: RH_POSTGRES_URL not resolvable (no .env creds found)" >&2
-  echo "  tried: \$RH_POSTGRES_URL, ${REPO_ROOT}/.env, ${FALLBACK_ENV}" >&2
+  echo "  tried: \$RH_POSTGRES_URL, ${REPO_ROOT}/.env, \$RH_ENV_FALLBACK (${RH_ENV_FALLBACK:-unset})" >&2
   exit 1
 fi
 
