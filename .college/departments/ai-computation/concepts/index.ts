@@ -13,3 +13,9 @@ export { capabilityEvolution } from './capability-evolution.js';
 export { harnessAsObject } from './harness-as-object.js';
 export { evidenceCentricReasoning } from './evidence-centric-reasoning.js';
 export { fourTierTrust } from './four-tier-trust.js';
+
+// Mathematical Foundations Refresh (Phase 744, v1.49.572 math-foundations-apr2026)
+export { semanticChannel } from './semantic-channel.js';
+export { rateDistortionDeductiveSource } from './rate-distortion-deductive-source.js';
+export { koopmanBilinearForm } from './koopman-bilinear-form.js';
+export { boundedLearningTheorem } from './bounded-learning-theorem.js';

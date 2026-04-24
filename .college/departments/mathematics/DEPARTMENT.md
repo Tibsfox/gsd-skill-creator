@@ -27,6 +27,10 @@
 | Scale-critical equations | Calculus | Python, C++, Lisp | math-blow-up-dynamics, math-complex-numbers |
 | Erdős problem index | Algebra | Python, C++, Lisp | math-euler-formula, math-logarithmic-scales |
 | Millennium problem catalogue | Algebra | Python, C++, Lisp | math-erdos-problem-index, math-complex-numbers |
+| Coherent Functor | Complex Analysis | Python, TypeScript, Lean 4 | math-complex-numbers, ai-computation-harness-as-object, math-euler-formula · Phase 744 v1.49.572 |
+| Ollivier-Ricci Curvature | Geometry | Python, TypeScript, Rust | math-fractal-geometry, ai-computation-harness-as-object, math-exponential-decay · Phase 744 v1.49.572 |
+| Hourglass Persistence | Geometry | Python, TypeScript | math-ollivier-ricci-curvature, math-fractal-geometry · Phase 744 v1.49.572 |
+| Tonnetz Lattice | Complex Analysis | Python, TypeScript | math-euler-formula, math-complex-numbers, math-trig-functions · Phase 744 v1.49.572 |
 
 ## Panels
 
