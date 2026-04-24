@@ -20,13 +20,17 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { readFileSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const repoRoot = join(here, '../../');
 const crossRefsPath = join(repoRoot, 'www/tibsfox/com/Research/cross-references.json');
+
+// www/tibsfox/com/Research is gitignored (regenerable, published via
+// sync-research-to-live.sh). Skip on CI / fresh checkouts.
+const ASSETS_PRESENT = existsSync(crossRefsPath);
 
 interface Edge {
   id: string;
@@ -50,8 +54,8 @@ interface CrossRefDoc {
   edges: Edge[];
 }
 
-describe('cross-references.json integrity (DRIFT-15)', () => {
-  const raw = readFileSync(crossRefsPath, 'utf8');
+describe.runIf(ASSETS_PRESENT)('cross-references.json integrity (DRIFT-15)', () => {
+  const raw = ASSETS_PRESENT ? readFileSync(crossRefsPath, 'utf8') : '{"edges":[]}';
   const doc: CrossRefDoc = JSON.parse(raw);
 
   it('parses as valid JSON with the expected top-level shape', () => {
