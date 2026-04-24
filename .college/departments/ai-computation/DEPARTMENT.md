@@ -28,6 +28,12 @@
 ### Retrieval-Augmented Generation (1 concept)
 - ai-computation-grounding-faithfulness — Semantic Grounding Index (SGI); Cohen's d 0.92–1.28 grounded vs. ungrounded (SGI 2025)
 
+### Mathematical Foundations Refresh — Silicon Layer (Phase 744, v1.49.572 math-foundations-apr2026)
+- ai-computation-semantic-channel — DACP three-part bundle channel; capacity bounded by weakest leg (arXiv:2604.16471) — Phase 747 substrate
+- ai-computation-rate-distortion-deductive-source — R-D curve for deductive sources has soundness discontinuity (arXiv:2604.15698) — Phase 747 substrate
+- ai-computation-koopman-bilinear-form — Mamba-Koopman sequence-memory bilinear form + spectral stability (arXiv:2604.17221) — Phase 749 substrate
+- ai-computation-bounded-learning-theorem — Formal backing for the 20%-rule via Peng continual-recovery envelope (arXiv:2604.17563) — Phase 748 reference
+
 ## Cross-References
 
 | Department | Bridge Type | Entry Point |
