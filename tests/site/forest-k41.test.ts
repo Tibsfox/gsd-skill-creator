@@ -1,5 +1,16 @@
 import { describe, it, expect } from 'vitest';
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+import { existsSync } from 'node:fs';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+// forest-sim sources live under www/tibsfox/com/Research/, which is gitignored
+// (regenerable artifacts synced to tibsfox.com via sync-research-to-live.sh).
+// On CI / fresh checkouts the files are absent, so skip instead of failing.
+const here = dirname(fileURLToPath(import.meta.url));
+const k41Path = join(here, '../../www/tibsfox/com/Research/forest/k41.js');
+const microPath = join(here, '../../www/tibsfox/com/Research/forest/microphysics.js');
+const ASSETS_PRESENT = existsSync(k41Path) && existsSync(microPath);
+
 const K41: {
   k41TkeDissipation: (U: number, L: number) => number;
   k41KolmogorovScale: (eps: number, nu?: number) => number;
@@ -7,8 +18,7 @@ const K41: {
   k41StructureFunctionScaling: (eps: number, r: number) => number;
   NU_AIR: number;
   C_S: number;
-} = require('../../www/tibsfox/com/Research/forest/k41.js');
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+} = ASSETS_PRESENT ? require(k41Path) : ({} as never);
 const Micro: {
   kohlerActivationFraction: (
     sEnv: number,
@@ -16,9 +26,9 @@ const Micro: {
     T: number,
     kappa: number,
   ) => number;
-} = require('../../www/tibsfox/com/Research/forest/microphysics.js');
+} = ASSETS_PRESENT ? require(microPath) : ({} as never);
 
-describe('forest-sim K41 turbulence closure (Phase 681)', () => {
+describe.runIf(ASSETS_PRESENT)('forest-sim K41 turbulence closure (Phase 681)', () => {
   it.each([
     // [U (m/s), L (m), eps_min, eps_max, label]
     [0.5, 30, 1e-4, 1e-2, 'low-Re canopy breeze'],
