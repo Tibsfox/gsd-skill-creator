@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LeJEPA Integration — Heuristics-Free Skill Space | Tibsfox Research</title>
+<meta name="description" content="From provable self-supervised learning to a provably non-collapsing skill space. LeJEPA (Balestriero &amp; LeCun 2025), LeWorldModel (Maes et al. 2026), and their implications for gsd-skill-creator. (2026-04-23)">
+<!-- SC-VER: tibsfox.com/Research/LEJEPA/index.html — v1.49.571 Phase 727 -->
+<style>
+:root {
+  --bg: #04060c; --panel: #080c16; --border: rgba(255,255,255,0.06);
+  --text: #c8d0e0; --dim: rgba(255,255,255,0.35);
+  --lejepa-steel: #1565C0; --lejepa-copper: #c18a4d; --lejepa-ivory: #ECEFF1;
+  --lejepa-accent: #1565C0;
+  --text-bright: #f5f9ff;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:Georgia,'Times New Roman',serif; line-height:1.75; }
+a { color:var(--lejepa-steel); text-decoration:none; }
+a:hover { color:var(--lejepa-copper); text-decoration:underline; }
+header {
+  background:linear-gradient(135deg,#040614 0%,#0a1228 25%,#12204a 50%,#0b1836 75%,var(--bg) 100%);
+  padding:2.5rem 2rem 2rem; text-align:center;
+  border-bottom:3px solid var(--lejepa-steel);
+  position:relative; overflow:hidden;
+}
+header::before { content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse 40% 50% at 50% 40%,rgba(21,101,192,.10) 0%,transparent 70%); }
+h1 { font-size:2.6rem; color:var(--text-bright); margin-bottom:.5rem; font-weight:400; position:relative; }
+h1 .sub { display:block; font-size:1.1rem; color:var(--lejepa-copper); margin-top:.5rem; font-style:italic; }
+.meta { color:var(--dim); font-size:.95rem; position:relative; }
+main { max-width:920px; margin:0 auto; padding:3rem 2rem; }
+section { margin-bottom:3.5rem; }
+h2 { color:var(--lejepa-steel); font-size:1.7rem; margin-bottom:1.25rem; font-weight:400;
+  border-bottom:1px solid var(--border); padding-bottom:.5rem; }
+h3 { color:var(--lejepa-copper); font-size:1.2rem; margin:1.5rem 0 .75rem; font-weight:400; }
+p { margin-bottom:1.15rem; }
+blockquote { border-left:4px solid var(--lejepa-steel); background:rgba(21,101,192,.05);
+  padding:1rem 1.5rem; margin:1.25rem 0; font-style:italic; color:var(--text-bright); }
+code { background:rgba(21,101,192,.12); color:var(--lejepa-copper); padding:.1rem .35rem; border-radius:3px; font-family:'DejaVu Sans Mono',monospace; font-size:.9em; }
+.cards { display:grid; grid-template-columns:1fr 1fr; gap:1.1rem; margin:1.5rem 0; }
+@media(max-width:640px){ .cards{grid-template-columns:1fr;} h1{font-size:2rem;} }
+.card { border:1px solid var(--border); background:var(--panel); padding:1.25rem; border-radius:4px;
+  transition:border-color .15s ease; }
+.card:hover { border-color:var(--lejepa-steel); }
+.card h3 { margin-top:0; color:var(--text-bright); font-size:1.05rem; }
+.card .tag { font-size:.75rem; letter-spacing:.08em; text-transform:uppercase; color:var(--lejepa-steel); }
+.card p { font-size:.92rem; margin-bottom:.5rem; }
+footer { text-align:center; padding:2.5rem 2rem; border-top:1px solid var(--border); color:var(--dim); font-size:.88rem; }
+footer a { color:var(--lejepa-steel); }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>LeJEPA Integration<span class="sub">From Heuristics-Free Self-Supervised Learning to a Provably Non-Collapsing Skill Space</span></h1>
+  <p class="meta">Milestone v1.49.571 · Heuristics-Free Skill Space · 23 April 2026</p>
+</header>
+
+<main>
+
+<section>
+<h2>The Claim in One Sentence</h2>
+<blockquote>
+When the principles are right, the implementation becomes forgiving. LeJEPA's fifty-line regularizer
+works because a theoretically grounded objective replaces a decade of accumulated anti-collapse
+heuristics — and gsd-skill-creator's skill library is a latent space organized by the same logic.
+</blockquote>
+<p>
+In November 2025 Randall Balestriero and Yann LeCun published
+<a href="https://arxiv.org/abs/2511.08544"><em>LeJEPA: Provable and Scalable Self-Supervised Learning
+Without the Heuristics</em></a>. The paper proves that the <em>isotropic Gaussian</em> uniquely minimizes
+downstream prediction risk for Joint-Embedding Predictive Architectures under both linear and
+nonlinear probes, and introduces SIGReg (Sketched Isotropic Gaussian Regularization): Cramér-Wold
+slicing plus the Epps-Pulley empirical characteristic function test, in roughly fifty lines of
+PyTorch. Teacher-student networks, stop-gradient, EMA schedulers, negative samples — a decade of
+anti-collapse heuristics — dissolve into a single hyperparameter λ.
+</p>
+<p>
+Five months later, LeCun's <em>Special Lecture on AI and World Models</em> (Al-Khwarizmi Applied
+Mathematics Webinar, 14 April 2026) situates LeJEPA inside his longer argument: JEPAs as the path
+past autoregressive LLMs, and <a href="https://le-wm.github.io/">LeWorldModel</a> (Maes et al. 2026)
+as the first end-to-end pixel world model that plans in latent space — 48× faster than DINO-WM
+because its compact 192-dim CLS-style latent shrinks the CEM state space by ~200×.
+</p>
+<p>
+For <code>gsd-skill-creator</code>, this is not purely academic. The architectural parallels are unusually
+direct — the Amiga Principle is the same architectural-leverage argument in a different idiom; the
+chipset, bounded-learning caps, CAPCOM gates, and College of Knowledge each have a LeJEPA analogue.
+This research hub indexes the mission package, the four themed research pages, and the substrate
+modules shipping in Half B.
+</p>
+</section>
+
+<section>
+<h2>Research Pages</h2>
+<div class="cards">
+  <a class="card" href="sigreg-mechanics.html">
+    <span class="tag">Mechanics</span>
+    <h3>SIGReg — How the Regularizer Works</h3>
+    <p>Sketching strategy (Cramér-Wold slicing), why moments fail, why CDFs fail, why the Epps-Pulley ECF succeeds — and the ≈50-LOC reference implementation.</p>
+  </a>
+  <a class="card" href="world-models.html">
+    <span class="tag">World Models</span>
+    <h3>LeWorldModel + LeCun's Vision</h3>
+    <p>I-JEPA → V-JEPA → IWM → LeJEPA → LeWM lineage. Two-loss end-to-end pixel world model, 192-dim latent, 48× CEM planning speedup, label-free Spearman-0.99 quality signal.</p>
+  </a>
+  <a class="card" href="gsd-parallels.html">
+    <span class="tag">Parallels</span>
+    <h3>LeJEPA ↔ gsd-skill-creator</h3>
+    <p>Twelve architectural parallels with both sides sourced: heuristics↔Amiga Principle, single-λ↔bounded-learning knobs, LeWM↔mission-state world-model, and more.</p>
+  </a>
+  <a class="card" href="through-line.html">
+    <span class="tag">Through-line</span>
+    <h3>The Amiga Principle, in ML Form</h3>
+    <p>Why fifty lines of code is not a shortcut. The Commodore Amiga, Cramér-Wold (1936), Epps-Pulley (1983), and what happens when a distributional target finally gets stated out loud.</p>
+  </a>
+</div>
+</section>
+
+<section>
+<h2>Mission Package</h2>
+<p>
+The full three-stage Vision → Research → Mission package (35 pages) is archived at
+<code>.planning/missions/arxiv-april-2026-lejepa-integration/</code>: <code>mission.pdf</code> + <code>mission.tex</code> + <code>index.html</code>.
+It was authored as the seed document for this milestone and contains the complete Stage-1 Vision,
+the Stage-2 Research Reference that drove Phases 721-727, and the Stage-3 Mission Specification that
+the roadmap turned into 15 executable phases.
+</p>
+</section>
+
+<section>
+<h2>Half B — Substrate Modules</h2>
+<p>
+The mechanism survey above drives Half B of this milestone — six default-off substrate modules shipping
+across Phases 728-734:
+</p>
+<ul style="margin-left:1.5rem;">
+<li><strong>Skill Space Isotropy Audit</strong> (<code>src/skill-isotropy/</code>) — Cramér-Wold slicing applied to skill embeddings</li>
+<li><strong>SIGReg primitive</strong> (<code>src/sigreg/</code>) — ≤80-LOC Epps-Pulley port (MIT-attributed)</li>
+<li><strong>Single-λ orchestration audit</strong> — maps bounded-learning knob clusters to principled balance parameters</li>
+<li><strong>Heuristics audit</strong> — scores the six-step loop for stop-gradient-analogue behaviors</li>
+<li><strong>Mission-state world-model layer</strong> (<code>src/mission-world-model/</code>) — mini-LeWM for pre-dispatch wave rehearsal; sits <em>under</em> CAPCOM</li>
+<li><strong>Intrinsic telemetry</strong> (<code>src/intrinsic-telemetry/</code>) — Spearman-style label-free quality signal</li>
+</ul>
+<p style="margin-top:1rem;">
+All six ship default-off, opt-in via the <code>heuristics-free-skill-space</code> block in
+<code>.claude/gsd-skill-creator.json</code>. CAPCOM preservation is a hard gate throughout Half B —
+every module augments rather than replaces the human-gate architecture.
+</p>
+</section>
+
+<section>
+<h2>Primary Sources</h2>
+<ul style="margin-left:1.5rem;">
+<li>Balestriero, R. &amp; LeCun, Y. (2025). <a href="https://arxiv.org/abs/2511.08544"><em>LeJEPA: Provable and Scalable Self-Supervised Learning Without the Heuristics</em></a>. arXiv:2511.08544v3 [cs.LG].</li>
+<li>LeCun, Y. (14 April 2026). <em>Special Lecture on AI and World Models</em>. Al-Khwarizmi Applied Mathematics Webinar.</li>
+<li>Maes, L., Le Lidec, Q., Scieur, D., LeCun, Y., &amp; Balestriero, R. (2026). <a href="https://le-wm.github.io/"><em>LeWorldModel: Stable End-to-End JEPA from Pixels</em></a>.</li>
+<li>Reference implementations: <a href="https://github.com/rbalestr-lab/lejepa">rbalestr-lab/lejepa</a> (MIT) · <a href="https://github.com/lucas-maes/le-wm">lucas-maes/le-wm</a></li>
+</ul>
+</section>
+
+</main>
+
+<footer>
+Milestone v1.49.571 Heuristics-Free Skill Space · gsd-skill-creator Research Series ·
+© Tibsfox Inc. 2026 · <a href="/Research/">Research index</a> · <a href="/Research/CONV/">← v1.49.570 Convergent Substrate</a>
+</footer>
+
+</body>
+</html>

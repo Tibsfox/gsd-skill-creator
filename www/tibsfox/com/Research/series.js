@@ -82,6 +82,47 @@ export const researchSeries = [
     tags: ['math', 'ai', 'tibs'],
   },
 
+  // ─── LeJEPA Integration (v1.49.571) — AI & Computation cluster ─────
+  {
+    id: 'lejepa-hub',
+    label: 'LeJEPA Integration',
+    href: 'LEJEPA/index.html',
+    cluster: 'AI-COMPUTATION',
+    tags: ['ai', 'ssl', 'jepa', 'world-models', 'amiga-principle', 'arxiv'],
+  },
+  {
+    id: 'lejepa-sigreg',
+    label: 'LEJEPA: SIGReg Mechanics',
+    href: 'LEJEPA/sigreg-mechanics.html',
+    cluster: 'AI-COMPUTATION',
+    tags: ['ai', 'ssl', 'cramer-wold', 'epps-pulley', 'ecf'],
+    parent: 'lejepa-hub',
+  },
+  {
+    id: 'lejepa-world-models',
+    label: 'LEJEPA: World Models',
+    href: 'LEJEPA/world-models.html',
+    cluster: 'AI-COMPUTATION',
+    tags: ['ai', 'jepa', 'world-model', 'cem-planning', 'lewm'],
+    parent: 'lejepa-hub',
+  },
+  {
+    id: 'lejepa-gsd-parallels',
+    label: 'LEJEPA: GSD Parallels',
+    href: 'LEJEPA/gsd-parallels.html',
+    cluster: 'AI-COMPUTATION',
+    tags: ['ai', 'architecture', 'amiga-principle', 'half-b'],
+    parent: 'lejepa-hub',
+  },
+  {
+    id: 'lejepa-through-line',
+    label: 'LEJEPA: Through-line',
+    href: 'LEJEPA/through-line.html',
+    cluster: 'AI-COMPUTATION',
+    tags: ['ai', 'philosophy', 'amiga-principle'],
+    parent: 'lejepa-hub',
+  },
+
   // ─── Convergent Substrate (v1.49.570) — AI & Computation cluster ─────
   {
     id: 'conv-hub',

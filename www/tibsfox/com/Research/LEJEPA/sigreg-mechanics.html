@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SIGReg Mechanics — How the LeJEPA Regularizer Works | Tibsfox Research</title>
+<meta name="description" content="Sketched Isotropic Gaussian Regularization in ~50 lines: Cramér-Wold slicing, the Epps-Pulley empirical characteristic function test, and why moment- and CDF-based alternatives fail.">
+<!-- SC-VER: tibsfox.com/Research/LEJEPA/sigreg-mechanics.html — v1.49.571 Phase 727 -->
+<style>
+:root{--bg:#04060c;--panel:#080c16;--border:rgba(255,255,255,0.06);--text:#c8d0e0;--dim:rgba(255,255,255,0.35);--lejepa-steel:#1565C0;--lejepa-copper:#c18a4d;--text-bright:#f5f9ff;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:Georgia,'Times New Roman',serif;line-height:1.75;}
+a{color:var(--lejepa-steel);} a:hover{color:var(--lejepa-copper);text-decoration:underline;}
+header{background:linear-gradient(135deg,#040614 0%,#0a1228 25%,#12204a 50%,#0b1836 75%,var(--bg) 100%);padding:2rem;text-align:center;border-bottom:2px solid var(--lejepa-steel);}
+h1{font-size:2.2rem;color:var(--text-bright);font-weight:400;margin-bottom:.4rem;}
+.meta{color:var(--dim);font-size:.9rem;}
+main{max-width:860px;margin:0 auto;padding:2.5rem 2rem;}
+h2{color:var(--lejepa-steel);font-size:1.5rem;margin:2rem 0 1rem;font-weight:400;border-bottom:1px solid var(--border);padding-bottom:.3rem;}
+h3{color:var(--lejepa-copper);font-size:1.15rem;margin:1.25rem 0 .5rem;}
+p{margin-bottom:1rem;}
+code{background:rgba(21,101,192,.12);color:var(--lejepa-copper);padding:.08rem .3rem;border-radius:3px;font-family:'DejaVu Sans Mono',monospace;font-size:.9em;}
+pre{background:var(--panel);border:1px solid var(--border);padding:1rem;border-radius:4px;overflow-x:auto;font-family:'DejaVu Sans Mono',monospace;font-size:.88rem;color:#d8e0f0;margin:1rem 0;}
+.math{font-style:italic;color:var(--lejepa-copper);}
+blockquote{border-left:3px solid var(--lejepa-steel);background:rgba(21,101,192,.04);padding:.75rem 1.25rem;margin:1rem 0;font-style:italic;color:var(--text-bright);}
+.failure-table{width:100%;border-collapse:collapse;margin:1rem 0;}
+.failure-table th,.failure-table td{padding:.65rem .75rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:top;}
+.failure-table th{background:rgba(21,101,192,.08);color:var(--lejepa-steel);font-weight:600;}
+.failure-table tr:nth-child(even){background:rgba(255,255,255,.015);}
+footer{text-align:center;padding:2rem;border-top:1px solid var(--border);color:var(--dim);font-size:.85rem;}
+footer a{color:var(--lejepa-steel);}
+</style>
+</head>
+<body>
+
+<header>
+<h1>SIGReg — How the Regularizer Works</h1>
+<p class="meta">LeJEPA Integration · Module 2 · Phase 723 source · v1.49.571 Phase 727</p>
+</header>
+
+<main>
+
+<h2>The Problem SIGReg Solves</h2>
+<p>
+LeJEPA's Theorem 1 proves that the isotropic Gaussian uniquely minimizes worst-case downstream risk
+for embeddings. Proving is the easy part; <em>measuring</em> how far an empirical embedding distribution
+is from an isotropic Gaussian in K dimensions is where everyone had historically gotten stuck. Kernel
+density estimation suffers the curse of dimensionality. Moment-matching founders on Carleman's 1926
+non-identifiability. The field's workaround had been a decade of anti-collapse heuristics
+(stop-gradient, teacher-student networks, EMA, negative samples) — techniques that work but resist
+principled explanation.
+</p>
+<p>
+SIGReg replaces all of that with roughly fifty lines of PyTorch. It does so by factoring the problem
+through the Hyperspherical Cramér-Wold theorem.
+</p>
+
+<h2>The Cramér-Wold Reduction</h2>
+<blockquote>
+Let <span class="math">X, Y</span> be <span class="math">ℝ<sup>d</sup></span>-valued random vectors.
+Then <span class="math">⟨u, X⟩ =<sub>d</sub> ⟨u, Y⟩</span> for all <span class="math">u ∈ S<sup>d−1</sup></span>
+if and only if <span class="math">X =<sub>d</sub> Y</span>.
+— LeJEPA Lemma 3 (Hyperspherical Cramér-Wold)
+</blockquote>
+<p>
+Comparing two K-dimensional distributions is equivalent to comparing their one-dimensional projections
+along every unit direction. The <em>every</em> gets softened in practice to <em>enough</em> (sampled
+uniformly on the sphere), and Theorem 2 of the paper formalizes this into a valid asymptotic statistical
+test with the expected level-and-power properties.
+</p>
+
+<h2>The Sketching Strategy</h2>
+<p>
+Given M random unit directions <span class="math">𝒜 = {a₁, …, a<sub>M</sub>}</span>, SIGReg computes:
+</p>
+<pre>SIGReg_T(𝒜, {f_θ(xₙ)}) = (1/|𝒜|) · Σ_{a ∈ 𝒜}  T( {a⊤ f_θ(xₙ)} )</pre>
+<p>
+where <code>T</code> is any consistent univariate goodness-of-fit test against the standard one-dimensional
+Gaussian. The outer operator is an <em>average</em> over directions, not a maximum. This is deliberate: a
+maximum-over-directions produces sparse gradients (only the worst direction contributes to the backward
+pass), while the average spreads gradient signal across every sampled direction and trains stably under SGD.
+</p>
+
+<h2>What T Is Not</h2>
+
+<h3>Moments — rejected by §4.2.1</h3>
+<table class="failure-table">
+<tr><th>Failure mode</th><th>Consequence</th></tr>
+<tr>
+  <td>Non-identifiability (Theorem 3 + Carleman 1926)</td>
+  <td>Matching the first K moments, for any finite K, does not imply distributional equality. Jarque-Bera extended nails mean, variance, skewness, kurtosis — leaves infinite distributions unconstrained at moments 5+.</td>
+</tr>
+<tr>
+  <td>Gradient instability</td>
+  <td>The k-th moment's gradient norm scales <span class="math">O(k)</span>; its Monte-Carlo variance scales <span class="math">O(k²·m<sub>2(k−1)</sub>)</span>. Pushing k high enough to constrain the tail breaks SGD.</td>
+</tr>
+</table>
+
+<h3>CDFs — rejected by §4.2.2</h3>
+<table class="failure-table">
+<tr><th>Failure mode</th><th>Consequence</th></tr>
+<tr>
+  <td>Sorting breaks embarrassing parallelism</td>
+  <td><span class="math">O(N log N)</span> cost + cross-device synchronization. SGD deliberately avoids this; putting it back at the regularizer inverts distributed-training scaling.</td>
+</tr>
+<tr>
+  <td>Non-differentiable order statistics</td>
+  <td>Cramér-von Mises, Anderson-Darling, Watson, Shapiro-Wilk all need sorted projections. Relaxations (soft sort) add hyperparameters — precisely what LeJEPA aimed to eliminate.</td>
+</tr>
+<tr>
+  <td>ℓ<sub>∞</sub> sparse gradients (Kolmogorov-Smirnov)</td>
+  <td>KS uses a supremum over the CDF difference; only one point contributes to the gradient.</td>
+</tr>
+</table>
+
+<h2>What T Is — Epps-Pulley Empirical Characteristic Function</h2>
+<p>
+§4.2.3 settles on the Epps-Pulley test (<a href="https://www.jstor.org/stable/2336165">Epps &amp; Pulley
+1983, <em>Biometrika</em></a>):
+</p>
+<pre>EP = N · ∫  |φ̂_X(t) − φ(t)|²  w(t)  dt,     w(t) = e^{−t²/σ²},   σ=1</pre>
+<p>
+where the empirical characteristic function is:
+</p>
+<pre>φ̂_X(t) = (1/n) · Σⱼ e^{i t Xⱼ}</pre>
+<p>Three load-bearing properties:</p>
+<ul style="margin-left:1.5rem;margin-bottom:1rem;">
+<li><strong>Linear complexity.</strong> <span class="math">O(N)</span> time and memory.</li>
+<li><strong>Naturally differentiable.</strong> The ECF is a sum of smooth functions of the samples; no order statistics, no sorting.</li>
+<li><strong>Multi-GPU friendly.</strong> The ECF is an average, aggregated across devices via a single <code>all_reduce</code>.</li>
+</ul>
+<p>
+And the load-bearing theoretical property: characteristic functions <em>uniquely determine
+distributions</em>. Matching them gives full distributional identity, not just finite-moment matching.
+</p>
+
+<h2>Defeating the Curse of Dimensionality</h2>
+<p>
+A fair objection: the projection reduction does not eliminate dimensionality; it just changes where
+the dimensionality lives. §4.3 argues that SIGReg's construction defeats the curse because the target
+(isotropic Gaussian) is smooth in the Sobolev sense. Smoothness coefficients grow rapidly for smooth
+targets, so a small M suffices to constrain the whole space.
+</p>
+<p>
+Empirical receipt (Figure 6 of the paper): a 1024-dimensional Gaussian with a perturbation in two
+coordinates is recovered with <strong>M = 10 random directions</strong> and <strong>N = 100 samples</strong>
+— well inside a single training batch.
+</p>
+
+<h2>The ~50-LOC Reference</h2>
+<p>
+The official implementation at <a href="https://github.com/rbalestr-lab/lejepa">rbalestr-lab/lejepa</a>
+(MIT) factors as:
+</p>
+<pre>import lejepa
+univariate_test = lejepa.univariate.EppsPulley(num_points=17)
+loss_fn = lejepa.multivariate.SlicingUnivariateTest(
+    univariate_test=univariate_test,
+    num_slices=1024,
+)
+loss = loss_fn(embeddings)   # [num_samples, num_dims]
+loss.backward()</pre>
+<p>
+The single hyperparameter λ balances the JEPA prediction loss against SIGReg:
+</p>
+<pre>L = L_pred + λ · SIGReg(Z)</pre>
+<p>
+The paper demonstrates robustness across a wide λ range — the sweet spot is broad, not knife-edge. That
+robustness is not a corollary of the theory; it's an empirical result the paper reports to justify the
+"single hyperparameter" claim.
+</p>
+
+<h2>Why This Matters for gsd-skill-creator</h2>
+<p>
+Module 2's "why this failed, why this succeeded" survey is worth carrying forward as a design lens. The
+pattern repeats: a candidate mechanism has the right intent but the wrong computational shape, and the
+better mechanism is chosen because it factors cleanly into the existing gradient/parallelism/differentiability
+framework. Phase 731 (T1d Heuristics audit) applies the same lens to the six-step skill-creator loop —
+asking of each engineering heuristic whether a principled objective could subsume it without sacrificing
+throughput.
+</p>
+<p>
+Phase 729 ports SIGReg itself as <code>src/sigreg/</code> — target ≤80 LOC core, MIT-attributed,
+default-off. Phase 728 adapts the <em>mechanism</em> (Cramér-Wold slicing) to the skill library as the
+Skill Space Isotropy Audit.
+</p>
+
+</main>
+
+<footer>
+Milestone v1.49.571 · <a href="index.html">← LeJEPA hub</a> · <a href="world-models.html">World models →</a>
+</footer>
+
+</body>
+</html>
