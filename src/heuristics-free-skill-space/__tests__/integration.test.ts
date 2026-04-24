@@ -26,7 +26,15 @@ import * as sigregMod from '../../sigreg/index.js';
 import * as missionWorldModel from '../../mission-world-model/index.js';
 import * as intrinsicTelemetry from '../../intrinsic-telemetry/index.js';
 
-// ---------- settings reader ----------
+// The live-config checks only make sense on an installation where the developer
+// has opted modules in. `.claude/gsd-skill-creator.json` is gitignored by project
+// policy (per-install state), so CI clones and fresh checkouts do not have it —
+// in that case the live-config assertions would be vacuous. We guard with
+// existsSync and skip when absent. Mirrors src/convergent/__tests__/settings.test.ts.
+const LIVE_CONFIG_PATH = path.join(process.cwd(), '.claude', 'gsd-skill-creator.json');
+const LIVE_CONFIG_PRESENT = fs.existsSync(LIVE_CONFIG_PATH);
+
+// ---------- settings reader (always runs; uses defaults when config absent) ----------
 
 describe('readHeuristicsFreeConfig', () => {
   it('returns a well-typed config object for every module', () => {
@@ -45,12 +53,13 @@ describe('readHeuristicsFreeConfig', () => {
     expect(typeof isModuleEnabled('mission_world_model')).toBe('boolean');
     expect(typeof isModuleEnabled('intrinsic_telemetry')).toBe('boolean');
   });
+});
 
+// ---------- live-config tests (skipped when .claude/gsd-skill-creator.json is absent) ----------
+
+describe.runIf(LIVE_CONFIG_PRESENT)('live .claude/gsd-skill-creator.json (developer install)', () => {
   it('reads the actual project config and schema matches v1.49.571 additions', () => {
-    const raw = fs.readFileSync(
-      path.join(process.cwd(), '.claude', 'gsd-skill-creator.json'),
-      'utf8',
-    );
+    const raw = fs.readFileSync(LIVE_CONFIG_PATH, 'utf8');
     expect(raw).toContain('heuristics-free-skill-space');
     expect(raw).toContain('skill_isotropy_audit');
     expect(raw).toContain('sigreg');
@@ -60,17 +69,29 @@ describe('readHeuristicsFreeConfig', () => {
 
   it('config defaults to enabled=false for every Half B flag (SC-CONT-FLAG-OFF prerequisite)', () => {
     // Read the actual file. Every module flag should be false.
-    const raw = JSON.parse(
-      fs.readFileSync(
-        path.join(process.cwd(), '.claude', 'gsd-skill-creator.json'),
-        'utf8',
-      ),
-    );
+    const raw = JSON.parse(fs.readFileSync(LIVE_CONFIG_PATH, 'utf8'));
     const block = raw['gsd-skill-creator']['heuristics-free-skill-space'];
     expect(block.skill_isotropy_audit.enabled).toBe(false);
     expect(block.sigreg.enabled).toBe(false);
     expect(block.mission_world_model.enabled).toBe(false);
     expect(block.intrinsic_telemetry.enabled).toBe(false);
+  });
+});
+
+describe.runIf(!LIVE_CONFIG_PRESENT)('live config absent (CI / fresh checkout)', () => {
+  it('readHeuristicsFreeConfig returns all-default-false when the config file is missing', () => {
+    const cfg = readHeuristicsFreeConfig();
+    expect(cfg.skill_isotropy_audit.enabled).toBe(false);
+    expect(cfg.sigreg.enabled).toBe(false);
+    expect(cfg.mission_world_model.enabled).toBe(false);
+    expect(cfg.intrinsic_telemetry.enabled).toBe(false);
+  });
+
+  it('isModuleEnabled returns false for every module without a config file', () => {
+    expect(isModuleEnabled('skill_isotropy_audit')).toBe(false);
+    expect(isModuleEnabled('sigreg')).toBe(false);
+    expect(isModuleEnabled('mission_world_model')).toBe(false);
+    expect(isModuleEnabled('intrinsic_telemetry')).toBe(false);
   });
 });
 
@@ -230,22 +251,16 @@ describe('MB-1 Lyapunov + MB-5 dead-zone composition contracts', () => {
   });
 });
 
-// ---------- schema validation ----------
+// ---------- schema validation (live-config only — gated by LIVE_CONFIG_PRESENT) ----------
 
-describe('`.claude/gsd-skill-creator.json` schema round-trip', () => {
+describe.runIf(LIVE_CONFIG_PRESENT)('`.claude/gsd-skill-creator.json` schema round-trip', () => {
   it('config parses as valid JSON', () => {
-    const raw = fs.readFileSync(
-      path.join(process.cwd(), '.claude', 'gsd-skill-creator.json'),
-      'utf8',
-    );
+    const raw = fs.readFileSync(LIVE_CONFIG_PATH, 'utf8');
     expect(() => JSON.parse(raw)).not.toThrow();
   });
 
   it('prior milestone blocks (convergent, sensoria, lyapunov, umwelt, orchestration) are preserved', () => {
-    const raw = fs.readFileSync(
-      path.join(process.cwd(), '.claude', 'gsd-skill-creator.json'),
-      'utf8',
-    );
+    const raw = fs.readFileSync(LIVE_CONFIG_PATH, 'utf8');
     // These were present before v1.49.571 opened and must remain intact.
     expect(raw).toContain('"convergent"');
     expect(raw).toContain('"sensoria"');
@@ -255,12 +270,7 @@ describe('`.claude/gsd-skill-creator.json` schema round-trip', () => {
   });
 
   it('heuristics-free-skill-space block carries the _capcom_preservation note (hard-gate audit trail)', () => {
-    const raw = JSON.parse(
-      fs.readFileSync(
-        path.join(process.cwd(), '.claude', 'gsd-skill-creator.json'),
-        'utf8',
-      ),
-    );
+    const raw = JSON.parse(fs.readFileSync(LIVE_CONFIG_PATH, 'utf8'));
     const block = raw['gsd-skill-creator']['heuristics-free-skill-space'];
     expect(block._capcom_preservation).toBeDefined();
     expect(String(block._capcom_preservation)).toContain('CAPCOM');
