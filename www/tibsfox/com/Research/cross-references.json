@@ -1,12 +1,25 @@
 {
   "$schema": "https://tibsfox.com/schemas/research-cross-references/v1.json",
   "version": "1.0.0",
-  "description": "Edge graph connecting Tibsfox Research nodes. Phase 690 drift-hub seed (10 edges) plus Phase 707 convergent-substrate extension (7 edges).",
+  "description": "Edge graph connecting Tibsfox Research nodes. Phase 690 drift-hub seed (10 edges) plus Phase 707 convergent-substrate extension (7 edges). Phase 727 LeJEPA extension (10 edges).",
   "generated": "2026-04-23",
   "node_count": 180,
-  "edge_count": 17,
+  "edge_count": 27,
   "clusters": [
-    "PNW", "NASA", "S36", "SPS", "BLN", "CSP", "TIBS", "GFX", "MUK", "SOL", "AI-COMPUTATION", "DRIFT", "CONV", "SYS"
+    "PNW",
+    "NASA",
+    "S36",
+    "SPS",
+    "BLN",
+    "CSP",
+    "TIBS",
+    "GFX",
+    "MUK",
+    "SOL",
+    "AI-COMPUTATION",
+    "DRIFT",
+    "CONV",
+    "SYS"
   ],
   "edges": [
     {
@@ -35,7 +48,7 @@
       "target": "SST",
       "type": "cluster-member",
       "label": "Drift-hub member of AI & Computation (SST) cluster",
-      "weight": 0.90,
+      "weight": 0.9,
       "direction": "from-source",
       "notes": "SST is the AI & Computation Rosetta cluster; DRIFT joins as 6th member alongside erdos-1196, GFX, BLN/M5, CSP"
     },
@@ -44,10 +57,10 @@
       "source": "DRIFT",
       "target": "STAGING-LAYER",
       "type": "concept-bridge",
-      "label": "Scope drift in staging layer mirrors Module D §2",
-      "weight": 0.70,
+      "label": "Scope drift in staging layer mirrors Module D \u00a72",
+      "weight": 0.7,
       "direction": "bidirectional",
-      "notes": "Phase 684 CONTEXT.md D-09 Module D §2 identifies scope drift as a cross-surface phenomenon; the staging-layer research node is the engineering analog"
+      "notes": "Phase 684 CONTEXT.md D-09 Module D \u00a72 identifies scope drift as a cross-surface phenomenon; the staging-layer research node is the engineering analog"
     },
     {
       "id": "drift-module-a-knowledge-01",
@@ -75,7 +88,7 @@
       "target": "ai-computation-grounding-faithfulness",
       "type": "concept-anchored",
       "label": "Module C anchors to ai-computation-grounding-faithfulness concept",
-      "weight": 0.90,
+      "weight": 0.9,
       "direction": "from-source",
       "notes": "Module C (retrieval.html) is the primary research expression of the ai-computation-grounding-faithfulness college concept (SGI section)"
     },
@@ -115,9 +128,9 @@
       "target": "AAR",
       "type": "cross-cluster",
       "label": "Convergent Substrate cross-validates AAR architectural audit findings",
-      "weight": 0.80,
+      "weight": 0.8,
       "direction": "bidirectional",
-      "notes": "Phase 707 gap-closure §1 (four-tier trust) formalizes what AAR audit identified as Staging Layer weakness; the 26.1% community-skill vulnerability baseline is the beat-target"
+      "notes": "Phase 707 gap-closure \u00a71 (four-tier trust) formalizes what AAR audit identified as Staging Layer weakness; the 26.1% community-skill vulnerability baseline is the beat-target"
     },
     {
       "id": "conv-hub-llm-01",
@@ -135,7 +148,7 @@
       "target": "SST",
       "type": "cluster-member",
       "label": "Convergent Substrate member of AI & Computation (SST) cluster",
-      "weight": 0.90,
+      "weight": 0.9,
       "direction": "from-source",
       "notes": "SST is the AI & Computation Rosetta cluster; CONV joins as 7th member extending the DRIFT/NLF/BLN/CSP/GFX/erdos-1196 constellation"
     },
@@ -178,6 +191,106 @@
       "weight": 0.92,
       "direction": "from-source",
       "notes": "compression-spectrum.html is the primary research expression of the Shen et al. spectrum concept; ties memory/skills/rules as one axis with the missing-diagonal gap"
+    },
+    {
+      "id": "lejepa-hub-aar-01",
+      "source": "LEJEPA",
+      "target": "AAR",
+      "type": "cross-cluster",
+      "label": "LeJEPA proves the Amiga Principle in ML form",
+      "weight": 0.95,
+      "direction": "bidirectional",
+      "notes": "LeJEPA's heuristics-free stance is the mathematical form of AAR's Amiga Principle \u2014 architectural leverage replacing brute force. Load-bearing parallel (a) in the Module 4 table."
+    },
+    {
+      "id": "lejepa-hub-conv-01",
+      "source": "LEJEPA",
+      "target": "CONV",
+      "type": "cross-cluster",
+      "label": "LeJEPA extends the Convergent Substrate methodology",
+      "weight": 0.88,
+      "direction": "bidirectional",
+      "notes": "v1.49.571 follows the v1.49.570 two-half pattern (research + corpus tie-in, then default-off substrate modules). Convergent Substrate validated GSD patterns against April 2026 literature; LeJEPA adopts LeCun's distributional-objective methodology directly."
+    },
+    {
+      "id": "lejepa-hub-drift-01",
+      "source": "LEJEPA",
+      "target": "DRIFT",
+      "type": "cross-cluster",
+      "label": "Heuristic-free objective as drift-prevention by design",
+      "weight": 0.8,
+      "direction": "bidirectional",
+      "notes": "Drift in LLM Systems (v1.49.569) catalogued drift defenses; LeJEPA's stated distributional target is drift-prevention at the representation-space level \u2014 collapse cannot happen if isotropy is measured and enforced."
+    },
+    {
+      "id": "lejepa-hub-sst-01",
+      "source": "LEJEPA",
+      "target": "SST",
+      "type": "cross-cluster",
+      "label": "LeJEPA anchors the AI & Computation Rosetta cluster",
+      "weight": 0.9,
+      "direction": "bidirectional",
+      "notes": "SST (Structured Sparse Theorem-proving) is the AI & Computation cluster hub; LeJEPA joins as a major member covering representation learning, world models, and heuristics-free methodology."
+    },
+    {
+      "id": "lejepa-hub-llm-01",
+      "source": "LEJEPA",
+      "target": "LLM",
+      "type": "cross-cluster",
+      "label": "LeCun's JEPA thesis: LLMs insufficient, latent prediction the path forward",
+      "weight": 0.87,
+      "direction": "bidirectional",
+      "notes": "LeCun's 14 Apr 2026 Al-Khwarizmi lecture argues autoregressive LLMs do not learn world models in the sense required for planning; JEPAs predict future latent embeddings rather than raw observations. LLM hub gets a JEPA-alternative section pointing to LEJEPA."
+    },
+    {
+      "id": "lejepa-chipset-01",
+      "source": "LEJEPA",
+      "target": "CHIPSET",
+      "type": "cross-cluster",
+      "label": "Chipset allocation validated by LeJEPA's 60+ architecture result",
+      "weight": 0.75,
+      "direction": "bidirectional",
+      "notes": "LeJEPA's \u00a76.1 architecture-zoo result (heuristics-free training works across 60+ architectures of varying capacities) independently validates the chipset specialization argument. Parallel (k) in the Module 4 table."
+    },
+    {
+      "id": "lejepa-college-01",
+      "source": "LEJEPA",
+      "target": "COLLEGE",
+      "type": "cross-cluster",
+      "label": "In-domain > transfer validates College of Knowledge direction",
+      "weight": 0.82,
+      "direction": "bidirectional",
+      "notes": "LeJEPA's Galaxy10 result (LeJEPA pretrained in-domain beats DINOv2/v3 transfer across 1-shot to full supervision) is the existence proof that the College of Knowledge's specialized-beats-generic direction scales. Parallel (h) in the Module 4 table."
+    },
+    {
+      "id": "lejepa-dacp-01",
+      "source": "LEJEPA",
+      "target": "DACP",
+      "type": "cross-cluster",
+      "label": "DACP bundles as structured embeddings",
+      "weight": 0.68,
+      "direction": "bidirectional",
+      "notes": "DACP's deterministic three-part structured bundles are gsd-skill-creator's analogue of 'clean structured embeddings'; SIGReg-style isotropy checks could apply to the structured-data layer of DACP as a future strategic item (mission package T3 tier)."
+    },
+    {
+      "id": "lejepa-silicon-01",
+      "source": "LEJEPA",
+      "target": "SILICON",
+      "type": "cross-cluster",
+      "label": "Silicon Layer as natural home for SIGReg adapter",
+      "weight": 0.72,
+      "direction": "bidirectional",
+      "notes": "Silicon Layer's GPU math co-processor and LoRA pipeline is the natural home for an actual SIGReg computation primitive. Tier-3 strategic item T3b in the M5 roadmap."
+    },
+    {
+      "id": "lejepa-hub-staging-01",
+      "source": "LEJEPA",
+      "target": "STAGING",
+      "type": "cross-cluster",
+      "label": "Scope drift as representation drift at the staging layer",
+      "weight": 0.63,
+      "direction": "bidirectional",
+      "notes": "Staging-layer 'scope drift' from v1.49.569 is a special case of the LeJEPA collapse problem \u2014 drift in derived content is drift in the representation of user intent. Intrinsic Telemetry (Phase 733) could correlate scope-drift signals with mission quality."
     }
   ]
 }

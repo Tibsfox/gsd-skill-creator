@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LeWorldModel + LeCun's Vision | Tibsfox Research</title>
+<meta name="description" content="I-JEPA → V-JEPA → IWM → LeJEPA → LeWorldModel. First end-to-end pixel JEPA world model: 15M params, 192-dim latent, 48× CEM planning speedup, Spearman-0.99 label-free quality signal.">
+<!-- SC-VER: tibsfox.com/Research/LEJEPA/world-models.html — v1.49.571 Phase 727 -->
+<style>
+:root{--bg:#04060c;--panel:#080c16;--border:rgba(255,255,255,0.06);--text:#c8d0e0;--dim:rgba(255,255,255,0.35);--lejepa-steel:#1565C0;--lejepa-copper:#c18a4d;--text-bright:#f5f9ff;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:Georgia,'Times New Roman',serif;line-height:1.75;}
+a{color:var(--lejepa-steel);} a:hover{color:var(--lejepa-copper);text-decoration:underline;}
+header{background:linear-gradient(135deg,#040614 0%,#0a1228 25%,#12204a 50%,#0b1836 75%,var(--bg) 100%);padding:2rem;text-align:center;border-bottom:2px solid var(--lejepa-steel);}
+h1{font-size:2.2rem;color:var(--text-bright);font-weight:400;}
+.meta{color:var(--dim);font-size:.9rem;}
+main{max-width:860px;margin:0 auto;padding:2.5rem 2rem;}
+h2{color:var(--lejepa-steel);font-size:1.5rem;margin:2rem 0 1rem;font-weight:400;border-bottom:1px solid var(--border);padding-bottom:.3rem;}
+h3{color:var(--lejepa-copper);font-size:1.15rem;margin:1.25rem 0 .5rem;}
+p{margin-bottom:1rem;}
+code{background:rgba(21,101,192,.12);color:var(--lejepa-copper);padding:.08rem .3rem;border-radius:3px;font-family:'DejaVu Sans Mono',monospace;font-size:.9em;}
+pre{background:var(--panel);border:1px solid var(--border);padding:1rem;border-radius:4px;overflow-x:auto;font-family:'DejaVu Sans Mono',monospace;font-size:.88rem;color:#d8e0f0;}
+table{width:100%;border-collapse:collapse;margin:1rem 0;}
+th,td{padding:.6rem .75rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:top;}
+th{background:rgba(21,101,192,.08);color:var(--lejepa-steel);font-weight:600;}
+tr:nth-child(even){background:rgba(255,255,255,.015);}
+blockquote{border-left:3px solid var(--lejepa-steel);background:rgba(21,101,192,.04);padding:.75rem 1.25rem;margin:1rem 0;font-style:italic;color:var(--text-bright);}
+footer{text-align:center;padding:2rem;border-top:1px solid var(--border);color:var(--dim);font-size:.85rem;}
+footer a{color:var(--lejepa-steel);}
+</style>
+</head>
+<body>
+
+<header>
+<h1>LeWorldModel + LeCun's Vision</h1>
+<p class="meta">LeJEPA Integration · Module 3 · Phase 724 source · v1.49.571 Phase 727</p>
+</header>
+
+<main>
+
+<h2>The Architecture Family Tree</h2>
+<p>
+Yann LeCun's position that autoregressive LLMs are insufficient for grounded, planning-capable
+intelligence has generated a specific architecture lineage over four years. Each step is a single
+design change whose practicality depends on the previous step succeeding.
+</p>
+<table>
+<tr><th>Model</th><th>Year</th><th>Step over predecessor</th></tr>
+<tr><td>I-JEPA</td><td>2023</td><td>First practical JEPA for images. Masked-region prediction in embedding space. 632M ViT on 16 A100s in &lt;72h.</td></tr>
+<tr><td>V-JEPA</td><td>2024</td><td>Video extension. Learns motion + content from raw video.</td></tr>
+<tr><td>IWM</td><td>2024</td><td>Generalizes JEPA prediction to arbitrary transformations. Sets up the world-model interpretation: if the prediction is "how does the world change under action a," the predictor is a world model.</td></tr>
+<tr><td>LeJEPA</td><td>2025</td><td>Provable theory + SIGReg + single λ. Enables stable training at 1.8B ViT-g without teacher/stop-gradient/EMA. Prerequisite for LeWM: you cannot plan in a latent space you cannot stably train.</td></tr>
+<tr><td>LeWM</td><td>2026</td><td>First end-to-end pixel JEPA world model. Two loss terms, ~15M params, 192-dim latent, 48× CEM planning speedup. The payoff.</td></tr>
+</table>
+
+<h2>LeWorldModel Architecture</h2>
+<p>LeWM has two components and two loss terms. That's the entire architecture.</p>
+<pre>z_t     = Enc(o_t)              # single frame → 192-dim CLS-style latent
+ẑ_{t+1} = Pred(z_t, a_t)        # next-frame latent given current latent + action
+L_LeWM  = L_pred + λ · SIGReg(Z)</pre>
+<p>
+Roughly 15M parameters end-to-end from pixels. The 192-dim latent is roughly 200× fewer tokens per
+frame than DINO-WM's full patch grid. Six tunable loss-weighting hyperparameters collapse to one.
+</p>
+
+<h2>Planning via Cross-Entropy Method</h2>
+<p>
+At test time LeWM encodes start and goal images into latent space, then uses CEM to optimize an action
+sequence: sample candidate action sequences, roll out through the predictor, select those whose final
+latent lands closest to the goal latent.
+</p>
+<blockquote>
+LeWM CEM: ~1 s per episode.
+DINO-WM CEM: ~47 s per episode.
+48× speedup — attributed to the compact latent, not to any single engineering optimization.
+</blockquote>
+<p>
+The attribution matters. CEM cost scales with the dimensionality of the state space being optimized.
+Shrinking that state space by ~200× in dimensionality is the dominant factor. It's not faster sampling,
+better initialization, or tighter tolerance; it's that there's less to optimize over.
+</p>
+<p>
+This has a direct downstream implication for Phase 732 (Mission-state world-model). If we understand
+that the speedup derives from the compact latent, we keep the mission-state latent compact (target
+≤192-dim) rather than, say, a sparse feature grid over all possible mission variables.
+</p>
+
+<h2>Empirical Findings</h2>
+<table>
+<tr><th>Claim</th><th>Value</th><th>Source</th></tr>
+<tr><td>ImageNet-1K top-1 linear probe</td><td>79% (ViT-H/14)</td><td>LeJEPA §6 / Table 2</td></tr>
+<tr><td>Architectures tested</td><td>60+</td><td>LeJEPA §6.1</td></tr>
+<tr><td>Training-loss ↔ downstream Spearman</td><td>≈0.99</td><td>LeJEPA Fig 1 top-left, §6.2</td></tr>
+<tr><td>In-domain &gt; transfer (Galaxy10)</td><td>LeJEPA beats DINOv2/v3 frozen + fine-tuned, 1-shot → full sup.</td><td>LeJEPA Fig 1 bottom-right, §6.3</td></tr>
+<tr><td>Scale trained stably without heuristics</td><td>1.8B ViT-g</td><td>LeJEPA Fig 1 top-right</td></tr>
+<tr><td>LeWM parameter count</td><td>~15M</td><td>LeWM project page</td></tr>
+<tr><td>LeWM latent dimension</td><td>192</td><td>LeWM project page</td></tr>
+<tr><td>Tokens per frame vs DINO-WM</td><td>200× fewer</td><td>LeWM project page</td></tr>
+<tr><td>CEM planning speedup</td><td>48×</td><td>LeWM project page</td></tr>
+</table>
+<p>
+The Spearman ≈0.99 result is the payoff fact for gsd-skill-creator's Phase 733 Intrinsic Telemetry.
+LeJEPA proves that an internal training signal can correlate almost perfectly with downstream
+performance without requiring downstream labels. If a GSD-internal signal had a similar relationship
+to mission outcome, CAPCOM would gain a principled label-free pre-verification signal augmenting
+(never replacing) the human-gate verdict.
+</p>
+
+<h2>LeCun's Lecture — Broader Frame</h2>
+<p>
+Yann LeCun's <em>Special Lecture on AI and World Models</em> (Al-Khwarizmi Applied Mathematics Webinar,
+14 April 2026, ~1h45m) situates LeJEPA and LeWM inside his longer argument:
+</p>
+<ul style="margin-left:1.5rem;margin-bottom:1rem;">
+<li>Autoregressive generative models (LLMs, Sora, Veo) do not learn <em>world models</em> in the sense required for planning — they produce plausible continuations in pixel or token space.</li>
+<li>The path forward is predicting future <em>latent</em> embeddings rather than raw observations (JEPA). The latent is where a world model lives.</li>
+<li>Practical JEPA had been fragile. LeJEPA is the first instantiation where theory drives practice rather than the reverse.</li>
+<li>LeWM shows that once the latent space is clean (via SIGReg), planning is orders of magnitude faster than methods that rely on large pretrained encoders as world models.</li>
+</ul>
+<p class="meta" style="font-size:.85rem;">
+<em>Note on lecture use (SC-ADV compliance): every lecture claim above is corroborated in the LeJEPA or
+LeWM papers. The lecture is framed as framing, not as an authority for standalone claims.</em>
+</p>
+
+<h2>Practical Takeaway</h2>
+<blockquote>
+Stop treating "anti-collapse" as a bag of tricks and start treating it as a distributional constraint
+to be measured.
+</blockquote>
+<p>
+This is the claim Half B of this milestone imports into <code>gsd-skill-creator</code>. The Skill Space
+Isotropy Audit (Phase 728) is exactly the "measured distributional constraint" interpretation, applied
+not to image embeddings but to skill-library semantic embeddings. The Mission-state World-Model (Phase
+732) is the LeWM architecture applied to mission state rather than visual scenes.
+</p>
+
+</main>
+
+<footer>
+Milestone v1.49.571 · <a href="sigreg-mechanics.html">← SIGReg</a> · <a href="index.html">LeJEPA hub</a> · <a href="gsd-parallels.html">GSD parallels →</a>
+</footer>
+
+</body>
+</html>

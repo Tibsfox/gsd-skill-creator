@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Amiga Principle, in ML Form — LeJEPA Through-Line | Tibsfox Research</title>
+<meta name="description" content="Why fifty lines of code is not a shortcut. The Commodore Amiga, Cramér-Wold (1936), Epps-Pulley (1983), and what happens when a distributional target finally gets stated out loud.">
+<!-- SC-VER: tibsfox.com/Research/LEJEPA/through-line.html — v1.49.571 Phase 727 -->
+<style>
+:root{--bg:#04060c;--panel:#080c16;--border:rgba(255,255,255,0.06);--text:#c8d0e0;--dim:rgba(255,255,255,0.35);--lejepa-steel:#1565C0;--lejepa-copper:#c18a4d;--text-bright:#f5f9ff;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:Georgia,'Times New Roman',serif;line-height:1.75;}
+a{color:var(--lejepa-steel);} a:hover{color:var(--lejepa-copper);text-decoration:underline;}
+header{background:linear-gradient(135deg,#040614 0%,#0a1228 25%,#12204a 50%,#0b1836 75%,var(--bg) 100%);padding:2.5rem 2rem;text-align:center;border-bottom:2px solid var(--lejepa-steel);}
+h1{font-size:2.4rem;color:var(--text-bright);font-weight:400;line-height:1.2;}
+h1 .sub{display:block;font-size:1.05rem;color:var(--lejepa-copper);margin-top:.5rem;font-style:italic;}
+.meta{color:var(--dim);font-size:.9rem;margin-top:.75rem;}
+main{max-width:780px;margin:0 auto;padding:3rem 2rem;}
+h2{color:var(--lejepa-steel);font-size:1.5rem;margin:2.25rem 0 1rem;font-weight:400;}
+h2::before{content:"§ ";color:var(--lejepa-copper);font-style:italic;opacity:.6;}
+p{margin-bottom:1.15rem;}
+blockquote{border-left:3px solid var(--lejepa-steel);background:rgba(21,101,192,.06);padding:1rem 1.5rem;margin:1.25rem 0;font-style:italic;color:var(--text-bright);font-size:1.05rem;}
+code{background:rgba(21,101,192,.12);color:var(--lejepa-copper);padding:.08rem .3rem;border-radius:3px;font-family:'DejaVu Sans Mono',monospace;font-size:.9em;}
+.pull{text-align:center;font-size:1.25rem;color:var(--lejepa-copper);font-style:italic;padding:1.5rem 1rem;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin:2rem 0;}
+footer{text-align:center;padding:2rem;border-top:1px solid var(--border);color:var(--dim);font-size:.85rem;}
+footer a{color:var(--lejepa-steel);}
+</style>
+</head>
+<body>
+
+<header>
+<h1>The Amiga Principle, in ML Form<span class="sub">When the principles are right, the implementation becomes forgiving</span></h1>
+<p class="meta">LeJEPA Integration · Through-line · v1.49.571 Phase 727</p>
+</header>
+
+<main>
+
+<h2>The Fifty Lines</h2>
+<p>
+LeJEPA's reference implementation is roughly fifty lines of PyTorch. It replaces a decade of
+accumulated anti-collapse heuristics — stop-gradient, teacher-student networks, EMA schedulers,
+negative samples — with a single regularizer parameterized by a single hyperparameter λ.
+</p>
+<p>
+Fifty lines. That is not a shortcut. It is what a theoretically grounded objective lets you get away
+with. The heuristics that used to guard against collapse turn out to be <em>symptoms</em> of an
+unstated distributional target. Once the target is stated (isotropic Gaussian) and measured with a
+well-chosen univariate test (Epps-Pulley, 1983) over a well-chosen sketch (Cramér-Wold slicing, 1936),
+the symptoms vanish. The Whac-A-Mole ends.
+</p>
+
+<h2>What 1936 and 1983 Already Knew</h2>
+<p>
+SIGReg's two mathematical ingredients were sitting on a shelf. Harald Cramér and Herman Wold published
+their projection theorem in 1936: two multivariate distributions agree iff all their one-dimensional
+projections agree. T. W. Epps and L. B. Pulley published their empirical-characteristic-function
+normality test in 1983: a linear-complexity, differentiable, multi-GPU-friendly test for univariate
+normality.
+</p>
+<p>
+LeJEPA's contribution is not to invent new mathematics. It is to see that these two classical results,
+combined, give exactly the tool that modern self-supervised learning had been approximating with a
+decade of heuristics. Stating the target distribution out loud is the move. Cramér-Wold and Epps-Pulley
+did the rest.
+</p>
+
+<h2>The Amiga Analogy</h2>
+<p>
+The Commodore Amiga did not beat its competitors by brute force. It beat them by giving each
+function a chipset of its own — Agnus for memory, Denise for graphics, Paula for sound, Gary for
+glue logic — and letting them cooperate on the cycle. The CPU was a 7.16 MHz Motorola 68000, not
+meaningfully faster than competitors. But the system pulled off animations, sampled sound, blitter-
+accelerated graphics, and multitasking in 1985 that other architectures struggled with for years
+because the load-bearing work happened in the spaces between the chips.
+</p>
+<p>
+<code>gsd-skill-creator</code>'s architecture is this same pattern. The chipset model (Agnus/Denise/
+Paula/Gary → Opus/Sonnet/Haiku) specializes by inference cost. CAPCOM gates specialize by safety
+role. Bounded-learning caps (MB-1 Lyapunov, MB-5 dead-zone) specialize by stability property. The
+College of Knowledge specializes by domain coverage. DACP specializes by handoff discipline. Each
+is a specialized elegant piece, and the meaning — the work the system actually does — lives at the
+thresholds between them.
+</p>
+
+<div class="pull">LeJEPA shows us a rigorous new threshold — the distribution of the representation itself — and gives us the tool to measure it.</div>
+
+<h2>The Transposition</h2>
+<p>
+This mission picks up that tool and teaches <code>gsd-skill-creator</code> to sharpen its own latent
+space the same way LeJEPA sharpens a neural network's. The skill library is a latent space. Every
+skill is a point, every task is a region, and the library's value depends on how well the points
+cover the regions the user actually encounters. No mechanism currently measures whether new skills
+fill gaps or duplicate coverage. Half B of this milestone adds that measurement as a default-off
+audit (<code>src/skill-isotropy/</code>), adds the SIGReg primitive itself as a first-class skill
+(<code>src/sigreg/</code>, ≤80 LOC), adds the mission-state world-model that makes wave rehearsal
+cheap (<code>src/mission-world-model/</code>, sits under CAPCOM), and adds the intrinsic telemetry
+that gives CAPCOM a Spearman-style label-free pre-verification signal
+(<code>src/intrinsic-telemetry/</code>).
+</p>
+
+<h2>The Through-Line</h2>
+<blockquote>
+In both LeJEPA and the Amiga, the winning architecture is not the one with the most firepower. It
+is the one where specialized elegant pieces cooperate on the cycle and meaning lives at the
+thresholds between them. Load-bearing work happens in the spaces between.
+</blockquote>
+<p>
+This mission is a new threshold.
+</p>
+
+<h2>What This Means Practically</h2>
+<p>
+When the principles are right, the implementation becomes forgiving. SIGReg takes fifty lines of
+code because Cramér-Wold did the hard work in 1936 and Epps and Pulley did the rest in 1983.
+<code>gsd-skill-creator</code>'s ecosystem already has its philosophical foundations in place — the
+Amiga Principle, the spaces between, bounded learning, the College of Knowledge. What this mission
+hands the ecosystem is a new rigorous instrument: a measurable, projection-based way to tell whether
+the skill library is filling its task space like an isotropic Gaussian or collapsing into a handful
+of shortcut corners.
+</p>
+<p>
+The heuristics that have accumulated to prevent collapse are not wrong. They are symptoms of an
+implicit distributional target that, once stated, lets us stop playing Whac-A-Mole and start
+measuring.
+</p>
+
+</main>
+
+<footer>
+Milestone v1.49.571 · <a href="gsd-parallels.html">← GSD parallels</a> · <a href="index.html">LeJEPA hub</a> · <a href="/Research/">Research index</a>
+</footer>
+
+</body>
+</html>

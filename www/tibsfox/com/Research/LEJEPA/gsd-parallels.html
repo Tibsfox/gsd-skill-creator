@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LeJEPA ↔ gsd-skill-creator — Twelve Architectural Parallels | Tibsfox Research</title>
+<meta name="description" content="Twelve parallels between LeJEPA's heuristics-free design and gsd-skill-creator's existing structures, each with both sides sourced. Heuristics ↔ Amiga Principle, single-λ ↔ bounded-learning knobs, LeWM ↔ mission-state world-model.">
+<!-- SC-VER: tibsfox.com/Research/LEJEPA/gsd-parallels.html — v1.49.571 Phase 727 -->
+<style>
+:root{--bg:#04060c;--panel:#080c16;--border:rgba(255,255,255,0.06);--text:#c8d0e0;--dim:rgba(255,255,255,0.35);--lejepa-steel:#1565C0;--lejepa-copper:#c18a4d;--text-bright:#f5f9ff;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:Georgia,'Times New Roman',serif;line-height:1.75;}
+a{color:var(--lejepa-steel);} a:hover{color:var(--lejepa-copper);text-decoration:underline;}
+header{background:linear-gradient(135deg,#040614 0%,#0a1228 25%,#12204a 50%,#0b1836 75%,var(--bg) 100%);padding:2rem;text-align:center;border-bottom:2px solid var(--lejepa-steel);}
+h1{font-size:2.2rem;color:var(--text-bright);font-weight:400;}
+.meta{color:var(--dim);font-size:.9rem;}
+main{max-width:980px;margin:0 auto;padding:2.5rem 2rem;}
+h2{color:var(--lejepa-steel);font-size:1.5rem;margin:2rem 0 1rem;font-weight:400;border-bottom:1px solid var(--border);padding-bottom:.3rem;}
+h3{color:var(--lejepa-copper);font-size:1.1rem;margin:1.25rem 0 .5rem;}
+p{margin-bottom:1rem;}
+code{background:rgba(21,101,192,.12);color:var(--lejepa-copper);padding:.08rem .3rem;border-radius:3px;font-family:'DejaVu Sans Mono',monospace;font-size:.9em;}
+table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.94rem;}
+th,td{padding:.6rem .7rem;border-bottom:1px solid var(--border);text-align:left;vertical-align:top;}
+th{background:rgba(21,101,192,.08);color:var(--lejepa-steel);font-weight:600;}
+tr:nth-child(even){background:rgba(255,255,255,.015);}
+td.label{color:var(--lejepa-copper);font-weight:600;white-space:nowrap;}
+blockquote{border-left:3px solid var(--lejepa-steel);background:rgba(21,101,192,.04);padding:.75rem 1.25rem;margin:1rem 0;font-style:italic;color:var(--text-bright);}
+footer{text-align:center;padding:2rem;border-top:1px solid var(--border);color:var(--dim);font-size:.85rem;}
+footer a{color:var(--lejepa-steel);}
+</style>
+</head>
+<body>
+
+<header>
+<h1>LeJEPA ↔ gsd-skill-creator</h1>
+<p class="meta">Twelve architectural parallels · Module 4 · Phase 725 source · v1.49.571 Phase 727</p>
+</header>
+
+<main>
+
+<h2>Why Parallels Matter</h2>
+<p>
+The architectural parallels between LeJEPA's design and <code>gsd-skill-creator</code>'s existing
+structures are not coincidental. Both projects rest on the same philosophical claim — that the right
+architecture beats brute force — and both arrive at that claim from the same observational position:
+accumulated heuristics that work in practice but resist principled explanation. LeJEPA's contribution
+is to show that when a distributional target is finally stated explicitly, the heuristics dissolve
+into symptoms. This page asks what that same move would look like applied to gsd-skill-creator.
+</p>
+
+<h2>The Twelve Parallels</h2>
+<table>
+<tr><th>#</th><th>LeJEPA concept</th><th>GSD analogue</th><th>Integration opportunity</th></tr>
+<tr><td class="label">a</td><td>Heuristics replaced by provable objective</td><td>Amiga Principle: architectural leverage beats brute force (AAR, 14 evidence instances)</td><td>Both make the same bet. LeJEPA gives the Amiga Principle a proof.</td></tr>
+<tr><td class="label">b</td><td>Isotropic Gaussian target for embeddings</td><td>Skill library organized across task-coverage dimensions (no explicit target to date)</td><td>Skill Space Isotropy Audit (Phase 728). Coverage becomes a measured property.</td></tr>
+<tr><td class="label">c</td><td>Single λ hyperparameter</td><td>Multiple bounded-learning knobs (20% cap, 3-correction min, 7-day cooldown)</td><td>Single-λ orchestration audit (Phase 730). Collapse knob clusters to principled trade-offs.</td></tr>
+<tr><td class="label">d</td><td>Cramér-Wold projection slicing</td><td>No direct analogue yet — skill similarity is ad-hoc pairwise</td><td>Projection-based audit without full pairwise similarity matrices.</td></tr>
+<tr><td class="label">e</td><td>Epps-Pulley ECF bounded gradients</td><td>Bounded-learning caps (MB-1 Lyapunov + MB-5 dead-zone, v1.49.561)</td><td>Both are stability-by-construction. ECF is a mathematical guarantee; caps are engineering safeguards. Can the caps be redesigned around a gradient-flow property they need?</td></tr>
+<tr><td class="label">f</td><td>~50 LOC implementation</td><td>Minimal CLAUDE.md (&lt;80 lines)</td><td>The SIGReg port (Phase 729) aims for ≤80 LOC as the analogous budget.</td></tr>
+<tr><td class="label">g</td><td>Training-loss ↔ downstream, Spearman ≈0.99</td><td>Retrospective feed-forward (max 5 items / subversion)</td><td>LeJEPA offers an <em>intrinsic</em> label-free signal. Retrospectives are external. Gap: Intrinsic Telemetry (Phase 733).</td></tr>
+<tr><td class="label">h</td><td>In-domain &gt; transfer (Galaxy10)</td><td>College of Knowledge + fox-food dogfooding</td><td>Empirical validation of direction. Galaxy10 is the existence proof that specialized beats generic when the framework scales cleanly.</td></tr>
+<tr><td class="label">i</td><td>LeWorldModel predictor (two-loss)</td><td>Mission state has no explicit predictor — orchestrator dispatches without rehearsal</td><td>Mission-state world-model (Phase 732). CEM in latent space for pre-dispatch wave rehearsal. <strong>Sits under CAPCOM, not instead of it.</strong></td></tr>
+<tr><td class="label">j</td><td>Representation collapse</td><td>Skill library redundancy / shortcut compositions (observed, no formal audit)</td><td>Measurable property once the Isotropy Audit is in place. "Collapse" moves from folk concept to flagged finding.</td></tr>
+<tr><td class="label">k</td><td>Chipset model allocation (30/60/10 Opus/Sonnet/Haiku)</td><td>Chipset architecture (Agnus/Denise/Paula/68000 → Opus/Sonnet/Haiku/Gary)</td><td>Already aligned. Correctness check: LeJEPA's §6.1 architecture-zoo result independently validates that heuristics-free training works across varying capacities.</td></tr>
+<tr><td class="label">l</td><td>Cramér-Wold asymptotic test</td><td>ZFC compliance auditor (Wasteland, planned)</td><td>Both rest on measure-theoretic / set-theoretic foundations. Possible federated-validation bridge. Tier-3 strategic.</td></tr>
+</table>
+
+<h2>The Four Load-Bearing Parallels</h2>
+<p>
+Parallels (a), (b), (g), and (i) carry the main argument of this mission. Each deserves an explicit defense.
+</p>
+
+<h3>(a) Heuristics replaced by provable objective ↔ Amiga Principle</h3>
+<p>
+The Amiga Principle is <code>gsd-skill-creator</code>'s foundational architectural claim: remarkable
+outcomes come from well-specialized pieces cooperating on the cycle, not from brute-force accumulation.
+LeJEPA makes the same bet in ML form. Both projects observe that the industry has been accumulating
+workarounds — teacher-student networks, EMA schedulers, stop-gradient, negative samples on the ML
+side; bounded-learning caps, correction minimums, cooldowns, confidence gates on the GSD side — and
+both projects ask whether a single principled objective could subsume those workarounds. LeJEPA proves
+yes for representation learning. Phases 730-731 pilot the same question for gsd-skill-creator.
+</p>
+
+<h3>(b) Isotropic Gaussian target ↔ skill library coverage</h3>
+<p>
+The skill library is a latent space. Every skill is a point, every task is a region, and the library's
+value depends on how well the points cover the regions the user actually encounters. No mechanism
+currently measures whether new skills fill coverage gaps or duplicate existing coverage. LeJEPA's
+distributional-target methodology — state a target, measure the deviation, let the measurement drive
+design — transposes directly. The target need not be isotropic Gaussian in the literal sense
+(appropriate target for a skill library is an empirical question, potentially task-weighted); what
+transposes is the discipline of stating a target explicitly so the measurement becomes principled.
+</p>
+
+<h3>(g) Spearman 0.99 training signal ↔ retrospective feed-forward</h3>
+<p>
+GSD's mission-quality feedback loop currently runs through retrospectives: humans review, extract
+lessons, feed a small number of items forward to the next subversion. That's the right loop for
+qualitative synthesis, but it's external and human-bound. LeJEPA's Spearman-0.99 result shows that a
+cheap, label-free, internal signal can almost perfectly rank outcomes. Phase 733 (Intrinsic Telemetry)
+reproduces the pattern with GSD-internal signals (test pass density, skill invocation entropy, DACP
+fidelity compliance). The internal signal never replaces the retrospective — it augments it with a
+pre-verification estimate.
+</p>
+
+<h3>(i) LeWM predictor ↔ mission-state world-model</h3>
+<p>
+The GSD orchestrator dispatches waves and observes their outcomes. It does not <em>predict</em> them.
+LeWM's payoff is to show that planning in a compact latent world model is orders of magnitude faster
+than planning through a heavy pretrained encoder. Phase 732 ports the idea: a small encoder maps
+mission state to a compact latent, a predictor forecasts next mission state under a candidate action,
+and CEM over that predictor rehearses waves in latent space before dispatching them.
+</p>
+<blockquote>
+Hard constraint: the predictor sits <em>under</em> CAPCOM. The orchestrator's human-gate authority is
+never bypassed; predictions are advisory.
+</blockquote>
+
+<h2>Through-Line Preparation</h2>
+<p>
+The twelve parallels above are organized into Module 5's Tier 1 / Tier 2 / Tier 3 improvements roadmap
+with effort-risk scoring and dependency lists. The through-line — "when the principles are right, the
+implementation becomes forgiving" — consolidates all four load-bearing parallels into a single
+architectural claim.
+</p>
+
+</main>
+
+<footer>
+Milestone v1.49.571 · <a href="world-models.html">← World models</a> · <a href="index.html">LeJEPA hub</a> · <a href="through-line.html">Through-line →</a>
+</footer>
+
+</body>
+</html>
