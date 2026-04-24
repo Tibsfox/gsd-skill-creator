@@ -16,3 +16,9 @@ export { blowUpDynamics } from './blow-up-dynamics.js';
 export { scaleCriticalEquations } from './scale-critical-equations.js';
 export { erdosProblemIndex } from './erdos-problem-index.js';
 export { millenniumProblemCatalogue } from './millennium-problem-catalogue.js';
+
+// Mathematical Foundations Refresh (Phase 744, v1.49.572 math-foundations-apr2026)
+export { coherentFunctor } from './coherent-functor.js';
+export { ollivierRicciCurvature } from './ollivier-ricci-curvature.js';
+export { hourglassPersistence } from './hourglass-persistence.js';
+export { tonnetzLattice } from './tonnetz-lattice.js';
