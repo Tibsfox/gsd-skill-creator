@@ -1,6 +1,14 @@
 import { describe, it, expect } from 'vitest';
-// Dual-use module: dynamic require keeps the import portable.
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+import { existsSync } from 'node:fs';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+// forest-sim source lives under www/tibsfox/com/Research/ (gitignored —
+// regenerable, synced to tibsfox.com). Skip on CI / fresh checkouts.
+const here = dirname(fileURLToPath(import.meta.url));
+const microPath = join(here, '../../www/tibsfox/com/Research/forest/microphysics.js');
+const ASSETS_PRESENT = existsSync(microPath);
+
 const Micro: {
   kohlerCriticalSS: (rDry: number, kappa: number, T: number) => number;
   kohlerActivationFraction: (
@@ -10,9 +18,9 @@ const Micro: {
     kappa: number,
   ) => number;
   curvatureTermA: (T: number) => number;
-} = require('../../www/tibsfox/com/Research/forest/microphysics.js');
+} = ASSETS_PRESENT ? require(microPath) : ({} as never);
 
-describe('forest-sim Köhler droplet activation (Phase 681)', () => {
+describe.runIf(ASSETS_PRESENT)('forest-sim Köhler droplet activation (Phase 681)', () => {
   it('curvature term A matches Lohmann 2016 Eq. 4.2 order of magnitude', () => {
     const A = Micro.curvatureTermA(288);
     // A ≈ 1e-9 m at 288 K (canonical Lohmann value)
