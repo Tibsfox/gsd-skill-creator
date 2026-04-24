@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# Block any commit that stages paths under www/tibsfox/com/.
+# That tree is gitignored for a reason (228 MB of regenerable research artifacts
+# published to tibsfox.com via sync-research-to-live.sh). Force-adds bypassing
+# .gitignore have leaked content to origin/dev and origin/main multiple times
+# (untracked 2026-04-17 `0bf63c085`; scrubbed from history 2026-04-24).
+#
+# If you genuinely need to commit something here, set:
+#   ALLOW_WWW_COMMIT=1 git commit ...
+set -eu
+
+protected_regex='^www/tibsfox/com/'
+staged=$(git diff --cached --name-only --diff-filter=AM | grep -E "$protected_regex" || true)
+
+if [ -n "$staged" ]; then
+  if [ "${ALLOW_WWW_COMMIT:-0}" = "1" ]; then
+    printf '\033[33m[pre-commit] ALLOW_WWW_COMMIT=1 override — permitting staged www/tibsfox/com paths.\033[0m\n' >&2
+    exit 0
+  fi
+  printf '\033[31m[pre-commit] BLOCKED: www/tibsfox/com/ is gitignored; do not commit.\033[0m\n' >&2
+  printf '\n  Staged paths under protected tree:\n' >&2
+  printf '    %s\n' $staged >&2
+  printf '\n  Fix:\n    git rm --cached <path>    # if already tracked\n    git reset HEAD <path>     # if just added\n\n' >&2
+  printf '  Override (only if you really mean it):\n    ALLOW_WWW_COMMIT=1 git commit ...\n\n' >&2
+  exit 1
+fi
+
+exit 0
