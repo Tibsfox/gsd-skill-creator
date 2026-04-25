@@ -3,7 +3,7 @@ name: done-retirement
 description: Pipeline retirement protocol for completed work items. Implements a 7-stage validate-commit-push-submit-notify-cleanup-terminate pipeline with irreversibility after push. Done means gone.
 format: 2025-10-02
 version: 1.0.0
-status: active
+status: ACTIVE
 updated: 2026-04-15
 triggers:
   - Pipeline retirement protocol for completed work items

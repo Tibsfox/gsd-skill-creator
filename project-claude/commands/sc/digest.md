@@ -147,6 +147,34 @@ If any diffs show `scope_change` other than "on_track", highlight them:
 
 If no scan entries exist, display: "No plan-vs-summary diffs available. Run `/sc:start` to capture baseline."
 
+## Step 3g: Skill lifecycle staleness (OGA-033)
+
+Scan all SKILL.md files under `project-claude/skills/` (and any installed
+`.claude/skills/` if the project-claude tree is missing). For each skill,
+parse the `status:` and `updated:` (or `last_updated:`) fields from the
+frontmatter.
+
+Surface any skill with `status: ACTIVE` whose `updated` date is more than
+**90 days** behind the current date. Display as a table:
+
+```
+### Lifecycle Staleness (>90d untouched, status=ACTIVE)
+| Skill | Status | Last Updated | Days Stale |
+|-------|--------|--------------|------------|
+| api-design | ACTIVE | 2025-12-12 | 134 |
+| code-review | ACTIVE | 2026-01-04 | 111 |
+```
+
+If no stale skills exist, display: "All ACTIVE skills updated within the
+last 90 days."
+
+For each stale row, append a follow-up suggestion: "Consider transitioning
+[skill] to DEPRECATED via the lifecycle state machine (DRAFT → ACTIVE →
+DEPRECATED → RETIRED → ARCHIVED)."
+
+Skills with `status: DRAFT`, `DEPRECATED`, `RETIRED`, or `ARCHIVED` are
+exempt from the staleness check — only `ACTIVE` skills are surveyed.
+
 ## Step 4: Activation history
 
 Read `.planning/patterns/budget-history.jsonl` using the Read tool.

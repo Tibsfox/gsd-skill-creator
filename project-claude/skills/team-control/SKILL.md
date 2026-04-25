@@ -3,7 +3,7 @@ name: team-control
 description: Unit Circle Laboratory + sc-dev-team autonomous mission control. Provides human-in-the-loop automation layer, pipeline management, context lifecycle, stuck-state prevention. UC re-execution series and dev branch milestones. Adapted from uc-lab pattern for code plan/execute/verify/complete. Auto-activates during UC milestone work; trigger: user says 'bring up the dev team'.
 format: 2025-10-02
 version: 1.0.0
-status: active
+status: ACTIVE
 updated: 2026-04-15
 triggers:
   - during UC milestone work

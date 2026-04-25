@@ -6,6 +6,7 @@ format: 2025-10-02
 triggers:
   - reviewing PRs or checking code quality
 updated: 2026-04-25
+status: ACTIVE
 ---
 
 # Code Review

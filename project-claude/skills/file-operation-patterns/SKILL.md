@@ -6,6 +6,7 @@ format: 2025-10-02
 triggers:
   - performing bulk file operations or writing deployment scripts
 updated: 2026-04-25
+status: ACTIVE
 ---
 
 # File Operation Patterns

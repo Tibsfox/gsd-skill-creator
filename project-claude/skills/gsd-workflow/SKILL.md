@@ -8,6 +8,7 @@ format: 2025-10-02
 triggers:
   - "the user asks \"what should I work on\", mentions GSD phases, ROADMAP, or"
 updated: 2026-04-25
+status: ACTIVE
 ---
 
 # GSD Workflow Routing

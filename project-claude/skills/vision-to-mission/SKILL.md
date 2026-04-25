@@ -8,6 +8,7 @@ triggers:
   - "'structure this for GSD', 'make this into a milestone', 'turn this vision into a mission', 'package this up for Claude Code', 'create the mission files', 'I wan"
   - the user has a vision doc already written and needs mission decomposition
 updated: 2026-04-25
+status: ACTIVE
 ---
 
 # Vision → Mission Skill

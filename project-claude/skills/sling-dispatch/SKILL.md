@@ -3,7 +3,7 @@ name: sling-dispatch
 description: Instruction dispatch pipeline for routing work items to available agents. Implements a 7-stage fetch-allocate-prepare-hook-store-launch-confirm pipeline with batch convoy mode, formula expansion, idempotent dispatch, and crash recovery.
 format: 2025-10-02
 version: 1.0.0
-status: active
+status: ACTIVE
 updated: 2026-04-15
 triggers:
   - Instruction dispatch pipeline for routing work items to available agents

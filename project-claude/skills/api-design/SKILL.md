@@ -6,6 +6,7 @@ format: 2025-10-02
 triggers:
   - "designing APIs, choosing status codes, or creating endpoints"
 updated: 2026-04-25
+status: ACTIVE
 ---
 
 # REST API Design

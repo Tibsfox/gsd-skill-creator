@@ -7,6 +7,7 @@ format: 2025-10-02
 triggers:
   - GSD commands are failing or
 updated: 2026-04-25
+status: ACTIVE
 ---
 
 # GSD Preflight Validator

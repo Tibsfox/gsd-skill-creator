@@ -3,7 +3,7 @@ name: portable-schema-generator
 description: "Emit Postgres.sql and SQLite.sql from a single schema spec so tools work across both drivers without duplicating DDL by hand. Use when designing a schema that needs to support both shared Postgres deployments and zero-config SQLite. Reduces two-file sync burden to a single source edit."
 format: 2025-10-02
 version: 1.0.0
-status: active
+status: ACTIVE
 updated: 2026-04-17
 triggers:
   - designing a schema that needs to support both shared Postgres deployments and zero-config SQLite
