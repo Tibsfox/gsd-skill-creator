@@ -12,8 +12,8 @@
     "wasserstein-hebbian",
     "tonnetz"
   ],
-  "fileCount": 153,
-  "rootDigest": "ace3a9008ed7850e33d05bc6d98fc57daa617d46a7e0341bd6c77acc54804d95",
+  "fileCount": 159,
+  "rootDigest": "09bce6ce14e98741a1102da56b9d0a02edc6ff46379f76e672077a3013b8f950",
   "tree": [
     {
       "path": "orchestration/__tests__/fairness.test.ts",
@@ -36,6 +36,21 @@
       "size": 413
     },
     {
+      "path": "orchestration/jepa-planner/__tests__/jepa-planner.test.ts",
+      "sha256": "f0ef00cb80195ae81f094913916e3e9c21d129ee4c5f93c9645fcaa28b38f26d",
+      "size": 8121
+    },
+    {
+      "path": "orchestration/jepa-planner/index.ts",
+      "sha256": "61e2d39ac82b4b9330e24fb4975c91fdc03a52d45224e0ba644e385e08c6b33b",
+      "size": 10100
+    },
+    {
+      "path": "orchestration/jepa-planner/settings.ts",
+      "sha256": "7190fe14ef09c809ab95e42805e471055d504e53c2f9b4df2d5d0bdcfafafadf",
+      "size": 458
+    },
+    {
       "path": "orchestration/retrieval-loop.ts",
       "sha256": "a1c9f91712837fe5501e547de52207211f95eaa774c2f26fd3bc555813a7482f",
       "size": 11784
@@ -49,6 +64,21 @@
       "path": "orchestration/settings.ts",
       "sha256": "5a8cf4600855159e36f4cc26c8292718005773dd1d85d05018f2cd975e58a1e9",
       "size": 2027
+    },
+    {
+      "path": "orchestration/sol-budget/__tests__/sol-budget.test.ts",
+      "sha256": "254b66988da7fbee648dfff444c540afeb9eb1c2988609472f37577bbd2cc177",
+      "size": 7581
+    },
+    {
+      "path": "orchestration/sol-budget/index.ts",
+      "sha256": "dfe56993490bcd8b3bc5b39170fc34176d83922f57db176f111ec1ff55ab62bd",
+      "size": 7406
+    },
+    {
+      "path": "orchestration/sol-budget/settings.ts",
+      "sha256": "9b4f793238233586a386bb9f4085447144583d062a03ecb74bcbea951d0ad5bc",
+      "size": 456
     },
     {
       "path": "dacp/assembler/assembler.test.ts",
