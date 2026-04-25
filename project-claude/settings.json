@@ -5,30 +5,6 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node .claude/hooks/gsd-check-update.js"
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node .claude/hooks/gsd-restore-work-state.js"
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node .claude/hooks/gsd-inject-snapshot.js"
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
             "command": "node .claude/hooks/session-state.cjs"
           }
         ]
