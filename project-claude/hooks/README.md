@@ -91,28 +91,34 @@ See `docs/adr/0001-vendoring-policy.md` for the full policy rationale.
 
 ## 3. Origin map
 
-The hook surface contains roughly three kinds of file. The classification below is the C0 first-pass; C2 will refine it as part of the dual-impl triage and will stamp each file accordingly. Until C2 lands, treat the existing `gsd-hook-version: 1.38.3` stamps as authoritative for vendored origin and treat unstamped files as state-C-pending-confirmation.
+This table is the post-C2 (Phase 823) authoritative classification. Every file is in exactly one of the three ADR 0001 states. The four dual-implementation rows from ADR 0002 (OGA-048, OGA-049, OGA-050, OGA-051) are split across two rows each — the vendored `.sh`/`.js` half in state A, the locally-authored `.cjs` half in state C.
 
-### Vendored from upstream `gsd-build/get-shit-done@1.38.3` (probable state A or B)
+### Dual-implementation pairs (ADR 0002)
 
-These carry the existing `gsd-hook-version: 1.38.3` stamp:
+| Pair | Vendored half | State | Local half | State | Authority (settings.json) |
+|------|---------------|-------|------------|-------|---------------------------|
+| OGA-048 validate-commit | `gsd-validate-commit.sh` | A (unmodified vendor) | `validate-commit.cjs` | C (locally authored) | `.cjs` only — PreToolUse:Bash |
+| OGA-049 phase-boundary | `gsd-phase-boundary.sh` | A (unmodified vendor) | `phase-boundary-check.cjs` | C (locally authored) | `.cjs` only — PostToolUse:Write\|Edit (matcher widened from `Write` per ADR 0002) |
+| OGA-050 session-state | `gsd-session-state.sh` | A (unmodified vendor) | `session-state.cjs` | C (locally authored) | `.cjs` only — SessionStart (single state-bootstrap entry per OGA-020 consolidation) |
+| OGA-051 snapshot/recovery (triple) | `gsd-snapshot-session.js` | A (unmodified vendor) | `pre-compact-snapshot.cjs` + `post-compact-recovery.cjs` | C (locally authored) | all three wired — SessionEnd / PreCompact / PostCompact respectively (per ADR 0002 OGA-051; closes OGA-013) |
+
+The vendored halves in the first three rows are present on disk but unregistered in `settings.json`. They stay on disk so `gsd update` can continue to track upstream lineage; deleting them would orphan the vendor record. Per ADR 0001 state A, `gsd update` may overwrite them without warning (no local fork to preserve).
+
+### Other vendored files (state A)
+
+These carry `gsd-hook-version: 1.38.3` and are unmodified since vendoring:
 
 - `gsd-statusline.js`
-- `gsd-validate-commit.sh` (ADR 0002 retires from settings.json; stays on disk in state A)
-- `gsd-phase-boundary.sh` (ADR 0002 retires from settings.json; stays on disk in state A)
-- `gsd-session-state.sh` (ADR 0002 retires from settings.json; stays on disk in state A)
 
-Several other `gsd-`-prefixed scripts in this directory likely came from the same vendor source but the M3 inventory only flagged the four above as carrying the explicit version stamp. C2 should grep every `gsd-`-prefixed file for the stamp and triage.
+### Locally authored files (state C)
 
-### Locally authored (probable state C)
+These were written for this project, never came from upstream, and carry the `gsd-skill-creator-hook-version` stamp (or are pending stamping in a future hardening pass):
 
-These have no `gsd-hook-version` stamp and were written for this project:
-
-- `validate-commit.cjs` (ADR 0002 keeps as authoritative validate-commit)
-- `phase-boundary-check.cjs` (ADR 0002 keeps as authoritative phase-boundary)
-- `session-state.cjs` (ADR 0002 keeps as authoritative session-state)
-- `pre-compact-snapshot.cjs` (ADR 0002 wires to PreCompact)
-- `post-compact-recovery.cjs` (ADR 0002 wires to PostCompact)
+- `validate-commit.cjs` (authoritative for OGA-048 per ADR 0002)
+- `phase-boundary-check.cjs` (authoritative for OGA-049 per ADR 0002)
+- `session-state.cjs` (authoritative for OGA-050 per ADR 0002)
+- `pre-compact-snapshot.cjs` (PreCompact half of the OGA-051 triple per ADR 0002; closes OGA-013)
+- `post-compact-recovery.cjs` (PostCompact half of the OGA-051 triple per ADR 0002; closes OGA-013)
 - `observe-tool-trace.cjs`
 - `external-change-tracker.cjs`
 - `notification-logger.cjs`
@@ -123,7 +129,7 @@ These have no `gsd-hook-version` stamp and were written for this project:
 - `worktree-cleanup.sh`
 - `lib/hook-output.cjs`
 
-C2 should stamp each of these with `gsd-skill-creator-hook-version: v1.49.x` per ADR 0001 to make the origin explicit.
+A subsequent hardening pass should stamp each state-C file with `gsd-skill-creator-hook-version: v1.49.x` per ADR 0001 to make origin explicit. Until then, the absence of `gsd-hook-version` is treated as state-C-pending-confirmation by `gsd update`.
 
 ### Companion test files (no runtime hook surface)
 
