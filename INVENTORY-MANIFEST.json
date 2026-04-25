@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-04-25T21:19:09Z",
+  "generated_at": "2026-04-25T21:27:04Z",
   "generator_version": "1.0.0",
   "milestone": "v1.49.576",
   "counts": {
     "commands": 4,
     "agents_total": 10,
     "agents_gsd_prefix": 4,
-    "hooks": 23,
+    "hooks": 24,
     "src_subsystems": 145
   },
   "commands": [
@@ -98,6 +98,11 @@
       "name": "gsd-validate-commit.sh",
       "path": "project-claude/hooks/gsd-validate-commit.sh",
       "origin": "vendored:gsd-build@1.38.3"
+    },
+    {
+      "name": "tool-tracker.sh",
+      "path": "project-claude/hooks/tool-tracker.sh",
+      "origin": "local"
     },
     {
       "name": "worktree-cleanup.sh",
