@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-25T21:15:44Z",
+  "generated_at": "2026-04-25T21:19:09Z",
   "generator_version": "1.0.0",
   "milestone": "v1.49.576",
   "counts": {
@@ -7,7 +7,7 @@
     "agents_total": 10,
     "agents_gsd_prefix": 4,
     "hooks": 23,
-    "src_subsystems": 144
+    "src_subsystems": 145
   },
   "commands": [
     {
@@ -307,6 +307,7 @@
     "ricci-curvature-audit",
     "roles",
     "rumor-delay-model",
+    "runtime-hal",
     "safety",
     "security",
     "semantic-channel",
