@@ -63,9 +63,10 @@ function scoreHeaderBlock(text) {
   return 2;
 }
 
-// Summary section with bolded findings — **SOMETHING** at line start
+// Summary section with bolded findings — **SOMETHING** at line start.
+// Accepts h2-h4 to support corpus-builder's chapter-demoted `### Summary`.
 function scoreSummaryFindings(text) {
-  const summary = extractSection(text, /^##\s+Summary\b/mi);
+  const summary = extractSection(text, /^#{2,4}\s+Summary\b/mi);
   if (!summary) return 0;
   // Count bolded lead-ins: lines starting with **PHRASE.** or **PHRASE:**
   const findings = [...summary.matchAll(/^\s*\*\*[^*\n]{3,100}(?:\.|:)\*\*/gm)].length;
@@ -77,9 +78,13 @@ function scoreSummaryFindings(text) {
   return anyBold >= 3 ? 3 : 0;
 }
 
-// Key Features table — must be a pipe-table after Key Features heading
+// Key Features table — pipe-table after a features-equivalent heading.
+// Degree-format uses `## Key Features`; milestone-format uses `## Half A`,
+// `## Half B`, `## Modules`, `## Deliverables`, `## Substrate`. Any of those
+// followed by a pipe-table counts.
 function scoreKeyFeatures(text) {
-  const section = extractSection(text, /^##\s+Key Features\b/mi);
+  const headingRe = /^#{2,4}\s+(Key Features|Half A|Half B|Modules|Deliverables|Substrate)\b/mi;
+  const section = extractSection(text, headingRe);
   if (!section) return 0;
   const tableLines = section.split(/\r?\n/).filter(l => /^\s*\|/.test(l)).length;
   if (tableLines >= 5) return 10;
@@ -118,16 +123,24 @@ function scoreRetrospective(text) {
 // Lessons Learned with numbered entries OR bullets (both formats occur).
 // When the combined corpus contains multiple Lessons sections (README
 // with bullets + chapter with numbered), take the best score across all.
+//
+// Slicing: section runs to the next heading of the same-or-higher level.
+// (Earlier behavior stopped at any subsequent heading, which broke when
+// chapter files used h3 sub-headings within the lessons block — common in
+// milestone-format releases that group lessons by category.)
 function scoreLessons(text) {
-  const re = /^#{2,4}\s+Lessons(?:\s+Learned)?\b/gmi;
+  const lines = text.split(/\r?\n/);
   let best = 0;
-  let m;
-  while ((m = re.exec(text)) !== null) {
-    // Slice from match to next heading of same-or-higher level
-    const start = m.index + m[0].length;
-    const tail = text.slice(start);
-    const endMatch = tail.match(/^#{1,4}\s+/m);
-    const section = endMatch ? tail.slice(0, endMatch.index) : tail;
+  for (let i = 0; i < lines.length; i++) {
+    const headerMatch = /^(#{2,4})\s+Lessons(?:\s+Learned)?\b/i.exec(lines[i]);
+    if (!headerMatch) continue;
+    const startLevel = headerMatch[1].length;
+    let endIdx = lines.length;
+    for (let j = i + 1; j < lines.length; j++) {
+      const inner = /^(#{1,4})\s/.exec(lines[j]);
+      if (inner && inner[1].length <= startLevel) { endIdx = j; break; }
+    }
+    const section = lines.slice(i + 1, endIdx).join('\n');
     const numbered = [...section.matchAll(/^\s*\d+\.\s+/gm)].length;
     const bulleted = [...section.matchAll(/^\s*[-*]\s+\*\*/gm)].length;
     const count = Math.max(numbered, bulleted);
@@ -141,19 +154,28 @@ function scoreLessons(text) {
   return best;
 }
 
-// Cross-references
+// Cross-references. Degree-format uses `## Cross-References`; milestone-
+// format uses `## Convergent-discovery validation` or `## Cross-cluster
+// validation` for the same structural role (named external referents).
 function scoreCrossRefs(text) {
-  if (!/^#{2,4}\s+Cross[- ]References/mi.test(text)) return 0;
-  const section = extractSection(text, /^#{2,4}\s+Cross[- ]References/mi);
-  const links = (section.match(/\|/g) || []).length;
-  if (links >= 30) return 10;
-  if (links >= 15) return 7;
-  if (links >= 5) return 4;
+  const headingRe = /^#{2,4}\s+(Cross[- ]References|Convergent[- ]discovery|Convergent[- ]Discovery|Cross[- ]cluster)/mi;
+  if (!headingRe.test(text)) return 0;
+  const section = extractSection(text, headingRe);
+  // Pipe-count remains the proxy for "named external referents in a table",
+  // but a milestone-format §Convergent-discovery often has prose with
+  // multiple bold-prefixed referents instead of a pipe-table. Count both.
+  const pipes = (section.match(/\|/g) || []).length;
+  const boldReferents = [...section.matchAll(/\*\*[^*\n]+\*\*/g)].length;
+  const score = pipes + (boldReferents * 3);
+  if (score >= 30) return 10;
+  if (score >= 15) return 7;
+  if (score >= 5) return 4;
   return 2;
 }
 
-// Running ledgers (at least one of the Acoustic Progression / Artist-City Patterns /
-// Energy Distribution / Genre Evolution type tables)
+// Running ledgers (at least one of the Acoustic Progression / Artist-City
+// Patterns / Energy Distribution / Genre Evolution type tables for degree
+// releases; By the numbers / Health metrics / Test posture for milestones).
 function scoreRunningLedgers(text) {
   const markers = [
     /^#{2,4}\s+Acoustic Progression/mi,
@@ -163,6 +185,11 @@ function scoreRunningLedgers(text) {
     /^#{2,4}\s+Engine Position/mi,
     /^#{2,4}\s+Cumulative.*Statistics/mi,
     /^#{2,4}\s+Taxonomic State/mi,
+    // Milestone-format equivalents.
+    /^#{2,4}\s+By the numbers/mi,
+    /^#{2,4}\s+Health metrics/mi,
+    /^#{2,4}\s+Test posture/mi,
+    /^#{2,4}\s+By the Numbers/mi,
   ];
   const hits = markers.filter(re => re.test(text)).length;
   if (hits >= 3) return 5;
@@ -170,12 +197,14 @@ function scoreRunningLedgers(text) {
   return 0;
 }
 
-// Infrastructure block
+// Infrastructure block. Degree-format uses `## Infrastructure` or `## Files`;
+// milestone-format uses `## Branch state` (where the dev/main/tag topology
+// lives), `## Dedications` (named contributors), or `## Out of scope`
+// (project-discipline boundary).
 function scoreInfrastructure(text) {
-  if (!/^#{2,4}\s+Infrastructure\b/mi.test(text) &&
-      !/^#{2,4}\s+Files\b/mi.test(text)) return 0;
-  const section = extractSection(text,
-    /^#{2,4}\s+(Infrastructure|Files)\b/mi);
+  const headingRe = /^#{2,4}\s+(Infrastructure|Files|Branch state|Dedications|Out of scope|Out-of-scope discipline)\b/mi;
+  if (!headingRe.test(text)) return 0;
+  const section = extractSection(text, headingRe);
   // Count bullets
   const bullets = (section.match(/^\s*[-*]\s/gm) || []).length;
   if (bullets >= 5) return 5;

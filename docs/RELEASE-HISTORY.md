@@ -1,19 +1,24 @@
 # Release History
 
-612 milestones shipped across the v1.0 → v1.49.569 arc. The table below lists every shipped release, newest first.
+617 milestones shipped across the v1.0 → v1.49.574 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions, and where available, retrospectives and lessons learned. `Commits` is the count of commits between this tag and the previous tag (from git). `Phases` and `Plans` come from structured GSD metadata in the release README — most content/patch releases don't have these. `Retro` links to the retrospective chapter when present. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
-> **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 612 releases · 609 with retrospectives · 608 with extracted lessons · quality A:603 B:1 C:0 D:2 F:6 (avg 97) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+> **Drift detected:** 5 releases flag a retrospective but have no `03-retrospective.md` on disk; 5 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
+**Snapshot:** 617 releases · 614 with retrospectives · 612 with extracted lessons · quality A:603 B:1 C:1 D:2 F:10 (avg 96) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Retro | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|-------|---------|---------|-------|
+| [v1.49.574](release-notes/v1.49.574) | Megakernel: One Launch, One Chipset | — | 3 | — | — | [✓](release-notes/v1.49.574/chapter/03-retrospective.md) | [4](release-notes/v1.49.574/chapter/04-lessons.md) | F 31 |  |
+| [v1.49.573](release-notes/v1.49.573) | Upstream Intelligence Pack v1.44 (ArXiv eess Integration) | — | 3 | 24 | — | ✓ _(no file)_ | 9 _(no file)_ | F 3 |  |
+| [v1.49.572](release-notes/v1.49.572) | Mathematical Foundations Refresh | — | 2031 | 19 | — | ✓ _(no file)_ | 8 _(no file)_ | F 0 |  |
+| [v1.49.571](release-notes/v1.49.571) | Heuristics-Free Skill Space | 2026-04-23 | 11 | — | — | ✓ _(no file)_ | — | F 13 |  |
+| [v1.49.570](release-notes/v1.49.570) | Convergent Substrate | 2026-04-23 | 5384 | 9 | — | ✓ _(no file)_ | 7 _(no file)_ | F 25 |  |
 | [v1.49.569](release-notes/v1.49.569) | Drift in LLM Systems | 2026-04-23 | 29 | 18 | — | [✓](release-notes/v1.49.569/chapter/03-retrospective.md) | [8](release-notes/v1.49.569/chapter/04-lessons.md) | F 50 |  |
 | [v1.49.568](release-notes/v1.49.568) | Nonlinear Frontier | 2026-04-23 | 34 | 5 | — | [✓](release-notes/v1.49.568/chapter/03-retrospective.md) | [4](release-notes/v1.49.568/chapter/04-lessons.md) | F 24 |  |
 | [v1.49.567](release-notes/v1.49.567) | Degree 62: The Ground Beneath the Survey | 2026-04-22 | 1 | — | — | — | — | F 17 |  |
-| [v1.49.566](release-notes/v1.49.566) | Degree 61: The Completion of the Survey | 2026-04-22 | 1 | — | — | [✓](release-notes/v1.49.566/chapter/03-retrospective.md) | [5](release-notes/v1.49.566/chapter/04-lessons.md) | F 43 |  |
+| [v1.49.566](release-notes/v1.49.566) | Degree 61: The Completion of the Survey | 2026-04-22 | 1 | — | — | [✓](release-notes/v1.49.566/chapter/03-retrospective.md) | [5](release-notes/v1.49.566/chapter/04-lessons.md) | F 48 |  |
 | [v1.49.565](release-notes/v1.49.565) | Degree 60: The Anchored Listener | 2026-04-22 | 1 | — | — | [✓](release-notes/v1.49.565/chapter/03-retrospective.md) | — | D 63 |  |
 | [v1.49.564](release-notes/v1.49.564) | Degree 59: The Engineering Lineage | 2026-04-24 | 10 | — | — | [✓](release-notes/v1.49.564/chapter/03-retrospective.md) | [13](release-notes/v1.49.564/chapter/04-lessons.md) | A 100 |  |
 | [v1.49.563](release-notes/v1.49.563) | Degree 58: Twenty-Four Hours | 2026-04-20 | 2 | — | — | [✓](release-notes/v1.49.563/chapter/03-retrospective.md) | [15](release-notes/v1.49.563/chapter/04-lessons.md) | A 100 |  |
@@ -341,9 +346,9 @@ Each version links to a detailed release notes directory with full feature descr
 | [v1.49.241](release-notes/v1.49.241) | Degree 101: Hecuba + Common Raven Pair — THE POST-CENTENNIAL | 2026-04-01 | 3 | — | — | [✓](release-notes/v1.49.241/chapter/03-retrospective.md) | [5/20](release-notes/v1.49.241/chapter/04-lessons.md) | A 90 |  |
 | [v1.49.240](release-notes/v1.49.240) | Degree 100: Summer Heart + Common Raven — THE CENTENNIAL | 2026-04-02 | 1 | — | — | [✓](release-notes/v1.49.240/chapter/03-retrospective.md) | [3/18](release-notes/v1.49.240/chapter/04-lessons.md) | A 98 |  |
 | [v1.49.239](release-notes/v1.49.239) | Degree 99: Kaina + Click Beetle — THE SYNTHESIS AND THE SNAP | 2026-04-02 | 1 | — | — | [✓](release-notes/v1.49.239/chapter/03-retrospective.md) | [2/24](release-notes/v1.49.239/chapter/04-lessons.md) | A 100 |  |
-| [v1.49.238](release-notes/v1.49.238) | Degree 98: Gold Casio + Tree Cricket Song -- THE SHIMMER AND THE TRILL | 2026-04-01 | 1 | — | — | [✓](release-notes/v1.49.238/chapter/03-retrospective.md) | [2/21](release-notes/v1.49.238/chapter/04-lessons.md) | F 55 |  |
+| [v1.49.238](release-notes/v1.49.238) | Degree 98: Gold Casio + Tree Cricket Song -- THE SHIMMER AND THE TRILL | 2026-04-01 | 1 | — | — | [✓](release-notes/v1.49.238/chapter/03-retrospective.md) | [2/21](release-notes/v1.49.238/chapter/04-lessons.md) | D 65 |  |
 | [v1.49.237](release-notes/v1.49.237) | Degree 97: The Postal Service (Electronic Context) + Toad Chorus — THE ALGORITHM AND THE PURR | 2026-04-01 | 2 | — | — | [✓](release-notes/v1.49.237/chapter/03-retrospective.md) | [3/21](release-notes/v1.49.237/chapter/04-lessons.md) | A 100 |  |
-| [v1.49.236](release-notes/v1.49.236) | Degree 96: STRFKR + Wood Frog -- THE PULSE AND THE FREEZE | 2026-04-01 | 2 | — | — | [✓](release-notes/v1.49.236/chapter/03-retrospective.md) | [2/22](release-notes/v1.49.236/chapter/04-lessons.md) | D 60 |  |
+| [v1.49.236](release-notes/v1.49.236) | Degree 96: STRFKR + Wood Frog -- THE PULSE AND THE FREEZE | 2026-04-01 | 2 | — | — | [✓](release-notes/v1.49.236/chapter/03-retrospective.md) | [2/22](release-notes/v1.49.236/chapter/04-lessons.md) | C 70 |  |
 | [v1.49.235](release-notes/v1.49.235) | Degree 95: ODESZA + Mayfly Emergence — THE EUPHORIC AND THE EPHEMERAL | 2026-04-01 | 1 | — | — | [✓](release-notes/v1.49.235/chapter/03-retrospective.md) | [23](release-notes/v1.49.235/chapter/04-lessons.md) | A 100 |  |
 | [v1.49.234](release-notes/v1.49.234) | Degree 94: Erik Blood + Stonefly Hatch — THE STUDIO AND THE STREAM | 2026-04-02 | 1 | — | — | [✓](release-notes/v1.49.234/chapter/03-retrospective.md) | [3/23](release-notes/v1.49.234/chapter/04-lessons.md) | A 100 |  |
 | [v1.49.233](release-notes/v1.49.233) | Degree 93: NAVVI + Hornet Nest Buzz — THE SHIMMER AND THE STING | 2026-04-02 | 1 | — | — | [✓](release-notes/v1.49.233/chapter/03-retrospective.md) | [3/22](release-notes/v1.49.233/chapter/04-lessons.md) | A 100 |  |
