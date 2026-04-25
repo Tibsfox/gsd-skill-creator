@@ -12,8 +12,8 @@
     "wasserstein-hebbian",
     "tonnetz"
   ],
-  "fileCount": 159,
-  "rootDigest": "09bce6ce14e98741a1102da56b9d0a02edc6ff46379f76e672077a3013b8f950",
+  "fileCount": 179,
+  "rootDigest": "0cd7711e6fc71ed1ba175476fe9b769e72524cc8674d5f1ad1c63e0befcc47b3",
   "tree": [
     {
       "path": "orchestration/__tests__/fairness.test.ts",
@@ -42,8 +42,8 @@
     },
     {
       "path": "orchestration/jepa-planner/index.ts",
-      "sha256": "61e2d39ac82b4b9330e24fb4975c91fdc03a52d45224e0ba644e385e08c6b33b",
-      "size": 10100
+      "sha256": "0cc0761101dc61ed2c311fbe74cd7d77345bee7f3a9d5bae5147120fa1a09f71",
+      "size": 10459
     },
     {
       "path": "orchestration/jepa-planner/settings.ts",
@@ -79,6 +79,106 @@
       "path": "orchestration/sol-budget/settings.ts",
       "sha256": "9b4f793238233586a386bb9f4085447144583d062a03ecb74bcbea951d0ad5bc",
       "size": 456
+    },
+    {
+      "path": "orchestration/tool-attention/__tests__/_fixtures.ts",
+      "sha256": "e59115823b22c90a0125e0b955423c7d87837aaedb0eeeb78aeabf3b4822a494",
+      "size": 6109
+    },
+    {
+      "path": "orchestration/tool-attention/__tests__/budget-monitor.test.ts",
+      "sha256": "d87e46cf4a5c02565c2356e582100c85945d41abccb20139a4b860a31db9e862",
+      "size": 2388
+    },
+    {
+      "path": "orchestration/tool-attention/__tests__/composition.test.ts",
+      "sha256": "dd8755e73ac7f1e13e49cf69e7f18ccc16ab62a4bb1eec068e4d891629ff0277",
+      "size": 3317
+    },
+    {
+      "path": "orchestration/tool-attention/__tests__/edge-cases.test.ts",
+      "sha256": "8bc0164be493963f7b3a67918760386eef61ac8e5107805450e18b20b41e4e6a",
+      "size": 4873
+    },
+    {
+      "path": "orchestration/tool-attention/__tests__/flag-off-byte-identical.test.ts",
+      "sha256": "74ad16b9da0cb7e557f8f7daca1e3e89cbdc7507b75c501bcada26de0c902b00",
+      "size": 5328
+    },
+    {
+      "path": "orchestration/tool-attention/__tests__/fracture-alert.test.ts",
+      "sha256": "1f424f8780e018d6729fda31b8fe42d020cd445cc2c882b81698bf95f6d243f8",
+      "size": 2155
+    },
+    {
+      "path": "orchestration/tool-attention/__tests__/iso-score.test.ts",
+      "sha256": "496299ebd23ea5679d701a08cfa51c7a7fb4cb21ba896e110ed5804f3ac89d51",
+      "size": 3311
+    },
+    {
+      "path": "orchestration/tool-attention/__tests__/lazy-loader.test.ts",
+      "sha256": "209a05562d1c2c25959a208faa733d7f1251faaa5853325d863b470c4fc18586",
+      "size": 3995
+    },
+    {
+      "path": "orchestration/tool-attention/__tests__/mock-mcp-scenario.test.ts",
+      "sha256": "402e0151ad70d0f755e98ed9dbd59339114745d64baa9978f738d93b7eedcea6",
+      "size": 2527
+    },
+    {
+      "path": "orchestration/tool-attention/__tests__/phase-pin-override.test.ts",
+      "sha256": "b761763579698ef70ce1a78b0599ae651e765f3581c1667d8d87ded02b1c844f",
+      "size": 2654
+    },
+    {
+      "path": "orchestration/tool-attention/__tests__/state-gate.test.ts",
+      "sha256": "d1090806cab1736e6225ac55213d27debcae2efbef7a969a046e87b36a4c9c50",
+      "size": 3352
+    },
+    {
+      "path": "orchestration/tool-attention/__tests__/token-budget-baseline.test.ts",
+      "sha256": "f73d8cbeedfe483fde37a5273ae6aac4434825ba0b6111003554d86a4a67eaea",
+      "size": 3411
+    },
+    {
+      "path": "orchestration/tool-attention/__tests__/token-budget-reduction.test.ts",
+      "sha256": "f553584cc84954fd8c036ee76229b3572b5413e86c157a3a7d8ec7725e9674d1",
+      "size": 4364
+    },
+    {
+      "path": "orchestration/tool-attention/budget-monitor.ts",
+      "sha256": "14adcb89b93d5cc3b933f956aad304a02a3ddf83eca52bef0dacab72752b0598",
+      "size": 1871
+    },
+    {
+      "path": "orchestration/tool-attention/index.ts",
+      "sha256": "ccd07d4eee70f60d1b7009e2f16623a7f7bfebc63034b24e5115b2f0fdaf481d",
+      "size": 4096
+    },
+    {
+      "path": "orchestration/tool-attention/iso-score.ts",
+      "sha256": "9ef7b0469df50534cf17ec11977269097cef02e5fd498db84dd60b63c4f76f3b",
+      "size": 4622
+    },
+    {
+      "path": "orchestration/tool-attention/lazy-loader.ts",
+      "sha256": "a8b6d649685a6a976e2301a6ffdb97f07f8555bfe6897b49f04e3986e8128fcc",
+      "size": 3231
+    },
+    {
+      "path": "orchestration/tool-attention/settings.ts",
+      "sha256": "6bbde24de62e99cf4e34707a11b3dca77cf4ade6dc58f772fe6880aeb8a384f9",
+      "size": 2273
+    },
+    {
+      "path": "orchestration/tool-attention/state-gate.ts",
+      "sha256": "65fc5a54254e37a9c519235cecd400ad08b61951ed2488ad8baf0eca896cba5a",
+      "size": 2221
+    },
+    {
+      "path": "orchestration/tool-attention/types.ts",
+      "sha256": "87a861b825081eda3a94dc33dc99956c9784ce1ac48f655a3f23f031e900207f",
+      "size": 4747
     },
     {
       "path": "dacp/assembler/assembler.test.ts",
