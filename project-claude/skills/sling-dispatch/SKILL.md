@@ -4,9 +4,14 @@ description: Instruction dispatch pipeline for routing work items to available a
 format: 2025-10-02
 version: 1.0.0
 status: ACTIVE
-updated: 2026-04-15
+updated: 2026-04-25
 triggers:
-  - Instruction dispatch pipeline for routing work items to available agents
+  - mayor needs to assign work items to available polecats
+  - convoy of beads is ready for dispatch to a rig
+  - formula template needs expansion into ordered dispatch steps
+  - partial dispatch needs recovery after a crash or session restart
+references_subdir: true
+word_budget: 800
 ---
 
 # Sling Dispatch
