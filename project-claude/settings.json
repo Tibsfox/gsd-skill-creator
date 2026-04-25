@@ -32,6 +32,25 @@
             "command": "node .claude/hooks/session-state.cjs"
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/worktree-init.cjs"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/worktree-cleanup.sh"
+          }
+        ]
       }
     ],
     "SessionEnd": [
