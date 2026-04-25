@@ -11,6 +11,11 @@ description: >
   project-claude configuration. Also activates for discussions about
   skill-creator security, trust models, or content hygiene.
 user-invocable: true
+version: 1.0.0
+format: 2025-10-02
+triggers:
+  - "for discussions about skill-creator security, trust models, or content hygiene"
+updated: 2026-04-25
 ---
 
 # Security Hygiene

@@ -10,6 +10,11 @@ description: >
   activates when the user references .planning/ files, milestones,
   phases, or project progress.
 user-invocable: true
+version: 1.0.0
+format: 2025-10-02
+triggers:
+  - the user references
+updated: 2026-04-25
 ---
 
 # Session Awareness

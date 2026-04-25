@@ -5,6 +5,8 @@ format: 2025-10-02
 version: 1.0.0
 status: active
 updated: 2026-04-17
+triggers:
+  - designing a schema that needs to support both shared Postgres deployments and zero-config SQLite
 ---
 
 # Portable Schema Generator

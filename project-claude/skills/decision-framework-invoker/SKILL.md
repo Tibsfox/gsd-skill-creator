@@ -5,6 +5,9 @@ format: 2025-10-02
 version: 1.0.0
 status: active
 updated: 2026-04-17
+triggers:
+  - for automatically invoking the decision-framework skill before irreversible or high-blast-radius operations
+  - "pattern, pause and run the appropriate framework (first-principles, inversion, decision matrix, second-order thinking) before proceeding"
 ---
 
 # Decision Framework Invoker
