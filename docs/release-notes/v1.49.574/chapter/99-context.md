@@ -1,0 +1,28 @@
+# Context — v1.49.574
+
+- **Version:** `v1.49.574`
+- **Subtitle:** Megakernel — One Launch, One Chipset
+- **Shipped:** 2026-04-25
+- **Branch:** dev → main
+- **Merge commit:** `d2ea4f0a0`
+- **Tag:** `v1.49.574` (annotated, on `d2ea4f0a0`)
+- **GitHub release:** https://github.com/Tibsfox/gsd-skill-creator/releases/tag/v1.49.574
+- **Phases:** Half A 10 phases (779–788) across Waves W0/W1A/W1B/W2/W3 + Half B 6 substrate modules + closing wave
+- **Plans:** 17 (10 Half A + 6 Half B + 1 closing)
+- **CAPCOM gates:** G0 PASS · G1 PASS · G2 PASS · G3 (folded into G4) · G4 PASS (final block-or-pass via SAFETY-WARDEN against the 40-test plan); HB-04 carries CAPCOM hard preservation
+- **Test posture:** 27,556 passing (+145 over baseline 27,411). Zero v1.49.574 regressions. 2 pre-existing failures from v1.49.572 baseline carried (live-config flag-state, NOT v1.49.574; deferred to follow-up)
+- **PDF:** 60 pages, 338 KB, 3-pass XeLaTeX clean — `.planning/missions/megakernel-one-launch-one-chipset/work/publication/megakernel-reference.pdf`
+- **Bibliography:** 32 entries (23 primary + 9 secondary/context); 33 distinct cite keys used across modules; arXiv ID provenance disclosed in bib header
+- **Hardware reference:** NVIDIA RTX 4060 Ti 8GB (Ada Lovelace AD106); forward-compatible to dual RTX 5090 (Blackwell)
+- **Wall-clock:** 65m 47s end-to-end (observatory log 07:45:59Z → 08:51:46Z)
+- **Tokens consumed:** ~430K
+- **Mission package:** `.planning/missions/megakernel-one-launch-one-chipset/megakernel-mission.{pdf,tex,html}` — three-stage GSD package (Vision → Research Reference → Mission); 38pp PDF; 1159-line LaTeX source
+- **Half A deliverables (10):** D1 `megakernel-reference.tex` · D2 `megakernel-reference.pdf` · D3 `bibliography.bib` · D4–D8 module markdowns (M1/M2/M3/M4/M5) · D9 `verification-matrix.md` · D10 `retrospective.md`
+- **Half B substrate (6 modules + 1 docs-only):** HB-01..HB-07; all default-off via `.claude/gsd-skill-creator.json` `megakernel-substrate` block
+- **Convergent-discovery finding:** SIGReg ↔ counter-based megakernel sync share a design discipline (replace many-term coordination with one carefully-chosen invariant); structural rather than mathematically equivalent
+- **Through-line:** "The Amiga Principle compounds twice"
+- **Dedication:** Laine/Karras/Aila (NVIDIA Research, 2013); Hazy Research (Spector et al., May 2025); Maes/Le Lidec/Scieur/LeCun/Balestriero (LeWorldModel); Jia and CMU Catalyst (Mirage MPK); Sakana AI (AICE incident → robust-kbench corrective)
+- **Out of scope (preserved):** production CUDA implementation work · training a JEPA against real GPU traces · ROCm/MI300/Apple Metal porting · LLM training kernels · multi-vendor benchmarking
+- **Parse confidence:** 1.00
+- **Retrospective:** present
+- **Source:** `docs/release-notes/v1.49.574/README.md` + `docs/release-notes/v1.49.574/RETROSPECTIVE.md`
