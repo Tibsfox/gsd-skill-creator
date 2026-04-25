@@ -1,0 +1,17 @@
+--- a/CLAUDE.md
++++ b/CLAUDE.md
+@@ -83,6 +83,29 @@
+ ## Important Notes
+
+ - This is a self-modifying system -- the security-hygiene skill handles safety
+ - `.planning/patterns/` should be in `.gitignore`
+ - Skills load automatically based on context -- no explicit invocation needed
+ - **Session auto-init:** when starting a new mission, run `node tools/session-retro/observe.mjs start '<mission-name>'` as your first Bash call. This captures `started_commit` for `generate.mjs --since …` and gives the retrospective real event data. Close with `observe.mjs end` + `generate.mjs` before context dies. Token usage can be dual-logged via `observe.mjs event tokens <in> <out> [label]`.
++
++## External Citations (CS25–26 Sweep)
++
++Three foundational papers from the v1.49.575 CS25–26 Sweep give published derivations for load-bearing GSD architectural choices. See `.planning/missions/cs25-26-sweep/work/synthesis/convergent-discovery.md` for the full four-anchor analysis.
++
++- **Bounded-tape framing — `arXiv:2604.20874` Root Theorem of Context Engineering.** Formal foundation (two axioms, five derived consequences) for treating the agent's working context as a bounded lossy channel. Justifies CAPCOM gating on fidelity thresholds rather than capacity, fresh-context-subagent verification (C5 external-verification-gate), and the accumulate–compress–rewrite–shed milestone retrospective lifecycle. The 20% / 3-correction / 7-day cooldown bounded-learning caps are anchored on C1 (monotone decay independent of nominal window size) and do not relax with larger context models. See `convergent-discovery.md §4`.
++- **Override-the-prompt rule for Hard Constraints — `arXiv:2604.21744` GROUNDINGmd.** Published independent rediscovery of the CLAUDE.md + Safety Warden BLOCK pattern. The two-class taxonomy — Hard Constraints (non-negotiable invariants; the agent must refuse rather than violate) and Convention Parameters (community-agreed defaults; overridable with explicit typed override) — is the structural defence against prompt-injection. Safety Warden BLOCK authority overrides the user prompt and is non-negotiable; see `.claude/skills/security-hygiene/SKILL.md`. See `convergent-discovery.md §3`.
++- **Three-tier skills-as-md pipeline — `arXiv:2604.21910` Skills-as-md.** Foundation for the vision-to-mission (semantic layer; LLM intent extraction) → research-mission-generator (deterministic layer; identical-intent → identical-output guarantee) → skill-creator (knowledge layer; markdown skills authored by domain experts) pipeline. LLM non-determinism is confined to intent extraction; the deterministic layer is the gate-able surface. See `convergent-discovery.md §2`.
