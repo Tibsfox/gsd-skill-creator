@@ -66,3 +66,25 @@ describe('OGA-048 — validate-commit dual-impl pair collapses to .cjs', () => {
     );
   });
 });
+
+describe('OGA-049 — phase-boundary dual-impl pair collapses to .cjs', () => {
+  it('CF-H-049a: PostToolUse registers phase-boundary-check.cjs with widened Write|Edit matcher', () => {
+    const settings = loadSettings();
+    const groups = groupsForEvent(settings, 'PostToolUse').filter((g) =>
+      g.hooks.some((h) => h.command.includes('phase-boundary-check.cjs')),
+    );
+    expect(groups.length).toBeGreaterThanOrEqual(1);
+    // ADR 0002 OGA-049: matcher must be widened from Write to Write|Edit so
+    // phase boundaries fire on Edit operations as well as Write.
+    const matchers = groups.map((g) => g.matcher ?? '');
+    expect(matchers.some((m) => m === 'Write|Edit')).toBe(true);
+  });
+
+  it('CF-H-049b: PostToolUse does NOT register gsd-phase-boundary.sh', () => {
+    const settings = loadSettings();
+    const allCmds = commandsForEvent(settings, 'PostToolUse');
+    expect(allCmds.some((c) => c.includes('gsd-phase-boundary.sh'))).toBe(
+      false,
+    );
+  });
+});
