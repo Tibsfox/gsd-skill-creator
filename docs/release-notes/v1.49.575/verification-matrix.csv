@@ -1,0 +1,58 @@
+requirement_id,requirement_summary,test_id,test_path,test_type,phase,status
+CS25-01,All 54 priority papers addressed via one ADR per paper,CF-01,tests/cs25-26-sweep/adr-completeness.test.ts,CF,803,Pending
+CS25-01,All 54 priority papers addressed via one ADR per paper,CF-13,tests/cs25-26-sweep/m1-coverage.test.ts,CF,801,Pending
+CS25-01,All 54 priority papers addressed via one ADR per paper,CF-14,tests/cs25-26-sweep/m2-coverage.test.ts,CF,801,Pending
+CS25-01,All 54 priority papers addressed via one ADR per paper,CF-15,tests/cs25-26-sweep/m3-coverage.test.ts,CF,801,Pending
+CS25-01,All 54 priority papers addressed via one ADR per paper,CF-16,tests/cs25-26-sweep/m4-coverage.test.ts,CF,801,Pending
+CS25-01,All 54 priority papers addressed via one ADR per paper,CF-17,tests/cs25-26-sweep/m5-coverage.test.ts,CF,801,Pending
+CS25-01,All 54 priority papers addressed via one ADR per paper,CF-18,tests/cs25-26-sweep/m6-coverage.test.ts,CF,801,Pending
+CS25-02,Per-paper ADR populated consistently; SC-PARA + SC-SRC gates,SC-SRC,tests/cs25-26-sweep/source-quality.test.ts,SC,801,Pending
+CS25-02,Per-paper ADR populated consistently; SC-PARA + SC-SRC gates,SC-PARA,tests/cs25-26-sweep/no-verbatim-15w.test.ts,SC,801,Pending
+CS25-02,Per-paper ADR populated consistently; SC-PARA + SC-SRC gates,SC-NUM,tests/cs25-26-sweep/numerical-attribution.test.ts,SC,801,Pending
+CS25-03,Convergent-discovery validation report — 4 anchors x 500-800 words,CF-02,tests/cs25-26-sweep/convergent-discovery-citations.test.ts,CF,801,Pending
+CS25-03,Convergent-discovery validation report — 4 anchors x 500-800 words,CF-13,tests/cs25-26-sweep/m1-coverage.test.ts,CF,801,Pending
+CS25-03,Convergent-discovery validation report — 4 anchors x 500-800 words,IN-08,tests/cs25-26-sweep/root-theorem-bounded-learning-link.test.ts,IN,801,Pending
+CS25-04,Cross-module relationship matrix >=15 connections; pre-rollout-gate language,CF-11,tests/cs25-26-sweep/xmod-matrix-size.test.ts,CF,801,Pending
+CS25-04,Cross-module relationship matrix >=15 connections; pre-rollout-gate language,IN-03,tests/cs25-26-sweep/xmod-adr-consistency.test.ts,IN,801,Pending
+CS25-04,Cross-module relationship matrix >=15 connections; pre-rollout-gate language,CF-06,tests/cs25-26-sweep/skill-stealing-threat-model.test.ts,CF,803,Pending
+CS25-05,Per-subsystem what-changes table; every milestone affected,IN-04,tests/cs25-26-sweep/citation-density-vs-adoption.test.ts,IN,802,Pending
+CS25-05,Per-subsystem what-changes table; every milestone affected,IN-05,tests/cs25-26-sweep/bounded-learning-silicon-cross-link.test.ts,IN,802,Pending
+CS25-06,Drop-in integration specs for all 12+ ADOPT papers >=250 words,CF-03,tests/cs25-26-sweep/dropin-spec-count.test.ts,CF,803,Pending
+CS25-06,Drop-in integration specs for all 12+ ADOPT papers >=250 words,IN-01,tests/cs25-26-sweep/adr-spec-consistency.test.ts,IN,803,Pending
+CS25-06,Drop-in integration specs for all 12+ ADOPT papers >=250 words,IN-02,tests/cs25-26-sweep/adr-test-consistency.test.ts,IN,803,Pending
+CS25-07,cs25-26-sweep.bib — 54 entries; biblatex compiles,CF-10,tests/cs25-26-sweep/bibtex-compiles.test.ts,CF,804,Pending
+CS25-08,Final mission PDF recompiles with all wave outputs integrated,CF-12,tests/cs25-26-sweep/pdf-compiles.test.ts,CF,804,Pending
+CS25-08,Final mission PDF recompiles with all wave outputs integrated,CF-20,tests/cs25-26-sweep/index-page.test.ts,CF,805,Pending
+CS25-09,CLAUDE.md draft additions <=30 lines + SKILL.md additions,CF-02,tests/cs25-26-sweep/convergent-discovery-citations.test.ts,CF,805,Pending
+CS25-09,CLAUDE.md draft additions <=30 lines + SKILL.md additions,IN-04,tests/cs25-26-sweep/citation-density-vs-adoption.test.ts,IN,805,Pending
+CS25-10,Safety harness gains 3 new test categories,CF-04,tests/cs25-26-sweep/agentdog-schema.test.ts,CF,807,Pending
+CS25-10,Safety harness gains 3 new test categories,CF-09,tests/cs25-26-sweep/std-measurement-protocol.test.ts,CF,808,Pending
+CS25-10,Safety harness gains 3 new test categories,IN-06,tests/cs25-26-sweep/mcp-security-joint-coverage.test.ts,IN,813,Pending
+CS25-11,M6 cultural-sensitivity verification — SC-IND/SC-MED/SC-SOV gates,SC-IND,tests/cs25-26-sweep/indigenous-attribution.test.ts,SC,801,Pending
+CS25-11,M6 cultural-sensitivity verification — SC-IND/SC-MED/SC-SOV gates,SC-MED,tests/cs25-26-sweep/mental-health-framing.test.ts,SC,801,Pending
+CS25-11,M6 cultural-sensitivity verification — SC-IND/SC-MED/SC-SOV gates,SC-SOV,tests/cs25-26-sweep/sovereignty-gating.test.ts,SC,801,Pending
+CS25-11,M6 cultural-sensitivity verification — SC-IND/SC-MED/SC-SOV gates,SC-ADV,tests/cs25-26-sweep/no-policy-advocacy.test.ts,SC,801,Pending
+CS25-12,Index landing page shipped to docs/release-notes/v1.49.575/,CF-20,tests/cs25-26-sweep/index-page.test.ts,CF,805,Pending
+CS25-12,Index landing page shipped to docs/release-notes/v1.49.575/,IN-07,tests/cs25-26-sweep/self-containment.test.ts,IN,805,Pending
+CS25-13,src/orchestration/tool-attention/ — lazy schema loader; ISO score; >=40% p50 token reduction,CF-05,tests/orchestration/tool-attention/tool-attention.test.ts,CF,806,Pending
+CS25-13,src/orchestration/tool-attention/ — lazy schema loader; ISO score; >=40% p50 token reduction,IN-06,tests/cs25-26-sweep/mcp-security-joint-coverage.test.ts,IN,806,Pending
+CS25-14,src/safety/agentdog/ — where/how/what BLOCK schema; flag-off byte-identical,CF-04,tests/safety/agentdog/agentdog-schema.test.ts,CF,807,Pending
+CS25-15,src/safety/std-calibration/ — per-model omission decay; CAPCOM HARD GATE,CF-09,tests/safety/std-calibration/std-measurement.test.ts,CF,808,Pending
+CS25-16,src/skill-creator/roles/ — Worker/Evaluator/Evolution; CAPCOM HARD GATE,CF-08,tests/skill-creator/roles/weler-roles.test.ts,CF,808,Pending
+CS25-17,src/cartridge/linter/structural-completeness.ts — five-principle SKILL.md validation,CF-07,tests/cartridge/linter/structural-completeness.test.ts,CF,810,Pending
+CS25-18,src/cartridge/linter/ambiguity.ts — four-type ambiguity check; zero false positives baseline,CF-07,tests/cartridge/linter/ambiguity.test.ts,CF,811,Pending
+CS25-19,src/skill-creator/auto-load/bandit.ts — Thompson Sampling + LLM reflection; CAPCOM HARD GATE,IN-02,tests/skill-creator/auto-load/bandit.test.ts,IN,812,Pending
+CS25-04,Edge case — withdrawn paper handling,EC-01,tests/cs25-26-sweep/withdrawn-paper.test.ts,EC,801,Pending
+CS25-04,Edge case — ambiguous theme handling,EC-02,tests/cs25-26-sweep/ambiguous-theme.test.ts,EC,801,Pending
+CS25-05,Edge case — out-of-scope adjacency,EC-03,tests/cs25-26-sweep/out-of-scope-adjacency.test.ts,EC,802,Pending
+CS25-06,Edge case — future-paper extension,EC-04,tests/cs25-26-sweep/future-paper-extension.test.ts,EC,803,Pending
+CS25-02,Edge case — source-quality outliers,EC-05,tests/cs25-26-sweep/source-quality-outliers.test.ts,EC,801,Pending
+CS25-01,Edge case — counterfactual decisions,EC-06,tests/cs25-26-sweep/counterfactual-decisions.test.ts,EC,801,Pending
+CS25-08,Test plan coverage — every CS25-NN maps to >=1 test,IN-09,tests/cs25-26-sweep/test-plan-coverage.test.ts,IN,805,Pending
+CS25-13,HB-01 implementation test — Tool Attention closing wave,IN-06,tests/cs25-26-sweep/mcp-security-joint-coverage.test.ts,IN,813,Pending
+CS25-14,HB-02 implementation test — AgentDoG audit log,IN-02,tests/safety/agentdog/audit-log.test.ts,IN,807,Pending
+CS25-15,HB-03 implementation test — STD calibration table persistence,IN-02,tests/safety/std-calibration/calibration-table.test.ts,IN,808,Pending
+CS25-16,HB-04 implementation test — WELER role isolation invariants,IN-02,tests/skill-creator/roles/role-isolation.test.ts,IN,808,Pending
+CS25-17,HB-05 implementation test — five-principle linter fixtures,IN-02,tests/cartridge/linter/five-principle-fixtures.test.ts,IN,810,Pending
+CS25-18,HB-06 implementation test — ambiguity linter fixtures,IN-02,tests/cartridge/linter/ambiguity-fixtures.test.ts,IN,811,Pending
+CS25-19,HB-07 implementation test — bandit convergence on 3-policy benchmark,IN-02,tests/skill-creator/auto-load/bandit-convergence.test.ts,IN,812,Pending
