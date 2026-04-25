@@ -710,6 +710,40 @@ them and a test vector is added. They are fixed points in the v1 spec.
 ## 12. Changelog
 
 - **v1 draft (2026-04-08)**: initial specification.
+- **v1.49.573 addendum (2026-04-24)**: two substrate modules added as
+  composable pre-audit layers over Grove record audit pipelines.
+
+### v1.49.573 — T2c PromptCluster BatchEffect Detector
+
+The [T2c PromptCluster BatchEffect Detector](substrate/promptcluster-batcheffect.md)
+adds batch-effect detection on Grove skill embeddings as an optional audit
+companion. It identifies systematic embedding-space shifts across batches
+(model-version changes, training-distribution changes, prompt-template
+changes) that the v1.49.571 Skill Space Isotropy Audit (SSIA) cannot catch.
+`composeWithSSIA` returns a `CombinedReport` with a joint status; neither
+report overwrites the other.
+
+Grounded in Tao et al., *Batch Effects in Brain Foundation Model Embeddings*
+(arXiv:2604.14441 / `eess26_2604.14441`, 2026). The module is read-only and
+has no write path into Grove record storage.
+
+### v1.49.573 — T2d ArtifactNet Provenance Verifier
+
+The [T2d ArtifactNet Provenance Verifier](substrate/artifactnet-provenance.md)
+wires into the Grove record audit pipeline as a **pre-audit step** — strictly
+additive, never mutating. With the `artifactnet-provenance` flag on,
+`preAuditHook` wraps any Grove audit-producing function and prepends provenance
+findings on a separate `preAudit` array. The existing `findings` array in the
+Grove audit report is never mutated. Gate G13 (CAPCOM hard-preservation)
+guarantees the Grove audit pipeline is byte-identical with the flag off.
+
+Grounded in Heewon Oh et al., *ArtifactNet: Forensic-Residual Physics for
+AI-Generated Content Detection* (arXiv:2604.16254 / `eess26_2604.16254`,
+SONICS 2026). The SONICS 3-way (real / partial / synthetic) classifier is
+applied to Grove text, audio, and image assets before the existing audit runs.
+
+See [`substrate/upstream-intelligence/README.md`](substrate/upstream-intelligence/README.md)
+for the full v1.49.573 substrate cluster hub.
 
 ---
 

@@ -22,6 +22,45 @@ Each release also has its own directory under
 `README.md` with the full feature description, and for major milestones
 a `RETROSPECTIVE.md` and/or `LESSONS-LEARNED.md`.
 
+## [v1.49.573] — 2026-04-24 — Upstream Intelligence Pack v1.44 (ArXiv eess Integration)
+
+### Added
+
+- 7 research modules covering 150 arXiv eess/cs papers (17–23 Apr 2026 submission window) — M1 Skill Learning, M2 Mathematical & Info-Theoretic Substrate, M3 Bioacoustics/Music/Audio + Cultural Sensitivity, M4 Federated Learning + Threat Model, M5 Edge Mesh, M6 Hardware Substrate, M7 Safety + Pedagogy. LaTeX outputs at `.planning/missions/arxiv-eess-integration-apr17-23/work/templates/` (18 `.tex` files; ~707 KB). Citation-key convention `eess26_<arxivID>`.
+- 10 substrate-code modules across 3 tiers (default-off; opt-in via `.claude/gsd-skill-creator.json` `upstream-intelligence` block):
+  - **T1 must-ship:** `src/skilldex-auditor/` (T1a, ZFC compliance auditor) · `src/bounded-learning-empirical/` (T1b, SkillLearnBench harness) · `src/activation-steering/` (T1c, Local Linearity DACP runtime steering) · `src/fl-threat-model/` (T1d, Lee et al. trio pre-rollout gate)
+  - **T2 if-budget:** `src/experience-compression/` (T2a, cross-level adaptive compression) · `src/predictive-skill-loader/` (T2b, GNN link-formation cache pre-warmer) · `src/promptcluster-batcheffect/` (T2c, embedding-space drift detector) · `src/artifactnet-provenance/` (T2d, SONICS forensic-residual provenance)
+  - **T3 may-defer (shipped):** `src/stackelberg-pricing/` (T3a, multi-tenant pricing reference) · `src/rumor-delay-model/` (T3b, SDDE signal-vs-hype separator)
+- W9 cross-module integration suite at `src/upstream-intelligence/__tests__/` — 6 test files / 33 tests + 153-file SHA-256 hash-tree fixture (`preserved-modules-hashtree.json`, root digest `ace3a9008ed7850e33d05bc6d98fc57daa617d46a7e0341bd6c77acc54804d95`)
+- 7 convergent-discovery projects enumerated in `synthesis-convergent-discovery.tex` (Skilldex, SkillX, Experience Compression, Vakhnovskyi BLE-LoRa, Stackelberg Drainability, ArtifactNet, Spatiotemporal Link Formation)
+- 5 hub HTML pages on `www/tibsfox/com/Research/UPSTREAM/` (gitignored; reach production via `sync-research-to-live.sh`)
+- 8 college concept `.ts` files seeded across `ai-computation` + `adaptive-systems` departments
+- 11 cross-references.json edges + series.js entry under "AI & Computation" / "Safety & Verification" / "Audio Intelligence" Rosetta clusters
+- `docs/substrate/upstream-intelligence/README.md` hub doc + 10 per-module guides at `docs/substrate/`
+
+### Changed
+
+- `.claude/gsd-skill-creator.json` — new top-level `upstream-intelligence` block with 10 sub-blocks (one per Half B module); all `enabled: false` by default
+- `docs/CORE-CONCEPTS.md` — cross-link updates for T1c Activation Steering + T2b Predictive Skill Loader
+- `docs/GROVE-FORMAT.md` — cross-link updates for T2c PromptCluster BatchEffect + T2d ArtifactNet Provenance
+
+### Verified
+
+- 16 CAPCOM gates G0–G15 all PASS / AUTHORIZED — including 4 hard-preservation gates (G10 Skilldex read-only · G11 DACP byte-identical · G12 orchestration byte-identical · G13 audit pipeline byte-identical) + 1 hard composition closure (G14) + 1 Safety Warden BLOCK (G7)
+- 27,411 tests passing (+712 over baseline 26,699; 7.12× over the ≥100 floor; itemized +576 across 11 new test clusters: 4.11× over the ≥140 itemized floor)
+- Zero v1.49.573 regressions
+- Zero Fox Companies IP leakage in any of the 5 public hub pages or 10 module guides
+- DACP / orchestration / audit pipelines byte-identical with all 10 flags off (verified by `composition-flag-off-byte-identical.test.ts` + 153-file hash-tree fixture + cross-milestone composition test with v1.49.570/571/572 + MB-1 Lyapunov + MB-5 dead-zone)
+- `npx tsc --noEmit` exit 0 (clean)
+
+### Known
+
+- 2 pre-existing failures in `src/mathematical-foundations/__tests__/integration.test.ts` (v1.49.572 baseline live-config flag-state checks; NOT v1.49.573 regressions; deferred to v1.49.572 follow-up cleanup phase). Audit trail: `src/upstream-intelligence/__tests__/PRE-EXISTING.md`.
+
+### Dedication
+
+Dedicated to **Zhong et al.** (SkillLearnBench / `eess26_2604.20087`), **Saha & Hemanth** (Skilldex / `eess26_2604.16911`), **Vakhnovskyi** (BLE-LoRa / `eess26_2604.15532`), **Zhang et al.** (Experience Compression / `eess26_2604.15877`), **Lee et al.** (FL threat trio / `eess26_2604.19891` + `eess26_2604.19915` + `eess26_2604.20020`), **Skifstad / Yang / Chou** (Local Linearity / `eess26_2604.19018`).
+
 ## [v1.49.561] — 2026-04-18
 
 ### Added
