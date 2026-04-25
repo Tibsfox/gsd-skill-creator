@@ -250,6 +250,23 @@ Eight safety requirements enforced by mandatory-pass tests:
 
 DACP shipped with 263 verification tests, 95% fidelity accuracy across 20 test scenarios, and full backward compatibility across all fidelity levels.
 
+### v1.49.573 — T1c Activation Steering
+
+**v1.49.573** added the [T1c Activation Steering Runtime](substrate/activation-steering.md)
+as an optional advisory layer on top of DACP. The activation-steering module layers on
+top of the DACP wire format without modifying it: the activation vector travels alongside
+the `(intent, data, code)` triad as additional agent-internal state and never enters any
+DACP payload. Gate G11 (CAPCOM hard-preservation) guarantees `src/dacp/` is byte-identical
+with the `activation-steering` flag off.
+
+Grounded in Skifstad, Yang, Chou, *Local Linearity of LLMs* (arXiv:2604.19018 /
+`eess26_2604.19018`): within a neighbourhood of the current operating point, the
+transformer's forward map is affine, making classical proportional control
+(`u = K(target − current)`) contractive toward the target. This is also the same layer
+that composes with the v1.49.572 T1c Semantic Channel formalism
+([`substrate/semantic-channel.md`](substrate/semantic-channel.md)) — the semantic-channel
+fidelity tier never weakens because the steering layer never touches the bundle.
+
 ---
 
 ## College Structure
@@ -290,6 +307,26 @@ Three departments shipped as proof of concept:
 The expansion architecture (v1.49.10) defined how to scale from 3 to 41 departments using **flat atoms** (each subject as a flat directory, no nested hierarchies) and **dynamic mappings** (virtual departments as user-owned JSON mappings, not hardcoded structure). The architecture was shipped; building all 41 departments proceeds incrementally as vision-to-mission packages arrive.
 
 All College source lives in `.college/` — Rosetta Core, panels, departments, and calibration.
+
+### v1.49.573 — T2b Predictive Skill Auto-Loader
+
+**v1.49.573** added the [T2b Predictive Skill Auto-Loader](substrate/predictive-skill-loader.md)
+which uses the College-of-Knowledge concept graph as a social-learning network for
+GNN-based skill cache pre-warming. Each `RosettaConcept` is a node; each
+`RosettaConcept.relationships[].targetId` is a social-learning edge. A 1-channel
+message-passing layer spreads activation outward from the currently active skill to
+predict which skills are most likely to fire next, then submits the top-K predictions
+to the M5 cache pre-warm hook API for non-blocking pre-fetch.
+
+Grounded in Mohammadiasl et al., *Spatiotemporal Link Formation Prediction in Social
+Learning Networks* (arXiv:2604.18888 / `eess26_2604.18888`, EDM 2026). Gate G12
+(CAPCOM hard-preservation) guarantees `src/orchestration/` is byte-identical with
+the `predictive-skill-loader` flag off. The College concept graph is read-only;
+no concept files are executed at runtime.
+
+See also `.planning/missions/arxiv-eess-integration-apr17-23/work/templates/m7-college-pedagogy.tex`
+for the Phase 762 College pedagogy update that formalised the social-learning-network
+framing this module implements.
 
 ---
 
@@ -471,3 +508,4 @@ These concepts interconnect deeply. Some key relationships:
 For detailed integration documentation, see:
 - [Gastown Integration Guide](gastown-integration/README.md) — 10 documents covering architecture, security, setup, and workflow
 - [Release Notes](release-notes/) — per-version detailed history of every concept's evolution
+- [Upstream Intelligence Pack v1.44 Hub](substrate/upstream-intelligence/README.md) — v1.49.573 substrate cluster: 10 modules (T1a–T3b), module roster, activation guide, composition guide, hard-preservation reference (G10/G11/G12/G13)

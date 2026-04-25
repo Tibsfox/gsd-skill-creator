@@ -19,3 +19,12 @@ export { semanticChannel } from './semantic-channel.js';
 export { rateDistortionDeductiveSource } from './rate-distortion-deductive-source.js';
 export { koopmanBilinearForm } from './koopman-bilinear-form.js';
 export { boundedLearningTheorem } from './bounded-learning-theorem.js';
+
+// Upstream Intelligence Pack v1.44 (Phase 764, v1.49.573 upstream-intelligence-pack)
+export { skilldexConformance } from './skilldex-conformance.js';
+export { localLinearitySteering } from './local-linearity-steering.js';
+export { experienceCompressionSpectrum } from './experience-compression-spectrum.js';
+export { dataFreeMiaAttack } from './data-free-mia-attack.js';
+export { spatiotemporalLinkFormation } from './spatiotemporal-link-formation.js';
+export { stackelbergDrainability } from './stackelberg-drainability.js';
+export { forensicResidualPhysics } from './forensic-residual-physics.js';
