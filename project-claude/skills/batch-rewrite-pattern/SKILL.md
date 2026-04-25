@@ -5,6 +5,8 @@ format: 2025-10-02
 version: 1.0.0
 status: active
 updated: 2026-04-17
+triggers:
+  - applying the same refactor to multiple files (e
 ---
 
 # Batch Rewrite Pattern

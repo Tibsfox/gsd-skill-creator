@@ -5,6 +5,8 @@ format: 2025-10-02
 version: 1.0.0
 status: active
 updated: 2026-04-15
+triggers:
+  - "user is new to GSD, asks about commands, wants to understand workflows, or mentions preview"
 ---
 
 # GSD Guide — Quick Reference + Workflow Explainer

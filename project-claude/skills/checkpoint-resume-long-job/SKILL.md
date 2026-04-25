@@ -5,6 +5,8 @@ format: 2025-10-02
 version: 1.0.0
 status: active
 updated: 2026-04-17
+triggers:
+  - a job iterates over N items and completing item K matters independently
 ---
 
 # Checkpoint & Resume for Long Jobs

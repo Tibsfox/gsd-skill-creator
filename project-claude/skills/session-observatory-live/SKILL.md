@@ -8,6 +8,8 @@ updated: 2026-04-17
 version_history:
   - 1.0.0 (2026-04-17): initial
   - 1.1.0 (2026-04-17): document `event tokens` dual-write shortcut
+triggers:
+  - Conversational guide for using tools/session-retro/observe
 ---
 
 # Session Observatory — Live Event Logging
