@@ -51,6 +51,7 @@ Adaptive learning layer for Claude Code that creates, validates, and manages ski
 - `desktop/` -- Vite webview frontend
 - `.college/` -- College Structure: Rosetta Core, panels, departments (culinary-arts, mathematics, mind-body), calibration
 - `docs/` -- 435+ markdown files, canonical documentation and release notes
+- `docs/adr/` -- Architecture Decision Records (ADR 0001 vendoring policy, ADR 0002 dual-impl precedence)
 - `www/tibsfox/com/Research/` -- 168 research projects (179 dirs), PNW Research Series
 
 ## Commit Convention
