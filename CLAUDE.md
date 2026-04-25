@@ -15,7 +15,7 @@ Adaptive learning layer for Claude Code that creates, validates, and manages ski
 
 - `.planning/` -- GSD project management (ROADMAP.md, STATE.md, REQUIREMENTS.md, config.json)
 - `.claude/skills/` -- auto-activating skills (gsd-workflow, skill-integration, session-awareness, security-hygiene, and others)
-- `.claude/agents/` -- GSD executor, verifier, planner subagents
+- `$REPO/.claude/agents/` -- 49 subagents on disk (per `INVENTORY-MANIFEST.json` + `.planning/missions/oops-gsd-alignment/m3/local-inventory.json`): 33 GSD-prefixed (planner / executor / verifier + 30 specialists), 8 Unit Circle Lab team agents (capcom, flight-ops, lab-director, uc-* analysts), 3 v1.50a-* (paused experiment), 5 generic infra (observer, watchdog, doc-linter, codebase-navigator, changelog-generator, pipeline-reconciler, quality-drift-watcher). Source-of-truth lives at `$REPO/project-claude/agents/`; install.cjs replays into `.claude/agents/` (gitignored).
 - `.claude/commands/gsd/` -- GSD command definitions
 - `.claude/hooks/` -- deterministic hooks (commit validation, session state, phase boundary)
 - `project-claude/` -- source of project-specific Claude config (installed via `node project-claude/install.cjs`)
@@ -46,6 +46,13 @@ Adaptive learning layer for Claude Code that creates, validates, and manages ski
 - `src/model-affinity/` -- ME-2 per-skill model affinity + Haiku→Sonnet→Opus escalation on tractability mismatch
 - `src/ab-harness/` -- ME-3 significance-gated A/B harness built on M4 fork/explore/commit
 - `src/coprocessor/` -- TypeScript client for the math coprocessor runtime; spawns the Python MCP server from `coprocessors/math/` and exposes typed APIs for skill activation
+- `src/memory/` -- Memory Arena stack (M1-M13 slices + IPC + Grove integration; ~710 Rust + ~393 TS tests at session 014; survey scorer + half-life decay + 9-type taxonomy classifier landed in W1 OGA-006/024/025)
+- `src/vtm/` -- vision-to-mission deterministic intent → mission-package generator (semantic layer of the three-tier skills-as-md pipeline; see CLAUDE.md "External Citations" §arXiv:2604.21910)
+- `src/dacp/` -- DACP runtime (Fox-aligned reference implementation: assembler, bus, fidelity, retrospective, schema-generator, templates; referenced by name only — Fox Companies IP stays in `.planning/`)
+- `src/mathematical-foundations/` -- formal foundations (proof scaffolds backing M5/M7/MA-2 derivations)
+- `src/coherent-functors/` -- categorical structure (composition, factory, invariants, silicon-layer-boundary; underpins the cartridge composition algebra)
+- `src/predictive-skill-loader/` -- anticipatory skill preloader (predicts next likely skill activation from M5 selector traces; reduces cold-start latency)
+- `src/runtime-hal/` -- runtime HAL registry; declares the 14 upstream + Pi runtimes the agent can be hosted under (claude-code is the only adapter implemented; others are registration-only — see `runtimes.ts`)
 - `coprocessors/math/` -- **core Python GPU math coprocessor** (algebrus / fourier / statos / symbex / vectora chips + MCP server + CPU oracle fallback + 125 tests). Invoked via the `coprocessor` chipset kind. Promoted from `examples/chipsets/math-coprocessor/` 2026-04-19 to reflect first-class status
 - `src-tauri/` -- Rust backend (Tauri)
 - `desktop/` -- Vite webview frontend
