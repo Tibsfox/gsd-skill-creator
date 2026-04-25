@@ -4,9 +4,14 @@ description: Pipeline retirement protocol for completed work items. Implements a
 format: 2025-10-02
 version: 1.0.0
 status: ACTIVE
-updated: 2026-04-15
+updated: 2026-04-25
 triggers:
-  - Pipeline retirement protocol for completed work items
+  - polecat has completed execution and is ready to retire its work
+  - agent's hook status transitions to completed
+  - work item's status transitions to done
+  - convoy needs to track individual bead completion
+references_subdir: true
+word_budget: 800
 ---
 
 # Done Retirement
