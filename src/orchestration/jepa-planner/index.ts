@@ -110,7 +110,12 @@ export interface PlanResult {
 }
 
 const DISABLED_PLAN_RESULT: PlanResult = Object.freeze({
-  actions: Object.freeze([]) as ActionSequence,
+  // The outer Object.freeze locks the `actions` reference; the inner empty
+  // array is intentionally typed as `ActionSequence` via the unknown bridge
+  // because `ActionSequence` is a mutable `CodeTransformation[]` (Zod-inferred)
+  // and TypeScript correctly rejects the direct `readonly never[]` → mutable
+  // narrowing under strict mode.
+  actions: Object.freeze([]) as unknown as ActionSequence,
   predictedCost: Number.POSITIVE_INFINITY,
   executeFirstK: 0,
   disabled: true,
