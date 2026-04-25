@@ -6,6 +6,7 @@ format: 2025-10-02
 triggers:
   - "ending sessions, switching tasks, or handing off work"
 updated: 2026-04-25
+status: ACTIVE
 ---
 
 # Context Handoff

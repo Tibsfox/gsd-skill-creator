@@ -6,6 +6,7 @@ format: 2025-10-02
 triggers:
   - "user asks \"why did we"
 updated: 2026-04-25
+status: ACTIVE
 ---
 
 # GSD Decision Archaeology

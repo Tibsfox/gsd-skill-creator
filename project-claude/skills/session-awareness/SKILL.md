@@ -15,6 +15,7 @@ format: 2025-10-02
 triggers:
   - the user references
 updated: 2026-04-25
+status: ACTIVE
 ---
 
 # Session Awareness

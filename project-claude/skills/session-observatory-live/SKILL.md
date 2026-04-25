@@ -3,7 +3,7 @@ name: session-observatory-live
 description: "Conversational guide for using tools/session-retro/observe.mjs to capture friction, wins, corrections, decisions, gaps, tool-use, and checkpoints as they happen during a session. Use at session start (to kick off the log), at inflection points (to record events), and at session end (to archive and feed the retrospective generator)."
 format: 2025-10-02
 version: 1.1.0
-status: active
+status: ACTIVE
 updated: 2026-04-17
 version_history:
   - 1.0.0 (2026-04-17): initial

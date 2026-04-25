@@ -3,7 +3,7 @@ name: gupp-propulsion
 description: Interrupt controller converting polled to proactive agent execution. Per-runtime strategies, configurable thresholds, Deacon heartbeat supervision. Fights LLM passivity bias.
 format: 2025-10-02
 version: 1.0.0
-status: active
+status: ACTIVE
 updated: 2026-04-15
 triggers:
   - Interrupt controller converting polled to proactive agent execution

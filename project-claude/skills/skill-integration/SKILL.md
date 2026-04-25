@@ -16,6 +16,7 @@ format: 2025-10-02
 triggers:
   - "Manages skill-creator integration with GSD workflows including skill loading, session observation, bounded learning guardrails, and pattern detection"
 updated: 2026-04-25
+status: ACTIVE
 ---
 
 # Skill-Creator Integration

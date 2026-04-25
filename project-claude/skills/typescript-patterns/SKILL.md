@@ -6,6 +6,7 @@ format: 2025-10-02
 triggers:
   - "writing TypeScript, fixing type errors, or working with generics"
 updated: 2026-04-25
+status: ACTIVE
 ---
 
 # TypeScript Patterns

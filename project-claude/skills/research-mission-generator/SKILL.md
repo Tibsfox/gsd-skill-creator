@@ -7,6 +7,7 @@ triggers:
   - "the user has been discussing, researching, or brainstorming a topic and then asks to turn it into a research mission, research pack, mission package, or says 'p"
   - "if the user asks to 'create a research mission on [topic]' cold — in that case, conduct web research first, then package"
 updated: 2026-04-25
+status: ACTIVE
 ---
 
 # Research Mission Generator

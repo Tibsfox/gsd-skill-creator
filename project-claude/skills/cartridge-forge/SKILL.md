@@ -8,6 +8,7 @@ format: 2025-10-02
 triggers:
   - "the user asks to forge, scaffold, or author a new cartridge — content cartridge, department cartridge, or chipset bundle"
 updated: 2026-04-25
+status: ACTIVE
 ---
 
 # Cartridge Forge

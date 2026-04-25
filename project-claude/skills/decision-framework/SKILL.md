@@ -6,6 +6,7 @@ format: 2025-10-02
 triggers:
   - "evaluating options, root causes, or prioritizing"
 updated: 2026-04-25
+status: ACTIVE
 ---
 
 # Decision Frameworks
