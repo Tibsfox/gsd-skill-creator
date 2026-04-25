@@ -88,3 +88,17 @@ describe('OGA-049 — phase-boundary dual-impl pair collapses to .cjs', () => {
     );
   });
 });
+
+describe('OGA-050 — session-state dual-impl pair collapses to .cjs', () => {
+  it('CF-H-050a: SessionStart registers session-state.cjs', () => {
+    const settings = loadSettings();
+    const cmds = commandsForEvent(settings, 'SessionStart');
+    expect(cmds.some((c) => c.includes('session-state.cjs'))).toBe(true);
+  });
+
+  it('CF-H-050b: SessionStart does NOT register gsd-session-state.sh', () => {
+    const settings = loadSettings();
+    const cmds = commandsForEvent(settings, 'SessionStart');
+    expect(cmds.some((c) => c.includes('gsd-session-state.sh'))).toBe(false);
+  });
+});
