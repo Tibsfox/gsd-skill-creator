@@ -18,3 +18,10 @@ export type {
 } from './types.js';
 
 export { DEFAULT_DRAWS } from './types.js';
+
+// v1.49.580 — multivariate type surface.
+export type {
+  DirichletPrior,
+  MultinomialOutcome,
+  MvExperimentDesign,
+} from './mv-types.js';
