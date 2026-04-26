@@ -6,26 +6,26 @@ Each version links to a detailed release notes directory with full feature descr
 
 
 > **Drift detected:** 7 releases flag a retrospective but have no `03-retrospective.md` on disk; 3 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 619 releases · 616 with retrospectives · 609 with extracted lessons · quality A:607 B:1 C:2 D:1 F:7 (avg 96) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 619 releases · 616 with retrospectives · 609 with extracted lessons · quality A:617 B:1 C:0 D:0 F:0 (avg 97) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Retro | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|-------|---------|---------|-------|
 | [v1.49.576](release-notes/v1.49.576) | OOPS-GSD Alignment + Implementation | — | 40 | 4 | — | ✓ _(no file)_ | — | A 100 |  |
 | [v1.49.575](release-notes/v1.49.575) | CS25–26 Sweep → GSD Integration | — | 16 | 18 | — | ✓ _(no file)_ | — | A 100 |  |
 | [v1.49.574](release-notes/v1.49.574) | Megakernel: One Launch, One Chipset | — | 3 | — | — | [✓](release-notes/v1.49.574/chapter/03-retrospective.md) | [4](release-notes/v1.49.574/chapter/04-lessons.md) | A 100 |  |
-| [v1.49.573](release-notes/v1.49.573) | Upstream Intelligence Pack v1.44 (ArXiv eess Integration) | — | 3 | 24 | — | ✓ _(no file)_ | 9 _(no file)_ | F 21 |  |
+| [v1.49.573](release-notes/v1.49.573) | Upstream Intelligence Pack v1.44 (ArXiv eess Integration) | — | 3 | 24 | — | ✓ _(no file)_ | 9 _(no file)_ | A 100 |  |
 | [v1.49.572](release-notes/v1.49.572) | Mathematical Foundations Refresh | — | 3 | 19 | — | ✓ _(no file)_ | — | A 98 |  |
-| [v1.49.571](release-notes/v1.49.571) | Heuristics-Free Skill Space | 2026-04-23 | 11 | — | — | ✓ _(no file)_ | — | F 25 |  |
-| [v1.49.570](release-notes/v1.49.570) | Convergent Substrate | 2026-04-23 | 13 | 9 | — | ✓ _(no file)_ | — | F 25 |  |
-| [v1.49.569](release-notes/v1.49.569) | Drift in LLM Systems | 2026-04-23 | 29 | 18 | — | [✓](release-notes/v1.49.569/chapter/03-retrospective.md) | [8](release-notes/v1.49.569/chapter/04-lessons.md) | F 50 |  |
+| [v1.49.571](release-notes/v1.49.571) | Heuristics-Free Skill Space | 2026-04-23 | 11 | — | — | ✓ _(no file)_ | — | A 100 |  |
+| [v1.49.570](release-notes/v1.49.570) | Convergent Substrate | 2026-04-23 | 13 | 9 | — | ✓ _(no file)_ | — | A 100 |  |
+| [v1.49.569](release-notes/v1.49.569) | Drift in LLM Systems | 2026-04-23 | 29 | 18 | — | [✓](release-notes/v1.49.569/chapter/03-retrospective.md) | [8](release-notes/v1.49.569/chapter/04-lessons.md) | A 100 |  |
 | [v1.49.568](release-notes/v1.49.568) | Nonlinear Frontier | 2026-04-23 | 34 | 5 | — | [✓](release-notes/v1.49.568/chapter/03-retrospective.md) | [4](release-notes/v1.49.568/chapter/04-lessons.md) | A 98 |  |
-| [v1.49.567](release-notes/v1.49.567) | Degree 62: The Ground Beneath the Survey | 2026-04-22 | 1 | — | — | — | — | F 17 |  |
-| [v1.49.566](release-notes/v1.49.566) | Degree 61: The Completion of the Survey | 2026-04-22 | 1 | — | — | [✓](release-notes/v1.49.566/chapter/03-retrospective.md) | [5](release-notes/v1.49.566/chapter/04-lessons.md) | F 48 |  |
-| [v1.49.565](release-notes/v1.49.565) | Degree 60: The Anchored Listener | 2026-04-22 | 1 | — | — | [✓](release-notes/v1.49.565/chapter/03-retrospective.md) | — | C 73 |  |
+| [v1.49.567](release-notes/v1.49.567) | Degree 62: The Ground Beneath the Survey | 2026-04-22 | 1 | — | — | — | — | A 95 |  |
+| [v1.49.566](release-notes/v1.49.566) | Degree 61: The Completion of the Survey | 2026-04-22 | 1 | — | — | [✓](release-notes/v1.49.566/chapter/03-retrospective.md) | [5](release-notes/v1.49.566/chapter/04-lessons.md) | A 92 |  |
+| [v1.49.565](release-notes/v1.49.565) | Degree 60: The Anchored Listener | 2026-04-22 | 1 | — | — | [✓](release-notes/v1.49.565/chapter/03-retrospective.md) | — | A 97 |  |
 | [v1.49.564](release-notes/v1.49.564) | Degree 59: The Engineering Lineage | 2026-04-24 | 10 | — | — | [✓](release-notes/v1.49.564/chapter/03-retrospective.md) | [13](release-notes/v1.49.564/chapter/04-lessons.md) | A 100 |  |
 | [v1.49.563](release-notes/v1.49.563) | Degree 58: Twenty-Four Hours | 2026-04-20 | 2 | — | — | [✓](release-notes/v1.49.563/chapter/03-retrospective.md) | [15](release-notes/v1.49.563/chapter/04-lessons.md) | A 100 |  |
 | [v1.49.562](release-notes/v1.49.562) | Degree 56: Triple Bounce to Smithsonian | 2026-04-19 | 4 | — | — | [✓](release-notes/v1.49.562/chapter/03-retrospective.md) | [14](release-notes/v1.49.562/chapter/04-lessons.md) | A 100 |  |
-| [v1.49.561](release-notes/v1.49.561) | Living Sensoria | 2026-04-18 | 45 | 15 | — | — | — | F 13 |  |
+| [v1.49.561](release-notes/v1.49.561) | Living Sensoria | 2026-04-18 | 45 | 15 | — | — | — | A 100 |  |
 | [v1.49.560](release-notes/v1.49.560) | Release Documentation Uplift | 2026-04-18 | 629 | — | — | ✓ _(no file)_ | 16 _(no file)_ | B 88 |  |
 | [v1.49.559](release-notes/v1.49.559) | Degree 55: The Unmanned Work Continues | 2026-04-16 | 1 | — | — | [✓](release-notes/v1.49.559/chapter/03-retrospective.md) | [20](release-notes/v1.49.559/chapter/04-lessons.md) | A 100 |  |
 | [v1.49.558](release-notes/v1.49.558) | Degree 54: In Memoriam -- Tough and Competent | 2026-04-16 | 3 | — | — | [✓](release-notes/v1.49.558/chapter/03-retrospective.md) | [23](release-notes/v1.49.558/chapter/04-lessons.md) | A 100 |  |
@@ -348,9 +348,9 @@ Each version links to a detailed release notes directory with full feature descr
 | [v1.49.241](release-notes/v1.49.241) | Degree 101: Hecuba + Common Raven Pair — THE POST-CENTENNIAL | 2026-04-01 | 3 | — | — | [✓](release-notes/v1.49.241/chapter/03-retrospective.md) | [5/20](release-notes/v1.49.241/chapter/04-lessons.md) | A 90 |  |
 | [v1.49.240](release-notes/v1.49.240) | Degree 100: Summer Heart + Common Raven — THE CENTENNIAL | 2026-04-02 | 1 | — | — | [✓](release-notes/v1.49.240/chapter/03-retrospective.md) | [3/18](release-notes/v1.49.240/chapter/04-lessons.md) | A 98 |  |
 | [v1.49.239](release-notes/v1.49.239) | Degree 99: Kaina + Click Beetle — THE SYNTHESIS AND THE SNAP | 2026-04-02 | 1 | — | — | [✓](release-notes/v1.49.239/chapter/03-retrospective.md) | [2/24](release-notes/v1.49.239/chapter/04-lessons.md) | A 100 |  |
-| [v1.49.238](release-notes/v1.49.238) | Degree 98: Gold Casio + Tree Cricket Song -- THE SHIMMER AND THE TRILL | 2026-04-01 | 1 | — | — | [✓](release-notes/v1.49.238/chapter/03-retrospective.md) | [2/21](release-notes/v1.49.238/chapter/04-lessons.md) | D 65 |  |
+| [v1.49.238](release-notes/v1.49.238) | Degree 98: Gold Casio + Tree Cricket Song -- THE SHIMMER AND THE TRILL | 2026-04-01 | 1 | — | — | [✓](release-notes/v1.49.238/chapter/03-retrospective.md) | [2/21](release-notes/v1.49.238/chapter/04-lessons.md) | A 95 |  |
 | [v1.49.237](release-notes/v1.49.237) | Degree 97: The Postal Service (Electronic Context) + Toad Chorus — THE ALGORITHM AND THE PURR | 2026-04-01 | 2 | — | — | [✓](release-notes/v1.49.237/chapter/03-retrospective.md) | [3/21](release-notes/v1.49.237/chapter/04-lessons.md) | A 100 |  |
-| [v1.49.236](release-notes/v1.49.236) | Degree 96: STRFKR + Wood Frog -- THE PULSE AND THE FREEZE | 2026-04-01 | 2 | — | — | [✓](release-notes/v1.49.236/chapter/03-retrospective.md) | [2/22](release-notes/v1.49.236/chapter/04-lessons.md) | C 70 |  |
+| [v1.49.236](release-notes/v1.49.236) | Degree 96: STRFKR + Wood Frog -- THE PULSE AND THE FREEZE | 2026-04-01 | 2 | — | — | [✓](release-notes/v1.49.236/chapter/03-retrospective.md) | [2/22](release-notes/v1.49.236/chapter/04-lessons.md) | A 92 |  |
 | [v1.49.235](release-notes/v1.49.235) | Degree 95: ODESZA + Mayfly Emergence — THE EUPHORIC AND THE EPHEMERAL | 2026-04-01 | 1 | — | — | [✓](release-notes/v1.49.235/chapter/03-retrospective.md) | [23](release-notes/v1.49.235/chapter/04-lessons.md) | A 100 |  |
 | [v1.49.234](release-notes/v1.49.234) | Degree 94: Erik Blood + Stonefly Hatch — THE STUDIO AND THE STREAM | 2026-04-02 | 1 | — | — | [✓](release-notes/v1.49.234/chapter/03-retrospective.md) | [3/23](release-notes/v1.49.234/chapter/04-lessons.md) | A 100 |  |
 | [v1.49.233](release-notes/v1.49.233) | Degree 93: NAVVI + Hornet Nest Buzz — THE SHIMMER AND THE STING | 2026-04-02 | 1 | — | — | [✓](release-notes/v1.49.233/chapter/03-retrospective.md) | [3/22](release-notes/v1.49.233/chapter/04-lessons.md) | A 100 |  |
