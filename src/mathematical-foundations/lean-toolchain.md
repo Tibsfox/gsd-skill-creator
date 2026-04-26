@@ -28,7 +28,7 @@ leanprover/lean4:v4.15.0
 6955cd00cec441d129d832418347a89d682205a6
 ```
 
-**Status:** date-bracketed pin (provenance verified; `lake build` verification deferred).
+**Status:** verified — date-bracketed pin + provenance + `lake build` all confirmed (v1.49.578, 2026-04-26).
 
 **Provenance.** Latest commit on `leanprover-community/mathlib4@main` on or before the arXiv:2510.04070 submission date (2025-10-09), obtained via the GitHub commits API:
 
@@ -39,16 +39,31 @@ GET https://api.github.com/repos/leanprover-community/mathlib4/commits?until=202
   title = "chore: drastically speed up `LieModule.Cohomology.d₂₃` (#30377)"
 ```
 
-**Structural sanity check (passed).** At this commit, `Mathlib/Probability/Kernel/Disintegration/` exists as a subdirectory, confirming the Markov-kernel disintegration namespace required by Degenne et al. §3 is present. The other three namespaces (`MeasureTheory.KLDivergence`, `ProbabilityTheory.entropy`, `ProbabilityTheory.subgaussian`) are expected at the same commit per the paper's submission-date claim but have not been individually file-system-verified here.
+**Structural sanity check (passed).** At this commit, `Mathlib/Probability/Kernel/Disintegration/` exists as a subdirectory, confirming the Markov-kernel disintegration namespace required by Degenne et al. §3 is present.
 
-**`lake build` verification — pending.** A full `lake build` against this commit requires a local Lean 4.15.0 installation, which is not available in the current authoring environment. The four-namespace compilation check (per the procedure below) should be run before any v1.50 proof-companion artifact is shipped against this pin.
+**`lake build` verification — PASS (v1.49.578, 2026-04-26).** All four load-bearing namespaces compiled cleanly against this commit on Lean 4.15.0 / Mathlib4 commit `6955cd00cec441d129d832418347a89d682205a6` via `tools/verify-mathlib-pin.sh`:
+
+| Namespace | Status | Build jobs |
+|---|---|---|
+| `Mathlib.Probability.Kernel.Disintegration.Basic` | PASS | 1760 |
+| `Mathlib.InformationTheory.KullbackLeibler.Basic` | PASS | 2479 |
+| `Mathlib.Probability.Distributions.Gaussian` | PASS | 2706 |
+| `Mathlib.Probability.IdentDistrib` | PASS | 2438 |
+
+**`lake build` automation — v1.49.578.** A full `lake build` against this commit requires a local Lean 4.15.0 installation. The verification is now one command:
+
+```
+tools/verify-mathlib-pin.sh
+```
+
+The script parses the SHA from this document (so the doc is the source of truth — no hardcoded SHA), clones or updates Mathlib4 at `./.mathlib-verify-checkout` (override with `--mathlib-dir`), runs `lake exe cache get` then `lake build` for each of the four load-bearing namespaces, and reports PASS/FAIL per namespace with a non-zero exit on any failure. See the script header for full exit-code semantics and disk/time costs.
 
 **Re-verification procedure (when bumping or auditing):**
 
-1. Clone Mathlib4: `git clone https://github.com/leanprover-community/mathlib4`
-2. `git checkout 6955cd00cec441d129d832418347a89d682205a6`
-3. Confirm `lake build Mathlib.Probability.Kernel.Disintegration.Basic`, `lake build Mathlib.InformationTheory.KullbackLeibler.Basic`, `lake build Mathlib.Probability.Distributions.Gaussian`, and the entropy module all succeed
-4. If a different date or set of namespaces is required, repeat the date-bracketed API query above with the new `until=…` value, substitute the resulting SHA, and re-run `npm test -- src/mathematical-foundations/__tests__/lean-version-pin.test.ts`
+1. Edit the SHA in this document's "Pinned Mathlib Commit Hash" section.
+2. Run `npm test -- src/mathematical-foundations/__tests__/lean-version-pin.test.ts` (the doc-content + 40-char-SHA assertion).
+3. Run `tools/verify-mathlib-pin.sh` (the actual `lake build`). Pass `--no-build` if you only want to confirm the parse and Mathlib clone succeed.
+4. To pick a different commit: re-issue the date-bracketed API query (`https://api.github.com/repos/leanprover-community/mathlib4/commits?until=YYYY-MM-DDT23:59:59Z&per_page=1`), substitute the new SHA, then repeat steps 2–3.
 
 ---
 
