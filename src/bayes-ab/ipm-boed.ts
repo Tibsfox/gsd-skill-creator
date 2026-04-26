@@ -164,8 +164,11 @@ export function sampleBetas(b: BetaPrior, n: number, rng: SeedableRng): number[]
 /**
  * Sample one Gamma(shape, scale=1) draw. Marsaglia–Tsang (2000) for
  * shape ≥ 1; Best (1978) boost for shape < 1.
+ *
+ * Exported (v1.49.580) so `src/bayes-ab/dirichlet.ts::sampleDirichlet`
+ * can construct Dirichlet draws as K independent Gamma draws normalised.
  */
-function sampleGamma(shape: number, rng: SeedableRng): number {
+export function sampleGamma(shape: number, rng: SeedableRng): number {
   if (shape <= 0) {
     throw new RangeError(`sampleGamma: shape must be > 0 (got ${shape})`);
   }
