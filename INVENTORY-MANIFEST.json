@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-26T08:10:39Z",
+  "generated_at": "2026-04-26T12:51:26Z",
   "generator_version": "1.0.0",
   "milestone": "v1.49.576",
   "counts": {
@@ -7,7 +7,7 @@
     "agents_total": 10,
     "agents_gsd_prefix": 4,
     "hooks": 24,
-    "src_subsystems": 147
+    "src_subsystems": 148
   },
   "commands": [
     {
@@ -219,6 +219,7 @@
     "application",
     "artifactnet-provenance",
     "audio-engineering",
+    "bayes-ab",
     "bounded-learning",
     "bounded-learning-empirical",
     "brainstorm",
