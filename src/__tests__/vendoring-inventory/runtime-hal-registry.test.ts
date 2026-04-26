@@ -20,7 +20,7 @@ import {
   SUPPORTED_RUNTIMES,
   getRuntimeCount,
   isSupportedRuntime,
-} from '../../runtime-hal/runtimes';
+} from '../../runtime-hal/runtimes.js';
 
 const UPSTREAM_14 = [
   'claude-code',

@@ -20,6 +20,7 @@ import {
   migrateDirectory,
   pickDefaultHalfLife,
   HALF_LIFE_VALUES,
+// @ts-expect-error — .mjs migration script has no .d.ts; runtime-tested via this suite
 } from '../../../scripts/memory-migrate-half-life.mjs';
 
 const STAMP = '2026-04-25T12:00:00.000Z';

@@ -17,6 +17,7 @@ import {
   VALID_STATUSES,
   SPEC_FORMAT,
   SPEC_VERSION,
+// @ts-expect-error — .mjs migration script has no .d.ts; runtime-tested via this suite
 } from '../../../scripts/skill-migrate-spec-fields.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -106,7 +107,7 @@ describe('CF-H-032: triggers field is a non-empty list', () => {
       const { raw } = splitFrontmatter(text);
       // Locate the triggers: block and ensure at least one '  - ' item line.
       const lines = raw.split('\n');
-      const idx = lines.findIndex((l) => /^triggers\s*:/.test(l));
+      const idx = lines.findIndex((l: string) => /^triggers\s*:/.test(l));
       expect(idx).toBeGreaterThanOrEqual(0);
       let count = 0;
       for (let j = idx + 1; j < lines.length; j++) {
