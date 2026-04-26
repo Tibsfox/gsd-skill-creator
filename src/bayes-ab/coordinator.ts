@@ -78,18 +78,29 @@ export type RunBayesABOptions<P> = BayesABConfig & {
 /**
  * Bounded posterior-shift metric in [-1, 1] for the JP-002 e-process.
  *
- * Returns the difference of posterior and prior means:
- *   metric = betaMean(posterior) - betaMean(prior)
+ * Returns 2× the difference of posterior and prior means, clipped to
+ * [-1, 1]:
  *
- * Both means lie in (0, 1), so the difference is in (-1, 1) — within the
- * e-process's required bounded range. Sign convention: positive ⇒ posterior
- * mean has shifted *upward* from the prior mean (more "successful skill"
- * evidence). Negative ⇒ shifted *downward*. The 'one-sided' hypothesis
- * variant of the e-process treats positive shifts as evidence against H_0
- * (no shift); 'two-sided' treats either direction as evidence.
+ *   metric = clip(2 · (betaMean(posterior) − betaMean(prior)), -1, +1)
+ *
+ * The 2× scale matters: at the JP-002 default Hoeffding parameter λ=0.5,
+ * the per-step log-e-value is `λ·x − λ²/2`. The unscaled difference x is
+ * bounded by `min(priorMean, 1 − priorMean)` ≤ 0.5; for a Beta(1,1)
+ * uniform prior the maximum is exactly 0.5, putting the e-process at its
+ * breakeven point (0.5·0.5 − 0.125 = 0). Doubling the metric gives the
+ * gate non-trivial accumulation under H₁ while still respecting the
+ * Hoeffding-bound's [-1, 1] support requirement.
+ *
+ * Under H₀ (posterior mean = prior mean), the metric is exactly zero;
+ * under H₁ it accumulates positive (or, two-sided, signed) evidence. Sign
+ * convention: positive ⇒ posterior mean has shifted *upward* from the
+ * prior mean (more "successful skill" evidence).
  */
 export function scaledPosteriorShift(posterior: BetaPrior, prior: BetaPrior): number {
-  return betaMean(posterior) - betaMean(prior);
+  const raw = 2 * (betaMean(posterior) - betaMean(prior));
+  if (raw > 1) return 1;
+  if (raw < -1) return -1;
+  return raw;
 }
 
 // ─── runBayesAB ──────────────────────────────────────────────────────────────
