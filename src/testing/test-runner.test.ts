@@ -244,7 +244,7 @@ describe('TestRunner', () => {
       };
       vi.mocked(BatchSimulator).mockImplementation(function (this: any) {
         this.runTestSuite = vi.fn().mockImplementation(async () => {
-          await new Promise(resolve => setTimeout(resolve, 10));
+          await new Promise(resolve => setTimeout(resolve, 25));
           return batchResult;
         });
         return this;
@@ -252,7 +252,12 @@ describe('TestRunner', () => {
 
       const result = await runner.runForSkill('test-skill');
 
-      expect(result.duration).toBeGreaterThanOrEqual(10);
+      // Assertion lower bound is intentionally below the setTimeout target
+      // (25ms) to absorb CI clock granularity and scheduling jitter — Node's
+      // setTimeout can resolve a few ms early, and the test's intent is to
+      // verify duration is *tracked*, not that a specific timeout produces
+      // a specific measured duration. >=15 leaves ~10ms of headroom.
+      expect(result.duration).toBeGreaterThanOrEqual(15);
     });
   });
 
