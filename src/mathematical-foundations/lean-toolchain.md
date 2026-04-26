@@ -25,18 +25,30 @@ leanprover/lean4:v4.15.0
 ## Pinned Mathlib Commit Hash
 
 ```
-<MATHLIB_COMMIT_HASH_TO_VERIFY>
+6955cd00cec441d129d832418347a89d682205a6
 ```
 
-**Status:** placeholder. The exact commit must be verified by checking out Mathlib at the date closest to the arXiv:2510.04070 submission (October 2025) and confirming `MeasureTheory.Kernel.disintegration`, `MeasureTheory.KLDivergence`, `ProbabilityTheory.entropy`, and `ProbabilityTheory.subgaussian` all compile.
+**Status:** date-bracketed pin (provenance verified; `lake build` verification deferred).
 
-**Verification procedure:**
+**Provenance.** Latest commit on `leanprover-community/mathlib4@main` on or before the arXiv:2510.04070 submission date (2025-10-09), obtained via the GitHub commits API:
+
+```
+GET https://api.github.com/repos/leanprover-community/mathlib4/commits?until=2025-10-09T23:59:59Z&per_page=1
+→ sha   = 6955cd00cec441d129d832418347a89d682205a6
+  date  = 2025-10-09T20:31:53Z
+  title = "chore: drastically speed up `LieModule.Cohomology.d₂₃` (#30377)"
+```
+
+**Structural sanity check (passed).** At this commit, `Mathlib/Probability/Kernel/Disintegration/` exists as a subdirectory, confirming the Markov-kernel disintegration namespace required by Degenne et al. §3 is present. The other three namespaces (`MeasureTheory.KLDivergence`, `ProbabilityTheory.entropy`, `ProbabilityTheory.subgaussian`) are expected at the same commit per the paper's submission-date claim but have not been individually file-system-verified here.
+
+**`lake build` verification — pending.** A full `lake build` against this commit requires a local Lean 4.15.0 installation, which is not available in the current authoring environment. The four-namespace compilation check (per the procedure below) should be run before any v1.50 proof-companion artifact is shipped against this pin.
+
+**Re-verification procedure (when bumping or auditing):**
 
 1. Clone Mathlib4: `git clone https://github.com/leanprover-community/mathlib4`
-2. Run `git log --before="2025-10-09" -1 --format="%H"` (use the arXiv:2510.04070 submission date)
-3. Confirm `lake build Mathlib.MeasureTheory.Kernel` succeeds at that commit
-4. Replace the placeholder above with the full 40-character SHA
-5. Update this document and re-run `npm test -- src/mathematical-foundations/__tests__/lean-version-pin.test.ts`
+2. `git checkout 6955cd00cec441d129d832418347a89d682205a6`
+3. Confirm `lake build Mathlib.Probability.Kernel.Disintegration.Basic`, `lake build Mathlib.InformationTheory.KullbackLeibler.Basic`, `lake build Mathlib.Probability.Distributions.Gaussian`, and the entropy module all succeed
+4. If a different date or set of namespaces is required, repeat the date-bracketed API query above with the new `until=…` value, substitute the resulting SHA, and re-run `npm test -- src/mathematical-foundations/__tests__/lean-version-pin.test.ts`
 
 ---
 
