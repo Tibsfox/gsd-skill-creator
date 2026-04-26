@@ -33,12 +33,17 @@ the chipset metaphor?", v1.49.575 asks the more uncomfortable question:
 decisions GSD has been making since v1.0?** The signal carries the
 convergent-discovery validation pattern for the third milestone running.
 
-- **CONVERGENT-DISCOVERY THIRD MILESTONE.** Four anchor papers from the CS25–26 sweep arrive at GSD's load-bearing primitives by independent paths. None cite the GSD ecosystem. None could have — the timing rules it out. The signal is no longer interesting because it's surprising; it's interesting because it's stable. Three milestones in, it is a property of the design space rather than a coincidence.
-- **DESIGN-DISCIPLINE LEVEL CALIBRATION.** The published derivations and GSD's field-grown conventions are not formally equivalent. They share a discipline of identifying the minimum coordinating primitive a system needs and replacing the cluster of approximate mechanisms with one carefully-chosen one. We are not claiming we built it first. We are claiming the patterns are recoverable from outside.
-- **TIER-1 ONLY HALF B SHIPS SEVEN MODULES.** Seven ADOPT-decision substrate modules ship as T1 (HB-01 through HB-07); five reviewed candidates (HB-08 through HB-12) defer to backlog at milestone-open. The T1 / T2 / T3 tier-split discipline kept the milestone deliverable. Without it, the temptation to absorb 12 reviewed candidates in one milestone would have either blown the wall-clock budget or shipped 12 substrates at lower quality each. Both halves built in parallel.
-- **CAPCOM HARD GATE PATTERN MATURED.** The trigger-vs-auth separation matured through the chain v1.49.574 → HB-03 → HB-04 → HB-07. By Phase 812 the pattern was a copy-paste-with-customization template; the four primitives (`isCapcomAuthorized` / `isActivationTriggered` / `emitCapcomGate` / `defaultCapcomMarkerPath`) are the same shape across all three modules. Three CAPCOM HARD GATES landed and all three pass. Each independently authorizes; each fails closed by default.
-- **HB-04 × HB-07 KEYSTONE COMPOSITION.** The most architecturally interesting finding of the milestone: HB-04 (Last Harness Worker / Evaluator / Evolution roles) supplies the per-episode adversarial check; HB-07 (AEL fast/slow bandit) supplies the cross-episode reflection-bandit. They compose, they don't collide. The natural composition is HB-07 implementing `EvolutionExtensionPoint` inside HB-04's Evolution role. Both authorizations independently required (the double-gate semantic). Phase 813's `compose-hb04-hb07.test.ts` verifies all four authorization quadrants; only (T,T) accepts a bandit-source proposal.
-- **PARALLEL FLEET DISPATCH GENERALIZES.** Wave 1 dispatched three background subagent fleets (Track A: M1+M2 / Track B: M3+M4 / Track C: M5+M6) in parallel from the main context. Wall-clock was bounded by the slowest fleet (Track C, 21 papers) rather than the sum. Compression ratio relative to sequential execution was approximately 3:1 — the same numerical relationship v1.49.574's Half A achieved with its Track A+B parallelism. The pattern generalizes from 2 to 3 fleets without coordination cost growth.
+**CONVERGENT-DISCOVERY THIRD MILESTONE.** Four anchor papers from the CS25–26 sweep arrive at GSD's load-bearing primitives by independent paths. None cite the GSD ecosystem. None could have — the timing rules it out. The signal is no longer interesting because it's surprising; it's interesting because it's stable. Three milestones in, it is a property of the design space rather than a coincidence.
+
+**DESIGN-DISCIPLINE LEVEL CALIBRATION.** The published derivations and GSD's field-grown conventions are not formally equivalent. They share a discipline of identifying the minimum coordinating primitive a system needs and replacing the cluster of approximate mechanisms with one carefully-chosen one. We are not claiming we built it first. We are claiming the patterns are recoverable from outside.
+
+**TIER-1 ONLY HALF B SHIPS SEVEN MODULES.** Seven ADOPT-decision substrate modules ship as T1 (HB-01 through HB-07); five reviewed candidates (HB-08 through HB-12) defer to backlog at milestone-open. The T1 / T2 / T3 tier-split discipline kept the milestone deliverable. Without it, the temptation to absorb 12 reviewed candidates in one milestone would have either blown the wall-clock budget or shipped 12 substrates at lower quality each. Both halves built in parallel.
+
+**CAPCOM HARD GATE PATTERN MATURED.** The trigger-vs-auth separation matured through the chain v1.49.574 → HB-03 → HB-04 → HB-07. By Phase 812 the pattern was a copy-paste-with-customization template; the four primitives are the same shape across all three modules. Three CAPCOM HARD GATES landed and all three pass. Each independently authorizes; each fails closed by default.
+
+**HB-04 KEYSTONE COMPOSES WITH HB-07.** The most architecturally interesting finding of the milestone: HB-04 supplies the per-episode adversarial check; HB-07 supplies the cross-episode reflection-bandit. They compose, they don't collide. The natural composition is HB-07 implementing the Evolution extension point inside HB-04's Evolution role. Both authorizations independently required (the double-gate semantic). Phase 813's compose test verifies all four authorization quadrants; only (T,T) accepts a bandit-source proposal.
+
+**PARALLEL FLEET DISPATCH GENERALIZES.** Wave 1 dispatched three background subagent fleets (Track A: M1+M2 / Track B: M3+M4 / Track C: M5+M6) in parallel from the main context. Wall-clock was bounded by the slowest fleet (Track C, 21 papers) rather than the sum. Compression ratio relative to sequential execution was approximately 3:1 — the same numerical relationship v1.49.574's Half A achieved with its Track A+B parallelism. The pattern generalizes from 2 to 3 fleets without coordination cost growth.
 
 ## Half A — Deep research deliverable
 
@@ -187,7 +192,9 @@ of the design space rather than a coincidence.
 | **`.planning/missions/cs25-26-sweep/work/synthesis/convergent-discovery.md`** | **CONVERGENT-DISCOVERY REPORT.** 4,558-word position-paper-grade synthesis. |
 | **`.planning/missions/cs25-26-sweep/work/synthesis/impact.md`** | **ARCHITECTURAL IMPACT ANALYSIS.** 4,329 words / 12 subsystems / 19 dispositions. |
 
-### Test Coverage Progression
+### Test posture
+
+#### By the numbers
 
 | Milestone | Tests Passing | Net Delta | Cumulative since v1.49.570 |
 |---|---|---|---|
