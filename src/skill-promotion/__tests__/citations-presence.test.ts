@@ -1,26 +1,12 @@
 /**
- * citations-presence — JP-032 / JP-033 presence tests (Wave 3 / phase 843).
+ * citations-presence — JP-032 / JP-033 / JP-040 presence tests.
  *
- * Asserts that the citation anchor files created in Wave 3 exist on disk
- * and reference the expected arXiv IDs.
- *
- * ## Note on JP-040 (NASA citations)
- *
- * JP-040 (SAGES + EEI formation flying citations for the NASA mission series)
- * was originally specified to land at `.planning/missions/nasa/REFERENCES.md`.
- * That path is under `.planning/`, which is gitignored by project hard rule
- * — the file therefore cannot be verified by CI on a fresh checkout. The
- * file exists in working-tree state where authored, but the Wave 3 P843
- * agent's presence-check assertion failed on CI for this reason.
- *
- * JP-040 verification is tracked outside this test file:
- * - Working-tree presence is sufficient for the local audit trail.
- * - Migration of NASA mission-series citations to the `nasa` branch is the
- *   correct long-term home (NASA mission work lives on its own branch per
- *   CLAUDE.md).
- *
- * The JP-040 presence assertions were therefore removed from this test
- * (commit addressing CI failure on dev push 268950204).
+ * Asserts that the citation anchor files exist on disk and reference the
+ * expected arXiv IDs. JP-040 was originally Wave 3 / phase 843 of the
+ * v1.49.577 JULIA-PARAMETER mission; its presence assertion was relocated
+ * from a gitignored `.planning/` path to the on-tree
+ * `docs/research/nasa-citations.md` path in v1.49.578 (the `nasa` branch is
+ * no longer active — all NASA-series work continues on dev/main).
  */
 
 import { describe, it, expect } from 'vitest';
@@ -55,6 +41,25 @@ describe('JP-033 — dead-zone/CITATION.md', () => {
   });
 });
 
-// JP-040 NASA citations: assertions removed — see module docstring for rationale.
-// Tracked deliverable lives in a gitignored .planning/ location and cannot be
-// verified by CI. Migration to the `nasa` branch is the correct long-term home.
+describe('JP-040 — docs/research/nasa-citations.md', () => {
+  const filePath = resolve(REPO_ROOT, 'docs/research/nasa-citations.md');
+
+  it('file exists on-tree', () => {
+    expect(existsSync(filePath)).toBe(true);
+  });
+
+  it('contains the SAGES anchor (arXiv:2512.09111)', () => {
+    const content = readFileSync(filePath, 'utf8');
+    expect(content).toMatch(/2512\.09111/);
+  });
+
+  it('contains the EEI Formation Flying anchor (arXiv:2604.21024)', () => {
+    const content = readFileSync(filePath, 'utf8');
+    expect(content).toMatch(/2604\.21024/);
+  });
+
+  it('is well-formed Markdown with an H1 title', () => {
+    const content = readFileSync(filePath, 'utf8');
+    expect(content).toMatch(/^# /m);
+  });
+});
