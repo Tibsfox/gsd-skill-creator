@@ -1,22 +1,29 @@
 /**
- * Tests for JP-022: Wasserstein BOED skill scoring primitive.
+ * Tests for JP-022: Wasserstein BOED scoring primitive (post v1.49.579 W4 rewrite).
  *
  * Verifies:
- *  - W1 distance is finite and non-negative on synthetic distributions.
- *  - BOED utility is finite and non-negative.
- *  - BOED ranking differs from naive EIG ranking under prior misspecification
- *    (the distinguishing property of IPM-based BOED per arXiv:2604.21849).
- *  - Utility is monotone in observation count: more outcome samples with
- *    the same information content should not decrease the score.
+ *  - W1 distance is finite, non-negative, symmetric, and zero on identical
+ *    distributions (the primitive — kept exactly as before).
+ *  - wassersteinExpectedUtility honestly delegates to the conjugate
+ *    Beta-Bernoulli update + W1 sample-bag distance — no hand-picked
+ *    constants, no simulated posterior shift.
+ *  - The historical MAX_SHIFT_STDS / VAR_SHRINK constants are GONE from
+ *    the file (grep test); the heuristic that used them is no longer the
+ *    function body.
+ *  - More-shifted observations produce a larger W1 score than near-prior
+ *    observations (the honest property the heuristic was approximating).
  */
 
 import { describe, it, expect } from 'vitest';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import {
   wasserstein1d,
   wassersteinExpectedUtility,
   type EmpiricalDistribution,
   type ExperimentDesign,
 } from '../wasserstein-boed.js';
+import { mulberry32 } from '../../bayes-ab/ipm-boed.js';
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -28,17 +35,8 @@ function uniformGrid(lo: number, hi: number, n: number): EmpiricalDistribution {
   return { samples: Array.from({ length: n }, (_, i) => lo + i * step) };
 }
 
-/** Naive EIG proxy: mean squared distance from prior mean (as a stand-in). */
-function naiveEIG(design: ExperimentDesign, prior: EmpiricalDistribution): number {
-  const priorMean = prior.samples.reduce((s, x) => s + x, 0) / prior.samples.length;
-  const msd =
-    design.outcomeSamples.reduce((s, y) => s + (y - priorMean) ** 2, 0) /
-    design.outcomeSamples.length;
-  return msd;
-}
-
 // ---------------------------------------------------------------------------
-// Tests
+// wasserstein1d primitive (unchanged from pre-W4)
 // ---------------------------------------------------------------------------
 
 describe('wasserstein1d', () => {
@@ -62,78 +60,91 @@ describe('wasserstein1d', () => {
   });
 });
 
-describe('wassersteinExpectedUtility', () => {
+// ---------------------------------------------------------------------------
+// wassersteinExpectedUtility — honest one-step adapter
+// ---------------------------------------------------------------------------
+
+describe('wassersteinExpectedUtility — honest delegation', () => {
   it('returns a finite, non-negative score for a synthetic design', () => {
-    const prior = uniformGrid(0, 1, 20);
+    const prior = uniformGrid(0, 1, 30);
     const design: ExperimentDesign = {
       label: 'arm-A',
       outcomeSamples: [0.1, 0.3, 0.7, 0.9],
     };
-    const score = wassersteinExpectedUtility(design, prior);
+    const score = wassersteinExpectedUtility(design, prior, mulberry32(7));
     expect(Number.isFinite(score)).toBe(true);
     expect(score).toBeGreaterThanOrEqual(0);
   });
 
-  /**
-   * KEY test: BOED ranking differs from EIG ranking under prior misspecification.
-   *
-   * Setup: two designs —
-   *   - design-A: outcomes tightly clustered near the prior mean (low EIG,
-   *     but the cluster is at the edge of the prior support so Wasserstein
-   *     displacement is non-trivial).
-   *   - design-B: one extreme outlier (high EIG / squared deviation) but
-   *     the bulk of outcomes are near the prior mean, giving a low
-   *     Wasserstein average displacement.
-   *
-   * Under naive EIG (mean squared distance), design-B ranks higher because
-   * the outlier inflates the squared term.  Under Wasserstein BOED, design-A
-   * ranks higher because its cluster systematically displaces the posterior
-   * in a coherent direction.
-   */
-  it('BOED ranking differs from naive EIG ranking under prior misspecification', () => {
-    // Prior: uniform on [0, 1], 30 samples.
-    const prior = uniformGrid(0, 1, 30);
-
-    // design-A: 8 outcomes near upper edge — systematic posterior shift.
-    const designA: ExperimentDesign = {
-      label: 'arm-A-systematic',
-      outcomeSamples: [0.85, 0.88, 0.90, 0.87, 0.92, 0.86, 0.89, 0.91],
+  it('design with all-success outcomes shifts the posterior more than 50/50 outcomes', () => {
+    // Prior: uniform on [0, 1] — empirical mean ≈ 0.5
+    const prior = uniformGrid(0, 1, 50);
+    const allHigh: ExperimentDesign = {
+      label: 'all-high',
+      // all > 0.5 ⇒ all binarised as success ⇒ posterior shifts strongly upward
+      outcomeSamples: [0.7, 0.8, 0.9, 0.85, 0.75, 0.95, 0.78, 0.82, 0.88, 0.91],
     };
-
-    // design-B: 7 near-mean outcomes + 1 extreme outlier.
-    const designB: ExperimentDesign = {
-      label: 'arm-B-outlier',
-      outcomeSamples: [0.48, 0.51, 0.50, 0.49, 0.52, 0.50, 0.51, 5.0],
+    const balanced: ExperimentDesign = {
+      label: 'balanced',
+      // half above, half below ⇒ posterior shift ≈ 0
+      outcomeSamples: [0.1, 0.2, 0.3, 0.4, 0.45, 0.55, 0.6, 0.7, 0.8, 0.9],
     };
-
-    const boedA = wassersteinExpectedUtility(designA, prior);
-    const boedB = wassersteinExpectedUtility(designB, prior);
-    const eigA = naiveEIG(designA, prior);
-    const eigB = naiveEIG(designB, prior);
-
-    // Wasserstein BOED prefers design-A (coherent shift beats noisy outlier).
-    expect(boedA).toBeGreaterThan(boedB);
-
-    // Naive EIG prefers design-B (outlier inflates squared deviation).
-    expect(eigB).toBeGreaterThan(eigA);
-
-    // Rankings are opposite — this is the distinguishing property of IPM-BOED.
-    const boedRankA = boedA > boedB ? 'A' : 'B';
-    const eigRankA = eigA > eigB ? 'A' : 'B';
-    expect(boedRankA).not.toBe(eigRankA);
+    const scoreHigh = wassersteinExpectedUtility(allHigh, prior, mulberry32(11));
+    const scoreBalanced = wassersteinExpectedUtility(balanced, prior, mulberry32(11));
+    expect(scoreHigh).toBeGreaterThan(scoreBalanced);
   });
 
-  it('utility is non-decreasing when outcome samples are doubled (same distribution)', () => {
-    const prior = uniformGrid(0, 1, 20);
-    const outcomes = [0.2, 0.4, 0.6, 0.8];
-    const designSmall: ExperimentDesign = { label: 'small', outcomeSamples: outcomes };
-    const designLarge: ExperimentDesign = {
-      label: 'large',
-      outcomeSamples: [...outcomes, ...outcomes],
+  it('determinism: same RNG seed ⇒ same score', () => {
+    const prior = uniformGrid(0, 1, 30);
+    const design: ExperimentDesign = {
+      label: 'arm',
+      outcomeSamples: [0.1, 0.3, 0.7, 0.9, 0.5, 0.4],
     };
-    const scoreSmall = wassersteinExpectedUtility(designSmall, prior);
-    const scoreLarge = wassersteinExpectedUtility(designLarge, prior);
-    // Same distribution doubles should yield the same score (Monte-Carlo average is stable).
-    expect(Math.abs(scoreSmall - scoreLarge)).toBeLessThan(1e-9);
+    const a = wassersteinExpectedUtility(design, prior, mulberry32(42));
+    const b = wassersteinExpectedUtility(design, prior, mulberry32(42));
+    expect(a).toBe(b);
+  });
+
+  it('throws on empty inputs', () => {
+    const prior = uniformGrid(0, 1, 5);
+    expect(() => wassersteinExpectedUtility(
+      { label: 'empty', outcomeSamples: [] },
+      prior,
+    )).toThrow(RangeError);
+    expect(() => wassersteinExpectedUtility(
+      { label: 'd', outcomeSamples: [0.5] },
+      { samples: [] },
+    )).toThrow(RangeError);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Honesty audit — the v1.49.578 footnote constants are gone
+// ---------------------------------------------------------------------------
+
+describe('honesty audit — historical heuristic constants are gone', () => {
+  const SOURCE_PATH = resolve(__dirname, '../wasserstein-boed.ts');
+  const source = readFileSync(SOURCE_PATH, 'utf8');
+
+  it('MAX_SHIFT_STDS is no longer in the source file', () => {
+    expect(source).not.toContain('MAX_SHIFT_STDS');
+  });
+
+  it('VAR_SHRINK is no longer in the source file', () => {
+    expect(source).not.toContain('VAR_SHRINK');
+  });
+
+  it('module no longer claims to be an "illustrative IPM-aware heuristic"', () => {
+    expect(source).not.toContain('illustrative IPM-aware heuristic');
+    // Contains the new framing:
+    expect(source).toContain('Verified-against arXiv:2604.21849');
+  });
+
+  it('Limitations section retains only the multivariate gap', () => {
+    // The W4 spec says the Limitations block is trimmed to one bullet about
+    // the multivariate gap — not the three bullets about the heuristic
+    // posterior + made-up constants.
+    expect(source).toContain('Univariate parameter only');
+    expect(source).toContain('sliced-Wasserstein');
   });
 });
