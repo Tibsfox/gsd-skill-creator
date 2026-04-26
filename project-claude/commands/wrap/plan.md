@@ -122,9 +122,18 @@ This is the core delegation step. Do NOT reimplement GSD planning logic.
 
 1. Read `.claude/commands/gsd/plan-phase.md` using the Read tool
 2. If the file exists, follow its instructions with phase number N
-3. If the file does not exist, use the Task tool:
+3. If the file does not exist, use the Task tool. Pass an `effort` parameter
+   derived from the current GSD profile (`/gsd:set-profile`): `quality`→`high`,
+   `balanced`→`medium`, `budget`→`low`. Omit `effort` for `inherit` to preserve
+   the parent runtime's default. Source: `.planning/skill-creator.json`
+   `integration.profile` (OGA-016, additive).
+
    ```
-   Follow the /gsd:plan-phase process for phase N.
+   Task(
+     subagent_type="general",
+     effort=<derived from profile, omit if inherit>,
+     prompt="Follow the /gsd:plan-phase process for phase N."
+   )
    ```
 
 Pass along any phase context gathered in Step 2 (loaded skills, prior SUMMARY insights) as

@@ -11,6 +11,12 @@ description: >
   project-claude configuration. Also activates for discussions about
   skill-creator security, trust models, or content hygiene.
 user-invocable: true
+version: 1.0.0
+format: 2025-10-02
+triggers:
+  - "for discussions about skill-creator security, trust models, or content hygiene"
+updated: 2026-04-25
+status: ACTIVE
 ---
 
 # Security Hygiene
@@ -37,6 +43,35 @@ When processing community-contributed content (skills, chipsets, LoRA adapters):
 - Verify YAML does not contain unsafe tags (`!!python/object`, etc.)
 - Validate that skill descriptions match their actual content
 - Quarantine new community content for review before activation
+
+## Privacy Tier Taxonomy (4-tier, OOPS-08-P03)
+
+All telemetry, observation data, and skill artefacts are classified into one
+of four privacy tiers. Telemetry writers MUST stamp every record with its
+tier and MUST NOT mix tiers in a single sink.
+
+| Tier | Name | Description | Examples |
+|------|------|-------------|----------|
+| **A** | **Public** | No PII, no proprietary content; safe to publish externally. | Open-source skill descriptions, public release notes, anonymised aggregate metrics. |
+| **B** | **Internal** | Non-PII operational data; safe to share within the project team. | Phase activity counts, commit-type distributions, hook firing rates, build-time profiles. |
+| **C** | **Sensitive** | PII, credentials, authentication tokens, individual session transcripts. | `.env` contents, OAuth tokens, individual user prompts, raw conversation logs. |
+| **D** | **Restricted** | Regulated data, proprietary IP, Fox Companies content. | `.planning/fox-companies/` artefacts, `wasteland/` content, customer-identifiable records, anything subject to legal hold. |
+
+Defaults and enforcement:
+
+- New telemetry writers default to **Tier B** unless an explicit tier label
+  is supplied at construction.
+- **Tier C** data MUST be encrypted at rest and MUST be excluded from any
+  artefact published outside the local repository (no `git push` of files
+  containing Tier C content; no FTP sync; no inclusion in release notes).
+- **Tier D** data MUST never leave the `.planning/` tree or
+  `wasteland/` branch. Surface alignments in conversation only; never
+  commit Tier D content to a public-facing path.
+- Mixed-tier sinks are FORBIDDEN — a writer that mixes Tier A and Tier C
+  records loses the ability to safely publish the Tier A subset.
+
+Referenced by C5 W3.P6 tool-tracker (telemetry writer wiring) and the
+post-tool-use observation hook.
 
 ## The Staging Layer Principle
 

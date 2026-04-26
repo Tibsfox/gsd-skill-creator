@@ -2,6 +2,12 @@
 name: gsd-preflight
 description: Use when GSD commands are failing or .planning/ artifacts look inconsistent. Run before any GSD execute-phase or verify-work attempt to catch cross-artifact mismatches early.
 description-frequency: on-demand
+version: 1.0.0
+format: 2025-10-02
+triggers:
+  - GSD commands are failing or
+updated: 2026-04-25
+status: ACTIVE
 ---
 
 # GSD Preflight Validator

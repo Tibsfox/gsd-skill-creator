@@ -3,8 +3,16 @@ name: gupp-propulsion
 description: Interrupt controller converting polled to proactive agent execution. Per-runtime strategies, configurable thresholds, Deacon heartbeat supervision. Fights LLM passivity bias.
 format: 2025-10-02
 version: 1.0.0
-status: active
-updated: 2026-04-15
+status: ACTIVE
+updated: 2026-04-25
+triggers:
+  - agent has work assigned to its hook and is not yet executing
+  - stall detection identifies an agent with hooked work that has gone idle
+  - new agent is spawned and needs GUPP enforcement injected into its context
+  - runtime-specific GUPP strategy selection is needed
+  - heartbeat supervision needs to be configured for active agents
+references_subdir: true
+word_budget: 800
 ---
 
 # GUPP Propulsion
@@ -86,6 +94,7 @@ Reads runtime capabilities from `runtime-hal` (`getGUPPStrategy()`, thresholds, 
 Implementation detail moved to:
 
 - [`references/runtime-strategies.md`](references/runtime-strategies.md) — per-runtime enforcement tables (Claude Code, Codex, Gemini, Cursor), threshold reference, Deacon heartbeat pattern.
+- [`references/boundaries.md`](references/boundaries.md) — full Safety Boundaries detail (advisory-in-GSD hierarchy, restart limits, escalation, no-data-destruction).
 - [`references/metrics-and-learning.md`](references/metrics-and-learning.md) — observable metrics (response time, nudge effectiveness, strategy success, stall frequency) and the learning feedback loop.
 - [`references/gastown-origin.md`](references/gastown-origin.md) — the GUPP principle from Gastown, how it fights model training bias.
 - [`heartbeat.md`](heartbeat.md) — Deacon heartbeat supervision pattern and integration points.

@@ -3,6 +3,12 @@ name: gsd-workflow
 description: Use when the user asks "what should I work on", mentions GSD phases, ROADMAP, or .planning/ artifacts. Routes to the correct GSD command for the current project state.
 description-frequency: on-demand
 user-invocable: true
+version: 1.0.0
+format: 2025-10-02
+triggers:
+  - "the user asks \"what should I work on\", mentions GSD phases, ROADMAP, or"
+updated: 2026-04-25
+status: ACTIVE
 ---
 
 # GSD Workflow Routing

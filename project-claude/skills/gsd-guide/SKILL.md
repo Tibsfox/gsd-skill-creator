@@ -3,8 +3,10 @@ name: gsd-guide
 description: GSD tutorial, command reference, and workflow explainer. Explains what a GSD workflow command does before you run it. Activates when user is new to GSD, asks about commands, wants to understand workflows, or mentions preview.
 format: 2025-10-02
 version: 1.0.0
-status: active
+status: ACTIVE
 updated: 2026-04-15
+triggers:
+  - "user is new to GSD, asks about commands, wants to understand workflows, or mentions preview"
 ---
 
 # GSD Guide — Quick Reference + Workflow Explainer

@@ -1,6 +1,13 @@
 ---
 name: research-mission-generator
 description: "Package conversation research into a GSD-ready mission package. Produces a three-stage Vision → Research → Mission pipeline as a LaTeX PDF following GSD/NASA SE methodology, designed to be handed to gsd-skill-creator for execution. Use this skill when the user has been discussing, researching, or brainstorming a topic and then asks to turn it into a research mission, research pack, mission package, or says 'package this as a mission', 'make this a research pack', 'turn this into a mission for skill-creator', 'create a research mission from this', or 'use the research mission skill'. The skill harvests findings, sources, and structure from the current conversation and any prior research, then produces the complete pipeline document. Also trigger if the user asks to 'create a research mission on [topic]' cold — in that case, conduct web research first, then package."
+version: 1.0.0
+format: 2025-10-02
+triggers:
+  - "the user has been discussing, researching, or brainstorming a topic and then asks to turn it into a research mission, research pack, mission package, or says 'p"
+  - "if the user asks to 'create a research mission on [topic]' cold — in that case, conduct web research first, then package"
+updated: 2026-04-25
+status: ACTIVE
 ---
 
 # Research Mission Generator

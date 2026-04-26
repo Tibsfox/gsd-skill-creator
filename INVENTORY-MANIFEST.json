@@ -1,0 +1,355 @@
+{
+  "generated_at": "2026-04-25T21:27:04Z",
+  "generator_version": "1.0.0",
+  "milestone": "v1.49.576",
+  "counts": {
+    "commands": 4,
+    "agents_total": 10,
+    "agents_gsd_prefix": 4,
+    "hooks": 24,
+    "src_subsystems": 145
+  },
+  "commands": [
+    {
+      "name": "plan-review-convergence",
+      "path": "project-claude/commands/gsd/plan-review-convergence.md",
+      "origin": "vendored:gsd-build@1.38.3"
+    },
+    {
+      "name": "settings-advanced",
+      "path": "project-claude/commands/gsd/settings-advanced.md",
+      "origin": "vendored:gsd-build@1.38.3"
+    },
+    {
+      "name": "settings-integrations",
+      "path": "project-claude/commands/gsd/settings-integrations.md",
+      "origin": "vendored:gsd-build@1.38.3"
+    },
+    {
+      "name": "sync-skills",
+      "path": "project-claude/commands/gsd/sync-skills.md",
+      "origin": "vendored:gsd-build@1.38.3"
+    }
+  ],
+  "agents": [
+    {
+      "name": "changelog-generator",
+      "path": "project-claude/agents/changelog-generator.md",
+      "origin": "local"
+    },
+    {
+      "name": "codebase-navigator",
+      "path": "project-claude/agents/codebase-navigator.md",
+      "origin": "local"
+    },
+    {
+      "name": "doc-linter",
+      "path": "project-claude/agents/doc-linter.md",
+      "origin": "local"
+    },
+    {
+      "name": "gsd-executor",
+      "path": "project-claude/agents/gsd-executor.md",
+      "origin": "local"
+    },
+    {
+      "name": "gsd-orchestrator",
+      "path": "project-claude/agents/gsd-orchestrator.md",
+      "origin": "local"
+    },
+    {
+      "name": "gsd-planner",
+      "path": "project-claude/agents/gsd-planner.md",
+      "origin": "local"
+    },
+    {
+      "name": "gsd-verifier",
+      "path": "project-claude/agents/gsd-verifier.md",
+      "origin": "local"
+    },
+    {
+      "name": "observer",
+      "path": "project-claude/agents/observer.md",
+      "origin": "local"
+    },
+    {
+      "name": "pipeline-reconciler",
+      "path": "project-claude/agents/pipeline-reconciler.md",
+      "origin": "local"
+    },
+    {
+      "name": "quality-drift-watcher",
+      "path": "project-claude/agents/quality-drift-watcher.md",
+      "origin": "local"
+    }
+  ],
+  "hooks": [
+    {
+      "name": "gsd-phase-boundary.sh",
+      "path": "project-claude/hooks/gsd-phase-boundary.sh",
+      "origin": "vendored:gsd-build@1.38.3"
+    },
+    {
+      "name": "gsd-session-state.sh",
+      "path": "project-claude/hooks/gsd-session-state.sh",
+      "origin": "vendored:gsd-build@1.38.3"
+    },
+    {
+      "name": "gsd-validate-commit.sh",
+      "path": "project-claude/hooks/gsd-validate-commit.sh",
+      "origin": "vendored:gsd-build@1.38.3"
+    },
+    {
+      "name": "tool-tracker.sh",
+      "path": "project-claude/hooks/tool-tracker.sh",
+      "origin": "local"
+    },
+    {
+      "name": "worktree-cleanup.sh",
+      "path": "project-claude/hooks/worktree-cleanup.sh",
+      "origin": "local"
+    },
+    {
+      "name": "external-change-tracker.cjs",
+      "path": "project-claude/hooks/external-change-tracker.cjs",
+      "origin": "local"
+    },
+    {
+      "name": "gsd-response-scan.cjs",
+      "path": "project-claude/hooks/gsd-response-scan.cjs",
+      "origin": "local"
+    },
+    {
+      "name": "notification-logger.cjs",
+      "path": "project-claude/hooks/notification-logger.cjs",
+      "origin": "local"
+    },
+    {
+      "name": "observe-tool-trace.cjs",
+      "path": "project-claude/hooks/observe-tool-trace.cjs",
+      "origin": "local"
+    },
+    {
+      "name": "permission-recovery.cjs",
+      "path": "project-claude/hooks/permission-recovery.cjs",
+      "origin": "local"
+    },
+    {
+      "name": "phase-boundary-check.cjs",
+      "path": "project-claude/hooks/phase-boundary-check.cjs",
+      "origin": "local"
+    },
+    {
+      "name": "post-compact-recovery.cjs",
+      "path": "project-claude/hooks/post-compact-recovery.cjs",
+      "origin": "local"
+    },
+    {
+      "name": "pre-compact-snapshot.cjs",
+      "path": "project-claude/hooks/pre-compact-snapshot.cjs",
+      "origin": "local"
+    },
+    {
+      "name": "session-state.cjs",
+      "path": "project-claude/hooks/session-state.cjs",
+      "origin": "local"
+    },
+    {
+      "name": "validate-commit.cjs",
+      "path": "project-claude/hooks/validate-commit.cjs",
+      "origin": "local"
+    },
+    {
+      "name": "worktree-init.cjs",
+      "path": "project-claude/hooks/worktree-init.cjs",
+      "origin": "local"
+    },
+    {
+      "name": "gsd-check-update.js",
+      "path": "project-claude/hooks/gsd-check-update.js",
+      "origin": "local"
+    },
+    {
+      "name": "gsd-config-guard.js",
+      "path": "project-claude/hooks/gsd-config-guard.js",
+      "origin": "local"
+    },
+    {
+      "name": "gsd-inject-snapshot.js",
+      "path": "project-claude/hooks/gsd-inject-snapshot.js",
+      "origin": "local"
+    },
+    {
+      "name": "gsd-prompt-guard.js",
+      "path": "project-claude/hooks/gsd-prompt-guard.js",
+      "origin": "local"
+    },
+    {
+      "name": "gsd-restore-work-state.js",
+      "path": "project-claude/hooks/gsd-restore-work-state.js",
+      "origin": "local"
+    },
+    {
+      "name": "gsd-save-work-state.js",
+      "path": "project-claude/hooks/gsd-save-work-state.js",
+      "origin": "local"
+    },
+    {
+      "name": "gsd-snapshot-session.js",
+      "path": "project-claude/hooks/gsd-snapshot-session.js",
+      "origin": "local"
+    },
+    {
+      "name": "gsd-statusline.js",
+      "path": "project-claude/hooks/gsd-statusline.js",
+      "origin": "local"
+    }
+  ],
+  "src_subsystems": [
+    "ab-harness",
+    "ace",
+    "activation",
+    "activation-steering",
+    "agc",
+    "agents",
+    "alternative-discoverer",
+    "amiga",
+    "aminet",
+    "application",
+    "artifactnet-provenance",
+    "audio-engineering",
+    "bounded-learning",
+    "bounded-learning-empirical",
+    "brainstorm",
+    "branches",
+    "bundles",
+    "cache",
+    "calibration",
+    "capabilities",
+    "cartridge",
+    "catalog",
+    "chips",
+    "chipset",
+    "citations",
+    "cli",
+    "cloud-ops",
+    "code-absorber",
+    "coherent-functors",
+    "commands",
+    "components",
+    "composition",
+    "compression-spectrum",
+    "conflicts",
+    "console",
+    "convergent",
+    "coprocessor",
+    "critique",
+    "dacp",
+    "dashboard",
+    "dead-zone",
+    "den",
+    "dependency-auditor",
+    "dependency-resolver",
+    "detection",
+    "disclosure",
+    "discovery",
+    "dogfood",
+    "drift",
+    "eligibility",
+    "embeddings",
+    "engines",
+    "eval",
+    "evaluator",
+    "events",
+    "experience-compression",
+    "fl-threat-model",
+    "fs",
+    "git",
+    "graph",
+    "hardware-infrastructure",
+    "health-diagnostician",
+    "heuristics-free-skill-space",
+    "holomorphic",
+    "hooks",
+    "hourglass-persistence",
+    "identifiers",
+    "initialization",
+    "integration",
+    "interpreter",
+    "intrinsic-telemetry",
+    "knowledge",
+    "koopman-memory",
+    "langevin",
+    "launcher",
+    "learn",
+    "learnable-k_h",
+    "learning",
+    "lod",
+    "lyapunov",
+    "mathematical-foundations",
+    "mcp",
+    "mcp-defense",
+    "memory",
+    "mesh",
+    "mission-world-model",
+    "model-affinity",
+    "nlp",
+    "observation",
+    "orchestration",
+    "orchestrator",
+    "output-structure",
+    "plane",
+    "portability",
+    "predictive-skill-loader",
+    "projection",
+    "promptcluster-batcheffect",
+    "random",
+    "reasoning-graphs",
+    "reinforcement",
+    "representation-audit",
+    "retrieval",
+    "retro",
+    "ricci-curvature-audit",
+    "roles",
+    "rumor-delay-model",
+    "runtime-hal",
+    "safety",
+    "security",
+    "semantic-channel",
+    "sensoria",
+    "settings",
+    "sigreg",
+    "simulation",
+    "site",
+    "skill",
+    "skill-creator",
+    "skill-isotropy",
+    "skill-workflows",
+    "skilldex-auditor",
+    "spatial-awareness",
+    "stackelberg-pricing",
+    "staging",
+    "stochastic",
+    "storage",
+    "styles",
+    "symbiosis",
+    "teams",
+    "telemetry",
+    "temperature",
+    "terminal",
+    "testing",
+    "tonnetz",
+    "traces",
+    "tractability",
+    "trust-tiers",
+    "types",
+    "umwelt",
+    "upstream",
+    "upstream-intelligence",
+    "utils",
+    "validation",
+    "vtm",
+    "wasserstein-hebbian",
+    "workflows"
+  ]
+}
