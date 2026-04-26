@@ -100,16 +100,21 @@ export function selectIpmBoedDesign<P>(opts: SelectIpmBoedOptions<P>): IpmBoedRe
   const rng: SeedableRng = opts.rng ?? mulberry32(0);
 
   // Pre-sample the prior once: every design's score is W1 against a
-  // common prior-sample bag, so the reference is stable across designs
-  // (Monte-Carlo variance still applies to the posterior side, but the
-  // prior-side noise cancels in pairwise comparisons).
+  // common prior-sample bag, so the reference is stable across designs.
   const priorSamples = sampleBetas(opts.prior, draws.prior, rng);
+
+  // Pre-sample θ values ONCE — every design is scored against the SAME θ
+  // sequence (paired-sample variance reduction). Without this, each design
+  // would see independent θ draws and Monte-Carlo noise across designs
+  // would dominate the actual information-gain difference between designs.
+  // This is the standard variance-reduction trick for between-design
+  // comparisons in BOED.
+  const thetaSamples = Array.from({ length: draws.theta }, () => sampleBeta(opts.prior, rng));
 
   const perDesign: PerDesignScore[] = [];
   for (const d of opts.designs) {
     let total = 0;
-    for (let i = 0; i < draws.theta; i++) {
-      const theta = sampleBeta(opts.prior, rng);
+    for (const theta of thetaSamples) {
       const outcomes = opts.modelSamples(d, theta);
       const summary = summariseOutcomes(outcomes);
       const posterior = posteriorBeta(opts.prior, summary);

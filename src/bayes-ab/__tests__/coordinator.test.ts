@@ -61,22 +61,22 @@ describe('scaledPosteriorShift', () => {
     expect(scaledPosteriorShift({ alpha: 2, beta: 5 }, { alpha: 2, beta: 5 })).toBe(0);
   });
 
-  it('positive when posterior mean > prior mean', () => {
+  it('positive when posterior mean > prior mean (with 2× Hoeffding scaling)', () => {
     // prior mean = 2/7 ≈ 0.286; posterior mean = 7/12 ≈ 0.583
+    // raw shift = 7/12 - 2/7 ≈ 0.298; metric = 2 × raw ≈ 0.595
     const m = scaledPosteriorShift({ alpha: 7, beta: 5 }, { alpha: 2, beta: 5 });
     expect(m).toBeGreaterThan(0);
-    expect(m).toBeCloseTo(7 / 12 - 2 / 7, 6);
+    expect(m).toBeCloseTo(2 * (7 / 12 - 2 / 7), 6);
   });
 
-  it('bounded in [-1, 1]', () => {
+  it('bounded in [-1, 1] via clip when 2× raw shift would exceed', () => {
     // Most-extreme upward shift: prior mean ≈ 0, posterior mean ≈ 1
+    // raw shift ≈ 1; 2× would be 2; clip to 1
     const upMax = scaledPosteriorShift({ alpha: 1000, beta: 1 }, { alpha: 1, beta: 1000 });
-    expect(upMax).toBeGreaterThan(0.99);
-    expect(upMax).toBeLessThanOrEqual(1);
+    expect(upMax).toBe(1);
     // Most-extreme downward shift
     const downMax = scaledPosteriorShift({ alpha: 1, beta: 1000 }, { alpha: 1000, beta: 1 });
-    expect(downMax).toBeLessThan(-0.99);
-    expect(downMax).toBeGreaterThanOrEqual(-1);
+    expect(downMax).toBe(-1);
   });
 });
 
