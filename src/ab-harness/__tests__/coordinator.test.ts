@@ -412,3 +412,113 @@ describe('IID caveat warning (E-4)', () => {
     expect(hasIIDWarning).toBe(true);
   });
 });
+
+// ─── JP-010a — K-axis telemetry wiring ────────────────────────────────────────
+
+describe('JP-010a — runAB emits K-axis observation when kAxes supplied', () => {
+  let tmpDir: string;
+  beforeEach(async () => { tmpDir = await makeTmpDir(); });
+  afterEach(async () => { await cleanup(tmpDir); });
+
+  it('appends one JSONL observation per completed experiment', async () => {
+    const trunkPath = join(tmpDir, 'skill.md');
+    await fs.writeFile(trunkPath, PARENT_BODY, 'utf8');
+    const logPath = join(tmpDir, 'k-axis-observations.jsonl');
+
+    const result = await runAB({
+      skillName: 'gsd-explore',
+      trunkBody: PARENT_BODY,
+      variantBody: VARIANT_BODY,
+      trunkPath,
+      tractability: 'tractable',
+      samplesPerVariant: 12,
+      alpha: 0.10,
+      branchesDir: join(tmpDir, 'branches'),
+      traceDir: join(tmpDir, 'traces'),
+      runSkill: makeScorer(40, 50),
+      settings: { enabled: true },
+      kAxes: {
+        userDomain: 'typescript',
+        expertiseLevel: 'expert',
+        sessionType: 'ci',
+        extraAxes: { harness: 'vitest' },
+        logPath,
+      },
+    });
+
+    expect(result.status).toBe('completed');
+    if (result.status !== 'completed') return;
+
+    const raw = await fs.readFile(logPath, 'utf8');
+    const lines = raw.split('\n').filter(l => l.length > 0);
+    expect(lines).toHaveLength(1);
+    const obs = JSON.parse(lines[0]);
+    expect(obs.userDomain).toBe('typescript');
+    expect(obs.expertiseLevel).toBe('expert');
+    expect(obs.sessionType).toBe('ci');
+    expect(obs.extraAxes).toEqual({ harness: 'vitest' });
+    expect(typeof obs.experimentId).toBe('string');
+    expect(obs.experimentId.length).toBeGreaterThan(0);
+    expect(typeof obs.timestamp).toBe('string');
+    // ISO-8601 sanity
+    expect(() => new Date(obs.timestamp).toISOString()).not.toThrow();
+  });
+
+  it('does not create the log file when kAxes is omitted', async () => {
+    const trunkPath = join(tmpDir, 'skill.md');
+    await fs.writeFile(trunkPath, PARENT_BODY, 'utf8');
+    const logPath = join(tmpDir, 'should-not-exist.jsonl');
+
+    const result = await runAB({
+      skillName: 'gsd-explore',
+      trunkBody: PARENT_BODY,
+      variantBody: VARIANT_BODY,
+      trunkPath,
+      tractability: 'tractable',
+      samplesPerVariant: 12,
+      alpha: 0.10,
+      branchesDir: join(tmpDir, 'branches'),
+      traceDir: join(tmpDir, 'traces'),
+      runSkill: makeScorer(40, 50),
+      settings: { enabled: true },
+      // kAxes deliberately omitted
+    });
+
+    expect(result.status).toBe('completed');
+    await expect(fs.stat(logPath)).rejects.toThrow();
+  });
+
+  it('telemetry failure is non-fatal (verdict unchanged when log path is invalid)', async () => {
+    const trunkPath = join(tmpDir, 'skill.md');
+    await fs.writeFile(trunkPath, PARENT_BODY, 'utf8');
+    // Force a write failure by pointing logPath at a regular file's *child* —
+    // mkdir parent will succeed but we monkey-patch by using a NUL byte path,
+    // which fs.appendFile rejects on Linux.
+    const invalidLogPath = join(tmpDir, 'nul\0byte.jsonl');
+
+    const result = await runAB({
+      skillName: 'gsd-explore',
+      trunkBody: PARENT_BODY,
+      variantBody: VARIANT_BODY,
+      trunkPath,
+      tractability: 'tractable',
+      samplesPerVariant: 12,
+      alpha: 0.10,
+      branchesDir: join(tmpDir, 'branches'),
+      traceDir: join(tmpDir, 'traces'),
+      runSkill: makeScorer(40, 50),
+      settings: { enabled: true },
+      kAxes: {
+        userDomain: 'typescript',
+        expertiseLevel: 'expert',
+        sessionType: 'ci',
+        logPath: invalidLogPath,
+      },
+    });
+
+    // Experiment still resolves successfully even though telemetry threw.
+    expect(result.status).toBe('completed');
+    if (result.status !== 'completed') return;
+    expect(result.verdict.decision).toBe('commit-B');
+  });
+});
