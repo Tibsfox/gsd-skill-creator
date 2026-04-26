@@ -234,3 +234,104 @@ describe('CF-M5-01: multi-turn top-k matches RAGSearch ≥27pt margin', () => {
     for (const q of queries) expect(q.relevantIds.length).toBe(3);
   });
 });
+
+// ─── JP-002 — anytime-valid early-stop wiring ────────────────────────────────
+//
+// These tests isolate the wiring contract between the retrieval loop and the
+// `src/anytime-valid/` e-process primitive. Custom `metric` functions are used
+// so the gate's input is decoupled from the doc-corpus retrieval dynamics —
+// otherwise a fixture-shape change can flip the test verdict for reasons
+// unrelated to the wiring.
+
+describe('JP-002 — retrieve() honours opt-in anytime-valid early-stop', () => {
+  // A small corpus that always has new evidence to harvest (so the loop never
+  // bails on 'no-evidence' before maxTurns), with one dominant doc.
+  function manyEvidenceDocs(): RetrievalDocument[] {
+    const docs: RetrievalDocument[] = [];
+    for (let i = 0; i < 50; i++) {
+      docs.push({
+        id: `d${i}`,
+        // Each doc has 'alpha' once + a long ladder of unique tokens. That
+        // gives the loop fresh evidence on every turn from any doc it picks.
+        content: `alpha ` + Array.from({ length: 12 }, (_, j) => `tok-${i}-${j}`).join(' '),
+      });
+    }
+    return docs;
+  }
+
+  it('exitReason is not "anytime" when no anytimeStop is supplied', async () => {
+    const res = await retrieve('alpha', manyEvidenceDocs(), {
+      maxTurns: 3,
+      topK: 3,
+    });
+    expect(res.exitReason).not.toBe('anytime');
+  });
+
+  it('exits early with exitReason="anytime" when the metric is constantly +1', async () => {
+    const res = await retrieve('alpha', manyEvidenceDocs(), {
+      maxTurns: 50,
+      topK: 3,
+      detectConvergence: false, // do not let the order-stability shortcut fire
+      anytimeStop: {
+        config: { alpha: 0.05, hypothesis: 'one-sided' },
+        minTurns: 2,
+        // Constant +1 = strongest possible "stable" signal; the e-process
+        // accumulates evidence fast and rejects within a few turns.
+        metric: () => 1,
+      },
+    });
+    expect(res.exitReason).toBe('anytime');
+    expect(res.converged).toBe(true);
+    expect(res.turns.length).toBeLessThan(50);
+    expect(res.turns.length).toBeGreaterThanOrEqual(2); // minTurns honoured
+  });
+
+  it('does not exit via "anytime" when the metric is constantly -1 (perfect instability)', async () => {
+    const res = await retrieve('alpha', manyEvidenceDocs(), {
+      maxTurns: 5,
+      topK: 3,
+      detectConvergence: false,
+      anytimeStop: {
+        config: { alpha: 0.05, hypothesis: 'one-sided' },
+        minTurns: 2,
+        // Constant -1 — the e-process can never accumulate evidence for
+        // stability. The gate must not fire.
+        metric: () => -1,
+      },
+    });
+    expect(res.exitReason).not.toBe('anytime');
+  });
+
+  it('respects minTurns: cannot exit via "anytime" before that many turns', async () => {
+    const res = await retrieve('alpha', manyEvidenceDocs(), {
+      maxTurns: 50,
+      topK: 3,
+      detectConvergence: false,
+      anytimeStop: {
+        config: { alpha: 0.05, hypothesis: 'one-sided' },
+        minTurns: 7,
+        metric: () => 1,
+      },
+    });
+    if (res.exitReason === 'anytime') {
+      expect(res.turns.length).toBeGreaterThanOrEqual(7);
+    }
+  });
+
+  it('does not change the top-k decision when the loop runs to completion under both modes', async () => {
+    const docs = manyEvidenceDocs();
+    const baseline = await retrieve('alpha', docs, { maxTurns: 5, topK: 3 });
+    const withGate = await retrieve('alpha', docs, {
+      maxTurns: 5,
+      topK: 3,
+      anytimeStop: {
+        config: { alpha: 0.05, hypothesis: 'one-sided' },
+        minTurns: 2,
+        // Constant -1 prevents early stop, so both runs traverse the same
+        // turn-1..maxTurns trajectory and must land on the same top-k.
+        metric: () => -1,
+      },
+    });
+    expect(withGate.topK).toEqual(baseline.topK);
+  });
+});
