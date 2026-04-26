@@ -130,7 +130,28 @@ Nine components-of-significance plus 24 supporting commits, every BLOCK/HIGH row
 | **REVIEW.md** (`.planning/missions/oops-gsd-alignment/`) | **Full audit close summary.** Documents the "Open questions surfaced" section that named the two `comparison-matrix.json` schema bugs fixed in W4. Internal-only by project rule. |
 | **`.planning/missions/oops-gsd-implementation/`** | **Part B mission package.** Components C0-C6 with closing commits and acceptance gates. Internal-only by project rule. |
 
-### Test Coverage Progression
+### Test posture
+
+Final test posture for v1.49.576: 28,066 passing / 10 failing / 7 skipped / 7 todo / 28,090 total. Failure breakdown: 4 cases `src/chipset/harness-integrity.test.ts` (pre-existing per Part B handoff); 2 cases `src/mathematical-foundations/__tests__/integration.test.ts` (pre-existing v1.49.572 baseline); 1 case `src/heuristics-free-skill-space/__tests__/integration.test.ts` (pre-existing per Part B handoff); 3 cases `tests/skills/gastown-splits.test.ts` (mid-milestone interaction documented as feed-forward item 6).
+
+### By the numbers
+
+| Metric | Value |
+|---|---|
+| Commits in range | 37 (`dba568d3d` W0 -> `8c0cf2b9e` W4) |
+| Files changed | 85 |
+| New test files | 24 |
+| Tests passing | 28,066 (+179 vs v1.49.575 baseline 27,887) |
+| BLOCKs closed | 2 / 2 (OGA-013 + OGA-023) |
+| HIGH+BLOCK rows closed | 18 / 18 |
+| MEDIUM rows shipped | 11 / 11 |
+| LOW rows batched | 2 / 2 |
+| ADRs landed | 2 (ADR 0001 vendoring policy; ADR 0002 PreCompact triple-mapping) |
+| Components | 9 (C0-C6, with C3 split into 3 sub-commits) |
+| Phases | 18 (814-831) |
+| OGA-023 scorer reduction | 76.6% mean (vs 40% acceptance floor -- nearly 2x) |
+
+### Cumulative engine statistics
 
 | Milestone | Tests Passing | Delta | Notes |
 |---|---|---|---|
@@ -139,8 +160,6 @@ Nine components-of-significance plus 24 supporting commits, every BLOCK/HIGH row
 | v1.49.574 | 27,552 | +141 vs v1.49.573 | Megakernel substrate landed default-off |
 | v1.49.575 | 27,887 | +335 vs v1.49.574 | CS25-26 Sweep close baseline |
 | **v1.49.576** | **28,066** | **+179 vs v1.49.575** | **24 new test files; both BLOCKs closed** |
-
-Final test posture for v1.49.576: 28,066 passing / 10 failing / 7 skipped / 7 todo / 28,090 total. Failure breakdown: 4 cases `src/chipset/harness-integrity.test.ts` (pre-existing per Part B handoff); 2 cases `src/mathematical-foundations/__tests__/integration.test.ts` (pre-existing v1.49.572 baseline); 1 case `src/heuristics-free-skill-space/__tests__/integration.test.ts` (pre-existing per Part B handoff); 3 cases `tests/skills/gastown-splits.test.ts` (mid-milestone interaction documented as feed-forward item 6).
 
 ### Infrastructure
 
