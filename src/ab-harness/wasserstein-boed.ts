@@ -26,12 +26,19 @@
  * provides the per-(design, observed-outcomes) building block; the full
  * expectation is computed in `src/bayes-ab/ipm-boed.ts`.
  *
- * ## Limitations
+ * ## Multivariate extension (v1.49.580)
  *
- * - **Univariate parameter only.** Multivariate IPM-BOED via
- *   sliced-Wasserstein is a separate algorithm (different paper) and is not
- *   implemented. Callers with >1-D parameters must extend to sliced-W1
- *   themselves; this module only exposes the 1-D primitive.
+ * Multivariate IPM-BOED via sliced-Wasserstein lives at
+ * `src/bayes-ab/sliced-wasserstein.ts` (the SW primitive) and
+ * `src/bayes-ab/ipm-boed-mv.ts` (the multivariate design selector).
+ * Callers with >1-D parameters should use `selectIpmBoedDesignMv`
+ * directly. The Dirichlet-Multinomial conjugate update lives at
+ * `src/bayes-ab/dirichlet.ts`. The sequential multivariate harness lives
+ * at `src/bayes-ab/coordinator-mv.ts::runBayesABMv`.
+ *
+ * The 1-D case in this module is the K=2 specialisation of the
+ * multivariate case (Beta(α, β) = Dirichlet([α, β]); wasserstein1d =
+ * slicedWasserstein in d=1). The two surfaces are deliberately parallel.
  *
  * @module ab-harness/wasserstein-boed
  */
