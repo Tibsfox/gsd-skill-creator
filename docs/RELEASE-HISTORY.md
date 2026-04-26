@@ -6,19 +6,19 @@ Each version links to a detailed release notes directory with full feature descr
 
 
 > **Drift detected:** 7 releases flag a retrospective but have no `03-retrospective.md` on disk; 3 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 619 releases · 616 with retrospectives · 609 with extracted lessons · quality A:602 B:1 C:3 D:1 F:11 (avg 96) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 619 releases · 616 with retrospectives · 609 with extracted lessons · quality A:607 B:1 C:2 D:1 F:7 (avg 96) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Retro | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|-------|---------|---------|-------|
-| [v1.49.576](release-notes/v1.49.576) | OOPS-GSD Alignment + Implementation | — | 40 | 4 | — | ✓ _(no file)_ | — | F 0 |  |
-| [v1.49.575](release-notes/v1.49.575) | CS25–26 Sweep → GSD Integration | — | 16 | 18 | — | ✓ _(no file)_ | — | F 24 |  |
-| [v1.49.574](release-notes/v1.49.574) | Megakernel: One Launch, One Chipset | — | 3 | — | — | [✓](release-notes/v1.49.574/chapter/03-retrospective.md) | [4](release-notes/v1.49.574/chapter/04-lessons.md) | C 75 |  |
+| [v1.49.576](release-notes/v1.49.576) | OOPS-GSD Alignment + Implementation | — | 40 | 4 | — | ✓ _(no file)_ | — | A 100 |  |
+| [v1.49.575](release-notes/v1.49.575) | CS25–26 Sweep → GSD Integration | — | 16 | 18 | — | ✓ _(no file)_ | — | A 100 |  |
+| [v1.49.574](release-notes/v1.49.574) | Megakernel: One Launch, One Chipset | — | 3 | — | — | [✓](release-notes/v1.49.574/chapter/03-retrospective.md) | [4](release-notes/v1.49.574/chapter/04-lessons.md) | A 100 |  |
 | [v1.49.573](release-notes/v1.49.573) | Upstream Intelligence Pack v1.44 (ArXiv eess Integration) | — | 3 | 24 | — | ✓ _(no file)_ | 9 _(no file)_ | F 21 |  |
-| [v1.49.572](release-notes/v1.49.572) | Mathematical Foundations Refresh | — | 3 | 19 | — | ✓ _(no file)_ | — | F 13 |  |
+| [v1.49.572](release-notes/v1.49.572) | Mathematical Foundations Refresh | — | 3 | 19 | — | ✓ _(no file)_ | — | A 98 |  |
 | [v1.49.571](release-notes/v1.49.571) | Heuristics-Free Skill Space | 2026-04-23 | 11 | — | — | ✓ _(no file)_ | — | F 25 |  |
 | [v1.49.570](release-notes/v1.49.570) | Convergent Substrate | 2026-04-23 | 13 | 9 | — | ✓ _(no file)_ | — | F 25 |  |
 | [v1.49.569](release-notes/v1.49.569) | Drift in LLM Systems | 2026-04-23 | 29 | 18 | — | [✓](release-notes/v1.49.569/chapter/03-retrospective.md) | [8](release-notes/v1.49.569/chapter/04-lessons.md) | F 50 |  |
-| [v1.49.568](release-notes/v1.49.568) | Nonlinear Frontier | 2026-04-23 | 34 | 5 | — | [✓](release-notes/v1.49.568/chapter/03-retrospective.md) | [4](release-notes/v1.49.568/chapter/04-lessons.md) | F 24 |  |
+| [v1.49.568](release-notes/v1.49.568) | Nonlinear Frontier | 2026-04-23 | 34 | 5 | — | [✓](release-notes/v1.49.568/chapter/03-retrospective.md) | [4](release-notes/v1.49.568/chapter/04-lessons.md) | A 98 |  |
 | [v1.49.567](release-notes/v1.49.567) | Degree 62: The Ground Beneath the Survey | 2026-04-22 | 1 | — | — | — | — | F 17 |  |
 | [v1.49.566](release-notes/v1.49.566) | Degree 61: The Completion of the Survey | 2026-04-22 | 1 | — | — | [✓](release-notes/v1.49.566/chapter/03-retrospective.md) | [5](release-notes/v1.49.566/chapter/04-lessons.md) | F 48 |  |
 | [v1.49.565](release-notes/v1.49.565) | Degree 60: The Anchored Listener | 2026-04-22 | 1 | — | — | [✓](release-notes/v1.49.565/chapter/03-retrospective.md) | — | C 73 |  |
