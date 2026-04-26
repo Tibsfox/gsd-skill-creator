@@ -16,8 +16,8 @@ interface SizedDesign {
   n: number;
 }
 
-const TRUE_THETA = [0.6, 0.3, 0.1];
-const PRIOR = { alphas: [1, 1, 1] } as const;
+const TRUE_THETA: number[] = [0.6, 0.3, 0.1];
+const PRIOR: { alphas: number[] } = { alphas: [1, 1, 1] };
 const DESIGNS: MvExperimentDesign<SizedDesign>[] = [
   { label: 'small', payload: { n: 5 } },
   { label: 'large', payload: { n: 20 } },
