@@ -79,18 +79,21 @@ export interface EProcessConfig {
    */
   hypothesis?: 'one-sided' | 'two-sided';
   /**
-   * The optional-stopping policy governing when `result()` is consulted.
-   * Does not affect the e-process computation; used for documentation in
-   * `Type1Bound` and to gate fixed-horizon mode.
-   * Default: `'continuous'`.
+   * The optional-stopping policy. Reserved for future use — the current
+   * e-process implementation is anytime-valid by construction (Ville's
+   * inequality), so the same `result()` is correct under both 'continuous'
+   * and 'fixed-horizon' inspection. Stored on the config for caller-side
+   * documentation; consumers MAY use it to choose how often to call
+   * `result()`. Default: `'continuous'`.
    */
   stoppingPolicy?: OptionalStoppingPolicy;
   /**
    * Learning-rate parameter λ for the likelihood-ratio martingale
    * e_i = exp(λ · x_i − λ²/2).
    * Positive values tune sensitivity to positive drift. Default: 0.5.
-   * For two-sided tests the implementation uses ±λ and takes the geometric
-   * mean, so |λ| applies symmetrically.
+   * For two-sided tests the implementation uses cosh(λ · x) · exp(−λ²/2)
+   * — the arithmetic mean of the +λ and −λ one-sided e-values — so |λ|
+   * applies symmetrically.
    */
   lambda?: number;
 }

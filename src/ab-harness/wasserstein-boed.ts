@@ -1,5 +1,6 @@
 /**
- * JP-022 — Wasserstein BOED skill scoring primitive.
+ * JP-022 — Wasserstein BOED scoring primitive (illustrative IPM-aware
+ * heuristic; see Limitations below).
  *
  * Anchor: arXiv:2604.21849 — "Beyond Expected Information Gain:
  * IPM-based Bayesian Optimal Experimental Design" (2026).
@@ -18,12 +19,38 @@
  *     W1(P, Q) = ∫ |F_P(x) − F_Q(x)| dx
  *   which, for empirical distributions over the same sorted grid, reduces
  *   to the mean absolute difference of the two CDFs.
- * • The BOED utility for a design d is:
+ * • The BOED utility for a design d is conceptually:
  *     U_W(d) = E_{y~p(y|d)} [ W1(p(θ|y,d), p(θ)) ]
  *   approximated by Monte-Carlo over outcome samples.
  * • Only univariate distributions (1-D parameter θ) are handled here; a
  *   multivariate extension (sliced-Wasserstein) is left for a successor
  *   phase.
+ *
+ * ## Limitations
+ *
+ * This module ships an **illustrative IPM-aware heuristic**, not a faithful
+ * implementation of the IPM-BOED algorithm in arXiv:2604.21849. Specifically:
+ *
+ * - The "posterior" used inside `wassersteinExpectedUtility` is a
+ *   hand-constructed bounded-update simulation: prior samples are shifted
+ *   toward each observation by an amount clamped at `MAX_SHIFT_STDS = 1.5`
+ *   prior standard deviations, then contracted toward the posterior mean by
+ *   `VAR_SHRINK = 0.8`. These constants are NOT from the paper; they are
+ *   chosen to produce IPM-BOED-like ranking behaviour on bounded-support
+ *   priors.
+ * - A faithful IPM-BOED implementation requires (a) an actual data-generating
+ *   model `p(y | d, θ)` from which to sample outcomes, and (b) a real Bayesian
+ *   posterior `p(θ | y, d)` (or a simulator thereof). Both are application-
+ *   specific and out of scope for this primitive.
+ * - The provided ranking-reversal test passes on fixtures designed to
+ *   exhibit IPM-BOED's qualitative property (clipped sensitivity to outliers
+ *   versus naive EIG); the heuristic reproduces that qualitative property,
+ *   not the paper's quantitative algorithm.
+ *
+ * Use this module as a citation-anchor implementation that exposes the
+ * Wasserstein-1 primitive (`wasserstein1d`) for downstream consumers; replace
+ * `wassersteinExpectedUtility` with a model-aware implementation when a
+ * concrete `p(y | d, θ)` is available.
  */
 
 /** A 1-D empirical distribution: sorted sample points. */
@@ -90,30 +117,35 @@ export function wasserstein1d(p: EmpiricalDistribution, q: EmpiricalDistribution
 }
 
 /**
- * Compute the Wasserstein-BOED utility for a candidate experiment design.
+ * Compute an IPM-aware utility score for a candidate experiment design.
  *
- * Algorithm (IPM-BOED, §3.1 of arXiv:2604.21849):
- *   1. For each outcome sample y_k in design.outcomeSamples, form a toy
- *      posterior p(θ | y_k) as a shift of the prior by the observation.
- *      (Here: robust bounded-update model — posterior mean shifts toward y_k
- *      by a step capped at MAX_SHIFT * prior_std to avoid runaway updates
- *      from out-of-distribution observations.  Variance shrinks by factor 0.8.)
- *   2. Compute W1 between that posterior and the prior.
- *   3. Return the mean W1 over all outcome samples as the BOED score.
+ * **NOTE: this is the illustrative heuristic described in the module's
+ * Limitations section — not the IPM-BOED algorithm of arXiv:2604.21849.**
  *
- * The capped shift is the key distinction from naive EIG: an extreme outlier
- * (y far outside the prior support) does NOT produce a proportionally large
- * W1 score because the posterior update is bounded.  Coherent in-distribution
- * observations that shift the whole prior mass uniformly score higher than
- * isolated outliers — which is the IPM-BOED property from arXiv:2604.21849.
+ * Procedure (heuristic posterior simulation):
+ *   1. For each outcome sample y_k in design.outcomeSamples, simulate a
+ *      "posterior" by shifting every prior sample toward y_k. The shift is
+ *      clamped at MAX_SHIFT_STDS (= 1.5) prior standard deviations and
+ *      shrunk toward the posterior mean by VAR_SHRINK (= 0.8). Both
+ *      constants are chosen to mimic the qualitative robustness property
+ *      of IPM-BOED on bounded-support priors.
+ *   2. Compute W1 between that simulated posterior and the prior.
+ *   3. Return the mean W1 over all outcome samples as the heuristic score.
+ *
+ * The clamped shift is what produces the IPM-BOED-like qualitative
+ * behaviour: an extreme outlier (y far outside the prior support) does
+ * NOT produce a proportionally large W1 score because the simulated
+ * posterior update is bounded. This is the qualitative property the
+ * faithful IPM-BOED algorithm exhibits, but the quantitative computation
+ * here is a heuristic, not Bayes.
  *
  * A higher score means the design is expected to produce larger
- * distributional movement — i.e. more informative experiments — under the
- * Wasserstein geometry.
+ * (clamped) distributional movement under the Wasserstein geometry.
  *
  * @param design   Candidate experiment design with outcome samples.
  * @param prior    Prior distribution over the parameter of interest.
- * @returns        BOED utility score (≥ 0; higher = more informative).
+ * @returns        Heuristic utility score (≥ 0; higher = more informative
+ *                 under the simulated posterior model).
  */
 export function wassersteinExpectedUtility(
   design: ExperimentDesign,

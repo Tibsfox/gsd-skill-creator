@@ -1,15 +1,30 @@
 /**
- * SAGES semantic-behavioral consistency regression test for the VTM pipeline.
+ * VTM pipeline structural-integrity regression test (SAGES-anchored).
  *
- * Anchored on arXiv:2512.09111 (SAGES: Safe Trajectory Generation via
- * Language-Conditioned Skill Embedding). SAGES demonstrates that a
- * three-stage pipeline (intent extraction → deterministic planning →
- * knowledge grounding) achieves >90% semantic-behavioral consistency when
- * the NL intent is preserved across all three stages.
+ * Citation anchor: arXiv:2512.09111 (SAGES: Safe Trajectory Generation
+ * via Language-Conditioned Skill Embedding). SAGES demonstrates >90%
+ * *semantic-behavioral* consistency in a three-stage pipeline (intent
+ * extraction → deterministic planning → knowledge grounding) for
+ * spacecraft proximity operations under nonconvex constraints.
  *
- * This test measures whether the VTM pipeline (vision-parser →
- * mission-assembler → MissionPackage) reproduces the same structural intent
- * from three distinct NL vision inputs, achieving the ≥90% bar.
+ * This test does NOT measure semantic-behavioral consistency in the SAGES
+ * sense — that would require ground-truth comparison of LLM-extracted
+ * intent against executed behaviour under safety constraints. Instead,
+ * it asserts four structural-integrity invariants on the VTM pipeline's
+ * NL → MissionPackage transformation:
+ *
+ *   1. Output validates against MissionPackageSchema (schema integrity).
+ *   2. Component-spec count matches input module count (intent breadth
+ *      preservation at structural level).
+ *   3. Wave execution plan is non-empty (planning stage reached).
+ *   4. Test plan is non-empty (verification layer present).
+ *
+ * The 0.90 score-threshold is anchored on the SAGES bar but applied to
+ * a structural-integrity composite rather than a semantic-fidelity score.
+ * Reading the test as "the VTM pipeline preserves structural intent on
+ * three diverse NL vision documents at the SAGES quality bar" is correct;
+ * reading it as "the VTM pipeline achieves SAGES semantic-behavioral
+ * consistency" is not.
  *
  * Convergent reference: arXiv:2604.21910 (Skills-as-md three-tier pipeline).
  *
@@ -394,19 +409,24 @@ const FIXTURE_CLI_TOOLKIT = [
 // ---------------------------------------------------------------------------
 
 /**
- * Assess semantic-behavioral consistency for one NL → MissionPackage round-trip.
+ * Assess structural integrity for one NL → MissionPackage round-trip.
  *
- * Returns a score in [0, 1] based on four structural invariants that SAGES
- * identifies as load-bearing for semantic-behavioral consistency:
+ * Returns a score in [0, 1] based on four structural invariants:
  *
  * 1. Mission package validates against MissionPackageSchema (schema integrity).
- * 2. Component spec count matches module count (intent breadth preserved).
+ * 2. Component spec count matches module count (intent breadth preserved
+ *    at structural level — not semantic-behavioral preservation).
  * 3. Wave execution plan is non-empty (planning stage was reached).
  * 4. Test plan has at least one test (verification layer is present).
  *
- * All four invariants contribute equally (0.25 each). ≥ 0.90 passes.
+ * All four invariants contribute equally (0.25 each). ≥ 0.90 passes — i.e.
+ * all four checks must pass simultaneously, since each is binary.
+ *
+ * This composite is NOT the SAGES semantic-behavioral consistency score;
+ * it borrows the 0.90 bar but applies a different (weaker) measurement.
+ * See module-level docstring for the framing distinction.
  */
-function measureConsistency(
+function measureStructuralIntegrity(
   markdown: string,
   missionPackage: unknown,
   expectedModuleCount: number,
@@ -443,8 +463,8 @@ function measureConsistency(
 // Tests
 // ---------------------------------------------------------------------------
 
-describe('SAGES NL → MissionPackage semantic-behavioral consistency (arXiv:2512.09111)', () => {
-  it('fixture-1 (drone curriculum) achieves ≥90% consistency via runPipeline', async () => {
+describe('VTM pipeline structural-integrity at the SAGES bar (arXiv:2512.09111-anchored)', () => {
+  it('fixture-1 (drone curriculum) achieves ≥90% structural integrity via runPipeline', async () => {
     const result = await runPipeline(FIXTURE_DRONE, { speed: 'full' });
     expect(result.success).toBe(true);
     expect(result.stages.mission).toBeDefined();
@@ -453,7 +473,7 @@ describe('SAGES NL → MissionPackage semantic-behavioral consistency (arXiv:251
     expect(parsed.success).toBe(true);
     const expectedModules = parsed.success ? parsed.data.modules.length : 3;
 
-    const score = measureConsistency(
+    const score = measureStructuralIntegrity(
       FIXTURE_DRONE,
       result.stages.mission!.missionPackage,
       expectedModules,
@@ -461,7 +481,7 @@ describe('SAGES NL → MissionPackage semantic-behavioral consistency (arXiv:251
     expect(score).toBeGreaterThanOrEqual(0.9);
   });
 
-  it('fixture-2 (finance tracker) achieves ≥90% consistency via runPipeline', async () => {
+  it('fixture-2 (finance tracker) achieves ≥90% structural integrity via runPipeline', async () => {
     const result = await runPipeline(FIXTURE_FINANCE, { speed: 'full' });
     expect(result.success).toBe(true);
     expect(result.stages.mission).toBeDefined();
@@ -470,7 +490,7 @@ describe('SAGES NL → MissionPackage semantic-behavioral consistency (arXiv:251
     expect(parsed.success).toBe(true);
     const expectedModules = parsed.success ? parsed.data.modules.length : 3;
 
-    const score = measureConsistency(
+    const score = measureStructuralIntegrity(
       FIXTURE_FINANCE,
       result.stages.mission!.missionPackage,
       expectedModules,
@@ -478,7 +498,7 @@ describe('SAGES NL → MissionPackage semantic-behavioral consistency (arXiv:251
     expect(score).toBeGreaterThanOrEqual(0.9);
   });
 
-  it('fixture-3 (CLI toolkit) achieves ≥90% consistency via runPipeline', async () => {
+  it('fixture-3 (CLI toolkit) achieves ≥90% structural integrity via runPipeline', async () => {
     const result = await runPipeline(FIXTURE_CLI_TOOLKIT, { speed: 'full' });
     expect(result.success).toBe(true);
     expect(result.stages.mission).toBeDefined();
@@ -487,7 +507,7 @@ describe('SAGES NL → MissionPackage semantic-behavioral consistency (arXiv:251
     expect(parsed.success).toBe(true);
     const expectedModules = parsed.success ? parsed.data.modules.length : 3;
 
-    const score = measureConsistency(
+    const score = measureStructuralIntegrity(
       FIXTURE_CLI_TOOLKIT,
       result.stages.mission!.missionPackage,
       expectedModules,
@@ -495,7 +515,7 @@ describe('SAGES NL → MissionPackage semantic-behavioral consistency (arXiv:251
     expect(score).toBeGreaterThanOrEqual(0.9);
   });
 
-  it('aggregate consistency across all 3 fixtures is ≥90% (SAGES acceptance bar)', async () => {
+  it('aggregate structural integrity across all 3 fixtures is ≥90% (SAGES-bar-anchored)', async () => {
     const fixtures = [FIXTURE_DRONE, FIXTURE_FINANCE, FIXTURE_CLI_TOOLKIT];
     const scores: number[] = [];
 
@@ -507,7 +527,7 @@ describe('SAGES NL → MissionPackage semantic-behavioral consistency (arXiv:251
       }
       const parsed = parseVisionDocument(markdown);
       const expectedModules = parsed.success ? parsed.data.modules.length : 3;
-      scores.push(measureConsistency(markdown, result.stages.mission.missionPackage, expectedModules));
+      scores.push(measureStructuralIntegrity(markdown, result.stages.mission.missionPackage, expectedModules));
     }
 
     const aggregate = scores.reduce((sum, s) => sum + s, 0) / scores.length;

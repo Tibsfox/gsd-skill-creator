@@ -78,12 +78,15 @@ class LikelihoodRatioEProcess implements EProcess {
   /**
    * Update the running e-value with one new observation.
    *
-   * One-sided increment:  e_i = exp(λ · x − λ²/2)
-   * Two-sided increment:  e_i = sqrt(exp(+λ · x − λ²/2) · exp(−λ · x − λ²/2))
-   *                           = exp(−λ²/2)           (geometric mean of ±λ arms)
+   * One-sided increment: e_i = exp(λ · x − λ²/2)
+   *   Under H_0 with x ∈ [-1, 1] and E[x] = 0, Hoeffding's lemma gives
+   *   E[exp(λx)] ≤ exp(λ²/2), so E[e_i | H_0] ≤ 1.
    *
-   * Note: for the two-sided case the geometric-mean construction folds both
-   * arms into a single value that still satisfies E[e_i | H_0] ≤ 1.
+   * Two-sided increment: e_i = cosh(λ · x) · exp(−λ²/2)
+   *   This is the arithmetic mean of the +λ and −λ one-sided increments
+   *   (cosh(λx) = (e^{λx} + e^{−λx}) / 2). Under H_0 the same Hoeffding
+   *   bound applies to each arm, so E[e_i | H_0] = E[cosh(λx)] · exp(−λ²/2)
+   *   ≤ exp(λ²/2) · exp(−λ²/2) = 1. Sensitive to |x| > 0 in either direction.
    */
   update(observation: number): void {
     let increment: number;
@@ -92,12 +95,7 @@ class LikelihoodRatioEProcess implements EProcess {
       // e_i = exp(λ x − λ²/2)
       increment = Math.exp(this.lambda * observation - (this.lambda ** 2) / 2);
     } else {
-      // Geometric mean of +λ and −λ arms:
-      // sqrt( exp(λ x − λ²/2) · exp(−λ x − λ²/2) ) = exp(−λ²/2)
-      // This always equals exp(−λ²/2) < 1 and is a valid e-value under H_0.
-      // For two-sided detection we use the absolute-value arm combination:
-      // e_i = cosh(λ x) · exp(−λ²/2), which is ≥ exp(−λ²/2) when |x| > 0
-      // and ≤ exp(λ|x| − λ²/2) under Hoeffding, satisfying E[e_i | H_0] ≤ 1.
+      // e_i = cosh(λ x) · exp(−λ²/2) — arithmetic mean of ±λ arms.
       increment =
         Math.cosh(this.lambda * observation) *
         Math.exp(-(this.lambda ** 2) / 2);

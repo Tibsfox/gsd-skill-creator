@@ -1,18 +1,24 @@
 /**
- * skill-promotion — ROI gate implementation (Wave 0 minimum-viable).
+ * skill-promotion — deployment-horizon ROI gate (JP-005, Wave 2).
  *
  * `computeROI` returns a fully-shaped `ROIBreakdown` for any `SkillCandidate`.
- * `shouldInstall` returns `false` unconditionally in Wave 0 — this is the
- * documented placeholder.  JP-005 (Wave 2 / phase 835) replaces this logic
- * with the real thermodynamic comparison:
+ * `shouldInstall` is the live ROI gate: install iff
  *
  *   payoffBits > installCostJoules / LANDAUER_FLOOR_JPB
  *
- * The intermediate values (`payoffBits`, `installCostJoules`, `marginBits`)
- * are computed correctly even in Wave 0 so downstream consumers can inspect
- * them; only the final `decision` / `shouldInstall` gate is deferred.
+ * Equivalently (after dividing both sides by `LANDAUER_FLOOR_JPB`):
+ *
+ *   payoffBits > estimatedIK   →  marginBits > 0   →  install
+ *
+ * The `estimatedIK` field on `SkillCandidate` carries the algorithmic
+ * mutual information between substrate and class descriptor; a Wave 3
+ * estimator may refine this (see JP-018 multi-step BO autotune in
+ * `bo-autotune.ts`), but the gate itself is live.
  *
  * Reference: arXiv:2604.20897 § 3 — deployment-horizon ROI.
+ *
+ * History: shipped in Wave 0 (phase 827) as a stub returning `false`
+ * unconditionally; replaced in Wave 2 (phase 835) by the real gate below.
  *
  * @module skill-promotion/promotion-roi
  */
@@ -32,7 +38,7 @@ import type { SkillCandidate, ROIBreakdown } from './types.js';
  * installCostJoules = LANDAUER_FLOOR_JPB × estimatedIK
  * marginBits        = payoffBits − (installCostJoules / LANDAUER_FLOOR_JPB)
  *                   = payoffBits − estimatedIK          (dimensionless bits)
- * decision          = 'reject'  (Wave 0 placeholder; JP-005 replaces)
+ * decision          = marginBits > 0 ? 'install' : 'reject'
  * ```
  *
  * Note on units: `marginBits` is expressed in bits by dividing both sides of
@@ -40,7 +46,7 @@ import type { SkillCandidate, ROIBreakdown } from './types.js';
  * a dimensionless bit count.
  *
  * @param candidate - Skill candidate to evaluate.
- * @returns Full ROI breakdown with decision set to `'reject'` (Wave 0).
+ * @returns Full ROI breakdown with `decision` set per the live gate.
  */
 export function computeROI(candidate: SkillCandidate): ROIBreakdown {
   const payoffBits = candidate.estimatedUses * candidate.perUseSavingsBits;
@@ -50,7 +56,7 @@ export function computeROI(candidate: SkillCandidate): ROIBreakdown {
   const installCostBits = candidate.estimatedIK; // installCostJoules / LANDAUER_FLOOR_JPB
   const marginBits = payoffBits - installCostBits;
 
-  // JP-005 (Wave 2): real ROI gate — install iff marginBits > 0.
+  // Live ROI gate — install iff marginBits > 0 (JP-005, Wave 2).
   const decision: 'install' | 'reject' = marginBits > 0 ? 'install' : 'reject';
 
   return {
