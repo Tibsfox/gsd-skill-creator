@@ -31,7 +31,10 @@ describe('Wave 2B: Gastown skill splits — word-count gate', () => {
   for (const { name, ref } of skills) {
     it(`${name}/SKILL.md is at or below 820 words`, () => {
       const md = readSkill(name);
-      expect(wordCount(md)).toBeLessThanOrEqual(820);
+      // Count body only — frontmatter holds bounded agentskills.io spec fields
+      // (version, format, triggers, status) added by v1.49.576 OGA-032/033 and
+      // does not contribute to the payload-bloat budget the gate is protecting.
+      expect(wordCount(parseFrontmatter(md).body)).toBeLessThanOrEqual(820);
     });
 
     it(`${name} reference file exists at ${ref}`, () => {

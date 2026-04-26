@@ -123,7 +123,20 @@ This is the core step. The wrapper invokes the real GSD command -- it does NOT r
 
 1. Read the file `.claude/commands/gsd/execute-phase.md` using the Read tool
 2. **If the file exists:** Follow its instructions with phase number N as the argument. Execute the full GSD execute-phase process as documented in that command file.
-3. **If the file does NOT exist** (GSD commands stored elsewhere): Use the Task tool to invoke: "Follow the /gsd:execute-phase process for phase N. Read the GSD execute-phase command from `.claude/get-shit-done/` or wherever GSD stores its commands, and execute phase N."
+3. **If the file does NOT exist** (GSD commands stored elsewhere): Use the Task
+   tool to invoke. Pass an `effort` parameter derived from the current GSD
+   profile (`/gsd:set-profile`): `quality`→`high`, `balanced`→`medium`,
+   `budget`→`low`. Omit `effort` for `inherit` to preserve the parent
+   runtime's default behavior (OGA-016, additive). Source the profile from
+   `.planning/skill-creator.json` `integration.profile`.
+
+   ```
+   Task(
+     subagent_type="general",
+     effort=<derived from profile, omit if inherit>,
+     prompt="Follow the /gsd:execute-phase process for phase N. Read the GSD execute-phase command from .claude/get-shit-done/ or wherever GSD stores its commands, and execute phase N."
+   )
+   ```
 
 **CRITICAL:** Do NOT reimplement any GSD logic. The wrapper's sole job at this step is to invoke the real GSD command. All planning, execution, commits, state updates, and verification are handled by GSD itself.
 

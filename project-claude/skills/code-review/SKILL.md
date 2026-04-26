@@ -1,6 +1,12 @@
 ---
 name: code-review
 description: Reviews code for bugs, style, and best practices. Use when reviewing PRs or checking code quality.
+version: 1.0.0
+format: 2025-10-02
+triggers:
+  - reviewing PRs or checking code quality
+updated: 2026-04-25
+status: ACTIVE
 ---
 
 # Code Review

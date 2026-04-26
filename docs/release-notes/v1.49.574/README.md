@@ -9,16 +9,23 @@
 **CAPCOM gates:** G0–G4 all PASS (Half A) + Half B substrate landed default-off with HB-04 carrying CAPCOM hard preservation
 **Half A PDF:** `.planning/missions/megakernel-one-launch-one-chipset/work/publication/megakernel-reference.pdf` — 60 pages, 3-pass XeLaTeX clean
 
-## The Amiga Principle compounds twice
+## Summary
 
 > The lesson of the Amiga was never that custom chips were better silicon. The lesson was that exposing the architecture — making the registers, the DMA, the timing visible to anyone who wanted to look — generated more value than hiding it. The megakernel literature is making the SM scheduler visible. The JEPA literature is making the dynamics of search visible. The Silicon Layer's job is to make both of them programmable from the same place that adapter selection already lives. One launch. One chipset. The spaces between were always where the work was hiding.
 
-Where v1.49.573 asked "what does the literature say about the architecture we built?", v1.49.574 asks the next question: **what does the kernel-design literature say about the chipset metaphor when you take it down to the SM scheduler?** The answer reaches across two convergent traditions:
+Where v1.49.573 asked "what does the literature say about the architecture we built?", v1.49.574 asks the next question: **what does the kernel-design literature say about the chipset metaphor when you take it down to the SM scheduler?** The answer reaches across two convergent traditions, and the milestone delivers both a deep-research package (Half A) and a tier-gated typed substrate (Half B) that lets the project plan against the next engineering mission without reopening the research question.
 
-1. **Megakernel architecture** (Hazy Research / Mirage MPK / Event Tensor Compiler) — collapses ~100 CUDA kernel launches into one persistent kernel with counter-based SM coordination. The Amiga Principle at the GPU scheduler layer.
-2. **JEPA-based latent planning** (LeWorldModel arXiv:2603.19312, V-JEPA 2, EB-JEPA, Causal-JEPA) — replaces brute-force kernel autotune with a learned latent dynamics model that ranks candidates without executing them. The Amiga Principle at the planner layer.
+**The Amiga Principle compounds twice.** Megakernel architecture exposes the SM scheduler; JEPA-based latent planning exposes the dynamics of search. Both are the same architectural discipline applied at two different layers — the same way the Amiga's custom chips and DMA were the same discipline applied at two different layers of the 1985 graphics pipeline.
 
-The reversal narrative — Laine et al. 2013's "Megakernels Considered Harmful" → Hazy Research May 2025's "Look Ma, No Bubbles" — is documented as a workload-character dependency, not a refutation. Same architectural insight, opposite optimal answer when SIMT divergence is structurally absent and the workload is memory-bound at low batch.
+**Megakernel architecture is the Amiga Principle at the GPU scheduler layer.** Hazy Research / Mirage MPK / Event Tensor Compiler collapse ~100 CUDA kernel launches into one persistent kernel with counter-based SM coordination. Half A M2 documents seven mechanisms each cited with primary source plus implementation reference.
+
+**JEPA-based latent planning is the Amiga Principle at the planner layer.** LeWorldModel (arXiv:2603.19312), V-JEPA 2, EB-JEPA, and Causal-JEPA replace brute-force kernel autotune with a learned latent dynamics model that ranks candidates without executing them. Half A M3 produced the bridge thesis mapping table (8 rows) as its keystone.
+
+**The 2013 → 2025 reversal is workload-character, not refutation.** Laine et al. 2013's "Megakernels Considered Harmful" and Hazy Research May 2025's "Look Ma, No Bubbles" reach opposite optimal answers from the same architectural insight: when SIMT divergence is structurally absent and the workload is memory-bound at low batch, the megakernel wins. Both sides of the synchronized debate are simultaneously correct about their own workload character.
+
+**SIGReg and counter-based sync are architecturally rhyming.** Both are minimum-viable coordination primitives that prevent a system from degenerating to a trivial state — one in latent embedding space, the other in global-memory dependency. They share a design discipline (replace many approximate coordination mechanisms with one carefully-chosen one) without sharing a mathematical identity.
+
+**Half B holds the substrate boundary.** All seven Half B candidates that surfaced from M5 §6 passed the substrate test (typed interface / schema / telemetry hook / doctrine — not engine work); zero out-of-scope engineering attempts; both halves complete in parallel without merge conflict.
 
 ## Half A — Deep research deliverable
 
@@ -32,6 +39,39 @@ The reversal narrative — Laine et al. 2013's "Megakernels Considered Harmful" 
 | S2 cross-module synthesis | 2,366 | — | 8 IN tests rendered as PASS checklist with evidence |
 
 **Total:** 20,426 words across 5 modules + S2; 60-page PDF; 33 distinct cite keys; bibliography of 32 entries (23 primary + 9 secondary/context); zero unsupported numerical claims.
+
+## By the numbers
+
+| Surface | Count |
+|---|---|
+| Half A modules (M1–M5 + S2) | 6 |
+| Half A words shipped | 20,426 |
+| Half A PDF pages (3-pass XeLaTeX clean) | 60 |
+| Distinct citation keys | 33 |
+| Bibliography entries (23 primary + 9 secondary/context) | 32 |
+| Half B substrate modules (T1+T2+T3) | 7 (3 + 3 + 1) |
+| Half B new tests added | 141 |
+| Total tests passing (was 27,411 at v1.49.573) | 27,552 |
+| Net regressions attributable to v1.49.574 | 0 |
+| Pre-existing failures inherited (v1.49.572 baseline) | 2 |
+| CAPCOM gates (Half A G0–G4) all PASS | 5 |
+| Waves executed (W0 + W1 parallel A/B + W2 + W3) | 4 |
+
+## Health metrics
+
+- **Tests:** 27,552 passing (+141 vs the v1.49.573 published baseline of 27,411 — 1.41× the ≥100 floor; 1.76× the ≥80 T1-only floor).
+- **Regressions:** 0 net new attributable to v1.49.574.
+- **Pre-existing failures:** 2 in `src/mathematical-foundations/__tests__/integration.test.ts` (live-config flag-state checks, v1.49.572 baseline; deferred to a follow-up clean-up pass per v1.49.573 policy).
+- **CAPCOM gates:** G0–G4 all PASS for Half A; HB-04 carries CAPCOM hard preservation for Half B.
+- **Default-off posture:** every Half B module is gated by `.claude/gsd-skill-creator.json` `megakernel-substrate` block — activating any flag is a deliberate operator decision.
+- **Wall-clock:** 65m 47s end-to-end (observatory log) vs the mission package's 7-session / 4–5-day estimate.
+
+## Test posture
+
+- **T1 must-ship (HB-01 + HB-02 + HB-03):** 83 tests, all green — the substrate floor (instruction-tensor schema + telemetry envelope + JEPA-planner stub interface).
+- **T2 if-budget (HB-04 + HB-05 + HB-07):** 58 tests, all green — adapter-selection schema (CAPCOM hard-preservation gated), SOL-budget estimator, verification doctrine.
+- **T3 may-defer (HB-06):** 0 runtime tests by design — documentation-only ThunderKittens reference example.
+- **Byte-identical fixture coverage:** 4 disabled-result snapshot tests across all six runtime Half B surfaces (HB-01/02/03/04/05/07); shape changes become visible automatically.
 
 ## Half B — Tier-gated research-informed substrate
 
@@ -71,12 +111,12 @@ Half B stays at the architectural-substrate layer: typed interfaces, schemas, te
 
 ## Convergent-discovery validation (Half A finding)
 
-The mission's M2 + M3 reading surfaced one structural insight that warrants explicit naming: the SIGReg anti-collapse regularizer in LeWorldModel and the counter-based fine-grained synchronization in Hazy Research megakernels are doing **architecturally rhyming work**. Both are minimum-viable coordination primitives that prevent a system from degenerating to a trivial state:
+The mission's M2 + M3 reading surfaced one structural insight that warrants explicit naming: the **SIGReg anti-collapse regularizer** in **LeWorldModel** and the **counter-based fine-grained synchronization** in **Hazy Research megakernels** are doing **architecturally rhyming work**. Both are minimum-viable coordination primitives that prevent a system from degenerating to a trivial state:
 
-- SIGReg keeps the latent space from collapsing to a constant by enforcing a single statistical invariant (Gaussianity along random projections via the Cramér–Wold theorem).
-- Counter-based sync keeps SMs from racing or deadlocking by enforcing a single dependency invariant (counter ≥ target before proceeding).
-
-In both cases the previous state of the art used many regularizers (PLDM's seven-term loss; CUDA's coarse kernel barriers + PDL's coarse synchronization) and the breakthrough was finding the single primitive that did the work of many. **The two primitives are not formally equivalent** — SIGReg lives in latent embedding space; counter-based sync lives in global-memory dependency. They share a *design discipline* rather than a mathematical identity: identify the minimum invariant the system actually needs and replace the cluster of approximate coordination mechanisms with one carefully-chosen one. The shared discipline is what carries forward into Half B substrate; the analogy is productive without claiming more than it can defend.
+- **SIGReg (latent-space invariant).** Keeps the latent space from collapsing to a constant by enforcing a single statistical invariant — **Gaussianity along random projections** via the **Cramér–Wold theorem**.
+- **Counter-based sync (dependency invariant).** Keeps SMs from racing or deadlocking by enforcing a single dependency invariant — **counter ≥ target before proceeding**, against the Hazy Research **persistent-kernel** scheduler.
+- **Prior art replaced.** **PLDM's seven-term loss** (latent side) and **CUDA's coarse kernel barriers + PDL's coarse synchronization** (scheduler side) were each clusters of approximate coordination mechanisms; the breakthrough on each side was finding the single primitive that did the work of many.
+- **Shared design discipline, not mathematical identity.** **The two primitives are not formally equivalent** — SIGReg lives in latent embedding space; counter-based sync lives in global-memory dependency. The shared discipline carries forward into **Half B substrate**; the analogy is productive without claiming more than it can defend.
 
 ## Dedications
 

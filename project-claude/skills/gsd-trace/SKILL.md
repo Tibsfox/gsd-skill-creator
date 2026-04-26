@@ -1,6 +1,12 @@
 ---
 name: gsd-trace
 description: Traces decisions and requirements through GSD artifacts. Use when user asks "why did we...", "what happened to...", or mentions decision history.
+version: 1.0.0
+format: 2025-10-02
+triggers:
+  - "user asks \"why did we"
+updated: 2026-04-25
+status: ACTIVE
 ---
 
 # GSD Decision Archaeology

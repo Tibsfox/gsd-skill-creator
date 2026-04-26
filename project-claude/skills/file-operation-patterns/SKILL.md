@@ -1,6 +1,12 @@
 ---
 name: file-operation-patterns
 description: Safe file operation patterns. Use when performing bulk file operations or writing deployment scripts.
+version: 1.0.0
+format: 2025-10-02
+triggers:
+  - performing bulk file operations or writing deployment scripts
+updated: 2026-04-25
+status: ACTIVE
 ---
 
 # File Operation Patterns

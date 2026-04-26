@@ -156,10 +156,22 @@ Before delegating, show the user what was detected and why:
 
 Invoke the appropriate wrapper command based on the routing decision from Step 3.
 
-Use the Task tool to delegate:
-- If routing to plan: `Run /wrap:plan N`
-- If routing to execute: `Run /wrap:execute N`
-- If routing to verify: `Run /wrap:verify N`
+Use the Task tool to delegate. Pass an `effort` parameter sourced from the
+current GSD profile (set via `/gsd:set-profile`):
+
+- `quality` profile → `effort: "high"` (Opus)
+- `balanced` profile → `effort: "medium"` (Sonnet)
+- `budget` profile → `effort: "low"` (Haiku)
+- `inherit` (or unset) → omit `effort` (preserves existing default behavior)
+
+Read profile from `.planning/skill-creator.json` (`integration.profile`) or
+`.claude/skill-creator.json` if the project copy is absent. The mapping is
+additive: when `effort` is unset, the parent runtime falls back to its default,
+so legacy invocations remain valid (OGA-016).
+
+- If routing to plan: `Task(subagent_type="general", effort=<derived>, prompt="Run /wrap:plan N")`
+- If routing to execute: `Task(subagent_type="general", effort=<derived>, prompt="Run /wrap:execute N")`
+- If routing to verify: `Task(subagent_type="general", effort=<derived>, prompt="Run /wrap:verify N")`
 
 If the Task tool is not available, instruct directly:
 "Now follow the `/wrap:[chosen] N` command process."

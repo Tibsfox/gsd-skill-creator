@@ -1,6 +1,12 @@
 ---
 name: test-generator
 description: Generates test cases for functions and components. Use when writing tests or creating test suites.
+version: 1.0.0
+format: 2025-10-02
+triggers:
+  - writing tests or creating test suites
+updated: 2026-04-25
+status: ACTIVE
 ---
 
 # Test Generation

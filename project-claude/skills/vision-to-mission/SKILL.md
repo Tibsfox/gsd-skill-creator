@@ -1,6 +1,14 @@
 ---
 name: vision-to-mission
 description: "Transform a user's builder vision into a complete, executable GSD mission package. Use this skill whenever a user has described what they want to BUILD (a product, tool, feature, system, educational pack, or ecosystem component) and wants it structured for GSD execution. Triggers include: 'structure this for GSD', 'make this into a milestone', 'turn this vision into a mission', 'package this up for Claude Code', 'create the mission files', 'I want to hand this to GSD', 'make me a mission package', or any request to decompose a described system into wave-based executable tasks. Also trigger when the user has a vision doc already written and needs mission decomposition. Prefer this skill over generic document creation whenever the GSD ecosystem is mentioned alongside building something."
+version: 1.0.0
+format: 2025-10-02
+triggers:
+  - "a user has described what they want to BUILD (a product, tool, feature, system, educational pack, or ecosystem component) and wants it structured for GSD execut"
+  - "'structure this for GSD', 'make this into a milestone', 'turn this vision into a mission', 'package this up for Claude Code', 'create the mission files', 'I wan"
+  - the user has a vision doc already written and needs mission decomposition
+updated: 2026-04-25
+status: ACTIVE
 ---
 
 # Vision → Mission Skill
