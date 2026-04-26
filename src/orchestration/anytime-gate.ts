@@ -16,14 +16,17 @@
  * }
  * ```
  *
- * ## Legacy adapter
+ * ## Fixed-N adapter
  *
- * Call sites that historically used a fixed-N Z-test threshold gate can
- * keep their semantics via `legacyFixedNAdapter(metric, N)`. This returns
- * a one-shot result equivalent to a one-sample Z-test at α=0.05 using the
- * standard normal threshold z_α = 1.645 (one-tailed, SE = 1/√N). The
- * adapter is **not** anytime-valid and is provided for backward compat only;
- * flagged for future migration to `anytimeGate.create()`.
+ * `legacyFixedNAdapter(metric, N)` is a standalone one-sample Z-test gate
+ * at α=0.05 using the standard normal threshold z_α = 1.6449 (one-tailed,
+ * SE = 1/√N). It is **not** anytime-valid. Despite the `legacy*` name,
+ * there is no pre-existing CAPCOM gate in the codebase that this adapter
+ * is migrating from (see "CAPCOM call-site search result" below); the
+ * adapter exists as a self-contained fixed-N alternative for callers that
+ * genuinely want frozen-window semantics. The naming is preserved to
+ * match the JP-002 component spec, but readers should not infer the
+ * existence of legacy fixed-N call sites that need migration.
  *
  * ## CAPCOM call-site search result
  *
@@ -161,15 +164,14 @@ export const anytimeGate = {
 // ─── Legacy fixed-N adapter ──────────────────────────────────────────────────
 
 /**
- * One-shot backward-compat adapter for call sites that use a fixed-N Z-test.
+ * One-shot fixed-N Z-test gate. Standalone (not migrating from any
+ * pre-existing CAPCOM gate — none exists in the codebase per the JP-002
+ * call-site search). NOT anytime-valid.
  *
  * Computes Z = metric * sqrt(N) and rejects when Z ≥ z_{α=0.05} = 1.6449
- * (one-tailed). This reproduces the historical fixed-window CAPCOM gate
- * behavior bit-exactly and is NOT anytime-valid.
- *
- * **Migration note:** this adapter is a bridge for legacy call sites; future
- * migrations should replace it with `anytimeGate.create()` to gain the
- * anytime-valid guarantee.
+ * (one-tailed). Provided for callers that explicitly want frozen-window
+ * semantics; for sequential testing use `anytimeGate.create()` instead
+ * to gain the anytime-valid Type-I guarantee.
  *
  * @param metric — the aggregated test metric (e.g., normalised mean shift).
  * @param N — the fixed window size (number of observations).
