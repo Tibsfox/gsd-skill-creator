@@ -150,3 +150,91 @@ describe('route() convenience function', () => {
     expect(result.output).toBe(expected);
   });
 });
+
+// ─── JP-002 — anytime-valid acceptance-rate gate wiring ─────────────────────
+
+describe('JP-002 — DraftVerifyRouter acceptance-rate anytime-valid gate', () => {
+  it('acceptanceVerdict() returns null when no gate is configured', async () => {
+    const router = new DraftVerifyRouter({
+      generate: identicalTierGenerate,
+    });
+    expect(router.acceptanceVerdict()).toBeNull();
+    await router.route('p1');
+    // Still null — no gate was supplied, so no verdict is recorded.
+    expect(router.acceptanceVerdict()).toBeNull();
+  });
+
+  it('acceptanceVerdict() returns null before the first route() even with a gate configured', () => {
+    const router = new DraftVerifyRouter({
+      generate: identicalTierGenerate,
+      acceptanceGate: { alpha: 0.05, hypothesis: 'one-sided' },
+    });
+    expect(router.acceptanceVerdict()).toBeNull();
+  });
+
+  it('rejects null hypothesis after a long run of accepted drafts', async () => {
+    const router = new DraftVerifyRouter({
+      // Identical-tier generate ⇒ every draft is accepted ⇒ +1 every route.
+      generate: identicalTierGenerate,
+      acceptanceGate: { alpha: 0.05, hypothesis: 'one-sided' },
+    });
+    let lastVerdict = null;
+    for (let i = 0; i < 30; i++) {
+      await router.route(`prompt-${i}`);
+      lastVerdict = router.acceptanceVerdict();
+      if (lastVerdict?.rejected) break;
+    }
+    expect(lastVerdict).not.toBeNull();
+    expect(lastVerdict!.rejected).toBe(true);
+    expect(lastVerdict!.observations).toBeGreaterThan(0);
+  });
+
+  it('does not reject after a long run of rejected drafts (perfect disagreement)', async () => {
+    const router = new DraftVerifyRouter({
+      // Different-tier generate ⇒ every draft is rejected ⇒ -1 every route.
+      generate: differentTierGenerate,
+      acceptanceGate: { alpha: 0.05, hypothesis: 'one-sided' },
+    });
+    for (let i = 0; i < 50; i++) {
+      await router.route(`prompt-${i}`);
+    }
+    const verdict = router.acceptanceVerdict();
+    expect(verdict).not.toBeNull();
+    expect(verdict!.rejected).toBe(false);
+    expect(verdict!.observations).toBe(50);
+  });
+
+  it('acceptanceVerdict() is a snapshot read — does not advance the e-process', async () => {
+    const router = new DraftVerifyRouter({
+      generate: identicalTierGenerate,
+      acceptanceGate: { alpha: 0.05, hypothesis: 'one-sided' },
+    });
+    await router.route('p1');
+    await router.route('p2');
+    const v1 = router.acceptanceVerdict();
+    const v2 = router.acceptanceVerdict();
+    const v3 = router.acceptanceVerdict();
+    expect(v1!.observations).toBe(2);
+    expect(v2!.observations).toBe(2);
+    expect(v3!.observations).toBe(2);
+    expect(v1!.evidence).toBe(v2!.evidence);
+  });
+
+  it('does not change route() behavior when the gate is configured (bit-exact preserved)', async () => {
+    const withoutGate = new DraftVerifyRouter({
+      generate: identicalTierGenerate,
+    });
+    const withGate = new DraftVerifyRouter({
+      generate: identicalTierGenerate,
+      acceptanceGate: { alpha: 0.05, hypothesis: 'one-sided' },
+    });
+    const prompts = ['alpha', 'beta', 'gamma', 'delta'];
+    for (const p of prompts) {
+      const a = await withoutGate.route(p);
+      const b = await withGate.route(p);
+      expect(b.output).toBe(a.output);
+      expect(b.draftAccepted).toBe(a.draftAccepted);
+      expect(b.draftOutput).toBe(a.draftOutput);
+    }
+  });
+});

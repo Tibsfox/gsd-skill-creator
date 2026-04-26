@@ -38,6 +38,7 @@
  */
 
 import type { Preloader } from '../cache/preload.js';
+import { anytimeGate, type AnytimeGateConfig, type AnytimeGateInstance, type AnytimeGateResult } from './anytime-gate.js';
 
 // ─── Model tier vocabulary ───────────────────────────────────────────────────
 
@@ -80,6 +81,22 @@ export interface RouterConfig {
    * Required; no default (callers always supply a concrete function).
    */
   generate: GenerateFn;
+
+  /**
+   * JP-002 — opt-in anytime-valid acceptance-rate gate. When supplied, the
+   * router accumulates draft-accept indicators across `route()` calls and
+   * exposes a sequential test verdict via `acceptanceVerdict()`. The metric
+   * fed to the gate is `+1` when a route's `draftAccepted` is true, `-1`
+   * otherwise — bounded, mean-zero under the null "draft tier is unreliable",
+   * positive in expectation when the draft tier matches the verifier
+   * frequently. Type-I error bound holds at any sample size, so callers may
+   * poll the verdict after every route safely.
+   *
+   * The gate does NOT change `route()`'s pipeline or output. It is an
+   * observation surface only — callers read `acceptanceVerdict()` to decide
+   * whether to switch to a draft-only path on a future request.
+   */
+  acceptanceGate?: AnytimeGateConfig;
 }
 
 export interface RouteResult {
@@ -133,12 +150,19 @@ export class DraftVerifyRouter {
   private _draftAccepts = 0;
   /** Instrumentation: number of preloader hits (warm cache consulted). */
   private _preloadHitsBefore = 0;
+  /** JP-002: anytime-valid acceptance-rate gate (null when unconfigured). */
+  private readonly _acceptanceGate: AnytimeGateInstance | null;
+  /** JP-002: snapshot of the most recent gate verdict (null until first route). */
+  private _lastAcceptanceVerdict: AnytimeGateResult | null = null;
 
   constructor(config: RouterConfig) {
     this.draftTier = config.draftTier ?? 'haiku';
     this.verifyTier = config.verifyTier ?? 'sonnet';
     this.preloader = config.preloader;
     this.generate = config.generate;
+    this._acceptanceGate = config.acceptanceGate
+      ? anytimeGate.create(config.acceptanceGate)
+      : null;
   }
 
   // ─── Public API ─────────────────────────────────────────────────────────────
@@ -185,6 +209,16 @@ export class DraftVerifyRouter {
     const draftAccepted = draftOutput === verifyOutput;
     if (draftAccepted) this._draftAccepts++;
 
+    // JP-002 — feed the indicator into the anytime-valid gate (if configured).
+    // +1 = draft matched verify; -1 = draft missed. The e-process accumulates
+    // across calls; the latest verdict is cached for callers to inspect via
+    // `acceptanceVerdict()` without adding a phantom observation.
+    if (this._acceptanceGate) {
+      this._lastAcceptanceVerdict = this._acceptanceGate.evaluate(
+        draftAccepted ? 1 : -1,
+      );
+    }
+
     return {
       output: verifyOutput,
       draftTier: this.draftTier,
@@ -209,6 +243,23 @@ export class DraftVerifyRouter {
   get acceptRate(): number {
     if (this._totalRoutes === 0) return 0;
     return this._draftAccepts / this._totalRoutes;
+  }
+
+  /**
+   * JP-002 — anytime-valid acceptance-rate verdict.
+   *
+   * Returns the most recent e-process verdict when an `acceptanceGate` was
+   * configured, or `null` when no gate is configured or no `route()` has run
+   * yet. `result.rejected === true` means the e-process has anytime-validly
+   * rejected the null hypothesis "draft tier is unreliable" at the configured
+   * α — i.e., the draft tier is matching the verifier often enough that
+   * switching to draft-only is statistically justified at the gate's level.
+   *
+   * Safe to call after every `route()`. This is a snapshot read: it does not
+   * add a phantom observation to the e-process.
+   */
+  acceptanceVerdict(): AnytimeGateResult | null {
+    return this._lastAcceptanceVerdict;
   }
 }
 
