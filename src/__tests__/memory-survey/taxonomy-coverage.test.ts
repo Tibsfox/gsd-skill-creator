@@ -21,7 +21,9 @@ import {
   looksLikePinnedRule,
   migrateDocument,
   migrateDirectory,
+// @ts-expect-error — .mjs migration script has no .d.ts; runtime-tested via this suite
 } from '../../../scripts/memory-migrate-taxonomy.mjs';
+// @ts-expect-error — .mjs migration script has no .d.ts; runtime-tested via this suite
 import { parseFrontmatter } from '../../../scripts/memory-migrate-half-life.mjs';
 
 describe('CF-MED-025: TAXONOMY constant', () => {
@@ -188,7 +190,7 @@ describe('CF-MED-025: migrateDirectory coverage on synthetic corpus', () => {
       expect(report.byType.observation).toBe(1);
 
       // Sum of byType counts equals scanned
-      const sum = Object.values(report.byType).reduce((a, b) => a + b, 0);
+      const sum = (Object.values(report.byType) as number[]).reduce((a, b) => a + b, 0);
       expect(sum).toBe(report.scanned);
 
       // Re-running is a no-op
