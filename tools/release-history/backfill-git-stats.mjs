@@ -40,8 +40,20 @@ function resolveTag(version) {
 }
 
 function countCommits(fromTag, toTag) {
-  const out = git('rev-list', '--count', `${fromTag}..${toTag}`);
-  return out !== null ? parseInt(out, 10) : null;
+  // Default rev-list counts every commit reachable from <toTag> but not
+  // from <fromTag>. For most milestones this matches the atomic-commit
+  // count exactly. Pathological cases — milestones tagged on a merge
+  // commit that pulled in a long-divergent parallel-engine branch (NASA,
+  // Seattle 360) — can produce counts in the thousands. We cap at 500:
+  // above that, fall back to first-parent --no-merges, which counts only
+  // the release-line atomic commits between the two tags. This bounds the
+  // worst-case inflation while leaving normal milestones unchanged.
+  const def = git('rev-list', '--count', `${fromTag}..${toTag}`);
+  if (def === null) return null;
+  const n = parseInt(def, 10);
+  if (n <= 500) return n;
+  const fp = git('rev-list', '--count', '--first-parent', '--no-merges', `${fromTag}..${toTag}`);
+  return fp !== null ? parseInt(fp, 10) : n;
 }
 
 function diffStats(fromTag, toTag) {
