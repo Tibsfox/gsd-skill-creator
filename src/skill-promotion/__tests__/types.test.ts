@@ -100,9 +100,9 @@ describe('computeROI', () => {
     expect(breakdown.marginBits).toBe(200 * 40 - 3); // 7997
   });
 
-  it('decision is "reject" in Wave 0 (placeholder)', () => {
+  it('decision is "install" when marginBits > 0 (JP-005 gate, candidate has payoff 8000 > IK 3)', () => {
     breakdown = computeROI(candidate);
-    expect(breakdown.decision).toBe('reject');
+    expect(breakdown.decision).toBe('install');
   });
 
   it('preserves candidate reference in breakdown', () => {
@@ -111,20 +111,20 @@ describe('computeROI', () => {
   });
 });
 
-// ─── shouldInstall Wave 0 placeholder ────────────────────────────────────────
+// ─── shouldInstall JP-005 gate ────────────────────────────────────────────────
 
-describe('shouldInstall (Wave 0 placeholder)', () => {
-  it('returns false for a clearly positive-ROI candidate', () => {
+describe('shouldInstall (JP-005 real gate)', () => {
+  it('returns true for a clearly positive-ROI candidate', () => {
     const highROI: SkillCandidate = {
       id: 'high-roi-skill',
       estimatedUses: 1_000_000,
       perUseSavingsBits: 1000,
       estimatedIK: 1,
     };
-    expect(shouldInstall(highROI)).toBe(false);
+    expect(shouldInstall(highROI)).toBe(true);
   });
 
-  it('returns false for a zero-use candidate', () => {
+  it('returns false for a zero-use candidate (payoffBits = 0 < IK = 1)', () => {
     const noUse: SkillCandidate = {
       id: 'zero-use-skill',
       estimatedUses: 0,
