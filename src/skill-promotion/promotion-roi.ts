@@ -50,8 +50,8 @@ export function computeROI(candidate: SkillCandidate): ROIBreakdown {
   const installCostBits = candidate.estimatedIK; // installCostJoules / LANDAUER_FLOOR_JPB
   const marginBits = payoffBits - installCostBits;
 
-  // Wave 0 placeholder: decision gate deferred to JP-005 (Wave 2).
-  const decision: 'install' | 'reject' = 'reject';
+  // JP-005 (Wave 2): real ROI gate — install iff marginBits > 0.
+  const decision: 'install' | 'reject' = marginBits > 0 ? 'install' : 'reject';
 
   return {
     candidate,
@@ -65,15 +65,22 @@ export function computeROI(candidate: SkillCandidate): ROIBreakdown {
 // ─── shouldInstall ────────────────────────────────────────────────────────────
 
 /**
- * Top-level promotion gate.
+ * Top-level promotion gate (JP-005, Wave 2, phase 835).
+ *
+ * Implements the full thermodynamic ROI gate:
+ *
+ *   ROI(skill) > 0  ⟺  N_uses · per_use_savings > Landauer_floor · I_K
+ *
+ * Equivalently (normalised to bits by dividing both sides by LANDAUER_FLOOR_JPB):
+ *
+ *   payoffBits > estimatedIK   →  marginBits > 0   →  install
+ *
+ * Reference: arXiv:2604.20897 §3 — deployment-horizon ROI gate.
  *
  * @param candidate - Skill candidate to evaluate.
- * @returns `true` if the skill should be installed, `false` otherwise.
- *
- * **Wave 0 placeholder**: always returns `false`.  JP-005 (Wave 2) replaces
- * this with the real thermodynamic gate: `computeROI(candidate).marginBits > 0`.
+ * @returns `true` if ROI > 0 (payoffBits > Landauer floor × I_K); `false`
+ *   otherwise.
  */
-export function shouldInstall(_candidate: SkillCandidate): boolean {
-  // Intentional Wave 0 placeholder — JP-005 (phase 835) replaces this body.
-  return false;
+export function shouldInstall(candidate: SkillCandidate): boolean {
+  return computeROI(candidate).marginBits > 0;
 }
