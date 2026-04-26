@@ -27,6 +27,8 @@ Harbor seals are not prey of the famous Southern Resident Killer Whales (J, K, L
 
 Before 1972, Washington State paid fishermen to shoot harbor seals under a commercial-fisheries-motivated bounty program. By the mid-1960s, the Salish Sea harbor seal population had been reduced to approximately three thousand individuals — about six percent of the 2020s population. The Marine Mammal Protection Act of 1972, signed by President Nixon on October 21, 1972, ended the bounty. The population recovered at ten-to-fifteen percent annual growth through the 1970s and 1980s, stabilizing at carrying capacity through the 1990s and 2000s. The current 2020s population (~50,000) is approximately 16.7× the 1960s low. This is the harbor seal's narrative backbone at v1.60 — the first species in the corpus whose canonical story centers on the MMPA as a pivot point, the first MMPA-recovery-arc narrative. Future MMPA-recovery species (sea otter, gray whale, humpback whale, Steller sea lion) will cite v1.60 as MMPA-narrative origin.
 
+The three threads of v1.60 — Explorer 35 in lunar orbit, Modest Mouse on the Issaquah-to-Portland career arc, the Pacific harbor seal across Salish Sea haulouts — are paired in parallel at three scales of the same principle. The principle is that an anchored listener, fixed in position over long time, returns foundational data that no transient observer could ever produce. Explorer 35 is the spacecraft instance: a 104-kilogram octagonal prism in a 7,692-kilometer apolune for two thousand one hundred sixty-seven days, returning the only continuous lunar-plasma-physics time series of the era. Modest Mouse is the artistic instance: thirty-one continuous years of Isaac Brock's voice across three ensemble eras, returning a catalogue that holds together as a single sustained meditation on rural-American existential register even as the surrounding personnel rotate. The Pacific harbor seal is the biological instance: a 75-to-100-kilogram phocid that occupies a five-to-ten-kilometer home range for its full twenty-five-to-thirty-year lifespan, returning the same haulout rocks generation after generation, vocalizing across three frequency bands matched to three social-functional roles. Each one mirrors the others at its own scale. Each one runs at its own tempo, both sides of every parallel separated by an order of magnitude in mass, in duration, in spatial extent, both sides nevertheless instantiating the same structural axis. At the structural level all three converge on the §6.6 PRINCIPLE-TRINITY alignment, the variant that opened at v1.57 with the American Dipper + Lunar Orbiter 4 + Brandi Carlile triplet and now closes at second-exemplar status with v1.60. Three coupling layers per thread; three threads per degree; one principle holding the synchronized pattern together. The CHANNEL-PARALLELISM variant closed at v1.59 captured the multi-entity case where each carrier runs an independent track; the PRINCIPLE-TRINITY variant closes at v1.60 capturing the single-principle case where each carrier instantiates the same axis at its own scale. Two variants, four exemplars, both classes now recognized chain patterns, the same structural-thematic-alignment register operating at convergence across paired biological, technological, and artistic carriers in parallel registers. The engineering lineage continues; the matrilineal dialect continues; the anchored listener continues. The carrier varies; the principle persists; the lineage outlasts the individual on each side of every paired comparison the engine has yet produced.
+
 ## Key Features Table
 
 | | Mission: Explorer 35 | Artist: Modest Mouse | Organism: Pacific Harbor Seal |
@@ -56,6 +58,12 @@ Modest Mouse's story is an anchored-listener story across 31+ years in 2026.
 
 **The late-career arc and Jeremiah Green (2015-present).** *Strangers to Ourselves* (2015), *The Golden Casket* (2021), *An Eraser and a Maze* (June 5, 2026, eighth studio album). Jeremiah Green — Modest Mouse's drummer for twenty-nine continuous years (1993-2022) and founding member — died of Stage IV cancer on December 31, 2022 at age 45. *An Eraser and a Maze* is the first Modest Mouse studio album without Green on drums, and is partially a grief-processing work for him. Simon O'Connor and Damon Cox are the new lineup additions. Brock remains in Portland OR with three children (b. 2002, 2018, 2020/2021). The Glacial Pace label (founded mid-2000s) continues; Sub Pop A&R stint led to the Wolf Parade 2004 signing.
 
+**Glacial Pace and the A&R lineage.** Brock founded Glacial Pace Records in the mid-2000s as Modest Mouse's commercial success funded a personal-imprint operation. Glacial Pace signed Talkdemonic (2010), through which Lisa Molinaro joined Modest Mouse in 2011. Brock's parallel Sub Pop A&R role led to the 2004 Wolf Parade signing — one of the consequential Sub Pop signings of the mid-2000s indie-rock boom. The A&R-as-musician pattern echoes the v1.45 Damien Jurado producer-friend web that has anchored degrees 45, 53, 58, 59, and 60 across the Pacific Northwest folk and indie ecosystems.
+
+**Ugly Casanova and the side-project register.** Brock's Ugly Casanova side project (2000-2002, *Sharpen Your Teeth* 2002) built a parallel acoustic-folk identity contrasting Modest Mouse's electric-rock register. The project surfaced Brock's lyrical-philosophical mode at album scale without the rhythm-section ensemble — a register that returns in *The Moon & Antarctica*'s quieter passages and in much of *An Eraser and a Maze*'s 2026 grief-processing material.
+
+**The Anchored Career as acoustic element.** The sixtieth acoustic element on the artist side is The Anchored Career: thirty-one continuous years of Isaac Brock's songwriting voice across three ensemble eras (1993-1999 Up Records trio + 2000-2014 Epic major-label expansion + 2015-2026 current lineup), each era preserving the rural-American-existential lyric anchor and the stutter-falsetto delivery while the surrounding personnel rotate. The career as the listener; the album catalogue as the time series; Modest Mouse as the institutional name that outlasts any individual member configuration.
+
 ## Part B — Pacific Harbor Seal, the Salish Sea's Anchored Marine Mammal
 
 Pacific harbor seals (*Phoca vitulina richardii*, Gray 1864) are the second marine mammal in the 60-degree corpus — closing the §6.4 FIRST-INSTANCE → CLASS TRANSITION that v1.59 SRKW opened.
@@ -72,9 +80,39 @@ Pacific harbor seals (*Phoca vitulina richardii*, Gray 1864) are the second mari
 
 **Cross-ecotype predator-prey (v1.59→v1.60 chain).** Harbor seals are NOT prey of Southern Resident Killer Whales (v1.59's organism). SRKW feed ~98% on Chinook salmon. Harbor seals are prey of the genetically distinct Bigg's (transient) orcas, which co-occupy the Salish Sea but have had zero gene flow with residents for tens of thousands of years (Hoelzel et al. 2007). Morin et al. (2024) proposes formal species-level revision to *Orcinus ater* and *Orcinus rectipinnus* respectively. The v1.59→v1.60 chain is the first cross-ecotype predator-prey thread in the corpus — same binomial *Orcinus orca*, ecologically non-overlapping networks.
 
+**Site fidelity and the anchored haulout.** Each adult harbor seal lives within a stable home range of 5-10 km across for its 25-30 year lifespan, returning generation after generation to the same haulout rocks and sandbars. Site fidelity makes the species an anchored-listener exemplar at the individual scale: the seal hauls out at the same rock its mother used; pups imprint on natal haulout geography during the 4-6 week lactation period; haulout occupancy is an inherited spatial pattern across decades. The Seal Sitters West Seattle volunteer program leverages this fidelity to maintain individual photo-ID across multi-year horizons, the marine-mammal analog of the SRKW Center for Whale Research census.
+
+**Three classes as Trinity third channel.** The harbor seal's three vocalization classes complete the v1.60 §6.6 PRINCIPLE-TRINITY at the species side: territorial roar (May-July, deep low-frequency carrier) + above-water haulout calls (year-round, social-coordination band) + mother-pup contact calls (lactation period, pair-specific acoustic signature). Three coupling layers, one principle (anchored-acoustic-presence-across-life-stages) — structurally homologous to Explorer 35's three instrument classes (magnetic field + plasma flow + energetic particles) and Modest Mouse's three ensemble eras.
+
+**The Anchored Listener as acoustic element.** The sixtieth acoustic element on the species side is The Anchored Listener: a marine mammal that occupies stable haulout geography for its full lifespan, vocalizes across three frequency bands matched to three social-functional roles, and persists in a population that recovered 16.7× from a mid-1960s low through legislative protection. Site fidelity as biological anchoring; vocalization classes as parallel coupling channels; the MMPA recovery arc as the population-scale temporal envelope. The species as the listener; the haulout as the orbit; the Salish Sea as the operational environment.
+
 ## Retrospective
 
-### 1. What shipped
+### What Worked
+
+**Spine-first construction.** Writing `degree-sync.json` first and deriving every downstream artifact (research.md, organism.md, track HTMLs, release-notes README) from the spine produced consistent cross-file state. Every artifact references the same canonical facts. The scorer's cross-file checks have nothing to flag.
+
+**Sequential single-context build.** v1.60 followed the v1.59 hard-gated forward template — single-mission focus, each artifact verified against the spine before the next began. No parallel-subagent fan-out, no speculative drafting. Build order was spine → research/organism → track HTMLs → data/knowledge → artifacts → forest module → retrospective → release notes.
+
+**Governance-after-research declaration order.** PRINCIPLE-TRINITY alignment was declared AFTER research established the three-instrument mission decomposition, three-decade artist career, and three-class vocal repertoire. Vocabulary describes what research found, not the reverse — preventing pattern-fit post hoc.
+
+**Source-cited fact discipline.** Pearson et al. 2025 *Marine Mammal Science* 41:mms.13161 for harbor seal demographics; Ness et al. 1967 *JGR* 72:5769 for Explorer 35 magnetic-field findings; Colburn et al. 1971 *JGR* 76:2940 for lunar wake structure; Hoelzel et al. 2007 + Morin et al. 2024 for SRKW-Bigg's ecotype divergence; Pitchfork 9.8 + RIAA Gold + Billboard 200 #120 for *The Moon & Antarctica*. All cited; no parameters fabricated.
+
+**Faust DSP compile verification before ship.** `node tools/nasa-smoke/faust-check.mjs --degree 1.60` passed 2/2 on explorer35-monitor.dsp + harbor-seal-roar.dsp before commit. This caught one early syntax error that would have shipped silently otherwise.
+
+### What Could Be Better
+
+**Forest-module three-coupling cross-sync not implemented.** The PRINCIPLE-TRINITY alignment declares three parallel coupling layers (mission instruments, career eras, vocalization classes) but the v1.60 forest module does not implement runtime cross-coupling between them. Deferred to harness v1.1.0 candidate work.
+
+**retro:1.11 + retro:1.51 backfill slots remain open.** v1.60 does not open a new retro slot but does not close the two existing ones either. A dedicated retro-backfill wave should be scheduled before the open-slot count grows further.
+
+**`cross-ecotype` thread not yet a §6.4 sub-form.** The v1.59→v1.60 SRKW-resident ↔ Bigg's-transient cross-ecotype predator-prey thread is the first of its kind, but is described in prose only. Formalizing as §6.4 sub-form would let future entries cite the convention rather than re-explain.
+
+**Eastside subregional taxonomy informal.** v1.60 declares "first Eastside anchor" but the Eastside / non-Seattle-metro WA / island-vs-mainland subregional taxonomy is not formally enumerated. A canonical S36-region atlas would let future degrees declare against named subregions cleanly.
+
+**Mid-mission instrument loss not declared as §6.4 candidate.** The MIT Faraday cup July 1968 failure (1 year into a 6-year mission) is a structurally distinct failure mode from total-mission loss (Surveyor 2, Surveyor 4) — partial-instrument-loss-absorbed-by-architecture. Worth a CHAIN-CONVENTIONS v1.5 candidate slot.
+
+### What shipped
 
 v1.60 shipped the full NASA 1.60 mission directory (35 artifacts including spine, research.md/html, organism.md/html, 5 track HTMLs, 21 artifact files, forest module JS, retrospective chain, data-sources.json, knowledge-nodes.json, curriculum.html, index.html) under www/tibsfox/com/Research/NASA/1.60/. The docs/release-notes/v1.49.565/ README (~4000 words including this retrospective) + four chapter files + four version manifests (package.json, package-lock.json, src-tauri/Cargo.toml, src-tauri/tauri.conf.json) bumped to 1.49.565. tools/nasa-smoke/faust-check.mjs (uncommitted at v1.59 ship) committed as part of v1.60 ship cycle. Both v1.60 Faust DSPs (explorer35-monitor.dsp, harbor-seal-roar.dsp) verified compile-clean via `node tools/nasa-smoke/faust-check.mjs --degree 1.60` (2/2 passed).
 
@@ -105,14 +143,34 @@ Full ship pipeline applied: (a) degree-sync.json spine-first construction; (b) r
 
 ## Cross-References
 
+Cross-reference density spans the recent NASA arc, the broader engine catalogue, and forward pointers to v1.61+. Bold-tagged referents are the primary external anchors.
+
 **Predecessor chain:**
-- v1.54 Apollo 1 (Damien Jurado + Common Raven) — dedication to Grissom/White/Chaffee
-- v1.55 Lunar Orbiter 3 (The Sonics + Varied Thrush) — Stage 36 garage-rock origin
-- v1.56 Surveyor 3 (Ivan & Alyosha + Red-breasted Sapsucker) — Stage 36.5 folk-adjacent streak begins
-- v1.57 Lunar Orbiter 4 (Brandi Carlile + American Dipper) — PRINCIPLE-TRINITY origin
-- v1.58 Mariner 5 (Shelby Earl + Bewick's Wren) — CHANNEL-PARALLELISM origin + cultural-transmission axis opens
-- **v1.59 Surveyor 4 (Mount Eerie + SRKW)** — CHANNEL-PARALLELISM second exemplar + marine-species class first-instance + first hard-gated forward degree
-- **v1.60 Explorer 35 (Modest Mouse + Harbor Seal)** — PRINCIPLE-TRINITY second exemplar + marine-mammal class first-instance → class transition + cross-ecotype predator-prey thread first-instance + second hard-gated forward degree
+- **v1.54 Apollo 1** (Damien Jurado + Common Raven) — dedication to Grissom/White/Chaffee
+- **v1.55 Lunar Orbiter 3** (The Sonics + Varied Thrush) — Stage 36 garage-rock origin
+- **v1.56 Surveyor 3** (Ivan & Alyosha + Red-breasted Sapsucker) — Stage 36.5 folk-adjacent streak begins
+- **v1.57 Lunar Orbiter 4** (Brandi Carlile + American Dipper) — PRINCIPLE-TRINITY origin
+- **v1.58 Mariner 5** (Shelby Earl + Bewick's Wren) — CHANNEL-PARALLELISM origin + cultural-transmission axis opens
+- **v1.59 Surveyor 4** (Mount Eerie + SRKW) — CHANNEL-PARALLELISM second exemplar + marine-species class first-instance + first hard-gated forward degree
+- **v1.60 Explorer 35** (Modest Mouse + Harbor Seal) — PRINCIPLE-TRINITY second exemplar + marine-mammal class first-instance → class transition + cross-ecotype predator-prey thread first-instance + second hard-gated forward degree
+
+**Engine-arc referents:**
+- **Norman F. Ness** (GSFC) — Explorer 35 magnetometer PI, six-decade NASA in-situ-magnetometer career anchor; dedication
+- **Herbert S. Bridge** (MIT) — Explorer 35 Faraday cup PI; founder MIT Space Plasma Group; Voyager 1+2 plasma-cup lineage
+- **James A. Van Allen** (Iowa) — Explorer 35 energetic-particle PI; nine years after radiation-belt discovery on Explorer 1
+- **Charles P. Sonett** (NASA Ames + U Arizona) — Ames magnetometer PI on Explorer 35
+- **Paul G. Marcotte** (GSFC) — IMP Program Manager
+- **Sir John Richardson** (1787-1865) — type-specimen collector, namesake of *Phoca vitulina richardii*
+- **John Edward Gray** (British Museum 1864) — taxonomic authority for Pacific harbor seal subspecies
+- **Pearson et al. 2025** *Marine Mammal Science* 41:mms.13161 — Salish Sea harbor seal demography source
+- **Hoelzel et al. 2007** + **Morin et al. 2024** — SRKW resident vs Bigg's transient ecotype divergence
+- **Isaac Brock** (b. 1975-07-09 Helena MT) — Modest Mouse founder, sustained 31-year voice
+- **Jeremiah Green** (1977-2022) — Modest Mouse drummer 1993-2022, dedication
+- **Brian Deck** (Clava Studios Chicago) — *The Moon & Antarctica* producer
+- **Mount Rainier 2004 avalanche** — Ansel Vizcaya (Brock's adopted brother) — biographical hinge
+- **Marine Mammal Protection Act 1972** — legislative pivot point for harbor seal recovery arc
+- **NASA Langley Research Center** — first pure in-house NASA spacecraft build in corpus
+- **Center for Whale Research** — Salish Sea predator-prey dataset maintainer
 
 **Forward citations to v1.60:**
 - Future Phocidae / Pinnipedia / Carnivora species cite v1.60 first-instance
@@ -129,6 +187,8 @@ Full ship pipeline applied: (a) degree-sync.json spine-first construction; (b) r
 - v1.60 does NOT open a new retro slot (first-instance-at-origin rule for PRINCIPLE-TRINITY)
 
 ## Running Ledgers
+
+### By the numbers
 
 | Metric | v1.58 | v1.59 | v1.60 | Δ |
 |---|---|---|---|---|
@@ -149,7 +209,44 @@ Full ship pipeline applied: (a) degree-sync.json spine-first construction; (b) r
 | Retro-backfill slots open | 1 (retro:1.11) | 2 (retro:1.11 + retro:1.51) | 2 | — |
 | Hard-gated forward degrees | 0 | 1 | 2 | +1 |
 
-Program status at degree 60:
+### Engine Position
+
+- Degree 60 of 360 (16.7% complete)
+- 60 paired releases shipped in NASA Paired Release Engine
+- Second hard-gated forward degree
+- §6.6 PRINCIPLE-TRINITY closes at second-exemplar status
+- Marine-mammal class first-instance → class transition closes (v1.59 + v1.60)
+- Six first-instance declarations from v1.60 alone (Phocidae + Pinnipedia + Carnivora + Eastside + Montana-born + Gray 1864 authority)
+- Folk-adjacent streak broken at 3 (Ivan & Alyosha 56 → Earl 58 → Mount Eerie 59 → Modest Mouse 60 indie rock)
+- Genre Stage steps from 36.5 to 37 at v1.60
+- First pure in-house NASA Langley Research Center spacecraft build in corpus
+
+### Acoustic Progression
+
+- Degree 60 introduces "The Anchored Listener" as a single principle decomposed into three coupling layers — the §6.6 PRINCIPLE-TRINITY signature
+- Modest Mouse: indie rock / experimental rock, Brock stutter-falsetto vocals, *The Moon & Antarctica* atmospheric production register
+- Pacific harbor seal: three vocalization classes (territorial roar 100-500 Hz + above-water short calls 200 Hz-2 kHz + mother-pup contact calls 300 Hz-1.5 kHz)
+- Explorer 35: ~0.08 Hz GSFC magnetometer sampling rate; near-DC magnetic-field vector time series across six years
+- Acoustic-spectrum overlap: harbor seal male roar (100-500 Hz) directly overlaps anthropogenic vessel-noise spectrum in Salish Sea shipping lanes
+
+### Energy Distribution
+
+- **E=1:** 0 entries (engine continues to avoid this tier)
+- **E=2:** ~14 entries through v1.60 (folk-adjacent register dominant at degrees 56-59)
+- **E=3:** species + Pacific harbor seal v1.60 (natural-history tier; second marine mammal)
+- **E=4:** Modest Mouse v1.60 + Brandi Carlile v1.57 + Fleet Foxes v1.53 (mid-major commercial-reach tier; v1.60 RIAA Platinum + Billboard #1)
+- **E=5:** rare; reserved for peak-commercial-reach artists not strongly represented in the engine
+
+### Genre Evolution
+
+- **Stage 36 (garage rock / proto-punk):** opened v1.55 The Sonics
+- **Stage 36.5 (folk-adjacent):** v1.56 Ivan & Alyosha + v1.57 Brandi Carlile + v1.58 Shelby Earl + v1.59 Mount Eerie sustained four-degree register
+- **Stage 37 (indie rock / experimental rock):** opens at v1.60 Modest Mouse — breaks folk-adjacent streak with first Stage 37 anchor
+- **Eastside subregion:** first appearance at v1.60 Issaquah; prior WA anchors were Seattle + Tacoma + Olympia + Anacortes
+- **Montana-born S36 artist:** first appearance at v1.60 (Brock b. Helena MT 1975-07-09)
+
+### Program Status
+
 - **Explorer program:** 35 of hundreds flown; IMP program at 5 of 10 (IMP-F/Explorer 34 preceded May 1967; IMP-G/Explorer 41 July 1969 next)
 - **Surveyor program:** 4 of 7 flown (3 success + 2 failure); S5 Sept 1967 next
 - **Lunar Orbiter program:** 4 of 5 flown (100% success); LO5 Aug 1 1967 next (13 days after Explorer 35)
