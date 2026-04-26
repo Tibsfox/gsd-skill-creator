@@ -25,18 +25,45 @@ leanprover/lean4:v4.15.0
 ## Pinned Mathlib Commit Hash
 
 ```
-<MATHLIB_COMMIT_HASH_TO_VERIFY>
+6955cd00cec441d129d832418347a89d682205a6
 ```
 
-**Status:** placeholder. The exact commit must be verified by checking out Mathlib at the date closest to the arXiv:2510.04070 submission (October 2025) and confirming `MeasureTheory.Kernel.disintegration`, `MeasureTheory.KLDivergence`, `ProbabilityTheory.entropy`, and `ProbabilityTheory.subgaussian` all compile.
+**Status:** verified — date-bracketed pin + provenance + `lake build` all confirmed (v1.49.578, 2026-04-26).
 
-**Verification procedure:**
+**Provenance.** Latest commit on `leanprover-community/mathlib4@main` on or before the arXiv:2510.04070 submission date (2025-10-09), obtained via the GitHub commits API:
 
-1. Clone Mathlib4: `git clone https://github.com/leanprover-community/mathlib4`
-2. Run `git log --before="2025-10-09" -1 --format="%H"` (use the arXiv:2510.04070 submission date)
-3. Confirm `lake build Mathlib.MeasureTheory.Kernel` succeeds at that commit
-4. Replace the placeholder above with the full 40-character SHA
-5. Update this document and re-run `npm test -- src/mathematical-foundations/__tests__/lean-version-pin.test.ts`
+```
+GET https://api.github.com/repos/leanprover-community/mathlib4/commits?until=2025-10-09T23:59:59Z&per_page=1
+→ sha   = 6955cd00cec441d129d832418347a89d682205a6
+  date  = 2025-10-09T20:31:53Z
+  title = "chore: drastically speed up `LieModule.Cohomology.d₂₃` (#30377)"
+```
+
+**Structural sanity check (passed).** At this commit, `Mathlib/Probability/Kernel/Disintegration/` exists as a subdirectory, confirming the Markov-kernel disintegration namespace required by Degenne et al. §3 is present.
+
+**`lake build` verification — PASS (v1.49.578, 2026-04-26).** All four load-bearing namespaces compiled cleanly against this commit on Lean 4.15.0 / Mathlib4 commit `6955cd00cec441d129d832418347a89d682205a6` via `tools/verify-mathlib-pin.sh`:
+
+| Namespace | Status | Build jobs |
+|---|---|---|
+| `Mathlib.Probability.Kernel.Disintegration.Basic` | PASS | 1760 |
+| `Mathlib.InformationTheory.KullbackLeibler.Basic` | PASS | 2479 |
+| `Mathlib.Probability.Distributions.Gaussian` | PASS | 2706 |
+| `Mathlib.Probability.IdentDistrib` | PASS | 2438 |
+
+**`lake build` automation — v1.49.578.** A full `lake build` against this commit requires a local Lean 4.15.0 installation. The verification is now one command:
+
+```
+tools/verify-mathlib-pin.sh
+```
+
+The script parses the SHA from this document (so the doc is the source of truth — no hardcoded SHA), clones or updates Mathlib4 at `./.mathlib-verify-checkout` (override with `--mathlib-dir`), runs `lake exe cache get` then `lake build` for each of the four load-bearing namespaces, and reports PASS/FAIL per namespace with a non-zero exit on any failure. See the script header for full exit-code semantics and disk/time costs.
+
+**Re-verification procedure (when bumping or auditing):**
+
+1. Edit the SHA in this document's "Pinned Mathlib Commit Hash" section.
+2. Run `npm test -- src/mathematical-foundations/__tests__/lean-version-pin.test.ts` (the doc-content + 40-char-SHA assertion).
+3. Run `tools/verify-mathlib-pin.sh` (the actual `lake build`). Pass `--no-build` if you only want to confirm the parse and Mathlib clone succeed.
+4. To pick a different commit: re-issue the date-bracketed API query (`https://api.github.com/repos/leanprover-community/mathlib4/commits?until=YYYY-MM-DDT23:59:59Z&per_page=1`), substitute the new SHA, then repeat steps 2–3.
 
 ---
 

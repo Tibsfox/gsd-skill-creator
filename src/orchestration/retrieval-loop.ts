@@ -28,6 +28,7 @@
 
 import type { SelectorDecision, SelectorOptions } from './selector.js';
 import { ActivationWriter } from '../traces/activation-writer.js';
+import { anytimeGate, type AnytimeGateConfig } from './anytime-gate.js';
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -64,6 +65,34 @@ export interface RetrievalOptions {
    * inside retrieveSingleTurn.
    */
   selector?: Omit<SelectorOptions, 'topK'>;
+
+  /**
+   * JP-002 — opt-in anytime-valid early-stop. When supplied, the loop feeds
+   * a per-turn stability metric into an anytime-valid gate (Ville's-inequality
+   * e-process); the loop exits early as soon as the gate rejects with at least
+   * `minTurns` observations. The Type-I error bound holds at any sample size,
+   * so the early stop is safe under continuous peeking.
+   *
+   * The default `metric` is the signed Jaccard similarity of the current and
+   * previous top-k id lists, mapped from [0, 1] to [-1, 1] (1.0 = identical
+   * top-k → metric +1; 0.0 = disjoint → metric -1). Callers can override with
+   * any bounded-in-[-1,1] stability signal.
+   *
+   * `convergence: 'anytime'` is set on `RetrievalResult` when this branch
+   * fires. When omitted, retrieval termination follows the original policy
+   * (max turns / convergence by exact-order match / no new evidence).
+   */
+  anytimeStop?: {
+    /** E-process configuration (e.g. `{ alpha: 0.05, hypothesis: 'one-sided' }`). */
+    config?: AnytimeGateConfig;
+    /** Minimum turns required before the gate may fire. Default: 2. */
+    minTurns?: number;
+    /**
+     * Stability metric — must return a value in [-1, 1].
+     * Default: `2 * jaccard(current, previous) - 1`.
+     */
+    metric?: (current: string[], previous: string[]) => number;
+  };
 }
 
 export interface TurnResult {
@@ -84,6 +113,14 @@ export interface RetrievalResult {
   turns: TurnResult[];
   /** True if the loop exited on stable top-k rather than maxTurns. */
   converged: boolean;
+  /**
+   * Reason the loop exited.
+   *   - `'max-turns'` — the loop ran maxTurns and did not converge
+   *   - `'stable-order'` — top-k id order matched the previous turn's
+   *   - `'no-evidence'` — no new evidence tokens harvested this turn
+   *   - `'anytime'` — JP-002 anytime-valid gate rejected (early stop)
+   */
+  exitReason: 'max-turns' | 'stable-order' | 'no-evidence' | 'anytime';
 }
 
 // ─── Scoring primitives (retrieval-local) ───────────────────────────────────
@@ -142,6 +179,30 @@ function sameOrder(a: string[], b: string[]): boolean {
   return true;
 }
 
+/**
+ * Jaccard similarity of two id lists, ignoring order.
+ * Returns 1.0 for identical sets, 0.0 for disjoint, NaN for two empty lists.
+ */
+function jaccard(a: string[], b: string[]): number {
+  if (a.length === 0 && b.length === 0) return Number.NaN;
+  const sa = new Set(a);
+  const sb = new Set(b);
+  let inter = 0;
+  for (const x of sa) if (sb.has(x)) inter++;
+  const union = sa.size + sb.size - inter;
+  return union === 0 ? Number.NaN : inter / union;
+}
+
+/**
+ * Default JP-002 stability metric: signed Jaccard mapped from [0,1] to [-1,1].
+ * Returns 0 (no evidence either way) when both lists are empty.
+ */
+function defaultStabilityMetric(current: string[], previous: string[]): number {
+  const j = jaccard(current, previous);
+  if (Number.isNaN(j)) return 0;
+  return 2 * j - 1;
+}
+
 // ─── Public API ─────────────────────────────────────────────────────────────
 
 /**
@@ -177,6 +238,15 @@ export async function retrieve(
   const accumulatedEvidence = new Set<string>();
   let previousTopIds: string[] = [];
   let converged = false;
+  let exitReason: RetrievalResult['exitReason'] = 'max-turns';
+
+  // JP-002 anytime-valid early-stop gate (created only when opts.anytimeStop
+  // is supplied; otherwise undefined and the loop runs the original policy).
+  const anytimeMinTurns = opts.anytimeStop?.minTurns ?? 2;
+  const anytimeMetric = opts.anytimeStop?.metric ?? defaultStabilityMetric;
+  const anytimeStopGate = opts.anytimeStop
+    ? anytimeGate.create(opts.anytimeStop.config ?? {})
+    : null;
 
   // Union: docId → best-observed match count across turns.
   const bestScore = new Map<string, number>();
@@ -233,12 +303,29 @@ export async function retrieve(
     // Convergence check (by top-k id order).
     if (detectConvergence && t > 1 && sameOrder(ids, previousTopIds)) {
       converged = true;
+      exitReason = 'stable-order';
       break;
     }
+
+    // JP-002 anytime-valid early-stop. Feeds the per-turn stability metric
+    // into the e-process; the gate's Type-I bound holds at any sample size,
+    // so peeking after every turn is safe. Skip turn 1 (no `previous` yet).
+    if (anytimeStopGate && t > 1) {
+      const stability = anytimeMetric(ids, previousTopIds);
+      const r = anytimeStopGate.evaluate(stability);
+      if (r.rejected && t >= anytimeMinTurns) {
+        converged = true;
+        exitReason = 'anytime';
+        previousTopIds = ids;
+        break;
+      }
+    }
+
     previousTopIds = ids;
 
     if (turnEvidence.length === 0) {
       converged = true;
+      exitReason = 'no-evidence';
       break;
     }
     currentQuery = `${query} ${[...accumulatedEvidence].join(' ')}`;
@@ -269,7 +356,7 @@ export async function retrieve(
     }
   }
 
-  return { topK: finalTopK, turns, converged };
+  return { topK: finalTopK, turns, converged, exitReason };
 }
 
 /**
@@ -320,5 +407,6 @@ export async function retrieveSingleTurn(
     topK: turnTop.map((x) => x.id),
     turns: [{ turn: 1, query, decisions, evidence: [] }],
     converged: true,
+    exitReason: 'stable-order',
   };
 }

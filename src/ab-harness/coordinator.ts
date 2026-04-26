@@ -41,6 +41,7 @@ import type { TractabilityClass } from '../tractability/selector-api.js';
 import { runSignificanceTest, type ABDecision, type SignificanceResult } from './stats.js';
 import { requiredSampleSize } from './sample-size.js';
 import { isABHarnessEnabled, type ABHarnessSettings } from './settings.js';
+import { observeKAxes, DEFAULT_LOG_PATH as DEFAULT_KAXIS_LOG_PATH } from './k-axis-telemetry.js';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -165,6 +166,30 @@ export interface RunABOptions {
 
   /** Override fork timestamp for tests. */
   ts?: number;
+
+  /**
+   * JP-010a — opt-in K-axis telemetry. When supplied, the coordinator records
+   * one K-axis observation per completed (or commit-decided) experiment via
+   * `observeKAxes`. Telemetry failure is non-fatal: the experiment outcome is
+   * unaffected if the JSONL append fails (e.g., read-only filesystem).
+   *
+   * When omitted, no telemetry is emitted and JP-010b falls back to K=3.
+   *
+   * Note: telemetry runs only on `status: 'completed'` outcomes. Disabled and
+   * error paths do not emit observations.
+   */
+  kAxes?: {
+    /** Domain the skill operates in (e.g. 'typescript', 'data-analysis'). */
+    userDomain: string;
+    /** Caller-estimated expertise level. */
+    expertiseLevel: 'beginner' | 'intermediate' | 'expert' | 'unknown';
+    /** Session context. */
+    sessionType: 'interactive' | 'batch' | 'ci' | 'unknown';
+    /** Optional extra axes preserved verbatim in the JSONL line. */
+    extraAxes?: Record<string, string>;
+    /** Override JSONL log path (defaults to DEFAULT_LOG_PATH). */
+    logPath?: string;
+  };
 }
 
 // ─── Coordinator ─────────────────────────────────────────────────────────────
@@ -323,6 +348,26 @@ export async function runAB(opts: RunABOptions): Promise<ABRunOutcome> {
         ts,
         emitReinforcement: false,
       });
+    }
+
+    // JP-010a — opt-in K-axis observation. Non-fatal on failure: the
+    // experiment outcome is what callers care about; telemetry is best-effort.
+    if (opts.kAxes) {
+      try {
+        await observeKAxes({
+          logPath: opts.kAxes.logPath ?? DEFAULT_KAXIS_LOG_PATH,
+          observation: {
+            timestamp: new Date().toISOString(),
+            experimentId: bid,
+            userDomain: opts.kAxes.userDomain,
+            expertiseLevel: opts.kAxes.expertiseLevel,
+            sessionType: opts.kAxes.sessionType,
+            extraAxes: opts.kAxes.extraAxes,
+          },
+        });
+      } catch {
+        // swallowed — telemetry must never affect verdict
+      }
     }
 
     return { status: 'completed', verdict, committed };
