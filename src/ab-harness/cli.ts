@@ -176,6 +176,19 @@ async function runFull(args: string[]): Promise<number> {
     branchesDir,
     runSkill,
     settings: { enabled: true },
+    // JP-010a — first real caller seed (v1.49.578). The CLI doesn't know
+    // the user's domain or expertise; we record what we can — session-type
+    // (CI vs interactive), the caller surface, and the skill's tractability
+    // class. Richer callers can supply userDomain / expertiseLevel directly.
+    kAxes: {
+      userDomain: 'unknown',
+      expertiseLevel: 'unknown',
+      sessionType: process.env.CI ? 'ci' : 'interactive',
+      extraAxes: {
+        caller: 'ab-harness-cli',
+        tractability,
+      },
+    },
   });
 
   if (result.status === 'disabled') {

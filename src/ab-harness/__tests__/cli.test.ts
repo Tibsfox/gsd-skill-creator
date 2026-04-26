@@ -229,3 +229,124 @@ describe('abCommand() — dispatch correctness', () => {
     vi.restoreAllMocks();
   });
 });
+
+// ─── JP-010a — CLI threads kAxes into runAB (v1.49.578 W5 first real caller seed)
+
+describe('JP-010a — abCommand() seeds K-axis telemetry from CLI invocations', () => {
+  beforeEach(() => {
+    process.env['SC_AB_HARNESS_ENABLED'] = '1';
+  });
+
+  it('writes a JSONL observation with caller=ab-harness-cli + sessionType derived from process.env.CI', async () => {
+    const { abCommand } = await import('../cli.js');
+    vi.spyOn(console, 'log').mockImplementation(() => {});
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    const tmpDir = await makeTmpDir();
+    const variantFile = join(tmpDir, 'variant.md');
+    const trunkFile = join(tmpDir, 'trunk.md');
+    // Same content for trunk + variant — guarantees runs are decisive without
+    // exercising real divergence semantics; the test cares only about telemetry.
+    const body = '# Skill\n## Description\nA test skill.\n## Instructions\nFollow the schema.\n'.repeat(20);
+    await fs.writeFile(trunkFile, body, 'utf8');
+    await fs.writeFile(variantFile, body + '\n## Variant\nMinor diff.\n', 'utf8');
+
+    // Capture original cwd + CI env; restore in finally.
+    const originalCwd = process.cwd();
+    const originalCi = process.env.CI;
+    process.env.CI = ''; // force 'interactive' branch deterministically
+
+    try {
+      // Chdir into tmpDir so the default JSONL log path resolves under it
+      // (DEFAULT_LOG_PATH is relative to cwd at call time).
+      process.chdir(tmpDir);
+
+      const exitCode = await abCommand([
+        'test-skill',
+        `--variant=${variantFile}`,
+        `--trunk=${trunkFile}`,
+        '--samples=11', // > 10 minSamples in coordinator
+        '--alpha=0.10',
+        '--tractability=tractable',
+        `--branches-dir=${join(tmpDir, 'branches')}`,
+      ]);
+
+      expect(exitCode).toBe(0);
+
+      const logPath = join(
+        tmpDir,
+        '.planning/missions/julia-parameter-implementation/k-axis-evidence/observations.jsonl',
+      );
+      const raw = await fs.readFile(logPath, 'utf8');
+      const lines = raw.split('\n').filter(l => l.length > 0);
+      expect(lines).toHaveLength(1);
+
+      const obs = JSON.parse(lines[0]);
+      expect(obs.userDomain).toBe('unknown');
+      expect(obs.expertiseLevel).toBe('unknown');
+      expect(obs.sessionType).toBe('interactive');
+      expect(obs.extraAxes).toEqual({
+        caller: 'ab-harness-cli',
+        tractability: 'tractable',
+      });
+      expect(typeof obs.experimentId).toBe('string');
+      expect(obs.experimentId.length).toBeGreaterThan(0);
+    } finally {
+      process.chdir(originalCwd);
+      if (originalCi === undefined) delete process.env.CI;
+      else process.env.CI = originalCi;
+      await cleanupDir(tmpDir);
+      vi.restoreAllMocks();
+    }
+  });
+
+  it('records sessionType=ci when process.env.CI is truthy', async () => {
+    const { abCommand } = await import('../cli.js');
+    vi.spyOn(console, 'log').mockImplementation(() => {});
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    const tmpDir = await makeTmpDir();
+    const variantFile = join(tmpDir, 'variant.md');
+    const trunkFile = join(tmpDir, 'trunk.md');
+    const body = '# Skill\n## Description\nCI path test.\n## Instructions\nDo the thing.\n'.repeat(20);
+    await fs.writeFile(trunkFile, body, 'utf8');
+    await fs.writeFile(variantFile, body + '\n## Variant\n', 'utf8');
+
+    const originalCwd = process.cwd();
+    const originalCi = process.env.CI;
+    process.env.CI = '1';
+
+    try {
+      process.chdir(tmpDir);
+
+      const exitCode = await abCommand([
+        'ci-test-skill',
+        `--variant=${variantFile}`,
+        `--trunk=${trunkFile}`,
+        '--samples=11',
+        '--alpha=0.10',
+        '--tractability=unknown',
+        `--branches-dir=${join(tmpDir, 'branches')}`,
+      ]);
+
+      expect(exitCode).toBe(0);
+
+      const logPath = join(
+        tmpDir,
+        '.planning/missions/julia-parameter-implementation/k-axis-evidence/observations.jsonl',
+      );
+      const raw = await fs.readFile(logPath, 'utf8');
+      const lines = raw.split('\n').filter(l => l.length > 0);
+      expect(lines).toHaveLength(1);
+      const obs = JSON.parse(lines[0]);
+      expect(obs.sessionType).toBe('ci');
+      expect(obs.extraAxes.tractability).toBe('unknown');
+    } finally {
+      process.chdir(originalCwd);
+      if (originalCi === undefined) delete process.env.CI;
+      else process.env.CI = originalCi;
+      await cleanupDir(tmpDir);
+      vi.restoreAllMocks();
+    }
+  });
+});
