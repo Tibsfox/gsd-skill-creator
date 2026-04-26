@@ -140,11 +140,14 @@ describe('honesty audit — historical heuristic constants are gone', () => {
     expect(source).toContain('Verified-against arXiv:2604.21849');
   });
 
-  it('Limitations section retains only the multivariate gap', () => {
-    // The W4 spec says the Limitations block is trimmed to one bullet about
-    // the multivariate gap — not the three bullets about the heuristic
-    // posterior + made-up constants.
-    expect(source).toContain('Univariate parameter only');
+  it('multivariate extension is wired (v1.49.580): docs point to src/bayes-ab/{sliced-wasserstein,ipm-boed-mv}', () => {
+    // v1.49.579 trimmed Limitations to just the multivariate gap. v1.49.580
+    // closes that gap by adding src/bayes-ab/sliced-wasserstein.ts +
+    // src/bayes-ab/ipm-boed-mv.ts; the Limitations block was replaced by a
+    // 'Multivariate extension' pointer.
+    expect(source).toContain('Multivariate extension');
     expect(source).toContain('sliced-Wasserstein');
+    expect(source).toContain('src/bayes-ab/sliced-wasserstein.ts');
+    expect(source).toContain('src/bayes-ab/ipm-boed-mv.ts');
   });
 });
