@@ -1,0 +1,8 @@
+* Surveyor 5 alpha-scatterer preamp — teaching circuit
+V1 in 0 DC 0 AC 1
+R1 in n1 1k
+C1 n1 out 100n
+R2 out 0 10k
+.ac dec 10 1 1Meg
+.print ac v(out)
+.end
