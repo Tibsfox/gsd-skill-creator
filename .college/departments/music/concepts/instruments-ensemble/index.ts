@@ -1,3 +1,16 @@
 export { acoustics } from './acoustics.js';
+export { altitudeScanProduction } from './altitude-scan-production.js';
+export { bodyResonantInstrumentTimbre } from './body-resonant-instrument-timbre.js';
+export { broadbandContinuousSpectrumArchivalTimbre } from './broadband-continuous-spectrum-archival-timbre.js';
+export { chamberProductionRoomInstrument } from './chamber-production-room-instrument.js';
+export { dualMediumVocalTimbre } from './dual-medium-vocal-timbre.js';
+export { elegyTimbreLossVector } from './elegy-timbre-loss-vector.js';
 export { ensemblePlaying } from './ensemble-playing.js';
+export { evaOverdubProduction } from './eva-overdub-production.js';
 export { instrumentFamilies } from './instrument-families.js';
+export { irregularPercussionMorseCadence } from './irregular-percussion-morse-cadence.js';
+export { matrilinealTimbralSignature } from './matrilineal-timbral-signature.js';
+export { monophonicDisplacementGesture } from './monophonic-displacement-gesture.js';
+export { multiFrameAssemblyMultiMediumMix } from './multi-frame-assembly-multi-medium-mix.js';
+export { rendezvousProductionAesthetic } from './rendezvous-production-aesthetic.js';
+export { vocalRepertoireAsTimbralIdentity } from './vocal-repertoire-as-timbral-identity.js';

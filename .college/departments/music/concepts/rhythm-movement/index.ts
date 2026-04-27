@@ -1,3 +1,10 @@
 export { meter } from './meter.js';
 export { rhythm } from './rhythm.js';
 export { syncopation } from './syncopation.js';
+export { polyrhythmTerminalAccelerando } from './polyrhythm-terminal-accelerando.js';
+export { pulseTimeEntrainment } from './pulse-time-entrainment.js';
+export { roundTripRhythmPassiveReflectorLoopYodel } from './round-trip-rhythm-passive-reflector-loop-yodel.js';
+export { evenSubdivisionPulseAbbreviatedBloomCycle } from './even-subdivision-pulse-abbreviated-bloom-cycle.js';
+export { dormancyModulatedPulse } from './dormancy-modulated-pulse.js';
+export { dielTrackingLongPeriodRhythm } from './diel-tracking-long-period-rhythm.js';
+export { informationTheoreticPulseCountEncoding } from './information-theoretic-pulse-count-encoding.js';

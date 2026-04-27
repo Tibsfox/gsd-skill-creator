@@ -12,23 +12,63 @@
     "wasserstein-hebbian",
     "tonnetz"
   ],
-  "fileCount": 179,
-  "rootDigest": "0cd7711e6fc71ed1ba175476fe9b769e72524cc8674d5f1ad1c63e0befcc47b3",
+  "fileCount": 201,
+  "rootDigest": "23b3f99f7ab84e1228900f43e02a9f9633982dc2a73b8e6b3c4d80f0113eafb3",
   "tree": [
+    {
+      "path": "orchestration/REFERENCES.md",
+      "sha256": "90d4cf15c87a6dd96c822a7670005ce405fad1f1845edc3cbd71292605205123",
+      "size": 3859
+    },
+    {
+      "path": "orchestration/__tests__/capcom-anytime-gate.test.ts",
+      "sha256": "71d974d8c68e442a700da3cb2768b220395b90926d74c890b40565fbd66888fa",
+      "size": 8473
+    },
+    {
+      "path": "orchestration/__tests__/draft-verify-router.test.ts",
+      "sha256": "6eb6267e024b9093c6689f10bb99380634ea22566f7bff2b7ed0b4108917b70f",
+      "size": 9234
+    },
     {
       "path": "orchestration/__tests__/fairness.test.ts",
       "sha256": "7e1939ddf742754ba4a052b4c86effefc6c77328d076f3bbc5c09ce642db241f",
       "size": 3481
     },
     {
+      "path": "orchestration/__tests__/mesh-degree-monitor.test.ts",
+      "sha256": "2382f08cebbd4397766867a7399843979847cadbef5e33539f56a4bc3eb79b97",
+      "size": 5795
+    },
+    {
+      "path": "orchestration/__tests__/miqp-cp-scheduler.test.ts",
+      "sha256": "4fafa87af8c83e02f684b12e59b5d8e4dc53faa7ff2f8b9540d8a9323cf46c23",
+      "size": 7445
+    },
+    {
       "path": "orchestration/__tests__/retrieval-loop.test.ts",
-      "sha256": "0691127b520dc4019959f94cf934a1c67a07583f49c6dedd3764ec0c95ea69eb",
-      "size": 8626
+      "sha256": "09e41ca4d30c4e06cc8c4b87b403efffc5c21a15d45767b762c4d92b68b2ec48",
+      "size": 12500
     },
     {
       "path": "orchestration/__tests__/selector.test.ts",
       "sha256": "b6f1aaf9eea60f3e97d70c550ee6f33bea8b62115a9679e86edbe2deda812e58",
       "size": 6823
+    },
+    {
+      "path": "orchestration/__tests__/wasserstein-prior.test.ts",
+      "sha256": "868213377e1effe5fe96ecf93a9cbc4fb9f06d56b546928b1dfacbacf31681c0",
+      "size": 3975
+    },
+    {
+      "path": "orchestration/anytime-gate.ts",
+      "sha256": "77ce966fe2526fc49ab64bd6d29f644b2635905bf5623538376a3643e169414a",
+      "size": 7361
+    },
+    {
+      "path": "orchestration/draft-verify-router.ts",
+      "sha256": "8b65e86bb199dead72c09415b7eccfaee778f197332f4e69d29e998b0ce1c632",
+      "size": 12013
     },
     {
       "path": "orchestration/index.ts",
@@ -51,9 +91,19 @@
       "size": 458
     },
     {
+      "path": "orchestration/mesh-degree-monitor.ts",
+      "sha256": "ac9d71da9d203f2295f9d0a175ac2d2d40a5b9c4bf5fe52ade6ac17947d95086",
+      "size": 10147
+    },
+    {
+      "path": "orchestration/miqp-cp-scheduler.ts",
+      "sha256": "5e95ea967b52cf7eb3daec451885cea8c4e6415931e015086b1fbfc746bbe9d5",
+      "size": 10098
+    },
+    {
       "path": "orchestration/retrieval-loop.ts",
-      "sha256": "a1c9f91712837fe5501e547de52207211f95eaa774c2f26fd3bc555813a7482f",
-      "size": 11784
+      "sha256": "604ea71ecb631b6fa0beb3aeb9a98eb375ed7061088db2d378af752c129b11ad",
+      "size": 15509
     },
     {
       "path": "orchestration/selector.ts",
@@ -181,6 +231,21 @@
       "size": 4747
     },
     {
+      "path": "orchestration/wasserstein-prior.ts",
+      "sha256": "cae3905101a82c9117eb2bc3862a5f33e677833f1a199a30d7b58694b7c38644",
+      "size": 6912
+    },
+    {
+      "path": "dacp/REFERENCES.md",
+      "sha256": "e5f2f023c1215d67e7f40820ba409c40523a8c88641998ee40abbfc2d9db5c46",
+      "size": 3392
+    },
+    {
+      "path": "dacp/__tests__/codec-fidelity.test.ts",
+      "sha256": "8518ddd659d06fc449cb76cde7a05edca39079bbd9a49e72282c089ced0487a2",
+      "size": 6565
+    },
+    {
       "path": "dacp/assembler/assembler.test.ts",
       "sha256": "4008afae3a4f15a25c5fe7b36820ffeb5a6455779af56c8f6899e25d17fff600",
       "size": 12252
@@ -279,6 +344,11 @@
       "path": "dacp/bus/types.ts",
       "sha256": "c18fe2fce55fdddad6293e4ff8f29b6f06684033fec86b9eaeeb6da64752bca9",
       "size": 2925
+    },
+    {
+      "path": "dacp/codec-fidelity.ts",
+      "sha256": "6968f9353ab890ae135a247146b0a87da577db7e146ed0e257dc2cdefdcb7c21",
+      "size": 7552
     },
     {
       "path": "dacp/fidelity/decision.test.ts",
@@ -486,6 +556,21 @@
       "size": 17136
     },
     {
+      "path": "memory/__tests__/scorer-integration.test.ts",
+      "sha256": "91e945aa968ec7ebb57917bb88d2b40ccc80f0ccfd9b58386e4e345d595a9679",
+      "size": 11542
+    },
+    {
+      "path": "memory/__tests__/standing-rules-preservation.test.ts",
+      "sha256": "5d2b6b40e2407d04297fd4978928fb87925f429d69e4ab19514d4d6b46c0ce06",
+      "size": 5688
+    },
+    {
+      "path": "memory/__tests__/survey-scorer.test.ts",
+      "sha256": "4600083735a5c7af74a35a038f9aa14d199382b47c82878a6bc19e5a65f3825a",
+      "size": 7124
+    },
+    {
       "path": "memory/__tests__/tag-types.test.ts",
       "sha256": "d0bdfa94dc5d73c46af68de93146b4abbd66b22b28c9b5d3f8aaf02606c0817b",
       "size": 2283
@@ -631,6 +716,11 @@
       "size": 6645
     },
     {
+      "path": "memory/survey-scorer.ts",
+      "sha256": "b1aaa1e09b145231b1725768b6492bdd1918e8f643cb1febadd6b4138b750183",
+      "size": 7464
+    },
+    {
       "path": "memory/tag-types.ts",
       "sha256": "834b3bbe5b77bf34abce611c2e36c233f7fcc65b1560469b58ce6b608d19dedd",
       "size": 1145
@@ -646,14 +736,34 @@
       "size": 26894
     },
     {
+      "path": "coherent-functors/REFERENCES.md",
+      "sha256": "93fe819d4c7e8c6ca03f13aee8ab41c27bbccb842d6582b78089b2ef1dbd0fdf",
+      "size": 5458
+    },
+    {
       "path": "coherent-functors/__tests__/coherent-functors.test.ts",
       "sha256": "b2a76a03b73b0df09345ffdc56167e651dd1b9f33c4ea40ef35402da2f9c41e7",
       "size": 18299
     },
     {
+      "path": "coherent-functors/__tests__/discrete-bundle-application.test.ts",
+      "sha256": "5b8483a895eea258a97d29a55d9c8ccc92a1eaed5133ceae216610ce05bce3f3",
+      "size": 5868
+    },
+    {
+      "path": "coherent-functors/__tests__/discrete-bundles-integration.test.ts",
+      "sha256": "78bed9967b3cbececa5c1811ebd8d0327717c26f72d3768fda9c45a9ddc2d06c",
+      "size": 8260
+    },
+    {
       "path": "coherent-functors/composition.ts",
       "sha256": "03061dab3a5e7887361ac9116483ace2e52d727e87ffeddcd111b779944572fe",
       "size": 2057
+    },
+    {
+      "path": "coherent-functors/discrete-bundle-application.ts",
+      "sha256": "769d4d2333fe2e2d770e0071009a8f99c479e61c28c1346ba29987160568f7c2",
+      "size": 8519
     },
     {
       "path": "coherent-functors/factory.ts",
