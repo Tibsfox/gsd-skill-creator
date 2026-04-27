@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0.0",
+  "degree": "1.62",
+  "domain": 7,
+  "domain_name": "Analog signal conditioning",
+  "topic": "Alpha-particle scattering preamp chain and chopper-stabilized integrator",
+  "era": "si-discrete",
+  "flight_subset": "Surveyor 5 alpha-scatterer analog front-end",
+  "cir_topology": "two-stage chopper-stabilized integrator with cascode input",
+  "datasheet_anchor": {
+    "manufacturer": "texas-instruments",
+    "part_number": "uA709",
+    "url": "https://www.ti.com/product/UA709",
+    "archived_path": "_assets/datasheets/texas-instruments/uA709_1968.pdf"
+  }
+}
