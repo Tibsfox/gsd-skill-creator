@@ -1,5 +1,13 @@
 import { defineConfig } from 'vitest/config';
 import { resolve } from 'path';
+import { existsSync } from 'fs';
+
+// www/ is gitignored (deployed via FTP). Tests under tests/spice-renderer/ +
+// tests/spice-symbols.test.ts statically import from www/.../_harness/v1.0.0/
+// so they only run where that tree exists — locally always, in CI never.
+const wwwHarnessAvailable = existsSync(
+  resolve(import.meta.dirname!, 'www/tibsfox/com/Research/NASA/_harness/v1.0.0/spice-loader.js'),
+);
 
 export default defineConfig({
   test: {
@@ -30,6 +38,10 @@ export default defineConfig({
             'node_modules/**',
             '**/*.integration.test.ts',
             '**/*.system.test.ts',
+            ...(wwwHarnessAvailable ? [] : [
+              'tests/spice-renderer/**',
+              'tests/spice-symbols.test.ts',
+            ]),
           ],
         },
       },
