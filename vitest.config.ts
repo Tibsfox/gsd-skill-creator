@@ -18,6 +18,7 @@ export default defineConfig({
             '.college/**/*.test.ts',
             '.college/**/*.test.tsx',
             'tests/**/*.test.ts',
+            'www/tibsfox/com/Research/NASA/_harness/**/*.test.ts',
           ],
           exclude: [
             'dist/**',
