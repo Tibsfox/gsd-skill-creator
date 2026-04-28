@@ -1,15 +1,21 @@
 # Release History
 
-619 milestones shipped across the v1.0 → v1.49.576 arc. The table below lists every shipped release, newest first.
+625 milestones shipped across the v1.0 → v1.49.582 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions, and where available, retrospectives and lessons learned. `Commits` is the count of commits between this tag and the previous tag (from git). `Phases` and `Plans` come from structured GSD metadata in the release README — most content/patch releases don't have these. `Retro` links to the retrospective chapter when present. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
-> **Drift detected:** 7 releases flag a retrospective but have no `03-retrospective.md` on disk; 3 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 619 releases · 616 with retrospectives · 609 with extracted lessons · quality A:617 B:1 C:0 D:0 F:0 (avg 97) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+> **Drift detected (2026-04-27):** Five releases (v1.49.577–v1.49.580) shipped without `docs/release-notes/<version>/` directories — RELEASE-HISTORY.md backfilled manually pending PG-truth refresh. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
+**Snapshot:** 625 releases · 617 with retrospectives · 610 with extracted lessons · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Retro | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|-------|---------|---------|-------|
+| [v1.49.582](release-notes/v1.49.582) | Degree 64: The All-Up Commit | 2026-04-27 | 8 | 4 | — | [✓](release-notes/v1.49.582/chapter/03-retrospective.md) | [12](release-notes/v1.49.582/chapter/04-lessons.md) | A 100 |  |
+| [v1.49.581](release-notes/v1.49.581) | Degree 63: The Controlled Displacement Lift | 2026-04-27 | 5 | 4 | — | [✓](release-notes/v1.49.581/chapter/03-retrospective.md) | [10](release-notes/v1.49.581/chapter/04-lessons.md) | A 100 |  |
+| [v1.49.580](release-notes/v1.49.580) | BAYES-SEQUENTIAL-MV (Multivariate Bayesian Sequential A/B) | 2026-04-26 | 10 | — | — | — | — | — | no release-notes dir |
+| [v1.49.579](release-notes/v1.49.579) | BAYES-SEQUENTIAL (Univariate Bayesian Sequential A/B) | 2026-04-26 | 8 | — | — | — | — | — | no release-notes dir |
+| [v1.49.578](release-notes/v1.49.578) | JULIA-PARAMETER Substantiation + Closure | 2026-04-26 | 11 | 6 | — | — | — | — | no release-notes dir |
+| [v1.49.577](release-notes/v1.49.577) | JULIA-PARAMETER: Wasserstein-Everywhere | 2026-04-26 | 50 | 20 | — | — | — | — | no release-notes dir |
 | [v1.49.576](release-notes/v1.49.576) | OOPS-GSD Alignment + Implementation | — | 40 | 4 | — | ✓ _(no file)_ | — | A 100 |  |
 | [v1.49.575](release-notes/v1.49.575) | CS25–26 Sweep → GSD Integration | — | 16 | 18 | — | ✓ _(no file)_ | — | A 100 |  |
 | [v1.49.574](release-notes/v1.49.574) | Megakernel: One Launch, One Chipset | — | 3 | — | — | [✓](release-notes/v1.49.574/chapter/03-retrospective.md) | [4](release-notes/v1.49.574/chapter/04-lessons.md) | A 100 |  |
