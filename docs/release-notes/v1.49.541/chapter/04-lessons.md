@@ -43,7 +43,7 @@
 
 10. **The displacement cascade reaches the victim one degree after its aggressor.**
    Degree 39 documented the Townsend's Warbler as the aggressive canopy competitor expanding southward. Degree 40 documents the Hermit Warbler as the species being displaced, its range contracting, its genome dissolving into the hybrid swarm. The engine presented the winner, then the loser, in consecutive degrees -- the first time this sequencing has occurred.
-   _⚙ Status: `investigate` · lesson #4998_
+   _⚙ Status: `applied` (applied in `v1.49.581`) · lesson #4998_
 
 11. **Parulidae extends its lead to eight members, confirming family dominance.**
    The warbler family now runs three ahead of Hirundinidae and Turdidae at five each, and the gap continues to widen. The engine's SPS track is now structurally warbler-dominated, and the family dominance mirrors the real ecological distribution of warblers in the Pacific Northwest biome.
