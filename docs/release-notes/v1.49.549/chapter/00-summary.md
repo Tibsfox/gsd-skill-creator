@@ -1,7 +1,7 @@
 > Following v1.49.548 — _Degree 47: The Darkroom in Space_, v1.49.549 ships as Artemis II: The Space Between the Moon and the Earth.
 # v1.49.549 — Artemis II: The Space Between the Moon and the Earth
 **Shipped:** 2026-04-14
-**Commits:** 752 | **Files:** 9 | **Lines:** +531038 / -1858351
+**Commits:** 42 | **Files:** 9 | **Lines:** +531038 / -1858351
 **Branch:** dev (merged from artemis-ii worktree via PR #32, plus follow-on dev work)
 _Parse confidence: 0.75 — source `docs/release-notes/v1.49.549/README.md`_
 ## Summary

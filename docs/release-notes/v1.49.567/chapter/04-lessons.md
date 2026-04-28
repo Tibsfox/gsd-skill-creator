@@ -1,38 +1,65 @@
-# v1.49.567 — Degree 62 — Lessons Carry Forward
+# Lessons — v1.49.567
 
-## Applied from v1.61
+15 lessons extracted. Classification source: ⚙ rule-based · 🤖 LLM tiebreaker (needs review) · 👤 human.
 
-1. **CHANNEL-PARALLELISM stabilizes at three exemplars (v1.58+v1.59+v1.61).** v1.62 does not use CHANNEL-PARALLELISM; v1.62 uses PRINCIPLE-TRINITY. The two §6.6 variants are genuinely alternate choices — CHANNEL-PARALLELISM for three-parallel-theme missions, PRINCIPLE-TRINITY for single-principle-redundant missions. v1.62 validates the alternate-choice structure by landing cleanly on PRINCIPLE-TRINITY without stress-testing CHANNEL-PARALLELISM.
-2. **CULTURAL-TRANSMISSION axis stabilizes at three species / three scales.** Pileated Woodpecker laughing call is not a cultural-transmission case — the call is species-fixed, not culturally transmitted. The axis remains at v1.58 Bewick's Wren + v1.59 SRKW + v1.61 humpback three-exemplar stability. v1.62 instead introduces the distinct BIOACOUSTIC-INVENTORY-OF-HABITAT narrative thread — acoustic signals functioning as habitat-intactness proxies rather than as transmission vectors.
-3. **Lunar Orbiter program closes at 5-of-5.** v1.62 is not a program closure; v1.62 is mid-program-recovery-from-loss (Surveyor program recovers after the v1.59 S4 loss). The two archetypes are now clearly differentiated: program-closure as at v1.61, mid-program-recovery as at v1.62. Future program arcs may follow either archetype or combine them.
-4. **Third hard-gated forward degree at §3 NORMATIVE spec from initial build (v1.61).** v1.62 is the FOURTH hard-gated forward degree; second forward degree to ship at §3 NORMATIVE 15-card layout from initial build (not rebuilt). The spec amendments are doubly operational; standard is institutionalized.
-5. **Barsuk Records stabilizes at three S36 exemplars.** v1.62 Grand Archives is on Sub Pop, not Barsuk. v1.62 applies the same three-exemplar label-thread pattern to three parallel institutional axes simultaneously: **Sub Pop label** (second/third S36 exemplar — second for certain after Fleet Foxes v1.53), **Phil Ek production lineage** (third exemplar — stabilizes), **Band of Horses spinoff lineage** (first exemplar). v1.62 validates the Barsuk three-exemplar pattern by successfully replicating the label-thread structure across three parallel institutional axes at the same degree.
+1. **PRINCIPLE-TRINITY stabilizes at three exemplars.**
+   v1.57 + v1.60 + v1.62 — the §6.6 variant is now reproducibly stable as a first-class chain pattern for future single-principle-redundant missions. CHAIN-CONVENTIONS v1.5 candidate: formalize §6.6 as COMPLETE TWO-VARIANT CATALOGUE (both CHANNEL-PARALLELISM and PRINCIPLE-TRINITY now reproducibly stable) and open a third candidate variant slot.
+   _⚙ Status: `investigate` · lesson #9959_
 
-## New from v1.62 (Carry Forward to v1.63+)
+2. **Forest-sim cumulative-layer forward-cadence pattern established.**
+   simulation.js is now under retro-wired cumulative layer; v1.62 adds block #64 as the first forward-cadence appendation. Every future forward degree adds exactly one block, same canonical shape (init + tick + event + nasaState read/publish). CHAIN-CONVENTIONS v1.5 candidate: §2.5 SIMULATION-CUMULATIVE-LAYER normative block spec.
+   _⚙ Status: `investigate` · lesson #9960_
 
-### Lesson 1.62-01: PRINCIPLE-TRINITY stabilizes at three exemplars — §6.6 maturity threshold reached
+3. **SUCCESS-AFTER-FAILURE as §6.4 declination variant.**
+   v1.62 S5 success follows v1.59 S4 loss along the engineering-lineage-survival axis — the COMPLEMENTARY recovery arc to the v1.51+v1.59 FAILURE-MODE duology. CHAIN-CONVENTIONS v1.5 candidate: formalize SUCCESS-AFTER-FAILURE as §6.4 sub-form 2b. Future candidates: v1.64 Apollo 4 first unmanned Saturn V (Apollo program recovery after Apollo 1 loss at v1.54).
+   _⚙ Status: `investigate` · lesson #9961_
 
-Mirroring v1.61's CHANNEL-PARALLELISM three-exemplar stabilization, v1.62 brings PRINCIPLE-TRINITY to three-exemplar reproducible stability. **§6.6 now has TWO reproducibly-stable variants for the first time in corpus history.** The alignment catalogue is at maximum tested maturity — both variants are reproducibly stable across three exemplars each. CHAIN-CONVENTIONS v1.5 candidate: formalize §6.6 as a COMPLETE TWO-VARIANT CATALOGUE and open a third candidate variant slot. v1.63 Cosmos 186/188 (Soviet automated rendezvous and docking, October 30, 1967) is the natural candidate for the third variant (DUAL-THREAD-CONVERGENCE — two initially-separate threads converge via docking). Carry forward to v1.63 for third-variant-origin consideration.
+4. **Multi-appearance §3.1 sub-form validated cross-class.**
+   Polystichum munitum (v1.2 + v1.8) inside the plant class; Pileated Woodpecker (v1.30 drum + v1.62 laughing call) inside the animal class. Two-species / two-class stability; §3.1 sub-form reproducibly demonstrated. Future candidates: Varied Thrush, American Dipper, Fleet Foxes — any species that has appeared under one channel may return under a distinct motor-system / acoustic-regime / phenological channel without violating §3.1 uniqueness-per-species.
+   _⚙ Status: `investigate` · lesson #9962_
 
-### Lesson 1.62-02: FOREST-SIM CUMULATIVE-LAYER FORWARD-CADENCE begins — every future forward degree adds exactly one block
+5. **Phil Ek production lineage stabilizes at three S36 exemplars.**
+   Grand Archives extends the count to three after Fleet Foxes (v1.53) and an earlier credit. The producer-thread pattern reproducibly stabilizes at three exemplars, the same threshold the Barsuk Records label-thread pattern reached at v1.61 and the §6.6 alignment variants reach at v1.61 + v1.62. Future candidates for institutional-lineage three-exemplar stabilization: Atlantic Records (DCFC-era), K Records, Drag City.
+   _⚙ Status: `investigate` · lesson #9963_
 
-v1.62 is the first forward-cadence degree under the retro-wired cumulative forest-sim layer. simulation.js contains blocks for all 63 predecessor degrees after the retro-wire ship preceding v1.62. v1.62 adds block #64. The canonical block shape — init hook + tick hook + event hook + nasaState read/publish — is reproducible. Every future forward degree adds exactly one block, same shape. CHAIN-CONVENTIONS v1.5 candidate: §2.5 SIMULATION-CUMULATIVE-LAYER normative block spec, formalizing (i) the canonical block shape, (ii) the append-one-block-per-ship cadence, (iii) the nasaState read/publish protocol. Carry forward.
+6. **Bioacoustic-inventory narrative thread opens.**
+   Acoustic signals functioning as habitat-intactness proxies — the Pileated laughing call as old-growth-forest-intactness index — opens a new narrative axis distinct from the cultural-transmission axis. Future bioacoustic-inventory candidates: Marbled Murrelet (old-growth nesting), Northern Spotted Owl (old-growth occupancy), American Dipper (clean-water indicator).
+   _⚙ Status: `investigate` · lesson #9964_
 
-### Lesson 1.62-03: SUCCESS-AFTER-FAILURE as §6.4 declination variant — complement to FAILURE-MODE duology
+7. **Keystone-cavity-excavator explicit declaration formalizes precedent.**
+   The Pileated supplies cavities for ~20+ secondary users. First explicit declaration in the SPS corpus formalizes a precedent that has been implicitly cited under PNW old-growth species pages. Future candidates for keystone-role explicit declaration: Beaver (keystone hydrological), Sea Otter (keystone trophic), Salmon (keystone nutrient transfer).
+   _⚙ Status: `investigate` · lesson #9965_
 
-v1.62 S5 success follows the v1.59 S4 loss along the engineering-lineage-survival axis. This is the COMPLEMENTARY recovery arc to the v1.51+v1.59 FAILURE-MODE duology. v1.62 opens **retro:1.59** for backward SUCCESS-AFTER-FAILURE duology citation from v1.59. CHAIN-CONVENTIONS v1.5 candidate: formalize SUCCESS-AFTER-FAILURE as §6.4 sub-form 2b (complement to FAILURE-MODE sub-form 2a). Future SUCCESS-AFTER-FAILURE candidates: v1.64 Apollo 4 first unmanned Saturn V test (Apollo program recovery after Apollo 1 loss at v1.54) — would be second exemplar, at a different program level (crewed Apollo rather than lunar-lander Surveyor). Carry forward.
+8. **Densest single-degree first-instance count.**
+   Nine first-instance declarations at one degree. Reflects the structural position of v1.62: simultaneously closes one §6.6 variant axis, opens one new narrative thread (BIOACOUSTIC-INVENTORY), formalizes one existing precedent (keystone-cavity-excavator), validates one structural sub-form (multi-appearance cross-class), and executes one program-level recovery arc (Surveyor S4 → S5). Future degrees that occupy similar structural positions may produce comparable first-instance density; the canonical-handler pattern should accommodate the load.
+   _⚙ Status: `investigate` · lesson #9966_
 
-### Lesson 1.62-04: Second multi-appearance-with-behavioral-channel-differentiation exemplar — §3.1 sub-form cross-class validated
+9. **Retro-wire-then-forward-cadence as reproducible infrastructure pattern.**
+   simulation.js retro-wired before v1.62; v1.62 ships under the cumulative layer. The same pattern can be applied to the retrospective chain (three open retro slots), to the legacy DSP compile-fix wave (67 broken DSPs), to other chain-level layers that have accumulated technical debt under retro-pass. Carry forward as a re-usable infrastructure-pattern template.
+   _⚙ Status: `investigate` · lesson #9967_
 
-Pileated Woodpecker (v1.30 drumming + v1.62 laughing call) is the second multi-appearance-with-behavioral-channel-differentiation exemplar after Polystichum munitum sword fern (v1.2 failure-mapping + v1.8 frond-unfurl). Two-species stability across two taxonomic classes (plant + animal). §3.1 sub-form now reproducibly demonstrated. The Pileated second-appearance precedent validates the multi-role-species pattern for future candidates: other species that have appeared under one behavioral channel may return under a distinct motor-system / acoustic-regime / phenological channel without violating the §3.1 uniqueness-per-species rule. Future candidates: Varied Thrush (v1.59 SPS under altitudinal-soundscape channel — may return under dawn-chorus channel), American Dipper (v1.57 under benthic-invertebrate channel — may return under underwater-vocalization channel), Fleet Foxes (v1.53 under harmony-stacking channel — may return under a lyric-voice channel). Carry forward.
+10. **§6.6 alignment catalogue reaches maximum tested maturity.**
+   Both variants (CHANNEL-PARALLELISM stabilized at v1.61; PRINCIPLE-TRINITY stabilized at v1.62) now hold three-exemplar reproducible status. The catalogue has no remaining open variants at v1.62. v1.63 Cosmos 186/188 is the natural candidate for a third variant (DUAL-THREAD-CONVERGENCE) that would re-open the catalogue at the v1.5 bump. Carry forward as the v1.63 third-variant-origin consideration.
+---
+*v1.49.567 — Degree 62 "The Ground Beneath the Survey" — Surveyor 5 + Grand Archives + Pileated Woodpecker (laughing call) — Released 2026-04-22 — CHAIN-CONVENTIONS v1.4 — Harness v1.0.0 — Hard-gated forward build #4 — A(100) scorer target
+   _⚙ Status: `investigate` · lesson #9968_
 
-### Lesson 1.62-05: Phil Ek production lineage stabilizes at three S36 exemplars
+11. **Three retro-backfill slots open — sprint past threshold.**
+   retro:1.11 (American Dipper ↔ v1.57) + retro:1.51 (Surveyor 2 ↔ v1.59) + retro:1.59 (Surveyor 4 ↔ v1.62, opened at v1.62) now form three open slots. The dedicated retro-backfill sprint (first surfaced as a recommendation at v1.60) is now operationally required between v1.62 and v1.63 OR immediately after v1.63 ships.
+   _⚙ Status: `investigate` · lesson #9969_
 
-Grand Archives extends Phil Ek's production credits in the S36 corpus to **third exemplar** after Fleet Foxes (v1.53) and one earlier credit. Three institutional lineages established or extended simultaneously at v1.62: **Sub Pop label** (second/third S36 exemplar), **Phil Ek production** (third exemplar — **stabilizes**), **Band of Horses spinoff lineage** (first exemplar). The v1.61 Barsuk three-exemplar label-thread pattern is now validated across three parallel institutional axes — label + producer + band-spinoff — within a single degree. The pattern is reproducible and extensible. Future candidates for institutional-lineage stabilization: Atlantic Records (DCFC-era), Drag City, Kill Rock Stars, Thrill Jockey, K Records. Carry forward.
+12. **Raptor canopy still empty at degree 62.**
+   First surfaced at approximately degree 50; carried forward through every subsequent degree without resolution. Should be prioritized for the next SPS pair slot that accommodates a raptor species.
+   _⚙ Status: `investigate` · lesson #9970_
 
-## Open Action Items (Forwarded)
+13. **67 legacy DSP compile fixes still pending.**
+   The retro-dsp-fix wave is orthogonal to the simulation.js retro-wire that completed before v1.62 ship, and it still has not been scheduled.
+   _⚙ Status: `investigate` · lesson #9971_
 
-1. **Retro-backfill sprint.** Three retro slots now open (retro:1.11 + retro:1.51 + retro:1.59). Three-slot threshold triggers the dedicated sprint per v1.60 corpusDeltaHints. Recommended scheduling: between v1.62 and v1.63 OR immediately after v1.63 ships. Sprint backfills all three backward citations as a single coordinated pass — same structural pattern as the simulation.js retro-wire that preceded v1.62, applied to the retrospective chain.
-2. **Raptor canopy still overdue at degree 62.** First surfaced at approximately degree 50; carried forward through every subsequent degree without resolution. Should be prioritized for the next SPS pair slot that accommodates a raptor species (Northern Goshawk, Cooper's Hawk, Northern Spotted Owl, Peregrine Falcon, Red-tailed Hawk, or comparable).
-3. **67 legacy DSPs broken.** Retro-dsp-fix wave still recommended. Separate from the simulation.js retro-wire that completed before v1.62 ship; DSPs are an orthogonal retro-wave still pending.
-4. **CHAIN-CONVENTIONS v1.5 bump candidacy.** Three v1.5 candidates surfaced at v1.62: §6.6 COMPLETE-TWO-VARIANT-CATALOGUE formalization + third-variant slot opening (Lesson 1.62-01), §2.5 SIMULATION-CUMULATIVE-LAYER normative block spec (Lesson 1.62-02), SUCCESS-AFTER-FAILURE §6.4 sub-form 2b (Lesson 1.62-03). If v1.63 Cosmos 186/188 declares DUAL-THREAD-CONVERGENCE as §6.6 third variant, and/or v1.64 Apollo 4 declares a second SUCCESS-AFTER-FAILURE exemplar, the v1.5 bump becomes justified.
+14. **CHAIN-CONVENTIONS v1.5 candidates accumulating without bump.**
+   Three v1.5 candidates surfaced at v1.62 alone (§6.6 COMPLETE-TWO-VARIANT-CATALOGUE formalization + third-variant slot opening, §2.5 SIMULATION-CUMULATIVE-LAYER normative block spec, §6.4 SUCCESS-AFTER-FAILURE sub-form 2b). v1.5 bump should be scheduled when a fourth or fifth candidate accumulates from v1.63 / v1.64.
+   _⚙ Status: `investigate` · lesson #9972_
+
+15. **Surveyor program mid-arc tension.**
+   Program at 3-of-5 with S6 and S7 remaining. If both succeed, program closes at 5-of-7 (a different closure shape than Lunar Orbiter 5-of-5 at v1.61). If either fails, FAILURE-MODE axis re-opens and SUCCESS-AFTER-FAILURE axis may require extension to keep the corpus consistent.
+   _⚙ Status: `investigate` · lesson #9973_

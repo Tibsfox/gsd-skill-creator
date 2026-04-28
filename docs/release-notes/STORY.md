@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.562`.
+The story begins at `v1.0` and continues to `v1.49.583`.
 
-**603 chapters.** 602 have retrospectives.
+**626 chapters.** 625 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -79,8 +79,8 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.17](v1.49.17/00-summary.md)** — The Space Between · 2026-03-04
 - **[v1.49.18](v1.49.18/00-summary.md)** — Space Between Observatory · 2026-03-06
 - **[v1.49.19](v1.49.19/00-summary.md)** — Gastown Chipset Integration · 2026-03-06
-- **[v1.49.20.1](v1.49.20.1/00-summary.md)** — Documentation Reflections · 2026-03-06
 - **[v1.49.20](v1.49.20/00-summary.md)** — Documentation Consolidation · 2026-03-06
+- **[v1.49.20.1](v1.49.20.1/00-summary.md)** — Documentation Reflections · 2026-03-06
 - **[v1.49.21](v1.49.21/00-summary.md)** — Image to Mission Pipeline · 2026-03-07
 - **[v1.49.22](v1.49.22/00-summary.md)** — PNW Research Series · 2026-03-07
 - **[v1.49.23](v1.49.23/00-summary.md)** — Unison Language & Math Co-Processor Completion · 2026-03-08
@@ -286,9 +286,9 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.233](v1.49.233/00-summary.md)** — Degree 93: NAVVI + Hornet Nest Buzz — THE SHIMMER AND THE STING · 2026-04-02
 - **[v1.49.234](v1.49.234/00-summary.md)** — Degree 94: Erik Blood + Stonefly Hatch — THE STUDIO AND THE STREAM · 2026-04-02
 - **[v1.49.235](v1.49.235/00-summary.md)** — Degree 95: ODESZA + Mayfly Emergence — THE EUPHORIC AND THE EPHEMERAL · 2026-04-01
-- **[v1.49.236](v1.49.236/00-summary.md)** — Degree 96: STRFKR + Wood Frog — THE PULSE AND THE FREEZE · 2026-04-01
+- **[v1.49.236](v1.49.236/00-summary.md)** — Degree 96: STRFKR + Wood Frog -- THE PULSE AND THE FREEZE · 2026-04-01
 - **[v1.49.237](v1.49.237/00-summary.md)** — Degree 97: The Postal Service (Electronic Context) + Toad Chorus — THE ALGORITHM AND THE PURR · 2026-04-01
-- **[v1.49.238](v1.49.238/00-summary.md)** — Degree 98: Gold Casio + Tree Cricket Song — THE SHIMMER AND THE TRILL · 2026-04-02
+- **[v1.49.238](v1.49.238/00-summary.md)** — Degree 98: Gold Casio + Tree Cricket Song -- THE SHIMMER AND THE TRILL · 2026-04-01
 - **[v1.49.239](v1.49.239/00-summary.md)** — Degree 99: Kaina + Click Beetle — THE SYNTHESIS AND THE SNAP · 2026-04-02
 - **[v1.49.240](v1.49.240/00-summary.md)** — Degree 100: Summer Heart + Common Raven — THE CENTENNIAL · 2026-04-02
 - **[v1.49.241](v1.49.241/00-summary.md)** — Degree 101: Hecuba + Common Raven Pair — THE POST-CENTENNIAL · 2026-04-01
@@ -610,4 +610,27 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.557](v1.49.557/00-summary.md)** — Degree 53: The Last Gemini · 2026-04-15
 - **[v1.49.558](v1.49.558/00-summary.md)** — Degree 54: In Memoriam -- Tough and Competent · 2026-04-16
 - **[v1.49.559](v1.49.559/00-summary.md)** — Degree 55: The Unmanned Work Continues · 2026-04-16
+- **[v1.49.560](v1.49.560/00-summary.md)** — Release Documentation Uplift · 2026-04-18
+- **[v1.49.561](v1.49.561/00-summary.md)** — Living Sensoria · 2026-04-18
 - **[v1.49.562](v1.49.562/00-summary.md)** — Degree 56: Triple Bounce to Smithsonian · 2026-04-19
+- **[v1.49.563](v1.49.563/00-summary.md)** — Degree 58: Twenty-Four Hours · 2026-04-20
+- **[v1.49.564](v1.49.564/00-summary.md)** — Degree 59: The Engineering Lineage · 2026-04-24
+- **[v1.49.565](v1.49.565/00-summary.md)** — Degree 60: The Anchored Listener · 2026-04-22
+- **[v1.49.566](v1.49.566/00-summary.md)** — Degree 61: The Completion of the Survey · 2026-04-22
+- **[v1.49.567](v1.49.567/00-summary.md)** — Degree 62: The Ground Beneath the Survey · 2026-04-22
+- **[v1.49.568](v1.49.568/00-summary.md)** — Nonlinear Frontier · 2026-04-23
+- **[v1.49.569](v1.49.569/00-summary.md)** — Drift in LLM Systems · 2026-04-23
+- **[v1.49.570](v1.49.570/00-summary.md)** — Convergent Substrate · 2026-04-23
+- **[v1.49.571](v1.49.571/00-summary.md)** — Heuristics-Free Skill Space · 2026-04-23
+- **[v1.49.572](v1.49.572/00-summary.md)** — Mathematical Foundations Refresh · 2026-04-24
+- **[v1.49.573](v1.49.573/00-summary.md)** — Upstream Intelligence Pack v1.44 (ArXiv eess Integration) · 2026-04-24
+- **[v1.49.574](v1.49.574/00-summary.md)** — Megakernel: One Launch, One Chipset
+- **[v1.49.575](v1.49.575/00-summary.md)** — CS25-26 Sweep → GSD Integration · 2026-04-25
+- **[v1.49.576](v1.49.576/00-summary.md)** — Ecosystem Alignment (OOPS-GSD Alignment + Implementation) · 2026-04-25
+- **[v1.49.577](v1.49.577/00-summary.md)** — JULIA-PARAMETER: Wasserstein-Everywhere · 2026-04-26
+- **[v1.49.578](v1.49.578/00-summary.md)** — JULIA-PARAMETER Substantiation + Closure · 2026-04-26
+- **[v1.49.579](v1.49.579/00-summary.md)** — BAYES-SEQUENTIAL · 2026-04-26
+- **[v1.49.580](v1.49.580/00-summary.md)** — BAYES-SEQUENTIAL-MV: Multivariate IPM-BOED via Sliced-Wasserstein · 2026-04-26
+- **[v1.49.581](v1.49.581/00-summary.md)** — Degree 63: The Controlled Displacement Lift · 2026-04-27
+- **[v1.49.582](v1.49.582/00-summary.md)** — Degree 64: The All-Up Commit · 2026-04-27
+- **[v1.49.583](v1.49.583/00-summary.md)** — Degree 65: The Persistent Constellation · 2026-04-27
