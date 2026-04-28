@@ -129,7 +129,7 @@ The gate runs against `package.json` `version`. It exits non-zero if any of the 
 node tools/release-history/run-with-pg.mjs refresh --fast --quiet
 ```
 
-The wrapper reads `/media/foxy/ai/GSD/dev-tools/artemis-ii/.env` (PG_HOST/PORT/USER/DB + the anonymous-password-list section), builds `RH_POSTGRES_URL`, and invokes `tools/release-history/refresh.mjs`. The wrapper exists because the `.env` file's anonymous-password-list section breaks shell `source` due to special characters in passwords. Use the wrapper, never `source .env` directly.
+The wrapper reads the artemis-ii sibling repo's `.env` (`$ARTEMIS_REPO/.env` — same parent dir as `$REPO`) for PG_HOST/PORT/USER/DB plus the anonymous-password-list section, builds `RH_POSTGRES_URL`, and invokes `tools/release-history/refresh.mjs`. The wrapper exists because the `.env` file's anonymous-password-list section breaks shell `source` due to special characters in passwords. Use the wrapper, never `source .env` directly. (The wrapper itself resolves the absolute path; CLAUDE.md keeps the placeholder per CF-MED-063b.)
 
 ## External Citations (CS25–26 Sweep)
 
