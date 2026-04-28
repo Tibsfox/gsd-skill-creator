@@ -2,11 +2,11 @@
 
 - **Version:** `v1.49.568`
 - **Shipped:** 2026-04-23
-- **Branch:** dev.
+- **Branch:** dev (pending merge to main after v1.49.561 Living Sensoria merges first)
 - **Tag:** —
 - **Dedication:** —
-- **Phases:** 5 · **Plans:** —
-- **Parse confidence:** 0.65
+- **Phases:** 5 · **Plans:** 14
+- **Parse confidence:** 0.95
 - **Retrospective:** present
 - **Prev:** [v1.49.567](../v1.49.567/00-summary.md)
 - **Next:** [v1.49.569](../v1.49.569/00-summary.md)

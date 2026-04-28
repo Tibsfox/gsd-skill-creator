@@ -1,60 +1,63 @@
-# v1.49.581 — Degree 63 — Forward Lessons (Emitted to v1.64+)
+# Lessons — v1.49.581
 
-## Lessons Forward
+16 lessons extracted. Classification source: ⚙ rule-based · 🤖 LLM tiebreaker (needs review) · 👤 human.
 
-### 1. Three-Track Forward-Cadence Is a Reproducible Pattern
+1. **Three-track forward-cadence is reproducible when CSV alignment exists.**
+   When the NASA, MUS, and ELC CSV catalogs all yield Domain-N subjects derivable from the same triad, ship coordinated three-track in a single version bump with bidirectional cross-track links. When only one or neither track is available, ship NASA-only as before.
+   _⚙ Status: `investigate` · lesson #10108_
 
-v1.63 demonstrates that NASA + MUS + ELC can be coordinated as a three-track forward-cadence degree when CSV-derived subjects align on the same triad. Cross-track artifact pairings (audio Faust demos cross-paired NASA↔MUS; SPICE circuit cross-paired NASA↔ELC) are the structural binding that makes the multi-track shipment coherent rather than three independent releases. **Forward operational rule:** at each forward-cadence degree, check the MUS and ELC CSV catalogs for available Domain-N subjects derivable from the NASA triad; if both are available, ship coordinated three-track. If only one or neither is available, ship NASA-only as before.
+2. **§6.6 variant-origin discipline.**
+   Future §6.6 variant openings should declare the variant name and structural definition at origin time, explicitly mark single-exemplar status, register plausible candidate 2nd and 3rd exemplars, set an archive threshold ~17 future degrees out, and ensure CHAIN-CONVENTIONS does NOT bump at variant origin. The v1.63 LIFT-AND-RESET origin is the reference template.
+   _⚙ Status: `investigate` · lesson #10109_
 
-### 2. §6.6 Variant Origin Discipline
+3. **SUCCESS-AFTER-FAILURE thread closure.**
+   With the SUCCESS-AFTER-FAILURE thread now at 2-exemplar threshold (v1.62 + v1.63), include it as a formalized §6.4 sub-form 2b complement to FAILURE-MODE sub-form 2a when CHAIN-CONVENTIONS v1.5 is cut.
+   _⚙ Status: `investigate` · lesson #10110_
 
-v1.63 demonstrates the explicit-origin-declaration discipline for opening a new §6.6 variant. The discipline:
-- Declare the variant name and structural definition at origin time
-- Explicitly mark single-exemplar status
-- Register candidate 2nd and 3rd exemplars (must be plausible future degree subjects)
-- Set an archive threshold (typically ~17 future degrees out)
-- Ensure CHAIN-CONVENTIONS does NOT bump version at variant origin
+4. **retro-slot:1.59 backward-citation pass recommended.**
+   Schedule the retro-backfill sprint between v1.63 and v1.64 OR immediately after v1.63 ships, as a single coordinated backward-citation pass covering retro:1.11 American Dipper + retro:1.51 Surveyor 2 + retro:1.59 Surveyor 4 SUCCESS-AFTER-FAILURE.
+   _⚙ Status: `investigate` · lesson #10111_
 
-**Forward operational rule:** future §6.6 variant openings should follow the same discipline rather than letting variants accumulate organically. The v1.63 LIFT-AND-RESET origin is the reference template.
+5. **Verification-result documentation format.**
+   Document V-flag resolutions at four places: `degree-sync.json` `dedication_candidates` and threads field-level descriptions, `forest-module/*.js` header docblock, `retrospective/lessons-carryover.json` `v_audit_summary` field, and release-notes `chapter/00-summary.md` and `chapter/03-retrospective.md`.
+   _⚙ Status: `investigate` · lesson #10112_
 
-### 3. SUCCESS-AFTER-FAILURE Thread Closure
+6. **Subjects without PNW geographic origin require explicit tagging.**
+   Future SPS subjects with non-PNW geographic origin should be tagged as such in `degree-sync.json` and corpus-deltas, with the LIFT-AND-RESET §6.6 variant considered as the candidate alignment. Extensible to S36 artists who relocated to the PNW from non-PNW origins.
+   _⚙ Status: `investigate` · lesson #10113_
 
-The SUCCESS-AFTER-FAILURE thread reached its 2-exemplar threshold at v1.63 (S5 + S6 consecutive successes after v1.59 S4 loss). The thread is now eligible for promotion to CHAIN-CONVENTIONS v1.5 §6.4 sub-form 2b. **Forward operational rule:** when CHAIN-CONVENTIONS v1.5 is cut (currently a v1.5-bump candidate is held pending dev-line milestone reactivation per user instruction), include SUCCESS-AFTER-FAILURE as a formalized §6.4 sub-form 2b complement to FAILURE-MODE sub-form 2a.
+7. **Process-variant vs substantive-point §6.6 variants.**
+   When opening a new §6.6 variant, explicitly identify whether it is a process variant (one structural arc instantiated three times with the same temporal shape) or a substantive-point variant (a single point of convergence reached three ways); the two sub-classes have different reproducibility criteria. v1.63 LIFT-AND-RESET is the first PROCESS-variant.
+   _⚙ Status: `investigate` · lesson #10114_
 
-### 4. retro-slot:1.59 Backward-Citation Pass Recommended
+8. **Spine information density continues to rise.**
+   v1.63 spine ~44 KB; the 80-100 KB target band is the working envelope. Spines approaching 100 KB should be considered for compression via cross-references to retrospective files rather than inline expansion.
+   _⚙ Status: `investigate` · lesson #10115_
 
-retro-slot:1.59 was opened at v1.62 for backward SUCCESS-AFTER-FAILURE duology citation from the v1.59 S4 entry. With the thread now at 2-exemplar threshold, the backward-citation pass is the recommended scheduled action for the next retro-backfill sprint. **Forward operational rule:** schedule the retro-backfill sprint between v1.63 and v1.64 OR immediately after v1.63 ships, as a single coordinated backward-citation pass covering retro:1.11 American Dipper + retro:1.51 Surveyor 2 + retro:1.59 Surveyor 4 SUCCESS-AFTER-FAILURE.
+9. **simulation.js block-shape pattern is reproducibly stable.**
+   Two consecutive forward-cadence degrees (v1.62 + v1.63) have shipped blocks following the canonical init/tick/event/nasaState block-shape pattern; promote to a normative §2.5 SIMULATION-CUMULATIVE-LAYER block-shape spec at CHAIN-CONVENTIONS v1.5.
+   _⚙ Status: `investigate` · lesson #10116_
 
-### 5. Verification-Result Documentation Format
+10. **Sentinel-authorization pattern for tag + release.**
+   Continue the sentinel-authorization gate; never auto-tag or auto-release without explicit human authorization. Stage release notes to `~/tmp-release/` before `gh release create --notes-file`. FTP sync runs as a mandatory ship step (not user-initiated) per the gsd-skill-creator HARD RULE.
+   _⚙ Status: `investigate` · lesson #10117_
 
-v1.63 demonstrates that verification results (V-1 through V-5) should be documented at three levels:
-- In `degree-sync.json` `dedication_candidates` and threads field-level descriptions
-- In `forest-module/*.js` header docblock as part of the §6.6 variant origin declaration
-- In `retrospective/lessons-carryover.json` `v_audit_summary` field
-- In release-notes `chapter/00-summary.md` and `chapter/03-retrospective.md`
+11. **V-4 Surveyor 6 hop trajectory specific page reference within TM-X-1740 carries forward as needs-citation; pending NTRS retrieval at https://ntrs.nasa.gov/citations/19690001050.**
+   _⚙ Status: `investigate` · lesson #10118_
 
-This four-place documentation ensures that future degree builders find verification status whether they enter through degree-sync, forest-module, retrospective, or release-notes. **Forward operational rule:** continue four-place verification-result documentation for future degrees with multi-V verification flags.
+12. **Original release-notes shipped at abbreviated form (45 lines) at ship time; augmented to v1.49.165 gold-standard depth at v1.49.582 drift remediation pass on 2026-04-27.**
+   _⚙ Status: `investigate` · lesson #10119_
 
-### 6. Subjects Without PNW Geographic Origin
+13. **Spine grew to ~44 KB (up from ~36 KB at v1.62); the 80-100 KB target band remains the working envelope but spines approaching 100 KB should be considered for compression via cross-references rather th**
+   Spine grew to ~44 KB (up from ~36 KB at v1.62); the 80-100 KB target band remains the working envelope but spines approaching 100 KB should be considered for compression via cross-references rather than inline expansion.
+   _⚙ Status: `investigate` · lesson #10120_
 
-v1.63 introduces the first SPS species whose geographic origin is explicitly NOT the Pacific Northwest (Green Frog: native to eastern North America, established as PNW invasive resident). This is a structural inversion of the prior SPS pattern (native PNW species). **Forward operational rule:** future SPS subjects with non-PNW geographic origin should be tagged as such in `degree-sync.json` and the corpus-deltas.md, and the LIFT-AND-RESET §6.6 variant should be considered as the candidate alignment. The pattern is also potentially extensible to S36 artists who relocated to the PNW from non-PNW origin (a prior pattern that has occurred but has not been explicitly tagged).
+14. **FTP sync at close of session was still propagating for MUS 1.63 and NASA 1.63 (ELC 1.63 verified live); curl -sI HEAD checks recommended as follow-up.**
+   _⚙ Status: `investigate` · lesson #10121_
 
-### 7. Process-Variant vs Substantive-Point §6.6 Variants
+15. **The retro-backfill sprint covering retro:1.11 + retro:1.51 + retro:1.59 should run as a single coordinated three-slot batch rather than three separate passes.**
+   _⚙ Status: `investigate` · lesson #10122_
 
-v1.63 introduces the first PROCESS-variant under §6.6 (LIFT-AND-RESET = one structural arc instantiated three times with the same temporal shape). The two prior reproducibly-stable §6.6 variants (PRINCIPLE-TRINITY, CHANNEL-PARALLELISM) are SUBSTANTIVE-POINT variants (a single point of convergence reached three ways). The structural distinction between process variants and substantive-point variants is itself a meta-level §6.6 organization principle that may be worth formalizing in CHAIN-CONVENTIONS v1.5. **Forward operational rule:** when opening a new §6.6 variant, explicitly identify whether it is a process variant or a substantive-point variant; the two sub-classes have different reproducibility criteria (process variants reproduce through temporal-shape; substantive-point variants reproduce through point-of-convergence).
-
-### 8. Spine Information Density Continues to Rise
-
-v1.63 spine ~44 KB up from v1.62 ~36 KB. The trend reflects accumulating cross-thread references and increasing first-instance-declaration density. **Forward operational rule:** the 80-100 KB target band remains the working envelope; spines approaching 100 KB should be considered for compression via cross-references to retrospective files rather than inline expansion.
-
-### 9. simulation.js Block-Shape Pattern Is Now Reproducibly Stable
-
-Two consecutive forward-cadence degrees (v1.62 + v1.63) have shipped blocks following the canonical init/tick/event/nasaState block-shape pattern. The pattern is reproducibly demonstrated; it is fit for promotion to a normative §2.5 SIMULATION-CUMULATIVE-LAYER block-shape spec at CHAIN-CONVENTIONS v1.5. **Forward operational rule:** continue the canonical block-shape for v1.64+ forward-cadence degrees; revise only at the v1.5 cut.
-
-### 10. Sentinel Authorization Pattern for Tag + Release
-
-The v1.49.581 ship pipeline includes the standard sentinel-authorization gate before tag and GitHub release. **Forward operational rule:** continue the sentinel pattern; never auto-tag or auto-release without explicit human authorization. Stage release notes to ~/tmp-release/ before `gh release create --notes-file`. FTP sync runs as mandatory ship step (NOT user-initiated) per the gsd-skill-creator HARD RULE.
-
----
-
-*v1.49.581 forward lessons. Emitted to v1.49.582+ degrees as carryover via lessons-carryover.json read pattern.*
+16. **The §6.6 LIFT-AND-RESET variant origin documentation is single-degree; future degrees should formalize the variant-origin documentation template so subsequent variant-openings follow the same shape au**
+   The §6.6 LIFT-AND-RESET variant origin documentation is single-degree; future degrees should formalize the variant-origin documentation template so subsequent variant-openings follow the same shape automatically.
+   _⚙ Status: `investigate` · lesson #10123_

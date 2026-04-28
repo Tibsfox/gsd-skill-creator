@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CS25–26 Sweep · Convergent Discovery in Agentic Systems · Tibsfox Research</title>
+<meta name="description" content="Four independent peer-reviewed papers from the 2025–2026 arXiv listing arrive at the same load-bearing patterns the GSD ecosystem has been quietly shipping. The trail was already there.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #263238;
+    --secondary: #1565C0;
+    --tertiary: #37474F;
+    --accent: #0277BD;
+    --light-primary: #ECEFF1;
+    --light-secondary: #E3F2FD;
+    --border-gray: #BDBDBD;
+    --subtle-gray: #757575;
+    --dark-text: #212121;
+    --card-bg: #FAFAFA;
+    --card-border: #E0E0E0;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    color: var(--dark-text);
+    background: #FAFAFA;
+    line-height: 1.65;
+  }
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--tertiary) 100%);
+    color: white;
+    padding: 4rem 2rem 3rem;
+    text-align: center;
+  }
+  header .label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #B0BEC5;
+    margin-bottom: 1rem;
+  }
+  header h1 {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 2.5rem;
+    margin: 0.3rem 0 0.6rem;
+    line-height: 1.2;
+  }
+  header .subtitle {
+    font-style: italic;
+    font-size: 1.1rem;
+    color: #CFD8DC;
+    margin: 0.6rem auto 0;
+    max-width: 760px;
+  }
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+  }
+  .pull {
+    background: var(--light-primary);
+    border-left: 4px solid var(--primary);
+    padding: 1.2rem 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+    color: var(--tertiary);
+  }
+  h2 {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--primary);
+    font-size: 1.5rem;
+    border-bottom: 1px solid var(--border-gray);
+    padding-bottom: 0.4rem;
+    margin: 2.8rem 0 1rem;
+  }
+  h3 {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--tertiary);
+    font-size: 1.15rem;
+    margin: 1.6rem 0 0.5rem;
+  }
+  p { margin: 0 0 1rem; }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px dotted var(--accent); }
+  a:hover { color: var(--secondary); border-bottom-color: var(--secondary); }
+  code {
+    font-family: 'DM Mono', 'Fira Mono', Menlo, monospace;
+    background: var(--light-primary);
+    padding: 0.1em 0.4em;
+    border-radius: 3px;
+    font-size: 0.88em;
+    color: var(--primary);
+  }
+  .anchor-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.2rem;
+    margin: 1.5rem 0 2rem;
+  }
+  .anchor {
+    background: white;
+    border: 1px solid var(--card-border);
+    border-left: 4px solid var(--accent);
+    padding: 1.2rem 1.4rem;
+    border-radius: 0 4px 4px 0;
+  }
+  .anchor .arxiv {
+    font-family: 'DM Mono', 'Fira Mono', monospace;
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+  .anchor h3 { margin: 0.3rem 0 0.6rem; font-size: 1.05rem; color: var(--primary); }
+  .anchor p { font-size: 0.93rem; color: var(--tertiary); margin: 0; }
+  .more {
+    background: var(--light-secondary);
+    border-left: 4px solid var(--accent);
+    padding: 1.2rem 1.4rem;
+    margin: 2rem 0;
+    border-radius: 0 4px 4px 0;
+  }
+  .more a {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+  }
+  .closing {
+    background: var(--light-primary);
+    border-left: 4px solid var(--primary);
+    padding: 1.4rem 1.6rem;
+    margin-top: 3rem;
+    font-style: italic;
+    color: var(--tertiary);
+    text-align: center;
+  }
+  .closing .credit {
+    font-family: 'DM Sans', sans-serif;
+    font-style: normal;
+    font-size: 0.78rem;
+    color: var(--subtle-gray);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 0.8rem;
+    display: block;
+  }
+  footer {
+    text-align: center;
+    color: var(--subtle-gray);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    padding: 2rem 1rem 3rem;
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="label">Tibsfox Research · CS25–26 Sweep</div>
+  <h1>Different Watersheds, Same Trail</h1>
+  <div class="subtitle">Four independent peer-reviewed papers from the 2025–2026 arXiv listing arrive at the same load-bearing patterns the GSD ecosystem has been quietly shipping.</div>
+</header>
+
+<main>
+
+  <div class="pull">
+    The fox finds the trail by recognizing the seams the deer made walking it.
+    The seams were always there. The fox just looks where the path is.
+  </div>
+
+  <p>
+    Convergent discovery is a particular kind of validation. Citation is influence; cross-validation is when one team explicitly builds on another team's work. Convergent discovery is heavier than either: independent intellectual currents, with no line of communication, arriving at the same load-bearing structure.
+  </p>
+
+  <p>
+    Between October 2025 and April 2026 we read 930 papers from the arXiv computer-science listing. We narrowed to 54 priority papers. We narrowed again to four anchor papers in our Module 1 — one each on architectural foundations of long-running agentic systems. None of the four authors has any line of communication to the GSD codebase. None cite us; we don't cite them. They published in 2026 inside a research stream we had no hand in shaping.
+  </p>
+
+  <p>
+    They arrived at our patterns anyway. Different watersheds, same trail.
+  </p>
+
+  <h2>The Four Anchors</h2>
+
+  <div class="anchor-grid">
+
+    <div class="anchor">
+      <span class="arxiv"><a href="https://arxiv.org/abs/2604.21910">arXiv:2604.21910</a></span>
+      <h3>Skills-as-Markdown · Three-Tier Pipeline</h3>
+      <p>A population-genetics workflow team independently derives the three-tier semantic / deterministic / knowledge architecture: an LLM extracts intent from natural language; a deterministic dispatcher emits reproducible scripts; markdown skills authored by domain experts encode vocabulary, constraints, and strategies. Their numbers: 44%→83% intent-match accuracy with skills enabled; 92% data-transfer reduction for deferred generation. The shape matches our vision-to-mission → research-mission-generator → skill-creator pipeline point-for-point.</p>
+    </div>
+
+    <div class="anchor">
+      <span class="arxiv"><a href="https://arxiv.org/abs/2604.21744">arXiv:2604.21744</a></span>
+      <h3>GROUNDINGmd · The Document Overrides the Prompt</h3>
+      <p>A proteomics governance team independently rediscovers our CLAUDE.md + Safety Warden BLOCK pattern. Their two-class taxonomy — Hard Constraints (non-negotiable invariants) and Convention Parameters (community-agreed defaults) — overrides every other context the agent receives, including the user prompt itself. The agent must refuse rather than violate a Hard Constraint. The community-governance property is the structural defence against prompt-injection: an attacker has to land a commit, not just emit a prompt.</p>
+    </div>
+
+    <div class="anchor">
+      <span class="arxiv"><a href="https://arxiv.org/abs/2604.20874">arXiv:2604.20874</a></span>
+      <h3>Root Theorem of Context Engineering · The Bounded Tape</h3>
+      <p>Two axioms — the window is finite; per-token information quality decays monotonically with cumulative volume. Five derived consequences. C1 says the decay is independent of nominal window size — a 1M-token model is not exempt. C3 says the right gating signal is fidelity, not capacity. C4 says only architectures that <em>accumulate, compress, rewrite, and shed</em> can sustain understanding indefinitely. C5 says the compressor needs an external verification gate. Each consequence maps to a shipped GSD architectural choice.</p>
+    </div>
+
+    <div class="anchor">
+      <span class="arxiv"><a href="https://arxiv.org/abs/2604.21003">arXiv:2604.21003</a></span>
+      <h3>Last Harness · Worker, Evaluator, Evolution</h3>
+      <p>An agentic-harness research team names the three-role split that gsd-skill-creator has shipped without naming for years. Worker attempts the task. Evaluator <em>adversarially</em> diagnoses failure (not passive scoring; active failure-finding). Evolution proposes harness modifications conditioned on the full failure history. An outer Meta-Evolution loop optimises the protocol itself across diverse tasks. The framing the authors give it: "automating the design of the automation itself." The naming is now adoptable.</p>
+    </div>
+
+  </div>
+
+  <h2>Why It Matters</h2>
+
+  <p>
+    When four works derived in four different problem domains — population genetics, proteomics, abstract context theory, agentic harness research — land on four of GSD's load-bearing primitives, the primitives are not local choices made by one author. They are the engineering equivalent of natural laws. Different drainages converge on the same trail because the contour is the same. What we built by attention and patience, four other teams built by attention and patience.
+  </p>
+
+  <p>
+    We hold this calibration carefully. The convergence is a productive analogy at the design-discipline level — not a theorem-level isomorphism. We do not claim our vision-to-mission is <em>formally identical</em> to the paper's semantic layer; we do not claim Hard Constraints and Safety Warden BLOCK are equal as formal objects. What we claim is structural form and design intent. That is enough to cite, and it is enough to act on.
+  </p>
+
+  <p>
+    The trail is real. The fox finds it.
+  </p>
+
+  <div class="more">
+    Read the full convergent-discovery analysis: <a href="convergent-discovery.html">Convergent Discovery — Four Anchors, One Trail</a>.
+  </div>
+
+  <h2>The Wider Sweep</h2>
+
+  <p>
+    Module 1 is four anchors. Modules 2–6 cover 51 more papers across bounded learning, safety surface, chipset coherence, test synthesis, and cultural sensitivity. The full sweep produced a 129-page mission package, a 55-entry bibliography, and a six-month implementation roadmap. Eighteen phases. Three CAPCOM hard gates requiring human authorization at the gate.
+  </p>
+
+  <p>
+    The release-notes index for v1.49.575 is the engineering counterpart to this page; it lives inside the GSD repository's public release notes. The substrate documents that came out of this sweep — bounded-tape Root Theorem, three-tier pipeline architecture, Worker/Evaluator/Evolution naming — are merging into the GSD codebase across April and May 2026.
+  </p>
+
+  <div class="closing">
+    Different watersheds; same trail.<br>
+    The fox finds the trail by recognizing the seams the deer made walking it.
+    <span class="credit">Through-line · CS25–26 Sweep · v1.49.575</span>
+  </div>
+
+</main>
+
+<footer>
+  Tibsfox Research · © Tibsfox Inc. 2026 · Mukilteo, WA · Convergent-discovery hub
+</footer>
+
+</body>
+</html>

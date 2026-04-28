@@ -1,28 +1,29 @@
 # Release History
 
-625 milestones shipped across the v1.0 → v1.49.582 arc. The table below lists every shipped release, newest first.
+626 milestones shipped across the v1.0 → v1.49.583 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions, and where available, retrospectives and lessons learned. `Commits` is the count of commits between this tag and the previous tag (from git). `Phases` and `Plans` come from structured GSD metadata in the release README — most content/patch releases don't have these. `Retro` links to the retrospective chapter when present. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
-> **Drift detected:** 8 releases flag a retrospective but have no `03-retrospective.md` on disk; 9 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 625 releases · 624 with retrospectives · 624 with extracted lessons · quality A:624 B:1 C:0 D:0 F:0 (avg 97) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+> **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
+**Snapshot:** 626 releases · 625 with retrospectives · 625 with extracted lessons · quality A:623 B:2 C:1 D:0 F:0 (avg 97) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Retro | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|-------|---------|---------|-------|
+| [v1.49.583](release-notes/v1.49.583) | Degree 65: The Persistent Constellation | 2026-04-27 | 10 | — | — | [✓](release-notes/v1.49.583/chapter/03-retrospective.md) | [14](release-notes/v1.49.583/chapter/04-lessons.md) | C 79 |  |
 | [v1.49.582](release-notes/v1.49.582) | Degree 64: The All-Up Commit | 2026-04-27 | 8 | — | — | [✓](release-notes/v1.49.582/chapter/03-retrospective.md) | [18](release-notes/v1.49.582/chapter/04-lessons.md) | A 100 |  |
 | [v1.49.581](release-notes/v1.49.581) | Degree 63: The Controlled Displacement Lift | 2026-04-27 | 5 | — | — | [✓](release-notes/v1.49.581/chapter/03-retrospective.md) | [16](release-notes/v1.49.581/chapter/04-lessons.md) | A 100 |  |
 | [v1.49.580](release-notes/v1.49.580) | BAYES-SEQUENTIAL-MV: Multivariate IPM-BOED via Sliced-Wasserstein | 2026-04-26 | 10 | — | — | [✓](release-notes/v1.49.580/chapter/03-retrospective.md) | [16](release-notes/v1.49.580/chapter/04-lessons.md) | A 100 |  |
 | [v1.49.579](release-notes/v1.49.579) | BAYES-SEQUENTIAL | 2026-04-26 | 8 | — | — | [✓](release-notes/v1.49.579/chapter/03-retrospective.md) | [1/16](release-notes/v1.49.579/chapter/04-lessons.md) | A 100 |  |
 | [v1.49.578](release-notes/v1.49.578) | JULIA-PARAMETER Substantiation + Closure | 2026-04-26 | 11 | — | — | [✓](release-notes/v1.49.578/chapter/03-retrospective.md) | [15](release-notes/v1.49.578/chapter/04-lessons.md) | A 100 |  |
 | [v1.49.577](release-notes/v1.49.577) | JULIA-PARAMETER: Wasserstein-Everywhere | 2026-04-26 | 50 | 20 | — | [✓](release-notes/v1.49.577/chapter/03-retrospective.md) | [15](release-notes/v1.49.577/chapter/04-lessons.md) | A 100 |  |
-| [v1.49.576](release-notes/v1.49.576) | Ecosystem Alignment (OOPS-GSD Alignment + Implementation) | 2026-04-25 | 37 | 11 | — | ✓ _(no file)_ | 10 _(no file)_ | A 100 |  |
-| [v1.49.575](release-notes/v1.49.575) | CS25-26 Sweep → GSD Integration | 2026-04-25 | 16 | 18 | 4 | ✓ _(no file)_ | 9 _(no file)_ | A 100 |  |
-| [v1.49.574](release-notes/v1.49.574) | Megakernel: One Launch, One Chipset | — | 3 | — | — | [✓](release-notes/v1.49.574/chapter/03-retrospective.md) | [4](release-notes/v1.49.574/chapter/04-lessons.md) | A 100 |  |
-| [v1.49.573](release-notes/v1.49.573) | Upstream Intelligence Pack v1.44 (ArXiv eess Integration) | 2026-04-24 | 3 | 24 | — | ✓ _(no file)_ | 14 _(no file)_ | A 100 |  |
-| [v1.49.572](release-notes/v1.49.572) | Mathematical Foundations Refresh | 2026-04-24 | 3 | 19 | — | ✓ _(no file)_ | 13 _(no file)_ | A 98 |  |
-| [v1.49.571](release-notes/v1.49.571) | Heuristics-Free Skill Space | 2026-04-23 | 11 | 15 | — | ✓ _(no file)_ | 14 _(no file)_ | A 100 |  |
-| [v1.49.570](release-notes/v1.49.570) | Convergent Substrate | 2026-04-23 | 3030 | 9 | — | ✓ _(no file)_ | 11 _(no file)_ | A 100 |  |
+| [v1.49.576](release-notes/v1.49.576) | Ecosystem Alignment (OOPS-GSD Alignment + Implementation) | 2026-04-25 | 37 | 11 | — | [✓](release-notes/v1.49.576/chapter/03-retrospective.md) | [10](release-notes/v1.49.576/chapter/04-lessons.md) | A 100 |  |
+| [v1.49.575](release-notes/v1.49.575) | CS25-26 Sweep → GSD Integration | 2026-04-25 | 16 | 18 | 4 | [✓](release-notes/v1.49.575/chapter/03-retrospective.md) | [9](release-notes/v1.49.575/chapter/04-lessons.md) | A 100 |  |
+| [v1.49.574](release-notes/v1.49.574) | Megakernel: One Launch, One Chipset | — | 3 | — | — | [✓](release-notes/v1.49.574/chapter/03-retrospective.md) | [4](release-notes/v1.49.574/chapter/04-lessons.md) | B 88 |  |
+| [v1.49.573](release-notes/v1.49.573) | Upstream Intelligence Pack v1.44 (ArXiv eess Integration) | 2026-04-24 | 3 | 24 | — | [✓](release-notes/v1.49.573/chapter/03-retrospective.md) | [14](release-notes/v1.49.573/chapter/04-lessons.md) | A 100 |  |
+| [v1.49.572](release-notes/v1.49.572) | Mathematical Foundations Refresh | 2026-04-24 | 3 | 19 | — | [✓](release-notes/v1.49.572/chapter/03-retrospective.md) | [13](release-notes/v1.49.572/chapter/04-lessons.md) | A 98 |  |
+| [v1.49.571](release-notes/v1.49.571) | Heuristics-Free Skill Space | 2026-04-23 | 11 | 15 | — | [✓](release-notes/v1.49.571/chapter/03-retrospective.md) | [14](release-notes/v1.49.571/chapter/04-lessons.md) | A 100 |  |
+| [v1.49.570](release-notes/v1.49.570) | Convergent Substrate | 2026-04-23 | 3030 | 9 | — | [✓](release-notes/v1.49.570/chapter/03-retrospective.md) | [11](release-notes/v1.49.570/chapter/04-lessons.md) | A 100 |  |
 | [v1.49.569](release-notes/v1.49.569) | Drift in LLM Systems | 2026-04-23 | 29 | 18 | — | [✓](release-notes/v1.49.569/chapter/03-retrospective.md) | [13](release-notes/v1.49.569/chapter/04-lessons.md) | A 100 |  |
 | [v1.49.568](release-notes/v1.49.568) | Nonlinear Frontier | 2026-04-23 | 34 | 5 | 14 | [✓](release-notes/v1.49.568/chapter/03-retrospective.md) | [9](release-notes/v1.49.568/chapter/04-lessons.md) | A 98 |  |
 | [v1.49.567](release-notes/v1.49.567) | Degree 62: The Ground Beneath the Survey | 2026-04-22 | 1 | — | — | [✓](release-notes/v1.49.567/chapter/03-retrospective.md) | [15](release-notes/v1.49.567/chapter/04-lessons.md) | A 95 |  |
@@ -31,7 +32,7 @@ Each version links to a detailed release notes directory with full feature descr
 | [v1.49.564](release-notes/v1.49.564) | Degree 59: The Engineering Lineage | 2026-04-24 | 10 | — | — | [✓](release-notes/v1.49.564/chapter/03-retrospective.md) | [13](release-notes/v1.49.564/chapter/04-lessons.md) | A 100 |  |
 | [v1.49.563](release-notes/v1.49.563) | Degree 58: Twenty-Four Hours | 2026-04-20 | 2 | — | — | [✓](release-notes/v1.49.563/chapter/03-retrospective.md) | [15](release-notes/v1.49.563/chapter/04-lessons.md) | A 100 |  |
 | [v1.49.562](release-notes/v1.49.562) | Degree 56: Triple Bounce to Smithsonian | 2026-04-19 | 4 | — | — | [✓](release-notes/v1.49.562/chapter/03-retrospective.md) | [14](release-notes/v1.49.562/chapter/04-lessons.md) | A 100 |  |
-| [v1.49.561](release-notes/v1.49.561) | Living Sensoria | 2026-04-18 | 46 | 43 | — | ✓ _(no file)_ | 15 _(no file)_ | A 100 |  |
+| [v1.49.561](release-notes/v1.49.561) | Living Sensoria | 2026-04-18 | 46 | 43 | — | [✓](release-notes/v1.49.561/chapter/03-retrospective.md) | [15](release-notes/v1.49.561/chapter/04-lessons.md) | A 100 |  |
 | [v1.49.560](release-notes/v1.49.560) | Release Documentation Uplift | 2026-04-18 | 1 | — | — | ✓ _(no file)_ | 16 _(no file)_ | B 88 |  |
 | [v1.49.559](release-notes/v1.49.559) | Degree 55: The Unmanned Work Continues | 2026-04-16 | 1 | — | — | [✓](release-notes/v1.49.559/chapter/03-retrospective.md) | [20](release-notes/v1.49.559/chapter/04-lessons.md) | A 100 |  |
 | [v1.49.558](release-notes/v1.49.558) | Degree 54: In Memoriam -- Tough and Competent | 2026-04-16 | 3 | — | — | [✓](release-notes/v1.49.558/chapter/03-retrospective.md) | [23](release-notes/v1.49.558/chapter/04-lessons.md) | A 100 |  |

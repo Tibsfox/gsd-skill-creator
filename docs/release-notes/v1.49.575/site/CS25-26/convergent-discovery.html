@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Convergent Discovery — Four Anchors, One Trail · Tibsfox Research</title>
+<meta name="description" content="The strongest external validation a load-bearing architectural decision can receive is convergent discovery — independent intellectual currents arriving at the same structure. Four 2026 arXiv papers and the GSD ecosystem.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #263238;
+    --secondary: #1565C0;
+    --tertiary: #37474F;
+    --accent: #0277BD;
+    --light-primary: #ECEFF1;
+    --light-secondary: #E3F2FD;
+    --border-gray: #BDBDBD;
+    --subtle-gray: #757575;
+    --dark-text: #212121;
+    --card-bg: #FAFAFA;
+    --card-border: #E0E0E0;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    color: var(--dark-text);
+    background: #FAFAFA;
+    line-height: 1.7;
+  }
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--tertiary) 100%);
+    color: white;
+    padding: 4rem 2rem 3rem;
+    text-align: center;
+  }
+  header .label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #B0BEC5;
+    margin-bottom: 1rem;
+  }
+  header h1 {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 2.4rem;
+    margin: 0.3rem 0 0.6rem;
+    line-height: 1.2;
+  }
+  header .subtitle {
+    font-style: italic;
+    font-size: 1.1rem;
+    color: #CFD8DC;
+    margin: 0.6rem auto 0;
+    max-width: 760px;
+  }
+  header nav { margin-top: 1.4rem; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; }
+  header nav a { color: #90CAF9; text-decoration: none; border-bottom: 1px dotted #90CAF9; }
+  header nav a:hover { color: #BBDEFB; }
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+  }
+  .pull {
+    background: var(--light-primary);
+    border-left: 4px solid var(--primary);
+    padding: 1.2rem 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+    color: var(--tertiary);
+  }
+  h2 {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--primary);
+    font-size: 1.6rem;
+    border-bottom: 1px solid var(--border-gray);
+    padding-bottom: 0.4rem;
+    margin: 2.8rem 0 1rem;
+  }
+  h3 {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--tertiary);
+    font-size: 1.2rem;
+    margin: 1.6rem 0 0.5rem;
+  }
+  p { margin: 0 0 1.1rem; }
+  ul { margin: 0.5rem 0 1.2rem; padding-left: 1.4rem; }
+  li { margin-bottom: 0.5rem; }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px dotted var(--accent); }
+  a:hover { color: var(--secondary); border-bottom-color: var(--secondary); }
+  code {
+    font-family: 'DM Mono', 'Fira Mono', Menlo, monospace;
+    background: var(--light-primary);
+    padding: 0.1em 0.4em;
+    border-radius: 3px;
+    font-size: 0.88em;
+    color: var(--primary);
+  }
+  .anchor-block {
+    background: white;
+    border: 1px solid var(--card-border);
+    border-left: 4px solid var(--accent);
+    padding: 1.5rem 1.7rem;
+    margin: 1.5rem 0 2rem;
+    border-radius: 0 4px 4px 0;
+  }
+  .anchor-block .arxiv {
+    font-family: 'DM Mono', 'Fira Mono', monospace;
+    color: var(--accent);
+    font-size: 0.9rem;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+  .anchor-block h2 { border-bottom: none; margin-top: 0; padding-bottom: 0; }
+  .calibration {
+    background: var(--light-secondary);
+    border-left: 4px solid var(--accent);
+    padding: 1.3rem 1.5rem;
+    margin: 2rem 0;
+    border-radius: 0 4px 4px 0;
+  }
+  .calibration h3 { margin-top: 0; color: var(--primary); }
+  .closing {
+    background: var(--light-primary);
+    border-left: 4px solid var(--primary);
+    padding: 1.4rem 1.6rem;
+    margin-top: 3rem;
+    font-style: italic;
+    color: var(--tertiary);
+    text-align: center;
+  }
+  .closing .credit {
+    font-family: 'DM Sans', sans-serif;
+    font-style: normal;
+    font-size: 0.78rem;
+    color: var(--subtle-gray);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 0.8rem;
+    display: block;
+  }
+  footer {
+    text-align: center;
+    color: var(--subtle-gray);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    padding: 2rem 1rem 3rem;
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="label">Tibsfox Research · CS25–26 Sweep · Keystone Narrative</div>
+  <h1>Convergent Discovery — Four Anchors, One Trail</h1>
+  <div class="subtitle">The strongest external validation a load-bearing architectural decision can receive is convergent discovery: independent intellectual currents arriving at the same structure.</div>
+  <nav>← <a href="index.html">Back to CS25–26 Sweep hub</a></nav>
+</header>
+
+<main>
+
+  <div class="pull">
+    Citation is influence; convergent discovery is evidence. When two systems built without contact derive equivalent shapes for the same job, the shape is more likely a property of the problem than an idiosyncrasy of either author.
+  </div>
+
+  <h2>§1 Why Convergent Discovery Matters</h2>
+
+  <p>
+    The patterns are the seams the deer made walking it; the deer were always walking the same watershed. This page is the public companion to the v1.49.575 keystone document — the convergent-discovery validation report that closes Wave 2 of our six-month research sweep.
+  </p>
+
+  <p>
+    Cross-validation is the lighter pattern: paper A cites paper B's primitive and re-tests it. Useful, but it does not rule out the idiosyncrasy hypothesis — paper A's design might still be wrong, just shared. Convergent discovery is heavier: independently-derived equivalent structures arising without communication. None of the four anchor authors of this milestone has any line of communication to the GSD ecosystem. None cite GSD; GSD does not cite them. The structural matches are not borrowed; they are derived.
+  </p>
+
+  <p>
+    What makes Module 1 the keystone is that all four anchors land on architectural foundations rather than secondary tactics: the system-level shape of an LLM-driven research pipeline; the document-level safety doctrine that overrides user prompts; the information-theoretic substrate of long-running agent context; and the meta-evolutionary loop a self-improving harness must run. Each is load-bearing — remove it and the rest of the structure tilts.
+  </p>
+
+  <div class="anchor-block">
+    <span class="arxiv">arXiv:2604.21910</span>
+    <h2>§2 Skills-as-Markdown · Three-Tier Pipeline</h2>
+    <p>
+      A population-genetics workflow team proposes a three-layer agentic architecture for population-genetics workflow synthesis. The <strong>semantic layer</strong> uses an LLM to extract structured intent from a natural-language research question. The <strong>deterministic layer</strong> dispatches that intent to validated DAG generators that emit reproducible workflow scripts; this layer contains no LLM calls and is therefore behaviourally stable across runs. The <strong>knowledge layer</strong> holds domain-expert markdown documents called "Skills" that encode vocabulary mappings, parameter constraints, and optimisation strategies. LLM non-determinism is confined entirely to intent extraction; identical intents produce identical workflows.
+    </p>
+    <p>
+      Two numbers worth pinning. Full intent-match accuracy rises from a 44% baseline (no skills) to 83% (skills enabled). Skill-driven deferred workflow generation cuts data transfer 92% versus eager generation.
+    </p>
+    <p>
+      <strong>The convergence.</strong> The structural equivalence is point-for-point. Their semantic layer maps to GSD's vision-to-mission (LLM intent extraction). Their deterministic layer maps to research-mission-generator (validated generators with stable scaffolding). Their knowledge layer maps to gsd-skill-creator's <code>.claude/skills/</code> and <code>examples/</code> libraries. Both confine non-determinism to intent extraction. Both treat the knowledge layer as <em>markdown authored by domain experts</em> rather than learned weights or runtime-rewritable state — a non-obvious choice the paper makes for population genetics and GSD makes for cross-domain creative tooling.
+    </p>
+  </div>
+
+  <div class="anchor-block">
+    <span class="arxiv">arXiv:2604.21744</span>
+    <h2>§3 GROUNDINGmd · Hard Constraints + Convention Parameters</h2>
+    <p>
+      A proteomics governance team proposes a community-governed, field-scoped epistemic grounding document the agent loads before any task. The document defines two override-everything classes. <strong>Hard Constraints</strong> are non-negotiable validity invariants empirically required for scientific correctness in the field — for example, "do not let the agent silently change the m/z tolerance below the instrument resolution." <strong>Convention Parameters</strong> are community-agreed defaults: units, schemas, naming, the standard search-tolerance for a given mass-spec workflow.
+    </p>
+    <p>
+      Both classes override every other context the agent receives, including the user prompt itself. The agent must refuse — must BLOCK — rather than violate a Hard Constraint. The document is <strong>community-governed</strong>: changes require consensus, not individual modification. That is the structural defence against prompt-injection: an attacker who wants to relax a rule has to land a commit, not just emit a prompt.
+    </p>
+    <p>
+      <strong>The convergence.</strong> The GROUNDINGmd construct is — in nearly its exact shape — GSD's CLAUDE.md + SKILL.md + Safety Warden BLOCK pattern. CLAUDE.md is the project-scoped grounding document loaded before any task; the system reminder at the top of every Claude Code session includes the override clause verbatim. The Safety Warden BLOCK pattern in <code>.claude/skills/security-hygiene/SKILL.md</code> ensures that on safety-critical decisions the agent refuses regardless of the user prompt. The two-class taxonomy maps cleanly: Hard Constraints ↔ Safety Warden HARD GATE; Convention Parameters ↔ CLAUDE.md project conventions. The community-governance property is also present: CLAUDE.md and SKILL.md ship under git, with PR-style review for changes.
+    </p>
+  </div>
+
+  <div class="anchor-block">
+    <span class="arxiv">arXiv:2604.20874</span>
+    <h2>§4 Root Theorem of Context Engineering · The Bounded Tape</h2>
+    <p>
+      The paper formalises the agent's working context as a <strong>bounded lossy channel</strong>. Two axioms: (i) the window is finite; (ii) per-token information quality decays monotonically with cumulative volume. From these two axioms, five consequences are derived.
+    </p>
+    <ul>
+      <li><strong>C1.</strong> Quality degrades monotonically with token volume <em>independent of nominal window size</em>. A 1M-token model is not exempt; it merely slides the absolute number at which the decay becomes operationally painful.</li>
+      <li><strong>C2.</strong> Signal density and token-count are <em>independent</em> optimisation variables; optimising one does not optimise the other.</li>
+      <li><strong>C3.</strong> Gating must trigger on <em>fidelity thresholds, not capacity</em>. "Is the context window 80% full?" is the wrong question; "has the signal-to-noise dropped below the tolerated threshold?" is the right one.</li>
+      <li><strong>C4.</strong> Only architectures that <em>accumulate, compress, rewrite, and shed</em> can sustain understanding indefinitely. Pure accumulation diverges.</li>
+      <li><strong>C5.</strong> The compressor needs an <em>external verification gate</em> because it operates inside the same channel it is compressing — self-review is structurally inadequate.</li>
+    </ul>
+    <p>
+      The paper demonstrates the framework empirically with a 60+-session persistent agent showing stable memory footprint and stable task quality.
+    </p>
+    <p>
+      <strong>The convergence.</strong> Each consequence maps to a shipped GSD architectural decision. C1 is the formal justification for why our 20% / 3-correction / 7-day cooldown bounded-learning caps don't relax with bigger context windows. C3 is the formal derivation of CAPCOM gating policy: gates trigger on phase boundaries and fidelity, not on token-budget exhaustion. C4 is exactly our milestone retrospective lifecycle — accumulate during execution, compress in retrospective, rewrite into substrate documents, shed via the done-retirement skill. C5 is our fresh-context-subagent verification pattern: the orchestrator does not self-review its own outputs; a separate-context subagent provides the verification gate.
+    </p>
+  </div>
+
+  <div class="anchor-block">
+    <span class="arxiv">arXiv:2604.21003</span>
+    <h2>§5 Last Harness · Worker, Evaluator, Evolution</h2>
+    <p>
+      The paper proposes a two-level framework for self-improving agentic harnesses. At the inner level, the <strong>Harness Evolution Loop</strong> pairs three agents. A <strong>Worker</strong> attempts the target task. An <strong>Evaluator</strong> adversarially diagnoses Worker failures and scores performance — its job is not passive correctness-grading but active failure-finding. An <strong>Evolution</strong> agent proposes harness modifications conditioned on the full Worker / Evaluator failure history. At the outer level, the <strong>Meta-Evolution Loop</strong> optimises the evolution protocol itself across a diverse set of tasks.
+    </p>
+    <p>
+      The framing the authors give the contribution: "automating the design of the automation itself."
+    </p>
+    <p>
+      <strong>The convergence.</strong> This paper is essentially an external description of <code>gsd-skill-creator</code>'s purpose. The two-level structure maps directly onto skill-creator's existing design: the inner Harness Evolution Loop corresponds to skill-creator's six-step learning loop applied to a single skill; the outer Meta-Evolution Loop corresponds to the bounded-learning policy that operates across skills. The roles are present in skill-creator today but ad-hoc — implicit Worker (the skill being applied), implicit Evaluator (the 3-correction-minimum rule), implicit Evolution (the bounded-learning policy). The Last Harness paper gives us the published vocabulary. Adopting Worker / Evaluator / Evolution as the formal naming convention is one of the v1.49.575 implementation deliverables.
+    </p>
+    <p>
+      The Evaluator role is also an upgrade. The current 3-correction-min rule is <em>passive</em> — count corrections after the fact. The paper's Evaluator is <em>active</em> — probe for failure modes the Worker did not surface. That replacement is a meaningful improvement to skill-creator's discipline, and v1.49.575 ships the role-isolated subagents to support it.
+    </p>
+  </div>
+
+  <h2>§6 The Four Together</h2>
+
+  <p>
+    What do the four anchors say together about GSD?
+  </p>
+  <ul>
+    <li><strong>The architecture is right.</strong> Skills-as-md three-tier maps point-for-point onto vision-to-mission → research-mission-generator → gsd-skill-creator.</li>
+    <li><strong>The safety doctrine is right.</strong> GROUNDINGmd Hard Constraints + Convention Parameters is the published independent rediscovery of CLAUDE.md + Safety Warden BLOCK.</li>
+    <li><strong>The cognitive substrate is right.</strong> The Root Theorem formalises the bounded-tape framing — two axioms, five consequences, each mapped to a shipped GSD architectural decision.</li>
+    <li><strong>The evolutionary loop is right.</strong> Last Harness names skill-creator's Worker / Evaluator / Evolution pattern explicitly.</li>
+  </ul>
+
+  <p>
+    Four independent peer-reviewed works arrive at GSD's load-bearing patterns from four different problem domains — population genetics, proteomics, abstract context theory, agentic harness research. The patterns are not idiosyncratic. They are the engineering equivalent of natural laws. Different watersheds; same trail. The seams the deer have made walking the trail across multiple drainages are visible from above, and they all run the same way because the contour is the same.
+  </p>
+
+  <div class="calibration">
+    <h3>§7 Calibration</h3>
+    <p>
+      It is important to distinguish two registers. <strong>Productive analogy at the design-discipline level</strong> is the register this report stays in. At the design-discipline level, GSD and these four papers share design intent and structural form — same role split, same overrides, same lifecycle, same gate placement. This is a strong external-citation register.
+    </p>
+    <p>
+      <strong>Theorem-level equivalence</strong> is what we do <em>not</em> claim. We do not claim GSD's vision-to-mission is isomorphic to the paper's semantic layer in a category-theoretic sense; we do not claim Hard Constraints and Safety Warden BLOCK are equal as formal objects; we do not claim the Root Theorem's two-axiom derivation is <em>the</em> derivation of CAPCOM policy. Theorem-level claims would require formal proof and a shared formalism — neither is present here, and neither is needed for the citations the report supports.
+    </p>
+    <p>
+      The rhyme is a productive analogy at the design-discipline level, not a theorem. We present it externally with that calibration intact.
+    </p>
+  </div>
+
+  <h2>§8 What Comes Next</h2>
+
+  <p>
+    Half B of the v1.49.575 milestone implements the seven adoptable findings (HB-01 through HB-07): Tool Attention as a lazy MCP schema loader; AgentDoG as the where/how/what diagnostic taxonomy on every BLOCK; STD calibration measuring per-model omission decay; Worker/Evaluator/Evolution as the formal role split; the five-principle structural-completeness linter; the four-type ambiguity linter; and the AEL Thompson-Sampling bandit for skill auto-load. Three of those seven carry CAPCOM HARD GATE designation requiring human authorization at the gate: STD calibration, WELER roles, and AEL bandit.
+  </p>
+
+  <p>
+    Five further findings (HB-08 through HB-12) sit in the backlog with documented promotion triggers, awaiting the v1.49.576+ milestones.
+  </p>
+
+  <p>
+    The seams are mapped; what remains is to walk them.
+  </p>
+
+  <div class="closing">
+    Different watersheds; same trail.<br>
+    The fox finds the trail by recognizing the seams the deer made walking it.
+    <span class="credit">Through-line · CS25–26 Sweep · v1.49.575</span>
+  </div>
+
+</main>
+
+<footer>
+  Tibsfox Research · © Tibsfox Inc. 2026 · Mukilteo, WA · Convergent-discovery keystone narrative
+</footer>
+
+</body>
+</html>
