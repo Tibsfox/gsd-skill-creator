@@ -1,27 +1,59 @@
-# v1.49.583 — Degree 65 — Forward Lessons (for v1.66 Carryover)
+# Lessons — v1.49.583
 
-## New Lessons Emitted at v1.65
+14 lessons extracted. Classification source: ⚙ rule-based · 🤖 LLM tiebreaker (needs review) · 👤 human.
 
-1. **Single Write tool calls >50 KB exceed the 600s watchdog with high probability.** Fleet build agents writing index.html-class files (~86–97 KB) need to use a copy+edit strategy (cp template → cp output, then targeted Edits) to break the work into many smaller tool calls. The original NASA + MUS fleet build agents both stalled at 600s when attempting to Write the full index.html in a single tool call; recovery required re-dispatch with explicit copy+edit strategy. Future fleet build prompts should include this as the default for any file >50 KB.
+1. **Single Write tool calls >50 KB exceed the 600s watchdog with high probability.**
+   Fleet build agents writing index.html-class files (~86–97 KB) need to use a copy+edit strategy to break the work into many smaller tool calls. Build prompt template needs this as a default.
+   _⚙ Status: `investigate` · lesson #10142_
 
-2. **Recovery agents should grep-verify before reporting completion.** The first round of copy+edit recovery agents swapped some v1.64 references but left artifact filenames + cross-track card hrefs + narrative content in v1.64 form. A second cleanup-pass round was required to scrub residuals. Future copy+edit prompts should include `grep -cE '<bad-pattern>' file && exit-if-nonzero` as part of the contract, plus a small-list of specific patterns that the agent must verify are absent before reporting completion.
+2. **Recovery agents should grep-verify before reporting completion.**
+   A copy+edit pass that swaps some references but leaves others creates a partial-state file that fails subsequent QA. Recovery prompts should include `grep -cE '<bad-pattern>' file && exit-if-nonzero` as part of the contract.
+   _⚙ Status: `investigate` · lesson #10143_
 
-3. **PERSISTENT-CONSTELLATION-LISTENER opens with strong watchlist candidates.** Pioneer 9 + ISEE-3 + ACE + Voyager 1+2 are all strong 2nd/3rd exemplar candidates; the variant has a clearer path-to-stabilization than ALL-UP COMMITMENT did at v1.64 origin. Pioneer 9 specifically is at v1.66 (the next chronological mission after Pioneer 8 in the same constellation); a structural opportunity for the PERSISTENT-CONSTELLATION-LISTENER 2nd-exemplar slot to land at v1.66 directly.
+3. **Domain coverage JSONs are easy-to-forget.**
+   Both MUS + ELC domain-coverage.json files were stale at v1.582 close (didn't catch v1.64 closures); v1.65 had to catch up two milestones of drift. Add domain-coverage-update to the standard Phase C checklist; consider auto-update via populate script.
+   _⚙ Status: `investigate` · lesson #10144_
 
-4. **Cross-track artistic-engineering analog primitive: sustained-signal as identity is substrate-independent.** The v1.65 trans-domain isomorphism (Earth drone-tone + Sandhill Crane bugle + Pioneer 8 1 Hz beat) is a clean demonstration that committal-by-persistence is a substrate-independent design pattern. Future degrees should explicitly look for this primitive shape in cross-track triads — when the engineering signal carries the same structural shape as the artistic primitive (sustained held tone, sustained dyadic call, sustained AM modulation), the cross-track binding is structurally tighter than when the engineering content is unrelated to the artistic content.
+4. **PERSISTENT-CONSTELLATION-LISTENER as a §6.6 thread origin opens with strong watchlist candidates.**
+   Pioneer 9 + ISEE-3 + ACE + Voyager 1+2 are all strong 2nd/3rd exemplar candidates; the variant has a clearer path-to-stabilization than ALL-UP COMMITMENT did at v1.64 origin.
+   _⚙ Status: `investigate` · lesson #10145_
 
-5. **First multi-decade-mission entry opens a new mission-design category.** Pioneer 8's 28-year 8-month operational lifetime introduces a category of mission-design that prior degrees did not address: identity-as-sustained-signal across decades. Future degrees in the multi-decade category (Voyager 1+2, ACE, ISEE-3, Mars rovers, New Horizons, Pioneer 6+7+9) should reference v1.65 as the category opener. Multi-decade missions also raise structurally distinct concerns from short-duration missions: ground-station infrastructure refresh across decades; component-aging-after-launch as load-bearing engineering finding; reactivation-after-dormancy as engineering capability; multi-generational on-call team handoff at the operations level.
+5. **Cross-track artistic-engineering analog primitive: sustained-signal as identity is substrate-independent.**
+   The v1.65 trans-domain isomorphism (Earth drone-tone + Sandhill Crane bugle + Pioneer 8 1 Hz beat) is a clean demonstration that committal-by-persistence is a substrate-independent design pattern. Future degrees should explicitly look for this primitive shape in cross-track triads.
+   _⚙ Status: `investigate` · lesson #10146_
 
-6. **Sandhill Crane tracheal-coil error in the original brief is a useful cautionary tale.** The 5 m vs ~1.0–1.2 m fact-check error came from a mis-attribution of trumpeter swan comparative-anatomy figure to a sandhill crane context. Spec authors caught the error and propagated correction across brief, STATE.md, all 3 subject-specs, and downstream fleet build files. Process anchor: spec authors should always cross-check anatomical/physical claims against authoritative comparative-anatomy sources (Fitch 1999 J. Zool. is the canonical reference for tracheal elongation in birds).
+6. **First multi-decade-mission entry opens a new mission-design category.**
+   Pioneer 8's 28y8m operational lifetime introduces a category of mission-design that prior degrees did not address. Future degrees in the multi-decade category (Voyager, ACE, ISEE-3, Mars rovers) should reference v1.65 as the category opener.
+   _⚙ Status: `investigate` · lesson #10147_
 
-7. **Carry-forward drift in domain coverage is an early warning.** When two milestones in a row (v1.582 carrying v1.64 closures) leave a JSON file out of date, that's a signal that the file should be auto-generated from the source-of-truth catalog rather than manually maintained. Add domain-coverage-update to the standard Phase C checklist (already done for v1.65); plan a maintenance milestone to make populate-mus-elc-landing.mjs also write the domain-coverage JSON updates.
+7. **Sandhill Crane tracheal-coil error in the original brief is a useful cautionary tale.**
+   The 5 m vs ~1.0–1.2 m fact-check error came from a mis-attribution of trumpeter swan comparative-anatomy figure to a sandhill crane context. Spec authors caught the error and propagated correction. Process anchor: spec authors should always cross-check anatomical/physical claims against authoritative comparative-anatomy sources (Fitch 1999 J. Zool. is the canonical reference for tracheal elongation in birds).
+   _⚙ Status: `investigate` · lesson #10148_
 
-8. **Two-phase Write strategy (skeleton + Edit-fill) is a useful general pattern.** Beyond the index.html case, any file authored via subagent that is >50 KB should consider this strategy. Variant: structured-skeleton placeholder + multiple targeted Edits for content sections. The pattern saves wall-clock time, avoids watchdog stalls, and makes per-section content review tractable.
+8. **Carry-forward drift in domain coverage is an early warning.**
+   When two milestones in a row leave a JSON file out of date, that's a signal that the file should be auto-generated from the source-of-truth catalog rather than manually maintained.
+   _⚙ Status: `investigate` · lesson #10149_
 
-9. **Cross-track 1 Hz beat as identity-signature is a teachable demonstration of the substrate-independent pattern.** The Pioneer 8 spin-modulation signature is a literal engineering instantiation of the sustained-pitch primitive — it is the kind of cross-domain isomorphism that the gsd-skill-creator engine is designed to surface and that pedagogical content should center. The v1.65 NASA index Card 5 (Persistent Constellation Analysis) and MUS index research.md both surface this anchor explicitly; future degrees should plan for explicit cross-domain-isomorphism callouts in their Card 5 / research.md anchors.
+9. **Two-phase Write strategy (skeleton + Edit-fill) is a useful general pattern.**
+   Beyond the index.html case, any file authored via subagent that is >50 KB should consider this strategy. Variant: structured-skeleton placeholder + multiple targeted Edits for content sections.
+   _⚙ Status: `investigate` · lesson #10150_
 
-10. **Ship-pipeline gate from v1.582 drift remediation works.** `node tools/release-history/check-completeness.mjs --current --strict` was run before tag and exited 0 (PASS); the gate is now part of the normal ship pipeline and successfully prevents the v1.49.577–580 silent-skip pattern. Future maintenance: consider also running the per-release scorer (`node tools/release-history/run-with-pg.mjs score-completeness --version v1.49.583`) before tag to confirm A 100/100 grade.
+10. **Cross-track 1 Hz beat as identity-signature is a teachable demonstration of the substrate-independent pattern.**
+   The Pioneer 8 spin-modulation signature is a literal engineering instantiation of the sustained-pitch primitive — it is the kind of cross-domain isomorphism that the gsd-skill-creator engine is designed to surface and that pedagogical content should center.
+   _⚙ Status: `investigate` · lesson #10151_
 
-11. **Three-track triple closure-pattern continues to deliver clean co-anchored release contexts.** Three consecutive degrees (v1.63 + v1.64 + v1.65) shipping as three-track forward-cadence triples have now provided clean co-anchored release contexts where every track's structural advance is visible and every track's narrative is reinforced by the others. The pattern's structural value: each track's spec author can use the other two specs as cross-validation for narrative coherence; each track's index.html cross-track sidebar provides bidirectional structural binding; each track's release-notes can cite the others.
+11. **Two fleet agent stalls writing the index.html (~86–97 KB single-Write).**
+   The MUS fleet build agent and the NASA fleet build agent both stalled at 600s when attempting to Write the full index.html in a single tool call. Recovery required re-dispatch with explicit copy+edit strategy (cp v1.64 → v1.65, then targeted Edits) to avoid the single-large-Write watchdog. Future fleet build prompts should include the copy+edit strategy for any file >50 KB by default.
+   _⚙ Status: `investigate` · lesson #10152_
 
-12. **NASA index.html residual-from-template cleanup is a known limitation of the copy+edit strategy.** When the template is structurally rich (v1.64's index.html has 654 lines of Apollo 4 narrative content), the copy+edit strategy is faster than regeneration but can leave narrative residuals if the cleanup-pass scope is bounded. v1.65's NASA index ships with some Card 1 / Card 3 / Card 4 / Card 9 narrative content that still uses Apollo 4 anchoring rather than Pioneer 8; structural elements (title, header, mission summary, Card 5 Persistent Constellation Analysis, Card 7 Firsts, cross-track sidebar) are clean v1.65 content. Future copy+edit recovery should include an explicit cleanup-pass scope-bound: scan all narrative cards, not just the prominent ones.
+12. **Recovery agents did partial substitutions.**
+   The first round of copy+edit recovery agents swapped some v1.64 references but left artifact filenames + cross-track card hrefs + some narrative content in the original v1.64 form. A second cleanup-pass round was required to scrub residuals. Future copy+edit prompts should include an explicit residual-scan step + grep-verify gate before reporting completion.
+   _⚙ Status: `investigate` · lesson #10153_
+
+13. **simulation.html aggregator template still pending.**
+   NASA 1.65 references `artifacts/sims/*.html` directly per the v1.63+ pattern; the proposed `simulation.html` per-degree aggregator page is not yet shipped. Decision-pending: aggregator template OR rewrite Track 5 card to point at `artifacts/`.
+   _⚙ Status: `investigate` · lesson #10154_
+
+14. **flight-hardware-mapping.csv has no row for v1.65.**
+   ELC scorer reports "no year for degree in mapping" → 4/5 era anchoring (benign warning). The CSV should be updated with a Pioneer 8 / 1967-12-13 / si-discrete row in next maintenance pass.
+   _⚙ Status: `investigate` · lesson #10155_

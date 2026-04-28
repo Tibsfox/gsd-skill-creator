@@ -1,6 +1,6 @@
 # Lessons — v1.49.569
 
-8 lessons extracted. Classification source: ⚙ rule-based · 🤖 LLM tiebreaker (needs review) · 👤 human.
+13 lessons extracted. Classification source: ⚙ rule-based · 🤖 LLM tiebreaker (needs review) · 👤 human.
 
 1. **Insert an Opus editorial pass between W0 foundation and W1 parallel surveys on any citation-heavy research milestone.**
    Phase 684.1 resolved 24 papers as `supported`, flagged 5 as `partial`, produced zero mismatches — the single highest-return intervention in v1.49.569. Without it, five partials would have propagated into the 42-page final doc and surfaced at the W3 hard-block gate under emergency-revision conditions. Apply whenever a milestone cites ≥15 primary sources with numerical claims.
@@ -33,3 +33,23 @@
 8. **Test density is a module-property, not a milestone-property.**
    DRIFT-24 grounding-faithfulness has 49 assertions in one file; DRIFT-26 drift-audit CLI has 12 across four integration tests. Neither number is "wrong" — each matches the natural complexity of the domain it's testing. Don't impose uniform per-module test counts; let the surface dictate the density.
    _⚙ Status: `investigate` · lesson #9888_
+
+9. **Live tibsfox.com HTTP check deferred.**
+   DRIFT-13 requires the four DRIFT pages return HTTP 200. The pages are present on disk at `www/tibsfox/com/Research/DRIFT/` and queued for FTP sync via `scripts/sync-research-to-live.sh`. The HTTP-200 verification requires the live FTP sync to complete, which is a manual step outside the gsd-skill-creator execution surface. Confirmed working for the prior NLF pages (same pipeline); deferred to human reviewer.
+   _⚙ Status: `investigate` · lesson #9979_
+
+10. **Test-count running sum vs vitest authoritative count.**
+   Per-phase running sum (using grep counts of `it(` / `test(` occurrences) reaches 26,352 by Phase 698, but vitest's authoritative count of unique test IDs within describe blocks is 26,135. The vitest number is correct. Recommendation for future milestones: stop maintaining a per-phase grep running sum — only the vitest count matters.
+   _⚙ Status: `investigate` · lesson #9980_
+
+11. **MATH-style cross-document duplication risk in 684.1 vs 689.**
+   The 684.1 editorial review (`audits/editorial-review.md`) and the W3 publication's `audits/citation_audit.md` both record per-paper status. They're consistent but duplicated. A future consolidation pass should designate one canonical and point the other at it.
+   _⚙ Status: `investigate` · lesson #9981_
+
+12. **Phase 698 default-off invariance test depends on grep-noise stability.**
+   The golden-output test passes today but is sensitive to non-substantive changes in test output formatting (vitest version bumps, reporter changes). A future hardening pass should pin the snapshot to a reduced surface (e.g., file count + total count) rather than full output.
+   _⚙ Status: `investigate` · lesson #9982_
+
+13. **`scripts/drift/bci-validate.mjs` shipped without a CLI doc.**
+   It was an unplanned utility; the four planned scripts have docs at `docs/cli/drift-audit.md` but `bci-validate.mjs` does not. Recommendation: add `docs/cli/bci-validate.md` in a follow-up release.
+   _⚙ Status: `investigate` · lesson #9983_
