@@ -6,16 +6,16 @@ Each version links to a detailed release notes directory with full feature descr
 
 
 > **Drift detected:** 8 releases flag a retrospective but have no `03-retrospective.md` on disk; 9 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 625 releases · 618 with retrospectives · 618 with extracted lessons · quality A:618 B:1 C:0 D:0 F:6 (avg 97) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 625 releases · 624 with retrospectives · 624 with extracted lessons · quality A:624 B:1 C:0 D:0 F:0 (avg 97) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Retro | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|-------|---------|---------|-------|
-| [v1.49.582](release-notes/v1.49.582) | Degree 64: The All-Up Commit | 2026-04-27 | 8 | — | — | — | — | F 14 |  |
-| [v1.49.581](release-notes/v1.49.581) | Degree 63: The Controlled Displacement Lift | 2026-04-27 | 5 | — | — | — | — | F 10 |  |
-| [v1.49.580](release-notes/v1.49.580) | BAYES-SEQUENTIAL-MV: Multivariate IPM-BOED via Sliced-Wasserstein | 2026-04-26 | 10 | — | — | — | — | F 29 |  |
-| [v1.49.579](release-notes/v1.49.579) | BAYES-SEQUENTIAL | 2026-04-26 | 8 | — | — | — | — | F 16 |  |
-| [v1.49.578](release-notes/v1.49.578) | JULIA-PARAMETER Substantiation + Closure | 2026-04-26 | 11 | — | — | — | — | F 16 |  |
-| [v1.49.577](release-notes/v1.49.577) | JULIA-PARAMETER: Wasserstein-Everywhere | 2026-04-26 | 50 | — | — | — | — | F 20 |  |
+| [v1.49.582](release-notes/v1.49.582) | Degree 64: The All-Up Commit | 2026-04-27 | 8 | — | — | [✓](release-notes/v1.49.582/chapter/03-retrospective.md) | [18](release-notes/v1.49.582/chapter/04-lessons.md) | A 100 |  |
+| [v1.49.581](release-notes/v1.49.581) | Degree 63: The Controlled Displacement Lift | 2026-04-27 | 5 | — | — | [✓](release-notes/v1.49.581/chapter/03-retrospective.md) | [16](release-notes/v1.49.581/chapter/04-lessons.md) | A 100 |  |
+| [v1.49.580](release-notes/v1.49.580) | BAYES-SEQUENTIAL-MV: Multivariate IPM-BOED via Sliced-Wasserstein | 2026-04-26 | 10 | — | — | [✓](release-notes/v1.49.580/chapter/03-retrospective.md) | [16](release-notes/v1.49.580/chapter/04-lessons.md) | A 100 |  |
+| [v1.49.579](release-notes/v1.49.579) | BAYES-SEQUENTIAL | 2026-04-26 | 8 | — | — | [✓](release-notes/v1.49.579/chapter/03-retrospective.md) | [1/16](release-notes/v1.49.579/chapter/04-lessons.md) | A 100 |  |
+| [v1.49.578](release-notes/v1.49.578) | JULIA-PARAMETER Substantiation + Closure | 2026-04-26 | 11 | — | — | [✓](release-notes/v1.49.578/chapter/03-retrospective.md) | [15](release-notes/v1.49.578/chapter/04-lessons.md) | A 100 |  |
+| [v1.49.577](release-notes/v1.49.577) | JULIA-PARAMETER: Wasserstein-Everywhere | 2026-04-26 | 50 | 20 | — | [✓](release-notes/v1.49.577/chapter/03-retrospective.md) | [15](release-notes/v1.49.577/chapter/04-lessons.md) | A 100 |  |
 | [v1.49.576](release-notes/v1.49.576) | Ecosystem Alignment (OOPS-GSD Alignment + Implementation) | 2026-04-25 | 37 | 11 | — | ✓ _(no file)_ | 10 _(no file)_ | A 100 |  |
 | [v1.49.575](release-notes/v1.49.575) | CS25-26 Sweep → GSD Integration | 2026-04-25 | 16 | 18 | 4 | ✓ _(no file)_ | 9 _(no file)_ | A 100 |  |
 | [v1.49.574](release-notes/v1.49.574) | Megakernel: One Launch, One Chipset | — | 3 | — | — | [✓](release-notes/v1.49.574/chapter/03-retrospective.md) | [4](release-notes/v1.49.574/chapter/04-lessons.md) | A 100 |  |
