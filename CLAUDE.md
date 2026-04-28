@@ -97,6 +97,40 @@ This preserves bisect intent in the commit message even when commit boundaries d
 - Skills load automatically based on context -- no explicit invocation needed
 - **Session auto-init:** when starting a new mission, run `node tools/session-retro/observe.mjs start '<mission-name>'` as your first Bash call. This captures `started_commit` for `generate.mjs --since …` and gives the retrospective real event data. Close with `observe.mjs end` + `generate.mjs` before context dies. Token usage can be dual-logged via `observe.mjs event tokens <in> <out> [label]`.
 
+## Ship Pipeline — Required Per-Milestone Artifacts
+
+Every dev-line milestone (v1.49.NNN) MUST ship with the standard 5-file release-notes structure under `docs/release-notes/<version>/`:
+
+```
+docs/release-notes/v1.49.NNN/
+├── README.md                      # ~40-60 lines summary + cross-track + thread state
+└── chapter/
+    ├── 00-summary.md              # 50-80 lines structural firsts + engine state
+    ├── 03-retrospective.md        # 30-60 lines carryover lessons applied + new lessons
+    ├── 04-lessons.md              # 30-60 lines forward lessons emitted
+    └── 99-context.md              # 50-80 lines engine-state tables
+```
+
+**Gold reference:** `docs/release-notes/v1.49.581/` and `docs/release-notes/v1.49.582/` — mirror these file-for-file.
+
+**Pre-ship gate (HARD RULE — do not skip):**
+
+```bash
+node tools/release-history/check-completeness.mjs --current
+```
+
+The gate runs against `package.json` `version`. It exits non-zero if any of the 5 required files is missing. Run it BEFORE: tagging the milestone, merging dev → main, pushing main, or creating the GH release. Add `--strict` to also check that each file has ≥200 bytes of content.
+
+**Why this gate exists:** v1.49.577–v1.49.580 (4 milestones in 1 day, 2026-04-26) shipped without authoring release-notes because velocity was prioritized over docs discipline. The drift was caught at v1.49.582 ship and remediated 2026-04-27 by backfilling the 4 missing dirs + adding this gate. Subsequent ship pipelines must run the gate.
+
+**RELEASE-HISTORY.md refresh (post-tag):**
+
+```bash
+node tools/release-history/run-with-pg.mjs refresh --fast --quiet
+```
+
+The wrapper reads `/media/foxy/ai/GSD/dev-tools/artemis-ii/.env` (PG_HOST/PORT/USER/DB + the anonymous-password-list section), builds `RH_POSTGRES_URL`, and invokes `tools/release-history/refresh.mjs`. The wrapper exists because the `.env` file's anonymous-password-list section breaks shell `source` due to special characters in passwords. Use the wrapper, never `source .env` directly.
+
 ## External Citations (CS25–26 Sweep)
 
 Three foundational papers from the v1.49.575 CS25–26 Sweep give published derivations for load-bearing GSD architectural choices. See `.planning/missions/cs25-26-sweep/work/synthesis/convergent-discovery.md` for the full four-anchor analysis.
