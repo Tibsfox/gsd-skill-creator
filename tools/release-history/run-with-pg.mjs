@@ -1,23 +1,28 @@
 #!/usr/bin/env node
-// Wrapper: parse the artemis-ii .env file safely (its anonymous-password-list
-// section at the bottom breaks shell `source`), build RH_POSTGRES_URL, then
-// invoke refresh.mjs / publish.mjs with that env set.
+// Wrapper: read PG credentials from <repo-root>/.env (canonical), set
+// RH_POSTGRES_URL in the environment, then invoke refresh.mjs / publish.mjs.
 //
-// The .env shape is:
-//   PG_HOST=...
-//   PG_PORT=...
-//   PG_USER=...
-//   PG_DB=...
-//   FTP_HOST=...
-//   FTP_USER=...
-//   FTP_PASS=...
-//   <anonymous password 1>     ← lines 8-11; not key=value
-//   <anonymous password 2>
-//   <anonymous password 3>
-//   <anonymous password 4>     ← last line; per project memory, "ends with role name"
+// The .env shape (project root):
+//   RH_POSTGRES_URL=postgresql://<user>:<pass>@<host>:<port>/<db>   ← preferred
+//   PGHOST=...
+//   PGPORT=...
+//   PGUSER=...
+//   PGDATABASE=...
+//   PGPASSWORD=...
 //
-// We try each anonymous-password line as PG_PASSWORD until pg connects, in
-// reverse order (last-line first per the memory hint).
+// If RH_POSTGRES_URL is present, it is used verbatim. Otherwise the wrapper
+// constructs it from PGHOST/PGPORT/PGUSER/PGDATABASE/PGPASSWORD.
+//
+// Override the .env path via:
+//   RH_ENV_FILE=/path/to/alt/.env node tools/release-history/run-with-pg.mjs <args>
+//
+// The legacy `ARTEMIS_REPO_ENV` env var is accepted for backward-compatibility
+// with operators who may have it set, but its use is deprecated. The wrapper
+// previously parsed `PG_HOST`/`PG_PORT`/`PG_USER`/`PG_DB` plus an anonymous-
+// password-list section from the artemis-ii worktree's .env; both that path
+// default AND the password-list parsing were removed in v1.49.585 (full
+// deprecation per user direction; see .planning/missions/v1-49-585-
+// concerns-cleanup/components/08-artemis-env-var.md and CONCERNS §8).
 //
 // Usage: node tools/release-history/run-with-pg.mjs <subcommand> [args...]
 //   e.g. node tools/release-history/run-with-pg.mjs refresh --fast --quiet
@@ -30,44 +35,119 @@ import { fileURLToPath } from 'node:url';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(HERE, '..', '..');
-const ENV_PATH = '/media/foxy/ai/GSD/dev-tools/artemis-ii/.env';
+
+/**
+ * Path to the .env file containing PG credentials.
+ *
+ * Default: <repo-root>/.env (canonical location per v1.49.585 user direction).
+ *
+ * Override precedence (first match wins):
+ *   1. RH_ENV_FILE=<path>        (preferred new env-var)
+ *   2. ARTEMIS_REPO_ENV=<path>   (deprecated alias; kept for backward-compat)
+ *   3. <repo-root>/.env          (default)
+ */
+const ENV_PATH =
+  process.env.RH_ENV_FILE ??
+  process.env.ARTEMIS_REPO_ENV ??
+  join(REPO_ROOT, '.env');
+
+const ENV_SOURCE = process.env.RH_ENV_FILE
+  ? 'RH_ENV_FILE env var'
+  : process.env.ARTEMIS_REPO_ENV
+    ? 'ARTEMIS_REPO_ENV env var (deprecated)'
+    : 'default <repo-root>/.env';
+
+// --check flag: exit 0 after env-file existence + RH_POSTGRES_URL presence
+// verification, before the subcommand spawn. Used by C08 test fixtures.
+const CHECK_ONLY = process.argv.includes('--check');
+
+if (process.env.ARTEMIS_REPO_ENV && !process.env.RH_ENV_FILE) {
+  console.error(
+    `[run-with-pg] DEPRECATION NOTICE: ARTEMIS_REPO_ENV is deprecated as of v1.49.585. ` +
+    `Use RH_ENV_FILE instead. The wrapper continues to honor ARTEMIS_REPO_ENV for now ` +
+    `for backward-compat with existing operator setups.`
+  );
+}
 
 if (!existsSync(ENV_PATH)) {
-  console.error(`fatal: ${ENV_PATH} not found`);
-  process.exit(1);
+  console.error(`
+[run-with-pg] PG credentials .env file not found.
+
+  Resolved path: ${ENV_PATH}
+  Source:        ${ENV_SOURCE}
+
+  This script needs an .env file containing either RH_POSTGRES_URL (preferred)
+  or PGHOST/PGPORT/PGUSER/PGDATABASE/PGPASSWORD that can be assembled into one.
+
+  Resolution options:
+    1. Create <repo-root>/.env with at minimum RH_POSTGRES_URL=postgresql://...
+    2. If your .env is at a different path:
+         RH_ENV_FILE=/your/path/to/.env node tools/release-history/run-with-pg.mjs <args>
+    3. If you don't have PG access, you cannot run release-history refresh.
+       The check-completeness.mjs gate runs without it — only refresh requires PG.
+
+  See: CLAUDE.md "RELEASE-HISTORY.md refresh (post-tag)" section.
+`);
+  process.exit(2);
 }
 
-const lines = readFileSync(ENV_PATH, 'utf8').split('\n').filter(l => l.trim());
+// Parse the .env file — KEY=VALUE lines only; comments and blanks ignored.
+const envLines = readFileSync(ENV_PATH, 'utf8').split('\n');
 const kv = {};
-const anonPasswords = [];
-
-for (const line of lines) {
-  const m = /^([A-Z_][A-Z0-9_]*)=(.*)$/.exec(line);
-  if (m && /^(PG_|FTP_)/.test(m[1])) {
-    kv[m[1]] = m[2];
-  } else if (!/^#/.test(line) && !/^[A-Z_]+=/.test(line)) {
-    // Doesn't look like KEY=VALUE; treat as anonymous password line
-    anonPasswords.push(line);
+for (const raw of envLines) {
+  const line = raw.trim();
+  if (!line || line.startsWith('#')) continue;
+  const m = /^([A-Za-z_][A-Za-z0-9_]*)=(.*)$/.exec(line);
+  if (!m) continue;
+  let value = m[2];
+  // Strip MATCHED outer quotes only (single or double); preserve a lone leading
+  // apostrophe that is part of a value (per FTP_PASS gotcha — first char of
+  // some passwords is a literal `'`). The matched-pair test guards against
+  // stripping a substantive leading quote.
+  if (value.length >= 2) {
+    const first = value[0];
+    const last = value[value.length - 1];
+    if ((first === '"' && last === '"') || (first === "'" && last === "'")) {
+      value = value.slice(1, -1);
+    }
   }
+  kv[m[1]] = value;
 }
 
-const required = ['PG_HOST', 'PG_PORT', 'PG_USER', 'PG_DB'];
-for (const k of required) {
-  if (!kv[k]) {
-    console.error(`fatal: missing ${k} in ${ENV_PATH}`);
+// Derive RH_POSTGRES_URL: prefer the .env's pre-built value; fall back to
+// constructing from PGHOST/PGPORT/PGUSER/PGDATABASE/PGPASSWORD.
+let RH_POSTGRES_URL = kv.RH_POSTGRES_URL ?? '';
+let derivedFrom = 'RH_POSTGRES_URL';
+
+if (!RH_POSTGRES_URL) {
+  const required = ['PGHOST', 'PGPORT', 'PGUSER', 'PGDATABASE', 'PGPASSWORD'];
+  const missing = required.filter(k => !kv[k]);
+  if (missing.length) {
+    console.error(
+      `[run-with-pg] fatal: ${ENV_PATH} has neither RH_POSTGRES_URL nor ` +
+      `the full PG{HOST,PORT,USER,DATABASE,PASSWORD} set.\n` +
+      `  Missing keys: ${missing.join(', ')}\n` +
+      `  Resolution: add RH_POSTGRES_URL=postgresql://... to ${ENV_PATH}, ` +
+      `OR add the missing PG* keys.`
+    );
     process.exit(1);
   }
-}
-if (anonPasswords.length === 0) {
-  console.error('fatal: no anonymous-password lines found in .env');
-  process.exit(1);
+  const encUser = encodeURIComponent(kv.PGUSER);
+  const encPass = encodeURIComponent(kv.PGPASSWORD);
+  RH_POSTGRES_URL = `postgresql://${encUser}:${encPass}@${kv.PGHOST}:${kv.PGPORT}/${kv.PGDATABASE}`;
+  derivedFrom = 'PGHOST/PGPORT/PGUSER/PGDATABASE/PGPASSWORD';
 }
 
-// Try each anonymous password (last-first per memory hint)
-const passwordOrder = [...anonPasswords].reverse();
+if (CHECK_ONLY) {
+  console.log(
+    `[run-with-pg] --check OK: ${ENV_PATH} exists; ` +
+    `RH_POSTGRES_URL ${derivedFrom === 'RH_POSTGRES_URL' ? 'present (pre-built)' : 'derived from PG* keys'}`
+  );
+  process.exit(0);
+}
 
 const subcommand = process.argv[2];
-const subArgs = process.argv.slice(3);
+const subArgs = process.argv.slice(3).filter(a => a !== '--check');
 if (!subcommand) {
   console.error('usage: node run-with-pg.mjs <subcommand> [args...]');
   console.error('  subcommand: refresh | publish | scan | ingest | <other-tool>.mjs');
@@ -83,60 +163,19 @@ if (!existsSync(subcommandPath)) {
   process.exit(1);
 }
 
-// Test each password by running a tiny pg-connect probe via psql (if available)
-// or via node's pg client. Simpler: just try each in order; the first one that
-// allows the wrapped subcommand to exit non-fatally wins.
-
-function buildPgUrl(password) {
-  // URL-encode the password (special chars are present)
-  const encUser = encodeURIComponent(kv.PG_USER);
-  const encPass = encodeURIComponent(password);
-  return `postgresql://${encUser}:${encPass}@${kv.PG_HOST}:${kv.PG_PORT}/${kv.PG_DB}`;
-}
-
-// First, probe with `psql` if available — much faster than running the full
-// subcommand. Falls back to spawning the actual subcommand if psql is absent.
-const psqlAvail = spawnSync('which', ['psql'], { encoding: 'utf8' }).status === 0;
-
-let workingPassword = null;
-if (psqlAvail) {
-  for (const pw of passwordOrder) {
-    const url = buildPgUrl(pw);
-    const probe = spawnSync('psql', [url, '-c', 'SELECT 1'], {
-      encoding: 'utf8',
-      env: { ...process.env, PGCONNECT_TIMEOUT: '3' },
-      stdio: ['ignore', 'pipe', 'pipe'],
-    });
-    if (probe.status === 0) {
-      workingPassword = pw;
-      break;
-    }
-  }
-  if (!workingPassword) {
-    console.error('fatal: none of the anonymous-password lines accepted by Postgres');
-    console.error(`tried ${passwordOrder.length} passwords against ${kv.PG_HOST}:${kv.PG_PORT}/${kv.PG_DB} as user ${kv.PG_USER}`);
-    process.exit(1);
-  }
-} else {
-  // No psql — just use the last-line password (per memory hint)
-  workingPassword = passwordOrder[0];
-  console.error('[run-with-pg] psql not found; using last-line password (unverified)');
-}
-
-const RH_POSTGRES_URL = buildPgUrl(workingPassword);
-
-// Now run the subcommand with the env populated
+// Run the subcommand with RH_POSTGRES_URL set in env. Also forward PG* keys
+// for any tooling that prefers them as separate variables.
 const result = spawnSync('node', [subcommandPath, ...subArgs], {
   cwd: REPO_ROOT,
   stdio: 'inherit',
   env: {
     ...process.env,
     RH_POSTGRES_URL,
-    PGPASSWORD: workingPassword,
-    PG_HOST: kv.PG_HOST,
-    PG_PORT: kv.PG_PORT,
-    PG_USER: kv.PG_USER,
-    PG_DB: kv.PG_DB,
+    ...(kv.PGHOST ? { PGHOST: kv.PGHOST } : {}),
+    ...(kv.PGPORT ? { PGPORT: kv.PGPORT } : {}),
+    ...(kv.PGUSER ? { PGUSER: kv.PGUSER } : {}),
+    ...(kv.PGDATABASE ? { PGDATABASE: kv.PGDATABASE } : {}),
+    ...(kv.PGPASSWORD ? { PGPASSWORD: kv.PGPASSWORD } : {}),
   },
 });
 
