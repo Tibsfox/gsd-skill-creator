@@ -144,6 +144,16 @@
         "description": "PreToolUse: BLOCK git add of .planning|.claude|.archive|artifacts/ unless SC_FORCE_ADD=1 (v1.49.585 C02)"
       },
       {
+        "source": "hooks/__tests__/self-mod-guard.test.sh",
+        "target": ".claude/hooks/__tests__/self-mod-guard.test.sh",
+        "description": "Self-test for self-mod-guard hook (10 cases; sterile via env -i, v1.49.586 T2.2)"
+      },
+      {
+        "source": "hooks/__tests__/git-add-blocker.test.sh",
+        "target": ".claude/hooks/__tests__/git-add-blocker.test.sh",
+        "description": "Self-test for git-add-blocker hook (10 cases; sterile via env -i, v1.49.586 T2.2)"
+      },
+      {
         "source": "hooks/gsd-inject-snapshot.js",
         "target": ".claude/hooks/gsd-inject-snapshot.js",
         "description": "Session start: inject latest snapshot"

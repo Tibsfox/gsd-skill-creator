@@ -45,6 +45,7 @@
     "dev": "tsx src/cli.ts",
     "test": "vitest --project root --project space-between",
     "test:integration": "vitest run --project integration",
+    "test:hooks": "bash tools/hook-tests-sterile.sh",
     "setup:claude": "skill-creator gsd-init",
     "setup:claude:force": "skill-creator gsd-init --force",
     "setup:claude:check": "skill-creator gsd-init --dry-run",
