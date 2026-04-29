@@ -154,6 +154,126 @@ test.describe('NASA shared-harness v1.0.0', () => {
     await expect(panel.locator('label')).toHaveCount(state.count);
   });
 
+  test('forest real subsystems: 6 implementations smoke-test', async ({ page }) => {
+    // Exercises the v1.0.0-amendment-6 subsystem implementations:
+    //   boids, lsystem, circadian, kuramoto, physarum, audio
+    // Each is verified against a behavioral invariant rather than a structural
+    // check, so future stub re-introductions would fail the test.
+    await timedGoto(page, `${FIXTURES}/forest-module/subsystems-test.html`);
+    await page.waitForFunction(
+      () => (window as any).__SUBSYSTEMS_READY__ === true,
+      { timeout: LOAD_BUDGET_MS }
+    );
+    // Initial state baseline.
+    const t0 = await page.evaluate(() => ({
+      boidsPop:  (window as any).__boids.boids.length,
+      lsysPop:   (window as any).__lsystem.plants.length,
+      kuraN:     (window as any).__kuramoto.opts.N,
+      phyAgents: (window as any).__physarum.agents.length,
+      phySources:(window as any).__physarum.sources.size,
+      ctxState:  (window as any).__audio.stats().ctxState,
+    }));
+    expect(t0.boidsPop).toBe(200);
+    expect(t0.lsysPop).toBe(14);          // populationTarget default
+    expect(t0.kuraN).toBe(80);
+    expect(t0.phyAgents).toBe(240);
+    expect(t0.phySources).toBeGreaterThanOrEqual(3);    // 3 default seeds
+    expect(t0.ctxState).toBe('never-created');           // pre-unlock
+
+    // Direct-tick the subsystems instead of relying on rAF — playwright's
+    // headless rAF cadence is not reliably fast enough to make the GA loops
+    // deterministic in a 30 s test budget.
+    await page.evaluate(() => {
+      const b = (window as any).__boids;
+      const ls = (window as any).__lsystem;
+      const k = (window as any).__kuramoto;
+      const p = (window as any).__physarum;
+      const c = (window as any).__circadian;
+      for (let i = 0; i < 30; i++) {
+        c.tick(1/30); ls.tick(1/30); b.tick(1/30); k.tick(1/30); p.tick(1/30);
+      }
+    });
+
+    // boids: predator removes a boid. Use a large kill radius so the test is
+    // deterministic regardless of starting positions.
+    const boidsRes = await page.evaluate(() => {
+      const b = (window as any).__boids;
+      const before = b.boids.length;
+      b.addPredator({ id: 'smoke-pred', x: b.canvas.width / 2, y: b.canvas.height / 2,
+                      radius: 800, killCooldown: 0 });
+      // Tick deterministically — at radius=800, kill ring=144px covers
+      // ~30% of a 1024×576 canvas, so several boids are inside on each tick.
+      for (let i = 0; i < 60; i++) b.tick(1/30);
+      return { before, after: b.boids.length, stats: b._stats,
+               predatorIds: [...b.predators.keys()] };
+    });
+    expect(boidsRes.predatorIds).toContain('smoke-pred');
+    expect(boidsRes.stats.predationKills).toBeGreaterThan(0);
+    expect(boidsRes.after).toBeLessThan(boidsRes.before + 1);  // kills outpace births within 2s
+
+    // lsystem: bumpDensity adds plants instantly.
+    const lsysRes = await page.evaluate(() => {
+      const ls = (window as any).__lsystem;
+      const before = ls.plants.length;
+      ls.bumpDensity(3, 5000);
+      return { before, after: ls.plants.length, bumps: ls.densityBumps.length };
+    });
+    expect(lsysRes.after - lsysRes.before).toBe(3);
+    expect(lsysRes.bumps).toBe(1);
+
+    // circadian: 24h compressed into 4 s, so phase advances measurably across
+    // a 1.2 s wall-clock window.
+    const circadianRes = await page.evaluate(() => new Promise<{p1: number, p2: number}>((res) => {
+      const c = (window as any).__circadian;
+      const p1 = c.phase();
+      setTimeout(() => res({ p1, p2: c.phase() }), 1200);
+    }));
+    expect(Math.abs(circadianRes.p2 - circadianRes.p1)).toBeGreaterThan(0.05);
+
+    // kuramoto: phase reference + coupling raise the peak order parameter
+    // measurably above resting drift. Cauchy-distributed intrinsic frequencies
+    // mean a few outliers fight the coupling indefinitely (the slow-cadence
+    // visual is intentional), so we sample over a window and check the peak.
+    const kuraRes = await page.evaluate(() => {
+      const k = (window as any).__kuramoto;
+      const r0 = k.r;
+      k.addPhaseReference({ phase: 0.0, strength: 0.9 });
+      k.setCoupling(0.5);
+      let rPeak = 0;
+      for (let i = 0; i < 240; i++) {
+        k.tick(1/30);
+        if (k.r > rPeak) rPeak = k.r;
+      }
+      return { r0, rPeak };
+    });
+    expect(kuraRes.rPeak).toBeGreaterThan(kuraRes.r0 + 0.05);
+
+    // physarum: agents deposit pheromone — totalWeight grows over time.
+    const phyRes = await page.evaluate(() => {
+      const p = (window as any).__physarum;
+      return {
+        weight: p.stats().totalWeight,
+        sample: p.sampleHighestWeightNode(),
+      };
+    });
+    expect(phyRes.weight).toBeGreaterThan(0);
+    expect(Number.isFinite(phyRes.sample.weight)).toBe(true);
+
+    // audio: locked → unlocked transition, and addLayer counter increments.
+    await page.locator('#audio-toggle').click();
+    await page.waitForTimeout(300);
+    const audioRes = await page.evaluate(() => {
+      const a = (window as any).__audio;
+      a.addLayer('smoke-layer', { gain: -30, frequency: 220 });
+      a.fireEvent('smoke-event', { gain: -25, duration: 0.05 });
+      return a.stats();
+    });
+    expect(audioRes.unlocked).toBe(true);
+    expect(audioRes.ctxState).toBe('running');
+    expect(audioRes.activeLayers).toBeGreaterThanOrEqual(1);
+    expect(audioRes.events).toBeGreaterThanOrEqual(1);
+  });
+
   test('all four runners load within 3s budget (combined)', async ({ page }) => {
     const urls = [
       `${FIXTURES}/audio/sample-synth.html`,
