@@ -494,6 +494,62 @@ test.describe('NASA shared-harness v1.0.0', () => {
     });
   });
 
+  test('forest panel-augment: footer roll-up + colorized digest icons', async ({ page }) => {
+    await timedGoto(page, `${FIXTURES}/forest-module/panel-augment-axis-test.html`);
+    await page.waitForFunction(
+      () => (window as any).__PANEL_AUGMENT_READY__ === true,
+      { timeout: LOAD_BUDGET_MS }
+    );
+
+    // 1) Footer exists, declares total + axis, and has cross-axis rows.
+    const footer = await page.evaluate(() => {
+      const f = document.querySelector('#missions-panel .__footer');
+      if (!f) return { exists: false };
+      return {
+        exists: true,
+        text: (f as HTMLElement).innerText.trim(),
+        rowCount: f.querySelectorAll(':scope > div').length - 1,  // minus header line
+      };
+    });
+    expect(footer.exists).toBe(true);
+    expect(footer.text).toMatch(/^4 modules · sorted by program/);
+    expect(footer.rowCount).toBeGreaterThanOrEqual(2);  // Bird + Plant + Fungus
+
+    // 2) Footer rows include percentages.
+    const hasPct = await page.evaluate(() => {
+      const f = document.querySelector('#missions-panel .__footer');
+      return f ? /\d+\s*·\s*\d+%/.test((f as HTMLElement).innerText) : false;
+    });
+    expect(hasPct).toBe(true);
+
+    // 3) Cross-axis digest icons: at least one digest span carries an
+    // inline color style (the program-axis tints organism icons).
+    const colored = await page.evaluate(() => {
+      const spans = document.querySelectorAll('#missions-panel summary .__digest span[data-cross-key]');
+      for (const s of spans) {
+        const c = (s as HTMLElement).style.color;
+        if (c && c.length > 0) return { count: spans.length, sample: c };
+      }
+      return { count: spans.length, sample: null };
+    });
+    expect(colored.count).toBeGreaterThanOrEqual(1);
+    expect(colored.sample).toMatch(/^(rgb|hsl)\(/);
+
+    // 4) Toggle to organism axis: footer rebuilds with program rows.
+    await page.click('#missions-panel button');
+    await page.waitForTimeout(100);
+    const orgFooter = await page.evaluate(() => {
+      const f = document.querySelector('#missions-panel .__footer');
+      return f ? (f as HTMLElement).innerText.trim() : '';
+    });
+    expect(orgFooter).toMatch(/^4 modules · sorted by organism/);
+
+    // Clean up persisted axis.
+    await page.evaluate(() => {
+      try { localStorage.removeItem('forest-panel-axis'); } catch (_) {}
+    });
+  });
+
   test('forest URL deep-link + share-button: round-trip', async ({ page, context }) => {
     // Grant clipboard permissions so the share button can write.
     await context.grantPermissions(['clipboard-read', 'clipboard-write']);
