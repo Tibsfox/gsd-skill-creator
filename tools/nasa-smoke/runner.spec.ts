@@ -349,6 +349,103 @@ test.describe('NASA shared-harness v1.0.0', () => {
     expect(classifyChecks.forest).toBe('Forest / SPS');
   });
 
+  test('forest perf budget: 60 ticks of all 5 subsystems under regression threshold', async ({ page }) => {
+    // Headless-Chromium CPU budget. Headless lacks GPU acceleration, so
+    // canvas operations are slower than they will be in a real browser.
+    // Baseline measured 2026-04-29 was ~1140ms total / ~19ms per tick.
+    // Budget set at 1.6× the baseline: catches a noticeable regression
+    // while accommodating CI/runner variance.
+    //
+    // The test exercises *real CPU work* — actual subsystem tick + render
+    // calls in sequence. Frame time in real browsers (with GPU canvas +
+    // hardware acceleration) is ~3-5× faster.
+    await timedGoto(page, `${FIXTURES}/forest-module/subsystems-test.html`);
+    await page.waitForFunction(
+      () => (window as any).__SUBSYSTEMS_READY__ === true,
+      { timeout: LOAD_BUDGET_MS }
+    );
+
+    const result = await page.evaluate(() => {
+      const b = (window as any).__boids;
+      const ls = (window as any).__lsystem;
+      const c = (window as any).__circadian;
+      const k = (window as any).__kuramoto;
+      const p = (window as any).__physarum;
+      const ctx2d = document.getElementById('forest-canvas')!.getContext('2d')!;
+      // Warm-up: 10 ticks discarded (JIT, growable buffers, etc.)
+      for (let i = 0; i < 10; i++) {
+        c.tick(1/60); ls.tick(1/60); b.tick(1/60); k.tick(1/60); p.tick(1/60);
+        c.render(ctx2d); ls.render(ctx2d); b.render(ctx2d); k.render(ctx2d); p.render(ctx2d);
+      }
+      const start = performance.now();
+      for (let i = 0; i < 60; i++) {
+        c.tick(1/60); ls.tick(1/60); b.tick(1/60); k.tick(1/60); p.tick(1/60);
+        c.render(ctx2d); ls.render(ctx2d); b.render(ctx2d); k.render(ctx2d); p.render(ctx2d);
+      }
+      const elapsed = performance.now() - start;
+      return { elapsed, perTick: elapsed / 60 };
+    });
+    console.log(`  perf: 60 ticks in ${result.elapsed.toFixed(1)}ms, ${result.perTick.toFixed(2)}ms/tick`);
+    expect(result.elapsed).toBeLessThan(1800);  // 1.6× baseline of ~1140ms
+    expect(result.perTick).toBeLessThan(30);
+  });
+
+  test('forest URL deep-link + share-button: round-trip', async ({ page, context }) => {
+    // Grant clipboard permissions so the share button can write.
+    await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+
+    // Pre-enable two modules via ?modules=...
+    await timedGoto(page, `${FIXTURES}/forest-module/deeplink-test.html?modules=1.0,1.12`);
+    await page.waitForFunction(
+      () => (window as any).__DEEPLINK_READY__ === true,
+      { timeout: LOAD_BUDGET_MS }
+    );
+
+    const preEnabled = await page.evaluate(() => (window as any).__PRE_ENABLED__);
+    expect(preEnabled).toEqual(expect.arrayContaining(['1.0', '1.12']));
+    expect(preEnabled).not.toContain('1.46');
+
+    // Verify the corresponding registry modules' enable() was actually called.
+    const enabledCounts = await page.evaluate(() => {
+      const m = (window as any).__MODULES__;
+      return { m1: m.m1._enabled, m2: m.m2._enabled, m3: m.m3._enabled };
+    });
+    expect(enabledCounts.m1).toBe(1);
+    expect(enabledCounts.m2).toBe(1);
+    expect(enabledCounts.m3).toBe(0);
+
+    // Add 1.46 via UI toggle, then click share — the resulting URL should
+    // contain 1.0, 1.12, AND 1.46 deduplicated.
+    await page.evaluate(() => {
+      for (const lbl of document.querySelectorAll('#missions-panel label')) {
+        if (lbl.textContent?.includes('1.46')) {
+          (lbl.querySelector('input[type=checkbox]') as HTMLInputElement).click();
+          return;
+        }
+      }
+    });
+    await page.click('#share-scene');
+    await page.waitForFunction(
+      () => (document.getElementById('share-result')!.textContent || '').length > 0,
+      { timeout: 1000 }
+    );
+    const shareUrl = await page.locator('#share-result').textContent();
+    expect(shareUrl).toMatch(/[?&]modules=/);
+    const url = new URL(shareUrl!);
+    const versions = (url.searchParams.get('modules') || '').split(',').sort();
+    expect(versions).toEqual(['1.0', '1.12', '1.46']);
+
+    // Round-trip: load the share URL on a fresh navigation and verify those
+    // three modules are pre-enabled.
+    await timedGoto(page, shareUrl!.replace(url.origin, ''));
+    await page.waitForFunction(
+      () => (window as any).__DEEPLINK_READY__ === true,
+      { timeout: LOAD_BUDGET_MS }
+    );
+    const roundtrip = await page.evaluate(() => (window as any).__PRE_ENABLED__);
+    expect(roundtrip.sort()).toEqual(['1.0', '1.12', '1.46']);
+  });
+
   test('all four runners load within 3s budget (combined)', async ({ page }) => {
     const urls = [
       `${FIXTURES}/audio/sample-synth.html`,
