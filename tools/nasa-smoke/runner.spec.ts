@@ -390,6 +390,50 @@ test.describe('NASA shared-harness v1.0.0', () => {
     expect(result.perTick).toBeLessThan(30);
   });
 
+  test('forest panel-augment: organism axis toggle', async ({ page }) => {
+    // The augmenter accepts a JSON sidecar with { program, organismCategory }
+    // entries keyed by missionVersion. The panel exposes an axis-toggle
+    // button that flips the bucket key between program and organism.
+    await timedGoto(page, `${FIXTURES}/forest-module/panel-augment-axis-test.html`);
+    await page.waitForFunction(
+      () => (window as any).__PANEL_AUGMENT_READY__ === true,
+      { timeout: LOAD_BUDGET_MS }
+    );
+
+    // Initial axis: 'program'. Synthetic fixture seeds 4 sidecar entries
+    // with mixed program/organism so we can verify both buckets.
+    const programInit = await page.evaluate(() =>
+      [...document.querySelectorAll('#missions-panel details')].map((d) => ({
+        key: (d as HTMLElement).dataset.program,
+        axis: (d as HTMLElement).dataset.axis,
+        n: d.querySelectorAll(':scope > label').length,
+      }))
+    );
+    expect(programInit.every((g) => g.axis === 'program')).toBe(true);
+    expect(programInit.length).toBeGreaterThanOrEqual(2);
+
+    // Toggle the axis.
+    await page.click('#missions-panel button');
+    const organismView = await page.evaluate(() =>
+      [...document.querySelectorAll('#missions-panel details')].map((d) => ({
+        key: (d as HTMLElement).dataset.program,
+        axis: (d as HTMLElement).dataset.axis,
+        n: d.querySelectorAll(':scope > label').length,
+      }))
+    );
+    expect(organismView.every((g) => g.axis === 'organism')).toBe(true);
+    expect(organismView.map((g) => g.key)).toEqual(expect.arrayContaining(['Bird', 'Plant']));
+
+    // Toggle back.
+    await page.click('#missions-panel button');
+    const programAgain = await page.evaluate(() =>
+      [...document.querySelectorAll('#missions-panel details')].map((d) =>
+        (d as HTMLElement).dataset.axis
+      )
+    );
+    expect(programAgain.every((a) => a === 'program')).toBe(true);
+  });
+
   test('forest URL deep-link + share-button: round-trip', async ({ page, context }) => {
     // Grant clipboard permissions so the share button can write.
     await context.grantPermissions(['clipboard-read', 'clipboard-write']);
