@@ -241,7 +241,10 @@ async function criterion11_takeaway(degreeDir) {
   const p = join(degreeDir, 'research.md');
   if (!await exists(p)) return { score: 0, max: 5, threshold: 4, pass: false, detail: 'research.md missing' };
   const text = await readFile(p, 'utf8');
-  const re = /^#{1,6}\s+pedagogical takeaway\s*$/im;
+  // Allow optional numeric prefix (e.g. "## 7. Pedagogical Takeaway") — matches MUS scorer.
+  // Standardized 2026-04-28 in v1.49.585 component C06 to eliminate per-ship gap-fix
+  // iteration; see .planning/missions/v1-49-585-concerns-cleanup/components/06-elc-scorer-regex.md
+  const re = /^#{1,6}\s+(?:\d+\.\s+)?pedagogical takeaway\s*$/im;
   const m = re.exec(text);
   if (!m) return { score: 0, max: 5, threshold: 4, pass: false, detail: 'section missing' };
   const after = text.slice(m.index + m[0].length);

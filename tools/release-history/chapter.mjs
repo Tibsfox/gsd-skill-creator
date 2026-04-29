@@ -4,16 +4,28 @@
 // Each release gets: 00-summary, 99-context, and conditionally 01-features,
 // 03-retrospective, 04-lessons. Plus top-level STORY.md and INDEX.md.
 //
-// Idempotent: overwrites each chapter file with DB-derived content.
+// Idempotency model (v1.49.585 C04):
+//   - DEFAULT: preserve existing chapter files whose first 200 bytes do NOT
+//     match the DB-derivable opener template. This protects hand-authored
+//     gold-standard release-notes (CONCERNS §5; v1.49.583 incident).
+//   - --force-regenerate flag: bypass preservation and overwrite all chapters.
+//     Use when backfilling historical milestones (e.g. v1.49.577–580 case).
+//   - Conservative bias: when in doubt, PRESERVE. A false-preserve costs
+//     nothing (DB regen runs frequently); a false-overwrite costs a hand-
+//     authored gold-standard ship.
 
-import { writeFileSync, mkdirSync, existsSync } from 'node:fs';
-import { join } from 'node:path';
+import { writeFileSync, readFileSync, mkdirSync, existsSync, statSync } from 'node:fs';
+import { join, basename } from 'node:path';
 import { loadConfig, REPO_ROOT } from './config.mjs';
 import { openDb } from './db.mjs';
 
 const ctx_cfg = loadConfig();
 const ROADMAP_DIR = ctx_cfg.roadmap_dir_abs;
 mkdirSync(ROADMAP_DIR, { recursive: true });
+
+// CLI flag parsing: --force-regenerate bypasses idempotent preservation.
+const ARGV = process.argv.slice(2);
+const FORCE_REGENERATE = ARGV.includes('--force-regenerate');
 
 function esc(s) { return (s || '').replace(/\|/g, '\\|'); }
 function fmtDate(d) {
@@ -27,6 +39,108 @@ function trimPara(s, max = 400) {
   const trimmed = s.trim();
   if (trimmed.length <= max) return trimmed;
   return trimmed.slice(0, max).replace(/\s+\S*$/, '') + '…';
+}
+
+// ---------------------------------------------------------------------------
+// Idempotent-write helper (C04 from v1.49.585).
+// ---------------------------------------------------------------------------
+
+/**
+ * Normalize text for opener-match comparison: collapse whitespace runs to
+ * single space, strip leading UTF-8 BOM, trim. Used to compare two openers
+ * tolerantly across whitespace formatting differences.
+ */
+export function normalizeOpener(s) {
+  if (!s) return '';
+  // Strip UTF-8 BOM if present.
+  let t = s.charCodeAt(0) === 0xFEFF ? s.slice(1) : s;
+  return t.replace(/\s+/g, ' ').trim();
+}
+
+/**
+ * Decide whether the existing chapter file's first 200 bytes match the
+ * shape of the generated DB-derivable opener.
+ *
+ * Heuristic: normalize both, take the first 100 chars, compute a Jaccard-like
+ * overlap on whitespace-split tokens. >50% overlap → match (DB-derivable).
+ *
+ * Conservative direction: when in doubt, return false (mismatch → preserve).
+ */
+export function openerMatches(existingOpener, generatedOpener) {
+  const a = normalizeOpener(existingOpener).slice(0, 200);
+  const b = normalizeOpener(generatedOpener).slice(0, 200);
+  if (!a || !b) return false;
+  if (a === b) return true;
+
+  // Token overlap (Jaccard-like on lowercased words).
+  const ta = new Set(a.toLowerCase().split(/\s+/).filter(t => t.length > 1));
+  const tb = new Set(b.toLowerCase().split(/\s+/).filter(t => t.length > 1));
+  if (ta.size === 0 || tb.size === 0) return false;
+  let intersect = 0;
+  for (const t of ta) if (tb.has(t)) intersect++;
+  const minSize = Math.min(ta.size, tb.size);
+  const overlap = intersect / minSize;
+  return overlap > 0.5;
+}
+
+/**
+ * Write a chapter file, preserving hand-authored content by default.
+ *
+ * Returns { wrote: boolean, reason: string } so the caller can build a
+ * summary report.
+ *
+ * Decision tree:
+ *   1. forceRegenerate=true → write
+ *   2. file does not exist → write
+ *   3. file <200 bytes (stub) → write
+ *   4. opener matches generated (DB-derivable) → write iff content drifted
+ *   5. opener does not match (hand-authored) → PRESERVE
+ */
+export function writeChapterIdempotent(chapterPath, generatedContent, forceRegenerate) {
+  if (forceRegenerate) {
+    writeFileSync(chapterPath, generatedContent);
+    return { wrote: true, reason: 'force-regenerate flag' };
+  }
+
+  if (!existsSync(chapterPath)) {
+    writeFileSync(chapterPath, generatedContent);
+    return { wrote: true, reason: 'file did not exist' };
+  }
+
+  let existing;
+  try {
+    existing = readFileSync(chapterPath, 'utf-8');
+  } catch (e) {
+    // Unreadable → fall back to write (better than silent skip).
+    writeFileSync(chapterPath, generatedContent);
+    return { wrote: true, reason: `existing unreadable: ${e.message}` };
+  }
+
+  if (existing.length < 200) {
+    writeFileSync(chapterPath, generatedContent);
+    return { wrote: true, reason: `existing file <200 bytes (stub)` };
+  }
+
+  const existingOpener = existing.slice(0, 200);
+  const generatedOpener = generatedContent.slice(0, 200);
+
+  if (openerMatches(existingOpener, generatedOpener)) {
+    if (existing === generatedContent) {
+      return { wrote: false, reason: 'byte-identical to generated' };
+    }
+    writeFileSync(chapterPath, generatedContent);
+    return { wrote: true, reason: 'DB-derivable opener; content drift' };
+  }
+
+  // Hand-authored opener detected; preserve.
+  return { wrote: false, reason: 'existing opener non-derivable; preserved' };
+}
+
+// Per-version write log, populated by writeChapterIdempotent calls in main().
+// Surfaced as a summary block at end of run.
+const writeLog = [];
+function logWrite(version, fileName, result) {
+  writeLog.push({ version, fileName, ...result });
 }
 
 async function main() {
@@ -142,8 +256,11 @@ async function main() {
       '',
     ].filter(l => l !== '').join('\n').replace(/\n{3,}/g, '\n\n');
 
-    writeFileSync(join(chapterDir, '00-summary.md'), summary);
-    fileCount++;
+    {
+      const result = writeChapterIdempotent(join(chapterDir, '00-summary.md'), summary, FORCE_REGENERATE);
+      logWrite(r.version, '00-summary.md', result);
+      if (result.wrote) fileCount++;
+    }
 
     // 01-features.md
     if (featuresByVersion[r.version]?.length) {
@@ -157,8 +274,9 @@ async function main() {
         lines.push(trimPara(f.summary_md, 1500));
         lines.push('');
       }
-      writeFileSync(join(chapterDir, '01-features.md'), lines.join('\n'));
-      fileCount++;
+      const result = writeChapterIdempotent(join(chapterDir, '01-features.md'), lines.join('\n'), FORCE_REGENERATE);
+      logWrite(r.version, '01-features.md', result);
+      if (result.wrote) fileCount++;
     }
 
     // 03-retrospective.md
@@ -181,8 +299,9 @@ async function main() {
         lines.push(row.body_md.trim());
         lines.push('');
       }
-      writeFileSync(join(chapterDir, '03-retrospective.md'), lines.join('\n'));
-      fileCount++;
+      const result = writeChapterIdempotent(join(chapterDir, '03-retrospective.md'), lines.join('\n'), FORCE_REGENERATE);
+      logWrite(r.version, '03-retrospective.md', result);
+      if (result.wrote) fileCount++;
     }
 
     // 04-lessons.md
@@ -207,8 +326,9 @@ async function main() {
         }
         lines.push('');
       }
-      writeFileSync(join(chapterDir, '04-lessons.md'), lines.join('\n'));
-      fileCount++;
+      const result = writeChapterIdempotent(join(chapterDir, '04-lessons.md'), lines.join('\n'), FORCE_REGENERATE);
+      logWrite(r.version, '04-lessons.md', result);
+      if (result.wrote) fileCount++;
     }
 
     // 99-context.md
@@ -231,8 +351,11 @@ async function main() {
       `Parsed from: \`${r.source_readme}\``,
       '',
     ].join('\n');
-    writeFileSync(join(chapterDir, '99-context.md'), ctx);
-    fileCount++;
+    {
+      const result = writeChapterIdempotent(join(chapterDir, '99-context.md'), ctx, FORCE_REGENERATE);
+      logWrite(r.version, '99-context.md', result);
+      if (result.wrote) fileCount++;
+    }
 
     chapterCount++;
     if ((i + 1) % 100 === 0) console.error(`[chapter] ${i + 1}/${targets.length}`);
@@ -278,7 +401,27 @@ async function main() {
   await client.close();
 
   console.error(`[chapter] done — ${chapterCount} chapters, ${fileCount} files written`);
-  console.log(JSON.stringify({ chapters: chapterCount, files: fileCount }, null, 2));
+
+  // v1.49.585 C04 — emit idempotent-write summary so CI logs reveal preserve/write decisions.
+  if (writeLog.length > 0) {
+    const wrote = writeLog.filter(e => e.wrote).length;
+    const preserved = writeLog.filter(e => !e.wrote).length;
+    console.error(`[chapter] idempotent-write summary: ${wrote} wrote, ${preserved} preserved`);
+    if (FORCE_REGENERATE) {
+      console.error(`[chapter] (--force-regenerate flag was set; all writes were unconditional)`);
+    } else if (preserved > 0) {
+      // Show preserved-file summary for visibility
+      const preservedByReason = {};
+      for (const e of writeLog.filter(x => !x.wrote)) {
+        preservedByReason[e.reason] = (preservedByReason[e.reason] ?? 0) + 1;
+      }
+      for (const [reason, count] of Object.entries(preservedByReason)) {
+        console.error(`[chapter]   preserved (${count}): ${reason}`);
+      }
+    }
+  }
+
+  console.log(JSON.stringify({ chapters: chapterCount, files: fileCount, idempotent_writes: writeLog.length }, null, 2));
 }
 
 main().catch(e => {

@@ -134,6 +134,16 @@
         "description": "PreToolUse: scan Write/Edit to .planning/ for prompt-injection + invisible Unicode (HI-12)"
       },
       {
+        "source": "hooks/self-mod-guard.js",
+        "target": ".claude/hooks/self-mod-guard.js",
+        "description": "PreToolUse: BLOCK Write/Edit/Bash on .claude/skills|agents|hooks/ unless SC_SELF_MOD=1 or install.cjs caller (v1.49.585 C01)"
+      },
+      {
+        "source": "hooks/git-add-blocker.js",
+        "target": ".claude/hooks/git-add-blocker.js",
+        "description": "PreToolUse: BLOCK git add of .planning|.claude|.archive|artifacts/ unless SC_FORCE_ADD=1 (v1.49.585 C02)"
+      },
+      {
         "source": "hooks/gsd-inject-snapshot.js",
         "target": ".claude/hooks/gsd-inject-snapshot.js",
         "description": "Session start: inject latest snapshot"
