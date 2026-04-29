@@ -55,20 +55,24 @@ else
   fail "bash syntax check failed"
 fi
 
-# Test 3: contains expected step labels
-if grep -q "step 1/3: npm run build" "$GATE" \
-   && grep -q "step 2/3: npx vitest run" "$GATE" \
-   && grep -q "step 3/3: release-notes completeness" "$GATE"; then
-  ok "all 3 step labels present"
+# Test 3: contains expected step labels (5 steps as of v1.49.587)
+if grep -q "step 1/5: npm run build" "$GATE" \
+   && grep -q "step 2/5: npx vitest run" "$GATE" \
+   && grep -q "step 3/5: release-notes completeness" "$GATE" \
+   && grep -q "step 4/5: CI-on-dev verification" "$GATE" \
+   && grep -q "step 5/5: www-bundles freshness" "$GATE"; then
+  ok "all 5 step labels present"
 else
-  fail "step labels missing"
+  fail "step labels missing or wrong count"
 fi
 
-# Test 4: contains expected exit codes
+# Test 4: contains expected exit codes (1..5 as of v1.49.587)
 if grep -q "exit 1" "$GATE" \
    && grep -q "exit 2" "$GATE" \
-   && grep -q "exit 3" "$GATE"; then
-  ok "exit codes 1/2/3 documented"
+   && grep -q "exit 3" "$GATE" \
+   && grep -q "exit 4" "$GATE" \
+   && grep -q "exit 5" "$GATE"; then
+  ok "exit codes 1/2/3/4/5 documented"
 else
   fail "exit codes missing"
 fi
@@ -85,6 +89,35 @@ if grep -q '"pre-tag-gate":' "$REPO_ROOT/package.json"; then
   ok "package.json wires npm run pre-tag-gate"
 else
   fail "package.json missing pre-tag-gate script"
+fi
+
+# Test 7: SC_SKIP_CI_GATE override supported (v1.49.587 HARD RULE)
+if grep -q 'SC_SKIP_CI_GATE' "$GATE"; then
+  ok "SC_SKIP_CI_GATE override supported"
+else
+  fail "SC_SKIP_CI_GATE override missing"
+fi
+
+# Test 8: build-www-bundles.sh exists + executable (v1.49.587 step 5)
+WWW_BUILDER="tools/build-www-bundles.sh"
+if [ -x "$WWW_BUILDER" ]; then
+  ok "build-www-bundles.sh exists + executable"
+else
+  fail "build-www-bundles.sh missing or not executable"
+fi
+
+# Test 9: package.json wires npm run build:www-bundles
+if grep -q '"build:www-bundles":' "$REPO_ROOT/package.json"; then
+  ok "package.json wires npm run build:www-bundles"
+else
+  fail "package.json missing build:www-bundles script"
+fi
+
+# Test 10: gate references gh CLI (CI-on-dev step needs it)
+if grep -q 'gh run list' "$GATE"; then
+  ok "gate uses gh CLI for CI-on-dev"
+else
+  fail "gate does not call gh run list"
 fi
 
 echo ""
