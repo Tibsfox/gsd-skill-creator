@@ -721,6 +721,346 @@ test.describe('NASA shared-harness v1.0.0', () => {
     expect(roundtrip.sort()).toEqual(['1.0', '1.12', '1.46']);
   });
 
+  test('forest reset button: disables modules + clears storage + resets subsystems + clears step state', async ({ page }) => {
+    // Verifies the runner page's reset button (mirrored in runner-controls-test
+    // fixture) clears every accumulated piece of state in one click:
+    //   - all enabled modules are disabled (their disable() hook is called)
+    //   - localStorage entries for forest-enabled-modules + forest-panel-axis
+    //     are removed
+    //   - every subsystem with a reset() method is called
+    //   - if the sim was paused, pause is cleared and the step button is
+    //     disabled again
+    await timedGoto(page, `${FIXTURES}/forest-module/runner-controls-test.html`);
+    await page.waitForFunction(
+      () => (window as any).__CONTROLS_READY__ === true,
+      { timeout: LOAD_BUDGET_MS }
+    );
+
+    // Pre-conditions: both modules enabled, both localStorage keys set.
+    const before = await page.evaluate(() => ({
+      enabledStorage: localStorage.getItem('forest-enabled-modules'),
+      axisStorage:    localStorage.getItem('forest-panel-axis'),
+      m1Enabled:      (window as any).__MODULES__.m1._enabled,
+      m2Enabled:      (window as any).__MODULES__.m2._enabled,
+      checked: [...document.querySelectorAll('#missions-panel label input[type=checkbox]')]
+                 .filter((cb: any) => cb.checked).length,
+    }));
+    expect(before.enabledStorage).toBe('1.0,1.12');
+    expect(before.axisStorage).toBe('organism');
+    expect(before.m1Enabled).toBeGreaterThanOrEqual(1);
+    expect(before.m2Enabled).toBeGreaterThanOrEqual(1);
+    expect(before.checked).toBe(2);
+
+    // Pause the sim so we can verify reset clears the pause state too.
+    await page.locator('#pause-toggle').click();
+    await page.waitForTimeout(50);
+    const paused = await page.evaluate(() => ({
+      ariaPressed: document.getElementById('pause-toggle')?.getAttribute('aria-pressed'),
+      stepDisabled: (document.getElementById('step-frame') as HTMLButtonElement)?.disabled,
+    }));
+    expect(paused.ariaPressed).toBe('true');
+    expect(paused.stepDisabled).toBe(false);
+
+    // Click reset.
+    await page.locator('#reset-scene').click();
+    await page.waitForTimeout(100);
+
+    const after = await page.evaluate(() => ({
+      enabledStorage: localStorage.getItem('forest-enabled-modules'),
+      axisStorage:    localStorage.getItem('forest-panel-axis'),
+      m1Disabled:     (window as any).__MODULES__.m1._disabled,
+      m2Disabled:     (window as any).__MODULES__.m2._disabled,
+      checked: [...document.querySelectorAll('#missions-panel label input[type=checkbox]')]
+                 .filter((cb: any) => cb.checked).length,
+      resetCalls:     (window as any).__resetCalls.slice().sort(),
+      pauseAria:      document.getElementById('pause-toggle')?.getAttribute('aria-pressed'),
+      stepDisabled:   (document.getElementById('step-frame') as HTMLButtonElement)?.disabled,
+      resetClicks:    (window as any).__resetClickCount,
+    }));
+    expect(after.enabledStorage).toBeNull();
+    expect(after.axisStorage).toBeNull();
+    expect(after.m1Disabled).toBeGreaterThanOrEqual(1);
+    expect(after.m2Disabled).toBeGreaterThanOrEqual(1);
+    expect(after.checked).toBe(0);
+    expect(after.resetCalls).toEqual(['audio', 'boids', 'kuramoto', 'lsystem', 'physarum']);
+    expect(after.pauseAria).toBe('false');
+    expect(after.stepDisabled).toBe(true);
+    expect(after.resetClicks).toBe(1);
+  });
+
+  test('forest keyboard shortcuts: p / ] / m / r behave like the buttons', async ({ page }) => {
+    // p toggles pause, ] steps one frame (only while paused), m toggles
+    // audio, r triggers reset. Skipped while typing in an input. ] is the
+    // new shortcut introduced 2026-04-29 for pause-and-step.
+    await timedGoto(page, `${FIXTURES}/forest-module/runner-controls-test.html`);
+    await page.waitForFunction(
+      () => (window as any).__CONTROLS_READY__ === true,
+      { timeout: LOAD_BUDGET_MS }
+    );
+
+    // Move focus off any input so keyboard handlers fire.
+    await page.evaluate(() => (document.activeElement as HTMLElement)?.blur());
+
+    // Frame counter starts at 0 since the runner-controls fixture only ticks
+    // on explicit step (no rAF loop in the fixture — keeps tests deterministic).
+    const fc0 = await page.evaluate(() => (window as any).__frameCount);
+    expect(fc0).toBe(0);
+
+    // p: pause
+    await page.keyboard.press('p');
+    await page.waitForTimeout(50);
+    const afterP = await page.evaluate(() => ({
+      pauseAria: document.getElementById('pause-toggle')?.getAttribute('aria-pressed'),
+      stepDisabled: (document.getElementById('step-frame') as HTMLButtonElement)?.disabled,
+    }));
+    expect(afterP.pauseAria).toBe('true');
+    expect(afterP.stepDisabled).toBe(false);
+
+    // ] : step one frame (only meaningful while paused)
+    await page.keyboard.press(']');
+    await page.waitForTimeout(50);
+    const fc1 = await page.evaluate(() => (window as any).__frameCount);
+    expect(fc1).toBe(1);
+
+    // Press ] again — second frame advance.
+    await page.keyboard.press(']');
+    await page.waitForTimeout(50);
+    const fc2 = await page.evaluate(() => (window as any).__frameCount);
+    expect(fc2).toBe(2);
+
+    // Resume (p again). ] should now no-op because the step button is
+    // re-disabled when not paused.
+    await page.keyboard.press('p');
+    await page.waitForTimeout(50);
+    const afterP2 = await page.evaluate(() => ({
+      pauseAria: document.getElementById('pause-toggle')?.getAttribute('aria-pressed'),
+      stepDisabled: (document.getElementById('step-frame') as HTMLButtonElement)?.disabled,
+    }));
+    expect(afterP2.pauseAria).toBe('false');
+    expect(afterP2.stepDisabled).toBe(true);
+    await page.keyboard.press(']');
+    await page.waitForTimeout(50);
+    const fc3 = await page.evaluate(() => (window as any).__frameCount);
+    expect(fc3).toBe(2);    // unchanged
+
+    // m: audio toggle
+    const audioBefore = await page.evaluate(() => (window as any).__audioUnlocked);
+    expect(audioBefore).toBe(false);
+    await page.keyboard.press('m');
+    await page.waitForTimeout(80);
+    const audioAfter = await page.evaluate(() => ({
+      unlocked: (window as any).__audioUnlocked,
+      ariaPressed: document.getElementById('audio-toggle')?.getAttribute('aria-pressed'),
+    }));
+    expect(audioAfter.unlocked).toBe(true);
+    expect(audioAfter.ariaPressed).toBe('true');
+
+    // r: reset
+    const resetClicksBefore = await page.evaluate(() => (window as any).__resetClickCount || 0);
+    await page.keyboard.press('r');
+    await page.waitForTimeout(80);
+    const resetClicksAfter = await page.evaluate(() => (window as any).__resetClickCount);
+    expect(resetClicksAfter).toBe(resetClicksBefore + 1);
+  });
+
+  test('forest pause-and-step button: disabled until paused, advances one frame on click', async ({ page }) => {
+    // The step button is disabled by default and only enabled while paused.
+    // Clicking it advances exactly one frame (verified via __frameCount).
+    await timedGoto(page, `${FIXTURES}/forest-module/runner-controls-test.html`);
+    await page.waitForFunction(
+      () => (window as any).__CONTROLS_READY__ === true,
+      { timeout: LOAD_BUDGET_MS }
+    );
+
+    const stepBtn = page.locator('#step-frame');
+    await expect(stepBtn).toBeDisabled();
+
+    // Pause: step becomes enabled.
+    await page.locator('#pause-toggle').click();
+    await page.waitForTimeout(50);
+    await expect(stepBtn).toBeEnabled();
+
+    // Click step three times: __frameCount advances by exactly 3.
+    const fcBefore = await page.evaluate(() => (window as any).__frameCount);
+    await stepBtn.click();
+    await stepBtn.click();
+    await stepBtn.click();
+    await page.waitForTimeout(50);
+    const fcAfter = await page.evaluate(() => (window as any).__frameCount);
+    expect(fcAfter - fcBefore).toBe(3);
+
+    // Resume: step is disabled again.
+    await page.locator('#pause-toggle').click();
+    await page.waitForTimeout(50);
+    await expect(stepBtn).toBeDisabled();
+  });
+
+  test('forest boids Phase-2 narrative methods: applyPhaseShift kicks boids; addMigrationWave + triggerEvent record visuals', async ({ page }) => {
+    // The five boids "narrative" methods (addColony, addMigrationWave,
+    // triggerEvent, applyPhaseShift, spawn) were originally ledger-only.
+    // 2026-04-29 promotion: each now has a visible side-effect AND retains
+    // its event-ledger entry. This test exercises the three that were not
+    // already animated (addColony + spawn were already functional).
+    await timedGoto(page, `${FIXTURES}/forest-module/subsystems-test.html`);
+    await page.waitForFunction(
+      () => (window as any).__SUBSYSTEMS_READY__ === true,
+      { timeout: LOAD_BUDGET_MS }
+    );
+
+    // applyPhaseShift: boid velocities inside the radius are kicked away
+    // from the centre; an entry lands in _phaseShifts; ledger gets the event.
+    const shiftRes = await page.evaluate(() => {
+      const b: any = (window as any).__boids;
+      // Pin a known boid near the shift centre so its velocity change is
+      // verifiable. Capture (vx,vy) before and after.
+      b.boids[0].x = 100; b.boids[0].y = 100;
+      b.boids[0].vx = 0;  b.boids[0].vy = 0;
+      const v0 = { vx: b.boids[0].vx, vy: b.boids[0].vy };
+      b.applyPhaseShift({ x: 50, y: 50, magnitude: 0.8, radius: 200, durationS: 1.0 });
+      const v1 = { vx: b.boids[0].vx, vy: b.boids[0].vy };
+      return {
+        speedBefore: Math.sqrt(v0.vx*v0.vx + v0.vy*v0.vy),
+        speedAfter:  Math.sqrt(v1.vx*v1.vx + v1.vy*v1.vy),
+        // Direction: from (50,50) to (100,100) → boid should move toward
+        // positive x AND positive y (away from the centre).
+        dxSign: Math.sign(v1.vx),
+        dySign: Math.sign(v1.vy),
+        ringCount: b._phaseShifts.length,
+        eventCount: b.events.filter((e: any) => e.name === 'phaseShift').length,
+        statsRingCount: b.stats().phaseShifts,
+      };
+    });
+    expect(shiftRes.speedBefore).toBe(0);
+    expect(shiftRes.speedAfter).toBeGreaterThan(0);
+    expect(shiftRes.dxSign).toBe(1);
+    expect(shiftRes.dySign).toBe(1);
+    expect(shiftRes.ringCount).toBe(1);
+    expect(shiftRes.eventCount).toBe(1);
+    expect(shiftRes.statsRingCount).toBe(1);
+
+    // addMigrationWave: spec normalised; entry stored with `recorded` time.
+    const waveRes = await page.evaluate(() => {
+      const b: any = (window as any).__boids;
+      const id = b.addMigrationWave({
+        startX: 0.1, startY: 0.5,
+        endX:   0.9, endY:   0.5,
+        durationS: 5,
+      });
+      const wave = b.migrationWaves.get(id);
+      return {
+        startX: wave.startX, startY: wave.startY,
+        endX:   wave.endX,   endY:   wave.endY,
+        durationS: wave.durationS,
+        recorded: typeof wave.recorded,
+        size: b.migrationWaves.size,
+      };
+    });
+    // Coords normalised to pixel space: 0.1 * 1024 = 102.4
+    expect(waveRes.startX).toBeCloseTo(102.4, 0);
+    expect(waveRes.endX).toBeCloseTo(921.6, 0);
+    expect(waveRes.durationS).toBe(5);
+    expect(waveRes.recorded).toBe('number');
+    expect(waveRes.size).toBeGreaterThanOrEqual(1);
+
+    // triggerEvent with location: a marker is added to _eventMarkers AND the
+    // ledger gets a row. Without a location, only the ledger gets the row.
+    const evRes = await page.evaluate(() => {
+      const b: any = (window as any).__boids;
+      const m0 = b._eventMarkers.length;
+      const e0 = b.events.length;
+      b.triggerEvent('peck', { x: 200, y: 300 });
+      b.triggerEvent('keepalive', {});  // no location
+      return {
+        markersAdded: b._eventMarkers.length - m0,
+        eventsAdded:  b.events.length - e0,
+        peckMarker:   b._eventMarkers.find((e: any) => e.name === 'peck'),
+        statsMarkers: b.stats().eventMarkers,
+      };
+    });
+    expect(evRes.markersAdded).toBe(1);    // only the located one
+    expect(evRes.eventsAdded).toBe(2);     // both ledger rows
+    expect(evRes.peckMarker).toBeDefined();
+    expect(evRes.peckMarker.x).toBe(200);
+    expect(evRes.peckMarker.y).toBe(300);
+    expect(evRes.statsMarkers).toBeGreaterThanOrEqual(1);
+
+    // Reset clears all narrative state.
+    const afterReset = await page.evaluate(() => {
+      const b: any = (window as any).__boids;
+      b.reset();
+      return {
+        rings: b._phaseShifts.length,
+        markers: b._eventMarkers.length,
+        waves: b.migrationWaves.size,
+        events: b.events.length,
+      };
+    });
+    expect(afterReset.rings).toBe(0);
+    expect(afterReset.markers).toBe(0);
+    expect(afterReset.waves).toBe(0);
+    expect(afterReset.events).toBe(0);
+  });
+
+  test('forest circadian.addOffset: phase(id) returns offset-adjusted phase, global sky stays wall-clock', async ({ page }) => {
+    // addOffset(id, hours) is module-scoped — phase(id) returns the global
+    // phase shifted by hours/24, mod 1. Global sky (sun/moon altitudes)
+    // remains unaffected because the offset is per-module by design.
+    await timedGoto(page, `${FIXTURES}/forest-module/subsystems-test.html`);
+    await page.waitForFunction(
+      () => (window as any).__SUBSYSTEMS_READY__ === true,
+      { timeout: LOAD_BUDGET_MS }
+    );
+
+    const res = await page.evaluate(() => {
+      const c: any = (window as any).__circadian;
+      const sunBefore = c.sky.sunAlt;
+      const pGlobal = c.phase();
+      // +6h offset.
+      c.addOffset('mod-A', 6);
+      const pA = c.phase('mod-A');
+      // -3h offset (negative wrap).
+      c.addOffset('mod-B', -3);
+      const pB = c.phase('mod-B');
+      // Unknown id → falls back to global phase.
+      const pUnknown = c.phase('not-registered');
+      // Removing the offset returns the module to global phase.
+      c.removeOffset('mod-A');
+      const pAfterRemove = c.phase('mod-A');
+      // Global sky did not move.
+      const sunAfter = c.sky.sunAlt;
+      // Subscribers receive a phaseFor() helper.
+      let captured: any = null;
+      const unsub = c.subscribe((p: number, phaseFor: (id: string) => number) => {
+        captured = { p, phaseForB: phaseFor('mod-B'), phaseForGlobal: phaseFor() };
+      });
+      c.tick(1/30);
+      unsub();
+      return {
+        sunBefore, sunAfter,
+        pGlobal, pA, pB, pUnknown, pAfterRemove,
+        captured,
+      };
+    });
+
+    expect(res.sunBefore).toBe(res.sunAfter);
+    // pA = pGlobal + 6/24 mod 1; pB = pGlobal - 3/24 mod 1. Allow a small
+    // tolerance for a tick happening between reads.
+    const expectedA = ((res.pGlobal + 6/24) % 1 + 1) % 1;
+    expect(Math.abs(res.pA - expectedA)).toBeLessThan(0.05);
+    const expectedB = ((res.pGlobal - 3/24) % 1 + 1) % 1;
+    expect(Math.abs(res.pB - expectedB)).toBeLessThan(0.05);
+    // Unknown id → global.
+    expect(Math.abs(res.pUnknown - res.pGlobal)).toBeLessThan(0.05);
+    // Removed → global.
+    expect(Math.abs(res.pAfterRemove - res.pGlobal)).toBeLessThan(0.05);
+    // Subscriber received a usable phaseFor accessor.
+    expect(res.captured).not.toBeNull();
+    expect(typeof res.captured.p).toBe('number');
+    const expectedCapturedB = ((res.captured.p - 3/24) % 1 + 1) % 1;
+    expect(Math.abs(res.captured.phaseForB - expectedCapturedB)).toBeLessThan(0.05);
+    expect(Math.abs(res.captured.phaseForGlobal - res.captured.p)).toBeLessThan(0.001);
+  });
+
   test('all four runners load within 3s budget (combined)', async ({ page }) => {
     const urls = [
       `${FIXTURES}/audio/sample-synth.html`,
