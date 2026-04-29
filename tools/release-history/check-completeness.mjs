@@ -87,7 +87,9 @@ for (const rel of REQUIRED) {
     try {
       const sz = readFileSync(p, 'utf8').length;
       if (sz < 200) {
-        findings.push({ severity: 'WARN', file: rel, reason: `too short (${sz} bytes; need ≥200)` });
+        // v1.49.585 C05: undersized files BLOCK under --strict (was WARN; the gate
+        // is intended to be blocking when the operator explicitly opted in to strict).
+        findings.push({ severity: 'BLOCK', file: rel, reason: `too short (${sz} bytes; need ≥200)` });
       }
     } catch (e) {
       findings.push({ severity: 'BLOCK', file: rel, reason: `unreadable: ${e.message}` });

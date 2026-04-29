@@ -79,3 +79,66 @@ export function readDeadZoneEnabledFlag(
     return false;
   }
 }
+
+// ---------------------------------------------------------------------------
+// Bounded-learning citation-anchored constants (v1.49.585 C03)
+// ---------------------------------------------------------------------------
+//
+// These constants ARE citation-anchored architectural invariants. Each value
+// is derived from a published paper and CANNOT be changed without amending
+// CITATION.md and updating the citation-anchors specification at
+// .planning/missions/v1-49-585-concerns-cleanup/work/specs/citation-anchors.md
+// in the same commit.
+//
+// The src/dead-zone/__tests__/citation-invariants.test.ts file asserts on
+// these values; changing any value silently will fail CI loudly, forcing
+// the author to engage with the citation rationale.
+//
+// Until v1.49.585 these values existed only as prose mentions across the
+// codebase (cli.ts, dashboard/parser.test.ts, skill-creator/roles/types.ts,
+// compression-spectrum/types.ts comments) or as documentation-only claims
+// in src/dead-zone/CITATION.md (JP-033). v1.49.585 component C03 elevates
+// them to real exports with test enforcement.
+
+/**
+ * Maximum corrections admitted to a single skill before fidelity threshold
+ * is crossed and the skill must be re-derived rather than further corrected.
+ *
+ * Anchored on arXiv:2604.20874 (Root Theorem of Context Engineering):
+ * the bounded-tape framing's C1 monotone-decay consequence implies a finite
+ * correction-budget per skill. The third correction is the last admissible
+ * fidelity-preserving correction; a fourth correction crosses C1's monotone-
+ * decay threshold and the skill must be re-derived.
+ *
+ * DO NOT change without amending:
+ *   .planning/missions/v1-49-585-concerns-cleanup/work/specs/citation-anchors.md
+ *   src/dead-zone/CITATION.md
+ *
+ * @see arXiv:2604.20874
+ */
+export const MAX_CORRECTIONS_BEFORE_BLOCK = 3 as const;
+
+/**
+ * Small-data inductive-bias floor: minimum activation count before a skill
+ * may be promoted to a structural-anchor role with confidence-interval-bounded
+ * fidelity claims.
+ *
+ * Anchored on arXiv:2604.21101 (Hybridizable Neural Time Integrator):
+ * 12 high-fidelity simulations suffice for reference-accuracy match in
+ * conservation-law-structured architectures. This is the tightest published
+ * data-efficiency anchor for any system that enforces structural constraints
+ * (cf. dead-zone bounded learning's Lyapunov-stable updates).
+ *
+ * Until v1.49.585, this was citation-only at src/dead-zone/CITATION.md JP-033
+ * with no enforcing const in code (the CITATION.md *claimed* smooth-dead-zone.ts
+ * enforced it, but no enforcement existed). v1.49.585 component C03 elevates
+ * the floor to a real export; future smooth-dead-zone refinements may consume
+ * this const to provide the runtime enforcement CITATION.md describes.
+ *
+ * DO NOT change without amending:
+ *   .planning/missions/v1-49-585-concerns-cleanup/work/specs/citation-anchors.md
+ *   src/dead-zone/CITATION.md
+ *
+ * @see arXiv:2604.21101
+ */
+export const SMALL_DATA_FLOOR = 12 as const;

@@ -29,6 +29,26 @@
             "command": "node .claude/hooks/gsd-config-guard.js"
           }
         ]
+      },
+      {
+        "matcher": "Write|Edit|MultiEdit|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/self-mod-guard.js",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/git-add-blocker.js",
+            "timeout": 5
+          }
+        ]
       }
     ],
     "PostToolUse": [
