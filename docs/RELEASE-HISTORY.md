@@ -1,15 +1,16 @@
 # Release History
 
-627 milestones shipped across the v1.0 → v1.49.584 arc. The table below lists every shipped release, newest first.
+628 milestones shipped across the v1.0 → v1.49.585 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions, and where available, retrospectives and lessons learned. `Commits` is the count of commits between this tag and the previous tag (from git). `Phases` and `Plans` come from structured GSD metadata in the release README — most content/patch releases don't have these. `Retro` links to the retrospective chapter when present. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 627 releases · 626 with retrospectives · 626 with extracted lessons · quality A:623 B:2 C:1 D:1 F:0 (avg 97) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 628 releases · 626 with retrospectives · 626 with extracted lessons · quality A:623 B:2 C:1 D:1 F:1 (avg 97) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Retro | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|-------|---------|---------|-------|
+| [v1.49.585](release-notes/v1.49.585) | Concerns Cleanup / Foundation Shoring | 2026-04-29 | 4 | — | — | — | — | F 28 |  |
 | [v1.49.584](release-notes/v1.49.584) | Degree 66: Graceful Attrition + Form-as-Multiplicity-Coordination | 2026-04-28 | 4 | — | — | [✓](release-notes/v1.49.584/chapter/03-retrospective.md) | [16](release-notes/v1.49.584/chapter/04-lessons.md) | D 69 |  |
 | [v1.49.583](release-notes/v1.49.583) | Degree 65: The Persistent Constellation | 2026-04-27 | 10 | — | — | [✓](release-notes/v1.49.583/chapter/03-retrospective.md) | [14](release-notes/v1.49.583/chapter/04-lessons.md) | C 79 |  |
 | [v1.49.582](release-notes/v1.49.582) | Degree 64: The All-Up Commit | 2026-04-27 | 8 | — | — | [✓](release-notes/v1.49.582/chapter/03-retrospective.md) | [18](release-notes/v1.49.582/chapter/04-lessons.md) | A 100 |  |
