@@ -550,6 +550,87 @@ test.describe('NASA shared-harness v1.0.0', () => {
     });
   });
 
+  test('forest enabled-modules persistence: localStorage round-trip + URL precedence', async ({ page }) => {
+    // Asserts:
+    //   1. toggling a module writes its missionVersion to localStorage
+    //   2. reload with no URL params restores the saved set
+    //   3. URL params (?modules=, ?mission=) override localStorage
+    //   4. unchecking the last module clears the localStorage entry
+
+    // Start clean.
+    await page.goto(`${FIXTURES}/forest-module/persistence-test.html`);
+    await page.evaluate(() => { try { localStorage.clear(); } catch (_) {} });
+
+    await page.reload();
+    await page.waitForFunction(
+      () => (window as any).__PERSISTENCE_READY__ === true,
+      { timeout: LOAD_BUDGET_MS }
+    );
+
+    // 1) Toggle 1.0 + 1.46 → localStorage gets both.
+    await page.evaluate(() => {
+      for (const lbl of document.querySelectorAll('#missions-panel label')) {
+        const t = (lbl.textContent || '');
+        if (t.includes('1.0 ') || t.includes('1.46 ')) {
+          (lbl.querySelector('input[type=checkbox]') as HTMLInputElement).click();
+        }
+      }
+    });
+    await page.waitForTimeout(150);
+    const stored = await page.evaluate(() => localStorage.getItem('forest-enabled-modules'));
+    expect(stored).toBeTruthy();
+    expect(stored!.split(',').sort()).toEqual(['1.0', '1.46']);
+
+    // 2) Reload with no URL params: persistence restores both.
+    await page.goto(`${FIXTURES}/forest-module/persistence-test.html`);
+    await page.waitForFunction(
+      () => (window as any).__PERSISTENCE_READY__ === true,
+      { timeout: LOAD_BUDGET_MS }
+    );
+    const afterReload = await page.evaluate(() => ({
+      target:    (window as any).__TARGET_VERSIONS__.sort(),
+      restored:  (window as any).__RESTORED_FROM_STORAGE__,
+      checked:   [...document.querySelectorAll('#missions-panel label input[type=checkbox]')]
+                   .filter((cb) => (cb as HTMLInputElement).checked).length,
+    }));
+    expect(afterReload.target).toEqual(['1.0', '1.46']);
+    expect(afterReload.restored).toBe(true);
+    expect(afterReload.checked).toBe(2);
+
+    // 3) URL ?modules= overrides localStorage.
+    await page.goto(`${FIXTURES}/forest-module/persistence-test.html?modules=1.12`);
+    await page.waitForFunction(
+      () => (window as any).__PERSISTENCE_READY__ === true,
+      { timeout: LOAD_BUDGET_MS }
+    );
+    const urlOverride = await page.evaluate(() => ({
+      target:   (window as any).__TARGET_VERSIONS__,
+      restored: (window as any).__RESTORED_FROM_STORAGE__,
+    }));
+    expect(urlOverride.target).toEqual(['1.12']);   // 1.0 / 1.46 ignored
+    expect(urlOverride.restored).toBe(false);
+
+    // 4) Unchecking everything clears the storage entry.
+    // Reload to a clean state with all three checked.
+    await page.goto(`${FIXTURES}/forest-module/persistence-test.html?modules=1.0,1.12,1.46`);
+    await page.waitForFunction(
+      () => (window as any).__PERSISTENCE_READY__ === true,
+      { timeout: LOAD_BUDGET_MS }
+    );
+    // Persist is only called via onChange — explicitly toggle each off.
+    await page.evaluate(() => {
+      for (const cb of document.querySelectorAll('#missions-panel label input[type=checkbox]')) {
+        if ((cb as HTMLInputElement).checked) (cb as HTMLInputElement).click();
+      }
+    });
+    await page.waitForTimeout(150);
+    const cleared = await page.evaluate(() => localStorage.getItem('forest-enabled-modules'));
+    expect(cleared).toBeNull();
+
+    // Cleanup so other tests don't see persisted state.
+    await page.evaluate(() => { try { localStorage.clear(); } catch (_) {} });
+  });
+
   test('forest URL deep-link + share-button: round-trip', async ({ page, context }) => {
     // Grant clipboard permissions so the share button can write.
     await context.grantPermissions(['clipboard-read', 'clipboard-write']);
