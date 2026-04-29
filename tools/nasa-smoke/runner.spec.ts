@@ -274,6 +274,81 @@ test.describe('NASA shared-harness v1.0.0', () => {
     expect(audioRes.events).toBeGreaterThanOrEqual(1);
   });
 
+  test('forest panel-augment: groupings + search filter + idempotence', async ({ page }) => {
+    // Tests the panel-augment helper directly against a synthetic flat panel.
+    // Independent of the full subsystems test so a panel-only regression is
+    // caught even if a subsystem regresses.
+    await timedGoto(page, `${FIXTURES}/forest-module/panel-augment-test.html`);
+    await page.waitForFunction(
+      () => (window as any).__PANEL_AUGMENT_READY__ === true,
+      { timeout: LOAD_BUDGET_MS }
+    );
+
+    // Groupings: programs detected by the classifier.
+    const groups = await page.evaluate(() => {
+      return [...document.querySelectorAll('#missions-panel details')].map((d) => ({
+        program: d.dataset.program,
+        labelCount: d.querySelectorAll(':scope > label').length,
+        open: d.open,
+      }));
+    });
+    // Synthetic fixture seeds 10 labels: 1 Mercury, 1 Gemini, 1 Surveyor, 1 LO,
+    // 1 Apollo, 1 Pioneer, 1 Mariner, 3 Forest/SPS.
+    const programNames = groups.map((g) => g.program);
+    expect(programNames).toEqual(expect.arrayContaining([
+      'Mercury', 'Gemini', 'Surveyor', 'Lunar Orbiter', 'Apollo',
+      'Pioneer', 'Mariner', 'Forest / SPS',
+    ]));
+    // Forest / SPS should be the last group and collapsed by default.
+    expect(programNames[programNames.length - 1]).toBe('Forest / SPS');
+    expect(groups[groups.length - 1].open).toBe(false);
+
+    // Search filter: filter by 'cedar' should narrow to one Forest/SPS entry,
+    // hide all other groups.
+    await page.fill('#missions-panel input[type=search]', 'cedar');
+    await page.waitForTimeout(200);
+    const filtered = await page.evaluate(() => {
+      const visibleLabels: string[] = [];
+      for (const lbl of document.querySelectorAll('#missions-panel label')) {
+        if ((lbl as HTMLElement).style.display !== 'none') {
+          visibleLabels.push(lbl.textContent?.trim() || '');
+        }
+      }
+      const visibleGroups = [...document.querySelectorAll('#missions-panel details')]
+        .filter((d) => (d as HTMLElement).style.display !== 'none')
+        .map((d) => (d as HTMLElement).dataset.program);
+      return { visibleLabels, visibleGroups };
+    });
+    expect(filtered.visibleLabels.length).toBe(1);
+    expect(filtered.visibleLabels[0]).toMatch(/cedar/i);
+    expect(filtered.visibleGroups).toEqual(['Forest / SPS']);
+
+    // Clear filter restores all groups.
+    await page.fill('#missions-panel input[type=search]', '');
+    await page.waitForTimeout(200);
+    const restored = await page.evaluate(() => {
+      const visibleGroups = [...document.querySelectorAll('#missions-panel details')]
+        .filter((d) => (d as HTMLElement).style.display !== 'none')
+        .map((d) => (d as HTMLElement).dataset.program);
+      return visibleGroups.length;
+    });
+    expect(restored).toBe(8);  // all 8 groups visible
+
+    // Classifier unit checks (fixture exposes window.__classifyLabel).
+    const classifyChecks = await page.evaluate(() => ({
+      mercury:    (window as any).__classifyLabel('1.19 · Freedom 7 Chinook Salmon'),
+      surveyor:   (window as any).__classifyLabel('1.46 · Surveyor 1 Oregon White Oak'),
+      lo:         (window as any).__classifyLabel('1.49 · Lunar Orbiter 1 Common Raven'),
+      forest:     (window as any).__classifyLabel('1.0 · Armillaria Mycelial Pulse Network'),
+      gemini:     (window as any).__classifyLabel('1.43 · Gemini 6A Marbled Murrelet'),
+    }));
+    expect(classifyChecks.mercury).toBe('Mercury');
+    expect(classifyChecks.surveyor).toBe('Surveyor');
+    expect(classifyChecks.lo).toBe('Lunar Orbiter');
+    expect(classifyChecks.gemini).toBe('Gemini');
+    expect(classifyChecks.forest).toBe('Forest / SPS');
+  });
+
   test('all four runners load within 3s budget (combined)', async ({ page }) => {
     const urls = [
       `${FIXTURES}/audio/sample-synth.html`,
