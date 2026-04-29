@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>NASA Harness — Real Subsystems Smoke Test</title>
+</head>
+<body>
+  <div id="forest-stage" style="position:relative;width:1024px;height:576px;background:#0E0E0C;">
+    <canvas id="forest-canvas" width="1024" height="576" style="width:100%;height:100%;display:block;"></canvas>
+  </div>
+  <button id="audio-toggle" type="button">audio</button>
+
+  <script type="module">
+    // The smoke-test http-server serves the repo root, so harness assets live
+    // under /www/tibsfox/com/Research/NASA/_harness/v1.0.0/. The production
+    // page at https://tibsfox.com/Research/forest/ uses /Research/... paths
+    // because Research is the FTP root.
+    import { BoidSystem }      from '/www/tibsfox/com/Research/NASA/_harness/v1.0.0/subsystems/boids.js';
+    import { LSystemForest }   from '/www/tibsfox/com/Research/NASA/_harness/v1.0.0/subsystems/lsystem.js';
+    import { CircadianSystem } from '/www/tibsfox/com/Research/NASA/_harness/v1.0.0/subsystems/circadian.js';
+    import { KuramotoSystem }  from '/www/tibsfox/com/Research/NASA/_harness/v1.0.0/subsystems/kuramoto.js';
+    import { PhysarumSystem }  from '/www/tibsfox/com/Research/NASA/_harness/v1.0.0/subsystems/physarum.js';
+    import { AudioSystem }     from '/www/tibsfox/com/Research/NASA/_harness/v1.0.0/subsystems/audio.js';
+
+    const canvas = document.getElementById('forest-canvas');
+    const ctx2d  = canvas.getContext('2d');
+
+    const boids     = new BoidSystem(canvas);
+    const lsystem   = new LSystemForest(canvas);
+    // Compress 24h into 4 seconds for the smoke test so day/night cycles
+    // through several phases inside the test window.
+    const circadian = new CircadianSystem(canvas, { compressedDayMs: 4000 });
+    const kuramoto  = new KuramotoSystem(canvas);
+    const physarum  = new PhysarumSystem(canvas);
+    const audio     = new AudioSystem();
+
+    boids.seedInitialPopulation();
+    lsystem.seedInitialPopulation();
+
+    window.__boids     = boids;
+    window.__lsystem   = lsystem;
+    window.__circadian = circadian;
+    window.__kuramoto  = kuramoto;
+    window.__physarum  = physarum;
+    window.__audio     = audio;
+    window.__SUBSYSTEMS_READY__ = true;
+
+    document.getElementById('audio-toggle').addEventListener('click', () => audio.unlock());
+
+    // Tick + render loop (subsystems do their own rendering).
+    let last = performance.now();
+    function frame(now) {
+      const dt = Math.min(0.1, (now - last) / 1000);
+      last = now;
+      circadian.tick(dt); circadian.render(ctx2d);
+      physarum.tick(dt);  physarum.render(ctx2d);
+      lsystem.tick(dt);   lsystem.render(ctx2d);
+      boids.tick(dt);     boids.render(ctx2d);
+      kuramoto.tick(dt);  kuramoto.render(ctx2d);
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  </script>
+</body>
+</html>

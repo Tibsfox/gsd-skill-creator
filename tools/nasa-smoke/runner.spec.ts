@@ -154,6 +154,571 @@ test.describe('NASA shared-harness v1.0.0', () => {
     await expect(panel.locator('label')).toHaveCount(state.count);
   });
 
+  test('forest real subsystems: 6 implementations smoke-test', async ({ page }) => {
+    // Exercises the v1.0.0-amendment-6 subsystem implementations:
+    //   boids, lsystem, circadian, kuramoto, physarum, audio
+    // Each is verified against a behavioral invariant rather than a structural
+    // check, so future stub re-introductions would fail the test.
+    await timedGoto(page, `${FIXTURES}/forest-module/subsystems-test.html`);
+    await page.waitForFunction(
+      () => (window as any).__SUBSYSTEMS_READY__ === true,
+      { timeout: LOAD_BUDGET_MS }
+    );
+    // Initial state baseline.
+    const t0 = await page.evaluate(() => ({
+      boidsPop:  (window as any).__boids.boids.length,
+      lsysPop:   (window as any).__lsystem.plants.length,
+      kuraN:     (window as any).__kuramoto.opts.N,
+      phyAgents: (window as any).__physarum.agents.length,
+      phySources:(window as any).__physarum.sources.size,
+      ctxState:  (window as any).__audio.stats().ctxState,
+    }));
+    expect(t0.boidsPop).toBe(200);
+    expect(t0.lsysPop).toBe(14);          // populationTarget default
+    expect(t0.kuraN).toBe(80);
+    expect(t0.phyAgents).toBe(240);
+    expect(t0.phySources).toBeGreaterThanOrEqual(3);    // 3 default seeds
+    expect(t0.ctxState).toBe('never-created');           // pre-unlock
+
+    // Direct-tick the subsystems instead of relying on rAF — playwright's
+    // headless rAF cadence is not reliably fast enough to make the GA loops
+    // deterministic in a 30 s test budget.
+    await page.evaluate(() => {
+      const b = (window as any).__boids;
+      const ls = (window as any).__lsystem;
+      const k = (window as any).__kuramoto;
+      const p = (window as any).__physarum;
+      const c = (window as any).__circadian;
+      for (let i = 0; i < 30; i++) {
+        c.tick(1/30); ls.tick(1/30); b.tick(1/30); k.tick(1/30); p.tick(1/30);
+      }
+    });
+
+    // boids: predator removes a boid. Use a large kill radius so the test is
+    // deterministic regardless of starting positions.
+    const boidsRes = await page.evaluate(() => {
+      const b = (window as any).__boids;
+      const before = b.boids.length;
+      b.addPredator({ id: 'smoke-pred', x: b.canvas.width / 2, y: b.canvas.height / 2,
+                      radius: 800, killCooldown: 0 });
+      // Tick deterministically — at radius=800, kill ring=144px covers
+      // ~30% of a 1024×576 canvas, so several boids are inside on each tick.
+      for (let i = 0; i < 60; i++) b.tick(1/30);
+      return { before, after: b.boids.length, stats: b._stats,
+               predatorIds: [...b.predators.keys()] };
+    });
+    expect(boidsRes.predatorIds).toContain('smoke-pred');
+    expect(boidsRes.stats.predationKills).toBeGreaterThan(0);
+    expect(boidsRes.after).toBeLessThan(boidsRes.before + 1);  // kills outpace births within 2s
+
+    // lsystem: bumpDensity adds plants instantly.
+    const lsysRes = await page.evaluate(() => {
+      const ls = (window as any).__lsystem;
+      const before = ls.plants.length;
+      ls.bumpDensity(3, 5000);
+      return { before, after: ls.plants.length, bumps: ls.densityBumps.length };
+    });
+    expect(lsysRes.after - lsysRes.before).toBe(3);
+    expect(lsysRes.bumps).toBe(1);
+
+    // circadian: 24h compressed into 4 s, so phase advances measurably across
+    // a 1.2 s wall-clock window.
+    const circadianRes = await page.evaluate(() => new Promise<{p1: number, p2: number}>((res) => {
+      const c = (window as any).__circadian;
+      const p1 = c.phase();
+      setTimeout(() => res({ p1, p2: c.phase() }), 1200);
+    }));
+    expect(Math.abs(circadianRes.p2 - circadianRes.p1)).toBeGreaterThan(0.05);
+
+    // kuramoto: phase reference + coupling raise the peak order parameter
+    // measurably above resting drift. Cauchy-distributed intrinsic frequencies
+    // mean a few outliers fight the coupling indefinitely (the slow-cadence
+    // visual is intentional), so we sample over a window and check the peak.
+    const kuraRes = await page.evaluate(() => {
+      const k = (window as any).__kuramoto;
+      const r0 = k.r;
+      k.addPhaseReference({ phase: 0.0, strength: 0.9 });
+      k.setCoupling(0.5);
+      let rPeak = 0;
+      for (let i = 0; i < 240; i++) {
+        k.tick(1/30);
+        if (k.r > rPeak) rPeak = k.r;
+      }
+      return { r0, rPeak };
+    });
+    expect(kuraRes.rPeak).toBeGreaterThan(kuraRes.r0 + 0.05);
+
+    // physarum: agents deposit pheromone — totalWeight grows over time.
+    const phyRes = await page.evaluate(() => {
+      const p = (window as any).__physarum;
+      return {
+        weight: p.stats().totalWeight,
+        sample: p.sampleHighestWeightNode(),
+      };
+    });
+    expect(phyRes.weight).toBeGreaterThan(0);
+    expect(Number.isFinite(phyRes.sample.weight)).toBe(true);
+
+    // audio: locked → unlocked transition, and addLayer counter increments.
+    await page.locator('#audio-toggle').click();
+    await page.waitForTimeout(300);
+    const audioRes = await page.evaluate(() => {
+      const a = (window as any).__audio;
+      a.addLayer('smoke-layer', { gain: -30, frequency: 220 });
+      a.fireEvent('smoke-event', { gain: -25, duration: 0.05 });
+      return a.stats();
+    });
+    expect(audioRes.unlocked).toBe(true);
+    expect(audioRes.ctxState).toBe('running');
+    expect(audioRes.activeLayers).toBeGreaterThanOrEqual(1);
+    expect(audioRes.events).toBeGreaterThanOrEqual(1);
+  });
+
+  test('forest panel-augment: groupings + search filter + idempotence', async ({ page }) => {
+    // Tests the panel-augment helper directly against a synthetic flat panel.
+    // Independent of the full subsystems test so a panel-only regression is
+    // caught even if a subsystem regresses.
+    await timedGoto(page, `${FIXTURES}/forest-module/panel-augment-test.html`);
+    await page.waitForFunction(
+      () => (window as any).__PANEL_AUGMENT_READY__ === true,
+      { timeout: LOAD_BUDGET_MS }
+    );
+
+    // Groupings: programs detected by the classifier.
+    const groups = await page.evaluate(() => {
+      return [...document.querySelectorAll('#missions-panel details')].map((d) => ({
+        program: d.dataset.program,
+        labelCount: d.querySelectorAll(':scope > label').length,
+        open: d.open,
+      }));
+    });
+    // Synthetic fixture seeds 10 labels: 1 Mercury, 1 Gemini, 1 Surveyor, 1 LO,
+    // 1 Apollo, 1 Pioneer, 1 Mariner, 3 Forest/SPS.
+    const programNames = groups.map((g) => g.program);
+    expect(programNames).toEqual(expect.arrayContaining([
+      'Mercury', 'Gemini', 'Surveyor', 'Lunar Orbiter', 'Apollo',
+      'Pioneer', 'Mariner', 'Forest / SPS',
+    ]));
+    // Forest / SPS should be the last group and collapsed by default.
+    expect(programNames[programNames.length - 1]).toBe('Forest / SPS');
+    expect(groups[groups.length - 1].open).toBe(false);
+
+    // Search filter: filter by 'cedar' should narrow to one Forest/SPS entry,
+    // hide all other groups.
+    await page.fill('#missions-panel input[type=search]', 'cedar');
+    await page.waitForTimeout(200);
+    const filtered = await page.evaluate(() => {
+      const visibleLabels: string[] = [];
+      for (const lbl of document.querySelectorAll('#missions-panel label')) {
+        if ((lbl as HTMLElement).style.display !== 'none') {
+          visibleLabels.push(lbl.textContent?.trim() || '');
+        }
+      }
+      const visibleGroups = [...document.querySelectorAll('#missions-panel details')]
+        .filter((d) => (d as HTMLElement).style.display !== 'none')
+        .map((d) => (d as HTMLElement).dataset.program);
+      return { visibleLabels, visibleGroups };
+    });
+    expect(filtered.visibleLabels.length).toBe(1);
+    expect(filtered.visibleLabels[0]).toMatch(/cedar/i);
+    expect(filtered.visibleGroups).toEqual(['Forest / SPS']);
+
+    // Clear filter restores all groups.
+    await page.fill('#missions-panel input[type=search]', '');
+    await page.waitForTimeout(200);
+    const restored = await page.evaluate(() => {
+      const visibleGroups = [...document.querySelectorAll('#missions-panel details')]
+        .filter((d) => (d as HTMLElement).style.display !== 'none')
+        .map((d) => (d as HTMLElement).dataset.program);
+      return visibleGroups.length;
+    });
+    expect(restored).toBe(8);  // all 8 groups visible
+
+    // Classifier unit checks (fixture exposes window.__classifyLabel).
+    const classifyChecks = await page.evaluate(() => ({
+      mercury:    (window as any).__classifyLabel('1.19 · Freedom 7 Chinook Salmon'),
+      surveyor:   (window as any).__classifyLabel('1.46 · Surveyor 1 Oregon White Oak'),
+      lo:         (window as any).__classifyLabel('1.49 · Lunar Orbiter 1 Common Raven'),
+      forest:     (window as any).__classifyLabel('1.0 · Armillaria Mycelial Pulse Network'),
+      gemini:     (window as any).__classifyLabel('1.43 · Gemini 6A Marbled Murrelet'),
+    }));
+    expect(classifyChecks.mercury).toBe('Mercury');
+    expect(classifyChecks.surveyor).toBe('Surveyor');
+    expect(classifyChecks.lo).toBe('Lunar Orbiter');
+    expect(classifyChecks.gemini).toBe('Gemini');
+    expect(classifyChecks.forest).toBe('Forest / SPS');
+  });
+
+  test('forest perf budget: 60 ticks of all 5 subsystems under regression threshold', async ({ page }) => {
+    // Headless-Chromium CPU budget. Headless lacks GPU acceleration, so
+    // canvas operations are slower than they will be in a real browser.
+    // Baseline measured 2026-04-29 was ~1140ms total / ~19ms per tick.
+    // Budget set at 1.6× the baseline: catches a noticeable regression
+    // while accommodating CI/runner variance.
+    //
+    // The test exercises *real CPU work* — actual subsystem tick + render
+    // calls in sequence. Frame time in real browsers (with GPU canvas +
+    // hardware acceleration) is ~3-5× faster.
+    await timedGoto(page, `${FIXTURES}/forest-module/subsystems-test.html`);
+    await page.waitForFunction(
+      () => (window as any).__SUBSYSTEMS_READY__ === true,
+      { timeout: LOAD_BUDGET_MS }
+    );
+
+    const result = await page.evaluate(() => {
+      const b = (window as any).__boids;
+      const ls = (window as any).__lsystem;
+      const c = (window as any).__circadian;
+      const k = (window as any).__kuramoto;
+      const p = (window as any).__physarum;
+      const ctx2d = document.getElementById('forest-canvas')!.getContext('2d')!;
+      // Warm-up: 10 ticks discarded (JIT, growable buffers, etc.)
+      for (let i = 0; i < 10; i++) {
+        c.tick(1/60); ls.tick(1/60); b.tick(1/60); k.tick(1/60); p.tick(1/60);
+        c.render(ctx2d); ls.render(ctx2d); b.render(ctx2d); k.render(ctx2d); p.render(ctx2d);
+      }
+      const start = performance.now();
+      for (let i = 0; i < 60; i++) {
+        c.tick(1/60); ls.tick(1/60); b.tick(1/60); k.tick(1/60); p.tick(1/60);
+        c.render(ctx2d); ls.render(ctx2d); b.render(ctx2d); k.render(ctx2d); p.render(ctx2d);
+      }
+      const elapsed = performance.now() - start;
+      return { elapsed, perTick: elapsed / 60 };
+    });
+    console.log(`  perf: 60 ticks in ${result.elapsed.toFixed(1)}ms, ${result.perTick.toFixed(2)}ms/tick`);
+    expect(result.elapsed).toBeLessThan(1800);  // 1.6× baseline of ~1140ms
+    expect(result.perTick).toBeLessThan(30);
+  });
+
+  test('forest panel-augment: organism axis toggle', async ({ page }) => {
+    // The augmenter accepts a JSON sidecar with { program, organismCategory }
+    // entries keyed by missionVersion. The panel exposes an axis-toggle
+    // button that flips the bucket key between program and organism.
+    await timedGoto(page, `${FIXTURES}/forest-module/panel-augment-axis-test.html`);
+    await page.waitForFunction(
+      () => (window as any).__PANEL_AUGMENT_READY__ === true,
+      { timeout: LOAD_BUDGET_MS }
+    );
+
+    // Initial axis: 'program'. Synthetic fixture seeds 4 sidecar entries
+    // with mixed program/organism so we can verify both buckets.
+    const programInit = await page.evaluate(() =>
+      [...document.querySelectorAll('#missions-panel details')].map((d) => ({
+        key: (d as HTMLElement).dataset.program,
+        axis: (d as HTMLElement).dataset.axis,
+        n: d.querySelectorAll(':scope > label').length,
+      }))
+    );
+    expect(programInit.every((g) => g.axis === 'program')).toBe(true);
+    expect(programInit.length).toBeGreaterThanOrEqual(2);
+
+    // Toggle the axis.
+    await page.click('#missions-panel button');
+    const organismView = await page.evaluate(() =>
+      [...document.querySelectorAll('#missions-panel details')].map((d) => ({
+        key: (d as HTMLElement).dataset.program,
+        axis: (d as HTMLElement).dataset.axis,
+        n: d.querySelectorAll(':scope > label').length,
+      }))
+    );
+    expect(organismView.every((g) => g.axis === 'organism')).toBe(true);
+    expect(organismView.map((g) => g.key)).toEqual(expect.arrayContaining(['Bird', 'Plant']));
+
+    // Toggle back.
+    await page.click('#missions-panel button');
+    const programAgain = await page.evaluate(() =>
+      [...document.querySelectorAll('#missions-panel details')].map((d) =>
+        (d as HTMLElement).dataset.axis
+      )
+    );
+    expect(programAgain.every((a) => a === 'program')).toBe(true);
+  });
+
+  test('forest panel-augment: organism swatches + axis persistence + cross-axis digest', async ({ page }) => {
+    // Loads the axis-test fixture (which seeds 4 sidecar entries) and asserts:
+    //   1. organism color swatches attach to labels whose sidecar entry has
+    //      an organismCategory
+    //   2. axis choice persists in localStorage across navigation
+    //   3. summary text carries a cross-axis digest like "[🐦×n …]"
+    await timedGoto(page, `${FIXTURES}/forest-module/panel-augment-axis-test.html`);
+    await page.waitForFunction(
+      () => (window as any).__PANEL_AUGMENT_READY__ === true,
+      { timeout: LOAD_BUDGET_MS }
+    );
+
+    // 1) Swatches: every label with an organismCategory carries one.
+    // The fixture seeds 4 entries, all of which have an organismCategory
+    // (Plant, Bird, Bird, Fungus), so every label should get a swatch.
+    const swatchInfo = await page.evaluate(() => ({
+      labels:   document.querySelectorAll('#missions-panel label').length,
+      swatches: document.querySelectorAll('#missions-panel label .__swatch').length,
+      // Each swatch must carry a non-default background color. Browsers
+      // serialise hsl() to rgb() when reading inline styles, so accept either.
+      firstSwatchStyle: document.querySelector('#missions-panel label .__swatch')?.getAttribute('style') || '',
+    }));
+    expect(swatchInfo.labels).toBe(4);
+    expect(swatchInfo.swatches).toBe(4);
+    expect(swatchInfo.firstSwatchStyle).toMatch(/background:\s*(hsl|rgb)\(/);
+
+    // 2) Cross-axis digest: program-axis summaries should mention organism icons.
+    const programDigests = await page.evaluate(() =>
+      [...document.querySelectorAll('#missions-panel details[data-axis="program"] summary')]
+        .map((s) => s.textContent || '')
+    );
+    expect(programDigests.length).toBeGreaterThanOrEqual(2);
+    // At least one summary must contain "[" + an organism icon glyph.
+    const hasDigest = programDigests.some((s) => /\[.*[🐦🌿🍄🐟🦦🦎🐸🦋].*\]/.test(s));
+    expect(hasDigest).toBe(true);
+
+    // 3) Toggle to organism axis and reload — localStorage must restore it.
+    await page.click('#missions-panel button');
+    await page.waitForTimeout(100);
+    const beforeReload = await page.evaluate(() =>
+      document.querySelector('#missions-panel details')?.getAttribute('data-axis')
+    );
+    expect(beforeReload).toBe('organism');
+
+    await page.reload();
+    await page.waitForFunction(
+      () => (window as any).__PANEL_AUGMENT_READY__ === true,
+      { timeout: LOAD_BUDGET_MS }
+    );
+    const afterReload = await page.evaluate(() =>
+      document.querySelector('#missions-panel details')?.getAttribute('data-axis')
+    );
+    expect(afterReload).toBe('organism');
+
+    // Clean up so other tests aren't affected by the persisted axis.
+    await page.evaluate(() => {
+      try { localStorage.removeItem('forest-panel-axis'); } catch (_) {}
+    });
+  });
+
+  test('forest panel-augment: footer roll-up + colorized digest icons', async ({ page }) => {
+    await timedGoto(page, `${FIXTURES}/forest-module/panel-augment-axis-test.html`);
+    await page.waitForFunction(
+      () => (window as any).__PANEL_AUGMENT_READY__ === true,
+      { timeout: LOAD_BUDGET_MS }
+    );
+
+    // 1) Footer exists, declares total + axis, and has cross-axis rows.
+    const footer = await page.evaluate(() => {
+      const f = document.querySelector('#missions-panel .__footer');
+      if (!f) return { exists: false };
+      return {
+        exists: true,
+        text: (f as HTMLElement).innerText.trim(),
+        rowCount: f.querySelectorAll(':scope > div').length - 1,  // minus header line
+      };
+    });
+    expect(footer.exists).toBe(true);
+    expect(footer.text).toMatch(/^4 modules · sorted by program/);
+    expect(footer.rowCount).toBeGreaterThanOrEqual(2);  // Bird + Plant + Fungus
+
+    // 2) Footer rows include percentages.
+    const hasPct = await page.evaluate(() => {
+      const f = document.querySelector('#missions-panel .__footer');
+      return f ? /\d+\s*·\s*\d+%/.test((f as HTMLElement).innerText) : false;
+    });
+    expect(hasPct).toBe(true);
+
+    // 3) Cross-axis digest icons: at least one digest span carries an
+    // inline color style (the program-axis tints organism icons).
+    const colored = await page.evaluate(() => {
+      const spans = document.querySelectorAll('#missions-panel summary .__digest span[data-cross-key]');
+      for (const s of spans) {
+        const c = (s as HTMLElement).style.color;
+        if (c && c.length > 0) return { count: spans.length, sample: c };
+      }
+      return { count: spans.length, sample: null };
+    });
+    expect(colored.count).toBeGreaterThanOrEqual(1);
+    expect(colored.sample).toMatch(/^(rgb|hsl)\(/);
+
+    // 4) Toggle to organism axis: footer rebuilds with program rows.
+    await page.click('#missions-panel button');
+    await page.waitForTimeout(100);
+    const orgFooter = await page.evaluate(() => {
+      const f = document.querySelector('#missions-panel .__footer');
+      return f ? (f as HTMLElement).innerText.trim() : '';
+    });
+    expect(orgFooter).toMatch(/^4 modules · sorted by organism/);
+
+    // Clean up persisted axis.
+    await page.evaluate(() => {
+      try { localStorage.removeItem('forest-panel-axis'); } catch (_) {}
+    });
+  });
+
+  test('forest audio: lastEventAt timestamp updates on fireEvent', async ({ page }) => {
+    // The runner page exposes audio.lastEventAt() so it can highlight the
+    // mute button when modules emit fireEvent calls while audio is muted.
+    // Verify the timestamp updates and stays stable until the next event.
+    await timedGoto(page, `${FIXTURES}/forest-module/subsystems-test.html`);
+    await page.waitForFunction(
+      () => (window as any).__SUBSYSTEMS_READY__ === true,
+      { timeout: LOAD_BUDGET_MS }
+    );
+
+    const at0 = await page.evaluate(() => (window as any).__audio.lastEventAt());
+    expect(at0).toBe(0);   // never fired
+
+    const at1 = await page.evaluate(() => {
+      (window as any).__audio.fireEvent('test1', { gain: -22, duration: 0.1 });
+      return (window as any).__audio.lastEventAt();
+    });
+    expect(at1).toBeGreaterThan(0);
+
+    // Same call shouldn't bump the timestamp without a new fireEvent.
+    const at2 = await page.evaluate(() => (window as any).__audio.lastEventAt());
+    expect(at2).toBe(at1);
+
+    // Second event advances it.
+    await page.waitForTimeout(50);
+    const at3 = await page.evaluate(() => {
+      (window as any).__audio.fireEvent('test2', { gain: -25, duration: 0.05 });
+      return (window as any).__audio.lastEventAt();
+    });
+    expect(at3).toBeGreaterThan(at1);
+  });
+
+  test('forest enabled-modules persistence: localStorage round-trip + URL precedence', async ({ page }) => {
+    // Asserts:
+    //   1. toggling a module writes its missionVersion to localStorage
+    //   2. reload with no URL params restores the saved set
+    //   3. URL params (?modules=, ?mission=) override localStorage
+    //   4. unchecking the last module clears the localStorage entry
+
+    // Start clean.
+    await page.goto(`${FIXTURES}/forest-module/persistence-test.html`);
+    await page.evaluate(() => { try { localStorage.clear(); } catch (_) {} });
+
+    await page.reload();
+    await page.waitForFunction(
+      () => (window as any).__PERSISTENCE_READY__ === true,
+      { timeout: LOAD_BUDGET_MS }
+    );
+
+    // 1) Toggle 1.0 + 1.46 → localStorage gets both.
+    await page.evaluate(() => {
+      for (const lbl of document.querySelectorAll('#missions-panel label')) {
+        const t = (lbl.textContent || '');
+        if (t.includes('1.0 ') || t.includes('1.46 ')) {
+          (lbl.querySelector('input[type=checkbox]') as HTMLInputElement).click();
+        }
+      }
+    });
+    await page.waitForTimeout(150);
+    const stored = await page.evaluate(() => localStorage.getItem('forest-enabled-modules'));
+    expect(stored).toBeTruthy();
+    expect(stored!.split(',').sort()).toEqual(['1.0', '1.46']);
+
+    // 2) Reload with no URL params: persistence restores both.
+    await page.goto(`${FIXTURES}/forest-module/persistence-test.html`);
+    await page.waitForFunction(
+      () => (window as any).__PERSISTENCE_READY__ === true,
+      { timeout: LOAD_BUDGET_MS }
+    );
+    const afterReload = await page.evaluate(() => ({
+      target:    (window as any).__TARGET_VERSIONS__.sort(),
+      restored:  (window as any).__RESTORED_FROM_STORAGE__,
+      checked:   [...document.querySelectorAll('#missions-panel label input[type=checkbox]')]
+                   .filter((cb) => (cb as HTMLInputElement).checked).length,
+    }));
+    expect(afterReload.target).toEqual(['1.0', '1.46']);
+    expect(afterReload.restored).toBe(true);
+    expect(afterReload.checked).toBe(2);
+
+    // 3) URL ?modules= overrides localStorage.
+    await page.goto(`${FIXTURES}/forest-module/persistence-test.html?modules=1.12`);
+    await page.waitForFunction(
+      () => (window as any).__PERSISTENCE_READY__ === true,
+      { timeout: LOAD_BUDGET_MS }
+    );
+    const urlOverride = await page.evaluate(() => ({
+      target:   (window as any).__TARGET_VERSIONS__,
+      restored: (window as any).__RESTORED_FROM_STORAGE__,
+    }));
+    expect(urlOverride.target).toEqual(['1.12']);   // 1.0 / 1.46 ignored
+    expect(urlOverride.restored).toBe(false);
+
+    // 4) Unchecking everything clears the storage entry.
+    // Reload to a clean state with all three checked.
+    await page.goto(`${FIXTURES}/forest-module/persistence-test.html?modules=1.0,1.12,1.46`);
+    await page.waitForFunction(
+      () => (window as any).__PERSISTENCE_READY__ === true,
+      { timeout: LOAD_BUDGET_MS }
+    );
+    // Persist is only called via onChange — explicitly toggle each off.
+    await page.evaluate(() => {
+      for (const cb of document.querySelectorAll('#missions-panel label input[type=checkbox]')) {
+        if ((cb as HTMLInputElement).checked) (cb as HTMLInputElement).click();
+      }
+    });
+    await page.waitForTimeout(150);
+    const cleared = await page.evaluate(() => localStorage.getItem('forest-enabled-modules'));
+    expect(cleared).toBeNull();
+
+    // Cleanup so other tests don't see persisted state.
+    await page.evaluate(() => { try { localStorage.clear(); } catch (_) {} });
+  });
+
+  test('forest URL deep-link + share-button: round-trip', async ({ page, context }) => {
+    // Grant clipboard permissions so the share button can write.
+    await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+
+    // Pre-enable two modules via ?modules=...
+    await timedGoto(page, `${FIXTURES}/forest-module/deeplink-test.html?modules=1.0,1.12`);
+    await page.waitForFunction(
+      () => (window as any).__DEEPLINK_READY__ === true,
+      { timeout: LOAD_BUDGET_MS }
+    );
+
+    const preEnabled = await page.evaluate(() => (window as any).__PRE_ENABLED__);
+    expect(preEnabled).toEqual(expect.arrayContaining(['1.0', '1.12']));
+    expect(preEnabled).not.toContain('1.46');
+
+    // Verify the corresponding registry modules' enable() was actually called.
+    const enabledCounts = await page.evaluate(() => {
+      const m = (window as any).__MODULES__;
+      return { m1: m.m1._enabled, m2: m.m2._enabled, m3: m.m3._enabled };
+    });
+    expect(enabledCounts.m1).toBe(1);
+    expect(enabledCounts.m2).toBe(1);
+    expect(enabledCounts.m3).toBe(0);
+
+    // Add 1.46 via UI toggle, then click share — the resulting URL should
+    // contain 1.0, 1.12, AND 1.46 deduplicated.
+    await page.evaluate(() => {
+      for (const lbl of document.querySelectorAll('#missions-panel label')) {
+        if (lbl.textContent?.includes('1.46')) {
+          (lbl.querySelector('input[type=checkbox]') as HTMLInputElement).click();
+          return;
+        }
+      }
+    });
+    await page.click('#share-scene');
+    await page.waitForFunction(
+      () => (document.getElementById('share-result')!.textContent || '').length > 0,
+      { timeout: 1000 }
+    );
+    const shareUrl = await page.locator('#share-result').textContent();
+    expect(shareUrl).toMatch(/[?&]modules=/);
+    const url = new URL(shareUrl!);
+    const versions = (url.searchParams.get('modules') || '').split(',').sort();
+    expect(versions).toEqual(['1.0', '1.12', '1.46']);
+
+    // Round-trip: load the share URL on a fresh navigation and verify those
+    // three modules are pre-enabled.
+    await timedGoto(page, shareUrl!.replace(url.origin, ''));
+    await page.waitForFunction(
+      () => (window as any).__DEEPLINK_READY__ === true,
+      { timeout: LOAD_BUDGET_MS }
+    );
+    const roundtrip = await page.evaluate(() => (window as any).__PRE_ENABLED__);
+    expect(roundtrip.sort()).toEqual(['1.0', '1.12', '1.46']);
+  });
+
   test('all four runners load within 3s budget (combined)', async ({ page }) => {
     const urls = [
       `${FIXTURES}/audio/sample-synth.html`,
