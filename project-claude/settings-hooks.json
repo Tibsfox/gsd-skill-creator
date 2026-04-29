@@ -35,7 +35,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/self-mod-guard.js",
+            "command": "node .claude/hooks/self-mod-guard.js",
             "timeout": 5
           }
         ]
@@ -45,7 +45,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/git-add-blocker.js",
+            "command": "node .claude/hooks/git-add-blocker.js",
             "timeout": 5
           }
         ]
