@@ -1,6 +1,14 @@
 #!/usr/bin/env node
 'use strict';
 
+// v1.49.585 C01: signal to the self-mod-guard hook (.claude/hooks/self-mod-guard.js)
+// that this process is the legitimate install.cjs caller — its writes into
+// .claude/skills|agents|hooks/ are sanctioned. The hook checks this env var
+// in addition to SC_SELF_MOD=1 and npm_lifecycle_event === 'install-project-claude'.
+//
+// See: .planning/missions/v1-49-585-concerns-cleanup/work/specs/hook-conventions.md §5
+process.env.SC_INSTALL_CALLER = 'project-claude';
+
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');

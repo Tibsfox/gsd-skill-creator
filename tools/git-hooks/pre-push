@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+# .git/hooks/pre-push — completeness gate scoped to main pushes
+#
+# BLOCKS `git push origin main` if release-notes 5-file structure is missing
+# or undersized (--strict). Override: SC_SKIP_PREPUSH=1 git push origin main
+# (use only in true emergencies; the gate exists because v1.49.577–v1.49.580
+# shipped without release-notes when this discipline was social-only).
+#
+# Tracked source: tools/git-hooks/pre-push
+# Installed via:  bash tools/install-git-hooks.sh (also wired to npm postinstall)
+#
+# Authored 2026-04-28 in v1.49.585 component C05.
+# See: .planning/missions/v1-49-585-concerns-cleanup/components/05-prepush-completeness.md
+#      .planning/codebase/CONCERNS.md §6 (release-completeness drift incident)
+
+set -euo pipefail
+
+# Override path
+if [ "${SC_SKIP_PREPUSH:-0}" = "1" ]; then
+  echo "[pre-push] SC_SKIP_PREPUSH=1 — completeness gate SKIPPED"
+  # Log to .git/hooks/.log/pre-push.jsonl for post-hoc audit (per hook-conventions.md §4)
+  LOG_DIR="$(git rev-parse --git-dir)/hooks/.log"
+  mkdir -p "$LOG_DIR"
+  echo "{\"timestamp\":\"$(date -u +%FT%TZ)\",\"hook\":\"pre-push\",\"decision\":\"allow-override\",\"override\":\"SC_SKIP_PREPUSH\"}" \
+    >> "$LOG_DIR/pre-push.jsonl"
+  exit 0
+fi
+
+# Read stdin; check for main-targeted pushes
+PUSHING_TO_MAIN=0
+while IFS=' ' read -r local_ref local_sha remote_ref remote_sha; do
+  if [ "$remote_ref" = "refs/heads/main" ]; then
+    PUSHING_TO_MAIN=1
+  fi
+done
+
+if [ "$PUSHING_TO_MAIN" -eq 0 ]; then
+  exit 0
+fi
+
+# Run the completeness gate from repo root
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+cd "$REPO_ROOT"
+
+echo "[pre-push] Pushing to main detected — running check-completeness.mjs --current --strict"
+if ! node tools/release-history/check-completeness.mjs --current --strict; then
+  echo ""
+  echo "[pre-push] BLOCKED: release-notes completeness gate FAILED"
+  echo "  Reason:   release-notes-incomplete or release-notes-undersized"
+  echo "  Override: SC_SKIP_PREPUSH=1 git push origin main (emergency only)"
+  echo "  See:      CLAUDE.md 'Ship Pipeline — Required Per-Milestone Artifacts'"
+  echo "  Spec:     .planning/missions/v1-49-585-concerns-cleanup/components/05-prepush-completeness.md"
+
+  # Log the BLOCK
+  LOG_DIR="$(git rev-parse --git-dir)/hooks/.log"
+  mkdir -p "$LOG_DIR"
+  echo "{\"timestamp\":\"$(date -u +%FT%TZ)\",\"hook\":\"pre-push\",\"decision\":\"block\",\"reason_category\":\"release-notes-incomplete\"}" \
+    >> "$LOG_DIR/pre-push.jsonl"
+
+  exit 1
+fi
+
+echo "[pre-push] Completeness gate PASSED"
+exit 0

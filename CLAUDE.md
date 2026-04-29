@@ -17,7 +17,7 @@ Adaptive learning layer for Claude Code that creates, validates, and manages ski
 - `.claude/skills/` -- auto-activating skills (gsd-workflow, skill-integration, session-awareness, security-hygiene, and others)
 - `src/anytime-valid/` -- anytime-valid e-process martingale primitive (Ville's inequality; consumed by `src/orchestration/anytime-gate.ts` and future `src/ab-harness/` consumer per JP-029)
 - `src/skill-promotion/` -- skill-promotion ROI gate via deployment-horizon math (Landauer floor at T=300K; JP-005)
-- `$REPO/.claude/agents/` -- 49 subagents on disk (per `INVENTORY-MANIFEST.json` + `.planning/missions/oops-gsd-alignment/m3/local-inventory.json`): 33 GSD-prefixed (planner / executor / verifier + 30 specialists), 8 Unit Circle Lab team agents (capcom, flight-ops, lab-director, uc-* analysts), 3 v1.50a-* (paused experiment), 5 generic infra (observer, watchdog, doc-linter, codebase-navigator, changelog-generator, pipeline-reconciler, quality-drift-watcher). Source-of-truth lives at `$REPO/project-claude/agents/`; install.cjs replays into `.claude/agents/` (gitignored).
+- `$REPO/.claude/agents/` -- **52 subagents on disk** (49 from source-of-truth + 3 v1.50a-* paused-experiment local-only): **34 GSD-prefixed** (`gsd-*` — planner / executor / verifier + ~31 specialists), **9 Unit Circle Lab + Observatory team** (capcom, flight-ops, lab-director, watchdog, uc-brainstorm-engine, uc-perf-analyst, uc-proof-engineer, uc-retro-analyst, uc-skill-forger), **3 v1.50a-*** (paused experiment — KEEP-LOCAL until v1.50 unparking), **6 generic infra** (observer, doc-linter, codebase-navigator, changelog-generator, pipeline-reconciler, quality-drift-watcher). Source-of-truth lives at `$REPO/project-claude/agents/` (49 files post-v1.49.585 C12 reconciliation); install.cjs auto-discovers via `manifest.json` schema-v2 `autoDiscover` pattern `*.md` and replays into `.claude/agents/` (gitignored). After v1.49.585 the source matches on-disk reality; `node project-claude/install.cjs --dry-run` reports zero new agents.
 - `.claude/commands/gsd/` -- GSD command definitions
 - `.claude/hooks/` -- deterministic hooks (commit validation, session state, phase boundary)
 - `project-claude/` -- source of project-specific Claude config (installed via `node project-claude/install.cjs`)
@@ -90,12 +90,38 @@ This preserves bisect intent in the commit message even when commit boundaries d
 - GSD skills and hooks handle workflow guidance automatically
 - Strict boundary: `src/` never imports `desktop/@tauri-apps/api`; `desktop/` never imports Node.js modules
 
+### Environment Variables (added in v1.49.585)
+
+| Var | Default behavior | Override behavior |
+|---|---|---|
+| `SC_SELF_MOD` | unset → BLOCK self-mod writes | `=1` → allow `.claude/skills\|agents\|hooks/` writes |
+| `SC_FORCE_ADD` | unset → BLOCK protected-path adds | `=1` → allow `git add` of `.planning/`, `.claude/`, `.archive/`, `artifacts/` paths |
+| `SC_SKIP_PREPUSH` | unset → run completeness gate | `=1` → skip pre-push completeness check (emergency only) |
+| `SC_INSTALL_CALLER` | (set by `project-claude/install.cjs` at process start) | `=project-claude` → install.cjs allowlist for self-mod-guard |
+| `RH_ENV_FILE` | unset → use default `<repo-root>/.env` | `=<path>` → use override .env path for `tools/release-history/run-with-pg.mjs` |
+| `ARTEMIS_REPO_ENV` *(deprecated)* | unset → ignored | `=<path>` → fallback alias for `RH_ENV_FILE`; emits deprecation notice |
+
 ## Important Notes
 
-- This is a self-modifying system -- the security-hygiene skill handles safety
+- This is a self-modifying system -- the security-hygiene skill handles prose-level safety; v1.49.585 added deterministic gates (see "Operational Gates" subsection below)
 - `.planning/patterns/` should be in `.gitignore`
 - Skills load automatically based on context -- no explicit invocation needed
 - **Session auto-init:** when starting a new mission, run `node tools/session-retro/observe.mjs start '<mission-name>'` as your first Bash call. This captures `started_commit` for `generate.mjs --since …` and gives the retrospective real event data. Close with `observe.mjs end` + `generate.mjs` before context dies. Token usage can be dual-logged via `observe.mjs event tokens <in> <out> [label]`.
+
+### Operational Gates (added in v1.49.585)
+
+The following deterministic gates BLOCK certain operations by default; each has a documented override env var for legitimate use:
+
+| Gate | What it blocks | Override |
+|---|---|---|
+| `.claude/hooks/self-mod-guard.js` | Write/Edit/Bash to `.claude/skills/`, `.claude/agents/`, `.claude/hooks/` | `SC_SELF_MOD=1` env var, OR call from `node project-claude/install.cjs` (sets `SC_INSTALL_CALLER=project-claude` automatically) |
+| `.claude/hooks/git-add-blocker.js` | `git add` / `git commit -a` of `.planning/`, `.claude/`, `.archive/`, `artifacts/` paths | `SC_FORCE_ADD=1` env var |
+| `.git/hooks/pre-push` (installed via `tools/install-git-hooks.sh` + npm postinstall) | `git push origin main` if release-notes 5-file structure is missing or any file <200 bytes (`check-completeness.mjs --strict`) | `SC_SKIP_PREPUSH=1` env var (emergency only) |
+| `src/dead-zone/__tests__/citation-invariants.test.ts` | (CI test) FAILS if `cooldownDays=7` / `diffThreshold=0.20` / `MAX_CORRECTIONS_BEFORE_BLOCK=3` / `SMALL_DATA_FLOOR=12` defaults are silently changed | Update `.planning/missions/v1-49-585-concerns-cleanup/work/specs/citation-anchors.md` AND `src/dead-zone/CITATION.md` in the same commit as the value change |
+
+The gates exist to convert prose-only social rules into deterministic enforcement. See `.planning/codebase/CONCERNS.md` (the audit they emerged from) and `.planning/missions/v1-49-585-concerns-cleanup/` for full design context. The gates' contract spec is at `.planning/missions/v1-49-585-concerns-cleanup/work/specs/hook-conventions.md`.
+
+**Self-mod-guard known caveat (v1.49.585):** the hook's Bash detection can false-positive when a long compound command contains BOTH a write-operator (e.g. `mv`, `rm`, `cp`) AND a `.claude/skills|agents|hooks/` substring elsewhere in the same line, even when those are not adjacent. Workaround: split into multiple Bash calls. Long-term fix (proximity-aware matching) deferred to v1.49.586+.
 
 ## Ship Pipeline — Required Per-Milestone Artifacts
 
@@ -129,7 +155,19 @@ The gate runs against `package.json` `version`. It exits non-zero if any of the 
 node tools/release-history/run-with-pg.mjs refresh --fast --quiet
 ```
 
-The wrapper reads the artemis-ii sibling repo's `.env` (`$ARTEMIS_REPO/.env` — same parent dir as `$REPO`) for PG_HOST/PORT/USER/DB plus the anonymous-password-list section, builds `RH_POSTGRES_URL`, and invokes `tools/release-history/refresh.mjs`. The wrapper exists because the `.env` file's anonymous-password-list section breaks shell `source` due to special characters in passwords. Use the wrapper, never `source .env` directly. (The wrapper itself resolves the absolute path; CLAUDE.md keeps the placeholder per CF-MED-063b.)
+The wrapper reads PG credentials from `<repo-root>/.env` (canonical location) and invokes `tools/release-history/refresh.mjs` with `RH_POSTGRES_URL` populated in the environment. If the `.env` has a pre-built `RH_POSTGRES_URL=postgresql://...`, that value is used verbatim; otherwise the wrapper constructs the URL from `PGHOST`/`PGPORT`/`PGUSER`/`PGDATABASE`/`PGPASSWORD` keys. Override the .env path via the `RH_ENV_FILE` env var.
+
+**Historical note (v1.49.585 deprecation):** prior to v1.49.585 the wrapper read PG creds from a worktree-attached `.env` at `/media/foxy/ai/GSD/dev-tools/artemis-ii/.env` (the artemis-ii git worktree, not a separate dev-tools project) and used a legacy `PG_HOST`/`PG_PORT`/`PG_USER`/`PG_DB` key style plus an anonymous-password-list section. The artemis-ii worktree default and anonymous-password-list parsing were both removed in v1.49.585 component C08. The legacy `ARTEMIS_REPO_ENV` env var continues to be honored for backward-compat with operator setups, but emits a deprecation notice; new setups should use `RH_ENV_FILE`. Do NOT route work to the `artemis-ii` branch (merged 2026-04-14 PR #32, no longer active); the worktree directory at `/media/foxy/ai/GSD/dev-tools/artemis-ii/` is left in place but is not the canonical .env location anymore.
+
+**Idempotent chapter generation (added in v1.49.585):**
+
+`tools/release-history/chapter.mjs` now preserves hand-authored release-notes by default (checksum-skip when existing content has non-DB-derivable opener — first 200 bytes don't match the regenerated template's opener). To force regeneration of chapter files (e.g. when backfilling historical milestones from clean state), use:
+
+```bash
+node tools/release-history/chapter.mjs --version v1.49.NNN --force-regenerate
+```
+
+Without `--force-regenerate`, hand-authored release-notes in `docs/release-notes/<version>/chapter/*.md` are preserved across `refresh.mjs` runs. The v1.49.583 "defeat-checkout" pattern (`git checkout HEAD -- ...`) is no longer required for normal ship pipelines.
 
 ## External Citations (CS25–26 Sweep)
 

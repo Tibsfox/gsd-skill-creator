@@ -1,0 +1,53 @@
+# .gitattributes — gsd-skill-creator
+#
+# Authored 2026-04-28 in v1.49.585 (concerns cleanup mission, component C09).
+# See .planning/missions/v1-49-585-concerns-cleanup/components/09-gitattributes.md
+# and .planning/codebase/CONCERNS.md §3.2 for the motivating drift incidents.
+
+# --- Line-ending normalization (project default per CLAUDE.md "Platform: linux") ---
+* text=auto eol=lf
+
+# --- Manifest files: explicit text merge with LF endings ---
+# These bump on every milestone (version bumps in dev and main); declaring them
+# with explicit text and eol=lf reduces noise from accidental CRLF drift.
+package.json     text eol=lf
+Cargo.toml       text eol=lf
+tauri.conf.json  text eol=lf
+
+# package-lock.json regenerates from package.json + npm-cli; merge=union is safe
+# (dependency entries are line-additive; conflicts resolve to a superset that
+# `npm install` can normalize on next install).
+package-lock.json  text eol=lf merge=union
+
+# --- Generated/binary content (declare so git diff/merge doesn't try to text-merge) ---
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.ico   binary
+*.pdf   binary
+*.zip   binary
+
+# Source-map and lockfile diffs are noisy; mark as -diff for cleaner git log
+*.map         -diff
+yarn.lock     -diff merge=union
+pnpm-lock.yaml -diff merge=union
+
+# --- Shell scripts: ensure LF endings even on Windows ---
+*.sh   text eol=lf
+*.bash text eol=lf
+
+# --- TypeScript / JavaScript: ensure LF endings ---
+*.ts   text eol=lf
+*.tsx  text eol=lf
+*.js   text eol=lf
+*.cjs  text eol=lf
+*.mjs  text eol=lf
+*.json text eol=lf
+
+# --- Documentation: text with LF ---
+*.md  text eol=lf
+
+# --- Rust: text with LF ---
+*.rs   text eol=lf
+*.toml text eol=lf
