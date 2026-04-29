@@ -6,6 +6,19 @@
 //   node tools/release-history/score-completeness.mjs            # score all
 //   node tools/release-history/score-completeness.mjs v1.49.165  # one release
 //   node tools/release-history/score-completeness.mjs --summary  # print distribution
+//   node tools/release-history/score-completeness.mjs --rubric=cleanup-mission v1.49.585
+//                                                                # force cleanup-mission rubric
+//   node tools/release-history/score-completeness.mjs --rubric=auto v1.49.585
+//                                                                # auto-detect (default)
+//
+// Rubrics:
+//   degree           — paired-engine prose-style NASA-degree releases (release_type=degree)
+//   structured       — feature/milestone/patch (default for non-degree)
+//   cleanup-mission  — counter-cadence operational-debt milestones (Lesson #10168 cadence;
+//                      v1.49.585 first exemplar). Distinguished by "## Components",
+//                      "## Threads closed/opened", "## Forward lessons emitted" markers
+//                      and engine-state-unchanged sanity. Auto-detected from README
+//                      text when --rubric=auto (default). v1.49.586 T2.3 / Lesson #10175.
 
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
@@ -244,7 +257,228 @@ function gradeOf(score) {
   return 'F';
 }
 
-function scoreRelease(text, releaseType) {
+// Auto-detect whether a README looks like a cleanup-mission release.
+// Cleanup-mission marker triad: explicit "counter-cadence" or "cleanup"
+// in the **Type:** header field OR title; no NASA-mission line in the
+// header (no "NASA Mission:", "Degree NN", "**Mission Code:**"); presence
+// of an "Engine state: UNCHANGED" or "Components/Gates" structural section.
+// Returns true only when at least 2 of 3 signals fire.
+export function isCleanupMission(text) {
+  const head = text.split(/\r?\n/).slice(0, 30).join('\n');
+  let hits = 0;
+  // Signal 1: explicit type marker
+  if (/\*\*Type:?\*\*:?\s*[^\n]*(counter[- ]cadence|cleanup|operational[- ]debt|foundation[- ]shoring)/i.test(head) ||
+      /^#\s+v[\d.]+\s+—\s+[^\n]*(Concerns Cleanup|Foundation Shoring|Operational Debt|Counter[- ]cadence)/im.test(text)) {
+    hits++;
+  }
+  // Signal 2: NO NASA mission code in header (negative signal)
+  const hasNasa = /\*\*(Mission Code|NASA Mission|Degree)\b/m.test(head) ||
+                  /^#\s+v[\d.]+\s+—\s+(NASA|Degree|Pioneer|Apollo|Surveyor|Lunar Orbiter|Explorer|OAO|Mariner|Voyager)/im.test(text);
+  if (!hasNasa) hits++;
+  // Signal 3: explicit cleanup structural sections
+  if (/^#{2,3}\s+(Forward lessons emitted|Threads (closed|opened|extended)|Components|Gates? (added|installed))\b/im.test(text) ||
+      /Engine state:?\*?\*?\s+UNCHANGED/i.test(text)) {
+    hits++;
+  }
+  return hits >= 2;
+}
+
+// Cleanup-mission Summary that aggregates ALL Summary-shaped sections in
+// the corpus (README's `## Summary` + chapter/00-summary.md's
+// `## NN — Summary: …`), summing word counts so chapter-style narratives
+// are not penalized for splitting prose between README and chapter file.
+function scoreCleanupSummaryFromChapter(text) {
+  const lines = text.split(/\r?\n/);
+  let totalWords = 0;
+  for (let i = 0; i < lines.length; i++) {
+    if (!/^#{2}\s+(?:\d{2}\s+—\s+)?Summary\b/i.test(lines[i])) continue;
+    let endIdx = lines.length;
+    for (let j = i + 1; j < lines.length; j++) {
+      if (/^#{1,2}\s/.test(lines[j])) { endIdx = j; break; }
+    }
+    const section = lines.slice(i + 1, endIdx).join('\n');
+    totalWords += (section.trim().match(/\S+/g) || []).length;
+  }
+  if (totalWords >= 1500) return 15;
+  if (totalWords >= 800) return 10;
+  if (totalWords >= 400) return 5;
+  if (totalWords >= 150) return 2;
+  return 0;
+}
+
+// Cleanup-mission Retrospective that matches `## NN — Retrospective`
+// (chapter heading). The shared scoreRetrospective requires bare
+// `## Retrospective`, which the chapter prefix breaks.
+function scoreCleanupRetrospective(text) {
+  const hasRetro = /^#{2}\s+(?:\d{2}\s+—\s+)?Retrospective/mi.test(text);
+  if (!hasRetro) return 0;
+  // Carryover-lessons + new-lessons sub-structure typical of cleanup retros.
+  const carryover = /^#{2,4}\s+Carryover lessons (applied|carried)/mi.test(text);
+  const newLessons = /^#{2,4}\s+(New lessons|Lessons emitted|What.*ship.*pipeline)/mi.test(text);
+  const whatWorked = /^#{2,4}\s+What (Worked|s Working)/mi.test(text);
+  const whatBetter = /^#{2,4}\s+(What Could Be Better|What.*(Didn'?t Work|Needs Improvement))/mi.test(text);
+  let score = 5;
+  if (carryover) score += 5;
+  if (newLessons || whatWorked) score += 3;
+  if (whatBetter) score += 2;
+  return Math.min(score, 15);
+}
+
+// Cleanup-mission Lessons matcher — accepts the numbered-chapter heading
+// `## NN — Lessons Learned: …` AND counts both numbered + #ID-prefixed
+// entries (cleanup releases use `### #10168 — title` style).
+function scoreCleanupLessons(text) {
+  const lines = text.split(/\r?\n/);
+  let best = 0;
+  for (let i = 0; i < lines.length; i++) {
+    const headerMatch = /^(#{2,4})\s+(?:\d{2}\s+—\s+)?Lessons(?:\s+Learned)?\b/i.exec(lines[i]);
+    if (!headerMatch) continue;
+    const startLevel = headerMatch[1].length;
+    let endIdx = lines.length;
+    for (let j = i + 1; j < lines.length; j++) {
+      const inner = /^(#{1,4})\s/.exec(lines[j]);
+      if (inner && inner[1].length <= startLevel) { endIdx = j; break; }
+    }
+    const section = lines.slice(i + 1, endIdx).join('\n');
+    const numbered = [...section.matchAll(/^\s*\d+\.\s+/gm)].length;
+    const bulleted = [...section.matchAll(/^\s*[-*]\s+\*\*/gm)].length;
+    const hashIds = [...section.matchAll(/^#{2,4}\s+#?1\d{4}\b/gm)].length;
+    const count = Math.max(numbered, bulleted, hashIds);
+    let s = 0;
+    if (count >= 8) s = 12;
+    else if (count >= 5) s = 9;
+    else if (count >= 3) s = 6;
+    else if (count >= 1) s = 3;
+    if (s > best) best = s;
+  }
+  return best;
+}
+
+// Cleanup-mission rubric: 8 dimensions × 100 max. Same 10-column schema;
+// the two unused columns (part_a_depth, part_b_depth) store 0 and are
+// normalized out (raw is out of 100, no rescale needed since cleanup
+// rubric is calibrated to 100 directly). Slot mapping:
+//   header_block              ← header_block (same)
+//   summary_findings          ← summary_findings (relaxed: 1500-word target)
+//   key_features_table        ← components_listed (count of ## Components / Gates)
+//   part_a_depth              ← 0 (unused)
+//   part_b_depth              ← 0 (unused)
+//   retrospective_structure   ← retrospective_structure (same)
+//   lessons_learned           ← lessons_learned (forward + carry both count)
+//   cross_references          ← thread_state_markers (## Threads closed/opened/extended)
+//   running_ledgers           ← engine_state_unchanged_marker
+//   infrastructure_block      ← forward_lessons_block
+function scoreCleanupMission(text) {
+  const dimensions = {
+    header_block:            scoreHeaderBlock(text),
+    summary_findings:        scoreCleanupSummaryFromChapter(text) || scoreCleanupSummary(text),
+    key_features_table:      scoreComponentsListed(text),
+    part_a_depth:            0,
+    part_b_depth:            0,
+    retrospective_structure: scoreCleanupRetrospective(text),
+    lessons_learned:         scoreCleanupLessons(text),
+    cross_references:        scoreThreadStateMarkers(text),
+    running_ledgers:         scoreEngineStateUnchanged(text),
+    infrastructure_block:    scoreForwardLessonsBlock(text),
+  };
+  const score = Object.values(dimensions).reduce((s, v) => s + v, 0);
+  return { score, grade: gradeOf(score), dimensions };
+}
+
+// Cleanup summary: 1500-word target (vs 2000 for NASA prose), relaxed.
+function scoreCleanupSummary(text) {
+  const summary = extractSection(text, /^#{2}\s+Summary\b/mi);
+  if (!summary) return 0;
+  const words = (summary.trim().match(/\S+/g) || []).length;
+  if (words >= 1500) return 15;
+  if (words >= 800) return 10;
+  if (words >= 400) return 5;
+  if (words >= 150) return 2;
+  return 0;
+}
+
+// Components/Gates listed — count bold lead-ins or pipe-table rows in
+// any section whose header matches the components-equivalent set.
+function scoreComponentsListed(text) {
+  const headingRe = /^#{2,4}\s+(Components|Gates? (added|installed)|Cross[- ]track|Component matrix)\b/mi;
+  const section = extractSection(text, headingRe);
+  if (!section) {
+    // Fallback: count "C0N" or "T2.N" component-id mentions in the full text;
+    // cleanup missions often inline the component list in Summary prose.
+    const mentions = [...text.matchAll(/\b(C\d{2}|T\d\.\d)\b/g)].length;
+    if (mentions >= 12) return 10;
+    if (mentions >= 6) return 6;
+    if (mentions >= 3) return 3;
+    return 0;
+  }
+  const tableLines = section.split(/\r?\n/).filter(l => /^\s*\|/.test(l)).length;
+  const boldLeads = [...section.matchAll(/^[-*]?\s*\*\*[^*\n]{3,200}\*\*/gm)].length;
+  const score = tableLines + boldLeads * 2;
+  if (score >= 12) return 12;
+  if (score >= 6) return 8;
+  if (score >= 3) return 5;
+  return 2;
+}
+
+// Thread state markers: count distinct "## Threads (closed|opened|extended)"
+// entries OR explicit "OPENED:" / "CLOSED:" / "EXTENDED:" / "CARRY-FORWARD:"
+// markers in a Threads section.
+function scoreThreadStateMarkers(text) {
+  const headingRe = /^#{2,3}\s+(Threads (closed|opened|extended|carry[- ]forward)|Thread state|Threads? (closed|opened|extended)( \/ (closed|opened|extended)){0,3})\b/mi;
+  const section = extractSection(text, headingRe);
+  if (!section) {
+    // Fallback: count thread-state markers anywhere in the text.
+    const anywhere = [...text.matchAll(/\*\*?(OPENED|CLOSED|EXTENDED|CARRY[- ]FORWARD):/g)].length;
+    if (anywhere >= 4) return 7;
+    if (anywhere >= 2) return 4;
+    if (anywhere >= 1) return 2;
+    return 0;
+  }
+  const markers = [...section.matchAll(/\*\*?(OPENED|CLOSED|EXTENDED|CARRY[- ]FORWARD):/g)].length;
+  if (markers >= 5) return 12;
+  if (markers >= 3) return 9;
+  if (markers >= 1) return 5;
+  return 2;
+}
+
+// Engine-state-unchanged sanity marker for cleanup missions.
+function scoreEngineStateUnchanged(text) {
+  if (/Engine state:?\*?\*?\s+UNCHANGED/i.test(text)) return 8;
+  if (/Engine (remains?|stays?)\s+at\b/i.test(text)) return 5;
+  if (/^\*\*Engine Position:?\*\*/im.test(text)) return 3;
+  return 0;
+}
+
+// Forward-lessons emitted block: count #NNNNN lesson IDs OR "## Forward
+// lessons emitted" sectioned bullets.
+function scoreForwardLessonsBlock(text) {
+  const headingRe = /^#{2,3}\s+Forward lessons (emitted|absorbed|carried)\b/mi;
+  const section = extractSection(text, headingRe);
+  if (!section) {
+    // Fallback: count #NNNNN lesson refs anywhere
+    const refs = [...text.matchAll(/#1\d{4}\b/g)].length;
+    if (refs >= 5) return 10;
+    if (refs >= 3) return 6;
+    if (refs >= 1) return 3;
+    return 0;
+  }
+  const ids = [...section.matchAll(/#1\d{4}\b/g)].length;
+  if (ids >= 6) return 12;
+  if (ids >= 3) return 8;
+  if (ids >= 1) return 4;
+  return 2;
+}
+
+export function scoreRelease(text, releaseType, options = {}) {
+  const rubric = options.rubric || 'auto';
+
+  // Cleanup-mission rubric (explicit or auto-detected). Calibrated to 100
+  // directly; the 10-column store keeps part_a/b at 0.
+  if (rubric === 'cleanup-mission' ||
+      (rubric === 'auto' && releaseType !== 'degree' && isCleanupMission(text))) {
+    return scoreCleanupMission(text);
+  }
+
   // Prose rubric for degree-type paired-engine releases. Different
   // scoring dimensions (prose depth + named-entity density + Part A/B
   // sync), but the same 10-column storage schema so release_score
@@ -365,6 +599,12 @@ function scoreDedicationMarker(text) {
 async function main() {
   const args = process.argv.slice(2);
   const summary = args.includes('--summary');
+  const rubricArg = args.find(a => a.startsWith('--rubric='));
+  const rubric = rubricArg ? rubricArg.split('=')[1] : 'auto';
+  if (!['auto', 'degree', 'structured', 'cleanup-mission'].includes(rubric)) {
+    console.error(`[score] invalid --rubric=${rubric}. Valid: auto|degree|structured|cleanup-mission`);
+    process.exit(2);
+  }
   const explicit = args.find(a => !a.startsWith('--'));
 
   const cfg = loadConfig();
@@ -404,7 +644,7 @@ async function main() {
       continue;
     }
     const text = buildReleaseCorpus(readmePath, r.version);
-    const { score, grade, dimensions } = scoreRelease(text, r.release_type);
+    const { score, grade, dimensions } = scoreRelease(text, r.release_type, { rubric });
     dist[grade]++;
     scored++;
 
@@ -453,4 +693,8 @@ async function main() {
   console.log(JSON.stringify({ scored, distribution: dist, average_score: Math.round(avg) }, null, 2));
 }
 
-main().catch(e => { console.error('[score] fatal:', e.message); console.error(e.stack); process.exit(2); });
+// Only run main() when invoked as a script, not when imported as a module.
+import { fileURLToPath as _ftpURL } from 'node:url';
+if (process.argv[1] && _ftpURL(import.meta.url) === process.argv[1]) {
+  main().catch(e => { console.error('[score] fatal:', e.message); console.error(e.stack); process.exit(2); });
+}

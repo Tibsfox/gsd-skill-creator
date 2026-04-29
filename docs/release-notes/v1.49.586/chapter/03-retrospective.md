@@ -1,0 +1,37 @@
+# 03 — Retrospective: v1.49.586 Process
+
+## Carryover lessons applied
+
+Five lessons from v1.49.585 propagated forward and were verified against v1.49.586's execution:
+
+- **Lesson #10168 (counter-cadence cleanup-mission cadence)** — v1.49.586 ships the Track 2 small-fix bundle (5 carryforward items from v1.49.585 §4.2) BEFORE the Track 1 NASA forward triple. The "harden the gates before the larger build runs through them" sequencing is the discipline #10168 prescribes; v1.49.586 W0 → W1-W3 → W4 wave structure embodies it.
+- **Lesson #10173 (hook self-tests must use `env -i` for full sterility)** — T2.2 shipped exactly this. `tools/hook-tests-sterile.sh` + `npm run test:hooks` + the `_sterile_invoke` helper in each `*.test.sh` rewrites bare `env` into `env -i PATH=<sterile>` so caller-set override env vars (SC_SELF_MOD=1, SC_FORCE_ADD=1) cannot leak into negative-test BLOCK assertions. Verified: 20/20 tests pass under `env -u SC_SELF_MOD bash` AND with caller `SC_SELF_MOD=1` exported (sterility cures contamination).
+- **Lesson #10175 (score-completeness rubric extension for cleanup-mission shape)** — T2.3 shipped the `cleanup-mission` rubric with `isCleanupMission()` auto-detect heuristic; v1.49.585 lifts F/28 → B/83 under the new rubric while v1.49.581/582/584 unchanged at A/100 (regression-protected). The rubric is now ready to score v1.49.586 itself (NASA-shaped milestone) under the existing structured/degree rubric path.
+- **Lesson #10176 (pre-tag-gate composite as HARD RULE)** — `npm run pre-tag-gate` was added in v1.49.585+ post-ship CI-fix follow-up. v1.49.586 W4 ship pipeline runs this gate BEFORE `git tag`: `npm run build` (catches TS errors that vitest does not surface) + `npx vitest run` (full suite mirroring CI exactly) + `node tools/release-history/check-completeness.mjs --current --strict`. Exit codes 0 (PASS) / 1 (build) / 2 (vitest) / 3 (completeness).
+- **Lesson #10174 (gsd-config-guard-protected `.claude/settings.json`)** — verified during W0: hook updates flowed through `project-claude/hooks/` source-of-truth (not `.claude/hooks/` runtime mirror); `node project-claude/install.cjs --dry-run` reports zero new agents post-T2.1+T2.2 mirror sync. The architectural discipline holds.
+
+## What worked
+
+- **W1 research subagent caught 6 substantive brief errors before W2 build commits.** The dossier surfaced NSSDC ID 103A→110A, end-cause cooling→HVPS, Code et al. catalog framing, Mudhoney CWO framing, ELC Domain 11→1, and Reciprocal address discrepancies. G0 user adjudication ("accept all") locked decisions into `G0-LOCKED-DECISIONS.md`, which W2 build subagents sourced as canonical (overriding the original mission brief). Without W1, all 6 errors would have propagated through ~700KB of build artifacts. Estimated W3+W4 rework cost averted: 6+ hours.
+- **W0 ran end-to-end in ~1 hour.** With `SC_SELF_MOD=1` set at session start, T2.1 + T2.2 (both edit `.claude/hooks/`) unblocked and shipped cleanly. T2.3 (scorer extension) was scope-clean and added 8 forward-ready vitest cases.
+- **W2 build subagents provided substantive partial output even when they hit Anthropic rate limits or watchdog stalls.** All 6 subagent attempts (3 initial + 3 post-rate-limit) terminated mid-write of an `index.html` file (>700-line, ~38KB write surface). But the JSON specs + research markdown + smaller HTML artifacts + subdirs all landed substantively before the watchdog killed each agent. The bulk surface (3 index.html files) was completed in main context after subagent attempts exhausted; the subagent partial output became the canonical content inputs for the main-context HTML generation.
+- **G0-LOCKED-DECISIONS.md as the canonical-source-of-truth pattern worked.** The 6 brief-error corrections + 3 user decisions (D1 Domain 7, D2 Domain 1, D3 CATALOG-WINDOW-OPENING name) flowed through 49 build artifacts without drift. Subagent prompts explicitly directed "where MISSION-BRIEF.md conflicts with G0-LOCKED-DECISIONS.md, obey LOCKED-DECISIONS"; verified post-W2: zero deviations from locked values across NASA/MUS/ELC subject-spec.json files.
+- **Chunked Read+Write strategy succeeded on the heavy index.html files.** Each 1.66 index.html (~38KB / 700 lines) was sampled in offset/limit chunks to understand template structure, then v1.67 equivalent was written in a single Write operation. Total main-context burn for 3 index.html files: ~115KB across reads + writes; significantly less than I had feared based on the rate-limit pattern.
+
+## What could be better
+
+- **Six subagent attempts to write 3 large HTML files is wasteful.** The watchdog stall at the 600s mark on a single ~38KB Write is reproducible: every subagent dispatched to write a v1.66-template-derived index.html stalled at the same surface. Forward lesson #10179 candidate: pre-fragment large index.html templates into ~10KB sub-cards so subagents can write incrementally rather than committing to a single 700-line Write that exceeds the watchdog timeout. Or alternatively, dispatch a "card-builder" subagent per card and reassemble in main context.
+- **Brief-error volume was higher than expected.** 6 substantive errors in a brief that nominally followed canonical templates is a quality issue. The original brief was authored without a research-subagent pass; future briefs should commit to a W0.5 research-pass-then-brief-revision cycle BEFORE the user G0 review (not as a separate W1 phase). Forward lesson #10180 candidate: research-validate-then-author brief structure.
+- **Cross-track stub-comment cleanup at W3 was mostly mechanical (sed strip).** The W2 subagents wrote the cross-track HTML correctly but left `<!-- W3 cross-ref pass: ... -->` stub markers throughout. The pattern is a vestige of the original "subagent stubs cross-refs; main context fills" design that was never needed (subagents had enough info to write proper cross-refs). Forward improvement: remove the stub-comment instruction from W2 subagent prompts; have them write proper cross-track markdown directly.
+- **SPS catalog re-numbering 056-067 is out of scope and creates a gap.** SPS releases stop at 055 (Bewick's Wren v1.55) and jump to 108 (Pileated Woodpecker v1.108). The Trumpeter Swan content for v1.67 is captured comprehensively in NASA 1.67/organism.html + sidebar S1, MUS 1.67 cards 7 + S6, but no standalone `SPS/research/releases/064-trumpeter-swan/` directory exists. Forward backlog item: SPS Pass-2 catalog backfill 056-067 to align with NASA degree numbering.
+
+## What's next
+
+v1.49.587+ candidates:
+- **Mariner 6/7** (1969-02-25 / 1969-03-27 launches; Mars flybys 1969-07-31 / 1969-08-05): could advance CATALOG-WINDOW-OPENING 2nd-exemplar (Mariner 6/7 opens Mars-imaging catalog window) AND op-amp era 2nd-exemplar (1969 vidicons).
+- **Mariner 9** (1971-05-30 launch; first Mars orbiter 1971-11-13): could advance CATALOG-WINDOW-OPENING 2nd-exemplar (Mariner 9 opens sustained-Mars-imaging catalog window).
+- **Apollo 8** (1968-12-21 launch, just 14 days after OAO-2): could advance ALL-UP COMMITMENT 2nd-exemplar.
+- **SPS Pass-2 catalog backfill** 056-067 to align with NASA degree numbering.
+- **Counter-cadence cleanup-mission #2** at ~v1.49.615 per Lesson #10168 cadence (every ~30 forward milestones).
+
+The next forward-cadence degree should apply v1.67's 4 lessons (lesson-nasa-1.67-01 CWO primitive distinction, -02 MUS Pass-2 over-target cadence, -03 brief-error correction discipline, -04 cross-substrate triad pattern) plus lessons #10175-#10178 emitted at this milestone.

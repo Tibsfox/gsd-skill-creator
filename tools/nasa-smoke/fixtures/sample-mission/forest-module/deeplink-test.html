@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>NASA Harness — URL Deep-Link + Share-Button Smoke Test</title>
+</head>
+<body>
+  <div id="missions-panel"></div>
+  <button id="share-scene" type="button">share</button>
+  <span id="share-result" data-testid="share-result"></span>
+
+  <script type="module">
+    import {
+      register, list, enableByMissionVersion, renderToggleList, __harnessVersion,
+    } from '/www/tibsfox/com/Research/NASA/_harness/v1.0.0/forest-module-registry.js';
+    import sampleModule from './sample.js';
+
+    // Register THREE synthetic modules at versions 1.0, 1.12, 1.46 so the
+    // panel has multiple toggles to deep-link against.
+    function makeModule(version, title) {
+      return {
+        id: 'smoke-deeplink-' + version,
+        missionVersion: version,
+        title,
+        description: 'deeplink smoke fixture',
+        couplings: [{ subsystem: 'audio', type: 'layer' }],
+        _enabled: 0, _disabled: 0,
+        enable(_f, _c) { this._enabled++; },
+        disable(_f, _c) { this._disabled++; },
+      };
+    }
+    const m1 = makeModule('1.0',  'Armillaria Mycelium Network');
+    const m2 = makeModule('1.12', 'Osprey Aerial Predator');
+    const m3 = makeModule('1.46', 'Surveyor 1 Oregon White Oak');
+    register(m1); register(m2); register(m3);
+    window.__MODULES__ = { m1, m2, m3 };
+
+    // Simulate the runner-page boot: parse ?modules=, enable each, render panel.
+    const params = new URLSearchParams(location.search);
+    const modulesParam = params.get('modules');
+    const targetVersions = new Set();
+    if (params.get('mission')) targetVersions.add(params.get('mission'));
+    if (modulesParam) {
+      for (const m of modulesParam.split(',').map((s) => s.trim()).filter(Boolean)) {
+        targetVersions.add(m);
+      }
+    }
+    const preEnabled = [];
+    for (const v of targetVersions) {
+      try {
+        const enabled = await enableByMissionVersion(v, {}, {});
+        if (enabled.length) preEnabled.push(v);
+      } catch (_) {}
+    }
+    window.__PRE_ENABLED__ = preEnabled;
+
+    const panel = document.getElementById('missions-panel');
+    renderToggleList(panel, { forest: {}, ctx: {} });
+
+    // Wire share button using the same logic as forest/index.html.
+    document.getElementById('share-scene').addEventListener('click', async () => {
+      const checked = [];
+      for (const lbl of document.querySelectorAll('#missions-panel label')) {
+        const cb = lbl.querySelector('input[type=checkbox]');
+        if (!cb || !cb.checked) continue;
+        const m = (lbl.textContent || '').trim().match(/^(\d+\.\d+)/);
+        if (m) checked.push(m[1]);
+      }
+      const url = new URL(location.href);
+      url.search = '';
+      if (checked.length) url.searchParams.set('modules', checked.join(','));
+      const out = url.toString();
+      try {
+        await navigator.clipboard.writeText(out);
+        document.getElementById('share-result').textContent = out;
+      } catch (_) {
+        // In headless without clipboard permission we still surface the URL.
+        document.getElementById('share-result').textContent = out;
+      }
+    });
+
+    window.__DEEPLINK_READY__ = true;
+  </script>
+</body>
+</html>

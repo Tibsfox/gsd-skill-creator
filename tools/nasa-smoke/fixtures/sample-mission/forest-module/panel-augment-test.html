@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>NASA Harness — Panel-Augment Smoke Test</title>
+</head>
+<body>
+  <div id="missions-panel">
+    <h4>mission forest modules</h4>
+  </div>
+
+  <script type="module">
+    import { augmentPanel, classifyLabel }
+      from '/www/tibsfox/com/Research/NASA/_harness/v1.0.0/subsystems/panel-augment.js';
+
+    // Synthetic flat panel: 10 labels covering 8 distinct programs.
+    // Mirror the structure renderToggleList() produces — label > input + span.
+    const SEEDS = [
+      '1.19 · Freedom 7 Chinook Salmon',
+      '1.40 · Gemini 4 White-throated Swift',
+      '1.46 · Surveyor 1 Oregon White Oak',
+      '1.49 · Lunar Orbiter 1 Common Raven',
+      '1.54 · Apollo 1 Raven Witness',
+      '1.65 · Pioneer 8 Persistent Constellation',
+      '1.36 · Mariner 4 Spikemoss Resurrection',
+      '1.0 · Armillaria Mycelial Pulse Network',
+      '1.3 · Western Red Cedar Orbital Longevity',
+      '1.7 · Fly Agaric Mycorrhizal Pulse',
+    ];
+    const panel = document.getElementById('missions-panel');
+    for (const text of SEEDS) {
+      const lbl = document.createElement('label');
+      const cb  = document.createElement('input'); cb.type = 'checkbox';
+      const sp  = document.createElement('span'); sp.textContent = text;
+      lbl.append(cb, sp);
+      panel.appendChild(lbl);
+    }
+
+    augmentPanel(panel);
+
+    window.__classifyLabel = classifyLabel;
+    window.__PANEL_AUGMENT_READY__ = true;
+  </script>
+</body>
+</html>

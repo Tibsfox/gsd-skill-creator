@@ -113,3 +113,6 @@ src/site/content/essays/
 release-history.local.json
 .planning/release-history.db
 .mathlib-verify-checkout/
+# Runtime telemetry (added v1.49.586 — operational artifacts, not source)
+.logs/
+test-results/

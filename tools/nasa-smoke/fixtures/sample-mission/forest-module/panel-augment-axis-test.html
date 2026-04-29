@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>NASA Harness — Panel-Augment Axis-Toggle Test</title>
+</head>
+<body>
+  <div id="missions-panel">
+    <h4>mission forest modules</h4>
+  </div>
+
+  <script type="module">
+    import { augmentPanel, setProgramSidecar }
+      from '/www/tibsfox/com/Research/NASA/_harness/v1.0.0/subsystems/panel-augment.js';
+
+    // Seed a sidecar with 4 entries covering both axes.
+    setProgramSidecar({
+      programs: {
+        '1.46': { program: 'Surveyor', organismCategory: 'Plant' },
+        '1.49': { program: 'Lunar Orbiter', organismCategory: 'Bird' },
+        '1.12': { program: null, organismCategory: 'Bird' },
+        '1.0':  { program: null, organismCategory: 'Fungus' },
+      },
+    });
+
+    const SEEDS = [
+      '1.46 · Surveyor 1 Oregon White Oak',
+      '1.49 · Lunar Orbiter 1 Common Raven',
+      '1.12 · Osprey Aerial Predator',
+      '1.0 · Armillaria Mycelium Network',
+    ];
+    const panel = document.getElementById('missions-panel');
+    for (const text of SEEDS) {
+      const lbl = document.createElement('label');
+      const cb  = document.createElement('input'); cb.type = 'checkbox';
+      const sp  = document.createElement('span'); sp.textContent = text;
+      lbl.append(cb, sp);
+      panel.appendChild(lbl);
+    }
+
+    augmentPanel(panel);
+    window.__PANEL_AUGMENT_READY__ = true;
+  </script>
+</body>
+</html>
