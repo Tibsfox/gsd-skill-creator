@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>NASA Harness — Persisted Enabled-Modules Smoke Test</title>
+</head>
+<body>
+  <div id="missions-panel"></div>
+
+  <script type="module">
+    import {
+      register, list, enableByMissionVersion, renderToggleList,
+    } from '/www/tibsfox/com/Research/NASA/_harness/v1.0.0/forest-module-registry.js';
+
+    function makeModule(version, title) {
+      return {
+        id: 'smoke-persist-' + version,
+        missionVersion: version,
+        title,
+        description: 'persistence smoke fixture',
+        couplings: [{ subsystem: 'audio', type: 'layer' }],
+        _enabled: 0, _disabled: 0,
+        enable(_f, _c) { this._enabled++; },
+        disable(_f, _c) { this._disabled++; },
+      };
+    }
+    const m1 = makeModule('1.0',  'Armillaria Mycelium Network');
+    const m2 = makeModule('1.12', 'Osprey Aerial Predator');
+    const m3 = makeModule('1.46', 'Surveyor 1 Oregon White Oak');
+    register(m1); register(m2); register(m3);
+    window.__MODULES__ = { m1, m2, m3 };
+
+    // Persist callback fires on each toggle. Mirrors forest/index.html.
+    function persistEnabledModules() {
+      try {
+        const enabled = [];
+        for (const lbl of document.querySelectorAll('#missions-panel label')) {
+          const cb = lbl.querySelector('input[type=checkbox]');
+          if (cb && cb.checked) {
+            const m = (lbl.textContent || '').trim().match(/^(\d+\.\d+)/);
+            if (m) enabled.push(m[1]);
+          }
+        }
+        if (enabled.length) {
+          localStorage.setItem('forest-enabled-modules', enabled.join(','));
+        } else {
+          localStorage.removeItem('forest-enabled-modules');
+        }
+      } catch (_) {}
+    }
+
+    // Boot: prefer URL params, else fall back to localStorage.
+    const params = new URLSearchParams(location.search);
+    const modulesParam = params.get('modules');
+    const missionParam = params.get('mission');
+    const targetVersions = new Set();
+    let restoredFromStorage = false;
+    if (missionParam) targetVersions.add(missionParam);
+    if (modulesParam) {
+      for (const m of modulesParam.split(',').map((s) => s.trim()).filter(Boolean)) {
+        targetVersions.add(m);
+      }
+    } else if (!missionParam) {
+      try {
+        const saved = localStorage.getItem('forest-enabled-modules');
+        if (saved) {
+          for (const m of saved.split(',').map((s) => s.trim()).filter(Boolean)) {
+            targetVersions.add(m);
+          }
+          restoredFromStorage = targetVersions.size > 0;
+        }
+      } catch (_) {}
+    }
+
+    for (const v of targetVersions) {
+      try { await enableByMissionVersion(v, {}, {}); } catch (_) {}
+    }
+
+    window.__RESTORED_FROM_STORAGE__ = restoredFromStorage;
+    window.__TARGET_VERSIONS__ = [...targetVersions];
+
+    renderToggleList(
+      document.getElementById('missions-panel'),
+      { forest: {}, ctx: {}, onChange: persistEnabledModules }
+    );
+
+    window.__PERSISTENCE_READY__ = true;
+  </script>
+</body>
+</html>
