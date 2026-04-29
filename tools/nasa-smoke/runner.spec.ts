@@ -434,6 +434,66 @@ test.describe('NASA shared-harness v1.0.0', () => {
     expect(programAgain.every((a) => a === 'program')).toBe(true);
   });
 
+  test('forest panel-augment: organism swatches + axis persistence + cross-axis digest', async ({ page }) => {
+    // Loads the axis-test fixture (which seeds 4 sidecar entries) and asserts:
+    //   1. organism color swatches attach to labels whose sidecar entry has
+    //      an organismCategory
+    //   2. axis choice persists in localStorage across navigation
+    //   3. summary text carries a cross-axis digest like "[🐦×n …]"
+    await timedGoto(page, `${FIXTURES}/forest-module/panel-augment-axis-test.html`);
+    await page.waitForFunction(
+      () => (window as any).__PANEL_AUGMENT_READY__ === true,
+      { timeout: LOAD_BUDGET_MS }
+    );
+
+    // 1) Swatches: every label with an organismCategory carries one.
+    // The fixture seeds 4 entries, all of which have an organismCategory
+    // (Plant, Bird, Bird, Fungus), so every label should get a swatch.
+    const swatchInfo = await page.evaluate(() => ({
+      labels:   document.querySelectorAll('#missions-panel label').length,
+      swatches: document.querySelectorAll('#missions-panel label .__swatch').length,
+      // Each swatch must carry a non-default background color. Browsers
+      // serialise hsl() to rgb() when reading inline styles, so accept either.
+      firstSwatchStyle: document.querySelector('#missions-panel label .__swatch')?.getAttribute('style') || '',
+    }));
+    expect(swatchInfo.labels).toBe(4);
+    expect(swatchInfo.swatches).toBe(4);
+    expect(swatchInfo.firstSwatchStyle).toMatch(/background:\s*(hsl|rgb)\(/);
+
+    // 2) Cross-axis digest: program-axis summaries should mention organism icons.
+    const programDigests = await page.evaluate(() =>
+      [...document.querySelectorAll('#missions-panel details[data-axis="program"] summary')]
+        .map((s) => s.textContent || '')
+    );
+    expect(programDigests.length).toBeGreaterThanOrEqual(2);
+    // At least one summary must contain "[" + an organism icon glyph.
+    const hasDigest = programDigests.some((s) => /\[.*[🐦🌿🍄🐟🦦🦎🐸🦋].*\]/.test(s));
+    expect(hasDigest).toBe(true);
+
+    // 3) Toggle to organism axis and reload — localStorage must restore it.
+    await page.click('#missions-panel button');
+    await page.waitForTimeout(100);
+    const beforeReload = await page.evaluate(() =>
+      document.querySelector('#missions-panel details')?.getAttribute('data-axis')
+    );
+    expect(beforeReload).toBe('organism');
+
+    await page.reload();
+    await page.waitForFunction(
+      () => (window as any).__PANEL_AUGMENT_READY__ === true,
+      { timeout: LOAD_BUDGET_MS }
+    );
+    const afterReload = await page.evaluate(() =>
+      document.querySelector('#missions-panel details')?.getAttribute('data-axis')
+    );
+    expect(afterReload).toBe('organism');
+
+    // Clean up so other tests aren't affected by the persisted axis.
+    await page.evaluate(() => {
+      try { localStorage.removeItem('forest-panel-axis'); } catch (_) {}
+    });
+  });
+
   test('forest URL deep-link + share-button: round-trip', async ({ page, context }) => {
     // Grant clipboard permissions so the share button can write.
     await context.grantPermissions(['clipboard-read', 'clipboard-write']);
