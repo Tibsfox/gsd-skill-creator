@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-04-26T13:25:10Z",
+  "generated_at": "2026-04-29T07:39:29Z",
   "generator_version": "1.0.0",
   "milestone": "v1.49.576",
   "counts": {
     "commands": 4,
-    "agents_total": 10,
-    "agents_gsd_prefix": 4,
-    "hooks": 24,
+    "agents_total": 49,
+    "agents_gsd_prefix": 34,
+    "hooks": 26,
     "src_subsystems": 148
   },
   "commands": [
@@ -33,6 +33,11 @@
   ],
   "agents": [
     {
+      "name": "capcom",
+      "path": "project-claude/agents/capcom.md",
+      "origin": "local"
+    },
+    {
       "name": "changelog-generator",
       "path": "project-claude/agents/changelog-generator.md",
       "origin": "local"
@@ -48,8 +53,108 @@
       "origin": "local"
     },
     {
+      "name": "flight-ops",
+      "path": "project-claude/agents/flight-ops.md",
+      "origin": "local"
+    },
+    {
+      "name": "gsd-advisor-researcher",
+      "path": "project-claude/agents/gsd-advisor-researcher.md",
+      "origin": "local"
+    },
+    {
+      "name": "gsd-ai-researcher",
+      "path": "project-claude/agents/gsd-ai-researcher.md",
+      "origin": "local"
+    },
+    {
+      "name": "gsd-assumptions-analyzer",
+      "path": "project-claude/agents/gsd-assumptions-analyzer.md",
+      "origin": "local"
+    },
+    {
+      "name": "gsd-code-fixer",
+      "path": "project-claude/agents/gsd-code-fixer.md",
+      "origin": "local"
+    },
+    {
+      "name": "gsd-code-reviewer",
+      "path": "project-claude/agents/gsd-code-reviewer.md",
+      "origin": "local"
+    },
+    {
+      "name": "gsd-codebase-mapper",
+      "path": "project-claude/agents/gsd-codebase-mapper.md",
+      "origin": "local"
+    },
+    {
+      "name": "gsd-debug-session-manager",
+      "path": "project-claude/agents/gsd-debug-session-manager.md",
+      "origin": "local"
+    },
+    {
+      "name": "gsd-debugger",
+      "path": "project-claude/agents/gsd-debugger.md",
+      "origin": "local"
+    },
+    {
+      "name": "gsd-doc-classifier",
+      "path": "project-claude/agents/gsd-doc-classifier.md",
+      "origin": "local"
+    },
+    {
+      "name": "gsd-doc-synthesizer",
+      "path": "project-claude/agents/gsd-doc-synthesizer.md",
+      "origin": "local"
+    },
+    {
+      "name": "gsd-doc-verifier",
+      "path": "project-claude/agents/gsd-doc-verifier.md",
+      "origin": "local"
+    },
+    {
+      "name": "gsd-doc-writer",
+      "path": "project-claude/agents/gsd-doc-writer.md",
+      "origin": "local"
+    },
+    {
+      "name": "gsd-domain-researcher",
+      "path": "project-claude/agents/gsd-domain-researcher.md",
+      "origin": "local"
+    },
+    {
+      "name": "gsd-eval-auditor",
+      "path": "project-claude/agents/gsd-eval-auditor.md",
+      "origin": "local"
+    },
+    {
+      "name": "gsd-eval-planner",
+      "path": "project-claude/agents/gsd-eval-planner.md",
+      "origin": "local"
+    },
+    {
       "name": "gsd-executor",
       "path": "project-claude/agents/gsd-executor.md",
+      "origin": "local"
+    },
+    {
+      "name": "gsd-framework-selector",
+      "path": "project-claude/agents/gsd-framework-selector.md",
+      "origin": "local"
+    },
+    {
+      "name": "gsd-integration-checker",
+      "path": "project-claude/agents/gsd-integration-checker.md",
+      "origin": "local"
+    },
+    {
+      "name": "gsd-intel-updater",
+      "path": "project-claude/agents/gsd-intel-updater.md",
+      "origin": "local"
+    },
+    {
+      "name": "gsd-nyquist-auditor",
+      "path": "project-claude/agents/gsd-nyquist-auditor.md",
       "origin": "local"
     },
     {
@@ -58,13 +163,73 @@
       "origin": "local"
     },
     {
+      "name": "gsd-pattern-mapper",
+      "path": "project-claude/agents/gsd-pattern-mapper.md",
+      "origin": "local"
+    },
+    {
+      "name": "gsd-phase-researcher",
+      "path": "project-claude/agents/gsd-phase-researcher.md",
+      "origin": "local"
+    },
+    {
+      "name": "gsd-plan-checker",
+      "path": "project-claude/agents/gsd-plan-checker.md",
+      "origin": "local"
+    },
+    {
       "name": "gsd-planner",
       "path": "project-claude/agents/gsd-planner.md",
       "origin": "local"
     },
     {
+      "name": "gsd-project-researcher",
+      "path": "project-claude/agents/gsd-project-researcher.md",
+      "origin": "local"
+    },
+    {
+      "name": "gsd-research-synthesizer",
+      "path": "project-claude/agents/gsd-research-synthesizer.md",
+      "origin": "local"
+    },
+    {
+      "name": "gsd-roadmapper",
+      "path": "project-claude/agents/gsd-roadmapper.md",
+      "origin": "local"
+    },
+    {
+      "name": "gsd-security-auditor",
+      "path": "project-claude/agents/gsd-security-auditor.md",
+      "origin": "local"
+    },
+    {
+      "name": "gsd-ui-auditor",
+      "path": "project-claude/agents/gsd-ui-auditor.md",
+      "origin": "local"
+    },
+    {
+      "name": "gsd-ui-checker",
+      "path": "project-claude/agents/gsd-ui-checker.md",
+      "origin": "local"
+    },
+    {
+      "name": "gsd-ui-researcher",
+      "path": "project-claude/agents/gsd-ui-researcher.md",
+      "origin": "local"
+    },
+    {
+      "name": "gsd-user-profiler",
+      "path": "project-claude/agents/gsd-user-profiler.md",
+      "origin": "local"
+    },
+    {
       "name": "gsd-verifier",
       "path": "project-claude/agents/gsd-verifier.md",
+      "origin": "local"
+    },
+    {
+      "name": "lab-director",
+      "path": "project-claude/agents/lab-director.md",
       "origin": "local"
     },
     {
@@ -80,6 +245,36 @@
     {
       "name": "quality-drift-watcher",
       "path": "project-claude/agents/quality-drift-watcher.md",
+      "origin": "local"
+    },
+    {
+      "name": "uc-brainstorm-engine",
+      "path": "project-claude/agents/uc-brainstorm-engine.md",
+      "origin": "local"
+    },
+    {
+      "name": "uc-perf-analyst",
+      "path": "project-claude/agents/uc-perf-analyst.md",
+      "origin": "local"
+    },
+    {
+      "name": "uc-proof-engineer",
+      "path": "project-claude/agents/uc-proof-engineer.md",
+      "origin": "local"
+    },
+    {
+      "name": "uc-retro-analyst",
+      "path": "project-claude/agents/uc-retro-analyst.md",
+      "origin": "local"
+    },
+    {
+      "name": "uc-skill-forger",
+      "path": "project-claude/agents/uc-skill-forger.md",
+      "origin": "local"
+    },
+    {
+      "name": "watchdog",
+      "path": "project-claude/agents/watchdog.md",
       "origin": "local"
     }
   ],
@@ -165,6 +360,11 @@
       "origin": "local"
     },
     {
+      "name": "git-add-blocker.js",
+      "path": "project-claude/hooks/git-add-blocker.js",
+      "origin": "local"
+    },
+    {
       "name": "gsd-check-update.js",
       "path": "project-claude/hooks/gsd-check-update.js",
       "origin": "local"
@@ -202,6 +402,11 @@
     {
       "name": "gsd-statusline.js",
       "path": "project-claude/hooks/gsd-statusline.js",
+      "origin": "local"
+    },
+    {
+      "name": "self-mod-guard.js",
+      "path": "project-claude/hooks/self-mod-guard.js",
       "origin": "local"
     }
   ],

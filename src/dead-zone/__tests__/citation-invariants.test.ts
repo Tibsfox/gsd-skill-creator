@@ -30,9 +30,9 @@
  * Authored 2026-04-28 in v1.49.585 component C03.
  */
 import { describe, it, expect } from 'vitest';
-import { DEFAULT_COOLDOWN_ADAPTER_PARAMS } from '../cooldown-adapter';
-import { DEFAULT_DEAD_ZONE_PARAMS } from '../diff-bound-adapter';
-import { MAX_CORRECTIONS_BEFORE_BLOCK, SMALL_DATA_FLOOR } from '../settings';
+import { DEFAULT_COOLDOWN_ADAPTER_PARAMS } from '../cooldown-adapter.js';
+import { DEFAULT_DEAD_ZONE_PARAMS } from '../diff-bound-adapter.js';
+import { MAX_CORRECTIONS_BEFORE_BLOCK, SMALL_DATA_FLOOR } from '../settings.js';
 
 describe('citation invariants — bounded-learning architectural anchors', () => {
   it('cooldownDays = 7 in DEFAULT_COOLDOWN_ADAPTER_PARAMS (arXiv:2604.20874)', () => {
