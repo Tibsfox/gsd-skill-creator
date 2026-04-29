@@ -100,6 +100,7 @@ This preserves bisect intent in the commit message even when commit boundaries d
 | `SC_INSTALL_CALLER` | (set by `project-claude/install.cjs` at process start) | `=project-claude` → install.cjs allowlist for self-mod-guard |
 | `RH_ENV_FILE` | unset → use default `<repo-root>/.env` | `=<path>` → use override .env path for `tools/release-history/run-with-pg.mjs` |
 | `ARTEMIS_REPO_ENV` *(deprecated)* | unset → ignored | `=<path>` → fallback alias for `RH_ENV_FILE`; emits deprecation notice |
+| `PRE_TAG_GATE_QUIET` | unset → step labels printed | `=1` → suppress step labels (errors still printed) |
 
 ## Important Notes
 
@@ -118,6 +119,7 @@ The following deterministic gates BLOCK certain operations by default; each has 
 | `.claude/hooks/git-add-blocker.js` | `git add` / `git commit -a` of `.planning/`, `.claude/`, `.archive/`, `artifacts/` paths | `SC_FORCE_ADD=1` env var |
 | `.git/hooks/pre-push` (installed via `tools/install-git-hooks.sh` + npm postinstall) | `git push origin main` if release-notes 5-file structure is missing or any file <200 bytes (`check-completeness.mjs --strict`) | `SC_SKIP_PREPUSH=1` env var (emergency only) |
 | `src/dead-zone/__tests__/citation-invariants.test.ts` | (CI test) FAILS if `cooldownDays=7` / `diffThreshold=0.20` / `MAX_CORRECTIONS_BEFORE_BLOCK=3` / `SMALL_DATA_FLOOR=12` defaults are silently changed | Update `.planning/missions/v1-49-585-concerns-cleanup/work/specs/citation-anchors.md` AND `src/dead-zone/CITATION.md` in the same commit as the value change |
+| `tools/pre-tag-gate.sh` (added 2026-04-29 v1.49.585+) | `git tag` if `npm run build` / `npx vitest run` / `check-completeness.mjs --current --strict` fails. Operator-invoked via `npm run pre-tag-gate` before each milestone tag. | (no override — fix the failing check; emergency: skip and tag manually, but expect CI red on push) |
 
 The gates exist to convert prose-only social rules into deterministic enforcement. See `.planning/codebase/CONCERNS.md` (the audit they emerged from) and `.planning/missions/v1-49-585-concerns-cleanup/` for full design context. The gates' contract spec is at `.planning/missions/v1-49-585-concerns-cleanup/work/specs/hook-conventions.md`.
 
@@ -148,6 +150,22 @@ node tools/release-history/check-completeness.mjs --current
 The gate runs against `package.json` `version`. It exits non-zero if any of the 5 required files is missing. Run it BEFORE: tagging the milestone, merging dev → main, pushing main, or creating the GH release. Add `--strict` to also check that each file has ≥200 bytes of content.
 
 **Why this gate exists:** v1.49.577–v1.49.580 (4 milestones in 1 day, 2026-04-26) shipped without authoring release-notes because velocity was prioritized over docs discipline. The drift was caught at v1.49.582 ship and remediated 2026-04-27 by backfilling the 4 missing dirs + adding this gate. Subsequent ship pipelines must run the gate.
+
+**Pre-tag composite gate (HARD RULE — do not skip):**
+
+```bash
+npm run pre-tag-gate
+```
+
+The composite gate (added 2026-04-29 in the v1.49.585+ post-ship CI-fix follow-up) wraps three checks the operator must run BEFORE `git tag`:
+
+1. `npm run build` — catches TypeScript errors that vitest does not surface (e.g. TS2835 missing-`.js` extensions on relative ESM imports under node16/nodenext moduleResolution).
+2. `npx vitest run` — runs the full vitest suite, mirroring CI exactly. Catches CI-shaped failures the lighter pre-push hook does not exercise (manifest-drift CF-MED-065b, harness-integrity hook-ref invariants, claude-md-truth CF-MED-063b, etc.).
+3. `node tools/release-history/check-completeness.mjs --current --strict` — re-runs the release-notes structure gate so the operator sees both gates fire pre-tag.
+
+Exit codes: 0 = all PASS; 1 = build failed; 2 = vitest failed; 3 = completeness failed. Self-tests at `tools/pre-tag-gate.test.sh` (6 cases verifying script structure + npm wiring).
+
+**Why this gate exists:** v1.49.585 shipped with CI red on dev (run 25096343019) + main (run 25096349789) — 1 build error + 4 test failures, all v1.49.585-introduced. The W4 Phase 3 meta-test only ran completeness + chapter idempotent + pre-push BLOCK/ALLOW; CI-shaped tests slipped through the meta-test net. Forward lesson #10176 captured the gap; this gate closes it. Subsequent ship pipelines must run BOTH `check-completeness.mjs --current --strict` (lightweight, also enforced by pre-push hook on push-to-main) AND `npm run pre-tag-gate` (heavyweight, operator-invoked) before `git tag`.
 
 **RELEASE-HISTORY.md refresh (post-tag):**
 

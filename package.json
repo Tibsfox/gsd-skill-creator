@@ -39,6 +39,7 @@
     "version:check": "node scripts/bump-version.mjs --check",
     "version:bump": "node scripts/bump-version.mjs",
     "version": "node scripts/bump-version.mjs --from-npm && git add package.json package-lock.json src-tauri/Cargo.toml src-tauri/tauri.conf.json",
+    "pre-tag-gate": "bash tools/pre-tag-gate.sh",
     "build": "tsc",
     "postbuild": "node scripts/postbuild.mjs",
     "dev": "tsx src/cli.ts",
