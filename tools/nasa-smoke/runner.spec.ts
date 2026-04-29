@@ -550,6 +550,38 @@ test.describe('NASA shared-harness v1.0.0', () => {
     });
   });
 
+  test('forest audio: lastEventAt timestamp updates on fireEvent', async ({ page }) => {
+    // The runner page exposes audio.lastEventAt() so it can highlight the
+    // mute button when modules emit fireEvent calls while audio is muted.
+    // Verify the timestamp updates and stays stable until the next event.
+    await timedGoto(page, `${FIXTURES}/forest-module/subsystems-test.html`);
+    await page.waitForFunction(
+      () => (window as any).__SUBSYSTEMS_READY__ === true,
+      { timeout: LOAD_BUDGET_MS }
+    );
+
+    const at0 = await page.evaluate(() => (window as any).__audio.lastEventAt());
+    expect(at0).toBe(0);   // never fired
+
+    const at1 = await page.evaluate(() => {
+      (window as any).__audio.fireEvent('test1', { gain: -22, duration: 0.1 });
+      return (window as any).__audio.lastEventAt();
+    });
+    expect(at1).toBeGreaterThan(0);
+
+    // Same call shouldn't bump the timestamp without a new fireEvent.
+    const at2 = await page.evaluate(() => (window as any).__audio.lastEventAt());
+    expect(at2).toBe(at1);
+
+    // Second event advances it.
+    await page.waitForTimeout(50);
+    const at3 = await page.evaluate(() => {
+      (window as any).__audio.fireEvent('test2', { gain: -25, duration: 0.05 });
+      return (window as any).__audio.lastEventAt();
+    });
+    expect(at3).toBeGreaterThan(at1);
+  });
+
   test('forest enabled-modules persistence: localStorage round-trip + URL precedence', async ({ page }) => {
     // Asserts:
     //   1. toggling a module writes its missionVersion to localStorage
