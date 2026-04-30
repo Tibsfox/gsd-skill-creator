@@ -8,7 +8,9 @@
 //   node tools/release-history/score-completeness.mjs --summary  # print distribution
 //   node tools/release-history/score-completeness.mjs --rubric=cleanup-mission v1.49.585
 //                                                                # force cleanup-mission rubric
-//   node tools/release-history/score-completeness.mjs --rubric=auto v1.49.585
+//   node tools/release-history/score-completeness.mjs --rubric=multi-track-trs v1.49.587
+//                                                                # force multi-track-trs rubric
+//   node tools/release-history/score-completeness.mjs --rubric=auto v1.49.587
 //                                                                # auto-detect (default)
 //
 // Rubrics:
@@ -19,6 +21,13 @@
 //                      "## Threads closed/opened", "## Forward lessons emitted" markers
 //                      and engine-state-unchanged sanity. Auto-detected from README
 //                      text when --rubric=auto (default). v1.49.586 T2.3 / Lesson #10175.
+//   multi-track-trs  — combined three-track-plus-TRS forward-cadence milestones
+//                      (v1.49.587 first exemplar). NASA forward-cadence + ship-pipeline +
+//                      The Rendered Space (or analogous third track) bundled in one ship.
+//                      Distinguished by **Track 1/2/3** bold-prefixes in Summary, structural
+//                      firsts table, and Track-3-or-TRS markers. Auto-detected ahead of
+//                      cleanup-mission (more specific). v1.49.588 T2.1 / closes Lesson #10175
+//                      carryover for three-track-plus-TRS shape.
 
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
@@ -449,6 +458,142 @@ function scoreEngineStateUnchanged(text) {
   return 0;
 }
 
+// ---- multi-track-plus-TRS rubric (v1.49.587 first exemplar) ----
+//
+// Auto-detect whether a README looks like a three-track-plus-TRS milestone.
+// Signal triad: explicit "three-track" / "multi-track" / "TRS" / "Track 3" /
+// "The Rendered Space" in the **Type:** header field; body contains all three
+// of **Track 1**, **Track 2**, and **Track 3** (or TRS-equivalent third-track
+// marker); presence of ## Structural firsts section. Returns true when ≥2 of
+// 3 signals fire. Runs ahead of isCleanupMission in the dispatch (more specific).
+export function isMultiTrackTrs(text) {
+  const head = text.split(/\r?\n/).slice(0, 30).join('\n');
+  let hits = 0;
+  // Signal 1: explicit type marker
+  if (/\*\*Type:?\*\*:?\s*[^\n]*(three[- ]track|multi[- ]track|TRS|Track\s*3|The Rendered Space)/i.test(head)) {
+    hits++;
+  }
+  // Signal 2: body mentions Track 1 + Track 2 + (Track 3 OR TRS OR The Rendered Space)
+  const hasTrack1 = /\*\*Track\s+1\b/.test(text);
+  const hasTrack2 = /\*\*Track\s+2\b/.test(text);
+  const hasTrack3OrTrs = /\*\*Track\s+3\b|\bTRS\b|The Rendered Space\b/.test(text);
+  if (hasTrack1 && hasTrack2 && hasTrack3OrTrs) hits++;
+  // Signal 3: explicit structural-firsts or three-track sectional marker
+  if (/^#{2,4}\s+(Structural firsts|Three[- ]track|Multi[- ]track)\b/im.test(text)) hits++;
+  return hits >= 2;
+}
+
+// Multi-track-plus-TRS Summary aggregator. Same chapter-aware approach as
+// scoreCleanupSummaryFromChapter but ALSO counts **Track N** bold prefixes
+// to qualify the score against multi-track-shape expectation. Three or more
+// tracks with ≥1500 words = max; bare track count without prose = floor.
+function scoreMultiTrackSummary(text) {
+  const lines = text.split(/\r?\n/);
+  let totalWords = 0;
+  let trackBolds = 0;
+  for (let i = 0; i < lines.length; i++) {
+    if (!/^#{2}\s+(?:\d{2}\s+—\s+)?Summary\b/i.test(lines[i])) continue;
+    let endIdx = lines.length;
+    for (let j = i + 1; j < lines.length; j++) {
+      if (/^#{1,2}\s/.test(lines[j])) { endIdx = j; break; }
+    }
+    const section = lines.slice(i + 1, endIdx).join('\n');
+    totalWords += (section.trim().match(/\S+/g) || []).length;
+    trackBolds += [...section.matchAll(/\*\*Track\s+\d+/gi)].length;
+  }
+  if (trackBolds >= 3 && totalWords >= 1500) return 15;
+  if (trackBolds >= 3 && totalWords >= 800)  return 12;
+  if (trackBolds >= 2 && totalWords >= 800)  return 10;
+  if (trackBolds >= 2 && totalWords >= 400)  return 7;
+  if (totalWords >= 400) return 4;
+  if (totalWords >= 150) return 2;
+  return 0;
+}
+
+// Tracks-listed dimension. Combines distinct **Track N** bold-prefix count
+// in the body with structural-firsts bullet density in the chapter summary.
+// Three tracks AND ≥10 structural-firsts bullets = max.
+function scoreTracksListed(text) {
+  const trackIds = new Set([...text.matchAll(/\*\*Track\s+(\d+)\b/gi)].map(m => m[1]));
+  const trackCount = trackIds.size;
+  const sfSection = extractSection(text, /^#{2,4}\s+Structural firsts\b/mi);
+  const sfBullets = sfSection ? (sfSection.match(/^\s*[-*]\s+\*\*[^*\n]+\.\*\*/gm) || []).length : 0;
+  if (trackCount >= 3 && sfBullets >= 10) return 10;
+  if (trackCount >= 3 && sfBullets >= 5)  return 8;
+  if (trackCount >= 3) return 6;
+  if (trackCount >= 2 && sfBullets >= 5)  return 5;
+  if (trackCount >= 2) return 3;
+  if (trackCount >= 1) return 1;
+  return 0;
+}
+
+// Engine-state markers dimension. Looks for engine-state section
+// (## Cross-track / Engine state, ## Engine state at close, ## Engine state)
+// and counts engine-state metric markers within it (degree NN/360, §6.6
+// register, Pass-N, CHAIN-CONVENTIONS, simulation.js block, MUS Pass-, ELC
+// Pass-, forward-cadence count). Bullets and pipe-table rows in the section
+// also contribute. Falls back to anywhere-in-text if no section found.
+function scoreEngineStateMarkers(text) {
+  const headingRe = /^#{2,4}\s+(Cross[- ]track\s*\/\s*Engine state|Engine state at close|Cross[- ]track|Engine state\b)/mi;
+  const section = extractSection(text, headingRe);
+  const markerRegexes = [
+    /\bdegree\s+\d+\s*\/\s*360\b/i,
+    /§6\.6\s+register/i,
+    /\bPass-\d+/,
+    /CHAIN-CONVENTIONS\s+v[\d.]+/i,
+    /simulation\.js\s+block/i,
+    /forward[- ]cadence count/i,
+    /MUS Pass-/,
+    /ELC Pass-/,
+    /three[- ]track-?plus-?TRS/i,
+  ];
+  if (!section) {
+    const hits = markerRegexes.filter(re => re.test(text)).length;
+    if (hits >= 5) return 7;
+    if (hits >= 3) return 4;
+    if (hits >= 1) return 2;
+    return 0;
+  }
+  const hits = markerRegexes.filter(re => re.test(section)).length;
+  const bullets = (section.match(/^\s*[-*]\s/gm) || []).length;
+  const pipes   = (section.match(/^\s*\|/gm) || []).length;
+  const score = hits * 2 + Math.min(bullets, 5) + Math.min(pipes, 5);
+  if (score >= 18) return 10;
+  if (score >= 12) return 7;
+  if (score >= 6)  return 4;
+  if (score >= 2)  return 2;
+  return 0;
+}
+
+// Multi-track-plus-TRS rubric: 8 dimensions × 100 max. Same 10-column schema
+// as cleanup-mission; part_a/b stay 0 (unused). Slot mapping:
+//   header_block              ← header_block (same; 10 max)
+//   summary_findings          ← multi_track_summary (3 tracks + words; 15 max)
+//   key_features_table        ← tracks_listed + structural-firsts (10 max)
+//   part_a_depth              ← 0 (unused)
+//   part_b_depth              ← 0 (unused)
+//   retrospective_structure   ← cleanup-style retro (carryover + worked + better; 15 max)
+//   lessons_learned           ← cleanup-style lessons (numbered/bulleted/hashId; 15 max)
+//   cross_references          ← thread_state_markers (OPENED/CLOSED/EXTENDED/CARRY-FORWARD; 12 max)
+//   running_ledgers           ← engine_state_markers (degree + register + Pass + ledger; 10 max)
+//   infrastructure_block      ← forward_lessons_block (#NNNNN refs + Forward Lessons section; 13 max)
+function scoreMultiTrackTrs(text) {
+  const dimensions = {
+    header_block:            scoreHeaderBlock(text),
+    summary_findings:        scoreMultiTrackSummary(text),
+    key_features_table:      scoreTracksListed(text),
+    part_a_depth:            0,
+    part_b_depth:            0,
+    retrospective_structure: scoreCleanupRetrospective(text),
+    lessons_learned:         scoreCleanupLessons(text),
+    cross_references:        scoreThreadStateMarkers(text),
+    running_ledgers:         scoreEngineStateMarkers(text),
+    infrastructure_block:    scoreForwardLessonsBlock(text),
+  };
+  const score = Object.values(dimensions).reduce((s, v) => s + v, 0);
+  return { score, grade: gradeOf(score), dimensions };
+}
+
 // Forward-lessons emitted block: count #NNNNN lesson IDs OR "## Forward
 // lessons emitted" sectioned bullets.
 function scoreForwardLessonsBlock(text) {
@@ -471,6 +616,16 @@ function scoreForwardLessonsBlock(text) {
 
 export function scoreRelease(text, releaseType, options = {}) {
   const rubric = options.rubric || 'auto';
+
+  // Multi-track-plus-TRS rubric (explicit or auto-detected). Runs ahead of
+  // cleanup-mission because three-track-plus-TRS milestones are typically
+  // NASA-degree advances (release_type=degree) — the cleanup-mission branch
+  // explicitly skips degree-type. Multi-track-trs applies regardless of
+  // release_type so v1.49.587-shaped degrees get the right rubric.
+  if (rubric === 'multi-track-trs' ||
+      (rubric === 'auto' && isMultiTrackTrs(text))) {
+    return scoreMultiTrackTrs(text);
+  }
 
   // Cleanup-mission rubric (explicit or auto-detected). Calibrated to 100
   // directly; the 10-column store keeps part_a/b at 0.
@@ -601,8 +756,8 @@ async function main() {
   const summary = args.includes('--summary');
   const rubricArg = args.find(a => a.startsWith('--rubric='));
   const rubric = rubricArg ? rubricArg.split('=')[1] : 'auto';
-  if (!['auto', 'degree', 'structured', 'cleanup-mission'].includes(rubric)) {
-    console.error(`[score] invalid --rubric=${rubric}. Valid: auto|degree|structured|cleanup-mission`);
+  if (!['auto', 'degree', 'structured', 'cleanup-mission', 'multi-track-trs'].includes(rubric)) {
+    console.error(`[score] invalid --rubric=${rubric}. Valid: auto|degree|structured|cleanup-mission|multi-track-trs`);
     process.exit(2);
   }
   const explicit = args.find(a => !a.startsWith('--'));
