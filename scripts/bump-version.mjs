@@ -16,7 +16,21 @@ import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
-const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
+// ROOT defaults to the script's parent dir (real repo root); --root <path>
+// override allows tests + tooling to point the script at a temporary
+// manifests dir without touching the real four-manifest set.
+//
+// v1.49.589 T2.2 (closes Lesson #10187 candidate): added --root override
+// to support hermetic atomic-bump invariant tests at scripts/__tests__/.
+function resolveRoot(argv) {
+  const rootIdx = argv.indexOf('--root');
+  if (rootIdx >= 0 && argv[rootIdx + 1]) {
+    return argv[rootIdx + 1];
+  }
+  return join(dirname(fileURLToPath(import.meta.url)), '..');
+}
+
+const ROOT = resolveRoot(process.argv);
 
 const MANIFESTS = {
   pkg: join(ROOT, 'package.json'),
@@ -104,9 +118,11 @@ function bump(next) {
   console.log(`Bumped all manifests to ${next}.`);
 }
 
-const arg = process.argv[2];
+// Strip --root <path> from argv positional parsing; remaining first arg is action
+const filtered = process.argv.slice(2).filter((a, i, arr) => a !== '--root' && arr[i - 1] !== '--root');
+const arg = filtered[0];
 if (!arg || arg === '-h' || arg === '--help') {
-  console.log('Usage:\n  bump-version.mjs <x.y.z>\n  bump-version.mjs --from-npm\n  bump-version.mjs --check');
+  console.log('Usage:\n  bump-version.mjs <x.y.z> [--root <path>]\n  bump-version.mjs --from-npm [--root <path>]\n  bump-version.mjs --check [--root <path>]');
   process.exit(arg ? 0 : 1);
 }
 if (arg === '--check') process.exit(check());

@@ -159,15 +159,31 @@ The gate runs against `package.json` `version`. It exits non-zero if any of the 
 npm run pre-tag-gate
 ```
 
-The composite gate (added 2026-04-29 in the v1.49.585+ post-ship CI-fix follow-up; expanded 2026-04-29 in v1.49.587) wraps **five** checks the operator must run BEFORE `git tag` and before `git push origin main`:
+The composite gate (added 2026-04-29 in the v1.49.585+ post-ship CI-fix follow-up; expanded 2026-04-29 in v1.49.587; expanded 2026-04-30 in v1.49.589 with step 6) wraps **six** checks the operator must run BEFORE `git tag` and before `git push origin main`:
 
 1. `npm run build` — catches TypeScript errors that vitest does not surface (e.g. TS2835 missing-`.js` extensions on relative ESM imports under node16/nodenext moduleResolution).
 2. `npx vitest run` — runs the full vitest suite, mirroring CI exactly. Catches CI-shaped failures the lighter pre-push hook does not exercise (manifest-drift CF-MED-065b, harness-integrity hook-ref invariants, claude-md-truth CF-MED-063b, etc.).
 3. `node tools/release-history/check-completeness.mjs --current --strict` — re-runs the release-notes structure gate so the operator sees both gates fire pre-tag.
 4. **CI-on-dev verification (HARD RULE — added v1.49.587).** Resolves the `origin/dev` tip SHA, queries `gh run list --branch dev`, and verifies the matching run is `status=completed conclusion=success`. If CI is still pending (status=in_progress/queued), the gate FAILS with a wait-and-retry hint. If CI concluded `failure`/`cancelled`, the gate FAILS with the run URL. **Rationale:** local pre-tag-gate (steps 1–3) only validates THIS machine's copy; remote CI may differ (GitHub Actions runner OS/version drift, environment-specific test flakes). Verifying CI green on `origin/dev` BEFORE merging to main is the only way to guarantee main never receives a regression. Override: `SC_SKIP_CI_GATE=1` (emergency only — almost never the right call; CI red is rarely an emergency).
 5. **www-bundles freshness (added v1.49.587).** Runs `bash tools/build-www-bundles.sh` which esbuild-bundles `www/tibsfox/com/Research/NASA/_harness/v1.0.0/spice-renderer/index.ts` → `index.js`. Idempotent (same input → same output). Closes the v1.49.581 unwired-build gap that left 126 SPICE viewer pages broken on tibsfox.com (caught 2026-04-29 during v1.49.586 follow-up). Run standalone via `npm run build:www-bundles`.
+6. **Depth audit (WARNING-only at v1.49.589; hardens to BLOCKER at v1.49.591+).** Runs `node tools/depth-audit.mjs --current` which compares NASA/MUS/ELC `index.html` line+byte counts at the current degree against the predecessor degree; flags any sibling file at <80% predecessor depth. Closes Lesson #10188 candidate from v1.49.588 §5: post-ship audit script catching W2-quota lazy-truncate failure mode that produced thin sibling files at v1.49.588 (required ad-hoc rebuild of 6 files). Override: `SC_SKIP_DEPTH_AUDIT=1` (harmless until step is hardened).
 
-Exit codes: 0 = all PASS; 1 = build failed; 2 = vitest failed; 3 = completeness failed; 4 = CI-on-dev failed/pending; 5 = www-bundles failed. Self-tests at `tools/pre-tag-gate.test.sh`.
+Exit codes: 0 = all PASS; 1 = build failed; 2 = vitest failed; 3 = completeness failed; 4 = CI-on-dev failed/pending; 5 = www-bundles failed; 6 = depth-audit failed (only when --strict mode is hardened; warning-only at v1.49.589-590). Self-tests at `tools/pre-tag-gate.test.sh`.
+
+**Version-consistency invariant (HARD RULE — added v1.49.589 T2.2):** Before running `npm run pre-tag-gate`, ALL FOUR manifests must move together to the target version: `package.json`, `src-tauri/tauri.conf.json`, `src-tauri/Cargo.toml`, `package-lock.json` (root + `packages[""]` slot = 5 total version slots). Use the atomic `scripts/bump-version.mjs` script — never bump manifests manually:
+
+```bash
+node scripts/bump-version.mjs 1.49.NNN  # bumps all 4 manifests + 5 slots atomically
+node scripts/bump-version.mjs --check   # verifies no drift (exit 0 OK; exit 1 DRIFT)
+npm run version:bump 1.49.NNN           # equivalent npm-script form
+npm run version:check                   # equivalent check
+```
+
+The CI harness-integrity test FAILS if any manifest version drifts independently. v1.49.588 ship pipeline manually bumped 2 of 4 manifests; CI run 25148062618 caught the drift; commit `d30668660` was the correction-after-detection. Closes Lesson #10187 candidate. Tests at `scripts/__tests__/bump-version.test.mjs` (run via `npx vitest run --config vitest.tools.config.mjs`).
+
+**W2 build-agent dispatch discipline (added v1.49.589 T2.4):** When dispatching W2 build agents (NASA / MUS / ELC index.html builders), use the prompt template at `.planning/missions/template-files/W2-build-agent-prompt.md`. Key rules:
+- **Output token cap discipline:** use incremental Edit operations (3-12 per file) for files >100 lines; single Write only for new files <800 lines. The 32K output token cap can silently truncate a single Write (v1.49.588 ELC 1.69 attempted single-Write → 0 bytes).
+- **Dispatch order:** serial-then-parallel — dispatch W2-NASA first (largest at ~80K tokens); after NASA completes, dispatch W2-MUS + W2-ELC in parallel (~40K each). Eliminates the v1.49.588 quota-collision failure mode (Lesson #10185 candidate).
 
 **Why this gate exists:** v1.49.585 shipped with CI red on dev (run 25096343019) + main (run 25096349789) — 1 build error + 4 test failures, all v1.49.585-introduced. The W4 Phase 3 meta-test only ran completeness + chapter idempotent + pre-push BLOCK/ALLOW; CI-shaped tests slipped through the meta-test net. Forward lesson #10176 captured the gap; this gate closes it. Subsequent ship pipelines must run BOTH `check-completeness.mjs --current --strict` (lightweight, also enforced by pre-push hook on push-to-main) AND `npm run pre-tag-gate` (heavyweight, operator-invoked) before `git tag`.
 
