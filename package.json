@@ -1,6 +1,6 @@
 {
   "name": "gsd-skill-creator",
-  "version": "1.49.588",
+  "version": "1.49.589",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
@@ -40,6 +40,8 @@
     "version:bump": "node scripts/bump-version.mjs",
     "version": "node scripts/bump-version.mjs --from-npm && git add package.json package-lock.json src-tauri/Cargo.toml src-tauri/tauri.conf.json",
     "pre-tag-gate": "bash tools/pre-tag-gate.sh",
+    "depth-audit": "node tools/depth-audit.mjs",
+    "depth-audit:current": "node tools/depth-audit.mjs --current",
     "build:www-bundles": "bash tools/build-www-bundles.sh",
     "build": "tsc",
     "postbuild": "node scripts/postbuild.mjs",
