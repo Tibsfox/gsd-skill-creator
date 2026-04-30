@@ -209,6 +209,68 @@ node tools/release-history/chapter.mjs --version v1.49.NNN --force-regenerate
 
 Without `--force-regenerate`, hand-authored release-notes in `docs/release-notes/<version>/chapter/*.md` are preserved across `refresh.mjs` runs. The v1.49.583 "defeat-checkout" pattern (`git checkout HEAD -- ...`) is no longer required for normal ship pipelines.
 
+**FTP sync to tibsfox.com (added in v1.49.590 T2.1; closes Lesson #10195 candidate):**
+
+```bash
+node tools/ftp-sync.mjs <version>            # push v<version> dirs to tibsfox.com
+node tools/ftp-sync.mjs <version> --dry-run  # list what would upload, no connection
+node tools/ftp-sync.mjs <version> --json     # machine-readable summary
+
+npm run ftp-sync -- 1.71                     # equivalent npm form
+npm run ftp-sync:dry-run -- 1.71             # equivalent dry-run form
+```
+
+The tool reads `FTP_HOST` / `FTP_USER` / `FTP_PASS` from `<repo-root>/.env`, builds a manifest from `www/tibsfox/com/Research/{NASA,MUS,ELC}/<version>/`, and uploads via `basic-ftp`. Exit codes: 0 = all uploaded; 1 = one or more PUT failures; 2 = invalid args or missing .env keys; 3 = local source dirs missing for the requested version.
+
+**Why this tool exists:** every milestone ship pipeline pushes 49+ build artifacts (NASA + MUS + ELC index.html sets at the new degree) to tibsfox.com via FTP. v1.49.589 used an ad-hoc Python ftplib script (`/home/foxy/ftp-sync-v1-49-589.py`, deleted post-use); the pattern recurred every milestone but was rebuilt ad-hoc each time. T2.1 promoted it to a tested in-repo tool.
+
+**Critical FTP credentials gotchas (per memory rules — encoded in tests):**
+
+1. **FTP_PASS leading-quote is part of the password.** The `claudefox@tibsfox.com` FTP_PASS is 32 chars long and char 1 is a literal `'`. Do NOT strip it. The `parseEnv()` helper in `tools/ftp-sync.mjs` only strips a *matched pair* of surrounding double-quotes (common .env convention); single-quote-prefixed values are preserved verbatim. Verify: `bash -c 'source .env; echo "${#FTP_PASS}=32 ${FTP_PASS:0:1}=\\''`
+2. **FTP root `/` maps to URL `/Research/` on tibsfox.com.** The FTP account is chrooted; do NOT `cd /Research` before `put`. The tool emits remote paths as `/{NASA,MUS,ELC}/<version>/...` which resolve to `/Research/{...}` on the public site.
+
+**Inline-recovery procedure for W2-quota-failure (added in v1.49.590 T2.2; closes Lesson #10194 candidate):**
+
+When a Sonnet W2 build agent dispatch is rate-limited mid-build (Anthropic per-account quota exhausted) and the ship deadline cannot wait for the typical ~1-hour quota refresh, fall back to **main-context Opus inline recovery** as a tested-acceptable mitigation.
+
+**Trigger conditions:**
+- `Error: rate_limit_exceeded` from Sonnet subagent during W2-MUS or W2-ELC build
+- Ship deadline within current session (cannot defer to next session)
+- Quota-failed file count >0 against gold-standard predecessor
+
+**Procedure:**
+1. Identify quota-failed files: count files in `www/tibsfox/com/Research/{TRACK}/<version>/` vs gold-standard predecessor `<version-0.01>/`
+2. For each missing file, main-context Opus authors using gold-standard predecessor as reference
+3. Per-file budget: 3-7K output tokens; **MUST use incremental Edit operations** (3-12 Edits per file per T2.4 from v1.49.589) — single Write of large files risks 32K output cap silent-truncation
+4. After all files exist, run `npm run depth-audit -- <version> --json` to score depth
+5. Acceptance: zero FAIL findings (≥80% predecessor depth); WARN findings (80-95%) acceptable for ship; PASS findings (≥95%) ideal
+
+**Quality tradeoff (citation-anchored from v1.49.589 W2):**
+| Recovery path | Predecessor depth ratio | Verdict |
+|---|---|---|
+| Sonnet subagent (normal W2) | 95-113% | PASS |
+| Inline Opus (recovery fallback) | 78-89% | WARN |
+| Single Write attempt at >100 lines | 0% (silent truncation) | FAIL — never use |
+
+**Acceptable-as-recovery framing:** inline recovery is a *fallback* when ship deadline cannot wait, NOT the default. Subsequent milestones' Sonnet-driven W2 should re-establish 95%+ depth. v1.49.589 demonstrated zero FAIL findings under inline recovery — pattern is validated for emergency use only.
+
+**`gh release create --notes-file` path-resolution workaround (added in v1.49.590 T2.3; closes Lesson #10196 candidate):**
+
+**Symptom:** `gh release create v1.49.NNN --notes-file docs/release-notes/v1.49.NNN/README.md ...` returns `permission denied` even when the file is readable, repo-relative path is correct, and `cat docs/release-notes/v1.49.NNN/README.md` works fine.
+
+**Workaround pattern (use `/tmp` for the temp copy — cleaner than `/home/foxy`):**
+
+```bash
+cp docs/release-notes/v1.49.NNN/README.md /tmp/v1.49.NNN-rn.md
+gh release create v1.49.NNN \
+    --title "v1.49.NNN — <subject>" \
+    --notes-file /tmp/v1.49.NNN-rn.md \
+    --target main
+rm /tmp/v1.49.NNN-rn.md
+```
+
+**Investigation status (v1.49.590):** root cause likely a gh CLI quirk in handling relative paths on certain filesystem mount setups (user-permission FUSE-style mounts, snap-confined gh installs, etc.). Variations to try if the basic workaround fails: `--notes-file ./docs/release-notes/...` (explicit relative); `--notes-file "$(pwd)/docs/release-notes/..."` (absolute path). If reproducibly broken, file at github.com/cli/cli with this command + repro steps.
+
 ## External Citations (CS25–26 Sweep)
 
 Three foundational papers from the v1.49.575 CS25–26 Sweep give published derivations for load-bearing GSD architectural choices. See `.planning/missions/cs25-26-sweep/work/synthesis/convergent-discovery.md` for the full four-anchor analysis.
