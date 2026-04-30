@@ -101,6 +101,8 @@ This preserves bisect intent in the commit message even when commit boundaries d
 | `RH_ENV_FILE` | unset → use default `<repo-root>/.env` | `=<path>` → use override .env path for `tools/release-history/run-with-pg.mjs` |
 | `ARTEMIS_REPO_ENV` *(deprecated)* | unset → ignored | `=<path>` → fallback alias for `RH_ENV_FILE`; emits deprecation notice |
 | `PRE_TAG_GATE_QUIET` | unset → step labels printed | `=1` → suppress step labels (errors still printed) |
+| `SC_SKIP_CI_GATE` | unset → verify CI green on origin/dev (HARD RULE) | `=1` → skip CI-on-dev verification step in pre-tag-gate (emergency only — fix the failing CI instead) |
+| `BUILD_WWW_BUNDLES_QUIET` | unset → step labels printed | `=1` → suppress step labels in `tools/build-www-bundles.sh` (errors still printed) |
 
 ## Important Notes
 
@@ -119,7 +121,7 @@ The following deterministic gates BLOCK certain operations by default; each has 
 | `.claude/hooks/git-add-blocker.js` | `git add` / `git commit -a` of `.planning/`, `.claude/`, `.archive/`, `artifacts/` paths | `SC_FORCE_ADD=1` env var |
 | `.git/hooks/pre-push` (installed via `tools/install-git-hooks.sh` + npm postinstall) | `git push origin main` if release-notes 5-file structure is missing or any file <200 bytes (`check-completeness.mjs --strict`) | `SC_SKIP_PREPUSH=1` env var (emergency only) |
 | `src/dead-zone/__tests__/citation-invariants.test.ts` | (CI test) FAILS if `cooldownDays=7` / `diffThreshold=0.20` / `MAX_CORRECTIONS_BEFORE_BLOCK=3` / `SMALL_DATA_FLOOR=12` defaults are silently changed | Update `.planning/missions/v1-49-585-concerns-cleanup/work/specs/citation-anchors.md` AND `src/dead-zone/CITATION.md` in the same commit as the value change |
-| `tools/pre-tag-gate.sh` (added 2026-04-29 v1.49.585+) | `git tag` if `npm run build` / `npx vitest run` / `check-completeness.mjs --current --strict` fails. Operator-invoked via `npm run pre-tag-gate` before each milestone tag. | (no override — fix the failing check; emergency: skip and tag manually, but expect CI red on push) |
+| `tools/pre-tag-gate.sh` (added 2026-04-29 v1.49.585+; expanded v1.49.587) | `git tag` / merge to main if any of: (1) `npm run build` fails, (2) `npx vitest run` fails, (3) `check-completeness.mjs --current --strict` fails, (4) **CI-on-dev fails or is pending** (HARD RULE — verify CI green on `origin/dev` before pushing to main), (5) www-bundles esbuild fails (SPICE renderer). Operator-invoked via `npm run pre-tag-gate` before each milestone tag. | Fix the failing check. Emergency overrides: `SC_SKIP_CI_GATE=1` (skip CI-on-dev only). No override exists for build/vitest/completeness/www-bundles. |
 
 The gates exist to convert prose-only social rules into deterministic enforcement. See `.planning/codebase/CONCERNS.md` (the audit they emerged from) and `.planning/missions/v1-49-585-concerns-cleanup/` for full design context. The gates' contract spec is at `.planning/missions/v1-49-585-concerns-cleanup/work/specs/hook-conventions.md`.
 
@@ -157,15 +159,19 @@ The gate runs against `package.json` `version`. It exits non-zero if any of the 
 npm run pre-tag-gate
 ```
 
-The composite gate (added 2026-04-29 in the v1.49.585+ post-ship CI-fix follow-up) wraps three checks the operator must run BEFORE `git tag`:
+The composite gate (added 2026-04-29 in the v1.49.585+ post-ship CI-fix follow-up; expanded 2026-04-29 in v1.49.587) wraps **five** checks the operator must run BEFORE `git tag` and before `git push origin main`:
 
 1. `npm run build` — catches TypeScript errors that vitest does not surface (e.g. TS2835 missing-`.js` extensions on relative ESM imports under node16/nodenext moduleResolution).
 2. `npx vitest run` — runs the full vitest suite, mirroring CI exactly. Catches CI-shaped failures the lighter pre-push hook does not exercise (manifest-drift CF-MED-065b, harness-integrity hook-ref invariants, claude-md-truth CF-MED-063b, etc.).
 3. `node tools/release-history/check-completeness.mjs --current --strict` — re-runs the release-notes structure gate so the operator sees both gates fire pre-tag.
+4. **CI-on-dev verification (HARD RULE — added v1.49.587).** Resolves the `origin/dev` tip SHA, queries `gh run list --branch dev`, and verifies the matching run is `status=completed conclusion=success`. If CI is still pending (status=in_progress/queued), the gate FAILS with a wait-and-retry hint. If CI concluded `failure`/`cancelled`, the gate FAILS with the run URL. **Rationale:** local pre-tag-gate (steps 1–3) only validates THIS machine's copy; remote CI may differ (GitHub Actions runner OS/version drift, environment-specific test flakes). Verifying CI green on `origin/dev` BEFORE merging to main is the only way to guarantee main never receives a regression. Override: `SC_SKIP_CI_GATE=1` (emergency only — almost never the right call; CI red is rarely an emergency).
+5. **www-bundles freshness (added v1.49.587).** Runs `bash tools/build-www-bundles.sh` which esbuild-bundles `www/tibsfox/com/Research/NASA/_harness/v1.0.0/spice-renderer/index.ts` → `index.js`. Idempotent (same input → same output). Closes the v1.49.581 unwired-build gap that left 126 SPICE viewer pages broken on tibsfox.com (caught 2026-04-29 during v1.49.586 follow-up). Run standalone via `npm run build:www-bundles`.
 
-Exit codes: 0 = all PASS; 1 = build failed; 2 = vitest failed; 3 = completeness failed. Self-tests at `tools/pre-tag-gate.test.sh` (6 cases verifying script structure + npm wiring).
+Exit codes: 0 = all PASS; 1 = build failed; 2 = vitest failed; 3 = completeness failed; 4 = CI-on-dev failed/pending; 5 = www-bundles failed. Self-tests at `tools/pre-tag-gate.test.sh`.
 
 **Why this gate exists:** v1.49.585 shipped with CI red on dev (run 25096343019) + main (run 25096349789) — 1 build error + 4 test failures, all v1.49.585-introduced. The W4 Phase 3 meta-test only ran completeness + chapter idempotent + pre-push BLOCK/ALLOW; CI-shaped tests slipped through the meta-test net. Forward lesson #10176 captured the gap; this gate closes it. Subsequent ship pipelines must run BOTH `check-completeness.mjs --current --strict` (lightweight, also enforced by pre-push hook on push-to-main) AND `npm run pre-tag-gate` (heavyweight, operator-invoked) before `git tag`.
+
+**Why steps 4 + 5 were added (v1.49.587):** v1.49.586 follow-up (2026-04-29) discovered (a) the SPICE renderer module shipped as TypeScript source with no compile step wired up — 126 SPICE viewer pages had been broken on tibsfox.com since v1.49.581 (the spec said "builds with the existing Vite pipeline" but no Vite step landed); (b) parallel-session ship-coordination scenarios where CI on `origin/dev` could be still pending or red while a separate operator session was already pushing to main. The user formalized the discipline as a HARD RULE: "before pushing to main, verify CI passes on dev first." Step 4 operationalizes the rule deterministically; step 5 prevents recurrence of unwired-build drift by always rebuilding browser-bundles before tag.
 
 **RELEASE-HISTORY.md refresh (post-tag):**
 
