@@ -1,15 +1,16 @@
 # Release History
 
-629 milestones shipped across the v1.0 → v1.49.586 arc. The table below lists every shipped release, newest first.
+630 milestones shipped across the v1.0 → v1.49.587 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions, and where available, retrospectives and lessons learned. `Commits` is the count of commits between this tag and the previous tag (from git). `Phases` and `Plans` come from structured GSD metadata in the release README — most content/patch releases don't have these. `Retro` links to the retrospective chapter when present. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 629 releases · 626 with retrospectives · 626 with extracted lessons · quality A:623 B:3 C:1 D:1 F:1 (avg 97) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 630 releases · 626 with retrospectives · 626 with extracted lessons · quality A:623 B:3 C:1 D:1 F:2 (avg 97) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Retro | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|-------|---------|---------|-------|
+| [v1.49.587](release-notes/v1.49.587) | Surveyor 7 / Lady Soul / Northern Spotted Owl / SCIENCE-MAXIMIZED FINAL-OF-SERIES | 2026-04-29 | 6 | — | — | — | — | F 25 |  |
 | [v1.49.586](release-notes/v1.49.586) | OAO-2 Stargazer / Mudhoney / Trumpeter Swan / CATALOG-WINDOW-OPENING | 2026-04-29 | 21 | — | — | — | — | B 85 |  |
 | [v1.49.585](release-notes/v1.49.585) | Concerns Cleanup / Foundation Shoring | 2026-04-29 | 4 | — | — | — | — | B 83 |  |
 | [v1.49.584](release-notes/v1.49.584) | Degree 66: Graceful Attrition + Form-as-Multiplicity-Coordination | 2026-04-28 | 4 | — | — | [✓](release-notes/v1.49.584/chapter/03-retrospective.md) | [16](release-notes/v1.49.584/chapter/04-lessons.md) | D 69 |  |
@@ -102,7 +103,7 @@ Each version links to a detailed release notes directory with full feature descr
 | [v1.49.497](release-notes/v1.49.497) | Degree 356: The Fartz (peak hardcore) + Pacific Wren Storm-Chorus Max | 2026-04-03 | 1 | — | — | [✓](release-notes/v1.49.497/chapter/03-retrospective.md) | [15](release-notes/v1.49.497/chapter/04-lessons.md) | A 98 |  |
 | [v1.49.496](release-notes/v1.49.496) | Degree 355: Solger (Peak Hardcore) + Stonefly Emergence Full River | 2026-04-03 | 1 | — | — | [✓](release-notes/v1.49.496/chapter/03-retrospective.md) | [13](release-notes/v1.49.496/chapter/04-lessons.md) | A 98 |  |
 | [v1.49.495](release-notes/v1.49.495) | Degree 354: The Blood Brothers (peak) + Orca Breach + Bird Colony Chaos | 2026-04-03 | 1 | — | — | [✓](release-notes/v1.49.495/chapter/03-retrospective.md) | [13](release-notes/v1.49.495/chapter/04-lessons.md) | A 98 |  |
-| [v1.49.494](release-notes/v1.49.494) | Degree 353: These Arms Are Snakes (Peak) + Mixed Owl Chorus Full Night | 2026-04-03 | 1 | — | — | [✓](release-notes/v1.49.494/chapter/03-retrospective.md) | [2/17](release-notes/v1.49.494/chapter/04-lessons.md) | A 98 |  |
+| [v1.49.494](release-notes/v1.49.494) | Degree 353: These Arms Are Snakes (Peak) + Mixed Owl Chorus Full Night | 2026-04-03 | 1 | — | — | [✓](release-notes/v1.49.494/chapter/03-retrospective.md) | [3/17](release-notes/v1.49.494/chapter/04-lessons.md) | A 98 |  |
 | [v1.49.493](release-notes/v1.49.493) | Degree 352: Botch (We Are the Romans) + River + Percussion + Wind Geological | 2026-04-03 | 1 | — | — | [✓](release-notes/v1.49.493/chapter/03-retrospective.md) | [13](release-notes/v1.49.493/chapter/04-lessons.md) | A 98 |  |
 | [v1.49.492](release-notes/v1.49.492) | Degree 351: The Accused (Peak Crossover) + Insect + Bird + Rain Maximum | 2026-04-03 | 1 | — | — | [✓](release-notes/v1.49.492/chapter/03-retrospective.md) | [1/18](release-notes/v1.49.492/chapter/04-lessons.md) | A 98 |  |
 | [v1.49.491](release-notes/v1.49.491) | Degree 350: TAD (Peak Intensity) + Cascades Full Avalanche Sequence | 2026-04-03 | 1 | — | — | [✓](release-notes/v1.49.491/chapter/03-retrospective.md) | [1/16](release-notes/v1.49.491/chapter/04-lessons.md) | A 98 |  |

@@ -127,7 +127,12 @@ function ensureConfig({ sourceDir, indexFile, driver }) {
       ],
     },
     leak_scan_patterns: [
-      '\\.planning/(?:fox-companies|HANDOFF|memory|missions|intel|agent-memory)',
+      // Truly-private path prefixes that must never appear in published release notes.
+      // Fox Companies IP per HARD RULE; agent-memory is teammate-scoped private retros.
+      // HANDOFF / memory / missions / intel are CONVENTION refs in retros (storytelling
+      // about project methodology); the actual file content is gitignored, so mentioning
+      // these paths in published chapters is explanatory, not leakage. v1.49.588 T2.2.
+      '\\.planning/(?:fox-companies|agent-memory)/',
     ],
     ghosts: [],
     classifier: {
