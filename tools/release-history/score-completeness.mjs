@@ -293,14 +293,24 @@ export function isCleanupMission(text) {
 }
 
 // Cleanup-mission Summary that aggregates ALL Summary-shaped sections in
-// the corpus (README's `## Summary` + chapter/00-summary.md's
-// `## NN — Summary: …`), summing word counts so chapter-style narratives
+// the corpus (README's `## Summary` / `## Cross-track summary` + the
+// chapter/00-summary.md `## NN — Summary` / `## v1.49.NNN — Summary`
+// post-demotion form), summing word counts so chapter-style narratives
 // are not penalized for splitting prose between README and chapter file.
+//
+// v1.49.589 T2.1 (closes Lesson #10190 candidate): accepts BOTH the
+// numbered-prefix chapter form (`## NN — Summary`) AND the
+// version-prefix degree-style form (`## v1.NN.NNN — Summary`) AND the
+// README's hyphenated forms (`## Cross-track summary`). All three
+// communicate "this section is a Summary" with equal structural
+// intent; the scorer should not reward one stylistic choice.
 function scoreCleanupSummaryFromChapter(text) {
   const lines = text.split(/\r?\n/);
   let totalWords = 0;
+  // Match: ## Summary | ## NN — Summary | ## v1.NN.NNN — Summary | ## Cross-track summary
+  const summaryHeadingRe = /^#{2}\s+(?:(?:\d{2}|v\d+\.\d+\.\d+)\s+—\s+)?(?:Cross[- ]track\s+|Forward\s+|Engine\s+|Multi[- ]track\s+)?Summary\b/i;
   for (let i = 0; i < lines.length; i++) {
-    if (!/^#{2}\s+(?:\d{2}\s+—\s+)?Summary\b/i.test(lines[i])) continue;
+    if (!summaryHeadingRe.test(lines[i])) continue;
     let endIdx = lines.length;
     for (let j = i + 1; j < lines.length; j++) {
       if (/^#{1,2}\s/.test(lines[j])) { endIdx = j; break; }
@@ -316,31 +326,39 @@ function scoreCleanupSummaryFromChapter(text) {
 }
 
 // Cleanup-mission Retrospective that matches `## NN — Retrospective`
-// (chapter heading). The shared scoreRetrospective requires bare
-// `## Retrospective`, which the chapter prefix breaks.
+// (chapter heading; cleanup-mission style) AND `## v1.NN.NNN — Retrospective`
+// (degree style; v1.49.589 T2.1 loosening). The shared scoreRetrospective
+// requires bare `## Retrospective`, which both chapter prefix forms break.
 function scoreCleanupRetrospective(text) {
-  const hasRetro = /^#{2}\s+(?:\d{2}\s+—\s+)?Retrospective/mi.test(text);
+  const hasRetro = /^#{2}\s+(?:(?:\d{2}|v\d+\.\d+\.\d+)\s+—\s+)?Retrospective/mi.test(text);
   if (!hasRetro) return 0;
   // Carryover-lessons + new-lessons sub-structure typical of cleanup retros.
   const carryover = /^#{2,4}\s+Carryover lessons (applied|carried)/mi.test(text);
   const newLessons = /^#{2,4}\s+(New lessons|Lessons emitted|What.*ship.*pipeline)/mi.test(text);
   const whatWorked = /^#{2,4}\s+What (Worked|s Working)/mi.test(text);
   const whatBetter = /^#{2,4}\s+(What Could Be Better|What.*(Didn'?t Work|Needs Improvement))/mi.test(text);
+  const surprises = /^#{2,4}\s+Surprises\b/mi.test(text);
   let score = 5;
   if (carryover) score += 5;
   if (newLessons || whatWorked) score += 3;
   if (whatBetter) score += 2;
+  if (surprises) score += 1;
   return Math.min(score, 15);
 }
 
-// Cleanup-mission Lessons matcher — accepts the numbered-chapter heading
-// `## NN — Lessons Learned: …` AND counts both numbered + #ID-prefixed
-// entries (cleanup releases use `### #10168 — title` style).
+// Cleanup-mission Lessons matcher — accepts:
+//   - numbered-chapter heading `## NN — Lessons Learned: …` (cleanup style)
+//   - degree-style version-prefix `## v1.NN.NNN — Forward Lessons` (T2.1)
+//   - bare `## Lessons` / `## Forward Lessons` / `## Lessons Learned`
+// Counts numbered + bulleted + #ID-prefixed entries (cleanup releases use
+// `### #10168 — title` style; degree releases use `## #10183 — title`).
 function scoreCleanupLessons(text) {
   const lines = text.split(/\r?\n/);
   let best = 0;
+  // Match: ## Lessons | ## NN — Lessons | ## v1.NN.NNN — Lessons | ## Forward Lessons | ## Lessons Learned
+  const lessonsHeaderRe = /^(#{2,4})\s+(?:(?:\d{2}|v\d+\.\d+\.\d+)\s+—\s+)?(?:Forward\s+)?Lessons(?:\s+Learned)?\b/i;
   for (let i = 0; i < lines.length; i++) {
-    const headerMatch = /^(#{2,4})\s+(?:\d{2}\s+—\s+)?Lessons(?:\s+Learned)?\b/i.exec(lines[i]);
+    const headerMatch = lessonsHeaderRe.exec(lines[i]);
     if (!headerMatch) continue;
     const startLevel = headerMatch[1].length;
     let endIdx = lines.length;
@@ -463,9 +481,15 @@ function scoreEngineStateUnchanged(text) {
 // Auto-detect whether a README looks like a three-track-plus-TRS milestone.
 // Signal triad: explicit "three-track" / "multi-track" / "TRS" / "Track 3" /
 // "The Rendered Space" in the **Type:** header field; body contains all three
-// of **Track 1**, **Track 2**, and **Track 3** (or TRS-equivalent third-track
-// marker); presence of ## Structural firsts section. Returns true when ≥2 of
-// 3 signals fire. Runs ahead of isCleanupMission in the dispatch (more specific).
+// of Track 1, Track 2, and Track 3 (or TRS-equivalent third-track marker)
+// in EITHER bold-form (**Track N**) OR heading-form (## Track N / ### Track N);
+// presence of ## Structural firsts section. Returns true when ≥2 of 3 signals
+// fire. Runs ahead of isCleanupMission in the dispatch (more specific).
+//
+// v1.49.589 T2.1 (closes Lesson #10190 candidate): loosened Signal 2 to accept
+// heading-form Track markers since some README authors use ## Track N headings
+// rather than **Track N** bolds; the scorer should not reward one stylistic
+// choice over the other when both communicate the same structural intent.
 export function isMultiTrackTrs(text) {
   const head = text.split(/\r?\n/).slice(0, 30).join('\n');
   let hits = 0;
@@ -474,9 +498,10 @@ export function isMultiTrackTrs(text) {
     hits++;
   }
   // Signal 2: body mentions Track 1 + Track 2 + (Track 3 OR TRS OR The Rendered Space)
-  const hasTrack1 = /\*\*Track\s+1\b/.test(text);
-  const hasTrack2 = /\*\*Track\s+2\b/.test(text);
-  const hasTrack3OrTrs = /\*\*Track\s+3\b|\bTRS\b|The Rendered Space\b/.test(text);
+  // accepting EITHER bold-form (**Track N**) OR heading-form (^## Track N / ^### Track N)
+  const hasTrack1 = /\*\*Track\s+1\b|^#{2,4}\s+Track\s+1\b/m.test(text);
+  const hasTrack2 = /\*\*Track\s+2\b|^#{2,4}\s+Track\s+2\b/m.test(text);
+  const hasTrack3OrTrs = /\*\*Track\s+3\b|^#{2,4}\s+Track\s+3\b|\bTRS\b|The Rendered Space\b/m.test(text);
   if (hasTrack1 && hasTrack2 && hasTrack3OrTrs) hits++;
   // Signal 3: explicit structural-firsts or three-track sectional marker
   if (/^#{2,4}\s+(Structural firsts|Three[- ]track|Multi[- ]track)\b/im.test(text)) hits++;
@@ -484,37 +509,48 @@ export function isMultiTrackTrs(text) {
 }
 
 // Multi-track-plus-TRS Summary aggregator. Same chapter-aware approach as
-// scoreCleanupSummaryFromChapter but ALSO counts **Track N** bold prefixes
-// to qualify the score against multi-track-shape expectation. Three or more
+// scoreCleanupSummaryFromChapter but ALSO counts Track N markers in EITHER
+// bold-form (**Track N**) OR heading-form (^## Track N / ^### Track N) to
+// qualify the score against multi-track-shape expectation. Three or more
 // tracks with ≥1500 words = max; bare track count without prose = floor.
+//
+// v1.49.589 T2.1 (closes Lesson #10190 candidate): heading-form acceptance
+// matches the isMultiTrackTrs detector loosening.
 function scoreMultiTrackSummary(text) {
   const lines = text.split(/\r?\n/);
   let totalWords = 0;
-  let trackBolds = 0;
+  let trackHits = 0;
+  // Match: ## Summary | ## NN — Summary | ## v1.NN.NNN — Summary | ## Cross-track summary | ## Forward summary | etc.
+  const summaryHeadingRe = /^#{2}\s+(?:(?:\d{2}|v\d+\.\d+\.\d+)\s+—\s+)?(?:Cross[- ]track\s+|Forward\s+|Engine\s+|Multi[- ]track\s+)?Summary\b/i;
   for (let i = 0; i < lines.length; i++) {
-    if (!/^#{2}\s+(?:\d{2}\s+—\s+)?Summary\b/i.test(lines[i])) continue;
+    if (!summaryHeadingRe.test(lines[i])) continue;
     let endIdx = lines.length;
     for (let j = i + 1; j < lines.length; j++) {
       if (/^#{1,2}\s/.test(lines[j])) { endIdx = j; break; }
     }
     const section = lines.slice(i + 1, endIdx).join('\n');
     totalWords += (section.trim().match(/\S+/g) || []).length;
-    trackBolds += [...section.matchAll(/\*\*Track\s+\d+/gi)].length;
+    trackHits += [...section.matchAll(/\*\*Track\s+\d+/gi)].length;
+    trackHits += [...section.matchAll(/^#{2,4}\s+Track\s+\d+/gim)].length;
   }
-  if (trackBolds >= 3 && totalWords >= 1500) return 15;
-  if (trackBolds >= 3 && totalWords >= 800)  return 12;
-  if (trackBolds >= 2 && totalWords >= 800)  return 10;
-  if (trackBolds >= 2 && totalWords >= 400)  return 7;
+  if (trackHits >= 3 && totalWords >= 1500) return 15;
+  if (trackHits >= 3 && totalWords >= 800)  return 12;
+  if (trackHits >= 2 && totalWords >= 800)  return 10;
+  if (trackHits >= 2 && totalWords >= 400)  return 7;
   if (totalWords >= 400) return 4;
   if (totalWords >= 150) return 2;
   return 0;
 }
 
-// Tracks-listed dimension. Combines distinct **Track N** bold-prefix count
-// in the body with structural-firsts bullet density in the chapter summary.
-// Three tracks AND ≥10 structural-firsts bullets = max.
+// Tracks-listed dimension. Combines distinct Track-N count (accepting BOTH
+// bold-form AND heading-form markers) with structural-firsts bullet density
+// in the chapter summary. Three tracks AND ≥10 structural-firsts bullets = max.
+//
+// v1.49.589 T2.1 (closes Lesson #10190 candidate): heading-form acceptance.
 function scoreTracksListed(text) {
-  const trackIds = new Set([...text.matchAll(/\*\*Track\s+(\d+)\b/gi)].map(m => m[1]));
+  const trackIds = new Set();
+  for (const m of text.matchAll(/\*\*Track\s+(\d+)\b/gi)) trackIds.add(m[1]);
+  for (const m of text.matchAll(/^#{2,4}\s+Track\s+(\d+)\b/gim)) trackIds.add(m[1]);
   const trackCount = trackIds.size;
   const sfSection = extractSection(text, /^#{2,4}\s+Structural firsts\b/mi);
   const sfBullets = sfSection ? (sfSection.match(/^\s*[-*]\s+\*\*[^*\n]+\.\*\*/gm) || []).length : 0;
@@ -595,19 +631,45 @@ function scoreMultiTrackTrs(text) {
 }
 
 // Forward-lessons emitted block: count #NNNNN lesson IDs OR "## Forward
-// lessons emitted" sectioned bullets.
+// lessons emitted" sectioned bullets. Accepts BOTH explicit enumeration
+// (#10183 #10184 #10185 #10186) AND shorthand range form (#10183-#10186 OR
+// #10183–#10186 with en-dash); range form expands to (end - start + 1).
+//
+// v1.49.589 T2.1 (closes Lesson #10190 candidate): range-form expansion
+// matches the isMultiTrackTrs detector loosening. Ranges must span ≤20
+// (anti-fraud — prevents claiming hundreds of lessons via #10000-#10999).
+function countLessonRefs(text) {
+  // Detect range form: #NNNNN-#NNNNN or #NNNNN–#NNNNN
+  let count = 0;
+  const consumed = new Set();
+  for (const m of text.matchAll(/#(1\d{4})\s*[-–]\s*#(1\d{4})/g)) {
+    const start = parseInt(m[1], 10);
+    const end = parseInt(m[2], 10);
+    if (end >= start && (end - start) <= 20) {
+      count += (end - start + 1);
+      consumed.add(m[1]);
+      consumed.add(m[2]);
+    }
+  }
+  // Add singletons (excluding range endpoints already counted)
+  for (const m of text.matchAll(/#(1\d{4})\b/g)) {
+    if (!consumed.has(m[1])) count++;
+  }
+  return count;
+}
+
 function scoreForwardLessonsBlock(text) {
   const headingRe = /^#{2,3}\s+Forward lessons (emitted|absorbed|carried)\b/mi;
   const section = extractSection(text, headingRe);
   if (!section) {
-    // Fallback: count #NNNNN lesson refs anywhere
-    const refs = [...text.matchAll(/#1\d{4}\b/g)].length;
+    // Fallback: count #NNNNN lesson refs (incl. range form) anywhere
+    const refs = countLessonRefs(text);
     if (refs >= 5) return 10;
     if (refs >= 3) return 6;
     if (refs >= 1) return 3;
     return 0;
   }
-  const ids = [...section.matchAll(/#1\d{4}\b/g)].length;
+  const ids = countLessonRefs(section);
   if (ids >= 6) return 12;
   if (ids >= 3) return 8;
   if (ids >= 1) return 4;

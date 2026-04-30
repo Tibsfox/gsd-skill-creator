@@ -217,3 +217,197 @@ describe('T2.1 (v1.49.588): multi-track-trs rubric', () => {
     expect(degree.grade).toBe('F'); // demonstrates the original F/25 drift
   });
 });
+
+describe('T2.1 (v1.49.589): README scorer-format adjustment (#10190 candidate)', () => {
+  // Closes the F/27 doc-quality miss on v1.49.588 README. Loosens the
+  // multi-track-trs detector + summary aggregator + lessons matcher to
+  // accept BOTH bold-form (**Track N**) AND heading-form (## Track N)
+  // markers, BOTH explicit lesson enumeration AND shorthand range form,
+  // AND degree-style chapter prefixes (## v1.NN.NNN — Summary).
+
+  it('isMultiTrackTrs detects heading-form Track markers (## Track N)', () => {
+    const headingFormReadme = `# v1.49.NNN
+
+**Type:** three-track shipped milestone
+
+## Track 1 — NASA degree
+content
+
+## Track 2 — operational-debt fold-in
+content
+
+## Track 3 — The Rendered Space M0 Wave
+content
+
+## Structural firsts
+- one
+- two
+`;
+    expect(isMultiTrackTrs(headingFormReadme)).toBe(true);
+  });
+
+  it('isMultiTrackTrs detects bold-form Track markers (**Track N**)', () => {
+    const boldFormReadme = `# v1.49.NNN
+
+**Type:** three-track ship
+
+**Track 1** — NASA mission content
+**Track 2** — operational-debt fold-in
+**Track 3** — TRS work
+
+## Structural firsts
+- one
+`;
+    expect(isMultiTrackTrs(boldFormReadme)).toBe(true);
+  });
+
+  it('isMultiTrackTrs accepts mixed bold + heading-form markers', () => {
+    const mixedReadme = `# v1.49.NNN
+
+**Type:** three-track milestone
+
+## Track 1 — NASA mission heading-form
+**Track 2** — fold-in bold-form
+## Track 3 — TRS heading-form
+
+## Structural firsts
+- one
+`;
+    expect(isMultiTrackTrs(mixedReadme)).toBe(true);
+  });
+
+  it('forward-lessons block accepts shorthand range form (#NNNNN-#NNNNN)', () => {
+    // Re-import the inner countLessonRefs through scoreRelease side effect
+    const text = `# v1.49.NNN
+
+**Type:** three-track ship
+
+## Track 1
+**Track 1** content
+
+## Track 2
+**Track 2** content
+
+## Track 3
+**Track 3** content
+
+## Structural firsts
+- one
+- two
+- three
+- four
+- five
+- six
+- seven
+- eight
+- nine
+- ten
+
+## Forward lessons emitted
+
+Four forward lessons (#10183–#10186).
+`;
+    const result = scoreRelease(text, 'degree', { rubric: 'multi-track-trs' });
+    // Range form #10183-#10186 should expand to 4 lessons → ≥3 → score 8
+    expect(result.dimensions.infrastructure_block).toBeGreaterThanOrEqual(8);
+  });
+
+  it('forward-lessons block accepts explicit enumeration (#NNNNN #NNNNN ...)', () => {
+    const text = `# v1.49.NNN
+
+**Type:** three-track ship
+
+## Track 1
+**Track 1** content
+
+## Track 2
+**Track 2** content
+
+## Track 3
+**Track 3** content
+
+## Structural firsts
+- one
+
+## Forward lessons emitted
+
+#10183 #10184 #10185 #10186
+`;
+    const result = scoreRelease(text, 'degree', { rubric: 'multi-track-trs' });
+    expect(result.dimensions.infrastructure_block).toBeGreaterThanOrEqual(8);
+  });
+
+  it('summary section accepts ## Cross-track summary alias', () => {
+    const text = `# v1.49.NNN
+
+**Type:** three-track milestone
+
+**Track 1** — NASA
+**Track 2** — fold-in
+**Track 3** — TRS
+
+## Cross-track summary
+
+${'word '.repeat(450)}
+
+## Structural firsts
+- one
+`;
+    const result = scoreRelease(text, 'degree', { rubric: 'multi-track-trs' });
+    // 450 words of summary content → totalWords ≥ 400 → score ≥ 4
+    expect(result.dimensions.summary_findings).toBeGreaterThan(0);
+  });
+
+  it('summary section accepts degree-style chapter prefix (## v1.NN.NNN — Summary)', () => {
+    // Simulates corpus-builder demoted chapter heading
+    const text = `# v1.49.NNN
+
+**Type:** three-track ship
+
+**Track 1** — NASA
+**Track 2** — fold-in
+**Track 3** — TRS
+
+## v1.49.589 — Summary
+
+${'word '.repeat(450)}
+
+## Structural firsts
+- one
+`;
+    const result = scoreRelease(text, 'degree', { rubric: 'multi-track-trs' });
+    expect(result.dimensions.summary_findings).toBeGreaterThan(0);
+  });
+
+  it('regression: v1.49.587 still scores A/B (≥80) post-loosening', () => {
+    const text = buildCorpus('v1.49.587');
+    if (text === null) return;
+    const result = scoreRelease(text, 'degree', { rubric: 'auto' });
+    expect(result.score).toBeGreaterThanOrEqual(80);
+    expect(['A', 'B']).toContain(result.grade);
+  });
+
+  it('regression: v1.49.581 + v1.49.582 still A/95+ post-loosening', () => {
+    for (const v of ['v1.49.581', 'v1.49.582']) {
+      const text = buildCorpus(v);
+      if (text === null) continue;
+      const result = scoreRelease(text, 'degree', { rubric: 'auto' });
+      expect(result.score).toBeGreaterThanOrEqual(95);
+      expect(result.grade).toBe('A');
+    }
+  });
+
+  it('shorthand range #10183-#10999 (>20 span) is REJECTED as anti-fraud', () => {
+    const text = `# v1.49.NNN
+
+## Forward lessons emitted
+
+A whole bunch (#10000-#10999).
+`;
+    // The range 10000-10999 spans 999 → exceeds 20-cap → rejected
+    // Falls back to counting 2 endpoints as singletons
+    const result = scoreRelease(text, 'degree', { rubric: 'multi-track-trs' });
+    // Only 2 lessons counted from 2 singleton endpoints → score = 4 (1-2 hits → 4)
+    expect(result.dimensions.infrastructure_block).toBeLessThanOrEqual(4);
+  });
+});
