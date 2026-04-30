@@ -1,0 +1,44 @@
+# 03 — Retrospective: v1.49.587 Process
+
+## Carryover lessons applied
+
+Four lessons from v1.49.586 propagated forward and were verified against v1.49.587's execution:
+
+- **Lesson #10175 (score-completeness rubric extension for non-NASA-shaped milestones)** — v1.49.587 is a NASA-shaped milestone (degree 68); the structured/degree rubric path applies. The cleanup-mission rubric extension shipped at v1.49.586 T2.3 stays dormant for this milestone. Verified the rubric correctly auto-detects this milestone as the structured path (not cleanup-mission shape) by inspecting the README's "Engine state at close" structure.
+- **Lesson #10176 (pre-tag-gate composite as HARD RULE)** — v1.49.587 W4 ship pipeline runs `npm run pre-tag-gate` BEFORE `git tag`, with two new steps added at this milestone (steps 4+5). All 5 steps PASS: build + vitest + completeness --strict + CI-on-dev verification + www-bundles freshness. The new steps were exercised end-to-end against this milestone's own ship.
+- **Lesson #10177 (founding-instance-as-window-opener as a structural primitive distinct from PCL/FAMC/SAF)** — v1.49.587 carries CATALOG-WINDOW-OPENING forward at single-exemplar (NOT advanced) because Surveyor 7 is engineering-qualified terminal-mission (SMFS shape), not catalog-window-opening. The distinction was explicitly preserved in NASA 1.68 Card 5 + Card 12 governance section: SMFS = "platform now qualified by engineering-test series → terminal mission spends qualification on maximum science return"; CWO = "open new band → produce sustained dataset". Two structurally-distinct primitives, neither double-counted.
+- **Lesson #10178 (brief-error correction discipline at G0 gate)** — W1a research subagent caught 5 substantive brief errors before W2 build commits. G0 user adjudication ("accept all") locked decisions into `G0-LOCKED-DECISIONS.md` which W2 build subagents sourced as canonical (overriding the original mission brief). Without W1a, all 5 errors would have propagated through ~700KB of build artifacts. The W1a→G0→W2 pattern is now a reproducible discipline at every NASA forward-cadence milestone.
+
+## What worked
+
+- **W1a research subagent caught 5 substantive brief errors before W2 build commits.** The dossier surfaced: (BE-1, HIGH) alpha source Cm-244 → **Cm-242** (163d t½, 6.11 MeV); (BE-2, HIGH) surface sampler "S3+S6+S7" → **S3 + S7 ONLY** (S6 carried alpha-scattering + TV only); (BE-3, HIGH) fictional citation "Turkevich 1969 *Science* 165:277" → **Turkevich et al. 1968 *Science* 162:117 + Patterson, Turkevich et al. 1970 *Science* 168:825-828**; (BE-4, MED) photo count → **21,038 with V-flag**; (BE-5, LOW) landing coords 40.86°S 11.47°W → **40.97°S 11.44°W**. All 5 corrections sourced canonically from G0-LOCKED-DECISIONS into all 35+ build artifacts; zero propagation of the brief errors detected post-W2.
+- **CSV reconciliation as a Python script worked atomically.** `tools/nasa-csv-path-y-reconciliation.py` is idempotent (detects 1.66 = PIONEER-9 marker on second run), atomic (writes to `.tmp` + dated `.bak` before rename), schema-validated (post-state assertions verify 1.66-1.71 placements before commit). 449 rows in → 450 rows out; 1 row inserted (OAO-2 at 1.67); 4 rows renamed (1.66/1.67/1.70 → new positions); ~378 rows shifted +1 (old 1.71+).
+- **Track 2 ship-pipeline hardening landed cleanly at commit 28cd2007a.** SPICE renderer build automation + CI-on-dev gate + 10/10 self-tests + CLAUDE.md + env-vars table updates + npm wiring + commit + push — all in one focused session of main-context work. The discipline-as-deterministic-gate pattern is paying off.
+- **Track 3 TRS Track 3 dispatched in parallel with W1a NASA dossier.** Two subagents (W1a Surveyor 7 dossier + W1c TRS M0 Wave 0 PDF extract) ran simultaneously and returned independently: W1a 6,900 words + 5 brief errors caught, W1c 164 claims + 21/22 packs covered. No contention; no shared-file conflicts; clean completion of both.
+- **W2 build subagents covered 2 of 3 tracks before quota hit.** MUS subagent (Lady Soul, 14 files) + ELC subagent (alpha-scattering CSP, 10 files) both completed. NASA subagent (Surveyor 7, target 25 files) hit quota at 16/25 — same rate-limit pattern as v1.49.586 W2. Recovery via main-context chunked Read+Write completed the remaining 9 files (audio DSP×2 + audio HTML×2 + circuit MD + circuit HTML + sims PY + story TEX + retrospective JSON) without further subagent attempts.
+- **W3 cross-track polish was minimal.** Only one stub-comment found across the 49 build artifacts (a legitimate forward-link to MUS 1.69). Catalog-index updates + completedMissions Set extension landed in 3 surgical Edit operations. The W2 subagents wrote proper cross-track markdown directly per v1.49.586 lesson; no W3 sed-strip pass needed.
+- **Pre-tag-gate steps 4+5 exercised end-to-end at this milestone's own ship.** Step 4 verified CI green at dev tip 40520d97f. Step 5 ran `bash tools/build-www-bundles.sh` which esbuilt the SPICE renderer cleanly (144,733 bytes). Both new gates work as designed.
+
+## What could be better
+
+- **NASA W2 subagent quota hit was avoidable.** Same pattern as v1.49.586: target 25 files; subagent hits limit at ~16. Forward lesson #10183 candidate: pre-fragment NASA W2 into TWO subagent dispatches (subagent A: index.html + papers.html + organism.html + mathematics.html + curriculum.html + research.html + JSON files = 9 files; subagent B: artifacts/ subdir = ~16 files) so neither single subagent exceeds the quota window. Halves the per-subagent token spend.
+- **Brief-error volume held at 5 for v1.49.587.** Down from 6 at v1.49.586 but still nontrivial. The original brief at `.planning/missions/v1-49-587-mariner-6-7-twin-mars-flyby/MISSION-BRIEF.md` was authored without a research-subagent pre-pass (W1a was the FIRST research touch). Forward improvement: insert a W0.5 pre-W1 pass where a brief-validation subagent fact-checks the mission-brief BEFORE the user G0 review, surfacing brief errors as part of brief authoring rather than as a side-effect of W1 research.
+- **Forest-sim simulation.js aggregator merge deferred.** The canonical block aggregator at `www/tibsfox/com/Research/forest/simulation.js` only contains entries through v1.63; per-mission canonical blocks v1.64-v1.68 exist at their respective `forest-module/*.js` locations but were not merged into the aggregator. This is a recurring pattern across multiple milestones; surface as a counter-cadence cleanup-mission item at v1.49.615+.
+- **CSV reconciliation publish discipline.** The CSV file lives at `www/tibsfox/com/Research/NASA/catalog/nasa_master_mission_catalog_expanded.csv`, which is gitignored (per `.gitignore` standing rule for `www/`). The reconciled version exists locally + will FTP-sync to tibsfox.com at W4. Post-sync, the live NASA index will show updated 1.66/1.67/1.68 entries. Verify post-sync: the 4 missions Apollo 5/6/7/8 + downstream apollo missions show new version numbers in the live index, confirming CSV reconciliation succeeded.
+- **TRS topic-map.json count below middle-of-range.** Target was ~200-500 claims; W1c returned 164 claims (just below the lower bound). Coverage is reasonable per "load-bearing claims, not every comma" guidance but a denser pass would benefit M0 Wave 1 fetch quality. Forward improvement: at v1.49.588 W3, retroactively run a W1c-supplementary subagent to expand the topic-map for chapters where claim density looks thin (book chapters with <5 claims are candidates).
+
+## What's next
+
+v1.49.588 candidates per Path Y CSV reconciliation:
+- **Apollo 5** (1968-01-22 launch) — first flight test of Lunar Module in Earth orbit; AS-204R; structural anchor candidate: ALL-UP-LM-CHECKOUT (engineering-test pattern complementary to ALL-UP COMMITMENT)
+- **Apollo 6** (1968-04-04) — second Saturn V test; pogo oscillation + engine failures; partial-success structural anchor candidate
+- **Apollo 7** (1968-10-11) — first crewed Apollo; Schirra/Eisele/Cunningham; 11-day Earth orbit; first live US TV from space; ALL-UP-CREW-CHECKOUT structural pair with Apollo 8 (1968-12-21)
+
+Forward-look at next 5 milestones (per CSV-reconciled ordering):
+- v1.49.588 = NASA 1.69 Apollo 5 + S36 #66 + ELC 1.69 + SPS #66 + TRS M0 Wave 1a (packs 01-04)
+- v1.49.589 = NASA 1.70 Apollo 6 + S36 #67 + ELC 1.70 + SPS #67 + TRS M0 Wave 1b (packs 05-08)
+- v1.49.590 = NASA 1.71 Apollo 7 + S36 #68 + ELC 1.71 + SPS #68 + TRS M0 Wave 1c (packs 09-12)
+- v1.49.591 = NASA 1.72 Apollo 8 + S36 #69 + ELC 1.72 + SPS #69 + TRS M0 Wave 1d (packs 13-16)
+- v1.49.592 = NASA 1.73 Apollo 9 + S36 #70 + ELC 1.73 + SPS #70 + TRS M0 Wave 1e (packs 17-22)
+
+The next forward-cadence degree should apply v1.49.587's 4 lessons (#10179 SMFS primitive, #10180 ALPHA-SCATTERING closure criterion, #10181 CSV Path-Y reconciliation pattern, #10182 three-track-plus-TRS milestone pattern) plus the v1.49.586 carryover lessons that remain active.
