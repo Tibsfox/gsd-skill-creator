@@ -19,6 +19,13 @@
 #                       `index.js`. Idempotent. Added v1.49.587 — closes the
 #                       v1.49.581 unwired-build gap that left 126 SPICE
 #                       viewer pages broken on tibsfox.com.
+#   6. Depth audit (warning-only) — flags sibling NASA/MUS/ELC index.html
+#                       files at <80% predecessor line/byte depth. Closes
+#                       Lesson #10188 candidate from v1.49.588 §5: W2-quota
+#                       depth gap that required ad-hoc rebuild of 6 files.
+#                       Added v1.49.589 in WARNING-only mode; will harden to
+#                       BLOCKER after 2 milestones of soak. Override:
+#                       SC_SKIP_DEPTH_AUDIT=1 (harmless until step is hardened).
 #
 # Exit codes:
 #   0  all checks PASS
@@ -27,6 +34,7 @@
 #   3  completeness gate failed
 #   4  CI-on-dev failed / pending (SC_SKIP_CI_GATE=1 overrides)
 #   5  www-bundles build failed
+#   6  depth-audit failed (only when --strict mode is hardened; warning-only at v1.49.589)
 #
 # Usage:
 #   bash tools/pre-tag-gate.sh
@@ -63,7 +71,7 @@ log() {
   fi
 }
 
-log "[pre-tag-gate] step 1/5: npm run build"
+log "[pre-tag-gate] step 1/6: npm run build"
 if ! npm run build --silent; then
   echo "[pre-tag-gate] FAIL: npm run build exited non-zero" >&2
   echo "[pre-tag-gate] Check TypeScript errors above; common cause is" >&2
@@ -71,9 +79,9 @@ if ! npm run build --silent; then
   echo "[pre-tag-gate] (TS2835 with --moduleResolution node16/nodenext)." >&2
   exit 1
 fi
-log "[pre-tag-gate] step 1/5: PASS"
+log "[pre-tag-gate] step 1/6: PASS"
 
-log "[pre-tag-gate] step 2/5: npx vitest run (full suite — mirrors CI)"
+log "[pre-tag-gate] step 2/6: npx vitest run (full suite — mirrors CI)"
 if ! npx vitest run --silent; then
   echo "[pre-tag-gate] FAIL: npx vitest run exited non-zero" >&2
   echo "[pre-tag-gate] Common v1.49.585+ CI-shaped failures:" >&2
@@ -82,23 +90,23 @@ if ! npx vitest run --silent; then
   echo "[pre-tag-gate]   - claude-md-truth CF-MED-063b: no /media/foxy/ literal paths in CLAUDE.md (use \$REPO/ or \$ARTEMIS_REPO/)" >&2
   exit 2
 fi
-log "[pre-tag-gate] step 2/5: PASS"
+log "[pre-tag-gate] step 2/6: PASS"
 
-log "[pre-tag-gate] step 3/5: release-notes completeness gate"
+log "[pre-tag-gate] step 3/6: release-notes completeness gate"
 if ! node tools/release-history/check-completeness.mjs --current --strict; then
   echo "[pre-tag-gate] FAIL: completeness gate failed" >&2
   echo "[pre-tag-gate] Author the missing release-notes files BEFORE tagging." >&2
   echo "[pre-tag-gate] See: docs/release-notes/v1.49.581/ + v1.49.582/ as gold reference." >&2
   exit 3
 fi
-log "[pre-tag-gate] step 3/5: PASS"
+log "[pre-tag-gate] step 3/6: PASS"
 
-# ----- step 4/5: CI-on-dev gate (v1.49.587 HARD RULE) -----
+# ----- step 4/6: CI-on-dev gate (v1.49.587 HARD RULE) -----
 SKIP_CI_GATE="${SC_SKIP_CI_GATE:-0}"
 if [ "$SKIP_CI_GATE" = "1" ]; then
-  log "[pre-tag-gate] step 4/5: SKIPPED (SC_SKIP_CI_GATE=1)"
+  log "[pre-tag-gate] step 4/6: SKIPPED (SC_SKIP_CI_GATE=1)"
 else
-  log "[pre-tag-gate] step 4/5: CI-on-dev verification"
+  log "[pre-tag-gate] step 4/6: CI-on-dev verification"
   DEV_SHA="$(git rev-parse origin/dev 2>/dev/null || echo "")"
   if [ -z "$DEV_SHA" ]; then
     echo "[pre-tag-gate] FAIL: cannot resolve origin/dev SHA — fetch first?" >&2
@@ -148,17 +156,39 @@ else
     echo "[pre-tag-gate]   Override (emergency only): SC_SKIP_CI_GATE=1" >&2
     exit 4
   fi
-  log "[pre-tag-gate] step 4/5: PASS (CI green at $DEV_SHA)"
+  log "[pre-tag-gate] step 4/6: PASS (CI green at $DEV_SHA)"
 fi
 
-# ----- step 5/5: SPICE renderer bundle freshness (v1.49.587 unwired-build closure) -----
-log "[pre-tag-gate] step 5/5: www-bundles freshness (SPICE renderer)"
+# ----- step 5/6: SPICE renderer bundle freshness (v1.49.587 unwired-build closure) -----
+log "[pre-tag-gate] step 5/6: www-bundles freshness (SPICE renderer)"
 if ! bash "$REPO_ROOT/tools/build-www-bundles.sh" >/dev/null 2>&1; then
   echo "[pre-tag-gate] FAIL: www-bundles build failed" >&2
   echo "[pre-tag-gate] Re-run for diagnostics: bash tools/build-www-bundles.sh" >&2
   exit 5
 fi
-log "[pre-tag-gate] step 5/5: PASS"
+log "[pre-tag-gate] step 5/6: PASS"
 
-log "[pre-tag-gate] all 5 checks PASS — safe to \`git tag\` and merge to main"
+# ----- step 6/6: depth-audit (WARNING-only at v1.49.589; closes Lesson #10188) -----
+SKIP_DEPTH="${SC_SKIP_DEPTH_AUDIT:-0}"
+if [ "$SKIP_DEPTH" = "1" ]; then
+  log "[pre-tag-gate] step 6/6: SKIPPED (SC_SKIP_DEPTH_AUDIT=1)"
+else
+  log "[pre-tag-gate] step 6/6: depth-audit (WARNING-only — soaking 2 milestones)"
+  # Resolve current NASA-degree-form version from STATE.md
+  if [ -f "$REPO_ROOT/.planning/STATE.md" ]; then
+    DEPTH_OUT="$(node "$REPO_ROOT/tools/depth-audit.mjs" --current 2>&1)" || true
+    if echo "$DEPTH_OUT" | grep -qE '(FAIL|MISSING)'; then
+      echo "[pre-tag-gate] WARNING: depth-audit reported issues (not blocking; warning-only at v1.49.589):" >&2
+      echo "$DEPTH_OUT" | grep -E '\[(X |!!|OK)\]' >&2 || echo "$DEPTH_OUT" >&2
+      echo "[pre-tag-gate]   To suppress: SC_SKIP_DEPTH_AUDIT=1" >&2
+      echo "[pre-tag-gate]   Hardens to BLOCKER at v1.49.591+." >&2
+    else
+      log "[pre-tag-gate] step 6/6: PASS (depth-audit clean)"
+    fi
+  else
+    log "[pre-tag-gate] step 6/6: SKIPPED (.planning/STATE.md absent — cannot derive version)"
+  fi
+fi
+
+log "[pre-tag-gate] all 6 checks PASS — safe to \`git tag\` and merge to main"
 exit 0
