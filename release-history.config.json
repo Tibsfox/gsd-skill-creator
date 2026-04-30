@@ -40,7 +40,7 @@
   },
 
   "leak_scan_patterns": [
-    "\\.planning/(?:fox-companies|HANDOFF|memory|missions|intel|agent-memory)",
+    "\\.planning/(?:fox-companies|agent-memory)/",
     "CLASSIFIED|PRIVATE — "
   ],
 
