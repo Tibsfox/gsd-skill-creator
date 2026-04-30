@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>NASA Harness — Runner Controls Smoke Test</title>
+</head>
+<body>
+  <!--
+    Mirrors the subset of the production runner page (Research/forest/index.html)
+    relevant to the reset button + keyboard-shortcut surface:
+      - reset button + click handler
+      - pause button + step button (disabled until paused) + click handlers
+      - keyboard shortcuts: p / ] / m / r / /
+      - localStorage round-trip for forest-enabled-modules + forest-panel-axis
+      - mock subsystem.reset() calls so the test can verify the reset wires
+        through to every subsystem
+    Kept minimal: no real flocking / sky / kuramoto code is loaded, only the
+    UI control surface. Subsystem behaviour is covered by other fixtures
+    (subsystems-test.html, panel-augment-*-test.html).
+  -->
+  <div id="missions-panel"></div>
+  <button id="audio-toggle" type="button" aria-pressed="false">audio</button>
+  <button id="pause-toggle" type="button" aria-pressed="false">⏸ pause</button>
+  <button id="step-frame" type="button" disabled>⏭ step</button>
+  <button id="reset-scene" type="button">↺ reset</button>
+
+  <script type="module">
+    import {
+      register, list, enableByMissionVersion, renderToggleList,
+    } from '/www/tibsfox/com/Research/NASA/_harness/v1.0.0/forest-module-registry.js';
+
+    // ---- Mock subsystems with reset() trackers ---------------------------
+    const reset = (name) => () => { window.__resetCalls.push(name); };
+    window.__resetCalls = [];
+    const boids     = { reset: reset('boids') };
+    const lsystem   = { reset: reset('lsystem') };
+    const kuramoto  = { reset: reset('kuramoto') };
+    const physarum  = { reset: reset('physarum') };
+    const audio     = {
+      reset: reset('audio'),
+      unlock: async () => { window.__audioUnlocked = true; },
+      mute:   () => { window.__audioMuted = true; },
+    };
+    window.__audioUnlocked = false;
+    window.__audioMuted    = false;
+
+    // ---- Mock registry modules so toggle/reset have something to act on -
+    function makeModule(version, title) {
+      return {
+        id: 'smoke-controls-' + version,
+        missionVersion: version,
+        title,
+        description: 'controls smoke fixture',
+        couplings: [{ subsystem: 'audio', type: 'layer' }],
+        _enabled: 0, _disabled: 0,
+        enable(_f, _c) { this._enabled++; },
+        disable(_f, _c) { this._disabled++; },
+      };
+    }
+    const m1 = makeModule('1.0',  'Armillaria Mycelium Network');
+    const m2 = makeModule('1.12', 'Osprey Aerial Predator');
+    register(m1); register(m2);
+    window.__MODULES__ = { m1, m2 };
+
+    // Persist callback fires on each toggle.
+    function persistEnabledModules() {
+      try {
+        const enabled = [];
+        for (const lbl of document.querySelectorAll('#missions-panel label')) {
+          const cb = lbl.querySelector('input[type=checkbox]');
+          if (cb && cb.checked) {
+            const m = (lbl.textContent || '').trim().match(/^(\d+\.\d+)/);
+            if (m) enabled.push(m[1]);
+          }
+        }
+        if (enabled.length) {
+          localStorage.setItem('forest-enabled-modules', enabled.join(','));
+        } else {
+          localStorage.removeItem('forest-enabled-modules');
+        }
+      } catch (_) {}
+    }
+
+    // Pre-enable both modules + seed forest-panel-axis so reset has work to do.
+    await enableByMissionVersion('1.0',  {}, {});
+    await enableByMissionVersion('1.12', {}, {});
+    try {
+      localStorage.setItem('forest-enabled-modules', '1.0,1.12');
+      localStorage.setItem('forest-panel-axis', 'organism');
+    } catch (_) {}
+
+    renderToggleList(
+      document.getElementById('missions-panel'),
+      { forest: {}, ctx: {}, onChange: persistEnabledModules }
+    );
+
+    // ---- Pause/step state + frame counter -------------------------------
+    // The frame loop here is synchronous-on-demand: tick() is called by the
+    // step button handler when paused, OR by rAF when not paused. This makes
+    // the test deterministic — we don't need to wait for browser rAF cadence.
+    let paused = false;
+    let _stepRequested = false;
+    window.__frameCount = 0;
+    const pauseBtn = document.getElementById('pause-toggle');
+    const stepBtn  = document.getElementById('step-frame');
+
+    function _setStepBtnEnabled(enabled) {
+      if (!stepBtn) return;
+      stepBtn.disabled = !enabled;
+    }
+    function maybeTick() {
+      if (paused && !_stepRequested) return false;
+      if (paused && _stepRequested) _stepRequested = false;
+      window.__frameCount++;
+      return true;
+    }
+    pauseBtn.addEventListener('click', () => {
+      paused = !paused;
+      pauseBtn.textContent = paused ? '▶ resume' : '⏸ pause';
+      pauseBtn.setAttribute('aria-pressed', String(paused));
+      _setStepBtnEnabled(paused);
+    });
+    stepBtn.addEventListener('click', () => {
+      if (paused) {
+        _stepRequested = true;
+        // Single-frame advance is observable via __frameCount; tick once now
+        // rather than waiting for the rAF callback so the test sees the
+        // advance synchronously. Mirrors the production semantics: ⏭ step
+        // queues a single tick that runs on the next frame.
+        maybeTick();
+      }
+    });
+
+    // ---- Audio toggle ---------------------------------------------------
+    const audioBtn = document.getElementById('audio-toggle');
+    audioBtn.addEventListener('click', async () => {
+      if (!window.__audioUnlocked) {
+        await audio.unlock();
+        audioBtn.setAttribute('aria-pressed', 'true');
+      } else {
+        audio.mute();
+        audioBtn.setAttribute('aria-pressed', 'false');
+      }
+    });
+
+    // ---- Reset button (mirrors production runner) -----------------------
+    const resetBtn = document.getElementById('reset-scene');
+    resetBtn.addEventListener('click', () => {
+      const checked = [...document.querySelectorAll('#missions-panel label input[type=checkbox]')]
+        .filter((cb) => cb.checked);
+      for (const cb of checked) cb.click();
+      try {
+        localStorage.removeItem('forest-enabled-modules');
+        localStorage.removeItem('forest-panel-axis');
+      } catch (_) {}
+      try { boids.reset(); }    catch (_) {}
+      try { lsystem.reset(); }  catch (_) {}
+      try { kuramoto.reset(); } catch (_) {}
+      try { physarum.reset(); } catch (_) {}
+      try { audio.reset(); }    catch (_) {}
+      if (paused) {
+        paused = false;
+        pauseBtn.textContent = '⏸ pause';
+        pauseBtn.setAttribute('aria-pressed', 'false');
+      }
+      _stepRequested = false;
+      _setStepBtnEnabled(false);
+      audioBtn.setAttribute('aria-pressed', 'false');
+      window.__audioUnlocked = false;
+      window.__resetClickCount = (window.__resetClickCount || 0) + 1;
+    });
+
+    // ---- Keyboard shortcuts (mirrors production runner) -----------------
+    addEventListener('keydown', (ev) => {
+      const t = ev.target;
+      const isTyping = t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' ||
+                             t.isContentEditable);
+      if (ev.key === 'Escape' && t && t.tagName === 'INPUT' && t.type === 'search') {
+        t.blur();
+        return;
+      }
+      if (isTyping) return;
+      if (ev.ctrlKey || ev.metaKey || ev.altKey) return;
+      if (ev.key === 'p' || ev.key === 'P') {
+        document.getElementById('pause-toggle')?.click();
+      } else if (ev.key === ']') {
+        document.getElementById('step-frame')?.click();
+      } else if (ev.key === 'm' || ev.key === 'M') {
+        document.getElementById('audio-toggle')?.click();
+      } else if (ev.key === 'r' || ev.key === 'R') {
+        document.getElementById('reset-scene')?.click();
+      } else if (ev.key === '/') {
+        const search = document.querySelector('#missions-panel input[type=search]');
+        if (search) {
+          ev.preventDefault();
+          search.focus();
+        }
+      }
+    });
+
+    window.__CONTROLS_READY__ = true;
+  </script>
+</body>
+</html>
