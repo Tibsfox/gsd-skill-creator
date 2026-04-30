@@ -1,22 +1,23 @@
 # Release History
 
-631 milestones shipped across the v1.0 → v1.49.588 arc. The table below lists every shipped release, newest first.
+632 milestones shipped across the v1.0 → v1.49.589 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions, and where available, retrospectives and lessons learned. `Commits` is the count of commits between this tag and the previous tag (from git). `Phases` and `Plans` come from structured GSD metadata in the release README — most content/patch releases don't have these. `Retro` links to the retrospective chapter when present. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 631 releases · 626 with retrospectives · 626 with extracted lessons · quality A:624 B:3 C:1 D:1 F:2 (avg 97) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 632 releases · 626 with retrospectives · 626 with extracted lessons · quality A:624 B:3 C:1 D:3 F:1 (avg 97) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Retro | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|-------|---------|---------|-------|
-| [v1.49.588](release-notes/v1.49.588) | Apollo 5 LM-1 / BS&T / Steller's Jay / UNMANNED-PRECURSOR-VALIDATION | 2026-04-29 | 5 | — | — | — | — | F 27 |  |
+| [v1.49.589](release-notes/v1.49.589) | Apollo 6 (NASA degree 1.70) + Bookends + S-IC pogo accelerometer chain + Hairy Woodpecker + 4 operational-debt fold-ins + TRS Wave 1b (partial) | 2026-04-30 | 12 | — | — | — | — | D 69 |  |
+| [v1.49.588](release-notes/v1.49.588) | Apollo 5 LM-1 / BS&T / Steller's Jay / UNMANNED-PRECURSOR-VALIDATION | 2026-04-29 | 5 | — | — | — | — | D 63 |  |
 | [v1.49.587](release-notes/v1.49.587) | Surveyor 7 / Lady Soul / Northern Spotted Owl / SCIENCE-MAXIMIZED FINAL-OF-SERIES | 2026-04-29 | 6 | — | — | — | — | A 90 |  |
 | [v1.49.586](release-notes/v1.49.586) | OAO-2 Stargazer / Mudhoney / Trumpeter Swan / CATALOG-WINDOW-OPENING | 2026-04-29 | 21 | — | — | — | — | B 85 |  |
 | [v1.49.585](release-notes/v1.49.585) | Concerns Cleanup / Foundation Shoring | 2026-04-29 | 4 | — | — | — | — | B 83 |  |
 | [v1.49.584](release-notes/v1.49.584) | Degree 66: Graceful Attrition + Form-as-Multiplicity-Coordination | 2026-04-28 | 4 | — | — | [✓](release-notes/v1.49.584/chapter/03-retrospective.md) | [16](release-notes/v1.49.584/chapter/04-lessons.md) | D 69 |  |
 | [v1.49.583](release-notes/v1.49.583) | Degree 65: The Persistent Constellation | 2026-04-27 | 10 | — | — | [✓](release-notes/v1.49.583/chapter/03-retrospective.md) | [14](release-notes/v1.49.583/chapter/04-lessons.md) | C 79 |  |
-| [v1.49.582](release-notes/v1.49.582) | Degree 64: The All-Up Commit | 2026-04-27 | 8 | — | — | [✓](release-notes/v1.49.582/chapter/03-retrospective.md) | [18](release-notes/v1.49.582/chapter/04-lessons.md) | A 100 |  |
+| [v1.49.582](release-notes/v1.49.582) | Degree 64: The All-Up Commit | 2026-04-27 | 8 | — | — | [✓](release-notes/v1.49.582/chapter/03-retrospective.md) | [2/18](release-notes/v1.49.582/chapter/04-lessons.md) | A 100 |  |
 | [v1.49.581](release-notes/v1.49.581) | Degree 63: The Controlled Displacement Lift | 2026-04-27 | 5 | — | — | [✓](release-notes/v1.49.581/chapter/03-retrospective.md) | [16](release-notes/v1.49.581/chapter/04-lessons.md) | A 100 |  |
 | [v1.49.580](release-notes/v1.49.580) | BAYES-SEQUENTIAL-MV: Multivariate IPM-BOED via Sliced-Wasserstein | 2026-04-26 | 10 | — | — | [✓](release-notes/v1.49.580/chapter/03-retrospective.md) | [16](release-notes/v1.49.580/chapter/04-lessons.md) | A 100 |  |
 | [v1.49.579](release-notes/v1.49.579) | BAYES-SEQUENTIAL | 2026-04-26 | 8 | — | — | [✓](release-notes/v1.49.579/chapter/03-retrospective.md) | [1/16](release-notes/v1.49.579/chapter/04-lessons.md) | A 100 |  |
