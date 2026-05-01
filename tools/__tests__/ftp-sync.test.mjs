@@ -202,6 +202,93 @@ describe('buildManifest', () => {
   });
 });
 
+describe('buildManifest --include-catalog-index (Lesson #10206; T2.3 v1.49.592)', () => {
+  function makeTracks(version, withCatalog) {
+    for (const track of ['NASA', 'MUS', 'ELC']) {
+      const trackRoot = join(tmpRoot, 'www', 'tibsfox', 'com', 'Research', track);
+      const versionDir = join(trackRoot, version);
+      mkdirSync(versionDir, { recursive: true });
+      writeFileSync(join(versionDir, 'index.html'), `<html>v${version} ${track}</html>`);
+      if (withCatalog) {
+        writeFileSync(join(trackRoot, 'index.html'), `<html>${track} catalog</html>`);
+      }
+    }
+  }
+
+  it('default behavior excludes catalog indexes (backward compat)', () => {
+    makeTracks('1.73', true);
+    const m = buildManifest(tmpRoot, '1.73');
+    expect(m.totalFiles).toBe(3);  // 3 version index.html, no catalog
+    for (const track of ['NASA', 'MUS', 'ELC']) {
+      const catalogEntries = m.tracks[track].filter((e) => e.kind === 'catalog');
+      expect(catalogEntries.length).toBe(0);
+    }
+  });
+
+  it('--include-catalog-index adds 3 catalog index.html entries when present', () => {
+    makeTracks('1.73', true);
+    const m = buildManifest(tmpRoot, '1.73', { includeCatalogIndex: true });
+    expect(m.totalFiles).toBe(6);  // 3 version + 3 catalog
+    const allCatalogs = Object.values(m.tracks)
+      .flat()
+      .filter((e) => e.kind === 'catalog');
+    expect(allCatalogs.length).toBe(3);
+    const remotes = allCatalogs.map((e) => e.remoteAbs).sort();
+    expect(remotes).toEqual([
+      '/ELC/index.html',
+      '/MUS/index.html',
+      '/NASA/index.html',
+    ]);
+  });
+
+  it('catalog entries map to /{track}/index.html (one level up from version)', () => {
+    makeTracks('1.73', true);
+    const m = buildManifest(tmpRoot, '1.73', { includeCatalogIndex: true });
+    const nasaCatalog = m.tracks.NASA.find((e) => e.kind === 'catalog');
+    expect(nasaCatalog).toBeDefined();
+    expect(nasaCatalog.remoteAbs).toBe('/NASA/index.html');
+    expect(nasaCatalog.localAbs).toContain('NASA/index.html');
+    expect(nasaCatalog.localAbs).not.toContain('1.73');  // NOT the version dir
+  });
+
+  it('skips missing catalog index.html (does not error if absent)', () => {
+    makeTracks('1.73', false);  // no catalog index.html files written
+    const m = buildManifest(tmpRoot, '1.73', { includeCatalogIndex: true });
+    expect(m.totalFiles).toBe(3);  // 3 version files only; no catalogs added
+    const allCatalogs = Object.values(m.tracks)
+      .flat()
+      .filter((e) => e.kind === 'catalog');
+    expect(allCatalogs.length).toBe(0);
+  });
+
+  it('partial-catalog (NASA only) still works', () => {
+    const version = '1.73';
+    for (const track of ['NASA', 'MUS', 'ELC']) {
+      const versionDir = join(tmpRoot, 'www', 'tibsfox', 'com', 'Research', track, version);
+      mkdirSync(versionDir, { recursive: true });
+      writeFileSync(join(versionDir, 'index.html'), 'page');
+    }
+    // Only NASA catalog index.html exists
+    writeFileSync(
+      join(tmpRoot, 'www', 'tibsfox', 'com', 'Research', 'NASA', 'index.html'),
+      'NASA catalog only'
+    );
+    const m = buildManifest(tmpRoot, '1.73', { includeCatalogIndex: true });
+    expect(m.totalFiles).toBe(4);  // 3 version + 1 NASA catalog
+    expect(m.tracks.NASA.filter((e) => e.kind === 'catalog')).toHaveLength(1);
+    expect(m.tracks.MUS.filter((e) => e.kind === 'catalog')).toHaveLength(0);
+    expect(m.tracks.ELC.filter((e) => e.kind === 'catalog')).toHaveLength(0);
+  });
+
+  it('opts.includeCatalogIndex !== true (e.g. truthy non-true) does NOT enable', () => {
+    makeTracks('1.73', true);
+    const m1 = buildManifest(tmpRoot, '1.73', { includeCatalogIndex: 'yes' });
+    const m2 = buildManifest(tmpRoot, '1.73', { includeCatalogIndex: 1 });
+    expect(m1.totalFiles).toBe(3);
+    expect(m2.totalFiles).toBe(3);
+  });
+});
+
 describe('pickVerificationSample (Lesson #10203 verification probe)', () => {
   function buildSyntheticManifest() {
     const version = '1.71';
