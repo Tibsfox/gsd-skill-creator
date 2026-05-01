@@ -11,6 +11,7 @@ export default defineConfig({
       'tools/release-history/__tests__/score-completeness.test.mjs',
       'scripts/__tests__/bump-version.test.mjs',
       'tools/__tests__/depth-audit.test.mjs',
+      'tools/__tests__/ftp-sync.test.mjs',
     ],
     globals: true,
     testTimeout: 15000,
