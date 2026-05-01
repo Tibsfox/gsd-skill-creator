@@ -212,15 +212,18 @@ Without `--force-regenerate`, hand-authored release-notes in `docs/release-notes
 **FTP sync to tibsfox.com (added in v1.49.590 T2.1; closes Lesson #10195 candidate):**
 
 ```bash
-node tools/ftp-sync.mjs <version>            # push v<version> dirs to tibsfox.com
-node tools/ftp-sync.mjs <version> --dry-run  # list what would upload, no connection
-node tools/ftp-sync.mjs <version> --json     # machine-readable summary
+node tools/ftp-sync.mjs <version>                          # push v<version> dirs to tibsfox.com
+node tools/ftp-sync.mjs <version> --dry-run                # list what would upload, no connection
+node tools/ftp-sync.mjs <version> --json                   # machine-readable summary
+node tools/ftp-sync.mjs <version> --include-catalog-index  # ALSO upload NASA/MUS/ELC catalog index.html (one level up)
 
 npm run ftp-sync -- 1.71                     # equivalent npm form
 npm run ftp-sync:dry-run -- 1.71             # equivalent dry-run form
 ```
 
-The tool reads `FTP_HOST` / `FTP_USER` / `FTP_PASS` from `<repo-root>/.env`, builds a manifest from `www/tibsfox/com/Research/{NASA,MUS,ELC}/<version>/`, and uploads via `basic-ftp`. Exit codes: 0 = all uploaded; 1 = one or more PUT failures; 2 = invalid args or missing .env keys; 3 = local source dirs missing for the requested version.
+The tool reads `FTP_HOST` / `FTP_USER` / `FTP_PASS` from `<repo-root>/.env`, builds a manifest from `www/tibsfox/com/Research/{NASA,MUS,ELC}/<version>/`, and uploads via `basic-ftp`. Exit codes: 0 = all uploaded; 1 = one or more PUT failures; 2 = invalid args or missing .env keys; 3 = local source dirs missing for the requested version; 4 = HTTPS verification probe found drift (post-upload sample HEAD failed).
+
+**`--include-catalog-index` flag (added in v1.49.592 T2.3; closes Lesson #10206 candidate):** when present, the tool also uploads the per-track catalog `index.html` pages (located ONE LEVEL UP from the version dir at `www/tibsfox/com/Research/{NASA,MUS,ELC}/index.html` → remote `/{NASA,MUS,ELC}/index.html`). This promotes the ad-hoc `sync-catalog-indexes.mjs` pattern (used at v1.49.590 + v1.49.591 ship pipelines) into the canonical FTP tool. Catalog entries carry `kind: 'catalog'` for downstream disambiguation. Use when ship pipeline includes catalog-index updates (e.g. NASA `completedMissions` Set adding a new degree); skip otherwise.
 
 **Why this tool exists:** every milestone ship pipeline pushes 49+ build artifacts (NASA + MUS + ELC index.html sets at the new degree) to tibsfox.com via FTP. v1.49.589 used an ad-hoc Python ftplib script (`/home/foxy/ftp-sync-v1-49-589.py`, deleted post-use); the pattern recurred every milestone but was rebuilt ad-hoc each time. T2.1 promoted it to a tested in-repo tool.
 

@@ -18,10 +18,15 @@
  *     → remote `/{NASA,MUS,ELC}/<version>/...`
  *
  * Usage:
- *   node tools/ftp-sync.mjs <version>             # push + verify
- *   node tools/ftp-sync.mjs <version> --dry-run   # list files, no upload
- *   node tools/ftp-sync.mjs <version> --json      # machine-readable summary
- *   node tools/ftp-sync.mjs <version> --no-verify # skip post-upload HTTPS probe
+ *   node tools/ftp-sync.mjs <version>                    # push + verify
+ *   node tools/ftp-sync.mjs <version> --dry-run          # list files, no upload
+ *   node tools/ftp-sync.mjs <version> --json             # machine-readable summary
+ *   node tools/ftp-sync.mjs <version> --no-verify        # skip post-upload HTTPS probe
+ *   node tools/ftp-sync.mjs <version> --include-catalog-index
+ *     # ALSO upload the NASA/MUS/ELC catalog index.html pages (one level up
+ *     # from the version dir) — closes Lesson #10206 candidate from v1.49.591;
+ *     # promotes the ad-hoc sync-catalog-indexes.mjs pattern (used at v1.49.590
+ *     # + v1.49.591 ship pipelines) into the canonical FTP tool.
  *
  *   npm run ftp-sync -- 1.71
  *   npm run ftp-sync:dry-run -- 1.71
@@ -128,27 +133,55 @@ export function walkDir(absDir) {
 /**
  * Build the upload manifest for a given version.
  *
- * Returns: { tracks: { NASA: [{rel,size}...], MUS: [...], ELC: [...] },
+ * @param {string} repoRoot — absolute path to repo root
+ * @param {string} version  — e.g. "1.71"
+ * @param {object} [opts]   — { includeCatalogIndex: boolean }
+ *   includeCatalogIndex: when true, also include the per-track catalog
+ *   index.html (located ONE LEVEL UP from the version dir at
+ *   www/tibsfox/com/Research/{track}/index.html → /{track}/index.html).
+ *   Closes Lesson #10206 candidate from v1.49.591 (T2.3 v1.49.592).
+ *
+ * Returns: { tracks: { NASA: [{rel,size,kind?}...], MUS: [...], ELC: [...] },
  *            totalFiles, totalBytes, missingTracks }
+ *
+ * Catalog-index entries carry kind: 'catalog' for downstream disambiguation
+ * (per-version files have no kind field; treat absence as 'version').
  */
-export function buildManifest(repoRoot, version) {
+export function buildManifest(repoRoot, version, opts = {}) {
+  const includeCatalogIndex = opts.includeCatalogIndex === true;
   const manifest = { tracks: {}, totalFiles: 0, totalBytes: 0, missingTracks: [] };
   for (const track of TRACKS) {
     const dir = join(repoRoot, 'www', 'tibsfox', 'com', 'Research', track, version);
+    const trackEntries = [];
     if (!existsSync(dir)) {
       manifest.missingTracks.push(track);
-      manifest.tracks[track] = [];
-      continue;
+    } else {
+      const files = walkDir(dir);
+      for (const f of files) {
+        trackEntries.push({
+          rel: f.rel,
+          size: f.size,
+          localAbs: join(dir, f.rel),
+          remoteAbs: `/${track}/${version}/${f.rel}`,
+        });
+      }
     }
-    const files = walkDir(dir);
-    manifest.tracks[track] = files.map((f) => ({
-      rel: f.rel,
-      size: f.size,
-      localAbs: join(dir, f.rel),
-      remoteAbs: `/${track}/${version}/${f.rel}`,
-    }));
-    manifest.totalFiles += files.length;
-    manifest.totalBytes += files.reduce((sum, f) => sum + f.size, 0);
+    if (includeCatalogIndex) {
+      const catalogPath = join(repoRoot, 'www', 'tibsfox', 'com', 'Research', track, 'index.html');
+      if (existsSync(catalogPath)) {
+        const st = statSync(catalogPath);
+        trackEntries.push({
+          rel: 'index.html',
+          size: st.size,
+          localAbs: catalogPath,
+          remoteAbs: `/${track}/index.html`,
+          kind: 'catalog',
+        });
+      }
+    }
+    manifest.tracks[track] = trackEntries;
+    manifest.totalFiles += trackEntries.length;
+    manifest.totalBytes += trackEntries.reduce((sum, e) => sum + e.size, 0);
   }
   return manifest;
 }
@@ -259,11 +292,13 @@ async function main() {
   const dryRun = argv.includes('--dry-run');
   const json = argv.includes('--json');
   const noVerify = argv.includes('--no-verify');
+  const includeCatalogIndex = argv.includes('--include-catalog-index');
   const version = argv.find((a) => !a.startsWith('--') && a !== process.argv[1]);
 
   if (!validateVersion(version)) {
-    console.error('Usage: node tools/ftp-sync.mjs <version> [--dry-run] [--json]');
+    console.error('Usage: node tools/ftp-sync.mjs <version> [--dry-run] [--json] [--no-verify] [--include-catalog-index]');
     console.error('Example: node tools/ftp-sync.mjs 1.71');
+    console.error('  --include-catalog-index also uploads NASA/MUS/ELC catalog index.html (one level up from version dir)');
     process.exit(2);
   }
 
@@ -278,7 +313,7 @@ async function main() {
     process.exit(2);
   }
 
-  const manifest = buildManifest(REPO_ROOT, version);
+  const manifest = buildManifest(REPO_ROOT, version, { includeCatalogIndex });
   if (manifest.missingTracks.length === TRACKS.length) {
     console.error(`No source dirs for v${version}: missing ${manifest.missingTracks.join(', ')}`);
     process.exit(3);
@@ -291,6 +326,12 @@ async function main() {
       console.log(`  Missing locally (skipped): ${manifest.missingTracks.join(', ')}`);
     }
     console.log(`  Files: ${manifest.totalFiles} / Bytes: ${manifest.totalBytes}`);
+    if (includeCatalogIndex) {
+      const catalogCount = Object.values(manifest.tracks)
+        .flat()
+        .filter((e) => e.kind === 'catalog').length;
+      console.log(`  Catalog indexes included: ${catalogCount} (--include-catalog-index)`);
+    }
     console.log(`  Mode: ${dryRun ? 'DRY-RUN' : 'EXECUTE'}`);
     console.log('');
   }
