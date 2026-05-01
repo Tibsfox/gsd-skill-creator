@@ -181,7 +181,7 @@ npm run version:check                   # equivalent check
 
 The CI harness-integrity test FAILS if any manifest version drifts independently. v1.49.588 ship pipeline manually bumped 2 of 4 manifests; CI run 25148062618 caught the drift; commit `d30668660` was the correction-after-detection. Closes Lesson #10187 candidate. Tests at `scripts/__tests__/bump-version.test.mjs` (run via `npx vitest run --config vitest.tools.config.mjs`).
 
-**W2 build-agent dispatch discipline (added v1.49.589 T2.4):** When dispatching W2 build agents (NASA / MUS / ELC index.html builders), use the prompt template at `.planning/missions/template-files/W2-build-agent-prompt.md`. Key rules:
+**W2 build-agent dispatch discipline (added v1.49.589 T2.4; elevated to MANDATORY at v1.49.591 T2.3):** When dispatching W2 build agents (NASA / MUS / ELC index.html builders), use the prompt template at `.planning/missions/template-files/W2-build-agent-prompt.md`. **MANDATORY** as of v1.49.591 — soaked across 4 consecutive successful applications (v1.49.587/588/589/590); future automation may gate this template's use deterministically. Emergency override: `SC_W2_DISPATCH_OVERRIDE=1` (advisory; doc-only). Key rules:
 - **Output token cap discipline:** use incremental Edit operations (3-12 per file) for files >100 lines; single Write only for new files <800 lines. The 32K output token cap can silently truncate a single Write (v1.49.588 ELC 1.69 attempted single-Write → 0 bytes).
 - **Dispatch order:** serial-then-parallel — dispatch W2-NASA first (largest at ~80K tokens); after NASA completes, dispatch W2-MUS + W2-ELC in parallel (~40K each). Eliminates the v1.49.588 quota-collision failure mode (Lesson #10185 candidate).
 
