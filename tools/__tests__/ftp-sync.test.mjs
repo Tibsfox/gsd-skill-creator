@@ -26,6 +26,8 @@ import {
   validateEnv,
   walkDir,
   buildManifest,
+  pickVerificationSample,
+  remotePathToUrl,
 } from '../ftp-sync.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -197,5 +199,65 @@ describe('buildManifest', () => {
     const m = buildManifest(tmpRoot, version);
     expect(m.tracks.NASA[0].localAbs).toContain(tmpRoot);
     expect(m.tracks.NASA[0].localAbs).toContain('NASA/1.71/index.html');
+  });
+});
+
+describe('pickVerificationSample (Lesson #10203 verification probe)', () => {
+  function buildSyntheticManifest() {
+    const version = '1.71';
+    for (const track of ['NASA', 'MUS', 'ELC']) {
+      const dir = join(tmpRoot, 'www', 'tibsfox', 'com', 'Research', track, version);
+      mkdirSync(join(dir, 'sub'), { recursive: true });
+      writeFileSync(join(dir, 'index.html'), 'i');
+      writeFileSync(join(dir, 'data.json'), '{}');
+      writeFileSync(join(dir, 'sub', 'nested.html'), 'n');
+    }
+    return buildManifest(tmpRoot, version);
+  }
+
+  it('always includes index.html for each present track', () => {
+    const m = buildSyntheticManifest();
+    const sample = pickVerificationSample(m);
+    const indexes = sample.filter((s) => s.rel === 'index.html');
+    expect(indexes.length).toBe(3);
+    const tracks = new Set(indexes.map((s) => s.remoteAbs.split('/')[1]));
+    expect(tracks.has('NASA')).toBe(true);
+    expect(tracks.has('MUS')).toBe(true);
+    expect(tracks.has('ELC')).toBe(true);
+  });
+
+  it('caps sample size at sampleSize parameter', () => {
+    const m = buildSyntheticManifest();
+    const sample = pickVerificationSample(m, 5);
+    expect(sample.length).toBeLessThanOrEqual(5);
+  });
+
+  it('produces unique entries (no duplicate remoteAbs)', () => {
+    const m = buildSyntheticManifest();
+    const sample = pickVerificationSample(m, 5);
+    const remotes = sample.map((s) => s.remoteAbs);
+    expect(remotes.length).toBe(new Set(remotes).size);
+  });
+
+  it('returns empty when manifest has zero tracks', () => {
+    const empty = { tracks: {}, totalFiles: 0, totalBytes: 0, missingTracks: [] };
+    expect(pickVerificationSample(empty)).toEqual([]);
+  });
+});
+
+describe('remotePathToUrl', () => {
+  it('builds canonical tibsfox URL from remoteAbs', () => {
+    expect(remotePathToUrl('/NASA/1.71/index.html'))
+      .toBe('https://tibsfox.com/Research/NASA/1.71/index.html');
+  });
+
+  it('respects custom baseUrl', () => {
+    expect(remotePathToUrl('/NASA/1.71/index.html', 'https://example.com/path'))
+      .toBe('https://example.com/path/NASA/1.71/index.html');
+  });
+
+  it('strips trailing slash from baseUrl to avoid double-slash', () => {
+    expect(remotePathToUrl('/MUS/1.71/x.html', 'https://example.com/Research/'))
+      .toBe('https://example.com/Research/MUS/1.71/x.html');
   });
 });
