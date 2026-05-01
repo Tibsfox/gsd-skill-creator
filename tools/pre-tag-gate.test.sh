@@ -55,24 +55,26 @@ else
   fail "bash syntax check failed"
 fi
 
-# Test 3: contains expected step labels (5 steps as of v1.49.587)
-if grep -q "step 1/5: npm run build" "$GATE" \
-   && grep -q "step 2/5: npx vitest run" "$GATE" \
-   && grep -q "step 3/5: release-notes completeness" "$GATE" \
-   && grep -q "step 4/5: CI-on-dev verification" "$GATE" \
-   && grep -q "step 5/5: www-bundles freshness" "$GATE"; then
-  ok "all 5 step labels present"
+# Test 3: contains expected step labels (6 steps as of v1.49.589; depth-audit added)
+if grep -q "step 1/6: npm run build" "$GATE" \
+   && grep -q "step 2/6: npx vitest run" "$GATE" \
+   && grep -q "step 3/6: release-notes completeness" "$GATE" \
+   && grep -q "step 4/6: CI-on-dev verification" "$GATE" \
+   && grep -q "step 5/6: www-bundles freshness" "$GATE" \
+   && grep -q "step 6/6: depth-audit" "$GATE"; then
+  ok "all 6 step labels present"
 else
   fail "step labels missing or wrong count"
 fi
 
-# Test 4: contains expected exit codes (1..5 as of v1.49.587)
+# Test 4: contains expected exit codes (1..6 as of v1.49.591; depth-audit BLOCKER)
 if grep -q "exit 1" "$GATE" \
    && grep -q "exit 2" "$GATE" \
    && grep -q "exit 3" "$GATE" \
    && grep -q "exit 4" "$GATE" \
-   && grep -q "exit 5" "$GATE"; then
-  ok "exit codes 1/2/3/4/5 documented"
+   && grep -q "exit 5" "$GATE" \
+   && grep -q "exit 6" "$GATE"; then
+  ok "exit codes 1/2/3/4/5/6 documented"
 else
   fail "exit codes missing"
 fi
@@ -118,6 +120,20 @@ if grep -q 'gh run list' "$GATE"; then
   ok "gate uses gh CLI for CI-on-dev"
 else
   fail "gate does not call gh run list"
+fi
+
+# Test 11: SC_SKIP_DEPTH_AUDIT override supported (v1.49.591 BLOCKER hardening)
+if grep -q 'SC_SKIP_DEPTH_AUDIT' "$GATE"; then
+  ok "SC_SKIP_DEPTH_AUDIT override supported"
+else
+  fail "SC_SKIP_DEPTH_AUDIT override missing"
+fi
+
+# Test 12: depth-audit step 6 in BLOCKER mode (exits 6 on FAIL/MISSING)
+if grep -q 'exit 6' "$GATE" && grep -q 'depth-audit' "$GATE"; then
+  ok "depth-audit BLOCKER mode (exits 6 on FAIL/MISSING)"
+else
+  fail "depth-audit BLOCKER mode not wired"
 fi
 
 echo ""
