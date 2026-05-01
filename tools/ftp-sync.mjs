@@ -18,20 +18,31 @@
  *     → remote `/{NASA,MUS,ELC}/<version>/...`
  *
  * Usage:
- *   node tools/ftp-sync.mjs <version>            # push v<version> dirs
- *   node tools/ftp-sync.mjs <version> --dry-run  # list files, no upload
- *   node tools/ftp-sync.mjs <version> --json     # machine-readable summary
+ *   node tools/ftp-sync.mjs <version>             # push + verify
+ *   node tools/ftp-sync.mjs <version> --dry-run   # list files, no upload
+ *   node tools/ftp-sync.mjs <version> --json      # machine-readable summary
+ *   node tools/ftp-sync.mjs <version> --no-verify # skip post-upload HTTPS probe
  *
  *   npm run ftp-sync -- 1.71
- *   npm run ftp-sync -- 1.71 --dry-run
+ *   npm run ftp-sync:dry-run -- 1.71
  *
  * Exit codes:
- *   0  all files PUT successfully (or dry-run completed)
- *   1  one or more PUT failures
+ *   0  all files PUT + verified successfully (or dry-run completed)
+ *   1  one or more PUT failures OR verification failures
  *   2  invalid arguments OR .env missing required keys
  *   3  local source dir(s) missing for the requested version
+ *   4  PUT succeeded but verification probe found 404s (drift detection)
+ *
+ * Verification probe (added v1.49.590 post-ship; closes Lesson #10203 candidate):
+ * After uploads complete, the tool issues HTTPS HEAD requests to a sample of
+ * uploaded files (default: index.html for each track + 2 random files). If any
+ * probe returns non-200, exit code 4 is raised. The probe URL is constructed
+ * from FTP_PUBLIC_BASE_URL (defaults to https://tibsfox.com/Research). This
+ * catches the v1.49.589 silent-failure mode where the ad-hoc Python ftplib
+ * script reported "ALL PASS" but v1.70 NASA + MUS + ELC dirs never landed.
  *
  * Authored 2026-04-30 in v1.49.590 W0 component T2.1.
+ * Verification probe added 2026-04-30 post-ship after v1.70 404 incident.
  */
 
 import { readFileSync, existsSync, statSync, readdirSync } from 'node:fs';
@@ -161,6 +172,62 @@ export function validateEnv(env) {
   return { ok: true };
 }
 
+/**
+ * Pick the sample of uploaded files to verify via HTTPS HEAD.
+ * Default sample: index.html for each present track + 2 random files (one from
+ * NASA artifacts/ if present + one random from any track). Up to 5 probes.
+ *
+ * Returns array of { remoteAbs, size } items.
+ */
+export function pickVerificationSample(manifest, sampleSize = 5) {
+  const sample = [];
+  const seen = new Set();
+  const add = (item) => {
+    if (!item || seen.has(item.remoteAbs)) return;
+    seen.add(item.remoteAbs);
+    sample.push(item);
+  };
+  for (const track of Object.keys(manifest.tracks)) {
+    const files = manifest.tracks[track];
+    const idx = files.find((f) => f.rel === 'index.html');
+    if (idx) add(idx);
+  }
+  const allFiles = Object.values(manifest.tracks).flat();
+  while (sample.length < sampleSize && sample.length < allFiles.length) {
+    const f = allFiles[Math.floor(Math.random() * allFiles.length)];
+    add(f);
+  }
+  return sample;
+}
+
+/**
+ * Translate a remote FTP path to a public URL.
+ * remoteAbs format: /<TRACK>/<version>/<path>
+ * URL format: <baseUrl>/<TRACK>/<version>/<path>
+ *
+ * baseUrl defaults to https://tibsfox.com/Research per FTP root → URL mapping.
+ * Override via FTP_PUBLIC_BASE_URL env var.
+ */
+export function remotePathToUrl(remoteAbs, baseUrl = 'https://tibsfox.com/Research') {
+  return baseUrl.replace(/\/$/, '') + remoteAbs;
+}
+
+/**
+ * HEAD-probe a URL. Returns { url, status, ok } where ok = (status === 200).
+ * Uses Node's built-in fetch (>= Node 18).
+ */
+export async function probeUrl(url, timeoutMs = 10000) {
+  try {
+    const ac = new AbortController();
+    const t = setTimeout(() => ac.abort(), timeoutMs);
+    const res = await fetch(url, { method: 'HEAD', signal: ac.signal });
+    clearTimeout(t);
+    return { url, status: res.status, ok: res.status === 200 };
+  } catch (err) {
+    return { url, status: 0, ok: false, error: String(err.message || err) };
+  }
+}
+
 async function pushTrack(client, trackName, files, opts) {
   const results = [];
   for (const f of files) {
@@ -191,6 +258,7 @@ async function main() {
   const argv = process.argv.slice(2);
   const dryRun = argv.includes('--dry-run');
   const json = argv.includes('--json');
+  const noVerify = argv.includes('--no-verify');
   const version = argv.find((a) => !a.startsWith('--') && a !== process.argv[1]);
 
   if (!validateVersion(version)) {
@@ -259,6 +327,41 @@ async function main() {
   const uploads = allResults.filter((r) => r.status === 'uploaded');
   const totalUploadedBytes = uploads.reduce((s, r) => s + r.size, 0);
 
+  // Post-upload HTTPS verification probe (Lesson #10203)
+  let verification = { skipped: true, probes: [], failures: 0 };
+  if (!dryRun && !noVerify && uploads.length > 0) {
+    const baseUrl = env.FTP_PUBLIC_BASE_URL || 'https://tibsfox.com/Research';
+    const sample = pickVerificationSample(manifest);
+    if (!json) {
+      console.log('');
+      console.log(`=== verification probe (${sample.length} HEAD requests to ${baseUrl}) ===`);
+    }
+    const probes = [];
+    for (const f of sample) {
+      const url = remotePathToUrl(f.remoteAbs, baseUrl);
+      const result = await probeUrl(url);
+      probes.push(result);
+      if (!json) {
+        const tag = result.ok ? '[verified]' : '[DRIFT]';
+        console.log(`${tag} ${result.status}  ${url}`);
+      }
+    }
+    const probeFailures = probes.filter((p) => !p.ok);
+    verification = {
+      skipped: false,
+      sample_size: sample.length,
+      probes,
+      failures: probeFailures.length,
+    };
+    if (!json && probeFailures.length > 0) {
+      console.log('');
+      console.log('  ⚠ DRIFT DETECTED — uploaded files not reachable via HTTPS:');
+      for (const p of probeFailures) {
+        console.log(`    ${p.status} ${p.url}${p.error ? ` (${p.error})` : ''}`);
+      }
+    }
+  }
+
   if (json) {
     console.log(JSON.stringify({
       version,
@@ -269,6 +372,7 @@ async function main() {
       uploaded_bytes: totalUploadedBytes,
       failures: failures.length,
       missing_tracks: manifest.missingTracks,
+      verification,
     }, null, 2));
   } else {
     console.log('');
@@ -276,6 +380,9 @@ async function main() {
     console.log(`  Uploaded: ${uploads.length} / ${manifest.totalFiles} files`);
     console.log(`  Bytes:    ${totalUploadedBytes} / ${manifest.totalBytes}`);
     console.log(`  Failed:   ${failures.length}`);
+    if (!verification.skipped) {
+      console.log(`  Verified: ${verification.sample_size - verification.failures} / ${verification.sample_size} probes (${verification.failures} drift)`);
+    }
     if (failures.length > 0) {
       console.log('  Failures:');
       for (const f of failures) {
@@ -284,7 +391,9 @@ async function main() {
     }
   }
 
-  process.exit(failures.length > 0 ? 1 : 0);
+  if (failures.length > 0) process.exit(1);
+  if (verification.failures > 0) process.exit(4);
+  process.exit(0);
 }
 
 // Only run main() when invoked directly (not when imported by tests).
