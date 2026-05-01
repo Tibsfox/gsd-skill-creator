@@ -19,13 +19,15 @@
 #                       `index.js`. Idempotent. Added v1.49.587 — closes the
 #                       v1.49.581 unwired-build gap that left 126 SPICE
 #                       viewer pages broken on tibsfox.com.
-#   6. Depth audit (warning-only) — flags sibling NASA/MUS/ELC index.html
-#                       files at <80% predecessor line/byte depth. Closes
-#                       Lesson #10188 candidate from v1.49.588 §5: W2-quota
-#                       depth gap that required ad-hoc rebuild of 6 files.
-#                       Added v1.49.589 in WARNING-only mode; will harden to
-#                       BLOCKER after 2 milestones of soak. Override:
-#                       SC_SKIP_DEPTH_AUDIT=1 (harmless until step is hardened).
+#   6. Depth audit (BLOCKER as of v1.49.591) — flags sibling NASA/MUS/ELC
+#                       index.html files at <80% predecessor line/byte depth.
+#                       Closes Lesson #10188 candidate from v1.49.588 §5:
+#                       W2-quota depth gap that required ad-hoc rebuild of 6
+#                       files. Added v1.49.589 in WARNING-only mode; soaked
+#                       across v1.49.589 + v1.49.590 with zero FAIL findings;
+#                       hardened to BLOCKER at v1.49.591 per T2.2. Override:
+#                       SC_SKIP_DEPTH_AUDIT=1 (emergency only — fix the
+#                       depth gap instead).
 #
 # Exit codes:
 #   0  all checks PASS
@@ -34,7 +36,7 @@
 #   3  completeness gate failed
 #   4  CI-on-dev failed / pending (SC_SKIP_CI_GATE=1 overrides)
 #   5  www-bundles build failed
-#   6  depth-audit failed (only when --strict mode is hardened; warning-only at v1.49.589)
+#   6  depth-audit FAIL findings (BLOCKER as of v1.49.591; SC_SKIP_DEPTH_AUDIT=1 overrides)
 #
 # Usage:
 #   bash tools/pre-tag-gate.sh
@@ -168,23 +170,23 @@ if ! bash "$REPO_ROOT/tools/build-www-bundles.sh" >/dev/null 2>&1; then
 fi
 log "[pre-tag-gate] step 5/6: PASS"
 
-# ----- step 6/6: depth-audit (WARNING-only at v1.49.589; closes Lesson #10188) -----
+# ----- step 6/6: depth-audit (BLOCKER as of v1.49.591; closes Lesson #10188) -----
 SKIP_DEPTH="${SC_SKIP_DEPTH_AUDIT:-0}"
 if [ "$SKIP_DEPTH" = "1" ]; then
   log "[pre-tag-gate] step 6/6: SKIPPED (SC_SKIP_DEPTH_AUDIT=1)"
 else
-  log "[pre-tag-gate] step 6/6: depth-audit (WARNING-only — soaking 2 milestones)"
-  # Resolve current NASA-degree-form version from STATE.md
+  log "[pre-tag-gate] step 6/6: depth-audit (BLOCKER mode — hardened at v1.49.591)"
   if [ -f "$REPO_ROOT/.planning/STATE.md" ]; then
     DEPTH_OUT="$(node "$REPO_ROOT/tools/depth-audit.mjs" --current 2>&1)" || true
     if echo "$DEPTH_OUT" | grep -qE '(FAIL|MISSING)'; then
-      echo "[pre-tag-gate] WARNING: depth-audit reported issues (not blocking; warning-only at v1.49.589):" >&2
+      echo "[pre-tag-gate] FAIL: depth-audit reported FAIL/MISSING findings:" >&2
       echo "$DEPTH_OUT" | grep -E '\[(X |!!|OK)\]' >&2 || echo "$DEPTH_OUT" >&2
-      echo "[pre-tag-gate]   To suppress: SC_SKIP_DEPTH_AUDIT=1" >&2
-      echo "[pre-tag-gate]   Hardens to BLOCKER at v1.49.591+." >&2
-    else
-      log "[pre-tag-gate] step 6/6: PASS (depth-audit clean)"
+      echo "[pre-tag-gate]   Author the missing/under-depth files BEFORE tagging." >&2
+      echo "[pre-tag-gate]   See template-files/W2-build-agent-prompt.md for the dispatch pattern." >&2
+      echo "[pre-tag-gate]   Override (emergency only — almost never the right call): SC_SKIP_DEPTH_AUDIT=1" >&2
+      exit 6
     fi
+    log "[pre-tag-gate] step 6/6: PASS (depth-audit clean)"
   else
     log "[pre-tag-gate] step 6/6: SKIPPED (.planning/STATE.md absent — cannot derive version)"
   fi
