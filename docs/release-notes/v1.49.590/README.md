@@ -22,7 +22,7 @@ v1.49.590 advances NASA from 1.70 (Apollo 6 / UPV 2-ex reproducibly-stable) to *
 
 **Track 5** — Operational-debt fold-in: **3 lesson-candidate items closed** (#10194 inline-recovery doc + #10195 FTP sync tool repo-promotion + #10196 gh CLI path-resolution workaround). New `tools/ftp-sync.mjs` (18 vitest assertions) + `npm run ftp-sync` + CLAUDE.md ship-pipeline expansions covering all 3 items.
 
-**Track 6** — TRS M0 Wave 1b retry + Wave 1c: 7 packs total (05/06/07 retry from v1.49.589 deferral + 09/10/11/12 new). Dispatched per Lesson #10191 4-batch sequential discipline (≤2 concurrent Sonnets, ≥3-min spacing, <150K tokens aggregate per batch). Three new lesson candidates emit at v1.49.590 (TBD #10197+).
+**Track 6** — TRS M0 Wave 1b retry COMPLETE (3-of-3 packs landed; +59 master.json records: pack-05 +20 / pack-06 +8 / pack-07 +31; master.json 137 → 196). Wave 1c (packs 09/10/11/12) DEFERRED to v1.49.591 due to Anthropic Sonnet quota exhaustion at Batch C dispatch (resets ~18:50 PDT same-day). The deferred-item directive from v1.49.589 §6 #1 is satisfied by Wave 1b retry; Wave 1c was v1.49.590-native scope per TRS-EXECUTION-MAP.md but not part of the deferred-items mandate. Four forward lessons emit at v1.49.590 (#10197 cadence soak / #10198 mid-mission MUS anchor / #10199 brief-error load-bearing / #10200 arXiv-direct-API 429 fallback canonical).
 
 ## Structural firsts
 
@@ -38,7 +38,7 @@ v1.49.590 advances NASA from 1.70 (Apollo 6 / UPV 2-ex reproducibly-stable) to *
 
 ## Forward lessons emitted
 
-#10197 #10198 #10199
+#10197 #10198 #10199 #10200
 
 (See `chapter/04-lessons.md` for full lesson definitions and 3-criterion rubrics.)
 

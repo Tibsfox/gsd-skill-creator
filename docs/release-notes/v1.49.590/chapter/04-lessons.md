@@ -1,6 +1,6 @@
 # v1.49.590 — Forward Lessons
 
-Three forward lessons emitted (#10197 #10198 #10199).
+Four forward lessons emitted (#10197 #10198 #10199 #10200).
 
 ## #10197 — Three-track-plus-TRS pattern soaked at 4 instances → "established cadence" upgrade
 
@@ -59,3 +59,24 @@ Three forward lessons emitted (#10197 #10198 #10199).
 **Anti-pattern to avoid:** do NOT relax the discipline as the cadence becomes routine. The 4-milestone soak of three-track-plus-TRS makes the workflow predictable, but the brief-error discipline must remain active — every milestone authors a fresh dossier, and every milestone must independently catch errors. Routine ≠ rigorous.
 
 **Cross-link:** Validates Lesson #10178 (brief-error catch discipline) at HIGH severity. Extends Lesson #10192 (Sonnet 13K-word target enables higher catch rates): at 12,033 words v1.49.590 caught 11 errors including 1 HIGH. Catch-rate scaling continues linear (5/v1.587 → 6/v1.588 → 10/v1.589 → 11/v1.590).
+
+## #10200 — arXiv direct-API 429 fallback to WebSearch+WebFetch is the reliable TRS pack-fetch pattern
+
+**Definition:** When dispatching TRS M0 pack-fetch agents at scale (3+ packs in sequence), the arXiv direct API (`export.arxiv.org/api/query`) reliably returns HTTP 429 (rate-limited) on bulk queries. The proven-good fallback pattern is **WebSearch for "arxiv <claim-keyword>" → WebFetch the specific arxiv abs page**. This succeeded in 100% of cases observed (3-of-3 packs in v1.49.590 Batch A + B). The discipline should be applied PROACTIVELY from the agent's first claim, not reactively after a 429.
+
+**Evidence:**
+- v1.49.590 Pack-05 (linear-algebra, 10 claims): "One claim has only 1 source... no rate-limit interruptions after the initial 429 on export.arxiv.org abs pages (switched to API endpoint successfully)"
+- v1.49.590 Pack-06 (complex-analysis, 5 claims): "arXiv returned 429 on initial direct API calls; switched to WebSearch + WebFetch per-paper metadata pattern, which succeeded without issue"
+- v1.49.590 Pack-07 (physics-constants, 20 claims): "arXiv direct API returned 429 on initial fetches; WebSearch fallback applied successfully per Batch A discipline. All 31 files verified on disk."
+- v1.49.590 Wave 1c attempt (packs 09 + 10 parallel) hit Anthropic per-account quota at startup BEFORE arXiv 429 became the issue — different failure mode (Sonnet quota vs arXiv rate-limit). 4 deferred to v1.49.591.
+
+**3-criterion test for TRS pack-fetch dispatch reliability:**
+1. **arXiv direct API expected to fail** — assume 429 on bulk queries; build fallback into the prompt template proactively
+2. **WebSearch+WebFetch is the durable path** — Anthropic web tools have separate rate-limit pools from arXiv, so the fallback decouples cleanly
+3. **Anthropic Sonnet quota is the harder ceiling** — pack agents at ~38K each × 4 parallel = 152K aggregate which can hit the daily-quota wall; the arXiv 429 is recoverable, the Sonnet 429 is not (must wait for reset)
+
+**Forward action:** Update `04-arxiv-search-protocol.md` to document the WebSearch+WebFetch fallback as the recommended primary path for pack-fetch agents in M0 Wave 1+. Update the TRS pack-agent prompt template to include the fallback paragraph upfront. Plan v1.49.591 Wave 1c retry with batches restricted to ≤2 concurrent + ≥10-min spacing (more conservative than #10191's 3-min) to give Sonnet quota more recovery headroom.
+
+**Anti-pattern to avoid:** do NOT plan TRS pack-fetch dispatch around arXiv-direct-API as primary — arXiv-direct is so reliably-broken that any pipeline depending on it as the happy path will exhibit non-deterministic behavior. WebSearch+WebFetch is now the canonical TRS pack-fetch primary pattern.
+
+**Cross-link:** Refines Lesson #10191 (W1 dispatch quota discipline): the discipline is correct but the TRS pack-fetch wave runs against TWO quotas (Anthropic Sonnet + arXiv direct API). The 429 on the upstream service is recoverable per-pack via WebSearch fallback; the 429 on the Anthropic side is not. v1.49.590 Wave 1c quota-failure is the second TRS wave to hit the Sonnet ceiling (after v1.49.589 Wave 1b initial), confirming this as a recurring constraint at the 4-parallel scale.

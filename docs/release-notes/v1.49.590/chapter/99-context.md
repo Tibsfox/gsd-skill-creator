@@ -92,8 +92,8 @@
 
 | Milestone | NASA | TRS | Track 2 carryover |
 |---|---|---|---|
-| **v1.49.590 (this)** | Apollo 7 1.71 | M0 Wave 1b retry (05/06/07) + Wave 1c (09-12) = 7 packs | (none — clean Track 2 close) |
-| v1.49.591 | Apollo 8 1.72 (first-crewed Saturn V; first-crewed translunar; ALL-UP COMMITMENT 2nd-ex candidate) | M0 Wave 1d packs 13-16 | depth-audit hardening to BLOCKER (T2.3 follow-on); W2-prompt MANDATORY upgrade |
+| **v1.49.590 (this)** | Apollo 7 1.71 | M0 Wave 1b retry COMPLETE (05/06/07; +59 records); **Wave 1c packs 09-12 DEFERRED to v1.49.591** (Anthropic Sonnet quota exhaustion at Batch C) | (none — clean Track 2 close) |
+| v1.49.591 | Apollo 8 1.72 (first-crewed Saturn V; first-crewed translunar; ALL-UP COMMITMENT 2nd-ex candidate) | M0 Wave 1c retry (packs 09-12) + Wave 1d (packs 13-16) = 8 packs total per #10200 dispatch discipline (≤2 concurrent + ≥10-min spacing) | depth-audit hardening to BLOCKER (T2.3 follow-on); W2-prompt MANDATORY upgrade |
 | v1.49.592 | Apollo 9 1.73 (first-crewed LM; UPV outcome-validation of Apollo 5) | M0 Wave 1e packs 17-22 | TBD |
 | v1.49.593-595 | Apollo 10/11/12 | M0 Wave 2a/2b/2c synthesis | first-lunar-landing at v1.75 Apollo 11 |
 
