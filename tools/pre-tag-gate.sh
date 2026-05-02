@@ -175,9 +175,9 @@ SKIP_DEPTH="${SC_SKIP_DEPTH_AUDIT:-0}"
 if [ "$SKIP_DEPTH" = "1" ]; then
   log "[pre-tag-gate] step 6/6: SKIPPED (SC_SKIP_DEPTH_AUDIT=1)"
 else
-  log "[pre-tag-gate] step 6/6: depth-audit (BLOCKER mode — hardened at v1.49.591)"
+  log "[pre-tag-gate] step 6/6: depth-audit (BLOCKER mode — hardened at v1.49.591; cross-link strict at v1.49.595+)"
   if [ -f "$REPO_ROOT/.planning/STATE.md" ]; then
-    DEPTH_OUT="$(node "$REPO_ROOT/tools/depth-audit.mjs" --current 2>&1)" || true
+    DEPTH_OUT="$(node "$REPO_ROOT/tools/depth-audit.mjs" --current --cross-link-strict 2>&1)" || true
     if echo "$DEPTH_OUT" | grep -qE '(FAIL|MISSING)'; then
       echo "[pre-tag-gate] FAIL: depth-audit reported FAIL/MISSING findings:" >&2
       echo "$DEPTH_OUT" | grep -E '\[(X |!!|OK)\]' >&2 || echo "$DEPTH_OUT" >&2
