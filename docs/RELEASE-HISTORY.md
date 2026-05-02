@@ -1,15 +1,16 @@
 # Release History
 
-636 milestones shipped across the v1.0 → v1.49.593 arc. The table below lists every shipped release, newest first.
+637 milestones shipped across the v1.0 → v1.49.594 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions, and where available, retrospectives and lessons learned. `Commits` is the count of commits between this tag and the previous tag (from git). `Phases` and `Plans` come from structured GSD metadata in the release README — most content/patch releases don't have these. `Retro` links to the retrospective chapter when present. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 636 releases · 626 with retrospectives · 626 with extracted lessons · quality A:624 B:3 C:3 D:3 F:3 (avg 97) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 637 releases · 626 with retrospectives · 626 with extracted lessons · quality A:624 B:3 C:3 D:3 F:4 (avg 97) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Retro | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|-------|---------|---------|-------|
+| [v1.49.594](release-notes/v1.49.594) | Apollo 11 (NASA degree 1.75 FIRST LUNAR LANDING) | 2026-05-02 | 11 | — | — | — | — | F 7 |  |
 | [v1.49.593](release-notes/v1.49.593) | Apollo 10 (NASA degree 1.74 lunar-orbit dress rehearsal) | 2026-05-01 | 3 | — | — | — | — | F 7 |  |
 | [v1.49.592](release-notes/v1.49.592) | Apollo 9 (NASA degree 1.73 first-crewed LM Earth-orbit shakedown) | 2026-05-01 | 4 | — | — | — | — | F 7 |  |
 | [v1.49.591](release-notes/v1.49.591) | Apollo 8 (NASA degree 1.72 first-crewed Saturn V + first-crewed translunar) + White Album + S-IVB J-2 restart sequencer + Common Raven + 3 operational-debt fold-ins + TRS Wave 1d | 2026-04-30 | 9 | — | — | — | — | C 72 |  |
