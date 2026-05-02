@@ -91,6 +91,19 @@ const ARTIFACT_PASS_THRESHOLD = 10;     // ≥10 files = PASS
 const ARTIFACT_WARN_THRESHOLD = 4;      // 4-9 files = WARN; <4 = FAIL
 const ARTIFACT_CATEGORY_PASS_THRESHOLD = 5; // 5/5 categories = PASS; 4/5 = WARN; <4 = FAIL
 
+// Cross-link coverage thresholds (added v1.49.594 W0 per #10222 candidate).
+// Per gold standard v1.69 + v1.70: every artifact file on disk is referenced
+// at least once via `<a href="artifacts/...">` from index.html (Creative
+// Artifacts + Runnable Simulations + track-card sections). v1.72/v1.73/v1.74
+// shipped with thin/empty/missing card-population — artifacts existed but
+// were invisible from the page. coverage = distinct-paths-referenced / files-on-disk.
+const CROSSLINK_PASS_RATIO = 0.80;      // ≥80% of artifacts referenced = PASS
+const CROSSLINK_WARN_RATIO = 0.50;      // 50-80% = WARN; <50% = FAIL
+// Soak mode: at v1.49.594 introduction, FAIL is downgraded to WARN in the
+// overall_status rollup unless `--cross-link-strict` is set. Flip the
+// pre-tag-gate.sh invocation to add `--cross-link-strict` at v1.49.595+ ship
+// (soak-then-harden pattern matching v1.49.591 depth-audit BLOCKER cutover).
+
 function previousVersion(v) {
   // "1.70" → "1.69"; "1.69" → "1.68"
   const m = v.match(/^(\d+)\.(\d+)$/);
@@ -170,6 +183,86 @@ function inspectArtifacts(track, version) {
   };
 }
 
+/**
+ * Inspect index.html cross-links to artifacts/ files (added v1.49.594 W0 #10222).
+ * Returns { count, distinctReferenced, totalOnDisk, coverage, status, missingPaths }
+ * or null if track is not NASA or there are no artifacts on disk.
+ *
+ * The check counts `<a href="artifacts/...">` references (any anchor — track-card,
+ * Creative Artifacts list, Runnable Simulations list, Forest Contribution prose),
+ * deduplicates by href path, then computes coverage = distinctReferenced / totalOnDisk.
+ *
+ * Status: PASS (≥80%) / WARN (50-80%) / FAIL (<50%) — per #10222 carry-forward fix.
+ */
+function inspectCrossLinks(track, version, artifactsInfo) {
+  if (track !== 'NASA') return null;
+  if (!artifactsInfo || artifactsInfo.status === 'MISSING') return null;
+  if (artifactsInfo.totalFiles === 0) return null;
+
+  const indexPath = indexHtmlPath(track, version);
+  if (!existsSync(indexPath)) return null;
+  const text = readFileSync(indexPath, 'utf8');
+
+  // Match every `href="artifacts/<path>"` reference. Capture the path so we
+  // can deduplicate. Tolerates surrounding attributes/spaces/single-quotes.
+  const hrefRe = /href=["']artifacts\/([^"'#?]+)["'#?]/g;
+  const distinct = new Set();
+  let count = 0;
+  let m;
+  while ((m = hrefRe.exec(text)) !== null) {
+    count++;
+    distinct.add(m[1]);
+  }
+
+  // Enumerate the artifact files on disk (relative to artifacts/) so we can
+  // identify which specific files lack a cross-link.
+  const artifactsDir = join(RESEARCH_ROOT, track, version, 'artifacts');
+  const onDiskPaths = new Set();
+  for (const cat of NASA_ARTIFACT_CATEGORIES) {
+    const catDir = join(artifactsDir, cat);
+    if (!existsSync(catDir)) continue;
+    let entries;
+    try {
+      entries = readdirSync(catDir, { withFileTypes: true });
+    } catch {
+      continue;
+    }
+    for (const e of entries) {
+      if (e.isFile()) onDiskPaths.add(`${cat}/${e.name}`);
+    }
+  }
+
+  const totalOnDisk = onDiskPaths.size;
+  // Count how many on-disk files have at least one matching reference. Use
+  // prefix-match so href="artifacts/circuits/foo.cir" counts foo.cir as
+  // referenced; href="artifacts/circuits/" alone does not.
+  let coveredOnDisk = 0;
+  const missingPaths = [];
+  for (const p of onDiskPaths) {
+    if (distinct.has(p)) {
+      coveredOnDisk++;
+    } else {
+      missingPaths.push(p);
+    }
+  }
+  const coverage = totalOnDisk > 0 ? coveredOnDisk / totalOnDisk : 1.0;
+
+  let status;
+  if (coverage >= CROSSLINK_PASS_RATIO) status = 'PASS';
+  else if (coverage >= CROSSLINK_WARN_RATIO) status = 'WARN';
+  else status = 'FAIL';
+
+  return {
+    count,
+    distinctReferenced: distinct.size,
+    coveredOnDisk,
+    totalOnDisk,
+    coverage,
+    status,
+    missingPaths: missingPaths.sort(),
+  };
+}
+
 function inspectFile(path, track) {
   if (!existsSync(path)) return null;
   const text = readFileSync(path, 'utf8');
@@ -209,6 +302,7 @@ function classify(currMetric, prevMetric, opts = {}) {
 
 function auditVersion(version, opts = {}) {
   const compositePass = opts.compositePass === true;
+  const crossLinkStrict = opts.crossLinkStrict === true;
   const prevVersion = previousVersion(version);
   if (!prevVersion) {
     console.error(`[depth-audit] cannot determine predecessor for ${version}`);
@@ -261,21 +355,31 @@ function auditVersion(version, opts = {}) {
     const artifacts = inspectArtifacts(track, version);
     const artifactStatus = artifacts ? artifacts.status : 'PASS'; // MUS+ELC always PASS
 
+    // NASA-only: inspect cross-links from index.html → artifacts/ (v1.49.594+, #10222).
+    // During v1.49.594 soak: FAIL is downgraded to WARN unless --cross-link-strict is set.
+    const crossLinks = inspectCrossLinks(track, version, artifacts);
+    const crossLinkRawStatus = crossLinks ? crossLinks.status : 'PASS';
+    const crossLinkStatus = (!crossLinkStrict && crossLinkRawStatus === 'FAIL')
+      ? 'WARN'
+      : crossLinkRawStatus;
+
     // Roll up worst-case across all submetrics. MISSING (artifacts/ dir absent)
     // is treated as FAIL — the artifacts/ directory is mandatory for NASA tracks.
-    const allSignals = [status, sectionStatus, artifactStatus];
+    const allSignals = [status, sectionStatus, artifactStatus, crossLinkStatus];
     const overallStatus =
       allSignals.some(s => s === 'FAIL' || s === 'MISSING') ? 'FAIL' :
       allSignals.includes('WARN') ? 'WARN' : 'PASS';
 
     const baseMsg = `${(lineRatio * 100).toFixed(0)}% lines / ${(byteRatio * 100).toFixed(0)}% bytes / ${curr.sectionsFound}/${curr.sectionsExpected} ${track === 'NASA' ? 'canonical' : 'card-title'} sections`;
     const artifactMsg = artifacts ? ` / ${artifacts.totalFiles} artifacts ${artifacts.categoriesFound.length}/${artifacts.categoriesExpected} cat` : '';
+    const crossLinkMsg = crossLinks ? ` / ${crossLinks.coveredOnDisk}/${crossLinks.totalOnDisk} linked` : '';
     findings.push({
       track, file: currPath,
       status: overallStatus,
       curr,
       prev,
       artifacts,
+      crossLinks,
       ratios: {
         lines: lineRatio,
         bytes: byteRatio,
@@ -285,9 +389,12 @@ function auditVersion(version, opts = {}) {
         bytes: byteStatus,
         sections: sectionStatus,
         artifacts: artifactStatus,
+        crossLinks: crossLinkStatus,
+        crossLinksRaw: crossLinkRawStatus,
       },
       compositePassActive: useComposite,
-      message: `${overallStatus}${useComposite ? ' (composite)' : ''}: ${baseMsg}${artifactMsg}`,
+      crossLinkStrictActive: crossLinkStrict,
+      message: `${overallStatus}${useComposite ? ' (composite)' : ''}: ${baseMsg}${artifactMsg}${crossLinkMsg}`,
     });
   }
 
@@ -309,6 +416,18 @@ function formatReport(report) {
       const cats = f.artifacts.categoriesFound.join(',') || 'none';
       lines.push(`     artifacts: ${f.artifacts.status} — ${f.artifacts.totalFiles} files / ${f.artifacts.categoriesFound.length}/${f.artifacts.categoriesExpected} categories (have: ${cats})`);
     }
+    if (f.crossLinks && f.crossLinks.status !== 'PASS') {
+      const pct = (f.crossLinks.coverage * 100).toFixed(0);
+      const softNote = f.submetrics && f.submetrics.crossLinks !== f.submetrics.crossLinksRaw
+        ? ` (soft-mode: ${f.submetrics.crossLinksRaw} downgraded to ${f.submetrics.crossLinks})`
+        : '';
+      lines.push(`     cross-links: ${f.crossLinks.status} — ${f.crossLinks.coveredOnDisk}/${f.crossLinks.totalOnDisk} artifacts referenced (${pct}% coverage)${softNote}`);
+      if (f.crossLinks.missingPaths.length > 0 && f.crossLinks.missingPaths.length <= 6) {
+        lines.push(`     missing: ${f.crossLinks.missingPaths.join(', ')}`);
+      } else if (f.crossLinks.missingPaths.length > 6) {
+        lines.push(`     missing: ${f.crossLinks.missingPaths.slice(0, 5).join(', ')}, ... +${f.crossLinks.missingPaths.length - 5} more`);
+      }
+    }
   }
   return lines.join('\n');
 }
@@ -327,6 +446,7 @@ function main() {
   const json = args.includes('--json');
   const strict = args.includes('--strict');
   const compositePass = args.includes('--composite-pass');
+  const crossLinkStrict = args.includes('--cross-link-strict');
   const positional = args.filter(a => !a.startsWith('--'));
 
   let version;
@@ -347,13 +467,14 @@ function main() {
   } else if (positional.length === 1) {
     version = positional[0].replace(/^v/, '');
   } else {
-    console.error('Usage: depth-audit.mjs <version> | --current  [--json] [--strict] [--composite-pass]');
+    console.error('Usage: depth-audit.mjs <version> | --current  [--json] [--strict] [--composite-pass] [--cross-link-strict]');
     console.error('  version: NASA-degree form like "1.70" (not the npm "1.49.589" form)');
     console.error('  --composite-pass: when lines ≥ 95% AND sections meet threshold, relax bytes thresholds (per #10207)');
+    console.error('  --cross-link-strict: cross-link FAIL contributes FAIL to overall status (default: soak-mode WARN; per #10222)');
     process.exit(3);
   }
 
-  const report = auditVersion(version, { compositePass });
+  const report = auditVersion(version, { compositePass, crossLinkStrict });
 
   if (json) {
     console.log(JSON.stringify(report, null, 2));
