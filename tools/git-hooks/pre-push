@@ -26,13 +26,40 @@ if [ "${SC_SKIP_PREPUSH:-0}" = "1" ]; then
   exit 0
 fi
 
-# Read stdin; check for main-targeted pushes
+# Read stdin; check for main-targeted pushes + dev-targeted pushes
+# (latter is for the dev-behind-main drift advisory; closes Lesson #10221 candidate)
 PUSHING_TO_MAIN=0
+PUSHING_TO_DEV=0
 while IFS=' ' read -r local_ref local_sha remote_ref remote_sha; do
   if [ "$remote_ref" = "refs/heads/main" ]; then
     PUSHING_TO_MAIN=1
+  elif [ "$remote_ref" = "refs/heads/dev" ]; then
+    PUSHING_TO_DEV=1
   fi
 done
+
+# Dev-behind-main drift advisory (added v1.49.594 follow-up; closes Lesson #10221).
+# WARNS (does not block) when pushing dev if origin/main has commits dev doesn't.
+# Canonical fix: git checkout dev && git merge --ff-only main && git push origin dev
+# documented in CLAUDE.md "Dev/main sync after each main-merge" section.
+if [ "$PUSHING_TO_DEV" -eq 1 ]; then
+  REPO_ROOT="$(git rev-parse --show-toplevel)"
+  cd "$REPO_ROOT"
+  # Best-effort fetch (non-fatal if offline; sync check still uses cached origin/main)
+  git fetch origin main --quiet 2>/dev/null || true
+  if git rev-parse --verify origin/main >/dev/null 2>&1; then
+    BEHIND=$(git rev-list --count dev..origin/main 2>/dev/null || echo "0")
+    if [ "$BEHIND" -gt 0 ]; then
+      echo "[pre-push] WARN: dev is $BEHIND commits behind origin/main"
+      echo "  Fix:    git merge --ff-only main && git push origin dev"
+      echo "  See:    CLAUDE.md 'Dev/main sync after each main-merge' (HARD RULE)"
+      LOG_DIR="$(git rev-parse --git-dir)/hooks/.log"
+      mkdir -p "$LOG_DIR"
+      echo "{\"timestamp\":\"$(date -u +%FT%TZ)\",\"hook\":\"pre-push\",\"decision\":\"warn\",\"reason_category\":\"dev-behind-main\",\"behind_count\":$BEHIND}" \
+        >> "$LOG_DIR/pre-push.jsonl"
+    fi
+  fi
+fi
 
 if [ "$PUSHING_TO_MAIN" -eq 0 ]; then
   exit 0
