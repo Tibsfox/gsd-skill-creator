@@ -109,6 +109,8 @@ describe('T2.3 (v1.49.589): depth-audit script', () => {
     gold('MUS', '1.69', 600, 80000, 14);
     gold('ELC', '1.68', 600, 80000, 14);
     gold('ELC', '1.69', 600, 80000, 14);
+    // v1.49.593: artifact-suite check requires NASA artifacts/ present
+    makeArtifacts('1.69', { story: 2, shaders: 2, audio: 4, sims: 2, circuits: 3 });
     const r = runAudit('1.69', '--json');
     expect(r.code).toBe(0);
     const report = JSON.parse(r.stdout);
@@ -149,6 +151,8 @@ describe('T2.3 (v1.49.589): depth-audit script', () => {
     gold('MUS', '1.69', 600, 80000, 14);
     gold('ELC', '1.68', 600, 80000, 14);
     gold('ELC', '1.69', 600, 80000, 14);
+    // v1.49.593: artifact-suite check requires NASA artifacts/ present
+    makeArtifacts('1.69', { story: 2, shaders: 2, audio: 4, sims: 2, circuits: 3 });
     const r = runAudit('1.69', '--strict');
     expect(r.code).toBe(0);
   });
@@ -195,8 +199,209 @@ describe('T2.3 (v1.49.589): depth-audit script', () => {
     gold('MUS', '1.69', 800, 100000, 14);
     gold('ELC', '1.68', 800, 100000, 14);
     gold('ELC', '1.69', 800, 100000, 14);
+    // v1.49.593: artifact-suite check requires NASA artifacts/ present
+    makeArtifacts('1.69', { story: 2, shaders: 2, audio: 4, sims: 2, circuits: 3 });
     const r = runAudit('1.69');
     expect(r.stdout).toMatch(/PASS/);
     expect(r.stdout).toMatch(/Summary: PASS=3/);
+  });
+});
+
+// T2.1 (v1.49.593): NASA artifacts/ canonical 13-file suite enforcement
+// (closes Lesson #10213 candidate from v1.49.592 close — USER-FLAGGED 2026-05-01).
+function makeArtifacts(version, fileCounts) {
+  // fileCounts = { story: N, shaders: N, audio: N, sims: N, circuits: N }
+  const artifactsDir = join(tmpRoot, 'www', 'tibsfox', 'com', 'Research', 'NASA', version, 'artifacts');
+  for (const [cat, count] of Object.entries(fileCounts)) {
+    if (count === 0) continue;
+    const catDir = join(artifactsDir, cat);
+    mkdirSync(catDir, { recursive: true });
+    for (let i = 0; i < count; i++) {
+      writeFileSync(join(catDir, `file-${i}.txt`), `synthetic ${cat} artifact ${i}`);
+    }
+  }
+}
+
+describe('T2.1 (v1.49.593): NASA artifacts/ canonical-suite enforcement (#10213)', () => {
+  it('PASS when 13 files across all 5 categories (gold standard v1.69 + v1.70)', () => {
+    gold('NASA', '1.68', 600, 80000);
+    gold('NASA', '1.69', 600, 80000);
+    gold('MUS', '1.68', 600, 80000, 14);
+    gold('MUS', '1.69', 600, 80000, 14);
+    gold('ELC', '1.68', 600, 80000, 14);
+    gold('ELC', '1.69', 600, 80000, 14);
+    makeArtifacts('1.69', { story: 2, shaders: 2, audio: 4, sims: 2, circuits: 3 });
+    const r = runAudit('1.69', '--json');
+    const report = JSON.parse(r.stdout);
+    const nasa = report.findings.find(f => f.track === 'NASA');
+    expect(nasa.status).toBe('PASS');
+    expect(nasa.artifacts.totalFiles).toBe(13);
+    expect(nasa.artifacts.categoriesFound.length).toBe(5);
+  });
+
+  it('WARN when 4 files / 4 categories (v1.72 + v1.73 actual drift case)', () => {
+    gold('NASA', '1.68', 600, 80000);
+    gold('NASA', '1.69', 600, 80000);
+    gold('MUS', '1.68', 600, 80000, 14);
+    gold('MUS', '1.69', 600, 80000, 14);
+    gold('ELC', '1.68', 600, 80000, 14);
+    gold('ELC', '1.69', 600, 80000, 14);
+    // 4 files across 4 categories — circuits missing entirely
+    makeArtifacts('1.69', { story: 1, shaders: 1, audio: 1, sims: 1, circuits: 0 });
+    const r = runAudit('1.69', '--json');
+    const report = JSON.parse(r.stdout);
+    const nasa = report.findings.find(f => f.track === 'NASA');
+    expect(nasa.submetrics.artifacts).toBe('WARN');
+    expect(nasa.artifacts.totalFiles).toBe(4);
+    expect(nasa.artifacts.categoriesFound.length).toBe(4);
+    expect(nasa.artifacts.categoriesFound).not.toContain('circuits');
+  });
+
+  it('FAIL when <4 artifact files (lazy-truncate failure mode)', () => {
+    gold('NASA', '1.68', 600, 80000);
+    gold('NASA', '1.69', 600, 80000);
+    gold('MUS', '1.68', 600, 80000, 14);
+    gold('MUS', '1.69', 600, 80000, 14);
+    gold('ELC', '1.68', 600, 80000, 14);
+    gold('ELC', '1.69', 600, 80000, 14);
+    makeArtifacts('1.69', { story: 1, shaders: 1, audio: 0, sims: 0, circuits: 0 });
+    const r = runAudit('1.69', '--json');
+    const report = JSON.parse(r.stdout);
+    const nasa = report.findings.find(f => f.track === 'NASA');
+    expect(nasa.status).toBe('FAIL');
+    expect(nasa.submetrics.artifacts).toBe('FAIL');
+  });
+
+  it('FAIL when artifacts/ directory missing entirely', () => {
+    gold('NASA', '1.68', 600, 80000);
+    gold('NASA', '1.69', 600, 80000);
+    gold('MUS', '1.68', 600, 80000, 14);
+    gold('MUS', '1.69', 600, 80000, 14);
+    gold('ELC', '1.68', 600, 80000, 14);
+    gold('ELC', '1.69', 600, 80000, 14);
+    // No artifacts/ dir at all
+    const r = runAudit('1.69', '--json');
+    const report = JSON.parse(r.stdout);
+    const nasa = report.findings.find(f => f.track === 'NASA');
+    expect(nasa.status).toBe('FAIL');
+    expect(nasa.artifacts.status).toBe('MISSING');
+  });
+
+  it('MUS + ELC do not enforce artifacts/ check (NASA-only)', () => {
+    gold('NASA', '1.68', 600, 80000);
+    gold('NASA', '1.69', 600, 80000);
+    gold('MUS', '1.68', 600, 80000, 14);
+    gold('MUS', '1.69', 600, 80000, 14);
+    gold('ELC', '1.68', 600, 80000, 14);
+    gold('ELC', '1.69', 600, 80000, 14);
+    makeArtifacts('1.69', { story: 2, shaders: 2, audio: 4, sims: 2, circuits: 3 });
+    const r = runAudit('1.69', '--json');
+    const report = JSON.parse(r.stdout);
+    const mus = report.findings.find(f => f.track === 'MUS');
+    const elc = report.findings.find(f => f.track === 'ELC');
+    expect(mus.artifacts).toBeNull();
+    expect(elc.artifacts).toBeNull();
+    // MUS + ELC PASS independent of artifacts
+    expect(mus.status).toBe('PASS');
+    expect(elc.status).toBe('PASS');
+  });
+
+  it('WARN when 5 files but only 4 categories (e.g. 2 audio + 1 each shader/sim/story)', () => {
+    gold('NASA', '1.68', 600, 80000);
+    gold('NASA', '1.69', 600, 80000);
+    gold('MUS', '1.68', 600, 80000, 14);
+    gold('MUS', '1.69', 600, 80000, 14);
+    gold('ELC', '1.68', 600, 80000, 14);
+    gold('ELC', '1.69', 600, 80000, 14);
+    makeArtifacts('1.69', { story: 1, shaders: 1, audio: 2, sims: 1, circuits: 0 });
+    const r = runAudit('1.69', '--json');
+    const report = JSON.parse(r.stdout);
+    const nasa = report.findings.find(f => f.track === 'NASA');
+    expect(nasa.submetrics.artifacts).toBe('WARN');
+    expect(nasa.artifacts.totalFiles).toBe(5);
+    expect(nasa.artifacts.categoriesFound.length).toBe(4);
+  });
+});
+
+// W0.3 (v1.49.593): --composite-pass flag for #10207 false-WARN cleanup
+//
+// Note: the gold() helper conflates line + byte targets (each filler line is
+// fixed-size), so we cannot reliably synthesize specific byte ratios in tests.
+// These tests verify FLAG MECHANICS (compositePassActive set correctly,
+// thresholds applied to ratio function) rather than specific synthesized
+// verdicts; verdict-on-real-data is covered by manual verification against
+// www/tibsfox/com/Research/NASA/{1.71,1.72,1.73}/index.html (see ship-pipeline
+// pre-tag-gate output).
+describe('W0.3 (v1.49.593): --composite-pass flag (#10207)', () => {
+  it('default behavior: compositePassActive=false when flag absent', () => {
+    gold('NASA', '1.68', 600, 80000);
+    gold('NASA', '1.69', 600, 80000);
+    gold('MUS', '1.68', 600, 80000, 14);
+    gold('MUS', '1.69', 600, 80000, 14);
+    gold('ELC', '1.68', 600, 80000, 14);
+    gold('ELC', '1.69', 600, 80000, 14);
+    makeArtifacts('1.69', { story: 2, shaders: 2, audio: 4, sims: 2, circuits: 3 });
+    const r = runAudit('1.69', '--json');
+    const report = JSON.parse(r.stdout);
+    for (const f of report.findings) {
+      expect(f.compositePassActive).toBe(false);
+    }
+  });
+
+  it('--composite-pass: compositePassActive=true when lines ≥ 95% AND sections OK', () => {
+    gold('NASA', '1.68', 600, 80000);
+    gold('NASA', '1.69', 600, 80000);  // 100% lines / 7/7 sections
+    gold('MUS', '1.68', 600, 80000, 14);
+    gold('MUS', '1.69', 600, 80000, 14);  // 100% lines / 14/10 sections
+    gold('ELC', '1.68', 600, 80000, 14);
+    gold('ELC', '1.69', 600, 80000, 14);
+    makeArtifacts('1.69', { story: 2, shaders: 2, audio: 4, sims: 2, circuits: 3 });
+    const r = runAudit('1.69', '--json', '--composite-pass');
+    const report = JSON.parse(r.stdout);
+    for (const f of report.findings) {
+      expect(f.compositePassActive).toBe(true);
+    }
+  });
+
+  it('--composite-pass: compositePassActive=false when lines < 95% (line drop is real signal)', () => {
+    gold('NASA', '1.68', 600, 80000);
+    gold('NASA', '1.69', 600, 80000);
+    gold('MUS', '1.68', 600, 80000, 14);
+    gold('MUS', '1.69', 600, 80000, 14);
+    gold('ELC', '1.68', 600, 80000, 14);
+    thin('ELC', '1.69');  // synthesized as ~50% depth — line ratio < 95%
+    makeArtifacts('1.69', { story: 2, shaders: 2, audio: 4, sims: 2, circuits: 3 });
+    const r = runAudit('1.69', '--json', '--composite-pass');
+    const report = JSON.parse(r.stdout);
+    const elc = report.findings.find(f => f.track === 'ELC');
+    // ELC lines at ~50% < 95% threshold → composite-pass NOT active
+    expect(elc.compositePassActive).toBe(false);
+  });
+
+  it('--composite-pass: still produces PASS verdict when conditions OK', () => {
+    gold('NASA', '1.68', 600, 80000);
+    gold('NASA', '1.69', 600, 80000);
+    gold('MUS', '1.68', 600, 80000, 14);
+    gold('MUS', '1.69', 600, 80000, 14);
+    gold('ELC', '1.68', 600, 80000, 14);
+    gold('ELC', '1.69', 600, 80000, 14);
+    makeArtifacts('1.69', { story: 2, shaders: 2, audio: 4, sims: 2, circuits: 3 });
+    const r = runAudit('1.69', '--json', '--composite-pass');
+    const report = JSON.parse(r.stdout);
+    for (const f of report.findings) {
+      expect(f.status).toBe('PASS');
+    }
+  });
+
+  it('--composite-pass: human format shows "(composite)" annotation', () => {
+    gold('NASA', '1.68', 600, 80000);
+    gold('NASA', '1.69', 600, 80000);
+    gold('MUS', '1.68', 600, 80000, 14);
+    gold('MUS', '1.69', 600, 80000, 14);
+    gold('ELC', '1.68', 600, 80000, 14);
+    gold('ELC', '1.69', 600, 80000, 14);
+    makeArtifacts('1.69', { story: 2, shaders: 2, audio: 4, sims: 2, circuits: 3 });
+    const r = runAudit('1.69', '--composite-pass');
+    expect(r.stdout).toMatch(/\(composite\)/);
   });
 });
