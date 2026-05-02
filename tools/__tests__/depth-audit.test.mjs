@@ -15,7 +15,7 @@
  * run via vitest.tools.config.mjs.
  */
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
-import { mkdtempSync, mkdirSync, writeFileSync, rmSync, symlinkSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, existsSync, rmSync, symlinkSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
@@ -209,17 +209,41 @@ describe('T2.3 (v1.49.589): depth-audit script', () => {
 
 // T2.1 (v1.49.593): NASA artifacts/ canonical 13-file suite enforcement
 // (closes Lesson #10213 candidate from v1.49.592 close — USER-FLAGGED 2026-05-01).
-function makeArtifacts(version, fileCounts) {
+//
+// v1.49.594 W0 (#10222): also writes matching `href="artifacts/<cat>/<file>"`
+// cross-link references into the NASA index.html so the cross-link coverage
+// check passes by default in tests. Pass `linkCoverage` to control how many
+// of the on-disk files get a matching reference (default 1.0 = 100% coverage).
+function makeArtifacts(version, fileCounts, linkCoverage = 1.0) {
   // fileCounts = { story: N, shaders: N, audio: N, sims: N, circuits: N }
   const artifactsDir = join(tmpRoot, 'www', 'tibsfox', 'com', 'Research', 'NASA', version, 'artifacts');
+  const onDiskPaths = [];
   for (const [cat, count] of Object.entries(fileCounts)) {
     if (count === 0) continue;
     const catDir = join(artifactsDir, cat);
     mkdirSync(catDir, { recursive: true });
     for (let i = 0; i < count; i++) {
       writeFileSync(join(catDir, `file-${i}.txt`), `synthetic ${cat} artifact ${i}`);
+      onDiskPaths.push(`${cat}/file-${i}.txt`);
     }
   }
+
+  // Append `href="artifacts/<path>"` anchors to the NASA index.html so the
+  // cross-link coverage submetric (added v1.49.594) passes alongside the
+  // artifact-suite check. Only append if the index exists (some tests don't
+  // call gold() before makeArtifacts).
+  const indexPath = join(tmpRoot, 'www', 'tibsfox', 'com', 'Research', 'NASA', version, 'index.html');
+  if (!existsSync(indexPath) || onDiskPaths.length === 0) return;
+
+  const linkCount = Math.round(onDiskPaths.length * linkCoverage);
+  const linksHtml = onDiskPaths
+    .slice(0, linkCount)
+    .map(p => `<li><a href="artifacts/${p}" style="color:var(--gold);">${p}</a></li>`)
+    .join('\n');
+  const text = readFileSync(indexPath, 'utf8');
+  // Inject the cross-link block right before </body>.
+  const injected = text.replace('</body>', `<ul class="cross-links">\n${linksHtml}\n</ul>\n</body>`);
+  writeFileSync(indexPath, injected);
 }
 
 describe('T2.1 (v1.49.593): NASA artifacts/ canonical-suite enforcement (#10213)', () => {
@@ -403,5 +427,175 @@ describe('W0.3 (v1.49.593): --composite-pass flag (#10207)', () => {
     makeArtifacts('1.69', { story: 2, shaders: 2, audio: 4, sims: 2, circuits: 3 });
     const r = runAudit('1.69', '--composite-pass');
     expect(r.stdout).toMatch(/\(composite\)/);
+  });
+});
+
+// W0 (v1.49.594): cross-link coverage submetric — closes #10222 candidate.
+// Carry-forward fix from v1.49.593 close: v1.72/v1.73/v1.74 NASA index.html
+// pages shipped with thin/empty/missing card-population (artifacts on disk
+// but not enumerated as href="artifacts/..." references in Creative
+// Artifacts / Runnable Simulations / Forest Contribution cards). The
+// artifact-suite check passed (files present); the structural gap was
+// invisible because the gate only verified disk presence + canonical h2s.
+describe('W0 (v1.49.594): cross-link coverage submetric (#10222)', () => {
+  it('PASS when ≥80% of artifacts referenced (gold pattern)', () => {
+    gold('NASA', '1.68', 600, 80000);
+    gold('NASA', '1.69', 600, 80000);
+    gold('MUS', '1.68', 600, 80000, 14);
+    gold('MUS', '1.69', 600, 80000, 14);
+    gold('ELC', '1.68', 600, 80000, 14);
+    gold('ELC', '1.69', 600, 80000, 14);
+    makeArtifacts('1.69', { story: 2, shaders: 2, audio: 4, sims: 2, circuits: 3 }); // 100% coverage
+    const r = runAudit('1.69', '--json');
+    const report = JSON.parse(r.stdout);
+    const nasa = report.findings.find(f => f.track === 'NASA');
+    expect(nasa.crossLinks).not.toBeNull();
+    expect(nasa.crossLinks.totalOnDisk).toBe(13);
+    expect(nasa.crossLinks.coveredOnDisk).toBe(13);
+    expect(nasa.crossLinks.coverage).toBe(1.0);
+    expect(nasa.crossLinks.status).toBe('PASS');
+    expect(nasa.submetrics.crossLinks).toBe('PASS');
+    expect(nasa.status).toBe('PASS');
+  });
+
+  it('WARN when 50-80% coverage (partial linkage drift)', () => {
+    gold('NASA', '1.68', 600, 80000);
+    gold('NASA', '1.69', 600, 80000);
+    gold('MUS', '1.68', 600, 80000, 14);
+    gold('MUS', '1.69', 600, 80000, 14);
+    gold('ELC', '1.68', 600, 80000, 14);
+    gold('ELC', '1.69', 600, 80000, 14);
+    // 13 files; only 60% (8) referenced → coverage in WARN band [0.5, 0.8)
+    makeArtifacts('1.69', { story: 2, shaders: 2, audio: 4, sims: 2, circuits: 3 }, 0.60);
+    const r = runAudit('1.69', '--json');
+    const report = JSON.parse(r.stdout);
+    const nasa = report.findings.find(f => f.track === 'NASA');
+    expect(nasa.crossLinks.coverage).toBeGreaterThanOrEqual(0.5);
+    expect(nasa.crossLinks.coverage).toBeLessThan(0.8);
+    expect(nasa.crossLinks.status).toBe('WARN');
+    expect(nasa.submetrics.crossLinks).toBe('WARN');
+    expect(nasa.status).toBe('WARN');
+  });
+
+  it('FAIL coverage downgrades to WARN in soak mode (default)', () => {
+    gold('NASA', '1.68', 600, 80000);
+    gold('NASA', '1.69', 600, 80000);
+    gold('MUS', '1.68', 600, 80000, 14);
+    gold('MUS', '1.69', 600, 80000, 14);
+    gold('ELC', '1.68', 600, 80000, 14);
+    gold('ELC', '1.69', 600, 80000, 14);
+    // 13 files; only 10% (1) referenced → coverage in FAIL band <0.5
+    makeArtifacts('1.69', { story: 2, shaders: 2, audio: 4, sims: 2, circuits: 3 }, 0.10);
+    const r = runAudit('1.69', '--json');
+    const report = JSON.parse(r.stdout);
+    const nasa = report.findings.find(f => f.track === 'NASA');
+    expect(nasa.crossLinks.coverage).toBeLessThan(0.5);
+    expect(nasa.crossLinks.status).toBe('FAIL');             // raw status
+    expect(nasa.submetrics.crossLinksRaw).toBe('FAIL');       // raw status preserved
+    expect(nasa.submetrics.crossLinks).toBe('WARN');          // soak-mode downgrade
+    expect(nasa.status).toBe('WARN');                         // overall not FAIL
+    expect(nasa.crossLinkStrictActive).toBe(false);
+  });
+
+  it('FAIL coverage stays FAIL with --cross-link-strict (post-soak mode)', () => {
+    gold('NASA', '1.68', 600, 80000);
+    gold('NASA', '1.69', 600, 80000);
+    gold('MUS', '1.68', 600, 80000, 14);
+    gold('MUS', '1.69', 600, 80000, 14);
+    gold('ELC', '1.68', 600, 80000, 14);
+    gold('ELC', '1.69', 600, 80000, 14);
+    makeArtifacts('1.69', { story: 2, shaders: 2, audio: 4, sims: 2, circuits: 3 }, 0.10);
+    const r = runAudit('1.69', '--json', '--cross-link-strict');
+    const report = JSON.parse(r.stdout);
+    const nasa = report.findings.find(f => f.track === 'NASA');
+    expect(nasa.crossLinks.status).toBe('FAIL');
+    expect(nasa.submetrics.crossLinks).toBe('FAIL');          // no downgrade
+    expect(nasa.status).toBe('FAIL');                         // overall FAIL
+    expect(nasa.crossLinkStrictActive).toBe(true);
+  });
+
+  it('--strict + --cross-link-strict: exit 1 on FAIL coverage', () => {
+    gold('NASA', '1.68', 600, 80000);
+    gold('NASA', '1.69', 600, 80000);
+    gold('MUS', '1.68', 600, 80000, 14);
+    gold('MUS', '1.69', 600, 80000, 14);
+    gold('ELC', '1.68', 600, 80000, 14);
+    gold('ELC', '1.69', 600, 80000, 14);
+    makeArtifacts('1.69', { story: 2, shaders: 2, audio: 4, sims: 2, circuits: 3 }, 0.10);
+    const r = runAudit('1.69', '--strict', '--cross-link-strict');
+    expect(r.code).toBe(1);
+  });
+
+  it('--strict (without --cross-link-strict): exit 0 even on FAIL coverage (soak)', () => {
+    gold('NASA', '1.68', 600, 80000);
+    gold('NASA', '1.69', 600, 80000);
+    gold('MUS', '1.68', 600, 80000, 14);
+    gold('MUS', '1.69', 600, 80000, 14);
+    gold('ELC', '1.68', 600, 80000, 14);
+    gold('ELC', '1.69', 600, 80000, 14);
+    makeArtifacts('1.69', { story: 2, shaders: 2, audio: 4, sims: 2, circuits: 3 }, 0.10);
+    const r = runAudit('1.69', '--strict');
+    // soak-mode: FAIL coverage → WARN → no overall FAIL → --strict exits 0
+    expect(r.code).toBe(0);
+  });
+
+  it('MUS + ELC do not enforce cross-link check (NASA-only)', () => {
+    gold('NASA', '1.68', 600, 80000);
+    gold('NASA', '1.69', 600, 80000);
+    gold('MUS', '1.68', 600, 80000, 14);
+    gold('MUS', '1.69', 600, 80000, 14);
+    gold('ELC', '1.68', 600, 80000, 14);
+    gold('ELC', '1.69', 600, 80000, 14);
+    makeArtifacts('1.69', { story: 2, shaders: 2, audio: 4, sims: 2, circuits: 3 });
+    const r = runAudit('1.69', '--json');
+    const report = JSON.parse(r.stdout);
+    const mus = report.findings.find(f => f.track === 'MUS');
+    const elc = report.findings.find(f => f.track === 'ELC');
+    expect(mus.crossLinks).toBeNull();
+    expect(elc.crossLinks).toBeNull();
+    expect(mus.status).toBe('PASS');
+    expect(elc.status).toBe('PASS');
+  });
+
+  it('null when artifacts/ directory missing (no link-target on disk)', () => {
+    gold('NASA', '1.68', 600, 80000);
+    gold('NASA', '1.69', 600, 80000);
+    gold('MUS', '1.68', 600, 80000, 14);
+    gold('MUS', '1.69', 600, 80000, 14);
+    gold('ELC', '1.68', 600, 80000, 14);
+    gold('ELC', '1.69', 600, 80000, 14);
+    // No makeArtifacts call → no artifacts/ dir
+    const r = runAudit('1.69', '--json');
+    const report = JSON.parse(r.stdout);
+    const nasa = report.findings.find(f => f.track === 'NASA');
+    expect(nasa.crossLinks).toBeNull();
+    // overall status governed by artifacts MISSING (FAIL) — independent of cross-links
+    expect(nasa.artifacts.status).toBe('MISSING');
+  });
+
+  it('human format reports cross-link gap when WARN', () => {
+    gold('NASA', '1.68', 600, 80000);
+    gold('NASA', '1.69', 600, 80000);
+    gold('MUS', '1.68', 600, 80000, 14);
+    gold('MUS', '1.69', 600, 80000, 14);
+    gold('ELC', '1.68', 600, 80000, 14);
+    gold('ELC', '1.69', 600, 80000, 14);
+    makeArtifacts('1.69', { story: 2, shaders: 2, audio: 4, sims: 2, circuits: 3 }, 0.60);
+    const r = runAudit('1.69');
+    expect(r.stdout).toMatch(/cross-links: WARN/);
+    expect(r.stdout).toMatch(/coverage/);
+  });
+
+  it('soft-mode annotation appears when FAIL downgraded to WARN', () => {
+    gold('NASA', '1.68', 600, 80000);
+    gold('NASA', '1.69', 600, 80000);
+    gold('MUS', '1.68', 600, 80000, 14);
+    gold('MUS', '1.69', 600, 80000, 14);
+    gold('ELC', '1.68', 600, 80000, 14);
+    gold('ELC', '1.69', 600, 80000, 14);
+    makeArtifacts('1.69', { story: 2, shaders: 2, audio: 4, sims: 2, circuits: 3 }, 0.10);
+    const r = runAudit('1.69');
+    expect(r.stdout).toMatch(/cross-links: FAIL/);
+    expect(r.stdout).toMatch(/soft-mode: FAIL downgraded to WARN/);
   });
 });
