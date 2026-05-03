@@ -1,0 +1,48 @@
+[
+  {
+    "name": "SC_SELF_MOD",
+    "default_behavior": "unset → BLOCK self-mod writes",
+    "override_behavior": "`=1` → allow `.claude/skills\\|agents\\|hooks/` writes"
+  },
+  {
+    "name": "SC_FORCE_ADD",
+    "default_behavior": "unset → BLOCK protected-path adds",
+    "override_behavior": "`=1` → allow `git add` of `.planning/`, `.claude/`, `.archive/`, `artifacts/` paths"
+  },
+  {
+    "name": "SC_SKIP_PREPUSH",
+    "default_behavior": "unset → run completeness gate",
+    "override_behavior": "`=1` → skip pre-push completeness check (emergency only)"
+  },
+  {
+    "name": "SC_INSTALL_CALLER",
+    "default_behavior": "(set by `project-claude/install.cjs` at process start)",
+    "override_behavior": "`=project-claude` → install.cjs allowlist for self-mod-guard"
+  },
+  {
+    "name": "RH_ENV_FILE",
+    "default_behavior": "unset → use default `<repo-root>/.env`",
+    "override_behavior": "`=<path>` → use override .env path for `tools/release-history/run-with-pg.mjs`"
+  },
+  {
+    "name": "ARTEMIS_REPO_ENV",
+    "name_suffix": " *(deprecated)*",
+    "default_behavior": "unset → ignored",
+    "override_behavior": "`=<path>` → fallback alias for `RH_ENV_FILE`; emits deprecation notice"
+  },
+  {
+    "name": "PRE_TAG_GATE_QUIET",
+    "default_behavior": "unset → step labels printed",
+    "override_behavior": "`=1` → suppress step labels (errors still printed)"
+  },
+  {
+    "name": "SC_SKIP_CI_GATE",
+    "default_behavior": "unset → verify CI green on origin/dev (HARD RULE)",
+    "override_behavior": "`=1` → skip CI-on-dev verification step in pre-tag-gate (emergency only — fix the failing CI instead)"
+  },
+  {
+    "name": "BUILD_WWW_BUNDLES_QUIET",
+    "default_behavior": "unset → step labels printed",
+    "override_behavior": "`=1` → suppress step labels in `tools/build-www-bundles.sh` (errors still printed)"
+  }
+]
