@@ -1,0 +1,12 @@
+{
+  "id": "console-req-2026-05-02-0001",
+  "type": "intelligence.refresh_briefing",
+  "project": "gsd-skill-creator",
+  "branch": "dev",
+  "payload": {
+    "snapshot_id": "v1.49.597+local",
+    "force": false
+  },
+  "respond_to": ".planning/console/outbox/status/console-req-2026-05-02-0001.json",
+  "timeout_hint_ms": 60000
+}

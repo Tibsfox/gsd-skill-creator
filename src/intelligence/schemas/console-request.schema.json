@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gsd-skill-creator.local/intelligence/console-request.schema.json",
+  "title": "ConsoleRequest",
+  "description": "Console inbox message for intelligence.* control-plane requests. Round-trips with the ConsoleRequest TS interface in src/intelligence/types.ts.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "type", "project", "payload", "respond_to", "timeout_hint_ms"],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "type": {
+      "type": "string",
+      "enum": [
+        "intelligence.refresh_briefing",
+        "intelligence.triage_finding",
+        "intelligence.snapshot_diff",
+        "intelligence.investigate_section",
+        "intelligence.dismiss_finding"
+      ]
+    },
+    "project": { "type": "string", "minLength": 1 },
+    "branch": { "type": "string" },
+    "payload": { "type": "object" },
+    "respond_to": { "type": "string", "minLength": 1 },
+    "timeout_hint_ms": { "type": "integer", "minimum": 0 }
+  }
+}
