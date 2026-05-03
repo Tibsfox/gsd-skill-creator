@@ -1,0 +1,293 @@
+/**
+ * Intelligence Dashboard — IPC client library.
+ *
+ * ALLOWED EXCEPTION: this is the ONLY file under `src/intelligence/` that imports
+ * from `@tauri-apps/api/core` and `@tauri-apps/api/event`. All other files in
+ * `src/intelligence/` and `desktop/intelligence/` route through this module.
+ * Documented exception per D-24-02.
+ *
+ * Dual-mode: works in both Tauri shell (native invoke/listen) and browser-tab mode
+ * (same commands exposed via Tauri's built-in WebSocket bridge). Feature-detects
+ * `window.__TAURI__` to decide which path to use; in pure browser mode where Tauri
+ * is not present, falls back to a fetch-based stub (useful for SSR / testing).
+ *
+ * Phase 824 / C07.
+ */
+
+import type {
+  Briefing,
+  Bundle,
+  BundleId,
+  Decision,
+  DecisionId,
+  Finding,
+  FindingId,
+  Meeting,
+  MeetingId,
+  Project,
+  ProjectId,
+} from './types.js';
+
+// ─── Payload types specific to IPC ─────────────────────────────────────────────
+
+export interface RequestIdResult {
+  id: string;
+}
+
+export interface SendNowResult {
+  decision_id: string;
+  emission_path: string;
+  emitted_at: string;
+}
+
+export interface BundlePreview {
+  meeting_id: string;
+  decision_count: number;
+  decisions: Decision[];
+}
+
+export interface DecisionDraftPayload {
+  kind: 'vision_mission' | 'research_mission' | 'analysis_run' | 'finding_dismissal';
+  ai_draft: { title: string; body: string } | null;
+  source_findings: FindingId[];
+  source_move_rank?: number;
+}
+
+export interface ProjectInputPayload {
+  name: string;
+  path: string;
+  branch?: string;
+  kind: 'code' | 'manuscript' | 'planning' | 'mixed';
+  priority: 'high' | 'med' | 'low';
+}
+
+// ─── Status event types ─────────────────────────────────────────────────────────
+
+export type DecisionUIState =
+  | 'queued'
+  | 'picked_up'
+  | 'expanding'
+  | 'wave_0'
+  | 'wave_1'
+  | 'wave_2'
+  | 'wave_n'
+  | 'blocked'
+  | 'complete'
+  | 'failed';
+
+export interface StatusUpdateEvent {
+  request_id: string;
+  decision_id?: string;
+  bundle_id?: string;
+  project_id: string;
+  state: DecisionUIState;
+  sub_status?: string;
+  wave_progress?: { current: number; total: number };
+  result_path?: string;
+  block_reason?: string;
+  block_findings?: string[];
+  error?: string;
+  updated_at: string;
+}
+
+export interface BriefingReadyEvent {
+  project_id: string;
+  briefing_id: string;
+}
+
+export interface FindingsUpdatedEvent {
+  project_id: string;
+  snapshot_id: string;
+  count: number;
+}
+
+export interface MeetingRecordUpdatedEvent {
+  meeting_id: string;
+  path: string;
+}
+
+export interface BundleCompletedEvent {
+  bundle_id: string;
+  project_id: string;
+  summary: string;
+}
+
+// ─── Tauri API imports (guarded) ────────────────────────────────────────────────
+
+// Lazily imported to avoid crashes in non-Tauri environments (tests, SSR).
+type InvokeFn = <T>(cmd: string, args?: Record<string, unknown>) => Promise<T>;
+type ListenFn = <T>(event: string, cb: (e: { payload: T }) => void) => Promise<() => void>;
+
+function getTauriInvoke(): InvokeFn | null {
+  // Feature detection: Tauri injects `__TAURI__` on the global object.
+  // Use `globalThis` so this works in both browser/Tauri (window) and
+  // Node/vitest test environments (globalThis without window).
+  const g = globalThis as Record<string, unknown>;
+  if (g.__TAURI__ && typeof g.__TAURI__ === 'object') {
+    const tauri = g.__TAURI__ as { core?: { invoke?: InvokeFn } };
+    if (tauri.core?.invoke) return tauri.core.invoke;
+  }
+  return null;
+}
+
+function getTauriListen(): ListenFn | null {
+  const g = globalThis as Record<string, unknown>;
+  if (g.__TAURI__ && typeof g.__TAURI__ === 'object') {
+    const tauri = g.__TAURI__ as { event?: { listen?: ListenFn } };
+    if (tauri.event?.listen) return tauri.event.listen;
+  }
+  return null;
+}
+
+/** Invoke a Tauri command (Tauri shell) or reject with "server unavailable" (browser). */
+async function invoke<T>(cmd: string, args?: Record<string, unknown>): Promise<T> {
+  const fn = getTauriInvoke();
+  if (fn) {
+    return fn<T>(cmd, args);
+  }
+  // Browser-tab mode: Tauri 2 exposes the same commands via WebSocket on the dev server.
+  // For Wave 1, reject cleanly so E14 empty-state can render. Phase 825 wires WS bridge.
+  throw new Error(`intelligence-server: not connected (cmd=${cmd})`);
+}
+
+/** Subscribe to a Tauri event. Returns an unlisten function. */
+async function listen<T>(event: string, cb: (payload: T) => void): Promise<() => void> {
+  const fn = getTauriListen();
+  if (fn) {
+    return fn<T>(event, (e) => cb(e.payload));
+  }
+  // No-op in non-Tauri context.
+  return () => { /* noop */ };
+}
+
+// ─── Public IPC client ─────────────────────────────────────────────────────────
+
+/**
+ * All intelligence dashboard IPC calls. UI components import ONLY from this module —
+ * they never call `invoke` or `listen` directly.
+ */
+export const intelligenceIpc = {
+  // ── Project commands ────────────────────────────────────────────────────────
+
+  listProjects(sort?: 'recent' | 'priority' | 'findings'): Promise<Project[]> {
+    return invoke<Project[]>('intelligence_list_projects', { sort: sort ?? null });
+  },
+
+  getProject(projectId: ProjectId): Promise<Project | null> {
+    return invoke<Project | null>('intelligence_get_project', { projectId });
+  },
+
+  registerProject(project: ProjectInputPayload): Promise<Project> {
+    return invoke<Project>('intelligence_register_project', { project });
+  },
+
+  // ── Briefing commands ────────────────────────────────────────────────────────
+
+  getBriefing(projectId: ProjectId): Promise<Briefing | null> {
+    return invoke<Briefing | null>('intelligence_get_briefing', { projectId });
+  },
+
+  requestBriefingRefresh(
+    projectId: ProjectId,
+    branch?: string,
+    conversationText?: string,
+  ): Promise<RequestIdResult> {
+    return invoke<RequestIdResult>('intelligence_request_briefing_refresh', {
+      projectId,
+      branch: branch ?? null,
+      conversationText: conversationText ?? null,
+    });
+  },
+
+  requestSnapshotDiff(projectId: ProjectId, branch?: string): Promise<RequestIdResult> {
+    return invoke<RequestIdResult>('intelligence_request_snapshot_diff', {
+      projectId,
+      branch: branch ?? null,
+    });
+  },
+
+  // ── Finding commands ─────────────────────────────────────────────────────────
+
+  listFindings(projectId: ProjectId): Promise<Finding[]> {
+    return invoke<Finding[]>('intelligence_list_findings', { projectId });
+  },
+
+  dismissFinding(findingId: FindingId, rationale?: string): Promise<Finding> {
+    return invoke<Finding>('intelligence_dismiss_finding', {
+      findingId,
+      rationale: rationale ?? null,
+    });
+  },
+
+  // ── Meeting commands ─────────────────────────────────────────────────────────
+
+  startMeeting(projectId: ProjectId): Promise<Meeting> {
+    return invoke<Meeting>('intelligence_start_meeting', { projectId });
+  },
+
+  parkMeeting(meetingId: MeetingId): Promise<Meeting> {
+    return invoke<Meeting>('intelligence_park_meeting', { meetingId });
+  },
+
+  resumeMeeting(meetingId: MeetingId): Promise<Meeting> {
+    return invoke<Meeting>('intelligence_resume_meeting', { meetingId });
+  },
+
+  getMeetingRecord(meetingId: MeetingId): Promise<string> {
+    return invoke<string>('intelligence_get_meeting_record', { meetingId });
+  },
+
+  // ── Decision commands ────────────────────────────────────────────────────────
+
+  addDecision(meetingId: MeetingId, draft: DecisionDraftPayload): Promise<Decision> {
+    return invoke<Decision>('intelligence_add_decision', { meetingId, draft });
+  },
+
+  editDecision(decisionId: DecisionId, modifications: string[]): Promise<Decision> {
+    return invoke<Decision>('intelligence_edit_decision', { decisionId, modifications });
+  },
+
+  withdrawDecision(decisionId: DecisionId): Promise<Decision> {
+    return invoke<Decision>('intelligence_withdraw_decision', { decisionId });
+  },
+
+  sendNow(decisionId: DecisionId): Promise<SendNowResult> {
+    return invoke<SendNowResult>('intelligence_send_now', { decisionId });
+  },
+
+  // ── Bundle commands ──────────────────────────────────────────────────────────
+
+  previewBundle(meetingId: MeetingId): Promise<BundlePreview> {
+    return invoke<BundlePreview>('intelligence_preview_bundle', { meetingId });
+  },
+
+  commitBundle(meetingId: MeetingId): Promise<Bundle> {
+    return invoke<Bundle>('intelligence_commit_bundle', { meetingId });
+  },
+
+  // ── Event subscriptions ──────────────────────────────────────────────────────
+
+  on: {
+    statusUpdate(cb: (e: StatusUpdateEvent) => void): Promise<() => void> {
+      return listen<StatusUpdateEvent>('intelligence:status_update', cb);
+    },
+
+    briefingReady(cb: (e: BriefingReadyEvent) => void): Promise<() => void> {
+      return listen<BriefingReadyEvent>('intelligence:briefing_ready', cb);
+    },
+
+    findingsUpdated(cb: (e: FindingsUpdatedEvent) => void): Promise<() => void> {
+      return listen<FindingsUpdatedEvent>('intelligence:findings_updated', cb);
+    },
+
+    meetingRecordUpdated(cb: (e: MeetingRecordUpdatedEvent) => void): Promise<() => void> {
+      return listen<MeetingRecordUpdatedEvent>('intelligence:meeting_record_updated', cb);
+    },
+
+    bundleCompleted(cb: (e: BundleCompletedEvent) => void): Promise<() => void> {
+      return listen<BundleCompletedEvent>('intelligence:bundle_completed', cb);
+    },
+  },
+} as const;
+
+export type IntelligenceIpc = typeof intelligenceIpc;
