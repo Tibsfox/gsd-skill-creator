@@ -254,30 +254,7 @@ The tool reads `FTP_HOST` / `FTP_USER` / `FTP_PASS` from `<repo-root>/.env`, bui
 1. **FTP_PASS leading-quote is part of the password.** The `claudefox@tibsfox.com` FTP_PASS is 32 chars long and char 1 is a literal `'`. Do NOT strip it. The `parseEnv()` helper in `tools/ftp-sync.mjs` only strips a *matched pair* of surrounding double-quotes (common .env convention); single-quote-prefixed values are preserved verbatim. Verify: `bash -c 'source .env; echo "${#FTP_PASS}=32 ${FTP_PASS:0:1}=\\''`
 2. **FTP root `/` maps to URL `/Research/` on tibsfox.com.** The FTP account is chrooted; do NOT `cd /Research` before `put`. The tool emits remote paths as `/{NASA,MUS,ELC}/<version>/...` which resolve to `/Research/{...}` on the public site.
 
-**Inline-recovery procedure for W2-quota-failure (added in v1.49.590 T2.2; closes Lesson #10194 candidate):**
-
-When a Sonnet W2 build agent dispatch is rate-limited mid-build (Anthropic per-account quota exhausted) and the ship deadline cannot wait for the typical ~1-hour quota refresh, fall back to **main-context Opus inline recovery** as a tested-acceptable mitigation.
-
-**Trigger conditions:**
-- `Error: rate_limit_exceeded` from Sonnet subagent during W2-MUS or W2-ELC build
-- Ship deadline within current session (cannot defer to next session)
-- Quota-failed file count >0 against gold-standard predecessor
-
-**Procedure:**
-1. Identify quota-failed files: count files in `www/tibsfox/com/Research/{TRACK}/<version>/` vs gold-standard predecessor `<version-0.01>/`
-2. For each missing file, main-context Opus authors using gold-standard predecessor as reference
-3. Per-file budget: 3-7K output tokens; **MUST use incremental Edit operations** (3-12 Edits per file per T2.4 from v1.49.589) — single Write of large files risks 32K output cap silent-truncation
-4. After all files exist, run `npm run depth-audit -- <version> --json` to score depth
-5. Acceptance: zero FAIL findings (≥80% predecessor depth); WARN findings (80-95%) acceptable for ship; PASS findings (≥95%) ideal
-
-**Quality tradeoff (citation-anchored from v1.49.589 W2):**
-| Recovery path | Predecessor depth ratio | Verdict |
-|---|---|---|
-| Sonnet subagent (normal W2) | 95-113% | PASS |
-| Inline Opus (recovery fallback) | 78-89% | WARN |
-| Single Write attempt at >100 lines | 0% (silent truncation) | FAIL — never use |
-
-**Acceptable-as-recovery framing:** inline recovery is a *fallback* when ship deadline cannot wait, NOT the default. Subsequent milestones' Sonnet-driven W2 should re-establish 95%+ depth. v1.49.589 demonstrated zero FAIL findings under inline recovery — pattern is validated for emergency use only.
+**W2-quota-failure inline-recovery:** when a Sonnet W2 build agent hits `rate_limit_exceeded` mid-build and the ship deadline cannot wait for the ~1-hour quota refresh, fall back to main-context Opus inline recovery (closes Lesson #10194). Trigger conditions, the 5-step procedure, quality tradeoff table, and "fallback only" framing live in `docs/release-pipeline/w2-inline-recovery.md`. Promotion to a script was rejected because the procedure is human-judgement-driven (when to invoke, which files to author first, per-file budget), not mechanical.
 
 **`gh release create` snap-confinement workaround (closes Lesson #10201):** `gh` is snap-confined and cannot read paths outside `$HOME`, so release notes must be copied to `$HOME` before invoking `gh release create`. Use the wrapper:
 
