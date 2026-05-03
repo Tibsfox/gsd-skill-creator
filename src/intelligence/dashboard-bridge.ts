@@ -11,6 +11,7 @@
  */
 
 import { KBStore } from './kb/store.js';
+import { getIntelligenceEventBus } from './events/bus.js';
 import type { ProjectId, MeetingId, DecisionId, FindingId } from './types.js';
 
 // ─── Command dispatch table ────────────────────────────────────────────────────
@@ -79,27 +80,27 @@ const COMMANDS: Record<string, CommandHandler> = {
       args.meetingId as MeetingId,
       args.draft as Parameters<KBStore['addDecision']>[1]
     ),
-  intelligence_edit_decision: async (_kb, args) => {
-    // Edit is appending to developer_modifications array; Phase 823's KBStore
-    // doesn't expose this directly. For browser-tab mode read-most flows, we
-    // surface a "not yet wired" error — the desktop shell uses Tauri commands
-    // that mutate the row directly.
-    throw new Error(
-      `intelligence_edit_decision: not yet wired in HTTP bridge (decisionId=${args.decisionId})`
-    );
+  // Phase 827 / C03 — replace 3 throw-stubs with real KBStore method calls
+  // (C01 landed editDecision / withdrawDecision / previewBundle on KBStore).
+  intelligence_edit_decision: (kb, args) => {
+    if (!kb.editDecision) {
+      throw new Error('intelligence_edit_decision: KBStore.editDecision not implemented');
+    }
+    return kb.editDecision(args.decisionId as DecisionId, args.modifications as string[]);
   },
-  intelligence_withdraw_decision: async (_kb, args) => {
-    throw new Error(
-      `intelligence_withdraw_decision: not yet wired in HTTP bridge (decisionId=${args.decisionId})`
-    );
+  intelligence_withdraw_decision: (kb, args) => {
+    if (!kb.withdrawDecision) {
+      throw new Error('intelligence_withdraw_decision: KBStore.withdrawDecision not implemented');
+    }
+    return kb.withdrawDecision(args.decisionId as DecisionId);
   },
   intelligence_send_now: (kb, args) =>
     kb.promoteToSendNow(args.decisionId as DecisionId),
-  intelligence_preview_bundle: async (_kb, args) => {
-    // Preview = list pending decisions for this meeting (no commit)
-    throw new Error(
-      `intelligence_preview_bundle: not yet wired in HTTP bridge (meetingId=${args.meetingId})`
-    );
+  intelligence_preview_bundle: (kb, args) => {
+    if (!kb.previewBundle) {
+      throw new Error('intelligence_preview_bundle: KBStore.previewBundle not implemented');
+    }
+    return kb.previewBundle(args.meetingId as MeetingId);
   },
   intelligence_commit_bundle: (kb, args) =>
     kb.commitBundle(args.meetingId as MeetingId),
@@ -162,8 +163,23 @@ interface BridgeRouter {
   close: () => void;
 }
 
-export function createIntelligenceBridge(_cwd?: string): BridgeRouter {
-  const kb = new KBStore();
+export interface CreateIntelligenceBridgeOptions {
+  /** Pre-constructed KBStore instance (for tests). When omitted, a default
+   *  KBStore is created and wired to the global IntelligenceEventBus singleton. */
+  kb?: KBStore;
+}
+
+export function createIntelligenceBridge(
+  _cwd?: string,
+  opts?: CreateIntelligenceBridgeOptions,
+): BridgeRouter {
+  const kb = opts?.kb ?? (() => {
+    // Phase 827 / C03 — wire the global event bus into the bridge's KBStore
+    // so KBStore writes flow to /api/events SSE subscribers.
+    const store = new KBStore();
+    store.setEventBus(getIntelligenceEventBus());
+    return store;
+  })();
   let registryReady: Promise<void> | null = null;
 
   // Lazy-init the registry on first request. Multiple in-flight requests
