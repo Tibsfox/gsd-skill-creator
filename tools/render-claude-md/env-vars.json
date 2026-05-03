@@ -44,5 +44,10 @@
     "name": "BUILD_WWW_BUNDLES_QUIET",
     "default_behavior": "unset → step labels printed",
     "override_behavior": "`=1` → suppress step labels in `tools/build-www-bundles.sh` (errors still printed)"
+  },
+  {
+    "name": "SC_SKIP_CLAUDE_MD_GATE",
+    "default_behavior": "unset → run CLAUDE.md auto-render check in pre-tag-gate step 7",
+    "override_behavior": "`=1` → skip CLAUDE.md drift check (emergency only — run `npm run render:claude-md` and commit instead)"
   }
 ]
