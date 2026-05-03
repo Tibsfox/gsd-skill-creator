@@ -9,6 +9,12 @@ description: |
   with a causal hypothesis + acknowledged uncertainty + confidence label and
   ranked moves, then writes the result back to the KB. Always trigger this
   skill for these request types — do not generate briefings manually.
+version: 1.0.0
+format: 2025-10-02
+triggers:
+  - "console-inbox request type starts with intelligence.* (refresh_briefing, triage_finding, snapshot_diff, investigate_section, dismiss_finding)"
+updated: 2026-05-02
+status: ACTIVE
 allowed-tools: Read, Glob, Bash(sqlite3:*), Bash(git:*), Bash(node:*), Bash(bun:*), Write
 ---
 
