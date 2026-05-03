@@ -32,6 +32,11 @@ dashboard/requirements.html
 dashboard/roadmap.html
 dashboard/state.html
 dashboard/.dashboard-manifest.json
+# dashboard/assets/ is the per-build hashed-chunk dependency tree copied
+# from desktop/dist/assets/ by `npm run intelligence:build` (Phase 828 fix
+# for 826.5 carryover). Filenames are content-hashed so every rebuild
+# would dirty the working tree; treat as build-output and rebuild on demand.
+dashboard/assets/
 
 # Intelligence UI bundles built by `npm run intelligence:build` from
 # desktop/intelligence/ source. Regenerable; not tracked.
