@@ -15,6 +15,7 @@ export default defineConfig({
       'tools/__tests__/render-claude-md.test.mjs',
       'tools/__tests__/ship-sync.test.mjs',
       'tools/__tests__/gh-release-publish.test.mjs',
+      'scripts/__tests__/serve-dashboard-sse.test.mjs',
     ],
     globals: true,
     testTimeout: 15000,
