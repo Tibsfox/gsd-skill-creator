@@ -79,9 +79,15 @@ export function mountPlanningUI(rootEl: HTMLElement): () => void {
   };
 }
 
-// Auto-mount if running in browser (not in test environment)
+// Auto-mount if running in browser (not in test environment).
+// Two host shells:
+//   - Tauri standalone (`desktop/intelligence/planning/index.html`) uses #planning-root
+//   - Dashboard tab (`dashboard/intelligence.html`) uses #intelligence-planning (Phase 826 / C14)
+// Accept either; the C14 dashboard ID is preferred.
 if (typeof document !== 'undefined' && typeof process === 'undefined') {
-  const root = document.getElementById('planning-root');
+  const root =
+    document.getElementById('intelligence-planning') ??
+    document.getElementById('planning-root');
   if (root) {
     mountPlanningUI(root);
   }
