@@ -5,8 +5,8 @@
  * Phase 824 / C09.
  */
 
-import type { StatusUpdateEvent } from '../../../../src/intelligence/ipc.js';
-import { intelligenceIpc } from '../../../../src/intelligence/ipc.js';
+import type { StatusUpdateEvent } from '../../../src/intelligence/ipc.js';
+import { intelligenceIpc } from '../../../src/intelligence/ipc.js';
 import { createLiveWorkView, LiveWorkViewComponent } from './components/live-work-view.js';
 import type { InFlightBundle } from './types.js';
 

@@ -33,6 +33,11 @@ dashboard/roadmap.html
 dashboard/state.html
 dashboard/.dashboard-manifest.json
 
+# Intelligence UI bundles built by `npm run intelligence:build` from
+# desktop/intelligence/ source. Regenerable; not tracked.
+dashboard/intelligence/planning.bundle.js
+dashboard/intelligence/live-work.bundle.js
+
 # Tauri / Desktop
 src-tauri/target/
 src-tauri/gen/
