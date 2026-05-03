@@ -399,6 +399,21 @@
         "target": ".claude/skills/research-mission-generator",
         "description": "Research mission generator — package conversation research into GSD mission LaTeX pipeline",
         "files": ["SKILL.md", "references/test-patterns.md", "references/crew-profiles.md", "references/latex-template.md"]
+      },
+      {
+        "source": "skills/intelligence-investigator",
+        "target": ".claude/skills/intelligence-investigator",
+        "description": "AI investigator skill (Phase 825 / C12) — consumes intelligence.* console requests, synthesizes briefings (causal hypothesis + uncertainty + confidence) and ranked moves, writes via KB. NEVER returns AI output inline.",
+        "files": [
+          "SKILL.md",
+          "references/briefing-format.md",
+          "references/move-ranking.md",
+          "references/kb-queries.md",
+          "references/confidence-calibration.md",
+          "scripts/load-kb-context.sh",
+          "scripts/verify-briefing.ts",
+          "scripts/write-briefing.ts"
+        ]
       }
     ],
     "hookScripts": [
