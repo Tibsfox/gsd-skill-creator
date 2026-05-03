@@ -226,4 +226,19 @@ export interface IntelligenceKB {
   commitBundle(meetingId: MeetingId): Promise<Bundle>;
   parkMeeting(meetingId: MeetingId): Promise<Meeting>;
   dismissFinding(findingId: FindingId, rationale?: string): Promise<Finding>;
+
+  // Phase 827 (browser-tab parity completion) — close the 3 unwired bridge commands.
+  // Optional during C00 surface-declaration; C01 lands concrete implementations on
+  // `KBStore` and a final cleanup can promote these to required once all implementers
+  // (KBStore, IntelligenceKBStub, test fixtures) are aligned.
+  editDecision?(decisionId: DecisionId, modifications: string[]): Promise<Decision>;
+  withdrawDecision?(decisionId: DecisionId): Promise<Decision>;
+  previewBundle?(meetingId: MeetingId): Promise<BundlePreview>;
+}
+
+// Phase 827 — preview shape for `previewBundle()` (used by both Tauri shell and HTTP bridge).
+export interface BundlePreview {
+  meeting_id: MeetingId;
+  decision_count: number;
+  decisions: Decision[];
 }
