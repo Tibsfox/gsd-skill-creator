@@ -1,0 +1,12 @@
+{
+  "id": "no-prefix",
+  "meeting_id": "M-good",
+  "emitted_at": "not-a-date",
+  "decisions": "should-be-array",
+  "manifest_path": "",
+  "batch_hints": {
+    "parallelizable": "should-be-array-of-arrays",
+    "shared_context": [],
+    "suggested_order": []
+  }
+}

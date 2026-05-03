@@ -1,0 +1,332 @@
+/**
+ * Live Work UI — styles.
+ * Phase 824 / C09.
+ * Reuses Tokyo-Night CSS variables defined in planning.css.
+ */
+
+/* ── Live work view container ─────────────────────────────────────────────── */
+.live-work-view {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.bundle-panel {
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.08));
+  border-radius: var(--radius-lg, 8px);
+  overflow: hidden;
+  background: var(--bg-card, #1f2335);
+}
+
+/* ── Bundle summary card ──────────────────────────────────────────────────── */
+.bundle-summary-card {
+  padding: 12px 16px;
+  background: var(--bg-card, #1f2335);
+}
+
+.bundle-summary-card.bundle-complete {
+  border-left: 3px solid var(--accent-green, #9ece6a);
+}
+
+.bundle-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.bundle-id {
+  font-family: var(--font-mono, monospace);
+  font-size: 12px;
+  color: var(--text-secondary, #9aa5ce);
+  background: rgba(122, 162, 247, 0.1);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm, 3px);
+}
+
+.bundle-time {
+  font-size: 12px;
+  color: var(--text-secondary, #9aa5ce);
+  flex: 1;
+}
+
+.notify-label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--text-secondary, #9aa5ce);
+  cursor: pointer;
+  user-select: none;
+}
+
+.notify-checkbox {
+  cursor: pointer;
+}
+
+/* ── Progress bar ─────────────────────────────────────────────────────────── */
+.progress-bar {
+  height: 4px;
+  background: var(--border-color, rgba(255, 255, 255, 0.08));
+  border-radius: 2px;
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: var(--accent-blue, #7aa2f7);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.bundle-aggregate {
+  font-size: 12px;
+  color: var(--text-secondary, #9aa5ce);
+}
+
+/* ── Decision rows ─────────────────────────────────────────────────────────── */
+.decision-rows {
+  border-top: 1px solid var(--border-color, rgba(255, 255, 255, 0.08));
+}
+
+.decision-row {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border-color, rgba(255, 255, 255, 0.05));
+}
+
+.decision-row:last-child {
+  border-bottom: none;
+}
+
+.decision-row-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.decision-title {
+  font-size: 13px;
+  color: var(--text-primary, #c0caf5);
+}
+
+.decision-sub-status {
+  font-size: 12px;
+  color: var(--text-secondary, #9aa5ce);
+  margin-bottom: 6px;
+}
+
+.decision-row-actions {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+  margin-top: 4px;
+}
+
+/* ── Pills ─────────────────────────────────────────────────────────────────── */
+.pill {
+  padding: 2px 8px;
+  border-radius: var(--radius-md, 4px);
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.pill-queued {
+  background: rgba(154, 165, 206, 0.15);
+  color: var(--text-secondary, #9aa5ce);
+}
+
+.pill-progress {
+  background: rgba(122, 162, 247, 0.15);
+  color: var(--accent-blue, #7aa2f7);
+}
+
+.pill-blocked {
+  background: rgba(255, 158, 100, 0.15);
+  color: var(--accent-orange, #ff9e64);
+}
+
+.pill-complete {
+  background: rgba(158, 206, 106, 0.15);
+  color: var(--accent-green, #9ece6a);
+}
+
+.pill-failed {
+  background: rgba(247, 118, 142, 0.15);
+  color: var(--accent-red, #f7768e);
+}
+
+/* ── Timeline indicator ────────────────────────────────────────────────────── */
+.timeline-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  height: 14px;
+  margin: 4px 0;
+}
+
+.timeline-stage {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border-color, rgba(255, 255, 255, 0.15));
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.timeline-stage.filled {
+  background: var(--accent-blue, #7aa2f7);
+}
+
+.timeline-connector {
+  flex: 1;
+  height: 2px;
+  background: var(--border-color, rgba(255, 255, 255, 0.15));
+  max-width: 20px;
+}
+
+/* ── Action buttons ─────────────────────────────────────────────────────────── */
+.address-btn,
+.view-btn,
+.open-result-btn {
+  padding: 3px 8px;
+  border-radius: var(--radius-sm, 3px);
+  font-size: 12px;
+  cursor: pointer;
+  border: 1px solid currentColor;
+  background: transparent;
+}
+
+.address-btn {
+  color: var(--accent-orange, #ff9e64);
+  border-color: rgba(255, 158, 100, 0.4);
+}
+
+.address-btn:hover {
+  background: rgba(255, 158, 100, 0.1);
+}
+
+.view-btn,
+.open-result-btn {
+  color: var(--accent-blue, #7aa2f7);
+  border-color: rgba(122, 162, 247, 0.4);
+}
+
+.view-btn:hover,
+.open-result-btn:hover {
+  background: rgba(122, 162, 247, 0.1);
+}
+
+/* ── Micro-meeting modal ────────────────────────────────────────────────────── */
+.micro-meeting-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--bg-surface, #24283b);
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.12));
+  border-radius: var(--radius-lg, 8px);
+  padding: 20px;
+  min-width: 440px;
+  max-width: 600px;
+  color: var(--text-primary, #c0caf5);
+  z-index: 1000;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.48);
+}
+
+.micro-meeting-modal::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-header h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0 0 16px 0;
+  color: var(--text-primary, #c0caf5);
+}
+
+.modal-decision-title {
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.modal-block-reason {
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.modal-findings {
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+
+.blocking-findings {
+  margin: 4px 0 0 0;
+  padding-left: 16px;
+  font-size: 12px;
+  color: var(--text-secondary, #9aa5ce);
+}
+
+.modal-actions-choice {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.modal-radio-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.dismiss-rationale-wrapper {
+  margin-top: 4px;
+}
+
+.dismiss-rationale-input {
+  background: var(--bg-primary, #1a1b26);
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.15));
+  border-radius: var(--radius-sm, 3px);
+  color: var(--text-primary, #c0caf5);
+  padding: 4px 8px;
+  font-size: 12px;
+  width: 200px;
+}
+
+.modal-footer {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.modal-cancel-btn,
+.modal-send-btn {
+  padding: 6px 12px;
+  border-radius: var(--radius-sm, 3px);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.modal-cancel-btn {
+  background: transparent;
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.2));
+  color: var(--text-secondary, #9aa5ce);
+}
+
+.modal-send-btn {
+  background: var(--accent-blue, #7aa2f7);
+  border: none;
+  color: var(--bg-primary, #1a1b26);
+  font-weight: 500;
+}
+
+.modal-send-btn:hover {
+  background: #8ab3ff;
+}

@@ -13,6 +13,7 @@ Adaptive learning layer for Claude Code that creates, validates, and manages ski
 
 ## Key File Locations
 
+<!-- AUTO:file-locations:START -->
 - `.planning/` -- GSD project management (ROADMAP.md, STATE.md, REQUIREMENTS.md, config.json)
 - `.claude/skills/` -- auto-activating skills (gsd-workflow, skill-integration, session-awareness, security-hygiene, and others)
 - `src/anytime-valid/` -- anytime-valid e-process martingale primitive (Ville's inequality; consumed by `src/orchestration/anytime-gate.ts` and future `src/ab-harness/` consumer per JP-029)
@@ -62,6 +63,7 @@ Adaptive learning layer for Claude Code that creates, validates, and manages ski
 - `docs/` -- 435+ markdown files, canonical documentation and release notes
 - `docs/adr/` -- Architecture Decision Records (ADR 0001 vendoring policy, ADR 0002 dual-impl precedence)
 - `www/tibsfox/com/Research/` -- 168 research projects (179 dirs), PNW Research Series
+<!-- AUTO:file-locations:END -->
 
 ## Commit Convention
 
@@ -92,6 +94,7 @@ This preserves bisect intent in the commit message even when commit boundaries d
 
 ### Environment Variables (added in v1.49.585)
 
+<!-- AUTO:env-vars:START -->
 | Var | Default behavior | Override behavior |
 |---|---|---|
 | `SC_SELF_MOD` | unset → BLOCK self-mod writes | `=1` → allow `.claude/skills\|agents\|hooks/` writes |
@@ -103,6 +106,8 @@ This preserves bisect intent in the commit message even when commit boundaries d
 | `PRE_TAG_GATE_QUIET` | unset → step labels printed | `=1` → suppress step labels (errors still printed) |
 | `SC_SKIP_CI_GATE` | unset → verify CI green on origin/dev (HARD RULE) | `=1` → skip CI-on-dev verification step in pre-tag-gate (emergency only — fix the failing CI instead) |
 | `BUILD_WWW_BUNDLES_QUIET` | unset → step labels printed | `=1` → suppress step labels in `tools/build-www-bundles.sh` (errors still printed) |
+| `SC_SKIP_CLAUDE_MD_GATE` | unset → run CLAUDE.md auto-render check in pre-tag-gate step 7 | `=1` → skip CLAUDE.md drift check (emergency only — run `npm run render:claude-md` and commit instead) |
+<!-- AUTO:env-vars:END -->
 
 ## Important Notes
 
@@ -121,7 +126,7 @@ The following deterministic gates BLOCK certain operations by default; each has 
 | `.claude/hooks/git-add-blocker.js` | `git add` / `git commit -a` of `.planning/`, `.claude/`, `.archive/`, `artifacts/` paths | `SC_FORCE_ADD=1` env var |
 | `.git/hooks/pre-push` (installed via `tools/install-git-hooks.sh` + npm postinstall) | `git push origin main` if release-notes 5-file structure is missing or any file <200 bytes (`check-completeness.mjs --strict`) | `SC_SKIP_PREPUSH=1` env var (emergency only) |
 | `src/dead-zone/__tests__/citation-invariants.test.ts` | (CI test) FAILS if `cooldownDays=7` / `diffThreshold=0.20` / `MAX_CORRECTIONS_BEFORE_BLOCK=3` / `SMALL_DATA_FLOOR=12` defaults are silently changed | Update `.planning/missions/v1-49-585-concerns-cleanup/work/specs/citation-anchors.md` AND `src/dead-zone/CITATION.md` in the same commit as the value change |
-| `tools/pre-tag-gate.sh` (added 2026-04-29 v1.49.585+; expanded v1.49.587) | `git tag` / merge to main if any of: (1) `npm run build` fails, (2) `npx vitest run` fails, (3) `check-completeness.mjs --current --strict` fails, (4) **CI-on-dev fails or is pending** (HARD RULE — verify CI green on `origin/dev` before pushing to main), (5) www-bundles esbuild fails (SPICE renderer). Operator-invoked via `npm run pre-tag-gate` before each milestone tag. | Fix the failing check. Emergency overrides: `SC_SKIP_CI_GATE=1` (skip CI-on-dev only). No override exists for build/vitest/completeness/www-bundles. |
+| `tools/pre-tag-gate.sh` (added 2026-04-29 v1.49.585+; expanded v1.49.587, v1.49.589, v1.49.596+) | `git tag` / merge to main if any of: (1) `npm run build` fails, (2) `npx vitest run` fails, (3) `check-completeness.mjs --current --strict` fails, (4) **CI-on-dev fails or is pending** (HARD RULE — verify CI green on `origin/dev` before pushing to main), (5) www-bundles esbuild fails (SPICE renderer), (6) depth-audit FAIL/MISSING (BLOCKER as of v1.49.591), (7) **CLAUDE.md drifted from `tools/render-claude-md/` manifests** (added v1.49.596+). Operator-invoked via `npm run pre-tag-gate` before each milestone tag. | Fix the failing check. Emergency overrides: `SC_SKIP_CI_GATE=1`, `SC_SKIP_DEPTH_AUDIT=1`, `SC_SKIP_CLAUDE_MD_GATE=1`. No override exists for build/vitest/completeness/www-bundles. |
 
 The gates exist to convert prose-only social rules into deterministic enforcement. See `.planning/codebase/CONCERNS.md` (the audit they emerged from) and `.planning/missions/v1-49-585-concerns-cleanup/` for full design context. The gates' contract spec is at `.planning/missions/v1-49-585-concerns-cleanup/work/specs/hook-conventions.md`.
 
@@ -159,7 +164,7 @@ The gate runs against `package.json` `version`. It exits non-zero if any of the 
 npm run pre-tag-gate
 ```
 
-The composite gate (added 2026-04-29 in the v1.49.585+ post-ship CI-fix follow-up; expanded 2026-04-29 in v1.49.587; expanded 2026-04-30 in v1.49.589 with step 6) wraps **six** checks the operator must run BEFORE `git tag` and before `git push origin main`:
+The composite gate (added 2026-04-29 in the v1.49.585+ post-ship CI-fix follow-up; expanded 2026-04-29 in v1.49.587; expanded 2026-04-30 in v1.49.589 with step 6; expanded 2026-05-02 in v1.49.596+ with step 7) wraps **seven** checks the operator must run BEFORE `git tag` and before `git push origin main`:
 
 1. `npm run build` — catches TypeScript errors that vitest does not surface (e.g. TS2835 missing-`.js` extensions on relative ESM imports under node16/nodenext moduleResolution).
 2. `npx vitest run` — runs the full vitest suite, mirroring CI exactly. Catches CI-shaped failures the lighter pre-push hook does not exercise (manifest-drift CF-MED-065b, harness-integrity hook-ref invariants, claude-md-truth CF-MED-063b, etc.).
@@ -167,8 +172,9 @@ The composite gate (added 2026-04-29 in the v1.49.585+ post-ship CI-fix follow-u
 4. **CI-on-dev verification (HARD RULE — added v1.49.587).** Resolves the `origin/dev` tip SHA, queries `gh run list --branch dev`, and verifies the matching run is `status=completed conclusion=success`. If CI is still pending (status=in_progress/queued), the gate FAILS with a wait-and-retry hint. If CI concluded `failure`/`cancelled`, the gate FAILS with the run URL. **Rationale:** local pre-tag-gate (steps 1–3) only validates THIS machine's copy; remote CI may differ (GitHub Actions runner OS/version drift, environment-specific test flakes). Verifying CI green on `origin/dev` BEFORE merging to main is the only way to guarantee main never receives a regression. Override: `SC_SKIP_CI_GATE=1` (emergency only — almost never the right call; CI red is rarely an emergency).
 5. **www-bundles freshness (added v1.49.587).** Runs `bash tools/build-www-bundles.sh` which esbuild-bundles `www/tibsfox/com/Research/NASA/_harness/v1.0.0/spice-renderer/index.ts` → `index.js`. Idempotent (same input → same output). Closes the v1.49.581 unwired-build gap that left 126 SPICE viewer pages broken on tibsfox.com (caught 2026-04-29 during v1.49.586 follow-up). Run standalone via `npm run build:www-bundles`.
 6. **Depth audit (BLOCKER as of v1.49.591).** Runs `node tools/depth-audit.mjs --current` which compares NASA/MUS/ELC `index.html` line+byte counts at the current degree against the predecessor degree; flags any sibling file at <80% predecessor depth. Closes Lesson #10188 candidate from v1.49.588 §5: post-ship audit script catching W2-quota lazy-truncate failure mode that produced thin sibling files at v1.49.588 (required ad-hoc rebuild of 6 files). Soaked WARNING-only across v1.49.589 + v1.49.590 (zero FAIL findings); hardened to BLOCKER at v1.49.591 per T2.2. Override: `SC_SKIP_DEPTH_AUDIT=1` (emergency only — fix the depth gap instead; almost never the right call).
+7. **CLAUDE.md auto-render drift check (added v1.49.596+).** Runs `node tools/render-claude-md.mjs --check` and fails when CLAUDE.md is out of sync with the source-of-truth manifests at `tools/render-claude-md/`. The fix is cheap: `npm run render:claude-md` and commit the diff. Manifests cover the file-locations bullet list, the env-vars table, and the agents-composite count line; future phases will widen the auto-rendered surface. Override: `SC_SKIP_CLAUDE_MD_GATE=1` (emergency only — the fix is a 5-second auto-render).
 
-Exit codes: 0 = all PASS; 1 = build failed; 2 = vitest failed; 3 = completeness failed; 4 = CI-on-dev failed/pending; 5 = www-bundles failed; 6 = depth-audit FAIL/MISSING findings (BLOCKER as of v1.49.591). Self-tests at `tools/pre-tag-gate.test.sh`.
+Exit codes: 0 = all PASS; 1 = build failed; 2 = vitest failed; 3 = completeness failed; 4 = CI-on-dev failed/pending; 5 = www-bundles failed; 6 = depth-audit FAIL/MISSING findings (BLOCKER as of v1.49.591); 7 = CLAUDE.md drift (added v1.49.596+). Self-tests at `tools/pre-tag-gate.test.sh`.
 
 **Version-consistency invariant (HARD RULE — added v1.49.589 T2.2):** Before running `npm run pre-tag-gate`, ALL FOUR manifests must move together to the target version: `package.json`, `src-tauri/tauri.conf.json`, `src-tauri/Cargo.toml`, `package-lock.json` (root + `packages[""]` slot = 5 total version slots). Use the atomic `scripts/bump-version.mjs` script — never bump manifests manually:
 
@@ -189,21 +195,19 @@ The CI harness-integrity test FAILS if any manifest version drifts independently
 
 **Why steps 4 + 5 were added (v1.49.587):** v1.49.586 follow-up (2026-04-29) discovered (a) the SPICE renderer module shipped as TypeScript source with no compile step wired up — 126 SPICE viewer pages had been broken on tibsfox.com since v1.49.581 (the spec said "builds with the existing Vite pipeline" but no Vite step landed); (b) parallel-session ship-coordination scenarios where CI on `origin/dev` could be still pending or red while a separate operator session was already pushing to main. The user formalized the discipline as a HARD RULE: "before pushing to main, verify CI passes on dev first." Step 4 operationalizes the rule deterministically; step 5 prevents recurrence of unwired-build drift by always rebuilding browser-bundles before tag.
 
-**Dev/main sync after each main-merge (HARD RULE — added v1.49.594 follow-up to v1.49.593 ship; closes Lesson #10221 candidate):**
+**Dev/main sync after each main-merge (HARD RULE — closes Lesson #10221 candidate):**
 
-After EACH `git push origin main` (the initial dev→main ship merge AND the post-ship RH refresh sync merge), fast-forward `dev` to include the merge commit so the two branches stay in sync:
+After EACH `git push origin main` (the initial dev→main ship merge AND the post-ship RH refresh sync merge), run:
 
 ```bash
-git checkout dev
-git merge --ff-only main    # always succeeds — main's tip merge commit has dev's tip as parent
-git push origin dev
+npm run ship-sync   # FF dev to main, push origin dev (idempotent)
 ```
 
-**Why this step exists:** `git merge --no-ff dev` on main creates a merge commit that exists ONLY on main, not on dev. Across N ships, main accumulates 2N merge commits that dev doesn't have, causing `dev is N commits behind main` drift in the GitHub UI. v1.49.591 + v1.49.592 + v1.49.593 each accumulated 2 such commits → dev was 6 commits behind main at v1.49.593 close. The fast-forward sync is cheap (no rebase, no conflicts possible since dev's tip is one parent of the merge commit) and zeroes the drift.
+The wrapper at `tools/ship-sync.sh` is idempotent (no-op when dev is already in sync), restores the original branch on early exit, and exits 2 if the FF would be refused (dev has divergent commits — investigate before retrying). Closes the prose-only discipline added v1.49.594 by promoting it to a tested script (4 hermetic tests at `tools/__tests__/ship-sync.test.mjs`).
 
-**Insertion points in the ship pipeline:** AFTER each of the two `git push origin main` calls — once after the initial ship merge (post-tag), once after the post-ship RH refresh merge.
+**Why this step exists:** `git merge --no-ff dev` on main creates a merge commit that lives only on main; across N ships, main accumulates 2N merge commits dev lacks → "dev is N commits behind" drift in the GitHub UI. The FF zeroes it cheaply (no rebase, no conflicts since dev's tip is one parent of the merge commit).
 
-**Pre-push hook check (advisory; added at v1.49.594 W0):** `.git/hooks/pre-push` warns when pushing dev to origin if `git log dev..origin/main` returns >0 (dev is behind main). The warning surfaces drift without blocking; the fast-forward sync above is the canonical fix.
+**Pre-push hook check (advisory; v1.49.594 W0):** `.git/hooks/pre-push` warns when pushing dev to origin if `git log dev..origin/main` > 0. The warning surfaces drift without blocking; `npm run ship-sync` is the canonical fix.
 
 ---
 
@@ -250,58 +254,15 @@ The tool reads `FTP_HOST` / `FTP_USER` / `FTP_PASS` from `<repo-root>/.env`, bui
 1. **FTP_PASS leading-quote is part of the password.** The `claudefox@tibsfox.com` FTP_PASS is 32 chars long and char 1 is a literal `'`. Do NOT strip it. The `parseEnv()` helper in `tools/ftp-sync.mjs` only strips a *matched pair* of surrounding double-quotes (common .env convention); single-quote-prefixed values are preserved verbatim. Verify: `bash -c 'source .env; echo "${#FTP_PASS}=32 ${FTP_PASS:0:1}=\\''`
 2. **FTP root `/` maps to URL `/Research/` on tibsfox.com.** The FTP account is chrooted; do NOT `cd /Research` before `put`. The tool emits remote paths as `/{NASA,MUS,ELC}/<version>/...` which resolve to `/Research/{...}` on the public site.
 
-**Inline-recovery procedure for W2-quota-failure (added in v1.49.590 T2.2; closes Lesson #10194 candidate):**
+**W2-quota-failure inline-recovery:** when a Sonnet W2 build agent hits `rate_limit_exceeded` mid-build and the ship deadline cannot wait for the ~1-hour quota refresh, fall back to main-context Opus inline recovery (closes Lesson #10194). Trigger conditions, the 5-step procedure, quality tradeoff table, and "fallback only" framing live in `docs/release-pipeline/w2-inline-recovery.md`. Promotion to a script was rejected because the procedure is human-judgement-driven (when to invoke, which files to author first, per-file budget), not mechanical.
 
-When a Sonnet W2 build agent dispatch is rate-limited mid-build (Anthropic per-account quota exhausted) and the ship deadline cannot wait for the typical ~1-hour quota refresh, fall back to **main-context Opus inline recovery** as a tested-acceptable mitigation.
-
-**Trigger conditions:**
-- `Error: rate_limit_exceeded` from Sonnet subagent during W2-MUS or W2-ELC build
-- Ship deadline within current session (cannot defer to next session)
-- Quota-failed file count >0 against gold-standard predecessor
-
-**Procedure:**
-1. Identify quota-failed files: count files in `www/tibsfox/com/Research/{TRACK}/<version>/` vs gold-standard predecessor `<version-0.01>/`
-2. For each missing file, main-context Opus authors using gold-standard predecessor as reference
-3. Per-file budget: 3-7K output tokens; **MUST use incremental Edit operations** (3-12 Edits per file per T2.4 from v1.49.589) — single Write of large files risks 32K output cap silent-truncation
-4. After all files exist, run `npm run depth-audit -- <version> --json` to score depth
-5. Acceptance: zero FAIL findings (≥80% predecessor depth); WARN findings (80-95%) acceptable for ship; PASS findings (≥95%) ideal
-
-**Quality tradeoff (citation-anchored from v1.49.589 W2):**
-| Recovery path | Predecessor depth ratio | Verdict |
-|---|---|---|
-| Sonnet subagent (normal W2) | 95-113% | PASS |
-| Inline Opus (recovery fallback) | 78-89% | WARN |
-| Single Write attempt at >100 lines | 0% (silent truncation) | FAIL — never use |
-
-**Acceptable-as-recovery framing:** inline recovery is a *fallback* when ship deadline cannot wait, NOT the default. Subsequent milestones' Sonnet-driven W2 should re-establish 95%+ depth. v1.49.589 demonstrated zero FAIL findings under inline recovery — pattern is validated for emergency use only.
-
-**`gh release create --notes-file` snap-confinement workaround (added in v1.49.590 T2.3; root cause CONFIRMED + path corrected at v1.49.591 T2.1; closes Lesson #10201):**
-
-**Symptom:** `gh release create v1.49.NNN --notes-file docs/release-notes/v1.49.NNN/README.md ...` returns `permission denied` even when the file is readable, repo-relative path is correct, and `cat docs/release-notes/v1.49.NNN/README.md` works fine.
-
-**Root cause (confirmed at v1.49.591 T2.1):** `gh` is installed via **snap** in this environment (`/snap/bin/gh` → `/usr/bin/snap`). Snap-confined applications run in a security sandbox that restricts filesystem access to declared "interfaces." `gh`'s declared interfaces (`snap connections gh`) are `home`, `network`, `network-bind`, `desktop`, `ssh-keys` — there is **NO** interface granting access to `/tmp` or to mount points outside `$HOME`. This explains: (a) why repo-relative paths fail when the repo lives outside `$HOME` (e.g. on an alternative mount under `/media/<user>/...`); (b) why `/tmp` paths fail (no `system-files` plug); (c) why `$HOME/...` paths succeed (the `home` interface auto-connects).
-
-**Workaround pattern (CORRECTED — use `/home/foxy` not `/tmp`):**
+**`gh release create` snap-confinement workaround (closes Lesson #10201):** `gh` is snap-confined and cannot read paths outside `$HOME`, so release notes must be copied to `$HOME` before invoking `gh release create`. Use the wrapper:
 
 ```bash
-cp docs/release-notes/v1.49.NNN/README.md /home/foxy/v1-49-NNN-rn.md
-gh release create v1.49.NNN \
-    --title "v1.49.NNN — <subject>" \
-    --notes-file /home/foxy/v1-49-NNN-rn.md \
-    --target main
-rm /home/foxy/v1-49-NNN-rn.md
+npm run gh-release-publish -- 1.49.NNN ["v1.49.NNN — subject"]
 ```
 
-(Filename hyphenation `v1-49-NNN-rn.md` rather than `v1.49.NNN-rn.md` to avoid shell-glob and dot-file pitfalls in `/home/foxy`.)
-
-**Why the v1.49.590 doc said `/tmp` — and was wrong:** the v1.49.590 T2.3 codification incorrectly claimed `/tmp` was "cleaner than `/home/foxy`" without empirical verification. v1.49.590 ship pipeline used `/home/foxy` (matching v1.49.589 ad-hoc fix); the doc-as-written would have failed if followed. v1.49.591 T2.1 corrected the doc + investigated the snap-confinement root cause; full investigation at `.planning/missions/v1-49-591-apollo-8-first-crewed-translunar/evidence/gh-cli-path-investigation.md`.
-
-**Alternative paths to try if `/home/foxy` ever fails:**
-- `~/<file>` (shell-expanded; same as `/home/foxy`)
-- `~/snap/gh/current/<file>` (gh's per-app private storage; ALLOWED by definition)
-- `--notes-file -` and pipe stdin: `cat <readme> | gh release create ... --notes-file -` (untested but bypasses path resolution)
-
-**Long-term remediation options (deferred):** install `gh` via apt or the official deb release from github.com/cli/cli/releases (non-confined; loses snap auto-update); OR `sudo snap connect gh:system-files :system-files` (weakens sandbox). Both deferred until/unless the workaround stops working.
+The wrapper at `tools/gh-release-publish.sh` handles the cp / gh / rm dance and supports `GH_RELEASE_PUBLISH_DRY_RUN=1` for rehearsal. Full snap-confinement investigation (root cause + alternative paths + long-term remediation options) lives in the script header comment and at `.planning/missions/v1-49-591-apollo-8-first-crewed-translunar/evidence/gh-cli-path-investigation.md`. Hermetic tests at `tools/__tests__/gh-release-publish.test.mjs` (7 invariants).
 
 ## External Citations (CS25–26 Sweep)
 
