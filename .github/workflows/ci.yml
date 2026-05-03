@@ -52,6 +52,14 @@ jobs:
         with:
           node-version: '22'
       - run: npm ci
+      # Build the dist/ tree before tests — several tests (e.g.
+      # src/intelligence/__tests__/c12-write-briefing.test.ts, the
+      # intelligence-investigator skill harness, dashboard generator
+      # smoke tests) import compiled artifacts from dist/intelligence/.
+      # Added at v1.49.597 ship-pipeline; closes the silent "test depends
+      # on dist/ but CI doesn't build" gap that surfaced as 4 c12-write-
+      # briefing failures.
+      - run: npm run build
       - name: Generate Grove arena snapshot (fixture for grove-migration-live tests)
         run: |
           npx tsx tools/import-filesystem-skills.ts \
