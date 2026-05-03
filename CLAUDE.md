@@ -279,33 +279,13 @@ When a Sonnet W2 build agent dispatch is rate-limited mid-build (Anthropic per-a
 
 **Acceptable-as-recovery framing:** inline recovery is a *fallback* when ship deadline cannot wait, NOT the default. Subsequent milestones' Sonnet-driven W2 should re-establish 95%+ depth. v1.49.589 demonstrated zero FAIL findings under inline recovery — pattern is validated for emergency use only.
 
-**`gh release create --notes-file` snap-confinement workaround (added in v1.49.590 T2.3; root cause CONFIRMED + path corrected at v1.49.591 T2.1; closes Lesson #10201):**
-
-**Symptom:** `gh release create v1.49.NNN --notes-file docs/release-notes/v1.49.NNN/README.md ...` returns `permission denied` even when the file is readable, repo-relative path is correct, and `cat docs/release-notes/v1.49.NNN/README.md` works fine.
-
-**Root cause (confirmed at v1.49.591 T2.1):** `gh` is installed via **snap** in this environment (`/snap/bin/gh` → `/usr/bin/snap`). Snap-confined applications run in a security sandbox that restricts filesystem access to declared "interfaces." `gh`'s declared interfaces (`snap connections gh`) are `home`, `network`, `network-bind`, `desktop`, `ssh-keys` — there is **NO** interface granting access to `/tmp` or to mount points outside `$HOME`. This explains: (a) why repo-relative paths fail when the repo lives outside `$HOME` (e.g. on an alternative mount under `/media/<user>/...`); (b) why `/tmp` paths fail (no `system-files` plug); (c) why `$HOME/...` paths succeed (the `home` interface auto-connects).
-
-**Workaround pattern (CORRECTED — use `/home/foxy` not `/tmp`):**
+**`gh release create` snap-confinement workaround (closes Lesson #10201):** `gh` is snap-confined and cannot read paths outside `$HOME`, so release notes must be copied to `$HOME` before invoking `gh release create`. Use the wrapper:
 
 ```bash
-cp docs/release-notes/v1.49.NNN/README.md /home/foxy/v1-49-NNN-rn.md
-gh release create v1.49.NNN \
-    --title "v1.49.NNN — <subject>" \
-    --notes-file /home/foxy/v1-49-NNN-rn.md \
-    --target main
-rm /home/foxy/v1-49-NNN-rn.md
+npm run gh-release-publish -- 1.49.NNN ["v1.49.NNN — subject"]
 ```
 
-(Filename hyphenation `v1-49-NNN-rn.md` rather than `v1.49.NNN-rn.md` to avoid shell-glob and dot-file pitfalls in `/home/foxy`.)
-
-**Why the v1.49.590 doc said `/tmp` — and was wrong:** the v1.49.590 T2.3 codification incorrectly claimed `/tmp` was "cleaner than `/home/foxy`" without empirical verification. v1.49.590 ship pipeline used `/home/foxy` (matching v1.49.589 ad-hoc fix); the doc-as-written would have failed if followed. v1.49.591 T2.1 corrected the doc + investigated the snap-confinement root cause; full investigation at `.planning/missions/v1-49-591-apollo-8-first-crewed-translunar/evidence/gh-cli-path-investigation.md`.
-
-**Alternative paths to try if `/home/foxy` ever fails:**
-- `~/<file>` (shell-expanded; same as `/home/foxy`)
-- `~/snap/gh/current/<file>` (gh's per-app private storage; ALLOWED by definition)
-- `--notes-file -` and pipe stdin: `cat <readme> | gh release create ... --notes-file -` (untested but bypasses path resolution)
-
-**Long-term remediation options (deferred):** install `gh` via apt or the official deb release from github.com/cli/cli/releases (non-confined; loses snap auto-update); OR `sudo snap connect gh:system-files :system-files` (weakens sandbox). Both deferred until/unless the workaround stops working.
+The wrapper at `tools/gh-release-publish.sh` handles the cp / gh / rm dance and supports `GH_RELEASE_PUBLISH_DRY_RUN=1` for rehearsal. Full snap-confinement investigation (root cause + alternative paths + long-term remediation options) lives in the script header comment and at `.planning/missions/v1-49-591-apollo-8-first-crewed-translunar/evidence/gh-cli-path-investigation.md`. Hermetic tests at `tools/__tests__/gh-release-publish.test.mjs` (7 invariants).
 
 ## External Citations (CS25–26 Sweep)
 
