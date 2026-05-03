@@ -673,7 +673,7 @@ let generate = null;
 
 async function loadGenerator() {
   try {
-    const mod = await import('./dist/dashboard/generator.js');
+    const mod = await import('../dist/dashboard/generator.js');
     generate = mod.generate;
     console.log('[dashboard] Generator loaded from dist/dashboard/generator.js');
     return true;
@@ -692,7 +692,7 @@ let helperRouter = null;
 
 async function loadHelperRouter() {
   try {
-    const mod = await import('./dist/console/helper.js');
+    const mod = await import('../dist/console/helper.js');
     helperRouter = mod.createHelperRouter(CWD);
     console.log('[helper] Helper router loaded from dist/console/helper.js');
     return true;
