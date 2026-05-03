@@ -204,17 +204,63 @@ describe('intelligenceIpc — event subscriptions', () => {
   });
 });
 
-describe('intelligenceIpc — no-Tauri fallback', () => {
-  it('listProjects rejects with server-not-connected when Tauri absent', async () => {
-    // No __TAURI__ installed
+describe('intelligenceIpc — no-Tauri fallback (Phase 826.5 IPC-to-HTTP bridge)', () => {
+  let originalFetch: typeof globalThis.fetch | undefined;
+
+  beforeEach(() => {
     removeTauriMock();
+    originalFetch = globalThis.fetch;
+  });
+
+  afterEach(() => {
+    if (originalFetch) {
+      globalThis.fetch = originalFetch;
+    } else {
+      delete (globalThis as { fetch?: unknown }).fetch;
+    }
+  });
+
+  it('listProjects dispatches via fetch to /api/intelligence/invoke when Tauri absent', async () => {
+    const mockFetch = vi.fn().mockResolvedValue({
+      ok: true,
+      status: 200,
+      json: () => Promise.resolve([]),
+    });
+    globalThis.fetch = mockFetch as unknown as typeof globalThis.fetch;
+
+    const result = await intelligenceIpc.listProjects('recent');
+    expect(result).toEqual([]);
+    expect(mockFetch).toHaveBeenCalledWith(
+      '/api/intelligence/invoke',
+      expect.objectContaining({
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ cmd: 'intelligence_list_projects', args: { sort: 'recent' } }),
+      }),
+    );
+  });
+
+  it('rejects with not-connected when neither Tauri nor fetch is available', async () => {
+    delete (globalThis as { fetch?: unknown }).fetch;
     await expect(intelligenceIpc.listProjects()).rejects.toThrow('not connected');
   });
 
-  it('event subscriptions return noop unlisten when Tauri absent', async () => {
-    removeTauriMock();
+  it('rejects with bridge error message when HTTP returns non-ok', async () => {
+    const mockFetch = vi.fn().mockResolvedValue({
+      ok: false,
+      status: 500,
+      statusText: 'Internal Server Error',
+      json: () => Promise.resolve({ error: 'KBStore: registry not open', cmd: 'intelligence_list_projects' }),
+    });
+    globalThis.fetch = mockFetch as unknown as typeof globalThis.fetch;
+
+    await expect(intelligenceIpc.listProjects()).rejects.toThrow('registry not open');
+  });
+
+  it('event subscriptions return noop unlisten when Tauri absent and no EventSource', async () => {
+    // jsdom doesn't ship EventSource by default; the fallback should noop
+    delete (globalThis as { EventSource?: unknown }).EventSource;
     const unlisten = await intelligenceIpc.on.statusUpdate(() => { /* noop */ });
-    // Should not throw; returns a callable.
     expect(typeof unlisten).toBe('function');
   });
 });

@@ -703,6 +703,26 @@ async function loadHelperRouter() {
   }
 }
 
+// ---------------------------------------------------------------------------
+// Intelligence dashboard bridge (Phase 826.5 — IPC-to-HTTP for browser-tab mode)
+// ---------------------------------------------------------------------------
+
+let intelligenceBridge = null;
+
+async function loadIntelligenceBridge() {
+  try {
+    const mod = await import('../dist/intelligence/dashboard-bridge.js');
+    intelligenceBridge = mod.createIntelligenceBridge(CWD);
+    console.log('[intelligence] Bridge loaded from dist/intelligence/dashboard-bridge.js');
+    return true;
+  } catch (err) {
+    console.error('[intelligence] Failed to load IPC-to-HTTP bridge:', err.message);
+    console.error('[intelligence] POST /api/intelligence/invoke will not be available');
+    console.error('[intelligence] Browser-tab mode will fall back to read-only static UI');
+    return false;
+  }
+}
+
 let isGenerating = false;
 let generatedAt = null;
 
@@ -814,6 +834,28 @@ const server = createServer(async (req, res) => {
     if (handled) return;
   }
 
+  // API: intelligence dashboard IPC-to-HTTP bridge (Phase 826.5)
+  // Browser-tab mode dispatches Tauri-style commands via POST /api/intelligence/invoke
+  if (intelligenceBridge && pathname === '/api/intelligence/invoke') {
+    if (req.method !== 'POST') {
+      res.writeHead(405, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ error: 'method not allowed; use POST' }));
+    }
+    let body = '';
+    req.on('data', (chunk) => { body += chunk.toString('utf8'); });
+    req.on('end', async () => {
+      try {
+        await intelligenceBridge.handle(req, res, body);
+      } catch (err) {
+        if (!res.headersSent) {
+          res.writeHead(500, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ error: err.message }));
+        }
+      }
+    });
+    return;
+  }
+
   // Static file serving from dashboard/
   let filePath = pathname === '/' ? '/index.html' : pathname;
   filePath = join(OUTPUT_DIR, filePath);
@@ -877,6 +919,9 @@ async function main() {
 
   // Load helper router (console endpoint)
   await loadHelperRouter();
+
+  // Load intelligence dashboard IPC-to-HTTP bridge (browser-tab mode support)
+  await loadIntelligenceBridge();
 
   // Initial generation
   if (hasGenerator && existsSync(PLANNING_DIR)) {
