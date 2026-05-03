@@ -29,9 +29,11 @@ import type {
   DecisionId,
   Bundle,
   BundleId,
+  BundlePreview,
   Snapshot,
   SnapshotId,
 } from '../types.js';
+import type { EventBus, IntelligenceEvent } from '../events/types.js';
 import { applyMigrations } from './migrations.js';
 import {
   rowToProject,
@@ -98,6 +100,9 @@ export class KBStore implements IntelligenceKB {
   private readonly _projectDBs = new Map<string, Database.Database>();
   // Maps projectId → absolute path to project's intelligence.db
   private readonly _projectPaths = new Map<string, string>();
+  // Phase 827 / C01 — optional event bus; C02 wires singleton at serve-dashboard startup.
+  // When undefined, publish calls no-op (safe for tests that don't care about events).
+  private _eventBus?: EventBus<IntelligenceEvent>;
 
   constructor(opts?: KBStoreOptions) {
     this.registryPath =
@@ -109,6 +114,14 @@ export class KBStore implements IntelligenceKB {
       join(dirname(new URL(import.meta.url).pathname), '..', 'db', 'migrations');
 
     this._busyTimeoutMs = opts?.busyTimeoutMs ?? 5000;
+  }
+
+  /**
+   * Wire the optional event bus (Phase 827 / C01).
+   * Called by C02 at serve-dashboard startup; no-op in tests that don't need events.
+   */
+  setEventBus(bus: EventBus<IntelligenceEvent>): void {
+    this._eventBus = bus;
   }
 
   // ─── Lifecycle ────────────────────────────────────────────────────────
@@ -677,6 +690,120 @@ export class KBStore implements IntelligenceKB {
     });
 
     return txn();
+  }
+
+  // ─── Phase 827 / C01 — editDecision, withdrawDecision, previewBundle ──
+
+  /**
+   * T1: Append entries to the `developer_modifications` JSON array column.
+   * Modifications are append-only (existing entries preserved).
+   * Emits `intelligence:findings_updated` via the optional event bus.
+   */
+  async editDecision(
+    decisionId: DecisionId,
+    modifications: string[],
+  ): Promise<Decision> {
+    await this.ensureRegistry();
+    const { pdb, projectId } = await this._findProjectDBForDecision(decisionId);
+
+    const txn = pdb.transaction(() => {
+      const row = pdb
+        .prepare('SELECT * FROM decisions WHERE id = ?')
+        .get(decisionId) as DecisionRow | undefined;
+      if (!row) throw new Error(`Decision ${decisionId} not found`);
+
+      const existing: string[] = JSON.parse(row.developer_modifications || '[]');
+      const merged = [...existing, ...modifications];
+
+      pdb
+        .prepare('UPDATE decisions SET developer_modifications = ? WHERE id = ?')
+        .run(JSON.stringify(merged), decisionId);
+
+      return pdb
+        .prepare('SELECT * FROM decisions WHERE id = ?')
+        .get(decisionId) as DecisionRow;
+    });
+
+    const updated = txn();
+    const decision = rowToDecision(updated);
+
+    // Bus.publish failures must NOT roll back the KB write (KB integrity > event delivery).
+    try {
+      this._eventBus?.publish({
+        type: 'intelligence:findings_updated',
+        payload: { project_id: projectId, added: [], removed: [], at: new Date().toISOString() },
+      });
+    } catch (err) {
+      console.error('[KBStore] editDecision: event bus publish failed (ignored):', err);
+    }
+
+    return decision;
+  }
+
+  /**
+   * T4/T5: Transition `state` column to `'withdrawn'`.
+   * Idempotent: calling on an already-withdrawn decision returns the row, no error, no double-emit.
+   */
+  async withdrawDecision(decisionId: DecisionId): Promise<Decision> {
+    await this.ensureRegistry();
+    const { pdb, projectId } = await this._findProjectDBForDecision(decisionId);
+
+    let wasAlreadyWithdrawn = false;
+
+    const txn = pdb.transaction(() => {
+      const row = pdb
+        .prepare('SELECT * FROM decisions WHERE id = ?')
+        .get(decisionId) as DecisionRow | undefined;
+      if (!row) throw new Error(`Decision ${decisionId} not found`);
+
+      if (row.state === 'withdrawn') {
+        wasAlreadyWithdrawn = true;
+        return row; // idempotent — no UPDATE, no emit
+      }
+
+      pdb
+        .prepare('UPDATE decisions SET state = ? WHERE id = ?')
+        .run('withdrawn', decisionId);
+      return pdb
+        .prepare('SELECT * FROM decisions WHERE id = ?')
+        .get(decisionId) as DecisionRow;
+    });
+
+    const updated = txn();
+    const decision = rowToDecision(updated);
+
+    // Only emit on the real state transition, not on no-op idempotent retries.
+    if (!wasAlreadyWithdrawn) {
+      try {
+        this._eventBus?.publish({
+          type: 'intelligence:findings_updated',
+          payload: { project_id: projectId, added: [], removed: [], at: new Date().toISOString() },
+        });
+      } catch (err) {
+        console.error('[KBStore] withdrawDecision: event bus publish failed (ignored):', err);
+      }
+    }
+
+    return decision;
+  }
+
+  /**
+   * T6/T7: Read-only query of pending decisions for the meeting.
+   * No event emission (preview is a read).
+   */
+  async previewBundle(meetingId: MeetingId): Promise<BundlePreview> {
+    await this.ensureRegistry();
+    const { pdb } = await this._findProjectDBForMeeting(meetingId);
+
+    const rows = pdb
+      .prepare('SELECT * FROM decisions WHERE meeting_id = ? AND state = ?')
+      .all(meetingId, 'pending') as DecisionRow[];
+
+    return {
+      meeting_id: meetingId,
+      decision_count: rows.length,
+      decisions: rows.map(rowToDecision),
+    };
   }
 
   // ─── IntelligenceKB: In-flight work ──────────────────────────────────
