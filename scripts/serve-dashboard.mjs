@@ -723,6 +723,42 @@ async function loadIntelligenceBridge() {
   }
 }
 
+// ---------------------------------------------------------------------------
+// Intelligence event bus — Phase 827 / C02: SSE broadcast wiring
+// ---------------------------------------------------------------------------
+
+/**
+ * Subscribe the SSE broadcast loop to IntelligenceEventBus events.
+ *
+ * Lazy-imports from dist/ so that a missing build does NOT crash startup.
+ * Each published IntelligenceEvent is serialised as a `data: <JSON>\n\n`
+ * envelope and written to all currently-connected SSE clients.
+ *
+ * Dead-client write failures are caught silently (the existing live-reload
+ * handler already reaps disconnected clients via 'close' events; we reuse
+ * that pattern here).
+ *
+ * Returns the unsubscribe function, or null if the bus could not be loaded.
+ */
+async function loadIntelligenceEventBus() {
+  try {
+    const mod = await import('../dist/intelligence/events/bus.js');
+    const bus = mod.getIntelligenceEventBus();
+    const unsubscribe = bus.subscribe((event) => {
+      const envelope = `data: ${JSON.stringify(event)}\n\n`;
+      for (const client of sseClients) {
+        try { client.write(envelope); } catch { /* dead client; live-reload handler reaps */ }
+      }
+    });
+    console.log('[intelligence-events] Bus subscribed; broadcasting to /api/events');
+    return unsubscribe;
+  } catch (err) {
+    console.error('[intelligence-events] Failed to load event bus:', err.message);
+    console.error('[intelligence-events] /api/events will only carry live-reload events');
+    return null;
+  }
+}
+
 let isGenerating = false;
 let generatedAt = null;
 
@@ -922,6 +958,9 @@ async function main() {
 
   // Load intelligence dashboard IPC-to-HTTP bridge (browser-tab mode support)
   await loadIntelligenceBridge();
+
+  // Wire intelligence event bus to SSE broadcast (Phase 827 / C02)
+  await loadIntelligenceEventBus();
 
   // Initial generation
   if (hasGenerator && existsSync(PLANNING_DIR)) {
