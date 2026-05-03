@@ -24,3 +24,11 @@ export type {
   BundleManifestData,
   ManifestDecisionEntry,
 } from './emitter/emit.js';
+export { MeetingRecordGenerator } from './meetings/record.js';
+export type {
+  MeetingRecordKB,
+  MeetingRecordGeneratorOptions,
+  RecordResult,
+  RecordSummary,
+  OutcomeUpdate,
+} from './meetings/record.js';
