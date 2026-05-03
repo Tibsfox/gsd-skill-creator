@@ -13,6 +13,7 @@ Adaptive learning layer for Claude Code that creates, validates, and manages ski
 
 ## Key File Locations
 
+<!-- AUTO:file-locations:START -->
 - `.planning/` -- GSD project management (ROADMAP.md, STATE.md, REQUIREMENTS.md, config.json)
 - `.claude/skills/` -- auto-activating skills (gsd-workflow, skill-integration, session-awareness, security-hygiene, and others)
 - `src/anytime-valid/` -- anytime-valid e-process martingale primitive (Ville's inequality; consumed by `src/orchestration/anytime-gate.ts` and future `src/ab-harness/` consumer per JP-029)
@@ -62,6 +63,7 @@ Adaptive learning layer for Claude Code that creates, validates, and manages ski
 - `docs/` -- 435+ markdown files, canonical documentation and release notes
 - `docs/adr/` -- Architecture Decision Records (ADR 0001 vendoring policy, ADR 0002 dual-impl precedence)
 - `www/tibsfox/com/Research/` -- 168 research projects (179 dirs), PNW Research Series
+<!-- AUTO:file-locations:END -->
 
 ## Commit Convention
 
@@ -92,6 +94,7 @@ This preserves bisect intent in the commit message even when commit boundaries d
 
 ### Environment Variables (added in v1.49.585)
 
+<!-- AUTO:env-vars:START -->
 | Var | Default behavior | Override behavior |
 |---|---|---|
 | `SC_SELF_MOD` | unset → BLOCK self-mod writes | `=1` → allow `.claude/skills\|agents\|hooks/` writes |
@@ -103,6 +106,7 @@ This preserves bisect intent in the commit message even when commit boundaries d
 | `PRE_TAG_GATE_QUIET` | unset → step labels printed | `=1` → suppress step labels (errors still printed) |
 | `SC_SKIP_CI_GATE` | unset → verify CI green on origin/dev (HARD RULE) | `=1` → skip CI-on-dev verification step in pre-tag-gate (emergency only — fix the failing CI instead) |
 | `BUILD_WWW_BUNDLES_QUIET` | unset → step labels printed | `=1` → suppress step labels in `tools/build-www-bundles.sh` (errors still printed) |
+<!-- AUTO:env-vars:END -->
 
 ## Important Notes
 
