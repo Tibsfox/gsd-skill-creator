@@ -1,0 +1,159 @@
+/**
+ * intelligence.css — Phase 826 / C14 / D-26-50
+ *
+ * Intelligence tab stylesheet. Inherits GSD dashboard design tokens.
+ * Combines component-08 (planning panel) + component-09 (live-work panel) styles.
+ *
+ * D-26-50: Does not override any existing GSD dashboard class.
+ * D-26-45: No existing dashboard file is modified or deleted.
+ */
+
+/* ─── Mount containers ────────────────────────────────────────────────────── */
+
+#intelligence-root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6, 1.5rem);
+  padding: var(--space-6, 1.5rem);
+  min-height: 100vh;
+  background: var(--bg-primary, #0d1117);
+  color: var(--text-primary, #c9d1d9);
+  font-family: var(--font-sans, 'Inter', system-ui, sans-serif);
+}
+
+.intelligence-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4, 1rem);
+}
+
+/* ─── Planning panel (component-08) ──────────────────────────────────────── */
+
+#intelligence-planning {
+  background: var(--bg-secondary, #161b22);
+  border: 1px solid var(--border-default, #30363d);
+  border-radius: var(--radius-lg, 8px);
+  padding: var(--space-4, 1rem);
+  min-height: 400px;
+}
+
+#intelligence-planning:empty::after {
+  content: 'Loading planning data...';
+  color: var(--text-muted, #6e7681);
+  font-size: 0.875rem;
+}
+
+/* ─── Live-work panel (component-09) ─────────────────────────────────────── */
+
+#intelligence-live-work {
+  background: var(--bg-secondary, #161b22);
+  border: 1px solid var(--border-default, #30363d);
+  border-radius: var(--radius-lg, 8px);
+  padding: var(--space-4, 1rem);
+}
+
+/* D-26-50: hide empty live-work panel */
+#intelligence-live-work:empty {
+  display: none;
+}
+
+/* ─── Finding severity pills (D-24-09 mapping) ───────────────────────────── */
+
+.intelligence-pill {
+  display: inline-block;
+  padding: 0.125rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.intelligence-pill--high {
+  background: rgba(248, 81, 73, 0.15);
+  color: #f85149;
+  border: 1px solid rgba(248, 81, 73, 0.4);
+}
+
+.intelligence-pill--med {
+  background: rgba(210, 153, 34, 0.15);
+  color: #d29922;
+  border: 1px solid rgba(210, 153, 34, 0.4);
+}
+
+.intelligence-pill--low {
+  background: rgba(56, 139, 253, 0.15);
+  color: #388bfd;
+  border: 1px solid rgba(56, 139, 253, 0.4);
+}
+
+/* ─── Static-mode fallback banner (D-26-47 / E14) ──────────────────────── */
+
+.intelligence-static-banner {
+  background: var(--bg-secondary, #161b22);
+  border: 1px solid var(--color-warning, #d29922);
+  border-radius: var(--radius-lg, 8px);
+  padding: var(--space-4, 1rem) var(--space-6, 1.5rem);
+  margin: var(--space-4, 1rem) 0;
+  color: var(--text-primary, #c9d1d9);
+}
+
+.intelligence-static-banner__title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-warning, #d29922);
+  margin-bottom: var(--space-2, 0.5rem);
+}
+
+.intelligence-static-banner__command {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  background: var(--bg-primary, #0d1117);
+  border: 1px solid var(--border-default, #30363d);
+  border-radius: var(--radius-sm, 4px);
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  color: var(--text-code, #a5d6ff);
+}
+
+/* ─── Meeting / decision cards ────────────────────────────────────────────── */
+
+.intelligence-card {
+  background: var(--bg-secondary, #161b22);
+  border: 1px solid var(--border-default, #30363d);
+  border-radius: var(--radius-lg, 8px);
+  padding: var(--space-4, 1rem);
+  transition: border-color 0.15s ease;
+}
+
+.intelligence-card:hover {
+  border-color: var(--border-muted, #484f58);
+}
+
+.intelligence-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-3, 0.75rem);
+}
+
+.intelligence-card__title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-primary, #c9d1d9);
+}
+
+.intelligence-card__meta {
+  font-size: 0.75rem;
+  color: var(--text-muted, #6e7681);
+}
+
+/* ─── Section headings ────────────────────────────────────────────────────── */
+
+.intelligence-section-heading {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted, #6e7681);
+  margin-bottom: var(--space-3, 0.75rem);
+}
