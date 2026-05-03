@@ -22,6 +22,17 @@ node_modules/
 infra/dashboard/*.html
 infra/dashboard/.dashboard-manifest.json
 
+# Generated dashboard pages from scripts/serve-dashboard.mjs.
+# dashboard/index.html and dashboard/intelligence* ARE tracked
+# (Phase 826 v1.49.597 milestone source-of-truth); these others
+# are build-time-only HTML and manifest output.
+dashboard/console.html
+dashboard/milestones.html
+dashboard/requirements.html
+dashboard/roadmap.html
+dashboard/state.html
+dashboard/.dashboard-manifest.json
+
 # Tauri / Desktop
 src-tauri/target/
 src-tauri/gen/
