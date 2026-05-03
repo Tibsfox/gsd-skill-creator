@@ -139,25 +139,70 @@ function getTauriListen(): ListenFn | null {
   return null;
 }
 
-/** Invoke a Tauri command (Tauri shell) or reject with "server unavailable" (browser). */
+/** Invoke a Tauri command (Tauri shell) or HTTP-dispatch via the dashboard bridge (browser). */
 async function invoke<T>(cmd: string, args?: Record<string, unknown>): Promise<T> {
   const fn = getTauriInvoke();
   if (fn) {
     return fn<T>(cmd, args);
   }
-  // Browser-tab mode: Tauri 2 exposes the same commands via WebSocket on the dev server.
-  // For Wave 1, reject cleanly so E14 empty-state can render. Phase 825 wires WS bridge.
-  throw new Error(`intelligence-server: not connected (cmd=${cmd})`);
+  // Browser-tab mode: dispatch via the Phase 826.5 IPC-to-HTTP bridge served by
+  // scripts/serve-dashboard.mjs. Same KBStore instance backs both Tauri and HTTP
+  // paths, so behaviour is identical.
+  if (typeof globalThis.fetch !== 'function') {
+    // No fetch available (Node SSR / vitest before mocks): keep the strict reject
+    // so test environments that haven't installed an HTTP stub fail loudly.
+    throw new Error(`intelligence-server: not connected (cmd=${cmd})`);
+  }
+  const resp = await fetch('/api/intelligence/invoke', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ cmd, args: args ?? {} }),
+  });
+  if (!resp.ok) {
+    let message = resp.statusText;
+    try {
+      const errBody = await resp.json();
+      if (errBody && typeof errBody === 'object' && 'error' in errBody && typeof errBody.error === 'string') {
+        message = errBody.error;
+      }
+    } catch {
+      // body wasn't JSON — keep statusText
+    }
+    throw new Error(`intelligence-server: ${message} (cmd=${cmd})`);
+  }
+  return (await resp.json()) as T;
 }
 
-/** Subscribe to a Tauri event. Returns an unlisten function. */
+/** Subscribe to a Tauri event (Tauri shell) or to an SSE channel (browser). */
 async function listen<T>(event: string, cb: (payload: T) => void): Promise<() => void> {
   const fn = getTauriListen();
   if (fn) {
     return fn<T>(event, (e) => cb(e.payload));
   }
-  // No-op in non-Tauri context.
-  return () => { /* noop */ };
+  // Browser-tab mode: subscribe to /api/events SSE; messages are JSON envelopes
+  // shaped { type: '<event>', payload: T }. The dashboard server's existing
+  // EventSource broadcasts both live-reload events AND intelligence events;
+  // we filter by type.
+  const g = globalThis as unknown as { EventSource?: typeof EventSource };
+  if (typeof g.EventSource !== 'function') {
+    return () => { /* noop — no EventSource available */ };
+  }
+  const es = new g.EventSource('/api/events');
+  const handler = (e: MessageEvent) => {
+    try {
+      const data = JSON.parse(e.data) as { type?: string; payload?: T };
+      if (data && data.type === event && 'payload' in data) {
+        cb(data.payload as T);
+      }
+    } catch {
+      // Non-JSON event (e.g., live-reload heartbeat) — ignore
+    }
+  };
+  es.addEventListener('message', handler);
+  return () => {
+    es.removeEventListener('message', handler);
+    es.close();
+  };
 }
 
 // ─── Public IPC client ─────────────────────────────────────────────────────────

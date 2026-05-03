@@ -130,12 +130,30 @@ main {
     <script type="module" src="intelligence/planning.bundle.js" onerror="window.__intelligencePlanningLoadError=true"></script>
     <script type="module" src="intelligence/live-work.bundle.js" onerror="window.__intelligenceLiveWorkLoadError=true"></script>
     <script>
-      // Static-mode fallback: show banner if bundles fail to load or Tauri IPC not available
+      // Static-mode fallback (Phase 826.5): show banner only when neither Tauri IPC
+      // NOR the HTTP bridge is reachable (true degraded state). If the bridge IS
+      // reachable, browser-tab mode is functional and the banner stays hidden.
       (function() {
-        var checkStaticMode = function() {
+        var checkStaticMode = async function() {
           var hasTauri = typeof window.__TAURI_IPC__ !== 'undefined' || typeof window.__TAURI__ !== 'undefined';
           var planningError = window.__intelligencePlanningLoadError;
-          if (!hasTauri || planningError) {
+          if (hasTauri && !planningError) return; // Tauri shell, all good
+
+          // Probe the IPC-to-HTTP bridge — Phase 826.5 closes the spec gap by
+          // exposing the same 18 commands over POST /api/intelligence/invoke.
+          var bridgeReachable = false;
+          try {
+            var resp = await fetch('/api/intelligence/invoke', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ cmd: 'intelligence_list_projects', args: {} })
+            });
+            // Any 2xx OR 4xx-other-than-404 means the bridge handler is wired
+            bridgeReachable = resp.status !== 404;
+          } catch (e) {
+            bridgeReachable = false;
+          }
+          if (planningError || !bridgeReachable) {
             var banner = document.getElementById('intelligence-static-mode-banner');
             if (banner) banner.style.display = '';
           }

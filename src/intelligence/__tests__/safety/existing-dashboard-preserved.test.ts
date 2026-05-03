@@ -105,17 +105,26 @@ describe('S12: existing dashboard tabs/views preserved (G2 BLOCK)', () => {
     expect(distLines, `S12: dist/dashboard/index.html (${distLines} lines) has fewer lines than source (${sourceLines} lines)`).toBeGreaterThanOrEqual(sourceLines);
   });
 
-  it('dist/dashboard/index.html (if built) has exactly one more line than the source (1-line migration rule)', () => {
+  it('both dist and source dashboard index.html contain the nav-shim script tag (renderer-template integration)', () => {
     if (!existsSync(DASHBOARD_HTML) || !existsSync(DASHBOARD_SOURCE)) {
       // Pre-build — skip
       return;
     }
-    const sourceLines = readFileSync(DASHBOARD_SOURCE, 'utf8').split('\n').length;
-    const distLines = readFileSync(DASHBOARD_HTML, 'utf8').split('\n').length;
 
-    // D-26-44: exactly one line added (the nav-shim script tag)
-    // Allow for ±1 line tolerance (some editors may normalize trailing newlines)
-    expect(distLines, `S12/D-26-44: dist/dashboard/index.html should be source+1 lines but got source=${sourceLines} dist=${distLines}`).toBeGreaterThanOrEqual(sourceLines);
-    expect(distLines - sourceLines, `S12/D-26-44: More than 1 line added to index.html (added ${distLines - sourceLines} lines)`).toBeLessThanOrEqual(2);
+    // D-26-44 evolved (Phase 826.5): the original "1-line edit to dist/index.html"
+    // rule was replaced by a renderer-template-level integration in
+    // src/dashboard/renderer.ts. The script tag is now emitted by the universal
+    // <head> template every time the dashboard generator runs.
+    //
+    // Line-count comparison between dist/ and source/ is intentionally NOT
+    // asserted here because both are regenerated build artifacts that drift
+    // independently (depending on regen timing, timestamp variations, and
+    // intervening planning content changes). The real invariant is structural:
+    // both files emit the nav-shim script tag because both came from the
+    // shared renderer template.
+    const sourceHasShim = readFileSync(DASHBOARD_SOURCE, 'utf8').includes('intelligence/nav-shim.js');
+    const distHasShim = readFileSync(DASHBOARD_HTML, 'utf8').includes('intelligence/nav-shim.js');
+    expect(sourceHasShim, 'S12/D-26-44: dashboard source missing nav-shim script tag').toBe(true);
+    expect(distHasShim, 'S12/D-26-44: dist dashboard missing nav-shim script tag').toBe(true);
   });
 });
