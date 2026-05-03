@@ -253,28 +253,33 @@ export function parseRequirementsMd(content: string): RequirementsData {
     return { goal: '', groups: [] };
   }
 
-  const sections = parseMarkdownSections(content, 2);
+  const level2Sections = parseMarkdownSections(content, 2);
 
-  // Goal
-  const goalContent = getSectionContent(sections, 'Goal');
+  // Goal — explicit "## Goal" section (legacy) takes precedence; otherwise empty.
+  const goalContent = getSectionContent(level2Sections, 'Goal');
   const goal = goalContent
     ? goalContent.split('\n').filter((l) => l.trim()).join(' ').trim()
     : '';
 
-  // Requirements section contains ### groups
-  const reqSection = getSectionContent(sections, 'Requirements');
   const groups: RequirementGroup[] = [];
 
-  if (reqSection) {
+  // Requirement-ID matcher: legacy `**REQ-NNN**` plus current `**PREFIX-XXX**`
+  // (e.g. DASH-AN-01, MATH-001, INT-12). Any uppercase letter run + optional
+  // sub-prefix + numeric suffix.
+  const reqIdRe = /\*\*([A-Z]+(?:-[A-Z]+)*-\d+[A-Za-z]?)\*\*/;
+
+  const ingestSubsections = (parentContent: string): void => {
     const subSections = parseMarkdownSections(
-      `## Requirements\n\n${reqSection}`,
+      `## _\n\n${parentContent}`,
       3,
     );
     for (const sub of subSections) {
       const requirements = extractListItems(sub.content)
-        .filter((item) => item.match(/\*\*REQ-\d+\*\*/))
+        .filter((item) => reqIdRe.test(item))
         .map((item) => {
-          const idMatch = item.match(/\*\*(REQ-\d+)\*\*:\s*(.*)/);
+          const idMatch = item.match(
+            /\*\*([A-Z]+(?:-[A-Z]+)*-\d+[A-Za-z]?)\*\*:?\s*(.*)/,
+          );
           return idMatch
             ? { id: idMatch[1], text: idMatch[2].trim() }
             : { id: '', text: item };
@@ -287,6 +292,21 @@ export function parseRequirementsMd(content: string): RequirementsData {
           requirements,
         });
       }
+    }
+  };
+
+  // Legacy format: "## Requirements" wrapper containing level-3 category groups.
+  const legacyReqSection = getSectionContent(level2Sections, 'Requirements');
+  if (legacyReqSection) {
+    ingestSubsections(legacyReqSection);
+  }
+
+  // Current format: per-milestone level-2 wrappers like
+  //   "## Milestone v1.49.597 — GSD Intelligence Dashboard"
+  // Each contains level-3 category groups directly.
+  for (const section of level2Sections) {
+    if (/^Milestone\s+v[\d.]+/i.test(section.title)) {
+      ingestSubsections(section.content);
     }
   }
 
@@ -301,15 +321,24 @@ export function parseRoadmapMd(content: string): RoadmapData {
     return { phases: [], totalPhases: 0 };
   }
 
-  const sections = parseMarkdownSections(content, 2);
+  // Walk level 2 (legacy: phases at top level) AND level 3 (current: phases
+  // nested under "## Milestone vX.Y -- Name" wrappers). Phase numbers may be
+  // decimal (e.g. 826.5) so don't restrict to integers.
+  const sections = [
+    ...parseMarkdownSections(content, 2),
+    ...parseMarkdownSections(content, 3),
+  ];
   const phases: Phase[] = [];
+  const seenPhaseNumbers = new Set<number>();
 
   for (const section of sections) {
-    // Match "Phase NN: Name"
-    const phaseMatch = section.title.match(/Phase (\d+):\s+(.+)/);
+    // Match "Phase NN[.M]: Name" — accept decimal phase numbers
+    const phaseMatch = section.title.match(/Phase (\d+(?:\.\d+)?):\s+(.+)/);
     if (!phaseMatch) continue;
 
-    const number = parseInt(phaseMatch[1], 10);
+    const number = parseFloat(phaseMatch[1]);
+    if (seenPhaseNumbers.has(number)) continue;
+    seenPhaseNumbers.add(number);
     const name = phaseMatch[2].trim();
 
     const status = extractField(section.content, /\*\*Status:\*\*\s*(.+)/);
@@ -452,21 +481,46 @@ export function parseMilestonesMd(content: string): MilestonesData {
 
   const milestones: MilestoneData[] = [];
 
-  // Parse ### headings for individual milestones
-  const sections = parseMarkdownSections(content, 3);
+  // Walk both level 2 (current `.planning/MILESTONES.md` format — milestones at
+  // top level) and level 3 (legacy format — milestones nested under "## Shipped"
+  // or "## In Progress"). Versions seen at level 2 take precedence over level 3.
+  const seenVersions = new Set<string>();
+  const sections = [
+    ...parseMarkdownSections(content, 2),
+    ...parseMarkdownSections(content, 3),
+  ];
 
   for (const section of sections) {
-    // Match "vX.Y — Name (Phases N-M)" or "vX.Y — Name"
-    const versionMatch = section.title.match(
-      /v([\d.]+)\s*(?:--|\u2014)\s*(.+)/,
+    // Heading conventions:
+    //   Legacy:  "vX.Y -- Name (...)" or "vX.Y — Name (...)"
+    //   Current: "vX.Y Name (Status: date — extra)" (no separator; status in parens)
+    let versionMatch = section.title.match(
+      /^v([\d.]+)\s*(?:--|\u2014)\s*(.+)$/,
     );
-    if (!versionMatch) continue;
+    let titleSuffix = '';
+    if (!versionMatch) {
+      const altMatch = section.title.match(
+        /^v([\d.]+)\s+(.+?)(?:\s*\(([^)]+)\))?\s*$/,
+      );
+      if (!altMatch) continue;
+      versionMatch = altMatch as RegExpMatchArray;
+      titleSuffix = altMatch[3] ?? '';
+    }
 
     const version = `v${versionMatch[1]}`;
+    if (seenVersions.has(version)) continue;
+    seenVersions.add(version);
     const name = versionMatch[2].trim();
 
     const goal = extractField(section.content, /\*\*Goal:\*\*\s*(.+)/);
-    const shipped = extractField(section.content, /\*\*Shipped:\*\*\s*(.+)/);
+    let shipped = extractField(section.content, /\*\*Shipped:\*\*\s*(.+)/);
+    // Fall back to title-suffix dates: "(Closed: 2026-04-24 — ready_for_review)" etc.
+    if (!shipped && titleSuffix) {
+      const suffixDate = titleSuffix.match(
+        /(?:Shipped|Closed|Code-complete|Opened):\s*(\d{4}-\d{2}-\d{2})/,
+      );
+      if (suffixDate) shipped = suffixDate[1];
+    }
 
     // Stats: **Requirements:** N | **Phases:** N | **Plans:** N
     const statsLine = section.content.match(
