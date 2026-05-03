@@ -13,7 +13,7 @@
  *   - Preserves scroll position across reloads
  *
  * Usage:
- *   node serve-dashboard.mjs [--port 3000] [--planning .planning] [--output dashboard]
+ *   node serve-dashboard.mjs [--port 3030] [--planning .planning] [--output dashboard]
  *
  * Zero external dependencies — uses only Node.js built-ins + the compiled
  * dashboard generator from dist/dashboard/generator.js.
@@ -34,7 +34,7 @@ function getArg(name, fallback) {
   return idx !== -1 && args[idx + 1] ? args[idx + 1] : fallback;
 }
 
-const PORT = parseInt(getArg('port', '3000'), 10);
+const PORT = parseInt(getArg('port', '3030'), 10);
 const PLANNING_DIR = resolve(getArg('planning', '.planning'));
 const OUTPUT_DIR = resolve(getArg('output', 'dashboard'));
 const CWD = process.cwd();
