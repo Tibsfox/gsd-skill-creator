@@ -195,21 +195,19 @@ The CI harness-integrity test FAILS if any manifest version drifts independently
 
 **Why steps 4 + 5 were added (v1.49.587):** v1.49.586 follow-up (2026-04-29) discovered (a) the SPICE renderer module shipped as TypeScript source with no compile step wired up — 126 SPICE viewer pages had been broken on tibsfox.com since v1.49.581 (the spec said "builds with the existing Vite pipeline" but no Vite step landed); (b) parallel-session ship-coordination scenarios where CI on `origin/dev` could be still pending or red while a separate operator session was already pushing to main. The user formalized the discipline as a HARD RULE: "before pushing to main, verify CI passes on dev first." Step 4 operationalizes the rule deterministically; step 5 prevents recurrence of unwired-build drift by always rebuilding browser-bundles before tag.
 
-**Dev/main sync after each main-merge (HARD RULE — added v1.49.594 follow-up to v1.49.593 ship; closes Lesson #10221 candidate):**
+**Dev/main sync after each main-merge (HARD RULE — closes Lesson #10221 candidate):**
 
-After EACH `git push origin main` (the initial dev→main ship merge AND the post-ship RH refresh sync merge), fast-forward `dev` to include the merge commit so the two branches stay in sync:
+After EACH `git push origin main` (the initial dev→main ship merge AND the post-ship RH refresh sync merge), run:
 
 ```bash
-git checkout dev
-git merge --ff-only main    # always succeeds — main's tip merge commit has dev's tip as parent
-git push origin dev
+npm run ship-sync   # FF dev to main, push origin dev (idempotent)
 ```
 
-**Why this step exists:** `git merge --no-ff dev` on main creates a merge commit that exists ONLY on main, not on dev. Across N ships, main accumulates 2N merge commits that dev doesn't have, causing `dev is N commits behind main` drift in the GitHub UI. v1.49.591 + v1.49.592 + v1.49.593 each accumulated 2 such commits → dev was 6 commits behind main at v1.49.593 close. The fast-forward sync is cheap (no rebase, no conflicts possible since dev's tip is one parent of the merge commit) and zeroes the drift.
+The wrapper at `tools/ship-sync.sh` is idempotent (no-op when dev is already in sync), restores the original branch on early exit, and exits 2 if the FF would be refused (dev has divergent commits — investigate before retrying). Closes the prose-only discipline added v1.49.594 by promoting it to a tested script (4 hermetic tests at `tools/__tests__/ship-sync.test.mjs`).
 
-**Insertion points in the ship pipeline:** AFTER each of the two `git push origin main` calls — once after the initial ship merge (post-tag), once after the post-ship RH refresh merge.
+**Why this step exists:** `git merge --no-ff dev` on main creates a merge commit that lives only on main; across N ships, main accumulates 2N merge commits dev lacks → "dev is N commits behind" drift in the GitHub UI. The FF zeroes it cheaply (no rebase, no conflicts since dev's tip is one parent of the merge commit).
 
-**Pre-push hook check (advisory; added at v1.49.594 W0):** `.git/hooks/pre-push` warns when pushing dev to origin if `git log dev..origin/main` returns >0 (dev is behind main). The warning surfaces drift without blocking; the fast-forward sync above is the canonical fix.
+**Pre-push hook check (advisory; v1.49.594 W0):** `.git/hooks/pre-push` warns when pushing dev to origin if `git log dev..origin/main` > 0. The warning surfaces drift without blocking; `npm run ship-sync` is the canonical fix.
 
 ---
 
