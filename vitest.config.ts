@@ -62,6 +62,20 @@ export default defineConfig({
           exclude: ['**/node_modules/**'],
         },
       },
+      // Intelligence Dashboard UI tests (Phase 824 C08/C09 — desktop/intelligence/).
+      // Uses jsdom environment to simulate browser DOM. No Node module imports allowed (S10).
+      {
+        test: {
+          name: 'intelligence-ui',
+          globals: true,
+          environment: 'jsdom',
+          include: [
+            'desktop/intelligence/**/*.test.ts',
+            'desktop/intelligence/**/*.test.tsx',
+          ],
+          exclude: ['**/node_modules/**', 'dist/**'],
+        },
+      },
       // Integration tests — env-gated via GSD_*_INTEGRATION=1 inside the files.
       // Opt-in only: selected via `vitest run --project integration`.
       {
