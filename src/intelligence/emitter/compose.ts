@@ -233,7 +233,11 @@ export class MissionEmitter {
     return meta;
   }
 
-  /** Compose the bundle manifest YAML. */
+  /** Compose the bundle manifest YAML.
+   *
+   * When `decisions` entries include a `ctx` field, coupling-aware batch_hints
+   * are computed. Otherwise falls back to the single-group form.
+   */
   composeBundleManifestYaml(args: {
     bundleId: BundleId;
     meetingId: MeetingId;
@@ -241,10 +245,23 @@ export class MissionEmitter {
     decisions: Array<{
       requestId: string;
       decision: Decision;
+      /** Optional: findings context for coupling-aware batch_hints */
+      ctx?: ComposeContext;
     }>;
     excluded: Array<{ requestId: string; decision: Decision }>;
     kbSnapshot: SnapshotId;
   }): string {
+    // Use coupling-aware batch_hints when ctx is available
+    const batchHints = args.decisions.every((d) => d.ctx !== undefined)
+      ? this.computeBatchHintsFromDecisions(
+          args.decisions.map((d) => ({
+            requestId: d.requestId,
+            decision: d.decision,
+            ctx: d.ctx!,
+          })),
+        )
+      : this.computeBatchHints(args.decisions.map((d) => d.requestId));
+
     const data: BundleManifestData = {
       bundle_id: args.bundleId,
       meeting_id: args.meetingId,
@@ -260,7 +277,7 @@ export class MissionEmitter {
           title: decision.ai_draft?.title ?? '(untitled)',
         }),
       ),
-      batch_hints: this.computeBatchHints(args.decisions.map((d) => d.requestId)),
+      batch_hints: batchHints,
       excluded_from_bundle: args.excluded.map(
         ({ requestId, decision }): ManifestExcludedEntry => ({
           request_id: requestId,
@@ -394,12 +411,12 @@ export class MissionEmitter {
       });
     }
 
-    // Compose manifest YAML
+    // Compose manifest YAML (pass ctx for coupling-aware batch_hints)
     const manifestYaml = this.composeBundleManifestYaml({
       bundleId,
       meetingId: meeting.id,
       project,
-      decisions: composed.map(({ decision, requestId }) => ({ requestId, decision })),
+      decisions: composed.map(({ decision, requestId, ctx }) => ({ requestId, decision, ctx })),
       excluded: composedExcluded,
       kbSnapshot: meeting.kb_snapshot,
     });
@@ -554,15 +571,99 @@ export class MissionEmitter {
   }
 
   /**
-   * Compute batch hints. v1: every decision is parallelizable (each in its own
-   * group); shared_context empty; suggested_order = input order. The full
-   * coupling-aware logic lives in MeetingStore C06.
+   * Compute coupling-aware batch hints.
+   *
+   * Decisions whose source_findings include shared coupling_spike findings
+   * belong to the same parallel group (they share a coupling context and
+   * should be dispatched together). All other decisions get their own group.
+   *
+   * Algorithm:
+   *   1. Collect the coupling_spike finding IDs referenced by each decision.
+   *   2. Union-Find over decisions that share at least one coupling_spike.
+   *   3. Emit one group per connected component; singletons get their own group.
+   *
+   * Phase 826 / Carryover 2 (closes 825 batch_hints single-group stub).
+   */
+  private computeBatchHintsFromDecisions(
+    items: Array<{
+      requestId: string;
+      decision: { source_findings: string[] };
+      ctx: { findings: FindingSummary[] };
+    }>,
+  ): {
+    parallelizable: string[][];
+    shared_context: string[];
+    suggested_order: string[];
+  } {
+    if (items.length === 0) {
+      return { parallelizable: [], shared_context: [], suggested_order: [] };
+    }
+
+    const n = items.length;
+    // Union-Find
+    const parent = Array.from({ length: n }, (_, i) => i);
+    const find = (x: number): number => {
+      while (parent[x] !== x) {
+        parent[x] = parent[parent[x]]!;
+        x = parent[x]!;
+      }
+      return x;
+    };
+    const union = (a: number, b: number) => {
+      const ra = find(a);
+      const rb = find(b);
+      if (ra !== rb) parent[ra] = rb;
+    };
+
+    // Map coupling_spike finding ID → set of item indices that reference it
+    const couplingMap = new Map<string, number[]>();
+    for (let i = 0; i < n; i++) {
+      const item = items[i]!;
+      const couplingSpikeIds = item.ctx.findings
+        .filter((f) => f.kind === 'coupling_spike')
+        .map((f) => f.id);
+      for (const fid of couplingSpikeIds) {
+        const existing = couplingMap.get(fid) ?? [];
+        existing.push(i);
+        couplingMap.set(fid, existing);
+      }
+    }
+
+    // Union any items that share a coupling_spike
+    for (const indices of couplingMap.values()) {
+      for (let k = 1; k < indices.length; k++) {
+        union(indices[0]!, indices[k]!);
+      }
+    }
+
+    // Group request IDs by root component
+    const groupMap = new Map<number, string[]>();
+    for (let i = 0; i < n; i++) {
+      const root = find(i);
+      const group = groupMap.get(root) ?? [];
+      group.push(items[i]!.requestId);
+      groupMap.set(root, group);
+    }
+
+    const parallelizable = Array.from(groupMap.values());
+    const suggestedOrder = items.map((d) => d.requestId);
+    return {
+      parallelizable,
+      shared_context: [],
+      suggested_order: suggestedOrder,
+    };
+  }
+
+  /**
+   * @deprecated Use computeBatchHintsFromDecisions for coupling-aware grouping.
+   * Kept for manifest YAML path that only has requestIds (no finding context).
    */
   private computeBatchHints(requestIds: string[]): {
     parallelizable: string[][];
     shared_context: string[];
     suggested_order: string[];
   } {
+    // Fallback: single group (all parallelizable).
     return {
       parallelizable: [requestIds.slice()],
       shared_context: [],
