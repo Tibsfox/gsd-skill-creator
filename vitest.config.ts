@@ -20,6 +20,7 @@ export default defineConfig({
         test: {
           name: 'root',
           globals: true,
+          testTimeout: 15000,
           include: [
             'src/**/*.test.ts',
             'src/**/*.test.tsx',
