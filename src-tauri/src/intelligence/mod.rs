@@ -3,6 +3,7 @@
 //! Re-exports all public symbols from the intelligence submodules.
 //! Phase 824 / C07.
 
+pub mod real_kb;
 pub mod server;
 pub mod types;
 pub mod watchers;

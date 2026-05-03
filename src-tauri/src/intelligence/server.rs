@@ -111,9 +111,26 @@ pub struct IntelligenceState {
 }
 
 impl IntelligenceState {
+    /// Build a state with the stub KB delegate.
+    /// Phase 824 path; retained for tests + transitional use.
     pub fn new_with_stub(repo_root: PathBuf) -> Self {
         Self {
             kb: Box::new(StubKbDelegate),
+            console_inbox_path: repo_root.join(".planning/console/inbox/pending"),
+            console_outbox_path: repo_root.join(".planning/console/outbox/status"),
+        }
+    }
+
+    /// Build a state with the real KB delegate (Phase 825 / D-25-08).
+    ///
+    /// The real delegate opens the same per-project SQLite databases the
+    /// TypeScript `KBStore` writes (~/.gsd/intelligence/registry.db and
+    /// `<project>/.gsd/intelligence/intelligence.db`). Read paths fully
+    /// functional; mutation paths return descriptive errors pointing the
+    /// caller to the canonical TS surface (mutations land Phase 826).
+    pub fn new(repo_root: PathBuf) -> Self {
+        Self {
+            kb: Box::new(super::real_kb::RealKbDelegate::new()),
             console_inbox_path: repo_root.join(".planning/console/inbox/pending"),
             console_outbox_path: repo_root.join(".planning/console/outbox/status"),
         }

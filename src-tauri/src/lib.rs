@@ -28,11 +28,14 @@ pub fn run() {
     tauri::Builder::default()
         .setup(|app| {
             app.manage(Mutex::new(AppState::default()));
-            // Phase 824 / C07: intelligence state (stub KB delegate; real KB wired in Phase 825)
+            // Phase 824 / C07 + Phase 825 / D-25-08: intelligence state with real KB delegate.
+            // The real delegate opens the same SQLite databases the TS KBStore writes
+            // (~/.gsd/intelligence/registry.db and <project>/.gsd/intelligence/intelligence.db).
+            // Read paths fully functional; mutation paths land in Phase 826.
             {
                 let repo_root = std::env::current_dir().unwrap_or_else(|_| std::path::PathBuf::from("."));
                 app.manage(std::sync::Mutex::new(
-                    intelligence::server::IntelligenceState::new_with_stub(repo_root),
+                    intelligence::server::IntelligenceState::new(repo_root),
                 ));
             }
             app.manage(Mutex::new(state::WatcherState::default()));
