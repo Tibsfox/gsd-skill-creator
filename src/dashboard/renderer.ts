@@ -120,6 +120,7 @@ export function renderLayout(options: LayoutOptions): string {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">${metaBlock}
     <title>${escapeHtml(title)}</title>
     <style>${styles}</style>${jsonLdBlock}
+    <script src="intelligence/nav-shim.js" defer></script>
   </head>
   <body>
     <header>

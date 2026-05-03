@@ -15,10 +15,15 @@ import { existsSync, readdirSync, mkdirSync, writeFileSync } from 'node:fs';
 import { mkdtempSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
-import Ajv2020 from 'ajv/dist/2020.js';
+import { Ajv2020 } from 'ajv/dist/2020.js';
 import addFormats from 'ajv-formats';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+
+// ajv-formats default export is CJS-style; ESM interop yields the namespace.
+const addFormatsFn = (
+  addFormats as unknown as { default?: typeof addFormats }
+).default ?? addFormats;
 
 const REPO_ROOT = resolve(__dirname, '../../../../');
 const SCHEMA_PATH = join(REPO_ROOT, 'src/intelligence/schemas/bundle-manifest.schema.json');
@@ -108,7 +113,7 @@ describe('S6: bundle manifest schema validation (G2 BLOCK)', () => {
   it('100 random bundle manifests validate against bundle-manifest.schema.json', () => {
     const schemaSource = JSON.parse(readFileSync(SCHEMA_PATH, 'utf8'));
     const ajv = new Ajv2020({ strict: false });
-    addFormats(ajv);
+    (addFormatsFn as any)(ajv);
     // Remove the $id to prevent URI resolution issues in test environments
     const schema = { ...schemaSource };
     delete schema.$id;
@@ -151,7 +156,7 @@ describe('S6: bundle manifest schema validation (G2 BLOCK)', () => {
     const { composeBundleManifest, parseBundleManifest } = await import('../../emitter/manifest.js');
     const schemaSource = JSON.parse(readFileSync(SCHEMA_PATH, 'utf8'));
     const ajv = new Ajv2020({ strict: false });
-    addFormats(ajv);
+    (addFormatsFn as any)(ajv);
     const schema = { ...schemaSource };
     delete schema.$id;
     delete schema.$schema;

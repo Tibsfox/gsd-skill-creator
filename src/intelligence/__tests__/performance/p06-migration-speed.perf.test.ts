@@ -43,7 +43,7 @@ describe('P6/migration: apply all SQL migrations to fresh DB under 100ms (PERF â
     const tmpDir = mkdtempSync(pathJoin(tmpdir(), 'gsd-p6-'));
     try {
       const { KBStore } = await import('../../kb/store.js');
-      const kb = new KBStore({ storageRoot: tmpDir });
+      const kb = new KBStore({ registryPath: pathJoin(tmpDir, 'registry.db') });
 
       const start = performance.now();
       // ensureRegistry() triggers migration on first call
