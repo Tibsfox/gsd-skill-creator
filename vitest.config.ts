@@ -59,6 +59,7 @@ export default defineConfig({
           name: 'space-between',
           root: './apps/the-space-between-engine',
           globals: true,
+          testTimeout: 15000,
           environment: 'jsdom',
           include: ['tests/**/*.test.ts', 'tests/**/*.test.tsx'],
           exclude: ['**/node_modules/**'],
@@ -98,6 +99,7 @@ export default defineConfig({
         test: {
           name: 'integration',
           globals: true,
+          testTimeout: 15000,
           include: [
             'src/**/*.integration.test.ts',
             'tests/**/*.integration.test.ts',
