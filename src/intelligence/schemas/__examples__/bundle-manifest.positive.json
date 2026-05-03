@@ -1,0 +1,15 @@
+{
+  "id": "M-2026-05-02-0001",
+  "meeting_id": "M-2026-05-02-0001",
+  "emitted_at": "2026-05-02T20:18:00.000Z",
+  "decisions": ["dec-001", "dec-002", "dec-003"],
+  "manifest_path": ".planning/staging/inbox/intelligence-dashboard-bundle/M-2026-05-02-0001.manifest.yaml",
+  "batch_hints": {
+    "parallelizable": [["dec-001", "dec-003"], ["dec-002"]],
+    "shared_context": [
+      "src/intelligence/analyzer/core.ts",
+      ".planning/intelligence/meetings/M-2026-05-02-0001.md"
+    ],
+    "suggested_order": ["dec-001", "dec-002", "dec-003"]
+  }
+}

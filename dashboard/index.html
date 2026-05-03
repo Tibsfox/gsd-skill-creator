@@ -1,0 +1,5122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Adaptive learning layer for Claude Code that creates, validates, and manages skills, agents, teams, and chipsets. Uses GSD for project management, skill-creator as the adaptive learning layer. The www/ directory contains a 168-project Research series mapping the PNW bioregion, technology domains, creative arts, science, broadcasting, space, AI, infrastructure, and cross-domain translation frameworks.">
+    <meta property="og:title" content="gsd-skill-creator — Project Overview">
+    <meta property="og:description" content="Adaptive learning layer for Claude Code that creates, validates, and manages skills, agents, teams, and chipsets. Uses GSD for project management, skill-creator as the adaptive learning layer. The www/ directory contains a 168-project Research series mapping the PNW bioregion, technology domains, creative arts, science, broadcasting, space, AI, infrastructure, and cross-domain translation frameworks.">
+    <meta property="og:type" content="website">
+    <title>gsd-skill-creator — Project Overview - Dashboard</title>
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+/* -----------------------------------------------------------------------
+   GSD Design System — Foundation Tokens
+   ----------------------------------------------------------------------- */
+
+:root {
+  /* Domain Colors (REQ-DS-01) */
+  --color-frontend: #58a6ff;
+  --color-backend: #3fb950;
+  --color-testing: #d29922;
+  --color-infrastructure: #bc8cff;
+  --color-observation: #39d2c0;
+  --color-silicon: #f778ba;
+
+  /* Signal Colors (REQ-DS-02) */
+  --signal-success: #22c55e;
+  --signal-warning: #f97316;
+  --signal-error: #ef4444;
+  --signal-neutral: #6b7280;
+
+  /* Typography (REQ-DS-03) */
+  --font-data: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+  --font-ui: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Spacing Tokens (REQ-DS-06) */
+  --ds-letter-spacing: 0.025em;
+  --ds-line-height: 1.5;
+  --ds-card-margin-sm: 16px;
+  --ds-card-margin-lg: 24px;
+}
+
+/* -----------------------------------------------------------------------
+   Tabular-Nums Numeric Treatment (REQ-DS-04)
+   ----------------------------------------------------------------------- */
+
+body {
+  font-variant-numeric: tabular-nums;
+}
+
+/* -----------------------------------------------------------------------
+   Five-State Status Vocabulary (REQ-DS-07)
+   ----------------------------------------------------------------------- */
+
+.status-not-started {
+  color: var(--signal-neutral);
+  border-color: var(--signal-neutral);
+}
+
+.status-active {
+  color: var(--signal-success);
+  border-color: var(--signal-success);
+}
+
+.status-complete {
+  color: var(--color-frontend);
+  border-color: var(--color-frontend);
+}
+
+.status-blocked {
+  color: var(--signal-error);
+  border-color: var(--signal-error);
+}
+
+.status-attention {
+  color: var(--signal-warning);
+  border-color: var(--signal-warning);
+}
+
+/* -----------------------------------------------------------------------
+   Weight Hierarchy (REQ-DS-05)
+   ----------------------------------------------------------------------- */
+
+.text-primary {
+  font-weight: 700;
+}
+
+.text-secondary {
+  font-weight: 400;
+}
+
+/* -----------------------------------------------------------------------
+   Case Discipline (REQ-DS-08)
+   ----------------------------------------------------------------------- */
+
+.case-label {
+  text-transform: none;
+}
+
+.case-interrupt {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* -----------------------------------------------------------------------
+   CSS Custom Properties — Dark Theme
+   ----------------------------------------------------------------------- */
+
+:root {
+  /* Backgrounds */
+  --bg: #0d1117;
+  --surface: #161b22;
+  --surface-raised: #1c2128;
+
+  /* Borders */
+  --border: #30363d;
+  --border-muted: #21262d;
+
+  /* Text */
+  --text: #e6edf3;
+  --text-muted: #8b949e;
+  --text-dim: #484f58;
+
+  /* Accent colors */
+  --accent: #58a6ff;
+  --accent-muted: #388bfd26;
+  --green: #3fb950;
+  --green-muted: #23863626;
+  --yellow: #d29922;
+  --yellow-muted: #bb800926;
+  --red: #f85149;
+  --red-muted: #f8514926;
+  --purple: #bc8cff;
+
+  /* Typography */
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+
+  /* Borders & Radius */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+
+  /* Layout */
+  --max-width: 1600px;
+  --sidebar-width: 200px;
+}
+
+/* -----------------------------------------------------------------------
+   Reset & Base
+   ----------------------------------------------------------------------- */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* -----------------------------------------------------------------------
+   Layout
+   ----------------------------------------------------------------------- */
+
+header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: var(--space-md) var(--space-xl);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.header-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-left: var(--space-sm);
+}
+
+.page-wrapper {
+  display: flex;
+  flex: 1;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  width: 100%;
+  padding: var(--space-xl);
+  gap: var(--space-xl);
+}
+
+main {
+  flex: 1;
+  min-width: 0;
+}
+
+footer {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: var(--space-md) var(--space-xl);
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  margin-top: auto;
+}
+
+/* -----------------------------------------------------------------------
+   Navigation
+   ----------------------------------------------------------------------- */
+
+nav {
+  min-width: var(--sidebar-width);
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  position: sticky;
+  top: 80px;
+}
+
+.nav-link {
+  display: block;
+  padding: var(--space-sm) var(--space-md);
+  color: var(--text-muted);
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  transition: background 0.15s, color 0.15s;
+}
+
+.nav-link:hover {
+  background: var(--surface);
+  color: var(--text);
+}
+
+.nav-link.active {
+  background: var(--accent-muted);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* -----------------------------------------------------------------------
+   Stats Grid
+   ----------------------------------------------------------------------- */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1.2;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: var(--space-xs);
+}
+
+/* -----------------------------------------------------------------------
+   Cards
+   ----------------------------------------------------------------------- */
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-md);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-md);
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.card-body {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+/* -----------------------------------------------------------------------
+   Tables
+   ----------------------------------------------------------------------- */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: var(--space-lg);
+  font-size: 0.9rem;
+}
+
+th {
+  text-align: left;
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 2px solid var(--border);
+  color: var(--text);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+td {
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--border-muted);
+  color: var(--text-muted);
+}
+
+tr:hover td {
+  background: var(--surface-raised);
+}
+
+/* -----------------------------------------------------------------------
+   Status Badges
+   ----------------------------------------------------------------------- */
+
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.badge-active {
+  background: var(--green-muted);
+  color: var(--green);
+}
+
+.badge-pending {
+  background: var(--yellow-muted);
+  color: var(--yellow);
+}
+
+.badge-complete {
+  background: var(--accent-muted);
+  color: var(--accent);
+}
+
+.badge-blocked {
+  background: var(--red-muted);
+  color: var(--red);
+}
+
+/* -----------------------------------------------------------------------
+   Timeline
+   ----------------------------------------------------------------------- */
+
+.timeline {
+  position: relative;
+  padding-left: var(--space-xl);
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--border);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: var(--space-lg);
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: calc(-1 * var(--space-xl) + 4px);
+  top: 6px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--border);
+  border: 2px solid var(--bg);
+}
+
+.timeline-item.active::before {
+  background: var(--green);
+}
+
+.timeline-item.complete::before {
+  background: var(--accent);
+}
+
+.timeline-title {
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: var(--space-xs);
+}
+
+.timeline-meta {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.timeline-body {
+  margin-top: var(--space-sm);
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* -----------------------------------------------------------------------
+   Progress Bar
+   ----------------------------------------------------------------------- */
+
+.progress-bar {
+  background: var(--border-muted);
+  border-radius: var(--radius-sm);
+  height: 8px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: var(--radius-sm);
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+
+.progress-fill.success {
+  background: var(--green);
+}
+
+/* -----------------------------------------------------------------------
+   Code Blocks
+   ----------------------------------------------------------------------- */
+
+pre {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  overflow-x: auto;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin-bottom: var(--space-md);
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+}
+
+:not(pre) > code {
+  background: var(--surface-raised);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  color: var(--accent);
+}
+
+/* -----------------------------------------------------------------------
+   Lists
+   ----------------------------------------------------------------------- */
+
+.list-styled {
+  list-style: none;
+  padding: 0;
+}
+
+.list-styled li {
+  position: relative;
+  padding: var(--space-sm) 0 var(--space-sm) var(--space-lg);
+  border-bottom: 1px solid var(--border-muted);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.list-styled li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* -----------------------------------------------------------------------
+   Page Title
+   ----------------------------------------------------------------------- */
+
+.page-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--border);
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: var(--space-md);
+  margin-top: var(--space-xl);
+}
+
+/* -----------------------------------------------------------------------
+   Dashboard Two-Column Grid
+   ----------------------------------------------------------------------- */
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+  align-items: start;
+}
+
+.dashboard-terminal-col {
+  position: sticky;
+  top: 72px;
+  z-index: 10;
+}
+
+.terminal-standalone {
+  height: calc(100vh - 96px);
+  display: flex;
+  flex-direction: column;
+}
+
+.terminal-standalone .terminal-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  margin-bottom: 0;
+}
+
+.terminal-standalone .terminal-iframe {
+  flex: 1;
+  height: auto;
+  min-height: 400px;
+}
+
+.terminal-standalone .terminal-fallback {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.dashboard-info-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  min-width: 0;
+}
+
+/* Compact card wrapper for right column */
+.compact-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-sm) var(--space-md);
+}
+
+.compact-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-xs);
+}
+
+/* Compact overrides for cards in the info column */
+.dashboard-info-col .card {
+  padding: var(--space-sm) var(--space-md);
+  margin-bottom: 0;
+}
+
+.dashboard-info-col .card-body {
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.dashboard-info-col .section-title {
+  font-size: 1rem;
+  margin-top: var(--space-sm);
+  margin-bottom: var(--space-xs);
+}
+
+.dashboard-info-col table {
+  font-size: 0.8rem;
+  margin-bottom: var(--space-sm);
+}
+
+.dashboard-info-col th,
+.dashboard-info-col td {
+  padding: var(--space-xs) var(--space-sm);
+}
+
+.dashboard-info-col .metrics-dashboard {
+  gap: var(--space-md);
+}
+
+.dashboard-info-col .pulse-section {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-sm);
+}
+
+.dashboard-info-col .pulse-card {
+  padding: var(--space-sm);
+}
+
+.dashboard-info-col .velocity-section {
+  gap: var(--space-sm);
+}
+
+.dashboard-info-col .velocity-progress-card,
+.dashboard-info-col .velocity-timeline,
+.dashboard-info-col .velocity-tdd-rhythm,
+.dashboard-info-col .quality-section,
+.dashboard-info-col .history-section {
+  padding: var(--space-sm);
+}
+
+.dashboard-info-col .velocity-timeline {
+  max-height: 200px;
+}
+
+.dashboard-info-col .quality-section {
+  max-height: 300px;
+}
+
+.dashboard-info-col .history-section {
+  max-height: 300px;
+}
+
+/* -----------------------------------------------------------------------
+   Build Log
+   ----------------------------------------------------------------------- */
+
+.build-log {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  line-height: 1.6;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.build-log-entry {
+  padding: 2px 0;
+}
+
+.build-log-time {
+  color: var(--text-dim);
+  margin-right: var(--space-sm);
+}
+
+.build-log-success {
+  color: var(--green);
+}
+
+.build-log-error {
+  color: var(--red);
+}
+
+.build-log-warn {
+  color: var(--yellow);
+}
+
+/* -----------------------------------------------------------------------
+   Responsive Design
+   ----------------------------------------------------------------------- */
+
+@media (max-width: 768px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-terminal-col {
+    position: static;
+  }
+
+  .terminal-standalone {
+    height: 400px;
+  }
+
+  .page-wrapper {
+    flex-direction: column;
+    padding: var(--space-md);
+    gap: var(--space-md);
+  }
+
+  nav {
+    min-width: auto;
+  }
+
+  .nav-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    position: static;
+    gap: var(--space-xs);
+  }
+
+  .nav-link {
+    padding: var(--space-xs) var(--space-sm);
+    font-size: 0.8rem;
+  }
+
+  header {
+    padding: var(--space-sm) var(--space-md);
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .page-title {
+    font-size: 1.35rem;
+  }
+
+  table {
+    font-size: 0.8rem;
+  }
+
+  th, td {
+    padding: var(--space-xs) var(--space-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .header-subtitle {
+    display: none;
+  }
+}
+
+/* -----------------------------------------------------------------------
+   Gantry Status Strip
+   ----------------------------------------------------------------------- */
+
+.gantry-strip {
+  position: sticky;
+  top: 48px;
+  z-index: 90;
+  background: var(--surface, #161b22);
+  border-bottom: 1px solid var(--border, #30363d);
+  padding: var(--space-xs, 0.25rem) var(--space-xl, 2rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gantry-cells {
+  display: flex;
+  gap: var(--space-md, 1rem);
+  align-items: center;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  max-width: var(--max-width, 1200px);
+}
+
+.gantry-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs, 0.25rem);
+  white-space: nowrap;
+  font-size: 0.8rem;
+  color: var(--text-muted, #8b949e);
+}
+
+.gantry-cell + .gantry-cell::before {
+  content: '';
+  display: inline-block;
+  width: 1px;
+  height: 14px;
+  background: var(--border-muted, #21262d);
+  margin-right: var(--space-xs, 0.25rem);
+  flex-shrink: 0;
+}
+
+.gantry-symbol {
+  font-size: 0.9rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.gantry-label {
+  font-size: 0.75rem;
+  color: var(--text-muted, #8b949e);
+}
+
+.gantry-value {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.75rem;
+  color: var(--text, #e6edf3);
+  font-variant-numeric: tabular-nums;
+}
+
+.gantry-budget-bar {
+  width: 48px;
+  height: 6px;
+  background: var(--border-muted, #21262d);
+  border-radius: 3px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.gantry-budget-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+/* -----------------------------------------------------------------------
+   Topology Panel (Route Map)
+   ----------------------------------------------------------------------- */
+
+.topology-panel {
+  background: var(--surface, #1e1e2e);
+  border: 1px solid var(--border, #333);
+  border-radius: var(--radius-lg, 8px);
+  padding: var(--space-lg, 1.25rem);
+  margin-bottom: var(--space-lg, 1.25rem);
+  position: relative;
+}
+
+.tp-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary, #e0e0e0);
+  margin: 0 0 var(--space-md, 1rem) 0;
+}
+
+.tp-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* --- Node shapes --- */
+
+.tp-node-agent circle {
+  fill: var(--domain-backend, #3fb950);
+  stroke: var(--border, #333);
+  stroke-width: 1;
+}
+
+.tp-node-skill rect {
+  fill: var(--domain-frontend, #58a6ff);
+  stroke: var(--border, #333);
+  stroke-width: 1;
+}
+
+.tp-node-team polygon {
+  fill: var(--domain-infrastructure, #bc8cff);
+  stroke: var(--border, #333);
+  stroke-width: 1;
+}
+
+.tp-node-phase polygon {
+  fill: var(--domain-observation, #39d2c0);
+  stroke: var(--border, #333);
+  stroke-width: 1;
+}
+
+.tp-node-adapter polygon {
+  fill: var(--domain-silicon, #f778ba);
+  stroke: var(--border, #333);
+  stroke-width: 1;
+}
+
+.tp-node-plan circle {
+  fill: var(--text-muted, #a0a0a0);
+  stroke: none;
+}
+
+/* --- Active state --- */
+
+.tp-active circle,
+.tp-active rect,
+.tp-active polygon {
+  filter: brightness(1.3) drop-shadow(0 0 4px currentColor);
+}
+
+/* --- Labels --- */
+
+.tp-label {
+  font-size: 11px;
+  fill: var(--text-muted, #a0a0a0);
+  pointer-events: none;
+}
+
+/* --- Edges --- */
+
+.tp-edge {
+  stroke: var(--text-dim, #666);
+  stroke-width: 1.5;
+  fill: none;
+}
+
+.tp-edge-active {
+  stroke: var(--domain-backend, #3fb950);
+  stroke-width: 2;
+  stroke-dasharray: 8 4;
+  animation: tp-pulse 1.5s linear infinite;
+}
+
+.tp-edge-dormant {
+  stroke-dasharray: 4 4;
+  opacity: 0.5;
+}
+
+@keyframes tp-pulse {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -24; }
+}
+
+/* --- Collapsed summary --- */
+
+.tp-collapsed circle {
+  fill: var(--text-dim, #666);
+  stroke: none;
+}
+
+.tp-collapsed .tp-label {
+  font-style: italic;
+  fill: var(--text-dim, #666);
+}
+
+/* --- Empty state --- */
+
+.tp-empty {
+  color: var(--text-muted, #a0a0a0);
+  font-style: italic;
+  padding: var(--space-md, 1rem) 0;
+  text-align: center;
+}
+
+/* --- Detail panel (click-to-detail) --- */
+
+.tp-detail-panel {
+  position: absolute;
+  top: var(--space-lg, 1.25rem);
+  right: var(--space-lg, 1.25rem);
+  width: 220px;
+  background: var(--surface, #1e1e2e);
+  border: 1px solid var(--border, #333);
+  border-radius: var(--radius-md, 6px);
+  padding: var(--space-md, 1rem);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  animation: tp-slide-in 0.2s ease-out;
+  z-index: 10;
+}
+
+.tp-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-sm, 0.5rem);
+}
+
+.tp-detail-title {
+  font-weight: 600;
+  color: var(--text-primary, #e0e0e0);
+}
+
+.tp-detail-close {
+  background: none;
+  border: none;
+  color: var(--text-muted, #a0a0a0);
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 0 4px;
+}
+
+.tp-detail-close:hover {
+  color: var(--text-primary, #e0e0e0);
+}
+
+.tp-detail-field {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--border, #333);
+}
+
+.tp-detail-label {
+  font-size: 0.8rem;
+  color: var(--text-muted, #a0a0a0);
+}
+
+.tp-detail-value {
+  font-size: 0.8rem;
+  color: var(--text-primary, #e0e0e0);
+}
+
+@keyframes tp-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* -----------------------------------------------------------------------
+   Metrics Dashboard — Container
+   ----------------------------------------------------------------------- */
+
+.metrics-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg, 1.5rem);
+  margin-bottom: var(--space-xl, 2rem);
+}
+
+/* -----------------------------------------------------------------------
+   Pulse Section
+   ----------------------------------------------------------------------- */
+
+.pulse-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-md, 1rem);
+}
+
+.pulse-card {
+  background: var(--surface, #161b22);
+  border: 1px solid var(--border, #30363d);
+  border-radius: var(--radius-lg, 8px);
+  padding: var(--space-md, 1rem);
+}
+
+.session-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs, 0.25rem);
+  font-size: 0.85rem;
+}
+
+.session-id {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.8rem;
+  color: var(--accent, #58a6ff);
+}
+
+.session-model,
+.session-start,
+.session-duration {
+  color: var(--text-muted, #8b949e);
+  font-size: 0.8rem;
+}
+
+.commit-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.commit-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs, 0.25rem);
+  font-size: 0.8rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.commit-hash {
+  font-family: var(--font-mono, monospace);
+  color: var(--accent, #58a6ff);
+  font-size: 0.75rem;
+}
+
+.commit-scope {
+  color: var(--text-muted, #8b949e);
+  font-size: 0.75rem;
+}
+
+.commit-subject {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--text-primary, #e6edf3);
+}
+
+.commit-time {
+  color: var(--text-dim, #484f58);
+  font-size: 0.75rem;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.diff-add {
+  color: var(--green, #3fb950);
+  font-size: 0.75rem;
+}
+
+.diff-del {
+  color: var(--red, #f85149);
+  font-size: 0.75rem;
+}
+
+.heartbeat {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs, 0.25rem);
+}
+
+.heartbeat-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green, #3fb950);
+}
+
+.heartbeat-gray .heartbeat-dot {
+  background: var(--text-dim, #484f58);
+}
+
+.heartbeat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted, #8b949e);
+}
+
+.message-counter {
+  display: flex;
+  gap: var(--space-md, 1rem);
+  flex-wrap: wrap;
+  font-size: 0.8rem;
+}
+
+.counter-user,
+.counter-assistant,
+.counter-tools,
+.counter-total {
+  color: var(--text-muted, #8b949e);
+}
+
+/* -----------------------------------------------------------------------
+   Velocity Section
+   ----------------------------------------------------------------------- */
+
+.velocity-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md, 1rem);
+}
+
+.velocity-progress-card {
+  background: var(--surface, #161b22);
+  border: 1px solid var(--border, #30363d);
+  border-radius: var(--radius-lg, 8px);
+  padding: var(--space-md, 1rem);
+}
+
+.progress-bar {
+  height: 8px;
+  background: var(--border-muted, #21262d);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: var(--space-sm, 0.5rem);
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--accent, #58a6ff);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.progress-plans,
+.progress-commits,
+.progress-time {
+  font-size: 0.8rem;
+  color: var(--text-muted, #8b949e);
+}
+
+.progress-loc {
+  display: flex;
+  gap: var(--space-sm, 0.5rem);
+  font-size: 0.8rem;
+}
+
+.loc-add {
+  color: var(--green, #3fb950);
+}
+
+.loc-del {
+  color: var(--red, #f85149);
+}
+
+.velocity-timeline {
+  background: var(--surface, #161b22);
+  border: 1px solid var(--border, #30363d);
+  border-radius: var(--radius-lg, 8px);
+  padding: var(--space-md, 1rem);
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.velocity-timeline-empty {
+  color: var(--text-dim, #484f58);
+  font-style: italic;
+  text-align: center;
+  padding: var(--space-md, 1rem);
+}
+
+.velocity-timeline-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm, 0.5rem);
+  padding: 4px 0;
+  font-size: 0.8rem;
+}
+
+.velocity-timeline-label {
+  min-width: 80px;
+  color: var(--text-muted, #8b949e);
+  flex-shrink: 0;
+}
+
+.velocity-timeline-bar {
+  height: 6px;
+  background: var(--accent, #58a6ff);
+  border-radius: 3px;
+}
+
+.velocity-timeline-duration {
+  color: var(--text-dim, #484f58);
+  font-size: 0.75rem;
+  flex-shrink: 0;
+}
+
+.velocity-legend {
+  display: flex;
+  gap: var(--space-md, 1rem);
+  flex-wrap: wrap;
+  margin-top: var(--space-sm, 0.5rem);
+}
+
+.velocity-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  color: var(--text-muted, #8b949e);
+}
+
+.velocity-legend-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+
+.velocity-stats-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  background: var(--surface, #161b22);
+  border: 1px solid var(--border, #30363d);
+  border-radius: var(--radius-lg, 8px);
+  overflow: hidden;
+}
+
+.velocity-stats-table th,
+.velocity-stats-table td {
+  padding: var(--space-xs, 0.25rem) var(--space-sm, 0.5rem);
+  border-bottom: 1px solid var(--border-muted, #21262d);
+  text-align: left;
+}
+
+.velocity-stats-table th {
+  color: var(--text-muted, #8b949e);
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.velocity-stats-empty {
+  color: var(--text-dim, #484f58);
+  font-style: italic;
+  text-align: center;
+  padding: var(--space-md, 1rem);
+}
+
+.phase-num {
+  font-family: var(--font-mono, monospace);
+  color: var(--accent, #58a6ff);
+}
+
+.velocity-tdd-rhythm {
+  background: var(--surface, #161b22);
+  border: 1px solid var(--border, #30363d);
+  border-radius: var(--radius-lg, 8px);
+  padding: var(--space-md, 1rem);
+}
+
+.velocity-tdd-empty {
+  color: var(--text-dim, #484f58);
+  font-style: italic;
+  text-align: center;
+}
+
+.velocity-tdd-phase {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm, 0.5rem);
+  padding: 4px 0;
+  font-size: 0.8rem;
+}
+
+.velocity-tdd-label {
+  color: var(--text-muted, #8b949e);
+  min-width: 80px;
+}
+
+.velocity-tdd-overall {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary, #e6edf3);
+  margin-top: var(--space-sm, 0.5rem);
+}
+
+/* -----------------------------------------------------------------------
+   Quality Section
+   ----------------------------------------------------------------------- */
+
+.quality-section {
+  max-height: 500px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md, 1rem);
+  background: var(--surface, #161b22);
+  border: 1px solid var(--border, #30363d);
+  border-radius: var(--radius-lg, 8px);
+  padding: var(--space-md, 1rem);
+}
+
+.quality-card {
+  background: var(--surface-raised, #1c2128);
+  border: 1px solid var(--border-muted, #21262d);
+  border-radius: var(--radius-md, 6px);
+  padding: var(--space-sm, 0.5rem) var(--space-md, 1rem);
+}
+
+.quality-card.empty {
+  color: var(--text-dim, #484f58);
+  font-style: italic;
+  text-align: center;
+}
+
+.accuracy-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm, 0.5rem);
+  padding: 4px 0;
+  font-size: 0.8rem;
+}
+
+.accuracy-indicator {
+  width: 20px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.accuracy-phase {
+  min-width: 80px;
+  color: var(--text-primary, #e6edf3);
+}
+
+.accuracy-plans {
+  color: var(--text-muted, #8b949e);
+  min-width: 60px;
+}
+
+.accuracy-label {
+  color: var(--text-muted, #8b949e);
+  text-transform: capitalize;
+}
+
+.scope-on-track .accuracy-indicator { color: var(--green, #3fb950); }
+.scope-expanded .accuracy-indicator { color: var(--yellow, #e3b341); }
+.scope-contracted .accuracy-indicator { color: var(--accent, #58a6ff); }
+.scope-shifted .accuracy-indicator { color: var(--red, #f85149); }
+
+.emergent-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm, 0.5rem);
+  padding: 4px 0;
+  font-size: 0.8rem;
+}
+
+.emergent-phase {
+  min-width: 80px;
+  color: var(--text-primary, #e6edf3);
+}
+
+.emergent-files {
+  color: var(--text-muted, #8b949e);
+  min-width: 80px;
+}
+
+.emergent-pct {
+  color: var(--text-muted, #8b949e);
+  min-width: 50px;
+  text-align: right;
+}
+
+.emergent-bar {
+  flex: 1;
+  height: 6px;
+  background: var(--border-muted, #21262d);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.emergent-fill {
+  height: 100%;
+  background: var(--yellow, #e3b341);
+  border-radius: 3px;
+}
+
+.emergent-average {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary, #e6edf3);
+  margin-bottom: var(--space-sm, 0.5rem);
+}
+
+.deviation-summary {
+  font-size: 0.8rem;
+}
+
+.deviation-phase {
+  padding: 4px 0;
+  color: var(--text-muted, #8b949e);
+}
+
+.deviation-none {
+  color: var(--text-dim, #484f58);
+  font-style: italic;
+}
+
+.accuracy-trend {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs, 0.25rem);
+}
+
+.trend-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 40px;
+}
+
+.trend-bar {
+  flex: 1;
+  min-width: 4px;
+  border-radius: 2px 2px 0 0;
+}
+
+.trend-bar-green { background: var(--green, #3fb950); }
+.trend-bar-yellow { background: var(--yellow, #e3b341); }
+.trend-bar-blue { background: var(--accent, #58a6ff); }
+.trend-bar-red { background: var(--red, #f85149); }
+
+.trend-average {
+  font-size: 0.8rem;
+  color: var(--text-muted, #8b949e);
+  text-align: center;
+}
+
+/* -----------------------------------------------------------------------
+   History Section
+   ----------------------------------------------------------------------- */
+
+.history-section {
+  max-height: 500px;
+  overflow-y: auto;
+  background: var(--surface, #161b22);
+  border: 1px solid var(--border, #30363d);
+  border-radius: var(--radius-lg, 8px);
+  padding: var(--space-md, 1rem);
+}
+
+.history-empty {
+  color: var(--text-dim, #484f58);
+  font-style: italic;
+  text-align: center;
+  padding: var(--space-md, 1rem);
+}
+
+.milestone-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+.milestone-table th,
+.milestone-table td {
+  padding: var(--space-xs, 0.25rem) var(--space-sm, 0.5rem);
+  border-bottom: 1px solid var(--border-muted, #21262d);
+  text-align: left;
+}
+
+.milestone-table th {
+  color: var(--text-muted, #8b949e);
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.milestone-name {
+  color: var(--text-primary, #e6edf3);
+}
+
+.milestone-table .numeric {
+  text-align: right;
+  font-family: var(--font-mono, monospace);
+}
+
+.milestone-table .accuracy {
+  text-align: right;
+}
+
+.commit-bar {
+  display: flex;
+  height: 16px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: var(--space-sm, 0.5rem);
+}
+
+.commit-bar-segment {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.commit-legend {
+  display: flex;
+  gap: var(--space-md, 1rem);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-md, 1rem);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  color: var(--text-muted, #8b949e);
+}
+
+.legend-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+
+.velocity-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 80px;
+  margin-bottom: var(--space-sm, 0.5rem);
+}
+
+.velocity-bar-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.velocity-bar {
+  width: 100%;
+  border-radius: 2px 2px 0 0;
+  background: var(--accent, #58a6ff);
+}
+
+.velocity-phases {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 2px;
+}
+
+.velocity-label {
+  font-size: 0.65rem;
+  color: var(--text-dim, #484f58);
+  text-align: center;
+}
+
+.hotspot-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hotspot-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm, 0.5rem);
+  font-size: 0.8rem;
+  padding: 2px 0;
+}
+
+.hotspot-path {
+  font-family: var(--font-mono, monospace);
+  color: var(--accent, #58a6ff);
+  font-size: 0.75rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hotspot-count {
+  color: var(--text-muted, #8b949e);
+  font-size: 0.75rem;
+  flex-shrink: 0;
+}
+
+.hotspot-recency {
+  color: var(--text-dim, #484f58);
+  font-size: 0.7rem;
+  flex-shrink: 0;
+}
+/* -----------------------------------------------------------------------
+   Activity Tab Toggle
+   ----------------------------------------------------------------------- */
+
+.activity-tab-panel {
+  background: var(--surface, #1e1e2e);
+  border: 1px solid var(--border, #333);
+  border-radius: var(--radius-lg, 8px);
+  overflow: hidden;
+}
+
+.at-tab-bar {
+  display: flex;
+  border-bottom: 1px solid var(--border, #333);
+}
+
+.at-tab {
+  flex: 1;
+  padding: 8px 16px;
+  background: transparent;
+  border: none;
+  color: var(--text-muted, #a0a0a0);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.at-tab:hover {
+  color: var(--text-primary, #e0e0e0);
+}
+
+.at-tab-active {
+  color: var(--accent, #58a6ff);
+  border-bottom-color: var(--accent, #58a6ff);
+}
+
+.at-content-activity,
+.at-content-terminal {
+  min-height: 200px;
+}
+/* -----------------------------------------------------------------------
+   Activity Feed
+   ----------------------------------------------------------------------- */
+
+.activity-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--surface, #1e1e2e);
+  border: 1px solid var(--border, #333);
+  border-radius: var(--radius-lg, 8px);
+  overflow: hidden;
+}
+
+.af-entry {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: var(--bg, #0d1117);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.af-shape {
+  flex-shrink: 0;
+  font-size: 0.9rem;
+  width: 18px;
+  text-align: center;
+}
+
+.af-identifier {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-primary, #e0e0e0);
+  flex-shrink: 0;
+}
+
+.af-description {
+  font-size: 0.8rem;
+  color: var(--text-muted, #a0a0a0);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Domain colors (uses Phase 142 CSS vars when available, fallback hardcoded) */
+.af-domain-frontend { color: var(--domain-frontend, #58a6ff); }
+.af-domain-backend { color: var(--domain-backend, #3fb950); }
+.af-domain-testing { color: var(--domain-testing, #e3b341); }
+.af-domain-infrastructure { color: var(--domain-infrastructure, #bc8cff); }
+.af-domain-observation { color: var(--domain-observation, #39d3c5); }
+.af-domain-silicon { color: var(--domain-silicon, #f778ba); }
+
+.af-empty {
+  text-align: center;
+  color: var(--text-dim, #666);
+  padding: var(--space-md, 1rem);
+  font-style: italic;
+}
+
+/* -----------------------------------------------------------------------
+   Terminal Panel
+   ----------------------------------------------------------------------- */
+
+.terminal-panel {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: var(--space-md);
+  min-height: 400px;
+  position: relative;
+}
+
+.terminal-iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
+  border: none;
+  background: var(--bg);
+  display: none;
+}
+
+.terminal-fallback {
+  display: block;
+  padding: var(--space-xl);
+  text-align: center;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.terminal-fallback-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: var(--space-md);
+}
+
+.terminal-fallback-message {
+  margin-bottom: var(--space-sm);
+  line-height: 1.6;
+}
+
+.terminal-fallback-message code {
+  background: var(--surface);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+.terminal-fallback-url {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin-top: var(--space-sm);
+}
+
+/* -----------------------------------------------------------------------
+   Entity Legend
+   ----------------------------------------------------------------------- */
+
+.entity-legend {
+  background: var(--surface, #161b22);
+  border: 1px solid var(--border, #30363d);
+  border-radius: var(--radius-lg, 8px);
+  padding: var(--space-md, 1rem);
+  margin-top: var(--space-lg, 1.5rem);
+}
+
+.entity-legend-toggle {
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted, #8b949e);
+  list-style: none;
+  user-select: none;
+}
+
+.entity-legend-toggle::-webkit-details-marker {
+  display: none;
+}
+
+.entity-legend-toggle::before {
+  content: '\25B6';
+  display: inline-block;
+  margin-right: 0.5em;
+  font-size: 0.7em;
+  transition: transform 0.2s;
+}
+
+.entity-legend[open] .entity-legend-toggle::before {
+  transform: rotate(90deg);
+}
+
+.entity-legend-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md, 1rem);
+  margin-top: var(--space-md, 1rem);
+}
+
+.entity-legend-section h4 {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted, #8b949e);
+  margin-bottom: var(--space-sm, 0.5rem);
+}
+
+.entity-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 2px 0;
+  font-size: 0.8rem;
+  color: var(--text, #e6edf3);
+}
+
+.domain-swatch {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+}
+
+.domain-swatch.domain-frontend { background-color: var(--domain-frontend, #58a6ff); }
+.domain-swatch.domain-backend { background-color: var(--domain-backend, #3fb950); }
+.domain-swatch.domain-testing { background-color: var(--domain-testing, #d29922); }
+.domain-swatch.domain-infrastructure { background-color: var(--domain-infrastructure, #bc8cff); }
+.domain-swatch.domain-observation { background-color: var(--domain-observation, #39d2c0); }
+.domain-swatch.domain-silicon { background-color: var(--domain-silicon, #f778ba); }
+
+@media (max-width: 480px) {
+  .entity-legend-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* -----------------------------------------------------------------------
+   Entity Shape/Color System
+   ----------------------------------------------------------------------- */
+
+:root {
+  --domain-frontend: #58a6ff;
+  --domain-backend: #3fb950;
+  --domain-testing: #d29922;
+  --domain-infrastructure: #bc8cff;
+  --domain-observation: #39d2c0;
+  --domain-silicon: #f778ba;
+}
+
+.entity-shape {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.entity-agent {}
+.entity-skill {}
+.entity-team {}
+.entity-milestone {}
+.entity-adapter {}
+.entity-plan {}
+
+.domain-frontend { fill: var(--domain-frontend); }
+.domain-backend { fill: var(--domain-backend); }
+.domain-testing { fill: var(--domain-testing); }
+.domain-infrastructure { fill: var(--domain-infrastructure); }
+.domain-observation { fill: var(--domain-observation); }
+.domain-silicon { fill: var(--domain-silicon); }
+
+/* -----------------------------------------------------------------------
+   Silicon Panel
+   ----------------------------------------------------------------------- */
+
+.silicon-panel {
+  background: var(--surface, #161b22);
+  border: 1px solid var(--border, #30363d);
+  border-radius: var(--radius-lg, 8px);
+  padding: var(--space-lg, 1.25rem);
+  margin-bottom: var(--space-md, 1rem);
+}
+
+.sp-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text, #e6edf3);
+  margin: 0 0 var(--space-md, 1rem) 0;
+}
+
+/* --- Adapters layout --- */
+
+.sp-adapters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md, 1rem);
+  margin-bottom: var(--space-md, 1rem);
+}
+
+.sp-adapter {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs, 0.25rem);
+  padding: var(--space-xs, 0.25rem) var(--space-sm, 0.5rem);
+  background: var(--bg, #0d1117);
+  border: 1px solid var(--border, #30363d);
+  border-radius: var(--radius-md, 6px);
+}
+
+.sp-diamond {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.sp-adapter-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text, #e6edf3);
+}
+
+.sp-confidence {
+  font-size: 0.75rem;
+  font-family: var(--font-mono, monospace);
+  color: var(--text-muted, #8b949e);
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- State classes --- */
+
+.sp-state-not-started {
+  opacity: 0.5;
+}
+
+.sp-state-active .sp-diamond {
+  animation: sp-pulse 2s ease-in-out infinite;
+}
+
+.sp-state-complete .sp-adapter-name {
+  color: var(--green, #3fb950);
+}
+
+.sp-state-blocked {
+  opacity: 0.6;
+}
+
+.sp-state-blocked .sp-adapter-name {
+  text-decoration: line-through;
+}
+
+.sp-state-attention {
+  border-color: var(--yellow, #d29922);
+}
+
+@keyframes sp-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* --- VRAM gauge --- */
+
+.sp-vram-gauge {
+  margin-top: var(--space-sm, 0.5rem);
+}
+
+.sp-vram-label {
+  font-size: 0.75rem;
+  color: var(--text-muted, #8b949e);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  margin-bottom: var(--space-xs, 0.25rem);
+}
+
+.sp-vram-bar {
+  display: flex;
+  height: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+  background: var(--border-muted, #21262d);
+}
+
+.sp-vram-segment {
+  height: 100%;
+  transition: width 0.3s ease;
+  min-width: 1px;
+}
+
+.sp-vram-headroom {
+  height: 100%;
+  background: var(--text-dim, #484f58);
+  opacity: 0.2;
+}
+
+/* --- Disabled message --- */
+
+.sp-disabled-msg {
+  color: var(--text-muted, #8b949e);
+  font-style: italic;
+  padding: var(--space-md, 1rem) 0;
+  font-size: 0.9rem;
+}
+
+/* -----------------------------------------------------------------------
+   Budget Gauge
+   ----------------------------------------------------------------------- */
+
+.budget-gauge {
+  margin-bottom: var(--space-md, 1rem);
+  padding: var(--space-sm, 0.5rem) 0;
+}
+
+.bg-label {
+  font-size: 0.75rem;
+  color: var(--text-muted, #8b949e);
+  margin-bottom: var(--space-xs, 0.25rem);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.bg-bar {
+  display: flex;
+  height: 12px;
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--border-muted, #21262d);
+  position: relative;
+}
+
+.bg-segment {
+  height: 100%;
+  position: relative;
+  transition: width 0.3s ease;
+  min-width: 2px;
+}
+
+.bg-scan-label {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.65rem;
+  font-family: var(--font-mono, monospace);
+  color: var(--text, #e6edf3);
+  background: var(--surface-raised, #1c2128);
+  padding: 1px 4px;
+  border-radius: var(--radius-sm, 4px);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s;
+}
+
+.bg-segment:hover .bg-scan-label {
+  opacity: 1;
+}
+
+.bg-headroom {
+  height: 100%;
+  background: var(--text-dim, #484f58);
+  opacity: 0.3;
+}
+
+/* --- Threshold states --- */
+
+.bg-warning {
+  box-shadow: 0 0 0 1px var(--yellow, #d29922);
+}
+
+.bg-warning .bg-bar {
+  outline: 1px solid color-mix(in srgb, var(--yellow, #d29922) 40%, transparent);
+}
+
+.bg-critical {
+  box-shadow: 0 0 0 1px var(--red, #f85149);
+}
+
+.bg-critical .bg-bar {
+  outline: 1px solid color-mix(in srgb, var(--red, #f85149) 40%, transparent);
+}
+
+/* --- Over-budget state --- */
+
+.bg-over-budget {
+  box-shadow: 0 0 0 2px var(--red, #f85149);
+}
+
+.bg-over-budget .bg-bar {
+  outline: 2px solid var(--red, #f85149);
+}
+
+/* --- Deferred skills tooltip --- */
+
+.bg-deferred-tooltip {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: var(--space-xs, 0.25rem);
+  background: var(--surface-raised, #1c2128);
+  border: 1px solid var(--border-muted, #21262d);
+  border-radius: var(--radius-sm, 4px);
+  padding: var(--space-xs, 0.25rem) var(--space-sm, 0.5rem);
+  font-size: 0.7rem;
+  color: var(--text-muted, #8b949e);
+  white-space: nowrap;
+  z-index: 10;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s;
+}
+
+.bg-deferred-tooltip ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.bg-deferred-tooltip li {
+  padding: 1px 0;
+}
+
+.bg-bar:hover .bg-deferred-tooltip {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* -----------------------------------------------------------------------
+   Staging Queue Panel
+   ----------------------------------------------------------------------- */
+
+.staging-queue-panel {
+  background: var(--surface, #1e1e2e);
+  border: 1px solid var(--border, #333);
+  border-radius: var(--radius-lg, 8px);
+  padding: var(--space-lg, 1.25rem);
+  margin-bottom: var(--space-lg, 1.25rem);
+  position: relative;
+}
+
+.sq-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary, #e0e0e0);
+  margin: 0 0 var(--space-md, 1rem) 0;
+}
+
+/* --- Columns layout --- */
+
+.sq-columns {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-md, 1rem);
+}
+
+.sq-column {
+  min-height: 100px;
+}
+
+.sq-column-header {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted, #a0a0a0);
+  margin-bottom: var(--space-sm, 0.5rem);
+  padding-bottom: var(--space-xs, 0.25rem);
+  border-bottom: 2px solid var(--border, #333);
+}
+
+/* --- Cards --- */
+
+.sq-card {
+  background: var(--bg, #0d1117);
+  border: 1px solid var(--border, #333);
+  border-radius: var(--radius-md, 6px);
+  padding: var(--space-sm, 0.5rem) var(--space-md, 1rem);
+  margin-bottom: var(--space-sm, 0.5rem);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.sq-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.sq-card-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary, #e0e0e0);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sq-card-domain {
+  font-size: 0.75rem;
+  color: var(--text-muted, #a0a0a0);
+  margin-bottom: 4px;
+}
+
+.sq-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+/* --- Tags --- */
+
+.sq-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  padding: 1px 6px;
+  background: color-mix(in srgb, var(--text-muted, #a0a0a0) 15%, transparent);
+  border-radius: var(--radius-sm, 4px);
+  color: var(--text-muted, #a0a0a0);
+}
+
+/* --- State badges --- */
+
+.sq-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: var(--radius-sm, 4px);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.sq-badge-uploaded {
+  color: var(--accent, #58a6ff);
+  background: color-mix(in srgb, var(--accent, #58a6ff) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent, #58a6ff) 30%, transparent);
+}
+
+.sq-badge-checking {
+  color: var(--yellow, #e3b341);
+  background: color-mix(in srgb, var(--yellow, #e3b341) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--yellow, #e3b341) 30%, transparent);
+}
+
+.sq-badge-needs-attention {
+  color: var(--signal-warning, #f0883e);
+  background: color-mix(in srgb, var(--signal-warning, #f0883e) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--signal-warning, #f0883e) 30%, transparent);
+}
+
+.sq-badge-ready {
+  color: var(--green, #3fb950);
+  background: color-mix(in srgb, var(--green, #3fb950) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--green, #3fb950) 30%, transparent);
+}
+
+.sq-badge-queued {
+  color: var(--color-observation, #39d3c5);
+  background: color-mix(in srgb, var(--color-observation, #39d3c5) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-observation, #39d3c5) 30%, transparent);
+}
+
+.sq-badge-executing {
+  color: var(--purple, #bc8cff);
+  background: color-mix(in srgb, var(--purple, #bc8cff) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--purple, #bc8cff) 30%, transparent);
+}
+
+.sq-badge-set-aside {
+  color: var(--text-muted, #8b949e);
+  background: color-mix(in srgb, var(--text-muted, #8b949e) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text-muted, #8b949e) 30%, transparent);
+}
+
+/* --- SVG overlay --- */
+
+.sq-dep-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.sq-dep-line {
+  stroke: var(--text-muted, #a0a0a0);
+  stroke-width: 1.5;
+  fill: none;
+}
+
+/* --- Empty state --- */
+
+.sq-empty {
+  color: var(--text-muted, #a0a0a0);
+  font-style: italic;
+  padding: var(--space-md, 1rem) 0;
+  text-align: center;
+}
+
+/* --- Responsive --- */
+
+@media (max-width: 768px) {
+  .sq-columns {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .sq-columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* -----------------------------------------------------------------------
+   Question Card
+   ----------------------------------------------------------------------- */
+
+.question-card {
+  background: var(--surface, #1e1e2e);
+  border: 1px solid var(--border, #333);
+  border-left: 4px solid var(--accent, #58a6ff);
+  border-radius: var(--radius-md, 6px);
+  padding: var(--space-md, 1rem);
+  margin-bottom: var(--space-md, 1rem);
+}
+
+/* Urgency levels */
+.question-card-urgency-low {
+  border-left-color: var(--text-dim, #666);
+}
+
+.question-card-urgency-medium {
+  border-left-color: var(--accent, #58a6ff);
+}
+
+.question-card-urgency-high {
+  border-left-color: var(--signal-warning, #f0883e);
+}
+
+.question-card-urgency-critical {
+  border-left-color: var(--red, #f85149);
+  background: color-mix(in srgb, #f85149 6%, var(--surface, #1e1e2e));
+}
+
+/* Answered state */
+.question-card-answered {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Header: urgency badge + timeout */
+.question-card-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm, 0.5rem);
+  margin-bottom: var(--space-sm, 0.5rem);
+}
+
+.question-card-urgency-badge {
+  display: inline-block;
+  padding: 2px var(--space-xs, 0.25rem);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted, #a0a0a0);
+  background: var(--bg, #0d1117);
+  border: 1px solid var(--border, #333);
+  border-radius: var(--radius-sm, 4px);
+}
+
+.question-card-timeout {
+  font-size: 0.8rem;
+  color: var(--text-dim, #666);
+  font-family: var(--font-mono, monospace);
+}
+
+/* Body: question text + input controls */
+.question-card-text {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text, #e0e0e0);
+  margin: 0 0 var(--space-sm, 0.5rem) 0;
+}
+
+/* Options container */
+.question-card-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm, 0.5rem);
+  margin-bottom: var(--space-sm, 0.5rem);
+}
+
+/* Binary option buttons */
+.question-card-option {
+  padding: var(--space-xs, 0.25rem) var(--space-md, 1rem);
+  background: var(--accent, #58a6ff);
+  color: var(--bg, #0d1117);
+  border: none;
+  border-radius: var(--radius-sm, 4px);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.question-card-option:hover {
+  opacity: 0.85;
+}
+
+/* Radio / checkbox labels */
+.question-card-options label {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+  color: var(--text, #e0e0e0);
+  cursor: pointer;
+  padding: var(--space-xs, 0.25rem) 0;
+}
+
+/* Textarea */
+.question-card-textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: var(--space-sm, 0.5rem);
+  background: var(--bg, #0d1117);
+  border: 1px solid var(--border, #333);
+  border-radius: var(--radius-sm, 4px);
+  color: var(--text, #e0e0e0);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.9rem;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.question-card-textarea:focus {
+  outline: none;
+  border-color: var(--accent, #58a6ff);
+}
+
+/* Actions bar */
+.question-card-actions {
+  margin-top: var(--space-sm, 0.5rem);
+  padding-top: var(--space-sm, 0.5rem);
+  border-top: 1px solid var(--border, #333);
+}
+
+/* Submit button */
+.question-card-submit {
+  padding: var(--space-xs, 0.25rem) var(--space-lg, 1.25rem);
+  background: var(--accent, #58a6ff);
+  color: var(--bg, #0d1117);
+  border: none;
+  border-radius: var(--radius-sm, 4px);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.question-card-submit:hover {
+  opacity: 0.85;
+}
+
+/* Confirm button */
+.question-card-confirm {
+  padding: var(--space-sm, 0.5rem) var(--space-xl, 1.75rem);
+  background: var(--accent, #58a6ff);
+  color: var(--bg, #0d1117);
+  border: none;
+  border-radius: var(--radius-sm, 4px);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.question-card-confirm:hover {
+  opacity: 0.85;
+}
+
+/* -----------------------------------------------------------------------
+   Upload Zone
+   ----------------------------------------------------------------------- */
+
+.upload-zone {
+  background: var(--surface);
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  margin-bottom: var(--space-md);
+}
+
+.upload-zone:hover {
+  border-color: var(--accent);
+}
+
+.upload-zone-active {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, var(--surface));
+}
+
+.upload-zone-prompt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  color: var(--text-muted);
+}
+
+.upload-zone-icon {
+  color: var(--text-dim);
+  margin-bottom: var(--space-sm);
+}
+
+.upload-zone-text {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.upload-zone-or {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.upload-zone-browse {
+  display: inline-block;
+  padding: var(--space-xs) var(--space-md);
+  background: var(--accent);
+  color: var(--bg);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.upload-zone-browse:hover {
+  opacity: 0.85;
+}
+
+.upload-metadata {
+  margin-top: var(--space-lg);
+  padding: var(--space-md);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  text-align: left;
+}
+
+.upload-metadata-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: var(--space-sm);
+}
+
+.upload-metadata-stats {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  margin-bottom: var(--space-sm);
+}
+
+.upload-metadata-sections {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.upload-metadata-sections ul {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-xs) 0 0 0;
+}
+
+.upload-metadata-sections li {
+  padding: var(--space-xs) 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.upload-metadata-sections li:last-child {
+  border-bottom: none;
+}
+
+/* -----------------------------------------------------------------------
+   Configuration Form
+   ----------------------------------------------------------------------- */
+
+.config-form {
+  font-family: var(--font-sans, system-ui, sans-serif);
+  color: var(--text, #e0e0e0);
+}
+
+.config-section {
+  background: var(--surface, #1e1e2e);
+  border: 1px solid var(--border, #333);
+  border-radius: var(--radius-lg, 8px);
+  padding: var(--space-lg, 1.25rem);
+  margin-bottom: var(--space-md, 1rem);
+}
+
+.config-section legend,
+.config-section-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text, #e0e0e0);
+  margin-bottom: var(--space-sm, 0.5rem);
+  padding: 0 var(--space-xs, 0.25rem);
+}
+
+.config-field {
+  margin-bottom: var(--space-md, 1rem);
+}
+
+.config-label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-muted, #a0a0a0);
+  margin-bottom: var(--space-xs, 0.25rem);
+}
+
+.config-input,
+.config-select {
+  width: 100%;
+  padding: var(--space-sm, 0.5rem) var(--space-md, 1rem);
+  background: var(--bg, #0d1117);
+  border: 1px solid var(--border, #333);
+  border-radius: var(--radius-sm, 4px);
+  color: var(--text, #e0e0e0);
+  font-size: 0.95rem;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.config-input:focus,
+.config-select:focus {
+  outline: none;
+  border-color: var(--accent, #58a6ff);
+}
+
+/* Radio groups */
+.config-radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm, 0.5rem);
+  align-items: center;
+}
+
+.config-radio {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+  color: var(--text, #e0e0e0);
+  cursor: pointer;
+}
+
+/* Toggle switches */
+.config-toggles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm, 0.5rem);
+}
+
+.config-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+  color: var(--text, #e0e0e0);
+  cursor: pointer;
+}
+
+.config-toggle-label {
+  user-select: none;
+}
+
+/* Range inputs */
+.config-range-group {
+  margin-bottom: var(--space-md, 1rem);
+}
+
+.config-range-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm, 0.5rem);
+}
+
+.config-range-row input[type="range"] {
+  flex: 1;
+  accent-color: var(--accent, #58a6ff);
+}
+
+.config-range-value {
+  min-width: 3ch;
+  text-align: right;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.9rem;
+  color: var(--accent, #58a6ff);
+}
+
+/* -----------------------------------------------------------------------
+   Submit Flow
+   ----------------------------------------------------------------------- */
+
+.submit-flow {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: var(--space-lg, 1.25rem);
+}
+
+.submit-flow-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text, #e0e0e0);
+  margin-bottom: var(--space-lg, 1.25rem);
+}
+
+.submit-flow-section {
+  margin-bottom: var(--space-xl, 1.75rem);
+}
+
+.submit-flow-section h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-muted, #a0a0a0);
+  margin-bottom: var(--space-md, 1rem);
+}
+
+/* Submit button */
+.submit-button {
+  display: inline-block;
+  padding: var(--space-sm, 0.5rem) var(--space-xl, 1.75rem);
+  background: var(--accent, #58a6ff);
+  color: var(--bg, #0d1117);
+  border: none;
+  border-radius: var(--radius-sm, 4px);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s, background 0.2s;
+}
+
+.submit-button:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+.submit-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: var(--text-dim, #666);
+}
+
+/* Status messages */
+.submit-status {
+  margin-top: var(--space-md, 1rem);
+  padding: var(--space-sm, 0.5rem) var(--space-md, 1rem);
+  border-radius: var(--radius-sm, 4px);
+  font-size: 0.9rem;
+}
+
+.submit-status-success {
+  background: color-mix(in srgb, var(--green, #3fb950) 15%, var(--surface, #1e1e2e));
+  color: var(--green, #3fb950);
+  border: 1px solid var(--green, #3fb950);
+}
+
+.submit-status-error {
+  background: color-mix(in srgb, var(--red, #f85149) 15%, var(--surface, #1e1e2e));
+  color: var(--red, #f85149);
+  border: 1px solid var(--red, #f85149);
+}
+
+/* -----------------------------------------------------------------------
+   Console Settings Panel
+   ----------------------------------------------------------------------- */
+
+.console-settings-panel {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-md, 1rem);
+}
+
+.setting-group {
+  background: var(--surface, #1e1e2e);
+  border: 1px solid var(--border, #333);
+  border-radius: var(--radius-lg, 8px);
+  padding: var(--space-md, 1rem);
+}
+
+.setting-group h4 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-primary, #e0e0e0);
+  margin: 0 0 var(--space-sm, 0.5rem) 0;
+  padding-bottom: var(--space-xs, 0.25rem);
+  border-bottom: 1px solid var(--border, #333);
+}
+
+.setting-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: var(--text-primary, #e0e0e0);
+}
+
+.setting-toggle input[type="checkbox"] {
+  cursor: pointer;
+  accent-color: var(--accent, #58a6ff);
+}
+
+.setting-toggle input[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.setting-select {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  font-size: 0.85rem;
+  color: var(--text-primary, #e0e0e0);
+}
+
+.setting-select label {
+  min-width: 80px;
+}
+
+.setting-select select {
+  background: var(--bg, #0d1117);
+  color: var(--text-primary, #e0e0e0);
+  border: 1px solid var(--border, #333);
+  border-radius: var(--radius-sm, 4px);
+  padding: 4px 8px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.setting-select select[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.setting-number {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  font-size: 0.85rem;
+  color: var(--text-primary, #e0e0e0);
+}
+
+.setting-number label {
+  min-width: 80px;
+  flex: 1;
+}
+
+.setting-number input[type="number"] {
+  width: 80px;
+  background: var(--bg, #0d1117);
+  color: var(--text-primary, #e0e0e0);
+  border: 1px solid var(--border, #333);
+  border-radius: var(--radius-sm, 4px);
+  padding: 4px 8px;
+  font-size: 0.85rem;
+}
+
+.setting-number input[type="number"][disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.setting-disabled {
+  opacity: 0.5;
+}
+
+/* --- Pending sync indicator --- */
+
+.setting-pending {
+  position: relative;
+  border-color: var(--accent, #58a6ff);
+  box-shadow: 0 0 0 1px var(--accent, #58a6ff);
+  border-radius: var(--radius-sm, 4px);
+  padding: 2px 4px;
+}
+
+.setting-pending::after {
+  content: "syncing...";
+  font-size: 0.65rem;
+  color: var(--accent, #58a6ff);
+  margin-left: 8px;
+  animation: setting-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes setting-pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.setting-pending.setting-synced {
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.setting-pending.setting-synced::after {
+  display: none;
+}
+
+/* -----------------------------------------------------------------------
+   Console Activity Timeline
+   ----------------------------------------------------------------------- */
+
+.console-activity-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.activity-entry {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--border, #333);
+}
+
+.activity-time {
+  min-width: 60px;
+  font-size: 0.75rem;
+  color: var(--text-dim, #666);
+}
+
+.activity-badge {
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.badge-config-write {
+  background: rgba(31, 111, 235, 0.15);
+  color: var(--accent, #58a6ff);
+}
+
+.badge-question-response {
+  background: rgba(63, 185, 80, 0.15);
+  color: var(--green, #3fb950);
+}
+
+.badge-milestone-submit {
+  background: rgba(88, 166, 255, 0.15);
+  color: var(--accent, #58a6ff);
+}
+
+.badge-upload {
+  background: rgba(163, 113, 247, 0.15);
+  color: var(--purple, #a371f7);
+}
+
+.badge-error {
+  background: rgba(248, 81, 73, 0.15);
+  color: var(--red, #f85149);
+}
+
+.activity-summary {
+  font-size: 0.8rem;
+  color: var(--text-primary, #e0e0e0);
+  flex: 1;
+}
+
+.activity-details {
+  font-size: 0.75rem;
+  color: var(--text-muted, #a0a0a0);
+  padding-left: 76px;
+}
+
+.activity-empty {
+  text-align: center;
+  color: var(--text-dim, #666);
+  padding: var(--space-md, 1rem);
+}
+
+.activity-error {
+  background: rgba(248, 81, 73, 0.05);
+}
+
+/* -----------------------------------------------------------------------
+   Console Page
+   ----------------------------------------------------------------------- */
+
+.console-page {
+  max-width: 100%;
+}
+
+/* --- Status Section --- */
+
+.console-status {
+  background: var(--surface, #1e1e2e);
+  border: 1px solid var(--border, #333);
+  border-radius: var(--radius-lg, 8px);
+  padding: var(--space-lg, 1.25rem);
+  margin-bottom: var(--space-lg, 1.25rem);
+}
+
+.console-section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary, #e0e0e0);
+  margin: 0 0 var(--space-md, 1rem) 0;
+}
+
+.console-status-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md, 1rem);
+}
+
+@media (max-width: 640px) {
+  .console-status-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.console-status-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.console-status-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted, #a0a0a0);
+}
+
+.console-status-value {
+  font-size: 0.95rem;
+  color: var(--text-primary, #e0e0e0);
+  font-family: var(--font-mono, monospace);
+}
+
+.console-status-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--accent, #58a6ff);
+  background: color-mix(in srgb, var(--accent, #58a6ff) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent, #58a6ff) 30%, transparent);
+  border-radius: var(--radius-sm, 4px);
+  width: fit-content;
+}
+
+.console-progress-bar {
+  position: relative;
+  height: 20px;
+  background: var(--bg, #0d1117);
+  border: 1px solid var(--border, #333);
+  border-radius: var(--radius-sm, 4px);
+  overflow: hidden;
+}
+
+.console-progress-fill {
+  height: 100%;
+  background: linear-gradient(to right, var(--accent, #58a6ff), #3fb950);
+  border-radius: var(--radius-sm, 4px);
+  transition: width 0.3s ease;
+}
+
+.console-progress-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-primary, #e0e0e0);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.console-status-updated {
+  margin-top: var(--space-sm, 0.5rem);
+  font-size: 0.75rem;
+  color: var(--text-muted, #a0a0a0);
+}
+
+.console-status-empty {
+  color: var(--text-muted, #a0a0a0);
+  font-style: italic;
+  padding: var(--space-md, 1rem) 0;
+}
+
+/* --- Questions Section --- */
+
+.console-questions {
+  background: var(--surface, #1e1e2e);
+  border: 1px solid var(--border, #333);
+  border-radius: var(--radius-lg, 8px);
+  padding: var(--space-lg, 1.25rem);
+  margin-bottom: var(--space-lg, 1.25rem);
+}
+
+.console-questions-empty {
+  color: var(--text-muted, #a0a0a0);
+  font-style: italic;
+  padding: var(--space-sm, 0.5rem) 0;
+}
+
+/* --- Settings Section --- */
+
+.console-settings {
+  background: var(--surface, #1e1e2e);
+  border: 1px solid var(--border, #333);
+  border-radius: var(--radius-lg, 8px);
+  padding: var(--space-lg, 1.25rem);
+  margin-bottom: var(--space-lg, 1.25rem);
+}
+
+/* --- Activity Section --- */
+
+.console-activity {
+  background: var(--surface, #1e1e2e);
+  border: 1px solid var(--border, #333);
+  border-radius: var(--radius-lg, 8px);
+  padding: var(--space-lg, 1.25rem);
+  margin-bottom: var(--space-lg, 1.25rem);
+}
+
+/* --- Shared --- */
+
+.console-placeholder {
+  color: var(--text-muted, #a0a0a0);
+  font-style: italic;
+  padding: var(--space-sm, 0.5rem) 0;
+}
+
+
+/* -----------------------------------------------------------------------
+   Question Card
+   ----------------------------------------------------------------------- */
+
+.question-card {
+  background: var(--surface, #1e1e2e);
+  border: 1px solid var(--border, #333);
+  border-left: 4px solid var(--accent, #58a6ff);
+  border-radius: var(--radius-md, 6px);
+  padding: var(--space-md, 1rem);
+  margin-bottom: var(--space-md, 1rem);
+}
+
+/* Urgency levels */
+.question-card-urgency-low {
+  border-left-color: var(--text-dim, #666);
+}
+
+.question-card-urgency-medium {
+  border-left-color: var(--accent, #58a6ff);
+}
+
+.question-card-urgency-high {
+  border-left-color: var(--signal-warning, #f0883e);
+}
+
+.question-card-urgency-critical {
+  border-left-color: var(--red, #f85149);
+  background: color-mix(in srgb, #f85149 6%, var(--surface, #1e1e2e));
+}
+
+/* Answered state */
+.question-card-answered {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Header: urgency badge + timeout */
+.question-card-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm, 0.5rem);
+  margin-bottom: var(--space-sm, 0.5rem);
+}
+
+.question-card-urgency-badge {
+  display: inline-block;
+  padding: 2px var(--space-xs, 0.25rem);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted, #a0a0a0);
+  background: var(--bg, #0d1117);
+  border: 1px solid var(--border, #333);
+  border-radius: var(--radius-sm, 4px);
+}
+
+.question-card-timeout {
+  font-size: 0.8rem;
+  color: var(--text-dim, #666);
+  font-family: var(--font-mono, monospace);
+}
+
+/* Body: question text + input controls */
+.question-card-text {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text, #e0e0e0);
+  margin: 0 0 var(--space-sm, 0.5rem) 0;
+}
+
+/* Options container */
+.question-card-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm, 0.5rem);
+  margin-bottom: var(--space-sm, 0.5rem);
+}
+
+/* Binary option buttons */
+.question-card-option {
+  padding: var(--space-xs, 0.25rem) var(--space-md, 1rem);
+  background: var(--accent, #58a6ff);
+  color: var(--bg, #0d1117);
+  border: none;
+  border-radius: var(--radius-sm, 4px);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.question-card-option:hover {
+  opacity: 0.85;
+}
+
+/* Radio / checkbox labels */
+.question-card-options label {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+  color: var(--text, #e0e0e0);
+  cursor: pointer;
+  padding: var(--space-xs, 0.25rem) 0;
+}
+
+/* Textarea */
+.question-card-textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: var(--space-sm, 0.5rem);
+  background: var(--bg, #0d1117);
+  border: 1px solid var(--border, #333);
+  border-radius: var(--radius-sm, 4px);
+  color: var(--text, #e0e0e0);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.9rem;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.question-card-textarea:focus {
+  outline: none;
+  border-color: var(--accent, #58a6ff);
+}
+
+/* Actions bar */
+.question-card-actions {
+  margin-top: var(--space-sm, 0.5rem);
+  padding-top: var(--space-sm, 0.5rem);
+  border-top: 1px solid var(--border, #333);
+}
+
+/* Submit button */
+.question-card-submit {
+  padding: var(--space-xs, 0.25rem) var(--space-lg, 1.25rem);
+  background: var(--accent, #58a6ff);
+  color: var(--bg, #0d1117);
+  border: none;
+  border-radius: var(--radius-sm, 4px);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.question-card-submit:hover {
+  opacity: 0.85;
+}
+
+/* Confirm button */
+.question-card-confirm {
+  padding: var(--space-sm, 0.5rem) var(--space-xl, 1.75rem);
+  background: var(--accent, #58a6ff);
+  color: var(--bg, #0d1117);
+  border: none;
+  border-radius: var(--radius-sm, 4px);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.question-card-confirm:hover {
+  opacity: 0.85;
+}
+
+
+
+/* -----------------------------------------------------------------------
+   Console Settings Panel
+   ----------------------------------------------------------------------- */
+
+.console-settings-panel {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-md, 1rem);
+}
+
+.setting-group {
+  background: var(--surface, #1e1e2e);
+  border: 1px solid var(--border, #333);
+  border-radius: var(--radius-lg, 8px);
+  padding: var(--space-md, 1rem);
+}
+
+.setting-group h4 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-primary, #e0e0e0);
+  margin: 0 0 var(--space-sm, 0.5rem) 0;
+  padding-bottom: var(--space-xs, 0.25rem);
+  border-bottom: 1px solid var(--border, #333);
+}
+
+.setting-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: var(--text-primary, #e0e0e0);
+}
+
+.setting-toggle input[type="checkbox"] {
+  cursor: pointer;
+  accent-color: var(--accent, #58a6ff);
+}
+
+.setting-toggle input[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.setting-select {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  font-size: 0.85rem;
+  color: var(--text-primary, #e0e0e0);
+}
+
+.setting-select label {
+  min-width: 80px;
+}
+
+.setting-select select {
+  background: var(--bg, #0d1117);
+  color: var(--text-primary, #e0e0e0);
+  border: 1px solid var(--border, #333);
+  border-radius: var(--radius-sm, 4px);
+  padding: 4px 8px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.setting-select select[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.setting-number {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  font-size: 0.85rem;
+  color: var(--text-primary, #e0e0e0);
+}
+
+.setting-number label {
+  min-width: 80px;
+  flex: 1;
+}
+
+.setting-number input[type="number"] {
+  width: 80px;
+  background: var(--bg, #0d1117);
+  color: var(--text-primary, #e0e0e0);
+  border: 1px solid var(--border, #333);
+  border-radius: var(--radius-sm, 4px);
+  padding: 4px 8px;
+  font-size: 0.85rem;
+}
+
+.setting-number input[type="number"][disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.setting-disabled {
+  opacity: 0.5;
+}
+
+/* --- Pending sync indicator --- */
+
+.setting-pending {
+  position: relative;
+  border-color: var(--accent, #58a6ff);
+  box-shadow: 0 0 0 1px var(--accent, #58a6ff);
+  border-radius: var(--radius-sm, 4px);
+  padding: 2px 4px;
+}
+
+.setting-pending::after {
+  content: "syncing...";
+  font-size: 0.65rem;
+  color: var(--accent, #58a6ff);
+  margin-left: 8px;
+  animation: setting-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes setting-pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.setting-pending.setting-synced {
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.setting-pending.setting-synced::after {
+  display: none;
+}
+
+
+
+/* -----------------------------------------------------------------------
+   Console Activity Timeline
+   ----------------------------------------------------------------------- */
+
+.console-activity-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.activity-entry {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--border, #333);
+}
+
+.activity-time {
+  min-width: 60px;
+  font-size: 0.75rem;
+  color: var(--text-dim, #666);
+}
+
+.activity-badge {
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.badge-config-write {
+  background: rgba(31, 111, 235, 0.15);
+  color: var(--accent, #58a6ff);
+}
+
+.badge-question-response {
+  background: rgba(63, 185, 80, 0.15);
+  color: var(--green, #3fb950);
+}
+
+.badge-milestone-submit {
+  background: rgba(88, 166, 255, 0.15);
+  color: var(--accent, #58a6ff);
+}
+
+.badge-upload {
+  background: rgba(163, 113, 247, 0.15);
+  color: var(--purple, #a371f7);
+}
+
+.badge-error {
+  background: rgba(248, 81, 73, 0.15);
+  color: var(--red, #f85149);
+}
+
+.activity-summary {
+  font-size: 0.8rem;
+  color: var(--text-primary, #e0e0e0);
+  flex: 1;
+}
+
+.activity-details {
+  font-size: 0.75rem;
+  color: var(--text-muted, #a0a0a0);
+  padding-left: 76px;
+}
+
+.activity-empty {
+  text-align: center;
+  color: var(--text-dim, #666);
+  padding: var(--space-md, 1rem);
+}
+
+.activity-error {
+  background: rgba(248, 81, 73, 0.05);
+}
+
+</style>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareSourceCode","name":"gsd-skill-creator — Project Overview","description":"Adaptive learning layer for Claude Code that creates, validates, and manages skills, agents, teams, and chipsets. Uses GSD for project management, skill-creator as the adaptive learning layer. The www/ directory contains a 168-project Research series mapping the PNW bioregion, technology domains, creative arts, science, broadcasting, space, AI, infrastructure, and cross-domain translation frameworks.","programmingLanguage":"TypeScript","dateModified":"2026-05-03T12:01:03.942Z","version":"v1.49.597"}</script>
+    <script src="intelligence/nav-shim.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <span class="header-title">gsd-skill-creator — Project Overview</span>
+    </header>
+    <div class="gantry-strip" data-max-cells="8">
+  <div class="gantry-cells">
+    <div class="gantry-cell" data-type="phase">
+      <span class="gantry-symbol">❯</span>
+      <span class="gantry-label">Phase</span>
+      <span class="gantry-value">0/106</span>
+    </div>
+  </div>
+</div>
+    <div class="page-wrapper">
+      <nav>
+    <ul class="nav-list">
+      <li><a href="index.html" class="nav-link active">Dashboard</a></li>
+      <li><a href="requirements.html" class="nav-link">Requirements</a></li>
+      <li><a href="roadmap.html" class="nav-link">Roadmap</a></li>
+      <li><a href="milestones.html" class="nav-link">Milestones</a></li>
+      <li><a href="state.html" class="nav-link">State</a></li>
+      <li><a href="console.html" class="nav-link">Console</a></li>
+    </ul>
+  </nav>
+      <main>
+        <h1 class="page-title">gsd-skill-creator — Project Overview</h1>
+<p style="color: var(--text-muted); margin-bottom: var(--space-xl);">Adaptive learning layer for Claude Code that creates, validates, and manages skills, agents, teams, and chipsets. Uses GSD for project management, skill-creator as the adaptive learning layer. The www/ directory contains a 168-project Research series mapping the PNW bioregion, technology domains, creative arts, science, broadcasting, space, AI, infrastructure, and cross-domain translation frameworks.</p>
+<div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value">28</div>
+        <div class="stat-label">Milestones</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">177</div>
+        <div class="stat-label">Requirements</div>
+      </div>
+</div>
+<div class="dashboard-grid"><div class="dashboard-terminal-col"><div class="terminal-standalone"><div class="terminal-panel">
+  <iframe
+    class="terminal-iframe"
+    data-terminal-url="http://localhost:11338/terminal"
+    title="Terminal"
+  ></iframe>
+  <div class="terminal-fallback" style="display: block;">
+    <div class="terminal-fallback-title">Terminal Offline</div>
+    <div class="terminal-fallback-message">Terminal service is not available. Start Wetty with: <code>npx skill-creator terminal start</code></div>
+    <div class="terminal-fallback-url">http://localhost:11338/terminal</div>
+  </div>
+  <script>
+  (function() {
+    var url = 'http://localhost:11338/terminal';
+    var iframe = document.querySelector('.terminal-iframe');
+    var fallback = document.querySelector('.terminal-fallback');
+
+    function checkAvailability() {
+      fetch(url, { mode: 'no-cors' })
+        .then(function(res) {
+          if (res.type === 'opaque' || res.ok) {
+            if (iframe) {
+              if (!iframe.src) iframe.src = url;
+              iframe.style.display = 'block';
+            }
+            if (fallback) fallback.style.display = 'none';
+          } else {
+            throw new Error('not available');
+          }
+        })
+        .catch(function() {
+          if (iframe) {
+            iframe.removeAttribute('src');
+            iframe.style.display = 'none';
+          }
+          if (fallback) fallback.style.display = 'block';
+        });
+    }
+
+    checkAvailability();
+    setInterval(checkAvailability, 10000);
+  })();
+  </script>
+</div></div></div><div class="dashboard-info-col"><h2 class="section-title">Current Status</h2>
+<div class="card">
+  <div class="card-body">
+    <div><strong>Milestone:</strong> **GSD Intelligence Dashboard (v1.49.597)** — OPENED 2026-05-02 on `dev` at tip `63ba59044` (predecessor v1.49.596 SHIPPED 2026-05-02T18:30 at `c3ce1e3b2` tag `v1.49.596`; +10 commits ahead of origin/dev awaiting next push include: ship-sync.sh, gh-release-publish.sh, render-claude-md.mjs + pre-tag-gate step 7, W2 inline-recovery doc move). **NOT a NASA degree advance** — engine state at v1.49.597 close = v1.49.596 close (NASA at degree 1.77, SPS at 74, MUS at 1.77, ELC at 1.77; no cards/landings/scorer count change). Mission package staged at `.planning/staging/inbox/intelligence-dashboard/` (5 docs + 15 component specs, 22 files, 232 KB; sourced from a 2026-05-02 vision-to-mission conversation).</div>
+    <div><strong>Phase:</strong> **826 (Wave 3 verification + dashboard migration) — COMPLETE 2026-05-03**. G2 safety gate CLEARED (38 safety + 60 integration + 26 edge + 8 perf tests all green). C14 Intelligence tab additive migration complete. Phase **826.5 IPC-to-HTTP bridge — COMPLETE 2026-05-03** (intra-826 follow-on; commit `240b15d0b`; closes browser-tab static-mode for 15 of 18 commands).</div>
+  </div>
+</div>
+<div class="compact-card"><h3 class="compact-title">Budget</h3><div class="budget-gauge" role="meter" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+  <div class="bg-label">Token Budget</div><div class="bg-bar"><div class="bg-headroom" style="width:100%"></div></div>
+</div><div class="silicon-panel">
+  <h3 class="sp-title">Silicon</h3>
+  <div class="sp-adapters">
+    
+  </div>
+  <div class="sp-vram-gauge" role="meter" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+    <div class="sp-vram-label">VRAM</div>
+    <div class="sp-vram-bar"><div class="sp-vram-headroom" style="width:100%"></div></div>
+  </div>
+</div></div>
+<div class="compact-card"><h3 class="compact-title">Activity</h3><div class="activity-feed">
+  <div class="af-entry">
+    <span class="af-shape af-domain-testing" data-entity-type="skill" data-domain="testing">■</span>
+    <span class="af-identifier">test</span>
+    <span class="af-description">npm run build before vitest in Test job (Phase 828)</span>
+  </div>
+</div></div>
+<div class="staging-queue-panel">
+  <h3 class="sq-title">Staging Queue</h3>
+  <div class="sq-empty">No items in staging queue</div>
+</div>
+<div class="metrics-dashboard">
+<div id="gsd-section-session-pulse" data-tier="hot" data-interval="1500"><section class="pulse-section">
+<div class="pulse-card session-card">
+  <div class="session-id">f7dc338a-cb8f-4948-8b6c-53b7a1ba2b62</div>
+  <div class="session-model">unknown</div>
+  <div class="session-start">Started: 5/3/2026, 2:36:47 AM</div>
+  <span class="session-duration" data-start="1777801007699">0:00</span>
+</div>
+<script>
+(function() {
+  var el = document.querySelector('.session-duration[data-start="1777801007699"]');
+  if (!el) return;
+  var startMs = 1777801007699;
+  function tick() {
+    var elapsed = Math.floor((Date.now() - startMs) / 1000);
+    var h = Math.floor(elapsed / 3600);
+    var m = Math.floor((elapsed % 3600) / 60);
+    var s = elapsed % 60;
+    if (h > 0) {
+      el.textContent = h + ':' + (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+    } else {
+      el.textContent = m + ':' + (s < 10 ? '0' : '') + s;
+    }
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+</script>
+<div class="pulse-card commit-feed">
+  <div class="commit-row"><span class="commit-hash">47ba3a16b</span> <span class="badge badge-ci">ci</span> <span class="commit-scope">(test)</span> <span class="commit-subject">npm run build before vitest in Test job (Phase 828)</span> <span class="commit-time">38m ago</span> <span class="diff-add">+0</span> <span class="diff-del">-0</span></div>
+</div>
+<div class="pulse-card heartbeat heartbeat-gray" data-mtime="1777801007699"><span class="heartbeat-dot"></span><span class="heartbeat-label">Last activity: 2h 24m ago</span></div>
+<div class="pulse-card message-counter">
+  <div class="counter-user">User: 0</div>
+  <div class="counter-assistant">Assistant: 0</div>
+  <div class="counter-tools">Tools: 0</div>
+  <div class="counter-total">Total messages: 0</div>
+</div>
+</section></div>
+<script>
+(function() {
+  var el = document.getElementById('gsd-section-session-pulse');
+  if (!el) return;
+  setInterval(function() {
+    try {
+      fetch('/api/metrics/session-pulse')
+        .then(function(r) { return r.ok ? r.text() : ''; })
+        .then(function(html) { if (html) el.innerHTML = html; })
+        .catch(function() {});
+    } catch(e) {}
+  }, 1500);
+})();
+</script>
+<div id="gsd-section-phase-velocity" data-tier="warm" data-interval="7500"><section class="velocity-section" id="phase-velocity">
+  <h2>Phase Velocity</h2>
+  <div class="velocity-progress-card">
+  <h3>Phase 660</h3>
+  <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+  <div class="progress-plans">0 / 0 plans</div>
+  <div class="progress-commits">0 commits</div>
+  <div class="progress-loc"><span class="loc-add">+0</span> / <span class="loc-del">-0</span></div>
+  <div class="progress-time">—</div>
+</div>
+  <div class="velocity-timeline-empty">No phase data available</div>
+  <div class="velocity-stats-empty">No phase data available</div>
+  <div class="velocity-tdd-empty">No TDD cycles detected</div>
+</section></div>
+<script>
+(function() {
+  var el = document.getElementById('gsd-section-phase-velocity');
+  if (!el) return;
+  setInterval(function() {
+    try {
+      fetch('/api/metrics/phase-velocity')
+        .then(function(r) { return r.ok ? r.text() : ''; })
+        .then(function(html) { if (html) el.innerHTML = html; })
+        .catch(function() {});
+    } catch(e) {}
+  }, 7500);
+})();
+</script>
+<div id="gsd-section-planning-quality" data-tier="warm" data-interval="7500"><section class="quality-section"><div class="quality-card accuracy-scores empty">No planning data available</div><div class="quality-card emergent-ratio empty">No planning data available</div><div class="quality-card deviation-summary empty">No planning data available</div><div class="quality-card accuracy-trend empty">No planning data available</div></section></div>
+<script>
+(function() {
+  var el = document.getElementById('gsd-section-planning-quality');
+  if (!el) return;
+  setInterval(function() {
+    try {
+      fetch('/api/metrics/planning-quality')
+        .then(function(r) { return r.ok ? r.text() : ''; })
+        .then(function(html) { if (html) el.innerHTML = html; })
+        .catch(function() {});
+    } catch(e) {}
+  }, 7500);
+})();
+</script>
+<div id="gsd-section-historical-trends" data-tier="cold" data-interval="0"><div class="history-section"><h3>Milestone Comparison</h3>
+<table class="milestone-table">
+<thead><tr><th>Milestone</th><th>Phases</th><th>Plans</th><th>Commits</th><th>LOC</th><th>Tests</th><th>Accuracy</th></tr></thead>
+<tbody>
+<tr>
+<td class="milestone-name">v1.49.572 Mathematical Foundations Refresh</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="accuracy">N/A</td>
+</tr>
+<tr>
+<td class="milestone-name">v1.49.571 Heuristics-Free Skill Space</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="accuracy">N/A</td>
+</tr>
+<tr>
+<td class="milestone-name">v1.49.570 Convergent Substrate</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="accuracy">N/A</td>
+</tr>
+<tr>
+<td class="milestone-name">v1.49.568 Nonlinear Frontier</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="accuracy">N/A</td>
+</tr>
+<tr>
+<td class="milestone-name">v1.49.561 Living Sensoria</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="accuracy">N/A</td>
+</tr>
+<tr>
+<td class="milestone-name">v1.49.19 Gastown Chipset Integration</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="accuracy">N/A</td>
+</tr>
+<tr>
+<td class="milestone-name">v1.49.18 Space Between Observatory</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="accuracy">N/A</td>
+</tr>
+<tr>
+<td class="milestone-name">v1.50.40 Unit Circle v1.25 Review</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="accuracy">N/A</td>
+</tr>
+<tr>
+<td class="milestone-name">v1.50.39 Unit Circle v1.24 Review</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="accuracy">N/A</td>
+</tr>
+<tr>
+<td class="milestone-name">v1.50.38 Unit Circle v1.23 Review</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="accuracy">N/A</td>
+</tr>
+<tr>
+<td class="milestone-name">v1.50.37 Muse Architecture</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="accuracy">N/A</td>
+</tr>
+<tr>
+<td class="milestone-name">v1.49.16 Maple Foxy Bells</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="accuracy">N/A</td>
+</tr>
+<tr>
+<td class="milestone-name">v1.50.33 Unit Circle Re-execution: v1.19 Review</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="accuracy">N/A</td>
+</tr>
+<tr>
+<td class="milestone-name">v1.50.32 Unit Circle Re-execution: v1.18 Review</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="accuracy">N/A</td>
+</tr>
+<tr>
+<td class="milestone-name">v1.49.15 Self-Improving Mesh Architecture</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="accuracy">N/A</td>
+</tr>
+<tr>
+<td class="milestone-name">v1.50.29 Unit Circle Re-execution: v1.15 Review</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="accuracy">N/A</td>
+</tr>
+<tr>
+<td class="milestone-name">v1.50.26 Unit Circle Re-execution: v1.12 Review</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="accuracy">N/A</td>
+</tr>
+<tr>
+<td class="milestone-name">v1.50.13 Hindsight Corrections</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="accuracy">N/A</td>
+</tr>
+<tr>
+<td class="milestone-name">v1.50.11 GSD Tooling Hardening</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="accuracy">N/A</td>
+</tr>
+<tr>
+<td class="milestone-name">v1.50.10 Post-Merge Integration</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="accuracy">N/A</td>
+</tr>
+<tr>
+<td class="milestone-name">v1.50.9 Retrospective Remediation</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="accuracy">N/A</td>
+</tr>
+<tr>
+<td class="milestone-name">v1.50.8 Retrospective Hardening</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="accuracy">N/A</td>
+</tr>
+<tr>
+<td class="milestone-name">v1.50.7 Retro Net Pack</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="accuracy">N/A</td>
+</tr>
+<tr>
+<td class="milestone-name">v1.50.6 Full Stack Buildout</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="accuracy">N/A</td>
+</tr>
+<tr>
+<td class="milestone-name">v1.50.5 Skill Creator Hardening</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="accuracy">N/A</td>
+</tr>
+<tr>
+<td class="milestone-name">v1.50.4 Autonomous Lessons Implementation</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="accuracy">N/A</td>
+</tr>
+<tr>
+<td class="milestone-name">v1.50.3 The Unit Circle</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="accuracy">N/A</td>
+</tr>
+<tr>
+<td class="milestone-name">v1.50 The Unit Circle</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="numeric">0</td>
+<td class="accuracy">N/A</td>
+</tr>
+</tbody>
+</table>
+</div><div class="history-section"><h3>Commit Type Distribution</h3>
+<div class="commit-bar"><div class="commit-bar-segment" data-type="other" title="other: 1 (100%)" style="width:100%;background:#607D8B"></div></div>
+<div class="commit-legend"><span class="legend-item"><span class="legend-swatch" style="background:#607D8B"></span>other: 1 (100%)</span></div>
+</div><div class="history-section"><h3>Velocity Trend</h3><div class="velocity-chart"><div class="velocity-bar-group"><div class="velocity-bar" style="height:0%" title="v1.49.572: 0 LOC/phase"></div><div class="velocity-phases">0p</div><div class="velocity-label">v1.49.572</div></div><div class="velocity-bar-group"><div class="velocity-bar" style="height:0%" title="v1.49.571: 0 LOC/phase"></div><div class="velocity-phases">0p</div><div class="velocity-label">v1.49.571</div></div><div class="velocity-bar-group"><div class="velocity-bar" style="height:0%" title="v1.49.570: 0 LOC/phase"></div><div class="velocity-phases">0p</div><div class="velocity-label">v1.49.570</div></div><div class="velocity-bar-group"><div class="velocity-bar" style="height:0%" title="v1.49.568: 0 LOC/phase"></div><div class="velocity-phases">0p</div><div class="velocity-label">v1.49.568</div></div><div class="velocity-bar-group"><div class="velocity-bar" style="height:0%" title="v1.49.561: 0 LOC/phase"></div><div class="velocity-phases">0p</div><div class="velocity-label">v1.49.561</div></div><div class="velocity-bar-group"><div class="velocity-bar" style="height:0%" title="v1.49.19: 0 LOC/phase"></div><div class="velocity-phases">0p</div><div class="velocity-label">v1.49.19</div></div><div class="velocity-bar-group"><div class="velocity-bar" style="height:0%" title="v1.49.18: 0 LOC/phase"></div><div class="velocity-phases">0p</div><div class="velocity-label">v1.49.18</div></div><div class="velocity-bar-group"><div class="velocity-bar" style="height:0%" title="v1.50.40: 0 LOC/phase"></div><div class="velocity-phases">0p</div><div class="velocity-label">v1.50.40</div></div><div class="velocity-bar-group"><div class="velocity-bar" style="height:0%" title="v1.50.39: 0 LOC/phase"></div><div class="velocity-phases">0p</div><div class="velocity-label">v1.50.39</div></div><div class="velocity-bar-group"><div class="velocity-bar" style="height:0%" title="v1.50.38: 0 LOC/phase"></div><div class="velocity-phases">0p</div><div class="velocity-label">v1.50.38</div></div><div class="velocity-bar-group"><div class="velocity-bar" style="height:0%" title="v1.50.37: 0 LOC/phase"></div><div class="velocity-phases">0p</div><div class="velocity-label">v1.50.37</div></div><div class="velocity-bar-group"><div class="velocity-bar" style="height:0%" title="v1.49.16: 0 LOC/phase"></div><div class="velocity-phases">0p</div><div class="velocity-label">v1.49.16</div></div><div class="velocity-bar-group"><div class="velocity-bar" style="height:0%" title="v1.50.33: 0 LOC/phase"></div><div class="velocity-phases">0p</div><div class="velocity-label">v1.50.33</div></div><div class="velocity-bar-group"><div class="velocity-bar" style="height:0%" title="v1.50.32: 0 LOC/phase"></div><div class="velocity-phases">0p</div><div class="velocity-label">v1.50.32</div></div><div class="velocity-bar-group"><div class="velocity-bar" style="height:0%" title="v1.49.15: 0 LOC/phase"></div><div class="velocity-phases">0p</div><div class="velocity-label">v1.49.15</div></div><div class="velocity-bar-group"><div class="velocity-bar" style="height:0%" title="v1.50.29: 0 LOC/phase"></div><div class="velocity-phases">0p</div><div class="velocity-label">v1.50.29</div></div><div class="velocity-bar-group"><div class="velocity-bar" style="height:0%" title="v1.50.26: 0 LOC/phase"></div><div class="velocity-phases">0p</div><div class="velocity-label">v1.50.26</div></div><div class="velocity-bar-group"><div class="velocity-bar" style="height:0%" title="v1.50.13: 0 LOC/phase"></div><div class="velocity-phases">0p</div><div class="velocity-label">v1.50.13</div></div><div class="velocity-bar-group"><div class="velocity-bar" style="height:0%" title="v1.50.11: 0 LOC/phase"></div><div class="velocity-phases">0p</div><div class="velocity-label">v1.50.11</div></div><div class="velocity-bar-group"><div class="velocity-bar" style="height:0%" title="v1.50.10: 0 LOC/phase"></div><div class="velocity-phases">0p</div><div class="velocity-label">v1.50.10</div></div><div class="velocity-bar-group"><div class="velocity-bar" style="height:0%" title="v1.50.9: 0 LOC/phase"></div><div class="velocity-phases">0p</div><div class="velocity-label">v1.50.9</div></div><div class="velocity-bar-group"><div class="velocity-bar" style="height:0%" title="v1.50.8: 0 LOC/phase"></div><div class="velocity-phases">0p</div><div class="velocity-label">v1.50.8</div></div><div class="velocity-bar-group"><div class="velocity-bar" style="height:0%" title="v1.50.7: 0 LOC/phase"></div><div class="velocity-phases">0p</div><div class="velocity-label">v1.50.7</div></div><div class="velocity-bar-group"><div class="velocity-bar" style="height:0%" title="v1.50.6: 0 LOC/phase"></div><div class="velocity-phases">0p</div><div class="velocity-label">v1.50.6</div></div><div class="velocity-bar-group"><div class="velocity-bar" style="height:0%" title="v1.50.5: 0 LOC/phase"></div><div class="velocity-phases">0p</div><div class="velocity-label">v1.50.5</div></div><div class="velocity-bar-group"><div class="velocity-bar" style="height:0%" title="v1.50.4: 0 LOC/phase"></div><div class="velocity-phases">0p</div><div class="velocity-label">v1.50.4</div></div><div class="velocity-bar-group"><div class="velocity-bar" style="height:0%" title="v1.50.3: 0 LOC/phase"></div><div class="velocity-phases">0p</div><div class="velocity-label">v1.50.3</div></div><div class="velocity-bar-group"><div class="velocity-bar" style="height:0%" title="v1.50: 0 LOC/phase"></div><div class="velocity-phases">0p</div><div class="velocity-label">v1.50</div></div></div></div><div class="history-empty">No file hotspot data available</div></div>
+</div>
+<div class="topology-panel">
+  <h3 class="tp-title">Route Map</h3>
+  <svg viewBox="0 0 800 600" class="tp-svg">
+    
+    <g class="tp-node-team" data-node-id="code-review-team" data-domain="infrastructure">
+      <polygon points="130.4,114.0 130.4,126.0 120.0,132.0 109.6,126.0 109.6,114.0 120.0,108.0" />
+      <text x="120" y="140" text-anchor="middle" class="tp-label">code-review-team</text>
+    </g>
+    <g class="tp-node-team" data-node-id="doc-generation-team" data-domain="infrastructure">
+      <polygon points="130.4,234.0 130.4,246.0 120.0,252.0 109.6,246.0 109.6,234.0 120.0,228.0" />
+      <text x="120" y="260" text-anchor="middle" class="tp-label">doc-generation-team</text>
+    </g>
+    <g class="tp-node-team" data-node-id="gsd-debug" data-domain="infrastructure">
+      <polygon points="130.4,354.0 130.4,366.0 120.0,372.0 109.6,366.0 109.6,354.0 120.0,348.0" />
+      <text x="120" y="380" text-anchor="middle" class="tp-label">gsd-debug</text>
+    </g>
+    <g class="tp-node-team" data-node-id="gsd-research" data-domain="infrastructure">
+      <polygon points="130.4,474.0 130.4,486.0 120.0,492.0 109.6,486.0 109.6,474.0 120.0,468.0" />
+      <text x="120" y="500" text-anchor="middle" class="tp-label">gsd-research</text>
+    </g>
+    <g class="tp-node-agent" data-node-id="capcom" data-domain="infrastructure">
+      <circle cx="400" cy="11.320754716981131" r="12" />
+      <text x="400" y="31.32075471698113" text-anchor="middle" class="tp-label">capcom</text>
+    </g>
+    <g class="tp-node-agent" data-node-id="changelog-generator" data-domain="infrastructure">
+      <circle cx="400" cy="22.641509433962263" r="12" />
+      <text x="400" y="42.64150943396226" text-anchor="middle" class="tp-label">changelog-generator</text>
+    </g>
+    <g class="tp-node-agent" data-node-id="codebase-navigator" data-domain="frontend">
+      <circle cx="400" cy="33.9622641509434" r="12" />
+      <text x="400" y="53.9622641509434" text-anchor="middle" class="tp-label">codebase-navigator</text>
+    </g>
+    <g class="tp-node-agent" data-node-id="doc-linter" data-domain="infrastructure">
+      <circle cx="400" cy="45.283018867924525" r="12" />
+      <text x="400" y="65.28301886792453" text-anchor="middle" class="tp-label">doc-linter</text>
+    </g>
+    <g class="tp-node-agent" data-node-id="flight-ops" data-domain="infrastructure">
+      <circle cx="400" cy="56.60377358490567" r="12" />
+      <text x="400" y="76.60377358490567" text-anchor="middle" class="tp-label">flight-ops</text>
+    </g>
+    <g class="tp-node-agent" data-node-id="gsd-advisor-researcher" data-domain="infrastructure">
+      <circle cx="400" cy="67.9245283018868" r="12" />
+      <text x="400" y="87.9245283018868" text-anchor="middle" class="tp-label">gsd-advisor-researcher</text>
+    </g>
+    <g class="tp-node-agent" data-node-id="gsd-ai-researcher" data-domain="testing">
+      <circle cx="400" cy="79.24528301886792" r="12" />
+      <text x="400" y="99.24528301886792" text-anchor="middle" class="tp-label">gsd-ai-researcher</text>
+    </g>
+    <g class="tp-node-plan" data-node-id="collapsed-summary" data-domain="collapsed">
+      <circle cx="680" cy="540" r="4" />
+      <text x="680" y="560" text-anchor="middle" class="tp-label">+57 more</text>
+    </g>
+  </svg>
+</div>
+<script>
+(function() {
+  var panel = document.querySelector('.topology-panel');
+  if (!panel) return;
+
+  panel.addEventListener('click', function(e) {
+    var target = e.target.closest('[data-node-id]');
+    if (!target) {
+      var existing = panel.querySelector('.tp-detail-panel');
+      if (existing) existing.remove();
+      return;
+    }
+
+    var nodeId = target.getAttribute('data-node-id');
+    var domain = target.getAttribute('data-domain') || '';
+    var textEl = target.querySelector('text');
+    var label = textEl ? textEl.textContent : nodeId;
+    var nodeType = target.classList.toString().match(/tp-node-(\w+)/);
+    var type = nodeType ? nodeType[1] : 'unknown';
+    var isActive = target.classList.contains('tp-active');
+
+    var old = panel.querySelector('.tp-detail-panel');
+    if (old) old.remove();
+
+    var detail = document.createElement('div');
+    detail.className = 'tp-detail-panel';
+    detail.innerHTML = '<div class="tp-detail-header">' +
+      '<span class="tp-detail-title">' + label + '</span>' +
+      '<button class="tp-detail-close">&times;</button></div>' +
+      '<div class="tp-detail-field"><span class="tp-detail-label">Type</span>' +
+      '<span class="tp-detail-value">' + type + '</span></div>' +
+      '<div class="tp-detail-field"><span class="tp-detail-label">Domain</span>' +
+      '<span class="tp-detail-value">' + domain + '</span></div>' +
+      '<div class="tp-detail-field"><span class="tp-detail-label">Status</span>' +
+      '<span class="tp-detail-value">' + (isActive ? 'Active' : 'Dormant') + '</span></div>';
+
+    panel.appendChild(detail);
+
+    detail.querySelector('.tp-detail-close').addEventListener('click', function() {
+      detail.remove();
+    });
+  });
+})();
+</script>
+<details class="entity-legend" open>
+  <summary class="entity-legend-toggle">Shape &amp; Color Legend</summary>
+  <div class="entity-legend-grid">
+    <div class="entity-legend-section">
+      <h4>Entity Types</h4>
+      <div class="entity-legend-item"><svg class="entity-shape entity-agent domain-frontend" width="20" height="20" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"  fill="var(--domain-frontend)" /></svg> <span>Agent</span></div>
+      <div class="entity-legend-item"><svg class="entity-shape entity-skill domain-frontend" width="20" height="20" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"  fill="var(--domain-frontend)" /></svg> <span>Skill</span></div>
+      <div class="entity-legend-item"><svg class="entity-shape entity-team domain-frontend" width="20" height="20" viewBox="0 0 24 24"><polygon points="12,2 22,7 22,17 12,22 2,17 2,7"  fill="var(--domain-frontend)" /></svg> <span>Team</span></div>
+      <div class="entity-legend-item"><svg class="entity-shape entity-milestone domain-frontend" width="20" height="20" viewBox="0 0 24 24"><polygon points="2,4 16,4 22,12 16,20 2,20 8,12"  fill="var(--domain-frontend)" /></svg> <span>Milestone</span></div>
+      <div class="entity-legend-item"><svg class="entity-shape entity-adapter domain-frontend" width="20" height="20" viewBox="0 0 24 24"><polygon points="12,2 22,12 12,22 2,12"  fill="var(--domain-frontend)" /></svg> <span>Adapter</span></div>
+      <div class="entity-legend-item"><svg class="entity-shape entity-plan domain-frontend" width="20" height="20" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"  fill="var(--domain-frontend)" /></svg> <span>Plan</span></div>
+    </div>
+    <div class="entity-legend-section">
+      <h4>Domains</h4>
+      <div class="entity-legend-item"><span class="domain-swatch domain-frontend"></span> <span>Frontend</span></div>
+      <div class="entity-legend-item"><span class="domain-swatch domain-backend"></span> <span>Backend</span></div>
+      <div class="entity-legend-item"><span class="domain-swatch domain-testing"></span> <span>Testing</span></div>
+      <div class="entity-legend-item"><span class="domain-swatch domain-infrastructure"></span> <span>Infrastructure</span></div>
+      <div class="entity-legend-item"><span class="domain-swatch domain-observation"></span> <span>Observation</span></div>
+      <div class="entity-legend-item"><span class="domain-swatch domain-silicon"></span> <span>Silicon</span></div>
+    </div>
+  </div>
+</details>
+<h2 class="section-title">Phases</h2>
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Goal</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td>821</td>
+        <td>Foundation — Wave 0 shared types + SQLite migration + JSON schemas</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Land the three contract artifacts (TypeScript shared types, SQLite migration script, JSON schemas for staging file format) plus a KB API stub interface, so all three Wave 1 tracks can dispatch in parallel from a known-good cache.</td>
+      </tr>
+      <tr>
+        <td>822</td>
+        <td>Analyzer Pipeline — Wave 1 Track A file walker + tree-sitter analyzers + finding engine</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Users can point the analyzer at any local repo (including a freshly-cloned external GitHub repo at &lt;100K LOC) and see a complete first-pass scan complete in under 5 minutes with all findings — typed by language, ranked by hot-spot heuristics, scored for confidence — written to the per-project Intelligence KB.</td>
+      </tr>
+      <tr>
+        <td>823</td>
+        <td>Intelligence KB — Wave 1 Track B SQLite WAL store + snapshot manager + meeting store</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Users can run the web tool (browser tab or Tauri shell) AND a Claude Code session simultaneously against the same per-project Intelligence KB, take snapshots that diff cleanly, and have planning-meeting state (decisions in pending tray, bundle composition, meeting state machine) persist across server restarts.</td>
+      </tr>
+      <tr>
+        <td>824</td>
+        <td>Server + UI — Wave 1 Track C Tauri server + planning meeting view + live work view</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Users open the web tool (Tauri shell or browser tab against the 127.0.0.1 server, same UI bundle) and see a chronological project list, expand a project into a planning meeting view in &lt;200ms, watch live work updates stream within 1s of status events, and address blocked decisions via a single-decision micro-meeting.</td>
+      </tr>
+      <tr>
+        <td>825</td>
+        <td>Integration + AI Investigator — Wave 2 mission emitter + meeting record + investigator skill (CAPCOM gate G1)</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Users commit a planning-meeting bundle and observe the bundle deposit atomically as N vision-shaped seeds plus a bundle manifest in `.planning/staging/inbox/`; the auto-generated meeting record at `.planning/intelligence/meetings/M-YYYY-MM-DD-NNNN.md` carries the AI briefing + decisions + dynamic outcome lines that update as status events arrive; AI briefings come from the Claude Code-side investigator skill via console-inbox requests, never from direct AI calls in the web tool.</td>
+      </tr>
+      <tr>
+        <td>826</td>
+        <td>Verification + Dashboard Migration — Wave 3 integration tests + non-breaking Intelligence tab (Safety Warden BLOCK G2; pre-tag gate G3)</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Users grep any compiled webview bundle and find zero `anthropic` / `@anthropic-ai/sdk` / `child_process.spawn` matches; users load the existing dashboard and find the existing nav/hero/milestone grid render unchanged with only a new "Intelligence ★" tab added; users run `npm test` and see all 14 safety-critical tests pass plus ≥18 integration tests plus ≥32 component-internal tests with vitest count delta ≥+50 over the v1.49.596 baseline; users run the end-to-end loop on this very repo and watch a vision seed produced by the mission emitter expand cleanly through the existing `vision-to-mission` skill.</td>
+      </tr>
+      <tr>
+        <td>827</td>
+        <td>Browser-tab parity completion — Wave 0-3 internal (KBStore extensions + SSE event emitter + bridge wiring + integration tests)</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Users open `http://localhost:3030/intelligence.html` in any browser tab and observe the dashboard at full feature parity with the Tauri shell — `editDecision`, `withdrawDecision`, `previewBundle` work end-to-end via HTTP; `intelligenceIpc.on.status_update` / `briefing_ready` / `findings_updated` / `meeting_record_updated` / `bundle_completed` listeners fire within 250ms of the corresponding KB writes; no static-mode banner appears; pending tray populates from real KB data.</td>
+      </tr>
+      <tr>
+        <td>755</td>
+        <td>W0 Foundation — 150-entry BibTeX + citation-key convention + 7 module spec templates + CAPCOM gate macro</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Seed the upstream-intelligence-pack v1.44 citation discipline. Build (a) the unified BibTeX index `gsd-arxiv-eess-apr17-23.bib` with 150 entries — every paper from the mission package's M1–M7 anchor tables (11+22+16+14+14+14+16=107 explicit anchors plus the trailing 43 from the 150-curated set across deep dive + addendum) — using the `eess26_&lt;arxivID&gt;` citation-key convention; (b) the per-module glossary covering skill-architecture / continual-learning / federated-learning / mesh-networking / hardware-aware / safety-verification / OCAP-CARE-UNDRIP vocabulary; (c) per-module LaTeX templates `module_{1,2,3,4,5,6,7}.tex` modeled on v1.49.572 M1..M6 scaffolds with a 7th added for safety/pedagogy; (d) the CAPCOM gate macro reusable across all downstream waves of this milestone; (e) the `numerical_attribution.md` scaffold listing every target figure (e.g., 23,288 SONICS sample size, 50-page synthesis target, 25-page max for D8) with empty source-section field. All outputs live under `.planning/missions/arxiv-eess-integration-apr17-23/work/` (mirror of v1.49.572 pattern).</td>
+      </tr>
+      <tr>
+        <td>756</td>
+        <td>W1A Module M1 — Skill Learning Foundations</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Produce `modules/module_1.tex` (target ≥18pp) covering 11 papers anchoring the skill-architecture / continual-learning cluster (Experience Compression Spectrum 2604.15877; SkillLearnBench 2604.20087; SkillX 2604.04804 v2; Skilldex 2604.16911; Spontaneous Self-Evolution 2604.18131; Structural Verification EDA 2604.18834; Local Linearity LLMs 2604.19018; WirelessAgent 2604.17440; SpaceMind 2604.14399; Unified Ultrasound Intelligence 2604.16914; WebXSkill 2604.13318). Each paper has a dedicated subsection with citation key, methodology contribution, integration target, and risk classification (Low/Medium/High). Highlight SkillLearnBench's recursive-drift-under-self-feedback empirical finding as direct empirical justification for the GSD constitution's bounded-learning constraints.</td>
+      </tr>
+      <tr>
+        <td>757</td>
+        <td>W1A Module M2 — Mathematical &amp; Information-Theoretic Substrate</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Produce `modules/module_2.tex` (target ≥22pp) covering 22 papers anchoring the mathematical/info-theoretic substrate cluster. Flagship: Algebraic Diversity (2604.19983) — Rényi-2-analog structural-capacity metric as cleanest formal articulation of the Amiga Principle. Anchors: Sample Entropy for Graph Signals (2604.20655), companion 2604.05086, Existential Theory of Research (2604.19810), Synonymous Variational RDP (2604.14603), Symplectic Inductive Bias (2604.17213), RG-Based Hopf Reduction (2604.20753, 82pp), Hadamard Product Positivity (2604.19602), Sparse Recovery via Linear Sketching (2604.20214), Tonnetz Combinatorial Geometry (2604.19960), Unified EnKF Derivation (2604.16458), CAR-EnKF (2604.17343), DMD Parameter Identification (2604.18783), Secure Rate-Distortion-Perception (2604.20245), Sparse Ecological Network Inference (2604.18820), SOLIS PINN (2604.14879), SPaRSe-TIME (2604.17350), Consensus over Finite Fields (2604.14205), Timescale Limits (2604.16710), Nesterov Accelerated Distributed Optimization (2604.16906), Reward-Balancing (2604.20433), Forward-looking evolutionary games (2604.20029). **Per re-analyze directive:** papers overlapping v1.49.572 (2604.19960, 2604.20655, 2604.16710, 2604.20433, 2604.17213, 2604.16458, 2604.17343) produce fresh analysis in eess/cs lens — do NOT forward-cite to 572.</td>
+      </tr>
+      <tr>
+        <td>758</td>
+        <td>W1A Module M3 — Bioacoustics, Music &amp; Audio Intelligence + OCAP/CARE/UNDRIP cultural review</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Produce `modules/module_3.tex` (target ≥18pp) covering 16 audio-intelligence papers (ArtifactNet 2604.16254 SONICS n=23,288; Audio Flamingo Next 2604.10905; ONOTE 2604.20719; MERT Source Separation Eval 2604.20270; Tonnetz 2604.19960 cross-link M2; OMR Bottleneck 2604.16446; ICLAD 2604.16749; Indic-CodecFake 2604.19949; Explainable SER 2604.19763; VIBE 2604.17248; Multimodal Music-Taste 2604.10632; Capacitive Microphone Self-Noise Reduction 2604.18969; Acoustic Camouflage 2604.14619; Prosody as Supervision 2604.17647; Chain-of-Details TTS 2604.19330; Reliable ASR Child Speech 2604.19801). Plus produce `modules/m3-cultural-sensitivity-report.tex` — Opus-driven OCAP/CARE/UNDRIP audit treating every PNW/audio reference with nation-specific attribution (Coast Salish, Lummi/Lhaq'temish, Tulalip, Stillaguamish, Wanapum, etc.); enumerates how Explainable SER (2604.19763) + VIBE (2604.17248) make the SoPS cultural-sensitivity gate testable; identifies ArtifactNet (2604.16254) as provenance verification layer for the 360-musicians dataset.</td>
+      </tr>
+      <tr>
+        <td>759</td>
+        <td>W1B Module M4 — Federated Learning, Security &amp; Privacy + MIA threat-model synthesis</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Produce `modules/module_4.tex` (target ≥18pp) covering 14 federated-learning papers (FedSIR 2604.20825; FB-NLL 2604.19729; Heterogeneity-Aware PFL 2604.19451; Decision-Focused FL 2604.20031; Data-Free MIA 2604.19891; DECIFR 2604.19915; FL Hardware Assurance survey 2604.20020; FL/Blockchain 2604.20062; ScalarFedLQR 2604.05088; Exploiting Correlations 2604.14751; Decentralization Acceleration 2604.19518; TTA EEG 2604.16926; Wasserstein DR CVaR 2604.18546; Continual Generative Replay 2604.14259). Plus produce `modules/m4-mia-threat-model.tex` — Opus synthesis of the Lee et al. trio (2604.19891 data-free MIA + 2604.19915 DECIFR + 2604.20020 FL Hardware Assurance survey) as the canonical pre-rollout threat model for any future GSD federated training. Document SCLL-prior gradient-inversion attack class; prescribe DP+gradient-clipping+secure-aggregation+per-client-data-cap mitigations; mandate budgeting before any federated-training recommendation.</td>
+      </tr>
+      <tr>
+        <td>760</td>
+        <td>W1B Module M5 — Edge Infrastructure, Mesh &amp; Resilient Networks</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Produce `modules/module_5.tex` (target ≥18pp) covering 14 edge-infrastructure papers. Flagship: Vakhnovskyi Dual-Radio BLE-LoRa Hierarchical Mesh (2604.15532) — explicitly identified as the published academic version of the Cascadia Subduction Zone emergency-comms thesis. Anchors: Equinox Decentralized Orbital Scheduling (2604.19958); MPC Low-Altitude Networks (2604.20610); Lightweight Low-SNR Semantic Comms (2604.20278); HYMN Multi-Technology Positioning Dataset (2604.20349); Thermal Anomaly Sentinel-2 (2604.18606); Olive Orchard Path Loss (2604.19427); Co-Design Crypto + Feedback Gain (2604.14774); Frugal Geofencing (2604.18141); Active LV Distribution (2604.20530, CIRED 2026); Trustworthy 6G Digital Twins (2604.14787); E2E-WAVE Underwater Multicasting (2604.17047, SECON 2026); Active Inference ISAC (2604.19599 cross-link M7); Odour Sensing Turbulent Plumes (2604.19626).</td>
+      </tr>
+      <tr>
+        <td>761</td>
+        <td>W1B Module M6 — Hardware Substrate &amp; Energy Economics</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Produce `modules/module_6.tex` (target ≥18pp) covering 14 hardware/energy papers. Flagship: Stackelberg Drainability Guardrails (2604.16802, CDC 2026) — explicitly identified as the working academic version of the FoxCompute commercial thesis. Anchors: SAGE Edge-Cloud Inference (2604.19623); ReRAM Architecture (2604.20178); Analog Circuit Synthesis for Constrained Optimization (2604.19100); DHFP-PE Dual-Precision FP (2604.04507); Neuromorphic SNN Power Converter (2604.15714, ICONS 2026); Probabilistic Ising Machine with Inertia (2604.17109); FM-CAC Carbon-Aware Control (2604.16448); Cross-Atlantic Grid Architectures (2604.19933, Smart Energy 2026) — structural precedent for "Pacific Rim agenda" framing; Hierarchical MARL P2P Trading (2604.20586); On-Meter Graph ML PV Forecasting (2604.19800, CEEPE 2026); Tech Learning Curve Water Electrolysis (2604.17421); Puerto Rico Capacity Expansion (2604.18926); Particle Accelerator Digital Twins (2604.19101).</td>
+      </tr>
+      <tr>
+        <td>762</td>
+        <td>W1C Module M7 — Safety, Verification &amp; Pedagogy + CAPCOM logic synthesis + ZFC blueprint + College pedagogy update</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Produce `modules/module_7.tex` (target ≥20pp) covering 16 safety/verification/pedagogy papers (Interval POMDP Shielding 2604.20728; Safety-Critical Riemannian 2604.19639; Active Inference ISAC 2604.19599 cross-link M5; Safety-Certified CRT Sparse FFT 2604.18911; Safe RL Wireless 2604.17032; Quantitative Verification of Constrained Occupation Measures 2604.19014 + 2604.17902; Verification of Autonomous Systems 2604.15659; Stochastic Rumor Propagation with Fact-Checking 2604.17368; Reward-Balancing 2604.20433 cross-link M2; Student Emotion via Speech 2604.09881; Teaching the Teachers 2604.11256; Spatiotemporal Link Formation 2604.18888 EDM 2026; HARNESS Distilled Arabic Speech 2604.14186; Batch Effects Brain FMs 2604.14441; ASPIRin 2604.10065). Plus three Opus-driven synthesis docs: (a) `m7-capcom-revision.tex` — CAPCOM gate logic revision tied to POMDP shielding + verification pair + rumor propagation; (b) `m7-zfc-blueprint.tex` — ZFC compliance auditor methodology blueprint (Skilldex 2604.16911 + Structural Verification 2604.18834 fusion) feeding T1a; (c) `m7-college-pedagogy.tex` — College of Knowledge update via Spatiotemporal Link Formation + Teaching the Teachers.</td>
+      </tr>
+      <tr>
+        <td>763</td>
+        <td>W2 Synthesis — convergent-discovery enumeration + top-10 cross-cutting + ≤25pp integration document</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Cross-module synthesis (Opus). Produce three deliverables: (a) `synthesis-convergent-discovery.tex` — explicit enumeration of ≥5 external projects that independently arrived at GSD design decisions (Skilldex ≈ ZFC auditor; SkillX ≈ chipset three-tier hierarchy; Vakhnovskyi BLE-LoRa ≈ Cascadia mesh thesis; Stackelberg Drainability ≈ FoxCompute thesis; Experience Compression Spectrum ≈ DACP layer; ArtifactNet ≈ asset-provenance gate); (b) `synthesis-top10-crosscutting.tex` — top-10 cross-cutting recommendations spanning ≥3 modules each (e.g., information-theoretic compression / federated security / foundation-model distillation / structural verification / safety-shielding under uncertainty); (c) `synthesis-integration.tex` (≤25pp) — integration-document prose with prioritization by impact × effort. Source-verification pass: every cited paper checked against canonical arxiv URL. Through-line ("the architecture reads itself") stated in Stage-1-depth quote block.</td>
+      </tr>
+      <tr>
+        <td>764</td>
+        <td>W3 Publication + Verification + Safety Warden BLOCK gate</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Wave 3 publication + verification. Assemble D1–D10 deliverables: D1–D7 module deliverables polished from Phases 756–762 outputs; D8 cross-module synthesis from Phase 763; D9 v1.44 delta document with v1.43-changelog; D10 BibTeX bibliography (150 entries with author lists, arXiv IDs, primary subjects, submission dates). Cross-document consistency check across all 10 deliverables. Corpus tie-in: ≥4 hub pages published to `tibsfox.com/Research/UPSTREAM/` via `sync-research-to-live.sh` (NOT git — `www/tibsfox/com/Research/` is gitignored, pre-commit hook enforces); ≥6 college concept `.ts` files seeded across ai-computation/adaptive-systems/audio-intelligence/safety-verification departments (candidate slugs: experience-compression-spectrum, skilldex-conformance, local-linearity-steering, data-free-mia-attack, ble-lora-mesh, stackelberg-drainability, interval-pomdp-shielding, spatiotemporal-link-formation); cross-references.json edges UPSTREAM ↔ MATH ↔ AAR ↔ LeJEPA ↔ Convergent ↔ Drift ↔ SST ↔ LLM ↔ Chipset ↔ College ↔ Silicon Layer ↔ DACP ↔ The Space Between ↔ Sound of Puget Sound ↔ FIG ↔ CAPCOM. **Safety Warden BLOCK gate** — final pre-publication audit.</td>
+      </tr>
+      <tr>
+        <td>765</td>
+        <td>W4 T1a Skilldex Conformance Auditor — `src/skilldex-auditor/` (CAPCOM hard preservation)</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Implement the ZFC compliance auditor for SKILL.md spec-conformance scoring as the methodology fusion of Skilldex (arXiv:2604.16911) + Structural Verification for EDA (arXiv:2604.18834). Package-manager + registry + first public spec-conformance scorer with structural-verification-without-tool-in-the-loop-debug architecture. Produces structured audit findings (PASS/FAIL/WARN) consumable by session-observatory. Read-only relative to skill library; zero write-paths into `.claude/skills/`. Default-off, opt-in via `.claude/gsd-skill-creator.json` `upstream-intelligence.skilldex-auditor` block. Augments existing skill-loader without replacing CAPCOM gate surface or skill-DAG topology.</td>
+      </tr>
+      <tr>
+        <td>766</td>
+        <td>W4 T1b Bounded-Learning Empirical Harness — `src/bounded-learning-empirical/`</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Implement SkillLearnBench (arXiv:2604.20087) harness wiring as empirical justification for the GSD constitution's 20% / 3-correction / 7-day-cooldown bounded-learning constraints. Provides a 20-task / 15-sub-domain test scaffold; emits empirical evidence record for each constitutional cap; builds on v1.49.572 T1d theorem reference (extends from attestation to executable harness). Default-off, opt-in via `upstream-intelligence.bounded-learning-empirical` block.</td>
+      </tr>
+      <tr>
+        <td>767</td>
+        <td>W5 T1c Activation Steering Runtime — `src/activation-steering/` (CAPCOM hard preservation)</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Implement DACP runtime steering via Local Linearity of LLMs (arXiv:2604.19018). Classical model-based linear optimal control on activation space enables no-fine-tune CRAFT-role modulation across Opus/Sonnet/Haiku tier. Layer composes on top of existing DACP three-part bundles without mutating wire format. Default-off, opt-in via `upstream-intelligence.activation-steering` block. **Touches DACP runtime — hard preservation gate.**</td>
+      </tr>
+      <tr>
+        <td>768</td>
+        <td>W5 T1d FL Pre-Rollout Threat-Model Gate — `src/fl-threat-model/`</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Implement structural pre-rollout gate that blocks unauthorized federated-training paths until the data-free MIA threat model (arXiv:2604.19891 + 2604.19915 + 2604.20020) has been explicitly addressed in the calling code's design document. Gate-only (no FL implemented); checks for required mitigations in design-doc YAML frontmatter (DP noise budget / gradient clipping / secure aggregation / per-client data cap). Default-off, opt-in via `upstream-intelligence.fl-threat-model` block. Mandatory budgeting; gate fails fast on missing mitigations.</td>
+      </tr>
+      <tr>
+        <td>769</td>
+        <td>W6 T2a Experience Compression Layer [if-budget] — `src/experience-compression/`</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Implement cross-level adaptive compression spanning the memory/skills/rules axis per Experience Compression Spectrum (arXiv:2604.15877). Fills the "missing diagonal" named explicitly in the paper — adaptive compression across episodic (5–20×) / procedural (50–500×) / declarative (1000×+) levels. Default-off, opt-in via `upstream-intelligence.experience-compression` block. Tier 2 — ship only if W4+W5 close with budget margin.</td>
+      </tr>
+      <tr>
+        <td>770</td>
+        <td>W6 T2b Predictive Skill Auto-Loader [if-budget] — `src/predictive-skill-loader/` (CAPCOM hard preservation)</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Implement GNN link-formation prediction layer for skill cache pre-warming per Spatiotemporal Link Formation (arXiv:2604.18888, EDM 2026). Replaces heuristic-recency cache pre-warming with predictive link-formation over the College-of-Knowledge social-learning-network graph. Default-off, opt-in via `upstream-intelligence.predictive-skill-loader` block. **Touches orchestration — hard preservation gate.** Tier 2.</td>
+      </tr>
+      <tr>
+        <td>771</td>
+        <td>W7 T2c PromptCluster BatchEffect Detector [if-budget] — `src/promptcluster-batcheffect/`</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Implement batch-effect detection on skill embeddings per Batch Effects in Brain FMs (arXiv:2604.14441). Detects systematic embedding-space shifts across batches (model-version changes, training-data-distribution changes, prompt-template changes) that v1.49.571's Skill Space Isotropy Audit cannot catch. Composes with v1.49.571 SSIA. Default-off, opt-in via `upstream-intelligence.promptcluster-batcheffect` block. Tier 2.</td>
+      </tr>
+      <tr>
+        <td>772</td>
+        <td>W7 T2d ArtifactNet Provenance Verifier [if-budget] — `src/artifactnet-provenance/` (CAPCOM hard preservation)</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Implement forensic-residual-physics provenance layer for skill/asset authenticity per ArtifactNet (arXiv:2604.16254 SONICS n=23,288). Detects AI-generated content vs. real-musician/author/contributor work; wires into Grove record audit pipeline. Default-off, opt-in via `upstream-intelligence.artifactnet-provenance` block. **Touches skill/asset audit — hard preservation gate.** Tier 2.</td>
+      </tr>
+      <tr>
+        <td>773</td>
+        <td>W8 T3a Stackelberg Drainability Pricing Reference [strictly-optional, MAY DEFER] — `src/stackelberg-pricing/`</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Implement multi-tenant skill/compute pricing reference per Stackelberg Game with Drainability Guardrails (arXiv:2604.16802 CDC 2026). Reference implementation only — formal pricing-and-scaling framework as the working academic version of FoxCompute commercial thesis. No commercial deployment in this milestone (FoxCompute IP stays in `.planning/` per Fox Companies HARD RULE). Default-off, opt-in via `upstream-intelligence.stackelberg-pricing` block. Tier 3 — ship only if T1+T2 close with margin.</td>
+      </tr>
+      <tr>
+        <td>774</td>
+        <td>W8 T3b Rumor Delay Model [strictly-optional, MAY DEFER] — `src/rumor-delay-model/`</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Implement stochastic-delayed-dynamics model for upstream-intelligence-pack signal-vs-hype separation per Stochastic Delayed Rumor Propagation with Awareness and Fact-Checking (arXiv:2604.17368). Models the time delay between rumor introduction and fact-checking effect, applied to the SENTINEL/ANALYST upstream-intelligence pipeline. Default-off, opt-in via `upstream-intelligence.rumor-delay-model` block. Tier 3.</td>
+      </tr>
+      <tr>
+        <td>775</td>
+        <td>W9 Integration + composition + flag-off byte-identical regression</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Cross-module integration. Verify all shipped Half B modules (T1a–T1d guaranteed; T2a–T2d if-budget; T3a+T3b if shipped) compose with v1.49.572 modules (coherent-functors / ricci-curvature-audit / semantic-channel / koopman-memory / hourglass-persistence / wasserstein-hebbian / tonnetz) + MB-1 Lyapunov + MB-5 dead-zone + v1.49.571 heuristics-free-skill-space + v1.49.570 convergent. Composition tests verify no Half B module of v1.49.573 introduces Lyapunov violations or bypasses dead-zone. Feature-flag-off byte-identical regression: all flags off → byte-identical to phase 764 tip (W3 publish close).</td>
+      </tr>
+      <tr>
+        <td>776</td>
+        <td>W10 Regression addendum — delta vs baseline 26,699 + per-module test attribution</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Regression analysis. Document test delta per module: T1a ≥15, T1b ≥10, T1c ≥12, T1d ≥15, T2a ≥10 (if shipped), T2b ≥12 (if shipped), T2c ≥10 (if shipped), T2d ≥10 (if shipped), T3a ≥8 (if shipped), T3b ≥8 (if shipped), Integration ≥30. Verify final test count ≥26,799 (+100 floor over 26,699 baseline; over-delivery permitted). Zero regressions against v1.49.572 baseline tip `c8ca8de63`. CI parity verified across all flag-off and flag-on permutations.</td>
+      </tr>
+      <tr>
+        <td>777</td>
+        <td>W10 Documentation addendum — user-facing guides + existing-doc updates</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>User-facing guides for all shipped Half B modules under `docs/substrate/upstream-intelligence/`. Updates to existing docs that reference modified subsystems: `docs/substrate/dacp.md` (cross-link T1c Activation Steering); `docs/substrate/skill-loader.md` (cross-link T1a Skilldex Auditor + T2b Predictive Loader); `docs/substrate/skill-audit.md` (cross-link T2c BatchEffect + T2d Provenance); `docs/substrate/capcom.md` (cite Phase 762 CAPCOM logic synthesis); `docs/substrate/college-of-knowledge.md` (cite Phase 762 pedagogy update). Each new module guide cites the originating arXiv paper, lists the integration target, gives the opt-in YAML config example, and documents the flag-off byte-identical guarantee.</td>
+      </tr>
+      <tr>
+        <td>778</td>
+        <td>W11 Milestone close — CHANGELOG + release-notes index addendum + dedication + retrospective + README + milestone-package archive + STATE flip</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Milestone close ceremony. Write CHANGELOG entry; release-notes index addendum; dedication line acknowledging Zhong et al. (SkillLearnBench); Saha &amp; Hemanth (Skilldex); Vakhnovskyi (BLE-LoRa); Zhang et al. (Experience Compression); Lee et al. (FL threat trio); Skifstad / Yang / Chou (Local Linearity). Retrospective at `docs/release-notes/v1.49.573/RETROSPECTIVE.md`. README at `docs/release-notes/v1.49.573/README.md`. Milestone-package archive at `docs/release-notes/v1.49.573/milestone-package/MANIFEST.md`. STATE.md flip to `ready_for_review`. Final CAPCOM gate G15 = AUTHORIZED.</td>
+      </tr>
+      <tr>
+        <td>736</td>
+        <td>W0 Foundation — Shared BibTeX + glossary + module spec templates + CAPCOM gate macro</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Seed the mathematical-foundations citation discipline: build the unified BibTeX index (`gsd-arxiv-apr2026.bib`) skeleton with ≥10 primary arXiv entries spanning the M1–M6 reading list, the per-module glossary of categorical / topological / information-theoretic / dynamical-systems / unit-circle vocabulary, per-module LaTeX templates (M1 through M6, modeled on v1.49.571 M1..M5 scaffolds), the CAPCOM go/no-go gate macro reusable across all downstream waves, and the `numerical_attribution.md` scaffold that waves W1–W3 will populate. All outputs live under `.planning/missions/arxiv-april-17-23-math-foundations/work/` (mirror of v1.49.571 pattern).</td>
+      </tr>
+      <tr>
+        <td>737</td>
+        <td>W1A Module M1 — Formal Methods &amp; Proof Companion</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Produce `modules/module_1.tex` (target ≥15pp) covering the Lean 4 / Rocq / autoformalization stack for the future v1.50 Half B proof companion. Each priority paper from MATH-01 gets a dedicated subsection: arXiv:2604.16507 (Deep Vision / Wolstenholme Lean 4), 2604.03789 (Rethlas/Archon/Matlas), 2604.16347 (Lean Atlas IDE), 2604.20345 (Rocq simplicial Lagrange FE), 2604.14912 (Lean 4 Wu-Ritt), 2604.18882 (patent analysis with Lean 4 certificates), 2604.18587 (Compile to Compress), 2604.19459 (LLM formalization faithfulness), 2604.20807 (formal primal-dual analysis). Extract a reusable proof-assistant-agnostic workflow pattern that downstream MATH-16 (Bounded-Learning Theorem reference) can invoke.</td>
+      </tr>
+      <tr>
+        <td>738</td>
+        <td>W1A Module M2 — Agent Coordination Theory &amp; Convergent Discovery</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Produce `modules/module_2.tex` covering the six-group convergent-discovery cohort and formal coordination theorems that justify Wave / CAPCOM / Squadron / Fleet activation profiles. Priority papers: arXiv:2604.20714 (TPGO / Alibaba), 2604.17400 (Phase-Scheduled MAS, ICLR 2026), 2604.17139 (Consensus Trap / token-level round-robin), 2604.18419 (Knowing When to Quit / dynamic abstention), 2604.01608 (Metric Freedom / skill distillation), 2604.02460 (SAS vs MAS token-budget equity), 2604.14564 (MARS2 multi-agent tree search), 2604.20316 (R2IF composite-reward function calling). Appendix maps each coordination theorem to a specific CAPCOM-gate design decision. Closes Wave 1A.</td>
+      </tr>
+      <tr>
+        <td>739</td>
+        <td>W1B Module M3 — Rosetta Core Categorical Foundations</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Produce `modules/module_3.tex` — the category-theoretic substrate for the College of Knowledge's cross-department translation layer. Priority papers: arXiv:2604.20603 (topological dualities for modal algebras), 2604.18668 (fibrations in directed type theory), 2604.16016 (ℕ-filtered differential modality extraction), 2604.16594 (operadic spectrum / obstructions to spectral base change), 2604.19313 (point-free Nakaoka spectrum of Tambara functor), 2604.17942 (2-adjunction between representations and preorder morphisms), **2604.15100 (presenting neural networks via coherent functors — primary)**, 2604.16805 (non-graded Koszul duality), 2604.20554 (injectivity paucity in AB5), 2604.16945 (biprops). Becomes the definitive reference for `.college/rosetta-core/` and the theoretical backbone for Phase 745 (T1a Coherent Functors primitive).</td>
+      </tr>
+      <tr>
+        <td>740</td>
+        <td>W1B Module M4 — Skill-Graph Topological &amp; Geometric Analysis</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Produce `modules/module_4.tex` — the quantitative diagnostic toolkit for the skill-DAG. Priority papers: arXiv:2604.17548 (contraction and hourglass persistence, ICLR 2026), 2604.20004 (continuum of Künneth theorems), **2604.14211 (Ollivier-Ricci curvature on directed graphs — primary for T1b)**, 2604.15265 (motif-based filtrations), 2604.15262 (Mixup Euler characteristic profile), 2604.14155 (operational calculus on curved differentials), 2604.19212 (logical expressiveness of topological NNs), 2604.17954 (complex normalizing flows = Kähler-Ricci flows), 2604.20327 (persistent homology CLT for drifted Brownian motion). Pseudocode appendix shows each diagnostic computed on a concrete skill-DAG instance. Seeds Phase 746 (T1b Ricci-Curvature Audit) and Phase 750 (T2b Hourglass-Persistence audit). Closes Wave 1B.</td>
+      </tr>
+      <tr>
+        <td>741</td>
+        <td>W1C Module M5 — Silicon Layer Mathematical Foundations + Bounded-Learning Theorem attempt</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Produce `modules/module_5.tex` (largest module — 12+ S/A-priority papers) covering optimization, learning dynamics, and information theory for the GPU math co-processor. Priority papers: **arXiv:2604.16471 (Semantic Channel Theory — primary for T1c)**, **2604.15698 (Rate-Distortion for Deductive Sources — primary for T1c)**, **2604.17221 (Mamba + Koopman — primary for T2a)**, 2604.15632 (algebraic invariants of lightning self-attention), **2604.16052 (Wasserstein Hebbian, 75 pp — primary for T2c)**, 2604.17563 (composition / tensor train), 2604.15356 (KV cache beyond Shannon limit), 2604.19018 (local linearity / activation steering), 2604.19253 (border subrank / Strassen), 2604.14075 (multistage conditional compositional opt), 2604.14017 (stochastic trust-region), 2604.14108 (momentum at edge of stochastic stability), **2604.17578 (continual-learning recovery — primary for MATH-06 / MATH-16)**, 2604.18450 (random matrix early-stopped gradient flow), 2604.10649 (SpectralLoRA). **Additionally**, produce `m5-bounded-learning-theorem.pdf` (MATH-06) — the theorem attempt must resolve to exactly one of {proof sketch, counterexample, precise additional-assumptions statement} for the 20% content-change cap / 3-correction minimum / 7-day cooldown against 2604.17578 recovery guarantees.</td>
+      </tr>
+      <tr>
+        <td>742</td>
+        <td>W1C Module M6 — Musical / Unit-Circle Structure (Tonnetz theory)</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Produce `modules/module_6.tex` — mathematical substrate for the v1.50 subversion arc (θ=0 to 2π) and the Sound of Puget Sound mission. Priority paper: **arXiv:2604.19960 (Tonnetz theory, classical harmony, combinatorial geometry of abstract musical resources; 26 pp, 18 figures — primary for T3)**. Supplementary: arXiv:2505.08752v6 (configurations, tessellations) plus any canonical-dataset paper touching lattice geometry, circle actions, or equivariant algebra. Deliverable includes a concrete recommendation for how to structure the Sound of Puget Sound mission around the Tonnetz lattice, with ≥3 citations from arXiv:2604.19960 and its companion. Closes Wave 1C.</td>
+      </tr>
+      <tr>
+        <td>743</td>
+        <td>W2 Synthesis — ≥12 cross-module connections + through-line + v4 memo + numerical audit finalize</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Keystone Opus synthesis. Write `synthesis.pdf` with ≥12 cross-module connections explicitly articulated (e.g., "M3 operadic spectrum provides the categorical setting for M4's Hourglass Persistence"). Module 2 explicitly maps each coordination-theorem citation to a specific GSD component. Module 5 Silicon Layer architectural synthesis integrates Opus-level judgment across the 15 priority papers. State the "Amiga Principle proved" through-line in a Stage-1-depth quote block — a reader unfamiliar with either side follows the argument that each of the 6 modules strengthens exactly one GSD asset. Finalize `numerical_attribution.md` — every figure pinned to a specific source section. Update `v4.md` memo to reflect deep-read findings. Closes Wave 2.</td>
+      </tr>
+      <tr>
+        <td>744</td>
+        <td>W3 Publication + Corpus Tie-In</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Ship ≥4 tibsfox.com/Research/MATH/ pages via the Phase-680 publication pipeline — MATH hub + per-module themed pages (candidates: formal-methods-compass, agent-coordination-theorems, rosetta-core-categorical, skill-graph-curvature, silicon-layer-info-theory, unit-circle-tonnetz). **Pages live on disk only** — `www/tibsfox/com/Research/` is gitignored; `scripts/git-hooks/pre-commit` blocks commits. Seed ≥6 new college concept `.ts` files across `ai-computation / mathematics / adaptive-systems / data-science` (candidate slugs: `coherent-functor`, `ollivier-ricci-curvature`, `semantic-channel`, `rate-distortion-deductive-source`, `koopman-bilinear-form`, `hourglass-persistence`, `tonnetz-lattice`, `bounded-learning-theorem`). Add `cross-references.json` edges linking MATH hub to AAR / LeJEPA / Convergent / Drift / SST hubs. Extend `series.js` + Rosetta "AI &amp; Computation" cluster. Safety Warden final BLOCK-authority pass. Finalize MATH-12 verification matrix (every MATH-01..12 criterion → ≥1 test ID; ≥3 tests per criterion; ≥30 total Half-A tests across SC/CF/IT/EC categories).</td>
+      </tr>
+      <tr>
+        <td>745</td>
+        <td>W4 T1a Coherent Functors primitive</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Implement `src/coherent-functors/` — a category-theoretic NN-presentation-via-coherent-functors primitive per arXiv:2604.15100 (M3 theoretical backbone). Ships coherent functor factory + composition + invariant checks + typed boundary with the Silicon Layer, forming a direct Rosetta-Core-to-Silicon-Layer bridge. **Default-off**, opt-in via `.claude/gsd-skill-creator.json` `mathematical-foundations.coherent-functors.enabled`. **Must not replace skill-DAG topology or CAPCOM gate surface**; byte-identical when disabled. First Half B phase; first hard CAPCOM-preservation gate.</td>
+      </tr>
+      <tr>
+        <td>746</td>
+        <td>W4 T1b Ricci-Curvature Audit</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Implement `src/ricci-curvature-audit/` — Ollivier-Ricci curvature computation on the skill-DAG per arXiv:2604.14211 (M4 primary). Ships Wasserstein-distance-based edge curvature + negative-curvature bottleneck detection + structured audit findings consumable by the session-observatory pipeline. **Read-only**; zero skill-library write paths. **Default-off**, opt-in via `mathematical-foundations.ricci-curvature-audit.enabled`; byte-identical when disabled.</td>
+      </tr>
+      <tr>
+        <td>747</td>
+        <td>W5 T1c Semantic-Channel DACP formalism</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Implement `src/semantic-channel/` — formal DACP three-part bundle semantics per arXiv:2604.16471 (Semantic Channel Theory) + arXiv:2604.15698 (Rate-Distortion for Deductive Sources). Ships channel-capacity bounds for the (human-intent / structured-data / executable-code) triad + optional runtime semantic-drift checker. Ship documentation at `docs/substrate/semantic-channel.md` that **explicitly addresses GAP-6 (DACP Not Publicly Documented)** from the v1.49.571-era substrate audits. **Must not alter existing DACP wire format** or bypass CAPCOM handoff; **byte-identical when disabled**. Second hard CAPCOM-preservation gate (this phase touches DACP).</td>
+      </tr>
+      <tr>
+        <td>748</td>
+        <td>W5 T1d Bounded-Learning Theorem reference</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Author `docs/substrate-theorems/bounded-learning.md` that states and defends the bounded-learning 20% content-change cap / 3-correction minimum / 7-day cooldown against the continual-learning recovery guarantees from arXiv:2604.17578 (M5). Result carries forward the MATH-06 Half A theorem-attempt resolution (proof sketch, counterexample, or precise additional-assumptions statement) into substrate-facing form. Optional machine-checked theorem skeleton (Lean 4 / Rocq) using the proof-assistant-agnostic workflow pattern extracted in Phase 737. Feeds CAPCOM-gate design decisions.</td>
+      </tr>
+      <tr>
+        <td>749</td>
+        <td>W6 T2a Koopman-Memory [if-budget]</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Implement `src/koopman-memory/` — a Mamba-style state-space + Koopman bilinear form for long-context primitive per arXiv:2604.17221 (M5 primary). Ships bilinear-form composition + memory retention invariants + typed boundary. **Must not replace memory primitive for non-opted-in code paths**; **byte-identical when disabled**. Third hard CAPCOM-preservation gate (this phase touches memory primitive). **Conditional phase** — ships only if T1 (Phases 745–748) closes with budget margin.</td>
+      </tr>
+      <tr>
+        <td>750</td>
+        <td>W6 T2b Hourglass-Persistence audit [if-budget]</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Implement `src/hourglass-persistence/` — contraction / hourglass-persistence alarm on the skill-DAG per arXiv:2604.17548 (M4). Ships topological hole detection + contraction index computation + structured audit findings. **Composes with MATH-14 Ricci-curvature audit** (Phase 746). Read-only; zero skill-library write paths. Default-off; byte-identical when disabled. **Conditional phase** — ships only if budget permits after Phase 749.</td>
+      </tr>
+      <tr>
+        <td>751</td>
+        <td>W6 T2c Wasserstein-Hebbian reference [if-budget]</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Author `docs/substrate-references/wasserstein-hebbian.md` documenting the Wasserstein geometric framework for Hebbian plasticity per arXiv:2604.16052 (M5; 75 pp). Optional `src/wasserstein-hebbian/` adapter-stack audit primitive **only if T2a (749) + T2b (750) ship with margin**. Documentation-first reference phase.</td>
+      </tr>
+      <tr>
+        <td>752</td>
+        <td>W7 T3 Tonnetz primitive [strictly-optional, MAY DEFER]</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Implement `src/tonnetz/` — unit-circle lattice primitive for the Sound of Puget Sound mission per arXiv:2604.19960 (M6). Tonnetz lattice + combinatorial-geometry operations + mapping from {360 PNW species × 360 Seattle musicians} onto a shared unit circle. **Only if T1 (745–748) + T2 (749–751) close with margin.** Default-off; byte-identical when disabled. **Acceptable outcome: defer to a future milestone** — if deferred, MATH-20 is marked `DEFERRED` (not `INCOMPLETE`) in the verification matrix and the deferral is noted in the Phase 753 flag-off composition commit body.</td>
+      </tr>
+      <tr>
+        <td>753</td>
+        <td>W8 Integration + composition + flag-off regression</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Verify all shipped Half B modules (Phases 745–752) compose correctly with MB-1 Lyapunov stability, MB-5 dead-zone bounded learning, the v1.49.570 convergent block, and the v1.49.571 heuristics-free-skill-space block. Composition tests verify no Half B module introduces Lyapunov-violating updates or bypasses the dead-zone. Wire all modules under a single opt-in block `mathematical-foundations` in `.claude/gsd-skill-creator.json` (same schema pattern as `convergent` and `heuristics-free-skill-space`). Ship the feature-flag-off byte-identical regression test (analogue to LEJEPA-19 SC-CONT-FLAG-OFF) proving all flags off → byte-identical to the v1.49.571 tip `a5ec2bd6f`. If MATH-20 (T3) was deferred at Phase 752, note the deferral explicitly in the commit body. Dev branch only (no main push).</td>
+      </tr>
+      <tr>
+        <td>754</td>
+        <td>W8 Milestone close</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Final milestone audit. Verify every MATH-01..MATH-22 requirement is closed (MATH-20 may be `DEFERRED` rather than `[x]`); verify all CAPCOM gates G0..G9 PASS; verify final test suite ≥26,721 passing (26,641 baseline + ≥80 delta: ≥30 Half A + ≥50 Half B); zero regressions; typecheck clean. Ship retrospective, README, and milestone-package archive at `docs/release-notes/v1.49.572/`. Flip STATE.md to `ready_for_review`. Update PROJECT.md and MILESTONES.md with close summary. Dev branch only; human merge to main remains gated.</td>
+      </tr>
+      <tr>
+        <td>721</td>
+        <td>W0 Foundation — Shared bibliography + glossary + module spec templates</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Build the LeJEPA BibTeX index (3 primary + secondary sources), the 25–40 entry JEPA/SIGReg/ECF glossary, per-module (M1..M5) LaTeX templates, and the CAPCOM go/no-go gate macro used by every downstream wave. Establish the numerical-attribution tracking table (scaffold) that waves W1–W3 populate.</td>
+      </tr>
+      <tr>
+        <td>722</td>
+        <td>W1A Module M1 — LeJEPA theoretical foundations</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Reconstruct LeJEPA's two axioms (Predictive + Distributional) with proof traces, Lemmas 1 (anisotropy amplifies bias) and 2 (anisotropy amplifies variance) with bias/variance bounds, Theorem 1 (Gaussian optimality under nonlinear probes) with scalar-covariance qualifier and ISB bound forms for k-NN and kernel probes, and the Hyperspherical Cramér-Wold result. Output `modules/module_1.tex` at implementation-ready depth.</td>
+      </tr>
+      <tr>
+        <td>723</td>
+        <td>W1A Module M2 — SIGReg mechanics + alternative rejection</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Reconstruct SIGReg from first principles such that a reader can re-derive the ≈50-LOC reference implementation — sketching strategy (Definition 2 averaging over max), Epps-Pulley ECF test with weight function `w(t)=e^(-t²/σ²)`, single-λ balance between prediction loss and SIGReg. Explain rejection of moment-based and CDF-based alternatives with ≥3 concrete failure modes. Output `modules/module_2.tex` with API sketch.</td>
+      </tr>
+      <tr>
+        <td>724</td>
+        <td>W1B Module M3 — World models + LeCun lecture</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Describe LeWM architecture with two-component encoder + predictor, 192-dim CLS-style latent (≈200× fewer tokens than DINO-WM), two-loss objective `L_LeWM = L_pred + λ·SIGReg(Z)`, 15M-parameter scale. Attribute 48× CEM planning speedup to the specific design choice (192-dim token representation). Reference LeCun's 14 Apr 2026 Al-Khwarizmi lecture *only* where corroborated in LeJEPA or LeWM papers. Output `modules/module_3.tex`.</td>
+      </tr>
+      <tr>
+        <td>725</td>
+        <td>W1B Module M4 — GSD architectural parallels</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Identify and defend ≥8 distinct LeJEPA ↔ gsd-skill-creator parallels, both sides sourced. Minimum coverage: heuristics-replaced-by-objective ↔ Amiga Principle; isotropic-Gaussian target ↔ skill-library coverage distribution; single-λ ↔ bounded-learning knob cluster; Cramér-Wold slicing ↔ skill-embedding projection diversity; Epps-Pulley stability ↔ bounded-learning caps; ≈50-LOC simplicity ↔ minimal CLAUDE.md; training-loss↔downstream correlation ↔ retrospective feed-forward; in-domain &gt; transfer ↔ College of Knowledge; LeWM predictor ↔ mission-state world-model; representation collapse ↔ skill redundancy; chipset allocation correspondence (30/60/10); Cramér-Wold ↔ Wasteland ZFC auditor bridge.</td>
+      </tr>
+      <tr>
+        <td>726</td>
+        <td>W2 Synthesis — M5 Tier 1/2/3 improvements + numerical audit + through-line</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Write the M5 improvements roadmap with Tier 1 / Tier 2 / Tier 3 items, each carrying an effort-risk score and dependency list — T1a Skill Space Isotropy Audit, T1b SIGReg skill port, T1c Single-λ orchestration audit, T1d Heuristics audit, T2a Mission-state world-model layer, T2b Intrinsic telemetry, T2c Projection-based composition validator, T3a College-of-Knowledge empirical validation, T3b Silicon Layer SIGReg adapter, T3c Cramér-Wold ↔ Wasteland ZFC auditor bridge. Finalize the numerical-attribution audit started in Phase 721 — every figure pinned to a specific source section. State the Amiga Principle ↔ LeJEPA through-line in a Stage-1-depth quote block. **This phase finalizes Half B module scope** (same pattern as v1.49.570 Phase 708).</td>
+      </tr>
+      <tr>
+        <td>727</td>
+        <td>W3 Publication + Corpus tie-in</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Assemble final PDF via three-pass XeLaTeX; populate verification matrix (every LEJEPA-0X criterion → ≥1 test ID; ≥3 tests per criterion; ≥30 total Half-A tests across SC/CF/IT/EC categories). Ship ≥4 tibsfox.com/Research/ pages via the Phase-680 publication pipeline (LeJEPA hub + SIGReg mechanics + world-models-as-world-models + GSD-parallels-map). Seed ≥6 college concept `.ts` files across `ai-computation / data-science / adaptive-systems / mathematics`. Add `cross-references.json` edges (LeJEPA hub ↔ AAR · Convergent Substrate · Drift · SST · LLM · Chipset · College · Silicon Layer · DACP · *Space Between* Cramér-Wold chapter). Add `series.js` entry and extend Rosetta "AI &amp; Computation" cluster. Safety Warden final BLOCK-authority pass.</td>
+      </tr>
+      <tr>
+        <td>728</td>
+        <td>W4 T1a Skill Space Isotropy Audit (Half B M1)</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Implement `src/skill-isotropy/` — Cramér-Wold slicing over the skill-library semantic embedding space. M random unit directions in embedding space, projections of each skill, univariate goodness-of-fit tests (Anderson-Darling on sorted projections acceptable for N ~ hundreds) against a configurable target distribution (default: standard Gaussian). Flags skill-library coverage deviations as structured audit findings consumable by the session-observatory pipeline. **Read-only audit** — zero skill-library write paths. **Default-off** — opt-in via `.claude/gsd-skill-creator.json` `heuristics-free-skill-space.skill-isotropy.enabled`.</td>
+      </tr>
+      <tr>
+        <td>729</td>
+        <td>W5 T1b SIGReg primitive (Half B M2)</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Port the ≈50-LOC Epps-Pulley ECF + slicing reference from `rbalestr-lab/lejepa` (MIT-attributed) into `src/sigreg/`. ≤80-LOC core, linear-complexity ECF, differentiable-by-construction, multi-GPU friendly `all_reduce` aggregation. Exposed as a standard SKILL.md skill importable by any skill-creator subsystem training its own representation head. Accepts `embeddings: float[num_samples, num_dims]`, returns scalar loss + optional per-direction breakdown. Depends on `torch` (Silicon Layer). **Default-off.**</td>
+      </tr>
+      <tr>
+        <td>730</td>
+        <td>W6a T1c Single-λ orchestration audit (Half B M3)</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Author `docs/substrate-audits/single-lambda.md` enumerating every tunable knob in the `gsd-skill-creator` pipeline — bounded-learning caps (20% content-change cap, 3-correction minimum, 7-day cooldown from v1.49.560 era), suggest thresholds, auto-load confidence gates, Lyapunov MB-1 stability bands, dead-zone MB-5 suppression widths — identifying for each the distributional property it is trying to preserve. Propose a single-λ-like principled balance parameter for each cluster where one trade-off can replace several empirical thresholds. **Explicitly state what the proposal does not collapse** (CAPCOM gates, Safety Warden BLOCK authority remain authoritative and untouched). Optional unified-λ reader at `src/single-lambda/` behind a default-off flag.</td>
+      </tr>
+      <tr>
+        <td>731</td>
+        <td>W6b T1d Heuristics audit of the six-step loop (Half B M4)</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Author `docs/substrate-audits/heuristics-audit.md` scoring each of the six skill-creator loop steps (Observe → Detect → Suggest → Manage → Auto-Load → Learn/Compose) for stop-gradient-analogue behaviors — detection thresholds, bounded-learning caps, cooldowns, correction minimums, confidence gates. ≥5 candidate heuristics enumerated with effort-to-replace and risk-if-removed scores. Each candidate includes (a) what distributional property it is implicitly guarding, (b) whether a principled objective could subsume it, (c) known dependencies on other substrate. Report-only; does not modify substrate.</td>
+      </tr>
+      <tr>
+        <td>732</td>
+        <td>W7a T2a Mission-state world-model layer (Half B M5)</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Implement `src/mission-world-model/` — a mini-LeWM. Encoder maps mission state (current wave, completed tasks, open CAPCOM gates, budget consumed, skill activation set) to a compact latent token (≤192-dim). Predictor forecasts next mission state given a proposed action (wave dispatch, model allocation, skill activation). Supports Cross-Entropy Method (CEM) planning for pre-dispatch wave rehearsal in ≤1 second per episode. **Sits underneath CAPCOM, not instead of it** — predicted states are advisory only; CAPCOM human-gate remains authoritative. **Default-off.**</td>
+      </tr>
+      <tr>
+        <td>733</td>
+        <td>W7b T2b Intrinsic telemetry (Half B M6)</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Implement `src/intrinsic-telemetry/` — identifies GSD-internal signals that correlate with mission quality without requiring CAPCOM verdict. Candidate signals: test pass density, skill invocation entropy, retrospective feed-forward uptake rate, DACP fidelity-level compliance, SIGReg-on-embeddings (from Phase 729), skill-isotropy-audit-deviation (from Phase 728). Emits a Spearman-style rank correlation between each signal and final mission quality over the retrospective ledger. Analogue to LeJEPA Fig 1 top-left (label-free validation signal). **Default-off.**</td>
+      </tr>
+      <tr>
+        <td>734</td>
+        <td>W8 Integration + composition + flag-off regression</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Verify all Half-B modules (728–733) compose correctly with MB-1 Lyapunov stability and MB-5 dead-zone bounded learning from the v1.49.560 era. Composition tests verify no Half-B module introduces Lyapunov-violating updates or bypasses the dead-zone. Wire all modules under a single opt-in block `heuristics-free-skill-space` in `.claude/gsd-skill-creator.json` (same schema pattern as `convergent` from v1.49.570). Ship the feature-flag-off byte-identical regression test (analogue to Convergent-Substrate's SC-CONT-FLAG-OFF) proving all flags off → byte-identical to the v1.49.570 tip `6f950adcb`.</td>
+      </tr>
+      <tr>
+        <td>735</td>
+        <td>W8 Milestone close</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Final milestone audit. Verify every LEJEPA-01..LEJEPA-20 requirement is closed; verify all 6+ CAPCOM gates PASS; verify final test suite ≥26,472 passing (26,392 baseline + ≥80 delta); zero regressions; typecheck clean. Ship retrospective, README, and milestone-package archive at `docs/release-notes/v1.49.571/`. Flip STATE.md to `ready_for_review`.</td>
+      </tr>
+      <tr>
+        <td>620</td>
+        <td>Foundation — Math Co-Processor Init</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Configure math co-processor for PNW ecological computation. Define silicon.yaml engines, elevation-to-Minecraft coordinate projection tables, scale factor validation.</td>
+      </tr>
+      <tr>
+        <td>621</td>
+        <td>Foundation — Shared Attribute Layers</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Create cached attribute layers reused across all 6 taxonomy modules. Elevation bands, habitat types, ecological roles, conservation status definitions, cultural significance categories, species profile template.</td>
+      </tr>
+      <tr>
+        <td>622</td>
+        <td>Wave 1 Track A — Flora Survey</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>50+ species profiles covering conifers, deciduous/understory, marine plants across all elevation bands.</td>
+      </tr>
+      <tr>
+        <td>623</td>
+        <td>Wave 1 Track A — Fungi &amp; Microbiome Survey</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>30+ species/community profiles covering mycorrhizal networks, decomposers, lichens with USFS data.</td>
+      </tr>
+      <tr>
+        <td>624</td>
+        <td>Wave 1 Track B — Fauna Terrestrial Survey</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>80+ species profiles (mammals, birds, amphibians, reptiles) across all elevation bands.</td>
+      </tr>
+      <tr>
+        <td>625</td>
+        <td>Wave 1 Track B — Fauna Marine &amp; Aquatic Survey</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>60+ species profiles (salmon, marine mammals, invertebrates) from estuary to deep marine.</td>
+      </tr>
+      <tr>
+        <td>626</td>
+        <td>Wave 1 Track C — Ecological Networks</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>5 major pathway documents with cross-module references (salmon nutrient, kelp-otter-urchin, mycorrhizal, predator-prey, watershed).</td>
+      </tr>
+      <tr>
+        <td>627</td>
+        <td>Wave 1 Track C — Heritage Bridge</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Nation-specific cultural-ecological cross-reference table following OCAP/CARE/UNDRIP protocols.</td>
+      </tr>
+      <tr>
+        <td>628</td>
+        <td>Synthesis — Cross-Module Merge</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Unified taxonomy with all cross-references resolved.</td>
+      </tr>
+      <tr>
+        <td>629</td>
+        <td>Synthesis — Chipset Derivation</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>pnw-ecosystem.chipset.yaml with 6 chips, 5 bus routes, 6 clock domains.</td>
+      </tr>
+      <tr>
+        <td>630</td>
+        <td>Synthesis — Minecraft World Spec</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Complete biome-to-Y mapping, entity spawn tables, redstone systems.</td>
+      </tr>
+      <tr>
+        <td>631</td>
+        <td>Engineering — Optimization Pass</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Optimized chipset with performance report (25% bus contention reduction).</td>
+      </tr>
+      <tr>
+        <td>632</td>
+        <td>Engineering — College Integration</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Biology department seed data with math/heritage cross-references.</td>
+      </tr>
+      <tr>
+        <td>633</td>
+        <td>Engineering — Verification &amp; Test</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Execute 32 tests (6 safety-critical), produce verification matrix.</td>
+      </tr>
+      <tr>
+        <td>634</td>
+        <td>Publication — Final Assembly</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Complete self-contained research document.</td>
+      </tr>
+      <tr>
+        <td>635</td>
+        <td>Publication — Package Delivery</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>PDF + .tex + index.html + chipset.yaml packaged.</td>
+      </tr>
+      <tr>
+        <td>636</td>
+        <td>W0.1 Shared TypeScript Types</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Author `src/types/{memory,sensoria,umwelt,symbiosis}.ts` + `src/types/index.ts`; no duplicates with existing types; tsc clean; prior test baseline green.</td>
+      </tr>
+      <tr>
+        <td>637</td>
+        <td>W0.2 Theoretical Foundation Audit</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Produce `docs/foundations/theoretical-audit.md` walking through net-shift derivation, Markov-blanket formalism, Quintessence axes, Amiga Principle mapping, with primary-source page references (Lanzara 2023, Friston 2010/2013, Kirchhoff 2018, Foxglove 2026, Traag 2019, Weber 1834).</td>
+      </tr>
+      <tr>
+        <td>638</td>
+        <td>W0.3 Grove Inventory</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Produce `docs/grove-rearch/inventory.md` classifying every file in `src/memory/` and `src/mesh/` by which M-module (if any) will touch it, and whether EXTEND / REWRITE / NEW-LAYER. 100% coverage gate.</td>
+      </tr>
+      <tr>
+        <td>639</td>
+        <td>W1.A M6 Sensoria Layer</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Ship `src/sensoria/` net-shift + desensitisation + applicator hook + CLI. Lanzara reference match to 10⁻⁶; tachyphylaxis ≥30% fade on 20 activations; Weber R² ≥0.95.</td>
+      </tr>
+      <tr>
+        <td>640</td>
+        <td>W1.B M7 Umwelt Boundary</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Ship `src/umwelt/` Markov-blanket types + generative model + free-energy minimiser + prediction/surprise + action policy. Type-level conditional-independence enforcement; FE converges ≤50ms on 100-node model within 10⁻⁴ of reference; top-5 prediction ≥70% on 200-session fixture.</td>
+      </tr>
+      <tr>
+        <td>641</td>
+        <td>W1.C M8 Symbiosis Protocol</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Ship `src/symbiosis/` teaching ledger + co-evolution pass + Quintessence 5-axis metrics + CLI + parasocial-drift guard. Round-trip teach entries; offerings ≥80% useful on calibration; all 5 axes computable from existing module data.</td>
+      </tr>
+      <tr>
+        <td>642</td>
+        <td>W1.D.1 M1 Semantic Memory Graph (on Grove)</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Ship `src/graph/` — schema + ingest + Leiden + summaries + queries, extending Grove content-addressed records. Entity precision ≥0.85 on 200-session fixture; Leiden matches reference ≤2% modularity delta; all existing grove-format tests green.</td>
+      </tr>
+      <tr>
+        <td>643</td>
+        <td>W1.D.2 M2 Hierarchical Hybrid Memory (on Grove)</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Ship `src/memory/short-term.ts`, `long-term.ts`, αβγ scorer, reflection pass; wires existing ram-cache → chroma-store (localhost:8100) → pg-store. Short-term p95 &lt;10ms; reflection 1000→≤100 lossless on referenced entities.</td>
+      </tr>
+      <tr>
+        <td>644</td>
+        <td>W1.D.3 M3 Decision-Trace Ledger (on Grove)</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Ship `src/traces/` AMTP schema + append-only writer + precedent queries, extending `src/mesh/event-log.ts`. Every activation/composition writes a trace; precedent preservation lossless on 50 handoffs.</td>
+      </tr>
+      <tr>
+        <td>645</td>
+        <td>W1.D.4 M4 Branch-Context Experimentation (on Grove)</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Ship `src/branches/` fork/explore/commit/abort over `src/mesh/lifecycle-resolver.ts`. Cross-platform CI matrix green; first-commit-wins with N=5 concurrent branches; 20% refinement-diff bound enforced.</td>
+      </tr>
+      <tr>
+        <td>646</td>
+        <td>W1.D.5 M5 Agentic Orchestration + Prefix Cache</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Ship `src/orchestration/` multi-turn retrieval + selector, `src/cache/` radix-tree prefix index + step graph + anticipatory preload. RAGSearch ≥27pt margin; prefix-cache hit ≥60%; first-token latency ≥10x reduction.</td>
+      </tr>
+      <tr>
+        <td>647</td>
+        <td>W2.1 Eight-Module Integration</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Wire M6 net-shift into M5 applicator; initialise M7 generative model from M1 communities and update via M3; route M8 teaching into M6 K_H adjustment and M7 priors; compose M8 Quintessence over all seven other modules. End-to-end trace from observation → entity → memory → net-shift → activation → trace → surprise-check → Quintessence update.</td>
+      </tr>
+      <tr>
+        <td>648</td>
+        <td>W3.1 Regression Report</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Run full Vitest suite (existing baseline) + 98 new tests. Zero regressions; all new tests green. Per-test status report produced.</td>
+      </tr>
+      <tr>
+        <td>649</td>
+        <td>W3.2 Documentation</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Update README, OFFICIAL-FORMAT.md, EXTENSIONS.md, CLAUDE.md; new `docs/sensoria.md`, `docs/umwelt.md`, `docs/symbiosis.md`, `docs/memory-stack.md`, `docs/grove-rearch/` entries; Lanzara/Friston/Foxglove/Kirchhoff/Traag attributions with page refs.</td>
+      </tr>
+      <tr>
+        <td>650</td>
+        <td>W3.3 Release Notes v1.49.561</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>CHANGELOG.md entry for v1.49.561 covering 8 modules, Grove re-architecture decisions, backward-compat flags, migration notes. Dedication page honouring Lanzara, Friston, Kirchhoff, Foxglove.</td>
+      </tr>
+      <tr>
+        <td>651</td>
+        <td>R0 ME-5 Output-structure frontmatter</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Extend skill frontmatter with `output_structure:` field (json-schema | markdown-template | prose); validator + migration tooling for existing skills.</td>
+      </tr>
+      <tr>
+        <td>652</td>
+        <td>R0 MA-6 Canonical reinforcement taxonomy</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Define shared ReinforcementEvent type + taxonomy of reinforcement channels (explicit-correction, outcome-observed, branch-resolved, surprise-triggered, quintessence-updated); wire M3 writer to emit canonical events.</td>
+      </tr>
+      <tr>
+        <td>653</td>
+        <td>R1 ME-1 Tractability classifier</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Classify every skill as {tractable, partial, coin-flip} from frontmatter + observation history; expose `skill-creator tractability &lt;skill&gt;` CLI; M5 selector consumes classification.</td>
+      </tr>
+      <tr>
+        <td>654</td>
+        <td>R1 MA-1 Eligibility-trace layer on M3</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Extend src/traces/ with TD(λ)-style eligibility decay over M3 events; per-reinforcement-channel decay kernels cited to Barto 1983 §III.</td>
+      </tr>
+      <tr>
+        <td>655</td>
+        <td>R2 MA-2 ACE internal reinforcement (actor-critic wire)</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Wire M7 expected-free-energy reduction as ACE secondary-reinforcement signal; TD error weighted by ME-1 tractability (coin-flip=0.3, partial=0.6, tractable=1.0); flag-off byte-identical.</td>
+      </tr>
+      <tr>
+        <td>656</td>
+        <td>R2 ME-4 Coin-flip teach warning</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>M8 `skill-creator teach` surfaces tractability warning when target skill is coin-flip or partial; warning copy passes parasocial-guard; teach entry carries expected_effect field.</td>
+      </tr>
+      <tr>
+        <td>657</td>
+        <td>R3 Refinement integration</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Cross-wire the six refinement components; IT-W1-* integration tests; verify actor-critic loop closes under tractability gating; SC-REF-FLAG-OFF byte-identical on 50-session fixture.</td>
+      </tr>
+      <tr>
+        <td>658</td>
+        <td>R4 Regression report (refinement addendum)</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Run full Vitest suite + new refinement tests; zero regressions vs phase 650 baseline; per-test status report. Addendum to `docs/release-notes/v1.49.561/regression-report.md`.</td>
+      </tr>
+      <tr>
+        <td>659</td>
+        <td>R4 Documentation (refinement addendum)</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Update docs/sensoria.md, docs/memory-stack.md, docs/symbiosis.md for refinement-wave additions; new `docs/tractability.md` + `docs/reinforcement-taxonomy.md`; primary-source citations (Barto 1983, Zhang 2026).</td>
+      </tr>
+      <tr>
+        <td>660</td>
+        <td>R4 Release-notes refinement addendum</td>
+        <td><span class="badge badge-pending">pending</span></td>
+        <td>Update CHANGELOG.md v1.49.561 entry + `docs/release-notes/v1.49.561/README.md` with refinement-wave additions; extended dedication acknowledging Barto/Sutton/Anderson and Zhang et al.</td>
+      </tr>
+  </tbody>
+</table></div></div>
+<h2 class="section-title">Milestones</h2>
+<div class="timeline">
+    <div class="timeline-item complete">
+      <div class="timeline-title">v1.49.572 &mdash; Mathematical Foundations Refresh</div>
+      <div class="timeline-meta">Shipped 2026-04-24</div>
+      <div class="timeline-body">Two-half execution mirroring v1.49.570/571 — (Half A) deep research pass over the Apr 17–23, 2026 arXiv math harvest (1,254 canonical papers, 85 GSD-relevant) across 6 modules, with corpus tie-in; (Half B) tier-gated research-informed substrate — 4 T1 must-ship modules, 3 T2 if-budget modules, 1 T3 strictly-optional module. Through-line: "The Amiga Principle proved" — each module strengthens exactly one GSD asset and the synthesis lives in the mathematically-defined handoffs.</div>
+    </div>
+    <div class="timeline-item complete">
+      <div class="timeline-title">v1.49.571 &mdash; Heuristics-Free Skill Space</div>
+      <div class="timeline-meta">Shipped 2026-04-23</div>
+      <div class="timeline-body">Two-half execution mirroring v1.49.570 Convergent Substrate — (Half A) deep research pass that verifies, extends, and corpus-ties-in the staged LeJEPA / SIGReg / LeWorldModel mission package; (Half B) research-informed substrate hardening that ports the highest-leverage Tier 1/2 improvements into default-off modules that augment (never replace) the CAPCOM human-gate architecture.</div>
+    </div>
+    <div class="timeline-item complete">
+      <div class="timeline-title">v1.49.570 &mdash; Convergent Substrate</div>
+      <div class="timeline-meta">Shipped 2026-04-23</div>
+      
+    </div>
+    <div class="timeline-item complete">
+      <div class="timeline-title">v1.49.568 &mdash; Nonlinear Frontier</div>
+      <div class="timeline-meta">Shipped 2026-04-22</div>
+      <div class="timeline-body">Wire the nonlinear-systems-clouds deep-research pack (6 modules, 107 sources, already shipped to tibsfox.com) into the gsd-skill-creator substrate — college concepts, publication pipeline, simulation extensions, live Erdős-tracker refresh.</div>
+    </div>
+    <div class="timeline-item complete">
+      <div class="timeline-title">v1.49.561 &mdash; Living Sensoria</div>
+      <div class="timeline-meta">Shipped 2026-04-19</div>
+      <div class="timeline-body">Land eight composable modules (M1–M8) into the gsd-skill-creator TypeScript codebase — mechanism → substrate → boundary → partnership — with full backwards compatibility and Grove-aware substrate reuse.</div>
+    </div>
+    <div class="timeline-item complete">
+      <div class="timeline-title">v1.49.19 &mdash; Gastown Chipset Integration</div>
+      <div class="timeline-meta">Shipped 2026-03-06</div>
+      
+    </div>
+    <div class="timeline-item complete">
+      <div class="timeline-title">v1.49.18 &mdash; Space Between Observatory</div>
+      <div class="timeline-meta">Shipped 2026-03-06</div>
+      
+    </div>
+    <div class="timeline-item complete">
+      <div class="timeline-title">v1.50.40 &mdash; Unit Circle v1.25 Review</div>
+      <div class="timeline-meta">Shipped 2026-03-04</div>
+      
+    </div>
+    <div class="timeline-item complete">
+      <div class="timeline-title">v1.50.39 &mdash; Unit Circle v1.24 Review</div>
+      <div class="timeline-meta">Shipped 2026-03-04</div>
+      
+    </div>
+    <div class="timeline-item complete">
+      <div class="timeline-title">v1.50.38 &mdash; Unit Circle v1.23 Review</div>
+      <div class="timeline-meta">Shipped 2026-03-04</div>
+      
+    </div>
+    <div class="timeline-item complete">
+      <div class="timeline-title">v1.50.37 &mdash; Muse Architecture</div>
+      <div class="timeline-meta">Shipped 2026-03-04</div>
+      
+    </div>
+    <div class="timeline-item complete">
+      <div class="timeline-title">v1.49.16 &mdash; Maple Foxy Bells</div>
+      <div class="timeline-meta">Shipped 2026-03-04</div>
+      
+    </div>
+    <div class="timeline-item complete">
+      <div class="timeline-title">v1.50.33 &mdash; Unit Circle Re-execution: v1.19 Review</div>
+      <div class="timeline-meta">Shipped 2026-03-03</div>
+      
+    </div>
+    <div class="timeline-item complete">
+      <div class="timeline-title">v1.50.32 &mdash; Unit Circle Re-execution: v1.18 Review</div>
+      <div class="timeline-meta">Shipped 2026-03-03</div>
+      
+    </div>
+    <div class="timeline-item complete">
+      <div class="timeline-title">v1.49.15 &mdash; Self-Improving Mesh Architecture</div>
+      <div class="timeline-meta">Shipped 2026-03-04</div>
+      
+    </div>
+    <div class="timeline-item complete">
+      <div class="timeline-title">v1.50.29 &mdash; Unit Circle Re-execution: v1.15 Review</div>
+      <div class="timeline-meta">Shipped 2026-03-03</div>
+      
+    </div>
+    <div class="timeline-item complete">
+      <div class="timeline-title">v1.50.26 &mdash; Unit Circle Re-execution: v1.12 Review</div>
+      <div class="timeline-meta">Shipped 2026-03-03</div>
+      
+    </div>
+    <div class="timeline-item complete">
+      <div class="timeline-title">v1.50.13 &mdash; Hindsight Corrections</div>
+      <div class="timeline-meta">Shipped 2026-03-03</div>
+      
+    </div>
+    <div class="timeline-item complete">
+      <div class="timeline-title">v1.50.11 &mdash; GSD Tooling Hardening</div>
+      <div class="timeline-meta">Shipped 2026-03-03</div>
+      
+    </div>
+    <div class="timeline-item complete">
+      <div class="timeline-title">v1.50.10 &mdash; Post-Merge Integration</div>
+      <div class="timeline-meta">Shipped 2026-03-02</div>
+      
+    </div>
+    <div class="timeline-item complete">
+      <div class="timeline-title">v1.50.9 &mdash; Retrospective Remediation</div>
+      <div class="timeline-meta">Shipped 2026-03-02</div>
+      
+    </div>
+    <div class="timeline-item complete">
+      <div class="timeline-title">v1.50.8 &mdash; Retrospective Hardening</div>
+      <div class="timeline-meta">Shipped 2026-03-02</div>
+      
+    </div>
+    <div class="timeline-item complete">
+      <div class="timeline-title">v1.50.7 &mdash; Retro Net Pack</div>
+      <div class="timeline-meta">Shipped 2026-03-02</div>
+      
+    </div>
+    <div class="timeline-item complete">
+      <div class="timeline-title">v1.50.6 &mdash; Full Stack Buildout</div>
+      <div class="timeline-meta">Shipped 2026-03-02</div>
+      
+    </div>
+    <div class="timeline-item complete">
+      <div class="timeline-title">v1.50.5 &mdash; Skill Creator Hardening</div>
+      <div class="timeline-meta">Shipped 2026-03-01</div>
+      
+    </div>
+    <div class="timeline-item complete">
+      <div class="timeline-title">v1.50.4 &mdash; Autonomous Lessons Implementation</div>
+      <div class="timeline-meta">Shipped 2026-03-01</div>
+      
+    </div>
+    <div class="timeline-item ">
+      <div class="timeline-title">v1.50.3 &mdash; The Unit Circle</div>
+      <div class="timeline-meta">In progress</div>
+      
+    </div>
+    <div class="timeline-item ">
+      <div class="timeline-title">v1.50 &mdash; The Unit Circle</div>
+      <div class="timeline-meta">In progress</div>
+      
+    </div>
+</div>
+<h2 class="section-title">Build Log</h2>
+<div class="build-log">
+  <div class="build-log-entry">
+    <span class="build-log-time">2026-05-03T12:01:03.942Z</span>
+    <span class="build-log-success">Dashboard generated successfully</span>
+  </div>
+</div>
+      </main>
+    </div>
+    <footer>
+      Generated 2026-05-03T12:01:03.942Z
+    </footer>
+  <style>
+  #gsd-refresh-indicator {
+    position: fixed;
+    top: 8px;
+    right: 8px;
+    background: rgba(59, 130, 246, 0.9);
+    color: var(--text, #fff);
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-family: system-ui, sans-serif;
+    z-index: 10000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  #gsd-refresh-indicator.visible {
+    opacity: 1;
+  }
+</style>
+<div id="gsd-refresh-indicator">Refreshing...</div>
+<script>
+(function() {
+  var STORAGE_KEY = 'gsd-dashboard-scrollY';
+  var INDICATOR_KEY = 'gsd-dashboard-refreshing';
+
+  // Restore scroll position after refresh
+  var savedY = sessionStorage.getItem(STORAGE_KEY);
+  if (savedY !== null) {
+    window.scrollTo(0, parseInt(savedY, 10));
+    sessionStorage.removeItem(STORAGE_KEY);
+  }
+
+  // Show indicator briefly if we just refreshed
+  var wasRefreshing = sessionStorage.getItem(INDICATOR_KEY);
+  if (wasRefreshing) {
+    sessionStorage.removeItem(INDICATOR_KEY);
+    var indicator = document.getElementById('gsd-refresh-indicator');
+    if (indicator) {
+      indicator.classList.add('visible');
+      setTimeout(function() {
+        indicator.classList.remove('visible');
+      }, 1200);
+    }
+  }
+
+  // Schedule periodic refresh
+  setInterval(function() {
+    // Save scroll position
+    sessionStorage.setItem(STORAGE_KEY, String(window.scrollY));
+    // Mark that we are refreshing (so indicator shows after reload)
+    sessionStorage.setItem(INDICATOR_KEY, '1');
+    // Reload the page
+    window.location.reload();
+  }, 5000);
+})();
+</script>
+  </body>
+</html>

@@ -1,6 +1,6 @@
 [package]
 name = "gsd-os"
-version = "1.49.596"
+version = "1.49.597"
 edition = "2021"
 description = "GSD-OS Desktop Application"
 
@@ -30,6 +30,8 @@ libc = "0.2"
 memmap2 = "0.9"
 cudarc = { version = "0.19", default-features = false, features = ["driver", "std", "nvrtc", "fallback-dynamic-loading", "cuda-version-from-build-system"], optional = true }
 sqlx = { version = "0.8", features = ["runtime-tokio", "postgres"], optional = true }
+# Phase 825 / KbDelegate seam swap (D-25-08): bundled SQLite for the real KB read path.
+rusqlite = { version = "0.32", features = ["bundled"] }
 
 [features]
 gnome-keyring = []

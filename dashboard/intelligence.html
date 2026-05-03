@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="gsd-skill-creator Intelligence — Codebase analysis, planning, and in-flight work dashboard powered by the KB intelligence layer.">
+    <meta property="og:title" content="gsd-skill-creator — Intelligence">
+    <meta property="og:type" content="website">
+    <title>gsd-skill-creator — Intelligence</title>
+    <link rel="stylesheet" href="intelligence/intelligence.css">
+    <style>
+/* Match existing GSD dashboard base layout */
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans, 'Inter', system-ui, -apple-system, sans-serif);
+  background: var(--bg-primary, #0d1117);
+  color: var(--text-primary, #c9d1d9);
+  font-size: 14px;
+  line-height: 1.6;
+}
+:root {
+  --bg-primary: #0d1117;
+  --bg-secondary: #161b22;
+  --border-default: #30363d;
+  --border-muted: #484f58;
+  --text-primary: #c9d1d9;
+  --text-muted: #6e7681;
+  --text-code: #a5d6ff;
+  --color-warning: #d29922;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --radius-sm: 4px;
+  --radius-lg: 8px;
+}
+header {
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-default);
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.header-title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.page-wrapper {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  min-height: calc(100vh - 48px);
+}
+nav {
+  border-right: 1px solid var(--border-default);
+  padding: 1rem 0;
+  background: var(--bg-secondary);
+}
+.nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-list li {
+  margin: 0;
+}
+.nav-link {
+  display: block;
+  padding: 0.5rem 1.25rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color 0.15s, background 0.15s;
+}
+.nav-link:hover {
+  color: var(--text-primary);
+  background: rgba(255,255,255,0.05);
+}
+.nav-link.active {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+main {
+  padding: 1.5rem;
+  overflow: auto;
+}
+    </style>
+  </head>
+  <body>
+    <header>
+      <span class="header-title">gsd-skill-creator — Intelligence</span>
+    </header>
+    <div class="page-wrapper">
+      <nav>
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Dashboard</a></li>
+          <li><a href="requirements.html" class="nav-link">Requirements</a></li>
+          <li><a href="roadmap.html" class="nav-link">Roadmap</a></li>
+          <li><a href="milestones.html" class="nav-link">Milestones</a></li>
+          <li><a href="state.html" class="nav-link">State</a></li>
+          <li><a href="console.html" class="nav-link">Console</a></li>
+          <li><a href="intelligence.html" class="nav-link active">Intelligence</a></li>
+        </ul>
+      </nav>
+      <main>
+        <div id="intelligence-root">
+          <div class="intelligence-body">
+            <!-- Static-mode fallback banner (D-26-47 / E14) — visible in browser-tab mode without Tauri IPC -->
+            <div id="intelligence-static-mode-banner" class="intelligence-static-banner" style="display:none;">
+              <div class="intelligence-static-banner__title">Browser-tab mode (read-only UI)</div>
+              <p style="margin:0.5rem 0;">The dashboard server is running, but the Intelligence dashboard's KB queries route through Tauri IPC. In browser-tab mode the UI scaffold renders, but live data — projects, briefings, findings, decisions — is only available in the desktop shell.</p>
+              <p style="margin:0.5rem 0 0;">For full interactive use: <code class="intelligence-static-banner__command">npm run desktop:dev</code></p>
+            </div>
+
+            <!-- Planning panel — populated by planning.bundle.js -->
+            <div id="intelligence-planning"></div>
+
+            <!-- Live-work panel — populated by live-work.bundle.js (hidden when empty via CSS) -->
+            <div id="intelligence-live-work"></div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <!-- Intelligence UI bundles (Phase 826 / C14) -->
+    <script type="module" src="intelligence/planning.bundle.js" onerror="window.__intelligencePlanningLoadError=true"></script>
+    <script type="module" src="intelligence/live-work.bundle.js" onerror="window.__intelligenceLiveWorkLoadError=true"></script>
+    <script>
+      // Static-mode fallback (Phase 826.5): show banner only when neither Tauri IPC
+      // NOR the HTTP bridge is reachable (true degraded state). If the bridge IS
+      // reachable, browser-tab mode is functional and the banner stays hidden.
+      (function() {
+        var checkStaticMode = async function() {
+          var hasTauri = typeof window.__TAURI_IPC__ !== 'undefined' || typeof window.__TAURI__ !== 'undefined';
+          var planningError = window.__intelligencePlanningLoadError;
+          if (hasTauri && !planningError) return; // Tauri shell, all good
+
+          // Probe the IPC-to-HTTP bridge — Phase 826.5 closes the spec gap by
+          // exposing the same 18 commands over POST /api/intelligence/invoke.
+          var bridgeReachable = false;
+          try {
+            var resp = await fetch('/api/intelligence/invoke', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ cmd: 'intelligence_list_projects', args: {} })
+            });
+            // Any 2xx OR 4xx-other-than-404 means the bridge handler is wired
+            bridgeReachable = resp.status !== 404;
+          } catch (e) {
+            bridgeReachable = false;
+          }
+          if (planningError || !bridgeReachable) {
+            var banner = document.getElementById('intelligence-static-mode-banner');
+            if (banner) banner.style.display = '';
+          }
+        };
+        // Check after a short delay to allow bundles to initialize
+        setTimeout(checkStaticMode, 1500);
+      })();
+    </script>
+  </body>
+</html>

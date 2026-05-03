@@ -17,5 +17,27 @@ export default defineConfig({
     target: "safari13",
     minify: !process.env.TAURI_ENV_DEBUG ? "esbuild" : false,
     sourcemap: !!process.env.TAURI_ENV_DEBUG,
+    rollupOptions: {
+      input: {
+        // Main Tauri webview entry
+        main: "index.html",
+        // Intelligence Dashboard — planning meeting bundle (C08, <200KB gzipped)
+        "intelligence-planning": "intelligence/planning/index.html",
+        // Intelligence Dashboard — live work bundle (C09, <60KB gzipped)
+        "intelligence-live-work": "intelligence/live-work/index.html",
+      },
+      output: {
+        // Keep intelligence bundles in predictable output paths
+        entryFileNames: (chunk) => {
+          if (chunk.name === "intelligence-planning") {
+            return "dashboard/intelligence/planning.bundle.js";
+          }
+          if (chunk.name === "intelligence-live-work") {
+            return "dashboard/intelligence/live-work.bundle.js";
+          }
+          return "[name]-[hash].js";
+        },
+      },
+    },
   },
 });

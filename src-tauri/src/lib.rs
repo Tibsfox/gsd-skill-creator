@@ -15,6 +15,7 @@ pub mod magic;
 pub mod pcg;
 pub mod services;
 mod watcher;
+pub mod intelligence;
 
 use std::sync::Mutex;
 use tauri::Manager;
@@ -27,6 +28,16 @@ pub fn run() {
     tauri::Builder::default()
         .setup(|app| {
             app.manage(Mutex::new(AppState::default()));
+            // Phase 824 / C07 + Phase 825 / D-25-08: intelligence state with real KB delegate.
+            // The real delegate opens the same SQLite databases the TS KBStore writes
+            // (~/.gsd/intelligence/registry.db and <project>/.gsd/intelligence/intelligence.db).
+            // Read paths fully functional; mutation paths land in Phase 826.
+            {
+                let repo_root = std::env::current_dir().unwrap_or_else(|_| std::path::PathBuf::from("."));
+                app.manage(std::sync::Mutex::new(
+                    intelligence::server::IntelligenceState::new(repo_root),
+                ));
+            }
             app.manage(Mutex::new(state::WatcherState::default()));
             app.manage(Mutex::new(PtyManager::default()));
             app.manage(Mutex::new(ClaudeSessionManager::default()));
@@ -162,6 +173,25 @@ pub fn run() {
             commands::memory_arena::cgroup_init,
             commands::memory_arena::cgroup_state,
             commands::memory_arena::cgroup_grow,
+            // Phase 824 / C07 — Intelligence Dashboard commands
+            crate::intelligence::server::intelligence_list_projects,
+            crate::intelligence::server::intelligence_get_project,
+            crate::intelligence::server::intelligence_register_project,
+            crate::intelligence::server::intelligence_get_briefing,
+            crate::intelligence::server::intelligence_list_findings,
+            crate::intelligence::server::intelligence_dismiss_finding,
+            crate::intelligence::server::intelligence_start_meeting,
+            crate::intelligence::server::intelligence_park_meeting,
+            crate::intelligence::server::intelligence_resume_meeting,
+            crate::intelligence::server::intelligence_add_decision,
+            crate::intelligence::server::intelligence_edit_decision,
+            crate::intelligence::server::intelligence_withdraw_decision,
+            crate::intelligence::server::intelligence_send_now,
+            crate::intelligence::server::intelligence_preview_bundle,
+            crate::intelligence::server::intelligence_commit_bundle,
+            crate::intelligence::server::intelligence_request_briefing_refresh,
+            crate::intelligence::server::intelligence_request_snapshot_diff,
+            crate::intelligence::server::intelligence_get_meeting_record,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

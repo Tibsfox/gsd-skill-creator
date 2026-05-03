@@ -55,26 +55,28 @@ else
   fail "bash syntax check failed"
 fi
 
-# Test 3: contains expected step labels (6 steps as of v1.49.589; depth-audit added)
-if grep -q "step 1/6: npm run build" "$GATE" \
-   && grep -q "step 2/6: npx vitest run" "$GATE" \
-   && grep -q "step 3/6: release-notes completeness" "$GATE" \
-   && grep -q "step 4/6: CI-on-dev verification" "$GATE" \
-   && grep -q "step 5/6: www-bundles freshness" "$GATE" \
-   && grep -q "step 6/6: depth-audit" "$GATE"; then
-  ok "all 6 step labels present"
+# Test 3: contains expected step labels (7 steps as of v1.49.596+; CLAUDE.md drift added)
+if grep -q "step 1/7: npm run build" "$GATE" \
+   && grep -q "step 2/7: npx vitest run" "$GATE" \
+   && grep -q "step 3/7: release-notes completeness" "$GATE" \
+   && grep -q "step 4/7: CI-on-dev verification" "$GATE" \
+   && grep -q "step 5/7: www-bundles freshness" "$GATE" \
+   && grep -q "step 6/7: depth-audit" "$GATE" \
+   && grep -q "step 7/7: CLAUDE.md auto-render" "$GATE"; then
+  ok "all 7 step labels present"
 else
   fail "step labels missing or wrong count"
 fi
 
-# Test 4: contains expected exit codes (1..6 as of v1.49.591; depth-audit BLOCKER)
+# Test 4: contains expected exit codes (1..7 as of v1.49.596+; CLAUDE.md gate added)
 if grep -q "exit 1" "$GATE" \
    && grep -q "exit 2" "$GATE" \
    && grep -q "exit 3" "$GATE" \
    && grep -q "exit 4" "$GATE" \
    && grep -q "exit 5" "$GATE" \
-   && grep -q "exit 6" "$GATE"; then
-  ok "exit codes 1/2/3/4/5/6 documented"
+   && grep -q "exit 6" "$GATE" \
+   && grep -q "exit 7" "$GATE"; then
+  ok "exit codes 1/2/3/4/5/6/7 documented"
 else
   fail "exit codes missing"
 fi
@@ -134,6 +136,28 @@ if grep -q 'exit 6' "$GATE" && grep -q 'depth-audit' "$GATE"; then
   ok "depth-audit BLOCKER mode (exits 6 on FAIL/MISSING)"
 else
   fail "depth-audit BLOCKER mode not wired"
+fi
+
+# Test 13: SC_SKIP_CLAUDE_MD_GATE override supported (v1.49.596+ step 7)
+if grep -q 'SC_SKIP_CLAUDE_MD_GATE' "$GATE"; then
+  ok "SC_SKIP_CLAUDE_MD_GATE override supported"
+else
+  fail "SC_SKIP_CLAUDE_MD_GATE override missing"
+fi
+
+# Test 14: render-claude-md.mjs exists (v1.49.596+ step 7 dependency)
+RENDERER="tools/render-claude-md.mjs"
+if [ -f "$RENDERER" ]; then
+  ok "render-claude-md.mjs exists"
+else
+  fail "render-claude-md.mjs missing"
+fi
+
+# Test 15: package.json wires npm run render:claude-md
+if grep -q '"render:claude-md":' "$REPO_ROOT/package.json"; then
+  ok "package.json wires npm run render:claude-md"
+else
+  fail "package.json missing render:claude-md script"
 fi
 
 echo ""

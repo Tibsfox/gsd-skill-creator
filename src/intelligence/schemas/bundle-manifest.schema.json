@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gsd-skill-creator.local/intelligence/bundle-manifest.schema.json",
+  "title": "BundleManifest",
+  "description": "Bundle manifest deposited atomically alongside vision seeds in .planning/staging/inbox/. Round-trips with the Bundle TS interface in src/intelligence/types.ts.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "meeting_id", "emitted_at", "decisions", "manifest_path", "batch_hints"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^M-" },
+    "meeting_id": { "type": "string", "pattern": "^M-" },
+    "emitted_at": { "type": "string", "format": "date-time" },
+    "decisions": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "manifest_path": { "type": "string", "minLength": 1 },
+    "batch_hints": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["parallelizable", "shared_context", "suggested_order"],
+      "properties": {
+        "parallelizable": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        },
+        "shared_context": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "suggested_order": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  }
+}
