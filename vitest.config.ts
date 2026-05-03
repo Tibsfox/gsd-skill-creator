@@ -39,6 +39,8 @@ export default defineConfig({
             'node_modules/**',
             '**/*.integration.test.ts',
             '**/*.system.test.ts',
+            // Performance tests run via `npm run test:perf` (advisory, WARN-only, not BLOCK).
+            'src/intelligence/__tests__/performance/**',
             ...(wwwHarnessAvailable ? [] : [
               'tests/spice-renderer/**',
               'tests/spice-symbols.test.ts',
@@ -72,6 +74,20 @@ export default defineConfig({
           include: [
             'desktop/intelligence/**/*.test.ts',
             'desktop/intelligence/**/*.test.tsx',
+          ],
+          exclude: ['**/node_modules/**', 'dist/**'],
+        },
+      },
+      // Intelligence Dashboard performance tests (WARN-only, advisory).
+      // Run via: npm run test:perf
+      // Excluded from default run to avoid flakiness in CI.
+      {
+        test: {
+          name: 'intelligence-perf',
+          globals: true,
+          testTimeout: 60000,
+          include: [
+            'src/intelligence/__tests__/performance/**/*.perf.test.ts',
           ],
           exclude: ['**/node_modules/**', 'dist/**'],
         },
