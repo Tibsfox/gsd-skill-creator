@@ -16,11 +16,22 @@ import { readFileSync, existsSync } from 'node:fs';
 import { resolve, join } from 'node:path';
 
 const REPO_ROOT = resolve(__dirname, '../../../../');
-const DIST_DASHBOARD = join(REPO_ROOT, 'dist/dashboard');
+// dashboard/ is the tracked source; dist/dashboard/ is build output (gitignored).
+// Tests check tracked dashboard/ first, fall back to dist/dashboard/ if present.
+const DIST_DASHBOARD = existsSync(join(REPO_ROOT, 'dist/dashboard/index.html'))
+  ? join(REPO_ROOT, 'dist/dashboard')
+  : join(REPO_ROOT, 'dashboard');
+
+function resolveDashboardDir(): string {
+  const distPath = join(REPO_ROOT, 'dist/dashboard');
+  const srcPath = join(REPO_ROOT, 'dashboard');
+  return existsSync(join(distPath, 'index.html')) ? distPath : srcPath;
+}
 
 describe('I18: dashboard migration non-breaking', () => {
   it('all original nav targets are still present after migration', () => {
-    const indexPath = join(DIST_DASHBOARD, 'index.html');
+    const dashDir = resolveDashboardDir();
+    const indexPath = join(dashDir, 'index.html');
     if (!existsSync(indexPath)) {
       // Pre-build: skip
       return;
@@ -39,8 +50,8 @@ describe('I18: dashboard migration non-breaking', () => {
   });
 
   it('intelligence.html is present after migration', () => {
-    const intelligencePath = join(DIST_DASHBOARD, 'intelligence.html');
-    if (!existsSync(join(DIST_DASHBOARD, 'index.html'))) {
+    const intelligencePath = join(resolveDashboardDir(), 'intelligence.html');
+    if (!existsSync(join(resolveDashboardDir(), 'index.html'))) {
       // Pre-build: skip
       return;
     }
@@ -48,7 +59,7 @@ describe('I18: dashboard migration non-breaking', () => {
   });
 
   it('index.html gained exactly the intelligence nav-shim script tag and nothing else', () => {
-    const indexPath = join(DIST_DASHBOARD, 'index.html');
+    const indexPath = join(resolveDashboardDir(), 'index.html');
     if (!existsSync(indexPath)) {
       return;
     }
@@ -70,7 +81,7 @@ describe('I18: dashboard migration non-breaking', () => {
       'console.html',
     ];
     for (const page of pages) {
-      const pagePath = join(DIST_DASHBOARD, page);
+      const pagePath = join(resolveDashboardDir(), page);
       if (!existsSync(pagePath)) continue;
       const lines = readFileSync(pagePath, 'utf8').split('\n').length;
       // Sanity: each page should have at least 20 lines
@@ -79,12 +90,12 @@ describe('I18: dashboard migration non-breaking', () => {
   });
 
   it('intelligence.css and nav-shim.js assets are present', () => {
-    const indexPath = join(DIST_DASHBOARD, 'index.html');
+    const indexPath = join(resolveDashboardDir(), 'index.html');
     if (!existsSync(indexPath)) {
       return;
     }
-    const cssPath = join(DIST_DASHBOARD, 'intelligence', 'intelligence.css');
-    const shimPath = join(DIST_DASHBOARD, 'intelligence', 'nav-shim.js');
+    const cssPath = join(resolveDashboardDir(), 'intelligence', 'intelligence.css');
+    const shimPath = join(resolveDashboardDir(), 'intelligence', 'nav-shim.js');
     expect(existsSync(cssPath), `Missing: ${cssPath}`).toBe(true);
     expect(existsSync(shimPath), `Missing: ${shimPath}`).toBe(true);
   });
