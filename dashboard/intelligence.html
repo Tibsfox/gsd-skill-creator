@@ -110,11 +110,11 @@ main {
       <main>
         <div id="intelligence-root">
           <div class="intelligence-body">
-            <!-- Static-mode fallback banner (D-26-47 / E14) — visible when no local server -->
+            <!-- Static-mode fallback banner (D-26-47 / E14) — visible in browser-tab mode without Tauri IPC -->
             <div id="intelligence-static-mode-banner" class="intelligence-static-banner" style="display:none;">
-              <div class="intelligence-static-banner__title">Local server not running</div>
-              <p style="margin:0.5rem 0;">The intelligence server is not running. Start it to enable live codebase analysis and planning features.</p>
-              <p style="margin:0.5rem 0 0;">Start command: <code class="intelligence-static-banner__command">npm run intelligence:serve</code></p>
+              <div class="intelligence-static-banner__title">Browser-tab mode (read-only UI)</div>
+              <p style="margin:0.5rem 0;">The dashboard server is running, but the Intelligence dashboard's KB queries route through Tauri IPC. In browser-tab mode the UI scaffold renders, but live data — projects, briefings, findings, decisions — is only available in the desktop shell.</p>
+              <p style="margin:0.5rem 0 0;">For full interactive use: <code class="intelligence-static-banner__command">npm run desktop:dev</code></p>
             </div>
 
             <!-- Planning panel — populated by planning.bundle.js -->
