@@ -16,11 +16,16 @@ export default defineConfig({
     globals: true,
     projects: [
       // Root project — existing tests (src/, .college/, etc.)
+      // testTimeout: 20000 covers integration tests that spawn bash subprocesses
+      // for shell-script contracts (e.g. src/intelligence/__tests__/c12-end-to-end-flow.test.ts
+      // T11 "full flow" exercises load-kb-context.sh via execFileSync; the subprocess-
+      // spawn + shell-startup + script-execution chain runs ~3s isolated but balloons
+      // under full-suite load + concurrent worker contention).
       {
         test: {
           name: 'root',
           globals: true,
-          testTimeout: 15000,
+          testTimeout: 20000,
           include: [
             'src/**/*.test.ts',
             'src/**/*.test.tsx',
@@ -59,6 +64,7 @@ export default defineConfig({
           name: 'space-between',
           root: './apps/the-space-between-engine',
           globals: true,
+          testTimeout: 15000,
           environment: 'jsdom',
           include: ['tests/**/*.test.ts', 'tests/**/*.test.tsx'],
           exclude: ['**/node_modules/**'],
@@ -98,6 +104,7 @@ export default defineConfig({
         test: {
           name: 'integration',
           globals: true,
+          testTimeout: 15000,
           include: [
             'src/**/*.integration.test.ts',
             'tests/**/*.integration.test.ts',
