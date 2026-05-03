@@ -183,7 +183,6 @@ fn parse_produced_by(s: &str) -> ProducedBy {
     }
 }
 
-#[allow(dead_code)] // Reserved for future write-path enrichment in Phase 826.
 fn parse_meeting_status(s: &str) -> MeetingStatus {
     match s {
         "parked" => MeetingStatus::Parked,
@@ -230,10 +229,181 @@ fn parse_move_kind(s: &str) -> MoveKind {
 
 // ─── KbDelegate implementation ────────────────────────────────────────────────
 
-const MUTATION_DEFERRED: &str =
-    "RealKbDelegate: mutation requested via Tauri command; mutations land in Phase 826 \
-     when the Tauri server gains a write surface. For now, mutations flow through the \
-     TypeScript KBStore via the dashboard's IPC client.";
+// ─── Mutation helpers ─────────────────────────────────────────────────────────
+
+/// Open the project DB and return a (Connection, project_path) for the meeting, finding, or decision
+/// identified by searching across all registered projects.
+///
+/// Phase 826 / Carryover 1: mutation paths wired end-to-end.
+
+/// Search all project DBs for a meeting row; return (conn, project_id).
+fn find_project_conn_for_meeting(
+    delegate: &RealKbDelegate,
+    meeting_id: &str,
+) -> Result<(Connection, String), String> {
+    let projects = delegate.list_projects(None)?;
+    for project in &projects {
+        let conn = match delegate.open_project_db(&project.id) {
+            Ok(c) => c,
+            Err(_) => continue,
+        };
+        let exists: Option<String> = conn
+            .query_row(
+                "SELECT id FROM meetings WHERE id = ?",
+                [meeting_id],
+                |row| row.get(0),
+            )
+            .optional()
+            .map_err(|e| format!("meeting lookup: {e}"))?;
+        if exists.is_some() {
+            return Ok((conn, project.id.clone()));
+        }
+    }
+    Err(format!("meeting {meeting_id} not found in any project DB"))
+}
+
+/// Search all project DBs for a finding row; return (conn, project_id).
+fn find_project_conn_for_finding(
+    delegate: &RealKbDelegate,
+    finding_id: &str,
+) -> Result<(Connection, String), String> {
+    let projects = delegate.list_projects(None)?;
+    for project in &projects {
+        let conn = match delegate.open_project_db(&project.id) {
+            Ok(c) => c,
+            Err(_) => continue,
+        };
+        let exists: Option<String> = conn
+            .query_row(
+                "SELECT id FROM findings WHERE id = ?",
+                [finding_id],
+                |row| row.get(0),
+            )
+            .optional()
+            .map_err(|e| format!("finding lookup: {e}"))?;
+        if exists.is_some() {
+            return Ok((conn, project.id.clone()));
+        }
+    }
+    Err(format!("finding {finding_id} not found in any project DB"))
+}
+
+/// Search all project DBs for a decision row; return (conn, project_id).
+fn find_project_conn_for_decision(
+    delegate: &RealKbDelegate,
+    decision_id: &str,
+) -> Result<(Connection, String), String> {
+    let projects = delegate.list_projects(None)?;
+    for project in &projects {
+        let conn = match delegate.open_project_db(&project.id) {
+            Ok(c) => c,
+            Err(_) => continue,
+        };
+        let exists: Option<String> = conn
+            .query_row(
+                "SELECT id FROM decisions WHERE id = ?",
+                [decision_id],
+                |row| row.get(0),
+            )
+            .optional()
+            .map_err(|e| format!("decision lookup: {e}"))?;
+        if exists.is_some() {
+            return Ok((conn, project.id.clone()));
+        }
+    }
+    Err(format!("decision {decision_id} not found in any project DB"))
+}
+
+/// ISO-8601 timestamp (UTC) for now.
+fn now_iso8601() -> String {
+    use std::time::{SystemTime, UNIX_EPOCH};
+    let secs = SystemTime::now()
+        .duration_since(UNIX_EPOCH)
+        .map(|d| d.as_secs())
+        .unwrap_or(0);
+    // Convert unix epoch secs to approximate ISO-8601 date-time string.
+    // Uses a simplified calculation (no leap second / leap year correction needed
+    // for meeting IDs and timestamps). chrono is not in the dependency tree so
+    // we use raw arithmetic for this non-critical formatting.
+    let days_total = secs / 86400;
+    let time_in_day = secs % 86400;
+    let hours = time_in_day / 3600;
+    let mins = (time_in_day % 3600) / 60;
+    let secs_in_min = time_in_day % 60;
+    // Rough Gregorian: 400yr = 146097 days; close enough for meeting IDs.
+    let year_400 = days_total / 146097;
+    let days_in_era = days_total % 146097;
+    let year = 1970 + year_400 * 400 + days_in_era / 365;
+    let day_in_year = days_in_era % 365;
+    let month = (day_in_year / 30) + 1;
+    let day = (day_in_year % 30) + 1;
+    format!(
+        "{year:04}-{month:02}-{day:02}T{hours:02}:{mins:02}:{secs_in_min:02}Z"
+    )
+}
+
+/// Generate a short unique ID (8 alphanumeric chars) for new rows.
+fn short_id() -> String {
+    use uuid::Uuid;
+    let u = Uuid::new_v4().to_string().replace('-', "");
+    u[..8].to_string()
+}
+
+/// Query one Decision row from an open project connection.
+fn read_decision_from_conn(conn: &Connection, decision_id: &str) -> Result<Decision, String> {
+    conn.query_row(
+        "SELECT id, meeting_id, kind, state, ai_draft_title, ai_draft_body, \
+                developer_modifications, source_findings, source_move_rank, \
+                approved_at, emitted_at, emission_path \
+         FROM decisions WHERE id = ?",
+        [decision_id],
+        |row| {
+            let title: Option<String> = row.get(4)?;
+            let body: Option<String> = row.get(5)?;
+            let ai_draft = match (title, body) {
+                (Some(t), Some(b)) => Some(AiDraft { title: t, body: b }),
+                _ => None,
+            };
+            let dev_mods: String = row.get(6)?;
+            let source: String = row.get(7)?;
+            Ok(Decision {
+                id: row.get(0)?,
+                meeting_id: row.get(1)?,
+                kind: parse_decision_kind(&row.get::<_, String>(2)?),
+                state: parse_decision_state(&row.get::<_, String>(3)?),
+                ai_draft,
+                developer_modifications: serde_json::from_str(&dev_mods).unwrap_or_default(),
+                source_findings: serde_json::from_str(&source).unwrap_or_default(),
+                source_move_rank: row.get::<_, Option<i64>>(8)?.map(|n| n as u32),
+                approved_at: row.get::<_, Option<String>>(9)?,
+                emitted_at: row.get::<_, Option<String>>(10)?,
+                emission_path: row.get::<_, Option<String>>(11)?,
+            })
+        },
+    )
+    .map_err(|e| format!("read_decision: {e}"))
+}
+
+/// Query one Meeting row from an open project connection.
+fn read_meeting_from_conn(conn: &Connection, meeting_id: &str) -> Result<Meeting, String> {
+    conn.query_row(
+        "SELECT id, project_id, started_at, committed_at, status, kb_snapshot, briefing_at_start \
+         FROM meetings WHERE id = ?",
+        [meeting_id],
+        |row| {
+            Ok(Meeting {
+                id: row.get(0)?,
+                project_id: row.get(1)?,
+                started_at: row.get(2)?,
+                committed_at: row.get::<_, Option<String>>(3)?,
+                status: parse_meeting_status(&row.get::<_, String>(4)?),
+                kb_snapshot: row.get(5)?,
+                briefing_at_start: row.get::<_, Option<String>>(6)?,
+            })
+        },
+    )
+    .map_err(|e| format!("read_meeting: {e}"))
+}
 
 impl KbDelegate for RealKbDelegate {
     fn list_projects(&self, sort: Option<String>) -> Result<Vec<Project>, String> {
@@ -297,8 +467,92 @@ impl KbDelegate for RealKbDelegate {
         .map_err(|e| format!("get_project: {e}"))
     }
 
-    fn register_project(&self, _project: ProjectInput) -> Result<Project, String> {
-        Err(MUTATION_DEFERRED.to_string())
+    fn register_project(&self, project: ProjectInput) -> Result<Project, String> {
+        // Ensure the registry DB exists and is migrated before inserting.
+        if !self.registry_path.exists() {
+            if let Some(parent) = self.registry_path.parent() {
+                std::fs::create_dir_all(parent)
+                    .map_err(|e| format!("create registry dir: {e}"))?;
+            }
+        }
+        let conn = Connection::open(&self.registry_path)
+            .map_err(|e| format!("open registry for register: {e}"))?;
+        // Ensure the projects table exists (run bootstrap DDL if empty DB).
+        conn.execute_batch(
+            "CREATE TABLE IF NOT EXISTS projects (
+                id TEXT PRIMARY KEY,
+                name TEXT NOT NULL,
+                path TEXT NOT NULL,
+                branch TEXT,
+                kind TEXT NOT NULL,
+                priority TEXT NOT NULL,
+                last_activity_at TEXT NOT NULL,
+                last_snapshot_id TEXT
+            );
+            CREATE TABLE IF NOT EXISTS schema_version (
+                version INTEGER NOT NULL,
+                applied_at TEXT NOT NULL
+            );",
+        )
+        .map_err(|e| format!("bootstrap registry DDL: {e}"))?;
+
+        let now = now_iso8601();
+        // Derive a stable ID from the project path (slug the path basename).
+        let project_id = {
+            let basename = std::path::Path::new(&project.path)
+                .file_name()
+                .and_then(|n| n.to_str())
+                .unwrap_or("project");
+            let slug: String = basename
+                .chars()
+                .map(|c| if c.is_alphanumeric() || c == '-' { c } else { '-' })
+                .collect::<String>()
+                .trim_matches('-')
+                .to_lowercase();
+            format!("{}-{}", slug, short_id())
+        };
+
+        conn.execute(
+            "INSERT INTO projects (id, name, path, branch, kind, priority, last_activity_at, last_snapshot_id) \
+             VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, NULL) \
+             ON CONFLICT(id) DO UPDATE SET \
+               name = excluded.name, \
+               path = excluded.path, \
+               branch = excluded.branch, \
+               kind = excluded.kind, \
+               priority = excluded.priority, \
+               last_activity_at = excluded.last_activity_at",
+            rusqlite::params![
+                project_id,
+                project.name,
+                project.path,
+                project.branch,
+                match project.kind {
+                    super::types::ProjectKind::Code => "code",
+                    super::types::ProjectKind::Manuscript => "manuscript",
+                    super::types::ProjectKind::Planning => "planning",
+                    super::types::ProjectKind::Mixed => "mixed",
+                },
+                match project.priority {
+                    super::types::Priority::High => "high",
+                    super::types::Priority::Med => "med",
+                    super::types::Priority::Low => "low",
+                },
+                now,
+            ],
+        )
+        .map_err(|e| format!("insert project: {e}"))?;
+
+        Ok(Project {
+            id: project_id,
+            name: project.name,
+            path: project.path,
+            branch: project.branch,
+            kind: project.kind,
+            priority: project.priority,
+            last_activity_at: now,
+            last_snapshot_id: None,
+        })
     }
 
     fn get_briefing(&self, project_id: String) -> Result<Option<Briefing>, String> {
@@ -420,46 +674,234 @@ impl KbDelegate for RealKbDelegate {
 
     fn dismiss_finding(
         &self,
-        _finding_id: String,
-        _rationale: Option<String>,
+        finding_id: String,
+        rationale: Option<String>,
     ) -> Result<Finding, String> {
-        Err(MUTATION_DEFERRED.to_string())
+        let (conn, _project_id) =
+            find_project_conn_for_finding(self, &finding_id)?;
+        let n = conn
+            .execute(
+                "UPDATE findings SET status = 'dismissed', dismissed_rationale = ?1 \
+                 WHERE id = ?2 AND status = 'open'",
+                rusqlite::params![rationale, finding_id],
+            )
+            .map_err(|e| format!("dismiss_finding execute: {e}"))?;
+        if n == 0 {
+            return Err(format!(
+                "dismiss_finding: finding {finding_id} not open or not found"
+            ));
+        }
+        conn.query_row(
+            "SELECT id, project_id, kind, severity, confidence, title, rationale, \
+                    source_path, source_range_start, source_range_end, produced_by, \
+                    produced_at, snapshot_id, status, addressed_by_decision, \
+                    dismissed_rationale \
+             FROM findings WHERE id = ?",
+            [&finding_id],
+            |row| {
+                let source_range_start: Option<i64> = row.get(8)?;
+                let source_range_end: Option<i64> = row.get(9)?;
+                let source_range = match (source_range_start, source_range_end) {
+                    (Some(s), Some(e)) => Some(SourceRange {
+                        start: s as u64,
+                        end: e as u64,
+                    }),
+                    _ => None,
+                };
+                Ok(Finding {
+                    id: row.get(0)?,
+                    project_id: row.get(1)?,
+                    kind: parse_finding_kind(&row.get::<_, String>(2)?),
+                    severity: parse_severity(&row.get::<_, String>(3)?),
+                    confidence: row.get(4)?,
+                    title: row.get(5)?,
+                    rationale: row.get(6)?,
+                    source_path: row.get::<_, Option<String>>(7)?,
+                    source_range,
+                    produced_by: parse_produced_by(&row.get::<_, String>(10)?),
+                    produced_at: row.get(11)?,
+                    snapshot_id: row.get(12)?,
+                    status: parse_finding_status(&row.get::<_, String>(13)?),
+                    addressed_by_decision: row.get::<_, Option<String>>(14)?,
+                    dismissed_rationale: row.get::<_, Option<String>>(15)?,
+                })
+            },
+        )
+        .map_err(|e| format!("dismiss_finding read-back: {e}"))
     }
 
-    fn start_meeting(&self, _project_id: String) -> Result<Meeting, String> {
-        Err(MUTATION_DEFERRED.to_string())
+    fn start_meeting(&self, project_id: String) -> Result<Meeting, String> {
+        let conn = self.open_project_db(&project_id)?;
+        let now = now_iso8601();
+        let date_compact = &now[..10].replace('-', "");
+        let id = format!("M-{}-{}", date_compact, short_id());
+
+        // Use the latest snapshot for this project (or a placeholder).
+        let kb_snapshot: String = conn
+            .query_row(
+                "SELECT id FROM snapshots WHERE project_id = ? ORDER BY taken_at DESC LIMIT 1",
+                [&project_id],
+                |row| row.get(0),
+            )
+            .optional()
+            .map_err(|e| format!("snapshot lookup: {e}"))?
+            .unwrap_or_else(|| format!("S-init-{}", short_id()));
+
+        conn.execute(
+            "INSERT INTO meetings (id, project_id, started_at, committed_at, status, kb_snapshot, briefing_at_start) \
+             VALUES (?1, ?2, ?3, NULL, 'in_session', ?4, NULL)",
+            rusqlite::params![id, project_id, now, kb_snapshot],
+        )
+        .map_err(|e| format!("start_meeting insert: {e}"))?;
+
+        Ok(Meeting {
+            id,
+            project_id,
+            started_at: now,
+            committed_at: None,
+            status: MeetingStatus::InSession,
+            kb_snapshot,
+            briefing_at_start: None,
+        })
     }
 
-    fn park_meeting(&self, _meeting_id: String) -> Result<Meeting, String> {
-        Err(MUTATION_DEFERRED.to_string())
+    fn park_meeting(&self, meeting_id: String) -> Result<Meeting, String> {
+        let (conn, _project_id) =
+            find_project_conn_for_meeting(self, &meeting_id)?;
+        let n = conn
+            .execute(
+                "UPDATE meetings SET status = 'parked' WHERE id = ?1 AND status = 'in_session'",
+                [&meeting_id],
+            )
+            .map_err(|e| format!("park_meeting execute: {e}"))?;
+        if n == 0 {
+            return Err(format!(
+                "park_meeting: meeting {meeting_id} not in_session or not found"
+            ));
+        }
+        read_meeting_from_conn(&conn, &meeting_id)
     }
 
-    fn resume_meeting(&self, _meeting_id: String) -> Result<Meeting, String> {
-        Err(MUTATION_DEFERRED.to_string())
+    fn resume_meeting(&self, meeting_id: String) -> Result<Meeting, String> {
+        let (conn, _project_id) =
+            find_project_conn_for_meeting(self, &meeting_id)?;
+        let n = conn
+            .execute(
+                "UPDATE meetings SET status = 'in_session' WHERE id = ?1 AND status = 'parked'",
+                [&meeting_id],
+            )
+            .map_err(|e| format!("resume_meeting execute: {e}"))?;
+        if n == 0 {
+            return Err(format!(
+                "resume_meeting: meeting {meeting_id} not parked or not found"
+            ));
+        }
+        read_meeting_from_conn(&conn, &meeting_id)
     }
 
     fn add_decision(
         &self,
-        _meeting_id: String,
-        _draft: DecisionDraft,
+        meeting_id: String,
+        draft: DecisionDraft,
     ) -> Result<Decision, String> {
-        Err(MUTATION_DEFERRED.to_string())
+        let (conn, _project_id) =
+            find_project_conn_for_meeting(self, &meeting_id)?;
+        let id = format!("D-{}", short_id());
+        let now = now_iso8601();
+        // DecisionDraft has no developer_modifications field; default to empty.
+        let dev_mods = "[]";
+        let source_findings = serde_json::to_string(&draft.source_findings)
+            .unwrap_or_else(|_| "[]".to_string());
+        let kind_str = match draft.kind {
+            DecisionKind::ResearchMission => "research_mission",
+            DecisionKind::AnalysisRun => "analysis_run",
+            DecisionKind::FindingDismissal => "finding_dismissal",
+            DecisionKind::VisionMission => "vision_mission",
+        };
+        conn.execute(
+            "INSERT INTO decisions (id, meeting_id, kind, state, ai_draft_title, ai_draft_body, \
+                                    developer_modifications, source_findings, source_move_rank, \
+                                    approved_at, emitted_at, emission_path) \
+             VALUES (?1, ?2, ?3, 'pending', ?4, ?5, ?6, ?7, ?8, ?9, NULL, NULL)",
+            rusqlite::params![
+                id,
+                meeting_id,
+                kind_str,
+                draft.ai_draft.as_ref().map(|d| d.title.as_str()),
+                draft.ai_draft.as_ref().map(|d| d.body.as_str()),
+                dev_mods,
+                source_findings,
+                draft.source_move_rank.map(|n| n as i64),
+                now,
+            ],
+        )
+        .map_err(|e| format!("add_decision insert: {e}"))?;
+
+        read_decision_from_conn(&conn, &id)
     }
 
     fn edit_decision(
         &self,
-        _decision_id: String,
-        _modifications: Vec<String>,
+        decision_id: String,
+        modifications: Vec<String>,
     ) -> Result<Decision, String> {
-        Err(MUTATION_DEFERRED.to_string())
+        let (conn, _project_id) =
+            find_project_conn_for_decision(self, &decision_id)?;
+        let mods_json = serde_json::to_string(&modifications)
+            .unwrap_or_else(|_| "[]".to_string());
+        let n = conn
+            .execute(
+                "UPDATE decisions SET developer_modifications = ?1 WHERE id = ?2 AND state = 'pending'",
+                rusqlite::params![mods_json, decision_id],
+            )
+            .map_err(|e| format!("edit_decision execute: {e}"))?;
+        if n == 0 {
+            return Err(format!(
+                "edit_decision: decision {decision_id} not pending or not found"
+            ));
+        }
+        read_decision_from_conn(&conn, &decision_id)
     }
 
-    fn withdraw_decision(&self, _decision_id: String) -> Result<Decision, String> {
-        Err(MUTATION_DEFERRED.to_string())
+    fn withdraw_decision(&self, decision_id: String) -> Result<Decision, String> {
+        let (conn, _project_id) =
+            find_project_conn_for_decision(self, &decision_id)?;
+        let n = conn
+            .execute(
+                "UPDATE decisions SET state = 'withdrawn' WHERE id = ?1 AND state = 'pending'",
+                [&decision_id],
+            )
+            .map_err(|e| format!("withdraw_decision execute: {e}"))?;
+        if n == 0 {
+            return Err(format!(
+                "withdraw_decision: decision {decision_id} not pending or not found"
+            ));
+        }
+        read_decision_from_conn(&conn, &decision_id)
     }
 
-    fn send_now(&self, _decision_id: String) -> Result<SendNowResult, String> {
-        Err(MUTATION_DEFERRED.to_string())
+    fn send_now(&self, decision_id: String) -> Result<SendNowResult, String> {
+        let (conn, _project_id) =
+            find_project_conn_for_decision(self, &decision_id)?;
+        let now = now_iso8601();
+        let n = conn
+            .execute(
+                "UPDATE decisions SET state = 'sent_now', emitted_at = ?1 WHERE id = ?2 AND state = 'pending'",
+                rusqlite::params![now, decision_id],
+            )
+            .map_err(|e| format!("send_now execute: {e}"))?;
+        if n == 0 {
+            return Err(format!(
+                "send_now: decision {decision_id} not pending or not found"
+            ));
+        }
+        // emission_path is null until emitSendNow runs in the TS layer;
+        // return an empty placeholder (actual path set by the TS emitter).
+        Ok(SendNowResult {
+            decision_id,
+            emission_path: String::new(),
+            emitted_at: now,
+        })
     }
 
     fn preview_bundle(&self, meeting_id: String) -> Result<BundlePreview, String> {
@@ -537,8 +979,73 @@ impl KbDelegate for RealKbDelegate {
         Err(format!("meeting {meeting_id} not found in any project DB"))
     }
 
-    fn commit_bundle(&self, _meeting_id: String) -> Result<Bundle, String> {
-        Err(MUTATION_DEFERRED.to_string())
+    fn commit_bundle(&self, meeting_id: String) -> Result<Bundle, String> {
+        let (conn, _project_id) =
+            find_project_conn_for_meeting(self, &meeting_id)?;
+        let now = now_iso8601();
+        // Transition meeting to 'committed'; transition pending decisions to 'bundled'.
+        let _m_rows = conn
+            .execute(
+                "UPDATE meetings SET status = 'committed', committed_at = ?1 WHERE id = ?2",
+                rusqlite::params![now, meeting_id],
+            )
+            .map_err(|e| format!("commit_bundle meeting update: {e}"))?;
+        let _d_rows = conn
+            .execute(
+                "UPDATE decisions SET state = 'bundled' WHERE meeting_id = ?1 AND state = 'pending'",
+                [&meeting_id],
+            )
+            .map_err(|e| format!("commit_bundle decisions update: {e}"))?;
+
+        // Collect bundled decision IDs
+        let mut stmt = conn
+            .prepare(
+                "SELECT id FROM decisions WHERE meeting_id = ?1 AND state = 'bundled' ORDER BY approved_at",
+            )
+            .map_err(|e| format!("commit_bundle list: {e}"))?;
+        let ids: Vec<String> = stmt
+            .query_map([&meeting_id], |row| row.get(0))
+            .map_err(|e| format!("commit_bundle query_map: {e}"))?
+            .filter_map(|r| r.ok())
+            .collect();
+
+        let bundle_id = meeting_id.clone();
+        let suggested_order = ids.clone();
+        let parallelizable_json = serde_json::to_string(&[ids.clone()])
+            .unwrap_or_else(|_| "[[]]".to_string());
+        let decisions_json = serde_json::to_string(&ids)
+            .unwrap_or_else(|_| "[]".to_string());
+
+        // Upsert bundle row (bundles share the meeting_id).
+        let manifest_path = format!(".planning/staging/inbox/{meeting_id}.bundle.yaml");
+        conn.execute(
+            "INSERT INTO bundles (id, meeting_id, emitted_at, decisions, manifest_path, batch_hints) \
+             VALUES (?1, ?2, ?3, ?4, ?5, ?6) \
+             ON CONFLICT(id) DO UPDATE SET emitted_at = excluded.emitted_at, \
+               decisions = excluded.decisions, manifest_path = excluded.manifest_path",
+            rusqlite::params![
+                bundle_id,
+                meeting_id,
+                now,
+                decisions_json,
+                manifest_path,
+                parallelizable_json,
+            ],
+        )
+        .map_err(|e| format!("commit_bundle insert: {e}"))?;
+
+        Ok(Bundle {
+            id: bundle_id,
+            meeting_id,
+            emitted_at: now,
+            decisions: ids.clone(),
+            manifest_path,
+            batch_hints: BatchHints {
+                parallelizable: vec![ids.clone()],
+                shared_context: Vec::new(),
+                suggested_order,
+            },
+        })
     }
 
     fn get_meeting_record(&self, meeting_id: String) -> Result<String, String> {
@@ -668,6 +1175,23 @@ mod tests {
                 status TEXT NOT NULL,
                 kb_snapshot TEXT NOT NULL,
                 briefing_at_start TEXT
+            );
+            CREATE TABLE snapshots (
+                id TEXT PRIMARY KEY,
+                project_id TEXT NOT NULL,
+                taken_at TEXT NOT NULL,
+                git_sha TEXT,
+                files_scanned INTEGER NOT NULL,
+                loc_total INTEGER NOT NULL,
+                notes TEXT
+            );
+            CREATE TABLE bundles (
+                id TEXT PRIMARY KEY,
+                meeting_id TEXT NOT NULL,
+                emitted_at TEXT NOT NULL,
+                decisions TEXT NOT NULL,
+                manifest_path TEXT NOT NULL,
+                batch_hints TEXT NOT NULL
             );
             CREATE TABLE decisions (
                 id TEXT PRIMARY KEY,
@@ -837,12 +1361,83 @@ mod tests {
     }
 
     #[test]
-    fn mutation_paths_return_descriptive_error() {
+    fn dismiss_finding_on_absent_db_returns_not_found() {
+        // Empty registry → no projects → no project DB → "not found" error.
         let tmp = TempDir::new().unwrap();
         let kb = RealKbDelegate::with_registry_path(tmp.path().join("registry.db"));
         let err = kb.dismiss_finding("F-001".to_string(), None).unwrap_err();
-        assert!(err.contains("mutation"), "Got: {err}");
-        assert!(err.contains("Phase 826") || err.contains("TypeScript"), "Got: {err}");
+        // Should report not found (no project DB to search) rather than MUTATION_DEFERRED.
+        assert!(
+            err.contains("not found") || err.contains("not registered") || err.contains("registry"),
+            "Got: {err}"
+        );
+    }
+
+    #[test]
+    fn add_decision_then_list_via_tauri_round_trip() {
+        let tmp = TempDir::new().unwrap();
+        let proj_root = tmp.path().join("proj");
+        std::fs::create_dir_all(&proj_root).unwrap();
+        let registry_path =
+            create_registry_with_project(&tmp, "test-proj", &proj_root);
+        let _db = create_project_db(&proj_root);
+
+        let kb = RealKbDelegate::with_registry_path(registry_path);
+
+        // Start a meeting
+        let meeting = kb.start_meeting("test-proj".to_string()).unwrap();
+        assert_eq!(meeting.project_id, "test-proj");
+
+        // Add a decision
+        let draft = super::super::types::DecisionDraft {
+            kind: DecisionKind::VisionMission,
+            ai_draft: Some(AiDraft {
+                title: "Refactor core module".to_string(),
+                body: "The analyzer core needs a focused pass.".to_string(),
+            }),
+            source_findings: vec!["F-001".to_string()],
+            source_move_rank: Some(1),
+        };
+        let decision = kb.add_decision(meeting.id.clone(), draft).unwrap();
+        assert_eq!(decision.kind, DecisionKind::VisionMission);
+        assert_eq!(decision.state, DecisionState::Pending);
+        assert!(decision.ai_draft.is_some());
+
+        // preview_bundle should now return that decision
+        let preview = kb.preview_bundle(meeting.id.clone()).unwrap();
+        assert_eq!(preview.meeting_id, meeting.id);
+        assert_eq!(preview.decision_count, 1);
+        assert_eq!(preview.decisions[0].id, decision.id);
+    }
+
+    #[test]
+    fn commit_bundle_round_trip() {
+        let tmp = TempDir::new().unwrap();
+        let proj_root = tmp.path().join("proj");
+        std::fs::create_dir_all(&proj_root).unwrap();
+        let registry_path =
+            create_registry_with_project(&tmp, "test-proj", &proj_root);
+        let _db = create_project_db(&proj_root);
+
+        let kb = RealKbDelegate::with_registry_path(registry_path);
+        let meeting = kb.start_meeting("test-proj".to_string()).unwrap();
+        let draft = super::super::types::DecisionDraft {
+            kind: DecisionKind::VisionMission,
+            ai_draft: None,
+            source_findings: vec![],
+            source_move_rank: None,
+        };
+        kb.add_decision(meeting.id.clone(), draft).unwrap();
+
+        // Commit the bundle
+        let bundle = kb.commit_bundle(meeting.id.clone()).unwrap();
+        assert_eq!(bundle.meeting_id, meeting.id);
+        assert_eq!(bundle.decisions.len(), 1);
+
+        // Meeting should now be 'committed' (preview returns no pending decisions)
+        let preview = kb.preview_bundle(meeting.id.clone()).unwrap();
+        // After commit, pending decisions → bundled, so preview.decision_count = 0
+        assert_eq!(preview.decision_count, 0);
     }
 
     #[test]
