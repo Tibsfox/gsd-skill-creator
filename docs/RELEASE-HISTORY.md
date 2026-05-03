@@ -1,15 +1,16 @@
 # Release History
 
-639 milestones shipped across the v1.0 → v1.49.596 arc. The table below lists every shipped release, newest first.
+640 milestones shipped across the v1.0 → v1.49.597 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions, and where available, retrospectives and lessons learned. `Commits` is the count of commits between this tag and the previous tag (from git). `Phases` and `Plans` come from structured GSD metadata in the release README — most content/patch releases don't have these. `Retro` links to the retrospective chapter when present. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 639 releases · 626 with retrospectives · 626 with extracted lessons · quality A:624 B:3 C:3 D:3 F:6 (avg 96) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 640 releases · 626 with retrospectives · 626 with extracted lessons · quality A:624 B:3 C:3 D:4 F:6 (avg 96) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Retro | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|-------|---------|---------|-------|
+| [v1.49.597](release-notes/v1.49.597) | GSD Intelligence Dashboard | 2026-05-03 | 47 | — | — | — | — | D 67 |  |
 | [v1.49.596](release-notes/v1.49.596) | Apollo 13 SUCCESSFUL FAILURE + LM-AS-LIFEBOAT (NASA degree 1.77) | 2026-05-02 | 5 | — | — | — | — | F 12 |  |
 | [v1.49.595](release-notes/v1.49.595) | Apollo 12 PINPOINT LANDING + SCE-TO-AUX RECOVERY | 2026-05-02 | 5 | — | — | — | — | F 51 |  |
 | [v1.49.594](release-notes/v1.49.594) | Apollo 11 (NASA degree 1.75 FIRST LUNAR LANDING) | 2026-05-02 | 11 | — | — | — | — | F 7 |  |
