@@ -1,0 +1,37 @@
+# {decision.ai_draft.title}
+
+**Source:** intelligence-dashboard meeting {meeting_id}
+**Project:** {project.name} @ {project.branch}
+**Skill expected:** {meta.skill}
+**Speed hint:** {meta.speed_hint}
+
+---
+
+## Vision
+
+{decision.ai_draft.body}
+
+{if developer_modifications}
+**Developer modifications:**
+{for each mod in developer_modifications}
+- {mod}
+{end}
+{end}
+
+## Source findings
+
+{for each finding in source_findings}
+- **{finding.id}** ({finding.kind}, severity {finding.severity}, confidence {finding.confidence})
+  {finding.rationale}{if finding.source_path} at `{finding.source_path}`{end}
+{end}
+
+## Provenance
+
+This vision was approved by the developer in meeting [{meeting_id}]({meeting_excerpt_url})
+on {developer_approved_at}.
+
+{if ai_rationale}
+AI rationale at suggestion time (rank #{ai_rank}, confidence {ai_confidence}):
+
+> {ai_rationale}
+{end}

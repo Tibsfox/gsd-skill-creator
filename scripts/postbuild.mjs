@@ -22,6 +22,26 @@ const assetDirs = [
   // templates next to dist/cartridge/scaffold.js or `skill-creator
   // cartridge scaffold` throws ENOENT at runtime.
   { src: 'src/cartridge/templates', dest: 'dist/cartridge/templates', ext: '.tmpl' },
+  // Phase 825 / C10: vision-doc.md.tmpl read at MissionEmitter construction time.
+  {
+    src: 'src/intelligence/emitter/templates',
+    dest: 'dist/intelligence/emitter/templates',
+    ext: '.tmpl',
+  },
+  // Phase 825 / C11: meeting-record.md.tmpl read at MeetingRecordGenerator
+  // construction time.
+  {
+    src: 'src/intelligence/meetings/templates',
+    dest: 'dist/intelligence/meetings/templates',
+    ext: '.tmpl',
+  },
+  // Phase 825 / C10: vision-seed-meta + bundle-manifest schemas read at
+  // ajv compile time by meta-validator.ts.
+  {
+    src: 'src/intelligence/schemas',
+    dest: 'dist/intelligence/schemas',
+    ext: '.json',
+  },
 ];
 
 let copied = 0;
