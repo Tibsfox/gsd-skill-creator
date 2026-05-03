@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gsd-skill-creator.local/intelligence/vision-seed-meta.schema.json",
+  "title": "VisionSeedMeta",
+  "description": "Companion `.meta.json` for a vision-shaped seed deposited at .planning/staging/inbox/. Round-trips with the VisionSeedMeta TS interface in src/intelligence/types.ts.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "request_id",
+    "kind",
+    "skill",
+    "speed_hint",
+    "project",
+    "provenance",
+    "constraints",
+    "bundle_id"
+  ],
+  "properties": {
+    "request_id": { "type": "string", "minLength": 1 },
+    "kind": { "const": "mission_seed" },
+    "skill": {
+      "type": "string",
+      "enum": ["vision-to-mission", "research-mission-generator"]
+    },
+    "speed_hint": {
+      "type": "string",
+      "enum": ["full", "fast", "mission-only"]
+    },
+    "project": { "type": "string", "minLength": 1 },
+    "branch": { "type": "string" },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_findings",
+        "source_briefing",
+        "ai_confidence",
+        "ai_rank",
+        "ai_rationale",
+        "developer_approved_at",
+        "developer_modifications",
+        "meeting_id",
+        "meeting_excerpt_url",
+        "kb_snapshot"
+      ],
+      "properties": {
+        "source_findings": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^F-" }
+        },
+        "source_briefing": {
+          "anyOf": [
+            { "type": "string", "pattern": "^B-" },
+            { "type": "null" }
+          ]
+        },
+        "ai_confidence": {
+          "anyOf": [
+            { "type": "string", "enum": ["low", "medium", "high"] },
+            { "type": "null" }
+          ]
+        },
+        "ai_rank": {
+          "anyOf": [{ "type": "integer" }, { "type": "null" }]
+        },
+        "ai_rationale": {
+          "anyOf": [{ "type": "string" }, { "type": "null" }]
+        },
+        "developer_approved_at": { "type": "string", "format": "date-time" },
+        "developer_modifications": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "meeting_id": { "type": "string", "pattern": "^M-" },
+        "meeting_excerpt_url": { "type": "string" },
+        "kb_snapshot": { "type": "string", "minLength": 1 }
+      }
+    },
+    "constraints": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "max_research_searches": { "type": "integer", "minimum": 0 },
+        "crew_profile": {
+          "type": "string",
+          "enum": ["patrol", "squadron", "fleet"]
+        },
+        "output_format": {
+          "type": "string",
+          "enum": ["three-file-pdf", "markdown-package"]
+        }
+      }
+    },
+    "bundle_id": {
+      "anyOf": [
+        { "type": "string", "pattern": "^M-" },
+        { "type": "null" }
+      ]
+    }
+  }
+}
