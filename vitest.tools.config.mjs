@@ -14,6 +14,7 @@ export default defineConfig({
       'tools/__tests__/ftp-sync.test.mjs',
       'tools/__tests__/render-claude-md.test.mjs',
       'tools/__tests__/ship-sync.test.mjs',
+      'tools/__tests__/gh-release-publish.test.mjs',
     ],
     globals: true,
     testTimeout: 15000,

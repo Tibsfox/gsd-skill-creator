@@ -49,6 +49,7 @@
     "render:claude-md:check": "node tools/render-claude-md.mjs --check",
     "render:claude-md:dry-run": "node tools/render-claude-md.mjs --dry-run",
     "ship-sync": "bash tools/ship-sync.sh",
+    "gh-release-publish": "bash tools/gh-release-publish.sh",
     "build": "tsc",
     "postbuild": "node scripts/postbuild.mjs",
     "dev": "tsx src/cli.ts",
