@@ -157,15 +157,19 @@ function scorePartDepth(text, which) {
   const partRes = which === 'A'
     ? [
         /^###?\s+Part A[:\s]/m,
-        /^#{2,4}\s+§6\.6 register full enumeration/mi,
-        /^#{2,4}\s+Engine state full enumeration/mi,
+        /^#{2,4}\s+§6\.6 register\b/mi,
+        /^#{2,4}\s+Engine state\b/mi,
+        /^#{2,4}\s+(MUS )?Domain (register )?state\b/mi,
+        /^#{2,4}\s+Carryover lessons applied/mi,
       ]
     : [
         /^###?\s+Part B[:\s]/m,
-        /^#{2,4}\s+Cross-track structural pair anchor inventory/mi,
+        /^#{2,4}\s+Cross-track structural pair/mi,
         /^#{2,4}\s+Cross-track .* weave/mi,
-        /^#{2,4}\s+Tier \d+ inline-Opus build-path provenance/mi,
+        /^#{2,4}\s+Tier \d+ inline-Opus build-path/mi,
         /^#{2,4}\s+Build path: Tier/mi,
+        /^#{2,4}\s+New (lessons|observations)/mi,
+        /^#{2,4}\s+Forward observations/mi,
       ];
   let best = 0;
   for (const re of partRes) {
@@ -303,15 +307,25 @@ function scoreRunningLedgers(text) {
     /^#{2,4}\s+Health metrics/mi,
     /^#{2,4}\s+Test posture/mi,
     /^#{2,4}\s+By the Numbers/mi,
-    // v584+ chapter-first ledger equivalents.
-    /^#{2,4}\s+Engine state full enumeration/mi,
-    /^#{2,4}\s+§6\.6 register full enumeration/mi,
-    /^#{2,4}\s+Cross-track structural pair anchor inventory/mi,
-    /^#{2,4}\s+Cross-track \/?\s*Engine state/mi,
+    // v584+ chapter-first ledger equivalents (broad — any "register state",
+    // "Domain state", "series state", "engine state" section counts as a
+    // running ledger because they enumerate cross-mission state at the
+    // milestone close).
+    /^#{2,4}\s+Engine state\b/mi,
+    /^#{2,4}\s+§6\.6 register\b/mi,
+    /^#{2,4}\s+(MUS )?Domain (register )?state\b/mi,
+    /^#{2,4}\s+ELC Domain\b/mi,
+    /^#{2,4}\s+SPS series state\b/mi,
+    /^#{2,4}\s+TRS M\d+ substrate\b/mi,
+    /^#{2,4}\s+Cross-track structural pair anchor/mi,
+    /^#{2,4}\s+Cross-track \/?\s*Engine state\b/mi,
     /^#{2,4}\s+Soak observation/mi,
+    /^#{2,4}\s+Forward queue\b/mi,
+    /^#{2,4}\s+Three-track-plus-TRS cadence/mi,
   ];
   const hits = markers.filter(re => re.test(text)).length;
-  if (hits >= 3) return 5;
+  if (hits >= 5) return 5;
+  if (hits >= 3) return 4;
   if (hits >= 1) return 3;
   return 0;
 }
@@ -326,11 +340,17 @@ function scoreRunningLedgers(text) {
 function scoreInfrastructure(text) {
   const headingRes = [
     /^#{2,4}\s+(Infrastructure|Files|Branch state|Dedications|Out of scope|Out-of-scope discipline)\b/mi,
-    /^#{2,4}\s+Tier \d+ inline-Opus build-path provenance/mi,
+    /^#{2,4}\s+Tier \d+ inline-Opus build-path/mi,
     /^#{2,4}\s+Build path: Tier/mi,
+    /^#{2,4}\s+Build artifacts shipped/mi,
+    /^#{2,4}\s+Operational gates\b/mi,
+    /^#{2,4}\s+Mid-build recoveries\b/mi,
     /^#{2,4}\s+Cadence\b/mi,
     /^#{2,4}\s+See also\b/mi,
     /^#{2,4}\s+Pipeline closure/mi,
+    /^#{2,4}\s+File inventory\b/mi,
+    /^#{2,4}\s+Cross-mission .* references\b/mi,
+    /^#{2,4}\s+Next milestone scope\b/mi,
   ];
   let best = 0;
   for (const re of headingRes) {
