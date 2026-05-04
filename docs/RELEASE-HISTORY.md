@@ -1,15 +1,16 @@
 # Release History
 
-645 milestones shipped across the v1.0 → v1.49.602 arc. The table below lists every shipped release, newest first.
+646 milestones shipped across the v1.0 → v1.49.603 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions, and where available, retrospectives and lessons learned. `Commits` is the count of commits between this tag and the previous tag (from git). `Phases` and `Plans` come from structured GSD metadata in the release README — most content/patch releases don't have these. `Retro` links to the retrospective chapter when present. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 645 releases · 644 with retrospectives · 633 with extracted lessons · quality A:624 B:4 C:11 D:4 F:2 (avg 96) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 646 releases · 645 with retrospectives · 633 with extracted lessons · quality A:624 B:4 C:11 D:4 F:3 (avg 96) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Retro | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|-------|---------|---------|-------|
+| [v1.49.603](release-notes/v1.49.603) | Research-Track-Cards + Nav-Card Drift Gate Counter-Cadence | 2026-05-04 | 4 | — | — | [✓](release-notes/v1.49.603/chapter/03-retrospective.md) | — | F 55 |  |
 | [v1.49.602](release-notes/v1.49.602) | Apollo 15 First Lunar Roving Vehicle (NASA degree 1.81) | 2026-05-04 | 4 | — | — | [✓](release-notes/v1.49.602/chapter/03-retrospective.md) | — | C 79 |  |
 | [v1.49.601](release-notes/v1.49.601) | Catalog-Index Auto-Derive Counter-Cadence | 2026-05-04 | 4 | — | — | [✓](release-notes/v1.49.601/chapter/03-retrospective.md) | — | F 47 |  |
 | [v1.49.600](release-notes/v1.49.600) | Mariner 9 First Planet Orbit (NASA degree 1.80) | 2026-05-04 | 18 | — | — | [✓](release-notes/v1.49.600/chapter/03-retrospective.md) | — | C 79 |  |
