@@ -1,4 +1,4 @@
-# v1.49.592 Forward Lessons (#10207 — #10210)
+# v1.49.592 — Forward Lessons Emitted (#10207 — #10210)
 
 ## #10207 — Depth-audit composite-signal evaluation supersedes moving-baseline hypothesis
 
