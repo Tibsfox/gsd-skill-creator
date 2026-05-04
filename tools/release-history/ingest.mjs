@@ -194,11 +194,30 @@ function extractPhasesPlans(text) {
   return Object.keys(out).length ? out : null;
 }
 
-function extractRetrospectiveFlag(text) {
-  const hasRetro =
+function extractRetrospectiveFlag(text, version) {
+  // Strategy 1: README inline retrospective headings (pre-v585 single-file format).
+  const inlineRetro =
     /##+\s*Retrospective/im.test(text) ||
     /##+\s*What Worked/im.test(text) ||
     /##+\s*Lessons Learned/im.test(text);
+  // Strategy 2: 5-file structure chaptered retrospective (v585+ deterministic-gate format).
+  // The chapter file at chapter/03-retrospective.md is the canonical source for
+  // the 5-file release-notes structure mandated by the v1.49.585 completeness
+  // gate. Older format put retro inline in README; newer format chaptered it
+  // for hand-authoring clarity. Either source counts as "has retrospective".
+  let chapterRetro = false;
+  if (version) {
+    const chapterPath = join(RELEASE_NOTES_DIR, version, 'chapter', '03-retrospective.md');
+    if (existsSync(chapterPath)) {
+      try {
+        const chapterText = readFileSync(chapterPath, 'utf8');
+        // Treat as present if file has non-trivial content (>200 bytes mirrors
+        // the --strict completeness gate threshold).
+        chapterRetro = chapterText.length >= 200;
+      } catch {}
+    }
+  }
+  const hasRetro = inlineRetro || chapterRetro;
   return { has_retrospective: hasRetro, retrospective_status: hasRetro ? 'present' : 'missing' };
 }
 
@@ -230,7 +249,8 @@ function parseRelease(version, text) {
   const warnings = [];
   for (const ex of extractors) {
     try {
-      const result = ex.fn(text);
+      // Pass version to extractors that need it (e.g. retrospective chapter-file fallback).
+      const result = ex.fn(text, version);
       if (result) {
         Object.assign(fields, result);
         fields.parse_confidence += ex.weight;

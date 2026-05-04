@@ -130,12 +130,25 @@ function scorePartDepth(text, which) {
   return 0;
 }
 
-// Retrospective with both sub-sections
+// Retrospective with both sub-sections.
+// Heading patterns observed in the corpus:
+//   Pre-v584 canonical:    `# Retrospective — v1.49.NNN`
+//   v584+ version-prefix:  `# v1.49.NNN — Retrospective`
+//   v584+ alt:             `# 03 — Retrospective: v1.49.NNN Process`
+// After heading-demote-by-one in buildReleaseCorpus all become ## level. The
+// regex relaxes from "first word after `## `" to "appears anywhere on the
+// heading line" so version-prefixed forms also match. Same relaxation for
+// What Worked / What Could Be Better subheadings — modern retros use freeform
+// subheadings ("Carryover lessons applied", "New observations", etc.) so a
+// presence-of-content fallback awards partial credit when subheadings drift.
 function scoreRetrospective(text) {
-  const hasRetro = /^#{2,4}\s+Retrospective/mi.test(text);
+  const hasRetro = /^#{2,4}\s+.*\bRetrospective\b/mi.test(text);
   if (!hasRetro) return 0;
-  const worked = /^#{2,4}\s+What (Worked|s Working)/mi.test(text);
-  const better = /^#{2,4}\s+What Could Be Better|^#{2,4}\s+What (Didn'?t Work|Needs Improvement)/mi.test(text);
+  const worked = /^#{2,4}\s+.*\bWhat (Worked|s Working)\b/mi.test(text)
+    || /^#{2,4}\s+.*\b(Carryover lessons applied|New observations)\b/mi.test(text);
+  const better = /^#{2,4}\s+.*\bWhat Could Be Better\b/mi.test(text)
+    || /^#{2,4}\s+.*\bWhat (Didn'?t Work|Needs Improvement)\b/mi.test(text)
+    || /^#{2,4}\s+.*\b(Trust-budget|Process observation|Surprises|Drift)\b/mi.test(text);
   let score = 5;
   if (worked) score += 5;
   if (better) score += 5;
@@ -154,7 +167,12 @@ function scoreLessons(text) {
   const lines = text.split(/\r?\n/);
   let best = 0;
   for (let i = 0; i < lines.length; i++) {
-    const headerMatch = /^(#{2,4})\s+Lessons(?:\s+Learned)?\b/i.exec(lines[i]);
+    // Match "Lessons" or "Forward Lessons" appearing anywhere in the heading
+    // line (not just first word after `## `). Covers:
+    //   `## Lessons — v1.49.580` (pre-v584 canonical)
+    //   `## v1.49.598 — Forward Lessons Emitted` (v584+ version-prefix)
+    //   `## Lessons Learned` (legacy)
+    const headerMatch = /^(#{2,4})\s+.*\b(?:Forward\s+)?Lessons(?:\s+Learned|\s+Emitted)?\b/i.exec(lines[i]);
     if (!headerMatch) continue;
     const startLevel = headerMatch[1].length;
     let endIdx = lines.length;
