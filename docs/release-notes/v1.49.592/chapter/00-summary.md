@@ -1,6 +1,6 @@
 # v1.49.592 — Structural Firsts + Engine State
 
-## Six load-bearing firsts at v1.73 (per Apollo 9 narrative)
+## Structural firsts at v1.49.592 close
 
 1. **First crewed LM flight** — LM-3 "Spider"; Block II Apollo Lunar Module's first crewed mission
 2. **First crewed CSM-LM separation + rendezvous** — CSM "Gumdrop" + LM "Spider" tested CSM-LM transposition + extraction + Day 5 active rendezvous

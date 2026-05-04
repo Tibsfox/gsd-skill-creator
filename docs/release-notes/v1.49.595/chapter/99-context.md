@@ -1,5 +1,70 @@
 # v1.49.595 — Engine State Tables
 
+## Engine state full enumeration at v1.49.595 close
+
+| Surface | v1.49.594 close | **v1.49.595 close** | Change v594→v595 |
+|---|---|---|---|
+| NASA degree | 1.75 (Apollo 11 / FIRST CREWED LUNAR LANDING) | **1.76 (Apollo 12 / PINPOINT LANDING + SCE-TO-AUX RECOVERY)** | **+0.01** |
+| MUS degree | 1.75 (The Beatles *Abbey Road*) | **1.76 (Led Zeppelin II)** | **+0.01** |
+| ELC degree | 1.75 (Ryan ALR-100 LM Landing Radar) | **1.76 (ALSEP central station / Bendix / SNAP-27 RTG)** | **+0.01** |
+| SPS series | #72 (American Marten) | **#73 (Pacific Marten — sister-species split)** | **+1** |
+| §6.6 register | 17 exemplars | **19 exemplars** (Path D BOTH: PINPOINT + PROCEDURAL dual origination) | **+2** |
+| AUC outcome-validation | 3-ex reproducibly-stable (ESTABLISHED at v1.75) | 4th outcome-validation instance contributed | thread strengthening |
+| FCSC outcome-validation | 1-ex origination | 2nd outcome-validation instance contributed | strengthening |
+| MUS Domain register | Domain 12 (Era-Closing Album) at 1-ex | **Domain 13 (Hard Rock Foundation / Genre-Defining Sophomore) 1-ex origination** | **+1 Domain** |
+| ELC sub-thread | RR→LR closed at v1.75 | **LONG-DURATION-LUNAR-SURFACE-SCIENCE 1-ex origination** | NEW sub-thread |
+| TRS substrate | M0 Wave 2b synthesis COMPLETE | **M0 Wave 2c synthesis COMPLETE** (22 of 22 packs synthesized) | +1 wave |
+| TRS master.json | 313 records | **324 records** (+11 from pack-09 Wave-1.5 fetch) | +11 |
+| Three-track-plus-TRS cadence | 8 instances | **9 instances** | **+1 instance** |
+| CHAIN-CONVENTIONS | v1.4 (sixteenth full use) | v1.4 (seventeenth full use; no bump) | unchanged |
+| Pre-tag-gate | 6/6 PASS | 6/6 PASS + cross-link strict-mode cutover (NEW BLOCKER) | hardened |
+| Lesson #10221 dev/main sync | first-instance test | **second-instance soak PASS** (zero-drift maintained) | +1 soak |
+| vitest test count | ~28,800 | ~28,810 | +10 |
+
+## Cross-track structural pair anchor inventory (NASA + MUS + ELC + SPS at v1.76)
+
+| Substrate | Manifestation | Connection point |
+|---|---|---|
+| NASA 1.76 | Apollo 12 PINPOINT LANDING + SCE-TO-AUX RECOVERY; Conrad "Whoopee! Man, that may have been a small one for Neil, but that's a long one for me!" first-step quote; Surveyor 3 walk-up retrieval (5 items including TV camera) | **Second crewed lunar landing as refinement of first** — PINPOINT + PREC §6.6 dual origination |
+| MUS 1.76 | Led Zeppelin II (Atlantic SD 8236; producer Jimmy Page; mobile-recording across 9 studios on 2 continents during 1969 world tour); foundational Hard Rock genre-defining sophomore record after Led Zep I debut | **Cross-track structural pair on first-refinement-after-debut narrative axis** — second instantiation of the same primitive in a different style |
+| ELC 1.76 | ALSEP central station (Bendix; SNAP-27 RTG plutonium-238 ~73 W; 4 science packages PSE/LSM/SWS/SIDE-CCGE; 8-year operational life 1969-1977) — opens long-duration-lunar-surface-science substrate | **First long-duration robotic-science package on lunar surface** — telemetry returned for 8 years across all subsequent ALSEPs |
+| SPS #73 | Pacific Marten (*Martes caurina*) — sister-species split from American Marten via 2013 Dawson et al. mtDNA analysis; Cascades + Olympics + Sierra Nevada alpine populations | **Sister-species split parallels Apollo 12's "second refinement of the same pattern"** — paired-species structural primitive |
+
+**Cross-track structural-pair finding:** v1.76 lands a **META-SOPHOMORE-REFINEMENT cross-substrate pattern** — Apollo 12 refines the lunar landing protocol; Led Zep II refines the Led Zep I sound; ALSEP refines the one-shot LR into long-duration multi-instrument science; Pacific Marten is the sister-species refinement of American Marten. Four substrates each instantiate the same structural primitive (refinement-after-debut) simultaneously.
+
+## Build path: Tier 2 inline-Opus W2-NASA recovery + Sonnet for MUS+ELC
+
+**Build path:** Tier 1 Sonnet sub-agent dispatch attempted; W2-NASA Sonnet sub-agent hit `rate_limit_exceeded` mid-build (~12 min wall-clock); main-context Tier 2 inline-Opus recovery completed NASA build per the W2-build-agent template Tier 2 procedure (template lines 247-269; closes Lesson #10223). MUS + ELC builds completed via Tier 1 Sonnet dispatch.
+
+**Why Tier 2 was used (W2-NASA only):** Sonnet sub-agent dispatch hit Anthropic per-account rate limit at ~12 min into NASA build; cannot wait for ~1-hour quota refresh given ship deadline; main-context Opus inline-Edit recovery is the documented fallback procedure. Closes Lesson #10223 candidate.
+
+**v595 actual depth-audit results:**
+
+| Track | Status | Lines | Bytes | Comments |
+|---|---|---|---|---|
+| NASA 1.76 (vs NASA 1.75) | PASS | 95% | 100% | 7/7 canonical sections + 13 artifacts / 5/5 categories + 13/13 cross-links 100% (Tier 2 inline-Opus build matched Sonnet quality) |
+| MUS 1.76 (vs MUS 1.75) | WARN | 81% | 84% | 11/10 cards; below 95% lines threshold; v1.75 baseline was Abbey Road which scored unusually high |
+| ELC 1.76 (vs ELC 1.75) | WARN | 85% | 82% | 10/10 cards; below 95% lines threshold |
+
+**Forward-action result:** Tier 2 inline-Opus recovery procedure validated as functional fallback; closes Lesson #10223. Single-Write 32K cap workable for ~50KB files via incremental-Edit augmentation pattern (#10228 candidate emitted; MUS+ELC inline recovery demonstrated).
+
+## Cross-mission Apollo references (v1.72–v1.77)
+
+| Version | Mission | NASA degree | §6.6 contribution |
+|---|---|---|---|
+| v1.49.591 | Apollo 8 | 1.72 | first crewed translunar; AUC 2-ex |
+| v1.49.592 | Apollo 9 | 1.73 | first crewed LM stack; UPV 2nd-instance outcome-validation |
+| v1.49.593 | Apollo 10 | 1.74 | lunar-orbit dress rehearsal; DRC §6.6 origination |
+| v1.49.594 | Apollo 11 | 1.75 | FIRST CREWED LUNAR LANDING; FCSC origination + AUC 3-ex promotion |
+| **v1.49.595** | **Apollo 12** | **1.76** | **PINPOINT-LANDING + PROCEDURAL-RECOVERY dual origination (Path D BOTH); Domain 13 (Hard Rock Foundation) origination; ELC LONG-DURATION-LUNAR-SURFACE-SCIENCE sub-thread origination** |
+| v1.49.596 (planned) | Apollo 13 | 1.77 | SUCCESSFUL FAILURE + LM-AS-LIFEBOAT; PREC outcome-validation 2nd-instance |
+
+## Forward lessons emitted
+
+#10221 #10222 #10223 #10224 (retracted) #10225 #10227 #10228
+
+(See `chapter/04-lessons.md` for full lesson definitions and 3-criterion rubrics.)
+
 ## §6.6 Register at v1.76 close (19 exemplars)
 
 | # | Thread | Origin | Status |

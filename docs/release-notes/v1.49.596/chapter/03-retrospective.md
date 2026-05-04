@@ -1,4 +1,4 @@
-# v1.49.596 Retrospective — Carryover Lessons Applied + New Lessons
+# v1.49.596 — Retrospective: Carryover Lessons Applied + New Lessons
 
 ## Carryover lessons applied at v1.49.596
 
