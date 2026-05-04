@@ -104,6 +104,34 @@ const CROSSLINK_WARN_RATIO = 0.50;      // 50-80% = WARN; <50% = FAIL
 // pre-tag-gate.sh invocation to add `--cross-link-strict` at v1.49.595+ ship
 // (soak-then-harden pattern matching v1.49.591 depth-audit BLOCKER cutover).
 
+// NASA Research Track cards canonical 8-card grid (added v1.49.603 — closes
+// post-v602 operator-discovered drift class across degrees 1.76-1.81 where
+// Track 1a/1b/2/3/4/5/6/7 cards were missing or partial). Per gold-standard
+// v1.74 (Apollo 10): 8 unique cards (Track 1a Mission Narrative + Track 1b
+// Wall-Clock Papers + Track 2 Organism + Track 3 Mathematics + Track 4
+// Curriculum + Track 5 Simulation & Arts + Track 6 MUS cross-track + Track 7
+// ELC cross-track). Per #10244 ESTABLISHED counter-cadence pattern (3rd
+// instance = v585 self-mod-guard + v601 catalog-index + v603 track-cards).
+const NASA_TRACK_CARD_VARIANTS = [
+  /Track\s+1a\b/i,
+  /Track\s+1b\b/i,
+  /Track\s+2\b/i,
+  /Track\s+3\b/i,
+  /Track\s+4\b/i,
+  /Track\s+5\b/i,
+  /Track\s+6\b/i,
+  /Track\s+7\b/i,
+];
+const TRACK_CARDS_PASS_THRESHOLD = 8;   // 8/8 unique cards = PASS
+const TRACK_CARDS_WARN_THRESHOLD = 6;   // 6-7 = WARN; <6 = FAIL/BLOCKER
+
+// NASA bottom-of-content nav-card (added v1.49.603). Per gold standard v1.69
+// + v1.70 + v1.74: at least one occurrence of `nav-card` class (typically
+// rendered as a div with prev/index/next anchor links before the <footer>).
+// PASS at ≥1; FAIL at 0.
+const NAV_CARD_RE = /\bnav-card\b/g;
+const NAV_CARD_PASS_THRESHOLD = 1;
+
 function previousVersion(v) {
   // "1.70" → "1.69"; "1.69" → "1.68"
   const m = v.match(/^(\d+)\.(\d+)$/);
@@ -263,6 +291,70 @@ function inspectCrossLinks(track, version, artifactsInfo) {
   };
 }
 
+/**
+ * Inspect NASA Research Track cards (added v1.49.603 — closes #10244-pattern
+ * silent-drift class surfaced across degrees 1.76-1.81). Counts unique
+ * Track 1a/1b/2/3/4/5/6/7 occurrences in index.html.
+ *
+ * status: 'PASS' (8/8 unique cards) /
+ *         'WARN' (6-7 unique cards) /
+ *         'FAIL' (<6 unique cards)
+ *
+ * MUS + ELC: not enforced (their pages use numbered card-title h2s instead).
+ */
+function inspectTrackCards(track, version) {
+  if (track !== 'NASA') return null;
+  const indexPath = indexHtmlPath(track, version);
+  if (!existsSync(indexPath)) return null;
+  const text = readFileSync(indexPath, 'utf8');
+
+  const found = [];
+  const missing = [];
+  for (const re of NASA_TRACK_CARD_VARIANTS) {
+    if (re.test(text)) {
+      found.push(re.source.replace(/\\s\+/g, ' ').replace(/\\b/g, ''));
+    } else {
+      missing.push(re.source.replace(/\\s\+/g, ' ').replace(/\\b/g, ''));
+    }
+  }
+
+  const uniqueFound = found.length;
+  let status;
+  if (uniqueFound >= TRACK_CARDS_PASS_THRESHOLD) status = 'PASS';
+  else if (uniqueFound >= TRACK_CARDS_WARN_THRESHOLD) status = 'WARN';
+  else status = 'FAIL';
+
+  return {
+    found: uniqueFound,
+    expected: NASA_TRACK_CARD_VARIANTS.length,
+    foundCards: found,
+    missingCards: missing,
+    status,
+  };
+}
+
+/**
+ * Inspect NASA bottom-of-content nav-card (added v1.49.603 — closes the same
+ * silent-drift class as inspectTrackCards). Verifies ≥1 occurrence of
+ * `nav-card` class in index.html.
+ *
+ * status: 'PASS' (≥1) / 'FAIL' (0)
+ */
+function inspectNavCard(track, version) {
+  if (track !== 'NASA') return null;
+  const indexPath = indexHtmlPath(track, version);
+  if (!existsSync(indexPath)) return null;
+  const text = readFileSync(indexPath, 'utf8');
+
+  const matches = text.match(NAV_CARD_RE) || [];
+  const count = matches.length;
+
+  return {
+    count,
+    status: count >= NAV_CARD_PASS_THRESHOLD ? 'PASS' : 'FAIL',
+  };
+}
+
 function inspectFile(path, track) {
   if (!existsSync(path)) return null;
   const text = readFileSync(path, 'utf8');
@@ -363,9 +455,25 @@ function auditVersion(version, opts = {}) {
       ? 'WARN'
       : crossLinkRawStatus;
 
+    // NASA-only: inspect Research Track cards (8/8 unique) and bottom-of-content
+    // nav-card presence (v1.49.603+; closes post-v602 operator-discovered drift
+    // class across 1.76-1.81). Both gates BLOCKER mode at introduction since
+    // all 6 affected degrees were hot-fixed pre-v603 (no soak phase needed).
+    // SC_SKIP_TRACK_CARDS_GATE=1 environment variable downgrades FAIL → WARN
+    // for the rollup (emergency override; mirrors SC_SKIP_DEPTH_AUDIT pattern).
+    const trackCards = inspectTrackCards(track, version);
+    const navCard = inspectNavCard(track, version);
+    const trackCardsRawStatus = trackCards ? trackCards.status : 'PASS';
+    const navCardRawStatus = navCard ? navCard.status : 'PASS';
+    const skipTrackCardsGate = process.env.SC_SKIP_TRACK_CARDS_GATE === '1';
+    const trackCardsStatus = (skipTrackCardsGate && trackCardsRawStatus === 'FAIL')
+      ? 'WARN' : trackCardsRawStatus;
+    const navCardStatus = (skipTrackCardsGate && navCardRawStatus === 'FAIL')
+      ? 'WARN' : navCardRawStatus;
+
     // Roll up worst-case across all submetrics. MISSING (artifacts/ dir absent)
     // is treated as FAIL — the artifacts/ directory is mandatory for NASA tracks.
-    const allSignals = [status, sectionStatus, artifactStatus, crossLinkStatus];
+    const allSignals = [status, sectionStatus, artifactStatus, crossLinkStatus, trackCardsStatus, navCardStatus];
     const overallStatus =
       allSignals.some(s => s === 'FAIL' || s === 'MISSING') ? 'FAIL' :
       allSignals.includes('WARN') ? 'WARN' : 'PASS';
@@ -373,6 +481,8 @@ function auditVersion(version, opts = {}) {
     const baseMsg = `${(lineRatio * 100).toFixed(0)}% lines / ${(byteRatio * 100).toFixed(0)}% bytes / ${curr.sectionsFound}/${curr.sectionsExpected} ${track === 'NASA' ? 'canonical' : 'card-title'} sections`;
     const artifactMsg = artifacts ? ` / ${artifacts.totalFiles} artifacts ${artifacts.categoriesFound.length}/${artifacts.categoriesExpected} cat` : '';
     const crossLinkMsg = crossLinks ? ` / ${crossLinks.coveredOnDisk}/${crossLinks.totalOnDisk} linked` : '';
+    const trackCardsMsg = trackCards ? ` / ${trackCards.found}/${trackCards.expected} track-cards` : '';
+    const navCardMsg = navCard ? ` / ${navCard.count}× nav-card` : '';
     findings.push({
       track, file: currPath,
       status: overallStatus,
@@ -380,6 +490,8 @@ function auditVersion(version, opts = {}) {
       prev,
       artifacts,
       crossLinks,
+      trackCards,
+      navCard,
       ratios: {
         lines: lineRatio,
         bytes: byteRatio,
@@ -391,10 +503,15 @@ function auditVersion(version, opts = {}) {
         artifacts: artifactStatus,
         crossLinks: crossLinkStatus,
         crossLinksRaw: crossLinkRawStatus,
+        trackCards: trackCardsStatus,
+        trackCardsRaw: trackCardsRawStatus,
+        navCard: navCardStatus,
+        navCardRaw: navCardRawStatus,
       },
       compositePassActive: useComposite,
       crossLinkStrictActive: crossLinkStrict,
-      message: `${overallStatus}${useComposite ? ' (composite)' : ''}: ${baseMsg}${artifactMsg}${crossLinkMsg}`,
+      trackCardsGateSkipped: skipTrackCardsGate,
+      message: `${overallStatus}${useComposite ? ' (composite)' : ''}: ${baseMsg}${artifactMsg}${crossLinkMsg}${trackCardsMsg}${navCardMsg}`,
     });
   }
 
@@ -427,6 +544,21 @@ function formatReport(report) {
       } else if (f.crossLinks.missingPaths.length > 6) {
         lines.push(`     missing: ${f.crossLinks.missingPaths.slice(0, 5).join(', ')}, ... +${f.crossLinks.missingPaths.length - 5} more`);
       }
+    }
+    if (f.trackCards && f.trackCards.status !== 'PASS') {
+      const skipNote = f.trackCardsGateSkipped && f.submetrics && f.submetrics.trackCards !== f.submetrics.trackCardsRaw
+        ? ` (override: SC_SKIP_TRACK_CARDS_GATE=1; ${f.submetrics.trackCardsRaw} downgraded to ${f.submetrics.trackCards})`
+        : '';
+      lines.push(`     track-cards: ${f.trackCards.status} — ${f.trackCards.found}/${f.trackCards.expected} unique Track 1a/1b/2/3/4/5/6/7${skipNote}`);
+      if (f.trackCards.missingCards.length > 0) {
+        lines.push(`     missing tracks: ${f.trackCards.missingCards.join(', ')}`);
+      }
+    }
+    if (f.navCard && f.navCard.status !== 'PASS') {
+      const skipNote = f.trackCardsGateSkipped && f.submetrics && f.submetrics.navCard !== f.submetrics.navCardRaw
+        ? ` (override: SC_SKIP_TRACK_CARDS_GATE=1; ${f.submetrics.navCardRaw} downgraded to ${f.submetrics.navCard})`
+        : '';
+      lines.push(`     nav-card: ${f.navCard.status} — ${f.navCard.count} occurrence(s) of nav-card class (gold pattern: ≥1 bottom-of-content nav block)${skipNote}`);
     }
   }
   return lines.join('\n');
@@ -471,6 +603,7 @@ function main() {
     console.error('  version: NASA-degree form like "1.70" (not the npm "1.49.589" form)');
     console.error('  --composite-pass: when lines ≥ 95% AND sections meet threshold, relax bytes thresholds (per #10207)');
     console.error('  --cross-link-strict: cross-link FAIL contributes FAIL to overall status (default: soak-mode WARN; per #10222)');
+    console.error('  Env: SC_SKIP_TRACK_CARDS_GATE=1 — downgrades track-card-coverage + nav-card-presence FAIL → WARN (emergency override; per v1.49.603)');
     process.exit(3);
   }
 

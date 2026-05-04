@@ -53,6 +53,18 @@ function gold(track, version, lines = 600, bytes = 80000, sections = 14) {
     body += '<div class="card">card3</div>\n<div class="card">card4</div>\n';
     body += '<div class="card">card5</div>\n<div class="card">card6</div>\n';
     body += '<div class="card">card7</div>\n<div class="card">card8</div>\n';
+    // v1.49.603: NASA pages must include 8 Research Track cards (1a/1b/2/3/4/5/6/7)
+    // and ≥1 bottom-of-content nav-card. Both are PASS-required for the gate
+    // introduced in v1.49.603.
+    body += '<div class="track-card t1"><div class="track-num">Track 1a</div></div>\n';
+    body += '<div class="track-card t2"><div class="track-num">Track 1b</div></div>\n';
+    body += '<div class="track-card t3"><div class="track-num">Track 2</div></div>\n';
+    body += '<div class="track-card t4"><div class="track-num">Track 3</div></div>\n';
+    body += '<div class="track-card t5"><div class="track-num">Track 4</div></div>\n';
+    body += '<div class="track-card t6"><div class="track-num">Track 5</div></div>\n';
+    body += '<div class="track-card t7"><div class="track-num">Track 6 - MUS cross-track</div></div>\n';
+    body += '<div class="track-card t8"><div class="track-num">Track 7 - ELC cross-track</div></div>\n';
+    body += '<div class="nav-card"><a href="../prev/">prev</a><a href="../next/">next</a></div>\n';
   } else {
     // MUS + ELC use card-title h2 numbered sections
     for (let i = 1; i <= sections; i++) {
@@ -597,5 +609,209 @@ describe('W0 (v1.49.594): cross-link coverage submetric (#10222)', () => {
     const r = runAudit('1.69');
     expect(r.stdout).toMatch(/cross-links: FAIL/);
     expect(r.stdout).toMatch(/soft-mode: FAIL downgraded to WARN/);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// v1.49.603 — track-cards + nav-card drift gate (#10244-pattern, observation #3)
+// ---------------------------------------------------------------------------
+
+/**
+ * Build a NASA index.html with controllable Track-card + nav-card content
+ * for the v1.49.603 sub-checks. Default: include all 8 cards + nav-card
+ * (PASS). Pass `trackCardCount` to control how many of Track 1a/1b/2/3/4/5/6/7
+ * appear (the variants are always written in order; 6 means 1a+1b+2+3+4+5).
+ * Pass `navCard:false` to omit the nav-card class.
+ */
+function nasaWithCards(version, opts = {}) {
+  const trackCardCount = opts.trackCardCount !== undefined ? opts.trackCardCount : 8;
+  const navCard = opts.navCard !== false;
+  const dir = join(tmpRoot, 'www', 'tibsfox', 'com', 'Research', 'NASA', version);
+  mkdirSync(dir, { recursive: true });
+  const path = join(dir, 'index.html');
+  const variants = ['Track 1a', 'Track 1b', 'Track 2', 'Track 3', 'Track 4', 'Track 5', 'Track 6', 'Track 7'];
+  let body = `<html><head><title>NASA ${version}</title></head><body>\n`;
+  body += `<h1>NASA ${version}</h1>\n`;
+  body += '<h2>Three Parallel Threads</h2>\n<h2>Resonance Axes</h2>\n';
+  body += '<h2>Founding-Instance Narrative</h2>\n<h2>Forest Contribution</h2>\n';
+  body += '<h2>Governance & Chain Declarations</h2>\n<h2>Data Files</h2>\n<h2>Dedication</h2>\n';
+  for (let i = 0; i < 8; i++) body += '<div class="card">card</div>\n';
+  for (let i = 0; i < trackCardCount && i < variants.length; i++) {
+    body += `<div class="track-card t${i+1}"><div class="track-num">${variants[i]}</div></div>\n`;
+  }
+  if (navCard) body += '<div class="nav-card"><a href="../prev/">prev</a><a href="../next/">next</a></div>\n';
+  let curBody = body + '</body></html>\n';
+  while (curBody.split('\n').length < 600 || Buffer.byteLength(curBody) < 80000) {
+    curBody = curBody.replace('</body>', '<p>filler line of synthetic depth content</p>\n</body>');
+    if (curBody.split('\n').length > 900) break;
+  }
+  writeFileSync(path, curBody);
+  return path;
+}
+
+describe('v1.49.603: NASA Research Track cards + nav-card drift gate (#10244 obs #3)', () => {
+  it('PASS when 8/8 unique Track cards (1a/1b/2/3/4/5/6/7) and ≥1 nav-card', () => {
+    gold('NASA', '1.74', 600, 80000);
+    nasaWithCards('1.75', { trackCardCount: 8, navCard: true });
+    gold('MUS', '1.74', 600, 80000, 14);
+    gold('MUS', '1.75', 600, 80000, 14);
+    gold('ELC', '1.74', 600, 80000, 14);
+    gold('ELC', '1.75', 600, 80000, 14);
+    makeArtifacts('1.75', { story: 2, shaders: 2, audio: 4, sims: 2, circuits: 3 });
+    const r = runAudit('1.75', '--json');
+    const report = JSON.parse(r.stdout);
+    const nasa = report.findings.find(f => f.track === 'NASA');
+    expect(nasa.submetrics.trackCards).toBe('PASS');
+    expect(nasa.submetrics.navCard).toBe('PASS');
+    expect(nasa.trackCards.found).toBe(8);
+    expect(nasa.navCard.count).toBeGreaterThanOrEqual(1);
+  });
+
+  it('FAIL when 0 Track cards (drift fixture matching v1.77 pre-hot-fix)', () => {
+    gold('NASA', '1.74', 600, 80000);
+    nasaWithCards('1.75', { trackCardCount: 0, navCard: true });
+    gold('MUS', '1.74', 600, 80000, 14);
+    gold('MUS', '1.75', 600, 80000, 14);
+    gold('ELC', '1.74', 600, 80000, 14);
+    gold('ELC', '1.75', 600, 80000, 14);
+    makeArtifacts('1.75', { story: 2, shaders: 2, audio: 4, sims: 2, circuits: 3 });
+    const r = runAudit('1.75', '--json');
+    const report = JSON.parse(r.stdout);
+    const nasa = report.findings.find(f => f.track === 'NASA');
+    expect(nasa.submetrics.trackCards).toBe('FAIL');
+    expect(nasa.trackCards.found).toBe(0);
+    expect(nasa.status).toBe('FAIL');
+  });
+
+  it('FAIL when 4 Track cards (drift fixture matching v1.76 pre-hot-fix)', () => {
+    // 4 cards = below WARN threshold of 6 — FAIL/BLOCKER
+    gold('NASA', '1.74', 600, 80000);
+    nasaWithCards('1.75', { trackCardCount: 4, navCard: true });
+    gold('MUS', '1.74', 600, 80000, 14);
+    gold('MUS', '1.75', 600, 80000, 14);
+    gold('ELC', '1.74', 600, 80000, 14);
+    gold('ELC', '1.75', 600, 80000, 14);
+    makeArtifacts('1.75', { story: 2, shaders: 2, audio: 4, sims: 2, circuits: 3 });
+    const r = runAudit('1.75', '--json');
+    const report = JSON.parse(r.stdout);
+    const nasa = report.findings.find(f => f.track === 'NASA');
+    expect(nasa.submetrics.trackCards).toBe('FAIL');
+    expect(nasa.trackCards.found).toBe(4);
+  });
+
+  it('WARN when 6 Track cards (boundary; matches v1.78 pre-hot-fix at 6 of 8)', () => {
+    gold('NASA', '1.74', 600, 80000);
+    nasaWithCards('1.75', { trackCardCount: 6, navCard: true });
+    gold('MUS', '1.74', 600, 80000, 14);
+    gold('MUS', '1.75', 600, 80000, 14);
+    gold('ELC', '1.74', 600, 80000, 14);
+    gold('ELC', '1.75', 600, 80000, 14);
+    makeArtifacts('1.75', { story: 2, shaders: 2, audio: 4, sims: 2, circuits: 3 });
+    const r = runAudit('1.75', '--json');
+    const report = JSON.parse(r.stdout);
+    const nasa = report.findings.find(f => f.track === 'NASA');
+    expect(nasa.submetrics.trackCards).toBe('WARN');
+    expect(nasa.trackCards.found).toBe(6);
+  });
+
+  it('WARN when 7 Track cards (boundary upper)', () => {
+    gold('NASA', '1.74', 600, 80000);
+    nasaWithCards('1.75', { trackCardCount: 7, navCard: true });
+    gold('MUS', '1.74', 600, 80000, 14);
+    gold('MUS', '1.75', 600, 80000, 14);
+    gold('ELC', '1.74', 600, 80000, 14);
+    gold('ELC', '1.75', 600, 80000, 14);
+    makeArtifacts('1.75', { story: 2, shaders: 2, audio: 4, sims: 2, circuits: 3 });
+    const r = runAudit('1.75', '--json');
+    const report = JSON.parse(r.stdout);
+    const nasa = report.findings.find(f => f.track === 'NASA');
+    expect(nasa.submetrics.trackCards).toBe('WARN');
+    expect(nasa.trackCards.found).toBe(7);
+  });
+
+  it('FAIL when nav-card absent (gold cards present, but no nav-card class)', () => {
+    gold('NASA', '1.74', 600, 80000);
+    nasaWithCards('1.75', { trackCardCount: 8, navCard: false });
+    gold('MUS', '1.74', 600, 80000, 14);
+    gold('MUS', '1.75', 600, 80000, 14);
+    gold('ELC', '1.74', 600, 80000, 14);
+    gold('ELC', '1.75', 600, 80000, 14);
+    makeArtifacts('1.75', { story: 2, shaders: 2, audio: 4, sims: 2, circuits: 3 });
+    const r = runAudit('1.75', '--json');
+    const report = JSON.parse(r.stdout);
+    const nasa = report.findings.find(f => f.track === 'NASA');
+    expect(nasa.submetrics.trackCards).toBe('PASS');
+    expect(nasa.submetrics.navCard).toBe('FAIL');
+    expect(nasa.navCard.count).toBe(0);
+    expect(nasa.status).toBe('FAIL');
+  });
+
+  it('SC_SKIP_TRACK_CARDS_GATE=1 downgrades FAIL → WARN (emergency override)', () => {
+    gold('NASA', '1.74', 600, 80000);
+    nasaWithCards('1.75', { trackCardCount: 0, navCard: false });
+    gold('MUS', '1.74', 600, 80000, 14);
+    gold('MUS', '1.75', 600, 80000, 14);
+    gold('ELC', '1.74', 600, 80000, 14);
+    gold('ELC', '1.75', 600, 80000, 14);
+    makeArtifacts('1.75', { story: 2, shaders: 2, audio: 4, sims: 2, circuits: 3 });
+    const stdout = execSync(`node ${SCRIPT_PATH} 1.75 --json --root ${tmpRoot}`, {
+      cwd: tmpRoot, encoding: 'utf8',
+      env: { ...process.env, SC_SKIP_TRACK_CARDS_GATE: '1' },
+    });
+    const report = JSON.parse(stdout);
+    const nasa = report.findings.find(f => f.track === 'NASA');
+    // Raw status is FAIL but the override downgrades to WARN
+    expect(nasa.submetrics.trackCardsRaw).toBe('FAIL');
+    expect(nasa.submetrics.trackCards).toBe('WARN');
+    expect(nasa.submetrics.navCardRaw).toBe('FAIL');
+    expect(nasa.submetrics.navCard).toBe('WARN');
+    expect(nasa.trackCardsGateSkipped).toBe(true);
+  });
+
+  it('--strict exits 1 when track-cards FAIL', () => {
+    gold('NASA', '1.74', 600, 80000);
+    nasaWithCards('1.75', { trackCardCount: 0, navCard: true });
+    gold('MUS', '1.74', 600, 80000, 14);
+    gold('MUS', '1.75', 600, 80000, 14);
+    gold('ELC', '1.74', 600, 80000, 14);
+    gold('ELC', '1.75', 600, 80000, 14);
+    makeArtifacts('1.75', { story: 2, shaders: 2, audio: 4, sims: 2, circuits: 3 });
+    const r = runAudit('1.75', '--strict');
+    expect(r.code).toBe(1);
+  });
+
+  it('human format reports track-card and nav-card gaps', () => {
+    gold('NASA', '1.74', 600, 80000);
+    nasaWithCards('1.75', { trackCardCount: 0, navCard: false });
+    gold('MUS', '1.74', 600, 80000, 14);
+    gold('MUS', '1.75', 600, 80000, 14);
+    gold('ELC', '1.74', 600, 80000, 14);
+    gold('ELC', '1.75', 600, 80000, 14);
+    makeArtifacts('1.75', { story: 2, shaders: 2, audio: 4, sims: 2, circuits: 3 });
+    const r = runAudit('1.75');
+    expect(r.stdout).toMatch(/track-cards: FAIL/);
+    expect(r.stdout).toMatch(/nav-card: FAIL/);
+    expect(r.stdout).toMatch(/missing tracks:/);
+  });
+
+  it('MUS + ELC do not enforce track-card or nav-card check (NASA-only)', () => {
+    // Build MUS + ELC index without any track cards or nav-card; should still PASS
+    gold('NASA', '1.74', 600, 80000);
+    nasaWithCards('1.75', { trackCardCount: 8, navCard: true });
+    gold('MUS', '1.74', 600, 80000, 14);
+    gold('MUS', '1.75', 600, 80000, 14);
+    gold('ELC', '1.74', 600, 80000, 14);
+    gold('ELC', '1.75', 600, 80000, 14);
+    makeArtifacts('1.75', { story: 2, shaders: 2, audio: 4, sims: 2, circuits: 3 });
+    const r = runAudit('1.75', '--json');
+    const report = JSON.parse(r.stdout);
+    const mus = report.findings.find(f => f.track === 'MUS');
+    const elc = report.findings.find(f => f.track === 'ELC');
+    expect(mus.trackCards).toBeNull();
+    expect(mus.navCard).toBeNull();
+    expect(elc.trackCards).toBeNull();
+    expect(elc.navCard).toBeNull();
+    expect(mus.status).toBe('PASS');
+    expect(elc.status).toBe('PASS');
   });
 });
