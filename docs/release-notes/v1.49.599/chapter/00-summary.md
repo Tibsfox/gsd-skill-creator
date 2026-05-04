@@ -1,6 +1,6 @@
 # v1.49.599 — Summary
 
-## Structural firsts at v1.79
+## Structural firsts at v1.49.599 close
 
 1. **First FAILED-mission canonical-pattern second-instance** in the gsd-skill-creator catalog. Surveyor 4 (v1.49.553) was the FAILED-mission canonical-scope precedent; Mariner 8 (v1.49.599) is the second instance. Pattern soaks toward ESTABLISHED at v600+ third instance (candidate: future Phobos 1, Mars Observer, or Beresheet build).
 
