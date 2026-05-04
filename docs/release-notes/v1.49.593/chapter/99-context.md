@@ -1,5 +1,81 @@
 # v1.49.593 Engine-State Context
 
+## Engine state full enumeration at v1.49.593 close
+
+| Surface | v1.49.592 close | **v1.49.593 close** | Change v592→v593 |
+|---|---|---|---|
+| NASA degree | 1.73 (Apollo 9 / first crewed LM Earth-orbit shakedown) | **1.74 (Apollo 10 / lunar-orbit dress rehearsal)** | **+0.01** |
+| MUS degree | 1.73 (Crosby, Stills & Nash debut) | **1.74 (The Who *Tommy*)** | **+0.01** |
+| ELC degree | 1.73 (LM Abort Guidance System) | **1.74 (LM Rendezvous Radar / RCA Western Electric)** | **+0.01** |
+| SPS series | #70 (Clark's Nutcracker) | **#71 (Steller's Jay)** | **+1** |
+| §6.6 register | 15 exemplars | **16 exemplars** (DRC originates) | **+1** |
+| MUS Domain register | Domain 10 (Supergroup) at 1-ex | **Domain 11 (Rock Opera) 1-ex origination** | **+1 Domain** |
+| TRS substrate | M0 Wave 1e COMPLETE (master.json 305) | **M0 Wave 2a synthesis COMPLETE** (~44,100 words / 91 claims / 192 records cited / 26 gaps documented) | +1 wave |
+| Three-track-plus-TRS cadence | 6 instances | **7 instances** | **+1 instance** |
+| CHAIN-CONVENTIONS | v1.4 (fourteenth full use) | v1.4 (fifteenth full use; no bump) | unchanged |
+| Pre-tag-gate | 6/6 PASS (depth-audit BLOCKER active) | 6/6 PASS | unchanged |
+| W2-prompt discipline | MANDATORY + 7 canonical regexes | MANDATORY + 7 canonical regexes + artifact-suite enumeration (template 111→154 lines) | hardened |
+| Depth-audit verdict | NASA PASS / MUS WARN / ELC WARN | **NASA PASS / MUS PASS / ELC WARN-bytes-only** (composite-pass clears all 3 to PASS) | improved |
+| Artifacts at NASA degree | 4 files (v1.73 pre-remediation) | **13 files / 5/5 categories** (matches v1.69 + v1.70 gold standard) | +9 files |
+| vitest test count | ~28,773 | ~28,792 (+19 new composite-pass tests) | +19 |
+
+## §6.6 register full enumeration at v1.49.593 close (16 exemplars)
+
+| # | Thread | Status | Founding instance | Notes |
+|---|---|---|---|---|
+| 1-13 | (existing pre-v1.71 threads) | various | (per pre-v1.71 history) | (per pre-v1.71 history) |
+| 14 | ALL-UP COMMITMENT (AUC) | 2-ex reproducibly-stable | Apollo 4 (v1.64 uncrewed) + Apollo 8 (v1.72 crewed) | Watchlist 3-ex: STS-1 / Crew Dragon Demo-2 |
+| 15 | POST-FIRE-PROGRAM-RECOVERY (PFPR) | 1-ex | Apollo 7 (v1.71) | Watchlist 2-ex: STS-26 (1988) |
+| **16** | **DRESS-REHEARSAL-BEFORE-COMMITMENT (DRC)** | **1-ex origination at v1.74** | **Apollo 10 (v1.74; LM-4 Snoopy 14.4 km perilune + hardware-enforced stop-short)** | **Watchlist 2-ex: STS-1 Columbia OFT (1981-04-12)** |
+| — | UPV (predictive-value) | 2-ex carry; outcome-validated 3rd-instance at v1.74 | Apollo 5 + Apollo 6 (validated by Apollo 10 LM systems success) | reproducibly-stable maintained |
+
+**Net §6.6 register state: 16 active threads at v1.49.593 close (advance from 15 at v1.49.592). MUS Domain 11 originates as Domain-register entry (NOT separate §6.6 thread per Domain-vs-Thread G0 G2 lock distinction).**
+
+## Cross-track structural pair anchor inventory (NASA + MUS + ELC + SPS at v1.74)
+
+| Substrate | Manifestation | Connection point |
+|---|---|---|
+| NASA 1.74 | Apollo 10 LM Snoopy 14.4 km perilune + hardware-enforced stop-short; complete crewed Apollo stack flown in lunar-orbit operational regime; ALL operational subsystems exercised | **Crewed full-stack stop-short** — DRC §6.6 thread 1-ex origination |
+| MUS 1.74 | The Who *Tommy* (Track Records UK 1969-05-23 / Decca US 1969-05-19; producer Pete Townshend; IBC Studios London) — first complete rock-opera narrative arc (deaf-dumb-blind boy → pinball wizard → false messiah → enlightenment); deliberate stop-short of triumphant resolution (final track is rejection, not ascendance) | **Cross-track structural pair on dress-rehearsal-before-commitment narrative axis** — every operatic subsystem exercised; deliberate stop-short |
+| ELC 1.74 | LM Rendezvous Radar (RCA / Western Electric) first crewed lunar-orbit use; max separation reached ~628 km; closes Apollo 9 RR (185 km) → Apollo 10 RR (~628 km) two-instance arc; clears Apollo 11 to use Eagle RR + LR for surface descent | **First crewed Ku/X-band-RR-in-lunar-regime architecture** — independent backup to PGNCS state-vector |
+| SPS #71 | Steller's Jay (*Cyanocitta stelleri*) — PNW resident corvid; documented mimicry of red-tailed hawks and other species; site-fidelity behavior across seasons | **Mimicry-without-commitment parallel to Apollo 10 mimicking Apollo 11 mission profile without committing to land** |
+
+**Cross-track structural-pair finding:** the structural primitive is **dress-rehearsal-before-commitment** — a complete configuration flown in its operational regime, every subsystem exercised, deliberately stopping short of irreversible commitment so that next-instance commitment can be made on validated architecture. This is parallel to but distinct from ALL-UP COMMITMENT (Apollo 4/8 first-flight commitment) and UPV (Apollo 5/6 uncrewed precursor validation). DRC is **crewed full-stack stop-short** — neither uncrewed nor commitment.
+
+## Build path: Tier 1 Sonnet sub-agent dispatch (NASA 1.74) with 1 mid-build 401 recovery
+
+**Build path:** W2-build-agent template Tier 1 Sonnet sub-agent dispatch path; canonical 7-section regex enforcement (v1.49.592 T2.1) + artifact-suite enumeration (v1.49.593 T2.2) both active.
+
+**Why Tier 1 was used:** Sonnet sub-agent dispatch tool capability available; W2-prompt MANDATORY discipline carried forward from v1.49.591 T2.3 with template grown 111→154 lines at this milestone.
+
+**Mid-build 401 recovery:** W2-NASA Sonnet sub-agent died at ~8 min wall-clock with auth failure; partial output salvageable. Continuation agent dispatched preserving existing files; total W2-NASA wall-clock 31 min (8 + 23). Closes Lesson #10215 candidate.
+
+**v593 actual depth-audit results:**
+
+| Track | Status | Lines | Bytes | Comments |
+|---|---|---|---|---|
+| NASA 1.74 (vs NASA 1.73) | PASS | — | — | 7/7 canonical sections + 13 artifacts / 5/5 categories WITHOUT inline-recovery cycles |
+| MUS 1.74 (vs MUS 1.73) | PASS | — | — | improvement over v1.49.592 sibling WARN |
+| ELC 1.74 (vs ELC 1.73) | WARN | — | 91% | bytes-only WARN; CSS-difference cause not content thinness; composite-pass clears to PASS |
+
+**Forward-action result:** the W2-prompt T2.2 artifact-suite enumeration fix preempted ~30 min of post-ship artifact-suite remediation that would otherwise be needed at v1.49.594+. Lessons #10208 + #10213 + #10215 emitted.
+
+## Cross-mission Apollo references (v1.71–v1.75)
+
+| Version | Mission | NASA degree | §6.6 contribution |
+|---|---|---|---|
+| v1.49.591 | Apollo 8 | 1.72 | first crewed translunar; AUC 2-ex reproducibly-stable |
+| v1.49.592 | Apollo 9 | 1.73 | first crewed LM stack; UPV 2nd-instance outcome-validation |
+| **v1.49.593** | **Apollo 10** | **1.74** | **lunar-orbit dress rehearsal; DRC §6.6 origination + Domain 11 (Rock Opera) origination + UPV 3rd-instance outcome-validation + ELC sub-thread RR closure** |
+| v1.49.594 (planned) | Apollo 11 | 1.75 | first crewed lunar landing (FCSC origination + AUC 3-ex reproducibly-stable upgrade) |
+| v1.49.595 (planned) | Apollo 12 | 1.76 | second crewed lunar landing (PINPOINT-LANDING + PROCEDURAL-RECOVERY originations) |
+
+## Forward lessons emitted
+
+#10213 #10214 #10215 #10216 #10217 (plus carry-forward applied: #10208 #10209 #10210)
+
+(See `chapter/04-lessons.md` for full lesson definitions and 3-criterion rubrics.)
+
 ## Repository state at close
 
 | Surface | Value |
