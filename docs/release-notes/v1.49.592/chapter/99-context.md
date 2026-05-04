@@ -1,5 +1,76 @@
 # v1.49.592 Engine-State Context
 
+## Engine state full enumeration at v1.49.592 close
+
+| Surface | v1.49.591 close | **v1.49.592 close** | Change v591→v592 |
+|---|---|---|---|
+| NASA degree | 1.72 (Apollo 8 / first crewed translunar) | **1.73 (Apollo 9 / first crewed LM Earth-orbit shakedown)** | **+0.01** |
+| MUS degree | 1.72 (The Beatles *White Album*) | **1.73 (Crosby, Stills & Nash debut)** | **+0.01** |
+| ELC degree | 1.72 (Saturn V S-IVB J-2 restart sequencer) | **1.73 (LM Abort Guidance System / TRW MARCO 4418)** | **+0.01** |
+| SPS series | #69 (Common Raven) | **#70 (Clark's Nutcracker)** | **+1** |
+| §6.6 register | 15 exemplars | **15 exemplars** (unchanged; Domain 10 + Domain 16 originate but no §6.6 thread admits) | **0** |
+| MUS Domain register | Domain 9 (Extended Form) at 2-ex | **Domain 10 (Supergroup / Cross-Pollination Debut) 1-ex origination** | **+1 Domain** |
+| ELC Domain register | Domain 15 (Engine Restart) at 1-ex | **Domain 16 (Strapdown INS / Backup Digital Guidance) 1-ex origination** | **+1 Domain** |
+| TRS substrate | M0 Wave 1d COMPLETE (master.json 260) | **M0 Wave 1e COMPLETE (master.json 305)** | **+45 records / 6 packs** |
+| Three-track-plus-TRS cadence | 5 instances (established) | **6 instances** | **+1 instance** |
+| CHAIN-CONVENTIONS | v1.4 (thirteenth full use) | v1.4 (fourteenth full use; no bump) | unchanged |
+| Pre-tag-gate | 6/6 PASS (depth-audit BLOCKER active) | 6/6 PASS | unchanged |
+| W2-prompt discipline | MANDATORY (per v1.49.591 T2.3) | MANDATORY + 7 canonical regexes (per v1.49.592 T2.1) | hardened |
+| vitest test count | ~28,767 | ~28,773 (+6 new ftp-sync tests) | +6 |
+
+## §6.6 register full enumeration at v1.49.592 close (15 exemplars)
+
+| # | Thread | Status | Founding instance | Notes |
+|---|---|---|---|---|
+| 1-13 | (existing pre-v1.71 threads) | various | (per pre-v1.71 history) | (per pre-v1.71 history) |
+| 14 | ALL-UP COMMITMENT (AUC) | 2-ex reproducibly-stable | Apollo 4 (v1.64 uncrewed) + Apollo 8 (v1.72 crewed) | Watchlist 3-ex: STS-1 / Crew Dragon Demo-2 |
+| 15 | POST-FIRE-PROGRAM-RECOVERY (PFPR) | 1-ex | Apollo 7 (v1.71) | Watchlist 2-ex: STS-26 (1988) |
+| — | UPV (predictive-value) | 2-ex carry; outcome-validated 2nd-instance at v1.73 | Apollo 5 + Apollo 6 (validated by Apollo 9 LM-1 abort path success) | reproducibly-stable maintained |
+
+**Net §6.6 register state: 15 active threads at v1.49.592 close (held flat from v1.49.591). MUS Domain 10 + ELC Domain 16 originate as Domain-register entries (NOT separate §6.6 threads per Domain-vs-Thread G0 G2 lock distinction).**
+
+## Cross-track structural pair anchor inventory (NASA + MUS + ELC + SPS at v1.73)
+
+| Substrate | Manifestation | Connection point |
+|---|---|---|
+| NASA 1.73 | Apollo 9 first crewed LM stack: McDivitt + Scott + Schweickart fly LM-3 "Spider" independent of CSM-104 "Gumdrop" for ~6.5 hours; Day 5 active rendezvous | **First complete crewed Apollo stack flown together** — three-veteran-crew configuration |
+| MUS 1.73 | Crosby, Stills & Nash debut (Atlantic SD-8229; 1969-05-29; Wally Heider Studios; producer Bill Halverson) — three solo veterans (ex-Byrds + ex-Buffalo Springfield + ex-Hollies) form new collective | **First complete supergroup configuration** — three-veteran-musician configuration |
+| ELC 1.73 | LM Abort Guidance System (TRW MARCO 4418; entirely digital 18-bit; 4096-word magnetic-core; first strapdown IMU in crewed spaceflight) — independent backup-navigation pathway separate from PGNCS gimbaled-IMU primary | **First strapdown-IMU + backup-digital-guidance complete architecture** — independent-pathway configuration |
+| SPS #70 | Clark's Nutcracker (*Nucifraga columbiana*, Wilson 1811 from Lewis & Clark specimens) — corvid with documented spatial-memory cache-recovery across thousands of cache sites over months | **Spatial-navigation parallel to Spider 115-mile rendezvous** — cache-recovery analogous to AGS state-vector return-to-CSM |
+
+**Cross-track structural-pair finding:** the structural primitive is **independent-architecture-debut** — a complete configuration that can stand alone. CSN doesn't need any prior band; Apollo 9 LM doesn't need PGNCS for AGS abort path; CSN+Apollo+AGS each demonstrate their own complete configuration. This is parallel to but distinct from ALL-UP COMMITMENT (Apollo 4/8) — here the configuration is novel-as-an-integrated-whole, not first-flight-of-an-integrated-whole.
+
+## Build path: Tier 1 Sonnet sub-agent dispatch (NASA 1.73)
+
+**Build path:** W2-build-agent template Tier 1 Sonnet sub-agent dispatch path; canonical 7-section regex enforcement landed via T2.1 fix at this milestone (closes #10203 candidate from v1.49.591).
+
+**Why Tier 1 was used:** Sonnet sub-agent dispatch tool capability available; W2-prompt MANDATORY discipline (per v1.49.591 T2.3) extended at this milestone with 7-canonical-regex enumeration (T2.1).
+
+**v592 actual depth-audit results:**
+
+| Track | Status | Lines | Bytes | Comments |
+|---|---|---|---|---|
+| NASA 1.73 (vs NASA 1.72) | PASS | 96% | 98% | 7/7 canonical sections WITHOUT inline-recovery cycles (vs v1.49.591 which needed 4 inline-recovery edits) |
+| MUS 1.73 (vs MUS 1.72) | WARN | 97% | 84% | 13/10 sections; legitimate brevity (CSN debut 12 tracks vs White Album 30 tracks) |
+| ELC 1.73 (vs ELC 1.72) | WARN | 86% | 101% | 16/10 sections; legitimate density (digital-computer narrative more bullet-pointed than J-2 mechanical narrative) |
+
+**Forward-action result:** the W2-prompt T2.1 regex propagation fix preempted its own future-incidents — the 4-Edit inline-recovery cycle from v1.49.591 vanished entirely at v1.49.592. Lesson #10208 emitted.
+
+## Cross-mission Apollo references (v1.71–v1.74)
+
+| Version | Mission | NASA degree | §6.6 contribution |
+|---|---|---|---|
+| v1.49.591 | Apollo 8 | 1.72 | first crewed translunar; AUC 2-ex reproducibly-stable |
+| **v1.49.592** | **Apollo 9** | **1.73** | **first crewed LM stack; Domain 10 + Domain 16 origination; UPV 2nd-instance outcome-validation** |
+| v1.49.593 (planned) | Apollo 10 | 1.74 | lunar-orbit dress rehearsal; LM crewed in lunar SOI |
+| v1.49.594 (planned) | Apollo 11 | 1.75 | first crewed lunar landing (FCSC origination) |
+
+## Forward lessons emitted
+
+#10207 #10208 #10209 #10210
+
+(See `chapter/04-lessons.md` for full lesson definitions and 3-criterion rubrics; carry-forward candidates #10211 + #10212 held for v1.49.593+ emission.)
+
 ## Repository state at close
 
 | Surface | Value |
