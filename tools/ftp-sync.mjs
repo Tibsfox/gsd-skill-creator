@@ -37,6 +37,9 @@
  *   2  invalid arguments OR .env missing required keys
  *   3  local source dir(s) missing for the requested version
  *   4  PUT succeeded but verification probe found 404s (drift detection)
+ *   5  catalog-index drift detected (only raised when --include-catalog-index
+ *      is set and update-catalog-indexes.mjs --check exits non-zero; added
+ *      v1.49.601 as a precondition guard before uploading stale catalogs)
  *
  * Verification probe (added v1.49.590 post-ship; closes Lesson #10203 candidate):
  * After uploads complete, the tool issues HTTPS HEAD requests to a sample of
@@ -53,6 +56,7 @@
 import { readFileSync, existsSync, statSync, readdirSync } from 'node:fs';
 import { join, dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { spawnSync } from 'node:child_process';
 import { Client } from 'basic-ftp';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -317,6 +321,38 @@ async function main() {
   if (manifest.missingTracks.length === TRACKS.length) {
     console.error(`No source dirs for v${version}: missing ${manifest.missingTracks.join(', ')}`);
     process.exit(3);
+  }
+
+  // Catalog-index precondition (added v1.49.601): when --include-catalog-index
+  // is set, verify catalog indexes are in sync with on-disk degree dirs before
+  // uploading. A stale catalog index uploaded to tibsfox.com would replace the
+  // live catalog with a regressed version, silently hiding new degrees.
+  // Exit code 5 = catalog-index drift (new for ftp-sync; distinct from the
+  // pre-tag-gate exit-8 allocation which scopes differently).
+  if (includeCatalogIndex && !dryRun) {
+    const checkTool = join(REPO_ROOT, 'tools', 'update-catalog-indexes.mjs');
+    if (existsSync(checkTool)) {
+      if (!json) {
+        console.log('[ftp-sync] precondition: checking catalog-index drift before upload...');
+      }
+      const result = spawnSync(process.execPath, [checkTool, '--check'], {
+        encoding: 'utf8',
+        stdio: 'pipe',
+      });
+      if (result.status !== 0) {
+        console.error('[ftp-sync] ABORT: catalog-index drift detected.');
+        console.error('[ftp-sync]   Uploading a stale catalog would regress the live site.');
+        console.error('[ftp-sync]   Run: node tools/update-catalog-indexes.mjs --check');
+        console.error('[ftp-sync]   NASA fix:  node tools/update-catalog-indexes.mjs --write');
+        console.error('[ftp-sync]   MUS/ELC:   author missing degree-card divs manually');
+        console.error('[ftp-sync]   Re-run ftp-sync after fixing drift.');
+        if (result.stderr) console.error(result.stderr.trim());
+        process.exit(5);
+      }
+      if (!json) {
+        console.log('[ftp-sync] precondition: catalog-index PASS — proceeding with upload');
+      }
+    }
   }
 
   if (!json) {
