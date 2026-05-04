@@ -1,12 +1,111 @@
 # Release Notes Template
 
 Copy this file to `docs/release-notes/v<VERSION>/README.md` and fill it in.
-Modeled on **v1.49.165** — the canonical gold standard. When in doubt, read
-[`v1.49.165/README.md`](v1.49.165/README.md) and match its depth.
 
-A completeness scorer (`tools/release-history/score-completeness.mjs`) grades
-each README against this template. Scores appear in `docs/RELEASE-HISTORY.md`
-so drift shows up in plain sight.
+**Two equally-canonical authoring shapes are recognized by the scorer:**
+
+1. **Inline-everything README** (pre-v1.49.585 canonical) — single README.md
+   with all required sections inline. Modeled on **v1.49.165** + **v1.49.580/581/582**
+   (all A 100). Best when the milestone is a single coherent release without
+   need for extended chapter-level deep-dives.
+
+2. **5-file chapter-first structure** (v1.49.585+ canonical) — README.md as
+   gateway/index + `chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md`
+   for depth content. Mandated by `tools/release-history/check-completeness.mjs --strict`
+   for v1.49.585+ milestones (5 files × ≥200 bytes hard floor). Modeled on
+   **v1.49.587/591** (highest-scoring 5-file releases). Best when retrospective
+   + lessons + context warrant separate hand-authored documents.
+
+The scorer (`tools/release-history/score-completeness.mjs`) recognizes both
+shapes. The corpus builder (`buildReleaseCorpus()`) concatenates README + all
+chapter/*.md files with heading-demote-by-one, so chapter content counts toward
+all dimensions. Section-name regexes accept both inline ("Part A", "Cross-References",
+"Infrastructure") and chapter-first ("Cross-track structural pair anchor inventory",
+"Tier N inline-Opus build-path provenance", "Cadence", formal-ID `#10NNN`
+cross-refs) equivalents.
+
+For chapter-first authoring (v1.49.585+), see **§ 5-File Chapter-First Structure**
+below for the per-file content map.
+
+When in doubt, read [`v1.49.165/README.md`](v1.49.165/README.md) for inline-format
+gold standard, or [`v1.49.587/`](v1.49.587/) for 5-file chapter-first gold standard.
+
+Scores appear in `docs/RELEASE-HISTORY.md` so drift shows up in plain sight.
+
+---
+
+## 5-File Chapter-First Structure (v1.49.585+)
+
+When using the chaptered authoring shape, distribute content across the 5
+required files this way. Each file's recommended scorer-recognized headings
+are listed; pick those that apply to your milestone.
+
+### `README.md` — Gateway / Index
+
+Lean, ~50-200 lines. Holds:
+- **Header metadata block** (same fields as inline format — see § Header below)
+- `## Summary` — 1-3 paragraph high-level prose with **bolded findings**
+- `## Cross-track / Engine state` OR `## What shipped` — pipe-table summary of
+  this milestone's deliverables (NASA / MUS / ELC / SPS engine advances or
+  feature-milestone summary). Counts toward `key_features_table` dimension.
+- `## See also` OR `## Cadence` — pointers to chapter files + adjacent milestones.
+  Counts toward `infrastructure_block` and `cross_references`.
+
+### `chapter/00-summary.md` — Structural firsts + cross-track weave
+
+Holds the depth content for `summary_findings` + `key_features_table` +
+`part_a_depth` dimensions. Recommended sections:
+- `## Structural firsts at v<VERSION> close` — bolded findings of what's
+  novel this milestone (5+ findings → max `summary_findings` 15)
+- `## Engine state at v<VERSION> close` — pipe-table of NASA/MUS/ELC/SPS
+  state. Counts toward `key_features_table`.
+- `## Cross-track <pair-name> weave (N anchor points)` — bolded sub-themes
+  for the cross-track substrate-coherence finding. Counts toward `part_a_depth`
+  + `part_b_depth`.
+
+### `chapter/03-retrospective.md` — Retrospective
+
+Holds the depth content for `retrospective_structure` dimension (15 pts).
+Required sections:
+- `## Carryover lessons applied this milestone` (or `## What Worked` for
+  inline-style)
+- `## New observations` OR `## Trust-budget notes` OR `## Process observation`
+  (or `## What Could Be Better` for inline-style)
+
+The scorer accepts version-prefixed H1 (`# v<VERSION> — Retrospective`) AND
+canonical (`# Retrospective — v<VERSION>`) — both demote to `## Retrospective`
+under the corpus builder.
+
+### `chapter/04-lessons.md` — Forward lessons emitted
+
+Holds `lessons_learned` dimension (10 pts). Required structure:
+- H1: `# v<VERSION> — Forward Lessons Emitted` OR `# Lessons — v<VERSION>`
+- H2/H3 sections per formal-ID lesson: `## #10NNN — Title` with
+  promotion criteria + cross-references. The scorer counts numbered lessons
+  AND bulleted sub-themes; 8+ → max score.
+
+Cross-references between lessons (`#10NNN` formal IDs) accumulate toward
+the `cross_references` dimension via the corpus-wide formal-ID counter.
+
+### `chapter/99-context.md` — Engine state + ledger + provenance
+
+Holds `running_ledgers` + `infrastructure_block` + `part_a_depth`/`part_b_depth`
+fallback dimensions. Recommended sections:
+- `## Engine state full enumeration at v<VERSION> close` — full pipe-table
+  enumerating NASA/MUS/ELC/SPS state. Counts toward `running_ledgers`.
+- `## §6.6 register full enumeration at v<VERSION> close` — full enumeration
+  of all active §6.6 register threads. Counts toward `running_ledgers` +
+  `part_a_depth`.
+- `## Cross-track structural pair anchor inventory` — bolded sub-themes for
+  the cross-track substrate weave. Counts toward `part_b_depth` + `running_ledgers`.
+- `## Tier <N> inline-Opus build-path provenance` OR `## Build path: Tier <N>`
+  — provenance of the build path used for this milestone. Counts toward
+  `infrastructure_block`.
+- `## Cadence` — release cadence notes (counter-cadence vs forward-cadence,
+  carry-forward queue size, soak observation count). Counts toward
+  `infrastructure_block`.
+- `## Pipeline closure` — final dev/main SHA, RH refresh disposition, ship-sync
+  invariants verified. Counts toward `infrastructure_block`.
 
 ---
 

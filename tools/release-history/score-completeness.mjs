@@ -87,47 +87,103 @@ function scoreHeaderBlock(text) {
 
 // Summary section with bolded findings — **SOMETHING** at line start.
 // Accepts h2-h4 to support corpus-builder's chapter-demoted `### Summary`.
+// v585+ chapter-first structure also has chapter/00-summary.md sections like
+// `## Structural firsts at v1.49.NNN close` + `## Engine state at v1.49.NNN
+// close` + `## Cross-track ... weave` — recognize those as Summary-class.
 function scoreSummaryFindings(text) {
-  const summary = extractSection(text, /^#{2,4}\s+Summary\b/mi);
-  if (!summary) return 0;
-  // Count bolded lead-ins: lines starting with **PHRASE.** or **PHRASE:**
-  const findings = [...summary.matchAll(/^\s*\*\*[^*\n]{3,100}(?:\.|:)\*\*/gm)].length;
-  if (findings >= 5) return 15;
-  if (findings >= 3) return 10;
-  if (findings >= 1) return 5;
-  // Fallback: any bold anywhere in summary counts partially
-  const anyBold = (summary.match(/\*\*[^*\n]+\*\*/g) || []).length;
-  return anyBold >= 3 ? 3 : 0;
+  // Try multiple Summary-class headings; take best score across all.
+  const summaryHeadings = [
+    /^#{2,4}\s+Summary\b/mi,
+    /^#{2,4}\s+Structural firsts/mi,
+    /^#{2,4}\s+Engine state at v[\d.]+/mi,
+    /^#{2,4}\s+Cross-track .* weave/mi,
+  ];
+  let bestScore = 0;
+  let bestSection = null;
+  for (const re of summaryHeadings) {
+    const section = extractSection(text, re);
+    if (!section) continue;
+    const findings = [...section.matchAll(/^\s*\*\*[^*\n]{3,100}(?:\.|:)\*\*/gm)].length;
+    let s;
+    if (findings >= 5) s = 15;
+    else if (findings >= 3) s = 10;
+    else if (findings >= 1) s = 5;
+    else {
+      const anyBold = (section.match(/\*\*[^*\n]+\*\*/g) || []).length;
+      s = anyBold >= 3 ? 3 : 0;
+    }
+    if (s > bestScore) { bestScore = s; bestSection = section; }
+  }
+  return bestScore;
 }
 
 // Key Features table — pipe-table after a features-equivalent heading.
 // Degree-format uses `## Key Features`; milestone-format uses `## Half A`,
-// `## Half B`, `## Modules`, `## Deliverables`, `## Substrate`. Any of those
-// followed by a pipe-table counts.
+// `## Half B`, `## Modules`, `## Deliverables`, `## Substrate`. v584+
+// chapter-first format uses `## What shipped` (README) or `## Cross-track /
+// Engine state` or `## Engine state full enumeration` (chapter/99-context).
+// Any of those followed by a pipe-table counts.
 function scoreKeyFeatures(text) {
-  const headingRe = /^#{2,4}\s+(Key Features|Half A|Half B|Modules|Deliverables|Substrate)\b/mi;
-  const section = extractSection(text, headingRe);
-  if (!section) return 0;
-  const tableLines = section.split(/\r?\n/).filter(l => /^\s*\|/.test(l)).length;
-  if (tableLines >= 5) return 10;
-  if (tableLines >= 3) return 6;
-  return 2;
+  const headingRes = [
+    /^#{2,4}\s+(Key Features|Half A|Half B|Modules|Deliverables|Substrate)\b/mi,
+    /^#{2,4}\s+What shipped\b/mi,
+    /^#{2,4}\s+Cross-track\s*\/?\s*Engine state\b/mi,
+    /^#{2,4}\s+Engine state full enumeration\b/mi,
+    /^#{2,4}\s+Cross-track structural pair anchor inventory\b/mi,
+  ];
+  let best = 0;
+  for (const re of headingRes) {
+    const section = extractSection(text, re);
+    if (!section) continue;
+    const tableLines = section.split(/\r?\n/).filter(l => /^\s*\|/.test(l)).length;
+    let s;
+    if (tableLines >= 5) s = 10;
+    else if (tableLines >= 3) s = 6;
+    else s = 2;
+    if (s > best) best = s;
+  }
+  return best;
 }
 
 // Part A / Part B deep sections with bolded sub-themes (one function, returns split score)
+// Pre-v584 used `## Part A: <name>` / `## Part B: <name>` for the two halves
+// of paired-engine NASA-degree releases. v584+ chapter-first format moved
+// equivalent depth to chapter sections like:
+//   chapter/99-context.md `## §6.6 register full enumeration`         (Part A equivalent: structural-state depth)
+//   chapter/99-context.md `## Cross-track structural pair anchor inventory` (Part B equivalent: cross-track depth)
+//   chapter/99-context.md `## Tier 2 inline-Opus build-path provenance`  (Part B equivalent: tooling-arch depth)
+//   chapter/00-summary.md `## Cross-track ... weave (six anchor points)`  (Part A or B equivalent)
 function scorePartDepth(text, which) {
-  const re = which === 'A'
-    ? /^###?\s+Part A[:\s]/m
-    : /^###?\s+Part B[:\s]/m;
-  const section = extractSection(text, re);
-  if (!section) return 0;
-  // Count bold lead-in bullets: - **THING** or lines starting with **...**
-  const bolded = [...section.matchAll(/^[-*]?\s*\*\*[^*\n]{5,200}\*\*/gm)].length;
-  if (bolded >= 8) return 10;
-  if (bolded >= 5) return 7;
-  if (bolded >= 3) return 5;
-  if (bolded >= 1) return 2;
-  return 0;
+  const partRes = which === 'A'
+    ? [
+        /^###?\s+Part A[:\s]/m,
+        /^#{2,4}\s+§6\.6 register\b/mi,
+        /^#{2,4}\s+Engine state\b/mi,
+        /^#{2,4}\s+(MUS )?Domain (register )?state\b/mi,
+        /^#{2,4}\s+Carryover lessons applied/mi,
+      ]
+    : [
+        /^###?\s+Part B[:\s]/m,
+        /^#{2,4}\s+Cross-track structural pair/mi,
+        /^#{2,4}\s+Cross-track .* weave/mi,
+        /^#{2,4}\s+Tier \d+ inline-Opus build-path/mi,
+        /^#{2,4}\s+Build path: Tier/mi,
+        /^#{2,4}\s+New (lessons|observations)/mi,
+        /^#{2,4}\s+Forward observations/mi,
+      ];
+  let best = 0;
+  for (const re of partRes) {
+    const section = extractSection(text, re);
+    if (!section) continue;
+    const bolded = [...section.matchAll(/^[-*]?\s*\*\*[^*\n]{5,200}\*\*/gm)].length;
+    let s = 0;
+    if (bolded >= 8) s = 10;
+    else if (bolded >= 5) s = 7;
+    else if (bolded >= 3) s = 5;
+    else if (bolded >= 1) s = 2;
+    if (s > best) best = s;
+  }
+  return best;
 }
 
 // Retrospective with both sub-sections.
@@ -197,20 +253,41 @@ function scoreLessons(text) {
 // Cross-references. Degree-format uses `## Cross-References`; milestone-
 // format uses `## Convergent-discovery validation` or `## Cross-cluster
 // validation` for the same structural role (named external referents).
+// v584+ chapter-first format uses formal-ID lesson cross-references
+// (`## #10NNN — Title` blocks in chapter/04-lessons.md with explicit
+// `Cross-references:` lines + version-prefixed lesson body referents).
 function scoreCrossRefs(text) {
-  const headingRe = /^#{2,4}\s+(Cross[- ]References|Convergent[- ]discovery|Convergent[- ]Discovery|Cross[- ]cluster)/mi;
-  if (!headingRe.test(text)) return 0;
-  const section = extractSection(text, headingRe);
-  // Pipe-count remains the proxy for "named external referents in a table",
-  // but a milestone-format §Convergent-discovery often has prose with
-  // multiple bold-prefixed referents instead of a pipe-table. Count both.
-  const pipes = (section.match(/\|/g) || []).length;
-  const boldReferents = [...section.matchAll(/\*\*[^*\n]+\*\*/g)].length;
-  const score = pipes + (boldReferents * 3);
-  if (score >= 30) return 10;
-  if (score >= 15) return 7;
-  if (score >= 5) return 4;
-  return 2;
+  const headingRes = [
+    /^#{2,4}\s+(Cross[- ]References|Convergent[- ]discovery|Convergent[- ]Discovery|Cross[- ]cluster)/mi,
+    /^#{2,4}\s+Cross-track structural pair/mi,
+    /^#{2,4}\s+Cross-references and parallels/mi,
+    /^#{2,4}\s+See also\b/mi,
+  ];
+  let best = 0;
+  for (const re of headingRes) {
+    const section = extractSection(text, re);
+    if (!section) continue;
+    const pipes = (section.match(/\|/g) || []).length;
+    const boldReferents = [...section.matchAll(/\*\*[^*\n]+\*\*/g)].length;
+    const formalIdRefs = [...section.matchAll(/#10\d{3}\b/g)].length;
+    const score = pipes + (boldReferents * 3) + (formalIdRefs * 2);
+    let s;
+    if (score >= 30) s = 10;
+    else if (score >= 15) s = 7;
+    else if (score >= 5) s = 4;
+    else s = 2;
+    if (s > best) best = s;
+  }
+  // Fallback: count formal-ID lesson cross-references anywhere in the corpus
+  // as a partial credit (chapter/04-lessons.md is structured around these
+  // and is the modern equivalent of an external-referent table).
+  if (best < 4) {
+    const totalFormalIds = [...text.matchAll(/#10\d{3}\b/g)].length;
+    if (totalFormalIds >= 8) return Math.max(best, 7);
+    if (totalFormalIds >= 4) return Math.max(best, 4);
+    if (totalFormalIds >= 1) return Math.max(best, 2);
+  }
+  return best;
 }
 
 // Running ledgers (at least one of the Acoustic Progression / Artist-City
@@ -230,9 +307,25 @@ function scoreRunningLedgers(text) {
     /^#{2,4}\s+Health metrics/mi,
     /^#{2,4}\s+Test posture/mi,
     /^#{2,4}\s+By the Numbers/mi,
+    // v584+ chapter-first ledger equivalents (broad — any "register state",
+    // "Domain state", "series state", "engine state" section counts as a
+    // running ledger because they enumerate cross-mission state at the
+    // milestone close).
+    /^#{2,4}\s+Engine state\b/mi,
+    /^#{2,4}\s+§6\.6 register\b/mi,
+    /^#{2,4}\s+(MUS )?Domain (register )?state\b/mi,
+    /^#{2,4}\s+ELC Domain\b/mi,
+    /^#{2,4}\s+SPS series state\b/mi,
+    /^#{2,4}\s+TRS M\d+ substrate\b/mi,
+    /^#{2,4}\s+Cross-track structural pair anchor/mi,
+    /^#{2,4}\s+Cross-track \/?\s*Engine state\b/mi,
+    /^#{2,4}\s+Soak observation/mi,
+    /^#{2,4}\s+Forward queue\b/mi,
+    /^#{2,4}\s+Three-track-plus-TRS cadence/mi,
   ];
   const hits = markers.filter(re => re.test(text)).length;
-  if (hits >= 3) return 5;
+  if (hits >= 5) return 5;
+  if (hits >= 3) return 4;
   if (hits >= 1) return 3;
   return 0;
 }
@@ -240,16 +333,37 @@ function scoreRunningLedgers(text) {
 // Infrastructure block. Degree-format uses `## Infrastructure` or `## Files`;
 // milestone-format uses `## Branch state` (where the dev/main/tag topology
 // lives), `## Dedications` (named contributors), or `## Out of scope`
-// (project-discipline boundary).
+// (project-discipline boundary). v584+ chapter-first format uses chapter/
+// 99-context.md sections like `## Tier 2 inline-Opus build-path provenance`
+// (build-path/tooling-arch infra) or `## Cadence` (release cadence infra)
+// or `## See also` (cross-doc infra references).
 function scoreInfrastructure(text) {
-  const headingRe = /^#{2,4}\s+(Infrastructure|Files|Branch state|Dedications|Out of scope|Out-of-scope discipline)\b/mi;
-  if (!headingRe.test(text)) return 0;
-  const section = extractSection(text, headingRe);
-  // Count bullets
-  const bullets = (section.match(/^\s*[-*]\s/gm) || []).length;
-  if (bullets >= 5) return 5;
-  if (bullets >= 2) return 3;
-  return 1;
+  const headingRes = [
+    /^#{2,4}\s+(Infrastructure|Files|Branch state|Dedications|Out of scope|Out-of-scope discipline)\b/mi,
+    /^#{2,4}\s+Tier \d+ inline-Opus build-path/mi,
+    /^#{2,4}\s+Build path: Tier/mi,
+    /^#{2,4}\s+Build artifacts shipped/mi,
+    /^#{2,4}\s+Operational gates\b/mi,
+    /^#{2,4}\s+Mid-build recoveries\b/mi,
+    /^#{2,4}\s+Cadence\b/mi,
+    /^#{2,4}\s+See also\b/mi,
+    /^#{2,4}\s+Pipeline closure/mi,
+    /^#{2,4}\s+File inventory\b/mi,
+    /^#{2,4}\s+Cross-mission .* references\b/mi,
+    /^#{2,4}\s+Next milestone scope\b/mi,
+  ];
+  let best = 0;
+  for (const re of headingRes) {
+    const section = extractSection(text, re);
+    if (!section) continue;
+    const bullets = (section.match(/^\s*[-*]\s/gm) || []).length;
+    let s;
+    if (bullets >= 5) s = 5;
+    else if (bullets >= 2) s = 3;
+    else s = 1;
+    if (s > best) best = s;
+  }
+  return best;
 }
 
 // Extract a section's body (from header to next same-or-higher heading)
