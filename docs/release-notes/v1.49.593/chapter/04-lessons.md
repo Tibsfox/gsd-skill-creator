@@ -1,4 +1,4 @@
-# v1.49.593 Forward Lessons (#10213 — #10217)
+# v1.49.593 — Forward Lessons Emitted (#10213 — #10217)
 
 ## #10213 — Artifact-suite enforcement: structural-fix-as-forward-action
 
