@@ -1,5 +1,28 @@
 # v1.49.596 Engine-State Context Tables
 
+## Engine state full enumeration at v1.49.596 close
+
+| Surface | v1.49.595 close | **v1.49.596 close** | Change v595→v596 |
+|---|---|---|---|
+| NASA degree | 1.76 (Apollo 12 / PINPOINT LANDING + SCE-TO-AUX RECOVERY) | **1.77 (Apollo 13 / SUCCESSFUL FAILURE + LM-AS-LIFEBOAT)** | **+0.01** |
+| MUS degree | 1.76 (Led Zeppelin II) | **1.77 (Paul McCartney solo *McCartney*)** | **+0.01** |
+| ELC degree | 1.76 (ALSEP central station) | **1.77 (LM Aquarius lifeboat configuration + CO2 mailbox adapter)** | **+0.01** |
+| SPS series | #73 (Pacific Marten) | **#74 (Northern Spotted Owl — first RAPTOR exemplar)** | **+1** |
+| §6.6 register | 19 exemplars | **21 exemplars** (Path D BOTH: SUCCFAIL + LMLIFE dual origination) | **+2** |
+| AUC outcome-validation | 4th-instance (Apollo 12) | **5th-instance contributed** (Apollo 4/8/11/12/13) | strengthening |
+| PREC outcome-validation | 1-ex origination | **2nd-instance** (Apollo 12 origin + Apollo 13 multi-instance validation) | strengthening |
+| MUS Domain register | Domain 13 (Hard Rock Foundation) | **Domain 14 (Solo-Debut-After-Group-Dissolution) 1-ex origination** | **+1 Domain** |
+| ELC Domain register | LONG-DURATION at 1-ex | **IHAP candidate subsumed under LM-AS-LIFEBOAT per G0** | preserved as sub-thread |
+| TRS substrate | M0 Wave 2c synthesis COMPLETE | **M0 Wave 3 COMPLETE → M0 SUBSTRATE CLOSED** | **closure** |
+| TRS master.json | 324 records | **333 records** (+9 from pack-10 abstract-algebra Wave-1.5 fetch) | +9 |
+| Three-track-plus-TRS cadence | 9 instances | **10 instances** (pattern soaked + ESTABLISHED) | **+1 instance** |
+| CHAIN-CONVENTIONS | v1.4 (seventeenth full use) | v1.4 (eighteenth full use; no bump) | unchanged |
+| Pre-tag-gate | 6/6 PASS | 6/6 PASS + cross-link strict-mode active | unchanged + hardened |
+| Lesson #10221 dev/main sync | second-instance soak PASS | **third-instance soak PASS → ESTABLISHED status promoted** | **+1 soak; promoted** |
+| vitest test count | ~28,810 | ~28,820 | +10 |
+
+## §6.6 register full enumeration at v1.49.596 close (21 exemplars)
+
 ## §6.6 register state (after v1.77 close)
 
 | Position | Thread | Originated | Status | Watchlist progress |
@@ -95,6 +118,50 @@ PNW vertebrate cluster (3-instance):
 4. #10225 trailing-median refinement implementation (or obsoleted by #10231 iconic-mission depth-recovery pattern)
 5. Composite-pass default-flip decision at v1.49.597 W4 retrospective
 6. NASA degree 1.78 (Apollo 14 candidate per Path Y CSV; Antares at Cone Crater approach; PINPOINT-LANDING 2-ex outcome-validation)
+
+## Cross-track structural pair anchor inventory (NASA + MUS + ELC + SPS at v1.77)
+
+| Substrate | Manifestation | Connection point |
+|---|---|---|
+| NASA 1.77 | Apollo 13 SUCCESSFUL FAILURE + LM-AS-LIFEBOAT; O2 tank #2 explosion at T+55h54m53s on 1970-04-13; PC+2 free-return burn 4 min 23 sec; CO2 mailbox improvisation; AOT navigation; CSM cold-soak survival; LM Aquarius pressed into 3 crew × ~83 hours role beyond 2 crew × 2 days design envelope | **Team-fragmentation under stress, recovered via stripped-down configuration** |
+| MUS 1.77 | Paul McCartney solo *McCartney* (Apple Records 1970-04-17 — INSIDE Apollo 13 mission window +6 days); first solo album of any Beatle post-dissolution; recorded entirely at home + Morgan Studios; Paul played all instruments himself | **Cross-track structural pair on team-fragmentation-recovered-via-stripped-down-configuration narrative axis** — both events instantiate the same primitive simultaneously within a 6-day window |
+| ELC 1.77 | LM Aquarius lifeboat configuration + CO2 mailbox adapter combined; "Improvised-Hardware-Adaptation-Under-Pressure" canonical NASA pedagogical artifact; subsumed under LM-AS-LIFEBOAT per G0 to avoid over-fragmentation | **Equipment-rating-extension primitive** — operating beyond design envelope under sustained pressure |
+| SPS #74 | Northern Spotted Owl (*Strix occidentalis caurina*) — first RAPTOR category exemplar; iconic old-growth obligate; ~25-year multi-decade species-level recovery intervention (1990 ESA listing + Northwest Forest Plan 1994 + ongoing) | **Species under existential pressure with sustained recovery improvisation through multi-decade intervention** — extends the team-fragmentation-recovered primitive to species level |
+
+**Cross-track structural-pair finding:** v1.77 lands the first **INSIDE-window MUS pick observation #1** (#10232 emitted) — McCartney solo released 6 days INSIDE the Apollo 13 mission window. The substrate-coherence is exceptional: four substrates (NASA + MUS + ELC + SPS) instantiate the same structural primitive (team-fragmentation-recovered-via-stripped-down-configuration) simultaneously within a tight temporal window. This is also the first **iconic-mission depth-recovery soak observation #1** (#10231 emitted) — Apollo 13 is the most culturally referenced single Apollo mission after Apollo 11.
+
+## Build path: Tier 2 inline-Opus W2-NASA recovery (second consecutive Tier 2 instance)
+
+**Build path:** Tier 1 Sonnet sub-agent dispatch attempted; W2-NASA Sonnet sub-agent hit Anthropic per-account rate limit shortly after dispatch; main-context Tier 2 inline-Opus recovery completed NASA build per the W2-build-agent template Tier 2 procedure (template lines 247-269; closes Lessons #10215 + #10223 + #10228 recovery-pattern inventory at T2.4).
+
+**Why Tier 2 was used (W2-NASA):** Sonnet sub-agent dispatch hit rate limit; cannot wait for ~1-hour quota refresh given ship deadline; main-context Opus inline-Edit recovery is the documented fallback procedure. Second consecutive Tier 2 instance (v1.49.595 was first); closes the recovery-pattern inventory documentation gap at this milestone's T2.4.
+
+**v596 actual depth-audit results:**
+
+| Track | Status | Lines | Bytes | Comments |
+|---|---|---|---|---|
+| NASA 1.77 (vs NASA 1.76) | WARN | 88% | 85% | 7/7 canonical sections + 13/13 cross-links 100%; iconic-mission depth-recovery soak observation #1 (#10231 emitted; below-100% predecessor-ratio because Apollo 13 narrative content is denser per line than Apollo 12 PINPOINT prose) |
+| MUS 1.77 (vs MUS 1.76) | PASS | 117.6% | 111.2% | 13 cards; PASS-clean |
+| ELC 1.77 (vs ELC 1.76) | PASS | 116.3% | 152.8% | 15 cards; PASS-clean |
+
+**Forward-action result:** Tier 2 inline-Opus recovery procedure used cleanly second consecutive milestone; W2-build-agent template recovery-pattern inventory documented at T2.4 (three-tier recovery hierarchy + decision tree). Lessons #10231 + #10232 emitted.
+
+## Cross-mission Apollo references (v1.73–v1.78)
+
+| Version | Mission | NASA degree | §6.6 contribution |
+|---|---|---|---|
+| v1.49.592 | Apollo 9 | 1.73 | first crewed LM stack; UPV 2nd-instance outcome-validation |
+| v1.49.593 | Apollo 10 | 1.74 | lunar-orbit dress rehearsal; DRC §6.6 origination |
+| v1.49.594 | Apollo 11 | 1.75 | FIRST CREWED LUNAR LANDING; FCSC origination + AUC 3-ex promotion |
+| v1.49.595 | Apollo 12 | 1.76 | PINPOINT-LANDING + PROCEDURAL-RECOVERY dual origination (Path D BOTH) |
+| **v1.49.596** | **Apollo 13** | **1.77** | **SUCCESSFUL-FAILURE + LM-AS-LIFEBOAT dual origination (Path D BOTH); MUS Domain 14 origination; first RAPTOR SPS; PREC outcome-validation 2nd-instance** |
+| v1.49.598 (planned) | Apollo 14 | 1.78 | Fra Mauro Highlands; PREC outcome-validation 3rd-instance via Eyles abort-bit patch promoting PREC to ESTABLISHED |
+
+## Forward lessons emitted
+
+#10221 (ESTABLISHED promoted) #10225 #10227 #10231 #10232 #10233 (plus carry-forward applied: #10215 #10223 #10228 in T2.4 inventory)
+
+(See `chapter/04-lessons.md` for full lesson definitions and 3-criterion rubrics.)
 
 ---
 

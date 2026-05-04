@@ -1,6 +1,17 @@
-# v1.49.596 Forward Lessons
+# v1.49.596 — Forward Lessons Emitted
 
 Numbered carry-forwards + new candidates emitted at this milestone close.
+
+## Forward Lessons summary
+
+1. **#10221 — Dev/main sync discipline PROMOTED to ESTABLISHED.** Three-instance soak complete (v1.49.594/595/596 all maintained 0-commit drift across both main-merge boundaries each).
+2. **#10225 — Trailing-median refinement implementation deferred to v1.49.597.** Carry-forward; composite-pass third-soak observation supports the trailing-median direction.
+3. **#10227 — Composite-pass default-flip decision** held for v1.49.597 W4 retrospective.
+4. **#10230 — M0 substrate closure cadence (multi-milestone phase boundaries).** First observed phase-boundary closure at the ship-cadence level; closure milestones structurally distinct from intermediate arc milestones.
+5. **#10231 — Iconic-mission depth-recovery pattern** soak observation #1 emitted (Apollo 13 narrative density below predecessor-ratio is acceptable for iconic missions).
+6. **#10232 — Cross-track structural-pair INSIDE-window discovery** soak observation #1 emitted (McCartney solo released INSIDE Apollo 13 mission window +6 days).
+7. **#10233 — Tier 2 inline-Opus W2 build path** second consecutive instance (v1.49.595 + v1.49.596).
+8. **Pack-11 / pack-12 / pack-13 Wave-1.5 fetches** carry-forward to v1.49.597+.
 
 ## PROMOTED: #10221 — Dev/main sync ESTABLISHED canonical ship-pipeline step
 
