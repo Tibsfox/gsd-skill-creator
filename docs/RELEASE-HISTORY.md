@@ -1,15 +1,16 @@
 # Release History
 
-646 milestones shipped across the v1.0 → v1.49.603 arc. The table below lists every shipped release, newest first.
+647 milestones shipped across the v1.0 → v1.49.604 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions, and where available, retrospectives and lessons learned. `Commits` is the count of commits between this tag and the previous tag (from git). `Phases` and `Plans` come from structured GSD metadata in the release README — most content/patch releases don't have these. `Retro` links to the retrospective chapter when present. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 646 releases · 645 with retrospectives · 633 with extracted lessons · quality A:624 B:4 C:11 D:4 F:3 (avg 96) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 647 releases · 646 with retrospectives · 633 with extracted lessons · quality A:624 B:4 C:11 D:4 F:4 (avg 96) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Retro | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|-------|---------|---------|-------|
+| [v1.49.604](release-notes/v1.49.604) | Pioneer 10 First Through Asteroid Belt + First Jupiter Flyby (NASA degree 1.82) | 2026-05-04 | 4 | — | — | [✓](release-notes/v1.49.604/chapter/03-retrospective.md) | — | F 31 |  |
 | [v1.49.603](release-notes/v1.49.603) | Research-Track-Cards + Nav-Card Drift Gate Counter-Cadence | 2026-05-04 | 4 | — | — | [✓](release-notes/v1.49.603/chapter/03-retrospective.md) | — | F 55 |  |
 | [v1.49.602](release-notes/v1.49.602) | Apollo 15 First Lunar Roving Vehicle (NASA degree 1.81) | 2026-05-04 | 4 | — | — | [✓](release-notes/v1.49.602/chapter/03-retrospective.md) | — | C 79 |  |
 | [v1.49.601](release-notes/v1.49.601) | Catalog-Index Auto-Derive Counter-Cadence | 2026-05-04 | 4 | — | — | [✓](release-notes/v1.49.601/chapter/03-retrospective.md) | — | F 47 |  |
@@ -71,7 +72,7 @@ Each version links to a detailed release notes directory with full feature descr
 | [v1.49.545](release-notes/v1.49.545) | Degree 44: The Roll That Made an Astronaut | 2026-04-05 | 0 | — | — | [✓](release-notes/v1.49.545/chapter/03-retrospective.md) | [14](release-notes/v1.49.545/chapter/04-lessons.md) | A 94 |  |
 | [v1.49.544](release-notes/v1.49.544) | Degree 43: Thirty-Five Years of Listening | 2026-04-05 | 0 | — | — | [✓](release-notes/v1.49.544/chapter/03-retrospective.md) | [22](release-notes/v1.49.544/chapter/04-lessons.md) | A 99 |  |
 | [v1.49.543](release-notes/v1.49.543) | Degree 42: The First Rendezvous | 2026-04-05 | 0 | — | — | [✓](release-notes/v1.49.543/chapter/03-retrospective.md) | [1/14](release-notes/v1.49.543/chapter/04-lessons.md) | A 99 |  |
-| [v1.49.542](release-notes/v1.49.542) | Degree 41: Fourteen Days in a Volkswagen | 2026-04-05 | 0 | — | — | [✓](release-notes/v1.49.542/chapter/03-retrospective.md) | [22](release-notes/v1.49.542/chapter/04-lessons.md) | A 96 |  |
+| [v1.49.542](release-notes/v1.49.542) | Degree 41: Fourteen Days in a Volkswagen | 2026-04-05 | 0 | — | — | [✓](release-notes/v1.49.542/chapter/03-retrospective.md) | [1/22](release-notes/v1.49.542/chapter/04-lessons.md) | A 96 |  |
 | [v1.49.541](release-notes/v1.49.541) | Degree 40: Eight Days or Bust | 2026-04-05 | 15 | — | — | [✓](release-notes/v1.49.541/chapter/03-retrospective.md) | [2/21](release-notes/v1.49.541/chapter/04-lessons.md) | A 98 |  |
 | [v1.49.540](release-notes/v1.49.540) | Degree 39: The Spacewalk | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.540/chapter/03-retrospective.md) | [19](release-notes/v1.49.540/chapter/04-lessons.md) | A 95 |  |
 | [v1.49.539](release-notes/v1.49.539) | Degree 38: Gemini Begins | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.539/chapter/03-retrospective.md) | [22](release-notes/v1.49.539/chapter/04-lessons.md) | A 95 |  |
@@ -84,7 +85,7 @@ Each version links to a detailed release notes directory with full feature descr
 | [v1.49.532](release-notes/v1.49.532) | Degree 31: First Interplanetary | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.532/chapter/03-retrospective.md) | [21](release-notes/v1.49.532/chapter/04-lessons.md) | A 92 |  |
 | [v1.49.531](release-notes/v1.49.531) | Degree 30: The Genius | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.531/chapter/03-retrospective.md) | [2/19](release-notes/v1.49.531/chapter/04-lessons.md) | A 98 |  |
 | [v1.49.530](release-notes/v1.49.530) | Degree 29: The Rough Edge | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.530/chapter/03-retrospective.md) | [19](release-notes/v1.49.530/chapter/04-lessons.md) | A 96 |  |
-| [v1.49.529](release-notes/v1.49.529) | Degree 28: Impact Without Data | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.529/chapter/03-retrospective.md) | [3/18](release-notes/v1.49.529/chapter/04-lessons.md) | A 93 |  |
+| [v1.49.529](release-notes/v1.49.529) | Degree 28: Impact Without Data | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.529/chapter/03-retrospective.md) | [4/18](release-notes/v1.49.529/chapter/04-lessons.md) | A 93 |  |
 | [v1.49.528](release-notes/v1.49.528) | Degree 27: The Near Miss | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.528/chapter/03-retrospective.md) | [18](release-notes/v1.49.528/chapter/04-lessons.md) | A 98 |  |
 | [v1.49.527](release-notes/v1.49.527) | Degree 26: The Second Failure | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.527/chapter/03-retrospective.md) | [18](release-notes/v1.49.527/chapter/04-lessons.md) | A 96 |  |
 | [v1.49.526](release-notes/v1.49.526) | Degree 25: The Archetype | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.526/chapter/03-retrospective.md) | [2/19](release-notes/v1.49.526/chapter/04-lessons.md) | A 100 |  |
@@ -109,7 +110,7 @@ Each version links to a detailed release notes directory with full feature descr
 | [v1.49.507](release-notes/v1.49.507) | Degree 6: The Erasure and the Question | 2026-04-04 | 2 | — | — | [✓](release-notes/v1.49.507/chapter/03-retrospective.md) | [21](release-notes/v1.49.507/chapter/04-lessons.md) | A 95 |  |
 | [v1.49.506](release-notes/v1.49.506) | Degree 5: Escape Velocity | 2026-04-04 | 2 | — | — | [✓](release-notes/v1.49.506/chapter/03-retrospective.md) | [1/22](release-notes/v1.49.506/chapter/04-lessons.md) | A 98 |  |
 | [v1.49.505](release-notes/v1.49.505) | Degree 4: The Indicator Species | 2026-04-04 | 1 | — | — | [✓](release-notes/v1.49.505/chapter/03-retrospective.md) | [18](release-notes/v1.49.505/chapter/04-lessons.md) | A 98 |  |
-| [v1.49.504](release-notes/v1.49.504) | Degree 3: The Meaning-Maker | 2026-04-04 | 1 | — | — | [✓](release-notes/v1.49.504/chapter/03-retrospective.md) | [18](release-notes/v1.49.504/chapter/04-lessons.md) | A 98 |  |
+| [v1.49.504](release-notes/v1.49.504) | Degree 3: The Meaning-Maker | 2026-04-04 | 1 | — | — | [✓](release-notes/v1.49.504/chapter/03-retrospective.md) | [1/18](release-notes/v1.49.504/chapter/04-lessons.md) | A 98 |  |
 | [v1.49.503](release-notes/v1.49.503) | Degree 2: The Infrastructure Builder | 2026-04-04 | 1 | — | — | [✓](release-notes/v1.49.503/chapter/03-retrospective.md) | [1/18](release-notes/v1.49.503/chapter/04-lessons.md) | A 90 |  |
 | [v1.49.502](release-notes/v1.49.502) | Degree 1: Pioneer Signal | 2026-04-04 | 2 | — | — | [✓](release-notes/v1.49.502/chapter/03-retrospective.md) | [1/17](release-notes/v1.49.502/chapter/04-lessons.md) | A 90 |  |
 | [v1.49.501](release-notes/v1.49.501) | Degree 0: The Paired Engine Begins | 2026-04-04 | 1 | — | — | [✓](release-notes/v1.49.501/chapter/03-retrospective.md) | [18](release-notes/v1.49.501/chapter/04-lessons.md) | A 90 |  |
