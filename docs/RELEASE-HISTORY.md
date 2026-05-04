@@ -1,15 +1,16 @@
 # Release History
 
-641 milestones shipped across the v1.0 → v1.49.598 arc. The table below lists every shipped release, newest first.
+642 milestones shipped across the v1.0 → v1.49.599 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions, and where available, retrospectives and lessons learned. `Commits` is the count of commits between this tag and the previous tag (from git). `Phases` and `Plans` come from structured GSD metadata in the release README — most content/patch releases don't have these. `Retro` links to the retrospective chapter when present. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 641 releases · 626 with retrospectives · 626 with extracted lessons · quality A:624 B:3 C:3 D:4 F:7 (avg 96) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 642 releases · 626 with retrospectives · 626 with extracted lessons · quality A:624 B:3 C:3 D:4 F:8 (avg 96) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Retro | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|-------|---------|---------|-------|
+| [v1.49.599](release-notes/v1.49.599) | Mariner 8 Centaur Stage Failure (NASA degree 1.79) | 2026-05-04 | 6 | — | — | — | — | F 10 |  |
 | [v1.49.598](release-notes/v1.49.598) | Apollo 14 Fra Mauro Highlands (NASA degree 1.78) | 2026-05-03 | 6 | — | — | — | — | F 20 |  |
 | [v1.49.597](release-notes/v1.49.597) | GSD Intelligence Dashboard | 2026-05-03 | 47 | — | — | — | — | D 67 |  |
 | [v1.49.596](release-notes/v1.49.596) | Apollo 13 SUCCESSFUL FAILURE + LM-AS-LIFEBOAT (NASA degree 1.77) | 2026-05-02 | 5 | — | — | — | — | F 12 |  |
@@ -45,15 +46,15 @@ Each version links to a detailed release notes directory with full feature descr
 | [v1.49.566](release-notes/v1.49.566) | Degree 61: The Completion of the Survey | 2026-04-22 | 1 | — | — | [✓](release-notes/v1.49.566/chapter/03-retrospective.md) | [13](release-notes/v1.49.566/chapter/04-lessons.md) | A 92 |  |
 | [v1.49.565](release-notes/v1.49.565) | Degree 60: The Anchored Listener | 2026-04-22 | 1 | — | — | [✓](release-notes/v1.49.565/chapter/03-retrospective.md) | [5](release-notes/v1.49.565/chapter/04-lessons.md) | A 97 |  |
 | [v1.49.564](release-notes/v1.49.564) | Degree 59: The Engineering Lineage | 2026-04-24 | 10 | — | — | [✓](release-notes/v1.49.564/chapter/03-retrospective.md) | [13](release-notes/v1.49.564/chapter/04-lessons.md) | A 100 |  |
-| [v1.49.563](release-notes/v1.49.563) | Degree 58: Twenty-Four Hours | 2026-04-20 | 2 | — | — | [✓](release-notes/v1.49.563/chapter/03-retrospective.md) | [15](release-notes/v1.49.563/chapter/04-lessons.md) | A 100 |  |
-| [v1.49.562](release-notes/v1.49.562) | Degree 56: Triple Bounce to Smithsonian | 2026-04-19 | 4 | — | — | [✓](release-notes/v1.49.562/chapter/03-retrospective.md) | [14](release-notes/v1.49.562/chapter/04-lessons.md) | A 100 |  |
+| [v1.49.563](release-notes/v1.49.563) | Degree 58: Twenty-Four Hours | 2026-04-20 | 2 | — | — | [✓](release-notes/v1.49.563/chapter/03-retrospective.md) | [1/15](release-notes/v1.49.563/chapter/04-lessons.md) | A 100 |  |
+| [v1.49.562](release-notes/v1.49.562) | Degree 56: Triple Bounce to Smithsonian | 2026-04-19 | 4 | — | — | [✓](release-notes/v1.49.562/chapter/03-retrospective.md) | [1/14](release-notes/v1.49.562/chapter/04-lessons.md) | A 100 |  |
 | [v1.49.561](release-notes/v1.49.561) | Living Sensoria | 2026-04-18 | 46 | 43 | — | [✓](release-notes/v1.49.561/chapter/03-retrospective.md) | [15](release-notes/v1.49.561/chapter/04-lessons.md) | A 100 |  |
 | [v1.49.560](release-notes/v1.49.560) | Release Documentation Uplift | 2026-04-18 | 1 | — | — | ✓ _(no file)_ | 16 _(no file)_ | F 42 |  |
-| [v1.49.559](release-notes/v1.49.559) | Degree 55: The Unmanned Work Continues | 2026-04-16 | 1 | — | — | [✓](release-notes/v1.49.559/chapter/03-retrospective.md) | [20](release-notes/v1.49.559/chapter/04-lessons.md) | A 100 |  |
+| [v1.49.559](release-notes/v1.49.559) | Degree 55: The Unmanned Work Continues | 2026-04-16 | 1 | — | — | [✓](release-notes/v1.49.559/chapter/03-retrospective.md) | [1/20](release-notes/v1.49.559/chapter/04-lessons.md) | A 100 |  |
 | [v1.49.558](release-notes/v1.49.558) | Degree 54: In Memoriam -- Tough and Competent | 2026-04-16 | 3 | — | — | [✓](release-notes/v1.49.558/chapter/03-retrospective.md) | [23](release-notes/v1.49.558/chapter/04-lessons.md) | A 100 |  |
-| [v1.49.557](release-notes/v1.49.557) | Degree 53: The Last Gemini | 2026-04-15 | 1 | — | — | [✓](release-notes/v1.49.557/chapter/03-retrospective.md) | [24](release-notes/v1.49.557/chapter/04-lessons.md) | A 100 |  |
+| [v1.49.557](release-notes/v1.49.557) | Degree 53: The Last Gemini | 2026-04-15 | 1 | — | — | [✓](release-notes/v1.49.557/chapter/03-retrospective.md) | [1/24](release-notes/v1.49.557/chapter/04-lessons.md) | A 100 |  |
 | [v1.49.556](release-notes/v1.49.556) | Degree 52: The Complete Picture | 2026-04-15 | 1 | — | — | [✓](release-notes/v1.49.556/chapter/03-retrospective.md) | [17](release-notes/v1.49.556/chapter/04-lessons.md) | A 100 |  |
-| [v1.49.555](release-notes/v1.49.555) | Degree 51: The Fix | 2026-04-15 | 1 | — | — | [✓](release-notes/v1.49.555/chapter/03-retrospective.md) | [5/24](release-notes/v1.49.555/chapter/04-lessons.md) | A 100 |  |
+| [v1.49.555](release-notes/v1.49.555) | Degree 51: The Fix | 2026-04-15 | 1 | — | — | [✓](release-notes/v1.49.555/chapter/03-retrospective.md) | [6/24](release-notes/v1.49.555/chapter/04-lessons.md) | A 100 |  |
 | [v1.49.554](release-notes/v1.49.554) | Degree 50: The Midcourse Correction | 2026-04-15 | 1 | — | — | [✓](release-notes/v1.49.554/chapter/03-retrospective.md) | [24](release-notes/v1.49.554/chapter/04-lessons.md) | A 100 |  |
 | [v1.49.553](release-notes/v1.49.553) | Degree 49: The First Revolution | 2026-04-15 | 2 | — | — | [✓](release-notes/v1.49.553/chapter/03-retrospective.md) | [15](release-notes/v1.49.553/chapter/04-lessons.md) | A 100 |  |
 | [v1.49.552](release-notes/v1.49.552) | Degree 48: The Quiet Retrieval | 2026-04-15 | 3 | — | — | [✓](release-notes/v1.49.552/chapter/03-retrospective.md) | [16](release-notes/v1.49.552/chapter/04-lessons.md) | A 98 |  |
@@ -77,7 +78,7 @@ Each version links to a detailed release notes directory with full feature descr
 | [v1.49.534](release-notes/v1.49.534) | Degree 33: The Photographs | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.534/chapter/03-retrospective.md) | [21](release-notes/v1.49.534/chapter/04-lessons.md) | A 93 |  |
 | [v1.49.533](release-notes/v1.49.533) | Degree 32: Cameras Failed | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.533/chapter/03-retrospective.md) | [17](release-notes/v1.49.533/chapter/04-lessons.md) | A 93 |  |
 | [v1.49.532](release-notes/v1.49.532) | Degree 31: First Interplanetary | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.532/chapter/03-retrospective.md) | [20](release-notes/v1.49.532/chapter/04-lessons.md) | A 92 |  |
-| [v1.49.531](release-notes/v1.49.531) | Degree 30: The Genius | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.531/chapter/03-retrospective.md) | [19](release-notes/v1.49.531/chapter/04-lessons.md) | A 98 |  |
+| [v1.49.531](release-notes/v1.49.531) | Degree 30: The Genius | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.531/chapter/03-retrospective.md) | [2/19](release-notes/v1.49.531/chapter/04-lessons.md) | A 98 |  |
 | [v1.49.530](release-notes/v1.49.530) | Degree 29: The Rough Edge | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.530/chapter/03-retrospective.md) | [19](release-notes/v1.49.530/chapter/04-lessons.md) | A 97 |  |
 | [v1.49.529](release-notes/v1.49.529) | Degree 28: Impact Without Data | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.529/chapter/03-retrospective.md) | [3/18](release-notes/v1.49.529/chapter/04-lessons.md) | A 93 |  |
 | [v1.49.528](release-notes/v1.49.528) | Degree 27: The Near Miss | 2026-04-05 | 1 | — | — | [✓](release-notes/v1.49.528/chapter/03-retrospective.md) | [18](release-notes/v1.49.528/chapter/04-lessons.md) | A 98 |  |
