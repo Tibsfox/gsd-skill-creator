@@ -1,4 +1,4 @@
-# v1.49.594 Forward Lessons
+# v1.49.594 — Forward Lessons Emitted
 
 ## Numbered lessons emitted at v1.49.594 ship (carry-forward from v1.49.593 close)
 
