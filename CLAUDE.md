@@ -108,6 +108,7 @@ This preserves bisect intent in the commit message even when commit boundaries d
 | `BUILD_WWW_BUNDLES_QUIET` | unset → step labels printed | `=1` → suppress step labels in `tools/build-www-bundles.sh` (errors still printed) |
 | `SC_SKIP_CLAUDE_MD_GATE` | unset → run CLAUDE.md auto-render check in pre-tag-gate step 7 | `=1` → skip CLAUDE.md drift check (emergency only — run `npm run render:claude-md` and commit instead) |
 | `SC_SKIP_CATALOG_INDEX_GATE` | unset → run catalog-index drift check in pre-tag-gate step 8 | `=1` → skip catalog-index drift check (emergency only — run `node tools/update-catalog-indexes.mjs --check` and fix instead) |
+| `SC_SKIP_TRACK_CARDS_GATE` | unset → enforce NASA Research Track cards (8/8 unique Track 1a/1b/2/3/4/5/6/7) + bottom-of-content nav-card in depth-audit (BLOCKER mode at v1.49.603 introduction) | `=1` → downgrade track-card-coverage + nav-card-presence FAIL → WARN (emergency only — author the missing cards instead) |
 <!-- AUTO:env-vars:END -->
 
 ## Important Notes
