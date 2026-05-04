@@ -10,8 +10,8 @@ Each version links to a detailed release notes directory with full feature descr
 
 | Version | Name | Shipped | Commits | Phases | Plans | Retro | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|-------|---------|---------|-------|
-| [v1.49.599](release-notes/v1.49.599) | Mariner 8 Centaur Stage Failure (NASA degree 1.79) | 2026-05-04 | 6 | — | — | [✓](release-notes/v1.49.599/chapter/03-retrospective.md) | — | F 35 |  |
-| [v1.49.598](release-notes/v1.49.598) | Apollo 14 Fra Mauro Highlands (NASA degree 1.78) | 2026-05-03 | 6 | — | — | [✓](release-notes/v1.49.598/chapter/03-retrospective.md) | — | F 42 |  |
+| [v1.49.599](release-notes/v1.49.599) | Mariner 8 Centaur Stage Failure (NASA degree 1.79) | 2026-05-04 | 6 | — | — | [✓](release-notes/v1.49.599/chapter/03-retrospective.md) | — | F 38 |  |
+| [v1.49.598](release-notes/v1.49.598) | Apollo 14 Fra Mauro Highlands (NASA degree 1.78) | 2026-05-03 | 6 | — | — | [✓](release-notes/v1.49.598/chapter/03-retrospective.md) | — | F 54 |  |
 | [v1.49.597](release-notes/v1.49.597) | GSD Intelligence Dashboard | 2026-05-03 | 47 | — | — | [✓](release-notes/v1.49.597/chapter/03-retrospective.md) | — | D 67 |  |
 | [v1.49.596](release-notes/v1.49.596) | Apollo 13 SUCCESSFUL FAILURE + LM-AS-LIFEBOAT (NASA degree 1.77) | 2026-05-02 | 5 | — | — | [✓](release-notes/v1.49.596/chapter/03-retrospective.md) | — | F 32 |  |
 | [v1.49.595](release-notes/v1.49.595) | Apollo 12 PINPOINT LANDING + SCE-TO-AUX RECOVERY | 2026-05-02 | 5 | — | — | [✓](release-notes/v1.49.595/chapter/03-retrospective.md) | — | F 51 |  |
