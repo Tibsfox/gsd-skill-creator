@@ -239,6 +239,24 @@ async function processVersion(client, version, text, dryRun, stats) {
     retros = mergeRetros(retros, flatLessons);
   }
 
+  // 5-file chaptered fallback — v1.49.585+ deterministic-gate completeness
+  // structure puts retrospective + lessons in chapter/03-retrospective.md +
+  // chapter/04-lessons.md respectively. The flat-layout fallback above misses
+  // these because the file naming differs. Wrap each under the sentinel
+  // heading the parser expects so retros are extracted from chapter source.
+  const chapterRetroPath = join(RELEASE_NOTES_DIR, version, 'chapter', '03-retrospective.md');
+  if (existsSync(chapterRetroPath)) {
+    const retroText = readFileSync(chapterRetroPath, 'utf8');
+    const chapterRetros = extractRetrospectives('## Retrospective\n\n' + retroText);
+    retros = mergeRetros(retros, chapterRetros);
+  }
+  const chapterLessonsPath = join(RELEASE_NOTES_DIR, version, 'chapter', '04-lessons.md');
+  if (existsSync(chapterLessonsPath)) {
+    const lessonsText = readFileSync(chapterLessonsPath, 'utf8');
+    const chapterLessons = extractRetrospectives('## Lessons Learned\n\n' + lessonsText);
+    retros = mergeRetros(retros, chapterLessons);
+  }
+
   if (dryRun) {
     stats.features += features.length;
     stats.retros += retros.length;
