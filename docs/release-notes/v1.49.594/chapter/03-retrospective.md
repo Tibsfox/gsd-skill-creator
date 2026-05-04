@@ -1,4 +1,4 @@
-# v1.49.594 Retrospective
+# v1.49.594 — Retrospective
 
 ## Carryover lessons applied (from v1.49.593)
 
@@ -12,7 +12,7 @@
 - **#10221 dev/main sync discipline** — emitted at this ship as numbered Lesson; first-instance test APPLIED at every main-merge boundary (target 0-commit drift at close)
 - **#10222 card-population cross-link enforcement** — emitted at this ship as numbered Lesson; structural fix landed pre-open via `tools/depth-audit.mjs` cross-link submetric + W2-prompt template enumeration mandate
 
-## v1.49.594 process observations
+## What Worked
 
 ### What went well
 
@@ -20,12 +20,21 @@
 2. **Apollo 11 dossier brief-error catching at depth:** 12 brief errors documented (4 HIGH / 6 MED / 2 LOW) — exceeds typical Apollo brief-error count (~10 avg per Lesson #10186). The iconic-mission factor produces more pop-history confusion to correct. BE-01 (1201/1202 RR-not-LR), BE-03 (B/W not color TV), BE-04 (ALR-100 vs RR distinction) are the load-bearing corrections.
 3. **Cross-link enumeration mandate enforces itself:** W2-NASA Apollo 11 build hit 13/13 cross-link coverage at first run (not requiring inline-recovery). The W2-prompt template change at v1.49.594 W0 immediately produced compliance — forward-action structural fixes preempt their own incidents (#10208 pattern continues).
 
+## What Could Be Better
+
 ### What needs attention
 
 4. **W1bc rate-limit interruption at Batch D:** The W1bc TRS Wave 2b synthesis fork hit Anthropic per-account rate limit during Batch D dispatch (packs 15 + 16 dispatched but failed). Recovered by main-context fresh-dispatch (~10 min after rate limit). 6 of 8 packs completed in fork; 2 packs completed via main-context recovery dispatch. Wall-clock impact: ~15 min added to W1bc total. Lesson #10223 candidate: when fork hits rate limit, main-context dispatch is the recovery path (forks don't have their own quota separate from main).
 5. **Wave 2b synthesis runs 30% terser than Wave 2a:** Pack 09-14 came in at 2,900-4,000 words each vs Wave 2a target 5,000-6,000 (packs 15+16 hit the target after main-context fresh dispatch). Possible cause: fork-managed dispatch produces shallower synthesis than direct dispatch. Lesson #10224 candidate: Wave-N synthesis token-floor sets at the dispatch model (fork = lower floor; direct = higher floor); future Wave dispatches consider direct over fork for depth.
 6. **MUS+ELC at 81% line ratio:** Both tracks landed at 81% lines / 80-86% bytes vs predecessor v1.74. Below 95% PASS threshold; below 95% lines threshold for composite-pass to activate. Marginal but not FAIL. Lesson #10225 candidate: when MUS or ELC predecessor was unusually deep (v1.74 MUS hit 121% lines / 136% bytes vs v1.73), the next milestone's natural sizing produces apparent regression. Solution: consider composite-pass `lines ≥ 95% * predecessor` substitution with `lines ≥ 95% * 5-milestone-trailing-median` to dampen single-milestone outliers.
 7. **Composite-pass first soak observation:** NASA WARN→PASS (lines 99% qualifies for composite-pass; bytes 80% relaxed via composite). MUS+ELC stay WARN (lines 81% < 95% threshold; composite-pass not eligible). T2.4 first-soak data: composite-pass DOES help density-variance cases (NASA at v1.49.594) but does NOT help below-threshold-lines cases (MUS+ELC at v1.49.594). v1.49.595 second soak will confirm pattern.
+
+## Surprises
+
+- **Pre-open W0 fold-in concentration eliminated W0 dispatch overhead.** T2.1 (#10222) was completed BEFORE the milestone formally opened (commit `dcadc4c65`); fix already live + tested + FTP-synced at milestone open. Pattern recommended for future carry-forward queues with "DONE" items.
+- **W2-NASA build hit 13/13 cross-link coverage at first run.** No inline-recovery cycles required; the W2-prompt template change from v1.49.594 W0 immediately produced compliance — forward-action structural fixes preempt their own incidents (#10208 pattern continues).
+- **Wave 2b synthesis 30% terser than Wave 2a.** Pack 09-14 came in at 2,900-4,000 words each vs Wave 2a target 5,000-6,000 (#10224 candidate emitted: fork-managed dispatch produces shallower synthesis than direct dispatch).
+- **Composite-pass first-soak observation is partial-helpful.** NASA WARN→PASS under composite-pass; MUS+ELC stay WARN at 81% lines below the 95% threshold required for composite-pass to activate (#10225 candidate emitted: composite-pass needs trailing-median refinement to dampen single-milestone outliers).
 
 ## Carry-forward to v1.49.595+
 

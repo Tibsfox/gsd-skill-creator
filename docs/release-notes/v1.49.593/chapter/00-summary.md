@@ -1,13 +1,16 @@
 # v1.49.593 — Structural Firsts + Engine State
 
-## Six load-bearing firsts at v1.74 (per Apollo 10 narrative)
+## Structural firsts at v1.49.593 close
 
-1. **First crewed full lunar-orbit dress rehearsal** — F-mission per Apollo A-G classification; complete stack in operational regime
-2. **First crewed LM lunar-orbit independent flight** — LM-4 Snoopy separated from CSM-106 Charlie Brown for ~8 hours
-3. **First crewed CSM-LM rendezvous in lunar orbit** — closes the Apollo 9 v1.73 Earth-orbit RR sub-thread
-4. **LM Snoopy descent to 14.4 km perilune** (~47,400 ft AGL) — closest crewed approach to lunar surface before Apollo 11 v1.75 landing
-5. **First sustained color TV from lunar-orbit LM-CSM stack** [BE-2 corrected from "first color TV from lunar orbit"; Apollo 9 had RCA color on CSM]
-6. **Highest crewed spacecraft re-entry speed in history** — ~39,897 km/h (Mach 32.5); record stands
+1. **First crewed full lunar-orbit dress rehearsal — F-mission per Apollo A-G classification.** Complete stack in operational regime; LM-4 "Snoopy" + CSM-106 "Charlie Brown" exercised every operational subsystem (DPS / APS / RR / AGS / PGNCS / separation / redocking). DRC §6.6 thread 1-exemplar origination admitted at G2 lock.
+2. **First crewed LM lunar-orbit independent flight.** LM-4 Snoopy separated from CSM-106 Charlie Brown for approximately 8 hours; max separation reached ~628 km from CSM (BE-5 HIGH correction from initial brief's 14-100 km figure).
+3. **First crewed CSM-LM rendezvous in lunar orbit.** Closes the Apollo 9 v1.73 Earth-orbit RR sub-thread; Apollo 9 RR (185 km) → Apollo 10 lunar-orbit RR (~628 km) two-instance arc closes.
+4. **LM Snoopy descent to 14.4 km perilune** (~47,400 ft AGL). Closest crewed approach to lunar surface before Apollo 11 v1.75 landing; LM-4 propellant deliberately sized to prevent landing-then-return capability — the hardware-enforced stop-short anchoring the DRC doctrinal frame.
+5. **First sustained color TV from lunar-orbit LM-CSM stack.** BE-2 MED corrected from initial brief's "first color TV from lunar orbit"; Apollo 9 v1.73 had RCA color but CSM-only. Apollo 10's Westinghouse color camera produced the first sustained color transmission from inside the LM-CSM stacked configuration in lunar orbit.
+6. **Highest crewed spacecraft re-entry speed in history.** ~39,897 km/h (Mach 32.5); record still stands as of 2026.
+7. **First five-day temporal-coincidence anchor on a MUS pick.** *Tommy* UK release 1969-05-23 (5 days post-launch) + US release 1969-05-19 (1 day post-launch). Strongest temporal-coincidence anchor among any v1.49.59X milestone within the ±7-day narrow window per Lesson #10198. SOLE candidate within the window.
+8. **First W2-prompt artifact-suite enumeration discipline.** Closes Lesson #10213 candidate by mirroring the v1.49.592 T2.1 canonical-regex propagation pattern — W2-prompt template grew 111→154 lines; depth-audit gained artifact-count + 5-category check; v1.74 ships at 13 / 5/5 categories without remediation.
+9. **First DRC §6.6 thread origination on a stop-short success outcome.** Three-criterion test PASS: (1) complete stack in operational regime; (2) all subsystems exercised; (3) deliberate hardware-enforced stop-short. Watchlist 2-ex: STS-1 Columbia OFT (1981-04-12).
 
 ## Three new structural openings at v1.74
 

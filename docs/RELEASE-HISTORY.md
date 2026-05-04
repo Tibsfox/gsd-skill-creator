@@ -6,18 +6,18 @@ Each version links to a detailed release notes directory with full feature descr
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 642 releases · 641 with retrospectives · 631 with extracted lessons · quality A:624 B:4 C:3 D:4 F:7 (avg 96) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 642 releases · 641 with retrospectives · 633 with extracted lessons · quality A:624 B:4 C:9 D:4 F:1 (avg 97) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Retro | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|-------|---------|---------|-------|
-| [v1.49.599](release-notes/v1.49.599) | Mariner 8 Centaur Stage Failure (NASA degree 1.79) | 2026-05-04 | 6 | — | — | [✓](release-notes/v1.49.599/chapter/03-retrospective.md) | — | F 49 |  |
+| [v1.49.599](release-notes/v1.49.599) | Mariner 8 Centaur Stage Failure (NASA degree 1.79) | 2026-05-04 | 6 | — | — | [✓](release-notes/v1.49.599/chapter/03-retrospective.md) | — | C 76 |  |
 | [v1.49.598](release-notes/v1.49.598) | Apollo 14 Fra Mauro Highlands (NASA degree 1.78) | 2026-05-03 | 6 | — | — | [✓](release-notes/v1.49.598/chapter/03-retrospective.md) | — | D 61 |  |
 | [v1.49.597](release-notes/v1.49.597) | GSD Intelligence Dashboard | 2026-05-03 | 47 | — | — | [✓](release-notes/v1.49.597/chapter/03-retrospective.md) | — | D 67 |  |
-| [v1.49.596](release-notes/v1.49.596) | Apollo 13 SUCCESSFUL FAILURE + LM-AS-LIFEBOAT (NASA degree 1.77) | 2026-05-02 | 5 | — | — | [✓](release-notes/v1.49.596/chapter/03-retrospective.md) | — | F 49 |  |
-| [v1.49.595](release-notes/v1.49.595) | Apollo 12 PINPOINT LANDING + SCE-TO-AUX RECOVERY | 2026-05-02 | 5 | — | — | [✓](release-notes/v1.49.595/chapter/03-retrospective.md) | — | F 51 |  |
-| [v1.49.594](release-notes/v1.49.594) | Apollo 11 (NASA degree 1.75 FIRST LUNAR LANDING) | 2026-05-02 | 11 | — | — | [✓](release-notes/v1.49.594/chapter/03-retrospective.md) | — | F 40 |  |
-| [v1.49.593](release-notes/v1.49.593) | Apollo 10 (NASA degree 1.74 lunar-orbit dress rehearsal) | 2026-05-01 | 3 | — | — | [✓](release-notes/v1.49.593/chapter/03-retrospective.md) | — | F 39 |  |
-| [v1.49.592](release-notes/v1.49.592) | Apollo 9 (NASA degree 1.73 first-crewed LM Earth-orbit shakedown) | 2026-05-01 | 4 | — | — | [✓](release-notes/v1.49.592/chapter/03-retrospective.md) | — | F 42 |  |
+| [v1.49.596](release-notes/v1.49.596) | Apollo 13 SUCCESSFUL FAILURE + LM-AS-LIFEBOAT (NASA degree 1.77) | 2026-05-02 | 5 | — | — | [✓](release-notes/v1.49.596/chapter/03-retrospective.md) | — | C 71 |  |
+| [v1.49.595](release-notes/v1.49.595) | Apollo 12 PINPOINT LANDING + SCE-TO-AUX RECOVERY | 2026-05-02 | 5 | — | — | [✓](release-notes/v1.49.595/chapter/03-retrospective.md) | — | C 73 |  |
+| [v1.49.594](release-notes/v1.49.594) | Apollo 11 (NASA degree 1.75 FIRST LUNAR LANDING) | 2026-05-02 | 11 | — | — | [✓](release-notes/v1.49.594/chapter/03-retrospective.md) | — | C 75 |  |
+| [v1.49.593](release-notes/v1.49.593) | Apollo 10 (NASA degree 1.74 lunar-orbit dress rehearsal) | 2026-05-01 | 3 | — | — | [✓](release-notes/v1.49.593/chapter/03-retrospective.md) | [3](release-notes/v1.49.593/chapter/04-lessons.md) | C 78 |  |
+| [v1.49.592](release-notes/v1.49.592) | Apollo 9 (NASA degree 1.73 first-crewed LM Earth-orbit shakedown) | 2026-05-01 | 4 | — | — | [✓](release-notes/v1.49.592/chapter/03-retrospective.md) | [3](release-notes/v1.49.592/chapter/04-lessons.md) | C 78 |  |
 | [v1.49.591](release-notes/v1.49.591) | Apollo 8 (NASA degree 1.72 first-crewed Saturn V + first-crewed translunar) + White Album + S-IVB J-2 restart sequencer + Common Raven + 3 operational-debt fold-ins + TRS Wave 1d | 2026-04-30 | 9 | — | — | [✓](release-notes/v1.49.591/chapter/03-retrospective.md) | [2](release-notes/v1.49.591/chapter/04-lessons.md) | C 72 |  |
 | [v1.49.590](release-notes/v1.49.590) | Apollo 7 (NASA degree 1.71 first-crewed Apollo) + Electric Ladyland + AGC Block II Fairchild μL 9915 + Downy Woodpecker + 3 operational-debt fold-ins + TRS Wave 1b retry + Wave 1c | 2026-04-30 | 7 | — | — | [✓](release-notes/v1.49.590/chapter/03-retrospective.md) | — | C 70 |  |
 | [v1.49.589](release-notes/v1.49.589) | Apollo 6 (NASA degree 1.70) + Bookends + S-IC pogo accelerometer chain + Hairy Woodpecker + 4 operational-debt fold-ins + TRS Wave 1b (partial) | 2026-04-30 | 12 | — | — | [✓](release-notes/v1.49.589/chapter/03-retrospective.md) | [2](release-notes/v1.49.589/chapter/04-lessons.md) | D 69 |  |

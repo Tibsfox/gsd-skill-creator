@@ -1,6 +1,6 @@
-# v1.49.593 Retrospective — Carry-Forward Lessons Applied + New Lessons
+# v1.49.593 — Retrospective: Carry-Forward Lessons Applied + New Lessons
 
-## Carry-forward lessons applied this milestone
+## Carryover lessons applied this milestone
 
 ### #10208 — Forward-action fixes can preempt their own future-incidents
 **Applied this milestone (T2.1+T2.2).** v1.49.591 lesson #10203 (W2-prompt canonical-regex propagation) collapsed inline-recovery overhead from ~10 min to zero at v1.49.592. v1.49.593 applied the same pattern: artifact-suite drift was caught by user 2026-05-01 (v1.71/v1.72/v1.73 shipped at 13/4/4 artifacts vs 13-file gold). Two structural fixes landed AT v1.49.593 W0:
@@ -49,3 +49,15 @@ See `04-lessons.md` for full text. Summary:
 - **Depth-audit verdict: PASS=2 / WARN=1 / FAIL=0** — improvement over v1.49.592 (PASS=1 / WARN=2). Composite-pass would clear all 3 to PASS.
 - **W1a + G0 round-trip:** 14 min dossier + 3 min user adjudication. All G0 picks accepted at recommended option.
 - **Artifact remediation v1.71/v1.72/v1.73:** 30 min wall-clock combined (2 parallel batches + 1 inline-Opus when quota hit). Net: 23 new files (v1.72 +7 / v1.73 +5 / v1.71 +0 file but 2× HTML upgrades 40→171 lines).
+
+## What Could Be Better
+
+- **Sonnet quota at ~04:08 PDT cadence anchor (#10214 emitted).** Two consecutive milestone dispatches (v1.49.592 + v1.49.593) hit quota at approximately the same wall-clock time. Forward action: avoid multiple Sonnet dispatches in the 03:00-05:00 PDT window if quota margin is uncertain.
+- **Mid-build 401 auth interruption (#10215 emitted).** W2-NASA Sonnet sub-agent died mid-build with auth failure; partial output (8 min worth) was salvageable. Forward action: dispatch a CONTINUATION agent that explicitly preserves existing files and only authors the missing ones; saved ~15 min wall-clock vs full re-run.
+- **Pack-tag inconsistency in master.json (#10217 emitted).** Pack-08 quantum-mechanics has zero `pack`-tagged records; pack-05/06/07 have records cross-tagged via `pack_assignments` array vs `pack` field. Broader Wave-1.5 audit needed to reconcile schema.
+
+## Surprises
+
+- **Strongest temporal-coincidence anchor of the v1.49.59X series.** *Tommy* UK release 5 days post-launch + US release 1 day post-launch — SOLE candidate within the ±7-day narrow window per Lesson #10198. The narrow-window discipline produced its strongest hit since the lesson was emitted.
+- **Wave 2 synthesis is token-cheaper than Wave 1 fetching (#10216 emitted).** Wave 2 synthesis at ~30-50K tokens per pack vs Wave 1 fetching at ~75K tokens per pack. Wave 2 also has zero rate-limit risk (no arXiv / WebSearch external dependencies). Forward planning: prefer synthesis-batch milestones when quota margin is uncertain.
+- **Composite-pass option (a) cleared all 3 sibling builds to PASS.** v1.49.592 W0.3 analysis recommended composite-pass over moving-baseline; first soak at v1.49.593 confirms the recommendation. Default-flip target at v1.49.595 if 2 milestones of soak data confirm no false-PASS regressions.

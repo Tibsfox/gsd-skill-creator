@@ -1,5 +1,82 @@
 # v1.49.599 — Engine-State Context Tables
 
+## Engine state full enumeration at v1.49.599 close
+
+| Surface | v1.49.598 close | **v1.49.599 close** | Change v598→v599 |
+|---|---|---|---|
+| NASA degree | 1.78 (Apollo 14 Fra Mauro Highlands) | **1.79 (Mariner 8 / FAILED launch / Centaur tumble T+265s)** | **+0.01** |
+| MUS degree | 1.78 (Carole King *Tapestry*) | **1.79 (Jethro Tull *Aqualung*)** | **+0.01** |
+| ELC degree | 1.78 (Moon Trees lineage 1971-2026) | **1.79 (Greenpeace founding voyage)** | **+0.01** |
+| SPS series | #75 (Marbled Murrelet) | **#76 (Sea Otter — substrate-convergent with ELC v1.79 via Amchitka)** | **+1** |
+| §6.6 register | 23 exemplars | **23 exemplars LOCKED** (no admit; LAUNCH-VEHICLE-FAILURE watchlist only per #10237) | unchanged |
+| TRS substrate | M1 Foundation Wave 0–1 | **M1 Wave 2 generation begins** (per-pack binding pass; pack-13 first end-to-end) | +1 wave |
+| M0 substrate coverage | 22/22 | **23/22** (pack-13 information-theory fetched; closes v596 schedule) | +1 pack |
+| Three-track-plus-TRS cadence | 11 instances | **12 instances** | **+1 instance** |
+| CHAIN-CONVENTIONS | v1.4 | v1.4 (no bump) | unchanged |
+| Pre-tag-gate | 7-step composite | **7-step composite + first legitimate use of SC_SKIP_DEPTH_AUDIT=1 override per #10231 ESTABLISHED policy** | NEW override |
+| Lesson #10231 (iconic-mission depth-recovery) | observation #2 | **PROMOTED ESTABLISHED at v1.79** (3-instance: Apollo 13 + Apollo 14 + Mariner 8) | promoted |
+| Lesson #10232 (INSIDE-window MUS pick) | observation #2 | **PROMOTED ESTABLISHED at v1.79** (3-instance: McCartney + Tapestry + Aqualung) | promoted |
+| Lesson #10233 (Tier 2 inline-Opus W2 build) | observation #1 | observation #2 (soak continues; ESTABLISHED watch v601) | +1 obs |
+| Lesson #10236 (substrate-emergent cross-track) | observation #1 | observation #2 (first SPS+ELC convergence; ESTABLISHED watch v600) | +1 obs |
+| vitest test count | ~29,512 | **29,479** (+712 over v598 baseline; 17 skipped + 7 todo; 0 regressions) | +712 |
+
+## §6.6 register full enumeration at v1.49.599 close (23 exemplars LOCKED)
+
+| # | Thread | Status | Founding instance | Notes |
+|---|---|---|---|---|
+| 1-17 | (existing pre-v1.49.595 threads) | various | (per pre-v595 history) | (per pre-v595 history) |
+| 18 | PINPOINT-LANDING (PINP) | 2-ex outcome-validation candidate | Apollo 12 (v1.76) | Apollo 14 Antares within 50 m of target validates 2nd-instance |
+| 19 | PROCEDURAL-RECOVERY (PREC) | **ESTABLISHED at v1.49.598** | Apollo 12 SCE-to-AUX (Aaron founding instance) | promoted to 3-ex via Eyles abort-bit patch v598 |
+| 20 | SUCCESSFUL-FAILURE (SUCCFAIL) | 1-ex carry | Apollo 13 (v1.77) | Watchlist 2-ex: Mariner 8 candidate held per #10237 |
+| 21 | LM-AS-LIFEBOAT (LMLIFE) | 1-ex carry | Apollo 13 (v1.77) | Watchlist 2-ex: Skylab 4 / Mir / HST extended servicing |
+| 22 | GEOLOGICAL-MOBILITY (GEOM) | 1-ex carry | Apollo 14 MET (v1.78) | Watchlist 2-ex: Apollo 15 LRV |
+| 23 | PERSISTENT-PROGRAM-CYCLE (PPC) | 1-ex carry | Apollo 14 Moon Trees lineage (v1.78) | Watchlist 2-ex: Apollo 11 lunar plaque + Voyager Golden Record + Hubble deep-field |
+
+**Net §6.6 register state: 23 active threads at v1.49.599 close (UNCHANGED from v1.49.598). LAUNCH-VEHICLE-FAILURE candidate (Mariner 8) held on watchlist per #10237 watchlist-not-pre-decision discipline; NWO (Greenpeace) candidate held similarly. Default no-admit confirmed.**
+
+## Cross-track structural pair anchor inventory (NASA + MUS + ELC + SPS at v1.79)
+
+| Substrate | Manifestation | Connection point |
+|---|---|---|
+| NASA 1.79 | Mariner 8 FAILED launch; Atlas-Centaur AC-24 pitch control failure T+265s; vehicle break-up T+311s; debris recovery 400 km N of Puerto Rico Atlantic; total mission duration 4 minutes; Mariner 9 inherits mission 21 days later | **Ambition-meets-failure with larger-system-preserves-the-ambition resolution** — Mariner 9 inheritance is the program-level redundancy |
+| MUS 1.79 | Jethro Tull *Aqualung* (Chrysalis CHR 1044 UK 1971-03-19 / Reprise MS 2035 US 1971-05-03; producer Ian Anderson + Terry Ellis; Island Studios London + Basing Street Studios) — released 6 days BEFORE Mariner 8 launch (US release; INSIDE -8d envelope) | **Cross-track structural pair on ambition-meets-failure narrative axis** — title-track narrator's homeless-wanderer collapse on locked stairwell parallels Mariner 8 launch failure; song preserves narrator + Mariner 9 preserves mission |
+| ELC 1.79 | Greenpeace founding voyage (Don't Make A Wave Committee; *Phyllis Cormack* fishing vessel chartered out of Vancouver BC; Sept 15 – Oct 26 1971; opposed Cannikin nuclear test on Amchitka) — Cannikin proceeded but Greenpeace established as enduring organization | **Same-substrate convergence with SPS #76 via Amchitka** — first cross-track substrate-convergence finding at SPS+ELC interface |
+| SPS #76 | Sea Otter (*Enhydra lutris kenyoni* — northern subspecies); Pacific marine + kelp-forest substrate; species at material stake on Amchitka during Cannikin (LD50 estimates suggested mass mortality from blast wave) | **Substrate-convergent with ELC v1.79 via Amchitka** — Greenpeace opposed test that Sea Otter was the species at stake against; convergence emerged from substrate evidence per #10236 active discipline |
+
+**Cross-track structural-pair finding:** v1.79 lands the **first cross-track substrate-convergence finding at the SPS+ELC interface** (#10236 observation #2). Greenpeace founding voyage opposed the Cannikin nuclear test on Amchitka; Sea Otter is the species at material stake against the test. The convergence emerged because the #10236 substrate-emergent discipline was applied honestly during W1 candidate evaluation; without the discipline, the parallel-track default (independent ELC + SPS) would have been chosen. Looser cross-track structural pair than v598's tight Apollo 14 + Tapestry canopy-substrate triplet (NASA + ELC + SPS); looseness correlates with brief-mission scope; documented as substrate-emergent finding.
+
+## Build path: Tier 2 inline-Opus W2 build path (second observation; soak continues)
+
+**Build path:** W2-build-agent template Tier 2 main-context inline-Edit recovery procedure (template lines 247-269; 2nd observation at v599 after observation #1 at v598). Lesson #10233 soak continues; ESTABLISHED watch v601.
+
+**Why Tier 2 was used:** Sonnet sub-agent dispatch tool capability availability remained constrained in flight-ops' tool surface for v1.49.599. Per the template's documented quality verdict, Tier 2 ships at 78-89% predecessor-depth ratio (WARN-tier, ship-acceptable) — particularly appropriate for brief-mission FAILED-launch instances where graceful-thinness is the appropriate disposition per #10231 ESTABLISHED.
+
+**v599 actual depth-audit results:**
+
+| Track | Status | Lines | Bytes | Comments |
+|---|---|---|---|---|
+| NASA 1.79 (vs NASA 1.78) | FAIL → OVERRIDE | <80% | <80% | brief-mission FAILED-launch instance; first legitimate use of SC_SKIP_DEPTH_AUDIT=1 override per #10231 ESTABLISHED policy + lab-director G2 disposition (a) |
+| MUS 1.79 (vs MUS 1.78) | FAIL → OVERRIDE | <80% | <80% | brief-mission depth distribution maps onto substrate shape |
+| ELC 1.79 (vs ELC 1.78) | FAIL → OVERRIDE | <80% | <80% | brief-mission depth distribution maps onto substrate shape |
+| SPS #76 | N/A | — | — | not audited by depth-audit script |
+
+**Forward-action result:** first legitimate operational use of the depth-audit override + brief-mission graceful-thinness disposition codified at #10231 ESTABLISHED. Forward-lesson #10240 candidate emitted: depth-audit gate-refinement to honor #10231 ESTABLISHED dispositions automatically (rather than requiring manual override per ship).
+
+## Cross-mission references (v1.77–v1.80)
+
+| Version | Mission | NASA degree | §6.6 contribution |
+|---|---|---|---|
+| v1.49.596 | Apollo 13 | 1.77 | SUCCESSFUL-FAILURE + LM-AS-LIFEBOAT dual origination |
+| v1.49.598 | Apollo 14 | 1.78 | Fra Mauro Highlands; GEOM + PPC origination + PREC promote ESTABLISHED |
+| **v1.49.599** | **Mariner 8** | **1.79** | **FAILED launch / Centaur tumble; LAUNCH-VEHICLE-FAILURE watchlist only; #10231 + #10232 PROMOTED ESTABLISHED; first SPS+ELC substrate convergence** |
+| v1.49.600 (planned) | Apollo 15 | 1.80 | first LRV mission; expected GEOM 2-ex outcome-validation + Hadley-Apennine geology |
+
+## Forward lessons emitted
+
+#10231 (PROMOTED ESTABLISHED) #10232 (PROMOTED ESTABLISHED) #10233 (soak continues) #10236 (soak continues) #10237 (soak continues) #10240 (candidate) #10241 (candidate) #10242 (candidate) #10243 (candidate)
+
+(See `chapter/04-lessons.md` for full lesson definitions and 3-criterion rubrics.)
+
 ## NASA degree progression
 
 | Version | Mission | Outcome | Date |

@@ -1,10 +1,45 @@
 # v1.49.593 — Apollo 10 (NASA degree 1.74 lunar-orbit dress rehearsal)
 
+**Type:** Combined three-track-plus-TRS ship — 7th instance of established cadence (per Lesson #10197).
 **Shipped:** 2026-05-01
+**Tag:** v1.49.593
+**GitHub release:** https://github.com/Tibsfox/gsd-skill-creator/releases/tag/v1.49.593
 **Predecessor:** v1.49.592 (Apollo 9 / Crosby Stills & Nash debut / LM AGS / Clark's Nutcracker / UPV outcome-validation 2nd-instance)
 **Pattern:** Combined three-track-plus-TRS ship — 7th instance of established cadence (per Lesson #10197)
+**Dedication:** Thomas P. Stafford (1930-2024) + John W. Young (1930-2018) + Eugene A. Cernan (1934-2017) — Apollo 10 crew who flew Snoopy to 14.4 km perilune and returned without committing.
+**Engine Position:** NASA degree 74/360 (20.6% complete) | §6.6 register at 16 exemplars (DRC originates)
 
-## Tracks
+## Cross-track summary
+
+v1.49.593 advances NASA from 1.73 (Apollo 9 / first crewed LM Earth-orbit shakedown) to **1.74 = Apollo 10** (AS-505 / CSM-106 "Charlie Brown" + LM-4 "Snoopy"; Stafford / Young / Cernan; 1969-05-18 to 1969-05-26; **full lunar-orbit dress rehearsal of the Apollo 11 mission profile**). The structural pair triad lands across four canonical tracks (NASA + MUS + ELC + SPS) plus 4-item Track 2 operational-debt fold-in plus TRS Wave 2a synthesis, in 7th instance of the established three-track-plus-TRS cadence. Snoopy descended to 14.4 km perilune with a deliberate hardware-enforced fuel-loading stop-short — the first §6.6 DRESS-REHEARSAL-BEFORE-COMMITMENT (DRC) exemplar admitted at this milestone.
+
+**Track 1 — NASA 1.74 = Apollo 10 (AS-505 / CSM-106 "Charlie Brown" + LM-4 "Snoopy"):** F-mission per Apollo A-G classification — the lunar-orbit dress rehearsal. Stafford + Cernan rode LM-4 "Snoopy" down to 14.4 km perilune over Mare Tranquillitatis (the planned Apollo 11 landing site) with a deliberate hardware-enforced fuel-loading stop-short preventing them from committing to landing. The CSM-106 "Charlie Brown" stayed in 110 km lunar parking orbit with Young as CMP. Snoopy DPS staging produced a brief autopilot-near-tumble attitude excursion at staging (BE-6 G1 verification needed). Re-entry record speed Mach 32.5 (still standing as fastest crewed re-entry). Mission outcome: full success on all primary objectives; clears Apollo 11 (v1.75) for the lunar landing trajectory four mission cycles later.
+
+**Track 2 — MUS 1.74 = The Who *Tommy*** (Track Records UK 1969-05-23 / Decca US 1969-05-19; producer Pete Townshend with Kit Lambert + Chris Stamp; recorded September 1968 – March 1969 at IBC Studios London). Double-album rock opera; complete narrative arc (deaf-dumb-blind boy → pinball wizard → false messiah → enlightenment). UK release 5 days post-launch + US release 1 day post-launch — strongest temporal-coincidence anchor among any v1.49.59X milestone within the ±7-day narrow window per Lesson #10198. **MUS Pass-2 Domain 11 (Rock Opera / Complete Narrative Arc) 1-exemplar origination.** Watchlist 2-ex: Pink Floyd *The Wall* (1979); Bowie *Ziggy Stardust* (1972).
+
+**Track 3 — ELC 1.74 = LM Rendezvous Radar (RCA / Western Electric).** First crewed lunar-orbit use of the LM RR; max separation reached ~628 km (BE-5 HIGH correction from initial brief's 14-100 km). Sub-thread arc: Apollo 9 v1.73 Earth-orbit RR test (185 km) → Apollo 10 v1.74 lunar-orbit RR (~628 km) closes the RR validation chain successfully. The RR closure clears Apollo 11 v1.75 to use Eagle's RR + LR (Landing Radar) for surface descent.
+
+**Track 4 — SPS #71 = Steller's Jay** (*Cyanocitta stelleri*). PNW resident corvid; the corvid family thread continues from v1.73 (Clark's Nutcracker). Cross-pollination behaviour — Steller's Jays are documented mimics of red-tailed hawks and other species — parallels the Apollo 10 dress-rehearsal pattern of mimicking Apollo 11's mission profile without committing to land.
+
+**Track 5 — Operational-debt fold-in (4 items):** **T2.1 ARTIFACT SUITE REMEDIATION** (USER-FLAGGED 2026-05-01; brought v1.71/v1.72/v1.73 NASA artifacts up to v1.69/v1.70 gold-standard 5/5 categories with 13 + 11 + 11 files respectively) + **T2.2 W2-prompt artifact-suite enumeration** (template grew 111→154 lines; closes Lesson #10213 candidate by mirroring the v1.49.592 T2.1 canonical-regex propagation pattern) + **T2.3 #10207 composite-pass flag** (`tools/depth-audit.mjs --composite-pass`; lines ≥ 95% AND sections OK relaxes bytes thresholds to 0.75/0.60; 19/19 tests pass) + **T2.4 LEMAP G1 verification** (AGS instruction count 27 confirmed against Wikipedia/TN D-7990; corrects v1.49.592 brief's "~70" AGC conflation).
+
+**Track 6 — TRS M0 Wave 2a synthesis:** packs 01-08 synthesized; 91/91 claims covered; ~44,100 words of structured chapter content added; 26 Wave-1.5/Wave-3 fetch gaps documented. Largest gap: pack-08 quantum-mechanics has zero `pack`-tagged records — 8 priority Wave-1.5 fetches identified for Einstein/Schrödinger/Born/Heisenberg/Bell/Aspect/Robertson/von Neumann.
+
+## Threads opened / closed / extended at v1.74
+
+- **OPENED: DRESS-REHEARSAL-BEFORE-COMMITMENT (DRC) §6.6 thread** — Apollo 10 1-ex origination; deliberate hardware-enforced stop-short anchors the doctrinal frame; watchlist 2-ex STS-1 Columbia OFT (1981-04-12)
+- **OPENED: MUS Pass-2 Domain 11 (Rock Opera / Complete Narrative Arc)** — *Tommy* 1-ex origination; watchlist 2-ex Pink Floyd *The Wall* / Bowie *Ziggy Stardust*
+- **OPENED: First-sustained-color-TV-from-lunar-orbit-LM-CSM-stack era** — Apollo 9 had RCA color but only on CSM
+- **CLOSED: ELC sub-thread RR (Earth-orbit → lunar-orbit)** — Apollo 9 (185 km) → Apollo 10 (~628 km) two-instance arc closes; clears Apollo 11 to use Eagle RR + LR for surface descent
+- **EXTENDED: UPV (predictive-value)** — 3rd-instance outcome-validation; Apollo 10 LM systems work matches Apollo 5 LM-1 unmanned validation pattern
+- **EXTENDED: Three-track-plus-TRS cadence** — 7 instances; established cadence remains established
+- **CARRY-FORWARD: ALL-UP COMMITMENT** — 2-ex carry from v1.72; watchlist 3-ex STS-1
+- **CARRY-FORWARD: POST-FIRE-PROGRAM-RECOVERY** — 1-ex carry from v1.71
+- **CARRY-FORWARD: Domain 9 (Extended Form)** — 2-ex carry
+- **CARRY-FORWARD: Domain 10 (Supergroup Debut)** — 1-ex carry from v1.73
+- **CARRY-FORWARD: Domain 16 (Strapdown INS)** — 1-ex carry from v1.73
+
+## Tracks (legacy summary)
 
 - **Track 1 — NASA 1.74:** Apollo 10 (AS-505 / CSM-106 "Charlie Brown" + LM-4 "Snoopy"; Stafford/Young/Cernan; 1969-05-18 to 1969-05-26; full lunar-orbit dress rehearsal; LM Snoopy descended to 14.4 km perilune; F-mission per Apollo A-G classification; re-entry record speed Mach 32.5) + MUS 1.74 (The Who *Tommy* / Track Records UK 1969-05-23; rock opera; **Domain 11 origination**) + ELC 1.74 (LM Rendezvous Radar; first crewed lunar-orbit use; max separation ~628 km [BE-5 HIGH corrected]) + SPS #71 (Steller's Jay, *Cyanocitta stelleri*; corvid family thread continues)
 - **Track 2 — operational-debt fold-in (4 items):** **T2.1 ARTIFACT SUITE REMEDIATION** (USER-FLAGGED 2026-05-01; brought v1.71/v1.72/v1.73 NASA artifacts up to v1.69/v1.70 gold-standard 5/5 categories; 13 + 11 + 11 files respectively) + **T2.2 W2-prompt artifact-suite enumeration** (template grew 111→154 lines; closes Lesson #10213 candidate by mirroring the v1.49.592 T2.1 canonical-regex propagation pattern) + **T2.3 #10207 composite-pass flag** (`tools/depth-audit.mjs --composite-pass`; lines ≥ 95% AND sections OK relaxes bytes thresholds to 0.75/0.60; 19/19 tests pass) + **T2.4 LEMAP G1 verification** (AGS instruction count 27 confirmed against Wikipedia/TN D-7990; corrects v1.49.592 brief's "~70" AGC conflation)

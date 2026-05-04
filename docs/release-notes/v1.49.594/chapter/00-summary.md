@@ -1,5 +1,20 @@
 # v1.49.594 — Structural Firsts at Apollo 11
 
+## Structural firsts at v1.49.594 close
+
+1. **First crewed lunar landing.** Closes Kennedy 1961-05-25 commitment "before this decade is out" (8 years 2 months prior). Eagle on Mare Tranquillitatis 1969-07-20 20:17:40 UTC; Armstrong first step 1969-07-21 02:56:15 UTC.
+2. **First human bootprints on lunar surface.** Armstrong 02:56:15 UTC 1969-07-21; Aldrin ~19 minutes later. Both bootprints physically preserved on the regolith with no atmosphere or weather to erase them.
+3. **First Eagle/PGNCS landing under crew override.** Armstrong took semi-manual control past West Crater after 1201/1202 program alarms (BE-01 HIGH corrected: alarms were caused by RR slew mode causing PGNCS executive overload, NOT LR; NOT hardware crash; Hamilton MIT IL priority-scheduling design dropped low-priority tasks).
+4. **First crewed surface-EVA.** Armstrong + Aldrin 2h 31m; deployed PSEP / LRRR / PSE; collected 21.55 kg samples (BE-06 MED corrected from "22 kg" round figure).
+5. **First Lunar Module Landing Radar (ALR-100) operational use.** Ryan Aeronautical X-band 9.58 GHz; distinct from RR (BE-04 HIGH); closes the Apollo 9→10→11 ELC sub-thread RR→LR.
+6. **First lunar liftoff with crewed LM.** Eagle ascent stage 1969-07-21 17:54:01 UTC; Eagle's APS engine fired against the descent stage as launch pad.
+7. **First lunar-surface artifacts left on Moon.** Descent stage; U.S. flag; Apollo 1 patch dedication (in memory of Grissom + White + Chaffee); commemorative plaque "Here men from the planet Earth first set foot upon the Moon — July 1969 A.D. — We came in peace for all mankind."
+8. **First lunar laser ranging retroreflector (LRRR).** Operational from 1969-08-01; positions still active in 2026; cumulative dataset spans 57 years and counting; primary input to lunar-distance-measurement and tests of general relativity equivalence-principle.
+9. **§6.6 FIRST-CREWED-SURFACE-CONTACT (FCSC) thread 1-ex origination.** Three-criterion test PASS at G0 LOCKED 2026-05-02: (1) first-time human-crewed vehicle physically contacts a celestial body other than Earth; (2) crewed not robotic; (3) reproducibly-extensible primitive.
+10. **§6.6 ALL-UP COMMITMENT (AUC) promotes to 3-ex reproducibly-stable.** Apollo 4 (v1.64 uncrewed) + Apollo 8 (v1.72 first crewed translunar) + Apollo 11 (v1.75 first crewed lunar landing). Mueller doctrine extended to crewed lunar landing without prior crewed lunar-landing test. Path C BOTH §6.6 admission per G0 LOCKED.
+11. **First MAMMAL category in SPS series.** American Marten #72 closes the bird + amphibian-only era; Mustelidae family; arboreal weasel; old-growth conifer obligate.
+12. **First Era-Closing Album MUS Domain 12 origination.** Abbey Road as the final Beatles studio recording (chronologically); eight-track studio first; Side 2 medley as structural anchor of the era-closing form.
+
 ## Track 1 — NASA degree 1.75 = Apollo 11 (FIRST CREWED LUNAR LANDING)
 
 **Apollo 11** (NSSDC AS-506; Saturn V SA-506; CSM-107 "Columbia" + LM-5 "Eagle") launched 1969-07-16 13:32:00 UTC from KSC LC-39A. Crew: Armstrong (CDR; Gemini 8 first space-docking), Aldrin (LMP; Gemini 12 final-Gemini-EVA; PhD orbital mechanics MIT 1963), Collins (CMP; Gemini 10). Lunar landing: 1969-07-20 20:17:40 UTC, Mare Tranquillitatis (0.67408°N, 23.47297°E). Armstrong first step 1969-07-21 02:56:15 UTC. Surface EVA 2h 31m. 21.55 kg lunar samples. Eagle ascent 1969-07-21 17:54:01 UTC. Splashdown 1969-07-24 16:50:35 UTC, USS Hornet recovery.

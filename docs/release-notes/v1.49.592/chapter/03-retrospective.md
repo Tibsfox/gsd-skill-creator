@@ -1,6 +1,6 @@
-# v1.49.592 Retrospective — Carry-Forward Lessons Applied + New Lessons
+# v1.49.592 — Retrospective: Carry-Forward Lessons Applied + New Lessons
 
-## Carry-forward lessons applied this milestone
+## Carryover lessons applied this milestone
 
 ### #10197 — Three-track-plus-TRS established cadence
 **Applied:** 6th instance of the pattern; wall-clock and token budget tracked at ~3.5hr / ~640K Sonnet aggregate (within established envelope). Pattern continues to demonstrate stability + cross-substrate transferability + token-budget predictability.
@@ -42,3 +42,14 @@ See `04-lessons.md` for full text. Summary:
 - **TRS Wave 1e total: ~20 min wall-clock** (3 batches × ~5 min + 2 cooldowns × 10 min) — within plan
 - **Depth-audit verdict: 1 PASS + 2 WARN + 0 FAIL** — improvement over v1.49.591 (1 WARN borderline at NASA bytes); cleaner signal at v1.49.592
 - **W1a + G0 round-trip:** 17 min dossier + 3 min user adjudication; all G0 picks accepted at recommended option
+
+## What Could Be Better
+
+- **Sibling depth-audit triple-reporting** — current depth-audit output groups NASA + MUS + ELC verdicts but the summary line "PASS=1 / WARN=2" loses subject-track context. Forward action: report as a triple with named subjects (#10211 candidate held).
+- **Visual canonical-card-separation enforcement** — depth-audit regex passes when both Forest Contribution + Governance section names appear, but the structural intent (separate cards) can be violated by combining into one container. Forward action: enforce each canonical section in its own `<div class="card">` (#10212 candidate held).
+- **Composite-pass implementation deferred** — analysis at T2.2 confirms moving-baseline does NOT cleanly improve over single-predecessor. Better fix is composite-signal evaluation (option (a) from #10204). Implementation deferred to v1.49.593 W0 with `--composite-pass` flag.
+
+## Surprises
+
+- **Forward-action fix preempted its own future-incidents** — the W2-prompt T2.1 regex propagation (carry-forward from v1.49.591 #10203 candidate) eliminated all 4 inline-recovery edits at first application. The 10-min v1.49.591 recovery overhead collapsed to zero at v1.49.592 (#10208 emitted).
+- **Sibling depth-ratios diverge legitimately by subject density** — NASA PASS 96/98% / MUS WARN 97/84% / ELC WARN 86/101%. Investigation revealed digital-computer narrative (AGS) is structurally more bullet-pointed than mechanical-engineering narrative (J-2); CSN debut form-analysis is denser per line than White Album track-count format. Variance is a subject-density signal, NOT a quality signal (#10209 emitted).
