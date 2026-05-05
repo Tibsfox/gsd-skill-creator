@@ -16,6 +16,9 @@
 import { parseHash, serializeHash } from './focus-state.js';
 import type { Focus } from './focus-state.js';
 
+/** Maximum number of projects that can be selected simultaneously. */
+export const MAX_SELECTED_PROJECTS = 4;
+
 /**
  * Minimal view interface the coordinator cares about.
  *
@@ -30,17 +33,28 @@ import type { Focus } from './focus-state.js';
 export interface CoordinatedView {
   setFocus(focus: Focus): void;
   setMissionFilter?(missionId: string | null): void | Promise<void>;
+  /** Optional: view receives time-lapse cursor updates from the coordinator. */
+  setTimeLapseFiles?(filesPresent: Set<string> | null, missionId: string | null): void;
 }
 
 export type FocusSubscriber = (focus: Focus | null) => void;
+export type TimeLapseSubscriber = (filesPresent: Set<string> | null, missionId: string | null) => void;
 
 export interface Coordinator {
   /** Register a view. Returns an unregister function. */
   registerView(view: CoordinatedView): () => void;
   /** Called by a view (or palette) when the user makes a selection. */
   dispatch(focus: Focus | null): void;
+  /**
+   * Broadcast a time-lapse cursor update to all registered views that implement
+   * setTimeLapseFiles.  Pass null to clear the overlay on all views.
+   * Uses a sibling state object (not a Focus kind) so hash routing is unaffected.
+   */
+  dispatchTimeLapse(filesPresent: Set<string> | null, missionId: string | null): void;
   /** Subscribe to every focus change. Returns unsubscribe. */
   subscribe(handler: FocusSubscriber): () => void;
+  /** Subscribe to time-lapse cursor changes. Returns unsubscribe. */
+  subscribeTimeLapse(handler: TimeLapseSubscriber): () => void;
   /** Read current focus. */
   current(): Focus | null;
   /** Attach hashchange listener and seed from current URL hash. */
@@ -51,13 +65,24 @@ export interface Coordinator {
    * dispatch so screen readers announce the new focus context.
    */
   attachAnnouncer(announcer: HTMLElement): () => void;
+  /**
+   * Set the list of selected project IDs for multi-project mode.
+   * Returns true on success; false when projectIds.length > MAX_SELECTED_PROJECTS
+   * (no state change on rejection — callers must show visual feedback).
+   * Passing a single ID is equivalent to single-project mode.
+   */
+  setSelectedProjects(projectIds: string[]): boolean;
+  /** Read the current selected project IDs (never empty; default: [primaryProjectId]). */
+  selectedProjects(): string[];
 }
 
-export function createCoordinator(): Coordinator {
+export function createCoordinator(primaryProjectId = ''): Coordinator {
   const views = new Set<CoordinatedView>();
   const subscribers = new Set<FocusSubscriber>();
+  const timeLapseSubscribers = new Set<TimeLapseSubscriber>();
   let currentFocus: Focus | null = null;
   let debounceTimer: ReturnType<typeof setTimeout> | null = null;
+  let _selectedProjects: string[] = primaryProjectId ? [primaryProjectId] : [];
 
   function broadcast(focus: Focus | null, sourceView?: CoordinatedView): void {
     const missionId = focus?.kind === 'mission' ? focus.id : null;
@@ -99,9 +124,21 @@ export function createCoordinator(): Coordinator {
       scheduleHashWrite(focus);
     },
 
+    dispatchTimeLapse(filesPresent: Set<string> | null, missionId: string | null): void {
+      for (const v of views) {
+        if (v.setTimeLapseFiles) v.setTimeLapseFiles(filesPresent, missionId);
+      }
+      for (const s of timeLapseSubscribers) s(filesPresent, missionId);
+    },
+
     subscribe(handler: FocusSubscriber): () => void {
       subscribers.add(handler);
       return () => subscribers.delete(handler);
+    },
+
+    subscribeTimeLapse(handler: TimeLapseSubscriber): () => void {
+      timeLapseSubscribers.add(handler);
+      return () => timeLapseSubscribers.delete(handler);
     },
 
     current(): Focus | null {
@@ -151,6 +188,16 @@ export function createCoordinator(): Coordinator {
 
       subscribers.add(announceFocus);
       return () => subscribers.delete(announceFocus);
+    },
+
+    setSelectedProjects(projectIds: string[]): boolean {
+      if (projectIds.length > MAX_SELECTED_PROJECTS) return false;
+      _selectedProjects = [...projectIds];
+      return true;
+    },
+
+    selectedProjects(): string[] {
+      return [..._selectedProjects];
     },
   };
 }

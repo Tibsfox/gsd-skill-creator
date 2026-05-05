@@ -12,6 +12,7 @@ import { intelligenceIpc } from '../../../../src/intelligence/ipc.js';
 import type { SnapshotId } from '../../../../src/intelligence/types.js';
 import {
   buildFolderTree,
+  buildFolderTreeMulti,
   packConfig,
   subTreeAt,
   type BuildOptions,
@@ -65,6 +66,8 @@ export interface LegendEntry {
   count: number;
 }
 
+export type ColorModeChangeHandler = (mode: ColorMode) => void;
+
 export interface SystemMapComponent {
   mount(parent: HTMLElement): void;
   unmount(): void;
@@ -74,8 +77,25 @@ export interface SystemMapComponent {
   onSelect(handler: SelectHandler): void;
   /** Load and render data for the given snapshot + file list. */
   load(snapshotId: SnapshotId, filePaths: string[]): Promise<void>;
+  /**
+   * Load union data for multiple projects in parallel.
+   *
+   * Each project fetches its file symbols independently (chunks of 8 concurrent
+   * requests). The resulting trees are merged via buildFolderTreeMulti into a
+   * synthetic root with one child pack per project.
+   *
+   * projectIds beyond MAX_SELECTED_PROJECTS are silently dropped (the picker
+   * already enforces the limit; this is defense-in-depth).
+   */
+  setSelectedProjects(
+    projectIds: string[],
+    snapshotId: SnapshotId,
+    filePathsByProject: Map<string, string[]>,
+  ): Promise<void>;
   /** Switch color mode without reloading data. */
   setColorMode(mode: ColorMode): void;
+  /** Register a callback fired when setColorMode is called. Returns unregister fn. */
+  onColorModeChange(handler: ColorModeChangeHandler): () => void;
   /**
    * Mount the provenance legend into the given container element.
    * The host shell is responsible for placement (typically top-right of the pane).
@@ -85,6 +105,11 @@ export interface SystemMapComponent {
   mountLegend(container: HTMLElement, maxEntries?: number): () => void;
   /** Current legend entries (empty when mode is not 'provenance-overlay'). */
   getLegendEntries(maxEntries?: number): LegendEntry[];
+  /**
+   * Time-lapse overlay: dim all circles whose file_path is NOT in filesPresent.
+   * Pass null to clear the overlay and restore normal rendering.
+   */
+  setTimeLapseFiles(filesPresent: Set<string> | null): void;
 }
 
 const LEGEND_DEFAULT_MAX = 8;
@@ -102,6 +127,8 @@ export function createSystemMap(opts: SystemMapOptions = {}): SystemMapComponent
   let colorMode: ColorMode = opts.colorMode ?? 'symbol-density';
   let focus: Focus = { kind: null, id: '' };
   let selectHandlers: SelectHandler[] = [];
+  let colorModeChangeHandlers: ColorModeChangeHandler[] = [];
+  let timeLapseFiles: Set<string> | null = null;
 
   /** Legend containers registered by mountLegend(). */
   const legendContainers: Array<{ el: HTMLElement; maxEntries: number }> = [];
@@ -180,6 +207,9 @@ export function createSystemMap(opts: SystemMapOptions = {}): SystemMapComponent
     circle.setAttribute('fill', fill);
     circle.setAttribute('class', 'system-map-circle');
     if (node.id === focus.id) circle.classList.add('system-map-circle--selected');
+    if (timeLapseFiles !== null && node.data?.kind !== 'folder' && !timeLapseFiles.has(node.id)) {
+      circle.classList.add('system-map-circle--time-lapse-absent');
+    }
     circle.setAttribute('data-id', node.id);
 
     const isFolder = node.data?.kind === 'folder' || (node.children && node.children.length > 0);
@@ -413,10 +443,79 @@ export function createSystemMap(opts: SystemMapOptions = {}): SystemMapComponent
       updateAllLegends();
     },
 
+    async setSelectedProjects(
+      projectIds: string[],
+      snapshotId: SnapshotId,
+      filePathsByProject: Map<string, string[]>,
+    ): Promise<void> {
+      const CHUNK = 8;
+
+      async function fetchProjectFiles(filePaths: string[]): Promise<FileData[]> {
+        const results: FileData[] = [];
+        for (let i = 0; i < filePaths.length; i += CHUNK) {
+          const batch = filePaths.slice(i, i + CHUNK);
+          const settled = await Promise.allSettled(
+            batch.map(async (fp): Promise<FileData> => {
+              const [symbols, attributions] = await Promise.all([
+                intelligenceIpc.listSymbolsForFile(snapshotId, fp),
+                intelligenceIpc.listMissionsForFile(snapshotId, fp).catch(() => []),
+              ]);
+              const sorted = [...attributions].sort((a, b) => b.weight - a.weight);
+              return {
+                filePath: fp,
+                symbols,
+                recentActivityAt: 0,
+                missionIds: sorted.map(m => m.mission_id),
+                dominantMissionId: sorted[0]?.mission_id ?? null,
+                missionAttributions: sorted,
+              };
+            }),
+          );
+          for (const r of settled) {
+            if (r.status === 'fulfilled') results.push(r.value);
+          }
+        }
+        return results;
+      }
+
+      const allProjectData = await Promise.all(
+        projectIds.map(async (pid) => {
+          const paths = filePathsByProject.get(pid) ?? [];
+          const data = await fetchProjectFiles(paths);
+          return [pid, data] as [string, FileData[]];
+        }),
+      );
+
+      const projectMap = new Map(allProjectData);
+      const multiTree = buildFolderTreeMulti(projectMap);
+
+      if (multiTree === null) return;
+
+      fileDataCache = allProjectData.flatMap(([, d]) => d);
+      const pOpts = packConfig(opts);
+      const vw = opts.width ?? (containerEl?.clientWidth ?? 800);
+      const vh = opts.height ?? (containerEl?.clientHeight ?? 600);
+      const size = Math.min(vw, vh) * 0.92;
+      packedRoot = wangWangPack(multiTree, { ...pOpts, size });
+      colorCtx = buildColorContext(collectPayloads(packedRoot));
+
+      renderPack();
+      updateBreadcrumb();
+      updateAllLegends();
+    },
+
     setColorMode(mode: ColorMode): void {
       colorMode = mode;
       renderPack();
       updateAllLegends();
+      for (const h of colorModeChangeHandlers) h(mode);
+    },
+
+    onColorModeChange(handler: ColorModeChangeHandler): () => void {
+      colorModeChangeHandlers.push(handler);
+      return () => {
+        colorModeChangeHandlers = colorModeChangeHandlers.filter(h => h !== handler);
+      };
     },
 
     getLegendEntries(maxEntries = LEGEND_DEFAULT_MAX): LegendEntry[] {
@@ -432,6 +531,26 @@ export function createSystemMap(opts: SystemMapOptions = {}): SystemMapComponent
         if (idx >= 0) legendContainers.splice(idx, 1);
         container.innerHTML = '';
       };
+    },
+
+    setTimeLapseFiles(filesPresent: Set<string> | null): void {
+      timeLapseFiles = filesPresent;
+      if (!layerEl) return;
+      layerEl.querySelectorAll('.system-map-circle').forEach((el) => {
+        const circle = el as SVGCircleElement;
+        const dataId = circle.getAttribute('data-id') ?? '';
+        if (filesPresent === null) {
+          circle.classList.remove('system-map-circle--time-lapse-absent');
+        } else {
+          const isFolder = circle.closest('.system-map-node')?.querySelector('.system-map-label--folder') !== null
+            || !dataId.includes('.');
+          if (!isFolder && !filesPresent.has(dataId)) {
+            circle.classList.add('system-map-circle--time-lapse-absent');
+          } else {
+            circle.classList.remove('system-map-circle--time-lapse-absent');
+          }
+        }
+      });
     },
   };
 }

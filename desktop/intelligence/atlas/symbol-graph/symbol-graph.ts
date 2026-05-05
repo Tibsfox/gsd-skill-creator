@@ -61,6 +61,8 @@ const COLOR_EDGE_CALL = 0x9aa5ce66;
 const COLOR_EDGE_CALL_HIGHLIGHT = 0x7aa2f7cc;
 const COLOR_EDGE_TYPE = 0xbb9af766;
 const COLOR_EDGE_TYPE_HIGHLIGHT = 0xbb9af7cc;
+/** Accent color for cross-project edges (corresponds to CSS class .cross-project-edge). */
+const COLOR_EDGE_CROSS_PROJECT = 0xe0af68cc;
 const NODE_RADIUS = 6;
 
 // ─── internal graph data ─────────────────────────────────────────────────────
@@ -69,6 +71,8 @@ interface GraphEdge {
   sourceId: string;
   targetId: string;
   kind: 'call' | 'type';
+  /** True when caller and callee belong to different projects. */
+  crossProject: boolean;
 }
 
 export class SymbolGraphView {
@@ -90,10 +94,14 @@ export class SymbolGraphView {
   private layoutNodes: LayoutNode[] = [];
   private idToLayout = new Map<string, LayoutNode>();
 
+  /** Maps symbolId → projectId for cross-project edge detection. Populated in loadGraph. */
+  private symbolProjectMap = new Map<string, string>();
+
   private filterConfig: FilterConfig = { ...DEFAULT_FILTER_CONFIG };
   private missionFilterId: string | null = null;
   private missionChipEl: HTMLElement | null = null;
   private selectHandlers: Array<(sel: GraphSelection | null) => void> = [];
+  private missionFilterChangeHandlers: Array<(missionId: string | null) => void> = [];
 
   private rafId: number | null = null;
   private dirty = false;
@@ -128,6 +136,7 @@ export class SymbolGraphView {
       this.updateChip();
       this.rebuildVertices();
       this.dirty = true;
+      for (const h of this.missionFilterChangeHandlers) h(null);
       return;
     }
 
@@ -144,6 +153,7 @@ export class SymbolGraphView {
     this.updateChip();
     this.rebuildVertices();
     this.dirty = true;
+    for (const h of this.missionFilterChangeHandlers) h(missionId);
   }
 
   mountChipContainer(container: HTMLElement): void {
@@ -180,6 +190,13 @@ export class SymbolGraphView {
     this.selectHandlers.push(handler);
     return () => {
       this.selectHandlers = this.selectHandlers.filter((h) => h !== handler);
+    };
+  }
+
+  onMissionFilterChange(handler: (missionId: string | null) => void): () => void {
+    this.missionFilterChangeHandlers.push(handler);
+    return () => {
+      this.missionFilterChangeHandlers = this.missionFilterChangeHandlers.filter(h => h !== handler);
     };
   }
 
@@ -248,17 +265,33 @@ export class SymbolGraphView {
     const fCallEdges = filterCallEdges(rawCallEdges, survivingIds, this.filterConfig);
     const fTypeRels = filterTypeRelations(rawTypeRels, survivingIds, this.filterConfig);
 
+    // Rebuild the symbol→project index from the current symbol set.
+    this.symbolProjectMap.clear();
+    for (const sym of filtered) {
+      if (sym.project_id) this.symbolProjectMap.set(sym.id, sym.project_id);
+    }
+
     this.symbols = filtered;
     this.edges = [
       ...fCallEdges.map((e) => ({
         sourceId: e.caller_symbol_id,
         targetId: e.callee_symbol_id,
         kind: 'call' as const,
+        crossProject:
+          this.symbolProjectMap.has(e.caller_symbol_id) &&
+          this.symbolProjectMap.has(e.callee_symbol_id) &&
+          this.symbolProjectMap.get(e.caller_symbol_id) !==
+            this.symbolProjectMap.get(e.callee_symbol_id),
       })),
       ...fTypeRels.map((r) => ({
         sourceId: r.from_symbol_id,
         targetId: r.to_symbol_id,
         kind: 'type' as const,
+        crossProject:
+          this.symbolProjectMap.has(r.from_symbol_id) &&
+          this.symbolProjectMap.has(r.to_symbol_id) &&
+          this.symbolProjectMap.get(r.from_symbol_id) !==
+            this.symbolProjectMap.get(r.to_symbol_id),
       })),
     ];
 
@@ -311,6 +344,12 @@ export class SymbolGraphView {
       };
     });
 
+    // Build cross-project lookup keyed by "sourceId:targetId".
+    const crossProjectKey = new Map<string, boolean>();
+    for (const e of this.edges) {
+      crossProjectKey.set(`${e.sourceId}:${e.targetId}`, e.crossProject);
+    }
+
     const filteredCallEdges = filterCallEdges(
       this.edges
         .filter((e) => e.kind === 'call')
@@ -347,24 +386,30 @@ export class SymbolGraphView {
         const srcLayout = this.idToLayout.get(e.caller_symbol_id);
         const tgtLayout = this.idToLayout.get(e.callee_symbol_id);
         const isHighlighted = this.hoveredEdgeIdx === idx;
+        const isCrossProject = crossProjectKey.get(`${e.caller_symbol_id}:${e.callee_symbol_id}`) ?? false;
         return {
           x0: srcLayout?.x ?? 0,
           y0: srcLayout?.y ?? 0,
           x1: tgtLayout?.x ?? 0,
           y1: tgtLayout?.y ?? 0,
-          color: isHighlighted ? COLOR_EDGE_CALL_HIGHLIGHT : COLOR_EDGE_CALL,
+          color: isCrossProject
+            ? COLOR_EDGE_CROSS_PROJECT
+            : isHighlighted ? COLOR_EDGE_CALL_HIGHLIGHT : COLOR_EDGE_CALL,
         };
       }),
       ...filteredTypeRels.map((r, idx) => {
         const srcLayout = this.idToLayout.get(r.from_symbol_id);
         const tgtLayout = this.idToLayout.get(r.to_symbol_id);
         const isHighlighted = this.hoveredEdgeIdx === filteredCallEdges.length + idx;
+        const isCrossProject = crossProjectKey.get(`${r.from_symbol_id}:${r.to_symbol_id}`) ?? false;
         return {
           x0: srcLayout?.x ?? 0,
           y0: srcLayout?.y ?? 0,
           x1: tgtLayout?.x ?? 0,
           y1: tgtLayout?.y ?? 0,
-          color: isHighlighted ? COLOR_EDGE_TYPE_HIGHLIGHT : COLOR_EDGE_TYPE,
+          color: isCrossProject
+            ? COLOR_EDGE_CROSS_PROJECT
+            : isHighlighted ? COLOR_EDGE_TYPE_HIGHLIGHT : COLOR_EDGE_TYPE,
         };
       }),
     ];
@@ -514,6 +559,17 @@ export class SymbolGraphView {
   get _filterConfig(): FilterConfig { return this.filterConfig; }
   get _missionFilterId(): string | null { return this.missionFilterId; }
   get _missionChipEl(): HTMLElement | null { return this.missionChipEl; }
+  /** Number of edges flagged as cross-project (for test assertions). */
+  get _crossProjectEdgeCount(): number {
+    return this.edges.filter((e) => e.crossProject).length;
+  }
+  /** Indices into edgeVertices that received COLOR_EDGE_CROSS_PROJECT. */
+  get _crossProjectEdgeIndices(): number[] {
+    return this.edges.reduce<number[]>((acc, e, i) => {
+      if (e.crossProject) acc.push(i);
+      return acc;
+    }, []);
+  }
 
   _loadGraphForTest(
     rawSymbols: AtlasSymbol[],

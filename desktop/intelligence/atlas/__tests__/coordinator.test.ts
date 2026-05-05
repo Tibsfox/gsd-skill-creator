@@ -10,14 +10,23 @@ import { createCoordinator } from '../coordinator.js';
 import type { CoordinatedView } from '../coordinator.js';
 import type { Focus } from '../focus-state.js';
 
-function makeView(): CoordinatedView & { calls: Focus[]; missionCalls: Array<string | null> } {
+function makeView(): CoordinatedView & {
+  calls: Focus[];
+  missionCalls: Array<string | null>;
+  timeLapseCalls: Array<{ files: Set<string> | null; missionId: string | null }>;
+} {
   const calls: Focus[] = [];
   const missionCalls: Array<string | null> = [];
+  const timeLapseCalls: Array<{ files: Set<string> | null; missionId: string | null }> = [];
   return {
     calls,
     missionCalls,
+    timeLapseCalls,
     setFocus(f: Focus) { calls.push(f); },
     setMissionFilter(id: string | null) { missionCalls.push(id); },
+    setTimeLapseFiles(files: Set<string> | null, missionId: string | null) {
+      timeLapseCalls.push({ files, missionId });
+    },
   };
 }
 
@@ -185,5 +194,113 @@ describe('Coordinator', () => {
       c.dispatch({ kind: 'mission', id: 'v1.49.605' });
     }).not.toThrow();
     expect(minimal.calls).toHaveLength(1);
+  });
+
+  it('dispatchTimeLapse: time-lapse cursor broadcast reaches all registered views', () => {
+    const c = createCoordinator();
+    const v1 = makeView();
+    const v2 = makeView();
+    c.registerView(v1);
+    c.registerView(v2);
+
+    const files = new Set(['src/a.ts', 'src/b.ts']);
+    c.dispatchTimeLapse(files, 'm1');
+
+    expect(v1.timeLapseCalls).toHaveLength(1);
+    expect(v1.timeLapseCalls[0].files).toBe(files);
+    expect(v1.timeLapseCalls[0].missionId).toBe('m1');
+
+    expect(v2.timeLapseCalls).toHaveLength(1);
+    expect(v2.timeLapseCalls[0].missionId).toBe('m1');
+  });
+
+  it('dispatchTimeLapse(null) clears time-lapse on all views', () => {
+    const c = createCoordinator();
+    const v = makeView();
+    c.registerView(v);
+
+    c.dispatchTimeLapse(new Set(['src/a.ts']), 'm1');
+    c.dispatchTimeLapse(null, null);
+
+    expect(v.timeLapseCalls).toHaveLength(2);
+    expect(v.timeLapseCalls[1].files).toBeNull();
+  });
+
+  it('subscribeTimeLapse receives cursor updates and unsubscribe stops them', () => {
+    const c = createCoordinator();
+    const received: Array<Set<string> | null> = [];
+    const unsub = c.subscribeTimeLapse((files) => received.push(files));
+
+    c.dispatchTimeLapse(new Set(['x.ts']), 'm1');
+    unsub();
+    c.dispatchTimeLapse(new Set(['y.ts']), 'm2');
+
+    expect(received).toHaveLength(1);
+  });
+});
+
+// ─── J3: Multi-project state ──────────────────────────────────────────────────
+
+import { MAX_SELECTED_PROJECTS } from '../coordinator.js';
+import { parseHash, serializeHash } from '../focus-state.js';
+
+describe('Coordinator — setSelectedProjects (J3)', () => {
+  it('setSelectedProjects(["a","b"]) updates state and returns true', () => {
+    const c = createCoordinator('a');
+    const result = c.setSelectedProjects(['a', 'b']);
+    expect(result).toBe(true);
+    expect(c.selectedProjects()).toEqual(['a', 'b']);
+  });
+
+  it('setSelectedProjects with 5 IDs is rejected (returns false, no state change)', () => {
+    const c = createCoordinator('a');
+    c.setSelectedProjects(['a', 'b']);
+    const fiveIds = ['a', 'b', 'c', 'd', 'e'];
+    expect(fiveIds.length).toBeGreaterThan(MAX_SELECTED_PROJECTS);
+    const result = c.setSelectedProjects(fiveIds);
+    expect(result).toBe(false);
+    expect(c.selectedProjects()).toEqual(['a', 'b']);
+  });
+
+  it(`MAX_SELECTED_PROJECTS exported constant equals ${MAX_SELECTED_PROJECTS}`, () => {
+    expect(MAX_SELECTED_PROJECTS).toBe(4);
+  });
+
+  it('setSelectedProjects does NOT dispatch a focus change to subscribers', () => {
+    const c = createCoordinator('proj-1');
+    const received: Array<Focus | null> = [];
+    c.subscribe((f) => received.push(f));
+    c.setSelectedProjects(['proj-1', 'proj-2']);
+    expect(received).toHaveLength(0);
+  });
+});
+
+describe('Focus — project_id round-trips through URL hash codec (J3)', () => {
+  it('serializeHash includes ?pid= when project_id is set', () => {
+    const focus: Focus = { kind: 'file', id: 'src/foo.ts', project_id: 'proj-b' };
+    const hash = serializeHash(focus);
+    expect(hash).toContain('?pid=proj-b');
+  });
+
+  it('parseHash recovers project_id from ?pid= query', () => {
+    const hash = '#atlas/file/src/foo.ts?pid=proj-b';
+    const focus = parseHash(hash);
+    expect(focus).not.toBeNull();
+    expect(focus!.project_id).toBe('proj-b');
+    expect(focus!.id).toBe('src/foo.ts');
+  });
+
+  it('existing hash without ?pid= parses with project_id undefined (backward compat)', () => {
+    const hash = '#atlas/symbol/ts%3Asrc%2Ffoo.ts%3AMyClass';
+    const focus = parseHash(hash);
+    expect(focus).not.toBeNull();
+    expect(focus!.project_id).toBeUndefined();
+  });
+
+  it('round-trips a focus with project_id through serialize then parse', () => {
+    const original: Focus = { kind: 'symbol', id: 'ts:src/bar.ts:MyFn', project_id: 'proj-x' };
+    const hash = serializeHash(original);
+    const recovered = parseHash(hash);
+    expect(recovered).toEqual(original);
   });
 });

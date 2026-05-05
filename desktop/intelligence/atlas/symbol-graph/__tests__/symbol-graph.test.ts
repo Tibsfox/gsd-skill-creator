@@ -564,3 +564,51 @@ describe('SymbolGraphView — setFocus IPC routing', () => {
     listInSnap.mockRestore();
   });
 });
+
+// ─── J3: Multi-project mode — cross-project edges ────────────────────────────
+
+describe('SymbolGraphView — multi-project mode (J3)', () => {
+  let canvas: HTMLCanvasElement;
+  let view: SymbolGraphView;
+
+  beforeEach(() => {
+    vi.stubGlobal('requestAnimationFrame', vi.fn(() => 1));
+    vi.stubGlobal('cancelAnimationFrame', vi.fn());
+    canvas = makeCanvas();
+    view = new SymbolGraphView(canvas);
+  });
+
+  it('symbols from multiple projects are all present after loadGraph', () => {
+    const symA = makeSymbol({ id: 'sym-proj-a', project_id: 'proj-a', file_path: 'a/foo.ts' });
+    const symB = makeSymbol({ id: 'sym-proj-b', project_id: 'proj-b', file_path: 'b/bar.ts' });
+    view._loadGraphForTest([symA, symB], [], []);
+    expect(view._symbols).toHaveLength(2);
+    expect(view._symbols.map(s => s.id)).toContain('sym-proj-a');
+    expect(view._symbols.map(s => s.id)).toContain('sym-proj-b');
+  });
+
+  it('same-project call edge is NOT flagged as cross-project', () => {
+    const symA1 = makeSymbol({ id: 'sym-a1', project_id: 'proj-a' });
+    const symA2 = makeSymbol({ id: 'sym-a2', project_id: 'proj-a' });
+    const edge = makeCallEdge('sym-a1', 'sym-a2');
+    view._loadGraphForTest([symA1, symA2], [edge], []);
+    expect(view._crossProjectEdgeCount).toBe(0);
+  });
+
+  it('call edge spanning two different projects is flagged crossProject + gets cross-project color', () => {
+    const symA = makeSymbol({ id: 'sym-proj-a', project_id: 'proj-a' });
+    const symB = makeSymbol({ id: 'sym-proj-b', project_id: 'proj-b' });
+    const edge = makeCallEdge('sym-proj-a', 'sym-proj-b');
+    view._loadGraphForTest([symA, symB], [edge], []);
+    expect(view._crossProjectEdgeCount).toBe(1);
+    expect(view._crossProjectEdgeIndices).toContain(0);
+  });
+
+  it('type relation spanning two different projects is flagged crossProject', () => {
+    const symA = makeSymbol({ id: 'sym-proj-a2', project_id: 'proj-a' });
+    const symB = makeSymbol({ id: 'sym-proj-b2', project_id: 'proj-b' });
+    const rel = makeTypeRel('sym-proj-a2', 'sym-proj-b2');
+    view._loadGraphForTest([symA, symB], [], [rel]);
+    expect(view._crossProjectEdgeCount).toBe(1);
+  });
+});

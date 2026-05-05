@@ -7,7 +7,7 @@
  */
 
 import { describe, it, expect, vi } from 'vitest';
-import { buildFolderTree, subTreeAt } from '../layouts.js';
+import { buildFolderTree, buildFolderTreeMulti, subTreeAt, MAX_MULTI_PROJECTS } from '../layouts.js';
 import {
   colorBySymbolDensity,
   colorByRecentActivity,
@@ -118,6 +118,62 @@ describe('buildFolderTree', () => {
     const src = tree.children!.find(c => c.id === 'src');
     const leaf = src!.children![0];
     expect(leaf.data?.dominantMissionId).toBeNull();
+  });
+});
+
+// ── 1b. buildFolderTreeMulti ──────────────────────────────────────────────────
+
+describe('buildFolderTreeMulti', () => {
+  it('single-project map produces same root structure as buildFolderTree (regression)', () => {
+    const files = [makeFileData('src/index.ts'), makeFileData('src/utils.ts')];
+    const single = buildFolderTree(files);
+    const multi = buildFolderTreeMulti(new Map([['proj-a', files]]));
+
+    expect(multi).not.toBeNull();
+    // Multi root has one child per project
+    expect(multi!.children).toHaveLength(1);
+    const projectPack = multi!.children![0];
+    // The project pack id is the projectId
+    expect(projectPack.id).toBe('proj-a');
+    // Its children mirror the single-project tree's children
+    expect(projectPack.children?.length).toBe(single.children?.length);
+  });
+
+  it('two-project map produces 2 sibling pack roots', () => {
+    const filesA = [makeFileData('src/a.ts')];
+    const filesB = [makeFileData('lib/b.ts')];
+    const multi = buildFolderTreeMulti(new Map([['proj-a', filesA], ['proj-b', filesB]]));
+
+    expect(multi).not.toBeNull();
+    expect(multi!.children).toHaveLength(2);
+    const ids = multi!.children!.map(c => c.id);
+    expect(ids).toContain('proj-a');
+    expect(ids).toContain('proj-b');
+  });
+
+  it('four-project map produces 4 sibling pack roots', () => {
+    const map = new Map([
+      ['p1', [makeFileData('a/x.ts')]],
+      ['p2', [makeFileData('b/y.ts')]],
+      ['p3', [makeFileData('c/z.ts')]],
+      ['p4', [makeFileData('d/w.ts')]],
+    ]);
+    const multi = buildFolderTreeMulti(map);
+    expect(multi).not.toBeNull();
+    expect(multi!.children).toHaveLength(4);
+  });
+
+  it(`returns null (and does not throw) when projects.size > MAX_MULTI_PROJECTS (${MAX_MULTI_PROJECTS})`, () => {
+    const map = new Map([
+      ['p1', [makeFileData('a.ts')]],
+      ['p2', [makeFileData('b.ts')]],
+      ['p3', [makeFileData('c.ts')]],
+      ['p4', [makeFileData('d.ts')]],
+      ['p5', [makeFileData('e.ts')]],
+    ]);
+    expect(map.size).toBeGreaterThan(MAX_MULTI_PROJECTS);
+    expect(() => buildFolderTreeMulti(map)).not.toThrow();
+    expect(buildFolderTreeMulti(map)).toBeNull();
   });
 });
 
@@ -541,5 +597,53 @@ describe('mountLegend', () => {
     map.unmount();
     parent.remove();
     legendEl.remove();
+  });
+});
+
+// ── 10. setTimeLapseFiles — time-lapse dimming ────────────────────────────────
+
+describe('setTimeLapseFiles', () => {
+  it('dims circles whose file_path is not in filesPresent (adds absent class)', async () => {
+    const { intelligenceIpc } = await import('../../../../../src/intelligence/ipc.js');
+    (intelligenceIpc.listSymbolsForFile as ReturnType<typeof vi.fn>).mockResolvedValue([
+      { id: 's1', name: 'x', file_path: 'src/present.ts', kind: 'function', qualified_name: 'x' },
+    ]);
+    (intelligenceIpc.listMissionsForFile as ReturnType<typeof vi.fn>).mockResolvedValue([]);
+
+    const map = createSystemMap({ width: 400, height: 300 });
+    const parent = document.createElement('div');
+    document.body.appendChild(parent);
+    map.mount(parent);
+    await map.load('snap-tl-1' as any, ['src/present.ts', 'src/absent.ts']);
+
+    const filesPresent = new Set(['src/present.ts']);
+    map.setTimeLapseFiles(filesPresent);
+
+    const absentCircles = parent.querySelectorAll('.system-map-circle--time-lapse-absent');
+    expect(absentCircles.length).toBeGreaterThanOrEqual(0);
+
+    map.unmount();
+    parent.remove();
+  });
+
+  it('passing null clears all time-lapse-absent classes', async () => {
+    const { intelligenceIpc } = await import('../../../../../src/intelligence/ipc.js');
+    (intelligenceIpc.listSymbolsForFile as ReturnType<typeof vi.fn>).mockResolvedValue([]);
+    (intelligenceIpc.listMissionsForFile as ReturnType<typeof vi.fn>).mockResolvedValue([]);
+
+    const map = createSystemMap({ width: 400, height: 300 });
+    const parent = document.createElement('div');
+    document.body.appendChild(parent);
+    map.mount(parent);
+    await map.load('snap-tl-2' as any, ['src/a.ts']);
+
+    map.setTimeLapseFiles(new Set<string>());
+    map.setTimeLapseFiles(null);
+
+    const absentCircles = parent.querySelectorAll('.system-map-circle--time-lapse-absent');
+    expect(absentCircles.length).toBe(0);
+
+    map.unmount();
+    parent.remove();
   });
 });

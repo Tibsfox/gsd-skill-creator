@@ -47,6 +47,13 @@ export const DEFAULT_LABEL_CUTOFF_RADIUS = 12;
 export const DEFAULT_PADDING = 2;
 
 /**
+ * Hard limit on projects accepted by buildFolderTreeMulti.
+ * Exposed as a constant so callers (picker, tests) can reference it without
+ * duplicating the magic number.
+ */
+export const MAX_MULTI_PROJECTS = 4;
+
+/**
  * Build a HierNode tree from a flat list of FileData.
  *
  * Folder path segments become intermediate nodes; files become leaves.
@@ -54,8 +61,53 @@ export const DEFAULT_PADDING = 2;
  * still appear).
  */
 export function buildFolderTree(files: FileData[]): HierNode<NodePayload> {
-  const root: MutableNode = {
+  return freezeNode(buildMutableTree('/', files));
+}
+
+/**
+ * Build a union HierNode tree from a Map of projectId → FileData[].
+ *
+ * Produces a synthetic root with one child pack per project. Each project
+ * pack uses the projectId as its label. The per-project subtree is identical
+ * to what buildFolderTree would produce for that project's files alone.
+ *
+ * Safety: returns null and logs a warning when projects.size > MAX_MULTI_PROJECTS.
+ * Callers should check for null rather than let a too-large union silently slow
+ * down layout. The picker enforces the limit before dispatch, so null here
+ * is a defense-in-depth guard.
+ */
+export function buildFolderTreeMulti(
+  projects: Map<string, FileData[]>,
+): HierNode<NodePayload> | null {
+  if (projects.size > MAX_MULTI_PROJECTS) {
+    // eslint-disable-next-line no-console
+    console.warn(
+      `buildFolderTreeMulti: received ${projects.size} projects; ` +
+      `MAX_MULTI_PROJECTS is ${MAX_MULTI_PROJECTS}. Returning null.`,
+    );
+    return null;
+  }
+
+  const syntheticRoot: MutableNode = {
     id: '/',
+    data: { kind: 'folder', symbolCount: 0, missionIds: [], dominantMissionId: null, dominantWeight: 0 },
+    value: undefined,
+    children: [],
+  };
+
+  for (const [projectId, files] of projects) {
+    // Build the mutable inner tree (not yet frozen) so we can compose it safely.
+    const projectInner = buildMutableTree(projectId, files);
+    syntheticRoot.children.push(projectInner);
+  }
+
+  return freezeNode(syntheticRoot);
+}
+
+/** Shared mutable-tree builder used by both buildFolderTree and buildFolderTreeMulti. */
+function buildMutableTree(rootId: string, files: FileData[]): MutableNode {
+  const root: MutableNode = {
+    id: rootId,
     data: { kind: 'folder', symbolCount: 0, missionIds: [], dominantMissionId: null, dominantWeight: 0 },
     value: undefined,
     children: [],
@@ -99,7 +151,7 @@ export function buildFolderTree(files: FileData[]): HierNode<NodePayload> {
     });
   }
 
-  return freezeNode(root);
+  return root;
 }
 
 interface MutableNode {
