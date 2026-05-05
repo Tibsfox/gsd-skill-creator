@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="gsd-skill-creator Atlas — Code structure visualisation, mission archeology, symbol graph, and search palette.">
+    <meta property="og:title" content="gsd-skill-creator — Atlas">
+    <meta property="og:type" content="website">
+    <title>gsd-skill-creator — Atlas</title>
+    <link rel="stylesheet" href="intelligence/intelligence.css">
+    <style>
+/* Match existing GSD dashboard base layout */
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans, 'Inter', system-ui, -apple-system, sans-serif);
+  background: var(--bg-primary, #0d1117);
+  color: var(--text-primary, #c9d1d9);
+  font-size: 14px;
+  line-height: 1.6;
+}
+:root {
+  --bg-primary: #0d1117;
+  --bg-secondary: #161b22;
+  --border-default: #30363d;
+  --border-muted: #484f58;
+  --text-primary: #c9d1d9;
+  --text-muted: #6e7681;
+  --text-code: #a5d6ff;
+  --color-accent: #58a6ff;
+  --color-warning: #d29922;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --radius-sm: 4px;
+  --radius-lg: 8px;
+}
+header {
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-default);
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.header-title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.page-wrapper {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  min-height: calc(100vh - 48px);
+}
+nav {
+  border-right: 1px solid var(--border-default);
+  padding: 1rem 0;
+  background: var(--bg-secondary);
+}
+.nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-list li {
+  margin: 0;
+}
+.nav-link {
+  display: block;
+  padding: 0.5rem 1.25rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color 0.15s, background 0.15s;
+}
+.nav-link:hover {
+  color: var(--text-primary);
+  background: rgba(255,255,255,0.05);
+}
+.nav-link.active {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+main {
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+#atlas-root {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.atlas-static-banner {
+  margin: 1.5rem;
+  padding: 1rem 1.25rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+.atlas-static-banner__title {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+.atlas-static-banner__command {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--text-code);
+  background: rgba(165,214,255,0.08);
+  padding: 0.125rem 0.375rem;
+  border-radius: var(--radius-sm);
+}
+    </style>
+  </head>
+  <body>
+    <header>
+      <span class="header-title">gsd-skill-creator — Atlas</span>
+    </header>
+    <div class="page-wrapper">
+      <nav>
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Dashboard</a></li>
+          <li><a href="requirements.html" class="nav-link">Requirements</a></li>
+          <li><a href="roadmap.html" class="nav-link">Roadmap</a></li>
+          <li><a href="milestones.html" class="nav-link">Milestones</a></li>
+          <li><a href="state.html" class="nav-link">State</a></li>
+          <li><a href="console.html" class="nav-link">Console</a></li>
+          <li><a href="intelligence.html" class="nav-link">Intelligence</a></li>
+          <li><a href="atlas.html" class="nav-link active" data-nav-item="atlas">Atlas</a></li>
+        </ul>
+      </nav>
+      <main>
+        <div id="atlas-root">
+          <!-- Static-mode fallback banner — visible when Tauri IPC is not available -->
+          <div id="atlas-static-mode-banner" class="atlas-static-banner" style="display:none;">
+            <div class="atlas-static-banner__title">Atlas requires the Tauri shell</div>
+            <p style="margin:0.5rem 0;">
+              The Atlas code-structure visualiser runs inside the Tauri desktop shell
+              where IPC access to the Intelligence KB is available.  Open this page from
+              within the gsd-skill-creator desktop app to enable all four panes
+              (System Map, Symbol Graph, Mission Archeology, Code View) and the
+              Cmd-K search palette.
+            </p>
+            <p style="margin:0.5rem 0 0;">
+              Browser-only mode will show this banner.  Symbol indexing, snapshot
+              diffing, and live graph updates all require Tauri IPC.
+            </p>
+          </div>
+
+          <!-- Atlas shell — populated by desktop/intelligence/atlas/index.ts via createAtlas() -->
+          <div id="atlas-shell-host"></div>
+        </div>
+      </main>
+    </div>
+    <!-- Atlas UI (v1.49.607 W4a) — mounts createAtlas() from the atlas index -->
+    <script type="module">
+      /**
+       * Atlas entry-point bootstrap.
+       *
+       * In the Tauri shell, the atlas bundle is compiled alongside the desktop
+       * frontend via Vite/esbuild.  In static browser mode we detect the absence
+       * of Tauri IPC and surface the fallback banner.
+       *
+       * createAtlas(host) — factory from desktop/intelligence/atlas/index.ts:
+       *   Mounts the four-pane shell (SystemMap | SymbolGraph | Archeology | CodeView)
+       *   plus the SearchPalette overlay into `host`.
+       *   Returns an AtlasShell handle with coordinator.attachHashRouting() for
+       *   URL-hash state persistence.
+       */
+      var hasTauri = typeof window.__TAURI_IPC__ !== 'undefined' ||
+                     typeof window.__TAURI__     !== 'undefined';
+
+      if (!hasTauri) {
+        var banner = document.getElementById('atlas-static-mode-banner');
+        if (banner) banner.style.display = '';
+      }
+
+      // Dynamic import — resolved by Vite/esbuild in the Tauri build pipeline.
+      // The import path is relative to the compiled bundle output location.
+      // In static-file mode this import will fail gracefully (banner already shown).
+      if (hasTauri) {
+        import('./intelligence/atlas.bundle.js')
+          .then(function (m) {
+            var host = document.getElementById('atlas-shell-host');
+            if (!host) return;
+            var atlas = m.createAtlas(host);
+            // Wire URL-hash routing so reload survives and back-button works.
+            m.attachToHashRouting(atlas.coordinator);
+          })
+          .catch(function (err) {
+            if (typeof console !== 'undefined') {
+              console.warn('[atlas] Bundle load failed — showing static-mode banner.', err);
+            }
+            var banner = document.getElementById('atlas-static-mode-banner');
+            if (banner) banner.style.display = '';
+          });
+      }
+    </script>
+  </body>
+</html>
