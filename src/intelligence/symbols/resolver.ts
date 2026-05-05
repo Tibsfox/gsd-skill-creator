@@ -95,7 +95,7 @@ export function resolve(idx: IndexResult, ctx: ResolverContext): ResolveResult {
     const inFileSyms = (enclosingByFile.get(ref.file_path) ?? []).filter(
       (s) => s.name === ref.name && s.kind !== 'import' && s.kind !== 'export',
     );
-    const targetSym = pickResolutionTarget(ref, inFileSyms, buckets, fileBindings, fileBindingOrig);
+    const targetSym = pickResolutionTarget(ref, inFileSyms, buckets, fileBindings, fileBindingOrig, idx.files, ctx, knownFiles);
     const updated: AtlasSymbolReference = targetSym
       ? {
           ...ref,
@@ -147,6 +147,9 @@ function pickResolutionTarget(
   buckets: SymbolBucket,
   fileBindings: Map<string, string> | undefined,
   fileBindingOrig: Map<string, string> | undefined,
+  allFiles: FileIndexResult[],
+  ctx: ResolverContext,
+  knownFiles: Set<string>,
 ): PickedTarget | null {
   // 1. Same-file declaration wins (highest signal).
   if (inFileSyms.length === 1) return { symbol: inFileSyms[0]!, confidence: ref.resolution_kind === 'call' ? 0.95 : 1.0 };
@@ -159,7 +162,9 @@ function pickResolutionTarget(
     if (importedFrom) {
       // Look up by original export-name when the local binding is aliased.
       const lookupName = fileBindingOrig?.get(ref.name) ?? ref.name;
-      let candidates = (buckets.byFile.get(importedFrom) ?? []).filter((s) => s.name === lookupName);
+      let candidates = (buckets.byFile.get(importedFrom) ?? []).filter(
+        (s) => s.name === lookupName && s.kind !== 'import' && s.kind !== 'export',
+      );
       // Default-import fallback: when original is 'default', match the sole
       // exported symbol of that file (single-export heuristic).
       if (candidates.length === 0 && lookupName === 'default') {
@@ -167,6 +172,16 @@ function pickResolutionTarget(
           (s) => s.kind !== 'import' && s.kind !== 'export',
         );
         if (fileSyms.length === 1) candidates = fileSyms;
+      }
+      // Re-export chain: if the intermediate file has no matching declaration,
+      // follow re-exports transitively to find the ultimate source.
+      if (candidates.length === 0) {
+        const chain = followReExportChain(lookupName, importedFrom, allFiles, ctx, knownFiles);
+        if (chain.file !== importedFrom || chain.originalName !== lookupName) {
+          candidates = (buckets.byFile.get(chain.file) ?? []).filter(
+            (s) => s.name === chain.originalName && s.kind !== 'import' && s.kind !== 'export',
+          );
+        }
       }
       if (candidates.length === 1) return { symbol: candidates[0]!, confidence: ref.resolution_kind === 'call' ? 0.9 : 0.95 };
       if (candidates.length > 1) return { symbol: candidates[0]!, confidence: 0.5 };
@@ -257,6 +272,44 @@ function computeImportBindings(
     }
   }
   return { byFile, byOrigName };
+}
+
+/**
+ * Follow re-export chains: given that `localName` from `intermediateFile` is
+ * needed, check whether `intermediateFile` itself re-exports that name from
+ * another file. Returns the ultimate source file path (or the intermediate
+ * file if no re-export chain is found). Depth-limited to avoid cycles.
+ */
+export function followReExportChain(
+  localName: string,
+  intermediateFile: string,
+  allFiles: FileIndexResult[],
+  ctx: ResolverContext,
+  knownFiles: Set<string>,
+  depth = 0,
+): { file: string; originalName: string } {
+  if (depth > 8) return { file: intermediateFile, originalName: localName };
+  const fileResult = allFiles.find((f) => f.file_path === intermediateFile);
+  if (!fileResult) return { file: intermediateFile, originalName: localName };
+  // Look for a re-export import record that covers `localName`.
+  for (const imp of fileResult.imports) {
+    if (!imp.imported_bindings) continue;
+    const binding = imp.imported_bindings.find((b) => b.local === localName || b.original === '*');
+    if (!binding) continue;
+    // Resolve the module spec relative to the intermediate file.
+    let resolved: string | null = null;
+    if (fileResult.language === 'ts' || fileResult.language === 'js') {
+      resolved = resolveTsImport(fileResult.file_path, imp.module_spec, {
+        project_root: ctx.project_root,
+        paths: ctx.ts_paths,
+        known_files: knownFiles,
+      });
+    }
+    if (!resolved) continue;
+    const nextOriginal = binding.original === '*' ? localName : binding.original;
+    return followReExportChain(nextOriginal, resolved, allFiles, ctx, knownFiles, depth + 1);
+  }
+  return { file: intermediateFile, originalName: localName };
 }
 
 /**

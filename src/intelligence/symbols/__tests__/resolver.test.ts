@@ -141,4 +141,73 @@ describe('cross-file resolver', () => {
     expect(callRef!.resolved_symbol_id).toBe(helper.id);
     expect(callRef!.resolution_confidence).toBe(0.9);
   });
+
+  it('named re-export: file C imports foo from A (which re-exports from B) resolves to B', () => {
+    const inputs: FileInput[] = [
+      { file_path: 'src/b.ts', source: `export function foo() { return 1; }`, language: 'ts' },
+      { file_path: 'src/a.ts', source: `export { foo } from './b.js';`, language: 'ts' },
+      { file_path: 'src/c.ts', source: `import { foo } from './a.js';\nfunction run() { foo(); }`, language: 'ts' },
+    ];
+    const { idx, res } = buildAndResolve(inputs);
+    const fooInB = idx.symbols.find((s) => s.name === 'foo' && s.file_path === 'src/b.ts');
+    expect(fooInB).toBeDefined();
+    const callRef = res.references.find((r) => r.name === 'foo' && r.file_path === 'src/c.ts' && r.start_line === 2);
+    expect(callRef).toBeDefined();
+    expect(callRef!.resolved_symbol_id).toBe(fooInB!.id);
+    expect(callRef!.resolution_confidence).toBeGreaterThan(0.5);
+  });
+
+  it('aliased re-export: bar as baz resolves baz usage in consumer to bar in source', () => {
+    const inputs: FileInput[] = [
+      { file_path: 'src/b.ts', source: `export function bar() {}`, language: 'ts' },
+      { file_path: 'src/a.ts', source: `export { bar as baz } from './b.js';`, language: 'ts' },
+      { file_path: 'src/c.ts', source: `import { baz } from './a.js';\nfunction run() { baz(); }`, language: 'ts' },
+    ];
+    const { idx, res } = buildAndResolve(inputs);
+    const barInB = idx.symbols.find((s) => s.name === 'bar' && s.file_path === 'src/b.ts');
+    expect(barInB).toBeDefined();
+    const callRef = res.references.find((r) => r.name === 'baz' && r.file_path === 'src/c.ts' && r.start_line === 2);
+    expect(callRef).toBeDefined();
+    expect(callRef!.resolved_symbol_id).toBe(barInB!.id);
+  });
+
+  it('star re-export: file C imports any name from A (which star-re-exports B) resolves to B', () => {
+    const inputs: FileInput[] = [
+      { file_path: 'src/b.ts', source: `export function alpha() {}`, language: 'ts' },
+      { file_path: 'src/a.ts', source: `export * from './b.js';`, language: 'ts' },
+      { file_path: 'src/c.ts', source: `import { alpha } from './a.js';\nfunction run() { alpha(); }`, language: 'ts' },
+    ];
+    const { idx, res } = buildAndResolve(inputs);
+    const alphaInB = idx.symbols.find((s) => s.name === 'alpha' && s.file_path === 'src/b.ts');
+    expect(alphaInB).toBeDefined();
+    const callRef = res.references.find((r) => r.name === 'alpha' && r.file_path === 'src/c.ts' && r.start_line === 2);
+    expect(callRef).toBeDefined();
+    expect(callRef!.resolved_symbol_id).toBe(alphaInB!.id);
+  });
+
+  it('star-as-namespace re-export emits namespace export symbol in intermediate file', () => {
+    const inputs: FileInput[] = [
+      { file_path: 'src/b.ts', source: `export function beta() {}`, language: 'ts' },
+      { file_path: 'src/a.ts', source: `export * as NS from './b.js';`, language: 'ts' },
+    ];
+    const { idx } = buildAndResolve(inputs);
+    const nsExport = idx.symbols.find((s) => s.name === 'NS' && s.file_path === 'src/a.ts');
+    expect(nsExport).toBeDefined();
+    expect(nsExport!.kind).toBe('export');
+  });
+
+  it('transitive re-export: C imports from A re-exports B re-exports from D resolves to D', () => {
+    const inputs: FileInput[] = [
+      { file_path: 'src/d.ts', source: `export function deep() {}`, language: 'ts' },
+      { file_path: 'src/b.ts', source: `export { deep } from './d.js';`, language: 'ts' },
+      { file_path: 'src/a.ts', source: `export { deep } from './b.js';`, language: 'ts' },
+      { file_path: 'src/c.ts', source: `import { deep } from './a.js';\nfunction run() { deep(); }`, language: 'ts' },
+    ];
+    const { idx, res } = buildAndResolve(inputs);
+    const deepInD = idx.symbols.find((s) => s.name === 'deep' && s.file_path === 'src/d.ts');
+    expect(deepInD).toBeDefined();
+    const callRef = res.references.find((r) => r.name === 'deep' && r.file_path === 'src/c.ts' && r.start_line === 2);
+    expect(callRef).toBeDefined();
+    expect(callRef!.resolved_symbol_id).toBe(deepInD!.id);
+  });
 });

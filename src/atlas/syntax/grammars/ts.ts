@@ -254,21 +254,73 @@ const extractImport: CoarseExtractor = ({ tokens, i, pushNode }) => {
 const extractExport: CoarseExtractor = ({ tokens, i, pushNode }) => {
   const t = tokens[i];
   if (!t || t.value !== 'export') return i;
-  // Bare re-export: `export { ... } from '...'` OR fall through to function/class.
+  // Re-export forms: `export { ... } from '...'`, `export * from '...'`,
+  // `export * as N from '...'`. These carry no `from` when it's a plain
+  // `export { x }` (non-re-export) — we only emit import-routing for the
+  // `from`-clause variant.
   const next = tokens[i + 1];
   if (!next) return i;
-  if (next.value === '{' || next.value === '*' || next.value === 'default') {
-    // Find 'from'
+  if (next.value === '{' || next.value === '*') {
+    const importedNames: Array<{ local: string; original: string }> = [];
     let j = i + 1;
+    // Star re-export: `export * from '...'` or `export * as N from '...'`
+    if (tokens[j]?.value === '*') {
+      j++;
+      if (tokens[j]?.value === 'as') {
+        j++;
+        if (tokens[j]?.kind === 'identifier') {
+          // export * as N from '...' — emit a namespace export binding
+          importedNames.push({ local: tokens[j]!.value, original: '*' });
+          j++;
+        }
+      } else {
+        // bare star — re-export all; sentinel binding
+        importedNames.push({ local: '*', original: '*' });
+      }
+    } else if (tokens[j]?.value === '{') {
+      // Named re-export: `export { foo, bar as baz } from '...'`
+      j++;
+      while (j < tokens.length && tokens[j]!.value !== '}') {
+        if (tokens[j]!.value === 'type') { j++; continue; }
+        if (tokens[j]!.kind === 'identifier') {
+          const original = tokens[j]!.value;
+          let local = original;
+          j++;
+          if (tokens[j]?.value === 'as') {
+            j++;
+            if (tokens[j]?.kind === 'identifier') { local = tokens[j]!.value; j++; }
+          }
+          importedNames.push({ local, original });
+        } else { j++; }
+        if (tokens[j]?.value === ',') j++;
+      }
+      if (tokens[j]?.value === '}') j++;
+    }
+    // Look for `from 'spec'`
     while (j < tokens.length && tokens[j]!.value !== ';' && j < i + 64) {
       if (tokens[j]!.value === 'from' && tokens[j + 1]?.kind === 'string') {
-        const m = tokens[j + 1]!.value.slice(1, -1);
-        pushNode({ kind: 'export', name: m, start: t.start, end: tokens[j + 1]!.end, line: t.line });
+        const src = tokens[j + 1]!.value.slice(1, -1);
+        const endTok = tokens[j + 1]!;
+        // Emit an import-flavoured export node carrying re-export binding data.
+        pushNode({
+          kind: 'export',
+          name: src,
+          start: t.start,
+          end: endTok.end,
+          line: t.line,
+          importedNames: importedNames.length > 0 ? importedNames : undefined,
+        });
+        // Also emit individual export symbols for named re-exports (so downstream
+        // files that import from THIS file can resolve against it).
+        for (const b of importedNames) {
+          if (b.local === '*') continue;
+          pushNode({ kind: 'export', name: b.local, start: t.start, end: endTok.end, line: t.line });
+        }
         return j + 2;
       }
       j++;
     }
-    pushNode({ kind: 'export', name: '<*>', start: t.start, end: t.end, line: t.line });
+    // No `from` clause — plain export object; not a re-export.
     return i + 1;
   }
   return i;

@@ -83,4 +83,63 @@ describe('rust syntax', () => {
     expect(methods.map((n) => n.name).sort()).toEqual(['a', 'b', 'c']);
     expect(methods.every((m) => m.parent === 'Container')).toBe(true);
   });
+
+  it('extracts a single nested fn inside an outer fn', () => {
+    const src = `
+      fn outer() {
+        fn inner() {}
+      }
+    `;
+    const { ast } = parse(src, 'rust');
+    const fns = ast.nodes.filter((n) => n.kind === 'function');
+    const names = fns.map((n) => n.name);
+    expect(names).toContain('outer');
+    expect(names).toContain('inner');
+    const inner = fns.find((n) => n.name === 'inner');
+    expect(inner?.parent).toBe('outer');
+  });
+
+  it('extracts multiple sibling nested fns', () => {
+    const src = `
+      fn outer() {
+        fn first() {}
+        fn second() {}
+      }
+    `;
+    const { ast } = parse(src, 'rust');
+    const nested = ast.nodes.filter((n) => n.kind === 'function' && n.parent === 'outer');
+    expect(nested.map((n) => n.name).sort()).toEqual(['first', 'second']);
+  });
+
+  it('extracts doubly-nested fns (inner-of-inner)', () => {
+    const src = `
+      fn outer() {
+        fn mid() {
+          fn deep() {}
+        }
+      }
+    `;
+    const { ast } = parse(src, 'rust');
+    const fns = ast.nodes.filter((n) => n.kind === 'function');
+    const names = fns.map((n) => n.name);
+    expect(names).toContain('outer');
+    expect(names).toContain('mid');
+    expect(names).toContain('deep');
+    const deep = fns.find((n) => n.name === 'deep');
+    expect(deep?.parent).toBe('outer::mid');
+  });
+
+  it('nested struct inside fn is not emitted as a function node', () => {
+    const src = `
+      fn outer() {
+        struct Inner { x: i32 }
+        fn helper() {}
+      }
+    `;
+    const { ast } = parse(src, 'rust');
+    const fns = ast.nodes.filter((n) => n.kind === 'function');
+    expect(fns.map((n) => n.name)).toContain('helper');
+    const structs = ast.nodes.filter((n) => n.kind === 'struct');
+    expect(structs.map((n) => n.name)).not.toContain('Inner');
+  });
 });

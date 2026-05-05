@@ -77,4 +77,43 @@ describe('typescript syntax', () => {
     expect(imp?.name).toBe('./polyfill');
     expect(imp?.importedNames).toBeUndefined();
   });
+
+  it('named re-export carries importedNames on export node with module spec as name', () => {
+    const { ast } = parse(`export { foo, bar as baz } from './y';`, 'typescript');
+    const reExport = ast.nodes.find((n) => n.kind === 'export' && n.name === './y');
+    expect(reExport).toBeDefined();
+    expect(reExport?.importedNames).toEqual([
+      { local: 'foo', original: 'foo' },
+      { local: 'baz', original: 'bar' },
+    ]);
+  });
+
+  it('named re-export emits individual export symbols for each binding', () => {
+    const { ast } = parse(`export { foo, bar as baz } from './y';`, 'typescript');
+    const exportNames = ast.nodes.filter((n) => n.kind === 'export').map((n) => n.name);
+    expect(exportNames).toContain('foo');
+    expect(exportNames).toContain('baz');
+  });
+
+  it('star re-export carries sentinel importedNames binding', () => {
+    const { ast } = parse(`export * from './y';`, 'typescript');
+    const reExport = ast.nodes.find((n) => n.kind === 'export' && n.name === './y');
+    expect(reExport).toBeDefined();
+    expect(reExport?.importedNames).toEqual([{ local: '*', original: '*' }]);
+  });
+
+  it('star-as-namespace re-export emits namespace binding and individual export symbol', () => {
+    const { ast } = parse(`export * as NS from './y';`, 'typescript');
+    const reExport = ast.nodes.find((n) => n.kind === 'export' && n.name === './y');
+    expect(reExport).toBeDefined();
+    expect(reExport?.importedNames).toEqual([{ local: 'NS', original: '*' }]);
+    const nsExport = ast.nodes.find((n) => n.kind === 'export' && n.name === 'NS');
+    expect(nsExport).toBeDefined();
+  });
+
+  it('plain export { x } without from clause does not produce re-export import record', () => {
+    const { ast } = parse(`const x = 1;\nexport { x };`, 'typescript');
+    const withFrom = ast.nodes.filter((n) => n.kind === 'export' && n.importedNames !== undefined);
+    expect(withFrom).toHaveLength(0);
+  });
 });

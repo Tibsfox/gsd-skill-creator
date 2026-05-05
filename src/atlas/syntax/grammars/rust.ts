@@ -54,6 +54,57 @@ export const rustGrammar: Grammar = {
   },
 };
 
+/**
+ * Recursively emit `fn` declarations found inside a token range [from, limit).
+ * `qualifiedPrefix` is the outer function's name for nested qualified_name assembly.
+ * Depth-limited to avoid pathological nesting (max 8 levels).
+ */
+function extractNestedFns(
+  tokens: Token[],
+  from: number,
+  limit: number,
+  qualifiedPrefix: string,
+  pushNode: (node: CoarseNode) => void,
+  depth: number,
+): void {
+  if (depth > 8) return;
+  let j = from;
+  while (j < limit) {
+    const { mods, declAt } = consumeModifiers(tokens, j, MODIFIERS);
+    const t = tokens[declAt];
+    if (t && t.value === 'fn') {
+      const nameT = tokens[declAt + 1];
+      if (nameT && nameT.kind === 'identifier') {
+        const qualifiedName = `${qualifiedPrefix}::${nameT.value}`;
+        pushNode({
+          kind: 'function',
+          name: nameT.value,
+          parent: qualifiedPrefix,
+          start: t.start,
+          end: nameT.end,
+          line: t.line,
+          modifiers: mods,
+        });
+        // Skip generics + parameter list + return type to find the body.
+        let k = declAt + 2;
+        k = skipGenerics(tokens, k);
+        if (tokens[k]?.value === '(') k = skipBalanced(tokens, k, '(', ')');
+        // Skip return type / where clauses up to body or semicolon.
+        while (k < limit && tokens[k]!.value !== '{' && tokens[k]!.value !== ';') k++;
+        if (tokens[k]?.value === '{') {
+          const bodyEnd = skipBalanced(tokens, k, '{', '}');
+          extractNestedFns(tokens, k + 1, bodyEnd - 1, qualifiedName, pushNode, depth + 1);
+          j = bodyEnd;
+          continue;
+        }
+        j = k + 1;
+        continue;
+      }
+    }
+    j++;
+  }
+}
+
 const extractFn: CoarseExtractor = ({ tokens, i, pushNode }) => {
   const { mods, declAt } = consumeModifiers(tokens, i, MODIFIERS);
   const t = tokens[declAt];
@@ -61,6 +112,16 @@ const extractFn: CoarseExtractor = ({ tokens, i, pushNode }) => {
   const nameT = tokens[declAt + 1];
   if (!nameT || nameT.kind !== 'identifier') return i;
   pushNode({ kind: 'function', name: nameT.value, start: t.start, end: nameT.end, line: t.line, modifiers: mods });
+  // Descend into the function body to extract nested `fn` declarations.
+  let j = declAt + 2;
+  j = skipGenerics(tokens, j);
+  if (tokens[j]?.value === '(') j = skipBalanced(tokens, j, '(', ')');
+  while (j < tokens.length && tokens[j]!.value !== '{' && tokens[j]!.value !== ';') j++;
+  if (tokens[j]?.value === '{') {
+    const bodyEnd = skipBalanced(tokens, j, '{', '}');
+    extractNestedFns(tokens, j + 1, bodyEnd - 1, nameT.value, pushNode, 1);
+    return bodyEnd;
+  }
   return declAt + 2;
 };
 

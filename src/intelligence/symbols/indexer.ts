@@ -171,11 +171,15 @@ function collectReferences(
   return refs;
 }
 
-/** Build ImportRecord[] from the coarse-AST 'import' nodes (language-shaped). */
+/** Build ImportRecord[] from the coarse-AST 'import' nodes (language-shaped).
+ *  Also ingests 'export' nodes that carry importedNames (TS re-exports). */
 function collectImports(nodes: CoarseNode[], language: AtlasLanguage): ImportRecord[] {
   const out: ImportRecord[] = [];
   for (const n of nodes) {
-    if (n.kind !== 'import') continue;
+    // Accept plain imports AND re-export nodes (export nodes whose importedNames
+    // are set — those carry a module_spec in `name` just like an import node).
+    const isReExport = n.kind === 'export' && n.importedNames !== undefined;
+    if (n.kind !== 'import' && !isReExport) continue;
     const bindings = n.importedNames ?? [];
     const imported_names = bindings.map((b) => b.local);
     const imported_bindings = bindings.length > 0 ? bindings.map((b) => ({ ...b })) : undefined;
@@ -201,10 +205,12 @@ export function indexFile(input: FileInput, opts: IndexerOptions): FileIndexResu
   if (!adapter) throw new Error(`unsupported language: ${input.language}`);
   const { tokens, ast } = parse(input.source, SYNTAX_LANG[input.language]);
 
-  // Map nodes -> symbols, threading parent context for methods.
+  // Map nodes -> symbols, threading parent context for methods and nested fns.
   const symbols: AtlasSymbol[] = [];
   // Remember the most recent class/struct/interface/impl so methods can attach.
-  let containerByName: Map<string, AtlasSymbol> = new Map();
+  const containerByName: Map<string, AtlasSymbol> = new Map();
+  // Also track function symbols by qualified name for nested-fn parent lookup.
+  const fnByQualifiedName: Map<string, AtlasSymbol> = new Map();
   let lastContainer: AtlasSymbol | null = null;
 
   for (const node of ast.nodes) {
@@ -213,6 +219,10 @@ export function indexFile(input: FileInput, opts: IndexerOptions): FileIndexResu
       parent = containerByName.get(node.parent) ?? lastContainer;
     } else if (node.kind === 'method') {
       parent = lastContainer;
+    } else if (node.kind === 'function' && node.parent) {
+      // Nested function: look up its outer function by qualified-prefix name.
+      // The parent field holds the outer function's qualified name (e.g. "outer" or "outer::mid").
+      parent = fnByQualifiedName.get(node.parent) ?? null;
     }
     const sym = toSymbol(node, parent, adapter, input.source, input.file_path, opts);
     if (!sym) continue;
@@ -226,6 +236,9 @@ export function indexFile(input: FileInput, opts: IndexerOptions): FileIndexResu
     ) {
       lastContainer = sym;
       containerByName.set(node.name, sym);
+    }
+    if (node.kind === 'function') {
+      fnByQualifiedName.set(sym.qualified_name, sym);
     }
   }
 
