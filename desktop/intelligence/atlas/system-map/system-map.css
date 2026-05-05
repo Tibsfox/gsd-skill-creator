@@ -1,0 +1,98 @@
+/**
+ * System Map — styles.
+ * Tokyo-Night palette via CSS variables (matches desktop/intelligence/planning/planning.css).
+ */
+
+.system-map-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-primary, #1a1b26);
+  overflow: hidden;
+  user-select: none;
+}
+
+.system-map-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Zoom transition — < 300ms per spec */
+.system-map-layer {
+  transition: transform 280ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.system-map-circle {
+  cursor: pointer;
+  stroke: var(--border-subtle, #292e42);
+  stroke-width: 0.5;
+}
+
+.system-map-circle:hover {
+  stroke: var(--accent-blue, #7aa2f7);
+  stroke-width: 1.5;
+}
+
+.system-map-circle--selected {
+  stroke: var(--accent-orange, #ff9e64);
+  stroke-width: 2;
+}
+
+.system-map-label {
+  pointer-events: none;
+  fill: var(--text-primary, #c0caf5);
+  font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  font-size: 10px;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  overflow: hidden;
+}
+
+.system-map-label--folder {
+  font-weight: 600;
+  fill: var(--text-secondary, #9aa5ce);
+}
+
+.system-map-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary, #9aa5ce);
+  font-family: var(--font-sans, sans-serif);
+  font-size: 13px;
+  height: 100%;
+}
+
+.system-map-breadcrumb {
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  font-family: var(--font-mono, "SF Mono", Monaco, monospace);
+  font-size: 11px;
+  color: var(--text-secondary, #9aa5ce);
+  pointer-events: none;
+}
+
+.system-map-mode-bar {
+  position: absolute;
+  bottom: 8px;
+  right: 12px;
+  display: flex;
+  gap: 6px;
+}
+
+.system-map-mode-btn {
+  background: var(--bg-secondary, #24283b);
+  border: 1px solid var(--border-subtle, #292e42);
+  border-radius: var(--radius-sm, 4px);
+  color: var(--text-secondary, #9aa5ce);
+  cursor: pointer;
+  font-size: 11px;
+  padding: 3px 8px;
+}
+
+.system-map-mode-btn--active {
+  border-color: var(--accent-blue, #7aa2f7);
+  color: var(--accent-blue, #7aa2f7);
+}
