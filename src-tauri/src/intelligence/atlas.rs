@@ -15,6 +15,7 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::path::{Path, PathBuf};
 use std::sync::{Arc, Mutex};
+use std::time::{Duration, Instant};
 use tauri::State;
 
 // ─── Atlas row types (mirror src/intelligence/types.ts) ──────────────────────
@@ -192,8 +193,12 @@ pub trait AtlasKbDelegate: Send + Sync + 'static {
 
     /// Invalidate any cached connections so the next query re-opens the DB.
     /// Called after `atlas:indexing.completed` to pick up freshly-written rows.
-    /// Default no-op; only the SQLite delegate overrides this.
-    fn invalidate_connection_cache(&self) {}
+    /// Default no-op (returns 0); only the SQLite delegate overrides this.
+    ///
+    /// Returns the number of connection-cache entries evicted.
+    fn invalidate_connection_cache(&self) -> usize {
+        0
+    }
 
     /// Invalidate only the cache entry for a single project.
     ///
@@ -206,8 +211,8 @@ pub trait AtlasKbDelegate: Send + Sync + 'static {
         &self,
         _project_id: &str,
     ) -> (usize, &'static str) {
-        self.invalidate_connection_cache();
-        (0, "all")
+        let n = self.invalidate_connection_cache();
+        (n, "all")
     }
 }
 
@@ -310,6 +315,12 @@ fn default_registry_path() -> PathBuf {
     home.join(".gsd").join("intelligence").join("registry.db")
 }
 
+/// Maximum number of open SQLite connections to hold in the LRU cache.
+const MAX_CACHED_CONNECTIONS: usize = 8;
+
+/// Default TTL for the project_id → db_path lookup cache.
+const PATH_CACHE_TTL: Duration = Duration::from_secs(60);
+
 /// Real Atlas KB delegate — backed by per-project SQLite (migration 003).
 ///
 /// Two construction modes:
@@ -322,25 +333,38 @@ fn default_registry_path() -> PathBuf {
 ///     wiring directly when the desktop UI already knows which project is
 ///     open (a v1.49.608+ optimization).
 ///
-/// Connection caching (F3): opened connections are stored in `connections` as
-/// `Arc<Mutex<Connection>>` values keyed by absolute DB path. `get_all_project_conns`
-/// does get-or-insert on each query, so the file-open cost is paid at most once
-/// per path per delegate lifetime. The outer HashMap is protected by its own
-/// Mutex; each per-connection Arc<Mutex<Connection>> is cloned out and the
-/// outer lock is released before the connection is used, preventing the outer
-/// lock from being held across IO.
+/// Connection caching (F3 + I4-P1): opened connections are stored in `connections`
+/// as `Arc<Mutex<Connection>>` values keyed by absolute DB path. An LRU order ring
+/// (a `Vec<PathBuf>` in insertion/promotion order, back = most recent) enforces
+/// the `max_connections` bound: when the cache is full the front entry (least
+/// recently used) is evicted before inserting. On access the existing entry's
+/// path is moved to the back.
+///
+/// Path cache (I4-P2): `path_cache` records the result of registry lookups
+/// (`project_id → (PathBuf, Instant)`) for up to `path_cache_ttl`. Entries older
+/// than the TTL are re-fetched from the registry on the next call.
 ///
 /// Invalidation: call `clear_connection_cache()` after an indexing.completed
-/// event fires so the next query re-opens the updated file. The Tauri command
-/// layer can call this via `AtlasState::clear_connection_cache()`.
+/// event fires so the next query re-opens the updated file. This also clears
+/// `path_cache`.
 pub struct SqliteAtlasKbDelegate {
     registry_path: Option<PathBuf>,
     /// When set, all queries route to this single DB (test / single-project
     /// mode). Mutually exclusive with `registry_path` in practice.
     explicit_db_path: Option<PathBuf>,
+    /// Maximum number of connections held simultaneously (LRU eviction).
+    max_connections: usize,
     /// Connection cache: db_path → Arc<Mutex<Connection>>.
-    /// Outer Mutex guards HashMap mutations; inner Mutex serializes per-connection use.
+    /// Outer Mutex guards both HashMap and lru_order; inner Mutex serializes
+    /// per-connection use. Outer lock is released before IO on the connection.
     connections: Mutex<HashMap<PathBuf, Arc<Mutex<Connection>>>>,
+    /// LRU access order: front = least recently used, back = most recently used.
+    /// Length always mirrors `connections` map length.
+    lru_order: Mutex<Vec<PathBuf>>,
+    /// project_id → (db_path, cached_at). TTL-bounded registry lookup cache.
+    path_cache: Mutex<HashMap<String, (PathBuf, Instant)>>,
+    /// How long a path_cache entry stays valid.
+    path_cache_ttl: Duration,
 }
 
 impl SqliteAtlasKbDelegate {
@@ -348,7 +372,11 @@ impl SqliteAtlasKbDelegate {
         Self {
             registry_path: Some(default_registry_path()),
             explicit_db_path: None,
+            max_connections: MAX_CACHED_CONNECTIONS,
             connections: Mutex::new(HashMap::new()),
+            lru_order: Mutex::new(Vec::new()),
+            path_cache: Mutex::new(HashMap::new()),
+            path_cache_ttl: PATH_CACHE_TTL,
         }
     }
 
@@ -356,7 +384,11 @@ impl SqliteAtlasKbDelegate {
         Self {
             registry_path: Some(path),
             explicit_db_path: None,
+            max_connections: MAX_CACHED_CONNECTIONS,
             connections: Mutex::new(HashMap::new()),
+            lru_order: Mutex::new(Vec::new()),
+            path_cache: Mutex::new(HashMap::new()),
+            path_cache_ttl: PATH_CACHE_TTL,
         }
     }
 
@@ -367,26 +399,89 @@ impl SqliteAtlasKbDelegate {
         Self {
             registry_path: None,
             explicit_db_path: Some(path),
+            max_connections: MAX_CACHED_CONNECTIONS,
             connections: Mutex::new(HashMap::new()),
+            lru_order: Mutex::new(Vec::new()),
+            path_cache: Mutex::new(HashMap::new()),
+            path_cache_ttl: PATH_CACHE_TTL,
         }
     }
 
-    /// Evict all cached connections. Call after an indexing.completed event
-    /// so the next query re-opens the updated SQLite file.
-    pub fn clear_connection_cache(&self) {
-        if let Ok(mut cache) = self.connections.lock() {
+    /// Construct with a custom connection-cache limit. Used in tests.
+    pub fn with_max_connections(path: PathBuf, max: usize) -> Self {
+        Self {
+            registry_path: None,
+            explicit_db_path: Some(path),
+            max_connections: max,
+            connections: Mutex::new(HashMap::new()),
+            lru_order: Mutex::new(Vec::new()),
+            path_cache: Mutex::new(HashMap::new()),
+            path_cache_ttl: PATH_CACHE_TTL,
+        }
+    }
+
+    /// Construct with a custom path-cache TTL. Used in tests.
+    pub fn with_path_cache_ttl(registry_path: PathBuf, ttl: Duration) -> Self {
+        Self {
+            registry_path: Some(registry_path),
+            explicit_db_path: None,
+            max_connections: MAX_CACHED_CONNECTIONS,
+            connections: Mutex::new(HashMap::new()),
+            lru_order: Mutex::new(Vec::new()),
+            path_cache: Mutex::new(HashMap::new()),
+            path_cache_ttl: ttl,
+        }
+    }
+
+    /// Evict all cached connections and clear the path cache.
+    /// Call after an indexing.completed event so the next query re-opens the
+    /// updated SQLite file.
+    ///
+    /// Returns the number of connection-cache entries evicted. The count is
+    /// read under the same lock that performs `clear()` so it is exact.
+    pub fn clear_connection_cache(&self) -> usize {
+        let n = if let Ok(mut cache) = self.connections.lock() {
+            let n = cache.len();
             cache.clear();
+            n
+        } else {
+            0
+        };
+        if let Ok(mut order) = self.lru_order.lock() {
+            order.clear();
+        }
+        self.clear_path_cache();
+        n
+    }
+
+    /// Clear only the path_cache (project_id → db_path lookup cache).
+    fn clear_path_cache(&self) {
+        if let Ok(mut pc) = self.path_cache.lock() {
+            pc.clear();
         }
     }
 
-    /// Look up the intelligence.db path for `project_id` by querying the
-    /// registry. Mirrors `real_kb::RealKbDelegate::lookup_project_path`.
+    /// Look up the intelligence.db path for `project_id`.
+    ///
+    /// Results are cached in `path_cache` for `path_cache_ttl`. A cached entry
+    /// younger than the TTL is returned immediately without opening the registry.
+    /// Expired or absent entries trigger a fresh registry query.
     ///
     /// Returns `None` when:
     ///   * The delegate was constructed with `with_explicit_db_path` (no registry).
     ///   * The registry DB does not exist yet.
     ///   * The project_id is not present in the registry's `projects` table.
     pub fn path_for_project(&self, project_id: &str) -> Option<PathBuf> {
+        // Check the path cache first.
+        if let Ok(cache) = self.path_cache.lock() {
+            if let Some((cached_path, cached_at)) = cache.get(project_id) {
+                if cached_at.elapsed() < self.path_cache_ttl {
+                    return Some(cached_path.clone());
+                }
+            }
+        }
+
+        // Cache miss or expired — query the registry.
         let registry = self.registry_path.as_ref()?;
         if !registry.exists() {
             return None;
@@ -401,12 +496,21 @@ impl SqliteAtlasKbDelegate {
             .optional()
             .ok()
             .flatten();
-        path.map(|p| {
+        let result = path.map(|p| {
             Path::new(&p)
                 .join(".gsd")
                 .join("intelligence")
                 .join("intelligence.db")
-        })
+        });
+
+        // Populate cache if found.
+        if let Some(ref db_path) = result {
+            if let Ok(mut cache) = self.path_cache.lock() {
+                cache.insert(project_id.to_string(), (db_path.clone(), Instant::now()));
+            }
+        }
+
+        result
     }
 
     /// Evict only the cache entry for the DB path that belongs to `project_id`.
@@ -428,6 +532,14 @@ impl SqliteAtlasKbDelegate {
                 } else {
                     0
                 };
+                // Remove from LRU order.
+                if let Ok(mut order) = self.lru_order.lock() {
+                    order.retain(|p| p != &db_path);
+                }
+                // Remove from path cache for this project.
+                if let Ok(mut pc) = self.path_cache.lock() {
+                    pc.remove(project_id);
+                }
                 (evicted, "project")
             }
             None => {
@@ -438,10 +550,8 @@ impl SqliteAtlasKbDelegate {
                     "[atlas] warning: atlas_invalidate_cache: project '{}' not in registry — falling back to full clear",
                     project_id,
                 );
-                self.clear_connection_cache();
-                // Report the number that were actually evicted via full-clear.
-                // We can't know the count after the fact, so report 0 (conservative).
-                (0, "all")
+                let evicted = self.clear_connection_cache();
+                (evicted, "all")
             }
         }
     }
@@ -492,29 +602,39 @@ impl SqliteAtlasKbDelegate {
             }
         }
 
-        // Step 2: for each path, get-or-insert a cached Arc<Mutex<Connection>>.
-        // Lock the cache once for the whole batch, do all insertions, then drop the lock.
+        // Step 2: for each path, get-or-insert with LRU accounting.
+        // Both locks are acquired together to keep lru_order consistent with
+        // the connections map. The outer locks are released before any IO on
+        // individual connections (callers hold Arc clones, not the locks).
         let mut out: Vec<Arc<Mutex<Connection>>> = Vec::with_capacity(db_paths.len());
-        if let Ok(mut cache) = self.connections.lock() {
+        if let (Ok(mut cache), Ok(mut order)) =
+            (self.connections.lock(), self.lru_order.lock())
+        {
             for path in &db_paths {
-                let arc = cache
-                    .entry(path.clone())
-                    .or_insert_with(|| {
-                        // open_new is best-effort; failures stay out of the cache
-                        // (next call will retry). The entry() API requires we always
-                        // produce a value, so we use a sentinel approach: open and
-                        // unconditionally insert — if open fails the Vec will just skip it.
-                        Arc::new(Mutex::new(
-                            Connection::open(path).unwrap_or_else(|_| {
-                                // Fallback: open in-memory as a sentinel. This connection
-                                // will produce "no such table" errors on query, which callers
-                                // already handle gracefully (continue to next conn).
-                                Connection::open_in_memory().expect("in-memory fallback")
-                            }),
-                        ))
-                    })
-                    .clone();
-                out.push(arc);
+                if cache.contains_key(path) {
+                    // Cache hit — promote to back of LRU order.
+                    order.retain(|p| p != path);
+                    order.push(path.clone());
+                    let arc = cache[path].clone();
+                    out.push(arc);
+                } else {
+                    // Cache miss — evict LRU entry if at capacity.
+                    if cache.len() >= self.max_connections {
+                        if let Some(evict_path) = order.first().cloned() {
+                            cache.remove(&evict_path);
+                            order.remove(0);
+                        }
+                    }
+                    // Insert new connection.
+                    let arc = Arc::new(Mutex::new(
+                        Connection::open(path).unwrap_or_else(|_| {
+                            Connection::open_in_memory().expect("in-memory fallback")
+                        }),
+                    ));
+                    cache.insert(path.clone(), arc.clone());
+                    order.push(path.clone());
+                    out.push(arc);
+                }
             }
         }
         out
@@ -994,8 +1114,8 @@ impl AtlasKbDelegate for SqliteAtlasKbDelegate {
         ))
     }
 
-    fn invalidate_connection_cache(&self) {
-        self.clear_connection_cache();
+    fn invalidate_connection_cache(&self) -> usize {
+        self.clear_connection_cache()
     }
 
     fn invalidate_connection_cache_for_project(
@@ -1237,6 +1357,7 @@ pub async fn atlas_request_index_snapshot(
             project_path: None,
             db_override: None,
             registry_override: None,
+            timeout_secs: None, // use default 300 s
         },
     )
 }
@@ -1284,10 +1405,8 @@ pub async fn atlas_invalidate_cache(
         let pid = project_id.as_deref().unwrap();
         locked.kb.invalidate_connection_cache_for_project(pid)
     } else {
-        locked.kb.invalidate_connection_cache();
-        // Full clear: evicted_count is 0 (we do not count pre-clear entries
-        // because the trait's full-clear path does not expose a count).
-        (0, "all")
+        let n = locked.kb.invalidate_connection_cache();
+        (n, "all")
     };
 
     Ok(InvalidateCacheResult {
@@ -1805,6 +1924,7 @@ mod tests {
             project_path: None,
             db_override: None,
             registry_override: None,
+            timeout_secs: Some(300),
         };
         let dbg = format!("{a:?}");
         assert!(dbg.contains("snap-01"));
@@ -1820,6 +1940,7 @@ mod tests {
             project_path: None,
             db_override: None,
             registry_override: None,
+            timeout_secs: Some(300),
         };
         let flag = args.project_id.as_ref().map(|p| format!("--project={p}"));
         assert_eq!(flag.as_deref(), Some("--project="));
@@ -1976,7 +2097,7 @@ mod tests {
 
         // Simulate the command: clear via AtlasState regardless of project_id value.
         let _project_id: Option<String> = Some("gsd-skill-creator".to_string());
-        kb.invalidate_connection_cache(); // same path the command uses
+        let _ = kb.invalidate_connection_cache(); // same path the command uses
         assert_eq!(kb.cached_connection_count(), 0, "full clear expected even with project_id set");
     }
 
@@ -1991,8 +2112,52 @@ mod tests {
         assert_eq!(kb.cached_connection_count(), 1);
 
         let _project_id: Option<String> = None;
-        kb.invalidate_connection_cache();
+        let evicted = kb.invalidate_connection_cache();
+        assert_eq!(evicted, 1, "full clear must return actual evicted count");
         assert_eq!(kb.cached_connection_count(), 0, "full clear with project_id=None");
+    }
+
+    // ─── I1 Surgery 3 — clear_connection_cache evicted_count correctness ──
+
+    #[test]
+    fn full_clear_with_n_entries_returns_evicted_count_n() {
+        // Verifies Surgery 3: clear_connection_cache() reads HashMap size
+        // under the lock BEFORE clear(), so the returned count is exact.
+        let tmp = TempDir::new().unwrap();
+        let db = create_atlas_db(&tmp);
+        seed_minimal_atlas_rows(&db);
+        let kb = SqliteAtlasKbDelegate::with_explicit_db_path(db);
+
+        // Cold cache — should report 0 evictions.
+        let cold = kb.clear_connection_cache();
+        assert_eq!(cold, 0, "cold-clear must return 0");
+
+        // Warm one connection then clear.
+        let _ = kb.list_symbols_for_file("snap-01".to_string(), "src/foo.ts".to_string()).unwrap();
+        assert_eq!(kb.cached_connection_count(), 1);
+        let warm = kb.clear_connection_cache();
+        assert_eq!(warm, 1, "clear with 1 cached entry must return 1");
+        assert_eq!(kb.cached_connection_count(), 0);
+    }
+
+    #[test]
+    fn invalidate_connection_cache_trait_method_returns_real_count() {
+        // The trait's invalidate_connection_cache() now returns usize.
+        // For the SQLite delegate, it must equal the number of connections
+        // in the cache at the time of the call.
+        let tmp = TempDir::new().unwrap();
+        let db = create_atlas_db(&tmp);
+        seed_minimal_atlas_rows(&db);
+        let kb = SqliteAtlasKbDelegate::with_explicit_db_path(db);
+
+        // Warm the cache via a query.
+        let _ = kb.get_symbol("sym-001".to_string()).unwrap();
+        assert_eq!(kb.cached_connection_count(), 1);
+
+        // Call through the trait impl (same path as atlas_invalidate_cache command).
+        let n = <SqliteAtlasKbDelegate as AtlasKbDelegate>::invalidate_connection_cache(&kb);
+        assert_eq!(n, 1, "trait invalidate must return real evicted count");
+        assert_eq!(kb.cached_connection_count(), 0);
     }
 
     // ─── H3-R3 multi-thread connection-pool test ──────────────────────────
@@ -2294,5 +2459,230 @@ mod tests {
         let v2: serde_json::Value = serde_json::from_str(&json2).unwrap();
         assert_eq!(v2["scope"], "all");
         assert_eq!(v2["evicted_count"], 0);
+    }
+    // ─── I4-P1 LRU eviction tests ─────────────────────────────────────────
+
+    fn make_schema_only_db(db_path: &PathBuf) {
+        let conn = Connection::open(db_path).unwrap();
+        conn.execute_batch(
+            "CREATE TABLE IF NOT EXISTS symbols (
+                id TEXT PRIMARY KEY, snapshot_id TEXT NOT NULL,
+                project_id TEXT NOT NULL, file_path TEXT NOT NULL,
+                kind TEXT NOT NULL, name TEXT NOT NULL,
+                qualified_name TEXT NOT NULL,
+                start_byte INTEGER NOT NULL, end_byte INTEGER NOT NULL,
+                start_line INTEGER NOT NULL, end_line INTEGER NOT NULL,
+                signature_hash TEXT, modifiers_json TEXT NOT NULL DEFAULT '[]',
+                language TEXT NOT NULL, parent_symbol_id TEXT
+            );
+            CREATE TABLE IF NOT EXISTS symbol_references (
+                id TEXT PRIMARY KEY, snapshot_id TEXT NOT NULL,
+                file_path TEXT NOT NULL, start_byte INTEGER NOT NULL,
+                end_byte INTEGER NOT NULL, start_line INTEGER NOT NULL,
+                end_line INTEGER NOT NULL, name TEXT NOT NULL,
+                resolved_symbol_id TEXT,
+                resolution_confidence REAL NOT NULL DEFAULT 0.0,
+                resolution_kind TEXT);
+            CREATE TABLE IF NOT EXISTS calls (
+                id TEXT PRIMARY KEY, snapshot_id TEXT NOT NULL,
+                caller_symbol_id TEXT NOT NULL, callee_symbol_id TEXT NOT NULL,
+                call_site_byte INTEGER NOT NULL, call_site_line INTEGER NOT NULL,
+                confidence REAL NOT NULL DEFAULT 1.0);
+            CREATE TABLE IF NOT EXISTS type_relations (
+                id TEXT PRIMARY KEY, snapshot_id TEXT NOT NULL,
+                from_symbol_id TEXT NOT NULL, to_symbol_id TEXT NOT NULL,
+                kind TEXT NOT NULL, confidence REAL NOT NULL DEFAULT 1.0);
+            CREATE TABLE IF NOT EXISTS files_changed (
+                id TEXT PRIMARY KEY, mission_id TEXT NOT NULL,
+                commit_sha TEXT NOT NULL, file_path TEXT NOT NULL,
+                change_kind TEXT NOT NULL, rename_from TEXT,
+                added_lines INTEGER NOT NULL DEFAULT 0,
+                removed_lines INTEGER NOT NULL DEFAULT 0);
+            CREATE TABLE IF NOT EXISTS mission_provenance (
+                id TEXT PRIMARY KEY, snapshot_id TEXT NOT NULL,
+                file_path TEXT NOT NULL, line_no INTEGER NOT NULL,
+                mission_id TEXT NOT NULL, commit_sha TEXT NOT NULL,
+                weight REAL NOT NULL DEFAULT 1.0);",
+        )
+        .unwrap();
+    }
+
+    fn make_delegate_with_n_projects(max: usize, n: usize) -> (TempDir, SqliteAtlasKbDelegate) {
+        let tmp = TempDir::new().unwrap();
+        let reg = tmp.path().join("reg.db");
+        {
+            let conn = Connection::open(&reg).unwrap();
+            conn.execute_batch(
+                "CREATE TABLE projects (id TEXT PRIMARY KEY, name TEXT NOT NULL,
+                 path TEXT NOT NULL, branch TEXT, kind TEXT NOT NULL,
+                 priority TEXT NOT NULL, last_activity_at TEXT NOT NULL,
+                 last_snapshot_id TEXT);",
+            )
+            .unwrap();
+            for i in 0..n {
+                let proj_dir = tmp.path().join(format!("proj{i}"));
+                std::fs::create_dir_all(&proj_dir).unwrap();
+                let db_path = proj_dir.join(".gsd").join("intelligence").join("intelligence.db");
+                std::fs::create_dir_all(db_path.parent().unwrap()).unwrap();
+                make_schema_only_db(&db_path);
+                conn.execute(
+                    "INSERT INTO projects VALUES (?,?,?,'dev','code','med','2026-05-05',NULL)",
+                    params![format!("p{i}"), format!("P{i}"), proj_dir.to_string_lossy().to_string()],
+                )
+                .unwrap();
+            }
+        }
+        let kb = SqliteAtlasKbDelegate {
+            registry_path: Some(reg),
+            explicit_db_path: None,
+            max_connections: max,
+            connections: Mutex::new(HashMap::new()),
+            lru_order: Mutex::new(Vec::new()),
+            path_cache: Mutex::new(HashMap::new()),
+            path_cache_ttl: PATH_CACHE_TTL,
+        };
+        (tmp, kb)
+    }
+
+    #[test]
+    fn lru_evicts_oldest_at_9th_insert_when_limit_is_8() {
+        // 9 project DBs, limit=8 → after loading all 9 the cache holds exactly 8.
+        let (_tmp, kb) = make_delegate_with_n_projects(8, 9);
+        let _ = kb.list_symbols_for_file("snap".to_string(), "f.ts".to_string()).unwrap();
+        assert_eq!(
+            kb.cached_connection_count(), 8,
+            "LRU must evict 1 entry when inserting the 9th into a limit-8 cache"
+        );
+    }
+
+    #[test]
+    fn lru_access_promotes_keeps_entry_alive_under_eviction() {
+        // 3 projects, limit=2. Load p0+p1. Promote p0 manually. Load p2 → p1 evicted, p0 survives.
+        let (tmp, kb) = make_delegate_with_n_projects(2, 2);
+        let _ = kb.list_symbols_for_file("s".to_string(), "f".to_string()).unwrap();
+        assert_eq!(kb.cached_connection_count(), 2);
+
+        // Determine which path is p0.
+        let db0 = {
+            let order = kb.lru_order.lock().unwrap();
+            order.first().cloned().expect("at least one entry")
+        };
+
+        // Promote p0 to most-recently-used.
+        {
+            let mut c = kb.connections.lock().unwrap();
+            let mut o = kb.lru_order.lock().unwrap();
+            if c.contains_key(&db0) {
+                o.retain(|p| p != &db0);
+                o.push(db0.clone());
+                let _ = c; // keep alive to satisfy borrow
+            }
+        }
+
+        // Add a third project to the registry and trigger a query.
+        {
+            let reg = kb.registry_path.as_ref().unwrap();
+            let conn = Connection::open(reg).unwrap();
+            let i = 2usize;
+            let proj_dir = tmp.path().join(format!("proj{i}"));
+            std::fs::create_dir_all(&proj_dir).unwrap();
+            let db_path = proj_dir.join(".gsd").join("intelligence").join("intelligence.db");
+            std::fs::create_dir_all(db_path.parent().unwrap()).unwrap();
+            make_schema_only_db(&db_path);
+            conn.execute(
+                "INSERT INTO projects VALUES (?,?,?,'dev','code','med','2026-05-05',NULL)",
+                params![format!("p{i}"), format!("P{i}"), proj_dir.to_string_lossy().to_string()],
+            )
+            .unwrap();
+        }
+
+        let _ = kb.list_symbols_for_file("s".to_string(), "f".to_string()).unwrap();
+        assert_eq!(kb.cached_connection_count(), 2, "cache stays at limit=2");
+
+        let c = kb.connections.lock().unwrap();
+        assert!(c.contains_key(&db0), "promoted p0 must survive eviction");
+    }
+
+    #[test]
+    fn with_max_connections_2_honors_the_limit() {
+        let (_tmp, kb) = make_delegate_with_n_projects(2, 3);
+        let _ = kb.list_symbols_for_file("s".to_string(), "f".to_string()).unwrap();
+        assert!(
+            kb.cached_connection_count() <= 2,
+            "with_max_connections(2) must cap at 2, got {}",
+            kb.cached_connection_count()
+        );
+    }
+
+    // ─── I4-P2 path cache tests ───────────────────────────────────────────
+
+    #[test]
+    fn path_for_project_caches_within_ttl() {
+        let tmp = TempDir::new().unwrap();
+        let proj_root = tmp.path().join("proj");
+        std::fs::create_dir_all(&proj_root).unwrap();
+        let registry_path = tmp.path().join("registry.db");
+        let db_path = create_atlas_registry_with_project(&registry_path, "my-proj", &proj_root);
+        std::fs::create_dir_all(db_path.parent().unwrap()).unwrap();
+        create_atlas_db_at(&db_path);
+
+        let kb = SqliteAtlasKbDelegate::with_path_cache_ttl(registry_path.clone(), Duration::from_secs(60));
+
+        // First call populates cache.
+        let p1 = kb.path_for_project("my-proj");
+        assert!(p1.is_some());
+        {
+            let c = kb.path_cache.lock().unwrap();
+            assert!(c.contains_key("my-proj"), "path_cache populated after first lookup");
+        }
+
+        // Delete the registry — second call within TTL must still return from cache.
+        std::fs::remove_file(&registry_path).unwrap();
+        let p2 = kb.path_for_project("my-proj");
+        assert_eq!(p1, p2, "within-TTL call must return cached value without re-opening registry");
+    }
+
+    #[test]
+    fn path_for_project_re_queries_registry_after_ttl_expiry() {
+        let tmp = TempDir::new().unwrap();
+        let proj_root = tmp.path().join("proj");
+        std::fs::create_dir_all(&proj_root).unwrap();
+        let registry_path = tmp.path().join("registry.db");
+        let db_path = create_atlas_registry_with_project(&registry_path, "my-proj", &proj_root);
+        std::fs::create_dir_all(db_path.parent().unwrap()).unwrap();
+        create_atlas_db_at(&db_path);
+
+        // Zero TTL → every call re-opens the registry.
+        let kb = SqliteAtlasKbDelegate::with_path_cache_ttl(registry_path.clone(), Duration::ZERO);
+        let p1 = kb.path_for_project("my-proj");
+        assert!(p1.is_some());
+
+        std::fs::remove_file(&registry_path).unwrap();
+        let p2 = kb.path_for_project("my-proj");
+        assert!(p2.is_none(), "zero-TTL must re-open registry; deleted file → None");
+    }
+
+    #[test]
+    fn clear_connection_cache_also_clears_path_cache() {
+        let tmp = TempDir::new().unwrap();
+        let proj_root = tmp.path().join("proj");
+        std::fs::create_dir_all(&proj_root).unwrap();
+        let registry_path = tmp.path().join("registry.db");
+        let db_path = create_atlas_registry_with_project(&registry_path, "my-proj", &proj_root);
+        std::fs::create_dir_all(db_path.parent().unwrap()).unwrap();
+        create_atlas_db_at(&db_path);
+        seed_minimal_atlas_rows(&db_path);
+
+        let kb = SqliteAtlasKbDelegate::with_path_cache_ttl(registry_path, Duration::from_secs(60));
+        let _ = kb.path_for_project("my-proj");
+        {
+            let c = kb.path_cache.lock().unwrap();
+            assert!(c.contains_key("my-proj"), "populated before clear");
+        }
+        kb.clear_connection_cache();
+        {
+            let c = kb.path_cache.lock().unwrap();
+            assert!(c.is_empty(), "path_cache must be empty after full clear");
+        }
     }
 }
