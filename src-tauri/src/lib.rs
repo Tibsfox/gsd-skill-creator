@@ -38,8 +38,13 @@ pub fn run() {
                     intelligence::server::IntelligenceState::new(repo_root),
                 ));
             }
-            // v1.49.607 W1 Track C — Atlas KB state (stub; real impl wires in Track B).
-            app.manage(std::sync::Mutex::new(intelligence::atlas::AtlasState::new_with_stub()));
+            // v1.49.607 W1 Track C / E4 — Atlas KB state.
+            // Phase 824 shipped with `new_with_stub` (the W1 Track C parallel build);
+            // E4 swaps it for `new_with_sqlite`, which routes the 12 Atlas Tauri
+            // commands through `SqliteAtlasKbDelegate` against the per-project
+            // intelligence DB (migration 003). Empty registry → empty results, so
+            // the desktop UI remains safe before any project is indexed.
+            app.manage(std::sync::Mutex::new(intelligence::atlas::AtlasState::new_with_sqlite()));
             app.manage(Mutex::new(state::WatcherState::default()));
             app.manage(Mutex::new(PtyManager::default()));
             app.manage(Mutex::new(ClaudeSessionManager::default()));
