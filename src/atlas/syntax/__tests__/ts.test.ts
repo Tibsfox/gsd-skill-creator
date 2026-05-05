@@ -29,4 +29,52 @@ describe('typescript syntax', () => {
     expect(methods.map((n) => n.name)).toContain('say');
     expect(methods.find((n) => n.name === 'say')?.parent).toBe('Greeter');
   });
+
+  it('captures named-import bindings', () => {
+    const { ast } = parse(`import { foo, bar } from './x';`, 'typescript');
+    const imp = ast.nodes.find((n) => n.kind === 'import');
+    expect(imp?.name).toBe('./x');
+    expect(imp?.importedNames).toEqual([
+      { local: 'foo', original: 'foo' },
+      { local: 'bar', original: 'bar' },
+    ]);
+  });
+
+  it('captures default-import binding as original=default', () => {
+    const { ast } = parse(`import Foo from './x';`, 'typescript');
+    const imp = ast.nodes.find((n) => n.kind === 'import');
+    expect(imp?.importedNames).toEqual([{ local: 'Foo', original: 'default' }]);
+  });
+
+  it('captures aliased named-import as local + original', () => {
+    const { ast } = parse(`import { foo, bar as baz } from './x';`, 'typescript');
+    const imp = ast.nodes.find((n) => n.kind === 'import');
+    expect(imp?.importedNames).toEqual([
+      { local: 'foo', original: 'foo' },
+      { local: 'baz', original: 'bar' },
+    ]);
+  });
+
+  it('captures namespace-import binding as original=*', () => {
+    const { ast } = parse(`import * as N from './x';`, 'typescript');
+    const imp = ast.nodes.find((n) => n.kind === 'import');
+    expect(imp?.importedNames).toEqual([{ local: 'N', original: '*' }]);
+  });
+
+  it('captures default + named mixed-import bindings', () => {
+    const { ast } = parse(`import D, { a, b as c } from './x';`, 'typescript');
+    const imp = ast.nodes.find((n) => n.kind === 'import');
+    expect(imp?.importedNames).toEqual([
+      { local: 'D', original: 'default' },
+      { local: 'a', original: 'a' },
+      { local: 'c', original: 'b' },
+    ]);
+  });
+
+  it('side-effect import has no importedNames', () => {
+    const { ast } = parse(`import './polyfill';`, 'typescript');
+    const imp = ast.nodes.find((n) => n.kind === 'import');
+    expect(imp?.name).toBe('./polyfill');
+    expect(imp?.importedNames).toBeUndefined();
+  });
 });

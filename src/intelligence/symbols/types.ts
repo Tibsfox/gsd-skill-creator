@@ -33,8 +33,14 @@ export interface FileIndexResult {
 
 export interface ImportRecord {
   module_spec: string;
-  /** Imported names (named imports, use-segments, from-imports). */
+  /** Imported local-name bindings (named imports, use-segments, from-imports). */
   imported_names: string[];
+  /**
+   * Optional richer binding shape for languages whose extractor distinguishes
+   * the original export-name from the local binding (TS/JS). When present,
+   * supersedes `imported_names` for resolution purposes.
+   */
+  imported_bindings?: Array<{ local: string; original: string }>;
   /** Whether it is a default/namespace/star import (treat as bag). */
   star: boolean;
   start_byte: number;

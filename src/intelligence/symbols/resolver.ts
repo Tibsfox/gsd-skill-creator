@@ -69,8 +69,12 @@ export function resolve(idx: IndexResult, ctx: ResolverContext): ResolveResult {
 
   // Per-file imported-name → resolved-file map (for narrowing references).
   const importBindingsByFile = new Map<string, Map<string, string>>();
+  // Per-file local-name → original export-name map (for aliased imports).
+  const importOriginalByFile = new Map<string, Map<string, string>>();
   for (const f of idx.files) {
-    importBindingsByFile.set(f.file_path, computeImportBindings(f, ctx, knownFiles));
+    const { byFile, byOrigName } = computeImportBindings(f, ctx, knownFiles);
+    importBindingsByFile.set(f.file_path, byFile);
+    importOriginalByFile.set(f.file_path, byOrigName);
   }
 
   // Per-file enclosing-symbol lookup (caller_symbol_id resolution).
@@ -87,8 +91,11 @@ export function resolve(idx: IndexResult, ctx: ResolverContext): ResolveResult {
 
   for (const ref of idx.references) {
     const fileBindings = importBindingsByFile.get(ref.file_path);
-    const inFileSyms = (enclosingByFile.get(ref.file_path) ?? []).filter((s) => s.name === ref.name);
-    const targetSym = pickResolutionTarget(ref, inFileSyms, buckets, fileBindings);
+    const fileBindingOrig = importOriginalByFile.get(ref.file_path);
+    const inFileSyms = (enclosingByFile.get(ref.file_path) ?? []).filter(
+      (s) => s.name === ref.name && s.kind !== 'import' && s.kind !== 'export',
+    );
+    const targetSym = pickResolutionTarget(ref, inFileSyms, buckets, fileBindings, fileBindingOrig);
     const updated: AtlasSymbolReference = targetSym
       ? {
           ...ref,
@@ -139,6 +146,7 @@ function pickResolutionTarget(
   inFileSyms: AtlasSymbol[],
   buckets: SymbolBucket,
   fileBindings: Map<string, string> | undefined,
+  fileBindingOrig: Map<string, string> | undefined,
 ): PickedTarget | null {
   // 1. Same-file declaration wins (highest signal).
   if (inFileSyms.length === 1) return { symbol: inFileSyms[0]!, confidence: ref.resolution_kind === 'call' ? 0.95 : 1.0 };
@@ -149,14 +157,24 @@ function pickResolutionTarget(
   if (fileBindings) {
     const importedFrom = fileBindings.get(ref.name);
     if (importedFrom) {
-      const candidates = (buckets.byFile.get(importedFrom) ?? []).filter((s) => s.name === ref.name);
+      // Look up by original export-name when the local binding is aliased.
+      const lookupName = fileBindingOrig?.get(ref.name) ?? ref.name;
+      let candidates = (buckets.byFile.get(importedFrom) ?? []).filter((s) => s.name === lookupName);
+      // Default-import fallback: when original is 'default', match the sole
+      // exported symbol of that file (single-export heuristic).
+      if (candidates.length === 0 && lookupName === 'default') {
+        const fileSyms = (buckets.byFile.get(importedFrom) ?? []).filter(
+          (s) => s.kind !== 'import' && s.kind !== 'export',
+        );
+        if (fileSyms.length === 1) candidates = fileSyms;
+      }
       if (candidates.length === 1) return { symbol: candidates[0]!, confidence: ref.resolution_kind === 'call' ? 0.9 : 0.95 };
       if (candidates.length > 1) return { symbol: candidates[0]!, confidence: 0.5 };
     }
   }
   // 3. Global by-name fallback. A single unambiguous global match is a fairly
-  // strong signal even without explicit import binding (e.g. coarse TS import
-  // extractor doesn't capture named imports yet).
+  // strong signal even without explicit import binding (rare paths where the
+  // extractor could not parse the import clause).
   const all = buckets.byName.get(ref.name);
   if (all && all.length === 1) return { symbol: all[0]!, confidence: ref.resolution_kind === 'call' ? 0.7 : 0.8 };
   if (all && all.length > 1) return { symbol: all[0]!, confidence: 0.4 };
@@ -197,9 +215,10 @@ function computeImportBindings(
   file: FileIndexResult,
   ctx: ResolverContext,
   knownFiles: Set<string>,
-): Map<string, string> {
-  const out = new Map<string, string>();
-  if (file.imports.length === 0) return out;
+): { byFile: Map<string, string>; byOrigName: Map<string, string> } {
+  const byFile = new Map<string, string>();
+  const byOrigName = new Map<string, string>();
+  if (file.imports.length === 0) return { byFile, byOrigName };
 
   for (const imp of file.imports) {
     let resolved: string | null = null;
@@ -221,19 +240,23 @@ function computeImportBindings(
       });
     }
     if (!resolved) continue;
-    // Bind every imported name to the resolved file. When the import is
-    // bare-spec (no named imports captured by the coarse extractor) we still
-    // record the module's basename so `Foo.bar()` style references can match.
-    if (imp.imported_names.length > 0) {
-      for (const n of imp.imported_names) out.set(n, resolved);
+    // Prefer the richer binding shape when available (TS/JS extractor parses
+    // import clauses; original-name carries default/aliased semantics).
+    if (imp.imported_bindings && imp.imported_bindings.length > 0) {
+      for (const b of imp.imported_bindings) {
+        byFile.set(b.local, resolved);
+        if (b.original !== b.local) byOrigName.set(b.local, b.original);
+        else if (b.original === 'default' || b.original === '*') byOrigName.set(b.local, b.original);
+      }
+    } else if (imp.imported_names.length > 0) {
+      for (const n of imp.imported_names) byFile.set(n, resolved);
     } else {
-      // For TS/JS: the coarse extractor only captures the spec. Bind every
-      // identifier defined in the resolved file so references in this file
-      // can chain. The resolver will down-rank ambiguity.
-      out.set('*' + resolved, resolved);
+      // Bare-spec import (no clause captured): keep a sentinel so type-relation
+      // scans can still find the resolved file via the '*' prefix.
+      byFile.set('*' + resolved, resolved);
     }
   }
-  return out;
+  return { byFile, byOrigName };
 }
 
 /**

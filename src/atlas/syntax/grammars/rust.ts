@@ -4,8 +4,9 @@
  */
 
 import type { Grammar } from '../lexer-state-machine.js';
-import type { CoarseExtractor } from '../coarse-ast.js';
-import { consumeModifiers } from '../coarse-ast.js';
+import type { CoarseExtractor, CoarseNode } from '../coarse-ast.js';
+import type { Token } from '../tokenizer.js';
+import { consumeModifiers, skipBalanced } from '../coarse-ast.js';
 
 const KEYWORDS = new Set([
   'as', 'async', 'await', 'break', 'const', 'continue', 'crate', 'dyn', 'else',
@@ -78,31 +79,112 @@ const extractStructEnumTrait: CoarseExtractor = ({ tokens, i, pushNode }) => {
   return declAt + 2;
 };
 
+function skipGenerics(tokens: Token[], j: number): number {
+  if (tokens[j]?.value !== '<') return j;
+  let depth = 0;
+  while (j < tokens.length) {
+    if (tokens[j]!.value === '<') depth++;
+    else if (tokens[j]!.value === '>') {
+      depth--;
+      if (depth === 0) return j + 1;
+    }
+    j++;
+  }
+  return j;
+}
+
 const extractImpl: CoarseExtractor = ({ tokens, i, pushNode }) => {
   const t = tokens[i];
   if (!t || t.value !== 'impl') return i;
-  // Find first identifier after 'impl' (or after generics).
-  let j = i + 1;
-  if (tokens[j]?.value === '<') {
-    let depth = 0;
-    while (j < tokens.length) {
-      if (tokens[j]!.value === '<') depth++;
-      else if (tokens[j]!.value === '>') {
-        depth--;
-        if (depth === 0) {
-          j++;
-          break;
-        }
+  // impl [<generics>] (Trait for)? Type [<generics>] (where ...)? { ... }
+  let j = skipGenerics(tokens, i + 1);
+  // Capture first identifier — could be Trait or Type.
+  if (tokens[j]?.kind !== 'identifier') return i + 1;
+  let firstIdent = tokens[j]!;
+  let firstEnd = j;
+  // Walk past `::Path::Segments` and inner generics on the first type ref.
+  let k = j + 1;
+  while (tokens[k]?.value === '::' && tokens[k + 1]?.kind === 'identifier') {
+    firstIdent = tokens[k + 1]!;
+    k += 2;
+  }
+  k = skipGenerics(tokens, k);
+  firstEnd = k;
+  // If we see `for`, the first identifier was the trait — second is the target type.
+  let targetIdent = firstIdent;
+  let targetEnd = firstEnd;
+  if (tokens[k]?.value === 'for') {
+    k++;
+    if (tokens[k]?.kind === 'identifier') {
+      targetIdent = tokens[k]!;
+      let m = k + 1;
+      while (tokens[m]?.value === '::' && tokens[m + 1]?.kind === 'identifier') {
+        targetIdent = tokens[m + 1]!;
+        m += 2;
       }
-      j++;
+      m = skipGenerics(tokens, m);
+      targetEnd = m;
+      k = m;
     }
   }
-  if (tokens[j]?.kind === 'identifier') {
-    pushNode({ kind: 'impl', name: tokens[j]!.value, start: t.start, end: tokens[j]!.end, line: t.line });
-    return j + 1;
+  // Skip optional `where` clause.
+  if (tokens[k]?.value === 'where') {
+    while (k < tokens.length && tokens[k]!.value !== '{' && tokens[k]!.value !== ';') k++;
   }
-  return i + 1;
+  pushNode({ kind: 'impl', name: targetIdent.value, start: t.start, end: targetIdent.end, line: t.line });
+  // Walk into impl body to extract methods.
+  if (tokens[k]?.value === '{') {
+    const endIdx = skipBalanced(tokens, k, '{', '}');
+    let p = k + 1;
+    const lastEnd = endIdx > 0 ? endIdx - 1 : tokens.length;
+    while (p < lastEnd) {
+      const m = tryImplMethod(tokens, p, targetIdent.value);
+      if (m) {
+        pushNode(m.node);
+        p = m.next;
+      } else {
+        p++;
+      }
+    }
+    return endIdx;
+  }
+  return targetEnd;
 };
+
+function tryImplMethod(
+  tokens: Token[],
+  i: number,
+  parent: string,
+): { node: CoarseNode; next: number } | null {
+  const { mods, declAt } = consumeModifiers(tokens, i, MODIFIERS);
+  const t = tokens[declAt];
+  if (!t || t.value !== 'fn') return null;
+  const nameT = tokens[declAt + 1];
+  if (!nameT || nameT.kind !== 'identifier') return null;
+  // Skip name, optional generics, and the parameter list.
+  let j = declAt + 2;
+  j = skipGenerics(tokens, j);
+  if (tokens[j]?.value !== '(') return null;
+  const closeParens = skipBalanced(tokens, j, '(', ')');
+  // Skip return type / where clauses up to `{` or `;`.
+  let k = closeParens;
+  while (k < tokens.length && tokens[k]!.value !== '{' && tokens[k]!.value !== ';') k++;
+  let next = k;
+  if (tokens[k]?.value === '{') next = skipBalanced(tokens, k, '{', '}');
+  else if (tokens[k]?.value === ';') next = k + 1;
+  return {
+    node: {
+      kind: 'method',
+      name: nameT.value,
+      parent,
+      start: t.start,
+      end: nameT.end,
+      line: t.line,
+      modifiers: mods,
+    },
+    next,
+  };
+}
 
 const extractUse: CoarseExtractor = ({ tokens, i, pushNode }) => {
   const t = tokens[i];

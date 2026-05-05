@@ -39,6 +39,13 @@ export interface CoarseNode {
   line: number;
   /** Free-form modifiers: 'export', 'async', 'static', 'public', 'pub', etc. */
   modifiers?: string[];
+  /**
+   * Imported-name bindings for `kind: 'import'` nodes.
+   * `original` is the export name in the source module ('default' for default
+   * imports; '*' for namespace imports). `local` is the binding in the current
+   * file. Empty / undefined for non-import nodes or pure side-effect imports.
+   */
+  importedNames?: Array<{ local: string; original: string }>;
 }
 
 export interface CoarseAst {

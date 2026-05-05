@@ -24,4 +24,62 @@ describe('cpp syntax', () => {
     expect(ast.nodes.some((n) => n.kind === 'function' && n.name === 'answer')).toBe(true);
     expect(ast.nodes.some((n) => n.kind === 'import' && n.name === 'string')).toBe(true);
   });
+
+  it('extracts public methods from a class body', () => {
+    const src = `
+      class Foo {
+      public:
+        void bar();
+        int baz() const;
+      };
+    `;
+    const { ast } = parse(src, 'cpp');
+    const methods = ast.nodes.filter((n) => n.kind === 'method');
+    expect(methods.map((n) => n.name).sort()).toEqual(['bar', 'baz']);
+    expect(methods.every((m) => m.parent === 'Foo')).toBe(true);
+  });
+
+  it('extracts methods from a struct body', () => {
+    const src = `
+      struct Point {
+        int x;
+        int y;
+        int sum() const { return x + y; }
+        void reset() { x = 0; y = 0; }
+      };
+    `;
+    const { ast } = parse(src, 'cpp');
+    const methods = ast.nodes.filter((n) => n.kind === 'method');
+    expect(methods.map((n) => n.name).sort()).toEqual(['reset', 'sum']);
+    expect(methods.every((m) => m.parent === 'Point')).toBe(true);
+  });
+
+  it('does not double-count nested-class methods on the outer class', () => {
+    const src = `
+      class Outer {
+        void outer_method();
+        class Inner {
+          void inner_method();
+        };
+      };
+    `;
+    const { ast } = parse(src, 'cpp');
+    const outerMethods = ast.nodes.filter((n) => n.kind === 'method' && n.parent === 'Outer');
+    expect(outerMethods.map((n) => n.name)).toEqual(['outer_method']);
+  });
+
+  it('extracts methods with const / virtual / override qualifiers', () => {
+    const src = `
+      class Widget {
+      public:
+        virtual void draw() const;
+        virtual int area() const override;
+        void resize(int w, int h);
+      };
+    `;
+    const { ast } = parse(src, 'cpp');
+    const methods = ast.nodes.filter((n) => n.kind === 'method');
+    expect(methods.map((n) => n.name).sort()).toEqual(['area', 'draw', 'resize']);
+    expect(methods.every((m) => m.parent === 'Widget')).toBe(true);
+  });
 });

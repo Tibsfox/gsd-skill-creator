@@ -176,10 +176,15 @@ function collectImports(nodes: CoarseNode[], language: AtlasLanguage): ImportRec
   const out: ImportRecord[] = [];
   for (const n of nodes) {
     if (n.kind !== 'import') continue;
+    const bindings = n.importedNames ?? [];
+    const imported_names = bindings.map((b) => b.local);
+    const imported_bindings = bindings.length > 0 ? bindings.map((b) => ({ ...b })) : undefined;
+    const star = bindings.some((b) => b.original === '*');
     out.push({
       module_spec: n.name,
-      imported_names: [],
-      star: false,
+      imported_names,
+      imported_bindings,
+      star,
       start_byte: n.start,
       end_byte: n.end,
       start_line: n.line,

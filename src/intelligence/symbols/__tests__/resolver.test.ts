@@ -107,4 +107,38 @@ describe('cross-file resolver', () => {
     const { res } = buildAndResolve(inputs);
     expect(res.calls.length).toBe(0);
   });
+
+  it('import-bound named call resolves at confidence 0.9 (vs 0.7 global fallback)', () => {
+    // The import on main.ts pins `helper` to src/util.ts, so the call site
+    // resolves cross-file at confidence 0.9 (vs the 0.7 global by-name path
+    // the indexer fell through to before clause parsing landed).
+    const inputs: FileInput[] = [
+      { file_path: 'src/util.ts', source: `export function helper() { return 1; }`, language: 'ts' },
+      { file_path: 'src/main.ts', source: `import { helper } from './util.js';\nfunction run() { helper(); }`, language: 'ts' },
+    ];
+    const { res } = buildAndResolve(inputs);
+    // The line-2 call site (not the import-clause occurrence on line 1).
+    const callRef = res.references.find(
+      (r) => r.name === 'helper' && r.file_path === 'src/main.ts' && r.start_line === 2,
+    );
+    expect(callRef).toBeDefined();
+    expect(callRef!.resolution_kind).toBe('call');
+    expect(callRef!.resolution_confidence).toBe(0.9);
+  });
+
+  it('aliased named import resolves to original export name', () => {
+    const inputs: FileInput[] = [
+      { file_path: 'src/util.ts', source: `export function helper() { return 1; }`, language: 'ts' },
+      { file_path: 'src/main.ts', source: `import { helper as h } from './util.js';\nfunction run() { h(); }`, language: 'ts' },
+    ];
+    const { idx, res } = buildAndResolve(inputs);
+    const helper = idx.symbols.find((s) => s.name === 'helper' && s.file_path === 'src/util.ts')!;
+    const callRef = res.references.find(
+      (r) => r.name === 'h' && r.file_path === 'src/main.ts' && r.start_line === 2,
+    );
+    expect(callRef).toBeDefined();
+    expect(callRef!.resolution_kind).toBe('call');
+    expect(callRef!.resolved_symbol_id).toBe(helper.id);
+    expect(callRef!.resolution_confidence).toBe(0.9);
+  });
 });

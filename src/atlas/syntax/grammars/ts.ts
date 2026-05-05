@@ -166,20 +166,89 @@ function tryMethod(
 const extractImport: CoarseExtractor = ({ tokens, i, pushNode }) => {
   const t = tokens[i];
   if (!t || t.value !== 'import') return i;
-  // Find the source string.
+  // Parse import clause shapes between `import` and the source string:
+  //   import 'side-effect';
+  //   import D from 'mod';
+  //   import * as N from 'mod';
+  //   import { a, b as c } from 'mod';
+  //   import D, { a, b as c } from 'mod';
+  //   import D, * as N from 'mod';
+  //   import type { T } from 'mod';   (type-only imports — same shape)
+  const importedNames: Array<{ local: string; original: string }> = [];
   let j = i + 1;
+  // Skip an optional `type` keyword (TS type-only import).
+  if (tokens[j]?.value === 'type') j++;
+  let sawClause = false;
+  // Default import: `D` (identifier) before `,` or `from`.
+  if (tokens[j]?.kind === 'identifier' && tokens[j]!.value !== 'from') {
+    importedNames.push({ local: tokens[j]!.value, original: 'default' });
+    sawClause = true;
+    j++;
+    if (tokens[j]?.value === ',') j++;
+  }
+  // Namespace import: `* as N`.
+  if (tokens[j]?.value === '*') {
+    j++;
+    if (tokens[j]?.value === 'as') j++;
+    if (tokens[j]?.kind === 'identifier') {
+      importedNames.push({ local: tokens[j]!.value, original: '*' });
+      sawClause = true;
+      j++;
+    }
+  }
+  // Named imports: `{ a, b as c }`.
+  if (tokens[j]?.value === '{') {
+    j++;
+    while (j < tokens.length && tokens[j]!.value !== '}') {
+      // Skip optional `type` modifier on individual specifier.
+      if (tokens[j]!.value === 'type') {
+        j++;
+        continue;
+      }
+      if (tokens[j]!.kind === 'identifier') {
+        const original = tokens[j]!.value;
+        let local = original;
+        j++;
+        if (tokens[j]?.value === 'as') {
+          j++;
+          if (tokens[j]?.kind === 'identifier') {
+            local = tokens[j]!.value;
+            j++;
+          }
+        }
+        importedNames.push({ local, original });
+        sawClause = true;
+      } else {
+        j++;
+      }
+      if (tokens[j]?.value === ',') j++;
+    }
+    if (tokens[j]?.value === '}') j++;
+  }
+  // Find the `from` keyword (when there's an import clause) and the source string.
   let src = '';
-  while (j < tokens.length && tokens[j]!.value !== ';' && tokens[j]!.value !== '\n') {
+  let endIdx = j;
+  if (sawClause) {
+    if (tokens[j]?.value === 'from') j++;
+  }
+  while (j < tokens.length && tokens[j]!.value !== ';' && j < i + 256) {
     if (tokens[j]!.kind === 'string') {
       src = tokens[j]!.value.slice(1, -1);
-      j++;
+      endIdx = j + 1;
       break;
     }
     j++;
   }
   if (!src) return i;
-  pushNode({ kind: 'import', name: src, start: t.start, end: t.end, line: t.line });
-  return j;
+  pushNode({
+    kind: 'import',
+    name: src,
+    start: t.start,
+    end: t.end,
+    line: t.line,
+    importedNames: importedNames.length > 0 ? importedNames : undefined,
+  });
+  return endIdx;
 };
 
 const extractExport: CoarseExtractor = ({ tokens, i, pushNode }) => {
