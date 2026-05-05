@@ -265,6 +265,55 @@ describe('rust syntax', () => {
     expect(ast.nodes.filter((n) => n.kind !== 'namespace')).toHaveLength(0);
   });
 
+  // ── pub(crate) / pub(super) / pub(in path) visibility refinement (H3-R1) ──
+
+  it('pub(crate) mod with inline fn: mod and fn are both extracted', () => {
+    const src = `
+      pub(crate) mod internals {
+        pub(crate) fn helper() {}
+      }
+    `;
+    const { ast } = parse(src, 'rust');
+    const mod = ast.nodes.find((n) => n.kind === 'namespace' && n.name === 'internals');
+    expect(mod).toBeDefined();
+    expect(mod!.modifiers?.some((m) => m.startsWith('pub(crate)'))).toBe(true);
+    const fn_ = ast.nodes.find((n) => n.kind === 'function' && n.name === 'helper');
+    expect(fn_).toBeDefined();
+    expect(fn_!.parent).toBe('internals');
+  });
+
+  it('pub(crate) use emits export node with correct binding', () => {
+    const src = `pub(crate) use crate::detail::Hidden;`;
+    const { ast } = parse(src, 'rust');
+    const node = ast.nodes.find((n) => n.kind === 'export');
+    expect(node).toBeDefined();
+    expect(node!.importedNames?.[0]?.original).toBe('Hidden');
+    expect(node!.modifiers?.some((m) => m.startsWith('pub(crate)'))).toBe(true);
+  });
+
+  it('pub(super) mod emits namespace node with pub(super) modifier', () => {
+    const src = `
+      pub(super) mod sub {
+        fn inner() {}
+      }
+    `;
+    const { ast } = parse(src, 'rust');
+    const mod = ast.nodes.find((n) => n.kind === 'namespace' && n.name === 'sub');
+    expect(mod).toBeDefined();
+    expect(mod!.modifiers?.some((m) => m.startsWith('pub(super)'))).toBe(true);
+    const fn_ = ast.nodes.find((n) => n.kind === 'function' && n.name === 'inner');
+    expect(fn_).toBeDefined();
+    expect(fn_!.parent).toBe('sub');
+  });
+
+  it('pub(in crate::a::b) struct emits struct node with qualified visibility modifier', () => {
+    const src = `pub(in crate::a::b) struct Restricted { x: i32 }`;
+    const { ast } = parse(src, 'rust');
+    const node = ast.nodes.find((n) => n.kind === 'struct' && n.name === 'Restricted');
+    expect(node).toBeDefined();
+    expect(node!.modifiers?.some((m) => m.startsWith('pub(in'))).toBe(true);
+  });
+
   it('mod containing struct and impl produces parented symbols', () => {
     const src = `
       mod models {

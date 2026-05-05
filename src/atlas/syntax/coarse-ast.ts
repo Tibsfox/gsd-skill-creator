@@ -159,6 +159,11 @@ export function walkCoarseAst(
 /**
  * Common helper: detect modifier tokens before a declaration keyword.
  * Returns { mods, declAt } — declAt is index of the first non-modifier token.
+ *
+ * Rust visibility qualifiers: after `pub`, if the next token is `(` the helper
+ * consumes the balanced paren group and appends the full visibility string
+ * (e.g. `'pub(crate)'`, `'pub(super)'`, `'pub(in crate::a)'`) to `mods` so
+ * that the following declaration keyword is visible to the caller.
  */
 export function consumeModifiers(
   tokens: Token[],
@@ -168,8 +173,25 @@ export function consumeModifiers(
   const mods: string[] = [];
   let j = i;
   while (j < tokens.length && tokens[j]!.kind === 'keyword' && modSet.has(tokens[j]!.value)) {
-    mods.push(tokens[j]!.value);
+    const kw = tokens[j]!.value;
+    mods.push(kw);
     j++;
+    // After `pub`, consume an optional `(crate)` / `(super)` / `(in <path>)`
+    // visibility qualifier so the declaration keyword is not hidden behind the
+    // open-paren token.
+    if (kw === 'pub' && j < tokens.length && tokens[j]!.value === '(') {
+      // Collect the raw text of the paren group.
+      let depth = 0;
+      let inner = '';
+      while (j < tokens.length) {
+        const v = tokens[j]!.value;
+        if (v === '(') { depth++; inner += v; j++; }
+        else if (v === ')') { depth--; inner += v; j++; if (depth === 0) break; }
+        else { inner += v; j++; }
+      }
+      // Replace the bare 'pub' we already pushed with the qualified form.
+      mods[mods.length - 1] = `pub${inner}`;
+    }
   }
   return { mods, declAt: j };
 }

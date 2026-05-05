@@ -288,7 +288,7 @@ const extractUse: CoarseExtractor = ({ tokens, i, pushNode }) => {
   const t = tokens[declAt];
   if (!t || t.value !== 'use') return i;
 
-  const isPub = mods.includes('pub');
+  const isPub = mods.some((m) => m === 'pub' || m.startsWith('pub('));
 
   // Collect path segments up to ';', '{', or '*'.
   let j = declAt + 1;
@@ -331,6 +331,7 @@ const extractUse: CoarseExtractor = ({ tokens, i, pushNode }) => {
       start: t.start,
       end: tokens[end - 1]?.end ?? t.end,
       line: t.line,
+      modifiers: mods.length ? mods : undefined,
       importedNames: bindings,
     });
     let k = end;
@@ -347,6 +348,7 @@ const extractUse: CoarseExtractor = ({ tokens, i, pushNode }) => {
       start: t.start,
       end: cur.end,
       line: t.line,
+      modifiers: mods.length ? mods : undefined,
       importedNames: [{ local: '*', original: '*' }],
     });
     let k = j + 1;
@@ -373,6 +375,7 @@ const extractUse: CoarseExtractor = ({ tokens, i, pushNode }) => {
     start: t.start,
     end: endTok.end,
     line: t.line,
+    modifiers: mods.length ? mods : undefined,
     importedNames: lastSeg ? [{ local, original }] : [],
   });
 

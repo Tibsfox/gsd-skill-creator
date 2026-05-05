@@ -896,6 +896,13 @@ async function loadIntelligenceEventBus() {
   try {
     const mod = await import('../dist/intelligence/events/bus.js');
     const bus = mod.getIntelligenceEventBus();
+    // Generic subscriber broadcasts ALL IntelligenceEvent variants to SSE clients,
+    // including atlas:indexing.* (C / Track C) and atlas:cache.invalidated (G2).
+    // No per-event filtering is needed here — the client-side listener already
+    // dispatches on event.type. This covers:
+    //   - atlas:indexing.started / .progress / .completed / .failed
+    //   - atlas:cache.invalidated   ← H3-R2 explicit coverage
+    //   - intelligence:status_update / briefing_ready / findings_updated / etc.
     const unsubscribe = bus.subscribe((event) => {
       const envelope = `data: ${JSON.stringify(event)}\n\n`;
       for (const client of sseClients) {
@@ -903,6 +910,7 @@ async function loadIntelligenceEventBus() {
       }
     });
     console.log('[intelligence-events] Bus subscribed; broadcasting to /api/events');
+    console.log('[intelligence-events] Covered event types include atlas:cache.invalidated (H3-R2)');
     return unsubscribe;
   } catch (err) {
     console.error('[intelligence-events] Failed to load event bus:', err.message);
