@@ -36,6 +36,7 @@ import { getIntelligenceEventBus } from '../events/bus.js';
 import type { IntelligenceEvent } from '../events/types.js';
 import { walkProjectFiles } from './file-walker.js';
 import { detectAtlasLanguage } from './language-detect.js';
+import { createPool } from '../analyzer/pool.js';
 
 export interface AtlasIndexerOptions {
   snapshotId: SnapshotId;
@@ -53,6 +54,9 @@ export interface AtlasIndexerOptions {
   /** Run the ProvenanceLinker after symbol indexing. Default: false (it
    *  shells out to git and is opt-in for hosts that have a real repo). */
   runProvenance?: boolean;
+  /** Max parallel workers for per-file read+index step. Default: 4.
+   *  Capped at os.cpus().length by the pool. concurrency=1 → sequential. */
+  concurrency?: number;
   /** When true, all rows for `snapshotId` are deleted before writing.
    *  Default: false (idempotent ON CONFLICT(id) DO NOTHING is the cheaper
    *  default; replace=true is for forced reindex). */
@@ -103,40 +107,51 @@ export async function runAtlasIndexer(
     }
     const filesTotal = candidates.length;
 
-    // 2. Per-file: read source, dispatch to indexFile.
-    const fileResults: FileIndexResult[] = [];
-    const sources = new Map<string, string>();
+    // 2. Per-file: read source + tokenize+walk in parallel; resolver is sequential.
+    const pool = createPool(opts.concurrency ?? 4);
+    // Slot-indexed so we can reconstruct insertion order after parallel completion.
+    const slotResults = new Array<FileIndexResult | null>(candidates.length).fill(null);
+    const slotSources = new Array<{ rel: string; src: string } | null>(candidates.length).fill(null);
     let filesDone = 0;
-    for (const c of candidates) {
-      let source: string;
-      try {
-        source = await readFile(c.abs, 'utf-8');
-      } catch {
-        filesDone++;
-        if (opts.onProgress) opts.onProgress({ filesDone, filesTotal });
+
+    await pool.runAllSettled(
+      candidates.map((c, i) => async () => {
+        let source: string;
+        try {
+          source = await readFile(c.abs, 'utf-8');
+        } catch {
+          // Unreadable — count as done, fire progress, leave slot null.
+          const done = ++filesDone;
+          if (opts.onProgress) opts.onProgress({ filesDone: done, filesTotal });
+          bus.publish({
+            type: 'atlas:indexing.progress',
+            payload: { snapshot_id: opts.snapshotId, files_done: done, files_total: filesTotal },
+          });
+          return;
+        }
+        try {
+          const r = indexFile(
+            { file_path: c.rel, source, language: c.lang },
+            { snapshot_id: opts.snapshotId, project_id: opts.projectId },
+          );
+          slotResults[i] = r;
+          slotSources[i] = { rel: c.rel, src: source };
+        } catch {
+          // Per-file parse failures must never abort the whole run.
+        }
+        const done = ++filesDone;
+        if (opts.onProgress) opts.onProgress({ filesDone: done, filesTotal });
         bus.publish({
           type: 'atlas:indexing.progress',
-          payload: { snapshot_id: opts.snapshotId, files_done: filesDone, files_total: filesTotal },
+          payload: { snapshot_id: opts.snapshotId, files_done: done, files_total: filesTotal },
         });
-        continue;
-      }
-      try {
-        const r = indexFile(
-          { file_path: c.rel, source, language: c.lang },
-          { snapshot_id: opts.snapshotId, project_id: opts.projectId },
-        );
-        fileResults.push(r);
-        sources.set(c.rel, source);
-      } catch {
-        // Per-file parse failures must never abort the whole run.
-      }
-      filesDone++;
-      if (opts.onProgress) opts.onProgress({ filesDone, filesTotal });
-      bus.publish({
-        type: 'atlas:indexing.progress',
-        payload: { snapshot_id: opts.snapshotId, files_done: filesDone, files_total: filesTotal },
-      });
-    }
+      }),
+    );
+
+    const fileResults: FileIndexResult[] = slotResults.filter((r): r is FileIndexResult => r !== null);
+    const sources = new Map<string, string>(
+      slotSources.filter((s): s is { rel: string; src: string } => s !== null).map((s) => [s.rel, s.src]),
+    );
 
     // 3. Resolve cross-file references → call edges + type relations.
     const idx: IndexResult = {
@@ -152,7 +167,15 @@ export async function runAtlasIndexer(
       ts_paths: opts.tsPaths,
     });
 
-    // 4. Write to SQLite.
+    // 4. Write to SQLite — sort for deterministic output order (parallel work
+    //    arrives in arbitrary completion order; sequential walk had implicit order).
+    idx.symbols.sort((a, b) =>
+      a.file_path < b.file_path ? -1 : a.file_path > b.file_path ? 1 : a.start_byte - b.start_byte,
+    );
+    resolved.references.sort((a, b) =>
+      a.file_path < b.file_path ? -1 : a.file_path > b.file_path ? 1 : a.start_byte - b.start_byte,
+    );
+
     const kb = new SymbolsKB(db);
     if (opts.replace) kb.clearSnapshot(opts.snapshotId);
     const symbolsInserted = kb.bulkInsertSymbols(idx.symbols);
@@ -180,6 +203,7 @@ export async function runAtlasIndexer(
       type: 'atlas:indexing.completed',
       payload: {
         snapshot_id: opts.snapshotId,
+        project_id: opts.projectId,
         symbols_count: symbolsInserted,
         calls_count: callsInserted,
         files_count: filesTotal,
