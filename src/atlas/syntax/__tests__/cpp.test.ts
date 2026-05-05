@@ -82,4 +82,166 @@ describe('cpp syntax', () => {
     expect(methods.map((n) => n.name).sort()).toEqual(['area', 'draw', 'resize']);
     expect(methods.every((m) => m.parent === 'Widget')).toBe(true);
   });
+
+  // --- Surgery 1: Operator overloads ---
+
+  it('extracts equality and relational operator overloads', () => {
+    const src = `
+      class Vec {
+      public:
+        bool operator==(const Vec& o) const;
+        bool operator!=(const Vec& o) const;
+        bool operator<(const Vec& o) const;
+      };
+    `;
+    const { ast } = parse(src, 'cpp');
+    const methods = ast.nodes.filter((n) => n.kind === 'method');
+    expect(methods.map((n) => n.name).sort()).toEqual(['operator!=', 'operator<', 'operator==']);
+    expect(methods.every((m) => m.parent === 'Vec')).toBe(true);
+  });
+
+  it('extracts function-call and subscript operator overloads', () => {
+    const src = `
+      class Map {
+      public:
+        int& operator[](int idx);
+        void operator()(int x, int y);
+      };
+    `;
+    const { ast } = parse(src, 'cpp');
+    const methods = ast.nodes.filter((n) => n.kind === 'method');
+    expect(methods.map((n) => n.name).sort()).toEqual(['operator()', 'operator[]']);
+    expect(methods.every((m) => m.parent === 'Map')).toBe(true);
+  });
+
+  it('extracts arithmetic and assignment operator overloads', () => {
+    const src = `
+      class BigInt {
+      public:
+        BigInt operator+(const BigInt& o) const;
+        BigInt& operator+=(const BigInt& o);
+        BigInt& operator=(const BigInt& o);
+        BigInt operator-() const;
+      };
+    `;
+    const { ast } = parse(src, 'cpp');
+    const names = ast.nodes.filter((n) => n.kind === 'method').map((n) => n.name).sort();
+    expect(names).toEqual(['operator+', 'operator+=', 'operator-', 'operator=']);
+  });
+
+  it('extracts conversion operator overload', () => {
+    const src = `
+      class Safe {
+      public:
+        operator int() const;
+        operator bool() const;
+      };
+    `;
+    const { ast } = parse(src, 'cpp');
+    const names = ast.nodes.filter((n) => n.kind === 'method').map((n) => n.name).sort();
+    expect(names).toEqual(['operatorbool', 'operatorint']);
+  });
+
+  it('extracts new/delete operator overloads', () => {
+    const src = `
+      class Pooled {
+      public:
+        void* operator new(std::size_t sz);
+        void operator delete(void* p) noexcept;
+      };
+    `;
+    const { ast } = parse(src, 'cpp');
+    const names = ast.nodes.filter((n) => n.kind === 'method').map((n) => n.name).sort();
+    expect(names).toEqual(['operatordelete', 'operatornew']);
+  });
+
+  // --- Surgery 2: Nested classes ---
+
+  it('emits nested class and its methods attributed to inner class', () => {
+    const src = `
+      class Outer {
+        class Inner {
+          void bar();
+        };
+        void baz();
+      };
+    `;
+    const { ast } = parse(src, 'cpp');
+    expect(ast.nodes.find((n) => n.kind === 'class' && n.name === 'Outer')).toBeTruthy();
+    expect(ast.nodes.find((n) => n.kind === 'class' && n.name === 'Inner')).toBeTruthy();
+    const innerBar = ast.nodes.find((n) => n.kind === 'method' && n.name === 'bar');
+    expect(innerBar).toBeTruthy();
+    expect(innerBar?.parent).toBe('Outer::Inner');
+    const outerBaz = ast.nodes.find((n) => n.kind === 'method' && n.name === 'baz');
+    expect(outerBaz).toBeTruthy();
+    expect(outerBaz?.parent).toBe('Outer');
+  });
+
+  it('handles class with method + nested class + method in sequence', () => {
+    const src = `
+      class Container {
+        void before();
+        struct Node {
+          int value;
+          void init();
+        };
+        void after();
+      };
+    `;
+    const { ast } = parse(src, 'cpp');
+    const outerMethods = ast.nodes.filter((n) => n.kind === 'method' && n.parent === 'Container');
+    expect(outerMethods.map((n) => n.name).sort()).toEqual(['after', 'before']);
+    const innerMethods = ast.nodes.filter((n) => n.kind === 'method' && n.parent === 'Container::Node');
+    expect(innerMethods.map((n) => n.name)).toEqual(['init']);
+    expect(ast.nodes.find((n) => n.name === 'Node')).toBeTruthy();
+  });
+
+  it('handles struct nested inside class', () => {
+    const src = `
+      class Graph {
+        struct Edge {
+          void flip();
+        };
+        void clear();
+      };
+    `;
+    const { ast } = parse(src, 'cpp');
+    const edgeMethods = ast.nodes.filter((n) => n.kind === 'method' && n.parent === 'Graph::Edge');
+    expect(edgeMethods.map((n) => n.name)).toEqual(['flip']);
+    const graphMethods = ast.nodes.filter((n) => n.kind === 'method' && n.parent === 'Graph');
+    expect(graphMethods.map((n) => n.name)).toEqual(['clear']);
+  });
+
+  it('handles three levels of nesting', () => {
+    const src = `
+      class A {
+        class B {
+          class C {
+            void deepMethod();
+          };
+        };
+      };
+    `;
+    const { ast } = parse(src, 'cpp');
+    expect(ast.nodes.find((n) => n.name === 'A')).toBeTruthy();
+    expect(ast.nodes.find((n) => n.name === 'B')).toBeTruthy();
+    expect(ast.nodes.find((n) => n.name === 'C')).toBeTruthy();
+    const deep = ast.nodes.find((n) => n.kind === 'method' && n.name === 'deepMethod');
+    expect(deep).toBeTruthy();
+    expect(deep?.parent).toBe('A::B::C');
+  });
+
+  it('does not double-count nested-class methods on the outer class (regression guard)', () => {
+    const src = `
+      class Outer {
+        void outer_method();
+        class Inner {
+          void inner_method();
+        };
+      };
+    `;
+    const { ast } = parse(src, 'cpp');
+    const outerMethods = ast.nodes.filter((n) => n.kind === 'method' && n.parent === 'Outer');
+    expect(outerMethods.map((n) => n.name)).toEqual(['outer_method']);
+  });
 });

@@ -17,7 +17,13 @@ export const cppAdapter: ExtractorAdapter = {
     import: 'import',
   },
   qualifiedName(node, parentQn) {
+    // Methods carry a pre-built `parent` that is already the full qualified-name
+    // chain (e.g. "Outer::Inner") emitted by walkClassBody. Use it directly.
     if (node.kind === 'method' && node.parent) return `${node.parent}::${node.name}`;
+    // Nested classes also carry a `parent` chain; compose with name.
+    if ((node.kind === 'class' || node.kind === 'struct' || node.kind === 'enum') && node.parent) {
+      return `${node.parent}::${node.name}`;
+    }
     if (parentQn) return `${parentQn}::${node.name}`;
     return node.name;
   },

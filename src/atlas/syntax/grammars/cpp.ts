@@ -53,6 +53,53 @@ export const cppGrammar: Grammar = {
   },
 };
 
+/**
+ * Walk a class/struct body slice [bodyStart+1, bodyEnd) and emit methods
+ * (and recursively nested classes) using parentQn as the qualified-name prefix.
+ */
+function walkClassBody(
+  tokens: Token[],
+  bodyStart: number,
+  parentQn: string,
+  pushNode: (n: CoarseNode) => void,
+): void {
+  const endIdx = skipBalanced(tokens, bodyStart, '{', '}');
+  let p = bodyStart + 1;
+  const lastEnd = endIdx > 0 ? endIdx - 1 : tokens.length;
+  while (p < lastEnd) {
+    const tv = tokens[p]!.value;
+    if (tv === 'class' || tv === 'struct' || tv === 'union' || tv === 'enum') {
+      const innerNameT = tokens[p + 1];
+      if (innerNameT && innerNameT.kind === 'identifier') {
+        const innerQn = `${parentQn}::${innerNameT.value}`;
+        pushNode({
+          kind: tv === 'enum' ? 'enum' : tv === 'struct' ? 'struct' : 'class',
+          name: innerNameT.value,
+          parent: parentQn,
+          start: tokens[p]!.start,
+          end: innerNameT.end,
+          line: tokens[p]!.line,
+        });
+        // Find body opener for the nested class.
+        let q = p + 2;
+        while (q < lastEnd && tokens[q]!.value !== '{' && tokens[q]!.value !== ';') q++;
+        if (tokens[q]?.value === '{') {
+          walkClassBody(tokens, q, innerQn, pushNode);
+          p = skipBalanced(tokens, q, '{', '}');
+          continue;
+        }
+      }
+    }
+    const m = tryCppMethod(tokens, p, lastEnd, parentQn);
+    if (m) {
+      pushNode(m.node);
+      p = m.next;
+    } else {
+      p++;
+    }
+  }
+}
+
 const extractClassOrStruct: CoarseExtractor = ({ tokens, i, pushNode }) => {
   const t = tokens[i];
   if (!t) return i;
@@ -74,34 +121,53 @@ const extractClassOrStruct: CoarseExtractor = ({ tokens, i, pushNode }) => {
     let j = i + 2;
     while (j < tokens.length && tokens[j]!.value !== '{' && tokens[j]!.value !== ';') j++;
     if (tokens[j]?.value === '{') {
-      const endIdx = skipBalanced(tokens, j, '{', '}');
-      let p = j + 1;
-      const lastEnd = endIdx > 0 ? endIdx - 1 : tokens.length;
-      while (p < lastEnd) {
-        // Skip nested class/struct bodies — they'll be picked up at top-level
-        // by the outer walker only when emitted; for now skip past their body
-        // to avoid mis-attributing nested methods to the outer parent.
-        if (tokens[p]!.value === 'class' || tokens[p]!.value === 'struct' || tokens[p]!.value === 'union' || tokens[p]!.value === 'enum') {
-          let q = p + 1;
-          while (q < lastEnd && tokens[q]!.value !== '{' && tokens[q]!.value !== ';') q++;
-          if (tokens[q]?.value === '{') {
-            p = skipBalanced(tokens, q, '{', '}');
-            continue;
-          }
-        }
-        const m = tryCppMethod(tokens, p, lastEnd, nameT.value);
-        if (m) {
-          pushNode(m.node);
-          p = m.next;
-        } else {
-          p++;
-        }
-      }
-      return endIdx;
+      walkClassBody(tokens, j, nameT.value, pushNode);
+      return skipBalanced(tokens, j, '{', '}');
     }
   }
   return i + 2;
 };
+
+/**
+ * Try to parse an operator overload starting at tokens[j] === 'operator'.
+ * Returns { name, parenIdx } where name is e.g. `operator==` and parenIdx
+ * is the index of the `(` opening the parameter list, or null if not an overload.
+ */
+function tryOperatorOverload(
+  tokens: Token[],
+  j: number,
+  bodyEnd: number,
+): { name: string; parenIdx: number } | null {
+  let k = j + 1;
+  const opParts: string[] = [];
+  while (k < bodyEnd && opParts.length < 6) {
+    const v = tokens[k]!.value;
+    // `operator()` — function-call operator: ONLY when no prior op-tokens.
+    // `operator[]` — subscript operator: ONLY when no prior op-tokens.
+    if (opParts.length === 0) {
+      if (v === '(' && tokens[k + 1]?.value === ')') {
+        opParts.push('()');
+        k += 2;
+        continue;
+      }
+      if (v === '[' && tokens[k + 1]?.value === ']') {
+        opParts.push('[]');
+        k += 2;
+        continue;
+      }
+    }
+    // Parameter-list opener `(` — marks end of operator tokens.
+    if (v === '(') break;
+    // Structural stop tokens.
+    if (v === '{' || v === '}' || v === ';' || v === ':') return null;
+    opParts.push(v);
+    k++;
+  }
+  if (tokens[k]?.value !== '(') return null;
+  if (opParts.length === 0) return null;
+  const name = `operator${opParts.join('')}`;
+  return { name, parenIdx: k };
+}
 
 function tryCppMethod(
   tokens: Token[],
@@ -116,6 +182,45 @@ function tryCppMethod(
     const v = tokens[j]!.value;
     if (v === '{' || v === '}' || v === ':' || v === ',') return null;
     if (v === ';') return null;
+
+    // Operator overload: `operator <op-tokens> (`
+    if (v === 'operator') {
+      const op = tryOperatorOverload(tokens, j, bodyEnd);
+      if (op) {
+        const close = skipBalanced(tokens, op.parenIdx, '(', ')');
+        const after = tokens[close];
+        if (!after) return null;
+        if (
+          after.value === '{' ||
+          after.value === ';' ||
+          after.value === 'const' ||
+          after.value === 'noexcept' ||
+          after.value === 'override' ||
+          after.value === 'final' ||
+          after.value === '='
+        ) {
+          const tOp = tokens[j]!;
+          let next = close;
+          while (next < bodyEnd && tokens[next]!.value !== '{' && tokens[next]!.value !== ';') next++;
+          if (tokens[next]?.value === '{') next = skipBalanced(tokens, next, '{', '}');
+          else if (tokens[next]?.value === ';') next = next + 1;
+          return {
+            node: {
+              kind: 'method',
+              name: op.name,
+              parent,
+              start: tOp.start,
+              end: tOp.end,
+              line: tOp.line,
+            },
+            next,
+          };
+        }
+      }
+      j++;
+      continue;
+    }
+
     if (tokens[j]!.kind === 'identifier' && tokens[j + 1]?.value === '(') {
       const close = skipBalanced(tokens, j + 1, '(', ')');
       const after = tokens[close];
@@ -131,11 +236,6 @@ function tryCppMethod(
       ) {
         const tIdent = tokens[j]!;
         if (!/^[A-Za-z_~][\w]*$/.test(tIdent.value)) return null;
-        // Skip operator-overload identifiers — heuristic-filtered (out of scope).
-        if (tIdent.value === 'operator') return null;
-        // Skip constructors that match the class name to avoid double-counting:
-        // we still emit them as methods (they are member functions).
-        // Advance `next` to past the body or signature.
         let next = close;
         // Skip post-qualifiers up to `{` or `;`.
         while (next < bodyEnd && tokens[next]!.value !== '{' && tokens[next]!.value !== ';') next++;
