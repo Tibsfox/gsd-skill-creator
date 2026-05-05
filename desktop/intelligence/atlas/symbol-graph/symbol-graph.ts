@@ -162,8 +162,8 @@ export class SymbolGraphView {
       const resolved = neighborSyms.filter((s): s is AtlasSymbol => s !== null);
       rootSymbols = [...rootSymbols, ...resolved];
     } else {
-      // No specific symbol — load file-level symbols for the snapshot
-      rootSymbols = await intelligenceIpc.listSymbolsForFile(snapshotId, '');
+      // No specific symbol — load snapshot-wide overview (up to 500 symbols).
+      rootSymbols = await intelligenceIpc.listSymbolsInSnapshot(snapshotId, { limit: 500 });
     }
 
     this.loadGraph(rootSymbols, callEdges, typeRels);

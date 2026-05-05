@@ -378,6 +378,15 @@ export interface AtlasMissionProvenance {
  */
 export interface AtlasKB {
   listSymbolsForFile(snapshot: SnapshotId, file_path: string): Promise<AtlasSymbol[]>;
+  listSymbolsInSnapshot(
+    snapshot: SnapshotId,
+    opts?: {
+      kindFilter?: SymbolKind[];
+      languageFilter?: AtlasLanguage[];
+      limit?: number;
+      offset?: number;
+    },
+  ): Promise<AtlasSymbol[]>;
   getSymbol(id: SymbolId): Promise<AtlasSymbol | null>;
   findSymbolsByQualifiedName(snapshot: SnapshotId, qn: string): Promise<AtlasSymbol[]>;
   listCallers(symbol_id: SymbolId): Promise<AtlasCallEdge[]>;

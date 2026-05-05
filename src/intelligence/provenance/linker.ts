@@ -228,6 +228,43 @@ export class ProvenanceLinker {
   }
 
   /**
+   * Delete all `mission_provenance` rows for the given snapshot_id and all
+   * `files_changed` rows whose mission_id matches any mission linked to that
+   * snapshot via `mission_links`. Idempotent — calling twice does not error.
+   *
+   * Use this before `run()` when strict re-run idempotency is required (the
+   * 'replace' mode wrapper below does this automatically).
+   */
+  clearSnapshotProvenance(snapshot_id: string): void {
+    this._db.transaction(() => {
+      this._db
+        .prepare('DELETE FROM mission_provenance WHERE snapshot_id = ?')
+        .run(snapshot_id);
+      // files_changed is keyed by mission_id (not snapshot_id). Clear every
+      // mission_id that is referenced by a mission_provenance row that was
+      // (or would have been) written for this snapshot. Because we already
+      // deleted those rows above, we derive the set from mission_links
+      // (same source resolveMissionCommits uses) and clear unconditionally.
+      let missionIds: string[];
+      try {
+        missionIds = (
+          this._db
+            .prepare('SELECT DISTINCT decision_id FROM mission_links')
+            .all() as Array<{ decision_id: string }>
+        ).map((r) => r.decision_id);
+      } catch {
+        missionIds = [];
+      }
+      if (missionIds.length > 0) {
+        const placeholders = missionIds.map(() => '?').join(',');
+        this._db
+          .prepare(`DELETE FROM files_changed WHERE mission_id IN (${placeholders})`)
+          .run(...missionIds);
+      }
+    })();
+  }
+
+  /**
    * Run the full linker pipeline:
    *   1. Resolve `mission_links` → MissionCommitMap[]
    *   2. Walk `git log --name-status --numstat` for the union of all
@@ -238,10 +275,14 @@ export class ProvenanceLinker {
    *
    * Idempotency: writes are wrapped in a single transaction. Re-running
    * with the same snapshot_id appends new rows (the schema does not
-   * deduplicate); callers wanting strict idempotency should clear rows
-   * for the snapshot first.
+   * deduplicate). Pass `mode: 'replace'` to clear rows for the snapshot
+   * before writing, producing a deterministic final state regardless of
+   * how many times the linker is invoked.
    */
-  run(cfg: LinkerConfig): LinkerResult {
+  run(cfg: LinkerConfig, opts?: { mode?: 'append' | 'replace' }): LinkerResult {
+    if (opts?.mode === 'replace') {
+      this.clearSnapshotProvenance(cfg.snapshot_id);
+    }
     const missionMaps = resolveMissionCommits(this._db, cfg.project_dir);
     const idx = buildShaToMissionIndex(missionMaps);
 

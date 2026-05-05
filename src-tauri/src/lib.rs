@@ -196,6 +196,7 @@ pub fn run() {
             crate::intelligence::server::intelligence_request_snapshot_diff,
             crate::intelligence::server::intelligence_get_meeting_record,
             crate::intelligence::atlas::atlas_list_symbols_for_file,
+            crate::intelligence::atlas::atlas_list_symbols_in_snapshot,
             crate::intelligence::atlas::atlas_get_symbol,
             crate::intelligence::atlas::atlas_find_symbols_by_qualified_name,
             crate::intelligence::atlas::atlas_list_callers,

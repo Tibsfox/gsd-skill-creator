@@ -21,6 +21,8 @@ import type {
   AtlasTypeRelation,
   SymbolId,
   SnapshotId,
+  SymbolKind,
+  AtlasLanguage,
 } from '../types.js';
 import { rowToAtlasSymbol, rowToAtlasReference, rowToAtlasCallEdge, rowToAtlasTypeRelation } from './atlas-rows.js';
 import type { SymbolRow, SymbolReferenceRow, CallEdgeRow, TypeRelationRow } from './atlas-rows.js';
@@ -41,6 +43,9 @@ export class SymbolsKB {
   private _stmtListRefs?: Database.Statement;
   private _stmtListRelFrom?: Database.Statement;
   private _stmtListRelTo?: Database.Statement;
+  // listSymbolsInSnapshot uses dynamic SQL (variable WHERE clauses) so it
+  // cannot be a single cached prepared statement; base case is cached below.
+  private _stmtListInSnapshot?: Database.Statement;
 
   constructor(db: Database.Database) {
     this._db = db;
@@ -57,6 +62,67 @@ export class SymbolsKB {
       );
     }
     const rows = this._stmtListByFile.all(snapshot, file_path) as SymbolRow[];
+    return rows.map(rowToAtlasSymbol);
+  }
+
+  /**
+   * List all symbols in a snapshot, optionally filtered by kind and/or language,
+   * with limit/offset pagination. Uses idx_symbols_snapshot index for O(log n)
+   * snapshot lookup; secondary kind/language filters are applied in-DB via
+   * dynamic SQL when present (avoids a full-scan post-filter in JS).
+   *
+   * Dynamic-SQL note: because the WHERE clause varies by opts, a single cached
+   * prepared statement cannot cover all code paths. The base case (no filters) is
+   * cached; filtered cases prepare an ad-hoc statement per call. Caller-side
+   * caching or connection pooling should be applied if the filtered path is hot.
+   */
+  listSymbolsInSnapshot(
+    snapshot: SnapshotId,
+    opts?: {
+      kindFilter?: SymbolKind[];
+      languageFilter?: AtlasLanguage[];
+      limit?: number;
+      offset?: number;
+    },
+  ): AtlasSymbol[] {
+    const limit = opts?.limit ?? 500;
+    const offset = opts?.offset ?? 0;
+    const kinds = opts?.kindFilter ?? [];
+    const langs = opts?.languageFilter ?? [];
+
+    const hasKind = kinds.length > 0;
+    const hasLang = langs.length > 0;
+
+    if (!hasKind && !hasLang) {
+      // Base case: cacheable prepared statement via idx_symbols_snapshot.
+      if (!this._stmtListInSnapshot) {
+        this._stmtListInSnapshot = this._db.prepare(
+          `SELECT * FROM symbols
+           WHERE snapshot_id = ?
+           ORDER BY file_path ASC, start_byte ASC
+           LIMIT ? OFFSET ?`,
+        );
+      }
+      const rows = this._stmtListInSnapshot.all(snapshot, limit, offset) as SymbolRow[];
+      return rows.map(rowToAtlasSymbol);
+    }
+
+    // Filtered case: dynamic SQL prepared inline.
+    const clauses: string[] = ['snapshot_id = ?'];
+    const params: unknown[] = [snapshot];
+
+    if (hasKind) {
+      clauses.push(`kind IN (${kinds.map(() => '?').join(',')})`);
+      for (const k of kinds) params.push(k);
+    }
+    if (hasLang) {
+      clauses.push(`language IN (${langs.map(() => '?').join(',')})`);
+      for (const l of langs) params.push(l);
+    }
+
+    params.push(limit, offset);
+    const sql = `SELECT * FROM symbols WHERE ${clauses.join(' AND ')} ORDER BY file_path ASC, start_byte ASC LIMIT ? OFFSET ?`;
+    const rows = this._db.prepare(sql).all(...params) as SymbolRow[];
     return rows.map(rowToAtlasSymbol);
   }
 
@@ -172,6 +238,7 @@ export class SymbolsKB {
     if (this._stmtListRefs) n++;
     if (this._stmtListRelFrom) n++;
     if (this._stmtListRelTo) n++;
+    if (this._stmtListInSnapshot) n++;
     return n;
   }
 }

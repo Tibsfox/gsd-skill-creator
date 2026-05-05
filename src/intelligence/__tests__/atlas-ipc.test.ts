@@ -174,6 +174,27 @@ describe('intelligenceIpc — atlas commands', () => {
     });
   });
 
+  it('listSymbolsInSnapshot calls atlas_list_symbols_in_snapshot with correct args', async () => {
+    stubbedReturn = [];
+    const { intelligenceIpc } = await import('../ipc.js');
+
+    await intelligenceIpc.listSymbolsInSnapshot('snap-05', {
+      kindFilter: ['function', 'class'],
+      languageFilter: ['ts'],
+      limit: 100,
+      offset: 0,
+    });
+
+    expect(lastCall?.cmd).toBe('atlas_list_symbols_in_snapshot');
+    expect(lastCall?.args).toMatchObject({
+      snapshotId: 'snap-05',
+      kindFilter: ['function', 'class'],
+      languageFilter: ['ts'],
+      limit: 100,
+      offset: 0,
+    });
+  });
+
   it('requestIndexSnapshot calls atlas_request_index_snapshot', async () => {
     stubbedReturn = undefined;
     const { intelligenceIpc } = await import('../ipc.js');

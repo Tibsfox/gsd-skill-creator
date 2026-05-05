@@ -21,6 +21,7 @@ import type {
   AtlasSymbol,
   AtlasSymbolReference,
   AtlasTypeRelation,
+  AtlasLanguage,
   Briefing,
   Bundle,
   BundleId,
@@ -34,6 +35,7 @@ import type {
   ProjectId,
   SnapshotId,
   SymbolId,
+  SymbolKind,
 } from './types.js';
 
 // ─── Payload types specific to IPC ─────────────────────────────────────────────
@@ -355,6 +357,24 @@ export const intelligenceIpc = {
     return invoke<AtlasSymbol[]>('atlas_list_symbols_for_file', {
       snapshotId,
       filePath,
+    });
+  },
+
+  listSymbolsInSnapshot(
+    snapshotId: SnapshotId,
+    opts?: {
+      kindFilter?: SymbolKind[];
+      languageFilter?: AtlasLanguage[];
+      limit?: number;
+      offset?: number;
+    },
+  ): Promise<AtlasSymbol[]> {
+    return invoke<AtlasSymbol[]>('atlas_list_symbols_in_snapshot', {
+      snapshotId,
+      kindFilter: opts?.kindFilter ?? null,
+      languageFilter: opts?.languageFilter ?? null,
+      limit: opts?.limit ?? null,
+      offset: opts?.offset ?? null,
     });
   },
 

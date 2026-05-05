@@ -213,6 +213,56 @@ describe('ProvenanceLinker — integration', () => {
     expect(result.files_changed_inserted).toBe(0);
   });
 
+  it.skipIf(!HAVE_GIT)('clearSnapshotProvenance removes all provenance rows for the snapshot', () => {
+    gitInit(repoDir);
+    const sha1 = gitCommit(repoDir, 'feat: add a.ts', { 'src/a.ts': 'line1\n' });
+    insertMissionLink(db, 'D-clear-1', 'M-clear-1', 'commit_sha', sha1);
+
+    const linker = new ProvenanceLinker(db);
+    linker.run({ project_dir: repoDir, snapshot_id: 'snap-clear', file_paths: ['src/a.ts'] });
+
+    const before = db.prepare('SELECT COUNT(*) as n FROM mission_provenance WHERE snapshot_id = ?').get('snap-clear') as { n: number };
+    expect(before.n).toBeGreaterThan(0);
+
+    linker.clearSnapshotProvenance('snap-clear');
+    const after = db.prepare('SELECT COUNT(*) as n FROM mission_provenance WHERE snapshot_id = ?').get('snap-clear') as { n: number };
+    expect(after.n).toBe(0);
+  });
+
+  it.skipIf(!HAVE_GIT)('clearSnapshotProvenance is idempotent — calling twice does not error', () => {
+    gitInit(repoDir);
+    const sha1 = gitCommit(repoDir, 'feat: add a.ts', { 'src/a.ts': 'line1\n' });
+    insertMissionLink(db, 'D-idem-1', 'M-idem-1', 'commit_sha', sha1);
+
+    const linker = new ProvenanceLinker(db);
+    linker.run({ project_dir: repoDir, snapshot_id: 'snap-idem', file_paths: ['src/a.ts'] });
+
+    expect(() => linker.clearSnapshotProvenance('snap-idem')).not.toThrow();
+    expect(() => linker.clearSnapshotProvenance('snap-idem')).not.toThrow();
+    const after = db.prepare('SELECT COUNT(*) as n FROM mission_provenance WHERE snapshot_id = ?').get('snap-idem') as { n: number };
+    expect(after.n).toBe(0);
+  });
+
+  it.skipIf(!HAVE_GIT)("replace mode produces the same final state regardless of how many times invoked", () => {
+    gitInit(repoDir);
+    const sha1 = gitCommit(repoDir, 'feat: add a.ts', { 'src/a.ts': 'line1\nline2\n' });
+    insertMissionLink(db, 'D-rep-1', 'M-rep-1', 'commit_sha', sha1);
+
+    const linker = new ProvenanceLinker(db);
+    const cfg = { project_dir: repoDir, snapshot_id: 'snap-rep', file_paths: ['src/a.ts'] };
+
+    const r1 = linker.run(cfg, { mode: 'replace' });
+    const r2 = linker.run(cfg, { mode: 'replace' });
+    const r3 = linker.run(cfg, { mode: 'replace' });
+
+    // All three runs produced the same count — 'replace' cleared before each write.
+    expect(r1.provenance_inserted).toBe(r2.provenance_inserted);
+    expect(r2.provenance_inserted).toBe(r3.provenance_inserted);
+
+    const finalCount = db.prepare('SELECT COUNT(*) as n FROM mission_provenance WHERE snapshot_id = ?').get('snap-rep') as { n: number };
+    expect(finalCount.n).toBe(r1.provenance_inserted);
+  });
+
   it('parseGitLogNameStatusNumstat parses interleaved numstat + name-status output', () => {
     const sha = '1'.repeat(40);
     const stdout = [

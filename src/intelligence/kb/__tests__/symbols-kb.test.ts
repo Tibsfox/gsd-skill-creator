@@ -225,14 +225,64 @@ describe('intelligence/kb — SymbolsKB', () => {
     kb.getSymbol('s1' as SymbolId);
     expect(kb.preparedStatementCount()).toBe(2);
 
-    // A round-trip across all 8 methods must end at exactly 8 cached statements
+    // A round-trip across all 9 cacheable methods must end at exactly 9 cached statements
     kb.findSymbolsByQualifiedName(SNAP, 'foo');
     kb.listCallers('s1' as SymbolId);
     kb.listCallees('s1' as SymbolId);
     kb.listReferencesForSymbol('s1' as SymbolId);
     kb.listTypeRelationsFrom('s1' as SymbolId);
     kb.listTypeRelationsTo('s1' as SymbolId);
-    expect(kb.preparedStatementCount()).toBe(8);
+    kb.listSymbolsInSnapshot(SNAP); // base case (no filters) — uses cached stmt
+    expect(kb.preparedStatementCount()).toBe(9);
+  });
+
+  it('listSymbolsInSnapshot returns all symbols in snapshot ordered by file + start_byte', () => {
+    makeSymbolRow({ id: 's1', file_path: 'src/a.ts', name: 'foo', qualified_name: 'foo', start_byte: 50, start_line: 5 });
+    makeSymbolRow({ id: 's2', file_path: 'src/a.ts', name: 'bar', qualified_name: 'bar', start_byte: 10, start_line: 2 });
+    makeSymbolRow({ id: 's3', file_path: 'src/b.ts', name: 'baz', qualified_name: 'baz', start_byte: 0, start_line: 1 });
+    makeSymbolRow({ id: 's4', file_path: 'src/c.ts', name: 'qux', qualified_name: 'qux', start_byte: 0, start_line: 1, snapshot_id: 'other-snap' });
+
+    const result = kb.listSymbolsInSnapshot(SNAP);
+    expect(result.length).toBe(3);
+    // ordered: src/a.ts (byte 10 → byte 50) then src/b.ts
+    expect(result[0].id).toBe('s2');
+    expect(result[1].id).toBe('s1');
+    expect(result[2].id).toBe('s3');
+  });
+
+  it('listSymbolsInSnapshot filters by kindFilter', () => {
+    makeSymbolRow({ id: 'fn1', file_path: 'src/a.ts', name: 'fn1', qualified_name: 'fn1', start_byte: 0, start_line: 1, kind: 'function' });
+    makeSymbolRow({ id: 'cl1', file_path: 'src/a.ts', name: 'Cl1', qualified_name: 'Cl1', start_byte: 10, start_line: 2, kind: 'class' });
+    makeSymbolRow({ id: 'if1', file_path: 'src/a.ts', name: 'If1', qualified_name: 'If1', start_byte: 20, start_line: 3, kind: 'interface' });
+
+    const result = kb.listSymbolsInSnapshot(SNAP, { kindFilter: ['function', 'class'] });
+    expect(result.length).toBe(2);
+    expect(result.map((s) => s.kind).sort()).toEqual(['class', 'function']);
+  });
+
+  it('listSymbolsInSnapshot filters by languageFilter', () => {
+    makeSymbolRow({ id: 'ts1', file_path: 'src/a.ts', name: 'a', qualified_name: 'a', start_byte: 0, start_line: 1, language: 'ts' });
+    makeSymbolRow({ id: 'rs1', file_path: 'src/b.rs', name: 'b', qualified_name: 'b', start_byte: 0, start_line: 1, language: 'rust' });
+    makeSymbolRow({ id: 'py1', file_path: 'src/c.py', name: 'c', qualified_name: 'c', start_byte: 0, start_line: 1, language: 'python' });
+
+    const result = kb.listSymbolsInSnapshot(SNAP, { languageFilter: ['ts', 'rust'] });
+    expect(result.length).toBe(2);
+    expect(result.map((s) => s.language).sort()).toEqual(['rust', 'ts']);
+  });
+
+  it('listSymbolsInSnapshot respects limit and offset pagination', () => {
+    for (let i = 0; i < 5; i++) {
+      makeSymbolRow({ id: `pg${i}`, file_path: 'src/a.ts', name: `f${i}`, qualified_name: `f${i}`, start_byte: i * 10, start_line: i + 1 });
+    }
+    const page1 = kb.listSymbolsInSnapshot(SNAP, { limit: 2, offset: 0 });
+    const page2 = kb.listSymbolsInSnapshot(SNAP, { limit: 2, offset: 2 });
+    const page3 = kb.listSymbolsInSnapshot(SNAP, { limit: 2, offset: 4 });
+    expect(page1.length).toBe(2);
+    expect(page2.length).toBe(2);
+    expect(page3.length).toBe(1);
+    // No overlap
+    const ids = [...page1, ...page2, ...page3].map((s) => s.id);
+    expect(new Set(ids).size).toBe(5);
   });
 
   it('joins across symbols + calls + symbol_references all see the same row', () => {

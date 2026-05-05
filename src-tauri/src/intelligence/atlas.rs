@@ -127,6 +127,15 @@ pub trait AtlasKbDelegate: Send + Sync + 'static {
         file_path: String,
     ) -> Result<Vec<AtlasSymbol>, String>;
 
+    fn list_symbols_in_snapshot(
+        &self,
+        snapshot_id: String,
+        kind_filter: Option<Vec<String>>,
+        language_filter: Option<Vec<String>>,
+        limit: Option<i64>,
+        offset: Option<i64>,
+    ) -> Result<Vec<AtlasSymbol>, String>;
+
     fn get_symbol(&self, id: String) -> Result<Option<AtlasSymbol>, String>;
 
     fn find_symbols_by_qualified_name(
@@ -188,6 +197,16 @@ pub struct StubAtlasKbDelegate;
 
 impl AtlasKbDelegate for StubAtlasKbDelegate {
     fn list_symbols_for_file(&self, _s: String, _f: String) -> Result<Vec<AtlasSymbol>, String> {
+        Err(DEFERRED.to_string())
+    }
+    fn list_symbols_in_snapshot(
+        &self,
+        _s: String,
+        _kf: Option<Vec<String>>,
+        _lf: Option<Vec<String>>,
+        _limit: Option<i64>,
+        _offset: Option<i64>,
+    ) -> Result<Vec<AtlasSymbol>, String> {
         Err(DEFERRED.to_string())
     }
     fn get_symbol(&self, _id: String) -> Result<Option<AtlasSymbol>, String> {
@@ -277,6 +296,25 @@ pub async fn atlas_list_symbols_for_file(
         .map_err(|e| e.to_string())?
         .kb
         .list_symbols_for_file(snapshot_id, file_path)
+}
+
+/// List all symbols in a snapshot with optional kind/language filters and pagination.
+/// Backed by `idx_symbols_snapshot`; secondary filters applied in the KB layer.
+/// Default limit is 500 when the caller omits the parameter (mirroring the TS default).
+#[tauri::command]
+pub async fn atlas_list_symbols_in_snapshot(
+    state: State<'_, Mutex<AtlasState>>,
+    snapshot_id: String,
+    kind_filter: Option<Vec<String>>,
+    language_filter: Option<Vec<String>>,
+    limit: Option<i64>,
+    offset: Option<i64>,
+) -> Result<Vec<AtlasSymbol>, String> {
+    state
+        .lock()
+        .map_err(|e| e.to_string())?
+        .kb
+        .list_symbols_in_snapshot(snapshot_id, kind_filter, language_filter, limit, offset)
 }
 
 #[tauri::command]
@@ -488,6 +526,15 @@ mod tests {
         let kb = StubAtlasKbDelegate;
         let err = kb
             .list_symbols_for_file("snap-01".to_string(), "src/foo.ts".to_string())
+            .unwrap_err();
+        assert!(err.contains("stub"), "Expected stub error, got: {err}");
+    }
+
+    #[test]
+    fn stub_list_symbols_in_snapshot_returns_deferred_error() {
+        let kb = StubAtlasKbDelegate;
+        let err = kb
+            .list_symbols_in_snapshot("snap-01".to_string(), None, None, None, None)
             .unwrap_err();
         assert!(err.contains("stub"), "Expected stub error, got: {err}");
     }

@@ -15,6 +15,7 @@ import {
 } from '../filter-pipeline.js';
 import type { FilterConfig } from '../filter-pipeline.js';
 import { SymbolGraphView } from '../symbol-graph.js';
+import * as ipcModule from '../../../../../src/intelligence/ipc.js';
 
 // ─── WebGL2 stub ─────────────────────────────────────────────────────────────
 
@@ -324,5 +325,59 @@ describe('SymbolGraphView — click-handler dispatch', () => {
     view._clickAtWorld(layout?.x ?? 0, layout?.y ?? 0);
     expect(h1).toHaveBeenCalledTimes(1);
     expect(h2).toHaveBeenCalledTimes(1);
+  });
+});
+
+// ─── setFocus IPC routing tests ──────────────────────────────────────────────
+
+describe('SymbolGraphView — setFocus IPC routing', () => {
+  let canvas: HTMLCanvasElement;
+  let view: SymbolGraphView;
+
+  beforeEach(() => {
+    vi.stubGlobal('requestAnimationFrame', vi.fn(() => 1));
+    vi.stubGlobal('cancelAnimationFrame', vi.fn());
+    canvas = makeCanvas();
+    view = new SymbolGraphView(canvas);
+  });
+
+  it('setFocus without symbolId calls listSymbolsInSnapshot, not listSymbolsForFile', async () => {
+    const sym = makeSymbol({ id: 'snap-sym-1' });
+    const listInSnap = vi.spyOn(ipcModule.intelligenceIpc, 'listSymbolsInSnapshot')
+      .mockResolvedValueOnce([sym]);
+    const listForFile = vi.spyOn(ipcModule.intelligenceIpc, 'listSymbolsForFile')
+      .mockResolvedValue([]);
+
+    await view.setFocus({ snapshotId: 'snap-abc' });
+
+    expect(listInSnap).toHaveBeenCalledOnce();
+    expect(listInSnap).toHaveBeenCalledWith('snap-abc', { limit: 500 });
+    expect(listForFile).not.toHaveBeenCalled();
+
+    listInSnap.mockRestore();
+    listForFile.mockRestore();
+  });
+
+  it('setFocus with symbolId calls getSymbol + call-graph methods, not listSymbolsInSnapshot', async () => {
+    const sym = makeSymbol({ id: 'sym-focus' });
+    const getSym = vi.spyOn(ipcModule.intelligenceIpc, 'getSymbol').mockResolvedValue(sym);
+    const listCallers = vi.spyOn(ipcModule.intelligenceIpc, 'listCallers').mockResolvedValue([]);
+    const listCallees = vi.spyOn(ipcModule.intelligenceIpc, 'listCallees').mockResolvedValue([]);
+    const listTypeFrom = vi.spyOn(ipcModule.intelligenceIpc, 'listTypeRelationsFrom').mockResolvedValue([]);
+    const listTypeTo = vi.spyOn(ipcModule.intelligenceIpc, 'listTypeRelationsTo').mockResolvedValue([]);
+    const listInSnap = vi.spyOn(ipcModule.intelligenceIpc, 'listSymbolsInSnapshot')
+      .mockResolvedValue([]);
+
+    await view.setFocus({ snapshotId: 'snap-abc', symbolId: 'sym-focus' });
+
+    expect(getSym).toHaveBeenCalledWith('sym-focus');
+    expect(listInSnap).not.toHaveBeenCalled();
+
+    getSym.mockRestore();
+    listCallers.mockRestore();
+    listCallees.mockRestore();
+    listTypeFrom.mockRestore();
+    listTypeTo.mockRestore();
+    listInSnap.mockRestore();
   });
 });
