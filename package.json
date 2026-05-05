@@ -63,7 +63,7 @@
     "desktop:dev": "cd src-tauri && npx tauri dev",
     "desktop:build": "cd src-tauri && PKG_CONFIG_PATH=\"$(pwd)/.pkgconfig:${PKG_CONFIG_PATH:-}\" npx tauri build",
     "desktop:test": "cd desktop && npx vitest run",
-    "intelligence:build": "cd desktop && npx vite build && mkdir -p ../dashboard/intelligence ../dashboard/assets && cp dist/dashboard/intelligence/planning.bundle.js dist/dashboard/intelligence/live-work.bundle.js ../dashboard/intelligence/ && cp -r dist/assets/. ../dashboard/assets/",
+    "intelligence:build": "cd desktop && npx vite build && mkdir -p ../dashboard/intelligence ../dashboard/assets && cp dist/dashboard/intelligence/planning.bundle.js dist/dashboard/intelligence/live-work.bundle.js dist/dashboard/intelligence/atlas.bundle.js ../dashboard/intelligence/ && cp -r dist/assets/. ../dashboard/assets/",
     "intelligence:serve": "npm run intelligence:build && node scripts/serve-dashboard.mjs",
     "docs:api": "npx typedoc",
     "sync": "bash scripts/sync-research-to-live.sh --dry-run",
