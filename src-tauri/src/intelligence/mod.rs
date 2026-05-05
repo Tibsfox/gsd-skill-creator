@@ -1,8 +1,9 @@
 //! Intelligence Dashboard — Rust module.
 //!
 //! Re-exports all public symbols from the intelligence submodules.
-//! Phase 824 / C07.
+//! Phase 824 / C07. Atlas commands added v1.49.607 W1 Track C.
 
+pub mod atlas;
 pub mod real_kb;
 pub mod server;
 pub mod types;
@@ -28,4 +29,20 @@ pub use server::{
     intelligence_request_briefing_refresh,
     intelligence_request_snapshot_diff,
     intelligence_get_meeting_record,
+};
+
+pub use atlas::{
+    AtlasState,
+    atlas_list_symbols_for_file,
+    atlas_get_symbol,
+    atlas_find_symbols_by_qualified_name,
+    atlas_list_callers,
+    atlas_list_callees,
+    atlas_list_references_for_symbol,
+    atlas_list_type_relations_from,
+    atlas_list_type_relations_to,
+    atlas_list_files_changed_by_mission,
+    atlas_list_missions_for_file,
+    atlas_list_provenance_for_line,
+    atlas_request_index_snapshot,
 };
