@@ -297,7 +297,36 @@ export class SymbolGraphView {
 
     this.runLayout();
     this.rebuildVertices();
+    this.fitToContent();
     this.dirty = true;
+  }
+
+  /**
+   * Pan + zoom so the laid-out node cloud fits inside the viewport with a 10%
+   * margin. Without this the FR layout's world-space spread (≈ √n × 100 units)
+   * dwarfs the canvas, so only ~5% of nodes land in the visible center —
+   * "just a dot." Called after loadGraph and after viewport resize.
+   */
+  private fitToContent(): void {
+    if (this.layoutNodes.length === 0) return;
+    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    for (const n of this.layoutNodes) {
+      if (n.x < minX) minX = n.x;
+      if (n.y < minY) minY = n.y;
+      if (n.x > maxX) maxX = n.x;
+      if (n.y > maxY) maxY = n.y;
+    }
+    const w = Math.max(1, maxX - minX);
+    const h = Math.max(1, maxY - minY);
+    const cx = (minX + maxX) / 2;
+    const cy = (minY + maxY) / 2;
+    const margin = 1.1;
+    const zoomX = this.viewport.width / (w * margin);
+    const zoomY = this.viewport.height / (h * margin);
+    this.viewport.zoom = Math.min(zoomX, zoomY);
+    // Pan offset so the bbox center lands at canvas center.
+    this.viewport.panX = cx - this.viewport.width / (2 * this.viewport.zoom);
+    this.viewport.panY = cy - this.viewport.height / (2 * this.viewport.zoom);
   }
 
   private runLayout(): void {

@@ -43,8 +43,11 @@ export interface BuildOptions {
   padding?: number;
 }
 
-export const DEFAULT_LABEL_CUTOFF_RADIUS = 12;
-export const DEFAULT_PADDING = 2;
+// W4c tuning: padding 2 → 6 spreads siblings; cutoff 12 → 6 surfaces ~4×
+// more labels at the same zoom level. Both still defaults — explicit
+// SystemMapOptions overrides win.
+export const DEFAULT_LABEL_CUTOFF_RADIUS = 6;
+export const DEFAULT_PADDING = 6;
 
 /**
  * Hard limit on projects accepted by buildFolderTreeMulti.
@@ -146,7 +149,11 @@ function buildMutableTree(rootId: string, files: FileData[]): MutableNode {
     current.children.push({
       id: fileId,
       data: leafData,
-      value: Math.max(1, file.symbols.length),
+      // sqrt-mapping flattens the symbol-count disparity: a 100-symbol file
+      // gets ~3.2× the area of a 10-symbol file, not 10×. Without this, a
+      // single large file (e.g. ipc.ts at ~500 symbols) dominates its
+      // sibling cluster and renders all neighbours as 1-pixel dots.
+      value: Math.max(1, Math.sqrt(file.symbols.length)),
       children: [],
     });
   }

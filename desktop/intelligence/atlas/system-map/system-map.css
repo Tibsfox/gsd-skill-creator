@@ -71,7 +71,52 @@
   font-family: var(--font-mono, "SF Mono", Monaco, monospace);
   font-size: 11px;
   color: var(--text-secondary, #9aa5ce);
-  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  z-index: 2;
+}
+
+.system-map-back {
+  background: var(--bg-secondary, #24283b);
+  border: 1px solid var(--border-subtle, #292e42);
+  border-radius: var(--radius-sm, 4px);
+  color: var(--text-primary, #c0caf5);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1;
+  padding: 2px 8px;
+}
+.system-map-back:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.system-map-back:hover:not(:disabled) {
+  background: var(--accent-blue, #7aa2f7);
+  color: var(--bg-primary, #1a1b26);
+}
+
+.system-map-breadcrumb-seg {
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+.system-map-breadcrumb-seg:hover {
+  background: rgba(122, 162, 247, 0.15);
+  color: var(--text-primary, #c0caf5);
+}
+.system-map-breadcrumb-seg.is-current {
+  cursor: default;
+  color: var(--text-primary, #c0caf5);
+  font-weight: 600;
+}
+.system-map-breadcrumb-seg.is-current:hover {
+  background: transparent;
+}
+.system-map-breadcrumb-sep {
+  color: var(--text-muted, #565f89);
+  user-select: none;
 }
 
 .system-map-mode-bar {

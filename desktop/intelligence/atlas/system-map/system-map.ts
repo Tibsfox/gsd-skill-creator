@@ -173,7 +173,18 @@ export function createSystemMap(opts: SystemMapOptions = {}): SystemMapComponent
     const pOpts = packConfig(opts);
     const vw = opts.width ?? (containerEl?.clientWidth ?? 800);
     const vh = opts.height ?? (containerEl?.clientHeight ?? 600);
-    const size = Math.min(vw, vh) * 0.92;
+    // wangWangPack `size` is the ROOT RADIUS, not the container side. Use half
+    // the smaller dimension so the root circle's diameter fits inside the
+    // viewport with a 4% margin on each side.
+    const size = Math.min(vw, vh) * 0.46;
+
+    // Sync SVG viewBox to current container dimensions so the rendered pack
+    // is not clipped by the stale 800×600 box set at mount time. This is the
+    // browser-mode fix (W4c) — under the Tauri shell the container is sized
+    // before mount runs, so the original viewBox happened to match.
+    if (svgEl) {
+      svgEl.setAttribute('viewBox', `0 0 ${vw} ${vh}`);
+    }
 
     const localTree = buildFolderTree(fileDataCache);
     const subInput = subTreeAt(localTree, folderId) ?? localTree;
@@ -216,6 +227,17 @@ export function createSystemMap(opts: SystemMapOptions = {}): SystemMapComponent
     circle.setAttribute('role', 'button');
     circle.setAttribute('tabindex', '0');
     circle.setAttribute('aria-label', (isFolder ? 'folder ' : 'file ') + (node.id.split('/').pop() ?? node.id));
+
+    // Native SVG <title> tooltip — shows on hover, no JS or extra DOM needed.
+    // Surfaces full path + symbol count + dominant mission (when present).
+    const title = document.createElementNS(SVG_NS, 'title');
+    const symCount = node.data?.symbolCount ?? 0;
+    const missionPart = node.data?.dominantMissionId
+      ? ` · mission ${node.data.dominantMissionId}`
+      : '';
+    const kindLabel = isFolder ? 'folder' : 'file';
+    title.textContent = `${node.id} (${kindLabel}, ${symCount} symbol${symCount === 1 ? '' : 's'})${missionPart}`;
+    g.appendChild(title);
 
     function activate(e: Event): void {
       e.stopPropagation();
@@ -276,8 +298,54 @@ export function createSystemMap(opts: SystemMapOptions = {}): SystemMapComponent
 
   function updateBreadcrumb(): void {
     if (!breadcrumbEl) return;
+    breadcrumbEl.textContent = '';
+
+    // Always-visible "←" back button (greyed out at root). Cheaper than the
+    // right-click contextmenu zoom-out which users couldn't discover.
+    const back = document.createElement('button');
+    back.className = 'system-map-back';
+    back.textContent = '←';
+    back.setAttribute('aria-label', 'zoom out one level');
+    back.disabled = zoomStack.length <= 1;
+    back.addEventListener('click', (e) => {
+      e.stopPropagation();
+      zoomOut();
+    });
+    breadcrumbEl.appendChild(back);
+
+    // Clickable path segments. Click any segment to jump up to that level.
     const path = zoomStack.filter(Boolean);
-    breadcrumbEl.textContent = path.length === 0 ? '/' : '/' + path.join('/');
+    const root = document.createElement('span');
+    root.className = 'system-map-breadcrumb-seg' + (path.length === 0 ? ' is-current' : '');
+    root.textContent = '/';
+    if (path.length > 0) {
+      root.addEventListener('click', () => {
+        zoomStack.length = 1;
+        zoomStack[0] = '';
+        renderPack();
+        updateBreadcrumb();
+      });
+    }
+    breadcrumbEl.appendChild(root);
+
+    path.forEach((seg, i) => {
+      const sep = document.createElement('span');
+      sep.className = 'system-map-breadcrumb-sep';
+      sep.textContent = i === 0 ? '' : '/';
+      breadcrumbEl!.appendChild(sep);
+      const segEl = document.createElement('span');
+      const isCurrent = i === path.length - 1;
+      segEl.className = 'system-map-breadcrumb-seg' + (isCurrent ? ' is-current' : '');
+      segEl.textContent = seg.split('/').pop() ?? seg;
+      if (!isCurrent) {
+        segEl.addEventListener('click', () => {
+          zoomStack.length = i + 2; // root sentinel + path[0..i]
+          renderPack();
+          updateBreadcrumb();
+        });
+      }
+      breadcrumbEl!.appendChild(segEl);
+    });
   }
 
   // ─── Legend helpers ────────────────────────────────────────────────────────
@@ -434,7 +502,10 @@ export function createSystemMap(opts: SystemMapOptions = {}): SystemMapComponent
       const pOpts = packConfig(opts);
       const vw = opts.width ?? (containerEl?.clientWidth ?? 800);
       const vh = opts.height ?? (containerEl?.clientHeight ?? 600);
-      const size = Math.min(vw, vh) * 0.92;
+      // wangWangPack `size` is the ROOT RADIUS, not the container side. Use half
+    // the smaller dimension so the root circle's diameter fits inside the
+    // viewport with a 4% margin on each side.
+    const size = Math.min(vw, vh) * 0.46;
       packedRoot = wangWangPack(tree, { ...pOpts, size });
       colorCtx = buildColorContext(collectPayloads(packedRoot));
 
@@ -495,7 +566,10 @@ export function createSystemMap(opts: SystemMapOptions = {}): SystemMapComponent
       const pOpts = packConfig(opts);
       const vw = opts.width ?? (containerEl?.clientWidth ?? 800);
       const vh = opts.height ?? (containerEl?.clientHeight ?? 600);
-      const size = Math.min(vw, vh) * 0.92;
+      // wangWangPack `size` is the ROOT RADIUS, not the container side. Use half
+    // the smaller dimension so the root circle's diameter fits inside the
+    // viewport with a 4% margin on each side.
+    const size = Math.min(vw, vh) * 0.46;
       packedRoot = wangWangPack(multiTree, { ...pOpts, size });
       colorCtx = buildColorContext(collectPayloads(packedRoot));
 

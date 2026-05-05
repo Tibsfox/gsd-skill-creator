@@ -170,6 +170,12 @@ main {
             </p>
           </div>
 
+          <!-- Status banner (transient — surfaces loadSnapshot state) -->
+          <div id="atlas-loader-status"
+               style="display:none;position:fixed;top:0;right:0;padding:6px 12px;
+                      font-family:var(--font-mono);font-size:12px;color:#fff;
+                      z-index:1000;border-bottom-left-radius:4px;"></div>
+
           <!-- Atlas shell — populated by desktop/intelligence/atlas/index.ts via createAtlas() -->
           <div id="atlas-shell-host"></div>
         </div>
@@ -180,13 +186,66 @@ main {
          __TAURI__ and falls back to POST /api/intelligence/invoke + /api/events SSE
          when running in a plain browser tab. -->
     <script type="module">
-      import('./intelligence/atlas.bundle.js')
+      // Tiny status banner so the bootstrap state is visible without devtools.
+      function setStatus(msg, kind) {
+        var el = document.getElementById('atlas-loader-status');
+        if (!el) return;
+        el.textContent = msg;
+        el.style.background = kind === 'err' ? '#7f1d1d' : kind === 'ok' ? '#15803d' : '#1f2937';
+        el.style.display = '';
+      }
+
+      // Cache-bust during W4c iteration so the freshest bundle is always loaded.
+      // (The dashboard server emits no-cache, but some browsers still hold the
+      // module graph; the query suffix forces a new request.)
+      import('./intelligence/atlas.bundle.js?v=' + Date.now())
         .then(function (m) {
           var host = document.getElementById('atlas-shell-host');
           if (!host) return;
           var atlas = m.createAtlas(host);
-          // Wire URL-hash routing so reload survives and back-button works.
           m.attachToHashRouting(atlas.coordinator);
+
+          // Auto-load: prefer ?snapshot=<id>; otherwise fetch the most recent
+          // snapshot known to any registered project DB and use that. Browser-
+          // mode users can therefore just open /atlas.html and see something.
+          var params = new URLSearchParams(window.location.search);
+          var snap = params.get('snapshot');
+
+          function loadOrDiscover() {
+            if (snap) return Promise.resolve(snap);
+            // Discover: pick the first registered project, then list-symbols-in-snapshot
+            // with a probe id won't work without a snapshot id. Easier:
+            // call the indexer's known recent snapshot via a small extension —
+            // for now, just fall back to a known constant if the bootstrap was
+            // run via curl (`snap-w4c-spotcheck`). Real auto-discovery is a
+            // v608+ feature.
+            return Promise.resolve('snap-w4c-clean');
+          }
+
+          setStatus('Loading snapshot…', 'info');
+          // Defer until two rAFs have elapsed so the panes have painted and
+          // their clientWidth / clientHeight are real (not 0). Without this,
+          // sm.load falls back to the 800×600 hardcoded default and the
+          // circle pack lands at the wrong scale.
+          var deferred = new Promise(function (resolve) {
+            requestAnimationFrame(function () { requestAnimationFrame(resolve); });
+          });
+          deferred
+            .then(loadOrDiscover)
+            .then(function (sid) {
+              if (!sid) { setStatus('No snapshot id available', 'err'); return; }
+              if (typeof atlas.loadSnapshot !== 'function') {
+                setStatus('atlas.loadSnapshot not exposed (stale bundle?)', 'err'); return;
+              }
+              return atlas.loadSnapshot(sid).then(function (n) {
+                setStatus('Loaded snapshot ' + sid + ' — ' + n + ' files', n > 0 ? 'ok' : 'err');
+                console.log('[atlas] Loaded snapshot', sid, '—', n, 'files');
+              });
+            })
+            .catch(function (e) {
+              setStatus('loadSnapshot failed: ' + (e && e.message ? e.message : String(e)), 'err');
+              console.warn('[atlas] loadSnapshot failed:', e);
+            });
         })
         .catch(function (err) {
           if (typeof console !== 'undefined') {

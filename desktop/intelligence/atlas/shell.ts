@@ -41,6 +41,17 @@ export interface AtlasShell {
   mount(host: HTMLElement): void;
   unmount(): void;
   coordinator: Coordinator;
+  /**
+   * Populate the system-map (and code-view, if a focus arrives later) with
+   * data from a freshly indexed snapshot. Pulls every symbol in the snapshot
+   * via `intelligenceIpc.listSymbolsInSnapshot`, derives the unique file list,
+   * and calls `systemMap.load(snapshotId, filePaths)`. Safe to call multiple
+   * times — each call replaces the prior snapshot.
+   *
+   * Returns the number of files loaded. Resolves with 0 when the snapshot is
+   * empty or the system-map has not yet mounted.
+   */
+  loadSnapshot(snapshotId: string): Promise<number>;
 }
 
 export function createAtlasShell(opts: AtlasShellOptions = {}): AtlasShell {
@@ -50,6 +61,8 @@ export function createAtlasShell(opts: AtlasShellOptions = {}): AtlasShell {
   let shellEl: HTMLDivElement | null = null;
   let graphCanvas: HTMLCanvasElement | null = null;
   let graphView: SymbolGraphView | null = null;
+  let systemMapRef: SystemMapComponent | null = null;
+  let loadedSnapshotId: string | null = null;
 
   // Splitter drag state
   interface DragState {
@@ -235,27 +248,28 @@ export function createAtlasShell(opts: AtlasShellOptions = {}): AtlasShell {
     };
   }
 
-  function wrapCodeView(cv: CodeViewComponent): CoordinatedView {
-    return {
-      setFocus(focus: Focus): void {
-        if (focus.kind === 'file') {
-          cv.setFocus({ file: focus.id, line: 1 });
-        } else if (focus.kind === 'symbol') {
-          cv.setFocus({ file: '', line: 1, symbol_id: focus.id });
-        }
-      },
-    };
-  }
+  // wrapCodeView removed: code-view is now constructed per file-focus inline
+  // (so source loads on click). See createAtlasShell.mount → cvWrapper.
 
   // ── Symbol graph adapter ───────────────────────────────────────────────────
 
   function wrapSymbolGraph(sg: SymbolGraphView): CoordinatedView {
     return {
       setFocus(focus: Focus): void {
-        // Graph setFocus is async; no-op if kind mismatch
+        const sid = loadedSnapshotId ?? '';
+        if (!sid) return;
         if (focus.kind === 'symbol') {
-          // We need a snapshotId — pass empty string as placeholder
-          sg.setFocus({ snapshotId: '' as any, symbolId: focus.id }).catch(() => {});
+          sg.setFocus({ snapshotId: sid as never, symbolId: focus.id }).catch(() => {});
+        } else if (focus.kind === 'file') {
+          // Resolve the file's first non-import symbol and focus on it so the
+          // graph shows that file's call neighborhood.
+          intelligenceIpc.listSymbolsForFile(sid as never, focus.id)
+            .then((rows) => {
+              const pick = rows.find((r) => r.kind !== 'import') ?? rows[0];
+              if (!pick) return;
+              return sg.setFocus({ snapshotId: sid as never, symbolId: pick.id });
+            })
+            .catch(() => { /* IPC unavailable in tests */ });
         }
       },
     };
@@ -371,6 +385,7 @@ export function createAtlasShell(opts: AtlasShellOptions = {}): AtlasShell {
       const smOpts = opts.projectId ? { colorMode: persistedColorMode } : {};
       const sm = createSystemMap(smOpts);
       sm.mount(smBody);
+      systemMapRef = sm;
       const smWrapper = wrapSystemMap(sm);
       const unSm = coordinator.registerView(smWrapper);
       unregisterFns.push(unSm);
@@ -395,9 +410,19 @@ export function createAtlasShell(opts: AtlasShellOptions = {}): AtlasShell {
 
       let sgView: SymbolGraphView | null = null;
       let sgWrapper: CoordinatedView | null = null;
-      // Defer construction until paint so canvas has dimensions
-      requestAnimationFrame(() => {
+      // Defer construction until paint so canvas has dimensions. Two rAFs +
+      // explicit drawing-buffer sizing ensures the WebGL viewport matches the
+      // pane size; the constructor reads canvas.offsetWidth/Height + canvas
+      // .width/.height into a fixed viewport struct, so getting these wrong
+      // here means a 300×150 stretched render forever.
+      requestAnimationFrame(() => requestAnimationFrame(() => {
         if (!graphCanvas || !shellEl) return;
+        // Set drawing-buffer size to the displayed size before construction.
+        const dpr = (typeof globalThis !== 'undefined' && (globalThis as { devicePixelRatio?: number }).devicePixelRatio) || 1;
+        const cssW = graphCanvas.clientWidth || 800;
+        const cssH = graphCanvas.clientHeight || 600;
+        graphCanvas.width = Math.max(1, Math.floor(cssW * dpr));
+        graphCanvas.height = Math.max(1, Math.floor(cssH * dpr));
         try {
           sgView = new SymbolGraphView(graphCanvas);
           graphView = sgView;
@@ -419,10 +444,21 @@ export function createAtlasShell(opts: AtlasShellOptions = {}): AtlasShell {
           // Replay current focus
           const cur = coordinator.current();
           if (cur) sgWrapper.setFocus(cur);
-        } catch {
-          // WebGL2 unavailable (e.g. jsdom) — skip
+        } catch (e) {
+          // WebGL2 unavailable (e.g. jsdom) — skip silently in tests, but
+          // surface the failure visibly in production so the empty pane has
+          // an explanation.
+          const msg = e instanceof Error ? e.message : String(e);
+          // eslint-disable-next-line no-console
+          console.error('[atlas] SymbolGraphView construction failed:', msg);
+          if (sgPane) {
+            const errEl = document.createElement('div');
+            errEl.style.cssText = 'position:absolute;top:30px;left:10px;right:10px;color:#f87171;font-family:var(--font-mono);font-size:11px;';
+            errEl.textContent = 'Symbol graph unavailable: ' + msg;
+            sgPane.appendChild(errEl);
+          }
         }
-      });
+      }));
 
       // ── Mission Archeology ───────────────────────────────────────────────
       const { pane: avPane, body: avBody } = makePane('archeology', 'Mission Archeology');
@@ -437,8 +473,8 @@ export function createAtlasShell(opts: AtlasShellOptions = {}): AtlasShell {
 
       // ── Code View ───────────────────────────────────────────────────────
       const { pane: cvPane, body: cvBody } = makePane('code-view', 'Code View');
-      const cv = createCodeView({
-        snapshotId: '' as any,
+      let cv: CodeViewComponent | null = createCodeView({
+        snapshotId: '' as never,
         filePath: '',
         source: '// Select a file to view source.',
         fetchProvenance: (sid, fp, ln) =>
@@ -446,16 +482,84 @@ export function createAtlasShell(opts: AtlasShellOptions = {}): AtlasShell {
         fetchSymbol: (id) => intelligenceIpc.getSymbol(id),
       });
       cv.mount(cvBody);
-      const cvWrapper = wrapCodeView(cv);
+      // Mutable wrapper: re-create the code-view on file focus so source loads.
+      const cvWrapper: CoordinatedView = {
+        setFocus(focus: Focus): void {
+          if (focus.kind === 'file') {
+            // Fetch source via the dashboard's /api/atlas/source helper, then
+            // mount a fresh CodeView. (createCodeView's source/filePath are
+            // captured at construction; recreating is the cheapest way to
+            // re-render without refactoring the component's internal state.)
+            void (async () => {
+              try {
+                const resp = await fetch(
+                  '/api/atlas/source?path=' + encodeURIComponent(focus.id),
+                );
+                if (!resp.ok) throw new Error(`source ${resp.status}`);
+                const body = await resp.json() as { source: string };
+                cv?.unmount();
+                cv = createCodeView({
+                  snapshotId: (loadedSnapshotId ?? '') as never,
+                  filePath: focus.id,
+                  source: body.source,
+                  fetchProvenance: (sid, fp, ln) =>
+                    intelligenceIpc.listProvenanceForLine(sid, fp, ln),
+                  fetchSymbol: (id) => intelligenceIpc.getSymbol(id),
+                });
+                cv.mount(cvBody);
+                if (loadedSnapshotId) {
+                  intelligenceIpc.listSymbolsForFile(loadedSnapshotId as never, focus.id)
+                    .then((rows) => cv?.bindSymbols(rows))
+                    .catch(() => { /* IPC unavailable in tests */ });
+                }
+                cv.setFocus({ file: focus.id, line: 1 });
+              } catch (e) {
+                // eslint-disable-next-line no-console
+                console.warn('[atlas] code-view source fetch failed:', e);
+              }
+            })();
+          } else if (focus.kind === 'symbol') {
+            cv?.setFocus({ file: '', line: 1, symbol_id: focus.id });
+          }
+        },
+      };
       const unCv = coordinator.registerView(cvWrapper);
       unregisterFns.push(unCv);
+      unregisterFns.push(() => { cv?.unmount(); cv = null; });
 
       // ── Status pane ──────────────────────────────────────────────────────
       const { pane: stPane } = makePane('status', '');
       const unStatus = coordinator.subscribe((focus) => {
-        const statusEl = stPane.querySelector('.atlas-pane-body');
-        if (statusEl && focus) {
-          statusEl.textContent = `${focus.kind}: ${focus.id}`;
+        const statusEl = stPane.querySelector<HTMLElement>('.atlas-pane-body');
+        if (!statusEl || !focus) return;
+        // Render a richer status line: kind icon + path + symbol count + (for
+        // symbols) qualified name. Async-resolves details via IPC; falls back
+        // to bare text on failure.
+        const sid = loadedSnapshotId;
+        statusEl.textContent = `${focus.kind}: ${focus.id}`;
+        if (focus.kind === 'file' && sid) {
+          intelligenceIpc.listSymbolsForFile(sid as never, focus.id)
+            .then((rows) => {
+              const kinds = new Map<string, number>();
+              for (const r of rows) kinds.set(r.kind, (kinds.get(r.kind) ?? 0) + 1);
+              const breakdown = [...kinds.entries()]
+                .sort((a, b) => b[1] - a[1])
+                .map(([k, n]) => `${n} ${k}`)
+                .join(', ');
+              statusEl.textContent = `📄 ${focus.id} — ${rows.length} symbol${rows.length === 1 ? '' : 's'}${breakdown ? ' · ' + breakdown : ''}`;
+            })
+            .catch(() => { /* keep bare text */ });
+        } else if (focus.kind === 'symbol' && sid) {
+          intelligenceIpc.getSymbol(focus.id)
+            .then((sym) => {
+              if (!sym) return;
+              statusEl.textContent = `🔣 ${sym.qualified_name} (${sym.kind}, ${sym.language}) · ${sym.file_path}:${sym.start_line}`;
+            })
+            .catch(() => { /* keep bare text */ });
+        } else if (focus.kind === 'folder') {
+          statusEl.textContent = `📁 ${focus.id}/`;
+        } else if (focus.kind === 'mission') {
+          statusEl.textContent = `🎯 mission: ${focus.id}`;
         }
       });
       unregisterFns.push(unStatus);
@@ -562,6 +666,8 @@ export function createAtlasShell(opts: AtlasShellOptions = {}): AtlasShell {
       graphView?.dispose();
       graphView = null;
       graphCanvas = null;
+      systemMapRef = null;
+      loadedSnapshotId = null;
 
       for (const fn of unregisterFns) fn();
       unregisterFns.length = 0;
@@ -574,6 +680,53 @@ export function createAtlasShell(opts: AtlasShellOptions = {}): AtlasShell {
       shellEl?.parentElement?.removeChild(shellEl);
       shellEl = null;
       hostEl = null;
+    },
+
+    async loadSnapshot(snapshotId: string): Promise<number> {
+      if (!systemMapRef) return 0;
+      // Page through symbols until the snapshot is fully covered; dedup file
+      // paths in a Set. Page size mirrors SymbolsKB's default (500) but caller
+      // can use bridge command directly with bigger limit if needed.
+      const PAGE = 5000;
+      const seenFiles = new Set<string>();
+      let offset = 0;
+      // Safety cap — a single snapshot in this codebase is < 500K symbols.
+      const MAX_PAGES = 200;
+      for (let i = 0; i < MAX_PAGES; i++) {
+        const rows = await intelligenceIpc.listSymbolsInSnapshot(snapshotId, {
+          limit: PAGE,
+          offset,
+        });
+        if (rows.length === 0) break;
+        for (const r of rows) seenFiles.add(r.file_path);
+        if (rows.length < PAGE) break;
+        offset += PAGE;
+      }
+      const filePaths = [...seenFiles].sort();
+      if (filePaths.length === 0) return 0;
+      await systemMapRef.load(snapshotId, filePaths);
+      loadedSnapshotId = snapshotId;
+      // Seed the symbol graph with a snapshot-wide overview so the right pane
+      // isn't empty until the user clicks a file. The view is constructed
+      // inside a 2-rAF defer (canvas-sizing wait), so retry up to 1.5s in
+      // 100ms ticks until graphView is available before giving up.
+      let attempts = 0;
+      const tryGraphSeed = (): void => {
+        attempts++;
+        if (graphView) {
+          // eslint-disable-next-line no-console
+          console.log('[atlas] Seeding symbol graph with snapshot', snapshotId);
+          graphView
+            .setFocus({ snapshotId: snapshotId as never })
+            .then(() => console.log('[atlas] Symbol graph seed completed'))
+            .catch((e) => console.warn('[atlas] Symbol graph seed failed:', e));
+          return;
+        }
+        if (attempts < 15) setTimeout(tryGraphSeed, 100);
+        else console.warn('[atlas] graphView never became available — symbol graph empty');
+      };
+      tryGraphSeed();
+      return filePaths.length;
     },
   };
 }

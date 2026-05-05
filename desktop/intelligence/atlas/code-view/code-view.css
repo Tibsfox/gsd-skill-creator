@@ -8,6 +8,11 @@
   line-height: 1.5;
   overflow: auto;
   position: relative;
+  /* Fill the parent pane-body so overflow:auto produces a real scrollbar.
+     Without these, .cv-root grows to the content's intrinsic height and
+     the pane-body just lets it spill — no scroll possible. */
+  width: 100%;
+  height: 100%;
   background: var(--cv-bg, #1e1e2e);
   color: var(--cv-fg, #cdd6f4);
 }

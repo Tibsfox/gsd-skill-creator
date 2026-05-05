@@ -34,6 +34,12 @@ interface QuadNode {
   body: Body | null;
   /** Children: NW, NE, SW, SE. Null on leaves. */
   children: [QuadNode, QuadNode, QuadNode, QuadNode] | null;
+  /**
+   * Overflow bucket for bodies that exceeded the recursion depth limit (because
+   * they were near-coincident with another body). Treated as a flat list during
+   * walks. Typically null/undefined for normal cells.
+   */
+  extras?: Body[];
 }
 
 export class Quadtree {
@@ -44,7 +50,7 @@ export class Quadtree {
   }
 
   insert(body: Body): void {
-    insertInto(this.root, body);
+    insertInto(this.root, body, 0);
   }
 
   /**
@@ -101,7 +107,14 @@ function makeNode(bounds: Bounds): QuadNode {
   return { bounds, comX: 0, comY: 0, totalMass: 0, body: null, children: null };
 }
 
-function insertInto(node: QuadNode, body: Body): void {
+// Hard cap on subdivision depth. JS engines typically allow ~10K stack frames;
+// 40 levels = 2^40 ≈ 10^12 spatial resolution, far past any meaningful float
+// precision. When near-coincident bodies push past this, we bail to a leaf-with-
+// fallback that holds multiple bodies in one cell — an O(N) interaction in the
+// worst case, but avoids the alternative (RangeError: Maximum call stack size).
+const MAX_QUADTREE_DEPTH = 40;
+
+function insertInto(node: QuadNode, body: Body, depth: number): void {
   // Update running center-of-mass before recursing so internal nodes always
   // hold a valid pseudo-particle.
   const newMass = node.totalMass + body.mass;
@@ -114,15 +127,23 @@ function insertInto(node: QuadNode, body: Body): void {
     return;
   }
 
+  // Depth limit: keep both bodies in a singly-linked extras list on the leaf.
+  // Walks treat them as additional point masses sharing the quad's COM.
+  if (depth >= MAX_QUADTREE_DEPTH) {
+    if (!node.extras) node.extras = [];
+    node.extras.push(body);
+    return;
+  }
+
   if (node.children === null && node.body !== null) {
     // Was a leaf with one body; subdivide and re-insert the existing body.
     const existing = node.body;
     node.body = null;
     subdivide(node);
-    placeIntoChild(node, existing);
+    placeIntoChild(node, existing, depth);
   }
 
-  placeIntoChild(node, body);
+  placeIntoChild(node, body, depth);
 }
 
 function subdivide(node: QuadNode): void {
@@ -137,7 +158,7 @@ function subdivide(node: QuadNode): void {
   ];
 }
 
-function placeIntoChild(node: QuadNode, body: Body): void {
+function placeIntoChild(node: QuadNode, body: Body, depth: number): void {
   if (node.children === null) return;
   const { minX, minY, maxX, maxY } = node.bounds;
   const midX = (minX + maxX) / 2;
@@ -145,7 +166,7 @@ function placeIntoChild(node: QuadNode, body: Body): void {
   const east = body.x >= midX;
   const south = body.y >= midY;
   const idx = south ? (east ? 3 : 2) : east ? 1 : 0;
-  insertInto(node.children[idx], body);
+  insertInto(node.children[idx], body, depth + 1);
 }
 
 function walk(
@@ -159,6 +180,11 @@ function walk(
   if (node.children === null) {
     if (node.body !== null && node.body.id !== target.id) {
       visit(node.body.x, node.body.y, node.body.mass);
+    }
+    if (node.extras) {
+      for (const extra of node.extras) {
+        if (extra.id !== target.id) visit(extra.x, extra.y, extra.mass);
+      }
     }
     return;
   }

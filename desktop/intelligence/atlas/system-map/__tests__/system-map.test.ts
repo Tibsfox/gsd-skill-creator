@@ -86,7 +86,9 @@ describe('buildFolderTree', () => {
     const libFolder = tree.children!.find(c => c.id === 'lib');
     const leaf = libFolder!.children![0];
     expect(leaf.data?.symbolCount).toBe(7);
-    expect(leaf.value).toBe(7);
+    // W4c: leaf.value uses sqrt(symbolCount) so a single huge file doesn't
+    // dominate its sibling cluster. data.symbolCount preserves the raw count.
+    expect(leaf.value).toBeCloseTo(Math.sqrt(7), 6);
   });
 
   it('zero-symbol files get value 1 (minimum)', () => {

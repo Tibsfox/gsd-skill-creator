@@ -794,7 +794,7 @@ async function handleAtlasIndex(req, res) {
     return res.end(JSON.stringify({ ok: false, error: 'request body must be valid JSON' }));
   }
 
-  const { snapshotId, projectId, projectPath: bodyPath, languages, replace, runProvenance } = body;
+  const { snapshotId, projectId, projectPath: bodyPath, languages, replace, runProvenance, excludeDirs } = body;
 
   if (typeof projectId !== 'string' || !projectId) {
     res.writeHead(400, { 'Content-Type': 'application/json' });
@@ -846,6 +846,22 @@ async function handleAtlasIndex(req, res) {
     await store.ensureProjectDB(projectId);
     const db = await store.getProjectRawDB(projectId);
 
+    // Build a fileFilter from excludeDirs (case-sensitive prefix match against
+    // path segments). Supports both raw segment names ('node_modules') and
+    // ad-hoc project roots ('.college', '.planning'). Honors `false` returns
+    // from runAtlasIndexer's per-file filter contract.
+    const excludeSet = Array.isArray(excludeDirs) && excludeDirs.length > 0
+      ? new Set(excludeDirs)
+      : null;
+    const fileFilter = excludeSet
+      ? (relPath) => {
+          for (const seg of relPath.split('/')) {
+            if (excludeSet.has(seg)) return false;
+          }
+          return true;
+        }
+      : undefined;
+
     const result = await runAtlasIndexer(db, {
       snapshotId,
       projectId,
@@ -853,6 +869,7 @@ async function handleAtlasIndex(req, res) {
       languages: Array.isArray(languages) ? languages : undefined,
       replace: replace === true,
       runProvenance: runProvenance === true,
+      fileFilter,
       // bus defaults to singleton — SSE wiring picks it up automatically
     });
 
@@ -1037,6 +1054,49 @@ const server = createServer(async (req, res) => {
       return res.end(JSON.stringify({ ok: false, error: 'method not allowed; use POST' }));
     }
     return handleAtlasIndex(req, res);
+  }
+
+  // API: atlas file source — GET /api/atlas/source?path=<rel> (W4c spot-check)
+  // Reads file source from CWD (the project root the dashboard was launched in).
+  // Confined to CWD via path.resolve + startsWith check; rejects '..' escapes.
+  if (pathname === '/api/atlas/source') {
+    if (req.method !== 'GET') {
+      res.writeHead(405, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ ok: false, error: 'method not allowed; use GET' }));
+    }
+    const url = new URL(req.url, 'http://x');
+    const relPath = url.searchParams.get('path');
+    if (!relPath || typeof relPath !== 'string') {
+      res.writeHead(400, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ ok: false, error: 'path query param required' }));
+    }
+    const fs = await import('node:fs/promises');
+    const path = await import('node:path');
+    const abs = path.resolve(CWD, relPath);
+    if (!abs.startsWith(CWD + path.sep)) {
+      res.writeHead(403, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ ok: false, error: 'path escapes project root' }));
+    }
+    try {
+      const stat = await fs.stat(abs);
+      if (!stat.isFile()) {
+        res.writeHead(404, { 'Content-Type': 'application/json' });
+        return res.end(JSON.stringify({ ok: false, error: 'not a file' }));
+      }
+      if (stat.size > 5 * 1024 * 1024) {
+        res.writeHead(413, { 'Content-Type': 'application/json' });
+        return res.end(JSON.stringify({ ok: false, error: 'file too large (> 5 MiB)' }));
+      }
+      const text = await fs.readFile(abs, 'utf8');
+      res.writeHead(200, {
+        'Content-Type': 'application/json',
+        'Cache-Control': 'no-store',
+      });
+      return res.end(JSON.stringify({ ok: true, path: relPath, source: text, bytes: stat.size }));
+    } catch (e) {
+      res.writeHead(404, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ ok: false, error: e?.message ?? String(e) }));
+    }
   }
 
   // API: intelligence dashboard IPC-to-HTTP bridge (Phase 826.5)
