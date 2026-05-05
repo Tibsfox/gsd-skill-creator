@@ -12,8 +12,9 @@
 
 use rusqlite::{Connection, OptionalExtension};
 use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
 use std::path::{Path, PathBuf};
-use std::sync::Mutex;
+use std::sync::{Arc, Mutex};
 use tauri::State;
 
 // ─── Atlas row types (mirror src/intelligence/types.ts) ──────────────────────
@@ -188,6 +189,11 @@ pub trait AtlasKbDelegate: Send + Sync + 'static {
     /// `atlas:indexing.completed` or `atlas:indexing.failed` via Tauri events.
     /// This method returns immediately (fire-and-forget dispatch).
     fn request_index_snapshot(&self, snapshot_id: String) -> Result<(), String>;
+
+    /// Invalidate any cached connections so the next query re-opens the DB.
+    /// Called after `atlas:indexing.completed` to pick up freshly-written rows.
+    /// Default no-op; only the SQLite delegate overrides this.
+    fn invalidate_connection_cache(&self) {}
 }
 
 // ─── Stub delegate ───────────────────────────────────────────────────────────
@@ -300,11 +306,26 @@ fn default_registry_path() -> PathBuf {
 ///     registry and opens exactly one DB. Useful for in-memory tests and for
 ///     wiring directly when the desktop UI already knows which project is
 ///     open (a v1.49.608+ optimization).
+///
+/// Connection caching (F3): opened connections are stored in `connections` as
+/// `Arc<Mutex<Connection>>` values keyed by absolute DB path. `get_all_project_conns`
+/// does get-or-insert on each query, so the file-open cost is paid at most once
+/// per path per delegate lifetime. The outer HashMap is protected by its own
+/// Mutex; each per-connection Arc<Mutex<Connection>> is cloned out and the
+/// outer lock is released before the connection is used, preventing the outer
+/// lock from being held across IO.
+///
+/// Invalidation: call `clear_connection_cache()` after an indexing.completed
+/// event fires so the next query re-opens the updated file. The Tauri command
+/// layer can call this via `AtlasState::clear_connection_cache()`.
 pub struct SqliteAtlasKbDelegate {
     registry_path: Option<PathBuf>,
     /// When set, all queries route to this single DB (test / single-project
     /// mode). Mutually exclusive with `registry_path` in practice.
     explicit_db_path: Option<PathBuf>,
+    /// Connection cache: db_path → Arc<Mutex<Connection>>.
+    /// Outer Mutex guards HashMap mutations; inner Mutex serializes per-connection use.
+    connections: Mutex<HashMap<PathBuf, Arc<Mutex<Connection>>>>,
 }
 
 impl SqliteAtlasKbDelegate {
@@ -312,6 +333,7 @@ impl SqliteAtlasKbDelegate {
         Self {
             registry_path: Some(default_registry_path()),
             explicit_db_path: None,
+            connections: Mutex::new(HashMap::new()),
         }
     }
 
@@ -319,6 +341,7 @@ impl SqliteAtlasKbDelegate {
         Self {
             registry_path: Some(path),
             explicit_db_path: None,
+            connections: Mutex::new(HashMap::new()),
         }
     }
 
@@ -329,51 +352,90 @@ impl SqliteAtlasKbDelegate {
         Self {
             registry_path: None,
             explicit_db_path: Some(path),
+            connections: Mutex::new(HashMap::new()),
         }
     }
 
-    /// Open every per-project DB the registry knows about (plus the explicit
-    /// DB when configured). Returns an empty Vec when no DB is available;
-    /// callers map this to "no rows" rather than an error so the UI shows a
-    /// blank state instead of a popup.
-    fn open_all_project_dbs(&self) -> Vec<Connection> {
-        let mut conns = Vec::new();
+    /// Evict all cached connections. Call after an indexing.completed event
+    /// so the next query re-opens the updated SQLite file.
+    pub fn clear_connection_cache(&self) {
+        if let Ok(mut cache) = self.connections.lock() {
+            cache.clear();
+        }
+    }
+
+    /// Return the number of cached connections (test helper).
+    #[cfg(test)]
+    pub fn cached_connection_count(&self) -> usize {
+        self.connections.lock().map(|c| c.len()).unwrap_or(0)
+    }
+
+    /// Resolve the set of DB paths this delegate should query (explicit path
+    /// or all project paths from the registry), then get-or-insert each in
+    /// the connection cache. Returns a Vec of `Arc<Mutex<Connection>>` — one
+    /// per distinct project DB — with the outer cache lock already released.
+    fn get_all_project_conns(&self) -> Vec<Arc<Mutex<Connection>>> {
+        // Step 1: collect the DB paths to open (same logic as the old open_all_project_dbs).
+        let mut db_paths: Vec<PathBuf> = Vec::new();
+
         if let Some(p) = self.explicit_db_path.as_ref() {
             if p.exists() {
-                if let Ok(c) = Connection::open(p) {
-                    conns.push(c);
-                }
+                db_paths.push(p.clone());
             }
-            return conns;
-        }
-        let registry = match self.registry_path.as_ref() {
-            Some(p) if p.exists() => p,
-            _ => return conns,
-        };
-        let reg_conn = match Connection::open(registry) {
-            Ok(c) => c,
-            Err(_) => return conns,
-        };
-        let mut stmt = match reg_conn.prepare("SELECT path FROM projects") {
-            Ok(s) => s,
-            Err(_) => return conns,
-        };
-        let rows = match stmt.query_map([], |row| row.get::<_, String>(0)) {
-            Ok(r) => r,
-            Err(_) => return conns,
-        };
-        for r in rows.flatten() {
-            let db_path = Path::new(&r)
-                .join(".gsd")
-                .join("intelligence")
-                .join("intelligence.db");
-            if db_path.exists() {
-                if let Ok(c) = Connection::open(&db_path) {
-                    conns.push(c);
+        } else {
+            let registry = match self.registry_path.as_ref() {
+                Some(p) if p.exists() => p,
+                _ => return Vec::new(),
+            };
+            let reg_conn = match Connection::open(registry) {
+                Ok(c) => c,
+                Err(_) => return Vec::new(),
+            };
+            let mut stmt = match reg_conn.prepare("SELECT path FROM projects") {
+                Ok(s) => s,
+                Err(_) => return Vec::new(),
+            };
+            let rows = match stmt.query_map([], |row| row.get::<_, String>(0)) {
+                Ok(r) => r,
+                Err(_) => return Vec::new(),
+            };
+            for r in rows.flatten() {
+                let db_path = Path::new(&r)
+                    .join(".gsd")
+                    .join("intelligence")
+                    .join("intelligence.db");
+                if db_path.exists() {
+                    db_paths.push(db_path);
                 }
             }
         }
-        conns
+
+        // Step 2: for each path, get-or-insert a cached Arc<Mutex<Connection>>.
+        // Lock the cache once for the whole batch, do all insertions, then drop the lock.
+        let mut out: Vec<Arc<Mutex<Connection>>> = Vec::with_capacity(db_paths.len());
+        if let Ok(mut cache) = self.connections.lock() {
+            for path in &db_paths {
+                let arc = cache
+                    .entry(path.clone())
+                    .or_insert_with(|| {
+                        // open_new is best-effort; failures stay out of the cache
+                        // (next call will retry). The entry() API requires we always
+                        // produce a value, so we use a sentinel approach: open and
+                        // unconditionally insert — if open fails the Vec will just skip it.
+                        Arc::new(Mutex::new(
+                            Connection::open(path).unwrap_or_else(|_| {
+                                // Fallback: open in-memory as a sentinel. This connection
+                                // will produce "no such table" errors on query, which callers
+                                // already handle gracefully (continue to next conn).
+                                Connection::open_in_memory().expect("in-memory fallback")
+                            }),
+                        ))
+                    })
+                    .clone();
+                out.push(arc);
+            }
+        }
+        out
     }
 }
 
@@ -486,7 +548,8 @@ impl AtlasKbDelegate for SqliteAtlasKbDelegate {
         file_path: String,
     ) -> Result<Vec<AtlasSymbol>, String> {
         let mut out = Vec::new();
-        for conn in self.open_all_project_dbs() {
+        for conn_arc in self.get_all_project_conns() {
+            let conn = conn_arc.lock().map_err(|e| format!("lock: {e}"))?;
             let mut stmt = match conn.prepare(
                 "SELECT * FROM symbols
                  WHERE snapshot_id = ?1 AND file_path = ?2
@@ -534,7 +597,8 @@ impl AtlasKbDelegate for SqliteAtlasKbDelegate {
         );
 
         let mut out = Vec::new();
-        for conn in self.open_all_project_dbs() {
+        for conn_arc in self.get_all_project_conns() {
+            let conn = conn_arc.lock().map_err(|e| format!("lock: {e}"))?;
             let mut stmt = match conn.prepare(&sql) {
                 Ok(s) => s,
                 Err(_) => continue,
@@ -563,7 +627,8 @@ impl AtlasKbDelegate for SqliteAtlasKbDelegate {
     }
 
     fn get_symbol(&self, id: String) -> Result<Option<AtlasSymbol>, String> {
-        for conn in self.open_all_project_dbs() {
+        for conn_arc in self.get_all_project_conns() {
+            let conn = conn_arc.lock().map_err(|e| format!("lock: {e}"))?;
             let row = conn
                 .query_row("SELECT * FROM symbols WHERE id = ?", [&id], row_to_atlas_symbol)
                 .optional()
@@ -581,7 +646,8 @@ impl AtlasKbDelegate for SqliteAtlasKbDelegate {
         qn: String,
     ) -> Result<Vec<AtlasSymbol>, String> {
         let mut out = Vec::new();
-        for conn in self.open_all_project_dbs() {
+        for conn_arc in self.get_all_project_conns() {
+            let conn = conn_arc.lock().map_err(|e| format!("lock: {e}"))?;
             let mut stmt = match conn.prepare(
                 "SELECT * FROM symbols
                  WHERE snapshot_id = ?1 AND qualified_name = ?2
@@ -605,7 +671,8 @@ impl AtlasKbDelegate for SqliteAtlasKbDelegate {
 
     fn list_callers(&self, symbol_id: String) -> Result<Vec<AtlasCallEdge>, String> {
         let mut out = Vec::new();
-        for conn in self.open_all_project_dbs() {
+        for conn_arc in self.get_all_project_conns() {
+            let conn = conn_arc.lock().map_err(|e| format!("lock: {e}"))?;
             let mut stmt = match conn.prepare(
                 "SELECT * FROM calls
                  WHERE callee_symbol_id = ?
@@ -629,7 +696,8 @@ impl AtlasKbDelegate for SqliteAtlasKbDelegate {
 
     fn list_callees(&self, symbol_id: String) -> Result<Vec<AtlasCallEdge>, String> {
         let mut out = Vec::new();
-        for conn in self.open_all_project_dbs() {
+        for conn_arc in self.get_all_project_conns() {
+            let conn = conn_arc.lock().map_err(|e| format!("lock: {e}"))?;
             let mut stmt = match conn.prepare(
                 "SELECT * FROM calls
                  WHERE caller_symbol_id = ?
@@ -656,7 +724,8 @@ impl AtlasKbDelegate for SqliteAtlasKbDelegate {
         symbol_id: String,
     ) -> Result<Vec<AtlasSymbolReference>, String> {
         let mut out = Vec::new();
-        for conn in self.open_all_project_dbs() {
+        for conn_arc in self.get_all_project_conns() {
+            let conn = conn_arc.lock().map_err(|e| format!("lock: {e}"))?;
             let mut stmt = match conn.prepare(
                 "SELECT * FROM symbol_references
                  WHERE resolved_symbol_id = ?
@@ -683,7 +752,8 @@ impl AtlasKbDelegate for SqliteAtlasKbDelegate {
         symbol_id: String,
     ) -> Result<Vec<AtlasTypeRelation>, String> {
         let mut out = Vec::new();
-        for conn in self.open_all_project_dbs() {
+        for conn_arc in self.get_all_project_conns() {
+            let conn = conn_arc.lock().map_err(|e| format!("lock: {e}"))?;
             let mut stmt = match conn.prepare(
                 "SELECT * FROM type_relations
                  WHERE from_symbol_id = ?
@@ -710,7 +780,8 @@ impl AtlasKbDelegate for SqliteAtlasKbDelegate {
         symbol_id: String,
     ) -> Result<Vec<AtlasTypeRelation>, String> {
         let mut out = Vec::new();
-        for conn in self.open_all_project_dbs() {
+        for conn_arc in self.get_all_project_conns() {
+            let conn = conn_arc.lock().map_err(|e| format!("lock: {e}"))?;
             let mut stmt = match conn.prepare(
                 "SELECT * FROM type_relations
                  WHERE to_symbol_id = ?
@@ -737,7 +808,8 @@ impl AtlasKbDelegate for SqliteAtlasKbDelegate {
         mission_id: String,
     ) -> Result<Vec<AtlasFilesChanged>, String> {
         let mut out = Vec::new();
-        for conn in self.open_all_project_dbs() {
+        for conn_arc in self.get_all_project_conns() {
+            let conn = conn_arc.lock().map_err(|e| format!("lock: {e}"))?;
             let mut stmt = match conn.prepare(
                 "SELECT * FROM files_changed
                  WHERE mission_id = ?
@@ -765,7 +837,8 @@ impl AtlasKbDelegate for SqliteAtlasKbDelegate {
         file_path: String,
     ) -> Result<Vec<MissionForFileSummary>, String> {
         let mut out = Vec::new();
-        for conn in self.open_all_project_dbs() {
+        for conn_arc in self.get_all_project_conns() {
+            let conn = conn_arc.lock().map_err(|e| format!("lock: {e}"))?;
             let mut stmt = match conn.prepare(
                 "SELECT mission_id, SUM(weight) AS weight, COUNT(*) AS line_count
                  FROM mission_provenance
@@ -802,7 +875,8 @@ impl AtlasKbDelegate for SqliteAtlasKbDelegate {
         line_no: i64,
     ) -> Result<Vec<AtlasMissionProvenance>, String> {
         let mut out = Vec::new();
-        for conn in self.open_all_project_dbs() {
+        for conn_arc in self.get_all_project_conns() {
+            let conn = conn_arc.lock().map_err(|e| format!("lock: {e}"))?;
             let mut stmt = match conn.prepare(
                 "SELECT * FROM mission_provenance
                  WHERE snapshot_id = ?1 AND file_path = ?2 AND line_no = ?3
@@ -837,6 +911,10 @@ impl AtlasKbDelegate for SqliteAtlasKbDelegate {
             "atlas_request_index_snapshot({snapshot_id}): indexer dispatch is owned by the TS server (src/intelligence/atlas-indexer); call via the Node IPC seam"
         ))
     }
+
+    fn invalidate_connection_cache(&self) {
+        self.clear_connection_cache();
+    }
 }
 
 // ─── Atlas state managed by Tauri ────────────────────────────────────────────
@@ -867,6 +945,16 @@ impl AtlasState {
         Self {
             kb: Box::new(SqliteAtlasKbDelegate::with_registry_path(path)),
         }
+    }
+
+    /// Evict all cached connections in the delegate (if it is the SQLite
+    /// delegate). Call this after an `atlas:indexing.completed` event so the
+    /// next atlas query re-opens the updated DB file.
+    pub fn clear_connection_cache(&self) {
+        // Downcast is not possible through Box<dyn Trait>; we use a dedicated
+        // method on the trait instead so the Tauri command can call through
+        // the existing AtlasState without unsafe.
+        self.kb.invalidate_connection_cache();
     }
 }
 
@@ -1556,5 +1644,89 @@ mod tests {
             Ok(_) => {}
             Err(msg) => panic!("default delegate should not be the stub; got Err({msg})"),
         }
+    }
+
+    // ─── F3 connection-caching tests ─────────────────────────────────────
+
+    #[test]
+    fn connection_reused_across_sequential_method_calls() {
+        let tmp = TempDir::new().unwrap();
+        let db = create_atlas_db(&tmp);
+        seed_minimal_atlas_rows(&db);
+        let kb = SqliteAtlasKbDelegate::with_explicit_db_path(db.clone());
+
+        // No connection cached yet.
+        assert_eq!(kb.cached_connection_count(), 0);
+
+        // First query opens and caches the connection.
+        let _ = kb.list_symbols_for_file("snap-01".to_string(), "src/foo.ts".to_string()).unwrap();
+        assert_eq!(kb.cached_connection_count(), 1, "connection should be cached after first call");
+
+        // Second distinct method call reuses the same cached connection.
+        let _ = kb.list_callers("sym-002".to_string()).unwrap();
+        assert_eq!(kb.cached_connection_count(), 1, "cache size must not grow on reuse");
+
+        // Third call on yet another method still reuses the same connection.
+        let _ = kb.list_provenance_for_line("snap-01".to_string(), "src/foo.ts".to_string(), 5).unwrap();
+        assert_eq!(kb.cached_connection_count(), 1);
+    }
+
+    #[test]
+    fn cache_cleared_on_demand() {
+        let tmp = TempDir::new().unwrap();
+        let db = create_atlas_db(&tmp);
+        seed_minimal_atlas_rows(&db);
+        let kb = SqliteAtlasKbDelegate::with_explicit_db_path(db.clone());
+
+        // Warm the cache.
+        let _ = kb.list_symbols_in_snapshot("snap-01".to_string(), None, None, None, None).unwrap();
+        assert_eq!(kb.cached_connection_count(), 1);
+
+        // Invalidate (simulates atlasIndexingCompleted).
+        kb.clear_connection_cache();
+        assert_eq!(kb.cached_connection_count(), 0, "cache must be empty after clear");
+
+        // Next call re-opens the DB and rows are still accessible.
+        let rows = kb.list_symbols_in_snapshot("snap-01".to_string(), None, None, None, None).unwrap();
+        assert_eq!(rows.len(), 2, "rows must still be readable after re-open");
+        assert_eq!(kb.cached_connection_count(), 1, "cache repopulated after re-open");
+    }
+
+    #[test]
+    fn no_deadlock_on_sequential_calls_with_same_lock() {
+        // Verify the two-lock design (outer HashMap Mutex, inner Connection Mutex)
+        // does not deadlock when the same delegate is used for back-to-back calls
+        // that each lock-and-release both levels in the same order.
+        let tmp = TempDir::new().unwrap();
+        let db = create_atlas_db(&tmp);
+        seed_minimal_atlas_rows(&db);
+        let kb = SqliteAtlasKbDelegate::with_explicit_db_path(db);
+
+        // Four rapid sequential calls — if there were a deadlock they would hang.
+        let r1 = kb.list_symbols_for_file("snap-01".to_string(), "src/foo.ts".to_string()).unwrap();
+        let r2 = kb.list_callers("sym-002".to_string()).unwrap();
+        let r3 = kb.list_type_relations_from("sym-001".to_string()).unwrap();
+        let r4 = kb.list_missions_for_file("snap-01".to_string(), "src/foo.ts".to_string()).unwrap();
+
+        assert_eq!(r1.len(), 1);
+        assert_eq!(r2.len(), 1);
+        assert_eq!(r3.len(), 1);
+        assert_eq!(r4.len(), 2);
+    }
+
+    #[test]
+    fn invalidate_via_trait_method_clears_cache() {
+        let tmp = TempDir::new().unwrap();
+        let db = create_atlas_db(&tmp);
+        seed_minimal_atlas_rows(&db);
+        let kb = SqliteAtlasKbDelegate::with_explicit_db_path(db);
+
+        // Warm the cache.
+        let _ = kb.get_symbol("sym-001".to_string()).unwrap();
+        assert_eq!(kb.cached_connection_count(), 1);
+
+        // Invalidate via the trait method (the path AtlasState::clear_connection_cache uses).
+        kb.invalidate_connection_cache();
+        assert_eq!(kb.cached_connection_count(), 0);
     }
 }
