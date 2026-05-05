@@ -1,0 +1,132 @@
+/**
+ * coordinator.ts — unit tests (minimum 8).
+ *
+ * No DOM globals needed beyond what jsdom provides.
+ * hashchange events are fired manually.
+ */
+
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { createCoordinator } from '../coordinator.js';
+import type { CoordinatedView } from '../coordinator.js';
+import type { Focus } from '../focus-state.js';
+
+function makeView(): CoordinatedView & { calls: Focus[] } {
+  const calls: Focus[] = [];
+  return {
+    calls,
+    setFocus(f: Focus) { calls.push(f); },
+  };
+}
+
+describe('Coordinator', () => {
+  it('dispatches focus to all registered views', () => {
+    const c = createCoordinator();
+    const v1 = makeView();
+    const v2 = makeView();
+    c.registerView(v1);
+    c.registerView(v2);
+
+    c.dispatch({ kind: 'file', id: 'src/foo.ts' });
+
+    expect(v1.calls).toHaveLength(1);
+    expect(v1.calls[0]).toEqual({ kind: 'file', id: 'src/foo.ts' });
+    expect(v2.calls).toHaveLength(1);
+    expect(v2.calls[0]).toEqual({ kind: 'file', id: 'src/foo.ts' });
+  });
+
+  it('does NOT send setFocus back to the source view', () => {
+    const c = createCoordinator();
+    const src = makeView();
+    const other = makeView();
+    c.registerView(src);
+    c.registerView(other);
+
+    c.dispatch({ kind: 'symbol', id: 'sym-1' }, src);
+
+    expect(src.calls).toHaveLength(0);
+    expect(other.calls).toHaveLength(1);
+  });
+
+  it('no-ops when focus is identical to current', () => {
+    const c = createCoordinator();
+    const v = makeView();
+    c.registerView(v);
+    const focus: Focus = { kind: 'mission', id: 'v1.49.606' };
+
+    c.dispatch(focus);
+    c.dispatch({ ...focus }); // same kind + id
+
+    expect(v.calls).toHaveLength(1);
+  });
+
+  it('subscribe API receives every change', () => {
+    const c = createCoordinator();
+    const received: Array<Focus | null> = [];
+    c.subscribe((f) => received.push(f));
+
+    c.dispatch({ kind: 'file', id: 'a.ts' });
+    c.dispatch({ kind: 'folder', id: 'src' });
+    c.dispatch(null);
+
+    expect(received).toHaveLength(3);
+    expect(received[2]).toBeNull();
+  });
+
+  it('unsubscribe stops notifications', () => {
+    const c = createCoordinator();
+    const received: Array<Focus | null> = [];
+    const unsub = c.subscribe((f) => received.push(f));
+
+    c.dispatch({ kind: 'file', id: 'a.ts' });
+    unsub();
+    c.dispatch({ kind: 'file', id: 'b.ts' });
+
+    expect(received).toHaveLength(1);
+  });
+
+  it('current() returns the last dispatched focus', () => {
+    const c = createCoordinator();
+    expect(c.current()).toBeNull();
+
+    c.dispatch({ kind: 'symbol', id: 's1' });
+    expect(c.current()).toEqual({ kind: 'symbol', id: 's1' });
+  });
+
+  it('hashchange event triggers setFocus on views', () => {
+    const c = createCoordinator();
+    const v = makeView();
+    c.registerView(v);
+    const detach = c.attachHashRouting();
+
+    // Manually set hash and fire hashchange
+    window.location.hash = '#atlas/file/src/bar.ts';
+    window.dispatchEvent(new Event('hashchange'));
+
+    expect(v.calls.length).toBeGreaterThanOrEqual(1);
+    const last = v.calls[v.calls.length - 1];
+    expect(last).toEqual({ kind: 'file', id: 'src/bar.ts' });
+
+    detach();
+  });
+
+  it('unregistered view no longer receives focus updates', () => {
+    const c = createCoordinator();
+    const v = makeView();
+    const unreg = c.registerView(v);
+    c.dispatch({ kind: 'file', id: 'a.ts' });
+    unreg();
+    c.dispatch({ kind: 'file', id: 'b.ts' });
+
+    expect(v.calls).toHaveLength(1);
+  });
+
+  it('newly registered view receives current focus immediately', () => {
+    const c = createCoordinator();
+    c.dispatch({ kind: 'mission', id: 'm1' });
+    const v = makeView();
+    c.registerView(v);
+
+    expect(v.calls).toHaveLength(1);
+    expect(v.calls[0]).toEqual({ kind: 'mission', id: 'm1' });
+  });
+});

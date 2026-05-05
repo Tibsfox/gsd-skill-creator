@@ -1,0 +1,240 @@
+/**
+ * Atlas shell — 4-pane grid layout, splitters, palette overlay.
+ * Tokens match the Tokyo-Night theme in planning.css and W2 component CSS.
+ */
+
+/* ── Root layout ───────────────────────────────────────────────────────────── */
+
+.atlas-shell {
+  display: grid;
+  grid-template-rows: var(--atlas-row-top, 45%) var(--atlas-row-mid, 20%) var(--atlas-row-bot, 35%);
+  grid-template-columns: var(--atlas-col-left, 40%) var(--atlas-col-right, 60%);
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-primary, #1a1b26);
+  color: var(--text-primary, #c0caf5);
+  font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  overflow: hidden;
+  position: relative;
+}
+
+/* ── Panes ─────────────────────────────────────────────────────────────────── */
+
+.atlas-pane {
+  overflow: hidden;
+  position: relative;
+  border: 0.5px solid var(--border-subtle, #292e42);
+}
+
+.atlas-pane--system-map {
+  grid-row: 1;
+  grid-column: 1;
+}
+
+.atlas-pane--symbol-graph {
+  grid-row: 1;
+  grid-column: 2;
+}
+
+.atlas-pane--archeology {
+  grid-row: 2;
+  grid-column: 1 / span 2;
+}
+
+.atlas-pane--code-view {
+  grid-row: 3;
+  grid-column: 2;
+}
+
+/* bottom-left is an empty status slot (future use) */
+.atlas-pane--status {
+  grid-row: 3;
+  grid-column: 1;
+  display: flex;
+  align-items: flex-end;
+  padding: 6px 10px;
+  font-size: 11px;
+  font-family: var(--font-mono, "SF Mono", Monaco, monospace);
+  color: var(--text-secondary, #9aa5ce);
+  background-color: var(--bg-secondary, #24283b);
+}
+
+/* ── Pane headers ──────────────────────────────────────────────────────────── */
+
+.atlas-pane-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 22px;
+  background: var(--bg-secondary, #24283b);
+  border-bottom: 0.5px solid var(--border-subtle, #292e42);
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  font-size: 11px;
+  color: var(--text-secondary, #9aa5ce);
+  letter-spacing: 0.04em;
+  user-select: none;
+  z-index: 1;
+}
+
+.atlas-pane-body {
+  position: absolute;
+  top: 22px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/* ── Splitters ─────────────────────────────────────────────────────────────── */
+
+.atlas-splitter {
+  position: absolute;
+  z-index: 10;
+  background: transparent;
+}
+
+.atlas-splitter--col {
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  cursor: col-resize;
+  left: var(--atlas-col-left, 40%);
+  transform: translateX(-2px);
+}
+
+.atlas-splitter--row-top {
+  left: 0;
+  right: 0;
+  height: 5px;
+  cursor: row-resize;
+  top: var(--atlas-row-top, 45%);
+  transform: translateY(-2px);
+}
+
+.atlas-splitter--row-mid {
+  left: 0;
+  right: 0;
+  height: 5px;
+  cursor: row-resize;
+  /* mid splitter sits between row 2 and row 3 */
+  top: calc(var(--atlas-row-top, 45%) + var(--atlas-row-mid, 20%));
+  transform: translateY(-2px);
+}
+
+.atlas-splitter:hover,
+.atlas-splitter--dragging {
+  background: var(--accent-blue, #7aa2f7);
+  opacity: 0.4;
+}
+
+/* ── Palette overlay ───────────────────────────────────────────────────────── */
+
+.sc-search-palette {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 15vh;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+}
+
+.sc-search-palette.hidden {
+  display: none;
+}
+
+.sc-search-panel {
+  width: min(600px, 90vw);
+  background: var(--bg-card, #1f2335);
+  border: 1px solid var(--border-subtle, #292e42);
+  border-radius: var(--radius-lg, 8px);
+  overflow: hidden;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5);
+}
+
+.sc-search-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border-subtle, #292e42);
+  color: var(--text-primary, #c0caf5);
+  font-family: var(--font-mono, "SF Mono", Monaco, monospace);
+  font-size: 14px;
+  outline: none;
+  padding: 12px 16px;
+}
+
+.sc-search-input::placeholder {
+  color: var(--text-secondary, #9aa5ce);
+}
+
+.sc-search-results {
+  list-style: none;
+  margin: 0;
+  padding: 4px 0;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.sc-search-result {
+  padding: 7px 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.sc-search-result--active,
+.sc-search-result:hover {
+  background: var(--bg-secondary, #24283b);
+}
+
+.sc-search-result__kind {
+  font-family: var(--font-mono, "SF Mono", Monaco, monospace);
+  font-size: 10px;
+  color: var(--accent-blue, #7aa2f7);
+  min-width: 50px;
+}
+
+.sc-search-result__label {
+  color: var(--text-primary, #c0caf5);
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sc-search-result__detail {
+  font-family: var(--font-mono, "SF Mono", Monaco, monospace);
+  font-size: 11px;
+  color: var(--text-secondary, #9aa5ce);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 200px;
+}
+
+/* ── Focus ring ────────────────────────────────────────────────────────────── */
+
+.atlas-pane:focus-within > .atlas-pane-header {
+  border-bottom-color: var(--accent-blue, #7aa2f7);
+}
+
+/* ── Scroll ────────────────────────────────────────────────────────────────── */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--border-subtle, #292e42);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary, #9aa5ce);
+}
