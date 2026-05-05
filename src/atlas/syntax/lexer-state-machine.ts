@@ -53,15 +53,16 @@ export interface Grammar {
 }
 
 /**
- * Anchored variants of the regex — we use sticky 'y' semantics by re-creating
- * each rule's regex with global flag and lastIndex bump. This keeps grammars
- * source-readable (authors write /^\s+/, engine handles position).
+ * Sticky variants of the regex. The engine drives `lastIndex` directly,
+ * eliminating O(n²) `source.slice(pos)` allocations on every step (D5).
+ * Authors still write /^\s+/ for readability; engine strips the leading
+ * `^` (sticky implies anchor-at-lastIndex) and adds `y`.
  */
-function anchored(re: RegExp): RegExp {
+function sticky(re: RegExp): RegExp {
   let src = re.source;
-  if (!src.startsWith('^')) src = '^' + src;
-  const flags = re.flags.includes('y') ? re.flags : re.flags;
-  return new RegExp(src, flags.replace('y', ''));
+  if (src.startsWith('^')) src = src.slice(1);
+  const flags = re.flags.includes('y') ? re.flags : re.flags + 'y';
+  return new RegExp(src, flags);
 }
 
 /**
@@ -75,10 +76,11 @@ export function runLexer(source: string, grammar: Grammar): Token[] {
   let line = 1;
   let col = 1;
 
-  // Prebake anchored regexes for performance (each state, each rule).
+  // Prebake sticky regexes once. Each call resets `lastIndex` to the current
+  // scan position; first-match semantics preserved by ordered rule iteration.
   const compiled: Record<string, { re: RegExp; action: RuleAction }[]> = {};
   for (const [name, st] of Object.entries(grammar.states)) {
-    compiled[name] = st.rules.map((r) => ({ re: anchored(r.re), action: r.action }));
+    compiled[name] = st.rules.map((r) => ({ re: sticky(r.re), action: r.action }));
   }
 
   const updateLineCol = (text: string): void => {
@@ -110,11 +112,11 @@ export function runLexer(source: string, grammar: Grammar): Token[] {
       continue;
     }
 
-    const slice = source.slice(pos);
     let matched = false;
     for (const { re, action } of rules) {
-      const m = re.exec(slice);
-      if (!m || m.index !== 0) continue;
+      re.lastIndex = pos;
+      const m = re.exec(source);
+      if (!m || m.index !== pos) continue;
       const text = m[0];
       if (text.length === 0) {
         // Zero-length match — would loop forever; bail.
