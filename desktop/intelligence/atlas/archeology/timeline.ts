@@ -114,6 +114,9 @@ export function createTimeline(opts: TimelineOptions = { width: 960, height: 64 
       g.setAttribute('class', `mission-tick${focused === m.missionId ? ' is-focused' : ''}`);
       g.setAttribute('data-mission-id', m.missionId);
       g.setAttribute('transform', `translate(${x},${opts.height / 2})`);
+      g.setAttribute('role', 'button');
+      g.setAttribute('tabindex', '0');
+      g.setAttribute('aria-label', m.label);
       const dot = document.createElementNS(SVG_NS, 'circle');
       dot.setAttribute('r', focused === m.missionId ? '5' : '3');
       dot.setAttribute('cy', '0');
@@ -127,6 +130,12 @@ export function createTimeline(opts: TimelineOptions = { width: 960, height: 64 
       text.textContent = m.label;
       g.appendChild(text);
       g.addEventListener('click', () => selectCb(m.missionId));
+      g.addEventListener('keydown', (ke: KeyboardEvent) => {
+        if (ke.key === 'Enter' || ke.key === ' ') {
+          ke.preventDefault();
+          selectCb(m.missionId);
+        }
+      });
       tickGroup.appendChild(g);
     }
     svg.appendChild(tickGroup);

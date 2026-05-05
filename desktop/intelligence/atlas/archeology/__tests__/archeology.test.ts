@@ -13,6 +13,19 @@ vi.mock('../../../../../src/intelligence/ipc.js', () => ({
   },
 }));
 
+let sankeyLayoutCallCount = 0;
+
+vi.mock('../../../../../src/atlas/sankey/index.js', async (importOriginal) => {
+  const orig = await importOriginal<typeof import('../../../../../src/atlas/sankey/index.js')>();
+  return {
+    ...orig,
+    sankeyLayout: (...args: Parameters<typeof orig.sankeyLayout>) => {
+      sankeyLayoutCallCount++;
+      return orig.sankeyLayout(...args);
+    },
+  };
+});
+
 import { createArcheologyView } from '../archeology.js';
 import { layoutTimeline } from '../timeline.js';
 import { createMissionCard } from '../mission-card.js';
@@ -186,6 +199,18 @@ describe('createMissionCard', () => {
     expect(cb).toHaveBeenCalledWith('src/foo.ts');
   });
 
+  it('file row has role=button and Enter key triggers onFileClick', () => {
+    const card = createMissionCard();
+    const cb = vi.fn();
+    card.onFileClick(cb);
+    card.setData(MISSIONS[0], [row('m1', 'src/bar.ts', 'A')]);
+    const li = card.el.querySelector<HTMLLIElement>('li.archeology-file-row')!;
+    expect(li.getAttribute('role')).toBe('button');
+    expect(li.getAttribute('tabindex')).toBe('0');
+    li.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+    expect(cb).toHaveBeenCalledWith('src/bar.ts');
+  });
+
   it('renders a linked-decision anchor when linkedDecisionId is present', () => {
     const card = createMissionCard();
     const cb = vi.fn();
@@ -222,6 +247,29 @@ describe('createArcheologyView — composition', () => {
     expect(host.querySelector('.archeology-pane-timeline')).not.toBeNull();
     expect(host.querySelector('.archeology-pane-sankey')).not.toBeNull();
     expect(host.querySelector('.archeology-pane-cards')).not.toBeNull();
+    view.unmount();
+  });
+
+  it('timeline tick elements have role=button and respond to Enter key', async () => {
+    const view = createArcheologyView({ width: 600, sankeyHeight: 200 });
+    const host = document.createElement('div');
+    view.mount(host);
+    view.setMissions(MISSIONS);
+    view.primeMissionRows('m1', [row('m1', 'src/foo.ts', 'M', 20, 5)]);
+
+    const onSel = vi.fn();
+    view.onSelect(onSel);
+
+    const tick = host.querySelector<SVGGElement>('[data-mission-id="m1"]');
+    expect(tick).not.toBeNull();
+    expect(tick!.getAttribute('role')).toBe('button');
+    expect(tick!.getAttribute('tabindex')).toBe('0');
+
+    tick!.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+    await new Promise((r) => setTimeout(r, 0));
+    await new Promise((r) => setTimeout(r, 0));
+
+    expect(onSel).toHaveBeenCalled();
     view.unmount();
   });
 
@@ -306,6 +354,51 @@ describe('createArcheologyView — composition', () => {
     view.setFocus('m3');
     await new Promise((r) => setTimeout(r, 0));
     expect(fetchMock).toHaveBeenCalledTimes(1); // cached, no second call
+    view.unmount();
+  });
+});
+
+describe('Sankey stable-layout cache', () => {
+  beforeEach(() => {
+    sankeyLayoutCallCount = 0;
+  });
+
+  it('computes layout once for first focus and reuses on repeat-focus with same data', () => {
+    const view = createArcheologyView({ width: 600, sankeyHeight: 200 });
+    const host = document.createElement('div');
+    view.mount(host);
+    view.setMissions(MISSIONS);
+    view.primeMissionRows('m1', [row('m1', 'src/foo.ts', 'A', 50, 0)]);
+    view.primeMissionRows('m2', [row('m2', 'src/foo.ts', 'M', 10, 2)]);
+
+    view.setFocus('m1');
+    const callsAfterFirst = sankeyLayoutCallCount;
+    expect(callsAfterFirst).toBeGreaterThan(0);
+
+    view.setFocus('m2');
+    // Same data snapshot → layout should be reused, no additional sankeyLayout call
+    expect(sankeyLayoutCallCount).toBe(callsAfterFirst);
+
+    view.unmount();
+  });
+
+  it('invalidates cache when mission list changes', () => {
+    const view = createArcheologyView({ width: 600, sankeyHeight: 200 });
+    const host = document.createElement('div');
+    view.mount(host);
+    view.setMissions(MISSIONS);
+    view.primeMissionRows('m1', [row('m1', 'src/foo.ts', 'A', 50, 0)]);
+    view.primeMissionRows('m2', [row('m2', 'src/foo.ts', 'M', 10, 2)]);
+
+    view.setFocus('m1');
+    const callsAfterFirst = sankeyLayoutCallCount;
+
+    // Change missions list → cache should be invalidated
+    const newMissions = MISSIONS.slice(0, 2);
+    view.setMissions(newMissions);
+    view.setFocus('m1');
+    expect(sankeyLayoutCallCount).toBeGreaterThan(callsAfterFirst);
+
     view.unmount();
   });
 });

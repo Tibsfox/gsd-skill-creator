@@ -24,6 +24,7 @@ import type { ArcheologyView } from './archeology/index.js';
 import { createCodeView } from './code-view/index.js';
 import type { CodeViewComponent } from './code-view/index.js';
 import { SearchPalette } from './search-palette/index.js';
+import type { AtlasState } from './search-palette/index.js';
 import { createCoordinator } from './coordinator.js';
 import type { Coordinator, CoordinatedView } from './coordinator.js';
 import type { Focus } from './focus-state.js';
@@ -99,7 +100,50 @@ export function createAtlasShell(opts: AtlasShellOptions = {}): AtlasShell {
     el.className = `atlas-splitter atlas-splitter--${cls}`;
     el.setAttribute('role', 'separator');
     el.setAttribute('aria-orientation', cls === 'col' ? 'vertical' : 'horizontal');
+    el.setAttribute('tabindex', '0');
     return el;
+  }
+
+  function splitterValueNow(kind: DragState['kind']): number {
+    if (kind === 'col') return Math.round(colLeft);
+    if (kind === 'row-top') return Math.round(rowTop);
+    return Math.round(rowMid);
+  }
+
+  function updateSplitterAria(el: HTMLDivElement, kind: DragState['kind']): void {
+    el.setAttribute('aria-valuenow', String(splitterValueNow(kind)));
+  }
+
+  function attachSplitterKeyboard(
+    el: HTMLDivElement,
+    kind: DragState['kind'],
+  ): void {
+    el.addEventListener('keydown', (e: KeyboardEvent) => {
+      const isHoriz = kind === 'col';
+      const decKey = isHoriz ? 'ArrowLeft' : 'ArrowUp';
+      const incKey = isHoriz ? 'ArrowRight' : 'ArrowDown';
+      if (e.key !== decKey && e.key !== incKey && e.key !== 'Home' && e.key !== 'End') return;
+      e.preventDefault();
+      if (kind === 'col') {
+        if (e.key === 'ArrowLeft') colLeft = Math.max(10, colLeft - 2);
+        else if (e.key === 'ArrowRight') colLeft = Math.min(90, colLeft + 2);
+        else if (e.key === 'Home') colLeft = 10;
+        else if (e.key === 'End') colLeft = 90;
+      } else if (kind === 'row-top') {
+        if (e.key === 'ArrowUp') rowTop = Math.max(10, rowTop - 2);
+        else if (e.key === 'ArrowDown') rowTop = Math.min(80, rowTop + 2);
+        else if (e.key === 'Home') rowTop = 10;
+        else if (e.key === 'End') rowTop = 80;
+        if (rowTop + rowMid > 90) rowMid = 90 - rowTop;
+      } else {
+        if (e.key === 'ArrowUp') rowMid = Math.max(5, rowMid - 2);
+        else if (e.key === 'ArrowDown') rowMid = Math.min(80 - rowTop, rowMid + 2);
+        else if (e.key === 'Home') rowMid = 5;
+        else if (e.key === 'End') rowMid = 80 - rowTop;
+      }
+      applyLayout();
+      updateSplitterAria(el, kind);
+    });
   }
 
   // ── splitter drag ──────────────────────────────────────────────────────────
@@ -207,6 +251,49 @@ export function createAtlasShell(opts: AtlasShellOptions = {}): AtlasShell {
 
   // ── mount / unmount ────────────────────────────────────────────────────────
 
+  // ── Palette atlas-state cache ─────────────────────────────────────────────
+
+  let atlasStateCache: AtlasState | null = null;
+  let atlasStateFetching = false;
+
+  async function fetchAndPopulateAtlasState(palette: SearchPalette): Promise<void> {
+    if (atlasStateCache !== null) {
+      palette.setAtlasState(atlasStateCache);
+      return;
+    }
+    if (atlasStateFetching) return;
+    atlasStateFetching = true;
+    try {
+      const snapshotId = '' as any;
+      const [symbolsSettled, missionsSettled] = await Promise.allSettled([
+        intelligenceIpc.listSymbolsForFile(snapshotId, '').catch(() => [] as any[]),
+        intelligenceIpc.listFilesChangedByMission('').catch(() => [] as any[]),
+      ]);
+      const rawSymbols = symbolsSettled.status === 'fulfilled' ? symbolsSettled.value : [];
+      const rawMissions = missionsSettled.status === 'fulfilled' ? missionsSettled.value : [];
+      const files: AtlasState['files'] = Array.from(
+        new Set(rawSymbols.filter((s: any) => s.file_path).map((s: any) => s.file_path as string))
+      ).map((p) => ({ path: p }));
+      const state: AtlasState = {
+        symbols: rawSymbols as AtlasState['symbols'],
+        files,
+        missions: rawMissions.length > 0
+          ? [{ id: String(rawMissions[0].mission_id ?? '') }]
+          : [],
+      };
+      atlasStateCache = state;
+      palette.setAtlasState(state);
+    } catch {
+      // IPC unavailable — leave palette empty
+    } finally {
+      atlasStateFetching = false;
+    }
+  }
+
+  function invalidateAtlasStateCache(): void {
+    atlasStateCache = null;
+  }
+
   return {
     coordinator,
 
@@ -216,6 +303,18 @@ export function createAtlasShell(opts: AtlasShellOptions = {}): AtlasShell {
       shellEl = document.createElement('div');
       shellEl.className = 'atlas-shell';
       applyLayout();
+
+      // ── ARIA live region ─────────────────────────────────────────────────
+      const announcer = document.createElement('div');
+      announcer.id = 'atlas-focus-announcer';
+      announcer.setAttribute('role', 'status');
+      announcer.setAttribute('aria-live', 'polite');
+      announcer.setAttribute('aria-atomic', 'true');
+      announcer.style.cssText =
+        'position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;';
+      shellEl.appendChild(announcer);
+      const unAnnouncer = coordinator.attachAnnouncer(announcer);
+      unregisterFns.push(unAnnouncer);
 
       // ── System Map ──────────────────────────────────────────────────────
       const { pane: smPane, body: smBody } = makePane('system-map', 'System Map');
@@ -311,12 +410,16 @@ export function createAtlasShell(opts: AtlasShellOptions = {}): AtlasShell {
         { parent: shellEl },
       );
 
-      // Cmd-K handler
+      // Cmd-K handler + palette atlas-state auto-population
       const onKeyDown = (e: KeyboardEvent): void => {
         if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
           e.preventDefault();
-          if (palette.isOpen()) palette.close();
-          else palette.openPalette();
+          if (palette.isOpen()) {
+            palette.close();
+          } else {
+            palette.openPalette();
+            void fetchAndPopulateAtlasState(palette);
+          }
         }
         if (e.key === 'Escape' && palette.isOpen()) {
           palette.close();
@@ -325,14 +428,36 @@ export function createAtlasShell(opts: AtlasShellOptions = {}): AtlasShell {
       document.addEventListener('keydown', onKeyDown);
       unregisterFns.push(() => document.removeEventListener('keydown', onKeyDown));
 
+      // Invalidate atlas-state cache on indexing.completed
+      intelligenceIpc.on.atlasIndexingCompleted(() => {
+        invalidateAtlasStateCache();
+      }).then((unsub) => {
+        unregisterFns.push(unsub);
+      }).catch(() => { /* IPC unavailable in tests */ });
+
       // ── Splitters ────────────────────────────────────────────────────────
       const colSplitter = makeSplitter('col');
       const rowTopSplitter = makeSplitter('row-top');
       const rowMidSplitter = makeSplitter('row-mid');
 
+      // Seed aria-valuenow
+      colSplitter.setAttribute('aria-valuenow', String(Math.round(colLeft)));
+      colSplitter.setAttribute('aria-valuemin', '10');
+      colSplitter.setAttribute('aria-valuemax', '90');
+      rowTopSplitter.setAttribute('aria-valuenow', String(Math.round(rowTop)));
+      rowTopSplitter.setAttribute('aria-valuemin', '10');
+      rowTopSplitter.setAttribute('aria-valuemax', '80');
+      rowMidSplitter.setAttribute('aria-valuenow', String(Math.round(rowMid)));
+      rowMidSplitter.setAttribute('aria-valuemin', '5');
+      rowMidSplitter.setAttribute('aria-valuemax', '80');
+
       attachSplitter(colSplitter, 'col');
       attachSplitter(rowTopSplitter, 'row-top');
       attachSplitter(rowMidSplitter, 'row-mid');
+
+      attachSplitterKeyboard(colSplitter, 'col');
+      attachSplitterKeyboard(rowTopSplitter, 'row-top');
+      attachSplitterKeyboard(rowMidSplitter, 'row-mid');
 
       document.addEventListener('pointermove', onPointerMove);
       document.addEventListener('pointerup', onPointerUp);

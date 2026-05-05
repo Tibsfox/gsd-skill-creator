@@ -66,6 +66,13 @@ export function createMissionCard(): MissionCardComponent {
         const fp = li.dataset.filePath;
         if (fp) fileCb(fp);
       });
+      li.addEventListener('keydown', (ke: KeyboardEvent) => {
+        if (ke.key === 'Enter' || ke.key === ' ') {
+          ke.preventDefault();
+          const fp = li.dataset.filePath;
+          if (fp) fileCb(fp);
+        }
+      });
     });
   }
 
@@ -74,7 +81,7 @@ export function createMissionCard(): MissionCardComponent {
     const renamed = kind === 'R' && row.rename_from
       ? `<span class="archeology-rename-from">${esc(row.rename_from)} →</span>`
       : '';
-    return `<li class="archeology-file-row" data-file-path="${esc(row.file_path)}">
+    return `<li class="archeology-file-row" role="button" tabindex="0" data-file-path="${esc(row.file_path)}">
       <span class="archeology-badge archeology-badge-${kind}" title="${kindTitle(kind)}">${BADGE_TEXT[kind]}</span>
       ${renamed}
       <span class="archeology-file-path">${esc(row.file_path)}</span>

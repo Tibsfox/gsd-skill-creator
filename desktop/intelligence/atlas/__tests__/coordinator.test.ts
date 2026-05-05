@@ -129,4 +129,22 @@ describe('Coordinator', () => {
     expect(v.calls).toHaveLength(1);
     expect(v.calls[0]).toEqual({ kind: 'mission', id: 'm1' });
   });
+
+  it('announcer text is updated on symbol focus', () => {
+    const c = createCoordinator();
+    const el = document.createElement('div');
+    c.attachAnnouncer(el);
+    c.dispatch({ kind: 'symbol', id: 'parseHash' });
+    expect(el.textContent).toBe('focused symbol: parseHash');
+  });
+
+  it('announcer text is updated on mission focus and cleared on null', () => {
+    const c = createCoordinator();
+    const el = document.createElement('div');
+    c.attachAnnouncer(el);
+    c.dispatch({ kind: 'mission', id: 'v1.49.607' });
+    expect(el.textContent).toBe('focused mission: v1.49.607');
+    c.dispatch(null);
+    expect(el.textContent).toBe('');
+  });
 });

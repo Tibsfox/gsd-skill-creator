@@ -78,6 +78,30 @@ export function createArcheologyView(opts: ArcheologyOptions = {}): ArcheologyVi
   let selectCb: (e: ArcheologySelectEvent) => void = () => {};
   let lastSankey: SankeyDataResult | null = null;
 
+  // ── Sankey layout cache ──────────────────────────────────────────────────
+  interface SankeyCacheEntry {
+    cacheKey: string;
+    data: SankeyDataResult;
+    layout: SankeyLayout;
+  }
+  let sankeyCache: SankeyCacheEntry | null = null;
+
+  function buildSankeyCacheKey(
+    missionList: MilestoneLink[],
+    filesByMission: Map<string, AtlasFilesChanged[]>,
+  ): string {
+    const parts: string[] = missionList.map((m) => {
+      const rows = filesByMission.get(m.missionId);
+      const rowSig = rows ? rows.map((r) => `${r.file_path}:${r.added_lines}:${r.removed_lines}`).join(',') : '';
+      return `${m.missionId}|${rowSig}`;
+    });
+    return parts.join(';');
+  }
+
+  function invalidateSankeyCache(): void {
+    sankeyCache = null;
+  }
+
   function mount(h: HTMLElement): void {
     host = h;
     host.classList.add('archeology-view');
@@ -102,6 +126,7 @@ export function createArcheologyView(opts: ArcheologyOptions = {}): ArcheologyVi
 
   function setMissions(next: MilestoneLink[]): void {
     missions = next;
+    invalidateSankeyCache();
     if (timeline) timeline.setMissions(missions);
     renderSankey();
     if (focused && !missions.find((m) => m.missionId === focused)) {
@@ -152,7 +177,32 @@ export function createArcheologyView(opts: ArcheologyOptions = {}): ArcheologyVi
       const rows = rowsCache.get(m.missionId);
       if (rows && rows.length > 0) filesByMission.set(m.missionId, rows);
     }
-    const data = buildSankeyData(missions, filesByMission);
+
+    // Stable-layout cache: reuse the prior layout when (missions, filesByMission)
+    // snapshot is identical. Focus changes update only the colour overlay, not
+    // the layout geometry, so this covers the common repeat-focus pattern.
+    const cacheKey = buildSankeyCacheKey(missions, filesByMission);
+    let data: SankeyDataResult;
+    let layout: SankeyLayout;
+
+    if (sankeyCache && sankeyCache.cacheKey === cacheKey) {
+      data = sankeyCache.data;
+      layout = sankeyCache.layout;
+    } else {
+      data = buildSankeyData(missions, filesByMission);
+      if (data.nodes.length > 0) {
+        layout = sankeyLayout(data.nodes, data.links, {
+          width: o.width,
+          height: o.sankeyHeight,
+          nodeWidth: 14,
+          nodePadding: 4,
+        });
+        sankeyCache = { cacheKey, data, layout };
+      } else {
+        sankeyCache = null;
+      }
+    }
+
     lastSankey = data;
 
     if (data.nodes.length === 0) {
@@ -160,15 +210,9 @@ export function createArcheologyView(opts: ArcheologyOptions = {}): ArcheologyVi
       return;
     }
 
-    const layout: SankeyLayout = sankeyLayout(data.nodes, data.links, {
-      width: o.width,
-      height: o.sankeyHeight,
-      nodeWidth: 14,
-      nodePadding: 4,
-    });
     const focusedNodeIds = focused ? new Set(data.nodesByMission.get(focused) ?? []) : null;
 
-    const inner = sankeyToSvg(layout, {
+    const inner = sankeyToSvg(layout!, {
       nodeColor: (n) => {
         if (focusedNodeIds && focusedNodeIds.has(n.id)) return '#f29c2b';
         return '#4a90d9';
@@ -225,6 +269,7 @@ export function createArcheologyView(opts: ArcheologyOptions = {}): ArcheologyVi
     cards.clear();
     rowsCache.clear();
     lastSankey = null;
+    sankeyCache = null;
   }
 
   return {

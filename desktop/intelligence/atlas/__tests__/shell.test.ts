@@ -91,17 +91,30 @@ vi.mock('../search-palette/index.js', () => ({
       this.events = events;
       paletteSelectHandlers.push(events.onSelect);
     }
-    setAtlasState(_s: any) {}
+    setAtlasState(s: any) { paletteAtlasState = s; }
     openPalette() { paletteIsOpen = true; }
     close() { paletteIsOpen = false; }
     isOpen() { return paletteIsOpen; }
   },
 }));
 
+let indexingCompletedCb: (() => void) | null = null;
+let paletteAtlasState: any = null;
+
 vi.mock('../../../../src/intelligence/ipc.js', () => ({
   intelligenceIpc: {
     listProvenanceForLine: vi.fn().mockResolvedValue([]),
     getSymbol: vi.fn().mockResolvedValue(null),
+    listSymbolsForFile: vi.fn().mockResolvedValue([
+      { id: 's1', name: 'parseHash', file_path: 'src/focus-state.ts' },
+    ]),
+    listFilesChangedByMission: vi.fn().mockResolvedValue([]),
+    on: {
+      atlasIndexingCompleted: vi.fn().mockImplementation((cb: () => void) => {
+        indexingCompletedCb = cb;
+        return Promise.resolve(() => {});
+      }),
+    },
   },
 }));
 
@@ -124,6 +137,8 @@ describe('AtlasShell', () => {
     archeologyView.selectHandlers.length = 0;
     codeView.focusCalls.length = 0;
     paletteIsOpen = false;
+    paletteAtlasState = null;
+    indexingCompletedCb = null;
   });
 
   afterEach(() => {
@@ -215,6 +230,122 @@ describe('AtlasShell', () => {
 
     const splitters = host.querySelectorAll('.atlas-splitter');
     expect(splitters.length).toBeGreaterThanOrEqual(3); // col + row-top + row-mid
+
+    shell.unmount();
+  });
+
+  it('column splitter has tabindex=0 and role=separator', () => {
+    const shell = createAtlasShell();
+    shell.mount(host);
+
+    const col = host.querySelector('.atlas-splitter--col');
+    expect(col).not.toBeNull();
+    expect(col!.getAttribute('tabindex')).toBe('0');
+    expect(col!.getAttribute('role')).toBe('separator');
+
+    shell.unmount();
+  });
+
+  it('ArrowRight on column splitter increments aria-valuenow by 2', () => {
+    const shell = createAtlasShell();
+    shell.mount(host);
+
+    const col = host.querySelector<HTMLElement>('.atlas-splitter--col')!;
+    const before = Number(col.getAttribute('aria-valuenow'));
+    col.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
+    const after = Number(col.getAttribute('aria-valuenow'));
+    expect(after).toBe(before + 2);
+
+    shell.unmount();
+  });
+
+  it('Home key on column splitter jumps to minimum (10)', () => {
+    const shell = createAtlasShell();
+    shell.mount(host);
+
+    const col = host.querySelector<HTMLElement>('.atlas-splitter--col')!;
+    col.dispatchEvent(new KeyboardEvent('keydown', { key: 'Home', bubbles: true }));
+    expect(Number(col.getAttribute('aria-valuenow'))).toBe(10);
+
+    shell.unmount();
+  });
+
+  it('first Cmd-K open triggers IPC fetch and populates atlas state', async () => {
+    const { intelligenceIpc } = await import('../../../../src/intelligence/ipc.js');
+    const listSpy = intelligenceIpc.listSymbolsForFile as ReturnType<typeof vi.fn>;
+    listSpy.mockClear();
+
+    const shell = createAtlasShell();
+    shell.mount(host);
+
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', metaKey: true, bubbles: true }));
+    await new Promise((r) => setTimeout(r, 0));
+    await new Promise((r) => setTimeout(r, 0));
+
+    expect(listSpy).toHaveBeenCalledTimes(1);
+    expect(paletteAtlasState).not.toBeNull();
+
+    shell.unmount();
+  });
+
+  it('second Cmd-K open uses cache (no second IPC fetch)', async () => {
+    const { intelligenceIpc } = await import('../../../../src/intelligence/ipc.js');
+    const listSpy = intelligenceIpc.listSymbolsForFile as ReturnType<typeof vi.fn>;
+    listSpy.mockClear();
+
+    const shell = createAtlasShell();
+    shell.mount(host);
+
+    // First open
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', metaKey: true, bubbles: true }));
+    await new Promise((r) => setTimeout(r, 0));
+    await new Promise((r) => setTimeout(r, 0));
+
+    // Close and reopen
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', metaKey: true, bubbles: true }));
+    await new Promise((r) => setTimeout(r, 0));
+
+    expect(listSpy).toHaveBeenCalledTimes(1); // still 1, no second call
+
+    shell.unmount();
+  });
+
+  it('atlas:indexing.completed invalidates cache causing re-fetch on next open', async () => {
+    const { intelligenceIpc } = await import('../../../../src/intelligence/ipc.js');
+    const listSpy = intelligenceIpc.listSymbolsForFile as ReturnType<typeof vi.fn>;
+    listSpy.mockClear();
+
+    const shell = createAtlasShell();
+    shell.mount(host);
+
+    // First open — populates cache
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', metaKey: true, bubbles: true }));
+    await new Promise((r) => setTimeout(r, 0));
+    await new Promise((r) => setTimeout(r, 0));
+    expect(listSpy).toHaveBeenCalledTimes(1);
+
+    // Simulate indexing.completed → invalidates cache
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+    if (indexingCompletedCb) indexingCompletedCb();
+
+    // Second open — should re-fetch
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', metaKey: true, bubbles: true }));
+    await new Promise((r) => setTimeout(r, 0));
+    await new Promise((r) => setTimeout(r, 0));
+    expect(listSpy).toHaveBeenCalledTimes(2);
+
+    shell.unmount();
+  });
+
+  it('ARIA focus announcer element is present in shell DOM', () => {
+    const shell = createAtlasShell();
+    shell.mount(host);
+
+    const announcer = host.querySelector('#atlas-focus-announcer');
+    expect(announcer).not.toBeNull();
+    expect(announcer!.getAttribute('role')).toBe('status');
+    expect(announcer!.getAttribute('aria-live')).toBe('polite');
 
     shell.unmount();
   });

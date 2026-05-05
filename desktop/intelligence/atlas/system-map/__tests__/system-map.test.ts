@@ -255,4 +255,25 @@ describe('createSystemMap — DOM integration', () => {
     map.unmount();
     parent.remove();
   });
+
+  it('circle elements have role=button and tabindex=0 after load', async () => {
+    const { intelligenceIpc } = await import('../../../../../src/intelligence/ipc.js');
+    (intelligenceIpc.listSymbolsForFile as ReturnType<typeof vi.fn>).mockResolvedValue([
+      { id: 's1', name: 'foo', file_path: 'src/a.ts', kind: 'function', qualified_name: 'foo' },
+    ]);
+    (intelligenceIpc.listMissionsForFile as ReturnType<typeof vi.fn>).mockResolvedValue([]);
+
+    const map = createSystemMap({ width: 400, height: 300 });
+    const parent = document.createElement('div');
+    document.body.appendChild(parent);
+    map.mount(parent);
+    await map.load('snap-1' as any, ['src/a.ts']);
+
+    const circles = parent.querySelectorAll('circle[role="button"]');
+    expect(circles.length).toBeGreaterThan(0);
+    expect(circles[0].getAttribute('tabindex')).toBe('0');
+
+    map.unmount();
+    parent.remove();
+  });
 });

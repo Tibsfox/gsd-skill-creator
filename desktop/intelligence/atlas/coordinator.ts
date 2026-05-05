@@ -34,6 +34,12 @@ export interface Coordinator {
   current(): Focus | null;
   /** Attach hashchange listener and seed from current URL hash. */
   attachHashRouting(): () => void;
+  /**
+   * Attach an ARIA live-region element that receives announcements on each
+   * focus change. The coordinator updates `announcer.textContent` on every
+   * dispatch so screen readers announce the new focus context.
+   */
+  attachAnnouncer(announcer: HTMLElement): () => void;
 }
 
 export function createCoordinator(): Coordinator {
@@ -112,6 +118,26 @@ export function createCoordinator(): Coordinator {
       }
 
       return () => window.removeEventListener('hashchange', onHashChange);
+    },
+
+    attachAnnouncer(announcer: HTMLElement): () => void {
+      function announceFocus(focus: Focus | null): void {
+        if (focus === null) {
+          announcer.textContent = '';
+          return;
+        }
+        const label = focus.kind === 'symbol'
+          ? `focused symbol: ${focus.id}`
+          : focus.kind === 'mission'
+            ? `focused mission: ${focus.id}`
+            : focus.kind === 'file'
+              ? `focused file: ${focus.id}`
+              : `focused ${focus.kind}: ${focus.id}`;
+        announcer.textContent = label;
+      }
+
+      subscribers.add(announceFocus);
+      return () => subscribers.delete(announceFocus);
     },
   };
 }

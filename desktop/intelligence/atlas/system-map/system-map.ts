@@ -160,17 +160,30 @@ export function createSystemMap(opts: SystemMapOptions = {}): SystemMapComponent
     if (node.id === focus.id) circle.classList.add('system-map-circle--selected');
     circle.setAttribute('data-id', node.id);
 
-    // Pointer events
-    circle.addEventListener('click', (e) => {
+    const isFolder = node.data?.kind === 'folder' || (node.children && node.children.length > 0);
+    circle.setAttribute('role', 'button');
+    circle.setAttribute('tabindex', '0');
+    circle.setAttribute('aria-label', (isFolder ? 'folder ' : 'file ') + (node.id.split('/').pop() ?? node.id));
+
+    function activate(e: Event): void {
       e.stopPropagation();
-      const payload = node.data;
-      if (payload?.kind === 'folder' || (node.children && node.children.length > 0)) {
+      if (isFolder) {
         zoomStack.push(node.id);
         renderPack();
         updateBreadcrumb();
         notify({ kind: 'folder', id: node.id });
       } else {
         notify({ kind: 'file', id: node.id });
+      }
+    }
+
+    // Pointer events
+    circle.addEventListener('click', activate);
+
+    circle.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        activate(e);
       }
     });
 
