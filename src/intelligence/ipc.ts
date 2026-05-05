@@ -44,6 +44,14 @@ export interface RequestIdResult {
   id: string;
 }
 
+/** Response from atlas_invalidate_cache (H2 per-project eviction). */
+export interface InvalidateCacheResult {
+  /** 'project' when a targeted per-project eviction ran; 'all' for a full clear. */
+  scope: 'project' | 'all';
+  /** Number of connection cache entries actually removed (0..N). */
+  evicted_count: number;
+}
+
 export interface SendNowResult {
   decision_id: string;
   emission_path: string;
@@ -442,9 +450,14 @@ export const intelligenceIpc = {
     return invoke<void>('atlas_request_index_snapshot', { snapshotId });
   },
 
-  /** Invalidate the Rust-side connection cache after atlas:indexing.completed. */
-  invalidateCache(projectId?: ProjectId): Promise<void> {
-    return invoke<void>('atlas_invalidate_cache', {
+  /**
+   * Invalidate the Rust-side connection cache after atlas:indexing.completed.
+   *
+   * Returns `{ scope, evicted_count }` so callers can verify whether a targeted
+   * per-project eviction or a full-clear ran (H2 per-project invalidation).
+   */
+  invalidateCache(projectId?: ProjectId): Promise<InvalidateCacheResult> {
+    return invoke<InvalidateCacheResult>('atlas_invalidate_cache', {
       projectId: projectId ?? null,
     });
   },

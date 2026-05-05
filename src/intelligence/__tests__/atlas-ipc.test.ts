@@ -224,6 +224,21 @@ describe('intelligenceIpc — atlas commands', () => {
     expect(lastCall?.cmd).toBe('atlas_invalidate_cache');
     expect(lastCall?.args).toMatchObject({ projectId: null });
   });
+
+  it('invalidateCache response shape includes scope and evicted_count', async () => {
+    // The Rust command now returns { scope: 'project' | 'all', evicted_count: number }.
+    // Verify the TS caller receives (and can pass through) that shape.
+    stubbedReturn = { scope: 'project', evicted_count: 1 };
+    const { intelligenceIpc } = await import('../ipc.js');
+
+    const result = await intelligenceIpc.invalidateCache('proj-b' as any);
+
+    expect(lastCall?.cmd).toBe('atlas_invalidate_cache');
+    expect(lastCall?.args).toMatchObject({ projectId: 'proj-b' });
+    // The stubbed return value is what the Tauri invoke stub returns, confirming
+    // the IPC layer passes through the structured response from the Rust side.
+    expect(result).toMatchObject({ scope: 'project', evicted_count: 1 });
+  });
 });
 
 describe('IntelligenceEvent union — atlas variants compile', () => {
