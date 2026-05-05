@@ -176,12 +176,33 @@ export async function runAtlasIndexer(
       a.file_path < b.file_path ? -1 : a.file_path > b.file_path ? 1 : a.start_byte - b.start_byte,
     );
 
+    // Wrap clearSnapshot + all four bulkInserts in a single transaction so a
+    // crash mid-write leaves the DB at the prior snapshot state, never a
+    // partially-written snapshot. Atomic snapshot writes (I1 / F2 deferred fix).
     const kb = new SymbolsKB(db);
-    if (opts.replace) kb.clearSnapshot(opts.snapshotId);
-    const symbolsInserted = kb.bulkInsertSymbols(idx.symbols);
-    const refsInserted = kb.bulkInsertReferences(resolved.references);
-    const callsInserted = kb.bulkInsertCalls(resolved.calls);
-    const trInserted = kb.bulkInsertTypeRelations(resolved.type_relations);
+    let symbolsInserted = 0;
+    let refsInserted = 0;
+    let callsInserted = 0;
+    let trInserted = 0;
+    try {
+      const writeTxn = db.transaction(() => {
+        if (opts.replace) kb.clearSnapshot(opts.snapshotId);
+        symbolsInserted = kb.bulkInsertSymbols(idx.symbols);
+        refsInserted = kb.bulkInsertReferences(resolved.references);
+        callsInserted = kb.bulkInsertCalls(resolved.calls);
+        trInserted = kb.bulkInsertTypeRelations(resolved.type_relations);
+      });
+      writeTxn();
+    } catch (writeErr) {
+      bus.publish({
+        type: 'atlas:indexing.failed',
+        payload: {
+          snapshot_id: opts.snapshotId,
+          error: writeErr instanceof Error ? writeErr.message : String(writeErr),
+        },
+      });
+      throw writeErr;
+    }
 
     // 5. Optional provenance linker.
     let provenanceLines = 0;

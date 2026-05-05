@@ -272,6 +272,72 @@ describe('atlas-indexer runner', () => {
     expect(bus.events.some((e) => e.type === 'atlas:indexing.failed')).toBe(false);
     expect(bus.events.some((e) => e.type === 'atlas:indexing.completed')).toBe(true);
   });
+
+  // ─── Surgery 2 (I1/F2): atomic snapshot-write transaction tests ──────────
+
+  it('crash mid-insert rolls back: DB state matches pre-run state', async () => {
+    // Run a first pass so the DB has known rows.
+    const bus = new CapturingBus();
+    await runAtlasIndexer(db, {
+      snapshotId: 'snap-atomic-base',
+      projectId: 'proj-1',
+      projectPath: projectRoot,
+      bus,
+    });
+    const kb = new SymbolsKB(db);
+    const countBefore = kb.listSymbolsInSnapshot('snap-atomic-base').length;
+    expect(countBefore).toBeGreaterThan(0);
+
+    // Patch bulkInsertCalls to throw on its first invocation, simulating a
+    // crash mid-transaction after symbols+refs have been written.
+    const origBulkInsertCalls = SymbolsKB.prototype.bulkInsertCalls;
+    let callCount = 0;
+    SymbolsKB.prototype.bulkInsertCalls = function (...args: Parameters<typeof origBulkInsertCalls>) {
+      callCount++;
+      throw new Error('simulated crash in bulkInsertCalls');
+    };
+
+    let threw = false;
+    const bus2 = new CapturingBus();
+    try {
+      await runAtlasIndexer(db, {
+        snapshotId: 'snap-atomic-crash',
+        projectId: 'proj-1',
+        projectPath: projectRoot,
+        replace: false,
+        bus: bus2,
+      });
+    } catch {
+      threw = true;
+    } finally {
+      SymbolsKB.prototype.bulkInsertCalls = origBulkInsertCalls;
+    }
+
+    expect(threw).toBe(true);
+    // The write transaction must have rolled back: snap-atomic-crash should
+    // have zero symbols in the DB.
+    const crashSnap = kb.listSymbolsInSnapshot('snap-atomic-crash');
+    expect(crashSnap).toHaveLength(0);
+    // The failed event must have been emitted.
+    expect(bus2.events.some((e) => e.type === 'atlas:indexing.failed')).toBe(true);
+    // The prior snapshot (snap-atomic-base) must be untouched.
+    const baseAfterCrash = kb.listSymbolsInSnapshot('snap-atomic-base').length;
+    expect(baseAfterCrash).toBe(countBefore);
+  });
+
+  it('successful run produces the same symbol count as a non-transactional baseline', async () => {
+    const bus = new CapturingBus();
+    const result = await runAtlasIndexer(db, {
+      snapshotId: 'snap-txn-ok',
+      projectId: 'proj-1',
+      projectPath: projectRoot,
+      bus,
+    });
+    expect(result.symbols).toBeGreaterThan(0);
+    const kb = new SymbolsKB(db);
+    const rows = kb.listSymbolsInSnapshot('snap-txn-ok');
+    expect(rows.length).toBe(result.symbols);
+  });
 });
 
 // ─── concurrency tests ────────────────────────────────────────────────────────
