@@ -141,19 +141,22 @@ main {
       </nav>
       <main>
         <div id="atlas-root">
-          <!-- Static-mode fallback banner — visible when Tauri IPC is not available -->
-          <div id="atlas-static-mode-banner" class="atlas-static-banner" style="display:none;">
-            <div class="atlas-static-banner__title">Atlas requires the Tauri shell</div>
+          <!-- Bundle-load failure banner — shown only when atlas.bundle.js fails
+               to load (e.g. dashboard served without `npm run intelligence:build`).
+               Browser-mode atlas IS supported (W4c v1.49.607); the IPC client falls
+               back to POST /api/intelligence/invoke + /api/events SSE automatically. -->
+          <div id="atlas-bundle-error-banner" class="atlas-static-banner" style="display:none;">
+            <div class="atlas-static-banner__title">Atlas bundle not available</div>
             <p style="margin:0.5rem 0;">
-              The Atlas code-structure visualiser runs inside the Tauri desktop shell
-              where IPC access to the Intelligence KB is available.  Open this page from
-              within the gsd-skill-creator desktop app to enable all four panes
-              (System Map, Symbol Graph, Mission Archeology, Code View) and the
-              Cmd-K search palette.
+              The atlas browser bundle could not be loaded. Run
+              <span class="atlas-static-banner__command">npm run intelligence:build</span>
+              to produce <span class="atlas-static-banner__command">dashboard/intelligence/atlas.bundle.js</span>,
+              then reload this page.
             </p>
             <p style="margin:0.5rem 0 0;">
-              Browser-only mode will show this banner.  Symbol indexing, snapshot
-              diffing, and live graph updates all require Tauri IPC.
+              Once the bundle is built, the four panes (System Map, Symbol Graph,
+              Mission Archeology, Code View) and the Cmd-K palette load directly in
+              the browser — no Tauri shell required (W4c v1.49.607).
             </p>
           </div>
 
@@ -162,49 +165,26 @@ main {
         </div>
       </main>
     </div>
-    <!-- Atlas UI (v1.49.607 W4a) — mounts createAtlas() from the atlas index -->
+    <!-- Atlas UI (v1.49.607 W4c — browser-mode bundle).
+         Always attempts to mount; intelligenceIpc.ts dual-mode shim feature-detects
+         __TAURI__ and falls back to POST /api/intelligence/invoke + /api/events SSE
+         when running in a plain browser tab. -->
     <script type="module">
-      /**
-       * Atlas entry-point bootstrap.
-       *
-       * In the Tauri shell, the atlas bundle is compiled alongside the desktop
-       * frontend via Vite/esbuild.  In static browser mode we detect the absence
-       * of Tauri IPC and surface the fallback banner.
-       *
-       * createAtlas(host) — factory from desktop/intelligence/atlas/index.ts:
-       *   Mounts the four-pane shell (SystemMap | SymbolGraph | Archeology | CodeView)
-       *   plus the SearchPalette overlay into `host`.
-       *   Returns an AtlasShell handle with coordinator.attachHashRouting() for
-       *   URL-hash state persistence.
-       */
-      var hasTauri = typeof window.__TAURI_IPC__ !== 'undefined' ||
-                     typeof window.__TAURI__     !== 'undefined';
-
-      if (!hasTauri) {
-        var banner = document.getElementById('atlas-static-mode-banner');
-        if (banner) banner.style.display = '';
-      }
-
-      // Dynamic import — resolved by Vite/esbuild in the Tauri build pipeline.
-      // The import path is relative to the compiled bundle output location.
-      // In static-file mode this import will fail gracefully (banner already shown).
-      if (hasTauri) {
-        import('./intelligence/atlas.bundle.js')
-          .then(function (m) {
-            var host = document.getElementById('atlas-shell-host');
-            if (!host) return;
-            var atlas = m.createAtlas(host);
-            // Wire URL-hash routing so reload survives and back-button works.
-            m.attachToHashRouting(atlas.coordinator);
-          })
-          .catch(function (err) {
-            if (typeof console !== 'undefined') {
-              console.warn('[atlas] Bundle load failed — showing static-mode banner.', err);
-            }
-            var banner = document.getElementById('atlas-static-mode-banner');
-            if (banner) banner.style.display = '';
-          });
-      }
+      import('./intelligence/atlas.bundle.js')
+        .then(function (m) {
+          var host = document.getElementById('atlas-shell-host');
+          if (!host) return;
+          var atlas = m.createAtlas(host);
+          // Wire URL-hash routing so reload survives and back-button works.
+          m.attachToHashRouting(atlas.coordinator);
+        })
+        .catch(function (err) {
+          if (typeof console !== 'undefined') {
+            console.warn('[atlas] Bundle load failed — showing build-instructions banner.', err);
+          }
+          var banner = document.getElementById('atlas-bundle-error-banner');
+          if (banner) banner.style.display = '';
+        });
     </script>
   </body>
 </html>
