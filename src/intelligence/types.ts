@@ -242,3 +242,157 @@ export interface BundlePreview {
   decision_count: number;
   decisions: Decision[];
 }
+
+// ─── Code Atlas (v1.49.607 — clean-room, per ADR 0003) ───
+// Additive types for the symbol index + provenance surface introduced by
+// migration 003_atlas_symbols.sql. None of these types replace or alter
+// existing v1.49.597 types; downstream consumers compile against them
+// alongside the existing surface.
+
+export type SymbolId = string;
+export type SymbolReferenceId = string;
+export type CallEdgeId = string;
+export type TypeRelationId = string;
+export type FilesChangedId = string;
+export type MissionProvenanceId = string;
+
+export type SymbolKind =
+  | 'function'
+  | 'class'
+  | 'method'
+  | 'interface'
+  | 'type'
+  | 'enum'
+  | 'const'
+  | 'import'
+  | 'export';
+
+export type AtlasLanguage =
+  | 'ts'
+  | 'js'
+  | 'rust'
+  | 'python'
+  | 'go'
+  | 'java'
+  | 'cpp'
+  | 'bash'
+  | 'glsl';
+
+export type ResolutionKind =
+  | 'declaration'
+  | 'call'
+  | 'type_use'
+  | 'import'
+  | 'unknown';
+
+export type TypeRelationKind =
+  | 'extends'
+  | 'implements'
+  | 'uses_type'
+  | 'returns'
+  | 'param';
+
+export type FileChangeKind = 'A' | 'M' | 'D' | 'R';
+
+export interface AtlasSymbol {
+  id: SymbolId;
+  snapshot_id: SnapshotId;
+  project_id: ProjectId;
+  file_path: string;
+  kind: SymbolKind;
+  name: string;
+  qualified_name: string;
+  start_byte: number;
+  end_byte: number;
+  start_line: number;
+  end_line: number;
+  signature_hash: string | null;
+  modifiers: string[];
+  language: AtlasLanguage;
+  parent_symbol_id: SymbolId | null;
+}
+
+export interface AtlasSymbolReference {
+  id: SymbolReferenceId;
+  snapshot_id: SnapshotId;
+  file_path: string;
+  start_byte: number;
+  end_byte: number;
+  start_line: number;
+  end_line: number;
+  name: string;
+  resolved_symbol_id: SymbolId | null;
+  /** 0..1 inclusive. 0 = unresolved; 1 = certain. */
+  resolution_confidence: number;
+  resolution_kind: ResolutionKind;
+}
+
+export interface AtlasCallEdge {
+  id: CallEdgeId;
+  snapshot_id: SnapshotId;
+  caller_symbol_id: SymbolId;
+  callee_symbol_id: SymbolId;
+  call_site_byte: number;
+  call_site_line: number;
+  /** 0..1 inclusive. */
+  confidence: number;
+}
+
+export interface AtlasTypeRelation {
+  id: TypeRelationId;
+  snapshot_id: SnapshotId;
+  from_symbol_id: SymbolId;
+  to_symbol_id: SymbolId;
+  kind: TypeRelationKind;
+  /** 0..1 inclusive. */
+  confidence: number;
+}
+
+export interface AtlasFilesChanged {
+  id: FilesChangedId;
+  mission_id: string;
+  commit_sha: string;
+  file_path: string;
+  change_kind: FileChangeKind;
+  /** Non-null only when change_kind === 'R'. */
+  rename_from: string | null;
+  added_lines: number;
+  removed_lines: number;
+}
+
+export interface AtlasMissionProvenance {
+  id: MissionProvenanceId;
+  snapshot_id: SnapshotId;
+  file_path: string;
+  line_no: number;
+  mission_id: string;
+  commit_sha: string;
+  /** 0..1 inclusive. 1 = sole attribution. */
+  weight: number;
+}
+
+/**
+ * Atlas KB query surface (extends `IntelligenceKB` non-mutatively).
+ * Real implementation lands in W1 Track B (components 03/04 of the
+ * v1.49.607 mission package). UI components compile against this stub.
+ */
+export interface AtlasKB {
+  listSymbolsForFile(snapshot: SnapshotId, file_path: string): Promise<AtlasSymbol[]>;
+  getSymbol(id: SymbolId): Promise<AtlasSymbol | null>;
+  findSymbolsByQualifiedName(snapshot: SnapshotId, qn: string): Promise<AtlasSymbol[]>;
+  listCallers(symbol_id: SymbolId): Promise<AtlasCallEdge[]>;
+  listCallees(symbol_id: SymbolId): Promise<AtlasCallEdge[]>;
+  listReferencesForSymbol(symbol_id: SymbolId): Promise<AtlasSymbolReference[]>;
+  listTypeRelationsFrom(symbol_id: SymbolId): Promise<AtlasTypeRelation[]>;
+  listTypeRelationsTo(symbol_id: SymbolId): Promise<AtlasTypeRelation[]>;
+  listFilesChangedByMission(mission_id: string): Promise<AtlasFilesChanged[]>;
+  listMissionsForFile(
+    snapshot: SnapshotId,
+    file_path: string,
+  ): Promise<{ mission_id: string; weight: number; line_count: number }[]>;
+  listProvenanceForLine(
+    snapshot: SnapshotId,
+    file_path: string,
+    line_no: number,
+  ): Promise<AtlasMissionProvenance[]>;
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gsd-skill-creator.local/intelligence/atlas-mission-provenance.schema.json",
+  "title": "AtlasMissionProvenance",
+  "description": "Per-line mission attribution. Round-trips with the AtlasMissionProvenance TS interface and the mission_provenance table in migration 003_atlas_symbols.sql. The cornerstone of the GSD-specific archeology view: every (file, line) pair carries one or more (mission, weight) attributions.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "snapshot_id",
+    "file_path",
+    "line_no",
+    "mission_id",
+    "commit_sha",
+    "weight"
+  ],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "snapshot_id": { "type": "string", "minLength": 1 },
+    "file_path": { "type": "string", "minLength": 1 },
+    "line_no": { "type": "integer", "minimum": 1 },
+    "mission_id": { "type": "string", "minLength": 1 },
+    "commit_sha": { "type": "string", "minLength": 7 },
+    "weight": { "type": "number", "minimum": 0, "maximum": 1 }
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gsd-skill-creator.local/intelligence/atlas-symbol.schema.json",
+  "title": "AtlasSymbol",
+  "description": "Code Atlas symbol record. Round-trips with the AtlasSymbol TS interface in src/intelligence/types.ts and the symbols table in migration 003_atlas_symbols.sql. Introduced by v1.49.607 per ADR 0003 (atlas clean-room policy).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "snapshot_id",
+    "project_id",
+    "file_path",
+    "kind",
+    "name",
+    "qualified_name",
+    "start_byte",
+    "end_byte",
+    "start_line",
+    "end_line",
+    "modifiers",
+    "language"
+  ],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "snapshot_id": { "type": "string", "minLength": 1 },
+    "project_id": { "type": "string", "minLength": 1 },
+    "file_path": { "type": "string", "minLength": 1 },
+    "kind": {
+      "type": "string",
+      "enum": ["function", "class", "method", "interface", "type", "enum", "const", "import", "export"]
+    },
+    "name": { "type": "string", "minLength": 1 },
+    "qualified_name": { "type": "string", "minLength": 1 },
+    "start_byte": { "type": "integer", "minimum": 0 },
+    "end_byte": { "type": "integer", "minimum": 0 },
+    "start_line": { "type": "integer", "minimum": 1 },
+    "end_line": { "type": "integer", "minimum": 1 },
+    "signature_hash": {
+      "anyOf": [{ "type": "string", "minLength": 1 }, { "type": "null" }]
+    },
+    "modifiers": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "language": {
+      "type": "string",
+      "enum": ["ts", "js", "rust", "python", "go", "java", "cpp", "bash", "glsl"]
+    },
+    "parent_symbol_id": {
+      "anyOf": [{ "type": "string", "minLength": 1 }, { "type": "null" }]
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gsd-skill-creator.local/intelligence/atlas-call-edge.schema.json",
+  "title": "AtlasCallEdge",
+  "description": "Caller→callee edge. Round-trips with the AtlasCallEdge TS interface and the calls table in migration 003_atlas_symbols.sql.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "snapshot_id",
+    "caller_symbol_id",
+    "callee_symbol_id",
+    "call_site_byte",
+    "call_site_line",
+    "confidence"
+  ],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "snapshot_id": { "type": "string", "minLength": 1 },
+    "caller_symbol_id": { "type": "string", "minLength": 1 },
+    "callee_symbol_id": { "type": "string", "minLength": 1 },
+    "call_site_byte": { "type": "integer", "minimum": 0 },
+    "call_site_line": { "type": "integer", "minimum": 1 },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+  }
+}
