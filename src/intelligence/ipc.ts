@@ -442,6 +442,13 @@ export const intelligenceIpc = {
     return invoke<void>('atlas_request_index_snapshot', { snapshotId });
   },
 
+  /** Invalidate the Rust-side connection cache after atlas:indexing.completed. */
+  invalidateCache(projectId?: ProjectId): Promise<void> {
+    return invoke<void>('atlas_invalidate_cache', {
+      projectId: projectId ?? null,
+    });
+  },
+
   // ── Event subscriptions ──────────────────────────────────────────────────────
 
   on: {

@@ -213,6 +213,7 @@ pub fn run() {
             crate::intelligence::atlas::atlas_list_missions_for_file,
             crate::intelligence::atlas::atlas_list_provenance_for_line,
             crate::intelligence::atlas::atlas_request_index_snapshot,
+            crate::intelligence::atlas::atlas_invalidate_cache,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

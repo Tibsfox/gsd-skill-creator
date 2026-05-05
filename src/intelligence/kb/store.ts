@@ -109,6 +109,9 @@ export class KBStore implements IntelligenceKB {
   // Phase 827 / C01 — optional event bus; C02 wires singleton at serve-dashboard startup.
   // When undefined, publish calls no-op (safe for tests that don't care about events).
   private _eventBus?: EventBus<IntelligenceEvent>;
+  // Unsubscribe function returned when we subscribed to atlas:indexing.completed.
+  // Set in setEventBus(); cleared in close().
+  private _unsubIndexing?: () => void;
 
   constructor(opts?: KBStoreOptions) {
     this.registryPath =
@@ -125,9 +128,28 @@ export class KBStore implements IntelligenceKB {
   /**
    * Wire the optional event bus (Phase 827 / C01).
    * Called by C02 at serve-dashboard startup; no-op in tests that don't need events.
+   *
+   * G2: also subscribes to atlas:indexing.completed to auto-invalidate the atlas
+   * KB cache for the indexed project, then publishes atlas:cache.invalidated for
+   * SSE telemetry. Any previous subscription is torn down before the new one is
+   * installed (safe to call multiple times, e.g. in tests).
    */
   setEventBus(bus: EventBus<IntelligenceEvent>): void {
+    this._unsubIndexing?.();
     this._eventBus = bus;
+    this._unsubIndexing = bus.subscribe((event) => {
+      if (event.type !== 'atlas:indexing.completed') return;
+      const { project_id } = event.payload;
+      this.clearAtlasKBCache(project_id);
+      try {
+        bus.publish({
+          type: 'atlas:cache.invalidated',
+          payload: { project_id, at: new Date().toISOString() },
+        });
+      } catch {
+        // Telemetry publish failure must never propagate.
+      }
+    });
   }
 
   // ─── Lifecycle ────────────────────────────────────────────────────────
@@ -197,6 +219,8 @@ export class KBStore implements IntelligenceKB {
   }
 
   close(): void {
+    this._unsubIndexing?.();
+    this._unsubIndexing = undefined;
     for (const db of this._projectDBs.values()) {
       db.close();
     }

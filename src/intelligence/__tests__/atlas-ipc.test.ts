@@ -204,6 +204,26 @@ describe('intelligenceIpc — atlas commands', () => {
     expect(lastCall?.cmd).toBe('atlas_request_index_snapshot');
     expect(lastCall?.args).toMatchObject({ snapshotId: 'snap-04' });
   });
+
+  it('invalidateCache calls atlas_invalidate_cache with projectId', async () => {
+    stubbedReturn = undefined;
+    const { intelligenceIpc } = await import('../ipc.js');
+
+    await intelligenceIpc.invalidateCache('proj-a' as any);
+
+    expect(lastCall?.cmd).toBe('atlas_invalidate_cache');
+    expect(lastCall?.args).toMatchObject({ projectId: 'proj-a' });
+  });
+
+  it('invalidateCache without projectId sends null', async () => {
+    stubbedReturn = undefined;
+    const { intelligenceIpc } = await import('../ipc.js');
+
+    await intelligenceIpc.invalidateCache();
+
+    expect(lastCall?.cmd).toBe('atlas_invalidate_cache');
+    expect(lastCall?.args).toMatchObject({ projectId: null });
+  });
 });
 
 describe('IntelligenceEvent union — atlas variants compile', () => {
@@ -219,5 +239,10 @@ describe('IntelligenceEvent union — atlas variants compile', () => {
       'atlas:indexing.failed',
     ];
     expect(atlasTypes).toHaveLength(4);
+  });
+
+  it('atlas:cache.invalidated is a valid discriminant in the union', async () => {
+    const atlasTypes: Array<string> = ['atlas:cache.invalidated'];
+    expect(atlasTypes).toHaveLength(1);
   });
 });

@@ -28,7 +28,8 @@ import type {
 
 /**
  * Discriminated union — the 5 legacy event types the v1.49.597 client listener
- * already filters on, plus the 4 atlas indexing SSE events added v1.49.607.
+ * already filters on, plus the 4 atlas indexing SSE events added v1.49.607,
+ * plus the cache-invalidation telemetry event added v1.49.607 G2.
  */
 export type IntelligenceEvent =
   // ── v1.49.597 original 5 ────────────────────────────────────────────────────
@@ -41,7 +42,9 @@ export type IntelligenceEvent =
   | { type: 'atlas:indexing.started'; payload: AtlasIndexingStartedPayload }
   | { type: 'atlas:indexing.progress'; payload: AtlasIndexingProgressPayload }
   | { type: 'atlas:indexing.completed'; payload: AtlasIndexingCompletedPayload }
-  | { type: 'atlas:indexing.failed'; payload: AtlasIndexingFailedPayload };
+  | { type: 'atlas:indexing.failed'; payload: AtlasIndexingFailedPayload }
+  // ── v1.49.607 G2 cache-invalidation telemetry ────────────────────────────────
+  | { type: 'atlas:cache.invalidated'; payload: AtlasCacheInvalidatedPayload };
 
 export type IntelligenceEventType = IntelligenceEvent['type'];
 
@@ -105,6 +108,8 @@ export interface AtlasIndexingProgressPayload {
 
 export interface AtlasIndexingCompletedPayload {
   snapshot_id: string;
+  /** Project that was indexed. Added v1.49.607 G2 for targeted cache invalidation. */
+  project_id: ProjectId;
   symbols_count: number;
   calls_count: number;
   files_count: number;
@@ -113,4 +118,10 @@ export interface AtlasIndexingCompletedPayload {
 export interface AtlasIndexingFailedPayload {
   snapshot_id: string;
   error: string;
+}
+
+/** Emitted by KBStore after it invalidates its atlas KB cache for a project. */
+export interface AtlasCacheInvalidatedPayload {
+  project_id: ProjectId;
+  at: string; // ISO-8601
 }

@@ -428,9 +428,17 @@ export function createAtlasShell(opts: AtlasShellOptions = {}): AtlasShell {
       document.addEventListener('keydown', onKeyDown);
       unregisterFns.push(() => document.removeEventListener('keydown', onKeyDown));
 
-      // Invalidate atlas-state cache on indexing.completed
-      intelligenceIpc.on.atlasIndexingCompleted(() => {
+      // Invalidate atlas-state cache on indexing.completed and trigger
+      // Rust-side connection cache invalidation (G2 event-driven wiring).
+      intelligenceIpc.on.atlasIndexingCompleted((e) => {
         invalidateAtlasStateCache();
+        const projectId = e?.payload?.project_id as string | undefined;
+        const invalidate = (intelligenceIpc as { invalidateCache?: (id?: string) => Promise<unknown> }).invalidateCache;
+        if (typeof invalidate === 'function') {
+          invalidate(projectId).catch(() => {
+            // Rust-side invalidation is best-effort; IPC unavailable in tests.
+          });
+        }
       }).then((unsub) => {
         unregisterFns.push(unsub);
       }).catch(() => { /* IPC unavailable in tests */ });
