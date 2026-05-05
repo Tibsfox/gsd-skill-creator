@@ -52,14 +52,20 @@ function hasFlag(name) {
 const projectId = getFlag('project');
 
 // Optional
-const snapshotFlag = getFlag('snapshot');
-const pathFlag     = getFlag('path');
-const languagesFlag = getFlag('languages');
-const registryFlag = getFlag('registry');
-const dbFlag       = getFlag('db');
-const modeJson     = hasFlag('json');
-const flagReplace  = hasFlag('replace');
-const flagProv     = hasFlag('provenance');
+const snapshotFlag   = getFlag('snapshot');
+const pathFlag       = getFlag('path');
+const languagesFlag  = getFlag('languages');
+const registryFlag   = getFlag('registry');
+const dbFlag         = getFlag('db');
+const modeJson       = hasFlag('json');
+const flagReplace    = hasFlag('replace');
+const flagProv       = hasFlag('provenance');
+// --stream-events (H1): emit one JSONL envelope per event line on stdout.
+// When set, --json output is suppressed in favour of per-event JSONL lines.
+// Backward-compat: callers that do NOT pass --stream-events see exactly the
+// same behaviour as before (single JSON summary line on success, or human
+// text).
+const flagStreamEvents = hasFlag('stream-events');
 
 // Validate
 if (!projectId) {
@@ -131,6 +137,22 @@ async function importTs(relFromSrc) {
   // Fall back to TS source (vitest / tsx environment)
   const srcPath = join(REPO_ROOT, 'src', relFromSrc);
   return import(pathToFileURL(srcPath).href);
+}
+
+// ── stream-events helpers (H1) ────────────────────────────────────────────────
+
+/**
+ * Emit a JSONL event envelope on stdout.
+ *
+ * Format: `{"event":"atlas:indexing.<kind>","payload":{...}}\n`
+ *
+ * Only called when `--stream-events` is active. Callers that pass only `--json`
+ * (or neither flag) never see this output.
+ */
+function emitStreamEvent(eventName, payload) {
+  process.stdout.write(
+    JSON.stringify({ event: eventName, payload }) + '\n',
+  );
 }
 
 // ── main ──────────────────────────────────────────────────────────────────────
@@ -240,7 +262,10 @@ async function main() {
 
   // ── run indexer ───────────────────────────────────────────────────────────
 
-  if (!modeJson) {
+  // Emit started event before touching the DB so the UI can show a spinner.
+  if (flagStreamEvents) {
+    emitStreamEvent('atlas:indexing.started', { snapshot_id: snapshotId });
+  } else if (!modeJson) {
     process.stdout.write(
       `atlas-index: indexing project "${projectId}"\n` +
       `  snapshot: ${snapshotId}\n` +
@@ -261,45 +286,61 @@ async function main() {
       languages: languages ?? undefined,
       replace: flagReplace,
       runProvenance: flagProv,
-      onProgress: modeJson
-        ? undefined
-        : ({ filesDone, filesTotal }) => {
-            process.stdout.write(`\r  progress: ${filesDone}/${filesTotal} files`);
-          },
+      onProgress: flagStreamEvents
+        ? ({ filesDone, filesTotal }) => {
+            emitStreamEvent('atlas:indexing.progress', {
+              snapshot_id: snapshotId,
+              files_done:  filesDone,
+              files_total: filesTotal,
+            });
+          }
+        : modeJson
+          ? undefined
+          : ({ filesDone, filesTotal }) => {
+              process.stdout.write(`\r  progress: ${filesDone}/${filesTotal} files`);
+            },
     });
   } catch (err) {
-    if (!modeJson) process.stdout.write('\n');
     const msg = `atlas-index: indexer failed: ${err.message}`;
-    if (modeJson) {
+    if (flagStreamEvents) {
+      emitStreamEvent('atlas:indexing.failed', { snapshot_id: snapshotId, error: msg });
+    } else if (modeJson) {
       process.stdout.write(JSON.stringify({ ok: false, error: msg }) + '\n');
     } else {
+      process.stdout.write('\n');
       process.stderr.write(msg + '\n');
     }
     process.exit(1);
   }
 
-  if (!modeJson) process.stdout.write('\n');
-
   const totals = {
-    files:          result.files,
-    symbols:        result.symbols,
-    calls:          result.calls,
-    references:     result.references,
+    files:           result.files,
+    symbols:         result.symbols,
+    calls:           result.calls,
+    references:      result.references,
     provenanceLines: result.provenanceLines,
-    durationMs:     result.durationMs,
+    durationMs:      result.durationMs,
   };
 
-  if (modeJson) {
+  if (flagStreamEvents) {
+    emitStreamEvent('atlas:indexing.completed', {
+      snapshot_id:   result.snapshotId ?? snapshotId,
+      project_id:    projectId,
+      symbols_count: totals.symbols,
+      calls_count:   totals.calls,
+      files_count:   totals.files,
+    });
+  } else if (modeJson) {
     process.stdout.write(JSON.stringify({ ok: true, snapshotId: result.snapshotId, totals }) + '\n');
   } else {
     process.stdout.write(
-      'atlas-index: done\n' +
-      `  files:     ${totals.files}\n` +
-      `  symbols:   ${totals.symbols}\n` +
-      `  calls:     ${totals.calls}\n` +
-      `  refs:      ${totals.references}\n` +
+      '\natlas-index: done\n' +
+      `  files:      ${totals.files}\n` +
+      `  symbols:    ${totals.symbols}\n` +
+      `  calls:      ${totals.calls}\n` +
+      `  refs:       ${totals.references}\n` +
       `  provenance: ${totals.provenanceLines}\n` +
-      `  duration:  ${totals.durationMs}ms\n`,
+      `  duration:   ${totals.durationMs}ms\n`,
     );
   }
 

@@ -194,6 +194,21 @@ pub trait AtlasKbDelegate: Send + Sync + 'static {
     /// Called after `atlas:indexing.completed` to pick up freshly-written rows.
     /// Default no-op; only the SQLite delegate overrides this.
     fn invalidate_connection_cache(&self) {}
+
+    /// Invalidate only the cache entry for a single project.
+    ///
+    /// Returns `(evicted_count, scope)` where scope is `"project"` when the
+    /// eviction was targeted, or `"all"` when the implementation fell back to
+    /// a full clear (e.g. project not found in registry).
+    ///
+    /// Default implementation falls through to a full clear.
+    fn invalidate_connection_cache_for_project(
+        &self,
+        _project_id: &str,
+    ) -> (usize, &'static str) {
+        self.invalidate_connection_cache();
+        (0, "all")
+    }
 }
 
 // ─── Stub delegate ───────────────────────────────────────────────────────────
@@ -361,6 +376,73 @@ impl SqliteAtlasKbDelegate {
     pub fn clear_connection_cache(&self) {
         if let Ok(mut cache) = self.connections.lock() {
             cache.clear();
+        }
+    }
+
+    /// Look up the intelligence.db path for `project_id` by querying the
+    /// registry. Mirrors `real_kb::RealKbDelegate::lookup_project_path`.
+    ///
+    /// Returns `None` when:
+    ///   * The delegate was constructed with `with_explicit_db_path` (no registry).
+    ///   * The registry DB does not exist yet.
+    ///   * The project_id is not present in the registry's `projects` table.
+    pub fn path_for_project(&self, project_id: &str) -> Option<PathBuf> {
+        let registry = self.registry_path.as_ref()?;
+        if !registry.exists() {
+            return None;
+        }
+        let conn = Connection::open(registry).ok()?;
+        let path: Option<String> = conn
+            .query_row(
+                "SELECT path FROM projects WHERE id = ?",
+                [project_id],
+                |row| row.get(0),
+            )
+            .optional()
+            .ok()
+            .flatten();
+        path.map(|p| {
+            Path::new(&p)
+                .join(".gsd")
+                .join("intelligence")
+                .join("intelligence.db")
+        })
+    }
+
+    /// Evict only the cache entry for the DB path that belongs to `project_id`.
+    ///
+    /// Returns the number of entries evicted (0 or 1). Falls back to a full
+    /// clear with a warning log when the project is not found in the registry;
+    /// callers can detect this via the returned `(count, scope)` tuple.
+    ///
+    /// Tuple: `(evicted_count, scope)` where scope is `"project"` on success
+    /// or `"all"` when the fallback full-clear fires.
+    pub fn clear_connection_cache_for_project(
+        &self,
+        project_id: &str,
+    ) -> (usize, &'static str) {
+        match self.path_for_project(project_id) {
+            Some(db_path) => {
+                let evicted = if let Ok(mut cache) = self.connections.lock() {
+                    if cache.remove(&db_path).is_some() { 1 } else { 0 }
+                } else {
+                    0
+                };
+                (evicted, "project")
+            }
+            None => {
+                // Project not found in registry (or no registry); log a warning
+                // and fall back to full-clear so callers are not left with stale
+                // connections from an unknown project.
+                eprintln!(
+                    "[atlas] warning: atlas_invalidate_cache: project '{}' not in registry — falling back to full clear",
+                    project_id,
+                );
+                self.clear_connection_cache();
+                // Report the number that were actually evicted via full-clear.
+                // We can't know the count after the fact, so report 0 (conservative).
+                (0, "all")
+            }
         }
     }
 
@@ -915,6 +997,13 @@ impl AtlasKbDelegate for SqliteAtlasKbDelegate {
     fn invalidate_connection_cache(&self) {
         self.clear_connection_cache();
     }
+
+    fn invalidate_connection_cache_for_project(
+        &self,
+        project_id: &str,
+    ) -> (usize, &'static str) {
+        self.clear_connection_cache_for_project(project_id)
+    }
 }
 
 // ─── Atlas state managed by Tauri ────────────────────────────────────────────
@@ -1120,44 +1209,91 @@ pub async fn atlas_list_provenance_for_line(
         .list_provenance_for_line(snapshot_id, file_path, line_no)
 }
 
-/// Fire-and-forget: kicks off indexer asynchronously.
-/// The indexer emits SSE events:
-///   atlas:indexing.started  { snapshot_id }
-///   atlas:indexing.progress { snapshot_id, files_done, files_total }
-///   atlas:indexing.completed { snapshot_id, symbols_count, calls_count, files_count }
-///   atlas:indexing.failed   { snapshot_id, error }
+/// Fire-and-forget: kicks off indexer asynchronously via the Node.js sidecar.
+///
+/// Dispatches `tools/atlas-index.mjs --stream-events --json --snapshot=<id>`
+/// as a child process via `super::atlas_sidecar::spawn_indexer_fire_and_forget`.
+/// Returns `Ok(())` immediately; indexer progress and completion are signalled
+/// via Tauri events emitted from the detached task:
+///   atlas:indexing.started   { snapshot_id }
+///   atlas:indexing.progress  { snapshot_id, files_done, files_total }
+///   atlas:indexing.completed { snapshot_id, project_id, symbols_count, calls_count, files_count }
+///   atlas:indexing.failed    { snapshot_id, error }
+///
+/// Subprocess spawning is isolated to `super::atlas_sidecar` (H1) — S2
+/// invariant ("no Command::new in atlas.rs") remains intact.
 #[tauri::command]
 pub async fn atlas_request_index_snapshot(
-    state: State<'_, Mutex<AtlasState>>,
+    app: tauri::AppHandle,
+    _state: State<'_, Mutex<AtlasState>>,
     snapshot_id: String,
+    project_id: Option<String>,
 ) -> Result<(), String> {
-    state
-        .lock()
-        .map_err(|e| e.to_string())?
-        .kb
-        .request_index_snapshot(snapshot_id)
+    super::atlas_sidecar::spawn_indexer_fire_and_forget(
+        app,
+        super::atlas_sidecar::IndexerArgs {
+            snapshot_id,
+            project_id,
+            project_path: None,
+            db_override: None,
+            registry_override: None,
+        },
+    )
 }
 
-/// Invalidate the Rust-side connection cache after an atlas:indexing.completed
-/// event. Called by the webview's atlas:indexing.completed listener so the next
-/// Tauri atlas command re-opens the freshly-written DB.
+/// Response payload for `atlas_invalidate_cache`.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub struct InvalidateCacheResult {
+    /// `"project"` when a targeted per-project eviction ran;
+    /// `"all"` when a full-cache eviction ran (either because no
+    /// `project_id` was supplied, or because the project was not in the
+    /// registry and the implementation fell back to full-clear).
+    pub scope: String,
+    /// Number of connection cache entries actually removed.
+    pub evicted_count: usize,
+}
+
+/// Invalidate the Rust-side connection cache after an `atlas:indexing.completed`
+/// event. Called by the webview's `atlas:indexing.completed` listener so the
+/// next Tauri atlas command re-opens the freshly-written DB.
 ///
-/// `project_id` is accepted for IPC symmetry with the TS side but is not used
-/// for filtering: the connection cache is keyed by DB path (not project ID),
-/// and resolving a path-to-project mapping at invalidation time would require
-/// an extra registry query. A full cache eviction is safe — connections are
-/// re-opened lazily on the next query and the per-query cost is one file-open.
+/// Behaviour:
+///  * If `project_id` is `Some` and non-empty, attempt a targeted eviction via
+///    the registry lookup (path_for_project). If the project is not found,
+///    falls back to full-clear and logs a warning.
+///  * If `project_id` is `None` or an empty string, evicts everything (the
+///    original G2 behaviour — safe, fully backward-compatible).
+///
+/// Returns `{ scope: "project" | "all", evicted_count: usize }` so callers
+/// can verify what actually happened.
 #[tauri::command]
 pub async fn atlas_invalidate_cache(
     state: State<'_, Mutex<AtlasState>>,
-    #[allow(unused_variables)]
     project_id: Option<String>,
-) -> Result<(), String> {
-    state
-        .lock()
-        .map_err(|e| e.to_string())?
-        .clear_connection_cache();
-    Ok(())
+) -> Result<InvalidateCacheResult, String> {
+    let locked = state.lock().map_err(|e| e.to_string())?;
+
+    let use_project = project_id
+        .as_deref()
+        .map(|s| !s.is_empty())
+        .unwrap_or(false);
+
+    let (evicted_count, scope_str) = if use_project {
+        // SAFETY: use_project = true means project_id is Some and non-empty.
+        let pid = project_id.as_deref().unwrap();
+        locked.kb.invalidate_connection_cache_for_project(pid)
+    } else {
+        locked.kb.invalidate_connection_cache();
+        // Full clear: evicted_count is 0 (we do not count pre-clear entries
+        // because the trait's full-clear path does not expose a count).
+        (0, "all")
+    };
+
+    Ok(InvalidateCacheResult {
+        scope: scope_str.to_string(),
+        evicted_count,
+    })
 }
 
 // ─── Tests ────────────────────────────────────────────────────────────────────
@@ -1258,13 +1394,18 @@ mod tests {
         assert!(err.contains("stub"));
     }
 
-    // S2 invariant: zero subprocess spawning in this file.
+    // S2 invariant: zero subprocess spawning in THIS file.
+    // The H1 track (v1.49.607) wires subprocess dispatch into
+    // `super::atlas_sidecar` so atlas.rs remains spawn-free.
+    // `atlas_request_index_snapshot` now calls into atlas_sidecar rather than
+    // spawning directly, preserving this invariant.
     #[test]
     fn s2_no_subprocess_spawn_invariant_documented() {
         // Static analysis: this file has zero occurrences of:
         //   std::process::Command, tokio::process::Command, Command::new
-        // Absence is the invariant; test documents it by passing.
-        assert!(true, "S2 invariant: no subprocess spawning in intelligence/atlas.rs");
+        // Subprocess spawning lives in intelligence/atlas_sidecar.rs (H1).
+        // Test documents the invariant by passing.
+        assert!(true, "S2 invariant: subprocess spawning delegated to atlas_sidecar.rs, not atlas.rs");
     }
 
     #[test]
@@ -1639,9 +1780,11 @@ mod tests {
 
     #[test]
     fn sqlite_delegate_request_index_returns_descriptive_error() {
-        // Indexer dispatch is not in the Rust delegate's surface; verify the
-        // error message points to the canonical TS owner instead of being
-        // silently dropped.
+        // The TRAIT's `request_index_snapshot` still returns a descriptive
+        // error (the delegate has no in-process indexer). This is correct:
+        // the H1 Tauri command (`atlas_request_index_snapshot`) bypasses the
+        // trait entirely and calls `atlas_sidecar::spawn_indexer_fire_and_forget`
+        // directly, so the trait method is now a fallback/test surface.
         let tmp = TempDir::new().unwrap();
         let db = create_atlas_db(&tmp);
         let kb = SqliteAtlasKbDelegate::with_explicit_db_path(db);
@@ -1649,6 +1792,46 @@ mod tests {
             .request_index_snapshot("snap-01".to_string())
             .unwrap_err();
         assert!(err.contains("atlas-indexer") || err.contains("TS server"));
+    }
+
+    // ── H1 sidecar dispatch unit tests ───────────────────────────────────────
+
+    #[test]
+    fn sidecar_indexer_args_debug_format() {
+        // Verify IndexerArgs implements Debug (used in diagnostic logs).
+        let a = super::super::atlas_sidecar::IndexerArgs {
+            snapshot_id: "snap-01".to_string(),
+            project_id: Some("gsd-skill-creator".to_string()),
+            project_path: None,
+            db_override: None,
+            registry_override: None,
+        };
+        let dbg = format!("{a:?}");
+        assert!(dbg.contains("snap-01"));
+    }
+
+    #[test]
+    fn sidecar_bad_project_id_flag_construction() {
+        // Ensure an empty project_id does NOT panic during flag building.
+        // The CLI will reject it with exit 2; our code just passes through.
+        let args = super::super::atlas_sidecar::IndexerArgs {
+            snapshot_id: "snap-xx".to_string(),
+            project_id: Some(String::new()),
+            project_path: None,
+            db_override: None,
+            registry_override: None,
+        };
+        let flag = args.project_id.as_ref().map(|p| format!("--project={p}"));
+        assert_eq!(flag.as_deref(), Some("--project="));
+    }
+
+    #[test]
+    fn sidecar_repo_root_env_override() {
+        // The env var allows tests to redirect the sidecar to a fixture.
+        std::env::set_var("GSD_REPO_ROOT", "/tmp/test-repo-root");
+        let r = super::super::atlas_sidecar::repo_root();
+        std::env::remove_var("GSD_REPO_ROOT");
+        assert_eq!(r.to_str().unwrap(), "/tmp/test-repo-root");
     }
 
     #[test]
@@ -1810,5 +1993,306 @@ mod tests {
         let _project_id: Option<String> = None;
         kb.invalidate_connection_cache();
         assert_eq!(kb.cached_connection_count(), 0, "full clear with project_id=None");
+    }
+
+    // ─── H3-R3 multi-thread connection-pool test ──────────────────────────
+
+    /// Wrap an Arc<SqliteAtlasKbDelegate>, spawn 4 worker threads each calling
+    /// list_symbols_for_file in a tight loop (10 iterations). Verify:
+    ///  (a) no deadlock — all threads join,
+    ///  (b) no data race — row count matches seeded rows on every call,
+    ///  (c) no Connection borrow-error — all Results are Ok.
+    ///
+    /// Arc<SqliteAtlasKbDelegate> is safe to share across threads because the
+    /// delegate's only interior-mutable state is Mutex<HashMap> + Mutex<Connection>,
+    /// both of which are Sync.
+    #[test]
+    fn multi_thread_list_symbols_no_deadlock_no_data_race() {
+        use std::time::{Duration, Instant};
+
+        let tmp = TempDir::new().unwrap();
+        let db = create_atlas_db(&tmp);
+        seed_minimal_atlas_rows(&db);
+
+        // Wrap in Arc so all threads share ownership without cloning.
+        let delegate = Arc::new(SqliteAtlasKbDelegate::with_explicit_db_path(db));
+
+        const THREADS: usize = 4;
+        const ITERS: usize = 10;
+
+        let mut handles = Vec::with_capacity(THREADS);
+        let started = Instant::now();
+
+        for thread_idx in 0..THREADS {
+            let kb = Arc::clone(&delegate);
+            let handle = std::thread::spawn(move || {
+                let mut errors: Vec<String> = Vec::new();
+                for iter in 0..ITERS {
+                    match kb.list_symbols_for_file(
+                        "snap-01".to_string(),
+                        "src/foo.ts".to_string(),
+                    ) {
+                        Ok(rows) => {
+                            // Seeded DB has exactly 1 symbol in src/foo.ts.
+                            if rows.len() != 1 {
+                                errors.push(format!(
+                                    "thread={thread_idx} iter={iter}: expected 1 row, got {}",
+                                    rows.len()
+                                ));
+                            }
+                        }
+                        Err(e) => {
+                            errors.push(format!("thread={thread_idx} iter={iter}: Err({e})"));
+                        }
+                    }
+                }
+                errors
+            });
+            handles.push(handle);
+        }
+
+        // Join all threads; panic propagated via expect().
+        let mut all_errors: Vec<String> = Vec::new();
+        for handle in handles {
+            let thread_errors = handle.join().expect("worker thread panicked");
+            all_errors.extend(thread_errors);
+        }
+
+        let elapsed = started.elapsed();
+        assert!(
+            elapsed < Duration::from_secs(5),
+            "4x10 queries should complete well under 5s; took {elapsed:?}"
+        );
+        assert!(
+            all_errors.is_empty(),
+            "unexpected errors from worker threads:\n{}",
+            all_errors.join("\n")
+        );
+    }
+
+    // ─── H2 per-project invalidation tests ────────────────────────────────
+
+    fn create_atlas_registry_with_project(
+        registry_path: &PathBuf,
+        project_id: &str,
+        project_path: &Path,
+    ) -> PathBuf {
+        let conn = Connection::open(registry_path).unwrap();
+        conn.execute_batch(
+            "CREATE TABLE IF NOT EXISTS projects (
+                id TEXT PRIMARY KEY, name TEXT NOT NULL, path TEXT NOT NULL,
+                branch TEXT, kind TEXT NOT NULL, priority TEXT NOT NULL,
+                last_activity_at TEXT NOT NULL, last_snapshot_id TEXT);",
+        )
+        .unwrap();
+        conn.execute(
+            "INSERT INTO projects (id, name, path, branch, kind, priority, \
+             last_activity_at, last_snapshot_id) \
+             VALUES (?, ?, ?, 'dev', 'code', 'med', '2026-05-05T00:00:00Z', NULL)",
+            params![project_id, "Test Project", project_path.to_string_lossy().to_string()],
+        )
+        .unwrap();
+        project_path.join(".gsd").join("intelligence").join("intelligence.db")
+    }
+
+    fn create_atlas_db_at(db_path: &PathBuf) {
+        let conn = Connection::open(db_path).unwrap();
+        conn.execute_batch(
+            "CREATE TABLE symbols (id TEXT PRIMARY KEY, snapshot_id TEXT NOT NULL,
+                project_id TEXT NOT NULL, file_path TEXT NOT NULL, kind TEXT NOT NULL,
+                name TEXT NOT NULL, qualified_name TEXT NOT NULL,
+                start_byte INTEGER NOT NULL, end_byte INTEGER NOT NULL,
+                start_line INTEGER NOT NULL, end_line INTEGER NOT NULL,
+                signature_hash TEXT, modifiers_json TEXT NOT NULL DEFAULT '[]',
+                language TEXT NOT NULL, parent_symbol_id TEXT);
+             CREATE TABLE symbol_references (id TEXT PRIMARY KEY,
+                snapshot_id TEXT NOT NULL, file_path TEXT NOT NULL,
+                start_byte INTEGER NOT NULL, end_byte INTEGER NOT NULL,
+                start_line INTEGER NOT NULL, end_line INTEGER NOT NULL,
+                name TEXT NOT NULL, resolved_symbol_id TEXT,
+                resolution_confidence REAL NOT NULL DEFAULT 0.0, resolution_kind TEXT);
+             CREATE TABLE calls (id TEXT PRIMARY KEY, snapshot_id TEXT NOT NULL,
+                caller_symbol_id TEXT NOT NULL, callee_symbol_id TEXT NOT NULL,
+                call_site_byte INTEGER NOT NULL, call_site_line INTEGER NOT NULL,
+                confidence REAL NOT NULL DEFAULT 1.0);
+             CREATE TABLE type_relations (id TEXT PRIMARY KEY, snapshot_id TEXT NOT NULL,
+                from_symbol_id TEXT NOT NULL, to_symbol_id TEXT NOT NULL,
+                kind TEXT NOT NULL, confidence REAL NOT NULL DEFAULT 1.0);
+             CREATE TABLE files_changed (id TEXT PRIMARY KEY, mission_id TEXT NOT NULL,
+                commit_sha TEXT NOT NULL, file_path TEXT NOT NULL,
+                change_kind TEXT NOT NULL, rename_from TEXT,
+                added_lines INTEGER NOT NULL DEFAULT 0,
+                removed_lines INTEGER NOT NULL DEFAULT 0);
+             CREATE TABLE mission_provenance (id TEXT PRIMARY KEY,
+                snapshot_id TEXT NOT NULL, file_path TEXT NOT NULL,
+                line_no INTEGER NOT NULL, mission_id TEXT NOT NULL,
+                commit_sha TEXT NOT NULL, weight REAL NOT NULL DEFAULT 1.0);",
+        )
+        .unwrap();
+    }
+
+    #[test]
+    fn per_project_clear_with_valid_project_id_evicts_only_that_path() {
+        let tmp = TempDir::new().unwrap();
+        let proj_a_root = tmp.path().join("proj-a");
+        let proj_b_root = tmp.path().join("proj-b");
+        std::fs::create_dir_all(&proj_a_root).unwrap();
+        std::fs::create_dir_all(&proj_b_root).unwrap();
+
+        let registry_path = tmp.path().join("registry.db");
+        let db_a_path =
+            create_atlas_registry_with_project(&registry_path, "proj-a", &proj_a_root);
+        {
+            let conn = Connection::open(&registry_path).unwrap();
+            conn.execute(
+                "INSERT INTO projects (id, name, path, branch, kind, priority, \
+                 last_activity_at, last_snapshot_id) \
+                 VALUES (?, ?, ?, 'dev', 'code', 'med', '2026-05-05T00:00:00Z', NULL)",
+                params!["proj-b", "Project B", proj_b_root.to_string_lossy().to_string()],
+            )
+            .unwrap();
+        }
+        let db_b_path: PathBuf =
+            proj_b_root.join(".gsd").join("intelligence").join("intelligence.db");
+
+        std::fs::create_dir_all(db_a_path.parent().unwrap()).unwrap();
+        std::fs::create_dir_all(db_b_path.parent().unwrap()).unwrap();
+        create_atlas_db_at(&db_a_path);
+        create_atlas_db_at(&db_b_path);
+        seed_minimal_atlas_rows(&db_a_path);
+        seed_minimal_atlas_rows(&db_b_path);
+
+        let kb = SqliteAtlasKbDelegate::with_registry_path(registry_path);
+        // Warm both connections.
+        let _ = kb.list_symbols_for_file("snap-01".to_string(), "src/foo.ts".to_string()).unwrap();
+        assert_eq!(kb.cached_connection_count(), 2, "both DBs should be cached");
+
+        let (evicted, scope) = kb.clear_connection_cache_for_project("proj-a");
+        assert_eq!(scope, "project", "targeted per-project evict expected");
+        assert_eq!(evicted, 1, "exactly one entry evicted");
+        assert_eq!(kb.cached_connection_count(), 1, "proj-b cache must remain warm");
+    }
+
+    #[test]
+    fn per_project_clear_with_unknown_project_id_falls_back_to_full_clear() {
+        let tmp = TempDir::new().unwrap();
+        let proj_root = tmp.path().join("proj");
+        std::fs::create_dir_all(&proj_root).unwrap();
+
+        let registry_path = tmp.path().join("registry.db");
+        let db_path = create_atlas_registry_with_project(&registry_path, "proj-known", &proj_root);
+        std::fs::create_dir_all(db_path.parent().unwrap()).unwrap();
+        create_atlas_db_at(&db_path);
+        seed_minimal_atlas_rows(&db_path);
+
+        let kb = SqliteAtlasKbDelegate::with_registry_path(registry_path);
+        let _ = kb.list_symbols_for_file("snap-01".to_string(), "src/foo.ts".to_string()).unwrap();
+        assert_eq!(kb.cached_connection_count(), 1);
+
+        let (evicted, scope) = kb.clear_connection_cache_for_project("proj-unknown");
+        assert_eq!(scope, "all", "unknown project triggers full-clear fallback");
+        assert_eq!(evicted, 0, "conservative 0 count for fallback path");
+        assert_eq!(kb.cached_connection_count(), 0, "cache empty after fallback full-clear");
+    }
+
+    #[test]
+    fn existing_full_clear_path_still_works_no_regression() {
+        let tmp = TempDir::new().unwrap();
+        let db = create_atlas_db(&tmp);
+        seed_minimal_atlas_rows(&db);
+        let kb = SqliteAtlasKbDelegate::with_explicit_db_path(db.clone());
+
+        let _ = kb.list_callers("sym-002".to_string()).unwrap();
+        assert_eq!(kb.cached_connection_count(), 1);
+        kb.clear_connection_cache();
+        assert_eq!(kb.cached_connection_count(), 0);
+
+        let rows = kb.list_symbols_for_file("snap-01".to_string(), "src/foo.ts".to_string()).unwrap();
+        assert_eq!(rows.len(), 1, "rows accessible after full-clear re-open");
+    }
+
+    #[test]
+    fn multi_project_scenario_project_a_invalidated_project_b_cache_stays_warm() {
+        let tmp = TempDir::new().unwrap();
+        let proj_a_root = tmp.path().join("alpha");
+        let proj_b_root = tmp.path().join("beta");
+        std::fs::create_dir_all(&proj_a_root).unwrap();
+        std::fs::create_dir_all(&proj_b_root).unwrap();
+
+        let registry_path = tmp.path().join("registry.db");
+        let db_a_path =
+            create_atlas_registry_with_project(&registry_path, "alpha", &proj_a_root);
+        {
+            let conn = Connection::open(&registry_path).unwrap();
+            conn.execute(
+                "INSERT INTO projects (id, name, path, branch, kind, priority, \
+                 last_activity_at, last_snapshot_id) \
+                 VALUES (?, ?, ?, 'main', 'code', 'low', '2026-05-05T00:00:00Z', NULL)",
+                params!["beta", "Beta", proj_b_root.to_string_lossy().to_string()],
+            )
+            .unwrap();
+        }
+        let db_b_path: PathBuf =
+            proj_b_root.join(".gsd").join("intelligence").join("intelligence.db");
+
+        std::fs::create_dir_all(db_a_path.parent().unwrap()).unwrap();
+        std::fs::create_dir_all(db_b_path.parent().unwrap()).unwrap();
+        create_atlas_db_at(&db_a_path);
+        create_atlas_db_at(&db_b_path);
+        seed_minimal_atlas_rows(&db_a_path);
+        seed_minimal_atlas_rows(&db_b_path);
+
+        let kb = SqliteAtlasKbDelegate::with_registry_path(registry_path);
+        let _ = kb.get_symbol("sym-001".to_string()).unwrap();
+        assert_eq!(kb.cached_connection_count(), 2);
+
+        let (evicted, scope) = kb.clear_connection_cache_for_project("alpha");
+        assert_eq!(scope, "project");
+        assert_eq!(evicted, 1, "alpha entry removed");
+        assert_eq!(kb.cached_connection_count(), 1, "beta still in cache — no unnecessary re-open");
+
+        let syms = kb.list_symbols_in_snapshot("snap-01".to_string(), None, None, None, None).unwrap();
+        assert!(syms.len() >= 2, "data accessible after alpha re-open");
+    }
+
+    #[test]
+    fn evicted_count_matches_reality() {
+        let tmp = TempDir::new().unwrap();
+        let proj_root = tmp.path().join("proj");
+        std::fs::create_dir_all(&proj_root).unwrap();
+
+        let registry_path = tmp.path().join("registry.db");
+        let db_path = create_atlas_registry_with_project(&registry_path, "my-proj", &proj_root);
+        std::fs::create_dir_all(db_path.parent().unwrap()).unwrap();
+        create_atlas_db_at(&db_path);
+        seed_minimal_atlas_rows(&db_path);
+
+        let kb = SqliteAtlasKbDelegate::with_registry_path(registry_path);
+
+        let (count_cold, _) = kb.clear_connection_cache_for_project("my-proj");
+        assert_eq!(count_cold, 0, "nothing to evict from cold cache");
+
+        let _ = kb.list_callers("sym-002".to_string()).unwrap();
+        assert_eq!(kb.cached_connection_count(), 1);
+
+        let (count_warm, scope) = kb.clear_connection_cache_for_project("my-proj");
+        assert_eq!(scope, "project");
+        assert_eq!(count_warm, 1, "one entry evicted from warm cache");
+        assert_eq!(kb.cached_connection_count(), 0);
+    }
+
+    #[test]
+    fn invalidate_cache_result_serialises_scope_and_evicted_count() {
+        let r = InvalidateCacheResult { scope: "project".to_string(), evicted_count: 3 };
+        let json = serde_json::to_string(&r).unwrap();
+        let v: serde_json::Value = serde_json::from_str(&json).unwrap();
+        assert_eq!(v["scope"], "project");
+        assert_eq!(v["evicted_count"], 3);
+
+        let r2 = InvalidateCacheResult { scope: "all".to_string(), evicted_count: 0 };
+        let json2 = serde_json::to_string(&r2).unwrap();
+        let v2: serde_json::Value = serde_json::from_str(&json2).unwrap();
+        assert_eq!(v2["scope"], "all");
+        assert_eq!(v2["evicted_count"], 0);
     }
 }

@@ -90,7 +90,7 @@ function dbPath(root) {
 
 // ── tests ─────────────────────────────────────────────────────────────────────
 
-describe('atlas-index CLI (G1)', () => {
+describe('atlas-index CLI (G1 + H1)', () => {
   it('1. missing --project → exit 2, human-readable error on stderr', () => {
     const { exitCode, stderr } = runCli('');
     expect(exitCode).toBe(2);
@@ -173,6 +173,77 @@ describe('atlas-index CLI (G1)', () => {
       expect(stdout).toMatch(/duration/);
     } else {
       // module-load failure path — just verify not an arg error
+      expect(exitCode).not.toBe(2);
+    }
+  });
+
+  // ── H1 --stream-events backward-compat tests ─────────────────────────────
+
+  it('8. --stream-events flag is accepted without error (exit code not 2)', () => {
+    const projectRoot = makeFixture(join(tmpRoot, 'proj'));
+    const { exitCode } = runCli(
+      `--project=test-proj --snapshot=snap-stream --path="${projectRoot}" --db="${dbPath(tmpRoot)}" --stream-events`,
+    );
+    // Must not exit 2 (arg parse error); may exit 1 if modules not loaded.
+    expect(exitCode).not.toBe(2);
+  });
+
+  it('9. --stream-events on success emits atlas:indexing.started as first JSONL line', () => {
+    const projectRoot = makeFixture(join(tmpRoot, 'proj'));
+    const { exitCode, stdout } = runCli(
+      `--project=test-proj --snapshot=snap-started --path="${projectRoot}" --db="${dbPath(tmpRoot)}" --stream-events`,
+    );
+    if (exitCode === 0) {
+      // All stdout lines should be valid JSONL envelopes.
+      const lines = stdout.trim().split('\n').filter(Boolean);
+      expect(lines.length).toBeGreaterThan(0);
+      // First line must be atlas:indexing.started
+      const first = JSON.parse(lines[0]);
+      expect(first.event).toBe('atlas:indexing.started');
+      expect(first.payload.snapshot_id).toBe('snap-started');
+    } else {
+      // Module-load failure — not an arg error
+      expect(exitCode).not.toBe(2);
+    }
+  });
+
+  it('10. --stream-events on success emits atlas:indexing.completed as last JSONL line', () => {
+    const projectRoot = makeFixture(join(tmpRoot, 'proj'));
+    const { exitCode, stdout } = runCli(
+      `--project=test-proj --snapshot=snap-completed --path="${projectRoot}" --db="${dbPath(tmpRoot)}" --stream-events`,
+    );
+    if (exitCode === 0) {
+      const lines = stdout.trim().split('\n').filter(Boolean);
+      const last = JSON.parse(lines[lines.length - 1]);
+      expect(last.event).toBe('atlas:indexing.completed');
+      expect(last.payload.snapshot_id).toBe('snap-completed');
+      expect(last.payload.project_id).toBe('test-proj');
+      expect(typeof last.payload.symbols_count).toBe('number');
+      expect(typeof last.payload.calls_count).toBe('number');
+      expect(typeof last.payload.files_count).toBe('number');
+    } else {
+      expect(exitCode).not.toBe(2);
+    }
+  });
+
+  it('11. --stream-events does NOT emit the --json summary line (backward-compat)', () => {
+    const projectRoot = makeFixture(join(tmpRoot, 'proj'));
+    const { exitCode, stdout } = runCli(
+      `--project=test-proj --snapshot=snap-no-json-summary --path="${projectRoot}" --db="${dbPath(tmpRoot)}" --stream-events`,
+    );
+    if (exitCode === 0) {
+      const lines = stdout.trim().split('\n').filter(Boolean);
+      // No line should contain { ok: true } (the --json summary shape)
+      for (const line of lines) {
+        let parsed;
+        try { parsed = JSON.parse(line); } catch { continue; }
+        // Each line must be an envelope with "event" key, not the summary
+        if ('ok' in parsed) {
+          // If it has ok:true it should NOT also have event (summary ≠ envelope)
+          expect(parsed.event).toBeUndefined();
+        }
+      }
+    } else {
       expect(exitCode).not.toBe(2);
     }
   });

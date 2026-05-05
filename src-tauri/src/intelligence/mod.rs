@@ -2,8 +2,10 @@
 //!
 //! Re-exports all public symbols from the intelligence submodules.
 //! Phase 824 / C07. Atlas commands added v1.49.607 W1 Track C.
+//! Atlas sidecar (Node.js child-process dispatch) added v1.49.607 H1.
 
 pub mod atlas;
+pub mod atlas_sidecar;
 pub mod real_kb;
 pub mod server;
 pub mod types;
