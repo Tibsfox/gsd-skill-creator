@@ -334,6 +334,10 @@ export function createAtlasShell(opts: AtlasShellOptions = {}): AtlasShell {
       graphCanvas.style.cssText = 'width:100%;height:100%;display:block;';
       sgBody.appendChild(graphCanvas);
 
+      const chipContainerEl = document.createElement('div');
+      chipContainerEl.className = 'atlas-symbol-graph-chip-container';
+      sgPane.appendChild(chipContainerEl);
+
       let sgView: SymbolGraphView | null = null;
       let sgWrapper: CoordinatedView | null = null;
       // Defer construction until paint so canvas has dimensions
@@ -342,6 +346,7 @@ export function createAtlasShell(opts: AtlasShellOptions = {}): AtlasShell {
         try {
           sgView = new SymbolGraphView(graphCanvas);
           graphView = sgView;
+          sgView.mountChipContainer(chipContainerEl);
           sgWrapper = wrapSymbolGraph(sgView);
           const unSg = coordinator.registerView(sgWrapper);
           unregisterFns.push(unSg);

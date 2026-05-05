@@ -50,12 +50,14 @@ vi.mock('../symbol-graph/index.js', () => ({
   SymbolGraphView: class {
     focusCalls: Focus[] = [];
     selectHandlers: Array<(sel: any) => void> = [];
+    mountChipContainerEl: HTMLElement | null = null;
     constructor(_canvas: HTMLCanvasElement) {}
     setFocus(_f: any) { return Promise.resolve(); }
     onSelect(h: (sel: any) => void) {
       this.selectHandlers.push(h);
       return () => {};
     }
+    mountChipContainer(el: HTMLElement) { this.mountChipContainerEl = el; }
     dispose() {}
   },
 }));
@@ -346,6 +348,43 @@ describe('AtlasShell', () => {
     expect(announcer).not.toBeNull();
     expect(announcer!.getAttribute('role')).toBe('status');
     expect(announcer!.getAttribute('aria-live')).toBe('polite');
+
+    shell.unmount();
+  });
+
+  it('shell mounts chip container element under the symbol-graph pane', () => {
+    const shell = createAtlasShell();
+    shell.mount(host);
+
+    const sgPane = host.querySelector('.atlas-pane--symbol-graph');
+    expect(sgPane).not.toBeNull();
+    const chipContainer = sgPane!.querySelector('.atlas-symbol-graph-chip-container');
+    expect(chipContainer).not.toBeNull();
+
+    shell.unmount();
+  });
+
+  it('chip container has the correct CSS class for positioning', () => {
+    const shell = createAtlasShell();
+    shell.mount(host);
+
+    const chipContainer = host.querySelector('.atlas-symbol-graph-chip-container');
+    expect(chipContainer).not.toBeNull();
+    expect(chipContainer!.classList.contains('atlas-symbol-graph-chip-container')).toBe(true);
+
+    shell.unmount();
+  });
+
+  it('chip container is a child of the position-relative symbol-graph pane', () => {
+    const shell = createAtlasShell();
+    shell.mount(host);
+
+    const sgPane = host.querySelector('.atlas-pane--symbol-graph');
+    expect(sgPane).not.toBeNull();
+    // atlas-pane has position: relative (from atlas.css); chip container child enables absolute positioning
+    const chipContainer = sgPane!.querySelector('.atlas-symbol-graph-chip-container');
+    expect(chipContainer).not.toBeNull();
+    expect(chipContainer!.parentElement).toBe(sgPane);
 
     shell.unmount();
   });

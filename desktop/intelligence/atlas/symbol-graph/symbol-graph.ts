@@ -149,7 +149,6 @@ export class SymbolGraphView {
   mountChipContainer(container: HTMLElement): void {
     this.missionChipEl = document.createElement('div');
     this.missionChipEl.className = 'symbol-graph-mission-chip';
-    this.missionChipEl.style.display = 'none';
     container.prepend(this.missionChipEl);
     this.updateChip();
   }
@@ -157,11 +156,11 @@ export class SymbolGraphView {
   private updateChip(): void {
     if (!this.missionChipEl) return;
     if (this.missionFilterId === null) {
-      this.missionChipEl.style.display = 'none';
+      this.missionChipEl.classList.remove('symbol-graph-mission-chip--visible');
       this.missionChipEl.textContent = '';
       return;
     }
-    this.missionChipEl.style.display = 'inline-flex';
+    this.missionChipEl.classList.add('symbol-graph-mission-chip--visible');
     this.missionChipEl.innerHTML = '';
 
     const label = document.createElement('span');

@@ -87,6 +87,16 @@
   bottom: 0;
 }
 
+/* ── Symbol-graph chip container ───────────────────────────────────────────── */
+
+.atlas-symbol-graph-chip-container {
+  position: absolute;
+  top: 30px; /* below the 22px pane header + 8px gap */
+  right: 8px;
+  z-index: 5;
+  pointer-events: none; /* individual chips set pointer-events: auto when visible */
+}
+
 /* ── Splitters ─────────────────────────────────────────────────────────────── */
 
 .atlas-splitter {

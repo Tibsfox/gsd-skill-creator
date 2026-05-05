@@ -70,9 +70,6 @@
 }
 
 .symbol-graph-mission-chip {
-  position: absolute;
-  top: 8px;
-  right: 8px;
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -82,6 +79,24 @@
   padding: 3px 8px;
   font-size: 11px;
   color: var(--text-primary, #c0caf5);
+  opacity: 0;
+  transform: translateX(8px);
+  pointer-events: none;
+  transition:
+    opacity var(--atlas-chip-transition, 200ms ease-out),
+    transform var(--atlas-chip-transition, 200ms ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .symbol-graph-mission-chip {
+    transition: none;
+  }
+}
+
+.symbol-graph-mission-chip--visible {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
 }
 
 .symbol-graph-mission-chip-clear {

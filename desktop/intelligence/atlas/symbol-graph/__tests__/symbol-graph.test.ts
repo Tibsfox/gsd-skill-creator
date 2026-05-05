@@ -442,7 +442,7 @@ describe('SymbolGraphView — setMissionFilter', () => {
     await view.setMissionFilter('v1.49.605');
 
     const chip = view._missionChipEl!;
-    expect(chip.style.display).not.toBe('none');
+    expect(chip.classList.contains('symbol-graph-mission-chip--visible')).toBe(true);
     expect(chip.textContent).toContain('v1.49.605');
     expect(chip.querySelector('.symbol-graph-mission-chip-clear')).not.toBeNull();
 
@@ -461,7 +461,51 @@ describe('SymbolGraphView — setMissionFilter', () => {
     await view.setMissionFilter('v1.49.605');
     await view.setMissionFilter(null);
 
-    expect(view._missionChipEl!.style.display).toBe('none');
+    expect(view._missionChipEl!.classList.contains('symbol-graph-mission-chip--visible')).toBe(false);
+
+    spy.mockRestore();
+  });
+
+  it('chip element exists in DOM at construction with --visible class absent', () => {
+    const container = document.createElement('div');
+    view.mountChipContainer(container);
+
+    const chip = view._missionChipEl!;
+    expect(chip).not.toBeNull();
+    expect(chip.parentElement).toBe(container);
+    expect(chip.classList.contains('symbol-graph-mission-chip--visible')).toBe(false);
+  });
+
+  it('setMissionFilter adds --visible class after IPC resolves', async () => {
+    const container = document.createElement('div');
+    view.mountChipContainer(container);
+
+    const spy = vi.spyOn(ipcModule.intelligenceIpc, 'listFilesChangedByMission')
+      .mockResolvedValueOnce([
+        { id: 'fc-2', mission_id: 'mission-x', commit_sha: 'def', file_path: 'src/c.ts', change_kind: 'A', rename_from: null, added_lines: 10, removed_lines: 0 },
+      ]);
+
+    await view.setMissionFilter('mission-x');
+
+    expect(view._missionChipEl!.classList.contains('symbol-graph-mission-chip--visible')).toBe(true);
+
+    spy.mockRestore();
+  });
+
+  it('setMissionFilter(null) removes --visible class', async () => {
+    const container = document.createElement('div');
+    view.mountChipContainer(container);
+
+    const spy = vi.spyOn(ipcModule.intelligenceIpc, 'listFilesChangedByMission')
+      .mockResolvedValueOnce([
+        { id: 'fc-3', mission_id: 'mission-x', commit_sha: 'ghi', file_path: 'src/d.ts', change_kind: 'M', rename_from: null, added_lines: 2, removed_lines: 1 },
+      ]);
+
+    await view.setMissionFilter('mission-x');
+    expect(view._missionChipEl!.classList.contains('symbol-graph-mission-chip--visible')).toBe(true);
+
+    await view.setMissionFilter(null);
+    expect(view._missionChipEl!.classList.contains('symbol-graph-mission-chip--visible')).toBe(false);
 
     spy.mockRestore();
   });
