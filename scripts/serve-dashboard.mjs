@@ -724,6 +724,158 @@ async function loadIntelligenceBridge() {
 }
 
 // ---------------------------------------------------------------------------
+// Atlas indexer endpoint — G1: POST /api/atlas/index
+// ---------------------------------------------------------------------------
+
+/**
+ * Lazy-load the atlas indexer modules from dist/ (or fall back to TS source
+ * in dev environments where vitest/tsx provides the transform). Returns null
+ * if the modules cannot be loaded; the endpoint returns 503 in that case.
+ */
+let atlasModules = null;
+
+async function loadAtlasModules() {
+  if (atlasModules) return atlasModules;
+  try {
+    const [runnerMod, storeMod, migrationsMod, DbMod] = await Promise.all([
+      import('../dist/intelligence/atlas-indexer/runner.js').catch(() =>
+        import('../src/intelligence/atlas-indexer/runner.ts')
+      ),
+      import('../dist/intelligence/kb/store.js').catch(() =>
+        import('../src/intelligence/kb/store.ts')
+      ),
+      import('../dist/intelligence/kb/migrations.js').catch(() =>
+        import('../src/intelligence/kb/migrations.ts')
+      ),
+      import('better-sqlite3'),
+    ]);
+    atlasModules = {
+      runAtlasIndexer: runnerMod.runAtlasIndexer,
+      KBStore: storeMod.KBStore,
+      applyMigrations: migrationsMod.applyMigrations,
+      Database: DbMod.default,
+    };
+    console.log('[atlas] Indexer modules loaded; POST /api/atlas/index available');
+    return atlasModules;
+  } catch (err) {
+    console.error('[atlas] Failed to load indexer modules:', err.message);
+    console.error('[atlas] POST /api/atlas/index will not be available');
+    return null;
+  }
+}
+
+/**
+ * Handle POST /api/atlas/index.
+ *
+ * Body JSON schema:
+ *   { snapshotId: string, projectId: string, projectPath?: string,
+ *     languages?: string[], replace?: boolean, runProvenance?: boolean }
+ *
+ * Returns:
+ *   200 { ok: true,  totals: { symbols, calls, references, provenanceLines } }
+ *   400 { ok: false, error: string }   — bad / missing body fields
+ *   404 { ok: false, error: string }   — project not found in registry
+ *   500 { ok: false, error: string }   — indexer runtime error
+ *   503 { ok: false, error: string }   — modules not loaded (build missing)
+ */
+async function handleAtlasIndex(req, res) {
+  // Collect request body
+  let rawBody = '';
+  await new Promise((resolve) => {
+    req.on('data', (chunk) => { rawBody += chunk.toString('utf8'); });
+    req.on('end', resolve);
+  });
+
+  let body;
+  try {
+    body = JSON.parse(rawBody || '{}');
+  } catch {
+    res.writeHead(400, { 'Content-Type': 'application/json' });
+    return res.end(JSON.stringify({ ok: false, error: 'request body must be valid JSON' }));
+  }
+
+  const { snapshotId, projectId, projectPath: bodyPath, languages, replace, runProvenance } = body;
+
+  if (typeof projectId !== 'string' || !projectId) {
+    res.writeHead(400, { 'Content-Type': 'application/json' });
+    return res.end(JSON.stringify({ ok: false, error: 'projectId (string) is required' }));
+  }
+  if (typeof snapshotId !== 'string' || !snapshotId) {
+    res.writeHead(400, { 'Content-Type': 'application/json' });
+    return res.end(JSON.stringify({ ok: false, error: 'snapshotId (string) is required' }));
+  }
+
+  const mods = await loadAtlasModules();
+  if (!mods) {
+    res.writeHead(503, { 'Content-Type': 'application/json' });
+    return res.end(JSON.stringify({ ok: false, error: 'atlas indexer modules not available (run npm run build)' }));
+  }
+
+  const { runAtlasIndexer, KBStore, applyMigrations: _applyMigrations, Database: _Db } = mods;
+
+  // Resolve projectPath
+  let projectPath = typeof bodyPath === 'string' && bodyPath ? bodyPath : null;
+  const store = new KBStore({ registryPath: undefined /* default */ });
+
+  try {
+    await store.ensureRegistry();
+    if (!projectPath) {
+      const project = await store.getProject(projectId);
+      if (!project) {
+        store.close();
+        res.writeHead(404, { 'Content-Type': 'application/json' });
+        return res.end(JSON.stringify({ ok: false, error: `project "${projectId}" not found in registry` }));
+      }
+      if (!project.path) {
+        store.close();
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        return res.end(JSON.stringify({ ok: false, error: `project "${projectId}" has no path field in registry; pass projectPath in the request body` }));
+      }
+      projectPath = project.path;
+    }
+
+    // Ensure project is registered (idempotent upsert — needed so ensureProjectDB can find the row)
+    await store.registerProject({
+      id: projectId,
+      name: projectId,
+      path: projectPath,
+      kind: 'code',
+      priority: 'med',
+      last_activity_at: new Date().toISOString(),
+    });
+    await store.ensureProjectDB(projectId);
+    const db = await store.getProjectRawDB(projectId);
+
+    const result = await runAtlasIndexer(db, {
+      snapshotId,
+      projectId,
+      projectPath,
+      languages: Array.isArray(languages) ? languages : undefined,
+      replace: replace === true,
+      runProvenance: runProvenance === true,
+      // bus defaults to singleton — SSE wiring picks it up automatically
+    });
+
+    store.close();
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    return res.end(JSON.stringify({
+      ok: true,
+      totals: {
+        symbols: result.symbols,
+        calls: result.calls,
+        references: result.references,
+        provenanceLines: result.provenanceLines,
+      },
+    }));
+  } catch (err) {
+    try { store.close(); } catch { /* ignore */ }
+    console.error('[atlas] Index run failed:', err.message);
+    res.writeHead(500, { 'Content-Type': 'application/json' });
+    return res.end(JSON.stringify({ ok: false, error: err.message }));
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Intelligence event bus — Phase 827 / C02: SSE broadcast wiring
 // ---------------------------------------------------------------------------
 
@@ -870,6 +1022,15 @@ const server = createServer(async (req, res) => {
     if (handled) return;
   }
 
+  // API: atlas indexer dispatch (G1)
+  if (pathname === '/api/atlas/index') {
+    if (req.method !== 'POST') {
+      res.writeHead(405, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ ok: false, error: 'method not allowed; use POST' }));
+    }
+    return handleAtlasIndex(req, res);
+  }
+
   // API: intelligence dashboard IPC-to-HTTP bridge (Phase 826.5)
   // Browser-tab mode dispatches Tauri-style commands via POST /api/intelligence/invoke
   if (intelligenceBridge && pathname === '/api/intelligence/invoke') {
@@ -958,6 +1119,9 @@ async function main() {
 
   // Load intelligence dashboard IPC-to-HTTP bridge (browser-tab mode support)
   await loadIntelligenceBridge();
+
+  // Pre-load atlas indexer modules (G1 — POST /api/atlas/index)
+  await loadAtlasModules();
 
   // Wire intelligence event bus to SSE broadcast (Phase 827 / C02)
   await loadIntelligenceEventBus();

@@ -19,6 +19,7 @@ export default defineConfig({
       'scripts/__tests__/serve-dashboard-sse.test.mjs',
       'tools/__tests__/atlas-deps-audit.test.mjs',
       'tools/__tests__/atlas-perf-bench.test.mjs',
+      'tools/__tests__/atlas-index-cli.test.mjs',
     ],
     globals: true,
     testTimeout: 15000,
