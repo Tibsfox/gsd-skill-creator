@@ -108,3 +108,108 @@ corpora.
 Sankey layout; test with a fixture that renames a symbol across two missions.
 
 **Soak target:** 2 observations before promotion to ESTABLISHED.
+
+---
+
+### #10254 CANDIDATE — run the desktop UI end-to-end before claiming ship-ready
+
+**Statement:** Compile + tests pass is necessary but not sufficient.  An IPC stub that returns
+`Err` for all commands compiles cleanly and passes all unit tests (the stub tests verify the
+stub *returns* a deferred error — they don't verify the production path works).  Only a live
+desktop UI smoke-test surfaces the failure.  The W4a meta-test net passed; the stub survived
+to near-tag; the work-review pass caught it.
+
+**Trigger:** any milestone that ships a new Tauri IPC surface or wires a new Rust delegate
+trait.
+
+**Action:** after the final wave, open the desktop shell and exercise the new tab/surface
+end-to-end before running `npm run pre-tag-gate`.  Verify that IPC commands return data, not
+error banners.  Post-W4 work-review pass before tag is a required gate, not optional.
+
+**Soak target:** 3 observations before promotion to ESTABLISHED.
+
+---
+
+### #10255 CANDIDATE — when a perf claim looks suspicious, re-measure at the actual target scale
+
+**Statement:** D4 bench surfaced GLSL at 5,400 LOC/sec (0.54× the 10K target) and attributed
+the root cause to an O(n²) engine-wide `source.slice(pos)` pattern.  D5 fixed the engine
+(sticky regex); GLSL moved from 5,400 → 5,600 LOC/sec — within noise.  The actual bottleneck
+is the coarse-AST extractor's speculative `skipBalanced` calls at high token density, not the
+lexer.  The D4 root-cause attribution was overstated; D5 re-measurement corrected it.
+
+**Trigger:** any perf bench result that looks 10× worse than neighboring languages.
+
+**Action:** run the fix, re-measure, and check whether the number moved.  If it didn't move
+significantly, the bottleneck is elsewhere.  Attribute root cause after the fix, not before.
+
+**Soak target:** 2 observations before promotion to ESTABLISHED.
+
+---
+
+### #10256 CANDIDATE — snapshot-clear helpers + replace-mode for idempotent re-runs
+
+**Statement:** The D2 linker idempotency fix (`clearSnapshotProvenance` + `opts.mode = 'replace'`
+in `src/intelligence/provenance/linker.ts`) costs ~10 lines and eliminates duplicate-row bugs
+on re-runs.  Any write-once pipeline that can be re-triggered (indexer, linker, extractor)
+should expose a `replace` mode from the start rather than requiring a follow-on patch.
+
+**Trigger:** any new pipeline stage that writes rows to an Intelligence KB table.
+
+**Action:** expose `opts?: { mode?: 'append' | 'replace' }` on the run method; implement
+`clear*` for the snapshot scope; default to `'append'` for backward compat.
+
+**Soak target:** 2 observations before promotion to ESTABLISHED.
+
+---
+
+### #10257 CANDIDATE — ARIA aria-live="polite" (not "assertive") for navigational state changes
+
+**Statement:** The D3 a11y pass wired `aria-live="polite"` on the atlas focus announcer.
+Navigational state changes in an exploratory tool (clicking a node, changing focus) are not
+urgent — `assertive` would interrupt the user mid-sentence and is inappropriate.  Use `polite`
+for any focus/selection change in an interactive dashboard.
+
+**Trigger:** any new dashboard pane that emits focus-change announcements to screen readers.
+
+**Action:** mount a visually-hidden `<div role="status" aria-live="polite">` via the
+coordinator's `attachAnnouncer()` method; never use `aria-live="assertive"` for exploratory
+navigation events.
+
+**Soak target:** 2 observations before promotion to ESTABLISHED.
+
+---
+
+### #10258 CANDIDATE — perf benches at the actual target scale, not a convenient smaller scale
+
+**Statement:** The D4 bench defaulted to 10K-line fixtures.  The mission spec criterion is
+"100K LOC < 3 min" (≥ 10K LOC/sec at 100K scale).  10K is convenient but too small: at 10K
+lines the O(n²) engine and an O(n) engine are indistinguishable for most grammars.  The
+architectural fix (D5 sticky regex) is confirmed correct at scale even though the 10K bench
+numbers barely moved, because asymptotic analysis shows the divergence widens at 100K.
+
+**Trigger:** any perf bench whose target is specified at a different scale than the default
+fixture size.
+
+**Action:** set the bench fixture size to match the spec target scale, or document explicitly
+why the smaller scale is a conservative proxy.
+
+**Soak target:** 2 observations before promotion to ESTABLISHED.
+
+---
+
+### #10259 CANDIDATE — audit the trait → impl → wired-up chain before claiming completion
+
+**Statement:** A trait with a `Stub` implementation is non-functional in production until the
+real implementation lands AND is wired into the Tauri state.  The atlas `AtlasKbDelegate`
+trait had 13 methods; `StubAtlasKbDelegate` implemented all 13; `AtlasState::default()` was
+wired to the stub; nothing in the build or test suite caught the gap because stub-method tests
+verify stub behavior, not production behavior.
+
+**Trigger:** any milestone that introduces a new Rust delegate trait backed by a stub.
+
+**Action:** after landing the stub, immediately create a tracking note (or a `TODO(real-impl)`
+comment in `AtlasState::default()`) that is visible in code review.  Before tagging, grep for
+`new_with_stub` and verify each call site has been migrated or intentionally kept.
+
+**Soak target:** 3 observations before promotion to ESTABLISHED.

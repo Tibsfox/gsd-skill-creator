@@ -44,3 +44,36 @@ The coordinator (single-writer for cross-view focus state; all four panes subscr
 write directly to another) eliminated the event-loop cycle problem seen in ad-hoc multi-pane
 dashboards.  Pattern: one coordinator per shared-state surface; all consumers subscribe to it
 via a typed FocusSubscriber interface; no direct pane-to-pane calls.
+
+## D/E wave retrospective
+
+**D1–D5 closed known deferred items:**
+D1 (extractor surgeries: TS imports, Rust impl blocks, C++ classes), D2 (listSymbolsInSnapshot
+IPC + symbol-graph wire + linker idempotency), D3 (a11y: announcer + splitter keyboard + ARIA
+roles), D4 (perf bench harness for 9 languages × 10K LOC), D5 (sticky-regex engine fixing
+the O(n²) source.slice pattern D4 surfaced).  All were flagged deferrals in their originating
+commit messages; the D-wave pass cleared them systematically.
+
+**E1–E4 closed newly-surfaced items:**
+E2 (C++ operator overloads + nested-class methods — both D1-deferred sub-items),
+E3 (TS re-exports + Rust nested-fn — both D1-deferred sub-items),
+E4 (real Rust SQLite delegate — **critical**, surfaced during work review; see below).
+
+**#10254 CANDIDATE — post-W4 work-review pass before tag is required, not optional:**
+The W4a meta-test net verified build, vitest, completeness, and CI green.  It did NOT include
+a live desktop UI smoke-test.  That gap allowed the `StubAtlasKbDelegate` to survive to
+near-tag: it compiled cleanly, all unit tests passed (the stub tests verify that stubs *return*
+a deferred error, not that the production path works), and the IPC surface appeared complete.
+Only the work-review pass through the Rust source caught that `AtlasState::default()` still
+wired the stub.  Fix (E4): `SqliteAtlasKbDelegate` implemented and wired; `AtlasState::default()`
+changed from `new_with_stub()` to `new_with_sqlite()`.  The lesson: post-W4 work-review pass
+before tag is a required gate, not an optional nice-to-have.
+
+**D5 commit message precision note:**
+The D4 bench headline listed GLSL at 5,400 LOC/sec and flagged it as the engine's O(n²) floor.
+D5 fixed the engine (sticky regex), but GLSL's bench number barely moved (5.4K → 5.6K).
+D5's commit message correctly identified the residual bottleneck: the coarse-AST extractor
+pipeline's speculative `skipBalanced` calls at high token-density, not the lexer.  The D4
+framing ("root cause is engine-wide") was overstated; D5 corrected it.  Lesson: when a perf
+claim looks suspiciously bad, re-measure after the fix at the actual target scale before
+attributing root cause.

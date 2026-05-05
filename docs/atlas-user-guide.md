@@ -35,6 +35,50 @@ cross-corpus search (symbols, files, missions, KB notes) via a trigram index.
 
 ---
 
+## Setup: registering your project
+
+Atlas reads symbol and provenance data from the same Intelligence KB that powers the
+**Intelligence** tab (introduced in v1.49.597).  Two SQLite files are involved:
+
+| File | Role |
+|---|---|
+| `~/.gsd/intelligence/registry.db` | Index of all registered GSD projects.  One row per project: `(id, path)`. |
+| `<project>/.gsd/intelligence/intelligence.db` | Per-project KB (migrations 001 + 002 + 003).  The atlas reads migration-003 tables from this file. |
+
+The registry path is overridable via the `GSD_INTELLIGENCE_REGISTRY` environment variable —
+the same convention used by `RealKbDelegate` (v1.49.597) and `SqliteAtlasKbDelegate` (E4).
+
+### Pre-existing GSD project (Intelligence tab already working)
+
+No extra setup needed.  If your project already appears in the **Intelligence** tab it is
+registered in `registry.db` and Atlas will read it immediately.  Open the Atlas tab and the
+four panes will populate on first load.
+
+### New or unregistered project
+
+Register the project through the same mechanism you used for the Intelligence tab — either
+the `gsd intelligence register` CLI command or the "Register project" button in the
+Intelligence tab settings panel.  Once registered, Atlas reads the project automatically.
+
+> If you do not yet have Intelligence tab documentation to hand, the short path is:
+> `gsd intelligence register <path/to/project>` from the project root.  This creates the
+> registry row and initialises `<project>/.gsd/intelligence/intelligence.db` with all three
+> migrations.  Then open the Atlas tab.
+
+### Cold-start UX
+
+Opening the Atlas tab before any project is registered (fresh install, no registry yet) shows
+**empty panes, not errors**.  The SQLite delegate returns `Ok([])` for all queries when the
+registry file does not exist — the desktop tab stays calm.  Once a project is registered and
+the Intelligence analyzer has run at least one session, the panes populate automatically on
+the next Atlas tab load.
+
+> **Tauri only:** the Atlas tab requires the Tauri desktop shell.  Opening `atlas.html`
+> directly in a browser (without Tauri IPC) shows the static fallback banner.  This is
+> expected — symbol and provenance data require IPC access to the Intelligence KB.
+
+---
+
 ## Cross-pane Selection
 
 Clicking any node in any pane propagates a **Focus** event to the other three panes:
@@ -170,4 +214,4 @@ node count via the filter pipeline controls in the Symbol Graph toolbar.
 
 ---
 
-*Atlas — v1.49.607 (GSD Code Atlas milestone, W4a)*
+*Atlas — v1.49.607 (GSD Code Atlas milestone, post-E4)*

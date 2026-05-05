@@ -2,7 +2,7 @@
 
 ## Milestone identity
 
-**GSD Code Atlas — W4a (build/verify/audit/release-notes wave)**
+**GSD Code Atlas — full milestone (28 commits: W0 → W4a → D1–D5 → E1–E4)**
 Counter-cadence. No NASA/MUS/ELC/SPS/TRS engine advance.
 
 ## Structural firsts
@@ -41,15 +41,34 @@ Counter-cadence. No NASA/MUS/ELC/SPS/TRS engine advance.
 
 ## Test count
 
-- Atlas-specific tests: ~370 (24 test files in src/atlas/ + desktop/intelligence/atlas/)
-- Repo-wide (vitest run): 29,751+ (exact count in W4a gate run)
-- tools-config tests: 5 new (atlas-deps-audit.test.mjs) + 9 prior = 14 total
+- Atlas-specific tests: ~460 (24 test files in src/atlas/ + desktop/intelligence/atlas/;
+  +90 net across D1–E4: 16 D1 + 12 D2 + 13 D3 + 4 D4 tools + 10 E2 + 16 E3 + 9 E4 Rust)
+- Repo-wide (vitest run): **29,841 passing** (29,866 total — 17 skipped — 7 todo)
+- tools-config tests: 9 new (atlas-deps-audit.test.mjs × 5 + atlas-perf-bench.test.mjs × 4)
+  + 9 prior = 18 total
 
-## Atlas surface (W4a close)
+## Atlas surface (post-E4)
 
 - `src/atlas/` — 57 TypeScript files (graph-renderer, pack-layout, sankey, scales, syntax,
   search primitives)
 - `desktop/intelligence/atlas/` — 32 TypeScript files (shell, coordinator, focus-state,
   system-map, symbol-graph, archeology, code-view, search-palette)
-- `tools/atlas-deps-audit.mjs` — enforcement tool
+- `src-tauri/src/intelligence/atlas.rs` — 12 pre-existing Tauri commands +
+  `SqliteAtlasKbDelegate` (~470 lines; E4); `AtlasState::default()` now uses SQLite delegate
+- `tools/atlas-deps-audit.mjs` — ADR 0003 enforcement tool
+- `tools/atlas-perf-bench.mjs` — syntax tokenizer perf bench (D4; 9 languages × 10K LOC)
 - `dist/dashboard/atlas.html` + nav updates — dashboard integration
+
+## Structural firsts added by D/E waves
+
+6. **First real Rust SQLite delegate for the Atlas IPC surface (E4)** — `SqliteAtlasKbDelegate`
+   in `src-tauri/src/intelligence/atlas.rs` mirrors the `RealKbDelegate` pattern from the
+   v1.49.597 Intelligence surface.  Registry at `~/.gsd/intelligence/registry.db`; per-project
+   DB at `<project>/.gsd/intelligence/intelligence.db`.  Empty-state contract: no-registry /
+   unknown-snapshot both return `Ok(vec![])`, never `Err` — the desktop tab stays blank, not
+   broken.
+
+7. **First sticky-regex lexer engine (D5)** — eliminates the O(n²) `source.slice(pos)` pattern
+   in `src/atlas/syntax/lexer-state-machine.ts`.  8 of 9 grammars exceed the 10K LOC/sec
+   mission-spec target at 10K-line scale; GLSL bottleneck is the coarse-AST pipeline, not the
+   lexer (deferred as D6 candidate).
