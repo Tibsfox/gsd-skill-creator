@@ -328,6 +328,145 @@ describe('SymbolGraphView — click-handler dispatch', () => {
   });
 });
 
+// ─── filterByMission tests ───────────────────────────────────────────────────
+
+describe('filterSymbols — missionFilePaths gate', () => {
+  it('passes all symbols when missionFilePaths is null', () => {
+    const s1 = makeSymbol({ id: 's1', file_path: 'src/a.ts' });
+    const s2 = makeSymbol({ id: 's2', file_path: 'src/b.ts' });
+    const result = filterSymbols([s1, s2], { ...DEFAULT_FILTER_CONFIG, missionFilePaths: null });
+    expect(result).toHaveLength(2);
+  });
+
+  it('retains only symbols whose file_path is in the mission set', () => {
+    const s1 = makeSymbol({ id: 's1', file_path: 'src/a.ts' });
+    const s2 = makeSymbol({ id: 's2', file_path: 'src/b.ts' });
+    const paths = new Set(['src/a.ts']);
+    const result = filterSymbols([s1, s2], { ...DEFAULT_FILTER_CONFIG, missionFilePaths: paths });
+    expect(result).toHaveLength(1);
+    expect(result[0]!.id).toBe('s1');
+  });
+
+  it('returns empty array when no symbol file_path matches', () => {
+    const s1 = makeSymbol({ id: 's1', file_path: 'src/x.ts' });
+    const paths = new Set(['src/other.ts']);
+    const result = filterSymbols([s1], { ...DEFAULT_FILTER_CONFIG, missionFilePaths: paths });
+    expect(result).toHaveLength(0);
+  });
+
+  it('mission gate applies before hideTestFiles (both must pass)', () => {
+    const s1 = makeSymbol({ id: 's1', file_path: 'src/__tests__/foo.test.ts' });
+    const paths = new Set(['src/__tests__/foo.test.ts']);
+    const result = filterSymbols([s1], {
+      ...DEFAULT_FILTER_CONFIG,
+      missionFilePaths: paths,
+      hideTestFiles: true,
+    });
+    expect(result).toHaveLength(0);
+  });
+});
+
+// ─── setMissionFilter API tests ──────────────────────────────────────────────
+
+describe('SymbolGraphView — setMissionFilter', () => {
+  let canvas: HTMLCanvasElement;
+  let view: SymbolGraphView;
+
+  beforeEach(() => {
+    vi.stubGlobal('requestAnimationFrame', vi.fn(() => 1));
+    vi.stubGlobal('cancelAnimationFrame', vi.fn());
+    canvas = makeCanvas();
+    view = new SymbolGraphView(canvas);
+  });
+
+  it('setMissionFilter narrows symbols to mission-touched files', async () => {
+    const s1 = makeSymbol({ id: 's1', file_path: 'src/a.ts' });
+    const s2 = makeSymbol({ id: 's2', file_path: 'src/b.ts' });
+    view._loadGraphForTest([s1, s2], [], []);
+
+    const spy = vi.spyOn(ipcModule.intelligenceIpc, 'listFilesChangedByMission')
+      .mockResolvedValueOnce([
+        { id: 'fc-1', mission_id: 'v1.49.605', commit_sha: 'abc', file_path: 'src/a.ts', change_kind: 'M', rename_from: null, added_lines: 5, removed_lines: 2 },
+      ]);
+
+    await view.setMissionFilter('v1.49.605');
+
+    expect(spy).toHaveBeenCalledWith('v1.49.605');
+    expect(view._missionFilterId).toBe('v1.49.605');
+    expect(view._filterConfig.missionFilePaths).not.toBeNull();
+    expect(view._filterConfig.missionFilePaths!.has('src/a.ts')).toBe(true);
+    expect(view._filterConfig.missionFilePaths!.has('src/b.ts')).toBe(false);
+
+    spy.mockRestore();
+  });
+
+  it('setMissionFilter(null) clears the filter', async () => {
+    const spy = vi.spyOn(ipcModule.intelligenceIpc, 'listFilesChangedByMission')
+      .mockResolvedValueOnce([
+        { id: 'fc-1', mission_id: 'v1.49.605', commit_sha: 'abc', file_path: 'src/a.ts', change_kind: 'M', rename_from: null, added_lines: 5, removed_lines: 2 },
+      ]);
+
+    await view.setMissionFilter('v1.49.605');
+    await view.setMissionFilter(null);
+
+    expect(view._missionFilterId).toBeNull();
+    expect(view._filterConfig.missionFilePaths).toBeNull();
+
+    spy.mockRestore();
+  });
+
+  it('IPC fetch failure leaves view in clean state (no crash, filter unchanged)', async () => {
+    const spy = vi.spyOn(ipcModule.intelligenceIpc, 'listFilesChangedByMission')
+      .mockRejectedValueOnce(new Error('mission not found'));
+
+    const prevId = view._missionFilterId;
+    const prevPaths = view._filterConfig.missionFilePaths;
+
+    await view.setMissionFilter('nonexistent-mission');
+
+    expect(view._missionFilterId).toBe(prevId);
+    expect(view._filterConfig.missionFilePaths).toBe(prevPaths);
+
+    spy.mockRestore();
+  });
+
+  it('chip renders with mission ID and clear button when filter is active', async () => {
+    const container = document.createElement('div');
+    view.mountChipContainer(container);
+
+    const spy = vi.spyOn(ipcModule.intelligenceIpc, 'listFilesChangedByMission')
+      .mockResolvedValueOnce([
+        { id: 'fc-1', mission_id: 'v1.49.605', commit_sha: 'abc', file_path: 'src/a.ts', change_kind: 'M', rename_from: null, added_lines: 5, removed_lines: 2 },
+      ]);
+
+    await view.setMissionFilter('v1.49.605');
+
+    const chip = view._missionChipEl!;
+    expect(chip.style.display).not.toBe('none');
+    expect(chip.textContent).toContain('v1.49.605');
+    expect(chip.querySelector('.symbol-graph-mission-chip-clear')).not.toBeNull();
+
+    spy.mockRestore();
+  });
+
+  it('chip is hidden when filter is cleared', async () => {
+    const container = document.createElement('div');
+    view.mountChipContainer(container);
+
+    const spy = vi.spyOn(ipcModule.intelligenceIpc, 'listFilesChangedByMission')
+      .mockResolvedValueOnce([
+        { id: 'fc-1', mission_id: 'v1.49.605', commit_sha: 'abc', file_path: 'src/a.ts', change_kind: 'M', rename_from: null, added_lines: 5, removed_lines: 2 },
+      ]);
+
+    await view.setMissionFilter('v1.49.605');
+    await view.setMissionFilter(null);
+
+    expect(view._missionChipEl!.style.display).toBe('none');
+
+    spy.mockRestore();
+  });
+});
+
 // ─── setFocus IPC routing tests ──────────────────────────────────────────────
 
 describe('SymbolGraphView — setFocus IPC routing', () => {

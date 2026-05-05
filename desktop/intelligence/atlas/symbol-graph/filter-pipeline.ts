@@ -3,6 +3,10 @@
  *
  * Filters run in declaration order; each returns the surviving nodes/edges.
  * All predicates are pure and allocation-free beyond the output arrays.
+ *
+ * Filter order: mission gate (coarse) → test/private/edge-type/confidence (refine).
+ * Mission filter is applied first because it is a strict subset gate — any symbol
+ * not touched by the focused mission is irrelevant regardless of other criteria.
  */
 
 import type { AtlasSymbol, AtlasCallEdge, AtlasTypeRelation } from '../../../../src/intelligence/types.js';
@@ -14,6 +18,8 @@ export interface FilterConfig {
   hidePrivateSymbols: boolean;
   edgeType: EdgeTypeFilter;
   confidenceThreshold: number;
+  /** When non-null, only symbols whose file_path is in this set survive. */
+  missionFilePaths: ReadonlySet<string> | null;
 }
 
 export const DEFAULT_FILTER_CONFIG: FilterConfig = {
@@ -21,6 +27,7 @@ export const DEFAULT_FILTER_CONFIG: FilterConfig = {
   hidePrivateSymbols: false,
   edgeType: 'both',
   confidenceThreshold: 0.5,
+  missionFilePaths: null,
 };
 
 function isTestFile(filePath: string): boolean {
@@ -42,6 +49,7 @@ export function filterSymbols(
   config: FilterConfig,
 ): AtlasSymbol[] {
   return symbols.filter((sym) => {
+    if (config.missionFilePaths !== null && !config.missionFilePaths.has(sym.file_path)) return false;
     if (config.hideTestFiles && isTestFile(sym.file_path)) return false;
     if (config.hidePrivateSymbols && isPrivateSymbol(sym)) return false;
     return true;

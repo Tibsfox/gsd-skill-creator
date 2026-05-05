@@ -68,3 +68,32 @@
   color: var(--text-secondary, #9aa5ce);
   pointer-events: none;
 }
+
+.symbol-graph-mission-chip {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-card, #1f2335);
+  border: 1px solid var(--accent-blue, #7aa2f7);
+  border-radius: var(--radius-md, 4px);
+  padding: 3px 8px;
+  font-size: 11px;
+  color: var(--text-primary, #c0caf5);
+}
+
+.symbol-graph-mission-chip-clear {
+  background: none;
+  border: none;
+  color: var(--text-secondary, #9aa5ce);
+  cursor: pointer;
+  font-size: 11px;
+  padding: 0;
+  line-height: 1;
+}
+
+.symbol-graph-mission-chip-clear:hover {
+  color: var(--text-primary, #c0caf5);
+}

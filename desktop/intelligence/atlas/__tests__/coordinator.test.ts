@@ -10,11 +10,14 @@ import { createCoordinator } from '../coordinator.js';
 import type { CoordinatedView } from '../coordinator.js';
 import type { Focus } from '../focus-state.js';
 
-function makeView(): CoordinatedView & { calls: Focus[] } {
+function makeView(): CoordinatedView & { calls: Focus[]; missionCalls: Array<string | null> } {
   const calls: Focus[] = [];
+  const missionCalls: Array<string | null> = [];
   return {
     calls,
+    missionCalls,
     setFocus(f: Focus) { calls.push(f); },
+    setMissionFilter(id: string | null) { missionCalls.push(id); },
   };
 }
 
@@ -146,5 +149,41 @@ describe('Coordinator', () => {
     expect(el.textContent).toBe('focused mission: v1.49.607');
     c.dispatch(null);
     expect(el.textContent).toBe('');
+  });
+
+  it('mission focus → setMissionFilter dispatched with mission ID', () => {
+    const c = createCoordinator();
+    const v = makeView();
+    c.registerView(v);
+
+    c.dispatch({ kind: 'mission', id: 'v1.49.605' });
+
+    expect(v.missionCalls).toContain('v1.49.605');
+  });
+
+  it('non-mission focus → setMissionFilter dispatched with null (auto-clear)', () => {
+    const c = createCoordinator();
+    const v = makeView();
+    c.registerView(v);
+
+    c.dispatch({ kind: 'mission', id: 'v1.49.605' });
+    c.dispatch({ kind: 'file', id: 'src/foo.ts' });
+
+    const last = v.missionCalls[v.missionCalls.length - 1];
+    expect(last).toBeNull();
+  });
+
+  it('view without setMissionFilter still receives setFocus normally', () => {
+    const c = createCoordinator();
+    const minimal: CoordinatedView & { calls: Focus[] } = {
+      calls: [],
+      setFocus(f: Focus) { this.calls.push(f); },
+    };
+    c.registerView(minimal);
+
+    expect(() => {
+      c.dispatch({ kind: 'mission', id: 'v1.49.605' });
+    }).not.toThrow();
+    expect(minimal.calls).toHaveLength(1);
   });
 });

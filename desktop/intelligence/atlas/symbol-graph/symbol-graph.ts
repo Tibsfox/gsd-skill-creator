@@ -91,6 +91,8 @@ export class SymbolGraphView {
   private idToLayout = new Map<string, LayoutNode>();
 
   private filterConfig: FilterConfig = { ...DEFAULT_FILTER_CONFIG };
+  private missionFilterId: string | null = null;
+  private missionChipEl: HTMLElement | null = null;
   private selectHandlers: Array<(sel: GraphSelection | null) => void> = [];
 
   private rafId: number | null = null;
@@ -117,6 +119,62 @@ export class SymbolGraphView {
     this.filterConfig = { ...this.filterConfig, ...config };
     this.rebuildVertices();
     this.dirty = true;
+  }
+
+  async setMissionFilter(missionId: string | null): Promise<void> {
+    if (missionId === null) {
+      this.missionFilterId = null;
+      this.filterConfig = { ...this.filterConfig, missionFilePaths: null };
+      this.updateChip();
+      this.rebuildVertices();
+      this.dirty = true;
+      return;
+    }
+
+    let filePaths: Set<string>;
+    try {
+      const records = await intelligenceIpc.listFilesChangedByMission(missionId);
+      filePaths = new Set(records.map((r) => r.file_path));
+    } catch {
+      return;
+    }
+
+    this.missionFilterId = missionId;
+    this.filterConfig = { ...this.filterConfig, missionFilePaths: filePaths };
+    this.updateChip();
+    this.rebuildVertices();
+    this.dirty = true;
+  }
+
+  mountChipContainer(container: HTMLElement): void {
+    this.missionChipEl = document.createElement('div');
+    this.missionChipEl.className = 'symbol-graph-mission-chip';
+    this.missionChipEl.style.display = 'none';
+    container.prepend(this.missionChipEl);
+    this.updateChip();
+  }
+
+  private updateChip(): void {
+    if (!this.missionChipEl) return;
+    if (this.missionFilterId === null) {
+      this.missionChipEl.style.display = 'none';
+      this.missionChipEl.textContent = '';
+      return;
+    }
+    this.missionChipEl.style.display = 'inline-flex';
+    this.missionChipEl.innerHTML = '';
+
+    const label = document.createElement('span');
+    label.textContent = `Filtered to mission ${this.missionFilterId}`;
+
+    const clearBtn = document.createElement('button');
+    clearBtn.textContent = '✕';
+    clearBtn.className = 'symbol-graph-mission-chip-clear';
+    clearBtn.setAttribute('aria-label', 'Clear mission filter');
+    clearBtn.addEventListener('click', () => { void this.setMissionFilter(null); });
+
+    this.missionChipEl.appendChild(label);
+    this.missionChipEl.appendChild(clearBtn);
   }
 
   onSelect(handler: (sel: GraphSelection | null) => void): () => void {
@@ -455,6 +513,8 @@ export class SymbolGraphView {
   get _selectedId(): string | null { return this.selectedId; }
   get _nodeVertices(): NodeVertex[] { return this.nodeVertices; }
   get _filterConfig(): FilterConfig { return this.filterConfig; }
+  get _missionFilterId(): string | null { return this.missionFilterId; }
+  get _missionChipEl(): HTMLElement | null { return this.missionChipEl; }
 
   _loadGraphForTest(
     rawSymbols: AtlasSymbol[],

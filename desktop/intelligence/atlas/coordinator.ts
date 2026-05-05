@@ -16,9 +16,20 @@
 import { parseHash, serializeHash } from './focus-state.js';
 import type { Focus } from './focus-state.js';
 
-/** Minimal view interface the coordinator cares about. */
+/**
+ * Minimal view interface the coordinator cares about.
+ *
+ * `setMissionFilter` is optional: only views that support mission-scoped
+ * filtering (e.g. SymbolGraphView) need to implement it. The coordinator
+ * calls it when focus changes to/from `kind: 'mission'`.
+ *
+ * Auto-apply rule: mission focus → apply; any non-mission focus → clear.
+ * This prevents stuck-filter syndrome when the user clicks a file or symbol
+ * after browsing a mission.
+ */
 export interface CoordinatedView {
   setFocus(focus: Focus): void;
+  setMissionFilter?(missionId: string | null): void | Promise<void>;
 }
 
 export type FocusSubscriber = (focus: Focus | null) => void;
@@ -49,9 +60,11 @@ export function createCoordinator(): Coordinator {
   let debounceTimer: ReturnType<typeof setTimeout> | null = null;
 
   function broadcast(focus: Focus | null, sourceView?: CoordinatedView): void {
+    const missionId = focus?.kind === 'mission' ? focus.id : null;
     for (const v of views) {
       if (v === sourceView) continue;
       if (focus !== null) v.setFocus(focus);
+      if (v.setMissionFilter) void v.setMissionFilter(missionId);
     }
     for (const s of subscribers) s(focus);
   }
