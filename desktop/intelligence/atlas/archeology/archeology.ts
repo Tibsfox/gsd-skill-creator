@@ -30,6 +30,8 @@ import type { AtlasFilesChanged } from '../../../../src/intelligence/types.js';
 
 import { createTimeline } from './timeline.js';
 import type { TimelineComponent } from './timeline.js';
+import { buildFileExistence } from './file-existence.js';
+import type { FileExistenceState } from './file-existence.js';
 import { createMissionCard } from './mission-card.js';
 import type { MissionCardComponent } from './mission-card.js';
 import { buildSankeyData } from './sankey-data.js';
@@ -51,6 +53,12 @@ export interface ArcheologyView {
   /** Imperatively prime the per-mission rows cache (used by tests + warm hosts). */
   primeMissionRows(missionId: string, rows: AtlasFilesChanged[]): void;
   onSelect(cb: (e: ArcheologySelectEvent) => void): void;
+  /**
+   * Subscribe to time-lapse cursor changes.  Called each time the scrubber
+   * advances (manually or via auto-play) with the files present at that
+   * point in history.  Pass null to clear the time-lapse overlay.
+   */
+  onTimeLapseCursor(cb: (filesPresent: Set<string> | null, missionId: string | null) => void): void;
   unmount(): void;
 }
 
@@ -76,7 +84,9 @@ export function createArcheologyView(opts: ArcheologyOptions = {}): ArcheologyVi
   const rowsCache = new Map<string, AtlasFilesChanged[]>();
   const cards = new Map<string, MissionCardComponent>();
   let selectCb: (e: ArcheologySelectEvent) => void = () => {};
+  let timeLapseCursorCb: (filesPresent: Set<string> | null, missionId: string | null) => void = () => {};
   let lastSankey: SankeyDataResult | null = null;
+  let fileExistence: FileExistenceState | null = null;
 
   // ── Sankey layout cache ──────────────────────────────────────────────────
   interface SankeyCacheEntry {
@@ -118,6 +128,18 @@ export function createArcheologyView(opts: ArcheologyOptions = {}): ArcheologyVi
 
     timeline = createTimeline({ width: o.width, height: o.timelineHeight });
     timeline.onSelect((id) => setFocus(id));
+    timeline.onCursor((missionId) => {
+      const sorted = [...missions].sort((a, b) => a.shippedAt - b.shippedAt);
+      const chronological = sorted.map((m) => m.missionId);
+      if (fileExistence === null) {
+        fileExistence = buildFileExistence({
+          filesChangedByMission: rowsCache,
+          missionsChronological: chronological,
+        });
+      }
+      const filesPresent = fileExistence.filesAt(missionId);
+      timeLapseCursorCb(filesPresent, missionId);
+    });
     timeline.mount(timelineHost);
 
     renderSankey();
@@ -126,6 +148,7 @@ export function createArcheologyView(opts: ArcheologyOptions = {}): ArcheologyVi
 
   function setMissions(next: MilestoneLink[]): void {
     missions = next;
+    fileExistence = null;
     invalidateSankeyCache();
     if (timeline) timeline.setMissions(missions);
     renderSankey();
@@ -270,18 +293,18 @@ export function createArcheologyView(opts: ArcheologyOptions = {}): ArcheologyVi
     rowsCache.clear();
     lastSankey = null;
     sankeyCache = null;
+    fileExistence = null;
   }
 
   return {
     mount,
     setMissions,
     setFocus: (id) => {
-      // setFocus is async internally; surface a fire-and-forget façade for
-      // synchronous callers (timeline ticks, host dispatch).
       void setFocus(id);
     },
     primeMissionRows,
     onSelect(cb) { selectCb = cb; },
+    onTimeLapseCursor(cb) { timeLapseCursorCb = cb; },
     unmount,
   };
 }

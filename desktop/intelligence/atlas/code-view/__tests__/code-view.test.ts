@@ -208,4 +208,39 @@ describe('createCodeView', () => {
 
     expect(container.querySelector('.cv-root')).toBeNull();
   });
+
+  // T9 — time-lapse: overlay appears when current file not in filesPresent
+  it('setTimeLapseFiles shows overlay when filePath is absent from set', () => {
+    const cv = createCodeView(makeOpts({ filePath: 'src/index.ts' }));
+    cv.mount(container);
+
+    const filesNotIncluding = new Set(['src/other.ts']);
+    cv.setTimeLapseFiles(filesNotIncluding, 'v1.49.581');
+
+    const overlay = container.querySelector('.cv-time-lapse-overlay');
+    expect(overlay).not.toBeNull();
+    expect(overlay!.textContent).toContain('v1.49.581');
+
+    cv.unmount();
+  });
+
+  // T10 — time-lapse: no overlay when file is present; null clears existing overlay
+  it('setTimeLapseFiles does not show overlay when file is present; null clears overlay', () => {
+    const cv = createCodeView(makeOpts({ filePath: 'src/index.ts' }));
+    cv.mount(container);
+
+    // First: show overlay
+    cv.setTimeLapseFiles(new Set<string>(), 'v1.49.581');
+    expect(container.querySelector('.cv-time-lapse-overlay')).not.toBeNull();
+
+    // Clear overlay via null
+    cv.setTimeLapseFiles(null);
+    expect(container.querySelector('.cv-time-lapse-overlay')).toBeNull();
+
+    // File included → no overlay
+    cv.setTimeLapseFiles(new Set(['src/index.ts']), 'v1.49.581');
+    expect(container.querySelector('.cv-time-lapse-overlay')).toBeNull();
+
+    cv.unmount();
+  });
 });

@@ -55,6 +55,12 @@ export interface CodeViewComponent {
   setFocus(target: FocusTarget): void;
   /** Populate name→symbolId map so click + hover resolve correctly. */
   bindSymbols(symbols: AtlasSymbol[]): void;
+  /**
+   * Time-lapse overlay: if the currently-viewed file is not in filesPresent,
+   * show a banner "This file did not exist at <missionLabel>".
+   * Pass null to clear any overlay.
+   */
+  setTimeLapseFiles(filesPresent: Set<string> | null, missionLabel?: string): void;
 }
 
 function escapeHtml(s: string): string {
@@ -113,6 +119,7 @@ export function createCodeView(opts: CodeViewOptions): CodeViewComponent {
   let gutterInstance: ReturnType<typeof createGutter> | null = null;
   let hoverInstance: ReturnType<typeof createHoverTooltip> | null = null;
   const cleanupFns: Array<() => void> = [];
+  let timeLapseOverlay: HTMLElement | null = null;
 
   const lang = detectLanguage(filePath);
   const rawLines = splitIntoLines(source);
@@ -268,5 +275,35 @@ export function createCodeView(opts: CodeViewOptions): CodeViewComponent {
     }
   }
 
-  return { mount, unmount, setFocus, bindSymbols };
+  function setTimeLapseFiles(filesPresent: Set<string> | null, missionLabel?: string): void {
+    if (timeLapseOverlay) {
+      timeLapseOverlay.remove();
+      timeLapseOverlay = null;
+    }
+    if (filesPresent === null || filesPresent.has(filePath)) return;
+    if (!rootEl) return;
+
+    const overlay = document.createElement('div');
+    overlay.className = 'cv-time-lapse-overlay';
+    const msg = missionLabel
+      ? `This file did not exist at ${missionLabel}`
+      : 'This file did not exist at this point in history';
+    const msgEl = document.createElement('span');
+    msgEl.className = 'cv-time-lapse-msg';
+    msgEl.textContent = msg;
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'cv-time-lapse-close';
+    closeBtn.textContent = '×';
+    closeBtn.setAttribute('aria-label', 'clear time-lapse overlay');
+    closeBtn.addEventListener('click', () => {
+      overlay.remove();
+      timeLapseOverlay = null;
+    });
+    overlay.appendChild(msgEl);
+    overlay.appendChild(closeBtn);
+    rootEl.appendChild(overlay);
+    timeLapseOverlay = overlay;
+  }
+
+  return { mount, unmount, setFocus, bindSymbols, setTimeLapseFiles };
 }

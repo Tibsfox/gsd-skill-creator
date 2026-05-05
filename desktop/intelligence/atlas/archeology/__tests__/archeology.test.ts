@@ -4,7 +4,7 @@
  * jsdom environment via the `intelligence-ui` vitest project.
  */
 
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import type { AtlasFilesChanged } from '../../../../../src/intelligence/types.js';
 
 vi.mock('../../../../../src/intelligence/ipc.js', () => ({
@@ -398,6 +398,94 @@ describe('Sankey stable-layout cache', () => {
     view.setMissions(newMissions);
     view.setFocus('m1');
     expect(sankeyLayoutCallCount).toBeGreaterThan(callsAfterFirst);
+
+    view.unmount();
+  });
+});
+
+// ── Time-lapse playback tests ────────────────────────────────────────────────
+
+describe('time-lapse playback', () => {
+  beforeEach(async () => {
+    vi.useFakeTimers();
+    const { intelligenceIpc } = await import('../../../../../src/intelligence/ipc.js');
+    (intelligenceIpc.listFilesChangedByMission as ReturnType<typeof vi.fn>).mockClear();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  it('play button starts auto-advance: cursor emits after interval elapses', async () => {
+    const { createTimeline } = await import('../timeline.js');
+    const tl = createTimeline({ width: 800, height: 60 });
+    const host = document.createElement('div');
+    tl.mount(host);
+    tl.setMissions(MISSIONS);
+
+    const cursorIds: string[] = [];
+    tl.onCursor((id) => cursorIds.push(id));
+
+    const playBtn = host.querySelector<HTMLButtonElement>('.tl-play-btn');
+    expect(playBtn).not.toBeNull();
+    playBtn!.click(); // start playing at 1× (1000ms interval)
+
+    vi.advanceTimersByTime(1100);
+    expect(cursorIds.length).toBeGreaterThanOrEqual(1);
+
+    tl.unmount();
+  });
+
+  it('speed setter changes interval: 4× speed fires ~4× more advances in same wall time', async () => {
+    const { createTimeline } = await import('../timeline.js');
+    const tl = createTimeline({ width: 800, height: 60 });
+    const host = document.createElement('div');
+    tl.mount(host);
+    tl.setMissions(MISSIONS);
+
+    const cursorIds: string[] = [];
+    tl.onCursor((id) => cursorIds.push(id));
+
+    // Set speed to 4× before playing
+    const speedSel = host.querySelector<HTMLSelectElement>('.tl-speed-select');
+    expect(speedSel).not.toBeNull();
+    speedSel!.value = '4';
+    speedSel!.dispatchEvent(new Event('change', { bubbles: true }));
+
+    const playBtn = host.querySelector<HTMLButtonElement>('.tl-play-btn');
+    playBtn!.click();
+
+    // At 4× the interval is 250ms. Advance 1000ms → should see multiple advances.
+    vi.advanceTimersByTime(1000);
+    expect(cursorIds.length).toBeGreaterThanOrEqual(2);
+
+    tl.unmount();
+  });
+
+  it('scrubber setCursor emits cursor event and onTimeLapseCursor fires on archeology view', async () => {
+    const view = createArcheologyView({ width: 600, sankeyHeight: 200 });
+    const host = document.createElement('div');
+    view.mount(host);
+
+    const sorted = [...MISSIONS].sort((a, b) => a.shippedAt - b.shippedAt);
+    view.setMissions(sorted);
+    view.primeMissionRows('m1', [row('m1', 'src/foo.ts', 'A', 10, 0)]);
+
+    const received: Array<{ files: Set<string> | null; mission: string | null }> = [];
+    view.onTimeLapseCursor((files, missionId) => received.push({ files, mission: missionId }));
+
+    // Manually fire the timeline cursor event by accessing the timeline's cursor callback.
+    // The cursor button is wired via tl.onCursor → archeology internal handler.
+    const tlHost = host.querySelector<HTMLElement>('.archeology-pane-timeline');
+    const playBtn = tlHost?.querySelector<HTMLButtonElement>('.tl-play-btn');
+    expect(playBtn).not.toBeNull();
+    playBtn!.click();
+
+    vi.advanceTimersByTime(1100);
+
+    // At least one cursor event should have propagated
+    expect(received.length).toBeGreaterThanOrEqual(1);
+    expect(received[0].files).toBeInstanceOf(Set);
 
     view.unmount();
   });
