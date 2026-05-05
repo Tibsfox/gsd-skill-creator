@@ -73,12 +73,15 @@ describe('intelligence/kb — SnapshotManager (C05)', () => {
     expect(tables).toContain('file_metrics');
   });
 
-  it('T1: schema_version shows version 2 after migration', async () => {
+  it('T1: schema_version shows version ≥ 2 after migration', async () => {
+    // v1.49.607 added migration 003 (atlas symbols) on top of v2. The
+    // snapshot-manager still depends only on v2-and-earlier tables; assert
+    // migrations have advanced past the v2 boundary.
     const pdb = await store.getProjectRawDB(PROJECT_ID);
     const rows = pdb
       .prepare('SELECT MAX(version) AS v FROM schema_version')
       .all() as Array<{ v: number }>;
-    expect(rows[0].v).toBe(2);
+    expect(rows[0].v).toBeGreaterThanOrEqual(2);
   });
 
   // ─── T2: Snapshot lifecycle ───────────────────────────────────────────
