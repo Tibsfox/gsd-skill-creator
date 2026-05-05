@@ -191,4 +191,99 @@ describe('rust syntax', () => {
     expect(node).toBeDefined();
     expect(node!.importedNames?.[0]?.original).toBe('Hidden');
   });
+
+  it('simple inline mod emits namespace node and fn inside with parent prefix', () => {
+    const src = `
+      mod utils {
+        pub fn helper() {}
+      }
+    `;
+    const { ast } = parse(src, 'rust');
+    const mod = ast.nodes.find((n) => n.kind === 'namespace');
+    expect(mod).toBeDefined();
+    expect(mod!.name).toBe('utils');
+    const fn_ = ast.nodes.find((n) => n.kind === 'function' && n.name === 'helper');
+    expect(fn_).toBeDefined();
+    expect(fn_!.parent).toBe('utils');
+  });
+
+  it('inline mod with pub use inside emits export node with correct module spec', () => {
+    const src = `
+      mod inner {
+        pub use crate::types::Foo;
+      }
+    `;
+    const { ast } = parse(src, 'rust');
+    const exportNode = ast.nodes.find((n) => n.kind === 'export');
+    expect(exportNode).toBeDefined();
+    expect(exportNode!.importedNames).toEqual([{ local: 'Foo', original: 'Foo' }]);
+  });
+
+  it('doubly-nested mods produce correct qualified parent chain (a, a::b, a::b::c)', () => {
+    const src = `
+      mod a {
+        mod b {
+          fn c() {}
+        }
+      }
+    `;
+    const { ast } = parse(src, 'rust');
+    const mods = ast.nodes.filter((n) => n.kind === 'namespace');
+    expect(mods.map((n) => n.name).sort()).toEqual(['a', 'b']);
+    const modA = mods.find((n) => n.name === 'a');
+    expect(modA!.parent === '' || modA!.parent === undefined).toBe(true);
+    const modB = mods.find((n) => n.name === 'b');
+    expect(modB!.parent).toBe('a');
+    const fn_ = ast.nodes.find((n) => n.kind === 'function' && n.name === 'c');
+    expect(fn_).toBeDefined();
+    expect(fn_!.parent).toBe('a::b');
+  });
+
+  it('pub mod with visibility modifier emits namespace node with pub modifier', () => {
+    const src = `
+      pub mod api {
+        pub fn endpoint() {}
+      }
+    `;
+    const { ast } = parse(src, 'rust');
+    const mod = ast.nodes.find((n) => n.kind === 'namespace');
+    expect(mod).toBeDefined();
+    expect(mod!.name).toBe('api');
+    expect(mod!.modifiers).toContain('pub');
+    const fn_ = ast.nodes.find((n) => n.kind === 'function' && n.name === 'endpoint');
+    expect(fn_).toBeDefined();
+    expect(fn_!.parent).toBe('api');
+  });
+
+  it('declaration-only mod emits namespace node but does not descend', () => {
+    const src = `mod submodule;`;
+    const { ast } = parse(src, 'rust');
+    const mod = ast.nodes.find((n) => n.kind === 'namespace');
+    expect(mod).toBeDefined();
+    expect(mod!.name).toBe('submodule');
+    // No other nodes should appear (no body to descend into).
+    expect(ast.nodes.filter((n) => n.kind !== 'namespace')).toHaveLength(0);
+  });
+
+  it('mod containing struct and impl produces parented symbols', () => {
+    const src = `
+      mod models {
+        pub struct User { id: u32 }
+        impl User {
+          pub fn new(id: u32) -> User { User { id } }
+        }
+      }
+    `;
+    const { ast } = parse(src, 'rust');
+    const struct_ = ast.nodes.find((n) => n.kind === 'struct');
+    expect(struct_).toBeDefined();
+    expect(struct_!.name).toBe('User');
+    expect(struct_!.parent).toBe('models');
+    const impl_ = ast.nodes.find((n) => n.kind === 'impl');
+    expect(impl_).toBeDefined();
+    expect(impl_!.name).toBe('User');
+    const method = ast.nodes.find((n) => n.kind === 'method' && n.name === 'new');
+    expect(method).toBeDefined();
+    expect(method!.parent).toBe('User');
+  });
 });

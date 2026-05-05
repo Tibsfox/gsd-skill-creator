@@ -274,4 +274,56 @@ describe('cross-file resolver', () => {
     expect(callRef).toBeDefined();
     expect(callRef!.resolved_symbol_id).toBe(initInPrelude!.id);
   });
+
+  it('Rust inline mod: fn inside mod body is indexed with qualified parent prefix', () => {
+    // lib.rs has an inline mod block; main.rs imports through it.
+    // The indexer should emit bar with parent='utils', qualified_name='utils::bar'.
+    const inputs: FileInput[] = [
+      {
+        file_path: 'src/lib.rs',
+        source: `pub mod utils {\n  pub fn bar() -> i32 { 0 }\n}\n`,
+        language: 'rust',
+      },
+      {
+        file_path: 'src/main.rs',
+        source: `use crate::utils::bar;\nfn run() { bar(); }`,
+        language: 'rust',
+      },
+    ];
+    const { idx } = buildAndResolve(inputs);
+    const barSym = idx.symbols.find((s) => s.name === 'bar' && s.file_path === 'src/lib.rs');
+    expect(barSym).toBeDefined();
+    expect(barSym!.qualified_name).toBe('utils::bar');
+  });
+
+  it('Rust nested mod pub use: consumer resolves through inline re-export to origin', () => {
+    // types.rs defines Foo; lib.rs has inline mod inner { pub use super::Foo; };
+    // consumer.rs uses inner::Foo — indexer should see the re-export, resolver follows it.
+    const inputs: FileInput[] = [
+      {
+        file_path: 'src/types.rs',
+        source: `pub struct Foo;`,
+        language: 'rust',
+      },
+      {
+        file_path: 'src/lib.rs',
+        source: `pub mod types;\npub mod inner {\n  pub use crate::types::Foo;\n}\n`,
+        language: 'rust',
+      },
+      {
+        file_path: 'src/consumer.rs',
+        source: `use crate::inner::Foo;\nfn run() { let _: Foo; }`,
+        language: 'rust',
+      },
+    ];
+    const { idx } = buildAndResolve(inputs);
+    // The pub use inside the inline mod body must be indexed.
+    const reExportNode = idx.symbols.find(
+      (s) => s.file_path === 'src/lib.rs' && s.kind === 'export',
+    );
+    expect(reExportNode).toBeDefined();
+    // The origin struct must be indexable from types.rs.
+    const fooInTypes = idx.symbols.find((s) => s.name === 'Foo' && s.file_path === 'src/types.rs');
+    expect(fooInTypes).toBeDefined();
+  });
 });

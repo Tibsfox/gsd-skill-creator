@@ -381,7 +381,197 @@ const extractUse: CoarseExtractor = ({ tokens, i, pushNode }) => {
   return k + 1;
 };
 
+/**
+ * Walk a `mod { ... }` body token range [from, limit), emitting nodes for
+ * all recognized declarations with names prefixed by `parentPrefix`.
+ * Descends recursively for nested mods.
+ */
+function walkRustModBody(
+  tokens: Token[],
+  from: number,
+  limit: number,
+  modName: string,
+  parentPrefix: string,
+  pushNode: (node: CoarseNode) => void,
+  depth: number,
+): void {
+  if (depth > 8) return;
+  const prefix = parentPrefix ? `${parentPrefix}::${modName}` : modName;
+  let i = from;
+  while (i < limit) {
+    // Try mod (recursive).
+    const modResult = tryExtractMod(tokens, i, limit, prefix, pushNode, depth + 1);
+    if (modResult > i) { i = modResult; continue; }
+    // Try fn.
+    const fnResult = tryExtractFnWithPrefix(tokens, i, limit, prefix, pushNode);
+    if (fnResult > i) { i = fnResult; continue; }
+    // Try struct/enum/trait.
+    const setResult = tryExtractStructEnumTrait(tokens, i, prefix, pushNode);
+    if (setResult > i) { i = setResult; continue; }
+    // Try use/pub use.
+    const useResult = tryExtractUseWithPrefix(tokens, i, limit, prefix, pushNode);
+    if (useResult > i) { i = useResult; continue; }
+    // Try impl.
+    const implResult = tryExtractImplInMod(tokens, i, limit, prefix, pushNode);
+    if (implResult > i) { i = implResult; continue; }
+    i++;
+  }
+}
+
+function tryExtractMod(
+  tokens: Token[],
+  i: number,
+  limit: number,
+  parentPrefix: string,
+  pushNode: (node: CoarseNode) => void,
+  depth: number,
+): number {
+  const { mods, declAt } = consumeModifiers(tokens, i, MODIFIERS);
+  const t = tokens[declAt];
+  if (!t || t.value !== 'mod') return i;
+  const nameT = tokens[declAt + 1];
+  if (!nameT || nameT.kind !== 'identifier') return i;
+  const modName = nameT.value;
+  const qualifiedName = parentPrefix ? `${parentPrefix}::${modName}` : modName;
+  const next = tokens[declAt + 2];
+  if (!next) return i;
+  // Declaration-only: `mod foo;`
+  if (next.value === ';') {
+    pushNode({
+      kind: 'namespace',
+      name: modName,
+      parent: parentPrefix || undefined,
+      start: t.start,
+      end: nameT.end,
+      line: t.line,
+      modifiers: mods,
+    });
+    return declAt + 3;
+  }
+  // Inline body: `mod foo { ... }`
+  if (next.value === '{') {
+    const bodyEnd = skipBalanced(tokens, declAt + 2, '{', '}');
+    pushNode({
+      kind: 'namespace',
+      name: modName,
+      parent: parentPrefix || undefined,
+      start: t.start,
+      end: nameT.end,
+      line: t.line,
+      modifiers: mods,
+    });
+    const innerLimit = Math.min(bodyEnd - 1, limit);
+    walkRustModBody(tokens, declAt + 3, innerLimit, modName, parentPrefix, pushNode, depth);
+    return bodyEnd;
+  }
+  return i;
+}
+
+function tryExtractFnWithPrefix(
+  tokens: Token[],
+  i: number,
+  limit: number,
+  parentPrefix: string,
+  pushNode: (node: CoarseNode) => void,
+): number {
+  const { mods, declAt } = consumeModifiers(tokens, i, MODIFIERS);
+  const t = tokens[declAt];
+  if (!t || t.value !== 'fn') return i;
+  const nameT = tokens[declAt + 1];
+  if (!nameT || nameT.kind !== 'identifier') return i;
+  const qualifiedName = `${parentPrefix}::${nameT.value}`;
+  pushNode({
+    kind: 'function',
+    name: nameT.value,
+    parent: parentPrefix,
+    start: t.start,
+    end: nameT.end,
+    line: t.line,
+    modifiers: mods,
+  });
+  let j = declAt + 2;
+  j = skipGenerics(tokens, j);
+  if (tokens[j]?.value === '(') j = skipBalanced(tokens, j, '(', ')');
+  while (j < limit && tokens[j]!.value !== '{' && tokens[j]!.value !== ';') j++;
+  if (tokens[j]?.value === '{') {
+    const bodyEnd = skipBalanced(tokens, j, '{', '}');
+    extractNestedFns(tokens, j + 1, bodyEnd - 1, qualifiedName, pushNode, 1);
+    return bodyEnd;
+  }
+  return declAt + 2;
+}
+
+function tryExtractStructEnumTrait(
+  tokens: Token[],
+  i: number,
+  parentPrefix: string,
+  pushNode: (node: CoarseNode) => void,
+): number {
+  const { mods, declAt } = consumeModifiers(tokens, i, MODIFIERS);
+  const t = tokens[declAt];
+  if (!t) return i;
+  let kind: 'struct' | 'enum' | 'trait' | undefined;
+  if (t.value === 'struct') kind = 'struct';
+  else if (t.value === 'enum') kind = 'enum';
+  else if (t.value === 'trait') kind = 'trait';
+  if (!kind) return i;
+  const nameT = tokens[declAt + 1];
+  if (!nameT || nameT.kind !== 'identifier') return i;
+  pushNode({
+    kind,
+    name: nameT.value,
+    parent: parentPrefix,
+    start: t.start,
+    end: nameT.end,
+    line: t.line,
+    modifiers: mods,
+  });
+  return declAt + 2;
+}
+
+function tryExtractUseWithPrefix(
+  tokens: Token[],
+  i: number,
+  limit: number,
+  _parentPrefix: string,
+  pushNode: (node: CoarseNode) => void,
+): number {
+  // Delegate to the same logic as extractUse but via a one-shot ctx.
+  void limit;
+  let advanced = i;
+  const ctx = {
+    tokens,
+    i,
+    pushNode,
+    skipBalanced(open: string, close: string) { return skipBalanced(tokens, i, open, close); },
+  };
+  advanced = extractUse(ctx);
+  return advanced;
+}
+
+function tryExtractImplInMod(
+  tokens: Token[],
+  i: number,
+  _limit: number,
+  _parentPrefix: string,
+  pushNode: (node: CoarseNode) => void,
+): number {
+  void _limit; void _parentPrefix;
+  const ctx = {
+    tokens,
+    i,
+    pushNode,
+    skipBalanced(open: string, close: string) { return skipBalanced(tokens, i, open, close); },
+  };
+  return extractImpl(ctx);
+}
+
+const extractMod: CoarseExtractor = ({ tokens, i, pushNode }) => {
+  return tryExtractMod(tokens, i, tokens.length, '', pushNode, 0);
+};
+
 export const rustExtractors: CoarseExtractor[] = [
+  extractMod,
   extractUse,
   extractImpl,
   extractStructEnumTrait,
