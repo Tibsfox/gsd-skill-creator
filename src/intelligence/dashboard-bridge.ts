@@ -12,6 +12,7 @@
 
 import { KBStore } from './kb/store.js';
 import { getIntelligenceEventBus } from './events/bus.js';
+import { installAtlasCommands } from './atlas-bridge.js';
 import type { ProjectId, MeetingId, DecisionId, FindingId } from './types.js';
 
 // ─── Command dispatch table ────────────────────────────────────────────────────
@@ -113,6 +114,11 @@ const COMMANDS: Record<string, CommandHandler> = {
     return queueConsoleRequest('intelligence.snapshot_diff', args);
   },
 };
+
+// W4c: merge in 14 browser-mode atlas commands (13 read + 1 indexer dispatch +
+// invalidate). The atlas surface lives in `atlas-bridge.ts` to keep this file
+// focused on the core KB-command catalog.
+installAtlasCommands(COMMANDS as Record<string, CommandHandler>);
 
 // ─── Console outbox helper ─────────────────────────────────────────────────────
 
