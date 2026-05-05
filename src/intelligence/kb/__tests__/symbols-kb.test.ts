@@ -320,4 +320,184 @@ describe('intelligence/kb — SymbolsKB', () => {
     expect(refs[0].resolved_symbol_id).toBe('method-x');
     expect(refs[0].resolution_kind).toBe('call');
   });
+
+  // ─── F2: bulk-insert writers (atlas-indexer) ────────────────────────
+
+  it('bulkInsertSymbols round-trips through listSymbolsInSnapshot', () => {
+    const inserted = kb.bulkInsertSymbols([
+      {
+        id: 'b1',
+        snapshot_id: SNAP,
+        project_id: 'proj-1',
+        file_path: 'src/x.ts',
+        kind: 'function',
+        name: 'f',
+        qualified_name: 'f',
+        start_byte: 0,
+        end_byte: 10,
+        start_line: 1,
+        end_line: 2,
+        signature_hash: 'h1',
+        modifiers: ['async'],
+        language: 'ts',
+        parent_symbol_id: null,
+      },
+      {
+        id: 'b2',
+        snapshot_id: SNAP,
+        project_id: 'proj-1',
+        file_path: 'src/y.ts',
+        kind: 'class',
+        name: 'C',
+        qualified_name: 'C',
+        start_byte: 0,
+        end_byte: 20,
+        start_line: 1,
+        end_line: 5,
+        signature_hash: null,
+        modifiers: [],
+        language: 'ts',
+        parent_symbol_id: null,
+      },
+    ]);
+    expect(inserted).toBe(2);
+    const all = kb.listSymbolsInSnapshot(SNAP);
+    expect(all.length).toBe(2);
+    expect(all.find((s) => s.id === 'b1')?.modifiers).toEqual(['async']);
+  });
+
+  it('bulkInsertSymbols is idempotent on conflicting ids', () => {
+    const row = {
+      id: 'b1',
+      snapshot_id: SNAP,
+      project_id: 'proj-1',
+      file_path: 'src/x.ts',
+      kind: 'function' as const,
+      name: 'f',
+      qualified_name: 'f',
+      start_byte: 0,
+      end_byte: 10,
+      start_line: 1,
+      end_line: 2,
+      signature_hash: null,
+      modifiers: [],
+      language: 'ts' as const,
+      parent_symbol_id: null,
+    };
+    kb.bulkInsertSymbols([row]);
+    const second = kb.bulkInsertSymbols([row]);
+    expect(second).toBe(0);
+    expect(kb.listSymbolsInSnapshot(SNAP).length).toBe(1);
+  });
+
+  it('bulkInsertCalls + bulkInsertReferences + bulkInsertTypeRelations round-trip', () => {
+    kb.bulkInsertSymbols([
+      {
+        id: 'A',
+        snapshot_id: SNAP,
+        project_id: 'p',
+        file_path: 'a.ts',
+        kind: 'function',
+        name: 'A',
+        qualified_name: 'A',
+        start_byte: 0,
+        end_byte: 5,
+        start_line: 1,
+        end_line: 1,
+        signature_hash: null,
+        modifiers: [],
+        language: 'ts',
+        parent_symbol_id: null,
+      },
+      {
+        id: 'B',
+        snapshot_id: SNAP,
+        project_id: 'p',
+        file_path: 'b.ts',
+        kind: 'function',
+        name: 'B',
+        qualified_name: 'B',
+        start_byte: 0,
+        end_byte: 5,
+        start_line: 1,
+        end_line: 1,
+        signature_hash: null,
+        modifiers: [],
+        language: 'ts',
+        parent_symbol_id: null,
+      },
+    ]);
+    expect(
+      kb.bulkInsertCalls([
+        {
+          id: 'C-1',
+          snapshot_id: SNAP,
+          caller_symbol_id: 'A',
+          callee_symbol_id: 'B',
+          call_site_byte: 4,
+          call_site_line: 1,
+          confidence: 0.9,
+        },
+      ]),
+    ).toBe(1);
+    expect(kb.listCallees('A' as SymbolId).length).toBe(1);
+
+    expect(
+      kb.bulkInsertReferences([
+        {
+          id: 'R-1',
+          snapshot_id: SNAP,
+          file_path: 'a.ts',
+          start_byte: 4,
+          end_byte: 5,
+          start_line: 1,
+          end_line: 1,
+          name: 'B',
+          resolved_symbol_id: 'B',
+          resolution_confidence: 0.9,
+          resolution_kind: 'call',
+        },
+      ]),
+    ).toBe(1);
+    expect(kb.listReferencesForSymbol('B' as SymbolId).length).toBe(1);
+
+    expect(
+      kb.bulkInsertTypeRelations([
+        {
+          id: 'T-1',
+          snapshot_id: SNAP,
+          from_symbol_id: 'A',
+          to_symbol_id: 'B',
+          kind: 'uses_type',
+          confidence: 0.8,
+        },
+      ]),
+    ).toBe(1);
+    expect(kb.listTypeRelationsFrom('A' as SymbolId).length).toBe(1);
+  });
+
+  it('clearSnapshot removes all symbol-side rows for the snapshot', () => {
+    kb.bulkInsertSymbols([
+      {
+        id: 's1',
+        snapshot_id: SNAP,
+        project_id: 'p',
+        file_path: 'a.ts',
+        kind: 'function',
+        name: 'a',
+        qualified_name: 'a',
+        start_byte: 0,
+        end_byte: 5,
+        start_line: 1,
+        end_line: 1,
+        signature_hash: null,
+        modifiers: [],
+        language: 'ts',
+        parent_symbol_id: null,
+      },
+    ]);
+    expect(kb.listSymbolsInSnapshot(SNAP).length).toBe(1);
+    kb.clearSnapshot(SNAP);
+    expect(kb.listSymbolsInSnapshot(SNAP).length).toBe(0);
+  });
 });

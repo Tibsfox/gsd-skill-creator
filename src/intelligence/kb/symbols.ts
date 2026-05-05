@@ -222,6 +222,159 @@ export class SymbolsKB {
     return rows.map(rowToAtlasTypeRelation);
   }
 
+  // ─── Writers (atlas-indexer F2) ───────────────────────────────────────
+  //
+  // Bulk-insert helpers consumed by `src/intelligence/atlas-indexer/runner.ts`.
+  // Each batch wraps a single transaction; prepared statements are cached on
+  // the instance for repeat calls. Inserts use ON CONFLICT(id) DO NOTHING so
+  // a re-run for the same snapshot is idempotent — the indexer's deterministic
+  // id generation guarantees stable keys across reindex passes.
+
+  bulkInsertSymbols(rows: AtlasSymbol[]): number {
+    if (rows.length === 0) return 0;
+    const insert = this._db.prepare(
+      `INSERT INTO symbols
+         (id, snapshot_id, project_id, file_path, kind, name, qualified_name,
+          start_byte, end_byte, start_line, end_line, signature_hash,
+          modifiers_json, language, parent_symbol_id)
+       VALUES
+         (@id, @snapshot_id, @project_id, @file_path, @kind, @name, @qualified_name,
+          @start_byte, @end_byte, @start_line, @end_line, @signature_hash,
+          @modifiers_json, @language, @parent_symbol_id)
+       ON CONFLICT(id) DO NOTHING`,
+    );
+    const txn = this._db.transaction((batch: AtlasSymbol[]) => {
+      let n = 0;
+      for (const s of batch) {
+        const r = insert.run({
+          id: s.id,
+          snapshot_id: s.snapshot_id,
+          project_id: s.project_id,
+          file_path: s.file_path,
+          kind: s.kind,
+          name: s.name,
+          qualified_name: s.qualified_name,
+          start_byte: s.start_byte,
+          end_byte: s.end_byte,
+          start_line: s.start_line,
+          end_line: s.end_line,
+          signature_hash: s.signature_hash,
+          modifiers_json: JSON.stringify(s.modifiers ?? []),
+          language: s.language,
+          parent_symbol_id: s.parent_symbol_id,
+        });
+        if (r.changes > 0) n++;
+      }
+      return n;
+    });
+    return txn(rows);
+  }
+
+  bulkInsertReferences(rows: AtlasSymbolReference[]): number {
+    if (rows.length === 0) return 0;
+    const insert = this._db.prepare(
+      `INSERT INTO symbol_references
+         (id, snapshot_id, file_path, start_byte, end_byte, start_line, end_line,
+          name, resolved_symbol_id, resolution_confidence, resolution_kind)
+       VALUES
+         (@id, @snapshot_id, @file_path, @start_byte, @end_byte, @start_line, @end_line,
+          @name, @resolved_symbol_id, @resolution_confidence, @resolution_kind)
+       ON CONFLICT(id) DO NOTHING`,
+    );
+    const txn = this._db.transaction((batch: AtlasSymbolReference[]) => {
+      let n = 0;
+      for (const ref of batch) {
+        const r = insert.run({
+          id: ref.id,
+          snapshot_id: ref.snapshot_id,
+          file_path: ref.file_path,
+          start_byte: ref.start_byte,
+          end_byte: ref.end_byte,
+          start_line: ref.start_line,
+          end_line: ref.end_line,
+          name: ref.name,
+          resolved_symbol_id: ref.resolved_symbol_id,
+          resolution_confidence: ref.resolution_confidence,
+          resolution_kind: ref.resolution_kind,
+        });
+        if (r.changes > 0) n++;
+      }
+      return n;
+    });
+    return txn(rows);
+  }
+
+  bulkInsertCalls(rows: AtlasCallEdge[]): number {
+    if (rows.length === 0) return 0;
+    const insert = this._db.prepare(
+      `INSERT INTO calls
+         (id, snapshot_id, caller_symbol_id, callee_symbol_id,
+          call_site_byte, call_site_line, confidence)
+       VALUES
+         (@id, @snapshot_id, @caller_symbol_id, @callee_symbol_id,
+          @call_site_byte, @call_site_line, @confidence)
+       ON CONFLICT(id) DO NOTHING`,
+    );
+    const txn = this._db.transaction((batch: AtlasCallEdge[]) => {
+      let n = 0;
+      for (const e of batch) {
+        const r = insert.run({
+          id: e.id,
+          snapshot_id: e.snapshot_id,
+          caller_symbol_id: e.caller_symbol_id,
+          callee_symbol_id: e.callee_symbol_id,
+          call_site_byte: e.call_site_byte,
+          call_site_line: e.call_site_line,
+          confidence: e.confidence,
+        });
+        if (r.changes > 0) n++;
+      }
+      return n;
+    });
+    return txn(rows);
+  }
+
+  bulkInsertTypeRelations(rows: AtlasTypeRelation[]): number {
+    if (rows.length === 0) return 0;
+    const insert = this._db.prepare(
+      `INSERT INTO type_relations
+         (id, snapshot_id, from_symbol_id, to_symbol_id, kind, confidence)
+       VALUES
+         (@id, @snapshot_id, @from_symbol_id, @to_symbol_id, @kind, @confidence)
+       ON CONFLICT(id) DO NOTHING`,
+    );
+    const txn = this._db.transaction((batch: AtlasTypeRelation[]) => {
+      let n = 0;
+      for (const t of batch) {
+        const r = insert.run({
+          id: t.id,
+          snapshot_id: t.snapshot_id,
+          from_symbol_id: t.from_symbol_id,
+          to_symbol_id: t.to_symbol_id,
+          kind: t.kind,
+          confidence: t.confidence,
+        });
+        if (r.changes > 0) n++;
+      }
+      return n;
+    });
+    return txn(rows);
+  }
+
+  /**
+   * Clear all rows for a snapshot — used when re-indexing replaces a prior
+   * pass. Wraps four DELETEs in one transaction.
+   */
+  clearSnapshot(snapshot_id: SnapshotId): void {
+    const txn = this._db.transaction(() => {
+      this._db.prepare('DELETE FROM symbols WHERE snapshot_id = ?').run(snapshot_id);
+      this._db.prepare('DELETE FROM symbol_references WHERE snapshot_id = ?').run(snapshot_id);
+      this._db.prepare('DELETE FROM calls WHERE snapshot_id = ?').run(snapshot_id);
+      this._db.prepare('DELETE FROM type_relations WHERE snapshot_id = ?').run(snapshot_id);
+    });
+    txn();
+  }
+
   // ─── Test helpers (not part of AtlasKB surface) ──────────────────────
 
   /**
