@@ -1,0 +1,338 @@
+/**
+ * Cross-file resolver — walks IndexResult, resolves references against the
+ * symbol table, builds call edges and type relations.
+ *
+ * Confidence convention (per src/intelligence/types.ts):
+ *   declaration→declaration:    1.0 (already set at index time, not here)
+ *   call site, single match:    0.9
+ *   call site, multi-match:     0.5 (ambiguous; first match wins, low confidence)
+ *   call site, in-file match:   0.95 (slightly higher than cross-file)
+ *   type-relation, resolved:    0.9
+ *   import re-export:           0.8
+ *   unresolved:                 0.0
+ * @module intelligence/symbols/resolver
+ */
+
+import type {
+  AtlasCallEdge,
+  AtlasSymbol,
+  AtlasSymbolReference,
+  AtlasTypeRelation,
+  CallEdgeId,
+  ResolutionKind,
+  SymbolId,
+  TypeRelationId,
+} from '../types.js';
+import type { FileIndexResult, IndexResult, ResolveResult, ResolverContext } from './types.js';
+import { parse, significant, type Token } from '../../atlas/syntax/index.js';
+import { resolveTsImport } from './import-resolution/ts.js';
+import { resolveRustUse } from './import-resolution/rust.js';
+import { resolvePythonImport } from './import-resolution/python.js';
+
+interface SymbolBucket {
+  byName: Map<string, AtlasSymbol[]>;
+  byQualifiedName: Map<string, AtlasSymbol[]>;
+  byFile: Map<string, AtlasSymbol[]>;
+}
+
+function bucket(symbols: AtlasSymbol[]): SymbolBucket {
+  const byName = new Map<string, AtlasSymbol[]>();
+  const byQualifiedName = new Map<string, AtlasSymbol[]>();
+  const byFile = new Map<string, AtlasSymbol[]>();
+  for (const s of symbols) {
+    arrPush(byName, s.name, s);
+    arrPush(byQualifiedName, s.qualified_name, s);
+    arrPush(byFile, s.file_path, s);
+  }
+  return { byName, byQualifiedName, byFile };
+}
+
+function arrPush<K, V>(m: Map<K, V[]>, k: K, v: V): void {
+  const arr = m.get(k);
+  if (arr) arr.push(v);
+  else m.set(k, [v]);
+}
+
+function hash32(s: string): string {
+  let h = 5381;
+  for (let i = 0; i < s.length; i++) h = (h * 33) ^ s.charCodeAt(i);
+  return (h >>> 0).toString(16);
+}
+
+/**
+ * Resolve every reference, produce call edges + type relations. The reference
+ * rows themselves are returned with resolved_symbol_id + confidence filled in.
+ */
+export function resolve(idx: IndexResult, ctx: ResolverContext): ResolveResult {
+  const buckets = bucket(idx.symbols);
+  const knownFiles = new Set(idx.files.map((f) => f.file_path));
+
+  // Per-file imported-name → resolved-file map (for narrowing references).
+  const importBindingsByFile = new Map<string, Map<string, string>>();
+  for (const f of idx.files) {
+    importBindingsByFile.set(f.file_path, computeImportBindings(f, ctx, knownFiles));
+  }
+
+  // Per-file enclosing-symbol lookup (caller_symbol_id resolution).
+  const enclosingByFile = new Map<string, AtlasSymbol[]>();
+  for (const s of idx.symbols) {
+    arrPush(enclosingByFile, s.file_path, s);
+  }
+
+  const refs: AtlasSymbolReference[] = [];
+  const calls: AtlasCallEdge[] = [];
+  const seenCallEdge = new Set<string>();
+  const seenTypeRel = new Set<string>();
+  const typeRels: AtlasTypeRelation[] = [];
+
+  for (const ref of idx.references) {
+    const fileBindings = importBindingsByFile.get(ref.file_path);
+    const inFileSyms = (enclosingByFile.get(ref.file_path) ?? []).filter((s) => s.name === ref.name);
+    const targetSym = pickResolutionTarget(ref, inFileSyms, buckets, fileBindings);
+    const updated: AtlasSymbolReference = targetSym
+      ? {
+          ...ref,
+          resolved_symbol_id: targetSym.symbol.id,
+          resolution_confidence: targetSym.confidence,
+          resolution_kind: ref.resolution_kind === 'unknown' ? 'call' : ref.resolution_kind,
+        }
+      : ref;
+    refs.push(updated);
+
+    if (targetSym && (ref.resolution_kind === 'call' || (updated.resolution_kind === 'call'))) {
+      const caller = findEnclosing(enclosingByFile.get(ref.file_path) ?? [], ref.start_byte);
+      if (caller && caller.id !== targetSym.symbol.id) {
+        const key = `${caller.id}|${targetSym.symbol.id}|${ref.start_byte}`;
+        if (!seenCallEdge.has(key)) {
+          seenCallEdge.add(key);
+          const id: CallEdgeId = `C-${hash32(key)}`;
+          calls.push({
+            id,
+            snapshot_id: ctx.snapshot_id,
+            caller_symbol_id: caller.id,
+            callee_symbol_id: targetSym.symbol.id,
+            call_site_byte: ref.start_byte,
+            call_site_line: ref.start_line,
+            confidence: targetSym.confidence,
+          });
+        }
+      }
+    }
+  }
+
+  // Type relations: extends / implements / returns / param scanned via re-tokenize.
+  for (const f of idx.files) {
+    const fileSyms = idx.symbols.filter((s) => s.file_path === f.file_path);
+    extractTypeRelations(f, fileSyms, buckets, importBindingsByFile.get(f.file_path), ctx, typeRels, seenTypeRel);
+  }
+
+  return { references: refs, calls, type_relations: typeRels };
+}
+
+interface PickedTarget {
+  symbol: AtlasSymbol;
+  confidence: number;
+}
+
+function pickResolutionTarget(
+  ref: AtlasSymbolReference,
+  inFileSyms: AtlasSymbol[],
+  buckets: SymbolBucket,
+  fileBindings: Map<string, string> | undefined,
+): PickedTarget | null {
+  // 1. Same-file declaration wins (highest signal).
+  if (inFileSyms.length === 1) return { symbol: inFileSyms[0]!, confidence: ref.resolution_kind === 'call' ? 0.95 : 1.0 };
+  if (inFileSyms.length > 1) {
+    return { symbol: inFileSyms[0]!, confidence: 0.6 };
+  }
+  // 2. Cross-file resolution via import binding.
+  if (fileBindings) {
+    const importedFrom = fileBindings.get(ref.name);
+    if (importedFrom) {
+      const candidates = (buckets.byFile.get(importedFrom) ?? []).filter((s) => s.name === ref.name);
+      if (candidates.length === 1) return { symbol: candidates[0]!, confidence: ref.resolution_kind === 'call' ? 0.9 : 0.95 };
+      if (candidates.length > 1) return { symbol: candidates[0]!, confidence: 0.5 };
+    }
+  }
+  // 3. Global by-name fallback. A single unambiguous global match is a fairly
+  // strong signal even without explicit import binding (e.g. coarse TS import
+  // extractor doesn't capture named imports yet).
+  const all = buckets.byName.get(ref.name);
+  if (all && all.length === 1) return { symbol: all[0]!, confidence: ref.resolution_kind === 'call' ? 0.7 : 0.8 };
+  if (all && all.length > 1) return { symbol: all[0]!, confidence: 0.4 };
+  return null;
+}
+
+function findEnclosing(syms: AtlasSymbol[], offset: number): AtlasSymbol | null {
+  let best: AtlasSymbol | null = null;
+  let bestSize = Infinity;
+  for (const s of syms) {
+    if (s.start_byte <= offset && offset <= s.end_byte && (s.kind === 'function' || s.kind === 'method')) {
+      const size = s.end_byte - s.start_byte;
+      if (size < bestSize) {
+        best = s;
+        bestSize = size;
+      }
+    }
+  }
+  // Fall back: any function/method declared earlier in the file.
+  if (!best) {
+    let candidate: AtlasSymbol | null = null;
+    for (const s of syms) {
+      if ((s.kind === 'function' || s.kind === 'method') && s.start_byte <= offset) {
+        if (!candidate || s.start_byte > candidate.start_byte) candidate = s;
+      }
+    }
+    best = candidate;
+  }
+  return best;
+}
+
+/**
+ * Build a "name → resolved file path" map for the given file's imports.
+ * Uses the language-specific import resolver. Unresolved bare imports are
+ * silently skipped (their references stay at confidence 0).
+ */
+function computeImportBindings(
+  file: FileIndexResult,
+  ctx: ResolverContext,
+  knownFiles: Set<string>,
+): Map<string, string> {
+  const out = new Map<string, string>();
+  if (file.imports.length === 0) return out;
+
+  for (const imp of file.imports) {
+    let resolved: string | null = null;
+    if (file.language === 'ts' || file.language === 'js') {
+      resolved = resolveTsImport(file.file_path, imp.module_spec, {
+        project_root: ctx.project_root,
+        paths: ctx.ts_paths,
+        known_files: knownFiles,
+      });
+    } else if (file.language === 'rust') {
+      resolved = resolveRustUse(file.file_path, imp.module_spec, {
+        project_root: ctx.project_root,
+        known_files: knownFiles,
+      });
+    } else if (file.language === 'python') {
+      resolved = resolvePythonImport(file.file_path, imp.module_spec, {
+        project_root: ctx.project_root,
+        known_files: knownFiles,
+      });
+    }
+    if (!resolved) continue;
+    // Bind every imported name to the resolved file. When the import is
+    // bare-spec (no named imports captured by the coarse extractor) we still
+    // record the module's basename so `Foo.bar()` style references can match.
+    if (imp.imported_names.length > 0) {
+      for (const n of imp.imported_names) out.set(n, resolved);
+    } else {
+      // For TS/JS: the coarse extractor only captures the spec. Bind every
+      // identifier defined in the resolved file so references in this file
+      // can chain. The resolver will down-rank ambiguity.
+      out.set('*' + resolved, resolved);
+    }
+  }
+  return out;
+}
+
+/**
+ * Re-tokenize the file once and scan for `class X extends Y`, `class X implements Y`,
+ * `: Type` annotations, and emit AtlasTypeRelation rows for the ones whose
+ * `Y` resolves against the symbol table.
+ */
+function extractTypeRelations(
+  file: FileIndexResult,
+  fileSyms: AtlasSymbol[],
+  buckets: SymbolBucket,
+  bindings: Map<string, string> | undefined,
+  ctx: ResolverContext,
+  out: AtlasTypeRelation[],
+  seen: Set<string>,
+): void {
+  // Only TS/JS/Java grammars expose `extends`/`implements` cleanly; Rust uses `impl … for …`
+  // which our coarse extractor surfaces as kind='impl'. Re-tokenize once for keyword scan.
+  const langForSyntax = file.language === 'cpp' ? 'cpp' : file.language === 'js' ? 'javascript' : file.language;
+  let tokens: Token[];
+  try {
+    const sourceLookup = (file as FileIndexResult & { _source?: string })._source ?? '';
+    if (!sourceLookup) return;
+    const parsed = parse(sourceLookup, langForSyntax === 'ts' ? 'typescript' : (langForSyntax as 'typescript'));
+    tokens = parsed.tokens;
+  } catch {
+    return;
+  }
+  const sig = significant(tokens);
+  for (let i = 0; i < sig.length - 2; i++) {
+    const t = sig[i]!;
+    if (t.value !== 'extends' && t.value !== 'implements') continue;
+    // Find the enclosing class symbol (closest preceding `class IDENT` token).
+    const nameT = sig[i + 1];
+    if (!nameT || nameT.kind !== 'identifier') continue;
+    const fromSym = findEnclosingClass(fileSyms, t.start);
+    if (!fromSym) continue;
+    const targetSym = resolveTypeName(nameT.value, file.file_path, fileSyms, buckets, bindings);
+    if (!targetSym) continue;
+    const kind = t.value === 'extends' ? 'extends' : 'implements';
+    const key = `${fromSym.id}|${kind}|${targetSym.id}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    const id: TypeRelationId = `T-${hash32(key)}`;
+    out.push({
+      id,
+      snapshot_id: ctx.snapshot_id,
+      from_symbol_id: fromSym.id,
+      to_symbol_id: targetSym.id,
+      kind,
+      confidence: 0.9,
+    });
+  }
+}
+
+function findEnclosingClass(syms: AtlasSymbol[], offset: number): AtlasSymbol | null {
+  let best: AtlasSymbol | null = null;
+  let bestStart = -1;
+  for (const s of syms) {
+    if (s.kind !== 'class' && s.kind !== 'interface') continue;
+    if (s.start_byte <= offset && s.start_byte > bestStart) {
+      best = s;
+      bestStart = s.start_byte;
+    }
+  }
+  return best;
+}
+
+function resolveTypeName(
+  name: string,
+  file_path: string,
+  fileSyms: AtlasSymbol[],
+  buckets: SymbolBucket,
+  bindings: Map<string, string> | undefined,
+): AtlasSymbol | null {
+  const inFile = fileSyms.find((s) => s.name === name);
+  if (inFile) return inFile;
+  if (bindings) {
+    const f = bindings.get(name);
+    if (f) {
+      const cand = (buckets.byFile.get(f) ?? []).filter((s) => s.name === name);
+      if (cand.length > 0) return cand[0]!;
+    }
+  }
+  void file_path;
+  const all = buckets.byName.get(name);
+  if (all && all.length === 1) return all[0]!;
+  return null;
+}
+
+/**
+ * Stash the original source on each FileIndexResult so the resolver's type-relation
+ * scan can re-tokenize without the caller threading sources through. Public helper
+ * used by integration callers; tests may bypass and call resolve directly.
+ */
+export function attachSources(result: IndexResult, sources: Map<string, string>): IndexResult {
+  for (const f of result.files) {
+    const src = sources.get(f.file_path);
+    if (src !== undefined) (f as FileIndexResult & { _source?: string })._source = src;
+  }
+  return result;
+}
