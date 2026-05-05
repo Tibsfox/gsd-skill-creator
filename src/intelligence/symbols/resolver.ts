@@ -275,10 +275,37 @@ function computeImportBindings(
 }
 
 /**
+ * Resolve the module spec of a re-export record to a file path. Handles TS/JS
+ * and Rust; returns null for unresolvable or unsupported languages.
+ */
+function resolveReExportSpec(
+  fileResult: FileIndexResult,
+  moduleSpec: string,
+  ctx: ResolverContext,
+  knownFiles: Set<string>,
+): string | null {
+  if (fileResult.language === 'ts' || fileResult.language === 'js') {
+    return resolveTsImport(fileResult.file_path, moduleSpec, {
+      project_root: ctx.project_root,
+      paths: ctx.ts_paths,
+      known_files: knownFiles,
+    });
+  }
+  if (fileResult.language === 'rust') {
+    return resolveRustUse(fileResult.file_path, moduleSpec, {
+      project_root: ctx.project_root,
+      known_files: knownFiles,
+    });
+  }
+  return null;
+}
+
+/**
  * Follow re-export chains: given that `localName` from `intermediateFile` is
  * needed, check whether `intermediateFile` itself re-exports that name from
  * another file. Returns the ultimate source file path (or the intermediate
  * file if no re-export chain is found). Depth-limited to avoid cycles.
+ * Supports TS/JS (`export { ... } from`) and Rust (`pub use`).
  */
 export function followReExportChain(
   localName: string,
@@ -296,15 +323,7 @@ export function followReExportChain(
     if (!imp.imported_bindings) continue;
     const binding = imp.imported_bindings.find((b) => b.local === localName || b.original === '*');
     if (!binding) continue;
-    // Resolve the module spec relative to the intermediate file.
-    let resolved: string | null = null;
-    if (fileResult.language === 'ts' || fileResult.language === 'js') {
-      resolved = resolveTsImport(fileResult.file_path, imp.module_spec, {
-        project_root: ctx.project_root,
-        paths: ctx.ts_paths,
-        known_files: knownFiles,
-      });
-    }
+    const resolved = resolveReExportSpec(fileResult, imp.module_spec, ctx, knownFiles);
     if (!resolved) continue;
     const nextOriginal = binding.original === '*' ? localName : binding.original;
     return followReExportChain(nextOriginal, resolved, allFiles, ctx, knownFiles, depth + 1);

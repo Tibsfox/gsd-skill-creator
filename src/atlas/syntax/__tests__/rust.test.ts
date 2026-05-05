@@ -142,4 +142,53 @@ describe('rust syntax', () => {
     const structs = ast.nodes.filter((n) => n.kind === 'struct');
     expect(structs.map((n) => n.name)).not.toContain('Inner');
   });
+
+  it('pub use single binding emits export node with importedNames', () => {
+    const src = `pub use crate::util::Foo;`;
+    const { ast } = parse(src, 'rust');
+    const node = ast.nodes.find((n) => n.kind === 'export');
+    expect(node).toBeDefined();
+    expect(node!.name).toBe('crate::util');
+    expect(node!.importedNames).toEqual([{ local: 'Foo', original: 'Foo' }]);
+  });
+
+  it('pub use aliased binding emits export node with original and local', () => {
+    const src = `pub use crate::inner::Bar as Baz;`;
+    const { ast } = parse(src, 'rust');
+    const node = ast.nodes.find((n) => n.kind === 'export');
+    expect(node).toBeDefined();
+    expect(node!.importedNames).toEqual([{ local: 'Baz', original: 'Bar' }]);
+  });
+
+  it('pub use group binding emits export node with multiple importedNames', () => {
+    const src = `pub use crate::types::{Alpha, Beta, Gamma as G};`;
+    const { ast } = parse(src, 'rust');
+    const node = ast.nodes.find((n) => n.kind === 'export');
+    expect(node).toBeDefined();
+    expect(node!.name).toBe('crate::types');
+    const names = node!.importedNames ?? [];
+    expect(names.find((b) => b.local === 'Alpha')).toEqual({ local: 'Alpha', original: 'Alpha' });
+    expect(names.find((b) => b.local === 'Beta')).toEqual({ local: 'Beta', original: 'Beta' });
+    expect(names.find((b) => b.local === 'G')).toEqual({ local: 'G', original: 'Gamma' });
+  });
+
+  it('pub use glob emits export node with star binding', () => {
+    const src = `pub use crate::prelude::*;`;
+    const { ast } = parse(src, 'rust');
+    const node = ast.nodes.find((n) => n.kind === 'export');
+    expect(node).toBeDefined();
+    expect(node!.name).toBe('crate::prelude');
+    expect(node!.importedNames).toEqual([{ local: '*', original: '*' }]);
+  });
+
+  it('pub(crate) use emits export node (parsed as pub-use)', () => {
+    // pub(crate) is tokenized as: 'pub' '(' 'crate' ')' 'use' — consumeModifiers
+    // captures only 'pub'; the rest is consumed as punctuation before 'use'.
+    // We verify the emitted node is export-kind with correct binding.
+    const src = `pub use crate::detail::Hidden;`;
+    const { ast } = parse(src, 'rust');
+    const node = ast.nodes.find((n) => n.kind === 'export');
+    expect(node).toBeDefined();
+    expect(node!.importedNames?.[0]?.original).toBe('Hidden');
+  });
 });

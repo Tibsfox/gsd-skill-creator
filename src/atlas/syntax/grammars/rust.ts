@@ -247,18 +247,138 @@ function tryImplMethod(
   };
 }
 
-const extractUse: CoarseExtractor = ({ tokens, i, pushNode }) => {
-  const t = tokens[i];
-  if (!t || t.value !== 'use') return i;
-  // Capture path text up to ';' (cheap approximation).
-  let j = i + 1;
-  let path = '';
-  while (j < tokens.length && tokens[j]!.value !== ';' && j < i + 32) {
-    path += tokens[j]!.value;
+/**
+ * Parse the binding list after a `use foo::{...}` brace group.
+ * Returns an array of { local, original } pairs. `braceAt` must be the index
+ * of the `{` token; returns the index AFTER the matching `}`.
+ */
+function parseUseBraceGroup(
+  tokens: Token[],
+  braceAt: number,
+): { bindings: Array<{ local: string; original: string }>; end: number } {
+  const bindings: Array<{ local: string; original: string }> = [];
+  let j = braceAt + 1;
+  while (j < tokens.length && tokens[j]!.value !== '}') {
+    const t = tokens[j]!;
+    if (t.value === '*') {
+      bindings.push({ local: '*', original: '*' });
+      j++;
+      continue;
+    }
+    if (t.kind === 'identifier') {
+      const name = t.value;
+      j++;
+      if (tokens[j]?.value === 'as' && tokens[j + 1]?.kind === 'identifier') {
+        bindings.push({ local: tokens[j + 1]!.value, original: name });
+        j += 2;
+      } else {
+        bindings.push({ local: name, original: name });
+      }
+      if (tokens[j]?.value === ',') j++;
+      continue;
+    }
     j++;
   }
-  pushNode({ kind: 'import', name: path, start: t.start, end: t.end, line: t.line });
-  return j + 1;
+  return { bindings, end: j + 1 }; // j+1 past the '}'
+}
+
+
+const extractUse: CoarseExtractor = ({ tokens, i, pushNode }) => {
+  const { mods, declAt } = consumeModifiers(tokens, i, MODIFIERS);
+  const t = tokens[declAt];
+  if (!t || t.value !== 'use') return i;
+
+  const isPub = mods.includes('pub');
+
+  // Collect path segments up to ';', '{', or '*'.
+  let j = declAt + 1;
+  const segments: string[] = [];
+  while (j < tokens.length) {
+    const cur = tokens[j]!;
+    if (cur.value === ';' || cur.value === '{' || cur.value === '*') break;
+    if (
+      cur.kind === 'identifier' ||
+      cur.value === 'crate' ||
+      cur.value === 'super' ||
+      cur.value === 'self'
+    ) {
+      segments.push(cur.value);
+      j++;
+      if (tokens[j]?.value === '::') {
+        const after = tokens[j + 1];
+        if (!after || after.value === '{' || after.value === '*') {
+          j++; // consume '::', stop before brace/glob
+          break;
+        }
+        j++; // consume '::'
+        continue;
+      }
+      break;
+    }
+    j++;
+  }
+
+  const nodeKind = isPub ? 'export' : 'import';
+  const cur = tokens[j];
+
+  if (cur?.value === '{') {
+    // Group: `use foo::{bar, baz}` or `use foo::{bar as b, ...}`.
+    const moduleSpec = segments.join('::');
+    const { bindings, end } = parseUseBraceGroup(tokens, j);
+    pushNode({
+      kind: nodeKind,
+      name: moduleSpec,
+      start: t.start,
+      end: tokens[end - 1]?.end ?? t.end,
+      line: t.line,
+      importedNames: bindings,
+    });
+    let k = end;
+    while (k < tokens.length && tokens[k]!.value !== ';') k++;
+    return k + 1;
+  }
+
+  if (cur?.value === '*') {
+    // Glob: `use foo::*`.
+    const moduleSpec = segments.join('::');
+    pushNode({
+      kind: nodeKind,
+      name: moduleSpec,
+      start: t.start,
+      end: cur.end,
+      line: t.line,
+      importedNames: [{ local: '*', original: '*' }],
+    });
+    let k = j + 1;
+    while (k < tokens.length && tokens[k]!.value !== ';') k++;
+    return k + 1;
+  }
+
+  // Single or aliased binding: `use foo::bar` or `use foo::bar as baz`.
+  const lastSeg = segments[segments.length - 1] ?? '';
+  const moduleSpec = segments.slice(0, -1).join('::');
+  let local = lastSeg;
+  let original = lastSeg;
+  let endTok = tokens[j - 1] ?? t;
+
+  if (tokens[j]?.value === 'as' && tokens[j + 1]?.kind === 'identifier') {
+    local = tokens[j + 1]!.value;
+    endTok = tokens[j + 1]!;
+    j += 2;
+  }
+
+  pushNode({
+    kind: nodeKind,
+    name: moduleSpec || lastSeg,
+    start: t.start,
+    end: endTok.end,
+    line: t.line,
+    importedNames: lastSeg ? [{ local, original }] : [],
+  });
+
+  let k = j;
+  while (k < tokens.length && tokens[k]!.value !== ';') k++;
+  return k + 1;
 };
 
 export const rustExtractors: CoarseExtractor[] = [

@@ -210,4 +210,68 @@ describe('cross-file resolver', () => {
     expect(callRef).toBeDefined();
     expect(callRef!.resolved_symbol_id).toBe(deepInD!.id);
   });
+
+  it('Rust pub use single-hop: consumer resolves through re-export to origin file', () => {
+    // util.rs declares helper; lib.rs re-exports it with pub use; main.rs uses it via lib.
+    const inputs: FileInput[] = [
+      { file_path: 'src/lib.rs', source: `pub mod util;\npub use crate::util::helper;`, language: 'rust' },
+      { file_path: 'src/util.rs', source: `pub fn helper() -> i32 { 1 }`, language: 'rust' },
+      { file_path: 'src/main.rs', source: `use crate::helper;\nfn run() { helper(); }`, language: 'rust' },
+    ];
+    const { idx, res } = buildAndResolve(inputs);
+    const helperInUtil = idx.symbols.find((s) => s.name === 'helper' && s.file_path === 'src/util.rs');
+    expect(helperInUtil).toBeDefined();
+    const callRef = res.references.find((r) => r.name === 'helper' && r.file_path === 'src/main.rs' && r.start_line === 2);
+    expect(callRef).toBeDefined();
+    expect(callRef!.resolved_symbol_id).toBe(helperInUtil!.id);
+  });
+
+  it('Rust pub use aliased hop: pub use foo::Bar as Baz resolves usage of Baz to Bar', () => {
+    // reexport.rs re-exports Bar from types.rs as Baz.
+    // consumer.rs imports Baz from reexport — followReExportChain should walk
+    // the alias and land on Bar in types.rs.
+    const inputs: FileInput[] = [
+      { file_path: 'src/lib.rs', source: `pub mod types;\npub mod reexport;`, language: 'rust' },
+      { file_path: 'src/types.rs', source: `pub struct Bar;`, language: 'rust' },
+      { file_path: 'src/reexport.rs', source: `pub use crate::types::Bar as Baz;`, language: 'rust' },
+      { file_path: 'src/consumer.rs', source: `use crate::reexport::Baz;\nfn run() { let _: Baz; }`, language: 'rust' },
+    ];
+    const { idx, res } = buildAndResolve(inputs);
+    const barInTypes = idx.symbols.find((s) => s.name === 'Bar' && s.file_path === 'src/types.rs');
+    expect(barInTypes).toBeDefined();
+    // Baz usage in consumer.rs: reexport.rs has pub use Bar as Baz so chain
+    // follows local='Baz' → original='Bar' → types.rs::Bar.
+    const ref = res.references.find((r) => r.name === 'Baz' && r.file_path === 'src/consumer.rs');
+    expect(ref).toBeDefined();
+    expect(ref!.resolved_symbol_id).toBe(barInTypes!.id);
+  });
+
+  it('Rust pub use transitive hop-of-hop: A pub-uses from B which pub-uses from C', () => {
+    const inputs: FileInput[] = [
+      { file_path: 'src/c.rs', source: `pub fn compute() -> i32 { 0 }`, language: 'rust' },
+      { file_path: 'src/b.rs', source: `pub use crate::c::compute;`, language: 'rust' },
+      { file_path: 'src/lib.rs', source: `pub mod b;\npub mod c;\npub use crate::b::compute;`, language: 'rust' },
+      { file_path: 'src/main.rs', source: `use crate::compute;\nfn run() { compute(); }`, language: 'rust' },
+    ];
+    const { idx, res } = buildAndResolve(inputs);
+    const computeInC = idx.symbols.find((s) => s.name === 'compute' && s.file_path === 'src/c.rs');
+    expect(computeInC).toBeDefined();
+    const callRef = res.references.find((r) => r.name === 'compute' && r.file_path === 'src/main.rs' && r.start_line === 2);
+    expect(callRef).toBeDefined();
+    expect(callRef!.resolved_symbol_id).toBe(computeInC!.id);
+  });
+
+  it('Rust pub use glob: star re-export causes name lookup to find origin file', () => {
+    const inputs: FileInput[] = [
+      { file_path: 'src/lib.rs', source: `pub mod prelude;\npub use crate::prelude::*;`, language: 'rust' },
+      { file_path: 'src/prelude.rs', source: `pub fn init() {}`, language: 'rust' },
+      { file_path: 'src/main.rs', source: `use crate::init;\nfn run() { init(); }`, language: 'rust' },
+    ];
+    const { idx, res } = buildAndResolve(inputs);
+    const initInPrelude = idx.symbols.find((s) => s.name === 'init' && s.file_path === 'src/prelude.rs');
+    expect(initInPrelude).toBeDefined();
+    const callRef = res.references.find((r) => r.name === 'init' && r.file_path === 'src/main.rs' && r.start_line === 2);
+    expect(callRef).toBeDefined();
+    expect(callRef!.resolved_symbol_id).toBe(initInPrelude!.id);
+  });
 });
