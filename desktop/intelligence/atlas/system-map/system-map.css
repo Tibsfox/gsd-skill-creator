@@ -96,3 +96,46 @@
   border-color: var(--accent-blue, #7aa2f7);
   color: var(--accent-blue, #7aa2f7);
 }
+
+.system-map-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 10px;
+  background: var(--bg-secondary, #24283b);
+  border: 1px solid var(--border-subtle, #292e42);
+  border-radius: var(--radius-sm, 4px);
+  min-width: 140px;
+  max-width: 220px;
+}
+
+.system-map-legend-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow: hidden;
+}
+
+.system-map-legend-swatch {
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.system-map-legend-label {
+  font-family: var(--font-mono, "SF Mono", Monaco, monospace);
+  font-size: 10px;
+  color: var(--text-secondary, #9aa5ce);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.system-map-legend-overflow {
+  font-family: var(--font-mono, "SF Mono", Monaco, monospace);
+  font-size: 10px;
+  color: var(--text-muted, #565f89);
+  padding-top: 2px;
+}

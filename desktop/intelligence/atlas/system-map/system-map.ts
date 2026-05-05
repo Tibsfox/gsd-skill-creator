@@ -21,6 +21,7 @@ import {
 import {
   buildColorContext,
   colorFor,
+  missionHue,
   type ColorContext,
   type ColorMode,
 } from './color-modes.js';
@@ -57,6 +58,13 @@ function collectPayloads(root: CircleNode<NodePayload>): Array<NodePayload | und
   return out;
 }
 
+/** Legend entry passed to host when provenance-overlay is active. */
+export interface LegendEntry {
+  missionId: string;
+  color: string;
+  count: number;
+}
+
 export interface SystemMapComponent {
   mount(parent: HTMLElement): void;
   unmount(): void;
@@ -68,7 +76,18 @@ export interface SystemMapComponent {
   load(snapshotId: SnapshotId, filePaths: string[]): Promise<void>;
   /** Switch color mode without reloading data. */
   setColorMode(mode: ColorMode): void;
+  /**
+   * Mount the provenance legend into the given container element.
+   * The host shell is responsible for placement (typically top-right of the pane).
+   * Call before or after load(); legend updates whenever setColorMode is called.
+   * Returns a cleanup function.
+   */
+  mountLegend(container: HTMLElement, maxEntries?: number): () => void;
+  /** Current legend entries (empty when mode is not 'provenance-overlay'). */
+  getLegendEntries(maxEntries?: number): LegendEntry[];
 }
+
+const LEGEND_DEFAULT_MAX = 8;
 
 export function createSystemMap(opts: SystemMapOptions = {}): SystemMapComponent {
   let containerEl: HTMLElement | null = null;
@@ -83,6 +102,9 @@ export function createSystemMap(opts: SystemMapOptions = {}): SystemMapComponent
   let colorMode: ColorMode = opts.colorMode ?? 'symbol-density';
   let focus: Focus = { kind: null, id: '' };
   let selectHandlers: SelectHandler[] = [];
+
+  /** Legend containers registered by mountLegend(). */
+  const legendContainers: Array<{ el: HTMLElement; maxEntries: number }> = [];
 
   /** Stack of folder IDs from root → current view ('' = filesystem root). */
   const zoomStack: string[] = [''];
@@ -228,6 +250,69 @@ export function createSystemMap(opts: SystemMapOptions = {}): SystemMapComponent
     breadcrumbEl.textContent = path.length === 0 ? '/' : '/' + path.join('/');
   }
 
+  // ─── Legend helpers ────────────────────────────────────────────────────────
+
+  function buildLegendEntries(files: FileData[], maxEntries: number): LegendEntry[] {
+    if (colorMode !== 'provenance-overlay') return [];
+    const counts = new Map<string, number>();
+    for (const f of files) {
+      if (f.dominantMissionId) {
+        counts.set(f.dominantMissionId, (counts.get(f.dominantMissionId) ?? 0) + 1);
+      }
+    }
+    return [...counts.entries()]
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, maxEntries)
+      .map(([missionId, count]) => ({
+        missionId,
+        color: `hsl(${missionHue(missionId)},70%,42%)`,
+        count,
+      }));
+  }
+
+  function renderLegend(container: HTMLElement, entries: LegendEntry[], maxEntries: number): void {
+    container.innerHTML = '';
+    if (colorMode !== 'provenance-overlay' || entries.length === 0) return;
+
+    container.className = 'system-map-legend';
+    const totalUnique = fileDataCache.filter(f => f.dominantMissionId).reduce((acc, f) => {
+      if (f.dominantMissionId) acc.add(f.dominantMissionId);
+      return acc;
+    }, new Set<string>()).size;
+
+    for (const entry of entries) {
+      const row = document.createElement('div');
+      row.className = 'system-map-legend-row';
+
+      const swatch = document.createElement('span');
+      swatch.className = 'system-map-legend-swatch';
+      swatch.style.background = entry.color;
+
+      const label = document.createElement('span');
+      label.className = 'system-map-legend-label';
+      label.textContent = entry.missionId;
+      label.title = entry.missionId;
+
+      row.appendChild(swatch);
+      row.appendChild(label);
+      container.appendChild(row);
+    }
+
+    const overflow = totalUnique - maxEntries;
+    if (overflow > 0) {
+      const more = document.createElement('div');
+      more.className = 'system-map-legend-overflow';
+      more.textContent = `+${overflow} more`;
+      container.appendChild(more);
+    }
+  }
+
+  function updateAllLegends(): void {
+    for (const { el, maxEntries } of legendContainers) {
+      renderLegend(el, buildLegendEntries(fileDataCache, maxEntries), maxEntries);
+    }
+  }
+
   // ─── Public API ────────────────────────────────────────────────────────────
 
   return {
@@ -287,24 +372,25 @@ export function createSystemMap(opts: SystemMapOptions = {}): SystemMapComponent
     },
 
     async load(snapshotId: SnapshotId, filePaths: string[]): Promise<void> {
-      // Fetch symbols for each file in parallel (bounded to avoid request storm).
       const BATCH = 20;
       const results: FileData[] = [];
       for (let i = 0; i < filePaths.length; i += BATCH) {
         const batch = filePaths.slice(i, i + BATCH);
         const settled = await Promise.allSettled(
           batch.map(async (fp): Promise<FileData> => {
-            const symbols = await intelligenceIpc.listSymbolsForFile(snapshotId, fp);
-            const missions = await intelligenceIpc.listMissionsForFile(snapshotId, fp);
-            const recentActivityAt = missions.reduce((max, m) => {
-              // mission_id may encode timestamp; fallback to 0.
-              return Math.max(max, 0);
-            }, 0);
+            const [symbols, attributions] = await Promise.all([
+              intelligenceIpc.listSymbolsForFile(snapshotId, fp),
+              intelligenceIpc.listMissionsForFile(snapshotId, fp).catch(() => []),
+            ]);
+            const sorted = [...attributions].sort((a, b) => b.weight - a.weight);
+            const dominantMissionId = sorted[0]?.mission_id ?? null;
             return {
               filePath: fp,
               symbols,
-              recentActivityAt,
-              missionIds: missions.map(m => m.mission_id),
+              recentActivityAt: 0,
+              missionIds: sorted.map(m => m.mission_id),
+              dominantMissionId,
+              missionAttributions: sorted,
             };
           }),
         );
@@ -324,11 +410,28 @@ export function createSystemMap(opts: SystemMapOptions = {}): SystemMapComponent
 
       renderPack();
       updateBreadcrumb();
+      updateAllLegends();
     },
 
     setColorMode(mode: ColorMode): void {
       colorMode = mode;
       renderPack();
+      updateAllLegends();
+    },
+
+    getLegendEntries(maxEntries = LEGEND_DEFAULT_MAX): LegendEntry[] {
+      if (colorMode !== 'provenance-overlay') return [];
+      return buildLegendEntries(fileDataCache, maxEntries);
+    },
+
+    mountLegend(container: HTMLElement, maxEntries = LEGEND_DEFAULT_MAX): () => void {
+      legendContainers.push({ el: container, maxEntries });
+      renderLegend(container, buildLegendEntries(fileDataCache, maxEntries), maxEntries);
+      return () => {
+        const idx = legendContainers.findIndex(l => l.el === container);
+        if (idx >= 0) legendContainers.splice(idx, 1);
+        container.innerHTML = '';
+      };
     },
   };
 }

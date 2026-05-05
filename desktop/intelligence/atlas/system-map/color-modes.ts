@@ -10,7 +10,7 @@ import { linearScale } from '../../../../src/atlas/scales/index.js';
 import type { CircleNode } from '../../../../src/atlas/pack-layout/index.js';
 import type { NodePayload } from './layouts.js';
 
-export type ColorMode = 'symbol-density' | 'recent-activity' | 'mission-attribution';
+export type ColorMode = 'symbol-density' | 'recent-activity' | 'mission-attribution' | 'provenance-overlay';
 
 export interface ColorContext {
   /** Maximum symbol count across the entire tree (for normalization). */
@@ -76,17 +76,52 @@ export function colorByRecentActivity(
   return lerpHex(WARM_LOW, HOT, (t - 0.5) * 2);
 }
 
-// ─── Mission attribution ──────────────────────────────────────────────────────
+// ─── Mission attribution (weight-aware real data) ─────────────────────────────
 
 export function colorByMissionAttribution(
   node: CircleNode<NodePayload>,
   ctx: ColorContext,
 ): string {
   if (!node.data || node.data.kind === 'folder') return FOLDER;
-  const count = node.data.missionIds.length;
-  if (count === 0) return COLD;
-  const t = Math.max(0, Math.min(1, count / Math.max(1, ctx.maxMissionCount)));
-  return lerpHex(WARM_LOW, HOT, t);
+  const { dominantMissionId, dominantWeight } = node.data;
+  if (!dominantMissionId) return COLD;
+  const hue = missionHue(dominantMissionId);
+  const sat = Math.round(30 + dominantWeight * 50);
+  const lit = 45;
+  return `hsl(${hue},${sat}%,${lit}%)`;
+}
+
+// ─── FNV-1a hash → stable HSL hue ────────────────────────────────────────────
+
+/**
+ * Inline FNV-1a 32-bit hash mapped to a hue in [0, 360).
+ * Deterministic for the same mission_id across all instances.
+ * ~10 lines; no npm package required.
+ */
+export function missionHue(missionId: string): number {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < missionId.length; i++) {
+    h ^= missionId.charCodeAt(i);
+    h = (Math.imul(h, 0x01000193) >>> 0);
+  }
+  return h % 360;
+}
+
+// ─── Provenance overlay ───────────────────────────────────────────────────────
+
+const UNATTRIBUTED = '#3b4261';
+
+export function colorByProvenanceOverlay(
+  node: CircleNode<NodePayload>,
+  _ctx: ColorContext,
+): string {
+  if (!node.data || node.data.kind === 'folder') return FOLDER;
+  const { dominantMissionId, dominantWeight } = node.data;
+  if (!dominantMissionId) return UNATTRIBUTED;
+  const hue = missionHue(dominantMissionId);
+  const sat = Math.round(40 + dominantWeight * 55);
+  const lit = 42;
+  return `hsl(${hue},${sat}%,${lit}%)`;
 }
 
 // ─── Dispatcher ───────────────────────────────────────────────────────────────
@@ -103,6 +138,8 @@ export function colorFor(
       return colorByRecentActivity(node, ctx);
     case 'mission-attribution':
       return colorByMissionAttribution(node, ctx);
+    case 'provenance-overlay':
+      return colorByProvenanceOverlay(node, ctx);
   }
 }
 

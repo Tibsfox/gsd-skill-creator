@@ -15,6 +15,10 @@ export interface NodePayload {
   symbolCount: number;
   recentActivityAt?: number;
   missionIds: string[];
+  /** Dominant mission id for provenance-overlay coloring; null when not attributed. */
+  dominantMissionId: string | null;
+  /** Weight of the dominant attribution in the 0..1 range; 0 when not attributed. */
+  dominantWeight: number;
 }
 
 /** Per-file data aggregated from IPC responses. */
@@ -25,6 +29,10 @@ export interface FileData {
   recentActivityAt: number;
   /** missions that have touched this file. */
   missionIds: string[];
+  /** Mission with the highest provenance weight for this file; null if none. */
+  dominantMissionId: string | null;
+  /** Full attribution list sorted descending by weight. */
+  missionAttributions: Array<{ mission_id: string; weight: number; line_count: number }>;
 }
 
 /** Options controlling how the hierarchy is built. */
@@ -48,7 +56,7 @@ export const DEFAULT_PADDING = 2;
 export function buildFolderTree(files: FileData[]): HierNode<NodePayload> {
   const root: MutableNode = {
     id: '/',
-    data: { kind: 'folder', symbolCount: 0, missionIds: [] },
+    data: { kind: 'folder', symbolCount: 0, missionIds: [], dominantMissionId: null, dominantWeight: 0 },
     value: undefined,
     children: [],
   };
@@ -58,13 +66,12 @@ export function buildFolderTree(files: FileData[]): HierNode<NodePayload> {
     let current = root;
 
     for (let i = 0; i < parts.length - 1; i++) {
-      const segment = parts[i];
       const folderId = parts.slice(0, i + 1).join('/');
       let child = current.children.find(c => c.id === folderId);
       if (!child) {
         child = {
           id: folderId,
-          data: { kind: 'folder', symbolCount: 0, missionIds: [] },
+          data: { kind: 'folder', symbolCount: 0, missionIds: [], dominantMissionId: null, dominantWeight: 0 },
           value: undefined,
           children: [],
         };
@@ -74,12 +81,15 @@ export function buildFolderTree(files: FileData[]): HierNode<NodePayload> {
     }
 
     const fileId = file.filePath;
+    const topAttr = file.missionAttributions[0] ?? null;
     const leafData: NodePayload = {
       kind: 'file',
       filePath: file.filePath,
       symbolCount: file.symbols.length,
       recentActivityAt: file.recentActivityAt,
       missionIds: file.missionIds,
+      dominantMissionId: file.dominantMissionId,
+      dominantWeight: topAttr?.weight ?? 0,
     };
     current.children.push({
       id: fileId,
