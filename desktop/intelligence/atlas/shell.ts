@@ -29,9 +29,12 @@ import { createCoordinator } from './coordinator.js';
 import type { Coordinator, CoordinatedView } from './coordinator.js';
 import type { Focus } from './focus-state.js';
 import { intelligenceIpc } from '../../../src/intelligence/ipc.js';
+import { loadSavedLayout, saveLayout } from './layout-persistence.js';
+import type { SavedAtlasLayout } from './layout-persistence.js';
 
 export interface AtlasShellOptions {
   coordinator?: Coordinator;
+  projectId?: string;
 }
 
 export interface AtlasShell {
@@ -64,6 +67,14 @@ export function createAtlasShell(opts: AtlasShellOptions = {}): AtlasShell {
   let rowMid = 20;     // %
   // rowBot = 100 - rowTop - rowMid
 
+  // Persisted layout state (mirrors what we'll save)
+  let persistedColorMode: SavedAtlasLayout['systemMapColorMode'] = 'symbol-density';
+  let persistedMissionFilter: string | null = null;
+  let persistedLegendVisible = true;
+
+  let saveDebounceTimer: ReturnType<typeof setTimeout> | null = null;
+  let pendingSave = false;
+
   const unregisterFns: Array<() => void> = [];
 
   // ── helpers ────────────────────────────────────────────────────────────────
@@ -77,6 +88,7 @@ export function createAtlasShell(opts: AtlasShellOptions = {}): AtlasShell {
     shellEl.style.setProperty('--atlas-row-top', pct(rowTop));
     shellEl.style.setProperty('--atlas-row-mid', pct(rowMid));
     shellEl.style.setProperty('--atlas-row-bot', pct(100 - rowTop - rowMid));
+    scheduleSave();
   }
 
   function makePane(cls: string, title: string): { pane: HTMLDivElement; body: HTMLDivElement } {
@@ -251,6 +263,31 @@ export function createAtlasShell(opts: AtlasShellOptions = {}): AtlasShell {
 
   // ── mount / unmount ────────────────────────────────────────────────────────
 
+  // ── Layout persistence helpers ─────────────────────────────────────────────
+
+  function flushSave(): void {
+    if (!opts.projectId || !pendingSave) return;
+    pendingSave = false;
+    saveLayout(opts.projectId, {
+      schema_version: 1,
+      splitters: { col: colLeft, rowTop, rowMid },
+      systemMapColorMode: persistedColorMode,
+      missionFilter: persistedMissionFilter,
+      legendVisible: persistedLegendVisible,
+      saved_at: new Date().toISOString(),
+    });
+  }
+
+  function scheduleSave(): void {
+    if (!opts.projectId) return;
+    pendingSave = true;
+    if (saveDebounceTimer !== null) clearTimeout(saveDebounceTimer);
+    saveDebounceTimer = setTimeout(() => {
+      saveDebounceTimer = null;
+      flushSave();
+    }, 200);
+  }
+
   // ── Palette atlas-state cache ─────────────────────────────────────────────
 
   let atlasStateCache: AtlasState | null = null;
@@ -300,6 +337,19 @@ export function createAtlasShell(opts: AtlasShellOptions = {}): AtlasShell {
     mount(host: HTMLElement): void {
       hostEl = host;
 
+      // Restore saved layout before constructing views.
+      if (opts.projectId) {
+        const saved = loadSavedLayout(opts.projectId);
+        if (saved) {
+          colLeft = saved.splitters.col;
+          rowTop = saved.splitters.rowTop;
+          rowMid = saved.splitters.rowMid;
+          persistedColorMode = saved.systemMapColorMode;
+          persistedMissionFilter = saved.missionFilter;
+          persistedLegendVisible = saved.legendVisible;
+        }
+      }
+
       shellEl = document.createElement('div');
       shellEl.className = 'atlas-shell';
       applyLayout();
@@ -318,7 +368,8 @@ export function createAtlasShell(opts: AtlasShellOptions = {}): AtlasShell {
 
       // ── System Map ──────────────────────────────────────────────────────
       const { pane: smPane, body: smBody } = makePane('system-map', 'System Map');
-      const sm = createSystemMap();
+      const smOpts = opts.projectId ? { colorMode: persistedColorMode } : {};
+      const sm = createSystemMap(smOpts);
       sm.mount(smBody);
       const smWrapper = wrapSystemMap(sm);
       const unSm = coordinator.registerView(smWrapper);
@@ -327,6 +378,10 @@ export function createAtlasShell(opts: AtlasShellOptions = {}): AtlasShell {
         if (f.kind === null) return;
         coordinator.dispatch(f as Focus, smWrapper);
       });
+      unregisterFns.push(sm.onColorModeChange((mode) => {
+        persistedColorMode = mode;
+        scheduleSave();
+      }));
 
       // ── Symbol Graph ────────────────────────────────────────────────────
       const { pane: sgPane, body: sgBody } = makePane('symbol-graph', 'Symbol Graph');
@@ -357,6 +412,10 @@ export function createAtlasShell(opts: AtlasShellOptions = {}): AtlasShell {
               sgWrapper,
             );
           });
+          unregisterFns.push(sgView.onMissionFilterChange((missionId) => {
+            persistedMissionFilter = missionId;
+            scheduleSave();
+          }));
           // Replay current focus
           const cur = coordinator.current();
           if (cur) sgWrapper.setFocus(cur);
@@ -493,6 +552,13 @@ export function createAtlasShell(opts: AtlasShellOptions = {}): AtlasShell {
     },
 
     unmount(): void {
+      // Flush any pending layout save before tearing down.
+      if (saveDebounceTimer !== null) {
+        clearTimeout(saveDebounceTimer);
+        saveDebounceTimer = null;
+      }
+      flushSave();
+
       graphView?.dispose();
       graphView = null;
       graphCanvas = null;

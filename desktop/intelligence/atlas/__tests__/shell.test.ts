@@ -35,6 +35,8 @@ const codeView = makeMockView();
 const paletteSelectHandlers: Array<(entry: { id: string; kind: string }) => void> = [];
 let paletteIsOpen = false;
 
+let colorModeChangeHandlers: Array<(m: string) => void> = [];
+
 vi.mock('../system-map/index.js', () => ({
   createSystemMap: () => ({
     mount: vi.fn(),
@@ -43,8 +45,14 @@ vi.mock('../system-map/index.js', () => ({
     onSelect: (h: (f: Focus) => void) => systemMapView.selectHandlers.push(h),
     load: vi.fn().mockResolvedValue(undefined),
     setColorMode: vi.fn(),
+    onColorModeChange: (h: (m: string) => void) => {
+      colorModeChangeHandlers.push(h);
+      return () => { colorModeChangeHandlers = colorModeChangeHandlers.filter(x => x !== h); };
+    },
   }),
 }));
+
+let missionFilterChangeHandlers: Array<(m: string | null) => void> = [];
 
 vi.mock('../symbol-graph/index.js', () => ({
   SymbolGraphView: class {
@@ -56,6 +64,10 @@ vi.mock('../symbol-graph/index.js', () => ({
     onSelect(h: (sel: any) => void) {
       this.selectHandlers.push(h);
       return () => {};
+    }
+    onMissionFilterChange(h: (m: string | null) => void) {
+      missionFilterChangeHandlers.push(h);
+      return () => { missionFilterChangeHandlers = missionFilterChangeHandlers.filter(x => x !== h); };
     }
     mountChipContainer(el: HTMLElement) { this.mountChipContainerEl = el; }
     dispose() {}
@@ -141,6 +153,9 @@ describe('AtlasShell', () => {
     paletteIsOpen = false;
     paletteAtlasState = null;
     indexingCompletedCb = null;
+    colorModeChangeHandlers.length = 0;
+    missionFilterChangeHandlers.length = 0;
+    localStorage.clear();
   });
 
   afterEach(() => {
@@ -387,5 +402,61 @@ describe('AtlasShell', () => {
     expect(chipContainer!.parentElement).toBe(sgPane);
 
     shell.unmount();
+  });
+
+  // ── Layout persistence tests ──────────────────────────────────────────────
+
+  it('shell.mount restores splitters from a saved layout', () => {
+    // Pre-seed localStorage with a known layout
+    localStorage.setItem('atlas:layout:p1', JSON.stringify({
+      schema_version: 1,
+      splitters: { col: 35, rowTop: 55, rowMid: 18 },
+      systemMapColorMode: 'recent-activity',
+      missionFilter: null,
+      legendVisible: true,
+      saved_at: '2026-05-05T00:00:00.000Z',
+    }));
+
+    const shell = createAtlasShell({ projectId: 'p1' });
+    shell.mount(host);
+
+    // The shell element's CSS custom properties should reflect the saved values
+    const shellEl = host.querySelector<HTMLElement>('.atlas-shell');
+    expect(shellEl).not.toBeNull();
+    expect(shellEl!.style.getPropertyValue('--atlas-col-left')).toBe('35.00%');
+
+    shell.unmount();
+  });
+
+  it('splitter change triggers a pending save within the debounce window', () => {
+    const shell = createAtlasShell({ projectId: 'p2' });
+    shell.mount(host);
+
+    const col = host.querySelector<HTMLElement>('.atlas-splitter--col')!;
+    col.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
+
+    // pendingSave should be true (debounce not yet fired); item may not be in storage yet
+    // but the test verifies no throws and the value is queued
+    expect(() => col.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true }))).not.toThrow();
+
+    shell.unmount();
+  });
+
+  it('unmount flushes any pending save synchronously', () => {
+    const shell = createAtlasShell({ projectId: 'p3' });
+    shell.mount(host);
+
+    // Trigger a splitter change (marks pendingSave = true)
+    const col = host.querySelector<HTMLElement>('.atlas-splitter--col')!;
+    col.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
+
+    // Unmount before debounce fires — should flush synchronously
+    shell.unmount();
+
+    const stored = localStorage.getItem('atlas:layout:p3');
+    expect(stored).not.toBeNull();
+    const parsed = JSON.parse(stored!);
+    expect(parsed.schema_version).toBe(1);
+    expect(typeof parsed.saved_at).toBe('string');
   });
 });

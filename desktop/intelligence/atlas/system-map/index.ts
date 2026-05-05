@@ -3,7 +3,7 @@
  */
 
 export { createSystemMap } from './system-map.js';
-export type { Focus, SelectHandler, SystemMapComponent, SystemMapOptions, LegendEntry } from './system-map.js';
+export type { Focus, SelectHandler, SystemMapComponent, SystemMapOptions, LegendEntry, ColorModeChangeHandler } from './system-map.js';
 export { buildFolderTree, subTreeAt, packConfig } from './layouts.js';
 export type { FileData, NodePayload, BuildOptions } from './layouts.js';
 export { colorFor, buildColorContext, colorBySymbolDensity, colorByRecentActivity, colorByMissionAttribution, colorByProvenanceOverlay, missionHue } from './color-modes.js';
