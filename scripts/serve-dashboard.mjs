@@ -1730,15 +1730,54 @@ const server = createServer(async (req, res) => {
     return handleFileBlame(relPath, res);
   }
 
-  // W4d/W4e: list snapshots known to the PG mirror so the dashboard atlas
-  // page can auto-pick the most recent without hard-coding. Returns
-  // [{ snapshot_id, project_id, symbol_count }] sorted by symbol_count desc.
-  // Best-effort: returns [] when PG isn't wired.
+  // W4d/W4e: list snapshots known to the dashboard so the atlas page can
+  // auto-pick. Queries SQLite (the source-of-truth for the UI's loadSnapshot
+  // path), enriched with PG embedding counts when available. Falls back to
+  // PG-only if SQLite is empty.
   if (pathname === '/api/atlas/snapshots') {
     if (req.method !== 'GET') {
       res.writeHead(405, { 'Content-Type': 'application/json' });
       return res.end(JSON.stringify({ ok: false, error: 'method not allowed; use GET' }));
     }
+    const mods = await loadAtlasModules();
+    const out = new Map();
+
+    // Walk every per-project SQLite DB the registry knows about and
+    // GROUP BY snapshot_id. The dashboard's atlas-bridge.ts uses these
+    // same DBs; consistency guarantees loadSnapshot will find rows.
+    if (mods?.KBStore) {
+      try {
+        const store = new mods.KBStore();
+        await store.ensureRegistry();
+        const projects = await store.listProjects();
+        for (const p of projects) {
+          try {
+            await store.ensureProjectDB(p.id);
+            const db = await store.getProjectRawDB(p.id);
+            const rows = db.prepare(
+              `SELECT snapshot_id, COUNT(*) AS symbol_count
+                 FROM symbols GROUP BY snapshot_id`,
+            ).all();
+            for (const r of rows) {
+              const key = `${p.id}|${r.snapshot_id}`;
+              out.set(key, {
+                project_id: p.id,
+                snapshot_id: r.snapshot_id,
+                symbol_count: r.symbol_count,
+                embedded_count: 0,
+                source: 'sqlite',
+              });
+            }
+          } catch { /* skip per-project failures */ }
+        }
+        store.close();
+      } catch (e) {
+        console.warn('[atlas-snapshots] sqlite walk failed:', e?.message ?? String(e));
+      }
+    }
+
+    // Augment with PG embedding counts (and add PG-only snapshots so
+    // operators can see when they're out of sync).
     try {
       const { Client } = await import('pg');
       const cfg = process.env.RH_POSTGRES_URL
@@ -1754,21 +1793,38 @@ const server = createServer(async (req, res) => {
       await client.connect();
       try {
         const r = await client.query(
-          `SELECT project_id, snapshot_id, count(*)::int AS symbol_count,
+          `SELECT project_id, snapshot_id, count(*)::int AS pg_count,
                   count(embedding)::int AS embedded_count
-             FROM atlas.symbols
-            GROUP BY project_id, snapshot_id
-            ORDER BY symbol_count DESC`,
+             FROM atlas.symbols GROUP BY project_id, snapshot_id`,
         );
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        return res.end(JSON.stringify({ ok: true, snapshots: r.rows }));
+        for (const row of r.rows) {
+          const key = `${row.project_id}|${row.snapshot_id}`;
+          const existing = out.get(key);
+          if (existing) {
+            existing.embedded_count = row.embedded_count;
+          } else {
+            out.set(key, {
+              project_id: row.project_id,
+              snapshot_id: row.snapshot_id,
+              symbol_count: row.pg_count,
+              embedded_count: row.embedded_count,
+              source: 'pg-only',
+            });
+          }
+        }
       } finally {
         await client.end();
       }
     } catch (e) {
-      res.writeHead(503, { 'Content-Type': 'application/json' });
-      return res.end(JSON.stringify({ ok: false, error: e?.message ?? String(e) }));
+      // PG unreachable — return SQLite snapshots only.
+      console.warn('[atlas-snapshots] pg augment failed:', e?.message ?? String(e));
     }
+
+    const snapshots = [...out.values()]
+      .sort((a, b) => b.symbol_count - a.symbol_count);
+
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    return res.end(JSON.stringify({ ok: true, snapshots }));
   }
 
   // W4e.A: server-side symbol text search (PG-backed). Falls back to {ok:false}
