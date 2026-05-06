@@ -77,6 +77,7 @@ const pathFlag       = getFlag('path');
 const languagesFlag  = getFlag('languages');
 const registryFlag   = getFlag('registry');
 const dbFlag         = getFlag('db');
+const excludeDirsFlag = getFlag('exclude-dirs');
 const modeJson       = hasFlag('json');
 const flagReplace    = hasFlag('replace');
 const flagProv       = hasFlag('provenance');
@@ -109,21 +110,23 @@ if (!projectId) {
 const snapshotId = snapshotFlag ?? `manual-${new Date().toISOString().replace(/\.\d{3}Z$/, 'Z')}`;
 
 // Language mapping from CLI shorthand → AtlasLanguage enum values
+// (must match src/intelligence/types.ts AtlasLanguage union exactly).
 const LANG_SHORTHANDS = {
-  ts:   'typescript',
-  tsx:  'typescript',
-  js:   'javascript',
-  jsx:  'javascript',
+  ts:   'ts',
+  tsx:  'ts',
+  js:   'js',
+  jsx:  'js',
   rs:   'rust',
   py:   'python',
   go:   'go',
-  rb:   'ruby',
   java: 'java',
   cpp:  'cpp',
-  c:    'c',
+  bash: 'bash',
+  sh:   'bash',
+  glsl: 'glsl',
   // also accept the full names
-  typescript: 'typescript',
-  javascript: 'javascript',
+  typescript: 'ts',
+  javascript: 'js',
   rust:       'rust',
   python:     'python',
 };
@@ -299,6 +302,17 @@ async function main() {
 
   let result;
   try {
+    // W4e: --exclude-dirs=a,b,c filters at walk time so the indexer skips
+    // tree segments that are content-heavy but not source (e.g. .college,
+    // .planning, www). Matches against any path segment of the relative
+    // path (case-sensitive); same semantics as the dashboard endpoint.
+    const excludeSet = excludeDirsFlag
+      ? new Set(excludeDirsFlag.split(',').map((s) => s.trim()).filter(Boolean))
+      : null;
+    const fileFilter = excludeSet
+      ? (rel) => !rel.split('/').some((seg) => excludeSet.has(seg))
+      : undefined;
+
     result = await runAtlasIndexer(db, {
       snapshotId,
       projectId,
@@ -306,6 +320,7 @@ async function main() {
       languages: languages ?? undefined,
       replace: flagReplace,
       runProvenance: flagProv,
+      fileFilter,
       onProgress: flagStreamEvents
         ? ({ filesDone, filesTotal }) => {
             emitStreamEvent('atlas:indexing.progress', {
