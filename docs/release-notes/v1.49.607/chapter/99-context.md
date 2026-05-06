@@ -79,6 +79,12 @@ Counter-cadence milestone does not add or promote substrate primitives.
 | #10257 | CANDIDATE | 1 | ARIA aria-live="polite" for navigation (D3) |
 | #10258 | CANDIDATE | 1 | perf bench fixture scale matches spec target (D4) |
 | #10259 | CANDIDATE | 1 | audit trait→impl→wired-up chain before tag (E4) |
+| #10260 | CANDIDATE | 1 | dual-mode IPC shim pays off (W4c) |
+| #10261 | CANDIDATE | 1 | write-through side-stores stay caches, not sources of truth (W4e.A) |
+| #10262 | CANDIDATE | 1 | local Xenova + pgvector / Chroma is cheapest semantic substrate ≤100 K rows (W4e.B/C) |
+| #10263 | CANDIDATE | 1 | UI snapshot discovery walks canonical store, not derived (W4e.A regression fix) |
+| #10264 | CANDIDATE | 1 | git tags + .planning/missions/ as zero-config provenance (W4d) |
+| #10265 | CANDIDATE | 1 | chromadb 3.x default-EF dep removal pattern (W4e.C) |
 
 ### Build profile
 
@@ -94,9 +100,9 @@ Counter-cadence milestone does not add or promote substrate primitives.
 | `docs/atlas-user-guide.md` | 1 .md | — | ~11 KB |
 | Release-notes (this structure) | 5 .md | — | ~28 KB |
 
-### Branch state at v607 close (post-E4 — pre-tag)
+### Branch state at v607 close (post-W4e — pre-tag)
 
-- **dev:** 28 commits ahead of main (all W0–E4); pre-tag
+- **dev:** 60 commits ahead of main (W0–E4 + W4c + W4d + W4e + polish); pre-tag
 - **main:** v1.49.606 (Apollo 17; last main-tip)
 - **GH release:** TBD (ship pipeline)
 - **tibsfox.com:** v1.84 pages live from v606; no new pages this milestone (counter-cadence)

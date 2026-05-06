@@ -41,11 +41,13 @@ Counter-cadence. No NASA/MUS/ELC/SPS/TRS engine advance.
 
 ## Test count
 
-- Atlas-specific tests: ~460 (24 test files in src/atlas/ + desktop/intelligence/atlas/;
-  +90 net across D1–E4: 16 D1 + 12 D2 + 13 D3 + 4 D4 tools + 10 E2 + 16 E3 + 9 E4 Rust)
-- Repo-wide (vitest run): **29,841 passing** (29,866 total — 17 skipped — 7 todo)
-- tools-config tests: 9 new (atlas-deps-audit.test.mjs × 5 + atlas-perf-bench.test.mjs × 4)
-  + 9 prior = 18 total
+- Atlas-specific tests: ~478 (24 src/atlas + desktop/intelligence/atlas + 18 W4c
+  atlas-bridge.test.ts; +90 net across D1–E4 + 18 W4c)
+- Repo-wide (vitest run): **30,025 passing** (30,049 total — 17 skipped — 7 todo)
+  at W4c.5 polish close.  W4d/W4e endpoints are live-tested rather than unit-tested
+  because they exercise external services (PG + Chroma + git subprocess).
+- tools-config tests: 9 new (atlas-deps-audit × 5 + atlas-perf-bench × 4) + 9 prior
+  = 18 total
 
 ## Atlas surface (post-E4)
 
@@ -72,3 +74,39 @@ Counter-cadence. No NASA/MUS/ELC/SPS/TRS engine advance.
    in `src/atlas/syntax/lexer-state-machine.ts`.  8 of 9 grammars exceed the 10K LOC/sec
    mission-spec target at 10K-line scale; GLSL bottleneck is the coarse-AST pipeline, not the
    lexer (deferred as D6 candidate).
+
+## Structural firsts added by W4c / W4d / W4e
+
+8. **First browser-mode atlas (W4c)** — the four-pane shell + Cmd-K palette load directly
+   from `dashboard/atlas.html` against the dashboard's existing
+   `POST /api/intelligence/invoke` HTTP IPC bridge.  The bridge gained 14 atlas command
+   handlers via `src/intelligence/atlas-bridge.ts` + `installAtlasCommands()`, mirroring
+   the Rust `SqliteAtlasKbDelegate` over an in-process scan-every-project resolution
+   model.  ADR 0003 invariant preserved: the new atlas browser bundle imports nothing
+   from `@tauri-apps/api`; `atlas-deps-audit --strict` reports 0 violations.
+
+9. **First Postgres atlas mirror schema (W4e.A)** — `atlas` schema in the existing
+   `tibsfox` DB mirrors the SQLite migration 003 tables with `(project_id, id)`
+   composite primary keys, a `GENERATED ALWAYS AS … STORED` `TSVECTOR` for sub-50 ms
+   text search, and a `vector(384)` column with an ivfflat cosine index for W4e.B.
+   Write-through architecture: SQLite stays canonical, the mirror is a derivative
+   cache; failures log + skip rather than blocking.
+
+10. **First in-process pgvector semantic search (W4e.B)** — `@huggingface/transformers`
+    quantized `Xenova/all-MiniLM-L6-v2` (~25 MB weights, no GPU, ~192 symbols/s on CPU)
+    runs server-side in the dashboard process.  Symbol embeddings populated post-mirror;
+    cosine search exposed at `POST /api/atlas/search/semantic`.  Verified at 97,705
+    embedded symbols against this repo with sub-300 ms query latency.
+
+11. **First ChromaDB mission-doc collection (W4e.C)** — `gsd-missions` collection
+    holding `.planning/missions/**/*.md` content with metadata (`milestoneTag`,
+    `missionDir`, `path`).  Embeddings supplied explicitly via the same Xenova
+    pipeline used for pgvector — the chromadb 3.x default-EF dep is sidestepped, and
+    cross-store similarity is well-defined because both stores share an embedding
+    space.  Exposed at `GET /api/atlas/mission-search?q=…`.
+
+12. **First file → milestone → planning-doc chain via git-tags-only (W4d)** — three
+    git-backed endpoints (`/api/atlas/file-history`, `/api/atlas/mission-docs`,
+    `/api/atlas/file-blame`) plus a `.planning/missions/v1-49-NNN-*/` glob convention
+    give any GSD repo a zero-config provenance chain.  No `mission_links` registry
+    required; works on any file with git history.
