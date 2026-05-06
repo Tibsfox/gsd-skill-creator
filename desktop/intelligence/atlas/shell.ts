@@ -562,7 +562,8 @@ export function createAtlasShell(opts: AtlasShellOptions = {}): AtlasShell {
             rows = (body.results ?? []).map((s) => ({
               kind: 'doc',
               primary: s.path,
-              secondary: (s.milestoneTag ?? '?') + '  ' + (s.snippet ?? '').replace(/\s+/g, ' ').slice(0, 200),
+              secondary: (s.milestoneTag ? '[' + s.milestoneTag + ']  ' : '')
+                + (s.snippet ?? '').replace(/\s+/g, ' ').slice(0, 200),
               onClick: () => loadFileIntoCodeView(s.path, 1),
             }));
           }
@@ -701,7 +702,11 @@ export function createAtlasShell(opts: AtlasShellOptions = {}): AtlasShell {
 
             const tag = document.createElement('div');
             tag.style.cssText = 'font-family:var(--font-mono);font-weight:600;color:var(--accent-blue,#7aa2f7);';
-            tag.textContent = m.milestoneTag;
+            // 'unreleased' bucket = commits not yet attributable to a tag.
+            // Show a friendlier label.
+            tag.textContent = m.milestoneTag === 'unreleased'
+              ? 'unreleased (since last tag)'
+              : m.milestoneTag;
             card.appendChild(tag);
 
             const meta = document.createElement('div');
@@ -919,15 +924,25 @@ export function createAtlasShell(opts: AtlasShellOptions = {}): AtlasShell {
             fetchProvenance: async (_sid, _fp, lineNo) => {
               const b = blameByLine.get(lineNo);
               if (!b) return [];
+              // The gutter expects an AtlasMissionProvenance shape; we use a
+              // structural cast (intersection adds blame-only fields). The
+              // gutter's tooltip renderer (W4d.3) reads commit_sha + summary
+              // when present so blame badges show "v1.49.NNN  ab12cd34\nfeat:
+              // …" instead of just the milestone tag.
+              const tag = b.milestoneTag && b.milestoneTag !== 'unreleased'
+                ? b.milestoneTag
+                : 'unreleased';
               return [{
                 id: `blame-${lineNo}`,
                 snapshot_id: '',
                 file_path: filePath,
                 line_no: lineNo,
-                mission_id: b.milestoneTag,
+                mission_id: tag,
                 commit_sha: b.sha,
                 weight: 1.0,
-              }];
+                // Non-canonical fields read by gutter renderer when available.
+                summary: b.summary,
+              } as unknown as never];
             },
             fetchSymbol: (id) => intelligenceIpc.getSymbol(id),
           });

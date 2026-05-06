@@ -52,17 +52,29 @@
   border-radius: 50%;
   cursor: pointer;
   flex-shrink: 0;
-  transition: transform 80ms ease;
+  transition: transform 80ms ease, box-shadow 80ms ease;
+  /* Subtle outline so dark badges are visible on the gutter background. */
+  box-shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.15);
 }
 
 .cv-mission-badge:hover {
-  transform: scale(1.4);
+  transform: scale(1.6);
+  /* Glow ring on hover so the user sees what they're targeting. The mission
+     color comes through via background-color; we stack a uniform white ring
+     on top for affordance independent of the underlying hue. */
+  box-shadow: 0 0 0 1.5px rgba(255, 255, 255, 0.5);
+  z-index: 2;
+  position: relative;
 }
 
 .cv-mission-badge--primary {
   width: 10px;
   height: 10px;
 }
+
+/* Tooltip styling — browsers render `title=` attribute by default but with
+   slow trigger + system styling. The native tooltip is good enough for now;
+   if we want a custom hover-card later it'd live here. */
 
 /* Code body */
 .cv-body {

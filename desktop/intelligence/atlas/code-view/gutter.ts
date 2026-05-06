@@ -57,7 +57,17 @@ export function createGutter(
         const badge = document.createElement('span');
         badge.className = `cv-mission-badge${idx === 0 ? ' cv-mission-badge--primary' : ' cv-mission-badge--secondary'}`;
         badge.style.backgroundColor = missionColor(prov.mission_id);
-        badge.title = prov.mission_id;
+
+        // Richer tooltip: mission tag + commit sha + summary when blame
+        // payloads carry them (W4d.3 wires file-blame into provenance).
+        const blameMeta = prov as unknown as { commit_sha?: string; summary?: string };
+        let tooltip = prov.mission_id;
+        if (blameMeta.commit_sha) {
+          const shortSha = blameMeta.commit_sha.slice(0, 8);
+          tooltip = `${prov.mission_id}  ${shortSha}`;
+          if (blameMeta.summary) tooltip += `\n${blameMeta.summary}`;
+        }
+        badge.title = tooltip;
 
         const handler = () => onBadgeClick({ missionId: prov.mission_id, lineNo: line.lineNo });
         badge.addEventListener('click', handler);
