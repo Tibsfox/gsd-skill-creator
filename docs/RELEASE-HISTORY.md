@@ -1,15 +1,17 @@
 # Release History
 
-649 milestones shipped across the v1.0 → v1.49.606 arc. The table below lists every shipped release, newest first.
+651 milestones shipped across the v1.0 → v1.49.608 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions, and where available, retrospectives and lessons learned. `Commits` is the count of commits between this tag and the previous tag (from git). `Phases` and `Plans` come from structured GSD metadata in the release README — most content/patch releases don't have these. `Retro` links to the retrospective chapter when present. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 649 releases · 648 with retrospectives · 633 with extracted lessons · quality A:624 B:4 C:11 D:4 F:6 (avg 96) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 651 releases · 650 with retrospectives · 633 with extracted lessons · quality A:624 B:4 C:11 D:4 F:8 (avg 96) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Retro | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|-------|---------|---------|-------|
+| [v1.49.608](release-notes/v1.49.608) | Pioneer 11 First Saturn Flyby | — | 3 | — | — | [✓](release-notes/v1.49.608/chapter/03-retrospective.md) | — | F 39 |  |
+| [v1.49.607](release-notes/v1.49.607) | GSD Code Atlas (counter-cadence) | 2026-05-05 | 65 | — | — | [✓](release-notes/v1.49.607/chapter/03-retrospective.md) | — | F 52 |  |
 | [v1.49.606](release-notes/v1.49.606) | Apollo 17 Final Crewed Lunar Landing (NASA degree 1.84) | 2026-05-04 | 5 | — | — | [✓](release-notes/v1.49.606/chapter/03-retrospective.md) | — | F 21 |  |
 | [v1.49.605](release-notes/v1.49.605) | Apollo 16 Descartes Highlands Geology (NASA degree 1.83) | 2026-05-04 | 5 | — | — | [✓](release-notes/v1.49.605/chapter/03-retrospective.md) | — | F 21 |  |
 | [v1.49.604](release-notes/v1.49.604) | Pioneer 10 First Through Asteroid Belt + First Jupiter Flyby (NASA degree 1.82) | 2026-05-04 | 4 | — | — | [✓](release-notes/v1.49.604/chapter/03-retrospective.md) | — | F 31 |  |
@@ -591,7 +593,7 @@ Each version links to a detailed release notes directory with full feature descr
 | [v1.49.19](release-notes/v1.49.19) | Gastown Chipset Integration | 2026-03-06 | 26 | — | — | [✓](release-notes/v1.49.19/chapter/03-retrospective.md) | [3/19](release-notes/v1.49.19/chapter/04-lessons.md) | A 99 |  |
 | [v1.49.18](release-notes/v1.49.18) | Space Between Observatory | 2026-03-06 | 16 | — | — | [✓](release-notes/v1.49.18/chapter/03-retrospective.md) | [2/17](release-notes/v1.49.18/chapter/04-lessons.md) | A 98 |  |
 | [v1.49.17](release-notes/v1.49.17) | The Space Between | 2026-03-04 | 9 | — | — | [✓](release-notes/v1.49.17/chapter/03-retrospective.md) | [19](release-notes/v1.49.17/chapter/04-lessons.md) | A 99 |  |
-| [v1.49.16](release-notes/v1.49.16) | Muse Integration & MCP Pipeline | 2026-03-04 | 2260 | — | — | [✓](release-notes/v1.49.16/chapter/03-retrospective.md) | [13](release-notes/v1.49.16/chapter/04-lessons.md) | A 98 |  |
+| [v1.49.16](release-notes/v1.49.16) | Muse Integration & MCP Pipeline | 2026-03-04 | 2258 | — | — | [✓](release-notes/v1.49.16/chapter/03-retrospective.md) | [13](release-notes/v1.49.16/chapter/04-lessons.md) | A 98 |  |
 | [v1.49.15](release-notes/v1.49.15) | Self-Improving Mesh Architecture | 2026-03-04 | 50 | — | — | [✓](release-notes/v1.49.15/chapter/03-retrospective.md) | [1/20](release-notes/v1.49.15/chapter/04-lessons.md) | A 98 |  |
 | [v1.49.14](release-notes/v1.49.14) | Dependency Health Monitor & Progressive Internalization Engine | 2026-03-03 | 21 | 6 | 26 | [✓](release-notes/v1.49.14/chapter/03-retrospective.md) | [20](release-notes/v1.49.14/chapter/04-lessons.md) | A 98 |  |
 | [v1.49.13](release-notes/v1.49.13) | Skill Usage Telemetry & Adaptive Pipeline | 2026-03-03 | 33 | 4 | 10 | [✓](release-notes/v1.49.13/chapter/03-retrospective.md) | [1/16](release-notes/v1.49.13/chapter/04-lessons.md) | A 98 |  |
@@ -605,7 +607,7 @@ Each version links to a detailed release notes directory with full feature descr
 | [v1.49.5](release-notes/v1.49.5) | Project Filesystem Reorganization | 2026-02-27 | 14 | 8 | 17 | [✓](release-notes/v1.49.5/chapter/03-retrospective.md) | [20](release-notes/v1.49.5/chapter/04-lessons.md) | A 98 |  |
 | [v1.49.4](release-notes/v1.49.4) | Filesystem Management Strategy | 2026-02-27 | 10 | — | — | [✓](release-notes/v1.49.4/chapter/03-retrospective.md) | [17](release-notes/v1.49.4/chapter/04-lessons.md) | A 91 |  |
 | [v1.49.3](release-notes/v1.49.3) | GSD-OS Desktop Polish | 2026-02-27 | 4 | — | — | [✓](release-notes/v1.49.3/chapter/03-retrospective.md) | [12](release-notes/v1.49.3/chapter/04-lessons.md) | A 98 |  |
-| [v1.49.2](release-notes/v1.49.2) | GSD-OS Indicator Wiring & TypeScript Fixes | 2026-02-27 | 2019 | — | — | [✓](release-notes/v1.49.2/chapter/03-retrospective.md) | [1/12](release-notes/v1.49.2/chapter/04-lessons.md) | A 98 |  |
+| [v1.49.2](release-notes/v1.49.2) | GSD-OS Indicator Wiring & TypeScript Fixes | 2026-02-27 | 2017 | — | — | [✓](release-notes/v1.49.2/chapter/03-retrospective.md) | [1/12](release-notes/v1.49.2/chapter/04-lessons.md) | A 98 |  |
 | [v1.49.1](release-notes/v1.49.1) | DACP CLI Field Alignment | 2026-02-27 | 2 | — | — | [✓](release-notes/v1.49.1/chapter/03-retrospective.md) | [2/11](release-notes/v1.49.1/chapter/04-lessons.md) | A 98 |  |
 | [v1.49](release-notes/v1.49) | Deterministic Agent Communication Protocol | 2026-02-27 | 43 | 11 | 24 | [✓](release-notes/v1.49/chapter/03-retrospective.md) | [2/14](release-notes/v1.49/chapter/04-lessons.md) | A 99 |  |
 | [v1.48](release-notes/v1.48) | Physical Infrastructure Engineering Pack | 2026-02-27 | 52 | 12 | 30 | [✓](release-notes/v1.48/chapter/03-retrospective.md) | [1/20](release-notes/v1.48/chapter/04-lessons.md) | A 98 |  |
@@ -628,7 +630,7 @@ Each version links to a detailed release notes directory with full feature descr
 | [v1.31](release-notes/v1.31) | GSD-OS MCP Integration | 2026-02-22 | 38 | 12 | 28 | [✓](release-notes/v1.31/chapter/03-retrospective.md) | [20](release-notes/v1.31/chapter/04-lessons.md) | A 98 |  |
 | [v1.30](release-notes/v1.30) | Vision-to-Mission Pipeline | 2026-02-22 | 67 | 14 | 26 | [✓](release-notes/v1.30/chapter/03-retrospective.md) | [23](release-notes/v1.30/chapter/04-lessons.md) | A 98 |  |
 | [v1.29](release-notes/v1.29) | Electronics Educational Pack | 2026-02-21 | 93 | 17 | 39 | [✓](release-notes/v1.29/chapter/03-retrospective.md) | [1/16](release-notes/v1.29/chapter/04-lessons.md) | A 98 |  |
-| [v1.28](release-notes/v1.28) | GSD Den Operations | 2026-02-21 | 1325 | 7 | 22 | [✓](release-notes/v1.28/chapter/03-retrospective.md) | [20](release-notes/v1.28/chapter/04-lessons.md) | A 98 |  |
+| [v1.28](release-notes/v1.28) | GSD Den Operations | 2026-02-21 | 1324 | 7 | 22 | [✓](release-notes/v1.28/chapter/03-retrospective.md) | [20](release-notes/v1.28/chapter/04-lessons.md) | A 98 |  |
 | [v1.27](release-notes/v1.27) | GSD Foundational Knowledge Packs | 2026-02-20 | — | 12 | 79 | [✓](release-notes/v1.27/chapter/03-retrospective.md) | [21](release-notes/v1.27/chapter/04-lessons.md) | A 98 |  |
 | [v1.26](release-notes/v1.26) | Aminet Archive Extension Pack | 2026-02-19 | 91 | 7 | 40 | [✓](release-notes/v1.26/chapter/03-retrospective.md) | [21](release-notes/v1.26/chapter/04-lessons.md) | A 98 |  |
 | [v1.25](release-notes/v1.25) | Ecosystem Integration | 2026-02-19 | 18 | 5 | 14 | [✓](release-notes/v1.25/chapter/03-retrospective.md) | [20](release-notes/v1.25/chapter/04-lessons.md) | A 98 |  |
@@ -643,7 +645,7 @@ Each version links to a detailed release notes directory with full feature descr
 | [v1.16](release-notes/v1.16) | Dashboard Console & Milestone Ingestion | 2026-02-13 | 48 | 6 | 18 | [✓](release-notes/v1.16/chapter/03-retrospective.md) | [3/19](release-notes/v1.16/chapter/04-lessons.md) | A 98 |  |
 | [v1.15](release-notes/v1.15) | Live Dashboard Terminal | 2026-02-13 | 23 | 5 | 11 | [✓](release-notes/v1.15/chapter/03-retrospective.md) | [18](release-notes/v1.15/chapter/04-lessons.md) | A 98 |  |
 | [v1.14](release-notes/v1.14) | Promotion Pipeline | 2026-02-13 | 51 | 8 | 16 | [✓](release-notes/v1.14/chapter/03-retrospective.md) | [1/16](release-notes/v1.14/chapter/04-lessons.md) | A 98 |  |
-| [v1.13](release-notes/v1.13) | Session Lifecycle & Workflow Coprocessor | 2026-02-12 | 525 | 14 | 35 | [✓](release-notes/v1.13/chapter/03-retrospective.md) | [2/18](release-notes/v1.13/chapter/04-lessons.md) | A 98 |  |
+| [v1.13](release-notes/v1.13) | Session Lifecycle & Workflow Coprocessor | 2026-02-12 | 524 | 14 | 35 | [✓](release-notes/v1.13/chapter/03-retrospective.md) | [2/18](release-notes/v1.13/chapter/04-lessons.md) | A 98 |  |
 | [v1.12.1](release-notes/v1.12.1) | Live Metrics Dashboard | 2026-02-12 | — | 7 | 14 | [✓](release-notes/v1.12.1/chapter/03-retrospective.md) | [2/20](release-notes/v1.12.1/chapter/04-lessons.md) | A 98 |  |
 | [v1.12](release-notes/v1.12) | GSD Planning Docs Dashboard | 2026-02-12 | 17 | 6 | 7 | [✓](release-notes/v1.12/chapter/03-retrospective.md) | [2/19](release-notes/v1.12/chapter/04-lessons.md) | A 98 |  |
 | [v1.11](release-notes/v1.11) | GSD Integration Layer | 2026-02-12 | 33 | 6 | 16 | [✓](release-notes/v1.11/chapter/03-retrospective.md) | [2/18](release-notes/v1.11/chapter/04-lessons.md) | A 98 |  |
@@ -658,4 +660,4 @@ Each version links to a detailed release notes directory with full feature descr
 | [v1.3](release-notes/v1.3) | Documentation Overhaul | 2026-02-05 | 40 | 5 | 8 | [✓](release-notes/v1.3/chapter/03-retrospective.md) | [4/16](release-notes/v1.3/chapter/04-lessons.md) | A 98 |  |
 | [v1.2](release-notes/v1.2) | Test Infrastructure | 2026-02-05 | 53 | 5 | 19 | [✓](release-notes/v1.2/chapter/03-retrospective.md) | [19](release-notes/v1.2/chapter/04-lessons.md) | A 98 |  |
 | [v1.1](release-notes/v1.1) | Semantic Conflict Detection | 2026-02-04 | 37 | 4 | 13 | [✓](release-notes/v1.1/chapter/03-retrospective.md) | [1/15](release-notes/v1.1/chapter/04-lessons.md) | A 98 |  |
-| [v1.0](release-notes/v1.0) | Core Skill Management | 2026-01-31 | 72 | 5 | 15 | [✓](release-notes/v1.0/chapter/03-retrospective.md) | [1/14](release-notes/v1.0/chapter/04-lessons.md) | A 98 |  |
+| [v1.0](release-notes/v1.0) | Core Skill Management | 2026-01-31 | 71 | 5 | 15 | [✓](release-notes/v1.0/chapter/03-retrospective.md) | [1/14](release-notes/v1.0/chapter/04-lessons.md) | A 98 |  |
