@@ -634,6 +634,11 @@ export function createAtlasShell(opts: AtlasShellOptions = {}): AtlasShell {
       avPane.appendChild(fileArcheologyEl);
 
       async function renderFileArcheology(filePath: string): Promise<void> {
+        // Skip when not running inside a browser tab (vitest / Tauri shell).
+        // The dashboard endpoint /api/atlas/file-history has no analog there.
+        if (typeof window === 'undefined' || typeof window.location === 'undefined' || !window.location.href.startsWith('http')) {
+          return;
+        }
         fileArcheologyEl.style.display = '';
         fileArcheologyEl.innerHTML =
           '<div style="color:var(--text-muted,#6e7681);">Loading file history…</div>';
@@ -886,6 +891,14 @@ export function createAtlasShell(opts: AtlasShellOptions = {}): AtlasShell {
           cv?.setFocus({ file: filePath, line });
           return;
         }
+        // Skip the fetch entirely when running outside a browser-like host
+        // (vitest+node, or Tauri shell). The cvWrapper.setFocus has already
+        // performed the synchronous scroll/flash for the file; the only
+        // additional work this function does is refresh the source from the
+        // dashboard endpoint — which doesn't exist outside the browser.
+        if (typeof window === 'undefined' || typeof window.location === 'undefined' || !window.location.href.startsWith('http')) {
+          return;
+        }
         try {
           // Fetch source + blame in parallel; blame is best-effort (returns
           // {ok:false} for files outside git or pre-tag commits).
@@ -964,6 +977,12 @@ export function createAtlasShell(opts: AtlasShellOptions = {}): AtlasShell {
       const cvWrapper: CoordinatedView = {
         setFocus(focus: Focus): void {
           if (focus.kind === 'file') {
+            // Synchronous fast-path: tell the existing code-view to focus the
+            // file/line immediately (scrolls + flashes the line; cheap). This
+            // preserves the sync contract the rest of the coordinator graph
+            // relies on (and that shell.test.ts asserts). The async source
+            // refresh happens in parallel.
+            cv?.setFocus({ file: focus.id, line: 1 });
             void loadFileIntoCodeView(focus.id, 1);
           } else if (focus.kind === 'symbol') {
             // Resolve symbol → its file_path + start_line; load that file
