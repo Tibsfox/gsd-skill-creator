@@ -1730,6 +1730,47 @@ const server = createServer(async (req, res) => {
     return handleFileBlame(relPath, res);
   }
 
+  // W4d/W4e: list snapshots known to the PG mirror so the dashboard atlas
+  // page can auto-pick the most recent without hard-coding. Returns
+  // [{ snapshot_id, project_id, symbol_count }] sorted by symbol_count desc.
+  // Best-effort: returns [] when PG isn't wired.
+  if (pathname === '/api/atlas/snapshots') {
+    if (req.method !== 'GET') {
+      res.writeHead(405, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ ok: false, error: 'method not allowed; use GET' }));
+    }
+    try {
+      const { Client } = await import('pg');
+      const cfg = process.env.RH_POSTGRES_URL
+        ? { connectionString: process.env.RH_POSTGRES_URL }
+        : {
+            host: process.env.PGHOST,
+            port: parseInt(process.env.PGPORT ?? '5432', 10),
+            user: process.env.PGUSER,
+            password: process.env.PGPASSWORD,
+            database: process.env.PGDATABASE,
+          };
+      const client = new Client(cfg);
+      await client.connect();
+      try {
+        const r = await client.query(
+          `SELECT project_id, snapshot_id, count(*)::int AS symbol_count,
+                  count(embedding)::int AS embedded_count
+             FROM atlas.symbols
+            GROUP BY project_id, snapshot_id
+            ORDER BY symbol_count DESC`,
+        );
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        return res.end(JSON.stringify({ ok: true, snapshots: r.rows }));
+      } finally {
+        await client.end();
+      }
+    } catch (e) {
+      res.writeHead(503, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ ok: false, error: e?.message ?? String(e) }));
+    }
+  }
+
   // W4e.A: server-side symbol text search (PG-backed). Falls back to {ok:false}
   // when PG isn't wired so the client can degrade to the local trigram path.
   if (pathname === '/api/atlas/search/symbols') {

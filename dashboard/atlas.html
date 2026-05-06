@@ -213,13 +213,18 @@ main {
 
           function loadOrDiscover() {
             if (snap) return Promise.resolve(snap);
-            // Discover: pick the first registered project, then list-symbols-in-snapshot
-            // with a probe id won't work without a snapshot id. Easier:
-            // call the indexer's known recent snapshot via a small extension —
-            // for now, just fall back to a known constant if the bootstrap was
-            // run via curl (`snap-w4c-spotcheck`). Real auto-discovery is a
-            // v608+ feature.
-            return Promise.resolve('snap-w4c-clean');
+            // Auto-discover: ask the PG mirror for snapshots and pick the
+            // largest (= most recently/fully indexed). Falls back to
+            // 'snap-w4e' if the API is unreachable.
+            return fetch('/api/atlas/snapshots')
+              .then(function (r) { return r.json(); })
+              .then(function (body) {
+                if (body && body.ok && Array.isArray(body.snapshots) && body.snapshots.length > 0) {
+                  return body.snapshots[0].snapshot_id;
+                }
+                return 'snap-w4e';
+              })
+              .catch(function () { return 'snap-w4e'; });
           }
 
           setStatus('Loading snapshot…', 'info');
