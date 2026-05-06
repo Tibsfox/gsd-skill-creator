@@ -261,15 +261,9 @@ export function createAtlasShell(opts: AtlasShellOptions = {}): AtlasShell {
         if (focus.kind === 'symbol') {
           sg.setFocus({ snapshotId: sid as never, symbolId: focus.id }).catch(() => {});
         } else if (focus.kind === 'file') {
-          // Resolve the file's first non-import symbol and focus on it so the
-          // graph shows that file's call neighborhood.
-          intelligenceIpc.listSymbolsForFile(sid as never, focus.id)
-            .then((rows) => {
-              const pick = rows.find((r) => r.kind !== 'import') ?? rows[0];
-              if (!pick) return;
-              return sg.setFocus({ snapshotId: sid as never, symbolId: pick.id });
-            })
-            .catch(() => { /* IPC unavailable in tests */ });
+          // Show the entire file's symbol structure + intra-file edges,
+          // not just one symbol's 1-hop neighborhood.
+          sg.loadFileGraph(sid as never, focus.id).catch(() => { /* IPC unavailable in tests */ });
         }
       },
     };
@@ -471,6 +465,402 @@ export function createAtlasShell(opts: AtlasShellOptions = {}): AtlasShell {
         coordinator.dispatch({ kind: 'mission', id: e.missionId }, avWrapper);
       });
 
+      // ── W4e search bar (top of archeology pane) ──────────────────────────
+      // Three search modes:
+      //   • Symbols (text)    → /api/atlas/search/symbols (PG tsvector)
+      //   • Symbols (semantic) → /api/atlas/search/semantic (pgvector)
+      //   • Mission docs      → /api/atlas/mission-search (Chroma)
+      // Results render in a flyout overlay that takes over the archeology
+      // pane. Click a result → dispatches the appropriate focus.
+      const searchBar = document.createElement('div');
+      searchBar.className = 'atlas-archeology-searchbar';
+      searchBar.style.cssText =
+        'position:absolute;top:22px;left:0;right:0;background:var(--bg-secondary,#24283b);' +
+        'border-bottom:1px solid var(--border-subtle,#292e42);padding:6px 10px;' +
+        'display:flex;align-items:center;gap:6px;z-index:5;';
+      const modeSel = document.createElement('select');
+      modeSel.style.cssText = 'background:var(--bg-primary,#1a1b26);color:var(--text-primary,#c0caf5);' +
+        'border:1px solid var(--border-subtle,#292e42);border-radius:4px;padding:3px 6px;font-size:11px;';
+      const modes: Array<[string, string]> = [
+        ['text', 'Symbols (text)'],
+        ['semantic', 'Symbols (semantic)'],
+        ['missions', 'Mission docs'],
+      ];
+      for (const [v, label] of modes) {
+        const opt = document.createElement('option');
+        opt.value = v;
+        opt.textContent = label;
+        modeSel.appendChild(opt);
+      }
+      const searchInput = document.createElement('input');
+      searchInput.type = 'search';
+      searchInput.placeholder = 'Search across the atlas…';
+      searchInput.style.cssText = 'flex:1;background:var(--bg-primary,#1a1b26);color:var(--text-primary,#c0caf5);' +
+        'border:1px solid var(--border-subtle,#292e42);border-radius:4px;padding:3px 8px;font-size:12px;';
+      searchBar.appendChild(modeSel);
+      searchBar.appendChild(searchInput);
+      avPane.appendChild(searchBar);
+
+      const searchResultsEl = document.createElement('div');
+      searchResultsEl.style.cssText =
+        'position:absolute;top:62px;left:0;right:0;bottom:0;background:var(--bg-primary,#1a1b26);' +
+        'overflow:auto;padding:10px 12px;display:none;z-index:4;font-size:12px;';
+      avPane.appendChild(searchResultsEl);
+
+      let searchSeq = 0;
+      async function runSearch(): Promise<void> {
+        const q = searchInput.value.trim();
+        if (!q) {
+          searchResultsEl.style.display = 'none';
+          return;
+        }
+        const seq = ++searchSeq;
+        const mode = modeSel.value;
+        searchResultsEl.style.display = '';
+        searchResultsEl.innerHTML =
+          '<div style="color:var(--text-muted,#6e7681);">Searching ' +
+          escapeText(mode) + '…</div>';
+        try {
+          let rows: Array<{ kind: string; primary: string; secondary?: string; onClick: () => void }>;
+          if (mode === 'text') {
+            const r = await fetch('/api/atlas/search/symbols?limit=50&q=' + encodeURIComponent(q));
+            const body = await r.json() as {
+              ok: boolean; error?: string;
+              results?: Array<{ id: string; project_id: string; qualified_name: string; file_path: string; kind: string; rank: number }>;
+            };
+            if (!body.ok) throw new Error(body.error ?? 'search failed');
+            rows = (body.results ?? []).map((s) => ({
+              kind: 'symbol',
+              primary: s.qualified_name + '  ' + s.kind,
+              secondary: s.file_path,
+              onClick: () => coordinator.dispatch({ kind: 'symbol', id: s.id }),
+            }));
+          } else if (mode === 'semantic') {
+            const r = await fetch('/api/atlas/search/semantic', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ q, limit: 50 }),
+            });
+            const body = await r.json() as {
+              ok: boolean; error?: string;
+              results?: Array<{ id: string; qualified_name: string; file_path: string; kind: string; distance: number }>;
+            };
+            if (!body.ok) throw new Error(body.error ?? 'search failed');
+            rows = (body.results ?? []).map((s) => ({
+              kind: 'symbol',
+              primary: s.qualified_name + '  ' + s.kind,
+              secondary: 'd=' + s.distance.toFixed(3) + '  ' + s.file_path,
+              onClick: () => coordinator.dispatch({ kind: 'symbol', id: s.id }),
+            }));
+          } else {
+            const r = await fetch('/api/atlas/mission-search?limit=20&q=' + encodeURIComponent(q));
+            const body = await r.json() as {
+              ok: boolean; error?: string;
+              results?: Array<{ path: string; milestoneTag: string; missionDir: string; distance: number; snippet?: string }>;
+            };
+            if (!body.ok) throw new Error(body.error ?? 'search failed');
+            rows = (body.results ?? []).map((s) => ({
+              kind: 'doc',
+              primary: s.path,
+              secondary: (s.milestoneTag ?? '?') + '  ' + (s.snippet ?? '').replace(/\s+/g, ' ').slice(0, 200),
+              onClick: () => loadFileIntoCodeView(s.path, 1),
+            }));
+          }
+          // Late-arrival guard: if a newer search has started, drop these results.
+          if (seq !== searchSeq) return;
+
+          searchResultsEl.innerHTML = '';
+          if (rows.length === 0) {
+            const empty = document.createElement('div');
+            empty.style.color = 'var(--text-muted,#6e7681)';
+            empty.textContent = 'No matches.';
+            searchResultsEl.appendChild(empty);
+            return;
+          }
+          for (const r of rows) {
+            const row = document.createElement('div');
+            row.style.cssText =
+              'padding:6px 8px;cursor:pointer;border-radius:4px;' +
+              'border-bottom:1px solid var(--border-subtle,#292e42);';
+            row.addEventListener('mouseenter', () => { row.style.background = 'var(--bg-secondary,#24283b)'; });
+            row.addEventListener('mouseleave', () => { row.style.background = 'transparent'; });
+            row.addEventListener('click', () => {
+              r.onClick();
+              searchResultsEl.style.display = 'none';
+              searchInput.value = '';
+            });
+            const p = document.createElement('div');
+            p.style.cssText = 'color:var(--text-primary,#c0caf5);font-family:var(--font-mono);';
+            p.textContent = r.primary;
+            row.appendChild(p);
+            if (r.secondary) {
+              const s = document.createElement('div');
+              s.style.cssText = 'color:var(--text-muted,#6e7681);font-size:11px;margin-top:2px;';
+              s.textContent = r.secondary;
+              row.appendChild(s);
+            }
+            searchResultsEl.appendChild(row);
+          }
+        } catch (e) {
+          if (seq !== searchSeq) return;
+          searchResultsEl.innerHTML =
+            '<div style="color:#f87171;">Search failed: ' +
+            escapeText(e instanceof Error ? e.message : String(e)) + '</div>';
+        }
+      }
+      let searchDebounce: ReturnType<typeof setTimeout> | null = null;
+      searchInput.addEventListener('input', () => {
+        if (searchDebounce !== null) clearTimeout(searchDebounce);
+        searchDebounce = setTimeout(runSearch, 200);
+      });
+      modeSel.addEventListener('change', () => { void runSearch(); });
+      searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          searchInput.value = '';
+          searchResultsEl.style.display = 'none';
+        }
+      });
+
+      // W4d: file-history view overlays the archeology pane when a file is
+      // focused. We slide an absolutely-positioned panel over the existing
+      // mission-flow Sankey so the user sees the file→milestone→docs chain
+      // without losing the underlying archeology component.
+      const fileArcheologyEl = document.createElement('div');
+      fileArcheologyEl.className = 'atlas-file-archeology';
+      fileArcheologyEl.style.cssText =
+        'position:absolute;top:22px;left:0;right:0;bottom:0;background:var(--bg-primary,#1a1b26);' +
+        'overflow:auto;padding:12px 16px;display:none;font-size:12px;line-height:1.5;';
+      avPane.appendChild(fileArcheologyEl);
+
+      async function renderFileArcheology(filePath: string): Promise<void> {
+        fileArcheologyEl.style.display = '';
+        fileArcheologyEl.innerHTML =
+          '<div style="color:var(--text-muted,#6e7681);">Loading file history…</div>';
+        try {
+          const resp = await fetch(
+            '/api/atlas/file-history?path=' + encodeURIComponent(filePath),
+          );
+          const body = await resp.json() as {
+            ok: boolean;
+            milestones: Array<{
+              milestoneTag: string;
+              commits: Array<{ sha: string; timestamp: number; subject: string }>;
+              earliestTimestamp: number;
+              latestTimestamp: number;
+            }>;
+          };
+          if (!body.ok) throw new Error('file-history failed');
+          if (body.milestones.length === 0) {
+            fileArcheologyEl.innerHTML =
+              '<div style="color:var(--text-muted,#6e7681);">No git history for ' + escapeText(filePath) + '</div>';
+            return;
+          }
+
+          const root = document.createElement('div');
+          root.style.display = 'grid';
+          root.style.gridTemplateColumns = 'minmax(280px, 1fr) 2fr';
+          root.style.gap = '12px';
+          root.style.height = '100%';
+
+          // Left: milestone timeline.
+          const leftCol = document.createElement('div');
+          leftCol.style.cssText = 'overflow:auto;padding-right:8px;border-right:1px solid var(--border-subtle,#292e42);';
+          const header = document.createElement('div');
+          header.style.cssText = 'font-weight:600;color:var(--text-primary,#c0caf5);margin-bottom:8px;';
+          header.textContent = '📄 ' + filePath;
+          leftCol.appendChild(header);
+
+          const sub = document.createElement('div');
+          sub.style.cssText = 'color:var(--text-muted,#6e7681);margin-bottom:10px;';
+          sub.textContent = `${body.milestones.length} milestone${body.milestones.length === 1 ? '' : 's'} touched this file`;
+          leftCol.appendChild(sub);
+
+          // Right: selected milestone's docs list.
+          const rightCol = document.createElement('div');
+          rightCol.style.cssText = 'overflow:auto;padding-left:8px;';
+          const rightDefault = document.createElement('div');
+          rightDefault.style.color = 'var(--text-muted,#6e7681)';
+          rightDefault.textContent = 'Click a milestone to see its planning docs';
+          rightCol.appendChild(rightDefault);
+
+          for (const m of body.milestones) {
+            const card = document.createElement('div');
+            card.className = 'atlas-archeology-milestone';
+            card.style.cssText =
+              'border:1px solid var(--border-subtle,#292e42);border-radius:6px;' +
+              'padding:8px 10px;margin-bottom:6px;cursor:pointer;background:var(--bg-secondary,#24283b);' +
+              'transition:background 80ms,border-color 80ms;';
+            card.addEventListener('mouseenter', () => {
+              card.style.background = 'var(--bg-elevated, #2c2f3d)';
+              card.style.borderColor = 'var(--accent-blue, #7aa2f7)';
+            });
+            card.addEventListener('mouseleave', () => {
+              card.style.background = 'var(--bg-secondary,#24283b)';
+              card.style.borderColor = 'var(--border-subtle,#292e42)';
+            });
+
+            const tag = document.createElement('div');
+            tag.style.cssText = 'font-family:var(--font-mono);font-weight:600;color:var(--accent-blue,#7aa2f7);';
+            tag.textContent = m.milestoneTag;
+            card.appendChild(tag);
+
+            const meta = document.createElement('div');
+            meta.style.cssText = 'color:var(--text-muted,#6e7681);font-size:11px;margin-top:2px;';
+            const date = new Date(m.latestTimestamp).toISOString().slice(0, 10);
+            meta.textContent = `${m.commits.length} commit${m.commits.length === 1 ? '' : 's'} · ${date}`;
+            card.appendChild(meta);
+
+            const firstCommit = document.createElement('div');
+            firstCommit.style.cssText = 'color:var(--text-secondary,#9aa5ce);font-size:11px;margin-top:4px;';
+            firstCommit.textContent = m.commits[0]?.subject ?? '';
+            card.appendChild(firstCommit);
+
+            card.addEventListener('click', () => {
+              void loadMilestoneDocs(m, rightCol);
+            });
+            leftCol.appendChild(card);
+          }
+
+          root.appendChild(leftCol);
+          root.appendChild(rightCol);
+          fileArcheologyEl.innerHTML = '';
+          fileArcheologyEl.appendChild(root);
+        } catch (e) {
+          // eslint-disable-next-line no-console
+          console.warn('[atlas] file-history fetch failed:', e);
+          fileArcheologyEl.innerHTML =
+            '<div style="color:#f87171;">Failed to load file history.</div>';
+        }
+      }
+
+      async function loadMilestoneDocs(
+        m: { milestoneTag: string; commits: Array<{ sha: string; subject: string; timestamp: number }> },
+        rightCol: HTMLElement,
+      ): Promise<void> {
+        rightCol.innerHTML =
+          '<div style="color:var(--text-muted,#6e7681);">Loading mission docs for ' +
+          escapeText(m.milestoneTag) + '…</div>';
+        try {
+          const resp = await fetch(
+            '/api/atlas/mission-docs?milestoneTag=' + encodeURIComponent(m.milestoneTag),
+          );
+          const body = await resp.json() as {
+            ok: boolean;
+            milestoneTag: string;
+            missionDir: string | null;
+            categorized: { brief: string | null; spec: string | null; plan: string | null; retro: string | null };
+            docs: Array<{ path: string; name: string }>;
+          };
+
+          rightCol.innerHTML = '';
+          const head = document.createElement('div');
+          head.style.cssText = 'font-weight:600;color:var(--text-primary,#c0caf5);margin-bottom:8px;font-family:var(--font-mono);';
+          head.textContent = m.milestoneTag;
+          rightCol.appendChild(head);
+
+          if (!body.ok || !body.missionDir) {
+            const none = document.createElement('div');
+            none.style.color = 'var(--text-muted,#6e7681)';
+            none.textContent = 'No matching mission directory in .planning/missions/';
+            rightCol.appendChild(none);
+          } else {
+            const dirEl = document.createElement('div');
+            dirEl.style.cssText = 'color:var(--text-muted,#6e7681);font-size:11px;margin-bottom:10px;font-family:var(--font-mono);';
+            dirEl.textContent = body.missionDir + '/';
+            rightCol.appendChild(dirEl);
+
+            // Categorized links.
+            const cats: Array<[string, string | null]> = [
+              ['Brief', body.categorized.brief],
+              ['Spec', body.categorized.spec],
+              ['Plan', body.categorized.plan],
+              ['Retro', body.categorized.retro],
+            ];
+            const catRow = document.createElement('div');
+            catRow.style.cssText = 'display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px;';
+            for (const [label, p] of cats) {
+              const btn = document.createElement('button');
+              btn.textContent = label;
+              btn.disabled = !p;
+              btn.style.cssText =
+                'background:var(--bg-secondary,#24283b);color:var(--text-primary,#c0caf5);' +
+                'border:1px solid var(--border-subtle,#292e42);border-radius:4px;padding:3px 8px;' +
+                'font-size:11px;cursor:' + (p ? 'pointer' : 'default') + ';' +
+                'opacity:' + (p ? '1' : '0.4') + ';';
+              if (p) {
+                btn.addEventListener('click', () => {
+                  void loadFileIntoCodeView(p, 1);
+                });
+              }
+              catRow.appendChild(btn);
+            }
+            rightCol.appendChild(catRow);
+
+            // All docs list.
+            const docHead = document.createElement('div');
+            docHead.style.cssText = 'color:var(--text-muted,#6e7681);font-size:11px;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.05em;';
+            docHead.textContent = `All docs (${body.docs.length})`;
+            rightCol.appendChild(docHead);
+
+            for (const d of body.docs) {
+              const link = document.createElement('div');
+              const trimmed = d.path.replace(body.missionDir + '/', '');
+              link.style.cssText =
+                'color:var(--accent-blue,#7aa2f7);font-family:var(--font-mono);font-size:11px;' +
+                'cursor:pointer;padding:2px 0;';
+              link.textContent = trimmed;
+              link.addEventListener('click', () => {
+                void loadFileIntoCodeView(d.path, 1);
+              });
+              rightCol.appendChild(link);
+            }
+          }
+
+          // Commit list.
+          const ch = document.createElement('div');
+          ch.style.cssText = 'color:var(--text-muted,#6e7681);font-size:11px;margin:14px 0 4px;text-transform:uppercase;letter-spacing:0.05em;';
+          ch.textContent = `Commits (${m.commits.length})`;
+          rightCol.appendChild(ch);
+          for (const c of m.commits) {
+            const row = document.createElement('div');
+            row.style.cssText = 'font-family:var(--font-mono);font-size:11px;color:var(--text-secondary,#9aa5ce);padding:2px 0;';
+            row.title = c.sha;
+            const sha = document.createElement('span');
+            sha.style.color = 'var(--text-muted,#6e7681)';
+            sha.textContent = c.sha.slice(0, 8) + ' ';
+            row.appendChild(sha);
+            row.appendChild(document.createTextNode(c.subject));
+            rightCol.appendChild(row);
+          }
+        } catch (e) {
+          // eslint-disable-next-line no-console
+          console.warn('[atlas] mission-docs fetch failed:', e);
+          rightCol.innerHTML = '<div style="color:#f87171;">Failed to load mission docs.</div>';
+        }
+      }
+
+      function hideFileArcheology(): void {
+        fileArcheologyEl.style.display = 'none';
+      }
+
+      function escapeText(s: string): string {
+        const d = document.createElement('div');
+        d.textContent = s;
+        return d.innerHTML;
+      }
+
+      // Hook the coordinator: file focus → show archeology overlay; mission
+      // focus → hide it (let the original archeology view take over).
+      const unArcheologyHook = coordinator.subscribe((focus) => {
+        if (!focus) return;
+        if (focus.kind === 'file') {
+          void renderFileArcheology(focus.id);
+        } else if (focus.kind === 'mission') {
+          hideFileArcheology();
+        }
+      });
+      unregisterFns.push(unArcheologyHook);
+
       // ── Code View ───────────────────────────────────────────────────────
       const { pane: cvPane, body: cvBody } = makePane('code-view', 'Code View');
       let cv: CodeViewComponent | null = createCodeView({
@@ -482,44 +872,94 @@ export function createAtlasShell(opts: AtlasShellOptions = {}): AtlasShell {
         fetchSymbol: (id) => intelligenceIpc.getSymbol(id),
       });
       cv.mount(cvBody);
+      // Track which file is currently loaded into cv so symbol-focus can
+      // skip the fetch+remount when the symbol's file is already up.
+      let cvLoadedFile = '';
+
+      async function loadFileIntoCodeView(filePath: string, line: number): Promise<void> {
+        if (cvLoadedFile === filePath) {
+          cv?.setFocus({ file: filePath, line });
+          return;
+        }
+        try {
+          // Fetch source + blame in parallel; blame is best-effort (returns
+          // {ok:false} for files outside git or pre-tag commits).
+          const [sourceResp, blameResp] = await Promise.all([
+            fetch('/api/atlas/source?path=' + encodeURIComponent(filePath)),
+            fetch('/api/atlas/file-blame?path=' + encodeURIComponent(filePath)).catch(() => null),
+          ]);
+          if (!sourceResp.ok) throw new Error(`source ${sourceResp.status}`);
+          const sourceBody = await sourceResp.json() as { source: string };
+
+          // Parse blame into a per-line milestoneTag map for the gutter.
+          const blameByLine = new Map<number, { milestoneTag: string; sha: string; summary: string }>();
+          if (blameResp && blameResp.ok) {
+            const blameBody = await blameResp.json().catch(() => null) as
+              | { ok: boolean; lines?: Array<{ lineNo: number; sha: string; milestoneTag: string; summary: string }> }
+              | null;
+            if (blameBody?.ok && Array.isArray(blameBody.lines)) {
+              for (const ln of blameBody.lines) {
+                blameByLine.set(ln.lineNo, {
+                  milestoneTag: ln.milestoneTag,
+                  sha: ln.sha,
+                  summary: ln.summary,
+                });
+              }
+            }
+          }
+
+          cv?.unmount();
+          cv = createCodeView({
+            snapshotId: (loadedSnapshotId ?? '') as never,
+            filePath,
+            source: sourceBody.source,
+            // Override fetchProvenance: synthesize per-line records from
+            // blame so each line gets a single milestone-tag badge in the
+            // gutter (the dominant attribution the W4d.3 spec asks for).
+            fetchProvenance: async (_sid, _fp, lineNo) => {
+              const b = blameByLine.get(lineNo);
+              if (!b) return [];
+              return [{
+                id: `blame-${lineNo}`,
+                snapshot_id: '',
+                file_path: filePath,
+                line_no: lineNo,
+                mission_id: b.milestoneTag,
+                commit_sha: b.sha,
+                weight: 1.0,
+              }];
+            },
+            fetchSymbol: (id) => intelligenceIpc.getSymbol(id),
+          });
+          cv.mount(cvBody);
+          cvLoadedFile = filePath;
+          if (loadedSnapshotId) {
+            intelligenceIpc.listSymbolsForFile(loadedSnapshotId as never, filePath)
+              .then((rows) => cv?.bindSymbols(rows))
+              .catch(() => { /* IPC unavailable in tests */ });
+          }
+          cv.setFocus({ file: filePath, line });
+        } catch (e) {
+          // eslint-disable-next-line no-console
+          console.warn('[atlas] code-view source fetch failed:', e);
+        }
+      }
+
       // Mutable wrapper: re-create the code-view on file focus so source loads.
       const cvWrapper: CoordinatedView = {
         setFocus(focus: Focus): void {
           if (focus.kind === 'file') {
-            // Fetch source via the dashboard's /api/atlas/source helper, then
-            // mount a fresh CodeView. (createCodeView's source/filePath are
-            // captured at construction; recreating is the cheapest way to
-            // re-render without refactoring the component's internal state.)
-            void (async () => {
-              try {
-                const resp = await fetch(
-                  '/api/atlas/source?path=' + encodeURIComponent(focus.id),
-                );
-                if (!resp.ok) throw new Error(`source ${resp.status}`);
-                const body = await resp.json() as { source: string };
-                cv?.unmount();
-                cv = createCodeView({
-                  snapshotId: (loadedSnapshotId ?? '') as never,
-                  filePath: focus.id,
-                  source: body.source,
-                  fetchProvenance: (sid, fp, ln) =>
-                    intelligenceIpc.listProvenanceForLine(sid, fp, ln),
-                  fetchSymbol: (id) => intelligenceIpc.getSymbol(id),
-                });
-                cv.mount(cvBody);
-                if (loadedSnapshotId) {
-                  intelligenceIpc.listSymbolsForFile(loadedSnapshotId as never, focus.id)
-                    .then((rows) => cv?.bindSymbols(rows))
-                    .catch(() => { /* IPC unavailable in tests */ });
-                }
-                cv.setFocus({ file: focus.id, line: 1 });
-              } catch (e) {
-                // eslint-disable-next-line no-console
-                console.warn('[atlas] code-view source fetch failed:', e);
-              }
-            })();
+            void loadFileIntoCodeView(focus.id, 1);
           } else if (focus.kind === 'symbol') {
-            cv?.setFocus({ file: '', line: 1, symbol_id: focus.id });
+            // Resolve symbol → its file_path + start_line; load that file
+            // into the code-view (no-op if already loaded) and scroll +
+            // flash-highlight the symbol's start line.
+            intelligenceIpc.getSymbol(focus.id)
+              .then((sym) => {
+                if (!sym) return;
+                return loadFileIntoCodeView(sym.file_path, sym.start_line);
+              })
+              .catch(() => { /* IPC unavailable in tests */ });
           }
         },
       };

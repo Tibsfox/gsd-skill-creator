@@ -243,6 +243,70 @@ export class SymbolGraphView {
     this.loadGraph(rootSymbols, callEdges, typeRels);
   }
 
+  /**
+   * Load every symbol in `filePath` into the graph plus all call edges + type
+   * relations whose endpoints both live in the file. Gives a per-file structure
+   * view (10-100 nodes typical) — denser than setFocus({symbolId}) which only
+   * shows one symbol's 1-hop neighborhood.
+   *
+   * Resolution model: query callers/callees per symbol in parallel, then keep
+   * only edges where both endpoints survived the file filter. This avoids a
+   * dedicated "edges-by-file" IPC at the cost of N×4 scan calls; with N ≤ 200
+   * (typical max-symbols-per-file) the cost is low on localhost.
+   */
+  async loadFileGraph(snapshotId: SnapshotId, filePath: string): Promise<void> {
+    const symbols = await intelligenceIpc.listSymbolsForFile(snapshotId, filePath);
+    if (symbols.length === 0) {
+      this.loadGraph([], [], []);
+      return;
+    }
+    const ids = new Set(symbols.map((s) => s.id));
+    // Cap fan-out: 200 symbols × 4 calls = 800 IPCs. Symbol graph quality
+    // saturates well before that for most files.
+    const sampled = symbols.slice(0, 200);
+    const edgePackets = await Promise.all(
+      sampled.map((s) =>
+        Promise.all([
+          intelligenceIpc.listCallers(s.id),
+          intelligenceIpc.listCallees(s.id),
+          intelligenceIpc.listTypeRelationsFrom(s.id),
+          intelligenceIpc.listTypeRelationsTo(s.id),
+        ]).catch(() => [[], [], [], []] as const),
+      ),
+    );
+    const callEdges: AtlasCallEdge[] = [];
+    const typeRels: AtlasTypeRelation[] = [];
+    for (const [callers, callees, typeFrom, typeTo] of edgePackets) {
+      for (const e of callers) {
+        if (ids.has(e.caller_symbol_id) && ids.has(e.callee_symbol_id)) callEdges.push(e);
+      }
+      for (const e of callees) {
+        if (ids.has(e.caller_symbol_id) && ids.has(e.callee_symbol_id)) callEdges.push(e);
+      }
+      for (const r of typeFrom) {
+        if (ids.has(r.from_symbol_id) && ids.has(r.to_symbol_id)) typeRels.push(r);
+      }
+      for (const r of typeTo) {
+        if (ids.has(r.from_symbol_id) && ids.has(r.to_symbol_id)) typeRels.push(r);
+      }
+    }
+    // Dedupe edges by id (caller_symbol_id+callee_symbol_id pairs returned
+    // twice — once per endpoint).
+    const seenCall = new Set<string>();
+    const dedupedCalls = callEdges.filter((e) => {
+      if (seenCall.has(e.id)) return false;
+      seenCall.add(e.id);
+      return true;
+    });
+    const seenType = new Set<string>();
+    const dedupedRels = typeRels.filter((r) => {
+      if (seenType.has(r.id)) return false;
+      seenType.add(r.id);
+      return true;
+    });
+    this.loadGraph(sampled, dedupedCalls, dedupedRels);
+  }
+
   dispose(): void {
     if (this.rafId !== null) {
       cancelAnimationFrame(this.rafId);

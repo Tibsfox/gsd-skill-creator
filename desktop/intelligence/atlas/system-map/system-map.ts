@@ -136,10 +136,36 @@ export function createSystemMap(opts: SystemMapOptions = {}): SystemMapComponent
   /** Stack of folder IDs from root → current view ('' = filesystem root). */
   const zoomStack: string[] = [''];
 
+  /** Free-form viewport state, on top of hierarchical zoomStack. */
+  let viewZoom = 1;
+  let viewPanX = 0;
+  let viewPanY = 0;
+  /** Last vw/vh used by renderPack — needed by wheel/drag handlers. */
+  let lastVw = 800;
+  let lastVh = 600;
+  /** Pan-drag state. */
+  let dragStart: { x: number; y: number; panX: number; panY: number } | null = null;
+
   // ─── Helpers ───────────────────────────────────────────────────────────────
 
   function currentFolderId(): string {
     return zoomStack[zoomStack.length - 1];
+  }
+
+  /** Apply current viewport state to the SVG viewBox. Cheap (one attr write). */
+  function applyViewport(): void {
+    if (!svgEl) return;
+    const w = lastVw / viewZoom;
+    const h = lastVh / viewZoom;
+    svgEl.setAttribute('viewBox', `${viewPanX} ${viewPanY} ${w} ${h}`);
+  }
+
+  /** Hierarchical-zoom (folder click) resets free-form viewport to identity. */
+  function resetViewport(): void {
+    viewZoom = 1;
+    viewPanX = 0;
+    viewPanY = 0;
+    applyViewport();
   }
 
   function notify(f: Focus): void {
@@ -178,13 +204,12 @@ export function createSystemMap(opts: SystemMapOptions = {}): SystemMapComponent
     // viewport with a 4% margin on each side.
     const size = Math.min(vw, vh) * 0.46;
 
-    // Sync SVG viewBox to current container dimensions so the rendered pack
-    // is not clipped by the stale 800×600 box set at mount time. This is the
-    // browser-mode fix (W4c) — under the Tauri shell the container is sized
-    // before mount runs, so the original viewBox happened to match.
-    if (svgEl) {
-      svgEl.setAttribute('viewBox', `0 0 ${vw} ${vh}`);
-    }
+    // Cache the current pane size for wheel/drag handlers. They re-derive
+    // viewBox from {viewZoom, viewPanX, viewPanY, lastVw, lastVh} without a
+    // full re-pack — much cheaper than running renderPack on every wheel tick.
+    lastVw = vw;
+    lastVh = vh;
+    applyViewport();
 
     const localTree = buildFolderTree(fileDataCache);
     const subInput = subTreeAt(localTree, folderId) ?? localTree;
@@ -243,6 +268,7 @@ export function createSystemMap(opts: SystemMapOptions = {}): SystemMapComponent
       e.stopPropagation();
       if (isFolder) {
         zoomStack.push(node.id);
+        resetViewport();
         renderPack();
         updateBreadcrumb();
         notify({ kind: 'folder', id: node.id });
@@ -291,6 +317,7 @@ export function createSystemMap(opts: SystemMapOptions = {}): SystemMapComponent
   function zoomOut(): void {
     if (zoomStack.length > 1) {
       zoomStack.pop();
+      resetViewport();
       renderPack();
       updateBreadcrumb();
     }
@@ -322,6 +349,7 @@ export function createSystemMap(opts: SystemMapOptions = {}): SystemMapComponent
       root.addEventListener('click', () => {
         zoomStack.length = 1;
         zoomStack[0] = '';
+        resetViewport();
         renderPack();
         updateBreadcrumb();
       });
@@ -340,6 +368,7 @@ export function createSystemMap(opts: SystemMapOptions = {}): SystemMapComponent
       if (!isCurrent) {
         segEl.addEventListener('click', () => {
           zoomStack.length = i + 2; // root sentinel + path[0..i]
+          resetViewport();
           renderPack();
           updateBreadcrumb();
         });
@@ -439,6 +468,55 @@ export function createSystemMap(opts: SystemMapOptions = {}): SystemMapComponent
       containerEl.appendChild(breadcrumbEl);
 
       parent.appendChild(containerEl);
+
+      // ── Free-form zoom / pan ─────────────────────────────────────────────
+      // Wheel: zoom in/out with cursor as anchor (point under mouse stays put).
+      svgEl.addEventListener('wheel', (e: WheelEvent) => {
+        e.preventDefault();
+        if (!svgEl) return;
+        // ctrl-key wheel = trackpad pinch-zoom; treat both the same.
+        const factor = Math.exp(-e.deltaY * 0.0015);
+        const newZoom = Math.max(0.2, Math.min(20, viewZoom * factor));
+        if (newZoom === viewZoom) return;
+
+        // Compute the world-space coord under the cursor at the OLD zoom, then
+        // re-pan so the same world coord stays under the cursor at NEW zoom.
+        const rect = svgEl.getBoundingClientRect();
+        const sx = (e.clientX - rect.left) / rect.width;
+        const sy = (e.clientY - rect.top) / rect.height;
+        const worldX = viewPanX + sx * (lastVw / viewZoom);
+        const worldY = viewPanY + sy * (lastVh / viewZoom);
+        viewZoom = newZoom;
+        viewPanX = worldX - sx * (lastVw / viewZoom);
+        viewPanY = worldY - sy * (lastVh / viewZoom);
+        applyViewport();
+      }, { passive: false });
+
+      // Pan: shift+drag OR middle-button drag OR drag on empty SVG background.
+      svgEl.addEventListener('pointerdown', (e: PointerEvent) => {
+        const onCircle = (e.target as Element)?.classList?.contains('system-map-circle');
+        const isPanGesture = e.button === 1 /* middle */ || e.shiftKey || !onCircle;
+        if (!isPanGesture) return;
+        e.preventDefault();
+        dragStart = { x: e.clientX, y: e.clientY, panX: viewPanX, panY: viewPanY };
+        svgEl?.setPointerCapture(e.pointerId);
+      });
+      svgEl.addEventListener('pointermove', (e: PointerEvent) => {
+        if (!dragStart || !svgEl) return;
+        const rect = svgEl.getBoundingClientRect();
+        const dx = (e.clientX - dragStart.x) / rect.width * (lastVw / viewZoom);
+        const dy = (e.clientY - dragStart.y) / rect.height * (lastVh / viewZoom);
+        viewPanX = dragStart.panX - dx;
+        viewPanY = dragStart.panY - dy;
+        applyViewport();
+      });
+      const endDrag = (e: PointerEvent): void => {
+        if (!dragStart) return;
+        dragStart = null;
+        svgEl?.releasePointerCapture(e.pointerId);
+      };
+      svgEl.addEventListener('pointerup', endDrag);
+      svgEl.addEventListener('pointercancel', endDrag);
     },
 
     unmount(): void {
