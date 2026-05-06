@@ -15,6 +15,13 @@
  */
 
 import type {
+  AtlasCallEdge,
+  AtlasFilesChanged,
+  AtlasMissionProvenance,
+  AtlasSymbol,
+  AtlasSymbolReference,
+  AtlasTypeRelation,
+  AtlasLanguage,
   Briefing,
   Bundle,
   BundleId,
@@ -26,12 +33,23 @@ import type {
   MeetingId,
   Project,
   ProjectId,
+  SnapshotId,
+  SymbolId,
+  SymbolKind,
 } from './types.js';
 
 // ─── Payload types specific to IPC ─────────────────────────────────────────────
 
 export interface RequestIdResult {
   id: string;
+}
+
+/** Response from atlas_invalidate_cache (H2 per-project eviction). */
+export interface InvalidateCacheResult {
+  /** 'project' when a targeted per-project eviction ran; 'all' for a full clear. */
+  scope: 'project' | 'all';
+  /** Number of connection cache entries actually removed (0..N). */
+  evicted_count: number;
 }
 
 export interface SendNowResult {
@@ -110,6 +128,37 @@ export interface BundleCompletedEvent {
   bundle_id: string;
   project_id: string;
   summary: string;
+}
+
+// ─── Atlas SSE event payload types ─────────────────────────────────────────────
+
+export interface AtlasIndexingStartedEvent {
+  snapshot_id: string;
+}
+
+export interface AtlasIndexingProgressEvent {
+  snapshot_id: string;
+  files_done: number;
+  files_total: number;
+}
+
+export interface AtlasIndexingCompletedEvent {
+  snapshot_id: string;
+  symbols_count: number;
+  calls_count: number;
+  files_count: number;
+}
+
+export interface AtlasIndexingFailedEvent {
+  snapshot_id: string;
+  error: string;
+}
+
+/** Summary row for listMissionsForFile. */
+export interface MissionForFileSummary {
+  mission_id: string;
+  weight: number;
+  line_count: number;
 }
 
 // ─── Tauri API imports (guarded) ────────────────────────────────────────────────
@@ -310,6 +359,109 @@ export const intelligenceIpc = {
     return invoke<Bundle>('intelligence_commit_bundle', { meetingId });
   },
 
+  // ── Atlas commands (v1.49.607 W1 Track C) ────────────────────────────────────
+
+  listSymbolsForFile(snapshotId: SnapshotId, filePath: string): Promise<AtlasSymbol[]> {
+    return invoke<AtlasSymbol[]>('atlas_list_symbols_for_file', {
+      snapshotId,
+      filePath,
+    });
+  },
+
+  listSymbolsInSnapshot(
+    snapshotId: SnapshotId,
+    opts?: {
+      kindFilter?: SymbolKind[];
+      languageFilter?: AtlasLanguage[];
+      limit?: number;
+      offset?: number;
+    },
+  ): Promise<AtlasSymbol[]> {
+    return invoke<AtlasSymbol[]>('atlas_list_symbols_in_snapshot', {
+      snapshotId,
+      kindFilter: opts?.kindFilter ?? null,
+      languageFilter: opts?.languageFilter ?? null,
+      limit: opts?.limit ?? null,
+      offset: opts?.offset ?? null,
+    });
+  },
+
+  getSymbol(id: SymbolId): Promise<AtlasSymbol | null> {
+    return invoke<AtlasSymbol | null>('atlas_get_symbol', { id });
+  },
+
+  findSymbolsByQualifiedName(
+    snapshotId: SnapshotId,
+    qn: string,
+  ): Promise<AtlasSymbol[]> {
+    return invoke<AtlasSymbol[]>('atlas_find_symbols_by_qualified_name', {
+      snapshotId,
+      qn,
+    });
+  },
+
+  listCallers(symbolId: SymbolId): Promise<AtlasCallEdge[]> {
+    return invoke<AtlasCallEdge[]>('atlas_list_callers', { symbolId });
+  },
+
+  listCallees(symbolId: SymbolId): Promise<AtlasCallEdge[]> {
+    return invoke<AtlasCallEdge[]>('atlas_list_callees', { symbolId });
+  },
+
+  listReferencesForSymbol(symbolId: SymbolId): Promise<AtlasSymbolReference[]> {
+    return invoke<AtlasSymbolReference[]>('atlas_list_references_for_symbol', { symbolId });
+  },
+
+  listTypeRelationsFrom(symbolId: SymbolId): Promise<AtlasTypeRelation[]> {
+    return invoke<AtlasTypeRelation[]>('atlas_list_type_relations_from', { symbolId });
+  },
+
+  listTypeRelationsTo(symbolId: SymbolId): Promise<AtlasTypeRelation[]> {
+    return invoke<AtlasTypeRelation[]>('atlas_list_type_relations_to', { symbolId });
+  },
+
+  listFilesChangedByMission(missionId: string): Promise<AtlasFilesChanged[]> {
+    return invoke<AtlasFilesChanged[]>('atlas_list_files_changed_by_mission', { missionId });
+  },
+
+  listMissionsForFile(
+    snapshotId: SnapshotId,
+    filePath: string,
+  ): Promise<MissionForFileSummary[]> {
+    return invoke<MissionForFileSummary[]>('atlas_list_missions_for_file', {
+      snapshotId,
+      filePath,
+    });
+  },
+
+  listProvenanceForLine(
+    snapshotId: SnapshotId,
+    filePath: string,
+    lineNo: number,
+  ): Promise<AtlasMissionProvenance[]> {
+    return invoke<AtlasMissionProvenance[]>('atlas_list_provenance_for_line', {
+      snapshotId,
+      filePath,
+      lineNo,
+    });
+  },
+
+  requestIndexSnapshot(snapshotId: SnapshotId): Promise<void> {
+    return invoke<void>('atlas_request_index_snapshot', { snapshotId });
+  },
+
+  /**
+   * Invalidate the Rust-side connection cache after atlas:indexing.completed.
+   *
+   * Returns `{ scope, evicted_count }` so callers can verify whether a targeted
+   * per-project eviction or a full-clear ran (H2 per-project invalidation).
+   */
+  invalidateCache(projectId?: ProjectId): Promise<InvalidateCacheResult> {
+    return invoke<InvalidateCacheResult>('atlas_invalidate_cache', {
+      projectId: projectId ?? null,
+    });
+  },
+
   // ── Event subscriptions ──────────────────────────────────────────────────────
 
   on: {
@@ -331,6 +483,32 @@ export const intelligenceIpc = {
 
     bundleCompleted(cb: (e: BundleCompletedEvent) => void): Promise<() => void> {
       return listen<BundleCompletedEvent>('intelligence:bundle_completed', cb);
+    },
+
+    // ── Atlas SSE events ─────────────────────────────────────────────────────
+
+    atlasIndexingStarted(
+      cb: (e: AtlasIndexingStartedEvent) => void,
+    ): Promise<() => void> {
+      return listen<AtlasIndexingStartedEvent>('atlas:indexing.started', cb);
+    },
+
+    atlasIndexingProgress(
+      cb: (e: AtlasIndexingProgressEvent) => void,
+    ): Promise<() => void> {
+      return listen<AtlasIndexingProgressEvent>('atlas:indexing.progress', cb);
+    },
+
+    atlasIndexingCompleted(
+      cb: (e: AtlasIndexingCompletedEvent) => void,
+    ): Promise<() => void> {
+      return listen<AtlasIndexingCompletedEvent>('atlas:indexing.completed', cb);
+    },
+
+    atlasIndexingFailed(
+      cb: (e: AtlasIndexingFailedEvent) => void,
+    ): Promise<() => void> {
+      return listen<AtlasIndexingFailedEvent>('atlas:indexing.failed', cb);
     },
   },
 } as const;

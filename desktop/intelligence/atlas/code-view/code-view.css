@@ -1,0 +1,184 @@
+/* Code View — monospace + syntax highlight + gutter + tooltip */
+
+.cv-root {
+  display: flex;
+  flex-direction: row;
+  font-family: var(--font-mono, 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Consolas', monospace);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  overflow: auto;
+  position: relative;
+  /* Fill the parent pane-body so overflow:auto produces a real scrollbar.
+     Without these, .cv-root grows to the content's intrinsic height and
+     the pane-body just lets it spill — no scroll possible. */
+  width: 100%;
+  height: 100%;
+  background: var(--cv-bg, #1e1e2e);
+  color: var(--cv-fg, #cdd6f4);
+}
+
+/* Gutter */
+.cv-gutter {
+  user-select: none;
+  flex-shrink: 0;
+  padding: 0 0.5rem;
+  background: var(--cv-gutter-bg, #181825);
+  border-right: 1px solid var(--cv-border, #313244);
+}
+
+.cv-gutter-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 1.5em;
+}
+
+.cv-line-num {
+  color: var(--cv-line-num, #585b70);
+  min-width: 2.5ch;
+  text-align: right;
+}
+
+.cv-mission-badges {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+
+.cv-mission-badge {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: transform 80ms ease, box-shadow 80ms ease;
+  /* Subtle outline so dark badges are visible on the gutter background. */
+  box-shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.15);
+}
+
+.cv-mission-badge:hover {
+  transform: scale(1.6);
+  /* Glow ring on hover so the user sees what they're targeting. The mission
+     color comes through via background-color; we stack a uniform white ring
+     on top for affordance independent of the underlying hue. */
+  box-shadow: 0 0 0 1.5px rgba(255, 255, 255, 0.5);
+  z-index: 2;
+  position: relative;
+}
+
+.cv-mission-badge--primary {
+  width: 10px;
+  height: 10px;
+}
+
+/* Tooltip styling — browsers render `title=` attribute by default but with
+   slow trigger + system styling. The native tooltip is good enough for now;
+   if we want a custom hover-card later it'd live here. */
+
+/* Code body */
+.cv-body {
+  flex: 1;
+  overflow: visible;
+}
+
+.cv-code {
+  display: block;
+  padding: 0 1rem;
+  white-space: pre;
+  tab-size: 2;
+}
+
+.cv-line {
+  display: block;
+  height: 1.5em;
+}
+
+.cv-line--flash {
+  background: var(--cv-flash, rgba(250, 219, 120, 0.2));
+  animation: cv-flash-fade 800ms ease forwards;
+}
+
+@keyframes cv-flash-fade {
+  0% { background: var(--cv-flash, rgba(250, 219, 120, 0.35)); }
+  100% { background: transparent; }
+}
+
+/* Syntax tokens */
+.hl-keyword    { color: var(--cv-keyword, #cba6f7); }
+.hl-identifier { color: var(--cv-fg, #cdd6f4); }
+.hl-string     { color: var(--cv-string, #a6e3a1); }
+.hl-number     { color: var(--cv-number, #fab387); }
+.hl-comment    { color: var(--cv-comment, #6c7086); font-style: italic; }
+.hl-regex      { color: var(--cv-regex, #f38ba8); }
+.hl-operator   { color: var(--cv-operator, #89dceb); }
+.hl-punctuation{ color: var(--cv-punct, #89b4fa); }
+.hl-type       { color: var(--cv-type, #89b4fa); }
+.hl-builtin    { color: var(--cv-builtin, #f38ba8); }
+.hl-preprocessor{ color: var(--cv-preproc, #f5c2e7); }
+.hl-decorator  { color: var(--cv-decorator, #f5c2e7); }
+.hl-attribute  { color: var(--cv-attr, #fab387); }
+.hl-invalid    { color: var(--cv-invalid, #f38ba8); background: rgba(243,139,168,0.15); }
+.hl-default    { color: var(--cv-fg, #cdd6f4); }
+
+/* Identifier click targets */
+.cv-sym {
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.cv-sym:hover {
+  background: var(--cv-sym-hover, rgba(137,180,250,0.15));
+  outline: 1px solid var(--cv-sym-hover-border, rgba(137,180,250,0.4));
+}
+
+/* Hover tooltip */
+.cv-hover-tooltip {
+  position: absolute;
+  z-index: 100;
+  padding: 6px 10px;
+  background: var(--cv-tooltip-bg, #313244);
+  border: 1px solid var(--cv-border, #45475a);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  max-width: 320px;
+  font-size: 0.8rem;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 80ms ease;
+}
+
+.cv-hover-tooltip--visible {
+  opacity: 1;
+}
+
+.cv-hover-tooltip::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 10px;
+  width: 8px;
+  height: 8px;
+  background: var(--cv-tooltip-bg, #313244);
+  border-right: 1px solid var(--cv-border, #45475a);
+  border-bottom: 1px solid var(--cv-border, #45475a);
+  transform: rotate(45deg);
+}
+
+.cv-tooltip-name {
+  font-weight: 600;
+  color: var(--cv-fg, #cdd6f4);
+}
+
+.cv-tooltip-kind {
+  color: var(--cv-keyword, #cba6f7);
+  font-size: 0.75rem;
+  margin-top: 2px;
+}
+
+.cv-tooltip-qn {
+  color: var(--cv-comment, #6c7086);
+  font-size: 0.73rem;
+  margin-top: 3px;
+  word-break: break-all;
+}

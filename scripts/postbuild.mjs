@@ -42,6 +42,17 @@ const assetDirs = [
     dest: 'dist/intelligence/schemas',
     ext: '.json',
   },
+  // W4c: KBStore.applyMigrations reads SQL migration files off disk at
+  // runtime via the default migrationsDir resolution
+  // (`<store.js dir>/../db/migrations`). dist builds (used by the dashboard
+  // server's atlas indexer endpoint) need these alongside the compiled JS,
+  // otherwise project DBs are created without tables and indexer runs fail
+  // with "no such table: projects".
+  {
+    src: 'src/intelligence/db/migrations',
+    dest: 'dist/intelligence/db/migrations',
+    ext: '.sql',
+  },
 ];
 
 let copied = 0;

@@ -211,7 +211,6 @@ export class ChromaStore implements MemoryStore {
 
     this.initPromise = (async (): Promise<boolean> => {
       try {
-        // @ts-expect-error — chromadb is an optional dependency; dynamic import handles absence at runtime
         const chromaModule = await import('chromadb');
         const ClientClass =
           chromaModule.ChromaClient ?? (chromaModule as any).default?.ChromaClient;
@@ -221,10 +220,15 @@ export class ChromaStore implements MemoryStore {
           return false;
         }
 
-        this.client = new ClientClass({ path: this.chromaPath }) as ChromaClient;
-        this.collection = await this.client!.getOrCreateCollection({
+        // chromadb 3.x returns concrete Collection/ChromaClient types whose
+        // shape diverges from the local ChromaClient/ChromaCollection
+        // interfaces (e.g. Collection.delete now returns DeleteCollectionRecordsResponse
+        // instead of void). The local interfaces predate the upgrade. We
+        // narrow via `unknown` to keep the consumer surface intact.
+        this.client = new ClientClass({ path: this.chromaPath }) as unknown as ChromaClient;
+        this.collection = (await this.client!.getOrCreateCollection({
           name: this.collectionName,
-        });
+        })) as unknown as ChromaCollection;
         this.available = true;
         return true;
       } catch {

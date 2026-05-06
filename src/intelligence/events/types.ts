@@ -27,16 +27,24 @@ import type {
 } from '../types.js';
 
 /**
- * Discriminated union — the 5 event types the v1.49.597 client listener
- * already filters on (`intelligenceIpc.on.statusUpdate` / `briefingReady` /
- * `findingsUpdated` / `meetingRecordUpdated` / `bundleCompleted`).
+ * Discriminated union — the 5 legacy event types the v1.49.597 client listener
+ * already filters on, plus the 4 atlas indexing SSE events added v1.49.607,
+ * plus the cache-invalidation telemetry event added v1.49.607 G2.
  */
 export type IntelligenceEvent =
+  // ── v1.49.597 original 5 ────────────────────────────────────────────────────
   | { type: 'intelligence:status_update'; payload: StatusUpdatePayload }
   | { type: 'intelligence:briefing_ready'; payload: BriefingReadyPayload }
   | { type: 'intelligence:findings_updated'; payload: FindingsUpdatedPayload }
   | { type: 'intelligence:meeting_record_updated'; payload: MeetingRecordUpdatedPayload }
-  | { type: 'intelligence:bundle_completed'; payload: BundleCompletedPayload };
+  | { type: 'intelligence:bundle_completed'; payload: BundleCompletedPayload }
+  // ── v1.49.607 atlas indexing SSE (additive; W1 Track C) ──────────────────────
+  | { type: 'atlas:indexing.started'; payload: AtlasIndexingStartedPayload }
+  | { type: 'atlas:indexing.progress'; payload: AtlasIndexingProgressPayload }
+  | { type: 'atlas:indexing.completed'; payload: AtlasIndexingCompletedPayload }
+  | { type: 'atlas:indexing.failed'; payload: AtlasIndexingFailedPayload }
+  // ── v1.49.607 G2 cache-invalidation telemetry ────────────────────────────────
+  | { type: 'atlas:cache.invalidated'; payload: AtlasCacheInvalidatedPayload };
 
 export type IntelligenceEventType = IntelligenceEvent['type'];
 
@@ -84,4 +92,36 @@ export interface EventBus<E> {
   /** Returns an unsubscribe function. */
   subscribe(cb: (event: E) => void): () => void;
   publish(event: E): void;
+}
+
+// ─── Atlas indexing SSE event payloads (v1.49.607 W1 Track C) ────────────────
+
+export interface AtlasIndexingStartedPayload {
+  snapshot_id: string;
+}
+
+export interface AtlasIndexingProgressPayload {
+  snapshot_id: string;
+  files_done: number;
+  files_total: number;
+}
+
+export interface AtlasIndexingCompletedPayload {
+  snapshot_id: string;
+  /** Project that was indexed. Added v1.49.607 G2 for targeted cache invalidation. */
+  project_id: ProjectId;
+  symbols_count: number;
+  calls_count: number;
+  files_count: number;
+}
+
+export interface AtlasIndexingFailedPayload {
+  snapshot_id: string;
+  error: string;
+}
+
+/** Emitted by KBStore after it invalidates its atlas KB cache for a project. */
+export interface AtlasCacheInvalidatedPayload {
+  project_id: ProjectId;
+  at: string; // ISO-8601
 }

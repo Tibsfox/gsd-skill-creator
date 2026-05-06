@@ -35,6 +35,8 @@ import type {
 } from '../types.js';
 import type { EventBus, IntelligenceEvent } from '../events/types.js';
 import { applyMigrations } from './migrations.js';
+import { SymbolsKB } from './symbols.js';
+import { ProvenanceKB } from './provenance.js';
 import {
   rowToProject,
   rowToFinding,
@@ -100,9 +102,16 @@ export class KBStore implements IntelligenceKB {
   private readonly _projectDBs = new Map<string, Database.Database>();
   // Maps projectId → absolute path to project's intelligence.db
   private readonly _projectPaths = new Map<string, string>();
+  // Atlas KB instance cache: projectId → SymbolsKB / ProvenanceKB.
+  // Invalidated on atlasIndexingCompleted and on explicit clearAtlasKBCache().
+  private readonly _symbolsKBs = new Map<string, SymbolsKB>();
+  private readonly _provenanceKBs = new Map<string, ProvenanceKB>();
   // Phase 827 / C01 — optional event bus; C02 wires singleton at serve-dashboard startup.
   // When undefined, publish calls no-op (safe for tests that don't care about events).
   private _eventBus?: EventBus<IntelligenceEvent>;
+  // Unsubscribe function returned when we subscribed to atlas:indexing.completed.
+  // Set in setEventBus(); cleared in close().
+  private _unsubIndexing?: () => void;
 
   constructor(opts?: KBStoreOptions) {
     this.registryPath =
@@ -119,9 +128,28 @@ export class KBStore implements IntelligenceKB {
   /**
    * Wire the optional event bus (Phase 827 / C01).
    * Called by C02 at serve-dashboard startup; no-op in tests that don't need events.
+   *
+   * G2: also subscribes to atlas:indexing.completed to auto-invalidate the atlas
+   * KB cache for the indexed project, then publishes atlas:cache.invalidated for
+   * SSE telemetry. Any previous subscription is torn down before the new one is
+   * installed (safe to call multiple times, e.g. in tests).
    */
   setEventBus(bus: EventBus<IntelligenceEvent>): void {
+    this._unsubIndexing?.();
     this._eventBus = bus;
+    this._unsubIndexing = bus.subscribe((event) => {
+      if (event.type !== 'atlas:indexing.completed') return;
+      const { project_id } = event.payload;
+      this.clearAtlasKBCache(project_id);
+      try {
+        bus.publish({
+          type: 'atlas:cache.invalidated',
+          payload: { project_id, at: new Date().toISOString() },
+        });
+      } catch {
+        // Telemetry publish failure must never propagate.
+      }
+    });
   }
 
   // ─── Lifecycle ────────────────────────────────────────────────────────
@@ -191,11 +219,15 @@ export class KBStore implements IntelligenceKB {
   }
 
   close(): void {
+    this._unsubIndexing?.();
+    this._unsubIndexing = undefined;
     for (const db of this._projectDBs.values()) {
       db.close();
     }
     this._projectDBs.clear();
     this._projectPaths.clear();
+    this._symbolsKBs.clear();
+    this._provenanceKBs.clear();
     this._registry?.close();
     this._registry = null;
   }
@@ -216,6 +248,14 @@ export class KBStore implements IntelligenceKB {
 
   cachedProjectDBCount(): number {
     return this._projectDBs.size;
+  }
+
+  cachedAtlasSymbolsKBCount(): number {
+    return this._symbolsKBs.size;
+  }
+
+  cachedAtlasProvenanceKBCount(): number {
+    return this._provenanceKBs.size;
   }
 
   // ─── IntelligenceKB: Projects ─────────────────────────────────────────
@@ -1149,6 +1189,58 @@ export class KBStore implements IntelligenceKB {
   async getProjectRawDB(projectId: ProjectId): Promise<Database.Database> {
     await this.ensureProjectDB(projectId);
     return this._requireProjectDB(projectId);
+  }
+
+  // ─── Atlas KB accessors (connection-caching layer, F3) ────────────────
+
+  /**
+   * Return a cached SymbolsKB for the given project. The instance is
+   * constructed once per project per KBStore lifetime and reused on every
+   * subsequent call, so the prepared-statement cache inside SymbolsKB
+   * accumulates across the 4-6 sequential Sankey atlas calls instead of
+   * being thrown away each time.
+   *
+   * Invalidation: call clearAtlasKBCache(projectId) after an
+   * atlasIndexingCompleted event so the next caller gets a fresh instance
+   * backed by the newly-written DB rows.
+   */
+  async getAtlasSymbolsKB(projectId: ProjectId): Promise<SymbolsKB> {
+    const cached = this._symbolsKBs.get(projectId);
+    if (cached) return cached;
+    await this.ensureProjectDB(projectId);
+    const db = this._requireProjectDB(projectId);
+    const kb = new SymbolsKB(db);
+    this._symbolsKBs.set(projectId, kb);
+    return kb;
+  }
+
+  /**
+   * Return a cached ProvenanceKB for the given project. Same lifecycle as
+   * getAtlasSymbolsKB.
+   */
+  async getAtlasProvenanceKB(projectId: ProjectId): Promise<ProvenanceKB> {
+    const cached = this._provenanceKBs.get(projectId);
+    if (cached) return cached;
+    await this.ensureProjectDB(projectId);
+    const db = this._requireProjectDB(projectId);
+    const kb = new ProvenanceKB(db);
+    this._provenanceKBs.set(projectId, kb);
+    return kb;
+  }
+
+  /**
+   * Invalidate the atlas KB cache for a single project (or all projects when
+   * projectId is omitted). Call after an atlasIndexingCompleted event to force
+   * re-open on the next accessor call.
+   */
+  clearAtlasKBCache(projectId?: ProjectId): void {
+    if (projectId === undefined) {
+      this._symbolsKBs.clear();
+      this._provenanceKBs.clear();
+    } else {
+      this._symbolsKBs.delete(projectId);
+      this._provenanceKBs.delete(projectId);
+    }
   }
 
   // ─── Private helpers ──────────────────────────────────────────────────

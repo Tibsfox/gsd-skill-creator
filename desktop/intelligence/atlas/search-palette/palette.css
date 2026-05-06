@@ -1,0 +1,86 @@
+/* Cmd-K Search Palette — minimal styling. */
+
+.sc-search-palette {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 12vh;
+  z-index: 9999;
+}
+
+.sc-search-palette.hidden {
+  display: none;
+}
+
+.sc-search-panel {
+  width: min(640px, 90vw);
+  background: #1e1e1e;
+  border: 1px solid #3a3a3a;
+  border-radius: 6px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.sc-search-input {
+  border: 0;
+  outline: 0;
+  padding: 14px 16px;
+  font-size: 14px;
+  font-family: inherit;
+  background: #2a2a2a;
+  color: #f0f0f0;
+}
+
+.sc-search-results {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+.sc-search-row {
+  display: grid;
+  grid-template-columns: 24px 1fr auto;
+  gap: 8px;
+  align-items: center;
+  padding: 8px 12px;
+  cursor: pointer;
+  color: #d0d0d0;
+  font-size: 13px;
+}
+
+.sc-search-row.active,
+.sc-search-row:hover {
+  background: #2f4a7a;
+  color: #ffffff;
+}
+
+.sc-search-kind {
+  text-align: center;
+  opacity: 0.7;
+}
+
+.sc-search-row[data-kind='symbol'] .sc-search-kind { color: #7ab9ff; }
+.sc-search-row[data-kind='file'] .sc-search-kind { color: #8fdc8f; }
+.sc-search-row[data-kind='mission'] .sc-search-kind { color: #f4c272; }
+
+.sc-search-label {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.sc-search-detail {
+  font-size: 11px;
+  opacity: 0.6;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 50%;
+}

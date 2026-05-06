@@ -72,6 +72,19 @@ function collectTsFiles(dir: string): string[] {
   return files;
 }
 
+// Documented exemptions: files whose explicit purpose is subprocess
+// dispatching, isolated from the IPC command surface so the S2 invariant
+// continues to hold for the IPC layer proper.
+//
+// - atlas_sidecar.rs (H1): isolated indexer-sidecar dispatcher. atlas.rs's
+//   atlas_request_index_snapshot Tauri command delegates to it; the IPC
+//   command itself contains zero spawn patterns. The sidecar wraps
+//   `tokio::process::Command` to invoke `node tools/atlas-index.mjs` in
+//   pure-Tauri-shell mode.
+const RUST_S2_EXEMPT_FILES = new Set<string>([
+  'src-tauri/src/intelligence/atlas_sidecar.rs',
+]);
+
 describe('S2: no subprocess spawn in intelligence code (G2 BLOCK)', () => {
   it('src-tauri/src/intelligence/ .rs files contain zero subprocess spawn patterns', () => {
     const files = collectRustFiles(RUST_INTELLIGENCE_DIR);
@@ -80,6 +93,8 @@ describe('S2: no subprocess spawn in intelligence code (G2 BLOCK)', () => {
     const offenders: Array<{ file: string; pattern: string; line: number }> = [];
 
     for (const f of files) {
+      const rel = f.replace(REPO_ROOT + '/', '');
+      if (RUST_S2_EXEMPT_FILES.has(rel)) continue;
       const lines = readFileSync(f, 'utf8').split('\n');
       for (let i = 0; i < lines.length; i++) {
         const line = lines[i]!;
@@ -89,7 +104,7 @@ describe('S2: no subprocess spawn in intelligence code (G2 BLOCK)', () => {
           // Test line-by-line for forbidden patterns
           if (pat.test(line)) {
             offenders.push({
-              file: f.replace(REPO_ROOT + '/', ''),
+              file: rel,
               pattern: pat.source,
               line: i + 1,
             });
@@ -100,6 +115,27 @@ describe('S2: no subprocess spawn in intelligence code (G2 BLOCK)', () => {
 
     expect(offenders, `S2 VIOLATION: subprocess spawn found in Rust intelligence code:\n${
       offenders.map((o) => `  ${o.file}:${o.line} — ${o.pattern}`).join('\n')
+    }`).toHaveLength(0);
+  });
+
+  it('atlas.rs (the IPC command surface) contains zero subprocess spawn — sidecar isolation invariant', () => {
+    // Even with atlas_sidecar.rs exempted, the atlas.rs IPC command file MUST
+    // remain spawn-free. This is the S2-isolation invariant H1 was designed
+    // to preserve: subprocess dispatching is quarantined to atlas_sidecar.rs;
+    // the command file delegates without itself touching Command/spawn.
+    const atlasRs = join(REPO_ROOT, 'src-tauri/src/intelligence/atlas.rs');
+    if (!existsSync(atlasRs)) return; // Pre-W1.C: file may not exist yet
+    const offenders: Array<{ pattern: string; line: number }> = [];
+    const lines = readFileSync(atlasRs, 'utf8').split('\n');
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i]!;
+      if (/^\s*\/\//.test(line) || /^\s*\*/.test(line)) continue;
+      for (const pat of FORBIDDEN_RUST_CODE_PATTERNS) {
+        if (pat.test(line)) offenders.push({ pattern: pat.source, line: i + 1 });
+      }
+    }
+    expect(offenders, `S2 ISOLATION VIOLATION: spawn in atlas.rs:\n${
+      offenders.map((o) => `  line ${o.line} — ${o.pattern}`).join('\n')
     }`).toHaveLength(0);
   });
 

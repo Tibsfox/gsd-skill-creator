@@ -38,6 +38,13 @@ pub fn run() {
                     intelligence::server::IntelligenceState::new(repo_root),
                 ));
             }
+            // v1.49.607 W1 Track C / E4 — Atlas KB state.
+            // Phase 824 shipped with `new_with_stub` (the W1 Track C parallel build);
+            // E4 swaps it for `new_with_sqlite`, which routes the 12 Atlas Tauri
+            // commands through `SqliteAtlasKbDelegate` against the per-project
+            // intelligence DB (migration 003). Empty registry → empty results, so
+            // the desktop UI remains safe before any project is indexed.
+            app.manage(std::sync::Mutex::new(intelligence::atlas::AtlasState::new_with_sqlite()));
             app.manage(Mutex::new(state::WatcherState::default()));
             app.manage(Mutex::new(PtyManager::default()));
             app.manage(Mutex::new(ClaudeSessionManager::default()));
@@ -175,6 +182,7 @@ pub fn run() {
             commands::memory_arena::cgroup_grow,
             // Phase 824 / C07 — Intelligence Dashboard commands
             crate::intelligence::server::intelligence_list_projects,
+            // v1.49.607 W1 Track C — Code Atlas commands
             crate::intelligence::server::intelligence_get_project,
             crate::intelligence::server::intelligence_register_project,
             crate::intelligence::server::intelligence_get_briefing,
@@ -192,6 +200,20 @@ pub fn run() {
             crate::intelligence::server::intelligence_request_briefing_refresh,
             crate::intelligence::server::intelligence_request_snapshot_diff,
             crate::intelligence::server::intelligence_get_meeting_record,
+            crate::intelligence::atlas::atlas_list_symbols_for_file,
+            crate::intelligence::atlas::atlas_list_symbols_in_snapshot,
+            crate::intelligence::atlas::atlas_get_symbol,
+            crate::intelligence::atlas::atlas_find_symbols_by_qualified_name,
+            crate::intelligence::atlas::atlas_list_callers,
+            crate::intelligence::atlas::atlas_list_callees,
+            crate::intelligence::atlas::atlas_list_references_for_symbol,
+            crate::intelligence::atlas::atlas_list_type_relations_from,
+            crate::intelligence::atlas::atlas_list_type_relations_to,
+            crate::intelligence::atlas::atlas_list_files_changed_by_mission,
+            crate::intelligence::atlas::atlas_list_missions_for_file,
+            crate::intelligence::atlas::atlas_list_provenance_for_line,
+            crate::intelligence::atlas::atlas_request_index_snapshot,
+            crate::intelligence::atlas::atlas_invalidate_cache,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

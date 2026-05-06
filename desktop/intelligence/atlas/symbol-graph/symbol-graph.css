@@ -1,0 +1,114 @@
+/**
+ * Symbol Graph — styles.
+ * Matches Tokyo-Night CSS variables from desktop/ conventions.
+ */
+
+.symbol-graph-pane {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-primary, #1a1b26);
+  overflow: hidden;
+}
+
+.symbol-graph-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+}
+
+.symbol-graph-canvas:active {
+  cursor: grabbing;
+}
+
+.symbol-graph-toolbar {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  background: var(--bg-card, #1f2335);
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.08));
+  border-radius: var(--radius-md, 4px);
+  padding: 4px 8px;
+}
+
+.symbol-graph-toolbar label {
+  font-size: 11px;
+  color: var(--text-secondary, #9aa5ce);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.symbol-graph-toolbar input[type='checkbox'] {
+  cursor: pointer;
+}
+
+.symbol-graph-toolbar select {
+  font-size: 11px;
+  background: var(--bg-primary, #1a1b26);
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.12));
+  border-radius: var(--radius-sm, 3px);
+  color: var(--text-primary, #c0caf5);
+  padding: 1px 4px;
+  cursor: pointer;
+}
+
+.symbol-graph-empty {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 13px;
+  color: var(--text-secondary, #9aa5ce);
+  pointer-events: none;
+}
+
+.symbol-graph-mission-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-card, #1f2335);
+  border: 1px solid var(--accent-blue, #7aa2f7);
+  border-radius: var(--radius-md, 4px);
+  padding: 3px 8px;
+  font-size: 11px;
+  color: var(--text-primary, #c0caf5);
+  opacity: 0;
+  transform: translateX(8px);
+  pointer-events: none;
+  transition:
+    opacity var(--atlas-chip-transition, 200ms ease-out),
+    transform var(--atlas-chip-transition, 200ms ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .symbol-graph-mission-chip {
+    transition: none;
+  }
+}
+
+.symbol-graph-mission-chip--visible {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+.symbol-graph-mission-chip-clear {
+  background: none;
+  border: none;
+  color: var(--text-secondary, #9aa5ce);
+  cursor: pointer;
+  font-size: 11px;
+  padding: 0;
+  line-height: 1;
+}
+
+.symbol-graph-mission-chip-clear:hover {
+  color: var(--text-primary, #c0caf5);
+}

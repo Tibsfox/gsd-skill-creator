@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="gsd-skill-creator Atlas — Code structure visualisation, mission archeology, symbol graph, and search palette.">
+    <meta property="og:title" content="gsd-skill-creator — Atlas">
+    <meta property="og:type" content="website">
+    <title>gsd-skill-creator — Atlas</title>
+    <link rel="stylesheet" href="intelligence/intelligence.css">
+    <style>
+/* Match existing GSD dashboard base layout */
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans, 'Inter', system-ui, -apple-system, sans-serif);
+  background: var(--bg-primary, #0d1117);
+  color: var(--text-primary, #c9d1d9);
+  font-size: 14px;
+  line-height: 1.6;
+}
+:root {
+  --bg-primary: #0d1117;
+  --bg-secondary: #161b22;
+  --border-default: #30363d;
+  --border-muted: #484f58;
+  --text-primary: #c9d1d9;
+  --text-muted: #6e7681;
+  --text-code: #a5d6ff;
+  --color-accent: #58a6ff;
+  --color-warning: #d29922;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --radius-sm: 4px;
+  --radius-lg: 8px;
+}
+header {
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-default);
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.header-title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.page-wrapper {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  min-height: calc(100vh - 48px);
+}
+nav {
+  border-right: 1px solid var(--border-default);
+  padding: 1rem 0;
+  background: var(--bg-secondary);
+}
+.nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-list li {
+  margin: 0;
+}
+.nav-link {
+  display: block;
+  padding: 0.5rem 1.25rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color 0.15s, background 0.15s;
+}
+.nav-link:hover {
+  color: var(--text-primary);
+  background: rgba(255,255,255,0.05);
+}
+.nav-link.active {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+main {
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+#atlas-root {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+#atlas-shell-host {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+}
+#atlas-shell-host > .atlas-shell {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+}
+.atlas-static-banner {
+  margin: 1.5rem;
+  padding: 1rem 1.25rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+.atlas-static-banner__title {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+.atlas-static-banner__command {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--text-code);
+  background: rgba(165,214,255,0.08);
+  padding: 0.125rem 0.375rem;
+  border-radius: var(--radius-sm);
+}
+    </style>
+  </head>
+  <body>
+    <header>
+      <span class="header-title">gsd-skill-creator — Atlas</span>
+    </header>
+    <div class="page-wrapper">
+      <nav>
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Dashboard</a></li>
+          <li><a href="requirements.html" class="nav-link">Requirements</a></li>
+          <li><a href="roadmap.html" class="nav-link">Roadmap</a></li>
+          <li><a href="milestones.html" class="nav-link">Milestones</a></li>
+          <li><a href="state.html" class="nav-link">State</a></li>
+          <li><a href="console.html" class="nav-link">Console</a></li>
+          <li><a href="intelligence.html" class="nav-link">Intelligence</a></li>
+          <li><a href="atlas.html" class="nav-link active" data-nav-item="atlas">Atlas</a></li>
+        </ul>
+      </nav>
+      <main>
+        <div id="atlas-root">
+          <!-- Bundle-load failure banner — shown only when atlas.bundle.js fails
+               to load (e.g. dashboard served without `npm run intelligence:build`).
+               Browser-mode atlas IS supported (W4c v1.49.607); the IPC client falls
+               back to POST /api/intelligence/invoke + /api/events SSE automatically. -->
+          <div id="atlas-bundle-error-banner" class="atlas-static-banner" style="display:none;">
+            <div class="atlas-static-banner__title">Atlas bundle not available</div>
+            <p style="margin:0.5rem 0;">
+              The atlas browser bundle could not be loaded. Run
+              <span class="atlas-static-banner__command">npm run intelligence:build</span>
+              to produce <span class="atlas-static-banner__command">dashboard/intelligence/atlas.bundle.js</span>,
+              then reload this page.
+            </p>
+            <p style="margin:0.5rem 0 0;">
+              Once the bundle is built, the four panes (System Map, Symbol Graph,
+              Mission Archeology, Code View) and the Cmd-K palette load directly in
+              the browser — no Tauri shell required (W4c v1.49.607).
+            </p>
+          </div>
+
+          <!-- Status banner (transient — surfaces loadSnapshot state) -->
+          <div id="atlas-loader-status"
+               style="display:none;position:fixed;top:0;right:0;padding:6px 12px;
+                      font-family:var(--font-mono);font-size:12px;color:#fff;
+                      z-index:1000;border-bottom-left-radius:4px;"></div>
+
+          <!-- Atlas shell — populated by desktop/intelligence/atlas/index.ts via createAtlas() -->
+          <div id="atlas-shell-host"></div>
+        </div>
+      </main>
+    </div>
+    <!-- Atlas UI (v1.49.607 W4c — browser-mode bundle).
+         Always attempts to mount; intelligenceIpc.ts dual-mode shim feature-detects
+         __TAURI__ and falls back to POST /api/intelligence/invoke + /api/events SSE
+         when running in a plain browser tab. -->
+    <script type="module">
+      // Tiny status banner so the bootstrap state is visible without devtools.
+      function setStatus(msg, kind) {
+        var el = document.getElementById('atlas-loader-status');
+        if (!el) return;
+        el.textContent = msg;
+        el.style.background = kind === 'err' ? '#7f1d1d' : kind === 'ok' ? '#15803d' : '#1f2937';
+        el.style.display = '';
+      }
+
+      // Cache-bust during W4c iteration so the freshest bundle is always loaded.
+      // (The dashboard server emits no-cache, but some browsers still hold the
+      // module graph; the query suffix forces a new request.)
+      import('./intelligence/atlas.bundle.js?v=' + Date.now())
+        .then(function (m) {
+          var host = document.getElementById('atlas-shell-host');
+          if (!host) return;
+          var atlas = m.createAtlas(host);
+          m.attachToHashRouting(atlas.coordinator);
+
+          // Auto-load: prefer ?snapshot=<id>; otherwise fetch the most recent
+          // snapshot known to any registered project DB and use that. Browser-
+          // mode users can therefore just open /atlas.html and see something.
+          var params = new URLSearchParams(window.location.search);
+          var snap = params.get('snapshot');
+
+          function loadOrDiscover() {
+            if (snap) return Promise.resolve(snap);
+            // Auto-discover: ask the PG mirror for snapshots and pick the
+            // largest (= most recently/fully indexed). Falls back to
+            // 'snap-w4e' if the API is unreachable.
+            return fetch('/api/atlas/snapshots')
+              .then(function (r) { return r.json(); })
+              .then(function (body) {
+                if (body && body.ok && Array.isArray(body.snapshots) && body.snapshots.length > 0) {
+                  return body.snapshots[0].snapshot_id;
+                }
+                return 'snap-w4e';
+              })
+              .catch(function () { return 'snap-w4e'; });
+          }
+
+          setStatus('Loading snapshot…', 'info');
+          // Defer until two rAFs have elapsed so the panes have painted and
+          // their clientWidth / clientHeight are real (not 0). Without this,
+          // sm.load falls back to the 800×600 hardcoded default and the
+          // circle pack lands at the wrong scale.
+          var deferred = new Promise(function (resolve) {
+            requestAnimationFrame(function () { requestAnimationFrame(resolve); });
+          });
+          deferred
+            .then(loadOrDiscover)
+            .then(function (sid) {
+              if (!sid) { setStatus('No snapshot id available', 'err'); return; }
+              if (typeof atlas.loadSnapshot !== 'function') {
+                setStatus('atlas.loadSnapshot not exposed (stale bundle?)', 'err'); return;
+              }
+              return atlas.loadSnapshot(sid).then(function (n) {
+                setStatus('Loaded snapshot ' + sid + ' — ' + n + ' files', n > 0 ? 'ok' : 'err');
+                console.log('[atlas] Loaded snapshot', sid, '—', n, 'files');
+              });
+            })
+            .catch(function (e) {
+              setStatus('loadSnapshot failed: ' + (e && e.message ? e.message : String(e)), 'err');
+              console.warn('[atlas] loadSnapshot failed:', e);
+            });
+        })
+        .catch(function (err) {
+          if (typeof console !== 'undefined') {
+            console.warn('[atlas] Bundle load failed — showing build-instructions banner.', err);
+          }
+          var banner = document.getElementById('atlas-bundle-error-banner');
+          if (banner) banner.style.display = '';
+        });
+    </script>
+  </body>
+</html>
