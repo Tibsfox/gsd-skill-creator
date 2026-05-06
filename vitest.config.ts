@@ -16,16 +16,20 @@ export default defineConfig({
     globals: true,
     projects: [
       // Root project — existing tests (src/, .college/, etc.)
-      // testTimeout: 20000 covers integration tests that spawn bash subprocesses
+      // testTimeout: 60000 covers integration tests that spawn bash subprocesses
       // for shell-script contracts (e.g. src/intelligence/__tests__/c12-end-to-end-flow.test.ts
       // T11 "full flow" exercises load-kb-context.sh via execFileSync; the subprocess-
       // spawn + shell-startup + script-execution chain runs ~3s isolated but balloons
       // under full-suite load + concurrent worker contention).
+      // Bumped 20s → 60s at v1.49.608: 3 consecutive pre-tag-gate runs flaked at 20s
+      // on different c12-end-to-end-flow tests under full-suite load (1844-file run).
+      // All pass cleanly in isolation; the 20s budget was too tight for full-suite
+      // contention. 60s gives generous headroom; isolated runtime stays ~3-9s.
       {
         test: {
           name: 'root',
           globals: true,
-          testTimeout: 20000,
+          testTimeout: 60000,
           include: [
             'src/**/*.test.ts',
             'src/**/*.test.tsx',
