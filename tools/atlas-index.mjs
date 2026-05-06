@@ -17,13 +17,33 @@
  *   2  bad arguments (missing required flag, invalid value)
  */
 
-import { existsSync, mkdirSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync } from 'node:fs';
 import { resolve, join, dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { homedir } from 'node:os';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(HERE, '..');
+
+// W4e.A: minimal .env loader for PG creds (PGHOST etc.) — pg mirror is
+// best-effort, but we need the env populated before the mirror module loads.
+(() => {
+  try {
+    const envPath = resolve(REPO_ROOT, '.env');
+    if (!existsSync(envPath)) return;
+    const text = readFileSync(envPath, 'utf8');
+    for (const rawLine of text.split('\n')) {
+      const line = rawLine.trim();
+      if (!line || line.startsWith('#')) continue;
+      const eq = line.indexOf('=');
+      if (eq < 0) continue;
+      const key = line.slice(0, eq).trim();
+      let val = line.slice(eq + 1).trim();
+      if (val.length >= 2 && val.startsWith('"') && val.endsWith('"')) val = val.slice(1, -1);
+      if (!(key in process.env)) process.env[key] = val;
+    }
+  } catch { /* swallow */ }
+})();
 
 // ── argument parsing ──────────────────────────────────────────────────────────
 
@@ -321,6 +341,27 @@ async function main() {
     provenanceLines: result.provenanceLines,
     durationMs:      result.durationMs,
   };
+
+  // W4e.A — best-effort PG mirror after a successful indexer run.
+  // Honors PGHOST + RH_POSTGRES_URL env vars; skips silently when unwired.
+  let pgMirror = null;
+  try {
+    const mirrorMod = await importTs('intelligence/atlas-pg/mirror.ts').catch(() => null);
+    if (mirrorMod?.mirrorSnapshotToPg) {
+      pgMirror = await mirrorMod.mirrorSnapshotToPg(db, projectId, snapshotId);
+      if (pgMirror.ok && !modeJson && !flagStreamEvents) {
+        process.stdout.write(
+          `  pg-mirror:  ${Object.entries(pgMirror.tables).map(([k, v]) => `${k}=${v}`).join(' ')} (${pgMirror.durationMs}ms)\n`,
+        );
+      } else if (!pgMirror.ok && !modeJson && !flagStreamEvents) {
+        process.stdout.write(`  pg-mirror:  skipped (${pgMirror.error})\n`);
+      }
+    }
+  } catch (err) {
+    if (!modeJson && !flagStreamEvents) {
+      process.stdout.write(`  pg-mirror:  threw (${err.message})\n`);
+    }
+  }
 
   if (flagStreamEvents) {
     emitStreamEvent('atlas:indexing.completed', {

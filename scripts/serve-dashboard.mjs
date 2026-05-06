@@ -22,7 +22,31 @@
 import { createServer } from 'node:http';
 import { readFile, stat, watch } from 'node:fs/promises';
 import { join, extname, resolve } from 'node:path';
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync as readFileSyncCore } from 'node:fs';
+
+// W4e.A: minimal .env loader so PG/Chroma creds are picked up without dotenv.
+// Reads <repo-root>/.env (cwd) at startup; existing process.env wins.
+(() => {
+  try {
+    const envPath = resolve(process.cwd(), '.env');
+    if (!existsSync(envPath)) return;
+    const text = readFileSyncCore(envPath, 'utf8');
+    for (const rawLine of text.split('\n')) {
+      const line = rawLine.trim();
+      if (!line || line.startsWith('#')) continue;
+      const eq = line.indexOf('=');
+      if (eq < 0) continue;
+      const key = line.slice(0, eq).trim();
+      let val = line.slice(eq + 1).trim();
+      // Strip a matched-pair of double-quotes (single-quote-prefix is part of
+      // the secret per FTP_PASS gotcha — leave those alone).
+      if (val.length >= 2 && val.startsWith('"') && val.endsWith('"')) {
+        val = val.slice(1, -1);
+      }
+      if (!(key in process.env)) process.env[key] = val;
+    }
+  } catch { /* swallow — best-effort */ }
+})();
 
 // ---------------------------------------------------------------------------
 // Config
@@ -724,6 +748,518 @@ async function loadIntelligenceBridge() {
 }
 
 // ---------------------------------------------------------------------------
+// Mission Archeology helpers (W4d) — git + .planning/missions/ probes
+// ---------------------------------------------------------------------------
+
+/**
+ * Run a git command from CWD and return stdout. Throws on non-zero exit so
+ * the caller's try/catch surfaces "not a git repo" / missing-file as JSON.
+ */
+async function runGit(args, opts = {}) {
+  const { execFile } = await import('node:child_process');
+  const { promisify } = await import('node:util');
+  const execFileP = promisify(execFile);
+  const { stdout } = await execFileP('git', args, {
+    cwd: opts.cwd ?? CWD,
+    maxBuffer: opts.maxBuffer ?? 8 * 1024 * 1024,
+    encoding: 'utf8',
+  });
+  return stdout;
+}
+
+/**
+ * GET /api/atlas/file-history?path=<rel>
+ *
+ * Runs `git log --follow --format='%H%x09%at%x09%s' -- <path>` then groups
+ * commits by their containing milestone tag (`v1.49.NNN`) via
+ * `git describe --contains --match='v1.49.*'`. Untagged commits land in a
+ * synthetic `unreleased` bucket.
+ */
+async function handleFileHistory(relPath, res) {
+  const path = await import('node:path');
+  const abs = path.resolve(CWD, relPath);
+  if (!abs.startsWith(CWD + path.sep)) {
+    res.writeHead(403, { 'Content-Type': 'application/json' });
+    return res.end(JSON.stringify({ ok: false, error: 'path escapes project root' }));
+  }
+  try {
+    const log = await runGit(['log', '--follow', '--format=%H%x09%at%x09%s', '--', relPath]);
+    const lines = log.split('\n').filter(Boolean);
+    if (lines.length === 0) {
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ ok: true, path: relPath, milestones: [] }));
+    }
+
+    // Cap to 200 commits — file-history fan-out × describe shell-outs.
+    const commits = lines.slice(0, 200).map((l) => {
+      const [sha, ts, ...rest] = l.split('\t');
+      return { sha, timestamp: parseInt(ts, 10) * 1000, subject: rest.join('\t') };
+    });
+
+    // Resolve each commit's milestone tag via describe --contains.
+    // Run in parallel batches of 16 to keep git from being hammered.
+    const tagFor = new Map();
+    const BATCH = 16;
+    for (let i = 0; i < commits.length; i += BATCH) {
+      const batch = commits.slice(i, i + BATCH);
+      const results = await Promise.all(batch.map(async (c) => {
+        try {
+          const out = await runGit(['describe', '--contains', '--match=v1.49.*', c.sha]);
+          // Output looks like "v1.49.606~3" or "v1.49.606^0" — strip trailing meta.
+          const tag = out.trim().split(/[~^]/)[0];
+          return [c.sha, tag || 'unreleased'];
+        } catch {
+          return [c.sha, 'unreleased'];
+        }
+      }));
+      for (const [sha, tag] of results) tagFor.set(sha, tag);
+    }
+
+    // Bucket commits by tag, preserve commit order within each bucket.
+    const milestones = new Map();
+    for (const c of commits) {
+      const tag = tagFor.get(c.sha) ?? 'unreleased';
+      let bucket = milestones.get(tag);
+      if (!bucket) {
+        bucket = { milestoneTag: tag, commits: [], earliestTimestamp: c.timestamp, latestTimestamp: c.timestamp };
+        milestones.set(tag, bucket);
+      }
+      bucket.commits.push(c);
+      if (c.timestamp < bucket.earliestTimestamp) bucket.earliestTimestamp = c.timestamp;
+      if (c.timestamp > bucket.latestTimestamp) bucket.latestTimestamp = c.timestamp;
+    }
+    // Sort by latest timestamp descending so newest milestone shows first.
+    const ordered = [...milestones.values()].sort((a, b) => b.latestTimestamp - a.latestTimestamp);
+
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    return res.end(JSON.stringify({ ok: true, path: relPath, milestones: ordered }));
+  } catch (e) {
+    res.writeHead(500, { 'Content-Type': 'application/json' });
+    return res.end(JSON.stringify({ ok: false, error: e?.message ?? String(e) }));
+  }
+}
+
+/**
+ * GET /api/atlas/mission-docs?milestoneTag=<tag>
+ *
+ * Globs `.planning/missions/v1-49-NNN-*` for the given tag and returns the
+ * mission's planning doc tree. Returns the discovered mission dir + a
+ * categorized list of well-known docs (brief / spec / plan / retro) plus
+ * an `otherDocs` array for everything else.
+ */
+async function handleMissionDocs(milestoneTag, res) {
+  const fs = await import('node:fs/promises');
+  const path = await import('node:path');
+
+  // tag → dir prefix: "v1.49.606" → "v1-49-606-"
+  const prefix = milestoneTag.replace(/\./g, '-');
+  const missionsRoot = path.resolve(CWD, '.planning/missions');
+
+  let entries;
+  try {
+    entries = await fs.readdir(missionsRoot, { withFileTypes: true });
+  } catch {
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    return res.end(JSON.stringify({ ok: true, milestoneTag, missionDir: null, docs: [] }));
+  }
+
+  const matchDir = entries.find((e) =>
+    e.isDirectory() && (e.name === prefix || e.name.startsWith(prefix + '-'))
+  );
+  if (!matchDir) {
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    return res.end(JSON.stringify({ ok: true, milestoneTag, missionDir: null, docs: [] }));
+  }
+
+  const dirAbs = path.join(missionsRoot, matchDir.name);
+  const dirRel = path.relative(CWD, dirAbs);
+
+  // Walk the mission dir up to depth 3, collect .md files. Hard cap at 200.
+  const docs = [];
+  async function walk(absDir, depth) {
+    if (depth > 3 || docs.length >= 200) return;
+    let kids;
+    try {
+      kids = await fs.readdir(absDir, { withFileTypes: true });
+    } catch { return; }
+    for (const k of kids) {
+      if (docs.length >= 200) break;
+      const a = path.join(absDir, k.name);
+      if (k.isDirectory()) {
+        await walk(a, depth + 1);
+      } else if (k.isFile() && k.name.endsWith('.md')) {
+        const rel = path.relative(CWD, a);
+        docs.push({ path: rel, name: k.name });
+      }
+    }
+  }
+  await walk(dirAbs, 0);
+
+  // Categorize well-known docs at the top level.
+  const find = (re) => docs.find((d) => re.test(d.name) && path.dirname(d.path) === dirRel);
+  const categorized = {
+    brief:  find(/^MISSION-BRIEF\.md$/i)?.path ?? find(/^README\.md$/i)?.path ?? null,
+    spec:   find(/^SPEC\.md$/i)?.path ?? null,
+    plan:   find(/^PLAN\.md$/i)?.path ?? null,
+    retro:  find(/^RETRO\.md$/i)?.path ?? find(/^RETROSPECTIVE\.md$/i)?.path ?? null,
+  };
+
+  res.writeHead(200, { 'Content-Type': 'application/json' });
+  return res.end(JSON.stringify({
+    ok: true,
+    milestoneTag,
+    missionDir: dirRel,
+    categorized,
+    docs,
+  }));
+}
+
+/**
+ * GET /api/atlas/file-blame?path=<rel>
+ *
+ * Runs `git blame --line-porcelain` on the file, parses each `<sha> <orig> <final> <count>`
+ * group, then resolves each unique commit's milestone tag via `git describe --contains`.
+ * Returns one row per source line: { lineNo, sha, milestoneTag, summary }.
+ */
+async function handleFileBlame(relPath, res) {
+  const path = await import('node:path');
+  const abs = path.resolve(CWD, relPath);
+  if (!abs.startsWith(CWD + path.sep)) {
+    res.writeHead(403, { 'Content-Type': 'application/json' });
+    return res.end(JSON.stringify({ ok: false, error: 'path escapes project root' }));
+  }
+  try {
+    const blame = await runGit(['blame', '--line-porcelain', '-CCC', '--', relPath]);
+    const lines = [];
+    let currentSha = null;
+    let currentSummary = '';
+    let currentLineNo = 0;
+    // Porcelain block headers: "<40-hex> <orig> <final> <count>"; subsequent
+    // header lines start with "summary "; content line starts with "\t".
+    for (const ln of blame.split('\n')) {
+      const headerMatch = /^([0-9a-f]{40}) \d+ (\d+)( \d+)?$/.exec(ln);
+      if (headerMatch) {
+        currentSha = headerMatch[1];
+        currentLineNo = parseInt(headerMatch[2], 10);
+        continue;
+      }
+      if (ln.startsWith('summary ')) {
+        currentSummary = ln.slice('summary '.length);
+        continue;
+      }
+      if (ln.startsWith('\t')) {
+        // Content line — emit a row for the current header.
+        if (currentSha !== null) {
+          lines.push({ lineNo: currentLineNo, sha: currentSha, summary: currentSummary });
+        }
+      }
+    }
+
+    // Resolve milestone tag for each unique sha (cap to 50 distinct shas).
+    const uniqueShas = [...new Set(lines.map((l) => l.sha))].slice(0, 200);
+    const tagFor = new Map();
+    const BATCH = 16;
+    for (let i = 0; i < uniqueShas.length; i += BATCH) {
+      const batch = uniqueShas.slice(i, i + BATCH);
+      const results = await Promise.all(batch.map(async (sha) => {
+        try {
+          const out = await runGit(['describe', '--contains', '--match=v1.49.*', sha]);
+          return [sha, out.trim().split(/[~^]/)[0] || 'unreleased'];
+        } catch {
+          return [sha, 'unreleased'];
+        }
+      }));
+      for (const [sha, tag] of results) tagFor.set(sha, tag);
+    }
+
+    for (const l of lines) {
+      l.milestoneTag = tagFor.get(l.sha) ?? 'unreleased';
+    }
+
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    return res.end(JSON.stringify({ ok: true, path: relPath, lines }));
+  } catch (e) {
+    res.writeHead(500, { 'Content-Type': 'application/json' });
+    return res.end(JSON.stringify({ ok: false, error: e?.message ?? String(e) }));
+  }
+}
+
+// ---------------------------------------------------------------------------
+// W4e.B — sentence-transformer embedder (Xenova/all-MiniLM-L6-v2, 384-dim)
+// ---------------------------------------------------------------------------
+
+let _embedderPromise = null;
+
+/**
+ * Lazy-load @huggingface/transformers and return a (text → number[384]) fn.
+ * First call downloads ~25 MB of model weights to ~/.cache/huggingface; ~5s.
+ * Subsequent calls are local. Returns null-ish if transformers can't load.
+ */
+async function loadEmbedder() {
+  if (_embedderPromise) return _embedderPromise;
+  _embedderPromise = (async () => {
+    const { pipeline } = await import('@huggingface/transformers');
+    console.log('[atlas-embed] loading Xenova/all-MiniLM-L6-v2 (~25 MB, first run only)…');
+    const extractor = await pipeline(
+      'feature-extraction',
+      'Xenova/all-MiniLM-L6-v2',
+      { quantized: true },
+    );
+    console.log('[atlas-embed] embedder ready');
+    return async (text) => {
+      const out = await extractor(text, { pooling: 'mean', normalize: true });
+      // out is a Tensor; .data gives Float32Array of length 384.
+      return Array.from(out.data);
+    };
+  })();
+  return _embedderPromise;
+}
+
+/**
+ * Embed and upsert a batch of symbols' embeddings. Called from the index
+ * pipeline AFTER the mirror has inserted symbol rows. Skips symbols that
+ * already have an embedding so re-runs are idempotent.
+ */
+async function embedSymbolsForSnapshot(projectId, snapshotId, batchSize = 64, hardCap = 5000) {
+  const mods = await loadAtlasModules();
+  if (!mods?.mirrorSnapshotToPg) return { ok: false, error: 'pg not wired' };
+
+  let pg;
+  try {
+    pg = (await import('pg'));
+  } catch {
+    return { ok: false, error: 'pg module not installed' };
+  }
+
+  const cfg = process.env.RH_POSTGRES_URL
+    ? { connectionString: process.env.RH_POSTGRES_URL }
+    : {
+        host: process.env.PGHOST,
+        port: parseInt(process.env.PGPORT ?? '5432', 10),
+        user: process.env.PGUSER,
+        password: process.env.PGPASSWORD,
+        database: process.env.PGDATABASE,
+      };
+  const client = new pg.Client(cfg);
+  await client.connect();
+
+  let embedder;
+  try {
+    embedder = await loadEmbedder();
+  } catch (e) {
+    await client.end();
+    return { ok: false, error: 'embedder load failed: ' + (e?.message ?? String(e)) };
+  }
+
+  const start = Date.now();
+  let processed = 0;
+  try {
+    while (processed < hardCap) {
+      const { rows } = await client.query(
+        `SELECT id, qualified_name, signature_hash, file_path
+           FROM atlas.symbols
+          WHERE project_id=$1 AND snapshot_id=$2 AND embedding IS NULL
+          LIMIT $3`,
+        [projectId, snapshotId, batchSize],
+      );
+      if (rows.length === 0) break;
+
+      // Build text per symbol: name + signature + file context.
+      const texts = rows.map((r) =>
+        `${r.qualified_name ?? ''} ${r.signature_hash ?? ''} ${r.file_path ?? ''}`.trim(),
+      );
+      const vectors = await Promise.all(texts.map((t) => embedder(t)));
+
+      // Bulk-update via VALUES + JOIN. Send the full vector for each row.
+      // pgvector accepts "[1,2,3]" string syntax casted to ::vector.
+      const params = [];
+      const tuples = [];
+      let p = 1;
+      for (let i = 0; i < rows.length; i++) {
+        params.push(projectId, rows[i].id, '[' + vectors[i].join(',') + ']');
+        tuples.push(`($${p}, $${p + 1}, $${p + 2}::vector)`);
+        p += 3;
+      }
+      await client.query(
+        `UPDATE atlas.symbols AS s
+            SET embedding = v.emb
+           FROM (VALUES ${tuples.join(',')}) AS v(project_id, id, emb)
+          WHERE s.project_id = v.project_id AND s.id = v.id`,
+        params,
+      );
+      processed += rows.length;
+      if (rows.length < batchSize) break;
+    }
+  } finally {
+    await client.end();
+  }
+  return { ok: true, processed, durationMs: Date.now() - start };
+}
+
+// ---------------------------------------------------------------------------
+// W4e.C — Chroma mission-doc collection
+// ---------------------------------------------------------------------------
+
+let _chromaClient = null;
+let _chromaCollection = null;
+
+/**
+ * Lazy-construct a chromadb client + ensure the `gsd-missions` collection
+ * exists. Chroma server defaults to localhost:8000; the chromadb server
+ * must be running for this to work (`chroma run --host localhost --port 8000`).
+ *
+ * Returns null + logs when chroma isn't reachable, so endpoints can degrade
+ * gracefully.
+ */
+async function getChromaCollection() {
+  if (_chromaCollection) return _chromaCollection;
+  if (_chromaClient === null) {
+    try {
+      const chroma = await import('chromadb');
+      _chromaClient = new chroma.ChromaClient({
+        host: process.env.CHROMA_HOST ?? 'localhost',
+        port: parseInt(process.env.CHROMA_PORT ?? '8000', 10),
+      });
+      // Ping by listing collections.
+      await _chromaClient.heartbeat();
+    } catch (e) {
+      console.warn('[atlas-chroma] connection failed:', e?.message ?? String(e));
+      _chromaClient = false;
+      return null;
+    }
+  }
+  if (!_chromaClient) return null;
+
+  try {
+    // chromadb 3.x dropped the bundled DefaultEmbeddingFunction (now an
+    // optional `@chroma-core/default-embed` peer). Rather than adding that
+    // dep + duplicating the embedding model, we feed our own embeddings
+    // (same Xenova/all-MiniLM-L6-v2 pipeline used for pgvector). The
+    // collection is created without an EF, and every upsert/query supplies
+    // pre-computed vectors.
+    _chromaCollection = await _chromaClient.getOrCreateCollection({
+      name: 'gsd-missions',
+    });
+  } catch (e) {
+    console.warn('[atlas-chroma] getOrCreateCollection failed:', e?.message ?? String(e));
+    return null;
+  }
+  return _chromaCollection;
+}
+
+/** Search `gsd-missions` for `q`. Returns up to `limit` ranked docs. */
+async function chromaSearchMissions(q, limit = 20) {
+  const col = await getChromaCollection();
+  if (!col) throw new Error('chroma collection unavailable');
+  const embedder = await loadEmbedder();
+  const queryEmbedding = await embedder(q);
+  const result = await col.query({ queryEmbeddings: [queryEmbedding], nResults: limit });
+  // chroma returns { ids, documents, metadatas, distances } as array-of-arrays
+  // (one inner array per query). We send a single query so unwrap [0].
+  const ids = result.ids?.[0] ?? [];
+  const docs = result.documents?.[0] ?? [];
+  const metas = result.metadatas?.[0] ?? [];
+  const dists = result.distances?.[0] ?? [];
+  const rows = [];
+  for (let i = 0; i < ids.length; i++) {
+    rows.push({
+      id: ids[i],
+      path: metas[i]?.path ?? null,
+      milestoneTag: metas[i]?.milestoneTag ?? null,
+      missionDir: metas[i]?.missionDir ?? null,
+      distance: dists[i] ?? null,
+      snippet: typeof docs[i] === 'string' ? docs[i].slice(0, 400) : null,
+    });
+  }
+  return rows;
+}
+
+/**
+ * Walk .planning/missions/**\/*.md, ingest each into the gsd-missions
+ * collection in batches. Idempotent: chroma upserts on (id) so re-running
+ * just updates content.
+ *
+ * Mission tag derived from the directory prefix (v1-49-NNN-...).
+ */
+async function ingestMissionDocsToChroma() {
+  const col = await getChromaCollection();
+  if (!col) return { ok: false, error: 'chroma unreachable' };
+  const fs = await import('node:fs/promises');
+  const path = await import('node:path');
+  const missionsRoot = path.resolve(CWD, '.planning/missions');
+  let topEntries;
+  try {
+    topEntries = await fs.readdir(missionsRoot, { withFileTypes: true });
+  } catch {
+    return { ok: false, error: 'no .planning/missions/ directory' };
+  }
+
+  const ingested = [];
+  for (const dir of topEntries) {
+    if (!dir.isDirectory()) continue;
+    // Derive milestone tag from dir name: "v1-49-606-foo-bar" → "v1.49.606".
+    const match = /^(v\d+-\d+-\d+)/.exec(dir.name);
+    const milestoneTag = match ? match[1].replace(/-/g, '.') : null;
+    const dirAbs = path.join(missionsRoot, dir.name);
+    const dirRel = path.relative(CWD, dirAbs);
+    const docs = [];
+    async function walk(absDir, depth) {
+      if (depth > 3) return;
+      let kids;
+      try { kids = await fs.readdir(absDir, { withFileTypes: true }); }
+      catch { return; }
+      for (const k of kids) {
+        const a = path.join(absDir, k.name);
+        if (k.isDirectory()) await walk(a, depth + 1);
+        else if (k.isFile() && k.name.endsWith('.md')) docs.push(a);
+      }
+    }
+    await walk(dirAbs, 0);
+
+    if (docs.length === 0) continue;
+
+    // Read in batches of 32 docs.
+    const ids = [];
+    const documents = [];
+    const metadatas = [];
+    for (const abs of docs) {
+      try {
+        const text = await fs.readFile(abs, 'utf8');
+        if (!text.trim()) continue;
+        // Cap individual doc size at ~32k chars (keeps embedding tractable).
+        const trimmed = text.length > 32_000 ? text.slice(0, 32_000) : text;
+        const rel = path.relative(CWD, abs);
+        ids.push(rel);
+        documents.push(trimmed);
+        metadatas.push({
+          path: rel,
+          milestoneTag: milestoneTag ?? '',
+          missionDir: dirRel,
+        });
+      } catch { /* skip unreadable files */ }
+    }
+    if (ids.length > 0) {
+      try {
+        const embedder = await loadEmbedder();
+        // Embed in small concurrent groups (4) to keep memory low.
+        const embeddings = [];
+        const CONC = 4;
+        for (let i = 0; i < documents.length; i += CONC) {
+          const slice = documents.slice(i, i + CONC);
+          const vecs = await Promise.all(slice.map((d) => embedder(d.slice(0, 8000))));
+          embeddings.push(...vecs);
+        }
+        await col.upsert({ ids, documents, metadatas, embeddings });
+        ingested.push({ dir: dirRel, count: ids.length });
+      } catch (e) {
+        console.warn('[atlas-chroma] upsert failed for', dirRel, '—', e?.message ?? String(e));
+      }
+    }
+  }
+  return { ok: true, ingested, total: ingested.reduce((a, b) => a + b.count, 0) };
+}
+
+// ---------------------------------------------------------------------------
 // Atlas indexer endpoint — G1: POST /api/atlas/index
 // ---------------------------------------------------------------------------
 
@@ -737,7 +1273,7 @@ let atlasModules = null;
 async function loadAtlasModules() {
   if (atlasModules) return atlasModules;
   try {
-    const [runnerMod, storeMod, migrationsMod, DbMod] = await Promise.all([
+    const [runnerMod, storeMod, migrationsMod, DbMod, mirrorMod] = await Promise.all([
       import('../dist/intelligence/atlas-indexer/runner.js').catch(() =>
         import('../src/intelligence/atlas-indexer/runner.ts')
       ),
@@ -748,14 +1284,26 @@ async function loadAtlasModules() {
         import('../src/intelligence/kb/migrations.ts')
       ),
       import('better-sqlite3'),
+      // W4e.A: PG mirror — best-effort. If `pg` isn't installed or PG is
+      // unreachable, the module loads but mirror calls return ok:false.
+      import('../dist/intelligence/atlas-pg/mirror.js').catch(() => null),
     ]);
     atlasModules = {
       runAtlasIndexer: runnerMod.runAtlasIndexer,
       KBStore: storeMod.KBStore,
       applyMigrations: migrationsMod.applyMigrations,
       Database: DbMod.default,
+      // pg mirror surface (may be null in dev environments)
+      mirrorSnapshotToPg: mirrorMod?.mirrorSnapshotToPg ?? null,
+      searchSymbols:      mirrorMod?.searchSymbols ?? null,
+      searchSemantic:     mirrorMod?.searchSemantic ?? null,
     };
     console.log('[atlas] Indexer modules loaded; POST /api/atlas/index available');
+    if (atlasModules.mirrorSnapshotToPg) {
+      console.log('[atlas] PG mirror enabled (W4e.A); index runs will sync to atlas.* schema');
+    } else {
+      console.log('[atlas] PG mirror unavailable (run `npm run build` or set PGHOST); SQLite-only mode');
+    }
     return atlasModules;
   } catch (err) {
     console.error('[atlas] Failed to load indexer modules:', err.message);
@@ -873,6 +1421,40 @@ async function handleAtlasIndex(req, res) {
       // bus defaults to singleton — SSE wiring picks it up automatically
     });
 
+    // W4e.A — write-through mirror to Postgres atlas.* schema.
+    // Best-effort: any failure logs and continues. SQLite is canonical.
+    let pgMirror = null;
+    if (mods.mirrorSnapshotToPg) {
+      try {
+        pgMirror = await mods.mirrorSnapshotToPg(db, projectId, snapshotId);
+        if (pgMirror.ok) {
+          console.log(
+            `[atlas-pg] mirrored ${snapshotId} to atlas.*: `
+            + Object.entries(pgMirror.tables).map(([k, v]) => `${k}=${v}`).join(' ')
+            + ` (${pgMirror.durationMs}ms)`,
+          );
+        } else {
+          console.warn('[atlas-pg] mirror skipped:', pgMirror.error);
+        }
+      } catch (e) {
+        console.warn('[atlas-pg] mirror threw:', e?.message ?? String(e));
+      }
+    }
+
+    // W4e.B — embed symbols into pgvector (best-effort, async-not-awaited
+    // so the index response returns fast; embedding is incremental anyway).
+    if (pgMirror?.ok) {
+      embedSymbolsForSnapshot(projectId, snapshotId)
+        .then((r) => {
+          if (r.ok) {
+            console.log(`[atlas-embed] embedded ${r.processed} symbols (${r.durationMs}ms)`);
+          } else if (r.error) {
+            console.warn('[atlas-embed] skipped:', r.error);
+          }
+        })
+        .catch((e) => console.warn('[atlas-embed] threw:', e?.message ?? String(e)));
+    }
+
     store.close();
     res.writeHead(200, { 'Content-Type': 'application/json' });
     return res.end(JSON.stringify({
@@ -883,6 +1465,7 @@ async function handleAtlasIndex(req, res) {
         references: result.references,
         provenanceLines: result.provenanceLines,
       },
+      pgMirror: pgMirror ? { ok: pgMirror.ok, tables: pgMirror.tables, durationMs: pgMirror.durationMs } : null,
     }));
   } catch (err) {
     try { store.close(); } catch { /* ignore */ }
@@ -1095,6 +1678,200 @@ const server = createServer(async (req, res) => {
       return res.end(JSON.stringify({ ok: true, path: relPath, source: text, bytes: stat.size }));
     } catch (e) {
       res.writeHead(404, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ ok: false, error: e?.message ?? String(e) }));
+    }
+  }
+
+  // ── Mission Archeology endpoints (W4d) ─────────────────────────────────────
+  // file-history: git log on a single file → group by milestone tag.
+  // mission-docs: list planning docs for a v1.49.NNN milestone.
+  // file-blame:   git blame --line-porcelain → per-line milestone tag.
+  // All three shell out to git in CWD; bail with [] when not in a git repo.
+
+  if (pathname === '/api/atlas/file-history') {
+    if (req.method !== 'GET') {
+      res.writeHead(405, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ ok: false, error: 'method not allowed; use GET' }));
+    }
+    const url = new URL(req.url, 'http://x');
+    const relPath = url.searchParams.get('path');
+    if (!relPath) {
+      res.writeHead(400, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ ok: false, error: 'path query param required' }));
+    }
+    return handleFileHistory(relPath, res);
+  }
+
+  if (pathname === '/api/atlas/mission-docs') {
+    if (req.method !== 'GET') {
+      res.writeHead(405, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ ok: false, error: 'method not allowed; use GET' }));
+    }
+    const url = new URL(req.url, 'http://x');
+    const tag = url.searchParams.get('milestoneTag');
+    if (!tag) {
+      res.writeHead(400, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ ok: false, error: 'milestoneTag query param required' }));
+    }
+    return handleMissionDocs(tag, res);
+  }
+
+  if (pathname === '/api/atlas/file-blame') {
+    if (req.method !== 'GET') {
+      res.writeHead(405, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ ok: false, error: 'method not allowed; use GET' }));
+    }
+    const url = new URL(req.url, 'http://x');
+    const relPath = url.searchParams.get('path');
+    if (!relPath) {
+      res.writeHead(400, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ ok: false, error: 'path query param required' }));
+    }
+    return handleFileBlame(relPath, res);
+  }
+
+  // W4e.A: server-side symbol text search (PG-backed). Falls back to {ok:false}
+  // when PG isn't wired so the client can degrade to the local trigram path.
+  if (pathname === '/api/atlas/search/symbols') {
+    if (req.method !== 'GET') {
+      res.writeHead(405, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ ok: false, error: 'method not allowed; use GET' }));
+    }
+    const url = new URL(req.url, 'http://x');
+    const q = url.searchParams.get('q');
+    const limit = Math.min(parseInt(url.searchParams.get('limit') ?? '50', 10) || 50, 500);
+    if (!q) {
+      res.writeHead(400, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ ok: false, error: 'q query param required' }));
+    }
+    const mods = await loadAtlasModules();
+    if (!mods?.searchSymbols) {
+      res.writeHead(503, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ ok: false, error: 'pg search unavailable' }));
+    }
+    try {
+      const rows = await mods.searchSymbols(q, limit);
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ ok: true, q, results: rows }));
+    } catch (e) {
+      res.writeHead(500, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ ok: false, error: e?.message ?? String(e) }));
+    }
+  }
+
+  // W4e.B: semantic search — POST to keep the embedding inline. Body shape:
+  // { q: string, limit?: number }. Server embeds via @huggingface/transformers.
+  if (pathname === '/api/atlas/search/semantic') {
+    if (req.method !== 'POST') {
+      res.writeHead(405, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ ok: false, error: 'method not allowed; use POST' }));
+    }
+    let raw = '';
+    await new Promise((resolve) => {
+      req.on('data', (c) => { raw += c.toString('utf8'); });
+      req.on('end', resolve);
+    });
+    let body;
+    try { body = JSON.parse(raw || '{}'); }
+    catch (e) {
+      res.writeHead(400, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ ok: false, error: 'invalid JSON: ' + e.message }));
+    }
+    const q = body.q;
+    const limit = Math.min(parseInt(body.limit ?? 50, 10) || 50, 500);
+    if (typeof q !== 'string' || !q.trim()) {
+      res.writeHead(400, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ ok: false, error: 'q (string) is required' }));
+    }
+    const mods = await loadAtlasModules();
+    if (!mods?.searchSemantic) {
+      res.writeHead(503, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ ok: false, error: 'pg vector search unavailable' }));
+    }
+    try {
+      const embedder = await loadEmbedder();
+      const vec = await embedder(q);
+      const rows = await mods.searchSemantic(vec, limit);
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ ok: true, q, results: rows }));
+    } catch (e) {
+      console.error('[atlas-pg] semantic search failed:', e?.message ?? String(e));
+      res.writeHead(500, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ ok: false, error: e?.message ?? String(e) }));
+    }
+  }
+
+  // W4e.C: admin endpoint to (re)ingest mission docs into chroma.
+  if (pathname === '/api/atlas/chroma-ingest') {
+    if (req.method !== 'POST') {
+      res.writeHead(405, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ ok: false, error: 'method not allowed; use POST' }));
+    }
+    try {
+      const r = await ingestMissionDocsToChroma();
+      res.writeHead(r.ok ? 200 : 503, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify(r));
+    } catch (e) {
+      res.writeHead(500, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ ok: false, error: e?.message ?? String(e) }));
+    }
+  }
+
+  // W4e.B: admin endpoint to (re)embed any UN-EMBEDDED symbols for a snapshot.
+  if (pathname === '/api/atlas/embed') {
+    if (req.method !== 'POST') {
+      res.writeHead(405, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ ok: false, error: 'method not allowed; use POST' }));
+    }
+    let raw = '';
+    await new Promise((resolve) => {
+      req.on('data', (c) => { raw += c.toString('utf8'); });
+      req.on('end', resolve);
+    });
+    let body;
+    try { body = JSON.parse(raw || '{}'); }
+    catch (e) {
+      res.writeHead(400, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ ok: false, error: 'invalid JSON: ' + e.message }));
+    }
+    if (typeof body.projectId !== 'string' || typeof body.snapshotId !== 'string') {
+      res.writeHead(400, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ ok: false, error: 'projectId+snapshotId required' }));
+    }
+    try {
+      const r = await embedSymbolsForSnapshot(
+        body.projectId, body.snapshotId,
+        body.batchSize ?? 64,
+        body.hardCap ?? 5000,
+      );
+      res.writeHead(r.ok ? 200 : 503, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify(r));
+    } catch (e) {
+      res.writeHead(500, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ ok: false, error: e?.message ?? String(e) }));
+    }
+  }
+
+  // W4e.C: Chroma-backed mission-doc search. Returns {ok:false} when Chroma
+  // server isn't reachable; UI degrades to milestone-only navigation.
+  if (pathname === '/api/atlas/mission-search') {
+    if (req.method !== 'GET') {
+      res.writeHead(405, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ ok: false, error: 'method not allowed; use GET' }));
+    }
+    const url = new URL(req.url, 'http://x');
+    const q = url.searchParams.get('q');
+    const limit = Math.min(parseInt(url.searchParams.get('limit') ?? '20', 10) || 20, 100);
+    if (!q) {
+      res.writeHead(400, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ ok: false, error: 'q query param required' }));
+    }
+    try {
+      const results = await chromaSearchMissions(q, limit);
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ ok: true, q, results }));
+    } catch (e) {
+      res.writeHead(503, { 'Content-Type': 'application/json' });
       return res.end(JSON.stringify({ ok: false, error: e?.message ?? String(e) }));
     }
   }
