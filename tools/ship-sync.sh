@@ -68,3 +68,10 @@ if ! git push origin dev; then
 fi
 
 echo "[ship-sync] dev synced with main and pushed to origin"
+
+# IC-613-3: auto-update .planning/STATE.md if the current milestone has shipped
+# (tag exists AND status=planning). Idempotent — no-op when STATE.md is missing,
+# milestone tag doesn't exist, or status is already shipped.
+if [ -f tools/update-state-md-on-ship.mjs ]; then
+  node tools/update-state-md-on-ship.mjs || true
+fi
