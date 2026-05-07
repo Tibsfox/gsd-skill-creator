@@ -60,6 +60,20 @@ REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null)" || {
 }
 cd "$REPO_ROOT"
 
+# Parse owner/repo from origin remote so we can pass --repo to gh and bypass
+# local .git/ discovery — required when snap-confined gh cannot read cwd
+# outside $HOME (closes IC-613-2 from v1.49.613 close-state CARRY-FORWARD.md).
+ORIGIN_URL="$(git remote get-url origin 2>/dev/null || true)"
+REPO_SLUG=""
+if [ -n "$ORIGIN_URL" ]; then
+  # Match both https://github.com/OWNER/REPO(.git) and git@github.com:OWNER/REPO(.git)
+  REPO_SLUG="$(echo "$ORIGIN_URL" | sed -E 's|^.*github\.com[/:]([^/]+/[^/]+)(\.git)?/?$|\1|; s|\.git$||')"
+fi
+if [ -z "$REPO_SLUG" ] || [ "$REPO_SLUG" = "$ORIGIN_URL" ]; then
+  echo "[gh-release-publish] FATAL: could not parse OWNER/REPO from origin URL: $ORIGIN_URL" >&2
+  exit 1
+fi
+
 SRC="docs/release-notes/v${VERSION}/README.md"
 if [ ! -f "$SRC" ]; then
   echo "[gh-release-publish] FATAL: release notes not found: $SRC" >&2
@@ -77,7 +91,7 @@ SIZE="$(stat -c%s "$TMP" 2>/dev/null || stat -f%z "$TMP")"
 if [ "${GH_RELEASE_PUBLISH_DRY_RUN:-0}" = "1" ]; then
   echo "[gh-release-publish] DRY-RUN: notes-file copied to ${TMP} (${SIZE} bytes)"
   echo "[gh-release-publish] DRY-RUN: would invoke:"
-  echo "  gh release create v${VERSION} --title \"${TITLE}\" --notes-file ${TMP} --target main"
+  echo "  gh release create v${VERSION} --repo ${REPO_SLUG} --title \"${TITLE}\" --notes-file ${TMP} --target main"
   exit 0
 fi
 
@@ -87,6 +101,7 @@ if ! command -v gh >/dev/null 2>&1; then
 fi
 
 if ! gh release create "v${VERSION}" \
+       --repo "$REPO_SLUG" \
        --title "$TITLE" \
        --notes-file "$TMP" \
        --target main; then
@@ -94,4 +109,4 @@ if ! gh release create "v${VERSION}" \
   exit 2
 fi
 
-echo "[gh-release-publish] release created: v${VERSION}"
+echo "[gh-release-publish] release created: v${VERSION} on ${REPO_SLUG}"
