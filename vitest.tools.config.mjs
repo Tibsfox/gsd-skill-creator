@@ -18,6 +18,7 @@ export default defineConfig({
       'tools/__tests__/update-catalog-indexes.test.mjs',
       'tools/__tests__/update-state-md-on-ship.test.mjs',
       'tools/__tests__/build-trs-edges.test.mjs',
+      'tools/__tests__/verify-predecessor-engine-state.test.mjs',
       'scripts/__tests__/serve-dashboard-sse.test.mjs',
       'tools/__tests__/atlas-deps-audit.test.mjs',
       'tools/__tests__/atlas-perf-bench.test.mjs',
