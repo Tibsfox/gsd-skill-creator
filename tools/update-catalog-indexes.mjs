@@ -32,10 +32,15 @@
 import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { spawnSync } from 'node:child_process';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 
 const TRACKS = ['NASA', 'MUS', 'ELC'];
+// TRS is structurally different (pack-XX dirs, not 1.NN dirs; canonical state
+// is the edges.json catalogue authored by tools/build-trs-edges.mjs). Audited
+// via auditTRS() below — extension added v1.49.613-post-ship per IC-613-1.4.
+const ALL_TRACKS = [...TRACKS, 'TRS'];
 
 // Degree directory pattern: "1.N" where N is one or more digits.
 // Excludes non-degree dirs like "catalog", "_harness", etc.
@@ -252,6 +257,77 @@ export function auditTrack(researchRoot, track) {
   }
 }
 
+// ---- TRS audit (IC-613-1.4) ----
+
+/**
+ * Audit the TRS track: cross-pack edge catalogue freshness +
+ * (when public landing page exists) pack-XX subdir parity.
+ *
+ * TRS is structurally different from NASA/MUS/ELC:
+ * - on-disk state lives in two places: per-milestone W1.TRS research files
+ *   under .planning/missions/.../ AND (post-IC-613-1.1) per-pack subdirs
+ *   under www/tibsfox/com/Research/TRS/pack-XX/
+ * - canonical state is the edges.json catalogue at
+ *   www/tibsfox/com/Research/TRS/edges.json (authored by build-trs-edges.mjs)
+ *
+ * Drift modes detected:
+ * 1. edges.json missing — soft-DRIFT (not yet authored; TRS gate is no-op
+ *    until edges.json exists)
+ * 2. edges.json exists but stale vs research files — DRIFT (run
+ *    build-trs-edges.mjs to refresh)
+ * 3. (Future, post-IC-613-1.1) Research/TRS/index.html catalog missing
+ *    pack-XX entries that exist on-disk — DRIFT
+ *
+ * Returns { status: 'PASS'|'DRIFT'|'SKIP', detail, on_disk_packs?, ... }.
+ */
+export function auditTRS(repoRoot) {
+  const edgesJsonPath = join(repoRoot, 'www', 'tibsfox', 'com', 'Research', 'TRS', 'edges.json');
+  const buildTrsScript = join(repoRoot, 'tools', 'build-trs-edges.mjs');
+
+  if (!existsSync(buildTrsScript)) {
+    return {
+      status: 'SKIP',
+      detail: 'build-trs-edges.mjs not present (IC-613-1.2 not yet landed)',
+    };
+  }
+
+  if (!existsSync(edgesJsonPath)) {
+    return {
+      status: 'SKIP',
+      detail: 'TRS edges.json catalogue not yet authored — run `node tools/build-trs-edges.mjs` to create',
+    };
+  }
+
+  // Run build-trs-edges --check to verify catalogue freshness against
+  // .planning/missions/ research files.
+  const result = spawnSync('node', [buildTrsScript, '--check'], {
+    cwd: repoRoot,
+    encoding: 'utf8',
+  });
+
+  if (result.error) {
+    return {
+      status: 'ERROR',
+      error: `Failed to invoke build-trs-edges.mjs: ${result.error.message}`,
+    };
+  }
+
+  if (result.status === 0) {
+    return {
+      status: 'PASS',
+      detail: 'TRS edges.json in sync with research files',
+    };
+  }
+
+  // Non-zero exit = stale or missing
+  const stderr = (result.stderr || '').trim();
+  return {
+    status: 'DRIFT',
+    detail: `TRS edges.json out of sync: ${stderr.split('\n')[0] || 'unknown reason'}`,
+    fix: 'Run `node tools/build-trs-edges.mjs` to refresh; commit the regenerated edges.json',
+  };
+}
+
 // ---- Write mode ----
 
 /**
@@ -327,7 +403,11 @@ function buildSummary(trackResults) {
     (sum, t) => sum + (t.missing_from_catalog || []).length + (t.extra_in_catalog || []).length,
     0
   );
-  const anyDrift = Object.values(trackResults).some((t) => t.status !== 'PASS');
+  // SKIP is not drift (TRS-not-yet-authored is a soft state, not a blocker).
+  // DRIFT and ERROR are blockers.
+  const anyDrift = Object.values(trackResults).some(
+    (t) => t.status === 'DRIFT' || t.status === 'ERROR',
+  );
   return {
     total_drift_degrees: totalDrift,
     any_drift: anyDrift,
@@ -362,6 +442,8 @@ Exit codes: 0=PASS, 8=drift, 2=bad args, 1=internal error
   for (const track of TRACKS) {
     trackResults[track] = auditTrack(RESEARCH_ROOT, track);
   }
+  // IC-613-1.4: also audit TRS (structurally different from NASA/MUS/ELC).
+  trackResults.TRS = auditTRS(REPO_ROOT);
   const summary = buildSummary(trackResults);
 
   // --write mode.
@@ -433,6 +515,18 @@ Exit codes: 0=PASS, 8=drift, 2=bad args, 1=internal error
       } else {
         console.log(`[PASS] ${track}: ${(t.on_disk_degrees || []).length} degrees — catalog in sync`);
       }
+    }
+    // TRS reporting (separate from NASA/MUS/ELC since structurally different)
+    const trsResult = trackResults.TRS;
+    if (trsResult.status === 'PASS') {
+      console.log(`[PASS] TRS: ${trsResult.detail}`);
+    } else if (trsResult.status === 'SKIP') {
+      console.log(`[SKIP] TRS: ${trsResult.detail}`);
+    } else if (trsResult.status === 'DRIFT') {
+      console.error(`[DRIFT] TRS: ${trsResult.detail}`);
+      if (trsResult.fix) console.error(`  Fix: ${trsResult.fix}`);
+    } else if (trsResult.status === 'ERROR') {
+      console.error(`[ERROR] TRS: ${trsResult.error}`);
     }
     console.log('');
     if (summary.any_drift) {

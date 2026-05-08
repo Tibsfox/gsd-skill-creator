@@ -1,6 +1,6 @@
 {
   "name": "gsd-skill-creator",
-  "version": "1.49.613",
+  "version": "1.49.614",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
@@ -48,6 +48,7 @@
     "render:claude-md": "node tools/render-claude-md.mjs",
     "render:claude-md:check": "node tools/render-claude-md.mjs --check",
     "render:claude-md:dry-run": "node tools/render-claude-md.mjs --dry-run",
+    "graph:load:trs": "node tools/load-trs-edges.mjs",
     "ship-sync": "bash tools/ship-sync.sh",
     "gh-release-publish": "bash tools/gh-release-publish.sh",
     "build": "tsc",

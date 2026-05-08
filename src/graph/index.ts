@@ -8,3 +8,4 @@ export * from './ingest.js';
 export * from './leiden.js';
 export * from './summaries.js';
 export * from './query.js';
+export * from './trs-loader.js';

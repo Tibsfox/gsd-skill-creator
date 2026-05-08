@@ -365,3 +365,88 @@ describe('test 7: --json output in PASS case has expected shape', () => {
     expect(parsed.tracks.MUS.status).toBe('PASS');
   });
 });
+
+// IC-613-1.4: TRS audit extension tests
+describe('IC-613-1.4: TRS audit extension', () => {
+  it('TRS SKIP when build-trs-edges.mjs missing in test env', () => {
+    const degrees = ['1.0'];
+    makeDegreeDirs(researchRoot, 'NASA', degrees);
+    makeDegreeDirs(researchRoot, 'MUS', degrees);
+    makeDegreeDirs(researchRoot, 'ELC', degrees);
+    makeNasaIndex(researchRoot, degrees);
+    makeMUSIndex(researchRoot, degrees);
+    makeELCIndex(researchRoot, degrees);
+
+    const { exitCode, stdout } = runJson(tmpRoot);
+    const parsed = JSON.parse(stdout);
+    expect(parsed.tracks).toHaveProperty('TRS');
+    expect(parsed.tracks.TRS.status).toBe('SKIP');
+    // SKIP doesn't fail the gate (soft-state until IC-613-1.2 lands)
+    expect(parsed.summary.any_drift).toBe(false);
+    expect(exitCode).toBe(0);
+  });
+
+  it('TRS DRIFT does fail the overall gate (composes with NASA/MUS/ELC)', () => {
+    const fakeTools = join(tmpRoot, 'tools');
+    mkdirSync(fakeTools, { recursive: true });
+    writeFileSync(
+      join(fakeTools, 'build-trs-edges.mjs'),
+      `#!/usr/bin/env node\nif (process.argv.includes('--check')) {\n  console.error('[build-trs-edges] STALE: synthetic test failure');\n  process.exit(1);\n}\n`,
+    );
+    mkdirSync(join(researchRoot, 'TRS'), { recursive: true });
+    writeFileSync(join(researchRoot, 'TRS', 'edges.json'), '{"schema":"trs-edges/v1"}');
+
+    const degrees = ['1.0'];
+    makeDegreeDirs(researchRoot, 'NASA', degrees);
+    makeDegreeDirs(researchRoot, 'MUS', degrees);
+    makeDegreeDirs(researchRoot, 'ELC', degrees);
+    makeNasaIndex(researchRoot, degrees);
+    makeMUSIndex(researchRoot, degrees);
+    makeELCIndex(researchRoot, degrees);
+
+    const { exitCode, stdout } = runJson(tmpRoot);
+    const parsed = JSON.parse(stdout);
+    expect(parsed.tracks.TRS.status).toBe('DRIFT');
+    expect(parsed.summary.any_drift).toBe(true);
+    expect(exitCode).toBe(8);
+  });
+
+  it('TRS PASS when build-trs-edges.mjs --check exits 0', () => {
+    const fakeTools = join(tmpRoot, 'tools');
+    mkdirSync(fakeTools, { recursive: true });
+    writeFileSync(
+      join(fakeTools, 'build-trs-edges.mjs'),
+      `#!/usr/bin/env node\nif (process.argv.includes('--check')) process.exit(0);\n`,
+    );
+    mkdirSync(join(researchRoot, 'TRS'), { recursive: true });
+    writeFileSync(join(researchRoot, 'TRS', 'edges.json'), '{"schema":"trs-edges/v1"}');
+
+    const degrees = ['1.0'];
+    makeDegreeDirs(researchRoot, 'NASA', degrees);
+    makeDegreeDirs(researchRoot, 'MUS', degrees);
+    makeDegreeDirs(researchRoot, 'ELC', degrees);
+    makeNasaIndex(researchRoot, degrees);
+    makeMUSIndex(researchRoot, degrees);
+    makeELCIndex(researchRoot, degrees);
+
+    const { exitCode, stdout } = runJson(tmpRoot);
+    const parsed = JSON.parse(stdout);
+    expect(parsed.tracks.TRS.status).toBe('PASS');
+    expect(parsed.summary.any_drift).toBe(false);
+    expect(exitCode).toBe(0);
+  });
+
+  it('TRS SKIP shown in human-readable output with [SKIP] prefix', () => {
+    const degrees = ['1.0'];
+    makeDegreeDirs(researchRoot, 'NASA', degrees);
+    makeDegreeDirs(researchRoot, 'MUS', degrees);
+    makeDegreeDirs(researchRoot, 'ELC', degrees);
+    makeNasaIndex(researchRoot, degrees);
+    makeMUSIndex(researchRoot, degrees);
+    makeELCIndex(researchRoot, degrees);
+
+    const { exitCode, stdout } = runCheck(tmpRoot);
+    expect(exitCode).toBe(0);
+    expect(stdout).toContain('[SKIP] TRS');
+  });
+});

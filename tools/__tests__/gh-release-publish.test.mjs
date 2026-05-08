@@ -32,6 +32,11 @@ function setupRepo() {
   execSync(`git init "${workDir}"`, { stdio: 'pipe' });
   execSync(`git -C "${workDir}" config user.email "test@example.com"`);
   execSync(`git -C "${workDir}" config user.name "Test"`);
+  // Add an origin remote so the wrapper can parse OWNER/REPO for --repo flag
+  // (IC-613-2 snap-confinement fix).
+  execSync(
+    `git -C "${workDir}" remote add origin https://github.com/Tibsfox/gsd-skill-creator.git`,
+  );
 }
 
 function writeReleaseNotes(version, content = '# release\n') {
@@ -118,5 +123,36 @@ describe('gh-release-publish.sh', () => {
     const r = runScript('');
     expect(r.exitCode).toBe(1);
     expect(r.stderr).toContain('Usage');
+  });
+
+  it('IC-613-2: passes --repo OWNER/REPO flag in gh invocation (snap-confinement bypass)', () => {
+    writeReleaseNotes('1.49.596');
+    const r = runScript('1.49.596');
+    expect(r.exitCode).toBe(0);
+    expect(r.stdout).toContain('--repo Tibsfox/gsd-skill-creator');
+  });
+
+  it('IC-613-2: parses owner/repo from https origin URL', () => {
+    execSync(`git -C "${workDir}" remote set-url origin https://github.com/SomeOrg/some-repo.git`);
+    writeReleaseNotes('1.49.596');
+    const r = runScript('1.49.596');
+    expect(r.exitCode).toBe(0);
+    expect(r.stdout).toContain('--repo SomeOrg/some-repo');
+  });
+
+  it('IC-613-2: parses owner/repo from ssh origin URL', () => {
+    execSync(`git -C "${workDir}" remote set-url origin git@github.com:SomeOrg/some-repo.git`);
+    writeReleaseNotes('1.49.596');
+    const r = runScript('1.49.596');
+    expect(r.exitCode).toBe(0);
+    expect(r.stdout).toContain('--repo SomeOrg/some-repo');
+  });
+
+  it('IC-613-2: fails with exit 1 when origin remote is missing', () => {
+    execSync(`git -C "${workDir}" remote remove origin`);
+    writeReleaseNotes('1.49.596');
+    const r = runScript('1.49.596');
+    expect(r.exitCode).toBe(1);
+    expect(r.stderr).toContain('could not parse OWNER/REPO');
   });
 });
