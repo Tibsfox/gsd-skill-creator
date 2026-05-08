@@ -61,6 +61,7 @@ const TRS_RESEARCH_LOCATIONS = [
   { milestone: 'v1.49.614', paths: ['.planning/missions/v1-49-614-apollo-soyuz-test-project/work/W1-TRS-research.md'] },
   { milestone: 'v1.49.615', paths: ['.planning/missions/v1-49-615-viking-1-first-mars-landing/work/W1-TRS-research.md'] },
   { milestone: 'v1.49.616', paths: ['.planning/missions/v1-49-616-viking-2-utopia-planitia/work/W1-TRS-research.md'] },
+  { milestone: 'v1.49.617', paths: ['.planning/missions/v1-49-617-heao-1-x-ray-all-sky-survey/work/W1-TRS-research.md'] },
 ];
 
 function readFrontmatter(text) {
