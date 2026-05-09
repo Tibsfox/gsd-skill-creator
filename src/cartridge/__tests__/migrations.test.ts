@@ -78,9 +78,27 @@ const KNOWN_VALIDATION_DEBT = new Set<string>([
   'writing-department',
 ]);
 
+/**
+ * SCRIBE research-output cartridges (v1.49.621) ship a different
+ * cartridge.yaml schema than the unified executable-chipset loader
+ * expects — they are research deliverables (lineage taxonomies,
+ * citation indexes, native-SVG figures), not skill/agent bundles.
+ * The proper SCRIBE chipset format is authored by Component 01
+ * (foundational-cartridge composition) of the SCRIBE Build-Out
+ * mission. Until then, exclude them from the bulk-loader enumeration
+ * to keep the executable-chipset coverage clean.
+ *
+ * Tracked: .planning/missions/v1-49-621-scribe/buildout-mission/
+ *          components/01-foundational-cartridge.md
+ */
+const SCRIBE_RESEARCH_CARTRIDGES = new Set<string>([
+  'markup-lineage',
+]);
+
 function bulkCartridges(): string[] {
   return readdirSync(CARTRIDGES)
     .filter((name) => {
+      if (SCRIBE_RESEARCH_CARTRIDGES.has(name)) return false;
       const p = resolve(CARTRIDGES, name, 'cartridge.yaml');
       return existsSync(p) && statSync(p).isFile();
     })
