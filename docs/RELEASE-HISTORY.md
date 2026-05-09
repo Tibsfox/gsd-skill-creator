@@ -1,15 +1,16 @@
 # Release History
 
-663 milestones shipped across the v1.0 → v1.49.620 arc. The table below lists every shipped release, newest first.
+664 milestones shipped across the v1.0 → v1.49.621 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions, and where available, retrospectives and lessons learned. `Commits` is the count of commits between this tag and the previous tag (from git). `Phases` and `Plans` come from structured GSD metadata in the release README — most content/patch releases don't have these. `Retro` links to the retrospective chapter when present. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 663 releases · 662 with retrospectives · 633 with extracted lessons · quality A:624 B:4 C:11 D:4 F:20 (avg 95) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 664 releases · 663 with retrospectives · 633 with extracted lessons · quality A:624 B:4 C:11 D:4 F:21 (avg 95) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Retro | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|-------|---------|---------|-------|
+| [v1.49.621](release-notes/v1.49.621) | SCRIBE Build-Out (counter-cadence) | — | 25 | — | — | [✓](release-notes/v1.49.621/chapter/03-retrospective.md) | — | F 40 |  |
 | [v1.49.620](release-notes/v1.49.620) | Pioneer Venus 1 Twin-Mission-Pair Continuation | — | 6 | — | — | [✓](release-notes/v1.49.620/chapter/03-retrospective.md) | — | F 45 |  |
 | [v1.49.619](release-notes/v1.49.619) | Voyager 1 Twin-Mission-Pair Completion | — | 6 | — | — | [✓](release-notes/v1.49.619/chapter/03-retrospective.md) | — | F 45 |  |
 | [v1.49.618](release-notes/v1.49.618) | Voyager 2 Outer-Planets Grand Tour | — | 7 | — | — | [✓](release-notes/v1.49.618/chapter/03-retrospective.md) | — | F 45 |  |
