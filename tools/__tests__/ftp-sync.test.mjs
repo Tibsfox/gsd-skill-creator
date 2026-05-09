@@ -26,6 +26,7 @@ import {
   validateEnv,
   walkDir,
   buildManifest,
+  buildManifestScribe,
   pickVerificationSample,
   remotePathToUrl,
 } from '../ftp-sync.mjs';
@@ -346,5 +347,134 @@ describe('remotePathToUrl', () => {
   it('strips trailing slash from baseUrl to avoid double-slash', () => {
     expect(remotePathToUrl('/MUS/1.71/x.html', 'https://example.com/Research/'))
       .toBe('https://example.com/Research/MUS/1.71/x.html');
+  });
+});
+
+describe('buildManifestScribe (Component 08 — public deployment SCRIBE mode)', () => {
+  it('returns missing: true when SCRIBE dir does not exist', () => {
+    const m = buildManifestScribe(tmpRoot);
+    expect(m.missing).toBe(true);
+    expect(m.totalFiles).toBe(0);
+    expect(m.totalBytes).toBe(0);
+    expect(m.files).toEqual([]);
+  });
+
+  it('walks all files in SCRIBE dir recursively', () => {
+    const scribeDir = join(tmpRoot, 'www', 'tibsfox', 'com', 'Research', 'SCRIBE');
+    mkdirSync(join(scribeDir, 'dashboard'), { recursive: true });
+    writeFileSync(join(scribeDir, 'index.html'), '<html>root</html>');
+    writeFileSync(join(scribeDir, 'scribe.css'), 'body { }');
+    writeFileSync(join(scribeDir, 'dashboard', 'app.js'), 'console.log("hi");');
+
+    const m = buildManifestScribe(tmpRoot);
+    expect(m.missing).toBe(false);
+    expect(m.totalFiles).toBe(3);
+    const rels = m.files.map((f) => f.rel).sort();
+    expect(rels).toEqual(['dashboard/app.js', 'index.html', 'scribe.css']);
+  });
+
+  it('produces correct remoteAbs paths for SCRIBE (no version subdir)', () => {
+    const scribeDir = join(tmpRoot, 'www', 'tibsfox', 'com', 'Research', 'SCRIBE');
+    mkdirSync(join(scribeDir, 'sub'), { recursive: true });
+    writeFileSync(join(scribeDir, 'index.html'), 'i');
+    writeFileSync(join(scribeDir, 'sub', 'nested.html'), 'n');
+
+    const m = buildManifestScribe(tmpRoot);
+    const remotes = m.files.map((f) => f.remoteAbs).sort();
+    expect(remotes).toEqual([
+      '/SCRIBE/index.html',
+      '/SCRIBE/sub/nested.html',
+    ]);
+  });
+
+  it('records correct file sizes and localAbs paths', () => {
+    const scribeDir = join(tmpRoot, 'www', 'tibsfox', 'com', 'Research', 'SCRIBE');
+    mkdirSync(scribeDir, { recursive: true });
+    writeFileSync(join(scribeDir, 'test.txt'), 'hello');
+
+    const m = buildManifestScribe(tmpRoot);
+    expect(m.files).toHaveLength(1);
+    expect(m.files[0].size).toBe(5);
+    expect(m.files[0].localAbs).toContain('SCRIBE/test.txt');
+    expect(m.totalBytes).toBe(5);
+  });
+
+  it('skips hidden files (dotted) per walkDir contract', () => {
+    const scribeDir = join(tmpRoot, 'www', 'tibsfox', 'com', 'Research', 'SCRIBE');
+    mkdirSync(scribeDir, { recursive: true });
+    writeFileSync(join(scribeDir, 'visible.txt'), 'v');
+    writeFileSync(join(scribeDir, '.hidden'), 'h');
+
+    const m = buildManifestScribe(tmpRoot);
+    expect(m.files.map((f) => f.rel)).toEqual(['visible.txt']);
+  });
+});
+
+describe('pickVerificationSample — SCRIBE format (Component 08)', () => {
+  it('handles SCRIBE single-dir format { files: [...], totalFiles, totalBytes, missing }', () => {
+    const manifest = {
+      files: [
+        { rel: 'index.html', size: 100, remoteAbs: '/SCRIBE/index.html' },
+        { rel: 'dashboard/index.html', size: 200, remoteAbs: '/SCRIBE/dashboard/index.html' },
+        { rel: 'data.json', size: 50, remoteAbs: '/SCRIBE/data.json' },
+      ],
+      totalFiles: 3,
+      totalBytes: 350,
+      missing: false,
+    };
+    const sample = pickVerificationSample(manifest, 5);
+    expect(sample.length).toBeGreaterThan(0);
+    expect(sample.length).toBeLessThanOrEqual(5);
+    const hasRoot = sample.some((s) => s.rel === 'index.html' && s.remoteAbs === '/SCRIBE/index.html');
+    expect(hasRoot).toBe(true);
+  });
+
+  it('always includes SCRIBE root index.html if present', () => {
+    const manifest = {
+      files: [
+        { rel: 'index.html', size: 100, remoteAbs: '/SCRIBE/index.html' },
+        { rel: 'sub/page.html', size: 50, remoteAbs: '/SCRIBE/sub/page.html' },
+      ],
+      totalFiles: 2,
+      totalBytes: 150,
+      missing: false,
+    };
+    const sample = pickVerificationSample(manifest, 2);
+    const rootIdx = sample.find((s) => s.remoteAbs === '/SCRIBE/index.html');
+    expect(rootIdx).toBeDefined();
+  });
+
+  it('caps sample size for SCRIBE', () => {
+    const manifest = {
+      files: Array.from({ length: 20 }, (_, i) => ({
+        rel: `file${i}.html`,
+        size: 100,
+        remoteAbs: `/SCRIBE/file${i}.html`,
+      })),
+      totalFiles: 20,
+      totalBytes: 2000,
+      missing: false,
+    };
+    const sample = pickVerificationSample(manifest, 5);
+    expect(sample.length).toBeLessThanOrEqual(5);
+  });
+});
+
+describe('pickVerificationSample — backward compat with track-based format', () => {
+  it('still handles track-based manifests { tracks: {...}, totalFiles, ... }', () => {
+    const manifest = {
+      tracks: {
+        NASA: [
+          { rel: 'index.html', size: 100, remoteAbs: '/NASA/1.71/index.html' },
+        ],
+      },
+      totalFiles: 1,
+      totalBytes: 100,
+      missingTracks: [],
+    };
+    const sample = pickVerificationSample(manifest, 5);
+    expect(sample.length).toBeGreaterThan(0);
+    const nasaIdx = sample.find((s) => s.remoteAbs.includes('NASA'));
+    expect(nasaIdx).toBeDefined();
   });
 });

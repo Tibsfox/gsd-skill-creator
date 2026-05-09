@@ -44,6 +44,8 @@
     "depth-audit:current": "node tools/depth-audit.mjs --current",
     "ftp-sync": "node tools/ftp-sync.mjs",
     "ftp-sync:dry-run": "node tools/ftp-sync.mjs --dry-run",
+    "ftp-sync:scribe": "node tools/ftp-sync.mjs scribe",
+    "ftp-sync:scribe:dry-run": "node tools/ftp-sync.mjs scribe --dry-run",
     "build:www-bundles": "bash tools/build-www-bundles.sh",
     "render:claude-md": "node tools/render-claude-md.mjs",
     "render:claude-md:check": "node tools/render-claude-md.mjs --check",
