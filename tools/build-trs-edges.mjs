@@ -63,6 +63,7 @@ const TRS_RESEARCH_LOCATIONS = [
   { milestone: 'v1.49.616', paths: ['.planning/missions/v1-49-616-viking-2-utopia-planitia/work/W1-TRS-research.md'] },
   { milestone: 'v1.49.617', paths: ['.planning/missions/v1-49-617-heao-1-x-ray-all-sky-survey/work/W1-TRS-research.md'] },
   { milestone: 'v1.49.618', paths: ['.planning/missions/v1-49-618-voyager-2-grand-tour/work/W1-TRS-research.md'] },
+  { milestone: 'v1.49.619', paths: ['.planning/missions/v1-49-619-voyager-1-twin-mission-pair/work/W1-TRS-research.md'] },
 ];
 
 function readFrontmatter(text) {
