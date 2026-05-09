@@ -19,6 +19,7 @@
 //   window.SCRIBE_FORCE_CPU is set (settings-pane toggle).
 
 import { detectWebGpu, createWebGpuLayout } from './webgpu-layout.js';
+import { shouldShowViewerButton, openViewerFor, closeViewer } from './viewer-embed.js';
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 
@@ -421,6 +422,8 @@ function renderInspector() {
   const el = document.getElementById('inspector-content');
   if (!state.selectedId) {
     el.innerHTML = '<div class="empty">click a node to inspect</div>';
+    // Close viewer when selection is cleared
+    closeViewer();
     return;
   }
   const n = query.lookup(state.selectedId);
@@ -442,6 +445,9 @@ function renderInspector() {
     return `<div class="field"><div class="field-label">${dirLabel} (${list.length})</div><div class="neighbor-list">${items}</div></div>`;
   };
 
+  // CAP-041: viewer button shown for roundtrip-event nodes and other supported sub_types
+  const showViewerBtn = shouldShowViewerButton(n);
+
   el.innerHTML = `
     ${renderField('label', n.label)}
     ${renderField('node_id', n.node_id, true)}
@@ -450,10 +456,21 @@ function renderInspector() {
     ${renderNeighborList(nb.in, 'INCOMING')}
     <div class="field"><div class="field-label">UPSTREAM (≤3 hops)</div><div class="field-value">${upstream.length} nodes</div></div>
     <div class="field"><div class="field-label">DOWNSTREAM (≤3 hops)</div><div class="field-value">${downstream.length} nodes</div></div>
+    ${showViewerBtn ? `<div class="field viewer-btn-row"><button id="btn-open-viewer" class="viewer-open-btn" data-node-id="${escapeHtml(n.node_id)}">Open Round-Trip Viewer (T3)</button></div>` : ''}
   `;
   el.querySelectorAll('.neighbor').forEach(div => {
     div.addEventListener('click', () => selectNode(div.dataset.id));
   });
+
+  // Wire the viewer button (CAP-041)
+  if (showViewerBtn) {
+    const btnOpenViewer = el.querySelector('#btn-open-viewer');
+    if (btnOpenViewer) {
+      btnOpenViewer.addEventListener('click', () => {
+        openViewerFor(n.node_id, { inspectorEl: el });
+      });
+    }
+  }
 }
 
 function escapeHtml(s) {

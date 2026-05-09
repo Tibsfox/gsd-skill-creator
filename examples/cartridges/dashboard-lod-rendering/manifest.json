@@ -13,6 +13,9 @@
     "svg-substrate",
     "retrieval-provenance"
   ],
+  "runtime_dependencies": [
+    "code-svg-hdl-bridge"
+  ],
   "self_demo": {
     "scope": "floor",
     "corpus": "32-node T5 sample-provenance graph + synthesized 1K-file slice (stretch corpus button)",
@@ -74,6 +77,7 @@
     "dashboard-service/package.json": "Service package (zero required deps; pg optional)",
     "dashboard/index.html": "Working LOD demo entrypoint",
     "dashboard/app.js": "Pure-ESM dashboard app (renderer-router, layout, query, inspector)",
+    "dashboard/viewer-embed.js": "CAP-041 T3↔T4 viewer-embed module — openViewerFor/closeViewer/isViewerOpen + sandboxed iframe lifecycle",
     "dashboard/data/sample-graph.json": "32-node T5 sample-provenance corpus",
     "deploy/ftp-sync.sh": "Sync to tibsfox.com (mirrors tools/ftp-sync.mjs pattern)"
   },

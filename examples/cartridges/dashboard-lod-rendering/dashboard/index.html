@@ -119,6 +119,12 @@
   .help { color: var(--text-dim); font-size: 11px; line-height: 1.5; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
   .help kbd { display: inline-block; padding: 1px 5px; background: var(--panel-2); border: 1px solid var(--border); border-radius: 3px; font-family: ui-monospace, monospace; font-size: 10px; color: var(--text); }
 
+  /* CAP-041: Round-Trip Viewer embed button + iframe container */
+  .viewer-btn-row { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); }
+  .viewer-open-btn { width: 100%; padding: 7px 10px; background: var(--panel-2); border: 1px solid var(--border); border-radius: 4px; color: var(--accent); cursor: pointer; font-size: 11px; text-align: left; transition: background 0.1s, border-color 0.1s; }
+  .viewer-open-btn:hover { background: var(--accent); color: white; border-color: var(--accent); }
+  #viewer-embed-frame { display: block; }
+
   /* GPU layout badge + Force CPU toggle */
   .gpu-badge { padding: 4px 10px; border-radius: 12px; background: var(--panel-2); border: 1px solid var(--border); font-size: 11px; color: var(--text-dim); font-family: ui-monospace, monospace; }
   .force-cpu-row { display: flex; align-items: center; gap: 8px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }

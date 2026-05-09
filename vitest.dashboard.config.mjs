@@ -24,6 +24,8 @@ export default defineConfig({
     include: [
       'examples/cartridges/dashboard-lod-rendering/dashboard/__tests__/webgpu-layout-detection.test.js',
       'examples/cartridges/dashboard-lod-rendering/dashboard/__tests__/webgpu-layout-fallback.test.js',
+      // CAP-041: viewer-embed module tests (always included — no env gate)
+      'examples/cartridges/dashboard-lod-rendering/dashboard/__tests__/viewer-embed.test.js',
       ...(includeE2E
         ? ['examples/cartridges/dashboard-lod-rendering/dashboard/__tests__/webgpu-layout-e2e.test.js']
         : []),
