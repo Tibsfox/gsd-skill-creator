@@ -1,0 +1,27 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/prov.jsonld",
+    { "scribe": "https://gsd-skill-creator.dev/schema/scribe#" }
+  ],
+  "@id": "scribe:decision/{{decision_id}}",
+  "@type": ["prov:Entity", "prov:Plan"],
+  "prov:label": "{{label}}",
+  "scribe:reason": "{{reason}}",
+  "prov:wasGeneratedBy": { "@id": "scribe:session/{{session_id}}" },
+  "prov:atTime": "{{decided_at_iso8601}}",
+  "prov:wasInfluencedBy": [
+    {{#each evidence_nodes}}
+    { "@id": "scribe:{{kind}}/{{id}}" }{{#unless @last}},{{/unless}}
+    {{/each}}
+  ],
+  "scribe:rejectedAlternatives": [
+    {{#each alternatives}}
+    {
+      "@id": "scribe:alternative/{{decision_id}}/alt-{{@index}}",
+      "@type": "prov:Entity",
+      "prov:label": "{{label}}",
+      "scribe:rejectionReason": "{{reason}}"
+    }{{#unless @last}},{{/unless}}
+    {{/each}}
+  ]
+}

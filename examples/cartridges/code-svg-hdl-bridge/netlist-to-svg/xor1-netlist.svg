@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:scribe="https://tibsfox.com/Research/SCRIBE/ns#" viewBox="0 0 540 180" width="540" height="180" role="graphics-document" aria-labelledby="nt">
+  <title id="nt">xor1 netlist</title>
+  <desc>SCRIBE structural netlist for module xor1</desc>
+  <metadata>
+    <scribe:graph version="1" kind="netlist" language="verilog">
+      <scribe:source path="xor1.ts" sha="b748cf75811520cde6ebce2418e0e0bc8236c618" generator="scribe-roundtrip-viewer/1.0"/>
+      <scribe:nodes>
+      <scribe:node id="n2" sub_type="port" label="a" payload='{"direction":"input"}'/>
+      <scribe:node id="n3" sub_type="port" label="b" payload='{"direction":"input"}'/>
+      <scribe:node id="n6" sub_type="BinaryExpression" label="^"/>
+      <scribe:node id="out" sub_type="port" label="out" payload='{"direction":"output"}'/>
+      </scribe:nodes>
+      <scribe:edges>
+      <scribe:edge id="w0" rel="wire" src="n2" dst="n6"/>
+      <scribe:edge id="w1" rel="wire" src="n3" dst="n6"/>
+      <scribe:edge id="w2" rel="wire" src="n6" dst="out"/>
+      </scribe:edges>
+    </scribe:graph>
+  </metadata>
+  <g class="layer wires">
+    <path class="wire" data-src="n2" data-dst="n6" d="M 80 60 L 140 60 L 140 60 L 200 60"/>
+    <path class="wire" data-src="n3" data-dst="n6" d="M 80 110 L 140 110 L 140 60 L 200 60"/>
+    <path class="wire" data-src="n6" data-dst="out" d="M 280 60 L 350 60 L 350 60 L 420 60"/>
+  </g>
+  <g class="layer ports">
+    <g class="port" data-node-id="n2" data-direction="input">
+      <circle cx="40" cy="60" r="6"/>
+      <text x="30" y="64" text-anchor="end">a</text>
+      <title>a (input port)</title>
+    </g>
+    <g class="port" data-node-id="n3" data-direction="input">
+      <circle cx="40" cy="110" r="6"/>
+      <text x="30" y="114" text-anchor="end">b</text>
+      <title>b (input port)</title>
+    </g>
+    <g class="port" data-node-id="out" data-direction="output">
+      <circle cx="460" cy="60" r="6"/>
+      <text x="470" y="64" text-anchor="start">out</text>
+      <title>out (output port)</title>
+    </g>
+  </g>
+  <g class="layer ops">
+    <g class="op" data-node-id="n6" data-sub_type="BinaryExpression">
+      <rect x="200" y="42" width="80" height="36" rx="3"/>
+      <text x="240" y="65" text-anchor="middle">^</text>
+      <title>BinaryExpression: ^</title>
+    </g>
+  </g>
+</svg>

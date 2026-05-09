@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 320" width="600" height="320" role="img" aria-labelledby="t-doc d-doc">
+  <title id="t-doc">Step-by-step solution: solve 2x + 3 = 11 for x</title>
+  <desc id="d-doc">Reference template for the SCRIBE step-by-step animation pattern. A four-step animated solution to the linear equation 2x + 3 = 11. Cycles indefinitely; pure SMIL, no JavaScript, opens standalone in any modern browser. Replace the per-step text content in place to author a new animation.</desc>
+
+  <defs>
+    <style>
+      .frame { fill: #fafafa; stroke: #ccc; stroke-width: 1; }
+      .title-text { font-family: Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 600; fill: #111; text-anchor: middle; }
+      .step-label { font-family: Helvetica, Arial, sans-serif; font-size: 13px; fill: #666; text-anchor: middle; }
+      .equation { font-family: 'Latin Modern Roman', 'Times New Roman', Times, serif; font-size: 36px; font-style: italic; fill: #111; text-anchor: middle; }
+      .progress-track { fill: #e5e7eb; }
+      .progress-fill { fill: #1d4ed8; }
+      .step-dot { fill: #cbd5e1; stroke: #94a3b8; stroke-width: 1; }
+      .caption { font-family: Helvetica, Arial, sans-serif; font-size: 14px; fill: #333; text-anchor: middle; }
+      @media (prefers-reduced-motion: reduce) {
+        .step { animation: none !important; }
+        .reduced-only { display: block; }
+        .motion-only { display: none; }
+      }
+      .reduced-only { display: none; }
+    </style>
+  </defs>
+
+  <rect class="frame" x="10" y="10" width="580" height="300" rx="8"/>
+  <text class="title-text" x="300" y="40">Solve  2x + 3 = 11  for  x</text>
+  <text class="step-label" x="300" y="60">step-by-step (SMIL animation, ~10s cycle)</text>
+
+  <g class="step motion-only">
+    <title>Step 1: Initial equation</title><desc>Two x plus three equals eleven.</desc>
+    <text class="equation" x="300" y="170">2x + 3 = 11</text>
+    <text class="caption" x="300" y="220">Initial equation</text>
+    <animate attributeName="opacity" values="0;1;1;0;0;0;0;0;0" keyTimes="0;0.02;0.22;0.25;0.5;0.75;0.97;0.98;1" dur="10s" repeatCount="indefinite"/>
+  </g>
+  <g class="step motion-only" opacity="0">
+    <title>Step 2: Subtract 3</title><desc>Two x plus three minus three equals eleven minus three.</desc>
+    <text class="equation" x="300" y="170">2x + 3 − 3 = 11 − 3</text>
+    <text class="caption" x="300" y="220">Subtract 3 from both sides</text>
+    <animate attributeName="opacity" values="0;0;0;1;1;0;0;0;0" keyTimes="0;0.22;0.25;0.27;0.47;0.5;0.97;0.98;1" dur="10s" repeatCount="indefinite"/>
+  </g>
+  <g class="step motion-only" opacity="0">
+    <title>Step 3: Simplify</title><desc>Two x equals eight.</desc>
+    <text class="equation" x="300" y="170">2x = 8</text>
+    <text class="caption" x="300" y="220">Simplify</text>
+    <animate attributeName="opacity" values="0;0;0;0;0;1;1;0;0" keyTimes="0;0.22;0.25;0.47;0.5;0.52;0.72;0.75;1" dur="10s" repeatCount="indefinite"/>
+  </g>
+  <g class="step motion-only" opacity="0">
+    <title>Step 4: Divide and solve</title><desc>x equals four. Solution.</desc>
+    <text class="equation" x="300" y="170">x = 4</text>
+    <text class="caption" x="300" y="220">Divide both sides by 2 — solution</text>
+    <animate attributeName="opacity" values="0;0;0;0;0;0;0;1;1" keyTimes="0;0.22;0.25;0.47;0.5;0.72;0.75;0.77;1" dur="10s" repeatCount="indefinite"/>
+  </g>
+
+  <g class="reduced-only">
+    <text class="equation" x="300" y="130" font-size="22">2x + 3 = 11</text>
+    <text class="equation" x="300" y="160" font-size="22">2x = 8</text>
+    <text class="equation" x="300" y="190" font-size="22">x = 4</text>
+    <text class="caption" x="300" y="220">All steps shown (reduced motion)</text>
+  </g>
+
+  <rect class="progress-track" x="120" y="265" width="360" height="4" rx="2"/>
+  <rect class="progress-fill" x="120" y="265" width="0" height="4" rx="2">
+    <animate attributeName="width" values="0;360;360;0" keyTimes="0;0.97;0.98;1" dur="10s" repeatCount="indefinite"/>
+  </rect>
+  <g>
+    <circle class="step-dot" cx="120" cy="267" r="6"><animate attributeName="fill" values="#1d4ed8;#1d4ed8;#cbd5e1;#cbd5e1" keyTimes="0;0.25;0.27;1" dur="10s" repeatCount="indefinite"/></circle>
+    <circle class="step-dot" cx="240" cy="267" r="6"><animate attributeName="fill" values="#cbd5e1;#cbd5e1;#1d4ed8;#1d4ed8;#cbd5e1;#cbd5e1" keyTimes="0;0.25;0.27;0.5;0.52;1" dur="10s" repeatCount="indefinite"/></circle>
+    <circle class="step-dot" cx="360" cy="267" r="6"><animate attributeName="fill" values="#cbd5e1;#cbd5e1;#1d4ed8;#1d4ed8;#cbd5e1;#cbd5e1" keyTimes="0;0.5;0.52;0.75;0.77;1" dur="10s" repeatCount="indefinite"/></circle>
+    <circle class="step-dot" cx="480" cy="267" r="6"><animate attributeName="fill" values="#cbd5e1;#cbd5e1;#1d4ed8;#1d4ed8" keyTimes="0;0.75;0.77;1" dur="10s" repeatCount="indefinite"/></circle>
+  </g>
+  <text class="step-label" x="300" y="295">opens standalone in any modern browser • respects prefers-reduced-motion</text>
+</svg>

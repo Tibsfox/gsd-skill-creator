@@ -1,0 +1,56 @@
+id: markup-lineage
+kind: research-output
+name: Markup Lineage
+version: 1.0.0
+author: scribe-mission
+description: >-
+  Lineage taxonomy of the document-markup family — from Tunnicliffe's
+  1967 separation thesis and Saltzer's 1964 CTSS RUNOFF through GML,
+  SGML, SCRIBE, TeX, LaTeX, HTML, XML, MathML, SVG, and the modern
+  lightweight-markup wave (Markdown, reST, AsciiDoc, Org-mode, Pandoc,
+  Typst). Two branches (procedural-formatter + generic-markup); five
+  shared invariants; cross-branch convergence at TeX→MathML pipelines
+  and the Pandoc AST bridge. Self-demo bar: the family-tree cladogram
+  is a hand-authored native SVG.
+trust: user
+provenance:
+  origin: research-mission
+  mission: scribe
+  milestone: v1.49.621
+  track: T1
+  wave: 1
+  createdAt: 2026-05-09
+  researchGrounding:
+    - .planning/missions/v1-49-621-scribe/FLEET-PLAN.md
+    - .planning/missions/v1-49-621-scribe/briefings/T1-MARKUP-LINEAGE-LEAD.md
+    - .planning/missions/v1-49-621-scribe/t1-markup-lineage/01-gml-sgml-genesis.md
+    - .planning/missions/v1-49-621-scribe/t1-markup-lineage/02-script-scribe-tex-lineage.md
+    - .planning/missions/v1-49-621-scribe/t1-markup-lineage/03-html-evolution.md
+    - .planning/missions/v1-49-621-scribe/t1-markup-lineage/04-xml-family.md
+    - .planning/missions/v1-49-621-scribe/t1-markup-lineage/05-mathml-deep-dive.md
+    - .planning/missions/v1-49-621-scribe/t1-markup-lineage/06-family-tree-synthesis.md
+    - .planning/missions/v1-49-621-scribe/t1-markup-lineage/07-modern-descendants.md
+artifacts:
+  - path: ./README.md
+    kind: doc
+    purpose: cartridge orientation + downstream-track integration notes
+  - path: ./lineage.json
+    kind: data
+    purpose: structured taxonomy (branches, nodes, edges, invariants)
+  - path: ./capabilities.md
+    kind: doc
+    purpose: 27 formats x 8 capability axes matrix
+  - path: ./citations.json
+    kind: data
+    purpose: deduped canonical citation index, ~35 sources
+  - path: ./figures/family-tree.svg
+    kind: figure-svg-native
+    purpose: hand-authored SVG cladogram (T1 self-demo bar artifact)
+metadata:
+  staging: research-output
+  selfDemoBar: passed
+  selfDemoArtifact: ./figures/family-tree.svg
+  selfDemoVerification: |-
+    Native SVG; ~22 KB; 50+ named text-labelled nodes; three edge classes;
+    no embedded raster, no <image href>; ARIA <title>+<desc> accessibility
+    metadata; XPath/CSS-queryable; opens in any modern browser.

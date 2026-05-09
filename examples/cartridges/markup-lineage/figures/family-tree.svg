@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Mission SCRIBE · Track 1 MARKUP-LINEAGE · Family Tree (Cladogram)
+  Hand-authored native SVG. No raster export. Every node has a traceable
+  text label; every edge has structural meaning per doc 06 §3.
+
+  Coordinate frame: 1400 x 1050 (viewBox), root upper-left.
+  Branches:
+    Procedural-formatter branch (left)  --> RUNOFF-SCRIPT-troff-TeX-LaTeX
+    Generic-markup branch (centre/right) --> Tunnicliffe-GenCode-GML-SCRIBE-SGML
+    Web cascade (right)                  --> SGML -> HTML/XML and descendants
+    Cross-branch edges (dashed)          --> SCRIBE->LaTeX, TeX->MathML, etc.
+-->
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 1400 1050"
+     width="1400" height="1050"
+     font-family="Helvetica, Arial, sans-serif"
+     role="img"
+     aria-labelledby="t1-tree-title t1-tree-desc">
+
+  <title id="t1-tree-title">Markup-Language Family Tree (Mission SCRIBE T1)</title>
+  <desc id="t1-tree-desc">
+    Cladogram showing the genealogy of document markup languages.
+    Two parallel branches: procedural formatters (RUNOFF, SCRIPT, troff, TeX, LaTeX)
+    on the left, and generic-markup (Tunnicliffe 1967, GenCode, GML, SGML, HTML, XML and
+    the XML family) on the right. Cross-branch edges show known design influences:
+    SCRIBE influencing LaTeX (1985), TeX-math feeding into MathML pipelines, Markdown
+    later transcompiling to HTML, Pandoc bridging both branches.
+  </desc>
+
+  <defs>
+    <!-- Edge styles -->
+    <style type="text/css"><![CDATA[
+      .node-box        { fill: #fff; stroke: #222; stroke-width: 1.5; }
+      .node-root       { fill: #e8eef7; stroke: #1a3d6b; stroke-width: 2; }
+      .node-procedural { fill: #fbeee0; stroke: #6b3a1a; stroke-width: 1.5; }
+      .node-generic    { fill: #e2efe0; stroke: #1a5a26; stroke-width: 1.5; }
+      .node-web        { fill: #e8eef7; stroke: #1a3d6b; stroke-width: 1.5; }
+      .node-xml        { fill: #f0e2ef; stroke: #5a1a4a; stroke-width: 1.5; }
+      .node-modern     { fill: #fefacf; stroke: #6b6010; stroke-width: 1.5; }
+      .node-failed     { fill: #f4e0e0; stroke: #8a2a2a; stroke-width: 1.5; stroke-dasharray: 4,3; }
+      .label           { fill: #111; font-size: 13px; }
+      .label-small     { fill: #333; font-size: 11px; }
+      .label-year      { fill: #555; font-size: 10px; font-style: italic; }
+      .legend-text     { fill: #222; font-size: 12px; }
+      .edge            { stroke: #555; stroke-width: 1.4; fill: none; }
+      .edge-cross      { stroke: #c2543b; stroke-width: 1.4; fill: none; stroke-dasharray: 5,3; }
+      .edge-dead       { stroke: #8a2a2a; stroke-width: 1.2; fill: none; stroke-dasharray: 2,2; opacity: 0.6; }
+      .header          { fill: #111; font-size: 18px; font-weight: bold; }
+      .subheader       { fill: #333; font-size: 13px; }
+      .branch-label    { fill: #444; font-size: 12px; font-style: italic; }
+    ]]></style>
+
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#555"/>
+    </marker>
+    <marker id="arrow-cross" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#c2543b"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="700" y="32" text-anchor="middle" class="header">
+    Markup-Language Family Tree
+  </text>
+  <text x="700" y="55" text-anchor="middle" class="subheader">
+    Mission SCRIBE · Track 1 MARKUP-LINEAGE · doc 06 cladogram
+  </text>
+
+  <!-- Branch labels -->
+  <text x="220" y="92" text-anchor="middle" class="branch-label">PROCEDURAL FORMATTER BRANCH</text>
+  <text x="780" y="92" text-anchor="middle" class="branch-label">GENERIC-MARKUP BRANCH</text>
+  <text x="1190" y="92" text-anchor="middle" class="branch-label">WEB / XML CASCADE</text>
+
+  <!-- ===== ROOT: 1967 separation thesis ===== -->
+  <g id="n-tunnicliffe">
+    <rect x="640" y="110" width="240" height="40" rx="6" class="node-root"/>
+    <text x="760" y="128" text-anchor="middle" class="label">Tunnicliffe (GCA, 1967)</text>
+    <text x="760" y="143" text-anchor="middle" class="label-small">separation of content from format</text>
+  </g>
+
+  <!-- ===== PROCEDURAL BRANCH (left) ===== -->
+
+  <g id="n-runoff">
+    <rect x="120" y="170" width="200" height="38" rx="5" class="node-procedural"/>
+    <text x="220" y="187" text-anchor="middle" class="label">CTSS RUNOFF</text>
+    <text x="220" y="201" text-anchor="middle" class="label-year">Saltzer · MIT · 1964</text>
+  </g>
+
+  <g id="n-script">
+    <rect x="120" y="240" width="200" height="38" rx="5" class="node-procedural"/>
+    <text x="220" y="257" text-anchor="middle" class="label">SCRIPT (CP-67/CMS)</text>
+    <text x="220" y="271" text-anchor="middle" class="label-year">Madnick · MIT/IBM · 1968</text>
+  </g>
+
+  <g id="n-troff">
+    <rect x="20" y="310" width="170" height="38" rx="5" class="node-procedural"/>
+    <text x="105" y="327" text-anchor="middle" class="label">troff / nroff</text>
+    <text x="105" y="341" text-anchor="middle" class="label-year">Ossanna · Bell Labs · 1973</text>
+  </g>
+
+  <g id="n-dcf">
+    <rect x="220" y="310" width="180" height="38" rx="5" class="node-procedural"/>
+    <text x="310" y="327" text-anchor="middle" class="label">SCRIPT/VS · DCF</text>
+    <text x="310" y="341" text-anchor="middle" class="label-year">IBM · 1980s</text>
+  </g>
+
+  <g id="n-tex">
+    <rect x="120" y="380" width="200" height="38" rx="5" class="node-procedural"/>
+    <text x="220" y="397" text-anchor="middle" class="label">TeX</text>
+    <text x="220" y="411" text-anchor="middle" class="label-year">Knuth · Stanford · 1977–82</text>
+  </g>
+
+  <g id="n-metafont">
+    <rect x="20" y="380" width="80" height="38" rx="5" class="node-procedural"/>
+    <text x="60" y="403" text-anchor="middle" class="label">METAFONT</text>
+  </g>
+
+  <g id="n-latex">
+    <rect x="120" y="450" width="200" height="38" rx="5" class="node-procedural"/>
+    <text x="220" y="467" text-anchor="middle" class="label">LaTeX</text>
+    <text x="220" y="481" text-anchor="middle" class="label-year">Lamport · SRI · 1985</text>
+  </g>
+
+  <g id="n-context">
+    <rect x="20" y="520" width="170" height="38" rx="5" class="node-procedural"/>
+    <text x="105" y="543" text-anchor="middle" class="label">ConTeXt</text>
+  </g>
+
+  <g id="n-katex">
+    <rect x="220" y="520" width="180" height="38" rx="5" class="node-modern"/>
+    <text x="310" y="537" text-anchor="middle" class="label">KaTeX (Appendix G)</text>
+    <text x="310" y="551" text-anchor="middle" class="label-year">Khan Academy · 2014</text>
+  </g>
+
+  <g id="n-mathjax">
+    <rect x="20" y="590" width="170" height="38" rx="5" class="node-modern"/>
+    <text x="105" y="607" text-anchor="middle" class="label">MathJax</text>
+    <text x="105" y="621" text-anchor="middle" class="label-year">Cervone · 2009</text>
+  </g>
+
+  <g id="n-latexml">
+    <rect x="220" y="590" width="180" height="38" rx="5" class="node-modern"/>
+    <text x="310" y="607" text-anchor="middle" class="label">LaTeXML</text>
+    <text x="310" y="621" text-anchor="middle" class="label-year">Miller · NIST</text>
+  </g>
+
+  <g id="n-typst">
+    <rect x="120" y="660" width="200" height="38" rx="5" class="node-modern"/>
+    <text x="220" y="677" text-anchor="middle" class="label">Typst</text>
+    <text x="220" y="691" text-anchor="middle" class="label-year">Mädje, Haug · TU Berlin · 2023</text>
+  </g>
+
+  <!-- ===== GENERIC-MARKUP / SGML BRANCH (centre) ===== -->
+
+  <g id="n-gencode">
+    <rect x="600" y="170" width="200" height="38" rx="5" class="node-generic"/>
+    <text x="700" y="187" text-anchor="middle" class="label">GenCode (GCA)</text>
+    <text x="700" y="201" text-anchor="middle" class="label-year">Tunnicliffe et al. · 1970s</text>
+  </g>
+
+  <g id="n-gml">
+    <rect x="820" y="170" width="200" height="38" rx="5" class="node-generic"/>
+    <text x="920" y="187" text-anchor="middle" class="label">GML</text>
+    <text x="920" y="201" text-anchor="middle" class="label-year">Goldfarb, Mosher, Lorie · IBM · 1969</text>
+  </g>
+
+  <g id="n-scribe">
+    <rect x="600" y="240" width="200" height="38" rx="5" class="node-generic"/>
+    <text x="700" y="257" text-anchor="middle" class="label">SCRIBE</text>
+    <text x="700" y="271" text-anchor="middle" class="label-year">Reid · CMU PhD · 1980</text>
+  </g>
+
+  <g id="n-sgml">
+    <rect x="820" y="240" width="200" height="38" rx="5" class="node-generic"/>
+    <text x="920" y="257" text-anchor="middle" class="label">SGML (ISO 8879)</text>
+    <text x="920" y="271" text-anchor="middle" class="label-year">Goldfarb · 1986</text>
+  </g>
+
+  <g id="n-docbook">
+    <rect x="600" y="310" width="200" height="38" rx="5" class="node-generic"/>
+    <text x="700" y="327" text-anchor="middle" class="label">DocBook</text>
+    <text x="700" y="341" text-anchor="middle" class="label-year">HaL · 1991 (later OASIS)</text>
+  </g>
+
+  <g id="n-tei">
+    <rect x="820" y="310" width="200" height="38" rx="5" class="node-generic"/>
+    <text x="920" y="327" text-anchor="middle" class="label">TEI</text>
+    <text x="920" y="341" text-anchor="middle" class="label-year">Sperberg-McQueen · 1987</text>
+  </g>
+
+  <!-- ===== WEB / XML CASCADE (right) ===== -->
+
+  <g id="n-html">
+    <rect x="1080" y="240" width="220" height="38" rx="5" class="node-web"/>
+    <text x="1190" y="257" text-anchor="middle" class="label">HTML</text>
+    <text x="1190" y="271" text-anchor="middle" class="label-year">Berners-Lee · CERN · 1990–95</text>
+  </g>
+
+  <g id="n-rfc1866">
+    <rect x="1080" y="290" width="220" height="34" rx="5" class="node-web"/>
+    <text x="1190" y="312" text-anchor="middle" class="label">HTML 2.0 (RFC 1866) · 1995</text>
+  </g>
+
+  <g id="n-html401">
+    <rect x="1080" y="334" width="220" height="34" rx="5" class="node-web"/>
+    <text x="1190" y="356" text-anchor="middle" class="label">HTML 4.01 · W3C · 1999</text>
+  </g>
+
+  <g id="n-xml">
+    <rect x="1080" y="380" width="220" height="38" rx="5" class="node-xml"/>
+    <text x="1190" y="397" text-anchor="middle" class="label">XML 1.0</text>
+    <text x="1190" y="411" text-anchor="middle" class="label-year">Bosak, Bray, Sperberg-McQueen, Paoli, Clark · W3C · 1998</text>
+  </g>
+
+  <g id="n-xhtml">
+    <rect x="930" y="450" width="180" height="38" rx="5" class="node-failed"/>
+    <text x="1020" y="467" text-anchor="middle" class="label">XHTML 1.0/1.1</text>
+    <text x="1020" y="481" text-anchor="middle" class="label-year">W3C · 2000–01</text>
+  </g>
+
+  <g id="n-xhtml2">
+    <rect x="1130" y="450" width="160" height="38" rx="5" class="node-failed"/>
+    <text x="1210" y="467" text-anchor="middle" class="label">XHTML 2.0</text>
+    <text x="1210" y="481" text-anchor="middle" class="label-year">2002–09 · charter expired</text>
+  </g>
+
+  <g id="n-html5">
+    <rect x="930" y="510" width="180" height="38" rx="5" class="node-web"/>
+    <text x="1020" y="527" text-anchor="middle" class="label">HTML5 (WHATWG, 2004→)</text>
+    <text x="1020" y="541" text-anchor="middle" class="label-year">Living Standard · 2014</text>
+  </g>
+
+  <g id="n-mathml">
+    <rect x="1130" y="510" width="160" height="38" rx="5" class="node-xml"/>
+    <text x="1210" y="527" text-anchor="middle" class="label">MathML 1.0</text>
+    <text x="1210" y="541" text-anchor="middle" class="label-year">W3C · April 1998</text>
+  </g>
+
+  <g id="n-svg">
+    <rect x="1130" y="565" width="160" height="38" rx="5" class="node-xml"/>
+    <text x="1210" y="582" text-anchor="middle" class="label">SVG 1.0</text>
+    <text x="1210" y="596" text-anchor="middle" class="label-year">W3C · September 2001</text>
+  </g>
+
+  <g id="n-xslt">
+    <rect x="1080" y="630" width="220" height="38" rx="5" class="node-xml"/>
+    <text x="1190" y="647" text-anchor="middle" class="label">XSLT 1.0 / XPath 1.0</text>
+    <text x="1190" y="661" text-anchor="middle" class="label-year">Clark, DeRose · W3C · 1999</text>
+  </g>
+
+  <g id="n-xsd">
+    <rect x="930" y="630" width="140" height="38" rx="5" class="node-xml"/>
+    <text x="1000" y="647" text-anchor="middle" class="label">XSD · Relax NG</text>
+    <text x="1000" y="661" text-anchor="middle" class="label-year">2001 / 2003</text>
+  </g>
+
+  <g id="n-mathml4">
+    <rect x="1130" y="690" width="160" height="38" rx="5" class="node-xml"/>
+    <text x="1210" y="707" text-anchor="middle" class="label">MathML 4 · Core</text>
+    <text x="1210" y="721" text-anchor="middle" class="label-year">W3C · November 2024</text>
+  </g>
+
+  <!-- ===== MODERN LIGHTWEIGHT MARKUP (bottom centre) ===== -->
+
+  <g id="n-markdown">
+    <rect x="540" y="450" width="200" height="38" rx="5" class="node-modern"/>
+    <text x="640" y="467" text-anchor="middle" class="label">Markdown</text>
+    <text x="640" y="481" text-anchor="middle" class="label-year">Gruber + Swartz · 2004</text>
+  </g>
+
+  <g id="n-rst">
+    <rect x="540" y="510" width="200" height="38" rx="5" class="node-modern"/>
+    <text x="640" y="527" text-anchor="middle" class="label">reStructuredText</text>
+    <text x="640" y="541" text-anchor="middle" class="label-year">Goodger · Docutils · 2002</text>
+  </g>
+
+  <g id="n-asciidoc">
+    <rect x="540" y="565" width="200" height="38" rx="5" class="node-modern"/>
+    <text x="640" y="582" text-anchor="middle" class="label">AsciiDoc</text>
+    <text x="640" y="596" text-anchor="middle" class="label-year">Rackham · 2002</text>
+  </g>
+
+  <g id="n-orgmode">
+    <rect x="540" y="620" width="200" height="38" rx="5" class="node-modern"/>
+    <text x="640" y="637" text-anchor="middle" class="label">Org-mode</text>
+    <text x="640" y="651" text-anchor="middle" class="label-year">Dominik · 2003</text>
+  </g>
+
+  <g id="n-commonmark">
+    <rect x="540" y="675" width="200" height="38" rx="5" class="node-modern"/>
+    <text x="640" y="692" text-anchor="middle" class="label">CommonMark</text>
+    <text x="640" y="706" text-anchor="middle" class="label-year">MacFarlane et al. · 2014</text>
+  </g>
+
+  <g id="n-pandoc">
+    <rect x="540" y="730" width="200" height="38" rx="5" class="node-modern"/>
+    <text x="640" y="747" text-anchor="middle" class="label">Pandoc</text>
+    <text x="640" y="761" text-anchor="middle" class="label-year">MacFarlane · 2006 · AST bridge</text>
+  </g>
+
+  <!-- ===== FAILED OR MARGINAL BRANCHES (lower right) ===== -->
+
+  <g id="n-pgml">
+    <rect x="930" y="800" width="160" height="34" rx="5" class="node-failed"/>
+    <text x="1010" y="822" text-anchor="middle" class="label">PGML (Adobe, 1998)</text>
+  </g>
+
+  <g id="n-vml">
+    <rect x="1130" y="800" width="160" height="34" rx="5" class="node-failed"/>
+    <text x="1210" y="822" text-anchor="middle" class="label">VML (Microsoft, 1998)</text>
+  </g>
+
+  <g id="n-xslfo">
+    <rect x="930" y="850" width="160" height="34" rx="5" class="node-failed"/>
+    <text x="1010" y="872" text-anchor="middle" class="label">XSL-FO (W3C, 2001)</text>
+  </g>
+
+  <g id="n-soap">
+    <rect x="1130" y="850" width="160" height="34" rx="5" class="node-failed"/>
+    <text x="1210" y="872" text-anchor="middle" class="label">SOAP / WSDL (2003–07)</text>
+  </g>
+
+  <text x="1110" y="788" text-anchor="middle" class="legend-text" fill="#8a2a2a">
+    Failed / superseded branches
+  </text>
+
+  <!-- ===== EDGES ===== -->
+
+  <!-- Tunnicliffe -> generic branch GenCode + GML -->
+  <path d="M 760 150 C 760 165, 700 158, 700 170" class="edge" marker-end="url(#arrow)"/>
+  <path d="M 760 150 C 800 158, 920 158, 920 170" class="edge" marker-end="url(#arrow)"/>
+
+  <!-- GenCode -> SGML (committee merger) -->
+  <path d="M 700 208 C 700 222, 920 222, 920 240" class="edge" marker-end="url(#arrow)"/>
+  <!-- GML -> SGML -->
+  <path d="M 920 208 L 920 240" class="edge" marker-end="url(#arrow)"/>
+
+  <!-- RUNOFF -> SCRIPT -->
+  <path d="M 220 208 L 220 240" class="edge" marker-end="url(#arrow)"/>
+  <!-- SCRIPT -> troff (independent re-implementation, not direct descent; render as edge) -->
+  <path d="M 220 278 C 220 294, 105 294, 105 310" class="edge" marker-end="url(#arrow)"/>
+  <!-- SCRIPT -> SCRIPT/VS DCF -->
+  <path d="M 220 278 C 220 294, 310 294, 310 310" class="edge" marker-end="url(#arrow)"/>
+
+  <!-- SCRIPT -> TeX (design-influence cousins; not direct descent, but historically Knuth knew them) -->
+  <path d="M 220 348 L 220 380" class="edge" marker-end="url(#arrow)"/>
+  <!-- TeX <-> METAFONT (sibling pair) -->
+  <path d="M 120 399 L 100 399" class="edge"/>
+
+  <!-- TeX -> LaTeX -->
+  <path d="M 220 418 L 220 450" class="edge" marker-end="url(#arrow)"/>
+
+  <!-- SCRIBE -> LaTeX (cross-branch design influence; dashed) -->
+  <path d="M 600 259 C 460 259, 360 380, 320 460" class="edge-cross" marker-end="url(#arrow-cross)"/>
+  <text x="430" y="365" class="label-small" fill="#c2543b">SCRIBE → LaTeX (1985 design influence)</text>
+
+  <!-- LaTeX -> ConTeXt + KaTeX -->
+  <path d="M 220 488 C 220 504, 105 504, 105 520" class="edge" marker-end="url(#arrow)"/>
+  <path d="M 220 488 C 220 504, 310 504, 310 520" class="edge" marker-end="url(#arrow)"/>
+
+  <!-- KaTeX -> MathJax + LaTeXML -->
+  <path d="M 310 558 C 310 574, 105 574, 105 590" class="edge" marker-end="url(#arrow)"/>
+  <path d="M 310 558 L 310 590" class="edge" marker-end="url(#arrow)"/>
+  <!-- LaTeX -> Typst (design lineage; both procedural) -->
+  <path d="M 220 488 C 220 580, 220 600, 220 660" class="edge" marker-end="url(#arrow)"/>
+
+  <!-- SGML -> HTML (Berners-Lee 1990; declared SGML application) -->
+  <path d="M 1020 259 L 1080 259" class="edge" marker-end="url(#arrow)"/>
+  <!-- SGML -> DocBook + TEI -->
+  <path d="M 920 278 C 920 294, 700 294, 700 310" class="edge" marker-end="url(#arrow)"/>
+  <path d="M 920 278 L 920 310" class="edge" marker-end="url(#arrow)"/>
+
+  <!-- HTML -> RFC 1866 -> HTML 4.01 -->
+  <path d="M 1190 278 L 1190 290" class="edge" marker-end="url(#arrow)"/>
+  <path d="M 1190 324 L 1190 334" class="edge" marker-end="url(#arrow)"/>
+
+  <!-- HTML 4.01 -> XML 1.0 (lineage: SGML simplification, came in parallel) AND -> XHTML/HTML5 -->
+  <path d="M 1190 368 L 1190 380" class="edge" marker-end="url(#arrow)"/>
+  <!-- XML -> XHTML, MathML, SVG, XSLT/XPath, XSD -->
+  <path d="M 1190 418 C 1190 434, 1020 434, 1020 450" class="edge" marker-end="url(#arrow)"/>
+  <path d="M 1190 418 C 1190 434, 1210 494, 1210 510" class="edge" marker-end="url(#arrow)"/>
+  <path d="M 1190 418 C 1190 434, 1210 549, 1210 565" class="edge" marker-end="url(#arrow)"/>
+  <path d="M 1190 418 L 1190 630" class="edge" marker-end="url(#arrow)"/>
+  <path d="M 1190 418 C 1190 434, 1000 614, 1000 630" class="edge" marker-end="url(#arrow)"/>
+
+  <!-- XHTML 1.0 -> XHTML 2.0 (failed) -->
+  <path d="M 1110 469 L 1130 469" class="edge-dead" marker-end="url(#arrow)"/>
+  <!-- XHTML 1.0 -> HTML5 (sibling: XHTML5 serialization) -->
+  <path d="M 1020 488 L 1020 510" class="edge" marker-end="url(#arrow)"/>
+
+  <!-- MathML -> MathML 4 -->
+  <path d="M 1210 548 C 1210 620, 1210 674, 1210 690" class="edge" marker-end="url(#arrow)"/>
+
+  <!-- HTML 4.01 -> HTML5 (continuity) -->
+  <path d="M 1080 351 C 970 351, 980 510, 1020 510" class="edge" marker-end="url(#arrow)"/>
+
+  <!-- TeX -> MathML pipeline (cross-branch dashed) -->
+  <path d="M 320 399 C 700 399, 1100 530, 1130 530" class="edge-cross" marker-end="url(#arrow-cross)"/>
+  <text x="700" y="395" class="label-small" fill="#c2543b">TeX-source feeds MathML rendering pipelines (KaTeX, MathJax, Temml, LaTeXML)</text>
+
+  <!-- HTML5 -> Markdown's transcompile target (Markdown -> HTML) cross-branch dashed -->
+  <path d="M 740 467 C 850 470, 950 524, 930 528" class="edge-cross" marker-end="url(#arrow-cross)"/>
+  <text x="800" y="445" class="label-small" fill="#c2543b">Markdown ⇒ HTML (transcompile)</text>
+
+  <!-- Markdown -> CommonMark -->
+  <path d="M 640 488 L 640 510" class="edge" marker-end="url(#arrow)"/>
+  <path d="M 640 548 L 640 565" class="edge" marker-end="url(#arrow)"/>
+  <path d="M 640 603 L 640 620" class="edge" marker-end="url(#arrow)"/>
+  <path d="M 640 658 L 640 675" class="edge" marker-end="url(#arrow)"/>
+  <path d="M 640 713 L 640 730" class="edge" marker-end="url(#arrow)"/>
+
+  <!-- Pandoc bridges branches: edges to LaTeX side and HTML side (dashed cross-branch) -->
+  <path d="M 540 749 C 380 749, 250 580, 320 488" class="edge-cross" marker-end="url(#arrow-cross)"/>
+  <path d="M 740 749 C 900 749, 1080 600, 1110 528" class="edge-cross" marker-end="url(#arrow-cross)"/>
+  <text x="365" y="800" class="label-small" fill="#c2543b">Pandoc bridges procedural ↔ generic branches via shared AST</text>
+
+  <!-- Failed branches: PGML+VML feed SVG (already standardized away) -->
+  <path d="M 1010 800 C 1010 720, 1210 645, 1210 603" class="edge-dead" marker-end="url(#arrow)"/>
+  <path d="M 1210 800 C 1210 720, 1210 645, 1210 603" class="edge-dead" marker-end="url(#arrow)"/>
+
+  <!-- Legend -->
+  <g id="legend" transform="translate(40,920)">
+    <rect x="0" y="0" width="540" height="115" fill="#fafafa" stroke="#999" stroke-width="1"/>
+    <text x="10" y="20" class="legend-text" font-weight="bold">Legend</text>
+    <rect x="14" y="32" width="22" height="14" class="node-procedural"/>
+    <text x="44" y="44" class="legend-text">Procedural-formatter branch</text>
+    <rect x="14" y="52" width="22" height="14" class="node-generic"/>
+    <text x="44" y="64" class="legend-text">Generic-markup branch</text>
+    <rect x="14" y="72" width="22" height="14" class="node-xml"/>
+    <text x="44" y="84" class="legend-text">XML application family</text>
+    <rect x="14" y="92" width="22" height="14" class="node-modern"/>
+    <text x="44" y="104" class="legend-text">Modern lightweight / converter</text>
+
+    <rect x="270" y="32" width="22" height="14" class="node-web"/>
+    <text x="300" y="44" class="legend-text">Web (HTML) cascade</text>
+    <rect x="270" y="52" width="22" height="14" class="node-failed"/>
+    <text x="300" y="64" class="legend-text">Failed / superseded branch</text>
+    <line x1="270" y1="78" x2="292" y2="78" class="edge" marker-end="url(#arrow)"/>
+    <text x="300" y="84" class="legend-text">In-branch descent</text>
+    <line x1="270" y1="98" x2="292" y2="98" class="edge-cross" marker-end="url(#arrow-cross)"/>
+    <text x="300" y="104" class="legend-text">Cross-branch design influence</text>
+  </g>
+
+  <text x="700" y="1000" text-anchor="middle" class="label-small">
+    Hand-authored native SVG. Mission SCRIBE v1.49.621 · 2026-05-09. Self-demo bar artifact for T1 doc 06.
+  </text>
+
+</svg>

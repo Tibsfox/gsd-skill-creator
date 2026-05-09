@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SCRIBE Dashboard — LOD demo (T4)</title>
+<style>
+  :root {
+    --bg: #0e1116;
+    --panel: #161b22;
+    --panel-2: #1f2630;
+    --border: #30363d;
+    --text: #e6edf3;
+    --text-dim: #9da7b3;
+    --accent: #4493f8;
+    --commit: #6cc24a;
+    --decision: #d29922;
+    --task: #4493f8;
+    --file: #58a6ff;
+    --alternative: #f85149;
+    --evidence: #a371f7;
+    --session: #db61a2;
+    --agent: #ffa657;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; font-size: 13px; }
+  #app { display: grid; grid-template-columns: 280px 1fr 320px; grid-template-rows: 48px 1fr; height: 100vh; }
+
+  header { grid-column: 1 / 4; background: var(--panel); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 16px; gap: 16px; }
+  header .title { font-weight: 600; font-size: 14px; }
+  header .substrate-badge { padding: 4px 10px; border-radius: 12px; background: var(--panel-2); border: 1px solid var(--border); font-size: 11px; color: var(--accent); font-family: ui-monospace, monospace; }
+  header .stat { color: var(--text-dim); font-family: ui-monospace, monospace; font-size: 11px; }
+  header .spacer { flex: 1; }
+  header button { background: var(--panel-2); color: var(--text); border: 1px solid var(--border); padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px; }
+  header button:hover { border-color: var(--accent); }
+  header button.active { background: var(--accent); color: white; border-color: var(--accent); }
+
+  aside.left { background: var(--panel); border-right: 1px solid var(--border); padding: 12px; overflow-y: auto; }
+  aside.right { background: var(--panel); border-left: 1px solid var(--border); padding: 12px; overflow-y: auto; }
+  aside h3 { margin: 0 0 8px 0; font-size: 11px; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.5px; }
+  aside h4 { margin: 16px 0 6px 0; font-size: 11px; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.5px; }
+
+  #search { width: 100%; padding: 6px 10px; background: var(--panel-2); border: 1px solid var(--border); border-radius: 4px; color: var(--text); font-size: 12px; }
+  #search:focus { outline: none; border-color: var(--accent); }
+  .search-results { margin-top: 8px; max-height: 200px; overflow-y: auto; }
+  .search-result { padding: 4px 6px; cursor: pointer; border-radius: 3px; font-size: 11px; }
+  .search-result:hover { background: var(--panel-2); }
+
+  .legend { display: flex; flex-direction: column; gap: 6px; }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-size: 11px; cursor: pointer; padding: 2px 4px; border-radius: 3px; }
+  .legend-item:hover { background: var(--panel-2); }
+  .legend-item.muted { opacity: 0.4; }
+  .legend-swatch { width: 12px; height: 12px; border-radius: 50%; }
+  .legend-swatch.commit { background: var(--commit); }
+  .legend-swatch.decision { background: var(--decision); }
+  .legend-swatch.task { background: var(--task); }
+  .legend-swatch.file { background: var(--file); }
+  .legend-swatch.alternative { background: var(--alternative); }
+  .legend-swatch.evidence { background: var(--evidence); }
+  .legend-swatch.session { background: var(--session); border-radius: 2px; }
+  .legend-swatch.agent { background: var(--agent); border-radius: 2px; }
+
+  .corpus-buttons { display: flex; flex-direction: column; gap: 6px; }
+  .corpus-buttons button { width: 100%; text-align: left; padding: 8px 10px; background: var(--panel-2); border: 1px solid var(--border); border-radius: 4px; color: var(--text); cursor: pointer; font-size: 11px; }
+  .corpus-buttons button:hover { border-color: var(--accent); }
+  .corpus-buttons button.active { background: var(--accent); color: white; border-color: var(--accent); }
+
+  main { position: relative; overflow: hidden; }
+  #stage { position: absolute; inset: 0; background: var(--bg); }
+  #svg-layer, #canvas-layer { position: absolute; inset: 0; width: 100%; height: 100%; }
+  #canvas-layer { pointer-events: none; }
+  #canvas-layer.active { pointer-events: auto; }
+  #svg-layer.hidden { visibility: hidden; }
+
+  .inspector .empty { color: var(--text-dim); font-style: italic; font-size: 11px; padding: 8px 0; }
+  .inspector .field { margin-bottom: 8px; }
+  .inspector .field-label { font-size: 10px; text-transform: uppercase; color: var(--text-dim); letter-spacing: 0.5px; margin-bottom: 2px; }
+  .inspector .field-value { font-size: 12px; word-break: break-word; }
+  .inspector .field-value.mono { font-family: ui-monospace, monospace; font-size: 11px; }
+  .inspector .neighbor-list { display: flex; flex-direction: column; gap: 3px; }
+  .inspector .neighbor { padding: 4px 6px; cursor: pointer; border-radius: 3px; font-size: 11px; background: var(--panel-2); }
+  .inspector .neighbor:hover { background: var(--accent); color: white; }
+  .inspector .neighbor .relation { color: var(--text-dim); font-size: 10px; }
+
+  /* SVG node + edge styling — keyed on sub_type per T5 substrate decision 3 */
+  .node { cursor: pointer; }
+  .node circle, .node rect { stroke: #0e1116; stroke-width: 1.5; transition: stroke 0.1s, stroke-width 0.1s; }
+  .node text { fill: var(--text); font-size: 10px; pointer-events: none; user-select: none; font-family: -apple-system, sans-serif; }
+  .node.commit circle { fill: var(--commit); }
+  .node.decision circle { fill: var(--decision); }
+  .node.task circle { fill: var(--task); }
+  .node.file circle { fill: var(--file); }
+  .node.alternative circle { fill: var(--alternative); }
+  .node.evidence circle { fill: var(--evidence); }
+  .node.session rect { fill: var(--session); }
+  .node.agent.person rect { fill: var(--agent); }
+  .node.agent.software rect { fill: var(--agent); opacity: 0.7; }
+  .node.selected circle, .node.selected rect { stroke: #fff; stroke-width: 3; }
+  .node.dim { opacity: 0.25; }
+
+  .edge { stroke: #586069; stroke-width: 1.2; fill: none; transition: opacity 0.15s; }
+  .edge.dim { opacity: 0.15; }
+  .edge.highlight { stroke: var(--accent); stroke-width: 2; }
+  .edge.wasGeneratedBy { stroke: #6cc24a; }
+  .edge.used { stroke: #586069; }
+  .edge.wasInfluencedBy { stroke: var(--alternative); stroke-dasharray: 3 3; }
+  .edge.wasInformedBy { stroke: #d29922; stroke-dasharray: 5 3; }
+  .edge.wasAssociatedWith, .edge.wasAttributedTo, .edge.actedOnBehalfOf { stroke: #586069; opacity: 0.6; }
+
+  #placeholder { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--text-dim); pointer-events: none; }
+  #placeholder.hidden { display: none; }
+  #placeholder .big { font-size: 28px; margin-bottom: 8px; }
+  #placeholder .small { font-size: 12px; }
+
+  /* Substrate-handoff visual cue (brief flash) */
+  @keyframes substrate-pulse { 0% { box-shadow: inset 0 0 0 2px var(--accent); } 100% { box-shadow: none; } }
+  #stage.handoff { animation: substrate-pulse 600ms ease-out; }
+
+  .help { color: var(--text-dim); font-size: 11px; line-height: 1.5; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
+  .help kbd { display: inline-block; padding: 1px 5px; background: var(--panel-2); border: 1px solid var(--border); border-radius: 3px; font-family: ui-monospace, monospace; font-size: 10px; color: var(--text); }
+
+  /* CAP-041: Round-Trip Viewer embed button + iframe container */
+  .viewer-btn-row { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); }
+  .viewer-open-btn { width: 100%; padding: 7px 10px; background: var(--panel-2); border: 1px solid var(--border); border-radius: 4px; color: var(--accent); cursor: pointer; font-size: 11px; text-align: left; transition: background 0.1s, border-color 0.1s; }
+  .viewer-open-btn:hover { background: var(--accent); color: white; border-color: var(--accent); }
+  #viewer-embed-frame { display: block; }
+
+  /* GPU layout badge + Force CPU toggle */
+  .gpu-badge { padding: 4px 10px; border-radius: 12px; background: var(--panel-2); border: 1px solid var(--border); font-size: 11px; color: var(--text-dim); font-family: ui-monospace, monospace; }
+  .force-cpu-row { display: flex; align-items: center; gap: 8px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
+  .force-cpu-row label { font-size: 11px; color: var(--text); cursor: pointer; display: flex; align-items: center; gap: 6px; }
+  .force-cpu-row input[type=checkbox] { cursor: pointer; accent-color: var(--accent); }
+  .force-cpu-hint { font-size: 10px; color: var(--text-dim); margin-top: 4px; }
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <span class="title">SCRIBE Dashboard <span style="color: var(--text-dim);">— LOD demo (T4)</span></span>
+    <span class="substrate-badge" id="substrate-badge">substrate: —</span>
+    <span class="gpu-badge" id="gpu-layout-badge" title="Layout engine mode (GPU = WebGPU ForceAtlas2; CPU = JS fallback)">layout: —</span>
+    <span class="stat" id="stat-nodes">0 nodes</span>
+    <span class="stat" id="stat-edges">0 edges</span>
+    <span class="stat" id="stat-zoom">zoom 1.00x</span>
+    <div class="spacer"></div>
+    <button id="btn-fit" title="Fit graph to viewport (f)">Fit</button>
+    <button id="btn-svg" title="Force SVG rung">SVG</button>
+    <button id="btn-canvas" title="Force Canvas rung">Canvas</button>
+    <button id="btn-auto" class="active" title="Auto substrate selection">Auto</button>
+  </header>
+
+  <aside class="left">
+    <h3>Search</h3>
+    <input id="search" type="text" placeholder="Fuzzy search nodes (try: IC-613)" autocomplete="off" />
+    <div class="search-results" id="search-results"></div>
+
+    <h4>Corpus</h4>
+    <div class="corpus-buttons">
+      <button id="corpus-sample" class="active">Sample provenance (32 nodes)</button>
+      <button id="corpus-codebase-slice">Codebase slice (1K files) — stretch</button>
+    </div>
+
+    <h4>Filter by sub_type</h4>
+    <div class="legend" id="legend"></div>
+
+    <div class="help">
+      <strong>Shortcuts</strong><br />
+      <kbd>/</kbd> focus search &nbsp; <kbd>f</kbd> fit<br />
+      <kbd>e</kbd> expand downstream &nbsp; <kbd>E</kbd> upstream<br />
+      <kbd>Esc</kbd> clear selection<br />
+      <kbd>scroll</kbd> zoom &nbsp; <kbd>drag</kbd> pan
+    </div>
+
+    <div class="force-cpu-row">
+      <label>
+        <input type="checkbox" id="force-cpu-toggle" />
+        Force CPU layout
+      </label>
+    </div>
+    <div class="force-cpu-hint" id="force-cpu-hint">Reload corpus to apply</div>
+  </aside>
+
+  <main>
+    <div id="stage">
+      <svg id="svg-layer" xmlns="http://www.w3.org/2000/svg"></svg>
+      <canvas id="canvas-layer"></canvas>
+      <div id="placeholder">
+        <div class="big">load a corpus to begin</div>
+        <div class="small">defaults to the 32-node T5 sample-provenance graph</div>
+      </div>
+    </div>
+  </main>
+
+  <aside class="right inspector">
+    <h3>Inspector</h3>
+    <div id="inspector-content">
+      <div class="empty">click a node to inspect</div>
+    </div>
+  </aside>
+</div>
+
+<script type="module" src="./app.js"></script>
+</body>
+</html>

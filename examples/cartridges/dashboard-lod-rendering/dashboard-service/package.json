@@ -1,0 +1,21 @@
+{
+  "name": "@scribe/dashboard-service",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "Local HTTP server for the SCRIBE dashboard with optional live PG backing.",
+  "main": "serve.mjs",
+  "scripts": {
+    "start": "node serve.mjs",
+    "start:live": "SCRIBE_DB_MODE=live node serve.mjs",
+    "start:static": "SCRIBE_DB_MODE=static node serve.mjs",
+    "migrate": "node migrate.mjs",
+    "migrate:dry": "node migrate.mjs --dry-run"
+  },
+  "dependencies": {
+    "pg": "^8.11.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

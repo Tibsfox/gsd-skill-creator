@@ -1,0 +1,82 @@
+{
+  "$schema": "https://schemas.gsd.tools/cartridge/lineage/v1.json",
+  "cartridge": "markup-lineage",
+  "version": "1.0.0",
+  "mission": "scribe",
+  "milestone": "v1.49.621",
+  "track": "T1",
+  "generatedAt": "2026-05-09",
+  "branches": {
+    "procedural-formatter": {
+      "rootDate": "1964",
+      "rootNode": "ctss-runoff",
+      "posture": "source is a script for the formatter; tags are imperative; static analysis undecidable in general",
+      "members": ["ctss-runoff", "script", "script-vs-dcf", "troff", "tex", "metafont", "latex", "context", "katex", "mathjax", "latexml", "typst"]
+    },
+    "generic-markup": {
+      "rootDate": "1967",
+      "rootNode": "tunnicliffe-1967",
+      "posture": "source describes structure; rendering delegated to renderer parameterized by document type and target medium",
+      "members": ["tunnicliffe-1967", "gencode", "gml", "scribe", "sgml", "docbook", "tei", "html", "rfc1866", "html401", "xml", "xhtml", "html5", "mathml", "svg", "xslt", "xpath", "xsd", "relaxng", "mathml4", "markdown", "rst", "asciidoc", "orgmode", "commonmark", "pandoc"]
+    }
+  },
+  "nodes": [
+    {"id": "tunnicliffe-1967", "label": "Tunnicliffe (GCA, 1967)", "year": 1967, "branch": "generic-markup", "kind": "root", "people": ["William W. Tunnicliffe"], "venue": "Canadian Government Printing Office meeting", "contribution": "Separation of content from format thesis"},
+    {"id": "ctss-runoff", "label": "CTSS RUNOFF", "year": 1964, "branch": "procedural-formatter", "kind": "root", "people": ["Jerome H. Saltzer"], "venue": "MIT Project MAC", "contribution": "First procedural text-formatter on a time-sharing system"},
+    {"id": "script", "label": "SCRIPT (CP-67/CMS)", "year": 1968, "branch": "procedural-formatter", "people": ["Stuart Madnick"], "venue": "MIT/IBM Cambridge Scientific Center", "parents": ["ctss-runoff"], "contribution": "Procedural text-formatter; later co-deployed with GML in IBM DCF"},
+    {"id": "script-vs-dcf", "label": "SCRIPT/VS · DCF", "yearRange": "1980s", "branch": "procedural-formatter", "people": [], "venue": "IBM", "parents": ["script", "gml"], "contribution": "IBM Document Composition Facility; GML+SCRIPT co-deployment"},
+    {"id": "troff", "label": "troff / nroff", "year": 1973, "branch": "procedural-formatter", "people": ["Joe Ossanna", "Brian Kernighan"], "venue": "Bell Labs", "parents": ["script"], "contribution": "Unix typesetter family; ancestor of groff and modern Unix manpages"},
+    {"id": "gencode", "label": "GenCode (GCA)", "yearRange": "1970s", "branch": "generic-markup", "people": ["William W. Tunnicliffe", "GCA Composition Committee"], "venue": "Graphic Communications Association", "parents": ["tunnicliffe-1967"], "contribution": "Standardized generic publishing tags; merged into SGML standardization"},
+    {"id": "gml", "label": "GML (Generalized Markup Language)", "year": 1969, "branch": "generic-markup", "people": ["Charles F. Goldfarb", "Edward Mosher", "Raymond Lorie"], "venue": "IBM Cambridge Scientific Center", "parents": ["tunnicliffe-1967"], "contribution": "First implemented generic-markup language; coined 'markup language' (1970)"},
+    {"id": "scribe", "label": "SCRIBE", "year": 1980, "branch": "generic-markup", "people": ["Brian K. Reid"], "venue": "Carnegie Mellon University (PhD)", "parents": [], "contribution": "Parallel re-discovery of generic markup at CMU; doc/database split influenced LaTeX", "awards": ["ACM Grace Murray Hopper Award 1982"]},
+    {"id": "sgml", "label": "SGML (ISO 8879:1986)", "year": 1986, "branch": "generic-markup", "people": ["Charles F. Goldfarb"], "venue": "ISO/IEC JTC 1/SC 18", "parents": ["gml", "gencode"], "contribution": "ISO standard generalized markup; DTD; SGML Declaration; entities; marked sections"},
+    {"id": "docbook", "label": "DocBook", "year": 1991, "branch": "generic-markup", "people": ["HaL Computer Systems", "later OASIS"], "venue": "OASIS", "parents": ["sgml"], "contribution": "Technical-documentation DTD; later XML"},
+    {"id": "tei", "label": "TEI (Text Encoding Initiative)", "year": 1987, "branch": "generic-markup", "people": ["C. Michael Sperberg-McQueen", "Lou Burnard"], "venue": "TEI Consortium", "parents": ["sgml"], "contribution": "Humanities-text encoding standard"},
+    {"id": "tex", "label": "TeX", "yearRange": "1977-1982", "branch": "procedural-formatter", "people": ["Donald E. Knuth"], "venue": "Stanford University", "contribution": "Procedural typesetting system optimized for mathematics; Turing-complete macro language; boxes-and-glue model"},
+    {"id": "metafont", "label": "METAFONT", "year": 1979, "branch": "procedural-formatter", "people": ["Donald E. Knuth"], "venue": "Stanford University", "siblings": ["tex"], "contribution": "Font-design language paired with TeX; Computer Modern font family"},
+    {"id": "latex", "label": "LaTeX", "year": 1985, "branch": "procedural-formatter", "people": ["Leslie Lamport"], "venue": "SRI International", "parents": ["tex"], "designInfluences": ["scribe"], "contribution": "Generic-markup macro layer over TeX; documentclass model"},
+    {"id": "context", "label": "ConTeXt", "year": 1991, "branch": "procedural-formatter", "people": ["Hans Hagen"], "venue": "Pragma ADE", "parents": ["tex"], "contribution": "Alternative TeX macro package focused on flexible page layout"},
+    {"id": "html", "label": "HTML", "yearRange": "1990-1995", "branch": "generic-markup", "people": ["Tim Berners-Lee", "Dan Connolly"], "venue": "CERN, then W3C", "parents": ["sgml"], "contribution": "SGML application for hypertext on the Web"},
+    {"id": "rfc1866", "label": "HTML 2.0 (RFC 1866)", "year": 1995, "branch": "generic-markup", "parents": ["html"], "contribution": "First IETF-standardized HTML; first formal SGML DTD for HTML"},
+    {"id": "html401", "label": "HTML 4.01", "year": 1999, "branch": "generic-markup", "parents": ["rfc1866"], "venue": "W3C", "contribution": "Three DTDs (Strict, Transitional, Frameset); CSS dependency; deprecation of presentational tags"},
+    {"id": "xml", "label": "XML 1.0", "year": 1998, "branch": "generic-markup", "people": ["Jon Bosak", "Tim Bray", "C. Michael Sperberg-McQueen", "Jean Paoli", "James Clark"], "venue": "W3C", "parents": ["sgml"], "contribution": "Deliberate SGML simplification; one-page-parser discipline"},
+    {"id": "xhtml", "label": "XHTML 1.0/1.1", "yearRange": "2000-2001", "branch": "generic-markup", "people": ["Steve Pemberton"], "venue": "W3C", "parents": ["html401", "xml"], "status": "superseded", "contribution": "HTML 4 reformulated as XML 1.0 application"},
+    {"id": "xhtml2", "label": "XHTML 2.0", "yearRange": "2002-2009", "branch": "generic-markup", "venue": "W3C", "parents": ["xhtml"], "status": "failed", "contribution": "From-scratch redesign; charter expired without Recommendation"},
+    {"id": "html5", "label": "HTML5 (Living Standard)", "yearStart": 2004, "yearRecommendation": 2014, "branch": "generic-markup", "people": ["Ian Hickson", "Anne van Kesteren"], "venue": "WHATWG (with W3C)", "parents": ["html401", "xhtml"], "contribution": "Specifies the lenient parser normatively; living standard"},
+    {"id": "mathml", "label": "MathML 1.0", "year": 1998, "branch": "generic-markup", "venue": "W3C Math Working Group", "parents": ["xml"], "contribution": "First XML application recommended by W3C; presentation/content/parallel split"},
+    {"id": "mathml4", "label": "MathML 4 / Core", "year": 2024, "branch": "generic-markup", "people": ["Frédéric Wang", "David Carlisle", "Patrick Ion"], "venue": "W3C", "parents": ["mathml"], "contribution": "Restricted to browser-implementable subset; aligned with HTML Living Standard"},
+    {"id": "svg", "label": "SVG 1.0", "year": 2001, "branch": "generic-markup", "venue": "W3C", "parents": ["xml"], "designInfluences": ["pgml", "vml"], "contribution": "Web-native vector graphics; treated in depth in T2"},
+    {"id": "xslt", "label": "XSLT 1.0 / XPath 1.0", "year": 1999, "branch": "generic-markup", "people": ["James Clark", "Steve DeRose"], "venue": "W3C", "parents": ["xml"], "designInfluences": ["dsssl"], "contribution": "Declarative XML transformation; XPath as query layer"},
+    {"id": "xsd", "label": "XSD · Relax NG", "yearRange": "2001-2003", "branch": "generic-markup", "people": ["James Clark"], "venue": "W3C / OASIS / ISO", "parents": ["xml"], "contribution": "Schema languages for XML beyond DTD"},
+    {"id": "markdown", "label": "Markdown", "year": 2004, "branch": "generic-markup", "people": ["John Gruber", "Aaron Swartz"], "venue": "Daring Fireball", "transcompilesTo": "html", "contribution": "Lightweight authoring surface that transcompiles to HTML"},
+    {"id": "commonmark", "label": "CommonMark", "year": 2014, "branch": "generic-markup", "people": ["John MacFarlane", "Jeff Atwood"], "parents": ["markdown"], "contribution": "Unambiguous Markdown specification; reference implementations in C/JS/Haskell"},
+    {"id": "rst", "label": "reStructuredText", "year": 2002, "branch": "generic-markup", "people": ["David Goodger"], "venue": "Docutils / Python community", "transcompilesTo": "html|latex|odt", "contribution": "Lightweight markup with directive/role extension mechanism"},
+    {"id": "asciidoc", "label": "AsciiDoc", "year": 2002, "branch": "generic-markup", "people": ["Stuart Rackham"], "transcompilesTo": "docbook", "contribution": "Lightweight authoring surface for DocBook"},
+    {"id": "orgmode", "label": "Org-mode", "year": 2003, "branch": "generic-markup", "people": ["Carsten Dominik", "Eric Schulte (Babel)"], "venue": "GNU Emacs", "contribution": "Outline + executable-document substrate; ancestor of Jupyter pattern"},
+    {"id": "pandoc", "label": "Pandoc", "year": 2006, "branch": "bridge", "people": ["John MacFarlane"], "venue": "UC Berkeley (independent)", "contribution": "Universal AST bridge; ~40 input formats x ~60 output formats; filter system"},
+    {"id": "katex", "label": "KaTeX (Appendix G)", "year": 2014, "branch": "procedural-formatter", "people": ["Emily Eisenberg", "Sophie Alpert"], "venue": "Khan Academy", "parents": ["latex"], "contribution": "Direct in-browser implementation of TeX Appendix G math layout"},
+    {"id": "mathjax", "label": "MathJax", "year": 2009, "branch": "procedural-formatter", "people": ["Davide Cervone"], "venue": "American Institute of Mathematics", "parents": ["latex"], "transcompilesTo": "mathml|html-css|svg", "contribution": "Browser TeX renderer with internal MathML pipeline"},
+    {"id": "latexml", "label": "LaTeXML", "yearStart": 2000, "branch": "procedural-formatter", "people": ["Bruce Miller"], "venue": "NIST", "parents": ["latex"], "transcompilesTo": "mathml|html|xml", "contribution": "Full-LaTeX-to-XML; substrate of arXiv HTML rendering"},
+    {"id": "typst", "label": "Typst", "year": 2023, "branch": "procedural-formatter", "people": ["Laurenz Mädje", "Martin Haug"], "venue": "TU Berlin (then Typst GmbH)", "designInfluences": ["latex", "markdown"], "contribution": "Modern procedural-formatter with analyzable macro layer; Rust; instant preview"},
+    {"id": "pgml", "label": "PGML", "year": 1998, "branch": "generic-markup", "people": ["Adobe", "Sun Microsystems"], "status": "failed", "contribution": "W3C Note; absorbed into SVG"},
+    {"id": "vml", "label": "VML", "year": 1998, "branch": "generic-markup", "people": ["Microsoft", "Macromedia"], "status": "failed", "contribution": "W3C Note; absorbed into SVG; survived in IE-specific code paths"},
+    {"id": "xslfo", "label": "XSL-FO", "year": 2001, "branch": "generic-markup", "venue": "W3C", "parents": ["xml"], "status": "deprecated", "contribution": "XML-to-print formatting-objects; FO Working Group closed 2013"},
+    {"id": "soap", "label": "SOAP / WSDL", "yearRange": "2003-2007", "branch": "generic-markup", "venue": "W3C", "parents": ["xml"], "status": "superseded", "contribution": "XML messaging; superseded by JSON+REST/gRPC"},
+    {"id": "dsssl", "label": "DSSSL (ISO/IEC 10179:1996)", "year": 1996, "branch": "generic-markup", "people": ["James Clark"], "venue": "ISO/IEC", "parents": ["sgml"], "status": "superseded", "contribution": "Scheme-based SGML stylesheets; superseded by XSLT"}
+  ],
+  "crossBranchEdges": [
+    {"from": "scribe", "to": "latex", "relation": "design-influence", "year": 1985, "evidence": "Lamport drew on SCRIBE while at SRI; documented in doc 02 §5"},
+    {"from": "tex", "to": "mathml", "relation": "renders-into", "year": 1998, "evidence": "TeX-source is the dominant authoring substrate; KaTeX, MathJax, Temml, LaTeXML render TeX into MathML; doc 05 §6"},
+    {"from": "markdown", "to": "html5", "relation": "transcompiles-to", "year": 2004, "evidence": "Markdown's design target is HTML output"},
+    {"from": "pandoc", "to": "latex", "relation": "reads-and-writes", "year": 2006, "evidence": "Pandoc reads/writes LaTeX as one of ~40 formats"},
+    {"from": "pandoc", "to": "html5", "relation": "reads-and-writes", "year": 2006, "evidence": "Pandoc reads/writes HTML as one of ~40 formats"},
+    {"from": "asciidoc", "to": "docbook", "relation": "transcompiles-to", "year": 2002, "evidence": "AsciiDoc internal representation is DocBook XML"}
+  ],
+  "invariants": [
+    {"id": "I1", "name": "Renderer-independent tag identity", "summary": "Every successful descendant encodes structure in renderer-independent named tokens"},
+    {"id": "I2", "name": "Permissive authoring surface", "summary": "Successful descendants ship author surfaces more permissive than their data models"},
+    {"id": "I3", "name": "Tree data model", "summary": "Every member exposes the same rooted, ordered, attributed tree data model"},
+    {"id": "I4", "name": "Schemas migrate to tooling", "summary": "Schemas remain socially required but migrate from spec to toolchain over time"},
+    {"id": "I5", "name": "Parser before adoption", "summary": "Every successful member ships a usable parser before achieving adoption"}
+  ]
+}

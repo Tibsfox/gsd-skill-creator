@@ -1,0 +1,17 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/prov.jsonld",
+    { "scribe": "https://gsd-skill-creator.dev/schema/scribe#",
+      "schema": "http://schema.org/" }
+  ],
+  "@id": "scribe:file/{{path}}",
+  "@type": ["prov:Entity", "schema:DigitalDocument"],
+  "schema:name": "{{filename}}",
+  "schema:filePath": "{{path}}",
+  "schema:contentSize": "{{bytes}}",
+  "scribe:contentSha256": "{{content_sha}}",
+  "prov:wasGeneratedBy": { "@id": "scribe:commit/{{generating_commit_sha}}" },
+  "prov:wasRevisionOf": {
+    "@id": "scribe:file-version/{{path}}@{{prior_commit_sha}}"
+  }
+}

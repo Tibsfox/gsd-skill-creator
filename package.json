@@ -1,6 +1,6 @@
 {
   "name": "gsd-skill-creator",
-  "version": "1.49.620",
+  "version": "1.49.621",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
@@ -44,6 +44,8 @@
     "depth-audit:current": "node tools/depth-audit.mjs --current",
     "ftp-sync": "node tools/ftp-sync.mjs",
     "ftp-sync:dry-run": "node tools/ftp-sync.mjs --dry-run",
+    "ftp-sync:scribe": "node tools/ftp-sync.mjs scribe",
+    "ftp-sync:scribe:dry-run": "node tools/ftp-sync.mjs scribe --dry-run",
     "build:www-bundles": "bash tools/build-www-bundles.sh",
     "render:claude-md": "node tools/render-claude-md.mjs",
     "render:claude-md:check": "node tools/render-claude-md.mjs --check",
@@ -63,6 +65,7 @@
     "setup:claude:check": "skill-creator gsd-init --dry-run",
     "desktop:dev": "cd src-tauri && npx tauri dev",
     "desktop:build": "cd src-tauri && PKG_CONFIG_PATH=\"$(pwd)/.pkgconfig:${PKG_CONFIG_PATH:-}\" npx tauri build",
+    "tauri:scribe": "cd src-tauri && npx tauri dev --no-watch",
     "desktop:test": "cd desktop && npx vitest run",
     "intelligence:build": "cd desktop && npx vite build && mkdir -p ../dashboard/intelligence ../dashboard/assets && cp dist/dashboard/intelligence/planning.bundle.js dist/dashboard/intelligence/live-work.bundle.js dist/dashboard/intelligence/atlas.bundle.js ../dashboard/intelligence/ && cp -r dist/assets/. ../dashboard/assets/",
     "intelligence:serve": "npm run intelligence:build && node scripts/serve-dashboard.mjs",

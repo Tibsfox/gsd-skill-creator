@@ -1,0 +1,120 @@
+{
+  "$schema": "../../cartridge-schema.json",
+  "id": "dashboard-lod-rendering",
+  "version": "0.1.0",
+  "kind": "cartridge",
+  "track": "T4",
+  "mission": "scribe",
+  "milestone": "v1.49.621",
+  "wave": 2,
+  "title": "Dashboard / LOD / Rendering",
+  "description": "SVG → Canvas → WebGL → WebGPU → Vulkan substrate ladder for visualizing the gsd-skill-creator codebase + planning docs as an interactive, navigable artifact. Ships a working LOD demo rendering the 32-node T5 sample-provenance graph.",
+  "composes_with": [
+    "svg-substrate",
+    "retrieval-provenance"
+  ],
+  "runtime_dependencies": [
+    "code-svg-hdl-bridge"
+  ],
+  "self_demo": {
+    "scope": "floor",
+    "corpus": "32-node T5 sample-provenance graph + synthesized 1K-file slice (stretch corpus button)",
+    "substrate_handoff": "SVG ↔ Canvas verified live (Auto button + manual SVG/Canvas toggle)",
+    "browser_supported": ["chromium", "firefox", "safari"],
+    "entrypoint": "dashboard/index.html"
+  },
+  "substrate_decisions": [
+    {
+      "id": "DEC-T4-001",
+      "decision": "SVG → Canvas → WebGL → WebGPU → Tauri+wgpu substrate ladder",
+      "thresholds": { "svg_max": 2000, "canvas_max": 20000, "webgl_max": 1000000, "webgpu_max": null },
+      "hysteresis": { "upgrade_frames": 3, "downgrade_frames": 30 },
+      "anchor": "doc 01 §4 + lod-thresholds.md"
+    },
+    {
+      "id": "DEC-T4-002",
+      "decision": "Cross-substrate semantic identity via T5 prov_node.node_id",
+      "anchor": "doc 01 §5 + T5 REPORT §6 substrate-decision 1"
+    },
+    {
+      "id": "DEC-T4-003",
+      "decision": "sub_type as visual-styling discriminator across all renderers",
+      "anchor": "doc 01 §5 + T5 REPORT §6 substrate-decision 3"
+    },
+    {
+      "id": "DEC-T4-004",
+      "decision": "WGSL compute kernels (force-atlas-2.wgsl) compile unchanged for browser WebGPU AND native Vulkan/Metal/DX12 via wgpu",
+      "anchor": "doc 03 §7 + doc 04 §4"
+    },
+    {
+      "id": "DEC-T4-005",
+      "decision": "Lazy-redraw pattern (needsRedraw flag); 3 instanced draws per frame at WebGL rung",
+      "anchor": "doc 02 §6"
+    },
+    {
+      "id": "DEC-T4-006",
+      "decision": "Picking buffer (not spatial-index) for WebGL hit-testing",
+      "anchor": "doc 02 §7.2"
+    },
+    {
+      "id": "DEC-T4-007",
+      "decision": "Selected nodes pinned during force-directed layout iteration",
+      "anchor": "doc 07 §7.2 + doc 08 §13"
+    },
+    {
+      "id": "DEC-T4-008",
+      "decision": "Four query primitives — LOOKUP / NEIGHBOURHOOD / SEARCH / HYBRID-SEARCH — all backed by T5 substrate",
+      "anchor": "doc 08 §3 + T5 REPORT §6 substrate-decisions 7, 8, fuzzy_find_node"
+    }
+  ],
+  "files": {
+    "lod-thresholds.md": "Authoritative substrate-switch threshold reference",
+    "webgl-primitives/instanced-nodes.glsl": "SDF disk node primitive (vertex + fragment)",
+    "webgl-primitives/edge-batch.glsl": "Wide-line edge primitive via per-instance quad extrusion",
+    "webgl-primitives/regl-setup.ts": "regl declarative wrapper showing the bind shape",
+    "webgpu-compute/force-atlas-2.wgsl": "Three FA2 compute kernels (repulsion + attraction + integration)",
+    "dashboard-service/serve.mjs": "Minimal Node HTTP server (static + optional PG proxy)",
+    "dashboard-service/package.json": "Service package (zero required deps; pg optional)",
+    "dashboard/index.html": "Working LOD demo entrypoint",
+    "dashboard/app.js": "Pure-ESM dashboard app (renderer-router, layout, query, inspector)",
+    "dashboard/viewer-embed.js": "CAP-041 T3↔T4 viewer-embed module — openViewerFor/closeViewer/isViewerOpen + sandboxed iframe lifecycle",
+    "dashboard/data/sample-graph.json": "32-node T5 sample-provenance corpus",
+    "deploy/ftp-sync.sh": "Sync to tibsfox.com (mirrors tools/ftp-sync.mjs pattern)"
+  },
+  "tech_stack": {
+    "render": ["SVG", "Canvas 2D", "WebGL 2", "WebGPU", "wgpu (Rust)"],
+    "shader_languages": ["GLSL ES 3.00", "WGSL"],
+    "layout_algorithm": "ForceAtlas2 (Jacomy 2014)",
+    "deps_runtime": []
+  },
+  "references": {
+    "papers": [
+      "Jacomy, Venturini, Heymann, Bastian (2014). ForceAtlas2, PLOS ONE.",
+      "Brendel et al. (2024). WebGPU for Graphs, IEEE VIS.",
+      "Sugiyama, Tagawa, Toda (1981). Methods for Visual Understanding of Hierarchical System Structures, IEEE SMC.",
+      "Hu (2005). Efficient and high quality force-directed graph drawing, Mathematica Journal.",
+      "Buja, McDonald, Michalak, Stuetzle (1991). Interactive Data Visualization Using Focusing and Linking, IEEE Visualization.",
+      "Green (2007). Improved Alpha-Tested Magnification for Vector Textures, SIGGRAPH.",
+      "Shneiderman (1991). Tree-maps: A space-filling approach, IEEE Visualization.",
+      "Purchase (2002). Metrics for Graph Drawing Aesthetics, J. Visual Languages & Computing."
+    ],
+    "specs": [
+      "WebGL 2.0 — registry.khronos.org/webgl/specs/latest/2.0/",
+      "WebGPU — w3.org/TR/webgpu/",
+      "WGSL — w3.org/TR/WGSL/",
+      "Vulkan — registry.khronos.org/vulkan/",
+      "PROV-O — w3.org/TR/prov-o/"
+    ],
+    "tools": [
+      "regl — regl.party",
+      "PixiJS — pixijs.com",
+      "Sigma.js — sigmajs.org",
+      "wgpu — wgpu.rs",
+      "Tauri — v2.tauri.app",
+      "Sourcetrail — github.com/CoatiSoftware/Sourcetrail",
+      "graphology — graphology.github.io",
+      "D3 — d3js.org",
+      "Obsidian — obsidian.md"
+    ]
+  }
+}

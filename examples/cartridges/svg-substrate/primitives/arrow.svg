@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Arrow marker definition. Copy the <marker> into your <defs>; reference via marker-end="url(#arrow)". -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10" width="10" height="10" role="img" aria-labelledby="t d">
+  <title id="t">Arrow marker</title>
+  <desc id="d">Filled triangular arrowhead, intended for use as an SVG marker via marker-end attribute on path or line elements.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 Z" fill="currentColor"/>
+    </marker>
+  </defs>
+  <path d="M0,5 L9,5" stroke="currentColor" stroke-width="1" marker-end="url(#arrow)"/>
+</svg>

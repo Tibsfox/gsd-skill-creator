@@ -1,0 +1,47 @@
+{
+  "name": "retrieval-provenance",
+  "version": "1.0.0",
+  "format": "2025-10-02",
+  "kind": "cartridge",
+  "track": "T5",
+  "mission": "scribe",
+  "milestone": "v1.49.621",
+  "description": "PROV-O-derived provenance graph + pgvector + fuzzy search + session extractor for code+docs corpora.",
+  "schema": {
+    "primary": "migrations/001-init.postgres.sql",
+    "sqlite":  "migrations/001-init.sqlite.sql",
+    "vector":  "migrations/002-pgvector.postgres.sql"
+  },
+  "extractor": {
+    "session": "extractor/session-to-prov.mjs",
+    "transcript": "extractor/transcript-patterns.mjs"
+  },
+  "templates": {
+    "commit":   "prov-o-templates/commit.jsonld",
+    "session":  "prov-o-templates/session.jsonld",
+    "decision": "prov-o-templates/decision.jsonld",
+    "file":     "prov-o-templates/file.jsonld"
+  },
+  "substrate_decisions_for_downstream": [
+    "PROV-O ontological backbone (closed class + property sets, CHECK-enforced)",
+    "Edge-list normal form (two flat tables: prov_node, prov_edge)",
+    "JSONB payload + sub_type discriminator",
+    "Content-addressed edge_id = sha256(src||rel||dst)[:16]",
+    "Recursive-CTE traversal helpers (upstream, downstream)",
+    "Hybrid search via RRF (k=60) over pgvector + tsvector",
+    "IC-NNN-N.N task identifier convention as first-class node",
+    "Convenience views (commits_view, sessions_view, decisions_view)"
+  ],
+  "interop": {
+    "prov-o": "https://www.w3.org/TR/prov-o/",
+    "openlineage": "https://openlineage.io/spec/",
+    "codemeta": "https://codemeta.github.io/"
+  },
+  "depends_on": {
+    "postgres": ">=15",
+    "pgvector": ">=0.5.0 (optional)",
+    "pg_trgm":  "(included with Postgres)",
+    "fuzzystrmatch": "(included with Postgres)",
+    "node": ">=18 (extractor)"
+  }
+}

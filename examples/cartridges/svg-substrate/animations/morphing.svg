@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" width="400" height="200" role="img" aria-labelledby="t d">
+  <title id="t">SVG path morphing pattern</title>
+  <desc id="d">A blue path morphs between three shapes that share the same path-command structure (M, then four C cubic Beziers, then Z). The animation cycles indefinitely. Note that SMIL path morphing only interpolates correctly when the values list shares the command sequence; for structurally different shapes the flubber library or WAAPI is required.</desc>
+  <defs>
+    <style>
+      .lbl { font-family: Helvetica, Arial, sans-serif; font-size: 12px; fill: #333; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <text class="lbl" x="200" y="30" font-weight="bold">SMIL path morphing — same command shape required</text>
+
+  <path d="M200 60 C 260 60, 300 100, 280 160 C 240 200, 160 200, 120 160 C 100 100, 140 60, 200 60 Z"
+        fill="#1d4ed8" stroke="#1e40af" stroke-width="1.2">
+    <animate attributeName="d"
+             values="M200 60 C 260 60, 300 100, 280 160 C 240 200, 160 200, 120 160 C 100 100, 140 60, 200 60 Z;
+                     M200 80 C 280 80, 320 120, 300 150 C 250 200, 150 200, 100 150 C 80 120, 120 80, 200 80 Z;
+                     M200 70 C 250 70, 320 110, 290 170 C 230 200, 170 200, 110 170 C 80 110, 150 70, 200 70 Z;
+                     M200 60 C 260 60, 300 100, 280 160 C 240 200, 160 200, 120 160 C 100 100, 140 60, 200 60 Z"
+             dur="6s" repeatCount="indefinite" calcMode="spline"
+             keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1"/>
+  </path>
+
+  <text class="lbl" x="200" y="190" font-style="italic">three keyframes, each with the same M/C/C/C/Z structure</text>
+</svg>

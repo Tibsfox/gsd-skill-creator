@@ -32,15 +32,40 @@ import { readFileSync } from 'node:fs';
 import { dirname, isAbsolute, resolve } from 'node:path';
 import { parse as parseYaml } from 'yaml';
 import { normalizeEvaluationChipset } from './normalizers/evaluation.js';
-import { CartridgeSchema, type Cartridge } from './types.js';
+import {
+  CartridgeSchema,
+  ResearchOutputCartridgeSchema,
+  type Cartridge,
+  type ResearchOutputCartridge,
+} from './types.js';
 
 export interface LoadCartridgeOptions {
   /** Maximum depth of nested src: chains. Defaults to 16. */
   maxDepth?: number;
 }
 
+/** Union of all top-level cartridge shapes the loader can return. */
+export type AnyCartridge = Cartridge | ResearchOutputCartridge;
+
+/**
+ * Return true when the document root declares `kind: research-output`.
+ *
+ * Research-output cartridges bypass the standard `chipsets.length >= 1`
+ * requirement and are validated against `ResearchOutputCartridgeSchema` instead
+ * of `CartridgeSchema`. The detection happens before any schema parse so that
+ * a missing / invalid `chipsets` field does not produce a confusing Zod error.
+ */
+function isResearchOutputDoc(doc: Record<string, unknown>): boolean {
+  return doc['kind'] === 'research-output';
+}
+
 /**
  * Load and parse a cartridge.yaml file into a validated Cartridge object.
+ *
+ * This function handles only standard executable-chipset cartridges. For
+ * research-output cartridges (kind: research-output), use `loadAnyCartridge()`
+ * which returns the `AnyCartridge` union. Calling this function on a
+ * research-output cartridge.yaml will throw with a descriptive error.
  *
  * @param cartridgePath Absolute or cwd-relative path to a cartridge.yaml file.
  */
@@ -62,9 +87,66 @@ export function loadCartridge(
     );
   }
 
+  const doc = rawDoc as Record<string, unknown>;
+
+  if (isResearchOutputDoc(doc)) {
+    throw new Error(
+      `loader: cartridge at ${absolutePath} is a research-output cartridge (kind: research-output). ` +
+      `Use loadAnyCartridge() to load both standard and research-output cartridges.`,
+    );
+  }
+
   const baseDir = dirname(absolutePath);
   const resolved = resolveCartridgeEntries(
-    rawDoc as Record<string, unknown>,
+    doc,
+    baseDir,
+    new Set(),
+    maxDepth,
+  );
+
+  return CartridgeSchema.parse(resolved);
+}
+
+/**
+ * Load any cartridge.yaml — standard or research-output.
+ *
+ * Returns `Cartridge` for standard executable-chipset cartridges (no top-level
+ * `kind:` field, or `kind:` is a chipset kind). Returns `ResearchOutputCartridge`
+ * for cartridges that declare `kind: research-output` at the document root.
+ *
+ * Use `isResearchOutputCartridge()` from `./types.js` to narrow the result.
+ *
+ * @param cartridgePath Absolute or cwd-relative path to a cartridge.yaml file.
+ */
+export function loadAnyCartridge(
+  cartridgePath: string,
+  options: LoadCartridgeOptions = {},
+): AnyCartridge {
+  const maxDepth = options.maxDepth ?? 16;
+  const absolutePath = isAbsolute(cartridgePath)
+    ? cartridgePath
+    : resolve(process.cwd(), cartridgePath);
+
+  const rawText = readFileSync(absolutePath, 'utf8');
+  const rawDoc = parseYaml(rawText);
+
+  if (rawDoc === null || typeof rawDoc !== 'object' || Array.isArray(rawDoc)) {
+    throw new Error(
+      `loader: cartridge at ${absolutePath} must be a YAML mapping (got ${describeType(rawDoc)})`,
+    );
+  }
+
+  const doc = rawDoc as Record<string, unknown>;
+
+  // Research-output cartridges do not have a chipsets array — route them to the
+  // alternate schema before any src: resolution (they have no src: references).
+  if (isResearchOutputDoc(doc)) {
+    return ResearchOutputCartridgeSchema.parse(doc);
+  }
+
+  const baseDir = dirname(absolutePath);
+  const resolved = resolveCartridgeEntries(
+    doc,
     baseDir,
     new Set(),
     maxDepth,
@@ -91,8 +173,9 @@ export function parseCartridge(
       `loader: cartridge document must be a mapping (got ${describeType(doc)})`,
     );
   }
+  const docObj = doc as Record<string, unknown>;
   const resolved = resolveCartridgeEntries(
-    doc as Record<string, unknown>,
+    docObj,
     baseDir,
     new Set(),
     maxDepth,

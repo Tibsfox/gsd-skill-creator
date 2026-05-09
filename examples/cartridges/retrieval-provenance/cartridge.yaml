@@ -1,0 +1,83 @@
+id: retrieval-provenance
+kind: research-output
+name: Retrieval Provenance
+version: 1.0.0
+author: scribe-mission
+description: >-
+  PROV-O-derived provenance graph, pgvector semantic search, and fuzzy
+  full-text retrieval for code+docs corpora. Ships Postgres and SQLite schema
+  migrations, PROV-O JSONLD templates (commit, session, decision, file), a
+  session-to-provenance extractor, fuzzy search SQL utilities, pgvector and
+  Chroma setup guides, and convenience views. The edge-list normal form uses
+  two flat tables (prov_node, prov_edge); content-addressed edge IDs are
+  sha256(src||rel||dst)[:16]; hybrid search uses RRF (k=60) over pgvector +
+  tsvector. Provides the T4 dashboard's query substrate.
+trust: user
+provenance:
+  origin: research-mission
+  mission: scribe
+  milestone: v1.49.621
+  track: T5
+  wave: 1
+  createdAt: 2026-05-09
+  researchGrounding:
+    - .planning/missions/v1-49-621-scribe/FLEET-PLAN.md
+    - .planning/missions/v1-49-621-scribe/briefings/T5-RETRIEVAL-PROVENANCE-LEAD.md
+artifacts:
+  - path: ./manifest.json
+    kind: data
+    purpose: authoritative cartridge manifest (CartridgeManifest schema)
+  - path: ./README.md
+    kind: doc
+    purpose: cartridge orientation and schema overview
+  - path: ./migrations/001-init.postgres.sql
+    kind: code-sql
+    purpose: primary Postgres schema (prov_node, prov_edge, helpers, views)
+  - path: ./migrations/001-init.sqlite.sql
+    kind: code-sql
+    purpose: SQLite schema (portable single-file development)
+  - path: ./migrations/002-pgvector.postgres.sql
+    kind: code-sql
+    purpose: pgvector extension migration for semantic search
+  - path: ./extractor/session-to-prov.mjs
+    kind: code
+    purpose: session transcript to PROV-O graph extractor
+  - path: ./extractor/transcript-patterns.mjs
+    kind: code
+    purpose: pattern library for session transcript parsing
+  - path: ./prov-o-templates/commit.jsonld
+    kind: data
+    purpose: PROV-O template for git commit provenance nodes
+  - path: ./prov-o-templates/session.jsonld
+    kind: data
+    purpose: PROV-O template for Claude session provenance nodes
+  - path: ./prov-o-templates/decision.jsonld
+    kind: data
+    purpose: PROV-O template for architectural decision provenance nodes
+  - path: ./prov-o-templates/file.jsonld
+    kind: data
+    purpose: PROV-O template for file provenance nodes
+  - path: ./fuzzy-search.sql
+    kind: code-sql
+    purpose: pg_trgm + fuzzystrmatch fuzzy-search helper queries
+  - path: ./pgvector-setup.md
+    kind: doc
+    purpose: pgvector installation and configuration guide
+  - path: ./chroma-setup.md
+    kind: doc
+    purpose: Chroma vector store alternative setup guide
+metadata:
+  staging: research-output
+  schema:
+    primary: migrations/001-init.postgres.sql
+    sqlite: migrations/001-init.sqlite.sql
+    vector: migrations/002-pgvector.postgres.sql
+  interop:
+    prov-o: https://www.w3.org/TR/prov-o/
+    openlineage: https://openlineage.io/spec/
+    codemeta: https://codemeta.github.io/
+  selfDemoBar: passed
+  selfDemoVerification: |-
+    SQL migrations apply cleanly on Postgres 15 + SQLite 3.x;
+    session extractor parses sample transcript; JSONLD templates validate
+    against PROV-O ontology.

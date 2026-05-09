@@ -1,0 +1,31 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/prov.jsonld",
+    { "scribe": "https://gsd-skill-creator.dev/schema/scribe#" }
+  ],
+  "@id": "scribe:session/{{session_id}}",
+  "@type": "prov:Activity",
+  "prov:label": "{{mission}}",
+  "prov:startedAtTime": "{{started_at_iso8601}}",
+  "prov:endedAtTime": "{{ended_at_iso8601}}",
+  "prov:wasAssociatedWith": [
+    { "@id": "scribe:agent/{{operator_slug}}" },
+    { "@id": "scribe:agent/claude-{{model_version}}" }
+  ],
+  "prov:used": [
+    {{#each input_files}}
+    { "@id": "scribe:file/{{this}}" }{{#unless @last}},{{/unless}}
+    {{/each}}
+  ],
+  "prov:generated": [
+    {{#each generated_commits}}
+    { "@id": "scribe:commit/{{this}}" }{{#unless @last}},{{/unless}}
+    {{/each}}
+  ],
+  "scribe:eventCount": {{event_count}},
+  "scribe:tokenSpend": {
+    "input": {{tokens_in}},
+    "output": {{tokens_out}},
+    "total": {{tokens_total}}
+  }
+}

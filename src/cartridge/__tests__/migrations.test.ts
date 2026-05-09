@@ -10,9 +10,10 @@ import { readdirSync, existsSync, statSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
-import { loadCartridge } from '../loader.js';
+import { loadAnyCartridge, loadCartridge } from '../loader.js';
 import { collectMetrics } from '../metrics.js';
-import { validateCartridge } from '../validator.js';
+import { isResearchOutputCartridge } from '../types.js';
+import { validateCartridge, validateResearchOutputCartridge } from '../validator.js';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(HERE, '..', '..', '..');
@@ -96,15 +97,22 @@ describe('W2B.2 bulk department migrations (MI-05)', () => {
 
   for (const cart of all) {
     it(`${cart}: loads under the unified loader`, () => {
-      const cartridge = loadCartridge(resolve(CARTRIDGES, cart, 'cartridge.yaml'));
+      const cartridge = loadAnyCartridge(resolve(CARTRIDGES, cart, 'cartridge.yaml'));
       expect(cartridge.id).toBe(cart);
-      expect(cartridge.chipsets.length).toBeGreaterThanOrEqual(1);
+      if (isResearchOutputCartridge(cartridge)) {
+        // Research-output cartridges have artifacts instead of chipsets.
+        expect(cartridge.artifacts.length).toBeGreaterThanOrEqual(1);
+      } else {
+        expect(cartridge.chipsets.length).toBeGreaterThanOrEqual(1);
+      }
     });
 
     if (!KNOWN_VALIDATION_DEBT.has(cart)) {
       it(`${cart}: passes cross-chipset validation`, () => {
-        const cartridge = loadCartridge(resolve(CARTRIDGES, cart, 'cartridge.yaml'));
-        const result = validateCartridge(cartridge);
+        const cartridge = loadAnyCartridge(resolve(CARTRIDGES, cart, 'cartridge.yaml'));
+        const result = isResearchOutputCartridge(cartridge)
+          ? validateResearchOutputCartridge(cartridge)
+          : validateCartridge(cartridge);
         if (!result.valid) {
           const summary = result.errors
             .map((e) => `  ${e.path}: ${e.message}`)

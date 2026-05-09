@@ -1,7 +1,7 @@
 {
   "$schema": "./gen/schemas/desktop-schema.json",
   "productName": "GSD-OS",
-  "version": "1.49.620",
+  "version": "1.49.621",
   "identifier": "com.gsd.os",
   "build": {
     "beforeDevCommand": "cd desktop && npm run dev",
@@ -34,6 +34,9 @@
       "icons/128x128@2x.png",
       "icons/icon.icns",
       "icons/icon.ico"
-    ]
+    ],
+    "resources": {
+      "../examples/cartridges/dashboard-lod-rendering/dashboard": "scribe-dashboard"
+    }
   }
 }

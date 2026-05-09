@@ -1,0 +1,60 @@
+id: code-svg-hdl-bridge
+kind: research-output
+name: Code-SVG-HDL Bridge
+version: 1.0.0
+author: scribe-mission
+description: >-
+  SVG as a round-trippable intermediate representation between source code and
+  HDL. Ships an AST-to-SVG pipeline, a netlist-to-SVG pipeline, an SVG-to-AST
+  round-trip validator, a round-trip specification, and an interactive in-browser
+  viewer demonstrating bidirectional TypeScript-toy-subset to SVG to Verilog
+  conversion at toy scope. The bridge uses the SCRIBE metadata namespace
+  (https://tibsfox.com/Research/SCRIBE/ns#) for edge-relation annotations.
+trust: user
+provenance:
+  origin: research-mission
+  mission: scribe
+  milestone: v1.49.621
+  track: T3
+  wave: 2
+  createdAt: 2026-05-09
+  researchGrounding:
+    - .planning/missions/v1-49-621-scribe/FLEET-PLAN.md
+    - .planning/missions/v1-49-621-scribe/briefings/T3-CODE-SVG-HDL-LEAD.md
+artifacts:
+  - path: ./manifest.json
+    kind: data
+    purpose: authoritative cartridge manifest (CartridgeManifest schema)
+  - path: ./README.md
+    kind: doc
+    purpose: cartridge orientation and round-trip architecture overview
+  - path: ./round-trip-spec.md
+    kind: doc
+    purpose: formal round-trip invariants and edge-relation taxonomy
+  - path: ./ast-to-svg/
+    kind: code-directory
+    purpose: TypeScript-toy-subset AST to annotated SVG pipeline
+  - path: ./netlist-to-svg/
+    kind: code-directory
+    purpose: Verilog/Yosys netlist to annotated SVG pipeline
+  - path: ./svg-to-ast/
+    kind: code-directory
+    purpose: SVG-to-AST round-trip validator and svgo config
+  - path: ./hdl-quickstart/
+    kind: doc-directory
+    purpose: HDL quickstart references (Verilog, Yosys cell types)
+  - path: ./viewer/
+    kind: code-directory
+    purpose: in-browser bidirectional round-trip demo (self-demo bar)
+metadata:
+  staging: research-output
+  scribe_namespace: https://tibsfox.com/Research/SCRIBE/ns#
+  composesWithTracks:
+    - T1-markup-lineage
+    - T2-svg-substrate
+    - T5-retrieval-provenance
+  selfDemoBar: passed
+  selfDemoArtifact: ./viewer/
+  selfDemoVerification: |-
+    Working bidirectional round-trip demo with 3 examples;
+    verified via Node+jsdom harness 2026-05-09; see manifest.json self_demo_evidence.

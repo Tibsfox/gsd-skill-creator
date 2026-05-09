@@ -18,8 +18,10 @@
  *     → remote `/{NASA,MUS,ELC}/<version>/...`
  *
  * Usage:
- *   node tools/ftp-sync.mjs <version>                    # push + verify
+ *   node tools/ftp-sync.mjs <version>                    # push NASA/MUS/ELC + verify
+ *   node tools/ftp-sync.mjs scribe                       # push SCRIBE (no version subdir)
  *   node tools/ftp-sync.mjs <version> --dry-run          # list files, no upload
+ *   node tools/ftp-sync.mjs scribe --dry-run             # SCRIBE dry-run
  *   node tools/ftp-sync.mjs <version> --json             # machine-readable summary
  *   node tools/ftp-sync.mjs <version> --no-verify        # skip post-upload HTTPS probe
  *   node tools/ftp-sync.mjs <version> --include-catalog-index
@@ -29,6 +31,7 @@
  *     # + v1.49.591 ship pipelines) into the canonical FTP tool.
  *
  *   npm run ftp-sync -- 1.71
+ *   npm run ftp-sync -- scribe
  *   npm run ftp-sync:dry-run -- 1.71
  *
  * Exit codes:
@@ -135,6 +138,35 @@ export function walkDir(absDir) {
 }
 
 /**
+ * Build the upload manifest for SCRIBE target.
+ * SCRIBE is a single-shot research deliverable at www/tibsfox/com/Research/SCRIBE/
+ * (no version-numbered subdirectory). Recursively walks all files.
+ *
+ * @param {string} repoRoot — absolute path to repo root
+ * @returns { files: [{rel,size,localAbs,remoteAbs}...], totalFiles, totalBytes, missing }
+ */
+export function buildManifestScribe(repoRoot) {
+  const sourceDir = join(repoRoot, 'www', 'tibsfox', 'com', 'Research', 'SCRIBE');
+  const manifest = { files: [], totalFiles: 0, totalBytes: 0, missing: false };
+  if (!existsSync(sourceDir)) {
+    manifest.missing = true;
+    return manifest;
+  }
+  const files = walkDir(sourceDir);
+  for (const f of files) {
+    manifest.files.push({
+      rel: f.rel,
+      size: f.size,
+      localAbs: join(sourceDir, f.rel),
+      remoteAbs: `/SCRIBE/${f.rel}`,
+    });
+  }
+  manifest.totalFiles = manifest.files.length;
+  manifest.totalBytes = manifest.files.reduce((sum, f) => sum + f.size, 0);
+  return manifest;
+}
+
+/**
  * Build the upload manifest for a given version.
  *
  * @param {string} repoRoot — absolute path to repo root
@@ -211,8 +243,10 @@ export function validateEnv(env) {
 
 /**
  * Pick the sample of uploaded files to verify via HTTPS HEAD.
- * Default sample: index.html for each present track + 2 random files (one from
- * NASA artifacts/ if present + one random from any track). Up to 5 probes.
+ * Handles both track-based manifests (NASA/MUS/ELC) and SCRIBE single-dir.
+ * For tracks: always includes index.html for each present track + up to 2 random files.
+ * For SCRIBE: always includes index.html (at SCRIBE root) + up to 2 random files.
+ * Up to 5 probes total.
  *
  * Returns array of { remoteAbs, size } items.
  */
@@ -224,6 +258,19 @@ export function pickVerificationSample(manifest, sampleSize = 5) {
     seen.add(item.remoteAbs);
     sample.push(item);
   };
+
+  // SCRIBE format: { files: [...], totalFiles, totalBytes, missing }
+  if (manifest.files !== undefined) {
+    const rootIndex = manifest.files.find((f) => f.rel === 'index.html');
+    if (rootIndex) add(rootIndex);
+    while (sample.length < sampleSize && sample.length < manifest.files.length) {
+      const f = manifest.files[Math.floor(Math.random() * manifest.files.length)];
+      add(f);
+    }
+    return sample;
+  }
+
+  // Track-based format: { tracks: {...}, totalFiles, totalBytes, missingTracks }
   for (const track of Object.keys(manifest.tracks)) {
     const files = manifest.tracks[track];
     const idx = files.find((f) => f.rel === 'index.html');
@@ -265,7 +312,7 @@ export async function probeUrl(url, timeoutMs = 10000) {
   }
 }
 
-async function pushTrack(client, trackName, files, opts) {
+async function pushFiles(client, files, opts) {
   const results = [];
   for (const f of files) {
     if (opts.dryRun) {
@@ -297,12 +344,19 @@ async function main() {
   const json = argv.includes('--json');
   const noVerify = argv.includes('--no-verify');
   const includeCatalogIndex = argv.includes('--include-catalog-index');
-  const version = argv.find((a) => !a.startsWith('--') && a !== process.argv[1]);
+  const target = argv.find((a) => !a.startsWith('--') && a !== process.argv[1]);
 
-  if (!validateVersion(version)) {
-    console.error('Usage: node tools/ftp-sync.mjs <version> [--dry-run] [--json] [--no-verify] [--include-catalog-index]');
-    console.error('Example: node tools/ftp-sync.mjs 1.71');
-    console.error('  --include-catalog-index also uploads NASA/MUS/ELC catalog index.html (one level up from version dir)');
+  // Determine target type: 'scribe' or version number
+  const isScribe = target === 'scribe';
+  const isVersioned = !isScribe && validateVersion(target);
+
+  if (!isScribe && !isVersioned) {
+    console.error('Usage: node tools/ftp-sync.mjs <version|scribe> [--dry-run] [--json] [--no-verify] [--include-catalog-index]');
+    console.error('Examples:');
+    console.error('  node tools/ftp-sync.mjs 1.71                                  # sync v1.71 NASA/MUS/ELC');
+    console.error('  node tools/ftp-sync.mjs scribe                                # sync SCRIBE research');
+    console.error('  node tools/ftp-sync.mjs 1.71 --include-catalog-index          # include catalog indexes');
+    console.error('  node tools/ftp-sync.mjs scribe --dry-run                      # preview SCRIBE upload');
     process.exit(2);
   }
 
@@ -317,10 +371,23 @@ async function main() {
     process.exit(2);
   }
 
-  const manifest = buildManifest(REPO_ROOT, version, { includeCatalogIndex });
-  if (manifest.missingTracks.length === TRACKS.length) {
-    console.error(`No source dirs for v${version}: missing ${manifest.missingTracks.join(', ')}`);
-    process.exit(3);
+  // Build manifest based on target type
+  let manifest;
+  let targetLabel;
+  if (isScribe) {
+    manifest = buildManifestScribe(REPO_ROOT);
+    targetLabel = 'SCRIBE';
+    if (manifest.missing) {
+      console.error('SCRIBE source dir not found: www/tibsfox/com/Research/SCRIBE/');
+      process.exit(3);
+    }
+  } else {
+    manifest = buildManifest(REPO_ROOT, target, { includeCatalogIndex });
+    targetLabel = `v${target}`;
+    if (manifest.missingTracks.length === TRACKS.length) {
+      console.error(`No source dirs for v${target}: missing ${manifest.missingTracks.join(', ')}`);
+      process.exit(3);
+    }
   }
 
   // Catalog-index precondition (added v1.49.601): when --include-catalog-index
@@ -329,7 +396,8 @@ async function main() {
   // live catalog with a regressed version, silently hiding new degrees.
   // Exit code 5 = catalog-index drift (new for ftp-sync; distinct from the
   // pre-tag-gate exit-8 allocation which scopes differently).
-  if (includeCatalogIndex && !dryRun) {
+  // (Not applicable for SCRIBE, which has no catalog).
+  if (includeCatalogIndex && !dryRun && !isScribe) {
     const checkTool = join(REPO_ROOT, 'tools', 'update-catalog-indexes.mjs');
     if (existsSync(checkTool)) {
       if (!json) {
@@ -356,13 +424,15 @@ async function main() {
   }
 
   if (!json) {
-    console.log(`FTP sync v${version} → ${env.FTP_HOST}`);
-    console.log(`  Tracks: ${TRACKS.filter((t) => !manifest.missingTracks.includes(t)).join(', ')}`);
-    if (manifest.missingTracks.length) {
-      console.log(`  Missing locally (skipped): ${manifest.missingTracks.join(', ')}`);
+    console.log(`FTP sync ${targetLabel} → ${env.FTP_HOST}`);
+    if (isVersioned) {
+      console.log(`  Tracks: ${TRACKS.filter((t) => !manifest.missingTracks.includes(t)).join(', ')}`);
+      if (manifest.missingTracks.length) {
+        console.log(`  Missing locally (skipped): ${manifest.missingTracks.join(', ')}`);
+      }
     }
     console.log(`  Files: ${manifest.totalFiles} / Bytes: ${manifest.totalBytes}`);
-    if (includeCatalogIndex) {
+    if (isVersioned && includeCatalogIndex) {
       const catalogCount = Object.values(manifest.tracks)
         .flat()
         .filter((e) => e.kind === 'catalog').length;
@@ -391,11 +461,18 @@ async function main() {
   }
 
   let allResults = [];
-  for (const track of TRACKS) {
-    const files = manifest.tracks[track] || [];
-    if (files.length === 0) continue;
-    const results = await pushTrack(client, track, files, { dryRun, json });
-    allResults = allResults.concat(results);
+  if (isScribe) {
+    // SCRIBE single-dir upload
+    const results = await pushFiles(client, manifest.files, { dryRun, json });
+    allResults = results;
+  } else {
+    // Version-based track upload
+    for (const track of TRACKS) {
+      const files = manifest.tracks[track] || [];
+      if (files.length === 0) continue;
+      const results = await pushFiles(client, files, { dryRun, json });
+      allResults = allResults.concat(results);
+    }
   }
 
   if (client) client.close();
@@ -432,7 +509,7 @@ async function main() {
     };
     if (!json && probeFailures.length > 0) {
       console.log('');
-      console.log('  ⚠ DRIFT DETECTED — uploaded files not reachable via HTTPS:');
+      console.log('  DRIFT DETECTED — uploaded files not reachable via HTTPS:');
       for (const p of probeFailures) {
         console.log(`    ${p.status} ${p.url}${p.error ? ` (${p.error})` : ''}`);
       }
@@ -440,17 +517,18 @@ async function main() {
   }
 
   if (json) {
-    console.log(JSON.stringify({
-      version,
+    const output = {
+      target: targetLabel,
       mode: dryRun ? 'dry-run' : 'execute',
       total_files: manifest.totalFiles,
       total_bytes: manifest.totalBytes,
       uploaded_files: uploads.length,
       uploaded_bytes: totalUploadedBytes,
       failures: failures.length,
-      missing_tracks: manifest.missingTracks,
       verification,
-    }, null, 2));
+    };
+    if (isVersioned) output.missing_tracks = manifest.missingTracks;
+    console.log(JSON.stringify(output, null, 2));
   } else {
     console.log('');
     console.log(`=== summary ===`);

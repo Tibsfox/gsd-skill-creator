@@ -6,9 +6,17 @@
  * the indexed project. Also verifies subscription lifecycle (close() removes it).
  */
 
-import { describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { rmSync, mkdirSync } from 'node:fs';
 import { tmpdir } from 'node:os';
+
+// Bump hookTimeout from default 10000ms to 30000ms.
+// Rationale: the beforeEach block creates two SQLite project DBs + applies migrations.
+// Under pre-tag-gate parallel-load wall-time pressure, the file-system + sqlite-init
+// path can exceed 10s on multi-core test runners. Test passes in CI consistently and
+// in isolation (~9s). Bumping to 30s gives 3× headroom against contention.
+// Lesson 8 from v1.49.621 retrospective.
+vi.setConfig({ hookTimeout: 30000, testTimeout: 30000 });
 import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import Database from 'better-sqlite3';

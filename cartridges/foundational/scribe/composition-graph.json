@@ -1,0 +1,55 @@
+{
+  "version": "1.0.0",
+  "chipset": "scribe",
+  "milestone": "v1.49.621",
+  "algebra": "sum",
+  "nodes": [
+    {
+      "name": "code-svg-hdl-bridge",
+      "track": "T3",
+      "version": "1.0.0"
+    },
+    {
+      "name": "dashboard-lod-rendering",
+      "track": "T4",
+      "version": "0.1.0"
+    },
+    {
+      "name": "markup-lineage",
+      "track": "T1",
+      "version": "1.0.0"
+    },
+    {
+      "name": "retrieval-provenance",
+      "track": "T5",
+      "version": "1.0.0"
+    },
+    {
+      "name": "svg-substrate",
+      "track": "T2",
+      "version": "1.0.0"
+    }
+  ],
+  "edges": [
+    {
+      "from": "code-svg-hdl-bridge",
+      "to": "markup-lineage"
+    },
+    {
+      "from": "code-svg-hdl-bridge",
+      "to": "retrieval-provenance"
+    },
+    {
+      "from": "code-svg-hdl-bridge",
+      "to": "svg-substrate"
+    },
+    {
+      "from": "dashboard-lod-rendering",
+      "to": "retrieval-provenance"
+    },
+    {
+      "from": "dashboard-lod-rendering",
+      "to": "svg-substrate"
+    }
+  ]
+}

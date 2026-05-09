@@ -9,7 +9,8 @@ import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { loadCartridge, parseCartridge } from '../loader.js';
+import { loadAnyCartridge, loadCartridge, parseCartridge } from '../loader.js';
+import { isResearchOutputCartridge } from '../types.js';
 
 function writeYaml(path: string, obj: unknown): void {
   // A minimal YAML emitter: JSON is a strict subset of YAML, so round-tripping
@@ -243,5 +244,89 @@ describe('parseCartridge — in-memory docs', () => {
   it('rejects non-mapping input', () => {
     expect(() => parseCartridge(['an', 'array'], '/tmp')).toThrow(/mapping/);
     expect(() => parseCartridge('a string', '/tmp')).toThrow(/mapping/);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Research-output cartridge loader (LD-RO-01..LD-RO-05)
+// ---------------------------------------------------------------------------
+
+const researchOutputFields = {
+  id: 'ro-fixture',
+  kind: 'research-output' as const,
+  name: 'RO Fixture',
+  version: '1.0.0',
+  author: 'tester',
+  description: 'a research-output loader fixture',
+  trust: 'user' as const,
+  provenance: {
+    origin: 'research-mission',
+    mission: 'test-mission',
+    createdAt: '2026-05-09',
+  },
+  artifacts: [
+    { path: './README.md', kind: 'doc', purpose: 'orientation' },
+    { path: './data.json', kind: 'data', purpose: 'structured data' },
+  ],
+};
+
+describe('loadAnyCartridge — research-output kind (LD-RO-01..LD-RO-05)', () => {
+  let workDir: string;
+
+  beforeEach(() => {
+    workDir = mkdtempSync(join(tmpdir(), 'cartridge-ro-loader-'));
+  });
+
+  afterEach(() => {
+    rmSync(workDir, { recursive: true, force: true });
+  });
+
+  it('LD-RO-01 loads a research-output cartridge.yaml and returns ResearchOutputCartridge', () => {
+    const cartPath = join(workDir, 'cartridge.yaml');
+    writeYaml(cartPath, researchOutputFields);
+    const loaded = loadAnyCartridge(cartPath);
+    expect(isResearchOutputCartridge(loaded)).toBe(true);
+    expect(loaded.id).toBe('ro-fixture');
+    if (isResearchOutputCartridge(loaded)) {
+      expect(loaded.kind).toBe('research-output');
+      expect(loaded.artifacts).toHaveLength(2);
+      expect(loaded.artifacts[0]?.path).toBe('./README.md');
+    }
+  });
+
+  it('LD-RO-02 research-output cartridge has no chipsets field', () => {
+    const cartPath = join(workDir, 'cartridge.yaml');
+    writeYaml(cartPath, researchOutputFields);
+    const loaded = loadAnyCartridge(cartPath);
+    expect(isResearchOutputCartridge(loaded)).toBe(true);
+    // TypeScript narrows: ResearchOutputCartridge has no chipsets.
+    // At runtime, the property should be absent.
+    expect((loaded as Record<string, unknown>)['chipsets']).toBeUndefined();
+  });
+
+  it('LD-RO-03 loadCartridge throws a descriptive error for research-output cartridges', () => {
+    const cartPath = join(workDir, 'cartridge.yaml');
+    writeYaml(cartPath, researchOutputFields);
+    expect(() => loadCartridge(cartPath)).toThrow(/research-output/);
+    expect(() => loadCartridge(cartPath)).toThrow(/loadAnyCartridge/);
+  });
+
+  it('LD-RO-04 loadAnyCartridge still loads standard cartridges unchanged', () => {
+    const cartPath = join(workDir, 'cartridge.yaml');
+    writeYaml(cartPath, {
+      ...identityFields,
+      chipsets: [groveInline, evalInline],
+    });
+    const loaded = loadAnyCartridge(cartPath);
+    expect(isResearchOutputCartridge(loaded)).toBe(false);
+    if (!isResearchOutputCartridge(loaded)) {
+      expect(loaded.chipsets).toHaveLength(2);
+    }
+  });
+
+  it('LD-RO-05 research-output cartridge fails Zod parse when artifacts is empty', () => {
+    const cartPath = join(workDir, 'cartridge.yaml');
+    writeYaml(cartPath, { ...researchOutputFields, artifacts: [] });
+    expect(() => loadAnyCartridge(cartPath)).toThrow();
   });
 });
