@@ -10,9 +10,10 @@ import { readdirSync, existsSync, statSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
-import { loadCartridge } from '../loader.js';
+import { loadAnyCartridge, loadCartridge } from '../loader.js';
 import { collectMetrics } from '../metrics.js';
-import { validateCartridge } from '../validator.js';
+import { isResearchOutputCartridge } from '../types.js';
+import { validateCartridge, validateResearchOutputCartridge } from '../validator.js';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(HERE, '..', '..', '..');
@@ -78,27 +79,9 @@ const KNOWN_VALIDATION_DEBT = new Set<string>([
   'writing-department',
 ]);
 
-/**
- * SCRIBE research-output cartridges (v1.49.621) ship a different
- * cartridge.yaml schema than the unified executable-chipset loader
- * expects — they are research deliverables (lineage taxonomies,
- * citation indexes, native-SVG figures), not skill/agent bundles.
- * The proper SCRIBE chipset format is authored by Component 01
- * (foundational-cartridge composition) of the SCRIBE Build-Out
- * mission. Until then, exclude them from the bulk-loader enumeration
- * to keep the executable-chipset coverage clean.
- *
- * Tracked: .planning/missions/v1-49-621-scribe/buildout-mission/
- *          components/01-foundational-cartridge.md
- */
-const SCRIBE_RESEARCH_CARTRIDGES = new Set<string>([
-  'markup-lineage',
-]);
-
 function bulkCartridges(): string[] {
   return readdirSync(CARTRIDGES)
     .filter((name) => {
-      if (SCRIBE_RESEARCH_CARTRIDGES.has(name)) return false;
       const p = resolve(CARTRIDGES, name, 'cartridge.yaml');
       return existsSync(p) && statSync(p).isFile();
     })
@@ -114,15 +97,22 @@ describe('W2B.2 bulk department migrations (MI-05)', () => {
 
   for (const cart of all) {
     it(`${cart}: loads under the unified loader`, () => {
-      const cartridge = loadCartridge(resolve(CARTRIDGES, cart, 'cartridge.yaml'));
+      const cartridge = loadAnyCartridge(resolve(CARTRIDGES, cart, 'cartridge.yaml'));
       expect(cartridge.id).toBe(cart);
-      expect(cartridge.chipsets.length).toBeGreaterThanOrEqual(1);
+      if (isResearchOutputCartridge(cartridge)) {
+        // Research-output cartridges have artifacts instead of chipsets.
+        expect(cartridge.artifacts.length).toBeGreaterThanOrEqual(1);
+      } else {
+        expect(cartridge.chipsets.length).toBeGreaterThanOrEqual(1);
+      }
     });
 
     if (!KNOWN_VALIDATION_DEBT.has(cart)) {
       it(`${cart}: passes cross-chipset validation`, () => {
-        const cartridge = loadCartridge(resolve(CARTRIDGES, cart, 'cartridge.yaml'));
-        const result = validateCartridge(cartridge);
+        const cartridge = loadAnyCartridge(resolve(CARTRIDGES, cart, 'cartridge.yaml'));
+        const result = isResearchOutputCartridge(cartridge)
+          ? validateResearchOutputCartridge(cartridge)
+          : validateCartridge(cartridge);
         if (!result.valid) {
           const summary = result.errors
             .map((e) => `  ${e.path}: ${e.message}`)

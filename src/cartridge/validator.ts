@@ -23,10 +23,12 @@
 
 import {
   CartridgeSchema,
+  ResearchOutputCartridgeSchema,
   type Cartridge,
   type CartridgeSkillEntry,
   type DepartmentChipset,
   type EvaluationChipset,
+  type ResearchOutputCartridge,
   findChipset,
   findChipsets,
 } from './types.js';
@@ -249,4 +251,84 @@ export function validateCartridgeOrThrow(input: unknown): Cartridge {
     );
   }
   return CartridgeSchema.parse(input);
+}
+
+// ============================================================================
+// Research-output cartridge validation
+// ============================================================================
+
+/**
+ * Validate a research-output cartridge.
+ *
+ * Research-output cartridges (kind: research-output) carry research deliverables
+ * — taxonomies, citation indexes, native-SVG figures, data files — rather than
+ * executable skill/agent bundles. The validation rules differ from standard
+ * cartridges: there is no chipsets array to check, but each artifact entry must
+ * carry `path`, `kind`, and `purpose` fields.
+ *
+ * Returns a CartridgeValidationResult with the same shape as validateCartridge()
+ * so callers can use both uniformly.
+ */
+export function validateResearchOutputCartridge(
+  input: unknown,
+): CartridgeValidationResult {
+  const errors: CartridgeValidationIssue[] = [];
+  const warnings: CartridgeValidationIssue[] = [];
+
+  const parsed = ResearchOutputCartridgeSchema.safeParse(input);
+  if (!parsed.success) {
+    for (const issue of parsed.error.issues) {
+      errors.push({
+        path: issue.path.join('.') || '<root>',
+        message: issue.message,
+      });
+    }
+    return { valid: false, errors, warnings };
+  }
+
+  const cartridge = parsed.data;
+
+  // Rule R01: every artifact must have a non-empty path, kind, and purpose.
+  // (Already enforced by the Zod schema, but repeated here for clarity and
+  // to allow future path-existence checks.)
+  for (let i = 0; i < cartridge.artifacts.length; i++) {
+    const a = cartridge.artifacts[i];
+    if (!a.path || !a.kind || !a.purpose) {
+      errors.push({
+        path: `artifacts[${i}]`,
+        message: 'artifact must have non-empty path, kind, and purpose fields',
+      });
+    }
+  }
+
+  // Rule R02: warn when provenance lacks a mission field (best-practice for
+  // SCRIBE research cartridges; not an error because CartridgeProvenanceSchema
+  // uses .passthrough() and mission is an extension field).
+  const prov = cartridge.provenance as Record<string, unknown>;
+  if (!prov['mission']) {
+    warnings.push({
+      path: 'provenance.mission',
+      message: 'research-output cartridge should declare provenance.mission for traceability',
+    });
+  }
+
+  return { valid: errors.length === 0, errors, warnings };
+}
+
+/**
+ * Convenience: validate a research-output cartridge and throw on failure.
+ */
+export function validateResearchOutputCartridgeOrThrow(
+  input: unknown,
+): ResearchOutputCartridge {
+  const result = validateResearchOutputCartridge(input);
+  if (!result.valid) {
+    const lines = result.errors.map(
+      (e) => `  - [research-output] ${e.path}: ${e.message}`,
+    );
+    throw new Error(
+      `research-output cartridge validation failed with ${result.errors.length} error(s):\n${lines.join('\n')}`,
+    );
+  }
+  return ResearchOutputCartridgeSchema.parse(input);
 }

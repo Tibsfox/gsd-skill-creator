@@ -347,6 +347,70 @@ export const CartridgeSchema = z.object({
 export type Cartridge = z.infer<typeof CartridgeSchema>;
 
 // ============================================================================
+// Research-output cartridge — alternate top-level schema for SCRIBE deliverables
+// ============================================================================
+
+/**
+ * An artifact entry within a research-output cartridge.
+ *
+ * Research-output cartridges (kind: research-output) ship research deliverables
+ * (taxonomies, citation indexes, native-SVG figures, data files) rather than
+ * executable skill/agent bundles. They bypass the `chipsets.length >= 1`
+ * requirement of the standard CartridgeSchema and are validated separately via
+ * `validateResearchOutputCartridge()`.
+ */
+export const ResearchOutputArtifactSchema = z.object({
+  path: z.string().min(1),
+  kind: z.string().min(1),
+  purpose: z.string().min(1),
+}).passthrough();
+
+export type ResearchOutputArtifact = z.infer<typeof ResearchOutputArtifactSchema>;
+
+/**
+ * Schema for research-output cartridges.
+ *
+ * Discriminated from standard cartridges by the top-level `kind: research-output`
+ * field. The loader detects this field before running `CartridgeSchema.parse()`
+ * and routes to this schema instead. Provenance is a superset of the standard
+ * CartridgeProvenanceSchema — it may carry mission-specific fields (track, wave,
+ * researchGrounding) that the executable-chipset provenance does not require.
+ */
+export const ResearchOutputCartridgeSchema = z.object({
+  /** Discriminator — must be 'research-output'. */
+  kind: z.literal('research-output'),
+  id: z.string().min(1),
+  name: z.string().min(1),
+  version: z.string().min(1),
+  author: z.string().min(1),
+  description: z.string().min(1),
+  trust: CartridgeTrustSchema,
+  provenance: CartridgeProvenanceSchema,
+  artifacts: z.array(ResearchOutputArtifactSchema).min(1),
+  metadata: z.record(z.string(), z.unknown()).optional(),
+}).passthrough();
+
+export type ResearchOutputCartridge = z.infer<typeof ResearchOutputCartridgeSchema>;
+
+/**
+ * Type guard: returns true when a loaded cartridge is a research-output
+ * cartridge (rather than a standard executable-chipset cartridge).
+ *
+ * Usage:
+ *   const c = loadCartridge(path);
+ *   if (isResearchOutputCartridge(c)) {
+ *     // c is ResearchOutputCartridge — has .artifacts, no .chipsets
+ *   } else {
+ *     // c is Cartridge — has .chipsets
+ *   }
+ */
+export function isResearchOutputCartridge(
+  c: Cartridge | ResearchOutputCartridge,
+): c is ResearchOutputCartridge {
+  return (c as ResearchOutputCartridge).kind === 'research-output';
+}
+
+// ============================================================================
 // Helpers
 // ============================================================================
 

@@ -1,0 +1,75 @@
+id: dashboard-lod-rendering
+kind: research-output
+name: Dashboard LOD Rendering
+version: 1.0.0
+author: scribe-mission
+description: >-
+  SVG to Canvas to WebGL to WebGPU to Vulkan substrate ladder for visualizing
+  the gsd-skill-creator codebase and planning docs as an interactive, navigable
+  artifact. Ships LOD threshold specifications, WebGL instanced primitives (SDF
+  disk nodes, wide-line edges), WebGPU ForceAtlas2 WGSL compute kernels, a
+  working dashboard demo rendering a 32-node T5 sample-provenance graph, and
+  FTP sync deploy scripts. The LOD switching is hysteresis-gated; semantic
+  identity is maintained across substrates via T5 provenance node IDs.
+trust: user
+provenance:
+  origin: research-mission
+  mission: scribe
+  milestone: v1.49.621
+  track: T4
+  wave: 2
+  createdAt: 2026-05-09
+  researchGrounding:
+    - .planning/missions/v1-49-621-scribe/FLEET-PLAN.md
+    - .planning/missions/v1-49-621-scribe/briefings/T4-DASHBOARD-LOD-LEAD.md
+artifacts:
+  - path: ./manifest.json
+    kind: data
+    purpose: authoritative cartridge manifest (CartridgeManifest schema)
+  - path: ./README.md
+    kind: doc
+    purpose: cartridge orientation and substrate ladder overview
+  - path: ./lod-thresholds.md
+    kind: doc
+    purpose: authoritative substrate-switch threshold reference (DEC-T4-001)
+  - path: ./webgl-primitives/instanced-nodes.glsl
+    kind: code-glsl
+    purpose: SDF disk node primitive (vertex + fragment stages)
+  - path: ./webgl-primitives/edge-batch.glsl
+    kind: code-glsl
+    purpose: wide-line edge primitive via per-instance quad extrusion
+  - path: ./webgl-primitives/regl-setup.ts
+    kind: code
+    purpose: regl declarative wrapper showing the WebGL bind shape
+  - path: ./webgpu-compute/force-atlas-2.wgsl
+    kind: code-wgsl
+    purpose: three FA2 compute kernels (repulsion + attraction + integration)
+  - path: ./dashboard-service/serve.mjs
+    kind: code
+    purpose: minimal Node HTTP server (static + optional PG proxy)
+  - path: ./dashboard-service/package.json
+    kind: data
+    purpose: service package definition (zero required deps; pg optional)
+  - path: ./dashboard/index.html
+    kind: figure-html
+    purpose: working LOD demo entrypoint (self-demo bar artifact)
+  - path: ./dashboard/app.js
+    kind: code
+    purpose: pure-ESM dashboard app (renderer-router, layout, query, inspector)
+  - path: ./dashboard/data/sample-graph.json
+    kind: data
+    purpose: 32-node T5 sample-provenance corpus for the LOD demo
+  - path: ./deploy/ftp-sync.sh
+    kind: code
+    purpose: FTP sync to tibsfox.com (mirrors tools/ftp-sync.mjs pattern)
+metadata:
+  staging: research-output
+  composesWithTracks:
+    - T2-svg-substrate
+    - T5-retrieval-provenance
+  selfDemoBar: passed
+  selfDemoArtifact: ./dashboard/index.html
+  selfDemoVerification: |-
+    SVG to Canvas verified live (Auto button + manual SVG/Canvas toggle);
+    32-node T5 sample-provenance graph renders; stretch corpus button triggers
+    synthesized 1K-file slice; Chromium/Firefox/Safari supported.

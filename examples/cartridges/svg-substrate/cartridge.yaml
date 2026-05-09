@@ -1,0 +1,98 @@
+id: svg-substrate
+kind: research-output
+name: SVG Substrate
+version: 1.0.0
+author: scribe-mission
+description: >-
+  Reference substrate for native-SVG production in the SCRIBE system.
+  Packages hand-authored SVG primitives (axes, arrows, callouts), a
+  LaTeX-to-SVG rendering pipeline (dvisvgm + MathJax routes), step-by-step
+  and morphing animation templates, an accessibility checklist, and
+  mechanically-enforced validators (svgo config + a11y-check.ts). SVG is the
+  terminal node of the markup family tree and the IR shared by the code-svg-hdl
+  bridge and the dashboard LOD rendering ladder.
+trust: user
+provenance:
+  origin: research-mission
+  mission: scribe
+  milestone: v1.49.621
+  track: T2
+  wave: 1
+  createdAt: 2026-05-09
+  researchGrounding:
+    - .planning/missions/v1-49-621-scribe/FLEET-PLAN.md
+    - .planning/missions/v1-49-621-scribe/briefings/T2-SVG-SUBSTRATE-LEAD.md
+    - .planning/missions/v1-49-621-scribe/t2-svg-substrate/01-svg-core.md
+    - .planning/missions/v1-49-621-scribe/t2-svg-substrate/02-primitives.md
+    - .planning/missions/v1-49-621-scribe/t2-svg-substrate/03-latex-to-svg.md
+    - .planning/missions/v1-49-621-scribe/t2-svg-substrate/04-animations.md
+    - .planning/missions/v1-49-621-scribe/t2-svg-substrate/05-a11y.md
+    - .planning/missions/v1-49-621-scribe/t2-svg-substrate/06-validators.md
+    - .planning/missions/v1-49-621-scribe/t2-svg-substrate/07-scribe-integration.md
+    - .planning/missions/v1-49-621-scribe/t2-svg-substrate/08-appendix.md
+artifacts:
+  - path: ./README.md
+    kind: doc
+    purpose: cartridge orientation and composition guide
+  - path: ./a11y-checklist.md
+    kind: doc
+    purpose: accessibility discipline every SCRIBE SVG must pass
+  - path: ./primitives/README.md
+    kind: doc
+    purpose: primitive fragment index
+  - path: ./primitives/arrow.svg
+    kind: figure-svg-native
+    purpose: reusable arrow primitive
+  - path: ./primitives/callout.svg
+    kind: figure-svg-native
+    purpose: reusable callout/annotation primitive
+  - path: ./primitives/dot.svg
+    kind: figure-svg-native
+    purpose: reusable dot/point primitive
+  - path: ./primitives/axis-x.svg
+    kind: figure-svg-native
+    purpose: reusable horizontal axis primitive
+  - path: ./latex-to-svg/README.md
+    kind: doc
+    purpose: LaTeX-to-SVG pipeline documentation (dvisvgm + MathJax routes)
+  - path: ./latex-to-svg/render.ts
+    kind: code
+    purpose: TypeScript renderer (MathJax SVG route)
+  - path: ./latex-to-svg/render.sh
+    kind: code
+    purpose: Shell renderer (dvisvgm build-time route)
+  - path: ./animations/README.md
+    kind: doc
+    purpose: animation pattern index
+  - path: ./animations/timeline.svg
+    kind: figure-svg-native
+    purpose: timeline animation template
+  - path: ./animations/step-by-step.svg
+    kind: figure-svg-native
+    purpose: step-by-step reveal animation template
+  - path: ./animations/morphing.svg
+    kind: figure-svg-native
+    purpose: morphing/interpolation animation template
+  - path: ./animations/build-step-by-step.ts
+    kind: code
+    purpose: TypeScript composer for step-by-step animations
+  - path: ./validators/svgo.config.js
+    kind: code
+    purpose: svgo config preserving a11y attributes and metadata namespaces
+  - path: ./validators/validate.sh
+    kind: code
+    purpose: xmllint-based SVG schema validator
+  - path: ./validators/a11y-check.ts
+    kind: code
+    purpose: mechanically enforces a11y-checklist.md requirements
+metadata:
+  staging: research-output
+  composedBy:
+    - markup-lineage
+    - code-svg-hdl-bridge
+    - dashboard-lod-rendering
+  selfDemoBar: passed
+  selfDemoArtifact: ./animations/step-by-step.svg
+  selfDemoVerification: |-
+    Native SVG animation; opens standalone in any modern browser;
+    respects prefers-reduced-motion; no embedded raster; ARIA accessible.
