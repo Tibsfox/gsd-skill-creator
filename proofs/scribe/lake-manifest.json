@@ -1,0 +1,30 @@
+{
+  "_comment": [
+    "PLACEHOLDER lake-manifest.json for proofs/scribe.",
+    "",
+    "Lake generates the real lockfile by resolving the `require mathlib ... @ \"v4.15.0\"`",
+    "directive in lakefile.lean. The operator MUST run `lake update` once on a",
+    "machine with Lean 4 (v4.15.0) installed to populate this file with the",
+    "concrete commit hashes of mathlib + its transitive deps (std4, aesop, Qq,",
+    "ProofWidgets, importGraph, batteries, ...).",
+    "",
+    "After `lake update` succeeds, the manifest will be overwritten with a real",
+    "JSON object of shape:",
+    "  { \"version\": \"1.1.0\", \"packagesDir\": \".lake/packages\",",
+    "    \"packages\": [ {\"url\": \"...\", \"type\": \"git\", \"subDir\": null,",
+    "                   \"scope\": \"\", \"rev\": \"<COMMIT-SHA>\",",
+    "                   \"name\": \"mathlib\", \"manifestFile\": \"lake-manifest.json\",",
+    "                   \"inputRev\": \"v4.15.0\", \"inherited\": false,",
+    "                   \"configFile\": \"lakefile.lean\"}, ... ],",
+    "    \"name\": \"scribe-roundtrip\", \"lakeDir\": \".lake\" }",
+    "",
+    "Commit the populated lake-manifest.json so other operators get reproducible builds.",
+    "",
+    "Reference: https://lean-lang.org/lean4/doc/lake.html"
+  ],
+  "version": "1.1.0",
+  "packagesDir": ".lake/packages",
+  "packages": [],
+  "name": "scribe-roundtrip",
+  "lakeDir": ".lake"
+}
