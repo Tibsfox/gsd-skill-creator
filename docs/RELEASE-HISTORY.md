@@ -1,15 +1,16 @@
 # Release History
 
-660 milestones shipped across the v1.0 → v1.49.617 arc. The table below lists every shipped release, newest first.
+661 milestones shipped across the v1.0 → v1.49.618 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions, and where available, retrospectives and lessons learned. `Commits` is the count of commits between this tag and the previous tag (from git). `Phases` and `Plans` come from structured GSD metadata in the release README — most content/patch releases don't have these. `Retro` links to the retrospective chapter when present. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 660 releases · 659 with retrospectives · 633 with extracted lessons · quality A:624 B:4 C:11 D:4 F:17 (avg 95) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 661 releases · 660 with retrospectives · 633 with extracted lessons · quality A:624 B:4 C:11 D:4 F:18 (avg 95) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Retro | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|-------|---------|---------|-------|
+| [v1.49.618](release-notes/v1.49.618) | Voyager 2 Outer-Planets Grand Tour | — | 7 | — | — | [✓](release-notes/v1.49.618/chapter/03-retrospective.md) | — | F 45 |  |
 | [v1.49.617](release-notes/v1.49.617) | HEAO-1 X-Ray All-Sky Survey | — | 6 | — | — | [✓](release-notes/v1.49.617/chapter/03-retrospective.md) | — | F 45 |  |
 | [v1.49.616](release-notes/v1.49.616) | Viking 2 Second Mars Landing | — | 6 | — | — | [✓](release-notes/v1.49.616/chapter/03-retrospective.md) | — | F 45 |  |
 | [v1.49.615](release-notes/v1.49.615) | Viking 1 First Successful Mars Landing | 1976-07-20 | 7 | — | — | [✓](release-notes/v1.49.615/chapter/03-retrospective.md) | — | F 45 |  |
