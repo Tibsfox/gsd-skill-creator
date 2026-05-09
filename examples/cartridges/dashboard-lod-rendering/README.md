@@ -61,6 +61,66 @@ xdg-open dashboard/index.html      # Linux
 
 The dashboard loads the 32-node T5 sample-provenance corpus by default.
 
+## Quickstart — Tauri-native window (CAP-024)
+
+Run the dashboard in a native OS window via the Tauri desktop app.  The same
+`dashboard/index.html` + `app.js` + `webgpu-layout.js` load in the platform
+webview (WebView2 / WKWebView / WebKitGTK); no WGSL changes required.
+
+### Prerequisites
+
+```bash
+# Install Tauri CLI (one-time)
+cargo install tauri-cli --version "^2"   # or: npm install -g @tauri-apps/cli
+
+# Linux: ensure WebKitGTK development headers are present
+sudo apt install libwebkit2gtk-4.1-dev   # Ubuntu/Debian
+```
+
+### Launch via npm script
+
+```bash
+# Start the full GSD-OS desktop app (main window + SCRIBE dashboard window):
+npm run tauri:scribe
+
+# The SCRIBE dashboard window opens automatically when you invoke the command
+# from the main GSD-OS window UI, or via the Tauri IPC from any webview:
+```
+
+```ts
+// Invoke from TypeScript (inside any Tauri webview):
+import { invoke } from '@tauri-apps/api/core';
+const result = await invoke('open_scribe_dashboard');
+// result = { label: "scribe-dashboard", created: true }
+```
+
+### How the resource bundling works
+
+`tauri.conf.json` `bundle.resources` maps:
+
+```
+"../examples/cartridges/dashboard-lod-rendering/dashboard" → "scribe-dashboard"
+```
+
+At bundle time Tauri copies the entire `dashboard/` directory into the app's
+resource bundle under the `scribe-dashboard/` subdirectory.  At runtime the
+Rust command `open_scribe_dashboard` resolves the path via
+`app.path().resource_dir()` and loads `scribe-dashboard/index.html` through the
+Tauri `asset://` protocol.
+
+### Idempotency
+
+Calling `open_scribe_dashboard` when the window is already open brings it to
+the foreground rather than creating a duplicate.
+
+### Native wgpu rung (future)
+
+The wgpu raw render loop (Vulkan/Metal/DX12, no webview overhead, bypasses the
+browser compositor) is deferred to a follow-up milestone per doc 04 §13.  The
+integration path is documented at
+`.planning/missions/v1-49-621-scribe/t4-dashboard-lod-rendering/04-vulkan-native-tauri.md`.
+When ready, the implementation belongs in `dashboard-service/native-rust/`.
+
 ## What the demo shows
 
 - **The sample provenance graph**: commits → sessions → decisions → rejected

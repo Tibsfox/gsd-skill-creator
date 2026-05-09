@@ -16,6 +16,8 @@ pub mod pcg;
 pub mod services;
 mod watcher;
 pub mod intelligence;
+// CAP-024: SCRIBE Dashboard native Tauri window (v1.49.621)
+pub mod scribe_dashboard;
 
 use std::sync::Mutex;
 use tauri::Manager;
@@ -214,6 +216,8 @@ pub fn run() {
             crate::intelligence::atlas::atlas_list_provenance_for_line,
             crate::intelligence::atlas::atlas_request_index_snapshot,
             crate::intelligence::atlas::atlas_invalidate_cache,
+            // CAP-024: SCRIBE Dashboard native Tauri window
+            crate::scribe_dashboard::open_scribe_dashboard,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

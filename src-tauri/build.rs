@@ -25,6 +25,8 @@ fn main() {
         "claude_list",
         "claude_status",
         "generate_dashboard",
+        // CAP-024: SCRIBE Dashboard native Tauri window
+        "open_scribe_dashboard",
     ]);
 
     tauri_build::try_build(
