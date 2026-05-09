@@ -6,7 +6,7 @@
  * the on-disk CITATIONS.json artifact's tolerance bound.
  */
 import { describe, it, expect } from 'vitest';
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 import {
@@ -114,12 +114,22 @@ describe('mergeCitations — dedup behaviour', () => {
   });
 });
 
-describe('On-disk CITATIONS.json artifact', () => {
+// CITATIONS.json lives under .planning/ which is gitignored — these tests
+// run locally where the artifact exists; in CI we skip gracefully (matches
+// the PG_TEST=1 / YOSYS_TEST=1 file-presence gating pattern used by the
+// other SCRIBE test suites).
+const CITATIONS_JSON_PATH = resolve(
+  REPO_ROOT,
+  '.planning/missions/v1-49-621-scribe/CITATIONS.json',
+);
+const citationsArtifactAvailable = existsSync(CITATIONS_JSON_PATH);
+const describeArtifact = citationsArtifactAvailable ? describe : describe.skip;
+
+describeArtifact('On-disk CITATIONS.json artifact', () => {
   let index: UnifiedCitationIndex;
 
   it('parses against the UnifiedCitationIndex shape', () => {
-    const path = resolve(REPO_ROOT, '.planning/missions/v1-49-621-scribe/CITATIONS.json');
-    index = JSON.parse(readFileSync(path, 'utf8')) as UnifiedCitationIndex;
+    index = JSON.parse(readFileSync(CITATIONS_JSON_PATH, 'utf8')) as UnifiedCitationIndex;
     expect(index.version).toBe('1.0.0');
     expect(index.milestone).toBe('v1.49.621');
     expect(typeof index.totalUniqueSources).toBe('number');

@@ -35,7 +35,14 @@ const EXPECTED_FILES: ReadonlyArray<{ path: string; minBytes: number }> = [
 const deployTestEnabled = process.env['DEPLOY_TEST'] === '1';
 const describeOrSkip = deployTestEnabled ? describe : describe.skip;
 
-describe('integration: public deployment manifest (C10 — local checks)', () => {
+// www/ is gitignored — these local-manifest checks run wherever the
+// deploy artifacts exist (operator's checkout post-Component 08); in CI
+// runners without www/ we soft-skip the suite. Matches the PG_TEST=1 /
+// YOSYS_TEST=1 file-presence gating pattern.
+const deployArtifactsAvailable = existsSync(DEPLOY_DIR);
+const describeLocalOrSkip = deployArtifactsAvailable ? describe : describe.skip;
+
+describeLocalOrSkip('integration: public deployment manifest (C10 — local checks)', () => {
   it('all 12 SCRIBE deployment files exist at the expected paths', () => {
     for (const { path } of EXPECTED_FILES) {
       const full = resolve(DEPLOY_DIR, path);
