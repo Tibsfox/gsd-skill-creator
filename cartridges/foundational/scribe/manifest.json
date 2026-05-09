@@ -1,0 +1,18 @@
+{
+  "name": "scribe",
+  "version": "1.49.621",
+  "kind": "chipset",
+  "mission": "scribe",
+  "milestone": "v1.49.621",
+  "summary": "Foundational chipset composing the five SCRIBE track cartridges (T1 markup-lineage, T2 svg-substrate, T3 code-svg-hdl-bridge, T4 dashboard-lod-rendering, T5 retrieval-provenance) into one categorical-sum bundle. Thin shell — member cartridges remain authoritative for their content.",
+  "license": "Apache-2.0",
+  "scribe_namespace": "https://tibsfox.com/Research/SCRIBE/ns#",
+  "role": "foundational",
+  "composes": [
+    "code-svg-hdl-bridge",
+    "dashboard-lod-rendering",
+    "markup-lineage",
+    "retrieval-provenance",
+    "svg-substrate"
+  ]
+}
