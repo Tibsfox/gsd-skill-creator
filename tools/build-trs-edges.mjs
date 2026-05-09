@@ -65,6 +65,7 @@ const TRS_RESEARCH_LOCATIONS = [
   { milestone: 'v1.49.618', paths: ['.planning/missions/v1-49-618-voyager-2-grand-tour/work/W1-TRS-research.md'] },
   { milestone: 'v1.49.619', paths: ['.planning/missions/v1-49-619-voyager-1-twin-mission-pair/work/W1-TRS-research.md'] },
   { milestone: 'v1.49.620', paths: ['.planning/missions/v1-49-620-pioneer-venus-1-orbiter/work/W1-TRS-research.md'] },
+  { milestone: 'v1.49.622', paths: ['.planning/missions/v1-49-622-pioneer-venus-2-multiprobe/work/W1-TRS-research.md'] },
 ];
 
 function readFrontmatter(text) {
