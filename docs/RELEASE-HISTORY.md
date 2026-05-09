@@ -1,15 +1,16 @@
 # Release History
 
-666 milestones shipped across the v1.0 → v1.49.623 arc. The table below lists every shipped release, newest first.
+667 milestones shipped across the v1.0 → v1.49.624 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions, and where available, retrospectives and lessons learned. `Commits` is the count of commits between this tag and the previous tag (from git). `Phases` and `Plans` come from structured GSD metadata in the release README — most content/patch releases don't have these. `Retro` links to the retrospective chapter when present. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 666 releases · 665 with retrospectives · 633 with extracted lessons · quality A:624 B:4 C:11 D:4 F:23 (avg 95) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 667 releases · 666 with retrospectives · 633 with extracted lessons · quality A:624 B:4 C:11 D:4 F:24 (avg 95) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Retro | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|-------|---------|---------|-------|
+| [v1.49.624](release-notes/v1.49.624) | HEAO-2 / Einstein Observatory Degree-100 K-Boundary | — | 6 | — | — | [✓](release-notes/v1.49.624/chapter/03-retrospective.md) | — | F 45 |  |
 | [v1.49.623](release-notes/v1.49.623) | ISEE-3 / ICE Paired-Triple-Mission-Architecture | — | 6 | — | — | [✓](release-notes/v1.49.623/chapter/03-retrospective.md) | — | F 45 |  |
 | [v1.49.622](release-notes/v1.49.622) | Pioneer Venus 2 Multiprobe Twin-Mission-Pair Completion | — | 6 | — | — | [✓](release-notes/v1.49.622/chapter/03-retrospective.md) | — | F 45 |  |
 | [v1.49.621](release-notes/v1.49.621) | SCRIBE Build-Out (counter-cadence) | — | 25 | — | — | [✓](release-notes/v1.49.621/chapter/03-retrospective.md) | — | F 40 |  |
