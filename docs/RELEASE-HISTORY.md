@@ -1,15 +1,16 @@
 # Release History
 
-665 milestones shipped across the v1.0 → v1.49.622 arc. The table below lists every shipped release, newest first.
+666 milestones shipped across the v1.0 → v1.49.623 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions, and where available, retrospectives and lessons learned. `Commits` is the count of commits between this tag and the previous tag (from git). `Phases` and `Plans` come from structured GSD metadata in the release README — most content/patch releases don't have these. `Retro` links to the retrospective chapter when present. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 665 releases · 664 with retrospectives · 633 with extracted lessons · quality A:624 B:4 C:11 D:4 F:22 (avg 95) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 666 releases · 665 with retrospectives · 633 with extracted lessons · quality A:624 B:4 C:11 D:4 F:23 (avg 95) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Retro | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|-------|---------|---------|-------|
+| [v1.49.623](release-notes/v1.49.623) | ISEE-3 / ICE Paired-Triple-Mission-Architecture | — | 6 | — | — | [✓](release-notes/v1.49.623/chapter/03-retrospective.md) | — | F 45 |  |
 | [v1.49.622](release-notes/v1.49.622) | Pioneer Venus 2 Multiprobe Twin-Mission-Pair Completion | — | 6 | — | — | [✓](release-notes/v1.49.622/chapter/03-retrospective.md) | — | F 45 |  |
 | [v1.49.621](release-notes/v1.49.621) | SCRIBE Build-Out (counter-cadence) | — | 25 | — | — | [✓](release-notes/v1.49.621/chapter/03-retrospective.md) | — | F 40 |  |
 | [v1.49.620](release-notes/v1.49.620) | Pioneer Venus 1 Twin-Mission-Pair Continuation | — | 6 | — | — | [✓](release-notes/v1.49.620/chapter/03-retrospective.md) | — | F 45 |  |
@@ -85,7 +86,7 @@ Each version links to a detailed release notes directory with full feature descr
 | [v1.49.550](release-notes/v1.49.550) | Platform Alignment Milestone | 2026-04-15 | 52 | — | — | [✓](release-notes/v1.49.550/chapter/03-retrospective.md) | [21](release-notes/v1.49.550/chapter/04-lessons.md) | A 98 |  |
 | [v1.49.549](release-notes/v1.49.549) | Artemis II: The Space Between the Moon and the Earth | 2026-04-14 | 42 | — | — | [✓](release-notes/v1.49.549/chapter/03-retrospective.md) | [14](release-notes/v1.49.549/chapter/04-lessons.md) | A 98 |  |
 | [v1.49.548](release-notes/v1.49.548) | Degree 47: The Darkroom in Space | 2026-04-05 | 0 | — | — | [✓](release-notes/v1.49.548/chapter/03-retrospective.md) | [14](release-notes/v1.49.548/chapter/04-lessons.md) | A 99 |  |
-| [v1.49.547](release-notes/v1.49.547) | Degree 46: The Angry Alligator | 2026-04-05 | 0 | — | — | [✓](release-notes/v1.49.547/chapter/03-retrospective.md) | [14](release-notes/v1.49.547/chapter/04-lessons.md) | A 98 |  |
+| [v1.49.547](release-notes/v1.49.547) | Degree 46: The Angry Alligator | 2026-04-05 | 0 | — | — | [✓](release-notes/v1.49.547/chapter/03-retrospective.md) | [1/14](release-notes/v1.49.547/chapter/04-lessons.md) | A 98 |  |
 | [v1.49.546](release-notes/v1.49.546) | Degree 45: Soft Landing | 2026-04-05 | 0 | — | — | [✓](release-notes/v1.49.546/chapter/03-retrospective.md) | [21](release-notes/v1.49.546/chapter/04-lessons.md) | A 99 |  |
 | [v1.49.545](release-notes/v1.49.545) | Degree 44: The Roll That Made an Astronaut | 2026-04-05 | 0 | — | — | [✓](release-notes/v1.49.545/chapter/03-retrospective.md) | [14](release-notes/v1.49.545/chapter/04-lessons.md) | A 94 |  |
 | [v1.49.544](release-notes/v1.49.544) | Degree 43: Thirty-Five Years of Listening | 2026-04-05 | 0 | — | — | [✓](release-notes/v1.49.544/chapter/03-retrospective.md) | [22](release-notes/v1.49.544/chapter/04-lessons.md) | A 99 |  |
