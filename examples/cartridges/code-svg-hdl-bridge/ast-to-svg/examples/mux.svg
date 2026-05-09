@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:scribe="https://tibsfox.com/Research/SCRIBE/ns#" viewBox="0 0 820 280" width="820" height="280" role="graphics-document" aria-labelledby="t">
+  <title id="t">mux.ts AST</title>
+  <desc>SCRIBE round-trip artifact: mux.ts (42 bytes) parsed to AST. SHA 0c5c84b30a43aeaa…</desc>
+  <metadata>
+    <scribe:graph version="1" kind="ast" language="typescript">
+      <scribe:source path="mux.ts" sha="0c5c84b30a43aeaa5c2666315d2562fbfcc849a5" bytes="42" generator="scribe-roundtrip-viewer/1.0"/>
+      <scribe:nodes>
+      <scribe:node id="n10" sub_type="FunctionDeclaration" label="mux" span="0..42"/>
+      <scribe:node id="n1" sub_type="Identifier" label="mux" span="9..12"/>
+      <scribe:node id="n2" sub_type="Parameter" label="c" span="13..14"/>
+      <scribe:node id="n3" sub_type="Parameter" label="a" span="16..17"/>
+      <scribe:node id="n4" sub_type="Parameter" label="b" span="19..20"/>
+      <scribe:node id="n9" sub_type="ReturnStatement" label="" span="31..40"/>
+      <scribe:node id="n8" sub_type="ConditionalExpression" label="?:" span="31..40"/>
+      <scribe:node id="n5" sub_type="Identifier" label="c" span="31..32"/>
+      <scribe:node id="n6" sub_type="Identifier" label="a" span="35..36"/>
+      <scribe:node id="n7" sub_type="Identifier" label="b" span="39..40"/>
+      </scribe:nodes>
+      <scribe:edges>
+      <scribe:edge id="e0" rel="child" src="n10" dst="n1" payload='{"order":0}'/>
+      <scribe:edge id="e1" rel="child" src="n10" dst="n2" payload='{"order":1}'/>
+      <scribe:edge id="e2" rel="child" src="n10" dst="n3" payload='{"order":2}'/>
+      <scribe:edge id="e3" rel="child" src="n10" dst="n4" payload='{"order":3}'/>
+      <scribe:edge id="e4" rel="child" src="n10" dst="n9" payload='{"order":4}'/>
+      <scribe:edge id="e5" rel="child" src="n9" dst="n8" payload='{"order":0}'/>
+      <scribe:edge id="e6" rel="child" src="n8" dst="n5" payload='{"order":0}'/>
+      <scribe:edge id="e7" rel="child" src="n8" dst="n6" payload='{"order":1}'/>
+      <scribe:edge id="e8" rel="child" src="n8" dst="n7" payload='{"order":2}'/>
+      </scribe:edges>
+    </scribe:graph>
+  </metadata>
+  <g class="layer edges">
+    <path class="edge" data-rel="child" data-src="n10" data-dst="n1" d="M 335 56 C 335 70, 60 70, 60 84"/>
+    <path class="edge" data-rel="child" data-src="n10" data-dst="n2" d="M 335 56 C 335 70, 170 70, 170 84"/>
+    <path class="edge" data-rel="child" data-src="n10" data-dst="n3" d="M 335 56 C 335 70, 280 70, 280 84"/>
+    <path class="edge" data-rel="child" data-src="n10" data-dst="n4" d="M 335 56 C 335 70, 390 70, 390 84"/>
+    <path class="edge" data-rel="child" data-src="n10" data-dst="n9" d="M 335 56 C 335 70, 610 70, 610 84"/>
+    <path class="edge" data-rel="child" data-src="n9" data-dst="n8" d="M 610 116 C 610 130, 610 130, 610 144"/>
+    <path class="edge" data-rel="child" data-src="n8" data-dst="n5" d="M 610 176 C 610 190, 500 190, 500 204"/>
+    <path class="edge" data-rel="child" data-src="n8" data-dst="n6" d="M 610 176 C 610 190, 610 190, 610 204"/>
+    <path class="edge" data-rel="child" data-src="n8" data-dst="n7" d="M 610 176 C 610 190, 720 190, 720 204"/>
+  </g>
+  <g class="layer nodes">
+    <g class="node" id="n10" data-node-id="n10" data-sub_type="FunctionDeclaration" data-span="0..42">
+      <rect x="305.0" y="24" width="60" height="32" rx="4"/>
+      <text x="335.0" y="44.0" text-anchor="middle">mux</text>
+      <title>mux (FunctionDeclaration, 0..42)</title>
+      <desc>FunctionDeclaration node spanning bytes 0..42</desc>
+    </g>
+    <g class="node" id="n1" data-node-id="n1" data-sub_type="Identifier" data-span="9..12">
+      <rect x="30.0" y="84" width="60" height="32" rx="4"/>
+      <text x="60.0" y="104.0" text-anchor="middle">mux</text>
+      <title>mux (Identifier, 9..12)</title>
+      <desc>Identifier node spanning bytes 9..12</desc>
+    </g>
+    <g class="node" id="n2" data-node-id="n2" data-sub_type="Parameter" data-span="13..14">
+      <rect x="140.0" y="84" width="60" height="32" rx="4"/>
+      <text x="170.0" y="104.0" text-anchor="middle">c</text>
+      <title>c (Parameter, 13..14)</title>
+      <desc>Parameter node spanning bytes 13..14</desc>
+    </g>
+    <g class="node" id="n3" data-node-id="n3" data-sub_type="Parameter" data-span="16..17">
+      <rect x="250.0" y="84" width="60" height="32" rx="4"/>
+      <text x="280.0" y="104.0" text-anchor="middle">a</text>
+      <title>a (Parameter, 16..17)</title>
+      <desc>Parameter node spanning bytes 16..17</desc>
+    </g>
+    <g class="node" id="n4" data-node-id="n4" data-sub_type="Parameter" data-span="19..20">
+      <rect x="360.0" y="84" width="60" height="32" rx="4"/>
+      <text x="390.0" y="104.0" text-anchor="middle">b</text>
+      <title>b (Parameter, 19..20)</title>
+      <desc>Parameter node spanning bytes 19..20</desc>
+    </g>
+    <g class="node" id="n9" data-node-id="n9" data-sub_type="ReturnStatement" data-span="31..40">
+      <rect x="549.5" y="84" width="121" height="32" rx="4"/>
+      <text x="610.0" y="104.0" text-anchor="middle">ReturnStatement</text>
+      <title>(ReturnStatement) (ReturnStatement, 31..40)</title>
+      <desc>ReturnStatement node spanning bytes 31..40</desc>
+    </g>
+    <g class="node" id="n8" data-node-id="n8" data-sub_type="ConditionalExpression" data-span="31..40">
+      <rect x="580.0" y="144" width="60" height="32" rx="4"/>
+      <text x="610.0" y="164.0" text-anchor="middle">?:</text>
+      <title>?: (ConditionalExpression, 31..40)</title>
+      <desc>ConditionalExpression node spanning bytes 31..40</desc>
+    </g>
+    <g class="node" id="n5" data-node-id="n5" data-sub_type="Identifier" data-span="31..32">
+      <rect x="470.0" y="204" width="60" height="32" rx="4"/>
+      <text x="500.0" y="224.0" text-anchor="middle">c</text>
+      <title>c (Identifier, 31..32)</title>
+      <desc>Identifier node spanning bytes 31..32</desc>
+    </g>
+    <g class="node" id="n6" data-node-id="n6" data-sub_type="Identifier" data-span="35..36">
+      <rect x="580.0" y="204" width="60" height="32" rx="4"/>
+      <text x="610.0" y="224.0" text-anchor="middle">a</text>
+      <title>a (Identifier, 35..36)</title>
+      <desc>Identifier node spanning bytes 35..36</desc>
+    </g>
+    <g class="node" id="n7" data-node-id="n7" data-sub_type="Identifier" data-span="39..40">
+      <rect x="690.0" y="204" width="60" height="32" rx="4"/>
+      <text x="720.0" y="224.0" text-anchor="middle">b</text>
+      <title>b (Identifier, 39..40)</title>
+      <desc>Identifier node spanning bytes 39..40</desc>
+    </g>
+  </g>
+</svg>

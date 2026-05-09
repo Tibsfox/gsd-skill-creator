@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200" width="600" height="200" role="img" aria-labelledby="t d">
+  <title id="t">Master timeline animation pattern</title>
+  <desc id="d">Three elements appear in chained sequence. The first fades in over 1 second, the second begins when the first ends and fades in plus moves right, the third begins when the second ends and rotates. Demonstrates SMIL begin chains for declarative cross-element synchronisation.</desc>
+  <defs>
+    <style>
+      .frame { fill: #fafafa; stroke: #ccc; }
+      .lbl { font-family: Helvetica, Arial, sans-serif; font-size: 12px; fill: #333; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <rect class="frame" x="10" y="10" width="580" height="180" rx="6"/>
+  <text class="lbl" x="300" y="32" font-weight="bold" font-size="14">Master timeline (SMIL begin chains)</text>
+
+  <circle id="c1" cx="100" cy="100" r="20" fill="#1d4ed8" opacity="0">
+    <animate attributeName="opacity" from="0" to="1" begin="0s" dur="1s" fill="freeze" id="a1"/>
+  </circle>
+  <text class="lbl" x="100" y="150">A appears t=0..1s</text>
+
+  <circle id="c2" cx="240" cy="100" r="20" fill="#7c3aed" opacity="0">
+    <animate attributeName="opacity" from="0" to="1" begin="a1.end" dur="1s" fill="freeze" id="a2"/>
+    <animate attributeName="cx" from="240" to="320" begin="a1.end" dur="1s" fill="freeze"/>
+  </circle>
+  <text class="lbl" x="280" y="150">B fades+slides at A.end</text>
+
+  <rect id="r3" x="450" y="80" width="40" height="40" fill="#16a34a" opacity="0">
+    <animate attributeName="opacity" from="0" to="1" begin="a2.end" dur="0.5s" fill="freeze" id="a3"/>
+    <animateTransform attributeName="transform" type="rotate" from="0 470 100" to="360 470 100" begin="a2.end" dur="2s" fill="freeze"/>
+  </rect>
+  <text class="lbl" x="470" y="150">C rotates at B.end</text>
+
+  <text class="lbl" x="300" y="180" font-style="italic">begin="prev.end" chains animations across elements without JS</text>
+</svg>

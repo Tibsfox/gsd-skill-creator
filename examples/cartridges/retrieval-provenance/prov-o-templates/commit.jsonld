@@ -1,0 +1,24 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/prov.jsonld",
+    {
+      "scribe": "https://gsd-skill-creator.dev/schema/scribe#",
+      "schema": "http://schema.org/",
+      "codemeta": "https://w3id.org/codemeta/3.0"
+    }
+  ],
+  "@id": "scribe:commit/{{sha}}",
+  "@type": ["prov:Entity", "schema:SoftwareSourceCode"],
+  "schema:name": "{{subject}}",
+  "schema:description": "{{body}}",
+  "scribe:identifier": "{{ic_identifier}}",
+  "prov:atTime": "{{authored_at_iso8601}}",
+  "prov:wasGeneratedBy": { "@id": "scribe:session/{{session_id}}" },
+  "prov:wasAttributedTo": { "@id": "scribe:agent/{{author_slug}}" },
+  "prov:used": [
+    {{#each used_planning_docs}}
+    { "@id": "scribe:file/{{this}}" }{{#unless @last}},{{/unless}}
+    {{/each}}
+  ],
+  "prov:hadPlan": { "@id": "scribe:task/{{ic_identifier}}" }
+}

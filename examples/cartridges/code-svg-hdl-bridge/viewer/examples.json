@@ -1,0 +1,19 @@
+{
+  "examples": [
+    {
+      "id": "add",
+      "label": "32-bit adder",
+      "source": "function add(a, b) { return a + b }"
+    },
+    {
+      "id": "xor",
+      "label": "1-bit XOR",
+      "source": "function xor1(a, b) { return a ^ b }"
+    },
+    {
+      "id": "mux",
+      "label": "2:1 multiplexer",
+      "source": "function mux(c, a, b) { return c ? a : b }"
+    }
+  ]
+}

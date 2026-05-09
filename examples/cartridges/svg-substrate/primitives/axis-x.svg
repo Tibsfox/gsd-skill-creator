@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Horizontal axis with five ticks and labels. Parameterise by editing tick positions and labels in place. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 60" width="400" height="60" role="img" aria-labelledby="t d">
+  <title id="t">X-axis</title>
+  <desc id="d">A horizontal axis with five evenly spaced ticks labelled 0 through 100 in increments of 25. The author edits the tick positions and labels in place.</desc>
+  <g role="graphics-object" aria-label="x-axis" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#444">
+    <line x1="20" y1="20" x2="380" y2="20" stroke="#444" stroke-width="1.2"/>
+    <g><line x1="20" y1="20" x2="20" y2="26" stroke="#444"/><text x="20" y="42" text-anchor="middle">0</text></g>
+    <g><line x1="110" y1="20" x2="110" y2="26" stroke="#444"/><text x="110" y="42" text-anchor="middle">25</text></g>
+    <g><line x1="200" y1="20" x2="200" y2="26" stroke="#444"/><text x="200" y="42" text-anchor="middle">50</text></g>
+    <g><line x1="290" y1="20" x2="290" y2="26" stroke="#444"/><text x="290" y="42" text-anchor="middle">75</text></g>
+    <g><line x1="380" y1="20" x2="380" y2="26" stroke="#444"/><text x="380" y="42" text-anchor="middle">100</text></g>
+  </g>
+</svg>

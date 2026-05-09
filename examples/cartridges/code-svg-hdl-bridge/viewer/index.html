@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SCRIBE Round-Trip Viewer — TypeScript ↔ SVG ↔ Verilog</title>
+  <link rel="stylesheet" href="viewer.css">
+</head>
+<body>
+  <header>
+    <h1>SCRIBE Round-Trip Viewer</h1>
+    <p class="tagline">TypeScript &harr; AST-as-SVG &harr; Verilog &harr; Netlist-as-SVG. Toy scope per Doc 04 &sect;4.2.</p>
+    <p class="meta">Mission SCRIBE (v1.49.621) &middot; Track 3 CODE-SVG-HDL-BRIDGE &middot; Doc 07 self-demo</p>
+  </header>
+
+  <section class="controls">
+    <label for="example-select">Example:</label>
+    <select id="example-select">
+      <option value="add">add(a, b) &rarr; a + b</option>
+      <option value="xor">xor1(a, b) &rarr; a ^ b (1-bit)</option>
+      <option value="mux">mux(c, a, b) &rarr; c ? a : b</option>
+    </select>
+    <button id="btn-load-example">Load example</button>
+    <button id="btn-run-roundtrip">Run round-trip</button>
+    <button id="btn-validate">Validate SVG</button>
+  </section>
+
+  <main class="grid">
+    <section class="pane" id="pane-source">
+      <h2>1. TypeScript source</h2>
+      <textarea id="source-input" spellcheck="false" rows="6"></textarea>
+      <div class="status" id="source-status"></div>
+    </section>
+
+    <section class="pane" id="pane-ast">
+      <h2>2. AST as SVG (kind=&quot;ast&quot;)</h2>
+      <div class="svg-container" id="ast-svg-container"></div>
+      <details><summary>SVG markup (with SCRIBE metadata)</summary>
+        <textarea id="ast-svg-text" spellcheck="false" rows="12" readonly></textarea>
+      </details>
+    </section>
+
+    <section class="pane" id="pane-verilog">
+      <h2>3. Emitted Verilog</h2>
+      <textarea id="verilog-output" spellcheck="false" rows="6" readonly></textarea>
+      <div class="status" id="verilog-status"></div>
+    </section>
+
+    <section class="pane" id="pane-netlist">
+      <h2>4. Netlist as SVG (kind=&quot;netlist&quot;)</h2>
+      <div class="svg-container" id="netlist-svg-container"></div>
+      <details><summary>SVG markup</summary>
+        <textarea id="netlist-svg-text" spellcheck="false" rows="10" readonly></textarea>
+      </details>
+    </section>
+
+    <section class="pane wide" id="pane-roundtrip">
+      <h2>5. Round-trip back to source</h2>
+      <p class="explainer">
+        Take the AST-SVG (pane 2), parse the metadata, regenerate TypeScript.
+        If the round-trip is lossless, the regenerated source matches pane 1
+        modulo whitespace.
+      </p>
+      <textarea id="roundtrip-output" spellcheck="false" rows="6" readonly></textarea>
+      <div class="status" id="roundtrip-status"></div>
+    </section>
+
+    <section class="pane wide" id="pane-validation">
+      <h2>6. Validation report</h2>
+      <pre id="validation-report">Run a round-trip to populate.</pre>
+    </section>
+  </main>
+
+  <footer>
+    <p>This viewer demonstrates the SCRIBE round-trip thesis (Doc 06) at toy scope.
+    All transforms run in the browser; no network calls. View source for impl details.</p>
+    <p>License: Apache-2.0 (cartridge default). Namespace: <code>https://tibsfox.com/Research/SCRIBE/ns#</code></p>
+  </footer>
+
+  <!-- Component 05: persistence-config.js must load BEFORE viewer.js.
+       Default: enabled=false (file:// safe, zero network requests).
+       To enable persistence when served via the dashboard-service, set:
+         window.SCRIBE_PERSISTENCE_OVERRIDE = { enabled: true };
+       in an inline <script> BEFORE these two lines, or ship a deployment-specific
+       copy of persistence-config.js with `enabled: true`. -->
+  <script src="persistence-config.js"></script>
+  <script src="viewer.js"></script>
+</body>
+</html>

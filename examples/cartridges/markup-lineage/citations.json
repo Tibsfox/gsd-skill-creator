@@ -1,0 +1,354 @@
+{
+  "$schema": "https://schemas.gsd.tools/cartridge/citations/v1.json",
+  "cartridge": "markup-lineage",
+  "version": "1.0.0",
+  "mission": "scribe",
+  "track": "T1",
+  "generatedAt": "2026-05-09",
+  "unifiedIndex": "../../../.planning/missions/v1-49-621-scribe/CITATIONS.json",
+  "citations": [
+    {
+      "id": "iso-8879-1986",
+      "type": "standard",
+      "title": "Information processing — Text and office systems — Standard Generalized Markup Language (SGML)",
+      "publisher": "International Organization for Standardization",
+      "designation": "ISO 8879:1986",
+      "year": 1986,
+      "month": 10,
+      "day": 15,
+      "url": "https://www.iso.org/standard/16387.html",
+      "amendments": ["1988", "1996 corrigendum", "1999 corrigendum"],
+      "citedFromDocs": ["01", "06"]
+    },
+    {
+      "id": "goldfarb-1990-handbook",
+      "type": "book",
+      "title": "The SGML Handbook",
+      "authors": ["Charles F. Goldfarb"],
+      "publisher": "Oxford University Press",
+      "year": 1990,
+      "isbn": "0-19-853737-9",
+      "citedFromDocs": ["01"]
+    },
+    {
+      "id": "reid-1980-scribe",
+      "type": "thesis",
+      "title": "Scribe: A Document Specification Language and Its Compiler",
+      "authors": ["Brian K. Reid"],
+      "advisor": "Robert F. Sproull",
+      "institution": "Carnegie Mellon University",
+      "year": 1980,
+      "degree": "PhD Computer Science",
+      "month": 12,
+      "techReportNumber": "CMU-CS-81-100",
+      "dticAccession": "ADA125287",
+      "url": "https://apps.dtic.mil/sti/tr/pdf/ADA125287.pdf",
+      "citedFromDocs": ["02", "06"]
+    },
+    {
+      "id": "knuth-1984-texbook",
+      "type": "book",
+      "title": "The TeXbook",
+      "authors": ["Donald E. Knuth"],
+      "publisher": "Addison-Wesley",
+      "year": 1984,
+      "isbn": "0-201-13447-0",
+      "seriesNote": "Volume A of Computers & Typesetting",
+      "citedFromDocs": ["02", "05", "06"]
+    },
+    {
+      "id": "lamport-1986-latex",
+      "type": "book",
+      "title": "LaTeX: A Document Preparation System",
+      "authors": ["Leslie Lamport"],
+      "publisher": "Addison-Wesley",
+      "year": 1986,
+      "isbn": "0-201-15790-X",
+      "secondEdition": 1994,
+      "citedFromDocs": ["02", "06"]
+    },
+    {
+      "id": "berners-lee-1989-proposal",
+      "type": "report",
+      "title": "Information Management: A Proposal",
+      "authors": ["Tim Berners-Lee"],
+      "publisher": "CERN",
+      "year": 1989,
+      "month": 3,
+      "day": 12,
+      "url": "https://www.w3.org/History/1989/proposal.html",
+      "citedFromDocs": ["03"]
+    },
+    {
+      "id": "rfc-1866",
+      "type": "rfc",
+      "title": "Hypertext Markup Language - 2.0",
+      "authors": ["Tim Berners-Lee", "Dan Connolly"],
+      "publisher": "IETF",
+      "designation": "RFC 1866",
+      "year": 1995,
+      "month": 11,
+      "url": "https://datatracker.ietf.org/doc/html/rfc1866",
+      "citedFromDocs": ["03", "06"]
+    },
+    {
+      "id": "w3c-html401-1999",
+      "type": "specification",
+      "title": "HTML 4.01 Specification",
+      "publisher": "W3C",
+      "year": 1999,
+      "month": 12,
+      "url": "https://www.w3.org/TR/html401/",
+      "citedFromDocs": ["03"]
+    },
+    {
+      "id": "w3c-xhtml1-2000",
+      "type": "specification",
+      "title": "XHTML 1.0: The Extensible HyperText Markup Language",
+      "publisher": "W3C",
+      "year": 2000,
+      "month": 1,
+      "day": 26,
+      "url": "https://www.w3.org/TR/xhtml1/",
+      "citedFromDocs": ["03", "04", "06"]
+    },
+    {
+      "id": "whatwg-html-living",
+      "type": "specification",
+      "title": "HTML Living Standard",
+      "publisher": "WHATWG",
+      "year": 2026,
+      "url": "https://html.spec.whatwg.org/",
+      "note": "Continuously published; W3C HTML5 became this in 2019",
+      "citedFromDocs": ["03", "06"]
+    },
+    {
+      "id": "w3c-xml10-fifth",
+      "type": "specification",
+      "title": "Extensible Markup Language (XML) 1.0 (Fifth Edition)",
+      "publisher": "W3C",
+      "year": 2008,
+      "month": 11,
+      "url": "https://www.w3.org/TR/xml/",
+      "citedFromDocs": ["04", "06"]
+    },
+    {
+      "id": "w3c-xml-infoset",
+      "type": "specification",
+      "title": "XML Information Set (Second Edition)",
+      "publisher": "W3C",
+      "year": 2004,
+      "month": 2,
+      "url": "https://www.w3.org/TR/xml-infoset/",
+      "citedFromDocs": ["04", "06"]
+    },
+    {
+      "id": "w3c-xml-namespaces",
+      "type": "specification",
+      "title": "Namespaces in XML 1.0 (Third Edition)",
+      "publisher": "W3C",
+      "year": 2009,
+      "month": 12,
+      "url": "https://www.w3.org/TR/xml-names/",
+      "citedFromDocs": ["04"]
+    },
+    {
+      "id": "w3c-xpath10",
+      "type": "specification",
+      "title": "XML Path Language (XPath) Version 1.0",
+      "authors": ["James Clark", "Steve DeRose"],
+      "publisher": "W3C",
+      "year": 1999,
+      "month": 11,
+      "day": 16,
+      "url": "https://www.w3.org/TR/1999/REC-xpath-19991116/",
+      "citedFromDocs": ["04", "06"]
+    },
+    {
+      "id": "w3c-xslt10",
+      "type": "specification",
+      "title": "XSL Transformations (XSLT) Version 1.0",
+      "authors": ["James Clark"],
+      "publisher": "W3C",
+      "year": 1999,
+      "month": 11,
+      "day": 16,
+      "url": "https://www.w3.org/TR/xslt-10/",
+      "citedFromDocs": ["04", "06"]
+    },
+    {
+      "id": "w3c-svg-secret-origin",
+      "type": "wiki",
+      "title": "Secret Origin of SVG",
+      "publisher": "W3C SVG Working Group",
+      "url": "https://www.w3.org/Graphics/SVG/WG/wiki/Secret_Origin_of_SVG",
+      "citedFromDocs": ["04", "06"]
+    },
+    {
+      "id": "w3c-svg10-2001",
+      "type": "specification",
+      "title": "Scalable Vector Graphics (SVG) 1.0 Specification",
+      "publisher": "W3C",
+      "year": 2001,
+      "month": 9,
+      "day": 4,
+      "url": "https://www.w3.org/TR/SVG10/",
+      "citedFromDocs": ["04", "06"]
+    },
+    {
+      "id": "w3c-mathml4",
+      "type": "specification",
+      "title": "Mathematical Markup Language (MathML) Version 4.0",
+      "publisher": "W3C",
+      "year": 2024,
+      "month": 11,
+      "day": 7,
+      "url": "https://www.w3.org/TR/mathml4/",
+      "citedFromDocs": ["05", "06"]
+    },
+    {
+      "id": "w3c-mathml-history",
+      "type": "publication-list",
+      "title": "MathML Recommendation Version History",
+      "publisher": "W3C Math Working Group",
+      "url": "https://www.w3.org/Math/Documents/mathml-history.html",
+      "citedFromDocs": ["05"]
+    },
+    {
+      "id": "mathjax-docs",
+      "type": "documentation",
+      "title": "MathJax 4.0 Documentation — TeX and LaTeX Support",
+      "url": "https://docs.mathjax.org/en/latest/input/tex/index.html",
+      "citedFromDocs": ["05"]
+    },
+    {
+      "id": "temml-comparison",
+      "type": "documentation",
+      "title": "Temml — Convert TeX to MathML — Comparison of TeX Coverage",
+      "url": "https://temml.org/docs/en/comparison",
+      "citedFromDocs": ["05"]
+    },
+    {
+      "id": "pandoc-project",
+      "type": "software",
+      "title": "Pandoc — Universal Document Converter",
+      "authors": ["John MacFarlane"],
+      "year": 2006,
+      "url": "https://pandoc.org/",
+      "sourceUrl": "https://github.com/jgm/pandoc",
+      "citedFromDocs": ["07"]
+    },
+    {
+      "id": "pandoc-types-package",
+      "type": "software",
+      "title": "pandoc-types Haskell package",
+      "url": "https://hackage.haskell.org/package/pandoc-types",
+      "citedFromDocs": ["07", "06"]
+    },
+    {
+      "id": "commonmark",
+      "type": "specification",
+      "title": "CommonMark Specification",
+      "authors": ["John MacFarlane", "et al."],
+      "year": 2014,
+      "url": "https://commonmark.org/",
+      "specUrl": "https://spec.commonmark.org/",
+      "citedFromDocs": ["07"]
+    },
+    {
+      "id": "typst-project",
+      "type": "software",
+      "title": "Typst — A new markup-based typesetting system",
+      "authors": ["Laurenz Mädje", "Martin Haug"],
+      "year": 2023,
+      "url": "https://typst.app/",
+      "sourceUrl": "https://github.com/typst/typst",
+      "license": "Apache-2.0",
+      "citedFromDocs": ["07", "06"]
+    },
+    {
+      "id": "asciidoctor",
+      "type": "software",
+      "title": "Asciidoctor — Reference AsciiDoc implementation",
+      "authors": ["Dan Allen", "et al."],
+      "year": 2012,
+      "url": "https://asciidoctor.org/",
+      "historyUrl": "https://docs.asciidoctor.org/about/history/",
+      "citedFromDocs": ["07"]
+    },
+    {
+      "id": "docutils",
+      "type": "software",
+      "title": "Docutils / reStructuredText",
+      "authors": ["David Goodger", "et al."],
+      "year": 2002,
+      "url": "https://docutils.sourceforge.io/",
+      "citedFromDocs": ["07"]
+    },
+    {
+      "id": "orgmode",
+      "type": "software",
+      "title": "Org mode for GNU Emacs",
+      "authors": ["Carsten Dominik", "Eric Schulte (Babel)", "et al."],
+      "year": 2003,
+      "url": "https://orgmode.org/",
+      "citedFromDocs": ["07"]
+    },
+    {
+      "id": "loc-sgml",
+      "type": "report",
+      "title": "Standard Generalized Markup Language (SGML). ISO 8879:1986 — Sustainability of Digital Formats",
+      "publisher": "Library of Congress",
+      "url": "https://www.loc.gov/preservation/digital/formats/fdd/fdd000465.shtml",
+      "citedFromDocs": ["01"]
+    },
+    {
+      "id": "loc-html",
+      "type": "report",
+      "title": "Hypertext Markup Language (HTML), versions prior to 2.0 — Sustainability of Digital Formats",
+      "publisher": "Library of Congress",
+      "url": "https://www.loc.gov/preservation/digital/formats/fdd/fdd000476.shtml",
+      "citedFromDocs": ["03"]
+    },
+    {
+      "id": "tug-whatis",
+      "type": "documentation",
+      "title": "What is TeX? — TeX Users Group",
+      "publisher": "TeX Users Group",
+      "url": "https://www.tug.org/whatis.html",
+      "citedFromDocs": ["02"]
+    },
+    {
+      "id": "raggett-html-history",
+      "type": "book-chapter",
+      "title": "A History of HTML — Chapter 2 of Raggett on HTML 4",
+      "authors": ["Dave Raggett"],
+      "publisher": "W3C / Addison-Wesley",
+      "url": "https://www.w3.org/People/Raggett/book4/ch02.html",
+      "citedFromDocs": ["03"]
+    },
+    {
+      "id": "bray-road-to-xml",
+      "type": "essay",
+      "title": "The Road to XML: Adapting SGML to the Web",
+      "authors": ["Tim Bray"],
+      "publisher": "xml.com",
+      "url": "https://www.xml.com/pub/a/w3j/s1.discussion.html",
+      "citedFromDocs": ["04"]
+    },
+    {
+      "id": "history-of-information-gml",
+      "type": "encyclopedia",
+      "title": "IBM Introduces the Generalized Markup Language (GML) and SGML",
+      "url": "https://historyofinformation.com/detail.php?id=1665",
+      "citedFromDocs": ["01"]
+    },
+    {
+      "id": "history-of-information-tex",
+      "type": "encyclopedia",
+      "title": "Donald Knuth Creates TeX and Metafont",
+      "url": "https://www.historyofinformation.com/detail.php?id=3339",
+      "citedFromDocs": ["02"]
+    }
+  ]
+}

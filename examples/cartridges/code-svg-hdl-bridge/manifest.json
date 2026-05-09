@@ -1,0 +1,43 @@
+{
+  "name": "code-svg-hdl-bridge",
+  "version": "1.0.0",
+  "kind": "cartridge",
+  "track": "T3",
+  "mission": "scribe",
+  "milestone": "v1.49.621",
+  "wave": 2,
+  "summary": "SVG as a round-trippable intermediate representation between source code and HDL. Ships an interactive in-browser viewer demonstrating bidirectional TypeScript-toy-subset ↔ SVG ↔ Verilog round-trip at toy scope.",
+  "license": "Apache-2.0",
+  "scribe_namespace": "https://tibsfox.com/Research/SCRIBE/ns#",
+  "composes_with": ["svg-substrate", "retrieval-provenance", "markup-lineage"],
+  "self_demo_status": "PASS",
+  "self_demo_evidence": "viewer/ ships a working bidirectional round-trip demo with 3 examples; verified via Node+jsdom harness 2026-05-09",
+  "deliverables": {
+    "documents": 9,
+    "viewer_examples": 3,
+    "metadata_namespace_version": 1,
+    "supported_target_hdl": ["verilog"],
+    "supported_source_lang": ["typescript-toy-subset"]
+  },
+  "substrate_decisions": {
+    "metadata_namespace": "https://tibsfox.com/Research/SCRIBE/ns#",
+    "schema_version": 1,
+    "ast_taxonomy_basis": "TypeScript SyntaxKind",
+    "netlist_taxonomy_basis": "Yosys cell types",
+    "edge_relation_set": ["child", "wire", "calls", "uses", "defines", "instantiates", "wasDerivedFrom"],
+    "round_trip_invariants": "see round-trip-spec.md",
+    "validator": "svg-to-ast/validate.ts (extends T2 cartridge a11y-check)",
+    "svgo_config": "svg-to-ast/svgo-roundtrip.config.js (preserves metadata + data-* + custom namespaces)"
+  },
+  "runtime_dependencies": ["retrieval-provenance", "dashboard-lod-rendering"],
+  "deferred": [
+    "Full TypeScript subset (loops, calls, classes)",
+    "VHDL / Chisel / Amaranth / SpinalHDL as round-trip targets",
+    "HLS pipelines (Vivado HLS, Bambu)",
+    "Yosys-driven netlist rendering at full fidelity",
+    "Formal verification of the round-trip (Lean 4)",
+    "Persistence to T5 provenance graph at runtime",
+    "Lossy-fallback structural recovery",
+    "Chip-as-document silicon-layer extension"
+  ]
+}
