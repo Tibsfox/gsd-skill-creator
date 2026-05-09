@@ -188,4 +188,125 @@ describe('update-state-md-on-ship.mjs', () => {
     const r2 = runScript();
     expect(r2.stdout).toContain('already at status=shipped');
   });
+
+  // -------------------------------------------------------------------------
+  // Stale-stuck advancement (post-v1.49.621 fix).
+  //
+  // Reproduces the v1.49.616-620 scenario: STATE.md anchored on an older
+  // tagged milestone with status=shipped, but newer milestone tags exist.
+  // The original implementation no-op'd in this case (read its own stale
+  // state and never advanced); the fix advances to the latest tag.
+  // -------------------------------------------------------------------------
+  describe('stale-stuck advancement', () => {
+    function commitAndTag(label, tag) {
+      writeFileSync(join(workDir, label), `${label}\n`);
+      git(`add ${label}`);
+      git(`commit -m "${label}"`);
+      git(`tag ${tag}`);
+    }
+
+    it('advances STATE.md when stuck on an older shipped milestone with a newer tag present', () => {
+      // STATE.md says v1.49.613 shipped; tags v1.49.613 and v1.49.621 exist.
+      setupRepo({ milestone: 'v1.49.613', status: 'shipped' });
+      tagMilestone('v1.49.613');
+      commitAndTag('newer1', 'v1.49.620');
+      commitAndTag('newer2', 'v1.49.621');
+
+      const r = runScript();
+      expect(r.exitCode).toBe(0);
+      expect(r.stdout).toContain('ADVANCED');
+      expect(r.stdout).toContain('v1.49.613');
+      expect(r.stdout).toContain('v1.49.621');
+
+      const updated = readFileSync(statePath, 'utf8');
+      expect(updated).toContain('milestone: v1.49.621');
+      expect(updated).not.toContain('milestone: v1.49.613');
+      expect(updated).toContain('status: shipped');
+      expect(updated).toMatch(/shipped_at_tag:\s*"v1\.49\.621"/);
+    });
+
+    it('emits warning about predecessor_* fields when advancing', () => {
+      setupRepo({ milestone: 'v1.49.613', status: 'shipped' });
+      tagMilestone('v1.49.613');
+      commitAndTag('newer', 'v1.49.620');
+
+      const r = runScript();
+      expect(r.stdout).toContain('WARNING');
+      expect(r.stdout).toContain('predecessor_*');
+    });
+
+    it('idempotent after advancement (second run is a no-op)', () => {
+      setupRepo({ milestone: 'v1.49.613', status: 'shipped' });
+      tagMilestone('v1.49.613');
+      commitAndTag('newer', 'v1.49.620');
+
+      const r1 = runScript();
+      expect(r1.stdout).toContain('ADVANCED');
+      const r2 = runScript();
+      expect(r2.stdout).toContain('already at status=shipped for v1.49.620');
+    });
+
+    it('--check reports WOULD ADVANCE without writing', () => {
+      setupRepo({ milestone: 'v1.49.613', status: 'shipped' });
+      tagMilestone('v1.49.613');
+      commitAndTag('newer', 'v1.49.620');
+
+      const r = runScript('--check');
+      expect(r.exitCode).toBe(0);
+      expect(r.stdout).toContain('WOULD ADVANCE');
+      // STATE.md unchanged
+      expect(readFileSync(statePath, 'utf8')).toContain('milestone: v1.49.613');
+    });
+
+    it('does NOT advance when STATE.md milestone has no tag (newly-opened milestone)', () => {
+      // Operator just opened v1.49.622 (no tag yet), but earlier tag v1.49.621 exists.
+      setupRepo({ milestone: 'v1.49.622', status: 'planning' });
+      commitAndTag('earlier', 'v1.49.621');
+
+      const r = runScript();
+      expect(r.exitCode).toBe(0);
+      expect(r.stdout).toContain('milestone not shipped yet');
+      // STATE.md unchanged — must NOT regress to v1.49.621
+      const after = readFileSync(statePath, 'utf8');
+      expect(after).toContain('milestone: v1.49.622');
+      expect(after).toContain('status: planning');
+    });
+
+    it('adds shipped_at_tag field when advancing if missing', () => {
+      setupRepo({ milestone: 'v1.49.613', status: 'shipped' });
+      tagMilestone('v1.49.613');
+      commitAndTag('newer', 'v1.49.620');
+
+      runScript();
+      const updated = readFileSync(statePath, 'utf8');
+      expect(updated).toMatch(/shipped_at_tag:\s*"v1\.49\.620"/);
+    });
+
+    it('ignores tags on disconnected branches (e.g. paused v1.50.x branch)', () => {
+      // Reproduces the gsd-skill-creator real-world scenario: dev/main at
+      // v1.49.621, but v1.50.43 tag exists on a separate paused branch.
+      // The script must filter via `git tag --merged HEAD` and stay on dev's
+      // history line.
+      setupRepo({ milestone: 'v1.49.613', status: 'shipped' });
+      tagMilestone('v1.49.613');
+      commitAndTag('dev-newer', 'v1.49.620');
+
+      // Branch off and add a higher version tag NOT reachable from main.
+      git(`checkout -b v1.50-experiment`);
+      writeFileSync(join(workDir, 'experimental'), 'experimental\n');
+      git(`add experimental`);
+      git(`commit -m "experimental"`);
+      git(`tag v1.50.43`);
+      git(`checkout main`); // back to the active branch
+
+      const r = runScript();
+      expect(r.exitCode).toBe(0);
+      // Must advance to v1.49.620 (reachable), NOT v1.50.43 (disconnected).
+      expect(r.stdout).toContain('v1.49.620');
+      expect(r.stdout).not.toContain('v1.50.43');
+      const updated = readFileSync(statePath, 'utf8');
+      expect(updated).toContain('milestone: v1.49.620');
+      expect(updated).not.toContain('milestone: v1.50.43');
+    });
+  });
 });
