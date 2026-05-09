@@ -48,6 +48,18 @@ process.stdin.on('end', () => {
         process.exit(2);
       }
 
+      // Reject Co-Authored-By: Claude trailers per v1.49.621 policy.
+      // Lesson 9 from v1.49.621 retrospective: operator policy is no AI attribution
+      // in commit history. Hook-layer enforcement prevents recurrence of the
+      // 14-commit force-push cleanup that was needed at v1.49.621 ship.
+      if (/^Co-Authored-By:\s*Claude\b/im.test(msg)) {
+        console.log(JSON.stringify({
+          decision: 'block',
+          reason: 'Commit messages may not include "Co-Authored-By: Claude ..." trailers (v1.49.621 policy). Strip the trailer and retry the commit. See lesson 9 in docs/release-notes/v1.49.621/chapter/03-retrospective.md.',
+        }));
+        process.exit(2);
+      }
+
       // Wave commit marker validation (warning only)
       const bodyLines = msg.split('\n').slice(1);
       const waveLines = bodyLines.filter((l) => /^Wave\s/.test(l));

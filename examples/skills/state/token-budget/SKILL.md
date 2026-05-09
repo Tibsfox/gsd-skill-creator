@@ -95,11 +95,13 @@ interface BudgetCheckResult {
 
 ### Default Values
 
-| Parameter | Default |
-|-----------|---------|
-| `maxTokensPerConvoy` | 500,000 tokens |
-| `maxTokensPerAgent` | 100,000 tokens |
-| `warningThresholdPercent` | 80% |
+| Parameter | Default | Recalibration note |
+|-----------|---------|--------------------|
+| `maxTokensPerConvoy` | 500,000 tokens | Was set conservatively pre-INLINE-SERIAL pattern. v1.49.621 actuals: ~50-300K per convoy under inline-serial Opus/Sonnet authoring (~10-15% of this default). Default retained for safety margin; missions may explicitly cap lower based on convoy shape. |
+| `maxTokensPerAgent` | 100,000 tokens | Pre-recursive-spawn-block default; with INLINE SERIAL the agent IS the convoy, so per-agent ≈ per-convoy. |
+| `warningThresholdPercent` | 80% | Unchanged. |
+
+**v1.49.621 retrospective lesson 3 — projection recalibration:** Wave 1+2+3+4 fleet token spend came in at ~26% of projected ceiling under INLINE SERIAL authoring. Future missions should project Opus convoys at ~75-300K and Sonnet convoys at ~30-150K based on output volume × ~1.5K tokens/100-line-of-output heuristic. Reserve 3-5× headroom over the projection for safety; do not 10× as this skill historically did.
 
 ## State Persistence
 
