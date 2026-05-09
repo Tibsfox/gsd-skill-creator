@@ -266,7 +266,6 @@ export class PgStore implements MemoryStore {
   /** Check if pg module is available. */
   async isAvailable(): Promise<boolean> {
     try {
-      // @ts-expect-error — pg types optional
       await import('pg');
       return true;
     } catch {
@@ -279,7 +278,6 @@ export class PgStore implements MemoryStore {
     if (this.initialized) return;
 
     try {
-      // @ts-expect-error — pg types optional
       const pg = await import('pg');
       this.pool = new pg.default.Pool({
         host: this.config.host,

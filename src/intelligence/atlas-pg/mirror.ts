@@ -40,7 +40,6 @@ async function getPool(): Promise<PgPool | null> {
   if (!process.env.PGHOST && !process.env.RH_POSTGRES_URL) return null;
   let pg: { Pool: new (cfg: Record<string, unknown>) => PgPool };
   try {
-    // @ts-expect-error — pg has no shipped .d.ts; treat as opaque module.
     pg = (await import('pg')) as unknown as { Pool: new (cfg: Record<string, unknown>) => PgPool };
   } catch {
     return null;
