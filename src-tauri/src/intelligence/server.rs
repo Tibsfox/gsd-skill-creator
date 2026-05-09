@@ -139,7 +139,14 @@ impl IntelligenceState {
 
 // ─── Atomic console request emission ─────────────────────────────────────────
 
-/// Generates a request ID with format `req_YYYY-MM-DD_HHMM_XXXX`.
+/// Generates a request ID with format `req_YYYY-MM-DD_HHMM_XXXXXXXX`.
+///
+/// Suffix length history: was 4 hex chars from UUID v4 (16^4 = 65,536 space → ~7.4%
+/// birthday-paradox collision at 100 calls — surfaced as TS-side CI flake on
+/// emitter-edge-cases.test.ts E13 in v1.49.621). Bumped to 8 hex chars
+/// (16^8 = 4.3 billion space → effectively never collides). The TS side at
+/// `src/intelligence/emitter/request-id.ts` has the parallel update.
+/// Lesson 10 in docs/release-notes/v1.49.621/chapter/03-retrospective.md.
 pub fn generate_request_id() -> String {
     use std::time::{SystemTime, UNIX_EPOCH};
     let secs = SystemTime::now()
@@ -156,9 +163,9 @@ pub fn generate_request_id() -> String {
     let day_in_year = days % 365;
     let month = (day_in_year / 30) + 1;
     let day_in_month = (day_in_year % 30) + 1;
-    let rand4 = &Uuid::new_v4().to_string()[..4];
+    let rand8 = &Uuid::new_v4().to_string()[..8];
     format!(
-        "req_{year:04}-{month:02}-{day_in_month:02}_{hours:02}{minutes:02}_{rand4}"
+        "req_{year:04}-{month:02}-{day_in_month:02}_{hours:02}{minutes:02}_{rand8}"
     )
 }
 
