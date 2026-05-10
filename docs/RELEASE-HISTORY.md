@@ -1,15 +1,16 @@
 # Release History
 
-669 milestones shipped across the v1.0 → v1.49.626 arc. The table below lists every shipped release, newest first.
+670 milestones shipped across the v1.0 → v1.49.627 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions, and where available, retrospectives and lessons learned. `Commits` is the count of commits between this tag and the previous tag (from git). `Phases` and `Plans` come from structured GSD metadata in the release README — most content/patch releases don't have these. `Retro` links to the retrospective chapter when present. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 669 releases · 668 with retrospectives · 633 with extracted lessons · quality A:624 B:4 C:11 D:4 F:26 (avg 95) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 670 releases · 669 with retrospectives · 633 with extracted lessons · quality A:624 B:4 C:11 D:4 F:27 (avg 94) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Retro | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|-------|---------|---------|-------|
+| [v1.49.627](release-notes/v1.49.627) | STS-1 Columbia First Space Shuttle Flight | — | 5 | — | — | [✓](release-notes/v1.49.627/chapter/03-retrospective.md) | — | F 45 |  |
 | [v1.49.626](release-notes/v1.49.626) | Solar Maximum Mission Repair-In-Orbit Substrate | — | 5 | — | — | [✓](release-notes/v1.49.626/chapter/03-retrospective.md) | — | F 45 |  |
 | [v1.49.625](release-notes/v1.49.625) | HEAO-3 Program-Trio Completion | — | 5 | — | — | [✓](release-notes/v1.49.625/chapter/03-retrospective.md) | — | F 45 |  |
 | [v1.49.624](release-notes/v1.49.624) | HEAO-2 / Einstein Observatory Degree-100 K-Boundary | — | 6 | — | — | [✓](release-notes/v1.49.624/chapter/03-retrospective.md) | — | F 45 |  |
