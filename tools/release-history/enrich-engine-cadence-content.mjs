@@ -199,10 +199,14 @@ function enrich00Summary(text) {
   for (let i = startIdx + 1; i < endIdx; i++) {
     const line = lines[i];
     let replacement = line;
-    // Numbered → paragraph
+    // Numbered with em-dash separator: `1. **TITLE** — content`
     replacement = replacement.replace(/^(\d+)\.\s+\*\*([^*\n]+?)\*\*\s+—\s+/, '**$2.** ');
-    // Bulleted-colon → paragraph (idempotency cleanup from earlier pass)
+    // Bulleted-colon (idempotency cleanup from earlier wrong pass):
+    // `- **TITLE:** content` → `**TITLE.** content`
     replacement = replacement.replace(/^-\s+\*\*([^*\n]+?):\*\*\s+/, '**$1.** ');
+    // Bulleted with parens or trailing prose: `- **TITLE** (content)` or
+    // `- **TITLE** content` → `**TITLE.** (content)` (period inside bold).
+    replacement = replacement.replace(/^-\s+\*\*([^*\n]+?)\*\*(\s+[^\n]+)$/, '**$1.**$2');
     if (replacement !== line) {
       lines[i] = replacement;
       mutated = true;

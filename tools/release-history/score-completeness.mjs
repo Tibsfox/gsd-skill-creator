@@ -819,22 +819,24 @@ function scoreForwardLessonsBlock(text) {
 export function isEngineCadence(text) {
   const head = text.split(/\r?\n/).slice(0, 30).join('\n');
   let hits = 0;
-  // Signal 1: explicit NASA Mission header field.
-  if (/\*\*NASA Mission:\*\*\s*[^\n]+(?:Degree|NSSDC|1\.\d+)/i.test(head)) hits++;
-  // Signal 2: Engine state ADVANCED with 5-track delta.
-  if (/\*\*Engine state:\*\*\s*[^\n]*ADVANCED[^\n]*NASA[^\n]*MUS[^\n]*ELC/i.test(head)) hits++;
-  // Signal 3: explicit Type=Engine-cadence marker.
+  // Signal 1: explicit NASA Mission header field (any).
+  if (/\*\*NASA Mission:\*\*/i.test(head)) hits++;
+  // Signal 2: explicit Type=Engine-cadence marker.
   if (/\*\*Type:\*\*\s*[^\n]*Engine[- ]cadence/i.test(head)) hits++;
-  // Signal 4: 3+ NEW LOCKED substrate primitives in first 5K chars.
-  const newLockedCount = (text.slice(0, 5000).match(/\bNEW\s+LOCKED\b/g) || []).length;
+  // Signal 3: NEW LOCKED density in entire corpus (3+).
+  const newLockedCount = (text.match(/\bNEW\s+LOCKED\b/g) || []).length;
   if (newLockedCount >= 3) hits++;
-  // Signal 5: 5-track Engine state advances bullets — all 5 present anywhere.
+  // Signal 4: 5-track Engine state advances bullets — all 5 present.
   const hasNasaBullet = /^- \*\*NASA degree:\*\*/m.test(text);
   const hasMusBullet  = /^- \*\*MUS degree:\*\*/m.test(text);
   const hasElcBullet  = /^- \*\*ELC degree:\*\*/m.test(text);
   const hasSpsBullet  = /^- \*\*SPS species:\*\*/m.test(text);
   const hasTrsBullet  = /^- \*\*TRS\b/m.test(text);
   if (hasNasaBullet && hasMusBullet && hasElcBullet && hasSpsBullet && hasTrsBullet) hits++;
+  // Signal 5: 5-track convergence narrative anywhere.
+  if (/\b5[- ]track\s+(NASA|substrate|convergence)/i.test(text)) hits++;
+  // Signal 6: explicit Phases:** 6 (W0-W5 wave-pipeline) marker.
+  if (/\*\*Phases:\*\*\s*6\s*\(W0-W5/i.test(head)) hits++;
   return hits >= 3;
 }
 
