@@ -1,5 +1,15 @@
 # v1.49.617 — HEAO-1 X-Ray All-Sky Survey
 
+**Released:** 2026-05-08
+**Type:** Engine-cadence degree-advancing milestone (v604+ run)
+**NASA Mission:** HEAO-1 X-Ray All-Sky Survey
+**Predecessor:** v1.49.616
+**Mission package:** `.planning/missions/v1-49-617-heao-1-x-ray-all-sky-survey/`
+**Engine state:** NASA degree:: 1.93 → **1.94** + MUS degree:: 1.93 → **1.94** + ELC degree:: 1.93 → **1.94** + SPS species:: #90 → **#91** + TRS M1 W2:: pack-16 logic-and-foundations binding; +14 cross-pack edges
+
+## Summary
+
+
 **Engine-cadence degree-advancing milestone — thirteenth consecutive degree-advancing milestone in the v604+ run.** HEAO-1 (NSSDC 1977-075A) — **first High Energy Astronomy Observatory; first all-sky X-ray survey at high sensitivity; substrate-archetype for survey-class observatory missions**. Launched 1977-08-12 06:28:59 UTC from Cape Canaveral LC-17B atop Atlas SLV-3D Centaur (final flight of the Atlas-Centaur D vehicle line); 16-month mission 1977-08-12 → 1979-01-09 (525 days; ended by battery exhaustion at planned end-of-life rather than catastrophic). Orbital parameters 432 × 445 km × 22.7° inclination; great-circle scan perpendicular-to-Sun every 6 months across two scan periods. Four-instrument payload: A1 LASS (Friedman NRL) 0.2-25 keV + A2 CXE (Boldt Goddard) 0.15-60 keV + A3 Modulation Collimator (Bradt MIT) 0.9-13 keV + A4 Hard X-ray + Low Energy Gamma-Ray (Peterson UCSD) 13-180 keV. Project scientist Frank McDonald (Goddard). 842-source catalog (Wood et al. 1984 ApJS 56:507) as primary scientific deliverable; SS 433 first relativistic-jet galactic binary discovered (Margon UW + Hjellming NRAO 1979); Hercules X-1 cyclotron line at 4×10¹² Gauss (Trümper et al. 1978 ApJ 219:L105); cosmic X-ray background flux measurements; cyg X-1 black hole confirmation. **First fresh regime-shift after v616 intra-regime second-instance**: paired-mission planetary regime → observatory/astrophysics regime (#10269 obs#6 hold-test passes; CANDIDATE FIFTH DAUGHTER PRIMITIVE PI-AS-CATALOG-AUTHOR emitted #10282). The observatory/astrophysics arc opens here that COBE 1989 / Compton GRO 1991 / HST 1990 / Chandra 1999 / Webb 2021 will inherit; the planetary-exploration arc parallels forward toward v618 Voyager 2 (1977-08-20 launch, +8d INSIDE-window of HEAO-1 = #10247 obs#10 cross-anchor).
 
 ## Engine state advances
@@ -49,3 +59,7 @@
 
 - Predecessor (immediate + degree-advancing): v1.49.616 Viking 2 Second Mars Landing.
 - Successor candidate: **v1.49.618 = Voyager 2 (NASA 1.95; 1977-08-20 launch chronologically first of Voyager pair)** — outer-planets grand tour Jupiter 1979 + Saturn 1981 + Uranus 1986 + Neptune 1989; substrate-coherence with v617 #10247 obs#10 cross-anchor (Voyager 2 launch +8d INSIDE-window of HEAO-1 launch). Voyager 1 launches 1977-09-05 = NASA 1.96 candidate at v619.
+
+## See also
+
+- Chapter contents: [00-summary](chapter/00-summary.md) · [03-retrospective](chapter/03-retrospective.md) · [04-lessons](chapter/04-lessons.md) · [99-context](chapter/99-context.md)

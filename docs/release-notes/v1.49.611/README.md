@@ -1,5 +1,15 @@
 # v1.49.611 — Skylab 3 First Long-Duration Crewed Mission
 
+**Released:** 2020-10-08
+**Type:** Engine-cadence degree-advancing milestone (v604+ run)
+**NASA Mission:** Skylab 3 First Long-Duration Crewed Mission
+**Predecessor:** v1.49.610
+**Mission package:** `.planning/missions/v1-49-611-skylab-3-first-long-duration-crewed-mission/`
+**Engine state:** NASA degree:: 1.87 → **1.88** + MUS degree:: 1.87 → **1.88** + ELC degree:: 1.87 → **1.88** + SPS species:: #84 → **#85** + TRS M1 W2:: pack-06 number theory bound; +14 cross-pack edges → **112 total** / **K_10 pack-pair completeness ACHIEVED** with **6 substrate-bridges to pack-10**
+
+## Summary
+
+
 **Engine-cadence degree-advancing milestone.** Skylab 3 (SL-3 / NSSDC 1973-050A) — first long-duration crewed mission and longest US mission to that date (59d 11h 9m 1s, more than double Skylab 2's 28-day baseline). Saturn IB SA-207 launched 1973-07-28 11:10:50 UTC from KSC LC-39B "milkstool" with **Alan Bean** (CDR; Apollo 12 LMP Moonwalker) + **Owen Garriott** (Science Pilot; Stanford EE PhD ionospheric physicist; ATM-PI participating crew member; first PI in space) + **Jack Lousma** (Pilot; Marine Corps aviator). RCS Quad B+D thruster propellant leaks during ascent triggered SL-RES rescue infrastructure activation (CSM-119 + SA-208 staged at LC-39B; first operational crewed-rescue-mission infrastructure; never launched but established the rescue-capability ISS inherits). 6 EVAs totaling 13h 43m. **ATM solar-physics program established CMEs as a STATISTICAL CLASS** via ~110 white-light coronal transients (77 measurable per Munro & Sime 1985). Iconic observations: 1973-08-10 magnetic-flux-rope CME / 1973-08-21 H-alpha "elbow prominence" / 1973-08-26-27 prominence-coronal-transient coupling event. Mission close 1973-09-25 22:19:51 UTC splashdown 9.6 km from USS New Orleans (Pacific recovery).
 
 ## Engine state advances
@@ -52,3 +62,7 @@
 
 - Predecessor (immediate + degree-advancing): v1.49.610 Skylab 2 First Crewed Station Mission + Rescue Completion.
 - Successor candidate: **v1.49.612 = Mariner 10 (NASA 1.89; first Mercury flyby; first Venus gravity assist; 1973-11-03 launch)** per FA-610-6 continue-engine-cadence decision.
+
+## See also
+
+- Chapter contents: [00-summary](chapter/00-summary.md) · [03-retrospective](chapter/03-retrospective.md) · [04-lessons](chapter/04-lessons.md) · [99-context](chapter/99-context.md)

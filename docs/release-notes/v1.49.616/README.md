@@ -1,5 +1,15 @@
 # v1.49.616 — Viking 2 Second Mars Landing
 
+**Released:** 2026-05-08
+**Type:** Engine-cadence degree-advancing milestone (v604+ run)
+**NASA Mission:** Viking 2 Second Mars Landing
+**Predecessor:** v1.49.615
+**Mission package:** `.planning/missions/v1-49-616-viking-2-second-mars-landing/`
+**Engine state:** NASA degree:: 1.92 → **1.93** + MUS degree:: 1.92 → **1.93** + ELC degree:: 1.92 → **1.93** + SPS species:: #89 → **#90** + TRS M1 W2:: pack-15 quantum theory binding; +14 cross-pack edges
+
+## Summary
+
+
 **Engine-cadence degree-advancing milestone — twelfth consecutive degree-advancing milestone in the v604+ run.** Viking 2 (NSSDC 1975-083A orbiter / 1975-083C lander) — **second successful Mars surface landing; first PAIR-OF-MISSION-AS-CROSS-VALIDATION at planetary scale**. Launched 1975-09-09 18:39 UTC from Cape Canaveral LC-41 atop Titan IIIE-Centaur (twentieth Titan-Centaur flight); cruise 1975-09-09 → 1976-08-07 (~11 months); Mars orbit insertion 1976-08-07 19:29:29 UTC; lander separation + powered descent + touchdown 1976-09-03 22:37:50 UTC at 47.967°N / 134.067°E in Utopia Planitia ("Plain of Utopia"), **6,460 km from Viking 1 site at 25° higher latitude**. Lander operations 1976-09-03 → 1980-04-11 (3.6 years; ended by battery failure); orbiter operations 1976-08-07 → 1978-07-25 (1.9 years; ended by attitude-control gas exhaustion). Project scientist Gerald A. Soffen continuing from Viking 1; biology PI roster Klein/Horowitz/Oyama/Levin re-running identical PR/LR/GEx protocols at the new latitude. **Biology results reproduced Viking 1**: LR-positive + PR-positive + GEx-positive + GCMS no-organics-detected — ambiguous results at TWO independent latitudes 6,460 km apart **simultaneously reinforcing both consensus-abiotic-superoxide (Soffen-Klein) AND Levin minority-interpretation** (Levin & Straat 2016 *Astrobiology* 16:798). Viking 1 + Viking 2 simultaneous surface operations 1976-09-03 → 1980-04-11 = **3.6-year intra-mission cross-anchor** (#10247 obs#9 INTRA-MISSION sub-form). Regime continues robotic-investigator INTRA-REGIME from v615; #10269 obs#5 hold-test at intra-regime second-instance WITHOUT fresh regime-shift. Three v615-emitted CANDIDATEs reach obs#2: #10276 DISSENTING-PI fourth-daughter-primitive (Levin LR-positive at second latitude); #10277 REMOTE-OPERATOR-AT-PLANETARY-SCALE (paired-lander 3.6-year simultaneous Earth-Mars ops); #10278 CALENDAR-DAY-SAME-AS-PRIOR-MISSION (declined-signal contrast vs v615 deliberate Apollo-11 +7y).
 
 ## Engine state advances
@@ -45,3 +55,7 @@
 
 - Predecessor (immediate + degree-advancing): v1.49.615 Viking 1 First Successful Mars Landing.
 - Successor candidate: **v1.49.617 = Voyager 2 (NASA 1.94; 1977-08-20 launch chronologically first; Jupiter 1979 + Saturn 1981 + Uranus 1986 + Neptune 1989 outer-planets grand tour)** per FA-616-7 continue-engine-cadence decision.
+
+## See also
+
+- Chapter contents: [00-summary](chapter/00-summary.md) · [03-retrospective](chapter/03-retrospective.md) · [04-lessons](chapter/04-lessons.md) · [99-context](chapter/99-context.md)

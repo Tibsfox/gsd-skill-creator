@@ -44,16 +44,35 @@ function countCommits(fromTag, toTag) {
   // from <fromTag>. For most milestones this matches the atomic-commit
   // count exactly. Pathological cases — milestones tagged on a merge
   // commit that pulled in a long-divergent parallel-engine branch (NASA,
-  // Seattle 360) — can produce counts in the thousands. We cap at 500:
-  // above that, fall back to first-parent --no-merges, which counts only
-  // the release-line atomic commits between the two tags. This bounds the
-  // worst-case inflation while leaving normal milestones unchanged.
+  // Seattle 360, artemis-ii) — can produce counts in the thousands.
+  //
+  // Two-stage fallback when default count > 500:
+  //   (1) first-parent --no-merges between the tags
+  //   (2) if that's still > 500, use first-parent since the prev-tag
+  //       commit-date — this bounds inflation when the prev tag and
+  //       current tag are on parallel branches sharing only an old
+  //       merge-base (e.g. v1.49.569/v1.49.570 = 3 hours apart in time
+  //       but share a merge-base 30+ tags back, yielding 5384 default /
+  //       3030 first-parent --no-merges / 4 first-parent since-date).
   const def = git('rev-list', '--count', `${fromTag}..${toTag}`);
   if (def === null) return null;
   const n = parseInt(def, 10);
   if (n <= 500) return n;
+
   const fp = git('rev-list', '--count', '--first-parent', '--no-merges', `${fromTag}..${toTag}`);
-  return fp !== null ? parseInt(fp, 10) : n;
+  const fpN = fp !== null ? parseInt(fp, 10) : n;
+  if (fpN <= 500) return fpN;
+
+  // Stage 2: date-bounded first-parent count. When the prev tag's
+  // commit-date is well before the current tag's commit-date but the
+  // tags share an old merge-base, this counts only the release-line
+  // commits actually authored in the window between the two tags.
+  const prevDate = git('log', fromTag, '-1', '--format=%cI');
+  if (!prevDate) return fpN;
+  const sinceCount = git('rev-list', '--count', toTag, '--first-parent', `--since=${prevDate}`);
+  if (sinceCount === null) return fpN;
+  const sN = parseInt(sinceCount, 10);
+  return sN > 0 ? sN : fpN;
 }
 
 function diffStats(fromTag, toTag) {

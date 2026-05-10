@@ -1,5 +1,15 @@
 # v1.49.618 — Voyager 2 Outer-Planets Grand Tour
 
+**Released:** 2018-11-05
+**Type:** Engine-cadence degree-advancing milestone (v604+ run)
+**NASA Mission:** Voyager 2 Outer-Planets Grand Tour
+**Predecessor:** v1.49.617
+**Mission package:** `.planning/missions/v1-49-618-voyager-2-outer-planets-grand-tour/`
+**Engine state:** NASA degree:: 1.94 → **1.95** + MUS degree:: 1.94 → **1.95** + ELC degree:: 1.94 → **1.95** + SPS species:: #91 → **#92** + TRS M1 W2:: pack-17 cryptography binding; +14 cross-pack edges
+
+## Summary
+
+
 **Engine-cadence degree-advancing milestone — fourteenth consecutive degree-advancing milestone in the v604+ run.** Voyager 2 (NSSDC 1977-076A) — **first and only spacecraft to complete close flyby of all four outer planets; only spacecraft ever to flyby Uranus + Neptune; substrate-archetype for grand-tour-class multi-planet trajectories exploiting rare planetary alignments**. Launched 1977-08-20 14:29:00 UTC from Cape Canaveral LC-41 atop Titan IIIE-Centaur (the same vehicle line that delivered HEAO-1 eight days earlier from an adjacent pad). 12-year primary mission Jupiter 1979-07-09 / Saturn 1981-08-26 / Uranus 1986-01-24 / Neptune 1989-08-25; Voyager Interstellar Mission 1989-present; heliopause crossing 2018-11-05 at 119.7 AU; current ~143 AU 2026 (~19.75 hr one-way light travel time). 12 instruments / 11 investigations under Bradford A. Smith (ISS) / Rudolf A. Hanel (IRIS) / A. Lyle Broadfoot (UVS) / Norman F. Ness (MAG) / Herbert S. Bridge (PLS) / Stamatios M. Krimigis (LECP) / Edward C. Stone (CRS + project scientist 1972-2022 50-year tenure). Voyager Golden Record cultural-payload-secondary-deliverable. **First fresh observatory→planetary regime-shift after v617 intra-regime second-instance**: observatory regime → outer-planets-grand-tour regime (#10269 obs#7 hold-test passes; tetra-form-plus-fifth-candidate taxonomy maintained). Six new substrate primitives admitted at v618: GRAND-TOUR-AS-SUBSTRATE-ARCHETYPE + CHRONOLOGICAL-VS-NUMERICAL-NAMING-INVERSION + TWIN-MISSION-PAIR-ARCHITECTURE + CULTURAL-PAYLOAD-AS-SECONDARY-DELIVERABLE + DECADAL-LATITUDE-OF-INVESTIGATOR + DEEP-SPACE-LATENCY-RETURNS.
 
 ## Engine state advances
@@ -49,3 +59,7 @@
 
 - Predecessor (immediate + degree-advancing): v1.49.617 HEAO-1 X-Ray All-Sky Survey.
 - Successor candidate: **v1.49.619 = Voyager 1 (NASA 1.96; 1977-09-05 launch chronologically second of Voyager pair; arrived at Jupiter first via faster JST trajectory)** — second-of-pair completion of TWIN-MISSION-PAIR architecture from Viking 1+2 → Voyager 1+2 generalization; first to reach interstellar 2012; substrate-coherence with v618 #10247 obs#11 cross-mission window overlap (Voyager 1 launch 1977-09-05 = Voyager 2 launch +16d OUTSIDE-strict but adjacent-cohort).
+
+## See also
+
+- Chapter contents: [00-summary](chapter/00-summary.md) · [03-retrospective](chapter/03-retrospective.md) · [04-lessons](chapter/04-lessons.md) · [99-context](chapter/99-context.md)

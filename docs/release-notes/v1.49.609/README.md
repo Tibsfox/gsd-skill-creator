@@ -1,5 +1,15 @@
 # v1.49.609 — Skylab Station Launch
 
+**Released:** 2026-05-06
+**Type:** Engine-cadence degree-advancing milestone (v604+ run)
+**NASA Mission:** Skylab Station Launch
+**Predecessor:** v1.49.608
+**Mission package:** `.planning/missions/v1-49-609-skylab-station-launch/`
+**Engine state:** NASA degree:: 1.85 → **1.86** + MUS degree:: 1.85 → **1.86** + ELC degree:: 1.85 → **1.86** + SPS species:: #82 → **#83** + TRS M1 W2:: pack-03 algebraic geometry bound; +14 cross-pack edges → 84 total / **K_8 pack-pair completeness ACHIEVED** with 4 substrate-bridges to pack-02 differential geometry
+
+## Summary
+
+
 **Engine-cadence degree-advancing milestone.** Skylab — first US space station — launched 1973-05-14 17:30:00 UTC on Saturn V SA-513 (the LAST Saturn V flight; freed by an Apollo cancellation). Orbital Workshop = converted Saturn IVB upper stage S-IVB-212 (wet→dry conversion); ~89,800 kg launch mass; orbit 434×442 km × 50.04°. **T+63s anomaly:** micrometeoroid + thermal shield ripped free, took solar array #2, jammed array #1; orbital insertion successful but interior 38°C / power 25-50% nominal. **Survive-by-in-flight-repair:** Skylab 2 launched 1973-05-25 with Conrad/Kerwin/Weitz; parasol-sunshield deployment 1973-05-26 15:38 UTC dropped temp to ~24°C; EVA 1973-06-07 freed jammed solar array. The architecture-pivot from transit (Apollo) to inhabit (Skylab) makes Shuttle / Mir / ISS thinkable.
 
 ## Engine state advances
@@ -40,3 +50,7 @@ This is the **first POSITIVE-CONFIRMING observation** in the #10247 SAME-DAY-CAL
 
 - Predecessor (immediate + degree-advancing): v1.49.608 Pioneer 11 First Saturn Flyby.
 - Successor candidate: **v1.49.610 = Skylab 2 (NASA 1.87; Conrad/Kerwin/Weitz 1973-05-25 launch + parasol rescue)** per FA-608-5 continue-engine-cadence decision.
+
+## See also
+
+- Chapter contents: [00-summary](chapter/00-summary.md) · [03-retrospective](chapter/03-retrospective.md) · [04-lessons](chapter/04-lessons.md) · [99-context](chapter/99-context.md)

@@ -1,5 +1,15 @@
 # v1.49.622 — Pioneer Venus 2 Multiprobe Twin-Mission-Pair Completion
 
+**Released:** 2026-05-09
+**Type:** Engine-cadence degree-advancing milestone (v604+ run)
+**NASA Mission:** Pioneer Venus 2 Multiprobe Twin-Mission-Pair Completion
+**Predecessor:** v1.49.620
+**Mission package:** `.planning/missions/v1-49-622-pioneer-venus-2-multiprobe-twin-mission-pair-compl/`
+**Engine state:** NASA degree:: 1.97 → **1.98** + MUS degree:: 1.97 → **1.98** + ELC degree:: 1.97 → **1.98** + SPS species:: #94 → **#95** + TRS M1 W2:: pack-19 graph-theory K_19 → **pack-20 set-theory binding K_20**; substrate-coherence with PV2: 4-element probe set + atmospheric-layer partition + species-detection inclusion structure + power set of probe-instrument combinations Boolean lattice; ~14-15 cross-pack edges → **~252 total**
+
+## Summary
+
+
 **Engine-cadence degree-advancing milestone — seventeenth consecutive degree-advancing milestone in the v604+ run.** Pioneer Venus 2 Multiprobe (NSSDC 1978-078A; also Pioneer 13) — **first US spacecraft to deploy multiple atmospheric entry probes at Venus; first direct atmospheric measurements of Venus cloud layers at three altitudes simultaneously; first US surface signal from Venus (Day Probe 67-min post-impact signal); substrate-archetype for MULTI-PROBE-DEPLOYMENT-AS-DELIVERABLE fragmentation-deployment missions**. Launched 1978-08-08 21:33 UTC from Cape Canaveral LCC-36A atop Atlas SLV-3D Centaur D1AR; 904 kg total (Bus + 1 Large Probe + 3 Small Probes); same Charles F. Hall project manager + Larry Colin project scientist as PV1. Entry 1978-12-09 18:21 UTC — five days after PV1 orbit insertion 1978-12-04. Hoffman NMS atmosphere CO2 96.5%; Knollenberg LCPS 3-mode cloud particle size 1µm/3µm/7µm; Seiff LAS atmospheric profile. Sister-spacecraft completion of Pioneer Venus paired architecture (PV1 v620 + PV2 v622) = **Pioneer-Venus pair as third Twin-Mission-Pair in v615-v622 engine run (Viking + Voyager + Pioneer-Venus)**. PV2 launched second AND numbered second = **#10287 obs#4 DIRECT-ORDER sub-form reaffirm** (sub-form independence preserved at second-instance test). **No ESTABLISHED-promotions at v622** (counter to v620's two promotions) — v622 is reproducibility-test milestone for promoted observations. **#10286 obs#4 post-ESTABLISHED reproducibility PASSES** — first post-ESTABLISHED reproducibility test after TWIN-MISSION-PAIR-CONTINUATION promotion at v620, substrate stability confirmed beyond promotion threshold. Three new substrate primitives LOCKED at v622: MULTI-PROBE-DEPLOYMENT-AS-DELIVERABLE + BENTHIC-INVERTEBRATE-AS-COHORT-NODE + TRIBAL-CONSULTATION-FRAMEWORK sub-form.
 
 ## Engine state advances
@@ -47,3 +57,7 @@
 - Predecessor (immediate): v1.49.621 (SCRIBE Build-Out counter-cadence; closed 2026-05-09 sha `1274fd9bb`)
 - Opening commit on dev: `b2dd11b8d` (STATE.md auto-update fix)
 - Successor candidate: **v1.49.623** — Veneras 11/12 (1978-09-09/14) or HEAO 2 / Einstein Observatory (1978-11-13); v623 W0 will choose chronologically-next NASA mission; TRS pack-21 mode-choice per FA-622-6 at v623 W0.
+
+## See also
+
+- Chapter contents: [00-summary](chapter/00-summary.md) · [03-retrospective](chapter/03-retrospective.md) · [04-lessons](chapter/04-lessons.md) · [99-context](chapter/99-context.md)

@@ -1,5 +1,15 @@
 # v1.49.623 — ISEE-3 / ICE Paired-Triple-Mission-Architecture
 
+**Released:** 2026-05-09
+**Type:** Engine-cadence degree-advancing milestone (v604+ run)
+**NASA Mission:** ISEE-3 / ICE Paired-Triple-Mission-Architecture
+**Predecessor:** v1.49.622
+**Mission package:** `.planning/missions/v1-49-623-isee-3-ice-paired-triple-mission-architecture/`
+**Engine state:** NASA degree:: 1.98 → **1.99** + MUS degree:: 1.98 → **1.99** + ELC degree:: 1.98 → **1.99** + SPS species:: #95 → **#96** + TRS M1 W2:: pack-20 set-theory K_20 → **pack-21 topology binding K_21**
+
+## Summary
+
+
 **Engine-cadence degree-advancing milestone — eighteenth consecutive degree-advancing milestone in the v604+ run.** ISEE-3 / ICE (NSSDC 1978-079A) — **first spacecraft at Earth-Sun L1 Lagrange point; first comet flyby (Comet Giacobini-Zinner 1985-09-11); first spacecraft to sample Halley outer coma (1986-03-25); substrate-archetype for L1-LAGRANGE-AS-NEW-DELIVERABLE + MISSION-REDIRECT-AS-DELIVERABLE + TRAJECTORY-ARCHITECT-AS-PROJECT-LEAD**. Launched 1978-08-12 11:13 UTC from LC-36B Atlas-Centaur; 478 kg; 13 instruments; Van Allen UI cosmic ray + Stone Caltech CRS + Gurnett UI plasma-waves project scientist + Ogilvie GSFC project manager + Farquhar 1932-2015 trajectory architect. Renamed ICE 1982 after ISEE-3 → ICE redirect via lunar-gravity-assist 1982-1983 Farquhar trajectory. Mission end 1997-05-05; 2014 reactivation attempt. ESA ~25% participation. **ISEE-1/2/3 = NASA-ESA TRIO** driving PAIRED-TRIPLE-MISSION-ARCHITECTURE NEW LOCKED. Cross-track: The Who *Who Are You* (Polydor UK / MCA US; 1978-08-18 = ISEE-3 +6d INSIDE strict; **Keith Moon final studio album**; Moon died 1978-09-07 age 32 clomethiazole overdose at 9 Curzon Place London; RIAA Platinum; UK Albums #6 / Billboard 200 #2 highest US peak for The Who; "Who Are You" Hot 100 #14) + Executive Order 12072 Federal Space Management (signed Carter 1978-08-16 = ISEE-3 +4d INSIDE strict; mandates federal CBD prioritization; paired companion EO 12074 same-day; revoked Trump EO 14274 April 2025; 47-year operational arc) + Pacific White-Sided Dolphin SPS #96 (first Delphinidae / first Odontoceti; ODONTOCETE-AS-COHORT-NODE NEW LOCKED; echolocation 0.5-150 kHz). **Five NEW LOCKED substrate primitives at v623**: PAIRED-TRIPLE-MISSION-ARCHITECTURE + L1-LAGRANGE-AS-NEW-DELIVERABLE + MISSION-REDIRECT-AS-DELIVERABLE + TRAJECTORY-ARCHITECT-AS-PROJECT-LEAD + ODONTOCETE-AS-COHORT-NODE. **Three NEW CANDIDATES**: #10306 KEITH-MOON-FINAL-ALBUM-AS-MISSION-REDIRECT-PREFIGURATION + #10307 ECHOLOCATION-AS-ON-BOARD-TRAJECTORY-DESIGN + #10308 FEDERAL-EO-AS-LONG-OPERATIONAL-ARC.
 
 ## Engine state advances
@@ -25,3 +35,7 @@
 - Predecessor (degree-advancing): v1.49.622 (Pioneer Venus 2 Multiprobe; closed 2026-05-09 sha `7772b9a1d`)
 - Opening commit on dev: `4c82a914a` (version bump to 1.49.623)
 - Successor candidate: **v1.49.624** — HEAO-2 / Einstein Observatory (1978-11-13 NSSDC 1978-103A; K-degree boundary 1.100 = first 3-digit degree); Magsat (1979-10-30 = 1.101); v624 W0 will decide chronologically-next + v1.100 milestone significance decision
+
+## See also
+
+- Chapter contents: [00-summary](chapter/00-summary.md) · [03-retrospective](chapter/03-retrospective.md) · [04-lessons](chapter/04-lessons.md) · [99-context](chapter/99-context.md)

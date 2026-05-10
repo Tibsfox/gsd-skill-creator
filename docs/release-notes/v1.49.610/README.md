@@ -1,5 +1,15 @@
 # v1.49.610 — Skylab 2 First Crewed Station Mission + Rescue Completion
 
+**Released:** 2026-05-07
+**Type:** Engine-cadence degree-advancing milestone (v604+ run)
+**NASA Mission:** Skylab 2 First Crewed Station Mission + Rescue Completion
+**Predecessor:** v1.49.609
+**Mission package:** `.planning/missions/v1-49-610-skylab-2-first-crewed-station-mission-rescue-compl/`
+**Engine state:** NASA degree:: 1.86 → **1.87** + MUS degree:: 1.86 → **1.87** + ELC degree:: 1.86 → **1.87** + SPS species:: #83 → **#84** + TRS M1 W2:: pack-10 projective geometry bound; +14 cross-pack edges → **98 total** / **K_9 pack-pair completeness ACHIEVED** with **5 substrate-bridges to pack-03**
+
+## Summary
+
+
 **Engine-cadence degree-advancing milestone.** Skylab 2 (SL-2 / NSSDC 1973-032A) — first crewed mission to Skylab and rescue completion of v609 launch arc. Saturn IB SA-206 launched 1973-05-25 13:00 UTC from KSC LC-39B "milkstool" with Pete Conrad (CDR; Apollo 12 Moonwalker) + Joseph Kerwin (Science Pilot; **first US physician in space**) + Paul Weitz (Pilot). Stand-up EVA hooked-rod attempt failed; hard-dock 1973-05-26 03:50 UTC after 5 attempts; **parasol sunshield deployment 1973-05-26 15:38 UTC** via T-handle through MDA scientific airlock dropped interior temperature 38°C→24°C; **EVA 1973-06-07** Conrad+Kerwin freed jammed solar array #1 via 25-foot pole + ratchet + cable-cutter (Marshall-engineered) restoring full ~7 kW power. Mission close 1973-06-22 splashdown 9.6 km from USS Ticonderoga; **28d 0h 49m 49s — longest US mission to date.** The architecture v609 introduced as theoretical-by-engineering is here vindicated by execution: real humans, real EVA tools, real success. Pre-Shuttle / pre-Mir / pre-ISS lineage gets its operational anchor.
 
 ## Engine state advances
@@ -42,3 +52,7 @@
 
 - Predecessor (immediate + degree-advancing): v1.49.609 Skylab Station Launch.
 - Successor candidate: **v1.49.611 = Skylab 3 (NASA 1.88; Bean/Garriott/Lousma 1973-07-28 launch + 59-day mission)** per FA-609-6 continue-engine-cadence decision.
+
+## See also
+
+- Chapter contents: [00-summary](chapter/00-summary.md) · [03-retrospective](chapter/03-retrospective.md) · [04-lessons](chapter/04-lessons.md) · [99-context](chapter/99-context.md)

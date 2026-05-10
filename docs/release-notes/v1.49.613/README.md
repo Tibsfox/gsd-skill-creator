@@ -1,5 +1,15 @@
 # v1.49.613 — Skylab 4 / Comet Kohoutek
 
+**Released:** 2026-05-07
+**Type:** Engine-cadence degree-advancing milestone (v604+ run)
+**NASA Mission:** Skylab 4 / Comet Kohoutek
+**Predecessor:** v1.49.612
+**Mission package:** `.planning/missions/v1-49-613-skylab-4-comet-kohoutek/`
+**Engine state:** NASA degree:: 1.89 → **1.90** + MUS degree:: 1.89 → **1.90** + ELC degree:: 1.89 → **1.90** + SPS species:: #86 → **#87** + TRS M1 W2:: pack-05 differential equations bound; +14 cross-pack edges → **140 total** / **K_12 pack-pair completeness ACHIEVED** with **5 substrate-bridges pack-05↔pack-02**
+
+## Summary
+
+
 **Engine-cadence degree-advancing milestone — ninth consecutive degree-advancing milestone in the v604+ run.** Skylab 4 (NSSDC 1973-090A) — third and final crewed mission to Skylab Orbital Workshop; **longest US crewed spaceflight to that date at 84d 1h 16m**; **first all-rookie crew since Armstrong on Gemini 8 (1966)**; **first comet-observation campaign from above-atmosphere** (Comet C/1973 E1 Kohoutek; perihelion 1973-12-28 at 0.142 AU; 1973-12-13 → 1974-01-08 multi-instrument campaign; produced first hydrogen Lyman-α coma profile from above-atmosphere; first water-ice cometary spectroscopy supporting Whipple dirty-snowball model decisively); **final flying Apollo Block II CSM (CSM-118) + final crewed Saturn-1B (SA-208)**. Saturn 1B SA-208 launched 1973-11-16 14:01:23 UTC from KSC LC-39B with **Gerald P. Carr** (CDR; USMC colonel; Apollo backup), **Edward G. Gibson** (SPT; PhD physics Caltech 1964 — second physicist-in-space after Garriott), **William R. Pogue** (PLT; USAF Thunderbirds aerobatic demo pilot). 4× EVA totaling 22h 13m including Carr/Pogue 1973-12-25 7h 1m Christmas Day longest-of-program. ATM coronal-hole-as-solar-wind-source confirmed at high-confidence. 1973-12-28 ~90-min inadvertent radio-off coincidence (NASA authoritative position: **NO STRIKE** actually occurred — was three-shift-workload overlap; reframe **COHESION-UNDER-SATURATION** sub-form per #10269 obs#2). Splashdown 1974-02-08 15:16:53 UTC Pacific Ocean ~280 km ESE San Diego; recovered USS *New Orleans* LPH-11. Total 1214 orbits / ~55.5M km mission distance.
 
 ## Engine state advances
@@ -56,3 +66,7 @@ Plus bonus: **1890 same-year coincidence** between True Red Tree Vole species de
 
 - Predecessor (immediate + degree-advancing): v1.49.612 Mariner 10 First Mercury Flyby.
 - Successor candidate: **v1.49.614 = ASTP Apollo-Soyuz Test Project (NASA 1.91; first US-Soviet docking 1975-07-17; first international human spaceflight rendezvous; 1975-07-15 launch)** per FA-612-4 continue-engine-cadence decision.
+
+## See also
+
+- Chapter contents: [00-summary](chapter/00-summary.md) · [03-retrospective](chapter/03-retrospective.md) · [04-lessons](chapter/04-lessons.md) · [99-context](chapter/99-context.md)

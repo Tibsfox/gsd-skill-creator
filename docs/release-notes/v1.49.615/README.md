@@ -1,5 +1,15 @@
 # v1.49.615 — Viking 1 First Successful Mars Landing
 
+**Released:** 2026-05-08
+**Type:** Engine-cadence degree-advancing milestone (v604+ run)
+**NASA Mission:** Viking 1 First Successful Mars Landing
+**Predecessor:** v1.49.614
+**Mission package:** `.planning/missions/v1-49-615-viking-1-first-successful-mars-landing/`
+**Engine state:** NASA degree:: 1.91 → **1.92** + MUS degree:: 1.91 → **1.92** + ELC degree:: 1.91 → **1.92** + SPS species:: #88 → **#89** + TRS M1 W2:: pack-14 information-geometry bound; +14 cross-pack edges
+
+## Summary
+
+
 **Engine-cadence degree-advancing milestone — eleventh consecutive degree-advancing milestone in the v604+ run.** Viking 1 (NSSDC 1975-075A orbiter / 1975-075C lander) — **first successful Mars surface landing; first complete in-situ biology + soil-chemistry + imaging surface science suite at any extraterrestrial body**. Launched 1975-08-20 21:22 UTC from Cape Canaveral LC-41 atop Titan IIIE-Centaur; cruise 1975-08-20 → 1976-06-19; Mars orbit insertion 1976-06-19 22:38 UTC; lander separation + powered descent + touchdown 1976-07-20 11:53:06 UTC at 22.697°N / 48.222°W in Chryse Planitia ("Plain of Gold") — exactly **seven calendar years after Apollo 11 lunar landing 1969-07-20** (the strongest cross-mission EXACT same-day signal in the #10247 soak chain to date; multi-year-differential cross-anchor at planetary-landing scale; deliberate per Soffen + Mutch project-meeting records). First photograph from Mars surface returned 25 seconds after touchdown. Lander operations 1976-07-20 → 1982-11-13 (6+ years; longest US extraterrestrial surface science mission to that date). Project scientist **Gerald A. Soffen** (Goddard); imaging team led by **Thomas A. Mutch** (Brown / NASA HQ); biology PI roster **Harold P. "Chuck" Klein** (overall) + **Norman H. Horowitz** (Pyrolytic Release / Caltech) + **Vance I. Oyama** (Gas Exchange / Ames) + **Gilbert V. Levin** (Labeled Release / Biospherics Inc; **dissented from consensus-abiotic-superoxide reading through 2021**). Biology results ambiguous (LR-positive / GEx-positive / PR-positive in some samples; XRF-identified strongly-oxidizing soil chemistry; Soffen-Klein consensus ruled abiotic-superoxide; Levin dissented to his death); imaging + meteorology + soil-chemistry datasets unambiguously transformative. Viking 1 succeeded where **Mars 3** (1971-12-02 touchdown; signal lost at ~14.5s) and **Mars 6** (1974-03-12 descent; signal lost ~3km altitude) failed — first-success-after-prior-failures substrate primitive at planetary scale. **Regime-shifts back to robotic-investigator** after v614 multi-government-crewed Apollo-Soyuz; #10269 obs#4 forward-generalization-holds + potential fourth daughter-primitive DISSENTING-PI-AS-OPERATOR-OF-MINORITY-INTERPRETATION emerges via Levin.
 
 ## Engine state advances
@@ -47,3 +57,7 @@
 
 - Predecessor (immediate + degree-advancing): v1.49.614 Apollo-Soyuz Test Project.
 - Successor candidate: **v1.49.616 = Viking 2 (NASA 1.93; Utopia Planitia 1976-09-03 landing; biology results crosscheck; second-of-pair planetary mission)** per FA-615-4 continue-engine-cadence decision.
+
+## See also
+
+- Chapter contents: [00-summary](chapter/00-summary.md) · [03-retrospective](chapter/03-retrospective.md) · [04-lessons](chapter/04-lessons.md) · [99-context](chapter/99-context.md)

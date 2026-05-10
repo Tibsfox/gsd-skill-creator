@@ -1,5 +1,15 @@
 # v1.49.620 — Pioneer Venus 1 Twin-Mission-Pair Continuation
 
+**Released:** 2026-05-09
+**Type:** Engine-cadence degree-advancing milestone (v604+ run)
+**NASA Mission:** Pioneer Venus 1 Twin-Mission-Pair Continuation
+**Predecessor:** v1.49.619
+**Mission package:** `.planning/missions/v1-49-620-pioneer-venus-1-twin-mission-pair-continuation/`
+**Engine state:** NASA degree:: 1.96 → **1.97** + MUS degree:: 1.96 → **1.97** + ELC degree:: 1.96 → **1.97** + SPS species:: #93 → **#94** + TRS M1 W2:: pack-18 → **pack-19** graph-theory binding; +14 cross-pack edges
+
+## Summary
+
+
 **Engine-cadence degree-advancing milestone — sixteenth consecutive degree-advancing milestone in the v604+ run.** Pioneer Venus 1 Orbiter (NSSDC 1978-051A; also Pioneer 12) — **first US spacecraft to orbit Venus (1978-12-04); first near-complete topographic map of any planet's surface from orbit (Pettengill 1980 PVR 93% Venus surface coverage at ~35 km horizontal resolution); longest-lived US Venus mission at 14 years 1978-1992; substrate-archetype for orbital-radar-mapping**. Launched 1978-05-20 13:13:00 UTC from Cape Canaveral LCC-36A atop an Atlas SLV-3D Centaur-D1AR; Hughes HS-507 spin-stabilized bus at 5 RPM; mass 582 kg launch / 517 kg dry; 16-instrument scientific payload. Charles F. Hall (1920-1999) project manager NASA Ames Research Center (same manager as Pioneer 10/11 outer-planet missions); Larry Colin Ames project scientist; 114 scientists from 34 colleges/universities + 14 federal labs + 15 industrial facilities + 10 foreign countries. Sister Pioneer Venus 2 Multiprobe (NSSDC 1978-078A) launched 1978-08-08 from same LCC-36A pad — third paired-spacecraft mission after Viking + Voyager = **#10286 TWIN-MISSION-PAIR-CONTINUATION ESTABLISHED-PROMOTION ACHIEVED at 3-ex (3-of-3 substrate domains)**. PV1 launched first AND numbered first = **#10287 obs#3 CHRONOLOGICAL-AND-NUMERICAL-NAMING-DIRECT-ORDER sub-form bifurcation** distinct from V1 INVERSION at v619. Six new substrate primitives admitted at v620: PLANETARY-RADAR-AS-DELIVERABLE + VENUS-AS-EARTH-COMPARATIVE-PLANET + AUTOTROPH-AS-COHORT-NODE + TAXOL-DEVELOPMENT-AS-PLANETARY-RADAR-MAPPING + EXACT-CALENDAR-MATCH-CROSS-TRACK + DIRECT-ORDER-VS-INVERSION-SUB-FORM-BIFURCATION. **Two ESTABLISHED-promotions at v620: #10286 TWIN-MISSION-PAIR-CONTINUATION at 3-ex (Viking + Voyager + Pioneer-Venus paired-spacecraft = 3-of-3) + #10287 DIRECT-ORDER sub-form distinct from INVERSION sub-form.**
 
 ## Engine state advances
@@ -56,3 +66,7 @@
 
 - Predecessor (immediate + degree-advancing): v1.49.619 Voyager 1 Twin-Mission-Pair Completion.
 - Successor candidate: **v1.49.621 = Pioneer Venus 2 Multiprobe** (NASA 1.98; NSSDC 1978-078A; launch 1978-08-08; sister mission to PV1; 4 atmospheric probes Dec 9 1978 entry; substrate parallel to V2-after-V1 + completion of Pioneer-Venus paired architecture); v621 W1.TRS mode-choice (deepening / extension to pack-20 / audit) per FA-620-8; v621 hard-fork escalation re-eval (#10238 / #10240) per FA-620-7.
+
+## See also
+
+- Chapter contents: [00-summary](chapter/00-summary.md) · [03-retrospective](chapter/03-retrospective.md) · [04-lessons](chapter/04-lessons.md) · [99-context](chapter/99-context.md)

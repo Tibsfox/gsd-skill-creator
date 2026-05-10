@@ -1,5 +1,15 @@
 # v1.49.608 — Pioneer 11 First Saturn Flyby
 
+**Released:** 2026-05-06
+**Type:** Engine-cadence degree-advancing milestone (v604+ run)
+**NASA Mission:** Pioneer 11 First Saturn Flyby
+**Predecessor:** v1.49.606
+**Mission package:** `.planning/missions/v1-49-608-pioneer-11-first-saturn-flyby/`
+**Engine state:** NASA degree:: 1.84 → **1.85** + MUS degree:: 1.84 → **1.85** + ELC degree:: 1.84 → **1.85** + SPS species:: #81 → **#82** + TRS M1 W2:: pack-09 functional analysis bound; +14 cross-pack edges → 70 total / **K_7 pack-pair completeness** single-pass
+
+## Summary
+
+
 **Engine-cadence degree-advancing milestone.** Pioneer 11 — sister mission to Pioneer 10 (v1.49.604) — completes the paired outer-solar-system reconnaissance program: launched 1973-04-05 02:11:00 UTC; first Jupiter flyby 1974-12-03 (closest approach 42,828 km); **first Saturn flyby 1979-09-01** (closest approach 20,591 km, four years before Voyager 1); F-ring discovery; Epimetheus discovery; pacification 1995-09-30; trajectory toward Aquila constellation.
 
 ## Engine state advances
@@ -36,3 +46,7 @@ The Sonnet-quota-stall / main-context-Opus-inline-recovery soak chain reaches ob
 - Predecessor (degree-advancing): v1.49.606 Apollo 17.
 - Predecessor (immediate): v1.49.607 Code Atlas counter-cadence.
 - Successor candidate: v1.49.609 Skylab 1 (1973-05-14 launch — first US space station).
+
+## See also
+
+- Chapter contents: [00-summary](chapter/00-summary.md) · [03-retrospective](chapter/03-retrospective.md) · [04-lessons](chapter/04-lessons.md) · [99-context](chapter/99-context.md)
