@@ -68,6 +68,7 @@ const TRS_RESEARCH_LOCATIONS = [
   { milestone: 'v1.49.622', paths: ['.planning/missions/v1-49-622-pioneer-venus-2-multiprobe/work/W1-TRS-research.md'] },
   { milestone: 'v1.49.623', paths: ['.planning/missions/v1-49-623-isee-3/work/W1-TRS-research.md'] },
   { milestone: 'v1.49.624', paths: ['.planning/missions/v1-49-624-heao-2-einstein-observatory/work/W1-TRS-research.md'] },
+  { milestone: 'v1.49.625', paths: ['.planning/missions/v1-49-625-heao-3-gamma-ray-spectroscopy/work/W1-TRS-research.md'] },
 ];
 
 function readFrontmatter(text) {
