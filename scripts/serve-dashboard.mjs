@@ -1730,6 +1730,77 @@ const server = createServer(async (req, res) => {
     return handleFileBlame(relPath, res);
   }
 
+  // ── Spatial substrate (gis-spatial-substrate v1.x; component 02) ──────────
+  // Three GET endpoints implemented by src/atlas/spatial/server-ipc.ts.
+  // Each opens a one-shot pg Client (matching the /api/atlas/snapshots
+  // pattern below) and dispatches to the compiled handler. PG client always
+  // closed in a finally — handlers may send any 2xx/4xx/5xx response shape.
+  if (
+    pathname === '/api/atlas/spatial-near' ||
+    pathname === '/api/atlas/mission-bbox' ||
+    pathname === '/api/atlas/tile-fetch'
+  ) {
+    if (req.method !== 'GET') {
+      res.writeHead(405, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ ok: false, error: 'method not allowed; use GET' }));
+    }
+
+    let mod;
+    try {
+      mod = await import('../dist/atlas/spatial/server-ipc.js');
+    } catch (e) {
+      res.writeHead(503, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ ok: false, error: 'spatial substrate not built; run `npm run build`' }));
+    }
+
+    let pg;
+    try {
+      pg = await import('pg');
+    } catch {
+      res.writeHead(503, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ ok: false, error: 'pg module not installed' }));
+    }
+    const cfg = process.env.RH_POSTGRES_URL
+      ? { connectionString: process.env.RH_POSTGRES_URL }
+      : {
+          host: process.env.PGHOST,
+          port: parseInt(process.env.PGPORT ?? '5432', 10),
+          user: process.env.PGUSER,
+          password: process.env.PGPASSWORD,
+          database: process.env.PGDATABASE,
+        };
+    const client = new pg.Client(cfg);
+    // LOW-03 fix: bound pg connect time so a network blackhole can't hang
+    // the request indefinitely. 5s is generous for a healthy local PG.
+    try {
+      await Promise.race([
+        client.connect(),
+        new Promise((_, reject) => setTimeout(() => reject(new Error('pg connect timeout (5s)')), 5_000).unref()),
+      ]);
+    } catch (e) {
+      res.writeHead(503, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ ok: false, error: `pg connect failed: ${e?.message ?? String(e)}` }));
+    }
+
+    try {
+      if (pathname === '/api/atlas/spatial-near') {
+        return await mod.handleSpatialNear(req, res, client);
+      }
+      if (pathname === '/api/atlas/mission-bbox') {
+        return await mod.handleMissionBBox(req, res, client);
+      }
+      // pathname === '/api/atlas/tile-fetch'
+      const reader = await import('../dist/atlas/spatial/pmtiles-reader.js');
+      return await mod.handleTileFetch(
+        req, res,
+        reader.fetchTileViaPMTiles,
+        reader.resolvePmtilesPath,
+      );
+    } finally {
+      try { await client.end(); } catch { /* swallow close errors */ }
+    }
+  }
+
   // W4d/W4e: list snapshots known to the dashboard so the atlas page can
   // auto-pick. Queries SQLite (the source-of-truth for the UI's loadSnapshot
   // path), enriched with PG embedding counts when available. Falls back to
