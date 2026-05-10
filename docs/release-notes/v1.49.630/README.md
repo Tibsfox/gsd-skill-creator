@@ -1,0 +1,63 @@
+# v1.49.630 — STS-3 Columbia First RMS Payload-Grapple-and-Redeploy + First Contingency Landing-Site Activation
+
+**Released:** 2026-05-10
+**Type:** Engine-cadence degree-advancing milestone — 24th consecutive in v604+ run (after v607 + v621 + v629 counter-cadence skips)
+**NASA Mission:** STS-3 Columbia (NSSDC 1982-022A) — Degree 1.105
+**Predecessor (degree-advancing):** v1.49.628 — STS-2 Columbia First Vehicle Reuse (closed sha `0fbdab79b`)
+**Predecessor (immediate):** v1.49.629 — GIS Spatial Substrate counter-cadence (closed sha `0f96da21e`)
+**Successor candidate:** v1.49.631 — STS-4 Columbia 1982-06-27 = NASA 1.106 (FA-630-7; final OFT mission; Mattingly + Hartsfield; first DoD payload)
+**Mission package:** `.planning/missions/v1-49-630-sts-3-columbia/`
+**Phases:** 5 (W0-W4 wave-pipeline: W0 version+brief / W1 research / W2 build / W3 audit+catalog / W4 release-notes / G3 ship-pipeline)
+**Engine state:** ADVANCED — NASA 1.104→1.105 + MUS 1.104→1.105 + ELC 1.104→1.105 + SPS #101→#102 + TRS pack-26→pack-27 homotopy-type-theory K_27 = 350 edges target
+
+## Summary
+
+**Engine-cadence degree-advancing milestone — twenty-fourth consecutive degree-advancing milestone in the v604+ run** (after v607 + v621 + v629 counter-cadence skips). STS-3 Columbia (NSSDC 1982-022A; OV-102 Columbia third flight) — **first RMS payload-grapple-and-redeploy operations in space** (Plasma Diagnostics Package PDP 162 kg grappled + 360° survey + redeployed; two sessions ~11h total — substrate transition v628 NEW LOCKED RMS-AS-CHECKOUT → v630 RECURRING RMS-AS-PAYLOAD-HANDLER) + **first contingency landing-site activation in Shuttle program** (White Sands Space Harbor New Mexico Runway 17; Edwards AFB lakebed flooded; Administrator James M. Beggs decision 1982-03-18 four days pre-launch; only White Sands landing in 135-flight Shuttle program) + **last white-painted external tank** (ET-3; ET-4+ unpainted-orange foam saving ~272 kg per launch) + **first intentional thermal-extreme passive-control verification as primary mission objective** (~80h tail-Sun cold-soak + ~26h nose-Sun hot-soak + side-Sun rotation) + **OSS-1 Office of Space Science dedicated payload bay configuration** (PDP + VCAP + IECM + CMP + SFXP + SUSIM + MFE + PLE/PGU + TCE; first dedicated science-payload Spacelab-pallet-precursor) + commander **Jack R. Lousma** (USMC; born 1936-02-29 leap-day Grand Rapids MI; Group 5 1966 same cohort as Engle; Apollo 13 CAPCOM "Houston, we've had a problem"; Skylab 3 Pilot 1973-07-28 to 1973-09-25 = 59-day second-crew long-duration mission; **first SKYLAB-VETERAN-AS-SHUTTLE-COMMANDER**) + pilot **C. Gordon Fullerton** (USAF; born 1936-10-11 Rochester NY; MOL 1966 → NASA Group 7 transferee 1969; Apollo 14/15/16/17 support crew; ALT 1977 with Haise; **third MOL-transferee to fly** after Crippen STS-1 + Truly STS-2 = MOL-TRANSFEREE-AS-PROGRAM-CONTINUITY 3-of-3 ESTABLISHED via Fullerton at v630 W3 per FA-628-5 #10326); launched 1982-03-22 16:00:00 UTC LC-39A Kennedy Space Center; 8 days 0h 4m 46s mission duration / 130 orbits = first OFT to fly planned full duration without truncation; landed White Sands Space Harbor 1982-03-30 16:04:46 UTC (one-day weather extension due to worst gypsum sandstorm in 25 years; Charles Bolden quote: gypsum coming out of Columbia "for the rest of its career"). Cross-track: **MUS 1.105 Iron Maiden *The Number of the Beast*** (Harvest/Capitol US 1982-03-22 = STS-3 launch SAME-DAY 0d INSIDE strict + EMI EMC 3400 UK 1982-03-29 = landing -1d INSIDE strict = **DUAL-SAME-DAY-LAUNCH-AND-LANDING-PAIR sub-form NEW LOCKED at v630**; first MUS pick to dual-anchor BOTH launch and landing; Bruce Dickinson lead-vocals DEBUT replacing Paul Di'Anno; UK Albums #1 1982-04-10 first NWOBHM #1; producer Martin Birch; recorded Battery Studios Willesden London Jan-Feb 1982; #10316 EDDIE-THE-HEAD-MASCOT obs#2 reproducibility PASS via Derek Riggs puppeteer cover; #10317 NWOBHM-AS-MUSIC-INDUSTRY-REPAIR obs#2 reproducibility PASS) + **ELC 1.105 South Georgia incident** (1982-03-19 -3d INSIDE strict; Davidoff Argentine scrap-merchant party landing at Leith harbour aboard ARA *Bahía Buen Suceso* under Operation Alpha; HMS Endurance dispatched 1982-03-21/22 = STS-3 launch SAME-DAY = TRIPLE-EVENT-DENSITY 1982-03-22 cluster including Iron Maiden NOTB US release; cascades to 1982-04-02 Operation Rosario Argentine invasion Falklands main island; UN SCR 502 1982-04-03; UK task-force 1982-04-05; 74-day Falklands War 1982-04-02 to 1982-06-14; ~907 deaths total; 7 naval losses; Galtieri ousted 1982-06-17; democratic transition 1983-12-10 Alfonsín; **CASUS-BELLI-AS-DELIVERABLE NEW LOCKED candidate**; **PRE-CONFLICT-INCIDENT-AS-DELIVERABLE sub-form NEW LOCKED candidate**; **COMMERCIAL-DISPUTE-CASCADES-TO-WAR sub-form NEW LOCKED candidate**; **POST-WAR-JUNTA-COLLAPSE substrate**) + **SPS #102 Common Raven** (*Corvus corax* Linnaeus 1758; second corvid following v628 #101 Steller's Jay = **CORVID-AS-RECURRING-COHORT-NODE transition** v628 NEW LOCKED → v630 RECURRING; *#10329 obs#2 reproducibility PASS*; subspecies *C. c. principalis* PNW; LARGEST PASSERINE GLOBALLY; cognitive parity with primates Bugnyar 2016 *Nat Comm* + Kabadayi+Osvath 2017 *Science* flexible planning; raven-wolf carrion-mutualism Stahler+Heinrich; multi-tradition cultural-archive: Coast Salish + Tlingit + Haida creator-trickster + Norse Hugin+Munin + Biblical + Poe + Tower of London + Ravenclaw/three-eyed-raven; **TRICKSTER-CREATOR-AS-CULTURAL-DELIVERABLE NEW LOCKED candidate**; **PASSERINE-LARGEST sub-form**; **COGNITIVE-PARITY-WITH-PRIMATES sub-form**) + **TRS pack-27 homotopy-type-theory binding** (K_27 = 350 edges target; FA-628-6 RESOLVED W0; HoTT-AS-PROGRAM-EVOLUTION-FORMAL-LANGUAGE + IDENTITY-TYPE-AS-RMS-TRAJECTORY-ENCODING + CONTINGENCY-AS-DEPENDENT-PAIR-ELIMINATION NEW LOCKED candidates; bridge-category #10273 obs#12 CONFIRMS; K_N completion #10274 obs#12 CONFIRMS 15-of-15 consecutive single-pass). **Twelve NEW LOCKED substrate primitives at v630**: RMS-PAYLOAD-GRAPPLE-AND-REDEPLOY + CONTINGENCY-LANDING-SITE-ACTIVATION + LAST-WHITE-EXTERNAL-TANK + INTENTIONAL-THERMAL-EXTREME-SOAK + SKYLAB-VETERAN-AS-SHUTTLE-COMMANDER + MOL-TRANSFEREE-AS-PROGRAM-CONTINUITY (obs#3 ESTABLISHED) + REMOTE-MANIPULATOR-SYSTEM-AS-RECURRING-SUBSTRATE + DUAL-SAME-DAY-LAUNCH-AND-LANDING-PAIR + VOCALIST-CHANGE-AS-DELIVERABLE + NWOBHM-COMMERCIAL-PEAK-AS-DELIVERABLE + CASUS-BELLI-AS-DELIVERABLE + TRICKSTER-CREATOR-AS-CULTURAL-DELIVERABLE. **FA-628-2 RESOLVED** (#10287 DIRECT-ORDER 10-of-10 cumulative ESTABLISHED-second-threshold ACHIEVED at W3); **FA-628-5 #10326 RESOLVED** (MOL-TRANSFEREE-AS-PROGRAM-CONTINUITY 3-of-3 ESTABLISHED via Fullerton); **FA-628-6 RESOLVED** (TRS pack-27 homotopy-type-theory at W0); **FA-628-7 RESOLVED** (STS-3 Columbia verified as NASA 1.105 at W0); **FA-628-8 RESOLVED** (RMS-AS-RECURRING-SUBSTRATE transition via STS-3 PDP grapple-and-redeploy). **v629 #10287 forward-lesson APPLIED** — gsd-code-reviewer agent loop integrated into ship-pipeline gate at W4. **Twenty-fourth operational application of v603 BLOCKER gate** — first-attempt PASS target; recovery-rate trending continues post-v628 first-attempt-streak break.
+
+## Key Features
+
+| Track | Pick | Anchor | NEW LOCKED primitives |
+|-------|------|--------|----------------------|
+| NASA 1.105 | STS-3 Columbia (NSSDC 1982-022A) | 1982-03-22 launch / 1982-03-30 White Sands landing | RMS-PAYLOAD-GRAPPLE-AND-REDEPLOY, CONTINGENCY-LANDING-SITE-ACTIVATION, LAST-WHITE-EXTERNAL-TANK, INTENTIONAL-THERMAL-EXTREME-SOAK, SKYLAB-VETERAN-AS-SHUTTLE-COMMANDER, MOL-TRANSFEREE-AS-PROGRAM-CONTINUITY (obs#3 ESTABLISHED), RMS-AS-RECURRING-SUBSTRATE |
+| MUS 1.105 | Iron Maiden *The Number of the Beast* | US 1982-03-22 SAME-DAY launch (Harvest/Capitol) + UK 1982-03-29 -1d landing (EMI EMC 3400) | DUAL-SAME-DAY-LAUNCH-AND-LANDING-PAIR sub-form, VOCALIST-CHANGE-AS-DELIVERABLE, NWOBHM-COMMERCIAL-PEAK-AS-DELIVERABLE |
+| ELC 1.105 | South Georgia incident | 1982-03-19 -3d INSIDE strict; HMS Endurance dispatched 1982-03-22 SAME-DAY | CASUS-BELLI-AS-DELIVERABLE, PRE-CONFLICT-INCIDENT-AS-DELIVERABLE, COMMERCIAL-DISPUTE-CASCADES-TO-WAR, POST-WAR-JUNTA-COLLAPSE |
+| SPS #102 | Common Raven (*Corvus corax*) | Second corvid; #10329 obs#2 reproducibility PASS | TRICKSTER-CREATOR-AS-CULTURAL-DELIVERABLE, PASSERINE-LARGEST, COGNITIVE-PARITY-WITH-PRIMATES; CORVID-AS-COHORT-NODE → CORVID-AS-RECURRING-COHORT-NODE transition |
+| TRS pack-27 | homotopy-type-theory binding | K_27 = 350 edges; FA-628-6 RESOLVED | HoTT-AS-PROGRAM-EVOLUTION-FORMAL-LANGUAGE, IDENTITY-TYPE-AS-RMS-TRAJECTORY-ENCODING, CONTINGENCY-AS-DEPENDENT-PAIR-ELIMINATION |
+| Ship pipeline | gsd-code-reviewer agent loop NEW GATE | per v629 #10287 forward-lesson | applied at W4 before pre-tag-gate |
+
+## Engine state advances
+
+- **NASA degree:** 1.104 → **1.105** (STS-3 Columbia; NSSDC 1982-022A; OV-102 Columbia 3rd flight; commander Lousma; pilot Fullerton; OFT-3; OSS-1 nine-experiment payload; first RMS payload-grapple-and-redeploy; first contingency landing-site activation White Sands; last white-painted ET-3; first intentional thermal-extreme passive-control as primary mission objective)
+- **MUS degree:** 1.104 → **1.105** (Iron Maiden *The Number of the Beast*; Harvest/Capitol US 1982-03-22 SAME-DAY launch + EMI EMC 3400 UK 1982-03-29 -1d landing; UK Albums #1 1982-04-10 first NWOBHM #1; Bruce Dickinson lead-vocals DEBUT; Steve Harris bass + composition lead; Martin Birch produced; Battery Studios Willesden London Jan-Feb 1982; ALBUM-FORM continuation third consecutive after v627 Cure + v628 OMD)
+- **ELC degree:** 1.104 → **1.105** (South Georgia incident; Davidoff Argentine scrap-merchant landing at Leith harbour 1982-03-19 -3d INSIDE strict; ARA *Bahía Buen Suceso* under Operation Alpha; HMS Endurance dispatched 1982-03-22 SAME-DAY launch; cascades to 74-day Falklands War 1982-04-02 to 1982-06-14; ~907 deaths total; Galtieri junta collapse 1982-06-17; democratic transition 1983-12-10 Alfonsín)
+- **SPS species:** #101 → **#102** (Common Raven *Corvus corax* Linnaeus 1758; second corvid; LARGEST PASSERINE GLOBALLY; cognitive parity with primates; multi-tradition cultural-archive)
+- **TRS M1 W2:** pack-26 category theory K_26 = 336 → **pack-27 homotopy-type-theory K_27 = 350 edges** (~14 new cross-pack edges e337-e350; FA-628-6 RESOLVED; bridge-category 15-of-15 consecutive)
+
+## Forward state
+
+- Predecessor (degree-advancing): v1.49.628 (STS-2 Columbia; closed sha `0fbdab79b`)
+- Predecessor (immediate, counter-cadence): v1.49.629 (GIS Spatial Substrate; closed sha `0f96da21e`)
+- Opening commit on dev: `176f43abc` (version bump to v1.49.630)
+- Successor candidate: **v1.49.631** — STS-4 Columbia 1982-06-27 = NASA 1.106 (final OFT mission; Mattingly + Hartsfield; first DoD payload; Hartsfield = fourth MOL-transferee to fly extending #10326)
+
+## Build artifacts shipped
+
+- `www/tibsfox/com/Research/NASA/1.105/` — index.html (742 lines / 115KB; 7/7 canonical sections; 8/8 Track cards + 4× nav-card; 13-file artifact suite); data-sources.json; degree-sync.json; knowledge-nodes.json; forest-module/sts-3.js
+- `www/tibsfox/com/Research/MUS/1.105/` — index.html (451 lines / 75KB; 19/10 card-title sections); 9 artifact files across audio/circuits/shaders/sims/story subdirs
+- `www/tibsfox/com/Research/ELC/1.105/` — index.html (598 lines / 93KB; 20/10 card-title sections); 5 artifacts across timeline/comparison/diagrams subdirs
+- `www/tibsfox/com/Research/SPS/common-raven/` — index.html (751 lines / 99KB); 6 artifacts across audio/sims/anatomy/diagrams subdirs
+- Catalog index updates: NASA + MUS + ELC catalog indexes all PASS (106 degrees in sync)
+- FTP sync: TBD via `npm run ftp-sync -- 1.105 --include-catalog-index` at G3 ship pipeline + manual SPS upload
+
+## Out of scope
+
+- v1.50 branch — paused/deferred (not reactivated this milestone; engine cadence continues on dev-line v1.49.x)
+- Phobos centennial substrate-scope decision (FA-628-9 → FA-630-9; STILL PENDING through 14 milestones since v617)
+- Lean 4 proof-fill milestone (FA-628-10 → FA-630-10; DEFERRED multi-week scope)
+- artemis-ii branch reactivation (merged 2026-04-14 PR #32; not active)
+
+## See also
+
+- Predecessor (degree-advancing): [v1.49.628 STS-2 Columbia](../v1.49.628/) — first reuse of crewed orbital spacecraft
+- Predecessor (immediate, counter-cadence): [v1.49.629 GIS Spatial Substrate](../v1.49.629/) — PostGIS + PMTiles + hybrid spatial-semantic query
+- Chapter contents: [00-summary](chapter/00-summary.md) · [03-retrospective](chapter/03-retrospective.md) · [04-lessons](chapter/04-lessons.md) · [99-context](chapter/99-context.md)
