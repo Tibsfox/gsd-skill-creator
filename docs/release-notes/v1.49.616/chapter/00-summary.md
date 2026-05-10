@@ -10,7 +10,7 @@
 
 **K_15 SINGLE-PASS ACHIEVED.** TRS M1 W2 pack-15 quantum theory binding extends past K_14 plateau in a single milestone; all 105 = C(15,2) pack-pair edges realized. Pack-15 plays a **bridge-category role obs#3** confirming pack-07 (v614) + pack-14 (v615) + pack-15 (v616) three-consecutive bridge-pattern. Substrate-coherence: XRFS spectroscopy on Viking 2 lander (quantum-electrodynamic transitions in Mars regolith) + photon-arrival statistics on Mars-Earth comm at 224 Mkm range = quantum-shot-noise limit + measurement-with-collapse parallels Viking biology operational definitions. **#10273 ESTABLISHED at obs#3.**
 
-4. **Three ESTABLISHED-promotions at single milestone — RARE CROSS-TRACK CONVERGENCE:**
+**Three ESTABLISHED-promotions at single milestone — RARE CROSS-TRACK CONVERGENCE:**
    - **#10273** bridge-category vs cluster-internal → ESTABLISHED at 3-ex (pack-07 + pack-14 + pack-15)
    - **#10274** K_N completion as substrate-architectural milestone → ESTABLISHED at 3-ex (K_13 + K_14 + K_15 clean extensions)
    - **#10275** multi-stakeholder-renegotiation generalizes domestic-and-international → ESTABLISHED at 3-ex (Helsinki 35-nation political-security + LDC 87-party environmental + ENMOD 31-state environmental-warfare; three independent multi-stakeholder dimensions)

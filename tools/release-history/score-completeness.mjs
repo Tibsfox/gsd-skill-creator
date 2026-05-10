@@ -125,16 +125,35 @@ function scoreSummaryFindings(text) {
 // Any of those followed by a pipe-table counts.
 function scoreKeyFeatures(text) {
   const headingRes = [
-    /^#{2,4}\s+(Key Features|Half A|Half B|Modules|Deliverables|Substrate)\b/mi,
+    /^#{2,4}\s+(Key Features|Half A|Half B|Modules|Deliverables)\s*$/mi,
+    /^#{2,4}\s+Substrate\s*$/mi,
     /^#{2,4}\s+What shipped\b/mi,
     /^#{2,4}\s+Cross-track\s*\/?\s*Engine state\b/mi,
     /^#{2,4}\s+Engine state full enumeration\b/mi,
     /^#{2,4}\s+Cross-track structural pair anchor inventory\b/mi,
   ];
   let best = 0;
-  for (const re of headingRes) {
-    const section = extractSection(text, re);
-    if (!section) continue;
+  // Iterate ALL matches across ALL regexes; scoreKeyFeatures should pick
+  // the best-scoring section in the entire corpus, not the first match.
+  // (The original implementation took the first regex match which could
+  // hit a section like `## Substrate provider cross-reference` that
+  // contains no pipe-table, missing the real `## Key Features` later.)
+  const lines = text.split(/\r?\n/);
+  for (let i = 0; i < lines.length; i++) {
+    let isHit = false;
+    for (const re of headingRes) {
+      if (re.test(lines[i])) { isHit = true; break; }
+    }
+    if (!isHit) continue;
+    // Anchor the level for section-end detection.
+    const levelMatch = /^(#+)/.exec(lines[i]);
+    const level = levelMatch ? levelMatch[1].length : 2;
+    let endIdx = lines.length;
+    for (let j = i + 1; j < lines.length; j++) {
+      const m = /^(#+)\s/.exec(lines[j]);
+      if (m && m[1].length <= level) { endIdx = j; break; }
+    }
+    const section = lines.slice(i + 1, endIdx).join('\n');
     const tableLines = section.split(/\r?\n/).filter(l => /^\s*\|/.test(l)).length;
     let s;
     if (tableLines >= 5) s = 10;

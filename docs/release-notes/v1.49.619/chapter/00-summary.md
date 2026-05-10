@@ -20,7 +20,7 @@
 
 **K_18 SINGLE-PASS ACHIEVED.** TRS M1 W2 pack-18 category-theory binding extends past K_17 in a single milestone; all 153 = C(18,2) pack-pair edges realized. Pack-18 plays a **bridge-category role obs#6** (6-of-6 consecutive bridge-pattern across pack-07/14/15/16/17/18) confirming **#10273 + #10274 post-ESTABLISHED reproducibility obs#3 HOLDS**. **#10284 post-ESTABLISHED reproducibility obs#1 CONFIRMED** via pack-18 EMERGENT-DOMINANT bridge sub-type — confirms taxonomic split: foundational packs (pack-16 logic-and-foundations + pack-17 cryptography) def-DOMINANT vs organizing-meta packs (pack-18 category-theory) emergent-DOMINANT.
 
-9. **Two ESTABLISHED-promotions at v619:**
+**Two ESTABLISHED-promotions at v619:**
    - **#10288** DECADAL-LATITUDE-OF-INVESTIGATOR → ESTABLISHED at obs#3 with 3-ex triad confirmed.
    - **#10279** PAIRED-RECOVERY-PROGRAM → ESTABLISHED at obs#3 (Bald Eagle+Peregrine paired federal recovery v615/v616 + Coho+Chinook NOAA 2013 paired ESA = 3-of-3).
 

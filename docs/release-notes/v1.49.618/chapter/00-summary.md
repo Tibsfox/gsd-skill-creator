@@ -18,7 +18,7 @@
 
 **K_17 SINGLE-PASS ACHIEVED.** TRS M1 W2 pack-17 cryptography binding extends past K_16 in a single milestone; all 136 = C(17,2) pack-pair edges realized. Pack-17 plays a **bridge-category role obs#5** (5-of-5 consecutive bridge-pattern across pack-07/14/15/16/17) confirming **#10273 post-ESTABLISHED reproducibility obs#2**. **#10274 K_N completion obs#2 CONFIRMED** at second consecutive CLEAN EXTENSION (K_16 v617 + K_17 v618 at 14-edge cadence preservation).
 
-8. **One ESTABLISHED-promotion at v618 with definitional-DOMINANT sub-form:**
+**One ESTABLISHED-promotion at v618 with definitional-DOMINANT sub-form:**
    - **#10284** EMERGENT-VS-DEFINITIONAL-BRIDGE-SUB-TYPE → ESTABLISHED at obs#2 (pack-16 logic-and-foundations + pack-17 cryptography both definitional dependency-forced bridges; pack-07/14/15 emergent breadth from substrate-coherence with cross-track milestones; refines #10273 ESTABLISHED bridge-category sub-types).
    - Lesson taxonomy now distinguishes emergent-bridge from definitional-bridge sub-types within #10273 ESTABLISHED.
 

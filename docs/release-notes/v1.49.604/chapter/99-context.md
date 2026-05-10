@@ -112,11 +112,36 @@ After operator authorizes G3 ship:
 - ... see ROADMAP.md for full history.
 ## Cross-track structural pair anchor inventory
 
-- **NASA × MUS substrate parallel:** Pioneer 10 (1.82) ↔ *Band on the Run* (Paul McCartney & Wings; Apple SO 3415; US 1973-12-05) (1.82) — cross-track structural pair anchor at v1.49.604
-- **NASA × ELC substrate parallel:** Pioneer 10 (1.82) ↔ *The Limits to Growth* (Meadows et al.; Smithsonian Castle 1972-03-02 evening; Universe Books 1972-0 (1.82) — political-technical anchor pair at v1.49.604
-- **NASA × SPS substrate parallel:** Pioneer 10 (1.82) ↔ Sooty Shearwater (*Ardenna grisea*) — biological-substrate anchor pair at v1.49.604
-- **NASA × TRS substrate parallel:** Pioneer 10 (1.82) ↔ Control theory / dynamical systems — formal-mathematics substrate anchor at v1.49.604
-- **MUS × ELC parallel:** *Band on the Run* (Paul McCartney & Wings; Apple SO 3415; US 1973-12-05) ↔ *The Limits to Growth* (Meadows et al.; Smithsonian Castle 1972-03-02 evening; Universe Books 1972-0 — cultural-political anchor pair at v1.49.604
+- **NASA × MUS cross-track structural pair anchor:** Pioneer 10 (1.82) ↔ *Band on the Run* (Paul McCartney & Wings; Apple SO 3415; US 1973-12-05) (1.82) at v1.49.604
+- **NASA × ELC political-technical anchor pair:** Pioneer 10 (1.82) ↔ *The Limits to Growth* (Meadows et al.; Smithsonian Castle 1972-03-02 evening; Universe Books 1972-0 (1.82) at v1.49.604
+- **NASA × SPS biological-substrate anchor pair:** Pioneer 10 (1.82) ↔ Sooty Shearwater (*Ardenna grisea*) (#79) at v1.49.604
+- **NASA × TRS formal-mathematics substrate anchor:** Pioneer 10 (1.82) ↔ Control theory / dynamical systems (pack-04 bound) at v1.49.604
+- **MUS × ELC cultural-political anchor pair:** *Band on the Run* (Paul McCartney & Wings; Apple SO 3415; US 1973-12-05) (1.82) ↔ *The Limits to Growth* (Meadows et al.; Smithsonian Castle 1972-03-02 evening; Universe Books 1972-0 (1.82) at v1.49.604
+- **MUS × SPS cultural-biological resonance pair:** *Band on the Run* (Paul McCartney & Wings; Apple SO 3415; US 1973-12-05) (1.82) ↔ Sooty Shearwater (*Ardenna grisea*) (#79) at v1.49.604
+- **MUS × TRS compositional-mathematics resonance pair:** *Band on the Run* (Paul McCartney & Wings; Apple SO 3415; US 1973-12-05) (1.82) ↔ Control theory / dynamical systems (pack-04 bound) at v1.49.604
+- **ELC × SPS policy-biological anchor pair:** *The Limits to Growth* (Meadows et al.; Smithsonian Castle 1972-03-02 evening; Universe Books 1972-0 (1.82) ↔ Sooty Shearwater (*Ardenna grisea*) (#79) at v1.49.604
+- **ELC × TRS policy-mathematics anchor pair:** *The Limits to Growth* (Meadows et al.; Smithsonian Castle 1972-03-02 evening; Universe Books 1972-0 (1.82) ↔ Control theory / dynamical systems (pack-04 bound) at v1.49.604
+- **SPS × TRS biological-mathematics resonance pair:** Sooty Shearwater (*Ardenna grisea*) (#79) ↔ Control theory / dynamical systems (pack-04 bound) at v1.49.604
 - **Five-track convergence at v1.49.604:** NASA + MUS + ELC + SPS + TRS reproducibly-stable cross-track substrate alignment per #10242 ESTABLISHED reaffirm
 - **Cross-track read-discipline maintained:** zero fabrication across W2 builds; all sibling references sourced from W1 drafts per #10243 ESTABLISHED reaffirm
+- **Engine-cadence wave pipeline:** W0 version+brief → W1 research → W2 build (NASA serial-first then MUS+ELC+SPS parallel) → W3 recovery+catalog → W4 release-notes → W5 ship-pipeline; six-wave deterministic execution at v1.49.604
+- **Pre-tag-gate composite at v1.49.604:** 8/8 PASS gate held (build + vitest + completeness + CI-on-dev + www-bundles + depth-audit + CLAUDE.md + catalog-index) per #10244 ESTABLISHED counter-cadence pattern
+- **Substrate-coherence-predicts-cross-pack-density at v1.49.604:** TRS pack-pair completion confirms #10273 + #10274 + #10284 post-ESTABLISHED reproducibility holds
+## Cross-track structural pair anchor inventory
+
+- **NASA × MUS cross-track structural pair anchor:** Pioneer 10 (1.82) ↔ *Band on the Run* (Paul McCartney & Wings; Apple SO 3415; US 1973-12-05) (1.82) at v1.49.604
+- **NASA × ELC political-technical anchor pair:** Pioneer 10 (1.82) ↔ *The Limits to Growth* (Meadows et al.; Smithsonian Castle 1972-03-02 evening; Universe Books 1972-0 (1.82) at v1.49.604
+- **NASA × SPS biological-substrate anchor pair:** Pioneer 10 (1.82) ↔ Sooty Shearwater (*Ardenna grisea*) (#79) at v1.49.604
+- **NASA × TRS formal-mathematics substrate anchor:** Pioneer 10 (1.82) ↔ Control theory / dynamical systems (pack-04 bound) at v1.49.604
+- **MUS × ELC cultural-political anchor pair:** *Band on the Run* (Paul McCartney & Wings; Apple SO 3415; US 1973-12-05) (1.82) ↔ *The Limits to Growth* (Meadows et al.; Smithsonian Castle 1972-03-02 evening; Universe Books 1972-0 (1.82) at v1.49.604
+- **MUS × SPS cultural-biological resonance pair:** *Band on the Run* (Paul McCartney & Wings; Apple SO 3415; US 1973-12-05) (1.82) ↔ Sooty Shearwater (*Ardenna grisea*) (#79) at v1.49.604
+- **MUS × TRS compositional-mathematics resonance pair:** *Band on the Run* (Paul McCartney & Wings; Apple SO 3415; US 1973-12-05) (1.82) ↔ Control theory / dynamical systems (pack-04 bound) at v1.49.604
+- **ELC × SPS policy-biological anchor pair:** *The Limits to Growth* (Meadows et al.; Smithsonian Castle 1972-03-02 evening; Universe Books 1972-0 (1.82) ↔ Sooty Shearwater (*Ardenna grisea*) (#79) at v1.49.604
+- **ELC × TRS policy-mathematics anchor pair:** *The Limits to Growth* (Meadows et al.; Smithsonian Castle 1972-03-02 evening; Universe Books 1972-0 (1.82) ↔ Control theory / dynamical systems (pack-04 bound) at v1.49.604
+- **SPS × TRS biological-mathematics resonance pair:** Sooty Shearwater (*Ardenna grisea*) (#79) ↔ Control theory / dynamical systems (pack-04 bound) at v1.49.604
+- **Five-track convergence at v1.49.604:** NASA + MUS + ELC + SPS + TRS reproducibly-stable cross-track substrate alignment per #10242 ESTABLISHED reaffirm
+- **Cross-track read-discipline maintained:** zero fabrication across W2 builds; all sibling references sourced from W1 drafts per #10243 ESTABLISHED reaffirm
+- **Engine-cadence wave pipeline:** W0 version+brief → W1 research → W2 build (NASA serial-first then MUS+ELC+SPS parallel) → W3 recovery+catalog → W4 release-notes → W5 ship-pipeline; six-wave deterministic execution at v1.49.604
+- **Pre-tag-gate composite at v1.49.604:** 8/8 PASS gate held (build + vitest + completeness + CI-on-dev + www-bundles + depth-audit + CLAUDE.md + catalog-index) per #10244 ESTABLISHED counter-cadence pattern
+- **Substrate-coherence-predicts-cross-pack-density at v1.49.604:** TRS pack-pair completion confirms #10273 + #10274 + #10284 post-ESTABLISHED reproducibility holds
 

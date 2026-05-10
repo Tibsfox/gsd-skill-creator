@@ -47,3 +47,10 @@ v605 W3.3 admitted EXTENDED-STAY-DOCTRINE to §6.6 register at 2-ex per substrat
 - **Pre-tag-gate composite:** 8/8 PASS gate held at v1.49.606 (build + vitest + completeness + CI-on-dev + www-bundles + depth-audit + CLAUDE.md + catalog-index)
 - **Drift detection:** post-ship RH refresh emitted advisory drift signal at v1.49.606 (active soak per FA-621 disposition)
 
+## Carryover lessons applied at v1.49.606
+
+- **Chunked Write+Edit discipline:** applied across W2 build subagents at v1.49.606 per #10246 ESTABLISHED reaffirm
+- **Cross-track sibling W1 read-discipline:** all sibling W1 drafts read before W2 build authoring at v1.49.606 per #10243 ESTABLISHED reaffirm
+- **Track-card BLOCKER gate:** depth-audit step 6 PASS at BLOCKER mode for v1.49.606 per #10244 ESTABLISHED reaffirm
+- **Pre-tag-gate composite:** 8/8 PASS gate held at v1.49.606 (build + vitest + completeness + CI-on-dev + www-bundles + depth-audit + CLAUDE.md + catalog-index)
+- **Engine-cadence wave pipeline:** W0-W5 deterministic execution at v1.49.606

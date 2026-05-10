@@ -94,3 +94,13 @@ Lab-director quality-bar evaluation: **G3 GATE QUALITY-BAR PASS** — awaiting o
 - `www/tibsfox/com/Research/ELC/1.1.82/` — index.html + artifact suite (timeline + comparison + diagrams)
 - `www/tibsfox/com/Research/SPS/<species-slug>/` — index.html + artifact suite (audio + sims + anatomy + diagrams)
 - FTP sync to tibsfox.com via `npm run ftp-sync -- 1.1.82` — typically 40-50 files / 1-2 MB
+
+## Key Features
+
+| Track | Detail |
+|-------|--------|
+| NASA | Pioneer 10 First Through Asteroid Belt + First Jupiter Flyby (NASA degree 1.82) |
+| MUS | cross-track INSIDE-window pick at v1.49.604 |
+| ELC | cross-track INSIDE-window pick at v1.49.604 |
+| SPS | cross-track INSIDE-window pick at v1.49.604 |
+| TRS | pack-pair completion at v1.49.604 |

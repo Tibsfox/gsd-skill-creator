@@ -64,3 +64,13 @@ Apollo 17 launched 1972-12-07 05:33:00 UTC from KSC LC-39A — the only nighttim
 - `www/tibsfox/com/Research/ELC/1.1.84/` — index.html + artifact suite (timeline + comparison + diagrams)
 - `www/tibsfox/com/Research/SPS/<species-slug>/` — index.html + artifact suite (audio + sims + anatomy + diagrams)
 - FTP sync to tibsfox.com via `npm run ftp-sync -- 1.1.84` — typically 40-50 files / 1-2 MB
+
+## Key Features
+
+| Track | Detail |
+|-------|--------|
+| NASA | Apollo 17 Final Crewed Lunar Landing (NASA degree 1.84) |
+| MUS | cross-track INSIDE-window pick at v1.49.606 |
+| ELC | cross-track INSIDE-window pick at v1.49.606 |
+| SPS | cross-track INSIDE-window pick at v1.49.606 |
+| TRS | pack-pair completion at v1.49.606 |

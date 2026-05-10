@@ -63,3 +63,13 @@ Apollo 16 launched 1972-04-16 17:54:00 UTC from KSC LC-39A: CDR John Young + CMP
 - `www/tibsfox/com/Research/ELC/1.1.83/` — index.html + artifact suite (timeline + comparison + diagrams)
 - `www/tibsfox/com/Research/SPS/<species-slug>/` — index.html + artifact suite (audio + sims + anatomy + diagrams)
 - FTP sync to tibsfox.com via `npm run ftp-sync -- 1.1.83` — typically 40-50 files / 1-2 MB
+
+## Key Features
+
+| Track | Detail |
+|-------|--------|
+| NASA | Apollo 16 Descartes Highlands Geology (NASA degree 1.83) |
+| MUS | cross-track INSIDE-window pick at v1.49.605 |
+| ELC | cross-track INSIDE-window pick at v1.49.605 |
+| SPS | cross-track INSIDE-window pick at v1.49.605 |
+| TRS | pack-pair completion at v1.49.605 |

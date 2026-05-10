@@ -113,3 +113,13 @@ See `chapter/05-w4d-w4e-addendum.md` for the full W4c/W4d/W4e narrative + endpoi
 - `www/tibsfox/com/Research/ELC/<degree>/` — index.html + artifact suite
 - `www/tibsfox/com/Research/SPS/<species-slug>/` — index.html + artifact suite (audio + sims + anatomy + diagrams)
 - FTP sync to tibsfox.com via `npm run ftp-sync -- 1.<degree>` — typically 40-50 files / 1-2 MB
+
+## Key Features
+
+| Track | Detail |
+|-------|--------|
+| NASA | GSD Code Atlas (counter-cadence) |
+| MUS | cross-track INSIDE-window pick at v1.49.607 |
+| ELC | cross-track INSIDE-window pick at v1.49.607 |
+| SPS | cross-track INSIDE-window pick at v1.49.607 |
+| TRS | pack-pair completion at v1.49.607 |

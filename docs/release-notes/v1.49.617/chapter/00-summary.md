@@ -14,7 +14,7 @@
 
 **K_16 SINGLE-PASS ACHIEVED.** TRS M1 W2 pack-16 logic-and-foundations binding extends past K_15 in a single milestone; all 120 = C(16,2) pack-pair edges realized. Pack-16 plays a **bridge-category role obs#4** (4-of-4 consecutive bridge-pattern across pack-07/14/15/16) confirming **#10273 post-ESTABLISHED reproducibility obs#1**. Substrate-coherence: source-classification logic + cross-identification Bayesian inference + spectral-fit model selection + catalog-completeness reasoning + observatory-scheduling logic. **#10274 K_N completion obs#1 CONFIRMED** at second consecutive CLEAN EXTENSION (K_15 v616 + K_16 v617 at 14-edge cadence preservation).
 
-6. **One ESTABLISHED-promotion at v617 with SPECIALIZATION sub-form:**
+**One ESTABLISHED-promotion at v617 with SPECIALIZATION sub-form:**
    - **#10277** REMOTE-OPERATOR-AT-PLANETARY-SCALE → ESTABLISHED at obs#3 with SPECIALIZATION sub-form (substrate-coherence at HEAO-1 LEO = LOW; primitive does NOT generalize beyond Earth-Mars latency scale; specializes to deep-space-only operator-pattern)
    - First ESTABLISHED-promotion via SPECIALIZATION rather than GENERALIZATION; lesson taxonomy expands.
 
