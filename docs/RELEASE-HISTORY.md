@@ -1,15 +1,16 @@
 # Release History
 
-672 milestones shipped across the v1.0 → v1.49.629 arc. The table below lists every shipped release, newest first.
+673 milestones shipped across the v1.0 → v1.49.630 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 672 releases · 671 with retrospectives · 633 with extracted lessons · quality A:642 B:10 C:12 D:4 F:4 (avg 96) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 673 releases · 672 with retrospectives · 633 with extracted lessons · quality A:642 B:10 C:13 D:4 F:4 (avg 96) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.630](release-notes/v1.49.630) | STS-3 Columbia First RMS Payload-Grapple-and-Redeploy + First Contingency Landing-Site Activation | 2026-05-10 | 4 | 5 | — | [s](release-notes/v1.49.630/chapter/00-summary.md) [r](release-notes/v1.49.630/chapter/03-retrospective.md) [l](release-notes/v1.49.630/chapter/04-lessons.md) [c](release-notes/v1.49.630/chapter/99-context.md) | — | C 75 |  |
 | [v1.49.629](release-notes/v1.49.629) | GIS Spatial Substrate (counter-cadence) | 2026-05-10 | 10 | — | — | [s](release-notes/v1.49.629/chapter/00-summary.md) [r](release-notes/v1.49.629/chapter/03-retrospective.md) [l](release-notes/v1.49.629/chapter/04-lessons.md) [c](release-notes/v1.49.629/chapter/99-context.md) | — | F 53 |  |
 | [v1.49.628](release-notes/v1.49.628) | STS-2 Columbia First Vehicle Reuse | 2026-05-09 | 6 | 6 | — | [s](release-notes/v1.49.628/chapter/00-summary.md) [r](release-notes/v1.49.628/chapter/03-retrospective.md) [l](release-notes/v1.49.628/chapter/04-lessons.md) [c](release-notes/v1.49.628/chapter/99-context.md) | — | A 96 |  |
 | [v1.49.627](release-notes/v1.49.627) | STS-1 Columbia First Space Shuttle Flight | 2026-05-09 | 5 | 6 | — | [s](release-notes/v1.49.627/chapter/00-summary.md) [r](release-notes/v1.49.627/chapter/03-retrospective.md) [l](release-notes/v1.49.627/chapter/04-lessons.md) [c](release-notes/v1.49.627/chapter/99-context.md) | — | A 96 |  |
