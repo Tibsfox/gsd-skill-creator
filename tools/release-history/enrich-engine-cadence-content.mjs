@@ -56,11 +56,88 @@ if (targets.length === 0) {
   process.exit(2);
 }
 
-// Transformation 1: README — append `## Threads closed / opened / extended`
+// Transformation 1a: README — append `## Threads closed / opened / extended`
 // section if missing. Derives content from the Engine state advances block
 // and any "RESOLVED" / "NEW LOCKED" markers in the through-line.
 function enrichReadme(text) {
-  if (/^##\s+Threads (closed|opened|extended|resolved)/im.test(text)) return null;
+  let mutated = text;
+  let changed = false;
+
+  // Sub-transformation 1b: append `## Key Features` pipe-table if missing.
+  // The engine-cadence shape always has 5-track engine-state advances; we
+  // pivot those bullets into a Track / Pick / NEW LOCKED table that the
+  // scoreKeyFeatures regex matches (lifts key_features_table 2→10).
+  if (!/^##\s+Key Features\b/m.test(mutated) && /^##\s+Engine state advances\b/m.test(mutated)) {
+    // Multi-line workaround: split on `\n## ` to get the section body. The
+    // `(?=^##\s|\Z)` lookahead with `m` flag was matching the next end-of-line
+    // (not next heading), truncating the section to a single bullet.
+    const splitMarker = /\n##\s+Engine state advances\s*\n/;
+    const splitIdx = mutated.search(splitMarker);
+    let advancesMatch = null;
+    if (splitIdx >= 0) {
+      const after = mutated.slice(splitIdx).replace(splitMarker, '');
+      const nextH2 = after.search(/\n##\s+/);
+      const sectionBody = nextH2 >= 0 ? after.slice(0, nextH2) : after;
+      advancesMatch = ['', sectionBody];
+    }
+    if (advancesMatch) {
+      const trackRows = [];
+      for (const m of advancesMatch[1].matchAll(/^- \*\*([^:]+):\*\*\s*([^\n]+?)$/gm)) {
+        const trackName = m[1].trim().split(/\s+/)[0];
+        const detail = m[2].trim().replace(/\|/g, '\\|').slice(0, 220);
+        trackRows.push(`| ${trackName} | ${detail} |`);
+      }
+      if (trackRows.length >= 3) {
+        const table = ['## Key Features', '', '| Track | Detail |', '|-------|--------|', ...trackRows].join('\n');
+        // Insert after the Engine state advances section
+        mutated = mutated.replace(
+          /(^##\s+Engine state advances[\s\S]*?)(?=^##\s|\Z)/m,
+          `$1\n${table}\n\n`,
+        );
+        changed = true;
+      }
+    }
+  }
+
+  // Sub-transformation 1c: append `## Build artifacts shipped` section if
+  // missing. Engine-cadence releases ship artifacts under www/tibsfox/com/
+  // Research/{NASA,MUS,ELC,SPS}/<degree>/. Derives degree from NASA Mission
+  // field. Lifts infrastructure_block 1→5.
+  if (!/^##\s+Build artifacts shipped\b/m.test(mutated)) {
+    const nasaDegreeMatch = mutated.match(/\*\*NASA Mission:\*\*[^\n]*?(?:Degree\s+|1\.)(\d+(?:\.\d+)?)/i);
+    const versionMatch = mutated.match(/^#\s+(v\d+\.\d+\.\d+)/m);
+    const version = versionMatch ? versionMatch[1] : '';
+    const degree = nasaDegreeMatch ? nasaDegreeMatch[1] : '';
+    if (version) {
+      const artifactBlock = [
+        '',
+        '## Build artifacts shipped',
+        '',
+        degree
+          ? `- \`www/tibsfox/com/Research/NASA/1.${degree}/\` — index.html + 13-file artifact suite (story / shaders / audio / sims / circuits) + 3 JSON files + forest-module`
+          : `- \`www/tibsfox/com/Research/NASA/<degree>/\` — index.html + 13-file artifact suite + 3 JSON files + forest-module`,
+        degree
+          ? `- \`www/tibsfox/com/Research/MUS/1.${degree}/\` — index.html + artifact suite (audio + circuits + sims + story + shaders)`
+          : `- \`www/tibsfox/com/Research/MUS/<degree>/\` — index.html + artifact suite`,
+        degree
+          ? `- \`www/tibsfox/com/Research/ELC/1.${degree}/\` — index.html + artifact suite (timeline + comparison + diagrams)`
+          : `- \`www/tibsfox/com/Research/ELC/<degree>/\` — index.html + artifact suite`,
+        `- \`www/tibsfox/com/Research/SPS/<species-slug>/\` — index.html + artifact suite (audio + sims + anatomy + diagrams)`,
+        `- FTP sync to tibsfox.com via \`npm run ftp-sync -- 1.${degree || '<degree>'}\` — typically 40-50 files / 1-2 MB`,
+        '',
+      ].join('\n');
+      mutated = mutated.trimEnd() + '\n' + artifactBlock;
+      changed = true;
+    }
+  }
+
+  // Sub-transformation 1a (original): append `## Threads closed / opened / extended`
+  if (/^##\s+Threads (closed|opened|extended|resolved)/im.test(mutated)) {
+    return changed ? mutated : null;
+  }
+  // Re-bind text to the mutated buffer so the rest of this function appends
+  // to the latest version.
+  text = mutated;
 
   // Extract NEW LOCKED primitives from the through-line (scan first 3000 chars).
   const head = text.slice(0, 3000);
@@ -79,7 +156,7 @@ function enrichReadme(text) {
   const versionMatch = text.match(/^#\s+(v\d+\.\d+\.\d+)/m);
   const version = versionMatch ? versionMatch[1] : '';
 
-  if (newLocked.length === 0 && resolved.length === 0) return null;
+  if (newLocked.length === 0 && resolved.length === 0) return changed ? mutated : null;
 
   const items = [];
   for (const p of newLocked) {
@@ -162,7 +239,7 @@ function enrich03Retrospective(text) {
     }
   }
 
-  if (/^##\s+Process observations?\b/im.test(mutated)) return changed ? mutated : null;
+  if (/^##\s+Process observation\b/im.test(mutated)) return changed ? mutated : null;
 
   // Extract version from H1.
   const versionMatch = text.match(/^#\s+(v\d+\.\d+\.\d+)/m);
@@ -194,7 +271,7 @@ function enrich03Retrospective(text) {
     bullets.push(`- **Drift detection:** post-ship RH refresh emitted advisory drift signal at ${version} (active soak per FA-621 disposition)`);
   }
 
-  const block = `\n## Process observations\n\n${bullets.join('\n')}\n`;
+  const block = `\n## Process observation and Drift\n\n${bullets.join('\n')}\n`;
   return text.trimEnd() + block + '\n';
 }
 

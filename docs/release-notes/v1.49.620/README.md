@@ -5,6 +5,7 @@
 **NASA Mission:** Pioneer Venus 1 Twin-Mission-Pair Continuation
 **Predecessor:** v1.49.619
 **Mission package:** `.planning/missions/v1-49-620-pioneer-venus-1-twin-mission-pair-continuation/`
+**Phases:** 6 (W0-W5 wave-pipeline: W0 version+brief / W1 research / W2 build / W3 recovery+catalog / W4 release-notes / W5 ship-pipeline)
 **Engine state:** NASA degree:: 1.96 → **1.97** + MUS degree:: 1.96 → **1.97** + ELC degree:: 1.96 → **1.97** + SPS species:: #93 → **#94** + TRS M1 W2:: pack-18 → **pack-19** graph-theory binding; +14 cross-pack edges
 
 ## Summary
@@ -19,6 +20,17 @@
 - **ELC degree:** 1.96 → **1.97** (UN First Special Session on Disarmament SSOD-I / opened UN Headquarters New York 1978-05-23 = PV1 launch +3d EXACT INSIDE strict ±8d; clean INSIDE-window pick (5 days of headroom); largest most representative meeting of nations ever convened to consider disarmament; **#10275 obs#4 post-ESTABLISHED reproducibility VERY HIGH** at full-UN-membership-Special-Session-with-civil-society-access domain; 6-of-6 cumulative domain forms; field dominance absolute; 8-of-8 primitives scored HIGH or VERY HIGH)
 - **SPS species:** #93 → **#94** (Pacific Yew *Taxus brevifolia*; family Taxaceae; Order Pinales; Class Pinopsida; Nuttall 1848; **FIRST autotroph (plant) in SPS cohort**; **AUTOTROPH-AS-COHORT-NODE NEW LOCKED at v620**; 14-year NCI taxol drug-development program 1978-1992 = **EXACT calendar match with PV1 14-year operation 1978-1992**; NCI 30,000-sample systematic botanical screening 1958-1971 parallels PVR Venus radar systematic mapping; Pacific Yew × European Yew comparative-chemistry pair parallels VENUS-AS-EARTH-COMPARATIVE-PLANET substrate; Pacific Yew Act P.L. 102-335 1992-08-07; FDA approval ovarian cancer 1992-12-29 = within 80 days of PV1 mission close)
 - **TRS M1 W2:** pack-18 → **pack-19** graph-theory binding; +14 cross-pack edges (225-238) → **238 total** / **K_19 ACHIEVED**; pack-19 = bridge-category obs#7 (7-of-7 consecutive bridge-category packs) → **#10273 + #10274 post-ESTABLISHED reproducibility obs#4 HOLDS** (7-of-7 cumulative); **#10284 post-ESTABLISHED reproducibility obs#2 HOLDS MIXED-leaning-EMERGENT** (5 def + 6 emergent + 3 hybrid)
+
+
+## Key Features
+
+| Track | Detail |
+|-------|--------|
+| NASA | 1.96 → **1.97** (Pioneer Venus 1 Orbiter / NSSDC 1978-051A / Pettengill PVR + Russell magnetometer + Stewart UVS airglow / Hall Ames project manager / Colin Ames project scientist / Hughes HS-507 / Atlas SLV-3D Centaur-D |
+| MUS | 1.96 → **1.97** (Kraftwerk *The Man-Machine* / Kling Klang 1C 064-32843 Germany / Capitol ST-11728 US / 1978-05-19 = PV1 launch -1d INSIDE strict; **#10232 obs#21 single unambiguous date INSIDE-strict primary anchor**; c |
+| ELC | 1.96 → **1.97** (UN First Special Session on Disarmament SSOD-I / opened UN Headquarters New York 1978-05-23 = PV1 launch +3d EXACT INSIDE strict ±8d; clean INSIDE-window pick (5 days of headroom); largest most represent |
+| SPS | #93 → **#94** (Pacific Yew *Taxus brevifolia*; family Taxaceae; Order Pinales; Class Pinopsida; Nuttall 1848; **FIRST autotroph (plant) in SPS cohort**; **AUTOTROPH-AS-COHORT-NODE NEW LOCKED at v620**; 14-year NCI taxol  |
+| TRS | pack-18 → **pack-19** graph-theory binding; +14 cross-pack edges (225-238) → **238 total** / **K_19 ACHIEVED**; pack-19 = bridge-category obs#7 (7-of-7 consecutive bridge-category packs) → **#10273 + #10274 post-ESTABLIS |
 
 ## v620 ESTABLISHED-promotions + post-ESTABLISHED hold-tests
 
@@ -70,3 +82,11 @@
 ## See also
 
 - Chapter contents: [00-summary](chapter/00-summary.md) · [03-retrospective](chapter/03-retrospective.md) · [04-lessons](chapter/04-lessons.md) · [99-context](chapter/99-context.md)
+
+## Build artifacts shipped
+
+- `www/tibsfox/com/Research/NASA/<degree>/` — index.html + 13-file artifact suite + 3 JSON files + forest-module
+- `www/tibsfox/com/Research/MUS/<degree>/` — index.html + artifact suite
+- `www/tibsfox/com/Research/ELC/<degree>/` — index.html + artifact suite
+- `www/tibsfox/com/Research/SPS/<species-slug>/` — index.html + artifact suite (audio + sims + anatomy + diagrams)
+- FTP sync to tibsfox.com via `npm run ftp-sync -- 1.<degree>` — typically 40-50 files / 1-2 MB

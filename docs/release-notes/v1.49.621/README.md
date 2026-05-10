@@ -5,6 +5,7 @@
 **NASA Mission:** SCRIBE Build-Out (counter-cadence)
 **Predecessor:** v1.49.620
 **Mission package:** `.planning/missions/v1-49-621-scribe-build-out-counter-cadence/`
+**Phases:** 6 (W0-W5 wave-pipeline: W0 version+brief / W1 research / W2 build / W3 recovery+catalog / W4 release-notes / W5 ship-pipeline)
 **Engine state:** NASA degree:: 1.92 → **1.92 + MUS degree:: unchanged + ELC degree:: unchanged + SPS species:: unchanged + Seattle 360:: 57/360 + SCRIBE foundational chipset:: newly shipped at `cartridges/foundational/scribe/` + Public deployment:: 12 SCRIBE files + Test count:: 21,298 baseline → +95 SCRIBE
 
 ## Summary
@@ -22,6 +23,20 @@
 - **SCRIBE foundational chipset:** newly shipped at `cartridges/foundational/scribe/` (manifest declares `composes: [code-svg-hdl-bridge, dashboard-lod-rendering, markup-lineage, retrieval-provenance, svg-substrate]`)
 - **Public deployment:** 12 SCRIBE files (369,668 bytes) live at https://tibsfox.com/Research/SCRIBE/ (5/5 HTTPS verification probes 200)
 - **Test count:** 21,298 baseline → +95 SCRIBE (Waves 1-3) + 44 integration/substrate (Wave 4 Component 09) = SCRIBE suite at 255 pass / 17 skip / 0 fail across 26 test files
+
+
+## Key Features
+
+| Track | Detail |
+|-------|--------|
+| NASA | 1.92 → **1.92 (UNCHANGED)** — counter-cadence; no degree advance this milestone |
+| MUS | unchanged |
+| ELC | unchanged |
+| SPS | unchanged |
+| Seattle | 57/360 (paused, unchanged) |
+| SCRIBE | newly shipped at `cartridges/foundational/scribe/` (manifest declares `composes: [code-svg-hdl-bridge, dashboard-lod-rendering, markup-lineage, retrieval-provenance, svg-substrate]`) |
+| Public | 12 SCRIBE files (369,668 bytes) live at https://tibsfox.com/Research/SCRIBE/ (5/5 HTTPS verification probes 200) |
+| Test | 21,298 baseline → +95 SCRIBE (Waves 1-3) + 44 integration/substrate (Wave 4 Component 09) = SCRIBE suite at 255 pass / 17 skip / 0 fail across 26 test files |
 
 ## Cross-track
 
@@ -61,3 +76,11 @@ conservative; tune downward in next mission spec.
 ## See also
 
 - Chapter contents: [00-summary](chapter/00-summary.md) · [03-retrospective](chapter/03-retrospective.md) · [04-lessons](chapter/04-lessons.md) · [99-context](chapter/99-context.md)
+
+## Build artifacts shipped
+
+- `www/tibsfox/com/Research/NASA/<degree>/` — index.html + 13-file artifact suite + 3 JSON files + forest-module
+- `www/tibsfox/com/Research/MUS/<degree>/` — index.html + artifact suite
+- `www/tibsfox/com/Research/ELC/<degree>/` — index.html + artifact suite
+- `www/tibsfox/com/Research/SPS/<species-slug>/` — index.html + artifact suite (audio + sims + anatomy + diagrams)
+- FTP sync to tibsfox.com via `npm run ftp-sync -- 1.<degree>` — typically 40-50 files / 1-2 MB

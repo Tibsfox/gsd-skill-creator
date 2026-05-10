@@ -57,7 +57,7 @@ v626 locks seven substrate primitives simultaneously — the largest single-mile
 ### Sixth consecutive INSIDE-strict 3-event cluster — extended run signal
 
 Six consecutive milestones (v620/v622/v623/v624/v625/v626) each produce a 3-event INSIDE-strict cluster across all three time-anchored tracks simultaneously. The run now spans 1978-05 through 1980-02 calendar months — a 21-month window. The v620 attenuation-after-1979 prediction (retroactively emitted at v625 retrospective) was incorrect: the cluster density persists into 1980. Lesson: the 1978-1980 cross-domain density zone is broader than initially estimated; SolarMax's launch density (3 events within 6 days) represents the tightest post-v624 cluster at 6 days (tied with v623 at 6 days). The six-event consecutive run is now well past the #10247 ESTABLISHED threshold and qualifies as a sustained substrate run; the question for v627+ is whether the 1980-1981 period continues the density or represents the run's terminal point.
-## Process observations
+## Process observation and Drift
 
 - **Wave dispatch cadence:** W0 main-context + W1 research subagent + W2 build subagents (NASA serial-first then MUS+ELC+SPS parallel) — pattern held at v1.49.626
 - **Recovery hierarchy:** Tier-2 inline-Edit recovery applied if depth-audit FAIL — engine-cadence resilience pattern

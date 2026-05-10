@@ -41,7 +41,7 @@ W2 ran cleanly across all 4 dispatches; the only friction at v612 was the W2.NAS
 
 Total W2 wall: ~72 min (NASA serial 50 min + parallel-cohort longest at ~22 min). Slightly heavier than v611 (~63 min) due to NASA inline-recovery overhead; otherwise comparable.
 
-## Process observations
+## Process observation and Drift
 
 1. **Four-milestone clean-wave trend confirms FA-608-1 chunked discipline is the load-bearing change.** Across v609 + v610 + v611 + v612, 16-of-16 W2 dispatches completed without watchdog/quota/fabrication events. The discipline is the steady-state W2 operating mode.
 2. **§6.6 promotion density at v612 reproduces v611 density at obs#2.** Three ESTABLISHED-target promotions in a single milestone (#10263 + #10264 + #10265). Back-to-back 3-promotion milestones (v611 + v612) triggers #10267 obs#2 toward LOCKED at 3-ex. The pattern is reproducible-not-coincidental.

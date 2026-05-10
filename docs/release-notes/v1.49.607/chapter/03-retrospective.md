@@ -77,7 +77,7 @@ pipeline's speculative `skipBalanced` calls at high token-density, not the lexer
 framing ("root cause is engine-wide") was overstated; D5 corrected it.  Lesson: when a perf
 claim looks suspiciously bad, re-measure after the fix at the actual target scale before
 attributing root cause.
-## Process observations
+## Process observation and Drift
 
 - **Wave dispatch cadence:** W0 main-context + W1 research subagent + W2 build subagents (NASA serial-first then MUS+ELC+SPS parallel) — pattern held at v1.49.607
 - **Recovery hierarchy:** Tier-2 inline-Edit recovery applied if depth-audit FAIL — engine-cadence resilience pattern

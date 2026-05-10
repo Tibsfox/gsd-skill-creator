@@ -5,6 +5,7 @@
 **NASA Mission:** HEAO-1 X-Ray All-Sky Survey
 **Predecessor:** v1.49.616
 **Mission package:** `.planning/missions/v1-49-617-heao-1-x-ray-all-sky-survey/`
+**Phases:** 6 (W0-W5 wave-pipeline: W0 version+brief / W1 research / W2 build / W3 recovery+catalog / W4 release-notes / W5 ship-pipeline)
 **Engine state:** NASA degree:: 1.93 → **1.94** + MUS degree:: 1.93 → **1.94** + ELC degree:: 1.93 → **1.94** + SPS species:: #90 → **#91** + TRS M1 W2:: pack-16 logic-and-foundations binding; +14 cross-pack edges
 
 ## Summary
@@ -15,7 +16,18 @@
 ## Engine state advances
 
 - **NASA degree:** 1.93 → **1.94** (HEAO-1 / NSSDC 1977-075A / Friedman-Boldt-Bradt-Peterson / McDonald project scientist / Atlas SLV-3D Centaur LC-17B / 1977-08-12 launch / 1979-01-09 silent / 525-day 16-month mission / 842-source X-ray catalog Wood 1984 / SS 433 first relativistic-jet binary / Hercules X-1 cyclotron line; **first all-sky X-ray survey at high sensitivity**; observatory regime opens; #10269 obs#6 fresh planetary→observatory regime-shift)
-- **MUS degree:** 1.93 → **1.94** (Steely Dan *Aja* / ABC AA-1006 / 1977-09-23 release = HEAO-1 launch +42d OUTSIDE strict ±8d; **recording-session-anchor sub-form per #10232 obs#18** — Aja tracking sessions Village Recorders Jan-Aug 1977 INSIDE-window; #10285 RECORDING-SESSION-ANCHOR sub-form CANDIDATE FORMALIZED at four cumulative instances)
+- **MUS degree:** 1.93 → **1.94** (Steely Dan *Aja* / ABC AA-1006 / 1977-09-23 release = HEAO-1 launch +42d OUTSIDE strict ±8d; **recording-session-anchor sub-form per #10232 obs#18** — Aja tracking sessions Village Recorders Jan-Aug 1977 INSIDE-window; #10285 RECORDING-SESSION-ANCHOR sub-form CANDIDATE FORMALI
+## Key Features
+
+| Track | Detail |
+|-------|--------|
+| NASA | 1.93 → **1.94** (HEAO-1 / NSSDC 1977-075A / Friedman-Boldt-Bradt-Peterson / McDonald project scientist / Atlas SLV-3D Centaur LC-17B / 1977-08-12 launch / 1979-01-09 silent / 525-day 16-month mission / 842-source X-ray c |
+| MUS | 1.93 → **1.94** (Steely Dan *Aja* / ABC AA-1006 / 1977-09-23 release = HEAO-1 launch +42d OUTSIDE strict ±8d; **recording-session-anchor sub-form per #10232 obs#18** — Aja tracking sessions Village Recorders Jan-Aug 1977 |
+| ELC | 1.93 → **1.94** (DOE Organization Act / Public Law 95-91 / signed Carter 1977-08-04 = HEAO-1 launch -8d EXACT INSIDE strict ±8d boundary; first Cabinet-rank reorganization since DoT 1967 consolidating ERDA + FEA + Atomic |
+| SPS | #90 → **#91** (Northern Pintail *Anas acuta*; family Anatidae; Order Anseriformes; **WBPHS continental survey 1955-present** — Waterfowl Breeding Population and Habitat Survey is the survey-instrument substrate-archetype |
+| TRS | pack-16 logic-and-foundations binding; +14 cross-pack edges (183-196) → **196 total** / **K_16 SINGLE-PASS ACHIEVED** (all 120 = C(16,2) pack-pair edges of the sixteen-pack roster realized); pack-16 = bridge-category obs |
+
+ZED at four cumulative instances)
 - **ELC degree:** 1.93 → **1.94** (DOE Organization Act / Public Law 95-91 / signed Carter 1977-08-04 = HEAO-1 launch -8d EXACT INSIDE strict ±8d boundary; first Cabinet-rank reorganization since DoT 1967 consolidating ERDA + FEA + Atomic Energy Commission successors + 50+ programs; #10275 post-ESTABLISHED reproducibility obs#1 CONFIRMED — multi-stakeholder-renegotiation generalizes to domestic-government domain; #10283 FIRST-CABINET-DEPARTMENT-FOR-RESEARCH-CONSOLIDATION CANDIDATE emitted)
 - **SPS species:** #90 → **#91** (Northern Pintail *Anas acuta*; family Anatidae; Order Anseriformes; **WBPHS continental survey 1955-present** — Waterfowl Breeding Population and Habitat Survey is the survey-instrument substrate-archetype mirror to HEAO-1's all-sky X-ray survey; cohort trophic edge Peregrine #90 → Pintail CONFIRMED via Mills 2019 *Falco peregrinus* prey-selection on duck cohorts)
 - **TRS M1 W2:** pack-16 logic-and-foundations binding; +14 cross-pack edges (183-196) → **196 total** / **K_16 SINGLE-PASS ACHIEVED** (all 120 = C(16,2) pack-pair edges of the sixteen-pack roster realized); pack-16 = bridge-category obs#4 (4-of-4 consecutive bridge-category packs) → **#10273 post-ESTABLISHED reproducibility obs#1 CONFIRMED**; **#10274 K_N completion CLEAN EXTENSION obs#1 CONFIRMED** (4-of-4 consecutive at 14-edge cadence); **emergent-bridge vs definitional-bridge sub-type refinement** emitted as #10284 CANDIDATE
@@ -63,3 +75,11 @@
 ## See also
 
 - Chapter contents: [00-summary](chapter/00-summary.md) · [03-retrospective](chapter/03-retrospective.md) · [04-lessons](chapter/04-lessons.md) · [99-context](chapter/99-context.md)
+
+## Build artifacts shipped
+
+- `www/tibsfox/com/Research/NASA/<degree>/` — index.html + 13-file artifact suite + 3 JSON files + forest-module
+- `www/tibsfox/com/Research/MUS/<degree>/` — index.html + artifact suite
+- `www/tibsfox/com/Research/ELC/<degree>/` — index.html + artifact suite
+- `www/tibsfox/com/Research/SPS/<species-slug>/` — index.html + artifact suite (audio + sims + anatomy + diagrams)
+- FTP sync to tibsfox.com via `npm run ftp-sync -- 1.<degree>` — typically 40-50 files / 1-2 MB

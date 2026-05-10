@@ -1,10 +1,11 @@
 # v1.49.627 — STS-1 Columbia First Space Shuttle Flight
 
-**Released:** 2026-05-10
+**Released:** 2026-05-09
 **Type:** Engine-cadence degree-advancing milestone (v604+ run)
 **NASA Mission:** STS-1 Columbia First Space Shuttle Flight
 **Predecessor:** v1.49.626
 **Mission package:** `.planning/missions/v1-49-627-sts-1-columbia-first-space-shuttle-flight/`
+**Phases:** 6 (W0-W5 wave-pipeline: W0 version+brief / W1 research / W2 build / W3 recovery+catalog / W4 release-notes / W5 ship-pipeline)
 **Engine state:** NASA degree:: 1.102 → **1.103** + MUS degree:: 1.102 → **1.103** + ELC degree:: 1.102 → **1.103** + SPS species:: #99 → **#100** + TRS M1 W2:: pack-24 harmonic/Fourier K_24 → **pack-25 dynamical systems / chaos theory K_25**
 
 ## Summary
@@ -20,6 +21,17 @@
 - **SPS species:** #99 → **#100** (Pacific Banana Slug *Ariolimax columbianus*; first 3-digit SPS species number; first Mollusca + first Gastropoda + first Pulmonata; SPS-DEGREE-100-K-BOUNDARY NEW LOCKED; Gould 1851)
 - **TRS M1 W2:** pack-24 harmonic/Fourier K_24 → **pack-25 dynamical systems / chaos theory K_25** (~322 edges target; FA-626-6 RESOLVED)
 
+
+## Key Features
+
+| Track | Detail |
+|-------|--------|
+| NASA | 1.102 → **1.103** (STS-1 Columbia; NSSDC 1981-034A; OV-102 Columbia; commander John W. Young 1930-2018 Apollo 10 + Apollo 16 Moonwalker; pilot Robert L. Crippen 1937-; launch 1981-04-12 12:00 UTC LC-39A; 54 hours 20 min  |
+| MUS | 1.102 → **1.103** (The Cure *Faith*; Fiction Records FIXH 6; UK release 1981-04-14 = STS-1 landing +2d INSIDE strict; #10232 obs#32; ALBUM-FORM RESTORATION sub-form; Robert Smith + Simon Gallup + Lol Tolhurst; Mike Hedge |
+| ELC | 1.102 → **1.103** (Reagan-Columbia Political-Technical Confidence Restoration Complex; Reagan hospital discharge 1981-04-11 -1d INSIDE + Reagan "great deeds" statement 1981-04-14 +2d INSIDE; MULTI-EVENT-COMPLEX sub-form  |
+| SPS | #99 → **#100** (Pacific Banana Slug *Ariolimax columbianus*; first 3-digit SPS species number; first Mollusca + first Gastropoda + first Pulmonata; SPS-DEGREE-100-K-BOUNDARY NEW LOCKED; Gould 1851) |
+| TRS | pack-24 harmonic/Fourier K_24 → **pack-25 dynamical systems / chaos theory K_25** (~322 edges target; FA-626-6 RESOLVED) |
+
 ## Forward state
 
 - Predecessor (degree-advancing): v1.49.626 (Solar Maximum Mission; closed sha `d33627ec6`)
@@ -34,3 +46,10 @@
 - **OPENED:** SPS-DEGREE-100-K-BOUNDARY — substrate primitive NEW LOCKED at v1.49.627
 - **EXTENDED:** engine-cadence run continued at v1.49.627 (degree-advancing milestone)
 
+## Build artifacts shipped
+
+- `www/tibsfox/com/Research/NASA/<degree>/` — index.html + 13-file artifact suite + 3 JSON files + forest-module
+- `www/tibsfox/com/Research/MUS/<degree>/` — index.html + artifact suite
+- `www/tibsfox/com/Research/ELC/<degree>/` — index.html + artifact suite
+- `www/tibsfox/com/Research/SPS/<species-slug>/` — index.html + artifact suite (audio + sims + anatomy + diagrams)
+- FTP sync to tibsfox.com via `npm run ftp-sync -- 1.<degree>` — typically 40-50 files / 1-2 MB

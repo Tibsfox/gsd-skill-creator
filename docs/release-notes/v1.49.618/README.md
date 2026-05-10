@@ -1,10 +1,11 @@
 # v1.49.618 — Voyager 2 Outer-Planets Grand Tour
 
-**Released:** 2018-11-05
+**Released:** 2026-05-08
 **Type:** Engine-cadence degree-advancing milestone (v604+ run)
 **NASA Mission:** Voyager 2 Outer-Planets Grand Tour
 **Predecessor:** v1.49.617
 **Mission package:** `.planning/missions/v1-49-618-voyager-2-outer-planets-grand-tour/`
+**Phases:** 6 (W0-W5 wave-pipeline: W0 version+brief / W1 research / W2 build / W3 recovery+catalog / W4 release-notes / W5 ship-pipeline)
 **Engine state:** NASA degree:: 1.94 → **1.95** + MUS degree:: 1.94 → **1.95** + ELC degree:: 1.94 → **1.95** + SPS species:: #91 → **#92** + TRS M1 W2:: pack-17 cryptography binding; +14 cross-pack edges
 
 ## Summary
@@ -19,6 +20,17 @@
 - **ELC degree:** 1.94 → **1.95** (UN Conference to Combat Desertification / UNCOD Nairobi 1977-08-29 → 1977-09-09 = Voyager 2 launch +9d boundary-edge sub-form per #10232 v615 LDC +10d precedent; PACD 28-priority framework; UNGA 32/172 endorsement 1977-12-19; **#10275 obs#2 post-ESTABLISHED reproducibility CONFIRMED** at international-multilateral-environmental-conference domain)
 - **SPS species:** #91 → **#92** (Coho Salmon *Oncorhynchus kisutch*; family Salmonidae; Order Salmoniformes; Class Actinopterygii; **first PNW salmonid in cohort substrate**; FIRST cross-Class Aves → Actinopterygii trophic edge in cohort; Bald Eagle #89 → Coho Salmon #92 confirmed predation edge; #10279 PAIRED-RECOVERY-PROGRAM obs#3 toward ESTABLISHED-promotion via Coho + Chinook ESA paired recovery)
 - **TRS M1 W2:** pack-17 cryptography binding; +14 cross-pack edges (197-210) → **210 total** / **K_17 SINGLE-PASS ACHIEVED** (all 136 = C(17,2) pack-pair edges of the seventeen-pack roster realized); pack-17 = bridge-category obs#5 (5-of-5 consecutive bridge-category packs) → **#10273 + #10274 post-ESTABLISHED reproducibility obs#2 CONFIRMED** at second consecutive CLEAN EXTENSION; **#10284 PROMOTE-TO-ESTABLISHED at v618 close** (definitional-DOMINANT bridge sub-types 2-of-2 confirmed at pack-16 + pack-17)
+
+
+## Key Features
+
+| Track | Detail |
+|-------|--------|
+| NASA | 1.94 → **1.95** (Voyager 2 / NSSDC 1977-076A / Smith-Hanel-Broadfoot-Ness-Bridge-Krimigis-Stone / Stone 50y project-scientist tenure / Titan IIIE-Centaur LC-41 / 1977-08-20 launch / Jupiter-Saturn-Uranus-Neptune grand to |
+| MUS | 1.94 → **1.95** (Motörhead self-titled debut / Chiswick WIK-2 / 1977-08-21 release = Voyager 2 launch +1d INSIDE strict ±8d; **#10232 obs#19 INSIDE-strict release-date primary anchor** — first INSIDE-strict release-date  |
+| ELC | 1.94 → **1.95** (UN Conference to Combat Desertification / UNCOD Nairobi 1977-08-29 → 1977-09-09 = Voyager 2 launch +9d boundary-edge sub-form per #10232 v615 LDC +10d precedent; PACD 28-priority framework; UNGA 32/172 e |
+| SPS | #91 → **#92** (Coho Salmon *Oncorhynchus kisutch*; family Salmonidae; Order Salmoniformes; Class Actinopterygii; **first PNW salmonid in cohort substrate**; FIRST cross-Class Aves → Actinopterygii trophic edge in cohort; |
+| TRS | pack-17 cryptography binding; +14 cross-pack edges (197-210) → **210 total** / **K_17 SINGLE-PASS ACHIEVED** (all 136 = C(17,2) pack-pair edges of the seventeen-pack roster realized); pack-17 = bridge-category obs#5 (5-o |
 
 ## v618 ESTABLISHED-promotions + post-ESTABLISHED hold-tests
 
@@ -63,3 +75,11 @@
 ## See also
 
 - Chapter contents: [00-summary](chapter/00-summary.md) · [03-retrospective](chapter/03-retrospective.md) · [04-lessons](chapter/04-lessons.md) · [99-context](chapter/99-context.md)
+
+## Build artifacts shipped
+
+- `www/tibsfox/com/Research/NASA/<degree>/` — index.html + 13-file artifact suite + 3 JSON files + forest-module
+- `www/tibsfox/com/Research/MUS/<degree>/` — index.html + artifact suite
+- `www/tibsfox/com/Research/ELC/<degree>/` — index.html + artifact suite
+- `www/tibsfox/com/Research/SPS/<species-slug>/` — index.html + artifact suite (audio + sims + anatomy + diagrams)
+- FTP sync to tibsfox.com via `npm run ftp-sync -- 1.<degree>` — typically 40-50 files / 1-2 MB

@@ -5,6 +5,7 @@
 **NASA Mission:** Skylab 4 / Comet Kohoutek
 **Predecessor:** v1.49.612
 **Mission package:** `.planning/missions/v1-49-613-skylab-4-comet-kohoutek/`
+**Phases:** 6 (W0-W5 wave-pipeline: W0 version+brief / W1 research / W2 build / W3 recovery+catalog / W4 release-notes / W5 ship-pipeline)
 **Engine state:** NASA degree:: 1.89 → **1.90** + MUS degree:: 1.89 → **1.90** + ELC degree:: 1.89 → **1.90** + SPS species:: #86 → **#87** + TRS M1 W2:: pack-05 differential equations bound; +14 cross-pack edges → **140 total** / **K_12 pack-pair completeness ACHIEVED** with **5 substrate-bridges pack-05↔pack-02**
 
 ## Summary
@@ -17,7 +18,17 @@
 - **NASA degree:** 1.89 → **1.90** (Skylab 4 / Carr-Gibson-Pogue / SA-208 + CSM-118 / 1973-11-16 → 1974-02-08; 84-day US endurance record; first comet observation campaign from above-atmosphere; final crewed Saturn-1B + final flying Apollo Block II CSM)
 - **MUS degree:** 1.89 → **1.90** (Brian Eno *Here Come the Warm Jets* / Island ILPS 9268 UK release **1974-02-08 = Skylab 4 splashdown EXACT SAME CALENDAR DAY** per #10247 post-ESTABLISHED hold-test; debut solo album post-Roxy departure; 10-collaborator multi-instrumentalist painterly architecture parallels Skylab 4 10-instrument Kohoutek campaign)
 - **ELC degree:** 1.89 → **1.90** (Trans-Alaska Pipeline Authorization Act / P.L. 93-153 / 87 Stat. 576 / 43 U.S.C. §§1651-1656 / **signed 1973-11-16 = Skylab 4 launch EXACT SAME CALENDAR DAY** per #10247 post-ESTABLISHED hold-test; first direct legislative override of NEPA injunction by statute via §202(d); Jackson-Gravel-Stevens-Young sponsor cohort; 800-mile pipeline operational 1977 → 2026+)
-- **SPS species:** #86 → **#87** (Red Tree Vole *Arborimus longicaudus*; family Cricetidae subfamily Arvicolinae; Order Rodentia; True 1890 species description / Maser 1966 systematic canopy characterization 76-year DESCRIPTION-VS-CHARACTERIZATION GAP; only PNW mammal with entire life cycle continuously in Douglas-fir canopy 15-60m altitude; LONG-DURATION-PRESENCE-AT-ALTITUDE substrate fit very-HIGH; 2 cohort-internal trophic edges Spotted Owl + Pacific Marten)
+- **SPS species:** #86 → **#87** (Red Tree Vole *Arborimus longicaudus*; family Cricetidae subfamily Arvicolinae; Order Rodentia; True 1890 species description / Maser 1966 systematic canopy characterization 76-year DESCRIPTION-VS-CHARACTERI
+## Key Features
+
+| Track | Detail |
+|-------|--------|
+| NASA | 1.89 → **1.90** (Skylab 4 / Carr-Gibson-Pogue / SA-208 + CSM-118 / 1973-11-16 → 1974-02-08; 84-day US endurance record; first comet observation campaign from above-atmosphere; final crewed Saturn-1B + final flying Apollo |
+| MUS | 1.89 → **1.90** (Brian Eno *Here Come the Warm Jets* / Island ILPS 9268 UK release **1974-02-08 = Skylab 4 splashdown EXACT SAME CALENDAR DAY** per #10247 post-ESTABLISHED hold-test; debut solo album post-Roxy departure; |
+| ELC | 1.89 → **1.90** (Trans-Alaska Pipeline Authorization Act / P.L. 93-153 / 87 Stat. 576 / 43 U.S.C. §§1651-1656 / **signed 1973-11-16 = Skylab 4 launch EXACT SAME CALENDAR DAY** per #10247 post-ESTABLISHED hold-test; first |
+| SPS | #86 → **#87** (Red Tree Vole *Arborimus longicaudus*; family Cricetidae subfamily Arvicolinae; Order Rodentia; True 1890 species description / Maser 1966 systematic canopy characterization 76-year DESCRIPTION-VS-CHARACTE |
+
+ZATION GAP; only PNW mammal with entire life cycle continuously in Douglas-fir canopy 15-60m altitude; LONG-DURATION-PRESENCE-AT-ALTITUDE substrate fit very-HIGH; 2 cohort-internal trophic edges Spotted Owl + Pacific Marten)
 - **TRS M1 W2:** pack-05 differential equations bound; +14 cross-pack edges → **140 total** / **K_12 pack-pair completeness ACHIEVED** with **5 substrate-bridges pack-05↔pack-02** (canonical differential-pair density now self-measurable; vector-fields-ARE-ODE / Lie-derivative-flow / Hamiltonian-symplectic / geodesic-second-order-ODE / Morse-theory) + **1 substrate-bridge pack-05↔pack-10** (Lie-Kolchin / projective-flag stabilizer)
 
 ## v613 carries TWO fresh #10247 SAME-DAY-CALENDAR-COINCIDENCE post-ESTABLISHED reproducibility signals at one milestone
@@ -70,3 +81,11 @@ Plus bonus: **1890 same-year coincidence** between True Red Tree Vole species de
 ## See also
 
 - Chapter contents: [00-summary](chapter/00-summary.md) · [03-retrospective](chapter/03-retrospective.md) · [04-lessons](chapter/04-lessons.md) · [99-context](chapter/99-context.md)
+
+## Build artifacts shipped
+
+- `www/tibsfox/com/Research/NASA/<degree>/` — index.html + 13-file artifact suite + 3 JSON files + forest-module
+- `www/tibsfox/com/Research/MUS/<degree>/` — index.html + artifact suite
+- `www/tibsfox/com/Research/ELC/<degree>/` — index.html + artifact suite
+- `www/tibsfox/com/Research/SPS/<species-slug>/` — index.html + artifact suite (audio + sims + anatomy + diagrams)
+- FTP sync to tibsfox.com via `npm run ftp-sync -- 1.<degree>` — typically 40-50 files / 1-2 MB

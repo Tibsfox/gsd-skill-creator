@@ -69,7 +69,7 @@ CANDIDATE emitted at v614 with Helsinki Final Act (political-security 35-nation 
 - **#10265 FIRST NEGATIVE** — informative refinement showing the substrate primitive's domain-of-validity (purely structural disciplines), not failure of the primitive
 - **#10271 saturating/inverse confirmed at obs#3** — anchor-density × same-day-density relationship is non-linear with saturating behavior
 - **First +10d boundary-edge sub-form admitted** — London Dumping Convention extends #10232 to a new sub-form of the boundary-edge accommodation; first ELC pick at +10d
-## Process observations
+## Process observation and Drift
 
 - **Wave dispatch cadence:** W0 main-context + W1 research subagent + W2 build subagents (NASA serial-first then MUS+ELC+SPS parallel) — pattern held at v1.49.615
 - **Recovery hierarchy:** Tier-2 inline-Edit recovery applied if depth-audit FAIL — engine-cadence resilience pattern

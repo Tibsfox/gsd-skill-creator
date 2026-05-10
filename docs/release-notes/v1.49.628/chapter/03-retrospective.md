@@ -53,7 +53,7 @@ v625 retrospective predicted potential attenuation after 1979. v626 predicted po
 ### #10287 DIRECT-ORDER 9-of-9 second-confirmation-threshold approaching
 
 STS-2 = 1.104; catalog position 1.104 matches chronological launch sequence 1981-11-12 = chronologically-next after STS-1 1981-04-12 = DIRECT-ORDER 9-of-9 cumulative. The ESTABLISHED threshold was met at v620 obs#3 (3-of-3). The second-confirmation-threshold (10-of-10) evaluation is now pending at v629; a 10th consecutive DIRECT-ORDER observation at STS-3 = 1.105 would trigger the second-threshold formal signal. **FA-628-4 carries the DECISION to v629 W3**.
-## Process observations
+## Process observation and Drift
 
 - **Wave dispatch cadence:** W0 main-context + W1 research subagent + W2 build subagents (NASA serial-first then MUS+ELC+SPS parallel) — pattern held at v1.49.628
 - **Recovery hierarchy:** Tier-2 inline-Edit recovery applied if depth-audit FAIL — engine-cadence resilience pattern

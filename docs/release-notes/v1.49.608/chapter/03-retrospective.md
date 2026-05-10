@@ -39,7 +39,7 @@ Key insight: model class alone (Sonnet vs Opus) was not the discriminator — th
 
 This refines the W2-build-agent-prompt.md MANDATORY discipline: the chunked pattern instruction must be in the agent prompt verbatim, not relied on as model heuristic. Forward action item: amend W2-build-agent-prompt.md template at v609 W0 to include the explicit chunked instruction.
 
-## Process observations
+## Process observation and Drift
 
 1. **Five W2 dispatches in parallel was sustainable.** After the NASA Stage-1 success, the orchestrator dispatched 5 parallel Opus build agents (NASA Stage-2, NASA Stage-3, MUS, ELC, SPS) — all completed within the same wall-clock window without quota collision. Validates the parallelism strategy when Opus quota is available.
 2. **MUS retry succeeded on second dispatch** with stricter chunking discipline (≤7KB per Edit). Suggests the chunking discipline lowers stall risk monotonically — tighter chunks = lower risk.

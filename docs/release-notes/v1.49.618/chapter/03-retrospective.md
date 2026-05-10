@@ -76,7 +76,7 @@ W0 mode-choice per FA-617-9: enumerated (a) deepening / (b) extension to pack-17
 - **FIRST-CROSS-CLASS-COHORT-INTERNAL-TROPHIC-EDGE** — Bald Eagle #89 Aves → Coho Salmon #92 Actinopterygii = #10290 CANDIDATE; first cross-Class trophic edge in cohort substrate; opens cross-Class sub-cohort line
 - **DECADAL-LATITUDE-OF-INVESTIGATOR triad emerges** — Stone 50y / Lemmy 40y / Tolba 17y = #10288 CANDIDATE; substrate primitive across NASA + MUS + ELC tracks at v618 first-of-their-kind milestone
 - **DEEP-SPACE-LATENCY-RETURNS reflexively-confirms #10277 SPECIALIZATION** — #10289 CANDIDATE positively-instantiates the v617 SPECIALIZATION sub-form ESTABLISHED at outer-planets scale; substrate primitive specializes to deep-space-only operator-pattern as ESTABLISHED predicted
-## Process observations
+## Process observation and Drift
 
 - **Wave dispatch cadence:** W0 main-context + W1 research subagent + W2 build subagents (NASA serial-first then MUS+ELC+SPS parallel) — pattern held at v1.49.618
 - **Recovery hierarchy:** Tier-2 inline-Edit recovery applied if depth-audit FAIL — engine-cadence resilience pattern

@@ -71,7 +71,7 @@ FA-615-6 (TRS pack-14↔pack-N edge back-fill counter-cadence) resolved at v616 
 - **#10260 reproducibility extension at v616 W2.SPS** — stream-watchdog stall recovered via Edit-only mode; mitigation-pattern from prior dispatcher-stall lessons reproduces
 - **PAIRED-RECOVERY-PROGRAM substrate-archetype emerges via SPS Peregrine Falcon** — Babbitt 1999 announcement names BOTH Bald Eagle + Peregrine Falcon jointly recovered = USFWS-tier paired-recovery substrate; parallel to Viking 1 + Viking 2 paired-mission cross-validation
 - **ENVIRONMENTAL-MODIFICATION-AS-PROHIBITED-WARFARE substrate primitive emerges via ENMOD** — substrate parallel to Viking planetary-protection bioshield + LDC ocean-dumping prohibition; #10280 CANDIDATE
-## Process observations
+## Process observation and Drift
 
 - **Wave dispatch cadence:** W0 main-context + W1 research subagent + W2 build subagents (NASA serial-first then MUS+ELC+SPS parallel) — pattern held at v1.49.616
 - **Recovery hierarchy:** Tier-2 inline-Edit recovery applied if depth-audit FAIL — engine-cadence resilience pattern

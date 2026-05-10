@@ -1,10 +1,11 @@
 # v1.49.615 — Viking 1 First Successful Mars Landing
 
-**Released:** 2026-05-08
+**Released:** 2026-05-07
 **Type:** Engine-cadence degree-advancing milestone (v604+ run)
 **NASA Mission:** Viking 1 First Successful Mars Landing
 **Predecessor:** v1.49.614
 **Mission package:** `.planning/missions/v1-49-615-viking-1-first-successful-mars-landing/`
+**Phases:** 6 (W0-W5 wave-pipeline: W0 version+brief / W1 research / W2 build / W3 recovery+catalog / W4 release-notes / W5 ship-pipeline)
 **Engine state:** NASA degree:: 1.91 → **1.92** + MUS degree:: 1.91 → **1.92** + ELC degree:: 1.91 → **1.92** + SPS species:: #88 → **#89** + TRS M1 W2:: pack-14 information-geometry bound; +14 cross-pack edges
 
 ## Summary
@@ -19,6 +20,17 @@
 - **ELC degree:** 1.91 → **1.92** (London Dumping Convention / Convention on the Prevention of Marine Pollution by Dumping of Wastes / entry into force 1975-08-30 = Viking 1 launch +10d; **first sub-form +10d boundary-edge extension of #10232 ESTABLISHED**; PRISTINE-ENVIRONMENT-PRESERVATION mirror to Viking planetary-protection bioshield; 87-party multi-government environmental-renegotiation; #10275 obs#2 multi-stakeholder-renegotiation generalizes domestic-and-international)
 - **SPS species:** #88 → **#89** (Bald Eagle *Haliaeetus leucocephalus*; family Accipitridae; Order Accipitriformes; FA-614-8 closes via 2 cohort-internal trophic edges to #87 Northern Flying Squirrel + #88 Trumpeter Swan cygnets per LaMontagne et al. 2003; recovery 1973-2007 from DDT-near-extinction → ESA-listing 1973 → delisting 2007 = FIRST-SUCCESSFUL-AFTER-PRIOR-FAILURES mirror to Mars 3 / Mars 6 → Viking 1)
 - **TRS M1 W2:** pack-14 information-geometry bound; +14 cross-pack edges (155-168) → **168 total** / **K_14 SINGLE-PASS ACHIEVED (all 91 = C(14,2) pack-pair edges of the fourteen-pack roster realized)**; pack-14 = bridge-category obs#2 (4/4/3/2 balanced cross-cluster distribution); first post-K_13 extension and #10274 CANDIDATE obs#2 confirms CLEAN EXTENSION verdict
+
+
+## Key Features
+
+| Track | Detail |
+|-------|--------|
+| NASA | 1.91 → **1.92** (Viking 1 / NSSDC 1975-075A orbiter / 1975-075C lander / Soffen-Mutch-Klein-Horowitz-Oyama-Levin / Titan IIIE-Centaur LC-41 / 1975-08-20 launch / 1976-06-19 orbit / 1976-07-20 Chryse Planitia landing / 19 |
+| MUS | 1.91 → **1.92** (Bruce Springsteen *Born to Run* / Columbia PC 33795 / 1975-08-25 release = Viking 1 launch +5d INSIDE strict ±8d per #10232 obs#16; third-album-breakthrough as FIRST-SURVIVAL-AT-NEW-FRONTIER mirror; "Bor |
+| ELC | 1.91 → **1.92** (London Dumping Convention / Convention on the Prevention of Marine Pollution by Dumping of Wastes / entry into force 1975-08-30 = Viking 1 launch +10d; **first sub-form +10d boundary-edge extension of #1 |
+| SPS | #88 → **#89** (Bald Eagle *Haliaeetus leucocephalus*; family Accipitridae; Order Accipitriformes; FA-614-8 closes via 2 cohort-internal trophic edges to #87 Northern Flying Squirrel + #88 Trumpeter Swan cygnets per LaMon |
+| TRS | pack-14 information-geometry bound; +14 cross-pack edges (155-168) → **168 total** / **K_14 SINGLE-PASS ACHIEVED (all 91 = C(14,2) pack-pair edges of the fourteen-pack roster realized)**; pack-14 = bridge-category obs#2  |
 
 ## v615 ESTABLISHED-promotions + post-ESTABLISHED hold-tests
 
@@ -61,3 +73,11 @@
 ## See also
 
 - Chapter contents: [00-summary](chapter/00-summary.md) · [03-retrospective](chapter/03-retrospective.md) · [04-lessons](chapter/04-lessons.md) · [99-context](chapter/99-context.md)
+
+## Build artifacts shipped
+
+- `www/tibsfox/com/Research/NASA/<degree>/` — index.html + 13-file artifact suite + 3 JSON files + forest-module
+- `www/tibsfox/com/Research/MUS/<degree>/` — index.html + artifact suite
+- `www/tibsfox/com/Research/ELC/<degree>/` — index.html + artifact suite
+- `www/tibsfox/com/Research/SPS/<species-slug>/` — index.html + artifact suite (audio + sims + anatomy + diagrams)
+- FTP sync to tibsfox.com via `npm run ftp-sync -- 1.<degree>` — typically 40-50 files / 1-2 MB

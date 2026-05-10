@@ -39,7 +39,7 @@ Both lessons STILL DEFERRED through 7/6 consecutive milestones. v606 W3.5 explic
 ## EXTENDED-STAY-DOCTRINE — v605 admit confirmed at v606
 
 v605 W3.3 admitted EXTENDED-STAY-DOCTRINE to §6.6 register at 2-ex per substrate-emergent rationale (Apollo 15 EVA-3 + Pioneer 10 30-yr DSN + Apollo 16 ALSEP-3 5-yr long-life). v606 reaffirms admit: Apollo 17 ALSEP-4 long-life science package (operational through 1977-09-30; 5-year lifecycle) + 75h surface time (longest of any Apollo) provide 4-ex confirmation. Admit holds; primitive remains in §6.6 LOCKED register.
-## Process observations
+## Process observation and Drift
 
 - **Wave dispatch cadence:** W0 main-context + W1 research subagent + W2 build subagents (NASA serial-first then MUS+ELC+SPS parallel) — pattern held at v1.49.606
 - **Recovery hierarchy:** Tier-2 inline-Edit recovery applied if depth-audit FAIL — engine-cadence resilience pattern

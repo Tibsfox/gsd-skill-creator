@@ -5,6 +5,7 @@
 **NASA Mission:** Solar Maximum Mission Repair-In-Orbit Substrate
 **Predecessor:** v1.49.625
 **Mission package:** `.planning/missions/v1-49-626-solar-maximum-mission-repair-in-orbit-substrate/`
+**Phases:** 6 (W0-W5 wave-pipeline: W0 version+brief / W1 research / W2 build / W3 recovery+catalog / W4 release-notes / W5 ship-pipeline)
 **Engine state:** NASA degree:: 1.101 → **1.102** + MUS degree:: 1.101 → **1.102** + ELC degree:: 1.101 → **1.102** + SPS species:: #98 → **#99** + TRS M1 W2:: pack-23 integration theory K_23 → **pack-24 harmonic/Fourier analysis K_24**
 
 ## Summary
@@ -19,6 +20,17 @@
 - **ELC degree:** 1.101 → **1.102** (Executive Order 12192 — State Planning Council on Radioactive Waste Management; Carter signed 1980-02-12 = SolarMax -2d INSIDE strict; #10232 obs#31; same-day Carter EO trio EO 12192+12193+12194; TMI 1979 context; NWPA 1982 successor; SAME-DAY-CLUSTER-AS-PAIRED-TRIPLE-ARCHITECTURE NEW LOCKED; NUCLEAR-PHYSICS-SUBSTRATE-CONTINUITY NEW LOCKED; #10318 + #10319 NEW CANDIDATES)
 - **SPS species:** #98 → **#99** (Pacific Tree Frog *Pseudacris regilla*; first amphibian + first Anura + first Hylidae in cohort; AMPHIBIA-AS-COHORT-NODE NEW LOCKED; #10315 NEW CANDIDATE; multi-modal advertisement call SOLAR-OBSERVATORY analog VERY-HIGH; metamorphosis = REPAIR-IN-ORBIT analog VERY-HIGH)
 - **TRS M1 W2:** pack-23 integration theory K_23 → **pack-24 harmonic/Fourier analysis K_24** (~308 edges target; FA-625-6 RESOLVED)
+
+
+## Key Features
+
+| Track | Detail |
+|-------|--------|
+| NASA | 1.101 → **1.102** (Solar Maximum Mission SolarMax/SMM; NSSDC 1980-014A; launch 1980-02-14 15:57 UTC LC-17A Delta 3910; 7 instruments C/P House + HXRBS Dennis + UVSP Woodgate + XRP Acton + HXIS de Jager + GRS Chupp + ACRI |
+| MUS | 1.101 → **1.102** (Iron Maiden "Running Free"/"Burning Ambition" 7" single; EMI 5032; UK release 1980-02-08 = SolarMax -6d INSIDE strict; #10232 obs#30; SINGLE-FORM sub-form NEW LOCKED; first single-instead-of-album in M |
+| ELC | 1.101 → **1.102** (Executive Order 12192 — State Planning Council on Radioactive Waste Management; Carter signed 1980-02-12 = SolarMax -2d INSIDE strict; #10232 obs#31; same-day Carter EO trio EO 12192+12193+12194; TMI 1 |
+| SPS | #98 → **#99** (Pacific Tree Frog *Pseudacris regilla*; first amphibian + first Anura + first Hylidae in cohort; AMPHIBIA-AS-COHORT-NODE NEW LOCKED; #10315 NEW CANDIDATE; multi-modal advertisement call SOLAR-OBSERVATORY a |
+| TRS | pack-23 integration theory K_23 → **pack-24 harmonic/Fourier analysis K_24** (~308 edges target; FA-625-6 RESOLVED) |
 
 ## Forward state
 
@@ -39,3 +51,10 @@
 - **RESOLVED:** FA-625-7 forward action closed at v1.49.626 W0
 - **EXTENDED:** engine-cadence run continued at v1.49.626 (degree-advancing milestone)
 
+## Build artifacts shipped
+
+- `www/tibsfox/com/Research/NASA/<degree>/` — index.html + 13-file artifact suite + 3 JSON files + forest-module
+- `www/tibsfox/com/Research/MUS/<degree>/` — index.html + artifact suite
+- `www/tibsfox/com/Research/ELC/<degree>/` — index.html + artifact suite
+- `www/tibsfox/com/Research/SPS/<species-slug>/` — index.html + artifact suite (audio + sims + anatomy + diagrams)
+- FTP sync to tibsfox.com via `npm run ftp-sync -- 1.<degree>` — typically 40-50 files / 1-2 MB

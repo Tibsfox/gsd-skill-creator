@@ -5,6 +5,7 @@
 **NASA Mission:** ISEE-3 / ICE Paired-Triple-Mission-Architecture
 **Predecessor:** v1.49.622
 **Mission package:** `.planning/missions/v1-49-623-isee-3-ice-paired-triple-mission-architecture/`
+**Phases:** 6 (W0-W5 wave-pipeline: W0 version+brief / W1 research / W2 build / W3 recovery+catalog / W4 release-notes / W5 ship-pipeline)
 **Engine state:** NASA degree:: 1.98 → **1.99** + MUS degree:: 1.98 → **1.99** + ELC degree:: 1.98 → **1.99** + SPS species:: #95 → **#96** + TRS M1 W2:: pack-20 set-theory K_20 → **pack-21 topology binding K_21**
 
 ## Summary
@@ -14,7 +15,18 @@
 
 ## Engine state advances
 
-- **NASA degree:** 1.98 → **1.99** (ISEE-3 / ICE; NSSDC 1978-079A; launch 1978-08-12 11:13 UTC LC-36B Atlas-Centaur; 478 kg; 13 instruments; Van Allen UI cosmic ray PI + Stone Caltech CRS + Gurnett UI plasma-waves + Ogilvie GSFC project manager + Farquhar 1932-2015 trajectory architect; renamed ICE 1982; lunar-gravity-assist redirect 1982-1983 Farquhar trajectory; Comet Giacobini-Zinner 1985-09-11 first comet flyby; Halley outer coma 1986-03-25; mission end 1997-05-05; 2014 reactivation attempt; ESA ~25%; #10247 obs#15 INSIDE-strict 1978-08-12 cluster; #10286 obs#5 reproducibility continuing; #10287 obs#5 DIRECT-ORDER 4-of-4; #10289 obs#5 toward ESTABLISHED-promotion; L1-LAGRANGE-AS-NEW-DELIVERABLE + MISSION-REDIRECT-AS-DELIVERABLE + TRAJECTORY-ARCHITECT-AS-PROJECT-LEAD NEW LOCKED)
+- **NASA degree:** 1.98 → **1.99** (ISEE-3 / ICE; NSSDC 1978-079A; launch 1978-08-12 11:13 UTC LC-36B Atlas-Centaur; 478 kg; 13 instruments; Van Allen UI cosmic ray PI + Stone Caltech CRS + Gurnett UI plasma-waves + Ogilvie GSFC project manager + Farquhar 1932-2015 trajectory architect; renamed ICE 1982; lunar-gravity-assist redirect 1982-1983 Farquhar trajectory; Comet Giacobini-
+## Key Features
+
+| Track | Detail |
+|-------|--------|
+| NASA | 1.98 → **1.99** (ISEE-3 / ICE; NSSDC 1978-079A; launch 1978-08-12 11:13 UTC LC-36B Atlas-Centaur; 478 kg; 13 instruments; Van Allen UI cosmic ray PI + Stone Caltech CRS + Gurnett UI plasma-waves + Ogilvie GSFC project ma |
+| MUS | 1.98 → **1.99** (The Who *Who Are You*; Polydor 2490 147 UK / MCA-3050 US; release 1978-08-18 = ISEE-3 +6d INSIDE strict; **#10232 obs#24 single unambiguous date INSIDE-strict primary anchor**; Keith Moon final studio al |
+| ELC | 1.98 → **1.99** (Executive Order 12072 Federal Space Management; signed Carter 1978-08-16 = ISEE-3 +4d INSIDE strict; **#10232 obs#25 single unambiguous date INSIDE-strict primary anchor**; 43 FR 36869 1978-08-21; mandat |
+| SPS | #95 → **#96** (Pacific White-Sided Dolphin *Lagenorhynchus obliquidens*; Gill 1865; first Delphinidae / first Odontoceti in cohort; **ODONTOCETE-AS-COHORT-NODE NEW LOCKED**; echolocation 0.5-150 kHz = ECHOLOCATION-AS-ON- |
+| TRS | pack-20 set-theory K_20 → **pack-21 topology binding K_21** (~266 edges target; 14 edges e253-e266; topology binding selected for substrate-coherence with ISEE-3 L1 manifold trajectories + continuous dynamical systems su |
+
+Zinner 1985-09-11 first comet flyby; Halley outer coma 1986-03-25; mission end 1997-05-05; 2014 reactivation attempt; ESA ~25%; #10247 obs#15 INSIDE-strict 1978-08-12 cluster; #10286 obs#5 reproducibility continuing; #10287 obs#5 DIRECT-ORDER 4-of-4; #10289 obs#5 toward ESTABLISHED-promotion; L1-LAGRANGE-AS-NEW-DELIVERABLE + MISSION-REDIRECT-AS-DELIVERABLE + TRAJECTORY-ARCHITECT-AS-PROJECT-LEAD NEW LOCKED)
 - **MUS degree:** 1.98 → **1.99** (The Who *Who Are You*; Polydor 2490 147 UK / MCA-3050 US; release 1978-08-18 = ISEE-3 +6d INSIDE strict; **#10232 obs#24 single unambiguous date INSIDE-strict primary anchor**; Keith Moon final studio album; Moon died 1978-09-07 age 32 clomethiazole overdose at 9 Curzon Place London; Townshend + Daltrey + Entwistle + Moon; producers Glyn Johns + Jon Astley; UK Albums #6 / US Billboard 200 #2 highest US peak for The Who; RIAA Platinum; "Who Are You" Hot 100 #14; KEITH-MOON-FINAL-ALBUM-AS-MISSION-REDIRECT-PREFIGURATION #10306 NEW CANDIDATE; Terry O'Neill cover art "NOT TO BE TAKEN AWAY" stenciled chair)
 - **ELC degree:** 1.98 → **1.99** (Executive Order 12072 Federal Space Management; signed Carter 1978-08-16 = ISEE-3 +4d INSIDE strict; **#10232 obs#25 single unambiguous date INSIDE-strict primary anchor**; 43 FR 36869 1978-08-21; mandates federal CBD prioritization; companion EO 12074 signed same day; revoked Trump EO 14274 April 2025; 47-year operational arc = FEDERAL-EO-AS-LONG-OPERATIONAL-ARC #10308 NEW CANDIDATE; #10289 obs#5 DEEP-SPACE-LATENCY-RETURNS reaffirm at 47-year arc)
 - **SPS species:** #95 → **#96** (Pacific White-Sided Dolphin *Lagenorhynchus obliquidens*; Gill 1865; first Delphinidae / first Odontoceti in cohort; **ODONTOCETE-AS-COHORT-NODE NEW LOCKED**; echolocation 0.5-150 kHz = ECHOLOCATION-AS-ON-BOARD-TRAJECTORY-DESIGN #10307 NEW CANDIDATE; trophic edges to Chinook Salmon #93)
@@ -45,3 +57,10 @@
 - **OPENED:** ODONTOCETE-AS-COHORT-NODE — substrate primitive NEW LOCKED at v1.49.623
 - **EXTENDED:** engine-cadence run continued at v1.49.623 (degree-advancing milestone)
 
+## Build artifacts shipped
+
+- `www/tibsfox/com/Research/NASA/<degree>/` — index.html + 13-file artifact suite + 3 JSON files + forest-module
+- `www/tibsfox/com/Research/MUS/<degree>/` — index.html + artifact suite
+- `www/tibsfox/com/Research/ELC/<degree>/` — index.html + artifact suite
+- `www/tibsfox/com/Research/SPS/<species-slug>/` — index.html + artifact suite (audio + sims + anatomy + diagrams)
+- FTP sync to tibsfox.com via `npm run ftp-sync -- 1.<degree>` — typically 40-50 files / 1-2 MB

@@ -32,7 +32,7 @@ v602 introduction (1-ex Apollo 15 EVA-3); v604 evaluation surfaced 2 candidate 2
 ## #10238 + #10240 — explicit defer-to-v610 hard fork
 
 Both lessons (depth-audit gold-standard-comparison extension + depth-audit honor #10231 graceful-thinness) STILL DEFERRED through 6/5 consecutive milestones. v605 W3.5 explicit decision: **defer to v605+ with v610 retire-or-implement hard fork** (paired symmetric decision). Rationale: v605 engine-cadence boundary discipline favors no gate-authoring; v606-v609 accumulates more Tier-2 inline-Opus build samples; v610 hard fork forces explicit decision before unbounded deferral.
-## Process observations
+## Process observation and Drift
 
 - **Wave dispatch cadence:** W0 main-context + W1 research subagent + W2 build subagents (NASA serial-first then MUS+ELC+SPS parallel) — pattern held at v1.49.605
 - **Recovery hierarchy:** Tier-2 inline-Edit recovery applied if depth-audit FAIL — engine-cadence resilience pattern

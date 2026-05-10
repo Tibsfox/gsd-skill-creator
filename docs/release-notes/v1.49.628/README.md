@@ -1,11 +1,12 @@
 # v1.49.628 — STS-2 Columbia First Vehicle Reuse
 
-**Released:** 2026-05-10
+**Released:** 2026-05-09
 **Type:** Engine-cadence degree-advancing milestone — 23rd consecutive in v604+ run (after v607 + v621 counter-cadence skips)
 **NASA Mission:** STS-2 Columbia (NSSDC 1981-110A) — Degree 1.104
 **Predecessor:** v1.49.627 — STS-1 Columbia First Space Shuttle Flight (closed sha `f00f6f033`)
 **Successor candidate:** v1.49.629 — STS-3 Columbia 1982-03-22 = NASA 1.105 (FA-628-7)
 **Mission package:** `.planning/missions/v1-49-628-sts-2-columbia/`
+**Phases:** 6 (W0-W5 wave-pipeline: W0 version+brief / W1 research / W2 build / W3 recovery+catalog / W4 release-notes / W5 ship-pipeline)
 **Engine state:** ADVANCED — NASA 1.103→1.104 + MUS 1.103→1.104 + ELC 1.103→1.104 + SPS #100→#101 + TRS pack-25→pack-26 category theory K_26 (~336 edges target)
 
 ## Summary

@@ -5,6 +5,7 @@
 **NASA Mission:** Skylab Station Launch
 **Predecessor:** v1.49.608
 **Mission package:** `.planning/missions/v1-49-609-skylab-station-launch/`
+**Phases:** 6 (W0-W5 wave-pipeline: W0 version+brief / W1 research / W2 build / W3 recovery+catalog / W4 release-notes / W5 ship-pipeline)
 **Engine state:** NASA degree:: 1.85 → **1.86** + MUS degree:: 1.85 → **1.86** + ELC degree:: 1.85 → **1.86** + SPS species:: #82 → **#83** + TRS M1 W2:: pack-03 algebraic geometry bound; +14 cross-pack edges → 84 total / **K_8 pack-pair completeness ACHIEVED** with 4 substrate-bridges to pack-02 differential geometry
 
 ## Summary
@@ -19,6 +20,17 @@
 - **ELC degree:** 1.85 → **1.86** (Skylab Earth Resources Experiment Package — EREP; multi-agency Earth-observation-from-crewed-orbit program; 139 PI teams across 9 federal agencies + 18 universities + 11 industry/non-profit + 6 foreign sponsors; six-instrument suite S190A/S190B/S191/S192/S193/S194; first cross-track-direct-at-literal-shared-payload coupling — ELC and NASA tracks are the same Skylab hardware seen as different faces)
 - **SPS species:** #82 → **#83** (Pileated Woodpecker *Dryocopus pileatus picinus*; PNW old-growth keystone; the only PNW species capable of excavating large cavities; ≥20 secondary cavity-dependents inherit Pileated cavities per Aubry & Raley 2002 keystone-habitat-modifier framing)
 - **TRS M1 W2:** pack-03 algebraic geometry bound; +14 cross-pack edges → 84 total / **K_8 pack-pair completeness ACHIEVED** with 4 substrate-bridges to pack-02 differential geometry (Chow/GAGA, Hodge theorem, Hodge L²-norm, functor-of-points)
+
+
+## Key Features
+
+| Track | Detail |
+|-------|--------|
+| NASA | 1.85 → **1.86** (Skylab Station Launch / Saturn V SA-513 last flight 1973-05-14) |
+| MUS | 1.85 → **1.86** (Billy Cobham *Spectrum* recording sessions 1973-05-14 → 1973-05-16 at Electric Lady Studios NYC; Atlantic SD 7268; release 1973-10-01; core quartet Cobham/Bolin/Hammer/Farrell — **recording day 1 = Skyla |
+| ELC | 1.85 → **1.86** (Skylab Earth Resources Experiment Package — EREP; multi-agency Earth-observation-from-crewed-orbit program; 139 PI teams across 9 federal agencies + 18 universities + 11 industry/non-profit + 6 foreign s |
+| SPS | #82 → **#83** (Pileated Woodpecker *Dryocopus pileatus picinus*; PNW old-growth keystone; the only PNW species capable of excavating large cavities; ≥20 secondary cavity-dependents inherit Pileated cavities per Aubry & R |
+| TRS | pack-03 algebraic geometry bound; +14 cross-pack edges → 84 total / **K_8 pack-pair completeness ACHIEVED** with 4 substrate-bridges to pack-02 differential geometry (Chow/GAGA, Hodge theorem, Hodge L²-norm, functor-of-p |
 
 ## Cross-track resonance — EXACT same-day calendar coincidence
 
@@ -54,3 +66,11 @@ This is the **first POSITIVE-CONFIRMING observation** in the #10247 SAME-DAY-CAL
 ## See also
 
 - Chapter contents: [00-summary](chapter/00-summary.md) · [03-retrospective](chapter/03-retrospective.md) · [04-lessons](chapter/04-lessons.md) · [99-context](chapter/99-context.md)
+
+## Build artifacts shipped
+
+- `www/tibsfox/com/Research/NASA/<degree>/` — index.html + 13-file artifact suite + 3 JSON files + forest-module
+- `www/tibsfox/com/Research/MUS/<degree>/` — index.html + artifact suite
+- `www/tibsfox/com/Research/ELC/<degree>/` — index.html + artifact suite
+- `www/tibsfox/com/Research/SPS/<species-slug>/` — index.html + artifact suite (audio + sims + anatomy + diagrams)
+- FTP sync to tibsfox.com via `npm run ftp-sync -- 1.<degree>` — typically 40-50 files / 1-2 MB

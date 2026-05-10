@@ -1,10 +1,11 @@
 # v1.49.614 — Apollo-Soyuz Test Project
 
-**Released:** 2026-05-08
+**Released:** 2026-05-07
 **Type:** Engine-cadence degree-advancing milestone (v604+ run)
 **NASA Mission:** Apollo-Soyuz Test Project
 **Predecessor:** v1.49.613
 **Mission package:** `.planning/missions/v1-49-614-apollo-soyuz-test-project/`
+**Phases:** 6 (W0-W5 wave-pipeline: W0 version+brief / W1 research / W2 build / W3 recovery+catalog / W4 release-notes / W5 ship-pipeline)
 **Engine state:** NASA degree:: 1.90 → **1.91** + MUS degree:: 1.90 → **1.91** + ELC degree:: 1.90 → **1.91** + SPS species:: #87 → **#88** + TRS M1 W2:: pack-07 abstract algebra bound; +14 cross-pack edges → **154 total** / **K_13 SINGLE-PASS ACHIEVED
 
 ## Summary
@@ -19,6 +20,17 @@
 - **ELC degree:** 1.90 → **1.91** (Helsinki Final Act / Conference on Security and Cooperation in Europe Final Act / signed 1975-08-01 Finlandia Hall Helsinki by 35 nations including Brezhnev + Ford; +8d Apollo splashdown 1975-07-24 boundary edge per #10232; Brezhnev-Ford handshake at Helsinki ↔ Stafford-Leonov handshake in orbit; Four Baskets architecture: Decalogue + economic + humanitarian + follow-up review)
 - **SPS species:** #87 → **#88** (Trumpeter Swan *Cygnus buccinator*; family Anatidae; Order Anseriformes — first PNW waterfowl Order in cohort; recovered from ~70 nesting pairs mid-1930s to ~63,016 by 2015 via 1916/1936/1972/1976 Migratory Bird Treaty multi-government framework + ESA 1973 + active reintroduction; lifetime pair-bonded with both-sex incubation; cross-territorial Pacific Coast subspecies *C. b. buccinator* US/Canada migration; 0-1 cohort-internal trophic edges = honest pivot to wetland-herbivore axis with Bald Eagle deferred to SPS #89/#90)
 - **TRS M1 W2:** pack-07 abstract algebra bound; +14 cross-pack edges → **154 total** / **K_13 SINGLE-PASS ACHIEVED (all 78 = C(13,2) pack-pair edges of the foundational thirteen-pack roster realized)**; pack-07 = bridge-category (Lie theory linking abstract algebra to differential and projective clusters); pack-07↔pack-10 = 2 (Lie-Kolchin + Schur-projective); pack-07↔pack-05 = 2 (Lie-point-symmetry + monodromy); pack-07↔pack-02 = 3 (Lie-group-IS-manifold + Lie-algebra-IS-tangent + principal-G-bundle); pack-07-differential-cluster = 5 = comparable to v613 pack-05↔pack-02 = 5
+
+
+## Key Features
+
+| Track | Detail |
+|-------|--------|
+| NASA | 1.90 → **1.91** (Apollo-Soyuz Test Project / Stafford-Brand-Slayton + Leonov-Kubasov / SA-210 + CSM-111 + DM with APAS-75 / 1975-07-15 dual launch / 1975-07-17 docking / 1975-07-24 Apollo splashdown; first international  |
+| MUS | 1.90 → **1.91** (Fleetwood Mac *Fleetwood Mac* / Reprise MS 2225 / 1975-07-11 = Apollo launch -4d / docking -6d INSIDE strict ±8d DOUBLE-BOUNDARY per #10232 ESTABLISHED; US-UK bi-national band ↔ MULTI-GOVERNMENT-COOPERAT |
+| ELC | 1.90 → **1.91** (Helsinki Final Act / Conference on Security and Cooperation in Europe Final Act / signed 1975-08-01 Finlandia Hall Helsinki by 35 nations including Brezhnev + Ford; +8d Apollo splashdown 1975-07-24 bound |
+| SPS | #87 → **#88** (Trumpeter Swan *Cygnus buccinator*; family Anatidae; Order Anseriformes — first PNW waterfowl Order in cohort; recovered from ~70 nesting pairs mid-1930s to ~63,016 by 2015 via 1916/1936/1972/1976 Migrator |
+| TRS | pack-07 abstract algebra bound; +14 cross-pack edges → **154 total** / **K_13 SINGLE-PASS ACHIEVED (all 78 = C(13,2) pack-pair edges of the foundational thirteen-pack roster realized)**; pack-07 = bridge-category (Lie th |
 
 ## v614 ESTABLISHED-promotion + first operational use of IC-613 infrastructure
 
@@ -81,3 +93,11 @@
 ## See also
 
 - Chapter contents: [00-summary](chapter/00-summary.md) · [03-retrospective](chapter/03-retrospective.md) · [04-lessons](chapter/04-lessons.md) · [99-context](chapter/99-context.md)
+
+## Build artifacts shipped
+
+- `www/tibsfox/com/Research/NASA/<degree>/` — index.html + 13-file artifact suite + 3 JSON files + forest-module
+- `www/tibsfox/com/Research/MUS/<degree>/` — index.html + artifact suite
+- `www/tibsfox/com/Research/ELC/<degree>/` — index.html + artifact suite
+- `www/tibsfox/com/Research/SPS/<species-slug>/` — index.html + artifact suite (audio + sims + anatomy + diagrams)
+- FTP sync to tibsfox.com via `npm run ftp-sync -- 1.<degree>` — typically 40-50 files / 1-2 MB

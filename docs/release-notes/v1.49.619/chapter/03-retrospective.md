@@ -80,7 +80,7 @@ W0 mode-choice per FA-618-7: enumerated (a) deepening / (b) extension to pack-18
 - **#10295 SEPTEMBER-1977-THREE-EVENT-SIMULTANEITY-CLUSTER NEW CANDIDATE** — V1 launch 1977-09-05 / Torrijos-Carter Treaties 1977-09-07 / UNCOD closing 1977-09-09 = first cross-track three-event simultaneity at multilateral-international scale single week
 - **#10291 + #10292 + #10293 + #10294 NEW CANDIDATEs at v619 first-of-their-kind milestone** — PALE-BLUE-DOT + TITAN-CLOSE-FLYBY-AS-MISSION-CRITICAL-DECISION + COAST-SALISH-FIRST-SALMON-CEREMONY + PAIRED-ALBUM-ARCHITECTURE-AS-MISSION-CROSS-VALIDATION; five new candidates at single milestone
 - **#10265 obs#7 HOLD-WITH-WEAK-EVIDENCE** — consider RETIRE-WITH-NULL at obs#8 if no fresh signal emerges; structural-density gradient flattens at organizing-meta packs
-## Process observations
+## Process observation and Drift
 
 - **Wave dispatch cadence:** W0 main-context + W1 research subagent + W2 build subagents (NASA serial-first then MUS+ELC+SPS parallel) — pattern held at v1.49.619
 - **Recovery hierarchy:** Tier-2 inline-Edit recovery applied if depth-audit FAIL — engine-cadence resilience pattern

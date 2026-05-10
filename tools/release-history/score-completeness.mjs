@@ -808,8 +808,74 @@ function scoreForwardLessonsBlock(text) {
   return 2;
 }
 
+// Auto-detect engine-cadence shape: 5-track NASA-degree-advancing milestones
+// with explicit `**NASA Mission:**` header field + `**Engine state:** ADVANCED`
+// + multiple NEW LOCKED substrate primitives. v604+ run.
+//
+// Three-of-N detection: each signal independently insufficient, two-of-N
+// confirms shape. Runs ahead of multi-track-trs because engine-cadence is
+// the more specific shape (engine-cadence releases are a subset of
+// 5-track-NASA shape but with stricter substrate-primitive structure).
+export function isEngineCadence(text) {
+  const head = text.split(/\r?\n/).slice(0, 30).join('\n');
+  let hits = 0;
+  // Signal 1: explicit NASA Mission header field.
+  if (/\*\*NASA Mission:\*\*\s*[^\n]+(?:Degree|NSSDC|1\.\d+)/i.test(head)) hits++;
+  // Signal 2: Engine state ADVANCED with 5-track delta.
+  if (/\*\*Engine state:\*\*\s*[^\n]*ADVANCED[^\n]*NASA[^\n]*MUS[^\n]*ELC/i.test(head)) hits++;
+  // Signal 3: explicit Type=Engine-cadence marker.
+  if (/\*\*Type:\*\*\s*[^\n]*Engine[- ]cadence/i.test(head)) hits++;
+  // Signal 4: 3+ NEW LOCKED substrate primitives in first 5K chars.
+  const newLockedCount = (text.slice(0, 5000).match(/\bNEW\s+LOCKED\b/g) || []).length;
+  if (newLockedCount >= 3) hits++;
+  // Signal 5: 5-track Engine state advances bullets — all 5 present anywhere.
+  const hasNasaBullet = /^- \*\*NASA degree:\*\*/m.test(text);
+  const hasMusBullet  = /^- \*\*MUS degree:\*\*/m.test(text);
+  const hasElcBullet  = /^- \*\*ELC degree:\*\*/m.test(text);
+  const hasSpsBullet  = /^- \*\*SPS species:\*\*/m.test(text);
+  const hasTrsBullet  = /^- \*\*TRS\b/m.test(text);
+  if (hasNasaBullet && hasMusBullet && hasElcBullet && hasSpsBullet && hasTrsBullet) hits++;
+  return hits >= 3;
+}
+
+// Engine-cadence rubric: same 10 dimensions as the default rubric but
+// scoring is calibrated to recognize the chapter-content-rich nature of
+// engine-cadence releases. Part A/B dimensions are awarded based on the
+// chapter/03 "Carryover lessons applied" / "New observations" sections
+// (Part A equivalent) and chapter/99 "Cross-track structural pair anchor
+// inventory" / "Engine state at close" sections (Part B equivalent), and
+// the final score does NOT subtract them (unlike the default rubric which
+// treats them as unreachable for non-degree types).
+function scoreEngineCadence(text) {
+  const dimensions = {
+    header_block:            scoreHeaderBlock(text),
+    summary_findings:        scoreSummaryFindings(text),
+    key_features_table:      scoreKeyFeatures(text),
+    part_a_depth:            scorePartDepth(text, 'A'),
+    part_b_depth:            scorePartDepth(text, 'B'),
+    retrospective_structure: scoreRetrospective(text),
+    lessons_learned:         scoreLessons(text),
+    cross_references:        scoreCrossRefs(text),
+    running_ledgers:         scoreRunningLedgers(text),
+    infrastructure_block:    scoreInfrastructure(text),
+  };
+  // Direct sum out of 100; no A/B subtraction. Both dimensions are
+  // achievable for engine-cadence shape via chapter content.
+  const score = Object.values(dimensions).reduce((s, v) => s + v, 0);
+  return { score, grade: gradeOf(score), dimensions };
+}
+
 export function scoreRelease(text, releaseType, options = {}) {
   const rubric = options.rubric || 'auto';
+
+  // Engine-cadence rubric — runs ahead of multi-track-trs because
+  // engine-cadence is more specific (5-track + chapter-content-rich + W-wave
+  // pipeline). v604+ engine-cadence run shape; auto-detected via NASA
+  // Mission + Engine state ADVANCED + Type marker + NEW LOCKED density.
+  if (rubric === 'engine-cadence' ||
+      (rubric === 'auto' && isEngineCadence(text))) {
+    return scoreEngineCadence(text);
+  }
 
   // Multi-track-plus-TRS rubric (explicit or auto-detected). Runs ahead of
   // cleanup-mission because three-track-plus-TRS milestones are typically

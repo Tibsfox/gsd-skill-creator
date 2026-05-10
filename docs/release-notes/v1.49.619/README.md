@@ -1,10 +1,11 @@
 # v1.49.619 — Voyager 1 Twin-Mission-Pair Completion
 
-**Released:** 2012-08-25
+**Released:** 2026-05-08
 **Type:** Engine-cadence degree-advancing milestone (v604+ run)
 **NASA Mission:** Voyager 1 Twin-Mission-Pair Completion
 **Predecessor:** v1.49.618
 **Mission package:** `.planning/missions/v1-49-619-voyager-1-twin-mission-pair-completion/`
+**Phases:** 6 (W0-W5 wave-pipeline: W0 version+brief / W1 research / W2 build / W3 recovery+catalog / W4 release-notes / W5 ship-pipeline)
 **Engine state:** NASA degree:: 1.95 → **1.96** + MUS degree:: 1.95 → **1.96** + ELC degree:: 1.95 → **1.96** + SPS species:: #92 → **#93** + TRS M1 W2:: pack-18 category-theory binding; +14 cross-pack edges
 
 ## Summary
@@ -19,6 +20,17 @@
 - **ELC degree:** 1.95 → **1.96** (Torrijos-Carter Treaties / Panama Canal Treaty + Neutrality Treaty / 1977-09-07 = Voyager 1 launch +2d EXACT INSIDE strict ±8d; cleanest INSIDE-window ELC pick in v615-v619 cohort; **#10275 obs#3 post-ESTABLISHED reproducibility CONFIRMED** at bilateral-treaty-with-domestic-ratification-and-multilateral-endorsement domain; 5-of-5 cumulative domain forms)
 - **SPS species:** #92 → **#93** (Chinook Salmon *Oncorhynchus tshawytscha*; family Salmonidae; Order Salmoniformes; Class Actinopterygii; "King Salmon" / Coast Salish "Tyee"; **TWIN-MISSION-PAIR-COMPLETION direct analog with Coho Salmon #92**; Bald Eagle #89 → Chinook #93 CONFIRMED predation edge; **FIRST cohort-internal edge connecting consecutive SPS species (Coho #92 ↔ Chinook #93)**; **#10279 PAIRED-RECOVERY-PROGRAM ESTABLISHED at 3-ex** via Coho+Chinook NOAA 2013 paired ESA recovery)
 - **TRS M1 W2:** pack-18 category-theory binding; +14 cross-pack edges (211-224) → **224 total** / **K_18 ACHIEVED**; pack-18 = bridge-category obs#6 (6-of-6 consecutive bridge-category packs) → **#10273 + #10274 post-ESTABLISHED reproducibility obs#3 HOLDS** (6-of-6 cumulative); **#10284 post-ESTABLISHED reproducibility obs#1 CONFIRMED** (pack-18 EMERGENT-DOMINANT confirms taxonomic split: foundational packs def-DOMINANT vs organizing-meta packs emergent-DOMINANT) → #10296 NEW CANDIDATE TAXONOMIC-SPLIT-OF-#10273-BRIDGE-CATEGORIES
+
+
+## Key Features
+
+| Track | Detail |
+|-------|--------|
+| NASA | 1.95 → **1.96** (Voyager 1 / NSSDC 1977-084A / Smith-Hanel-Broadfoot-Lillie-Warwick-Kurth-Krimigis-Stone-Ness-Bridge-Eshleman / Stone 50y project-scientist tenure / Titan IIIE-Centaur LC-41 / 1977-09-05 launch / Jupiter  |
+| MUS | 1.95 → **1.96** (Iggy Pop *Lust for Life* / RCA PL-12488 UK / AFL1-2488 US / 1977-08-29 primary INSIDE strict -7d AND 1977-09-09 alternate INSIDE strict +4d; **#10232 obs#20 first dual-date INSIDE-strict primary anchor** |
+| ELC | 1.95 → **1.96** (Torrijos-Carter Treaties / Panama Canal Treaty + Neutrality Treaty / 1977-09-07 = Voyager 1 launch +2d EXACT INSIDE strict ±8d; cleanest INSIDE-window ELC pick in v615-v619 cohort; **#10275 obs#3 post-ES |
+| SPS | #92 → **#93** (Chinook Salmon *Oncorhynchus tshawytscha*; family Salmonidae; Order Salmoniformes; Class Actinopterygii; "King Salmon" / Coast Salish "Tyee"; **TWIN-MISSION-PAIR-COMPLETION direct analog with Coho Salmon # |
+| TRS | pack-18 category-theory binding; +14 cross-pack edges (211-224) → **224 total** / **K_18 ACHIEVED**; pack-18 = bridge-category obs#6 (6-of-6 consecutive bridge-category packs) → **#10273 + #10274 post-ESTABLISHED reprodu |
 
 ## v619 ESTABLISHED-promotions + post-ESTABLISHED hold-tests
 
@@ -69,3 +81,11 @@
 ## See also
 
 - Chapter contents: [00-summary](chapter/00-summary.md) · [03-retrospective](chapter/03-retrospective.md) · [04-lessons](chapter/04-lessons.md) · [99-context](chapter/99-context.md)
+
+## Build artifacts shipped
+
+- `www/tibsfox/com/Research/NASA/<degree>/` — index.html + 13-file artifact suite + 3 JSON files + forest-module
+- `www/tibsfox/com/Research/MUS/<degree>/` — index.html + artifact suite
+- `www/tibsfox/com/Research/ELC/<degree>/` — index.html + artifact suite
+- `www/tibsfox/com/Research/SPS/<species-slug>/` — index.html + artifact suite (audio + sims + anatomy + diagrams)
+- FTP sync to tibsfox.com via `npm run ftp-sync -- 1.<degree>` — typically 40-50 files / 1-2 MB

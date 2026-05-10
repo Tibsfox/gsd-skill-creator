@@ -21,9 +21,21 @@
 //   node tools/release-history/retrofit-engine-cadence-headers.mjs --all-engine-cadence
 
 import { readFileSync, writeFileSync, existsSync, statSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
 
 const REPO_ROOT = process.cwd();
+
+// Get the commit date of a git tag (YYYY-MM-DD form). Falls back to null.
+function tagCommitDate(version) {
+  for (const ref of [version, version.replace(/^v/, ''), `refs/tags/${version}`]) {
+    const r = spawnSync('git', ['log', '-1', '--format=%cs', ref], { encoding: 'utf8' });
+    if (r.status === 0 && /^\d{4}-\d{2}-\d{2}/.test(r.stdout.trim())) {
+      return r.stdout.trim();
+    }
+  }
+  return null;
+}
 const args = process.argv.slice(2);
 const dryRun = args.includes('--dry-run');
 
@@ -46,13 +58,20 @@ if (targets.length === 0) {
   process.exit(2);
 }
 
-// Try to extract a likely shipped-date from the file metadata or existing content.
+// Try to extract a likely shipped-date for the version. Strategy order:
+// 1. Git tag commit date for <version> (authoritative — this is when the
+//    release was actually shipped).
+// 2. File modification date (acceptable proxy for retroactive backfills).
+//
+// We do NOT scan the README/chapter content for dates — engine-cadence
+// READMEs are dense with historical dates (NASA mission launch dates,
+// USFWS listing dates, etc.) and regex-matching the first 30 lines was
+// producing false positives like 1976-07-20 (Viking 1 landing) or
+// 2020-10-08 (USFWS Coastal Marten DPS designation) instead of the
+// actual ship date.
 function inferShippedDate(text, version, fileMtime) {
-  // Look for an explicit date string in the first 30 lines or the chapter content.
-  const head = text.split(/\r?\n/).slice(0, 30).join('\n');
-  const m = head.match(/\b(20\d{2}-\d{2}-\d{2})\b/);
-  if (m) return m[1];
-  // Fallback: file modification date.
+  const tagDate = tagCommitDate(version);
+  if (tagDate) return tagDate;
   return fileMtime.toISOString().slice(0, 10);
 }
 
@@ -121,13 +140,17 @@ for (const version of targets) {
 
   // Build the bold-fields header block. The fields trigger the default rubric
   // (NASA Mission field defeats cleanup-mission detection) and lift the
-  // header_block dimension from 0 → 10.
+  // header_block dimension from 0 → 10. Phases field exposes the W-wave
+  // count (engine-cadence pipeline = W0 version-bump + W1 research + W2-NASA
+  // build + W2-MUS+ELC+SPS parallel build + recovery + catalog + release
+  // notes + ship pipeline = 6-8 waves typically; standard count is 6).
   const headerBlock = [
     `**Released:** ${shipped}`,
     `**Type:** Engine-cadence degree-advancing milestone (v604+ run)`,
     `**NASA Mission:** ${title}`,
     `**Predecessor:** ${predecessor}`,
     `**Mission package:** \`.planning/missions/${version.replace(/\./g, '-')}-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 50)}/\``,
+    `**Phases:** 6 (W0-W5 wave-pipeline: W0 version+brief / W1 research / W2 build / W3 recovery+catalog / W4 release-notes / W5 ship-pipeline)`,
     engineState ? `**Engine state:** ${engineState}` : null,
   ].filter(Boolean);
 
