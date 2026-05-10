@@ -44,7 +44,8 @@ describe('scripts/erdos-refresh.py (Phase 682)', () => {
       [PY_SCRIPT, '--dry-run', '--tracker', tmpTracker, '--snapshot', SNAPSHOT],
       { encoding: 'utf8' },
     );
-    expect(run1).toBe(run2);
+    const stripTiming = (s: string) => s.replace(/\d+\.\d{2}s\)/g, 'Xs)');
+    expect(stripTiming(run1)).toBe(stripTiming(run2));
   });
 
   it('apply -> apply is a fixed point (file unchanged on second apply)', () => {
