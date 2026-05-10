@@ -1,0 +1,77 @@
+# v1.49.632 — Engine State Tables
+
+**Released:** 2026-05-10
+
+## Track-by-track engine state
+
+| Degree | Mission | Launch | NEW LOCKED |
+|--------|---------|--------|------------|
+| NASA 1.105 | STS-3 Columbia | 1982-03-22 | RMS-PAYLOAD-GRAPPLE; CONTINGENCY-LANDING; LAST-WHITE-ET; THERMAL-EXTREME-SOAK; SKYLAB-VETERAN-COMMANDER |
+| NASA 1.106 | STS-4 Columbia | 1982-06-27 | FINAL-OFT; FIRST-DOD-PAYLOAD; CONCRETE-RUNWAY; FIRST-UNPAINTED-ET; FIRST-SRB-RECOVERY-FAILURE; REAGAN-AT-LANDING; AUBURN-ALMA-MATER; SCA-OVERFLIGHT |
+| **NASA 1.107** | **STS-5 Columbia** | **1982-11-11** | **OPERATIONAL-PHASE; FIRST-COMMERCIAL-DEPLOY; FIRST-4-CREW; NON-PILOT-MS; SUIT-MALFUNCTION-CANCELS-EVA; ASTP-VETERAN-COMMANDER** |
+| NASA 1.108 (target) | STS-6 Challenger | 1983-04-04 | (FA-632-7: first Challenger flight; first Shuttle EVA; TDRS-1) |
+
+| Degree | Album | Release | NEW LOCKED |
+|--------|---|---|---|
+| MUS 1.105 | Iron Maiden NOTB | 1982-03-22 | DUAL-SAME-DAY-LAUNCH-AND-LANDING; VOCALIST-CHANGE; NWOBHM-COMMERCIAL-PEAK |
+| MUS 1.106 | ABC Lexicon of Love | 1982-06-21 + UK#1 1982-07-03 | DEBUT-ALBUM-AT-UK#1; TREVOR-HORN; FAIRLIGHT-AND-ORCHESTRA; SHEFFIELD-POST-INDUSTRIAL |
+| **MUS 1.107** | **Marvin Gaye Midnight Love** | **1982-11-08 US + 1982-11-12 UK** | **LABEL-DEPARTURE; ARTIST-AS-SELF-PRODUCER; ROLAND-TR-808; BELGIAN-EXILE; FIRST-COMMERCIAL-RECOVERY; PORTRAITURE; GENRE-TRAJECTORY** |
+
+| Degree | Event | Date | NEW LOCKED |
+|--------|---|---|---|
+| ELC 1.105 | South Georgia incident | 1982-03-19 | CASUS-BELLI; POST-WAR-JUNTA-COLLAPSE |
+| ELC 1.106 | ERA expiration | 1982-06-30 | CONSTITUTIONAL-AMENDMENT-FAILS-RATIFICATION |
+| **ELC 1.107** | **Brezhnev death + Andropov succession** | **1982-11-10 + 1982-11-12 DUAL-ANCHOR** | **SOVIET-LEADERSHIP-TRANSITION; KGB-TO-GS-PIPELINE; STATE-FUNERAL; 18-YEAR-TENURE-INVARIANT; COLD-WAR-LATE-STAGNATION** |
+
+| # | Species | Family | NEW LOCKED |
+|---|---|---|---|
+| 102 | Common Raven | Corvidae | TRICKSTER-CREATOR; PASSERINE-LARGEST; COGNITIVE-PARITY |
+| 103 | Northwestern Garter Snake | Colubridae | REPTILIA-AS-COHORT-NODE; PHYLOGENETIC-CLASS-FIRST; POLYMORPHISM; COHORT-INTERNAL-TROPHIC-EDGE |
+| **104** | **American Crow** | **Corvidae** | **#10329 ESTABLISHED; CORVID-AS-FOUNDING-FAMILY; LUMP-AS-DELIVERABLE; CONGENER-PAIR-IN-COHORT; URBAN-CORVID** |
+
+| Pack | Binding | K_N | Milestone |
+|------|---------|-----|------|
+| 27 | HoTT | K_27 = 350 | v630 |
+| 28 | model theory | K_28 = 364 | v631 |
+| **29** | **probability theory** | **K_29 = 378** | **v632** |
+| 30 (target) | (FA-632-6) | K_30 ~ 392 | v633 |
+
+## §6.6 register at v632 close
+
+| # | Substrate | v632 | Cumulative |
+|---|---|---|---|
+| #10247 | SAME-DAY-CALENDAR-COINCIDENCE | DUAL-ANCHOR Soviet | 24-of-24 |
+| #10273 | bridge-category | CONFIRMED | 17-of-17 |
+| #10274 | K_N completion | CONFIRMED | 17-of-17 |
+| #10323 | LONG-ALBUM-ZONE | **ESTABLISHED** | 5-of-5 |
+| #10326 | MOL-TRANSFEREE | obs#5 reproducibility | 5-of-5 |
+| #10329 | CORVID-BIOLOGICAL-TOOL-USE | **ESTABLISHED** | 3-of-3 |
+| #10331 | DESIGN-TRANSITION-VISIBLE | **ESTABLISHED** | 3-of-3 |
+| #10333 | CASCADE-CONTAINMENT | **ESTABLISHED** | 3-of-3 |
+
+**Four ESTABLISHED-DECISIONs in single milestone** — highest cadence since v628.
+
+## NEW LOCKED at v632 (26+)
+
+NASA: SHUTTLE-OPERATIONAL-PHASE / FIRST-COMMERCIAL-SATELLITE-DEPLOYMENT / FIRST-4-CREW / NON-PILOT-MISSION-SPECIALIST / SUIT-MALFUNCTION-CANCELS-EVA / ASTP-VETERAN-AS-COMMANDER
+MUS: LABEL-DEPARTURE / ARTIST-AS-SELF-PRODUCER / ROLAND-TR-808-AS-PRIMARY-RHYTHM / BELGIAN-EXILE / FIRST-COMMERCIAL-RECOVERY / PORTRAITURE / GENRE-TRAJECTORY
+ELC: SOVIET-LEADERSHIP-TRANSITION / DUAL-ANCHOR-LEADERSHIP-DEATH-AND-SUCCESSION / COLD-WAR-LATE-STAGNATION / STATE-FUNERAL-AS-DIPLOMATIC-CONVERGENCE / KGB-CHAIRMAN-TO-GS-PIPELINE / 18-YEAR-TENURE-INVARIANT
+SPS: CORVID-AS-FOUNDING-FAMILY / LUMP-AS-DELIVERABLE / CONGENER-PAIR-IN-COHORT / URBAN-CORVID
+TRS: PROBABILITY-THEORY-AS-OPERATIONAL-RELIABILITY / COMMERCIAL-SATELLITE-DEPLOYMENT-AS-BERNOULLI-TRIAL / EVA-MALFUNCTION-AS-CONDITIONAL-PROBABILITY
+
+## Build artifacts shipped
+
+| Track | Path | Lines | Bytes | Cards |
+|---|---|---|---|---|
+| NASA 1.107 | www/.../NASA/1.107/index.html | 792 | 175866 | 7/7 + 8/8 Track + 4× nav |
+| MUS 1.107 | www/.../MUS/1.107/index.html | 535 | 100918 | 19/10 |
+| ELC 1.107 | www/.../ELC/1.107/index.html | 747 | 118378 | 22/10 |
+| SPS #104 | www/.../SPS/american-crow/index.html | 849 | 139577 | 15 |
+| Catalog | 108 degrees in sync | — | — | — |
+
+## Branch state at v632 close
+
+- **dev** — primary; tip = TBD-W4-commit
+- **main** — at 4fa4c678a pre-merge; will move at G3
+- **Latest shipped:** v1.49.631 → **v1.49.632** at G3
+- **Auto-roll target:** v1.49.633 = NASA 1.108 STS-6 Challenger 1983-04-04 (first Challenger flight; first Shuttle EVA Story Musgrave + Don Peterson; TDRS-1 deployment via IUS)
