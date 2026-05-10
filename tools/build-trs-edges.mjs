@@ -70,6 +70,7 @@ const TRS_RESEARCH_LOCATIONS = [
   { milestone: 'v1.49.624', paths: ['.planning/missions/v1-49-624-heao-2-einstein-observatory/work/W1-TRS-research.md'] },
   { milestone: 'v1.49.625', paths: ['.planning/missions/v1-49-625-heao-3-gamma-ray-spectroscopy/work/W1-TRS-research.md'] },
   { milestone: 'v1.49.626', paths: ['.planning/missions/v1-49-626-solar-maximum-mission/work/W1-TRS-research.md'] },
+  { milestone: 'v1.49.627', paths: ['.planning/missions/v1-49-627-sts-1-columbia/work/W1-TRS-research.md'] },
 ];
 
 function readFrontmatter(text) {
