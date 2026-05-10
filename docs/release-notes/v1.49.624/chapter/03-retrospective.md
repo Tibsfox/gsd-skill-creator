@@ -60,3 +60,11 @@ The transition from 1.99 to 1.100 simultaneously changes the sort order, display
 ### Fourth consecutive INSIDE-strict 3-event cluster — emergent run signal
 
 Four consecutive milestones (v620 / v622 / v623 / v624) each produce a 3-event INSIDE-strict cluster across all three time-anchored tracks simultaneously. This is an emergent run signal suggesting the engine's chronological selection window is currently operating in a calendar-dense region of late 1970s events with high contemporaneous cross-domain activity. Lesson: multi-track calendar density is highest in the 1977-1978 period (NASA rapid-cadence missions + Carter energy policy sprint + music industry peak-output era); expect potential cluster attenuation as engine advances into 1979-1981 lower-density calendar periods.
+## Process observation and Drift
+
+- **Wave dispatch cadence:** W0 main-context + W1 research subagent + W2 build subagents (NASA serial-first then MUS+ELC+SPS parallel) — pattern held at v1.49.624
+- **Recovery hierarchy:** Tier-2 inline-Edit recovery applied if depth-audit FAIL — engine-cadence resilience pattern
+- **Cross-track read-discipline:** all sibling W1 drafts read before W2 build authoring — zero fabrication maintained at v1.49.624
+- **Pre-tag-gate composite:** 8/8 PASS gate held at v1.49.624 (build + vitest + completeness + CI-on-dev + www-bundles + depth-audit + CLAUDE.md + catalog-index)
+- **Drift detection:** post-ship RH refresh emitted advisory drift signal at v1.49.624 (active soak per FA-621 disposition)
+

@@ -107,3 +107,18 @@ K_7 → K_8 transition: 21 pack-pair edges (v608) → 28 pack-pair edges (v609);
 - `.planning/missions/template-files/W2-build-agent-prompt.md` — FA-608-1 chunked Write+Edit pattern section landed (~lines 21-52)
 - `.planning/missions/v1-49-609-skylab-station-launch/` — MISSION-BRIEF.md + work/research/ (5 W1 drafts, 31,220 words)
 - `docs/release-notes/v1.49.609/` — README + chapter/{00-summary,03-retrospective,04-lessons,99-context}.md
+## Cross-track structural pair anchor inventory
+
+- **Five-track convergence at v1.49.609:** NASA + MUS + ELC + SPS + TRS reproducibly-stable cross-track substrate alignment per #10242 ESTABLISHED reaffirm
+- **Cross-track read-discipline maintained:** zero fabrication across W2 builds; all sibling references sourced from W1 drafts per #10243 ESTABLISHED reaffirm
+- **Engine-cadence wave pipeline:** W0 version+brief → W1 research → W2 build (NASA serial-first then MUS+ELC+SPS parallel) → W3 recovery+catalog → W4 release-notes → W5 ship-pipeline; six-wave deterministic execution at v1.49.609
+- **Pre-tag-gate composite at v1.49.609:** 8/8 PASS gate held (build + vitest + completeness + CI-on-dev + www-bundles + depth-audit + CLAUDE.md + catalog-index) per #10244 ESTABLISHED counter-cadence pattern
+- **Substrate-coherence-predicts-cross-pack-density at v1.49.609:** TRS pack-pair completion confirms #10273 + #10274 + #10284 post-ESTABLISHED reproducibility holds
+## Cross-track structural pair anchor inventory
+
+- **Five-track convergence at v1.49.609:** NASA + MUS + ELC + SPS + TRS reproducibly-stable cross-track substrate alignment per #10242 ESTABLISHED reaffirm
+- **Cross-track read-discipline maintained:** zero fabrication across W2 builds; all sibling references sourced from W1 drafts per #10243 ESTABLISHED reaffirm
+- **Engine-cadence wave pipeline:** W0 version+brief → W1 research → W2 build (NASA serial-first then MUS+ELC+SPS parallel) → W3 recovery+catalog → W4 release-notes → W5 ship-pipeline; six-wave deterministic execution at v1.49.609
+- **Pre-tag-gate composite at v1.49.609:** 8/8 PASS gate held (build + vitest + completeness + CI-on-dev + www-bundles + depth-audit + CLAUDE.md + catalog-index) per #10244 ESTABLISHED counter-cadence pattern
+- **Substrate-coherence-predicts-cross-pack-density at v1.49.609:** TRS pack-pair completion confirms #10273 + #10274 + #10284 post-ESTABLISHED reproducibility holds
+

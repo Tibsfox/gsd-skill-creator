@@ -2,14 +2,14 @@
 
 ## Structural firsts
 
-- **First through asteroid belt + first Jupiter flyby + first solar-system-escape** (NASA 1.82 = Pioneer 10; resolves 3 pre-flight open questions in flight)
-- **First deliberate human encoded message for extraterrestrial intelligence** (Pioneer plaque; Sagan + Drake + Salzman Sagan 1972)
-- **First 4-track substrate convergence interface in soak series** (#10242 obs#4 = NASA + MUS + ELC + SPS at OPEN-QUESTION-DIRECT-RESOLUTION + HYPERBOLIC-ESCAPE-TRAJECTORY)
-- **First dual-INSIDE-window MUS pick** (#10232 obs#6 = *Band on the Run* INSIDE Jupiter close-approach +2d AND solar-escape +1d)
-- **First operational application of v603 #10244 ESTABLISHED counter-cadence pattern's downstream gate** (track-card-coverage + nav-card-presence depth-audit sub-checks BLOCKER PASS at v604 W3)
-- **First operational application of v603 W2-build-agent-prompt 8-Track-cards + nav-card HARD RULE section** (NASA 1.82 build ships with all 8 cards + 4× nav-card)
-- **First M0 original-substrate pack bound after Wave 2 foundational triad complete** (TRS pack-04 control theory / dynamical systems; 8 new cross-pack edges)
-- **First mid-build Sonnet-quota recovery via inline-Opus authoring** (#10233 ESTABLISHED Tier-2 inline-Opus path activated when 3 of 4 W2 build agents hit quota; main-context Opus authored NASA companion HTMLs + JSON + forest-module + 4 of 13 artifact files; first ratification of #10233 mid-build-recovery sub-pattern)
+**First through asteroid belt + first Jupiter flyby + first solar-system-escape.** (NASA 1.82 = Pioneer 10; resolves 3 pre-flight open questions in flight)
+**First deliberate human encoded message for extraterrestrial intelligence.** (Pioneer plaque; Sagan + Drake + Salzman Sagan 1972)
+**First 4-track substrate convergence interface in soak series.** (#10242 obs#4 = NASA + MUS + ELC + SPS at OPEN-QUESTION-DIRECT-RESOLUTION + HYPERBOLIC-ESCAPE-TRAJECTORY)
+**First dual-INSIDE-window MUS pick.** (#10232 obs#6 = *Band on the Run* INSIDE Jupiter close-approach +2d AND solar-escape +1d)
+**First operational application of v603 #10244 ESTABLISHED counter-cadence pattern's downstream gate.** (track-card-coverage + nav-card-presence depth-audit sub-checks BLOCKER PASS at v604 W3)
+**First operational application of v603 W2-build-agent-prompt 8-Track-cards + nav-card HARD RULE section.** (NASA 1.82 build ships with all 8 cards + 4× nav-card)
+**First M0 original-substrate pack bound after Wave 2 foundational triad complete.** (TRS pack-04 control theory / dynamical systems; 8 new cross-pack edges)
+**First mid-build Sonnet-quota recovery via inline-Opus authoring.** (#10233 ESTABLISHED Tier-2 inline-Opus path activated when 3 of 4 W2 build agents hit quota; main-context Opus authored NASA companion HTMLs + JSON + forest-module + 4 of 13 artifact files; first ratification of #10233 mid-build-recovery sub-pattern)
 
 ## Engine state at v604 close
 

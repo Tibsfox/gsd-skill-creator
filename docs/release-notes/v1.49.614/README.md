@@ -1,5 +1,16 @@
 # v1.49.614 — Apollo-Soyuz Test Project
 
+**Released:** 2026-05-07
+**Type:** Engine-cadence degree-advancing milestone (v604+ run)
+**NASA Mission:** Apollo-Soyuz Test Project
+**Predecessor:** v1.49.613
+**Mission package:** `.planning/missions/v1-49-614-apollo-soyuz-test-project/`
+**Phases:** 6 (W0-W5 wave-pipeline: W0 version+brief / W1 research / W2 build / W3 recovery+catalog / W4 release-notes / W5 ship-pipeline)
+**Engine state:** NASA degree:: 1.90 → **1.91** + MUS degree:: 1.90 → **1.91** + ELC degree:: 1.90 → **1.91** + SPS species:: #87 → **#88** + TRS M1 W2:: pack-07 abstract algebra bound; +14 cross-pack edges → **154 total** / **K_13 SINGLE-PASS ACHIEVED
+
+## Summary
+
+
 **Engine-cadence degree-advancing milestone — tenth consecutive degree-advancing milestone in the v604+ run.** Apollo-Soyuz Test Project (ASTP / NSSDC 1975-066A US side / 1975-065A Soyuz 19) — **first international crewed spaceflight; first US-Soviet docking** via APAS-75 androgynous adapter (Vladimir Syromyatnikov designer); **final Apollo Block II CSM-111 + final crewed Saturn IB SA-210** (stages fabricated 1967, 8 years storage before flying). Saturn IB SA-210 launched 1975-07-15 19:50:00 UTC from KSC LC-39B with **Thomas P. Stafford** (CDR; Gemini 6/9, Apollo 10), **Vance D. Brand** (CMP; rookie), **Donald K. "Deke" Slayton** (DMP; Mercury 7 selectee 1959; grounded 1962-1972 for paroxysmal atrial fibrillation; first flight at age 51 after 13-year grounding); Soyuz-U 11A511 launched 1975-07-15 12:20:00 UTC from Baikonur LC-1 with **Alexei Leonov** (CDR; Voskhod 2 1965 first EVA) + **Valeri Kubasov** (FE; Soyuz 6 1969 first orbital welding; previously replaced on Soyuz 11 1971 for benign lung mass — eerily paralleling Slayton's later splashdown-recovery lung lesion discovery). Rendezvous and dock 1975-07-17 16:09:09 UTC over the Atlantic west of Portugal via APAS-75; ~44 hours docked; 4 separate crew exchanges + televised Stafford-Leonov handshake; 5 joint experiments (UV stellar absorption / multi-purpose furnace / artificial-eclipse via Apollo eclipsing Soyuz / cosmic-ray-spectrum cross-calibration / microbial exchange). Soyuz 19 landed 1975-07-21 in Kazakhstan; Apollo splashed down 1975-07-24 21:18 UTC in Pacific ~595 km west of Honolulu (corrected from MISSION-BRIEF's 365 km). Brand inhaled ~300 ppm MMH/N₂O₄ toxic fumes during splashdown attitude-jet leak (~400 ppm 30-second-fatal threshold; Stafford's mask retrieval averted fatal exposure; crew hospitalized 2-week chemical-pneumonia recovery; Slayton's hospital workup discovered benign lung lesion); USS *New Orleans* LPH-11 recovery. **6-year US crewed gap follows until STS-1 1981-04-12 (longest US crewed gap until that date).**
 
 ## Engine state advances
@@ -9,6 +20,17 @@
 - **ELC degree:** 1.90 → **1.91** (Helsinki Final Act / Conference on Security and Cooperation in Europe Final Act / signed 1975-08-01 Finlandia Hall Helsinki by 35 nations including Brezhnev + Ford; +8d Apollo splashdown 1975-07-24 boundary edge per #10232; Brezhnev-Ford handshake at Helsinki ↔ Stafford-Leonov handshake in orbit; Four Baskets architecture: Decalogue + economic + humanitarian + follow-up review)
 - **SPS species:** #87 → **#88** (Trumpeter Swan *Cygnus buccinator*; family Anatidae; Order Anseriformes — first PNW waterfowl Order in cohort; recovered from ~70 nesting pairs mid-1930s to ~63,016 by 2015 via 1916/1936/1972/1976 Migratory Bird Treaty multi-government framework + ESA 1973 + active reintroduction; lifetime pair-bonded with both-sex incubation; cross-territorial Pacific Coast subspecies *C. b. buccinator* US/Canada migration; 0-1 cohort-internal trophic edges = honest pivot to wetland-herbivore axis with Bald Eagle deferred to SPS #89/#90)
 - **TRS M1 W2:** pack-07 abstract algebra bound; +14 cross-pack edges → **154 total** / **K_13 SINGLE-PASS ACHIEVED (all 78 = C(13,2) pack-pair edges of the foundational thirteen-pack roster realized)**; pack-07 = bridge-category (Lie theory linking abstract algebra to differential and projective clusters); pack-07↔pack-10 = 2 (Lie-Kolchin + Schur-projective); pack-07↔pack-05 = 2 (Lie-point-symmetry + monodromy); pack-07↔pack-02 = 3 (Lie-group-IS-manifold + Lie-algebra-IS-tangent + principal-G-bundle); pack-07-differential-cluster = 5 = comparable to v613 pack-05↔pack-02 = 5
+
+
+## Key Features
+
+| Track | Detail |
+|-------|--------|
+| NASA | 1.90 → **1.91** (Apollo-Soyuz Test Project / Stafford-Brand-Slayton + Leonov-Kubasov / SA-210 + CSM-111 + DM with APAS-75 / 1975-07-15 dual launch / 1975-07-17 docking / 1975-07-24 Apollo splashdown; first international  |
+| MUS | 1.90 → **1.91** (Fleetwood Mac *Fleetwood Mac* / Reprise MS 2225 / 1975-07-11 = Apollo launch -4d / docking -6d INSIDE strict ±8d DOUBLE-BOUNDARY per #10232 ESTABLISHED; US-UK bi-national band ↔ MULTI-GOVERNMENT-COOPERAT |
+| ELC | 1.90 → **1.91** (Helsinki Final Act / Conference on Security and Cooperation in Europe Final Act / signed 1975-08-01 Finlandia Hall Helsinki by 35 nations including Brezhnev + Ford; +8d Apollo splashdown 1975-07-24 bound |
+| SPS | #87 → **#88** (Trumpeter Swan *Cygnus buccinator*; family Anatidae; Order Anseriformes — first PNW waterfowl Order in cohort; recovered from ~70 nesting pairs mid-1930s to ~63,016 by 2015 via 1916/1936/1972/1976 Migrator |
+| TRS | pack-07 abstract algebra bound; +14 cross-pack edges → **154 total** / **K_13 SINGLE-PASS ACHIEVED (all 78 = C(13,2) pack-pair edges of the foundational thirteen-pack roster realized)**; pack-07 = bridge-category (Lie th |
 
 ## v614 ESTABLISHED-promotion + first operational use of IC-613 infrastructure
 
@@ -67,3 +89,15 @@
 
 - Predecessor (immediate + degree-advancing): v1.49.613 Skylab 4 / Comet Kohoutek.
 - Successor candidate: **v1.49.615 = Viking 1 First Successful Mars Landing (NASA 1.92; 1975-08-20 launch; 1976-07-20 Chryse Planitia landing; first US Mars surface mission; first complete biology / soil-chemistry / imaging surface science suite)** per FA-613-4 continue-engine-cadence decision.
+
+## See also
+
+- Chapter contents: [00-summary](chapter/00-summary.md) · [03-retrospective](chapter/03-retrospective.md) · [04-lessons](chapter/04-lessons.md) · [99-context](chapter/99-context.md)
+
+## Build artifacts shipped
+
+- `www/tibsfox/com/Research/NASA/<degree>/` — index.html + 13-file artifact suite + 3 JSON files + forest-module
+- `www/tibsfox/com/Research/MUS/<degree>/` — index.html + artifact suite
+- `www/tibsfox/com/Research/ELC/<degree>/` — index.html + artifact suite
+- `www/tibsfox/com/Research/SPS/<species-slug>/` — index.html + artifact suite (audio + sims + anatomy + diagrams)
+- FTP sync to tibsfox.com via `npm run ftp-sync -- 1.<degree>` — typically 40-50 files / 1-2 MB

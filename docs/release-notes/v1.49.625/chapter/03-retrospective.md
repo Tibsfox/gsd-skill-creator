@@ -56,3 +56,11 @@ HEAO-3 completes the HEAO program-trio and simultaneously marks the end of the A
 ### Fifth consecutive INSIDE-strict 3-event cluster — sustained emergent run signal
 
 Five consecutive milestones (v620 / v622 / v623 / v624 / v625) each produce a 3-event INSIDE-strict cluster across all three time-anchored tracks simultaneously. The run now spans 1978-05 through 1979-09 calendar months. Lesson: the 1978-1979 calendar period represents a sustained cross-domain density zone; expect potential attenuation after 1979 as NASA mission cadence slows (post-Pioneer-Venus quiescent period) and Eagles disbandment removes them as a MUS source. However, the 5-event run is already longer than the ESTABLISHED threshold for #10247 alone, suggesting the multi-track cluster signal may itself be ESTABLISHED-promotion-eligible as a separate density-run substrate.
+## Process observation and Drift
+
+- **Wave dispatch cadence:** W0 main-context + W1 research subagent + W2 build subagents (NASA serial-first then MUS+ELC+SPS parallel) — pattern held at v1.49.625
+- **Recovery hierarchy:** Tier-2 inline-Edit recovery applied if depth-audit FAIL — engine-cadence resilience pattern
+- **Cross-track read-discipline:** all sibling W1 drafts read before W2 build authoring — zero fabrication maintained at v1.49.625
+- **Pre-tag-gate composite:** 8/8 PASS gate held at v1.49.625 (build + vitest + completeness + CI-on-dev + www-bundles + depth-audit + CLAUDE.md + catalog-index)
+- **Drift detection:** post-ship RH refresh emitted advisory drift signal at v1.49.625 (active soak per FA-621 disposition)
+

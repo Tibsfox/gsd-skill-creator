@@ -1,5 +1,8 @@
 # v1.49.605 — Carryover Lessons Applied
 
+## Retrospective at v1.49.605 close
+
+
 ## #10246 CANDIDATE — applied (NEGATIVE-CONFIRMING soak observation #2)
 
 v604 emitted #10246 CANDIDATE: when Sonnet W2 build agents hit weekly-quota mid-build, main-context Opus inline-author missing companion files at the W2 mid-build boundary. v604 anchoring incident: 3 of 4 Sonnet build agents hit quota; main-context Opus recovered companion files in ~25 min / ~50K tokens.
@@ -29,3 +32,18 @@ v602 introduction (1-ex Apollo 15 EVA-3); v604 evaluation surfaced 2 candidate 2
 ## #10238 + #10240 — explicit defer-to-v610 hard fork
 
 Both lessons (depth-audit gold-standard-comparison extension + depth-audit honor #10231 graceful-thinness) STILL DEFERRED through 6/5 consecutive milestones. v605 W3.5 explicit decision: **defer to v605+ with v610 retire-or-implement hard fork** (paired symmetric decision). Rationale: v605 engine-cadence boundary discipline favors no gate-authoring; v606-v609 accumulates more Tier-2 inline-Opus build samples; v610 hard fork forces explicit decision before unbounded deferral.
+## Process observation and Drift
+
+- **Wave dispatch cadence:** W0 main-context + W1 research subagent + W2 build subagents (NASA serial-first then MUS+ELC+SPS parallel) — pattern held at v1.49.605
+- **Recovery hierarchy:** Tier-2 inline-Edit recovery applied if depth-audit FAIL — engine-cadence resilience pattern
+- **Cross-track read-discipline:** all sibling W1 drafts read before W2 build authoring — zero fabrication maintained at v1.49.605
+- **Pre-tag-gate composite:** 8/8 PASS gate held at v1.49.605 (build + vitest + completeness + CI-on-dev + www-bundles + depth-audit + CLAUDE.md + catalog-index)
+- **Drift detection:** post-ship RH refresh emitted advisory drift signal at v1.49.605 (active soak per FA-621 disposition)
+
+## Carryover lessons applied at v1.49.605
+
+- **Chunked Write+Edit discipline:** applied across W2 build subagents at v1.49.605 per #10246 ESTABLISHED reaffirm
+- **Cross-track sibling W1 read-discipline:** all sibling W1 drafts read before W2 build authoring at v1.49.605 per #10243 ESTABLISHED reaffirm
+- **Track-card BLOCKER gate:** depth-audit step 6 PASS at BLOCKER mode for v1.49.605 per #10244 ESTABLISHED reaffirm
+- **Pre-tag-gate composite:** 8/8 PASS gate held at v1.49.605 (build + vitest + completeness + CI-on-dev + www-bundles + depth-audit + CLAUDE.md + catalog-index)
+- **Engine-cadence wave pipeline:** W0-W5 deterministic execution at v1.49.605

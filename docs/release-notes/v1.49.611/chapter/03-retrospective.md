@@ -41,7 +41,7 @@ W2 ran cleanly across all 4 dispatches; the only friction at v611 was the W1.MUS
 
 Total W2 wall: ~63 min (NASA serial 42 min + parallel-cohort longest at ~21 min). Equivalent to v609 (57 min) and slightly faster than v610 (71 min).
 
-## Process observations
+## Process observation and Drift
 
 1. **Three-milestone clean-wave trend confirms FA-608-1 chunked discipline is the load-bearing change.** Across v609 + v610 + v611, 12-of-12 W2 dispatches completed without watchdog/quota/fabrication events. The discipline is the steady-state W2 operating mode.
 2. **§6.6 promotion density at v611 is the densest in v604+ history.** Three ESTABLISHED-target promotions in a single milestone (#10247 + CROSS-TRACK-DIRECT + 5-ex SISTER-COHORT). This is the consequence of FA-610-4/5 ESTABLISHED-target tracking discipline — the operator carries forward soak chains explicitly named by milestone, and the substrate at that milestone delivers all three convergences simultaneously.

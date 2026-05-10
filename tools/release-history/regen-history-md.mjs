@@ -78,15 +78,15 @@ async function main() {
     '',
     `${rows.length} milestones shipped across the ${oldest} → ${newest} arc. The table below lists every shipped release, newest first.`,
     '',
-    'Each version links to a detailed release notes directory with full feature descriptions, and where available, retrospectives and lessons learned. `Commits` is the count of commits between this tag and the previous tag (from git). `Phases` and `Plans` come from structured GSD metadata in the release README — most content/patch releases don\'t have these. `Retro` links to the retrospective chapter when present. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.',
+    'Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.',
     '',
     `**Snapshot:** ${rows.length} releases · ${retroCount} with retrospectives · `
       + `${rows.filter(r => r.lesson_count > 0).length} with extracted lessons · `
       + `quality A:${qualityDist.A} B:${qualityDist.B} C:${qualityDist.C} D:${qualityDist.D} F:${qualityDist.F} (avg ${avgScore}) · `
       + `source of truth: Postgres \`release_history\` schema, regenerated via \`tools/release-history/refresh.mjs\`.`,
     '',
-    '| Version | Name | Shipped | Commits | Phases | Plans | Retro | Lessons | Quality | Notes |',
-    '|---------|------|---------|---------|--------|-------|-------|---------|---------|-------|',
+    '| Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |',
+    '|---------|------|---------|---------|--------|-------|----------|---------|---------|-------|',
   ];
 
   // Track any drift between DB claims and actual chapter files on disk.
@@ -101,28 +101,32 @@ async function main() {
       : `${SOURCE_DIR}/${r.version}/`;
     const versionCell = `[${r.version}](${linkFromHistoryTo(versionLinkRel)})`;
 
-    // Retro cell — link to chapter file if present on disk
-    let retroCell = '—';
-    if (r.has_retrospective) {
-      const retroFile = chapterFileRel(r.version, '03-retrospective.md');
-      if (chapterFileExists(r.version, '03-retrospective.md')) {
-        retroCell = `[✓](${linkFromHistoryTo(retroFile)})`;
-      } else {
-        retroCell = '✓ _(no file)_';
-        driftRetro.push(r.version);
-      }
+    // Chapters cell — mini-links to each chapter file present on disk:
+    // [s] 00-summary, [r] 03-retrospective, [l] 04-lessons, [c] 99-context.
+    // Drift detection still tracks Retro and Lessons (DB claim vs disk).
+    const chapterParts = [];
+    if (chapterFileExists(r.version, '00-summary.md')) {
+      chapterParts.push(`[s](${linkFromHistoryTo(chapterFileRel(r.version, '00-summary.md'))})`);
     }
+    if (chapterFileExists(r.version, '03-retrospective.md')) {
+      chapterParts.push(`[r](${linkFromHistoryTo(chapterFileRel(r.version, '03-retrospective.md'))})`);
+    } else if (r.has_retrospective) {
+      driftRetro.push(r.version);
+    }
+    if (chapterFileExists(r.version, '04-lessons.md')) {
+      chapterParts.push(`[l](${linkFromHistoryTo(chapterFileRel(r.version, '04-lessons.md'))})`);
+    } else if (r.lesson_count > 0) {
+      driftLessons.push(r.version);
+    }
+    if (chapterFileExists(r.version, '99-context.md')) {
+      chapterParts.push(`[c](${linkFromHistoryTo(chapterFileRel(r.version, '99-context.md'))})`);
+    }
+    const chaptersCell = chapterParts.length > 0 ? chapterParts.join(' ') : '—';
 
-    // Lessons cell — link to chapter file if present on disk
+    // Lessons cell — count only (link is already in Chapters [l]).
     let lessonsCell = '—';
     if (r.lesson_count > 0) {
-      const label = r.applied_count > 0 ? `${r.applied_count}/${r.lesson_count}` : `${r.lesson_count}`;
-      if (chapterFileExists(r.version, '04-lessons.md')) {
-        lessonsCell = `[${label}](${linkFromHistoryTo(chapterFileRel(r.version, '04-lessons.md'))})`;
-      } else {
-        lessonsCell = `${label} _(no file)_`;
-        driftLessons.push(r.version);
-      }
+      lessonsCell = r.applied_count > 0 ? `${r.applied_count}/${r.lesson_count}` : `${r.lesson_count}`;
     }
 
     // Quality cell — grade + score (e.g. "A 95" or "D 65")
@@ -131,7 +135,7 @@ async function main() {
       : '—';
 
     const notes = isGhost ? '_no original README, chapter stub only_' : '';
-    return `| ${versionCell} | ${esc(r.name) || '—'} | ${r.shipped || '—'} | ${r.commits ?? '—'} | ${r.phases ?? '—'} | ${r.plans ?? '—'} | ${retroCell} | ${lessonsCell} | ${qualityCell} | ${notes} |`;
+    return `| ${versionCell} | ${esc(r.name) || '—'} | ${r.shipped || '—'} | ${r.commits ?? '—'} | ${r.phases ?? '—'} | ${r.plans ?? '—'} | ${chaptersCell} | ${lessonsCell} | ${qualityCell} | ${notes} |`;
   });
 
   // Surface drift in the summary line so it doesn't hide

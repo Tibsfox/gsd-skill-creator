@@ -2,11 +2,11 @@
 
 ## Structural firsts at v608
 
-1. **First sister-mission paired-program-design-vindication ADMIT.** #10241 promoted to §6.6 LOCKED at 2-ex (Pioneer 10 v604 + Pioneer 11 v608). The pattern itself is a §6.6 register exemplar: pattern emerges, stays watchlist, second instance confirms, only then admit.
-2. **First 3-of-3 paired-architecture triplet within ±60d window.** Beatles paired-LP + CITES paired-list + Pioneer paired-flight — three independent paired-by-design structural units in March-April 1973.
-3. **K_7 pack-pair completeness achieved single-pass at TRS M1 W2.** pack-09 functional analysis bound to K_6 with 14 new cross-pack edges (vs prior 8-per-pass average) — strongest binding density to date; confirms SUBSTRATE-COHERENCE-PREDICTS-CROSS-PACK-DENSITY at obs #4.
-4. **First multilateral-treaty preamble admitted to PLANETARY-PERSPECTIVE-AS-STEWARDSHIP-WARRANT register.** CITES preamble's "irreplaceable part of the natural systems of the earth" framing extends the warrant primitive from US-statutory (NEPA, MMPA) to multilateral-treaty register.
-5. **Fourth operational application of v603 track-card + nav-card BLOCKER gate.** All 8/8 Track cards + ≥1 nav-card present on NASA 1.85 — clean PASS.
+**First sister-mission paired-program-design-vindication ADMIT.** #10241 promoted to §6.6 LOCKED at 2-ex (Pioneer 10 v604 + Pioneer 11 v608). The pattern itself is a §6.6 register exemplar: pattern emerges, stays watchlist, second instance confirms, only then admit.
+**First 3-of-3 paired-architecture triplet within ±60d window.** Beatles paired-LP + CITES paired-list + Pioneer paired-flight — three independent paired-by-design structural units in March-April 1973.
+**K_7 pack-pair completeness achieved single-pass at TRS M1 W2.** pack-09 functional analysis bound to K_6 with 14 new cross-pack edges (vs prior 8-per-pass average) — strongest binding density to date; confirms SUBSTRATE-COHERENCE-PREDICTS-CROSS-PACK-DENSITY at obs #4.
+**First multilateral-treaty preamble admitted to PLANETARY-PERSPECTIVE-AS-STEWARDSHIP-WARRANT register.** CITES preamble's "irreplaceable part of the natural systems of the earth" framing extends the warrant primitive from US-statutory (NEPA, MMPA) to multilateral-treaty register.
+**Fourth operational application of v603 track-card + nav-card BLOCKER gate.** All 8/8 Track cards + ≥1 nav-card present on NASA 1.85 — clean PASS.
 
 ## Engine state at v608 close
 

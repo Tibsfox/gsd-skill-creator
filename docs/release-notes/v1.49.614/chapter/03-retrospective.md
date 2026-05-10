@@ -84,3 +84,11 @@ K_13 single-pass ACHIEVED — all 78 = C(13,2) pack-pair edges of foundational t
 - **Tri-form #10269 taxonomy with potential fourth-mode at non-spaceflight scale** — Fleetwood Mac multi-auteur-democratic-band suggests the parallel-daughter-primitive accumulation may not be regime-specific; might apply to any operator-substrate at sufficient scale.
 - **#10271 NEGATIVE-IN-LINEAR-FORM at obs#2** — anchor-density × same-day-density relationship is non-linear. Saturating/inverse hypothesis is the next refinement to test (more anchors does NOT mean more signals — possibly fewer per-anchor as anchor-density rises, suggesting attention/density inverse relationship).
 - **First multi-government substrate primitive ADMITTED** — opens future ASTP-lineage milestones (Mir-Shuttle 1995-1998 + ISS 1998-present + future joint missions) for cross-track substrate continuation.
+## Process observation and Drift
+
+- **Wave dispatch cadence:** W0 main-context + W1 research subagent + W2 build subagents (NASA serial-first then MUS+ELC+SPS parallel) — pattern held at v1.49.614
+- **Recovery hierarchy:** Tier-2 inline-Edit recovery applied if depth-audit FAIL — engine-cadence resilience pattern
+- **Cross-track read-discipline:** all sibling W1 drafts read before W2 build authoring — zero fabrication maintained at v1.49.614
+- **Pre-tag-gate composite:** 8/8 PASS gate held at v1.49.614 (build + vitest + completeness + CI-on-dev + www-bundles + depth-audit + CLAUDE.md + catalog-index)
+- **Drift detection:** post-ship RH refresh emitted advisory drift signal at v1.49.614 (active soak per FA-621 disposition)
+

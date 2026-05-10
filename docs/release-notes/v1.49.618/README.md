@@ -1,5 +1,16 @@
 # v1.49.618 — Voyager 2 Outer-Planets Grand Tour
 
+**Released:** 2026-05-08
+**Type:** Engine-cadence degree-advancing milestone (v604+ run)
+**NASA Mission:** Voyager 2 Outer-Planets Grand Tour
+**Predecessor:** v1.49.617
+**Mission package:** `.planning/missions/v1-49-618-voyager-2-outer-planets-grand-tour/`
+**Phases:** 6 (W0-W5 wave-pipeline: W0 version+brief / W1 research / W2 build / W3 recovery+catalog / W4 release-notes / W5 ship-pipeline)
+**Engine state:** NASA degree:: 1.94 → **1.95** + MUS degree:: 1.94 → **1.95** + ELC degree:: 1.94 → **1.95** + SPS species:: #91 → **#92** + TRS M1 W2:: pack-17 cryptography binding; +14 cross-pack edges
+
+## Summary
+
+
 **Engine-cadence degree-advancing milestone — fourteenth consecutive degree-advancing milestone in the v604+ run.** Voyager 2 (NSSDC 1977-076A) — **first and only spacecraft to complete close flyby of all four outer planets; only spacecraft ever to flyby Uranus + Neptune; substrate-archetype for grand-tour-class multi-planet trajectories exploiting rare planetary alignments**. Launched 1977-08-20 14:29:00 UTC from Cape Canaveral LC-41 atop Titan IIIE-Centaur (the same vehicle line that delivered HEAO-1 eight days earlier from an adjacent pad). 12-year primary mission Jupiter 1979-07-09 / Saturn 1981-08-26 / Uranus 1986-01-24 / Neptune 1989-08-25; Voyager Interstellar Mission 1989-present; heliopause crossing 2018-11-05 at 119.7 AU; current ~143 AU 2026 (~19.75 hr one-way light travel time). 12 instruments / 11 investigations under Bradford A. Smith (ISS) / Rudolf A. Hanel (IRIS) / A. Lyle Broadfoot (UVS) / Norman F. Ness (MAG) / Herbert S. Bridge (PLS) / Stamatios M. Krimigis (LECP) / Edward C. Stone (CRS + project scientist 1972-2022 50-year tenure). Voyager Golden Record cultural-payload-secondary-deliverable. **First fresh observatory→planetary regime-shift after v617 intra-regime second-instance**: observatory regime → outer-planets-grand-tour regime (#10269 obs#7 hold-test passes; tetra-form-plus-fifth-candidate taxonomy maintained). Six new substrate primitives admitted at v618: GRAND-TOUR-AS-SUBSTRATE-ARCHETYPE + CHRONOLOGICAL-VS-NUMERICAL-NAMING-INVERSION + TWIN-MISSION-PAIR-ARCHITECTURE + CULTURAL-PAYLOAD-AS-SECONDARY-DELIVERABLE + DECADAL-LATITUDE-OF-INVESTIGATOR + DEEP-SPACE-LATENCY-RETURNS.
 
 ## Engine state advances
@@ -9,6 +20,17 @@
 - **ELC degree:** 1.94 → **1.95** (UN Conference to Combat Desertification / UNCOD Nairobi 1977-08-29 → 1977-09-09 = Voyager 2 launch +9d boundary-edge sub-form per #10232 v615 LDC +10d precedent; PACD 28-priority framework; UNGA 32/172 endorsement 1977-12-19; **#10275 obs#2 post-ESTABLISHED reproducibility CONFIRMED** at international-multilateral-environmental-conference domain)
 - **SPS species:** #91 → **#92** (Coho Salmon *Oncorhynchus kisutch*; family Salmonidae; Order Salmoniformes; Class Actinopterygii; **first PNW salmonid in cohort substrate**; FIRST cross-Class Aves → Actinopterygii trophic edge in cohort; Bald Eagle #89 → Coho Salmon #92 confirmed predation edge; #10279 PAIRED-RECOVERY-PROGRAM obs#3 toward ESTABLISHED-promotion via Coho + Chinook ESA paired recovery)
 - **TRS M1 W2:** pack-17 cryptography binding; +14 cross-pack edges (197-210) → **210 total** / **K_17 SINGLE-PASS ACHIEVED** (all 136 = C(17,2) pack-pair edges of the seventeen-pack roster realized); pack-17 = bridge-category obs#5 (5-of-5 consecutive bridge-category packs) → **#10273 + #10274 post-ESTABLISHED reproducibility obs#2 CONFIRMED** at second consecutive CLEAN EXTENSION; **#10284 PROMOTE-TO-ESTABLISHED at v618 close** (definitional-DOMINANT bridge sub-types 2-of-2 confirmed at pack-16 + pack-17)
+
+
+## Key Features
+
+| Track | Detail |
+|-------|--------|
+| NASA | 1.94 → **1.95** (Voyager 2 / NSSDC 1977-076A / Smith-Hanel-Broadfoot-Ness-Bridge-Krimigis-Stone / Stone 50y project-scientist tenure / Titan IIIE-Centaur LC-41 / 1977-08-20 launch / Jupiter-Saturn-Uranus-Neptune grand to |
+| MUS | 1.94 → **1.95** (Motörhead self-titled debut / Chiswick WIK-2 / 1977-08-21 release = Voyager 2 launch +1d INSIDE strict ±8d; **#10232 obs#19 INSIDE-strict release-date primary anchor** — first INSIDE-strict release-date  |
+| ELC | 1.94 → **1.95** (UN Conference to Combat Desertification / UNCOD Nairobi 1977-08-29 → 1977-09-09 = Voyager 2 launch +9d boundary-edge sub-form per #10232 v615 LDC +10d precedent; PACD 28-priority framework; UNGA 32/172 e |
+| SPS | #91 → **#92** (Coho Salmon *Oncorhynchus kisutch*; family Salmonidae; Order Salmoniformes; Class Actinopterygii; **first PNW salmonid in cohort substrate**; FIRST cross-Class Aves → Actinopterygii trophic edge in cohort; |
+| TRS | pack-17 cryptography binding; +14 cross-pack edges (197-210) → **210 total** / **K_17 SINGLE-PASS ACHIEVED** (all 136 = C(17,2) pack-pair edges of the seventeen-pack roster realized); pack-17 = bridge-category obs#5 (5-o |
 
 ## v618 ESTABLISHED-promotions + post-ESTABLISHED hold-tests
 
@@ -49,3 +71,15 @@
 
 - Predecessor (immediate + degree-advancing): v1.49.617 HEAO-1 X-Ray All-Sky Survey.
 - Successor candidate: **v1.49.619 = Voyager 1 (NASA 1.96; 1977-09-05 launch chronologically second of Voyager pair; arrived at Jupiter first via faster JST trajectory)** — second-of-pair completion of TWIN-MISSION-PAIR architecture from Viking 1+2 → Voyager 1+2 generalization; first to reach interstellar 2012; substrate-coherence with v618 #10247 obs#11 cross-mission window overlap (Voyager 1 launch 1977-09-05 = Voyager 2 launch +16d OUTSIDE-strict but adjacent-cohort).
+
+## See also
+
+- Chapter contents: [00-summary](chapter/00-summary.md) · [03-retrospective](chapter/03-retrospective.md) · [04-lessons](chapter/04-lessons.md) · [99-context](chapter/99-context.md)
+
+## Build artifacts shipped
+
+- `www/tibsfox/com/Research/NASA/<degree>/` — index.html + 13-file artifact suite + 3 JSON files + forest-module
+- `www/tibsfox/com/Research/MUS/<degree>/` — index.html + artifact suite
+- `www/tibsfox/com/Research/ELC/<degree>/` — index.html + artifact suite
+- `www/tibsfox/com/Research/SPS/<species-slug>/` — index.html + artifact suite (audio + sims + anatomy + diagrams)
+- FTP sync to tibsfox.com via `npm run ftp-sync -- 1.<degree>` — typically 40-50 files / 1-2 MB

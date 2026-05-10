@@ -51,3 +51,11 @@ MISSION-BRIEF v613 §1 erroneously stated "v612 ELC = OPEC oil embargo". On-disk
 - **Substrate accumulation > substrate splitting** at #10269 obs#2 — the bidirectional regime-shift test produced parallel-daughter-primitive accumulation rather than substrate fragmentation. Future regime-shift soaks should explicitly enumerate sub-form distinctions as a third reading-option (alongside NEGATIVE-IN-REGIME-SHIFT and forward-generalization-holds).
 - **Same-day-calendar-coincidence density doubling** at #10247 obs#5+ — v613 produced two fresh same-day signals at one milestone, suggesting the substrate may be milestone-anchor-density-correlated (more anchor-events per milestone → more same-day chances).
 - **DESCRIPTION-VS-CHARACTERIZATION GAP at multi-register-spacings** — three independent gap instances surfaced across v613 cross-tracks (Mariner-10/Mercury-MF centuries / Marbled-Murrelet 1789→1974 185y / Red-Tree-Vole 1890→1966 76y). Substrate primitive worth tracking forward.
+## Process observation and Drift
+
+- **Wave dispatch cadence:** W0 main-context + W1 research subagent + W2 build subagents (NASA serial-first then MUS+ELC+SPS parallel) — pattern held at v1.49.613
+- **Recovery hierarchy:** Tier-2 inline-Edit recovery applied if depth-audit FAIL — engine-cadence resilience pattern
+- **Cross-track read-discipline:** all sibling W1 drafts read before W2 build authoring — zero fabrication maintained at v1.49.613
+- **Pre-tag-gate composite:** 8/8 PASS gate held at v1.49.613 (build + vitest + completeness + CI-on-dev + www-bundles + depth-audit + CLAUDE.md + catalog-index)
+- **Drift detection:** post-ship RH refresh emitted advisory drift signal at v1.49.613 (active soak per FA-621 disposition)
+

@@ -80,3 +80,38 @@
 **v1.49.628** — STS-2 Columbia 1981-11-12 (first reflight of a previously-flown orbital spacecraft; Columbia OV-102 second flight; commander Joe Engle + pilot Richard Truly; first test of Ku-band satellite communications + OSTA-1 payload including SIR-A Shuttle Imaging Radar; cut short to 54h 13m / 36 orbits from planned 5-day mission due to APU #1 failure; first reuse of a crewed orbital vehicle; = 1.104 if strict chronological order) as primary candidate. FA-627-7 carries the verify decision.
 
 Forward arc: **v1.49.626 SolarMax** (REPAIR-IN-ORBIT + SOLAR-OBSERVATORY + SINGLE-FORM + AMPHIBIA-AS-COHORT-NODE + EDDIE-THE-HEAD-MASCOT; K_24; FA-625-1/6/7 RESOLVED; seven-primitive lock; first dual-track Tier-2 recovery) → **v1.49.627 STS-1 Columbia** (CREWED-REUSABLE-ORBITAL-VEHICLE + WINGED-REENTRY + CREW-ON-FIRST-FLIGHT + APOLLO-MOONWALKER-AS-SHUTTLE-COMMANDER + SPS-DEGREE-100-K-BOUNDARY + MOLLUSCA-AS-COHORT-NODE + ALBUM-FORM-RESTORATION + MULTI-EVENT-COMPLEX + CURE-TRILOGY; K_25; FA-626-4/6/7 RESOLVED; #10289 ESTABLISHED; eight-or-more-primitive lock; 0 FAIL findings; cleanest milestone in current cohort) → **v1.49.628** (STS-2 Columbia 1981-11-12 = 1.104 candidate; FA-627-2 #10287 obs#10 toward 9-of-9 second-threshold; FA-627-6 TRS pack-26 mode-choice).
+## Cross-track structural pair anchor inventory
+
+- **NASA × MUS cross-track structural pair anchor:** STS-1 Columbia (NSSDC 1981-034A; OV-102 Columbia) (1.103) ↔ The Cure *Faith* (1.103) at v1.49.627
+- **NASA × ELC political-technical anchor pair:** STS-1 Columbia (NSSDC 1981-034A; OV-102 Columbia) (1.103) ↔ Reagan-Columbia Political-Technical Confidence Restoration Complex (1.103) at v1.49.627
+- **NASA × SPS biological-substrate anchor pair:** STS-1 Columbia (NSSDC 1981-034A; OV-102 Columbia) (1.103) ↔ Pacific Banana Slug (*Ariolimax columbianus*) (#100) at v1.49.627
+- **NASA × TRS formal-mathematics substrate anchor:** STS-1 Columbia (NSSDC 1981-034A; OV-102 Columbia) (1.103) ↔ dynamical systems / chaos theory binding (pack-25) at v1.49.627
+- **MUS × ELC cultural-political anchor pair:** The Cure *Faith* (1.103) ↔ Reagan-Columbia Political-Technical Confidence Restoration Complex (1.103) at v1.49.627
+- **MUS × SPS cultural-biological resonance pair:** The Cure *Faith* (1.103) ↔ Pacific Banana Slug (*Ariolimax columbianus*) (#100) at v1.49.627
+- **MUS × TRS compositional-mathematics resonance pair:** The Cure *Faith* (1.103) ↔ dynamical systems / chaos theory binding (pack-25) at v1.49.627
+- **ELC × SPS policy-biological anchor pair:** Reagan-Columbia Political-Technical Confidence Restoration Complex (1.103) ↔ Pacific Banana Slug (*Ariolimax columbianus*) (#100) at v1.49.627
+- **ELC × TRS policy-mathematics anchor pair:** Reagan-Columbia Political-Technical Confidence Restoration Complex (1.103) ↔ dynamical systems / chaos theory binding (pack-25) at v1.49.627
+- **SPS × TRS biological-mathematics resonance pair:** Pacific Banana Slug (*Ariolimax columbianus*) (#100) ↔ dynamical systems / chaos theory binding (pack-25) at v1.49.627
+- **Five-track convergence at v1.49.627:** NASA + MUS + ELC + SPS + TRS reproducibly-stable cross-track substrate alignment per #10242 ESTABLISHED reaffirm
+- **Cross-track read-discipline maintained:** zero fabrication across W2 builds; all sibling references sourced from W1 drafts per #10243 ESTABLISHED reaffirm
+- **Engine-cadence wave pipeline:** W0 version+brief → W1 research → W2 build (NASA serial-first then MUS+ELC+SPS parallel) → W3 recovery+catalog → W4 release-notes → W5 ship-pipeline; six-wave deterministic execution at v1.49.627
+- **Pre-tag-gate composite at v1.49.627:** 8/8 PASS gate held (build + vitest + completeness + CI-on-dev + www-bundles + depth-audit + CLAUDE.md + catalog-index) per #10244 ESTABLISHED counter-cadence pattern
+- **Substrate-coherence-predicts-cross-pack-density at v1.49.627:** TRS pack-pair completion confirms #10273 + #10274 + #10284 post-ESTABLISHED reproducibility holds
+## Cross-track structural pair anchor inventory
+
+- **NASA × MUS cross-track structural pair anchor:** STS-1 Columbia (NSSDC 1981-034A; OV-102 Columbia) (1.103) ↔ The Cure *Faith* (1.103) at v1.49.627
+- **NASA × ELC political-technical anchor pair:** STS-1 Columbia (NSSDC 1981-034A; OV-102 Columbia) (1.103) ↔ Reagan-Columbia Political-Technical Confidence Restoration Complex (1.103) at v1.49.627
+- **NASA × SPS biological-substrate anchor pair:** STS-1 Columbia (NSSDC 1981-034A; OV-102 Columbia) (1.103) ↔ Pacific Banana Slug (*Ariolimax columbianus*) (#100) at v1.49.627
+- **NASA × TRS formal-mathematics substrate anchor:** STS-1 Columbia (NSSDC 1981-034A; OV-102 Columbia) (1.103) ↔ dynamical systems / chaos theory binding (pack-25) at v1.49.627
+- **MUS × ELC cultural-political anchor pair:** The Cure *Faith* (1.103) ↔ Reagan-Columbia Political-Technical Confidence Restoration Complex (1.103) at v1.49.627
+- **MUS × SPS cultural-biological resonance pair:** The Cure *Faith* (1.103) ↔ Pacific Banana Slug (*Ariolimax columbianus*) (#100) at v1.49.627
+- **MUS × TRS compositional-mathematics resonance pair:** The Cure *Faith* (1.103) ↔ dynamical systems / chaos theory binding (pack-25) at v1.49.627
+- **ELC × SPS policy-biological anchor pair:** Reagan-Columbia Political-Technical Confidence Restoration Complex (1.103) ↔ Pacific Banana Slug (*Ariolimax columbianus*) (#100) at v1.49.627
+- **ELC × TRS policy-mathematics anchor pair:** Reagan-Columbia Political-Technical Confidence Restoration Complex (1.103) ↔ dynamical systems / chaos theory binding (pack-25) at v1.49.627
+- **SPS × TRS biological-mathematics resonance pair:** Pacific Banana Slug (*Ariolimax columbianus*) (#100) ↔ dynamical systems / chaos theory binding (pack-25) at v1.49.627
+- **Five-track convergence at v1.49.627:** NASA + MUS + ELC + SPS + TRS reproducibly-stable cross-track substrate alignment per #10242 ESTABLISHED reaffirm
+- **Cross-track read-discipline maintained:** zero fabrication across W2 builds; all sibling references sourced from W1 drafts per #10243 ESTABLISHED reaffirm
+- **Engine-cadence wave pipeline:** W0 version+brief → W1 research → W2 build (NASA serial-first then MUS+ELC+SPS parallel) → W3 recovery+catalog → W4 release-notes → W5 ship-pipeline; six-wave deterministic execution at v1.49.627
+- **Pre-tag-gate composite at v1.49.627:** 8/8 PASS gate held (build + vitest + completeness + CI-on-dev + www-bundles + depth-audit + CLAUDE.md + catalog-index) per #10244 ESTABLISHED counter-cadence pattern
+- **Substrate-coherence-predicts-cross-pack-density at v1.49.627:** TRS pack-pair completion confirms #10273 + #10274 + #10284 post-ESTABLISHED reproducibility holds
+

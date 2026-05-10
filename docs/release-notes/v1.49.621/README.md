@@ -1,5 +1,16 @@
 # v1.49.621 — SCRIBE Build-Out (counter-cadence)
 
+**Released:** 2026-05-09
+**Type:** Engine-cadence degree-advancing milestone (v604+ run)
+**NASA Mission:** SCRIBE Build-Out (counter-cadence)
+**Predecessor:** v1.49.620
+**Mission package:** `.planning/missions/v1-49-621-scribe-build-out-counter-cadence/`
+**Phases:** 6 (W0-W5 wave-pipeline: W0 version+brief / W1 research / W2 build / W3 recovery+catalog / W4 release-notes / W5 ship-pipeline)
+**Engine state:** NASA degree:: 1.92 → **1.92 + MUS degree:: unchanged + ELC degree:: unchanged + SPS species:: unchanged + Seattle 360:: 57/360 + SCRIBE foundational chipset:: newly shipped at `cartridges/foundational/scribe/` + Public deployment:: 12 SCRIBE files + Test count:: 21,298 baseline → +95 SCRIBE
+
+## Summary
+
+
 **Counter-cadence operational milestone — NASA degree stays at 1.92** (predecessor v1.49.620 Pioneer Venus 1 closed the previous degree-advancing cycle; v1.49.621 ships substrate work without advancing NASA / MUS / ELC / SPS / Seattle 360). This is the **substrate-continuity thesis** instantiated at the operational layer: 5 SCRIBE track cartridges (T1 markup-lineage, T2 svg-substrate, T3 code-svg-hdl-bridge, T4 dashboard-lod-rendering, T5 retrieval-provenance) compose into **one foundational chipset** at the first-of-its-kind `cartridges/foundational/scribe/` directory. 24 already-shipped Part-1 capabilities + 16 newly-wired Part-2 capabilities = **40 of 47 SCRIBE capabilities live**; 4 explicit deferrals (CAP-024 Tauri-native, CAP-046 chip-as-document silicon, CAP-047 Lean formal verification, CAP-041 viewer-embed) + 3 light/partial classifications (CAP-040, CAP-021, CAP-019 reclassified to runtime). 9 source components + 1 verification component shipped across 4 waves; ~16% of fleet token ceiling spent.
 
 ## Engine state advances
@@ -12,6 +23,20 @@
 - **SCRIBE foundational chipset:** newly shipped at `cartridges/foundational/scribe/` (manifest declares `composes: [code-svg-hdl-bridge, dashboard-lod-rendering, markup-lineage, retrieval-provenance, svg-substrate]`)
 - **Public deployment:** 12 SCRIBE files (369,668 bytes) live at https://tibsfox.com/Research/SCRIBE/ (5/5 HTTPS verification probes 200)
 - **Test count:** 21,298 baseline → +95 SCRIBE (Waves 1-3) + 44 integration/substrate (Wave 4 Component 09) = SCRIBE suite at 255 pass / 17 skip / 0 fail across 26 test files
+
+
+## Key Features
+
+| Track | Detail |
+|-------|--------|
+| NASA | 1.92 → **1.92 (UNCHANGED)** — counter-cadence; no degree advance this milestone |
+| MUS | unchanged |
+| ELC | unchanged |
+| SPS | unchanged |
+| Seattle | 57/360 (paused, unchanged) |
+| SCRIBE | newly shipped at `cartridges/foundational/scribe/` (manifest declares `composes: [code-svg-hdl-bridge, dashboard-lod-rendering, markup-lineage, retrieval-provenance, svg-substrate]`) |
+| Public | 12 SCRIBE files (369,668 bytes) live at https://tibsfox.com/Research/SCRIBE/ (5/5 HTTPS verification probes 200) |
+| Test | 21,298 baseline → +95 SCRIBE (Waves 1-3) + 44 integration/substrate (Wave 4 Component 09) = SCRIBE suite at 255 pass / 17 skip / 0 fail across 26 test files |
 
 ## Cross-track
 
@@ -47,3 +72,15 @@ conservative; tune downward in next mission spec.
 - [chapter/03-retrospective.md](chapter/03-retrospective.md) — carryover lessons applied + new lessons captured
 - [chapter/04-lessons.md](chapter/04-lessons.md) — forward lessons emitted
 - [chapter/99-context.md](chapter/99-context.md) — engine-state tables
+
+## See also
+
+- Chapter contents: [00-summary](chapter/00-summary.md) · [03-retrospective](chapter/03-retrospective.md) · [04-lessons](chapter/04-lessons.md) · [99-context](chapter/99-context.md)
+
+## Build artifacts shipped
+
+- `www/tibsfox/com/Research/NASA/<degree>/` — index.html + 13-file artifact suite + 3 JSON files + forest-module
+- `www/tibsfox/com/Research/MUS/<degree>/` — index.html + artifact suite
+- `www/tibsfox/com/Research/ELC/<degree>/` — index.html + artifact suite
+- `www/tibsfox/com/Research/SPS/<species-slug>/` — index.html + artifact suite (audio + sims + anatomy + diagrams)
+- FTP sync to tibsfox.com via `npm run ftp-sync -- 1.<degree>` — typically 40-50 files / 1-2 MB

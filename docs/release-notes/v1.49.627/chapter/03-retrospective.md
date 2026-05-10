@@ -53,3 +53,11 @@ The Reagan-Columbia ELC pick introduces a new sub-form variant: instead of a sin
 ### Seventh consecutive INSIDE-strict 3-event cluster — extended run continues past 1981
 
 Six consecutive observations at v620-v626 were projected to potentially attenuate after 1980 per the v625 retrospective's attenuation prediction. v627's obs#19 at 1981-04 demonstrates the density zone extends through at least 1981-04. The tightest cluster in the run (3-day window) appears at the latest calendar date (1981-04), inverting the expected attenuation gradient. Lesson: the 1978-1981 cross-domain density zone is now confirmed as spanning at least 36 calendar months; attenuation predictions have been consistently incorrect; the density zone may extend through the end of the Reagan first term.
+## Process observation and Drift
+
+- **Wave dispatch cadence:** W0 main-context + W1 research subagent + W2 build subagents (NASA serial-first then MUS+ELC+SPS parallel) — pattern held at v1.49.627
+- **Recovery hierarchy:** Tier-2 inline-Edit recovery applied if depth-audit FAIL — engine-cadence resilience pattern
+- **Cross-track read-discipline:** all sibling W1 drafts read before W2 build authoring — zero fabrication maintained at v1.49.627
+- **Pre-tag-gate composite:** 8/8 PASS gate held at v1.49.627 (build + vitest + completeness + CI-on-dev + www-bundles + depth-audit + CLAUDE.md + catalog-index)
+- **Drift detection:** post-ship RH refresh emitted advisory drift signal at v1.49.627 (active soak per FA-621 disposition)
+

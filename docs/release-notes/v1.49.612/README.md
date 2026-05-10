@@ -1,5 +1,16 @@
 # v1.49.612 — Mariner 10 First Mercury Flyby
 
+**Released:** 2026-05-07
+**Type:** Engine-cadence degree-advancing milestone (v604+ run)
+**NASA Mission:** Mariner 10 First Mercury Flyby
+**Predecessor:** v1.49.611
+**Mission package:** `.planning/missions/v1-49-612-mariner-10-first-mercury-flyby/`
+**Phases:** 6 (W0-W5 wave-pipeline: W0 version+brief / W1 research / W2 build / W3 recovery+catalog / W4 release-notes / W5 ship-pipeline)
+**Engine state:** NASA degree:: 1.88 → **1.89** + MUS degree:: 1.88 → **1.89** + ELC degree:: 1.88 → **1.89** + SPS species:: #85 → **#86** + TRS M1 W2:: pack-08 combinatorics bound; +14 cross-pack edges → **126 total** / **K_11 pack-pair completeness ACHIEVED** with **7 substrate-bridges to pack-10**
+
+## Summary
+
+
 **Engine-cadence degree-advancing milestone — eighth consecutive degree-advancing milestone in the v604+ run.** Mariner 10 (NSSDC 1973-085A) — first Mercury flyby, first Venus gravity assist, first dual-planet mission. Atlas-Centaur AC-34 launched 1973-11-03 05:45 UTC from Cape Canaveral LC-36B with **Bruce Murray** (Caltech imaging team / later JPL Director 1976-1982 / Planetary Society co-founder 1980), **Norman Ness** (GSFC magnetometer-PI; first detection of Mercury's intrinsic magnetic field), and **James A. Dunne** (project scientist; SP-424 historiographer) as principal investigators. Venus flyby 1974-02-05 (5,768 km closest approach; first gravity-assist from inner planet trajectory). Three Mercury encounters: I-1974-03-29 (703 km altitude / 327 K dayside / dark hemisphere mapping) + II-1974-09-21 (48,069 km / equatorial-imaging gap-fill) + III-1975-03-16 (327 km closest passage; magnetic-field intrinsic-dipole confirmation). Mission close 1975-03-24 (attitude-control fuel exhaustion; spacecraft remains in heliocentric orbit). 12,000+ images returned; 45% of Mercury's surface mapped at <1 km/pixel; intrinsic magnetic field 1.1% of Earth's discovered against pre-flight Mariner 9 prediction of zero field.
 
 ## Engine state advances
@@ -9,6 +20,17 @@
 - **ELC degree:** 1.88 → **1.89** (Endangered Species Act 1973 / PL 93-205 / signed 1973-12-28 by Nixon at San Clemente / Senate 92-0 / House 390-12; founds federal Threatened/Endangered listing framework; supersedes 1966 ESPA + 1969 ESCA; codifies "critical habitat" doctrine that v603+ NASA-OBLIGATE cohort depends on)
 - **SPS species:** #85 → **#86** (Northern Flying Squirrel *Glaucomys sabrinus* with 2017 *G. oregonensis* species-split; family Sciuridae; Order Rodentia — second mammalian Order after v611 Mustelidae; SINGLE-SPECIES 3-COHORT-EDGE TROPHIC DENSITY)
 - **TRS M1 W2:** pack-08 combinatorics bound; +14 cross-pack edges → **126 total** / **K_11 pack-pair completeness ACHIEVED** with **7 substrate-bridges to pack-10** (Schubert calculus IS Grassmannian cohomology categorical-identity; Young-tableau Littlewood-Richardson rule = Schubert intersection numbers; q-binomial point counts ↔ Plücker quadric flag-variety enumeration; partition-poset dominance ↔ Bruhat order; symmetric-functions Hall inner product ↔ Schubert duality pairing; RSK correspondence ↔ permutation-matroid stratification; matroid lattice rank ↔ Grassmannian Plücker dimension)
+
+
+## Key Features
+
+| Track | Detail |
+|-------|--------|
+| NASA | 1.88 → **1.89** (Mariner 10 / Murray-Ness-Dunne PI cohort / AC-34 1973-11-03 → 1975-03-24; first dual-planet mission; 16-month cruise + 17-month operational science phase) |
+| MUS | 1.88 → **1.89** (The Who *Quadrophenia* / Track 2657 013 US release 1973-10-26 = launch -8d EXACT BOUNDARY EDGE INSIDE; Townshend composer-conceptualist; Glyn Johns + Townshend co-production; Battersea Ramport Studios 19 |
+| ELC | 1.88 → **1.89** (Endangered Species Act 1973 / PL 93-205 / signed 1973-12-28 by Nixon at San Clemente / Senate 92-0 / House 390-12; founds federal Threatened/Endangered listing framework; supersedes 1966 ESPA + 1969 ESCA |
+| SPS | #85 → **#86** (Northern Flying Squirrel *Glaucomys sabrinus* with 2017 *G. oregonensis* species-split; family Sciuridae; Order Rodentia — second mammalian Order after v611 Mustelidae; SINGLE-SPECIES 3-COHORT-EDGE TROPHIC |
+| TRS | pack-08 combinatorics bound; +14 cross-pack edges → **126 total** / **K_11 pack-pair completeness ACHIEVED** with **7 substrate-bridges to pack-10** (Schubert calculus IS Grassmannian cohomology categorical-identity; You |
 
 ## Three ESTABLISHED-target promotions triggered at v612 — reproduces v611's 3-promotion density (#10267 obs#2 TRIGGERED)
 
@@ -52,3 +74,15 @@
 
 - Predecessor (immediate + degree-advancing): v1.49.611 Skylab 3 First Long-Duration Crewed Mission.
 - Successor candidate: **v1.49.613 = Skylab 4 (NASA 1.90; 84-day US endurance record; Comet Kohoutek primary-anchor cross-track-direct; 1973-11-16 launch)** per FA-611-6 continue-engine-cadence decision.
+
+## See also
+
+- Chapter contents: [00-summary](chapter/00-summary.md) · [03-retrospective](chapter/03-retrospective.md) · [04-lessons](chapter/04-lessons.md) · [99-context](chapter/99-context.md)
+
+## Build artifacts shipped
+
+- `www/tibsfox/com/Research/NASA/<degree>/` — index.html + 13-file artifact suite + 3 JSON files + forest-module
+- `www/tibsfox/com/Research/MUS/<degree>/` — index.html + artifact suite
+- `www/tibsfox/com/Research/ELC/<degree>/` — index.html + artifact suite
+- `www/tibsfox/com/Research/SPS/<species-slug>/` — index.html + artifact suite (audio + sims + anatomy + diagrams)
+- FTP sync to tibsfox.com via `npm run ftp-sync -- 1.<degree>` — typically 40-50 files / 1-2 MB

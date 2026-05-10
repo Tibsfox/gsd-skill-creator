@@ -41,7 +41,7 @@ Unlike v604/v606/v608 where one or more Sonnet subagents stalled at long Writes 
 
 Total W2 wall: ~57 min (NASA serial 41 min + parallel-cohort longest at ~16 min). The chunked discipline made parallelism reliable; v608's W2 wall was ~120 min including stall recovery, so v609 is 2.1× faster despite same scope.
 
-## Process observations
+## Process observation and Drift
 
 1. **Catalog-index update is a 2-tool dance.** NASA auto-update via `update-catalog-indexes.mjs --write` is mechanical. MUS+ELC require manual degree-card authoring (the tool refuses to invent narrative). Cycle time ~5 min when patterns are clear; the v1.85 cards are good templates because they encode soak-observation tracking discipline directly into the meta strings.
 2. **§6.6 admit density at v609 was lower than v608 (3 admits vs 4)** but the admits were higher-quality: SUBSTRATE-COHERENCE-PREDICTS-CROSS-PACK-DENSITY ESTABLISHED at obs#5 is the strongest possible evidence chain for that primitive (both v608 K_7 and v609 K_8 reproduced single-pass cadence); 3-ex SISTER-COHORT extends the v608 2-ex PAIRED admit with a third independent taxonomic class; 4-ex PLANETARY-PERSPECTIVE-AS-STEWARDSHIP-WARRANT extension brings the chain to four substrate-coherent observations across two-year envelope.

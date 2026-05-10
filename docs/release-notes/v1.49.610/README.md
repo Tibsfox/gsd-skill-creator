@@ -1,5 +1,16 @@
 # v1.49.610 — Skylab 2 First Crewed Station Mission + Rescue Completion
 
+**Released:** 2026-05-06
+**Type:** Engine-cadence degree-advancing milestone (v604+ run)
+**NASA Mission:** Skylab 2 First Crewed Station Mission + Rescue Completion
+**Predecessor:** v1.49.609
+**Mission package:** `.planning/missions/v1-49-610-skylab-2-first-crewed-station-mission-rescue-compl/`
+**Phases:** 6 (W0-W5 wave-pipeline: W0 version+brief / W1 research / W2 build / W3 recovery+catalog / W4 release-notes / W5 ship-pipeline)
+**Engine state:** NASA degree:: 1.86 → **1.87** + MUS degree:: 1.86 → **1.87** + ELC degree:: 1.86 → **1.87** + SPS species:: #83 → **#84** + TRS M1 W2:: pack-10 projective geometry bound; +14 cross-pack edges → **98 total** / **K_9 pack-pair completeness ACHIEVED** with **5 substrate-bridges to pack-03**
+
+## Summary
+
+
 **Engine-cadence degree-advancing milestone.** Skylab 2 (SL-2 / NSSDC 1973-032A) — first crewed mission to Skylab and rescue completion of v609 launch arc. Saturn IB SA-206 launched 1973-05-25 13:00 UTC from KSC LC-39B "milkstool" with Pete Conrad (CDR; Apollo 12 Moonwalker) + Joseph Kerwin (Science Pilot; **first US physician in space**) + Paul Weitz (Pilot). Stand-up EVA hooked-rod attempt failed; hard-dock 1973-05-26 03:50 UTC after 5 attempts; **parasol sunshield deployment 1973-05-26 15:38 UTC** via T-handle through MDA scientific airlock dropped interior temperature 38°C→24°C; **EVA 1973-06-07** Conrad+Kerwin freed jammed solar array #1 via 25-foot pole + ratchet + cable-cutter (Marshall-engineered) restoring full ~7 kW power. Mission close 1973-06-22 splashdown 9.6 km from USS Ticonderoga; **28d 0h 49m 49s — longest US mission to date.** The architecture v609 introduced as theoretical-by-engineering is here vindicated by execution: real humans, real EVA tools, real success. Pre-Shuttle / pre-Mir / pre-ISS lineage gets its operational anchor.
 
 ## Engine state advances
@@ -9,6 +20,17 @@
 - **ELC degree:** 1.86 → **1.87** (Skylab 2 Biomedical Program & Aerospace Medicine; Kerwin first US physician in space; M-series experiments [M092 LBNP / M093 VCG / M131 Vestibular / M171 Metabolic / M073 Bioassay]; IFMSS 1300+ item orbital clinic + first orbital dental kit; SMEAT 1972 56-day altitude-chamber ground baseline; canonical reference NASA SP-377)
 - **SPS species:** #83 → **#84** (American Goshawk *Astur atricapillus* — 2023 AOS species split + 2024 NACC *Astur* generic move; PNW subspecies *A. a. laingi* Queen Charlotte Goshawk COSEWIC-Threatened SARA Recovery Strategy 2018; talons-as-precision-tools strike-and-pin biomechanics; female-as-fierce-defender)
 - **TRS M1 W2:** pack-10 projective geometry bound; +14 cross-pack edges → **98 total** / **K_9 pack-pair completeness ACHIEVED** with **5 substrate-bridges to pack-03** (Proj-functor / Veronese embedding / Plücker coordinates / projective Hilbert space / Schubert calculus) — exceeds v609's 4 bridges to pack-02
+
+
+## Key Features
+
+| Track | Detail |
+|-------|--------|
+| NASA | 1.86 → **1.87** (Skylab 2 / Conrad/Kerwin/Weitz / SA-206 1973-05-25) |
+| MUS | 1.86 → **1.87** (George Harrison *Living in the Material World* / Apple SMAS-3410 US 1973-05-30 / UK PAS 10006 1973-06-22; producer George Harrison sole post-Spector; engineer Phil McDonald; recorded Oct 1972 - Mar 1973  |
+| ELC | 1.86 → **1.87** (Skylab 2 Biomedical Program & Aerospace Medicine; Kerwin first US physician in space; M-series experiments [M092 LBNP / M093 VCG / M131 Vestibular / M171 Metabolic / M073 Bioassay]; IFMSS 1300+ item orbi |
+| SPS | #83 → **#84** (American Goshawk *Astur atricapillus* — 2023 AOS species split + 2024 NACC *Astur* generic move; PNW subspecies *A. a. laingi* Queen Charlotte Goshawk COSEWIC-Threatened SARA Recovery Strategy 2018; talons |
+| TRS | pack-10 projective geometry bound; +14 cross-pack edges → **98 total** / **K_9 pack-pair completeness ACHIEVED** with **5 substrate-bridges to pack-03** (Proj-functor / Veronese embedding / Plücker coordinates / projecti |
 
 ## Headline structural firsts at v610
 
@@ -42,3 +64,15 @@
 
 - Predecessor (immediate + degree-advancing): v1.49.609 Skylab Station Launch.
 - Successor candidate: **v1.49.611 = Skylab 3 (NASA 1.88; Bean/Garriott/Lousma 1973-07-28 launch + 59-day mission)** per FA-609-6 continue-engine-cadence decision.
+
+## See also
+
+- Chapter contents: [00-summary](chapter/00-summary.md) · [03-retrospective](chapter/03-retrospective.md) · [04-lessons](chapter/04-lessons.md) · [99-context](chapter/99-context.md)
+
+## Build artifacts shipped
+
+- `www/tibsfox/com/Research/NASA/<degree>/` — index.html + 13-file artifact suite + 3 JSON files + forest-module
+- `www/tibsfox/com/Research/MUS/<degree>/` — index.html + artifact suite
+- `www/tibsfox/com/Research/ELC/<degree>/` — index.html + artifact suite
+- `www/tibsfox/com/Research/SPS/<species-slug>/` — index.html + artifact suite (audio + sims + anatomy + diagrams)
+- FTP sync to tibsfox.com via `npm run ftp-sync -- 1.<degree>` — typically 40-50 files / 1-2 MB

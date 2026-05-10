@@ -7,7 +7,7 @@ Counter-cadence. No NASA/MUS/ELC/SPS/TRS engine advance.
 
 ## Structural firsts
 
-1. **First ADR-as-CI-gate** — `tools/atlas-deps-audit.mjs` operationalises ADR 0003 (clean-room
+**First ADR-as-CI-gate.** `tools/atlas-deps-audit.mjs` operationalises ADR 0003 (clean-room
    policy) as a runnable enforcement tool.  This is the first milestone where an ADR's policy
    constraint is verified mechanically at every run rather than by prose review alone.
 
@@ -15,7 +15,7 @@ Counter-cadence. No NASA/MUS/ELC/SPS/TRS engine advance.
    #10222 reaffirmation) — the W0–W4 wave structure was dispatched from a single mission package
    staging document.  Each wave executed against a known-good prior wave tip.
 
-3. **Clean-room rendering primitives as new substrate** — five independent algorithm
+**Clean-room rendering primitives as new substrate.** five independent algorithm
    implementations shipped across W0.5: graph-renderer (Fruchterman–Reingold force layout +
    quadtree Barnes-Hut + viewport pan/zoom), pack-layout (Wang-Wang circle-pack + Reingold-Tilford
    tree + smallest-enclosing-circle), scales+sankey (linear/log/time scales + Heckbert ticks +
@@ -23,12 +23,12 @@ Counter-cadence. No NASA/MUS/ELC/SPS/TRS engine advance.
    search/trigram (TrigramIndex + query engine + highlighter).  Zero external runtime deps added
    (ADR 0003 clean-room; baseline package.json unchanged at 27 runtime deps).
 
-4. **Migration 003 as third additive SQLite migration** — `003_atlas_symbols.sql` extends the
+**Migration 003 as third additive SQLite migration.** `003_atlas_symbols.sql` extends the
    Intelligence KB schema with `atlas_symbols`, `atlas_call_edges`, `atlas_type_relations`, and
    `atlas_file_index` tables.  The migration is additive-only (no DROP, no ALTER on existing
    columns), matching the ADR 0002 dual-impl precedence contract.
 
-5. **117 new TypeScript files, ~370 new atlas-specific tests** — the largest single-milestone
+**117 new TypeScript files, ~370 new atlas-specific tests.** the largest single-milestone
    code surface since the artemis-ii memory arena (M1-M13, ~15,575 Rust lines).
 
 ## Engine state at v607 close

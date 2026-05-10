@@ -27,3 +27,11 @@
 - **Pre-existing-failure resolution via WAVE-4-AUDIT discovery.** The "test fix was reverted out-of-band" claim in the operator brief was investigated by the audit; the fix was actually IN the working tree, uncommitted, and passing 105/105. Option (i) (commit the existing diff) replaced the planned Option (ii) (author proper unified-chipset format for the 5 cartridges) and dropped a deferred follow-on milestone of work.
 - **Component 08 deployment evidence preserved at DEPLOYMENT-LOG-v1.49.621.md.** The 12 file / 369,668-byte manifest + 5/5 HTTPS probe results gave Component 09 evidence cells in VERIFICATION-MATRIX without re-running the deploy.
 - **Test suite stability.** SCRIBE went from 211 → 255 passing tests with 0 regressions; the full repo vitest run also stayed clean. The substrate frozen by Component 00 held across all 8 downstream consumers.
+## Process observation and Drift
+
+- **Wave dispatch cadence:** W0 main-context + W1 research subagent + W2 build subagents (NASA serial-first then MUS+ELC+SPS parallel) — pattern held at v1.49.621
+- **Recovery hierarchy:** Tier-2 inline-Edit recovery applied if depth-audit FAIL — engine-cadence resilience pattern
+- **Cross-track read-discipline:** all sibling W1 drafts read before W2 build authoring — zero fabrication maintained at v1.49.621
+- **Pre-tag-gate composite:** 8/8 PASS gate held at v1.49.621 (build + vitest + completeness + CI-on-dev + www-bundles + depth-audit + CLAUDE.md + catalog-index)
+- **Drift detection:** post-ship RH refresh emitted advisory drift signal at v1.49.621 (active soak per FA-621 disposition)
+

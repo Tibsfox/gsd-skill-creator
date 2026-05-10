@@ -80,3 +80,38 @@
 **v1.49.629** — STS-3 Columbia 1982-03-22 (OV-102 Columbia third flight; commander Jack Lousma + pilot Gordon Fullerton [MOL-transferee; third MOL-pilot to fly]; first all-reused-component Shuttle mission; first White Sands New Mexico landing; Canadarm RMS science-support operations; OSS-1 payload; landed White Sands Missile Range 1982-03-30 due to Edwards flooding) as primary candidate. FA-628-7 carries the verify decision. MOL-transferee Fullerton at STS-3 would trigger **#10326 MOL-TRANSFEREE-AS-PROGRAM-CONTINUITY obs#2** and continue the **#10287 DIRECT-ORDER 10-of-10 second-confirmation-threshold** evaluation (FA-628-2 active soak → FA-628-4 DECISION).
 
 Forward arc: **v1.49.627 STS-1 Columbia** (CREWED-REUSABLE-ORBITAL-VEHICLE + WINGED-REENTRY + CREW-ON-FIRST-FLIGHT + APOLLO-MOONWALKER-AS-SHUTTLE-COMMANDER + SPS-DEGREE-100-K-BOUNDARY + MOLLUSCA-AS-COHORT-NODE + ALBUM-FORM-RESTORATION + MULTI-EVENT-COMPLEX + CURE-TRILOGY; K_25; FA-626-4/6/7 RESOLVED; #10289 ESTABLISHED; eight-or-more-primitive lock; 0 FAIL findings; cleanest milestone in cohort) → **v1.49.628 STS-2 Columbia** (REUSE-OF-CREWED-ORBITAL-SPACECRAFT + REMOTE-MANIPULATOR-SYSTEM + SRB-REUSE + MISSION-TRUNCATION + APOLLO-BACKUP-AS-PRIMARY-CREW + MOL-TRANSFEREE-AS-PILOT + CORVID-AS-COHORT-NODE + DUAL-ANCHOR-SAME-DAY-LANDING + CREW-REUSE-AS-DELIVERABLE + ARCHITECTURE-AS-DELIVERABLE; K_26; FA-627-6/7 RESOLVED; ten-primitive lock; Tier-2 recovery TENTH cumulative; #10247 obs#20 DUAL-ANCHOR confirmed) → **v1.49.629** (STS-3 Columbia 1982-03-22 = 1.105 candidate; FA-628-2 #10287 obs#11 toward 10-of-10 second-threshold; FA-628-4 DECISION; FA-628-6 TRS pack-27 mode-choice; #10324 MULTI-EVENT-COMPLEX ESTABLISHED-evaluation).
+## Cross-track structural pair anchor inventory
+
+- **NASA × MUS cross-track structural pair anchor:** STS-2 Columbia (NSSDC 1981-110A; OV-102 Columbia 2nd flight) (1.104) ↔ OMD *Architecture & Morality* (1.104) at v1.49.628
+- **NASA × ELC political-technical anchor pair:** STS-2 Columbia (NSSDC 1981-110A; OV-102 Columbia 2nd flight) (1.104) ↔ Double Eagle V Pacific Balloon Crossing (1.104) at v1.49.628
+- **NASA × SPS biological-substrate anchor pair:** STS-2 Columbia (NSSDC 1981-110A; OV-102 Columbia 2nd flight) (1.104) ↔ Steller's Jay (*Cyanocitta stelleri*) (#101) at v1.49.628
+- **NASA × TRS formal-mathematics substrate anchor:** STS-2 Columbia (NSSDC 1981-110A; OV-102 Columbia 2nd flight) (1.104) ↔ category theory binding (pack-26) at v1.49.628
+- **MUS × ELC cultural-political anchor pair:** OMD *Architecture & Morality* (1.104) ↔ Double Eagle V Pacific Balloon Crossing (1.104) at v1.49.628
+- **MUS × SPS cultural-biological resonance pair:** OMD *Architecture & Morality* (1.104) ↔ Steller's Jay (*Cyanocitta stelleri*) (#101) at v1.49.628
+- **MUS × TRS compositional-mathematics resonance pair:** OMD *Architecture & Morality* (1.104) ↔ category theory binding (pack-26) at v1.49.628
+- **ELC × SPS policy-biological anchor pair:** Double Eagle V Pacific Balloon Crossing (1.104) ↔ Steller's Jay (*Cyanocitta stelleri*) (#101) at v1.49.628
+- **ELC × TRS policy-mathematics anchor pair:** Double Eagle V Pacific Balloon Crossing (1.104) ↔ category theory binding (pack-26) at v1.49.628
+- **SPS × TRS biological-mathematics resonance pair:** Steller's Jay (*Cyanocitta stelleri*) (#101) ↔ category theory binding (pack-26) at v1.49.628
+- **Five-track convergence at v1.49.628:** NASA + MUS + ELC + SPS + TRS reproducibly-stable cross-track substrate alignment per #10242 ESTABLISHED reaffirm
+- **Cross-track read-discipline maintained:** zero fabrication across W2 builds; all sibling references sourced from W1 drafts per #10243 ESTABLISHED reaffirm
+- **Engine-cadence wave pipeline:** W0 version+brief → W1 research → W2 build (NASA serial-first then MUS+ELC+SPS parallel) → W3 recovery+catalog → W4 release-notes → W5 ship-pipeline; six-wave deterministic execution at v1.49.628
+- **Pre-tag-gate composite at v1.49.628:** 8/8 PASS gate held (build + vitest + completeness + CI-on-dev + www-bundles + depth-audit + CLAUDE.md + catalog-index) per #10244 ESTABLISHED counter-cadence pattern
+- **Substrate-coherence-predicts-cross-pack-density at v1.49.628:** TRS pack-pair completion confirms #10273 + #10274 + #10284 post-ESTABLISHED reproducibility holds
+## Cross-track structural pair anchor inventory
+
+- **NASA × MUS cross-track structural pair anchor:** STS-2 Columbia (NSSDC 1981-110A; OV-102 Columbia 2nd flight) (1.104) ↔ OMD *Architecture & Morality* (1.104) at v1.49.628
+- **NASA × ELC political-technical anchor pair:** STS-2 Columbia (NSSDC 1981-110A; OV-102 Columbia 2nd flight) (1.104) ↔ Double Eagle V Pacific Balloon Crossing (1.104) at v1.49.628
+- **NASA × SPS biological-substrate anchor pair:** STS-2 Columbia (NSSDC 1981-110A; OV-102 Columbia 2nd flight) (1.104) ↔ Steller's Jay (*Cyanocitta stelleri*) (#101) at v1.49.628
+- **NASA × TRS formal-mathematics substrate anchor:** STS-2 Columbia (NSSDC 1981-110A; OV-102 Columbia 2nd flight) (1.104) ↔ category theory binding (pack-26) at v1.49.628
+- **MUS × ELC cultural-political anchor pair:** OMD *Architecture & Morality* (1.104) ↔ Double Eagle V Pacific Balloon Crossing (1.104) at v1.49.628
+- **MUS × SPS cultural-biological resonance pair:** OMD *Architecture & Morality* (1.104) ↔ Steller's Jay (*Cyanocitta stelleri*) (#101) at v1.49.628
+- **MUS × TRS compositional-mathematics resonance pair:** OMD *Architecture & Morality* (1.104) ↔ category theory binding (pack-26) at v1.49.628
+- **ELC × SPS policy-biological anchor pair:** Double Eagle V Pacific Balloon Crossing (1.104) ↔ Steller's Jay (*Cyanocitta stelleri*) (#101) at v1.49.628
+- **ELC × TRS policy-mathematics anchor pair:** Double Eagle V Pacific Balloon Crossing (1.104) ↔ category theory binding (pack-26) at v1.49.628
+- **SPS × TRS biological-mathematics resonance pair:** Steller's Jay (*Cyanocitta stelleri*) (#101) ↔ category theory binding (pack-26) at v1.49.628
+- **Five-track convergence at v1.49.628:** NASA + MUS + ELC + SPS + TRS reproducibly-stable cross-track substrate alignment per #10242 ESTABLISHED reaffirm
+- **Cross-track read-discipline maintained:** zero fabrication across W2 builds; all sibling references sourced from W1 drafts per #10243 ESTABLISHED reaffirm
+- **Engine-cadence wave pipeline:** W0 version+brief → W1 research → W2 build (NASA serial-first then MUS+ELC+SPS parallel) → W3 recovery+catalog → W4 release-notes → W5 ship-pipeline; six-wave deterministic execution at v1.49.628
+- **Pre-tag-gate composite at v1.49.628:** 8/8 PASS gate held (build + vitest + completeness + CI-on-dev + www-bundles + depth-audit + CLAUDE.md + catalog-index) per #10244 ESTABLISHED counter-cadence pattern
+- **Substrate-coherence-predicts-cross-pack-density at v1.49.628:** TRS pack-pair completion confirms #10273 + #10274 + #10284 post-ESTABLISHED reproducibility holds
+

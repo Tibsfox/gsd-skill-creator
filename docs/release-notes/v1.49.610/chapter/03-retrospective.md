@@ -68,7 +68,7 @@ Like v609 (zero stalls), v610 W2 ran cleanly across all 4 dispatches:
 
 Total W2 wall: ~71 min (NASA serial 52 min + parallel-cohort longest at ~19 min). Marginally slower than v609's 57 min total because the NASA serial run ran longer (24 files vs 24 files but more cross-track substrate weaving demanded more Edit operations); parallel cohort was equivalent.
 
-## Process observations
+## Process observation and Drift
 
 1. **Two-milestone trend confirms the discipline is the discriminator.** Across v604-v608 W2 had at least one Sonnet stall + one inline-recovery escalation. v609 + v610 had zero of either. The discipline change is the FA-608-1 chunked Write+Edit pattern with explicit byte budgets in the agent prompt; nothing else changed (same Opus model class; same parallel-dispatch shape; same cross-track read-discipline). The chunked pattern is the load-bearing change.
 2. **All-PASS-tier depth-audit is the v610 first.** v604-v609 always had at least one WARN-tier finding. v610 is the first milestone where every track lands at PASS-tier on every submetric. The depth-audit threshold (≥80% predecessor) leaves room for milestone-specific brevity but the v610 outputs all sit comfortably above 95% — the discipline is producing margin not minimums.
