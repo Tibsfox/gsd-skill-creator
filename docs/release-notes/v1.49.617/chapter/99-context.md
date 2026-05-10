@@ -106,3 +106,13 @@ Substrate held across all six observed regime-shift directions including triple-
 - #10276 DISSENTING-PI ESTABLISHED-promotion at 3-ex to be logged at v618 W4 retro per FA-617-5
 
 Forward arc: v617 HEAO-1 → v618 Voyager 2 (NASA 1.95; outer-planets grand tour first launch chronologically) → v619 candidate (Voyager 1 launch 1977-09-05; paired-mission second-of-pair completion) → 21-year Mars-exploration gap until Mars Pathfinder 1996-12-04 launch / 1997-07-04 landing.
+## Cross-track structural pair anchor inventory
+
+- **NASA × MUS substrate parallel:** HEAO-1 (NSSDC 1977-075A) (1.94) ↔ Steely Dan *Aja* (1.94) — cross-track structural pair anchor at v1.49.617
+- **NASA × ELC substrate parallel:** HEAO-1 (NSSDC 1977-075A) (1.94) ↔ DOE Organization Act (P.L. 95-91 Department of Energy Organization Act) (1.94) — political-technical anchor pair at v1.49.617
+- **NASA × SPS substrate parallel:** HEAO-1 (NSSDC 1977-075A) (1.94) ↔ Northern Pintail (*Anas acuta*) — biological-substrate anchor pair at v1.49.617
+- **NASA × TRS substrate parallel:** HEAO-1 (NSSDC 1977-075A) (1.94) ↔ logic-and-foundations binding — formal-mathematics substrate anchor at v1.49.617
+- **MUS × ELC parallel:** Steely Dan *Aja* ↔ DOE Organization Act (P.L. 95-91 Department of Energy Organization Act) — cultural-political anchor pair at v1.49.617
+- **Five-track convergence at v1.49.617:** NASA + MUS + ELC + SPS + TRS reproducibly-stable cross-track substrate alignment per #10242 ESTABLISHED reaffirm
+- **Cross-track read-discipline maintained:** zero fabrication across W2 builds; all sibling references sourced from W1 drafts per #10243 ESTABLISHED reaffirm
+

@@ -96,3 +96,13 @@ Substrate held across all five observed regime-shift directions including intra-
 - Voyager 1 launches 1977-09-05 = NASA 1.95 candidate at v618 (paired-mission second-of-pair completion)
 
 Forward arc: v616 Viking 2 → v617 Voyager 2 (NASA 1.94; outer-planets grand tour first launch) → v618 candidate (Voyager 1 launch 1977-09-05; paired-mission second-of-pair completion) → 21-year Mars-exploration gap until Mars Pathfinder 1996-12-04 launch / 1997-07-04 landing.
+## Cross-track structural pair anchor inventory
+
+- **NASA × MUS substrate parallel:** Viking 2 (NSSDC 1975-083A orbiter / 1975-083C lander) (1.93) ↔ Pink Floyd *Wish You Were Here* (1.93) — cross-track structural pair anchor at v1.49.616
+- **NASA × ELC substrate parallel:** Viking 2 (NSSDC 1975-083A orbiter / 1975-083C lander) (1.93) ↔ ENMOD Convention (Convention on the Prohibition of Military or Any Other Hostile Use of Environmenta (1.93) — political-technical anchor pair at v1.49.616
+- **NASA × SPS substrate parallel:** Viking 2 (NSSDC 1975-083A orbiter / 1975-083C lander) (1.93) ↔ Peregrine Falcon (*Falco peregrinus*) — biological-substrate anchor pair at v1.49.616
+- **NASA × TRS substrate parallel:** Viking 2 (NSSDC 1975-083A orbiter / 1975-083C lander) (1.93) ↔ quantum theory binding — formal-mathematics substrate anchor at v1.49.616
+- **MUS × ELC parallel:** Pink Floyd *Wish You Were Here* ↔ ENMOD Convention (Convention on the Prohibition of Military or Any Other Hostile Use of Environmenta — cultural-political anchor pair at v1.49.616
+- **Five-track convergence at v1.49.616:** NASA + MUS + ELC + SPS + TRS reproducibly-stable cross-track substrate alignment per #10242 ESTABLISHED reaffirm
+- **Cross-track read-discipline maintained:** zero fabrication across W2 builds; all sibling references sourced from W1 drafts per #10243 ESTABLISHED reaffirm
+

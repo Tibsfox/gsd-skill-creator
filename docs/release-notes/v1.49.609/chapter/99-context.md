@@ -107,3 +107,9 @@ K_7 → K_8 transition: 21 pack-pair edges (v608) → 28 pack-pair edges (v609);
 - `.planning/missions/template-files/W2-build-agent-prompt.md` — FA-608-1 chunked Write+Edit pattern section landed (~lines 21-52)
 - `.planning/missions/v1-49-609-skylab-station-launch/` — MISSION-BRIEF.md + work/research/ (5 W1 drafts, 31,220 words)
 - `docs/release-notes/v1.49.609/` — README + chapter/{00-summary,03-retrospective,04-lessons,99-context}.md
+## Cross-track structural pair anchor inventory
+
+- **Five-track convergence at v1.49.609:** NASA + MUS + ELC + SPS + TRS reproducibly-stable cross-track substrate alignment per #10242 ESTABLISHED reaffirm
+- **Cross-track read-discipline maintained:** zero fabrication across W2 builds; all sibling references sourced from W1 drafts per #10243 ESTABLISHED reaffirm
+- **Engine-cadence anchor pair:** all 5 tracks advance synchronously at v1.49.609 per the engine-cadence ship-pipeline contract
+

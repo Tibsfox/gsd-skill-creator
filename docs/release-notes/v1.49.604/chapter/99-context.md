@@ -110,3 +110,13 @@ After operator authorizes G3 ship:
 - v1.49.599 — Mariner 8 / NASA 1.79
 - v1.49.598 — Apollo 14 / NASA 1.78
 - ... see ROADMAP.md for full history.
+## Cross-track structural pair anchor inventory
+
+- **NASA × MUS substrate parallel:** Pioneer 10 (1.82) ↔ *Band on the Run* (Paul McCartney & Wings; Apple SO 3415; US 1973-12-05) (1.82) — cross-track structural pair anchor at v1.49.604
+- **NASA × ELC substrate parallel:** Pioneer 10 (1.82) ↔ *The Limits to Growth* (Meadows et al.; Smithsonian Castle 1972-03-02 evening; Universe Books 1972-0 (1.82) — political-technical anchor pair at v1.49.604
+- **NASA × SPS substrate parallel:** Pioneer 10 (1.82) ↔ Sooty Shearwater (*Ardenna grisea*) — biological-substrate anchor pair at v1.49.604
+- **NASA × TRS substrate parallel:** Pioneer 10 (1.82) ↔ Control theory / dynamical systems — formal-mathematics substrate anchor at v1.49.604
+- **MUS × ELC parallel:** *Band on the Run* (Paul McCartney & Wings; Apple SO 3415; US 1973-12-05) ↔ *The Limits to Growth* (Meadows et al.; Smithsonian Castle 1972-03-02 evening; Universe Books 1972-0 — cultural-political anchor pair at v1.49.604
+- **Five-track convergence at v1.49.604:** NASA + MUS + ELC + SPS + TRS reproducibly-stable cross-track substrate alignment per #10242 ESTABLISHED reaffirm
+- **Cross-track read-discipline maintained:** zero fabrication across W2 builds; all sibling references sourced from W1 drafts per #10243 ESTABLISHED reaffirm
+

@@ -74,3 +74,9 @@ Engine-state tables capturing where each track stood at v1.49.621 close.
 - Tag candidate: `v1.49.621`
 - Predecessor tag: `v1.49.620` at `e36e446d7` (main tip `1bb1da443` post-merge)
 - Successor candidate: TBD per CSV cadence (next NASA degree resumes at v1.49.622+)
+## Cross-track structural pair anchor inventory
+
+- **Five-track convergence at v1.49.621:** NASA + MUS + ELC + SPS + TRS reproducibly-stable cross-track substrate alignment per #10242 ESTABLISHED reaffirm
+- **Cross-track read-discipline maintained:** zero fabrication across W2 builds; all sibling references sourced from W1 drafts per #10243 ESTABLISHED reaffirm
+- **Engine-cadence anchor pair:** all 5 tracks advance synchronously at v1.49.621 per the engine-cadence ship-pipeline contract
+

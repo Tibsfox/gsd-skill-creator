@@ -114,3 +114,13 @@ Substrate held across all nine observed regime-shift directions including triple
 - Phobos centennial (v617 #10278) substrate-scope decision still PENDING per FA-620-12
 
 Forward arc: v620 Pioneer Venus 1 (TWIN-MISSION-PAIR-CONTINUATION ESTABLISHED-PROMOTION at 3-ex; first US Venus orbiter; first complete topographic map of any planet's surface from orbit; 14-year operation; #10286 + #10287 ESTABLISHED-promotions; six new substrate primitives admitted; #10275 obs#4 reproducibility VERY HIGH at 6-of-6 domain forms) → v621 candidate Pioneer Venus 2 Multiprobe (sister-spacecraft Pioneer Venus paired-mission completion; 4 atmospheric probes Dec 9 1978 entry).
+## Cross-track structural pair anchor inventory
+
+- **NASA × MUS substrate parallel:** Pioneer Venus 1 Orbiter (NSSDC 1978-051A; Pioneer 12) (1.97) ↔ Kraftwerk *The Man-Machine* (1.97) — cross-track structural pair anchor at v1.49.620
+- **NASA × ELC substrate parallel:** Pioneer Venus 1 Orbiter (NSSDC 1978-051A; Pioneer 12) (1.97) ↔ UN First Special Session on Disarmament (SSOD-I) (1.97) — political-technical anchor pair at v1.49.620
+- **NASA × SPS substrate parallel:** Pioneer Venus 1 Orbiter (NSSDC 1978-051A; Pioneer 12) (1.97) ↔ Pacific Yew (*Taxus brevifolia*) — biological-substrate anchor pair at v1.49.620
+- **NASA × TRS substrate parallel:** Pioneer Venus 1 Orbiter (NSSDC 1978-051A; Pioneer 12) (1.97) ↔ graph-theory binding — formal-mathematics substrate anchor at v1.49.620
+- **MUS × ELC parallel:** Kraftwerk *The Man-Machine* ↔ UN First Special Session on Disarmament (SSOD-I) — cultural-political anchor pair at v1.49.620
+- **Five-track convergence at v1.49.620:** NASA + MUS + ELC + SPS + TRS reproducibly-stable cross-track substrate alignment per #10242 ESTABLISHED reaffirm
+- **Cross-track read-discipline maintained:** zero fabrication across W2 builds; all sibling references sourced from W1 drafts per #10243 ESTABLISHED reaffirm
+

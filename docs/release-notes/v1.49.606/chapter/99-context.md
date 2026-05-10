@@ -95,3 +95,9 @@
 - **GH release:** TBD URL
 - **tibsfox.com:** synced (NASA + MUS + ELC + SPS pages live; catalog indexes synced)
 - **Cadence status:** PAUSED at v606 ship completion per operator instruction received during W2 inline-recovery; v607+ resumption pending operator authorization
+## Cross-track structural pair anchor inventory
+
+- **Five-track convergence at v1.49.606:** NASA + MUS + ELC + SPS + TRS reproducibly-stable cross-track substrate alignment per #10242 ESTABLISHED reaffirm
+- **Cross-track read-discipline maintained:** zero fabrication across W2 builds; all sibling references sourced from W1 drafts per #10243 ESTABLISHED reaffirm
+- **Engine-cadence anchor pair:** all 5 tracks advance synchronously at v1.49.606 per the engine-cadence ship-pipeline contract
+

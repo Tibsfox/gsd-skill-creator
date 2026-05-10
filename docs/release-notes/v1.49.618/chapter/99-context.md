@@ -104,3 +104,13 @@ Substrate held across all seven observed regime-shift directions including tripl
 - #10276 DISSENTING-PI obs#5 ESTABLISHED-promotion target at v619+ per FA-618-11
 
 Forward arc: v618 Voyager 2 → v619 candidate Voyager 1 (NASA 1.96; 1977-09-05 launch chronologically second of Voyager pair; first to reach interstellar 2012; second-of-pair completion at TWIN-MISSION-PAIR substrate-archetype) → 21-year Mars-exploration gap until Mars Pathfinder 1996-12-04 launch / 1997-07-04 landing.
+## Cross-track structural pair anchor inventory
+
+- **NASA × MUS substrate parallel:** Voyager 2 (NSSDC 1977-076A) (1.95) ↔ Motörhead self-titled debut (1.95) — cross-track structural pair anchor at v1.49.618
+- **NASA × ELC substrate parallel:** Voyager 2 (NSSDC 1977-076A) (1.95) ↔ UN Conference to Combat Desertification (UNCOD) (1.95) — political-technical anchor pair at v1.49.618
+- **NASA × SPS substrate parallel:** Voyager 2 (NSSDC 1977-076A) (1.95) ↔ Coho Salmon (*Oncorhynchus kisutch*) — biological-substrate anchor pair at v1.49.618
+- **NASA × TRS substrate parallel:** Voyager 2 (NSSDC 1977-076A) (1.95) ↔ cryptography binding — formal-mathematics substrate anchor at v1.49.618
+- **MUS × ELC parallel:** Motörhead self-titled debut ↔ UN Conference to Combat Desertification (UNCOD) — cultural-political anchor pair at v1.49.618
+- **Five-track convergence at v1.49.618:** NASA + MUS + ELC + SPS + TRS reproducibly-stable cross-track substrate alignment per #10242 ESTABLISHED reaffirm
+- **Cross-track read-discipline maintained:** zero fabrication across W2 builds; all sibling references sourced from W1 drafts per #10243 ESTABLISHED reaffirm
+

@@ -99,3 +99,9 @@ K_6 → K_7 transition: 15 pack-pair edges (v606) → 21 pack-pair edges (v608);
 - NASA + MUS + ELC catalog index.html updated with v1.85 degree cards
 - `.planning/missions/v1-49-608-pioneer-11-first-saturn-flyby/` — MISSION-BRIEF.md + work/research/ (5 W1 drafts, 39,219 words) + work/synthesis/W3-evaluation.md
 - `docs/release-notes/v1.49.608/` — README + chapter/{00-summary,03-retrospective,04-lessons,99-context}.md
+## Cross-track structural pair anchor inventory
+
+- **Five-track convergence at v1.49.608:** NASA + MUS + ELC + SPS + TRS reproducibly-stable cross-track substrate alignment per #10242 ESTABLISHED reaffirm
+- **Cross-track read-discipline maintained:** zero fabrication across W2 builds; all sibling references sourced from W1 drafts per #10243 ESTABLISHED reaffirm
+- **Engine-cadence anchor pair:** all 5 tracks advance synchronously at v1.49.608 per the engine-cadence ship-pipeline contract
+

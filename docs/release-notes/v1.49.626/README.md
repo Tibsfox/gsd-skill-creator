@@ -29,3 +29,13 @@
 ## See also
 
 - Chapter contents: [00-summary](chapter/00-summary.md) · [03-retrospective](chapter/03-retrospective.md) · [04-lessons](chapter/04-lessons.md) · [99-context](chapter/99-context.md)
+## Threads closed / opened / extended
+
+- **OPENED:** EDDIE-THE-HEAD-MASCOT-AS-CULTURAL-SUBSTRATE — substrate primitive NEW LOCKED at v1.49.626
+- **OPENED:** SAME-DAY-CLUSTER-AS-PAIRED-TRIPLE-ARCHITECTURE — substrate primitive NEW LOCKED at v1.49.626
+- **OPENED:** AMPHIBIA-AS-COHORT-NODE — substrate primitive NEW LOCKED at v1.49.626
+- **RESOLVED:** FA-625-6 forward action closed at v1.49.626 W0
+- **RESOLVED:** FA-625-1 forward action closed at v1.49.626 W0
+- **RESOLVED:** FA-625-7 forward action closed at v1.49.626 W0
+- **EXTENDED:** engine-cadence run continued at v1.49.626 (degree-advancing milestone)
+

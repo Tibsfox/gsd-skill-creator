@@ -80,3 +80,13 @@
 **v1.49.628** — STS-2 Columbia 1981-11-12 (first reflight of a previously-flown orbital spacecraft; Columbia OV-102 second flight; commander Joe Engle + pilot Richard Truly; first test of Ku-band satellite communications + OSTA-1 payload including SIR-A Shuttle Imaging Radar; cut short to 54h 13m / 36 orbits from planned 5-day mission due to APU #1 failure; first reuse of a crewed orbital vehicle; = 1.104 if strict chronological order) as primary candidate. FA-627-7 carries the verify decision.
 
 Forward arc: **v1.49.626 SolarMax** (REPAIR-IN-ORBIT + SOLAR-OBSERVATORY + SINGLE-FORM + AMPHIBIA-AS-COHORT-NODE + EDDIE-THE-HEAD-MASCOT; K_24; FA-625-1/6/7 RESOLVED; seven-primitive lock; first dual-track Tier-2 recovery) → **v1.49.627 STS-1 Columbia** (CREWED-REUSABLE-ORBITAL-VEHICLE + WINGED-REENTRY + CREW-ON-FIRST-FLIGHT + APOLLO-MOONWALKER-AS-SHUTTLE-COMMANDER + SPS-DEGREE-100-K-BOUNDARY + MOLLUSCA-AS-COHORT-NODE + ALBUM-FORM-RESTORATION + MULTI-EVENT-COMPLEX + CURE-TRILOGY; K_25; FA-626-4/6/7 RESOLVED; #10289 ESTABLISHED; eight-or-more-primitive lock; 0 FAIL findings; cleanest milestone in current cohort) → **v1.49.628** (STS-2 Columbia 1981-11-12 = 1.104 candidate; FA-627-2 #10287 obs#10 toward 9-of-9 second-threshold; FA-627-6 TRS pack-26 mode-choice).
+## Cross-track structural pair anchor inventory
+
+- **NASA × MUS substrate parallel:** STS-1 Columbia (NSSDC 1981-034A; OV-102 Columbia) (1.103) ↔ The Cure *Faith* (1.103) — cross-track structural pair anchor at v1.49.627
+- **NASA × ELC substrate parallel:** STS-1 Columbia (NSSDC 1981-034A; OV-102 Columbia) (1.103) ↔ Reagan-Columbia Political-Technical Confidence Restoration Complex (1.103) — political-technical anchor pair at v1.49.627
+- **NASA × SPS substrate parallel:** STS-1 Columbia (NSSDC 1981-034A; OV-102 Columbia) (1.103) ↔ Pacific Banana Slug (*Ariolimax columbianus*) — biological-substrate anchor pair at v1.49.627
+- **NASA × TRS substrate parallel:** STS-1 Columbia (NSSDC 1981-034A; OV-102 Columbia) (1.103) ↔ dynamical systems / chaos theory binding — formal-mathematics substrate anchor at v1.49.627
+- **MUS × ELC parallel:** The Cure *Faith* ↔ Reagan-Columbia Political-Technical Confidence Restoration Complex — cultural-political anchor pair at v1.49.627
+- **Five-track convergence at v1.49.627:** NASA + MUS + ELC + SPS + TRS reproducibly-stable cross-track substrate alignment per #10242 ESTABLISHED reaffirm
+- **Cross-track read-discipline maintained:** zero fabrication across W2 builds; all sibling references sourced from W1 drafts per #10243 ESTABLISHED reaffirm
+

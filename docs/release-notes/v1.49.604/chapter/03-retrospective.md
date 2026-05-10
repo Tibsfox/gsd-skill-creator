@@ -46,3 +46,11 @@ v604's TRS deliverable advances Wave 2 generation into the M0 original substrate
 ## Sonnet sub-agent dispatch passive monitor
 
 Status at v604 close: **still unavailable in flight-ops surface.** Tier-2 inline-Opus remains the canonical fallback per #10233 ESTABLISHED. Mid-build Sonnet quota exhaustion (this milestone's new failure mode) demonstrates the path's robustness — quota failure at L4 cascades to L3 inline-Opus recovery without ship-pipeline disruption. Watch condition: if Sonnet sub-agent dispatch returns AND quota stability improves, Sonnet path becomes preferred default per #10233 ESTABLISHED watch condition (currently no-op).
+## Process observations
+
+- **Wave dispatch cadence:** W0 main-context + W1 research subagent + W2 build subagents (NASA serial-first then MUS+ELC+SPS parallel) — pattern held at v1.49.604
+- **Recovery hierarchy:** Tier-2 inline-Edit recovery applied if depth-audit FAIL — engine-cadence resilience pattern
+- **Cross-track read-discipline:** all sibling W1 drafts read before W2 build authoring — zero fabrication maintained at v1.49.604
+- **Pre-tag-gate composite:** 8/8 PASS gate held at v1.49.604 (build + vitest + completeness + CI-on-dev + www-bundles + depth-audit + CLAUDE.md + catalog-index)
+- **Drift detection:** post-ship RH refresh emitted advisory drift signal at v1.49.604 (active soak per FA-621 disposition)
+

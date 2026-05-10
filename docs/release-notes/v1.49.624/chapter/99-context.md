@@ -80,3 +80,13 @@
 v625 W0 will verify, choose chronologically-next (HEAO-3 1979-09-20 predates Magsat 1979-10-30 by 40 days), and address FA-624-2 DIRECT-ORDER ESTABLISHED-promotion decision + FA-624-4 DEEP-SPACE-LATENCY-RETURNS ESTABLISHED-promotion decision. TRS pack-23 mode-choice per FA-624-6 at v625 W0.
 
 Forward arc: v1.49.622 Pioneer Venus 2 Multiprobe → v1.49.623 ISEE-3 / ICE (PAIRED-TRIPLE-MISSION-ARCHITECTURE + L1-LAGRANGE + MISSION-REDIRECT + TRAJECTORY-ARCHITECT + ODONTOCETE-AS-COHORT-NODE NEW LOCKED; K_21; FA-622-1/6/7 RESOLVED) → **v1.49.624 HEAO-2 / Einstein Observatory** (DEGREE-100-K-BOUNDARY + IMAGING-ASTRONOMY + NOBEL-PRIZE + ASTROPHYSICIST-AS-MUSICIAN + TROGLODYTIDAE-AS-COHORT-NODE + MULTI-BILL-PACKAGE-AS-PAIRED-ARCHITECTURE NEW LOCKED; K_22; FA-623-1/6/7 RESOLVED; six-primitive-lock new record; DEGREE-100-K-BOUNDARY STRUCTURAL FIRST) → **v1.49.625** (HEAO-3 1.101 or Magsat 1.101 chronological-next; FA-624-2 DIRECT-ORDER ESTABLISHED-promotion decision; FA-624-4 DEEP-SPACE-LATENCY-RETURNS ESTABLISHED-promotion decision).
+## Cross-track structural pair anchor inventory
+
+- **NASA × MUS substrate parallel:** HEAO-2 / Einstein Observatory (NSSDC 1978-103A) (1.100) ↔ Queen *Jazz* (1.100) — cross-track structural pair anchor at v1.49.624
+- **NASA × ELC substrate parallel:** HEAO-2 / Einstein Observatory (NSSDC 1978-103A) (1.100) ↔ National Energy Act of 1978 (5-bill package) (1.100) — political-technical anchor pair at v1.49.624
+- **NASA × SPS substrate parallel:** HEAO-2 / Einstein Observatory (NSSDC 1978-103A) (1.100) ↔ Pacific Wren (*Troglodytes pacificus*) — biological-substrate anchor pair at v1.49.624
+- **NASA × TRS substrate parallel:** HEAO-2 / Einstein Observatory (NSSDC 1978-103A) (1.100) ↔ measure-theory binding — formal-mathematics substrate anchor at v1.49.624
+- **MUS × ELC parallel:** Queen *Jazz* ↔ National Energy Act of 1978 (5-bill package) — cultural-political anchor pair at v1.49.624
+- **Five-track convergence at v1.49.624:** NASA + MUS + ELC + SPS + TRS reproducibly-stable cross-track substrate alignment per #10242 ESTABLISHED reaffirm
+- **Cross-track read-discipline maintained:** zero fabrication across W2 builds; all sibling references sourced from W1 drafts per #10243 ESTABLISHED reaffirm
+

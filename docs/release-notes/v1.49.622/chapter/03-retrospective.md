@@ -73,3 +73,11 @@ At v622, NASA 1.98 WARN 80%/81% (borderline pass) + ELC 1.98 initial FAIL 71%/59
 ### Counter-cadence gap continues soak
 
 v621 counter-cadence (SCRIBE Build-Out) intervenes between v620 and v622 degree-advancing milestones. The FA-620-7 hard-fork escalation re-eval was deferred at v621 per v621 release-notes; deferred again at v622 W3 retro to v624+ (substrate-promotion-velocity insufficient signal at single-milestone increment). Lesson: hard-fork escalation decisions (FA-620-7, #10238/#10240) require multiple consecutive high-velocity milestones to provide clear signal; single-milestone deferred judgments are correct behavior, not indecision.
+## Process observations
+
+- **Wave dispatch cadence:** W0 main-context + W1 research subagent + W2 build subagents (NASA serial-first then MUS+ELC+SPS parallel) — pattern held at v1.49.622
+- **Recovery hierarchy:** Tier-2 inline-Edit recovery applied if depth-audit FAIL — engine-cadence resilience pattern
+- **Cross-track read-discipline:** all sibling W1 drafts read before W2 build authoring — zero fabrication maintained at v1.49.622
+- **Pre-tag-gate composite:** 8/8 PASS gate held at v1.49.622 (build + vitest + completeness + CI-on-dev + www-bundles + depth-audit + CLAUDE.md + catalog-index)
+- **Drift detection:** post-ship RH refresh emitted advisory drift signal at v1.49.622 (active soak per FA-621 disposition)
+

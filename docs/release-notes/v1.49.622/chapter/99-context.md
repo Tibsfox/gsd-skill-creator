@@ -88,3 +88,13 @@
 v623 W0 will verify and choose one. TRS pack-21 mode-choice per FA-622-6 at v623 W0 (deepening / extension to pack-21 / audit — first audit-mode test since K_20 achieved may be appropriate).
 
 Forward arc: v1.49.620 Pioneer Venus 1 (TWIN-MISSION-PAIR-CONTINUATION ESTABLISHED-PROMOTION at 3-ex; #10286 + #10287 ESTABLISHED-promotions; first US Venus orbiter; first complete topographic map; six new substrate primitives) → v1.49.621 SCRIBE Build-Out counter-cadence → **v1.49.622 Pioneer Venus 2 Multiprobe** (Pioneer-Venus paired-architecture COMPLETE; #10286 obs#4 post-ESTABLISHED PASSES FA-620-1 RESOLVED; MULTI-PROBE-DEPLOYMENT-AS-DELIVERABLE + BENTHIC-INVERTEBRATE-AS-COHORT-NODE + TRIBAL-CONSULTATION-FRAMEWORK sub-form NEW LOCKED; K_20 ACHIEVED; three new substrate primitives; four NEW CANDIDATEs; zero ESTABLISHED-promotions by design) → **v1.49.623** (Veneras 11/12 or HEAO 2 candidate; v623 W0 decides).
+## Cross-track structural pair anchor inventory
+
+- **NASA × MUS substrate parallel:** Pioneer Venus 2 Multiprobe (NSSDC 1978-078A; Pioneer 13) (1.98) ↔ Boston *Don't Look Back* (1.98) — cross-track structural pair anchor at v1.49.622
+- **NASA × ELC substrate parallel:** Pioneer Venus 2 Multiprobe (NSSDC 1978-078A; Pioneer 13) (1.98) ↔ American Indian Religious Freedom Act AIRFA (1.98) — political-technical anchor pair at v1.49.622
+- **NASA × SPS substrate parallel:** Pioneer Venus 2 Multiprobe (NSSDC 1978-078A; Pioneer 13) (1.98) ↔ Dungeness Crab (*Metacarcinus magister*) — biological-substrate anchor pair at v1.49.622
+- **NASA × TRS substrate parallel:** Pioneer Venus 2 Multiprobe (NSSDC 1978-078A; Pioneer 13) (1.98) ↔ set-theory binding — formal-mathematics substrate anchor at v1.49.622
+- **MUS × ELC parallel:** Boston *Don't Look Back* ↔ American Indian Religious Freedom Act AIRFA — cultural-political anchor pair at v1.49.622
+- **Five-track convergence at v1.49.622:** NASA + MUS + ELC + SPS + TRS reproducibly-stable cross-track substrate alignment per #10242 ESTABLISHED reaffirm
+- **Cross-track read-discipline maintained:** zero fabrication across W2 builds; all sibling references sourced from W1 drafts per #10243 ESTABLISHED reaffirm
+

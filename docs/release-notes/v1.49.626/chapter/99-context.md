@@ -82,3 +82,13 @@
 v627 W0 will verify, choose chronologically-next (STS-1 Columbia 1981-04-12 is the strongest structural milestone; GOES-4 1980-09-09 is an alternative if strict calendar chronology requires it; likely STS-1 given SHUTTLE-PROGRAM-AS-NEW-DELIVERABLE substrate signal), and address FA-626-4 DEEP-SPACE-LATENCY-RETURNS ESTABLISHED-promotion DECISION at 9-of-9. TRS pack-25 mode-choice per FA-626-6 at v627 W0.
 
 Forward arc: **v1.49.625 HEAO-3** (GAMMA-RAY-SPECTROSCOPY + NUCLEOSYNTHESIS-RADIOACTIVITY + HEAVY-COSMIC-RAY-COMPOSITION + SALVELINUS-AS-COHORT-NODE + BAND-PROGRAM-COMPLETION; K_23; FA-624-1/6/7 RESOLVED; HEAO program-trio COMPLETE) → **v1.49.626 SolarMax** (REPAIR-IN-ORBIT-AS-NEW-DELIVERABLE + SOLAR-OBSERVATORY-AS-NEW-DELIVERABLE + SAME-DAY-CLUSTER + NUCLEAR-PHYSICS-SUBSTRATE-CONTINUITY + SINGLE-FORM + AMPHIBIA-AS-COHORT-NODE + EDDIE-THE-HEAD-MASCOT; K_24; FA-625-1/6/7 RESOLVED; SEVEN-PRIMITIVE-LOCK record; first dual-track Tier-2 recovery) → **v1.49.627** (STS-1 Columbia 1981-04-12 = 1.103 candidate; FA-626-4 DEEP-SPACE-LATENCY-RETURNS ESTABLISHED-promotion DECISION at 9-of-9).
+## Cross-track structural pair anchor inventory
+
+- **NASA × MUS substrate parallel:** Solar Maximum Mission (SolarMax/SMM; NSSDC 1980-014A) (1.102) ↔ Iron Maiden "Running Free"/"Burning Ambition" 7" single (1.102) — cross-track structural pair anchor at v1.49.626
+- **NASA × ELC substrate parallel:** Solar Maximum Mission (SolarMax/SMM; NSSDC 1980-014A) (1.102) ↔ Executive Order 12192 — State Planning Council on Radioactive Waste Management (1.102) — political-technical anchor pair at v1.49.626
+- **NASA × SPS substrate parallel:** Solar Maximum Mission (SolarMax/SMM; NSSDC 1980-014A) (1.102) ↔ Pacific Tree Frog (*Pseudacris regilla*) — biological-substrate anchor pair at v1.49.626
+- **NASA × TRS substrate parallel:** Solar Maximum Mission (SolarMax/SMM; NSSDC 1980-014A) (1.102) ↔ harmonic/Fourier analysis binding — formal-mathematics substrate anchor at v1.49.626
+- **MUS × ELC parallel:** Iron Maiden "Running Free"/"Burning Ambition" 7" single ↔ Executive Order 12192 — State Planning Council on Radioactive Waste Management — cultural-political anchor pair at v1.49.626
+- **Five-track convergence at v1.49.626:** NASA + MUS + ELC + SPS + TRS reproducibly-stable cross-track substrate alignment per #10242 ESTABLISHED reaffirm
+- **Cross-track read-discipline maintained:** zero fabrication across W2 builds; all sibling references sourced from W1 drafts per #10243 ESTABLISHED reaffirm
+

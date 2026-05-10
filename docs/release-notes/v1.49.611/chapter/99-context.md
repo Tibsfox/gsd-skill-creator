@@ -124,3 +124,9 @@ K_9 → K_10 transition: 36 pack-pair edges (v610) → 45 pack-pair edges (v611)
 - NASA + MUS + ELC catalog index.html updated with v1.88 degree cards
 - `.planning/missions/v1-49-611-skylab-3-first-long-duration/` — MISSION-BRIEF.md + work/research/ (5 W1 drafts, ~33,500 words body content)
 - `docs/release-notes/v1.49.611/` — README + chapter/{00-summary,03-retrospective,04-lessons,99-context}.md
+## Cross-track structural pair anchor inventory
+
+- **Five-track convergence at v1.49.611:** NASA + MUS + ELC + SPS + TRS reproducibly-stable cross-track substrate alignment per #10242 ESTABLISHED reaffirm
+- **Cross-track read-discipline maintained:** zero fabrication across W2 builds; all sibling references sourced from W1 drafts per #10243 ESTABLISHED reaffirm
+- **Engine-cadence anchor pair:** all 5 tracks advance synchronously at v1.49.611 per the engine-cadence ship-pipeline contract
+

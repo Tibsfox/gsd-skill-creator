@@ -79,3 +79,13 @@
 v626 W0 will verify, choose chronologically-next (Solar Maximum Mission 1980-02-14 predates GOES-4 by 7 months), and address FA-625-4 DEEP-SPACE-LATENCY-RETURNS ESTABLISHED-promotion decision at 7-of-7. TRS pack-24 mode-choice per FA-625-6 at v626 W0.
 
 Forward arc: v1.49.623 ISEE-3 / ICE (PAIRED-TRIPLE-MISSION-ARCHITECTURE + MISSION-REDIRECT + ODONTOCETE-AS-COHORT-NODE; K_21; FA-622-1/6/7 RESOLVED) → v1.49.624 HEAO-2 / Einstein Observatory (DEGREE-100-K-BOUNDARY + IMAGING-ASTRONOMY + NOBEL-PRIZE + ASTROPHYSICIST-AS-MUSICIAN + TROGLODYTIDAE-AS-COHORT-NODE + MULTI-BILL-PACKAGE-AS-PAIRED-ARCHITECTURE; K_22; FA-623-1/6/7 RESOLVED; six-primitive-lock record) → **v1.49.625 HEAO-3** (GAMMA-RAY-SPECTROSCOPY + NUCLEOSYNTHESIS-RADIOACTIVITY + HEAVY-COSMIC-RAY-COMPOSITION + SALVELINUS-AS-COHORT-NODE + BAND-PROGRAM-COMPLETION; K_23; FA-624-1/6/7 RESOLVED; HEAO program-trio COMPLETE 3-of-3; 2nd program-trio in engine run) → **v1.49.626** (Solar Maximum Mission 1.102 or GOES-4 1.102 chronological-next; FA-625-4 DEEP-SPACE-LATENCY-RETURNS ESTABLISHED-promotion DECISION; FA-625-7 NASA candidate verify).
+## Cross-track structural pair anchor inventory
+
+- **NASA × MUS substrate parallel:** HEAO-3 (NSSDC 1979-082A) (1.101) ↔ Eagles *The Long Run* (1.101) — cross-track structural pair anchor at v1.49.625
+- **NASA × ELC substrate parallel:** HEAO-3 (NSSDC 1979-082A) (1.101) ↔ Executive Order 12157 — President's Management Improvement Council (PMIC) (1.101) — political-technical anchor pair at v1.49.625
+- **NASA × SPS substrate parallel:** HEAO-3 (NSSDC 1979-082A) (1.101) ↔ Bull Trout (*Salvelinus confluentus*) — biological-substrate anchor pair at v1.49.625
+- **NASA × TRS substrate parallel:** HEAO-3 (NSSDC 1979-082A) (1.101) ↔ integration theory binding — formal-mathematics substrate anchor at v1.49.625
+- **MUS × ELC parallel:** Eagles *The Long Run* ↔ Executive Order 12157 — President's Management Improvement Council (PMIC) — cultural-political anchor pair at v1.49.625
+- **Five-track convergence at v1.49.625:** NASA + MUS + ELC + SPS + TRS reproducibly-stable cross-track substrate alignment per #10242 ESTABLISHED reaffirm
+- **Cross-track read-discipline maintained:** zero fabrication across W2 builds; all sibling references sourced from W1 drafts per #10243 ESTABLISHED reaffirm
+

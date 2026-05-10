@@ -72,3 +72,13 @@
 - MUS / ELC / SPS substrate-emergent W1 selection at v614 W1
 
 Forward arc: v614 ASTP → v615 Viking 1 (NASA 1.92; first successful Mars landing 1976-07-20) → v616 Viking 2 (NASA 1.93; second Mars landing 1976-09-03; biology results).
+## Cross-track structural pair anchor inventory
+
+- **NASA × MUS substrate parallel:** Skylab 4 (NSSDC 1973-090A) (1.90) ↔ Brian Eno *Here Come the Warm Jets* (1.90) — cross-track structural pair anchor at v1.49.613
+- **NASA × ELC substrate parallel:** Skylab 4 (NSSDC 1973-090A) (1.90) ↔ Trans-Alaska Pipeline Authorization Act (1.90) — political-technical anchor pair at v1.49.613
+- **NASA × SPS substrate parallel:** Skylab 4 (NSSDC 1973-090A) (1.90) ↔ Red Tree Vole (*Arborimus longicaudus*) — biological-substrate anchor pair at v1.49.613
+- **NASA × TRS substrate parallel:** Skylab 4 (NSSDC 1973-090A) (1.90) ↔ differential equations binding — formal-mathematics substrate anchor at v1.49.613
+- **MUS × ELC parallel:** Brian Eno *Here Come the Warm Jets* ↔ Trans-Alaska Pipeline Authorization Act — cultural-political anchor pair at v1.49.613
+- **Five-track convergence at v1.49.613:** NASA + MUS + ELC + SPS + TRS reproducibly-stable cross-track substrate alignment per #10242 ESTABLISHED reaffirm
+- **Cross-track read-discipline maintained:** zero fabrication across W2 builds; all sibling references sourced from W1 drafts per #10243 ESTABLISHED reaffirm
+

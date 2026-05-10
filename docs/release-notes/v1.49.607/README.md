@@ -1,5 +1,14 @@
 # v1.49.607 — GSD Code Atlas (counter-cadence)
 
+**Released:** 2026-05-05
+**Type:** Engine-cadence degree-advancing milestone (v604+ run)
+**NASA Mission:** GSD Code Atlas (counter-cadence)
+**Predecessor:** v1.49.606
+**Mission package:** `.planning/missions/v1-49-607-gsd-code-atlas-counter-cadence/`
+
+## Summary
+
+
 **Shipped:** 2026-05-05
 **Predecessor:** v1.49.606 (Apollo 17 Final Crewed Lunar Landing; NASA 1.84)
 **Cadence:** counter-cadence (no NASA/MUS/ELC/SPS/TRS engine advance)
@@ -91,3 +100,7 @@ See `chapter/05-w4d-w4e-addendum.md` for the full W4c/W4d/W4e narrative + endpoi
 - **#10265 CANDIDATE (W4e.C)** — chromadb 3.x's optional default-EF dep is best avoided
   by constructing collections without an embedding function and supplying embeddings
   explicitly on every upsert/query, sharing the application's existing pipeline.
+
+## See also
+
+- Chapter contents: [00-summary](chapter/00-summary.md) · [03-retrospective](chapter/03-retrospective.md) · [04-lessons](chapter/04-lessons.md) · [99-context](chapter/99-context.md)

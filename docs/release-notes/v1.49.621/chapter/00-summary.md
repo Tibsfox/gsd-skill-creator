@@ -8,18 +8,18 @@
 
 ## Structural firsts logged at v621
 
-1. **First-of-its-kind `cartridges/foundational/` directory** — SCRIBE chipset is its inaugural inhabitant; future foundational chipsets follow the thin-shell discipline
-2. **Cartridge composition algebra implemented in <500 lines** — `src/scribe/cartridge-composition/compose-chipset.ts` (184 lines categorical-sum primitive) + `merge-citations.ts` (665 lines deduplication + schema-versioned merge across 5 tracks) = 849 lines total
+**First-of-its-kind `cartridges/foundational/` directory.** SCRIBE chipset is its inaugural inhabitant; future foundational chipsets follow the thin-shell discipline
+**Cartridge composition algebra implemented in <500 lines.** `src/scribe/cartridge-composition/compose-chipset.ts` (184 lines categorical-sum primitive) + `merge-citations.ts` (665 lines deduplication + schema-versioned merge across 5 tracks) = 849 lines total
 3. **Unified citation index at 316 sources** (within 5% of 302 baseline; success criterion C2) — `.planning/missions/v1-49-621-scribe/CITATIONS.json` deduplicates across 5 track citation files via deterministic primaryKey computation
-4. **PG runtime live** — Component 02 wired `/api/graph/upstream/<node_id>` + `/api/graph/downstream/<node_id>` + `/api/search` (RRF hybrid) replacing 501 stubs; measured 8ms p95 on 32-node corpus (target ≤200ms; **25× headroom**)
-5. **Round-trip event persistence wired T3 → T5** — Component 05 inserts `prov_node sub_type='roundtrip-event'` + `wasDerivedFrom` edge to source artifact; CAP-019 reclassified from "deferred runtime" to "shipped runtime" (effective deferred count drops 4 → 3)
-6. **Yosys-driven netlist renderer at full fidelity** — Component 06 replaces simplified path; 3 cartridge examples (add, xor1, mux) re-rendered with structural metadata preserved; YOSYS_TEST=1 e2e gated
-7. **WGSL compute layout live in dashboard** — Component 07 routes through `webgpu-compute/force-atlas-2.wgsl` when WebGPU available; SCRIBE_FORCE_CPU toggle flips to JS fallback
-8. **Public deployment LIVE** — 12 SCRIBE files (369,668 bytes) at https://tibsfox.com/Research/SCRIBE/ via new `npm run ftp-sync:scribe` mode; 5/5 HTTPS verification probes returned 200
-9. **Substrate-continuity is now machine-checkable** — 5 substrate-conformance tests guard SQL ↔ TS parity, namespace URI stability, composition-graph DAG integrity, citation schema versioning, and SVGO BLOCKER opt-out invariants; CI fires the alarm on any silent drift
-10. **47 capabilities decomposed into 10 components** — single-Opus Component 09 close-out + Sonnet/Haiku/Opus mixed body-of-work fits the Fleet activation profile cleanly
-11. **Recursive subagent spawning hard-blocked finding formalized** — INLINE SERIAL pattern adopted across all 4 waves after Wave 0 discovery (parent agent authors files directly within own context; nested `Agent` calls fail at runtime layer)
-12. **flight-ops audit-then-author pattern verified ship-readiness BEFORE Wave 4 dispatch** — WAVE-4-AUDIT.md confirmed 0 blocking issues + 3 advisories pre-resolved, so Component 09 began with zero blockers
+**PG runtime live.** Component 02 wired `/api/graph/upstream/<node_id>` + `/api/graph/downstream/<node_id>` + `/api/search` (RRF hybrid) replacing 501 stubs; measured 8ms p95 on 32-node corpus (target ≤200ms; **25× headroom**)
+**Round-trip event persistence wired T3 → T5.** Component 05 inserts `prov_node sub_type='roundtrip-event'` + `wasDerivedFrom` edge to source artifact; CAP-019 reclassified from "deferred runtime" to "shipped runtime" (effective deferred count drops 4 → 3)
+**Yosys-driven netlist renderer at full fidelity.** Component 06 replaces simplified path; 3 cartridge examples (add, xor1, mux) re-rendered with structural metadata preserved; YOSYS_TEST=1 e2e gated
+**WGSL compute layout live in dashboard.** Component 07 routes through `webgpu-compute/force-atlas-2.wgsl` when WebGPU available; SCRIBE_FORCE_CPU toggle flips to JS fallback
+**Public deployment LIVE.** 12 SCRIBE files (369,668 bytes) at https://tibsfox.com/Research/SCRIBE/ via new `npm run ftp-sync:scribe` mode; 5/5 HTTPS verification probes returned 200
+**Substrate-continuity is now machine-checkable.** 5 substrate-conformance tests guard SQL ↔ TS parity, namespace URI stability, composition-graph DAG integrity, citation schema versioning, and SVGO BLOCKER opt-out invariants; CI fires the alarm on any silent drift
+**47 capabilities decomposed into 10 components.** single-Opus Component 09 close-out + Sonnet/Haiku/Opus mixed body-of-work fits the Fleet activation profile cleanly
+**Recursive subagent spawning hard-blocked finding formalized.** INLINE SERIAL pattern adopted across all 4 waves after Wave 0 discovery (parent agent authors files directly within own context; nested `Agent` calls fail at runtime layer)
+**flight-ops audit-then-author pattern verified ship-readiness BEFORE Wave 4 dispatch.** WAVE-4-AUDIT.md confirmed 0 blocking issues + 3 advisories pre-resolved, so Component 09 began with zero blockers
 
 ## v621 capability inventory
 

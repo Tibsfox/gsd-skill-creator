@@ -9,9 +9,9 @@
 5. **First on-orbit ATM-PI as participating crew member.** Owen Garriott (Stanford EE PhD ionospheric physicist) was both PI for ATM ionospheric/solar-physics observations AND active astronaut crew. PHYSICIAN-AS-CREW substrate primitive 2-ex reproduces v610 Kerwin pattern.
 6. **CMEs established as STATISTICAL CLASS.** Munro & Sime 1985 77-CME catalog (~110 events / 227 days) establishes Coronal Mass Ejection as a discrete-class space-weather phenomenon distinct from solar flares. OSO-7 1971-12-14 Tousey first-CME-detection distinguished as single-detection baseline; Skylab 3 ATM is the founding instance for CMEs-as-statistical-class.
 7. **K_10 pack-pair completeness ACHIEVED** with **6 substrate-bridges pack-06↔pack-10** (Hasse-Weil zeta L-functions; Plücker coordinates ↔ q-binomial; Veronese embedding; Modularity ↔ Pascal-incidence on X_0(N); modular-forms-as-Grassmannian-line-bundle-sections; Schubert calculus arithmetic-refinement; Manin BSD ↔ Cayley-Salmon). **Monotone-increasing pattern 4 (v609 pack-02↔pack-03) → 5 (v610 pack-03↔pack-10) → 6 (v611 pack-06↔pack-10)** — #10265 PROJECTIVE-PAIR-DENSER-THAN-DIFFERENTIAL-PAIR HOLDS at obs#2.
-8. **SUBSTRATE-COHERENCE-PREDICTS-CROSS-PACK-DENSITY HOLDS at obs#7** — second post-ESTABLISHED test passed; 7-of-7 cumulative; lesson is stable past initial ESTABLISHED-confirmation.
+**SUBSTRATE-COHERENCE-PREDICTS-CROSS-PACK-DENSITY HOLDS at obs#7.** second post-ESTABLISHED test passed; 7-of-7 cumulative; lesson is stable past initial ESTABLISHED-confirmation.
 9. **W2 wave clean across three consecutive milestones** (v609 + v610 + v611) — 12-of-12 cumulative clean dispatches without watchdog/quota/fabrication events. Chunked Write+Edit pattern (FA-608-1 amendment) continues post-ESTABLISHED reproducibility.
-10. **7th operational application of v603 BLOCKER gate** — clean PASS (8/8 Track cards + 5× nav-card / 7/7 NASA-canonical sections / 13 artifacts 5/5 categories / 13/13 cross-link coverage).
+**7th operational application of v603 BLOCKER gate.** clean PASS (8/8 Track cards + 5× nav-card / 7/7 NASA-canonical sections / 13 artifacts 5/5 categories / 13/13 cross-link coverage).
 
 ## Engine state at v611 close
 

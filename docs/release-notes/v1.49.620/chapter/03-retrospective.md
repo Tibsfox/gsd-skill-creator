@@ -83,3 +83,11 @@ W0 mode-choice per FA-619-8: enumerated (a) deepening / (b) extension to pack-19
 - **EXACT-CALENDAR-MATCH-CROSS-TRACK substrate primitive NEW LOCKED at v620** — PV1 14y operation 1978-1992 = Pacific Yew taxol 14y program 1978-1992 EXACT same calendar boundaries; first cross-track exact-calendar coincidence at 14-year scale across NASA + SPS tracks
 - **#10297 + #10298 + #10299 + #10300 + #10301 + #10302 NEW CANDIDATEs at v620 first-of-their-kind milestone** — PLANETARY-RADAR-AS-DELIVERABLE + AUTOTROPH-AS-COHORT-NODE + TAXOL-DEVELOPMENT-AS-PLANETARY-RADAR-MAPPING + EXACT-CALENDAR-MATCH-CROSS-TRACK + VENUS-AS-EARTH-COMPARATIVE-PLANET + DIRECT-ORDER-VS-INVERSION-SUB-FORM-BIFURCATION; six new candidates at single milestone matching v619 cadence
 - **#10265 obs#8 RETIRE-WITH-NULL FORMALIZED** — projective-pair-denser-than-differential-pair substrate primitive confirmed null at extension-tier organizing-meta packs; lesson formally retired per FA-619-11
+## Process observations
+
+- **Wave dispatch cadence:** W0 main-context + W1 research subagent + W2 build subagents (NASA serial-first then MUS+ELC+SPS parallel) — pattern held at v1.49.620
+- **Recovery hierarchy:** Tier-2 inline-Edit recovery applied if depth-audit FAIL — engine-cadence resilience pattern
+- **Cross-track read-discipline:** all sibling W1 drafts read before W2 build authoring — zero fabrication maintained at v1.49.620
+- **Pre-tag-gate composite:** 8/8 PASS gate held at v1.49.620 (build + vitest + completeness + CI-on-dev + www-bundles + depth-audit + CLAUDE.md + catalog-index)
+- **Drift detection:** post-ship RH refresh emitted advisory drift signal at v1.49.620 (active soak per FA-621 disposition)
+

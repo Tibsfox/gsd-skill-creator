@@ -77,3 +77,11 @@ W0 mode-choice per FA-616-8: enumerated (a) deepening / (b) extension to pack-16
 - **FIRST-CABINET-DEPARTMENT-FOR-RESEARCH-CONSOLIDATION substrate primitive emerges via DOE Organization Act** — first major Cabinet-rank reorganization since DoT 1967; consolidates 50+ programs; #10283 CANDIDATE
 - **EMERGENT-VS-DEFINITIONAL-BRIDGE-SUB-TYPE refinement** — pack-07/14/15 emergent breadth vs pack-16 definitional dependency-forced bridge; #10284 CANDIDATE refines #10273
 - **RECORDING-SESSION-ANCHOR formalization** at four cumulative instances — MUS 1.86 + v614 + v616 + v617; #10285 CANDIDATE PROMOTION TARGET at next bidirectional refinement
+## Process observations
+
+- **Wave dispatch cadence:** W0 main-context + W1 research subagent + W2 build subagents (NASA serial-first then MUS+ELC+SPS parallel) — pattern held at v1.49.617
+- **Recovery hierarchy:** Tier-2 inline-Edit recovery applied if depth-audit FAIL — engine-cadence resilience pattern
+- **Cross-track read-discipline:** all sibling W1 drafts read before W2 build authoring — zero fabrication maintained at v1.49.617
+- **Pre-tag-gate composite:** 8/8 PASS gate held at v1.49.617 (build + vitest + completeness + CI-on-dev + www-bundles + depth-audit + CLAUDE.md + catalog-index)
+- **Drift detection:** post-ship RH refresh emitted advisory drift signal at v1.49.617 (active soak per FA-621 disposition)
+

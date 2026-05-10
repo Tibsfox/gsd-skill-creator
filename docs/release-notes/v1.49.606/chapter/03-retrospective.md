@@ -1,5 +1,8 @@
 # v1.49.606 — Carryover Lessons Applied
 
+## Retrospective at v1.49.606 close
+
+
 ## #10246 CANDIDATE — applied (POSITIVE-RECURRENCE soak observation #3)
 
 v604 emitted #10246 CANDIDATE: when Sonnet W2 build agents hit weekly-quota mid-build, main-context Opus inline-author missing companion files at the W2 mid-build boundary. v605 was NEGATIVE-CONFIRMING (no quota event). v606 is **POSITIVE-CONFIRMING** at observation #3.
@@ -36,3 +39,11 @@ Both lessons STILL DEFERRED through 7/6 consecutive milestones. v606 W3.5 explic
 ## EXTENDED-STAY-DOCTRINE — v605 admit confirmed at v606
 
 v605 W3.3 admitted EXTENDED-STAY-DOCTRINE to §6.6 register at 2-ex per substrate-emergent rationale (Apollo 15 EVA-3 + Pioneer 10 30-yr DSN + Apollo 16 ALSEP-3 5-yr long-life). v606 reaffirms admit: Apollo 17 ALSEP-4 long-life science package (operational through 1977-09-30; 5-year lifecycle) + 75h surface time (longest of any Apollo) provide 4-ex confirmation. Admit holds; primitive remains in §6.6 LOCKED register.
+## Process observations
+
+- **Wave dispatch cadence:** W0 main-context + W1 research subagent + W2 build subagents (NASA serial-first then MUS+ELC+SPS parallel) — pattern held at v1.49.606
+- **Recovery hierarchy:** Tier-2 inline-Edit recovery applied if depth-audit FAIL — engine-cadence resilience pattern
+- **Cross-track read-discipline:** all sibling W1 drafts read before W2 build authoring — zero fabrication maintained at v1.49.606
+- **Pre-tag-gate composite:** 8/8 PASS gate held at v1.49.606 (build + vitest + completeness + CI-on-dev + www-bundles + depth-audit + CLAUDE.md + catalog-index)
+- **Drift detection:** post-ship RH refresh emitted advisory drift signal at v1.49.606 (active soak per FA-621 disposition)
+

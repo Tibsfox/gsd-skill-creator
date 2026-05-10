@@ -39,3 +39,8 @@
 ## See also
 
 - Chapter contents: [00-summary](chapter/00-summary.md) · [03-retrospective](chapter/03-retrospective.md) · [04-lessons](chapter/04-lessons.md) · [99-context](chapter/99-context.md)
+## Threads closed / opened / extended
+
+- **OPENED:** TROGLODYTIDAE-AS-COHORT-NODE — substrate primitive NEW LOCKED at v1.49.624
+- **EXTENDED:** engine-cadence run continued at v1.49.624 (degree-advancing milestone)
+

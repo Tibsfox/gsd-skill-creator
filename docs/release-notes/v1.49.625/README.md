@@ -29,3 +29,12 @@
 ## See also
 
 - Chapter contents: [00-summary](chapter/00-summary.md) · [03-retrospective](chapter/03-retrospective.md) · [04-lessons](chapter/04-lessons.md) · [99-context](chapter/99-context.md)
+## Threads closed / opened / extended
+
+- **OPENED:** BAND-PROGRAM-COMPLETION-AT-ALBUM-SCALE — substrate primitive NEW LOCKED at v1.49.625
+- **OPENED:** SALVELINUS-AS-COHORT-NODE — substrate primitive NEW LOCKED at v1.49.625
+- **RESOLVED:** FA-624-1 forward action closed at v1.49.625 W0
+- **RESOLVED:** FA-624-6 forward action closed at v1.49.625 W0
+- **RESOLVED:** FA-624-7 forward action closed at v1.49.625 W0
+- **EXTENDED:** engine-cadence run continued at v1.49.625 (degree-advancing milestone)
+

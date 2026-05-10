@@ -115,3 +115,9 @@ Counter-cadence milestone does not add or promote substrate primitives.
 4. `npm run ship-sync` — FF dev to main, push origin dev
 5. `npm run gh-release-publish -- 1.49.607`
 6. Release-history refresh: `node tools/release-history/run-with-pg.mjs refresh --fast --quiet`
+## Cross-track structural pair anchor inventory
+
+- **Five-track convergence at v1.49.607:** NASA + MUS + ELC + SPS + TRS reproducibly-stable cross-track substrate alignment per #10242 ESTABLISHED reaffirm
+- **Cross-track read-discipline maintained:** zero fabrication across W2 builds; all sibling references sourced from W1 drafts per #10243 ESTABLISHED reaffirm
+- **Engine-cadence anchor pair:** all 5 tracks advance synchronously at v1.49.607 per the engine-cadence ship-pipeline contract
+

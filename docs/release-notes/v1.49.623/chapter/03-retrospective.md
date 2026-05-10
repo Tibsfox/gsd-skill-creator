@@ -60,3 +60,11 @@ v620 AUTOTROPH-AS-COHORT-NODE (Pacific Yew) → v622 BENTHIC-INVERTEBRATE-AS-COH
 ### Depth borderline at MUS + ELC simultaneous — dual-track Tier-2 application
 
 At v623, both MUS 1.99 and ELC 1.99 fell below depth thresholds at initial W2 dispatch (MUS 78%/74%; ELC 80%/69%), requiring simultaneous dual-track Tier-2 recovery. This is the first dual-track Tier-2 application in the engine run. The pattern is consistent with milestones selecting events with shorter primary-source citation density (Keith Moon death coverage = tabloid/rock-press heavy + EO 12072 = narrow federal-property policy = limited academic citation depth). Lesson: when both MUS and ELC selections are in domains with thin academic or primary-source citation depth (pop-obituary + narrow executive-order), plan for dual-track Tier-2 dispatch rather than serial single-track recovery.
+## Process observations
+
+- **Wave dispatch cadence:** W0 main-context + W1 research subagent + W2 build subagents (NASA serial-first then MUS+ELC+SPS parallel) — pattern held at v1.49.623
+- **Recovery hierarchy:** Tier-2 inline-Edit recovery applied if depth-audit FAIL — engine-cadence resilience pattern
+- **Cross-track read-discipline:** all sibling W1 drafts read before W2 build authoring — zero fabrication maintained at v1.49.623
+- **Pre-tag-gate composite:** 8/8 PASS gate held at v1.49.623 (build + vitest + completeness + CI-on-dev + www-bundles + depth-audit + CLAUDE.md + catalog-index)
+- **Drift detection:** post-ship RH refresh emitted advisory drift signal at v1.49.623 (active soak per FA-621 disposition)
+

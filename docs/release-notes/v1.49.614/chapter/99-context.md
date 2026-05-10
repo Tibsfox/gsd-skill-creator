@@ -93,3 +93,13 @@ Bonus: MUS Fleetwood Mac multi-auteur-democratic-band as fourth-mode candidate a
 - MUS / ELC / SPS substrate-emergent W1 selection at v615 W1 (target window: 1976-07-20 ±8d Viking 1 landing; 1976-09-03 ±8d Viking 2 landing; possible cross-track to bicentennial / US 200th anniversary 1976-07-04)
 
 Forward arc: v615 Viking 1 → v616 Viking 2 (NASA 1.93; biology results) → v617 candidate (Voyager 1/2 launches 1977-08-20 + 1977-09-05; first outer-planets grand tour).
+## Cross-track structural pair anchor inventory
+
+- **NASA × MUS substrate parallel:** Apollo-Soyuz Test Project (NSSDC 1975-066A US / 1975-065A Soyuz 19) (1.91) ↔ Fleetwood Mac *Fleetwood Mac* (the "White Album") (1.91) — cross-track structural pair anchor at v1.49.614
+- **NASA × ELC substrate parallel:** Apollo-Soyuz Test Project (NSSDC 1975-066A US / 1975-065A Soyuz 19) (1.91) ↔ Helsinki Final Act / CSCE Final Act (1.91) — political-technical anchor pair at v1.49.614
+- **NASA × SPS substrate parallel:** Apollo-Soyuz Test Project (NSSDC 1975-066A US / 1975-065A Soyuz 19) (1.91) ↔ Trumpeter Swan (*Cygnus buccinator*) — biological-substrate anchor pair at v1.49.614
+- **NASA × TRS substrate parallel:** Apollo-Soyuz Test Project (NSSDC 1975-066A US / 1975-065A Soyuz 19) (1.91) ↔ abstract algebra binding — formal-mathematics substrate anchor at v1.49.614
+- **MUS × ELC parallel:** Fleetwood Mac *Fleetwood Mac* (the "White Album") ↔ Helsinki Final Act / CSCE Final Act — cultural-political anchor pair at v1.49.614
+- **Five-track convergence at v1.49.614:** NASA + MUS + ELC + SPS + TRS reproducibly-stable cross-track substrate alignment per #10242 ESTABLISHED reaffirm
+- **Cross-track read-discipline maintained:** zero fabrication across W2 builds; all sibling references sourced from W1 drafts per #10243 ESTABLISHED reaffirm
+

@@ -59,3 +59,11 @@
 - Chapter contents: [00-summary](chapter/00-summary.md) · [03-retrospective](chapter/03-retrospective.md) · [04-lessons](chapter/04-lessons.md) · [99-context](chapter/99-context.md)
 - NASA degree page: `www/tibsfox/com/Research/NASA/1.104/index.html`
 - Mission brief: `.planning/missions/v1-49-628-sts-2-columbia/MISSION-BRIEF.md` (gitignored, on-disk only)
+## Threads closed / opened / extended
+
+- **OPENED:** ARCHITECTURE-AS-DELIVERABLE — substrate primitive NEW LOCKED at v1.49.628
+- **OPENED:** DUAL-ANCHOR-SAME-DAY-LANDING — substrate primitive NEW LOCKED at v1.49.628
+- **OPENED:** CORVID-AS-COHORT-NODE — substrate primitive NEW LOCKED at v1.49.628
+- **RESOLVED:** FA-627-6 forward action closed at v1.49.628 W0
+- **EXTENDED:** engine-cadence run continued at v1.49.628 (degree-advancing milestone)
+

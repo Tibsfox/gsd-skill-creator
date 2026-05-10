@@ -1,5 +1,14 @@
 # v1.49.606 — Apollo 17 Final Crewed Lunar Landing (NASA degree 1.84)
 
+**Released:** 2026-05-04
+**Type:** Engine-cadence degree-advancing milestone (v604+ run)
+**NASA Mission:** Apollo 17 Final Crewed Lunar Landing (NASA degree 1.84)
+**Predecessor:** v1.49.605
+**Mission package:** `.planning/missions/v1-49-606-apollo-17-final-crewed-lunar-landing-nasa-degree-1/`
+
+## Summary
+
+
 **Shipped:** 2026-05-04
 **Predecessor:** v1.49.605 (Apollo 16 Descartes Highlands Geology; NASA 1.83)
 **Cadence:** engine-cadence degree-advancing milestone (third consecutive engine-cadence ship after v603 counter-cadence)
@@ -42,3 +51,7 @@ Apollo 17 launched 1972-12-07 05:33:00 UTC from KSC LC-39A — the only nighttim
 3. **First triple-boundary INSIDE membership** in #10232 soak series (Trouble Man across launch + landing + EVA-3)
 4. **First positive-recurrence soak observation of #10246** mid-build-quota-Opus-recovery pattern (v605 was NEGATIVE-CONFIRMING; v606 is POSITIVE-CONFIRMING)
 5. **Pack-02 (differential geometry) bound** — third M0 original-substrate pack; K_6 pack-pair completeness achieved (15/15 pairs bound)
+
+## See also
+
+- Chapter contents: [00-summary](chapter/00-summary.md) · [03-retrospective](chapter/03-retrospective.md) · [04-lessons](chapter/04-lessons.md) · [99-context](chapter/99-context.md)

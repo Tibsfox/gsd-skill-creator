@@ -113,3 +113,13 @@ Substrate held across all eight observed regime-shift directions including tripl
 - Phobos centennial (v617 #10278) substrate-scope decision still PENDING per FA-619-12
 
 Forward arc: v619 Voyager 1 (TWIN-MISSION-PAIR-COMPLETION; first interstellar 2012; Pale Blue Dot 1990 cultural-tertiary; #10288 + #10279 + #10282 ESTABLISHED-PROMOTIONS at 3-ex; #10275 obs#3 reproducibility CONFIRMED at 5-of-5 domain forms) → v620 candidate TBD (Helios 2 close-perihelion 0.29 AU 1976-04-17 if substrate-coherence test passes at v620 W0; otherwise other mid-1970s/late-1970s NASA 1.97 row mission).
+## Cross-track structural pair anchor inventory
+
+- **NASA × MUS substrate parallel:** Voyager 1 (NSSDC 1977-084A) (1.96) ↔ Iggy Pop *Lust for Life* (1.96) — cross-track structural pair anchor at v1.49.619
+- **NASA × ELC substrate parallel:** Voyager 1 (NSSDC 1977-084A) (1.96) ↔ Torrijos-Carter Treaties (Panama Canal Treaty + Neutrality Treaty) (1.96) — political-technical anchor pair at v1.49.619
+- **NASA × SPS substrate parallel:** Voyager 1 (NSSDC 1977-084A) (1.96) ↔ Chinook Salmon (*Oncorhynchus tshawytscha*) — biological-substrate anchor pair at v1.49.619
+- **NASA × TRS substrate parallel:** Voyager 1 (NSSDC 1977-084A) (1.96) ↔ category-theory binding — formal-mathematics substrate anchor at v1.49.619
+- **MUS × ELC parallel:** Iggy Pop *Lust for Life* ↔ Torrijos-Carter Treaties (Panama Canal Treaty + Neutrality Treaty) — cultural-political anchor pair at v1.49.619
+- **Five-track convergence at v1.49.619:** NASA + MUS + ELC + SPS + TRS reproducibly-stable cross-track substrate alignment per #10242 ESTABLISHED reaffirm
+- **Cross-track read-discipline maintained:** zero fabrication across W2 builds; all sibling references sourced from W1 drafts per #10243 ESTABLISHED reaffirm
+
