@@ -14,12 +14,19 @@
  *
  * Validation policy:
  *   - Passphrase + confirmation must both be non-empty and match.
- *   - Passphrase quality / minimum-length checks are R14-deferred (see
- *     `.planning/keystore-encryption-decision.md`); they land in a future
- *     mission with explicit operator policy.
+ *   - Passphrase quality is enforced via zxcvbn (R14, shipped v1.49.637
+ *     C3) at `submit()` BEFORE `submitFn` runs — weak passphrases never
+ *     reach the Tauri invoke boundary. Default threshold: zxcvbn score
+ *     >= 3; operator override via `SC_PASSPHRASE_MIN_SCORE` (range 0-4).
+ *     See `src/keystore/passphrase-quality.ts`.
  *
  * @module keystore/passphrase-flow
  */
+
+import {
+  assertPassphraseQuality,
+  PassphraseQualityError,
+} from '../../../src/keystore/passphrase-quality';
 
 /** Lifecycle state of the passphrase flow. */
 export type PassphraseFlowState =
@@ -102,6 +109,19 @@ export class PassphraseFlow {
   async submit(): Promise<void> {
     if (this.state === 'submitting') return;
     if (this.computeValidationError() !== null) return;
+    // R14: enforce zxcvbn quality threshold BEFORE invoking submitFn so the
+    // rejected passphrase never crosses the FFI boundary. PassphraseQualityError
+    // surfaces as `submitError` via the same path as Tauri-side rejection,
+    // matching existing error UX (string in `submitError`, state -> 'error').
+    try {
+      assertPassphraseQuality(this.passphrase);
+    } catch (e) {
+      this.state = 'error';
+      this.submitError =
+        e instanceof PassphraseQualityError ? e.message : stringifyError(e);
+      this.notify();
+      return;
+    }
     this.state = 'submitting';
     this.submitError = null;
     this.notify();

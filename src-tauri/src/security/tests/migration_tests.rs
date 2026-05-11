@@ -182,7 +182,11 @@ fn migrate_to_path2_round_trips_and_deletes_v1() {
     let v1 = write_v1_plaintext(&dir, PLAINTEXT_LINE);
     let age_path = path2_age_path(&dir);
 
-    let count = migrate_v1_to_path2(&v1, &age_path, "test-passphrase").expect("migration");
+    // Hygiene update (v1.49.637 C3 R14 audit): "test-passphrase" already
+    // scores 4 under zxcvbn, but the Rust path bypasses the TS validator
+    // entirely. Re-use the canonical strong fixture from encryption_tests
+    // for consistency across the security test suite.
+    let count = migrate_v1_to_path2(&v1, &age_path, "correct-horse-battery-staple-42").expect("migration");
     assert_eq!(count, 1);
     assert!(!v1.exists(), "v1 must be deleted after successful Path-2 migration");
     assert!(age_path.exists(), "age file must be written");

@@ -44,20 +44,20 @@ describe('v1.49.636 C1 flip — getKeystoreApi() returns TauriKeystoreApi', () =
 
   it('migrateV1ToV2(passphrase) forwards passphrase to keystore_migrate_v1_to_v2', async () => {
     mockInvoke.mockResolvedValueOnce({ migrated_count: 3 });
-    const out = await getKeystoreApi().migrateV1ToV2('hunter2');
+    const out = await getKeystoreApi().migrateV1ToV2('correct horse battery staple stadium electric');
     expect(out).toEqual({ migrated_count: 3 });
     expect(mockInvoke).toHaveBeenCalledWith('keystore_migrate_v1_to_v2', {
-      passphrase: 'hunter2',
+      passphrase: 'correct horse battery staple stadium electric',
     });
   });
 
   it('set(account, value, passphrase) forwards full payload to keystore_set', async () => {
     mockInvoke.mockResolvedValueOnce(undefined);
-    await getKeystoreApi().set('anthropic-api-key', 'sk-test', 'hunter2');
+    await getKeystoreApi().set('anthropic-api-key', 'sk-test', 'correct horse battery staple stadium electric');
     expect(mockInvoke).toHaveBeenCalledWith('keystore_set', {
       account: 'anthropic-api-key',
       value: 'sk-test',
-      passphrase: 'hunter2',
+      passphrase: 'correct horse battery staple stadium electric',
     });
   });
 

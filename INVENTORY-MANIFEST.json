@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-09T13:12:03Z",
+  "generated_at": "2026-05-11T19:50:16Z",
   "generator_version": "1.0.0",
   "milestone": "v1.49.576",
   "counts": {
@@ -7,7 +7,7 @@
     "agents_total": 49,
     "agents_gsd_prefix": 34,
     "hooks": 26,
-    "src_subsystems": 151
+    "src_subsystems": 152
   },
   "commands": [
     {
@@ -486,6 +486,7 @@
     "intelligence",
     "interpreter",
     "intrinsic-telemetry",
+    "keystore",
     "knowledge",
     "koopman-memory",
     "langevin",

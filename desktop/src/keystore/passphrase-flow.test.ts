@@ -5,6 +5,16 @@
 import { describe, it, expect, vi } from 'vitest';
 import { PassphraseFlow } from './passphrase-flow';
 
+/**
+ * Shared strong test fixtures (zxcvbn score 4) — required by R14 enforcement
+ * shipped at v1.49.637 C3. The flow's submit() now rejects any passphrase
+ * below score 3 before invoking submitFn, so submit-path tests must use
+ * fixtures that clear the threshold. Validation/edit/reset tests that
+ * don't reach the zxcvbn gate still use any string.
+ */
+const STRONG_PASSPHRASE = 'correct horse battery staple stadium electric';
+const STRONG_PASSPHRASE_ALT = 'rocket banana mineral cascade thunder';
+
 function makeFlow(submitFn: (p: string) => Promise<void> = async () => {}) {
   return new PassphraseFlow(submitFn);
 }
@@ -49,18 +59,18 @@ describe('PassphraseFlow — submit', () => {
   it('calls submitFn with the passphrase on success path', async () => {
     const submitFn = vi.fn().mockResolvedValue(undefined);
     const flow = makeFlow(submitFn);
-    flow.setPassphrase('hunter2');
-    flow.setConfirm('hunter2');
+    flow.setPassphrase(STRONG_PASSPHRASE);
+    flow.setConfirm(STRONG_PASSPHRASE);
     await flow.submit();
-    expect(submitFn).toHaveBeenCalledWith('hunter2');
+    expect(submitFn).toHaveBeenCalledWith(STRONG_PASSPHRASE);
     expect(flow.snapshot().state).toBe('success');
     expect(flow.snapshot().submitError).toBeNull();
   });
 
   it('transitions to "error" with a string error when submitFn rejects', async () => {
     const flow = makeFlow(() => Promise.reject('invalid passphrase'));
-    flow.setPassphrase('hunter2');
-    flow.setConfirm('hunter2');
+    flow.setPassphrase(STRONG_PASSPHRASE);
+    flow.setConfirm(STRONG_PASSPHRASE);
     await flow.submit();
     const snap = flow.snapshot();
     expect(snap.state).toBe('error');
@@ -69,8 +79,8 @@ describe('PassphraseFlow — submit', () => {
 
   it('uses Error.message when submitFn rejects with an Error', async () => {
     const flow = makeFlow(() => Promise.reject(new Error('decrypt failed')));
-    flow.setPassphrase('hunter2');
-    flow.setConfirm('hunter2');
+    flow.setPassphrase(STRONG_PASSPHRASE);
+    flow.setConfirm(STRONG_PASSPHRASE);
     await flow.submit();
     expect(flow.snapshot().submitError).toBe('decrypt failed');
   });
@@ -79,7 +89,7 @@ describe('PassphraseFlow — submit', () => {
     const submitFn = vi.fn();
     const flow = makeFlow(submitFn);
     flow.setPassphrase('hunter2');
-    flow.setConfirm('hunter3'); // mismatch
+    flow.setConfirm('hunter3'); // mismatch — fails pre-zxcvbn validation
     await flow.submit();
     expect(submitFn).not.toHaveBeenCalled();
     expect(flow.snapshot().state).toBe('entering');
@@ -91,8 +101,8 @@ describe('PassphraseFlow — submit', () => {
       () => new Promise<void>((resolve) => { resolveFn = resolve; }),
     );
     const flow = makeFlow(submitFn);
-    flow.setPassphrase('hunter2');
-    flow.setConfirm('hunter2');
+    flow.setPassphrase(STRONG_PASSPHRASE);
+    flow.setConfirm(STRONG_PASSPHRASE);
     const first = flow.submit();
     expect(flow.snapshot().state).toBe('submitting');
     await flow.submit(); // re-entry attempt — must not call submitFn again
@@ -101,16 +111,32 @@ describe('PassphraseFlow — submit', () => {
     await first;
     expect(flow.snapshot().state).toBe('success');
   });
+
+  // R14 (v1.49.637 C3): zxcvbn quality gate runs BEFORE submitFn.
+  it('rejects a weak passphrase before invoking submitFn (R14 zxcvbn gate)', async () => {
+    const submitFn = vi.fn().mockResolvedValue(undefined);
+    const flow = makeFlow(submitFn);
+    const WEAK = 'password123'; // zxcvbn score 1
+    flow.setPassphrase(WEAK);
+    flow.setConfirm(WEAK);
+    await flow.submit();
+    expect(submitFn).not.toHaveBeenCalled();
+    const snap = flow.snapshot();
+    expect(snap.state).toBe('error');
+    expect(snap.submitError).toContain('does not meet quality requirement');
+    // Security invariant: rejected passphrase never echoed in submitError.
+    expect(snap.submitError).not.toContain(WEAK);
+  });
 });
 
 describe('PassphraseFlow — edit clears prior submit-error', () => {
   it('clears submitError + drops state back to "entering" on next edit', async () => {
     const flow = makeFlow(() => Promise.reject('first try failed'));
-    flow.setPassphrase('hunter2');
-    flow.setConfirm('hunter2');
+    flow.setPassphrase(STRONG_PASSPHRASE);
+    flow.setConfirm(STRONG_PASSPHRASE);
     await flow.submit();
     expect(flow.snapshot().state).toBe('error');
-    flow.setPassphrase('hunter3');
+    flow.setPassphrase(STRONG_PASSPHRASE_ALT);
     const snap = flow.snapshot();
     expect(snap.state).toBe('entering');
     expect(snap.submitError).toBeNull();

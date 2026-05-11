@@ -32,8 +32,12 @@ fn salt_is_32_bytes_and_random() {
 #[test]
 fn derive_key_is_deterministic_for_same_inputs() {
     let salt = [0u8; ARGON2_SALT_LEN];
-    let k1 = derive_key("passphrase", &salt).expect("derive 1");
-    let k2 = derive_key("passphrase", &salt).expect("derive 2");
+    // Hygiene update (v1.49.637 C3 R14 audit): use a non-trivial fixture
+    // even on the Rust side, where the TS-side zxcvbn validator does NOT
+    // apply. This test only cares about derivation determinism, not
+    // passphrase strength — but a strong fixture documents intent.
+    let k1 = derive_key("salt-determinism-fixture-2026", &salt).expect("derive 1");
+    let k2 = derive_key("salt-determinism-fixture-2026", &salt).expect("derive 2");
     assert_eq!(k1, k2, "Argon2id must be deterministic for fixed inputs");
     assert_eq!(k1.len(), ARGON2_OUTPUT_LEN);
 }
