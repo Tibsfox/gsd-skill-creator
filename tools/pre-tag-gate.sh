@@ -64,6 +64,16 @@
 #                       bridge) is allowlisted at
 #                       tools/tauri-boundary-audit.allowlist.json. Override:
 #                       SC_SKIP_TAURI_BOUNDARY_GATE=1 (emergency only).
+#   9.5. Apply-to-self enforcement (v1.49.636 C7, Meta-Lesson) — runs
+#                       `node scripts/apply-to-self.mjs` which greps
+#                       newly-authored test files in the milestone diff
+#                       against pattern violations cataloged from the
+#                       discipline docs (existsSync-no-skip-guard,
+#                       perf-assertion-no-warmup). WARN-only by default;
+#                       converts to BLOCK with SC_REQUIRE_APPLY_TO_SELF=1.
+#                       Override: SC_SKIP_APPLY_TO_SELF=1 (emergency only;
+#                       fix the findings or allowlist at
+#                       .planning/ship-pipeline-discipline/apply-to-self-allowlist.md).
 #
 # Exit codes:
 #   0  all checks PASS
@@ -76,6 +86,7 @@
 #   7  CLAUDE.md drift (SC_SKIP_CLAUDE_MD_GATE=1 overrides)
 #   8  catalog-index drift (BLOCKER added v1.49.601; SC_SKIP_CATALOG_INDEX_GATE=1 overrides)
 #   9  tauri-boundary violation (BLOCKER added v1.49.634; SC_SKIP_TAURI_BOUNDARY_GATE=1 overrides)
+#   10 apply-to-self findings (BLOCKER only when SC_REQUIRE_APPLY_TO_SELF=1; default WARN-only)
 #
 # Usage:
 #   bash tools/pre-tag-gate.sh
@@ -317,6 +328,28 @@ else
     exit 9
   fi
   log "[pre-tag-gate] step 9/9: PASS"
+fi
+
+# ----- step 9.5: apply-to-self enforcement (v1.49.636 C7, Meta-Lesson) -----
+# WARN-only by default — emits findings without failing the gate. Closes
+# the Meta-Lesson "discipline docs only prove their value when their
+# authors follow them in the same commit window" by mechanically
+# checking newly-authored test files against discipline-doc patterns.
+SKIP_APPLY_TO_SELF="${SC_SKIP_APPLY_TO_SELF:-0}"
+if [ "$SKIP_APPLY_TO_SELF" = "1" ]; then
+  log "[pre-tag-gate] step 9.5/9: SKIPPED (SC_SKIP_APPLY_TO_SELF=1)"
+else
+  log "[pre-tag-gate] step 9.5/9: apply-to-self enforcement"
+  if ! node "$REPO_ROOT/scripts/apply-to-self.mjs"; then
+    # Default exit is 0 (WARN-only). Only non-zero when
+    # SC_REQUIRE_APPLY_TO_SELF=1 + findings present.
+    echo "[pre-tag-gate] FAIL: apply-to-self findings present AND SC_REQUIRE_APPLY_TO_SELF=1" >&2
+    echo "[pre-tag-gate]   Fix the findings OR allowlist them at" >&2
+    echo "[pre-tag-gate]   .planning/ship-pipeline-discipline/apply-to-self-allowlist.md" >&2
+    echo "[pre-tag-gate]   Override (emergency only): SC_SKIP_APPLY_TO_SELF=1" >&2
+    exit 10
+  fi
+  log "[pre-tag-gate] step 9.5/9: PASS"
 fi
 
 log "[pre-tag-gate] all 9 checks PASS — safe to \`git tag\` and merge to main"

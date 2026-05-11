@@ -30,6 +30,7 @@ export default defineConfig({
       'tools/__tests__/perf-assertion-audit.test.mjs',
       'tools/__tests__/check-version-sequence.test.mjs',
       'scripts/__tests__/ci-gate-enum.test.mjs',
+      'scripts/__tests__/apply-to-self.test.mjs',
     ],
     globals: true,
     testTimeout: 15000,
