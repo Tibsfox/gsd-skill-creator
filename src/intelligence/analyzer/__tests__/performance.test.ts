@@ -34,8 +34,14 @@ describe('language analyzer performance', () => {
       source: LARGE_SOURCE,
     };
 
-    // Warm up (first parse may be slower due to parser initialization)
-    await typescriptAnalyzer.analyze(input);
+    // Warm up: discard the first 5 parses so v8 tiers up + tree-sitter parser
+    // caches warm before the timed window. Single-call warmup proved insufficient
+    // under full-suite contention (observed 211.52ms 10-sample mean at v1.49.650
+    // pre-tag-gate; isolated runs land at ~120ms). Pattern follows the v1.49.634
+    // m2-short-term canonical fix (411edf9ee) generalized by C3 at v1.49.650.
+    for (let _ = 0; _ < 5; _++) {
+      await typescriptAnalyzer.analyze(input);
+    }
 
     const times: number[] = [];
     for (let i = 0; i < 10; i++) {
