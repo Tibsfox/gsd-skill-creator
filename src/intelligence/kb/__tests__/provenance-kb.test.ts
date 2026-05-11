@@ -72,6 +72,10 @@ function insertProvenance(opts: {
 }
 
 describe('intelligence/kb — ProvenanceKB', () => {
+  // Hook timeout bumped to 60s (= root-project testTimeout). sqlite WAL pragma +
+  // migration is fsync-bound and flakes under full-suite contention; isolated
+  // runtime is ~50ms. Canonical pattern: c6d49d8ab (connection-caching).
+  // Discipline doc: .planning/test-discipline/fragile-test-pattern.md (Template 2).
   beforeEach(() => {
     tmpDir = join(
       tmpdir(),
@@ -83,7 +87,7 @@ describe('intelligence/kb — ProvenanceKB', () => {
     db.pragma('foreign_keys = ON');
     applyMigrations(db, MIGRATIONS_DIR);
     kb = new ProvenanceKB(db);
-  });
+  }, 60_000);
 
   afterEach(() => {
     db.close();
