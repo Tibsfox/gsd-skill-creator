@@ -92,6 +92,10 @@ class CapturingBus {
   }
 }
 
+// Hook timeout bumped to 60s (= root-project testTimeout). sqlite init +
+// WAL pragma is fsync-bound and flakes under full-suite contention; isolated
+// runtime is ~50ms. Canonical pattern: c6d49d8ab / c49528c42.
+// Discipline doc: .planning/test-discipline/fragile-test-pattern.md (Template 2).
 beforeEach(() => {
   projectRoot = mkdtempSync(join(tmpdir(), 'atlas-runner-'));
   dbPath = join(projectRoot, 'atlas.db');
@@ -99,7 +103,7 @@ beforeEach(() => {
   db.pragma('journal_mode = WAL');
   applyMigrations(db, MIGRATIONS_DIR);
   makeFixtureProject(projectRoot);
-});
+}, 60_000);
 
 afterEach(() => {
   db.close();
@@ -355,6 +359,7 @@ describe('atlas-indexer runner — concurrency', () => {
   let cRoot: string;
   let cDb: Database.Database;
 
+  // Hook timeout bumped to 60s — same sqlite/WAL/fsync contention as outer beforeEach.
   beforeEach(() => {
     cRoot = mkdtempSync(join(tmpdir(), 'atlas-conc-'));
     const cDbPath = join(cRoot, 'atlas.db');
@@ -362,7 +367,7 @@ describe('atlas-indexer runner — concurrency', () => {
     cDb.pragma('journal_mode = WAL');
     applyMigrations(cDb, MIGRATIONS_DIR);
     make12FileFixture(cRoot);
-  });
+  }, 60_000);
 
   afterEach(() => {
     cDb.close();
