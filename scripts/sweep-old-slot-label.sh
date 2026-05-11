@@ -66,6 +66,32 @@ ALLOWLIST=(
   # state-md-normalizer test fixtures reference v1.49.650 as part of
   # the v1.49.635 audit trail it normalizes.
   "tools/__tests__/state-md-normalizer.test.mjs"
+  # Files below have a MIX of substrate citations (must remain v1.49.650
+  # to preserve architectural lineage: where the unified Keystore was
+  # introduced, where the legacy plaintext rename happened, where the
+  # pre-tag-gate measurement was observed) and cosmetic v1.49.636 refs
+  # (the C1-wiring milestone owner). The sweep tool's file-level
+  # allowlist treats these as substrate-citation-bearing; line-level
+  # discrimination is documented per-file by the C7 sweep-followup
+  # commit body. Future cluster may extend the sweep tool with a
+  # line-level allowlist regex set (lab-director-2 Option (b)).
+  "desktop/src/keystore/invoke.ts"
+  "desktop/src/keystore/passphrase-flow.ts"
+  "desktop/src/keystore/passphrase-flow.test.ts"
+  "desktop/src/keystore/migration-banner.ts"
+  "desktop/src/keystore/migration-banner.test.ts"
+  "src/cli/commands/keystore.ts"
+  "src-tauri/src/security/keystore.rs"
+  "src-tauri/src/security/migration.rs"
+  "src-tauri/src/security/tests/encryption_tests.rs"
+  "src-tauri/src/security/tests/keyring_backend_tests.rs"
+  "src-tauri/src/security/tests/migration_tests.rs"
+  "src-tauri/src/security/tests/keystore_reachability.rs"
+  "src-tauri/src/commands/keystore.rs"
+  "src-tauri/src/lib.rs"
+  "src-tauri/Cargo.toml"
+  "src/intelligence/atlas-indexer/__tests__/runner.test.ts"
+  "src/intelligence/analyzer/__tests__/performance.test.ts"
 )
 
 # Path-globs we scan. Limited to source/test/tools/scripts/docs trees;

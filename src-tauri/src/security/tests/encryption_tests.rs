@@ -1,4 +1,4 @@
-//! v1.49.636 C1 — encryption primitives unit tests.
+//! v1.49.650 C1 — encryption primitives unit tests.
 //!
 //! Covers `src/security/encryption.rs`:
 //! - Round-trip: encrypt(p, passphrase) → decrypt(c, passphrase) == p

@@ -114,7 +114,7 @@ function printHelp(io: KeystoreCommandIO): void {
       'Usage:',
       '  skill-creator keystore migrate           Migrate v1 plaintext → v2',
       '  skill-creator keystore migrate --to-keyring',
-      '                                            Path-2 → Path-1 (stub at v1.49.636)',
+      '                                            Path-2 → Path-1 (stub at v1.49.650)',
       '  skill-creator keystore set <account>     Store/update credential (value on stdin)',
       '  skill-creator keystore status            Print current keystore state',
       '',

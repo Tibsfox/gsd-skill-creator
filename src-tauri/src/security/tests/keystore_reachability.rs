@@ -180,7 +180,7 @@ fn plaintext_branch_disabled_in_release_arm_structural_proof() {
     );
     assert!(
         keystore_src.contains("skill-creator keystore migrate"),
-        "disabled-fallback error must point users at the v1.49.636 migration CLI"
+        "disabled-fallback error must point users at the v1.49.650 migration CLI"
     );
     assert!(
         keystore_src.contains("docs/keystore.md"),

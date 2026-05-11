@@ -1,6 +1,6 @@
 //! v1.49.636 C1 — Tauri commands for the unified keystore.
 //!
-//! Closes the v1.49.636 phase-(g) Option-2 deferral by wiring the three
+//! Closes the v1.49.650 phase-(g) Option-2 deferral by wiring the three
 //! TS-side `KeystoreApi` methods to real `#[tauri::command]` entry points.
 //!
 //! See `.planning/c1-tauri-wiring-design.md` for the W0 design + the

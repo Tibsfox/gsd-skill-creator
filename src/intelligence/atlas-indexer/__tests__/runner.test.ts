@@ -479,7 +479,7 @@ describe('atlas-indexer runner — concurrency', () => {
     // catastrophically regress). For a real speedup signal, log both times.
     // In practice on any machine with ≥2 cores t4 < t1 for CPU-bound indexFile.
     //
-    // Bumped 5× → 10× at v1.49.636 ship-time: full-suite contention surfaces
+    // Bumped 5× → 10× at v1.49.650 ship-time: full-suite contention surfaces
     // sub-50ms t1 timings where jitter dominates the ratio (observed t1=7.5ms,
     // t4=46.94ms = ~6.3× under load; isolated runs land t4 < t1 cleanly).
     // C3 audit gap: this site uses `expect(t4).toBeLessThan(t1 * N)` rather

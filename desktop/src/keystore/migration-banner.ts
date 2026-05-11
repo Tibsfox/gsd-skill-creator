@@ -1,5 +1,5 @@
 /**
- * Migration-banner state machine for the v1.49.636 keystore UI.
+ * Migration-banner state machine for the v1.49.650 keystore UI.
  *
  * Shows a visible banner on launch when a v1 plaintext credential file is
  * detected, prompting the user to migrate to v2 (Path-1 keyring or Path-2
@@ -7,7 +7,7 @@
  * supplied `KeystoreApi` and exposes the result to the presenter via
  * snapshot + onChange.
  *
- * STUB STATUS (v1.49.636 phase-(g) Option 2):
+ * STUB STATUS (v1.49.650 phase-(g) Option 2):
  *   No DOM rendering is wired here. The class is a pure observable state
  *   machine; a presenter in a follow-on milestone subscribes via
  *   `onChange()` and renders the banner.
