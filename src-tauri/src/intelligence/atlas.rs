@@ -2575,7 +2575,7 @@ mod tests {
             if c.contains_key(&db0) {
                 o.retain(|p| p != &db0);
                 o.push(db0.clone());
-                let _ = c; // keep alive to satisfy borrow
+                let _c = c; // keep alive to satisfy borrow (rustc let_underscore_lock)
             }
         }
 
