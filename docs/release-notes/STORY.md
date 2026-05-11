@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.583`.
+The story begins at `v1.0` and continues to `v1.49.636`.
 
-**626 chapters.** 625 have retrospectives.
+**679 chapters.** 678 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -634,3 +634,56 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.581](v1.49.581/00-summary.md)** — Degree 63: The Controlled Displacement Lift · 2026-04-27
 - **[v1.49.582](v1.49.582/00-summary.md)** — Degree 64: The All-Up Commit · 2026-04-27
 - **[v1.49.583](v1.49.583/00-summary.md)** — Degree 65: The Persistent Constellation · 2026-04-27
+- **[v1.49.584](v1.49.584/00-summary.md)** — Degree 66: Graceful Attrition + Form-as-Multiplicity-Coordination · 2026-04-28
+- **[v1.49.585](v1.49.585/00-summary.md)** — Concerns Cleanup / Foundation Shoring · 2026-04-29
+- **[v1.49.586](v1.49.586/00-summary.md)** — OAO-2 Stargazer / Mudhoney / Trumpeter Swan / CATALOG-WINDOW-OPENING · 2026-04-29
+- **[v1.49.587](v1.49.587/00-summary.md)** — Surveyor 7 / Lady Soul / Northern Spotted Owl / SCIENCE-MAXIMIZED FINAL-OF-SERIES · 2026-04-29
+- **[v1.49.588](v1.49.588/00-summary.md)** — Apollo 5 LM-1 / BS&T / Steller's Jay / UNMANNED-PRECURSOR-VALIDATION · 2026-04-29
+- **[v1.49.589](v1.49.589/00-summary.md)** — Apollo 6 (NASA degree 1.70) + Bookends + S-IC pogo accelerometer chain + Hairy Woodpecker + 4 operational-debt fold-ins + TRS Wave 1b (partial) · 2026-04-30
+- **[v1.49.590](v1.49.590/00-summary.md)** — Apollo 7 (NASA degree 1.71 first-crewed Apollo) + Electric Ladyland + AGC Block II Fairchild μL 9915 + Downy Woodpecker + 3 operational-debt fold-ins + TRS Wave 1b retry + Wave 1c · 2026-04-30
+- **[v1.49.591](v1.49.591/00-summary.md)** — Apollo 8 (NASA degree 1.72 first-crewed Saturn V + first-crewed translunar) + White Album + S-IVB J-2 restart sequencer + Common Raven + 3 operational-debt fold-ins + TRS Wave 1d · 2026-04-30
+- **[v1.49.592](v1.49.592/00-summary.md)** — Apollo 9 (NASA degree 1.73 first-crewed LM Earth-orbit shakedown) · 2026-05-01
+- **[v1.49.593](v1.49.593/00-summary.md)** — Apollo 10 (NASA degree 1.74 lunar-orbit dress rehearsal) · 2026-05-01
+- **[v1.49.594](v1.49.594/00-summary.md)** — Apollo 11 (NASA degree 1.75 FIRST LUNAR LANDING) · 2026-05-02
+- **[v1.49.595](v1.49.595/00-summary.md)** — Apollo 12 PINPOINT LANDING + SCE-TO-AUX RECOVERY · 2026-05-02
+- **[v1.49.596](v1.49.596/00-summary.md)** — Apollo 13 SUCCESSFUL FAILURE + LM-AS-LIFEBOAT (NASA degree 1.77) · 2026-05-02
+- **[v1.49.597](v1.49.597/00-summary.md)** — GSD Intelligence Dashboard · 2026-05-03
+- **[v1.49.598](v1.49.598/00-summary.md)** — Apollo 14 Fra Mauro Highlands (NASA degree 1.78) · 2026-05-03
+- **[v1.49.599](v1.49.599/00-summary.md)** — Mariner 8 Centaur Stage Failure (NASA degree 1.79) · 2026-05-04
+- **[v1.49.600](v1.49.600/00-summary.md)** — Mariner 9 First Planet Orbit (NASA degree 1.80) · 2026-05-04
+- **[v1.49.601](v1.49.601/00-summary.md)** — Catalog-Index Auto-Derive Counter-Cadence · 2026-05-04
+- **[v1.49.602](v1.49.602/00-summary.md)** — Apollo 15 First Lunar Roving Vehicle (NASA degree 1.81) · 2026-05-04
+- **[v1.49.603](v1.49.603/00-summary.md)** — Research-Track-Cards + Nav-Card Drift Gate Counter-Cadence · 2026-05-04
+- **[v1.49.604](v1.49.604/00-summary.md)** — Pioneer 10 First Through Asteroid Belt + First Jupiter Flyby (NASA degree 1.82) · 2026-05-04
+- **[v1.49.605](v1.49.605/00-summary.md)** — Apollo 16 Descartes Highlands Geology (NASA degree 1.83) · 2026-05-04
+- **[v1.49.606](v1.49.606/00-summary.md)** — Apollo 17 Final Crewed Lunar Landing (NASA degree 1.84) · 2026-05-04
+- **[v1.49.607](v1.49.607/00-summary.md)** — GSD Code Atlas (counter-cadence) · 2026-05-06
+- **[v1.49.608](v1.49.608/00-summary.md)** — Pioneer 11 First Saturn Flyby · 2026-05-06
+- **[v1.49.609](v1.49.609/00-summary.md)** — Skylab Station Launch · 2026-05-06
+- **[v1.49.610](v1.49.610/00-summary.md)** — Skylab 2 First Crewed Station Mission + Rescue Completion · 2026-05-06
+- **[v1.49.611](v1.49.611/00-summary.md)** — Skylab 3 First Long-Duration Crewed Mission · 2026-05-07
+- **[v1.49.612](v1.49.612/00-summary.md)** — Mariner 10 First Mercury Flyby · 2026-05-07
+- **[v1.49.613](v1.49.613/00-summary.md)** — Skylab 4 / Comet Kohoutek · 2026-05-07
+- **[v1.49.614](v1.49.614/00-summary.md)** — Apollo-Soyuz Test Project · 2026-05-07
+- **[v1.49.615](v1.49.615/00-summary.md)** — Viking 1 First Successful Mars Landing · 2026-05-07
+- **[v1.49.616](v1.49.616/00-summary.md)** — Viking 2 Second Mars Landing · 2026-05-08
+- **[v1.49.617](v1.49.617/00-summary.md)** — HEAO-1 X-Ray All-Sky Survey · 2026-05-08
+- **[v1.49.618](v1.49.618/00-summary.md)** — Voyager 2 Outer-Planets Grand Tour · 2026-05-08
+- **[v1.49.619](v1.49.619/00-summary.md)** — Voyager 1 Twin-Mission-Pair Completion · 2026-05-08
+- **[v1.49.620](v1.49.620/00-summary.md)** — Pioneer Venus 1 Twin-Mission-Pair Continuation · 2026-05-09
+- **[v1.49.621](v1.49.621/00-summary.md)** — SCRIBE Build-Out (counter-cadence) · 2026-05-09
+- **[v1.49.622](v1.49.622/00-summary.md)** — Pioneer Venus 2 Multiprobe Twin-Mission-Pair Completion · 2026-05-09
+- **[v1.49.623](v1.49.623/00-summary.md)** — ISEE-3 / ICE Paired-Triple-Mission-Architecture · 2026-05-09
+- **[v1.49.624](v1.49.624/00-summary.md)** — HEAO-2 / Einstein Observatory Degree-100 K-Boundary · 2026-05-09
+- **[v1.49.625](v1.49.625/00-summary.md)** — HEAO-3 Program-Trio Completion · 2026-05-09
+- **[v1.49.626](v1.49.626/00-summary.md)** — Solar Maximum Mission Repair-In-Orbit Substrate · 2026-05-09
+- **[v1.49.627](v1.49.627/00-summary.md)** — STS-1 Columbia First Space Shuttle Flight · 2026-05-09
+- **[v1.49.628](v1.49.628/00-summary.md)** — STS-2 Columbia First Vehicle Reuse · 2026-05-09
+- **[v1.49.629](v1.49.629/00-summary.md)** — GIS Spatial Substrate (counter-cadence) · 2026-05-10
+- **[v1.49.630](v1.49.630/00-summary.md)** — STS-3 Columbia First RMS Payload-Grapple-and-Redeploy + First Contingency Landing-Site Activation · 2026-05-10
+- **[v1.49.631](v1.49.631/00-summary.md)** — STS-4 Columbia Final OFT + First DoD Classified Payload + First Concrete-Runway Landing + Reagan OPERATIONAL Declaration · 2026-05-10
+- **[v1.49.632](v1.49.632/00-summary.md)** — STS-5 Columbia First OPERATIONAL Shuttle + First Commercial Satellite Deployment + First 4-Crew + First Non-Pilot MS · 2026-05-10
+- **[v1.49.633](v1.49.633/00-summary.md)** — STS-6 Challenger First Flight + First Shuttle EVA + TDRS-1 Deployment · 2026-05-10
+- **[v1.49.634](v1.49.634/00-summary.md)** — Concerns Cleanup #2 · 2026-05-11
+- **[v1.49.635](v1.49.635/00-summary.md)** — Housekeeping Cluster / Operational Debt Reduction · 2026-05-11
+- **[v1.49.636](v1.49.636/00-summary.md)** — Housekeeping Cluster #3 — carry-forward closure from v1.49.635, 8 components + ship-pipeline discipline tooling + line-level sweep tool · 2026-05-11
