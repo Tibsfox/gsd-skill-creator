@@ -290,6 +290,17 @@ Extension of Lesson #10186 (safe pattern); adjacent to Lesson
 #10182 (audit regex coverage); adjacent to Lesson #10189 (code-vs-
 comment distinction).
 
+**Closing observation (lab-director-2's framing):** test discipline
+that ENFORCES the right invariant beats discipline that ASKS for it.
+The negative-test fixture is the load-bearing assertion in Option B
+— without it, the regex set is just hope. v1.49.635 C3's
+audit-regex negative-test (Lesson #10182) is the lineage; v1.49.636
+C7's apply-to-self check (the Meta-Lesson) is the parallel; both
+share the principle that mechanical enforcement is the only durable
+form of a discipline doc's value. Future sweep tools, validators,
+and linters in this codebase should ship with a negative-test
+fixture in the same commit; no exceptions.
+
 ## Carry-forward index for Cluster #4 (v1.49.6XX or later)
 
 Items not closed at v1.49.636 that future clusters should pick up:
