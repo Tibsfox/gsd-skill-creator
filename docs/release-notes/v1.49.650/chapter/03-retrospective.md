@@ -21,10 +21,19 @@ The conservative tuning rule was critical: without it, there would be temptation
 Stage 1 confirmed the gaps were real, making calibration warranted. Had the gaps not existed (real
 quality regression), the conservative rule would have preserved the signal intact.
 
-C1 keystore encryption went cleanly. The Rust AES-256-GCM implementation is straightforward using
-`chacha20poly1305` crate; the keyring backend via `keyring` crate handles OS keychain integration
-transparently. Migration logic (v1 → v2 with backup-first) follows the same pattern as the v1.49.634
-`insecure-plaintext-keystore` feature gate. No surprises.
+C1 keystore encryption went cleanly across nine phases (a–h plus stub-UI g). The Path-1 OS-keyring
+direct-storage model (preferred) matches `gh auth` / `cargo login` precedent and keeps the audit
+surface minimal — the OS handles encryption + access control, no Argon2id on the hot path. Path-2
+(age + Argon2id-derived identity) handles headless servers and CI runners where the keyring is
+unavailable. The two-path design (Model A, pinned by lab-director arch-review) avoided the layered
+"keyring stores wrapping key for age-encrypted file" model (Model B), which would have doubled the
+attack surface for no v1.49.650-scope benefit. The error-leak sanitizer's 4-byte threshold was
+absorbed from the arch-review at refinement #3 with explicit rationale (1-byte = 1/256 collision
+rate, too noisy; 4-byte = ~1/4B, statistical sweet spot). Phase-(g) was the only operator decision
+that landed mid-execution: Option 2 (stub Tauri-invoke interface + observable state machines) over
+Option 1 (real Tauri commands now). The stub path means the desktop UI surface lives in tree today
+with full test coverage; a single-line factory swap activates production when the Rust commands
+land in a follow-on milestone.
 
 ## What went less well
 
