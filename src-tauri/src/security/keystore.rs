@@ -10,14 +10,13 @@
 //! winning path. v1 plaintext detection triggers a `MigrationRequired`
 //! error that callers handle via `Keystore::migrate_v1_to_v2()`.
 //!
-//! ## Legacy plaintext fallback
+//! ## Legacy plaintext fallback (RETIRED v1.49.637 cluster #4)
 //!
-//! The legacy `~/.config/gsd-os/credentials.enc` (plaintext, despite the
-//! .enc extension) is gated behind
-//! `#[cfg(any(debug_assertions, feature = "legacy-plaintext-keystore"))]`.
-//! Renamed from `insecure-plaintext-keystore` at v1.49.650. The feature
-//! emits a `warn!` log when enabled and is scheduled for full removal at
-//! v1.49.6XX cluster #3.
+//! The legacy `~/.config/gsd-os/credentials.enc` (plaintext) fallback was
+//! retired at v1.49.637 cluster #4. The previously-gated `legacy-plaintext-keystore`
+//! Cargo feature has been deleted; the function below always returns the
+//! disabled-fallback error pointing users to the env-var workaround and the
+//! v1.49.650 encrypted-keystore migration CLI.
 
 use crate::security::encryption::{decrypt_with_passphrase, encrypt_with_passphrase};
 use crate::security::keyring_backend::{
@@ -464,60 +463,28 @@ fn load_from_encrypted_file(
         )));
     }
 
-    // v1.49.634 §18 (C3) → v1.49.650 (renamed): the plaintext credential-file
-    // fallback is gated out of release builds. In debug builds OR when the
-    // developer opts in via `--features legacy-plaintext-keystore`, the legacy
-    // path remains available so existing developer setups continue to work.
-    // Release builds (cargo build --release without the feature) return a
-    // clear error pointing users at the env-var workaround and the unified
+    // v1.49.634 §18 (C3) → v1.49.650 (renamed) → v1.49.637 cluster #4 (retired):
+    // the plaintext credential-file fallback is no longer reachable. The
+    // previously-gated `legacy-plaintext-keystore` Cargo feature has been
+    // deleted; both debug and release builds return the disabled-fallback
+    // error pointing users at the env-var workaround and the
     // Keystore::migrate_v1_to_v2 surface.
     //
-    // Reachability proof: .planning/keystore-reachability-audit.md
     // Encryption migration: v1.49.650 C1 (encryption.rs +
     //   keyring_backend.rs + migration.rs).
     //
-    // Feature rename history:
+    // Feature retirement history:
     //   v1.49.634: insecure-plaintext-keystore (introduced)
     //   v1.49.650: legacy-plaintext-keystore (renamed; deprecation marker)
-    //   v1.49.6XX cluster #3: REMOVED entirely
-    #[cfg(any(debug_assertions, feature = "legacy-plaintext-keystore"))]
-    {
-        // Emit a warn-level marker when the feature is enabled (debug builds
-        // surface this on the test harness; release-with-feature surfaces it
-        // to the operator's stderr).
-        #[cfg(feature = "legacy-plaintext-keystore")]
-        eprintln!(
-            "warn: legacy-plaintext-keystore feature enabled; scheduled for removal at v1.49.6XX cluster #3"
-        );
-
-        let content = std::fs::read_to_string(&cred_file)
-            .map_err(|e| ProxyError::KeystoreError(e.to_string()))?;
-        for line in content.lines() {
-            let parts: Vec<&str> = line.splitn(3, ':').collect();
-            if parts.len() == 3 && parts[0] == service && parts[1] == account {
-                return Ok((
-                    SecretString::new(parts[2].to_string()),
-                    KeystoreBackend::EncryptedFile(cred_file),
-                ));
-            }
-        }
-
-        Err(ProxyError::KeystoreError(format!(
-            "Credential not found for {}/{}",
-            service, account
-        )))
-    }
-    #[cfg(not(any(debug_assertions, feature = "legacy-plaintext-keystore")))]
-    {
-        let _ = cred_file; // silence unused-binding warning when the gate excludes the branch
-        Err(ProxyError::KeystoreError(format!(
-            "Plaintext credential-file fallback is disabled in release builds for {}/{}. \
-             Set the ANTHROPIC_API_KEY environment variable as a workaround, or run \
-             `skill-creator keystore migrate` to upgrade to the v1.49.650 encrypted keystore. \
-             Tracking: v1.49.650 C1 (see docs/keystore.md).",
-            service, account
-        )))
-    }
+    //   v1.49.637 cluster #4: REMOVED entirely (C1 — this commit)
+    let _ = cred_file; // silence unused-binding warning
+    Err(ProxyError::KeystoreError(format!(
+        "Plaintext credential-file fallback is disabled in release builds for {}/{}. \
+         Set the ANTHROPIC_API_KEY environment variable as a workaround, or run \
+         `skill-creator keystore migrate` to upgrade to the v1.49.650 encrypted keystore. \
+         Tracking: v1.49.650 C1 (see docs/keystore.md).",
+        service, account
+    )))
 }
 
 // Mark unused service-param when both gnome-keyring + macos-keychain features
