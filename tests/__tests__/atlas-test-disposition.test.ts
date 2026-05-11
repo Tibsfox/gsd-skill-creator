@@ -1,19 +1,23 @@
 /**
- * v1.49.636 C4 — Atlas test disposition invariant
+ * v1.49.637 C4 — Atlas test disposition invariant (updated from v1.49.636)
  *
- * Asserts that the `#[ignore = "..."]` annotations in
- * `src-tauri/src/intelligence/atlas.rs` for the two pre-existing
- * atlas test failures cross-reference the disposition records at
+ * Asserts that any remaining `#[ignore = "..."]` annotations in
+ * `src-tauri/src/intelligence/atlas.rs` referencing the atlas test
+ * disposition cross-reference the disposition records at
  * `.planning/atlas-test-disposition.md`.
+ *
+ * v1.49.637 C4 disposition outcome:
+ *   - `per_project_clear_with_unknown_project_id_falls_back_to_full_clear`
+ *     was FIXED-INLINE (test contract corrected to expect actual eviction
+ *     count; `#[ignore]` removed; test PASSes).
+ *   - `lru_access_promotes_keeps_entry_alive_under_eviction` was
+ *     DOWNGRADED to v1.49.7XX cluster #5 deeper-investigation with
+ *     specific finding (batch-load vs per-project promotion mismatch).
  *
  * The disposition file lives in `.planning/` (gitignored project
  * workspace). When it is absent (CI or fresh-clone environments),
  * this test SKIPs cleanly rather than failing — same pattern as
  * `memory-truth.test.ts` for similar local-only artifacts.
- *
- * When the file is present, it must enumerate both ignored tests so
- * a future cluster maintenance pass can mechanically check
- * "are we still saying we'll fix these?"
  */
 
 import { describe, expect, it } from 'vitest';
@@ -33,12 +37,17 @@ const ATLAS_RS_PATH = join(
   'atlas.rs',
 );
 
+// Post-v1.49.637 C4: only the cluster-5-deferred test remains #[ignore]'d.
 const EXPECTED_IGNORED_TESTS = [
   'lru_access_promotes_keeps_entry_alive_under_eviction',
+];
+
+// Post-v1.49.637 C4: the fixed-inline test should NOT be #[ignore]'d.
+const EXPECTED_NOT_IGNORED_TESTS = [
   'per_project_clear_with_unknown_project_id_falls_back_to_full_clear',
 ];
 
-describe('v1.49.636 C4: atlas test-disposition invariants', () => {
+describe('v1.49.637 C4: atlas test-disposition invariants', () => {
   it('SKIP if disposition file absent (gitignored workspace)', () => {
     if (!existsSync(DISPOSITION_PATH)) {
       // Disposition lives in gitignored .planning/; CI doesn't see it.
@@ -48,7 +57,7 @@ describe('v1.49.636 C4: atlas test-disposition invariants', () => {
     expect(existsSync(DISPOSITION_PATH)).toBe(true);
   });
 
-  it('disposition file (when present) records each ignored test by name', () => {
+  it('disposition file (when present) records each remaining ignored test by name', () => {
     if (!existsSync(DISPOSITION_PATH)) return;
     const content = readFileSync(DISPOSITION_PATH, 'utf8');
     for (const testName of EXPECTED_IGNORED_TESTS) {
@@ -56,15 +65,15 @@ describe('v1.49.636 C4: atlas test-disposition invariants', () => {
     }
   });
 
-  it('every #[ignore = "..."] annotation in atlas.rs has a disposition entry', () => {
+  it('every cluster-5-deferred #[ignore] annotation in atlas.rs has a disposition entry', () => {
     if (!existsSync(DISPOSITION_PATH)) return;
     const dispositionText = readFileSync(DISPOSITION_PATH, 'utf8');
     if (!existsSync(ATLAS_RS_PATH)) return; // src-tauri may be absent in some test contexts
     const atlasText = readFileSync(ATLAS_RS_PATH, 'utf8');
 
-    // Find every `#[ignore = "v1.49.636 C4 ..."]` followed by `fn <name>(`.
+    // Find every `#[ignore = "TODO(v1.49.7XX cluster #5)..."]` followed by `fn <name>(`.
     const ignoreRe =
-      /#\[ignore\s*=\s*"v1\.49\.636 C4[^"]*"\]\s*\r?\n\s*fn\s+(\w+)/g;
+      /#\[ignore\s*=\s*"TODO\(v1\.49\.7XX cluster #5\)[^"]*"\]\s*\r?\n\s*fn\s+(\w+)/g;
     const ignored: string[] = [];
     for (let m: RegExpExecArray | null; (m = ignoreRe.exec(atlasText)); ) {
       ignored.push(m[1]);
@@ -75,15 +84,41 @@ describe('v1.49.636 C4: atlas test-disposition invariants', () => {
     }
   });
 
-  it('each ignored test annotation references the disposition file', () => {
+  it('each cluster-5-deferred test annotation references the disposition file', () => {
     if (!existsSync(ATLAS_RS_PATH)) return;
     const atlasText = readFileSync(ATLAS_RS_PATH, 'utf8');
     const ignoreLines = atlasText
       .split('\n')
-      .filter((l) => /#\[ignore\s*=\s*"v1\.49\.636 C4/.test(l));
+      .filter((l) => /#\[ignore\s*=\s*"TODO\(v1\.49\.7XX cluster #5\)/.test(l));
     expect(ignoreLines.length).toBe(EXPECTED_IGNORED_TESTS.length);
     for (const line of ignoreLines) {
       expect(line).toContain('atlas-test-disposition.md');
+    }
+  });
+
+  it('fixed-inline tests are no longer #[ignore]d', () => {
+    if (!existsSync(ATLAS_RS_PATH)) return;
+    const atlasText = readFileSync(ATLAS_RS_PATH, 'utf8');
+    for (const testName of EXPECTED_NOT_IGNORED_TESTS) {
+      // The fn def must exist
+      const fnRe = new RegExp(`fn\\s+${testName}\\s*\\(`);
+      expect(fnRe.test(atlasText)).toBe(true);
+      // And it must NOT be preceded immediately by an #[ignore] attribute.
+      // We check: within ~200 chars before `fn <name>(`, there should be no
+      // `#[ignore` that points to this fn (i.e. with no other fn between).
+      const idx = atlasText.search(fnRe);
+      if (idx >= 0) {
+        const slice = atlasText.slice(Math.max(0, idx - 400), idx);
+        // The slice should not contain an #[ignore = "..."] whose closest
+        // following fn is THIS fn (heuristic: no other `fn ` between #[ignore] and us).
+        const lastIgnore = slice.lastIndexOf('#[ignore');
+        if (lastIgnore !== -1) {
+          const between = slice.slice(lastIgnore);
+          // If there's another `fn ` between, the #[ignore] belongs to that fn.
+          const otherFn = between.match(/\bfn\s+\w+\s*\(/);
+          expect(otherFn).not.toBeNull();
+        }
+      }
     }
   });
 });

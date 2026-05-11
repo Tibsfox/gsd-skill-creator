@@ -4,12 +4,22 @@
  * Uses `StubKeystoreApi` from `./invoke` as the test double — same surface
  * the desktop UI uses for tests after v1.49.636 C1 flipped getKeystoreApi()
  * to TauriKeystoreApi in production.
+ *
+ * v1.49.637 C4 fixture-hygiene fold (CF-Nit 2 from W1A G-gate): the 2
+ * passphrase fixtures previously using `hunter2` are replaced with the
+ * shared `STRONG_PASSPHRASE` constant matching the C3 zxcvbn fixture
+ * pattern. The migration-banner path does NOT reach the zxcvbn gate
+ * (it consumes an already-decrypted v1 passphrase from disk), so the
+ * fixture strength here is hygienic — not a security gate. Same strong
+ * fixture is used across the keystore test surface for consistency.
  */
 
 import { describe, it, expect, vi } from 'vitest';
 import { MigrationBanner } from './migration-banner';
 import { StubKeystoreApi } from './invoke';
 import type { KeystoreStatus } from './types';
+
+const STRONG_PASSPHRASE = 'correct horse battery staple stadium electric';
 
 const ABSENT: KeystoreStatus = { state: 'absent', backend: null };
 const ENCRYPTED_KEYRING: KeystoreStatus = { state: 'encrypted', backend: 'keyring' };
@@ -73,7 +83,7 @@ describe('MigrationBanner — migrate', () => {
     );
     await banner.refresh();
     expect(banner.snapshot().state).toBe('visible');
-    await banner.migrate('hunter2');
+    await banner.migrate(STRONG_PASSPHRASE);
     const snap = banner.snapshot();
     expect(snap.state).toBe('success');
     expect(snap.migratedCount).toBe(3);
@@ -153,7 +163,7 @@ describe('MigrationBanner — onChange subscriptions', () => {
     const listener = vi.fn();
     banner.onChange(listener);
     await banner.refresh();
-    await banner.migrate('hunter2');
+    await banner.migrate(STRONG_PASSPHRASE);
     // refresh fires once; migrate fires twice (migrating → success).
     expect(listener).toHaveBeenCalledTimes(3);
   });
