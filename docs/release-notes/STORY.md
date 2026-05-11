@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.636`.
+The story begins at `v1.0` and continues to `v1.49.637`.
 
-**679 chapters.** 678 have retrospectives.
+**680 chapters.** 679 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -687,3 +687,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.634](v1.49.634/00-summary.md)** — Concerns Cleanup #2 · 2026-05-11
 - **[v1.49.635](v1.49.635/00-summary.md)** — Housekeeping Cluster / Operational Debt Reduction · 2026-05-11
 - **[v1.49.636](v1.49.636/00-summary.md)** — Housekeeping Cluster #3 — carry-forward closure from v1.49.635, 8 components + ship-pipeline discipline tooling + line-level sweep tool · 2026-05-11
+- **[v1.49.637](v1.49.637/00-summary.md)** — Housekeeping Cluster #4 · 2026-05-11
