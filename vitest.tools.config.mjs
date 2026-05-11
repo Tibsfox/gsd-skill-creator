@@ -36,6 +36,7 @@ export default defineConfig({
       'scripts/__tests__/apply-to-self-comment-vs-code.test.mjs',
       'scripts/__tests__/apply-to-self-sweep-substrate.test.mjs',
       'scripts/__tests__/sweep-old-slot-label.test.mjs',
+      'scripts/__tests__/append-story-entry.test.mjs',
     ],
     globals: true,
     testTimeout: 15000,

@@ -74,6 +74,19 @@
 #                       Override: SC_SKIP_APPLY_TO_SELF=1 (emergency only;
 #                       fix the findings or allowlist at
 #                       .planning/ship-pipeline-discipline/apply-to-self-allowlist.md).
+#  10.  STORY.md per-ship sustained-update gate (v1.49.637 C5) — runs
+#                       `node scripts/append-story-entry.mjs` which appends
+#                       the current tag's entry from the gitignored ground
+#                       truth at .planning/roadmap/STORY.md to the public
+#                       docs/release-notes/STORY.md, and bumps the header
+#                       line + chapter count. Idempotent (re-run is no-op).
+#                       BLOCKS if ground-truth lacks the tag's entry — author
+#                       it there first. Closes v1.49.636 named carry-forward
+#                       #1 "Public STORY.md sustained-update process" + closes
+#                       Lesson #10191 forward (no future operator should ever
+#                       need to backfill STORY.md the way v1.49.636 T14 did).
+#                       Override: SC_SKIP_STORY_GATE=1 (emergency only; document
+#                       the bypass in release-notes).
 #
 # Exit codes:
 #   0  all checks PASS
@@ -87,6 +100,7 @@
 #   8  catalog-index drift (BLOCKER added v1.49.601; SC_SKIP_CATALOG_INDEX_GATE=1 overrides)
 #   9  tauri-boundary violation (BLOCKER added v1.49.634; SC_SKIP_TAURI_BOUNDARY_GATE=1 overrides)
 #   10 apply-to-self findings (BLOCKER only when SC_REQUIRE_APPLY_TO_SELF=1; default WARN-only)
+#   11 STORY.md gate failed — ground truth missing entry for current tag (SC_SKIP_STORY_GATE=1 overrides)
 #
 # Usage:
 #   bash tools/pre-tag-gate.sh
@@ -352,5 +366,27 @@ else
   log "[pre-tag-gate] step 9.5/9: PASS"
 fi
 
-log "[pre-tag-gate] all 9 checks PASS — safe to \`git tag\` and merge to main"
+# ----- step 10: STORY.md per-ship sustained-update gate (v1.49.637 C5) -----
+# BLOCKER when ground-truth lacks the tag's entry. Idempotent on re-run.
+# Closes v1.49.636 named carry-forward #1 + Lesson #10191 forward.
+SKIP_STORY_GATE="${SC_SKIP_STORY_GATE:-0}"
+if [ "$SKIP_STORY_GATE" = "1" ]; then
+  log "[pre-tag-gate] step 10/10: SKIPPED (SC_SKIP_STORY_GATE=1)"
+  echo "[pre-tag-gate]   WARNING: SC_SKIP_STORY_GATE=1 — document bypass in release-notes" >&2
+else
+  log "[pre-tag-gate] step 10/10: STORY.md per-ship sustained-update gate"
+  if ! node "$REPO_ROOT/scripts/append-story-entry.mjs"; then
+    echo "[pre-tag-gate] FAIL: STORY.md gate failed" >&2
+    echo "[pre-tag-gate]   Most likely cause: ground truth .planning/roadmap/STORY.md" >&2
+    echo "[pre-tag-gate]   lacks the entry for the current package.json version." >&2
+    echo "[pre-tag-gate]   Fix: author the entry in .planning/roadmap/STORY.md first," >&2
+    echo "[pre-tag-gate]   then re-run pre-tag-gate. The script will idempotently sync" >&2
+    echo "[pre-tag-gate]   the public docs/release-notes/STORY.md on re-run." >&2
+    echo "[pre-tag-gate]   Override (emergency only): SC_SKIP_STORY_GATE=1" >&2
+    exit 11
+  fi
+  log "[pre-tag-gate] step 10/10: PASS"
+fi
+
+log "[pre-tag-gate] all 10 checks PASS — safe to \`git tag\` and merge to main"
 exit 0
