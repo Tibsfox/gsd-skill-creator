@@ -68,6 +68,14 @@ describe('CF-M7-03 — variational minimiser matches reference', () => {
   it('converges within 50 ms on a 100-node model', () => {
     const model = randomModel(100, 20, 13);
     const observations = [1, 2, 3, 4, 5];
+
+    // Warmup: 20 iterations to let V8 tier up the variational minimiser's hot
+    // loops (100-node × 20-observation model has nested loops that benefit
+    // significantly from Turbofan; cold Ignition can be 10–20× slower).
+    // Use a smaller model for warmup to keep test time reasonable.
+    const wModel = randomModel(20, 5, 99);
+    for (let i = 0; i < 20; i++) minimiseFreeEnergy(wModel, [0, 1]);
+
     const t0 = performance.now();
     const result = minimiseFreeEnergy(model, observations);
     const elapsed = performance.now() - t0;
