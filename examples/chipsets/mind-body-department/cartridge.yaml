@@ -1,0 +1,287 @@
+id: mind-body-department-v1-0
+name: mind-body-department-v1.0
+version: 1.0.0
+author: skill-creator cartridge migrate (v1.49.636 C2)
+description: >
+  A coordinated mind-body department providing lineage-respectful, safety-first
+  expertise across eight practice wings through seven named agents (Iyengar,
+  Feldenkrais, Kabat-Zinn, Pilates, Dōgen, Yang, Thich Nhat Hanh), six knowledge
+  skills, and three pre-composed teams. Persists work via Grove records and
+  integrates with the college mind-body department concept graph. Forked from
+  the department template pattern first instantiated by math-department.
+trust: system
+provenance:
+  origin: migration
+  createdAt: 2026-05-11
+  migrated_from: legacy-department-chipset
+chipsets:
+  - kind: college
+    department: mind-body
+    concept_graph:
+      read: true
+      write: true
+    try_session_generation: true
+    learning_pathway_updates: true
+    wings:
+      - Breath Practice
+      - Seated Meditation
+      - Yoga (Asana, Pranayama, and the Eight-Limb Path)
+      - Pilates (Contrology and the Apparatus System)
+      - Martial Arts as Body Discipline
+      - Tai Chi Chuan (Internal Martial Art)
+      - Qigong (Cultivation Practice)
+      - Somatic Movement Education
+  - kind: department
+    skills:
+      breath-and-meditation-foundations:
+        domain: mind-body
+        description: Breath practice and seated meditation foundations across traditions
+          — pranayama families, shikantaza, MBSR clinical translation,
+          engaged-mindfulness pedagogy
+        triggers:
+          - breath
+          - pranayama
+          - meditation
+          - zazen
+          - shikantaza
+          - MBSR
+          - mindfulness
+          - sit
+        agent_affinity:
+          - kabat-zinn
+          - dogen
+          - thich-nhat-hanh
+          - iyengar
+        wings_covered:
+          - breath
+          - meditation
+      yoga-practice-and-alignment:
+        domain: mind-body
+        description: Yoga practice with Iyengar-lineage alignment, prop use, staged
+          progression, and cross-lineage routing knowledge
+        triggers:
+          - yoga
+          - asana
+          - alignment
+          - pose
+          - Iyengar
+          - Ashtanga
+          - prop
+        agent_affinity:
+          - iyengar
+          - thich-nhat-hanh
+          - kabat-zinn
+        wings_covered:
+          - yoga
+      somatic-movement-pilates-feldenkrais:
+        domain: mind-body
+        description: Somatic movement and whole-body retraining through Pilates
+          Contrology and Feldenkrais Awareness Through Movement
+        triggers:
+          - Pilates
+          - Contrology
+          - reformer
+          - Feldenkrais
+          - ATM
+          - somatic
+          - core
+          - rehab
+        agent_affinity:
+          - pilates
+          - feldenkrais
+          - iyengar
+        wings_covered:
+          - pilates
+          - somatics
+      internal-arts-tai-chi-qigong:
+        domain: mind-body
+        description: Traditional Chinese internal arts — tai chi chuan and qigong — with
+          lineage-respectful YMAA-line voice
+        triggers:
+          - tai chi
+          - taiji
+          - qigong
+          - chi kung
+          - Ba Duan Jin
+          - zhan zhuang
+          - internal arts
+        agent_affinity:
+          - yang
+          - iyengar
+          - feldenkrais
+        wings_covered:
+          - tai-chi
+          - qigong
+      martial-arts-body-discipline:
+        domain: mind-body
+        description: Martial arts as body discipline — stance, distance, timing, ukemi,
+          live partner work, lineage, and the ethical container
+        triggers:
+          - martial arts
+          - judo
+          - jiu-jitsu
+          - BJJ
+          - karate
+          - aikido
+          - boxing
+          - muay thai
+          - kendo
+          - self-defense
+        agent_affinity:
+          - yang
+          - feldenkrais
+          - iyengar
+        wings_covered:
+          - martial-arts
+      contemplative-traditions-comparative:
+        domain: mind-body
+        description: Comparative framing across contemplative and mind-body traditions
+          for routing, cross-tradition navigation, and lineage respect
+        triggers:
+          - comparative
+          - tradition
+          - lineage
+          - secular vs religious
+          - which practice
+          - which tradition
+        agent_affinity:
+          - dogen
+          - thich-nhat-hanh
+          - kabat-zinn
+          - iyengar
+        wings_covered:
+          - breath
+          - meditation
+          - yoga
+          - pilates
+          - martial-arts
+          - tai-chi
+          - qigong
+          - somatics
+    agents:
+      topology: router
+      router_agent: iyengar
+      agents:
+        - name: iyengar
+          role: department chair — classification, safety gating, routing, synthesis,
+            Iyengar-lineage yoga voice
+          model: opus
+          tools:
+            - Read
+            - Glob
+            - Grep
+            - Bash
+            - Write
+          is_capcom: true
+        - name: feldenkrais
+          role: somatic learning specialist — ATM lessons, Functional Integration frame,
+            nervous-system-first learning, rehab-adjacent
+          model: opus
+          tools:
+            - Read
+            - Grep
+            - Write
+        - name: kabat-zinn
+          role: clinical mindfulness specialist — MBSR, secular translation,
+            research-honest voice
+          model: opus
+          tools:
+            - Read
+            - Grep
+            - Write
+    teams:
+      mind-body-analysis-team:
+        description: Full department for multi-tradition or multi-wing queries
+        agents:
+          - iyengar
+          - feldenkrais
+          - kabat-zinn
+          - pilates
+          - dogen
+          - yang
+          - thich-nhat-hanh
+        use_when: multi-tradition, multi-wing, comparative or scholarly, full-analysis
+          requests
+      mind-body-workshop-team:
+        description: Focused contemplative workshop on a single
+          meditation/breath/presence theme
+        agents:
+          - iyengar
+          - dogen
+          - kabat-zinn
+          - thich-nhat-hanh
+        use_when: contemplative depth questions, meditation program design,
+          cross-tradition contemplative navigation
+      mind-body-practice-team:
+        description: Body-centered practice pipeline for yoga, somatic, Pilates, and
+          internal-arts program design
+        agents:
+          - iyengar
+          - feldenkrais
+          - pilates
+          - yang
+        use_when: physical program design, form diagnosis, rehab-adjacent body work,
+          cross-method body training
+    customization:
+      rename_agents: true
+      replace_skills: true
+      swap_grove_types: true
+      remap_college_department: true
+      template_pattern: department
+      safety_posture_overridable: false
+    evaluation:
+      gates:
+        pre_deploy:
+          - check: all_skills_have_descriptions
+            description: Every skill must have a non-empty description
+            action: block
+          - check: all_agents_have_roles
+            description: Every agent must have a non-empty role
+            action: block
+          - check: grove_record_types_defined
+            description: All 5 mind-body Grove record types documented
+            action: block
+          - check: college_concept_ids_valid
+            description: All referenced concept IDs exist in college mind-body department
+            action: block
+          - check: router_agent_is_capcom
+            description: The router agent (iyengar) must be CAPCOM
+            action: block
+          - check: all_eight_wings_covered
+            description: Every one of the eight wings (breath, meditation, yoga, pilates,
+              martial-arts, tai-chi, qigong, somatics) must be covered by at
+              least one skill; no wing orphaned
+            action: block
+          - check: safety_posture_present
+            description: Every skill and every agent must enumerate its safety failure modes
+            action: block
+      benchmark:
+        trigger_accuracy_threshold: 0.85
+        test_cases_minimum: 40
+        domains_covered:
+          - breath
+          - meditation
+          - yoga
+          - pilates
+          - martial-arts
+          - tai-chi
+          - qigong
+          - somatics
+  - kind: grove
+    namespace: mind-body-department
+    record_types:
+      - name: MindBodyAnalysis
+        description: Diagnostic analysis — somatic diagnosis, form diagnosis, tradition
+          classification, safety triage
+      - name: MindBodyPractice
+        description: Practice artifact — ATM lesson, yoga sequence, Pilates session, tai
+          chi form plan, qigong set, zazen session plan, MBSR practice plan,
+          gatha selection
+      - name: MindBodyReview
+        description: Review or critique of an existing practice plan, form, or program
+      - name: MindBodyExplanation
+        description: Teaching artifact at a specified audience level and in a specified
+          tradition voice
+      - name: MindBodySession
+        description: Session log linking work products to interaction context, with
+          classification metadata and safety notes
