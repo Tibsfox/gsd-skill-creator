@@ -1,8 +1,8 @@
-# 00 — Summary: v1.49.650 Housekeeping Cluster
+# 00 — Summary: v1.49.635 Housekeeping Cluster
 
-v1.49.650 is the third counter-cadence cleanup milestone in the engine, registered to Lesson #10168
+v1.49.635 is the third counter-cadence cleanup milestone in the engine, registered to Lesson #10168
 (every ~30 forward-cadence milestones, run a concerns-cleanup ship). The first was v1.49.585 at degree 66;
-the second was v1.49.634 at degree 108 (19 milestones late); the third fires here at v1.49.650.
+the second was v1.49.634 at degree 108 (19 milestones late); the third fires here at v1.49.635.
 
 Eight components were delivered across five waves: W1A (C1 + C2), W1B (C3 + C4), W1C (C5 + C6), W2
 (C7), and W3-stage-1 (C8).
@@ -91,7 +91,7 @@ no TRS pack content was advanced. The milestone exclusively addresses accumulate
 - **First cleanup-rubric recalibration** — C5 extends the rubric to recognize plain-bullet entries, Lesson-suffix headings, and freeform retrospective sub-section names; conservative tuning rule respected.
 - **First STATE.md normalization tool** — C6 ships `tools/state-md-normalizer.mjs` with `--check` / `--write` / `--prune-stale` flags + a schema reference at `docs/STATE-MD-SCHEMA.md`.
 
-## Engine state at v1.49.650 close
+## Engine state at v1.49.635 close
 
 - NASA degree: 108 (v1.49.633 STS-6, unchanged)
 - MUS degree: 108 (LANDING-ANCHOR-ONLY-INSIDE candidate, unchanged)

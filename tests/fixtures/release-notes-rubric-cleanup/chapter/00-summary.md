@@ -1,14 +1,14 @@
 # 00 — Summary: v0.0.1 Synthetic Cleanup Fixture
 
 This is a synthetic fixture for testing the cleanup-mission rubric introduced in v1.49.634 C4.2 and
-recalibrated in v1.49.650 C5. It exercises all five scoring dimensions that differ between the cleanup
+recalibrated in v1.49.635 C5. It exercises all five scoring dimensions that differ between the cleanup
 rubric and the default structured rubric: summary prose depth, components listed, retrospective sub-structure
 with freeform headings, lessons via plain-bullet format, thread state markers, engine-state-unchanged marker,
 and forward lessons block with prose-only bullet format rather than formal ID enumeration.
 
 The fixture uses the v1.49.634 documentation style where the "Forward lessons emitted" section in the
 README lists lessons as plain prose bullets rather than formal #ID entries. This exercises the plain-bullet
-acceptance added in v1.49.650 C5 to scoreCleanupLessons and scoreForwardLessonsBlock. The retrospective
+acceptance added in v1.49.635 C5 to scoreCleanupLessons and scoreForwardLessonsBlock. The retrospective
 chapter uses "What went unusually well" and "What went less well" headings rather than the canonical
 "What Worked" and "What Could Be Better", exercising the freeform heading acceptance added to
 scoreCleanupRetrospective in the same C5 recalibration pass.
