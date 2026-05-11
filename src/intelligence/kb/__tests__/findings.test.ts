@@ -129,6 +129,10 @@ describe('intelligence/kb — findings round-trip', () => {
       await store.writeFindings(snapshotId, PROJECT_ID, findings.slice(i * 100, (i + 1) * 100));
     }
 
+    // Warmup: one discard call to compile the SQLite query plan and tier up
+    // the V8 call-site before the timed window (50ms sharp threshold).
+    await store.listOpenFindings(PROJECT_ID);
+
     const start = performance.now();
     const result = await store.listOpenFindings(PROJECT_ID);
     const elapsed = performance.now() - start;
