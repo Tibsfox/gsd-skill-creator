@@ -1036,7 +1036,17 @@ async function main() {
   const args = process.argv.slice(2);
   const summary = args.includes('--summary');
   const rubricArg = args.find(a => a.startsWith('--rubric='));
-  const rubric = rubricArg ? rubricArg.split('=')[1] : 'auto';
+  // v1.49.634 C4.2: `--cleanup` is a shorthand for `--rubric=cleanup-mission`.
+  // Mutually exclusive with `--rubric=`; explicit `--rubric=` wins if both set.
+  const cleanupShorthand = args.includes('--cleanup');
+  let rubric;
+  if (rubricArg) {
+    rubric = rubricArg.split('=')[1];
+  } else if (cleanupShorthand) {
+    rubric = 'cleanup-mission';
+  } else {
+    rubric = 'auto';
+  }
   if (!['auto', 'degree', 'structured', 'cleanup-mission', 'multi-track-trs'].includes(rubric)) {
     console.error(`[score] invalid --rubric=${rubric}. Valid: auto|degree|structured|cleanup-mission|multi-track-trs`);
     process.exit(2);

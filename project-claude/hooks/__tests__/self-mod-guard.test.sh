@@ -117,6 +117,24 @@ expect_block "SC-09: mv to .claude/agents/" \
   '{"tool_name":"Bash","tool_input":{"command":"mv tmp.md .claude/agents/lab.md"}}' \
   env
 
+# v1.49.634 §4.1 (C4.1 + C4.2): proximity-aware false-positive cases
+# explicitly named per the C4 test plan. The proximity fix landed at
+# v1.49.586 T2.1 (see SC-06 + SC-07 + SC-08 + SC-09 above for the
+# quoted-string and adjacent-write-op coverage). The two cases below
+# pin the spec's example pattern verbatim so a future reviewer can grep
+# for the C4 test names and confirm coverage.
+
+# SC-10 (C4.1): non-adjacent — `cp` on /tmp + protected path in trailing
+# echo string. Should ALLOW (cp does NOT target .claude/skills/).
+expect_allow "SC-10 (C4.1): self-mod-guard does NOT false-positive on non-adjacent .claude/skills/ + write-op" \
+  '{"tool_name":"Bash","tool_input":{"command":"cp /tmp/foo /tmp/bar && echo \"checking .claude/skills/...\""}}' \
+  env
+
+# SC-11 (C4.2): adjacent — `cp` directly into .claude/skills/. Should BLOCK.
+expect_block "SC-11 (C4.2): self-mod-guard still blocks adjacent .claude/skills/ + write-op" \
+  '{"tool_name":"Bash","tool_input":{"command":"cp src.md .claude/skills/foo/SKILL.md"}}' \
+  env
+
 echo ""
 echo "$PASS passed, $FAIL failed"
 exit $FAIL

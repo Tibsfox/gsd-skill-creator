@@ -39,6 +39,9 @@ function make1000Entries(): MemoryEntry[] {
 
 /** Measure p95 latency for `fn` run `n` times. */
 function p95Latency(fn: () => void, n = 100): number {
+  // Warmup: discard the first 20 samples to let v8 tier up + caches warm.
+  // CF-M2-02 measures steady-state p95, not cold-start latency.
+  for (let i = 0; i < 20; i++) fn();
   const times: number[] = [];
   for (let i = 0; i < n; i++) {
     const start = performance.now();

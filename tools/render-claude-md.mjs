@@ -23,8 +23,17 @@
  *   --dry-run         render, print to stdout, do not write
  *   --root <path>     override repo root (for hermetic tests)
  *
- * Exit codes: 0 = OK; 1 = drift detected (--check) OR validation failure;
- *             2 = invalid CLI args.
+ * Exit codes: 0 = OK (or absent-and-check, see below);
+ *             1 = drift detected (--check) OR validation failure;
+ *             2 = CLAUDE.md absent in non-check modes.
+ *
+ * Absent CLAUDE.md handling (post-2026-05-10 untrack):
+ *   --check          → exit 0 with "skipped: CLAUDE.md absent" message;
+ *                       the file is gitignored, so absence is valid state
+ *                       in CI / fresh clones; the gate becomes informational
+ *   --dry-run, write → exit 2 with "CLAUDE.md not found" (developer needs a
+ *                       template; auto-bootstrap not supported because the
+ *                       AUTO markers must be embedded in user-authored prose)
  *
  * Authored 2026-05-02 in the post-v1.49.596 CLAUDE.md compaction phase
  * (Tier 1 of the four-tier promotion plan; ships with the next milestone).
@@ -198,6 +207,13 @@ function main(argv = process.argv.slice(2), { stdout = process.stdout, stderr = 
   const claudeMdPath = join(repoRoot, 'CLAUDE.md');
 
   if (!existsSync(claudeMdPath)) {
+    if (mode === 'check') {
+      stdout.write(
+        `CLAUDE.md not present at ${claudeMdPath}; skipping drift check ` +
+        `(file is gitignored — local-only post-2026-05-10 untrack).\n`,
+      );
+      return 0;
+    }
     stderr.write(`CLAUDE.md not found at ${claudeMdPath}\n`);
     return 2;
   }

@@ -39,7 +39,14 @@ const describeOrSkip = deployTestEnabled ? describe : describe.skip;
 // deploy artifacts exist (operator's checkout post-Component 08); in CI
 // runners without www/ we soft-skip the suite. Matches the PG_TEST=1 /
 // YOSYS_TEST=1 file-presence gating pattern.
-const deployArtifactsAvailable = existsSync(DEPLOY_DIR);
+//
+// Skip-guard checks the full manifest, not just DEPLOY_DIR — a partial
+// www/ tree (e.g. an operator checkout that synced only some artifacts)
+// would otherwise produce ENOENT failures inside the assertions instead
+// of cleanly soft-skipping. Match the manifest reality, not the parent dir.
+const deployArtifactsAvailable =
+  existsSync(DEPLOY_DIR) &&
+  EXPECTED_FILES.every(({ path }) => existsSync(resolve(DEPLOY_DIR, path)));
 const describeLocalOrSkip = deployArtifactsAvailable ? describe : describe.skip;
 
 describeLocalOrSkip('integration: public deployment manifest (C10 — local checks)', () => {

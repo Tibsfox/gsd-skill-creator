@@ -55,6 +55,12 @@ function registerProjectInRegistry(registryPath: string, projectDir: string): vo
   reg.close();
 }
 
+// Hook timeout bumped from default 10s to 60s to match the root-project
+// testTimeout under full-suite contention (vitest.config.ts root project
+// runs at testTimeout: 60000 because subprocess-spawning + sqlite migrations
+// can exceed 10s when 1880+ test files run concurrently). The migration
+// + dual-DB-init in this hook is sqlite-fsync-bound and flakes only
+// under contention; isolated runtime is ~50ms.
 beforeEach(() => {
   tmpDir = join(
     tmpdir(),
@@ -70,7 +76,7 @@ beforeEach(() => {
   registerProjectInRegistry(registryPath, projectDir);
 
   store = new KBStore({ registryPath, migrationsDir: MIGRATIONS_DIR });
-});
+}, 60_000);
 
 afterEach(() => {
   store.close();
