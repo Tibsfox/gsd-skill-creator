@@ -26,6 +26,7 @@ export default defineConfig({
       'tools/__tests__/atlas-perf-bench.test.mjs',
       'tools/__tests__/atlas-index-cli.test.mjs',
       'tools/__tests__/tauri-boundary-audit.test.mjs',
+      'tools/__tests__/state-md-normalizer.test.mjs',
     ],
     globals: true,
     testTimeout: 15000,

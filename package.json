@@ -74,7 +74,9 @@
     "docs:api": "npx typedoc",
     "sync": "bash scripts/sync-research-to-live.sh --dry-run",
     "sync:live": "bash scripts/sync-research-to-live.sh",
-    "deploy": "bash scripts/sync-research-to-live.sh"
+    "deploy": "bash scripts/sync-research-to-live.sh",
+    "state-md:check": "node tools/state-md-normalizer.mjs --check",
+    "state-md:normalize": "node tools/state-md-normalizer.mjs --write"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.72.1",
