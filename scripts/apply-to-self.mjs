@@ -78,6 +78,7 @@ const DEFAULT_NEW_TEST_GLOBS = [
 const KNOWN_PATTERNS = [
   {
     name: 'existsSync-no-skip-guard',
+    mode: 'per-file',
     description:
       'Test calls existsSync/access/readFileSync on a path under .planning/ without an `if (!existsSync(...)) return` skip-guard or `it.runIf` (Lesson #10180).',
     detect(content) {
@@ -99,6 +100,7 @@ const KNOWN_PATTERNS = [
   },
   {
     name: 'perf-assertion-no-warmup',
+    mode: 'per-file',
     description:
       'Test contains a perf assertion (toBeLessThan against literal or relative ratio) without a warmup loop above (Lessons #10180 + #10181 + #10182).',
     detect(content) {
@@ -114,6 +116,127 @@ const KNOWN_PATTERNS = [
         /\/\/\s*Warm.up/i.test(content);
       if (hasWarmupLoop) return null;
       return { line: 1, snippet: 'perf assertion without visible warmup loop' };
+    },
+  },
+  {
+    name: 'posix-ere-translation-missing',
+    mode: 'per-file',
+    firstSurfacedIn: 'v1.49.636 C3 (Lesson #10188)',
+    description:
+      'JS regex `.source` containing \\d / \\s / \\w is passed to a POSIX-ERE consumer (git grep -E, grep -E, awk, sed -E) without translation to character classes ([0-9], [ \\t], etc). POSIX ERE does NOT understand JS shorthand classes.',
+    detect(content) {
+      // Look for: a .source reference adjacent to a POSIX-ERE invocation,
+      // where the .source-bearing regex contains \d / \s / \w.
+      // Heuristic: search for `.source` in the file AND find a regex in
+      // the same file containing the shorthand classes AND find a POSIX-ERE
+      // invocation. If translation (`.replace(/\\d/g, '[0-9]')` etc) is
+      // already present, suppress.
+      const usesDotSource = /\.source\b/.test(content);
+      if (!usesDotSource) return null;
+      const hasShorthandRegex = /\/[^/\n]*\\[dsw][^/\n]*\//.test(content);
+      if (!hasShorthandRegex) return null;
+      // POSIX-ERE consumers: spawn() / execSync() / shell-string forms.
+      // Matches: `git grep ... -E`, `grep ... -E`, `awk`, `sed ... -E`,
+      // including spawnSync(..., ['git', 'grep', ..., '-E', ...]) shape
+      // where args are separated across array elements.
+      const hasPosixEre =
+        // Shell-string forms (single string command).
+        /git\s+grep\s+[^"'`]*-E\b|\bgrep\s+[-]?[^"'`]*?-E\b|\bawk\b|\bsed\s+[^"'`]*-E\b/.test(content) ||
+        // Array-form spawn invocations: ['grep', ..., '-E', ...] or
+        // ['git', 'grep', ..., '-E', ...] across separate args.
+        (/['"`](grep|git|awk|sed)['"`]/.test(content) &&
+          /['"`]-E['"`]/.test(content));
+      if (!hasPosixEre) return null;
+      // Translation present?
+      const hasTranslation =
+        /\.replace\(\s*\/\\\\d\/g\s*,\s*['"`]\[0-9\]['"`]/.test(content) ||
+        /\.replace\(\s*\/\\\\s\/g\s*,\s*['"`]\[[ \\\\t]+\]['"`]/.test(content) ||
+        // Allow a brief inline translation comment to count as evidence.
+        /\/\/[^\n]*translate[^\n]*\\\\d/.test(content);
+      if (hasTranslation) return null;
+      return {
+        line: 1,
+        snippet: 'POSIX-ERE consumer receives JS shorthand class without translation',
+      };
+    },
+  },
+  {
+    name: 'comment-vs-code-pattern',
+    mode: 'per-file',
+    firstSurfacedIn: 'v1.49.636 C7 (Lesson #10189)',
+    description:
+      'Pattern detector matches a commentary token without a code-boundary anchor. E.g. a regex like /skip-guard/ without \\b boundary, or /runIf/ without preceding `it\\.` or `describe\\.`, will match prose in comments and over-fire.',
+    detect(content) {
+      // Heuristic: find lines inside an array literal (KNOWN_PATTERNS-like)
+      // that contain a regex matching what look like prose tokens
+      // (lowercase-hyphenated words like `skip-guard`, `runIf`, etc) with
+      // no surrounding boundary or anchor.
+      //
+      // We only fire when the file LOOKS like a pattern catalog
+      // (contains `KNOWN_PATTERNS` or `detect:` shape) AND has a regex
+      // that hits a common comment-vs-code anti-pattern.
+      const looksLikePatternCatalog =
+        /\bKNOWN_PATTERNS\b/.test(content) ||
+        /\bdetect\s*[:\(]/.test(content);
+      if (!looksLikePatternCatalog) return null;
+      // Identify suspect regexes: a /regex/ that matches a "hyphenated
+      // word" or camelCase identifier WITHOUT \b boundaries or it\./describe\.
+      // anchor.
+      // Pattern: a regex literal where the body contains [a-z]+-[a-z]+
+      // and there's no preceding \b within ~6 chars.
+      const suspectRe = /\/([^/\n\\]*?)\b([a-z]+-[a-z]+|[a-z]+[A-Z][a-zA-Z]+)\b([^/\n\\]*?)\//g;
+      let match;
+      while ((match = suspectRe.exec(content)) !== null) {
+        const before = match[1];
+        const after = match[3];
+        const inner = match[0];
+        const hasBoundary =
+          /\\b/.test(before) ||
+          /\\b/.test(after) ||
+          /\(it|describe\)\\\.|\b(it|describe)\\\./.test(before);
+        if (!hasBoundary) {
+          return {
+            line: 1,
+            snippet: `pattern catalog regex \`${inner}\` lacks code-boundary anchor`,
+          };
+        }
+      }
+      return null;
+    },
+  },
+  {
+    name: 'sweep-substrate-allowlist-missing',
+    mode: 'diff-level',
+    firstSurfacedIn: 'v1.49.636 C8 (Lesson #10190)',
+    description:
+      'A sweep-tool script (scripts/sweep-*.sh / scripts/sweep-*.mjs) was added without a paired negative-test fixture (scripts/__tests__/sweep-*.test.mjs) in the same diff. Sweep tools must ship with allowlist/negative-test coverage to prevent over-sweep of substrate citations.',
+    detect(diffFiles) {
+      // diffFiles: array of added paths in the diff range.
+      // For each added sweep script, look for a sibling sweep test added
+      // in the same diff. Report each unpaired sweep script.
+      const sweepScripts = diffFiles.filter((p) =>
+        /^scripts\/sweep-[^/]+\.(sh|mjs|js|ts)$/.test(p),
+      );
+      const sweepTests = diffFiles.filter((p) =>
+        /^scripts\/__tests__\/sweep-[^/]+\.test\.(mjs|js|ts)$/.test(p),
+      );
+      const findings = [];
+      for (const script of sweepScripts) {
+        // Extract sweep name suffix to look for matching test.
+        const m = script.match(/^scripts\/sweep-([^/.]+)\./);
+        if (!m) continue;
+        const sweepName = m[1];
+        const expectedTest = `scripts/__tests__/sweep-${sweepName}.test.`;
+        const paired = sweepTests.some((t) => t.startsWith(expectedTest));
+        if (!paired) {
+          findings.push({
+            file: script,
+            line: 1,
+            snippet: `sweep script added without paired ${expectedTest}{mjs,js,ts} fixture`,
+          });
+        }
+      }
+      return findings.length > 0 ? findings : null;
     },
   },
 ];
@@ -146,6 +269,27 @@ export function listNewTestFiles({ diffRange, cwd = process.cwd() } = {}) {
   try {
     const out = execSync(
       `git diff --name-only --diff-filter=A ${diffRange} -- ${DEFAULT_NEW_TEST_GLOBS.map((g) => `'${g}'`).join(' ')}`,
+      { encoding: 'utf8', cwd },
+    );
+    return out
+      .split('\n')
+      .filter((l) => l.trim().length > 0)
+      .map((l) => l.trim());
+  } catch {
+    return [];
+  }
+}
+
+/**
+ * List ALL added files in the diff range (not just tests). Used by
+ * diff-level detectors like sweep-substrate-allowlist-missing
+ * (v1.49.637 C7 Sub-1b).
+ */
+export function listAllAddedFiles({ diffRange, cwd = process.cwd() } = {}) {
+  if (!diffRange) return [];
+  try {
+    const out = execSync(
+      `git diff --name-only --diff-filter=A ${diffRange}`,
       { encoding: 'utf8', cwd },
     );
     return out
@@ -201,12 +345,20 @@ export function loadAllowlist(allowlistPath = DEFAULT_ALLOWLIST_PATH) {
 
 /**
  * Top-level entry: scan new test files for known violation patterns.
+ *
+ * Per-file patterns (`mode: 'per-file'`) run against each new test file's
+ * content. Diff-level patterns (`mode: 'diff-level'`) run once against
+ * the full list of added files in the diff range. Both kinds emit
+ * `ApplyToSelfFinding` records uniformly. (v1.49.637 C7 Sub-1b
+ * extension for sweep-substrate-allowlist-missing.)
  */
 export function runApplyToSelf({
   diffRange = null,
   disciplinePaths = DEFAULT_DISCIPLINE_PATHS,
   allowlistPath = DEFAULT_ALLOWLIST_PATH,
   cwd = process.cwd(),
+  knownPatterns = KNOWN_PATTERNS,
+  injectedAddedFiles = null,
 } = {}) {
   /** @type {ApplyToSelfCheckResult} */
   const result = {
@@ -220,6 +372,8 @@ export function runApplyToSelf({
 
   const allow = loadAllowlist(allowlistPath);
 
+  // Per-file detectors.
+  const perFile = knownPatterns.filter((p) => (p.mode || 'per-file') === 'per-file');
   for (const f of result.newTestFiles) {
     let content;
     try {
@@ -230,7 +384,7 @@ export function runApplyToSelf({
     } catch {
       continue;
     }
-    for (const pattern of KNOWN_PATTERNS) {
+    for (const pattern of perFile) {
       const hit = pattern.detect(content);
       if (!hit) continue;
       const key = `${f}::${pattern.name}`;
@@ -240,6 +394,35 @@ export function runApplyToSelf({
       }
       result.findings.push({
         file: f,
+        line: hit.line || 1,
+        patternName: pattern.name,
+        status: 'warn',
+        snippet: hit.snippet,
+      });
+    }
+  }
+
+  // Diff-level detectors. Allow tests to inject the added-files list
+  // (so we can exercise the detector deterministically without spinning
+  // up real git history).
+  const diffLevel = knownPatterns.filter((p) => p.mode === 'diff-level');
+  const addedFiles =
+    injectedAddedFiles !== null
+      ? injectedAddedFiles
+      : listAllAddedFiles({ diffRange, cwd });
+  for (const pattern of diffLevel) {
+    const hits = pattern.detect(addedFiles);
+    if (!hits) continue;
+    const findings = Array.isArray(hits) ? hits : [hits];
+    for (const hit of findings) {
+      const targetFile = hit.file || '<diff-level>';
+      const key = `${targetFile}::${pattern.name}`;
+      if (allow.has(key)) {
+        result.allowlistedViolations.push(key);
+        continue;
+      }
+      result.findings.push({
+        file: targetFile,
         line: hit.line || 1,
         patternName: pattern.name,
         status: 'warn',
@@ -297,6 +480,9 @@ function main(argv) {
   }
   return 0;
 }
+
+// Exported for tests (v1.49.637 C7 Sub-1b).
+export { KNOWN_PATTERNS };
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   process.exit(main(process.argv.slice(2)));

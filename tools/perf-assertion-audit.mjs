@@ -37,8 +37,18 @@ const SHAPE_PATTERNS = {
     /expect\([^)]*(latency|p95|p99|duration|throughput|qps|opsPerSec)[^)]*\)\.toBeLessThan/,
   'absolute-threshold-generic':
     /expect\((mean|avg|p50|t\d+|elapsed|elapsedMs|avgMs|secondCallMs|mountTime|median)\)\.toBeLessThan/,
+  // v1.49.637 C7 Sub-1a (Lesson #10181 forward): broaden the relative-ratio
+  // regex to catch:
+  //   (a) the post-multiplier additive/subtractive shape `* N + K)` (the
+  //       trailing-tail `[\d.+ \-]*` extension to the original)
+  //   (b) the pre-multiplier shape `N * ident + K)` where the digit
+  //       precedes `*` (the actual shape that broke at v1.49.636 ship-time
+  //       stabilization of src/plane/activation.integration.test.ts:
+  //       `expect(geoAvg).toBeLessThan(3 * baselineAvg + 5)`)
+  // The alternation matches either order; both end with optional
+  // additive/subtractive trailing constants.
   'relative-ratio':
-    /expect\([^)]+\)\.toBeLessThan\([^)]+\*\s*\d+(\.\d+)?\)/,
+    /expect\([^)]+\)\.toBeLessThan\(([^)]+\*\s*\d+(\.\d+)?|\d+(\.\d+)?\s*\*\s*[^)]+?)[\d.+ \-]*\)/,
 };
 
 // Native-module-backed import signatures — when a test file imports any
