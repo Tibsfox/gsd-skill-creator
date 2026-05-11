@@ -12,8 +12,8 @@
 //! - `set <account>` — store a credential (reads value from stdin)
 //! - `status` — print current keystore state (Path 1 / Path 2 / v1 /
 //!   empty + orphan note)
-//! - `migrate --to-keyring` — M3 stub; errors with v1.49.6XX cluster #3
-//!   deferral message
+//! - `migrate --to-keyring` — M3 stub; errors with v1.49.7XX (M3 deferral)
+//!   message + reference to .planning/path-2-to-path-1-migration.md
 
 use clap::{Args, Parser, Subcommand};
 use gsd_os_lib::security::keyring_backend::{os_store, KeyringStore};
@@ -114,7 +114,8 @@ fn cmd_migrate(args: MigrateArgs) -> ExitCode {
         eprintln!(
             "Path-2 → Path-1 upgrade not implemented at v1.49.636.\n\
              Your credentials are currently stored in the Path-2 file\n\
-             (passphrase-encrypted). Tracked at v1.49.6XX cluster #3.\n\
+             (passphrase-encrypted). Tracked at v1.49.7XX (M3 deferral).\n\
+             See .planning/path-2-to-path-1-migration.md for the M3 design.\n\
              Workaround: export ANTHROPIC_API_KEY from your shell, or\n\
              delete the credentials.age file and re-run\n\
              `skill-creator-keystore set` to store the credential in the OS\n\

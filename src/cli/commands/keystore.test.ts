@@ -14,7 +14,7 @@
 
 import { chmodSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import {
   keystoreCommand,
@@ -153,4 +153,78 @@ describe('keystoreCommand subprocess pass-through', () => {
   // resolver's final-fallback (`skill-creator-keystore` PATH name) — when
   // the binary is uninstalled the spawn's ENOENT handler converts to 127.
   // Coverage of that handler shape is implicit in the spawn-error logic.
+});
+
+describe('keystore migrate --to-keyring (v1.49.637 cluster #4 C2 stub polish)', () => {
+  it('passes through exit code 3 from the M3-stub bin', async () => {
+    // Stub bin emitting the polished stub message (Path-2 → Path-1 deferral
+    // + .planning/path-2-to-path-1-migration.md doc reference) and exit 3.
+    const stub = join(workRoot, 'stub-to-keyring');
+    writeFileSync(
+      stub,
+      '#!/bin/sh\n' +
+        'cat <<\'EOF\' >&2\n' +
+        'Path-2 → Path-1 upgrade not implemented at v1.49.636.\n' +
+        'Your credentials are currently stored in the Path-2 file\n' +
+        '(passphrase-encrypted). Tracked at v1.49.7XX (M3 deferral).\n' +
+        'See .planning/path-2-to-path-1-migration.md for the M3 design.\n' +
+        'EOF\n' +
+        'exit 3\n',
+    );
+    chmodSync(stub, 0o755);
+    process.env.KEYSTORE_BIN = stub;
+
+    const io = makeIO();
+    const code = await keystoreCommand(['migrate', '--to-keyring'], io);
+    expect(code).toBe(3);
+  });
+
+  it('routes M3-stub output to stderr (NOT stdout)', async () => {
+    const stub = join(workRoot, 'stub-to-keyring-stderr');
+    writeFileSync(
+      stub,
+      '#!/bin/sh\n' +
+        'echo "Path-2 → Path-1 upgrade not implemented" >&2\n' +
+        'echo "See .planning/path-2-to-path-1-migration.md" >&2\n' +
+        'exit 3\n',
+    );
+    chmodSync(stub, 0o755);
+    process.env.KEYSTORE_BIN = stub;
+
+    const io = makeIO();
+    const code = await keystoreCommand(['migrate', '--to-keyring'], io);
+    expect(code).toBe(3);
+    // Stub message must land on stderr per the 4-level exit-code contract.
+    expect(io.err.join('')).toContain('Path-2 → Path-1 upgrade not implemented');
+    expect(io.err.join('')).toContain('.planning/path-2-to-path-1-migration.md');
+    // Stdout must be empty for the stub path.
+    expect(io.out.join('')).toBe('');
+  });
+
+  it('keystore.ts help text references the M3-deferral version (NOT stale v1.49.650)', async () => {
+    const io = makeIO();
+    const code = await keystoreCommand(['--help'], io);
+    expect(code).toBe(0);
+    const helpText = io.out.join('');
+    // Polished help text (C2) references "M3 deferral" and "v1.49.7XX".
+    expect(helpText).toContain('M3 deferral');
+    expect(helpText).toContain('v1.49.7XX');
+    // The stale "stub at v1.49.650" string must be gone (it was the pre-C2 text).
+    expect(helpText).not.toContain('stub at v1.49.650');
+  });
+
+  it('skill-creator-keystore.rs stub message preserves the doc reference + version (substrate invariant)', async () => {
+    // Read the Rust bin source to assert the polished stub message format
+    // remains intact (regression-safe against accidental future edits).
+    const { readFileSync } = await import('node:fs');
+    const binSrc = readFileSync(
+      resolve(process.cwd(), 'src-tauri/bin/skill-creator-keystore.rs'),
+      'utf-8',
+    );
+    expect(binSrc).toContain('Path-2 → Path-1 upgrade not implemented');
+    expect(binSrc).toContain('v1.49.7XX (M3 deferral)');
+    expect(binSrc).toContain('.planning/path-2-to-path-1-migration.md');
+    // exit-code-3 contract preserved.
+    expect(binSrc).toContain('return ExitCode::from(3);');
+  });
 });
