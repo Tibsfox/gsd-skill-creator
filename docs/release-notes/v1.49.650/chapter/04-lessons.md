@@ -69,3 +69,63 @@ from implementing against an under-specified gap.
 **Pattern template.** (1) Stage 1 diagnosis; (2) spec gap identified; (3) halt component; (4) author
 pre-mission spec at `.planning/missions/<next-milestone>-<component>/`; (5) return "HALTED" status
 to orchestrator with pre-mission spec path as the deliverable reference.
+
+## Lesson #10180 — meta-tests must skip-guard against gitignored runtime artifacts
+
+**Context.** The v1.49.634 C8 meta-test at `tests/integration/v1-49-634-meta-test.test.ts:118` + `:141`
+asserts `expect(result.status).toBe(0)` for a subprocess spawn of
+`.claude/hooks/self-mod-guard.js`. The hook is gitignored at `.gitignore:9` (all of `.claude/` is
+excluded) and installed locally by `project-claude/install.cjs` at workspace setup time. CI runners do
+not execute that install step, so the hook is absent on CI; the subprocess spawn returns exit code 1
+and the assertion fails. The meta-test passed locally (where the hook is installed) and failed silently
+in CI for 19 forward-cadence milestones until the v1.49.650 W3 G3 pre-tag-gate composite (step 4/9
+"CI-on-dev verification") surfaced the predecessor `d4ffa4f32` CI red as a ship blocker.
+
+**Lesson.** Any meta-test that exercises a deploy-installed-only artifact — gitignored hooks,
+locally-generated config files, environment-specific binaries — MUST `existsSync()` skip-guard ahead of
+the subprocess invocation. The test should still verify the assertion when the artifact is present
+(local dev path) and gracefully skip when absent (CI path). Failing to skip-guard means CI red on the
+predecessor permanently blocks downstream ship pipelines from a real defect that's invisible to
+isolated local runs.
+
+**Applied to.** `tests/integration/v1-49-634-meta-test.test.ts` (skip-guard via
+`it.runIf(HOOK_AVAILABLE)` at the two C4 self-mod-guard tests, where
+`HOOK_AVAILABLE = existsSync(HOOK_PATH)` is computed at module scope).
+
+**Resolved in.** v1.49.650 W3 G3 inline stabilization (commit `327b4e235`); demonstrates the v1.49.650
+C4 fragile-test-pattern.md Template-3 (full-manifest skip-guard) on the test that surfaced its need.
+
+**Pattern template.** `const ARTIFACT_AVAILABLE = existsSync(ARTIFACT_PATH);` at module scope; gate the
+artifact-dependent tests with `it.runIf(ARTIFACT_AVAILABLE)(...)`. Document the runtime-install context
+in a comment naming the gitignore rule + the installer that produces the artifact.
+
+## Lesson #10181 — perf-assertion audits need regex coverage of relative-ratio assertion forms
+
+**Context.** v1.49.650 C3 audited the suite for sharp-threshold perf assertions using a 7-regex set
+keying on `latency` / `p95` / `p99` / `performance.now` / `duration` / `throughput` / `qps` /
+`opsPerSec` identifier names. The audit surfaced 31 sites, fixed top-8, and documented 9 for follow-on.
+At ship time, two additional pre-existing perf flakes surfaced during the full-suite pre-tag-gate run
+that the C3 audit had missed: `src/intelligence/analyzer/__tests__/performance.test.ts` used
+`expect(mean).toBeLessThan(N)` with a generic `mean` variable, and
+`src/intelligence/atlas-indexer/__tests__/runner.test.ts:481` used `expect(t4).toBeLessThan(t1 * 5)` —
+a relative-ratio form rather than an absolute-threshold form. Both passed in isolation but failed
+under full-suite contention; both pre-existed v1.49.650 by 19+ milestones.
+
+**Lesson.** Perf-assertion audits need regex coverage of TWO assertion shapes:
+1. **Absolute-threshold:** `expect(<identifier>).toBeLessThan(<numeric-literal>)` — caught by v1.49.650 C3.
+2. **Relative-ratio:** `expect(<identifier>).toBeLessThan(<identifier> * <numeric-literal>)` — MISSED by v1.49.650 C3.
+
+The relative-ratio form is jitter-prone in a different way than the absolute form: when the divisor is
+small (sub-50ms), measurement jitter dominates the ratio and the assertion fails under contention even
+though the underlying behavior is correct. Future audits should grep both shapes and apply per-site
+analysis to the relative-ratio sites separately (often the right fix is widening the multiplier OR
+adding an absolute-time floor like `if (t1 < 50) skip`).
+
+**Resolved in.** v1.49.650 W3 G3 inline stabilization (commits `bbde73555` analyzer + `90c3d8cbb`
+atlas-indexer). Carry-forward: extend C3 audit regex set in v1.49.651 to catch
+`expect\([^)]+\)\.toBeLessThan\([^)]+\s*\*\s*\d+\)` and `expect\(mean\b` patterns.
+
+**Pattern template.** When designing a grep-based audit, enumerate the syntactic shapes of the pattern
+to audit + assertion-name variants + identifier-name variants; the audit's regex set should cover the
+Cartesian product. A missed shape compounds across milestones because the missing pattern stays
+invisible until contention surfaces it.
