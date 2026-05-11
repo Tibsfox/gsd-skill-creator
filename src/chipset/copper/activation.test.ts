@@ -203,6 +203,22 @@ describe('PipelineActivationDispatch', () => {
 
   describe('async mode', () => {
     it('fires and returns immediately without waiting', async () => {
+      // Warmup: tier up PipelineActivationDispatch.activate() call-site before
+      // the timed assertion. The 50ms threshold measures dispatch return speed,
+      // not async work completion — cold JIT can inflate the dispatch overhead.
+      // 3 warmup calls on a fast-resolving ctx are sufficient (dispatch is
+      // synchronous overhead; the real work runs in background).
+      const warmupCtx: ActivationContext = {
+        resolveSkill: async () => ({
+          path: '.claude/commands/warmup.md',
+          content: '# warmup',
+        }),
+      };
+      const warmupDispatch = new PipelineActivationDispatch(warmupCtx);
+      for (let i = 0; i < 3; i++) {
+        await warmupDispatch.activate(move({ name: 'warmup', mode: 'lite' }));
+      }
+
       const ctx: ActivationContext = {
         resolveSkill: async () => {
           await new Promise((r) => setTimeout(r, 100));

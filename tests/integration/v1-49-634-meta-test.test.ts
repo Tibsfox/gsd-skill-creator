@@ -25,6 +25,17 @@ const HOOK_PATH = resolve(REPO_ROOT, '.claude/hooks/self-mod-guard.js');
 const AUDIT_PATH = resolve(REPO_ROOT, 'tools/tauri-boundary-audit.mjs');
 const PRE_TAG_GATE_PATH = resolve(REPO_ROOT, 'tools/pre-tag-gate.sh');
 
+// The self-mod-guard hook lives at .claude/hooks/self-mod-guard.js, which is
+// gitignored at .gitignore:9 (all of .claude/ is). The hook is installed
+// locally by project-claude/install.cjs but CI does not run that install
+// step, so the hook is absent on CI runners. The two C4 self-mod-guard tests
+// below spawn the hook as a subprocess; absent hook → exit code 1 → assertion
+// fail. Skip-guard those tests when the hook is not present, mirroring the
+// fragile-test discipline doc Template-3 (full-manifest skip-guard) shipped
+// at v1.49.650 C4. Local dev still exercises the assertions; CI gracefully
+// skips. See Lesson #10180 (chapter/04-lessons.md, v1.49.650).
+const HOOK_AVAILABLE = existsSync(HOOK_PATH);
+
 afterEach(() => {
   // Clean synthetic file + dir if any test left one behind
   try {
@@ -102,7 +113,7 @@ describe('v1.49.634 integration meta-test', () => {
     expect(result.status).toBe(0);
   });
 
-  it('C4 self-mod-guard BLOCKS on adjacent write to .claude/skills/', () => {
+  it.runIf(HOOK_AVAILABLE)('C4 self-mod-guard BLOCKS on adjacent write to .claude/skills/', () => {
     // Adjacent: `cp X .claude/skills/foo/SKILL.md` — write-operator + protected
     // path token are on the same proximity-resolved span. Hook must BLOCK.
     const payload = JSON.stringify({
@@ -121,7 +132,7 @@ describe('v1.49.634 integration meta-test', () => {
     expect(parsed.reason).toMatch(/skills|protected|self-mod/i);
   });
 
-  it('C4 self-mod-guard ALLOWS non-adjacent write (regression for §4.1)', () => {
+  it.runIf(HOOK_AVAILABLE)('C4 self-mod-guard ALLOWS non-adjacent write (regression for §4.1)', () => {
     // Non-adjacent: write-operator targets a non-protected path; the
     // .claude/skills/... substring appears inside a quoted string (echo body),
     // not as a write target. Hook must ALLOW (this is the §4.1 false-positive

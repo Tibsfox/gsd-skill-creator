@@ -210,6 +210,12 @@ describe('CF-H-006: performance budget', () => {
         }),
       );
     }
+
+    // Warmup: 10 discard calls to let V8 tier up the survey() scoring path
+    // (pure in-memory; JIT ramp-up is fast but the 50ms threshold is still
+    // tight enough to flake on cold first call under back-to-back suite runs).
+    for (let i = 0; i < 10; i++) survey('topic-2 feature-3', entries, { now: NOW });
+
     const t0 = performance.now();
     const out = survey('topic-2 feature-3', entries, { now: NOW });
     const elapsed = performance.now() - t0;

@@ -9,6 +9,7 @@ export default defineConfig({
     name: 'tools',
     include: [
       'tools/release-history/__tests__/score-completeness.test.mjs',
+      'tools/release-history/__tests__/score-completeness-c5.test.mjs',
       'scripts/__tests__/bump-version.test.mjs',
       'tools/__tests__/depth-audit.test.mjs',
       'tools/__tests__/ftp-sync.test.mjs',
@@ -25,6 +26,7 @@ export default defineConfig({
       'tools/__tests__/atlas-perf-bench.test.mjs',
       'tools/__tests__/atlas-index-cli.test.mjs',
       'tools/__tests__/tauri-boundary-audit.test.mjs',
+      'tools/__tests__/state-md-normalizer.test.mjs',
     ],
     globals: true,
     testTimeout: 15000,

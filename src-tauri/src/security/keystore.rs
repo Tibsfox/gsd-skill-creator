@@ -1,13 +1,31 @@
 //! Native OS keystore loading for credential proxy.
 //!
-//! Phase 369 -- Credential Proxy
+//! Phase 369 — Credential Proxy. Extended at v1.49.650 with the unified
+//! `Keystore` API (Path 1 = OS keyring direct; Path 2 = age-encrypted
+//! credentials.age file with Argon2id-derived passphrase identity).
 //!
-//! Platform strategy:
-//! - Linux: GNOME Keyring (libsecret) via feature gate, encrypted file fallback
-//! - macOS: macOS Keychain via feature gate, encrypted file fallback
-//! - Both: ANTHROPIC_API_KEY env var as development convenience (last resort)
+//! ## Path selection
+//!
+//! `Keystore::load()` probes OS keyring availability and commits to the
+//! winning path. v1 plaintext detection triggers a `MigrationRequired`
+//! error that callers handle via `Keystore::migrate_v1_to_v2()`.
+//!
+//! ## Legacy plaintext fallback
+//!
+//! The legacy `~/.config/gsd-os/credentials.enc` (plaintext, despite the
+//! .enc extension) is gated behind
+//! `#[cfg(any(debug_assertions, feature = "legacy-plaintext-keystore"))]`.
+//! Renamed from `insecure-plaintext-keystore` at v1.49.650. The feature
+//! emits a `warn!` log when enabled and is scheduled for full removal at
+//! v1.49.6XX cluster #3.
 
+use crate::security::encryption::{decrypt_with_passphrase, encrypt_with_passphrase};
+use crate::security::keyring_backend::{
+    self, os_store, KeyringError, KeyringStore, KEYRING_ACCOUNT_DEFAULT, KEYRING_SERVICE,
+};
+use crate::security::migration::{self, DiscoveredState, MigrationError};
 use crate::security::proxy::{ProxyError, SecretString};
+use std::path::{Path, PathBuf};
 
 /// Which keystore backend was used to load a credential.
 #[derive(Debug, Clone, PartialEq)]
@@ -16,13 +34,217 @@ pub enum KeystoreBackend {
     MacosKeychain,
     EncryptedFile(std::path::PathBuf),
     EnvironmentVariable,
+    /// Path 1 — OS keyring (cross-platform via `keyring` crate v3).
+    OsKeyring,
+    /// Path 2 — age-encrypted file under config dir.
+    AgeFile(std::path::PathBuf),
 }
+
+// ============================================================================
+// v1.49.650 — Unified Keystore API (Path 1 + Path 2 + migration)
+// ============================================================================
+
+/// Errors from the unified `Keystore` API.
+#[derive(Debug, thiserror::Error)]
+pub enum KeystoreError {
+    /// Path 2 source is locked; caller must supply a passphrase.
+    #[error("keystore locked; passphrase required")]
+    Locked,
+    /// v1 plaintext file detected; caller must run `migrate_v1_to_v2`.
+    #[error("v1 plaintext credential file detected; migration required")]
+    MigrationRequired,
+    /// Neither Path 1 nor Path 2 is usable on this host (keyring unavailable
+    /// AND age file absent/un-decryptable).
+    #[error("no keystore backend is usable on this host")]
+    BackendUnavailable,
+    /// Passphrase decryption failed for Path 2.
+    #[error("invalid passphrase or tampered ciphertext")]
+    InvalidPassphrase,
+    /// Ciphertext tampering detected (age MAC failure).
+    #[error("keystore content has been tampered")]
+    Tampered,
+    /// Underlying backend reported a non-recoverable error.
+    #[error("keystore backend error: {0}")]
+    Backend(String),
+    /// IO error while reading or writing a keystore file.
+    #[error("keystore io error: {0}")]
+    Io(String),
+    /// Migration helper surfaced an error.
+    #[error("migration error: {0}")]
+    Migration(String),
+}
+
+impl From<KeyringError> for KeystoreError {
+    fn from(e: KeyringError) -> Self {
+        match e {
+            KeyringError::Unavailable => KeystoreError::BackendUnavailable,
+            KeyringError::NotFound => KeystoreError::BackendUnavailable,
+            other => KeystoreError::Backend(format!("{:?}", other)),
+        }
+    }
+}
+
+impl From<MigrationError> for KeystoreError {
+    fn from(e: MigrationError) -> Self {
+        KeystoreError::Migration(format!("{:?}", e))
+    }
+}
+
+/// Resolve the canonical paths used by the unified keystore.
+///
+/// - `legacy_plaintext`: `~/.config/gsd-os/credentials.enc` (pre-v1.49.650)
+/// - `path2_age`: `~/.config/gsd-os/credentials.age` (v1.49.650+ Path 2)
+pub fn keystore_paths() -> Option<(PathBuf, PathBuf)> {
+    let config_dir = dirs::config_dir()?;
+    let gsd_dir = config_dir.join("gsd-os");
+    Some((
+        gsd_dir.join("credentials.enc"),
+        gsd_dir.join("credentials.age"),
+    ))
+}
+
+/// The unified keystore handle.
+///
+/// Constructed via `Keystore::load_with_backend()` which probes OS keyring
+/// availability and dispatches to Path 1 or Path 2. The legacy
+/// `load_credentials_from_keystore` free function continues to satisfy
+/// existing callers in `api/keystore.rs` and is layered on top.
+pub struct Keystore {
+    backend: Option<KeystoreBackend>,
+    secret: Option<SecretString>,
+}
+
+impl Keystore {
+    /// Empty keystore (no credential loaded).
+    pub fn empty() -> Self {
+        Self { backend: None, secret: None }
+    }
+
+    /// Which backend, if any, holds the credential.
+    pub fn backend(&self) -> Option<&KeystoreBackend> {
+        self.backend.as_ref()
+    }
+
+    /// Whether a credential is currently in-memory.
+    pub fn has_secret(&self) -> bool {
+        self.secret.is_some()
+    }
+
+    /// Probe the on-disk state via the supplied keyring store and path-2 file
+    /// location.
+    pub fn discover(
+        keyring: &dyn KeyringStore,
+        path2_age: &Path,
+        v1_plaintext: &Path,
+    ) -> DiscoveredState {
+        migration::discover_state(keyring, path2_age, v1_plaintext)
+    }
+
+    /// Load the credential from the appropriate backend.
+    ///
+    /// - Path 1 (keyring available): returns Self with the loaded secret.
+    /// - Path 2 (age file present): requires `passphrase` — returns
+    ///   `KeystoreError::Locked` if not provided.
+    /// - v1 plaintext detected: returns `KeystoreError::MigrationRequired`.
+    /// - Empty: returns Self with `has_secret() == false`.
+    pub fn load_with_backend(
+        keyring: &dyn KeyringStore,
+        path2_age: &Path,
+        v1_plaintext: &Path,
+        passphrase: Option<&str>,
+    ) -> Result<Self, KeystoreError> {
+        let state = migration::discover_state(keyring, path2_age, v1_plaintext);
+        match state {
+            DiscoveredState::V1Plaintext => Err(KeystoreError::MigrationRequired),
+            DiscoveredState::Path1 | DiscoveredState::Path1WithPath2Orphan => {
+                let secret = keyring.load(KEYRING_ACCOUNT_DEFAULT)?;
+                Ok(Self {
+                    backend: Some(KeystoreBackend::OsKeyring),
+                    secret: Some(secret),
+                })
+            }
+            DiscoveredState::Path2 => {
+                let pass = passphrase.ok_or(KeystoreError::Locked)?;
+                let ciphertext = std::fs::read(path2_age)
+                    .map_err(|e| KeystoreError::Io(e.to_string()))?;
+                let plaintext = decrypt_with_passphrase(&ciphertext, pass)
+                    .map_err(|_| KeystoreError::InvalidPassphrase)?;
+                let s = String::from_utf8(plaintext)
+                    .map_err(|_| KeystoreError::Tampered)?;
+                Ok(Self {
+                    backend: Some(KeystoreBackend::AgeFile(path2_age.to_path_buf())),
+                    secret: Some(SecretString::new(s)),
+                })
+            }
+            DiscoveredState::Empty => Ok(Self::empty()),
+        }
+    }
+
+    /// Save a credential value. Uses the same path the keystore was loaded
+    /// from, or commits a new path if currently empty.
+    ///
+    /// On Path 2, `passphrase` is required.
+    pub fn save_with_backend(
+        keyring: &dyn KeyringStore,
+        path2_age: &Path,
+        account: &str,
+        value: &str,
+        passphrase: Option<&str>,
+    ) -> Result<KeystoreBackend, KeystoreError> {
+        if keyring.is_available() {
+            keyring.store(account, value)?;
+            keyring_backend::round_trip_verify_with(keyring, account, value)?;
+            Ok(KeystoreBackend::OsKeyring)
+        } else {
+            let pass = passphrase.ok_or(KeystoreError::Locked)?;
+            let bytes = value.as_bytes();
+            let ciphertext = encrypt_with_passphrase(bytes, pass)
+                .map_err(|_| KeystoreError::Backend("encrypt failed".into()))?;
+            if let Some(parent) = path2_age.parent() {
+                std::fs::create_dir_all(parent)
+                    .map_err(|e| KeystoreError::Io(e.to_string()))?;
+            }
+            std::fs::write(path2_age, &ciphertext)
+                .map_err(|e| KeystoreError::Io(e.to_string()))?;
+            Ok(KeystoreBackend::AgeFile(path2_age.to_path_buf()))
+        }
+    }
+
+    /// Migrate the v1 plaintext file at the supplied path to v2 storage.
+    ///
+    /// Delegates to `migration::migrate_v1` which preserves the backup-first
+    /// invariant. Returns the count of credentials migrated.
+    pub fn migrate_v1_to_v2(
+        keyring: &dyn KeyringStore,
+        v1_plaintext: &Path,
+        path2_age: &Path,
+        passphrase: Option<&str>,
+    ) -> Result<usize, KeystoreError> {
+        migration::migrate_v1(keyring, v1_plaintext, path2_age, passphrase).map_err(Into::into)
+    }
+}
+
+// Production helper — uses the OS keyring + canonical paths.
+//
+// Returns Some only when both `dirs::config_dir()` resolves and the call
+// succeeds; otherwise the caller falls back to the legacy code path.
+pub fn keystore_load_production(
+    passphrase: Option<&str>,
+) -> Result<Keystore, KeystoreError> {
+    let (v1, path2) = keystore_paths().ok_or(KeystoreError::BackendUnavailable)?;
+    Keystore::load_with_backend(&os_store(), &path2, &v1, passphrase)
+}
+
+// ============================================================================
+// Legacy free-function surface (preserved for api/keystore.rs)
+// ============================================================================
 
 /// Load API credentials from the best available keystore.
 ///
-/// On Linux: tries GNOME Keyring (libsecret) first, falls back to encrypted file.
-/// On macOS: tries Keychain first, falls back to encrypted file.
-/// Both: checks ANTHROPIC_API_KEY env var as last development fallback.
+/// **Legacy v1.49.634 surface** — preserved for `src-tauri/src/api/keystore.rs`
+/// which has not yet been migrated to the unified `Keystore` API. New
+/// callers should use `Keystore::load_with_backend()` or
+/// `keystore_load_production()`.
 pub fn load_credentials_from_keystore(
     service: &str,
     account: &str,
@@ -41,7 +263,12 @@ pub fn load_credentials_from_keystore(
         }
     }
 
-    // Fallback: encrypted file at ~/.config/gsd-os/credentials.enc
+    // Fallback chain: env ANTHROPIC_API_KEY → (release-gated) plaintext
+    // credential file. The unified `Keystore::load_with_backend()` API
+    // provides the v1.49.650 Path 1 (OS keyring) + Path 2 (age-encrypted
+    // file) surfaces; callers wanting those should use the unified API.
+    // This legacy free function preserves its v1.49.634 precedence so
+    // existing api/keystore.rs consumers see no behavioral change.
     load_from_encrypted_file(service, account)
 }
 
@@ -120,18 +347,32 @@ fn load_from_encrypted_file(
         )));
     }
 
-    // v1.49.634 §18 (C3): the plaintext credential-file fallback is gated
-    // out of release builds. In debug builds OR when the developer opts in
-    // via `--features insecure-plaintext-keystore`, the legacy path remains
-    // available so existing developer setups continue to work. Release
-    // builds (cargo build --release without the feature) return a clear
-    // error pointing users at the env-var workaround and the follow-on
-    // encryption mission.
+    // v1.49.634 §18 (C3) → v1.49.650 (renamed): the plaintext credential-file
+    // fallback is gated out of release builds. In debug builds OR when the
+    // developer opts in via `--features legacy-plaintext-keystore`, the legacy
+    // path remains available so existing developer setups continue to work.
+    // Release builds (cargo build --release without the feature) return a
+    // clear error pointing users at the env-var workaround and the unified
+    // Keystore::migrate_v1_to_v2 surface.
     //
     // Reachability proof: .planning/keystore-reachability-audit.md
-    // Encryption migration: .planning/missions/v1-49-6XX-keystore-encryption-stub.md
-    #[cfg(any(debug_assertions, feature = "insecure-plaintext-keystore"))]
+    // Encryption migration: v1.49.650 C1 (this milestone — encryption.rs +
+    //   keyring_backend.rs + migration.rs).
+    //
+    // Feature rename history:
+    //   v1.49.634: insecure-plaintext-keystore (introduced)
+    //   v1.49.650: legacy-plaintext-keystore (renamed; deprecation marker)
+    //   v1.49.6XX cluster #3: REMOVED entirely
+    #[cfg(any(debug_assertions, feature = "legacy-plaintext-keystore"))]
     {
+        // Emit a warn-level marker when the feature is enabled (debug builds
+        // surface this on the test harness; release-with-feature surfaces it
+        // to the operator's stderr).
+        #[cfg(feature = "legacy-plaintext-keystore")]
+        eprintln!(
+            "warn: legacy-plaintext-keystore feature enabled; scheduled for removal at v1.49.6XX cluster #3"
+        );
+
         let content = std::fs::read_to_string(&cred_file)
             .map_err(|e| ProxyError::KeystoreError(e.to_string()))?;
         for line in content.lines() {
@@ -149,15 +390,22 @@ fn load_from_encrypted_file(
             service, account
         )))
     }
-    #[cfg(not(any(debug_assertions, feature = "insecure-plaintext-keystore")))]
+    #[cfg(not(any(debug_assertions, feature = "legacy-plaintext-keystore")))]
     {
         let _ = cred_file; // silence unused-binding warning when the gate excludes the branch
         Err(ProxyError::KeystoreError(format!(
             "Plaintext credential-file fallback is disabled in release builds for {}/{}. \
-             Set the ANTHROPIC_API_KEY environment variable as a workaround, or wait for the \
-             v1.49.6XX keystore-encryption mission to land platform secure-storage. \
-             Tracking: .planning/missions/v1-49-6XX-keystore-encryption-stub.md",
+             Set the ANTHROPIC_API_KEY environment variable as a workaround, or run \
+             `skill-creator keystore migrate` to upgrade to the v1.49.650 encrypted keystore. \
+             Tracking: v1.49.650 C1 (shipped this milestone — see docs/keystore.md).",
             service, account
         )))
     }
+}
+
+// Mark unused service-param when both gnome-keyring + macos-keychain features
+// are off (the platform stubs return Err immediately).
+#[allow(dead_code)]
+fn _silence_warnings() {
+    let _ = KEYRING_SERVICE;
 }

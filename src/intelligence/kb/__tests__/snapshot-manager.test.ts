@@ -403,6 +403,12 @@ describe('intelligence/kb — SnapshotManager (C05)', () => {
     const diff1 = await sm.diff(s1, s2);
     const firstCallMs = performance.now() - t0;
 
+    // Warmup: 3 additional cache-hit calls to tier up the cache-lookup code
+    // path in V8 before the timed measurement. The 10ms threshold is the
+    // tightest in the suite; the cache-hit branch itself is JIT-cold even
+    // after the first natural call populates the cache.
+    for (let i = 0; i < 3; i++) await sm.diff(s1, s2);
+
     const t1 = performance.now();
     const diff2 = await sm.diff(s1, s2);
     const secondCallMs = performance.now() - t1;

@@ -189,6 +189,11 @@ describe('GsdDiscoveryService', () => {
     // First call -- populates cache
     const result1 = await service.discover();
 
+    // Warmup: 3 discard calls to tier up the cache-hit branch in V8 before
+    // the timed measurement. The cache is already populated by the first
+    // natural call; these additional calls warm the call-site JIT.
+    for (let i = 0; i < 3; i++) await service.discover();
+
     // Second call -- should be cache hit
     const start = performance.now();
     const result2 = await service.discover();

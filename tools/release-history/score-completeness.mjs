@@ -480,14 +480,20 @@ function scoreCleanupSummaryFromChapter(text) {
 // (chapter heading; cleanup-mission style) AND `## v1.NN.NNN — Retrospective`
 // (degree style; v1.49.589 T2.1 loosening). The shared scoreRetrospective
 // requires bare `## Retrospective`, which both chapter prefix forms break.
+// v1.49.650 C5: add "What went unusually well" / "What went less well" as
+// accepted sub-heading forms (v1.49.634 chapter/03-retrospective.md style)
+// so retros that use the freeform "What went X" phrasing are not penalized
+// for not using the canonical "What Worked" / "What Could Be Better" wording.
 function scoreCleanupRetrospective(text) {
   const hasRetro = /^#{2}\s+(?:(?:\d{2}|v\d+\.\d+\.\d+)\s+—\s+)?Retrospective/mi.test(text);
   if (!hasRetro) return 0;
   // Carryover-lessons + new-lessons sub-structure typical of cleanup retros.
   const carryover = /^#{2,4}\s+Carryover lessons (applied|carried)/mi.test(text);
   const newLessons = /^#{2,4}\s+(New lessons|Lessons emitted|What.*ship.*pipeline)/mi.test(text);
-  const whatWorked = /^#{2,4}\s+What (Worked|s Working)/mi.test(text);
-  const whatBetter = /^#{2,4}\s+(What Could Be Better|What.*(Didn'?t Work|Needs Improvement))/mi.test(text);
+  // "What Worked", "What's Working", "What went unusually well", "Process observations"
+  const whatWorked = /^#{2,4}\s+(What (Worked|s Working)|What went (unusually|particularly|especially) well|Process observations?)\b/mi.test(text);
+  // "What Could Be Better", "What Didn't Work", "What went less well", "Inline stabilization"
+  const whatBetter = /^#{2,4}\s+(What Could Be Better|What.*(Didn'?t Work|Needs Improvement)|What went less well|Inline stabilization)\b/mi.test(text);
   const surprises = /^#{2,4}\s+Surprises\b/mi.test(text);
   let score = 5;
   if (carryover) score += 5;
@@ -501,8 +507,15 @@ function scoreCleanupRetrospective(text) {
 //   - numbered-chapter heading `## NN — Lessons Learned: …` (cleanup style)
 //   - degree-style version-prefix `## v1.NN.NNN — Forward Lessons` (T2.1)
 //   - bare `## Lessons` / `## Forward Lessons` / `## Lessons Learned`
-// Counts numbered + bulleted + #ID-prefixed entries (cleanup releases use
-// `### #10168 — title` style; degree releases use `## #10183 — title`).
+// Counts numbered + bulleted + #ID-prefixed entries. Entry formats:
+//   - `1. text` numbered list items
+//   - `- **text**` bold-lead bullets (structured style)
+//   - `- text` plain bullets (v1.49.634 README style: prose-only lesson list)
+//   - `## #10168 — title` or `## Lesson #10168` section headings (chapter style)
+//   - `## Lesson #10168-followup — ...` (follow-up lesson style; v1.49.634+)
+// v1.49.650 C5: plain-bullet and Lesson-heading acceptance added to prevent
+// v1.49.634-style scoring collapse when chapter uses prose sections instead of
+// formal #ID headers.
 function scoreCleanupLessons(text) {
   const lines = text.split(/\r?\n/);
   let best = 0;
@@ -520,8 +533,15 @@ function scoreCleanupLessons(text) {
     const section = lines.slice(i + 1, endIdx).join('\n');
     const numbered = [...section.matchAll(/^\s*\d+\.\s+/gm)].length;
     const bulleted = [...section.matchAll(/^\s*[-*]\s+\*\*/gm)].length;
-    const hashIds = [...section.matchAll(/^#{2,4}\s+#?1\d{4}\b/gm)].length;
-    const count = Math.max(numbered, bulleted, hashIds);
+    // Also count plain bullets (- text) as lesson entries; v1.49.634 README
+    // "Forward lessons emitted" uses plain prose bullets without bold lead-ins.
+    const plainBullets = [...section.matchAll(/^\s*[-*]\s+(?!\*\*)[A-Z]/gm)].length;
+    // Formal #ID headings: `## #10168 — title` (existing) OR `## Lesson #10168...`
+    // The Lesson-prefix form (## Lesson #10168-followup) was added in v1.49.634.
+    // Extend the hashIds regex to also match `## Lesson #NNNNN` headings so that
+    // follow-up lessons with suffix (-followup, -refinement, etc.) are counted.
+    const hashIds = [...section.matchAll(/^#{2,4}\s+(?:Lesson\s+)?#?1\d{4}\b/gm)].length;
+    const count = Math.max(numbered, bulleted, plainBullets, hashIds);
     let s = 0;
     if (count >= 8) s = 12;
     else if (count >= 5) s = 9;
@@ -824,6 +844,15 @@ function scoreForwardLessonsBlock(text) {
   if (ids >= 6) return 12;
   if (ids >= 3) return 8;
   if (ids >= 1) return 4;
+  // v1.49.650 C5: plain-bullet fallback — v1.49.634 "Forward lessons emitted"
+  // lists lessons as plain prose bullets (- text) without #ID refs. When the
+  // section exists but has no IDs, count plain bullets as lesson-entry proxies.
+  // This prevents the score collapsing to 2 when the section is well-populated
+  // but the author chose prose-bullet format over formal #ID enumeration.
+  const plainBullets = (section.match(/^\s*[-*]\s+\S/gm) || []).length;
+  if (plainBullets >= 4) return 8;
+  if (plainBullets >= 2) return 5;
+  if (plainBullets >= 1) return 3;
   return 2;
 }
 

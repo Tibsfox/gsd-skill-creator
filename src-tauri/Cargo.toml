@@ -1,6 +1,6 @@
 [package]
 name = "gsd-os"
-version = "1.49.634"
+version = "1.49.635"
 edition = "2021"
 description = "GSD-OS Desktop Application"
 
@@ -20,9 +20,15 @@ tokio = { version = "1", features = ["sync", "macros", "rt-multi-thread", "time"
 uuid = { version = "1", features = ["v4"] }
 dirs = "6"
 zeroize = { version = "1", features = ["derive"] }
+secrecy = "0.8"
 base64 = "0.22"
 regex = "1"
 reqwest = { version = "0.12", features = ["json", "stream", "rustls-tls"], default-features = false }
+keyring = { version = "3", default-features = false, features = ["sync-secret-service", "apple-native", "windows-native", "crypto-rust"] }
+age = "0.10"
+argon2 = "0.5"
+rand_core = { version = "0.6", features = ["std"] }
+clap = { version = "4", features = ["derive"] }
 futures-util = "0.3"
 zip = { version = "2", default-features = false, features = ["deflate"] }
 xxhash-rust = { version = "0.8", features = ["xxh3"] }
@@ -38,11 +44,12 @@ gnome-keyring = []
 macos-keychain = []
 cuda = ["dep:cudarc"]
 postgres = ["dep:sqlx"]
-# DANGEROUS — development-only. Re-enables the plaintext credential-file
-# fallback at src-tauri/src/security/keystore.rs gated out of release builds
-# at v1.49.634 §18 (C3). DO NOT enable in shipped binaries. Tracking the
-# real encryption migration: .planning/missions/v1-49-6XX-keystore-encryption-stub.md.
-insecure-plaintext-keystore = []
+# DEPRECATED — renamed v1.49.650 from `insecure-plaintext-keystore`.
+# Re-enables the legacy plaintext credential-file fallback at
+# src-tauri/src/security/keystore.rs. Default OFF in release builds.
+# Will be REMOVED entirely at v1.49.6XX cluster #3; debug builds may
+# enable for migration-test fixtures only. Emits a warn! log when enabled.
+legacy-plaintext-keystore = []
 
 [dev-dependencies]
 tempfile = "3"
@@ -55,6 +62,14 @@ tauri-build = { version = "2.5", features = [] }
 [[bench]]
 name = "arena_bench"
 harness = false
+
+# Standalone keystore CLI binary (operator-pinned hybrid CLI arch 2026-05-11).
+# `cargo build --release` produces `target/release/skill-creator-keystore`
+# alongside the main Tauri app. Both surfaces share the Rust keystore lib
+# under src/security/.
+[[bin]]
+name = "skill-creator-keystore"
+path = "bin/skill-creator-keystore.rs"
 
 [profile.release]
 panic = "abort"
