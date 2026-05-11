@@ -23,6 +23,15 @@ export {
   parseCoprocessorSpec,
   shutdownSharedClient,
 } from './activation.js';
+export {
+  CoprocessorWatchdog,
+  clearWatchdog,
+  describeWatchdogError,
+  getCoprocessorStatus,
+  registerWatchdog,
+  setSupervisorPolicy,
+} from './watchdog.js';
+export type { SupervisorPolicy, WatchdogOptions, WatchdogStatus } from './watchdog.js';
 export type {
   CapabilitiesReport,
   ChipName,
