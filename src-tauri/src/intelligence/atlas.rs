@@ -639,6 +639,61 @@ impl SqliteAtlasKbDelegate {
         }
         out
     }
+
+    /// Per-project lookup with LRU accounting for ONE project only.
+    ///
+    /// Unlike [`Self::get_all_project_conns`], this touches `lru_order` for
+    /// only the requested project — other projects' positions in the LRU
+    /// queue are left undisturbed. Useful when a caller already knows which
+    /// project they need (e.g., scoped Tauri queries) and does NOT want
+    /// cross-project re-touch to overwrite manual or prior promotions.
+    ///
+    /// Behavior:
+    ///   * Cache hit  → promote to back of `lru_order`; return Arc clone.
+    ///   * Cache miss at capacity → evict `order.first()`; insert; return Arc.
+    ///   * Cache miss not at capacity → insert; return Arc.
+    ///   * Unknown project_id or registry-less delegate → `None`.
+    ///
+    /// `get_all_project_conns` semantics are unchanged; this is additive.
+    pub fn get_or_open_for_project(
+        &self,
+        project_id: &str,
+    ) -> Option<Arc<Mutex<Connection>>> {
+        // Resolve project_id → db path via existing cached registry lookup.
+        let db_path = self.path_for_project(project_id)?;
+        if !db_path.exists() {
+            return None;
+        }
+
+        // Same get-or-insert + LRU accounting as get_all_project_conns,
+        // but scoped to a single path. Both locks are acquired together to
+        // keep lru_order consistent with the connections map.
+        let mut cache = self.connections.lock().ok()?;
+        let mut order = self.lru_order.lock().ok()?;
+
+        if cache.contains_key(&db_path) {
+            // Cache hit — promote to back of LRU order.
+            order.retain(|p| p != &db_path);
+            order.push(db_path.clone());
+            Some(cache[&db_path].clone())
+        } else {
+            // Cache miss — evict LRU entry if at capacity.
+            if cache.len() >= self.max_connections {
+                if let Some(evict_path) = order.first().cloned() {
+                    cache.remove(&evict_path);
+                    order.remove(0);
+                }
+            }
+            let arc = Arc::new(Mutex::new(
+                Connection::open(&db_path).unwrap_or_else(|_| {
+                    Connection::open_in_memory().expect("in-memory fallback")
+                }),
+            ));
+            cache.insert(db_path.clone(), arc.clone());
+            order.push(db_path);
+            Some(arc)
+        }
+    }
 }
 
 impl Default for SqliteAtlasKbDelegate {
