@@ -40,7 +40,7 @@ describe('intelligence/kb — snapshot lifecycle', () => {
     );
     mkdirSync(tmpDir, { recursive: true });
     await setupStore();
-  });
+  }, 30000); // Stabilized at v1.49.637 ship-time: widen hookTimeout to absorb full-suite I/O contention on KBStore registry + migrations setup (was 10000ms default).
 
   afterEach(() => {
     store.close();
