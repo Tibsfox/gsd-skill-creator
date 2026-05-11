@@ -6,6 +6,13 @@
 #
 #   1. npm run build  — catches TypeScript errors (e.g. TS2835 missing-.js
 #                       extensions) that vitest does not surface
+#   1.5. version-sequence sanity (v1.49.636 C5, Lesson #10183) — verifies
+#                       package.json patch is sequential vs the latest
+#                       prior tag in the same major.minor line. Soft-warn
+#                       by default; SC_REQUIRE_SEQUENTIAL_VERSION=1 hard-
+#                       fails; SC_SKIP_VERSION_SEQUENCE_CHECK=1 silences
+#                       (use for intentional gaps + document in release-
+#                       notes). Closes v1.49.635 slot-correction incident.
 #   2. npx vitest run — runs the full vitest suite, mirroring CI
 #   3. node tools/release-history/check-completeness.mjs --current --strict
 #                     — release-notes 5-file structure (already enforced by
@@ -110,6 +117,19 @@ if ! npm run build --silent; then
   exit 1
 fi
 log "[pre-tag-gate] step 1/9: PASS"
+
+# ----- step 1.5: version-sequence sanity (v1.49.636 C5, Lesson #10183) -----
+# Soft gate: warn-only by default. Hard fail when SC_REQUIRE_SEQUENTIAL_VERSION=1.
+# Bypass: SC_SKIP_VERSION_SEQUENCE_CHECK=1 (intentional gap; document in
+# release-notes). Closes v1.49.635 slot-correction incident.
+log "[pre-tag-gate] step 1.5/9: version-sequence sanity"
+if ! node scripts/check-version-sequence.mjs; then
+  echo "[pre-tag-gate] FAIL: version-sequence check exited non-zero" >&2
+  echo "[pre-tag-gate]   If non-sequential is intentional, set SC_SKIP_VERSION_SEQUENCE_CHECK=1 + document in release-notes." >&2
+  echo "[pre-tag-gate]   If strict-sequential required, this hard-fails per SC_REQUIRE_SEQUENTIAL_VERSION=1." >&2
+  exit 1
+fi
+log "[pre-tag-gate] step 1.5/9: PASS"
 
 log "[pre-tag-gate] step 2/9: npx vitest run (full suite — mirrors CI)"
 if ! npx vitest run --silent; then

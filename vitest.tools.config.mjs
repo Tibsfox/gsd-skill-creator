@@ -28,6 +28,7 @@ export default defineConfig({
       'tools/__tests__/tauri-boundary-audit.test.mjs',
       'tools/__tests__/state-md-normalizer.test.mjs',
       'tools/__tests__/perf-assertion-audit.test.mjs',
+      'tools/__tests__/check-version-sequence.test.mjs',
     ],
     globals: true,
     testTimeout: 15000,
