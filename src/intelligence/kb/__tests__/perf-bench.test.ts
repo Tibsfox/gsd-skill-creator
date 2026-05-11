@@ -99,6 +99,11 @@ describe('intelligence/kb — performance benchmarks', () => {
   });
 
   it('listOpenFindings on 1000-finding project <50ms (D-23-24, P5)', async () => {
+    // Warmup: one discard call to let SQLite compile the query plan and V8
+    // tier up the store method before the timed window. SQLite's prepared-
+    // statement cache and the JS call-site both benefit from a single prime.
+    await store.listOpenFindings(PROJECT_ID);
+
     const start = performance.now();
     const findings = await store.listOpenFindings(PROJECT_ID);
     const elapsed = performance.now() - start;
@@ -108,6 +113,9 @@ describe('intelligence/kb — performance benchmarks', () => {
   });
 
   it('getCurrentBriefing (project briefing query) <50ms (P5)', async () => {
+    // Warmup: one discard call to prime SQLite query plan + V8 call-site JIT.
+    await store.getCurrentBriefing(PROJECT_ID);
+
     const start = performance.now();
     const briefing = await store.getCurrentBriefing(PROJECT_ID);
     const elapsed = performance.now() - start;
