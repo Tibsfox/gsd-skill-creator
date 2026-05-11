@@ -129,6 +129,10 @@ let db: Database.Database;
 const HAVE_GIT = gitAvailable();
 
 describe('ProvenanceLinker — integration', () => {
+  // Hook timeout bumped to 60s (= root-project testTimeout). setupKBSchema calls
+  // applyMigrations which is fsync-bound and flakes under full-suite contention.
+  // Canonical pattern: c6d49d8ab (connection-caching).
+  // Discipline doc: .planning/test-discipline/fragile-test-pattern.md (Template 2).
   beforeEach(() => {
     tmpDir = join(
       tmpdir(),
@@ -138,7 +142,7 @@ describe('ProvenanceLinker — integration', () => {
     repoDir = join(tmpDir, 'repo');
     mkdirSync(repoDir, { recursive: true });
     db = setupKBSchema(join(tmpDir, 'atlas.db'));
-  });
+  }, 60_000);
 
   afterEach(() => {
     db.close();
