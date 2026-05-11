@@ -10,7 +10,7 @@
 ## What went unusually well
 
 This section title uses the v1.49.634 freeform style rather than the canonical "What Worked" heading.
-The cleanup rubric (v1.49.650 C5) accepts this phrasing to avoid penalizing retros that use natural
+The cleanup rubric (v1.49.635 C5) accepts this phrasing to avoid penalizing retros that use natural
 language instead of the canonical template wording.
 
 The fixture correctly exercises the plain-bullet lesson format by listing lessons in the README's
@@ -19,7 +19,7 @@ The fixture correctly exercises the plain-bullet lesson format by listing lesson
 ## What went less well
 
 This section title also uses v1.49.634 freeform style rather than "What Could Be Better". The
-retrospective scoring accepts it via the expanded pattern added in v1.49.650 C5.
+retrospective scoring accepts it via the expanded pattern added in v1.49.635 C5.
 
 The synthetic fixture cannot test real gate execution behavior — it only exercises the scoring rubric.
 Future calibration fixtures should include a chapter/00-summary.md with realistic word counts.

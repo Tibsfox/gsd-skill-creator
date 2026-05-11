@@ -6,6 +6,13 @@
 #
 #   1. npm run build  — catches TypeScript errors (e.g. TS2835 missing-.js
 #                       extensions) that vitest does not surface
+#   1.5. version-sequence sanity (v1.49.636 C5, Lesson #10183) — verifies
+#                       package.json patch is sequential vs the latest
+#                       prior tag in the same major.minor line. Soft-warn
+#                       by default; SC_REQUIRE_SEQUENTIAL_VERSION=1 hard-
+#                       fails; SC_SKIP_VERSION_SEQUENCE_CHECK=1 silences
+#                       (use for intentional gaps + document in release-
+#                       notes). Closes v1.49.635 slot-correction incident.
 #   2. npx vitest run — runs the full vitest suite, mirroring CI
 #   3. node tools/release-history/check-completeness.mjs --current --strict
 #                     — release-notes 5-file structure (already enforced by
@@ -14,7 +21,11 @@
 #   4. CI-on-dev verification — origin/dev tip's latest CI run must be
 #                       conclusion=success before tag/main-push proceeds.
 #                       Added v1.49.587 per HARD RULE: "verify CI passes on
-#                       dev before pushing to main". Override: SC_SKIP_CI_GATE=1
+#                       dev before pushing to main".
+#                       v1.49.636 C6: SC_SKIP_CI_GATE_TESTS=<csv> is the
+#                       enumerated override (closes Lesson #10185 silently-
+#                       masked-second-red incident); legacy SC_SKIP_CI_GATE=1
+#                       still works but emits DEPRECATION WARNING.
 #   5. SPICE renderer bundle freshness — esbuild `spice-renderer/index.ts` →
 #                       `index.js`. Idempotent. Added v1.49.587 — closes the
 #                       v1.49.581 unwired-build gap that left 126 SPICE
@@ -53,6 +64,16 @@
 #                       bridge) is allowlisted at
 #                       tools/tauri-boundary-audit.allowlist.json. Override:
 #                       SC_SKIP_TAURI_BOUNDARY_GATE=1 (emergency only).
+#   9.5. Apply-to-self enforcement (v1.49.636 C7, Meta-Lesson) — runs
+#                       `node scripts/apply-to-self.mjs` which greps
+#                       newly-authored test files in the milestone diff
+#                       against pattern violations cataloged from the
+#                       discipline docs (existsSync-no-skip-guard,
+#                       perf-assertion-no-warmup). WARN-only by default;
+#                       converts to BLOCK with SC_REQUIRE_APPLY_TO_SELF=1.
+#                       Override: SC_SKIP_APPLY_TO_SELF=1 (emergency only;
+#                       fix the findings or allowlist at
+#                       .planning/ship-pipeline-discipline/apply-to-self-allowlist.md).
 #
 # Exit codes:
 #   0  all checks PASS
@@ -65,6 +86,7 @@
 #   7  CLAUDE.md drift (SC_SKIP_CLAUDE_MD_GATE=1 overrides)
 #   8  catalog-index drift (BLOCKER added v1.49.601; SC_SKIP_CATALOG_INDEX_GATE=1 overrides)
 #   9  tauri-boundary violation (BLOCKER added v1.49.634; SC_SKIP_TAURI_BOUNDARY_GATE=1 overrides)
+#   10 apply-to-self findings (BLOCKER only when SC_REQUIRE_APPLY_TO_SELF=1; default WARN-only)
 #
 # Usage:
 #   bash tools/pre-tag-gate.sh
@@ -111,6 +133,19 @@ if ! npm run build --silent; then
 fi
 log "[pre-tag-gate] step 1/9: PASS"
 
+# ----- step 1.5: version-sequence sanity (v1.49.636 C5, Lesson #10183) -----
+# Soft gate: warn-only by default. Hard fail when SC_REQUIRE_SEQUENTIAL_VERSION=1.
+# Bypass: SC_SKIP_VERSION_SEQUENCE_CHECK=1 (intentional gap; document in
+# release-notes). Closes v1.49.635 slot-correction incident.
+log "[pre-tag-gate] step 1.5/9: version-sequence sanity"
+if ! node scripts/check-version-sequence.mjs; then
+  echo "[pre-tag-gate] FAIL: version-sequence check exited non-zero" >&2
+  echo "[pre-tag-gate]   If non-sequential is intentional, set SC_SKIP_VERSION_SEQUENCE_CHECK=1 + document in release-notes." >&2
+  echo "[pre-tag-gate]   If strict-sequential required, this hard-fails per SC_REQUIRE_SEQUENTIAL_VERSION=1." >&2
+  exit 1
+fi
+log "[pre-tag-gate] step 1.5/9: PASS"
+
 log "[pre-tag-gate] step 2/9: npx vitest run (full suite — mirrors CI)"
 if ! npx vitest run --silent; then
   echo "[pre-tag-gate] FAIL: npx vitest run exited non-zero" >&2
@@ -132,9 +167,14 @@ fi
 log "[pre-tag-gate] step 3/9: PASS"
 
 # ----- step 4/9: CI-on-dev gate (v1.49.587 HARD RULE) -----
+# v1.49.636 C6: SC_SKIP_CI_GATE_TESTS=<csv> is the enumerated form;
+# SC_SKIP_CI_GATE=1 remains as DEPRECATED blanket override. Closes
+# Lesson #10185 (v1.49.635 blanket-override silently masked a
+# co-occurring CI red).
 SKIP_CI_GATE="${SC_SKIP_CI_GATE:-0}"
 if [ "$SKIP_CI_GATE" = "1" ]; then
   log "[pre-tag-gate] step 4/9: SKIPPED (SC_SKIP_CI_GATE=1)"
+  echo "[pre-tag-gate] WARNING: SC_SKIP_CI_GATE=1 is DEPRECATED — use SC_SKIP_CI_GATE_TESTS=<csv> per Lesson #10185" >&2
 else
   log "[pre-tag-gate] step 4/9: CI-on-dev verification"
   DEV_SHA="$(git rev-parse origin/dev 2>/dev/null || echo "")"
@@ -179,14 +219,33 @@ else
     exit 4
   fi
   if [ "$CONCLUSION" != "success" ]; then
-    echo "[pre-tag-gate] FAIL: CI run on origin/dev concluded $CONCLUSION" >&2
-    echo "[pre-tag-gate]   SHA: $DEV_SHA" >&2
-    echo "[pre-tag-gate]   URL: $RUN_URL" >&2
-    echo "[pre-tag-gate]   Fix the failing tests on dev BEFORE pushing to main." >&2
-    echo "[pre-tag-gate]   Override (emergency only): SC_SKIP_CI_GATE=1" >&2
-    exit 4
+    # v1.49.636 C6 (Lesson #10185): allow enumerated override via
+    # SC_SKIP_CI_GATE_TESTS=<csv>. The ci-gate-enum.mjs script
+    # checks every failing test is covered; exits 0 only if so.
+    if [ -n "${SC_SKIP_CI_GATE_TESTS:-}" ]; then
+      log "[pre-tag-gate]   SC_SKIP_CI_GATE_TESTS present — checking enumeration..."
+      if node scripts/ci-gate-enum.mjs; then
+        log "[pre-tag-gate] step 4/9: PASS (CI red(s) authorized via SC_SKIP_CI_GATE_TESTS at $DEV_SHA)"
+        echo "[pre-tag-gate]   Rationale required at .planning/ship-pipeline-discipline/ci-gate-override-rationale.md" >&2
+      else
+        echo "[pre-tag-gate] FAIL: CI red(s) on dev not covered by SC_SKIP_CI_GATE_TESTS" >&2
+        echo "[pre-tag-gate]   SHA: $DEV_SHA" >&2
+        echo "[pre-tag-gate]   URL: $RUN_URL" >&2
+        echo "[pre-tag-gate]   Either fix the test, or extend SC_SKIP_CI_GATE_TESTS=<csv> to cover it." >&2
+        exit 4
+      fi
+    else
+      echo "[pre-tag-gate] FAIL: CI run on origin/dev concluded $CONCLUSION" >&2
+      echo "[pre-tag-gate]   SHA: $DEV_SHA" >&2
+      echo "[pre-tag-gate]   URL: $RUN_URL" >&2
+      echo "[pre-tag-gate]   Fix the failing tests on dev BEFORE pushing to main." >&2
+      echo "[pre-tag-gate]   Enumerated override (v1.49.636 C6): SC_SKIP_CI_GATE_TESTS=<csv>" >&2
+      echo "[pre-tag-gate]   Blanket override (DEPRECATED, emergency only): SC_SKIP_CI_GATE=1" >&2
+      exit 4
+    fi
+  else
+    log "[pre-tag-gate] step 4/9: PASS (CI green at $DEV_SHA)"
   fi
-  log "[pre-tag-gate] step 4/9: PASS (CI green at $DEV_SHA)"
 fi
 
 # ----- step 5/9: SPICE renderer bundle freshness (v1.49.587 unwired-build closure) -----
@@ -269,6 +328,28 @@ else
     exit 9
   fi
   log "[pre-tag-gate] step 9/9: PASS"
+fi
+
+# ----- step 9.5: apply-to-self enforcement (v1.49.636 C7, Meta-Lesson) -----
+# WARN-only by default — emits findings without failing the gate. Closes
+# the Meta-Lesson "discipline docs only prove their value when their
+# authors follow them in the same commit window" by mechanically
+# checking newly-authored test files against discipline-doc patterns.
+SKIP_APPLY_TO_SELF="${SC_SKIP_APPLY_TO_SELF:-0}"
+if [ "$SKIP_APPLY_TO_SELF" = "1" ]; then
+  log "[pre-tag-gate] step 9.5/9: SKIPPED (SC_SKIP_APPLY_TO_SELF=1)"
+else
+  log "[pre-tag-gate] step 9.5/9: apply-to-self enforcement"
+  if ! node "$REPO_ROOT/scripts/apply-to-self.mjs"; then
+    # Default exit is 0 (WARN-only). Only non-zero when
+    # SC_REQUIRE_APPLY_TO_SELF=1 + findings present.
+    echo "[pre-tag-gate] FAIL: apply-to-self findings present AND SC_REQUIRE_APPLY_TO_SELF=1" >&2
+    echo "[pre-tag-gate]   Fix the findings OR allowlist them at" >&2
+    echo "[pre-tag-gate]   .planning/ship-pipeline-discipline/apply-to-self-allowlist.md" >&2
+    echo "[pre-tag-gate]   Override (emergency only): SC_SKIP_APPLY_TO_SELF=1" >&2
+    exit 10
+  fi
+  log "[pre-tag-gate] step 9.5/9: PASS"
 fi
 
 log "[pre-tag-gate] all 9 checks PASS — safe to \`git tag\` and merge to main"

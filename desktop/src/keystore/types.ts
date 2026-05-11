@@ -1,14 +1,10 @@
 /**
- * Type contracts for the v1.49.650 unified keystore Tauri command surface.
+ * Type contracts for the unified keystore Tauri command surface.
  *
- * STUB STATUS (v1.49.650 phase-(g) Option 2):
- *   The Rust Tauri commands at `src-tauri/src/commands/keystore.rs` have
- *   NOT been wired yet. These types define the shape that the future
- *   commands WILL expose so that the TS UI surface (passphrase-flow +
- *   migration-banner) can be built and tested independently of the Rust
- *   IPC layer. When the Rust commands ship in a follow-on milestone,
- *   `getKeystoreApi()` in `./invoke.ts` flips from the stub to the real
- *   `invoke()` calls and no caller has to change.
+ * v1.49.636 C1 wired these to live Rust commands at
+ * `src-tauri/src/commands/keystore.rs` with mirror types
+ * (`KeystoreStatus`, `KeystoreState`, `KeystoreBackendKind`,
+ * `MigrationOutcome`) in `src-tauri/src/security/keystore.rs`.
  *
  * Mapping to the Rust Keystore API (`src-tauri/src/security/keystore.rs`):
  *   - `state: 'absent'`     ⇔ `DiscoveredState::Empty`

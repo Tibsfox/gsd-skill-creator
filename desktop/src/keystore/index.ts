@@ -1,9 +1,7 @@
 /**
- * Keystore desktop UI surface (v1.49.650 phase-(g) stub).
- *
- * See `./invoke.ts` for the stub-vs-real contract and the swap point
- * (`getKeystoreApi()`) that flips when the Rust Tauri commands ship in a
- * follow-on milestone.
+ * Keystore desktop UI surface. v1.49.636 C1 wired the production
+ * `TauriKeystoreApi` and added the `getStubKeystoreApi()` test escape
+ * hatch. See `./invoke.ts`.
  *
  * @module keystore
  */
@@ -21,6 +19,7 @@ export {
   StubKeystoreApi,
   DEFAULT_STUB_MOCKS,
   getKeystoreApi,
+  getStubKeystoreApi,
 } from './invoke';
 
 export type {

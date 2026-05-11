@@ -18,10 +18,14 @@
  * output. No external user prompts — this command group is batch-safe.
  */
 
-import { writeFileSync } from 'node:fs';
-import { resolve } from 'node:path';
-import { stringify as stringifyYaml } from 'yaml';
+import { existsSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
+import { join, resolve } from 'node:path';
+import { parse as parseYaml, stringify as stringifyYaml } from 'yaml';
 import { dedupCartridge } from '../../cartridge/dedup.js';
+import {
+  departmentLegacyToUnified,
+  DepartmentAdapterError,
+} from '../../cartridge/department-adapter.js';
 import { evalCartridge } from '../../cartridge/eval.js';
 import { forkCartridge } from '../../cartridge/fork.js';
 import { loadCartridge } from '../../cartridge/loader.js';
@@ -64,6 +68,8 @@ function usageError(io: CartridgeCommandIO, message: string): number {
   io.stderr('  skill-creator cartridge eval <path> [--json]');
   io.stderr('  skill-creator cartridge dedup <path> [--json]');
   io.stderr('  skill-creator cartridge fork <path> <newId> [--out <path>] [--json]');
+  io.stderr('  skill-creator cartridge migrate <path> [--dry-run] [--json]');
+  io.stderr('  skill-creator cartridge migrate --all <root> [--exclude <pattern>] [--dry-run] [--json]');
   return 2;
 }
 
@@ -114,6 +120,8 @@ export async function cartridgeCommand(
     io.stdout('  skill-creator cartridge eval <path> [--json]');
     io.stdout('  skill-creator cartridge dedup <path> [--json]');
     io.stdout('  skill-creator cartridge fork <path> <newId> [--out <path>] [--json]');
+    io.stdout('  skill-creator cartridge migrate <path> [--dry-run] [--json]');
+    io.stdout('  skill-creator cartridge migrate --all <root> [--exclude <pattern>] [--dry-run] [--json]');
     return 0;
   }
 
@@ -135,6 +143,8 @@ export async function cartridgeCommand(
         return handleDedup(rest, io);
       case 'fork':
         return handleFork(rest, io);
+      case 'migrate':
+        return handleMigrate(rest, io);
       default:
         return usageError(io, `unknown subcommand "${sub}"`);
     }
@@ -342,4 +352,224 @@ function handleFork(args: string[], io: CartridgeCommandIO): number {
     if (out) io.stdout(`wrote ${resolve(out)}`);
   }
   return 0;
+}
+
+// ============================================================================
+// v1.49.636 C2 — `cartridge migrate` (department-chipset adapter wiring)
+// ============================================================================
+
+/**
+ * Per-chipset migration record. The aggregate report is written to
+ * `.planning/cartridge-migration-<date>.md` when `--all` is used.
+ */
+export interface CartridgeMigrationRecord {
+  sourcePath: string;
+  targetPath: string;
+  status: 'migrated' | 'unfit' | 'failed' | 'dry-run' | 'idempotent';
+  reason?: string;
+  loadValidates: boolean;
+}
+
+interface MigrateAllOptions {
+  root: string;
+  exclude?: string;
+  dryRun: boolean;
+}
+
+/**
+ * Migrate a single LEGACY `chipset.yaml` file to a UNIFIED `cartridge.yaml`
+ * sibling. Returns a `CartridgeMigrationRecord` describing the outcome.
+ *
+ * Behavioral contract:
+ * - `targetPath` is `<dir>/cartridge.yaml` next to the source.
+ * - If the target already exists AND its bytes match what the adapter
+ *   would produce, the record is marked `idempotent` and no write occurs.
+ * - On `--dry-run`, no file is written; the record is marked `dry-run`.
+ * - On adapter failure (`DepartmentAdapterError`), the record is marked
+ *   `unfit` with `reason` set to the adapter error message.
+ * - On any other error, the record is marked `failed`.
+ */
+function migrateSingle(
+  sourcePath: string,
+  dryRun: boolean,
+): CartridgeMigrationRecord {
+  const absSource = resolve(sourcePath);
+  const dir = absSource.replace(/[/\\][^/\\]+$/, '');
+  const targetPath = join(dir, 'cartridge.yaml');
+  try {
+    const yaml = readFileSync(absSource, 'utf8');
+    const unified = departmentLegacyToUnified(yaml);
+    const serialized = stringifyYaml(unified);
+    if (dryRun) {
+      return {
+        sourcePath: absSource,
+        targetPath,
+        status: 'dry-run',
+        loadValidates: false,
+      };
+    }
+    if (existsSync(targetPath)) {
+      const existing = readFileSync(targetPath, 'utf8');
+      if (existing === serialized) {
+        return {
+          sourcePath: absSource,
+          targetPath,
+          status: 'idempotent',
+          loadValidates: true,
+        };
+      }
+    }
+    writeFileSync(targetPath, serialized, 'utf8');
+    // Self-validate: parse + Zod check via loader.
+    let loadValidates = false;
+    try {
+      loadCartridge(targetPath);
+      loadValidates = true;
+    } catch {
+      loadValidates = false;
+    }
+    return {
+      sourcePath: absSource,
+      targetPath,
+      status: 'migrated',
+      loadValidates,
+    };
+  } catch (err) {
+    if (err instanceof DepartmentAdapterError) {
+      return {
+        sourcePath: absSource,
+        targetPath,
+        status: 'unfit',
+        reason: err.message,
+        loadValidates: false,
+      };
+    }
+    const msg = err instanceof Error ? err.message : String(err);
+    return {
+      sourcePath: absSource,
+      targetPath,
+      status: 'failed',
+      reason: msg,
+      loadValidates: false,
+    };
+  }
+}
+
+/**
+ * Discover every `chipset.yaml` under `root`, skipping any directory whose
+ * absolute path contains the `exclude` substring.
+ *
+ * Returns deterministically-ordered absolute paths (alphabetic) so
+ * migration logs are stable across runs.
+ */
+function findLegacyChipsets(root: string, exclude?: string): string[] {
+  const absRoot = resolve(root);
+  const found: string[] = [];
+  function walk(dir: string): void {
+    let entries;
+    try {
+      entries = readdirSync(dir, { withFileTypes: true });
+    } catch {
+      return;
+    }
+    for (const entry of entries) {
+      const child = join(dir, entry.name);
+      if (exclude && child.includes(exclude)) continue;
+      if (entry.isDirectory()) {
+        walk(child);
+      } else if (entry.isFile() && entry.name === 'chipset.yaml') {
+        // Only count files that parse to a department-shape (have agents
+        // + skills + teams at the top level). Other `chipset.yaml` files
+        // (e.g. the `examples/chipsets/chipset/` root README sample) are
+        // skipped silently — the bulk command should not fail on
+        // unrelated files.
+        try {
+          const yaml = parseYaml(readFileSync(child, 'utf8'));
+          if (
+            yaml &&
+            typeof yaml === 'object' &&
+            !Array.isArray(yaml) &&
+            'agents' in (yaml as Record<string, unknown>) &&
+            'skills' in (yaml as Record<string, unknown>) &&
+            'teams' in (yaml as Record<string, unknown>)
+          ) {
+            found.push(child);
+          }
+        } catch {
+          // skip unparseable files
+        }
+      }
+    }
+  }
+  if (statSync(absRoot).isDirectory()) {
+    walk(absRoot);
+  }
+  found.sort();
+  return found;
+}
+
+function handleMigrate(args: string[], io: CartridgeCommandIO): number {
+  const dryRun = args.includes('--dry-run');
+  const json = jsonMode(args);
+  if (args.includes('--all')) {
+    const root = getFlagValue(args, 'all');
+    if (!root) {
+      return usageError(io, 'migrate --all requires <root>');
+    }
+    const exclude = getFlagValue(args, 'exclude');
+    const records = migrateAll({ root, exclude, dryRun });
+    if (json) {
+      printJson(io, records);
+    } else {
+      summarizeMigration(io, records, dryRun);
+    }
+    return records.some((r) => r.status === 'failed') ? 1 : 0;
+  }
+  const positional = positionalArgs(args);
+  const path = positional[0];
+  if (!path) return usageError(io, 'migrate requires <path> or --all <root>');
+  const record = migrateSingle(path, dryRun);
+  if (json) {
+    printJson(io, record);
+  } else {
+    io.stdout(`${record.status}: ${record.sourcePath} -> ${record.targetPath}`);
+    if (record.reason) io.stdout(`  reason: ${record.reason}`);
+  }
+  return record.status === 'failed' ? 1 : 0;
+}
+
+function migrateAll(opts: MigrateAllOptions): CartridgeMigrationRecord[] {
+  const sources = findLegacyChipsets(opts.root, opts.exclude);
+  return sources.map((s) => migrateSingle(s, opts.dryRun));
+}
+
+function summarizeMigration(
+  io: CartridgeCommandIO,
+  records: CartridgeMigrationRecord[],
+  dryRun: boolean,
+): void {
+  const tally = {
+    migrated: 0,
+    idempotent: 0,
+    'dry-run': 0,
+    unfit: 0,
+    failed: 0,
+  };
+  for (const r of records) tally[r.status]++;
+  io.stdout(
+    `cartridge migrate: ${records.length} chipset(s)${dryRun ? ' (dry-run)' : ''}`,
+  );
+  io.stdout(
+    `  migrated:   ${tally.migrated}` +
+      (tally.idempotent ? `  idempotent: ${tally.idempotent}` : '') +
+      (tally['dry-run'] ? `  dry-run: ${tally['dry-run']}` : '') +
+      (tally.unfit ? `  unfit: ${tally.unfit}` : '') +
+      (tally.failed ? `  failed: ${tally.failed}` : ''),
+  );
+  for (const r of records) {
+    if (r.status === 'unfit' || r.status === 'failed') {
+      io.stdout(`  ${r.status}: ${r.sourcePath}`);
+      if (r.reason) io.stdout(`    reason: ${r.reason}`);
+    }
+  }
 }

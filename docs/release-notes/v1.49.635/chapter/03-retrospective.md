@@ -1,4 +1,4 @@
-# 03 — Retrospective: v1.49.650 Housekeeping Cluster
+# 03 — Retrospective: v1.49.635 Housekeeping Cluster
 
 ## Carryover lessons applied
 
@@ -27,7 +27,7 @@ surface minimal — the OS handles encryption + access control, no Argon2id on t
 (age + Argon2id-derived identity) handles headless servers and CI runners where the keyring is
 unavailable. The two-path design (Model A, pinned by lab-director arch-review) avoided the layered
 "keyring stores wrapping key for age-encrypted file" model (Model B), which would have doubled the
-attack surface for no v1.49.650-scope benefit. The error-leak sanitizer's 4-byte threshold was
+attack surface for no v1.49.635-scope benefit. The error-leak sanitizer's 4-byte threshold was
 absorbed from the arch-review at refinement #3 with explicit rationale (1-byte = 1/256 collision
 rate, too noisy; 4-byte = ~1/4B, statistical sweet spot). Phase-(g) was the only operator decision
 that landed mid-execution: Option 2 (stub Tauri-invoke interface + observable state machines) over
@@ -38,7 +38,7 @@ land in a follow-on milestone.
 ## What went less well
 
 C2 was halted at Stage 1. This is the correct outcome per the spec decision tree, but it extends the
-cleanup debt horizon. The pre-mission spec for v1.49.651 is a good forward-handoff mechanism, but the
+cleanup debt horizon. The pre-mission spec for v1.49.636 is a good forward-handoff mechanism, but the
 debt remains open until the next cleanup milestone ships the implementation.
 
 The synthetic fixture for C5 required three iterations to score ≥ B: first version scored C/67 due

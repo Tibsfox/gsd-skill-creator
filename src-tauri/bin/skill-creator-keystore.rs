@@ -25,7 +25,7 @@ use std::process::ExitCode;
 #[derive(Parser, Debug)]
 #[command(name = "skill-creator-keystore")]
 #[command(version)]
-#[command(about = "Standalone keystore CLI for gsd-skill-creator (v1.49.650+)")]
+#[command(about = "Standalone keystore CLI for gsd-skill-creator (v1.49.636+)")]
 struct Cli {
     #[command(subcommand)]
     command: Command,
@@ -44,7 +44,7 @@ enum Command {
 #[derive(Args, Debug)]
 struct MigrateArgs {
     /// Upgrade Path-2 (age-encrypted file) → Path-1 (OS keyring) when the
-    /// OS keyring later becomes available. NOT IMPLEMENTED at v1.49.650.
+    /// OS keyring later becomes available. NOT IMPLEMENTED at v1.49.636.
     #[arg(long = "to-keyring")]
     to_keyring: bool,
 }
@@ -112,7 +112,7 @@ fn cmd_status() -> ExitCode {
 fn cmd_migrate(args: MigrateArgs) -> ExitCode {
     if args.to_keyring {
         eprintln!(
-            "Path-2 → Path-1 upgrade not implemented at v1.49.650.\n\
+            "Path-2 → Path-1 upgrade not implemented at v1.49.636.\n\
              Your credentials are currently stored in the Path-2 file\n\
              (passphrase-encrypted). Tracked at v1.49.6XX cluster #3.\n\
              Workaround: export ANTHROPIC_API_KEY from your shell, or\n\

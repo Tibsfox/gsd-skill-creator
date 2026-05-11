@@ -1,5 +1,5 @@
 /**
- * CLI command group for the v1.49.650 unified keystore.
+ * CLI command group for the v1.49.636 unified keystore.
  *
  * Hybrid Node-wrapper + standalone-Rust-bin architecture (operator-pinned
  * 2026-05-11): the Node entry point `skill-creator keystore <subcmd>`
