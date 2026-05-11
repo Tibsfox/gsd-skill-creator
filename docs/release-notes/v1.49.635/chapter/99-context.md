@@ -59,15 +59,15 @@ the NASA / MUS / ELC / SPS / TRS engines.
 - W1A G-gate verdict: PASS (verdict at `.planning/missions/v1-49-635-housekeeping-cluster/W1A-GATE-VERDICT.md`)
 - W1B G-gate verdict: PASS (verdict at `.planning/missions/v1-49-635-housekeeping-cluster/W1B-GATE-VERDICT.md`)
 
-## v1.49.651 carry-forward
+## v1.49.636 carry-forward
 
 The following items defer to the next counter-cadence cleanup milestone:
 
 - **C2 cartridge-finalization** — halted at Stage 1; pre-mission spec at `.planning/cartridge-migration-cli-gap.md` (5 deliverables, ~4-7h Sonnet estimate)
-- **C7 upstream rename absorb** — upstream still v1.41.2; Stage-1 re-probe at v1.49.651
+- **C7 upstream rename absorb** — upstream still v1.41.2; Stage-1 re-probe at v1.49.636
 - **Real Tauri keystore commands** — `src-tauri/src/commands/keystore.rs` wiring; flips `getKeystoreApi()` factory return value from stub to production
 - **Pre-existing atlas test failures** — 2 in `intelligence::atlas::tests` (Rust); confirmed on predecessor `d4ffa4f32`, flagged exempt at W1A G-gate
 - **C3 perf-warmup remainder** — 9 `no-warmup` sites documented-for-followon in `.planning/test-discipline/perf-assertion-audit-2026-05-11.md`
 - **C4 fragile-test remainder** — 6 sites documented-for-followon in `.planning/test-discipline/fragile-test-audit-2026-05-11.md` (split between Template-5 injected-clock candidates and subprocess-in-beforeEach patterns)
 
-The v1.49.635 → v1.49.651 handoff will reference this section as the carry-forward index.
+The v1.49.635 → v1.49.636 handoff will reference this section as the carry-forward index.

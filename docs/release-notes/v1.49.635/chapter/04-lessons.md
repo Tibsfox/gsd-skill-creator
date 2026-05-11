@@ -58,7 +58,7 @@ so after demotion it lands at h2, matching the Summary aggregator regex).
 
 **Context.** C2 (Tauri CLI gap) was halted at Stage 1 when diagnosis revealed a gap in the spec's
 assumptions about the CLI surface. Rather than proceeding with a partial or speculative implementation,
-the component was halted and a pre-mission spec was authored for v1.49.651.
+the component was halted and a pre-mission spec was authored for v1.49.636.
 
 **Lesson.** When Stage 1 diagnosis reveals a spec gap (not a scope change, but a factual gap in the
 original assumptions), halt the component and author a pre-mission spec. The halt is not a failure;
@@ -122,7 +122,7 @@ analysis to the relative-ratio sites separately (often the right fix is widening
 adding an absolute-time floor like `if (t1 < 50) skip`).
 
 **Resolved in.** v1.49.635 W3 G3 inline stabilization (commits `bbde73555` analyzer + `90c3d8cbb`
-atlas-indexer). Carry-forward: extend C3 audit regex set in v1.49.651 to catch
+atlas-indexer). Carry-forward: extend C3 audit regex set in v1.49.636 to catch
 `expect\([^)]+\)\.toBeLessThan\([^)]+\s*\*\s*\d+\)` and `expect\(mean\b` patterns.
 
 **Pattern template.** When designing a grep-based audit, enumerate the syntactic shapes of the pattern

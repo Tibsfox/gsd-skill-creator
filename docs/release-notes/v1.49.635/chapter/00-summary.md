@@ -28,7 +28,7 @@ line in `getKeystoreApi()` to make the surface live. The legacy plaintext featur
 
 **C2 — Tauri CLI gap analysis.** Stage 1 diagnosis confirmed a CLI surface gap that requires a separate
 spec before implementation. The component was halted per the spec decision tree. A pre-mission spec was
-authored at `.planning/missions/v1-49-651-cli-gap/` for the next cleanup cycle. This is the correct
+authored at `.planning/missions/v1-49-636-cli-gap/` for the next cleanup cycle. This is the correct
 outcome: implementing against an under-specified gap produces technical debt faster than not implementing.
 
 **C3 — Performance assertion warmup audit.** Grep-audited the suite for sharp-threshold perf assertions

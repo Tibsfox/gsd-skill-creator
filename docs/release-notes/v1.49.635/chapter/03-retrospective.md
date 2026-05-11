@@ -38,7 +38,7 @@ land in a follow-on milestone.
 ## What went less well
 
 C2 was halted at Stage 1. This is the correct outcome per the spec decision tree, but it extends the
-cleanup debt horizon. The pre-mission spec for v1.49.651 is a good forward-handoff mechanism, but the
+cleanup debt horizon. The pre-mission spec for v1.49.636 is a good forward-handoff mechanism, but the
 debt remains open until the next cleanup milestone ships the implementation.
 
 The synthetic fixture for C5 required three iterations to score ≥ B: first version scored C/67 due

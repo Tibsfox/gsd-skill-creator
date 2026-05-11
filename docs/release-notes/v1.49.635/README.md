@@ -14,7 +14,7 @@ v1.49.635 is the **third counter-cadence cleanup milestone** in the engine, regi
 cluster of eight components: **C1** keystore encryption (Rust `age` X25519 + ChaCha20-Poly1305 with
 Argon2id passphrase identity OR direct OS-keyring storage, hybrid Node-wrapper + standalone-Rust-bin CLI,
 backup-first migration, leak sanitizer, stub desktop UI per operator-pinned Option 2); **C2** Tauri CLI
-gap analysis (halted at Stage 1 per spec decision tree; pre-mission spec authored for v1.49.651);
+gap analysis (halted at Stage 1 per spec decision tree; pre-mission spec authored for v1.49.636);
 **C3** performance assertion warmup audit (31 sites grep-audited; top-8 `no-warmup` sites fixed with
 per-site-tuned warmup samples ranging N=1 to N=20); **C4** fragile test discipline sweep (top-5
 `stabilize-inline` Template-2 timeout bumps for sqlite-class beforeEach hooks; 6-symptom discipline
@@ -62,4 +62,4 @@ New lessons authored in chapter/04-lessons.md:
 CHAIN-CONVENTIONS unchanged. Engine forward-state UNCHANGED. Discipline-doc surface OPENED at `.planning/test-discipline/` (C3 + C4); STATE.md normalizer toolchain LANDED (C6); cleanup rubric RECALIBRATED (C5).
 
 ---
-**Prev:** [v1.49.634](../v1.49.634/README.md) · **Next:** v1.49.651+
+**Prev:** [v1.49.634](../v1.49.634/README.md) · **Next:** v1.49.636+
