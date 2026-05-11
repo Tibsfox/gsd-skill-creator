@@ -151,19 +151,28 @@ describe('v1.49.637 integration meta-test', () => {
         'utf8',
       );
 
-      // Disposition file mentions atlas tests by name; v1.49.637 records
-      // exactly one continuing temporary-skip (lru_access_promotes_…) and
-      // one fixed-inline (per_project_clear_…). The lru-promote test must
-      // continue to carry #[ignore] in atlas.rs; the per-project-clear
-      // test must NOT carry one anymore.
-      const lruIgnoredInDisposition = /lru_access_promotes_keeps_entry_alive_under_eviction[\s\S]*?temporary-skip/.test(
+      // Disposition history:
+      //   v1.49.637 C4: lru_access_promotes_… was `temporary-skip` (cluster
+      //                 #5 forward-action item), per_project_clear_… was
+      //                 `fixed-inline`.
+      //   v1.49.638 W1A.T1 (commits 7a9a2c5cb + b78097bb9): cluster-#5
+      //                 closure — lru_access_promotes_… migrated to
+      //                 `fixed-inline` via per-project query API
+      //                 (option (a)); test rewritten and un-ignored.
+      //
+      // Post-W1A.T1, BOTH tests must be `fixed-inline` in the disposition
+      // file AND NOT carry `#[ignore]` in atlas.rs. This meta-test was
+      // forward-synced to that disposition; if a future change re-adds
+      // `#[ignore]` to either test without updating the disposition
+      // record, this assertion fires as designed.
+      const lruFixedInDisposition = /lru_access_promotes_keeps_entry_alive_under_eviction[\s\S]*?fixed-inline/.test(
         disposition,
       );
-      expect(lruIgnoredInDisposition).toBe(true);
+      expect(lruFixedInDisposition).toBe(true);
 
       const lruRegex =
         /#\[ignore[^\]]*\]\s*(?:#\[[^\]]+\]\s*)*fn\s+lru_access_promotes_keeps_entry_alive_under_eviction/;
-      expect(lruRegex.test(atlas)).toBe(true);
+      expect(lruRegex.test(atlas)).toBe(false);
 
       // per_project_clear should NOT have an #[ignore] anymore.
       const ppcRegex =
