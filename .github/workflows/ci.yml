@@ -69,4 +69,12 @@ jobs:
             --agents examples/agents/gsd \
             --teams examples/teams \
             --chipsets data/chipset
+      # v1.49.638 C4 — install project-claude hooks so self-mod-guard.js is
+      # present at .claude/hooks/. Closes v1.49.634 carry-forward chain
+      # (.634/.635/.636/.637): the v1-49-634-meta-test C4 self-mod-guard
+      # assertions skip-guard on existsSync(.claude/hooks/self-mod-guard.js)
+      # and were previously never exercised in CI. With this install step,
+      # HOOK_AVAILABLE=true and both BLOCK/ALLOW assertions run.
+      - name: Install project-claude hooks (closes v1.49.634 C4 CI gap)
+        run: node project-claude/install.cjs --local --quiet
       - run: npx vitest run
