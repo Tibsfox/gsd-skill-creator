@@ -1,11 +1,11 @@
 /**
- * v1.49.650 Housekeeping Cluster — Integration meta-test.
+ * v1.49.635 Housekeeping Cluster — Integration meta-test.
  *
  * Mirrors the v1.49.585 W4 Phase 3 and v1.49.634 W3 Stage 1 patterns:
  * file-level invariants + subprocess-isolated tests asserting that each
  * new component's discipline / tool / API surface landed as designed.
  *
- * Spec: .planning/missions/v1-49-650-housekeeping-cluster/components/08-integration-verify-ship.md
+ * Spec: .planning/missions/v1-49-635-housekeeping-cluster/components/08-integration-verify-ship.md
  *
  * Tests:
  *   1. C1 keystore — unified Keystore API + KeystoreError types present
@@ -35,18 +35,31 @@ const C3_FIXED_TEST = resolve(REPO_ROOT, 'src/intelligence/kb/__tests__/snapshot
 const C4_FIXED_TEST = resolve(REPO_ROOT, 'src/intelligence/kb/__tests__/provenance-kb.test.ts');
 const SCORER_MJS = resolve(REPO_ROOT, 'tools/release-history/score-completeness.mjs');
 const NORMALIZER_MJS = resolve(REPO_ROOT, 'tools/state-md-normalizer.mjs');
+const STATE_MD_PATH = resolve(REPO_ROOT, '.planning/STATE.md');
 
-describe('v1.49.650 integration meta-test', () => {
+// `.planning/STATE.md` is gitignored at `.gitignore:8` (entire `.planning/`
+// is excluded). It's authored locally by the C6 normalizer or by hand; CI
+// runners never produce it. The C6 normalizer correctly handles the
+// "no STATE.md" case (exit 0, prints "no STATE.md at …"), but the C6
+// meta-test below asserts a present-and-normalized STATE.md specifically.
+// Skip-guard the C6 test when STATE.md is absent (CI path); local dev still
+// exercises the assertion. Pattern: Lesson #10180 (chapter/04-lessons.md)
+// — gitignored-runtime-artifact skip-guard. Surfaced post-v1.49.635-ship
+// when CI on `dev = 05166178e` failed exactly this assertion: my own
+// meta-test had the bug Lesson #10180 documents.
+const STATE_MD_AVAILABLE = existsSync(STATE_MD_PATH);
+
+describe('v1.49.635 integration meta-test', () => {
   it('C1 keystore — unified Keystore API + KeystoreError types compile-time present', () => {
     // Rust crypto is unit-tested in src-tauri/src/security/__tests__; this
     // meta-test asserts the public-API contract that downstream callers
     // (Node CLI wrapper + standalone Rust bin + future Tauri commands)
     // build against: Keystore struct + KeystoreError variants + the unified
-    // load/save/migrate surface introduced at v1.49.650.
+    // load/save/migrate surface introduced at v1.49.635.
     expect(existsSync(KEYSTORE_RS)).toBe(true);
     const body = readFileSync(KEYSTORE_RS, 'utf8');
 
-    // Unified API (v1.49.650; not present pre-milestone)
+    // Unified API (v1.49.635; not present pre-milestone)
     expect(body).toMatch(/pub struct Keystore\b/);
     expect(body).toMatch(/pub enum KeystoreError\b/);
     expect(body).toMatch(/pub fn load_with_backend\b/);
@@ -112,14 +125,14 @@ describe('v1.49.650 integration meta-test', () => {
     // Fix 3: scoreCleanupRetrospective accepts freeform sub-section headings
     expect(body).toMatch(/scoreCleanupRetrospective/);
 
-    // The C5 test suite is registered + the v1.49.650 fixture chapters exist
+    // The C5 test suite is registered + the v1.49.635 fixture chapters exist
     const c5TestPath = resolve(REPO_ROOT, 'tools/release-history/__tests__/score-completeness-c5.test.mjs');
     expect(existsSync(c5TestPath)).toBe(true);
     const rubricFixturePath = resolve(REPO_ROOT, 'tests/fixtures/release-notes-rubric-cleanup');
     expect(existsSync(rubricFixturePath)).toBe(true);
   });
 
-  it('C6 STATE.md normalizer --check exits 0 on current STATE.md (idempotency invariant)', () => {
+  it.runIf(STATE_MD_AVAILABLE)('C6 STATE.md normalizer --check exits 0 on current STATE.md (idempotency invariant)', () => {
     // The normalizer was authored + run during C6 (commits 37cc8eb51 +
     // 396100ce4 + 8f39a2b4d). After C6 applied, --check must be a no-op
     // on the on-disk STATE.md (idempotency: re-running the normalizer
