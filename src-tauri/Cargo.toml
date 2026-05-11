@@ -38,6 +38,11 @@ gnome-keyring = []
 macos-keychain = []
 cuda = ["dep:cudarc"]
 postgres = ["dep:sqlx"]
+# DANGEROUS — development-only. Re-enables the plaintext credential-file
+# fallback at src-tauri/src/security/keystore.rs gated out of release builds
+# at v1.49.634 §18 (C3). DO NOT enable in shipped binaries. Tracking the
+# real encryption migration: .planning/missions/v1-49-6XX-keystore-encryption-stub.md.
+insecure-plaintext-keystore = []
 
 [dev-dependencies]
 tempfile = "3"

@@ -120,21 +120,44 @@ fn load_from_encrypted_file(
         )));
     }
 
-    // TODO: decrypt file -- for now read plaintext (Phase 373 adds encryption)
-    let content = std::fs::read_to_string(&cred_file)
-        .map_err(|e| ProxyError::KeystoreError(e.to_string()))?;
-    for line in content.lines() {
-        let parts: Vec<&str> = line.splitn(3, ':').collect();
-        if parts.len() == 3 && parts[0] == service && parts[1] == account {
-            return Ok((
-                SecretString::new(parts[2].to_string()),
-                KeystoreBackend::EncryptedFile(cred_file),
-            ));
+    // v1.49.634 §18 (C3): the plaintext credential-file fallback is gated
+    // out of release builds. In debug builds OR when the developer opts in
+    // via `--features insecure-plaintext-keystore`, the legacy path remains
+    // available so existing developer setups continue to work. Release
+    // builds (cargo build --release without the feature) return a clear
+    // error pointing users at the env-var workaround and the follow-on
+    // encryption mission.
+    //
+    // Reachability proof: .planning/keystore-reachability-audit.md
+    // Encryption migration: .planning/missions/v1-49-6XX-keystore-encryption-stub.md
+    #[cfg(any(debug_assertions, feature = "insecure-plaintext-keystore"))]
+    {
+        let content = std::fs::read_to_string(&cred_file)
+            .map_err(|e| ProxyError::KeystoreError(e.to_string()))?;
+        for line in content.lines() {
+            let parts: Vec<&str> = line.splitn(3, ':').collect();
+            if parts.len() == 3 && parts[0] == service && parts[1] == account {
+                return Ok((
+                    SecretString::new(parts[2].to_string()),
+                    KeystoreBackend::EncryptedFile(cred_file),
+                ));
+            }
         }
-    }
 
-    Err(ProxyError::KeystoreError(format!(
-        "Credential not found for {}/{}",
-        service, account
-    )))
+        Err(ProxyError::KeystoreError(format!(
+            "Credential not found for {}/{}",
+            service, account
+        )))
+    }
+    #[cfg(not(any(debug_assertions, feature = "insecure-plaintext-keystore")))]
+    {
+        let _ = cred_file; // silence unused-binding warning when the gate excludes the branch
+        Err(ProxyError::KeystoreError(format!(
+            "Plaintext credential-file fallback is disabled in release builds for {}/{}. \
+             Set the ANTHROPIC_API_KEY environment variable as a workaround, or wait for the \
+             v1.49.6XX keystore-encryption mission to land platform secure-storage. \
+             Tracking: .planning/missions/v1-49-6XX-keystore-encryption-stub.md",
+            service, account
+        )))
+    }
 }
