@@ -12,7 +12,7 @@
 
 ## What went unusually well
 
-- **Mid-mission audit produced a follow-on stub rather than scope creep.** C6 surfaced 48 LEGACY chipsets and 0 cartridge.yaml siblings — a far larger migration than the spec budgeted for. Per the spec decision tree (>15 LEGACY = follow-on mission stub), the audit was completed audit-only and `v1-49-6XX-cartridge-finalization-stub.md` was authored without expanding scope. This is the discipline that v1.49.585 Lesson #10172 (scope expansion mid-mission) implicitly grants permission for — when the constraint inverts, contraction is the right answer.
+- **Mid-mission audit produced a follow-on stub rather than scope creep.** C6 surfaced 48 LEGACY chipsets and 0 cartridge.yaml siblings — a far larger migration than the spec budgeted for. Per the spec decision tree (>15 LEGACY = follow-on mission stub), the audit was completed audit-only and `v1-49-650-cartridge-finalization-stub.md` was authored without expanding scope. This is the discipline that v1.49.585 Lesson #10172 (scope expansion mid-mission) implicitly grants permission for — when the constraint inverts, contraction is the right answer.
 - **Two-phase gate landing for C1 watchdog.** Default policy `observe-only` lets the watchdog soak in the runtime as a pure observer; the `auto-restart` policy is opt-in via setting. No process-spawning authority shipped until the observability surface is validated. This is the inverse of the v1.49.585 W4 hook BLOCK pattern (BLOCK first, learn later) — appropriate because watchdogs touch live processes whereas hooks reject tool calls.
 
 ## What went less well

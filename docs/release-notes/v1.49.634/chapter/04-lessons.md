@@ -18,7 +18,7 @@ Lessons emitted from this milestone, to be applied at future ship pipelines.
 
 **Lesson.** Many security-critical TODO/FIXME/HACK markers are unreachable in shipped binaries (gated behind dev-only features, debug-only modules, test fixtures). Without a reachability audit, the marker stays as a load-bearing concern; with one, it either becomes a real fix or a documented inert-marker that future audits can skip.
 
-**Proposed action.** When CONCERNS.md flags a security-relevant marker (anything matching `keystore|crypto|secret|password|auth|token`), require a reachability audit using the C3 template before deciding fix-now vs defer. Future v1.49.6XX cleanup milestones should consume the template directly. The template is reusable as-is — copy `components/00-shared-types.md` "Keystore reachability audit report template" into the new mission's W0.
+**Proposed action.** When CONCERNS.md flags a security-relevant marker (anything matching `keystore|crypto|secret|password|auth|token`), require a reachability audit using the C3 template before deciding fix-now vs defer. Future cleanup milestones (starting with v1.49.650) should consume the template directly. The template is reusable as-is — copy `components/00-shared-types.md` "Keystore reachability audit report template" into the new mission's W0.
 
 ## Two-phase gate landings for runtime-touching code
 

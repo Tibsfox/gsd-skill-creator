@@ -39,7 +39,7 @@
 - **OPENED:** deterministic Tauri-boundary gate at pre-tag-gate step 9 (exit code 9; override `SC_SKIP_TAURI_BOUNDARY_GATE=1`); allowlist at `tools/tauri-boundary-audit.allowlist.json` for the architectural-exemption runtime-only Tauri IPC bridge.
 - **OPENED:** coprocessor liveness observability surface (`CoprocessorWatchdog` class + singleton helpers; `WatchdogStatus` discriminated union with `alive | degraded | dead | unknown` states; deterministic dead-after-N-missed-probes transition).
 - **OPENED:** release-profile Cargo feature gate pattern (`insecure-plaintext-keystore`); reachability-audit artifact template usable for future security-critical TODO resolutions.
-- **OPENED:** follow-on mission stubs `v1-49-6XX-keystore-encryption-stub.md` (encryption-rotation + key-derivation) and `v1-49-6XX-cartridge-finalization-stub.md` (48 LEGACY chipset.yaml → cartridge.yaml migration). Both placeholder `v1-49-6XX` versions pending operator-pin.
+- **OPENED:** follow-on mission stubs `v1-49-650-keystore-encryption-stub.md` (encryption-rotation + key-derivation) and `v1-49-650-cartridge-finalization-stub.md` (48 LEGACY chipset.yaml → cartridge.yaml migration). Both operator-pinned to v1.49.650 (2026-05-11); coordinated housekeeping cluster.
 - **EXTENDED:** operational-gate layer (5 → 6 gates); CLAUDE.md "Environment Variables" + "Operational Gates" tables.
 - **CARRY-FORWARD:** all v1.49.633 thread states UNCHANGED.
 
@@ -60,6 +60,6 @@
 ## Watchlist for forward milestones
 
 - **Pre-existing test fragilities flagged for follow-on housekeeping** (NOT v1.49.634 regressions; out of scope this milestone): `browser-tab-parity`, `connection-caching`, `public-deployment-smoke`. Recommend a small housekeeping mission (~v1.49.640-650 range) to stabilize or quarantine.
-- **`v1-49-6XX` placeholder resolution.** Two follow-on mission stubs use the placeholder. Operator-pin needed before either ships.
+- **`v1-49-6XX` placeholder resolution.** RESOLVED 2026-05-11 — both stubs operator-pinned to v1.49.650; rename + internal refs updated.
 - **Counter-cadence cleanup-mission #3** target window ~v1.49.664 (30 forward-cadence milestones after v1.49.634). The cadence-overdue gate (Lesson #10168-followup proposed below) would have surfaced the v1.49.615 trigger at the right moment; with it in place the next cycle should land on time.
 - **Upstream-alignment audit at next v1.42.x release** — verify `gsd-review` → `gsd-quality` rename has propagated through upstream `workflows/` + `references/` before absorbing.

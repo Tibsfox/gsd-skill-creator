@@ -44,7 +44,7 @@ Standalone `tools/tauri-boundary-audit.mjs --check` returns exit 10 directly (co
 | §11 Wave-1 integration tests — `tests/legacy/` graduation status uncertain | UNDECIDED | SWEPT — REQUIREMENTS.md DASH-* entries reconciled; `tests/integration/` index documented; 2 truth tests pin the invariant |
 | §14 Math coprocessor MCP server lifecycle — no watchdog | OPEN | GATED at v1.49.634 (commit `54481a55b`); observe-only default; opt-in auto-restart |
 | §15 Tauri v2 boundary leakage risk — well-defended but prose-only | OPEN (prose-rule) | GATED at v1.49.634 (commit `66490ac1a`); pre-tag-gate step 9 |
-| §18 TODO/FIXME/HACK markers — clustered by subsystem (keystore plaintext branch) | OPEN | GATED at v1.49.634 (commit `244482e97`); release-build-gated via `insecure-plaintext-keystore` feature; follow-on stub for encryption-rotation at `.planning/missions/v1-49-6XX-keystore-encryption-stub.md` |
+| §18 TODO/FIXME/HACK markers — clustered by subsystem (keystore plaintext branch) | OPEN | GATED at v1.49.634 (commit `244482e97`); release-build-gated via `insecure-plaintext-keystore` feature; follow-on stub for encryption-rotation at `.planning/missions/v1-49-650-keystore-encryption-stub.md` (operator-pinned 2026-05-11) |
 
 ## v1.49.585 §4 deferred-batch closure (consumed by C4)
 
