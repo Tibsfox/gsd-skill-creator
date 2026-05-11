@@ -6,17 +6,9 @@
  * the indexed project. Also verifies subscription lifecycle (close() removes it).
  */
 
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { rmSync, mkdirSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-
-// Bump hookTimeout from default 10000ms to 30000ms.
-// Rationale: the beforeEach block creates two SQLite project DBs + applies migrations.
-// Under pre-tag-gate parallel-load wall-time pressure, the file-system + sqlite-init
-// path can exceed 10s on multi-core test runners. Test passes in CI consistently and
-// in isolation (~9s). Bumping to 30s gives 3× headroom against contention.
-// Lesson 8 from v1.49.621 retrospective.
-vi.setConfig({ hookTimeout: 30000, testTimeout: 30000 });
 import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import Database from 'better-sqlite3';
@@ -93,6 +85,12 @@ let registryPath: string;
 let store: KBStore;
 let bus: StubBus;
 
+// Hook timeout bumped to 60s (= root-project testTimeout) to match the
+// dual-DB-init pattern stabilised in c6d49d8ab (connection-caching) and
+// c49528c42 (browser-tab-parity). The previous vi.setConfig({ hookTimeout: 30000 })
+// was overriding the root project's 60000ms testTimeout downward; this explicit
+// }, 60_000) form documents the budget and survives any future vi.setConfig additions.
+// Fragile-test discipline doc: .planning/test-discipline/fragile-test-pattern.md (Template 2).
 beforeEach(() => {
   tmpDir = join(
     tmpdir(),
@@ -110,7 +108,7 @@ beforeEach(() => {
 
   store = new KBStore({ registryPath, migrationsDir: MIGRATIONS_DIR });
   bus = new StubBus();
-});
+}, 60_000);
 
 afterEach(() => {
   store.close();
