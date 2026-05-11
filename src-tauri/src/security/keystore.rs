@@ -236,6 +236,123 @@ pub fn keystore_load_production(
 }
 
 // ============================================================================
+// v1.49.636 C1 — Tauri command surface types + boundary helpers
+// ============================================================================
+
+/// On-disk keystore state, reported by `keystore_status` Tauri command.
+///
+/// TS mirror: `desktop/src/keystore/types.ts::KeystoreState`.
+#[derive(Debug, Clone, PartialEq, serde::Serialize)]
+#[serde(rename_all = "lowercase")]
+pub enum KeystoreState {
+    Absent,
+    Plaintext,
+    Encrypted,
+}
+
+/// Active keystore backend kind exposed to the desktop UI.
+///
+/// TS mirror: `desktop/src/keystore/types.ts::KeystoreBackendKind`.
+#[derive(Debug, Clone, PartialEq, serde::Serialize)]
+#[serde(rename_all = "lowercase")]
+pub enum KeystoreBackendKind {
+    Keyring,
+    File,
+}
+
+/// Response shape for the `keystore_status` Tauri command.
+///
+/// TS mirror: `desktop/src/keystore/types.ts::KeystoreStatus`.
+#[derive(Debug, Clone, PartialEq, serde::Serialize)]
+pub struct KeystoreStatus {
+    pub state: KeystoreState,
+    pub backend: Option<KeystoreBackendKind>,
+}
+
+/// Success payload for the `keystore_migrate_v1_to_v2` Tauri command.
+///
+/// TS mirror: `desktop/src/keystore/types.ts::MigrationOutcome`.
+#[derive(Debug, Clone, PartialEq, serde::Serialize)]
+pub struct MigrationOutcome {
+    pub migrated_count: usize,
+}
+
+/// Stateless probe — reports keystore state without loading any secret.
+///
+/// Maps the internal `DiscoveredState` to the TS-visible `KeystoreStatus`.
+/// Returns `KeystoreState::Absent` if `keystore_paths()` cannot resolve.
+pub fn probe_keystore_status() -> KeystoreStatus {
+    probe_keystore_status_with(&os_store())
+}
+
+/// Test-friendly variant of `probe_keystore_status` accepting an injected
+/// `KeyringStore`. Used by unit tests that need to assert backend reporting
+/// without depending on the host's real OS keyring availability.
+pub fn probe_keystore_status_with(keyring: &dyn KeyringStore) -> KeystoreStatus {
+    let (v1, path2) = match keystore_paths() {
+        Some(p) => p,
+        None => {
+            return KeystoreStatus {
+                state: KeystoreState::Absent,
+                backend: None,
+            }
+        }
+    };
+    let state = migration::discover_state(keyring, &path2, &v1);
+    match state {
+        DiscoveredState::Empty => KeystoreStatus {
+            state: KeystoreState::Absent,
+            backend: None,
+        },
+        DiscoveredState::V1Plaintext => KeystoreStatus {
+            state: KeystoreState::Plaintext,
+            backend: None,
+        },
+        DiscoveredState::Path1 | DiscoveredState::Path1WithPath2Orphan => KeystoreStatus {
+            state: KeystoreState::Encrypted,
+            backend: Some(KeystoreBackendKind::Keyring),
+        },
+        DiscoveredState::Path2 => KeystoreStatus {
+            state: KeystoreState::Encrypted,
+            backend: Some(KeystoreBackendKind::File),
+        },
+    }
+}
+
+/// Map a `KeystoreError` to a user-visible string for the Tauri boundary.
+///
+/// The exhaustive match gives compiler-enforced coverage of every variant.
+/// Payload fields (`Io(msg)`, `Backend(msg)`, `Migration(msg)`) are
+/// construction-controlled to never carry plaintext or key bytes —
+/// `Io(...)` comes from `std::io::Error::to_string()`, `Backend(...)` from
+/// `format!("{:?}", other)` on keyring crate errors, and `Migration(...)`
+/// from `format!("{:?}", e)` on `MigrationError`. None of these constructor
+/// sites observe the cleartext credential value.
+///
+/// Verified by `keystore_error_to_user_string_never_leaks_synthetic_secret`
+/// in `src-tauri/src/commands/keystore.rs`.
+pub fn keystore_error_to_user_string(e: &KeystoreError) -> String {
+    match e {
+        KeystoreError::BackendUnavailable => {
+            "Keystore backend unavailable".to_string()
+        }
+        KeystoreError::MigrationRequired => {
+            "v1 plaintext credentials detected; migration required".to_string()
+        }
+        KeystoreError::Locked => {
+            "Keystore is encrypted; passphrase required".to_string()
+        }
+        KeystoreError::InvalidPassphrase => "Invalid passphrase".to_string(),
+        KeystoreError::Tampered => {
+            "Keystore data appears tampered; refusing to load".to_string()
+        }
+        KeystoreError::Io(msg) => format!("Keystore I/O error: {}", msg),
+        KeystoreError::Migration(msg) => format!("Migration error: {}", msg),
+        KeystoreError::Backend(msg) => format!("Keystore backend error: {}", msg),
+    }
+}
+
+// ============================================================================
 // Legacy free-function surface (preserved for api/keystore.rs)
 // ============================================================================
 

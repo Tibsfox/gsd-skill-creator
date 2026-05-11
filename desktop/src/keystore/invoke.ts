@@ -1,15 +1,12 @@
 /**
- * Tauri command wrappers + stub implementations for the v1.49.650 keystore.
+ * Tauri command wrappers for the unified keystore.
  *
- * STUB STATUS (v1.49.650 phase-(g) Option 2):
- *   The Rust Tauri commands at `src-tauri/src/commands/keystore.rs` are NOT
- *   yet wired. `StubKeystoreApi` returns canned responses so that desktop
- *   UI modules (passphrase-flow.ts + migration-banner.ts) can be built and
- *   tested independently of the Rust IPC layer. The production class
- *   `TauriKeystoreApi` is kept in this file so a follow-on milestone can
- *   swap a single line in `getKeystoreApi()` to make the UI live.
+ * v1.49.636 C1 wired the three Rust `#[tauri::command]` functions at
+ * `src-tauri/src/commands/keystore.rs`. `getKeystoreApi()` returns the
+ * production `TauriKeystoreApi`; test code that needs canned responses
+ * uses `getStubKeystoreApi()` or instantiates `StubKeystoreApi` directly.
  *
- * Command names (will become `#[tauri::command]`s in `src-tauri/`):
+ * Command names registered in `src-tauri/src/lib.rs::run`:
  *   - `keystore_status`           → `KeystoreStatus`
  *   - `keystore_migrate_v1_to_v2` → `Result<MigrationOutcome, String>`
  *   - `keystore_set`              → `Result<(), String>`
@@ -40,14 +37,9 @@ export interface KeystoreApi {
 }
 
 /**
- * Production implementation — calls the real Tauri commands.
- *
- * NOT WIRED at v1.49.650 phase-(g): the commands at
- * `src-tauri/src/commands/keystore.rs` do not exist yet. Invoking these
- * methods today rejects with Tauri's "command not found" error. The class
- * lives here so that when the Rust commands ship, `getKeystoreApi()` flips
- * one line to use this class and the typed wrappers below enforce the
- * contract at compile time.
+ * Production implementation — calls the real Tauri commands wired in
+ * v1.49.636 C1 at `src-tauri/src/commands/keystore.rs` and registered in
+ * `src-tauri/src/lib.rs::run`.
  */
 export class TauriKeystoreApi implements KeystoreApi {
   status(): Promise<KeystoreStatus> {
@@ -91,8 +83,9 @@ export const DEFAULT_STUB_MOCKS: Required<
 
 /**
  * Stub implementation that returns canned responses without calling Tauri.
- * Used as the v1.49.650 default so the UI surface is testable + previewable
- * before the Rust commands land.
+ * Used by tests via direct instantiation (`new StubKeystoreApi(...)`) or
+ * the `getStubKeystoreApi()` factory helper. Not the production default
+ * after v1.49.636 C1.
  */
 export class StubKeystoreApi implements KeystoreApi {
   constructor(private mocks: StubKeystoreMocks = {}) {}
@@ -119,12 +112,21 @@ export class StubKeystoreApi implements KeystoreApi {
 }
 
 /**
- * Factory — returns the keystore API the rest of the desktop UI should use.
- *
- * v1.49.650 default: `StubKeystoreApi` with `DEFAULT_STUB_MOCKS`. A future
- * milestone wires `TauriKeystoreApi` when the Rust commands ship; the swap
- * is a single line here, and no UI module needs to change.
+ * Factory — returns the production keystore API the desktop UI builds
+ * against. v1.49.636 C1 flipped this from the v1.49.650 phase-(g) stub
+ * to the live `TauriKeystoreApi`. Tests that need canned responses use
+ * `getStubKeystoreApi()` below, or instantiate `StubKeystoreApi`
+ * directly.
  */
 export function getKeystoreApi(): KeystoreApi {
-  return new StubKeystoreApi();
+  return new TauriKeystoreApi();
+}
+
+/**
+ * Test-only factory — returns a `StubKeystoreApi` instance with the
+ * supplied (or default) canned-response mocks. Use in vitest / jsdom
+ * environments where Tauri's `invoke` is unavailable.
+ */
+export function getStubKeystoreApi(mocks?: StubKeystoreMocks): KeystoreApi {
+  return new StubKeystoreApi(mocks);
 }

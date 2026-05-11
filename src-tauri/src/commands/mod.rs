@@ -4,6 +4,7 @@ pub mod dashboard;
 pub mod echo;
 pub mod greet;
 pub mod ipc;
+pub mod keystore;
 pub mod magic;
 pub mod memory_arena;
 pub mod proxy;

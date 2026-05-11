@@ -27,6 +27,12 @@ use pty::manager::PtyManager;
 use state::AppState;
 
 pub fn run() {
+    // v1.49.636 C1: install panic-hook redactor before any other init so
+    // any panic during Tauri setup is captured by the redactor. The hook
+    // is logging-only; Tauri's command-panic catcher independently
+    // returns a generic string to the desktop.
+    security::panic_hook::install();
+
     tauri::Builder::default()
         .setup(|app| {
             app.manage(Mutex::new(AppState::default()));
@@ -145,6 +151,11 @@ pub fn run() {
             commands::security::agent_create,
             commands::security::agent_destroy,
             commands::security::agent_verify_isolation,
+            // v1.49.636 C1 — Unified keystore Tauri surface (closes
+            // v1.49.650 phase-(g) Option-2 deferral).
+            commands::keystore::keystore_status,
+            commands::keystore::keystore_migrate_v1_to_v2,
+            commands::keystore::keystore_set,
             commands::ipc::send_chat_message,
             commands::ipc::has_api_key,
             commands::ipc::store_api_key,

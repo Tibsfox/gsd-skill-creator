@@ -1,9 +1,10 @@
 /**
- * Tests for the v1.49.650 keystore Tauri-command wrappers.
+ * Tests for the unified keystore Tauri-command wrappers.
  *
- * Covers the stub implementation (used at v1.49.650 phase-(g)) and the
- * production wrapper (kept in tree for the follow-on milestone that wires
- * the Rust commands).
+ * Covers both `StubKeystoreApi` (used directly by passphrase-flow +
+ * migration-banner tests and via `getStubKeystoreApi()`) and the
+ * production `TauriKeystoreApi` wiring contract. v1.49.636 C1 flipped
+ * `getKeystoreApi()` to return `TauriKeystoreApi`.
  */
 
 import { describe, it, expect, vi, beforeEach } from 'vitest';
@@ -21,6 +22,7 @@ import {
   TauriKeystoreApi,
   DEFAULT_STUB_MOCKS,
   getKeystoreApi,
+  getStubKeystoreApi,
 } from './invoke';
 import type { KeystoreStatus } from './types';
 
@@ -124,8 +126,19 @@ describe('TauriKeystoreApi (wiring contract)', () => {
   });
 });
 
-describe('getKeystoreApi (v1.49.650 default factory)', () => {
-  it('returns a StubKeystoreApi for the duration of phase-(g) stub mode', () => {
-    expect(getKeystoreApi()).toBeInstanceOf(StubKeystoreApi);
+describe('getKeystoreApi (production factory)', () => {
+  it('returns a TauriKeystoreApi after the v1.49.636 C1 flip', () => {
+    expect(getKeystoreApi()).toBeInstanceOf(TauriKeystoreApi);
+  });
+});
+
+describe('getStubKeystoreApi (test escape hatch)', () => {
+  it('returns a StubKeystoreApi for tests that need canned responses', () => {
+    expect(getStubKeystoreApi()).toBeInstanceOf(StubKeystoreApi);
+  });
+
+  it('forwards mocks to the underlying StubKeystoreApi', async () => {
+    const api = getStubKeystoreApi({ migrateError: 'mocked-failure' });
+    await expect(api.migrateV1ToV2('any')).rejects.toBe('mocked-failure');
   });
 });
