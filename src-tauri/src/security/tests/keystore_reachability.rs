@@ -4,7 +4,7 @@
 //! lab-director quality-bar guidance:
 //!
 //! 1. With BOTH `debug_assertions == false` AND `feature =
-//!    "insecure-plaintext-keystore" == false` (i.e. shipped release
+//!    "legacy-plaintext-keystore" == false` (i.e. shipped release
 //!    builds), the plaintext branch is excluded — `load_from_encrypted_file`
 //!    returns the disabled-fallback error pointing users at the env-var
 //!    workaround and the v1.49.6XX follow-on mission.
@@ -106,7 +106,7 @@ fn write_plaintext_cred_file(home: &PathBuf) -> PathBuf {
 /// accidentally over-tighten the gate to break dev workflows.
 ///
 /// The `cfg` predicate that ENABLES the branch is
-///   `any(debug_assertions, feature = "insecure-plaintext-keystore")`
+///   `any(debug_assertions, feature = "legacy-plaintext-keystore")`
 /// — cargo test compiles with `debug_assertions = true`, so this branch
 /// is in effect during the normal test run. We assert it by writing a
 /// real credential and observing the secret round-trips back through
@@ -147,10 +147,10 @@ fn plaintext_branch_reachable_under_debug_or_feature_arm() {
 ///     follow-on mission path. This is the *compile-time gate proof* that
 ///     release builds get a disabled-fallback error pointing users to the
 ///     correct workaround — `cargo build --release` (without the
-///     `insecure-plaintext-keystore` feature) will compile only the
+///     `legacy-plaintext-keystore` feature) will compile only the
 ///     `cfg(not(...))` arm into the shipped binary.
 ///
-/// (b) The `insecure-plaintext-keystore` feature is declared in Cargo.toml
+/// (b) The `legacy-plaintext-keystore` feature is declared in Cargo.toml
 ///     and is opt-in (NOT in any default-features list).
 ///
 /// This is the strongest possible test under a `debug_assertions=true`
@@ -165,8 +165,8 @@ fn plaintext_branch_disabled_in_release_arm_structural_proof() {
 
     // Invariant (a): the cfg-not arm exists and references the disabled-fallback message.
     assert!(
-        keystore_src.contains(r#"cfg(not(any(debug_assertions, feature = "insecure-plaintext-keystore")))"#),
-        "keystore.rs must contain the cfg(not(any(debug_assertions, feature = \"insecure-plaintext-keystore\"))) gate"
+        keystore_src.contains(r#"cfg(not(any(debug_assertions, feature = "legacy-plaintext-keystore")))"#),
+        "keystore.rs must contain the cfg(not(any(debug_assertions, feature = \"legacy-plaintext-keystore\"))) gate"
     );
     assert!(
         keystore_src.contains("Plaintext credential-file fallback is disabled in release builds"),
@@ -179,38 +179,42 @@ fn plaintext_branch_disabled_in_release_arm_structural_proof() {
         "disabled-fallback error must name the ANTHROPIC_API_KEY env-var workaround"
     );
     assert!(
-        keystore_src.contains("v1-49-6XX-keystore-encryption-stub.md"),
-        "disabled-fallback error must point users at the follow-on mission stub"
+        keystore_src.contains("skill-creator keystore migrate"),
+        "disabled-fallback error must point users at the v1.49.650 migration CLI"
+    );
+    assert!(
+        keystore_src.contains("docs/keystore.md"),
+        "disabled-fallback error must point users at the keystore documentation"
     );
 
     // Invariant (c): the feature is declared in Cargo.toml as an opt-in (empty array body).
     let cargo_toml = include_str!("../../../Cargo.toml");
     assert!(
-        cargo_toml.contains("insecure-plaintext-keystore = []"),
-        "Cargo.toml must declare insecure-plaintext-keystore as an opt-in feature"
+        cargo_toml.contains("legacy-plaintext-keystore = []"),
+        "Cargo.toml must declare legacy-plaintext-keystore as an opt-in feature"
     );
 
     // Invariant (d): the cfg-positive arm also exists so dev/test workflows continue to work.
     assert!(
-        keystore_src.contains(r#"cfg(any(debug_assertions, feature = "insecure-plaintext-keystore"))"#),
+        keystore_src.contains(r#"cfg(any(debug_assertions, feature = "legacy-plaintext-keystore"))"#),
         "keystore.rs must contain the cfg-positive arm so debug_assertions builds keep the plaintext branch reachable"
     );
 
     // Sanity: under debug_assertions (which is true for `cargo test`), we
     // are NOT executing the disabled arm. We assert the cfg-state we're in.
-    let in_debug_or_feature = cfg!(any(debug_assertions, feature = "insecure-plaintext-keystore"));
+    let in_debug_or_feature = cfg!(any(debug_assertions, feature = "legacy-plaintext-keystore"));
     assert!(
         in_debug_or_feature,
         "this test runs under cargo test which sets debug_assertions=true; the cfg should match"
     );
 
     // The dual assertion: a release-without-feature build would compile
-    // only the cfg(not(...)) arm. The Cargo gate `insecure-plaintext-keystore`
+    // only the cfg(not(...)) arm. The Cargo gate `legacy-plaintext-keystore`
     // is not enabled by default, and `cargo build --release` clears
     // debug_assertions. The cfg-not arm's error has been pinned by (a)+(b)
     // above; release-build behavior is therefore mechanically derivable.
     let example_of_not_arm_being_compiled =
-        cfg!(not(any(debug_assertions, feature = "insecure-plaintext-keystore")));
+        cfg!(not(any(debug_assertions, feature = "legacy-plaintext-keystore")));
     assert!(
         !example_of_not_arm_being_compiled,
         "test harness should NOT be running the cfg(not(...)) arm — we run with debug_assertions"
