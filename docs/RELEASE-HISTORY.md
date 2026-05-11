@@ -1,15 +1,16 @@
 # Release History
 
-679 milestones shipped across the v1.0 → v1.49.636 arc. The table below lists every shipped release, newest first.
+680 milestones shipped across the v1.0 → v1.49.637 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 679 releases · 678 with retrospectives · 634 with extracted lessons · quality A:642 B:12 C:14 D:5 F:6 (avg 96) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 680 releases · 679 with retrospectives · 634 with extracted lessons · quality A:642 B:12 C:14 D:6 F:6 (avg 96) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.637](release-notes/v1.49.637) | Housekeeping Cluster #4 | 2026-05-11 | 19 | — | — | [s](release-notes/v1.49.637/chapter/00-summary.md) [r](release-notes/v1.49.637/chapter/03-retrospective.md) [l](release-notes/v1.49.637/chapter/04-lessons.md) [c](release-notes/v1.49.637/chapter/99-context.md) | — | D 64 |  |
 | [v1.49.636](release-notes/v1.49.636) | Housekeeping Cluster #3 | 2026-05-11 | 21 | — | — | [s](release-notes/v1.49.636/chapter/00-summary.md) [r](release-notes/v1.49.636/chapter/03-retrospective.md) [l](release-notes/v1.49.636/chapter/04-lessons.md) [c](release-notes/v1.49.636/chapter/99-context.md) | 1 | D 69 |  |
 | [v1.49.635](release-notes/v1.49.635) | Housekeeping Cluster / Operational Debt Reduction | 2026-05-11 | 39 | — | — | [s](release-notes/v1.49.635/chapter/00-summary.md) [r](release-notes/v1.49.635/chapter/03-retrospective.md) [l](release-notes/v1.49.635/chapter/04-lessons.md) [c](release-notes/v1.49.635/chapter/99-context.md) | — | B 80 |  |
 | [v1.49.634](release-notes/v1.49.634) | Concerns Cleanup #2 | 2026-05-11 | 21 | — | — | [s](release-notes/v1.49.634/chapter/00-summary.md) [r](release-notes/v1.49.634/chapter/03-retrospective.md) [l](release-notes/v1.49.634/chapter/04-lessons.md) [c](release-notes/v1.49.634/chapter/99-context.md) | — | B 81 |  |
