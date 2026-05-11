@@ -295,6 +295,41 @@ describe('CLI write mode', () => {
   });
 });
 
+// ----- Absent-CLAUDE.md behavior (post-2026-05-10 untrack) -----
+
+describe('absent CLAUDE.md (gitignored / fresh-clone state)', () => {
+  it('--check exits 0 with informational message when CLAUDE.md is absent', () => {
+    setupFixtureRoot({
+      envVars: [{ name: 'X', default_behavior: 'd', override_behavior: 'o' }],
+    });
+    // No claudeMd written by setupFixtureRoot
+    const captured = [];
+    const exitCode = main(['--check', '--root', tmpRoot], {
+      stdout: { write: (s) => captured.push(s) },
+      stderr: { write() {} },
+    });
+    expect(exitCode).toBe(0);
+    expect(captured.join('')).toMatch(/skipping drift check/i);
+    expect(captured.join('')).toMatch(/gitignored/i);
+  });
+
+  it('--dry-run still exits 2 when CLAUDE.md is absent (loud signal for dev)', () => {
+    setupFixtureRoot({
+      envVars: [{ name: 'X', default_behavior: 'd', override_behavior: 'o' }],
+    });
+    const exitCode = main(['--dry-run', '--root', tmpRoot], NULL_STREAMS);
+    expect(exitCode).toBe(2);
+  });
+
+  it('write mode still exits 2 when CLAUDE.md is absent (loud signal for dev)', () => {
+    setupFixtureRoot({
+      envVars: [{ name: 'X', default_behavior: 'd', override_behavior: 'o' }],
+    });
+    const exitCode = main(['--root', tmpRoot], NULL_STREAMS);
+    expect(exitCode).toBe(2);
+  });
+});
+
 // ----- Live invariant -----
 
 describe('live invariant: repo CLAUDE.md is in sync with manifests', () => {
