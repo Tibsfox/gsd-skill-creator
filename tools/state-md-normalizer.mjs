@@ -31,6 +31,10 @@ import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
+import {
+  validateProseSync,
+  formatFindingsForStderr,
+} from './state-md-normalizer-prose.mjs';
 
 const require = createRequire(import.meta.url);
 const jsYaml = require('js-yaml');
@@ -460,14 +464,34 @@ function main() {
   const changed = normalizedContent !== raw;
 
   if (CHECK_ONLY) {
+    // v1.49.637 C6: extended --check also runs the prose-body milestone-drift
+    // validator. Warnings go to stderr; exit 1 only when frontmatter drift OR
+    // (SC_REQUIRE_PROSE_SYNC=1 AND prose findings).
+    const proseResult = validateProseSync(raw);
+
     if (changed) {
       console.log('[state-md-normalizer] CHECK: drift detected — STATE.md would be changed by normalization');
       console.log('[state-md-normalizer] Run `node tools/state-md-normalizer.mjs --write` to apply.');
+      if (proseResult.warnings.length > 0) {
+        console.error(formatFindingsForStderr(proseResult));
+      }
       process.exit(1);
-    } else {
-      console.log('[state-md-normalizer] CHECK: no drift — STATE.md is already normalized');
+    }
+
+    // Frontmatter is clean. Emit prose findings (if any) and exit per
+    // hardFail policy.
+    if (proseResult.warnings.length > 0) {
+      console.error(formatFindingsForStderr(proseResult));
+      if (proseResult.hardFail) {
+        console.error('[state-md-normalizer] CHECK: prose-body milestone drift + SC_REQUIRE_PROSE_SYNC=1 — exiting 1');
+        process.exit(1);
+      }
+      console.log('[state-md-normalizer] CHECK: frontmatter clean; prose-body drift WARNED (see stderr)');
       process.exit(0);
     }
+
+    console.log('[state-md-normalizer] CHECK: no drift — STATE.md is already normalized');
+    process.exit(0);
   }
 
   // --write (default) path.
