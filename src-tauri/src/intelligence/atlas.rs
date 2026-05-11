@@ -2619,52 +2619,91 @@ mod tests {
     }
 
     #[test]
-    #[ignore = "TODO(v1.49.7XX cluster #5): test design mismatch with batch-load semantics — get_all_project_conns() re-touches EVERY project on each call (line 613-638), so a manually-promoted p0 gets re-promoted-then-superseded by p1's natural re-touch before the p2 insert evicts the LRU. The test was written as if list_symbols_for_file loads ONE project; the impl loads ALL. Fix path requires either (a) a per-project query API that bypasses batch enumeration, or (b) rewriting the test to validate LRU semantics at a layer where per-project access is meaningful. Both are >45min work. See .planning/atlas-test-disposition.md lru_access_promotes for v1.49.637 C4 deeper finding."]
     fn lru_access_promotes_keeps_entry_alive_under_eviction() {
-        // 3 projects, limit=2. Load p0+p1. Promote p0 manually. Load p2 → p1 evicted, p0 survives.
-        let (tmp, kb) = make_delegate_with_n_projects(2, 2);
-        let _ = kb.list_symbols_for_file("s".to_string(), "f".to_string()).unwrap();
+        // Per-project semantics test, migrated to use get_or_open_for_project
+        // (v1.49.638 C1 / Cluster #5 closure, option-a per-project API path).
+        //
+        // 2 projects, limit=2. Load p0 then p1 via the per-project API
+        // (cache now: [p0, p1], p0 oldest). Re-access p0 to promote
+        // (cache now: [p1, p0], p1 oldest). Add a 3rd project and load it
+        // via the per-project API → p1 is evicted; p0 survives because it
+        // was MRU. This contract is meaningful for per-project access where
+        // the API does NOT re-touch unrelated projects.
+        let (_tmp, kb) = make_delegate_with_n_projects(2, 3);
+
+        // Load p0 (cache: [p0], oldest=p0)
+        let _ = kb
+            .get_or_open_for_project("p0")
+            .expect("p0 should resolve");
+        // Load p1 (cache: [p0, p1], oldest=p0)
+        let _ = kb
+            .get_or_open_for_project("p1")
+            .expect("p1 should resolve");
         assert_eq!(kb.cached_connection_count(), 2);
 
-        // Determine which path is p0.
-        let db0 = {
-            let order = kb.lru_order.lock().unwrap();
-            order.first().cloned().expect("at least one entry")
-        };
+        // Re-access p0 → promote to MRU. lru_order now: [p1, p0], oldest=p1.
+        let _ = kb
+            .get_or_open_for_project("p0")
+            .expect("p0 re-access should succeed");
 
-        // Promote p0 to most-recently-used.
-        {
-            let mut c = kb.connections.lock().unwrap();
-            let mut o = kb.lru_order.lock().unwrap();
-            if c.contains_key(&db0) {
-                o.retain(|p| p != &db0);
-                o.push(db0.clone());
-                let _c = c; // keep alive to satisfy borrow (rustc let_underscore_lock)
-            }
-        }
-
-        // Add a third project to the registry and trigger a query.
-        {
-            let reg = kb.registry_path.as_ref().unwrap();
-            let conn = Connection::open(reg).unwrap();
-            let i = 2usize;
-            let proj_dir = tmp.path().join(format!("proj{i}"));
-            std::fs::create_dir_all(&proj_dir).unwrap();
-            let db_path = proj_dir.join(".gsd").join("intelligence").join("intelligence.db");
-            std::fs::create_dir_all(db_path.parent().unwrap()).unwrap();
-            make_schema_only_db(&db_path);
-            conn.execute(
-                "INSERT INTO projects VALUES (?,?,?,'dev','code','med','2026-05-05',NULL)",
-                params![format!("p{i}"), format!("P{i}"), proj_dir.to_string_lossy().to_string()],
-            )
-            .unwrap();
-        }
-
-        let _ = kb.list_symbols_for_file("s".to_string(), "f".to_string()).unwrap();
+        // Load p2 — cache miss at capacity → evict oldest (p1). p0 survives.
+        let _ = kb
+            .get_or_open_for_project("p2")
+            .expect("p2 should resolve");
         assert_eq!(kb.cached_connection_count(), 2, "cache stays at limit=2");
 
+        // Verify p0's db path is still cached, p1's is not.
+        let p0_path = kb.path_for_project("p0").expect("p0 path");
+        let p1_path = kb.path_for_project("p1").expect("p1 path");
         let c = kb.connections.lock().unwrap();
-        assert!(c.contains_key(&db0), "promoted p0 must survive eviction");
+        assert!(
+            c.contains_key(&p0_path),
+            "promoted p0 must survive eviction"
+        );
+        assert!(
+            !c.contains_key(&p1_path),
+            "unpromoted p1 must be the one evicted"
+        );
+    }
+
+    // ─── per-project API invariants (v1.49.638 C1) ────────────────────────
+
+    #[test]
+    fn get_or_open_for_project_returns_none_for_unknown_project_id() {
+        let (_tmp, kb) = make_delegate_with_n_projects(2, 2);
+        assert!(kb.get_or_open_for_project("does-not-exist").is_none());
+        assert_eq!(
+            kb.cached_connection_count(),
+            0,
+            "unknown project_id must not poison the cache",
+        );
+    }
+
+    #[test]
+    fn get_or_open_for_project_leaves_other_projects_untouched() {
+        // 3 projects, limit=3 → all fit. Load via per-project API in order:
+        // [p0, p1, p2]. Re-access p0 → lru_order becomes [p1, p2, p0].
+        // Crucially p1 and p2 retain their relative order (unlike the
+        // batch-load API which would re-touch them on each call).
+        let (_tmp, kb) = make_delegate_with_n_projects(3, 3);
+        let _ = kb.get_or_open_for_project("p0").unwrap();
+        let _ = kb.get_or_open_for_project("p1").unwrap();
+        let _ = kb.get_or_open_for_project("p2").unwrap();
+
+        let p0 = kb.path_for_project("p0").unwrap();
+        let p1 = kb.path_for_project("p1").unwrap();
+        let p2 = kb.path_for_project("p2").unwrap();
+
+        // Sanity: initial order is [p0, p1, p2].
+        {
+            let order = kb.lru_order.lock().unwrap();
+            assert_eq!(*order, vec![p0.clone(), p1.clone(), p2.clone()]);
+        }
+
+        // Re-access p0 → moves to back; p1 and p2 keep their relative order.
+        let _ = kb.get_or_open_for_project("p0").unwrap();
+        let order = kb.lru_order.lock().unwrap();
+        assert_eq!(*order, vec![p1, p2, p0]);
     }
 
     #[test]
