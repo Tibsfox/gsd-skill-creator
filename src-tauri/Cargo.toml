@@ -28,6 +28,7 @@ keyring = { version = "3", default-features = false, features = ["sync-secret-se
 age = "0.10"
 argon2 = "0.5"
 rand_core = { version = "0.6", features = ["std"] }
+clap = { version = "4", features = ["derive"] }
 futures-util = "0.3"
 zip = { version = "2", default-features = false, features = ["deflate"] }
 xxhash-rust = { version = "0.8", features = ["xxh3"] }
@@ -61,6 +62,14 @@ tauri-build = { version = "2.5", features = [] }
 [[bench]]
 name = "arena_bench"
 harness = false
+
+# Standalone keystore CLI binary (operator-pinned hybrid CLI arch 2026-05-11).
+# `cargo build --release` produces `target/release/skill-creator-keystore`
+# alongside the main Tauri app. Both surfaces share the Rust keystore lib
+# under src/security/.
+[[bin]]
+name = "skill-creator-keystore"
+path = "bin/skill-creator-keystore.rs"
 
 [profile.release]
 panic = "abort"
