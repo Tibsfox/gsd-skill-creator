@@ -301,6 +301,93 @@ form of a discipline doc's value. Future sweep tools, validators,
 and linters in this codebase should ship with a negative-test
 fixture in the same commit; no exceptions.
 
+### Lesson #10191 — Ship-time directives are atomic; mid-execution revisions land at the next milestone (closed at T14 + post-ship resolution)
+
+**Surfaced in:** v1.49.636 T14 ship pipeline (2026-05-11 ~17:43–17:45 window)
+
+**Symptom.** During v1.49.636 T14 ship pipeline execution, two operator
+decisions arrived in quick succession via team-lead relay: (1) ~17:43
+"authorize T14 with full STORY.md backfill (52 entries v1.49.584 →
+v1.49.636)"; (2) ~17:45 (revision) "accept flight-ops's defer-all
+recommendation; T14 should NOT touch STORY.md." flight-ops executed
+the first directive and completed T14 with the full backfill; the
+revised "defer" directive arrived ~30min AFTER T14 had already
+shipped (tag pushed at `fa1d33555`, GH release 320695326 published,
+ship-sync + RH-refresh committed). lab-director-2's post-ship review
+surfaced this as a procedural divergence (Finding #1); after timeline
+clarification, the divergence dissolved — flight-ops had executed
+against the binding directive at execution time.
+
+**Root cause.** Multi-agent sc-dev-team operations have inherent
+message-delivery latency. When an operator revision arrives during
+T14 execution (between authorization and ship-complete), the
+executing agent may have already committed work against the prior
+directive. Force-revert to satisfy the later directive risks visible
+churn in published main history + theoretical authorization-bypass
+complexity (the revert would lack the original-authorization audit
+trail). Accepting the shipped state preserves audit-trail integrity
+at the cost of a brief operator-revision-not-honored window.
+
+**Discipline.** Once T14 (or any release-gating sub-decision)
+authorization is granted via team-lead relay, the ship sequence
+executes against the directive state AT AUTHORIZATION TIME. Later
+revisions are forward-only — they apply to the NEXT milestone, not
+the current one. Operator + team-lead should treat post-authorization
+revisions as Cluster #N+1 / next-milestone directives, not
+retro-corrections to in-flight T14 work.
+
+**Pattern template:**
+
+- **Pre-authorization revisions:** operator can change directive
+  freely; ship pipeline holds.
+- **Authorization:** team-lead relays operator's decision to
+  flight-ops; this is the binding directive.
+- **Post-authorization (during T14 window):** flight-ops executes;
+  revisions during this window do NOT apply to current milestone.
+- **Post-ship arrival of revision:** capture as forward-cadence
+  directive — applies to next milestone's planning OR a follow-on
+  commit on dev that lands at next ship.
+- **If revision MUST apply to current milestone** (rare; e.g.,
+  authorization was based on incorrect info): operator must
+  explicitly invoke the "revert ship" pathway with cost acknowledgment
+  (visible churn + audit-trail complication + GH release re-issue).
+
+**Adjacent.** Closely related to the durable instruction in
+`feedback_lab-director-g3-authority-boundary.md` — the asymmetry
+between revisable quality gates and irreversible public release.
+The atomic-directive principle extends that asymmetry to
+operator-relay timing.
+
+**Resolved in.** v1.49.636 milestone close (operator accepted shipped
+state via Option A; HANDOFF doc + this Lesson #10191 capture the
+timing-mismatch process observation). Promoted to durable IDENTITY-
+level memory at `feedback_ship-time-directives-atomic.md`.
+
+**Carry-forward to Cluster #4:** STORY.md backfill IN-LINED at
+v1.49.636 per timing-mismatch with revised directive (NOT a
+Cluster #4 deliverable). Public STORY.md sustained-update process
+remains a Cluster #4 candidate (per-ship gate going forward —
+auto-append entry on tag, not another backfill).
+
+**Forward design candidates for Cluster #4 retro consideration:**
+
+1. **Explicit revision window:** future T14-class directives note a
+   delay window (e.g., "execute starting in 5 minutes") to give the
+   operator the chance to revise before pipeline commits.
+2. **Executor-side idle:** flight-ops explicitly idles after directive
+   receipt + before pipeline start (e.g., 60-second pause +
+   last-confirmation message) to surface revision-receipt before
+   pipeline begins.
+3. **Status-board for in-flight T14:** team-lead or operator can
+   observe "flight-ops is at stage N of M" and decide whether
+   to interrupt vs let the pipeline complete.
+
+Neither mitigation was in place for v1.49.636 T14. The pattern
+surfaced today as a real operational concern but didn't cause
+material damage (backfill was correct + operator preferred-outcome).
+Captured as Lesson #10191; mitigation design is operator/team-lead
+policy territory and deferred to Cluster #4 retrospective.
+
 ## Carry-forward index for Cluster #4 (v1.49.6XX or later)
 
 Items not closed at v1.49.636 that future clusters should pick up:
