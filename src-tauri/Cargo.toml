@@ -24,7 +24,7 @@ secrecy = "0.8"
 base64 = "0.22"
 regex = "1"
 reqwest = { version = "0.12", features = ["json", "stream", "rustls-tls"], default-features = false }
-keyring = "3"
+keyring = { version = "3", default-features = false, features = ["sync-secret-service", "apple-native", "windows-native", "crypto-rust"] }
 age = "0.10"
 argon2 = "0.5"
 rand_core = { version = "0.6", features = ["std"] }

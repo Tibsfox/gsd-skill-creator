@@ -11,6 +11,7 @@
 
 pub mod agent_isolation;
 pub mod encryption;
+pub mod keyring_backend;
 pub mod keystore;
 pub mod proxy;
 pub mod proxy_server;
