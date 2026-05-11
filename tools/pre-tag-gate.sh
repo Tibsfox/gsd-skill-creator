@@ -21,7 +21,11 @@
 #   4. CI-on-dev verification — origin/dev tip's latest CI run must be
 #                       conclusion=success before tag/main-push proceeds.
 #                       Added v1.49.587 per HARD RULE: "verify CI passes on
-#                       dev before pushing to main". Override: SC_SKIP_CI_GATE=1
+#                       dev before pushing to main".
+#                       v1.49.636 C6: SC_SKIP_CI_GATE_TESTS=<csv> is the
+#                       enumerated override (closes Lesson #10185 silently-
+#                       masked-second-red incident); legacy SC_SKIP_CI_GATE=1
+#                       still works but emits DEPRECATION WARNING.
 #   5. SPICE renderer bundle freshness — esbuild `spice-renderer/index.ts` →
 #                       `index.js`. Idempotent. Added v1.49.587 — closes the
 #                       v1.49.581 unwired-build gap that left 126 SPICE
@@ -152,9 +156,14 @@ fi
 log "[pre-tag-gate] step 3/9: PASS"
 
 # ----- step 4/9: CI-on-dev gate (v1.49.587 HARD RULE) -----
+# v1.49.636 C6: SC_SKIP_CI_GATE_TESTS=<csv> is the enumerated form;
+# SC_SKIP_CI_GATE=1 remains as DEPRECATED blanket override. Closes
+# Lesson #10185 (v1.49.635 blanket-override silently masked a
+# co-occurring CI red).
 SKIP_CI_GATE="${SC_SKIP_CI_GATE:-0}"
 if [ "$SKIP_CI_GATE" = "1" ]; then
   log "[pre-tag-gate] step 4/9: SKIPPED (SC_SKIP_CI_GATE=1)"
+  echo "[pre-tag-gate] WARNING: SC_SKIP_CI_GATE=1 is DEPRECATED — use SC_SKIP_CI_GATE_TESTS=<csv> per Lesson #10185" >&2
 else
   log "[pre-tag-gate] step 4/9: CI-on-dev verification"
   DEV_SHA="$(git rev-parse origin/dev 2>/dev/null || echo "")"
@@ -199,14 +208,33 @@ else
     exit 4
   fi
   if [ "$CONCLUSION" != "success" ]; then
-    echo "[pre-tag-gate] FAIL: CI run on origin/dev concluded $CONCLUSION" >&2
-    echo "[pre-tag-gate]   SHA: $DEV_SHA" >&2
-    echo "[pre-tag-gate]   URL: $RUN_URL" >&2
-    echo "[pre-tag-gate]   Fix the failing tests on dev BEFORE pushing to main." >&2
-    echo "[pre-tag-gate]   Override (emergency only): SC_SKIP_CI_GATE=1" >&2
-    exit 4
+    # v1.49.636 C6 (Lesson #10185): allow enumerated override via
+    # SC_SKIP_CI_GATE_TESTS=<csv>. The ci-gate-enum.mjs script
+    # checks every failing test is covered; exits 0 only if so.
+    if [ -n "${SC_SKIP_CI_GATE_TESTS:-}" ]; then
+      log "[pre-tag-gate]   SC_SKIP_CI_GATE_TESTS present — checking enumeration..."
+      if node scripts/ci-gate-enum.mjs; then
+        log "[pre-tag-gate] step 4/9: PASS (CI red(s) authorized via SC_SKIP_CI_GATE_TESTS at $DEV_SHA)"
+        echo "[pre-tag-gate]   Rationale required at .planning/ship-pipeline-discipline/ci-gate-override-rationale.md" >&2
+      else
+        echo "[pre-tag-gate] FAIL: CI red(s) on dev not covered by SC_SKIP_CI_GATE_TESTS" >&2
+        echo "[pre-tag-gate]   SHA: $DEV_SHA" >&2
+        echo "[pre-tag-gate]   URL: $RUN_URL" >&2
+        echo "[pre-tag-gate]   Either fix the test, or extend SC_SKIP_CI_GATE_TESTS=<csv> to cover it." >&2
+        exit 4
+      fi
+    else
+      echo "[pre-tag-gate] FAIL: CI run on origin/dev concluded $CONCLUSION" >&2
+      echo "[pre-tag-gate]   SHA: $DEV_SHA" >&2
+      echo "[pre-tag-gate]   URL: $RUN_URL" >&2
+      echo "[pre-tag-gate]   Fix the failing tests on dev BEFORE pushing to main." >&2
+      echo "[pre-tag-gate]   Enumerated override (v1.49.636 C6): SC_SKIP_CI_GATE_TESTS=<csv>" >&2
+      echo "[pre-tag-gate]   Blanket override (DEPRECATED, emergency only): SC_SKIP_CI_GATE=1" >&2
+      exit 4
+    fi
+  else
+    log "[pre-tag-gate] step 4/9: PASS (CI green at $DEV_SHA)"
   fi
-  log "[pre-tag-gate] step 4/9: PASS (CI green at $DEV_SHA)"
 fi
 
 # ----- step 5/9: SPICE renderer bundle freshness (v1.49.587 unwired-build closure) -----
