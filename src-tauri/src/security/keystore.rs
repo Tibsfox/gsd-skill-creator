@@ -263,15 +263,12 @@ pub fn load_credentials_from_keystore(
         }
     }
 
-    // v1.49.650: try the OS keyring directly via the new keyring backend.
-    // This is the new Path 1 surface even from the legacy free function;
-    // existing callers benefit transparently.
-    if let Ok(secret) = os_store().load(account) {
-        let _ = service; // silence unused-binding when both platform stubs return Err
-        return Ok((secret, KeystoreBackend::OsKeyring));
-    }
-
-    // Fallback: env var + legacy plaintext file (debug or feature-gated).
+    // Fallback chain: env ANTHROPIC_API_KEY → (release-gated) plaintext
+    // credential file. The unified `Keystore::load_with_backend()` API
+    // provides the v1.49.650 Path 1 (OS keyring) + Path 2 (age-encrypted
+    // file) surfaces; callers wanting those should use the unified API.
+    // This legacy free function preserves its v1.49.634 precedence so
+    // existing api/keystore.rs consumers see no behavioral change.
     load_from_encrypted_file(service, account)
 }
 
