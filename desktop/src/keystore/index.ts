@@ -22,3 +22,18 @@ export {
   DEFAULT_STUB_MOCKS,
   getKeystoreApi,
 } from './invoke';
+
+export type {
+  PassphraseFlowState,
+  PassphraseFlowSnapshot,
+  PassphraseFlowSubmit,
+  PassphraseFlowListener,
+} from './passphrase-flow';
+export { PassphraseFlow } from './passphrase-flow';
+
+export type {
+  MigrationBannerState,
+  MigrationBannerSnapshot,
+  MigrationBannerListener,
+} from './migration-banner';
+export { MigrationBanner } from './migration-banner';
