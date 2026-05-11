@@ -9,6 +9,11 @@ node_modules/
 .claude/
 .cpanel.yml
 
+# CLAUDE.md is local-only (untracked 2026-05-10).
+# Source-of-truth manifests still live at tools/render-claude-md/;
+# regenerate locally via `npm run render:claude-md`.
+CLAUDE.md
+
 # Brainstorm session data (local only)
 .brainstorm/
 

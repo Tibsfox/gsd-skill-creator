@@ -46,6 +46,8 @@
     "ftp-sync:dry-run": "node tools/ftp-sync.mjs --dry-run",
     "ftp-sync:scribe": "node tools/ftp-sync.mjs scribe",
     "ftp-sync:scribe:dry-run": "node tools/ftp-sync.mjs scribe --dry-run",
+    "ftp-delete": "node tools/ftp-delete.mjs",
+    "ftp-delete:dry-run": "node tools/ftp-delete.mjs --dry-run",
     "build:www-bundles": "bash tools/build-www-bundles.sh",
     "render:claude-md": "node tools/render-claude-md.mjs",
     "render:claude-md:check": "node tools/render-claude-md.mjs --check",
