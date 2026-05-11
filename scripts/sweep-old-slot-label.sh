@@ -106,11 +106,12 @@ SUBSTRATE_PATTERNS=(
   'v1\.49\.650 C[0-9]'
   'v1\.49\.650 phase-\([a-h]\)'
   'legacy format from before v1\.49\.650'
-  'generalized by C[0-9] at v1\.49\.650'
-  'Bumped .* at v1\.49\.650 ship-time'
-  'Pattern follows v1\.49\.650'
+  'generalized by .*at v1\.49\.650'
+  '[Bb]umped .* at v1\.49\.650'
+  '[Pp]attern follows v1\.49\.650'
   '[Cc]loses (the )?v1\.49\.650'
-  'flipped (this )?from the v1\.49\.650'
+  'flipped (this )?from .*v1\.49\.650'
+  'observed .* at v1\.49\.650'
   'v1\.49\.650 encrypted keystore'
   'v1\.49\.650 migration CLI'
   'Extended at v1\.49\.650'
@@ -128,6 +129,9 @@ SUBSTRATE_PATTERNS=(
   # v1.49.650 phase-(g); their file-header attribution is provenance).
   'for the v1\.49\.650 keystore'
   'Tests for the v1\.49\.650 keystore'
+  # Generic version-class references like "v1.49.6XX cluster #3" must
+  # NOT be swept — "XX" is a literal placeholder for "future cluster".
+  'v1\.49\.6XX'
 )
 
 # Build the combined preserve regex (OR all substrate patterns).

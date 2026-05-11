@@ -210,6 +210,86 @@ no longer counts as evidence.
 restricted regex. Future apply-to-self pattern additions must
 follow the same discipline — match code, not commentary.
 
+### Lesson #10190 — Sweep tools need pattern-level allowlists for files where substrate citations and cosmetic references coexist
+
+**Context.** v1.49.636 first sweep attempt (`scripts/sweep-old-slot-label.sh`
+v1, commit `8f11cf40a`) used a FILE-LEVEL allowlist. The operator
+G3-conditional required an inline cosmetic v1.49.650 → v1.49.636
+sweep across non-allowlisted paths. lab-director-2's verification
+FAILED the commit because the file-level allowlist couldn't
+discriminate substrate-citation lines (must preserve to maintain
+architectural lineage — provenance comments, lineage refs, empirical-
+data citations, era-boundary markers) from cosmetic lines (must
+sweep — current-state ownership claims) within the same file. The
+sweep rewrote BOTH categories.
+
+Concrete examples of the over-sweep corruption:
+- `desktop/src/keystore/invoke.ts:116` — "flipped this from the
+  v1.49.636 phase-(g) stub" — semantic gibberish (v1.49.636 had
+  no phase-(g) stub; that was v1.49.650).
+- `src-tauri/src/security/keystore.rs:3` — "Extended at v1.49.636
+  with the unified..." — false architectural lineage (the unified
+  extension shipped at v1.49.650).
+- `src/intelligence/analyzer/__tests__/performance.test.ts:39` —
+  "observed 211.52ms mean at v1.49.636 pre-tag-gate" — fabricated
+  data (v1.49.636 has not yet run pre-tag-gate at sweep time).
+
+**Lesson.** Sweep tools that target version-label residue MUST use
+LINE-PATTERN allowlists, not file-level allowlists. Substrate-
+citation shapes form a known category with consistent verbal
+patterns (`[Rr]enamed (from )?.*at v1\.49\.650`, `Extended at
+v1\.49\.650`, `observed .* at v1\.49\.650`, `legacy format from
+before v1\.49\.650`, `phase-\(g\) [Oo]ption[ -]?[12]`, etc.);
+cosmetic refs are explicit current-state mentions. Pre-commit
+`--diff` mode + negative-test fixtures form the auditability
+surface.
+
+**Pattern template (Option B sweep tool architecture):**
+
+```bash
+# scripts/sweep-old-slot-label.sh (rebuild)
+SUBSTRATE_PATTERNS=(
+  '[Rr]enamed (from )?.*at v1\.49\.650'   # rename lineage
+  'Extended at v1\.49\.650'                # architectural intro
+  'observed .* at v1\.49\.650'             # empirical-data citation
+  'legacy format from before v1\.49\.650'  # substrate era
+  'phase-\([a-h]\) [Oo]ption[ -]?[12]'     # phase-decomposition
+  '[Cc]loses (the )?v1\.49\.650'           # deferral-closure verb
+  'flipped (this )?from .*v1\.49\.650'     # provenance source
+  'v1\.49\.6XX'                            # generic placeholder
+  # ... ~25 patterns total
+)
+
+# Per-line filter inside each candidate file:
+while IFS= read -r line; do
+  if echo "$line" | grep -qE "$OLD_PATTERN"; then
+    if is_substrate_line "$line"; then
+      printf '%s\n' "$line" >> "$tmpfile"     # preserve
+    else
+      echo "$line" | sed "s|$OLD|$NEW|g" >> "$tmpfile"  # sweep
+    fi
+  else
+    printf '%s\n' "$line" >> "$tmpfile"
+  fi
+done < "$f"
+```
+
+**Apply-to-self check:** the sweep tool ships with a
+`scripts/__tests__/sweep-old-slot-label.test.mjs` negative-test
+fixture that injects 40+ substrate-citation-shape lines and asserts
+none are rewritten. v1.49.636 C8 negative-test discipline (mirrors
+v1.49.635 C3 Lesson #10182 audit-regex pattern).
+
+**Surfaced in.** v1.49.636 C8 / T13b — operator-rejected file-level
+sweep, lab-director-2 FAIL verdict on `8f11cf40a`, rebuild as
+Option B.
+
+**Forward-applied at.** v1.49.636 C8 `scripts/sweep-old-slot-label.sh`
++ `scripts/__tests__/sweep-old-slot-label.test.mjs` (negative-test).
+Extension of Lesson #10186 (safe pattern); adjacent to Lesson
+#10182 (audit regex coverage); adjacent to Lesson #10189 (code-vs-
+comment distinction).
+
 ## Carry-forward index for Cluster #4 (v1.49.6XX or later)
 
 Items not closed at v1.49.636 that future clusters should pick up:

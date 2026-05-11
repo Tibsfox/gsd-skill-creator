@@ -234,4 +234,95 @@ describe('sweep-old-slot-label.sh — line-level pattern allowlist', () => {
     expect(out).toContain('total lines swept:     1');
     expect(out).toContain('total lines preserved: 1');
   });
+
+  // ==========================================================================
+  // Negative-test fixture (lab-director-2's 7th re-check criterion).
+  // Injects every substrate-citation shape into a single fixture file and
+  // verifies the sweep tool does NOT rewrite any of them. Mirrors v1.49.635
+  // C3 negative-test discipline (Lesson #10182 pattern); auditability
+  // proof for Lesson #10190.
+  // ==========================================================================
+  it('NEGATIVE-TEST: every substrate-citation shape is preserved verbatim', () => {
+    const substrateLines = [
+      // phase-(g) Option 2 / phase-(g) stub (passphrase + migration files)
+      '// STUB STATUS (v1.49.650 phase-(g) Option 2):',
+      '// STUB STATUS (v1.49.650 phase-(g) Option-2):',
+      '// flipped from v1.49.650 phase-(g) stub',
+      // Renamed-from / rename-arrow / renamed-from-inverse
+      '// Renamed from `insecure-plaintext-keystore` at v1.49.650.',
+      '// renamed from X at v1.49.650',
+      '// renamed v1.49.650 from `insecure-plaintext-keystore`.',
+      '// v1.49.634 → v1.49.650 renamed',
+      // pre-tag-gate observation
+      '// observed 211.52ms 10-sample mean at v1.49.650 pre-tag-gate',
+      '// observed extra data at v1.49.650 ship-time',
+      // C-component lineage
+      '// v1.49.650 C1 — keyring backend unit tests',
+      '// v1.49.650 C3 audit closed this',
+      // phase reference
+      '// v1.49.650 phase-(g) Option 2 stub',
+      // legacy-format era
+      '// legacy format from before v1.49.650 — migrated by v2',
+      // generalized-by precedent
+      '// generalized by C3 at v1.49.650',
+      '// generalized by m2-short-term canonical fix at v1.49.650',
+      // Bumped change-history
+      '// Bumped 5× → 10× at v1.49.650 ship-time',
+      '// bumped widening at v1.49.650 to absorb jitter',
+      // Pattern-follows precedent
+      '// Pattern follows v1.49.650 C3 discipline doc',
+      '// pattern follows v1.49.650 m2-short-term fix',
+      // Closes-deferral verb
+      '// Closes the v1.49.650 phase-(g) Option-2 deferral',
+      '// closes v1.49.650 C1 follow-on',
+      // flipped-from provenance
+      '// flipped this from the v1.49.650 phase-(g) stub',
+      '// flipped from v1.49.650 substrate',
+      // User-facing CLI message + test assertion
+      '// `upgrade to the v1.49.650 encrypted keystore`',
+      '// disabled-fallback error must point at the v1.49.650 migration CLI',
+      // Architectural-introduction
+      '// Extended at v1.49.650 with the unified API',
+      // em-dash section marker
+      '// v1.49.650 — Unified Keystore API',
+      // Past-tense fact forms
+      '// v1.49.650 introduced the new feature',
+      '// v1.49.650 added Path 2',
+      '// v1.49.650 landed at d4ffa4f32',
+      '// v1.49.650 shipped on 2026-05-11',
+      '// v1.49.650 tagged in main',
+      // Era prefix / suffix
+      '// pre-v1.49.650 era',
+      '// v1.49.650+ Path 2 onward',
+      // Stub-era ref
+      '// (stub at v1.49.650)',
+      // List marker
+      '// v1.49.650: legacy-plaintext-keystore (renamed)',
+      // Paren-phase
+      '// (v1.49.650 phase-(g) decision)',
+      // Rename-arrow
+      '// v1.49.634 → v1.49.650 renamed in this milestone',
+      // File-header attribution
+      '// for the v1.49.650 keystore UI',
+      '// Tests for the v1.49.650 keystore migration-banner',
+      // v1.49.6XX generic placeholder (must NOT be swept)
+      '// v1.49.6XX cluster #3: REMOVED entirely',
+      '// v1.49.6XX (next housekeeping)',
+    ];
+    writeFileSync(
+      join(tmp, 'src', 'negative-test.ts'),
+      substrateLines.join('\n'),
+    );
+    runScript('');
+    const after = readFileSync(join(tmp, 'src', 'negative-test.ts'), 'utf8');
+
+    // Every input line should appear verbatim in the output. No
+    // substrate-citation line was swept.
+    for (const line of substrateLines) {
+      expect(after).toContain(line);
+    }
+    // No v1.49.636 appears in the file (since all substrate citations
+    // were preserved and no cosmetic lines were in the fixture).
+    expect(after).not.toContain('v1.49.636');
+  });
 });
