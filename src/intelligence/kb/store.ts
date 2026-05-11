@@ -552,7 +552,10 @@ export class KBStore implements IntelligenceKB {
     const pdb = this._requireProjectDB(p);
     const rows = pdb
       .prepare(
-        `SELECT * FROM meetings WHERE project_id = ? ORDER BY started_at DESC`,
+        // Stabilized at v1.49.637 ship-time: add rowid tiebreaker so meetings
+        // created within the same millisecond (test-suite hot path) sort
+        // deterministically by insertion order (most recent insertion first).
+        `SELECT * FROM meetings WHERE project_id = ? ORDER BY started_at DESC, rowid DESC`,
       )
       .all(p) as MeetingRow[];
     return rows.map(rowToMeeting);
