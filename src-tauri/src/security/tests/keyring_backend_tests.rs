@@ -1,4 +1,4 @@
-//! v1.49.650 C1 — keyring backend unit tests using `InMemoryKeyring`.
+//! v1.49.636 C1 — keyring backend unit tests using `InMemoryKeyring`.
 //!
 //! Production code uses `OsKeyring` which wraps `keyring::Entry` against
 //! the OS daemon. Unit tests use `InMemoryKeyring` (a HashMap behind a

@@ -1,5 +1,5 @@
 /**
- * CLI command group for the v1.49.650 unified keystore.
+ * CLI command group for the v1.49.636 unified keystore.
  *
  * Hybrid Node-wrapper + standalone-Rust-bin architecture (operator-pinned
  * 2026-05-11): the Node entry point `skill-creator keystore <subcmd>`
@@ -114,7 +114,7 @@ function printHelp(io: KeystoreCommandIO): void {
       'Usage:',
       '  skill-creator keystore migrate           Migrate v1 plaintext → v2',
       '  skill-creator keystore migrate --to-keyring',
-      '                                            Path-2 → Path-1 (stub at v1.49.650)',
+      '                                            Path-2 → Path-1 (stub at v1.49.636)',
       '  skill-creator keystore set <account>     Store/update credential (value on stdin)',
       '  skill-creator keystore status            Print current keystore state',
       '',

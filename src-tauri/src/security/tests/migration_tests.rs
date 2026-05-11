@@ -1,4 +1,4 @@
-//! v1.49.650 C1 — migration logic tests.
+//! v1.49.636 C1 — migration logic tests.
 //!
 //! Three core invariants validated:
 //! 1. Round-trip: migrate(v1) → v2 stores match → v1 deleted post-success

@@ -44,7 +44,7 @@ gnome-keyring = []
 macos-keychain = []
 cuda = ["dep:cudarc"]
 postgres = ["dep:sqlx"]
-# DEPRECATED — renamed v1.49.650 from `insecure-plaintext-keystore`.
+# DEPRECATED — renamed v1.49.636 from `insecure-plaintext-keystore`.
 # Re-enables the legacy plaintext credential-file fallback at
 # src-tauri/src/security/keystore.rs. Default OFF in release builds.
 # Will be REMOVED entirely at v1.49.6XX cluster #3; debug builds may

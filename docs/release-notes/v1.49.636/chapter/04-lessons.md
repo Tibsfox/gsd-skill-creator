@@ -230,12 +230,6 @@ Items not closed at v1.49.636 that future clusters should pick up:
   treating as tracking-only artifact OR making a one-time downstream
   absorb decision regardless of upstream state.
 
-- **Cosmetic v1.49.650 sweep (broad).** The targeted sweep was deferred
-  per the retrospective scoping concern. ~24 files reference
-  v1.49.650; most are legitimate substrate citations. A careful
-  pass over file-header docblocks (only those that are clear-cut
-  cosmetic) is appropriate for Cluster #4.
-
 - **Apply-to-self pattern catalog extension.** Two patterns ship at
   v1.49.636 (existsSync-no-skip-guard + perf-assertion-no-warmup).
   Future patterns: Lesson #10188 POSIX-ERE-translation? Lesson #10189

@@ -1,6 +1,6 @@
 //! Native OS keystore loading for credential proxy.
 //!
-//! Phase 369 — Credential Proxy. Extended at v1.49.650 with the unified
+//! Phase 369 — Credential Proxy. Extended at v1.49.636 with the unified
 //! `Keystore` API (Path 1 = OS keyring direct; Path 2 = age-encrypted
 //! credentials.age file with Argon2id-derived passphrase identity).
 //!
@@ -15,7 +15,7 @@
 //! The legacy `~/.config/gsd-os/credentials.enc` (plaintext, despite the
 //! .enc extension) is gated behind
 //! `#[cfg(any(debug_assertions, feature = "legacy-plaintext-keystore"))]`.
-//! Renamed from `insecure-plaintext-keystore` at v1.49.650. The feature
+//! Renamed from `insecure-plaintext-keystore` at v1.49.636. The feature
 //! emits a `warn!` log when enabled and is scheduled for full removal at
 //! v1.49.6XX cluster #3.
 
@@ -41,7 +41,7 @@ pub enum KeystoreBackend {
 }
 
 // ============================================================================
-// v1.49.650 — Unified Keystore API (Path 1 + Path 2 + migration)
+// v1.49.636 — Unified Keystore API (Path 1 + Path 2 + migration)
 // ============================================================================
 
 /// Errors from the unified `Keystore` API.
@@ -92,8 +92,8 @@ impl From<MigrationError> for KeystoreError {
 
 /// Resolve the canonical paths used by the unified keystore.
 ///
-/// - `legacy_plaintext`: `~/.config/gsd-os/credentials.enc` (pre-v1.49.650)
-/// - `path2_age`: `~/.config/gsd-os/credentials.age` (v1.49.650+ Path 2)
+/// - `legacy_plaintext`: `~/.config/gsd-os/credentials.enc` (pre-v1.49.636)
+/// - `path2_age`: `~/.config/gsd-os/credentials.age` (v1.49.636+ Path 2)
 pub fn keystore_paths() -> Option<(PathBuf, PathBuf)> {
     let config_dir = dirs::config_dir()?;
     let gsd_dir = config_dir.join("gsd-os");
@@ -382,7 +382,7 @@ pub fn load_credentials_from_keystore(
 
     // Fallback chain: env ANTHROPIC_API_KEY → (release-gated) plaintext
     // credential file. The unified `Keystore::load_with_backend()` API
-    // provides the v1.49.650 Path 1 (OS keyring) + Path 2 (age-encrypted
+    // provides the v1.49.636 Path 1 (OS keyring) + Path 2 (age-encrypted
     // file) surfaces; callers wanting those should use the unified API.
     // This legacy free function preserves its v1.49.634 precedence so
     // existing api/keystore.rs consumers see no behavioral change.
@@ -464,7 +464,7 @@ fn load_from_encrypted_file(
         )));
     }
 
-    // v1.49.634 §18 (C3) → v1.49.650 (renamed): the plaintext credential-file
+    // v1.49.634 §18 (C3) → v1.49.636 (renamed): the plaintext credential-file
     // fallback is gated out of release builds. In debug builds OR when the
     // developer opts in via `--features legacy-plaintext-keystore`, the legacy
     // path remains available so existing developer setups continue to work.
@@ -473,12 +473,12 @@ fn load_from_encrypted_file(
     // Keystore::migrate_v1_to_v2 surface.
     //
     // Reachability proof: .planning/keystore-reachability-audit.md
-    // Encryption migration: v1.49.650 C1 (this milestone — encryption.rs +
+    // Encryption migration: v1.49.636 C1 (this milestone — encryption.rs +
     //   keyring_backend.rs + migration.rs).
     //
     // Feature rename history:
     //   v1.49.634: insecure-plaintext-keystore (introduced)
-    //   v1.49.650: legacy-plaintext-keystore (renamed; deprecation marker)
+    //   v1.49.636: legacy-plaintext-keystore (renamed; deprecation marker)
     //   v1.49.6XX cluster #3: REMOVED entirely
     #[cfg(any(debug_assertions, feature = "legacy-plaintext-keystore"))]
     {
@@ -513,8 +513,8 @@ fn load_from_encrypted_file(
         Err(ProxyError::KeystoreError(format!(
             "Plaintext credential-file fallback is disabled in release builds for {}/{}. \
              Set the ANTHROPIC_API_KEY environment variable as a workaround, or run \
-             `skill-creator keystore migrate` to upgrade to the v1.49.650 encrypted keystore. \
-             Tracking: v1.49.650 C1 (shipped this milestone — see docs/keystore.md).",
+             `skill-creator keystore migrate` to upgrade to the v1.49.636 encrypted keystore. \
+             Tracking: v1.49.636 C1 (shipped this milestone — see docs/keystore.md).",
             service, account
         )))
     }

@@ -1,7 +1,7 @@
 //! v1 → v2 keystore migration with backup-first pattern.
 //!
 //! On launch, the keystore probes the on-disk state. If a v1 plaintext
-//! credentials file is detected (legacy format from before v1.49.650), the
+//! credentials file is detected (legacy format from before v1.49.636), the
 //! migration logic runs:
 //!
 //! 1. Read v1 plaintext file into memory.

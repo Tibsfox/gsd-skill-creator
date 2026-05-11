@@ -152,7 +152,7 @@ pub fn run() {
             commands::security::agent_destroy,
             commands::security::agent_verify_isolation,
             // v1.49.636 C1 — Unified keystore Tauri surface (closes
-            // v1.49.650 phase-(g) Option-2 deferral).
+            // v1.49.636 phase-(g) Option-2 deferral).
             commands::keystore::keystore_status,
             commands::keystore::keystore_migrate_v1_to_v2,
             commands::keystore::keystore_set,

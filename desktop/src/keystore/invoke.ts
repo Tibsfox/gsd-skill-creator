@@ -113,7 +113,7 @@ export class StubKeystoreApi implements KeystoreApi {
 
 /**
  * Factory — returns the production keystore API the desktop UI builds
- * against. v1.49.636 C1 flipped this from the v1.49.650 phase-(g) stub
+ * against. v1.49.636 C1 flipped this from the v1.49.636 phase-(g) stub
  * to the live `TauriKeystoreApi`. Tests that need canned responses use
  * `getStubKeystoreApi()` below, or instantiate `StubKeystoreApi`
  * directly.

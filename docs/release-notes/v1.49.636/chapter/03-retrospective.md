@@ -53,14 +53,23 @@
   a design error in the mission-pipeline scaffolding. **Forward
   capture:** remove T1 from future cluster scaffolding.
 
-- **Cosmetic v1.49.650 sweep (spec Stage 2) was scoped too broadly.** 24
-  files reference `v1.49.650` but the vast majority are LEGITIMATE
-  substrate citations (e.g. `// Renamed from insecure-plaintext-keystore
-  at v1.49.650`). A blanket sweep would corrupt audit trail. Only a
-  handful of file-header docblocks ("CLI command group for the v1.49.650
-  unified keystore" pattern) are clear-cut cosmetic targets. **Forward
-  capture:** deferred the broad sweep to Cluster #4 with a more careful
-  scope (file-header docblocks only; substrate citations preserved).
+- **Cosmetic v1.49.650 sweep — initial deferral rejected by operator.**
+  flight-ops initially deferred the broad sweep to Cluster #4 on the
+  rationale that 24+ files were substrate citations whose rename
+  would corrupt audit trail. lab-director-2 marked the deferral
+  DEFERRED-ACCEPTABLE. Operator REJECTED the deferral via team-lead
+  relay: the sweep landed inline at v1.49.636 with an
+  allowlist-honoring `scripts/sweep-old-slot-label.sh` script per
+  Lesson #10186 safe-pattern. 18 files swept; 14 files allowlisted as
+  legitimate audit-trail surfaces (predecessor handoffs, release-
+  notes for v1.49.635 + v1.49.636, the v1.49.636 mission package,
+  the sweep tool's own constants, release-history tooling that
+  references v1.49.650 as a processed-version key, the
+  state-md-normalizer test fixtures, the v1.49.634 predecessor
+  meta-test). **Forward capture:** when in doubt on cosmetic vs
+  substrate, the right path is "sweep + allowlist what's truly
+  substrate", not "defer broad sweep". The allowlist + verification
+  step in the sweep tool makes the discipline auditable.
 
 - **Mid-mission stale task-routing messages from teammates' subscriptions
   created friction.** lab-director-2's task-tracking subscription

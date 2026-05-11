@@ -1,5 +1,5 @@
 /**
- * Tests for the v1.49.650 keystore passphrase-flow state machine.
+ * Tests for the v1.49.636 keystore passphrase-flow state machine.
  */
 
 import { describe, it, expect, vi } from 'vitest';

@@ -1,5 +1,5 @@
 /**
- * Passphrase-entry flow state machine for the v1.49.650 keystore UI.
+ * Passphrase-entry flow state machine for the v1.49.636 keystore UI.
  *
  * Drives the passphrase + re-confirm prompt shown for Path-2 (age-file)
  * keystore operations: first-run setup, migration from v1 plaintext, and
@@ -7,7 +7,7 @@
  * supplies the `submitFn` that runs after the passphrase is validated,
  * which keeps the state machine reusable across all three contexts.
  *
- * STUB STATUS (v1.49.650 phase-(g) Option 2):
+ * STUB STATUS (v1.49.636 phase-(g) Option 2):
  *   No DOM rendering is wired here. The class is a pure observable state
  *   machine; a presenter in a follow-on milestone subscribes via
  *   `onChange()` and renders the form.

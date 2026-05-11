@@ -1,5 +1,5 @@
 /**
- * Tests for the v1.49.650 keystore migration-banner state machine.
+ * Tests for the v1.49.636 keystore migration-banner state machine.
  *
  * Uses `StubKeystoreApi` from `./invoke` as the test double — same surface
  * the desktop UI will use in production once the Rust Tauri commands wire.
