@@ -1,0 +1,11 @@
+{
+  "comment": "Existing tauri-boundary entries captured at v1.49.634. These are NOT bugs — they are the documented runtime-only Tauri bridges that are the boundary, analogous to how src/intelligence/__tests__/s10-module-boundary.test.ts exempts intelligence/ipc.ts. The Function('return import(...)')() pattern intentionally defeats static bundling so the @tauri-apps/api dependency is only loaded under a Tauri runtime, never in headless test paths. Findings detail: .planning/tauri-boundary-findings.md.",
+  "violations": [
+    {
+      "file": "src/mcp/presentation/tauri-ipc-bridge.ts",
+      "line": 82,
+      "importPath": "@tauri-apps/api/core",
+      "reason": "ARCHITECTURAL — this file IS the src→Tauri bridge; the dynamic import is intentional runtime-only loading via Function() to avoid static bundling. Equivalent to the intelligence/ipc.ts exemption in s10-module-boundary.test.ts. No remediation needed; entry kept for audit visibility."
+    }
+  ]
+}
