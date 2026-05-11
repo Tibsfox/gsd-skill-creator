@@ -51,7 +51,14 @@ describe('language analyzer performance', () => {
     }
 
     const mean = times.reduce((a, b) => a + b, 0) / times.length;
-    // 200ms mean on commodity hardware (generous CI-safe threshold)
-    expect(mean).toBeLessThan(200);
+    // 300ms mean on commodity hardware. 200ms threshold was tight under
+    // full-suite contention (211ms observed at v1.49.635 pre-tag-gate even
+    // after the 5-iteration warmup landed at bbde73555; ~120ms isolated).
+    // 300ms gives ~90ms headroom over the contention measurement to absorb
+    // remaining jitter. Pattern follows v1.49.650 C3 discipline doc
+    // per-site-analysis-required guidance — the analyzer's tree-sitter +
+    // V8 tier-up cost takes longer than the m2-short-term canonical case
+    // to stabilize, so threshold widening complements warmup widening.
+    expect(mean).toBeLessThan(300);
   }, 15000);
 });
