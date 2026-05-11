@@ -59,7 +59,7 @@ New lessons authored in chapter/04-lessons.md:
 
 ## Thread state
 
-CHAIN-CONVENTIONS unchanged. Engine forward-state UNCHANGED. Operational-gate layer EXTENDED (6 → 7 gates).
+CHAIN-CONVENTIONS unchanged. Engine forward-state UNCHANGED. Discipline-doc surface OPENED at `.planning/test-discipline/` (C3 + C4); STATE.md normalizer toolchain LANDED (C6); cleanup rubric RECALIBRATED (C5).
 
 ---
 **Prev:** [v1.49.634](../v1.49.634/README.md) · **Next:** v1.49.651+
