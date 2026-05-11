@@ -20,9 +20,14 @@ tokio = { version = "1", features = ["sync", "macros", "rt-multi-thread", "time"
 uuid = { version = "1", features = ["v4"] }
 dirs = "6"
 zeroize = { version = "1", features = ["derive"] }
+secrecy = "0.8"
 base64 = "0.22"
 regex = "1"
 reqwest = { version = "0.12", features = ["json", "stream", "rustls-tls"], default-features = false }
+keyring = "3"
+age = "0.10"
+argon2 = "0.5"
+rand_core = { version = "0.6", features = ["std"] }
 futures-util = "0.3"
 zip = { version = "2", default-features = false, features = ["deflate"] }
 xxhash-rust = { version = "0.8", features = ["xxh3"] }

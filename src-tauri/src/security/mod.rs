@@ -10,6 +10,7 @@
 //! TypeScript equivalent: src/types/security.ts
 
 pub mod agent_isolation;
+pub mod encryption;
 pub mod keystore;
 pub mod proxy;
 pub mod proxy_server;
