@@ -24,7 +24,7 @@ import {
   PassphraseQualityError,
   DEFAULT_MIN_SCORE,
   ENV_VAR_OVERRIDE,
-} from '../passphrase-quality';
+} from '../passphrase-quality.js';
 
 // Save + restore the env var across tests so override tests don't leak.
 let savedEnvVar: string | undefined;
