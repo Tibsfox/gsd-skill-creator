@@ -144,11 +144,15 @@ describe('Phase 827 / C04 — browser-tab parity (full HTTP↔KB↔SSE cycle)', 
   let received: IntelligenceEvent[];
   let unsubscribe: () => void;
 
+  // Hook timeout bumped from default 10s to 60s — seed() performs the
+  // same sqlite-migration + dual-DB pattern as connection-caching.test.ts,
+  // which is fsync-bound and flakes under full-suite contention. Matches
+  // the root-project testTimeout established for the same reason.
   beforeEach(async () => {
     s = await seed();
     received = [];
     unsubscribe = getIntelligenceEventBus().subscribe((e) => received.push(e));
-  });
+  }, 60_000);
 
   afterEach(() => {
     try { unsubscribe(); } catch { /* idempotent */ }
