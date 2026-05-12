@@ -56,6 +56,19 @@ Before authoring component spec for any CF routed from a predecessor cluster:
    - Config-state: read the config file + grep for the misconfiguration
    - Upstream-spec: check current upstream state (`npm view`, `cargo search`, vendor advisory feed)
 
+   Concrete tool-output probe example (the canonical CF-7 application from v1.49.640):
+
+   ```bash
+   # Probe: are the catalogued advisories still surfaced?
+   npm audit --audit-level=high --json > /tmp/cf-N-probe.json
+   EXIT_CODE=$?
+   echo "exit: $EXIT_CODE"
+   # exit 0 = retired (advisories cleared upstream)
+   # exit 1 + catalogued GHSAs in output = still real
+   ```
+
+   See `docs/test-discipline/cf-closure-verification-templates.md` for templates covering all four shape categories (test-marker, tool-output, config-state, upstream-spec) plus a hidden-transitive guard.
+
 4. **Record** the probe output at `.planning/c0-cf{N}-closure-verification-record.md`. The record captures:
    - Probe command + exit code + output path
    - Status: `still-real` / `resolved-upstream` / `changed-shape` / `inconclusive`
