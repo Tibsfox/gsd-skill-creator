@@ -266,6 +266,89 @@ describe('cartridge migrate --all (bulk)', () => {
     expect(existsSync(join(tempRoot, 'dept-0', 'cartridge.yaml'))).toBe(false);
     expect(existsSync(join(tempRoot, 'dept-1', 'cartridge.yaml'))).toBe(false);
   });
+
+  // ─── Family B surface (v1.49.644 C2 path b — CF-17) ───
+  describe('not-department-shape surface (Family B chipsets)', () => {
+    /**
+     * Seeds the tempRoot with one valid department + one chipset.yaml that
+     * parses but doesn't match the agents+skills+teams gate. Used to verify
+     * the v1.49.644 C2 path b discovery-gate expansion (CF-17): non-DS files
+     * now surface as `status: not-department-shape` records instead of being
+     * silently dropped from the report.
+     */
+    function seedRootWithNonDS(nonDSYaml: Record<string, unknown>, name = 'non-ds'): void {
+      // Valid department to confirm regression doesn't break
+      const ok = join(tempRoot, 'dept-ok');
+      mkdirSync(ok);
+      writeFileSync(join(ok, 'chipset.yaml'), stringifyYaml(legacyMinimal('dept-ok-v1.0')), 'utf8');
+      // Non-department-shape file
+      const nd = join(tempRoot, name);
+      mkdirSync(nd);
+      writeFileSync(join(nd, 'chipset.yaml'), stringifyYaml(nonDSYaml), 'utf8');
+    }
+
+    it('surfaces header:-wrapped legacy as not-department-shape (gastown-orchestration analog)', async () => {
+      seedRootWithNonDS(
+        {
+          header: { name: 'analog-gastown', version: '1.0.0', archetype: 'multi-agent-orchestration' },
+          skills: { 'orchestration-pattern': { domain: 'meta' } },
+        },
+        'gastown-analog',
+      );
+      const io = captureIO();
+      await cartridgeCommand(['migrate', '--all', tempRoot, '--json'], io);
+      const records = JSON.parse(io.stdoutLines.join('\n'));
+      expect(records).toHaveLength(2);
+      const nd = records.find((r: { sourcePath: string }) => r.sourcePath.includes('gastown-analog'));
+      expect(nd.status).toBe('not-department-shape');
+      expect(nd.reason).toMatch(/lacks agents\+skills\+teams/);
+    });
+
+    it('surfaces stub redirect files as not-department-shape (math-coprocessor analog)', async () => {
+      seedRootWithNonDS(
+        { name: 'stub-redirect', version: '1.0.0', canonical_path: '../../real-location' },
+        'stub-redirect',
+      );
+      const io = captureIO();
+      await cartridgeCommand(['migrate', '--all', tempRoot, '--json'], io);
+      const records = JSON.parse(io.stdoutLines.join('\n'));
+      const nd = records.find((r: { sourcePath: string }) => r.sourcePath.includes('stub-redirect'));
+      expect(nd.status).toBe('not-department-shape');
+    });
+
+    it('surfaces non-department configs (e.g. den-style staff config) as not-department-shape', async () => {
+      seedRootWithNonDS(
+        { name: 'den-analog-v1.0', version: '1.0.0', totalBudget: 0.59, positions: [{ name: 'capcom' }] },
+        'den-analog',
+      );
+      const io = captureIO();
+      await cartridgeCommand(['migrate', '--all', tempRoot, '--json'], io);
+      const records = JSON.parse(io.stdoutLines.join('\n'));
+      const nd = records.find((r: { sourcePath: string }) => r.sourcePath.includes('den-analog'));
+      expect(nd.status).toBe('not-department-shape');
+    });
+
+    it('text summary includes not-department-shape tally + per-file reason', async () => {
+      seedRootWithNonDS(
+        { header: { name: 'analog-gastown', version: '1.0.0' }, skills: {} },
+        'gastown-analog',
+      );
+      const io = captureIO();
+      await cartridgeCommand(['migrate', '--all', tempRoot], io);
+      const out = io.stdoutLines.join('\n');
+      expect(out).toContain('not-department-shape: 1');
+      expect(out).toContain('reason: top-level YAML lacks agents+skills+teams');
+    });
+
+    it('regression: existing valid departments still migrate alongside not-department-shape files', async () => {
+      seedRootWithNonDS({ header: { name: 'foo' } }, 'non-ds');
+      const io = captureIO();
+      await cartridgeCommand(['migrate', '--all', tempRoot, '--json'], io);
+      const records = JSON.parse(io.stdoutLines.join('\n'));
+      expect(records.filter((r: { status: string }) => r.status === 'migrated')).toHaveLength(1);
+      expect(records.filter((r: { status: string }) => r.status === 'not-department-shape')).toHaveLength(1);
+    });
+  });
 });
 
 describe('cartridge migrate — usage errors', () => {
