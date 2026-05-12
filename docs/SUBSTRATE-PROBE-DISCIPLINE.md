@@ -69,6 +69,35 @@ The discipline is calibrated for substrate-touching components, not greenfield w
 - Pure-doc components (no code substrate named) — discipline is N/A
 - Components that explicitly defer substrate decisions to the executing agent ("flight-ops at W0a will enumerate and choose") — must say so explicitly so the spec reader knows the gap is intentional
 
+### 2.4 Grep adjacency check requirement
+
+**Added v1.49.639 C2 to close v1.49.638 CF-4 (audit-method correction).**
+
+Negation grep alone (`grep -L pattern files`, `grep -v 'pattern' files | wc -l > 0`) has false-positive risk when the target concept has multiple syntactic forms in the codebase. A grep for "the canonical form" misses tests/source that already comply via an alternate form, flagging them as violations.
+
+**Pattern:** when auditing for the absence of a discipline-required form, the audit MUST pair the negation grep with an **adjacency check** that catches alternate syntactic forms of the same concept.
+
+**Rate-of-false-positives observation (source):** v1.49.638 W1C flake audit `docs/test-discipline/flake-audit-2026-05-11.md` Stage 2 enumerated potential ORDER-BY-without-tiebreaker sites + hookTimeout sites via single-form grep. The grep produced 6 flagged files. On closer inspection, **2 of 6 (33%) were false positives** — the file already used the canonical form via a syntactic alternate the grep didn't anticipate.
+
+**Examples of multi-form concepts:**
+
+- **hookTimeout** — `}, 4000);` (inline numeric) vs `}, { timeout: 4000 });` (object form)
+- **ORDER-BY tiebreaker** — `ORDER BY x` (single column) vs `ORDER BY x, id DESC` (with tiebreaker) vs `ORDER BY x DESC, id ASC` (direction-flexible)
+- **perf-assertion threshold** — `expect(t).toBeLessThan(100)` vs `expect(t).toBeLessThan(3 * baseline)` vs `expect(t).toBeLessThan(3 * baseline + 5)` (additive constants per Lesson #10181)
+- **skip-guard env-var** — `if (process.env.SC_SKIP_X)` vs `if (!process.env.X_AVAILABLE)` (negative form) vs compound (`if (!process.env.A || process.env.B === '0')`)
+
+**Mitigation in audit pipelines:**
+
+1. Identify the concept being audited
+2. Look up the concept in `docs/test-discipline/audit-method-corrections.md`
+3. Use the inventory's `adjacencyCheckRegex` to combine all known forms
+4. Run negation grep with the combined pattern
+5. Review remaining hits as true positives (or refine the adjacency-check pattern + add to inventory)
+
+The companion inventory at `docs/test-discipline/audit-method-corrections.md` is the central catalog of known-multi-form concepts. New concepts surfaced by future audits should be added there, not duplicated in this doc.
+
+**The discipline:** every grep-driven audit step in a discipline check MUST cite which adjacency check it ran (or document its absence as an audit gap), so audit-method false-positive rates stay measurable.
+
 ---
 
 ## 3. Template — substrate-evidence section
