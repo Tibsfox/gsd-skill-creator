@@ -354,7 +354,12 @@ export class KBStore implements IntelligenceKB {
     const pdb = this._requireProjectDB(p);
     const row = pdb
       .prepare(
-        `SELECT * FROM briefings WHERE project_id = ? ORDER BY generated_at DESC LIMIT 1`,
+        // Stabilized at v1.49.638 W1C C5 Stage 3: add rowid tiebreaker so
+        // briefings written within the same millisecond sort deterministically
+        // by insertion order (most recent insertion first). Mirrors the
+        // listMeetings rowid fix at fcaacf057. Test exposure: auxiliary.test.ts
+        // 'getCurrentBriefing returns most recent briefing for project'.
+        `SELECT * FROM briefings WHERE project_id = ? ORDER BY generated_at DESC, rowid DESC LIMIT 1`,
       )
       .get(p) as BriefingRow | undefined;
     return row ? rowToBriefing(row) : null;
