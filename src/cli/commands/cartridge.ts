@@ -362,10 +362,24 @@ function handleFork(args: string[], io: CartridgeCommandIO): number {
  * Per-chipset migration record. The aggregate report is written to
  * `.planning/cartridge-migration-<date>.md` when `--all` is used.
  */
+/**
+ * Internal: a chipset.yaml file discovered under the migration root, along
+ * with its parsed shape classification. `'department'` means the file passes
+ * the department-shape gate (has agents/skills/teams at top level) and is
+ * eligible for adapter invocation. `'not-department'` means the file exists
+ * but doesn't match the gate — surfaced via v1.49.644 C2 path b (CF-17) so
+ * operators can see what was discovered-but-not-migrated rather than having
+ * those files silently dropped from the report.
+ */
+interface DiscoveredChipset {
+  path: string;
+  shape: 'department' | 'not-department';
+}
+
 export interface CartridgeMigrationRecord {
   sourcePath: string;
   targetPath: string;
-  status: 'migrated' | 'unfit' | 'failed' | 'dry-run' | 'idempotent';
+  status: 'migrated' | 'unfit' | 'failed' | 'dry-run' | 'idempotent' | 'not-department-shape';
   reason?: string;
   loadValidates: boolean;
 }
@@ -459,12 +473,23 @@ function migrateSingle(
  * Discover every `chipset.yaml` under `root`, skipping any directory whose
  * absolute path contains the `exclude` substring.
  *
+ * Returns each discovered file classified as `'department'` (matches the
+ * agents+skills+teams top-level gate, eligible for adapter migration) or
+ * `'not-department'` (exists and parses, but doesn't match the gate —
+ * e.g. header:-wrapped legacy, stub redirects, or unrelated chipset
+ * configurations like the den staff config). Non-department files were
+ * silently dropped from the report prior to v1.49.644 C2; they now
+ * surface as `status: not-department-shape` records (CF-17 path b).
+ *
+ * Unparseable files are still skipped silently — they would fail any
+ * follow-up adapter call anyway and aren't actionable as carry-forwards.
+ *
  * Returns deterministically-ordered absolute paths (alphabetic) so
  * migration logs are stable across runs.
  */
-function findLegacyChipsets(root: string, exclude?: string): string[] {
+function findLegacyChipsets(root: string, exclude?: string): DiscoveredChipset[] {
   const absRoot = resolve(root);
-  const found: string[] = [];
+  const found: DiscoveredChipset[] = [];
   function walk(dir: string): void {
     let entries;
     try {
@@ -478,22 +503,16 @@ function findLegacyChipsets(root: string, exclude?: string): string[] {
       if (entry.isDirectory()) {
         walk(child);
       } else if (entry.isFile() && entry.name === 'chipset.yaml') {
-        // Only count files that parse to a department-shape (have agents
-        // + skills + teams at the top level). Other `chipset.yaml` files
-        // (e.g. the `examples/chipsets/chipset/` root README sample) are
-        // skipped silently — the bulk command should not fail on
-        // unrelated files.
         try {
           const yaml = parseYaml(readFileSync(child, 'utf8'));
-          if (
-            yaml &&
-            typeof yaml === 'object' &&
-            !Array.isArray(yaml) &&
-            'agents' in (yaml as Record<string, unknown>) &&
-            'skills' in (yaml as Record<string, unknown>) &&
-            'teams' in (yaml as Record<string, unknown>)
-          ) {
-            found.push(child);
+          if (yaml && typeof yaml === 'object' && !Array.isArray(yaml)) {
+            const top = yaml as Record<string, unknown>;
+            const isDepartmentShape =
+              'agents' in top && 'skills' in top && 'teams' in top;
+            found.push({
+              path: child,
+              shape: isDepartmentShape ? 'department' : 'not-department',
+            });
           }
         } catch {
           // skip unparseable files
@@ -504,8 +523,27 @@ function findLegacyChipsets(root: string, exclude?: string): string[] {
   if (statSync(absRoot).isDirectory()) {
     walk(absRoot);
   }
-  found.sort();
+  found.sort((a, b) => a.path.localeCompare(b.path));
   return found;
+}
+
+/**
+ * Build a synthetic migration record for a discovered chipset.yaml that
+ * doesn't match the department-shape gate. No adapter is invoked; no file
+ * is written. The record gives operators visibility into what was
+ * discovered-but-not-migrated. CF-17 path b at v1.49.644 C2.
+ */
+function recordForNonDepartmentShape(sourcePath: string): CartridgeMigrationRecord {
+  const dir = sourcePath.replace(/[/\\][^/\\]+$/, '');
+  const targetPath = join(dir, 'cartridge.yaml');
+  return {
+    sourcePath,
+    targetPath,
+    status: 'not-department-shape',
+    reason:
+      "top-level YAML lacks agents+skills+teams; not eligible for department-adapter migration. Inspect chipset shape (e.g. 'header:'-wrapped legacy, stub redirect, or non-department configuration).",
+    loadValidates: false,
+  };
 }
 
 function handleMigrate(args: string[], io: CartridgeCommandIO): number {
@@ -540,7 +578,11 @@ function handleMigrate(args: string[], io: CartridgeCommandIO): number {
 
 function migrateAll(opts: MigrateAllOptions): CartridgeMigrationRecord[] {
   const sources = findLegacyChipsets(opts.root, opts.exclude);
-  return sources.map((s) => migrateSingle(s, opts.dryRun));
+  return sources.map((s) =>
+    s.shape === 'department'
+      ? migrateSingle(s.path, opts.dryRun)
+      : recordForNonDepartmentShape(s.path),
+  );
 }
 
 function summarizeMigration(
@@ -554,6 +596,7 @@ function summarizeMigration(
     'dry-run': 0,
     unfit: 0,
     failed: 0,
+    'not-department-shape': 0,
   };
   for (const r of records) tally[r.status]++;
   io.stdout(
@@ -564,10 +607,17 @@ function summarizeMigration(
       (tally.idempotent ? `  idempotent: ${tally.idempotent}` : '') +
       (tally['dry-run'] ? `  dry-run: ${tally['dry-run']}` : '') +
       (tally.unfit ? `  unfit: ${tally.unfit}` : '') +
+      (tally['not-department-shape']
+        ? `  not-department-shape: ${tally['not-department-shape']}`
+        : '') +
       (tally.failed ? `  failed: ${tally.failed}` : ''),
   );
   for (const r of records) {
-    if (r.status === 'unfit' || r.status === 'failed') {
+    if (
+      r.status === 'unfit' ||
+      r.status === 'failed' ||
+      r.status === 'not-department-shape'
+    ) {
       io.stdout(`  ${r.status}: ${r.sourcePath}`);
       if (r.reason) io.stdout(`    reason: ${r.reason}`);
     }

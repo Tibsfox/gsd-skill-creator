@@ -101,6 +101,41 @@ describe('closure-verify-cf.mjs', () => {
       const body = readFileSync(recordPathFor(cfId), 'utf-8');
       expect(body).toMatch(/STATUS:.*`resolved-upstream`/);
     });
+
+    // ─── Severity threshold parameter (v1.49.644 C3 — Lesson #10208) ───
+    describe('severity parameter', () => {
+      it('defaults to high when no severity given (backward compat)', () => {
+        const cfId = `${TEST_CF_PREFIX}-npm`;
+        runProbe(['npm-audit', cfId]);
+        const body = readFileSync(recordPathFor(cfId), 'utf-8');
+        expect(body).toContain('**Severity threshold:** `high`');
+        expect(body).toContain('npm audit --audit-level=high');
+      });
+
+      it('accepts explicit moderate severity and threads it through to npm', () => {
+        const cfId = `${TEST_CF_PREFIX}-npm`;
+        runProbe(['npm-audit', cfId, 'moderate']);
+        const body = readFileSync(recordPathFor(cfId), 'utf-8');
+        expect(body).toContain('**Severity threshold:** `moderate`');
+        expect(body).toContain('npm audit --audit-level=moderate');
+      });
+
+      it('accepts low + critical severities', () => {
+        const cfId = `${TEST_CF_PREFIX}-npm`;
+        for (const sev of ['low', 'critical']) {
+          runProbe(['npm-audit', cfId, sev]);
+          const body = readFileSync(recordPathFor(cfId), 'utf-8');
+          expect(body).toContain(`**Severity threshold:** \`${sev}\``);
+        }
+      });
+
+      it('rejects invalid severity with exit 1 and informative error', () => {
+        const r = runProbe(['npm-audit', `${TEST_CF_PREFIX}-npm`, 'bogus']);
+        expect(r.status).toBe(1);
+        expect(r.stderr).toContain('invalid severity');
+        expect(r.stderr).toContain('low, moderate, high, critical');
+      });
+    });
   });
 
   describe('file-snapshot probe', () => {
@@ -223,6 +258,30 @@ routing_rules: {resolved-upstream: retire}
       const r = runProbe(['auto', TEST_SPEC_ID]);
       expect(r.status).toBe(1);
       expect(r.stderr).toContain('invalid probe_type "auto"');
+    });
+
+    // ─── Severity threshold via probe_args.severity (v1.49.644 C3) ───
+    it('threads probe_args.severity through to npm-audit (apply-to-self for Lesson #10208)', () => {
+      const specYaml = `cf_id: ${TEST_SPEC_ID}
+probe_type: npm-audit
+probe_args:
+  severity: moderate
+routing_rules:
+  resolved-upstream: retire
+  still-real: proceed
+notes: |
+  Apply-to-self test for the v1.49.644 C3 threshold-enhancement.
+`;
+      spawnSync('mkdir', ['-p', SPEC_DIR]);
+      spawnSync('bash', ['-c', `cat > '${testSpecPath()}' <<'EOF'\n${specYaml}\nEOF`]);
+
+      const r = runProbe(['auto', TEST_SPEC_ID]);
+      expect([0, 1]).toContain(r.status);  // 0 if no vulns at moderate+, 1 otherwise
+      expect(r.stdout).toContain('severity=moderate');
+
+      const body = readFileSync(recordPathFor(TEST_SPEC_ID), 'utf-8');
+      expect(body).toContain('**Severity threshold:** `moderate`');
+      expect(body).toContain('npm audit --audit-level=moderate');
     });
   });
 });

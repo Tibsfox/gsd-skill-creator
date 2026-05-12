@@ -243,3 +243,122 @@ describe('departmentLegacyToUnified — chipset ordering determinism', () => {
     expect(out.chipsets.find((c) => c.kind === 'department')).toBeDefined();
   });
 });
+
+/**
+ * Family A `chipset:`-wrapped legacy shape (v1.49.644 C2 path a — CF-17).
+ *
+ * Family A chipsets (agc-educational, aminet-archive, minecraft-knowledge-world,
+ * unison-translation) nest identity under a `chipset:` sub-tree and serialize
+ * skills/agents/teams as arrays. The adapter pre-normalizes these shapes via
+ * `normalizeFamilyAShape` before validation.
+ */
+describe("departmentLegacyToUnified — Family A 'chipset:'-wrapped legacy", () => {
+  /**
+   * Minimum Family A fixture. Top-level `name` is absent; identity lives in
+   * the `chipset:` sub-tree. Skills/agents/teams are arrays with the Family A
+   * field conventions (tools as comma-separated string; team members instead
+   * of agents in team entries).
+   */
+  function familyAMinimal(name = 'agc-educational-analog'): Record<string, unknown> {
+    return {
+      schema_version: '1.0',
+      chipset: {
+        name,
+        version: '1.0.0',
+        description: 'Educational chipset for Family A adapter testing.',
+      },
+      skills: [
+        {
+          name: 'arch-reference',
+          source: 'infra/packs/x/skills/arch-reference/SKILL.md',
+          token_budget: '2.0%',
+          priority: 70,
+        },
+      ],
+      agents: [
+        {
+          name: 'simulator',
+          description: 'Manages simulation execution.',
+          skills: ['arch-reference'],
+          team: 'education',
+          model: 'opus',
+          tools: 'Read, Write, Bash',
+        },
+      ],
+      teams: [
+        {
+          name: 'education',
+          description: 'Education team for testing.',
+          topology: 'sequential',
+          lead_agent: 'simulator',
+          members: ['simulator'],
+        },
+      ],
+    };
+  }
+
+  it('hoists chipset.name/version/description to top-level identity', () => {
+    const yaml = stringifyYaml(familyAMinimal('my-family-a-cartridge'));
+    const out = departmentLegacyToUnified(yaml);
+    expect(out.name).toBe('my-family-a-cartridge');
+    expect(out.version).toBe('1.0.0');
+    expect(out.description).toContain('Educational chipset');
+  });
+
+  it('normalizes skills array to a map keyed by skill name', () => {
+    const yaml = stringifyYaml(familyAMinimal());
+    const out = departmentLegacyToUnified(yaml);
+    const dept = out.chipsets.find((c) => c.kind === 'department');
+    expect(dept).toBeDefined();
+    const skills = (dept as { skills: Record<string, { source?: string }> }).skills;
+    expect(skills['arch-reference']).toBeDefined();
+    expect(skills['arch-reference'].source).toBe('infra/packs/x/skills/arch-reference/SKILL.md');
+  });
+
+  it('synthesizes description fallback for skills missing description', () => {
+    const yaml = stringifyYaml(familyAMinimal());
+    const out = departmentLegacyToUnified(yaml);
+    const dept = out.chipsets.find((c) => c.kind === 'department');
+    const sk = (dept as { skills: Record<string, { description: string }> }).skills['arch-reference'];
+    expect(sk.description).toContain('Migrated from legacy skill arch-reference');
+  });
+
+  it('wraps agents array in {topology: router, agents: [...]} and splits tools string', () => {
+    const yaml = stringifyYaml(familyAMinimal());
+    const out = departmentLegacyToUnified(yaml);
+    const dept = out.chipsets.find((c) => c.kind === 'department');
+    const agentsBlock = (dept as { agents: { topology: string; agents: Array<{ tools?: string[]; role: string }> } }).agents;
+    expect(agentsBlock.topology).toBe('router');
+    expect(agentsBlock.agents).toHaveLength(1);
+    expect(agentsBlock.agents[0].tools).toEqual(['Read', 'Write', 'Bash']);
+    expect(agentsBlock.agents[0].role).toBe('education');  // fallback from `team` field
+  });
+
+  it('normalizes teams array to map and converts members → agents', () => {
+    const yaml = stringifyYaml(familyAMinimal());
+    const out = departmentLegacyToUnified(yaml);
+    const dept = out.chipsets.find((c) => c.kind === 'department');
+    const teams = (dept as { teams: Record<string, { agents: string[] }> }).teams;
+    expect(teams.education).toBeDefined();
+    expect(teams.education.agents).toEqual(['simulator']);
+  });
+
+  it('falls through when no chipset: sub-tree present (Family A detection is conservative)', () => {
+    // legacyMinimal has top-level name; should NOT trigger Family A path.
+    const legacy = legacyMinimal();
+    const yaml = stringifyYaml(legacy);
+    const out = departmentLegacyToUnified(yaml);
+    expect(out.name).toBe('business-department-v1.0');
+  });
+
+  it('falls through when top-level name is present even with chipset: sub-tree', () => {
+    const hybrid: Record<string, unknown> = {
+      ...legacyMinimal(),
+      chipset: { name: 'inner-name', version: '9.9.9', description: 'inner.' },
+    };
+    const yaml = stringifyYaml(hybrid);
+    const out = departmentLegacyToUnified(yaml);
+    expect(out.name).toBe('business-department-v1.0');  // top-level wins
+    expect(out.version).toBe('1.0.0');
+  });
+});
