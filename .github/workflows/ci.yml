@@ -69,4 +69,16 @@ jobs:
             --agents examples/agents/gsd \
             --teams examples/teams \
             --chipsets data/chipset
+      # Install project-claude hooks (closes v1.49.634 self-mod-guard gap).
+      # Hardened at v1.49.638 W1B.T2 v2: verbose mode (no --quiet) + post-install
+      # invariant. The v1 attempt used --local --quiet which silently no-op'd on
+      # the GitHub Actions runner — install reported success but
+      # .claude/hooks/self-mod-guard.js was never written. The `test -f` invariant
+      # fails CI immediately if the install doesn't actually install, so any
+      # future regression is loud rather than silent.
+      - name: Install project-claude hooks
+        run: |
+          node project-claude/install.cjs --local
+          test -f .claude/hooks/self-mod-guard.js || { echo "FATAL: self-mod-guard.js not installed after install.cjs --local"; ls -la .claude/hooks/ 2>&1 || true; exit 1; }
+          echo "Install verified: .claude/hooks/self-mod-guard.js present"
       - run: npx vitest run
