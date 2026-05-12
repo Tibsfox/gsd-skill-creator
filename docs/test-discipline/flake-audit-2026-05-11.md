@@ -109,6 +109,46 @@ Deferred to Cluster #6 (informational, not critical):
 
 ## Stage 3 — Apply targeted fixes
 
-See atomic commits per fix. Each fix is verified by running its target test file in isolation, then full-suite verification at end.
+Each fix verified by running its target test file in isolation; full-suite verification noted at end.
 
-(Populated by Stage 3 execution.)
+### Fixes applied
+
+| Site | Commit | Verification |
+|---|---|---|
+| `kb/store.ts:357` `getCurrentBriefing` ORDER BY rowid tiebreaker | `97a5ce3cf` | `auxiliary.test.ts` PASS |
+| `kb/store.ts:938` snapshots `taken_at` ORDER BY rowid tiebreaker | `deff7f9cd` | `snapshot-manager.test.ts` PASS |
+| `projects.test.ts` beforeEach hookTimeout 30000ms | `6d1282c64` | 6/6 PASS |
+| `findings.test.ts` beforeEach hookTimeout 30000ms (escalated from MED) | `6d1282c64` | 7/7 PASS |
+
+**Total: 4 fixes applied across 4 commits.**
+
+### Stage 2 corrections (discovered during Stage 3 execution)
+
+Two top-N sites turned out to be **already protected** — Stage 2 claims were wrong:
+
+- **`snapshot-manager.test.ts` hookTimeout** — claim at line 77 said "apply the matching `vi.setConfig({ hookTimeout: 30000 })`". On Stage 3 inspection: file's beforeEach already carries `}, 30000);` at the equivalent position. No-op.
+- **`meeting-store.test.ts` hookTimeout** — Stage 2 table row claimed unprotected. Verified at line 55: `}, 30000);` already present. No-op.
+
+Stage 2 enumeration method (grep `-L hookTimeout` on test files) generated false positives for these two: the hookTimeout is applied as a 2nd-arg to `beforeEach`, NOT via `vi.setConfig`, so `grep -L hookTimeout` returned files that DID have hookTimeout via the inline pattern. Method correction for future audits: also grep for `}, \d{4,6}\);` patterns adjacent to `beforeEach`/`beforeAll`.
+
+### Stage 3 escalation (discovered during fix attempt)
+
+- **`findings.test.ts` beforeEach hookTimeout** — Stage 1 ranked this MED-risk (line 62 table); was not in Stage 2 top-N. During Stage 3 verification of the `projects.test.ts` pattern, inspection revealed `findings.test.ts` had the identical unprotected pattern. Fix applied in same commit as `projects.test.ts` (`6d1282c64`).
+
+### Net Stage 3 vs Stage 2 reconciliation
+
+| Stage 2 top-N | Actual outcome |
+|---|---|
+| 1. `getCurrentBriefing` ORDER BY | FIXED `97a5ce3cf` |
+| 2. snapshots `taken_at` ORDER BY | FIXED `deff7f9cd` |
+| 3. `projects.test.ts` hookTimeout | FIXED `6d1282c64` |
+| 4. `meeting-store.test.ts` hookTimeout | NO-OP (already protected) |
+| 5. `snapshot-manager.test.ts` hookTimeout | NO-OP (already protected) |
+| (escalation) `findings.test.ts` hookTimeout | FIXED `6d1282c64` |
+
+3 of 5 top-N sites had real fixes (60% hit rate). 2 false positives from Stage 2 grep method. 1 escalation from MED tier.
+
+### Forward observations
+
+- **Substrate-probe discipline lesson:** Stage 2 should have invoked `read` + `grep '}, [0-9]\{4,\}'` cross-check on each candidate before classifying as needing the fix. The `grep -L hookTimeout` method matched only the `vi.setConfig` form, not the inline 2nd-arg form. Recommend audit method update at next iteration (carry-forward to Cluster #6 or absorbed into `docs/SUBSTRATE-PROBE-DISCIPLINE.md` v2).
+- **Pre-existing flake risk reduced:** 2 production-code ORDER BY tiebreakers + 2 test-side hookTimeout protections now in place. v1.49.638 ship-tip should not surface the listMeetings / snapshot-lifecycle-class flakes that hit v1.49.637 ship-time.
