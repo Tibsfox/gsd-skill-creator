@@ -938,9 +938,15 @@ export class KBStore implements IntelligenceKB {
     await this.ensureProjectDB(p);
     const pdb = this._requireProjectDB(p);
     const rows = pdb
-      .prepare(`SELECT * FROM snapshots WHERE project_id = ?
+      .prepare(
+        // Stabilized at v1.49.638 W1C C5 Stage 3: add rowid tiebreaker so
+        // snapshots taken within the same millisecond sort deterministically
+        // by insertion order. Mirrors listMeetings rowid fix at fcaacf057.
+        // Test exposure: snapshot-manager.test.ts T2 listSnapshots DESC order.
+        `SELECT * FROM snapshots WHERE project_id = ?
         AND taken_at IS NOT NULL AND taken_at != 'IN_PROGRESS'
-        ORDER BY taken_at DESC`)
+        ORDER BY taken_at DESC, rowid DESC`,
+      )
       .all(p) as SnapshotRow[];
     return rows.map(rowToSnapshot);
   }
