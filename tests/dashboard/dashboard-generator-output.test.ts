@@ -32,7 +32,16 @@ import { tmpdir } from 'node:os';
 
 // Always run by default at v1.49.598 W3; gate to opt-in at v1.49.599+ if needed.
 const PLANNING_DIR = resolve(__dirname, '../../.planning');
-const HAS_LIVE_PLANNING = existsSync(PLANNING_DIR) && statSync(PLANNING_DIR).isDirectory();
+// Tightened at v1.49.638 W1B.T2: require REQUIREMENTS.md presence specifically.
+// Reason: install.cjs --local creates .planning/skill-creator.json + .planning/patterns/
+// during CI setup, which made the prior `existsSync(.planning)` check pass on CI
+// runners with no real planning content, causing the dashboard test to run against
+// an empty .planning/ and fail. Gating on REQUIREMENTS.md ensures the test only
+// runs when a real planning tree (with parsed artifacts) is present.
+const HAS_LIVE_PLANNING =
+  existsSync(PLANNING_DIR) &&
+  statSync(PLANNING_DIR).isDirectory() &&
+  existsSync(join(PLANNING_DIR, 'REQUIREMENTS.md'));
 
 describe.skipIf(!HAS_LIVE_PLANNING)(
   '#10223 dashboard-generator non-empty output gate',
