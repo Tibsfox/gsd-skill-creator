@@ -1,0 +1,412 @@
+#!/usr/bin/env node
+/**
+ * closure-verify-cf.mjs — CF closure-verification probe runner.
+ *
+ * Codifies Lesson #10199's W0 closure-verification gate as an executable tool.
+ * Implements the four probe SHAPE categories from
+ * `docs/test-discipline/cf-closure-verification-templates.md` plus the
+ * hidden-transitive guard pattern from v1.49.640 C1 experience.
+ *
+ * Output convention: each probe writes to
+ *   `.planning/c0-<CF-id>-closure-verification-record.md`
+ *
+ * Created: v1.49.641 C2 (CF-12 closure)
+ */
+
+import { spawnSync } from 'node:child_process';
+import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
+import { dirname, resolve } from 'node:path';
+
+const REPO_ROOT = process.cwd();
+const PROBES = {
+  'npm-audit': probeNpmAudit,
+  'file-snapshot': probeFileSnapshot,
+  'upstream-version': probeUpstreamVersion,
+  'test-marker': probeTestMarker,
+  'hidden-transitive-guard': probeHiddenTransitiveGuard,
+};
+
+function usage(exitCode = 0) {
+  const out = exitCode === 0 ? process.stdout : process.stderr;
+  out.write(`Usage:
+  node scripts/closure-verify-cf.mjs <probe-type> <CF-id> [args...]
+
+Probe types:
+  npm-audit                <CF-id>                    Run \`npm audit --audit-level=high --json\` and record advisories
+  file-snapshot            <CF-id> <path>             Snapshot a config/state file (line count + first 20 lines)
+  upstream-version         <CF-id> <package>          Check current upstream versions of a package
+  test-marker              <CF-id> <test-file>        Run a specific test file and capture pass/fail state
+  hidden-transitive-guard  <package>                  Pre-flight check for path-d-style root-dep removal
+                                                       (lists src/ imports satisfied by <package>'s subtree)
+
+Examples:
+  node scripts/closure-verify-cf.mjs npm-audit CF-7
+  node scripts/closure-verify-cf.mjs file-snapshot CF-9 .planning/cartridge-migration-phase2.md
+  node scripts/closure-verify-cf.mjs upstream-version CF-7 gsd-pi
+  node scripts/closure-verify-cf.mjs hidden-transitive-guard gsd-pi
+
+Records: written to .planning/c0-<CF-id>-closure-verification-record.md (gitignored).
+Discipline: docs/MISSION-PACKAGE-DISCIPLINE.md \xa71 (Lesson #10199 codified).
+`);
+  process.exit(exitCode);
+}
+
+function ensureRecordDir() {
+  const dir = resolve(REPO_ROOT, '.planning');
+  if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
+}
+
+function recordPath(cfId) {
+  return resolve(REPO_ROOT, '.planning', `c0-${cfId.toLowerCase()}-closure-verification-record.md`);
+}
+
+function writeRecord(cfId, body) {
+  ensureRecordDir();
+  const path = recordPath(cfId);
+  writeFileSync(path, body, 'utf-8');
+  return path;
+}
+
+function probeNpmAudit(args) {
+  const [cfId] = args;
+  if (!cfId) usage(1);
+
+  console.log(`[closure-verify] npm-audit probe for ${cfId}...`);
+  const res = spawnSync('npm', ['audit', '--audit-level=high', '--json'], {
+    cwd: REPO_ROOT,
+    encoding: 'utf-8',
+  });
+
+  let parsed = null;
+  try { parsed = JSON.parse(res.stdout); } catch { /* leave null */ }
+
+  const vulns = parsed?.metadata?.vulnerabilities ?? null;
+  const totalHighCritical = vulns ? vulns.high + vulns.critical : null;
+  const status = res.status === 0 ? 'resolved-upstream' : 'still-real';
+
+  const advisories = [];
+  for (const [pkg, info] of Object.entries(parsed?.vulnerabilities ?? {})) {
+    advisories.push({
+      package: pkg,
+      severity: info.severity ?? '?',
+      range: info.range ?? '?',
+      ids: (info.via ?? [])
+        .filter(v => typeof v === 'object' && v.source)
+        .map(v => v.url ?? v.source)
+        .slice(0, 3),
+    });
+  }
+
+  const body = `# C0 — ${cfId} Closure-Verification Record (npm-audit probe)
+
+**Probed at:** ${new Date().toISOString()}
+**Probe command:** \`npm audit --audit-level=high --json\`
+**Exit code:** ${res.status}
+
+## Status
+
+**STATUS:** \`${status}\`
+
+${vulns ? `\`\`\`
+metadata.vulnerabilities:
+  info:     ${vulns.info ?? 0}
+  low:      ${vulns.low ?? 0}
+  moderate: ${vulns.moderate ?? 0}
+  high:     ${vulns.high ?? 0}
+  critical: ${vulns.critical ?? 0}
+  total:    ${vulns.total ?? 0}
+\`\`\`` : 'JSON parse failed; see raw output below.'}
+
+## Advisories
+
+${advisories.length === 0
+  ? '_None at high+critical level._'
+  : '| Package | Severity | Range | Advisory ID(s) |\n|---|---|---|---|\n' +
+    advisories.map(a => `| \`${a.package}\` | ${a.severity} | \`${a.range}\` | ${a.ids.join('<br>') || '—'} |`).join('\n')}
+
+## Routing decision
+
+${status === 'resolved-upstream'
+  ? 'CF is RESOLVED. Retire from carry-forward; no component-spec needed.'
+  : `CF is STILL REAL. Total high+critical advisories: ${totalHighCritical}. Proceed with closure path (b/c/d/e per MISSION-PACKAGE-DISCIPLINE.md \xa71.3).`}
+
+## See also
+
+- \`docs/MISSION-PACKAGE-DISCIPLINE.md\` \xa71.3 — gate discipline
+- \`docs/test-discipline/cf-closure-verification-templates.md\` — Template 1 (tool-output)
+
+---
+
+_Auto-generated by \`scripts/closure-verify-cf.mjs npm-audit ${cfId}\`._
+`;
+
+  const written = writeRecord(cfId, body);
+  console.log(`[closure-verify] STATUS: ${status} (high+critical: ${totalHighCritical ?? '?'})`);
+  console.log(`[closure-verify] wrote: ${written}`);
+  return status === 'resolved-upstream' ? 0 : 1;
+}
+
+function probeFileSnapshot(args) {
+  const [cfId, filePath] = args;
+  if (!cfId || !filePath) usage(1);
+
+  console.log(`[closure-verify] file-snapshot probe for ${cfId}: ${filePath}...`);
+  const abs = resolve(REPO_ROOT, filePath);
+
+  let status = 'inconclusive';
+  let body;
+
+  if (!existsSync(abs)) {
+    status = 'resolved-upstream';
+    body = `# C0 — ${cfId} Closure-Verification Record (file-snapshot probe)
+
+**Probed at:** ${new Date().toISOString()}
+**Probe target:** \`${filePath}\`
+**File present:** NO
+
+## Status
+
+**STATUS:** \`${status}\`
+
+The target file is absent — CF may be moot.
+
+## Routing decision
+
+Retire CF if file absence indicates resolution. Operator confirms.
+
+---
+
+_Auto-generated by \`scripts/closure-verify-cf.mjs file-snapshot ${cfId} ${filePath}\`._
+`;
+  } else {
+    const content = readFileSync(abs, 'utf-8');
+    const lines = content.split('\n');
+    const sample = lines.slice(0, 20).join('\n');
+    const sizeBytes = statSync(abs).size;
+
+    body = `# C0 — ${cfId} Closure-Verification Record (file-snapshot probe)
+
+**Probed at:** ${new Date().toISOString()}
+**Probe target:** \`${filePath}\`
+**File present:** YES (${lines.length} lines, ${sizeBytes} bytes)
+
+## Status
+
+**STATUS:** \`inconclusive\` (snapshot only; operator interprets vs predecessor state)
+
+## First 20 lines (snapshot)
+
+\`\`\`
+${sample}
+\`\`\`
+
+## Routing decision
+
+Operator compares against predecessor state. If identical: route forward unchanged. If changed: investigate.
+
+---
+
+_Auto-generated by \`scripts/closure-verify-cf.mjs file-snapshot ${cfId} ${filePath}\`._
+`;
+    status = 'inconclusive';
+  }
+
+  const written = writeRecord(cfId, body);
+  console.log(`[closure-verify] STATUS: ${status}`);
+  console.log(`[closure-verify] wrote: ${written}`);
+  return 0;
+}
+
+function probeUpstreamVersion(args) {
+  const [cfId, pkgName] = args;
+  if (!cfId || !pkgName) usage(1);
+
+  console.log(`[closure-verify] upstream-version probe for ${cfId}: ${pkgName}...`);
+  const versions = spawnSync('npm', ['view', pkgName, 'versions', '--json'], {
+    cwd: REPO_ROOT,
+    encoding: 'utf-8',
+  });
+  const deprecated = spawnSync('npm', ['view', pkgName, 'deprecated'], {
+    cwd: REPO_ROOT,
+    encoding: 'utf-8',
+  });
+
+  let parsedVersions = [];
+  try { parsedVersions = JSON.parse(versions.stdout) ?? []; } catch { /* leave empty */ }
+  const last5 = parsedVersions.slice(-5);
+  const deprecatedMsg = (deprecated.stdout ?? '').trim();
+
+  const body = `# C0 — ${cfId} Closure-Verification Record (upstream-version probe)
+
+**Probed at:** ${new Date().toISOString()}
+**Probe target:** \`${pkgName}\`
+
+## Status
+
+**STATUS:** \`inconclusive\` (operator interprets vs CF spec version range)
+
+## Versions
+
+- Total published versions: ${parsedVersions.length}
+- Latest 5: \`${last5.join('\`, \`')}\`
+
+## Deprecation status
+
+${deprecatedMsg ? `\`\`\`\n${deprecatedMsg}\n\`\`\`` : '_No deprecation message._'}
+
+## Routing decision
+
+If a non-vulnerable version is available outside the CF's flagged range: candidate for closure via upgrade.
+If the package itself is deprecated: candidate for closure via replacement.
+Otherwise: still real; proceed with closure path.
+
+---
+
+_Auto-generated by \`scripts/closure-verify-cf.mjs upstream-version ${cfId} ${pkgName}\`._
+`;
+
+  const written = writeRecord(cfId, body);
+  console.log(`[closure-verify] latest 5 versions: ${last5.join(', ')}`);
+  console.log(`[closure-verify] wrote: ${written}`);
+  return 0;
+}
+
+function probeTestMarker(args) {
+  const [cfId, testFile] = args;
+  if (!cfId || !testFile) usage(1);
+
+  console.log(`[closure-verify] test-marker probe for ${cfId}: ${testFile}...`);
+  const res = spawnSync('npx', ['vitest', 'run', testFile, '--reporter=dot'], {
+    cwd: REPO_ROOT,
+    encoding: 'utf-8',
+  });
+  const status = res.status === 0 ? 'resolved-upstream' : 'still-real';
+  const stdoutTail = (res.stdout ?? '').split('\n').slice(-15).join('\n');
+
+  const body = `# C0 — ${cfId} Closure-Verification Record (test-marker probe)
+
+**Probed at:** ${new Date().toISOString()}
+**Probe command:** \`npx vitest run ${testFile} --reporter=dot\`
+**Exit code:** ${res.status}
+
+## Status
+
+**STATUS:** \`${status}\`
+
+## Probe output (tail)
+
+\`\`\`
+${stdoutTail}
+\`\`\`
+
+## Routing decision
+
+${status === 'resolved-upstream'
+  ? 'Test passes locally — CF may be closed. Verify CI also passes for full confidence.'
+  : 'Test fails locally — CF is still real. Proceed with closure work.'}
+
+**Hidden trap:** check whether the test uses \`it.runIf(...)\` skip-guards. A "passing" test may be silently skipped. Inspect the test file source to confirm it actually runs.
+
+---
+
+_Auto-generated by \`scripts/closure-verify-cf.mjs test-marker ${cfId} ${testFile}\`._
+`;
+
+  const written = writeRecord(cfId, body);
+  console.log(`[closure-verify] STATUS: ${status}`);
+  console.log(`[closure-verify] wrote: ${written}`);
+  return res.status === 0 ? 0 : 1;
+}
+
+function probeHiddenTransitiveGuard(args) {
+  const [pkgName] = args;
+  if (!pkgName) usage(1);
+
+  console.log(`[closure-verify] hidden-transitive-guard probe for ${pkgName}...`);
+  console.log(`[closure-verify]   listing transitive subtree of ${pkgName}...`);
+  const lsResult = spawnSync('npm', ['ls', pkgName, '--depth=Infinity', '--json'], {
+    cwd: REPO_ROOT,
+    encoding: 'utf-8',
+  });
+
+  let tree = null;
+  try { tree = JSON.parse(lsResult.stdout); } catch { /* leave null */ }
+
+  const subtreePkgs = new Set();
+  function collect(node) {
+    if (!node || typeof node !== 'object') return;
+    if (node.dependencies) {
+      for (const [name, child] of Object.entries(node.dependencies)) {
+        subtreePkgs.add(name);
+        collect(child);
+      }
+    }
+  }
+  collect(tree);
+  subtreePkgs.delete(pkgName);  // exclude root
+
+  console.log(`[closure-verify]   subtree size: ${subtreePkgs.size} packages`);
+  console.log(`[closure-verify]   grepping src/ for direct imports of any subtree package...`);
+
+  const hits = [];
+  for (const pkg of subtreePkgs) {
+    const grep = spawnSync('grep', ['-rl', `from '${pkg}'`, 'src/'], {
+      cwd: REPO_ROOT,
+      encoding: 'utf-8',
+    });
+    if (grep.status === 0 && grep.stdout.trim().length > 0) {
+      hits.push({ pkg, files: grep.stdout.trim().split('\n') });
+    }
+  }
+
+  const hasHits = hits.length > 0;
+  const body = `# Hidden-Transitive Guard Report (${pkgName})
+
+**Probed at:** ${new Date().toISOString()}
+**Root dep:** \`${pkgName}\`
+**Subtree size:** ${subtreePkgs.size} packages
+
+## ${hasHits ? '⚠️  Hidden transitives detected' : '✓ No hidden transitives detected'}
+
+${hasHits
+  ? `Before removing \`${pkgName}\` from \`package.json\`, declare these packages as direct deps to avoid breaking src/ imports:
+
+| Package | src/ files importing it |
+|---|---|
+${hits.map(h => `| \`${h.pkg}\` | ${h.files.map(f => `\`${f}\``).join('<br>')} |`).join('\n')}
+
+**Recommended sequence:**
+\`\`\`bash
+${hits.map(h => `npm install ${h.pkg} --save`).join('\n')}
+# THEN remove the root dep:
+# (edit package.json to remove "${pkgName}")
+npm install
+\`\`\``
+  : `Removing \`${pkgName}\` from \`package.json\` is safe with respect to direct src/ imports. (No transitive in its subtree is imported by source code.)
+
+Verify also: \`tools/\`, \`tests/\`, and \`desktop/\` for any imports the guard didn't check.`}
+
+---
+
+_Auto-generated by \`scripts/closure-verify-cf.mjs hidden-transitive-guard ${pkgName}\`._
+_Source: Lesson #10204 (v1.49.640 C1 experience)._
+`;
+
+  const written = writeRecord(`htg-${pkgName.replace(/[^a-z0-9-]/gi, '-')}`, body);
+  console.log(`[closure-verify] HIDDEN TRANSITIVES: ${hasHits ? hits.length : 0}`);
+  console.log(`[closure-verify] wrote: ${written}`);
+  return hasHits ? 1 : 0;
+}
+
+// ─── Entry point ───────────────────────────────────────────────────────
+
+const [probeType, ...probeArgs] = process.argv.slice(2);
+
+if (!probeType || probeType === '--help' || probeType === '-h') usage(0);
+if (!(probeType in PROBES)) {
+  process.stderr.write(`closure-verify-cf: unknown probe type "${probeType}"\n`);
+  usage(1);
+}
+
+const result = PROBES[probeType](probeArgs);
+process.exit(result ?? 0);

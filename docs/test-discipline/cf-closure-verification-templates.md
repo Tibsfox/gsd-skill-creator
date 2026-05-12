@@ -178,7 +178,29 @@ done
 4. Run the probe; capture output at `.planning/c0-cf{N}-closure-verification-record.md`.
 5. Route per outcome.
 
+**Tooling shortcut (v1.49.641 C2):** for the four standard shapes plus the hidden-transitive guard, use `scripts/closure-verify-cf.mjs` instead of copy-pasting:
+
+```bash
+node scripts/closure-verify-cf.mjs npm-audit CF-N            # Template 1
+node scripts/closure-verify-cf.mjs test-marker CF-N <file>   # Template 2
+node scripts/closure-verify-cf.mjs file-snapshot CF-N <path> # Template 3
+node scripts/closure-verify-cf.mjs upstream-version CF-N <pkg> # Template 4
+node scripts/closure-verify-cf.mjs hidden-transitive-guard <pkg> # Hidden-transitive guard
+```
+
+The tool writes the record file automatically and prints a status summary.
+
 If a CF's shape doesn't match any template, **author a new template here** as part of the W0 work. The catalogue grows as the codebase encounters more CF shapes.
+
+## Vitest reporter note (v1.49.640 retro item)
+
+For Template 2 (test-marker shape) background runs, **avoid the `| tail -N` pipe** — it buffers all output until vitest exits, hiding progress for 5-10 minute suites. Better alternatives:
+
+- **`--reporter=tap-flat`** or `--reporter=tap` — emits per-test results progressively; doesn't buffer on pipe
+- **`--outputFile=<path>`** with `--reporter=json` — writes structured output directly to a file (no pipe needed)
+- Drop the `tail` filter entirely and write full output via `> file 2>&1`
+
+Surfaced from v1.49.640 C1 experience where the buffered `tail -10` pipe hid 10+ minutes of in-progress state, costing ~5min of operator-clock-time uncertainty per cycle.
 
 ---
 

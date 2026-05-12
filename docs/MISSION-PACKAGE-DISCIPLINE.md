@@ -148,11 +148,33 @@ Cluster N+k carry-forwards are evidence: the predecessor cluster's hypothesis di
 
 Practical heuristic: if the predecessor's W1 implementation produced a definitive *null result* (no signal where the hypothesis predicted signal), treat the null result as falsifying evidence rather than as "we didn't look hard enough" evidence. The v1.49.639 C1 trace instrumentation produced zero TRACE markers in CI; this null result was *the* diagnostic signal — not a failure of instrumentation.
 
-### 1.7 Tooling support (future improvement candidate)
+### 1.7 Tooling support (codified at v1.49.641 C2)
 
-A future operational improvement: a `scripts/closure-verify-cf.mjs` tool that reads a `.planning/c0-cf{N}-closure-verification-record.md` template and runs the embedded probe automatically. Out of scope for v1.49.640.
+`scripts/closure-verify-cf.mjs` codifies this discipline as an executable probe runner. Implemented at v1.49.641 C2 (closes CF-12).
 
-Forward-routed to Cluster #8 as a discretionary improvement candidate. Not blocking; not on the carry-forward path.
+Five probe types map to the four CF SHAPE categories from `docs/test-discipline/cf-closure-verification-templates.md` plus a built-in hidden-transitive guard:
+
+| Probe | Use case | Maps to |
+|---|---|---|
+| `npm-audit <CF-id>` | Tool-output shape — supply-chain advisories | Template 1 |
+| `file-snapshot <CF-id> <path>` | Config-state shape — file presence + first 20 lines | Template 3 |
+| `upstream-version <CF-id> <package>` | Upstream-spec shape — version availability + deprecation | Template 4 |
+| `test-marker <CF-id> <test-file>` | Test-marker shape — local vitest pass/fail | Template 2 |
+| `hidden-transitive-guard <package>` | Pre-flight for path-d-style root-dep removal | Lesson #10204 |
+
+Each probe writes a record to `.planning/c0-<CF-id>-closure-verification-record.md` (gitignored) with the standard frontmatter-like header + status + routing-decision sections.
+
+Usage:
+
+```bash
+# Verify a CF is still real:
+node scripts/closure-verify-cf.mjs npm-audit CF-7
+
+# Pre-flight check before removing a phantom dep:
+node scripts/closure-verify-cf.mjs hidden-transitive-guard <pkg-to-remove>
+```
+
+Forward improvement (out of scope; carry forward if useful): a probe-spec format (e.g., YAML at `.planning/cf-probes/<CF-id>.yaml`) so each CF carries its own probe spec rather than relying on the operator to know which probe type matches each CF.
 
 ---
 
