@@ -89,6 +89,8 @@ At any mission-package W0 where a CF has been routed through **4 or more predece
 
 > **"Could the framing be wrong?"**
 
+**Track record:** the §1.4 review has been applied twice (v1.49.641 against CF-11; v1.49.643 against CF-15). Both times surfaced a framing-error verdict; both times retired the CF. The discipline is producing consistent value at 4+ cluster thresholds. Future cluster authors should treat §1.4 as load-bearing, not optional. See `.planning/c0-cf11-reframing-review.md` and `.planning/c0-cf15-reframing-review.md` for canonical applications.
+
 Surface alternative framings:
 
 - **precondition vs behavior** — is the failure about what's allowed to run, or about what actually happens?
