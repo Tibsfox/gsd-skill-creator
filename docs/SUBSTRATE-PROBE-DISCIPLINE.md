@@ -242,6 +242,7 @@ Per Lesson #10192: **5-15 min per substrate per component.** The cost-of-NOT-doi
 - **Generalizes:** v1.49.635 Meta-Lesson #10180 (audit underestimates fixture scope)
 - **Sibling discipline doc:** `perf-assertion-warmup.md` (perf-test cold-start failure pattern; same lesson-→-doc codification structure)
 - **Sibling discipline doc:** `fragile-test-pattern.md` (test-flake taxonomy)
+- **Sibling discipline doc (one layer up):** `MISSION-PACKAGE-DISCIPLINE.md` — closure-verification gate for multi-cluster CF chains (Lesson #10199; v1.49.640 C2). Substrate-probe verifies the SHAPE of what's being worked on; closure-verification verifies whether the WORK is still needed.
 - **v1.49.638 W0 application:** `.planning/c1-atlas-lru-architectural-fix-design.md` §1, `.planning/c2-story-gate-ordering-design.md` §1
 - **Wave plan template:** mission-package component specs at `.planning/missions/v1-49-638-housekeeping-cluster-5/components/`
 
