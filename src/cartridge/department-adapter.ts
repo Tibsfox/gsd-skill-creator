@@ -184,6 +184,117 @@ function buildCollegeChipset(legacy: Record<string, unknown>): CollegeChipset | 
 }
 
 /**
+ * Detect + normalize Family A `chipset:`-wrapped legacy shape (v1.49.644 C2 path a).
+ *
+ * Family A chipsets (`agc-educational`, `aminet-archive`,
+ * `minecraft-knowledge-world`, `unison-translation`) wrap identity fields
+ * inside a `chipset:` sub-tree instead of placing them at top level:
+ *
+ *     chipset:
+ *       name: <id>
+ *       version: <ver>
+ *       description: <desc>
+ *     skills:  [...]   # array of {name, source, ...}
+ *     agents:  [...]   # array of {name, description, skills, team, model}
+ *     teams:   [...]   # array of {name, description, members}
+ *
+ * If a `chipset:` sub-tree is detected with top-level `name` absent, the
+ * adapter:
+ *   1. Hoists `chipset.name/version/description` to the top level
+ *   2. Normalizes `skills:[]` → `skills:{[name]:{description?, source?, ...}}`
+ *   3. Wraps `agents:[]` → `{topology:'router', agents:[{name, role, ...}]}`
+ *   4. Normalizes `teams:[]` → `teams:{[name]:{description, agents, ...}}`
+ *
+ * Returns the normalized record in-place; if no Family A shape detected,
+ * returns the original record unchanged.
+ *
+ * Field synthesis (when source lacks required schema fields):
+ *   - skill.description fallback: "Migrated from legacy skill <name>"
+ *   - agent.role fallback: agent.team || 'agent'
+ *   - teams[].agents derives from teams[].members
+ */
+function normalizeFamilyAShape(legacy: Record<string, unknown>): Record<string, unknown> {
+  const inner = legacy.chipset as Record<string, unknown> | undefined;
+  if (!inner || typeof inner !== 'object' || Array.isArray(inner)) {
+    return legacy;  // No `chipset:` sub-tree → not Family A
+  }
+  if (typeof legacy.name === 'string' && legacy.name.length > 0) {
+    return legacy;  // Top-level name already present → not Family A
+  }
+
+  const normalized: Record<string, unknown> = { ...legacy };
+  // 1. Hoist identity
+  if (typeof inner.name === 'string') normalized.name = inner.name;
+  if (typeof inner.version === 'string') normalized.version = inner.version;
+  if (typeof inner.description === 'string') normalized.description = inner.description;
+
+  // 2. Normalize skills array → map
+  if (Array.isArray(legacy.skills)) {
+    const skillsMap: Record<string, Record<string, unknown>> = {};
+    for (const s of legacy.skills as Array<Record<string, unknown>>) {
+      const skillName = typeof s.name === 'string' ? s.name : null;
+      if (!skillName) continue;
+      const { name: _omit, ...rest } = s;
+      skillsMap[skillName] = {
+        description:
+          typeof rest.description === 'string'
+            ? rest.description
+            : `Migrated from legacy skill ${skillName}`,
+        ...rest,
+      };
+    }
+    normalized.skills = skillsMap;
+  }
+
+  // 3. Wrap agents array → {topology, agents}
+  if (Array.isArray(legacy.agents)) {
+    const wrappedAgents = (legacy.agents as Array<Record<string, unknown>>).map((a) => {
+      const out: Record<string, unknown> = { ...a };
+      // Field synthesis: required `role`
+      out.role =
+        typeof a.role === 'string' && a.role.length > 0
+          ? a.role
+          : typeof a.team === 'string' && a.team.length > 0
+            ? a.team
+            : 'agent';
+      // Family A serializes `tools` as a comma-separated string; schema wants string[]
+      if (typeof a.tools === 'string') {
+        out.tools = (a.tools as string)
+          .split(',')
+          .map((t) => t.trim())
+          .filter((t) => t.length > 0);
+      }
+      return out;
+    });
+    normalized.agents = {
+      topology: 'router',
+      agents: wrappedAgents,
+    };
+  }
+
+  // 4. Normalize teams array → map
+  if (Array.isArray(legacy.teams)) {
+    const teamsMap: Record<string, Record<string, unknown>> = {};
+    for (const t of legacy.teams as Array<Record<string, unknown>>) {
+      const teamName = typeof t.name === 'string' ? t.name : null;
+      if (!teamName) continue;
+      const { name: _omit, members, ...rest } = t;
+      teamsMap[teamName] = {
+        ...rest,
+        description:
+          typeof rest.description === 'string'
+            ? rest.description
+            : `Migrated from legacy team ${teamName}`,
+        agents: Array.isArray(members) ? members : Array.isArray(rest.agents) ? rest.agents : [],
+      };
+    }
+    normalized.teams = teamsMap;
+  }
+
+  return normalized;
+}
+
+/**
  * Adapt a LEGACY `chipset.yaml` YAML string to a UNIFIED `Cartridge`
  * with `kind: 'department'` + optional `kind: 'grove'` + optional
  * `kind: 'college'` chipsets.
@@ -192,6 +303,9 @@ function buildCollegeChipset(legacy: Record<string, unknown>): CollegeChipset | 
  * REQUIRED field (`name`, `version`, `description`, `skills`, `agents`,
  * `teams`). Optional fields (`grove`, `college`, `customization`,
  * `evaluation`) are propagated when present.
+ *
+ * v1.49.644 C2 path a: Family A `chipset:`-wrapped legacy shapes are
+ * pre-normalized via `normalizeFamilyAShape` before validation.
  */
 export function departmentLegacyToUnified(
   legacyYaml: string,
@@ -204,7 +318,7 @@ export function departmentLegacyToUnified(
       '<root>',
     );
   }
-  const legacy = parsed as Record<string, unknown>;
+  const legacy = normalizeFamilyAShape(parsed as Record<string, unknown>);
 
   // Required top-level fields.
   for (const required of ['name', 'version', 'description'] as const) {
