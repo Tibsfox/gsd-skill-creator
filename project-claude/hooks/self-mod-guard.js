@@ -28,6 +28,60 @@
 const fs = require('fs');
 const path = require('path');
 
+// CI-gated tracing for v1.49.639 C1 self-mod-guard CI divergence diagnostic.
+// TRACE blocks fire only when GITHUB_ACTIONS=true OR SC_TRACE=1; otherwise
+// no-op for zero local-perf cost. Output goes to stderr (kept off the
+// decision stdout channel). All trace operations are wrapped to prevent
+// instrumentation bugs from breaking the hook's allow/block contract.
+const SC_TRACE = process.env.GITHUB_ACTIONS === 'true' || process.env.SC_TRACE === '1';
+function trace(label, payload) {
+  if (!SC_TRACE) return;
+  try {
+    const body = typeof payload === 'string' ? payload : JSON.stringify(payload);
+    process.stderr.write(`[TRACE ${label}] ${body}\n`);
+  } catch {
+    // Never let trace failure break the hook
+  }
+}
+
+// Entry-time substrate dump — captures "what's the environment when this
+// hook fires." Diverging values local-vs-CI isolate the v1.49.634 root cause.
+if (SC_TRACE) {
+  try {
+    let selfStat = null;
+    try {
+      const s = fs.statSync(__filename);
+      selfStat = { mode: s.mode.toString(8), uid: s.uid, gid: s.gid, size: s.size };
+    } catch (e) {
+      selfStat = { error: e.message };
+    }
+    trace('entry:env', {
+      HOME: process.env.HOME,
+      USER: process.env.USER,
+      PATH: process.env.PATH,
+      PWD: process.env.PWD,
+      XDG_CONFIG_HOME: process.env.XDG_CONFIG_HOME,
+      GITHUB_ACTIONS: process.env.GITHUB_ACTIONS,
+      CI: process.env.CI,
+      NODE_ENV: process.env.NODE_ENV,
+      SC_SELF_MOD: process.env.SC_SELF_MOD,
+      SC_INSTALL_CALLER: process.env.SC_INSTALL_CALLER,
+      npm_lifecycle_event: process.env.npm_lifecycle_event,
+    });
+    trace('entry:proc', {
+      cwd: process.cwd(),
+      argv: process.argv,
+      umask: process.umask().toString(8),
+      pid: process.pid,
+      ppid: process.ppid,
+      platform: process.platform,
+      node: process.version,
+      __filename,
+    });
+    trace('entry:self-stat', selfStat);
+  } catch {}
+}
+
 // Module-scope compiled regexes (cached for latency)
 const PROTECTED_PATH_RE = /(?:^|\/)\.claude\/(?:skills|agents|hooks)(?:\/|$)/;
 const BASH_PROTECTED_TOKEN_RE = /(?:^|[\s'"=])(?:[^\s'"=]*\/)?\.claude\/(?:skills|agents|hooks)\/[^\s'";|&]+/;
@@ -40,6 +94,7 @@ const SPEC_REF = '.planning/missions/v1-49-585-concerns-cleanup/components/01-se
 let input = '';
 const stdinTimeout = setTimeout(() => {
   // Stdin never closed — silent ALLOW (default-permissive on malformed input)
+  trace('exit', { exitCode: 0, output: 'allow-on-stdin-timeout' });
   process.stdout.write('{}');
   process.exit(0);
 }, 3000);
@@ -48,11 +103,15 @@ process.stdin.setEncoding('utf8');
 process.stdin.on('data', (chunk) => { input += chunk; });
 process.stdin.on('end', () => {
   clearTimeout(stdinTimeout);
+  trace('stdin:end', { length: input.length, head: input.slice(0, 200) });
   try {
     const data = input ? JSON.parse(input) : {};
+    trace('stdin:parsed', { tool_name: data.tool_name, has_tool_input: Boolean(data.tool_input) });
     const decision = decide(data);
+    trace('decide:result', { action: decision.action, override: decision.override || null, matched: Boolean(decision.matchedPath) });
     if (decision.action === 'block') {
       logDecision('block', data, decision);
+      trace('exit', { exitCode: 0, output: 'block-json' });
       process.stdout.write(JSON.stringify({
         decision: 'block',
         reason: decision.reason,
@@ -61,11 +120,13 @@ process.stdin.on('end', () => {
       if (decision.override) {
         logDecision('allow-override', data, decision);
       }
+      trace('exit', { exitCode: 0, output: 'allow' });
       process.stdout.write('{}');
     }
     process.exit(0);
-  } catch {
+  } catch (e) {
     // Malformed input — silent ALLOW (never block on bad JSON)
+    trace('exit', { exitCode: 0, output: 'allow-on-error', error: e && e.message });
     process.stdout.write('{}');
     process.exit(0);
   }
@@ -74,24 +135,29 @@ process.stdin.on('end', () => {
 function decide(data) {
   const toolName = data.tool_name || '';
   const toolInput = data.tool_input || {};
+  trace('decide:enter', { toolName });
 
   // Out of scope: anything except Write/Edit/MultiEdit/Bash
   if (!['Write', 'Edit', 'MultiEdit', 'Bash'].includes(toolName)) {
+    trace('decide:branch', 'out-of-scope-tool');
     return { action: 'allow' };
   }
 
   // ALLOW overrides (precedence: explicit env > install caller > npm caller)
   if (process.env.SC_SELF_MOD === '1') {
+    trace('decide:branch', 'override-SC_SELF_MOD');
     return matchesProtected(toolName, toolInput)
       ? { action: 'allow', override: 'SC_SELF_MOD' }
       : { action: 'allow' };
   }
   if (process.env.SC_INSTALL_CALLER === 'project-claude') {
+    trace('decide:branch', 'override-SC_INSTALL_CALLER');
     return matchesProtected(toolName, toolInput)
       ? { action: 'allow', override: 'SC_INSTALL_CALLER' }
       : { action: 'allow' };
   }
   if (process.env.npm_lifecycle_event === 'install-project-claude') {
+    trace('decide:branch', 'override-npm_lifecycle_event');
     return matchesProtected(toolName, toolInput)
       ? { action: 'allow', override: 'npm_lifecycle_event' }
       : { action: 'allow' };
@@ -100,9 +166,11 @@ function decide(data) {
   // BLOCK conditions
   const match = matchesProtected(toolName, toolInput);
   if (!match) {
+    trace('decide:branch', 'no-protected-match');
     return { action: 'allow' };
   }
 
+  trace('decide:branch', 'block-protected-match');
   const reason = buildBlockReason(toolName, match);
   return {
     action: 'block',
