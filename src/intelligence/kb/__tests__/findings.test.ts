@@ -68,7 +68,7 @@ describe('intelligence/kb — findings round-trip', () => {
     );
     mkdirSync(tmpDir, { recursive: true });
     await setup();
-  });
+  }, 30000); // Pre-emptive at v1.49.638 W1C C5: widen hookTimeout to absorb full-suite I/O contention on KBStore registry + migrations setup (mirrors snapshot-lifecycle fix at 8cac9eff7).
 
   afterEach(() => {
     store.close();
