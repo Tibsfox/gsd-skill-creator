@@ -294,8 +294,8 @@ export class KBStore implements IntelligenceKB {
 
     const orderBy =
       opts?.sort === 'priority'
-        ? 'priority ASC, last_activity_at DESC'
-        : 'last_activity_at DESC';
+        ? 'priority ASC, last_activity_at DESC, id ASC'
+        : 'last_activity_at DESC, id ASC';
 
     const rows = reg
       .prepare(`SELECT * FROM projects ORDER BY ${orderBy}`)
@@ -868,7 +868,7 @@ export class KBStore implements IntelligenceKB {
         SELECT b.* FROM bundles b
         JOIN meetings m ON m.id = b.meeting_id
         WHERE m.project_id = ?
-        ORDER BY b.emitted_at DESC
+        ORDER BY b.emitted_at DESC, b.id DESC
       `)
       .all(p) as BundleRow[];
 
@@ -913,7 +913,7 @@ export class KBStore implements IntelligenceKB {
     const { pdb } = await this._findProjectDBForMeeting(meetingId);
     return pdb
       .prepare(
-        `SELECT * FROM meeting_log WHERE meeting_id = ? ORDER BY recorded_at ASC`,
+        `SELECT * FROM meeting_log WHERE meeting_id = ? ORDER BY recorded_at ASC, id ASC`,
       )
       .all(meetingId) as Array<{ id: number; meeting_id: MeetingId; recorded_at: string; kind: string; body: string }>;
   }
