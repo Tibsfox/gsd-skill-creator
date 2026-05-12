@@ -98,6 +98,13 @@ Deferred to Cluster #6 (informational, not critical):
 
 **Common pattern across all 5:** native-module-backed (better-sqlite3) tests under v1.49.637+ full-suite I/O contention. The two production rowid fixes both improve human-visible determinism *and* eliminate test flake source. The three hookTimeout fixes preserve test invariants while absorbing jitter under load.
 
+### Stage 2 acceptance check
+
+- All 5 sites have an assigned profile / failure-mode / recommended-fix.
+- Each recommended-fix matches a pattern documented at `.planning/test-discipline/perf-assertion-warmup.md` or precedent commits (`fcaacf057` listMeetings rowid tiebreaker, `8cac9eff7` snapshot-lifecycle hookTimeout 30000ms).
+- No new substrate findings surfaced during classification.
+- Pre-Stage-3 invariant: baseline test posture inherited from v1.49.637 ship-tip (green at `5e270a905`).
+
 ---
 
 ## Stage 3 — Apply targeted fixes
