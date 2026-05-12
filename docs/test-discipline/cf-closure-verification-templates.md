@@ -190,6 +190,37 @@ node scripts/closure-verify-cf.mjs hidden-transitive-guard <pkg> # Hidden-transi
 
 The tool writes the record file automatically and prints a status summary.
 
+**Per-CF probe spec auto-dispatch (v1.49.642 C1):** for CFs with stable probe definitions, declare a YAML spec at `.planning/cf-probes/<CF-id>.yaml` and run the auto dispatcher:
+
+```bash
+node scripts/closure-verify-cf.mjs auto CF-13
+```
+
+Example specs live at `.planning/cf-probes/cf-13.yaml` and `.planning/cf-probes/cf-14.yaml`. The auto subcommand:
+
+1. Reads the YAML spec at the path keyed by the CF-id (lowercase)
+2. Validates required fields (`cf_id`, `probe_type`, `probe_args`, `routing_rules`)
+3. Dispatches to the configured probe with reconstructed args
+4. After the probe runs, reads the actual STATUS from the generated record file
+5. Looks up `routing_rules[<status>]` to suggest the operator's next action
+
+YAML schema:
+
+```yaml
+cf_id: CF-N
+probe_type: file-snapshot   # one of: npm-audit / file-snapshot / upstream-version / test-marker / hidden-transitive-guard
+probe_args:
+  path: '<path>'            # type-specific
+routing_rules:
+  resolved-upstream: retire
+  still-real: proceed
+  inconclusive: proceed     # file-snapshot specifically
+notes: |
+  Operator-readable context for interpreting routing_rules.
+```
+
+See `docs/MISSION-PACKAGE-DISCIPLINE.md` §1.7 for full schema documentation including routing-semantics inversion notes (some CFs may map "file present" to `retire` rather than `proceed`).
+
 If a CF's shape doesn't match any template, **author a new template here** as part of the W0 work. The catalogue grows as the codebase encounters more CF shapes.
 
 ## Vitest reporter note (v1.49.640 retro item)

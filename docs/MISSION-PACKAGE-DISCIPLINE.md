@@ -148,11 +148,11 @@ Cluster N+k carry-forwards are evidence: the predecessor cluster's hypothesis di
 
 Practical heuristic: if the predecessor's W1 implementation produced a definitive *null result* (no signal where the hypothesis predicted signal), treat the null result as falsifying evidence rather than as "we didn't look hard enough" evidence. The v1.49.639 C1 trace instrumentation produced zero TRACE markers in CI; this null result was *the* diagnostic signal — not a failure of instrumentation.
 
-### 1.7 Tooling support (codified at v1.49.641 C2)
+### 1.7 Tooling support (codified at v1.49.641 C2; auto-dispatch at v1.49.642 C1)
 
-`scripts/closure-verify-cf.mjs` codifies this discipline as an executable probe runner. Implemented at v1.49.641 C2 (closes CF-12).
+`scripts/closure-verify-cf.mjs` codifies this discipline as an executable probe runner. Implemented at v1.49.641 C2 (closes CF-12); auto-dispatch via per-CF probe spec YAML added at v1.49.642 C1 (closes CF-14).
 
-Five probe types map to the four CF SHAPE categories from `docs/test-discipline/cf-closure-verification-templates.md` plus a built-in hidden-transitive guard:
+Six probe types — five map to the four CF SHAPE categories from `docs/test-discipline/cf-closure-verification-templates.md` plus a built-in hidden-transitive guard; the sixth (`auto`) dispatches via a per-CF probe spec YAML:
 
 | Probe | Use case | Maps to |
 |---|---|---|
@@ -161,20 +161,42 @@ Five probe types map to the four CF SHAPE categories from `docs/test-discipline/
 | `upstream-version <CF-id> <package>` | Upstream-spec shape — version availability + deprecation | Template 4 |
 | `test-marker <CF-id> <test-file>` | Test-marker shape — local vitest pass/fail | Template 2 |
 | `hidden-transitive-guard <package>` | Pre-flight for path-d-style root-dep removal | Lesson #10204 |
+| `auto <CF-id>` | Dispatch via `.planning/cf-probes/<CF-id>.yaml` | v1.49.642 C1 (CF-14) |
 
 Each probe writes a record to `.planning/c0-<CF-id>-closure-verification-record.md` (gitignored) with the standard frontmatter-like header + status + routing-decision sections.
 
 Usage:
 
 ```bash
-# Verify a CF is still real:
+# Direct invocation:
 node scripts/closure-verify-cf.mjs npm-audit CF-7
-
-# Pre-flight check before removing a phantom dep:
 node scripts/closure-verify-cf.mjs hidden-transitive-guard <pkg-to-remove>
+
+# Auto-dispatch via per-CF YAML spec:
+node scripts/closure-verify-cf.mjs auto CF-13
 ```
 
-Forward improvement (out of scope; carry forward if useful): a probe-spec format (e.g., YAML at `.planning/cf-probes/<CF-id>.yaml`) so each CF carries its own probe spec rather than relying on the operator to know which probe type matches each CF.
+#### Per-CF probe spec YAML schema (`.planning/cf-probes/<CF-id>.yaml`)
+
+```yaml
+cf_id: CF-N                  # required; case-insensitive match
+probe_type: <type>           # required; one of the non-auto probe types
+probe_args:                  # required; type-specific args
+  path: '<path>'             #   for file-snapshot
+  package: '<pkg>'           #   for upstream-version / hidden-transitive-guard
+  test_file: '<file>'        #   for test-marker
+                             #   (npm-audit takes no args)
+routing_rules:               # required; map probe outcomes to operator actions
+  resolved-upstream: retire  # what to do when probe reports resolved-upstream
+  still-real: proceed        # what to do when probe reports still-real
+  inconclusive: proceed      # what to do when probe reports inconclusive (file-snapshot)
+notes: |                     # optional; free-form operator context
+  Any context the future operator needs to interpret routing_rules correctly.
+```
+
+Routing semantics note: the probe-status names (`resolved-upstream`, `still-real`, `inconclusive`) are probe-relative. CF specs can map them flexibly via routing_rules. For "feature presence" CFs (e.g., CF-14 itself), `inconclusive` (file present) may map to `retire` (feature exists; CF closed) rather than `proceed`. Document the mapping in `notes`.
+
+The `auto` subcommand reads the actual `STATUS` from the record file after the probe runs, so routing_rules dispatch is accurate even for probes with 3+ possible statuses.
 
 ---
 

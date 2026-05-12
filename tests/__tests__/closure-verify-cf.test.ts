@@ -144,4 +144,85 @@ describe('closure-verify-cf.mjs', () => {
       expect(r.stdout).toContain('subtree size: 0');
     });
   });
+
+  describe('auto probe (v1.49.642 C1 — CF-14)', () => {
+    const SPEC_DIR = resolve(process.cwd(), '.planning', 'cf-probes');
+    const TEST_SPEC_ID = `${TEST_CF_PREFIX}-auto`;
+    const testSpecPath = () => resolve(SPEC_DIR, `${TEST_SPEC_ID.toLowerCase()}.yaml`);
+
+    afterEach(() => {
+      try { unlinkSync(testSpecPath()); } catch { /* ignore */ }
+      cleanRecord(TEST_SPEC_ID);
+    });
+
+    it('reports missing spec file with helpful template', () => {
+      const r = runProbe(['auto', 'CF-does-not-exist']);
+      expect(r.status).toBe(1);
+      expect(r.stderr).toContain('probe spec not found');
+      expect(r.stderr).toContain('create one with:');
+      expect(r.stderr).toContain('cf_id: CF-does-not-exist');
+    });
+
+    it('validates required fields in spec', () => {
+      // Use writeFileSync via spawnSync to avoid an extra import
+      const malformed = `cf_id: ${TEST_SPEC_ID}\nprobe_type: file-snapshot\n`;
+      spawnSync('mkdir', ['-p', SPEC_DIR]);
+      spawnSync('bash', ['-c', `cat > '${testSpecPath()}' <<EOF\n${malformed}\nEOF`]);
+
+      const r = runProbe(['auto', TEST_SPEC_ID]);
+      expect(r.status).toBe(1);
+      expect(r.stderr).toMatch(/missing required field/);
+    });
+
+    it('dispatches to file-snapshot probe via spec', () => {
+      const specYaml = `cf_id: ${TEST_SPEC_ID}
+probe_type: file-snapshot
+probe_args:
+  path: package.json
+routing_rules:
+  resolved-upstream: retire
+  inconclusive: proceed
+notes: |
+  Test spec for auto dispatch.
+`;
+      spawnSync('mkdir', ['-p', SPEC_DIR]);
+      spawnSync('bash', ['-c', `cat > '${testSpecPath()}' <<'EOF'\n${specYaml}\nEOF`]);
+
+      const r = runProbe(['auto', TEST_SPEC_ID]);
+      expect(r.status).toBe(0);
+      // Routing should map "inconclusive" → "proceed" since package.json exists
+      expect(r.stdout).toContain('routing_rules[inconclusive] => proceed');
+      // Record file should be written by the file-snapshot probe
+      const body = readFileSync(recordPathFor(TEST_SPEC_ID), 'utf-8');
+      expect(body).toMatch(/STATUS:.*`inconclusive`/);
+    });
+
+    it('rejects invalid probe_type in spec', () => {
+      const specYaml = `cf_id: ${TEST_SPEC_ID}
+probe_type: not-a-real-probe
+probe_args: {}
+routing_rules: {resolved-upstream: retire}
+`;
+      spawnSync('mkdir', ['-p', SPEC_DIR]);
+      spawnSync('bash', ['-c', `cat > '${testSpecPath()}' <<'EOF'\n${specYaml}\nEOF`]);
+
+      const r = runProbe(['auto', TEST_SPEC_ID]);
+      expect(r.status).toBe(1);
+      expect(r.stderr).toContain('invalid probe_type');
+    });
+
+    it('rejects auto as probe_type (prevents recursion)', () => {
+      const specYaml = `cf_id: ${TEST_SPEC_ID}
+probe_type: auto
+probe_args: {}
+routing_rules: {resolved-upstream: retire}
+`;
+      spawnSync('mkdir', ['-p', SPEC_DIR]);
+      spawnSync('bash', ['-c', `cat > '${testSpecPath()}' <<'EOF'\n${specYaml}\nEOF`]);
+
+      const r = runProbe(['auto', TEST_SPEC_ID]);
+      expect(r.status).toBe(1);
+      expect(r.stderr).toContain('invalid probe_type "auto"');
+    });
+  });
 });

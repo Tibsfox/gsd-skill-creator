@@ -16,6 +16,7 @@
 import { spawnSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
+import { parse as parseYaml } from 'yaml';
 
 const REPO_ROOT = process.cwd();
 const PROBES = {
@@ -24,6 +25,7 @@ const PROBES = {
   'upstream-version': probeUpstreamVersion,
   'test-marker': probeTestMarker,
   'hidden-transitive-guard': probeHiddenTransitiveGuard,
+  'auto': probeAuto,
 };
 
 function usage(exitCode = 0) {
@@ -38,12 +40,29 @@ Probe types:
   test-marker              <CF-id> <test-file>        Run a specific test file and capture pass/fail state
   hidden-transitive-guard  <package>                  Pre-flight check for path-d-style root-dep removal
                                                        (lists src/ imports satisfied by <package>'s subtree)
+  auto                     <CF-id>                    Read .planning/cf-probes/<CF-id>.yaml and dispatch
+                                                       to the configured probe automatically (v1.49.642 C1)
 
 Examples:
   node scripts/closure-verify-cf.mjs npm-audit CF-7
   node scripts/closure-verify-cf.mjs file-snapshot CF-9 .planning/cartridge-migration-phase2.md
   node scripts/closure-verify-cf.mjs upstream-version CF-7 gsd-pi
   node scripts/closure-verify-cf.mjs hidden-transitive-guard gsd-pi
+  node scripts/closure-verify-cf.mjs auto CF-13
+
+Probe spec YAML schema (.planning/cf-probes/<CF-id>.yaml):
+  cf_id: CF-N                  # required; case-insensitive match
+  probe_type: <type>           # required; one of the non-auto probe types above
+  probe_args:                  # required; type-specific args (see below)
+    path: '<path>'             #   file-snapshot
+    package: '<pkg>'           #   upstream-version | hidden-transitive-guard
+    test_file: '<file>'        #   test-marker
+                               #   (npm-audit takes no args)
+  routing_rules:               # required; map probe outcomes to operator actions
+    resolved-upstream: retire
+    still-real: proceed
+  notes: |                     # optional; free-form context
+    (any operator notes)
 
 Records: written to .planning/c0-<CF-id>-closure-verification-record.md (gitignored).
 Discipline: docs/MISSION-PACKAGE-DISCIPLINE.md \xa71 (Lesson #10199 codified).
@@ -396,6 +415,100 @@ _Source: Lesson #10204 (v1.49.640 C1 experience)._
   console.log(`[closure-verify] HIDDEN TRANSITIVES: ${hasHits ? hits.length : 0}`);
   console.log(`[closure-verify] wrote: ${written}`);
   return hasHits ? 1 : 0;
+}
+
+// ─── Auto-dispatch via probe spec YAML (v1.49.642 C1) ─────────────────
+
+/**
+ * @typedef {Object} CfProbeSpec
+ * @property {string} cf_id
+ * @property {'npm-audit'|'file-snapshot'|'upstream-version'|'test-marker'|'hidden-transitive-guard'} probe_type
+ * @property {Record<string, string>} probe_args   - type-specific args
+ * @property {Record<string, string>} routing_rules - outcome -> action
+ * @property {string=} notes                        - optional free-form context
+ */
+
+function buildArgsForProbe(probeType, cfId, probeArgs) {
+  switch (probeType) {
+    case 'npm-audit':
+      return [cfId];
+    case 'file-snapshot':
+      return [cfId, probeArgs.path];
+    case 'upstream-version':
+      return [cfId, probeArgs.package];
+    case 'test-marker':
+      return [cfId, probeArgs.test_file];
+    case 'hidden-transitive-guard':
+      return [probeArgs.package];
+    default:
+      throw new Error(`unknown probe_type: ${probeType}`);
+  }
+}
+
+function probeAuto(args) {
+  const [cfId] = args;
+  if (!cfId) usage(1);
+
+  const specPath = resolve(REPO_ROOT, '.planning', 'cf-probes', `${cfId.toLowerCase()}.yaml`);
+  if (!existsSync(specPath)) {
+    process.stderr.write(`[closure-verify auto] probe spec not found: ${specPath}\n`);
+    process.stderr.write(`[closure-verify auto] create one with:\n`);
+    process.stderr.write(`  cf_id: ${cfId}\n  probe_type: <type>\n  probe_args: {<key>: <value>}\n  routing_rules: {resolved-upstream: retire, still-real: proceed}\n`);
+    return 1;
+  }
+
+  let spec;
+  try {
+    spec = parseYaml(readFileSync(specPath, 'utf-8'));
+  } catch (e) {
+    process.stderr.write(`[closure-verify auto] failed to parse YAML at ${specPath}: ${e.message}\n`);
+    return 1;
+  }
+
+  if (!spec || typeof spec !== 'object') {
+    process.stderr.write(`[closure-verify auto] YAML at ${specPath} did not parse to an object\n`);
+    return 1;
+  }
+
+  const requiredFields = ['cf_id', 'probe_type', 'probe_args', 'routing_rules'];
+  for (const f of requiredFields) {
+    if (!(f in spec)) {
+      process.stderr.write(`[closure-verify auto] missing required field "${f}" in ${specPath}\n`);
+      return 1;
+    }
+  }
+
+  if (spec.probe_type === 'auto' || !(spec.probe_type in PROBES)) {
+    const allowed = Object.keys(PROBES).filter(k => k !== 'auto').join(', ');
+    process.stderr.write(`[closure-verify auto] invalid probe_type "${spec.probe_type}" — must be one of: ${allowed}\n`);
+    return 1;
+  }
+
+  const reconstructedArgs = buildArgsForProbe(spec.probe_type, spec.cf_id, spec.probe_args ?? {});
+  console.log(`[closure-verify auto] CF=${spec.cf_id} probe_type=${spec.probe_type}`);
+  if (spec.notes) {
+    console.log(`[closure-verify auto] notes: ${String(spec.notes).split('\n')[0]}`);
+  }
+
+  const probeFn = PROBES[spec.probe_type];
+  const result = probeFn(reconstructedArgs);
+
+  // Read the actual STATUS from the record file the probe just wrote (more
+  // accurate than mapping exit codes — file-snapshot has 3 possible statuses
+  // but all currently exit 0).
+  const recordRelKey = spec.probe_type === 'hidden-transitive-guard'
+    ? `htg-${spec.probe_args.package.replace(/[^a-z0-9-]/gi, '-')}`
+    : spec.cf_id.toLowerCase();
+  const recordPath = resolve(REPO_ROOT, '.planning', `c0-${recordRelKey}-closure-verification-record.md`);
+  let outcome = result === 0 ? 'resolved-upstream' : 'still-real';
+  if (existsSync(recordPath)) {
+    const statusMatch = readFileSync(recordPath, 'utf-8').match(/\*\*STATUS:\*\*\s*`([^`]+)`/);
+    if (statusMatch) outcome = statusMatch[1];
+  }
+  const action = spec.routing_rules?.[outcome] ?? '(no routing rule for this outcome)';
+  console.log(`[closure-verify auto] routing_rules[${outcome}] => ${action}`);
+
+  return result;
 }
 
 // ─── Entry point ───────────────────────────────────────────────────────
