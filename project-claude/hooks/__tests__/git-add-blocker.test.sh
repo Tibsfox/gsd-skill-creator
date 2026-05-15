@@ -109,6 +109,53 @@ expect_block "EC-02: git add 'path/with .planning/spaces'" \
   '{"tool_name":"Bash","tool_input":{"command":"git add .planning/has\\ space.md"}}' \
   env
 
+# v1.49.653 hardening (CONCERNS §2.3 + §7.4):
+# CC-01: BLOCK git add .gsd/  (556MB intelligence.db accidental-stage exposure)
+expect_block "CC-01: git add .gsd/intelligence.db" \
+  '{"tool_name":"Bash","tool_input":{"command":"git add .gsd/intelligence.db"}}' \
+  env
+
+# CC-02: BLOCK git add -f .env (production FTP credential leak exposure)
+expect_block "CC-02: git add -f .env" \
+  '{"tool_name":"Bash","tool_input":{"command":"git add -f .env"}}' \
+  env
+
+# CC-03: BLOCK git add .chipset/
+expect_block "CC-03: git add .chipset/state" \
+  '{"tool_name":"Bash","tool_input":{"command":"git add .chipset/state"}}' \
+  env
+
+# CC-04: BLOCK git add project-claude/hooks/.log/
+expect_block "CC-04: git add project-claude/hooks/.log/" \
+  '{"tool_name":"Bash","tool_input":{"command":"git add project-claude/hooks/.log/foo.jsonl"}}' \
+  env
+
+# CC-05: BLOCK nested .env (e.g. apps/foo/.env)
+expect_block "CC-05: git add apps/foo/.env" \
+  '{"tool_name":"Bash","tool_input":{"command":"git add apps/foo/.env"}}' \
+  env
+
+# CC-06: ALLOW non-protected env-like paths (e.g. .envrc, env/, environments.json)
+expect_allow "CC-06a: git add .envrc" \
+  '{"tool_name":"Bash","tool_input":{"command":"git add .envrc"}}' \
+  env
+expect_allow "CC-06b: git add environments.json" \
+  '{"tool_name":"Bash","tool_input":{"command":"git add environments.json"}}' \
+  env
+expect_allow "CC-06c: git add env/foo.ts" \
+  '{"tool_name":"Bash","tool_input":{"command":"git add env/foo.ts"}}' \
+  env
+
+# CC-07: ALLOW project-claude/ outside hooks/.log/
+expect_allow "CC-07: git add project-claude/hooks/git-add-blocker.js" \
+  '{"tool_name":"Bash","tool_input":{"command":"git add project-claude/hooks/git-add-blocker.js"}}' \
+  env
+
+# CC-08: SC_FORCE_ADD=1 override still works for new paths
+expect_allow "CC-08: SC_FORCE_ADD=1 .gsd/" \
+  '{"tool_name":"Bash","tool_input":{"command":"git add .gsd/foo"}}' \
+  env SC_FORCE_ADD=1
+
 echo ""
 echo "$PASS passed, $FAIL failed"
 exit $FAIL

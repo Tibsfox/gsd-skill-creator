@@ -1,11 +1,17 @@
 #!/usr/bin/env node
-// gsd-hook-version: 1.49.585
+// gsd-hook-version: 1.49.653
 // Git-Add Blocker — PreToolUse hook
 //
 // BLOCKS git add / git stage / git commit -a operations that would stage
-// paths under .planning/, .claude/, .archive/, or artifacts/.
+// paths under:
+//   .planning/, .claude/, .archive/, artifacts/                    (v1.49.585)
+//   .gsd/, .chipset/, .env, project-claude/hooks/.log/             (v1.49.653)
 //
 // Authored 2026-04-28 in v1.49.585 component C02.
+// Extended 2026-05-15 per CONCERNS §2.3 + §7.4 hardening: closes the
+// 556 MB .gsd/intelligence.db accidental-stage exposure + the production
+// `git add -f .env` FTP-credential-leak exposure.
+//
 // Spec:    .planning/missions/v1-49-585-concerns-cleanup/components/02-git-add-blocker.md
 // Contract: .planning/missions/v1-49-585-concerns-cleanup/work/specs/hook-conventions.md
 //
@@ -22,8 +28,20 @@
 const fs = require('fs');
 const path = require('path');
 
-// Module-scope compiled regexes
-const PROTECTED_PATH_RE = /^\.?\.?\/?\.?(?:planning|claude|archive)\/|^artifacts\/|(?:^|\/)(?:\.planning|\.claude|\.archive|artifacts)\//;
+// Module-scope compiled regex. Multi-line alternation joined for readability.
+const PROTECTED_PATH_RE = new RegExp([
+  // v1.49.585 baseline:
+  '^\\.?\\.?\\/?\\.?(?:planning|claude|archive)\\/',  // {planning,claude,archive}/ at start (with optional ./, ../, . prefixes)
+  '^artifacts\\/',                                     // artifacts/ at start
+  '(?:^|\\/)(?:\\.planning|\\.claude|\\.archive|artifacts)\\/',  // dotted variants anywhere
+  // v1.49.653 hardening (CONCERNS §2.3 + §7.4):
+  '^\\.?\\.?\\/?\\.(?:gsd|chipset)(?:\\/|$)',          // .gsd/, .chipset/ at start
+  '(?:^|\\/)\\.(?:gsd|chipset)(?:\\/|$)',               // .gsd/, .chipset/ anywhere
+  '^\\.env(?:$|\\/)',                                   // .env file or .env/ dir at start
+  '(?:^|\\/)\\.env(?:$|\\/)',                           // .env anywhere
+  '^project-claude\\/hooks\\/\\.log(?:\\/|$)',          // project-claude/hooks/.log at start
+  '(?:^|\\/)project-claude\\/hooks\\/\\.log(?:\\/|$)',  // anywhere
+].join('|'));
 
 // Spec reference path
 const SPEC_REF = '.planning/missions/v1-49-585-concerns-cleanup/components/02-git-add-blocker.md';

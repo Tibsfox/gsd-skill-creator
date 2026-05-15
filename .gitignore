@@ -9,6 +9,19 @@ node_modules/
 .claude/
 .cpanel.yml
 
+# Self-modifying-system runtime artifacts (CONCERNS §2.3 + §7.4 hardening 2026-05-15)
+# Large untracked databases / state / binaries that would catastrophically
+# inflate the repo if accidentally staged. Defense-in-depth: also covered
+# by .claude/hooks/git-add-blocker.js for direct `git add` attempts.
+.gsd/
+.chipset/
+*.pmtiles
+CLAUDE.md.legacy
+project-claude/hooks/.log/
+
+# Bench last-run output (per-run; baseline.json IS tracked as source of truth)
+tools/bench/last-run.json
+
 # CLAUDE.md is local-only (untracked 2026-05-10).
 # Source-of-truth manifests still live at tools/render-claude-md/;
 # regenerate locally via `npm run render:claude-md`.
