@@ -1,0 +1,92 @@
+[
+  {
+    "domain": "Mission package framing",
+    "trigger": "Before authoring a mission package or W0 brief; when 4+ clusters in a CF chain accumulate",
+    "summary": "Closure-verification gate for multi-cluster CF chains + re-framing review pattern",
+    "canonical_docs": [
+      "docs/MISSION-PACKAGE-DISCIPLINE.md"
+    ],
+    "key_lessons": ["#10199", "#10207"],
+    "codified_at_milestone": "v1.49.638"
+  },
+  {
+    "domain": "Test authoring",
+    "trigger": "Writing or modifying vitest tests; perf-assertion authoring; flake debugging",
+    "summary": "Audit-method conventions (hookTimeout, ORDER-BY tiebreaker, perf-warmup, skip-guard env-vars) + CF closure-verification templates + flake catalog",
+    "canonical_docs": [
+      "docs/test-discipline/audit-method-corrections.md",
+      "docs/test-discipline/cf-closure-verification-templates.md",
+      "docs/test-discipline/flake-audit-2026-05-11.md"
+    ],
+    "key_lessons": ["#10173", "#10199", "#10204"],
+    "codified_at_milestone": "v1.49.585+"
+  },
+  {
+    "domain": "Ship pipeline",
+    "trigger": "Touching tools/pre-tag-gate.sh, T14 ship steps, or hook scripts",
+    "summary": "Apply-to-self enforcement, CI-gate override rationale (enumerated CSV per Lesson #10185), no Co-Authored-By trailers (v1.49.621), T14 step ordering (Lesson #10197)",
+    "canonical_docs": [
+      ".planning/ship-pipeline-discipline/apply-to-self-allowlist.md",
+      ".planning/ship-pipeline-discipline/ci-gate-override-rationale.md",
+      "docs/T14-SHIP-SEQUENCE.md"
+    ],
+    "key_lessons": ["#10184", "#10185", "#10191", "#10197", "#10204"],
+    "codified_at_milestone": "v1.49.636+"
+  },
+  {
+    "domain": "Self-modification safety",
+    "trigger": "Editing .claude/{skills,agents,hooks}/ paths; staging files into .planning/, .claude/, .archive/, artifacts/, .gsd/, .chipset/, .env, project-claude/hooks/.log/",
+    "summary": "PreToolUse hook BLOCKS self-mod operations without SC_SELF_MOD=1 / SC_INSTALL_CALLER=project-claude / npm_lifecycle_event override. git-add-blocker.js BLOCKS protected-path staging without SC_FORCE_ADD=1. Mission packages never committed.",
+    "canonical_docs": [
+      ".claude/skills/security-hygiene/SKILL.md",
+      "project-claude/hooks/self-mod-guard.js",
+      "project-claude/hooks/git-add-blocker.js"
+    ],
+    "key_lessons": ["#10201"],
+    "codified_at_milestone": "v1.49.585 C01 + C02; extended v1.49.653"
+  },
+  {
+    "domain": "Keystore",
+    "trigger": "Touching src-tauri/src/security/keystore.rs or wrapping Node CLI surfaces; Argon2id + age v0.10 invariants",
+    "summary": "OS keyring (preferred) → age-encrypted file (fallback). Legacy plaintext keystore retired v1.49.637.",
+    "canonical_docs": [
+      "docs/keystore.md"
+    ],
+    "key_lessons": [],
+    "codified_at_milestone": "v1.49.585 + v1.49.637 cluster #4 retirement"
+  },
+  {
+    "domain": "Substrate probe",
+    "trigger": "Authoring W1 substrate-axis declarations; relocating substrate-probe docs into tracked docs/ from .planning/",
+    "summary": "Substrate-form declaration patterns + LOCKED/SUSTAINED state-machine + forward-shadow first-instance convention",
+    "canonical_docs": [
+      "docs/SUBSTRATE-PROBE-DISCIPLINE.md"
+    ],
+    "key_lessons": ["#10210", "#10219", "#10225"],
+    "codified_at_milestone": "v1.49.638 C3"
+  },
+  {
+    "domain": "Citation debt",
+    "trigger": "Authoring retrospective V-flag emit/close/state blocks; running T14 step 2.6 (citation-debt auto-update)",
+    "summary": "Formal '### V-flag emit/close/state:' markdown blocks → scan-retrospectives.mjs --write-diff → apply-diff.mjs. Closes V-flag drift between retrospectives and the ledger.",
+    "canonical_docs": [
+      "docs/citation-debt-syntax.md",
+      "tools/citation-debt/scan-retrospectives.mjs",
+      "tools/citation-debt/apply-diff.mjs"
+    ],
+    "key_lessons": [],
+    "codified_at_milestone": "v1.49.585 C13 (ledger) + v1.49.653 L-03 (auto-update)"
+  },
+  {
+    "domain": "STORY drift recurrence",
+    "trigger": "T14 ship sequence step 2.5; observing pre-tag-gate step 12 WARN about STORY.md drift",
+    "summary": "Public docs/release-notes/STORY.md auto-append gate (T14 step 2.5) closes Lesson #10197 silent-no-op via per-tag append + idempotent re-run. Pre-tag-gate step 12 surfaces accumulated drift.",
+    "canonical_docs": [
+      "docs/T14-SHIP-SEQUENCE.md",
+      "scripts/append-story-entry.mjs",
+      "tools/check-story-drift.mjs"
+    ],
+    "key_lessons": ["#10191", "#10197"],
+    "codified_at_milestone": "v1.49.637 C5 + v1.49.653 (drift detector)"
+  }
+]

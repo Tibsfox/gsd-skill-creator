@@ -16,15 +16,20 @@
  *                        composes its body from agents.json + filesystem
  *                        scan of .claude/agents/)
  *   - env-vars        → tools/render-claude-md/env-vars.json
+ *   - disciplines     → tools/render-claude-md/disciplines.json
+ *                       (v1.49.653 L-04 — operative disciplines checklist
+ *                        linking to canonical docs; closes CONCERNS §23.4)
  *
  * Modes:
  *   (default)         render in place, write CLAUDE.md
  *   --check           render, exit 1 if differs from on-disk
  *   --dry-run         render, print to stdout, do not write
+ *   --diff            report source-of-truth vs on-disk agent-count drift only;
+ *                     does not render CLAUDE.md (independent of its presence)
  *   --root <path>     override repo root (for hermetic tests)
  *
  * Exit codes: 0 = OK (or absent-and-check, see below);
- *             1 = drift detected (--check) OR validation failure;
+ *             1 = drift detected (--check / --diff) OR validation failure;
  *             2 = CLAUDE.md absent in non-check modes.
  *
  * Absent CLAUDE.md handling (post-2026-05-10 untrack):
@@ -173,11 +178,30 @@ function renderEnvVars(repoRoot) {
   return [header, ...rows].join('\n');
 }
 
+// L-04: discipline-as-data (CONCERNS §23.4). Reads disciplines.json and emits
+// a markdown checklist linking to canonical docs per discipline domain.
+function renderDisciplines(repoRoot) {
+  const manifest = readManifest(repoRoot, 'disciplines.json');
+  const lines = [
+    'When making changes that touch the listed surfaces, consult the named canonical docs BEFORE writing.',
+    '',
+  ];
+  for (const d of manifest) {
+    const docs = d.canonical_docs.map((p) => `[\`${p}\`](${p})`).join(' · ');
+    const lessons = d.key_lessons.length > 0 ? ` *(${d.key_lessons.join(', ')})*` : '';
+    lines.push(`- **${d.domain}** — _${d.trigger}_${lessons}`);
+    lines.push(`  - ${d.summary}`);
+    lines.push(`  - ${docs}`);
+  }
+  return lines.join('\n');
+}
+
 // ----- Marker engine -----
 
 const SECTION_RENDERERS = {
   'file-locations': renderFileLocations,
   'env-vars': renderEnvVars,
+  'disciplines': renderDisciplines,
 };
 
 const MARKER_RE = /(<!-- AUTO:([\w-]+):START -->)\n[\s\S]*?\n(<!-- AUTO:\2:END -->)/g;
@@ -198,12 +222,104 @@ function render(input, repoRoot) {
 function parseMode(argv) {
   if (argv.includes('--check')) return 'check';
   if (argv.includes('--dry-run')) return 'dry-run';
+  if (argv.includes('--diff')) return 'diff';
   return 'write';
+}
+
+/**
+ * --diff mode: report drift between source-of-truth and on-disk reality
+ * without rendering CLAUDE.md.
+ *
+ * The expected invariant (from CLAUDE.md auto-rendered preamble):
+ *   total_on_disk == source_count + paused_count
+ *
+ * If this breaks, an agent was added to `.claude/agents/` without being
+ * promoted to `project-claude/agents/` (or vice versa) — the kind of drift
+ * that `--check` would catch only when CLAUDE.md is rendered. This mode
+ * surfaces it directly.
+ *
+ * Addresses CONCERNS §21.2 — recommendation 2026-05-15.
+ */
+function diffMode(repoRoot, { stdout, stderr }) {
+  let manifest;
+  try {
+    manifest = readManifest(repoRoot, 'agents.json');
+  } catch (err) {
+    stderr.write(`agents.json missing or invalid: ${err.message}\n`);
+    return 1;
+  }
+  const installedDir = join(repoRoot, '.claude', 'agents');
+  const sourceDir = join(repoRoot, manifest.source_of_truth_dir);
+  const installed = listAgentNames(installedDir);
+  const source = listAgentNames(sourceDir);
+
+  const total = installed.length;
+  const sourceCount = source.length;
+
+  // Compute expected paused count from agents.json categories.
+  // Categories may use either `members` (explicit list) or `match_prefix`
+  // (prefix match against on-disk agent names).
+  let expectedPaused = 0;
+  for (const cat of manifest.categories) {
+    if (!cat.is_paused) continue;
+    if (cat.members) {
+      expectedPaused += cat.members.length;
+    } else if (cat.match_prefix) {
+      expectedPaused += installed.filter((n) => n.startsWith(cat.match_prefix)).length;
+    }
+  }
+  const expected = sourceCount + expectedPaused;
+
+  // Set-difference for diagnostic detail
+  const installedSet = new Set(installed);
+  const sourceSet = new Set(source);
+  const onDiskNotInSource = installed.filter((n) => !sourceSet.has(n));
+  const inSourceNotOnDisk = source.filter((n) => !installedSet.has(n));
+
+  stdout.write(
+    `agents-source-of-truth: ${sourceCount} in ${manifest.source_of_truth_dir}\n` +
+      `agents-on-disk:         ${total} in .claude/agents/\n` +
+      `expected-paused:        ${expectedPaused} (from agents.json is_paused categories)\n` +
+      `expected-total:         ${expected} (source + paused)\n`,
+  );
+
+  if (total === expected) {
+    stdout.write('agents-count: in sync.\n');
+    return 0;
+  }
+
+  stderr.write('\nagents-count: DRIFT.\n');
+  if (onDiskNotInSource.length > 0) {
+    const sample = onDiskNotInSource.slice(0, 10);
+    stderr.write(
+      `  ${onDiskNotInSource.length} agent(s) on disk NOT in source-of-truth: ` +
+        `${sample.join(', ')}${onDiskNotInSource.length > 10 ? ', ...' : ''}\n`,
+    );
+  }
+  if (inSourceNotOnDisk.length > 0) {
+    const sample = inSourceNotOnDisk.slice(0, 10);
+    stderr.write(
+      `  ${inSourceNotOnDisk.length} agent(s) in source-of-truth NOT on disk: ` +
+        `${sample.join(', ')}${inSourceNotOnDisk.length > 10 ? ', ...' : ''}\n`,
+    );
+  }
+  stderr.write(
+    `  Fix: either run \`node project-claude/install.cjs --force\` to install missing,\n` +
+      `       or promote drifted agents into project-claude/agents/ + update agents.json.\n`,
+  );
+  return 1;
 }
 
 function main(argv = process.argv.slice(2), { stdout = process.stdout, stderr = process.stderr } = {}) {
   const repoRoot = resolveRoot(argv);
   const mode = parseMode(argv);
+
+  // --diff mode runs independently of CLAUDE.md presence; it inspects
+  // source-of-truth manifests + on-disk reality only.
+  if (mode === 'diff') {
+    return diffMode(repoRoot, { stdout, stderr });
+  }
+
   const claudeMdPath = join(repoRoot, 'CLAUDE.md');
 
   if (!existsSync(claudeMdPath)) {
@@ -263,8 +379,10 @@ export {
   render,
   renderFileLocations,
   renderEnvVars,
+  renderDisciplines,
   composeAgentsBody,
   classifyAgents,
   listAgentNames,
+  diffMode,
   main,
 };
