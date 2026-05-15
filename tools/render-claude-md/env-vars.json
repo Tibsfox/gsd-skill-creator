@@ -36,7 +36,18 @@
     "override_behavior": "`=1` → suppress step labels (errors still printed)"
   },
   {
+    "name": "SC_PRE_TAG_GATE_BYPASS",
+    "default_behavior": "unset → all 12 pre-tag-gate steps run",
+    "override_behavior": "`=<csv>` → skip the named steps (v1.49.653 L-02 consolidation; vocabulary: build, version-sequence, vitest, completeness, ci-gate, www-bundles, depth-audit, claude-md, catalog-index, tauri-boundary, apply-to-self, scaffolder-residue, citation-debt-sync, story-drift)"
+  },
+  {
+    "name": "SC_PRE_TAG_GATE_REQUIRE",
+    "default_behavior": "unset → WARN-only steps remain informational",
+    "override_behavior": "`=<csv>` → escalate WARN-only steps to BLOCKER (apply-to-self, citation-debt-sync, story-drift currently WARN-only)"
+  },
+  {
     "name": "SC_SKIP_CI_GATE",
+    "name_suffix": " *(deprecated → SC_PRE_TAG_GATE_BYPASS=ci-gate)*",
     "default_behavior": "unset → verify CI green on origin/dev (HARD RULE)",
     "override_behavior": "`=1` → skip CI-on-dev verification step in pre-tag-gate (emergency only — fix the failing CI instead)"
   },
@@ -47,11 +58,13 @@
   },
   {
     "name": "SC_SKIP_CLAUDE_MD_GATE",
+    "name_suffix": " *(deprecated → SC_PRE_TAG_GATE_BYPASS=claude-md)*",
     "default_behavior": "unset → run CLAUDE.md auto-render check in pre-tag-gate step 7",
     "override_behavior": "`=1` → skip CLAUDE.md drift check (emergency only — run `npm run render:claude-md` and commit instead)"
   },
   {
     "name": "SC_SKIP_CATALOG_INDEX_GATE",
+    "name_suffix": " *(deprecated → SC_PRE_TAG_GATE_BYPASS=catalog-index)*",
     "default_behavior": "unset → run catalog-index drift check in pre-tag-gate step 8",
     "override_behavior": "`=1` → skip catalog-index drift check (emergency only — run `node tools/update-catalog-indexes.mjs --check` and fix instead)"
   },

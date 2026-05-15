@@ -55,15 +55,20 @@ else
   fail "bash syntax check failed"
 fi
 
-# Test 3: contains expected step labels (7 steps as of v1.49.596+; CLAUDE.md drift added)
-if grep -q "step 1/7: npm run build" "$GATE" \
-   && grep -q "step 2/7: npx vitest run" "$GATE" \
-   && grep -q "step 3/7: release-notes completeness" "$GATE" \
-   && grep -q "step 4/7: CI-on-dev verification" "$GATE" \
-   && grep -q "step 5/7: www-bundles freshness" "$GATE" \
-   && grep -q "step 6/7: depth-audit" "$GATE" \
-   && grep -q "step 7/7: CLAUDE.md auto-render" "$GATE"; then
-  ok "all 7 step labels present"
+# Test 3: contains expected step labels (13 steps as of v1.49.653 L-04).
+# v1.49.601 added catalog-index step 8, v1.49.634 added tauri-boundary step 9,
+# v1.49.636 added apply-to-self step 9.5, v1.49.653 added scaffolder-residue
+# step 10 + citation-debt step 11 + STORY-drift step 12 + discipline-coverage step 13.
+if grep -q "step 6/" "$GATE" \
+   && grep -q "step 7/" "$GATE" \
+   && grep -q "step 8/" "$GATE" \
+   && grep -q "step 9/" "$GATE" \
+   && grep -q "step 9.5/" "$GATE" \
+   && grep -q "step 10/13: scaffolder-residue audit" "$GATE" \
+   && grep -q "step 11/13: citation-debt ledger sync" "$GATE" \
+   && grep -q "step 12/13: STORY.md drift detection" "$GATE" \
+   && grep -q "step 13/13: discipline coverage audit" "$GATE"; then
+  ok "all 13 step labels present"
 else
   fail "step labels missing or wrong count"
 fi
@@ -158,6 +163,58 @@ if grep -q '"render:claude-md":' "$REPO_ROOT/package.json"; then
   ok "package.json wires npm run render:claude-md"
 else
   fail "package.json missing render:claude-md script"
+fi
+
+# Test 16: v1.49.653 L-02 consolidation — SC_PRE_TAG_GATE_BYPASS parser present
+if grep -q 'SC_PRE_TAG_GATE_BYPASS' "$GATE" \
+   && grep -q 'SC_PRE_TAG_GATE_REQUIRE' "$GATE" \
+   && grep -q '_PTG_BYPASS_LIST' "$GATE"; then
+  ok "L-02 consolidated bypass/require parsing present"
+else
+  fail "L-02 consolidation missing: SC_PRE_TAG_GATE_BYPASS/REQUIRE or _PTG_BYPASS_LIST not found"
+fi
+
+# Test 17: gate_bypassed + gate_required helpers defined
+if grep -q '^gate_bypassed()' "$GATE" && grep -q '^gate_required()' "$GATE"; then
+  ok "gate_bypassed + gate_required helpers defined"
+else
+  fail "gate helpers missing"
+fi
+
+# Test 18: each consolidatable step uses gate_bypassed
+EXPECTED_STEPS="ci-gate depth-audit claude-md catalog-index tauri-boundary apply-to-self scaffolder-residue citation-debt-sync story-drift discipline-coverage"
+ALL_OK=1
+for step in $EXPECTED_STEPS; do
+  if ! grep -q "gate_bypassed \"$step\"" "$GATE"; then
+    echo "  step missing gate_bypassed call: $step"
+    ALL_OK=0
+  fi
+done
+if [ "$ALL_OK" = "1" ]; then
+  ok "all 10 overridable steps use gate_bypassed"
+else
+  fail "some steps missing gate_bypassed integration"
+fi
+
+# Test 19: CSV-form smoke test — SC_PRE_TAG_GATE_BYPASS=ci-gate,depth-audit
+# We can't run the full gate cheaply, but we can verify the prelude handles it.
+# Extract just the prelude (everything up to "log "[pre-tag-gate] step 1/12") + a gate_bypassed call.
+PRELUDE_END_LINE=$(grep -n 'log "\[pre-tag-gate\] step 1/13' "$GATE" | head -1 | cut -d: -f1)
+if [ -n "$PRELUDE_END_LINE" ]; then
+  PRELUDE_CONTENT=$(head -n "$PRELUDE_END_LINE" "$GATE")
+  # Append a test invocation
+  TEST_OUT=$(SC_PRE_TAG_GATE_BYPASS=ci-gate bash -c "
+    set -euo pipefail
+    $PRELUDE_CONTENT
+    gate_bypassed 'ci-gate' 'SC_SKIP_CI_GATE' && echo 'BYPASSED' || echo 'not bypassed'
+  " 2>&1) || true
+  if echo "$TEST_OUT" | grep -q "BYPASSED"; then
+    ok "SC_PRE_TAG_GATE_BYPASS=ci-gate triggers bypass"
+  else
+    fail "SC_PRE_TAG_GATE_BYPASS smoke test failed: $TEST_OUT"
+  fi
+else
+  fail "could not isolate gate prelude for CSV smoke test"
 fi
 
 echo ""

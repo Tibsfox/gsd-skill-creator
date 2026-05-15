@@ -74,22 +74,60 @@
 #                       Override: SC_SKIP_APPLY_TO_SELF=1 (emergency only;
 #                       fix the findings or allowlist at
 #                       .planning/ship-pipeline-discipline/apply-to-self-allowlist.md).
+#   10. Scaffolder-residue audit (v1.49.653, CONCERNS §18.2) — detects
+#                       TODO markers from capability-scaffolder.ts /
+#                       skill-generator.ts that escape into shipped skills/
+#                       agents. BLOCKER (--strict).
+#   11. Citation-debt ledger sync (v1.49.653, CONCERNS §9.3) — WARN-only;
+#                       scans recent retrospectives for V-flag activity.
+#   12. STORY.md drift detection (v1.49.653) — WARN-only; detects drift
+#                       between docs/release-notes/STORY.md preamble and the
+#                       chapter directory count + package.json version.
+#                       Recurrence path for the 8-degree v1.49.645→652 sprint.
+#   13. Discipline coverage audit (v1.49.653, L-04, CONCERNS §23.4) — WARN-
+#                       only; surfaces lesson IDs that appear in 2+
+#                       retrospectives but are not captured in
+#                       tools/render-claude-md/disciplines.json nor in any
+#                       cited canonical doc.
+#
 # Exit codes:
-#   0  all checks PASS
-#   1  build failed
-#   2  vitest failed
-#   3  completeness gate failed
-#   4  CI-on-dev failed / pending (SC_SKIP_CI_GATE=1 overrides)
-#   5  www-bundles build failed
-#   6  depth-audit FAIL findings (BLOCKER as of v1.49.591; SC_SKIP_DEPTH_AUDIT=1 overrides)
-#   7  CLAUDE.md drift (SC_SKIP_CLAUDE_MD_GATE=1 overrides)
-#   8  catalog-index drift (BLOCKER added v1.49.601; SC_SKIP_CATALOG_INDEX_GATE=1 overrides)
-#   9  tauri-boundary violation (BLOCKER added v1.49.634; SC_SKIP_TAURI_BOUNDARY_GATE=1 overrides)
-#   10 apply-to-self findings (BLOCKER only when SC_REQUIRE_APPLY_TO_SELF=1; default WARN-only)
+#   0   all checks PASS
+#   1   build failed
+#   2   vitest failed
+#   3   completeness gate failed
+#   4   CI-on-dev failed / pending
+#   5   www-bundles build failed
+#   6   depth-audit FAIL findings (BLOCKER as of v1.49.591)
+#   7   CLAUDE.md drift
+#   8   catalog-index drift (BLOCKER added v1.49.601)
+#   9   tauri-boundary violation (BLOCKER added v1.49.634)
+#   10  apply-to-self findings (BLOCKER only when require flag set; default WARN-only)
+#   12  scaffolder-residue findings (BLOCKER as of v1.49.653)
+#   13  citation-debt-sync escalation (BLOCKER only when require flag set; default WARN-only)
+#   14  story-drift escalation (BLOCKER only when require flag set; default WARN-only)
+#   15  discipline-coverage escalation (BLOCKER only when require flag set; default WARN-only)
+#
+# Step overrides (v1.49.653 consolidation; CONCERNS §26):
+#   SC_PRE_TAG_GATE_BYPASS=<csv>   skip these steps entirely
+#   SC_PRE_TAG_GATE_REQUIRE=<csv>  escalate WARN-only steps to BLOCKER
+#
+#   step-name vocabulary: build version-sequence vitest completeness ci-gate
+#                         www-bundles depth-audit claude-md catalog-index
+#                         tauri-boundary apply-to-self scaffolder-residue
+#                         citation-debt-sync story-drift discipline-coverage
+#
+# Legacy per-step env vars (SC_SKIP_*_GATE, SC_REQUIRE_*) are honored with a
+# DEPRECATION WARNING for one milestone cycle to ease migration.
 #
 # Usage:
 #   bash tools/pre-tag-gate.sh
 #   npm run pre-tag-gate
+#
+#   # Skip CI gate + depth-audit:
+#   SC_PRE_TAG_GATE_BYPASS=ci-gate,depth-audit bash tools/pre-tag-gate.sh
+#
+#   # Escalate apply-to-self + story-drift to BLOCKER:
+#   SC_PRE_TAG_GATE_REQUIRE=apply-to-self,story-drift bash tools/pre-tag-gate.sh
 #
 # Why this gate exists:
 #   v1.49.585 shipped with CI red on dev (run 25096343019) and main
@@ -122,7 +160,89 @@ log() {
   fi
 }
 
-log "[pre-tag-gate] step 1/9: npm run build"
+# ----- v1.49.653 L-02: consolidated bypass/require parsing (CONCERNS §26) -----
+#
+# Two CSV env vars replace ~15 ad-hoc SC_SKIP_* / SC_REQUIRE_* toggles:
+#
+#   SC_PRE_TAG_GATE_BYPASS=ci-gate,depth-audit,catalog-index
+#       Skip these steps entirely. The skip is logged.
+#
+#   SC_PRE_TAG_GATE_REQUIRE=apply-to-self,citation-debt-sync,story-drift
+#       Escalate WARN-only steps to BLOCKER status.
+#
+# Step-name vocabulary (matches gate step labels):
+#   build version-sequence vitest completeness ci-gate www-bundles
+#   depth-audit claude-md catalog-index tauri-boundary apply-to-self
+#   scaffolder-residue citation-debt-sync story-drift
+#
+# Legacy SC_SKIP_* / SC_REQUIRE_* env vars continue to be honored with a
+# deprecation warning for one milestone cycle. Use the new CSV form for new
+# work; the legacy vars are kept for back-compat with operator setups.
+
+_PTG_BYPASS_RAW="${SC_PRE_TAG_GATE_BYPASS:-}"
+_PTG_REQUIRE_RAW="${SC_PRE_TAG_GATE_REQUIRE:-}"
+# shellcheck disable=SC2206  # comma-split into array is intentional
+IFS=',' read -ra _PTG_BYPASS_LIST <<< "$_PTG_BYPASS_RAW"
+# shellcheck disable=SC2206
+IFS=',' read -ra _PTG_REQUIRE_LIST <<< "$_PTG_REQUIRE_RAW"
+
+_ptg_trim() {
+  local s="$1"
+  s="${s#"${s%%[![:space:]]*}"}"
+  s="${s%"${s##*[![:space:]]}"}"
+  printf '%s' "$s"
+}
+
+# Returns 0 if step is in the bypass set (via CSV or legacy env var).
+# Args: $1 = step name, $2 = optional legacy env var name (for back-compat).
+gate_bypassed() {
+  local name="$1"
+  local legacy_var="${2:-}"
+  if [ -n "$_PTG_BYPASS_RAW" ]; then
+    local item
+    for item in "${_PTG_BYPASS_LIST[@]+"${_PTG_BYPASS_LIST[@]}"}"; do
+      item="$(_ptg_trim "$item")"
+      if [ "$item" = "$name" ]; then
+        return 0
+      fi
+    done
+  fi
+  if [ -n "$legacy_var" ] && [ "${!legacy_var:-0}" = "1" ]; then
+    echo "[pre-tag-gate] DEPRECATED: $legacy_var=1 → migrate to SC_PRE_TAG_GATE_BYPASS=$name" >&2
+    return 0
+  fi
+  return 1
+}
+
+# Returns 0 if step is in the require set (escalates WARN → BLOCKER).
+# Args: $1 = step name, $2 = optional legacy env var name (for back-compat).
+gate_required() {
+  local name="$1"
+  local legacy_var="${2:-}"
+  if [ -n "$_PTG_REQUIRE_RAW" ]; then
+    local item
+    for item in "${_PTG_REQUIRE_LIST[@]+"${_PTG_REQUIRE_LIST[@]}"}"; do
+      item="$(_ptg_trim "$item")"
+      if [ "$item" = "$name" ]; then
+        return 0
+      fi
+    done
+  fi
+  if [ -n "$legacy_var" ] && [ "${!legacy_var:-0}" = "1" ]; then
+    echo "[pre-tag-gate] DEPRECATED: $legacy_var=1 → migrate to SC_PRE_TAG_GATE_REQUIRE=$name" >&2
+    return 0
+  fi
+  return 1
+}
+
+# Print summary of active overrides at session start (if any).
+if [ -n "$_PTG_BYPASS_RAW" ] || [ -n "$_PTG_REQUIRE_RAW" ]; then
+  [ -n "$_PTG_BYPASS_RAW" ]  && log "[pre-tag-gate] active BYPASS:  $_PTG_BYPASS_RAW"
+  [ -n "$_PTG_REQUIRE_RAW" ] && log "[pre-tag-gate] active REQUIRE: $_PTG_REQUIRE_RAW"
+  log "[pre-tag-gate] (step names: build|version-sequence|vitest|completeness|ci-gate|www-bundles|depth-audit|claude-md|catalog-index|tauri-boundary|apply-to-self|scaffolder-residue|citation-debt-sync|story-drift|discipline-coverage)"
+fi
+
+log "[pre-tag-gate] step 1/13: npm run build"
 if ! npm run build --silent; then
   echo "[pre-tag-gate] FAIL: npm run build exited non-zero" >&2
   echo "[pre-tag-gate] Check TypeScript errors above; common cause is" >&2
@@ -130,22 +250,22 @@ if ! npm run build --silent; then
   echo "[pre-tag-gate] (TS2835 with --moduleResolution node16/nodenext)." >&2
   exit 1
 fi
-log "[pre-tag-gate] step 1/9: PASS"
+log "[pre-tag-gate] step 1/13: PASS"
 
 # ----- step 1.5: version-sequence sanity (v1.49.636 C5, Lesson #10183) -----
 # Soft gate: warn-only by default. Hard fail when SC_REQUIRE_SEQUENTIAL_VERSION=1.
 # Bypass: SC_SKIP_VERSION_SEQUENCE_CHECK=1 (intentional gap; document in
 # release-notes). Closes v1.49.635 slot-correction incident.
-log "[pre-tag-gate] step 1.5/9: version-sequence sanity"
+log "[pre-tag-gate] step 1.5/13: version-sequence sanity"
 if ! node scripts/check-version-sequence.mjs; then
   echo "[pre-tag-gate] FAIL: version-sequence check exited non-zero" >&2
   echo "[pre-tag-gate]   If non-sequential is intentional, set SC_SKIP_VERSION_SEQUENCE_CHECK=1 + document in release-notes." >&2
   echo "[pre-tag-gate]   If strict-sequential required, this hard-fails per SC_REQUIRE_SEQUENTIAL_VERSION=1." >&2
   exit 1
 fi
-log "[pre-tag-gate] step 1.5/9: PASS"
+log "[pre-tag-gate] step 1.5/13: PASS"
 
-log "[pre-tag-gate] step 2/9: npx vitest run (full suite — mirrors CI)"
+log "[pre-tag-gate] step 2/13: npx vitest run (full suite — mirrors CI)"
 if ! npx vitest run --silent; then
   echo "[pre-tag-gate] FAIL: npx vitest run exited non-zero" >&2
   echo "[pre-tag-gate] Common v1.49.585+ CI-shaped failures:" >&2
@@ -154,28 +274,26 @@ if ! npx vitest run --silent; then
   echo "[pre-tag-gate]   - claude-md-truth CF-MED-063b: no /media/foxy/ literal paths in CLAUDE.md (use \$REPO/ or \$ARTEMIS_REPO/)" >&2
   exit 2
 fi
-log "[pre-tag-gate] step 2/9: PASS"
+log "[pre-tag-gate] step 2/13: PASS"
 
-log "[pre-tag-gate] step 3/9: release-notes completeness gate"
+log "[pre-tag-gate] step 3/13: release-notes completeness gate"
 if ! node tools/release-history/check-completeness.mjs --current --strict; then
   echo "[pre-tag-gate] FAIL: completeness gate failed" >&2
   echo "[pre-tag-gate] Author the missing release-notes files BEFORE tagging." >&2
   echo "[pre-tag-gate] See: docs/release-notes/v1.49.581/ + v1.49.582/ as gold reference." >&2
   exit 3
 fi
-log "[pre-tag-gate] step 3/9: PASS"
+log "[pre-tag-gate] step 3/13: PASS"
 
-# ----- step 4/9: CI-on-dev gate (v1.49.587 HARD RULE) -----
-# v1.49.636 C6: SC_SKIP_CI_GATE_TESTS=<csv> is the enumerated form;
-# SC_SKIP_CI_GATE=1 remains as DEPRECATED blanket override. Closes
-# Lesson #10185 (v1.49.635 blanket-override silently masked a
-# co-occurring CI red).
-SKIP_CI_GATE="${SC_SKIP_CI_GATE:-0}"
-if [ "$SKIP_CI_GATE" = "1" ]; then
-  log "[pre-tag-gate] step 4/9: SKIPPED (SC_SKIP_CI_GATE=1)"
-  echo "[pre-tag-gate] WARNING: SC_SKIP_CI_GATE=1 is DEPRECATED — use SC_SKIP_CI_GATE_TESTS=<csv> per Lesson #10185" >&2
+# ----- step 4/13: CI-on-dev gate (v1.49.587 HARD RULE) -----
+# v1.49.636 C6: SC_SKIP_CI_GATE_TESTS=<csv> is the enumerated form for
+# allowing specific test failures (script-level parameter, unchanged).
+# Blanket bypass uses SC_PRE_TAG_GATE_BYPASS=ci-gate (legacy SC_SKIP_CI_GATE=1
+# honored with deprecation warning). Closes Lesson #10185.
+if gate_bypassed "ci-gate" "SC_SKIP_CI_GATE"; then
+  log "[pre-tag-gate] step 4/13: SKIPPED"
 else
-  log "[pre-tag-gate] step 4/9: CI-on-dev verification"
+  log "[pre-tag-gate] step 4/13: CI-on-dev verification"
   DEV_SHA="$(git rev-parse origin/dev 2>/dev/null || echo "")"
   if [ -z "$DEV_SHA" ]; then
     echo "[pre-tag-gate] FAIL: cannot resolve origin/dev SHA — fetch first?" >&2
@@ -224,7 +342,7 @@ else
     if [ -n "${SC_SKIP_CI_GATE_TESTS:-}" ]; then
       log "[pre-tag-gate]   SC_SKIP_CI_GATE_TESTS present — checking enumeration..."
       if node scripts/ci-gate-enum.mjs; then
-        log "[pre-tag-gate] step 4/9: PASS (CI red(s) authorized via SC_SKIP_CI_GATE_TESTS at $DEV_SHA)"
+        log "[pre-tag-gate] step 4/13: PASS (CI red(s) authorized via SC_SKIP_CI_GATE_TESTS at $DEV_SHA)"
         echo "[pre-tag-gate]   Rationale required at .planning/ship-pipeline-discipline/ci-gate-override-rationale.md" >&2
       else
         echo "[pre-tag-gate] FAIL: CI red(s) on dev not covered by SC_SKIP_CI_GATE_TESTS" >&2
@@ -243,25 +361,24 @@ else
       exit 4
     fi
   else
-    log "[pre-tag-gate] step 4/9: PASS (CI green at $DEV_SHA)"
+    log "[pre-tag-gate] step 4/13: PASS (CI green at $DEV_SHA)"
   fi
 fi
 
-# ----- step 5/9: SPICE renderer bundle freshness (v1.49.587 unwired-build closure) -----
-log "[pre-tag-gate] step 5/9: www-bundles freshness (SPICE renderer)"
+# ----- step 5/13: SPICE renderer bundle freshness (v1.49.587 unwired-build closure) -----
+log "[pre-tag-gate] step 5/13: www-bundles freshness (SPICE renderer)"
 if ! bash "$REPO_ROOT/tools/build-www-bundles.sh" >/dev/null 2>&1; then
   echo "[pre-tag-gate] FAIL: www-bundles build failed" >&2
   echo "[pre-tag-gate] Re-run for diagnostics: bash tools/build-www-bundles.sh" >&2
   exit 5
 fi
-log "[pre-tag-gate] step 5/9: PASS"
+log "[pre-tag-gate] step 5/13: PASS"
 
-# ----- step 6/9: depth-audit (BLOCKER as of v1.49.591; closes Lesson #10188) -----
-SKIP_DEPTH="${SC_SKIP_DEPTH_AUDIT:-0}"
-if [ "$SKIP_DEPTH" = "1" ]; then
-  log "[pre-tag-gate] step 6/9: SKIPPED (SC_SKIP_DEPTH_AUDIT=1)"
+# ----- step 6/13: depth-audit (BLOCKER as of v1.49.591; closes Lesson #10188) -----
+if gate_bypassed "depth-audit" "SC_SKIP_DEPTH_AUDIT"; then
+  log "[pre-tag-gate] step 6/13: SKIPPED"
 else
-  log "[pre-tag-gate] step 6/9: depth-audit (BLOCKER mode — hardened at v1.49.591; cross-link strict at v1.49.595+)"
+  log "[pre-tag-gate] step 6/13: depth-audit (BLOCKER mode — hardened at v1.49.591; cross-link strict at v1.49.595+)"
   if [ -f "$REPO_ROOT/.planning/STATE.md" ]; then
     DEPTH_OUT="$(node "$REPO_ROOT/tools/depth-audit.mjs" --current --cross-link-strict 2>&1)" || true
     if echo "$DEPTH_OUT" | grep -qE '(FAIL|MISSING)'; then
@@ -272,18 +389,17 @@ else
       echo "[pre-tag-gate]   Override (emergency only — almost never the right call): SC_SKIP_DEPTH_AUDIT=1" >&2
       exit 6
     fi
-    log "[pre-tag-gate] step 6/9: PASS (depth-audit clean)"
+    log "[pre-tag-gate] step 6/13: PASS (depth-audit clean)"
   else
-    log "[pre-tag-gate] step 6/9: SKIPPED (.planning/STATE.md absent — cannot derive version)"
+    log "[pre-tag-gate] step 6/13: SKIPPED (.planning/STATE.md absent — cannot derive version)"
   fi
 fi
 
-# ----- step 7/9: CLAUDE.md auto-render drift check -----
-SKIP_CLAUDE_MD="${SC_SKIP_CLAUDE_MD_GATE:-0}"
-if [ "$SKIP_CLAUDE_MD" = "1" ]; then
-  log "[pre-tag-gate] step 7/9: SKIPPED (SC_SKIP_CLAUDE_MD_GATE=1)"
+# ----- step 7/13: CLAUDE.md auto-render drift check -----
+if gate_bypassed "claude-md" "SC_SKIP_CLAUDE_MD_GATE"; then
+  log "[pre-tag-gate] step 7/13: SKIPPED"
 else
-  log "[pre-tag-gate] step 7/9: CLAUDE.md auto-render drift check"
+  log "[pre-tag-gate] step 7/13: CLAUDE.md auto-render drift check"
   if ! node "$REPO_ROOT/tools/render-claude-md.mjs" --check >/dev/null 2>&1; then
     echo "[pre-tag-gate] FAIL: CLAUDE.md is out of sync with source-of-truth manifests" >&2
     echo "[pre-tag-gate]   Fix: npm run render:claude-md   # then commit the diff" >&2
@@ -291,15 +407,14 @@ else
     echo "[pre-tag-gate]   Override (emergency only): SC_SKIP_CLAUDE_MD_GATE=1" >&2
     exit 7
   fi
-  log "[pre-tag-gate] step 7/9: PASS"
+  log "[pre-tag-gate] step 7/13: PASS"
 fi
 
-# ----- step 8/9: catalog-index drift check (BLOCKER — added v1.49.601) -----
-SKIP_CATALOG_INDEX="${SC_SKIP_CATALOG_INDEX_GATE:-0}"
-if [ "$SKIP_CATALOG_INDEX" = "1" ]; then
-  log "[pre-tag-gate] step 8/9: SKIPPED (SC_SKIP_CATALOG_INDEX_GATE=1)"
+# ----- step 8/13: catalog-index drift check (BLOCKER — added v1.49.601) -----
+if gate_bypassed "catalog-index" "SC_SKIP_CATALOG_INDEX_GATE"; then
+  log "[pre-tag-gate] step 8/13: SKIPPED"
 else
-  log "[pre-tag-gate] step 8/9: catalog-index drift check (BLOCKER mode — added v1.49.601)"
+  log "[pre-tag-gate] step 8/13: catalog-index drift check (BLOCKER mode — added v1.49.601)"
   if ! node "$REPO_ROOT/tools/update-catalog-indexes.mjs" --check >/dev/null 2>&1; then
     echo "[pre-tag-gate] FAIL: catalog-index drift detected — NASA/MUS/ELC catalog index" >&2
     echo "[pre-tag-gate]   out of sync with on-disk degree dirs" >&2
@@ -309,15 +424,14 @@ else
     echo "[pre-tag-gate]   Override (emergency only): SC_SKIP_CATALOG_INDEX_GATE=1" >&2
     exit 8
   fi
-  log "[pre-tag-gate] step 8/9: PASS"
+  log "[pre-tag-gate] step 8/13: PASS"
 fi
 
-# ----- step 9/9: tauri-boundary audit (added v1.49.634 §15) -----
-SKIP_TAURI_BOUNDARY="${SC_SKIP_TAURI_BOUNDARY_GATE:-0}"
-if [ "$SKIP_TAURI_BOUNDARY" = "1" ]; then
-  log "[pre-tag-gate] step 9/9: SKIPPED (SC_SKIP_TAURI_BOUNDARY_GATE=1)"
+# ----- step 9/13: tauri-boundary audit (added v1.49.634 §15) -----
+if gate_bypassed "tauri-boundary" "SC_SKIP_TAURI_BOUNDARY_GATE"; then
+  log "[pre-tag-gate] step 9/13: SKIPPED"
 else
-  log "[pre-tag-gate] step 9/9: tauri-boundary audit"
+  log "[pre-tag-gate] step 9/13: tauri-boundary audit"
   if ! node "$REPO_ROOT/tools/tauri-boundary-audit.mjs" --check >/dev/null 2>&1; then
     echo "[pre-tag-gate] FAIL: tauri-boundary violations detected" >&2
     echo "[pre-tag-gate]   Inspect: node tools/tauri-boundary-audit.mjs" >&2
@@ -326,7 +440,7 @@ else
     echo "[pre-tag-gate]   Override (emergency only): SC_SKIP_TAURI_BOUNDARY_GATE=1" >&2
     exit 9
   fi
-  log "[pre-tag-gate] step 9/9: PASS"
+  log "[pre-tag-gate] step 9/13: PASS"
 fi
 
 # ----- step 9.5: apply-to-self enforcement (v1.49.636 C7, Meta-Lesson) -----
@@ -334,22 +448,120 @@ fi
 # the Meta-Lesson "discipline docs only prove their value when their
 # authors follow them in the same commit window" by mechanically
 # checking newly-authored test files against discipline-doc patterns.
-SKIP_APPLY_TO_SELF="${SC_SKIP_APPLY_TO_SELF:-0}"
-if [ "$SKIP_APPLY_TO_SELF" = "1" ]; then
-  log "[pre-tag-gate] step 9.5/9: SKIPPED (SC_SKIP_APPLY_TO_SELF=1)"
+if gate_bypassed "apply-to-self" "SC_SKIP_APPLY_TO_SELF"; then
+  log "[pre-tag-gate] step 9.5/13: SKIPPED"
 else
-  log "[pre-tag-gate] step 9.5/9: apply-to-self enforcement"
+  log "[pre-tag-gate] step 9.5/13: apply-to-self enforcement"
+  # Propagate require flag into the script's env so the script's existing
+  # SC_REQUIRE_APPLY_TO_SELF read continues to drive WARN→BLOCK escalation.
+  if gate_required "apply-to-self" "SC_REQUIRE_APPLY_TO_SELF"; then
+    export SC_REQUIRE_APPLY_TO_SELF=1
+  fi
   if ! node "$REPO_ROOT/scripts/apply-to-self.mjs"; then
-    # Default exit is 0 (WARN-only). Only non-zero when
-    # SC_REQUIRE_APPLY_TO_SELF=1 + findings present.
-    echo "[pre-tag-gate] FAIL: apply-to-self findings present AND SC_REQUIRE_APPLY_TO_SELF=1" >&2
+    # Default exit is 0 (WARN-only). Only non-zero when the require flag
+    # is set + findings present.
+    echo "[pre-tag-gate] FAIL: apply-to-self findings present AND require flag set" >&2
     echo "[pre-tag-gate]   Fix the findings OR allowlist them at" >&2
     echo "[pre-tag-gate]   .planning/ship-pipeline-discipline/apply-to-self-allowlist.md" >&2
-    echo "[pre-tag-gate]   Override (emergency only): SC_SKIP_APPLY_TO_SELF=1" >&2
+    echo "[pre-tag-gate]   Override (emergency only): SC_PRE_TAG_GATE_BYPASS=apply-to-self" >&2
     exit 10
   fi
-  log "[pre-tag-gate] step 9.5/9: PASS"
+  log "[pre-tag-gate] step 9.5/13: PASS"
 fi
 
-log "[pre-tag-gate] all 9 checks PASS — safe to \`git tag\` and merge to main"
+# ----- step 10/13: scaffolder-residue audit (v1.49.653, CONCERNS §18.2) -----
+# Closes the "shipping risk" by detecting scaffolder-emit TODO phrases that
+# escape into source-of-truth skills/agents. The tool ships with explicit
+# literal phrases from capability-scaffolder.ts + skill-generator.ts so it
+# is narrow enough to not false-positive on legitimate agent prompts that
+# reference TODO as a concept they detect (doc-linter, gsd-code-reviewer).
+if gate_bypassed "scaffolder-residue" "SC_SKIP_SCAFFOLDER_RESIDUE_GATE"; then
+  log "[pre-tag-gate] step 10/13: SKIPPED"
+else
+  log "[pre-tag-gate] step 10/13: scaffolder-residue audit"
+  if ! node "$REPO_ROOT/tools/check-scaffolder-residue.mjs" --strict >/dev/null 2>&1; then
+    echo "[pre-tag-gate] FAIL: scaffolder-residue TODO markers detected in project-claude/skills or agents" >&2
+    echo "[pre-tag-gate]   Inspect: node tools/check-scaffolder-residue.mjs" >&2
+    echo "[pre-tag-gate]   Fix:     replace TODO bodies with real content before tagging" >&2
+    echo "[pre-tag-gate]   Override (emergency only): SC_PRE_TAG_GATE_BYPASS=scaffolder-residue" >&2
+    exit 12
+  fi
+  log "[pre-tag-gate] step 10/13: PASS"
+fi
+
+# ----- step 11/13: citation-debt ledger sync (v1.49.653, CONCERNS §9.3) -----
+# Scans recent retrospectives for V-flag emit/close patterns. Exit 1 = activity
+# detected, ledger may need review. WARN-only by default so the gate does not
+# block ships on an informational signal; SC_REQUIRE_CITATION_DEBT_SYNC=1 hard.
+if gate_bypassed "citation-debt-sync" "SC_SKIP_CITATION_DEBT_GATE"; then
+  log "[pre-tag-gate] step 11/13: SKIPPED"
+else
+  log "[pre-tag-gate] step 11/13: citation-debt ledger sync scan"
+  CITATION_SCAN_OUTPUT="$(node "$REPO_ROOT/tools/citation-debt/scan-retrospectives.mjs" --since "v$(node -p "require('$REPO_ROOT/package.json').version")" 2>&1)" || true
+  CITATION_SCAN_EXIT=$?
+  if [ "$CITATION_SCAN_EXIT" -ne 0 ]; then
+    echo "[pre-tag-gate] INFO: citation-debt scan detected V-flag activity since current tag" >&2
+    echo "$CITATION_SCAN_OUTPUT" | head -20 >&2
+    if gate_required "citation-debt-sync" "SC_REQUIRE_CITATION_DEBT_SYNC"; then
+      echo "[pre-tag-gate] FAIL: citation-debt-sync escalated — review and update .planning/citation-debt.json" >&2
+      exit 13
+    fi
+    log "[pre-tag-gate] step 11/13: WARN (informational; set SC_PRE_TAG_GATE_REQUIRE=citation-debt-sync to block)"
+  else
+    log "[pre-tag-gate] step 11/13: PASS (no V-flag activity)"
+  fi
+fi
+
+# ----- step 12/12: STORY.md drift detection (v1.49.653, recurrence path for 8-degree drift) -----
+# Detects drift between docs/release-notes/STORY.md preamble and reality
+# (chapter directory count + package.json version). The 8-degree sprint
+# 2026-05-12/13 missed T14 step 2.5 (scripts/append-story-entry.mjs)
+# eight times; this gate makes that drift visible at audit time.
+# WARN-only by default; SC_REQUIRE_STORY_SYNC=1 to block.
+if gate_bypassed "story-drift" "SC_SKIP_STORY_DRIFT_GATE"; then
+  log "[pre-tag-gate] step 12/13: SKIPPED"
+else
+  log "[pre-tag-gate] step 12/13: STORY.md drift detection"
+  STORY_DRIFT_OUTPUT="$(node "$REPO_ROOT/tools/check-story-drift.mjs" 2>&1)" || true
+  STORY_DRIFT_EXIT=$?
+  if [ "$STORY_DRIFT_EXIT" -ne 0 ] || echo "$STORY_DRIFT_OUTPUT" | grep -q "Detected.*drift"; then
+    echo "[pre-tag-gate] INFO: STORY.md drift detected" >&2
+    echo "$STORY_DRIFT_OUTPUT" | head -25 >&2
+    if gate_required "story-drift" "SC_REQUIRE_STORY_SYNC"; then
+      echo "[pre-tag-gate] FAIL: story-drift escalated — run T14 step 2.5 (scripts/append-story-entry.mjs) before tagging" >&2
+      exit 14
+    fi
+    log "[pre-tag-gate] step 12/13: WARN (informational; set SC_PRE_TAG_GATE_REQUIRE=story-drift to block)"
+  else
+    log "[pre-tag-gate] step 12/13: PASS (STORY.md in sync)"
+  fi
+fi
+
+# ----- step 13/13: discipline coverage audit (v1.49.653, L-04, CONCERNS §23.4) -----
+# Surfaces lesson IDs that appear in 2+ retrospectives but are not captured in
+# tools/render-claude-md/disciplines.json or any cited discipline doc. WARN-only
+# by default — discipline-as-data scaling is operator-driven; the gate just
+# surfaces the gap. SC_PRE_TAG_GATE_REQUIRE=discipline-coverage to block.
+if gate_bypassed "discipline-coverage"; then
+  log "[pre-tag-gate] step 13/13: SKIPPED"
+else
+  log "[pre-tag-gate] step 13/13: discipline coverage audit"
+  COVERAGE_OUTPUT="$(node "$REPO_ROOT/tools/check-discipline-coverage.mjs" 2>&1)" || true
+  COVERAGE_EXIT=$?
+  UNCODIFIED_COUNT="$(echo "$COVERAGE_OUTPUT" | grep -oE "UNCODIFIED.*: [0-9]+" | head -1 | grep -oE "[0-9]+$" || echo "0")"
+  PARTIAL_COUNT="$(echo "$COVERAGE_OUTPUT" | grep -oE "PARTIAL.*: [0-9]+" | head -1 | grep -oE "[0-9]+$" || echo "0")"
+  if [ "${UNCODIFIED_COUNT:-0}" -gt 0 ]; then
+    echo "[pre-tag-gate] INFO: $UNCODIFIED_COUNT uncodified lesson(s) + $PARTIAL_COUNT partial match(es)" >&2
+    echo "[pre-tag-gate]   Run: node tools/check-discipline-coverage.mjs for the full report" >&2
+    if gate_required "discipline-coverage"; then
+      echo "[pre-tag-gate] FAIL: discipline-coverage escalated — codify uncodified lessons into discipline docs / manifest" >&2
+      exit 15
+    fi
+    log "[pre-tag-gate] step 13/13: WARN (informational; set SC_PRE_TAG_GATE_REQUIRE=discipline-coverage to block)"
+  else
+    log "[pre-tag-gate] step 13/13: PASS (no uncodified lessons)"
+  fi
+fi
+
+log "[pre-tag-gate] all 13 checks PASS — safe to \`git tag\` and merge to main"
 exit 0
