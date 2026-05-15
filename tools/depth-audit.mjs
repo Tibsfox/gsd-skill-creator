@@ -132,6 +132,15 @@ const TRACK_CARDS_WARN_THRESHOLD = 6;   // 6-7 = WARN; <6 = FAIL/BLOCKER
 const NAV_CARD_RE = /\bnav-card\b/g;
 const NAV_CARD_PASS_THRESHOLD = 1;
 
+// SCAFFOLD-PENDING marker (added v1.49.654 C04+C05; FA-652-11). Index.html
+// files written by tools/scaffold-cross-track-dirs.mjs carry this marker to
+// indicate "cohort presence tracked but full substrate-content backfill
+// pending." For MUS/ELC, the marker downgrades depth-audit FAIL (below depth
+// threshold) findings to status SCAFFOLD-PENDING in the rollup, which the
+// caller treats as WARN rather than FAIL. Removed by the content-backfill
+// W2 dispatches in the subsequent counter-cadence milestone (v1.49.655).
+const SCAFFOLD_PENDING_MARKER_RE = /<!--\s*SCAFFOLD-PENDING:[^-]*-->/;
+
 function previousVersion(v) {
   // "1.70" → "1.69"; "1.69" → "1.68"
   const m = v.match(/^(\d+)\.(\d+)$/);
@@ -362,6 +371,7 @@ function inspectFile(path, track) {
   const lines = text.split(/\r?\n/).length;
   const bytes = stat.size;
   const cards = (text.match(TRACK_CARD_RE) || []).length;
+  const scaffoldPending = SCAFFOLD_PENDING_MARKER_RE.test(text);
   // Track-specific section counting:
   // NASA uses canonical named sections; MUS + ELC use numbered card-title h2s.
   let sectionsFound, sectionsExpected, sectionsThreshold;
@@ -374,7 +384,7 @@ function inspectFile(path, track) {
     sectionsExpected = CARD_TITLE_PASS_THRESHOLD;
     sectionsThreshold = CARD_TITLE_PASS_THRESHOLD;
   }
-  return { path, lines, bytes, cards, sectionsFound, sectionsExpected, sectionsThreshold };
+  return { path, lines, bytes, cards, sectionsFound, sectionsExpected, sectionsThreshold, scaffoldPending };
 }
 
 function ratio(curr, prev) {
@@ -474,15 +484,39 @@ function auditVersion(version, opts = {}) {
     // Roll up worst-case across all submetrics. MISSING (artifacts/ dir absent)
     // is treated as FAIL — the artifacts/ directory is mandatory for NASA tracks.
     const allSignals = [status, sectionStatus, artifactStatus, crossLinkStatus, trackCardsStatus, navCardStatus];
-    const overallStatus =
+    let overallStatus =
       allSignals.some(s => s === 'FAIL' || s === 'MISSING') ? 'FAIL' :
       allSignals.includes('WARN') ? 'WARN' : 'PASS';
+
+    // v1.49.654 C05 (FA-652-11): MUS/ELC SCAFFOLD-PENDING marker downgrades
+    // FAIL → WARN with rollup status SCAFFOLD-PENDING. The scaffold tool
+    // (tools/scaffold-cross-track-dirs.mjs) writes stubs carrying the marker
+    // when a NASA degree advances without sibling MUS/ELC content. Backfill
+    // milestones (v1.49.655+) remove the marker by replacing the stub.
+    const scaffoldPending = curr.scaffoldPending === true;
+    let scaffoldDowngraded = false;
+    if (scaffoldPending && (track === 'MUS' || track === 'ELC') && overallStatus === 'FAIL') {
+      overallStatus = 'SCAFFOLD-PENDING';
+      scaffoldDowngraded = true;
+    }
+
+    // v1.49.654 C05 (FA-652-11): granular bypass.
+    // SC_SKIP_DEPTH_AUDIT_MUS_ELC=1 downgrades any MUS/ELC FAIL/SCAFFOLD-PENDING
+    // finding to WARN in the rollup (more conscious than blanket SC_SKIP_DEPTH_AUDIT).
+    const skipMusElc = process.env.SC_SKIP_DEPTH_AUDIT_MUS_ELC === '1';
+    let musElcSkipDowngraded = false;
+    if (skipMusElc && (track === 'MUS' || track === 'ELC') && (overallStatus === 'FAIL' || overallStatus === 'SCAFFOLD-PENDING')) {
+      overallStatus = 'WARN';
+      musElcSkipDowngraded = true;
+    }
 
     const baseMsg = `${(lineRatio * 100).toFixed(0)}% lines / ${(byteRatio * 100).toFixed(0)}% bytes / ${curr.sectionsFound}/${curr.sectionsExpected} ${track === 'NASA' ? 'canonical' : 'card-title'} sections`;
     const artifactMsg = artifacts ? ` / ${artifacts.totalFiles} artifacts ${artifacts.categoriesFound.length}/${artifacts.categoriesExpected} cat` : '';
     const crossLinkMsg = crossLinks ? ` / ${crossLinks.coveredOnDisk}/${crossLinks.totalOnDisk} linked` : '';
     const trackCardsMsg = trackCards ? ` / ${trackCards.found}/${trackCards.expected} track-cards` : '';
     const navCardMsg = navCard ? ` / ${navCard.count}× nav-card` : '';
+    const scaffoldNote = scaffoldDowngraded ? ' [scaffold-pending]' : '';
+    const musElcSkipNote = musElcSkipDowngraded ? ' [SC_SKIP_DEPTH_AUDIT_MUS_ELC]' : '';
     findings.push({
       track, file: currPath,
       status: overallStatus,
@@ -511,7 +545,10 @@ function auditVersion(version, opts = {}) {
       compositePassActive: useComposite,
       crossLinkStrictActive: crossLinkStrict,
       trackCardsGateSkipped: skipTrackCardsGate,
-      message: `${overallStatus}${useComposite ? ' (composite)' : ''}: ${baseMsg}${artifactMsg}${crossLinkMsg}${trackCardsMsg}${navCardMsg}`,
+      scaffoldPending,
+      scaffoldDowngraded,
+      musElcSkipDowngraded,
+      message: `${overallStatus}${useComposite ? ' (composite)' : ''}: ${baseMsg}${artifactMsg}${crossLinkMsg}${trackCardsMsg}${navCardMsg}${scaffoldNote}${musElcSkipNote}`,
     });
   }
 
@@ -523,8 +560,11 @@ function formatReport(report) {
   lines.push(`Depth-audit report: v${report.version} vs v${report.predecessor}`);
   lines.push('');
   for (const f of report.findings) {
-    const emoji = f.status === 'PASS' ? 'OK' : f.status === 'WARN' ? '!!' : 'X ';
-    lines.push(`[${emoji}] ${f.track.padEnd(4)} ${f.status.padEnd(15)} ${f.message}`);
+    let emoji;
+    if (f.status === 'PASS') emoji = 'OK';
+    else if (f.status === 'WARN' || f.status === 'SCAFFOLD-PENDING') emoji = '!!';
+    else emoji = 'X ';
+    lines.push(`[${emoji}] ${f.track.padEnd(4)} ${f.status.padEnd(16)} ${f.message}`);
     if (f.curr && f.prev) {
       lines.push(`     curr: ${f.curr.lines.toString().padStart(4)} lines / ${f.curr.bytes.toString().padStart(6)} bytes / ${f.curr.cards} cards / ${f.curr.sectionsFound}/${f.curr.sectionsExpected} sections`);
       lines.push(`     prev: ${f.prev.lines.toString().padStart(4)} lines / ${f.prev.bytes.toString().padStart(6)} bytes / ${f.prev.cards} cards / ${f.prev.sectionsFound}/${f.prev.sectionsExpected} sections`);
@@ -565,7 +605,7 @@ function formatReport(report) {
 }
 
 function summary(report) {
-  const counts = { PASS: 0, WARN: 0, FAIL: 0, MISSING: 0, NO_PREDECESSOR: 0 };
+  const counts = { PASS: 0, WARN: 0, 'SCAFFOLD-PENDING': 0, FAIL: 0, MISSING: 0, NO_PREDECESSOR: 0 };
   for (const f of report.findings) counts[f.status] = (counts[f.status] || 0) + 1;
   return counts;
 }
@@ -616,7 +656,7 @@ function main() {
     console.log('');
     const s = summary(report);
     const parts = [];
-    for (const k of ['PASS', 'WARN', 'FAIL', 'MISSING', 'NO_PREDECESSOR']) {
+    for (const k of ['PASS', 'WARN', 'SCAFFOLD-PENDING', 'FAIL', 'MISSING', 'NO_PREDECESSOR']) {
       if (s[k]) parts.push(`${k}=${s[k]}`);
     }
     console.log(`Summary: ${parts.join(' / ') || 'no findings'}`);

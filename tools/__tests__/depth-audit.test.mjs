@@ -815,3 +815,116 @@ describe('v1.49.603: NASA Research Track cards + nav-card drift gate (#10244 obs
     expect(elc.status).toBe('PASS');
   });
 });
+
+// v1.49.654 C05 (FA-652-11): SCAFFOLD-PENDING marker + granular bypass tests.
+describe('v1.49.654 C05: SCAFFOLD-PENDING + SC_SKIP_DEPTH_AUDIT_MUS_ELC', () => {
+  function scaffoldStub(track, version) {
+    const dir = join(tmpRoot, 'www', 'tibsfox', 'com', 'Research', track, version);
+    mkdirSync(dir, { recursive: true });
+    const path = join(dir, 'index.html');
+    const body = `<!DOCTYPE html>
+<html><head>
+<title>${track} ${version} scaffold</title>
+<!-- SCAFFOLD-PENDING: backfill required -->
+</head><body>
+<h1>${track} ${version}</h1>
+<p>scaffold</p>
+</body></html>`;
+    writeFileSync(path, body);
+    return path;
+  }
+
+  it('MUS scaffold-pending stub downgrades FAIL to SCAFFOLD-PENDING', () => {
+    gold('NASA', '1.68', 600, 80000);
+    gold('NASA', '1.69', 600, 80000);
+    gold('MUS', '1.68', 600, 80000, 14);
+    scaffoldStub('MUS', '1.69');         // tiny stub with marker
+    gold('ELC', '1.68', 600, 80000, 14);
+    gold('ELC', '1.69', 600, 80000, 14);
+    makeArtifacts('1.69', { story: 2, shaders: 2, audio: 4, sims: 2, circuits: 3 });
+    const r = runAudit('1.69', '--json');
+    const report = JSON.parse(r.stdout);
+    const mus = report.findings.find(f => f.track === 'MUS');
+    expect(mus.status).toBe('SCAFFOLD-PENDING');
+    expect(mus.scaffoldPending).toBe(true);
+    expect(mus.scaffoldDowngraded).toBe(true);
+  });
+
+  it('ELC scaffold-pending stub downgrades FAIL to SCAFFOLD-PENDING', () => {
+    gold('NASA', '1.68', 600, 80000);
+    gold('NASA', '1.69', 600, 80000);
+    gold('MUS', '1.68', 600, 80000, 14);
+    gold('MUS', '1.69', 600, 80000, 14);
+    gold('ELC', '1.68', 600, 80000, 14);
+    scaffoldStub('ELC', '1.69');
+    makeArtifacts('1.69', { story: 2, shaders: 2, audio: 4, sims: 2, circuits: 3 });
+    const r = runAudit('1.69', '--json');
+    const report = JSON.parse(r.stdout);
+    const elc = report.findings.find(f => f.track === 'ELC');
+    expect(elc.status).toBe('SCAFFOLD-PENDING');
+  });
+
+  it('SCAFFOLD-PENDING marker on NASA index does NOT downgrade NASA finding', () => {
+    // Defense-in-depth: marker only applies to MUS/ELC.
+    gold('NASA', '1.68', 600, 80000);
+    scaffoldStub('NASA', '1.69');         // tiny NASA stub with marker
+    gold('MUS', '1.68', 600, 80000, 14);
+    gold('MUS', '1.69', 600, 80000, 14);
+    gold('ELC', '1.68', 600, 80000, 14);
+    gold('ELC', '1.69', 600, 80000, 14);
+    const r = runAudit('1.69', '--json');
+    const report = JSON.parse(r.stdout);
+    const nasa = report.findings.find(f => f.track === 'NASA');
+    expect(['FAIL', 'MISSING']).toContain(nasa.status);
+    expect(nasa.scaffoldDowngraded).toBe(false);
+  });
+
+  it('SC_SKIP_DEPTH_AUDIT_MUS_ELC=1 downgrades MUS/ELC FAIL to WARN', () => {
+    gold('NASA', '1.68', 600, 80000);
+    gold('NASA', '1.69', 600, 80000);
+    gold('MUS', '1.68', 600, 80000, 14);
+    thin('MUS', '1.69');                  // thin = below depth, FAIL
+    gold('ELC', '1.68', 600, 80000, 14);
+    thin('ELC', '1.69');
+    makeArtifacts('1.69', { story: 2, shaders: 2, audio: 4, sims: 2, circuits: 3 });
+    try {
+      const stdout = execSync(`node ${SCRIPT_PATH} 1.69 --json --root ${tmpRoot}`, {
+        cwd: tmpRoot,
+        encoding: 'utf8',
+        env: { ...process.env, SC_SKIP_DEPTH_AUDIT_MUS_ELC: '1' },
+        stdio: ['pipe', 'pipe', 'pipe'],
+      });
+      const report = JSON.parse(stdout);
+      const mus = report.findings.find(f => f.track === 'MUS');
+      const elc = report.findings.find(f => f.track === 'ELC');
+      expect(mus.status).toBe('WARN');
+      expect(mus.musElcSkipDowngraded).toBe(true);
+      expect(elc.status).toBe('WARN');
+      expect(elc.musElcSkipDowngraded).toBe(true);
+    } catch (e) {
+      throw new Error(`audit failed: ${e.stderr || e.message}`);
+    }
+  });
+
+  it('SC_SKIP_DEPTH_AUDIT_MUS_ELC=1 does NOT affect NASA findings', () => {
+    gold('NASA', '1.68', 600, 80000);
+    thin('NASA', '1.69');                 // NASA below-depth
+    gold('MUS', '1.68', 600, 80000, 14);
+    gold('MUS', '1.69', 600, 80000, 14);
+    gold('ELC', '1.68', 600, 80000, 14);
+    gold('ELC', '1.69', 600, 80000, 14);
+    try {
+      const stdout = execSync(`node ${SCRIPT_PATH} 1.69 --json --root ${tmpRoot}`, {
+        cwd: tmpRoot,
+        encoding: 'utf8',
+        env: { ...process.env, SC_SKIP_DEPTH_AUDIT_MUS_ELC: '1' },
+        stdio: ['pipe', 'pipe', 'pipe'],
+      });
+      const report = JSON.parse(stdout);
+      const nasa = report.findings.find(f => f.track === 'NASA');
+      expect(['FAIL', 'MISSING']).toContain(nasa.status);
+    } catch (e) {
+      throw new Error(`audit failed: ${e.stderr || e.message}`);
+    }
+  });
+});

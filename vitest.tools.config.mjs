@@ -12,6 +12,7 @@ export default defineConfig({
       'tools/release-history/__tests__/score-completeness-c5.test.mjs',
       'scripts/__tests__/bump-version.test.mjs',
       'tools/__tests__/depth-audit.test.mjs',
+      'tools/__tests__/scaffold-cross-track-dirs.test.mjs',
       'tools/__tests__/ftp-sync.test.mjs',
       'tools/__tests__/ftp-delete.test.mjs',
       'tools/__tests__/render-claude-md.test.mjs',

@@ -37,8 +37,8 @@
   },
   {
     "name": "SC_PRE_TAG_GATE_BYPASS",
-    "default_behavior": "unset → all 12 pre-tag-gate steps run",
-    "override_behavior": "`=<csv>` → skip the named steps (v1.49.653 L-02 consolidation; vocabulary: build, version-sequence, vitest, completeness, ci-gate, www-bundles, depth-audit, claude-md, catalog-index, tauri-boundary, apply-to-self, scaffolder-residue, citation-debt-sync, story-drift)"
+    "default_behavior": "unset → all 13 pre-tag-gate steps run",
+    "override_behavior": "`=<csv>` → skip the named steps (v1.49.653 L-02 consolidation + v1.49.654 depth-audit-mus-elc granular bypass; vocabulary: build, version-sequence, vitest, completeness, ci-gate, www-bundles, depth-audit, depth-audit-mus-elc, claude-md, catalog-index, tauri-boundary, apply-to-self, scaffolder-residue, citation-debt-sync, story-drift, discipline-coverage)"
   },
   {
     "name": "SC_PRE_TAG_GATE_REQUIRE",
@@ -72,5 +72,11 @@
     "name": "SC_SKIP_TRACK_CARDS_GATE",
     "default_behavior": "unset → enforce NASA Research Track cards (8/8 unique Track 1a/1b/2/3/4/5/6/7) + bottom-of-content nav-card in depth-audit (BLOCKER mode at v1.49.603 introduction)",
     "override_behavior": "`=1` → downgrade track-card-coverage + nav-card-presence FAIL → WARN (emergency only — author the missing cards instead)"
+  },
+  {
+    "name": "SC_SKIP_DEPTH_AUDIT_MUS_ELC",
+    "name_suffix": " *(prefer SC_PRE_TAG_GATE_BYPASS=depth-audit-mus-elc)*",
+    "default_behavior": "unset → MUS/ELC FAIL findings block in pre-tag-gate step 6; SCAFFOLD-PENDING marker (from tools/scaffold-cross-track-dirs.mjs) already downgrades FAIL→WARN-equivalent",
+    "override_behavior": "`=1` → downgrade any MUS/ELC FAIL or SCAFFOLD-PENDING to WARN in rollup (FA-652-11 C05; granular alternative to blanket SC_SKIP_DEPTH_AUDIT)"
   }
 ]

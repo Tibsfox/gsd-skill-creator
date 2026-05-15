@@ -112,7 +112,7 @@
 #   SC_PRE_TAG_GATE_REQUIRE=<csv>  escalate WARN-only steps to BLOCKER
 #
 #   step-name vocabulary: build version-sequence vitest completeness ci-gate
-#                         www-bundles depth-audit claude-md catalog-index
+#                         www-bundles depth-audit depth-audit-mus-elc claude-md catalog-index
 #                         tauri-boundary apply-to-self scaffolder-residue
 #                         citation-debt-sync story-drift discipline-coverage
 #
@@ -172,7 +172,7 @@ log() {
 #
 # Step-name vocabulary (matches gate step labels):
 #   build version-sequence vitest completeness ci-gate www-bundles
-#   depth-audit claude-md catalog-index tauri-boundary apply-to-self
+#   depth-audit depth-audit-mus-elc claude-md catalog-index tauri-boundary apply-to-self
 #   scaffolder-residue citation-debt-sync story-drift
 #
 # Legacy SC_SKIP_* / SC_REQUIRE_* env vars continue to be honored with a
@@ -239,7 +239,7 @@ gate_required() {
 if [ -n "$_PTG_BYPASS_RAW" ] || [ -n "$_PTG_REQUIRE_RAW" ]; then
   [ -n "$_PTG_BYPASS_RAW" ]  && log "[pre-tag-gate] active BYPASS:  $_PTG_BYPASS_RAW"
   [ -n "$_PTG_REQUIRE_RAW" ] && log "[pre-tag-gate] active REQUIRE: $_PTG_REQUIRE_RAW"
-  log "[pre-tag-gate] (step names: build|version-sequence|vitest|completeness|ci-gate|www-bundles|depth-audit|claude-md|catalog-index|tauri-boundary|apply-to-self|scaffolder-residue|citation-debt-sync|story-drift|discipline-coverage)"
+  log "[pre-tag-gate] (step names: build|version-sequence|vitest|completeness|ci-gate|www-bundles|depth-audit|depth-audit-mus-elc|claude-md|catalog-index|tauri-boundary|apply-to-self|scaffolder-residue|citation-debt-sync|story-drift|discipline-coverage)"
 fi
 
 log "[pre-tag-gate] step 1/13: npm run build"
@@ -375,11 +375,21 @@ fi
 log "[pre-tag-gate] step 5/13: PASS"
 
 # ----- step 6/13: depth-audit (BLOCKER as of v1.49.591; closes Lesson #10188) -----
+# v1.49.654 (FA-652-11 C05): added granular `depth-audit-mus-elc` bypass token
+# that downgrades MUS/ELC findings only, leaving NASA depth checks intact. Use
+# this when shipping during a counter-cadence cross-track scaffold-pending phase
+# instead of the blanket `depth-audit` bypass.
 if gate_bypassed "depth-audit" "SC_SKIP_DEPTH_AUDIT"; then
   log "[pre-tag-gate] step 6/13: SKIPPED"
 else
   log "[pre-tag-gate] step 6/13: depth-audit (BLOCKER mode — hardened at v1.49.591; cross-link strict at v1.49.595+)"
   if [ -f "$REPO_ROOT/.planning/STATE.md" ]; then
+    # Granular MUS/ELC bypass: token `depth-audit-mus-elc` → SC_SKIP_DEPTH_AUDIT_MUS_ELC=1
+    # downgrades MUS/ELC FAIL → WARN inside depth-audit.mjs but keeps NASA strict.
+    if gate_bypassed "depth-audit-mus-elc" "SC_SKIP_DEPTH_AUDIT_MUS_ELC"; then
+      export SC_SKIP_DEPTH_AUDIT_MUS_ELC=1
+      log "[pre-tag-gate] step 6/13:   MUS/ELC findings downgraded (SC_SKIP_DEPTH_AUDIT_MUS_ELC=1)"
+    fi
     DEPTH_OUT="$(node "$REPO_ROOT/tools/depth-audit.mjs" --current --cross-link-strict 2>&1)" || true
     if echo "$DEPTH_OUT" | grep -qE '(FAIL|MISSING)'; then
       echo "[pre-tag-gate] FAIL: depth-audit reported FAIL/MISSING findings:" >&2
@@ -387,6 +397,7 @@ else
       echo "[pre-tag-gate]   Author the missing/under-depth files BEFORE tagging." >&2
       echo "[pre-tag-gate]   See template-files/W2-build-agent-prompt.md for the dispatch pattern." >&2
       echo "[pre-tag-gate]   Override (emergency only — almost never the right call): SC_SKIP_DEPTH_AUDIT=1" >&2
+      echo "[pre-tag-gate]   Granular (MUS/ELC scaffold-pending only): SC_PRE_TAG_GATE_BYPASS=depth-audit-mus-elc" >&2
       exit 6
     fi
     log "[pre-tag-gate] step 6/13: PASS (depth-audit clean)"

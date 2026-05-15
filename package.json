@@ -42,6 +42,8 @@
     "pre-tag-gate": "bash tools/pre-tag-gate.sh",
     "depth-audit": "node tools/depth-audit.mjs",
     "depth-audit:current": "node tools/depth-audit.mjs --current",
+    "scaffold:cross-track": "node tools/scaffold-cross-track-dirs.mjs",
+    "scaffold:cross-track:dry-run": "node tools/scaffold-cross-track-dirs.mjs --dry-run",
     "ftp-sync": "node tools/ftp-sync.mjs",
     "ftp-sync:dry-run": "node tools/ftp-sync.mjs --dry-run",
     "ftp-sync:scribe": "node tools/ftp-sync.mjs scribe",
