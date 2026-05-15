@@ -71,3 +71,28 @@ counter-cadence's scope. Treat as load-bearing input to the W0 brief.
 - Citation debt (one of the gate-codified disciplines)
 - STORY drift recurrence (another gate-codified discipline)
 - Memory: `feedback_release-pipeline-quality.md` (one release at a time)
+
+## Lesson #10265 — Cross-track scaffold-then-fill is a two-milestone pattern
+
+Counter-cadence content backfills with substantial per-page authoring
+(≥500 lines × 16 pages) split cleanly into two milestones:
+
+1. **Infrastructure + scaffold-marker introduction** — produces minimal
+   valid stubs carrying the SCAFFOLD-PENDING marker.
+2. **Parallel W2 content authoring with marker removal** — replaces stubs
+   with full substrate-tracked depth.
+
+The split avoids "scaffold-and-fill in one ship" patterns that would
+either rush the content authoring or leave drift in the depth-audit.
+Apply at future cross-track drifts of comparable magnitude (≥4 missing
+pages requiring substrate-tracked depth).
+
+## Lesson #10266 — Granular bypass token beats blanket bypass when drift is multi-track
+
+The `SC_PRE_TAG_GATE_BYPASS=depth-audit-mus-elc` token narrows
+depth-audit's bypass scope to MUS+ELC tracks only, preserving NASA
+strictness. This pattern (granular bypass at single-component
+resolution) is preferred over blanket bypass when multiple tracks have
+independent drift profiles. Apply: when introducing a new
+SC_PRE_TAG_GATE_BYPASS token, prefer the most-granular form that still
+expresses operator intent.
