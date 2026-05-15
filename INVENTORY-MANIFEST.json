@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-05-11T19:50:16Z",
+  "generated_at": "2026-05-15T15:19:48Z",
   "generator_version": "1.0.0",
   "milestone": "v1.49.576",
   "counts": {
     "commands": 4,
-    "agents_total": 49,
+    "agents_total": 48,
     "agents_gsd_prefix": 34,
     "hooks": 26,
     "src_subsystems": 152
@@ -230,11 +230,6 @@
     {
       "name": "lab-director",
       "path": "project-claude/agents/lab-director.md",
-      "origin": "local"
-    },
-    {
-      "name": "observer",
-      "path": "project-claude/agents/observer.md",
       "origin": "local"
     },
     {

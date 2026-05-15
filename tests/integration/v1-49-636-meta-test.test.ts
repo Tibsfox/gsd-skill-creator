@@ -271,8 +271,12 @@ describe('v1.49.636 integration meta-test', () => {
       return;
     }
     const content = execSync(`cat "${path}"`, { encoding: 'utf8' });
-    expect(content).toContain('step 1.5/9: version-sequence sanity');
-    expect(content).toContain('step 9.5/9: apply-to-self enforcement');
+    // v1.49.653 L-02 widened the step count from /9 to /13; the assertions
+    // check that the *steps* are still present, decoupled from the suffix.
+    expect(content).toContain('step 1.5/');
+    expect(content).toContain('version-sequence sanity');
+    expect(content).toContain('step 9.5/');
+    expect(content).toContain('apply-to-self enforcement');
     expect(content).toContain('SC_SKIP_CI_GATE_TESTS');
     expect(content).toContain('SC_SKIP_VERSION_SEQUENCE_CHECK');
     expect(content).toContain('SC_SKIP_APPLY_TO_SELF');
