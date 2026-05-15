@@ -782,7 +782,6 @@ function validateInstallation() {
     { name: 'wrap:plan', path: '.claude/commands/wrap/plan.md' },
     { name: 'wrap:phase', path: '.claude/commands/wrap/phase.md' },
     // Agents
-    { name: 'observer agent', path: '.claude/agents/observer.md' },
     { name: 'gsd-executor agent', path: '.claude/agents/gsd-executor.md' },
     { name: 'gsd-verifier agent', path: '.claude/agents/gsd-verifier.md' },
     { name: 'gsd-planner agent', path: '.claude/agents/gsd-planner.md' },
@@ -909,7 +908,6 @@ function uninstallIntegration() {
       '.claude/cartridges/housekeeping',
     ],
     files: [
-      '.claude/agents/observer.md',
       '.claude/agents/gsd-executor.md',
       '.claude/agents/gsd-verifier.md',
       '.claude/agents/gsd-planner.md',

@@ -319,11 +319,6 @@
         "description": "GSD phase smart router wrapper"
       },
       {
-        "source": "agents/observer.md",
-        "target": ".claude/agents/observer.md",
-        "description": "Passive session observer agent"
-      },
-      {
         "source": "agents/gsd-executor.md",
         "target": ".claude/agents/gsd-executor.md",
         "description": "GSD phase execution agent with skill references"

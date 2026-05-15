@@ -106,17 +106,17 @@ describe('collectTopologyData', () => {
   // 2. Reads agent files and returns agent entries with inferred domains
   // -------------------------------------------------------------------------
   it('reads agent files and returns agent entries with inferred domains', async () => {
-    await writeAgentFile(tempDir, 'observer', {
-      name: 'observer',
-      description: 'Passive session observer for pattern detection',
+    await writeAgentFile(tempDir, 'passive-monitor', {
+      name: 'passive-monitor',
+      description: 'Passive session monitor for pattern detection',
       tools: 'Read, Bash, Glob, Grep',
     });
 
     const result = await collectTopologyData({ cwd: tempDir });
 
     expect(result.agents).toHaveLength(1);
-    expect(result.agents[0].name).toBe('observer');
-    expect(result.agents[0].id).toBe('observer');
+    expect(result.agents[0].name).toBe('passive-monitor');
+    expect(result.agents[0].id).toBe('passive-monitor');
     expect(typeof result.agents[0].domain).toBe('string');
     expect(Array.isArray(result.agents[0].skills)).toBe(true);
   });
@@ -203,9 +203,9 @@ describe('collectTopologyData', () => {
       name: 'beautiful-commits',
       description: 'Crafts commit messages',
     });
-    await writeAgentFile(tempDir, 'observer', {
-      name: 'observer',
-      description: 'Passive session observer',
+    await writeAgentFile(tempDir, 'passive-monitor', {
+      name: 'passive-monitor',
+      description: 'Passive session monitor',
       tools: 'Read, Bash, Glob, Grep',
     });
 

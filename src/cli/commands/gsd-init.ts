@@ -660,7 +660,6 @@ function validateInstallation(
     { name: 'wrap:verify', path: '.claude/commands/wrap/verify.md' },
     { name: 'wrap:plan', path: '.claude/commands/wrap/plan.md' },
     { name: 'wrap:phase', path: '.claude/commands/wrap/phase.md' },
-    { name: 'observer agent', path: '.claude/agents/observer.md' },
     { name: 'gsd-executor agent', path: '.claude/agents/gsd-executor.md' },
     { name: 'gsd-verifier agent', path: '.claude/agents/gsd-verifier.md' },
     { name: 'gsd-planner agent', path: '.claude/agents/gsd-planner.md' },
