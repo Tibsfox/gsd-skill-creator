@@ -74,10 +74,26 @@ are stable references; insertion of new steps SHOULD use decimal sub-steps
        - MUST run AFTER step 2 (bump-version) and BEFORE step 4 (git tag).
        - Closes Lesson #10197.
 
+2.6. citation-debt auto-update (v1.49.653, L-03)
+       - `node tools/citation-debt/scan-retrospectives.mjs --since v<X> --write-diff`
+       - If the scan emits proposed actions, review the diff at
+         `.planning/citation-debt-proposed-diff.json` and apply:
+         `node tools/citation-debt/apply-diff.mjs --auto-confirm`
+         (or without --auto-confirm to confirm interactively per action).
+       - Skip if the scan reports "0 valid action(s)" — nothing to apply.
+       - The pre-tag-gate step 11 (citation-debt-sync) is WARN-only and runs
+         BEFORE bump-version; this T14 step 2.6 runs AFTER bump-version with
+         the current tag visible, so the `mission_origin` field on emitted
+         V-flags is correct.
+       - Idempotent: re-runs are safe (apply-diff reads current ledger +
+         deduplicates).
+       - See: docs/citation-debt-syntax.md for the formal block syntax.
+       - Closes CONCERNS §9.3 part 2 (L-03).
+
 3.   chore(release): commit
        - `git commit -m "chore(release): v<X> <subtitle>"`
        - includes the bump-version manifest changes + the public STORY.md
-         append from step 2.5.
+         append from step 2.5 + any citation-debt.json updates from step 2.6.
 
 4.   git tag v<X>
 
