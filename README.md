@@ -317,6 +317,30 @@ skill-creator status
 
 See [INSTALL.md](INSTALL.md) for detailed installation instructions.
 
+### Local-only files
+
+A fresh clone will be missing two local-only artifacts that the workflow depends on:
+
+- **`CLAUDE.md`** — gitignored post-v1.49.596 (2026-05-10). Regenerate from
+  source-of-truth manifests at `tools/render-claude-md/{file-locations.json, env-vars.json, agents.json}`:
+  ```bash
+  npm run render:claude-md
+  ```
+  Variants:
+  - `npm run render:claude-md:check` — exit non-zero if on-disk drifts from source-of-truth
+  - `npm run render:claude-md:dry-run` — print rendered output without writing
+  - `node tools/render-claude-md.mjs --diff` — report agent-count drift between `project-claude/agents/` (source) and `.claude/agents/` (installed)
+
+- **`www/`** — 228+ MB published-site tree (gitignored, regenerable via the
+  research pipelines). Tools that read `www/tibsfox/com/Research/<track>/<degree>/`
+  will fail on a fresh clone until you either re-run the catalog pipelines or
+  copy from a sibling clone.
+
+The `render:claude-md` step is **not currently in `postinstall`** to keep
+`npm install` fast and deterministic across environments where Node may not
+yet be able to run the script (CI bootstrap, etc.). Run it once after the
+initial `npm install` + `npm run build`.
+
 ---
 
 ## Documentation
