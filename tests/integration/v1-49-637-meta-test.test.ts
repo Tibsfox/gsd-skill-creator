@@ -342,6 +342,12 @@ describe('v1.49.637 integration meta-test', () => {
     if (!existsSync(statePath)) return; // gitignored on fresh clone
     const state = readFileSync(statePath, 'utf8');
 
+    // Forward-skip: STATE.md describes the CURRENT milestone, not the
+    // historical v1.49.637 baseline. When STATE has advanced past v637,
+    // this point-in-time assertion no longer applies.
+    const versionMatch = state.match(/^milestone:\s*v?(\d+)\.(\d+)\.(\d+)/m);
+    if (versionMatch && parseInt(versionMatch[3], 10) > 637) return;
+
     // nasa_degree is the load-bearing slot. v1.49.636 set it to 108;
     // v1.49.637 must keep it at 108.
     const m = state.match(/^nasa_degree:\s*(\d+)/m);

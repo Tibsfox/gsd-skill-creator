@@ -59,10 +59,15 @@ describe('v1.49.638 integration meta-test (Cluster #5 housekeeping)', () => {
       join(REPO_ROOT, 'tools/pre-tag-gate.sh'),
       'utf8',
     );
-    // No active or commented-out append-story-entry invocation
-    expect(script).not.toMatch(/append-story-entry/);
-    // No legacy STORY-gate step header
-    expect(script).not.toMatch(/STORY-gate/);
+    // No active invocation of append-story-entry as a sub-step.
+    // (v1.49.653 L-02 added error-message text that mentions
+    // `scripts/append-story-entry.mjs` as a remediation hint when
+    // step 12/13 story-drift detection escalates; that hint is a
+    // string mention, NOT a step invocation — the assertion below
+    // discriminates by looking for actual `node|bash <path>` calls.)
+    expect(script).not.toMatch(/(?:bash|node|sh)\s+\S*append-story-entry\.mjs/);
+    // No "X/N: STORY-gate" runnable step header.
+    expect(script).not.toMatch(/step\s+\S+:\s*STORY-gate/i);
   });
 
   it('C2 — invariant test for T14 STORY-gate ordering exists', () => {

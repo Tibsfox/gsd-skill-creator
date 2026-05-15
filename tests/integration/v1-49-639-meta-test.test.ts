@@ -126,6 +126,11 @@ describe('v1.49.639 integration meta-test', () => {
     'counter-cadence: engine state UNCHANGED from v1.49.638 baseline',
     () => {
       const content = readFileSync(STATE_MD, 'utf-8');
+      // Forward-skip: STATE describes the CURRENT milestone. When STATE
+      // has advanced past v639, this point-in-time assertion no longer
+      // applies (added v1.49.653 L-02 retrospective fixup).
+      const m = content.match(/^milestone:\s*v?(\d+)\.(\d+)\.(\d+)/m);
+      if (m && parseInt(m[3], 10) > 639) return;
       expect(content, 'NASA degree 108 (unchanged)').toMatch(/nasa_degree:\s*108/);
       expect(content, 'counter_cadence flag set').toMatch(/counter_cadence:\s*true/);
       expect(content, 'no_engine_state_advance flag set').toMatch(/no_engine_state_advance:\s*true/);
