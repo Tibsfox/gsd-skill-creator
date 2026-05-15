@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.652`.
+The story begins at `v1.0` and continues to `v1.49.653`.
 
-**695 chapters.** 694 have retrospectives.
+**696 chapters.** 695 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -703,3 +703,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.650](v1.49.650/00-summary.md)** — STS-41-D Discovery (NASA 1.113→1.114) · 2026-05-13
 - **[v1.49.651](v1.49.651/00-summary.md)** — STS-41-G Challenger (NASA 1.114→1.115) · 2026-05-13
 - **[v1.49.652](v1.49.652/00-summary.md)** — STS-51-A Discovery (NASA 1.115→1.116) · 2026-05-13
+- **[v1.49.653](v1.49.653/00-summary.md)** — Long-Term Roadmap + Audit Closure · 2026-05-15
