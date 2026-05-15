@@ -136,3 +136,18 @@ When a NEW concept emerges in the codebase that needs auditing:
 - **Related lesson (additive constants):** v1.49.636 Lesson #10181 (perf-assertion-audit regex coverage gap)
 - **Related Meta-Lesson:** v1.49.635 Meta-Lesson #10180 (audit underestimates fixture scope) — generalizes to "audit underestimates form coverage"
 - **Sibling discipline doc:** `.planning/test-discipline/perf-assertion-warmup.md` (perf-test cold-start failure pattern)
+
+## Lesson coverage (codified v1.49.654 C08+C09)
+
+Appended for discipline-coverage audit completeness. Each lesson is
+documented in its first-emit retrospective at
+`docs/release-notes/<version>/chapter/04-lessons.md`.
+
+- **Lesson #10173** — hook self-tests must use `env -i` for full
+  sterility (not just `env -u VAR`)
+- **Lesson #10175** — plain-bullet lesson format is a valid and
+  recognized entry form (alongside the `**Lesson #NNNN —**` heading
+  variant); lesson-discovery tooling must accept both
+- **Lesson #10182** — per-site tier-up classification audit-regex
+  pattern; audit-regex negative-tests verify the pattern catches
+  drift across all targeted sites

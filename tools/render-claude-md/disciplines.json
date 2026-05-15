@@ -2,48 +2,48 @@
   {
     "domain": "Mission package framing",
     "trigger": "Before authoring a mission package or W0 brief; when 4+ clusters in a CF chain accumulate",
-    "summary": "Closure-verification gate for multi-cluster CF chains + re-framing review pattern",
+    "summary": "Closure-verification gate for multi-cluster CF chains + re-framing review pattern + W1 brief-error catch + scope-expansion mid-mission + fact-check corrections + session-time accumulation ceiling",
     "canonical_docs": [
       "docs/MISSION-PACKAGE-DISCIPLINE.md"
     ],
-    "key_lessons": ["#10199", "#10207"],
-    "codified_at_milestone": "v1.49.638"
+    "key_lessons": ["#10172", "#10178", "#10192", "#10199", "#10207", "#10209", "#10218", "#10224", "#10226", "#10234"],
+    "codified_at_milestone": "v1.49.638 + v1.49.654 (forward-cadence lessons appended)"
   },
   {
     "domain": "Test authoring",
     "trigger": "Writing or modifying vitest tests; perf-assertion authoring; flake debugging",
-    "summary": "Audit-method conventions (hookTimeout, ORDER-BY tiebreaker, perf-warmup, skip-guard env-vars) + CF closure-verification templates + flake catalog",
+    "summary": "Audit-method conventions (hookTimeout, ORDER-BY tiebreaker, perf-warmup, skip-guard env-vars) + CF closure-verification templates + flake catalog + meta-test skip-guards against gitignored runtime artifacts + perf-assertion regex coverage + plain-bullet lesson format",
     "canonical_docs": [
       "docs/test-discipline/audit-method-corrections.md",
       "docs/test-discipline/cf-closure-verification-templates.md",
       "docs/test-discipline/flake-audit-2026-05-11.md"
     ],
-    "key_lessons": ["#10173", "#10199", "#10204"],
-    "codified_at_milestone": "v1.49.585+"
+    "key_lessons": ["#10173", "#10175", "#10180", "#10181", "#10182", "#10199", "#10204"],
+    "codified_at_milestone": "v1.49.585+ + v1.49.654 (meta-test + audit lessons appended)"
   },
   {
     "domain": "Ship pipeline",
     "trigger": "Touching tools/pre-tag-gate.sh, T14 ship steps, or hook scripts",
-    "summary": "Apply-to-self enforcement, CI-gate override rationale (enumerated CSV per Lesson #10185), no Co-Authored-By trailers (v1.49.621), T14 step ordering (Lesson #10197)",
+    "summary": "Apply-to-self enforcement, CI-gate override rationale (enumerated CSV per Lesson #10185), no Co-Authored-By trailers (v1.49.621), T14 step ordering (Lesson #10197), dev/main 0-commit drift via ship-sync, cross-link-strict flag, gh-CLI background-task git-discovery quirk",
     "canonical_docs": [
       ".planning/ship-pipeline-discipline/apply-to-self-allowlist.md",
       ".planning/ship-pipeline-discipline/ci-gate-override-rationale.md",
       "docs/T14-SHIP-SEQUENCE.md"
     ],
-    "key_lessons": ["#10184", "#10185", "#10191", "#10197", "#10204"],
-    "codified_at_milestone": "v1.49.636+"
+    "key_lessons": ["#10184", "#10185", "#10191", "#10197", "#10202", "#10204", "#10220", "#10221", "#10222"],
+    "codified_at_milestone": "v1.49.636+ + v1.49.654 (ship-pipeline lessons appended)"
   },
   {
     "domain": "Self-modification safety",
     "trigger": "Editing .claude/{skills,agents,hooks}/ paths; staging files into .planning/, .claude/, .archive/, artifacts/, .gsd/, .chipset/, .env, project-claude/hooks/.log/",
-    "summary": "PreToolUse hook BLOCKS self-mod operations without SC_SELF_MOD=1 / SC_INSTALL_CALLER=project-claude / npm_lifecycle_event override. git-add-blocker.js BLOCKS protected-path staging without SC_FORCE_ADD=1. Mission packages never committed.",
+    "summary": "PreToolUse hook BLOCKS self-mod operations without SC_SELF_MOD=1 / SC_INSTALL_CALLER=project-claude / npm_lifecycle_event override. git-add-blocker.js BLOCKS protected-path staging without SC_FORCE_ADD=1. settings.json gsd-config-guard-protected; new hooks route via project-claude/. Mission packages never committed.",
     "canonical_docs": [
       ".claude/skills/security-hygiene/SKILL.md",
       "project-claude/hooks/self-mod-guard.js",
       "project-claude/hooks/git-add-blocker.js"
     ],
-    "key_lessons": ["#10201"],
-    "codified_at_milestone": "v1.49.585 C01 + C02; extended v1.49.653"
+    "key_lessons": ["#10174", "#10190", "#10201"],
+    "codified_at_milestone": "v1.49.585 C01 + C02; extended v1.49.653; lessons appended v1.49.654"
   },
   {
     "domain": "Keystore",
@@ -58,12 +58,12 @@
   {
     "domain": "Substrate probe",
     "trigger": "Authoring W1 substrate-axis declarations; relocating substrate-probe docs into tracked docs/ from .planning/",
-    "summary": "Substrate-form declaration patterns + LOCKED/SUSTAINED state-machine + forward-shadow first-instance convention",
+    "summary": "Substrate-form declaration patterns + LOCKED/SUSTAINED state-machine + forward-shadow first-instance convention + 4-LEVEL trophic cascade closure + aquatic-substrate-pivot + auction-theory winner's-curse pattern + HARD-BLOCK forbidden-substring detection at W2 verification",
     "canonical_docs": [
       "docs/SUBSTRATE-PROBE-DISCIPLINE.md"
     ],
-    "key_lessons": ["#10210", "#10219", "#10225"],
-    "codified_at_milestone": "v1.49.638 C3"
+    "key_lessons": ["#10210", "#10219", "#10223", "#10225", "#10227", "#10228"],
+    "codified_at_milestone": "v1.49.638 C3 + v1.49.654 (substrate lessons appended)"
   },
   {
     "domain": "Citation debt",
@@ -88,5 +88,25 @@
     ],
     "key_lessons": ["#10191", "#10197"],
     "codified_at_milestone": "v1.49.637 C5 + v1.49.653 (drift detector)"
+  },
+  {
+    "domain": "Sub-agent dispatch",
+    "trigger": "Authoring W2/W3 sub-agent dispatch prompts; spawning parallel build agents; sizing token budgets per dispatch",
+    "summary": "Sub-agents lack SendMessage in toolkit (spawn-task-return-result, not continuous peers); ~60-70 tool-use ceiling per dispatch; bound dispatches to ~1 component / 30-50min; commit-between-deliverables discipline; chunked Write+Edit append pattern for >32K HTML deliverables; transient API errors recover via identical-prompt retry; 64K output-token cap requires JSON+HTML split",
+    "canonical_docs": [
+      "docs/sub-agent-dispatch-discipline.md"
+    ],
+    "key_lessons": ["#10193", "#10194", "#10200", "#10214", "#10215", "#10240", "#10244"],
+    "codified_at_milestone": "v1.49.654 (new domain — codified from v1.49.637-651 lesson cluster)"
+  },
+  {
+    "domain": "Counter-cadence cadence",
+    "trigger": "Planning a non-degree-advancing milestone; converting accumulated social-rule debt into deterministic gates; meta-testing newly-introduced gates at ship time",
+    "summary": "Counter-cadence cleanup-mission pattern productive every ~30 forward milestones; gate-not-vigilance discipline (convert offending rule to a gate, not a re-emphasized prose rule); meta-test newly-installed gates against the milestone's own release-notes during T14; discipline-as-code in 3-cluster lifecycle; cluster-close forward-notes are load-bearing decisions; phantom-deps npm-audit fix + probe threshold gap",
+    "canonical_docs": [
+      "docs/counter-cadence-discipline.md"
+    ],
+    "key_lessons": ["#10168", "#10169", "#10170", "#10196", "#10203", "#10205", "#10208"],
+    "codified_at_milestone": "v1.49.654 (new domain — codified from v1.49.585-651 lesson cluster)"
   }
 ]

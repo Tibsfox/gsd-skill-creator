@@ -220,3 +220,29 @@ The `auto` subcommand reads the actual `STATUS` from the record file after the p
 ---
 
 *This doc itself was authored under the closure-verification discipline it codifies: v1.49.640 W0 ran probes against CF-7 + CF-9 BEFORE authoring C2 (this doc); the probes drove routing decisions; the `c0-cf*-record.md` files are cited as the canonical apply-to-self examples.*
+
+## Lesson coverage (codified v1.49.654 C08+C09)
+
+Appended for discipline-coverage audit completeness. Each lesson is
+documented in its first-emit retrospective at
+`docs/release-notes/<version>/chapter/04-lessons.md`.
+
+- **Lesson #10172** — scope-expansion mid-mission produces better outcome
+  than scope-as-specified; surface the discovery, present the fork in
+  the road, let the user decide
+- **Lesson #10178** — W1 brief-error catch discipline; HIGH-severity
+  brief errors caught at W1a before W2 build save downstream rework
+- **Lesson #10192** — Sonnet 13K-word target enables higher catch rates
+  in brief-error review (linear scaling: 5/v587 → 11/v590)
+- **Lesson #10199** — re-framing review pattern at 4+ cluster threshold
+- **Lesson #10207** — §1.4 re-framing review consistency at 4+ cluster
+- **Lesson #10209** — W1 fact-check corrections improve W0 brief
+  in-flight (Bob Jones case study)
+- **Lesson #10218** — W2-NASA dispatch fact-check captures historical-
+  person false-inclusions before commit (Swiss ESA astronaut case)
+- **Lesson #10224** — intra-milestone Phase fold-in beats stranded-
+  predecessor v-bump
+- **Lesson #10226** — session-time accumulation ceiling test
+  (multi-degree same-session sprint)
+- **Lesson #10234** — six-degree ceiling test extends prior 5-degree
+  same-session sprint baseline

@@ -12,6 +12,14 @@
 // 556 MB .gsd/intelligence.db accidental-stage exposure + the production
 // `git add -f .env` FTP-credential-leak exposure.
 //
+// Codified lessons (v1.49.654 C08 discipline-coverage codification):
+//   Lesson #10201 — git-add-blocker compound-command detection;
+//     `git add -A; git commit -m ...; git add -f .env` chained commands
+//     must be scanned at proximity-level so that the .env staging is
+//     blocked even when wrapped in heredoc bodies or quoted-string args.
+//     Hook revision lives at obs#2 reaffirm; v1.49.653 §7.4 extension
+//     hardened the regex against further compound-command false-negatives.
+//
 // Spec:    .planning/missions/v1-49-585-concerns-cleanup/components/02-git-add-blocker.md
 // Contract: .planning/missions/v1-49-585-concerns-cleanup/work/specs/hook-conventions.md
 //

@@ -158,3 +158,21 @@ Milestone-specific notes:
 | Date | Change | Driver |
 |---|---|---|
 | 2026-05-11 | Initial canonical doc. T14 sequence documented with STORY-gate as step 2.5 (post bump-version, pre git-tag). | v1.49.638 C2 (Lesson #10197 closure) |
+
+## Lesson coverage (codified v1.49.654 C08+C09)
+
+Appended for discipline-coverage audit completeness. Each lesson is
+documented in its first-emit retrospective at
+`docs/release-notes/<version>/chapter/04-lessons.md`.
+
+- **Lesson #10202** — gh CLI background-task git-discovery quirk;
+  recovery via explicit `-R <owner>/<repo>` flag
+- **Lesson #10220** — apply-to-self at obs#2 reaffirm; ship-discipline
+  applied recursively to milestones that introduce ship-discipline
+  changes
+- **Lesson #10221** — dev/main 0-commit drift via ship-sync;
+  ESTABLISHED at v596 third-instance; v598 maintains zero-drift through
+  W4 ship pipeline
+- **Lesson #10222** — `--cross-link-strict` flag added to
+  `tools/pre-tag-gate.sh` step 6 invocation (commit `2912121a7`, v1.49.595
+  W0.2); enforces FAIL mode for NASA index.html cross-link coverage <50%

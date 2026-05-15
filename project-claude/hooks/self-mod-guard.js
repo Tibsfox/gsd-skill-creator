@@ -10,6 +10,13 @@
 // strings are filtered before matching, eliminating the false-positive on
 // long compound commands documented in CLAUDE.md "Self-mod-guard known caveat".
 //
+// Codified lessons (v1.49.654 C08 discipline-coverage codification):
+//   Lesson #10174 — .claude/settings.json is gsd-config-guard-protected; new
+//     hook registrations must route via project-claude/settings-hooks.json +
+//     project-claude/install.cjs (which runs under SC_INSTALL_CALLER=project-claude
+//     allowlist). Direct edits to .claude/settings.json are BLOCKed by an
+//     existing pre-v1.49.585 hook.
+//
 // Spec:    .planning/missions/v1-49-585-concerns-cleanup/components/01-self-mod-guard.md
 // Contract: .planning/missions/v1-49-585-concerns-cleanup/work/specs/hook-conventions.md
 //

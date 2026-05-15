@@ -249,3 +249,24 @@ Per Lesson #10192: **5-15 min per substrate per component.** The cost-of-NOT-doi
 ---
 
 *This doc itself was authored under the discipline it codifies: §5.1 and §5.2 cite concrete file paths, line numbers, and commit-evidence from real v1.49.638 W0 design docs rather than abstract patterns.*
+
+## Lesson coverage (codified v1.49.654 C08+C09)
+
+Appended for discipline-coverage audit completeness. Each lesson is
+documented in its first-emit retrospective at
+`docs/release-notes/<version>/chapter/04-lessons.md`.
+
+- **Lesson #10210** — substrate-form first-instance forward-shadow
+  convention; document at first observation, lock at second
+- **Lesson #10219** — HARD-BLOCK forbidden-substring detection at W2
+  verification; collision with historical-person first names caught via
+  initial+surname substitution
+- **Lesson #10223** — 4-LEVEL trophic cascade closure achieves
+  substrate-cascade-completeness via apex predator
+- **Lesson #10225** — HARD-BLOCK forbidden-substring pattern applied at
+  obs#3 reaffirm (v649 W2 verification screening)
+- **Lesson #10227** — auction theory winner's-curse as substrate-pattern
+  for first-instance failure analysis; WESTAR-VI/PALAPA-B2 PAM-D
+  back-to-back failures
+- **Lesson #10228** — AQUATIC-SUBSTRATE-PIVOT after 4-LEVEL terrestrial
+  cascade closure; substrate-class door-opening pattern
