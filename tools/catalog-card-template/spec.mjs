@@ -21,7 +21,7 @@ export const CARD_TEMPLATE_VERSION = '1.0';
 export const TRACK_TEMPLATES = {
   MUS:  { trackLabel: 'MUS',  requiredMetaFields: ['/^S\\d+$/', 'SPS', 'NASA'],     optionalMetaFields: [],                maxMetaCount: 3 },
   NASA: { trackLabel: 'NASA', requiredMetaFields: ['MUS', 'SPS', 'ELC'],            optionalMetaFields: ['mission-class'], maxMetaCount: 4 },
-  ELC:  { trackLabel: 'ELC',  requiredMetaFields: ['NASA', 'MUS', 'SPS'],           optionalMetaFields: [],                maxMetaCount: 3 },
+  ELC:  { trackLabel: 'ELC',  requiredMetaFields: ['NASA', 'Flight subset'],        optionalMetaFields: [],                maxMetaCount: 2 },
   SPS:  { trackLabel: 'SPS',  requiredMetaFields: ['NASA', 'MUS', 'ELC'],           optionalMetaFields: ['family'],        maxMetaCount: 4 },
   TRS:  { trackLabel: 'TRS',  requiredMetaFields: ['pack-K', 'bridge-categories'],  optionalMetaFields: [],                maxMetaCount: 2 },
 };
