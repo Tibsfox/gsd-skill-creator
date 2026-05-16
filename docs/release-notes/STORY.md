@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.658`.
+The story begins at `v1.0` and continues to `v1.49.659`.
 
-**701 chapters.** 700 have retrospectives.
+**702 chapters.** 701 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -709,3 +709,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.656](v1.49.656/00-summary.md)** — NASA Track-Card Uplift · 2026-05-16
 - **[v1.49.657](v1.49.657/00-summary.md)** — STS-51-C Discovery (NASA 1.116→1.117) · 2026-05-16
 - **[v1.49.658](v1.49.658/00-summary.md)** — MUS + ELC Catalog-Card Template Codification (counter-cadence) · 2026-05-16
+- **[v1.49.659](v1.49.659/00-summary.md)** — Phase-2 Build-Out: Manifests, Spectra, Retrieval, Audit (counter-cadence) · 2026-05-16
