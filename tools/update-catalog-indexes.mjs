@@ -33,6 +33,8 @@ import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
+import { extractAllCards, validateCard } from './catalog-card-template/extractor.mjs';
+import { TRACK_TEMPLATES } from './catalog-card-template/spec.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 
@@ -257,6 +259,67 @@ export function auditTrack(researchRoot, track) {
   }
 }
 
+// ---- Template audit (v1.49.658) — BLOCKER gate for catalog-card drift ----
+
+/**
+ * Validate all catalog cards in a track's index.html against the normative
+ * template (tools/catalog-card-template/spec.mjs). Tracks NASA/MUS/ELC use
+ * static degree-card divs; TRS uses a different shape so this audit only
+ * applies to NASA-ish tracks at this milestone (TRS template audit is
+ * deferred to a future iteration once TRS pack-card shape stabilizes).
+ *
+ * NASA has its own architectural divergence: drift lives in per-degree
+ * <title> tags rather than the JS-rendered catalog index. For NASA we
+ * still walk extracted cards (there are none in the index) and report
+ * PASS with a 'not-applicable' note; the per-degree <title> audit lands
+ * separately in tools/nasa-card-backfill.mjs at W2.4.
+ *
+ * Returns { status: 'PASS'|'DRIFT'|'ERROR', card_count, violations[], detail }.
+ */
+export function auditTrackTemplates(researchRoot, track) {
+  if (!TRACK_TEMPLATES[track]) {
+    return { status: 'ERROR', error: `Unknown track for template audit: ${track}` };
+  }
+
+  const catalogPath = join(researchRoot, track, 'index.html');
+  if (!existsSync(catalogPath)) {
+    return { status: 'ERROR', error: `Catalog index not found: ${catalogPath}` };
+  }
+
+  let html;
+  try {
+    html = readFileSync(catalogPath, 'utf8');
+  } catch (err) {
+    return { status: 'ERROR', error: `Failed to read catalog: ${err.message}` };
+  }
+
+  const cards = extractAllCards(html);
+
+  // NASA index is JS-rendered from CSV — no static degree-card divs.
+  // Template audit is not applicable here; NASA <title> audit is W2.4.
+  if (track === 'NASA' && cards.length === 0) {
+    return { status: 'PASS', card_count: 0, violations: [], detail: 'NASA index is JS-rendered; per-degree <title> audit handled by tools/nasa-card-backfill.mjs (W2.4)' };
+  }
+
+  const violations = [];
+  let maxBytes = 0;
+  for (const ast of cards) {
+    if (ast.byteCount > maxBytes) maxBytes = ast.byteCount;
+    const result = validateCard(ast, track);
+    if (!result.pass) violations.push(result);
+  }
+
+  return {
+    status: violations.length === 0 ? 'PASS' : 'DRIFT',
+    card_count: cards.length,
+    max_bytes: maxBytes,
+    violations,
+    detail: violations.length === 0
+      ? `${cards.length} cards, max ${maxBytes}B, 0 violations`
+      : `${cards.length} cards, ${violations.length} violation(s)`,
+  };
+}
+
 // ---- TRS audit (IC-613-1.4) ----
 
 /**
@@ -446,6 +509,14 @@ Exit codes: 0=PASS, 8=drift, 2=bad args, 1=internal error
   trackResults.TRS = auditTRS(REPO_ROOT);
   const summary = buildSummary(trackResults);
 
+  // v1.49.658: catalog-card template audit (BLOCKER gate).
+  const templateResults = {};
+  let templateDrift = false;
+  for (const track of TRACKS) {
+    templateResults[track] = auditTrackTemplates(RESEARCH_ROOT, track);
+    if (templateResults[track].status === 'DRIFT') templateDrift = true;
+  }
+
   // --write mode.
   if (write) {
     const writeResults = {};
@@ -491,7 +562,8 @@ Exit codes: 0=PASS, 8=drift, 2=bad args, 1=internal error
   if (json) {
     console.log(JSON.stringify({
       tracks: trackResults,
-      summary,
+      templates: templateResults,
+      summary: { ...summary, template_drift: templateDrift },
     }, null, 2));
   } else {
     for (const track of TRACKS) {
@@ -528,16 +600,37 @@ Exit codes: 0=PASS, 8=drift, 2=bad args, 1=internal error
     } else if (trsResult.status === 'ERROR') {
       console.error(`[ERROR] TRS: ${trsResult.error}`);
     }
+    // v1.49.658 template audit reporting
+    console.log('');
+    for (const track of TRACKS) {
+      const t = templateResults[track];
+      if (t.status === 'PASS') {
+        console.log(`[card-template:PASS] ${track} — ${t.detail}`);
+      } else if (t.status === 'DRIFT') {
+        console.error(`[card-template:DRIFT] ${track} — ${t.detail}`);
+        for (const v of t.violations.slice(0, 5)) {
+          console.error(`  ${v.blockerMessage}`);
+        }
+        if (t.violations.length > 5) {
+          console.error(`  ... and ${t.violations.length - 5} more violation(s)`);
+        }
+      } else {
+        console.error(`[card-template:ERROR] ${track}: ${t.error}`);
+      }
+    }
     console.log('');
     if (summary.any_drift) {
       console.error(`[DRIFT] catalog-index drift detected — ${summary.total_drift_degrees} degree(s) out of sync`);
       console.error('  Pre-tag-gate step 8 BLOCKER: fix drift before tagging.');
+    } else if (templateDrift) {
+      console.error(`[card-template:BLOCKER] catalog-card template violations detected`);
+      console.error('  Pre-tag-gate step 8 BLOCKER: bring cards under template (v1.49.658 gate).');
     } else {
-      console.log('[PASS] all catalog indexes in sync with on-disk degrees');
+      console.log('[PASS] all catalog indexes in sync with on-disk degrees + template-compliant');
     }
   }
 
-  if (summary.any_drift) process.exit(8);
+  if (summary.any_drift || templateDrift) process.exit(8);
   process.exit(0);
 }
 
