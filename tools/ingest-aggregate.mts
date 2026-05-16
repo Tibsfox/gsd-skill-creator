@@ -157,6 +157,14 @@ if (accumulator.length === 0) {
 console.log('');
 console.log('[ingest-aggregate] Running aggregate generators...');
 fs.mkdirSync(outputDir, { recursive: true });
+
+// Persist the raw primitive accumulator alongside generated artifacts so
+// downstream enrichment tools (composition derivation, plane refinement)
+// can operate without re-running scLearn over the entire batch.
+const primitivesPath = path.join(outputDir, 'primitives.json');
+fs.writeFileSync(primitivesPath, JSON.stringify(accumulator, null, 2), 'utf-8');
+console.log(`[ingest-aggregate] persisted primitives: ${primitivesPath}`);
+
 const report = runAggregateGenerators({ primitives: accumulator, outputDir });
 
 console.log('');
