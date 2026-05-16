@@ -37,6 +37,11 @@ import type {
 import { RELEVANCE_DOMAINS, SCORER_VERSION } from './types.js';
 import { cosineSimilarity } from '../embeddings/cosine-similarity.js';
 import { getEmbeddingService } from '../embeddings/embedding-service.js';
+import {
+  createEmbeddingCache,
+  DEFAULT_EMBEDDING_CACHE_DIR,
+  type EmbeddingCache,
+} from './embedding-cache.js';
 import { buildJudgePrompt } from './prompts/judge.js';
 import { AGENT_ORCHESTRATION_ANCHOR } from './prompts/agent-orchestration.js';
 import { SKILL_DESIGN_ANCHOR } from './prompts/skill-design.js';
@@ -125,8 +130,15 @@ export interface RankerOptions {
   preRankTop?: number;
   /** Filesystem cache directory (per-arxivId JSON files). */
   cacheDir?: string;
-  /** When true, every paper is judged fresh (no read or write of cache). */
+  /** When true, every paper is judged AND re-embedded fresh. Implies
+   *  noEmbeddingCache=true. */
   noCache?: boolean;
+  /** Filesystem cache directory for paper embeddings; defaults to
+   *  .planning/arxiv-cache/embeddings/. */
+  embeddingCacheDir?: string;
+  /** When true, every paper is re-embedded fresh (embedding cache only;
+   *  score cache untouched). */
+  noEmbeddingCache?: boolean;
   /** LLM judge temperature; default 0 (deterministic). */
   temperature?: number;
   /** Pre-rank cosine-similarity threshold; defaults to PRE_RANK_THRESHOLD. */
@@ -390,11 +402,13 @@ interface PreRankRow {
 async function preRank(
   papers: ArxivPaper[],
   embedder: TextEmbedder,
+  embeddingCache: EmbeddingCache,
   threshold: number,
   topCap: number,
 ): Promise<PreRankRow[]> {
   if (papers.length === 0) return [];
-  // Embed the four anchors once per batch.
+  // Embed the four anchors once per batch. Anchors are fixed strings, so
+  // they don't benefit from the per-paper cache (only 4 calls per batch).
   const anchorEmbeddings: Record<RelevanceDomain, number[]> = {
     'agent-orchestration': await embedder(ANCHOR_BY_DOMAIN['agent-orchestration']),
     'skill-design': await embedder(ANCHOR_BY_DOMAIN['skill-design']),
@@ -404,7 +418,11 @@ async function preRank(
 
   const rows: PreRankRow[] = [];
   for (const paper of papers) {
-    const vec = await embedder(`${paper.title} ${paper.abstract}`);
+    let vec = await embeddingCache.read(paper.arxivId);
+    if (!vec) {
+      vec = await embedder(`${paper.title} ${paper.abstract}`);
+      await embeddingCache.write(paper.arxivId, vec);
+    }
     const sims = {
       'agent-orchestration': cosineSimilarity(vec, anchorEmbeddings['agent-orchestration']),
       'skill-design':        cosineSimilarity(vec, anchorEmbeddings['skill-design']),
@@ -435,6 +453,8 @@ export function createRanker(opts: RankerOptions = {}): Ranker {
     preRankTop = DEFAULT_PRE_RANK_TOP,
     cacheDir = DEFAULT_CACHE_DIR,
     noCache = false,
+    embeddingCacheDir = DEFAULT_EMBEDDING_CACHE_DIR,
+    noEmbeddingCache = false,
     temperature = 0,
     preRankThreshold = PRE_RANK_THRESHOLD,
     weights = DEFAULT_DOMAIN_WEIGHTS,
@@ -445,6 +465,12 @@ export function createRanker(opts: RankerOptions = {}): Ranker {
   const judgeFn: JudgeFn =
     judge ?? buildDefaultJudge(llmJudgeModel, temperature, judgeBackend, cliMaxBudgetUsd);
   const cache = createCacheStore(cacheDir, noCache);
+  // noCache=true implies a fully uncached call, so it suppresses the
+  // embedding cache too. noEmbeddingCache is the surgical opt-out.
+  const embeddingCache = createEmbeddingCache(
+    embeddingCacheDir,
+    noEmbeddingCache || noCache,
+  );
 
   async function rankBatch(
     papers: ArxivPaper[],
@@ -452,7 +478,7 @@ export function createRanker(opts: RankerOptions = {}): Ranker {
     const out = new Map<string, RelevanceScore>();
     if (papers.length === 0) return out;
 
-    const survivors = await preRank(papers, embedder, preRankThreshold, preRankTop);
+    const survivors = await preRank(papers, embedder, embeddingCache, preRankThreshold, preRankTop);
 
     // Embedding-only backend: skip the LLM judge entirely. Anchor cosine sims
     // computed in preRank become the 4 subscores; aggregate is the weighted

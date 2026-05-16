@@ -493,4 +493,102 @@ describe('createRanker — cache and pre-rank behaviour', () => {
     expect(score!.rationale).toContain('Embedding-only');
     expect(callCount()).toBe(0); // judge never invoked
   });
+
+  // Test 14: embedding cache short-circuits the paper-text embedder call
+  //          (anchors are still re-embedded — they're only 4 calls/batch).
+  it('embedding cache is consulted before re-embedding a paper', async () => {
+    const { mkdtempSync, rmSync, writeFileSync, mkdirSync } = await import('node:fs');
+    const { tmpdir } = await import('node:os');
+    const pathMod = await import('node:path');
+    const tmpDir = mkdtempSync(pathMod.join(tmpdir(), 'rank-emb-'));
+    try {
+      const mac = lookup('multiAgentCoord');
+      // Pre-seed the embedding cache with a known good vector for this paper.
+      const vec = new Array(16).fill(0);
+      vec[0] = 1; // perfect alignment with the agent-orchestration anchor
+      mkdirSync(tmpDir, { recursive: true });
+      writeFileSync(
+        pathMod.join(tmpDir, `${mac.paper.arxivId}.json`),
+        JSON.stringify({ version: 'v1', model: 'Xenova/bge-small-en-v1.5', dim: 16, vec }),
+        'utf-8',
+      );
+
+      // Embedder that tracks paper-text calls. Anchor calls are expected
+      // (the cache only stores per-paper embeddings); paper text must NOT
+      // be re-embedded when the cache hits.
+      let paperEmbedCalls = 0;
+      const embedder: TextEmbedder = async (text) => {
+        if (text === AGENT_ORCHESTRATION_ANCHOR) { const v = new Array(16).fill(0); v[0] = 1; return v; }
+        if (text === SKILL_DESIGN_ANCHOR)        { const v = new Array(16).fill(0); v[1] = 1; return v; }
+        if (text === CODE_GEN_ANCHOR)            { const v = new Array(16).fill(0); v[2] = 1; return v; }
+        if (text === MEMORY_RETRIEVAL_ANCHOR)    { const v = new Array(16).fill(0); v[3] = 1; return v; }
+        paperEmbedCalls++;
+        return new Array(16).fill(0); // would be a cache MISS shape if hit
+      };
+
+      const { fn } = makeMockJudge();
+      const ranker = createRanker({
+        embedder,
+        judge: fn,
+        judgeBackend: 'embedding-only',
+        embeddingCacheDir: tmpDir,
+        // Score cache off, embedding cache on.
+        noCache: false,
+        cacheDir: pathMod.join(tmpDir, 'scores'),
+        preRankThreshold: 0,
+      });
+      const out = await ranker.rankBatch([mac.paper]);
+      expect(paperEmbedCalls).toBe(0);
+      // Agent-orch sim should be ~1 because we pre-seeded the vec to align.
+      expect(out.get(mac.paper.arxivId)!.subscores['agent-orchestration']).toBeCloseTo(1, 5);
+    } finally {
+      rmSync(tmpDir, { recursive: true, force: true });
+    }
+  });
+
+  // Test 15: noEmbeddingCache=true forces re-embedding on every call, even
+  //          when a valid cache record exists on disk.
+  it('noEmbeddingCache: true bypasses the embedding cache', async () => {
+    const { mkdtempSync, rmSync, writeFileSync, mkdirSync } = await import('node:fs');
+    const { tmpdir } = await import('node:os');
+    const pathMod = await import('node:path');
+    const tmpDir = mkdtempSync(pathMod.join(tmpdir(), 'rank-emb-'));
+    try {
+      const mac = lookup('multiAgentCoord');
+      // Pre-seed disk with a vector — it should be ignored.
+      mkdirSync(tmpDir, { recursive: true });
+      writeFileSync(
+        pathMod.join(tmpDir, `${mac.paper.arxivId}.json`),
+        JSON.stringify({ version: 'v1', model: 'Xenova/bge-small-en-v1.5', dim: 16, vec: new Array(16).fill(0) }),
+        'utf-8',
+      );
+
+      let paperEmbedCalls = 0;
+      const embedder: TextEmbedder = async (text) => {
+        if (text === AGENT_ORCHESTRATION_ANCHOR) { const v = new Array(16).fill(0); v[0] = 1; return v; }
+        if (text === SKILL_DESIGN_ANCHOR)        { const v = new Array(16).fill(0); v[1] = 1; return v; }
+        if (text === CODE_GEN_ANCHOR)            { const v = new Array(16).fill(0); v[2] = 1; return v; }
+        if (text === MEMORY_RETRIEVAL_ANCHOR)    { const v = new Array(16).fill(0); v[3] = 1; return v; }
+        paperEmbedCalls++;
+        const v = new Array(16).fill(0);
+        v[0] = 1;
+        return v;
+      };
+
+      const { fn } = makeMockJudge();
+      const ranker = createRanker({
+        embedder,
+        judge: fn,
+        judgeBackend: 'embedding-only',
+        embeddingCacheDir: tmpDir,
+        noEmbeddingCache: true,
+        cacheDir: pathMod.join(tmpDir, 'scores'),
+        preRankThreshold: 0,
+      });
+      await ranker.rankBatch([mac.paper]);
+      expect(paperEmbedCalls).toBe(1);
+    } finally {
+      rmSync(tmpDir, { recursive: true, force: true });
+    }
+  });
 });
