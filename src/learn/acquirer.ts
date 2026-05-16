@@ -8,7 +8,7 @@
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import * as os from 'node:os';
-import { execSync } from 'node:child_process';
+import { execSync, execFileSync } from 'node:child_process';
 
 // === Types ===
 
@@ -365,7 +365,28 @@ async function acquireUrl(
 // === Text Extraction Helpers ===
 
 function extractPdfText(filePath: string): string {
-  // Basic PDF text extraction: scan for text between BT and ET operators,
+  // Prefer the system `pdftotext` binary (poppler-utils) when available.
+  // The regex parser below only handles literal Tj/TJ operands and fails
+  // silently on modern PDFs that use Type 1/CFF font subsets — which is
+  // most papers from arxiv, IEEE, ACM, etc. pdftotext decodes those.
+  try {
+    const text = execFileSync(
+      'pdftotext',
+      ['-layout', '-nopgbrk', '-q', filePath, '-'],
+      {
+        encoding: 'utf-8',
+        maxBuffer: 16 * 1024 * 1024,
+        timeout: 30_000,
+        stdio: ['ignore', 'pipe', 'ignore'],
+      },
+    ).trim();
+    if (text.length > 0) return text;
+  } catch {
+    // pdftotext not installed, errored, or produced empty output —
+    // fall through to the regex parser below.
+  }
+
+  // Regex fallback: scan for text between BT and ET operators,
   // extract Tj/TJ string operands. Good enough for simple PDFs.
   const buffer = fs.readFileSync(filePath);
   const raw = buffer.toString('latin1');
