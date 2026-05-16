@@ -220,6 +220,27 @@ describe('buildBridge', () => {
     expect(content).toContain('read -rp "    ingest via sc:learn?');
   });
 
+  // Test (regression): the queue is sorted by aggregate DESC before truncation
+  // to top-N. Without the sort, "top-N" would actually return the first N in
+  // fetch order (typically submittedDate ASC) — not the highest-scored.
+  it('queue is sorted by aggregate DESC with arxivId tiebreaker', async () => {
+    // makeInputs() supplies aggregates [0.9, 0.8, 0.7, 0.6, 0.3] in arxivId
+    // order. With minScore=0.5 the 0.3 entry is dropped; top=3 should yield
+    // the three highest: 0.9, 0.8, 0.7 (NOT 0.9, 0.8, 0.7 by coincidence — by
+    // sort).
+    const result = await buildBridge(
+      makeInputs({ options: { ...DEFAULT_OPTIONS, top: 3, minScore: 0.5 } }, tmpBase),
+    );
+    const queue = JSON.parse(fs.readFileSync(result.queueJsonPath, 'utf-8'));
+    const aggs = queue.queue.map((q: { relevance: { aggregate: number } }) => q.relevance.aggregate);
+    expect(aggs).toEqual([0.9, 0.8, 0.7]);
+
+    // And the queue is monotonically non-increasing in aggregate.
+    for (let i = 1; i < aggs.length; i++) {
+      expect(aggs[i - 1]).toBeGreaterThanOrEqual(aggs[i]);
+    }
+  });
+
   // Test (regression): totalsByDomain counts papers crossing the 0.5
   // subscore threshold rather than summing subscore floats.
   it('totalsByDomain reports integer counts of papers with subscore >= 0.5', async () => {

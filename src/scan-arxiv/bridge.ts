@@ -120,7 +120,16 @@ export async function buildBridge(
     return true;
   });
 
-  // ── 3. Truncate to top-N and re-rank ───────────────────────────────────
+  // ── 3. Sort by aggregate DESC, then arxivId ASC tiebreaker, then truncate ──
+  // (Without the sort, the queue is in fetch order — usually submittedDate ASC
+  // from the fetcher — which means "top-N" actually picks the N earliest
+  // submitted, not the N highest-scored. ORDER-BY tiebreaker on arxivId keeps
+  // ties deterministic between runs.)
+  filtered.sort((a, b) => {
+    const d = b.relevance.aggregate - a.relevance.aggregate;
+    if (d !== 0) return d;
+    return a.paper.arxivId.localeCompare(b.paper.arxivId);
+  });
   const truncated = filtered.slice(0, options.top);
   const queue: QueueEntry[] = truncated.map((item, idx) => ({
     paper: item.paper,
