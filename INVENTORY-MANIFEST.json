@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-15T15:19:48Z",
+  "generated_at": "2026-05-16T18:54:11Z",
   "generator_version": "1.0.0",
   "milestone": "v1.49.576",
   "counts": {
@@ -7,7 +7,7 @@
     "agents_total": 48,
     "agents_gsd_prefix": 34,
     "hooks": 26,
-    "src_subsystems": 152
+    "src_subsystems": 153
   },
   "commands": [
     {
@@ -519,6 +519,7 @@
     "rumor-delay-model",
     "runtime-hal",
     "safety",
+    "scan-arxiv",
     "scribe",
     "security",
     "semantic-channel",

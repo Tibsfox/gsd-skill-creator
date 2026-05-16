@@ -12,8 +12,8 @@
     "wasserstein-hebbian",
     "tonnetz"
   ],
-  "fileCount": 201,
-  "rootDigest": "b50077cda23d60fce5bfba67237a634b683f78b9fbebf9c6502e6c9948ddbd63",
+  "fileCount": 205,
+  "rootDigest": "ee43fb5fac7c4a94e44ab610afdafa8378ef8ec7bd7f2adac92faa76e3738a70",
   "tree": [
     {
       "path": "orchestration/REFERENCES.md",
@@ -714,6 +714,26 @@
       "path": "memory/short-term.ts",
       "sha256": "7b445c522de2c9c84efd5c427bdcd84c60cf2d70fa2f31bed9b0273e756b7196",
       "size": 6645
+    },
+    {
+      "path": "memory/strategies/index.ts",
+      "sha256": "7616cab234187d009683e3ebecf4dc18786ca8601a4fc729c5a4bf226f31d540",
+      "size": 560
+    },
+    {
+      "path": "memory/strategies/lexical.test.ts",
+      "sha256": "4795c4d08b8225bdd9df34badc65bf6ed4343bd22e69a3d8fbec8fa6d3f5cf18",
+      "size": 8038
+    },
+    {
+      "path": "memory/strategies/lexical.ts",
+      "sha256": "a843aa7bf25d455a002577b29d0ae20e068c8ef0a9a72fe57ab68f9019ab1428",
+      "size": 5369
+    },
+    {
+      "path": "memory/strategies/types.ts",
+      "sha256": "37bc6218af1e4f75279381d0732b75c215c6138bc5a223e609f3fba0c90481ce",
+      "size": 2313
     },
     {
       "path": "memory/survey-scorer.ts",
