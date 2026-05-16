@@ -309,6 +309,439 @@ export function serializeSkillRecord(record: GroveRecord): Uint8Array {
   return encodeRecord(record);
 }
 
+// ─── TypedSkillSpec: typed manifest extension (May 2026 synthesis 2.4) ──────
+//
+// TypedSkillSpec extends the base SkillSpec with four typed substructures
+// vindicated by the May 2026 arxiv synthesis (SkCC `2605.03353v2`, FORTIS
+// `2605.09163v2`, CTA `2605.11946v1`). The base SkillSpec remains a valid
+// record type under SKILL_SPEC_TYPE_HASH; TypedSkillSpec gets its own
+// identity (TYPED_SKILL_SPEC_TYPE_HASH) so existing skill records keep
+// working unchanged and new records opt into the typed manifest explicitly.
+
+/** Compilation targets the skill IR can be rendered to. */
+export type CompilationTarget = 'claude-code' | 'codex' | 'kimi' | 'cursor';
+
+/**
+ * Declared capability surface for a skill. Enforced at selection time
+ * (refuse to load a skill that requests undeclared capabilities) and at
+ * execution time (refuse to dispatch a tool call outside the declared
+ * surface). See FORTIS `2605.09163v2`.
+ */
+export interface SkillCapabilities {
+  /** Tool names this skill is allowed to call. */
+  tools: string[];
+  /** Filesystem paths or globs this skill is allowed to read. */
+  reads: string[];
+  /** Filesystem paths or globs this skill is allowed to write. */
+  writes: string[];
+  /** Whether the skill may make outbound network requests. */
+  network: boolean;
+  /** Whether the skill may spawn subprocesses. */
+  exec: boolean;
+  /** Names of secrets / env-vars the skill may access. */
+  secrets: string[];
+}
+
+/**
+ * Manifest-level dependency declaration. Distinct from the existing
+ * `dependencies: HashRef[]` field on SkillSpec, which records
+ * content-addressed parent records. Manifest dependencies describe what
+ * the skill USES at runtime — tools and other skills — and the required
+ * activation order relative to them. See SkCC `2605.03353v2`.
+ */
+export interface ManifestDependencies {
+  /** Tool names the skill depends on at runtime. */
+  tools: string[];
+  /** Other skill names the skill loads, delegates to, or requires. */
+  skills: string[];
+  /** Required activation order relative to listed skills. */
+  order: 'before' | 'after' | 'any';
+  /**
+   * Optional content-addressed dependency-graph snapshot. Lets a skill
+   * pin the exact dependency closure it was authored against.
+   */
+  graph: HashRef | null;
+}
+
+/**
+ * Behavioural-audit fingerprint from the most recent paired-trace audit.
+ * See CTA `2605.11946v1`. The SIP distribution is over the five categories
+ * `surface-anchoring`, `template-copy`, `excess-planning`, `task-recovery`,
+ * `off-task-artifact`; values should sum to roughly 1.0 over a probe bank.
+ */
+export interface BehaviouralAudit {
+  /** SIP distribution (string→[0,1]) over the five SIP categories. */
+  sipDistribution: Record<string, number>;
+  /** Unix milliseconds of the last audit run. 0 = never audited. */
+  lastAuditedMs: number;
+  /** Lifecycle bucket the audit baseline applies to. */
+  baselineBucket: 'pre-ship' | 'shipped' | 'mature' | 'retired';
+}
+
+/**
+ * The typed-manifest skill spec. Strict superset of SkillSpec at the
+ * runtime-data level (it carries every base field), but encoded as a
+ * separate type record with a distinct identity hash. New skills opt in
+ * by writing a TypedSkillSpec record; old SkillSpec records continue to
+ * be valid Grove records under SKILL_SPEC_TYPE_HASH.
+ */
+export interface TypedSkillSpec extends SkillSpec {
+  /** Declared capability boundary. */
+  capabilities: SkillCapabilities;
+  /** Runtime dependency manifest (distinct from content-addressed parents). */
+  manifestDependencies: ManifestDependencies;
+  /** Latest counterfactual-audit fingerprint. */
+  behaviouralAudit: BehaviouralAudit;
+  /** Compilation targets the IR can be rendered to. */
+  compilationTargets: CompilationTarget[];
+}
+
+/** TypeRecord describing TypedSkillSpec. Built once at module load. */
+export function buildTypedSkillSpecTypeRecord(): GroveRecord {
+  const payload = typeRecordPayload(
+    'TypedSkillSpec',
+    'A skill artifact with a typed manifest: capabilities, dependencies, behavioural audit, and compilation targets.',
+    [
+      {
+        name: 'name',
+        kind: 'string',
+        elementKind: null,
+        required: true,
+        description: 'Display name of the skill.',
+      },
+      {
+        name: 'description',
+        kind: 'string',
+        elementKind: null,
+        required: true,
+        description: 'One-line activation hint shown to the router.',
+      },
+      {
+        name: 'body',
+        kind: 'string',
+        elementKind: null,
+        required: true,
+        description: 'Full markdown body of the skill (the SKILL.md content).',
+      },
+      {
+        name: 'activation_patterns',
+        kind: 'array',
+        elementKind: 'string',
+        required: true,
+        description: 'Phrases or context signals that suggest this skill should fire.',
+      },
+      {
+        name: 'dependencies',
+        kind: 'array',
+        elementKind: 'hashref',
+        required: true,
+        description: 'Hashrefs to parent skill records this skill is derived from.',
+      },
+      {
+        name: 'capabilities',
+        kind: 'map',
+        elementKind: null,
+        required: true,
+        description: 'Declared capability surface (tools, reads, writes, network, exec, secrets).',
+      },
+      {
+        name: 'manifest_dependencies',
+        kind: 'map',
+        elementKind: null,
+        required: true,
+        description: 'Runtime dependency manifest: tools, skills, order, optional graph hashref.',
+      },
+      {
+        name: 'behavioural_audit',
+        kind: 'map',
+        elementKind: null,
+        required: true,
+        description: 'Latest counterfactual-audit fingerprint (SIP distribution + bucket + timestamp).',
+      },
+      {
+        name: 'compilation_targets',
+        kind: 'array',
+        elementKind: 'string',
+        required: true,
+        description: 'Compilation targets the skill IR can be rendered to.',
+      },
+    ],
+  );
+  return {
+    version: GROVE_VERSION,
+    typeHash: TYPE_RECORD_HASH,
+    payload,
+    provenance: {
+      createdAtMs: 0,
+      author: null,
+      parentHashes: [],
+      sessionId: null,
+      toolVersion: 'grove-skillview/2.0',
+      dependencies: [],
+    },
+  };
+}
+
+/** Identity hash of the TypedSkillSpec TypeRecord. */
+export const TYPED_SKILL_SPEC_TYPE_HASH: HashRef = hashRecord(buildTypedSkillSpecTypeRecord());
+
+function encodeCapabilities(c: SkillCapabilities) {
+  return {
+    exec: c.exec,
+    network: c.network,
+    reads: c.reads.map((s) => v.string(s)),
+    secrets: c.secrets.map((s) => v.string(s)),
+    tools: c.tools.map((s) => v.string(s)),
+    writes: c.writes.map((s) => v.string(s)),
+  };
+}
+
+function encodeManifestDependencies(d: ManifestDependencies) {
+  return {
+    graph: d.graph === null ? v.null() : v.hashref(d.graph.algoId, d.graph.hash),
+    order: v.string(d.order),
+    skills: d.skills.map((s) => v.string(s)),
+    tools: d.tools.map((s) => v.string(s)),
+  };
+}
+
+function encodeBehaviouralAudit(b: BehaviouralAudit) {
+  const sipKeys = Object.keys(b.sipDistribution).sort();
+  const sipMap: Record<string, ReturnType<typeof v.string>> = {};
+  for (const k of sipKeys) {
+    // Quantise to integer parts-per-million so the value is canonical.
+    sipMap[k] = v.string(b.sipDistribution[k].toFixed(6));
+  }
+  return {
+    baseline_bucket: v.string(b.baselineBucket),
+    last_audited_ms: v.uint(b.lastAuditedMs),
+    sip_distribution: sipMap,
+  };
+}
+
+/** Encode a TypedSkillSpec to canonical bytes for a Grove record payload. */
+export function encodeTypedSkillSpec(spec: TypedSkillSpec): Uint8Array {
+  return encode({
+    activation_patterns: spec.activationPatterns.map((p) => v.string(p)),
+    behavioural_audit: encodeBehaviouralAudit(spec.behaviouralAudit),
+    body: v.string(spec.body),
+    capabilities: encodeCapabilities(spec.capabilities),
+    compilation_targets: spec.compilationTargets.map((t) => v.string(t)),
+    dependencies: spec.dependencies.map((h) => v.hashref(h.algoId, h.hash)),
+    description: v.string(spec.description),
+    manifest_dependencies: encodeManifestDependencies(spec.manifestDependencies),
+    name: v.string(spec.name),
+  });
+}
+
+function unwrapMap(value: unknown, ctx: string): Record<string, unknown> {
+  if (
+    value &&
+    typeof value === 'object' &&
+    !Array.isArray(value) &&
+    !('kind' in (value as object))
+  ) {
+    return value as Record<string, unknown>;
+  }
+  throw new Error(`TypedSkillSpec: expected map at ${ctx}`);
+}
+
+function unwrapBool(value: unknown, ctx: string): boolean {
+  if (typeof value === 'boolean') return value;
+  throw new Error(`TypedSkillSpec: expected bool at ${ctx}`);
+}
+
+function unwrapUint(value: unknown, ctx: string): number {
+  if (
+    value &&
+    typeof value === 'object' &&
+    'kind' in (value as object) &&
+    (value as { kind: string }).kind === 'uint64'
+  ) {
+    return Number((value as { value: bigint }).value);
+  }
+  throw new Error(`TypedSkillSpec: expected uint64 at ${ctx}`);
+}
+
+function decodeCapabilities(value: unknown): SkillCapabilities {
+  const map = unwrapMap(value, 'capabilities');
+  return {
+    exec: unwrapBool(map.exec, 'capabilities.exec'),
+    network: unwrapBool(map.network, 'capabilities.network'),
+    reads: unwrapStringArrayPublic(map.reads, 'capabilities.reads'),
+    secrets: unwrapStringArrayPublic(map.secrets, 'capabilities.secrets'),
+    tools: unwrapStringArrayPublic(map.tools, 'capabilities.tools'),
+    writes: unwrapStringArrayPublic(map.writes, 'capabilities.writes'),
+  };
+}
+
+function decodeManifestDependencies(value: unknown): ManifestDependencies {
+  const map = unwrapMap(value, 'manifest_dependencies');
+  const graphRaw = map.graph;
+  let graph: HashRef | null = null;
+  if (graphRaw !== null) {
+    if (
+      graphRaw &&
+      typeof graphRaw === 'object' &&
+      'kind' in (graphRaw as object) &&
+      (graphRaw as { kind: string }).kind === 'hashref'
+    ) {
+      graph = (graphRaw as { kind: 'hashref'; value: HashRef }).value;
+    } else {
+      throw new Error('TypedSkillSpec: manifest_dependencies.graph is neither null nor hashref');
+    }
+  }
+  const order = unwrapStringPublic(map.order, 'manifest_dependencies.order');
+  if (order !== 'before' && order !== 'after' && order !== 'any') {
+    throw new Error(`TypedSkillSpec: invalid manifest_dependencies.order: ${order}`);
+  }
+  return {
+    graph,
+    order,
+    skills: unwrapStringArrayPublic(map.skills, 'manifest_dependencies.skills'),
+    tools: unwrapStringArrayPublic(map.tools, 'manifest_dependencies.tools'),
+  };
+}
+
+function decodeBehaviouralAudit(value: unknown): BehaviouralAudit {
+  const map = unwrapMap(value, 'behavioural_audit');
+  const bucket = unwrapStringPublic(map.baseline_bucket, 'behavioural_audit.baseline_bucket');
+  if (bucket !== 'pre-ship' && bucket !== 'shipped' && bucket !== 'mature' && bucket !== 'retired') {
+    throw new Error(`TypedSkillSpec: invalid baseline_bucket: ${bucket}`);
+  }
+  const sipMap = unwrapMap(map.sip_distribution, 'behavioural_audit.sip_distribution');
+  const sipDistribution: Record<string, number> = {};
+  for (const [k, raw] of Object.entries(sipMap)) {
+    const s = unwrapStringPublic(raw, `behavioural_audit.sip_distribution[${k}]`);
+    const n = Number(s);
+    if (!Number.isFinite(n)) {
+      throw new Error(`TypedSkillSpec: non-numeric SIP value at ${k}: ${s}`);
+    }
+    sipDistribution[k] = n;
+  }
+  return {
+    baselineBucket: bucket,
+    lastAuditedMs: unwrapUint(map.last_audited_ms, 'behavioural_audit.last_audited_ms'),
+    sipDistribution,
+  };
+}
+
+function unwrapStringPublic(value: unknown, ctx: string): string {
+  if (
+    value &&
+    typeof value === 'object' &&
+    !Array.isArray(value) &&
+    'kind' in (value as object) &&
+    (value as { kind: string }).kind === 'string'
+  ) {
+    return (value as { kind: 'string'; value: string }).value;
+  }
+  throw new Error(`TypedSkillSpec: expected string at ${ctx}`);
+}
+
+function unwrapStringArrayPublic(value: unknown, ctx: string): string[] {
+  if (!Array.isArray(value)) {
+    throw new Error(`TypedSkillSpec: expected array at ${ctx}`);
+  }
+  return value.map((elem, i) => unwrapStringPublic(elem, `${ctx}[${i}]`));
+}
+
+/** Decode canonical-encoded TypedSkillSpec bytes. */
+export function decodeTypedSkillSpec(bytes: Uint8Array): TypedSkillSpec {
+  const { value } = decode(bytes);
+  const map = unwrapMap(value, 'TypedSkillSpec root');
+  const compilationTargetsRaw = unwrapStringArrayPublic(map.compilation_targets, 'compilation_targets');
+  const compilationTargets: CompilationTarget[] = compilationTargetsRaw.map((t) => {
+    if (t !== 'claude-code' && t !== 'codex' && t !== 'kimi' && t !== 'cursor') {
+      throw new Error(`TypedSkillSpec: invalid compilation target: ${t}`);
+    }
+    return t;
+  });
+  return {
+    name: unwrapStringPublic(map.name, 'name'),
+    description: unwrapStringPublic(map.description, 'description'),
+    body: unwrapStringPublic(map.body, 'body'),
+    activationPatterns: unwrapStringArrayPublic(map.activation_patterns, 'activation_patterns'),
+    dependencies: unwrapHashRefArrayPublic(map.dependencies, 'dependencies'),
+    capabilities: decodeCapabilities(map.capabilities),
+    manifestDependencies: decodeManifestDependencies(map.manifest_dependencies),
+    behaviouralAudit: decodeBehaviouralAudit(map.behavioural_audit),
+    compilationTargets,
+  };
+}
+
+function unwrapHashRefArrayPublic(value: unknown, ctx: string): HashRef[] {
+  if (!Array.isArray(value)) {
+    throw new Error(`TypedSkillSpec: expected array at ${ctx}`);
+  }
+  return value.map((elem, i) => {
+    if (
+      elem &&
+      typeof elem === 'object' &&
+      'kind' in (elem as object) &&
+      (elem as { kind: string }).kind === 'hashref'
+    ) {
+      return (elem as { kind: 'hashref'; value: HashRef }).value;
+    }
+    throw new Error(`TypedSkillSpec: expected hashref at ${ctx}[${i}]`);
+  });
+}
+
+/** Build a Grove record wrapping a TypedSkillSpec. */
+export function buildTypedSkillRecord(
+  spec: TypedSkillSpec,
+  opts: BuildSkillOptions = {},
+): GroveRecord {
+  return buildRecord(TYPED_SKILL_SPEC_TYPE_HASH, encodeTypedSkillSpec(spec), {
+    createdAtMs: opts.createdAtMs ?? Date.now(),
+    author: opts.author ?? null,
+    parentHashes: opts.parentHashes ?? [],
+    sessionId: opts.sessionId ?? null,
+    toolVersion: opts.toolVersion ?? 'grove-skillview/2.0',
+    dependencies: spec.dependencies.slice(),
+  });
+}
+
+/** Parse a Grove record back into a TypedSkillSpec. */
+export function parseTypedSkillRecord(record: GroveRecord): TypedSkillSpec {
+  if (!hashRefEquals(record.typeHash, TYPED_SKILL_SPEC_TYPE_HASH)) {
+    throw new Error('TypedSkillView: record type_hash is not TYPED_SKILL_SPEC_TYPE_HASH');
+  }
+  return decodeTypedSkillSpec(record.payload);
+}
+
+/**
+ * Migrate an existing SkillSpec to a TypedSkillSpec with conservative
+ * defaults: empty capability surface, no manifest dependencies, no audit
+ * history, every supported compilation target. Callers that know more
+ * about the skill should overwrite the relevant fields before persisting.
+ */
+export function skillSpecToTyped(spec: SkillSpec): TypedSkillSpec {
+  return {
+    ...spec,
+    capabilities: {
+      tools: [],
+      reads: [],
+      writes: [],
+      network: false,
+      exec: false,
+      secrets: [],
+    },
+    manifestDependencies: {
+      tools: [],
+      skills: [],
+      order: 'any',
+      graph: null,
+    },
+    behaviouralAudit: {
+      sipDistribution: {},
+      lastAuditedMs: 0,
+      baselineBucket: 'pre-ship',
+    },
+    compilationTargets: ['claude-code', 'codex', 'kimi', 'cursor'],
+  };
+}
+
 // ─── Re-exports ─────────────────────────────────────────────────────────────
 
 export {
