@@ -340,78 +340,106 @@ export function createFetcher(opts?: FetcherOptions): Fetcher {
     }
   }
 
-  return {
-    async fetchMonth(month: string, categories: string[]): Promise<ArxivPaper[]> {
-      const { start: monthStart, end: monthEnd } = monthBounds(month);
+  // Pull all papers for ONE category (which may itself be a wildcard like
+  // "cs.*"). The arxiv API caps results at start=10000 across the whole
+  // query; an HTTP 4xx/5xx beyond start=0 is treated as soft EOF so we keep
+  // whatever we got rather than crashing the run.
+  async function fetchOneCategory(
+    month: string,
+    category: string,
+  ): Promise<ArxivPaper[]> {
+    const { start: monthStart, end: monthEnd } = monthBounds(month);
+    const searchQuery = `cat:${category}`;
+    const allPapers: ArxivPaper[] = [];
+    let page = 0;
+    let done = false;
 
-      const searchQuery = categories.map((c) => `cat:${c}`).join('+OR+');
+    while (!done) {
+      const key = cacheKey(month, [category], page);
+      let xml: string;
+      let url: string;
 
-      const allPapers: ArxivPaper[] = [];
-      let page = 0;
-      let done = false;
-
-      while (!done) {
-        const key = cacheKey(month, categories, page);
-        let xml: string;
-        let url: string;
-
-        const cached = getCachedXml(key);
-        if (cached !== null) {
-          xml = cached;
-          url = `${baseUrl} (cached page ${page})`;
-        } else {
+      const cached = getCachedXml(key);
+      if (cached !== null) {
+        xml = cached;
+        url = `${baseUrl} (cached page ${page})`;
+      } else {
+        try {
           const result = await fetchPage(searchQuery, page * maxResultsPerRequest);
           xml = result.xml;
           url = result.url;
           setCachedXml(key, xml);
-          // Polite delay between real network pages (not on first page, not on cached)
           if (page > 0) {
             await sleep(INTER_PAGE_SLEEP_MS);
           }
-        }
-
-        const pagePapers = parseAtomXml(xml, url);
-        console.log(`[arxiv-fetcher] page=${page} query="${searchQuery}" results=${pagePapers.length}`);
-
-        if (pagePapers.length === 0) {
-          // Exhausted results
-          done = true;
-        } else {
-          // Since sorted descending by submittedDate, check if the last entry is older than monthStart
-          // Include entries from this page that fall within range
-          let foundOlderThanStart = false;
-          for (const paper of pagePapers) {
-            const pub = new Date(paper.publishedAt);
-            if (pub < monthStart) {
-              foundOlderThanStart = true;
-              // Don't break — still add papers from this page that are in range
-            } else {
-              allPapers.push(paper);
-            }
-          }
-
-          if (foundOlderThanStart || pagePapers.length < maxResultsPerRequest) {
-            // We hit papers older than our window, or we got fewer than requested (last page)
+        } catch (err) {
+          // Soft-EOF on transient HTTP errors past page 0 — arxiv enforces a
+          // hard 10K-result pagination cap and returns 5xx beyond it. Keep
+          // whatever we have so far rather than aborting the whole run.
+          if (page > 0) {
+            const msg = err instanceof Error ? err.message : String(err);
+            console.warn(
+              `[arxiv-fetcher] category=${category} page=${page} aborting pagination: ${msg.slice(0, 200)}`,
+            );
             done = true;
-          } else {
-            page++;
+            break;
           }
+          throw err;
         }
       }
 
-      // Date filter: only include papers in [monthStart, monthEnd]
-      const filtered = allPapers.filter((p) => {
-        const pub = new Date(p.publishedAt);
-        return pub >= monthStart && pub <= monthEnd;
-      });
+      const pagePapers = parseAtomXml(xml, url);
+      console.log(`[arxiv-fetcher] category=${category} page=${page} results=${pagePapers.length}`);
 
-      // Deduplicate by base arxivId
-      const deduped = deduplicate(filtered);
+      if (pagePapers.length === 0) {
+        done = true;
+      } else {
+        let foundOlderThanStart = false;
+        for (const paper of pagePapers) {
+          const pub = new Date(paper.publishedAt);
+          if (pub < monthStart) {
+            foundOlderThanStart = true;
+          } else {
+            allPapers.push(paper);
+          }
+        }
+        if (foundOlderThanStart || pagePapers.length < maxResultsPerRequest) {
+          done = true;
+        } else {
+          page++;
+        }
+      }
+    }
+
+    const filtered = allPapers.filter((p) => {
+      const pub = new Date(p.publishedAt);
+      return pub >= monthStart && pub <= monthEnd;
+    });
+    return filtered;
+  }
+
+  return {
+    async fetchMonth(month: string, categories: string[]): Promise<ArxivPaper[]> {
+      // arxiv API has a 10K-result pagination cap per query; combining many
+      // categories with +OR+ trips this. Fetch each category as its own
+      // query and merge — each gets its own 10K budget. The cache key is
+      // per-category so re-runs reuse partial results cleanly.
+      const merged: ArxivPaper[] = [];
+      for (const cat of categories) {
+        const subset = await fetchOneCategory(month, cat);
+        merged.push(...subset);
+      }
+
+      // Deduplicate by base arxivId (a paper cross-listed under cs.AI and
+      // cs.LG would otherwise appear twice).
+      const deduped = deduplicate(merged);
 
       // Sort by publishedAt ASC for stable downstream ordering
       deduped.sort((a, b) => a.publishedAt.localeCompare(b.publishedAt));
 
-      console.log(`[arxiv-fetcher] month=${month} fetched=${allPapers.length} filtered=${filtered.length} deduped=${deduped.length}`);
+      console.log(
+        `[arxiv-fetcher] month=${month} categories=${categories.length} fetched=${merged.length} deduped=${deduped.length}`,
+      );
 
       return deduped;
     },
