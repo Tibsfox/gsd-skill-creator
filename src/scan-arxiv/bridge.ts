@@ -224,7 +224,17 @@ export async function buildBridge(
 
 export async function ingestQueue(
   queuePath: string,
-  options: { dryRun?: boolean; autoConfirm?: boolean; topN?: number } = {},
+  options: {
+    dryRun?: boolean;
+    autoConfirm?: boolean;
+    topN?: number;
+    /**
+     * Optional override for the seen-ids.json path. Defaults to the real
+     * DEFAULT_SEEN_IDS_PATH; tests pass a tmp path so they don't clobber
+     * the operator's real ingestion ledger.
+     */
+    seenIdsPath?: string;
+  } = {},
 ): Promise<{ successCount: number; failureCount: number; reports: string[] }> {
   const raw = fs.readFileSync(queuePath, 'utf-8');
   const runOutput = JSON.parse(raw) as RunOutput;
@@ -233,7 +243,8 @@ export async function ingestQueue(
     ? runOutput.queue.slice(0, options.topN)
     : runOutput.queue;
 
-  let state = loadSeenIds();
+  const seenPath = options.seenIdsPath;  // undefined → defaults inside dedup.ts
+  let state = loadSeenIds(seenPath);
   let successCount = 0;
   let failureCount = 0;
   const reports: string[] = [];
@@ -260,7 +271,7 @@ export async function ingestQueue(
         // a stable identifier in the seen-ids ledger.
         const reportRef = result.sessionId;
         state = recordSeen(state, entry.paper.arxivId, reportRef);
-        saveSeenIds(state);
+        saveSeenIds(state, seenPath);
         reports.push(reportRef);
         successCount++;
         log(`  ✓ ingested ${entry.paper.arxivId}`);

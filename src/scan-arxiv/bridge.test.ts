@@ -338,7 +338,10 @@ describe('buildBridge', () => {
     });
     const recordSpy = vi.spyOn(dedupModule, 'recordSeen');
 
-    const result = await ingestQueue(queuePath, { dryRun: true });
+    // seenIdsPath isolates this test from the real DEFAULT_SEEN_IDS_PATH —
+    // without it, ingestQueue writes to the operator's real seen-ids ledger
+    // every time the test runs.
+    const result = await ingestQueue(queuePath, { dryRun: true, seenIdsPath: seenPath });
 
     // First call succeeded — recordSeen + saveSeenIds called once
     expect(recordSpy).toHaveBeenCalledOnce();
