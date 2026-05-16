@@ -113,6 +113,35 @@ export function parseArgv(argv: string[]): ParsedArgv {
         break;
       }
 
+      case '--judge-backend': {
+        if (!next || next.startsWith('--')) {
+          errors.push(`--judge-backend requires a value (sdk|cli|auto)`);
+          break;
+        }
+        if (next !== 'sdk' && next !== 'cli' && next !== 'auto') {
+          errors.push(`--judge-backend value "${next}" must be one of: sdk, cli, auto`);
+        } else {
+          options.judgeBackend = next;
+        }
+        i++;
+        break;
+      }
+
+      case '--cli-max-budget-usd': {
+        if (!next || next.startsWith('--')) {
+          errors.push(`--cli-max-budget-usd requires a value (e.g. 0.20)`);
+          break;
+        }
+        const f = parseFloat(next);
+        if (isNaN(f) || f <= 0) {
+          errors.push(`--cli-max-budget-usd value "${next}" must be a positive float`);
+        } else {
+          options.cliMaxBudgetUsd = f;
+        }
+        i++;
+        break;
+      }
+
       default:
         if (flag.startsWith('-')) {
           unknownFlags.push(flag);
@@ -138,6 +167,8 @@ export function resolveOptions(opts: ScanArxivOptions): ResolvedScanArxivOptions
     minScore: opts.minScore ?? DEFAULT_MIN_SCORE,
     noCache: opts.noCache ?? false,
     outputDir: opts.outputDir ?? DEFAULT_OUTPUT_DIR,
+    judgeBackend: opts.judgeBackend ?? 'auto',
+    cliMaxBudgetUsd: opts.cliMaxBudgetUsd ?? 0.20,
   };
 }
 
@@ -179,11 +210,16 @@ OPTIONS
   --min-score <float>     Drop candidates with aggregate score below this threshold (default: 0.5)
   --no-cache              Bypass arxiv API response cache
   --output-dir <path>     Directory to write run artifacts (default: .planning/arxiv-may-funnel/runs)
+  --judge-backend <name>  LLM judge backend: sdk (uses ANTHROPIC_API_KEY), cli (uses local
+                          \`claude\` Code OAuth session), or auto (default: pick sdk if
+                          ANTHROPIC_API_KEY is set, else cli)
+  --cli-max-budget-usd <f> Per-call USD cap when --judge-backend=cli (default: 0.20)
   --help, -h              Print this help text
 
 EXAMPLES
   npx tsx src/commands/scan-arxiv.ts --month 2026-04
   npx tsx src/commands/scan-arxiv.ts --top 50 --dry-run
   npx tsx src/commands/scan-arxiv.ts --categories cs.AI,cs.CL --min-score 0.6
+  npx tsx src/commands/scan-arxiv.ts --judge-backend cli --top 10
 `.trimStart();
 }

@@ -26,6 +26,8 @@
 
 import { promises as fs } from 'node:fs';
 import * as path from 'node:path';
+import * as os from 'node:os';
+import { spawn } from 'node:child_process';
 import type {
   ArxivPaper,
   Ranker,
@@ -102,11 +104,23 @@ export interface JudgeResult {
   rationale: string;
 }
 
+/**
+ * Backend for the default LLM judge.
+ *   - 'sdk'  : @anthropic-ai/sdk (requires ANTHROPIC_API_KEY)
+ *   - 'cli'  : `claude -p` subprocess (uses the local Claude Code OAuth session)
+ *   - 'auto' : pick 'sdk' if ANTHROPIC_API_KEY is set, else 'cli'
+ */
+export type JudgeBackend = 'sdk' | 'cli' | 'auto';
+
 export interface RankerOptions {
   /** Embedding model identifier (informational; pipeline is selected by service). */
   embeddingModel?: string;
   /** LLM judge model identifier. */
   llmJudgeModel?: string;
+  /** Which backend the default judge uses; default 'auto'. */
+  judgeBackend?: JudgeBackend;
+  /** Per-call budget cap for CLI backend, USD; default 0.20. */
+  cliMaxBudgetUsd?: number;
   /** Embedding pre-rank cap. */
   preRankTop?: number;
   /** Filesystem cache directory (per-arxivId JSON files). */
@@ -172,7 +186,7 @@ function buildDefaultEmbedder(): TextEmbedder {
   };
 }
 
-function buildDefaultJudge(model: string, temperature: number): JudgeFn {
+function buildSdkJudge(model: string, temperature: number): JudgeFn {
   return async (paper: ArxivPaper) => {
     // Dynamic import keeps the SDK optional at module-load time, matching
     // the pattern in src/conflicts/rewrite-suggester.ts.
@@ -189,6 +203,79 @@ function buildDefaultJudge(model: string, temperature: number): JudgeFn {
     const raw = textBlock && 'text' in textBlock ? textBlock.text : '';
     return parseJudgeJson(raw);
   };
+}
+
+/**
+ * Subprocess-based judge that shells out to the `claude` CLI. Used when no
+ * ANTHROPIC_API_KEY is available — leverages the local Claude Code OAuth
+ * session instead. Runs from os.tmpdir() so the CLI does not auto-discover
+ * the host repo's CLAUDE.md/hooks (which would inflate per-call token cost).
+ */
+export function buildCliJudge(model: string, maxBudgetUsd: number): JudgeFn {
+  return async (paper: ArxivPaper) => {
+    const prompt = buildJudgePrompt(paper);
+    const args = [
+      '-p',
+      '--output-format', 'json',
+      '--model', model,
+      '--no-session-persistence',
+      '--exclude-dynamic-system-prompt-sections',
+      '--max-budget-usd', String(maxBudgetUsd),
+    ];
+    const { stdout, stderr, code } = await new Promise<{
+      stdout: string;
+      stderr: string;
+      code: number | null;
+    }>((resolve, reject) => {
+      const child = spawn('claude', args, {
+        cwd: os.tmpdir(),
+        stdio: ['pipe', 'pipe', 'pipe'],
+        timeout: 180_000,
+      });
+      let out = '';
+      let err = '';
+      child.stdout.on('data', (d: Buffer) => { out += d.toString(); });
+      child.stderr.on('data', (d: Buffer) => { err += d.toString(); });
+      child.on('error', reject);
+      child.on('close', (c) => resolve({ stdout: out, stderr: err, code: c }));
+      child.stdin.write(prompt);
+      child.stdin.end();
+    });
+    if (code !== 0) {
+      throw new Error(
+        `claude CLI exited ${code}: ${stderr.slice(0, 300) || stdout.slice(0, 300)}`,
+      );
+    }
+    let envelope: { result?: unknown; is_error?: unknown };
+    try {
+      envelope = JSON.parse(stdout) as typeof envelope;
+    } catch {
+      throw new Error(`claude CLI returned non-JSON stdout: ${stdout.slice(0, 300)}`);
+    }
+    if (envelope.is_error === true) {
+      const msg = typeof envelope.result === 'string' ? envelope.result : 'unknown error';
+      throw new Error(`claude CLI error: ${msg.slice(0, 300)}`);
+    }
+    if (typeof envelope.result !== 'string') {
+      throw new Error('claude CLI envelope missing result string');
+    }
+    return parseJudgeJson(envelope.result);
+  };
+}
+
+function buildDefaultJudge(
+  model: string,
+  temperature: number,
+  backend: JudgeBackend,
+  cliMaxBudgetUsd: number,
+): JudgeFn {
+  const resolved: 'sdk' | 'cli' =
+    backend === 'auto'
+      ? (process.env.ANTHROPIC_API_KEY ? 'sdk' : 'cli')
+      : backend;
+  return resolved === 'sdk'
+    ? buildSdkJudge(model, temperature)
+    : buildCliJudge(model, cliMaxBudgetUsd);
 }
 
 /**
@@ -324,6 +411,8 @@ async function preRank(
 export function createRanker(opts: RankerOptions = {}): Ranker {
   const {
     llmJudgeModel = DEFAULT_JUDGE_MODEL,
+    judgeBackend = 'auto',
+    cliMaxBudgetUsd = 0.20,
     preRankTop = DEFAULT_PRE_RANK_TOP,
     cacheDir = DEFAULT_CACHE_DIR,
     noCache = false,
@@ -334,7 +423,8 @@ export function createRanker(opts: RankerOptions = {}): Ranker {
     judge,
   } = opts;
 
-  const judgeFn: JudgeFn = judge ?? buildDefaultJudge(llmJudgeModel, temperature);
+  const judgeFn: JudgeFn =
+    judge ?? buildDefaultJudge(llmJudgeModel, temperature, judgeBackend, cliMaxBudgetUsd);
   const cache = createCacheStore(cacheDir, noCache);
 
   async function rankBatch(

@@ -71,7 +71,10 @@ export async function main(
     return 0;
   }
 
-  const ranker = createRanker();
+  const ranker = createRanker({
+    judgeBackend: resolved.judgeBackend,
+    cliMaxBudgetUsd: resolved.cliMaxBudgetUsd,
+  });
   const scoreMap = await ranker.rankBatch(papers);
 
   const ranked = papers

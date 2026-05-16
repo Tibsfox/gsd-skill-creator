@@ -62,6 +62,9 @@ export interface RunOutput {
 
 // === CLI options ===
 
+/** Judge backend selection: SDK (API key), CLI (local claude session), or auto. */
+export type ScanArxivJudgeBackend = 'sdk' | 'cli' | 'auto';
+
 export interface ScanArxivOptions {
   month?: string;                  // "YYYY-MM"; default = previous completed month
   top?: number;                    // default 30
@@ -70,6 +73,8 @@ export interface ScanArxivOptions {
   minScore?: number;               // default 0.5
   noCache?: boolean;
   outputDir?: string;              // default ".planning/arxiv-may-funnel/runs"
+  judgeBackend?: ScanArxivJudgeBackend;  // default 'auto'
+  cliMaxBudgetUsd?: number;        // per-call cap when judgeBackend='cli'; default 0.20
 }
 
 export interface ResolvedScanArxivOptions {
@@ -80,6 +85,8 @@ export interface ResolvedScanArxivOptions {
   minScore: number;
   noCache: boolean;
   outputDir: string;
+  judgeBackend: ScanArxivJudgeBackend;
+  cliMaxBudgetUsd: number;
 }
 
 // === Ranker contract ===

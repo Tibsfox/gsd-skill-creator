@@ -69,6 +69,8 @@ const DEFAULT_OPTIONS: ResolvedScanArxivOptions = {
   minScore: 0.5,
   noCache: false,
   outputDir: '.planning/arxiv-may-funnel/runs',
+  judgeBackend: 'auto',
+  cliMaxBudgetUsd: 0.20,
 };
 
 // ── Helper: create a tmp dir and build inputs ─────────────────────────────────
