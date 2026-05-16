@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.655`.
+The story begins at `v1.0` and continues to `v1.49.656`.
 
-**698 chapters.** 697 have retrospectives.
+**699 chapters.** 698 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -706,3 +706,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.653](v1.49.653/00-summary.md)** — Long-Term Roadmap + Audit Closure · 2026-05-15
 - **[v1.49.654](v1.49.654/00-summary.md)** — FA-652-11 Infrastructure + Lesson Codification · 2026-05-15
 - **[v1.49.655](v1.49.655/00-summary.md)** — FA-652-11 Content Backfill · 2026-05-15
+- **[v1.49.656](v1.49.656/00-summary.md)** — NASA Track-Card Uplift · 2026-05-16
