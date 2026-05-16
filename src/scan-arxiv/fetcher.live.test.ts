@@ -96,7 +96,8 @@ describe.skipIf(!LIVE)('fetcher — live arxiv', () => {
       maxResultsPerRequest: 1000,
     });
 
-    // First call — populates cache
+    // Warm-up call — populates cache and pays the JIT/disk-warmup cost so the
+    // measured second call below is purely the cache-hit path.
     await fetcher.fetchMonth('2026-05', ['cs.AI']);
 
     // Second call — should be served from cache

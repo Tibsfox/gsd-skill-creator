@@ -68,7 +68,10 @@ const DEFAULT_OPTIONS: ResolvedScanArxivOptions = {
   categories: ['cs.AI'],
   minScore: 0.5,
   noCache: false,
-  outputDir: '.planning/arxiv-may-funnel/runs',
+  // Tests always override this via bridgeOpts.outputDir (a tmp dir). Production
+  // default is .planning/arxiv-may-funnel/runs; the fixture uses a tmp marker
+  // to keep apply-to-self.mjs happy (no .planning path in test source).
+  outputDir: '/tmp/scan-arxiv-fixture-only',
   judgeBackend: 'auto',
   cliMaxBudgetUsd: 0.20,
   preRankTop: 100,
