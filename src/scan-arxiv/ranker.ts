@@ -435,6 +435,7 @@ export function createRanker(opts: RankerOptions = {}): Ranker {
 
     const survivors = await preRank(papers, embedder, preRankThreshold, preRankTop);
 
+    let judgeErrors = 0;
     for (const { paper } of survivors) {
       // Cache lookup first (skipped when noCache).
       const hit = await cache.read(paper.arxivId);
@@ -442,7 +443,19 @@ export function createRanker(opts: RankerOptions = {}): Ranker {
         out.set(paper.arxivId, hit);
         continue;
       }
-      const judgeResult = await judgeFn(paper);
+      let judgeResult: JudgeResult;
+      try {
+        judgeResult = await judgeFn(paper);
+      } catch (err) {
+        // One bad call shouldn't kill a 50-paper batch. Log loudly with the
+        // arxiv ID so the operator can re-run with --no-cache later if needed.
+        const msg = err instanceof Error ? err.message : String(err);
+        console.warn(
+          `[ranker] judge failed for ${paper.arxivId} — skipping. (${msg.slice(0, 200)})`,
+        );
+        judgeErrors++;
+        continue;
+      }
       const subscores: Record<RelevanceDomain, number> = {
         'agent-orchestration': clamp01(judgeResult.subscores['agent-orchestration']),
         'skill-design': clamp01(judgeResult.subscores['skill-design']),
@@ -459,6 +472,9 @@ export function createRanker(opts: RankerOptions = {}): Ranker {
       };
       await cache.write(paper.arxivId, score);
       out.set(paper.arxivId, score);
+    }
+    if (judgeErrors > 0) {
+      console.warn(`[ranker] ${judgeErrors} paper(s) skipped due to judge failures`);
     }
     return out;
   }
