@@ -81,3 +81,63 @@ Six central concepts used throughout the Rosetta translation table (`translation
 **Primary source:** Kirchhoff, M., Parr, T., Palacios, E., Friston, K., & Kiverstein, J. (2018). "The Markov blankets of life: autonomy, active inference and the free energy principle." *Journal of the Royal Society Interface* 15:20170792. DOI: 10.1098/rsif.2017.0792. §§2–3 define the blanket as the boundary condition and prove the conditional independence theorem.
 
 **Secondary sources:** Foxglove, M. T. (2026). *The Space Between: The Autodidact's Guide to the Galaxy.* tibsfox.com. Preface pp. xxv–xxxii ("boundary condition of being"; symbiosis register). Friston, K. (2010). "The free-energy principle." *Nature Reviews Neuroscience* 11(2):127–138 ({E, S, A, I} partition; active states chosen to minimise expected free energy at the boundary).
+
+---
+
+## 7. Intent Routing
+
+**Primary cluster:** AI / SST (Cluster 12)
+
+**Canonical definition.** Intent routing is the act of classifying an input by its information-need before selecting a retrieval or reasoning strategy. It converts retrieval, dispatch, or composition from a *fixed function* into a *policy*: different query intents (lookup vs. multi-hop vs. global summarisation vs. verification vs. deep reasoning) demand categorically different retrievers, context budgets, and refinement passes, and a single one-size strategy is dominated on every axis by the conditional strategy. The architectural shift is "route → strategy → act", and the substantive empirical claim is that LLMs possess *latent* routing ability that can be elicited via a structured prompt without additional training (Chen et al. 2026, §3) — the routing decision can be encapsulated as a reusable skill and externalised from the answering model, and externalising it improves small-model performance by ~2× (Sharma et al. 2026 MemFlow §4.2). In control-theoretic terms, intent routing is the upstream switch in a mixture-of-controllers and is a precondition for specialised composition (Concept 5) to apply at the retrieval or action surface. The same pattern recurs across the 2026 frontier in code generation (Plan-on-Trigger, PaT: plan only on verification failure — Yoon et al. `2605.07248v1`) and multi-agent orchestration (critique-and-route MDP — Fang et al. `2605.08686`), establishing intent routing as a cross-domain primitive rather than a memory-specific trick.
+
+**Primary source:** Chen, Y. et al. (2026). "Route Before Retrieve: A Latent Routing Approach for Retrieval-Augmented Generation." arXiv:2605.10235v2.
+
+**Secondary sources:** Sharma, A. et al. (2026). "MemFlow: Intent-Driven Memory Orchestration for Small Language Models." arXiv:2605.03312v1 (externalising routing yields 2× accuracy on 1.7B SLM). Fang, X. et al. (2026). "Iterative Critique-and-Routing Controller for Multi-Agent Systems with Heterogeneous LLMs." arXiv:2605.08686v1 (routing as finite-horizon MDP). Yoon, S. et al. (2026). "Plan-on-Trigger." arXiv:2605.07248v1 (verification-failure as routing signal in code generation; ~69% inference-cost reduction).
+
+---
+
+## 8. Constraint Drift
+
+**Primary cluster:** AI / SST (Cluster 12)
+
+**Canonical definition.** Constraint drift is the loss, distortion, weakening, or relaxation of declared constraints — most consequentially safety constraints — as they propagate through the operating surfaces of an agent system: memory, delegation, communication, tool use, audit, and optimisation. The Li et al. taxonomy (2026, §2) names six drift channels and demonstrates that prompt-asserted constraints decay along every channel in measurable, reproducible ways. The architectural implication is that constraints must be *maintained as trajectory state* rather than re-asserted at prompt time: a constraint store, propagated across delegation boundaries, validated at each tool invocation, and reconciled at audit, prevents the drift. In control theory the analogue is the invariant of a stabilising controller — a property that must hold across every reachable state, not merely the initial state. In software engineering the analogue is the type system: types are constraints that travel with the value, not assertions checked once at module entry. The 2026 finding is that production multi-agent LLM systems fail at 41-87% rates primarily from coordination defects of which constraint drift is the dominant subclass (Nechepurenko & Shuvalov `2605.03310`), not from base model capability, which makes constraint-drift mitigation a higher-leverage intervention than model upgrades for the operational reliability of agent systems. The cross-domain analogue in code generation is "constraint decay" (Dente et al. `2605.06445v1`): every added non-functional structural constraint costs ~30pp of agent success rate, even when the functional spec is held fixed.
+
+**Primary source:** Li, J. et al. (2026). "Operationalizing Constraint Maintenance in Multi-Agent LLM Systems." arXiv:2605.10481.
+
+**Secondary sources:** Nechepurenko, A. & Shuvalov, K. (2026). "Coordination, Not Capability: A Failure-Mode Taxonomy of Production Multi-Agent LLM Systems." arXiv:2605.03310 (41-87% coordination failure rate). Dente, M., Satriani, A. & Papotti, P. (2026). "Constraint Decay: The Fragility of LLM Agents in Backend Code Generation." arXiv:2605.06445v1 (~30pp accuracy loss per additional non-functional constraint). gsd-skill-creator hooks discipline (`project-claude/hooks/self-mod-guard.js`, `git-add-blocker.js`, `pre-tag-gate.sh`) as the operational anti-drift pattern.
+
+---
+
+## 9. Execution-Grounded Selection
+
+**Primary cluster:** AI / SST (Cluster 12)
+
+**Canonical definition.** Execution-grounded selection is a selection rule for candidate outputs that conditions the choice on *behavioural evidence under diverse inputs* rather than on textual agreement, output-ranking, log-probability, or model-internal scoring. The canonical 2026 instantiation is Semantic Voting (Jiang, Yi & Zhu `2605.08680v1`): sample N candidate programs, execute each on a diverse input set, cluster by behavioural fingerprint, and pick the largest cluster — a 19-52pp improvement over output-majority voting across multiple code-generation benchmarks. The input set itself is a quality signal: sketch-generated inputs derived from the candidate population dominate random fuzz by up to 11.3pp. Once execution evidence is present, the specific aggregation rule (majority, weighted, MBR-Exec) is statistically indistinguishable — execution is the dominant signal, aggregation is the residual. The principle generalises beyond code generation: paired-trace audit in skill design (CTA `2605.11946v1`) uses execution-grounded comparison of with-skill vs. without-skill behaviour; verbal reranking in memory retrieval (`2605.01399v1`) validates retrieval choices via downstream-task success rather than similarity. Execution-grounded selection is the code/agent-domain analogue to the "noise-as-exploration" Rosetta concept (#3): execution diversity is the exploration mechanism, behavioural fingerprint is the equilibrium signal.
+
+**Primary source:** Jiang, Y., Yi, Z. & Zhu, F. (2026). "Semantic Voting: Execution-Grounded Selection for LLM Code Generation." arXiv:2605.08680v1.
+
+**Secondary sources:** Wang, R. et al. (2026). "CTA: Counterfactual Trace Audit for LLM Skills." arXiv:2605.11946v1 (paired-trace audit; 522 behavioural changes invisible to pass-rate). Patel, N. et al. (2026). "Verbal-R3: Reranking via Verbal Justification." arXiv:2605.01399v1 (downstream-success validation of retrieval). Yoon, S. et al. (2026). "Plan-on-Trigger." arXiv:2605.07248v1 (verification failure as the planning trigger).
+
+---
+
+## 10. Memory Consolidation
+
+**Primary cluster:** Science / BHK (Cluster 9)
+
+**Canonical definition.** Memory consolidation is the transformation, over time and offline cycles, of fresh episodic traces into stable, deduplicated, semantically organised engrams. In biological memory, consolidation occurs during sleep-phase activity that replays recent traces, strengthens those activated together, decays those that were not, and migrates them from hippocampus to neocortex (McClelland, McNaughton & O'Reilly 1995). The retrieval-time mirror is *reconsolidation*: a retrieved engram is briefly labile and is re-encoded with the current context, updating its embedding and incrementing its maturation counter (Nader, Schafe & LeDoux 2000). The 2026 finding (Kerestecioglu et al. `2605.08538v1`) is that the same triad — consolidation + interference-based forgetting + reconsolidation — applied to LLM-agent memory delivers a 58% store-size reduction at 97.2% retention precision, validated via a leakage-free synthetic calibration method. In Markov-blanket terms (cross-link to Concept 6), consolidation is the periodic re-encoding of internal states I to reduce surprise on the expected distribution of future sensory states S — fewer, denser engrams cover the same predictive territory. The architectural implication for long-lived agent systems is that *unbounded memory growth is a drift class* (cross-link to Concept 8): without a consolidation pass, retrieval latency degrades and quality drifts as the store fills with near-duplicates and stale traces. Consolidation is therefore the offline half of a two-timescale memory architecture, with retrieval-time reconsolidation as the online half.
+
+**Primary source:** Kerestecioglu, D. et al. (2026). "Human-Inspired Memory Architecture for LLM Agents." arXiv:2605.08538v1. §§3.1-3.4.
+
+**Secondary sources:** McClelland, J. L., McNaughton, B. L. & O'Reilly, R. C. (1995). "Why there are complementary learning systems in the hippocampus and neocortex." *Psychological Review* 102(3):419-457. Nader, K., Schafe, G. E. & LeDoux, J. E. (2000). "Fear memories require protein synthesis in the amygdala for reconsolidation after retrieval." *Nature* 406:722-726. Tonegawa, S. et al. (2015). "Memory engram cells have come of age." *Neuron* 87:918-931.
+
+---
+
+## 11. Knowing-Doing Gap
+
+**Primary cluster:** AI / SST (Cluster 12)
+
+**Canonical definition.** The knowing-doing gap is the observed orthogonality between an LLM's *internal representation* of when an action (typically a tool call) is needed and the *action token actually emitted* at generation time. Three independent May 2026 papers (`2605.14038v1`, `2605.09252v1`, `2605.00737v1`) converge on the same empirical pattern: tool-necessity is linearly decodable from hidden states at AUROC 0.89-0.96, but at generation time the "cognition" probe direction and the "action" probe direction become nearly orthogonal — the model knows but doesn't act, or acts when it knows it shouldn't. The intervention is to externalise the probe: a lightweight Probe&Prefill pass (a single verbalised self-check before tool dispatch) cuts unnecessary tool calls by 48% with only 1.7% accuracy loss (`2605.14038v1`). The pattern generalises beyond tool calls: any time an LLM internally has high confidence about a routing/dispatch/selection question but emits an incongruent action, the same intervention applies. The architectural implication is that for fast-path operations (where tokens-to-action latency matters), externalising the probe via a one-line prompt-level self-check is dominant over expecting the base model to act on its own latent representation. Related to intent routing (Concept 7), where the probe becomes a structured router; related to execution-grounded selection (Concept 9), where the disagreement between cognition and action is detected post-hoc via behavioural evidence.
+
+**Primary source:** Wong, K. et al. (2026). "The Knowing-Doing Gap: Internal Tool-Necessity Representations in LLM Agents." arXiv:2605.14038v1.
+
+**Secondary sources:** Mehta, R. et al. (2026). "Probe&Prefill: A Lightweight Intervention for Cognition-Action Misalignment." arXiv:2605.09252v1. Ostroumov, V. et al. (2026). "When LLMs Stop Following Steps: A Diagnostic Study of Procedural Drift." arXiv:2605.00737v1.
