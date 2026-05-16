@@ -218,6 +218,24 @@ describe('buildBridge', () => {
     expect(content).toContain('read -rp "    ingest via sc:learn?');
   });
 
+  // Test (regression): totalsByDomain counts papers crossing the 0.5
+  // subscore threshold rather than summing subscore floats.
+  it('totalsByDomain reports integer counts of papers with subscore >= 0.5', async () => {
+    const result = await buildBridge(makeInputs({}, tmpBase));
+    const queue = JSON.parse(fs.readFileSync(result.queueJsonPath, 'utf-8'));
+    const totals = queue.totalsByDomain as Record<string, number>;
+    for (const [domain, value] of Object.entries(totals)) {
+      expect(Number.isInteger(value), `totalsByDomain.${domain} = ${value} is not an integer`).toBe(true);
+    }
+    // 4 of the 5 makeInputs() papers have subscore = aggregate >= 0.5
+    // (0.9, 0.8, 0.7, 0.6 pass; 0.3 fails). makeScore() sets all 4 subscores
+    // equal to the aggregate, so every domain count should be 4.
+    expect(totals['agent-orchestration']).toBe(4);
+    expect(totals['skill-design']).toBe(4);
+    expect(totals['code-gen']).toBe(4);
+    expect(totals['memory-retrieval']).toBe(4);
+  });
+
   // Test 8: ingestQueue with mocked scLearn updates seen-ids.json on success,
   //          leaves it untouched on failure
   it('ingestQueue updates seen-ids.json on success and leaves it untouched on failure', async () => {

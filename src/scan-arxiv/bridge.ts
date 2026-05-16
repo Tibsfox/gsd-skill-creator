@@ -148,7 +148,12 @@ export async function buildBridge(
     for (const domain of Object.keys(totalsByDomain) as Array<
       keyof typeof totalsByDomain
     >) {
-      totalsByDomain[domain] += relevance.subscores[domain] ?? 0;
+      // Count papers whose subscore for this domain crosses the 0.5 mark,
+      // matching the spec ("Number of papers where subscores[domain] >= 0.5").
+      // Previously summed the float subscores, producing 11.599... etc.
+      if ((relevance.subscores[domain] ?? 0) >= 0.5) {
+        totalsByDomain[domain] += 1;
+      }
     }
   }
 
