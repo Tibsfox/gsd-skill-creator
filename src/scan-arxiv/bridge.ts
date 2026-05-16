@@ -3,7 +3,7 @@
 // Takes ranked ArxivPaper candidates, applies minScore + dedup filtering,
 // and produces three artifacts in the output directory:
 //   1. queue.json — RunOutput with filtered & re-ranked QueueEntry[]
-//   2. report.md  — stub (Wave 2B replaces the renderer wiring)
+//   2. report.md  — markdown summary rendered by renderRunReport
 //   3. run-ingestion.sh — HITL shell script the user runs to drive sc:learn
 //
 // seen-ids.json is NOT updated here. Only ingestQueue() (post-actual-ingest)
@@ -32,6 +32,7 @@ import {
   DEFAULT_SEEN_IDS_PATH,
 } from './dedup.js';
 
+import { renderRunReport } from './report.js';
 import { scLearn } from '../commands/sc-learn.js';
 
 // === BuildBridge inputs ===
@@ -172,16 +173,9 @@ export async function buildBridge(
   const queueJsonPath = path.join(outputDir, 'queue.json');
   fs.writeFileSync(queueJsonPath, JSON.stringify(runOutput, null, 2), 'utf-8');
 
-  // ── 7. Write report.md (stub — Wave 2B replaces renderer wiring) ────────
+  // ── 7. Write report.md ──────────────────────────────────────────────────
   const reportMdPath = path.join(outputDir, 'report.md');
-  fs.writeFileSync(
-    reportMdPath,
-    `<!-- stub: Wave 2B will replace this renderer -->\n\n` +
-      '```json\n' +
-      JSON.stringify(runOutput, null, 2) +
-      '\n```\n',
-    'utf-8',
-  );
+  fs.writeFileSync(reportMdPath, renderRunReport(runOutput), 'utf-8');
 
   // ── 8. Write run-ingestion.sh ───────────────────────────────────────────
   const shellScriptPath = path.join(outputDir, 'run-ingestion.sh');

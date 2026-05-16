@@ -303,13 +303,16 @@ export function createFetcher(opts?: FetcherOptions): Fetcher {
     start: number,
   ): Promise<{ xml: string; url: string }> {
     const params = new URLSearchParams({
-      search_query: searchQuery,
       start: String(start),
       max_results: String(maxResultsPerRequest),
       sortBy: 'submittedDate',
       sortOrder: 'descending',
     });
-    const url = `${baseUrl}?${params.toString()}`;
+    // arxiv API treats `+` as logical OR in search_query and `%2B` as a literal plus.
+    // URLSearchParams encodes `+` as `%2B`, breaking multi-category queries; encode the
+    // rest of the query but restore `+` so the OR semantics survive.
+    const safeQuery = encodeURIComponent(searchQuery).replace(/%2B/g, '+');
+    const url = `${baseUrl}?search_query=${safeQuery}&${params.toString()}`;
     const xml = await fetchWithRetry(url, timeoutMs, retryAttempts, getFetch());
     return { xml, url };
   }

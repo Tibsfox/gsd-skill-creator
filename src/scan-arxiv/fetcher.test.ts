@@ -3,7 +3,7 @@
  * All network calls are either avoided (cache) or intercepted via globalThis.__arxivFetchOverride.
  */
 
-import { readFileSync } from 'node:fs';
+import { readFileSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { createFetcher } from './fetcher.js';
@@ -77,15 +77,27 @@ function makeMockFetch(xml: string): typeof fetch {
   })) as unknown as typeof fetch;
 }
 
+function clearTempCache(): void {
+  try {
+    rmSync(TEMP_CACHE, { recursive: true, force: true });
+  } catch {
+    // ignore — dir may not exist yet
+  }
+}
+
 beforeEach(() => {
   // Reset any fetch override before each test
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   delete (globalThis as any).__arxivFetchOverride;
+  // Cache state must not leak between test runs (TTL is 24h, so an earlier
+  // run's cached XML would short-circuit the network mock on a later run).
+  clearTempCache();
 });
 
 afterEach(() => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   delete (globalThis as any).__arxivFetchOverride;
+  clearTempCache();
 });
 
 // ---------------------------------------------------------------------------

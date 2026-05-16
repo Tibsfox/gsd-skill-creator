@@ -55,6 +55,14 @@ export function loadSeenIds(filePath?: string): SeenIdsState {
 }
 
 /**
+ * Strip any trailing version suffix (`v1`, `v2`, …) so `2605.10001` and
+ * `2605.10001v1` collapse to the same dedup key.
+ */
+export function normalizeArxivId(arxivId: string): string {
+  return arxivId.replace(/v\d+$/, '');
+}
+
+/**
  * Return a new state with `arxivId` recorded.
  * Does NOT write to disk — call saveSeenIds() after this.
  */
@@ -63,11 +71,12 @@ export function recordSeen(
   arxivId: string,
   reportPath: string,
 ): SeenIdsState {
+  const key = normalizeArxivId(arxivId);
   return {
     ...state,
     ids: {
       ...state.ids,
-      [arxivId]: {
+      [key]: {
         ingestedAt: new Date().toISOString(),
         reportPath,
       },
@@ -79,7 +88,7 @@ export function recordSeen(
  * Returns true if `arxivId` is already in the seen-ids state.
  */
 export function isSeen(state: SeenIdsState, arxivId: string): boolean {
-  return Object.prototype.hasOwnProperty.call(state.ids, arxivId);
+  return Object.prototype.hasOwnProperty.call(state.ids, normalizeArxivId(arxivId));
 }
 
 /**
