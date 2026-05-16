@@ -1,15 +1,16 @@
 # Release History
 
-698 milestones shipped across the v1.0 → v1.49.655 arc. The table below lists every shipped release, newest first.
+699 milestones shipped across the v1.0 → v1.49.656 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 698 releases · 697 with retrospectives · 634 with extracted lessons · quality A:642 B:12 C:15 D:6 F:23 (avg 95) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 699 releases · 698 with retrospectives · 634 with extracted lessons · quality A:642 B:12 C:15 D:6 F:24 (avg 95) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.656](release-notes/v1.49.656) | NASA Track-Card Uplift (1.109-1.116) | 2026-05-16 | 3 | — | — | [s](release-notes/v1.49.656/chapter/00-summary.md) [r](release-notes/v1.49.656/chapter/03-retrospective.md) [l](release-notes/v1.49.656/chapter/04-lessons.md) [c](release-notes/v1.49.656/chapter/99-context.md) | — | F 58 |  |
 | [v1.49.655](release-notes/v1.49.655) | FA-652-11 Content Backfill (16 MUS+ELC pages + catalog regen) | 2026-05-15 | 3 | — | — | [s](release-notes/v1.49.655/chapter/00-summary.md) [r](release-notes/v1.49.655/chapter/03-retrospective.md) [l](release-notes/v1.49.655/chapter/04-lessons.md) [c](release-notes/v1.49.655/chapter/99-context.md) | — | F 58 |  |
 | [v1.49.654](release-notes/v1.49.654) | FA-652-11 Infrastructure + Lesson Codification | 2026-05-15 | 6 | — | — | [s](release-notes/v1.49.654/chapter/00-summary.md) [r](release-notes/v1.49.654/chapter/03-retrospective.md) [l](release-notes/v1.49.654/chapter/04-lessons.md) [c](release-notes/v1.49.654/chapter/99-context.md) | — | F 58 |  |
 | [v1.49.653](release-notes/v1.49.653) | Long-Term Roadmap + Audit Closure | 2026-05-15 | 15 | — | — | [s](release-notes/v1.49.653/chapter/00-summary.md) [r](release-notes/v1.49.653/chapter/03-retrospective.md) [l](release-notes/v1.49.653/chapter/04-lessons.md) [c](release-notes/v1.49.653/chapter/99-context.md) | — | F 56 |  |
