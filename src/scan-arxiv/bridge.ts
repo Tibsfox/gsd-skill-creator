@@ -29,6 +29,7 @@ import {
   loadSeenIds,
   recordSeen,
   saveSeenIds,
+  isSeen,
   DEFAULT_SEEN_IDS_PATH,
 } from './dedup.js';
 
@@ -113,7 +114,10 @@ export async function buildBridge(
   let dedupSkipCount = 0;
   const filtered = ranked.filter(({ paper, relevance }) => {
     if (relevance.aggregate < options.minScore) return false;
-    if (seenState.ids[paper.arxivId]) {
+    // Use isSeen() so the v\d+ suffix is normalized — incoming arxivIds from
+    // the fetcher carry the version suffix (e.g. 2605.02801v1) but seen-ids
+    // is stored normalized (e.g. 2605.02801).
+    if (isSeen(seenState, paper.arxivId)) {
       dedupSkipCount++;
       return false;
     }
