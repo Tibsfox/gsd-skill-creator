@@ -115,13 +115,43 @@ export function parseArgv(argv: string[]): ParsedArgv {
 
       case '--judge-backend': {
         if (!next || next.startsWith('--')) {
-          errors.push(`--judge-backend requires a value (sdk|cli|auto)`);
+          errors.push(`--judge-backend requires a value (sdk|cli|embedding-only|auto)`);
           break;
         }
-        if (next !== 'sdk' && next !== 'cli' && next !== 'auto') {
-          errors.push(`--judge-backend value "${next}" must be one of: sdk, cli, auto`);
+        if (next !== 'sdk' && next !== 'cli' && next !== 'embedding-only' && next !== 'auto') {
+          errors.push(`--judge-backend value "${next}" must be one of: sdk, cli, embedding-only, auto`);
         } else {
           options.judgeBackend = next;
+        }
+        i++;
+        break;
+      }
+
+      case '--pre-rank-top': {
+        if (!next || next.startsWith('--')) {
+          errors.push(`--pre-rank-top requires a value (e.g. 500)`);
+          break;
+        }
+        const n = parseInt(next, 10);
+        if (isNaN(n) || n < 1) {
+          errors.push(`--pre-rank-top value "${next}" must be a positive integer`);
+        } else {
+          options.preRankTop = n;
+        }
+        i++;
+        break;
+      }
+
+      case '--pre-rank-threshold': {
+        if (!next || next.startsWith('--')) {
+          errors.push(`--pre-rank-threshold requires a value (e.g. 0.25)`);
+          break;
+        }
+        const f = parseFloat(next);
+        if (isNaN(f) || f < 0 || f > 1) {
+          errors.push(`--pre-rank-threshold value "${next}" must be a float between 0 and 1`);
+        } else {
+          options.preRankThreshold = f;
         }
         i++;
         break;
@@ -169,6 +199,8 @@ export function resolveOptions(opts: ScanArxivOptions): ResolvedScanArxivOptions
     outputDir: opts.outputDir ?? DEFAULT_OUTPUT_DIR,
     judgeBackend: opts.judgeBackend ?? 'auto',
     cliMaxBudgetUsd: opts.cliMaxBudgetUsd ?? 0.20,
+    preRankTop: opts.preRankTop ?? 100,
+    preRankThreshold: opts.preRankThreshold ?? 0.35,
   };
 }
 
@@ -210,10 +242,13 @@ OPTIONS
   --min-score <float>     Drop candidates with aggregate score below this threshold (default: 0.5)
   --no-cache              Bypass arxiv API response cache
   --output-dir <path>     Directory to write run artifacts (default: .planning/arxiv-may-funnel/runs)
-  --judge-backend <name>  LLM judge backend: sdk (uses ANTHROPIC_API_KEY), cli (uses local
-                          \`claude\` Code OAuth session), or auto (default: pick sdk if
-                          ANTHROPIC_API_KEY is set, else cli)
+  --judge-backend <name>  Judge backend: sdk (uses ANTHROPIC_API_KEY), cli (uses local
+                          \`claude\` Code OAuth session), embedding-only (skip LLM; cosine
+                          sims to domain anchors as subscores), or auto (default: pick sdk
+                          if ANTHROPIC_API_KEY is set, else cli)
   --cli-max-budget-usd <f> Per-call USD cap when --judge-backend=cli (default: 0.20)
+  --pre-rank-top <N>      Max papers to fine-rank after embedding pre-rank (default: 100)
+  --pre-rank-threshold <f> Min cosine sim to anchor to pass pre-rank (default: 0.35)
   --help, -h              Print this help text
 
 EXAMPLES

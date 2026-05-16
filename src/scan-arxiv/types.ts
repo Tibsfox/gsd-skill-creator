@@ -62,8 +62,13 @@ export interface RunOutput {
 
 // === CLI options ===
 
-/** Judge backend selection: SDK (API key), CLI (local claude session), or auto. */
-export type ScanArxivJudgeBackend = 'sdk' | 'cli' | 'auto';
+/** Judge backend selection.
+ *   - 'sdk'             : @anthropic-ai/sdk (requires ANTHROPIC_API_KEY)
+ *   - 'cli'             : `claude -p` subprocess (uses local Claude Code OAuth session)
+ *   - 'embedding-only'  : skip LLM judge; use the 4 anchor cosine sims as subscores
+ *   - 'auto'            : pick sdk if ANTHROPIC_API_KEY is set, else cli
+ */
+export type ScanArxivJudgeBackend = 'sdk' | 'cli' | 'embedding-only' | 'auto';
 
 export interface ScanArxivOptions {
   month?: string;                  // "YYYY-MM"; default = previous completed month
@@ -75,6 +80,8 @@ export interface ScanArxivOptions {
   outputDir?: string;              // default ".planning/arxiv-may-funnel/runs"
   judgeBackend?: ScanArxivJudgeBackend;  // default 'auto'
   cliMaxBudgetUsd?: number;        // per-call cap when judgeBackend='cli'; default 0.20
+  preRankTop?: number;             // max papers to fine-rank; default 100
+  preRankThreshold?: number;       // min cosine sim to pass pre-rank; default 0.35
 }
 
 export interface ResolvedScanArxivOptions {
@@ -87,6 +94,8 @@ export interface ResolvedScanArxivOptions {
   outputDir: string;
   judgeBackend: ScanArxivJudgeBackend;
   cliMaxBudgetUsd: number;
+  preRankTop: number;
+  preRankThreshold: number;
 }
 
 // === Ranker contract ===

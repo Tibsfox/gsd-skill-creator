@@ -48,6 +48,8 @@ function makeRun(overrides: Partial<RunOutput> = {}): RunOutput {
       outputDir: '.planning/arxiv-may-funnel/runs',
       judgeBackend: 'auto',
       cliMaxBudgetUsd: 0.20,
+      preRankTop: 100,
+      preRankThreshold: 0.35,
     },
     totalsByCategory: { 'cs.AI': 42, 'cs.CL': 15, 'cs.LG': 27 },
     totalsByDomain: {

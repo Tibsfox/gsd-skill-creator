@@ -110,7 +110,7 @@ export interface JudgeResult {
  *   - 'cli'  : `claude -p` subprocess (uses the local Claude Code OAuth session)
  *   - 'auto' : pick 'sdk' if ANTHROPIC_API_KEY is set, else 'cli'
  */
-export type JudgeBackend = 'sdk' | 'cli' | 'auto';
+export type JudgeBackend = 'sdk' | 'cli' | 'embedding-only' | 'auto';
 
 export interface RankerOptions {
   /** Embedding model identifier (informational; pipeline is selected by service). */
@@ -269,6 +269,16 @@ function buildDefaultJudge(
   backend: JudgeBackend,
   cliMaxBudgetUsd: number,
 ): JudgeFn {
+  // 'embedding-only' short-circuits inside rankBatch before any judge call;
+  // the function returned here is a guard that throws if rankBatch ever
+  // calls it (which would indicate a code-path regression).
+  if (backend === 'embedding-only') {
+    return async (paper) => {
+      throw new Error(
+        `embedding-only backend should not reach judgeFn (paper ${paper.arxivId})`,
+      );
+    };
+  }
   const resolved: 'sdk' | 'cli' =
     backend === 'auto'
       ? (process.env.ANTHROPIC_API_KEY ? 'sdk' : 'cli')
@@ -373,6 +383,8 @@ const ANCHOR_BY_DOMAIN: Record<RelevanceDomain, string> = {
 interface PreRankRow {
   paper: ArxivPaper;
   maxSim: number;
+  /** Cosine similarity to each domain anchor — surfaced for embedding-only ranking. */
+  sims: Record<RelevanceDomain, number>;
 }
 
 async function preRank(
@@ -393,13 +405,20 @@ async function preRank(
   const rows: PreRankRow[] = [];
   for (const paper of papers) {
     const vec = await embedder(`${paper.title} ${paper.abstract}`);
-    let maxSim = -Infinity;
-    for (const d of RELEVANCE_DOMAINS) {
-      const sim = cosineSimilarity(vec, anchorEmbeddings[d]);
-      if (sim > maxSim) maxSim = sim;
-    }
+    const sims = {
+      'agent-orchestration': cosineSimilarity(vec, anchorEmbeddings['agent-orchestration']),
+      'skill-design':        cosineSimilarity(vec, anchorEmbeddings['skill-design']),
+      'code-gen':            cosineSimilarity(vec, anchorEmbeddings['code-gen']),
+      'memory-retrieval':    cosineSimilarity(vec, anchorEmbeddings['memory-retrieval']),
+    } as Record<RelevanceDomain, number>;
+    const maxSim = Math.max(
+      sims['agent-orchestration'],
+      sims['skill-design'],
+      sims['code-gen'],
+      sims['memory-retrieval'],
+    );
     if (maxSim >= threshold) {
-      rows.push({ paper, maxSim });
+      rows.push({ paper, maxSim, sims });
     }
   }
   rows.sort((a, b) => b.maxSim - a.maxSim);
@@ -434,6 +453,38 @@ export function createRanker(opts: RankerOptions = {}): Ranker {
     if (papers.length === 0) return out;
 
     const survivors = await preRank(papers, embedder, preRankThreshold, preRankTop);
+
+    // Embedding-only backend: skip the LLM judge entirely. Anchor cosine sims
+    // computed in preRank become the 4 subscores; aggregate is the weighted
+    // mean. Rationale is synthetic. Per-paper score is cached.
+    if (judgeBackend === 'embedding-only') {
+      for (const row of survivors) {
+        const hit = await cache.read(row.paper.arxivId);
+        if (hit) {
+          out.set(row.paper.arxivId, hit);
+          continue;
+        }
+        const subscores: Record<RelevanceDomain, number> = {
+          'agent-orchestration': clamp01(row.sims['agent-orchestration']),
+          'skill-design':        clamp01(row.sims['skill-design']),
+          'code-gen':            clamp01(row.sims['code-gen']),
+          'memory-retrieval':    clamp01(row.sims['memory-retrieval']),
+        };
+        const aggregate = aggregateOf(subscores, weights);
+        const top = (Object.entries(subscores) as Array<[RelevanceDomain, number]>)
+          .sort((a, b) => b[1] - a[1])[0];
+        const score: RelevanceScore = {
+          subscores,
+          aggregate,
+          rationale: `Embedding-only: top match ${top[0]}=${top[1].toFixed(2)} (cosine to anchor).`,
+          scoredAt: new Date().toISOString(),
+          scorerVersion: SCORER_VERSION,
+        };
+        await cache.write(row.paper.arxivId, score);
+        out.set(row.paper.arxivId, score);
+      }
+      return out;
+    }
 
     let judgeErrors = 0;
     for (const { paper } of survivors) {

@@ -32,6 +32,10 @@ import {
   type CannedPaper,
 } from './__fixtures__/canned-papers.js';
 import { RELEVANCE_DOMAINS, type ArxivPaper, type RelevanceDomain } from './types.js';
+import { AGENT_ORCHESTRATION_ANCHOR } from './prompts/agent-orchestration.js';
+import { SKILL_DESIGN_ANCHOR } from './prompts/skill-design.js';
+import { CODE_GEN_ANCHOR } from './prompts/code-gen.js';
+import { MEMORY_RETRIEVAL_ANCHOR } from './prompts/memory-retrieval.js';
 
 // === Mock helpers ===
 
@@ -453,6 +457,40 @@ describe('createRanker — cache and pre-rank behaviour', () => {
     });
     const out = await ranker.rankBatch([junkPaper]);
     expect(out.has(junkId)).toBe(false);
+    expect(callCount()).toBe(0); // judge never invoked
+  });
+
+  // Test 13: embedding-only backend skips the LLM judge entirely and uses
+  //          the four cosine sims as subscores directly.
+  it('embedding-only backend bypasses the judge and uses anchor cosines', async () => {
+    const paper = getCannedPaper('multiAgentCoord').paper;
+    // Embedder that returns a unit vector aligned with index 0 (= agent-orchestration anchor).
+    const embedder: TextEmbedder = async (text) => {
+      const v = new Array(16).fill(0);
+      // The 4 domain anchors are unique strings; mock each to a known unit
+      // vector along axes 0..3. Any non-anchor text is the paper, pointed at
+      // axis 0 (full agent-orch alignment).
+      if (text === AGENT_ORCHESTRATION_ANCHOR) { v[0] = 1; return v; }
+      if (text === SKILL_DESIGN_ANCHOR)        { v[1] = 1; return v; }
+      if (text === CODE_GEN_ANCHOR)            { v[2] = 1; return v; }
+      if (text === MEMORY_RETRIEVAL_ANCHOR)    { v[3] = 1; return v; }
+      v[0] = 1;
+      return v;
+    };
+    const { fn, callCount } = makeMockJudge();
+    const ranker = createRanker({
+      embedder,
+      judge: fn,
+      judgeBackend: 'embedding-only',
+      noCache: true,
+      preRankThreshold: 0,
+    });
+    const out = await ranker.rankBatch([paper]);
+    const score = out.get(paper.arxivId);
+    expect(score).toBeDefined();
+    expect(score!.subscores['agent-orchestration']).toBeCloseTo(1, 5);
+    expect(score!.subscores['skill-design']).toBeCloseTo(0, 5);
+    expect(score!.rationale).toContain('Embedding-only');
     expect(callCount()).toBe(0); // judge never invoked
   });
 });
