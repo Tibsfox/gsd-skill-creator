@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom">
+  <link href="http://arxiv.org/api/query?search_query=cat:cs.AI+OR+cat:cs.CL+OR+cat:cs.LG+OR+cat:cs.MA&amp;id_list=&amp;start=0&amp;max_results=5" rel="self" type="application/atom+xml"/>
+  <title type="html">ArXiv Query: search_query=cat:cs.AI</title>
+  <id>http://arxiv.org/api/dFjk1234abcd</id>
+  <updated>2026-05-16T00:00:00-04:00</updated>
+  <opensearch:totalResults>5</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <opensearch:itemsPerPage>5</opensearch:itemsPerPage>
+
+  <!-- Entry 1: Standard cs.AI entry, published mid-May 2026 -->
+  <entry>
+    <id>http://arxiv.org/abs/2605.11111v1</id>
+    <updated>2026-05-15T12:00:00Z</updated>
+    <published>2026-05-15T12:00:00Z</published>
+    <title>Advances in Agent Orchestration with Large Language Models</title>
+    <summary>We present a comprehensive survey of agent orchestration techniques using large language models, demonstrating significant improvements in multi-step reasoning and tool use across diverse benchmarks.</summary>
+    <author>
+      <name>Alice Researcher</name>
+    </author>
+    <arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <link href="http://arxiv.org/abs/2605.11111v1" rel="alternate" type="text/html"/>
+    <link title="pdf" href="http://arxiv.org/pdf/2605.11111v1" rel="related" type="application/pdf"/>
+    <arxiv:comment xmlns:arxiv="http://arxiv.org/schemas/atom">18 pages, 5 figures</arxiv:comment>
+  </entry>
+
+  <!-- Entry 2: cs.CL entry with multiple authors, published late April 2026 (should be filtered OUT for month=2026-05) -->
+  <entry>
+    <id>http://arxiv.org/abs/2604.99999v1</id>
+    <updated>2026-04-28T09:00:00Z</updated>
+    <published>2026-04-28T09:00:00Z</published>
+    <title>Cross-Lingual Transfer in Low-Resource Settings</title>
+    <summary>We study cross-lingual transfer learning for low-resource languages using multilingual pretrained models and demonstrate robust performance with limited labeled data.</summary>
+    <author>
+      <name>Bob Smith</name>
+    </author>
+    <author>
+      <name>Carol Jones</name>
+    </author>
+    <author>
+      <name>Dave Williams</name>
+    </author>
+    <arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <link href="http://arxiv.org/abs/2604.99999v1" rel="alternate" type="text/html"/>
+    <link title="pdf" href="http://arxiv.org/pdf/2604.99999v1" rel="related" type="application/pdf"/>
+  </entry>
+
+  <!-- Entry 3: cs.LG entry with v2 in the version suffix -->
+  <entry>
+    <id>http://arxiv.org/abs/2605.22222v2</id>
+    <updated>2026-05-14T18:30:00Z</updated>
+    <published>2026-05-10T08:00:00Z</published>
+    <title>Improved Gradient Descent for Neural Architecture Search</title>
+    <summary>This revised version extends our earlier work on differentiable architecture search with new experiments on ImageNet and improved convergence guarantees.</summary>
+    <author>
+      <name>Eve Zhang</name>
+    </author>
+    <author>
+      <name>Frank Lee</name>
+    </author>
+    <arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <link href="http://arxiv.org/abs/2605.22222v2" rel="alternate" type="text/html"/>
+    <link title="pdf" href="http://arxiv.org/pdf/2605.22222v2" rel="related" type="application/pdf"/>
+  </entry>
+
+  <!-- Entry 4: Entry missing the <summary> field (should be skipped with warn) -->
+  <entry>
+    <id>http://arxiv.org/abs/2605.33333v1</id>
+    <updated>2026-05-12T14:00:00Z</updated>
+    <published>2026-05-12T14:00:00Z</published>
+    <title>Incomplete Paper Entry Without Abstract</title>
+    <author>
+      <name>Ghost Author</name>
+    </author>
+    <arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <link href="http://arxiv.org/abs/2605.33333v1" rel="alternate" type="text/html"/>
+    <link title="pdf" href="http://arxiv.org/pdf/2605.33333v1" rel="related" type="application/pdf"/>
+  </entry>
+
+  <!-- Entry 5: cs.MA entry published 2026-05-31T23:30:00Z (boundary case, included) -->
+  <entry>
+    <id>http://arxiv.org/abs/2605.44444v1</id>
+    <updated>2026-05-31T23:30:00Z</updated>
+    <published>2026-05-31T23:30:00Z</published>
+    <title>Multi-Agent Coordination at the Boundary of May</title>
+    <summary>We investigate multi-agent coordination protocols near temporal boundaries, showing that agents can synchronize effectively even under strict time constraints.</summary>
+    <author>
+      <name>Henry Park</name>
+    </author>
+    <arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <link href="http://arxiv.org/abs/2605.44444v1" rel="alternate" type="text/html"/>
+    <link title="pdf" href="http://arxiv.org/pdf/2605.44444v1" rel="related" type="application/pdf"/>
+  </entry>
+
+</feed>
