@@ -12,12 +12,18 @@
 
 export const CARD_TEMPLATE_VERSION = '1.0';
 
+// Required field entries are matched as:
+//   - literal string match (exact field name)
+//   - if entry starts with '/' and ends with '/', treated as regex source
+// MUS uses S<NN> for the focus-artist field where NN increments per artist
+// (S36 = Quincy Jones at v1.0, S70 = Madonna at v1.116, S71 = USA for Africa
+// at v1.117). The regex form '/^S\d+$/' matches any such field.
 export const TRACK_TEMPLATES = {
-  MUS:  { trackLabel: 'MUS',  requiredMetaFields: ['S36', 'SPS', 'NASA'],         optionalMetaFields: [],                maxMetaCount: 3 },
-  NASA: { trackLabel: 'NASA', requiredMetaFields: ['MUS', 'SPS', 'ELC'],          optionalMetaFields: ['mission-class'], maxMetaCount: 4 },
-  ELC:  { trackLabel: 'ELC',  requiredMetaFields: ['NASA', 'MUS', 'SPS'],         optionalMetaFields: [],                maxMetaCount: 3 },
-  SPS:  { trackLabel: 'SPS',  requiredMetaFields: ['NASA', 'MUS', 'ELC'],         optionalMetaFields: ['family'],        maxMetaCount: 4 },
-  TRS:  { trackLabel: 'TRS',  requiredMetaFields: ['pack-K', 'bridge-categories'], optionalMetaFields: [],                maxMetaCount: 2 },
+  MUS:  { trackLabel: 'MUS',  requiredMetaFields: ['/^S\\d+$/', 'SPS', 'NASA'],     optionalMetaFields: [],                maxMetaCount: 3 },
+  NASA: { trackLabel: 'NASA', requiredMetaFields: ['MUS', 'SPS', 'ELC'],            optionalMetaFields: ['mission-class'], maxMetaCount: 4 },
+  ELC:  { trackLabel: 'ELC',  requiredMetaFields: ['NASA', 'MUS', 'SPS'],           optionalMetaFields: [],                maxMetaCount: 3 },
+  SPS:  { trackLabel: 'SPS',  requiredMetaFields: ['NASA', 'MUS', 'ELC'],           optionalMetaFields: ['family'],        maxMetaCount: 4 },
+  TRS:  { trackLabel: 'TRS',  requiredMetaFields: ['pack-K', 'bridge-categories'],  optionalMetaFields: [],                maxMetaCount: 2 },
 };
 
 export const HARD_LIMITS = {

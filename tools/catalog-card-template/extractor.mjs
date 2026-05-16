@@ -151,10 +151,14 @@ export function validateCard(ast, track) {
     fieldViolations.push({ field: 'degree-meta', actual: ast.meta.length, limit: tmpl.maxMetaCount, unit: 'count' });
   }
 
-  // required meta presence
-  const presentNames = new Set(ast.meta.map((mf) => mf.name));
+  // required meta presence — entries may be literal names OR /regex/ patterns
+  const presentNames = ast.meta.map((mf) => mf.name);
   for (const req of tmpl.requiredMetaFields) {
-    if (!presentNames.has(req)) missingRequired.push(req);
+    const isRegex = req.startsWith('/') && req.endsWith('/');
+    const matched = isRegex
+      ? presentNames.some((n) => new RegExp(req.slice(1, -1)).test(n))
+      : presentNames.includes(req);
+    if (!matched) missingRequired.push(req);
   }
 
   // forbidden content patterns
