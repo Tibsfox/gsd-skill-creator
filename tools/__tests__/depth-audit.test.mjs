@@ -928,3 +928,123 @@ describe('v1.49.654 C05: SCAFFOLD-PENDING + SC_SKIP_DEPTH_AUDIT_MUS_ELC', () => 
     }
   });
 });
+
+// -------------------------------------------------------------------------
+// v1.49.664 cc-1 Phase 4: SPS+TRS scaffold-pending inventory
+//
+// Tests the inspectScaffoldPendingSpsTrs() exported function directly. The
+// integration into main()'s output is exercised via the CLI in a single
+// smoke test at the end (env-var suppression).
+// -------------------------------------------------------------------------
+import { inspectScaffoldPendingSpsTrs } from '../depth-audit.mjs';
+
+describe('v1.49.664 cc-1 Phase 4: SPS+TRS scaffold-pending inventory', () => {
+  let spsRoot, trsRoot;
+
+  beforeEach(() => {
+    spsRoot = join(tmpRoot, 'SPS');
+    trsRoot = join(tmpRoot, 'TRS');
+    mkdirSync(spsRoot, { recursive: true });
+    mkdirSync(trsRoot, { recursive: true });
+  });
+
+  it('returns empty inventory when no SPS or TRS dirs exist', () => {
+    const inv = inspectScaffoldPendingSpsTrs({ spsRoot, trsRoot });
+    expect(inv.sps).toEqual([]);
+    expect(inv.trs).toEqual([]);
+  });
+
+  it('surfaces SPS dirs with HTML SCAFFOLD-PENDING marker in index.html', () => {
+    mkdirSync(join(spsRoot, 'test-species'), { recursive: true });
+    writeFileSync(join(spsRoot, 'test-species/index.html'),
+      '<html><!-- SCAFFOLD-PENDING: backfill required --></html>');
+    const inv = inspectScaffoldPendingSpsTrs({ spsRoot, trsRoot });
+    expect(inv.sps).toHaveLength(1);
+    expect(inv.sps[0].slug).toBe('test-species');
+    expect(inv.sps[0].markerLocations).toContain('index.html');
+  });
+
+  it('surfaces SPS dirs with scaffold_pending: true in data-sources.json', () => {
+    mkdirSync(join(spsRoot, 'partial-species'), { recursive: true });
+    writeFileSync(join(spsRoot, 'partial-species/index.html'),
+      '<html>real content (no marker)</html>');
+    writeFileSync(join(spsRoot, 'partial-species/data-sources.json'),
+      '{"scaffold_pending": true, "species": "x"}');
+    const inv = inspectScaffoldPendingSpsTrs({ spsRoot, trsRoot });
+    expect(inv.sps).toHaveLength(1);
+    expect(inv.sps[0].markerLocations).toContain('data-sources.json');
+    expect(inv.sps[0].markerLocations).not.toContain('index.html');
+  });
+
+  it('surfaces SPS dirs with scaffold_pending: true in knowledge-nodes.json', () => {
+    mkdirSync(join(spsRoot, 'partial-kn'), { recursive: true });
+    writeFileSync(join(spsRoot, 'partial-kn/knowledge-nodes.json'),
+      '{"scaffold_pending": true}');
+    const inv = inspectScaffoldPendingSpsTrs({ spsRoot, trsRoot });
+    expect(inv.sps).toHaveLength(1);
+    expect(inv.sps[0].markerLocations).toEqual(['knowledge-nodes.json']);
+  });
+
+  it('IGNORES SPS dirs without any scaffold-pending marker (real content)', () => {
+    mkdirSync(join(spsRoot, 'real-species'), { recursive: true });
+    writeFileSync(join(spsRoot, 'real-species/index.html'),
+      '<html>real authoritative content without marker</html>');
+    writeFileSync(join(spsRoot, 'real-species/data-sources.json'),
+      '{"species": "real", "data_sources": [{"id": "ds-001"}]}');
+    const inv = inspectScaffoldPendingSpsTrs({ spsRoot, trsRoot });
+    expect(inv.sps).toEqual([]);
+  });
+
+  it('surfaces TRS pack-NN dirs with SCAFFOLD-PENDING marker', () => {
+    mkdirSync(join(trsRoot, 'pack-40'), { recursive: true });
+    writeFileSync(join(trsRoot, 'pack-40/index.html'),
+      '<html><!-- SCAFFOLD-PENDING: backfill required --></html>');
+    const inv = inspectScaffoldPendingSpsTrs({ spsRoot, trsRoot });
+    expect(inv.trs).toHaveLength(1);
+    expect(inv.trs[0].slug).toBe('pack-40');
+    expect(inv.trs[0].scaffoldPending).toBe(true);
+  });
+
+  it('IGNORES TRS dirs not matching pack-NN pattern', () => {
+    mkdirSync(join(trsRoot, 'unrelated'), { recursive: true });
+    writeFileSync(join(trsRoot, 'unrelated/index.html'),
+      '<html><!-- SCAFFOLD-PENDING: backfill required --></html>');
+    mkdirSync(join(trsRoot, 'pack-40'), { recursive: true });
+    writeFileSync(join(trsRoot, 'pack-40/index.html'),
+      '<html><!-- SCAFFOLD-PENDING: backfill required --></html>');
+    const inv = inspectScaffoldPendingSpsTrs({ spsRoot, trsRoot });
+    expect(inv.trs).toHaveLength(1);
+    expect(inv.trs[0].slug).toBe('pack-40');
+  });
+
+  it('IGNORES TRS pack-NN dirs without scaffold-pending marker', () => {
+    mkdirSync(join(trsRoot, 'pack-13'), { recursive: true });
+    writeFileSync(join(trsRoot, 'pack-13/index.html'),
+      '<html>real authored pack-13 content</html>');
+    const inv = inspectScaffoldPendingSpsTrs({ spsRoot, trsRoot });
+    expect(inv.trs).toEqual([]);
+  });
+
+  it('handles missing SPS/TRS root dirs gracefully', () => {
+    rmSync(spsRoot, { recursive: true });
+    rmSync(trsRoot, { recursive: true });
+    const inv = inspectScaffoldPendingSpsTrs({ spsRoot, trsRoot });
+    expect(inv.sps).toEqual([]);
+    expect(inv.trs).toEqual([]);
+  });
+
+  it('combines SPS + TRS findings in one inventory', () => {
+    mkdirSync(join(spsRoot, 'sp-1'), { recursive: true });
+    writeFileSync(join(spsRoot, 'sp-1/index.html'),
+      '<html><!-- SCAFFOLD-PENDING: backfill required --></html>');
+    mkdirSync(join(trsRoot, 'pack-14'), { recursive: true });
+    writeFileSync(join(trsRoot, 'pack-14/index.html'),
+      '<html><!-- SCAFFOLD-PENDING: backfill required --></html>');
+    mkdirSync(join(trsRoot, 'pack-15'), { recursive: true });
+    writeFileSync(join(trsRoot, 'pack-15/index.html'),
+      '<html><!-- SCAFFOLD-PENDING: backfill required --></html>');
+    const inv = inspectScaffoldPendingSpsTrs({ spsRoot, trsRoot });
+    expect(inv.sps).toHaveLength(1);
+    expect(inv.trs).toHaveLength(2);
+  });
+});

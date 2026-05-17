@@ -44,6 +44,14 @@ const REPO_ROOT = resolveRoot(process.argv);
 const TRACKS = ['NASA', 'MUS', 'ELC'];
 const RESEARCH_ROOT = join(REPO_ROOT, 'www', 'tibsfox', 'com', 'Research');
 
+// SPS + TRS roots (v1.49.664 cc-1 Phase 4 — scaffold-pending inventory only;
+// not version-keyed like NASA/MUS/ELC). Real per-page depth scoring for these
+// tracks is a forward effort that needs gold-standard threshold derivation
+// (pack-39 + stellers-jay analysis). This pass surfaces SCAFFOLD-PENDING marker
+// presence as informational findings (soak mode: never blocking).
+const SPS_ROOT = join(RESEARCH_ROOT, 'SPS');
+const TRS_ROOT = join(RESEARCH_ROOT, 'TRS');
+
 // Canonical NASA-section regex set. NASA index.html pages use named sections
 // like "Three Parallel Threads", "Resonance Axes", etc. (per v1.49.587 +
 // v1.49.588 post-rebuild reference, handoff §4).
@@ -610,6 +618,107 @@ function summary(report) {
   return counts;
 }
 
+/**
+ * Inventory SPS species dirs + TRS pack-NN dirs for SCAFFOLD-PENDING markers
+ * (v1.49.664 cc-1 Phase 4). Soak-mode informational scan: never blocking on its
+ * own, surfaces marker presence so the operator sees the deficit at every audit.
+ *
+ * Returns { sps: [...findings], trs: [...findings] } where each finding is
+ * { slug, hasIndex, scaffoldPending, partial, missingFiles }.
+ *
+ * SPS expected files: index.html, data-sources.json, knowledge-nodes.json, artifacts/
+ * TRS expected files: index.html
+ */
+export function inspectScaffoldPendingSpsTrs({ spsRoot = SPS_ROOT, trsRoot = TRS_ROOT } = {}) {
+  const result = { sps: [], trs: [] };
+
+  if (existsSync(spsRoot)) {
+    const entries = readdirSync(spsRoot, { withFileTypes: true }).filter(d => d.isDirectory());
+    for (const d of entries) {
+      const indexPath = join(spsRoot, d.name, 'index.html');
+      const dsPath = join(spsRoot, d.name, 'data-sources.json');
+      const knPath = join(spsRoot, d.name, 'knowledge-nodes.json');
+      const hasIndex = existsSync(indexPath);
+      let indexHasMarker = false;
+      let dsHasMarker = false;
+      let knHasMarker = false;
+      if (hasIndex) {
+        try { indexHasMarker = SCAFFOLD_PENDING_MARKER_RE.test(readFileSync(indexPath, 'utf8')); }
+        catch { /* tolerate read errors */ }
+      }
+      if (existsSync(dsPath)) {
+        try { dsHasMarker = /"scaffold_pending"\s*:\s*true/.test(readFileSync(dsPath, 'utf8')); }
+        catch { /* tolerate read errors */ }
+      }
+      if (existsSync(knPath)) {
+        try { knHasMarker = /"scaffold_pending"\s*:\s*true/.test(readFileSync(knPath, 'utf8')); }
+        catch { /* tolerate read errors */ }
+      }
+      // Only surface dirs explicitly carrying the scaffold-pending marker in
+      // any of the canonical files. Pre-existing SPS dirs without the marker
+      // are real content on a possibly-different schema and not this audit's
+      // concern (real depth scoring is forward work).
+      const anyMarker = indexHasMarker || dsHasMarker || knHasMarker;
+      if (anyMarker) {
+        const markerLocations = [];
+        if (indexHasMarker) markerLocations.push('index.html');
+        if (dsHasMarker) markerLocations.push('data-sources.json');
+        if (knHasMarker) markerLocations.push('knowledge-nodes.json');
+        result.sps.push({ slug: d.name, hasIndex, scaffoldPending: true, markerLocations });
+      }
+    }
+  }
+
+  if (existsSync(trsRoot)) {
+    const entries = readdirSync(trsRoot, { withFileTypes: true })
+      .filter(d => d.isDirectory() && /^pack-\d+$/.test(d.name));
+    for (const d of entries) {
+      const indexPath = join(trsRoot, d.name, 'index.html');
+      const hasIndex = existsSync(indexPath);
+      let scaffoldPending = false;
+      if (hasIndex) {
+        try {
+          scaffoldPending = SCAFFOLD_PENDING_MARKER_RE.test(readFileSync(indexPath, 'utf8'));
+        } catch { /* tolerate read errors */ }
+      }
+      if (scaffoldPending || !hasIndex) {
+        result.trs.push({ slug: d.name, hasIndex, scaffoldPending });
+      }
+    }
+  }
+
+  return result;
+}
+
+function formatScaffoldInventory(inv) {
+  const lines = [];
+  const skipSps = process.env.SC_SKIP_DEPTH_AUDIT_SPS === '1';
+  const skipTrs = process.env.SC_SKIP_DEPTH_AUDIT_TRS === '1';
+  const spsCount = skipSps ? 0 : inv.sps.length;
+  const trsCount = skipTrs ? 0 : inv.trs.length;
+  if (spsCount === 0 && trsCount === 0) return null;
+  lines.push('');
+  lines.push(`SPS+TRS scaffold-pending inventory (soak mode — informational, never blocking):`);
+  if (!skipSps && inv.sps.length > 0) {
+    lines.push(`  SPS: ${inv.sps.length} species page(s) with scaffold-pending marker`);
+    for (const f of inv.sps) {
+      lines.push(`    ${f.slug}: marker in ${f.markerLocations.join('+')}`);
+    }
+  } else if (skipSps && inv.sps.length > 0) {
+    lines.push(`  SPS: ${inv.sps.length} finding(s) suppressed by SC_SKIP_DEPTH_AUDIT_SPS=1`);
+  }
+  if (!skipTrs && inv.trs.length > 0) {
+    lines.push(`  TRS: ${inv.trs.length} pack(s) with scaffold-pending state`);
+    // condense pack-list when long
+    const slugs = inv.trs.map(f => f.slug).join(', ');
+    if (slugs.length <= 200) lines.push(`    ${slugs}`);
+    else lines.push(`    ${inv.trs.length} packs (e.g. ${inv.trs.slice(0, 5).map(f => f.slug).join(', ')}, ...)`);
+  } else if (skipTrs && inv.trs.length > 0) {
+    lines.push(`  TRS: ${inv.trs.length} finding(s) suppressed by SC_SKIP_DEPTH_AUDIT_TRS=1`);
+  }
+  return lines.join('\n');
+}
+
 function main() {
   // Strip --root <path> from the args so the positional version arg is intact
   const rawArgs = process.argv.slice(2);
@@ -648,9 +757,10 @@ function main() {
   }
 
   const report = auditVersion(version, { compositePass, crossLinkStrict });
+  const scaffoldInventory = inspectScaffoldPendingSpsTrs();
 
   if (json) {
-    console.log(JSON.stringify(report, null, 2));
+    console.log(JSON.stringify({ ...report, scaffold_inventory: scaffoldInventory }, null, 2));
   } else {
     console.log(formatReport(report));
     console.log('');
@@ -660,6 +770,8 @@ function main() {
       if (s[k]) parts.push(`${k}=${s[k]}`);
     }
     console.log(`Summary: ${parts.join(' / ') || 'no findings'}`);
+    const inventoryReport = formatScaffoldInventory(scaffoldInventory);
+    if (inventoryReport) console.log(inventoryReport);
   }
 
   const failCount = report.findings.filter(f => f.status === 'FAIL' || f.status === 'MISSING').length;
@@ -669,4 +781,5 @@ function main() {
   process.exit(0);
 }
 
-main();
+const invokedDirectly = process.argv[1] && process.argv[1].endsWith('depth-audit.mjs');
+if (invokedDirectly) main();
