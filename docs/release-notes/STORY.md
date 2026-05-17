@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.668`.
+The story begins at `v1.0` and continues to `v1.49.669`.
 
-**711 chapters.** 710 have retrospectives.
+**712 chapters.** 711 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -719,3 +719,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.666](v1.49.666/00-summary.md)** — cc-3: Cluster-Close Schema + Retroactive + TRS-Fill · 2026-05-17
 - **[v1.49.667](v1.49.667/00-summary.md)** — STS-51-I Discovery LEASAT-3 Rescue-Recovery (NASA 1.121→1.122) · 2026-05-17
 - **[v1.49.668](v1.49.668/00-summary.md)** — STS-51-J Atlantis Maiden-Flight DoD-Classified (NASA 1.122→1.123) · 2026-05-17
+- **[v1.49.669](v1.49.669/00-summary.md)** — STS-61-A Challenger Spacelab-D1 (NASA 1.123→1.124) · 2026-05-17
