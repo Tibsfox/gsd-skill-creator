@@ -258,3 +258,17 @@ documented in its first-emit retrospective at
   v1.49.594 cross-link-strict soak pattern; promote to BLOCKER via
   `SC_PRE_TAG_GATE_REQUIRE=sps-cohort-uniqueness` at next NASA
   degree-advance window (FA-666-5 forward).
+- **Lesson #10365** — scaffold-manifest hint validation rule (codified
+  v1.49.666 cc-3 Phase 4); evidence: v1.49.664 cc-1 manifest hinted
+  6 TRS pack themes by extrapolation; v1.49.665 cc-2 conservative
+  agent's release-notes-validation pass found 3 of 6 (50%) were
+  wrong (pack-21 topology not measure theory; pack-22 measure theory
+  not functional analysis; pack-33 mechanism design not control
+  theory). Full discipline at
+  [`scaffold-manifest-discipline.md`](scaffold-manifest-discipline.md).
+  Rule: validate manifest metadata hints (theme / K_N /
+  milestone_bound / cohort_entry / etc.) against release-notes
+  BEFORE committing the manifest; use `"pending validation"` for
+  any hint not corroborated. Helper tool
+  `tools/validate-manifest-hints.mjs` proposed and deferred at v666
+  (FA-666-N forward).
