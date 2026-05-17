@@ -153,11 +153,43 @@ if (CHECK_ONLY) {
 
 let newFrontmatter = frontmatterRaw;
 
+// When advancing past a stale tag, also refresh milestone_name from the
+// latest tag's release-notes README first-line title.
+// Format expected: `# v1.49.NNN — <name>` → captures `<name>`.
+// Falls back to clearing milestone_name to the placeholder string if the
+// release-notes title cannot be parsed, so the stale prose is not retained.
+// Closes Lesson #10169 gate-not-vigilance: v661→v663 rapid-fire ships left
+// milestone_name describing v661 STS-51-B even at v663 close. Surfaced at cc-1.
+function deriveMilestoneNameFromReleaseNotes(tag) {
+  const readmePath = resolve(process.cwd(), 'docs', 'release-notes', tag, 'README.md');
+  if (!existsSync(readmePath)) return null;
+  try {
+    const firstLine = readFileSync(readmePath, 'utf8').split('\n', 1)[0] || '';
+    // Match `# <tag> — <name>` (em-dash) or `# <tag> - <name>` (ascii hyphen as fallback)
+    const m = firstLine.match(/^#\s+\S+\s+[—-]\s+(.+?)\s*$/);
+    return m ? m[1].trim() : null;
+  } catch {
+    return null;
+  }
+}
+
 if (isAdvancing) {
   newFrontmatter = newFrontmatter.replace(
     /^milestone:\s*.*$/m,
     `milestone: ${targetMilestone}`,
   );
+
+  const derivedName = deriveMilestoneNameFromReleaseNotes(targetMilestone);
+  const newName = derivedName || 'milestone';
+  // Handle both single-line `milestone_name: foo` and YAML folded `>-` blocks
+  // (frontmatter authored via tools/state-md-normalizer.mjs uses `>-` for long prose).
+  const foldedRe = /^milestone_name:\s*>-\s*\n((?:[ \t]+.*\n)+)/m;
+  const singleRe = /^milestone_name:\s*.*$/m;
+  if (foldedRe.test(newFrontmatter)) {
+    newFrontmatter = newFrontmatter.replace(foldedRe, `milestone_name: ${JSON.stringify(newName)}\n`);
+  } else if (singleRe.test(newFrontmatter)) {
+    newFrontmatter = newFrontmatter.replace(singleRe, `milestone_name: ${JSON.stringify(newName)}`);
+  }
 }
 
 newFrontmatter = newFrontmatter.replace(
@@ -206,6 +238,9 @@ if (isAdvancing) {
   );
   console.log(
     `[update-state-md] WARNING: predecessor_* and ancillary fields (counter_cadence, nasa_degree, etc.) were NOT touched — operator should backfill manually if bookkeeping matters.`,
+  );
+  console.log(
+    `[update-state-md] milestone_name refreshed from docs/release-notes/${targetMilestone}/README.md if parseable.`,
   );
 } else {
   console.log(

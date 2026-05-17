@@ -282,6 +282,93 @@ describe('update-state-md-on-ship.mjs', () => {
       expect(updated).toMatch(/shipped_at_tag:\s*"v1\.49\.620"/);
     });
 
+    // -----------------------------------------------------------------------
+     // milestone_name refresh on advance (Lesson #10169 gate-not-vigilance).
+     //
+     // Reproduces the v661→v663 rapid-fire ship pattern where STATE.md
+     // milestone advanced (v661→v663) but milestone_name kept describing
+     // v661 because the script only touched the `milestone:` field.
+     // -----------------------------------------------------------------------
+    function writeReleaseNotesTitle(tag, title) {
+      const dir = join(workDir, 'docs', 'release-notes', tag);
+      mkdirSync(dir, { recursive: true });
+      writeFileSync(join(dir, 'README.md'), `# ${tag} — ${title}\n\nbody\n`);
+    }
+
+    it('refreshes milestone_name from latest tag release-notes README on advance', () => {
+      setupRepo({ milestone: 'v1.49.661', status: 'shipped' });
+      tagMilestone('v1.49.661');
+      commitAndTag('newer1', 'v1.49.662');
+      commitAndTag('newer2', 'v1.49.663');
+      writeReleaseNotesTitle('v1.49.663', 'STS-51-F Challenger Spacelab-2 (NASA 1.120→1.121)');
+
+      const r = runScript();
+      expect(r.exitCode).toBe(0);
+      const updated = readFileSync(statePath, 'utf8');
+      expect(updated).toContain('milestone: v1.49.663');
+      expect(updated).toContain('milestone_name:');
+      expect(updated).toContain('STS-51-F Challenger Spacelab-2');
+      // Stale v661 prose must be gone
+      expect(updated).not.toContain('Test Milestone');
+    });
+
+    it('falls back to placeholder when release-notes README is missing', () => {
+      setupRepo({ milestone: 'v1.49.613', status: 'shipped' });
+      tagMilestone('v1.49.613');
+      commitAndTag('newer', 'v1.49.620');
+      // No release-notes README written → fallback path
+
+      const r = runScript();
+      expect(r.exitCode).toBe(0);
+      const updated = readFileSync(statePath, 'utf8');
+      expect(updated).toContain('milestone: v1.49.620');
+      // Stale name must be replaced with placeholder (not retained)
+      expect(updated).not.toContain('Test Milestone');
+      expect(updated).toMatch(/milestone_name:\s*"milestone"/);
+    });
+
+    it('handles YAML folded `>-` milestone_name block on advance', () => {
+      // Real STATE.md uses `>-` folded blocks for long prose names — exercise
+      // that path explicitly so the regex matches both shapes.
+      tmpRoot = mkdtempSync(join(tmpdir(), 'update-state-md-folded-'));
+      workDir = join(tmpRoot, 'work');
+      mkdirSync(join(workDir, '.planning'), { recursive: true });
+      execSync(`git init -b main "${workDir}"`, { stdio: 'pipe' });
+      git(`config user.email "test@example.com"`);
+      git(`config user.name "Test"`);
+      git(`config commit.gpgsign false`);
+      writeFileSync(join(workDir, 'README'), 'init\n');
+      git(`add README`);
+      git(`commit -m "initial"`);
+      statePath = join(workDir, '.planning', 'STATE.md');
+      writeFileSync(statePath, [
+        '---',
+        'gsd_state_version: 1.0',
+        'milestone: v1.49.661',
+        'milestone_name: >-',
+        '  STS-51-B Challenger Spacelab-3 long folded',
+        '  multi-line prose description that spans',
+        '  several lines per yaml fold rules',
+        'status: shipped',
+        'last_updated: "2026-05-07T00:00:00.000Z"',
+        '---',
+        '',
+        '## Body',
+        '',
+      ].join('\n'));
+      tagMilestone('v1.49.661');
+      commitAndTag('newer', 'v1.49.663');
+      writeReleaseNotesTitle('v1.49.663', 'STS-51-F Challenger Spacelab-2');
+
+      const r = runScript();
+      expect(r.exitCode).toBe(0);
+      const updated = readFileSync(statePath, 'utf8');
+      expect(updated).toContain('milestone: v1.49.663');
+      expect(updated).toContain('STS-51-F Challenger Spacelab-2');
+      expect(updated).not.toContain('STS-51-B Challenger Spacelab-3');
+      expect(updated).not.toContain('long folded');
+    });
+
     it('ignores tags on disconnected branches (e.g. paused v1.50.x branch)', () => {
       // Reproduces the gsd-skill-creator real-world scenario: dev/main at
       // v1.49.621, but v1.50.43 tag exists on a separate paused branch.
