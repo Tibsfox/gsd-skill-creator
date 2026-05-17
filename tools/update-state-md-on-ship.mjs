@@ -173,6 +173,22 @@ function deriveMilestoneNameFromReleaseNotes(tag) {
   }
 }
 
+// Match the state-md-normalizer.mjs quoting policy so that the normalizer
+// at T14 step 11 doesn't see drift on what we just wrote (closes the
+// pre-tag-gate v635 meta-test loop). The normalizer only quotes scalars that
+// contain `#` (YAML comment marker). Anything else stays unquoted. For
+// safety against `:` (which can prematurely close a YAML key), also quote
+// if the value contains `: ` (colon-space) or starts with a YAML reserved
+// indicator (- @ ` ! % & * |) that would be misparsed unquoted.
+function yamlSafeScalar(value) {
+  const s = String(value);
+  if (!s) return '""';
+  if (s.includes('#') || s.includes(': ') || /^[-@`!%&*|]/.test(s)) {
+    return `"${s.replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"`;
+  }
+  return s;
+}
+
 if (isAdvancing) {
   newFrontmatter = newFrontmatter.replace(
     /^milestone:\s*.*$/m,
@@ -181,14 +197,15 @@ if (isAdvancing) {
 
   const derivedName = deriveMilestoneNameFromReleaseNotes(targetMilestone);
   const newName = derivedName || 'milestone';
+  const newNameScalar = yamlSafeScalar(newName);
   // Handle both single-line `milestone_name: foo` and YAML folded `>-` blocks
   // (frontmatter authored via tools/state-md-normalizer.mjs uses `>-` for long prose).
   const foldedRe = /^milestone_name:\s*>-\s*\n((?:[ \t]+.*\n)+)/m;
   const singleRe = /^milestone_name:\s*.*$/m;
   if (foldedRe.test(newFrontmatter)) {
-    newFrontmatter = newFrontmatter.replace(foldedRe, `milestone_name: ${JSON.stringify(newName)}\n`);
+    newFrontmatter = newFrontmatter.replace(foldedRe, `milestone_name: ${newNameScalar}\n`);
   } else if (singleRe.test(newFrontmatter)) {
-    newFrontmatter = newFrontmatter.replace(singleRe, `milestone_name: ${JSON.stringify(newName)}`);
+    newFrontmatter = newFrontmatter.replace(singleRe, `milestone_name: ${newNameScalar}`);
   }
 }
 

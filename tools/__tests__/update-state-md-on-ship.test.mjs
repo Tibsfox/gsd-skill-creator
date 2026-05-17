@@ -324,7 +324,26 @@ describe('update-state-md-on-ship.mjs', () => {
       expect(updated).toContain('milestone: v1.49.620');
       // Stale name must be replaced with placeholder (not retained)
       expect(updated).not.toContain('Test Milestone');
-      expect(updated).toMatch(/milestone_name:\s*"milestone"/);
+      // Placeholder "milestone" is a YAML-safe scalar so it appears unquoted
+      // (aligns with state-md-normalizer.mjs quoting policy; closes the
+      //  pre-tag-gate v635 meta-test drift class).
+      expect(updated).toMatch(/^milestone_name:\s*milestone\s*$/m);
+    });
+
+    it('quotes milestone_name when value contains colon-space (YAML safety)', () => {
+      // README title "cc-1: Staged-Deck Scaffold Infrastructure" contains
+      // ": " which would prematurely close the YAML key if written unquoted.
+      // Closes the v664 cc-1 introspection: counter-cadence release notes
+      // typically have colons in titles.
+      setupRepo({ milestone: 'v1.49.661', status: 'shipped' });
+      tagMilestone('v1.49.661');
+      commitAndTag('newer', 'v1.49.664');
+      writeReleaseNotesTitle('v1.49.664', 'cc-1: Staged-Deck Scaffold Infrastructure (SPS + TRS)');
+
+      const r = runScript();
+      expect(r.exitCode).toBe(0);
+      const updated = readFileSync(statePath, 'utf8');
+      expect(updated).toMatch(/^milestone_name:\s*"cc-1: Staged-Deck Scaffold Infrastructure \(SPS \+ TRS\)"\s*$/m);
     });
 
     it('handles YAML folded `>-` milestone_name block on advance', () => {
