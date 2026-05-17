@@ -4,7 +4,7 @@
 
 The substrate-form **SELECTED-1967 + DEFERRED-FIRST-FLIGHT-15-PLUS-YEARS** describes
 NASA Astronaut Group 6, the "Excess Eleven" (XS-11) scientist-astronauts announced
-2026-08-04…1967-08-04. Of the eleven selected, **seven eventually flew** — none of
+1967-08-04. Of the eleven selected, **seven eventually flew** — none of
 them sooner than 15 years after selection. Four resigned before flying. The cohort
 is anchored by two complementary sub-forms:
 
