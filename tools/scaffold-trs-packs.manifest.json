@@ -2,7 +2,6 @@
   "schema": "scaffold-trs-packs/v1",
   "description": "Manifest of TRS pack-NN dirs expected to exist on disk. Entries with disk_status=missing drive cc-1 scaffold stubs (SCAFFOLD-PENDING marker). cc-2 content authoring replaces stubs with substrate-tracked depth. Packs 14-38 themes are tracked as 'pending' here pending cc-2 research into the corresponding milestone notes; packs 40-43 themes are declared in v660-v663 release-notes. Packs 1-13 + 39 already exist and are skipped on idempotent re-run. See .planning/missions/v1-49-664-cc1-staged-deck-scaffold-infrastructure/MISSION-BRIEF.md.",
   "packs": [
-    { "pack": 14, "theme": "pending", "k_n": null, "milestone_bound": "pending" },
     { "pack": 15, "theme": "pending", "k_n": null, "milestone_bound": "pending" },
     { "pack": 16, "theme": "pending", "k_n": null, "milestone_bound": "pending" },
     { "pack": 17, "theme": "pending", "k_n": null, "milestone_bound": "pending" },
