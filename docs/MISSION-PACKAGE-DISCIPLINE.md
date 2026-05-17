@@ -246,3 +246,15 @@ documented in its first-emit retrospective at
   (multi-degree same-session sprint)
 - **Lesson #10234** — six-degree ceiling test extends prior 5-degree
   same-session sprint baseline
+- **Lesson #10364** — duplicate-species first-instance gate (codified
+  v1.49.666 cc-3 Phase 3); evidence: v1.49.661 marbled-murrelet
+  near-miss (existing SPS #82 from v608 era + v661 release-notes
+  claimed FIRST-INSTANCE at SPS #115 — same slug, new number, false
+  first-instance). Gate at `tools/check-sps-cohort-uniqueness.mjs`
+  catches both duplicate-NUMBER (two slugs claiming same N) and
+  duplicate-SLUG-different-N (slug already exists with a different
+  declared N — the actual marbled-murrelet pattern). Wired into
+  `tools/pre-tag-gate.sh` step 14/14 in soak-mode WARN per the
+  v1.49.594 cross-link-strict soak pattern; promote to BLOCKER via
+  `SC_PRE_TAG_GATE_REQUIRE=sps-cohort-uniqueness` at next NASA
+  degree-advance window (FA-666-5 forward).
