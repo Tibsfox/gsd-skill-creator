@@ -1,0 +1,60 @@
+{
+  "schema": "scaffold-sps-pages/v1",
+  "description": "Manifest of SPS species pages expected to exist on disk. Entries with disk_status=missing or disk_status=partial drive cc-1 scaffold stubs (SCAFFOLD-PENDING marker). cc-2 content authoring replaces stubs with substrate-tracked depth. See .planning/missions/v1-49-664-cc1-staged-deck-scaffold-infrastructure/MISSION-BRIEF.md.",
+  "species": [
+    {
+      "slug": "marbled-murrelet",
+      "common_name": "Marbled Murrelet",
+      "scientific_name": "Brachyramphus marmoratus",
+      "authority": "Gmelin, 1789",
+      "sps_number": 115,
+      "class": "Aves",
+      "order": "Charadriiformes",
+      "family": "Alcidae",
+      "cohort_entry_milestone": "v1.49.661",
+      "cross_track_nasa": "STS-51-B Challenger Spacelab-3 (NASA 1.119; 1985-04-29)",
+      "structural_firsts": [
+        "MARBLED-MURRELET-AS-OLD-GROWTH-NEST-INDICATOR",
+        "PRE-PREDATOR-AT-N-COHORT-OPEN (closes at v663 Steller's Jay obs#1)"
+      ],
+      "substrate_tags": ["FIRST-ALCID", "OLD-GROWTH-CONIFER-NESTING-OBLIGATE"],
+      "scaffold_files": ["data-sources.json", "knowledge-nodes.json", "artifacts"]
+    },
+    {
+      "slug": "roosevelt-elk",
+      "common_name": "Roosevelt Elk",
+      "scientific_name": "Cervus canadensis roosevelti",
+      "authority": "Merriam, 1897",
+      "sps_number": 116,
+      "class": "Mammalia",
+      "order": "Artiodactyla",
+      "family": "Cervidae",
+      "cohort_entry_milestone": "v1.49.661",
+      "cross_track_nasa": "STS-51-B Challenger Spacelab-3 (NASA 1.119; 1985-04-29)",
+      "structural_firsts": [
+        "FIRST-CERVID",
+        "WITHIN-CLASS-FAMILY-PIVOT obs#1 (per Lesson #10345 density-taper)"
+      ],
+      "substrate_tags": ["FIRST-CERVID", "OLYMPIC-PENINSULA-ENDEMIC-SUBSPECIES"],
+      "scaffold_files": ["index.html", "data-sources.json", "knowledge-nodes.json", "artifacts"]
+    },
+    {
+      "slug": "mountain-goat",
+      "common_name": "Mountain Goat",
+      "scientific_name": "Oreamnos americanus",
+      "authority": "Blainville, 1816",
+      "sps_number": 117,
+      "class": "Mammalia",
+      "order": "Artiodactyla",
+      "family": "Bovidae",
+      "cohort_entry_milestone": "v1.49.662",
+      "cross_track_nasa": "STS-51-G Discovery (NASA 1.120; 1985-06-17)",
+      "structural_firsts": [
+        "FIRST-BOVID",
+        "WITHIN-CLASS-FAMILY-PIVOT obs#2 (continuing Cervidae→Bovidae)"
+      ],
+      "substrate_tags": ["FIRST-BOVID", "ALPINE-CLIFF-OBLIGATE-PNW-ENDEMIC"],
+      "scaffold_files": ["index.html", "data-sources.json", "knowledge-nodes.json", "artifacts"]
+    }
+  ]
+}
