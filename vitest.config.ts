@@ -30,6 +30,13 @@ export default defineConfig({
           name: 'root',
           globals: true,
           testTimeout: 60000,
+          // hookTimeout: vitest default is 10000ms regardless of testTimeout.
+          // src/intelligence/__tests__/ tests use beforeEach(async () => seedKB())
+          // which spins up a tmpdir SQLite + runs migrations; under full-suite
+          // contention this exceeds 10s. Match testTimeout headroom (60s).
+          // Surfaced at v1.49.667 pre-tag-gate: atlas-bridge.test.ts +
+          // dashboard-bridge-phase-827.test.ts hookTimeout flakes.
+          hookTimeout: 60000,
           include: [
             'src/**/*.test.ts',
             'src/**/*.test.tsx',
