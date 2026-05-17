@@ -15,6 +15,7 @@ export default defineConfig({
       'tools/__tests__/scaffold-cross-track-dirs.test.mjs',
       'tools/__tests__/scaffold-sps-pages.test.mjs',
       'tools/__tests__/scaffold-trs-packs.test.mjs',
+      'tools/__tests__/ps-spec.test.mjs',
       'tools/__tests__/ftp-sync.test.mjs',
       'tools/__tests__/ftp-delete.test.mjs',
       'tools/__tests__/render-claude-md.test.mjs',
