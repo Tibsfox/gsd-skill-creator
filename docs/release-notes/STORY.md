@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.664`.
+The story begins at `v1.0` and continues to `v1.49.665`.
 
-**707 chapters.** 706 have retrospectives.
+**708 chapters.** 707 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -715,3 +715,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.662](v1.49.662/00-summary.md)** — STS-51-G Discovery (NASA 1.119→1.120) · 2026-05-16
 - **[v1.49.663](v1.49.663/00-summary.md)** — STS-51-F Challenger Spacelab-2 (NASA 1.120→1.121) · 2026-05-16
 - **[v1.49.664](v1.49.664/00-summary.md)** — cc-1: Staged-Deck Scaffold Infrastructure (SPS + TRS) · 2026-05-17
+- **[v1.49.665](v1.49.665/00-summary.md)** — cc-2: Staged-Deck Content Authoring (SPS + TRS) · 2026-05-17
