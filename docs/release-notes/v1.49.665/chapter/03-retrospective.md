@@ -1,0 +1,35 @@
+# v1.49.665 — Retrospective
+
+## What went well
+
+**Parallel W2 sub-agent dispatch hit Lesson #10193 + #10215 specs cleanly.** 4 sub-agents this session (2 SPS in Wave 1 + 1 TRS pack-40..43 in Wave 1 + 1 conservative TRS pack-21/22/33/36/37/38 in Wave 2). Tool counts: 30, 31, 25, 25 (all well under the 50/agent ceiling). Each dispatch authored its full deliverable scope + committed between deliverables + verified via depth-audit before returning. Wall-clock per dispatch: 13.6 min (smallest) to 20.4 min (largest). Parallel throughput substantially beat sequential — the SPS + first-TRS waves ran concurrently for ~50 min wall-clock total instead of ~150 min serial.
+
+**Conservative agent caught 3 manifest theme errors.** The cc-1 manifest hints for pack-21 / pack-22 / pack-33 were all WRONG (manifest said measure theory / functional analysis / control theory; actual themes from release-notes were topology / measure theory / mechanism design). The agent's brief explicitly instructed "DO NOT fabricate K_N values or milestone bindings — when unsure, mark as pending validation"; this nudge appears to have biased the agent toward release-notes validation rather than trusting the hints. All 6 packs got validated K_N values and bindings; zero "pending validation" markers in final output. Excellent quality save.
+
+**marbled-murrelet discovery surfaced before wasted dispatch.** Pre-dispatch sanity-check of the cc-2 SPS scope (reading the existing index.html before launching sub-agent) caught the double-count issue. Had we dispatched a sub-agent to "complete" the marbled-murrelet stub, it would have authored content claiming SPS #115 for a species already at SPS #82 — creating either a confused duplicate or worse, an active substrate-tracking corruption. Operator-authorized retraction with manifest + stub cleanup in <10 minutes.
+
+**Empty-commit + manifest-delta pattern worked.** All 16 cc-2 commits use the established v1.49.621 pattern: `git add tools/scaffold-{sps,trs}-*.manifest.json` (the manifest entry removal is the tracked delta) + `git commit --allow-empty` (the substantive content lives in gitignored `www/`). Pattern was proven by sibling commit `216da46f0` and adopted consistently across all 4 sub-agents.
+
+**Sub-agents handled the interleaved parallel commit case gracefully.** A2 (mountain-goat) committed between A1's (roosevelt-elk) commit 2 and 3. A3 (TRS pack-40..43) committed between A1's commits and after A2's commits. The git history is interleaved across SPS + TRS + species but each agent's verification (`node tools/depth-audit.mjs 1.121`) correctly reported its own deliverable's status (markers removed) without confusion. The depth-audit's marker-presence-based inventory is inherently order-independent.
+
+## What did not go well
+
+**cc-2 brief understated the work required for pack-14..38.** Original cc-2 mission package scope was "29 TRS packs" treating all as equal. In reality, the 4 known-theme packs (40-43) and 6 partial-theme packs (21/22/33/36/37/38) were tractable in a single session via 2 dispatches; the remaining 19 fully-pending-theme packs (14-20, 23-32, 34-35) require per-pack release-notes research that wasn't budget-realistic in this session. Cluster scope should have been split: cc-2 = 12 deliverables (this milestone), cc-2b or future = 19 packs. Operator made the correct call mid-session to dispatch the conservative 6-pack batch and defer the remaining 19 — but the original cc-2 brief should have anticipated this.
+
+**3 manifest theme errors in cc-1 manifest reveal authoring quality issue.** I (orchestrator) authored the cc-1 scaffold-trs-packs.manifest.json hints based on speculation from the v657 mission brief which referenced "pack-21 measure theory + pack-22 functional analysis" etc. as DESTINATION-pack candidates for v657's pack-39 selection, NOT as VALIDATED past-pack themes. The conservative agent's release-notes validation caught the error in 3 of 6 cases (50% error rate on speculation). For future scaffolding manifests, validate hints against release-notes BEFORE committing the manifest, or explicitly mark them "guess; needs validation" without including them in the structured `theme` field.
+
+**Marker-cleanup for marbled-murrelet was small-but-fiddly.** The cc-1 scaffolder wrote 2 JSON files + an artifacts/ subdir into marbled-murrelet/ as "complete partial." The retraction required: delete 2 JSON files, rmdir empty artifacts/ (silent ok on non-empty), remove manifest entry. Done in <5 minutes BUT each step required a separate verification ("is artifacts/ actually empty?"). If this pattern recurs (cc-1-style scaffolders writing to a dir that turns out to be wrong-scope), a `scaffold-retract.mjs` helper might be worth ~30 min to author.
+
+## Process observations
+
+- **Conservative-scope dispatch beat aggressive-scope dispatch.** Operator's choice of "1 conservative agent for 6 partial-theme packs" over "3 agents for 25 fully-pending packs" was the right call. The 6-pack conservative batch shipped cleanly with manifest corrections; the 25-pack speculative batch would have likely produced lower-quality content + more manifest errors to surface.
+- **Marker-presence inventory is order-independent.** depth-audit's `inspectScaffoldPendingSpsTrs()` doesn't care about commit interleaving — it just scans the disk for markers. This made the interleaved parallel commit pattern safe.
+- **Empty-commit pattern preserves git-history record even when content is gitignored.** All 16 cc-2 commits exist in git history; the substantive content (SPS pages + TRS packs) lives in working-tree only per `.gitignore` rule on `www/`. This is intentional + consistent with cc-1.
+- **Sub-agent token economics.** Total sub-agent tool budget: 30 + 31 + 25 + 25 + 25 = 136 across 4 dispatches. Equivalent serial work would have been ~150 tool uses + much more orchestrator context. Parallel dispatch is ~2-3× more efficient than serial in this content-authoring shape.
+
+## Forward-notes for cc-3 + cluster close
+
+- **cc-3 scope decision:** operator should decide whether to absorb the 19 remaining TRS packs into cc-3, ship a separate cc-2b milestone, or defer to a future cluster. The 19 packs have NO theme manifest hints and need per-pack release-notes research; this is a substantial dispatch wave (~4-5 sub-agents).
+- **Lesson #10364 candidate** (duplicate-species-first-instance-detection gate) should be codified during cc-3 retrospective OR at cluster-close forward-notes per Lesson #10196.
+- **K_N progression validation** found pack-1..20 + pack-23..32 + pack-34..35 still uncharted from this session's perspective. Future scoping for those packs benefits from the +14-per-pack convention now validated K_21=266 → K_43=575.
+- **Manifest theme errors as a class** — recommend adopting "validate manifest hints against release-notes before commit" as a rule in `docs/MISSION-PACKAGE-DISCIPLINE.md` or a sibling. The cc-1 → cc-2 round-trip surfaced 3 errors; future scaffold manifests should pre-validate.
