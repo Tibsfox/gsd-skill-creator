@@ -453,6 +453,27 @@ else
   log "[pre-tag-gate] step 7/14: PASS"
 fi
 
+# ----- step 7.6/14: proactive card-template title-length gate (v1.49.676 cc1) -----
+# Closes deferred Gate 2 from v1.49.671. Catches MUS/ELC degree-title
+# length violations (>150 chars per HARD_LIMITS.degreeTitleChars) BEFORE
+# the catalog-index drift BLOCKER at step 8 fires with a cryptic error.
+# Surfaced as reactive BLOCKER at v672 + v674 ship cycles.
+# Override: SC_SKIP_CARD_TEMPLATE_LENGTH=1 (emergency only).
+if gate_bypassed "card-template-length" "SC_SKIP_CARD_TEMPLATE_LENGTH"; then
+  log "[pre-tag-gate] step 7.6/14: SKIPPED"
+else
+  log "[pre-tag-gate] step 7.6/14: card-template title-length gate (v1.49.676 cc1)"
+  if ! node "$REPO_ROOT/tools/check-card-template-length.mjs" --quiet; then
+    echo "[pre-tag-gate] FAIL: card-template title-length violations detected (>150 chars)" >&2
+    echo "[pre-tag-gate]   Diagnose: node tools/check-card-template-length.mjs" >&2
+    echo "[pre-tag-gate]   Fix: shorten degree-title in per-degree page <h1> + <title> +" >&2
+    echo "[pre-tag-gate]   catalog-card div to <= 150 chars; re-run update-catalog-indexes.mjs --write" >&2
+    echo "[pre-tag-gate]   Override (emergency only): SC_SKIP_CARD_TEMPLATE_LENGTH=1" >&2
+    exit 76
+  fi
+  log "[pre-tag-gate] step 7.6/14: PASS"
+fi
+
 # ----- step 8/14: catalog-index drift check (BLOCKER — added v1.49.601) -----
 if gate_bypassed "catalog-index" "SC_SKIP_CATALOG_INDEX_GATE"; then
   log "[pre-tag-gate] step 8/14: SKIPPED"
@@ -555,12 +576,17 @@ else
   fi
 fi
 
-# ----- step 12/14: STORY.md drift detection (v1.49.653, recurrence path for 8-degree drift) -----
+# ----- step 12/14: STORY.md drift detection (v1.49.653; story-drift hardened v1.49.676 cc2) -----
 # Detects drift between docs/release-notes/STORY.md preamble and reality
 # (chapter directory count + package.json version). The 8-degree sprint
 # 2026-05-12/13 missed T14 step 2.5 (scripts/append-story-entry.mjs)
 # eight times; this gate makes that drift visible at audit time.
-# WARN-only by default; SC_REQUIRE_STORY_SYNC=1 to block.
+#
+# v1.49.676 cc2: story-drift hardened — message strengthened from
+# informational "INFO" to actionable "WARN (action-required)" with the
+# remediation single-command shown inline. Default behavior remains
+# WARN-not-BLOCKER (T14 step 2.5 may run AFTER pre-tag-gate completes,
+# at which point drift will resolve). SC_REQUIRE_STORY_SYNC=1 still blocks.
 if gate_bypassed "story-drift" "SC_SKIP_STORY_DRIFT_GATE"; then
   log "[pre-tag-gate] step 12/14: SKIPPED"
 else
@@ -568,13 +594,14 @@ else
   STORY_DRIFT_OUTPUT="$(node "$REPO_ROOT/tools/check-story-drift.mjs" 2>&1)" || true
   STORY_DRIFT_EXIT=$?
   if [ "$STORY_DRIFT_EXIT" -ne 0 ] || echo "$STORY_DRIFT_OUTPUT" | grep -q "Detected.*drift"; then
-    echo "[pre-tag-gate] INFO: STORY.md drift detected" >&2
+    echo "[pre-tag-gate] WARN: STORY.md drift detected (story-drift hardened v1.49.676 cc2)" >&2
     echo "$STORY_DRIFT_OUTPUT" | head -25 >&2
+    echo "[pre-tag-gate]   Action: run \`scripts/append-story-entry.mjs\` (T14 step 2.5) before pushing to main" >&2
     if gate_required "story-drift" "SC_REQUIRE_STORY_SYNC"; then
       echo "[pre-tag-gate] FAIL: story-drift escalated — run T14 step 2.5 (scripts/append-story-entry.mjs) before tagging" >&2
       exit 14
     fi
-    log "[pre-tag-gate] step 12/14: WARN (informational; set SC_PRE_TAG_GATE_REQUIRE=story-drift to block)"
+    log "[pre-tag-gate] step 12/14: WARN (action-required; set SC_PRE_TAG_GATE_REQUIRE=story-drift to block)"
   else
     log "[pre-tag-gate] step 12/14: PASS (STORY.md in sync)"
   fi

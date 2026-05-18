@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.675`.
+The story begins at `v1.0` and continues to `v1.49.676`.
 
-**718 chapters.** 717 have retrospectives.
+**719 chapters.** 718 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -726,3 +726,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.673](v1.49.673/00-summary.md)** — Voyager 2 Uranus Encounter First-Uranus-Flyby (NASA 1.126→1.127) · 2026-05-18
 - **[v1.49.674](v1.49.674/00-summary.md)** — STS-51-L Challenger Disaster — CHALLENGER-FORWARD-SHADOW Catastrophic Closure (NASA 1.127→1.128) · 2026-05-18
 - **[v1.49.675](v1.49.675/00-summary.md)** — Rogers Commission Report (NASA 1.128→1.129) — Investigation-Substrate Substrate-Axis-Rotation + Memorial Continuation · 2026-05-18
+- **[v1.49.676](v1.49.676/00-summary.md)** — Counter-Cadence Cluster Broad-Cleanup (5 categories: cc1 title-length gate + cc2 STORY drift hardening + cc3 TRS pack-45 + cc4 MUS/ELC 1.124-1.129 backfill + cc5 depth-audit fix; NASA stays at 1.129) · 2026-05-18

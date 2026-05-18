@@ -184,7 +184,7 @@ function inspectArtifacts(track, version) {
     return {
       path: artifactsDir,
       totalFiles: 0,
-      categoriesFound: new Set(),
+      categoriesFound: [],
       categoriesExpected: NASA_ARTIFACT_CATEGORIES.length,
       status: 'MISSING',
     };
