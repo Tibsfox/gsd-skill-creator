@@ -1,15 +1,16 @@
 # Release History
 
-714 milestones shipped across the v1.0 → v1.49.671 arc. The table below lists every shipped release, newest first.
+715 milestones shipped across the v1.0 → v1.49.672 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 714 releases · 713 with retrospectives · 634 with extracted lessons · quality A:642 B:12 C:15 D:7 F:38 (avg 94) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 715 releases · 714 with retrospectives · 634 with extracted lessons · quality A:642 B:12 C:15 D:7 F:39 (avg 94) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.672](release-notes/v1.49.672) | STS-61-C Columbia 7th Flight Chang-Díaz First-Hispanic-American (NASA 1.125→1.126) | 2026-05-18 | 6 | — | — | [s](release-notes/v1.49.672/chapter/00-summary.md) [r](release-notes/v1.49.672/chapter/03-retrospective.md) [l](release-notes/v1.49.672/chapter/04-lessons.md) [c](release-notes/v1.49.672/chapter/99-context.md) | — | F 56 |  |
 | [v1.49.671](release-notes/v1.49.671) | Counter-Cadence Cluster cc-1 (NASA stays at 1.125) | 2026-05-18 | 6 | — | — | [s](release-notes/v1.49.671/chapter/00-summary.md) [r](release-notes/v1.49.671/chapter/03-retrospective.md) [l](release-notes/v1.49.671/chapter/04-lessons.md) [c](release-notes/v1.49.671/chapter/99-context.md) | — | F 45 |  |
 | [v1.49.670](release-notes/v1.49.670) | STS-61-B Atlantis 2nd Flight EASE/ACCESS (NASA 1.124→1.125) | 2026-05-17 | 6 | — | — | [s](release-notes/v1.49.670/chapter/00-summary.md) [r](release-notes/v1.49.670/chapter/03-retrospective.md) [l](release-notes/v1.49.670/chapter/04-lessons.md) [c](release-notes/v1.49.670/chapter/99-context.md) | — | F 50 |  |
 | [v1.49.669](release-notes/v1.49.669) | STS-61-A Challenger Spacelab-D1 (NASA 1.123→1.124) | 2026-05-17 | 2 | — | — | [s](release-notes/v1.49.669/chapter/00-summary.md) [r](release-notes/v1.49.669/chapter/03-retrospective.md) [l](release-notes/v1.49.669/chapter/04-lessons.md) [c](release-notes/v1.49.669/chapter/99-context.md) | — | F 50 |  |
