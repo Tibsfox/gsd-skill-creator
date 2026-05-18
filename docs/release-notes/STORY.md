@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.683`.
+The story begins at `v1.0` and continues to `v1.49.684`.
 
-**726 chapters.** 725 have retrospectives.
+**727 chapters.** 726 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -734,3 +734,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.681](v1.49.681/00-summary.md)** — Soyuz TM-4: First Year-in-Space Crew (Titov + Manarov 365d 22h) + Buran-Test-Pilot Levchenko (NASA 1.133→1.134) · 2026-05-18
 - **[v1.49.682](v1.49.682/00-summary.md)** — Soyuz TM-5: Second Bulgarian Cosmonaut Aleksandrov-Belorussian + 9-Year Programme Redemption (NASA 1.134→1.135) · 2026-05-18
 - **[v1.49.683](v1.49.683/00-summary.md)** — Soyuz TM-6: First Afghan Cosmonaut Mohmand + Polyakov First Physician on Mir + Igla Anomaly 24h Return Delay (NASA 1.135→1.136) · 2026-05-18
+- **[v1.49.684](v1.49.684/00-summary.md)** — STS-26 Discovery: Return-to-Flight After Challenger + 32-Month Stand-Down Closure + TDRS-C Deployment (NASA 1.136→1.137) · 2026-05-18
