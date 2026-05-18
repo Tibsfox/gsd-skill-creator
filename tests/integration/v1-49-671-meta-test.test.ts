@@ -17,10 +17,12 @@
  */
 
 import { describe, expect, it } from 'vitest';
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 const REPO_ROOT = process.cwd();
+const STATE_MD_PATH = join(REPO_ROOT, '.planning/STATE.md');
+const STATE_MD_AVAILABLE = existsSync(STATE_MD_PATH);
 
 describe('v1.49.671 integration meta-test (Counter-Cadence Cluster cc-1)', () => {
   // ==========================================================================
@@ -59,21 +61,23 @@ describe('v1.49.671 integration meta-test (Counter-Cadence Cluster cc-1)', () =>
 
   // ==========================================================================
   // Counter-cadence assertion: engine state matches predecessor v1.49.670
+  // Scoped to v671-active-window: STATE.md may have moved past v671 by the
+  // time later milestones run the suite; the cc-cluster contract is "NASA
+  // unchanged from v670 close at v671 close", which only the v671 ship
+  // commit-window can verify. Post-v671 invocations skip the assertion.
   // ==========================================================================
-  it('counter-cadence — NASA degree at 1.125 (matches predecessor v1.49.670 close)', () => {
-    // STATE.md is gitignored; skip if absent (CI / clean-repo path)
-    const stateMdPath = join(REPO_ROOT, '.planning/STATE.md');
-    let stateMd: string;
-    try {
-      stateMd = readFileSync(stateMdPath, 'utf8');
-    } catch {
-      // Absent in CI; counter-cadence engine-state assertion is local-only
+  it.runIf(STATE_MD_AVAILABLE)('counter-cadence — NASA degree at 1.125 (matches predecessor v1.49.670 close)', () => {
+    const stateMd = readFileSync(STATE_MD_PATH, 'utf8');
+
+    // Skip if STATE.md has moved past v671 — the cc-cluster invariant only
+    // applies in v671's active window. Later milestones (v672+) carry NASA
+    // 1.126+ legitimately as forward-cadence work resumes.
+    if (!/^milestone:\s*v1\.49\.671\s*$/m.test(stateMd)) {
       return;
     }
 
-    // milestone field is v1.49.671 (current); nasa_degree (when present)
-    // is 125 because cc cluster does NOT advance NASA
-    expect(stateMd).toMatch(/^milestone:\s*v1\.49\.671\s*$/m);
+    // Inside v671's active window: nasa_degree (when present) must be 125
+    // because cc cluster does NOT advance NASA
     if (/^nasa_degree:/m.test(stateMd)) {
       expect(stateMd).toMatch(/^nasa_degree:\s*125\s*$/m);
     }
