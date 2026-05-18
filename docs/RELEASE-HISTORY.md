@@ -1,15 +1,16 @@
 # Release History
 
-727 milestones shipped across the v1.0 → v1.49.684 arc. The table below lists every shipped release, newest first.
+728 milestones shipped across the v1.0 → v1.49.685 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 727 releases · 726 with retrospectives · 634 with extracted lessons · quality A:642 B:13 C:18 D:11 F:43 (avg 93) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 728 releases · 727 with retrospectives · 634 with extracted lessons · quality A:642 B:13 C:19 D:11 F:43 (avg 93) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.685](release-notes/v1.49.685) | STS-27 Atlantis: DoD-Classified Second Post-Challenger Flight + Near-Loss Tile Damage + Lacrosse-1 First-SAR-Recon Deployment (NASA 1.137→1.138) | 2026-05-18 | 3 | — | — | [s](release-notes/v1.49.685/chapter/00-summary.md) [r](release-notes/v1.49.685/chapter/03-retrospective.md) [l](release-notes/v1.49.685/chapter/04-lessons.md) [c](release-notes/v1.49.685/chapter/99-context.md) | — | C 75 |  |
 | [v1.49.684](release-notes/v1.49.684) | STS-26 Discovery: Return-to-Flight After Challenger + 32-Month Stand-Down Closure + TDRS-C Deployment (NASA 1.136→1.137) | 2026-05-18 | 3 | — | — | [s](release-notes/v1.49.684/chapter/00-summary.md) [r](release-notes/v1.49.684/chapter/03-retrospective.md) [l](release-notes/v1.49.684/chapter/04-lessons.md) [c](release-notes/v1.49.684/chapter/99-context.md) | — | C 75 |  |
 | [v1.49.683](release-notes/v1.49.683) | Soyuz TM-6: First Afghan Cosmonaut Mohmand + Polyakov First Physician on Mir + Igla Anomaly Recovery (NASA 1.135→1.136) | 2026-05-18 | 3 | — | — | [s](release-notes/v1.49.683/chapter/00-summary.md) [r](release-notes/v1.49.683/chapter/03-retrospective.md) [l](release-notes/v1.49.683/chapter/04-lessons.md) [c](release-notes/v1.49.683/chapter/99-context.md) | — | C 75 |  |
 | [v1.49.682](release-notes/v1.49.682) | Soyuz TM-5: Second Bulgarian Cosmonaut Aleksandr Aleksandrov-Belorussian + 9-Year Programme Redemption (NASA 1.134→1.135) | 2026-05-18 | 3 | — | — | [s](release-notes/v1.49.682/chapter/00-summary.md) [r](release-notes/v1.49.682/chapter/03-retrospective.md) [l](release-notes/v1.49.682/chapter/04-lessons.md) [c](release-notes/v1.49.682/chapter/99-context.md) | — | D 69 |  |
