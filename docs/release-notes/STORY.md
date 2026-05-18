@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.677`.
+The story begins at `v1.0` and continues to `v1.49.678`.
 
-**720 chapters.** 719 have retrospectives.
+**721 chapters.** 720 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -728,3 +728,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.675](v1.49.675/00-summary.md)** — Rogers Commission Report (NASA 1.128→1.129) — Investigation-Substrate Substrate-Axis-Rotation + Memorial Continuation · 2026-05-18
 - **[v1.49.676](v1.49.676/00-summary.md)** — Counter-Cadence Cluster Broad-Cleanup (5 categories: cc1 title-length gate + cc2 STORY drift hardening + cc3 TRS pack-45 + cc4 MUS/ELC 1.124-1.129 backfill + cc5 depth-audit fix; NASA stays at 1.129) · 2026-05-18
 - **[v1.49.677](v1.49.677/00-summary.md)** — Soyuz T-15 First Mir Crew + Last Salyut 7 Crew + Only Inter-Station Crew Transfer (NASA 1.129→1.130) — Substrate-Axis-Rotation to Soviet-Program-Continuity · 2026-05-18
+- **[v1.49.678](v1.49.678/00-summary.md)** — Mir Kvant Astrophysics Module + First Module Addition + First Western Instruments + First Contingency EVA in Mir Era (NASA 1.130→1.131) — Soviet-Program-Modular-Expansion + International-Cooperation Substrate · 2026-05-18
