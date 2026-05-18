@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.673`.
+The story begins at `v1.0` and continues to `v1.49.674`.
 
-**716 chapters.** 715 have retrospectives.
+**717 chapters.** 716 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -724,3 +724,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.671](v1.49.671/00-summary.md)** — Counter-Cadence Cluster cc-1: STATE.md Normalizer Auto-Run Gate (NASA 1.125 unchanged) · 2026-05-18
 - **[v1.49.672](v1.49.672/00-summary.md)** — STS-61-C Columbia 7th Flight Chang-Díaz First-Hispanic-American (NASA 1.125→1.126) · 2026-05-18
 - **[v1.49.673](v1.49.673/00-summary.md)** — Voyager 2 Uranus Encounter First-Uranus-Flyby (NASA 1.126→1.127) · 2026-05-18
+- **[v1.49.674](v1.49.674/00-summary.md)** — STS-51-L Challenger Disaster — CHALLENGER-FORWARD-SHADOW Catastrophic Closure (NASA 1.127→1.128) · 2026-05-18
