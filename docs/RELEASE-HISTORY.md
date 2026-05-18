@@ -1,15 +1,16 @@
 # Release History
 
-724 milestones shipped across the v1.0 → v1.49.681 arc. The table below lists every shipped release, newest first.
+725 milestones shipped across the v1.0 → v1.49.682 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 724 releases · 723 with retrospectives · 634 with extracted lessons · quality A:642 B:13 C:16 D:10 F:43 (avg 93) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 725 releases · 724 with retrospectives · 634 with extracted lessons · quality A:642 B:13 C:16 D:11 F:43 (avg 93) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.682](release-notes/v1.49.682) | Soyuz TM-5: Second Bulgarian Cosmonaut Aleksandr Aleksandrov-Belorussian + 9-Year Programme Redemption (NASA 1.134→1.135) | 2026-05-18 | 3 | — | — | [s](release-notes/v1.49.682/chapter/00-summary.md) [r](release-notes/v1.49.682/chapter/03-retrospective.md) [l](release-notes/v1.49.682/chapter/04-lessons.md) [c](release-notes/v1.49.682/chapter/99-context.md) | — | D 69 |  |
 | [v1.49.681](release-notes/v1.49.681) | Soyuz TM-4: First Year-in-Space Crew (Titov + Manarov 365d 22h) + Buran-Test-Pilot Levchenko (NASA 1.133→1.134) | 2026-05-18 | 3 | — | — | [s](release-notes/v1.49.681/chapter/00-summary.md) [r](release-notes/v1.49.681/chapter/03-retrospective.md) [l](release-notes/v1.49.681/chapter/04-lessons.md) [c](release-notes/v1.49.681/chapter/99-context.md) | — | C 75 |  |
 | [v1.49.680](release-notes/v1.49.680) | Soyuz TM-3 EO-2: First Syrian Cosmonaut Mohammed Faris + Interkosmos at Mir Opens (NASA 1.132→1.133) | 2026-05-18 | 3 | — | — | [s](release-notes/v1.49.680/chapter/00-summary.md) [r](release-notes/v1.49.680/chapter/03-retrospective.md) [l](release-notes/v1.49.680/chapter/04-lessons.md) [c](release-notes/v1.49.680/chapter/99-context.md) | — | D 69 |  |
 | [v1.49.679](release-notes/v1.49.679) | Halley Armada 1986: First International Multi-Spacecraft Comet Intercept Campaign (NASA 1.131→1.132) | 2026-05-18 | 3 | — | — | [s](release-notes/v1.49.679/chapter/00-summary.md) [r](release-notes/v1.49.679/chapter/03-retrospective.md) [l](release-notes/v1.49.679/chapter/04-lessons.md) [c](release-notes/v1.49.679/chapter/99-context.md) | — | D 69 |  |
