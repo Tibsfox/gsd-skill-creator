@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.680`.
+The story begins at `v1.0` and continues to `v1.49.681`.
 
-**723 chapters.** 722 have retrospectives.
+**724 chapters.** 723 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -731,3 +731,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.678](v1.49.678/00-summary.md)** — Mir Kvant Astrophysics Module + First Module Addition + First Western Instruments + First Contingency EVA in Mir Era (NASA 1.130→1.131) — Soviet-Program-Modular-Expansion + International-Cooperation Substrate · 2026-05-18
 - **[v1.49.679](v1.49.679/00-summary.md)** — Halley Armada 1986 First International Multi-Spacecraft Comet Intercept Campaign (NASA 1.131→1.132) — Retroactive Chronological Insertion + Substrate-Axis Rotation #4 · 2026-05-18
 - **[v1.49.680](v1.49.680/00-summary.md)** — Soyuz TM-3 EO-2 First Syrian Cosmonaut Mohammed Faris + Interkosmos at Mir Opens + Aleksandrov Relief Substitution (NASA 1.132→1.133) · 2026-05-18
+- **[v1.49.681](v1.49.681/00-summary.md)** — Soyuz TM-4: First Year-in-Space Crew (Titov + Manarov 365d 22h) + Buran-Test-Pilot Levchenko (NASA 1.133→1.134) · 2026-05-18
