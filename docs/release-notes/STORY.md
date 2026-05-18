@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.670`.
+The story begins at `v1.0` and continues to `v1.49.671`.
 
-**713 chapters.** 712 have retrospectives.
+**714 chapters.** 713 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -721,3 +721,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.668](v1.49.668/00-summary.md)** — STS-51-J Atlantis Maiden-Flight DoD-Classified (NASA 1.122→1.123) · 2026-05-17
 - **[v1.49.669](v1.49.669/00-summary.md)** — STS-61-A Challenger Spacelab-D1 (NASA 1.123→1.124) · 2026-05-17
 - **[v1.49.670](v1.49.670/00-summary.md)** — STS-61-B Atlantis 2nd Flight EASE/ACCESS (NASA 1.124→1.125) · 2026-05-17
+- **[v1.49.671](v1.49.671/00-summary.md)** — Counter-Cadence Cluster cc-1: STATE.md Normalizer Auto-Run Gate (NASA 1.125 unchanged) · 2026-05-18
