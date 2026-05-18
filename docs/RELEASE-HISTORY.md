@@ -1,15 +1,16 @@
 # Release History
 
-722 milestones shipped across the v1.0 → v1.49.679 arc. The table below lists every shipped release, newest first.
+723 milestones shipped across the v1.0 → v1.49.680 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 722 releases · 721 with retrospectives · 634 with extracted lessons · quality A:642 B:13 C:15 D:9 F:43 (avg 93) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 723 releases · 722 with retrospectives · 634 with extracted lessons · quality A:642 B:13 C:15 D:10 F:43 (avg 93) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.680](release-notes/v1.49.680) | Soyuz TM-3 EO-2: First Syrian Cosmonaut Mohammed Faris + Interkosmos at Mir Opens (NASA 1.132→1.133) | 2026-05-18 | 3 | — | — | [s](release-notes/v1.49.680/chapter/00-summary.md) [r](release-notes/v1.49.680/chapter/03-retrospective.md) [l](release-notes/v1.49.680/chapter/04-lessons.md) [c](release-notes/v1.49.680/chapter/99-context.md) | — | D 69 |  |
 | [v1.49.679](release-notes/v1.49.679) | Halley Armada 1986: First International Multi-Spacecraft Comet Intercept Campaign (NASA 1.131→1.132) | 2026-05-18 | 3 | — | — | [s](release-notes/v1.49.679/chapter/00-summary.md) [r](release-notes/v1.49.679/chapter/03-retrospective.md) [l](release-notes/v1.49.679/chapter/04-lessons.md) [c](release-notes/v1.49.679/chapter/99-context.md) | — | D 69 |  |
 | [v1.49.678](release-notes/v1.49.678) | Mir Kvant Astrophysics Module + First Module Addition + First Western Instruments + First Contingency EVA in Mir Era (NASA 1.130→1.131) | 2026-05-18 | 3 | — | — | [s](release-notes/v1.49.678/chapter/00-summary.md) [r](release-notes/v1.49.678/chapter/03-retrospective.md) [l](release-notes/v1.49.678/chapter/04-lessons.md) [c](release-notes/v1.49.678/chapter/99-context.md) | — | D 69 |  |
 | [v1.49.677](release-notes/v1.49.677) | Soyuz T-15 First Mir Crew + Inter-Station Crew Transfer + Salyut 7 Closure (NASA 1.129→1.130) | 2026-05-18 | 3 | — | — | [s](release-notes/v1.49.677/chapter/00-summary.md) [r](release-notes/v1.49.677/chapter/03-retrospective.md) [l](release-notes/v1.49.677/chapter/04-lessons.md) [c](release-notes/v1.49.677/chapter/99-context.md) | — | B 81 |  |
