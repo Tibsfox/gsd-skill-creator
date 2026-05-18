@@ -252,6 +252,28 @@ if [ -n "$_PTG_BYPASS_RAW" ] || [ -n "$_PTG_REQUIRE_RAW" ]; then
   log "[pre-tag-gate] (step names: build|version-sequence|vitest|completeness|ci-gate|www-bundles|depth-audit|depth-audit-mus-elc|claude-md|catalog-index|tauri-boundary|apply-to-self|scaffolder-residue|citation-debt-sync|story-drift|discipline-coverage|sps-cohort-uniqueness)"
 fi
 
+# ----- step 0.5: STATE.md normalizer auto-run (v1.49.671, Lesson #10373) -----
+# Deterministic gate converting the recurring v669+v670 manual fix
+# (gsd-sdk state.milestone-switch emits frontmatter that the C6 normalizer
+# reports as drifted on next run) into an idempotent pre-step. Runs
+# state-md-normalizer.mjs --write before vitest so the C6 meta-test
+# (tests/integration/v1-49-635-meta-test.test.ts > "STATE.md normalizer
+# --check exits 0") sees a normalized STATE.md every invocation.
+# Bypass: SC_SKIP_STATE_NORMALIZER=1 (rarely useful — surfaces drift but
+# the test will fail anyway).
+log "[pre-tag-gate] step 0.5/14: STATE.md normalizer auto-run (v1.49.671 deterministic gate)"
+if [ "${SC_SKIP_STATE_NORMALIZER:-0}" = "1" ]; then
+  log "[pre-tag-gate] step 0.5/14: SKIPPED (SC_SKIP_STATE_NORMALIZER=1)"
+elif [ -f "$REPO_ROOT/.planning/STATE.md" ]; then
+  # --write is idempotent: "no drift" outcome leaves the file unchanged
+  node tools/state-md-normalizer.mjs --write >/dev/null 2>&1 || true
+  # Clean up the backup file the normalizer leaves on actual rewrites
+  rm -f "$REPO_ROOT"/.planning/STATE.md.backup-before-normalize-* 2>/dev/null || true
+  log "[pre-tag-gate] step 0.5/14: PASS (STATE.md normalized in-place)"
+else
+  log "[pre-tag-gate] step 0.5/14: SKIPPED (no STATE.md; CI/clean-repo path)"
+fi
+
 log "[pre-tag-gate] step 1/14: npm run build"
 if ! npm run build --silent; then
   echo "[pre-tag-gate] FAIL: npm run build exited non-zero" >&2
