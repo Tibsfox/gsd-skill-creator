@@ -1,15 +1,16 @@
 # Release History
 
-734 milestones shipped across the v1.0 → v1.49.691 arc. The table below lists every shipped release, newest first.
+735 milestones shipped across the v1.0 → v1.49.692 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 734 releases · 733 with retrospectives · 634 with extracted lessons · quality A:642 B:13 C:21 D:15 F:43 (avg 93) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 735 releases · 734 with retrospectives · 634 with extracted lessons · quality A:642 B:13 C:21 D:16 F:43 (avg 93) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.692](release-notes/v1.49.692) | STS-33 Atlantis: DoD-Classified Third Post-Challenger Flight + First Night Shuttle Launch Post-Challenger + USA-48 Magnum-Orion-2 SIGINT Deployment + First African-American Shuttle Commander (NASA 1.144→1.145) | 2026-05-19 | 2 | — | — | [s](release-notes/v1.49.692/chapter/00-summary.md) [r](release-notes/v1.49.692/chapter/03-retrospective.md) [l](release-notes/v1.49.692/chapter/04-lessons.md) [c](release-notes/v1.49.692/chapter/99-context.md) | — | D 69 |  |
 | [v1.49.691](release-notes/v1.49.691) | Kvant-2 Second Mir Module: First Operational TKS-FGB Module + Dedicated EVA Airlock + Propulsion + Shower (NASA 1.143→1.144) | 2026-05-19 | 2 | — | — | [s](release-notes/v1.49.691/chapter/00-summary.md) [r](release-notes/v1.49.691/chapter/03-retrospective.md) [l](release-notes/v1.49.691/chapter/04-lessons.md) [c](release-notes/v1.49.691/chapter/99-context.md) | — | D 69 |  |
 | [v1.49.690](release-notes/v1.49.690) | STS-31 Discovery: First Hubble Space Telescope Launch + Discovery's 10th Flight + 614km Highest-Operational-Shuttle-Orbit (NASA 1.142→1.143) | 2026-05-19 | 2 | — | — | [s](release-notes/v1.49.690/chapter/00-summary.md) [r](release-notes/v1.49.690/chapter/03-retrospective.md) [l](release-notes/v1.49.690/chapter/04-lessons.md) [c](release-notes/v1.49.690/chapter/99-context.md) | — | D 69 |  |
 | [v1.49.689](release-notes/v1.49.689) | STS-30 Atlantis: First US Planetary Mission From Shuttle + Magellan Venus Radar Mapper Deployment (NASA 1.141→1.142) | 2026-05-19 | 2 | — | — | [s](release-notes/v1.49.689/chapter/00-summary.md) [r](release-notes/v1.49.689/chapter/03-retrospective.md) [l](release-notes/v1.49.689/chapter/04-lessons.md) [c](release-notes/v1.49.689/chapter/99-context.md) | — | D 69 |  |
