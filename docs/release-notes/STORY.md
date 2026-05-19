@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.694`.
+The story begins at `v1.0` and continues to `v1.49.695`.
 
-**737 chapters.** 736 have retrospectives.
+**738 chapters.** 737 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -745,3 +745,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.692](v1.49.692/00-summary.md)** — STS-33 Atlantis: DoD-Classified Third Post-Challenger + First Night Shuttle Launch Post-Challenger + USA-48 Magnum-Orion-2 SIGINT + First African-American Shuttle Commander Gregory + Carter Memorial Short-Delta-Subcohort (NASA 1.144→1.145) · 2026-05-19
 - **[v1.49.693](v1.49.693/00-summary.md)** — STS-34 Atlantis: First US Jupiter-Bound Planetary Probe + Galileo Orbiter + Atmospheric Entry Probe + 6-Year VEEGA Cruise + Atlantis-5 Fifth Flight + Williams Memorial 27y Decadal-Delta (NASA 1.145→1.146) · 2026-05-19
 - **[v1.49.694](v1.49.694/00-summary.md)** — STS-32 Columbia: First LDEF Retrieval + 5y 9m Forward-Shadow Closure from STS-41-C + First 10-Day Shuttle Mission + First Shuttle Night Landing + Syncom IV-5 Deployment + Columbia OV-102 Ninth Flight + NASA-Legacy-Family Cohort Opens (Low) + Low 18-Year Forward-Shadow Memorial + Chronological-Forward Resumed (NASA 1.146→1.147) · 2026-05-19
+- **[v1.49.695](v1.49.695/00-summary.md)** — STS-107 Columbia Research Mission: SPACEHAB Research Double Module + FREESTAR + 80+ Microgravity Experiments + Columbia OV-102 28th and Final Flight + Memorial Substrate Seven Crew + CAIB Investigation Cohort Opens + 29-Month Shuttle Stand-Down Substrate-Cohort-Pair with v674 32-Month + Shuttle Program Retirement Forward-Anticipation Cohort Opens + First Israeli Astronaut Ramon + First Indian-Born Woman in Space Chawla + Chronological-Inversion Re-Emergent (NASA 1.147→1.148) · 2026-05-19
