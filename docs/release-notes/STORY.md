@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.691`.
+The story begins at `v1.0` and continues to `v1.49.692`.
 
-**734 chapters.** 733 have retrospectives.
+**735 chapters.** 734 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -742,3 +742,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.689](v1.49.689/00-summary.md)** — STS-30 Atlantis: First US Planetary Mission From Shuttle + Magellan Venus Radar Mapper Deployment (NASA 1.141→1.142) · 2026-05-19
 - **[v1.49.690](v1.49.690/00-summary.md)** — STS-31 Discovery: First Hubble Space Telescope Launch + Discovery's 10th Flight + 614km Highest-Operational-Shuttle-Orbit (NASA 1.142→1.143) · 2026-05-19
 - **[v1.49.691](v1.49.691/00-summary.md)** — Kvant-2 Second Mir Module: First Operational TKS-FGB Module + Dedicated EVA Airlock + Propulsion + Shower (NASA 1.143→1.144) · 2026-05-19
+- **[v1.49.692](v1.49.692/00-summary.md)** — STS-33 Atlantis: DoD-Classified Third Post-Challenger + First Night Shuttle Launch Post-Challenger + USA-48 Magnum-Orion-2 SIGINT + First African-American Shuttle Commander Gregory + Carter Memorial Short-Delta-Subcohort (NASA 1.144→1.145) · 2026-05-19
