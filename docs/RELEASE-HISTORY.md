@@ -1,15 +1,16 @@
 # Release History
 
-732 milestones shipped across the v1.0 → v1.49.689 arc. The table below lists every shipped release, newest first.
+733 milestones shipped across the v1.0 → v1.49.690 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 732 releases · 731 with retrospectives · 634 with extracted lessons · quality A:642 B:13 C:21 D:13 F:43 (avg 93) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 733 releases · 732 with retrospectives · 634 with extracted lessons · quality A:642 B:13 C:21 D:14 F:43 (avg 93) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.690](release-notes/v1.49.690) | STS-31 Discovery: First Hubble Space Telescope Launch + Discovery's 10th Flight + 614km Highest-Operational-Shuttle-Orbit (NASA 1.142→1.143) | 2026-05-19 | 2 | — | — | [s](release-notes/v1.49.690/chapter/00-summary.md) [r](release-notes/v1.49.690/chapter/03-retrospective.md) [l](release-notes/v1.49.690/chapter/04-lessons.md) [c](release-notes/v1.49.690/chapter/99-context.md) | — | D 69 |  |
 | [v1.49.689](release-notes/v1.49.689) | STS-30 Atlantis: First US Planetary Mission From Shuttle + Magellan Venus Radar Mapper Deployment (NASA 1.141→1.142) | 2026-05-19 | 2 | — | — | [s](release-notes/v1.49.689/chapter/00-summary.md) [r](release-notes/v1.49.689/chapter/03-retrospective.md) [l](release-notes/v1.49.689/chapter/04-lessons.md) [c](release-notes/v1.49.689/chapter/99-context.md) | — | D 69 |  |
 | [v1.49.688](release-notes/v1.49.688) | STS-29 Discovery: Third Post-Challenger Flight + TDRS-4 Constellation Completion + RTF-Cadence-Stabilization (NASA 1.140→1.141) | 2026-05-19 | 2 | — | — | [s](release-notes/v1.49.688/chapter/00-summary.md) [r](release-notes/v1.49.688/chapter/03-retrospective.md) [l](release-notes/v1.49.688/chapter/04-lessons.md) [c](release-notes/v1.49.688/chapter/99-context.md) | — | D 69 |  |
 | [v1.49.687](release-notes/v1.49.687) | Buran 1.01 Unmanned: Single Orbital Flight + First Fully-Autonomous Shuttle Landing in History + Soviet Shuttle Program Closure + Energia Heavy-Lift First Operational Use (NASA 1.139→1.140) | 2026-05-19 | 2 | — | — | [s](release-notes/v1.49.687/chapter/00-summary.md) [r](release-notes/v1.49.687/chapter/03-retrospective.md) [l](release-notes/v1.49.687/chapter/04-lessons.md) [c](release-notes/v1.49.687/chapter/99-context.md) | — | C 75 |  |
