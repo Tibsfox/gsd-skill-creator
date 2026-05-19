@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.685`.
+The story begins at `v1.0` and continues to `v1.49.686`.
 
-**728 chapters.** 727 have retrospectives.
+**729 chapters.** 728 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -736,3 +736,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.683](v1.49.683/00-summary.md)** — Soyuz TM-6: First Afghan Cosmonaut Mohmand + Polyakov First Physician on Mir + Igla Anomaly 24h Return Delay (NASA 1.135→1.136) · 2026-05-18
 - **[v1.49.684](v1.49.684/00-summary.md)** — STS-26 Discovery: Return-to-Flight After Challenger + 32-Month Stand-Down Closure + TDRS-C Deployment (NASA 1.136→1.137) · 2026-05-18
 - **[v1.49.685](v1.49.685/00-summary.md)** — STS-27 Atlantis: DoD-Classified Second Post-Challenger Flight + Near-Loss Tile Damage + Lacrosse-1 First-SAR-Recon Deployment (NASA 1.137→1.138) · 2026-05-18
+- **[v1.49.686](v1.49.686/00-summary.md)** — Soyuz TM-7 EO-4: 2nd French Cosmonaut Chrétien Aragatz + Titov+Manarov First Yearlong-Endurance Return (365d 22h 39m) + Polyakov Substrate-Thread Continuation (NASA 1.138→1.139) · 2026-05-18
