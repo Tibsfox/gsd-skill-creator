@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.688`.
+The story begins at `v1.0` and continues to `v1.49.689`.
 
-**731 chapters.** 730 have retrospectives.
+**732 chapters.** 731 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -739,3 +739,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.686](v1.49.686/00-summary.md)** — Soyuz TM-7 EO-4: 2nd French Cosmonaut Chrétien Aragatz + Titov+Manarov First Yearlong-Endurance Return (365d 22h 39m) + Polyakov Substrate-Thread Continuation (NASA 1.138→1.139) · 2026-05-18
 - **[v1.49.687](v1.49.687/00-summary.md)** — Buran 1.01 Unmanned: Single Orbital Flight + First Fully-Autonomous Shuttle Landing in History + Soviet Shuttle Program Closure + Energia Heavy-Lift First Operational (NASA 1.139→1.140) · 2026-05-19
 - **[v1.49.688](v1.49.688/00-summary.md)** — STS-29 Discovery: Third Post-Challenger Flight + TDRS-4 Constellation Completion + RTF-Cadence-Stabilization (NASA 1.140→1.141) · 2026-05-19
+- **[v1.49.689](v1.49.689/00-summary.md)** — STS-30 Atlantis: First US Planetary Mission From Shuttle + Magellan Venus Radar Mapper Deployment (NASA 1.141→1.142) · 2026-05-19
