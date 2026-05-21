@@ -247,6 +247,39 @@ Note: the refresh step writes chapter files to .planning/roadmap/v<X>/
 via chapter.mjs. The publish step mirrors them to
 docs/release-notes/v<X>/chapter/ via publish.mjs. Both steps are
 required — refresh runs publish as DRY-RUN only.
+
+### README must include retrospective sections (codified v1.49.710 first-use)
+
+For chapter.mjs to generate `03-retrospective.md` and `04-lessons.md`, the
+release notes README must contain the standard retrospective section
+headings that `ingest-deep.mjs` parses. Without them, chapter.mjs only
+emits 2 of the 4 required chapter files (00-summary + 99-context only)
+and `check-completeness --strict` BLOCKS push-to-main.
+
+Required H2/H3 headings in `docs/release-notes/v<X>/README.md`:
+
+```markdown
+## What Worked
+- bullet list of what went well this milestone
+
+## What Could Be Better
+- bullet list of frictions / improvements
+
+## Decisions
+- key decisions made + brief rationale
+
+## Surprises
+- unexpected findings / observations
+
+## Lessons Learned
+1. Numbered list of lessons (each as a 1-2 sentence statement)
+```
+
+`ingest-deep.mjs` extracts these into the `release_history.retrospective`
+table, then `chapter.mjs` reads from there to write the 4-section
+retrospective chapter and the lessons chapter. The build sub-agent
+should populate all five sections from the W2/W3 build experience
+(e.g., what tripped, what worked, salvage decisions made).
 ```
 
 ### Compatibility with post-trip salvage cleanup
