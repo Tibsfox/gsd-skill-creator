@@ -91,13 +91,13 @@
   },
   {
     "domain": "Sub-agent dispatch",
-    "trigger": "Authoring W2/W3 sub-agent dispatch prompts; spawning parallel build agents; sizing token budgets per dispatch",
-    "summary": "Sub-agents lack SendMessage in toolkit (spawn-task-return-result, not continuous peers); ~60-70 tool-use ceiling per dispatch; bound dispatches to ~1 component / 30-50min; commit-between-deliverables discipline; chunked Write+Edit append pattern for >32K HTML deliverables; transient API errors recover via identical-prompt retry; 64K output-token cap requires JSON+HTML split",
+    "trigger": "Authoring W2/W3 sub-agent dispatch prompts; spawning parallel build agents; sizing token budgets per dispatch; embedding chapter-generation in NASA build dispatches",
+    "summary": "Sub-agents lack SendMessage in toolkit (spawn-task-return-result, not continuous peers); ~60-70 tool-use ceiling per dispatch; bound dispatches to ~1 component / 30-50min; commit-between-deliverables discipline; chunked Write+Edit append pattern for >32K HTML deliverables; transient API errors recover via identical-prompt retry; 64K output-token cap requires JSON+HTML split; W3.5 chapter-gen via `run-with-pg.mjs refresh --fast --quiet` belongs in the dispatch deliverable list (v709 codification)",
     "canonical_docs": [
       "docs/sub-agent-dispatch-discipline.md"
     ],
     "key_lessons": ["#10193", "#10194", "#10200", "#10214", "#10215", "#10240", "#10244"],
-    "codified_at_milestone": "v1.49.654 (new domain — codified from v1.49.637-651 lesson cluster)"
+    "codified_at_milestone": "v1.49.654 (new domain — codified from v1.49.637-651 lesson cluster); v1.49.709 (W3.5 chapter-gen bake-in)"
   },
   {
     "domain": "Counter-cadence cadence",

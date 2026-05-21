@@ -131,3 +131,133 @@ Show the audit numbers ("14 of 15 files on disk, technical artifacts clean, 72 '
 - **First-instance NEW LOCKED:** v1.49.707 Artemis I (2026-05-21)
 - **Memory:** `feedback_sub-agent-partial-deliverable-salvage-cleanup.md`
 - **Sibling discipline:** [`MISSION-PACKAGE-DISCIPLINE.md`](MISSION-PACKAGE-DISCIPLINE.md) §3 (brief trip-vocab budget — the trigger for the trip that this section salvages from)
+
+## Chapter generation in build dispatch (codified v1.49.709)
+
+**Surface:** the dispatch prompt for the NASA build sub-agent. Closes the
+v705–v708 deviation where chapter files (`docs/release-notes/v<X>/chapter/{00-summary,03-retrospective,04-lessons,99-context}.md`)
+materialised only in a post-ship commit. Pulling chapter generation into
+the dispatch saves ~5 minutes per ship and removes a class of late-pipeline
+work the main context was repeatedly catching.
+
+### Architectural facts
+
+1. **`chapter.mjs` is DB-derived.** It reads `release_history.release` +
+   `feature` + `retrospective` + `lesson` tables and writes chapter files
+   to `.planning/roadmap/<version>/`. For a NEW version to appear, the
+   release row must be ingested first (via `ingest.mjs`, which parses
+   `docs/release-notes/<version>/README.md`).
+
+2. **`publish.mjs` mirrors `.planning/roadmap/<v>/*.md` to `docs/release-notes/<v>/chapter/`.**
+   The 4 standard files are basename-allowlisted; non-standard files are
+   silently skipped (see `publish.mjs` allowlist).
+
+3. **`refresh.mjs` runs the full chain** (`scan → ingest → ingest-deep →
+   backfill-git-stats → extract-metrics → extract-lessons → classify →
+   chapter → score → regen-history-md → reconcile → drift-check → audit`).
+   `--fast` skips the expensive `extract-metrics` scan; `--quiet` suppresses
+   per-step output. Idempotent — re-runs are safe.
+
+4. **`run-with-pg.mjs` wraps PG credentials** from `<repo-root>/.env`.
+   No direct `node tools/release-history/refresh.mjs` invocation — always
+   route through the wrapper so PG auth lands.
+
+5. **Pre-tag-gate step 3/14 checks chapter file presence** via
+   `check-completeness.mjs --current --strict`. Chapter files must exist
+   on disk (tracked or untracked) when pre-tag-gate runs. The pre-push
+   hook re-runs the same gate when push-to-main is detected — strict mode
+   blocks if any of the 5 release-notes files are missing or <200 bytes.
+
+### Standard dispatch deliverable list (NASA mission build)
+
+Embed this canonical list in the build sub-agent dispatch prompt. Lifted
+from the brief's Phase digest (W2/W3 rows). The chapter-gen step at the
+end is the v709 codification.
+
+```
+W2 deliverables (sub-agent authors):
+- www/tibsfox/com/Research/NASA/<degree>/index.html (target ~96K)
+- www/tibsfox/com/Research/NASA/<degree>/<12 artifacts> (5/5 categories)
+- www/tibsfox/com/Research/NASA/degree-sync.json (update + new mission row)
+- Cross-link sentinels (≥50% coverage per --cross-link-strict)
+
+W3 deliverables (sub-agent authors):
+- docs/release-notes/v<X>/README.md (A(90+) score target)
+- Append v<X> ground-truth entry to .planning/roadmap/STORY.md
+  (prefix with \n separator per Lesson #10391)
+
+W3.5 deliverable (sub-agent runs as final step before returning):
+- node tools/release-history/run-with-pg.mjs refresh --fast --quiet
+  → populates docs/release-notes/v<X>/chapter/{00,03,04,99}.md via
+    chapter.mjs + publish.mjs.
+- Verify with: ls docs/release-notes/v<X>/chapter/
+  → expect 4 files (00-summary.md, 03-retrospective.md, 04-lessons.md,
+    99-context.md).
+```
+
+### Why W3.5 lives in the sub-agent, not the main context
+
+- **Pre-tag-gate step 3 needs the files on disk before tag.** Running
+  refresh post-tag (current v705–v708 pattern) requires an extra
+  post-ship commit to capture the chapter writes. The main-context
+  operator must either remember to run refresh between W3 and T14 or
+  accept a deferred post-ship commit. Baking into the sub-agent makes
+  this deterministic.
+
+- **Sub-agent has Bash + PG access through the wrapper.** The
+  `run-with-pg.mjs` wrapper reads `<repo-root>/.env` (PG credentials
+  canonical location per memory `pg_credentials_location.md`). No
+  additional secret-handling required.
+
+- **Refresh is idempotent.** A second run from the main context (e.g.,
+  to pick up post-tag metrics like `commits` / `files_changed` /
+  `lines_added`) is safe and remains the standard T14 step 9. The
+  post-ship refresh updates DB-derived fields that aren't available
+  until after the tag exists; chapter files updated by that re-run are
+  captured in the post-ship commit as usual.
+
+### Dispatch prompt snippet (copy-paste ready)
+
+Add to the build sub-agent's deliverable list near the end:
+
+```
+After authoring docs/release-notes/v<X>/README.md and appending the
+v<X> entry to .planning/roadmap/STORY.md, run the chapter pipeline:
+
+  cd /media/foxy/ai/GSD/dev-tools/gsd-skill-creator && \
+    node tools/release-history/run-with-pg.mjs refresh --fast --quiet
+
+Then verify the 4 chapter files exist:
+
+  ls docs/release-notes/v<X>/chapter/
+
+Expected: 00-summary.md, 03-retrospective.md, 04-lessons.md, 99-context.md.
+If any are missing or <200 bytes, surface the error in your return
+summary — the main-context operator needs to know before T14 step 1
+(pre-tag-gate) which requires them present.
+```
+
+### Compatibility with post-trip salvage cleanup
+
+If the sub-agent trips before reaching W3.5 chapter generation, the
+post-trip audit (preceding section) should include a chapter-files
+check as part of the disk audit:
+
+```bash
+ls docs/release-notes/v<X>/chapter/ 2>/dev/null || echo "missing"
+```
+
+If missing, the operator runs `node tools/release-history/run-with-pg.mjs refresh --fast --quiet`
+as part of salvage-cleanup before pre-tag-gate. The refresh is
+idempotent + DB-derived, so it's safe to run regardless of how much
+of the W2/W3 deliverable was salvaged vs. rewritten.
+
+### Cross-references
+
+- **First-instance NEW LOCKED:** v1.49.709 Euclid (2026-05-21)
+- **Memory:** `feedback_nasa-ship-sequence-streamlined.md` (existing —
+  this codification closes its "~5-7 main-context Bash calls per
+  milestone" → ~3-4 by moving chapter-gen into dispatch)
+- **Sibling discipline:** [`T14-SHIP-SEQUENCE.md`](T14-SHIP-SEQUENCE.md)
+  step 9 (RH refresh) — remains the canonical post-tag refresh; W3.5
+  is a pre-tag bootstrap, not a replacement

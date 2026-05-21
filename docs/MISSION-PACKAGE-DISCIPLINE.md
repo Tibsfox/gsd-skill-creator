@@ -288,6 +288,7 @@ If a sub-agent dispatch trips mid-flight despite §3.3 compliance, **audit the d
 - **Sustained obs#2:** v1.49.707 Artemis I (rule extended with secondary regex)
 - **Salvage-cleanup precedent:** v1.49.707 Artemis I (see [`sub-agent-dispatch-discipline.md`](sub-agent-dispatch-discipline.md))
 - **Sibling discipline:** [`SUBSTRATE-PROBE-DISCIPLINE.md`](SUBSTRATE-PROBE-DISCIPLINE.md) (substrate-level rules; this section is mission-package-level)
+- **Build-dispatch chapter-gen baked in v1.49.709:** [`sub-agent-dispatch-discipline.md`](sub-agent-dispatch-discipline.md) "Chapter generation in build dispatch" — the W3.5 step (`refresh --fast --quiet`) belongs in the sub-agent's deliverable list. Brief authors should embed it in the Phase 895 row of new MISSION-BRIEF.md files.
 
 ---
 
