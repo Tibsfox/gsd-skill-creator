@@ -188,11 +188,16 @@ W3 deliverables (sub-agent authors):
 
 W3.5 deliverable (sub-agent runs as final step before returning):
 - node tools/release-history/run-with-pg.mjs refresh --fast --quiet
-  → populates docs/release-notes/v<X>/chapter/{00,03,04,99}.md via
-    chapter.mjs + publish.mjs.
+  → ingests v<X> and writes chapter files to .planning/roadmap/v<X>/
+    (chapter.mjs step inside refresh).
+- node tools/release-history/run-with-pg.mjs publish --execute --version v<X>
+  → mirrors the .planning/roadmap/v<X>/ chapter files to
+    docs/release-notes/v<X>/chapter/. REQUIRED — refresh runs publish as
+    dry-run only; without this step, chapter files exist in
+    .planning/roadmap/ but NOT in docs/release-notes/.
 - Verify with: ls docs/release-notes/v<X>/chapter/
   → expect 4 files (00-summary.md, 03-retrospective.md, 04-lessons.md,
-    99-context.md).
+    99-context.md), each >200 bytes.
 ```
 
 ### Why W3.5 lives in the sub-agent, not the main context
@@ -222,19 +227,26 @@ Add to the build sub-agent's deliverable list near the end:
 
 ```
 After authoring docs/release-notes/v<X>/README.md and appending the
-v<X> entry to .planning/roadmap/STORY.md, run the chapter pipeline:
+v<X> entry to .planning/roadmap/STORY.md, run the chapter pipeline
+(BOTH steps — refresh alone is not sufficient):
 
   cd /media/foxy/ai/GSD/dev-tools/gsd-skill-creator && \
-    node tools/release-history/run-with-pg.mjs refresh --fast --quiet
+    node tools/release-history/run-with-pg.mjs refresh --fast --quiet && \
+    node tools/release-history/run-with-pg.mjs publish --execute --version v<X>
 
-Then verify the 4 chapter files exist:
+Then verify the 4 chapter files exist in docs/release-notes/:
 
   ls docs/release-notes/v<X>/chapter/
 
-Expected: 00-summary.md, 03-retrospective.md, 04-lessons.md, 99-context.md.
-If any are missing or <200 bytes, surface the error in your return
-summary — the main-context operator needs to know before T14 step 1
-(pre-tag-gate) which requires them present.
+Expected: 00-summary.md, 03-retrospective.md, 04-lessons.md, 99-context.md
+(each >200 bytes). If any are missing or undersized, surface the error
+in your return summary — the main-context operator needs to know before
+T14 step 1 (pre-tag-gate) which requires them present.
+
+Note: the refresh step writes chapter files to .planning/roadmap/v<X>/
+via chapter.mjs. The publish step mirrors them to
+docs/release-notes/v<X>/chapter/ via publish.mjs. Both steps are
+required — refresh runs publish as DRY-RUN only.
 ```
 
 ### Compatibility with post-trip salvage cleanup
