@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.722`.
+The story begins at `v1.0` and continues to `v1.49.723`.
 
-**765 chapters.** 764 have retrospectives.
+**766 chapters.** 765 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -773,3 +773,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.720](v1.49.720/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.122 STS-51-I Discovery LEASAT-3 Rescue-Recovery Rebuild · 2026-05-21
 - **[v1.49.721](v1.49.721/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.123 STS-51-J Atlantis Maiden-Flight DoD-Classified Rebuild + Lesson #10408 PROMOTION TO ESTABLISHED · 2026-05-22
 - **[v1.49.722](v1.49.722/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.124 STS-61-A Spacelab-D1 International-Funded Rebuild · 2026-05-22
+- **[v1.49.723](v1.49.723/00-summary.md)** — NASA Canonical Sibling Files Restoration Eighth Mission Rebuild v1.125 STS-61-B Atlantis 2nd Flight EASE/ACCESS (NASA degree unchanged at 1.168) + 13 Canonical Sibling Files Restored Single Sub-Agent Dispatch 35 Tool Uses ~35672 Words Zero Filter Trips + ATLANTIS-OPERATIONAL-CADENCE NEW LOCKED obs#1 First-Instance Post-Maiden + EASE-ACCESS-FIRST-ON-ORBIT-CONSTRUCTION-DEMO NEW LOCKED obs#1 First-Instance Spring + Ross 2 EVAs 12h 10m Total + SPACE-STATION-ASSEMBLY-TECHNIQUES-VALIDATED NEW LOCKED obs#1 Substrate-Relevance-to-Freedom-and-ISS + FIRST-MEXICAN-ASTRONAUT NEW LOCKED obs#1 Rodolfo Neri Vela + FIRST-MEXICAN-NATIONAL-COMSAT NEW LOCKED obs#1 MORELOS-B + MCDONNELL-DOUGLAS-CFES-COMMERCIAL-PS-3RD-FLIGHT NEW LOCKED obs#1 First 3-Flight Industry Payload-Specialist Career Charles Walker + MEXICAN-NATIONAL-PAYLOAD-AS-FOREIGN-FLAG-COHORT NEW LOCKED obs#1 + NIGHT-LAUNCH-CHALLENGER-ERA obs#2 Cumulative After STS-8 + 3 Commercial Comsats Deployed MORELOS-B Mexican + AUSSAT-2 Australian + SATCOM Ku-2 RCA US + Shaw 2nd Flight First Spacelab-PLT-Becomes-Shuttle-CDR + Ross First-Flight Future Record-Tying 7-Flight Career Anchor + NASA-GROUP-9-COHORT-DENSITY First 3-of-7 Group-9 1980 on Single Flight Cleave + Spring + Ross + EDWARDS-AFB-LANDING-COHORT obs#7 Cumulative + Engine State NASA 1.125 / MUS-ELC-SPS-TRS SCAFFOLD-PENDING + SCAFFOLD-PENDING Engine-State Suppression Discipline Sustained obs#4 Cumulative + Lesson #10408 ESTABLISHED Sustained obs#8 Cumulative + Lesson #10406 Candidate Positive-Framing Sustained obs#12 + Lesson #10407 Candidate Dispatch-Prompt-Density Sustained obs#11 + W3.5 Chapter-Gen Bake-In Sustained obs#15 + ENGINE FORWARD-STATE UNCHANGED · 2026-05-22
