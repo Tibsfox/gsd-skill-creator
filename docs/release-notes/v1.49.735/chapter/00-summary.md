@@ -1,7 +1,7 @@
 > Following v1.49.734 — _NASA Canonical Sibling Files Restoration: v1.136 Soyuz TM-6 First Afghan Cosmonaut + Polyakov Physician Rebuild_, v1.49.735 ships as NASA Canonical Sibling Files Restoration: v1.137 STS-26 Discovery Return-to-Flight Rebuild.
 # v1.49.735 — NASA Canonical Sibling Files Restoration: v1.137 STS-26 Discovery Return-to-Flight Rebuild
 **Shipped:** 2026-05-22
-**Commits:** 2 | **Files:** 15 | **Lines:** +192 / -26
+**Commits:** 2 | **Files:** 15 | **Lines:** +192 / -27
 _Parse confidence: 0.50 — source `docs/release-notes/v1.49.735/README.md`_
 ## Summary
 No structured feature list was captured for this release; see the source README for prose details.

@@ -2,10 +2,11 @@
 
 _Generated 2026-05-22 from `release_history.*`. Source of truth: Postgres._
 
-**777 releases.** 776 with retrospective. 652 with extracted lessons.
+**778 releases.** 777 with retrospective. 653 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
+| `v1.49.735` | NASA Canonical Sibling Files Restoration: v1.137 STS-26 Discovery Return-to-Flight Rebuild | 2026-05-22 | ✓ | 4 | [read](v1.49.735/00-summary.md) |
 | `v1.49.734` | NASA Canonical Sibling Files Restoration: v1.136 Soyuz TM-6 First Afghan Cosmonaut + Polyakov Physician Rebuild | 2026-05-22 | ✓ | 4 | [read](v1.49.734/00-summary.md) |
 | `v1.49.733` | NASA Canonical Sibling Files Restoration: v1.135 Soyuz TM-5 Second Bulgarian Cosmonaut Rebuild | 2026-05-22 | ✓ | 4 | [read](v1.49.733/00-summary.md) |
 | `v1.49.732` | NASA Canonical Sibling Files Restoration: v1.134 Soyuz TM-4 First Year-in-Space Crew Rebuild | 2026-05-22 | ✓ | 4 | [read](v1.49.732/00-summary.md) |
