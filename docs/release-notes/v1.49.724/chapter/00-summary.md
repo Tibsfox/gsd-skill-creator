@@ -1,25 +1,10 @@
-# 00 — Summary: v1.49.724 NASA Canonical Sibling Files Restoration — v1.126 STS-61-C Columbia Chang-Díaz Rebuild
-
-**Released:** 2026-05-22
-**Type:** counter-cadence campaign continuation
-**Engine forward-state:** UNCHANGED
-
-## Structural firsts
-
-- **Ninth mission rebuild in campaign.**
-- **FIRST-HISPANIC-AMERICAN-ASTRONAUT** (Chang-Díaz) substrate-anchor restored.
-- **Double-future-NASA-Administrator substrate** at single flight (Bolden + Bill Nelson) — substrate-novel.
-- **Highest-detail brief-discipline composition** — 4 patterns simultaneously applied without interference.
-
-## Engine state at close
-
-| Metric | Value |
-|---|---|
-| NASA degree | 1.168 (UNCHANGED) |
-| Canonical-layout gate | 169/169 canonical |
-| Substrate-era missions with full canonical sibling files | 9 of 51 |
-| Lesson #10408 status | ESTABLISHED (obs#9 cumulative) |
-| SCAFFOLD-PENDING suppression discipline | obs#5 cumulative |
-
+> Following v1.49.723 — _NASA Canonical Sibling Files Restoration: v1.125 STS-61-B Atlantis 2nd Flight EASE/ACCESS Rebuild_, v1.49.724 ships as NASA Canonical Sibling Files Restoration: v1.126 STS-61-C Columbia 7th Flight Chang-Díaz Rebuild.
+# v1.49.724 — NASA Canonical Sibling Files Restoration: v1.126 STS-61-C Columbia 7th Flight Chang-Díaz Rebuild
+**Shipped:** 2026-05-22
+**Commits:** 2 | **Files:** 15 | **Lines:** +212 / -79
+_Parse confidence: 0.50 — source `docs/release-notes/v1.49.724/README.md`_
+## Summary
+No structured feature list was captured for this release; see the source README for prose details.
+It also produced retrospective content (decisions, lessons_learned, surprises); see `03-retrospective.md`.
 ---
-**Prev:** [v1.49.723 README](../../v1.49.723/README.md) · **Next:** v1.49.725+
+**Prev:** [v1.49.723](../v1.49.723/00-summary.md) · _(current tip)_

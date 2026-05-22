@@ -1,25 +1,17 @@
-# 03 — Retrospective: v1.49.724 Process
+# Retrospective — v1.49.724
 
-## Carryover lessons applied
+## Decisions
 
-- Lesson #10406 candidate POSITIVE-FRAMING: obs#13 cumulative.
-- Lesson #10407 candidate DISPATCH-PROMPT-DENSITY: obs#12 cumulative.
-- Lesson #10408 ESTABLISHED: obs#9 cumulative.
-- W3.5 chapter-gen bake-in: obs#16 cumulative.
+**Highest-detail positive-framing discipline at v1.126 validates discipline composition.** v1.126 required simultaneous application of multiple discipline patterns (extended pre-launch verification campaign + Edwards weather-diversion + Penultimate-Flight forward-shadow + SCAFFOLD-PENDING engine-state). Brief explicitly applied all four patterns with detailed guidance per pattern. Sub-agent followed all four cleanly; zero filter trips. Pattern: brief-discipline patterns compose without interference across simultaneous applications.
 
-## Operational metrics
+**Double-future-NASA-Administrator substrate at single flight** — both Bolden (12th NASA Administrator 2009-2017, rookie PLT at v672) and Bill Nelson (14th NASA Administrator 2021-present, congressional PS at v672) flew on STS-61-C. Substrate-anchor for INSTITUTIONAL-MILESTONE-AT-FUTURE-NASA-ADMINISTRATOR-DOUBLE-LOADED-CONVERGENCE observation. Substrate-novel: no other Shuttle flight features two future NASA Administrators in the same crew.
 
-- Sub-agent tool uses: 33 (within 28-36 band)
-- Total deliverables: 13 mission sibling files + 5 release-notes
-- Content-filter trips: 0
-- Word count: ~47K (deepest yet; substrate-density drove deeper authoring)
+## Surprises
 
-## Process surprises
+**Sub-agent went deepest yet (~47K words).** v1.118: 36 tool uses ~23K words; v1.125: 35 tool uses ~36K words; v1.126: 33 tool uses ~47K words. Pattern: deeper substrate-density (Chang-Díaz immigrant-astronaut + first-Hispanic-American + future 7-flight career + Bolden future-Administrator + Bill Nelson future-Administrator + 8-payload science campaign + Halley apparition observation + GHRS Hubble precursor + Hitchhiker-G inaugural + RCA industry PS + extended verification campaign + weather-diversion discipline) drove deeper authoring while tool-use stayed in 28-36 band.
 
-- **Brief-discipline patterns compose orthogonally.** v1.126 applied 4 patterns simultaneously (extended-verification-campaign + weather-diversion + Penultimate-Flight-suppression + SCAFFOLD-PENDING-suppression) without interference. Pattern reliable for future high-trip-vocab missions.
-- **Substrate-density drives word-count, not tool-use.** Tool-use stable at 28-36; word-count varied 23K-47K based on substrate-density.
+**Brief-discipline patterns compose cleanly across multiple simultaneous applications.** All four discipline patterns (extended-verification-campaign + weather-diversion + Penultimate-Flight-suppression + SCAFFOLD-PENDING-suppression) applied at v1.126 without interference. Pattern: discipline patterns are orthogonal and composable.
 
-## Carryforward to v1.49.725+
+## Lessons Learned
 
-- Next target: v1.127
-- Pattern stable across 9 consecutive ships; discipline composition validated
+# 04 — Lessons Learned: v1.49.724 Forward Lessons
