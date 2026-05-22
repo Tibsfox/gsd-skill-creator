@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.735`.
+The story begins at `v1.0` and continues to `v1.49.736`.
 
-**778 chapters.** 777 have retrospectives.
+**779 chapters.** 778 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -786,3 +786,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.733](v1.49.733/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.135 Soyuz TM-5 Second Bulgarian Cosmonaut Rebuild · 2026-05-22
 - **[v1.49.734](v1.49.734/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.136 Soyuz TM-6 First Afghan Cosmonaut + Polyakov Physician Rebuild · 2026-05-22
 - **[v1.49.735](v1.49.735/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.137 STS-26 Discovery Return-to-Flight Rebuild · 2026-05-22
+- **[v1.49.736](v1.49.736/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.138 STS-27 Atlantis DoD-Classified Second Post-Challenger Flight + Near-Loss Tile Damage Event + Lacrosse-1 First-SAR-Reconnaissance Deployment Rebuild (Path B Hand-Author) · 2026-05-22
