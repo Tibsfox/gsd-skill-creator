@@ -1,15 +1,16 @@
 # Release History
 
-772 milestones shipped across the v1.0 → v1.49.729 arc. The table below lists every shipped release, newest first.
+773 milestones shipped across the v1.0 → v1.49.730 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 772 releases · 771 with retrospectives · 647 with extracted lessons · quality A:642 B:16 C:27 D:33 F:54 (avg 92) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 773 releases · 772 with retrospectives · 648 with extracted lessons · quality A:642 B:16 C:27 D:34 F:54 (avg 92) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.730](release-notes/v1.49.730) | NASA Canonical Sibling Files Restoration: v1.132 Halley Armada 1986 Rebuild | 2026-05-22 | 2 | — | — | [s](release-notes/v1.49.730/chapter/00-summary.md) [r](release-notes/v1.49.730/chapter/03-retrospective.md) [l](release-notes/v1.49.730/chapter/04-lessons.md) [c](release-notes/v1.49.730/chapter/99-context.md) | 4 | D 62 |  |
 | [v1.49.729](release-notes/v1.49.729) | NASA Canonical Sibling Files Restoration: v1.131 Mir Kvant Astrophysics Module Rebuild | 2026-05-22 | 2 | — | — | [s](release-notes/v1.49.729/chapter/00-summary.md) [r](release-notes/v1.49.729/chapter/03-retrospective.md) [l](release-notes/v1.49.729/chapter/04-lessons.md) [c](release-notes/v1.49.729/chapter/99-context.md) | 4 | D 62 |  |
 | [v1.49.728](release-notes/v1.49.728) | NASA Canonical Sibling Files Restoration: v1.130 Soyuz T-15 Rebuild | 2026-05-22 | 2 | — | — | [s](release-notes/v1.49.728/chapter/00-summary.md) [r](release-notes/v1.49.728/chapter/03-retrospective.md) [l](release-notes/v1.49.728/chapter/04-lessons.md) [c](release-notes/v1.49.728/chapter/99-context.md) | 4 | D 62 |  |
 | [v1.49.727](release-notes/v1.49.727) | NASA Canonical Sibling Files Restoration: v1.129 Rogers Commission Report Rebuild | 2026-05-22 | 2 | — | — | [s](release-notes/v1.49.727/chapter/00-summary.md) [r](release-notes/v1.49.727/chapter/03-retrospective.md) [l](release-notes/v1.49.727/chapter/04-lessons.md) [c](release-notes/v1.49.727/chapter/99-context.md) | 4 | D 62 |  |

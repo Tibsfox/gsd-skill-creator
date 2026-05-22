@@ -1,7 +1,7 @@
 > Following v1.49.729 — _NASA Canonical Sibling Files Restoration: v1.131 Mir Kvant Astrophysics Module Rebuild_, v1.49.730 ships as NASA Canonical Sibling Files Restoration: v1.132 Halley Armada 1986 Rebuild.
 # v1.49.730 — NASA Canonical Sibling Files Restoration: v1.132 Halley Armada 1986 Rebuild
 **Shipped:** 2026-05-22
-**Commits:** 2 | **Files:** 15 | **Lines:** +190 / -20
+**Commits:** 2 | **Files:** 15 | **Lines:** +191 / -26
 _Parse confidence: 0.50 — source `docs/release-notes/v1.49.730/README.md`_
 ## Summary
 No structured feature list was captured for this release; see the source README for prose details.
