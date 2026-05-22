@@ -2,10 +2,11 @@
 
 _Generated 2026-05-22 from `release_history.*`. Source of truth: Postgres._
 
-**769 releases.** 768 with retrospective. 644 with extracted lessons.
+**770 releases.** 769 with retrospective. 645 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
+| `v1.49.727` | NASA Canonical Sibling Files Restoration: v1.129 Rogers Commission Report Rebuild | 2026-05-22 | ✓ | 4 | [read](v1.49.727/00-summary.md) |
 | `v1.49.726` | NASA Canonical Sibling Files Restoration: v1.128 STS-51-L Challenger Memorial Rebuild | 2026-05-22 | ✓ | 4 | [read](v1.49.726/00-summary.md) |
 | `v1.49.725` | NASA Canonical Sibling Files Restoration: v1.127 Voyager 2 Uranus Encounter Rebuild | 2026-05-22 | ✓ | — | [read](v1.49.725/00-summary.md) |
 | `v1.49.724` | NASA Canonical Sibling Files Restoration: v1.126 STS-61-C Columbia 7th Flight Chang-Díaz Rebuild | 2026-05-22 | ✓ | — | [read](v1.49.724/00-summary.md) |
@@ -702,8 +703,8 @@ _Generated 2026-05-22 from `release_history.*`. Source of truth: Postgres._
 | `v1.49.23` | Unison Language & Math Co-Processor Completion | 2026-03-08 | ✓ | 23 | [read](v1.49.23/00-summary.md) |
 | `v1.49.22` | PNW Research Series | 2026-03-07 | ✓ | 24 | [read](v1.49.22/00-summary.md) |
 | `v1.49.21` | Image to Mission Pipeline | 2026-03-07 | ✓ | 22 | [read](v1.49.21/00-summary.md) |
-| `v1.49.20.1` | Documentation Reflections | 2026-03-06 | — | — | [read](v1.49.20.1/00-summary.md) |
 | `v1.49.20` | Documentation Consolidation | 2026-03-06 | ✓ | 13 | [read](v1.49.20/00-summary.md) |
+| `v1.49.20.1` | Documentation Reflections | 2026-03-06 | — | — | [read](v1.49.20.1/00-summary.md) |
 | `v1.49.19` | Gastown Chipset Integration | 2026-03-06 | ✓ | 19 | [read](v1.49.19/00-summary.md) |
 | `v1.49.18` | Space Between Observatory | 2026-03-06 | ✓ | 17 | [read](v1.49.18/00-summary.md) |
 | `v1.49.17` | The Space Between | 2026-03-04 | ✓ | 19 | [read](v1.49.17/00-summary.md) |
