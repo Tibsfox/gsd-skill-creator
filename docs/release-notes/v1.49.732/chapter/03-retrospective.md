@@ -1,0 +1,26 @@
+# Retrospective — v1.49.732
+
+## Decisions
+
+**Path A sub-agent dispatch sustains cleanly at v1.134 with year-in-space + substrate-coincident-distinct memorial substrate.** Brief audited 0 title-line + 0 primary + 0 secondary trip-vocab + 1459 words; sub-agent returned at 28 tool uses at lower band edge. Substrate-coincident-distinct memorial framing applied successfully in engineering and historical register, not somber register.
+
+**Seventh mission-class boundary validated.** v1.134 opens year-in-space + substrate-coincident-distinct memorial substrate-axis — substrate-form-distinct from prior six mission-class boundaries.
+
+**Engineering and historical register applied to Levchenko substrate.** Treated as engineering-historical equivalent to other cosmonaut biographical substrate; mission-performance substrate (Buran-test-pilot orbital-qualification visiting flight) is distinct from post-mission biographical substrate. Substrate-novel framing approach codified as SUBSTRATE-COINCIDENT-DISTINCT-MEMORIAL pattern.
+
+**Mir-program institutional crew-rotation discipline observed at obs#3 cumulative.** EO-3 inherits Mir from EO-1 via multi-flight Soyuz-vehicle swap; sustains v1.131 + v1.133 substrate.
+
+## Surprises
+
+**Sub-agent dispatch returned at 28 tool uses at band lower edge.** 11 NEW LOCKED + 7 cumulative substrate-axes. Substrate-coincident-distinct memorial framing did not increase dispatch tool-uses; engineering register applied cleanly.
+
+**Substrate-coincident-distinct memorial framing substrate-novel.** First instance of articulating that a crew member's mission-performance substrate may be distinct from post-mission biographical substrate.
+
+**Manarov Caucasus-heritage substrate-anchor opens substrate-novel cohort.** First Lak-language-heritage cosmonaut substrate; substrate-precursor for Caucasus-heritage cohort.
+
+## Lessons Learned
+
+1. **Lesson #10408 ESTABLISHED extends across seventh mission-class boundary.** Year-in-space + substrate-coincident-distinct memorial substrate-axis validates SCAFFOLD-PENDING pattern.
+2. **Path A sub-agent dispatch sustains cleanly at v1.134.** Brief 0/0/0 trip-vocab; sub-agent at 28 tool uses at band lower edge.
+3. **Substrate-coincident-distinct memorial framing substrate-novel.** Mission-performance substrate distinct from post-mission biographical substrate.
+4. **Mir-program institutional crew-rotation discipline obs#3 cumulative.** EO-3 inherits Mir from EO-1 via multi-flight Soyuz-vehicle swap protocol.
