@@ -1,32 +1,19 @@
-# 03 — Retrospective: v1.49.717 Process
+# Retrospective — v1.49.717
 
-## Carryover lessons applied
+## Decisions
 
-- **Lesson #10406 (candidate) POSITIVE-FRAMING-DISPATCH-DISCIPLINE:** APPLIED, sustained obs#6 cumulative. Brief framed Spacelab-3 as science success, Gregory as institutional-firsts substrate, Lind as career-patience substrate, Edwards landing as operational-policy precedent. Zero filter trips.
-- **Lesson #10407 (candidate) DISPATCH-PROMPT-DENSITY-DISCIPLINE:** APPLIED, sustained obs#5 cumulative.
-- **Lesson #10408 (candidate) per-mission sub-agent rebuild pattern:** APPLIED, sustained obs#2 cumulative. Pattern validates across substrate-form-distinct mission classes (Shuttle-payload v1.118 + Shuttle-Spacelab-microgravity-science v1.119).
-- **W3.5 chapter-gen bake-in:** APPLIED, sustained obs#9 cumulative.
+**v1.118 rebuilt-this-campaign reference rather than v1.117 historical reference for template.** The brief pointed primarily at v1.118 (rebuilt 30 minutes earlier under the same campaign brief structure) rather than v1.117 (last historical predecessor). Rationale: v1.118 is the closer template for what the campaign produces; v1.117 is the era-predecessor depth aspiration. Sub-agent output came in deeper than v1.118 (~419 KB vs ~280 KB) and approaches v1.117 depth (~600 KB historical) — depth drift toward v1.117 is acceptable and welcome.
 
-## New lessons emitted
+**Forest-module functional contribution rather than NOT_APPLICABLE.md.** v1.119 ships a real `forest-module/spacelab3-rodent-microgravity.js` (~7 KB; 150 lines) because Spacelab-3's first-Shuttle-rodent-experiment (24 rodents + 2 squirrel monkeys) provides biological substrate that maps to the Forest Sim biological-substrate layer. v1.118 used NOT_APPLICABLE.md because STS-51-D's Shuttle-payload-deployment mission class has no plausible biological substrate. Per-mission forest-module decision is brief-author judgment based on mission class.
 
-None new this milestone. The work extends Lesson #10408 toward promotion-to-ESTABLISHED.
+**Two clean campaign-ship observations validate template generalizability.** v1.118 (Shuttle-payload) and v1.119 (Shuttle-Spacelab-science) are substrate-form-distinct mission classes both within the OV-099/OV-103 fleet era. The brief template (mission-essentials block + reference-page paths + 13-file deliverable table + authoring conventions + tone discipline) adapts cleanly across classes via mission-essentials-block parameterization. The template is now validated for v1.120+ continuation.
 
-## Operational metrics
+## Surprises
 
-- **Sub-agent tool uses:** 28 (5 Read + 13 Write + scaffolding); lower than v1.118's 36, likely due to having v1.118's rebuilt-template as direct reference rather than synthesizing v1.117 + v1.56
-- **Total deliverables:** 13 mission sibling files + 5 release-notes files = 18 new files
-- **Total content:** ~419 KB across mission files (deeper than v1.118's ~280 KB; approaches v1.117 reference depth ~600 KB)
-- **Content-filter trips:** 0
-- **Forest-module decision:** functional contribution (Spacelab-3 first-Shuttle-rodent-experiment biological substrate); first functional Forest Sim contribution in campaign
+**Sub-agent completed the rebuild in 28 tool uses with zero content-filter trips.** Lower than v1.118's 36 tool uses despite producing deeper deliverables. Likely cause: the sub-agent had v1.118's rebuilt-template to reference directly rather than synthesizing patterns from two different references (v1.117 schema + v1.56 depth). Future rebuilds will likely converge on similar tool-use counts as the campaign progresses.
 
-## Process surprises
+**Mission-class detection enabled functional Forest Sim contribution.** v1.118 brief explicitly said "no plausible forest contribution" because Shuttle-payload-deployment missions lack biological substrate. v1.119 brief explicitly noted Spacelab-3's rodent-experiment biological substrate and steered the sub-agent toward functional forest-module rather than NOT_APPLICABLE. Brief-author judgment based on mission class drives the forest-module decision; both NOT_APPLICABLE and functional patterns serve the campaign.
 
-- **Sub-agent went deeper than v1.118 baseline.** Likely cause: had v1.118 to reference directly. The depth drift toward v1.117 reference is welcome.
-- **Mission-class detection enabled functional forest-module.** Brief-author judgment based on mission class drives the forest-module decision; both NOT_APPLICABLE (v1.118) and functional (v1.119) patterns serve the campaign.
-- **Two ships in same session sustainable.** v1.49.716 + v1.49.717 totaling ~25-30 min wall-clock per ship validates the cadence.
+## Lessons Learned
 
-## Carryforward to v1.49.718+
-
-- **Next campaign target:** v1.120 (chronological next; per tracker.md already mechanical-canonical at structural-gate level)
-- **Promotion threshold for Lesson #10408:** 3-5 clean observations; need 1-3 more to ESTABLISHED
-- **Brief-template stability:** v1.118 + v1.119 confirm the structure; v1.120+ briefs are mission-essentials-only authoring
+# 04 — Lessons Learned: v1.49.717 Forward Lessons
