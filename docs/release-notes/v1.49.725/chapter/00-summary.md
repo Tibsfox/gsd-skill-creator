@@ -1,24 +1,10 @@
-# 00 — Summary: v1.49.725 NASA Canonical Sibling Files Restoration — v1.127 Voyager 2 Uranus Encounter Rebuild
-
-**Released:** 2026-05-22
-**Type:** counter-cadence campaign continuation (FIRST deep-space robotic mission in campaign)
-**Engine forward-state:** UNCHANGED
-
-## Structural firsts
-
-- **Tenth mission rebuild in campaign.**
-- **FIRST deep-space robotic mission rebuilt in campaign** (substrate-form-distinct from 9 prior Shuttle-era ships).
-- **Lesson #10408 ESTABLISHED validated across substrate-form-distinct mission-class boundary** — deep-space robotic vs Shuttle-era.
-- **8 first-instance NEW LOCKED substrate-anchors at single mission** (campaign-densest substrate single ship).
-
-## Engine state at close
-
-| Metric | Value |
-|---|---|
-| NASA degree | 1.168 (UNCHANGED) |
-| Canonical-layout gate | 169/169 canonical |
-| Substrate-era missions with full canonical sibling files | 10 of 51 |
-| Lesson #10408 status | ESTABLISHED (obs#10 cumulative; validated across mission-class boundary) |
-
+> Following v1.49.724 — _NASA Canonical Sibling Files Restoration: v1.126 STS-61-C Columbia 7th Flight Chang-Díaz Rebuild_, v1.49.725 ships as NASA Canonical Sibling Files Restoration: v1.127 Voyager 2 Uranus Encounter Rebuild.
+# v1.49.725 — NASA Canonical Sibling Files Restoration: v1.127 Voyager 2 Uranus Encounter Rebuild
+**Shipped:** 2026-05-22
+**Commits:** 2 | **Files:** 15 | **Lines:** +198 / -76
+_Parse confidence: 0.50 — source `docs/release-notes/v1.49.725/README.md`_
+## Summary
+No structured feature list was captured for this release; see the source README for prose details.
+It also produced retrospective content (decisions, lessons_learned, surprises); see `03-retrospective.md`.
 ---
-**Prev:** [v1.49.724 README](../../v1.49.724/README.md) · **Next:** v1.49.726+
+**Prev:** [v1.49.724](../v1.49.724/00-summary.md) · _(current tip)_

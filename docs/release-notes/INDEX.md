@@ -2,10 +2,11 @@
 
 _Generated 2026-05-22 from `release_history.*`. Source of truth: Postgres._
 
-**767 releases.** 766 with retrospective. 643 with extracted lessons.
+**768 releases.** 767 with retrospective. 643 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
+| `v1.49.725` | NASA Canonical Sibling Files Restoration: v1.127 Voyager 2 Uranus Encounter Rebuild | 2026-05-22 | ✓ | — | [read](v1.49.725/00-summary.md) |
 | `v1.49.724` | NASA Canonical Sibling Files Restoration: v1.126 STS-61-C Columbia 7th Flight Chang-Díaz Rebuild | 2026-05-22 | ✓ | — | [read](v1.49.724/00-summary.md) |
 | `v1.49.723` | NASA Canonical Sibling Files Restoration: v1.125 STS-61-B Atlantis 2nd Flight EASE/ACCESS Rebuild | 2026-05-22 | ✓ | — | [read](v1.49.723/00-summary.md) |
 | `v1.49.722` | NASA Canonical Sibling Files Restoration: v1.124 STS-61-A Spacelab-D1 International-Funded Rebuild | 2026-05-22 | ✓ | — | [read](v1.49.722/00-summary.md) |
