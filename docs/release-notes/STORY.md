@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.720`.
+The story begins at `v1.0` and continues to `v1.49.721`.
 
-**763 chapters.** 762 have retrospectives.
+**764 chapters.** 763 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -771,3 +771,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.718](v1.49.718/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.120 STS-51-G Discovery Rebuild · 2026-05-21
 - **[v1.49.719](v1.49.719/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.121 STS-51-F Spacelab-2 Rebuild · 2026-05-21
 - **[v1.49.720](v1.49.720/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.122 STS-51-I Discovery LEASAT-3 Rescue-Recovery Rebuild · 2026-05-21
+- **[v1.49.721](v1.49.721/00-summary.md)** — NASA Canonical Sibling Files Restoration Sixth Mission Rebuild v1.123 STS-51-J Atlantis Maiden-Flight DoD-Classified + Lesson #10408 PROMOTION FROM CANDIDATE TO ESTABLISHED at obs#6 Cumulative (NASA degree unchanged at 1.168) + ATLANTIS-MAIDEN-FLIGHT NEW LOCKED obs#1 First-Instance + 4TH-OPERATIONAL-ORBITER-FIRST-FLIGHT NEW LOCKED obs#1 First-Instance Columbia OV-102 + Challenger OV-099 + Discovery OV-103 + Atlantis OV-104 + DSCS-III-COHORT-OPERATIONAL NEW LOCKED obs#1 First-Instance DSCS-III A-1 USA-11 + DSCS-III B-4 USA-12 via Boeing IUS-3 Dual-Payload Upper Stage + DOD-CLASSIFIED-SHUTTLE-COHORT obs#2 Cumulative after v657 STS-51-C + IUS-AS-CLASSIFIED-DELIVERY-VEHICLE obs#2 Cumulative + HIGHEST-DOD-CLASSIFIED-ORBIT NEW LOCKED obs#1 ~518 km + BOBKO-3RD-FLIGHT NEW LOCKED obs#1 MOL-Program-Transfer Multi-Program-Veteran Cohort obs#5 Cumulative + STEWART-AS-FIRST-ARMY-ASTRONAUT-MULTI-FLIGHT NEW LOCKED obs#1 First-Instance + USAF-MSE-COHORT obs#2 Cumulative Pailes After Payton STS-51-C + EDWARDS-AFB-MANDATORY-LANDING-COHORT obs#5 Cumulative + 13 Canonical Sibling Files Restored Single Sub-Agent Dispatch 34 Tool Uses Zero Filter Trips ~29794 Words + Engine State NASA 1.123 / MUS-ELC-SPS-TRS SCAFFOLD-PENDING Per v1.122 Pattern + Sixth Mission in Autonomous Run Validates Campaign Cadence Across Substrate-Form-Distinct Mission Classes + Lesson #10408 PROMOTED To ESTABLISHED Six Clean Observations Across Six Substrate-Form-Distinct Mission Classes Pattern Fully Validated + Lesson #10406 Candidate Positive-Framing Sustained obs#10 + Lesson #10407 Candidate Dispatch-Prompt-Density Sustained obs#9 + W3.5 Chapter-Gen Bake-In Sustained obs#13 + Brief-Discipline SCAFFOLD-PENDING Engine-State Suppression Sustained obs#2 Cumulative v1.122 + v1.123 + Tool-Use Band 28-36 Mean 31 Sigma 3 Across 6 Observations Well-Characterized + ENGINE FORWARD-STATE UNCHANGED · 2026-05-22
