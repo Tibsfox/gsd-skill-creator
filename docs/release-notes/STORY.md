@@ -79,8 +79,8 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.17](v1.49.17/00-summary.md)** — The Space Between · 2026-03-04
 - **[v1.49.18](v1.49.18/00-summary.md)** — Space Between Observatory · 2026-03-06
 - **[v1.49.19](v1.49.19/00-summary.md)** — Gastown Chipset Integration · 2026-03-06
-- **[v1.49.20.1](v1.49.20.1/00-summary.md)** — Documentation Reflections · 2026-03-06
 - **[v1.49.20](v1.49.20/00-summary.md)** — Documentation Consolidation · 2026-03-06
+- **[v1.49.20.1](v1.49.20.1/00-summary.md)** — Documentation Reflections · 2026-03-06
 - **[v1.49.21](v1.49.21/00-summary.md)** — Image to Mission Pipeline · 2026-03-07
 - **[v1.49.22](v1.49.22/00-summary.md)** — PNW Research Series · 2026-03-07
 - **[v1.49.23](v1.49.23/00-summary.md)** — Unison Language & Math Co-Processor Completion · 2026-03-08
@@ -769,4 +769,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.716](v1.49.716/00-summary.md)** — NASA Canonical Sibling Files Restoration Campaign Launch + v1.118 STS-51-D Discovery Rebuild · 2026-05-21
 - **[v1.49.717](v1.49.717/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.119 STS-51-B Challenger Spacelab-3 Rebuild · 2026-05-21
 - **[v1.49.718](v1.49.718/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.120 STS-51-G Discovery Rebuild · 2026-05-21
-- **[v1.49.719](v1.49.719/00-summary.md)** — NASA Canonical Sibling Files Restoration Fourth Mission Rebuild v1.121 STS-51-F Spacelab-2 (NASA degree unchanged at 1.168) + 13 Canonical Sibling Files Restored Single Sub-Agent Dispatch 28 Tool Uses Zero Filter Trips + Highest-Detail Positive-Framing Discipline Successfully Applied to High-Trip-Vocab Mission + Henize HENIZE-OLDEST-FIRST-FLIGHT-AGE-58 NEW LOCKED obs#1 + FIRST-PHD-ASTRONOMER-AS-FLIGHT-MS NEW LOCKED obs#1 + Musgrave POLYMATH-AS-MULTI-FLIGHT-ASTRONAUT NEW LOCKED obs#1 + England 18-YEAR-WAIT-TO-FIRST-FLIGHT obs#2 cumulative + Spacelab-2 Closes SPACELAB-CADENCE-NUMBERED-OUT-OF-ORDER Substrate-Form (v646 + v661 + v663) + IPS Instrument Pointing System FIRST-FLIGHT NEW LOCKED obs#1 + SOLAR-CORONA-OBSERVATION-COHORT NEW LOCKED obs#1 HRTS SUSIM UVST SOUP + FIRST-MAIN-ENGINE-IN-FLIGHT-ORBITAL-CONTINGENCY-MODE-ACHIEVED-AS-DELIVERABLE NEW LOCKED obs#1 + Fullerton CDR + Bridges PLT + Acton + Bartoe PS Solar Science Teams + EDWARDS-AFB-MANDATORY-LANDING-COHORT obs#3 cumulative + 8TH-OV-099-CHALLENGER-FLIGHT obs#1 + Engine State NASA 1.121 / MUS 1.121 John Mellencamp Scarecrow FARM-AID-PRECURSOR / ELC 1.121 Live Aid Concert 1985-07-13 Global-Multi-Venue-Live-Charity-Concert / SPS #118 Steller Jay FIRST-CORVID Closes-Cohort-With-v661-Marbled-Murrelet + Lesson #10408 Candidate Per-Mission Sub-Agent Rebuild Pattern Sustained obs#4 Cumulative + Lesson #10406 Candidate Positive-Framing-Dispatch Sustained obs#8 + Lesson #10407 Candidate Dispatch-Prompt-Density Sustained obs#7 + W3.5 Chapter-Gen Bake-In Sustained obs#11 + ENGINE FORWARD-STATE UNCHANGED · 2026-05-21
+- **[v1.49.719](v1.49.719/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.121 STS-51-F Spacelab-2 Rebuild · 2026-05-21
