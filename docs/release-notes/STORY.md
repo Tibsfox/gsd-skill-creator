@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.729`.
+The story begins at `v1.0` and continues to `v1.49.730`.
 
-**772 chapters.** 771 have retrospectives.
+**773 chapters.** 772 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -780,3 +780,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.727](v1.49.727/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.129 Rogers Commission Report Rebuild · 2026-05-22
 - **[v1.49.728](v1.49.728/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.130 Soyuz T-15 Rebuild · 2026-05-22
 - **[v1.49.729](v1.49.729/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.131 Mir Kvant Astrophysics Module Rebuild · 2026-05-22
+- **[v1.49.730](v1.49.730/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.132 Halley Armada 1986 Rebuild · 2026-05-22
