@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.721`.
+The story begins at `v1.0` and continues to `v1.49.722`.
 
-**764 chapters.** 763 have retrospectives.
+**765 chapters.** 764 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -772,3 +772,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.719](v1.49.719/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.121 STS-51-F Spacelab-2 Rebuild · 2026-05-21
 - **[v1.49.720](v1.49.720/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.122 STS-51-I Discovery LEASAT-3 Rescue-Recovery Rebuild · 2026-05-21
 - **[v1.49.721](v1.49.721/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.123 STS-51-J Atlantis Maiden-Flight DoD-Classified Rebuild + Lesson #10408 PROMOTION TO ESTABLISHED · 2026-05-22
+- **[v1.49.722](v1.49.722/00-summary.md)** — NASA Canonical Sibling Files Restoration Seventh Mission Rebuild First Ship Under ESTABLISHED Lesson #10408 v1.124 STS-61-A Spacelab-D1 International-Funded (NASA degree unchanged at 1.168) + 13 Canonical Sibling Files Restored Single Sub-Agent Dispatch 33 Tool Uses ~28500 Words Zero Filter Trips + SPACELAB-D1-INTERNATIONAL-FUNDED NEW LOCKED obs#1 First-Instance First ESA-Funded Primary-Payload Shuttle Mission West German Federal Republic ~175M USD via DFVLR/DLR + 8-PERSON-CREW-FIRST-INSTANCE NEW LOCKED obs#1 First-Instance Largest-To-Date Shuttle Crew + DLR-AS-NON-NASA-MISSION-MANAGER NEW LOCKED obs#1 First-Instance DLR Oberpfaffenhofen Payload Operations Control Center + FIRST-ESA-PAYLOAD-SPECIALIST-COHORT-3-PS NEW LOCKED obs#1 Furrer + Messerschmid + Ockels + FIRST-WEST-GERMAN-IN-SPACE-COHORT-PAIR NEW LOCKED obs#1 Furrer + Messerschmid Simultaneous + FIRST-DUTCH-ASTRONAUT NEW LOCKED obs#1 Ockels + GERMAN-VESTIBULAR-SLED-INVESTIGATION NEW LOCKED obs#1 First-Instance + MATERIALS-SCIENCE-LAB-D1-AS-PRIMARY-PAYLOAD NEW LOCKED obs#1 76 Microgravity Experiments 8 Disciplines + BLUFORD-2ND-FLIGHT NEW LOCKED obs#1 First African-American Astronaut Multi-Flight Career + DUNBAR PNW-NATIVE-ASTRONAUT obs#1 Sunnyside WA + HARTSFIELD-3RD-FLIGHT obs#3 Cumulative + Engine State NASA 1.124 / MUS-ELC-SPS-TRS SCAFFOLD-PENDING per v1.122/123 Pattern + SCAFFOLD-PENDING Engine-State Suppression Discipline Sustained obs#3 Cumulative v1.122 + v1.123 + v1.124 + Lesson #10408 ESTABLISHED Sustained obs#7 Cumulative First Ship Under Promoted Status Pattern Stable + Lesson #10406 Candidate Positive-Framing Sustained obs#11 + Lesson #10407 Candidate Dispatch-Prompt-Density Sustained obs#10 + W3.5 Chapter-Gen Bake-In Sustained obs#14 + ENGINE FORWARD-STATE UNCHANGED · 2026-05-22
