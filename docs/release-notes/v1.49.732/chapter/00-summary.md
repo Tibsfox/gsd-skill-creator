@@ -1,7 +1,7 @@
 > Following v1.49.731 — _NASA Canonical Sibling Files Restoration: v1.133 Soyuz TM-3 EO-2 First Syrian Cosmonaut Rebuild_, v1.49.732 ships as NASA Canonical Sibling Files Restoration: v1.134 Soyuz TM-4 First Year-in-Space Crew Rebuild.
 # v1.49.732 — NASA Canonical Sibling Files Restoration: v1.134 Soyuz TM-4 First Year-in-Space Crew Rebuild
 **Shipped:** 2026-05-22
-**Commits:** 2 | **Files:** 15 | **Lines:** +192 / -25
+**Commits:** 2 | **Files:** 15 | **Lines:** +191 / -27
 _Parse confidence: 0.50 — source `docs/release-notes/v1.49.732/README.md`_
 ## Summary
 No structured feature list was captured for this release; see the source README for prose details.
