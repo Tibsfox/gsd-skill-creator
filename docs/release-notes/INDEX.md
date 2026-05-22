@@ -2,10 +2,11 @@
 
 _Generated 2026-05-22 from `release_history.*`. Source of truth: Postgres._
 
-**779 releases.** 778 with retrospective. 654 with extracted lessons.
+**780 releases.** 779 with retrospective. 655 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
+| `v1.49.737` | NASA Canonical Sibling Files Restoration: v1.139 Soyuz TM-7 EO-4 Rebuild (Path B Hand-Author) | 2026-05-22 | ✓ | 5 | [read](v1.49.737/00-summary.md) |
 | `v1.49.736` | NASA Canonical Sibling Files Restoration: v1.138 STS-27 Atlantis Rebuild (Path B Hand-Author) | 2026-05-22 | ✓ | 5 | [read](v1.49.736/00-summary.md) |
 | `v1.49.735` | NASA Canonical Sibling Files Restoration: v1.137 STS-26 Discovery Return-to-Flight Rebuild | 2026-05-22 | ✓ | 4 | [read](v1.49.735/00-summary.md) |
 | `v1.49.734` | NASA Canonical Sibling Files Restoration: v1.136 Soyuz TM-6 First Afghan Cosmonaut + Polyakov Physician Rebuild | 2026-05-22 | ✓ | 4 | [read](v1.49.734/00-summary.md) |

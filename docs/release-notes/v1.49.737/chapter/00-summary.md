@@ -1,6 +1,7 @@
 > Following v1.49.736 — _NASA Canonical Sibling Files Restoration: v1.138 STS-27 Atlantis Rebuild (Path B Hand-Author)_, v1.49.737 ships as NASA Canonical Sibling Files Restoration: v1.139 Soyuz TM-7 EO-4 Rebuild (Path B Hand-Author).
 # v1.49.737 — NASA Canonical Sibling Files Restoration: v1.139 Soyuz TM-7 EO-4 Rebuild (Path B Hand-Author)
 **Shipped:** 2026-05-22
+**Commits:** 2 | **Files:** 15 | **Lines:** +192 / -27
 _Parse confidence: 0.50 — source `docs/release-notes/v1.49.737/README.md`_
 ## Summary
 No structured feature list was captured for this release; see the source README for prose details.

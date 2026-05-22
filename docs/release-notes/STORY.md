@@ -787,4 +787,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.734](v1.49.734/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.136 Soyuz TM-6 First Afghan Cosmonaut + Polyakov Physician Rebuild · 2026-05-22
 - **[v1.49.735](v1.49.735/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.137 STS-26 Discovery Return-to-Flight Rebuild · 2026-05-22
 - **[v1.49.736](v1.49.736/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.138 STS-27 Atlantis Rebuild (Path B Hand-Author) · 2026-05-22
-- **[v1.49.737](v1.49.737/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.139 Soyuz TM-7 EO-4 Aragatz + Yearlong-Endurance Return Rebuild (Path B Hand-Author) · 2026-05-22
+- **[v1.49.737](v1.49.737/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.139 Soyuz TM-7 EO-4 Rebuild (Path B Hand-Author) · 2026-05-22
