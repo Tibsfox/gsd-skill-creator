@@ -36,13 +36,15 @@ describe('v1.49.671 integration meta-test (Counter-Cadence Cluster cc-1)', () =>
 
     // The new step exists, runs the normalizer with --write, and runs
     // BEFORE step 1 (npm run build) so vitest sees a normalized STATE.md
-    expect(gate).toMatch(/step 0\.5\/14: STATE\.md normalizer auto-run/);
+    // Step count became 15 at v1.49.716 when the NASA canonical-layout gate
+    // was wired in as step 15/15.
+    expect(gate).toMatch(/step 0\.5\/15: STATE\.md normalizer auto-run/);
     expect(gate).toMatch(/node tools\/state-md-normalizer\.mjs --write/);
     expect(gate).toMatch(/SC_SKIP_STATE_NORMALIZER/);
 
-    // The step appears textually before step 1/14 (build)
-    const step05Pos = gate.indexOf('step 0.5/14: STATE.md normalizer auto-run');
-    const step1Pos = gate.indexOf('step 1/14: npm run build');
+    // The step appears textually before step 1/15 (build)
+    const step05Pos = gate.indexOf('step 0.5/15: STATE.md normalizer auto-run');
+    const step1Pos = gate.indexOf('step 1/15: npm run build');
     expect(step05Pos).toBeGreaterThan(-1);
     expect(step1Pos).toBeGreaterThan(-1);
     expect(step05Pos).toBeLessThan(step1Pos);
