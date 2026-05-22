@@ -2,10 +2,11 @@
 
 _Generated 2026-05-22 from `release_history.*`. Source of truth: Postgres._
 
-**771 releases.** 770 with retrospective. 646 with extracted lessons.
+**772 releases.** 771 with retrospective. 647 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
+| `v1.49.729` | NASA Canonical Sibling Files Restoration: v1.131 Mir Kvant Astrophysics Module Rebuild | 2026-05-22 | ✓ | 4 | [read](v1.49.729/00-summary.md) |
 | `v1.49.728` | NASA Canonical Sibling Files Restoration: v1.130 Soyuz T-15 Rebuild | 2026-05-22 | ✓ | 4 | [read](v1.49.728/00-summary.md) |
 | `v1.49.727` | NASA Canonical Sibling Files Restoration: v1.129 Rogers Commission Report Rebuild | 2026-05-22 | ✓ | 4 | [read](v1.49.727/00-summary.md) |
 | `v1.49.726` | NASA Canonical Sibling Files Restoration: v1.128 STS-51-L Challenger Memorial Rebuild | 2026-05-22 | ✓ | 4 | [read](v1.49.726/00-summary.md) |
