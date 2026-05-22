@@ -24,24 +24,24 @@
 
 # Lessons — v1.49.736
 
-5 lessons extracted. Classification source: rule-based · LLM tiebreaker (needs review) · human.
+5 lessons extracted. Classification source: ⚙ rule-based · 🤖 LLM tiebreaker (needs review) · 👤 human.
 
 1. **Lesson #10408 ESTABLISHED extends across eleventh mission-class boundary (DoD-Classified-Second-Post-Challenger-Flight substrate-axis).**
-   v1.138 validates SCAFFOLD-PENDING engine-state suppression pattern across Path B hand-author variant + DoD-classified second post-Challenger Shuttle substrate.
-   _Status: investigate · lesson #10790_
+   **Lesson #10408 ESTABLISHED extends across eleventh mission-class boundary (DoD-Classified-Second-Post-Challenger-Flight substrate-axis).**
+   _⚙ Status: `investigate` · lesson #10790_
 
 2. **Path B (main-context hand-author) selected per substrate-anchor-name vocabulary audit.**
-   Substrate-anchor names contain forbidden-token vocabulary; cannot be removed without breaking substrate-novel substrate-axis-rotation discipline; Path B sustained from v1.128 + v1.129 memorial-class hand-author discipline.
-   _Status: investigate · lesson #10791_
+   **Path B (main-context hand-author) selected per substrate-anchor-name vocabulary audit.**
+   _⚙ Status: `investigate` · lesson #10791_
 
 3. **Substrate-anticipation forward-shadow substrate-form codified.**
-   v1.138 STS-27-Columbia-foreshadow 15-year substrate-anticipation; substrate-cohort opening pattern with deferred substrate-realization at v1.148.
-   _Status: investigate · lesson #10792_
+   **Substrate-anticipation forward-shadow substrate-form codified.**
+   _⚙ Status: `investigate` · lesson #10792_
 
 4. **Substrate-novel astronaut-memoir documentation cohort substrate-form codified.**
-   Mullane Riding Rockets Scribner 2006 substrate-anchor opens substrate-novel intergenerational-knowledge-transfer cohort substrate.
-   _Status: investigate · lesson #10793_
+   **Substrate-novel astronaut-memoir documentation cohort substrate-form codified.**
+   _⚙ Status: `investigate` · lesson #10793_
 
 5. **Substrate-novel crew-future-anchor-cohort substrate-form codified.**
-   Single mission substrate-cohort carries 4 substrate-anchors articulating future programmatic-cohort leadership across multiple subsequent programmatic substrates.
-   _Status: investigate · lesson #10794_
+   **Substrate-novel crew-future-anchor-cohort substrate-form codified.**
+   _⚙ Status: `investigate` · lesson #10794_

@@ -2,10 +2,11 @@
 
 _Generated 2026-05-22 from `release_history.*`. Source of truth: Postgres._
 
-**778 releases.** 777 with retrospective. 653 with extracted lessons.
+**779 releases.** 778 with retrospective. 654 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
+| `v1.49.736` | NASA Canonical Sibling Files Restoration: v1.138 STS-27 Atlantis Rebuild (Path B Hand-Author) | 2026-05-22 | ✓ | 5 | [read](v1.49.736/00-summary.md) |
 | `v1.49.735` | NASA Canonical Sibling Files Restoration: v1.137 STS-26 Discovery Return-to-Flight Rebuild | 2026-05-22 | ✓ | 4 | [read](v1.49.735/00-summary.md) |
 | `v1.49.734` | NASA Canonical Sibling Files Restoration: v1.136 Soyuz TM-6 First Afghan Cosmonaut + Polyakov Physician Rebuild | 2026-05-22 | ✓ | 4 | [read](v1.49.734/00-summary.md) |
 | `v1.49.733` | NASA Canonical Sibling Files Restoration: v1.135 Soyuz TM-5 Second Bulgarian Cosmonaut Rebuild | 2026-05-22 | ✓ | 4 | [read](v1.49.733/00-summary.md) |
@@ -711,8 +712,8 @@ _Generated 2026-05-22 from `release_history.*`. Source of truth: Postgres._
 | `v1.49.23` | Unison Language & Math Co-Processor Completion | 2026-03-08 | ✓ | 23 | [read](v1.49.23/00-summary.md) |
 | `v1.49.22` | PNW Research Series | 2026-03-07 | ✓ | 24 | [read](v1.49.22/00-summary.md) |
 | `v1.49.21` | Image to Mission Pipeline | 2026-03-07 | ✓ | 22 | [read](v1.49.21/00-summary.md) |
-| `v1.49.20` | Documentation Consolidation | 2026-03-06 | ✓ | 13 | [read](v1.49.20/00-summary.md) |
 | `v1.49.20.1` | Documentation Reflections | 2026-03-06 | — | — | [read](v1.49.20.1/00-summary.md) |
+| `v1.49.20` | Documentation Consolidation | 2026-03-06 | ✓ | 13 | [read](v1.49.20/00-summary.md) |
 | `v1.49.19` | Gastown Chipset Integration | 2026-03-06 | ✓ | 19 | [read](v1.49.19/00-summary.md) |
 | `v1.49.18` | Space Between Observatory | 2026-03-06 | ✓ | 17 | [read](v1.49.18/00-summary.md) |
 | `v1.49.17` | The Space Between | 2026-03-04 | ✓ | 19 | [read](v1.49.17/00-summary.md) |

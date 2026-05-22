@@ -79,8 +79,8 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.17](v1.49.17/00-summary.md)** — The Space Between · 2026-03-04
 - **[v1.49.18](v1.49.18/00-summary.md)** — Space Between Observatory · 2026-03-06
 - **[v1.49.19](v1.49.19/00-summary.md)** — Gastown Chipset Integration · 2026-03-06
-- **[v1.49.20.1](v1.49.20.1/00-summary.md)** — Documentation Reflections · 2026-03-06
 - **[v1.49.20](v1.49.20/00-summary.md)** — Documentation Consolidation · 2026-03-06
+- **[v1.49.20.1](v1.49.20.1/00-summary.md)** — Documentation Reflections · 2026-03-06
 - **[v1.49.21](v1.49.21/00-summary.md)** — Image to Mission Pipeline · 2026-03-07
 - **[v1.49.22](v1.49.22/00-summary.md)** — PNW Research Series · 2026-03-07
 - **[v1.49.23](v1.49.23/00-summary.md)** — Unison Language & Math Co-Processor Completion · 2026-03-08
@@ -786,4 +786,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.733](v1.49.733/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.135 Soyuz TM-5 Second Bulgarian Cosmonaut Rebuild · 2026-05-22
 - **[v1.49.734](v1.49.734/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.136 Soyuz TM-6 First Afghan Cosmonaut + Polyakov Physician Rebuild · 2026-05-22
 - **[v1.49.735](v1.49.735/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.137 STS-26 Discovery Return-to-Flight Rebuild · 2026-05-22
-- **[v1.49.736](v1.49.736/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.138 STS-27 Atlantis DoD-Classified Second Post-Challenger Flight + Near-Loss Tile Damage Event + Lacrosse-1 First-SAR-Reconnaissance Deployment Rebuild (Path B Hand-Author) · 2026-05-22
+- **[v1.49.736](v1.49.736/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.138 STS-27 Atlantis Rebuild (Path B Hand-Author) · 2026-05-22

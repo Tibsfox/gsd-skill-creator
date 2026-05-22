@@ -1,15 +1,16 @@
 # Release History
 
-778 milestones shipped across the v1.0 → v1.49.735 arc. The table below lists every shipped release, newest first.
+779 milestones shipped across the v1.0 → v1.49.736 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 778 releases · 777 with retrospectives · 653 with extracted lessons · quality A:642 B:16 C:27 D:39 F:54 (avg 91) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 779 releases · 778 with retrospectives · 654 with extracted lessons · quality A:642 B:16 C:27 D:40 F:54 (avg 91) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.736](release-notes/v1.49.736) | NASA Canonical Sibling Files Restoration: v1.138 STS-27 Atlantis Rebuild (Path B Hand-Author) | 2026-05-22 | — | — | — | [s](release-notes/v1.49.736/chapter/00-summary.md) [r](release-notes/v1.49.736/chapter/03-retrospective.md) [l](release-notes/v1.49.736/chapter/04-lessons.md) [c](release-notes/v1.49.736/chapter/99-context.md) | 5 | D 65 |  |
 | [v1.49.735](release-notes/v1.49.735) | NASA Canonical Sibling Files Restoration: v1.137 STS-26 Discovery Return-to-Flight Rebuild | 2026-05-22 | 2 | — | — | [s](release-notes/v1.49.735/chapter/00-summary.md) [r](release-notes/v1.49.735/chapter/03-retrospective.md) [l](release-notes/v1.49.735/chapter/04-lessons.md) [c](release-notes/v1.49.735/chapter/99-context.md) | 4 | D 62 |  |
 | [v1.49.734](release-notes/v1.49.734) | NASA Canonical Sibling Files Restoration: v1.136 Soyuz TM-6 First Afghan Cosmonaut + Polyakov Physician Rebuild | 2026-05-22 | 2 | — | — | [s](release-notes/v1.49.734/chapter/00-summary.md) [r](release-notes/v1.49.734/chapter/03-retrospective.md) [l](release-notes/v1.49.734/chapter/04-lessons.md) [c](release-notes/v1.49.734/chapter/99-context.md) | 4 | D 62 |  |
 | [v1.49.733](release-notes/v1.49.733) | NASA Canonical Sibling Files Restoration: v1.135 Soyuz TM-5 Second Bulgarian Cosmonaut Rebuild | 2026-05-22 | 2 | — | — | [s](release-notes/v1.49.733/chapter/00-summary.md) [r](release-notes/v1.49.733/chapter/03-retrospective.md) [l](release-notes/v1.49.733/chapter/04-lessons.md) [c](release-notes/v1.49.733/chapter/99-context.md) | 4 | D 62 |  |
