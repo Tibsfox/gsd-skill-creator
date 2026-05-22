@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.723`.
+The story begins at `v1.0` and continues to `v1.49.724`.
 
-**766 chapters.** 765 have retrospectives.
+**767 chapters.** 766 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -774,3 +774,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.721](v1.49.721/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.123 STS-51-J Atlantis Maiden-Flight DoD-Classified Rebuild + Lesson #10408 PROMOTION TO ESTABLISHED · 2026-05-22
 - **[v1.49.722](v1.49.722/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.124 STS-61-A Spacelab-D1 International-Funded Rebuild · 2026-05-22
 - **[v1.49.723](v1.49.723/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.125 STS-61-B Atlantis 2nd Flight EASE/ACCESS Rebuild · 2026-05-22
+- **[v1.49.724](v1.49.724/00-summary.md)** — NASA Canonical Sibling Files Restoration Ninth Mission Rebuild v1.126 STS-61-C Columbia 7th Flight Chang-Díaz (NASA degree unchanged at 1.168) + 13 Canonical Sibling Files Restored Single Sub-Agent Dispatch 33 Tool Uses ~47K Words Deepest-Yet Zero Filter Trips + FIRST-HISPANIC-AMERICAN-ASTRONAUT NEW LOCKED obs#1 Franklin Chang-Díaz Costa Rican-Born US Citizen PhD Plasma Physics MIT 1977 + CHANG-DIAZ-AS-COSTA-RICAN-BORN-IMMIGRANT-ASTRONAUT NEW LOCKED obs#1 + BOLDEN-AS-FUTURE-NASA-ADMINISTRATOR-FIRST-FLIGHT NEW LOCKED obs#1 12th NASA Administrator 2009-2017 + CONGRESSIONAL-PS-COHORT obs#2 Cumulative Bill Nelson House Space Science Subcommittee Chairman Later 14th NASA Administrator 2021-Present + INSTITUTIONAL-MILESTONE-AT-FUTURE-NASA-ADMINISTRATOR-DOUBLE-LOADED-CONVERGENCE Substrate-Novel Both Bolden + Bill Nelson Same Crew + RCA-ASTRO-ELECTRONICS-INDUSTRY-PS-COHORT NEW LOCKED obs#1 Cenker SATCOM Ku-1 + 8-PAYLOAD-SCIENCE-AND-DEPLOY-SUCCESS SATCOM Ku-1 + CHAMP Comet Halley + MSL-2 + GHRS Hubble-Instrument Precursor + HAS-A + IBSE + DMOS + HHG-1 Hitchhiker-G Inaugural Carrier + COLUMBIA-CONTINUED-SERVICE-COHORT 7th-Flight + EDWARDS-AFB-LANDING-COHORT obs#8 Cumulative DIVERTED-Variant + KSC-PLANNED-EDWARDS-DIVERTED-LANDING NEW LOCKED obs#1 First Weather-Driven Landing-Site Decision + MSL-AS-MATERIALS-SCIENCE-COHORT-CONTINUATION obs#2 Cumulative + Engine State NASA 1.126 / MUS-ELC-SPS-TRS SCAFFOLD-PENDING + SCAFFOLD-PENDING Engine-State Suppression Discipline Sustained obs#5 Cumulative + Highest-Detail Brief-Discipline Composition Validated 4 Patterns Simultaneously Applied Without Interference + Lesson #10408 ESTABLISHED Sustained obs#9 Cumulative + Lesson #10406 Candidate Positive-Framing Sustained obs#13 + Lesson #10407 Candidate Dispatch-Prompt-Density Sustained obs#12 + W3.5 Chapter-Gen Bake-In Sustained obs#16 + Brief-Discipline Patterns Orthogonal and Composable Validated + Substrate-Density Drives Word-Count Not Tool-Use Observation + ENGINE FORWARD-STATE UNCHANGED · 2026-05-22
