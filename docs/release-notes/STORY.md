@@ -776,4 +776,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.723](v1.49.723/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.125 STS-61-B Atlantis 2nd Flight EASE/ACCESS Rebuild · 2026-05-22
 - **[v1.49.724](v1.49.724/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.126 STS-61-C Columbia 7th Flight Chang-Díaz Rebuild · 2026-05-22
 - **[v1.49.725](v1.49.725/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.127 Voyager 2 Uranus Encounter Rebuild · 2026-05-22
-- **[v1.49.726](v1.49.726/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.128 STS-51-L Challenger Memorial Mission Rebuild (Main-Context Hand-Author per Memorial Mission Substrate-Form-Distinct Class) · 2026-05-22
+- **[v1.49.726](v1.49.726/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.128 STS-51-L Challenger Memorial Rebuild · 2026-05-22
