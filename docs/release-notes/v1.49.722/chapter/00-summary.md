@@ -1,24 +1,10 @@
-# 00 — Summary: v1.49.722 NASA Canonical Sibling Files Restoration — v1.124 STS-61-A Spacelab-D1 Rebuild
-
-**Released:** 2026-05-22
-**Type:** counter-cadence campaign continuation (first ship under ESTABLISHED Lesson #10408)
-**Engine forward-state:** UNCHANGED
-
-## Structural firsts
-
-- **Seventh mission rebuild in campaign.**
-- **First ship under ESTABLISHED Lesson #10408** — pattern continues stable.
-- **Spacelab D1 international-cooperation milestone** rebuilt cleanly (first ESA-funded primary-payload Shuttle mission; first 8-person crew; DLR first non-NASA mission manager).
-
-## Engine state at close
-
-| Metric | Value |
-|---|---|
-| NASA degree | 1.168 (UNCHANGED) |
-| Canonical-layout gate | 169/169 canonical |
-| Substrate-era missions with full canonical sibling files | 7 of 51 |
-| Lesson #10408 status | ESTABLISHED (sustained obs#7 cumulative) |
-| SCAFFOLD-PENDING engine-state suppression discipline | obs#3 cumulative (v1.122 + v1.123 + v1.124) |
-
+> Following v1.49.721 — _NASA Canonical Sibling Files Restoration: v1.123 STS-51-J Atlantis Maiden-Flight DoD-Classified Rebuild + Lesson #10408 PROMOTION TO ESTABLISHED_, v1.49.722 ships as NASA Canonical Sibling Files Restoration: v1.124 STS-61-A Spacelab-D1 International-Funded Rebuild.
+# v1.49.722 — NASA Canonical Sibling Files Restoration: v1.124 STS-61-A Spacelab-D1 International-Funded Rebuild
+**Shipped:** 2026-05-22
+**Commits:** 2 | **Files:** 15 | **Lines:** +196 / -98
+_Parse confidence: 0.50 — source `docs/release-notes/v1.49.722/README.md`_
+## Summary
+No structured feature list was captured for this release; see the source README for prose details.
+It also produced retrospective content (decisions, lessons_learned, surprises); see `03-retrospective.md`.
 ---
-**Prev:** [v1.49.721 README](../../v1.49.721/README.md) · **Next:** v1.49.723+
+**Prev:** [v1.49.721](../v1.49.721/00-summary.md) · _(current tip)_

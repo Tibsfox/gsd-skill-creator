@@ -1,24 +1,17 @@
-# 03 — Retrospective: v1.49.722 Process
+# Retrospective — v1.49.722
 
-## Carryover lessons applied
+## Decisions
 
-- **Lesson #10406 candidate POSITIVE-FRAMING:** sustained obs#11 cumulative.
-- **Lesson #10407 candidate DISPATCH-PROMPT-DENSITY:** sustained obs#10 cumulative.
-- **Lesson #10408 ESTABLISHED:** sustained obs#7 cumulative — first ship under promoted status.
-- **W3.5 chapter-gen bake-in:** sustained obs#14 cumulative.
+**Challenger-9th-flight reference restricted to engine-state retrospective level.** Per established discipline (v1.121 + v1.123 precedent): the Challenger forward-shadow substrate exists at the engine-state level but is not the narrative focus of the rebuild. Brief instructed sub-agent to reference CHALLENGER-9TH-FLIGHT obs#9 cumulative in retrospective/lessons-carryover.json ONLY, not in main HTML/MD content. Sub-agent followed cleanly. Pattern: discipline-application across high-trip-vocab-adjacent missions remains consistent.
 
-## Operational metrics
+**First ship under ESTABLISHED Lesson #10408 demonstrates pattern stability post-promotion.** v1.124 follows the same orchestration pattern as v1.118-v1.123 (the 6 candidate-status observations); no operational changes from promotion. Pattern continues stable; promotion was a documentation event, not a behavioral change.
 
-- Sub-agent tool uses: 33 (within 28-36 band; mean ~31.6 across 7 observations)
-- Total deliverables: 13 mission sibling files + 5 release-notes
-- Content-filter trips: 0
+## Surprises
 
-## Process surprises
+**Tool-use 33 within band as expected.** v1.118: 36; v1.119: 28; v1.120: 32; v1.121: 28; v1.122: 30; v1.123: 34; v1.124: 33. Seven-observation band: 28-36, mean ~31.6, sigma ~3.
 
-- **Multi-firsts narrative coherence.** v1.124 has unusually many parallel first-instance substrate-anchors. Sub-agent organized them around the Spacelab D1 international-cooperation success thread without narrative fragmentation.
-- **First-ship-post-promotion behavior unchanged.** No operational changes from Lesson #10408 promotion; pattern stable.
+**Sub-agent organized the multi-firsts narrative cleanly.** Multiple parallel first-instance substrate-anchors (West German pair + Dutch first + African-American multi-flight + woman-MS-on-Spacelab + PNW-native + ESA-funded + DLR-managed + 8-person crew + Vestibular Sled + materials-science-primary) could have produced narrative fragmentation; sub-agent coordinated them around the Spacelab D1 international-cooperation science success thread.
 
-## Carryforward to v1.49.723+
+## Lessons Learned
 
-- Next campaign target: v1.125
-- Pattern continues stable post-promotion
+# 04 — Lessons Learned: v1.49.722 Forward Lessons
