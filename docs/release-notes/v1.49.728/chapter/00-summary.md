@@ -1,7 +1,7 @@
 > Following v1.49.727 — _NASA Canonical Sibling Files Restoration: v1.129 Rogers Commission Report Rebuild_, v1.49.728 ships as NASA Canonical Sibling Files Restoration: v1.130 Soyuz T-15 Rebuild.
 # v1.49.728 — NASA Canonical Sibling Files Restoration: v1.130 Soyuz T-15 Rebuild
 **Shipped:** 2026-05-22
-**Commits:** 2 | **Files:** 16 | **Lines:** +200 / -10
+**Commits:** 2 | **Files:** 15 | **Lines:** +186 / -25
 _Parse confidence: 0.50 — source `docs/release-notes/v1.49.728/README.md`_
 ## Summary
 No structured feature list was captured for this release; see the source README for prose details.
