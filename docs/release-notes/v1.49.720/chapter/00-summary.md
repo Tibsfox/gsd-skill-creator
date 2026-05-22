@@ -1,24 +1,10 @@
-# 00 — Summary: v1.49.720 NASA Canonical Sibling Files Restoration — v1.122 STS-51-I LEASAT-3 Rescue-Recovery Rebuild
-
-**Released:** 2026-05-21
-**Type:** counter-cadence campaign continuation
-**Engine forward-state:** UNCHANGED
-
-## Structural firsts
-
-- **Fifth mission rebuild in NASA Canonical Sibling Files Restoration Campaign.**
-- **LEASAT-3-FORWARD-SHADOW-CLOSURE-VERIFICATION** at substrate-arc level — v660 STS-51-D arc opens, v667 STS-51-I arc closes via direct-spacewalker-contact activation.
-- **SCAFFOLD-PENDING engine-state suppression** first observation as brief-discipline pattern (mission's original ship had MUS/ELC/SPS/TRS in SCAFFOLD-PENDING; this rebuild does not regenerate scaffold content).
-- **Lesson #10408 candidate HIGHER-BOUND PROMOTION THRESHOLD MET at obs#5.**
-
-## Engine state at close
-
-| Metric | Value |
-|---|---|
-| NASA degree | 1.168 (UNCHANGED) |
-| Canonical-layout gate | 169/169 canonical |
-| Substrate-era missions with full canonical sibling files | 5 of 51 |
-| Lesson #10408 candidate obs count | obs#5 cumulative (HIGHER-BOUND MET) |
-
+> Following v1.49.719 — _NASA Canonical Sibling Files Restoration: v1.121 STS-51-F Spacelab-2 Rebuild_, v1.49.720 ships as NASA Canonical Sibling Files Restoration: v1.122 STS-51-I Discovery LEASAT-3 Rescue-Recovery Rebuild.
+# v1.49.720 — NASA Canonical Sibling Files Restoration: v1.122 STS-51-I Discovery LEASAT-3 Rescue-Recovery Rebuild
+**Shipped:** 2026-05-21
+**Commits:** 2 | **Files:** 15 | **Lines:** +229 / -70
+_Parse confidence: 0.50 — source `docs/release-notes/v1.49.720/README.md`_
+## Summary
+No structured feature list was captured for this release; see the source README for prose details.
+It also produced retrospective content (decisions, lessons_learned, surprises); see `03-retrospective.md`.
 ---
-**Prev:** [v1.49.719 README](../../v1.49.719/README.md) · **Next:** v1.49.721+
+**Prev:** [v1.49.719](../v1.49.719/00-summary.md) · _(current tip)_

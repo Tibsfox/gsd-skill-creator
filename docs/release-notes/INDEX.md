@@ -2,10 +2,11 @@
 
 _Generated 2026-05-22 from `release_history.*`. Source of truth: Postgres._
 
-**762 releases.** 761 with retrospective. 643 with extracted lessons.
+**763 releases.** 762 with retrospective. 643 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
+| `v1.49.720` | NASA Canonical Sibling Files Restoration: v1.122 STS-51-I Discovery LEASAT-3 Rescue-Recovery Rebuild | 2026-05-21 | ✓ | — | [read](v1.49.720/00-summary.md) |
 | `v1.49.719` | NASA Canonical Sibling Files Restoration: v1.121 STS-51-F Spacelab-2 Rebuild | 2026-05-21 | ✓ | — | [read](v1.49.719/00-summary.md) |
 | `v1.49.718` | NASA Canonical Sibling Files Restoration: v1.120 STS-51-G Discovery Rebuild | 2026-05-21 | ✓ | — | [read](v1.49.718/00-summary.md) |
 | `v1.49.717` | NASA Canonical Sibling Files Restoration: v1.119 STS-51-B Challenger Spacelab-3 Rebuild | 2026-05-21 | ✓ | — | [read](v1.49.717/00-summary.md) |
