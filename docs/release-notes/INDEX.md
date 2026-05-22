@@ -2,10 +2,11 @@
 
 _Generated 2026-05-22 from `release_history.*`. Source of truth: Postgres._
 
-**763 releases.** 762 with retrospective. 643 with extracted lessons.
+**764 releases.** 763 with retrospective. 643 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
+| `v1.49.721` | NASA Canonical Sibling Files Restoration: v1.123 STS-51-J Atlantis Maiden-Flight DoD-Classified Rebuild + Lesson #10408 PROMOTION TO ESTABLISHED | 2026-05-22 | ✓ | — | [read](v1.49.721/00-summary.md) |
 | `v1.49.720` | NASA Canonical Sibling Files Restoration: v1.122 STS-51-I Discovery LEASAT-3 Rescue-Recovery Rebuild | 2026-05-21 | ✓ | — | [read](v1.49.720/00-summary.md) |
 | `v1.49.719` | NASA Canonical Sibling Files Restoration: v1.121 STS-51-F Spacelab-2 Rebuild | 2026-05-21 | ✓ | — | [read](v1.49.719/00-summary.md) |
 | `v1.49.718` | NASA Canonical Sibling Files Restoration: v1.120 STS-51-G Discovery Rebuild | 2026-05-21 | ✓ | — | [read](v1.49.718/00-summary.md) |
@@ -696,8 +697,8 @@ _Generated 2026-05-22 from `release_history.*`. Source of truth: Postgres._
 | `v1.49.23` | Unison Language & Math Co-Processor Completion | 2026-03-08 | ✓ | 23 | [read](v1.49.23/00-summary.md) |
 | `v1.49.22` | PNW Research Series | 2026-03-07 | ✓ | 24 | [read](v1.49.22/00-summary.md) |
 | `v1.49.21` | Image to Mission Pipeline | 2026-03-07 | ✓ | 22 | [read](v1.49.21/00-summary.md) |
-| `v1.49.20.1` | Documentation Reflections | 2026-03-06 | — | — | [read](v1.49.20.1/00-summary.md) |
 | `v1.49.20` | Documentation Consolidation | 2026-03-06 | ✓ | 13 | [read](v1.49.20/00-summary.md) |
+| `v1.49.20.1` | Documentation Reflections | 2026-03-06 | — | — | [read](v1.49.20.1/00-summary.md) |
 | `v1.49.19` | Gastown Chipset Integration | 2026-03-06 | ✓ | 19 | [read](v1.49.19/00-summary.md) |
 | `v1.49.18` | Space Between Observatory | 2026-03-06 | ✓ | 17 | [read](v1.49.18/00-summary.md) |
 | `v1.49.17` | The Space Between | 2026-03-04 | ✓ | 19 | [read](v1.49.17/00-summary.md) |

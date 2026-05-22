@@ -1,28 +1,10 @@
-# 00 — Summary: v1.49.721 NASA Canonical Sibling Files Restoration — v1.123 STS-51-J Atlantis Maiden DoD + Lesson #10408 PROMOTION
-
-**Released:** 2026-05-22
-**Type:** counter-cadence campaign continuation + lesson promotion
-**Engine forward-state:** UNCHANGED
-
-## Structural firsts
-
-- **Sixth mission rebuild in NASA Canonical Sibling Files Restoration Campaign.**
-- **Lesson #10408 PROMOTED candidate → ESTABLISHED** at obs#6 sustainment.
-- **Atlantis maiden-flight 4th-operational-orbiter-first-flight milestone substrate** rebuilt in canonical sibling files form.
-- **SCAFFOLD-PENDING engine-state suppression sustained obs#2 cumulative** (v1.122 + v1.123).
-
-## Engine state at close
-
-| Metric | Value |
-|---|---|
-| NASA degree | 1.168 (UNCHANGED) |
-| Canonical-layout gate | 169/169 canonical |
-| Substrate-era missions with full canonical sibling files | 6 of 51 |
-| Lesson #10408 status | **ESTABLISHED** (promoted from candidate at obs#6 cumulative) |
-
-## Lesson #10408 promotion summary
-
-Six clean observations across six substrate-form-distinct mission classes, tool-use band 28-36 mean ~31, zero filter trips across all 6 ships. Pattern fully validated and now load-bearing.
-
+> Following v1.49.720 — _NASA Canonical Sibling Files Restoration: v1.122 STS-51-I Discovery LEASAT-3 Rescue-Recovery Rebuild_, v1.49.721 ships as NASA Canonical Sibling Files Restoration: v1.123 STS-51-J Atlantis Maiden-Flight DoD-Classified Rebuild + Lesson #10408 PROMOTION TO ESTABLISHED.
+# v1.49.721 — NASA Canonical Sibling Files Restoration: v1.123 STS-51-J Atlantis Maiden-Flight DoD-Classified Rebuild + Lesson #10408 PROMOTION TO ESTABLISHED
+**Shipped:** 2026-05-22
+**Commits:** 2 | **Files:** 15 | **Lines:** +263 / -74
+_Parse confidence: 0.50 — source `docs/release-notes/v1.49.721/README.md`_
+## Summary
+No structured feature list was captured for this release; see the source README for prose details.
+It also produced retrospective content (decisions, lessons_learned, surprises); see `03-retrospective.md`.
 ---
-**Prev:** [v1.49.720 README](../../v1.49.720/README.md) · **Next:** v1.49.722+
+**Prev:** [v1.49.720](../v1.49.720/00-summary.md) · _(current tip)_
