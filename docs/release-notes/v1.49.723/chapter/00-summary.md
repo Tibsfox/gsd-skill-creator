@@ -1,24 +1,10 @@
-# 00 — Summary: v1.49.723 NASA Canonical Sibling Files Restoration — v1.125 STS-61-B Atlantis EASE/ACCESS Rebuild
-
-**Released:** 2026-05-22
-**Type:** counter-cadence campaign continuation
-**Engine forward-state:** UNCHANGED
-
-## Structural firsts
-
-- **Eighth mission rebuild in campaign.**
-- **EASE/ACCESS space-station-assembly construction-techniques substrate-anchor** rebuilt as primary narrative thread (substrate-relevance to Freedom + ISS).
-- **First Mexican astronaut + first Mexican comsat + first 3-flight industry PS career + Atlantis operational-cadence first-observation** all rebuilt in single sibling-files-rebuild.
-
-## Engine state at close
-
-| Metric | Value |
-|---|---|
-| NASA degree | 1.168 (UNCHANGED) |
-| Canonical-layout gate | 169/169 canonical |
-| Substrate-era missions with full canonical sibling files | 8 of 51 |
-| Lesson #10408 status | ESTABLISHED (obs#8 cumulative) |
-| SCAFFOLD-PENDING suppression discipline | obs#4 cumulative |
-
+> Following v1.49.722 — _NASA Canonical Sibling Files Restoration: v1.124 STS-61-A Spacelab-D1 International-Funded Rebuild_, v1.49.723 ships as NASA Canonical Sibling Files Restoration: v1.125 STS-61-B Atlantis 2nd Flight EASE/ACCESS Rebuild.
+# v1.49.723 — NASA Canonical Sibling Files Restoration: v1.125 STS-61-B Atlantis 2nd Flight EASE/ACCESS Rebuild
+**Shipped:** 2026-05-22
+**Commits:** 2 | **Files:** 15 | **Lines:** +201 / -76
+_Parse confidence: 0.50 — source `docs/release-notes/v1.49.723/README.md`_
+## Summary
+No structured feature list was captured for this release; see the source README for prose details.
+It also produced retrospective content (decisions, lessons_learned, surprises); see `03-retrospective.md`.
 ---
-**Prev:** [v1.49.722 README](../../v1.49.722/README.md) · **Next:** v1.49.724+
+**Prev:** [v1.49.722](../v1.49.722/00-summary.md) · _(current tip)_

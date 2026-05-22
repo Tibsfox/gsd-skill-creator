@@ -1,24 +1,17 @@
-# 03 — Retrospective: v1.49.723 Process
+# Retrospective — v1.49.723
 
-## Carryover lessons applied
+## Decisions
 
-- Lesson #10406 candidate POSITIVE-FRAMING: obs#12 cumulative.
-- Lesson #10407 candidate DISPATCH-PROMPT-DENSITY: obs#11 cumulative.
-- Lesson #10408 ESTABLISHED: obs#8 cumulative.
-- W3.5 chapter-gen bake-in: obs#15 cumulative.
+**EASE/ACCESS space-station-assembly substrate framing.** v1.125's primary substrate-anchor is the first-time on-orbit demonstration of space-station-class truss-assembly techniques via EASE + ACCESS EVAs. Sub-agent organized the narrative around the construction-techniques substrate (substrate-relevance to Freedom Space Station + ISS programs) rather than the commercial-comsat-deploy substrate. Pattern: substrate-form-distinct mission-class identification drives narrative framing.
 
-## Operational metrics
+**Sub-agent went deeper than v1.124 baseline (~35,672 vs ~28,500 words).** Likely driven by richer substrate density (EASE/ACCESS + Mexican-international-first + commercial-industry-3-flight + Atlantis-operational-cadence + EVA-construction + Ross-future-7-flight all in one mission). Tool-use 35 within band (28-36).
 
-- Sub-agent tool uses: 35 (upper edge of 28-36 band)
-- Total deliverables: 13 mission sibling files + 5 release-notes
-- Content-filter trips: 0
-- Word count: ~35,672 (deeper than v1.124 baseline due to rich substrate density)
+## Surprises
 
-## Process surprises
+**Tool-use 35 at upper edge of band.** v1.118: 36; v1.119: 28; v1.120: 32; v1.121: 28; v1.122: 30; v1.123: 34; v1.124: 33; v1.125: 35. Eight-observation band: 28-36, mean ~32, sigma ~3. v1.125 + v1.118 + v1.123 cluster at upper edge; v1.119 + v1.121 at lower edge.
 
-- Sub-agent recognized EASE/ACCESS substrate-relevance (Freedom + ISS engineering-validation precedent) and elevated it to primary narrative thread.
+**Construction-techniques narrative framed cleanly.** EASE/ACCESS could have been framed as a niche EVA experiment; sub-agent recognized its substrate-relevance as a Freedom + ISS engineering-validation precedent and elevated it to primary substrate-anchor of the rebuild.
 
-## Carryforward to v1.49.724+
+## Lessons Learned
 
-- Next target: v1.126
-- Pattern stable; same template applies
+# 04 — Lessons Learned: v1.49.723 Forward Lessons
