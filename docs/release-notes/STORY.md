@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.726`.
+The story begins at `v1.0` and continues to `v1.49.727`.
 
-**769 chapters.** 768 have retrospectives.
+**770 chapters.** 769 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -777,3 +777,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.724](v1.49.724/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.126 STS-61-C Columbia 7th Flight Chang-Díaz Rebuild · 2026-05-22
 - **[v1.49.725](v1.49.725/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.127 Voyager 2 Uranus Encounter Rebuild · 2026-05-22
 - **[v1.49.726](v1.49.726/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.128 STS-51-L Challenger Memorial Rebuild · 2026-05-22
+- **[v1.49.727](v1.49.727/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.129 Rogers Commission Report Rebuild · 2026-05-22
