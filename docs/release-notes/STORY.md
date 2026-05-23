@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.742`.
+The story begins at `v1.0` and continues to `v1.49.743`.
 
-**785 chapters.** 784 have retrospectives.
+**786 chapters.** 785 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -793,3 +793,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.740](v1.49.740/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.142 STS-30 Atlantis First US Planetary Mission From Shuttle + Magellan Venus Radar Mapper Deployment Rebuild (Path B Hand-Author) · 2026-05-23
 - **[v1.49.741](v1.49.741/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.143 STS-31 Discovery First Hubble Space Telescope Launch Rebuild (Path B Hand-Author) · 2026-05-23
 - **[v1.49.742](v1.49.742/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.144 Kvant-2 Second Mir Module Rebuild (Path B Hand-Author) · 2026-05-23
+- **[v1.49.743](v1.49.743/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.145 STS-33 Atlantis DoD-Classified Third Post-Challenger Flight + First Night Shuttle Launch Post-Challenger + USA-48 Magnum-2 SIGINT + First African-American Shuttle Commander Gregory Rebuild (Path B Hand-Author) · 2026-05-23
