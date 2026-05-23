@@ -2,10 +2,11 @@
 
 _Generated 2026-05-23 from `release_history.*`. Source of truth: Postgres._
 
-**787 releases.** 786 with retrospective. 662 with extracted lessons.
+**788 releases.** 787 with retrospective. 663 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
+| `v1.49.745` | NASA Canonical Sibling Files Restoration: v1.147 STS-32 Columbia LDEF Retrieval First Ever + 5y 9m Forward-Shadow Closure from STS-41-C + First 10-Day Shuttle Mission + First Shuttle Night Landing + Syncom IV-5 Deployment + Columbia OV-102 Ninth Flight + Brandenstein 3rd Flight Commander + Wetherbee Rookie Future 6-Flight CDR Record + Dunbar Future Mir-25 NASA Visitor + Ivins Future STS-98 Destiny-Lab + Low Rookie NASA-Legacy-Family Cohort + Chronological-Forward Resumed at v694 Rebuild (Path B Hand-Author) | 2026-05-23 | ✓ | 4 | [read](v1.49.745/00-summary.md) |
 | `v1.49.744` | NASA Canonical Sibling Files Restoration: v1.146 STS-34 Atlantis Galileo Jupiter First US Jupiter-Bound Planetary Probe + Galileo Orbiter and Atmospheric Entry Probe + 6-Year VEEGA Interplanetary Cruise + IUS Civilian-Planetary Deployment + Atlantis OV-104 Fifth Flight + Lucid Second Flight Future NASA-1 Mir Resident + Chang-Diaz Second Flight Future 7-Flight Veteran + Baker Rookie Future First US-Mir Docking + Williams Memorial 27-Year Forward-Shadow + Chronological Inversion Sustained Obs#2 Rebuild (Path B Hand-Author) | 2026-05-23 | ✓ | 4 | [read](v1.49.744/00-summary.md) |
 | `v1.49.743` | NASA Canonical Sibling Files Restoration: v1.145 STS-33 Atlantis DoD-Classified Third Post-Challenger Flight + First Night Shuttle Launch Post-Challenger + USA-48 Magnum-Orion-2 SIGINT + First African-American Shuttle Commander Gregory Rebuild (Path B Hand-Author) | 2026-05-23 | ✓ | 4 | [read](v1.49.743/00-summary.md) |
 | `v1.49.742` | NASA Canonical Sibling Files Restoration: v1.144 Kvant-2 Second Mir Module Rebuild (Path B Hand-Author) | 2026-05-23 | ✓ | 5 | [read](v1.49.742/00-summary.md) |
@@ -720,8 +721,8 @@ _Generated 2026-05-23 from `release_history.*`. Source of truth: Postgres._
 | `v1.49.23` | Unison Language & Math Co-Processor Completion | 2026-03-08 | ✓ | 23 | [read](v1.49.23/00-summary.md) |
 | `v1.49.22` | PNW Research Series | 2026-03-07 | ✓ | 24 | [read](v1.49.22/00-summary.md) |
 | `v1.49.21` | Image to Mission Pipeline | 2026-03-07 | ✓ | 22 | [read](v1.49.21/00-summary.md) |
-| `v1.49.20.1` | Documentation Reflections | 2026-03-06 | — | — | [read](v1.49.20.1/00-summary.md) |
 | `v1.49.20` | Documentation Consolidation | 2026-03-06 | ✓ | 13 | [read](v1.49.20/00-summary.md) |
+| `v1.49.20.1` | Documentation Reflections | 2026-03-06 | — | — | [read](v1.49.20.1/00-summary.md) |
 | `v1.49.19` | Gastown Chipset Integration | 2026-03-06 | ✓ | 19 | [read](v1.49.19/00-summary.md) |
 | `v1.49.18` | Space Between Observatory | 2026-03-06 | ✓ | 17 | [read](v1.49.18/00-summary.md) |
 | `v1.49.17` | The Space Between | 2026-03-04 | ✓ | 19 | [read](v1.49.17/00-summary.md) |
