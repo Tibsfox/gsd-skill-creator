@@ -1,6 +1,6 @@
 # GSD Skill Creator
 
-An adaptive learning and coprocessor architecture for [Claude Code](https://docs.anthropic.com/en/docs/build-with-claude/claude-code), built as an extension to [GSD (Get Shit Done)](https://github.com/gsd-build) -> now [GSD(open-gsd)](https://github.com/open-gsd/get-shit-done-redux)
+An adaptive learning and coprocessor architecture for [Claude Code](https://docs.anthropic.com/en/docs/build-with-claude/claude-code), built as an extension to [GSD (Get Shit Done)](https://github.com/gsd-build) -> now [GSD (open-gsd)](https://github.com/open-gsd/get-shit-done-redux)
 
 ```
 
