@@ -27,7 +27,7 @@ See `README.md` for full retrospective content.
 
 # Lessons — v1.49.753
 
-~17 lessons extracted. Classification source: rule-based | LLM tiebreaker (needs review) | human.
+17 lessons extracted. Classification source: rule-based | LLM tiebreaker (needs review) | human.
 
 1. **Lesson #10408 ESTABLISHED extends across twenty-eighth mission-class boundary**
    **Lesson #10408 ESTABLISHED extends across twenty-eighth mission-class boundary**
