@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.746`.
+The story begins at `v1.0` and continues to `v1.49.747`.
 
-**789 chapters.** 788 have retrospectives.
+**790 chapters.** 789 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -797,3 +797,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.744](v1.49.744/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.146 STS-34 Atlantis Galileo Jupiter First US Jupiter-Bound Planetary Probe + Galileo Orbiter and Atmospheric Entry Probe + 6-Year VEEGA Interplanetary Cruise + IUS Civilian-Planetary Deployment + Atlantis OV-104 Fifth Flight + Lucid Second Flight Future NASA-1 Mir Resident + Chang-Diaz Second Flight Future 7-Flight Veteran + Baker Rookie Future First US-Mir Docking + Williams Memorial 27-Year Forward-Shadow + Chronological Inversion Sustained Obs#2 Rebuild (Path B Hand-Author) · 2026-05-23
 - **[v1.49.745](v1.49.745/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.147 STS-32 Columbia LDEF Retrieval First Ever + 5y 9m Forward-Shadow Closure from STS-41-C + First 10-Day Shuttle Mission + First Shuttle Night Landing + Syncom IV-5 Deployment + Columbia OV-102 Ninth Flight + Brandenstein 3rd Flight Commander + Wetherbee Rookie Future 6-Flight CDR Record + Dunbar Future Mir-25 NASA Visitor + Ivins Future STS-98 Destiny-Lab + Low Rookie NASA-Legacy-Family Cohort + Chronological-Forward Resumed at v694 Rebuild (Path B Hand-Author) · 2026-05-23
 - **[v1.49.746](v1.49.746/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.148 STS-107 Columbia Research Mission + SPACEHAB Research Double Module + 80+ Microgravity Experiments + FREESTAR Cross-Bay Carrier + Israeli First Astronaut Ramon + Columbia OV-102 28th and Final Flight + CATASTROPHIC-CLOSURE Cohort Obs#2 Cumulative + Memorial Substrate Seven Crew + CAIB Investigation Cohort Opens + Post-2003 Shuttle Stand-Down Opens Rebuild (Path B Hand-Author) · 2026-05-23
+- **[v1.49.747](v1.49.747/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.149 Spirit MER-A Mars Exploration Rover + First MER-Program Rover + Gusev Crater Landing + Athena Science Payload + 2210-Sol Operational Lifetime + 7.73 km Cumulative Drive + Husband Hill First-Martian-Summit Ascent + Home Plate Past-Hydrothermal-Activity Evidence + Columbia Hills Memorial-Naming Continuity + MER-Program Dual-Rover Deployment + Substrate-Axis-Rotation #21 INTER-PROGRAM + ROBOTIC-DEEP-SPACE-SCIENCE Substrate-Axis Opens Rebuild (Path A Sub-Agent Dispatch) · 2026-05-23
