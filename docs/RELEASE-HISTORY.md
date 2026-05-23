@@ -1,15 +1,16 @@
 # Release History
 
-784 milestones shipped across the v1.0 → v1.49.741 arc. The table below lists every shipped release, newest first.
+785 milestones shipped across the v1.0 → v1.49.742 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 784 releases · 783 with retrospectives · 659 with extracted lessons · quality A:642 B:16 C:27 D:45 F:54 (avg 91) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 785 releases · 784 with retrospectives · 660 with extracted lessons · quality A:642 B:16 C:27 D:46 F:54 (avg 91) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.742](release-notes/v1.49.742) | NASA Canonical Sibling Files Restoration: v1.144 Kvant-2 Second Mir Module Rebuild (Path B Hand-Author) | 2026-05-23 | 2 | — | — | [s](release-notes/v1.49.742/chapter/00-summary.md) [r](release-notes/v1.49.742/chapter/03-retrospective.md) [l](release-notes/v1.49.742/chapter/04-lessons.md) [c](release-notes/v1.49.742/chapter/99-context.md) | 5 | D 65 |  |
 | [v1.49.741](release-notes/v1.49.741) | NASA Canonical Sibling Files Restoration: v1.143 STS-31 Discovery First Hubble Space Telescope Launch Rebuild (Path B Hand-Author) | 2026-05-23 | 2 | — | — | [s](release-notes/v1.49.741/chapter/00-summary.md) [r](release-notes/v1.49.741/chapter/03-retrospective.md) [l](release-notes/v1.49.741/chapter/04-lessons.md) [c](release-notes/v1.49.741/chapter/99-context.md) | 5 | D 65 |  |
 | [v1.49.740](release-notes/v1.49.740) | NASA Canonical Sibling Files Restoration: v1.142 STS-30 Atlantis First US Planetary Mission From Shuttle + Magellan Venus Radar Mapper Deployment Rebuild (Path B Hand-Author) | 2026-05-23 | 2 | — | — | [s](release-notes/v1.49.740/chapter/00-summary.md) [r](release-notes/v1.49.740/chapter/03-retrospective.md) [l](release-notes/v1.49.740/chapter/04-lessons.md) [c](release-notes/v1.49.740/chapter/99-context.md) | 5 | D 65 |  |
 | [v1.49.739](release-notes/v1.49.739) | NASA Canonical Sibling Files Restoration: v1.141 STS-29 Discovery Third Post-Challenger Flight + TDRS-4 Constellation Completion Rebuild (Path B Hand-Author) | 2026-05-23 | 2 | — | — | [s](release-notes/v1.49.739/chapter/00-summary.md) [r](release-notes/v1.49.739/chapter/03-retrospective.md) [l](release-notes/v1.49.739/chapter/04-lessons.md) [c](release-notes/v1.49.739/chapter/99-context.md) | 5 | D 65 |  |
