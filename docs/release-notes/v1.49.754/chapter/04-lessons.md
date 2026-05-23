@@ -39,37 +39,37 @@
    _⚙ Status: `investigate` · lesson #10978_
 
 10. **Substrate-novel LONG-MARCH-5-CZ-5-Y4-FIRST-MARS-LAUNCH substrate-anchor codified at v1.156**
-    **Substrate-novel LONG-MARCH-5-CZ-5-Y4-FIRST-MARS-LAUNCH substrate-anchor codified at v1.156**
-    _⚙ Status: `investigate` · lesson #10979_
+   **Substrate-novel LONG-MARCH-5-CZ-5-Y4-FIRST-MARS-LAUNCH substrate-anchor codified at v1.156**
+   _⚙ Status: `investigate` · lesson #10979_
 
 11. **Substrate-novel orbiter 7-instrument + Zhurong rover 6-instrument science suite substrate-anchors codified at v1.156**
-    **Substrate-novel orbiter 7-instrument + Zhurong rover 6-instrument science suite substrate-anchors codified at v1.156**
-    _⚙ Status: `investigate` · lesson #10980_
+   **Substrate-novel orbiter 7-instrument + Zhurong rover 6-instrument science suite substrate-anchors codified at v1.156**
+   _⚙ Status: `investigate` · lesson #10980_
 
 12. **Substrate-novel SUB-SURFACE-STRATIGRAPHY-AT-UTOPIA-PLANITIA-PER-ZHURONG-ROPER-PER-LI-NATURE-610-2022 substrate-anchor codified at v1.156**
-    **Substrate-novel SUB-SURFACE-STRATIGRAPHY-AT-UTOPIA-PLANITIA-PER-ZHURONG-ROPER-PER-LI-NATURE-610-2022 substrate-anchor codified at v1.156**
-    _⚙ Status: `investigate` · lesson #10981_
+   **Substrate-novel SUB-SURFACE-STRATIGRAPHY-AT-UTOPIA-PLANITIA-PER-ZHURONG-ROPER-PER-LI-NATURE-610-2022 substrate-anchor codified at v1.156**
+   _⚙ Status: `investigate` · lesson #10981_
 
 13. **Substrate-novel HYDRATED-MINERALS-PER-MARSCODE-LIBS-PER-LIU-NATURE-ASTRONOMY-6-2022 substrate-anchor codified at v1.156**
-    **Substrate-novel HYDRATED-MINERALS-PER-MARSCODE-LIBS-PER-LIU-NATURE-ASTRONOMY-6-2022 substrate-anchor codified at v1.156**
-    _⚙ Status: `investigate` · lesson #10982_
+   **Substrate-novel HYDRATED-MINERALS-PER-MARSCODE-LIBS-PER-LIU-NATURE-ASTRONOMY-6-2022 substrate-anchor codified at v1.156**
+   _⚙ Status: `investigate` · lesson #10982_
 
 14. **MARS-ORBITAL-SURVEY-COHORT substrate-realization obs#5 cumulative codified at v1.156**
-    **MARS-ORBITAL-SURVEY-COHORT substrate-realization obs#5 cumulative codified at v1.156**
-    _⚙ Status: `investigate` · lesson #10983_
+   **MARS-ORBITAL-SURVEY-COHORT substrate-realization obs#5 cumulative codified at v1.156**
+   _⚙ Status: `investigate` · lesson #10983_
 
-15. **MARS-SURFACE-MOBILE-ROVER-COHORT obs#4 + SOLAR-ARRAY-DUST-ACCUMULATION-MISSION-CONCLUSION-COHORT obs#2 + MARS-MASS-SPECTROMETRY-LIBS-COHORT obs#3 + MARS-GROUND-PENETRATING-SUBSURFACE-RADAR-COHORT obs#2 substrate-realizations cumulative codified at v1.156**
-    **MARS-SURFACE-MOBILE-ROVER-COHORT obs#4 + SOLAR-ARRAY-DUST-ACCUMULATION-MISSION-CONCLUSION-COHORT obs#2 + MARS-MASS-SPECTROMETRY-LIBS-COHORT obs#3 + MARS-GROUND-PENETRATING-SUBSURFACE-RADAR-COHORT obs#2 substrate-realizations cumulative codified at v1.156**
-    _⚙ Status: `investigate` · lesson #10984_
+15. **MARS-SURFACE-MOBILE-ROVER-COHORT obs#4 + SOLAR-ARRAY-DUST-ACCUMULATION-MISSION-CONCLUSION-COHORT obs#2 + MARS-MASS-SPECTROMETRY-LIBS-COHORT obs#3 + MARS-GROUND-PENETRATING-SUBSURFACE-RADAR-COHORT ob**
+   **MARS-SURFACE-MOBILE-ROVER-COHORT obs#4 + SOLAR-ARRAY-DUST-ACCUMULATION-MISSION-CONCLUSION-COHORT obs#2 + MARS-MASS-SPECTROMETRY-LIBS-COHORT obs#3 + MARS-GROUND-PENETRATING-SUBSURFACE-RADAR-COHORT obs#2 substrate-realizations cumulative codified at v1.156**
+   _⚙ Status: `investigate` · lesson #10984_
 
 16. **INTRA-AXIS-CONTINUATION-WITHIN-ROBOTIC-DEEP-SPACE-SCIENCE obs#8 cumulative codified at v1.156**
-    **INTRA-AXIS-CONTINUATION-WITHIN-ROBOTIC-DEEP-SPACE-SCIENCE obs#8 cumulative codified at v1.156**
-    _⚙ Status: `investigate` · lesson #10985_
+   **INTRA-AXIS-CONTINUATION-WITHIN-ROBOTIC-DEEP-SPACE-SCIENCE obs#8 cumulative codified at v1.156**
+   _⚙ Status: `investigate` · lesson #10985_
 
 17. **SUBSTRATE-AXIS-STABILITY-SUSTAINED obs#8 cumulative codified at v1.156**
-    **SUBSTRATE-AXIS-STABILITY-SUSTAINED obs#8 cumulative codified at v1.156**
-    _⚙ Status: `investigate` · lesson #10986_
+   **SUBSTRATE-AXIS-STABILITY-SUSTAINED obs#8 cumulative codified at v1.156**
+   _⚙ Status: `investigate` · lesson #10986_
 
 18. **ROBOTIC-DEEP-SPACE-SCIENCE substrate-axis sustains substrate-form-stable from v696+v697+v698+v699+v700+v701+v702**
-    **ROBOTIC-DEEP-SPACE-SCIENCE substrate-axis sustains substrate-form-stable from v696+v697+v698+v699+v700+v701+v702**
-    _⚙ Status: `investigate` · lesson #10987_
+   **ROBOTIC-DEEP-SPACE-SCIENCE substrate-axis sustains substrate-form-stable from v696+v697+v698+v699+v700+v701+v702**
+   _⚙ Status: `investigate` · lesson #10987_
