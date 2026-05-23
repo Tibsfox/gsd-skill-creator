@@ -1,11 +1,12 @@
 # Release History — Chapter Index
 
-_Generated 2026-05-22 from `release_history.*`. Source of truth: Postgres._
+_Generated 2026-05-23 from `release_history.*`. Source of truth: Postgres._
 
-**781 releases.** 780 with retrospective. 656 with extracted lessons.
+**782 releases.** 781 with retrospective. 657 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
+| `v1.49.739` | NASA Canonical Sibling Files Restoration: v1.141 STS-29 Discovery Third Post-Challenger Flight + TDRS-4 Constellation Completion Rebuild (Path B Hand-Author) | 2026-05-23 | ✓ | 5 | [read](v1.49.739/00-summary.md) |
 | `v1.49.738` | NASA Canonical Sibling Files Restoration: v1.140 Buran 1.01 Unmanned Single Orbital Flight Rebuild (Path B Hand-Author) | 2026-05-22 | ✓ | 5 | [read](v1.49.738/00-summary.md) |
 | `v1.49.737` | NASA Canonical Sibling Files Restoration: v1.139 Soyuz TM-7 EO-4 Rebuild (Path B Hand-Author) | 2026-05-22 | ✓ | 5 | [read](v1.49.737/00-summary.md) |
 | `v1.49.736` | NASA Canonical Sibling Files Restoration: v1.138 STS-27 Atlantis Rebuild (Path B Hand-Author) | 2026-05-22 | ✓ | 5 | [read](v1.49.736/00-summary.md) |
@@ -714,8 +715,8 @@ _Generated 2026-05-22 from `release_history.*`. Source of truth: Postgres._
 | `v1.49.23` | Unison Language & Math Co-Processor Completion | 2026-03-08 | ✓ | 23 | [read](v1.49.23/00-summary.md) |
 | `v1.49.22` | PNW Research Series | 2026-03-07 | ✓ | 24 | [read](v1.49.22/00-summary.md) |
 | `v1.49.21` | Image to Mission Pipeline | 2026-03-07 | ✓ | 22 | [read](v1.49.21/00-summary.md) |
-| `v1.49.20.1` | Documentation Reflections | 2026-03-06 | — | — | [read](v1.49.20.1/00-summary.md) |
 | `v1.49.20` | Documentation Consolidation | 2026-03-06 | ✓ | 13 | [read](v1.49.20/00-summary.md) |
+| `v1.49.20.1` | Documentation Reflections | 2026-03-06 | — | — | [read](v1.49.20.1/00-summary.md) |
 | `v1.49.19` | Gastown Chipset Integration | 2026-03-06 | ✓ | 19 | [read](v1.49.19/00-summary.md) |
 | `v1.49.18` | Space Between Observatory | 2026-03-06 | ✓ | 17 | [read](v1.49.18/00-summary.md) |
 | `v1.49.17` | The Space Between | 2026-03-04 | ✓ | 19 | [read](v1.49.17/00-summary.md) |
