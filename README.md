@@ -6,7 +6,7 @@ An adaptive learning and coprocessor architecture for [Claude Code](https://docs
 
 npx get-shit-done-cc@latest
 
-npx gsd-skill-creator@latest
+npx @opengsd/get-shit-done-redux@latest
 
 ```
 
