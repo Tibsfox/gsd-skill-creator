@@ -2,10 +2,11 @@
 
 _Generated 2026-05-23 from `release_history.*`. Source of truth: Postgres._
 
-**790 releases.** 789 with retrospective. 664 with extracted lessons.
+**791 releases.** 790 with retrospective. 665 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
+| `v1.49.748` | NASA Canonical Sibling Files Restoration: v1.150 Opportunity MER-B Mars Exploration Rover + Second MER-Program Rover Substrate-Cohort-Pair Realization with Spirit MER-A + 2003-07-08 CCAFS SLC-17B Launch on Delta II 7925H-9.5 First Flight of Delta II Heavy + 2004-01-25 Eagle Crater Meridiani Planum Hole-In-One Landing + Athena Science Payload Identical to Spirit + 5111-Sol Operational Lifetime + 45.16 km Cumulative Drive + First Mars Marathon + Hematite Blueberries First In-Situ Confirmation of Orbital TES Signature + Burns Formation Sedimentary Cross-Bedding + Jarosite Acidic Aqueous Chemistry Direct Mineralogy + Heat Shield Rock First Meteorite on Another Planet + Endeavour Crater Noachian Materials Phyllosilicate Signatures + Homestake Gypsum Vein Neutral-pH Water Substrate-Distinct + Last Surviving Pre-Curiosity Mars Surface Asset + Opportunity Explorer-Ship Feature-Naming Substrate-Form + INTRA-PROGRAM Continuation + SUBSTRATE-AXIS-STABILITY-SUSTAINED + ROBOTIC-DEEP-SPACE-SCIENCE Substrate-Axis Sustains Rebuild (Path A Sub-Agent Dispatch) | 2026-05-23 | ✓ | 21 | [read](v1.49.748/00-summary.md) |
 | `v1.49.747` | NASA Canonical Sibling Files Restoration: v1.149 Spirit MER-A Mars Exploration Rover + First MER-Program Rover + 2003-06-10 CCAFS SLC-17A Launch on Delta II 7925-9.5 Heavy + 2004-01-04 Gusev Crater Landing + Athena Science Payload + 2210-Sol Operational Lifetime + 7.73 km Cumulative Drive + Husband Hill First-Martian-Summit Ascent + Home Plate Past-Hydrothermal-Activity Evidence + Paso Robles Sulfate Substrate + Martian Dust-Devil Solar-Array Cleaning + Columbia Hills Memorial-Naming Continuity + MER-Program Dual-Rover Deployment + Substrate-Axis-Rotation #21 INTER-PROGRAM + ROBOTIC-DEEP-SPACE-SCIENCE Substrate-Axis Opens + CHRONOLOGICAL-FORWARD-AT-V696 Rebuild (Path A Sub-Agent Dispatch) | 2026-05-23 | ✓ | — | [read](v1.49.747/00-summary.md) |
 | `v1.49.746` | NASA Canonical Sibling Files Restoration: v1.148 STS-107 Columbia Research Mission + SPACEHAB Research Double Module + 80+ Microgravity Experiments + FREESTAR Cross-Bay Carrier + Israeli First Astronaut Ramon + Columbia OV-102 28th and Final Flight + CATASTROPHIC-CLOSURE Cohort Obs#2 Cumulative + Memorial Substrate Seven Crew + CAIB Investigation Cohort Opens + Post-2003 Shuttle Stand-Down Opens Rebuild (Path B Hand-Author) | 2026-05-23 | ✓ | 17 | [read](v1.49.746/00-summary.md) |
 | `v1.49.745` | NASA Canonical Sibling Files Restoration: v1.147 STS-32 Columbia LDEF Retrieval First Ever + 5y 9m Forward-Shadow Closure from STS-41-C + First 10-Day Shuttle Mission + First Shuttle Night Landing + Syncom IV-5 Deployment + Columbia OV-102 Ninth Flight + Brandenstein 3rd Flight Commander + Wetherbee Rookie Future 6-Flight CDR Record + Dunbar Future Mir-25 NASA Visitor + Ivins Future STS-98 Destiny-Lab + Low Rookie NASA-Legacy-Family Cohort + Chronological-Forward Resumed at v694 Rebuild (Path B Hand-Author) | 2026-05-23 | ✓ | 4 | [read](v1.49.745/00-summary.md) |
@@ -723,8 +724,8 @@ _Generated 2026-05-23 from `release_history.*`. Source of truth: Postgres._
 | `v1.49.23` | Unison Language & Math Co-Processor Completion | 2026-03-08 | ✓ | 23 | [read](v1.49.23/00-summary.md) |
 | `v1.49.22` | PNW Research Series | 2026-03-07 | ✓ | 24 | [read](v1.49.22/00-summary.md) |
 | `v1.49.21` | Image to Mission Pipeline | 2026-03-07 | ✓ | 22 | [read](v1.49.21/00-summary.md) |
-| `v1.49.20.1` | Documentation Reflections | 2026-03-06 | — | — | [read](v1.49.20.1/00-summary.md) |
 | `v1.49.20` | Documentation Consolidation | 2026-03-06 | ✓ | 13 | [read](v1.49.20/00-summary.md) |
+| `v1.49.20.1` | Documentation Reflections | 2026-03-06 | — | — | [read](v1.49.20.1/00-summary.md) |
 | `v1.49.19` | Gastown Chipset Integration | 2026-03-06 | ✓ | 19 | [read](v1.49.19/00-summary.md) |
 | `v1.49.18` | Space Between Observatory | 2026-03-06 | ✓ | 17 | [read](v1.49.18/00-summary.md) |
 | `v1.49.17` | The Space Between | 2026-03-04 | ✓ | 19 | [read](v1.49.17/00-summary.md) |
