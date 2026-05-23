@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.747`.
+The story begins at `v1.0` and continues to `v1.49.748`.
 
-**790 chapters.** 789 have retrospectives.
+**791 chapters.** 790 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -798,3 +798,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.745](v1.49.745/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.147 STS-32 Columbia LDEF Retrieval First Ever + 5y 9m Forward-Shadow Closure from STS-41-C + First 10-Day Shuttle Mission + First Shuttle Night Landing + Syncom IV-5 Deployment + Columbia OV-102 Ninth Flight + Brandenstein 3rd Flight Commander + Wetherbee Rookie Future 6-Flight CDR Record + Dunbar Future Mir-25 NASA Visitor + Ivins Future STS-98 Destiny-Lab + Low Rookie NASA-Legacy-Family Cohort + Chronological-Forward Resumed at v694 Rebuild (Path B Hand-Author) · 2026-05-23
 - **[v1.49.746](v1.49.746/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.148 STS-107 Columbia Research Mission + SPACEHAB Research Double Module + 80+ Microgravity Experiments + FREESTAR Cross-Bay Carrier + Israeli First Astronaut Ramon + Columbia OV-102 28th and Final Flight + CATASTROPHIC-CLOSURE Cohort Obs#2 Cumulative + Memorial Substrate Seven Crew + CAIB Investigation Cohort Opens + Post-2003 Shuttle Stand-Down Opens Rebuild (Path B Hand-Author) · 2026-05-23
 - **[v1.49.747](v1.49.747/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.149 Spirit MER-A Mars Exploration Rover + First MER-Program Rover + 2003-06-10 CCAFS SLC-17A Launch on Delta II 7925-9.5 Heavy + 2004-01-04 Gusev Crater Landing + Athena Science Payload + 2210-Sol Operational Lifetime + 7.73 km Cumulative Drive + Husband Hill First-Martian-Summit Ascent + Home Plate Past-Hydrothermal-Activity Evidence + Paso Robles Sulfate Substrate + Martian Dust-Devil Solar-Array Cleaning + Columbia Hills Memorial-Naming Continuity + MER-Program Dual-Rover Deployment + Substrate-Axis-Rotation #21 INTER-PROGRAM + ROBOTIC-DEEP-SPACE-SCIENCE Substrate-Axis Opens + CHRONOLOGICAL-FORWARD-AT-V696 Rebuild (Path A Sub-Agent Dispatch) · 2026-05-23
+- **[v1.49.748](v1.49.748/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.150 Opportunity MER-B Mars Exploration Rover + Substrate-Cohort-Pair Realization to Spirit MER-A + Meridiani Planum Eagle Crater Hole-In-One Landing + First Delta II Heavy Flight + Hematite Blueberries First In-Situ Confirmation + Burns Formation Cross-Bedding + Jarosite + Heat Shield Rock First Meteorite on Another Planet + Endeavour Crater Noachian Phyllosilicates + Homestake Gypsum Vein + First Mars Marathon + 5111-Sol Operational Lifetime + 45.16 km Cumulative Drive + INTRA-PROGRAM Continuation + Substrate-Axis-Stability Sustained Rebuild (Path A Sub-Agent Dispatch) · 2026-05-23
