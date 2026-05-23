@@ -1,6 +1,6 @@
 # Lessons — v1.49.752
 
-~17 lessons extracted. Classification source: ⚙ rule-based · 🤖 LLM tiebreaker (needs review) · 👤 human.
+17 lessons extracted. Classification source: ⚙ rule-based · 🤖 LLM tiebreaker (needs review) · 👤 human.
 
 1. **Lesson #10408 ESTABLISHED extends across twenty-seventh mission-class boundary**
    **Lesson #10408 ESTABLISHED extends across twenty-seventh mission-class boundary**
@@ -39,33 +39,33 @@
    _⚙ Status: `investigate` · lesson #10944_
 
 10. **Substrate-novel ATMOSPHERIC-METHANE-DETECTION-THRESHOLD-UPPER-LIMIT-CONSTRAINT substrate-anchor codified at v1.154**
-    **Substrate-novel ATMOSPHERIC-METHANE-DETECTION-THRESHOLD-UPPER-LIMIT-CONSTRAINT substrate-anchor codified at v1.154**
-    _⚙ Status: `investigate` · lesson #10945_
+   **Substrate-novel ATMOSPHERIC-METHANE-DETECTION-THRESHOLD-UPPER-LIMIT-CONSTRAINT substrate-anchor codified at v1.154**
+   _⚙ Status: `investigate` · lesson #10945_
 
 11. **Substrate-novel FIRST-HCL-DETECTION-MARTIAN-ATMOSPHERE substrate-anchor codified at v1.154**
-    **Substrate-novel FIRST-HCL-DETECTION-MARTIAN-ATMOSPHERE substrate-anchor codified at v1.154**
-    _⚙ Status: `investigate` · lesson #10946_
+   **Substrate-novel FIRST-HCL-DETECTION-MARTIAN-ATMOSPHERE substrate-anchor codified at v1.154**
+   _⚙ Status: `investigate` · lesson #10946_
 
 12. **Substrate-novel SCHIAPARELLI-EDM-ENGINEERING-HISTORICAL-SUBSTRATE-THREAD substrate-anchor codified at v1.154**
-    **Substrate-novel SCHIAPARELLI-EDM-ENGINEERING-HISTORICAL-SUBSTRATE-THREAD substrate-anchor codified at v1.154**
-    _⚙ Status: `investigate` · lesson #10947_
+   **Substrate-novel SCHIAPARELLI-EDM-ENGINEERING-HISTORICAL-SUBSTRATE-THREAD substrate-anchor codified at v1.154**
+   _⚙ Status: `investigate` · lesson #10947_
 
 13. **MARS-ORBITAL-SURVEY-COHORT substrate-realization obs#3 cumulative codified at v1.154**
-    **MARS-ORBITAL-SURVEY-COHORT substrate-realization obs#3 cumulative codified at v1.154**
-    _⚙ Status: `investigate` · lesson #10948_
+   **MARS-ORBITAL-SURVEY-COHORT substrate-realization obs#3 cumulative codified at v1.154**
+   _⚙ Status: `investigate` · lesson #10948_
 
 14. **MITROFANOV-SUBSURFACE-HYDROGEN-PI substrate-realization obs#2 cumulative codified at v1.154**
-    **MITROFANOV-SUBSURFACE-HYDROGEN-PI substrate-realization obs#2 cumulative codified at v1.154**
-    _⚙ Status: `investigate` · lesson #10949_
+   **MITROFANOV-SUBSURFACE-HYDROGEN-PI substrate-realization obs#2 cumulative codified at v1.154**
+   _⚙ Status: `investigate` · lesson #10949_
 
 15. **INTRA-AXIS-CONTINUATION-WITHIN-ROBOTIC-DEEP-SPACE-SCIENCE obs#5 cumulative codified at v1.154**
-    **INTRA-AXIS-CONTINUATION-WITHIN-ROBOTIC-DEEP-SPACE-SCIENCE obs#5 cumulative codified at v1.154**
-    _⚙ Status: `investigate` · lesson #10950_
+   **INTRA-AXIS-CONTINUATION-WITHIN-ROBOTIC-DEEP-SPACE-SCIENCE obs#5 cumulative codified at v1.154**
+   _⚙ Status: `investigate` · lesson #10950_
 
 16. **SUBSTRATE-AXIS-STABILITY-SUSTAINED obs#5 cumulative codified at v1.154**
-    **SUBSTRATE-AXIS-STABILITY-SUSTAINED obs#5 cumulative codified at v1.154**
-    _⚙ Status: `investigate` · lesson #10951_
+   **SUBSTRATE-AXIS-STABILITY-SUSTAINED obs#5 cumulative codified at v1.154**
+   _⚙ Status: `investigate` · lesson #10951_
 
 17. **ROBOTIC-DEEP-SPACE-SCIENCE substrate-axis sustains substrate-form-stable from v696+v697+v698+v699+v700**
-    **ROBOTIC-DEEP-SPACE-SCIENCE substrate-axis sustains substrate-form-stable from v696+v697+v698+v699+v700**
-    _⚙ Status: `investigate` · lesson #10952_
+   **ROBOTIC-DEEP-SPACE-SCIENCE substrate-axis sustains substrate-form-stable from v696+v697+v698+v699+v700**
+   _⚙ Status: `investigate` · lesson #10952_
