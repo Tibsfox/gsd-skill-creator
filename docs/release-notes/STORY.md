@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.744`.
+The story begins at `v1.0` and continues to `v1.49.745`.
 
-**787 chapters.** 786 have retrospectives.
+**788 chapters.** 787 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -795,3 +795,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.742](v1.49.742/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.144 Kvant-2 Second Mir Module Rebuild (Path B Hand-Author) · 2026-05-23
 - **[v1.49.743](v1.49.743/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.145 STS-33 Atlantis DoD-Classified Third Post-Challenger Flight + First Night Shuttle Launch Post-Challenger + USA-48 Magnum-Orion-2 SIGINT + First African-American Shuttle Commander Gregory Rebuild (Path B Hand-Author) · 2026-05-23
 - **[v1.49.744](v1.49.744/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.146 STS-34 Atlantis Galileo Jupiter First US Jupiter-Bound Planetary Probe + Galileo Orbiter and Atmospheric Entry Probe + 6-Year VEEGA Interplanetary Cruise + IUS Civilian-Planetary Deployment + Atlantis OV-104 Fifth Flight + Lucid Second Flight Future NASA-1 Mir Resident + Chang-Diaz Second Flight Future 7-Flight Veteran + Baker Rookie Future First US-Mir Docking + Williams Memorial 27-Year Forward-Shadow + Chronological Inversion Sustained Obs#2 Rebuild (Path B Hand-Author) · 2026-05-23
+- **[v1.49.745](v1.49.745/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.147 STS-32 Columbia LDEF Retrieval First Ever + 5y 9m Forward-Shadow Closure from STS-41-C + First 10-Day Shuttle Mission + First Shuttle Night Landing + Syncom IV-5 Deployment + Columbia OV-102 Ninth Flight + Brandenstein 3rd Flight Commander + Wetherbee Rookie Future 6-Flight CDR Record + Dunbar Future Mir-25 NASA Visitor + Ivins Future STS-98 Destiny-Lab + Low Rookie NASA-Legacy-Family Cohort + Chronological-Forward Resumed at v694 Rebuild (Path B Hand-Author) · 2026-05-23
