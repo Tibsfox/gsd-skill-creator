@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.740`.
+The story begins at `v1.0` and continues to `v1.49.741`.
 
-**783 chapters.** 782 have retrospectives.
+**784 chapters.** 783 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -791,3 +791,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.738](v1.49.738/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.140 Buran 1.01 Unmanned Single Orbital Flight Rebuild (Path B Hand-Author) · 2026-05-22
 - **[v1.49.739](v1.49.739/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.141 STS-29 Discovery Third Post-Challenger Flight + TDRS-4 Constellation Completion Rebuild (Path B Hand-Author) · 2026-05-23
 - **[v1.49.740](v1.49.740/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.142 STS-30 Atlantis First US Planetary Mission From Shuttle + Magellan Venus Radar Mapper Deployment Rebuild (Path B Hand-Author) · 2026-05-23
+- **[v1.49.741](v1.49.741/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.143 STS-31 Discovery First Hubble Space Telescope Launch Rebuild (Path B Hand-Author) · 2026-05-23
