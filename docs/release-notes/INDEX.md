@@ -2,10 +2,11 @@
 
 _Generated 2026-05-23 from `release_history.*`. Source of truth: Postgres._
 
-**783 releases.** 782 with retrospective. 658 with extracted lessons.
+**784 releases.** 783 with retrospective. 659 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
+| `v1.49.741` | NASA Canonical Sibling Files Restoration: v1.143 STS-31 Discovery First Hubble Space Telescope Launch Rebuild (Path B Hand-Author) | 2026-05-23 | ✓ | 5 | [read](v1.49.741/00-summary.md) |
 | `v1.49.740` | NASA Canonical Sibling Files Restoration: v1.142 STS-30 Atlantis First US Planetary Mission From Shuttle + Magellan Venus Radar Mapper Deployment Rebuild (Path B Hand-Author) | 2026-05-23 | ✓ | 5 | [read](v1.49.740/00-summary.md) |
 | `v1.49.739` | NASA Canonical Sibling Files Restoration: v1.141 STS-29 Discovery Third Post-Challenger Flight + TDRS-4 Constellation Completion Rebuild (Path B Hand-Author) | 2026-05-23 | ✓ | 5 | [read](v1.49.739/00-summary.md) |
 | `v1.49.738` | NASA Canonical Sibling Files Restoration: v1.140 Buran 1.01 Unmanned Single Orbital Flight Rebuild (Path B Hand-Author) | 2026-05-22 | ✓ | 5 | [read](v1.49.738/00-summary.md) |
