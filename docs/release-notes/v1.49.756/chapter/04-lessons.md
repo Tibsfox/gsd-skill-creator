@@ -43,29 +43,29 @@
    _⚙ Status: `investigate` · lesson #11015_
 
 11. **Substrate-novel L4-TROJAN-FLYBYS-2027-2028-FORWARD-SHADOW + L5-TROJAN-FLYBY-2033-FORWARD-SHADOW substrate-anchors codified at v1.158**
-    **Substrate-novel L4-TROJAN-FLYBYS-2027-2028-FORWARD-SHADOW + L5-TROJAN-FLYBY-2033-FORWARD-SHADOW substrate-anchors codified at v1.158**
-    _⚙ Status: `investigate` · lesson #11016_
+   **Substrate-novel L4-TROJAN-FLYBYS-2027-2028-FORWARD-SHADOW + L5-TROJAN-FLYBY-2033-FORWARD-SHADOW substrate-anchors codified at v1.158**
+   _⚙ Status: `investigate` · lesson #11016_
 
 12. **Substrate-novel L-LORRI-L-RALPH-L-TES-INSTRUMENT-SUITE-NEW-HORIZONS-HERITAGE + INSTRUMENT-HERITAGE-COHORT substrate-anchors codified at v1.158**
-    **Substrate-novel L-LORRI-L-RALPH-L-TES-INSTRUMENT-SUITE-NEW-HORIZONS-HERITAGE + INSTRUMENT-HERITAGE-COHORT substrate-anchors codified at v1.158**
-    _⚙ Status: `investigate` · lesson #11017_
+   **Substrate-novel L-LORRI-L-RALPH-L-TES-INSTRUMENT-SUITE-NEW-HORIZONS-HERITAGE + INSTRUMENT-HERITAGE-COHORT substrate-anchors codified at v1.158**
+   _⚙ Status: `investigate` · lesson #11017_
 
 13. **Substrate-novel BEYOND-MARS-FIRST-CYCLE-MILESTONE-SUBSTRATE-FORM substrate-anchor codified at v1.158**
-    **Substrate-novel BEYOND-MARS-FIRST-CYCLE-MILESTONE-SUBSTRATE-FORM substrate-anchor codified at v1.158**
-    _⚙ Status: `investigate` · lesson #11018_
+   **Substrate-novel BEYOND-MARS-FIRST-CYCLE-MILESTONE-SUBSTRATE-FORM substrate-anchor codified at v1.158**
+   _⚙ Status: `investigate` · lesson #11018_
 
 14. **Substrate-novel ATLAS-V-401 + LOCKHEED-MARTIN + CCAFS-CCSFS-SLC-41 obs#3/3/5 cumulative substrate-anchors codified at v1.158**
-    **Substrate-novel ATLAS-V-401 + LOCKHEED-MARTIN + CCAFS-CCSFS-SLC-41 obs#3/3/5 cumulative substrate-anchors codified at v1.158**
-    _⚙ Status: `investigate` · lesson #11019_
+   **Substrate-novel ATLAS-V-401 + LOCKHEED-MARTIN + CCAFS-CCSFS-SLC-41 obs#3/3/5 cumulative substrate-anchors codified at v1.158**
+   _⚙ Status: `investigate` · lesson #11019_
 
 15. **INTRA-AXIS-CONTINUATION-WITHIN-ROBOTIC-DEEP-SPACE-SCIENCE obs#10 cumulative codified at v1.158**
-    **INTRA-AXIS-CONTINUATION-WITHIN-ROBOTIC-DEEP-SPACE-SCIENCE obs#10 cumulative codified at v1.158**
-    _⚙ Status: `investigate` · lesson #11020_
+   **INTRA-AXIS-CONTINUATION-WITHIN-ROBOTIC-DEEP-SPACE-SCIENCE obs#10 cumulative codified at v1.158**
+   _⚙ Status: `investigate` · lesson #11020_
 
 16. **SUBSTRATE-AXIS-STABILITY-SUSTAINED obs#10 cumulative codified at v1.158**
-    **SUBSTRATE-AXIS-STABILITY-SUSTAINED obs#10 cumulative codified at v1.158**
-    _⚙ Status: `investigate` · lesson #11021_
+   **SUBSTRATE-AXIS-STABILITY-SUSTAINED obs#10 cumulative codified at v1.158**
+   _⚙ Status: `investigate` · lesson #11021_
 
 17. **ROBOTIC-DEEP-SPACE-SCIENCE substrate-axis sustains substrate-form-stable from v696+v697+v698+v699+v700+v701+v702+v703+v704**
-    **ROBOTIC-DEEP-SPACE-SCIENCE substrate-axis sustains substrate-form-stable from v696+v697+v698+v699+v700+v701+v702+v703+v704**
-    _⚙ Status: `investigate` · lesson #11022_
+   **ROBOTIC-DEEP-SPACE-SCIENCE substrate-axis sustains substrate-form-stable from v696+v697+v698+v699+v700+v701+v702+v703+v704**
+   _⚙ Status: `investigate` · lesson #11022_
