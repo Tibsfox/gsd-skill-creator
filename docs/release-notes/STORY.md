@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.743`.
+The story begins at `v1.0` and continues to `v1.49.744`.
 
-**786 chapters.** 785 have retrospectives.
+**787 chapters.** 786 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -794,3 +794,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.741](v1.49.741/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.143 STS-31 Discovery First Hubble Space Telescope Launch Rebuild (Path B Hand-Author) · 2026-05-23
 - **[v1.49.742](v1.49.742/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.144 Kvant-2 Second Mir Module Rebuild (Path B Hand-Author) · 2026-05-23
 - **[v1.49.743](v1.49.743/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.145 STS-33 Atlantis DoD-Classified Third Post-Challenger Flight + First Night Shuttle Launch Post-Challenger + USA-48 Magnum-Orion-2 SIGINT + First African-American Shuttle Commander Gregory Rebuild (Path B Hand-Author) · 2026-05-23
+- **[v1.49.744](v1.49.744/00-summary.md)** — NASA Canonical Sibling Files Restoration: v1.146 STS-34 Atlantis Galileo Jupiter First US Jupiter-Bound Planetary Probe + Galileo Orbiter and Atmospheric Entry Probe + 6-Year VEEGA Interplanetary Cruise + Atlantis OV-104 Fifth Flight + Lucid Future NASA-1 Mir Resident + Chang-Diaz Future 7-Flight Veteran + Baker Future First US-Mir Docking + Williams Memorial 27-Year Forward-Shadow + Chronological Inversion Sustained Obs#2 Rebuild (Path B Hand-Author) · 2026-05-23
