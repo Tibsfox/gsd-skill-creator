@@ -40,12 +40,12 @@
 
 1. **Lesson #10408 ESTABLISHED extends across thirty-seventh mission-class boundary**
    **Lesson #10408 ESTABLISHED extends across thirty-seventh mission-class boundary**
-   _Status: investigate · lesson #11082_
+   _Status: investigate · lesson #11081_
 
 2. **Path A (sub-agent dispatch) sustained codified at v1.164**
    **Path A (sub-agent dispatch) sustained codified at v1.164**
-   _Status: investigate · lesson #11083_
+   _Status: investigate · lesson #11082_
 
 3. **PLANETARY-PROTECTION-FRAMING-DISCIPLINE obs#2 cumulative sustained at v1.164...**
-   **PLANETARY-PROTECTION-FRAMING-DISCIPLINE obs#2 cumulative sustained at v1.164...
-   _Status: investigate · lesson #11084_
+   **PLANETARY-PROTECTION-FRAMING-DISCIPLINE obs#2 cumulative sustained at v1.164...**
+   _Status: investigate · lesson #11083_
