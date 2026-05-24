@@ -111,6 +111,22 @@
 #                       the new normative. Override:
 #                       SC_PRE_TAG_GATE_BYPASS=nasa-canonical-layout
 #                       (emergency only — fix the drift instead).
+#   16. NASA canonical sidebar gate (2026-05-24, BLOCKER) — runs
+#                       `bash tools/nasa-canonical-sidebar-gate.sh`. Fails
+#                       when any NASA Part C page lacks the canonical sidebar
+#                       trio (organism-card + Bird:/Animal:/Plant:/Habitat:
+#                       companion h3 + S36 Pairing or Dedication). Locks in
+#                       the 169/169 PASS milestone closed by the 2026-05-24
+#                       canonical-sidebar rollout campaign (handoff:
+#                       .planning/HANDOFF-CANONICAL-SIDEBAR-V1.38-V1.49-
+#                       2026-05-24.md). Complements step 15 (12-card main-
+#                       column layout) by enforcing the sidebar-side
+#                       organism/companion/S36 triple from
+#                       canonical-pairings.json. Override:
+#                       SC_PRE_TAG_GATE_BYPASS=nasa-canonical-sidebar
+#                       (emergency only — re-run
+#                       .planning/sps-s36-mapping/inject-canonical-sidebar.py
+#                       to restore drift).
 #
 # Exit codes:
 #   0   all checks PASS
@@ -130,6 +146,7 @@
 #   15  discipline-coverage escalation (BLOCKER only when require flag set; default WARN-only)
 #   16  sps-cohort-uniqueness escalation (BLOCKER only when require flag set; default WARN-only)
 #   17  nasa-canonical-layout drift (BLOCKER as of v1.49.716)
+#   18  nasa-canonical-sidebar drift (BLOCKER as of 2026-05-24)
 #
 # Step overrides (v1.49.653 consolidation; CONCERNS §26):
 #   SC_PRE_TAG_GATE_BYPASS=<csv>   skip these steps entirely
@@ -140,6 +157,7 @@
 #                         tauri-boundary apply-to-self scaffolder-residue
 #                         citation-debt-sync story-drift discipline-coverage
 #                         sps-cohort-uniqueness nasa-canonical-layout
+#                         nasa-canonical-sidebar
 #
 # Legacy per-step env vars (SC_SKIP_*_GATE, SC_REQUIRE_*) are honored with a
 # DEPRECATION WARNING for one milestone cycle to ease migration.
@@ -264,7 +282,7 @@ gate_required() {
 if [ -n "$_PTG_BYPASS_RAW" ] || [ -n "$_PTG_REQUIRE_RAW" ]; then
   [ -n "$_PTG_BYPASS_RAW" ]  && log "[pre-tag-gate] active BYPASS:  $_PTG_BYPASS_RAW"
   [ -n "$_PTG_REQUIRE_RAW" ] && log "[pre-tag-gate] active REQUIRE: $_PTG_REQUIRE_RAW"
-  log "[pre-tag-gate] (step names: build|version-sequence|vitest|completeness|ci-gate|www-bundles|depth-audit|depth-audit-mus-elc|claude-md|catalog-index|tauri-boundary|apply-to-self|scaffolder-residue|citation-debt-sync|story-drift|discipline-coverage|sps-cohort-uniqueness|nasa-canonical-layout)"
+  log "[pre-tag-gate] (step names: build|version-sequence|vitest|completeness|ci-gate|www-bundles|depth-audit|depth-audit-mus-elc|claude-md|catalog-index|tauri-boundary|apply-to-self|scaffolder-residue|citation-debt-sync|story-drift|discipline-coverage|sps-cohort-uniqueness|nasa-canonical-layout|nasa-canonical-sidebar)"
 fi
 
 # ----- step 0.5: STATE.md normalizer auto-run (v1.49.671, Lesson #10373) -----
@@ -689,9 +707,9 @@ fi
 # fix the drift; the restorer at tools/nasa-layout-restorer.mjs is
 # card-additive and safe to re-run).
 if gate_bypassed "nasa-canonical-layout" "SC_SKIP_NASA_CANONICAL_LAYOUT_GATE"; then
-  log "[pre-tag-gate] step 15/15: SKIPPED"
+  log "[pre-tag-gate] step 15/16: SKIPPED"
 else
-  log "[pre-tag-gate] step 15/15: NASA canonical layout gate"
+  log "[pre-tag-gate] step 15/16: NASA canonical layout gate"
   if ! bash "$REPO_ROOT/tools/nasa-canonical-layout-gate.sh" >/dev/null 2>&1; then
     echo "[pre-tag-gate] FAIL: NASA canonical layout drift detected" >&2
     echo "[pre-tag-gate]   Diagnose:  bash tools/nasa-canonical-layout-gate.sh" >&2
@@ -700,8 +718,32 @@ else
     echo "[pre-tag-gate]   Override (emergency only): SC_PRE_TAG_GATE_BYPASS=nasa-canonical-layout" >&2
     exit 17
   fi
-  log "[pre-tag-gate] step 15/15: PASS"
+  log "[pre-tag-gate] step 15/16: PASS"
 fi
 
-log "[pre-tag-gate] all 15 checks PASS — safe to \`git tag\` and merge to main"
+# ----- step 16/16: NASA canonical sidebar gate (2026-05-24 BLOCKER) -----
+# Verifies every www/.../NASA/<ver>/index.html contains the canonical sidebar
+# trio: organism-card + Bird:/Animal:/Plant:/Habitat: companion h3 + S36
+# Pairing or Dedication. Locks in the 169/169 PASS milestone closed by the
+# 2026-05-24 canonical-sidebar rollout (handoff:
+# .planning/HANDOFF-CANONICAL-SIDEBAR-V1.38-V1.49-2026-05-24.md). Companion
+# to step 15 (12-card main-column layout). Override:
+# SC_PRE_TAG_GATE_BYPASS=nasa-canonical-sidebar (emergency only — re-run
+# .planning/sps-s36-mapping/inject-canonical-sidebar.py to restore drift).
+if gate_bypassed "nasa-canonical-sidebar" "SC_SKIP_NASA_CANONICAL_SIDEBAR_GATE"; then
+  log "[pre-tag-gate] step 16/16: SKIPPED"
+else
+  log "[pre-tag-gate] step 16/16: NASA canonical sidebar gate"
+  if ! bash "$REPO_ROOT/tools/nasa-canonical-sidebar-gate.sh" >/dev/null 2>&1; then
+    echo "[pre-tag-gate] FAIL: NASA canonical sidebar drift detected" >&2
+    echo "[pre-tag-gate]   Diagnose:  bash tools/nasa-canonical-sidebar-gate.sh" >&2
+    echo "[pre-tag-gate]   JSON:      bash tools/nasa-canonical-sidebar-gate.sh --json" >&2
+    echo "[pre-tag-gate]   Restore:   python3 .planning/sps-s36-mapping/inject-canonical-sidebar.py" >&2
+    echo "[pre-tag-gate]   Override (emergency only): SC_PRE_TAG_GATE_BYPASS=nasa-canonical-sidebar" >&2
+    exit 18
+  fi
+  log "[pre-tag-gate] step 16/16: PASS"
+fi
+
+log "[pre-tag-gate] all 16 checks PASS — safe to \`git tag\` and merge to main"
 exit 0
