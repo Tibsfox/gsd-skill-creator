@@ -36,13 +36,16 @@
 
 # Lessons — v1.49.761
 
-1 lesson extracted. Classification source: ⚙ rule-based · 🤖 LLM tiebreaker (needs review) · 👤 human.
+3 lessons extracted. Classification source: ⚙ rule-based · 🤖 LLM tiebreaker (needs review) · 👤 human.
 
 1. **Lesson #10408 ESTABLISHED extends across thirty-sixth mission-class boundary**
-   (Psyche substrate-axes; fifteenth INTRA-AXIS continuation in the campaign; first NASA-led-Discovery-metal-asteroid-orbit + first-dedicated-all-metal-asteroid-mission + first-NASA-SEP-Hall-effect-thruster-outer-belt-mission + first-SpaceX-Falcon-Heavy-NASA-science-mission + DSOC-tech-demonstration substrate-form-distinct subform within ROBOTIC-DEEP-SPACE-SCIENCE substrate-axis).
-_⚙ Status: `investigate`_
+   **Lesson #10408 ESTABLISHED extends across thirty-sixth mission-class boundary**
+   _⚙ Status: `investigate` · lesson #11079_
+
 2. **Path A (sub-agent dispatch) sustained codified at v1.163**
-Fifteenth consecutive Path A in the sub-sequence v1.149-v1.163 (pre-flight audit verified zero forbidden-token substrate-axis-names + title-line primary trip-vocab = 0 + title-line secondary trip-vocab = 0).
-_⚙ Status: `investigate`_
-3. **Engineering-historical + scientific register discipline codified at…
-   _⚙ Status: `investigate` · lesson #11078_
+   **Path A (sub-agent dispatch) sustained codified at v1.163**
+   _⚙ Status: `investigate` · lesson #11080_
+
+3. **Engineering-historical + scientific register discipline codified at…**
+   **Engineering-historical + scientific register discipline codified at…
+   _⚙ Status: `investigate` · lesson #11081_
