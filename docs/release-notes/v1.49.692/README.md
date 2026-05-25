@@ -1,4 +1,4 @@
-# v1.49.692 — STS-33 Atlantis: DoD-Classified Third Post-Challenger Flight + First Night Shuttle Launch Post-Challenger + USA-48 Magnum-Orion-2 SIGINT Deployment + First African-American Shuttle Commander (NASA 1.144→1.145)
+# v1.49.692 — STS-33 Atlantis: DoD-Classified Third Post-Challenger Flight + First Night Shuttle Launch Post-Challenger (NASA 1.144→1.145)
 
 **Released:** 2026-05-19
 **Type:** engine-cadence degree-advancing milestone — **US-Shuttle-DoD-classified-Magnum-SIGINT-night-launch-Gregory-Commander substrate**. Substrate-axis-rotation #17 = inter-program return to US-Shuttle-program after one-degree Soviet-program excursion v691.

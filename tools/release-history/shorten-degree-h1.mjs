@@ -15,8 +15,8 @@ import { fileURLToPath } from 'node:url';
 
 const args = process.argv.slice(2);
 const dryRun = !args.includes('--execute');
-const fromV = args.includes('--from') ? args[args.indexOf('--from') + 1] : 'v1.49.229';
-const toV = args.includes('--to') ? args[args.indexOf('--to') + 1] : 'v1.49.500';
+const fromV = args.includes('--from') ? args[args.indexOf('--from') + 1] : 'v1.49.689';
+const toV = args.includes('--to') ? args[args.indexOf('--to') + 1] : 'v1.49.999';
 
 // Project root is derived from this script's location so the file carries no
 // machine-specific path. This script lives at tools/release-history/*.mjs, so
@@ -90,6 +90,42 @@ function trimTaglines(s) {
   return head;
 }
 
+// Substrate-anchor enumeration bloat strip for v685+ NASA-degree milestones.
+// The post-v685 era encodes substrate-anchor enumeration as ` + <TOKEN>` segments;
+// titles routinely grew past 1000 chars (peak: v1.49.704 at 4087 chars).
+//
+// Within each segment, truncate at the first substrate-marker token (Substrate-Anchor,
+// Substrate-Cumulative, Substrate-Form-Distinct, obs#N, INTRA-AXIS, etc.). Drop any
+// segment that starts with an ALL-CAPS-3+-hyphen-word token (e.g. CLUSTER-FIRST-INSTANCE).
+// Stop at the first dropped/truncated segment — substrate enumeration is contiguous.
+// No-op on titles without substrate indicators.
+function stripSubstrateBloat(s) {
+  const BLOAT_TOKENS = /(?:^|\s)(?:Substrate-Anchor|Substrate-Cumulative|Substrate-Form-Distinct|Substrate-Form-Cumulative|Substrate-Form-Stable|Substrate-Form|Substrate-Axis|Substrate-Realization|Substrate-Cohort|Substrate-Thread|substrate-cumulative|substrate-anchor|substrate-form|obs#\d+|INTRA-AXIS|NEW LOCKED|FIRST-INSTANCE|FRESH-BUILD|cross-axis-rotation)\b/;
+  const ALL_CAPS_HYPHEN_3 = /^[A-Z][A-Z0-9]+(?:-[A-Z0-9]+){2,}/;
+  // A segment whose entire body is an ALL-CAPS-HYPHENATED axis name (≥2 tokens) is bloat
+  // — e.g. "SOLAR-OBSERVATORY" left over after truncating "SOLAR-OBSERVATORY Substrate-Axis...".
+  const PURE_AXIS_NAME = /^[A-Z][A-Z0-9]+(?:-[A-Z0-9]+)+$/;
+
+  const segments = s.split(' + ');
+  const kept = [];
+
+  for (const seg of segments) {
+    let trimmed = seg.trim();
+    const m = BLOAT_TOKENS.exec(trimmed);
+    if (m) {
+      trimmed = trimmed.slice(0, m.index).trim();
+      // Drop if truncation leaves empty or a pure axis-name token
+      if (!trimmed || PURE_AXIS_NAME.test(trimmed)) break;
+      kept.push(trimmed);
+      break;
+    }
+    if (ALL_CAPS_HYPHEN_3.test(trimmed)) break;
+    kept.push(trimmed);
+  }
+
+  return kept.join(' + ').trim();
+}
+
 function shortenTitle(h1) {
   // Expected: "# v1.X.Y — <title>"
   const m = /^#\s+(v[\d.]+)\s*—\s*(.+)$/.exec(h1.trim());
@@ -97,10 +133,40 @@ function shortenTitle(h1) {
   const version = m[1];
   let title = m[2].trim();
 
-  // Strip long parens
-  title = stripLongParens(title);
-  // Collapse multi em-dash taglines
-  title = trimTaglines(title);
+  // Capture trailing (NASA 1.NNN[→1.NNN]) parenthetical so strip rules don't eat it.
+  let nasaTail = '';
+  const tailRe = /\s*(\(NASA\s+(?:degree\s+)?1\.\d+(?:\s*[→\->]+\s*1\.\d+)?\))\s*$/;
+  const tailMatch = tailRe.exec(title);
+  if (tailMatch) {
+    nasaTail = ` ${tailMatch[1]}`;
+    title = title.slice(0, tailMatch.index);
+  }
+
+  const hasSubstrate = /Substrate-|substrate-|obs#|INTRA-AXIS|NEW LOCKED|FIRST-INSTANCE|FRESH-BUILD|cross-axis|Path [AB]/.test(title);
+
+  if (hasSubstrate) {
+    // Substrate-aware strip (preserves long parens like "(Emirates Mars Mission / Al-Amal مسبار الأمل)").
+    title = stripSubstrateBloat(title);
+    // Post-strip cap: when substrate-strip retained many segments of legitimate facts
+    // (e.g. v696 Spirit kept 13 mission-datum segments), cap to 3 if still long.
+    const segs = title.split(' + ');
+    if (segs.length > 3 && title.length > 200) {
+      title = segs.slice(0, 3).join(' + ').trim();
+    }
+  } else {
+    // Legacy strip path for pre-substrate-era bloat
+    title = stripLongParens(title);
+    title = trimTaglines(title);
+    // Generic + -segment cap: catches non-substrate enumeration bloat (e.g. v694 crew bio).
+    const segs = title.split(' + ');
+    if (segs.length > 2 && title.length > 100) {
+      title = segs.slice(0, 2).join(' + ').trim();
+    }
+  }
+
+  // Re-attach NASA-degree tail
+  title = (title + nasaTail).trim();
+
   // Normalize whitespace
   title = title.replace(/\s+/g, ' ').replace(/\s+([+])\s+/g, ' + ').trim();
 

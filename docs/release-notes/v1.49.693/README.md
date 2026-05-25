@@ -1,4 +1,4 @@
-# v1.49.693 — STS-34 Atlantis: First US Jupiter-Bound Planetary Probe + Galileo Orbiter + Atmospheric Entry Probe + IUS Deployment for 6-Year VEEGA Cruise + Atlantis OV-104 Fifth Flight + Williams Memorial 27-Year-Decadal-Delta (NASA 1.145→1.146)
+# v1.49.693 — STS-34 Atlantis: First US Jupiter-Bound Planetary Probe + Galileo Orbiter (NASA 1.145→1.146)
 
 **Released:** 2026-05-19
 **Type:** engine-cadence degree-advancing milestone — **US-Shuttle-civilian-planetary-Galileo-Jupiter substrate**. Substrate-axis-rotation #18 = intra-US-Shuttle substrate-form-distinct rotation from v692 DoD-classified-Magnum-SIGINT to v693 civilian-planetary-Galileo-Jupiter.

@@ -1,4 +1,4 @@
-# v1.49.691 — Kvant-2 Second Mir Module: First Operational TKS-FGB Module + Dedicated EVA Airlock + Propulsion + Shower (NASA 1.143→1.144)
+# v1.49.691 — Kvant-2 Second Mir Module: First Operational TKS-FGB Module + Dedicated EVA Airlock (NASA 1.143→1.144)
 
 **Released:** 2026-05-19
 **Type:** engine-cadence degree-advancing milestone — **Soviet-Mir-modular-expansion-Kvant-2 substrate**. Substrate-axis-rotation #16 = inter-program substrate-axis return to Soviet-program after 4 consecutive US-Shuttle milestones (v685+v688+v689+v690).

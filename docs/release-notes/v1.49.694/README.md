@@ -1,4 +1,4 @@
-# v1.49.694 — STS-32 Columbia: First LDEF Retrieval + 5y 9m Forward-Shadow Closure from STS-41-C + First 10-Day Shuttle Mission + First Shuttle Night Landing + Syncom IV-5 Deployment + Columbia OV-102 Ninth Flight + Brandenstein 3rd Flight Commander + Wetherbee Rookie Future 6-Flight CDR Record + Dunbar Future Mir-25 NASA Visitor + Ivins Future STS-98 Destiny-Lab + Low Rookie NASA-Legacy-Family Cohort + Low 18-Year Forward-Shadow Memorial + Chronological-Forward Resumed (NASA 1.146→1.147)
+# v1.49.694 — STS-32 Columbia: First LDEF Retrieval + 5y 9m Forward-Shadow Closure from STS-41-C (NASA 1.146→1.147)
 
 **Released:** 2026-05-19
 **Type:** engine-cadence degree-advancing milestone — **US-Shuttle-civilian-retrieval-LDEF-Columbia substrate**. Substrate-axis-rotation #19 = intra-US-Shuttle substrate-form-distinct rotation from v693 civilian-planetary-Galileo-Jupiter to v694 civilian-retrieval-LDEF-Columbia.

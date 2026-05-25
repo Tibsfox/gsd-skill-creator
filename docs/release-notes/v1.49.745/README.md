@@ -1,4 +1,4 @@
-# v1.49.745 — NASA Canonical Sibling Files Restoration: v1.147 STS-32 Columbia LDEF Retrieval First Ever + 5y 9m Forward-Shadow Closure from STS-41-C + First 10-Day Shuttle Mission + First Shuttle Night Landing + Syncom IV-5 Deployment + Columbia OV-102 Ninth Flight + Brandenstein 3rd Flight Commander + Wetherbee Rookie Future 6-Flight CDR Record + Dunbar Future Mir-25 NASA Visitor + Ivins Future STS-98 Destiny-Lab + Low Rookie NASA-Legacy-Family Cohort + Chronological-Forward Resumed at v694 Rebuild (Path B Hand-Author)
+# v1.49.745 — NASA Canonical Sibling Files Restoration: v1.147 STS-32 Columbia LDEF Retrieval First Ever + 5y 9m Forward-Shadow Closure from STS-41-C + First 10-Day Shuttle Mission
 
 **Released:** 2026-05-23
 **Type:** counter-cadence campaign continuation

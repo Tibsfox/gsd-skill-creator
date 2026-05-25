@@ -1,4 +1,4 @@
-# v1.49.772 — Geotail ISAS-NASA Japan-Joint Deep-Magnetotail Single-Spacecraft Mission + GEOTAIL-FIRST-INSTANCE + ISAS-LED-NASA-JOINT-INTERNATIONAL-MISSION + DEEP-MAGNETOTAIL-ELONGATED-ORBIT-PHASE-1 Substrate-Anchor + 220-RE-APOGEE-FAR-MAGNETOTAIL-SUBSTRATE + SINGLE-SPACECRAFT-IN-AXIS + 7-INSTRUMENT-SUITE + ISAS-JAPAN-SPACECRAFT-PRIME + 2022-11-28 Designed-Lifetime-Completed Positive Framing + ~30-Year Operational Substrate + CHRONOLOGICALLY-EARLIEST-WITHIN-MAGNETOSPHERE-RADIATION-BELTS-AXIS + 1992-07-24 Delta II 7925 Launch from CCAFS SLC-17A + INTERNATIONAL-COHORT-SUBSTRATE-CUMULATIVE obs#3 (v713 SOHO + v770 Cluster + v772 Geotail) + NASA-FUNDED-INSTRUMENT-ON-NON-NASA-MISSION obs#2 cumulative + MAGNETOSPHERE-RADIATION-BELTS-INTRA-AXIS-CONTINUATION obs#6 + 8 Substrate-Anchors NEW LOCKED + 6 Substrate-Cumulative obs#N+1 + Partial-Deliverable-Salvage Pattern Applied (Path A — Sixth Fresh-Build via Path A + Salvage)
+# v1.49.772 — Geotail ISAS-NASA Japan-Joint Deep-Magnetotail Single-Spacecraft Mission
 
 **Released:** 2026-05-25
 **Type:** engine-cadence degree-advancing milestone (NASA 1.173 → **1.174**)

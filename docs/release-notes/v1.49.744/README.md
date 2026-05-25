@@ -1,4 +1,4 @@
-# v1.49.744 — NASA Canonical Sibling Files Restoration: v1.146 STS-34 Atlantis Galileo Jupiter First US Jupiter-Bound Planetary Probe + Galileo Orbiter and Atmospheric Entry Probe + 6-Year VEEGA Interplanetary Cruise + IUS Civilian-Planetary Deployment + Atlantis OV-104 Fifth Flight + Lucid Second Flight Future NASA-1 Mir Resident + Chang-Diaz Second Flight Future 7-Flight Veteran + Baker Rookie Future First US-Mir Docking + Williams Memorial 27-Year Forward-Shadow + Chronological Inversion Sustained Obs#2 Rebuild (Path B Hand-Author)
+# v1.49.744 — NASA Canonical Sibling Files Restoration: v1.146 STS-34 Atlantis Galileo Jupiter First US Jupiter-Bound Planetary Probe + Galileo Orbiter and Atmospheric Entry Probe + 6-Year VEEGA Interplanetary Cruise
 
 **Released:** 2026-05-23
 **Type:** counter-cadence campaign continuation

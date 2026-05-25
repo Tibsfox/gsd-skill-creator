@@ -1,4 +1,4 @@
-# v1.49.690 — STS-31 Discovery: First Hubble Space Telescope Launch + Discovery's 10th Flight + 614km Highest-Operational-Shuttle-Orbit (NASA 1.142→1.143)
+# v1.49.690 — STS-31 Discovery: First Hubble Space Telescope Launch + Discovery's 10th Flight (NASA 1.142→1.143)
 
 **Released:** 2026-05-19
 **Type:** engine-cadence degree-advancing milestone — **US-Shuttle-Hubble-Space-Telescope-launch substrate**. Substrate-axis-rotation #15 = intra-US substrate-form-distinct rotation (planetary-deployment → HST-launch).

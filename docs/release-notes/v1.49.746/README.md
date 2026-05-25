@@ -1,4 +1,4 @@
-# v1.49.746 — NASA Canonical Sibling Files Restoration: v1.148 STS-107 Columbia Research Mission + SPACEHAB Research Double Module + 80+ Microgravity Experiments + FREESTAR Cross-Bay Carrier + Israeli First Astronaut Ramon + Columbia OV-102 28th and Final Flight + CATASTROPHIC-CLOSURE Cohort Obs#2 Cumulative + Memorial Substrate Seven Crew + CAIB Investigation Cohort Opens + Post-2003 Shuttle Stand-Down Opens Rebuild (Path B Hand-Author)
+# v1.49.746 — NASA Canonical Sibling Files Restoration: v1.148 STS-107 Columbia Research Mission + SPACEHAB Research Double Module + 80+ Microgravity Experiments
 
 **Released:** 2026-05-23
 **Type:** counter-cadence campaign continuation
