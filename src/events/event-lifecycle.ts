@@ -2,21 +2,21 @@
  * Event lifecycle convenience functions.
  *
  * Provides high-level API for emitting, consuming, and expiring events
- * without requiring direct EventStore construction.
+ * without requiring direct SkillEventStore construction.
  *
  * - emitEvent: creates a pending event, optionally validates against declared emits
  * - consumeEvent: marks the first matching pending event as consumed
  * - expireStaleEvents: transitions all TTL-exceeded pending events to expired
  */
 
-import { EventStore } from './event-store.js';
+import { SkillEventStore } from './skill-event-store.js';
 import type { EventEntry } from './types.js';
 
 /**
  * Emit an event to the event store.
  *
  * Constructs an EventEntry with status 'pending' and current timestamp,
- * then delegates to EventStore.emit().
+ * then delegates to SkillEventStore.emit().
  *
  * If skillEvents.emits is provided, validates that eventName is in the
  * declared emits list. Warns to stderr if not (but does NOT throw).
@@ -54,14 +54,14 @@ export async function emitEvent(
     ttl_hours: options?.ttlHours ?? 24,
   };
 
-  const store = new EventStore(patternsDir);
+  const store = new SkillEventStore(patternsDir);
   await store.emit(entry);
 }
 
 /**
  * Consume the first matching pending event.
  *
- * Delegates to EventStore.consume().
+ * Delegates to SkillEventStore.consume().
  *
  * @param patternsDir - Directory containing the events.jsonl file
  * @param eventName - Event name to consume
@@ -72,18 +72,18 @@ export async function consumeEvent(
   eventName: string,
   consumedBy: string,
 ): Promise<void> {
-  const store = new EventStore(patternsDir);
+  const store = new SkillEventStore(patternsDir);
   await store.consume(eventName, consumedBy);
 }
 
 /**
  * Expire all TTL-exceeded pending events.
  *
- * Delegates to EventStore.markExpired().
+ * Delegates to SkillEventStore.markExpired().
  *
  * @param patternsDir - Directory containing the events.jsonl file
  */
 export async function expireStaleEvents(patternsDir: string): Promise<void> {
-  const store = new EventStore(patternsDir);
+  const store = new SkillEventStore(patternsDir);
   await store.markExpired();
 }

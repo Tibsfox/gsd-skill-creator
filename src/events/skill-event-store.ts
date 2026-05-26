@@ -1,5 +1,5 @@
 /**
- * JSONL append-log store for event entries.
+ * JSONL append-log store for inter-skill event entries.
  *
  * Tracks inter-skill communication events in pattern envelope format
  * ({timestamp, category: 'events', data: EventEntry}) for consistency
@@ -8,6 +8,9 @@
  * Writes are serialized through a write queue to prevent race conditions.
  * Reads are corruption-tolerant (invalid lines are skipped).
  * Each entry is validated via Zod safeParse on read.
+ *
+ * Renamed from EventStore at v1.49.781 to disambiguate from
+ * src/telemetry/TelemetryEventStore (a separate skill-usage telemetry store).
  */
 
 import { appendFile, readFile, writeFile, mkdir } from 'node:fs/promises';
@@ -19,7 +22,7 @@ import type { EventEntry } from './types.js';
 /** Filename for the event log */
 const EVENTS_FILENAME = 'events.jsonl';
 
-export class EventStore {
+export class SkillEventStore {
   private patternsDir: string;
   private writeQueue = new WriteQueue();
 

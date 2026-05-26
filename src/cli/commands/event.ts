@@ -18,7 +18,7 @@
 
 import { join } from 'node:path';
 import { readFile } from 'node:fs/promises';
-import { EventStore, emitEvent, consumeEvent, expireStaleEvents, EventNameSchema } from '../../events/index.js';
+import { SkillEventStore, emitEvent, consumeEvent, expireStaleEvents, EventNameSchema } from '../../events/index.js';
 import { EventSuggester } from '../../events/event-suggester.js';
 
 // ============================================================================
@@ -110,7 +110,7 @@ async function handleList(args: string[]): Promise<number> {
 
   try {
     const patternsDir = resolvePatternsDir();
-    const store = new EventStore(patternsDir);
+    const store = new SkillEventStore(patternsDir);
     const events = pending ? await store.getPending() : await store.readAll();
 
     if (pretty) {

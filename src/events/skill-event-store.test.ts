@@ -1,5 +1,5 @@
 /**
- * Tests for EventStore JSONL append-log.
+ * Tests for SkillEventStore JSONL append-log.
  *
  * Covers:
  * - emit() creates events.jsonl in patternsDir with pattern envelope format
@@ -19,7 +19,7 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { mkdtemp, rm, readFile, appendFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
-import { EventStore } from './event-store.js';
+import { SkillEventStore } from './skill-event-store.js';
 import type { EventEntry } from './types.js';
 
 // ============================================================================
@@ -40,16 +40,16 @@ function makeEntry(overrides: Partial<EventEntry> = {}): EventEntry {
 }
 
 // ============================================================================
-// EventStore
+// SkillEventStore
 // ============================================================================
 
-describe('EventStore', () => {
+describe('SkillEventStore', () => {
   let tmpDir: string;
-  let store: EventStore;
+  let store: SkillEventStore;
 
   beforeEach(async () => {
     tmpDir = await mkdtemp(join(tmpdir(), 'event-store-'));
-    store = new EventStore(tmpDir);
+    store = new SkillEventStore(tmpDir);
   });
 
   afterEach(async () => {
@@ -80,7 +80,7 @@ describe('EventStore', () => {
 
     it('creates patternsDir if it does not exist', async () => {
       const nestedDir = join(tmpDir, 'nested', 'deep', 'dir');
-      const nestedStore = new EventStore(nestedDir);
+      const nestedStore = new SkillEventStore(nestedDir);
       await nestedStore.emit(makeEntry());
 
       const entries = await nestedStore.readAll();
@@ -104,7 +104,7 @@ describe('EventStore', () => {
 
   describe('readAll()', () => {
     it('returns empty array when file does not exist', async () => {
-      const freshStore = new EventStore(join(tmpDir, 'nonexistent'));
+      const freshStore = new SkillEventStore(join(tmpDir, 'nonexistent'));
       const entries = await freshStore.readAll();
       expect(entries).toEqual([]);
     });

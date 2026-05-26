@@ -12,7 +12,7 @@ export { EventNameSchema, SkillEventsSchema, EventEntrySchema } from './types.js
 export type { SkillEvents, EventEntry, EventConnectionSuggestion } from './types.js';
 
 // Store
-export { EventStore } from './event-store.js';
+export { SkillEventStore } from './skill-event-store.js';
 
 // Lifecycle
 export { emitEvent, consumeEvent, expireStaleEvents } from './event-lifecycle.js';

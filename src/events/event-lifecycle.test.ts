@@ -2,9 +2,9 @@
  * Tests for event lifecycle convenience functions.
  *
  * Covers:
- * - emitEvent() creates EventStore and calls emit with constructed EventEntry
- * - consumeEvent() creates EventStore and calls consume
- * - expireStaleEvents() creates EventStore and calls markExpired
+ * - emitEvent() creates SkillEventStore and calls emit with constructed EventEntry
+ * - consumeEvent() creates SkillEventStore and calls consume
+ * - expireStaleEvents() creates SkillEventStore and calls markExpired
  * - emitEvent() validates event_name against emitter's declared emits list
  */
 
@@ -13,7 +13,7 @@ import { mkdtemp, rm, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { emitEvent, consumeEvent, expireStaleEvents } from './event-lifecycle.js';
-import { EventStore } from './event-store.js';
+import { SkillEventStore } from './skill-event-store.js';
 
 // ============================================================================
 // Lifecycle helpers
@@ -38,7 +38,7 @@ describe('event lifecycle helpers', () => {
     it('creates an event entry with status pending and emitted_at timestamp', async () => {
       await emitEvent(tmpDir, 'lint:complete', 'eslint-skill');
 
-      const store = new EventStore(tmpDir);
+      const store = new SkillEventStore(tmpDir);
       const entries = await store.readAll();
       expect(entries).toHaveLength(1);
       expect(entries[0].event_name).toBe('lint:complete');
@@ -53,7 +53,7 @@ describe('event lifecycle helpers', () => {
     it('accepts custom ttlHours option', async () => {
       await emitEvent(tmpDir, 'lint:complete', 'eslint-skill', { ttlHours: 48 });
 
-      const store = new EventStore(tmpDir);
+      const store = new SkillEventStore(tmpDir);
       const entries = await store.readAll();
       expect(entries[0].ttl_hours).toBe(48);
     });
@@ -70,7 +70,7 @@ describe('event lifecycle helpers', () => {
       expect(stderrSpy.mock.calls[0][0]).toMatch(/build:start/);
 
       // Event should still be created
-      const store = new EventStore(tmpDir);
+      const store = new SkillEventStore(tmpDir);
       const entries = await store.readAll();
       expect(entries).toHaveLength(1);
       expect(entries[0].event_name).toBe('build:start');
@@ -104,14 +104,14 @@ describe('event lifecycle helpers', () => {
   // --------------------------------------------------------------------------
 
   describe('consumeEvent()', () => {
-    it('delegates to EventStore.consume()', async () => {
+    it('delegates to SkillEventStore.consume()', async () => {
       // First emit an event
       await emitEvent(tmpDir, 'lint:complete', 'eslint-skill');
 
       // Then consume it
       await consumeEvent(tmpDir, 'lint:complete', 'report-skill');
 
-      const store = new EventStore(tmpDir);
+      const store = new SkillEventStore(tmpDir);
       const entries = await store.readAll();
       expect(entries).toHaveLength(1);
       expect(entries[0].status).toBe('consumed');
@@ -124,9 +124,9 @@ describe('event lifecycle helpers', () => {
   // --------------------------------------------------------------------------
 
   describe('expireStaleEvents()', () => {
-    it('delegates to EventStore.markExpired()', async () => {
+    it('delegates to SkillEventStore.markExpired()', async () => {
       // Emit an expired event (48 hours ago with 24h TTL)
-      const store = new EventStore(tmpDir);
+      const store = new SkillEventStore(tmpDir);
       const expired = new Date(Date.now() - 48 * 3600 * 1000).toISOString();
       await store.emit({
         event_name: 'old:event',
