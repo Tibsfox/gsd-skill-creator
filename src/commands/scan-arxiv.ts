@@ -10,6 +10,7 @@
 import { parseArgv, resolveOptions, formatHelpText } from '../scan-arxiv/options.js';
 import { createFetcher } from '../scan-arxiv/fetcher.js';
 import { createRanker } from '../scan-arxiv/ranker.js';
+import { isCliEntrypoint } from '../cli/entrypoint-guard.js';
 
 // Wave 2A delivers bridge.ts in parallel with this file.
 // If bridge.ts does not exist yet (parallel wave not landed), the import below
@@ -101,6 +102,6 @@ export async function main(
 }
 
 // Entrypoint guard — do NOT call main at module load time.
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (isCliEntrypoint(import.meta.url)) {
   main(process.argv.slice(2)).then(code => process.exit(code));
 }

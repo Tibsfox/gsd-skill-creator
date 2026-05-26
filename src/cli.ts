@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 import { createRequire } from 'node:module';
 import { resolve as pathResolve } from 'node:path';
-import { realpathSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
+import { isCliEntrypoint } from './cli/entrypoint-guard.js';
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
 import { createStores, createApplicationContext } from './index.js';
@@ -2125,22 +2124,7 @@ Pattern Storage:
 `);
 }
 
-// Entrypoint guard: compare the script's real path to argv[1]'s real path so
-// the CLI still runs when invoked via a symlink (npm global bin, npm link).
-// Naive pathResolve(argv[1]) keeps the symlink path while fileURLToPath
-// returns the realpath — they only matched for direct invocation.
-function isCliEntrypoint(): boolean {
-  if (!process.argv[1]) return false;
-  const here = fileURLToPath(import.meta.url);
-  const invoked = process.argv[1];
-  try {
-    return here === realpathSync(invoked);
-  } catch {
-    return here === pathResolve(invoked);
-  }
-}
-
-if (isCliEntrypoint()) {
+if (isCliEntrypoint(import.meta.url)) {
   main().catch((err) => {
     p.log.error(err.message);
     process.exit(1);

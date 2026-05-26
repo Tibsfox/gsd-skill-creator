@@ -1,3 +1,5 @@
+import { isCliEntrypoint } from '../../cli/entrypoint-guard.js';
+
 /**
  * SCRIBE SVG accessibility checker — shared module.
  *
@@ -224,10 +226,6 @@ export function runCli(): void {
 }
 
 // Run CLI only when invoked directly (not when imported as a module).
-if (
-  typeof process !== 'undefined' &&
-  typeof import.meta !== 'undefined' &&
-  import.meta.url === `file://${process.argv[1]}`
-) {
+if (isCliEntrypoint(import.meta.url)) {
   runCli();
 }

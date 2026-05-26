@@ -13,6 +13,7 @@
 
 import { execSync } from 'node:child_process';
 import { readFileSync, writeFileSync, readdirSync, statSync } from 'node:fs';
+import { isCliEntrypoint } from '../cli/entrypoint-guard.js';
 import { join } from 'node:path';
 import { SKILL_FORMAT_DATE, type SkillStatus } from './frontmatter-types.js';
 
@@ -245,7 +246,7 @@ async function main(): Promise<void> {
   }
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (isCliEntrypoint(import.meta.url)) {
   main().catch((err) => {
     console.error(err);
     process.exit(1);
