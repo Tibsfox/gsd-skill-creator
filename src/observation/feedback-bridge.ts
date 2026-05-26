@@ -18,6 +18,9 @@ export class FeedbackBridge {
   private bus: SignalBus;
   private store: PatternStore;
   private listener: ((signal: CompletionSignal) => void) | null = null;
+  // Chained promise of every in-flight storeFeedback call, used so callers
+  // (tests, callers wanting at-least-once delivery) can await drainage.
+  private pending: Promise<unknown> = Promise.resolve();
 
   constructor(bus: SignalBus, store: PatternStore) {
     this.bus = bus;
@@ -32,12 +35,23 @@ export class FeedbackBridge {
     if (this.listener) return;
 
     this.listener = (signal: CompletionSignal) => {
-      this.storeFeedback(signal).catch(err => {
+      const work = this.storeFeedback(signal).catch(err => {
         console.warn('FeedbackBridge: failed to store feedback:', err);
       });
+      this.pending = this.pending.then(() => work, () => work);
     };
 
     this.bus.on('completion', this.listener);
+  }
+
+  /**
+   * Resolve when every storeFeedback call observed up to this point has
+   * settled (whether the underlying write succeeded or failed). Useful in
+   * tests to avoid wall-clock setTimeout(50) "wait for async I/O" patterns
+   * — and in callers that need at-least-once delivery before proceeding.
+   */
+  flushPending(): Promise<void> {
+    return this.pending.then(() => undefined, () => undefined);
   }
 
   /**

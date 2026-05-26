@@ -42,7 +42,7 @@ describe('FeedbackBridge', () => {
     const signal = createCompletionSignal(result);
     bus.emit(signal);
 
-    await new Promise(r => setTimeout(r, 50));
+    await bridge.flushPending();
 
     const entries = await store.read('feedback');
     expect(entries.length).toBe(1);
@@ -63,7 +63,7 @@ describe('FeedbackBridge', () => {
     const signal = createCompletionSignal(result);
     bus.emit(signal);
 
-    await new Promise(r => setTimeout(r, 50));
+    await bridge.flushPending();
 
     const entries = await store.read('feedback');
     const expectedHash = createHash('sha256').update('deterministic output').digest('hex');
@@ -80,7 +80,7 @@ describe('FeedbackBridge', () => {
     const signal = createCompletionSignal(result);
     bus.emit(signal);
 
-    await new Promise(r => setTimeout(r, 50));
+    await bridge.flushPending();
 
     const entries = await store.read('feedback');
     expect(entries[0].data.status).toBe('failure');
@@ -97,7 +97,7 @@ describe('FeedbackBridge', () => {
     const signal = createCompletionSignal(result);
     bus.emit(signal);
 
-    await new Promise(r => setTimeout(r, 50));
+    await bridge.flushPending();
 
     const entries = await store.read('feedback');
     expect(entries[0].data.status).toBe('timeout');
@@ -113,7 +113,7 @@ describe('FeedbackBridge', () => {
     const signal = createCompletionSignal(result, { error: 'spawn failed' });
     bus.emit(signal);
 
-    await new Promise(r => setTimeout(r, 50));
+    await bridge.flushPending();
 
     const entries = await store.read('feedback');
     expect(entries[0].data.status).toBe('error');
@@ -132,7 +132,7 @@ describe('FeedbackBridge', () => {
       bus.emit(signal);
     }
 
-    await new Promise(r => setTimeout(r, 100));
+    await bridge.flushPending();
 
     const entries = await store.read('feedback');
     expect(entries.length).toBe(3);
@@ -149,13 +149,13 @@ describe('FeedbackBridge', () => {
 
     const result1 = makeResult({ operationId: 'Op:1' });
     bus.emit(createCompletionSignal(result1));
-    await new Promise(r => setTimeout(r, 50));
+    await bridge.flushPending();
 
     bridge.stop();
 
     const result2 = makeResult({ operationId: 'Op:2' });
     bus.emit(createCompletionSignal(result2));
-    await new Promise(r => setTimeout(r, 50));
+    await bridge.flushPending();
 
     const entries = await store.read('feedback');
     expect(entries.length).toBe(1);
@@ -167,7 +167,7 @@ describe('FeedbackBridge', () => {
 
     const result = makeResult();
     bus.emit(createCompletionSignal(result));
-    await new Promise(r => setTimeout(r, 50));
+    await bridge.flushPending();
 
     const entries = await store.read('feedback');
     expect(entries.length).toBeGreaterThanOrEqual(1);
@@ -188,7 +188,7 @@ describe('FeedbackBridge', () => {
 
     const result = makeResult();
     bus.emit(createCompletionSignal(result));
-    await new Promise(r => setTimeout(r, 50));
+    await bridge.flushPending();
 
     const entries = await store.read('feedback');
     expect(entries.length).toBe(0);
@@ -199,12 +199,12 @@ describe('FeedbackBridge', () => {
 
     bridge.start();
     bus.emit(createCompletionSignal(makeResult({ operationId: 'Op:1' })));
-    await new Promise(r => setTimeout(r, 50));
+    await bridge.flushPending();
     bridge.stop();
 
     bridge.start();
     bus.emit(createCompletionSignal(makeResult({ operationId: 'Op:2' })));
-    await new Promise(r => setTimeout(r, 50));
+    await bridge.flushPending();
     bridge.stop();
 
     const entries = await store.read('feedback');
