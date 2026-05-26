@@ -108,5 +108,35 @@
     ],
     "key_lessons": ["#10168", "#10169", "#10170", "#10196", "#10203", "#10205", "#10208", "#10265", "#10266"],
     "codified_at_milestone": "v1.49.654 (new domain — codified from v1.49.585-651 lesson cluster)"
+  },
+  {
+    "domain": "Ledger-driven work",
+    "trigger": "Before executing any REVIEW ledger entry or planning artifact written as a sweep summary; when authoring audit rules and audit verdicts",
+    "summary": "Per-file recon (~15min) precedes per-file code (verify scope, framing, prior-art). Audit rules classify by BEHAVIOR (e.g. `node:fs` import presence), not by filename pattern. Interface-conformance audits report a 3-way verdict: ALREADY CONFORMS / SHOULD CONFORM / INTENTIONALLY DIFFERENT (third verdict is load-bearing — prevents future re-flagging). REVIEW ledger fields distinguish filename-collisions (rename-scale) from class-name-collisions (merge-scale).",
+    "canonical_docs": [
+      "docs/ledger-driven-work-discipline.md"
+    ],
+    "key_lessons": ["#10409", "#10410", "#10411", "#10412", "#10413"],
+    "codified_at_milestone": "v1.49.784 (new domain — codified from v1.49.780-782 lesson cluster)"
+  },
+  {
+    "domain": "Architecture-retrofit patterns",
+    "trigger": "Introducing a chokepoint, interface, or generator-template to N existing modules with high call-site multiplicity; authoring a generator that may run on partial input",
+    "summary": "Optional `ctx?` parameter pattern for chokepoint retrofit — three states (undefined→legacy permissive; defaultLoaderContext()→audit-only; restricted→enforced); zero call-site churn. Tolerant generators emit skip-the-line over `UNKNOWN`/`TODO`/placeholder sentinels — placeholders pollute output, break round-trip, and mask the schema gap. Exception: emit the default when the field has a load-bearing default value.",
+    "canonical_docs": [
+      "docs/architecture-retrofit-patterns.md"
+    ],
+    "key_lessons": ["#10414", "#10416"],
+    "codified_at_milestone": "v1.49.784 (new domain — codified from v1.49.782 LoaderContext + v1.49.783 normalizer fix lesson cluster)"
+  },
+  {
+    "domain": "Deferred-maintenance escalation",
+    "trigger": "When a handoff lists a fix as 'escalated' or 'load-bearing'; when a test in `tests/integration/` has been red across 2+ consecutive ships; when operator memory accumulates workarounds for a known broken tool",
+    "summary": "Close escalated wedges within 1-2 milestones; do not defer beyond that. The cost of deferral is silent test drift + workaround documentation accumulation, not the eventual fix. Forward-cadence engine-state work can wait one milestone; an open red test in `tests/integration/` cannot. The pre-tag-gate's silent acceptance of a known-failing test is the alarm.",
+    "canonical_docs": [
+      "docs/deferred-maintenance-discipline.md"
+    ],
+    "key_lessons": ["#10415"],
+    "codified_at_milestone": "v1.49.784 (new domain — codified from v1.49.783 STATE.md normalizer fix)"
   }
 ]
