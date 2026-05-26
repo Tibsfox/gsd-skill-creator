@@ -1,4 +1,4 @@
-# v1.49.768 — MMS Magnetospheric Multiscale NASA Solar Terrestrial Probes Four-Spacecraft Tetrahedral Formation Magnetic Reconnection at Electron Scales
+# v1.49.768 — MMS Magnetospheric Multiscale NASA STP Mission
 
 **Released:** 2026-05-25
 **Type:** engine-cadence degree-advancing milestone (NASA 1.169 → **1.170**)

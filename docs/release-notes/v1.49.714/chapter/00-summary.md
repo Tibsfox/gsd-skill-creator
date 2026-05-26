@@ -1,10 +1,61 @@
-> Following v1.49.713 — _SOHO Solar and Heliospheric Observatory NASA-ESA Joint Heliophysics Mission at Sun-Earth L1 Halo Orbit + SOLAR-OBSERVATORY Substrate-Axis First INTRA-AXIS Continuation Sustaining Axis Opened at v712 + ~30-Year Operational Substrate + 12-Instrument International Heliophysics Science Suite + 1995-12-02 08:08 UTC Launch from Cape Canaveral Air Force Station LC-36B on Atlas IIAS + ~1,850 kg Total Spacecraft Mass + Matra Marconi Space France Spacecraft Prime + NASA-ESA Joint Project + Spacecraft + Science Operations at NASA Goddard Space Flight Center + 1996-03-14 L1 Halo Orbit Insertion + Helioseismology Substrate-Anchor + Sun-Grazing Comet-Discovery Substrate-Anchor + Long-Duration Operational Substrate-Anchor + L1-Heliophysics Substrate-Precedent + Ground-Recovery Operational Continuity Substrate-Anchor + Gyroless Operations Adaptation Substrate-Anchor + SOHO-FIRST-INSTANCE obs#1 NEW LOCKED + SOLAR-OBSERVATORY-INTRA-AXIS-CONTINUATION obs#1 NEW LOCKED + NASA-ESA-JOINT-MISSION-SUBSTRATE-ANCHOR obs#1 NEW LOCKED + 12-INSTRUMENT-INTERNATIONAL-HELIOPHYSICS-SUITE obs#1 NEW LOCKED + ESA-LED-SPACECRAFT-PRIME-SUBSTRATE-ANCHOR obs#1 NEW LOCKED + HELIOSEISMOLOGY-SUBSTRATE-ANCHOR obs#1 NEW LOCKED + SUN-GRAZING-COMET-DISCOVERY-SUBSTRATE-ANCHOR obs#1 NEW LOCKED + LONG-DURATION-OPERATIONAL-SUBSTRATE-ANCHOR obs#1 NEW LOCKED + L1-HELIOPHYSICS-SUBSTRATE-PRECEDENT obs#1 NEW LOCKED + GROUND-RECOVERY-OPERATIONAL-CONTINUITY-SUBSTRATE-ANCHOR obs#1 NEW LOCKED + GYROLESS-OPERATIONS-ADAPTATION-SUBSTRATE-ANCHOR obs#1 NEW LOCKED + LASCO-PRIMARY-CORONAGRAPH-NRL-MPAE-JOINT obs#1 NEW LOCKED + ATLAS-IIAS-LC-36B-LAUNCH-CONFIGURATION-FOR-L1-MISSION obs#1 NEW LOCKED + L1-HALO-ORBIT-INSERTION-1996-03-14 obs#1 NEW LOCKED + INTERNATIONAL-HELIOPHYSICS-L1-NETWORK-SUBSTRATE-CUMULATIVE obs#2 cumulative (NASA 1.165→1.166)_, v1.49.714 ships as ACE Advanced Composition Explorer NASA Explorer-Class L1 In-Situ Particle Composition Mission + SOLAR-OBSERVATORY Substrate-Axis Second INTRA-AXIS Continuation Sustaining Axis Opened at v712 and Continued at v713 + ~28-Year Operational Substrate + 9-Instrument In-Situ Composition Science Suite + 1997-08-25 14:39 UTC Launch from Cape Canaveral Air Force Station SLC-17A on Delta II 7920-8 + ~596 kg Total Spacecraft Mass Dry + Johns Hopkins Applied Physics Laboratory Spacecraft Prime + NASA Explorer Program Mission + Mission Operations at APL with Science Operations at NASA Goddard Space Flight Center + 1997-12-12 L1 Lissajous Orbit Insertion + In-Situ Particle Composition Substrate-Anchor + Cosmic-Ray Composition Substrate-Anchor + Continuous Real-Time Solar Wind Substrate to NOAA SWPC + Explorer-Class Small-Mission at L1 Substrate-Anchor + Spin-Stabilized L1 Observatory Substrate-Anchor + ACE-FIRST-INSTANCE obs#1 NEW LOCKED + SOLAR-OBSERVATORY-INTRA-AXIS-CONTINUATION obs#2 cumulative + IN-SITU-PARTICLE-COMPOSITION-SUBSTRATE-ANCHOR obs#1 NEW LOCKED + COSMIC-RAY-COMPOSITION-SUBSTRATE-ANCHOR obs#1 NEW LOCKED + 9-INSTRUMENT-IN-SITU-COMPOSITION-SUITE obs#1 NEW LOCKED + APL-LED-SPACECRAFT-PRIME-SUBSTRATE-ANCHOR obs#1 NEW LOCKED + EXPLORER-CLASS-SMALL-MISSION-AT-L1-SUBSTRATE-ANCHOR obs#1 NEW LOCKED + CONTINUOUS-REAL-TIME-SOLAR-WIND-SUBSTRATE-TO-NOAA-SWPC obs#1 NEW LOCKED + SPIN-STABILIZED-L1-OBSERVATORY-SUBSTRATE-ANCHOR obs#1 NEW LOCKED + DELTA-II-7920-8-SLC-17A-LAUNCH-CONFIGURATION-FOR-L1-MISSION obs#1 NEW LOCKED + L1-LISSAJOUS-ORBIT-INSERTION-1997-12-12 obs#1 NEW LOCKED + L1-HELIOPHYSICS-SUBSTRATE-PRECEDENT obs#2 cumulative + LONG-DURATION-OPERATIONAL-SUBSTRATE-ANCHOR obs#2 cumulative + INTERNATIONAL-HELIOPHYSICS-L1-NETWORK-SUBSTRATE-CUMULATIVE obs#3 cumulative (NASA 1.166→1.167).
-# v1.49.714 — ACE Advanced Composition Explorer NASA Explorer-Class L1 In-Situ Particle Composition Mission + SOLAR-OBSERVATORY Substrate-Axis Second INTRA-AXIS Continuation Sustaining Axis Opened at v712 and Continued at v713 + ~28-Year Operational Substrate + 9-Instrument In-Situ Composition Science Suite + 1997-08-25 14:39 UTC Launch from Cape Canaveral Air Force Station SLC-17A on Delta II 7920-8 + ~596 kg Total Spacecraft Mass Dry + Johns Hopkins Applied Physics Laboratory Spacecraft Prime + NASA Explorer Program Mission + Mission Operations at APL with Science Operations at NASA Goddard Space Flight Center + 1997-12-12 L1 Lissajous Orbit Insertion + In-Situ Particle Composition Substrate-Anchor + Cosmic-Ray Composition Substrate-Anchor + Continuous Real-Time Solar Wind Substrate to NOAA SWPC + Explorer-Class Small-Mission at L1 Substrate-Anchor + Spin-Stabilized L1 Observatory Substrate-Anchor + ACE-FIRST-INSTANCE obs#1 NEW LOCKED + SOLAR-OBSERVATORY-INTRA-AXIS-CONTINUATION obs#2 cumulative + IN-SITU-PARTICLE-COMPOSITION-SUBSTRATE-ANCHOR obs#1 NEW LOCKED + COSMIC-RAY-COMPOSITION-SUBSTRATE-ANCHOR obs#1 NEW LOCKED + 9-INSTRUMENT-IN-SITU-COMPOSITION-SUITE obs#1 NEW LOCKED + APL-LED-SPACECRAFT-PRIME-SUBSTRATE-ANCHOR obs#1 NEW LOCKED + EXPLORER-CLASS-SMALL-MISSION-AT-L1-SUBSTRATE-ANCHOR obs#1 NEW LOCKED + CONTINUOUS-REAL-TIME-SOLAR-WIND-SUBSTRATE-TO-NOAA-SWPC obs#1 NEW LOCKED + SPIN-STABILIZED-L1-OBSERVATORY-SUBSTRATE-ANCHOR obs#1 NEW LOCKED + DELTA-II-7920-8-SLC-17A-LAUNCH-CONFIGURATION-FOR-L1-MISSION obs#1 NEW LOCKED + L1-LISSAJOUS-ORBIT-INSERTION-1997-12-12 obs#1 NEW LOCKED + L1-HELIOPHYSICS-SUBSTRATE-PRECEDENT obs#2 cumulative + LONG-DURATION-OPERATIONAL-SUBSTRATE-ANCHOR obs#2 cumulative + INTERNATIONAL-HELIOPHYSICS-L1-NETWORK-SUBSTRATE-CUMULATIVE obs#3 cumulative (NASA 1.166→1.167)
-**Shipped:** 2026-05-21
-_Parse confidence: 0.50 — source `docs/release-notes/v1.49.714/README.md`_
+# v1.49.714 — Summary
+
 ## Summary
-No structured feature list was captured for this release; see the source README for prose details.
+
+**Forward-cadence NASA degree advance to 1.167.** v1.49.714 ships ACE as a forward-cadence engine-state advance; substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; the chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
+
+**ACE mission rebuilt to v1.56 gold-standard depth.** The Advanced Composition Explorer NASA Explorer-class L1 in-situ particle composition mission ships as the per-mission canonical deliverable set covering 13 sibling files at `www/tibsfox/com/Research/NASA/1.167/`. Output bands ~20-25K words across HTML + MD source per the Lesson #10408 candidate per-mission sub-agent rebuild pattern.
+
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
+
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
+
+**Path-A vs Path-B vs Path-C dispatch dynamics.** Path A is sub-agent first-pass clean (no content-filter trips; ~30-50 min, ~30 tool uses); Path B is sub-agent partial-deliverable salvage; Path C is main-context full hand-author. Per `feedback_nasa-path-b-substrate-anchor-count`, Path B produces HIGHER substrate-anchor counts than Path A mean. Each forward ship records dispatch path in the chapter/03 retrospective.
+
+**Brief-template generalizes across substrate-form-distinct mission classes.** The forward-cadence brief structure (mission essentials + reference paths + deliverable table + authoring conventions + positive-framing discipline) is invariant; mission-essentials adaptation per substrate-form-distinct class is the only authoring delta. Reference-page paths (immediate-predecessor + gold-standard) parameterize per mission.
+
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
+
+**Carryover discipline sustained across the forward run.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, Lesson #10406 candidate POSITIVE-FRAMING-DISPATCH-DISCIPLINE, Lesson #10407 candidate DISPATCH-PROMPT-DENSITY-DISCIPLINE, and W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
+
 It also produced retrospective content (decisions, lessons_learned, surprises, what_could_be_better, what_worked); see `03-retrospective.md`.
-7 lessons extracted; see `04-lessons.md` or the `RETROSPECTIVE-TRACKER.md`.
+
+7+ lessons extracted; see `04-lessons.md` or the `RETROSPECTIVE-TRACKER.md`.
+
+## Key Features
+
+| Track | Field | Value |
+|---|---|---|
+| NASA | Mission name | ACE |
+| NASA | Mission description | Advanced Composition Explorer NASA Explorer-class L1 in-situ particle composition mission |
+| NASA | Degree advance | 1.166→1.167 |
+| NASA | Brief template | per-mission canonical-sibling-rebuild template |
+| NASA | Output band | ~20-25K words HTML + MD source |
+| Process | Dispatch path | Path A (default) / Path B (salvage) / Path C (hand-author) |
+| Process | Carryover lessons | #10168 + #10401 + #10406 + #10407 + W3.5 chapter-gen bake-in |
+
+## Cross-References
+
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.713** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.715** (immediate successor) | Substrate-cumulative carry-forward; next ship in the canonical-sibling-rebuild run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10406** (POSITIVE-FRAMING-DISPATCH-DISCIPLINE candidate) | Brief uses positive framing for operationally-tense events |
+| **#10407** (DISPATCH-PROMPT-DENSITY-DISCIPLINE candidate) | Brief-as-required-read pattern carried through dispatch |
+| **#10408** (per-mission sub-agent rebuild candidate) | First-instance at v1.49.716; sustained across the forward-cadence run |
+
+## Infrastructure
+
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/1.167/` — 13 deliverable files (~20-25K words across HTML + MD source)
+- **Mission package:** `.planning/missions/v1-49-714-ace/` (gitignored per security-hygiene)
+- **Brief template:** per-mission canonical-sibling-rebuild brief (~1,200 words covering mission essentials + reference paths + 13-file deliverable table + authoring conventions)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.714` on origin
+- **Build path:** Tier 2 sub-agent dispatch under Lesson #10406 candidate POSITIVE-FRAMING-DISPATCH-DISCIPLINE
+- **Cadence:** forward-cadence engine-state advance #14 in the post-v700 forward run
+
 ---
-**Prev:** [v1.49.713](../v1.49.713/00-summary.md) · _(current tip)_
+**Prev:** [v1.49.713](../v1.49.713/00-summary.md) · **Next:** [v1.49.715](../v1.49.715/00-summary.md)

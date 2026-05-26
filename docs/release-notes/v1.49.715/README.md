@@ -1,4 +1,4 @@
-# v1.49.715 — SDO Solar Dynamics Observatory NASA Living With a Star Geosynchronous EUV-Dynamics + HMI Helioseismic-Magnetic Imager + EVE Extreme Ultraviolet Variability Mission (NASA 1.167→1.168)
+# v1.49.715 — SDO Solar Dynamics Observatory NASA Living With a Star Geosynchronous EUV-Dynamics (NASA 1.167→1.168)
 
 **Released:** 2026-05-21
 **NASA degree:** 1.167 → **1.168**

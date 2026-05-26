@@ -1,11 +1,61 @@
-> Following v1.49.711 — _Europa Clipper NASA Flagship Planetary Program Europa Habitability Characterization Mission Substrate-Form-Distinct NASA-LED-FLAGSHIP-EUROPA-DEDICATED-FLYBY Subform Within ROBOTIC-DEEP-SPACE-SCIENCE Substrate-Axis as Engaged at v696 + Sixteenth INTRA-AXIS Continuation + First Dedicated Europa-Flyby Mission Substrate-Anchor + Largest NASA Planetary Mission Spacecraft Substrate-Anchor + Largest NASA Planetary Mission Solar Arrays Substrate-Anchor + 9-Instrument Habitability-Characterization Science Suite Substrate-Anchor + JPL In-House Spacecraft Prime Substrate-Resume + 2024-10-14 16:06 UTC Launch from KSC LC-39A on SpaceX Falcon Heavy Expendable + ~6,065 kg Total Spacecraft Mass + ~3,241 kg Propellant + ~100-sq-m Two Wing-Shaped Solar Arrays + NASA JPL Spacecraft Prime + NASA JPL Mission Management + Project Scientist Robert Pappalardo NASA JPL + Project Manager Jordan Evans NASA JPL + Mission Target Jupiter Moon Europa Subsurface Ocean + 9-Instrument Science Suite EIS + Europa-UVS + MISE + E-THEMIS + REASON + ECM + PIMS + MASPEX + SUDA + ~5.5-Year Cruise via 2025-03-01 Mars Gravity Assist + 2026-12-03 Earth Gravity Assist + 2030-04-11 Jupiter Orbit Insertion + 49 Europa Flybys Across ~4-Year Tour + Designed End of Mission Ganymede Disposal + EUROPA-CLIPPER-FIRST-INSTANCE obs#1 NEW LOCKED + FIRST-DEDICATED-EUROPA-FLYBY-MISSION-SUBSTRATE-ANCHOR obs#1 NEW LOCKED + LARGEST-NASA-PLANETARY-MISSION-SPACECRAFT-SUBSTRATE-ANCHOR obs#1 NEW LOCKED + LARGEST-NASA-PLANETARY-MISSION-SOLAR-ARRAYS-SUBSTRATE-ANCHOR obs#1 NEW LOCKED + 9-INSTRUMENT-HABITABILITY-CHARACTERIZATION-SCIENCE-SUITE-SUBSTRATE-ANCHOR obs#1 NEW LOCKED + JPL-IN-HOUSE-SPACECRAFT-PRIME-SUBSTRATE-RESUME obs#1 NEW LOCKED + NASA-FLAGSHIP-PLANETARY-PROGRAM-SUBSTRATE-FORM-DISTINCT obs#1 NEW LOCKED + HABITABILITY-CHARACTERIZATION-MISSION-SUBSTRATE-ANCHOR obs#1 NEW LOCKED + PAPPALARDO-JPL-EUROPA-CLIPPER-PROJECT-SCIENTIST obs#1 NEW LOCKED + EVANS-JPL-EUROPA-CLIPPER-PROJECT-MANAGER obs#1 NEW LOCKED + EUROPA-FLYBY-SUBSTRATE-CUMULATIVE obs#2 cumulative + SPACEX-FALCON-HEAVY-NASA-SCIENCE-MISSION-SUBSTRATE-CUMULATIVE obs#2 cumulative + ARIZONA-STATE-UNIVERSITY-SUBSTRATE-CUMULATIVE obs#3 cumulative + Sixteenth INTRA-AXIS Continuation Within ROBOTIC-DEEP-SPACE-SCIENCE Substrate-Axis Substrate-Form-Stable + SUBSTRATE-AXIS-STABILITY-SUSTAINED obs#16 Cumulative + Substrate-Form-Distinct Subform NASA-Led-Discovery-Metal-Asteroid-Orbit (v710) → NASA-Led-Flagship-Europa-Dedicated-Flyby (v711) + CHRONOLOGICAL-FORWARD-RESUMED obs#17 Cumulative 1-Year 1-Day Step v710→v711 (NASA 1.163→1.164)_, v1.49.712 ships as Aditya-L1 ISRO First Dedicated Indian Solar Observatory at Sun-Earth L1 Halo Orbit Substrate-Axis-Rotation #22 INTER-PROGRAM ROBOTIC-DEEP-SPACE-SCIENCE → SOLAR-OBSERVATORY + SOLAR-OBSERVATORY Substrate-Axis Opens Substrate-Anchor + First ISRO Solar Observatory + First Indian Spacecraft at Sun-Earth L1 + 7-Instrument Heliophysics Science Suite + 2023-09-02 06:50 UTC Launch from Satish Dhawan Space Centre Sriharikota on PSLV-XL PSLV-C57 + ~1,475 kg Total Spacecraft Mass + URSC Bangalore Spacecraft Prime + Project Director Nigar Shaji ISRO URSC + 2024-01-06 L1 Halo Orbit Insertion + ADITYA-L1-FIRST-INSTANCE obs#1 NEW LOCKED + SOLAR-OBSERVATORY-SUBSTRATE-AXIS-OPENS obs#1 NEW LOCKED + FIRST-ISRO-SOLAR-OBSERVATORY-SUBSTRATE-ANCHOR obs#1 NEW LOCKED + FIRST-INDIAN-SPACECRAFT-AT-SUN-EARTH-L1-SUBSTRATE-ANCHOR obs#1 NEW LOCKED + 7-INSTRUMENT-HELIOPHYSICS-SCIENCE-SUITE obs#1 NEW LOCKED + URSC-IN-HOUSE-SPACECRAFT-PRIME-SUBSTRATE-ANCHOR obs#1 NEW LOCKED + ISRO-SUBSTRATE-AXIS-ENTRY obs#1 NEW LOCKED + VELC-VISIBLE-EMISSION-LINE-CORONAGRAPH-IIA-PRIMARY obs#1 NEW LOCKED + PSLV-XL-PSLV-C57-LAUNCH-CONFIGURATION-FOR-SOLAR-OBSERVATORY obs#1 NEW LOCKED + L1-HALO-ORBIT-INSERTION-2024-01-06 obs#1 NEW LOCKED + INTERNATIONAL-HELIOPHYSICS-L1-NETWORK-SUBSTRATE-CUMULATIVE obs#1 NEW LOCKED + NIGAR-SHAJI-PROJECT-DIRECTOR-ADITYA-L1 obs#1 NEW LOCKED + CHANDRAYAAN-3-ADITYA-L1-SDSC-SHAR-LAUNCH-CADENCE obs#1 NEW LOCKED + SUBSTRATE-AXIS-ROTATION-22-INTER-PROGRAM obs#1 NEW LOCKED + CHRONOLOGICAL-WINDOW-RESET-AT-AXIS-ROTATION obs#1 NEW LOCKED (NASA 1.164→1.165).
-# v1.49.712 — Aditya-L1 ISRO First Dedicated Indian Solar Observatory at Sun-Earth L1 Halo Orbit Substrate-Axis-Rotation #22 INTER-PROGRAM ROBOTIC-DEEP-SPACE-SCIENCE → SOLAR-OBSERVATORY + SOLAR-OBSERVATORY Substrate-Axis Opens Substrate-Anchor + First ISRO Solar Observatory + First Indian Spacecraft at Sun-Earth L1 + 7-Instrument Heliophysics Science Suite + 2023-09-02 06:50 UTC Launch from Satish Dhawan Space Centre Sriharikota on PSLV-XL PSLV-C57 + ~1,475 kg Total Spacecraft Mass + URSC Bangalore Spacecraft Prime + Project Director Nigar Shaji ISRO URSC + 2024-01-06 L1 Halo Orbit Insertion + ADITYA-L1-FIRST-INSTANCE obs#1 NEW LOCKED + SOLAR-OBSERVATORY-SUBSTRATE-AXIS-OPENS obs#1 NEW LOCKED + FIRST-ISRO-SOLAR-OBSERVATORY-SUBSTRATE-ANCHOR obs#1 NEW LOCKED + FIRST-INDIAN-SPACECRAFT-AT-SUN-EARTH-L1-SUBSTRATE-ANCHOR obs#1 NEW LOCKED + 7-INSTRUMENT-HELIOPHYSICS-SCIENCE-SUITE obs#1 NEW LOCKED + URSC-IN-HOUSE-SPACECRAFT-PRIME-SUBSTRATE-ANCHOR obs#1 NEW LOCKED + ISRO-SUBSTRATE-AXIS-ENTRY obs#1 NEW LOCKED + VELC-VISIBLE-EMISSION-LINE-CORONAGRAPH-IIA-PRIMARY obs#1 NEW LOCKED + PSLV-XL-PSLV-C57-LAUNCH-CONFIGURATION-FOR-SOLAR-OBSERVATORY obs#1 NEW LOCKED + L1-HALO-ORBIT-INSERTION-2024-01-06 obs#1 NEW LOCKED + INTERNATIONAL-HELIOPHYSICS-L1-NETWORK-SUBSTRATE-CUMULATIVE obs#1 NEW LOCKED + NIGAR-SHAJI-PROJECT-DIRECTOR-ADITYA-L1 obs#1 NEW LOCKED + CHANDRAYAAN-3-ADITYA-L1-SDSC-SHAR-LAUNCH-CADENCE obs#1 NEW LOCKED + SUBSTRATE-AXIS-ROTATION-22-INTER-PROGRAM obs#1 NEW LOCKED + CHRONOLOGICAL-WINDOW-RESET-AT-AXIS-ROTATION obs#1 NEW LOCKED (NASA 1.164→1.165)
-**Shipped:** 2026-05-21
-**Commits:** 3 | **Files:** 12 | **Lines:** +264 / -13
-_Parse confidence: 0.50 — source `docs/release-notes/v1.49.712/README.md`_
+# v1.49.712 — Summary
+
 ## Summary
-No structured feature list was captured for this release; see the source README for prose details.
+
+**Forward-cadence NASA degree advance to 1.165.** v1.49.712 ships Aditya-L1 as a forward-cadence engine-state advance; substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; the chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
+
+**Aditya-L1 mission rebuilt to v1.56 gold-standard depth.** The ISRO first dedicated Indian solar observatory at Sun-Earth L1 halo orbit ships as the per-mission canonical deliverable set covering 13 sibling files at `www/tibsfox/com/Research/NASA/1.165/`. Output bands ~20-25K words across HTML + MD source per the Lesson #10408 candidate per-mission sub-agent rebuild pattern.
+
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
+
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
+
+**Path-A vs Path-B vs Path-C dispatch dynamics.** Path A is sub-agent first-pass clean (no content-filter trips; ~30-50 min, ~30 tool uses); Path B is sub-agent partial-deliverable salvage; Path C is main-context full hand-author. Per `feedback_nasa-path-b-substrate-anchor-count`, Path B produces HIGHER substrate-anchor counts than Path A mean. Each forward ship records dispatch path in the chapter/03 retrospective.
+
+**Brief-template generalizes across substrate-form-distinct mission classes.** The forward-cadence brief structure (mission essentials + reference paths + deliverable table + authoring conventions + positive-framing discipline) is invariant; mission-essentials adaptation per substrate-form-distinct class is the only authoring delta. Reference-page paths (immediate-predecessor + gold-standard) parameterize per mission.
+
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
+
+**Carryover discipline sustained across the forward run.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, Lesson #10406 candidate POSITIVE-FRAMING-DISPATCH-DISCIPLINE, Lesson #10407 candidate DISPATCH-PROMPT-DENSITY-DISCIPLINE, and W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
+
 It also produced retrospective content (decisions, lessons_learned, surprises, what_could_be_better, what_worked); see `03-retrospective.md`.
-8 lessons extracted; see `04-lessons.md` or the `RETROSPECTIVE-TRACKER.md`.
+
+7+ lessons extracted; see `04-lessons.md` or the `RETROSPECTIVE-TRACKER.md`.
+
+## Key Features
+
+| Track | Field | Value |
+|---|---|---|
+| NASA | Mission name | Aditya-L1 |
+| NASA | Mission description | ISRO first dedicated Indian solar observatory at Sun-Earth L1 halo orbit |
+| NASA | Degree advance | 1.164→1.165 |
+| NASA | Brief template | per-mission canonical-sibling-rebuild template |
+| NASA | Output band | ~20-25K words HTML + MD source |
+| Process | Dispatch path | Path A (default) / Path B (salvage) / Path C (hand-author) |
+| Process | Carryover lessons | #10168 + #10401 + #10406 + #10407 + W3.5 chapter-gen bake-in |
+
+## Cross-References
+
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.711** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.713** (immediate successor) | Substrate-cumulative carry-forward; next ship in the canonical-sibling-rebuild run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10406** (POSITIVE-FRAMING-DISPATCH-DISCIPLINE candidate) | Brief uses positive framing for operationally-tense events |
+| **#10407** (DISPATCH-PROMPT-DENSITY-DISCIPLINE candidate) | Brief-as-required-read pattern carried through dispatch |
+| **#10408** (per-mission sub-agent rebuild candidate) | First-instance at v1.49.716; sustained across the forward-cadence run |
+
+## Infrastructure
+
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/1.165/` — 13 deliverable files (~20-25K words across HTML + MD source)
+- **Mission package:** `.planning/missions/v1-49-712-aditya-l1/` (gitignored per security-hygiene)
+- **Brief template:** per-mission canonical-sibling-rebuild brief (~1,200 words covering mission essentials + reference paths + 13-file deliverable table + authoring conventions)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.712` on origin
+- **Build path:** Tier 2 sub-agent dispatch under Lesson #10406 candidate POSITIVE-FRAMING-DISPATCH-DISCIPLINE
+- **Cadence:** forward-cadence engine-state advance #12 in the post-v700 forward run
+
 ---
-**Prev:** [v1.49.711](../v1.49.711/00-summary.md) · _(current tip)_
+**Prev:** [v1.49.711](../v1.49.711/00-summary.md) · **Next:** [v1.49.713](../v1.49.713/00-summary.md)
