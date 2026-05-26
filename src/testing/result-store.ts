@@ -3,6 +3,7 @@ import { join, dirname } from 'path';
 import { randomUUID } from 'crypto';
 import type { TestRunResult, TestRunSnapshot } from '../types/test-run.js';
 import { getSkillsBasePath, type SkillScope } from '../types/scope.js';
+import { serializeWrite } from '../safety/write-queue.js';
 
 /**
  * Store for persisting test run results to JSONL files.
@@ -49,12 +50,10 @@ export class ResultStore {
     await this.ensureDir(skillName);
 
     // Serialize writes to prevent interleaving
-    this.writeQueue = this.writeQueue.then(async () => {
+    await serializeWrite(this, async () => {
       const line = JSON.stringify(snapshot) + '\n';
       await appendFile(this.getResultsPath(skillName), line, 'utf-8');
     });
-
-    await this.writeQueue;
   }
 
   /**

@@ -13,6 +13,7 @@
 import { appendFile, readFile, writeFile, mkdir } from 'node:fs/promises';
 import { join } from 'node:path';
 import { EventEntrySchema } from './types.js';
+import { serializeWrite } from '../safety/write-queue.js';
 import type { EventEntry } from './types.js';
 
 /** Filename for the event log */
@@ -42,13 +43,11 @@ export class EventStore {
       data: entry,
     };
 
-    this.writeQueue = this.writeQueue.then(async () => {
+    return serializeWrite(this, async () => {
       await mkdir(this.patternsDir, { recursive: true });
       const line = JSON.stringify(envelope) + '\n';
       await appendFile(this.filePath, line, 'utf-8');
     });
-
-    return this.writeQueue;
   }
 
   /**
@@ -114,7 +113,7 @@ export class EventStore {
    * Uses writeQueue for serialization.
    */
   async consume(eventName: string, consumedBy: string): Promise<void> {
-    this.writeQueue = this.writeQueue.then(async () => {
+    return serializeWrite(this, async () => {
       let content: string;
       try {
         content = await readFile(this.filePath, 'utf-8');
@@ -163,8 +162,6 @@ export class EventStore {
 
       await writeFile(this.filePath, updatedLines.map(l => l + '\n').join(''), 'utf-8');
     });
-
-    return this.writeQueue;
   }
 
   /**
@@ -176,7 +173,7 @@ export class EventStore {
    * Uses writeQueue for serialization.
    */
   async markExpired(): Promise<void> {
-    this.writeQueue = this.writeQueue.then(async () => {
+    return serializeWrite(this, async () => {
       let content: string;
       try {
         content = await readFile(this.filePath, 'utf-8');
@@ -218,7 +215,5 @@ export class EventStore {
 
       await writeFile(this.filePath, updatedLines.map(l => l + '\n').join(''), 'utf-8');
     });
-
-    return this.writeQueue;
   }
 }

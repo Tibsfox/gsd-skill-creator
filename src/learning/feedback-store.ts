@@ -2,6 +2,7 @@ import { readFile, appendFile, mkdir } from 'fs/promises';
 import { join, dirname } from 'path';
 import { randomUUID } from 'crypto';
 import { FeedbackEvent, FeedbackType } from '../types/learning.js';
+import { serializeWrite } from '../safety/write-queue.js';
 
 export class FeedbackStore {
   private feedbackPath: string;
@@ -118,11 +119,9 @@ export class FeedbackStore {
     await this.ensureDir();
 
     // Serialize writes to prevent interleaving
-    this.writeQueue = this.writeQueue.then(async () => {
+    await serializeWrite(this, async () => {
       const line = JSON.stringify(event) + '\n';
       await appendFile(this.feedbackPath, line, 'utf-8');
     });
-
-    await this.writeQueue;
   }
 }
