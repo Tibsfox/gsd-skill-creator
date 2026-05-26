@@ -11,11 +11,27 @@
  */
 
 import { spawn } from 'node:child_process';
-import { writeFile, unlink, mkdtemp, chmod } from 'node:fs/promises';
+import { writeFile, mkdtemp, rm } from 'node:fs/promises';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import type { OffloadOperation, OffloadResult } from './types.js';
 import { SignalBus, createCompletionSignal } from './signals.js';
+
+// Environment variables passed through to the spawned interpreter. Only
+// locale/runtime essentials are inherited from the parent process; offload
+// scripts must declare any other vars explicitly via operation.env. Prevents
+// the parent's credential/secret env (FTP_PASS, ANTHROPIC_API_KEY, etc.)
+// from leaking into child scripts by default.
+const SAFE_ENV_ALLOWLIST = ['PATH', 'HOME', 'LANG', 'LC_ALL', 'LC_CTYPE', 'TZ', 'TMPDIR', 'TEMP', 'TMP'];
+
+function safeEnv(extra: Record<string, string>): Record<string, string> {
+  const env: Record<string, string> = {};
+  for (const key of SAFE_ENV_ALLOWLIST) {
+    const value = process.env[key];
+    if (value !== undefined) env[key] = value;
+  }
+  return { ...env, ...extra };
+}
 
 /** Map script types to file extensions. */
 const SCRIPT_EXTENSIONS: Record<string, string> = {
@@ -42,38 +58,66 @@ const INTERPRETERS: Record<string, string> = {
  * @returns Execution result with exit code, output, and timing
  */
 export async function executeOffloadOp(operation: OffloadOperation): Promise<OffloadResult> {
-  // Create a temp directory for the script file
-  const scriptDir = await mkdtemp(join(tmpdir(), 'offload-exec-'));
-  const ext = SCRIPT_EXTENSIONS[operation.scriptType] ?? '.sh';
-  const scriptPath = join(scriptDir, `script${ext}`);
-
-  // Write script content to temp file
-  await writeFile(scriptPath, operation.script, { mode: 0o755 });
-
-  // For bash/custom, ensure executable
-  if (operation.scriptType === 'bash' || operation.scriptType === 'custom') {
-    await chmod(scriptPath, 0o755);
-  }
-
-  // Determine spawn arguments
-  let command: string;
-  let args: string[];
-
-  if (operation.scriptType === 'custom') {
-    command = scriptPath;
-    args = [];
-  } else {
-    command = INTERPRETERS[operation.scriptType] ?? 'bash';
-    args = [scriptPath];
-  }
-
   const startTime = Date.now();
+
+  // Reject the legacy 'custom' scriptType. It previously direct-executed
+  // the temp file (chmod 0o755) which let any attacker-controlled script
+  // payload pick its own kernel-executed shebang. Legitimate consumers use
+  // explicit bash/node/python; no production caller relies on 'custom'.
+  if ((operation.scriptType as string) === 'custom') {
+    return {
+      operationId: operation.id,
+      exitCode: -1,
+      stdout: '',
+      stderr: `'custom' scriptType is not supported; use bash, node, or python`,
+      durationMs: Date.now() - startTime,
+      timedOut: false,
+    };
+  }
+
+  const interpreter = INTERPRETERS[operation.scriptType];
+  const ext = SCRIPT_EXTENSIONS[operation.scriptType];
+  if (!interpreter || !ext) {
+    return {
+      operationId: operation.id,
+      exitCode: -1,
+      stdout: '',
+      stderr: `Unsupported scriptType: ${operation.scriptType}`,
+      durationMs: Date.now() - startTime,
+      timedOut: false,
+    };
+  }
+
+  // Create a temp directory for the script file
+  let scriptDir: string;
+  let scriptPath: string;
+  try {
+    scriptDir = await mkdtemp(join(tmpdir(), 'offload-exec-'));
+    scriptPath = join(scriptDir, `script${ext}`);
+    // Write at 0o600 so the kernel never directly executes this; only the
+    // named interpreter does, via argv[1].
+    await writeFile(scriptPath, operation.script, { mode: 0o600 });
+  } catch (err) {
+    // Best-effort cleanup if mkdtemp succeeded but writeFile failed
+    if (typeof scriptDir! === 'string') {
+      await rm(scriptDir, { recursive: true, force: true }).catch(() => {});
+    }
+    return {
+      operationId: operation.id,
+      exitCode: -1,
+      stdout: '',
+      stderr: `Setup failed: ${(err as Error).message}`,
+      durationMs: Date.now() - startTime,
+      timedOut: false,
+    };
+  }
+
   let timedOut = false;
 
   return new Promise<OffloadResult>((resolve) => {
-    const child = spawn(command, args, {
+    const child = spawn(interpreter, [scriptPath], {
       cwd: operation.workingDir || '.',
-      env: { ...process.env, ...operation.env },
+      env: safeEnv(operation.env),
       stdio: ['ignore', 'pipe', 'pipe'],
       detached: true,
     });
@@ -109,12 +153,11 @@ export async function executeOffloadOp(operation: OffloadOperation): Promise<Off
       }
     }, operation.timeout);
 
+    const cleanup = () => rm(scriptDir, { recursive: true, force: true }).catch(() => {});
+
     child.on('close', (code: number | null) => {
       clearTimeout(timer);
-
-      // Clean up temp file (fire-and-forget)
-      unlink(scriptPath).catch(() => {});
-
+      cleanup();
       resolve({
         operationId: operation.id,
         exitCode: code ?? -1,
@@ -127,10 +170,7 @@ export async function executeOffloadOp(operation: OffloadOperation): Promise<Off
 
     child.on('error', (err: Error) => {
       clearTimeout(timer);
-
-      // Clean up temp file (fire-and-forget)
-      unlink(scriptPath).catch(() => {});
-
+      cleanup();
       resolve({
         operationId: operation.id,
         exitCode: -1,
