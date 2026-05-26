@@ -1,5 +1,8 @@
 import { describe, it, expect } from 'vitest';
-import { resolve } from 'node:path';
+import { resolve, join } from 'node:path';
+import { existsSync, mkdtempSync, symlinkSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { spawnSync } from 'node:child_process';
 import { parseSkillsDir, parseStringFlag } from './cli.js';
 import { getSkillsBasePath } from './types/scope.js';
 
@@ -74,5 +77,51 @@ describe('parseStringFlag', () => {
     parseStringFlag(args, '--override-critique');
     expect(args).toEqual(snapshot);
     expect(args.length).toBe(snapshot.length);
+  });
+});
+
+// Regression guard: the global-install path is `node <symlink>`, and
+// `process.argv[1]` is the symlink — not its realpath. A naive
+// `pathResolve(argv[1]) === fileURLToPath(import.meta.url)` guard fails for
+// that case and main() never fires, leaving every flag silent. Spawning
+// through a temp symlink reproduces the npm-global invocation faithfully.
+describe('cli entrypoint guard (symlink-aware)', () => {
+  const DIST_CLI = resolve(process.cwd(), 'dist/cli.js');
+  const NODE = process.execPath;
+  const distAvailable = existsSync(DIST_CLI);
+  const maybeIt = distAvailable ? it : it.skip;
+
+  maybeIt('runs --version when invoked through a symlink', () => {
+    const tmp = mkdtempSync(join(tmpdir(), 'sc-symlink-'));
+    const link = join(tmp, 'skill-creator');
+    symlinkSync(DIST_CLI, link);
+    try {
+      const result = spawnSync(NODE, [link, '--version'], {
+        encoding: 'utf-8',
+        timeout: 15000,
+      });
+      expect(result.status).toBe(0);
+      expect(result.stdout).toMatch(/skill-creator/);
+      expect(result.stdout).toMatch(/v\d+\.\d+\.\d+/);
+    } finally {
+      rmSync(tmp, { recursive: true, force: true });
+    }
+  });
+
+  maybeIt('runs --help when invoked through a symlink', () => {
+    const tmp = mkdtempSync(join(tmpdir(), 'sc-symlink-'));
+    const link = join(tmp, 'skill-creator');
+    symlinkSync(DIST_CLI, link);
+    try {
+      const result = spawnSync(NODE, [link, '--help'], {
+        encoding: 'utf-8',
+        timeout: 15000,
+      });
+      expect(result.status).toBe(0);
+      expect(result.stdout).toMatch(/Usage:/);
+      expect(result.stdout).toMatch(/Commands:/);
+    } finally {
+      rmSync(tmp, { recursive: true, force: true });
+    }
   });
 });
