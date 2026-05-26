@@ -36,7 +36,7 @@ import { critiqueCommand } from './cli/commands/critique.js';
 import { sensoriaCommand } from './sensoria/cli.js';
 import { teachCliCommand, coEvolutionCliCommand, quintessenceCliCommand } from './symbiosis/cli.js';
 import { handleMigratePlaneCommand } from './plane/migration.js';
-import { FeedbackStore, RefinementEngine, VersionManager } from './learning/index.js';
+import { VersionManager } from './learning/index.js';
 import { parseScope, getSkillsBasePath, type SkillScope } from './types/scope.js';
 import { SkillStore } from './storage/skill-store.js';
 import { SkillIndex } from './storage/skill-index.js';
@@ -520,124 +520,6 @@ async function main() {
     case 'status':
     case 'st': {
       await statusCommand(args);
-      break;
-    }
-
-    case 'feedback':
-    case 'fb': {
-      const subcommand = args[1];
-      const feedbackStore = new FeedbackStore('.planning/patterns');
-
-      switch (subcommand) {
-        case 'list':
-        case 'ls': {
-          const skillName = args[2];
-          if (!skillName) {
-            p.log.error('Usage: skill-creator feedback list <skill-name>');
-            break;
-          }
-
-          const corrections = await feedbackStore.getCorrections(skillName);
-          if (corrections.length === 0) {
-            p.log.info(`No feedback recorded for '${skillName}'.`);
-            break;
-          }
-
-          p.log.message('');
-          p.log.message(pc.bold(`Feedback for '${skillName}':`));
-          for (const fb of corrections.slice(-10)) {
-            const date = new Date(fb.timestamp).toLocaleDateString();
-            const preview = fb.corrected ? fb.corrected.slice(0, 50) : '';
-            p.log.message(`  ${date} - ${fb.type}: ${preview}...`);
-          }
-          if (corrections.length > 10) {
-            p.log.message(pc.dim(`  ... and ${corrections.length - 10} more`));
-          }
-          break;
-        }
-
-        case 'stats':
-        case undefined: {
-          const count = await feedbackStore.count();
-          p.log.message('');
-          p.log.message(pc.bold('Feedback Statistics:'));
-          p.log.message(`  Total events: ${count}`);
-          break;
-        }
-
-        default:
-          p.log.error(`Unknown subcommand: ${subcommand}`);
-          p.log.message('');
-          p.log.message('Usage:');
-          p.log.message('  feedback, fb              Show feedback stats');
-          p.log.message('  feedback list <skill>     List feedback for a skill');
-      }
-      break;
-    }
-
-    case 'refine':
-    case 'rf': {
-      const skillName = args[1];
-
-      if (!skillName) {
-        p.log.error('Usage: skill-creator refine <skill-name>');
-        break;
-      }
-
-      const feedbackStore = new FeedbackStore('.planning/patterns');
-      const { skillStore } = createStores();
-      const engine = new RefinementEngine(feedbackStore, skillStore);
-
-      // Check eligibility
-      p.intro(`Checking refinement eligibility for '${skillName}'...`);
-
-      const eligibility = await engine.checkEligibility(skillName);
-
-      if (!eligibility.eligible) {
-        if (eligibility.reason === 'cooldown') {
-          p.log.warn(`Skill is in cooldown. ${eligibility.daysRemaining} days remaining.`);
-        } else {
-          p.log.warn(`Insufficient feedback. Need ${eligibility.correctionsNeeded} more corrections.`);
-        }
-        break;
-      }
-
-      p.log.success(`Eligible for refinement (${eligibility.correctionCount} corrections).`);
-
-      // Generate suggestion
-      const suggestion = await engine.generateSuggestion(skillName);
-
-      if (!suggestion) {
-        p.log.info('No consistent patterns found in feedback.');
-        break;
-      }
-
-      p.log.message('');
-      p.log.message(pc.bold('Suggested Changes:'));
-      for (const change of suggestion.suggestedChanges) {
-        p.log.message(`  ${change.section}: ${change.reason}`);
-        p.log.message(pc.dim(`    "${change.original.slice(0, 40)}..." → "${change.suggested.slice(0, 40)}..."`));
-      }
-      p.log.message(`  Confidence: ${(suggestion.confidence * 100).toFixed(0)}%`);
-
-      // Ask for confirmation
-      const confirm = await p.confirm({
-        message: 'Apply these refinements?',
-      });
-
-      if (p.isCancel(confirm) || !confirm) {
-        p.log.info('Refinement cancelled.');
-        break;
-      }
-
-      // Apply refinement
-      const result = await engine.applyRefinement(skillName, suggestion, true);
-
-      if (result.success) {
-        p.log.success(`Skill refined to version ${result.newVersion}.`);
-      } else {
-        p.log.error(`Refinement failed: ${result.error}`);
-      }
       break;
     }
 

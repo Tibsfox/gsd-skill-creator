@@ -2,6 +2,8 @@ import type { SkillStore } from '../storage/skill-store.js';
 import type { SkillIndex } from '../storage/skill-index.js';
 import type { SkillScope } from '../types/scope.js';
 import { suggestCommand, suggestionsCommand } from './commands/suggest.js';
+import { feedbackCommand } from './commands/feedback.js';
+import { refineCommand } from './commands/refine.js';
 
 export interface CliContext {
   args: string[];
@@ -26,6 +28,8 @@ export interface CommandEntry {
 export const REGISTRY: readonly CommandEntry[] = [
   { aliases: ['suggest', 'sg'], handler: () => suggestCommand() },
   { aliases: ['suggestions', 'sgs'], handler: (ctx) => suggestionsCommand(ctx.args) },
+  { aliases: ['feedback', 'fb'], handler: (ctx) => feedbackCommand(ctx.args) },
+  { aliases: ['refine', 'rf'], handler: (ctx) => refineCommand(ctx.args) },
 ];
 
 export function lookup(command: string | undefined): CommandHandler | undefined {
