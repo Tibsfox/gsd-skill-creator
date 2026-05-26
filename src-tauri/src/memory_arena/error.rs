@@ -86,6 +86,13 @@ pub enum ArenaError {
         cooldown_remaining_ns: u64,
     },
 
+    #[error("arithmetic overflow computing {operation}: slot_size={slot_size}, num_slots={num_slots}")]
+    ArithmeticOverflow {
+        operation: &'static str,
+        slot_size: usize,
+        num_slots: usize,
+    },
+
     #[cfg(feature = "postgres")]
     #[error("PostgreSQL error: {0}")]
     PgError(String),

@@ -166,9 +166,13 @@ impl Arena {
         config.validate_size(config.chunk_size)?;
 
         let slot_size = config.chunk_size as usize;
-        let total_bytes = slot_size
-            .checked_mul(num_slots)
-            .expect("arena size overflow");
+        let total_bytes = slot_size.checked_mul(num_slots).ok_or(
+            crate::memory_arena::error::ArenaError::ArithmeticOverflow {
+                operation: "Arena::new total_bytes",
+                slot_size,
+                num_slots,
+            },
+        )?;
         let storage = Storage::Heap(vec![0u8; total_bytes].into_boxed_slice());
 
         Self::with_storage(config, num_slots, slot_size, storage)
@@ -269,9 +273,13 @@ impl Arena {
         // Huge pages are configured. Try MAP_HUGETLB.
         config.validate_size(config.chunk_size)?;
         let slot_size = config.chunk_size as usize;
-        let total_bytes = slot_size
-            .checked_mul(num_slots)
-            .expect("arena size overflow");
+        let total_bytes = slot_size.checked_mul(num_slots).ok_or(
+            crate::memory_arena::error::ArenaError::ArithmeticOverflow {
+                operation: "new_mmap_file_hugetlb total_bytes",
+                slot_size,
+                num_slots,
+            },
+        )?;
 
         let path = path.as_ref().to_path_buf();
         if let Some(parent) = path.parent() {
@@ -347,9 +355,13 @@ impl Arena {
         config.validate_size(config.chunk_size)?;
 
         let slot_size = config.chunk_size as usize;
-        let total_bytes = slot_size
-            .checked_mul(num_slots)
-            .expect("arena size overflow");
+        let total_bytes = slot_size.checked_mul(num_slots).ok_or(
+            crate::memory_arena::error::ArenaError::ArithmeticOverflow {
+                operation: "mmap_file_storage total_bytes",
+                slot_size,
+                num_slots,
+            },
+        )?;
 
         let path = path.to_path_buf();
         if let Some(parent) = path.parent() {
