@@ -3,10 +3,32 @@
  * Single import point for all security types, components, and IPC utilities.
  *
  * Consolidates security types (Phase 367-01), dashboard components (Phase 372),
- * and IPC constants for Tauri command/event wiring (Phase 374-01).
+ * IPC constants for Tauri command/event wiring (Phase 374-01), and the
+ * `LoaderContext` Tier-E disk-loader chokepoint (v1.49.782).
  *
  * @module security
  */
+
+// ============================================================================
+// LoaderContext (v1.49.782) — Tier E disk-loader chokepoint
+// ============================================================================
+
+export type {
+  PathPattern,
+  LoaderOp,
+  LoaderAuditRecord,
+  AuditSink,
+  LoaderContext,
+} from './loader-context.js';
+
+export {
+  matchesAllowList,
+  NULL_AUDIT_SINK,
+  CapturingAuditSink,
+  defaultLoaderContext,
+  LoaderContextDenied,
+  ensureAllowed,
+} from './loader-context.js';
 
 // ============================================================================
 // Types from Phase 367-01 (src/types/security.ts)
