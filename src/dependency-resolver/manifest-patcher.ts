@@ -8,6 +8,16 @@
 import type { ChangeType } from './types.js';
 import type { Ecosystem } from '../dependency-auditor/types.js';
 
+/**
+ * Escape every regex metacharacter so package names containing `.`, `+`, `*`,
+ * `(`, etc. (legal in cargo/conda/gem/pypi) are matched literally rather than
+ * as patterns. Without this, a package literally named "lib*" or "foo.bar"
+ * either silently mis-matches sibling packages or fails to match at all.
+ */
+function escapeRegExp(s: string): string {
+  return s.replace(/[\\^$.*+?()[\]{}|/-]/g, '\\$&');
+}
+
 export function patchManifest(
   content: string,
   packageName: string,
@@ -19,9 +29,10 @@ export function patchManifest(
     return removePackageFromManifest(content, packageName, ecosystem);
   }
 
+  const escapedName = escapeRegExp(packageName);
+
   switch (ecosystem) {
     case 'npm': {
-      const escapedName = packageName.replace(/[@/]/g, (c) => `\\${c}`);
       const re = new RegExp(`("${escapedName}"\\s*:\\s*)"[^"]*"`, 'g');
       const patched = content.replace(re, `$1"${proposedVersion}"`);
       if (patched === content) {
@@ -31,7 +42,6 @@ export function patchManifest(
     }
 
     case 'cargo': {
-      const escapedName = packageName.replace(/[-]/g, '\\-');
       const re = new RegExp(`(${escapedName}\\s*=\\s*(?:\\{[^}]*version\\s*=\\s*|"))[^"]*("?)`, 'g');
       const patched = content.replace(re, `$1${proposedVersion}$2`);
       if (patched === content) {
@@ -41,8 +51,11 @@ export function patchManifest(
     }
 
     case 'pypi': {
-      const escapedName = packageName.replace(/[-_.]/g, '[-_.]');
-      const re = new RegExp(`(${escapedName})[>=<~!]+[\\d.*]+`, 'gi');
+      // PyPI normalization: '-', '_', '.' are interchangeable per PEP 503.
+      // Match any single separator at each position by replacing the
+      // already-escaped variants with a [-_.] character class.
+      const normalized = escapedName.replace(/\\[-_.]/g, '[-_.]');
+      const re = new RegExp(`(${normalized})[>=<~!]+[\\d.*]+`, 'gi');
       const patched = content.replace(re, `$1==${proposedVersion}`);
       if (patched === content) {
         throw new Error(`Package '${packageName}' not found in requirements.txt`);
@@ -51,7 +64,6 @@ export function patchManifest(
     }
 
     case 'rubygems': {
-      const escapedName = packageName.replace(/[-]/g, '\\-');
       const re = new RegExp(`(gem\\s+['"]${escapedName}['"]\\s*,\\s*['"])[^'"]*(['"])`, 'g');
       const patched = content.replace(re, `$1${proposedVersion}$2`);
       if (patched === content) {
@@ -61,7 +73,7 @@ export function patchManifest(
     }
 
     case 'conda': {
-      const re = new RegExp(`(- ${packageName}=)[^\\n]*`, 'g');
+      const re = new RegExp(`(- ${escapedName}=)[^\\n]*`, 'g');
       const patched = content.replace(re, `$1${proposedVersion}`);
       if (patched === content) {
         throw new Error(`Package '${packageName}' not found in environment.yml`);
@@ -76,23 +88,24 @@ function removePackageFromManifest(
   packageName: string,
   ecosystem: Ecosystem,
 ): string {
+  const escapedName = escapeRegExp(packageName);
+
   switch (ecosystem) {
     case 'npm': {
-      const escapedName = packageName.replace(/[@/]/g, (c) => `\\${c}`);
       return content.replace(new RegExp(`\\s*"${escapedName}"\\s*:\\s*"[^"]*",?`, 'g'), '');
     }
     case 'pypi': {
-      const escapedName = packageName.replace(/[-_.]/g, '[-_.]');
-      return content.replace(new RegExp(`^${escapedName}[^\\n]*\\n?`, 'gim'), '');
+      const normalized = escapedName.replace(/\\[-_.]/g, '[-_.]');
+      return content.replace(new RegExp(`^${normalized}[^\\n]*\\n?`, 'gim'), '');
     }
     case 'cargo': {
-      return content.replace(new RegExp(`^${packageName}\\s*=.*\\n?`, 'gm'), '');
+      return content.replace(new RegExp(`^${escapedName}\\s*=.*\\n?`, 'gm'), '');
     }
     case 'rubygems': {
-      return content.replace(new RegExp(`^\\s*gem\\s+['"]${packageName}['"][^\\n]*\\n?`, 'gm'), '');
+      return content.replace(new RegExp(`^\\s*gem\\s+['"]${escapedName}['"][^\\n]*\\n?`, 'gm'), '');
     }
     case 'conda': {
-      return content.replace(new RegExp(`^\\s*-\\s*${packageName}[^\\n]*\\n?`, 'gm'), '');
+      return content.replace(new RegExp(`^\\s*-\\s*${escapedName}[^\\n]*\\n?`, 'gm'), '');
     }
   }
 }
