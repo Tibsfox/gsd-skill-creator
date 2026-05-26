@@ -23,6 +23,10 @@ import { readFileSync, existsSync } from 'node:fs';
 import { resolve, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { ensureAllowed, type LoaderContext } from '../../security/loader-context.js';
+
+const LOADER_SOURCE = 'scribe/pg-runtime/env-loader';
+
 // ---------------------------------------------------------------------------
 // Public result type
 // ---------------------------------------------------------------------------
@@ -126,10 +130,14 @@ export function composeUrlFromPgKeys(
  *
  * @param repoRoot - optional explicit repo root (for testing with temp .env files)
  * @param silent   - when true, suppresses deprecation warnings (for testing)
+ * @param ctx      - optional security chokepoint (src/security/loader-context.ts).
+ *                   When provided, the resolved env path must be admitted by
+ *                   `ctx.allowList` before any disk read.
  */
 export function loadPgEnv(
   repoRoot?: string,
   silent = false,
+  ctx?: LoaderContext,
 ): EnvLoadResult {
   // Emit deprecation warning when ARTEMIS_REPO_ENV is used without RH_ENV_FILE.
   if (process.env.ARTEMIS_REPO_ENV && !process.env.RH_ENV_FILE && !silent) {
@@ -151,6 +159,7 @@ export function loadPgEnv(
     };
   }
 
+  ensureAllowed(ctx, LOADER_SOURCE, 'exists-check', envPath);
   if (!existsSync(envPath)) {
     // No .env file — check if PG* keys are in the process environment directly.
     const urlFromEnv = composeUrlFromPgKeys(process.env as Record<string, string>);
@@ -171,6 +180,7 @@ export function loadPgEnv(
   }
 
   // Parse the .env file.
+  ensureAllowed(ctx, LOADER_SOURCE, 'read-file', envPath);
   let content: string;
   try {
     content = readFileSync(envPath, 'utf8');
