@@ -1,6 +1,10 @@
 /**
  * ConversationStore — Private local-only store for session logs and conversation memory.
  *
+ * Role: NOT a `MemoryStore` (src/memory/types.ts) tier. ConversationStore persists
+ * `ConversationTurn` records keyed by session, not `MemoryRecord` instances at an
+ * LOD tier. Different record shape, different lifecycle, different consumers.
+ *
  * VISIBILITY: ALWAYS PRIVATE. This data never leaves the local machine.
  * Storage: .gitignored local files + local SQLite/PostgreSQL.
  *

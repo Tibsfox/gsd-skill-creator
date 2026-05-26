@@ -1,6 +1,11 @@
 /**
  * Content-addressed store backed by a multi-pool ArenaSet.
  *
+ * Role: NOT a `MemoryStore` (src/memory/types.ts) tier. ContentAddressedSetStore
+ * persists raw bytes keyed by content hash with tier-aware allocation, not
+ * `MemoryRecord` instances at an LOD tier. Conforms to the `GroveStore`
+ * interface (src/memory/grove-store.ts) instead.
+ *
  * Extends the ContentAddressedStore model with tier-aware allocation:
  * callers specify a tier hint per `put()`, and the store routes records
  * to the appropriate mmap-backed pool (Hot, Warm, Blob, Resident).

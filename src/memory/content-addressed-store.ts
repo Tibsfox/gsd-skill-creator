@@ -1,6 +1,11 @@
 /**
  * Content-addressed store built on top of the Rust memory arena.
  *
+ * Role: NOT a `MemoryStore` (src/memory/types.ts) tier. ContentAddressedStore
+ * persists raw bytes keyed by content hash, not `MemoryRecord` instances at an
+ * LOD tier. Conforms to the `GroveStore` interface (src/memory/grove-store.ts)
+ * instead.
+ *
  * A thin, hash-agnostic facade over `RustArena` that maps caller-supplied
  * content hashes to arena chunk ids. It gives us:
  *

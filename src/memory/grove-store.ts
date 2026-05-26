@@ -1,6 +1,10 @@
 /**
  * Shared interface for content-addressed stores used by Grove consumers.
  *
+ * Role: NOT a `MemoryStore` (src/memory/types.ts) sibling. GroveStore is the
+ * interface for content-addressed blob storage (Grove records keyed by hash),
+ * a separate role from `MemoryStore`'s `MemoryRecord` LOD-tier lifecycle.
+ *
  * Both `ContentAddressedStore` (single arena) and `ContentAddressedSetStore`
  * (multi-pool ArenaSet) implement this interface, so Grove consumers
  * (GroveNamespace, SkillCodebase, SignatureView, etc.) can accept either

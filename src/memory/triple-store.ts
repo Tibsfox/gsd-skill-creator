@@ -1,6 +1,10 @@
 /**
  * Semantic triple extraction from Grove records.
  *
+ * Role: NOT a `MemoryStore` (src/memory/types.ts) tier. TripleStore indexes
+ * `Triple` records (subject-predicate-object + sourceHash) for fact→source
+ * linkage, not `MemoryRecord` instances at an LOD tier.
+ *
  * Extracts (subject, predicate, object) triples from grove record payloads,
  * linking each triple back to its source chunk hash. This enables Memori-style
  * fact→source linkage: you can retrieve a fact and trace it back to the exact
