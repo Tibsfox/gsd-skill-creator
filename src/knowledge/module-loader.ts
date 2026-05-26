@@ -13,6 +13,8 @@
 
 import { readFile, readdir } from 'node:fs/promises';
 import { join } from 'node:path';
+
+import { ensureAllowed, type LoaderContext } from '../security/loader-context.js';
 import { ModulesFileSchema } from './types.js';
 import type { KnowledgePack, PackActivity, ModulesFile } from './types.js';
 import { parseSkillmeta } from './skillmeta-parser.js';
@@ -23,6 +25,8 @@ import { parseAssessment } from './assessment-loader.js';
 import type { AssessmentDocument } from './assessment-loader.js';
 import { parseResources } from './resource-loader.js';
 import type { ResourceCatalog } from './resource-loader.js';
+
+const LOADER_SOURCE = 'knowledge/module-loader';
 
 // ============================================================================
 // Types
@@ -93,9 +97,16 @@ function emptyResult(directory: string): LoadedPack {
  * Only a missing or invalid .skillmeta produces errors.
  *
  * @param directory - Absolute path to the pack directory
+ * @param ctx - Optional security chokepoint (src/security/loader-context.ts).
+ *   The pack directory must be admitted; all subfile reads are confined
+ *   under the directory via `path.join`, so one top-level gate is enough.
  * @returns LoadedPack with all available content parsed
  */
-export async function loadPack(directory: string): Promise<LoadedPack> {
+export async function loadPack(
+  directory: string,
+  ctx?: LoaderContext,
+): Promise<LoadedPack> {
+  ensureAllowed(ctx, LOADER_SOURCE, 'load-pack', directory);
   const result = emptyResult(directory);
 
   // Step 1: List directory contents
