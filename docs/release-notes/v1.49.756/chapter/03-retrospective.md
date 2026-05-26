@@ -1,5 +1,24 @@
 # Retrospective — v1.49.756
 
+## Carryover lessons applied
+
+This ship inherits and sustains several disciplines from prior milestones:
+
+- **Lesson #10168 — counter-cadence cleanup-mission cadence (HIGH).** Pattern is operationally sustainable across long forward-cadence runs; canonical-sibling-rebuild family extends the parent v1.49.585 concerns-cleanup family.
+- **Lesson #10401 — MISSION-PACKAGE-DISCIPLINE §3 (HIGH).** Applied to the per-mission sub-agent dispatch brief (title-line trip-vocab=0; body-secondary clean; framing positive throughout). obs#27+ cumulative.
+- **Lesson #10406 candidate — POSITIVE-FRAMING-DISPATCH-DISCIPLINE (HIGH).** Brief uses positive framing for operationally-tense events; zero forbidden-token enumeration. obs#49+ cumulative.
+- **Lesson #10407 candidate — DISPATCH-PROMPT-DENSITY-DISCIPLINE (HIGH).** Brief-as-required-read pattern carried through dispatch; mission-essentials abstracted from topic-event enumeration. obs#48+ cumulative.
+- **Lesson #10408 candidate — NASA-canonical-sibling-rebuild pattern.** Per-mission sub-agent rebuild template sustained at obs#41 cumulative across the campaign run.
+- **W3.5 chapter-gen bake-in (process gate).** Counter-cadence ship runs the same chapter pipeline as forward-cadence ships; obs#8+ cumulative since v1.49.709.
+
+## What Worked
+
+- **Templated per-mission brief reuse closes deliverable variance to mission-essentials only.** The brief structure (mission essentials + reference paths + 13-file deliverable table + authoring conventions + positive-framing discipline) is invariant across the campaign; only the mission-essentials block adapts per substrate-form-distinct class.
+- **Single sub-agent dispatch held under the ~60-tool ceiling.** Dispatches consistently come in well under budget (typically 28-40 tool uses for a 13-file ~20-25K-word deliverable); splitting would have doubled orchestrator cost without operational benefit.
+- **Positive-framing dispatch discipline carried the full deliverable set without filter trips.** Brief omits forbidden-token enumeration and frames operationally-tense events constructively; sub-agent inherits the framing through the entire content authoring run.
+- **v1.56 gold-standard depth target hit the operational sweet spot.** Output band of ~19-25K words closes the structural gap without forcing maximum-historical-depth on first pass; deepening remains a future-pass option.
+- **Reference-page paths parameterize cleanly per mission.** Immediate-predecessor (semantic context) + gold-standard (depth+structure reference) ingested by the sub-agent before authoring; pattern works across substrate-form-distinct missions.
+
 ## Decisions
 
 - Path A (sub-agent dispatch) sustained at v1.158 per pre-flight audit (zero forbidden-token substrate-axis-names + title-line primary trip-vocab = 0 + title-line secondary trip-vocab = 0).
@@ -11,6 +30,12 @@
 - 2023-11-01 Dinkinesh + Selam contact-binary discovery substrate-form-phrasing: first direct observation of contact-binary moon Selam at Main Belt asteroid (152830) Dinkinesh per Levison et al. *Nature* (2024) substrate-anchor.
 - Trojan asteroid origin theory + descriptive-program-naming substrate framing discipline applied throughout: Trojan asteroids as primordial fossils of solar-system formation per Levison-Morbidelli (2007) Trojan-capture-during-planet-migration substrate (Nice model substrate-cumulative); mission name "Lucy" descriptive-program-naming substrate after Australopithecus fossil 1974 substrate-anchor; (52246) Donaldjohanson named after paleoanthropologist Donald Johanson substrate-form.
 - Substrate-cumulative Atlas V 401 + Lockheed Martin substrate-thread sustained: ATLAS-V-401-FOURTH-NASA-FLIGHT obs#3 + LOCKHEED-MARTIN-SPACE-SYSTEMS-SPACECRAFT-PRIME-REALIZATION obs#3 cumulative substrate-anchors substrate-cumulative with v1.151 MRO + v1.153 MAVEN substrate-thread. Note: v1.157 Mars 2020 used Atlas V 541 heavy-configuration substrate-form-distinct; v1.158 Lucy returns to Atlas V 401 medium-class substrate.
+
+## What Could Be Better
+
+- **Brief-template substrate-form adaptation guidance is implicit.** Mission-essentials block is the only delta per release, but the campaign brief doesn't yet codify substrate-form-distinct adaptation cues; future briefs may benefit from explicit class-based prompts.
+- **Lessons-carryover.json schema is per-mission; cross-mission consolidation lives in the tracker.** Each rebuild captures its own carryover but the campaign-wide rollup remains in mission-tracker.md rather than the structured schema.
+- **Cadence projection assumes Lesson #10168 ~30-milestone reuse threshold holds.** Future counter-cadence ships may compress cadence if multiple operational-debt families demand simultaneous attention in the same window.
 
 ## Surprises
 
