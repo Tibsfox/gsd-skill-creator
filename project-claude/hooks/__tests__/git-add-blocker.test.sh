@@ -156,6 +156,19 @@ expect_allow "CC-08: SC_FORCE_ADD=1 .gsd/" \
   '{"tool_name":"Bash","tool_input":{"command":"git add .gsd/foo"}}' \
   env SC_FORCE_ADD=1
 
+# v1.49.778: fail-closed regressions. Previously these silently ALLOW'd; the
+# hook now BLOCKs on malformed input unless SC_FORCE_ADD=1 is set.
+#
+# CC-09: malformed JSON on stdin → BLOCK
+expect_block "CC-09: malformed JSON → fail-closed BLOCK" \
+  'this is not json {' \
+  env
+
+# CC-10: malformed JSON + SC_FORCE_ADD=1 override → ALLOW
+expect_allow "CC-10: malformed JSON + SC_FORCE_ADD=1 override → ALLOW" \
+  'this is not json {' \
+  env SC_FORCE_ADD=1
+
 echo ""
 echo "$PASS passed, $FAIL failed"
 exit $FAIL

@@ -135,6 +135,24 @@ expect_block "SC-11 (C4.2): self-mod-guard still blocks adjacent .claude/skills/
   '{"tool_name":"Bash","tool_input":{"command":"cp src.md .claude/skills/foo/SKILL.md"}}' \
   env
 
+# v1.49.778: fail-closed regressions. Previously these silently ALLOW'd; the
+# hook now BLOCKs on malformed/missing input unless an override env var is set.
+#
+# SC-12: malformed JSON on stdin → BLOCK
+expect_block "SC-12: malformed JSON → fail-closed BLOCK" \
+  'this is not json {' \
+  env
+
+# SC-13: malformed JSON + SC_SELF_MOD=1 override → ALLOW
+expect_allow "SC-13: malformed JSON + SC_SELF_MOD=1 override → ALLOW" \
+  'this is not json {' \
+  env SC_SELF_MOD=1
+
+# SC-14: malformed JSON + SC_INSTALL_CALLER=project-claude override → ALLOW
+expect_allow "SC-14: malformed JSON + SC_INSTALL_CALLER override → ALLOW" \
+  'this is not json {' \
+  env SC_INSTALL_CALLER=project-claude
+
 echo ""
 echo "$PASS passed, $FAIL failed"
 exit $FAIL

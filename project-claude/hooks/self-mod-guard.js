@@ -44,38 +44,71 @@ const BASH_WRITE_OPERATOR_RE = /(?:^|[\s|&;])(?:>>?|cat\s+<<|tee\b|cp\b|mv\b|sed
 // Spec reference path (cited in structured error)
 const SPEC_REF = '.planning/missions/v1-49-585-concerns-cleanup/components/01-self-mod-guard.md';
 
+// Override-env check. Respected by the fail-closed default below so that
+// operators who have explicitly authorized self-mod (or the install.cjs
+// caller, or the npm lifecycle event) are not blocked by a stdin/JSON
+// malfunction during their authorized run.
+function overrideActive() {
+  return (
+    process.env.SC_SELF_MOD === '1' ||
+    process.env.SC_INSTALL_CALLER === 'project-claude' ||
+    process.env.npm_lifecycle_event === 'install-project-claude'
+  );
+}
+
+function failClosed(reasonTag, detail) {
+  if (overrideActive()) {
+    process.stdout.write('{}');
+    process.exit(0);
+  }
+  const reason = [
+    `[self-mod-guard] BLOCKED: ${reasonTag}`,
+    `  Detail:   ${detail}`,
+    `  Reason:   hook-input-malformed (fail-closed default)`,
+    `  Override: SC_SELF_MOD=1 (use only if you understand the implication)`,
+    `  See:      ${SPEC_REF}`,
+  ].join('\n');
+  try { logDecision('block', {}, { reason, matchedPath: null, matchedPattern: 'fail-closed' }); } catch { /* never let logging break the hook */ }
+  process.stdout.write(JSON.stringify({ decision: 'block', reason }));
+  process.exit(0);
+}
+
 let input = '';
 const stdinTimeout = setTimeout(() => {
-  // Stdin never closed — silent ALLOW (default-permissive on malformed input)
-  process.stdout.write('{}');
-  process.exit(0);
+  // Stdin never closed within 3s — BLOCK (fail-closed). Operators with
+  // an explicit override env var still pass.
+  failClosed('hook stdin timeout', 'no data received from Claude Code within 3s');
 }, 3000);
 
 process.stdin.setEncoding('utf8');
 process.stdin.on('data', (chunk) => { input += chunk; });
 process.stdin.on('end', () => {
   clearTimeout(stdinTimeout);
+  let data;
   try {
-    const data = input ? JSON.parse(input) : {};
-    const decision = decide(data);
-    if (decision.action === 'block') {
-      logDecision('block', data, decision);
-      process.stdout.write(JSON.stringify({
-        decision: 'block',
-        reason: decision.reason,
-      }));
-    } else {
-      if (decision.override) {
-        logDecision('allow-override', data, decision);
-      }
-      process.stdout.write('{}');
-    }
-    process.exit(0);
-  } catch {
-    // Malformed input — silent ALLOW (never block on bad JSON)
-    process.stdout.write('{}');
-    process.exit(0);
+    data = input ? JSON.parse(input) : {};
+  } catch (err) {
+    return failClosed('hook input malformed', `JSON.parse failed: ${err && err.message ? err.message : err}`);
   }
+  let decision;
+  try {
+    decision = decide(data);
+  } catch (err) {
+    return failClosed('hook internal error', `decide() threw: ${err && err.message ? err.message : err}`);
+  }
+  if (decision.action === 'block') {
+    logDecision('block', data, decision);
+    process.stdout.write(JSON.stringify({
+      decision: 'block',
+      reason: decision.reason,
+    }));
+  } else {
+    if (decision.override) {
+      logDecision('allow-override', data, decision);
+    }
+    process.stdout.write('{}');
+  }
+  process.exit(0);
 });
 
 function decide(data) {

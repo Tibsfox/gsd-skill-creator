@@ -54,10 +54,28 @@ const PROTECTED_PATH_RE = new RegExp([
 // Spec reference path
 const SPEC_REF = '.planning/missions/v1-49-585-concerns-cleanup/components/02-git-add-blocker.md';
 
+function failClosed(reasonTag, detail) {
+  // Operators with the explicit SC_FORCE_ADD=1 override pass even when
+  // the hook input itself is broken.
+  if (process.env.SC_FORCE_ADD === '1') {
+    process.stdout.write('{}');
+    process.exit(0);
+  }
+  const reason = [
+    `[git-add-blocker] BLOCKED: ${reasonTag}`,
+    `  Detail:   ${detail}`,
+    `  Reason:   hook-input-malformed (fail-closed default)`,
+    `  Override: SC_FORCE_ADD=1 <command> (use only if you understand the implication)`,
+    `  See:      ${SPEC_REF}`,
+  ].join('\n');
+  try { logDecision('block', null, null, 'fail-closed'); } catch { /* never let logging break the hook */ }
+  process.stdout.write(JSON.stringify({ decision: 'block', reason }));
+  process.exit(0);
+}
+
 let input = '';
 const stdinTimeout = setTimeout(() => {
-  process.stdout.write('{}');
-  process.exit(0);
+  failClosed('hook stdin timeout', 'no data received from Claude Code within 3s');
 }, 3000);
 
 process.stdin.setEncoding('utf8');
@@ -68,10 +86,8 @@ process.stdin.on('end', () => {
   let parsed;
   try {
     parsed = JSON.parse(input || '{}');
-  } catch {
-    // Malformed — default-permissive ALLOW
-    process.stdout.write('{}');
-    process.exit(0);
+  } catch (err) {
+    return failClosed('hook input malformed', `JSON.parse failed: ${err && err.message ? err.message : err}`);
   }
 
   const toolName = parsed.tool_name || '';
@@ -96,7 +112,12 @@ process.stdin.on('end', () => {
     process.exit(0);
   }
 
-  const decision = evaluateGitCommand(command);
+  let decision;
+  try {
+    decision = evaluateGitCommand(command);
+  } catch (err) {
+    return failClosed('hook internal error', `evaluateGitCommand threw: ${err && err.message ? err.message : err}`);
+  }
   if (decision.block) {
     const reason = formatBlockMessage(decision.matchedPath, command);
     logDecision('block', command, null, decision.matchedPath);
