@@ -277,7 +277,12 @@ export class MeetingStore {
         .get(decisionId) as { developer_modifications: string } | undefined;
       if (!row) throw new NotFoundError('decision', decisionId);
 
-      const current: string[] = JSON.parse(row.developer_modifications);
+      let current: string[];
+      try {
+        current = row.developer_modifications ? JSON.parse(row.developer_modifications) : [];
+      } catch {
+        current = [];
+      }
       const updated = [...current, ...modifications];
       pdb.prepare('UPDATE decisions SET developer_modifications = ? WHERE id = ?')
         .run(JSON.stringify(updated), decisionId);

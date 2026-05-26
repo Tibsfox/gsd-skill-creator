@@ -16,6 +16,21 @@ import type {
 } from '../types.js';
 import type { KBStore } from './store.js';
 
+/**
+ * JSON.parse wrapper that returns `fallback` on null/undefined/empty/malformed
+ * input. KB rows are populated from snapshot writers across many code paths;
+ * a single corrupt write would otherwise propagate as an unhandled throw to
+ * every reader of that row.
+ */
+function safeJsonParse<T>(raw: string | null | undefined, fallback: T): T {
+  if (raw == null || raw === '') return fallback;
+  try {
+    return JSON.parse(raw) as T;
+  } catch {
+    return fallback;
+  }
+}
+
 // ─── Public interfaces ───────────────────────────────────────────────────────
 
 export interface SnapshotDiff {
@@ -110,10 +125,12 @@ export class SnapshotManager {
   // ─── Diff ────────────────────────────────────────────────────────────
 
   async diff(from: SnapshotId, to: SnapshotId): Promise<SnapshotDiff> {
-    // Check cache first
+    // Check cache first. Malformed payload (any historical write that left
+    // truncated JSON) is treated as a cache miss — we recompute below.
     const cached = await this._kb.getSnapshotDiffCache(from, to);
     if (cached) {
-      return JSON.parse(cached.payload_json) as SnapshotDiff;
+      const parsed = safeJsonParse<SnapshotDiff | null>(cached.payload_json, null);
+      if (parsed) return parsed;
     }
 
     const start = Date.now();
@@ -161,12 +178,12 @@ export class SnapshotManager {
     const fromMetrics = await this._kb.getFileMetrics(from, filePath);
     const toMetrics = await this._kb.getFileMetrics(to, filePath);
 
-    const fromExports: string[] = fromMetrics ? JSON.parse(fromMetrics.exports_json) : [];
-    const toExports: string[] = toMetrics ? JSON.parse(toMetrics.exports_json) : [];
-    const fromImports: string[] = fromMetrics ? JSON.parse(fromMetrics.imports_json) : [];
-    const toImports: string[] = toMetrics ? JSON.parse(toMetrics.imports_json) : [];
-    const fromSigs: string[] = fromMetrics ? JSON.parse(fromMetrics.signatures_json) : [];
-    const toSigs: string[] = toMetrics ? JSON.parse(toMetrics.signatures_json) : [];
+    const fromExports = fromMetrics ? safeJsonParse<string[]>(fromMetrics.exports_json, []) : [];
+    const toExports = toMetrics ? safeJsonParse<string[]>(toMetrics.exports_json, []) : [];
+    const fromImports = fromMetrics ? safeJsonParse<string[]>(fromMetrics.imports_json, []) : [];
+    const toImports = toMetrics ? safeJsonParse<string[]>(toMetrics.imports_json, []) : [];
+    const fromSigs = fromMetrics ? safeJsonParse<string[]>(fromMetrics.signatures_json, []) : [];
+    const toSigs = toMetrics ? safeJsonParse<string[]>(toMetrics.signatures_json, []) : [];
 
     const fromExportSet = new Set(fromExports);
     const toExportSet = new Set(toExports);
