@@ -6,6 +6,38 @@ import { getExtension } from '../types/extensions.js';
 import type { SkillScope } from '../types/scope.js';
 import { getSkillsBasePath } from '../types/scope.js';
 
+// Module-level regex caches. findByTrigger is on the skill-resolution hot
+// path and compiles a fresh RegExp per pattern per skill per call; the
+// caches collapse that to one compile per unique pattern for the process
+// lifetime. `null` is cached for patterns that throw at construction so
+// subsequent calls don't keep retrying the same malformed input.
+const INTENT_REGEX_CACHE = new Map<string, RegExp | null>();
+const FILE_GLOB_REGEX_CACHE = new Map<string, RegExp>();
+
+function intentRegex(pattern: string): RegExp | null {
+  if (INTENT_REGEX_CACHE.has(pattern)) {
+    return INTENT_REGEX_CACHE.get(pattern)!;
+  }
+  let re: RegExp | null;
+  try {
+    re = new RegExp(pattern, 'i');
+  } catch {
+    re = null;
+  }
+  INTENT_REGEX_CACHE.set(pattern, re);
+  return re;
+}
+
+function fileGlobRegex(pattern: string): RegExp {
+  const cached = FILE_GLOB_REGEX_CACHE.get(pattern);
+  if (cached) return cached;
+  const re = new RegExp(
+    '^' + pattern.replace(/\*/g, '.*').replace(/\?/g, '.') + '$',
+  );
+  FILE_GLOB_REGEX_CACHE.set(pattern, re);
+  return re;
+}
+
 // Index entry with metadata snapshot and mtime for invalidation
 export interface SkillIndexEntry {
   name: string;
@@ -222,24 +254,18 @@ export class SkillIndex {
       // Check intent patterns (regex match)
       if (intent && entry.triggers.intents) {
         const matches = entry.triggers.intents.some(pattern => {
-          try {
-            return new RegExp(pattern, 'i').test(intent);
-          } catch {
-            return intent.toLowerCase().includes(pattern.toLowerCase());
-          }
+          const re = intentRegex(pattern);
+          if (re) return re.test(intent);
+          return intent.toLowerCase().includes(pattern.toLowerCase());
         });
         if (matches) return true;
       }
 
       // Check file patterns (glob-like, simplified)
       if (file && entry.triggers.files) {
-        const matches = entry.triggers.files.some(pattern => {
-          // Simple glob: * matches anything
-          const regex = new RegExp(
-            '^' + pattern.replace(/\*/g, '.*').replace(/\?/g, '.') + '$'
-          );
-          return regex.test(file);
-        });
+        const matches = entry.triggers.files.some(pattern =>
+          fileGlobRegex(pattern).test(file),
+        );
         if (matches) return true;
       }
 
