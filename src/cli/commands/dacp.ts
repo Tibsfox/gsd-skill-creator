@@ -12,6 +12,7 @@ Commands:
   history, h            Show handoff history for a pattern
   analyze, a            Trigger retrospective analysis
   export-templates, et  Export bundle templates
+  drift-check, dc       Advisory semantic-channel drift check on a bundle
 
 Examples:
   skill-creator dacp status
@@ -20,6 +21,7 @@ Examples:
   skill-creator dacp history "planner->executor:task" --last 5
   skill-creator dacp analyze --milestone v1.49
   skill-creator dacp export-templates --format=yaml
+  skill-creator dacp drift-check --bundle ./bundle-v2 --baseline ./bundle-v1
 
 Use 'skill-creator dacp <command> --help' for command-specific help.
 `);
@@ -54,6 +56,11 @@ export async function dacpCommand(args: string[]): Promise<number> {
     case 'et': {
       const { dacpExportTemplatesCommand } = await import('./dacp-export-templates.js');
       return dacpExportTemplatesCommand(subArgs);
+    }
+    case 'drift-check':
+    case 'dc': {
+      const { dacpDriftCheckCommand } = await import('./dacp-drift-check.js');
+      return dacpDriftCheckCommand(subArgs);
     }
     default:
       showDacpHelp();

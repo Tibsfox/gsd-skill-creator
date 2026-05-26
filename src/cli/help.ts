@@ -36,7 +36,7 @@ Commands:
   rollback, rb      Rollback skill to previous version
   agents, ag        Manage agent suggestions from skill clusters
   team, tm          Manage agent teams (create, list, validate, spawn, status)
-  dacp, dp          Manage DACP handoff protocol (status, set-level, history, analyze, export)
+  dacp, dp          Manage DACP handoff protocol (status, set-level, history, analyze, export, drift-check)
   reload-embeddings, re  Reload embedding model (retry after fallback)
   calibrate, cal    Optimize activation threshold from calibration data
   benchmark, bench  Measure simulator accuracy vs real activation
