@@ -1,5 +1,3 @@
-import type { SkillStore } from '../storage/skill-store.js';
-import type { SkillIndex } from '../storage/skill-index.js';
 import type { SkillScope } from '../types/scope.js';
 import { getSkillsBasePath } from '../types/scope.js';
 import { suggestCommand, suggestionsCommand } from './commands/suggest.js';
@@ -34,11 +32,43 @@ import { mcpServerCommand } from './commands/mcp-server.js';
 import { statusCommand } from './commands/status.js';
 import { auditCommand } from './commands/audit.js';
 import { teachCliCommand, coEvolutionCliCommand, quintessenceCliCommand } from '../symbiosis/cli.js';
+import { validateCommand } from './commands/validate.js';
+import { detectConflictsCommand } from './commands/detect-conflicts.js';
+import { scoreActivationCommand } from './commands/score-activation.js';
+import { simulateCommand, simulateHelp } from './commands/simulate.js';
+import { calibrateCommand, calibrateHelp } from './commands/calibrate.js';
+import { publishCommand } from './commands/publish.js';
+import { installCommand } from './commands/install.js';
+import { critiqueCommand } from './commands/critique.js';
+import { sensoriaCommand } from '../sensoria/cli.js';
+import { VersionManager } from '../learning/index.js';
+import { SkillStore } from '../storage/skill-store.js';
+import type { SkillStore as SkillStoreType } from '../storage/skill-store.js';
+import { SkillIndex } from '../storage/skill-index.js';
+import type { SkillIndex as SkillIndexType } from '../storage/skill-index.js';
+import * as p from '@clack/prompts';
+import pc from 'picocolors';
+
+function parseThreshold(args: string[]): number | undefined {
+  const thresholdArg = args.find((a) => a.startsWith('--threshold='));
+  if (thresholdArg) {
+    const value = parseFloat(thresholdArg.split('=')[1]);
+    if (!isNaN(value)) return value;
+  }
+  return undefined;
+}
+
+function createScopedStoreAndIndex(scope: SkillScope) {
+  const skillsDir = getSkillsBasePath(scope);
+  const skillStore = new SkillStore(skillsDir);
+  const skillIndex = new SkillIndex(skillStore, skillsDir);
+  return { skillStore, skillIndex, skillsDir };
+}
 
 export interface CliContext {
   args: string[];
-  skillStore: SkillStore;
-  skillIndex: SkillIndex;
+  skillStore: SkillStoreType;
+  skillIndex: SkillIndexType;
   parseScope: (args: string[]) => SkillScope;
   parseSkillsDir: (args: string[], scope: SkillScope) => string;
   parseStringFlag: (args: string[], name: string) => string | undefined;
@@ -275,6 +305,226 @@ export const REGISTRY: readonly CommandEntry[] = [
   } },
   { aliases: ['help', '-h', '--help'], handler: async () => {
     printHelp();
+  } },
+
+  // ---- inline-arg-parsing cases (formerly in cli.ts switch) ----
+  { aliases: ['validate', 'v'], handler: (ctx) => {
+    const scope = ctx.parseScope(ctx.args);
+    const isAll = ctx.args.includes('--all') || ctx.args.includes('-a');
+    const skillArgs = ctx.args.slice(1).filter((a) => !a.startsWith('-'));
+    const skillName = skillArgs[0];
+    return validateCommand(isAll ? undefined : skillName, { all: isAll, skillsDir: getSkillsBasePath(scope) });
+  } },
+  { aliases: ['detect-conflicts', 'conflicts', 'dc'], handler: async (ctx) => {
+    if (ctx.args.includes('--help') || ctx.args.includes('-h')) {
+      return detectConflictsCommand('--help', {});
+    }
+    const scope = ctx.parseScope(ctx.args);
+    const threshold = parseThreshold(ctx.args);
+    const quiet = ctx.args.includes('--quiet') || ctx.args.includes('-q');
+    const json = ctx.args.includes('--json');
+    const skillArgs = ctx.args.slice(1).filter((a) => !a.startsWith('-'));
+    const skillName = skillArgs[0];
+    return detectConflictsCommand(skillName, { threshold, quiet, json, skillsDir: getSkillsBasePath(scope) });
+  } },
+  { aliases: ['score-activation', 'sa', 'score'], handler: async (ctx) => {
+    if (ctx.args.includes('--help') || ctx.args.includes('-h')) {
+      return scoreActivationCommand('--help', {});
+    }
+    const scope = ctx.parseScope(ctx.args);
+    const skillArgs = ctx.args.slice(1).filter((a) => !a.startsWith('-'));
+    const skillName = skillArgs[0];
+    return scoreActivationCommand(skillName, {
+      all: ctx.args.includes('--all') || ctx.args.includes('-a'),
+      verbose: ctx.args.includes('--verbose') || ctx.args.includes('-v'),
+      quiet: ctx.args.includes('--quiet') || ctx.args.includes('-q'),
+      json: ctx.args.includes('--json'),
+      llm: ctx.args.includes('--llm'),
+      skillsDir: getSkillsBasePath(scope),
+    });
+  } },
+  { aliases: ['simulate', 'sim'], handler: async (ctx) => {
+    if (ctx.args.includes('--help') || ctx.args.includes('-h')) {
+      console.log(simulateHelp());
+      return;
+    }
+    const scope = ctx.parseScope(ctx.args);
+    const thresholdArg = ctx.args.find((a) => a.startsWith('--threshold='));
+    const threshold = thresholdArg ? parseFloat(thresholdArg.split('=')[1]) : undefined;
+    const batchArg = ctx.args.find((a) => a.startsWith('--batch='));
+    const batch = batchArg?.split('=')[1];
+    const promptArgs = ctx.args.filter(
+      (a) => !a.startsWith('--') && !a.startsWith('-') && a !== 'simulate' && a !== 'sim',
+    );
+    await simulateCommand(promptArgs, {
+      scope,
+      verbose: ctx.args.includes('--verbose') || ctx.args.includes('-v'),
+      threshold,
+      json: ctx.args.includes('--json'),
+      batch,
+    });
+  } },
+  { aliases: ['critique', 'crit'], handler: async (ctx) => {
+    if (ctx.args.includes('--help') || ctx.args.includes('-h')) {
+      return critiqueCommand(undefined, {});
+    }
+    const scope = ctx.parseScope(ctx.args);
+    const skillArgs = ctx.args.slice(1).filter((a) => !a.startsWith('-'));
+    const skillName = skillArgs[0];
+    const maxIterArg = ctx.args.find((a) => a.startsWith('--max-iter'));
+    const maxIter = maxIterArg
+      ? parseInt(
+          maxIterArg.includes('=')
+            ? maxIterArg.split('=')[1]!
+            : ctx.args[ctx.args.indexOf(maxIterArg) + 1]!,
+          10,
+        )
+      : undefined;
+    return critiqueCommand(skillName, {
+      skillsDir: ctx.parseSkillsDir(ctx.args, scope),
+      maxIter: !isNaN(maxIter!) ? maxIter : undefined,
+      checkExternal: ctx.args.includes('--check-external'),
+      mock: ctx.args.includes('--mock'),
+    });
+  } },
+  { aliases: ['test-triggering'], handler: async (ctx) => {
+    const scope = ctx.parseScope(ctx.args);
+    const skillName = ctx.args.slice(1).filter((a) => !a.startsWith('-'))[0];
+    const { testTriggeringCommand } = await import('./commands/test-triggering.js');
+    return testTriggeringCommand(skillName, {
+      skillsDir: ctx.parseSkillsDir(ctx.args, scope),
+      mock: ctx.args.includes('--mock'),
+      overrideTriggering: ctx.parseStringFlag(ctx.args, '--override-triggering'),
+    });
+  } },
+  { aliases: ['history', 'hist'], handler: async (ctx) => {
+    const skillName = ctx.args[1];
+    if (!skillName) {
+      p.log.error('Usage: skill-creator history <skill-name>');
+      return 1;
+    }
+    const versionManager = new VersionManager();
+    const history = await versionManager.getHistory(skillName);
+    if (history.length === 0) {
+      p.log.info(`No version history for '${skillName}'.`);
+      p.log.message('The skill may not be tracked in git yet.');
+      return 0;
+    }
+    p.log.message('');
+    p.log.message(pc.bold(`Version History for '${skillName}':`));
+    for (const version of history) {
+      const date = version.date.toLocaleDateString();
+      const versionLabel = version.version ? `v${version.version}` : '';
+      p.log.message(`  ${version.shortHash} ${date} ${versionLabel}`);
+      p.log.message(pc.dim(`    ${version.message}`));
+    }
+    return 0;
+  } },
+  { aliases: ['calibrate', 'cal'], handler: async (ctx) => {
+    if (ctx.args.includes('--help') || ctx.args.includes('-h')) {
+      console.log(calibrateHelp());
+      return;
+    }
+    return calibrateCommand(ctx.args.slice(1));
+  } },
+  { aliases: ['benchmark', 'bench'], handler: async (ctx) => {
+    if (ctx.args.includes('--help') || ctx.args.includes('-h')) {
+      console.log(calibrateHelp());
+      return;
+    }
+    return calibrateCommand(['benchmark', ...ctx.args.slice(1)]);
+  } },
+  { aliases: ['config', 'cfg'], handler: async (ctx) => {
+    const subcommand = ctx.args[1];
+    const subArgs = ctx.args.slice(2);
+    switch (subcommand) {
+      case 'validate':
+      case 'v': {
+        const { configValidateCommand } = await import('./commands/config-validate.js');
+        return configValidateCommand(subArgs);
+      }
+      default:
+        p.log.message('');
+        p.log.message(pc.bold('Config Management:'));
+        p.log.message('');
+        p.log.message('  Subcommands:');
+        p.log.message(`    ${pc.cyan('config validate')}   Validate GSD configuration against ranges and security policies`);
+        p.log.message('');
+        p.log.message('  Examples:');
+        p.log.message('    skill-creator config validate');
+        p.log.message('    skill-creator config validate --json');
+        p.log.message('    skill-creator config validate --config=/path/to/config.json');
+        return 0;
+    }
+  } },
+  { aliases: ['publish', 'pub'], handler: async (ctx) => {
+    const scope = ctx.parseScope(ctx.args);
+    if (ctx.args.includes('--help') || ctx.args.includes('-h')) {
+      return publishCommand(undefined, {});
+    }
+    const skillArgs = ctx.args.slice(1).filter((a) => !a.startsWith('-'));
+    const skillName = skillArgs[0];
+    const outputIdx = ctx.args.findIndex((a) => a === '--output' || a === '-o');
+    const output = outputIdx >= 0 ? ctx.args[outputIdx + 1] : undefined;
+    return publishCommand(skillName, {
+      skillsDir: ctx.parseSkillsDir(ctx.args, scope),
+      output,
+      overrideCritique: ctx.parseStringFlag(ctx.args, '--override-critique'),
+      overrideTriggering: ctx.parseStringFlag(ctx.args, '--override-triggering'),
+    });
+  } },
+  { aliases: ['install', 'inst'], handler: async (ctx) => {
+    const scope = ctx.parseScope(ctx.args);
+    if (ctx.args.includes('--help') || ctx.args.includes('-h')) {
+      return installCommand(undefined, {});
+    }
+    const installArgs = ctx.args.slice(1).filter((a) => !a.startsWith('-'));
+    const source = installArgs[0];
+    return installCommand(source, { skillsDir: getSkillsBasePath(scope) });
+  } },
+  { aliases: ['export', 'ex'], handler: async (ctx) => {
+    const { exportCommand } = await import('./commands/export.js');
+    const scope = ctx.parseScope(ctx.args);
+    const portable = ctx.args.includes('--portable');
+    const platformArg = ctx.args.find((a) => a.startsWith('--platform='));
+    const platformArgIdx = ctx.args.indexOf('--platform');
+    const platform = platformArg
+      ? platformArg.split('=')[1]
+      : platformArgIdx >= 0
+      ? ctx.args[platformArgIdx + 1]
+      : undefined;
+    const outputArg = ctx.args.find((a) => a.startsWith('--output=') || a.startsWith('-o='));
+    const outputArgIdx = ctx.args.findIndex((a) => a === '--output' || a === '-o');
+    const output = outputArg
+      ? outputArg.split('=')[1]
+      : outputArgIdx >= 0
+      ? ctx.args[outputArgIdx + 1]
+      : undefined;
+    const flagValues = new Set([platform, output].filter(Boolean));
+    const skillName = ctx.args.slice(1).find((a) => !a.startsWith('-') && !flagValues.has(a));
+    return exportCommand(skillName, { portable, platform, output, skillsDir: getSkillsBasePath(scope) });
+  } },
+  { aliases: ['sensoria'], handler: async (ctx) => {
+    const scope = ctx.parseScope(ctx.args);
+    const { skillStore: scopedStore } = createScopedStoreAndIndex(scope);
+    const positional = ctx.args.slice(1).filter((a) => !a.startsWith('-'));
+    const skillName = positional[0];
+    const minStr = ctx.parseStringFlag(ctx.args, '--min');
+    const maxStr = ctx.parseStringFlag(ctx.args, '--max');
+    const pointsStr = ctx.parseStringFlag(ctx.args, '--points');
+    return sensoriaCommand(
+      ctx.args.includes('--help') || ctx.args.includes('-h') ? '--help' : skillName,
+      {
+        format: ctx.parseStringFlag(ctx.args, '--format'),
+        min: minStr !== undefined ? Number(minStr) : undefined,
+        max: maxStr !== undefined ? Number(maxStr) : undefined,
+        points: pointsStr !== undefined ? Number(pointsStr) : undefined,
+        tachyphylaxis: ctx.args.includes('--tachyphylaxis'),
+        quiet: ctx.args.includes('--quiet') || ctx.args.includes('-q'),
+        settingsPath: ctx.parseStringFlag(ctx.args, '--settings'),
+      },
+      { skillStore: scopedStore },
+    );
   } },
 ];
 
