@@ -138,5 +138,26 @@
     ],
     "key_lessons": ["#10415"],
     "codified_at_milestone": "v1.49.784 (new domain — codified from v1.49.783 STATE.md normalizer fix)"
+  },
+  {
+    "domain": "Static-analysis tool authoring",
+    "trigger": "Authoring or extending a CLI tool in `tools/` that scans the codebase, emits metrics, or produces a comparable report; designing its test harness; piping its output to another command",
+    "summary": "Test harnesses use spawnSync (not execSync) so stderr survives exit 0; cross-module analyzers scan multiple importer roots (not just src/); metric-emitting tools commit a baseline file so future runs diff via git; CLIs flush stdout before process.exit() to avoid 64KB pipe-buffer truncation; diff-emitting observability tools document the warm-up period (first run has no prior baseline). #10421 field-validated at v789 by adoption-baseline diff emitting exactly the predicted line.",
+    "canonical_docs": [
+      "docs/static-analysis-tool-discipline.md"
+    ],
+    "key_lessons": ["#10417", "#10418", "#10419", "#10420", "#10421"],
+    "codified_at_milestone": "v1.49.790 (new domain — codified from v1.49.785-789 adoption-telemetry build chain lesson cluster)"
+  },
+  {
+    "domain": "Shelfware verdict patterns",
+    "trigger": "Authoring a per-module shelfware verdict (WIRED / RETIRED / ALLOWLISTED) for a module flagged by the adoption-scan as test-only; selecting the wire site that satisfies a WIRED verdict",
+    "summary": "Observability surface (scanner + dashboard + allowlist) and decision surface (per-module verdicts) MUST live in separate files and evolve independently. Default to the lightest wire that flips the adoption-scan classification — a CLI subcommand usually suffices and preserves HARD-preservation invariants — defer richer in-loop wires to follow-on ships only if the verdict explicitly requires production use.",
+    "canonical_docs": [
+      "docs/shelfware-verdict-patterns.md",
+      "docs/SHELFWARE-VERDICTS.md"
+    ],
+    "key_lessons": ["#10422", "#10423"],
+    "codified_at_milestone": "v1.49.790 (new domain — codified from v1.49.789 first shelfware verdict lesson cluster)"
   }
 ]

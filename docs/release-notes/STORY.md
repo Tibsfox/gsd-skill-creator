@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.789`.
+The story begins at `v1.0` and continues to `v1.49.790`.
 
-**832 chapters.** 831 have retrospectives.
+**833 chapters.** 832 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -840,3 +840,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.787](v1.49.787/00-summary.md)** — Adoption Telemetry: Dashboard + Automation + Allowlist · 2026-05-26
 - **[v1.49.788](v1.49.788/00-summary.md)** — IBEX NASA Interstellar Boundary Explorer SMEX-Class Earth-Orbit Energetic-Neutral-Atom All-Sky Imaging Mission · 2026-05-26
 - **[v1.49.789](v1.49.789/00-summary.md)** — Shelfware Verdict 1: WIRE `semantic-channel` via `dacp drift-check` · 2026-05-26
+- **[v1.49.790](v1.49.790/00-summary.md)** — Codification Ship: 7 candidate lessons promoted to ESTABLISHED across 2 new operative-discipline domains (Static-analysis tool authoring, Shelfware verdict patterns) · 2026-05-26
