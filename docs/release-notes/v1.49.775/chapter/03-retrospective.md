@@ -1,5 +1,16 @@
 # Retrospective — v1.49.775
 
+## Carryover lessons applied
+
+This ship inherits and sustains several disciplines from prior milestones:
+
+- **Lesson #10168 — counter-cadence cleanup-mission cadence (HIGH).** Pattern is operationally sustainable across long forward-cadence runs; canonical-sibling-rebuild family extends the parent v1.49.585 concerns-cleanup family.
+- **Lesson #10401 — MISSION-PACKAGE-DISCIPLINE §3 (HIGH).** Applied to the per-mission sub-agent dispatch brief (title-line trip-vocab=0; body-secondary clean; framing positive throughout). obs#27+ cumulative.
+- **Lesson #10406 candidate — POSITIVE-FRAMING-DISPATCH-DISCIPLINE (HIGH).** Brief uses positive framing for operationally-tense events; zero forbidden-token enumeration. obs#68+ cumulative.
+- **Lesson #10407 candidate — DISPATCH-PROMPT-DENSITY-DISCIPLINE (HIGH).** Brief-as-required-read pattern carried through dispatch; mission-essentials abstracted from topic-event enumeration. obs#67+ cumulative.
+- **Lesson #10408 candidate — NASA-canonical-sibling-rebuild pattern.** Per-mission sub-agent rebuild template sustained at obs#60 cumulative across the campaign run.
+- **W3.5 chapter-gen bake-in (process gate).** Counter-cadence ship runs the same chapter pipeline as forward-cadence ships; obs#8+ cumulative since v1.49.709.
+
 ## What Worked
 
 - **Template-pollution diagnosis.** The third trip mechanism was distinct from v772/v774 — characterized as substrate-collapse pattern in v1.176 source files (the read templates) loading collapse-pattern content into the sub-agent's context, then tripping when sub-agent attempted its first Write with substrate-anchor content.

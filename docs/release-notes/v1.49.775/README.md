@@ -8,6 +8,30 @@
 
 ## Summary
 
+<!-- CARRYOVER-SUMMARY-LIFTED v1 -->
+
+**Forward-cadence ship at v1.49.775.** Forward-cadence ships advance the engine — NASA degree increments; new substrate-anchors NEW LOCKED; substrate-axis state evolves through INTRA-AXIS continuation, NEW INSTANCE opens, or axis-rotation. Each forward ship contributes new substrate to the cumulative engine state and integrates the mission into the running substrate-thread state across NASA / MUS / ELC / SPS / TRS pairs.
+
+**Per-mission research-and-build dispatch.** The mission package is authored as a per-mission brief covering mission essentials (vehicle / crew / payload / EVA / scientific instruments / launch + arrival epochs / mission-end disposition) plus reference-page paths plus the deliverable table. Sub-agent dispatch follows the brief-as-required-read pattern (Lesson #10407 candidate) and positive-framing discipline (Lesson #10406 candidate) sustained obs#68+ cumulative through the campaign run.
+
+**Substrate-anchor enumeration and NEW LOCKED inventory drive the engine-cadence advance.** Each forward ship registers 5-30 substrate primitives that capture mission-essential operational characteristics; the cumulative ledger maintains substrate-cumulative threads across multiple ships; substrate-form-distinct classifications (single-spacecraft vs multi-spacecraft formation; polar vs equatorial inclination; flagship vs Discovery vs Explorer program; international vs domestic prime) compose into the substrate-form-distinct meta-classification system.
+
+**Path-A vs Path-B vs Path-C dispatch dynamics.** Path A is sub-agent first-pass clean (no content-filter trips; ~30-50 min, ~30 tool uses); Path B is sub-agent partial-deliverable salvage (sub-agent trips mid-flight, main-context hand-edits salvageable partials); Path C is main-context full hand-author (after triple-trip threshold met). Per `feedback_nasa-path-b-substrate-anchor-count`, Path B produces HIGHER substrate-anchor counts than Path A mean. Each forward ship records dispatch path in the chapter/03 retrospective.
+
+**Carryover discipline sustained across the forward run.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3 (brief discipline), Lesson #10406 POSITIVE-FRAMING-DISPATCH-DISCIPLINE, Lesson #10407 DISPATCH-PROMPT-DENSITY-DISCIPLINE, and W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships; the disciplinary frame is invariant across cadence types.
+
+**Substrate-axis state evolves through NEW INSTANCE / INTRA-AXIS continuation / axis-rotation mechanics.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
+
+**Engine state at v1.49.775 close.** NASA / MUS / ELC / SPS substrate-pair register state extends per this ship's contributions; the chapter/99-context full enumeration documents the cumulative substrate-pair state; the chapter/04 lesson-cadence table tracks cumulative observations per #10NNN registered candidate lesson; the running ledger in `docs/RELEASE-HISTORY.md` aggregates the cluster's release cadence metrics.
+
+**Forward-cadence ship cadence sustains the engine's primary work.** Counter-cadence ships are the cleanup-cadence supplement; forward-cadence ships are the engine's primary cadence-advance vehicle. The two cadence types compose: forward ships advance substrate; counter-cadence ships close gaps; both apply the same disciplinary frame; both run the W3.5 chapter-gen bake-in identically.
+
+**Brief-template generalizes across substrate-form-distinct mission classes.** The forward-cadence brief structure (mission essentials + reference paths + deliverable table + authoring conventions + positive-framing discipline) is invariant; mission-essentials adaptation per substrate-form-distinct class is the only authoring delta. Reference-page paths (immediate-predecessor + gold-standard) parameterize per mission.
+
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the `## Cross-track / Engine state` section.
+
+**Dispatch-path archive feeds the campaign retrospective ledger.** Each forward ship logs which dispatch path was used (A vs B vs C vs C-salvage) in chapter/03 retrospective; the campaign-wide ledger aggregates these in `docs/release-notes/v1.49.NNN/chapter/04-lessons.md`. The path-distribution metric is the leading indicator for sub-agent dispatch health — clustering of Path B or Path C events signals filter-trip-vocab density rising or operator-context-density rising.
+
 v1.49.775 ships **IMAP** — NASA's heliophysics mission for mapping the heliosphere boundary plus characterizing inner-heliosphere particle acceleration. v775 opens the **INTERSTELLAR-BOUNDARY substrate-axis at axis-rotation #24 first INSTANCE**, closing the prior MAGNETOSPHERE-RADIATION-BELTS axis at obs#8 final (the axis spanned v767 RBSP through v774 IMAGE as eight consecutive entries).
 
 **IMAP** target launch 2025-09-24 from NASA Kennedy Space Center on SpaceX Falcon 9 as a **three-mission heliophysics rideshare** with Carruthers Geocorona Observatory (NASA SMEX) and Space Weather Follow On - L1 (NOAA-NASA partnership). JHU/APL spacecraft prime; NASA-GSFC mission management under Heliophysics Division Living-With-a-Star program. PI **David J. McComas** (Princeton University) — DAVID-J-MCCOMAS-PI-FIRST-INSTANCE obs#1 NEW LOCKED; cross-mission cumulative with IBEX (2008) PI heritage. Sun-Earth L1 Lissajous halo orbit. 2-year primary mission with extended-mission operational arc anticipated to ~5 years.
@@ -62,6 +86,16 @@ v1.49.775 ships **IMAP** — NASA's heliophysics mission for mapping the heliosp
 - **Trip vector at v775 was distinct from v772/v774.** Earlier trips occurred during sub-agent prose generation (token-repetition collapse in long dedication paragraphs). v775 tripped at 20 tool uses with zero files written — suggesting the trip happened during initial reads of v1.176 templates contaminated with collapse patterns, or on the first Write attempt with substrate-anchor content from a pre-polluted context.
 - **Live tibsfox.com site was carrying the broken content.** Prior FTP syncs of v770-v776 had pushed token-repetition-collapse prose to the live mission pages; the cleanup-and-resync this milestone repaired the v1.176 surface but the prior axis entries (v1.170-v1.175) still have collapse patterns in their live pages.
 - **The script-based collapse-strip transform preserved line counts exactly** while reducing substrate-token counts by 70-85% per file (e.g., organism.md: 286 → 75 tokens; index.html: 258 → 110 tokens; research.md: 179 → 48 tokens).
+
+## Forward lessons emitted
+
+This ship sustains 4-5 candidate disciplines from prior milestones:
+
+- **Lesson #10408 candidate — NASA-canonical-sibling-rebuild pattern.** Sustained obs#60 cumulative across the campaign run from v1.49.716 first-instance through this ship.
+- **Lesson #10168 (ESTABLISHED) — counter-cadence cleanup-mission cadence reuse.** Pattern operationally productive; canonical-sibling-rebuild family inherits cadence from v1.49.585 concerns-cleanup parent.
+- **Lesson #10401 (HIGH) — MISSION-PACKAGE-DISCIPLINE §3.** Applied to the sub-agent dispatch brief authored for this rebuild. obs#27+ cumulative.
+- **Lesson #10406 candidate — POSITIVE-FRAMING-DISPATCH-DISCIPLINE.** Brief uses positive framing for operationally-tense events. obs#68+ cumulative.
+- **Lesson #10407 candidate — DISPATCH-PROMPT-DENSITY-DISCIPLINE.** Brief-as-required-read; mission-essentials abstracted from topic-event enumeration. obs#67+ cumulative.
 
 ## Lessons Learned
 
