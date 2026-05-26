@@ -34,7 +34,7 @@ export {
   RENDER_ENGINE,
   IO_ENGINE,
   ROUTER_ENGINE,
-} from './chip-registry.js';
+} from './engine-registry.js';
 
 // Message port
 export {

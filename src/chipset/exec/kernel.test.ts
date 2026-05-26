@@ -10,7 +10,7 @@
 import { describe, it, expect } from 'vitest';
 import { ExecKernel } from './kernel.js';
 import type { KernelConfig, KernelState } from './kernel.js';
-import { createDefaultRegistry } from '../teams/chip-registry.js';
+import { createDefaultRegistry } from '../teams/engine-registry.js';
 import { createMessage } from './messages.js';
 
 // ============================================================================

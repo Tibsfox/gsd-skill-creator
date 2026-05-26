@@ -17,7 +17,7 @@ import {
   RENDER_ENGINE,
   IO_ENGINE,
   ROUTER_ENGINE,
-} from './chip-registry.js';
+} from './engine-registry.js';
 
 // ============================================================================
 // createDefaultRegistry

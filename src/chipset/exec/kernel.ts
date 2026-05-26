@@ -21,7 +21,7 @@
  * - getState() returns a snapshot of kernel state and per-engine budgets
  */
 
-import type { EngineRegistry } from '../teams/chip-registry.js';
+import type { EngineRegistry } from '../teams/engine-registry.js';
 import { MessagePort } from '../teams/message-port.js';
 import type { KernelMessage } from './messages.js';
 import { ExecScheduler } from './scheduler.js';
