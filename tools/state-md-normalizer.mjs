@@ -286,45 +286,73 @@ function normalizeFrontmatter(fm) {
 
 /**
  * Generate the ## Current Position section body from frontmatter.
+ * Lines for absent fields are skipped (no UNKNOWN placeholder).
+ * Emits Shipped: line when status === 'shipped' and shipped_at is set.
  */
 function generateCurrentPosition(fm) {
   const milestone = fm.milestone ?? 'UNKNOWN';
-  const milestoneName = fm.milestone_name ?? 'UNKNOWN';
-  const status = fm.status ?? 'UNKNOWN';
-  const openedOn = fm.opened_on ?? 'UNKNOWN';
+  const milestoneName = fm.milestone_name;
+  const status = fm.status;
+  const openedOn = fm.opened_on;
+  const shippedAt = fm.shipped_at;
+  const isShipped = typeof status === 'string' && status.toLowerCase() === 'shipped';
 
-  return [
+  const milestoneLine = milestoneName
+    ? `Milestone: **${milestone} — ${milestoneName}**`
+    : `Milestone: **${milestone}**`;
+
+  const lines = [
     `## Current Position`,
     ``,
-    `Milestone: **${milestone} — ${milestoneName}**`,
-    `Status: ${status.toUpperCase()}`,
-    `Opened: ${openedOn}`,
+    milestoneLine,
+    status ? `Status: ${status.toUpperCase()}` : null,
+    openedOn ? `Opened: ${openedOn}` : null,
+    isShipped && shippedAt ? `Shipped: ${shippedAt}` : null,
     ``,
-  ].join('\n');
+  ].filter(line => line !== null);
+
+  return lines.join('\n');
 }
 
 /**
  * Generate the ## Engine state baseline section from predecessor block + nasa_degree.
+ * Lines for absent fields are skipped (no UNKNOWN placeholder).
  */
 function generateEngineStateBaseline(fm) {
   const milestone = fm.milestone ?? 'UNKNOWN';
   const pred = fm.predecessor ?? {};
-  const nasaDegree = fm.nasa_degree ?? 'UNKNOWN';
-  const predMilestone = pred.milestone ?? 'UNKNOWN';
-  const predTag = pred.shipped_at_tag ?? 'UNKNOWN';
-  const predSha = pred.shipped_at_sha ?? 'UNKNOWN';
+  const nasaDegree = fm.nasa_degree;
+  const predMilestone = pred.milestone;
+  const predTag = pred.shipped_at_tag;
+  const predSha = pred.shipped_at_sha;
   const predSync = pred.post_ship_sync_sha ?? null;
+  // Default counter_cadence to false when absent — most milestones are not
+  // counter-cadence, and the line is load-bearing for normalized-form match
+  // against historical fixtures.
   const predCounterCadence = pred.counter_cadence ?? false;
   const predDegreeAdvancing = pred.degree_advancing_milestone ?? null;
+
+  // Build the predecessor milestone line dynamically — only include the parts
+  // (tag, sha) that are actually present, so hand-authored frontmatter with
+  // partial detail round-trips without "UNKNOWN" drift.
+  let predecessorLine = null;
+  if (predMilestone) {
+    const detailParts = [];
+    if (predTag) detailParts.push(`tag: ${predTag}`);
+    if (predSha) detailParts.push(`sha: ${predSha}`);
+    predecessorLine = detailParts.length > 0
+      ? `- **Predecessor milestone:** ${predMilestone} (${detailParts.join(', ')})`
+      : `- **Predecessor milestone:** ${predMilestone}`;
+  }
 
   const lines = [
     `## Engine state baseline at ${milestone} open`,
     ``,
-    `- **Predecessor milestone:** ${predMilestone} (tag: ${predTag}, sha: ${predSha})`,
+    predecessorLine,
     predSync ? `- **Post-ship sync sha:** ${predSync}` : null,
     `- **Predecessor counter-cadence:** ${predCounterCadence}`,
     predDegreeAdvancing ? `- **Last degree-advancing milestone:** ${predDegreeAdvancing}` : null,
-    `- **NASA degree at open:** ${nasaDegree}`,
+    nasaDegree !== undefined ? `- **NASA degree at open:** ${nasaDegree}` : null,
     ``,
   ].filter(line => line !== null);
 
@@ -332,6 +360,34 @@ function generateEngineStateBaseline(fm) {
 }
 
 // ─── Body rebuilder ───────────────────────────────────────────────────────────
+
+/**
+ * Strip a markdown section by H2 heading prefix.
+ * Section runs from the matched heading line up to (but not including) the
+ * next H2 heading or end-of-input. Returns the body with the section removed.
+ * Replaces the regex pattern `(?=^##|\Z)` which JS does not support — `\Z`
+ * was being parsed as a literal `Z` character, causing premature termination
+ * when a Z appeared in section prose.
+ */
+function stripSection(body, headingPrefix) {
+  const lines = body.split('\n');
+  let start = -1;
+  for (let i = 0; i < lines.length; i++) {
+    if (lines[i].startsWith(headingPrefix)) {
+      start = i;
+      break;
+    }
+  }
+  if (start === -1) return body;
+  let end = lines.length;
+  for (let i = start + 1; i < lines.length; i++) {
+    if (lines[i].startsWith('## ')) {
+      end = i;
+      break;
+    }
+  }
+  return [...lines.slice(0, start), ...lines.slice(end)].join('\n');
+}
 
 /**
  * Rebuild the body from normalized frontmatter + preserved Notes section.
@@ -348,18 +404,15 @@ function rebuildBody(fm, originalBody) {
   const notesMatch = originalBody.match(/^(## Notes\s*\n[\s\S]*)$/m);
   const notesSection = notesMatch ? notesMatch[1] : null;
 
-  // Extract sections we know about (to identify "other" sections).
-  // Sections we auto-generate — strip them from the body before re-adding.
-  const knownAutoSectionPatterns = [
-    /^## Current Position[\s\S]*?(?=^##|\Z)/m,
-    /^## Engine state baseline[\s\S]*?(?=^##|\Z)/m,
-  ];
-
   let remainingBody = originalBody;
-  // Remove known auto-generated sections.
-  for (const pattern of knownAutoSectionPatterns) {
-    remainingBody = remainingBody.replace(pattern, '');
-  }
+
+  // Remove known auto-generated sections (Current Position + Engine state baseline).
+  // Uses a line-walk rather than regex with \Z (JS has no end-of-string anchor)
+  // so the strip works correctly even when the section body contains a literal
+  // `Z` character (e.g. ISO-8601 timestamps in inline prose).
+  remainingBody = stripSection(remainingBody, '## Current Position');
+  remainingBody = stripSection(remainingBody, '## Engine state baseline');
+
   // Remove the Notes section (we'll re-append it at the end).
   if (notesSection) {
     remainingBody = remainingBody.replace(notesSection, '');
@@ -456,9 +509,9 @@ function main() {
   // Rebuild body.
   const normalizedBody = rebuildBody(normalizedFm, body);
 
-  // Serialize.
+  // Serialize. Blank line between `---` close and body for readability.
   const normalizedFrontmatterYaml = serializeFrontmatter(normalizedFm);
-  const normalizedContent = `---\n${normalizedFrontmatterYaml}\n---\n${normalizedBody}`;
+  const normalizedContent = `---\n${normalizedFrontmatterYaml}\n---\n\n${normalizedBody}`;
 
   // Check if anything changed.
   const changed = normalizedContent !== raw;

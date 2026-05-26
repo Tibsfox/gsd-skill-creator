@@ -351,6 +351,166 @@ describe('state-md-normalizer.mjs', () => {
     });
   });
 
+  // T5: Body-generator tolerance + correctness (v1.49.783)
+  describe('T5 — body-generator tolerance + shipped-state correctness', () => {
+    it('emits a Shipped: line in Current Position when status=shipped + shipped_at is set', () => {
+      const fixture = [
+        '---',
+        'gsd_state_version: "1.0"',
+        'milestone: v1.49.783',
+        'milestone_name: Normalizer Fix',
+        'status: shipped',
+        'counter_cadence: false',
+        'nasa_degree: "1.177"',
+        'predecessor:',
+        '  milestone: v1.49.782',
+        '  shipped_at_tag: v1.49.782',
+        '  shipped_at_sha: c3c8e6394',
+        '  counter_cadence: false',
+        'opened_on: "2026-05-26"',
+        'shipped_at: "2026-05-26"',
+        '---',
+        '',
+      ].join('\n');
+      setupEnv(fixture);
+      const r = runScript('--write');
+      expect(r.exitCode).toBe(0);
+      const body = readFileSync(statePath, 'utf8');
+      expect(body).toMatch(/^Status: SHIPPED$/m);
+      expect(body).toMatch(/^Opened: 2026-05-26$/m);
+      expect(body).toMatch(/^Shipped: 2026-05-26$/m);
+    });
+
+    it('omits Opened: line entirely when opened_on is absent (no UNKNOWN placeholder)', () => {
+      const fixture = [
+        '---',
+        'gsd_state_version: "1.0"',
+        'milestone: v1.49.783',
+        'milestone_name: Minimal Fixture',
+        'status: opened',
+        'counter_cadence: false',
+        'nasa_degree: "1.177"',
+        'predecessor:',
+        '  milestone: v1.49.782',
+        '  shipped_at_tag: v1.49.782',
+        '  counter_cadence: false',
+        '---',
+        '',
+      ].join('\n');
+      setupEnv(fixture);
+      runScript('--write');
+      const body = readFileSync(statePath, 'utf8');
+      expect(body).not.toMatch(/UNKNOWN/);
+      expect(body).not.toMatch(/^Opened:/m);
+    });
+
+    it('omits sha part of Predecessor line when shipped_at_sha is absent', () => {
+      const fixture = [
+        '---',
+        'gsd_state_version: "1.0"',
+        'milestone: v1.49.783',
+        'milestone_name: Partial Predecessor',
+        'status: opened',
+        'counter_cadence: false',
+        'nasa_degree: "1.177"',
+        'predecessor:',
+        '  milestone: v1.49.782',
+        '  shipped_at_tag: v1.49.782',
+        '  counter_cadence: false',
+        '---',
+        '',
+      ].join('\n');
+      setupEnv(fixture);
+      runScript('--write');
+      const body = readFileSync(statePath, 'utf8');
+      // sha must NOT appear as UNKNOWN; tag present without comma-sha
+      expect(body).not.toMatch(/sha: UNKNOWN/);
+      expect(body).toMatch(/Predecessor milestone:\*\* v1\.49\.782 \(tag: v1\.49\.782\)/);
+    });
+
+    it('strip works correctly when body contains a literal Z character (regression for \\Z literal-Z bug)', () => {
+      const fixture = [
+        '---',
+        'gsd_state_version: "1.0"',
+        'milestone: v1.49.783',
+        'milestone_name: Z-In-Body Regression',
+        'status: opened',
+        'counter_cadence: false',
+        'nasa_degree: "1.177"',
+        'predecessor:',
+        '  milestone: v1.49.782',
+        '  shipped_at_tag: v1.49.782',
+        '  shipped_at_sha: c3c8e6394',
+        '  counter_cadence: false',
+        'opened_on: "2026-05-26"',
+        '---',
+        '',
+        '## Current Position',
+        '',
+        'Milestone: **v1.49.783 — Z-In-Body Regression**',
+        'Status: OPENED',
+        'Opened: 2026-05-26',
+        '',
+        '## Engine state baseline at v1.49.783 open',
+        '',
+        // Timestamps with trailing Z must NOT prematurely terminate strip.
+        '- **NASA degree at open:** 1.177 (sampled at 2026-05-26T10:30:00.000Z)',
+        '- **Predecessor milestone:** v1.49.782 (tag: v1.49.782, sha: c3c8e6394)',
+        '- **Predecessor counter-cadence:** false',
+        '',
+      ].join('\n');
+      setupEnv(fixture);
+      const r = runScript('--write');
+      expect(r.exitCode).toBe(0);
+      const body = readFileSync(statePath, 'utf8');
+      // The auto-generated Engine state baseline should fully replace the
+      // original — no trailing fragment of the original section bleeding
+      // through after a Z character.
+      expect(body).not.toContain('2026-05-26T10:30:00.000Z');
+      // Second --check should be clean (idempotency unaffected by Z).
+      const r2 = runScript('--check');
+      expect(r2.exitCode).toBe(0);
+    });
+
+    it('hand-authored shipped STATE.md with full frontmatter round-trips clean (no drift)', () => {
+      const fixture = [
+        '---',
+        'gsd_state_version: "1.0"',
+        'milestone: v1.49.783',
+        'milestone_name: Round-Trip Fixture',
+        'status: shipped',
+        'counter_cadence: false',
+        'nasa_degree: "1.177"',
+        'predecessor:',
+        '  milestone: v1.49.782',
+        '  shipped_at_tag: v1.49.782',
+        '  shipped_at_sha: c3c8e6394',
+        '  counter_cadence: false',
+        'opened_on: "2026-05-26"',
+        'shipped_at: "2026-05-26"',
+        '---',
+        '',
+        '## Current Position',
+        '',
+        'Milestone: **v1.49.783 — Round-Trip Fixture**',
+        'Status: SHIPPED',
+        'Opened: 2026-05-26',
+        'Shipped: 2026-05-26',
+        '',
+        '## Engine state baseline at v1.49.783 open',
+        '',
+        '- **Predecessor milestone:** v1.49.782 (tag: v1.49.782, sha: c3c8e6394)',
+        '- **Predecessor counter-cadence:** false',
+        '- **NASA degree at open:** 1.177',
+        '',
+      ].join('\n');
+      setupEnv(fixture);
+      const r = runScript('--check');
+      expect(r.exitCode).toBe(0);
+      expect(r.stdout).toMatch(/no drift|already normalized|frontmatter clean/i);
+    });
+  });
+
 });
 
 // Polyfill require for ESM context (used in T3 backup-file check).

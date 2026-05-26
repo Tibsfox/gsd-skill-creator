@@ -261,6 +261,7 @@ describe('state-md-normalizer-prose — integration with state-md-normalizer.mjs
       '  shipped_at_sha: deadbeef',
       'opened_on: "2026-05-11"',
       '---',
+      '',
       '## Current Position',
       '',
       'Milestone: **v1.49.637 — prose-int-fixture**',
