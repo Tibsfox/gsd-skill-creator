@@ -265,6 +265,20 @@ impl std::fmt::Debug for VramContext {
 // PinnedBuffer — page-locked host memory for high-bandwidth DMA transfers
 // =========================================================================
 
+/// Backing strategy used to allocate a `PinnedBuffer`. Tracked explicitly
+/// so `Drop` can call the matching deallocator — calling munmap on alloc'd
+/// memory (or dealloc on mmap'd memory) is undefined behavior.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+enum Backing {
+    /// Zero-size buffer; no allocation performed, nothing to free.
+    None,
+    /// Allocated via `libc::mmap` with `MAP_LOCKED` for pinned pages.
+    Mmap,
+    /// Fallback path via `std::alloc::alloc_zeroed` when mmap with
+    /// MAP_LOCKED failed (e.g. ulimit -l too low).
+    Alloc,
+}
+
 /// Page-locked (pinned) host memory buffer. Allocated via `cuMemAllocHost`
 /// (exposed through cudarc). Pinned memory bypasses the OS page cache and
 /// enables full PCIe bandwidth for host↔device transfers.
@@ -274,6 +288,7 @@ impl std::fmt::Debug for VramContext {
 pub struct PinnedBuffer {
     ptr: *mut u8,
     len: usize,
+    backing: Backing,
 }
 
 impl PinnedBuffer {
@@ -283,6 +298,7 @@ impl PinnedBuffer {
             return Ok(Self {
                 ptr: std::ptr::NonNull::dangling().as_ptr(),
                 len: 0,
+                backing: Backing::None,
             });
         }
         // Use libc::mmap with MAP_LOCKED for pinned pages. This avoids
@@ -310,11 +326,13 @@ impl PinnedBuffer {
             return Ok(Self {
                 ptr: fallback,
                 len,
+                backing: Backing::Alloc,
             });
         }
         Ok(Self {
             ptr: ptr as *mut u8,
             len,
+            backing: Backing::Mmap,
         })
     }
 
@@ -342,19 +360,24 @@ impl PinnedBuffer {
 
 impl Drop for PinnedBuffer {
     fn drop(&mut self) {
-        if self.len > 0 {
-            // Try munmap first (if we allocated via mmap). If the pointer
-            // came from alloc, munmap will fail silently — the allocator
-            // tracks its own pages. In practice we always use mmap or alloc,
-            // never both for the same pointer.
-            unsafe {
-                let ret = libc::munmap(self.ptr as *mut libc::c_void, self.len);
-                if ret != 0 {
-                    // Was allocated via std::alloc — free that way.
-                    let layout = std::alloc::Layout::from_size_align_unchecked(self.len, 64);
+        // Dispatch on the recorded backing strategy. The previous
+        // implementation always called munmap first and fell back to dealloc
+        // on non-zero return — but munmap can fail for reasons unrelated to
+        // the pointer (EINVAL on bad len/alignment, EAGAIN under memory
+        // pressure) and calling dealloc on mmap'd memory is undefined
+        // behavior, as is calling munmap on alloc'd memory.
+        match self.backing {
+            Backing::None => {}
+            Backing::Mmap => unsafe {
+                libc::munmap(self.ptr as *mut libc::c_void, self.len);
+            },
+            Backing::Alloc => unsafe {
+                // SAFETY: same (size, 64) layout used at allocation; len is
+                // immutable after construction.
+                if let Ok(layout) = std::alloc::Layout::from_size_align(self.len, 64) {
                     std::alloc::dealloc(self.ptr, layout);
                 }
-            }
+            },
         }
     }
 }
