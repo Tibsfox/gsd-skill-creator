@@ -89,7 +89,16 @@ describe('cli entrypoint guard (symlink-aware)', () => {
   const DIST_CLI = resolve(process.cwd(), 'dist/cli.js');
   const NODE = process.execPath;
   const distAvailable = existsSync(DIST_CLI);
-  const maybeIt = distAvailable ? it : it.skip;
+  // Windows requires admin/Developer Mode for symlinkSync; rather than hard-
+  // fail with EPERM, skip on win32 so the spawn coverage stays Linux/macOS-only.
+  const onWindows = process.platform === 'win32';
+  if (!distAvailable) {
+    console.warn(
+      '[cli.test] dist/cli.js missing — skipping symlink-aware tests. ' +
+        'Run `npm run build` to enable them.',
+    );
+  }
+  const maybeIt = distAvailable && !onWindows ? it : it.skip;
 
   maybeIt('runs --version when invoked through a symlink', () => {
     const tmp = mkdtempSync(join(tmpdir(), 'sc-symlink-'));
