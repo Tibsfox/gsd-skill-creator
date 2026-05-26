@@ -17,7 +17,7 @@ import type { ChipRegistry } from '../chips/chip-registry.js';
 import { CapabilityClassifier, CapabilityClassSchema } from './capability-classifier.js';
 import type { CapabilityClass } from './capability-classifier.js';
 import { LimitationRegistry } from './limitation-registry.js';
-import type { CalibrationStore } from './calibration-store.js';
+import type { CalibrationAdjustmentStore } from './calibration-adjustment-store.js';
 
 // ============================================================================
 // IMP-03: Threshold constants (model-aware-grader level)
@@ -237,7 +237,7 @@ export class ModelAwareGrader {
     registry: ChipRegistry,
     classifier: CapabilityClassifier,
     limitationRegistry: LimitationRegistry,
-    calibrationStore: CalibrationStore,
+    calibrationStore: CalibrationAdjustmentStore,
   ): Promise<GradingContext> {
     const profile = await this.buildCapabilityProfile(chipName, registry);
     if (!profile) {

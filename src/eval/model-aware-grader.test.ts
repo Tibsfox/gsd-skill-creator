@@ -14,7 +14,7 @@ import type { ModelCapabilityProfile, GradingContext, CalibrationAdjustment } fr
 import type { ChipRegistry } from '../chips/chip-registry.js';
 import { CapabilityClassifier } from './capability-classifier.js';
 import { LimitationRegistry } from './limitation-registry.js';
-import { CalibrationStore } from './calibration-store.js';
+import { CalibrationAdjustmentStore } from './calibration-adjustment-store.js';
 
 // ============================================================================
 // Helpers
@@ -402,8 +402,8 @@ describe('ModelAwareGrader.buildGradingContext', () => {
   const classifier = new CapabilityClassifier();
   const limitationRegistry = new LimitationRegistry();
 
-  function makeCalStore(): CalibrationStore {
-    return new CalibrationStore('/tmp/test-cal.json');
+  function makeCalStore(): CalibrationAdjustmentStore {
+    return new CalibrationAdjustmentStore('/tmp/test-cal.json');
   }
 
   it('returns valid GradingContext with model_context', async () => {

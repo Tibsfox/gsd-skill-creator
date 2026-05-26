@@ -1,8 +1,11 @@
 /**
- * CalibrationStore -- persists per-capability-class calibration adjustments.
+ * CalibrationAdjustmentStore -- persists per-capability-class calibration adjustments.
  *
  * Stores calibration data in calibration.json files. Missing files are not errors.
  * Default adjustments are all zeros (no calibration effect).
+ *
+ * Renamed from CalibrationStore at v1.49.781 to disambiguate from
+ * src/calibration/CalibrationEventStore (a separate JSONL event log).
  *
  * CAL-02: Per-tier calibration claims
  * CAL-03: model_context schema integration
@@ -39,10 +42,10 @@ function defaultAdjustment(): CalibrationAdjustment {
 }
 
 // ============================================================================
-// CalibrationStore
+// CalibrationAdjustmentStore
 // ============================================================================
 
-export class CalibrationStore {
+export class CalibrationAdjustmentStore {
   private data: Map<CapabilityClass, CalibrationAdjustment>;
   private filePath: string;
 

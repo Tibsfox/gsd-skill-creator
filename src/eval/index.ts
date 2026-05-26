@@ -82,8 +82,8 @@ export { LimitationRegistry } from './limitation-registry.js';
 export type { LimitationMatchResult } from './limitation-registry.js';
 
 // Calibration store (Phase 58, Plan 03)
-export { CalibrationStore, CalibrationFileSchema } from './calibration-store.js';
-export type { CalibrationFile } from './calibration-store.js';
+export { CalibrationAdjustmentStore, CalibrationFileSchema } from './calibration-adjustment-store.js';
+export type { CalibrationFile } from './calibration-adjustment-store.js';
 
 // Convergence detector (Phase 59, Plan 01)
 export { ConvergenceDetector, detectDivergence } from './convergence-detector.js';
