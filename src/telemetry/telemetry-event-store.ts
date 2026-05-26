@@ -4,21 +4,24 @@
  * Writes are serialized through a queue to prevent corruption.
  * File rotation trims oldest entries when the size ceiling is reached.
  * Follows the BudgetHistory atomic-rename pattern (src/storage/budget-history.ts).
+ *
+ * Renamed from EventStore at v1.49.781 to disambiguate from
+ * src/events/SkillEventStore (inter-skill event store).
  */
 
 import { readFile, writeFile, appendFile, rename, mkdir, stat } from 'fs/promises';
 import { dirname, join } from 'path';
 import { tmpdir } from 'os';
-import type { UsageEvent, EventStoreConfig } from './types.js';
+import type { UsageEvent, TelemetryEventStoreConfig } from './types.js';
 import { DEFAULT_MAX_SIZE_BYTES } from './types.js';
 import { WriteQueue } from '../safety/write-queue.js';
 
-export class EventStore {
+export class TelemetryEventStore {
   private filePath: string;
   private maxSizeBytes: number;
   private writeQueue = new WriteQueue();
 
-  constructor(config: EventStoreConfig) {
+  constructor(config: TelemetryEventStoreConfig) {
     this.filePath = config.filePath;
     this.maxSizeBytes = config.maxSizeBytes ?? DEFAULT_MAX_SIZE_BYTES;
   }

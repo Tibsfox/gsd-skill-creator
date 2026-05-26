@@ -2,14 +2,14 @@
  * UsagePatternDetector — analyzes accumulated telemetry events and produces
  * a structured report of skill health patterns.
  *
- * Reads from EventStore; produces PatternDetectionResult.
+ * Reads from TelemetryEventStore; produces PatternDetectionResult.
  * Returns PatternInsufficient when fewer than minimumSessions are present.
  *
  * Privacy: operates only on skill names, scores, and session IDs — never
  * on user message content.
  */
 
-import type { EventStore } from './event-store.js';
+import type { TelemetryEventStore } from './telemetry-event-store.js';
 import type {
   PatternDetectionResult,
   PatternReport,
@@ -44,7 +44,7 @@ export class UsagePatternDetector {
   private config: Required<PatternDetectorConfig>;
 
   constructor(
-    private store: EventStore,
+    private store: TelemetryEventStore,
     config?: PatternDetectorConfig,
   ) {
     this.config = { ...DEFAULT_CONFIG, ...config };

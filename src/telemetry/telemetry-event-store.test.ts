@@ -2,14 +2,14 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { rm, mkdir } from 'fs/promises';
 import { join } from 'path';
 import { tmpdir } from 'os';
-import { EventStore } from './event-store.js';
+import { TelemetryEventStore } from './telemetry-event-store.js';
 import type { UsageEvent } from './types.js';
 
 // Each test gets its own directory under OS tmpdir
 let testDir: string;
 
-const makeStore = (maxSizeBytes = 10_485_760): EventStore =>
-  new EventStore({ filePath: join(testDir, 'events.jsonl'), maxSizeBytes });
+const makeStore = (maxSizeBytes = 10_485_760): TelemetryEventStore =>
+  new TelemetryEventStore({ filePath: join(testDir, 'events.jsonl'), maxSizeBytes });
 
 const scoredEvent = (skillName: string, sessionId = 'sess-1'): UsageEvent => ({
   type: 'skill-scored',
@@ -46,7 +46,7 @@ afterEach(async () => {
   await rm(testDir, { recursive: true, force: true });
 });
 
-describe('EventStore.read', () => {
+describe('TelemetryEventStore.read', () => {
   it('returns empty array when file does not exist', async () => {
     const store = makeStore();
     const events = await store.read();
@@ -91,7 +91,7 @@ describe('EventStore.read', () => {
   });
 });
 
-describe('EventStore.getFileSizeBytes', () => {
+describe('TelemetryEventStore.getFileSizeBytes', () => {
   it('returns 0 when file does not exist', async () => {
     const store = makeStore();
     expect(await store.getFileSizeBytes()).toBe(0);
@@ -105,7 +105,7 @@ describe('EventStore.getFileSizeBytes', () => {
   });
 });
 
-describe('EventStore rotation', () => {
+describe('TelemetryEventStore rotation', () => {
   it('file size stays at or below ceiling after rotation', async () => {
     // Tiny ceiling — just 200 bytes to force rotation quickly
     const store = makeStore(200);
@@ -181,7 +181,7 @@ describe('Privacy boundary', () => {
   });
 });
 
-describe('EventStore.pruneOlderThan()', () => {
+describe('TelemetryEventStore.pruneOlderThan()', () => {
   it('returns 0 when store is empty (file does not exist)', async () => {
     const store = makeStore();
     const pruned = await store.pruneOlderThan(90);

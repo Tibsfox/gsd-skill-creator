@@ -16,7 +16,7 @@ import { ScoreAdjuster } from '../telemetry/score-adjuster.js';
 import type { PatternReport, PatternInsufficient } from '../telemetry/types.js';
 import type { SkillIndex } from '../storage/skill-index.js';
 import type { SkillStore } from '../storage/skill-store.js';
-import type { EventStore } from '../telemetry/event-store.js';
+import type { TelemetryEventStore } from '../telemetry/telemetry-event-store.js';
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -71,14 +71,14 @@ function makeMockSkillStore(): SkillStore {
   } as unknown as SkillStore;
 }
 
-function makeMockEventStore(): { store: EventStore; calls: unknown[] } {
+function makeMockEventStore(): { store: TelemetryEventStore; calls: unknown[] } {
   const calls: unknown[] = [];
   const store = {
     append: vi.fn(async (event: unknown) => { calls.push(event); }),
     read: vi.fn(async () => []),
     getFileSizeBytes: vi.fn(async () => 0),
     pruneOlderThan: vi.fn(async () => 0),
-  } as unknown as EventStore;
+  } as unknown as TelemetryEventStore;
   return { store, calls };
 }
 

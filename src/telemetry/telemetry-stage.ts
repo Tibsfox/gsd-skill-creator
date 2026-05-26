@@ -3,7 +3,7 @@
  * skill interaction in one pipeline run.
  *
  * Reads from PipelineContext (scored, budget-skipped, loaded) and writes
- * to EventStore. Never modifies context. Errors are caught and warned
+ * to TelemetryEventStore. Never modifies context. Errors are caught and warned
  * so that telemetry failures never interrupt the pipeline.
  *
  * Privacy: reads only scoredSkills, budgetSkipped, loaded, contentCache,
@@ -11,13 +11,13 @@
  */
 
 import type { PipelineStage, PipelineContext } from '../application/skill-pipeline.js';
-import type { EventStore } from './event-store.js';
+import type { TelemetryEventStore } from './telemetry-event-store.js';
 import type { UsageEvent } from './types.js';
 
 export class TelemetryStage implements PipelineStage {
   readonly name = 'telemetry';
 
-  constructor(private store: EventStore) {}
+  constructor(private store: TelemetryEventStore) {}
 
   async process(context: PipelineContext): Promise<PipelineContext> {
     // Nothing to emit if pipeline exited early with no data

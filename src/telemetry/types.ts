@@ -45,8 +45,8 @@ export interface SkillCorrectionEvent {
 /** Union of all usage event types. Discriminated by the `type` field. */
 export type UsageEvent = SkillScoredEvent | SkillBudgetSkippedEvent | SkillLoadedEvent | SkillCorrectionEvent;
 
-/** Configuration for the EventStore. */
-export interface EventStoreConfig {
+/** Configuration for the TelemetryEventStore. */
+export interface TelemetryEventStoreConfig {
   /** Absolute path to the JSONL event file. */
   filePath: string;
   /**

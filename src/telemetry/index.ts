@@ -1,4 +1,4 @@
-export type { UsageEvent, SkillScoredEvent, SkillBudgetSkippedEvent, SkillLoadedEvent, SkillCorrectionEvent, EventStoreConfig } from './types.js';
+export type { UsageEvent, SkillScoredEvent, SkillBudgetSkippedEvent, SkillLoadedEvent, SkillCorrectionEvent, TelemetryEventStoreConfig } from './types.js';
 export { DEFAULT_MAX_SIZE_BYTES } from './types.js';
 export type {
   SkillPatternEntry,
@@ -7,7 +7,7 @@ export type {
   PatternDetectionResult,
   PatternDetectorConfig,
 } from './types.js';
-export { EventStore } from './event-store.js';
+export { TelemetryEventStore } from './telemetry-event-store.js';
 export { TelemetryStage } from './telemetry-stage.js';
 export { UsagePatternDetector } from './usage-pattern-detector.js';
 export { ScoreAdjuster } from './score-adjuster.js';

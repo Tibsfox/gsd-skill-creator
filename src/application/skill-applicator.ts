@@ -11,7 +11,7 @@ import { ScoreStage, ResolveStage, LoadStage, BudgetStage, CacheOrderStage, Mode
 import { AdaptiveRouter, CorrectionStage } from '../retrieval/index.js';
 import type { CorrectionConfig } from '../retrieval/types.js';
 import { EmbeddingService } from '../embeddings/embedding-service.js';
-import type { EventStore, PatternReport } from '../telemetry/index.js';
+import type { TelemetryEventStore, PatternReport } from '../telemetry/index.js';
 import { TelemetryStage, ScoreAdjuster } from '../telemetry/index.js';
 import type { SensoriaHookOptions } from '../sensoria/applicator-hook.js';
 import { createSensoriaStage, readSensoriaEnabledFlag } from '../sensoria/applicator-hook.js';
@@ -81,7 +81,7 @@ export class SkillApplicator {
     budgetProfile?: BudgetProfile,
     modelProfile?: string,
     retrievalConfig?: RetrievalConfig,
-    eventStore?: EventStore,
+    eventStore?: TelemetryEventStore,
     patternReport?: PatternReport,
     sensoriaOptions?: SensoriaHookOptions,
     coprocessorOptions?: CoprocessorHookOptions,

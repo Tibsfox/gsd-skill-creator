@@ -1,18 +1,18 @@
 import { describe, it, expect, vi } from 'vitest';
 import { UsagePatternDetector } from './usage-pattern-detector.js';
-import type { EventStore } from './event-store.js';
+import type { TelemetryEventStore } from './telemetry-event-store.js';
 import type { UsageEvent } from './types.js';
 
 // ---------------------------------------------------------------------------
 // Fixture helpers
 // ---------------------------------------------------------------------------
 
-function makeStore(events: UsageEvent[]): EventStore {
+function makeStore(events: UsageEvent[]): TelemetryEventStore {
   return {
     read: vi.fn(async () => events),
     append: vi.fn(async () => {}),
     getFileSizeBytes: vi.fn(async () => 0),
-  } as unknown as EventStore;
+  } as unknown as TelemetryEventStore;
 }
 
 /** Build a flat UsageEvent array from a simple session description. */

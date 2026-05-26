@@ -1,10 +1,10 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { TelemetryStage } from './telemetry-stage.js';
 import { createEmptyContext } from '../application/skill-pipeline.js';
-import type { EventStore } from './event-store.js';
+import type { TelemetryEventStore } from './telemetry-event-store.js';
 import type { SkillBudgetSkippedEvent, SkillLoadedEvent, SkillScoredEvent } from './types.js';
 
-function makeMockStore(): { store: EventStore; calls: unknown[] } {
+function makeMockStore(): { store: TelemetryEventStore; calls: unknown[] } {
   const calls: unknown[] = [];
   const store = {
     append: vi.fn(async (event: unknown) => {
@@ -13,13 +13,13 @@ function makeMockStore(): { store: EventStore; calls: unknown[] } {
     read: vi.fn(async () => []),
     getFileSizeBytes: vi.fn(async () => 0),
     pruneOlderThan: vi.fn(async () => 0),
-  } as unknown as EventStore;
+  } as unknown as TelemetryEventStore;
   return { store, calls };
 }
 
 describe('TelemetryStage', () => {
   let stage: TelemetryStage;
-  let mockStore: EventStore;
+  let mockStore: TelemetryEventStore;
   let calls: unknown[];
 
   beforeEach(() => {
@@ -136,7 +136,7 @@ describe('TelemetryStage', () => {
       read: vi.fn(async () => []),
       getFileSizeBytes: vi.fn(async () => 0),
       pruneOlderThan: vi.fn(async () => 0),
-    } as unknown as EventStore;
+    } as unknown as TelemetryEventStore;
     const failingStage = new TelemetryStage(failingStore);
 
     const ctx = createEmptyContext({
