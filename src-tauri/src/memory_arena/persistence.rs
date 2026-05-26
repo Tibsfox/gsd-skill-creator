@@ -215,7 +215,14 @@ pub fn read_checkpoint(
 ) -> ArenaResult<Arena> {
     let path = path.as_ref();
     let mut file = File::open(path)?;
-    let mut buf = Vec::new();
+    // Pre-size from the file's reported length so read_to_end doesn't
+    // grow-and-realloc multiple times for multi-MB checkpoints. A failed
+    // metadata() call (rare on a freshly-opened file) falls through to
+    // Vec::new() — read_to_end still works, just slower.
+    let mut buf = match file.metadata() {
+        Ok(m) => Vec::with_capacity(m.len() as usize),
+        Err(_) => Vec::new(),
+    };
     file.read_to_end(&mut buf)?;
 
     if buf.len() < CHECKPOINT_HEADER_SIZE + 8 {
