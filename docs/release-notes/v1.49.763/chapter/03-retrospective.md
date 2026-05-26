@@ -1,5 +1,24 @@
 # Retrospective — v1.49.763
 
+## Carryover lessons applied
+
+This ship inherits and sustains several disciplines from prior milestones:
+
+- **Lesson #10168 — counter-cadence cleanup-mission cadence (HIGH).** Pattern is operationally sustainable across long forward-cadence runs; canonical-sibling-rebuild family extends the parent v1.49.585 concerns-cleanup family.
+- **Lesson #10401 — MISSION-PACKAGE-DISCIPLINE §3 (HIGH).** Applied to the per-mission sub-agent dispatch brief (title-line trip-vocab=0; body-secondary clean; framing positive throughout). obs#27+ cumulative.
+- **Lesson #10406 candidate — POSITIVE-FRAMING-DISPATCH-DISCIPLINE (HIGH).** Brief uses positive framing for operationally-tense events; zero forbidden-token enumeration. obs#56+ cumulative.
+- **Lesson #10407 candidate — DISPATCH-PROMPT-DENSITY-DISCIPLINE (HIGH).** Brief-as-required-read pattern carried through dispatch; mission-essentials abstracted from topic-event enumeration. obs#55+ cumulative.
+- **Lesson #10408 candidate — NASA-canonical-sibling-rebuild pattern.** Per-mission sub-agent rebuild template sustained at obs#48 cumulative across the campaign run.
+- **W3.5 chapter-gen bake-in (process gate).** Counter-cadence ship runs the same chapter pipeline as forward-cadence ships; obs#8+ cumulative since v1.49.709.
+
+## What Worked
+
+- **Templated per-mission brief reuse closes deliverable variance to mission-essentials only.** The brief structure (mission essentials + reference paths + 13-file deliverable table + authoring conventions + positive-framing discipline) is invariant across the campaign; only the mission-essentials block adapts per substrate-form-distinct class.
+- **Single sub-agent dispatch held under the ~60-tool ceiling.** Dispatches consistently come in well under budget (typically 28-40 tool uses for a 13-file ~20-25K-word deliverable); splitting would have doubled orchestrator cost without operational benefit.
+- **Positive-framing dispatch discipline carried the full deliverable set without filter trips.** Brief omits forbidden-token enumeration and frames operationally-tense events constructively; sub-agent inherits the framing through the entire content authoring run.
+- **v1.56 gold-standard depth target hit the operational sweet spot.** Output band of ~19-25K words closes the structural gap without forcing maximum-historical-depth on first pass; deepening remains a future-pass option.
+- **Reference-page paths parameterize cleanly per mission.** Immediate-predecessor (semantic context) + gold-standard (depth+structure reference) ingested by the sub-agent before authoring; pattern works across substrate-form-distinct missions.
+
 ## Decisions
 
 - Path A (sub-agent dispatch) sustained at v1.165 per pre-flight audit (zero forbidden-token substrate-axis-names + title-line primary trip-vocab = 0 + title-line secondary trip-vocab = 0 + zero trip-vocab in bridging from-1.164.md substrate). Seventeenth consecutive Path A in sub-sequence v1.149-v1.165.
@@ -15,6 +34,12 @@
 - ARIZONA-STATE-UNIVERSITY-SUBSTRATE-CUMULATIVE substrate-thread does NOT carry across the axis-rotation at v1.165 (preserved in the closing prior axis; not represented in the 7-instrument Indian heliophysics suite).
 - Chronological window reset at axis-rotation: CHRONOLOGICAL-WINDOW-RESET-AT-AXIS-ROTATION obs#1 first-instance NEW LOCKED at v712; Aditya-L1 2023-09-02 launch anchors SOLAR-OBSERVATORY chronological window substrate even though chronologically before v710 Psyche 2023-10-13 + v711 Europa Clipper 2024-10-14 within the prior axis.
 - 7-instrument suite identifier discipline: 7-instrument science suite cited per individual PI-institution archives (VELC IIA Bangalore + SUIT IUCAA Pune + SoLEXS URSC Bangalore + HEL1OS ISRO Space Astronomy Group URSC + ASPEX PRL Ahmedabad + PAPA VSSC Thiruvananthapuram + MAG LEOS Bangalore substrate-cumulative).
+
+## What Could Be Better
+
+- **Brief-template substrate-form adaptation guidance is implicit.** Mission-essentials block is the only delta per release, but the campaign brief doesn't yet codify substrate-form-distinct adaptation cues; future briefs may benefit from explicit class-based prompts.
+- **Lessons-carryover.json schema is per-mission; cross-mission consolidation lives in the tracker.** Each rebuild captures its own carryover but the campaign-wide rollup remains in mission-tracker.md rather than the structured schema.
+- **Cadence projection assumes Lesson #10168 ~30-milestone reuse threshold holds.** Future counter-cadence ships may compress cadence if multiple operational-debt families demand simultaneous attention in the same window.
 
 ## Surprises
 

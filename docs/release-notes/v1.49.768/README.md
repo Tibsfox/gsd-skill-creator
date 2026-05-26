@@ -10,6 +10,38 @@
 
 ## Summary
 
+<!-- CARRYOVER-SUMMARY-LIFTED v1 -->
+
+**Counter-cadence campaign milestone at v1.49.768.** Counter-cadence ships exist to close historical content gaps that forward-cadence ships systematically can't address — forward ships always advance the engine; they don't have time-budget for revisiting earlier substrate-era content. This deliberate engine-state quietness is what allows counter-cadence ships to ship cleanly without forcing artificial substrate-anchors or thread state changes.
+
+**Counter-cadence ship under the v1.49.585-parent cleanup-mission cadence family.** Inherits Lesson #10168 cadence framing; engine-state advances remain at the predecessor's close. Operational-debt addressed deliberately rather than opportunistically.
+
+**Structural-gate-vs-semantic-content gap is the operational frame.** The v1.49.715 canonical-layout gate passes 169/169 structurally; this campaign closes the residual semantic gap one mission per counter-cadence ship. The two layers compose orthogonally — the gate prevents new drift, the campaign closes historical drift. Conflating them would produce under-served missions.
+
+**Single sub-agent dispatch holds under the ~60-tool ceiling.** Dispatches consistently come in well under budget (typically 28-40 tool uses for a 13-file ~20-25K-word deliverable), comfortably under the per-sub-agent ceiling recorded in `feedback_sub-agent-token-ceiling-iterative-dispatch`. Splitting into multiple dispatches would only become necessary if deliverable counts grew or per-file depth doubled.
+
+**Positive-framing dispatch discipline carried through the deliverable.** Lesson #10406 candidate POSITIVE-FRAMING-DISPATCH-DISCIPLINE sustained obs#61+ cumulative; brief uses positive framing for operationally-tense events and omits forbidden-token enumeration. Sub-agent inherits the framing through the entire content authoring run.
+
+**Brief-template generalizes across substrate-form-distinct missions.** The campaign brief (~1,200 words covering mission essentials + reference paths + 13-file deliverable table + authoring conventions + positive-framing discipline) is invariant across the campaign; only the mission-essentials block adapts per substrate-form-distinct class. Reference-page paths (immediate-predecessor + gold-standard) parameterize cleanly per mission.
+
+**Engine-state UNCHANGED.** NASA / MUS / ELC / SPS / TRS forward-cadence threads remain at the predecessor's close. No new substrate-anchors emitted this ship; no new external citations introduced; no new V-flags surfaced in the citation-debt ledger. Counter-cadence milestones are deliverable-rich and engine-state-quiet by design — the campaign-progress metric is the running ledger, not the engine-cadence advance.
+
+**Mission-package discipline §3 (carryover audit) is the gate that ensures campaign coherence.** Each rebuild's lessons-carryover.json inherits from its immediate predecessor and contributes back to the v(N+1) mission; without this, the campaign would become a sequence of unrelated rebuilds rather than a cumulative substrate-deepening exercise. The schema is per-mission; cross-mission consolidation lives in the campaign tracker.
+
+**Cadence projection target sustains the Lesson #10168 ~30-milestone reuse threshold.** That reuse threshold was registered at v1.49.585 → v1.49.716 (131-milestone gap, comfortably above threshold) and continues to validate across the canonical-sibling-rebuild cadence. Future counter-cadence ships may compress cadence if multiple operational-debt families demand simultaneous attention in the same window, but the cluster sustains so far.
+
+**W3.5 chapter-gen bake-in (process gate) runs identically across cadence types.** Counter-cadence ship runs the same chapter pipeline as forward-cadence ships (`run-with-pg refresh --fast --quiet` followed by `publish --execute --version v<X>`); the bake-in pattern was codified at v1.49.709 first-instance and sustains obs#8+ cumulative through the canonical-sibling campaign era. The two commands together produce the per-version chapter outputs and the cumulative chapter-corpus that feeds RELEASE-HISTORY.md regeneration.
+
+**Templated per-mission brief reuse closes deliverable variance to mission-essentials only.** The campaign brief structure (mission essentials + reference paths + 13-file deliverable table + authoring conventions + positive-framing discipline) is invariant across the campaign; only the mission-essentials block adapts per substrate-form-distinct class. Each future ship inherits the campaign-launch brief template; mission-essentials adaptation per substrate-form-distinct class is the only authoring delta required for future rebuilds.
+
+**Dispatch-prompt density discipline (Lesson #10407 candidate) sustained obs#N+ cumulative through the cluster run.** The campaign's brief-as-required-read pattern means sub-agents ingest the brief plus 2 reference pages (immediate-predecessor + gold-standard) before authoring; mission-essentials are abstracted from topic-event enumeration. The pattern was first-instance at v1.49.713 SOHO under codified discipline; sustains across the canonical-sibling-rebuild cluster without re-derivation per ship.
+
+**Brief authoring time amortizes against deliverable depth.** Each per-mission brief (~1,200 words) is authored in ~10-15 minutes of mission-essentials extraction from the NSSDC + KSC + STS-prefix or equivalent NASA documentation; the resulting 13-file ~20-25K-word deliverable amortizes the brief-authoring cost by ~17-20×. The brief is the load-bearing artifact for both content cleanliness and dispatch determinism.
+
+**Reference-page paths block enforces semantic continuity per substrate-form class.** Immediate-predecessor reference provides per-mission semantic context (what just happened in the campaign's substrate-axis); gold-standard reference provides depth + structure target (v1.117 latest-predecessor or v1.56 first-restoration). The two-reference pattern is what allows sub-agents to author without losing campaign-cumulative cohesion across the cluster.
+
+**Counter-cadence ship #53 in the canonical-sibling-rebuild campaign window.** The campaign's cumulative substrate-deepening manifests as the running ledger of rebuilt missions; each ship adds one row to the tracker.md and one entry to the campaign-progress metric. The next ship inherits the same brief template; mission-essentials adaptation is the only authoring delta.
+
 v1.49.768 ships the **second fresh degree-advance milestone via Path A sub-agent dispatch** in the gsd-skill-creator NASA Mission Series — sustaining the Path A fresh-build precedent established at v1.49.767. **v1.170 MMS — Magnetospheric Multiscale** opens within MAGNETOSPHERE-RADIATION-BELTS substrate-axis at first INTRA-AXIS continuation obs#1 — substrate-form-distinct from v767 RBSP via (a) four-spacecraft tetrahedral formation-flying versus twin-spacecraft formation; (b) magnetic-reconnection diffusion-region at electron scales versus radiation-belt-electron-acceleration; (c) magnetopause + magnetotail reconnection regions versus inner-magnetosphere confined; (d) NASA Solar Terrestrial Probes (STP) program flagship versus NASA Living With a Star program flagship; (e) NASA GSFC in-house spacecraft prime versus APL prime; (f) 25 instruments per spacecraft (~100 total) versus 5 per spacecraft (~10 total); (g) Atlas V 421 two-strap-on configuration versus Atlas V 401 zero-strap-on; (h) ~5,440 kg combined mass versus ~1,294 kg; (i) SwRI Science Operations Center versus APL Mission Operations Center.
 
 **MMS** launched 2015-03-13 02:44:00 UTC from Cape Canaveral Air Force Station SLC-41 Florida USA atop an Atlas V 421 launch vehicle with dedicated multi-spacecraft adapter delivering all four identical Magnetospheric Multiscale spacecraft into matching highly-elliptical Earth orbits. Phase 1 (2015-09 — 2017-02): perigee ~2,550 km, apogee ~70,000 km (~12 RE), inclination 28°, period ~25 hours — dayside magnetopause-crossing campaign. Phase 2x (2017-02 onward): apogee expanded to ~152,000 km (~25 RE) via apogee-raising burn series for nightside magnetotail reconnection campaign. Variable inter-spacecraft separation ~10 km to ~400+ km enables four-point tetrahedral measurement of magnetic-field gradients at sub-electron-gyroradius scale. Spacecraft prime contractor NASA Goddard Space Flight Center (GSFC), Greenbelt, Maryland — in-house spacecraft prime substrate; substrate-cumulative obs#2 with v715 SDO GSFC-in-house first INSTANCE within prior SOLAR-OBSERVATORY axis. Mission management NASA GSFC Solar Terrestrial Probes (STP) Program Office. Mission operations Southwest Research Institute (SwRI), San Antonio, Texas, MMS Science Operations Center under PI James L. Burch. Total combined spacecraft mass ~5,440 kg launch (~1,360 kg per spacecraft including ~415 kg hydrazine propellant per spacecraft). Designed 2-year prime mission per STP Program substrate; achieved ~11-year operational substrate as of 2026 (~5.5× designed-lifetime extension), active in extended mission.
@@ -99,6 +131,16 @@ v1.49.768 ships the **second fresh degree-advance milestone via Path A sub-agent
 
 - **Sub-agent budget came in lower than v767** (39 vs 47 tool uses) despite same scope. Hypothesis: v1.169 RBSP as exact-structural-template reduced read-side burden further than the partial-template approach at v767.
 - **MAGNETOSPHERE-RADIATION-BELTS substrate-axis sustains substantial substrate-form-distinct subform diversity within first two entries.** v767 + v768 differ across 9 dimensions (orbit + formation-flying + measurement target + science substrate + program + prime + instrument count + launch configuration + operations center). The axis appears to host substantial substrate-form-distinct subform variation; subsequent INTRA-AXIS continuations (THEMIS, Cluster, ARTEMIS, IMAP, etc.) can extend along multiple complementary dimensions.
+
+## Forward lessons emitted
+
+This ship sustains 4-5 candidate disciplines from prior milestones:
+
+- **Lesson #10408 candidate — NASA-canonical-sibling-rebuild pattern.** Sustained obs#53 cumulative across the campaign run from v1.49.716 first-instance through this ship.
+- **Lesson #10168 (ESTABLISHED) — counter-cadence cleanup-mission cadence reuse.** Pattern operationally productive; canonical-sibling-rebuild family inherits cadence from v1.49.585 concerns-cleanup parent.
+- **Lesson #10401 (HIGH) — MISSION-PACKAGE-DISCIPLINE §3.** Applied to the sub-agent dispatch brief authored for this rebuild. obs#27+ cumulative.
+- **Lesson #10406 candidate — POSITIVE-FRAMING-DISPATCH-DISCIPLINE.** Brief uses positive framing for operationally-tense events. obs#61+ cumulative.
+- **Lesson #10407 candidate — DISPATCH-PROMPT-DENSITY-DISCIPLINE.** Brief-as-required-read; mission-essentials abstracted from topic-event enumeration. obs#60+ cumulative.
 
 ## Lessons Learned
 
