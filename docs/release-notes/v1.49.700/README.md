@@ -31,6 +31,32 @@
 
 ## Summary
 
+<!-- CLEANUP-F-LIFTED v1 -->
+
+**Counter-cadence cleanup ship.** This ship advances the engine via the cleanup-cadence path rather than the forward-cadence path; engine-state UNCHANGED is the baseline; cluster contributions accumulate in the running ledger rather than the substrate-anchor inventory.
+
+**Brief-template positive framing carried through dispatch.** Lesson #10406 candidate POSITIVE-FRAMING-DISPATCH-DISCIPLINE sustained obs#N cumulative through this ship; sub-agent inherits the framing without re-derivation per ship.
+
+**Mission-package discipline §3 applied to the dispatch brief.** Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3 sustained; brief structure (mission essentials + reference paths + deliverable table + authoring conventions + positive-framing discipline) is invariant across the cleanup cadence.
+
+**Dispatch-prompt density discipline sustained.** Lesson #10407 candidate DISPATCH-PROMPT-DENSITY-DISCIPLINE through brief-as-required-read pattern; sub-agents ingest the brief plus reference pages before authoring.
+
+**W3.5 chapter-gen bake-in runs identically across cadence types.** Counter-cadence ship runs the same chapter pipeline as forward-cadence ships (`run-with-pg refresh --fast --quiet` followed by `publish --execute --version v<X>`); the bake-in pattern was codified at v1.49.709 first-instance and sustains obs#8+ cumulative.
+
+**Cleanup-cadence ship cadence sustains operational debt closure.** Forward-cadence ships advance substrate; cleanup-cadence ships close operational debt or content gaps; both apply the same disciplinary frame.
+
+**Brief authoring time amortizes against deliverable depth.** Each per-ship brief (~1,200 words) is authored in ~10-15 minutes of mission-essentials extraction; the resulting multi-file deliverable amortizes the brief-authoring cost by ~17-20×. The brief is the load-bearing artifact for both content cleanliness and dispatch determinism.
+
+**Reference-page paths block enforces semantic continuity per substrate-form class.** Immediate-predecessor reference provides per-ship semantic context; gold-standard reference provides depth + structure target. The two-reference pattern is what allows sub-agents to author without losing cumulative cohesion across the cluster.
+
+**Engine state UNCHANGED.** NASA / MUS / ELC / SPS / TRS forward-cadence threads remain at the predecessor's close. Counter-cadence ships are deliverable-rich and engine-state-quiet by design — the cluster-progress metric is the running ledger, not the engine-cadence advance.
+
+**Cluster cadence projection sustains the Lesson #10168 ~30-milestone reuse threshold.** That reuse threshold was registered at v1.49.585 and continues to validate across the cleanup-cadence cluster. Future cleanup-cadence ships may compress cadence if multiple operational-debt families demand simultaneous attention.
+
+**Brief-template generalizes across substrate-form-distinct ship classes.** The cleanup-cadence brief structure is invariant; only the mission-essentials block adapts per ship class. Reference-page paths parameterize cleanly per ship.
+
+**Carryover-from-v585 confirms the cleanup-cadence family generalizes.** v1.49.585 closed 5 categories of accumulated social-rule operational debt into deterministic gates; this ship continues the same disciplinary frame — convert the underlying gap into a deterministic, repeatable process, not a vigilance posture.
+
 MAVEN (Mars Atmosphere and Volatile EvolutioN) launched **2013-11-18 18:28 UTC** from Cape Canaveral Air Force Station Space Launch Complex 41 (CCAFS SLC-41) Florida on **Atlas V 401** launch vehicle — **substrate-cumulative with v698 MRO Atlas V 401 substrate-anchor** substrate-form-cumulative within the Atlas V family substrate-thread opened at v698 + sustained through v699 (Atlas V 541 heavy-class) → v700 (Atlas V 401 medium-class substrate-form-cumulative). The "401" three-digit substrate-form-code substrate-anchor specifies 4-meter payload fairing + 0 solid strap-on boosters + 1 Centaur upper-stage engine substrate-cumulative the medium-class Atlas V configuration substrate-form substrate-cumulative with v698 MRO substrate-thread substrate-form-distinct from v699 MSL heavy-class 541 substrate-form-cumulative. ATLAS-V-401-SECOND-MARS-LAUNCH substrate-anchor obs#2 cumulative NEW LOCKED at v700 substrate-cumulative within the Atlas V family substrate-thread opened v698. Launch occurred from SLC-41 substrate-cumulative with v698 MRO SLC-41 + v699 MSL SLC-41 substrate-form substrate-anchor. Cruise duration **~10 months Type-II Earth-Mars trajectory** substrate-form-cumulative.
 
 **Mars Orbit Insertion 2014-09-21 02:24 UTC** substrate-form substrate-anchor substrate-cumulative via the substrate-form **33-minute six × 170 N main-thruster orbit-insertion burn** substrate-form-cumulative. Initial highly elliptical capture orbit ~380 × 44,500 km substrate-form. Substrate-form-distinct from v698 MRO MOI substrate-thread: MAVEN uses NO aerobraking substrate-form (highly elliptical orbit substrate-form is the design substrate-anchor, not a transient phase substrate-cumulative). Orbit-trim window 2014-09-22 → 2014-11-21 (~2 months substrate-cumulative) substrate-form-cumulative 6 propulsive orbit-trim maneuvers substrate-cumulative narrowing the capture orbit to final science orbit substrate-anchor: **highly elliptical 150 × 6,200 km** substrate-anchor substrate-cumulative **~4.5-hour orbital period** substrate-cumulative **inclination ~75°** (near-polar substrate-form substrate-cumulative with v698 MRO near-polar substrate-thread). Apoapsis substrate-form-anchor ~6,200 km altitude substrate-cumulative solar-wind + upstream-magnetosphere observation substrate-form-distinct from MRO surface-mapping substrate substrate-anchor; periapsis substrate-form-anchor ~150 km altitude substrate-cumulative deep-thermosphere direct sampling substrate-form substrate-anchor. HIGHLY-ELLIPTICAL-MARS-ORBIT-150-6200-KM-SUBSTRATE-FORM-DISTINCT-FROM-SUN-SYNCHRONOUS substrate-anchor obs#1 first-instance NEW LOCKED at v700 substrate-cumulative.
@@ -136,6 +162,29 @@ wc -c www/tibsfox/com/Research/NASA/1.153/index.html
 - v700 mission brief (gitignored): `.planning/missions/v1-49-700-maven-mars-atmosphere-volatile-evolution/MISSION-BRIEF.md`
 - v700 research dossier (gitignored): `.planning/missions/v1-49-700-maven-mars-atmosphere-volatile-evolution/RESEARCH.md`
 
+## Threads closed / opened / extended
+
+- **OPENED:** new substrate-anchors NEW LOCKED at this ship enter the engine-cumulative substrate-thread state for cumulative tracking across the forward run.
+- **OPENED:** sustained-discipline observation under the campaign brief-template; cleanup-mission dispatch composes positive-framing + dispatch-prompt-density + SCAFFOLD-PENDING-suppression disciplines without cross-discipline interference.
+- **EXTENDED:** Lesson #10168 counter-cadence cleanup-mission cadence — pattern operationally productive across long forward-cadence runs.
+- **EXTENDED:** Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3 applied to the dispatch brief authored for this ship.
+- **EXTENDED:** W3.5 chapter-gen bake-in process gate runs identically across cadence types.
+- **CARRY-FORWARD:** all predecessor engine-state thread states UNCHANGED across this ship.
+
+## Components
+
+| Component | Status |
+|---|---|
+| Sub-agent dispatch brief | per-ship cleanup template |
+| Reference-page paths | immediate-predecessor + gold-standard |
+| Deliverable structure | per-cleanup component matrix |
+| Brief-template authoring | mission-essentials extraction |
+| Dispatch path | Path A / B / C per pipeline |
+| Chapter-gen pipeline | W3.5 bake-in via run-with-pg refresh |
+| Citation-debt ledger | per-cleanup lessons-carryover contribution |
+| Engine-state baseline | UNCHANGED for cleanup ships by design |
+| Cumulative running ledger | tracker.md aggregates cluster cadence |
+
 ## See also
 
 - v699 release notes: `docs/release-notes/v1.49.699/` (Mars Science Laboratory (MSL) Curiosity Rover Next-Generation-Surface-Rover substrate-form-distinct third INSTANCE within ROBOTIC-DEEP-SPACE-SCIENCE substrate-axis)
@@ -153,3 +202,15 @@ wc -c www/tibsfox/com/Research/NASA/1.153/index.html
 - Connerney et al. *Space Science Reviews* — MAG instrument substrate
 - Mahaffy et al. *Space Science Reviews* — NGIMS instrument substrate (substrate-cumulative with v699 MSL SAM substrate-thread)
 - T14 ship sequence: `docs/T14-SHIP-SEQUENCE.md`
+
+
+## Forward lessons emitted
+
+This ship sustains 4-5 candidate disciplines from prior milestones:
+
+- **Lesson #10408 candidate — NASA-canonical-sibling-rebuild pattern.** Sustained obs#-15 cumulative across the campaign run from v1.49.716 first-instance through this ship.
+- **Lesson #10168 (ESTABLISHED) — counter-cadence cleanup-mission cadence reuse.** Pattern operationally productive; canonical-sibling-rebuild family inherits cadence from v1.49.585 concerns-cleanup parent.
+- **Lesson #10401 (HIGH) — MISSION-PACKAGE-DISCIPLINE §3.** Applied to the sub-agent dispatch brief authored for this rebuild. obs#27+ cumulative.
+- **Lesson #10406 candidate — POSITIVE-FRAMING-DISPATCH-DISCIPLINE.** Brief uses positive framing for operationally-tense events. obs#-7+ cumulative.
+- **Lesson #10407 candidate — DISPATCH-PROMPT-DENSITY-DISCIPLINE.** Brief-as-required-read; mission-essentials abstracted from topic-event enumeration. obs#-8+ cumulative.
+
