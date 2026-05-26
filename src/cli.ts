@@ -41,6 +41,7 @@ import { FeedbackStore, RefinementEngine, VersionManager } from './learning/inde
 import { parseScope, getSkillsBasePath, type SkillScope } from './types/scope.js';
 import { SkillStore } from './storage/skill-store.js';
 import { SkillIndex } from './storage/skill-index.js';
+import { lookup as dispatchLookup, type CliContext } from './cli/dispatch.js';
 
 /**
  * Resolve the skills base path for a CLI invocation.
@@ -148,6 +149,23 @@ async function main() {
   }
 
   const { skillStore, skillIndex } = createStores();
+
+  const dispatchHandler = dispatchLookup(command);
+  if (dispatchHandler) {
+    const ctx: CliContext = {
+      args,
+      skillStore,
+      skillIndex,
+      parseScope,
+      parseSkillsDir,
+      parseStringFlag,
+    };
+    const exitCode = await dispatchHandler(ctx);
+    if (typeof exitCode === 'number' && exitCode !== 0) {
+      process.exit(exitCode);
+    }
+    return;
+  }
 
   switch (command) {
     case 'create':
