@@ -7,6 +7,8 @@ import { refineCommand } from './commands/refine.js';
 import { deleteCommand } from './commands/delete.js';
 import { invokeCommand } from './commands/invoke.js';
 import { agentsCommand } from './commands/agents.js';
+import { teamCommand } from './commands/team.js';
+import { dacpCommand } from './commands/dacp.js';
 
 export interface CliContext {
   args: string[];
@@ -36,6 +38,8 @@ export const REGISTRY: readonly CommandEntry[] = [
   { aliases: ['delete', 'del', 'rm'], handler: (ctx) => deleteCommand(ctx.args) },
   { aliases: ['invoke', 'i'], handler: (ctx) => invokeCommand(ctx.args) },
   { aliases: ['agents', 'ag'], handler: (ctx) => agentsCommand(ctx.args) },
+  { aliases: ['team', 'tm'], handler: (ctx) => teamCommand(ctx.args) },
+  { aliases: ['dacp', 'dp'], handler: (ctx) => dacpCommand(ctx.args) },
 ];
 
 export function lookup(command: string | undefined): CommandHandler | undefined {

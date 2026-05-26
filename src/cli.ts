@@ -616,66 +616,6 @@ async function main() {
       break;
     }
 
-    case 'team':
-    case 'tm': {
-      const subcommand = args[1];
-      const subArgs = args.slice(2);
-
-      switch (subcommand) {
-        case 'create':
-        case 'c': {
-          const { teamCreateCommand } = await import('./cli/commands/team-create.js');
-          const exitCode = await teamCreateCommand(subArgs);
-          if (exitCode !== 0) process.exit(exitCode);
-          break;
-        }
-
-        case 'list':
-        case 'l': {
-          const { teamListCommand } = await import('./cli/commands/team-list.js');
-          const exitCode = await teamListCommand(subArgs);
-          if (exitCode !== 0) process.exit(exitCode);
-          break;
-        }
-
-        case 'validate':
-        case 'v': {
-          const { teamValidateCommand } = await import('./cli/commands/team-validate.js');
-          const exitCode = await teamValidateCommand(subArgs);
-          if (exitCode !== 0) process.exit(exitCode);
-          break;
-        }
-
-        case 'spawn':
-        case 'sp': {
-          const { teamSpawnCommand } = await import('./cli/commands/team-spawn.js');
-          const exitCode = await teamSpawnCommand(subArgs);
-          if (exitCode !== 0) process.exit(exitCode);
-          break;
-        }
-
-        case 'status':
-        case 's': {
-          const { teamStatusCommand } = await import('./cli/commands/team-status.js');
-          const exitCode = await teamStatusCommand(subArgs);
-          if (exitCode !== 0) process.exit(exitCode);
-          break;
-        }
-
-        case 'estimate':
-        case 'e': {
-          const { teamEstimateCommand } = await import('./cli/commands/team-estimate.js');
-          const exitCode = await teamEstimateCommand(subArgs);
-          if (exitCode !== 0) process.exit(exitCode);
-          break;
-        }
-
-        default:
-          showTeamHelp();
-      }
-      break;
-    }
-
     case 'session':
     case 'sess': {
       const { sessionCommand } = await import('./cli/commands/session.js');
@@ -919,58 +859,6 @@ async function main() {
       break;
     }
 
-    case 'dacp':
-    case 'dp': {
-      const subcommand = args[1];
-      const subArgs = args.slice(2);
-
-      switch (subcommand) {
-        case 'status':
-        case 's': {
-          const { dacpStatusCommand } = await import('./cli/commands/dacp-status.js');
-          const exitCode = await dacpStatusCommand(subArgs);
-          if (exitCode !== 0) process.exit(exitCode);
-          break;
-        }
-
-        case 'set-level':
-        case 'sl': {
-          const { dacpSetLevelCommand } = await import('./cli/commands/dacp-set-level.js');
-          const exitCode = await dacpSetLevelCommand(subArgs);
-          if (exitCode !== 0) process.exit(exitCode);
-          break;
-        }
-
-        case 'history':
-        case 'h': {
-          const { dacpHistoryCommand } = await import('./cli/commands/dacp-history.js');
-          const exitCode = await dacpHistoryCommand(subArgs);
-          if (exitCode !== 0) process.exit(exitCode);
-          break;
-        }
-
-        case 'analyze':
-        case 'a': {
-          const { dacpAnalyzeCommand } = await import('./cli/commands/dacp-analyze.js');
-          const exitCode = await dacpAnalyzeCommand(subArgs);
-          if (exitCode !== 0) process.exit(exitCode);
-          break;
-        }
-
-        case 'export-templates':
-        case 'et': {
-          const { dacpExportTemplatesCommand } = await import('./cli/commands/dacp-export-templates.js');
-          const exitCode = await dacpExportTemplatesCommand(subArgs);
-          if (exitCode !== 0) process.exit(exitCode);
-          break;
-        }
-
-        default:
-          showDacpHelp();
-      }
-      break;
-    }
-
     case 'project':
     case 'proj': {
       const { projectCommand } = await import('./fs/commands/project.js');
@@ -1141,63 +1029,6 @@ async function main() {
       showHelp();
       process.exit(command ? 1 : 0);
   }
-}
-
-function showDacpHelp(): void {
-  console.log(`
-skill-creator dacp - Manage DACP communication protocol
-
-Usage:
-  skill-creator dacp <command> [options]
-  skill-creator dp <command> [options]
-
-Commands:
-  status, s             Show DACP state (bundles, fidelity, drift)
-  set-level, sl         Set fidelity level override for a pattern
-  history, h            Show handoff history for a pattern
-  analyze, a            Trigger retrospective analysis
-  export-templates, et  Export bundle templates
-
-Examples:
-  skill-creator dacp status
-  skill-creator dp s --json
-  skill-creator dacp set-level "planner->executor:task" 3
-  skill-creator dacp history "planner->executor:task" --last 5
-  skill-creator dacp analyze --milestone v1.49
-  skill-creator dacp export-templates --format=yaml
-
-Use 'skill-creator dacp <command> --help' for command-specific help.
-`);
-}
-
-function showTeamHelp(): void {
-  console.log(`
-skill-creator team - Manage agent teams
-
-Usage:
-  skill-creator team <command> [options]
-  skill-creator tm <command> [options]
-
-Commands:
-  create, c     Create a new team (interactive wizard or flags)
-  list, l       List all teams with member counts
-  validate, v   Validate team config(s) with detailed report
-  spawn, sp     Check team readiness (agent resolution)
-  status, s     Show team details and validation summary
-  estimate, e   Show projected token usage and cost
-
-Examples:
-  skill-creator team create                    Interactive team creation
-  skill-creator tm c --pattern=leader-worker --name=research
-  skill-creator team list                      List all teams
-  skill-creator tm l --scope=project           List project teams only
-  skill-creator team validate my-team          Validate single team
-  skill-creator tm v --all                     Validate all teams
-  skill-creator team spawn my-team             Check readiness
-  skill-creator tm s my-team                   Show team details
-
-Use 'skill-creator team <command> --help' for command-specific help.
-`);
 }
 
 function showHelp() {
