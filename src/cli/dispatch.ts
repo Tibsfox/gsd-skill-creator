@@ -1,6 +1,7 @@
 import type { SkillStore } from '../storage/skill-store.js';
 import type { SkillIndex } from '../storage/skill-index.js';
 import type { SkillScope } from '../types/scope.js';
+import { suggestCommand, suggestionsCommand } from './commands/suggest.js';
 
 export interface CliContext {
   args: string[];
@@ -23,7 +24,8 @@ export interface CommandEntry {
 // Lookup is O(n) over entries; n is small enough that a flat scan beats
 // a Map for the constant-factor cost of the few-dozen-command surface.
 export const REGISTRY: readonly CommandEntry[] = [
-  // Entries land here as src/cli.ts cases migrate into command modules.
+  { aliases: ['suggest', 'sg'], handler: () => suggestCommand() },
+  { aliases: ['suggestions', 'sgs'], handler: (ctx) => suggestionsCommand(ctx.args) },
 ];
 
 export function lookup(command: string | undefined): CommandHandler | undefined {
