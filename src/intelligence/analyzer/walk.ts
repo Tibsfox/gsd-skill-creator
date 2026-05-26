@@ -164,11 +164,15 @@ const BINARY_THRESHOLD = 0.3;
 export async function isBinary(filePath: string): Promise<boolean> {
   let buffer: Buffer;
   try {
-    const handle = await import('node:fs/promises').then(m => m.open(filePath, 'r'));
-    const buf = Buffer.alloc(BINARY_CHECK_SIZE);
-    const { bytesRead } = await handle.read(buf, 0, BINARY_CHECK_SIZE, 0);
-    await handle.close();
-    buffer = buf.slice(0, bytesRead);
+    const { open } = await import('node:fs/promises');
+    const handle = await open(filePath, 'r');
+    try {
+      const buf = Buffer.alloc(BINARY_CHECK_SIZE);
+      const { bytesRead } = await handle.read(buf, 0, BINARY_CHECK_SIZE, 0);
+      buffer = buf.slice(0, bytesRead);
+    } finally {
+      await handle.close();
+    }
   } catch {
     return false; // can't read — assume text for safety
   }
