@@ -2,10 +2,23 @@
 
 _Generated 2026-05-26 from `release_history.*`. Source of truth: Postgres._
 
-**818 releases.** 817 with retrospective. 692 with extracted lessons.
+**831 releases.** 830 with retrospective. 710 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
+| `v1.49.788` | IBEX NASA Interstellar Boundary Explorer SMEX-Class Earth-Orbit Energetic-Neutral-Atom All-Sky Imaging Mission | 2026-05-26 | ✓ | 12 | [read](v1.49.788/00-summary.md) |
+| `v1.49.787` | Adoption Telemetry: Dashboard + Automation + Allowlist | 2026-05-26 | ✓ | — | [read](v1.49.787/00-summary.md) |
+| `v1.49.786` | Adoption Telemetry: Module-Usage Scanner | 2026-05-26 | ✓ | — | [read](v1.49.786/00-summary.md) |
+| `v1.49.785` | PROJECT.md Normalizer + GAP Table Refresh | 2026-05-26 | ✓ | — | [read](v1.49.785/00-summary.md) |
+| `v1.49.784` | Codification: 8 Lessons from v781-v783 → 3 New Operative Disciplines | 2026-05-26 | ✓ | — | [read](v1.49.784/00-summary.md) |
+| `v1.49.783` | STATE.md Normalizer Fix (Deferred-Maintenance Wedge) | 2026-05-26 | ✓ | — | [read](v1.49.783/00-summary.md) |
+| `v1.49.782` | Tier E Architecture: LoaderContext Security Chokepoint | 2026-05-26 | ✓ | — | [read](v1.49.782/00-summary.md) |
+| `v1.49.781` | Tier E Architecture: Store/Registry Naming Hygiene + MemoryStore Audit | 2026-05-26 | ✓ | — | [read](v1.49.781/00-summary.md) |
+| `v1.49.780` | Tier E Architecture: cli.ts Dispatcher Extraction | 2026-05-26 | ✓ | 3 | [read](v1.49.780/00-summary.md) |
+| `v1.49.779` | Wave 3 Review HIGHs / Performance + Test-Quality Counter-Cadence | 2026-05-26 | ✓ | 9 | [read](v1.49.779/00-summary.md) |
+| `v1.49.778` | Wave 2 Review HIGHs / Security + Correctness Counter-Cadence | 2026-05-26 | ✓ | 9 | [read](v1.49.778/00-summary.md) |
+| `v1.49.777` | Wave 1 Review BLOCKERs / Security + Correctness Counter-Cadence | 2026-05-26 | ✓ | 8 | [read](v1.49.777/00-summary.md) |
+| `v1.49.776` | Template-Pollution Cleanup / Script-Bug Discovery and Repair | 2026-05-26 | ✓ | 11 | [read](v1.49.776/00-summary.md) |
 | `v1.49.775` | IMAP NASA Interstellar Mapping and Acceleration Probe — INTERSTELLAR-BOUNDARY Axis Opens at Axis-Rotation 24 | 2026-05-25 | ✓ | 8 | [read](v1.49.775/00-summary.md) |
 | `v1.49.774` | IMAGE NASA Single-Spacecraft Magnetosphere Remote-Sensing via Energetic-Neutral-Atom and Extreme-Ultraviolet Imaging Mission | 2026-05-25 | ✓ | 5 | [read](v1.49.774/00-summary.md) |
 | `v1.49.773` | Polar NASA Single-Spacecraft High-Latitude Inner-Magnetosphere Auroral Imaging Mission | 2026-05-25 | ✓ | 4 | [read](v1.49.773/00-summary.md) |
@@ -13,60 +26,60 @@ _Generated 2026-05-26 from `release_history.*`. Source of truth: Postgres._
 | `v1.49.771` | ARTEMIS NASA Two-Spacecraft Lunar-Orbit Solar-Wind-Moon Interaction Mission via THEMIS-B-and-C Repurposing | 2026-05-25 | ✓ | 3 | [read](v1.49.771/00-summary.md) |
 | `v1.49.770` | Cluster ESA-NASA Four-Spacecraft Polar-Orbit Magnetospheric Multi-Scale Mission | 2026-05-25 | ✓ | 4 | [read](v1.49.770/00-summary.md) |
 | `v1.49.769` | THEMIS NASA Explorer-Class Medium Five-Spacecraft Constellation Substorm-Trigger Mechanism Characterization at Magnetotail | 2026-05-25 | ✓ | 5 | [read](v1.49.769/00-summary.md) |
-| `v1.49.768` | MMS Magnetospheric Multiscale NASA Solar Terrestrial Probes Four-Spacecraft Tetrahedral Formation Magnetic Reconnection at Electron Scales | 2026-05-25 | ✓ | 5 | [read](v1.49.768/00-summary.md) |
+| `v1.49.768` | MMS Magnetospheric Multiscale NASA STP Mission | 2026-05-25 | ✓ | 5 | [read](v1.49.768/00-summary.md) |
 | `v1.49.767` | RBSP Van Allen Probes NASA Living-With-a-Star Twin-Spacecraft Inner-Magnetosphere Radiation-Belt Mission | 2026-05-25 | ✓ | 7 | [read](v1.49.767/00-summary.md) |
-| `v1.49.766` | NASA Canonical Sibling Files Restoration: v1.168 SDO + NASA Living With a Star Flagship Heliophysics Mission at Inclined Geosynchronous Orbit | 2026-05-24 | ✓ | 4 | [read](v1.49.766/00-summary.md) |
-| `v1.49.765` | NASA Canonical Sibling Files Restoration: v1.167 ACE + NASA Explorer-Class L1 In-Situ Particle Composition Mission | 2026-05-24 | ✓ | 4 | [read](v1.49.765/00-summary.md) |
-| `v1.49.764` | NASA Canonical Sibling Files Restoration: v1.166 SOHO + NASA-ESA Joint Heliophysics Mission at Sun-Earth L1 Halo Orbit | 2026-05-24 | ✓ | 4 | [read](v1.49.764/00-summary.md) |
-| `v1.49.763` | NASA Canonical Sibling Files Restoration: v1.165 Aditya-L1 + ISRO First Dedicated Indian Solar Observatory at Sun-Earth L1 Halo Orbit | 2026-05-23 | ✓ | 4 | [read](v1.49.763/00-summary.md) |
-| `v1.49.762` | NASA Canonical Sibling Files Restoration: v1.164 Europa Clipper + NASA Flagship Planetary Program Europa Habitability Characterization Mission | 2026-05-23 | ✓ | 3 | [read](v1.49.762/00-summary.md) |
-| `v1.49.761` | NASA Canonical Sibling Files Restoration: v1.163 Psyche + NASA Discovery Program 16-Psyche Main-Belt Metal-Asteroid Orbit Mission | 2026-05-23 | ✓ | 3 | [read](v1.49.761/00-summary.md) |
-| `v1.49.760` | NASA Canonical Sibling Files Restoration: v1.162 Euclid + ESA Cosmic Vision M-Class Wide-Field Cosmology Survey Mission | 2026-05-23 | ✓ | 3 | [read](v1.49.760/00-summary.md) |
-| `v1.49.759` | NASA Canonical Sibling Files Restoration: v1.161 JUICE + ESA Cosmic Vision L-Class Flagship Jupiter Icy Moons Explorer | 2026-05-23 | ✓ | 3 | [read](v1.49.759/00-summary.md) |
-| `v1.49.758` | NASA Canonical Sibling Files Restoration: v1.160 Artemis I + NASA-Led Crewed-Program-Precursor-Uncrewed Lunar Test Flight | 2026-05-23 | ✓ | 27 | [read](v1.49.758/00-summary.md) |
-| `v1.49.757` | NASA Canonical Sibling Files Restoration: v1.159 James Webb Space Telescope (JWST) + NASA + ESA + CSA Flagship Infrared Space Observatory at Sun-Earth L2 Halo Orbit | 2026-05-23 | ✓ | 22 | [read](v1.49.757/00-summary.md) |
-| `v1.49.756` | NASA Canonical Sibling Files Restoration: v1.158 Lucy + NASA Discovery Program First Mission to Jupiter Trojan Asteroids | 2026-05-23 | ✓ | 17 | [read](v1.49.756/00-summary.md) |
-| `v1.49.755` | NASA Canonical Sibling Files Restoration: v1.157 Mars 2020 / Perseverance Rover + Ingenuity Helicopter + NASA-JPL-Led Sample-Caching Rover Plus First Powered Flight on Another World | 2026-05-23 | ✓ | 18 | [read](v1.49.755/00-summary.md) |
-| `v1.49.754` | NASA Canonical Sibling Files Restoration: v1.156 Tianwen-1 (天问一号) + CNSA-Led First Independent China Mars Mission | 2026-05-23 | ✓ | 18 | [read](v1.49.754/00-summary.md) |
-| `v1.49.753` | NASA Canonical Sibling Files Restoration: v1.155 Hope (Emirates Mars Mission / Al-Amal مسبار الأمل) + UAE-Led First Mars Weather-Climate Orbiter | 2026-05-23 | ✓ | 17 | [read](v1.49.753/00-summary.md) |
-| `v1.49.752` | NASA Canonical Sibling Files Restoration: v1.154 ExoMars Trace Gas Orbiter (TGO) + ESA-Led First Mars Atmospheric-Trace-Gas Orbiter | 2026-05-23 | ✓ | 17 | [read](v1.49.752/00-summary.md) |
-| `v1.49.751` | NASA Canonical Sibling Files Restoration: v1.153 Mars Atmosphere and Volatile EvolutioN (MAVEN) + First Dedicated Mars Upper-Atmosphere Mission | 2026-05-23 | ✓ | 22 | [read](v1.49.751/00-summary.md) |
-| `v1.49.750` | NASA Canonical Sibling Files Restoration: v1.152 Mars Science Laboratory (MSL) / Curiosity Rover + Next-Generation Surface-Rover | 2026-05-23 | ✓ | 21 | [read](v1.49.750/00-summary.md) |
-| `v1.49.749` | NASA Canonical Sibling Files Restoration: v1.151 Mars Reconnaissance Orbiter (MRO) + First Orbital-Survey | 2026-05-23 | ✓ | 18 | [read](v1.49.749/00-summary.md) |
-| `v1.49.748` | NASA Canonical Sibling Files Restoration: v1.150 Opportunity MER-B Mars Exploration Rover + Second MER-Program Rover | 2026-05-23 | ✓ | 21 | [read](v1.49.748/00-summary.md) |
-| `v1.49.747` | NASA Canonical Sibling Files Restoration: v1.149 Spirit MER-A Mars Exploration Rover + First MER-Program Rover + 2003-06-10 CCAFS SLC-17A Launch on Delta II 7925-9.5 Heavy | 2026-05-23 | ✓ | — | [read](v1.49.747/00-summary.md) |
-| `v1.49.746` | NASA Canonical Sibling Files Restoration: v1.148 STS-107 Columbia Research Mission + SPACEHAB Research Double Module + 80+ Microgravity Experiments | 2026-05-23 | ✓ | 17 | [read](v1.49.746/00-summary.md) |
-| `v1.49.745` | NASA Canonical Sibling Files Restoration: v1.147 STS-32 Columbia LDEF Retrieval First Ever + 5y 9m Forward-Shadow Closure from STS-41-C + First 10-Day Shuttle Mission | 2026-05-23 | ✓ | 4 | [read](v1.49.745/00-summary.md) |
-| `v1.49.744` | NASA Canonical Sibling Files Restoration: v1.146 STS-34 Atlantis Galileo Jupiter First US Jupiter-Bound Planetary Probe + Galileo Orbiter and Atmospheric Entry Probe + 6-Year VEEGA Interplanetary Cruise | 2026-05-23 | ✓ | 4 | [read](v1.49.744/00-summary.md) |
-| `v1.49.743` | NASA Canonical Sibling Files Restoration: v1.145 STS-33 Atlantis DoD-Classified Third Post-Challenger Flight + First Night Shuttle Launch Post-Challenger + USA-48 Magnum-Orion-2 SIGINT | 2026-05-23 | ✓ | 4 | [read](v1.49.743/00-summary.md) |
-| `v1.49.742` | NASA Canonical Sibling Files Restoration: v1.144 Kvant-2 Second Mir Module Rebuild (Path B Hand-Author) | 2026-05-23 | ✓ | 5 | [read](v1.49.742/00-summary.md) |
-| `v1.49.741` | NASA Canonical Sibling Files Restoration: v1.143 STS-31 Discovery First Hubble Space Telescope Launch Rebuild (Path B Hand-Author) | 2026-05-23 | ✓ | 5 | [read](v1.49.741/00-summary.md) |
-| `v1.49.740` | NASA Canonical Sibling Files Restoration: v1.142 STS-30 Atlantis First US Planetary Mission From Shuttle + Magellan Venus Radar Mapper Deployment Rebuild (Path B Hand-Author) | 2026-05-23 | ✓ | 5 | [read](v1.49.740/00-summary.md) |
-| `v1.49.739` | NASA Canonical Sibling Files Restoration: v1.141 STS-29 Discovery Third Post-Challenger Flight + TDRS-4 Constellation Completion Rebuild (Path B Hand-Author) | 2026-05-23 | ✓ | 5 | [read](v1.49.739/00-summary.md) |
-| `v1.49.738` | NASA Canonical Sibling Files Restoration: v1.140 Buran 1.01 Unmanned Single Orbital Flight Rebuild (Path B Hand-Author) | 2026-05-22 | ✓ | 5 | [read](v1.49.738/00-summary.md) |
-| `v1.49.737` | NASA Canonical Sibling Files Restoration: v1.139 Soyuz TM-7 EO-4 Rebuild (Path B Hand-Author) | 2026-05-22 | ✓ | 5 | [read](v1.49.737/00-summary.md) |
-| `v1.49.736` | NASA Canonical Sibling Files Restoration: v1.138 STS-27 Atlantis Rebuild (Path B Hand-Author) | 2026-05-22 | ✓ | 5 | [read](v1.49.736/00-summary.md) |
-| `v1.49.735` | NASA Canonical Sibling Files Restoration: v1.137 STS-26 Discovery Return-to-Flight Rebuild | 2026-05-22 | ✓ | 4 | [read](v1.49.735/00-summary.md) |
-| `v1.49.734` | NASA Canonical Sibling Files Restoration: v1.136 Soyuz TM-6 First Afghan Cosmonaut + Polyakov Physician Rebuild | 2026-05-22 | ✓ | 4 | [read](v1.49.734/00-summary.md) |
-| `v1.49.733` | NASA Canonical Sibling Files Restoration: v1.135 Soyuz TM-5 Second Bulgarian Cosmonaut Rebuild | 2026-05-22 | ✓ | 4 | [read](v1.49.733/00-summary.md) |
-| `v1.49.732` | NASA Canonical Sibling Files Restoration: v1.134 Soyuz TM-4 First Year-in-Space Crew Rebuild | 2026-05-22 | ✓ | 4 | [read](v1.49.732/00-summary.md) |
-| `v1.49.731` | NASA Canonical Sibling Files Restoration: v1.133 Soyuz TM-3 EO-2 First Syrian Cosmonaut Rebuild | 2026-05-22 | ✓ | 4 | [read](v1.49.731/00-summary.md) |
-| `v1.49.730` | NASA Canonical Sibling Files Restoration: v1.132 Halley Armada 1986 Rebuild | 2026-05-22 | ✓ | 4 | [read](v1.49.730/00-summary.md) |
-| `v1.49.729` | NASA Canonical Sibling Files Restoration: v1.131 Mir Kvant Astrophysics Module Rebuild | 2026-05-22 | ✓ | 4 | [read](v1.49.729/00-summary.md) |
-| `v1.49.728` | NASA Canonical Sibling Files Restoration: v1.130 Soyuz T-15 Rebuild | 2026-05-22 | ✓ | 4 | [read](v1.49.728/00-summary.md) |
-| `v1.49.727` | NASA Canonical Sibling Files Restoration: v1.129 Rogers Commission Report Rebuild | 2026-05-22 | ✓ | 4 | [read](v1.49.727/00-summary.md) |
-| `v1.49.726` | NASA Canonical Sibling Files Restoration: v1.128 STS-51-L Challenger Memorial Rebuild | 2026-05-22 | ✓ | 4 | [read](v1.49.726/00-summary.md) |
-| `v1.49.725` | NASA Canonical Sibling Files Restoration: v1.127 Voyager 2 Uranus Encounter Rebuild | 2026-05-22 | ✓ | — | [read](v1.49.725/00-summary.md) |
-| `v1.49.724` | NASA Canonical Sibling Files Restoration: v1.126 STS-61-C Columbia 7th Flight Chang-Díaz Rebuild | 2026-05-22 | ✓ | — | [read](v1.49.724/00-summary.md) |
-| `v1.49.723` | NASA Canonical Sibling Files Restoration: v1.125 STS-61-B Atlantis 2nd Flight EASE/ACCESS Rebuild | 2026-05-22 | ✓ | — | [read](v1.49.723/00-summary.md) |
-| `v1.49.722` | NASA Canonical Sibling Files Restoration: v1.124 STS-61-A Spacelab-D1 International-Funded Rebuild | 2026-05-22 | ✓ | — | [read](v1.49.722/00-summary.md) |
-| `v1.49.721` | NASA Canonical Sibling Files Restoration: v1.123 STS-51-J Atlantis Maiden-Flight DoD-Classified Rebuild + Lesson #10408 PROMOTION TO ESTABLISHED | 2026-05-22 | ✓ | — | [read](v1.49.721/00-summary.md) |
-| `v1.49.720` | NASA Canonical Sibling Files Restoration: v1.122 STS-51-I Discovery LEASAT-3 Rescue-Recovery Rebuild | 2026-05-21 | ✓ | — | [read](v1.49.720/00-summary.md) |
-| `v1.49.719` | NASA Canonical Sibling Files Restoration: v1.121 STS-51-F Spacelab-2 Rebuild | 2026-05-21 | ✓ | — | [read](v1.49.719/00-summary.md) |
-| `v1.49.718` | NASA Canonical Sibling Files Restoration: v1.120 STS-51-G Discovery Rebuild | 2026-05-21 | ✓ | — | [read](v1.49.718/00-summary.md) |
-| `v1.49.717` | NASA Canonical Sibling Files Restoration: v1.119 STS-51-B Challenger Spacelab-3 Rebuild | 2026-05-21 | ✓ | — | [read](v1.49.717/00-summary.md) |
-| `v1.49.716` | NASA Canonical Sibling Files Restoration Campaign Launch + v1.118 STS-51-D Discovery Rebuild | 2026-05-21 | ✓ | — | [read](v1.49.716/00-summary.md) |
-| `v1.49.715` | SDO Solar Dynamics Observatory NASA Living With a Star Geosynchronous EUV-Dynamics + HMI Helioseismic-Magnetic Imager + EVE Extreme Ultraviolet Variability Mission (NASA 1.167→1.168) | 2026-05-21 | ✓ | 7 | [read](v1.49.715/00-summary.md) |
+| `v1.49.766` | NASA Canonical Sibling Files Restoration: v1.168 SDO | 2026-05-24 | ✓ | 7 | [read](v1.49.766/00-summary.md) |
+| `v1.49.765` | NASA Canonical Sibling Files Restoration: v1.167 ACE + NASA Explorer-Class L1 In-Situ Particle Composition Mission | 2026-05-24 | ✓ | 7 | [read](v1.49.765/00-summary.md) |
+| `v1.49.764` | NASA Canonical Sibling Files Restoration: v1.166 SOHO + NASA-ESA Joint Heliophysics Mission at Sun-Earth L1 Halo Orbit | 2026-05-24 | ✓ | 7 | [read](v1.49.764/00-summary.md) |
+| `v1.49.763` | NASA Canonical Sibling Files Restoration: v1.165 Aditya-L1 | 2026-05-23 | ✓ | 7 | [read](v1.49.763/00-summary.md) |
+| `v1.49.762` | NASA Canonical Sibling Files Restoration: v1.164 Europa Clipper | 2026-05-23 | ✓ | 6 | [read](v1.49.762/00-summary.md) |
+| `v1.49.761` | NASA Canonical Sibling Files Restoration: v1.163 Psyche + NASA Discovery Program 16-Psyche Main-Belt Metal-Asteroid Orbit Mission | 2026-05-23 | ✓ | 6 | [read](v1.49.761/00-summary.md) |
+| `v1.49.760` | NASA Canonical Sibling Files Restoration: v1.162 Euclid + ESA Cosmic Vision M-Class Wide-Field Cosmology Survey Mission | 2026-05-23 | ✓ | 6 | [read](v1.49.760/00-summary.md) |
+| `v1.49.759` | NASA Canonical Sibling Files Restoration: v1.161 JUICE + ESA Cosmic Vision L-Class Flagship Jupiter Icy Moons Explorer | 2026-05-23 | ✓ | 6 | [read](v1.49.759/00-summary.md) |
+| `v1.49.758` | NASA Canonical Sibling Files Restoration: v1.160 Artemis I + NASA-Led Crewed-Program-Precursor-Uncrewed Lunar Test Flight | 2026-05-23 | ✓ | 30 | [read](v1.49.758/00-summary.md) |
+| `v1.49.757` | NASA Canonical Sibling Files Restoration: v1.159 James Webb Space Telescope (JWST) | 2026-05-23 | ✓ | 25 | [read](v1.49.757/00-summary.md) |
+| `v1.49.756` | NASA Canonical Sibling Files Restoration: v1.158 Lucy + NASA Discovery Program First Mission to Jupiter Trojan Asteroids | 2026-05-23 | ✓ | 20 | [read](v1.49.756/00-summary.md) |
+| `v1.49.755` | NASA Canonical Sibling Files Restoration: v1.157 Mars 2020 / Perseverance Rover | 2026-05-23 | ✓ | 21 | [read](v1.49.755/00-summary.md) |
+| `v1.49.754` | NASA Canonical Sibling Files Restoration: v1.156 Tianwen-1 (天问一号) + CNSA-Led First Independent China Mars Mission | 2026-05-23 | ✓ | 21 | [read](v1.49.754/00-summary.md) |
+| `v1.49.753` | NASA Canonical Sibling Files Restoration: v1.155 Hope (Emirates Mars Mission / Al-Amal مسبار الأمل) | 2026-05-23 | ✓ | 20 | [read](v1.49.753/00-summary.md) |
+| `v1.49.752` | NASA Canonical Sibling Files Restoration: v1.154 ExoMars Trace Gas Orbiter (TGO) | 2026-05-23 | ✓ | 20 | [read](v1.49.752/00-summary.md) |
+| `v1.49.751` | NASA Canonical Sibling Files Restoration: v1.153 Mars Atmosphere and Volatile EvolutioN (MAVEN) | 2026-05-23 | ✓ | 25 | [read](v1.49.751/00-summary.md) |
+| `v1.49.750` | NASA Canonical Sibling Files Restoration: v1.152 Mars Science Laboratory (MSL) / Curiosity Rover + Next-Generation Surface-Rover | 2026-05-23 | ✓ | 24 | [read](v1.49.750/00-summary.md) |
+| `v1.49.749` | NASA Canonical Sibling Files Restoration: v1.151 Mars Reconnaissance Orbiter (MRO) + First Orbital-Survey | 2026-05-23 | ✓ | 21 | [read](v1.49.749/00-summary.md) |
+| `v1.49.748` | NASA Canonical Sibling Files Restoration: v1.150 Opportunity MER-B Mars Exploration Rover + Second MER-Program Rover | 2026-05-23 | ✓ | 24 | [read](v1.49.748/00-summary.md) |
+| `v1.49.747` | NASA Canonical Sibling Files Restoration: v1.149 Spirit MER-A Mars Exploration Rover | 2026-05-23 | ✓ | 3 | [read](v1.49.747/00-summary.md) |
+| `v1.49.746` | NASA Canonical Sibling Files Restoration: v1.148 STS-107 Columbia Research Mission | 2026-05-23 | ✓ | 20 | [read](v1.49.746/00-summary.md) |
+| `v1.49.745` | NASA Canonical Sibling Files Restoration: v1.147 STS-32 Columbia LDEF Retrieval First Ever | 2026-05-23 | ✓ | 7 | [read](v1.49.745/00-summary.md) |
+| `v1.49.744` | NASA Canonical Sibling Files Restoration: v1.146 STS-34 Atlantis Galileo Jupiter First US Jupiter-Bound Planetary Probe | 2026-05-23 | ✓ | 7 | [read](v1.49.744/00-summary.md) |
+| `v1.49.743` | NASA Canonical Sibling Files Restoration: v1.145 STS-33 Atlantis DoD-Classified Third Post-Challenger Flight | 2026-05-23 | ✓ | 7 | [read](v1.49.743/00-summary.md) |
+| `v1.49.742` | NASA Canonical Sibling Files Restoration: v1.144 Kvant-2 Second Mir Module Rebuild (Path B Hand-Author) | 2026-05-23 | ✓ | 8 | [read](v1.49.742/00-summary.md) |
+| `v1.49.741` | NASA Canonical Sibling Files Restoration: v1.143 STS-31 Discovery First Hubble Space Telescope Launch Rebuild (Path B Hand-Author) | 2026-05-23 | ✓ | 8 | [read](v1.49.741/00-summary.md) |
+| `v1.49.740` | NASA Canonical Sibling Files Restoration: v1.142 STS-30 Atlantis First US Planetary Mission From Shuttle | 2026-05-23 | ✓ | 8 | [read](v1.49.740/00-summary.md) |
+| `v1.49.739` | NASA Canonical Sibling Files Restoration: v1.141 STS-29 Discovery Third Post-Challenger Flight | 2026-05-23 | ✓ | 8 | [read](v1.49.739/00-summary.md) |
+| `v1.49.738` | NASA Canonical Sibling Files Restoration: v1.140 Buran 1.01 Unmanned Single Orbital Flight Rebuild (Path B Hand-Author) | 2026-05-22 | ✓ | 8 | [read](v1.49.738/00-summary.md) |
+| `v1.49.737` | NASA Canonical Sibling Files Restoration: v1.139 Soyuz TM-7 EO-4 Rebuild (Path B Hand-Author) | 2026-05-22 | ✓ | 8 | [read](v1.49.737/00-summary.md) |
+| `v1.49.736` | NASA Canonical Sibling Files Restoration: v1.138 STS-27 Atlantis Rebuild (Path B Hand-Author) | 2026-05-22 | ✓ | 8 | [read](v1.49.736/00-summary.md) |
+| `v1.49.735` | NASA Canonical Sibling Files Restoration: v1.137 STS-26 Discovery Return-to-Flight Rebuild | 2026-05-22 | ✓ | 7 | [read](v1.49.735/00-summary.md) |
+| `v1.49.734` | NASA Canonical Sibling Files Restoration: v1.136 Soyuz TM-6 First Afghan Cosmonaut + Polyakov Physician Rebuild | 2026-05-22 | ✓ | 7 | [read](v1.49.734/00-summary.md) |
+| `v1.49.733` | NASA Canonical Sibling Files Restoration: v1.135 Soyuz TM-5 Second Bulgarian Cosmonaut Rebuild | 2026-05-22 | ✓ | 7 | [read](v1.49.733/00-summary.md) |
+| `v1.49.732` | NASA Canonical Sibling Files Restoration: v1.134 Soyuz TM-4 First Year-in-Space Crew Rebuild | 2026-05-22 | ✓ | 7 | [read](v1.49.732/00-summary.md) |
+| `v1.49.731` | NASA Canonical Sibling Files Restoration: v1.133 Soyuz TM-3 EO-2 First Syrian Cosmonaut Rebuild | 2026-05-22 | ✓ | 7 | [read](v1.49.731/00-summary.md) |
+| `v1.49.730` | NASA Canonical Sibling Files Restoration: v1.132 Halley Armada 1986 Rebuild | 2026-05-22 | ✓ | 7 | [read](v1.49.730/00-summary.md) |
+| `v1.49.729` | NASA Canonical Sibling Files Restoration: v1.131 Mir Kvant Astrophysics Module Rebuild | 2026-05-22 | ✓ | 7 | [read](v1.49.729/00-summary.md) |
+| `v1.49.728` | NASA Canonical Sibling Files Restoration: v1.130 Soyuz T-15 Rebuild | 2026-05-22 | ✓ | 7 | [read](v1.49.728/00-summary.md) |
+| `v1.49.727` | NASA Canonical Sibling Files Restoration: v1.129 Rogers Commission Report Rebuild | 2026-05-22 | ✓ | 7 | [read](v1.49.727/00-summary.md) |
+| `v1.49.726` | NASA Canonical Sibling Files Restoration: v1.128 STS-51-L Challenger Memorial Rebuild | 2026-05-22 | ✓ | 7 | [read](v1.49.726/00-summary.md) |
+| `v1.49.725` | NASA Canonical Sibling Files Restoration: v1.127 Voyager 2 Uranus Encounter Rebuild | 2026-05-22 | ✓ | 3 | [read](v1.49.725/00-summary.md) |
+| `v1.49.724` | NASA Canonical Sibling Files Restoration: v1.126 STS-61-C Columbia 7th Flight Chang-Díaz Rebuild | 2026-05-22 | ✓ | 3 | [read](v1.49.724/00-summary.md) |
+| `v1.49.723` | NASA Canonical Sibling Files Restoration: v1.125 STS-61-B Atlantis 2nd Flight EASE/ACCESS Rebuild | 2026-05-22 | ✓ | 3 | [read](v1.49.723/00-summary.md) |
+| `v1.49.722` | NASA Canonical Sibling Files Restoration: v1.124 STS-61-A Spacelab-D1 International-Funded Rebuild | 2026-05-22 | ✓ | 3 | [read](v1.49.722/00-summary.md) |
+| `v1.49.721` | NASA Canonical Sibling Files Restoration: v1.123 STS-51-J Atlantis Maiden-Flight DoD-Classified Rebuild | 2026-05-22 | ✓ | 3 | [read](v1.49.721/00-summary.md) |
+| `v1.49.720` | NASA Canonical Sibling Files Restoration: v1.122 STS-51-I Discovery LEASAT-3 Rescue-Recovery Rebuild | 2026-05-21 | ✓ | 3 | [read](v1.49.720/00-summary.md) |
+| `v1.49.719` | NASA Canonical Sibling Files Restoration: v1.121 STS-51-F Spacelab-2 Rebuild | 2026-05-21 | ✓ | 3 | [read](v1.49.719/00-summary.md) |
+| `v1.49.718` | NASA Canonical Sibling Files Restoration: v1.120 STS-51-G Discovery Rebuild | 2026-05-21 | ✓ | 3 | [read](v1.49.718/00-summary.md) |
+| `v1.49.717` | NASA Canonical Sibling Files Restoration: v1.119 STS-51-B Challenger Spacelab-3 Rebuild | 2026-05-21 | ✓ | 3 | [read](v1.49.717/00-summary.md) |
+| `v1.49.716` | NASA Canonical Sibling Files Restoration Campaign Launch + v1.118 STS-51-D Discovery Rebuild | 2026-05-21 | ✓ | 3 | [read](v1.49.716/00-summary.md) |
+| `v1.49.715` | SDO Solar Dynamics Observatory NASA Living With a Star Geosynchronous EUV-Dynamics (NASA 1.167→1.168) | 2026-05-21 | ✓ | 7 | [read](v1.49.715/00-summary.md) |
 | `v1.49.714` | ACE Advanced Composition Explorer NASA Explorer-Class L1 In-Situ Particle Composition Mission (NASA 1.166→1.167) | 2026-05-21 | ✓ | 7 | [read](v1.49.714/00-summary.md) |
 | `v1.49.713` | SOHO Solar and Heliospheric Observatory NASA-ESA Joint Heliophysics Mission at Sun-Earth L1 Halo Orbit (NASA 1.165→1.166) | 2026-05-21 | ✓ | 7 | [read](v1.49.713/00-summary.md) |
 | `v1.49.712` | Aditya-L1 ISRO First Dedicated Indian Solar Observatory at Sun-Earth L1 Halo Orbit (NASA 1.164→1.165) | 2026-05-21 | ✓ | 8 | [read](v1.49.712/00-summary.md) |
@@ -122,7 +135,7 @@ _Generated 2026-05-26 from `release_history.*`. Source of truth: Postgres._
 | `v1.49.662` | STS-51-G Discovery (NASA 1.119→1.120) | 2026-05-16 | ✓ | — | [read](v1.49.662/00-summary.md) |
 | `v1.49.661` | STS-51-B Challenger Spacelab-3 (NASA 1.118→1.119) | 2026-05-16 | ✓ | — | [read](v1.49.661/00-summary.md) |
 | `v1.49.660` | STS-51-D Discovery (NASA 1.117→1.118) | 2026-05-16 | ✓ | — | [read](v1.49.660/00-summary.md) |
-| `v1.49.659` | Phase-2 Build-Out: Manifests, Spectra, Retrieval, Audit | 2026-05-16 | ✓ | — | [read](v1.49.659/00-summary.md) |
+| `v1.49.659` | Phase-2 Build-Out: Manifests, Spectra, Retrieval, Audit | 2026-05-16 | ✓ | 3 | [read](v1.49.659/00-summary.md) |
 | `v1.49.658` | MUS + ELC Catalog-Card Template Codification | 2026-05-16 | ✓ | — | [read](v1.49.658/00-summary.md) |
 | `v1.49.657` | STS-51-C Discovery (NASA 1.116→1.117) | 2026-05-16 | ✓ | — | [read](v1.49.657/00-summary.md) |
 | `v1.49.656` | NASA Track-Card Uplift (1.109-1.116) | 2026-05-16 | ✓ | — | [read](v1.49.656/00-summary.md) |
