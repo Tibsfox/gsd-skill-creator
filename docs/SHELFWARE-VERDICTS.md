@@ -51,12 +51,12 @@ entry, or the deletion commit.
 | `semantic-channel` | WIRED | v1.49.789 | `src/cli/commands/dacp-drift-check.ts`; `.planning/PROJECT.md` GAP-6 row | Exposed the read-only adapter, capacity bound, and advisory drift checker through the existing `skill-creator dacp` CLI namespace as a new `drift-check`/`dc` subcommand. First operator-visible surface for the GAP-6 closure artifact; HARD-preservation invariants intact (read-only adapter, advisory-only exit codes, default-OFF opt-in flag). |
 | `tonnetz` | ALLOWLISTED | v1.49.791 | `tools/adoption-scan.allowlist.json` `tonnetz` entry | Substrate-level reference implementation for the SoPS (Sound of Puget Sound) surface per arXiv:2604.19960 (Boland 2026, MATH-20 Phase 752). The SoPS mapping is the substrate; ALLOWLIST rather than RETIRE because the substrate is preserved, not filtered out. Default-OFF + G6 standard CAPCOM preservation invariants intact. |
 | `wasserstein-hebbian` | ALLOWLISTED | v1.49.791 | `tools/adoption-scan.allowlist.json` `wasserstein-hebbian` entry; `docs/substrate-references/wasserstein-hebbian.md` | Substrate-level runtime backing for the canonical reader's reference to arXiv:2604.16052 (Tan 2026, 75pp, MATH-19 Phase 751). Companion to the substrate doc; advisory-only audit-finding emitter; CAPCOM retains gate authority. |
+| `koopman-memory` | WIRED | v1.49.792 | `src/cli/commands/koopman-check.ts` | Exposed the three advisory retention invariants (`checkIdentityRetention`, `checkZeroInputRetention`, `checkLipschitzBound`) plus operator construction + spectral-data through a new top-level `skill-creator koopman-check`/`kc` CLI. Three-tier output (text/quiet/JSON). HARD-preservation invariants intact: `src/memory/` runtime untouched; only `import type` references; G8 HARD-preservation gate preserved; advisory-only exit-code 0 invariant. |
 
 ## Open candidates (Math Foundations Refresh cluster)
 
 - `coherent-functors` — category-theoretic NN primitive; closes part of GAP-2 (College of Knowledge consumer engine) once wired. Candidate for a future WIRED verdict when the college-of-knowledge consumer engine ships.
 - `hourglass-persistence` — contraction/hole alarm. Natural wire site is the skill-DAG observability surface; candidate for WIRED when skill-DAG instrumentation reaches that surface.
-- `koopman-memory` — Mamba+Koopman long-context primitive. Candidate for ALLOWLISTED (reference impl backing the substrate doc) OR WIRED (long-context skill activation path) — operator decision pending.
 
 Each open candidate is one ship-unit of work.
 

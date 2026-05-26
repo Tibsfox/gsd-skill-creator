@@ -8,6 +8,7 @@ import { invokeCommand } from './commands/invoke.js';
 import { agentsCommand } from './commands/agents.js';
 import { teamCommand } from './commands/team.js';
 import { dacpCommand } from './commands/dacp.js';
+import { koopmanCheckCommand } from './commands/koopman-check.js';
 import { rollbackCommand } from './commands/rollback.js';
 import { skillCommand } from './commands/skill.js';
 import { printHelp } from './help.js';
@@ -134,6 +135,10 @@ export const REGISTRY: readonly CommandEntry[] = [
   { aliases: ['agents', 'ag'], handler: (ctx) => agentsCommand(ctx.args) },
   { aliases: ['team', 'tm'], handler: (ctx) => teamCommand(ctx.args) },
   { aliases: ['dacp', 'dp'], handler: (ctx) => dacpCommand(ctx.args) },
+  { aliases: ['koopman-check', 'kc'], handler: async (ctx) => {
+    const exitCode = await koopmanCheckCommand(ctx.args);
+    process.exitCode = exitCode;
+  } },
   { aliases: ['rollback', 'rb'], handler: (ctx) => rollbackCommand(ctx.args) },
   { aliases: ['skill'], handler: (ctx) => skillCommand(ctx.args, ctx.parseSkillsDir, ctx.parseStringFlag) },
 
