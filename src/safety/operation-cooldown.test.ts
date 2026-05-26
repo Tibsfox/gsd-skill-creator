@@ -53,10 +53,11 @@ describe('OperationCooldown', () => {
     it('should allow invocation after cooldown expires', async () => {
       const cooldown = new OperationCooldown({ discover: 100 }, statePath);
 
-      await cooldown.record('discover');
-
-      // Wait for cooldown to expire
-      await new Promise(resolve => setTimeout(resolve, 150));
+      // Write a state file with a timestamp that's already past the 100ms
+      // cooldown, instead of recording-then-waiting. Eliminates the 150ms
+      // real-time sleep and the flake hazard on slow CI runners.
+      const expiredTs = new Date(Date.now() - 500).toISOString();
+      await writeFile(statePath, JSON.stringify({ discover: expiredTs }));
 
       const result = await cooldown.check('discover');
       expect(result.allowed).toBe(true);
