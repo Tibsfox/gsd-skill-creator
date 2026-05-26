@@ -11,6 +11,10 @@
 
 import { readFile } from 'node:fs/promises';
 
+import { ensureAllowed, type LoaderContext } from '../security/loader-context.js';
+
+const LOADER_SOURCE = 'knowledge/resource-loader';
+
 // ============================================================================
 // Types
 // ============================================================================
@@ -119,9 +123,14 @@ export function parseResources(markdown: string): ResourceCatalog {
  * Read a resource catalog markdown file from disk and parse its contents.
  *
  * @param filePath - Absolute or relative path to the resources file
+ * @param ctx - Optional security chokepoint (src/security/loader-context.ts).
  * @returns ResourceCatalog with categorized and flattened links
  */
-export async function parseResourcesFile(filePath: string): Promise<ResourceCatalog> {
+export async function parseResourcesFile(
+  filePath: string,
+  ctx?: LoaderContext,
+): Promise<ResourceCatalog> {
+  ensureAllowed(ctx, LOADER_SOURCE, 'read-file', filePath);
   const content = await readFile(filePath, 'utf-8');
   return parseResources(content);
 }

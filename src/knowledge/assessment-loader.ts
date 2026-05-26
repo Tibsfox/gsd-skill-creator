@@ -11,6 +11,10 @@
 
 import { readFile } from 'node:fs/promises';
 
+import { ensureAllowed, type LoaderContext } from '../security/loader-context.js';
+
+const LOADER_SOURCE = 'knowledge/assessment-loader';
+
 // ============================================================================
 // Types
 // ============================================================================
@@ -128,9 +132,14 @@ export function parseAssessment(markdown: string): AssessmentDocument {
  * Read an assessment markdown file from disk and parse its contents.
  *
  * @param filePath - Absolute or relative path to the assessment file
+ * @param ctx - Optional security chokepoint (src/security/loader-context.ts).
  * @returns Structured AssessmentDocument
  */
-export async function parseAssessmentFile(filePath: string): Promise<AssessmentDocument> {
+export async function parseAssessmentFile(
+  filePath: string,
+  ctx?: LoaderContext,
+): Promise<AssessmentDocument> {
+  ensureAllowed(ctx, LOADER_SOURCE, 'read-file', filePath);
   const content = await readFile(filePath, 'utf-8');
   return parseAssessment(content);
 }

@@ -12,6 +12,10 @@ import { PackActivitySchema } from './types.js';
 import type { PackActivity } from './types.js';
 import { readFile } from 'node:fs/promises';
 
+import { ensureAllowed, type LoaderContext } from '../security/loader-context.js';
+
+const LOADER_SOURCE = 'knowledge/activity-loader';
+
 // ============================================================================
 // Result type
 // ============================================================================
@@ -88,9 +92,14 @@ export async function loadActivities(jsonString: string): Promise<ActivitiesResu
  * Read a JSON activities file from disk and parse/validate its contents.
  *
  * @param filePath - Absolute or relative path to the activities JSON file
+ * @param ctx - Optional security chokepoint (src/security/loader-context.ts).
  * @returns Validated PackActivity array or array of error messages
  */
-export async function loadActivitiesFile(filePath: string): Promise<ActivitiesResult> {
+export async function loadActivitiesFile(
+  filePath: string,
+  ctx?: LoaderContext,
+): Promise<ActivitiesResult> {
+  ensureAllowed(ctx, LOADER_SOURCE, 'read-file', filePath);
   let content: string;
   try {
     content = await readFile(filePath, 'utf-8');
