@@ -1,4 +1,13 @@
-# 03 — Retrospective: v1.49.644 Cluster #11 Post-Bankruptcy Resume
+# Retrospective
+
+## Carryover lessons applied
+
+This ship inherits and sustains several disciplines from prior milestones:
+
+- **Lesson #10168 — counter-cadence cleanup-mission cadence (HIGH).** Pattern operationally sustainable.
+- **Lesson #10401 — MISSION-PACKAGE-DISCIPLINE §3 (HIGH).** Applied to the dispatch brief.
+- **Lesson #10406 candidate — POSITIVE-FRAMING-DISPATCH-DISCIPLINE (HIGH).** Brief uses positive framing.
+
 
 ## What worked
 

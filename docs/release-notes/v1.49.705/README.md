@@ -35,6 +35,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.705 advances the engine from 1.157 to 1.158 with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** Lucy NASA Discovery Program First Mission to Jupiter Trojan Asteroids ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 Lucy launched **2021-10-16 09:34 UTC** from Cape Canaveral Space Force Station Space Launch Complex 41 (CCSFS SLC-41; renamed from CCAFS 2020-12) Florida on **Atlas V 401** medium-class launch vehicle — **substrate-cumulative with v698 MRO + v700 MAVEN Atlas V 401 substrate-anchor** by ATLAS-V-401-FOURTH-NASA-FLIGHT obs#3 cumulative substrate-form (third NASA-deep-space Atlas V 401 medium-class flight substrate-cumulative). Atlas V 401 is the United Launch Alliance medium-class configuration substrate-form (4-meter payload fairing + common core booster with RD-180 LOX/RP-1 engine + 0 solid rocket motor strap-ons + 1 Centaur upper stage with RL10 engine substrate-cumulative). Note: v704 Mars 2020 used Atlas V 541 heavy-configuration substrate-form-distinct; v705 Lucy returns to Atlas V 401 medium-class substrate. **CHRONOLOGICAL-FORWARD sustained at v705** substrate-form: v704 Mars 2020 launch 2020-07-30 → v705 Lucy launch 2021-10-16 = **1-year 2-month 17-day chronological-forward step** substrate-cumulative; CHRONOLOGICAL-FORWARD-RESUMED obs#11 cumulative substrate-form-stable. **First chronological-forward step beyond 2020 Mars launch-window cohort closure** substrate-anchor substrate-cumulative.
 
 **Spacecraft prime substrate-anchor.** Lockheed Martin Space Systems Denver Colorado substrate-cumulative with v698 MRO + v700 MAVEN substrate-thread substrate-form-distinct from v699 + v704 NASA JPL in-house + v701 Thales Alenia Space + v702 MBRSC + v703 CAST substrate. **Mission lead institution:** Southwest Research Institute (SwRI) Boulder Colorado substrate-anchor; PI **Hal Levison** substrate-anchor (LEVISON-SWRI-LUCY-PI-SUBSTRATE-ANCHOR obs#1 first-instance NEW LOCKED at v705); Deputy PI Cathy Olkin substrate; mission management NASA Goddard Space Flight Center substrate. **Total launch mass:** 1,550 kg substrate-form (Lucy spacecraft including propellant).

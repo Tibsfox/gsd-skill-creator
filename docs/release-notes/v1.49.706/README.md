@@ -31,6 +31,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.706 advances the engine from 1.158 to 1.159 with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** James Webb Space Telescope (JWST) NASA + ESA + CSA Flagship Infrared Space Obser ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 JWST launched **2021-12-25 12:20 UTC** from **Centre Spatial Guyanais (Kourou, French Guiana)** Ensemble de Lancement Ariane 3 (ELA-3) on **Arianespace Ariane 5 ECA flight VA256** European heavy-class launch vehicle substrate-anchor — substrate-form-distinct first ESA-launched NASA mission in this autonomous run substrate-cumulative (ARIANE-5-ECA-VA256-FIRST-INTERPLANETARY-LAUNCH-IN-AUTONOMOUS-RUN obs#1 first-instance NEW LOCKED at v706 substrate; first equatorial-launch substrate within autonomous run substrate-cumulative; first European-launch-vehicle substrate within v696-v706 substrate-axis substrate-anchor); KOUROU-EQUATORIAL-FRENCH-GUIANA-LAUNCH-SITE obs#1 first-instance NEW LOCKED at v706 substrate. Ariane 5 ECA substrate-form (5.4-m payload fairing substrate; cryogenic LH2/LOX Vulcain 2 main stage substrate; 2 EAP solid rocket boosters substrate-cumulative; ESC-A cryogenic upper stage substrate substrate-cumulative) is the European heavy-class launch vehicle substrate-anchor substrate-form-distinct from prior 10 subforms' Atlas V family + Proton-M / Briz-M + Mitsubishi H-IIA-202 + Long March 5 substrate-thread. **CHRONOLOGICAL-FORWARD sustained at v706** substrate-form: v705 Lucy launch 2021-10-16 → v706 JWST launch 2021-12-25 = **2-month 9-day chronological-forward step** substrate-cumulative; CHRONOLOGICAL-FORWARD-RESUMED obs#12 cumulative substrate-form-stable.
 
 **Spacecraft prime substrate-anchor.** Northrop Grumman Space Systems Redondo Beach California substrate-anchor substrate-form-distinct from v698+v700+v705 Lockheed Martin + v699+v704 NASA JPL in-house + v701 Thales Alenia Space + v702 MBRSC + v703 CAST substrate-thread (NORTHROP-GRUMMAN-PRIME-CONTRACTOR-SUBSTRATE-ANCHOR obs#1 first-instance NEW LOCKED at v706 substrate). **Mission lead institution:** NASA Goddard Space Flight Center substrate-anchor; Senior Project Scientist **John Mather** substrate-anchor (Nobel Prize Physics 2006 for COBE substrate substrate-cumulative substrate-anchor; MATHER-NASA-GODDARD-JWST-PROJECT-SCIENTIST-NOBEL-2006 obs#1 NEW LOCKED); Project Manager **Bill Ochs** substrate-anchor (OCHS-NASA-GODDARD-JWST-PROJECT-MANAGER obs#1 NEW LOCKED); Science Operations Space Telescope Science Institute (STScI) Baltimore Maryland substrate. **Total spacecraft mass:** 6,200 kg substrate (including propellant + sunshield + payload + OTE + ISIM).

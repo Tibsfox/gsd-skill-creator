@@ -35,6 +35,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.704 advances the engine from 1.156 to 1.157 with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** Mars 2020 / Perseverance Rover + Ingenuity Helicopter NASA-JPL-Led Sample-Cachin ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 Mars 2020 / Perseverance Rover + Ingenuity Helicopter launched **2020-07-30 11:50 UTC** from Cape Canaveral Air Force Station Space Launch Complex 41 (CCAFS SLC-41) Florida on **Atlas V 541** heavy-configuration launch vehicle — **substrate-cumulative with v699 MSL Atlas V 541 substrate-anchor** by ATLAS-V-541-SECOND-MARS-LAUNCH obs#2 cumulative substrate-form (both next-generation surface-rover-class deliveries substrate-form-cumulative). Atlas V 541 is the United Launch Alliance heavy-configuration substrate-form (5-meter payload fairing + common core booster with RD-180 LOX/RP-1 engine + 4 solid rocket motor strap-ons AJ-60A + 1 Centaur upper stage with RL10 engine substrate-cumulative). Cruise duration **~7 months Type-II Earth-Mars trajectory** substrate-form-cumulative. **CHRONOLOGICAL-FORWARD sustained at v704** substrate-form: v703 Tianwen-1 launch 2020-07-23 → v704 Mars 2020 launch 2020-07-30 = **7-day chronological-forward step** substrate-cumulative; CHRONOLOGICAL-FORWARD-RESUMED obs#10 cumulative substrate-form-stable. **Third consecutive 2020 Mars launch-window mission** substrate-anchor (Hope + Tianwen-1 + Mars 2020 all within 11-day window 2020-07-19 to 2020-07-30 substrate-cumulative); **2020-MARS-LAUNCH-WINDOW-COHORT-CLOSURE substrate-form-cumulative**.
 
 **Mars landing 2021-02-18 20:55 UTC** at Jezero Crater (18.4447°N, 77.4508°E) via the substrate-form **sky-crane EDL** substrate-anchor substrate-cumulative with v699 MSL sky-crane substrate-thread substrate-form-cumulative (SKY-CRANE-EDL-SECOND-INSTANCE substrate-anchor obs#2 cumulative). **Terrain Relative Navigation (TRN)** substrate-anchor obs#1 first-instance NEW LOCKED at v704 — first use of TRN during Mars EDL substrate-form via Lander Vision System (LVS) substrate comparing real-time DEM imagery against pre-loaded HiRISE substrate-cumulative with v698 MRO substrate-thread substrate-cumulative to autonomously divert away from hazards substrate. **MEDLI2** (Mars Entry, Descent, and Landing Instrumentation 2) substrate-cumulative with v699 MSL MEDLI substrate-thread substrate-form-cumulative. **Landing site rationale:** Jezero Crater = ancient lake basin substrate substrate-form with well-preserved river delta deposit substrate-anchor (Jezero Delta) Late Noachian / Early Hesperian deltaic substrate substrate-form well-preserved substrate-cumulative; selected for astrobiological potential + sample-return scientific value per Stack et al. *Space Science Reviews* 216 (2020) substrate. JEZERO-CRATER-ANCIENT-DELTA-LANDING-SITE-SUBSTRATE-ANCHOR obs#1 first-instance NEW LOCKED at v704.

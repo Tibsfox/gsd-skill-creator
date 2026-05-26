@@ -1,4 +1,4 @@
-# v1.49.591 — Retrospective (carryover lessons applied)
+# Retrospective
 
 ## Lessons consumed at v1.49.591
 

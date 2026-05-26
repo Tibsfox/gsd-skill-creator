@@ -1,4 +1,14 @@
-# v1.49.653 Chapter 03 — Retrospective
+# Retrospective
+
+## Carryover lessons applied
+
+This ship inherits and sustains several disciplines from prior milestones:
+
+- **Lesson #10168 — counter-cadence cleanup-mission cadence (HIGH).** Pattern operationally sustainable across long forward-cadence runs.
+- **Lesson #10401 — MISSION-PACKAGE-DISCIPLINE §3 (HIGH).** Applied to the dispatch brief.
+- **Lesson #10406 candidate — POSITIVE-FRAMING-DISPATCH-DISCIPLINE (HIGH).** Brief uses positive framing.
+- **Lesson #10407 candidate — DISPATCH-PROMPT-DENSITY-DISCIPLINE (HIGH).** Brief-as-required-read.
+
 
 ## What worked
 
