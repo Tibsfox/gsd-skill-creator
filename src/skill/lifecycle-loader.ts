@@ -12,8 +12,11 @@
 import { readFileSync } from 'node:fs';
 import { basename, dirname } from 'node:path';
 
+import { ensureAllowed, type LoaderContext } from '../security/loader-context.js';
 import { parseFrontmatter } from './version-backfill.js';
 import type { SkillStatus } from './frontmatter-types.js';
+
+const LOADER_SOURCE = 'skill/lifecycle-loader';
 
 export interface LoadedSkill {
   name: string;
@@ -26,12 +29,15 @@ export interface LoadedSkill {
 export interface LoadOptions {
   allowDraft?: boolean;
   onWarning?: (message: string) => void;
+  /** Optional security chokepoint — see src/security/loader-context.ts. */
+  ctx?: LoaderContext;
 }
 
 export function loadSkillWithLifecycle(
   skillPath: string,
   opts: LoadOptions = {}
 ): LoadedSkill | null {
+  ensureAllowed(opts.ctx, LOADER_SOURCE, 'load-skill', skillPath);
   const content = readFileSync(skillPath, 'utf8');
   const parsed = parseFrontmatter(content);
   if (!parsed.hasFrontmatter) return null;
