@@ -11,10 +11,7 @@ use super::trace::TraceEmitter;
 use super::types::{TraceEvent, TransportConfig};
 use super::manager::HostManager;
 
-use std::collections::HashMap;
 use std::time::{SystemTime, UNIX_EPOCH};
-
-use super::connection::ServerConnection;
 
 // ============================================================================
 // McpHostState
@@ -46,18 +43,14 @@ impl McpHostState {
 
     /// Rebuilds the tool-to-server index from current connections.
     ///
-    /// Separated as a method to work around Rust borrow checker limitations
-    /// when accessing both router and manager fields simultaneously.
+    /// Destructuring `&mut self` into its named fields lets the borrow
+    /// checker prove that `manager` and `router` are non-overlapping —
+    /// no `unsafe` raw-pointer cast required. The previous implementation
+    /// used `unsafe { &*ptr }` to dodge the checker, which would have been
+    /// UB if `rebuild_index` ever touched another field of `self`.
     fn rebuild_router(&mut self) {
-        let connections: &HashMap<String, ServerConnection> = self.manager.connections();
-        // SAFETY: We need to borrow connections (immutable) and router (mutable)
-        // from the same struct. Since rebuild_index only reads connections and
-        // writes to router, we use a pointer cast to satisfy the borrow checker.
-        // Both fields are independent and non-overlapping.
-        let connections_ptr = connections as *const HashMap<String, ServerConnection>;
-        unsafe {
-            self.router.rebuild_index(&*connections_ptr);
-        }
+        let Self { manager, router, .. } = self;
+        router.rebuild_index(manager.connections());
     }
 }
 
