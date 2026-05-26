@@ -52,13 +52,14 @@ entry, or the deletion commit.
 | `tonnetz` | ALLOWLISTED | v1.49.791 | `tools/adoption-scan.allowlist.json` `tonnetz` entry | Substrate-level reference implementation for the SoPS (Sound of Puget Sound) surface per arXiv:2604.19960 (Boland 2026, MATH-20 Phase 752). The SoPS mapping is the substrate; ALLOWLIST rather than RETIRE because the substrate is preserved, not filtered out. Default-OFF + G6 standard CAPCOM preservation invariants intact. |
 | `wasserstein-hebbian` | ALLOWLISTED | v1.49.791 | `tools/adoption-scan.allowlist.json` `wasserstein-hebbian` entry; `docs/substrate-references/wasserstein-hebbian.md` | Substrate-level runtime backing for the canonical reader's reference to arXiv:2604.16052 (Tan 2026, 75pp, MATH-19 Phase 751). Companion to the substrate doc; advisory-only audit-finding emitter; CAPCOM retains gate authority. |
 | `koopman-memory` | WIRED | v1.49.792 | `src/cli/commands/koopman-check.ts` | Exposed the three advisory retention invariants (`checkIdentityRetention`, `checkZeroInputRetention`, `checkLipschitzBound`) plus operator construction + spectral-data through a new top-level `skill-creator koopman-check`/`kc` CLI. Three-tier output (text/quiet/JSON). HARD-preservation invariants intact: `src/memory/` runtime untouched; only `import type` references; G8 HARD-preservation gate preserved; advisory-only exit-code 0 invariant. |
+| `coherent-functors` | WIRED | v1.49.793 | `src/cli/commands/coherent-check.ts` | Exposed the four coherence predicates (`checkNaturality`, `checkIdentity`, `checkComposition`, `checkDirectSum`) plus the aggregate `checkCoherence` and `identityFunctor` factory through a new top-level `skill-creator coherent-check`/`cc` CLI. Three-tier output (text/quiet/JSON). G6 HARD-preservation gate preserved; advisory-only exit-code 0 invariant. |
+| `hourglass-persistence` | WIRED | v1.49.793 | `src/cli/commands/hourglass-check.ts` | Exposed the topological-hole detector + contraction-index computation + waist detection + audit-finding emitter through a new top-level `skill-creator hourglass-check`/`hc` CLI. Canonical fixtures (hourglass / chain / empty) provide no-arg smoke check. Three-tier output (text/quiet/JSON). Standard CAPCOM preservation gate preserved; advisory-only exit-code 0 invariant. |
 
-## Open candidates (Math Foundations Refresh cluster)
+## Open candidates
 
-- `coherent-functors` — category-theoretic NN primitive; closes part of GAP-2 (College of Knowledge consumer engine) once wired. Candidate for a future WIRED verdict when the college-of-knowledge consumer engine ships.
-- `hourglass-persistence` — contraction/hole alarm. Natural wire site is the skill-DAG observability surface; candidate for WIRED when skill-DAG instrumentation reaches that surface.
+The Math Foundations Refresh (v1.49.572) cluster is **fully closed** as of v1.49.793 — all 6 modules verdicted (4 WIRED + 2 ALLOWLISTED).
 
-Each open candidate is one ship-unit of work.
+Future shelfware candidates from non-Math-Foundations clusters should be appended above this section as the adoption-scan surfaces them.
 
 ## When to add a verdict
 

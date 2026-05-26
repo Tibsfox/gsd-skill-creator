@@ -38,6 +38,8 @@ Commands:
   team, tm          Manage agent teams (create, list, validate, spawn, status)
   dacp, dp          Manage DACP handoff protocol (status, set-level, history, analyze, export, drift-check)
   koopman-check, kc Advisory koopman-memory invariant check (identity retention, zero-input retention, Lipschitz bound)
+  coherent-check, cc Advisory coherent-functors coherence check (naturality, identity, composition, direct-sum)
+  hourglass-check, hc Advisory hourglass-persistence audit (holes, contraction-index, waists)
   reload-embeddings, re  Reload embedding model (retry after fallback)
   calibrate, cal    Optimize activation threshold from calibration data
   benchmark, bench  Measure simulator accuracy vs real activation

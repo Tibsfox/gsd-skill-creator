@@ -9,6 +9,8 @@ import { agentsCommand } from './commands/agents.js';
 import { teamCommand } from './commands/team.js';
 import { dacpCommand } from './commands/dacp.js';
 import { koopmanCheckCommand } from './commands/koopman-check.js';
+import { coherentCheckCommand } from './commands/coherent-check.js';
+import { hourglassCheckCommand } from './commands/hourglass-check.js';
 import { rollbackCommand } from './commands/rollback.js';
 import { skillCommand } from './commands/skill.js';
 import { printHelp } from './help.js';
@@ -137,6 +139,14 @@ export const REGISTRY: readonly CommandEntry[] = [
   { aliases: ['dacp', 'dp'], handler: (ctx) => dacpCommand(ctx.args) },
   { aliases: ['koopman-check', 'kc'], handler: async (ctx) => {
     const exitCode = await koopmanCheckCommand(ctx.args);
+    process.exitCode = exitCode;
+  } },
+  { aliases: ['coherent-check', 'cc'], handler: async (ctx) => {
+    const exitCode = await coherentCheckCommand(ctx.args);
+    process.exitCode = exitCode;
+  } },
+  { aliases: ['hourglass-check', 'hc'], handler: async (ctx) => {
+    const exitCode = await hourglassCheckCommand(ctx.args);
     process.exitCode = exitCode;
   } },
   { aliases: ['rollback', 'rb'], handler: (ctx) => rollbackCommand(ctx.args) },
