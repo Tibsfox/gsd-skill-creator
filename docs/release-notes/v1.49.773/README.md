@@ -46,13 +46,16 @@ v1.49.773 ships **Polar** — NASA single-spacecraft high-latitude polar-orbit a
 
 ## Cross-track / Engine state
 
-- NASA degree ADVANCES 1.174 → 1.175 at v773 (counter_cadence: false).
-- MUS / ELC / SPS / TRS SCAFFOLD-PENDING obs#58 cumulative.
-- NO substrate-axis rotation. MAGNETOSPHERE-RADIATION-BELTS axis sustains sixth INTRA-AXIS continuation obs#6 cumulative.
-- 7 NEW LOCKED at v773: POLAR-FIRST-INSTANCE + POLAR-ORBIT-86-DEGREE-HIGH-LATITUDE-INNER-MAGNETOSPHERE + AURORAL-IMAGING-FROM-POLAR-ORBIT-SUBSTRATE + 12-INSTRUMENT-SUITE + LOCKHEED-MARTIN-SPACECRAFT-PRIME + DELTA-II-7925-10-FROM-VANDENBERG-LAUNCH-CONFIGURATION + ISTP-INTERNATIONAL-SOLAR-TERRESTRIAL-PHYSICS-PROGRAM-PARTICIPATION.
-- 6 substrate-cumulative obs#N+1: MAGNETOSPHERE-RADIATION-BELTS-INTRA-AXIS-CONTINUATION obs#7 + SINGLE-SPACECRAFT-IN-AXIS obs#2 + POLAR-ORBIT obs#2 + NASA-GSFC-MANAGED-MISSION obs#3 + IN-SITU-PARTICLE-FIELD-WAVE-MEASUREMENT obs#7 + LONG-DURATION-OPERATIONAL-SUBSTRATE-ANCHOR obs#5 within axis.
-- NAV-CARD-PAIR-DELIVERABLE-DISCIPLINE obs#6 cumulative.
-- PATH-A-FRESH-BUILD-PRECEDENT obs#7 cumulative.
+<!-- CROSS-TRACK-ENRICHED v1 -->
+
+- **Cross-track engine state UNCHANGED:** MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship; only NASA degree advances. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
+- **NASA degree advances:** 1.174 → 1.175 at v773 (counter_cadence: false).
+- **Cross-track scaffolding:** SCAFFOLD-PENDING obs#58 cumulative.
+- **Substrate-axis state:** rotation. MAGNETOSPHERE-RADIATION-BELTS axis sustains sixth INTRA-AXIS continuation obs#6 cumulative.
+- **Substrate-anchors NEW LOCKED:** at v773: POLAR-FIRST-INSTANCE + POLAR-ORBIT-86-DEGREE-HIGH-LATITUDE-INNER-MAGNETOSPHERE + AURORAL-IMAGING-FROM-POLAR-ORBIT-SUBSTRATE + 12-INSTRUMENT-SUITE + LOCKHEED-MARTIN-SPACECRAFT-PRIME + DELTA-II-7925-10-FROM-VANDENBERG-LAUNCH-CONFIGURATION + ISTP-INTERNATIONAL-SOLAR-TERRESTRIAL-PHYSICS-PROGRAM-PARTICIPATION.
+- **Substrate-cumulative observations:** obs#N+1: MAGNETOSPHERE-RADIATION-BELTS-INTRA-AXIS-CONTINUATION obs#7 + SINGLE-SPACECRAFT-IN-AXIS obs#2 + POLAR-ORBIT obs#2 + NASA-GSFC-MANAGED-MISSION obs#3 + IN-SITU-PARTICLE-FIELD-WAVE-MEASUREMENT obs#7 + LONG-DURATION-OPERATIONAL-SUBSTRATE-ANCHOR obs#5 within axis.
+- **Nav-card pair deliverable discipline:** -DELIVERABLE-DISCIPLINE obs#6 cumulative.
+- **Path-A fresh-build precedent:** -FRESH-BUILD-PRECEDENT obs#7 cumulative.
 
 ## Threads closed / opened / extended
 

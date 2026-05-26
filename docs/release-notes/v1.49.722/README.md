@@ -53,6 +53,7 @@ v1.49.722 ships the **seventh per-mission canonical sibling files rebuild** in t
 - **EXTENDED:** NASA Canonical Sibling Files Restoration Campaign (7 of ~51 rebuilds).
 - **EXTENDED:** Lesson #10408 ESTABLISHED — first ship under promoted status sustained obs#7. Pattern continues stable.
 - **EXTENDED:** SCAFFOLD-PENDING engine-state suppression discipline obs#3 cumulative (v1.122 + v1.123 + v1.124). Pattern now load-bearing across 3 substrate-form-distinct mission classes (Shuttle-multi-deploy-rescue v1.122, Shuttle-maiden-DoD v1.123, Shuttle-Spacelab-international-funded v1.124).
+- **OPENED:** sustained-discipline observation under the campaign brief-template; per-mission rebuild dispatch composes positive-framing + dispatch-prompt-density + SCAFFOLD-PENDING-suppression disciplines without cross-discipline interference.
 - **CARRY-FORWARD:** all v1.49.721 engine-state thread states UNCHANGED.
 
 ## Decisions

@@ -42,6 +42,7 @@ v1.49.775 ships **IMAP** — NASA's heliophysics mission for mapping the heliosp
 
 ## Cross-track / Engine state
 
+- **Cross-track engine state UNCHANGED:** MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship; only NASA degree advances.
 - NASA degree ADVANCES 1.176 → 1.177 (counter_cadence: false).
 - MUS / ELC / SPS / TRS SCAFFOLD-PENDING obs#60 cumulative.
 - **AXIS ROTATION #24** at v775. MAGNETOSPHERE-RADIATION-BELTS closes obs#8 final; INTERSTELLAR-BOUNDARY opens first INSTANCE obs#1.

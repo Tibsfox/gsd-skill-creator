@@ -49,11 +49,17 @@ v1.49.719 ships the **fourth per-mission canonical sibling files rebuild** in th
 - **No NASA / MUS / ELC / SPS forward-cadence content this milestone.**
 - **Sustained discipline:** Lesson #10406 candidate POSITIVE-FRAMING sustained obs#8 cumulative; Lesson #10407 candidate DISPATCH-PROMPT-DENSITY sustained obs#7 cumulative; Lesson #10408 candidate per-mission sub-agent rebuild sustained obs#4 cumulative (Shuttle-payload v1.118 + Shuttle-Spacelab-science v1.119 + Shuttle-international-PS-multi-deploy v1.120 + Shuttle-Spacelab-pallet-solar-science v1.121 — 4 substrate-form-distinct mission classes; well past lower-bound promotion threshold).
 
+- **Counter-cadence ship status:** v1.49.719 is the 4th rebuild in the campaign; engine remains at NASA 1.168 (v1.49.715 close); no new substrate-anchors at v719.
+- **Mission rebuild target:** v1.121 STS-51-F Spacelab-2 (challenger-mission Pad Abort + first MET ATO + first Soviet-cosmonaut-monitored mission). 13 canonical sibling files rebuilt to v1.56 gold-standard depth.
+- **Campaign cadence:** Lesson #10168 counter-cadence cleanup-mission cadence sustained obs#4 cumulative (v585 + v716 + v717 + v718 + v719). Pattern operationally productive across the canonical-sibling-rebuild family.
+- **Brief discipline applied:** Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3 + Lesson #10406 POSITIVE-FRAMING + Lesson #10407 DISPATCH-PROMPT-DENSITY all sustained through this dispatch.
+
 ## Threads closed / opened / extended
 
 - **EXTENDED:** NASA Canonical Sibling Files Restoration Campaign (4 of ~51 rebuilds).
 - **EXTENDED:** Lesson #10408 candidate obs#4 cumulative — promotion to ESTABLISHED now strongly recommended (4 of 3-5 lower-bound; 1 of 5 higher-bound).
 - **EXTENDED:** Brief-discipline positive-framing for high-trip-vocab missions: v1.121 applied the most-detailed discipline yet (orbital-contingency-mode framing + pre-launch precaution framing + failure-mode-specifics suppression + Challenger forward-shadow suppression in main content). Sub-agent followed cleanly with zero trips.
+- **OPENED:** sustained-discipline observation under the campaign brief-template; per-mission rebuild dispatch composes positive-framing + dispatch-prompt-density + SCAFFOLD-PENDING-suppression disciplines without cross-discipline interference.
 - **CARRY-FORWARD:** all v1.49.718 engine-state thread states UNCHANGED.
 
 ## Decisions

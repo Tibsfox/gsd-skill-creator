@@ -44,14 +44,17 @@ v1.49.769 ships the **third fresh degree-advance milestone via Path A sub-agent 
 
 ## Cross-track / Engine state
 
-- NASA degree ADVANCES 1.170 → 1.171 at v769 (counter_cadence: false).
-- MUS / ELC / SPS / TRS SCAFFOLD-PENDING obs#54 cumulative.
-- NO substrate-axis rotation. MAGNETOSPHERE-RADIATION-BELTS axis sustains second INTRA-AXIS continuation obs#2 cumulative.
-- 10 NEW LOCKED at v769: THEMIS-FIRST-INSTANCE + FIVE-SPACECRAFT-CONSTELLATION-FORMATION-FLYING + SUBSTORM-TRIGGER-MECHANISM-CHARACTERIZATION + MAGNETOTAIL-30RE-DOWNTAIL-OBSERVATIONS + THEMIS-B-AND-C-LUNAR-REPURPOSING-2010-AS-ARTEMIS + NASA-EXPLORER-MEDIUM-CLASS-PROGRAM + UC-BERKELEY-SSL-PRIME + VASSILIS-ANGELOPOULOS-PI + 5-INSTRUMENT-SUITE-PER-SPACECRAFT + DELTA-II-7925-LAUNCH-CONFIGURATION
-- 6 substrate-cumulative obs#N+1: MAGNETOSPHERE-RADIATION-BELTS-INTRA-AXIS-CONTINUATION obs#3 + INNER-MAGNETOSPHERE-PHYSICS obs#3 + MULTI-SPACECRAFT-FORMATION-FLYING-WITHIN-MAGNETOSPHERE obs#3 + HIGHLY-ELLIPTICAL-EARTH-ORBIT-THROUGH-MAGNETOSPHERE obs#3 + IN-SITU-PARTICLE-FIELD-WAVE-MEASUREMENT obs#3 + NASA-EXPLORER-PROGRAM-SUBSTRATE-CUMULATIVE obs#2 (cross-axis)
-- Plus LONG-DURATION-OPERATIONAL-SUBSTRATE-ANCHOR obs#1 within axis (first instance within MAGNETOSPHERE-RADIATION-BELTS).
-- NAV-CARD-PAIR-DELIVERABLE-DISCIPLINE obs#2 cumulative (both nav-card blocks verified present at sub-agent build).
-- PATH-A-FRESH-BUILD-PRECEDENT obs#3 cumulative.
+<!-- CROSS-TRACK-ENRICHED v1 -->
+
+- **Cross-track engine state UNCHANGED:** MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship; only NASA degree advances. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
+- **NASA degree advances:** 1.170 → 1.171 at v769 (counter_cadence: false).
+- **Cross-track scaffolding:** SCAFFOLD-PENDING obs#54 cumulative.
+- **Substrate-axis state:** rotation. MAGNETOSPHERE-RADIATION-BELTS axis sustains second INTRA-AXIS continuation obs#2 cumulative.
+- **Substrate-anchors NEW LOCKED:** at v769: THEMIS-FIRST-INSTANCE + FIVE-SPACECRAFT-CONSTELLATION-FORMATION-FLYING + SUBSTORM-TRIGGER-MECHANISM-CHARACTERIZATION + MAGNETOTAIL-30RE-DOWNTAIL-OBSERVATIONS + THEMIS-B-AND-C-LUNAR-REPURPOSING-2010-AS-ARTEMIS + NASA-EXPLORER-MEDIUM-CLASS-PROGRAM + UC-BERKELEY-SSL-PRIME + VASSILIS-ANGELOPOULOS-PI + 5-INSTRUMENT-SUITE-PER-SPACECRAFT + DELTA-II-7925-LAUNCH-CONFIGURATION
+- **Substrate-cumulative observations:** obs#N+1: MAGNETOSPHERE-RADIATION-BELTS-INTRA-AXIS-CONTINUATION obs#3 + INNER-MAGNETOSPHERE-PHYSICS obs#3 + MULTI-SPACECRAFT-FORMATION-FLYING-WITHIN-MAGNETOSPHERE obs#3 + HIGHLY-ELLIPTICAL-EARTH-ORBIT-THROUGH-MAGNETOSPHERE obs#3 + IN-SITU-PARTICLE-FIELD-WAVE-MEASUREMENT obs#3 + NASA-EXPLORER-PROGRAM-SUBSTRATE-CUMULATIVE obs#2 (cross-axis)
+- **Long-duration operational substrate:** -OPERATIONAL-SUBSTRATE-ANCHOR obs#1 within axis (first instance within MAGNETOSPHERE-RADIATION-BELTS).
+- **Nav-card pair deliverable discipline:** -DELIVERABLE-DISCIPLINE obs#2 cumulative (both nav-card blocks verified present at sub-agent build).
+- **Path-A fresh-build precedent:** -FRESH-BUILD-PRECEDENT obs#3 cumulative.
 
 ## Threads closed / opened / extended
 

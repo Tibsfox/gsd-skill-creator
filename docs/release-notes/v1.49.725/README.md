@@ -53,6 +53,7 @@ v1.49.725 ships the **tenth per-mission canonical sibling files rebuild** in the
 - **EXTENDED:** NASA Canonical Sibling Files Restoration Campaign (10 of ~51 rebuilds).
 - **EXTENDED:** Lesson #10408 ESTABLISHED — first validation across new substrate-form-distinct mission-class boundary (deep-space robotic vs Shuttle-era). Pattern extends cleanly across mission-class boundaries.
 - **EXTENDED:** SCAFFOLD-PENDING engine-state suppression discipline obs#6 cumulative.
+- **OPENED:** sustained-discipline observation under the campaign brief-template; per-mission rebuild dispatch composes positive-framing + dispatch-prompt-density + SCAFFOLD-PENDING-suppression disciplines without cross-discipline interference.
 - **CARRY-FORWARD:** all v1.49.724 engine-state thread states UNCHANGED.
 
 ## Decisions

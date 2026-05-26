@@ -42,13 +42,16 @@ v1.49.774 ships **IMAGE** — NASA single-spacecraft magnetosphere remote-sensin
 
 ## Cross-track / Engine state
 
-- NASA degree ADVANCES 1.175 → 1.176 (counter_cadence: false).
-- MUS / ELC / SPS / TRS SCAFFOLD-PENDING obs#59 cumulative.
-- NO substrate-axis rotation. MAGNETOSPHERE-RADIATION-BELTS axis sustains seventh INTRA-AXIS continuation obs#7 cumulative.
-- 6 NEW LOCKED at v774: IMAGE-FIRST-INSTANCE + ENA-IMAGING-OF-MAGNETOSPHERE-SUBSTRATE + REMOTE-SENSING-ONLY-MISSION-WITHIN-MAGNETOSPHERE-RADIATION-BELTS-AXIS + GLOBAL-MAGNETOSPHERE-IMAGING-FROM-SINGLE-VIEWPOINT + 6-INSTRUMENT-REMOTE-SENSING-SUITE + 2005-12-18-DESIGNED-LIFETIME-COMPLETED-POSITIVE-FRAMING.
-- 7 substrate-cumulative obs#N+1: MAGNETOSPHERE-RADIATION-BELTS-INTRA-AXIS-CONTINUATION obs#8 + SINGLE-SPACECRAFT-IN-AXIS obs#3 + HIGHLY-ELLIPTICAL-POLAR-ORBIT obs#3 + NASA-GSFC-MANAGED-MISSION obs#4 + LOCKHEED-MARTIN-PRIME obs#2 + DELTA-II-FROM-VANDENBERG obs#2 + SWRI-PI-CUMULATIVE obs#2 (Burch).
-- PARTIAL-DELIVERABLE-SALVAGE-PATTERN obs#2 cumulative (v772 + v774).
-- PATH-A-FRESH-BUILD-PRECEDENT obs#8 cumulative.
+<!-- CROSS-TRACK-ENRICHED v1 -->
+
+- **Cross-track engine state UNCHANGED:** MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship; only NASA degree advances. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
+- **NASA degree advances:** 1.175 → 1.176 (counter_cadence: false).
+- **Cross-track scaffolding:** SCAFFOLD-PENDING obs#59 cumulative.
+- **Substrate-axis state:** rotation. MAGNETOSPHERE-RADIATION-BELTS axis sustains seventh INTRA-AXIS continuation obs#7 cumulative.
+- **Substrate-anchors NEW LOCKED:** at v774: IMAGE-FIRST-INSTANCE + ENA-IMAGING-OF-MAGNETOSPHERE-SUBSTRATE + REMOTE-SENSING-ONLY-MISSION-WITHIN-MAGNETOSPHERE-RADIATION-BELTS-AXIS + GLOBAL-MAGNETOSPHERE-IMAGING-FROM-SINGLE-VIEWPOINT + 6-INSTRUMENT-REMOTE-SENSING-SUITE + 2005-12-18-DESIGNED-LIFETIME-COMPLETED-POSITIVE-FRAMING.
+- **Substrate-cumulative observations:** obs#N+1: MAGNETOSPHERE-RADIATION-BELTS-INTRA-AXIS-CONTINUATION obs#8 + SINGLE-SPACECRAFT-IN-AXIS obs#3 + HIGHLY-ELLIPTICAL-POLAR-ORBIT obs#3 + NASA-GSFC-MANAGED-MISSION obs#4 + LOCKHEED-MARTIN-PRIME obs#2 + DELTA-II-FROM-VANDENBERG obs#2 + SWRI-PI-CUMULATIVE obs#2 (Burch).
+- **PARTIAL-DELIVERABLE-SALVAGE-PATTERN obs#2 cumulative (v772 +:** v774).
+- **Path-A fresh-build precedent:** -FRESH-BUILD-PRECEDENT obs#8 cumulative.
 
 ## Threads closed / opened / extended
 

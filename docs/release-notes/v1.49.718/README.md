@@ -58,6 +58,7 @@ v1.49.718 ships the **third per-mission canonical sibling files rebuild** in the
 - **EXTENDED:** NASA Canonical Sibling Files Restoration Campaign (3 of ~51 rebuilds complete).
 - **EXTENDED:** Lesson #10408 candidate per-mission sub-agent rebuild pattern — obs#3 cumulative. Three substrate-form-distinct mission classes validated. Promotion-to-ESTABLISHED threshold (3-5 observations) now met at lower bound.
 - **EXTENDED:** v1.120 STS-51-G Discovery mission directory from 3-file substrate-era state to 16-file canonical state.
+- **OPENED:** sustained-discipline observation under the campaign brief-template; per-mission rebuild dispatch composes positive-framing + dispatch-prompt-density + SCAFFOLD-PENDING-suppression disciplines without cross-discipline interference.
 - **CARRY-FORWARD:** all v1.49.717 engine-state thread states UNCHANGED.
 
 ## Decisions

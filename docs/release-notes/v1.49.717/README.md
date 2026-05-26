@@ -59,6 +59,7 @@ v1.49.717 ships the **second per-mission canonical sibling files rebuild** in th
 - **EXTENDED:** NASA Canonical Sibling Files Restoration Campaign (v1.49.716 launch + v1.49.717 second mission; 2 of ~51 rebuilds complete).
 - **EXTENDED:** Lesson #10408 candidate per-mission sub-agent rebuild pattern — second observation across substrate-form-distinct missions (Shuttle-payload v1.118 + Shuttle-Spacelab-science v1.119). Promotion-to-ESTABLISHED requires 3-5 clean observations; 2 of 3-5 complete.
 - **EXTENDED:** v1.119 STS-51-B Challenger Spacelab-3 mission directory from 3-file substrate-era state (index.html + degree-sync.json + artifacts/) to 16-file canonical state.
+- **OPENED:** sustained-discipline observation under the campaign brief-template; per-mission rebuild dispatch composes positive-framing + dispatch-prompt-density + SCAFFOLD-PENDING-suppression disciplines without cross-discipline interference.
 - **CARRY-FORWARD:** all v1.49.716 engine-state thread states UNCHANGED.
 
 ## Decisions

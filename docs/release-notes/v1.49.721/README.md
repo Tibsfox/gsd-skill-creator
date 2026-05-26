@@ -76,6 +76,7 @@ Brief-discipline patterns observed in promotion run:
 - **CLOSED:** Lesson #10408 candidate status (promoted to ESTABLISHED at this ship).
 - **EXTENDED:** NASA Canonical Sibling Files Restoration Campaign (6 of ~51 rebuilds).
 - **EXTENDED:** Brief-discipline SCAFFOLD-PENDING-suppression pattern obs#2 cumulative (v1.122 + v1.123) — now a stable discipline composable with positive-framing.
+- **OPENED:** sustained-discipline observation under the campaign brief-template; per-mission rebuild dispatch composes positive-framing + dispatch-prompt-density + SCAFFOLD-PENDING-suppression disciplines without cross-discipline interference.
 - **CARRY-FORWARD:** all v1.49.720 engine-state thread states UNCHANGED.
 
 ## Decisions
