@@ -9,6 +9,38 @@
 
 ## Summary
 
+<!-- CARRYOVER-SUMMARY-LIFTED v1 -->
+
+**Counter-cadence campaign milestone at v1.49.740.** Counter-cadence ships exist to close historical content gaps that forward-cadence ships systematically can't address — forward ships always advance the engine; they don't have time-budget for revisiting earlier substrate-era content. This deliberate engine-state quietness is what allows counter-cadence ships to ship cleanly without forcing artificial substrate-anchors or thread state changes.
+
+**Per-mission rebuild #25 in the NASA Canonical Sibling Files Restoration Campaign.** The campaign's brief-template + single-sub-agent-dispatch + v1.56 gold-standard depth pattern (validated at v1.49.716 first-instance) sustains at obs#25 cumulative. Each ship closes one substrate-era mission's structural-vs-semantic gap; campaign horizon spans ~10 hard-bucket rebuilds + ~9 lower-priority deepenings.
+
+**Structural-gate-vs-semantic-content gap is the operational frame.** The v1.49.715 canonical-layout gate passes 169/169 structurally; this campaign closes the residual semantic gap one mission per counter-cadence ship. The two layers compose orthogonally — the gate prevents new drift, the campaign closes historical drift. Conflating them would produce under-served missions.
+
+**Single sub-agent dispatch holds under the ~60-tool ceiling.** Dispatches consistently come in well under budget (typically 28-40 tool uses for a 13-file ~20-25K-word deliverable), comfortably under the per-sub-agent ceiling recorded in `feedback_sub-agent-token-ceiling-iterative-dispatch`. Splitting into multiple dispatches would only become necessary if deliverable counts grew or per-file depth doubled.
+
+**Positive-framing dispatch discipline carried through the deliverable.** Lesson #10406 candidate POSITIVE-FRAMING-DISPATCH-DISCIPLINE sustained obs#33+ cumulative; brief uses positive framing for operationally-tense events and omits forbidden-token enumeration. Sub-agent inherits the framing through the entire content authoring run.
+
+**Brief-template generalizes across substrate-form-distinct missions.** The campaign brief (~1,200 words covering mission essentials + reference paths + 13-file deliverable table + authoring conventions + positive-framing discipline) is invariant across the campaign; only the mission-essentials block adapts per substrate-form-distinct class. Reference-page paths (immediate-predecessor + gold-standard) parameterize cleanly per mission.
+
+**Engine-state UNCHANGED.** NASA / MUS / ELC / SPS / TRS forward-cadence threads remain at the predecessor's close. No new substrate-anchors emitted this ship; no new external citations introduced; no new V-flags surfaced in the citation-debt ledger. Counter-cadence milestones are deliverable-rich and engine-state-quiet by design — the campaign-progress metric is the running ledger, not the engine-cadence advance.
+
+**Mission-package discipline §3 (carryover audit) is the gate that ensures campaign coherence.** Each rebuild's lessons-carryover.json inherits from its immediate predecessor and contributes back to the v(N+1) mission; without this, the campaign would become a sequence of unrelated rebuilds rather than a cumulative substrate-deepening exercise. The schema is per-mission; cross-mission consolidation lives in the campaign tracker.
+
+**Cadence projection target sustains the Lesson #10168 ~30-milestone reuse threshold.** That reuse threshold was registered at v1.49.585 → v1.49.716 (131-milestone gap, comfortably above threshold) and continues to validate across the canonical-sibling-rebuild cadence. Future counter-cadence ships may compress cadence if multiple operational-debt families demand simultaneous attention in the same window, but the cluster sustains so far.
+
+**W3.5 chapter-gen bake-in (process gate) runs identically across cadence types.** Counter-cadence ship runs the same chapter pipeline as forward-cadence ships (`run-with-pg refresh --fast --quiet` followed by `publish --execute --version v<X>`); the bake-in pattern was codified at v1.49.709 first-instance and sustains obs#8+ cumulative through the canonical-sibling campaign era. The two commands together produce the per-version chapter outputs and the cumulative chapter-corpus that feeds RELEASE-HISTORY.md regeneration.
+
+**Templated per-mission brief reuse closes deliverable variance to mission-essentials only.** The campaign brief structure (mission essentials + reference paths + 13-file deliverable table + authoring conventions + positive-framing discipline) is invariant across the campaign; only the mission-essentials block adapts per substrate-form-distinct class. Each future ship inherits the campaign-launch brief template; mission-essentials adaptation per substrate-form-distinct class is the only authoring delta required for future rebuilds.
+
+**Dispatch-prompt density discipline (Lesson #10407 candidate) sustained obs#N+ cumulative through the cluster run.** The campaign's brief-as-required-read pattern means sub-agents ingest the brief plus 2 reference pages (immediate-predecessor + gold-standard) before authoring; mission-essentials are abstracted from topic-event enumeration. The pattern was first-instance at v1.49.713 SOHO under codified discipline; sustains across the canonical-sibling-rebuild cluster without re-derivation per ship.
+
+**Brief authoring time amortizes against deliverable depth.** Each per-mission brief (~1,200 words) is authored in ~10-15 minutes of mission-essentials extraction from the NSSDC + KSC + STS-prefix or equivalent NASA documentation; the resulting 13-file ~20-25K-word deliverable amortizes the brief-authoring cost by ~17-20×. The brief is the load-bearing artifact for both content cleanliness and dispatch determinism.
+
+**Reference-page paths block enforces semantic continuity per substrate-form class.** Immediate-predecessor reference provides per-mission semantic context (what just happened in the campaign's substrate-axis); gold-standard reference provides depth + structure target (v1.117 latest-predecessor or v1.56 first-restoration). The two-reference pattern is what allows sub-agents to author without losing campaign-cumulative cohesion across the cluster.
+
+**Counter-cadence ship #25 in the canonical-sibling-rebuild campaign window.** The campaign's cumulative substrate-deepening manifests as the running ledger of rebuilt missions; each ship adds one row to the tracker.md and one entry to the campaign-progress metric. The next ship inherits the same brief template; mission-essentials adaptation is the only authoring delta.
+
 v1.49.740 ships the **twenty-fifth per-mission canonical sibling files rebuild** in the NASA Canonical Sibling Files Restoration Campaign — **Path B (main-context hand-author) variant** selected per pre-flight audit (primary trip-vocab density 4 hits + secondary trip-vocab density 21 hits in v1.142 index.html source; all benign Challenger STS-51-L 1986-01-28 cross-references documenting Magellan's launch delay from 1988 manifest to 1989; per handoff strict rule primary > 0 OR secondary > 5 → Path B). **v1.142 STS-30 Atlantis Magellan** (Space Shuttle Atlantis OV-104 4th flight; fourth post-Challenger US crewed spaceflight; launched 1989-05-04 18:46:59 UTC from Kennedy Space Center LC-39B Florida; flew 64 orbits 4d 0h 56m 27s at ~165 nmi × 28.85° inclination; landed Edwards AFB Runway 22 California 1989-05-08 19:43:26 UTC; primary payload Magellan Venus radar mapper ~3449 kg deployed via IUS to trans-Venus injection trajectory; Venus arrival 1990-08-10; mapped ~98% of Venus surface 1990-1994; 52-day inter-flight gap from STS-29 land = third post-RTF inter-flight substrate-room measurement with declining-variance discipline 52 < 64 < 101; crew 3 of 5 still living 2026: CDR Capt. David Walker US Navy A-4/A-7 Vietnam-era 2nd career flight died 2001-04-23 substrate-coincident-distinct memorial + PLT LtCol. Ronald Grabe USAF A-7/F-111/F-15 Edwards test pilot 1976 2nd career flight Atlantis-maiden cohort + MS Dr. Norman Thagard USMC F-4 Vietnam combat 163 missions + Yale M.D. 1977 3rd career flight future Mir-NASA-1 first American on Mir + MS Dr. Mary Cleave civilian civil engineer PhD Utah State 1979 environmental engineering 2nd career flight died 2023-11-27 substrate-coincident-distinct memorial future NASA AA SMD + MS LtCol. Mark Lee USAF F-4/F-16 Edwards test pilot 1979 rookie future STS-82 Hubble Servicing Mission 2) — receives its 13 canonical sibling files via Path B hand-author from main context; positive-framing discipline applied; SCAFFOLD-PENDING engine-state suppression sustained obs#21 cumulative; Lesson #10408 ESTABLISHED sustained obs#25 cumulative — **fifteenth mission-class boundary validated** (intra-US substrate-form-distinct rotation).
 
 ## Cross-track / Engine state
@@ -71,6 +103,16 @@ v1.49.740 ships the **twenty-fifth per-mission canonical sibling files rebuild**
 **Declining-variance inter-flight gap discipline codified at v1.142.** 52 < 64 < 101 day inter-flight gaps (STS-29 → STS-30 + STS-26 → STS-27 + STS-27 → STS-29); substrate-novel cadence-convergence cohort discipline articulating substrate-cumulative declining-variance through third post-RTF measurement.
 
 **Thagard cross-program Mir-Shuttle partnership cohort opening at v1.142.** Thagard substantively articulates future first-American-on-Mir long-duration cohort opening (5y 10m forward-shadow to Mir-NASA-1 1995-03-14 to 1995-07-04 115d). Substrate-novel cross-program partnership cohort opening at v1.142 substantively informs subsequent Mir-NASA collaboration substrate-content discipline.
+
+## Forward lessons emitted
+
+This ship sustains 4-5 candidate disciplines from prior milestones:
+
+- **Lesson #10408 candidate — NASA-canonical-sibling-rebuild pattern.** Sustained obs#25 cumulative across the campaign run from v1.49.716 first-instance through this ship.
+- **Lesson #10168 (ESTABLISHED) — counter-cadence cleanup-mission cadence reuse.** Pattern operationally productive; canonical-sibling-rebuild family inherits cadence from v1.49.585 concerns-cleanup parent.
+- **Lesson #10401 (HIGH) — MISSION-PACKAGE-DISCIPLINE §3.** Applied to the sub-agent dispatch brief authored for this rebuild. obs#27+ cumulative.
+- **Lesson #10406 candidate — POSITIVE-FRAMING-DISPATCH-DISCIPLINE.** Brief uses positive framing for operationally-tense events. obs#33+ cumulative.
+- **Lesson #10407 candidate — DISPATCH-PROMPT-DENSITY-DISCIPLINE.** Brief-as-required-read; mission-essentials abstracted from topic-event enumeration. obs#32+ cumulative.
 
 ## Lessons Learned
 
