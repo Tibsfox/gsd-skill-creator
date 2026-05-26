@@ -15,12 +15,15 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { BundleManifestSchema, type BundleManifest } from '../dacp/types.js';
+import { ensureAllowed, type LoaderContext } from '../security/loader-context.js';
 import {
   DEFAULT_INTERPRETER_CONFIG,
   type InterpreterConfig,
   type LoadedBundle,
   type BundleScript,
 } from './types.js';
+
+const LOADER_SOURCE = 'interpreter/loader';
 
 // ============================================================================
 // Main Loader
@@ -31,15 +34,23 @@ import {
  *
  * @param bundlePath - Path to the bundle directory
  * @param config - Optional interpreter configuration overrides
+ * @param ctx - Optional security chokepoint (src/security/loader-context.ts).
+ *   When provided, the bundle root path must be admitted by `ctx.allowList`.
+ *   All bundle-internal reads (manifest, intent, data, code) are confined
+ *   under the bundle directory via `path.join`, so the top-level gate is
+ *   sufficient — one audit record per `loadBundle` call.
  * @returns Loaded bundle with all components as typed objects
  * @throws Error if bundle is missing, incomplete, or has provenance issues
  */
 export function loadBundle(
   bundlePath: string,
   config?: Partial<InterpreterConfig>,
+  ctx?: LoaderContext,
 ): LoadedBundle {
   const cfg = { ...DEFAULT_INTERPRETER_CONFIG, ...config };
   const resolvedPath = resolve(bundlePath);
+
+  ensureAllowed(ctx, LOADER_SOURCE, 'load-bundle', resolvedPath);
 
   // --------------------------------------------------------------------------
   // Pre-checks
