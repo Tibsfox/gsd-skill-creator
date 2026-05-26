@@ -13,7 +13,7 @@
     "tonnetz"
   ],
   "fileCount": 205,
-  "rootDigest": "685f50a647f0d78563c17aa89a6cba61bd5004b110028083c9a6ef57b5a5b4b7",
+  "rootDigest": "4ea8077de4cf5a29d916514689ccb3031c59c064c12588780eabe57406b1b1c6",
   "tree": [
     {
       "path": "orchestration/REFERENCES.md",
@@ -212,8 +212,8 @@
     },
     {
       "path": "orchestration/tool-attention/lazy-loader.ts",
-      "sha256": "a8b6d649685a6a976e2301a6ffdb97f07f8555bfe6897b49f04e3986e8128fcc",
-      "size": 3231
+      "sha256": "3888e947ccd71e986de890bf7ee4eac091069421ad0357b6f5fa7032fd4a4fcf",
+      "size": 3516
     },
     {
       "path": "orchestration/tool-attention/settings.ts",
@@ -652,8 +652,8 @@
     },
     {
       "path": "memory/memory-loader.ts",
-      "sha256": "2a58e09ebc5b62a1f8170558de7754cda3b07f240fb2c934d07cdaff32e807e5",
-      "size": 2006
+      "sha256": "d02620a1cf5351f2c36a9a28b7899b5de7a1673fd8082a45b692eb8c58fca1a3",
+      "size": 2621
     },
     {
       "path": "memory/node-arena-shim.ts",
