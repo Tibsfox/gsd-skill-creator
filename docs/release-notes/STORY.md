@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.777`.
+The story begins at `v1.0` and continues to `v1.49.778`.
 
-**820 chapters.** 819 have retrospectives.
+**821 chapters.** 820 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -828,3 +828,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.775](v1.49.775/00-summary.md)** — IMAP NASA Interstellar Mapping and Acceleration Probe — INTERSTELLAR-BOUNDARY Axis Opens at Axis-Rotation 24 · 2026-05-25
 - **[v1.49.776](v1.49.776/00-summary.md)** — Template-Pollution Cleanup: Script-Bug Repair + v1.176 Heal + Broader Strip + FTP Sync · 2026-05-26
 - **[v1.49.777](v1.49.777/00-summary.md)** — Wave 1 Review BLOCKERs / Security + Correctness Counter-Cadence · 2026-05-26
+- **[v1.49.778](v1.49.778/00-summary.md)** — Wave 2 Review HIGHs / Security + Correctness Counter-Cadence · 2026-05-26
