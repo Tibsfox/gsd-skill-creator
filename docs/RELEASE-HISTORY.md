@@ -1,15 +1,16 @@
 # Release History
 
-825 milestones shipped across the v1.0 → v1.49.782 arc. The table below lists every shipped release, newest first.
+826 milestones shipped across the v1.0 → v1.49.783 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 825 releases · 824 with retrospectives · 709 with extracted lessons · quality A:662 B:97 C:63 D:0 F:3 (avg 94) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 826 releases · 825 with retrospectives · 709 with extracted lessons · quality A:662 B:97 C:63 D:0 F:4 (avg 93) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.783](release-notes/v1.49.783) | STATE.md Normalizer Fix (Deferred-Maintenance Wedge) | 2026-05-26 | 3 | — | — | [s](release-notes/v1.49.783/chapter/00-summary.md) [r](release-notes/v1.49.783/chapter/03-retrospective.md) [l](release-notes/v1.49.783/chapter/04-lessons.md) [c](release-notes/v1.49.783/chapter/99-context.md) | — | F 24 |  |
 | [v1.49.782](release-notes/v1.49.782) | Tier E Architecture: LoaderContext Security Chokepoint | 2026-05-26 | 14 | — | — | [s](release-notes/v1.49.782/chapter/00-summary.md) [r](release-notes/v1.49.782/chapter/03-retrospective.md) [l](release-notes/v1.49.782/chapter/04-lessons.md) [c](release-notes/v1.49.782/chapter/99-context.md) | — | F 26 |  |
 | [v1.49.781](release-notes/v1.49.781) | Tier E Architecture: Store/Registry Naming Hygiene + MemoryStore Audit | 2026-05-26 | 8 | — | — | [s](release-notes/v1.49.781/chapter/00-summary.md) [r](release-notes/v1.49.781/chapter/03-retrospective.md) [l](release-notes/v1.49.781/chapter/04-lessons.md) [c](release-notes/v1.49.781/chapter/99-context.md) | — | F 29 |  |
 | [v1.49.780](release-notes/v1.49.780) | Tier E Architecture: cli.ts Dispatcher Extraction | 2026-05-26 | 13 | — | — | [s](release-notes/v1.49.780/chapter/00-summary.md) [r](release-notes/v1.49.780/chapter/03-retrospective.md) [l](release-notes/v1.49.780/chapter/04-lessons.md) [c](release-notes/v1.49.780/chapter/99-context.md) | 3 | F 57 |  |
