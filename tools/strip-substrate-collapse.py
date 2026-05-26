@@ -1,14 +1,27 @@
 #!/usr/bin/env python3
-"""Strip substrate-repetition-collapse patterns from contaminated mission-page files.
+r"""Strip substrate-repetition-collapse patterns from contaminated mission-page files.
 
-Two-pass transform:
-  Pass 1 — collapse adjacent "substrate substrate ..." runs to a single occurrence.
-  Pass 2 — per-paragraph cap: keep at most 5 "substrate" tokens per paragraph;
-           strip excess from the right side of the paragraph (later occurrences
-           are usually the filler-collapse instances).
+Single-pass transform:
+  Collapse runs of bare adjacent "substrate" tokens separated by whitespace
+  down to a single occurrence. Hyphenated identifiers like "substrate-anchor",
+  "substrate-cumulative", "substrate-form-distinct" are preserved intact;
+  the trailing \b in the regex matches at the hyphen boundary, so a pattern
+  like "substrate substrate-cumulative" collapses to "substrate-cumulative"
+  (the leading bare-substrate filler is removed; the hyphenated identifier
+  is left untouched).
 
-Pass 3 — normalize whitespace artifacts left behind (double spaces, ` .`, ` ,`,
-         ` :`, ` ;`).
+Earlier versions of this script included a "Pass 2" per-paragraph cap and a
+"Pass 3" whitespace normaliser. Both were destructive against the v1.150 ..
+v1.175 substrate-axis content surface:
+  - Pass 2's `\bsubstrate\b` cap stripped the bare "substrate" prefix from
+    hyphenated identifiers, leaving orphan tails like " -anchor" / " -cumulative"
+    where "substrate-anchor" / "substrate-cumulative" had been intended.
+  - Pass 3's `" +([\.,;:])"` rule collapsed CSS class-selector spacing
+    (e.g. `body > .nav-card` -> `body >.nav-card`) and broke descendant-vs-
+    compound selector semantics (`h1 .subtitle` -> `h1.subtitle`).
+Both passes are deliberately omitted here. If the residual content needs
+further tightening, do that with a separate targeted tool, not with a
+density cap.
 
 Invoked as:
   python3 tools/strip-substrate-collapse.py <file>...
@@ -22,68 +35,17 @@ import re
 import sys
 from pathlib import Path
 
-# Pass 1: runs of "substrate" separated only by whitespace -> single "substrate"
+# Runs of "substrate" separated only by whitespace -> single "substrate".
+# The leading and trailing \b both match at hyphen boundaries, so this regex
+# safely collapses "substrate substrate-cumulative" -> "substrate-cumulative"
+# while leaving the hyphenated identifier intact.
 ADJACENT_RUN = re.compile(r"\bsubstrate(?:\s+substrate)+\b", re.IGNORECASE)
 
-# Per-paragraph "substrate" counter to cap density at MAX_PER_PARA.
-MAX_PER_PARA = 5
 SUBSTRATE_TOKEN = re.compile(r"\bsubstrate\b", re.IGNORECASE)
 
 
-def cap_per_paragraph(text: str) -> str:
-    """For each blank-line-separated paragraph, keep at most MAX_PER_PARA
-    'substrate' tokens. Strip excess occurrences from the right (collapse
-    tail is the usual filler-pattern location)."""
-    paragraphs = re.split(r"(\n\s*\n)", text)  # capture separators to preserve them
-    out = []
-    for chunk in paragraphs:
-        if chunk.strip() == "" or "\n\n" in chunk or chunk.startswith("\n"):
-            out.append(chunk)
-            continue
-        matches = list(SUBSTRATE_TOKEN.finditer(chunk))
-        if len(matches) <= MAX_PER_PARA:
-            out.append(chunk)
-            continue
-        # Build the kept set: first MAX_PER_PARA occurrences are retained
-        keep_indices = {i for i in range(MAX_PER_PARA)}
-        # Walk in reverse so character indices remain valid
-        modified = chunk
-        for i in range(len(matches) - 1, -1, -1):
-            if i in keep_indices:
-                continue
-            m = matches[i]
-            start, end = m.start(), m.end()
-            # Also consume the preceding whitespace and a trailing comma/space pair
-            # if it leaves an orphan ", "
-            left = start
-            while left > 0 and modified[left - 1] == " ":
-                left -= 1
-            right = end
-            # If between two spaces, leave one space to avoid word collisions
-            modified = modified[:left] + " " + modified[right:]
-        out.append(modified)
-    return "".join(out)
-
-
-def clean_whitespace(text: str) -> str:
-    """Normalize whitespace artifacts left by stripping."""
-    # Multiple spaces -> single space (but not at line starts)
-    text = re.sub(r"(?<=\S)  +", " ", text)
-    # Stray " ." " ," " :" " ;" -> tight punctuation
-    text = re.sub(r" +([\.,;:])", r"\1", text)
-    # " )" -> ")"
-    text = re.sub(r" +\)", ")", text)
-    # "( " -> "("
-    text = re.sub(r"\( +", "(", text)
-    # Collapse internal double spaces in mid-sentence (preserve indentation at line starts)
-    return text
-
-
 def transform(text: str) -> str:
-    text = ADJACENT_RUN.sub("substrate", text)
-    text = cap_per_paragraph(text)
-    text = clean_whitespace(text)
-    return text
+    return ADJACENT_RUN.sub("substrate", text)
 
 
 def count_collapse(text: str) -> int:

@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.775`.
+The story begins at `v1.0` and continues to `v1.49.776`.
 
-**818 chapters.** 817 have retrospectives.
+**819 chapters.** 818 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -826,3 +826,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.773](v1.49.773/00-summary.md)** — Polar NASA Single-Spacecraft High-Latitude Inner-Magnetosphere Auroral Imaging Mission · 2026-05-25
 - **[v1.49.774](v1.49.774/00-summary.md)** — IMAGE NASA Single-Spacecraft Magnetosphere Remote-Sensing via Energetic-Neutral-Atom and Extreme-Ultraviolet Imaging Mission · 2026-05-25
 - **[v1.49.775](v1.49.775/00-summary.md)** — IMAP NASA Interstellar Mapping and Acceleration Probe — INTERSTELLAR-BOUNDARY Axis Opens at Axis-Rotation 24 · 2026-05-25
+- **[v1.49.776](v1.49.776/00-summary.md)** — Template-Pollution Cleanup: Script-Bug Repair + v1.176 Heal + Broader Strip + FTP Sync · 2026-05-26
