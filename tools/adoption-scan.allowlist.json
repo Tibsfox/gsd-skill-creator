@@ -62,6 +62,18 @@
       "reason": "6 self-files / 0 self-importers — namespace placeholder for the substrate-reference docs (semantic-channel.md, bounded-learning.md). The actual implementation modules (coherent-functors, ricci-curvature-audit, etc.) live as siblings and ARE adoption-tracked individually.",
       "addedAt": "v1.49.787",
       "addedBy": "v786 adoption-scan baseline review"
+    },
+    {
+      "module": "tonnetz",
+      "reason": "Substrate-level reference implementation per arXiv:2604.19960 (Boland 2026, MATH-20 Phase 752). Ships the 24-triad neo-Riemannian lattice + P/L/R transforms + Sound of Puget Sound mapping (360 species × 360 musicians on the shared unit circle). The SoPS mapping is itself the substrate for an operator-filtered research-cadence surface; the module is the durable backing for that surface. Default-OFF, HARD-preservation invariants intact (G6 standard CAPCOM preservation gate), zero side-effects at import. ALLOWLISTED rather than RETIRED because the substrate is preserved, not filtered out.",
+      "addedAt": "v1.49.791",
+      "addedBy": "v791 second shelfware verdict (T1.2 ship 4)"
+    },
+    {
+      "module": "wasserstein-hebbian",
+      "reason": "Substrate-level reference implementation per arXiv:2604.16052 (Tan 2026, 75pp, MATH-19 Phase 751). Companion runtime to the canonical substrate doc docs/substrate-references/wasserstein-hebbian.md (deliberately not a faithful re-derivation; substrate-level reader's reference to the Wasserstein-2 framework for Hebbian plasticity). Ships closed-form W₂² helper + bounded-variance check + plasticity-rule validator + audit-finding emitter. Default-OFF, advisory-only (CAPCOM retains gate authority), zero side-effects at import.",
+      "addedAt": "v1.49.791",
+      "addedBy": "v791 second shelfware verdict (T1.2 ship 4)"
     }
   ]
 }
