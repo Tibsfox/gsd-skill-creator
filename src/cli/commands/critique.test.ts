@@ -147,15 +147,15 @@ describe('critiqueCommand', () => {
   });
 });
 
-describe('cli.ts critique registration', () => {
-  it('critique case is registered in cli.ts', () => {
-    const cliSource = readFileSync(join(__dirname, '../../cli.ts'), 'utf-8');
-    expect(cliSource).toContain("'critique'");
-    expect(cliSource).toContain('critiqueCommand');
+describe('cli dispatch registration', () => {
+  it('critique is registered in src/cli/dispatch.ts', () => {
+    const dispatchSource = readFileSync(join(__dirname, '../dispatch.ts'), 'utf-8');
+    expect(dispatchSource).toContain("'critique'");
+    expect(dispatchSource).toContain('critiqueCommand');
   });
 
-  it('existing refine case is NOT touched', () => {
-    const cliSource = readFileSync(join(__dirname, '../../cli.ts'), 'utf-8');
-    expect(cliSource).toContain("case 'refine'");
+  it('refine is still registered (case migrated to dispatch.ts as suggest/refine module)', () => {
+    const dispatchSource = readFileSync(join(__dirname, '../dispatch.ts'), 'utf-8');
+    expect(dispatchSource).toContain("'refine'");
   });
 });

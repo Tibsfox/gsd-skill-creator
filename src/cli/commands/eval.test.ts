@@ -285,12 +285,11 @@ describe('eval command routing', () => {
 // cli.ts integration: eval case exists
 // ============================================================================
 
-describe('cli.ts integration', () => {
-  it('src/cli.ts exports/contains eval command registration', async () => {
-    // We can't easily run cli.ts in a test, but we can verify the source contains 'eval'
+describe('cli dispatch integration', () => {
+  it('eval command is registered in src/cli/dispatch.ts', async () => {
     const { readFile } = await import('node:fs/promises');
-    const cliSource = await readFile(new URL('../../cli.ts', import.meta.url), 'utf-8');
-    expect(cliSource).toContain("case 'eval'");
-    expect(cliSource).toContain('evalCommand');
+    const dispatchSource = await readFile(new URL('../dispatch.ts', import.meta.url), 'utf-8');
+    expect(dispatchSource).toContain("'eval'");
+    expect(dispatchSource).toContain('evalCommand');
   });
 });
