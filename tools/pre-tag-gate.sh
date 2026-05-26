@@ -111,6 +111,18 @@
 #                       the new normative. Override:
 #                       SC_PRE_TAG_GATE_BYPASS=nasa-canonical-layout
 #                       (emergency only — fix the drift instead).
+#   17. PROJECT.md drift check (v1.49.785, WARN-only) — runs
+#                       `node tools/project-md-normalizer.mjs --check`.
+#                       Surfaces drift between .planning/PROJECT.md and ground
+#                       truth: stale "Latest shipped release" version vs
+#                       package.json, malformed GAP table rows, unrecognized
+#                       statuses, "Last updated" >30d old. WARN-only by default
+#                       (PROJECT.md is gitignored hand-authored prose; auto-fix
+#                       is out of scope). Promote to BLOCKER via
+#                       SC_PRE_TAG_GATE_REQUIRE=project-md.
+#                       Closes audit strengthening lever S5 (audit
+#                       .planning/AUDIT-2026-05-26-core-functions-retrospective.md).
+#
 #   16. NASA canonical sidebar gate (2026-05-24, BLOCKER) — runs
 #                       `bash tools/nasa-canonical-sidebar-gate.sh`. Fails
 #                       when any NASA Part C page lacks the canonical sidebar
@@ -147,6 +159,7 @@
 #   16  sps-cohort-uniqueness escalation (BLOCKER only when require flag set; default WARN-only)
 #   17  nasa-canonical-layout drift (BLOCKER as of v1.49.716)
 #   18  nasa-canonical-sidebar drift (BLOCKER as of 2026-05-24)
+#   19  project-md drift escalation (BLOCKER only when require flag set; default WARN-only)
 #
 # Step overrides (v1.49.653 consolidation; CONCERNS §26):
 #   SC_PRE_TAG_GATE_BYPASS=<csv>   skip these steps entirely
@@ -157,7 +170,7 @@
 #                         tauri-boundary apply-to-self scaffolder-residue
 #                         citation-debt-sync story-drift discipline-coverage
 #                         sps-cohort-uniqueness nasa-canonical-layout
-#                         nasa-canonical-sidebar
+#                         nasa-canonical-sidebar project-md
 #
 # Legacy per-step env vars (SC_SKIP_*_GATE, SC_REQUIRE_*) are honored with a
 # DEPRECATION WARNING for one milestone cycle to ease migration.
@@ -282,7 +295,7 @@ gate_required() {
 if [ -n "$_PTG_BYPASS_RAW" ] || [ -n "$_PTG_REQUIRE_RAW" ]; then
   [ -n "$_PTG_BYPASS_RAW" ]  && log "[pre-tag-gate] active BYPASS:  $_PTG_BYPASS_RAW"
   [ -n "$_PTG_REQUIRE_RAW" ] && log "[pre-tag-gate] active REQUIRE: $_PTG_REQUIRE_RAW"
-  log "[pre-tag-gate] (step names: build|version-sequence|vitest|completeness|ci-gate|www-bundles|depth-audit|depth-audit-mus-elc|claude-md|catalog-index|tauri-boundary|apply-to-self|scaffolder-residue|citation-debt-sync|story-drift|discipline-coverage|sps-cohort-uniqueness|nasa-canonical-layout|nasa-canonical-sidebar)"
+  log "[pre-tag-gate] (step names: build|version-sequence|vitest|completeness|ci-gate|www-bundles|depth-audit|depth-audit-mus-elc|claude-md|catalog-index|tauri-boundary|apply-to-self|scaffolder-residue|citation-debt-sync|story-drift|discipline-coverage|sps-cohort-uniqueness|nasa-canonical-layout|nasa-canonical-sidebar|project-md)"
 fi
 
 # ----- step 0.5: STATE.md normalizer auto-run (v1.49.671, Lesson #10373) -----
@@ -745,5 +758,34 @@ else
   log "[pre-tag-gate] step 16/16: PASS"
 fi
 
-log "[pre-tag-gate] all 16 checks PASS — safe to \`git tag\` and merge to main"
+# ----- step 17/17: PROJECT.md drift check (v1.49.785, WARN-only) -----
+# Surfaces drift between .planning/PROJECT.md and ground truth: stale
+# "Latest shipped release" version vs package.json, malformed GAP table
+# rows, unrecognized statuses, "Last updated" >30d old. WARN-only by
+# default — PROJECT.md is gitignored hand-authored prose; auto-fix is
+# out of scope. Promote to BLOCKER via SC_PRE_TAG_GATE_REQUIRE=project-md.
+# Closes audit strengthening lever S5 (audit
+# .planning/AUDIT-2026-05-26-core-functions-retrospective.md).
+if gate_bypassed "project-md"; then
+  log "[pre-tag-gate] step 17/17: SKIPPED"
+else
+  log "[pre-tag-gate] step 17/17: PROJECT.md drift check"
+  PROJECT_MD_OUTPUT="$(node "$REPO_ROOT/tools/project-md-normalizer.mjs" --check 2>&1)" || true
+  PROJECT_MD_EXIT=$?
+  if [ "$PROJECT_MD_EXIT" -ne 0 ] || echo "$PROJECT_MD_OUTPUT" | grep -q "drift detected"; then
+    echo "[pre-tag-gate] WARN: PROJECT.md drift detected" >&2
+    echo "$PROJECT_MD_OUTPUT" | head -25 >&2
+    echo "[pre-tag-gate]   Diagnose: node tools/project-md-normalizer.mjs --check" >&2
+    echo "[pre-tag-gate]   Fix: hand-edit .planning/PROJECT.md (gitignored)" >&2
+    if gate_required "project-md"; then
+      echo "[pre-tag-gate] FAIL: project-md escalated — update .planning/PROJECT.md before tagging" >&2
+      exit 19
+    fi
+    log "[pre-tag-gate] step 17/17: WARN (informational; set SC_PRE_TAG_GATE_REQUIRE=project-md to block)"
+  else
+    log "[pre-tag-gate] step 17/17: PASS (PROJECT.md in sync)"
+  fi
+fi
+
+log "[pre-tag-gate] all 17 checks PASS — safe to \`git tag\` and merge to main"
 exit 0
