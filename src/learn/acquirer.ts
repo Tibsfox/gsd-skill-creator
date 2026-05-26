@@ -8,7 +8,7 @@
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import * as os from 'node:os';
-import { execSync, execFileSync } from 'node:child_process';
+import { execFileSync } from 'node:child_process';
 
 // === Types ===
 
@@ -208,7 +208,7 @@ async function acquireArchive(
 
   if (isZip) {
     // List zip contents
-    const listOutput = execSync(`unzip -l "${archivePath}"`, { encoding: 'utf-8' });
+    const listOutput = execFileSync('unzip', ['-l', archivePath], { encoding: 'utf-8' });
     const lines = listOutput.split('\n');
     const files: string[] = [];
 
@@ -229,7 +229,7 @@ async function acquireArchive(
       }
 
       try {
-        const content = execSync(`unzip -p "${archivePath}" "${file}"`, { encoding: 'utf-8' });
+        const content = execFileSync('unzip', ['-p', archivePath, file], { encoding: 'utf-8' });
         const basename = path.basename(file, ext);
         const stagedFilename = `${basename}.staged.txt`;
         const stagedPath = path.join(stagingDir, stagedFilename);
@@ -248,7 +248,7 @@ async function acquireArchive(
     }
   } else {
     // tar.gz / tgz
-    const listOutput = execSync(`tar -tzf "${archivePath}"`, { encoding: 'utf-8' });
+    const listOutput = execFileSync('tar', ['-tzf', archivePath], { encoding: 'utf-8' });
     const files = listOutput.split('\n').filter(f => f.trim() && !f.endsWith('/'));
 
     for (const file of files) {
@@ -259,7 +259,7 @@ async function acquireArchive(
       }
 
       try {
-        const content = execSync(`tar -xzf "${archivePath}" -O "${file}"`, { encoding: 'utf-8' });
+        const content = execFileSync('tar', ['-xzf', archivePath, '-O', file], { encoding: 'utf-8' });
         const basename = path.basename(file, ext);
         const stagedFilename = `${basename}.staged.txt`;
         const stagedPath = path.join(stagingDir, stagedFilename);
@@ -293,10 +293,11 @@ async function acquireGitHub(
   const tempCloneDir = path.join(os.tmpdir(), `learn-github-${Date.now()}`);
 
   try {
-    execSync(`git clone --depth 1 --single-branch "${url}" "${tempCloneDir}"`, {
-      stdio: 'pipe',
-      timeout: 60_000,
-    });
+    execFileSync(
+      'git',
+      ['clone', '--depth', '1', '--single-branch', url, tempCloneDir],
+      { stdio: 'pipe', timeout: 60_000 },
+    );
 
     // Walk the cloned directory and filter by scope
     const staged: StagedContent[] = [];
@@ -349,10 +350,11 @@ async function acquireUrl(
   const tempFile = path.join(os.tmpdir(), `learn-url-${Date.now()}${path.extname(url) || '.txt'}`);
 
   try {
-    execSync(`curl -sL --max-time ${Math.ceil(timeout / 1000)} -o "${tempFile}" "${url}"`, {
-      stdio: 'pipe',
-      timeout: timeout + 5000,
-    });
+    execFileSync(
+      'curl',
+      ['-sL', '--max-time', String(Math.ceil(timeout / 1000)), '-o', tempFile, url],
+      { stdio: 'pipe', timeout: timeout + 5000 },
+    );
 
     return await acquireLocalFile(tempFile, stagingDir, maxFileSize);
   } finally {
@@ -426,7 +428,7 @@ function extractDocxText(filePath: string): string {
   fs.mkdirSync(tempDir, { recursive: true });
 
   try {
-    execSync(`unzip -o "${filePath}" word/document.xml -d "${tempDir}"`, { stdio: 'pipe' });
+    execFileSync('unzip', ['-o', filePath, 'word/document.xml', '-d', tempDir], { stdio: 'pipe' });
     const xmlPath = path.join(tempDir, 'word', 'document.xml');
     if (!fs.existsSync(xmlPath)) {
       return '(DOCX extraction: word/document.xml not found)';
@@ -447,7 +449,7 @@ function extractEpubText(filePath: string): string {
   fs.mkdirSync(tempDir, { recursive: true });
 
   try {
-    execSync(`unzip -o "${filePath}" -d "${tempDir}"`, { stdio: 'pipe' });
+    execFileSync('unzip', ['-o', filePath, '-d', tempDir], { stdio: 'pipe' });
 
     // Find all xhtml/html files
     const htmlFiles = walkDir(tempDir).filter(
