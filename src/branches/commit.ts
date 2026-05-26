@@ -160,7 +160,16 @@ export async function commit(opts: CommitOptions): Promise<CommitResult> {
       createdAt: manifest.createdAt,
       acquiredAt: ts,
     };
-    await fd.writeFile(JSON.stringify(entry), 'utf8');
+    try {
+      await fd.writeFile(JSON.stringify(entry), 'utf8');
+    } catch (writeErr) {
+      // Writing the lock body failed after we already won the atomic open.
+      // Release the lock so the next caller doesn't wedge on an orphaned file,
+      // then surface the original failure.
+      await fd.close().catch(() => { /* close races on the failed FD are OK */ });
+      await fs.unlink(lockPath).catch(() => { /* ignore if already gone */ });
+      throw writeErr;
+    }
     await fd.close();
     won = true;
     winnerEntry = entry;
