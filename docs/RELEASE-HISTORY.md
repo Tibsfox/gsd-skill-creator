@@ -1,15 +1,16 @@
 # Release History
 
-821 milestones shipped across the v1.0 → v1.49.778 arc. The table below lists every shipped release, newest first.
+822 milestones shipped across the v1.0 → v1.49.779 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 821 releases · 820 with retrospectives · 707 with extracted lessons · quality A:662 B:97 C:62 D:0 F:0 (avg 94) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 822 releases · 821 with retrospectives · 708 with extracted lessons · quality A:662 B:97 C:63 D:0 F:0 (avg 94) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.779](release-notes/v1.49.779) | Wave 3 Review HIGHs / Performance + Test-Quality Counter-Cadence | 2026-05-26 | 7 | — | — | [s](release-notes/v1.49.779/chapter/00-summary.md) [r](release-notes/v1.49.779/chapter/03-retrospective.md) [l](release-notes/v1.49.779/chapter/04-lessons.md) [c](release-notes/v1.49.779/chapter/99-context.md) | 9 | C 72 |  |
 | [v1.49.778](release-notes/v1.49.778) | Wave 2 Review HIGHs / Security + Correctness Counter-Cadence | 2026-05-26 | 12 | — | — | [s](release-notes/v1.49.778/chapter/00-summary.md) [r](release-notes/v1.49.778/chapter/03-retrospective.md) [l](release-notes/v1.49.778/chapter/04-lessons.md) [c](release-notes/v1.49.778/chapter/99-context.md) | 9 | C 77 |  |
 | [v1.49.777](release-notes/v1.49.777) | Wave 1 Review BLOCKERs / Security + Correctness Counter-Cadence | 2026-05-26 | 28 | — | — | [s](release-notes/v1.49.777/chapter/00-summary.md) [r](release-notes/v1.49.777/chapter/03-retrospective.md) [l](release-notes/v1.49.777/chapter/04-lessons.md) [c](release-notes/v1.49.777/chapter/99-context.md) | 1/8 | C 71 |  |
 | [v1.49.776](release-notes/v1.49.776) | Template-Pollution Cleanup / Script-Bug Discovery and Repair | 2026-05-26 | 2 | — | — | [s](release-notes/v1.49.776/chapter/00-summary.md) [r](release-notes/v1.49.776/chapter/03-retrospective.md) [l](release-notes/v1.49.776/chapter/04-lessons.md) [c](release-notes/v1.49.776/chapter/99-context.md) | 1/11 | B 84 |  |
