@@ -13,7 +13,7 @@
     "tonnetz"
   ],
   "fileCount": 205,
-  "rootDigest": "ee43fb5fac7c4a94e44ab610afdafa8378ef8ec7bd7f2adac92faa76e3738a70",
+  "rootDigest": "685f50a647f0d78563c17aa89a6cba61bd5004b110028083c9a6ef57b5a5b4b7",
   "tree": [
     {
       "path": "orchestration/REFERENCES.md",
@@ -587,18 +587,18 @@
     },
     {
       "path": "memory/content-addressed-set-store.ts",
-      "sha256": "72ecef0a494816278959ee4f210d2522acb9dd8fbef5229e2135e73b3e2ddf91",
-      "size": 11575
+      "sha256": "6cd32e4c7c4d5ed751da04e8cb4abe082cf92f16e31886140a6426159de57696",
+      "size": 11859
     },
     {
       "path": "memory/content-addressed-store.ts",
-      "sha256": "6329a4ed0c8b57af350f62dc59ac6a01778d51511168162afad73d5c6f54003b",
-      "size": 15336
+      "sha256": "6791784da809316a4d92d1ce4f10e5aa3c983ad341134bb3a27562d22afbce33",
+      "size": 15590
     },
     {
       "path": "memory/conversation-store.ts",
-      "sha256": "96a6400ad7a0dae96d1c9b8cda1e17a53bbec7f6ff80869cef2d0a5153256a1c",
-      "size": 17039
+      "sha256": "290d1b6dddeb5a5b74d1ec93f6b99284cb2520530aa1965fa43bec6b99c19486",
+      "size": 17288
     },
     {
       "path": "memory/embedding-index.ts",
@@ -627,8 +627,8 @@
     },
     {
       "path": "memory/grove-store.ts",
-      "sha256": "b0e4334917533bb1760464f51e34ebf2cb936ac904a370f0883822aa8617eace",
-      "size": 1970
+      "sha256": "09914ba2a8308e121bba2c65cf50a2b7a3fbbbdca8119c25aea84d45dd9bef4c",
+      "size": 2205
     },
     {
       "path": "memory/hybrid-scorer.ts",
@@ -747,8 +747,8 @@
     },
     {
       "path": "memory/triple-store.ts",
-      "sha256": "2e6bb49500d3bc0c8da2baa4e05a91951ee36c1d6eedc58725c362ac229906db",
-      "size": 10717
+      "sha256": "fae7976120c7dbc9e2f65c4673e60fa3917fbad17d4bd863ab5e673a98121085",
+      "size": 10932
     },
     {
       "path": "memory/types.ts",

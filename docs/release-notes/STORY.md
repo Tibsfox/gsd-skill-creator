@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.780`.
+The story begins at `v1.0` and continues to `v1.49.781`.
 
-**823 chapters.** 822 have retrospectives.
+**824 chapters.** 823 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -831,3 +831,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.778](v1.49.778/00-summary.md)** — Wave 2 Review HIGHs / Security + Correctness Counter-Cadence · 2026-05-26
 - **[v1.49.779](v1.49.779/00-summary.md)** — Wave 3 Review HIGHs / Performance + Test-Quality Counter-Cadence · 2026-05-26
 - **[v1.49.780](v1.49.780/00-summary.md)** — Tier E Architecture: cli.ts Dispatcher Extraction · 2026-05-26
+- **[v1.49.781](v1.49.781/00-summary.md)** — Tier E Architecture: Store/Registry Naming Hygiene + MemoryStore Audit · 2026-05-26
