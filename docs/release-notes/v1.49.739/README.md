@@ -1,4 +1,4 @@
-# v1.49.739 — NASA Canonical Sibling Files Restoration: v1.141 STS-29 Discovery Third Post-Challenger Flight + TDRS-4 Constellation Completion Rebuild (Path B Hand-Author)
+# v1.49.739 — NASA Canonical Sibling Files Restoration: v1.141 STS-29 Discovery Third Post-Challenger Flight
 
 **Released:** 2026-05-23
 **Type:** counter-cadence campaign continuation (US Space Shuttle Discovery third post-Challenger crewed flight + TDRS-4 deployment completing 3-satellite operational constellation post-Challenger TDRS-B substrate-recovery + Discovery's 8th flight + RTF-cadence-stabilization substrate-anchor + 101-day post-RTF inter-flight gap + first M.D. physician-astronaut in post-Challenger US crewed flight + first rotation-RTF-commander)

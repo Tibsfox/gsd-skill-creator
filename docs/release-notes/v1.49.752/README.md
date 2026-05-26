@@ -1,4 +1,4 @@
-# v1.49.752 — NASA Canonical Sibling Files Restoration: v1.154 ExoMars Trace Gas Orbiter (TGO) + ESA-Led First Mars Atmospheric-Trace-Gas Orbiter
+# v1.49.752 — NASA Canonical Sibling Files Restoration: v1.154 ExoMars Trace Gas Orbiter (TGO)
 
 **Released:** 2026-05-23
 **Type:** counter-cadence campaign continuation

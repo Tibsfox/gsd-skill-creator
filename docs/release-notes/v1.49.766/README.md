@@ -1,4 +1,4 @@
-# v1.49.766 — NASA Canonical Sibling Files Restoration: v1.168 SDO + NASA Living With a Star Flagship Heliophysics Mission at Inclined Geosynchronous Orbit
+# v1.49.766 — NASA Canonical Sibling Files Restoration: v1.168 SDO
 
 **Released:** 2026-05-24
 **Type:** counter-cadence campaign continuation

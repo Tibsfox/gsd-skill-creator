@@ -1,4 +1,4 @@
-# v1.49.721 — NASA Canonical Sibling Files Restoration: v1.123 STS-51-J Atlantis Maiden-Flight DoD-Classified Rebuild + Lesson #10408 PROMOTION TO ESTABLISHED
+# v1.49.721 — NASA Canonical Sibling Files Restoration: v1.123 STS-51-J Atlantis Maiden-Flight DoD-Classified Rebuild
 
 **Released:** 2026-05-22
 **Type:** counter-cadence campaign continuation + lesson promotion

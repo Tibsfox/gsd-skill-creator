@@ -1,4 +1,4 @@
-# v1.49.743 — NASA Canonical Sibling Files Restoration: v1.145 STS-33 Atlantis DoD-Classified Third Post-Challenger Flight + First Night Shuttle Launch Post-Challenger + USA-48 Magnum-Orion-2 SIGINT
+# v1.49.743 — NASA Canonical Sibling Files Restoration: v1.145 STS-33 Atlantis DoD-Classified Third Post-Challenger Flight
 
 **Released:** 2026-05-23
 **Type:** counter-cadence campaign continuation

@@ -1,4 +1,4 @@
-# v1.49.746 — NASA Canonical Sibling Files Restoration: v1.148 STS-107 Columbia Research Mission + SPACEHAB Research Double Module + 80+ Microgravity Experiments
+# v1.49.746 — NASA Canonical Sibling Files Restoration: v1.148 STS-107 Columbia Research Mission
 
 **Released:** 2026-05-23
 **Type:** counter-cadence campaign continuation

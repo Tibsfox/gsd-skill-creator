@@ -1,4 +1,4 @@
-# v1.49.744 — NASA Canonical Sibling Files Restoration: v1.146 STS-34 Atlantis Galileo Jupiter First US Jupiter-Bound Planetary Probe + Galileo Orbiter and Atmospheric Entry Probe + 6-Year VEEGA Interplanetary Cruise
+# v1.49.744 — NASA Canonical Sibling Files Restoration: v1.146 STS-34 Atlantis Galileo Jupiter First US Jupiter-Bound Planetary Probe
 
 **Released:** 2026-05-23
 **Type:** counter-cadence campaign continuation

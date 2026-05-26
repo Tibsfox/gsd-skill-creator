@@ -1,4 +1,4 @@
-# v1.49.745 — NASA Canonical Sibling Files Restoration: v1.147 STS-32 Columbia LDEF Retrieval First Ever + 5y 9m Forward-Shadow Closure from STS-41-C + First 10-Day Shuttle Mission
+# v1.49.745 — NASA Canonical Sibling Files Restoration: v1.147 STS-32 Columbia LDEF Retrieval First Ever
 
 **Released:** 2026-05-23
 **Type:** counter-cadence campaign continuation

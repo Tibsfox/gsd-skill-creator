@@ -1,4 +1,4 @@
-# v1.49.753 — NASA Canonical Sibling Files Restoration: v1.155 Hope (Emirates Mars Mission / Al-Amal مسبار الأمل) + UAE-Led First Mars Weather-Climate Orbiter
+# v1.49.753 — NASA Canonical Sibling Files Restoration: v1.155 Hope (Emirates Mars Mission / Al-Amal مسبار الأمل)
 
 **Released:** 2026-05-23
 **Type:** counter-cadence campaign continuation

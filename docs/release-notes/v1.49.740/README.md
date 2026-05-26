@@ -1,4 +1,4 @@
-# v1.49.740 — NASA Canonical Sibling Files Restoration: v1.142 STS-30 Atlantis First US Planetary Mission From Shuttle + Magellan Venus Radar Mapper Deployment Rebuild (Path B Hand-Author)
+# v1.49.740 — NASA Canonical Sibling Files Restoration: v1.142 STS-30 Atlantis First US Planetary Mission From Shuttle
 
 **Released:** 2026-05-23
 **Type:** counter-cadence campaign continuation (US Space Shuttle Atlantis fourth post-Challenger crewed flight + Magellan Venus radar mapper deployment + first US planetary mission from Shuttle + Atlantis's 4th flight + first IUS planetary deployment + Cleave first-PhD-civil-engineer-female-astronaut + Thagard first-American-on-Mir-future-substrate + Lee rookie-future-Hubble-Servicing-Mission-2 + 52-day post-RTF inter-flight gap + Walker rotation-RTF-commander-2nd-flight)

@@ -1,4 +1,4 @@
-# v1.49.757 — NASA Canonical Sibling Files Restoration: v1.159 James Webb Space Telescope (JWST) + NASA + ESA + CSA Flagship Infrared Space Observatory at Sun-Earth L2 Halo Orbit
+# v1.49.757 — NASA Canonical Sibling Files Restoration: v1.159 James Webb Space Telescope (JWST)
 
 **Released:** 2026-05-23
 **Type:** counter-cadence campaign continuation

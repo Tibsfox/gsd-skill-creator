@@ -1,4 +1,4 @@
-# v1.49.751 — NASA Canonical Sibling Files Restoration: v1.153 Mars Atmosphere and Volatile EvolutioN (MAVEN) + First Dedicated Mars Upper-Atmosphere Mission
+# v1.49.751 — NASA Canonical Sibling Files Restoration: v1.153 Mars Atmosphere and Volatile EvolutioN (MAVEN)
 
 **Released:** 2026-05-23
 **Type:** counter-cadence campaign continuation

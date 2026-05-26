@@ -1,4 +1,4 @@
-# v1.49.763 — NASA Canonical Sibling Files Restoration: v1.165 Aditya-L1 + ISRO First Dedicated Indian Solar Observatory at Sun-Earth L1 Halo Orbit
+# v1.49.763 — NASA Canonical Sibling Files Restoration: v1.165 Aditya-L1
 
 **Released:** 2026-05-23
 **Type:** counter-cadence campaign continuation

@@ -1,4 +1,4 @@
-# v1.49.762 — NASA Canonical Sibling Files Restoration: v1.164 Europa Clipper + NASA Flagship Planetary Program Europa Habitability Characterization Mission
+# v1.49.762 — NASA Canonical Sibling Files Restoration: v1.164 Europa Clipper
 
 **Released:** 2026-05-23
 **Type:** counter-cadence campaign continuation

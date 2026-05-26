@@ -1,4 +1,4 @@
-# v1.49.755 — NASA Canonical Sibling Files Restoration: v1.157 Mars 2020 / Perseverance Rover + Ingenuity Helicopter + NASA-JPL-Led Sample-Caching Rover Plus First Powered Flight on Another World
+# v1.49.755 — NASA Canonical Sibling Files Restoration: v1.157 Mars 2020 / Perseverance Rover
 
 **Released:** 2026-05-23
 **Type:** counter-cadence campaign continuation

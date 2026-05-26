@@ -1,4 +1,4 @@
-# v1.49.747 — NASA Canonical Sibling Files Restoration: v1.149 Spirit MER-A Mars Exploration Rover + First MER-Program Rover + 2003-06-10 CCAFS SLC-17A Launch on Delta II 7925-9.5 Heavy
+# v1.49.747 — NASA Canonical Sibling Files Restoration: v1.149 Spirit MER-A Mars Exploration Rover
 
 **Released:** 2026-05-23
 **Type:** counter-cadence campaign continuation
