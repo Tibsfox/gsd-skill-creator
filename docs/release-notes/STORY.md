@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.785`.
+The story begins at `v1.0` and continues to `v1.49.786`.
 
-**828 chapters.** 827 have retrospectives.
+**829 chapters.** 828 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -836,3 +836,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.783](v1.49.783/00-summary.md)** — STATE.md Normalizer Fix · 2026-05-26
 - **[v1.49.784](v1.49.784/00-summary.md)** — Codification: 8 v781-v783 lessons → 3 new operative disciplines · 2026-05-26
 - **[v1.49.785](v1.49.785/00-summary.md)** — PROJECT.md Normalizer + GAP Table Refresh · 2026-05-26
+- **[v1.49.786](v1.49.786/00-summary.md)** — Adoption Telemetry: Module-Usage Scanner · 2026-05-26
