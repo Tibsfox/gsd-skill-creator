@@ -6,6 +6,7 @@ import { feedbackCommand } from './commands/feedback.js';
 import { refineCommand } from './commands/refine.js';
 import { deleteCommand } from './commands/delete.js';
 import { invokeCommand } from './commands/invoke.js';
+import { agentsCommand } from './commands/agents.js';
 
 export interface CliContext {
   args: string[];
@@ -34,6 +35,7 @@ export const REGISTRY: readonly CommandEntry[] = [
   { aliases: ['refine', 'rf'], handler: (ctx) => refineCommand(ctx.args) },
   { aliases: ['delete', 'del', 'rm'], handler: (ctx) => deleteCommand(ctx.args) },
   { aliases: ['invoke', 'i'], handler: (ctx) => invokeCommand(ctx.args) },
+  { aliases: ['agents', 'ag'], handler: (ctx) => agentsCommand(ctx.args) },
 ];
 
 export function lookup(command: string | undefined): CommandHandler | undefined {
