@@ -73,6 +73,7 @@
  */
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { ensureAllowed, type LoaderContext } from '../security/loader-context.js';
 import {
   encode,
   hashBytes,
@@ -80,6 +81,8 @@ import {
   v,
   type CanonicalValue,
 } from '../memory/grove-format.js';
+
+const LOADER_SOURCE = 'graph/trs-loader';
 
 // ─── TRS-specific schema vocabulary ─────────────────────────────────────────
 
@@ -394,6 +397,8 @@ export interface LoadTrsOptions {
   text?: string;
   /** Pre-parsed JSON object. Highest precedence; skips disk + parse. */
   json?: TrsEdgesFileJson;
+  /** Optional security chokepoint — see src/security/loader-context.ts. */
+  ctx?: LoaderContext;
 }
 
 const DEFAULT_TRS_JSON_PATH = 'www/tibsfox/com/Research/TRS/edges.json';
@@ -451,6 +456,7 @@ async function resolveJson(opts: LoadTrsOptions): Promise<TrsEdgesFileJson> {
   const path = opts.path
     ? resolve(opts.path)
     : resolve(process.cwd(), DEFAULT_TRS_JSON_PATH);
+  ensureAllowed(opts.ctx, LOADER_SOURCE, 'read-file', path);
   const raw = await readFile(path, 'utf-8');
   return JSON.parse(raw) as TrsEdgesFileJson;
 }
