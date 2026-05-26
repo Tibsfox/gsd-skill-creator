@@ -16,6 +16,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.683 advances the engine from 1.135 to 1.136 with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** Soyuz TM-6: First Afghan Cosmonaut Mohmand + Polyakov First Physician on Mir + I ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 Soyuz TM-6 launched 1988-08-29 04:23:11 UTC from Baikonur Cosmodrome LC-1 (Gagarin's Start) on a Soyuz-U2 (11A511U2). Mir docking 1988-08-31 05:41 UTC at +X aft port. 8d 20h 27m visiting flight mission.
 
 **Cosmonaut-Researcher Lt. Col. Abdul Ahad Mohmand** (Pashto: عبدالاحد مهمند; born 1959-01-01 Sherzad District Nangarhar Province Afghanistan; still living 2026 in exile in Stuttgart Germany) — Royal Afghan Air Force / Afghan Air Force MiG-21 pilot 1976-1989. Pashtun ethnicity (largest ethnic group in Afghanistan + western Pakistan). Selected for Interkosmos 1988-01 from 457 Afghan candidates with backup Mohammad Dauran. **FIRST AFGHAN COSMONAUT + FIRST CENTRAL-ASIAN-MUSLIM COSMONAUT + FIRST PASHTUN IN SPACE** — substrate-axes substrate-distinct from Faris's FIRST-ARAB-MUSLIM at v680. Mohmand carried Quranic verses + Afghan soil + photographed Afghan landscapes (Hindu Kush + Bamiyan + Kabul + Kandahar + Sherzad District). Subsequently emigrated to Germany 1992 to escape Afghan Civil War + later Taliban.

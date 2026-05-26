@@ -1,29 +1,62 @@
+<!-- V650-699-CHAPTER-LIFTED v1 -->
 # v1.49.688 — Chapter 00: Summary
 
-**Type:** engine-cadence degree-advancing milestone — US-Shuttle-RTF-cadence-stabilization-TDRS-deployment substrate. Substrate-axis-rotation #13 inter-program return to US-program.
+## Summary
 
-**Mission:** STS-29 Discovery launched 1989-03-13 14:57:00 UTC from Kennedy LC-39B Florida; landed Edwards Runway 22 1989-03-18 14:35:50 UTC; mission duration 4d 23h 38m 50s. **Third US crewed spaceflight post-Challenger.** Primary payload TDRS-4 (TDRS-D "Hermes-4") ~2268 kg deployed via IUS at 41.4°W GEO = completes 3-satellite operational TDRS constellation (TDRS-1 + TDRS-3 + TDRS-4) post-Challenger TDRS-B loss recovery.
+**Forward-cadence NASA degree advance to 1.141.** v1.49.688 ships STS-29 Discovery: Third Post-Challenger Flight + TDRS-4 Constellation Completion + RTF-Cadence-Stabilization as a forward-cadence engine-state advance from NASA degree 1.140 to 1.141. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-**RTF cadence stabilization:** v684 STS-26 RTF anchor → 64-day gap → v685 STS-27 RTF+1 → 101-day gap → v688 STS-29 RTF+2. Second post-RTF substrate-room measurement (Lesson #10376 promoted to ESTABLISHED).
+**Mission rebuilt to per-pipeline depth.** STS-29 Discovery: Third Post-Challenger Flight + TDRS-4 Constellation Completion + RTF-Cadence-Stabilization ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/1.141/`.
 
-**Crew (all still living 2026; STILL-LIVING-CREW substrate-form):**
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-- CDR Capt. Michael Coats (Navy A-7; 3rd flight; STS-41-D Discovery's maiden 1984 PLT; future JSC Director 2005-2013) — COATS-RTF-VETERAN-COMMANDER-3RD-FLIGHT substrate-form (first rotation-RTF-commander)
-- PLT Col. John Blaha (USAF F-4/F-15; rookie; future Mir NASA-3 128-day long-duration 1996-09; 5-flight career) — BLAHA-ROOKIE-FUTURE-MIR-LONG-DURATION substrate-form
-- MS Dr. James Bagian (M.D. anesthesiologist + USAF Flight Surgeon Vietnam; rookie; future STS-40 SLS-1) — BAGIAN-FIRST-PHYSICIAN-ASTRONAUT-PAIR-WITH-HILMERS-V684 (PHYSICIAN-ASTRONAUT-COHORT obs#3 with Polyakov + Hilmers)
-- MS Col. Robert Springer (USMC F-4/AV-8; Vietnam combat 300+; rookie) — SPRINGER-USMC-PILOT-COHORT-CONTINUATION obs#3 (Hilmers + Mullane + Springer)
-- MS Col. James Buchli (USMC F-4; 3rd flight; STS-51-C Discovery-7th-flight v666 + STS-61-A Spacelab-D1 v669 + STS-29 Discovery-8th-flight) — BUCHLI-VETERAN-MS-3RD-FLIGHT-DISCOVERY-RETURN substrate-form
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-**Engine state:** NASA 1.140 → **1.141 STS-29 Discovery + TDRS-4 constellation completion + RTF-cadence-stabilization**. MUS/ELC/SPS/TRS SCAFFOLD-PENDING.
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-**Substrate-axis-rotation #13:** v687 Soviet-shuttle-program-closure → v688 US-Shuttle-RTF-cadence-stabilization = inter-program return after 2 consecutive Soviet rotations.
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-**13 obs#1 first-instances NEW LOCKED:** THIRD-POST-CHALLENGER-US-CREWED-SPACEFLIGHT + TDRS-4-HERMES-COMPLETION-OF-3-SATELLITE-OPERATIONAL-CONSTELLATION + POST-RTF-CADENCE-RESUMPTION-101-DAYS + DISCOVERY-OV-103-EIGHTH-FLIGHT + COATS-RTF-VETERAN-COMMANDER-3RD-FLIGHT + BLAHA-ROOKIE-FUTURE-MIR-LONG-DURATION + BAGIAN-FIRST-PHYSICIAN-ASTRONAUT-PAIR-WITH-HILMERS-V684 + BUCHLI-VETERAN-MS-3RD-FLIGHT-DISCOVERY-RETURN + IUS-TDRS-DEPLOYMENT-3RD-OPERATIONAL-USE + KENNEDY-LC-39B-3RD-POST-CHALLENGER-LAUNCH-PAD-USE + EDWARDS-RUNWAY-22-LANDING + RTF-CADENCE-STABILIZATION + SUSTAINED-POST-CHALLENGER-CADENCE.
+## Key Features
 
-**10 cumulative cohort observations:** Substrate-axis-rotation #13 (#10381) + Operator-authorized-departure #13 with FOUR-MILESTONE-CONTINUOUS-SESSION substrate-form (#10384) + Cluster-resume #16 + Inter-flight-gap #14 (#10376 promoted to ESTABLISHED) + Memorial #15 (#10380; STILL-LIVING-CREW) + Sub-agent-coordination #12 (#10385) + Springer-USMC-cohort #3 + Physician-cohort #3 + Dual-hard-block #16 + STATE-MD-normalizer #18.
+| Track | Field | Value |
+|---|---|---|
+| NASA | Mission name | STS-29 Discovery: Third Post-Challenger Flight + TDRS-4 Constellation Completion + RTF-Cadence-Stabilization |
+| NASA | Degree from | 1.140 |
+| NASA | Degree to | 1.141 |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-**8 substrate-anticipation forward-shadows:** STS-30 Magellan-Venus + STS-34 Galileo + Hubble STS-31 + Blaha Mir NASA-3 + Bagian STS-40 + Coats JSC + TDRS-5 + Coats STS-39.
+## Cross-References
 
-**ESTABLISHED lessons sustained:** #10381 obs#13 + #10384 obs#13 + #10376 obs#14 (promoted) + #10385 obs#12. All three recovery patterns sustained across 10 consecutive degrees (v679-v688).
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.687** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.689** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-**Engineering-professional dedication register.** All 5 STS-29 crew still living 2026.
+## Engine Position
+
+| Track | At v1.49.687 close | At v1.49.688 close |
+|---|---|---|
+| NASA degree | 1.140 | **1.141** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
+
+## Infrastructure
+
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/1.141/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-688-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.688` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.687](../v1.49.687/00-summary.md) · **Next:** [v1.49.689](../v1.49.689/00-summary.md)

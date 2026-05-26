@@ -1,36 +1,62 @@
-# v1.49.675 — Summary
+<!-- V650-699-CHAPTER-LIFTED v1 -->
+# v1.49.675 — Chapter 00: Summary
 
-## Headline
+## Summary
 
-**Rogers Commission Report (1986-06-06) — first investigation/policy/report milestone in the NASA Mission Series.** Substrate-axis-rotation from spaceflight-physical substrate (128 prior degrees) to investigation-policy substrate. ROGERS-COMMISSION-SUBSTRATE-ANTICIPATION + FEYNMAN-RUBBER-WATER-ICE-DEMONSTRATION-SUBSTRATE-ANTICIPATION (both OPEN at v674 close) formally close at v675. Memorial substrate continues — the Commission's first formal act was reading the names of the 7 STS-51-L crew lost on 1986-01-28. NASA degree 1.128 → 1.129.
+**Forward-cadence NASA degree advance to ?.?.** v1.49.675 ships Rogers Commission Report (NASA 1.128→1.129) — Investigation-Substrate Substrate-Axis-Rotation + Memorial Continuation as a forward-cadence engine-state advance from NASA degree ?.? to ?.?. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-## Engine state at v675 close
+**Mission rebuilt to per-pipeline depth.** Rogers Commission Report (NASA 1.128→1.129) — Investigation-Substrate Substrate-Axis-Rotation + Memorial Continuation ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/N.NNN/`.
 
-- **NASA:** 1.129 Rogers Commission Report (degree-advance from 1.128; INVESTIGATION-POLICY substrate-state)
-- **MUS / ELC / SPS / TRS:** SCAFFOLD-PENDING (continues from v674; v676 cc cluster prime backfill candidate)
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-## Substrate-form headline numbers
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-- **13 obs#1 first-instances NEW LOCKED** (ROGERS-COMMISSION-SUBSTRATE-CLOSURE + POST-DISASTER-INVESTIGATION-COMMISSION-AS-FIRST-MILESTONE + PRESIDENTIAL-EXECUTIVE-ORDER-CONSTITUTED-INVESTIGATION-COMMISSION + FEYNMAN-RUBBER-WATER-ICE-DEMONSTRATION-CLOSURE + FEYNMAN-APPENDIX-F-PERSONAL-OBSERVATIONS-AS-NORMALIZATION-OF-DEVIANCE-PROTO + 9-RECOMMENDATIONS-AS-POLICY-CHANGE-COHORT + INDEPENDENT-COMMISSIONER-AS-SUBSTRATE-EXPERTISE-COHORT + WHISTLEBLOWER-ENGINEER-IN-COMMISSION-TESTIMONY + KUTYNA-FEYNMAN-COLD-O-RING-PRIVATE-HANDOFF-SUBSTRATE + MEMORIAL-SUBSTRATE-CONTINUATION-IN-INVESTIGATION-MILESTONE + NOBEL-LAUREATE-IN-NASA-INVESTIGATION-COMMISSION + APOLLO-COMMANDER-IN-INVESTIGATION-COMMISSION + SUBSTRATE-ANTICIPATION-CLOSURE-AT-IMMEDIATE-SUCCESSOR)
-- **7 cumulative cohort observations** (FIRST-AMERICAN-WOMAN-IN-SPACE-IN-COMMISSION obs#1 + INTER-FLIGHT-GAP-AS-SUBSTRATE-ROOM-SECOND-APPLY obs#2 + NON-SHUTTLE-MISSION-IN-V667-RUN obs#2 + PNW-CONNECTION-COHORT obs#4 + 32-MONTH-SHUTTLE-PROGRAM-STAND-DOWN-CONTINUES obs#2 + CLUSTER-RESUME-FORWARD-CADENCE-POST-CC-INTERRUPTION obs#4 + SAME-CALENDAR-DAY-4-OF-4-THRESHOLD-HIT obs#1)
-- **9 substrate-anticipation forward-shadows opening** (CAIB-2003 + VAUGHAN-1996-CODIFICATION + MCDONALD-2009 + POST-CHALLENGER-CULTURE-CHANGE + STS-26-RTF-DISCOVERY + BARBARA-MORGAN-STS-118 + CHALLENGER-CENTER + CRITICALITY-1-1R-INDUSTRY-PATTERN + VOYAGER-2-NEPTUNE)
-- **2 substrate-anticipations formally CLOSED at v675** (ROGERS-COMMISSION + FEYNMAN-RUBBER-WATER-ICE-DEMONSTRATION; both OPEN at v674)
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-## Same-calendar-day count at v675 close
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-**4/4 hit on 2026-05-18** (v672 + v673 + v674 + v675). **Lesson #10371 second operational instance** triggered. **CC cluster TRIGGER at v676** (Gates 2 + 3 deferred from v671 + TRS pack-45 + MUS/ELC actual backfill).
+## Key Features
 
-## Memorial substrate continuation
+| Track | Field | Value |
+|---|---|---|
+| NASA | Mission name | Rogers Commission Report (NASA 1.128→1.129) — Investigation-Substrate Substrate-Axis-Rotation + Memorial Continuation |
+| NASA | Degree from | N.NNN |
+| NASA | Degree to | N.NNN |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-The Commission's first formal act at its opening session 1986-02-06 was reading the names of the seven STS-51-L crew (Scobee + Smith + Resnik + McNair + Onizuka + Jarvis + McAuliffe). The v1.129 page mirrors that pattern: the seven are named first.
+## Cross-References
 
-## Deliverables shipped
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.674** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.676** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-- Mission brief (gitignored per Lesson #10174)
-- NASA 1.129 index.html (670 lines / 144.7 KB; depth-audit 99% lines / 98% bytes PASS vs 1.128)
-- NASA 1.129 degree-sync.json (383 lines / 49.6 KB; 20 substrate_axes; 13 commission_members; 7 crew_remembered_first; 9 nine_recommendations; 5 volumes; 19-event investigation timeline; 3 whistleblower engineers; 9 substrate_anticipation_forward_shadows)
-- NASA 1.129 artifacts (13 files / 2,051 lines / 128.7 KB across audio + circuits + shaders + sims + story categories)
-- 5-file release-notes at `docs/release-notes/v1.49.675/`
-- MUS/ELC 1.129 SCAFFOLD-PENDING (per cc-cluster precedent)
-- Pre-tag-gate 14-step PASS (including v671 step 0.5 STATE.md normalizer auto-run)
-- Tag v1.49.675 pushed; GH release; FTP sync; main merge; RH refresh; drift cleanup
+## Engine Position
+
+| Track | At v1.49.674 close | At v1.49.675 close |
+|---|---|---|
+| NASA degree | N.NNN | **N.NNN** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
+
+## Infrastructure
+
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/N.NNN/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-675-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.675` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.674](../v1.49.674/00-summary.md) · **Next:** [v1.49.676](../v1.49.676/00-summary.md)

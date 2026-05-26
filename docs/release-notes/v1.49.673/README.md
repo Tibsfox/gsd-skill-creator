@@ -8,6 +8,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.673 advances the engine from 1.126 to 1.127 with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** Voyager 2 Uranus Encounter ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 v1.49.673 ships **the only Uranus encounter in human history to date** — 40+ years after the event, Voyager 2's 1986-01-24 closest approach remains the only spacecraft visit to Uranus. NSSDC 1977-076A; launched 1977-08-20 Cape Canaveral LC-41 Titan IIIE-Centaur AC-37; Uranus closest approach 1986-01-24 17:59 UTC at 81,500 km above cloud tops; encounter window 1986-01-22 → 1986-01-29; spacecraft age 8 years 5 months 4 days; ~19.2 AU from Sun (~2.87 billion km); round-trip light time ~2h 45m. Used Uranus gravity assist to commit Neptune trajectory (1989-08-25 encounter). The 16-day inter-flight gap between STS-61-C (1986-01-12 v672) and STS-51-L (1986-01-28 v676 candidate) is exactly the window in which Voyager 2's Uranus encounter occurred — substrate-room for Lesson #10376 INTER-FLIGHT-GAP first-instance application.
 
 **Key Uranus encounter discoveries:** 10 new moons (Puck + Portia + Juliet + Cressida + Rosalind + Belinda + Desdemona + Cordelia + Ophelia + Bianca; Uranus moon count 5 → 15); 5 major moon close-ups (Miranda + Ariel + Umbriel + Titania + Oberon); **Miranda revealed most extreme topography in Solar System** (Verona Rupes cliffs 20 km tall + 3 coronae structures); **tilted offset dipole magnetosphere** (59° offset from rotation axis + 1/3 planetary radius displaced); 2 new rings (ε + δ confirmed); rotation period 17h 14m 24s; atmospheric composition H₂ + He + CH₄ confirmed; uniform 59K equatorial/polar temperature despite extreme 97.77° axial tilt; ice-giant categorization (substrate-novel from gas-giant Jupiter/Saturn).

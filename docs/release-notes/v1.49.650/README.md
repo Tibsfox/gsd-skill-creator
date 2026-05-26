@@ -11,6 +11,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.650 advances the engine from 1.113 to 1.114 with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** STS-41-D Discovery ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 **The sixth consecutive degree-advancing milestone after the engine-cadence resume, and the first cohort entry to anchor a maiden orbiter flight alongside a triple-FIRST crew profile in a single mission envelope.** v645 reopened the NASA cadence at NASA 1.108 → 1.109. v646 sustained same calendar day 2026-05-12. v647 closed the same-day three-degree advance. v648 extended to four consecutive degree advances 2026-05-13. v649 extended to five. v650 extends to **six consecutive degree advances** — completing the **six-degree-in-two-day cadence** (v645+v646+v647 same-day 2026-05-12 + v648+v649+v650 same-day 2026-05-13) — with **STS-41-D Discovery (NSSDC 1984-093A)**, the **twelfth Space Shuttle flight** and the **maiden flight of OV-103 Discovery**, the third operational orbiter, bearing substrate density that opens five wholly new first-instance substrate-primitives simultaneously: **MAIDEN-OV-103-DISCOVERY** as third orbiter joining the operational fleet; **FIRST SHUTTLE LAUNCH-PAD ABORT AFTER MAIN-ENGINE IGNITION** (1984-06-26 RSLS abort T-4s, SSME #1 sluggish main fuel valve); **FIRST WOMAN ENGINEER IN SPACE** J. A. Resnik PhD EE Maryland 1977; **FIRST COMMERCIAL PAYLOAD SPECIALIST** C. D. Walker McDonnell Douglas; and the **COMPOUND-FORWARD-SHADOW-DENSITY** at three-of-three consecutive degrees — the deepest forward-shadow density in cohort history.
 
 STS-41-D launched at **1984-08-30 12:41:50 UTC** (08:41:50 a.m. EDT) from LC-39A, Kennedy Space Center, two months after the first-ever Shuttle pad abort (1984-06-26; SSME #1 failed to ignite via sluggish main fuel valve; RSLS commanded SSME #2 and SSME #3 shutdown at T-4 seconds; invisible hydrogen fire suppressed by firex deluge; crew evacuated via slidewire baskets). The 65-calendar-day refurbish-and-reflight cycle consolidated the cancelled STS-41-F manifest onto STS-41-D, producing the **record 41,184-pound payload manifest** — SBS-4 + Leasat-2 (Syncom IV-2) + Telstar-3C + OAST-1 solar array — the largest commercial deploy mission in Shuttle history to that point. Discovery landed at **Edwards AFB Runway 17 lake bed 1984-09-05 13:37:54 UTC** (6d 0h 56m 04s / **97 orbits**) — held to the lake bed rather than the concrete runway per maiden-flight protocol.

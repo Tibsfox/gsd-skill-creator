@@ -16,6 +16,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.682 advances the engine from 1.134 to 1.135 with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** Soyuz TM-5: Second Bulgarian Cosmonaut Aleksandr Aleksandrov-Belorussian + 9-Yea ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 Soyuz TM-5 launched 1988-06-07 14:03:13 UTC from Baikonur Cosmodrome LC-1 (Gagarin's Start) on a Soyuz-U2 (11A511U2). Mir docking 1988-06-09 15:57 UTC at +X aft port. 9d 20h 9m visiting flight during Titov + Manarov year-in-space EO-3 mission's 5th month.
 
 **Cosmonaut-Researcher Maj. Aleksandr Panayotov Aleksandrov-Belorussian** (born 1951-12-01 Omurtag Bulgarian People's Republic; still living 2026) — Bulgarian People's Republic Air Force MiG-21 + MiG-23 fighter pilot. Selected for Interkosmos 1978 as backup to Georgi Ivanov.

@@ -1,42 +1,62 @@
+<!-- V650-699-CHAPTER-LIFTED v1 -->
 # v1.49.696 — Chapter 00: Summary
 
-**Type:** engine-cadence degree-advancing milestone — **substrate-axis pivot**. Substrate-axis-rotation #20 → #21 INTER-PROGRAM substrate-form-distinct rotation from v695 US-Shuttle-civilian-research-SPACEHAB-Columbia to v696 Robotic-Mars-Exploration-Spirit-MER-A per operator-authorized substrate-axis pivot per operator catch-up directive substrate-form. **ROBOTIC-DEEP-SPACE-SCIENCE substrate-axis opens substrate-anchor at v696** per operator catch-up directive substrate-form pivot.
+## Summary
 
-**Mission:** Spirit MER-A (Mars Exploration Rover A) launched 2003-06-10 17:58:47 UTC from Cape Canaveral Air Force Station SLC-17A Florida on Boeing Delta II 7925-9.5 Heavy. Mars arrival 2004-01-04 04:35:00 UTC; landing site Gusev Crater 14.5684°S / 175.4726°E. **Mission planned 90 sols; actual 2210 sols** (~6 years 2 months; 24.6x planned substrate). **Cumulative drive 7.73 km substrate-form.** Last communication 2010-03-22 sol 2210; NASA end-of-mission declared 2011-05-25.
+**Forward-cadence NASA degree advance to 1.149.** v1.49.696 ships Spirit MER-A Mars Exploration Rover: First MER-Program Rover + 2003-06-10 Launch from CCAFS SLC-17A on Delta II 7925-9.5 Heavy + 2004-01-04 Gusev Crater Landing as a forward-cadence engine-state advance from NASA degree 1.148 to 1.149. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-**Chronological-forward-at-v696:** Spirit launch 2003-06-10 chronologically AFTER v695 STS-107 launch 2003-01-16 by ~5 months; v695 CHRONOLOGICAL-INVERSION-RE-EMERGENT resolved at v696 substrate-form; CHRONOLOGICAL-FORWARD-AT-V696 substrate-form obs#1 first-instance NEW LOCKED.
+**Mission rebuilt to per-pipeline depth.** Spirit MER-A Mars Exploration Rover: First MER-Program Rover + 2003-06-10 Launch from CCAFS SLC-17A on Delta II 7925-9.5 Heavy + 2004-01-04 Gusev Crater Landing ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/1.149/`.
 
-**COLUMBIA-HILLS-HUSBAND-HILL-MEMORIAL-NAMING substrate-cumulative direct substrate-thread v695 → v696 via mission-naming substrate-form** — engineering-professional register applied throughout per Lesson #10380 ESTABLISHED obs#23 cumulative + Lesson #10387 candidate obs#3 cumulative. Seven individual hills in Columbia Hills cluster (Gusev Crater) named for STS-107 crew:
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-- **Husband Hill** (CDR Husband; tallest summit ~106m; first Martian summit ascended 2005-08-21 sol 581 — FIRST-SUMMIT-OF-MARTIAN-HILL substrate-anchor)
-- **McCool Hill** (PLT McCool; Spirit's planned winter haven 2006-2007)
-- **Anderson Hill** (MS Anderson; PNW substrate substrate-cumulative)
-- **Clark Hill** (MS Clark)
-- **Chawla Hill** (MS Chawla; first Indian-born woman in space substrate-cumulative)
-- **Brown Hill** (MS Brown)
-- **Ramon Hill** (IL-PS Ramon; first Israeli astronaut substrate-cumulative)
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-**Athena Science Payload substrate-anchor:** PI Steven W. Squyres Cornell University + Pancam + Mini-TES + APXS + Mossbauer Spectrometer + Microscopic Imager + Rock Abrasion Tool (RAT) substrate-cumulative. MER engineering team substrate: Pete Theisinger Project Manager + Rob Manning Chief Engineer (EDL substrate-anchor) + Jennifer Trosper Mission Manager + Adam Steltzner EDL substrate-cumulative future MSL sky-crane substrate-anticipation.
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-**Substrate-cumulative discoveries:**
-- First ascent of a Martian summit (Husband Hill 2005-08-21 sol 581)
-- First evidence of past hydrothermal activity on Mars (Home Plate silica-rich substrate ~98% SiO2 sol 1158) — PAST-LIQUID-WATER-HYDROTHERMAL-ACTIVITY-EVIDENCE substrate-anchor
-- Sulfate-rich substrate (Paso Robles sulfate sol 401)
-- Basaltic volcanic substrate composition (Adirondack-class basalt sol 14)
-- MARTIAN-DUST-DEVIL-SOLAR-ARRAY-CLEANING substrate-form-distinct power-recovery substrate (periodic dust-devil cleaning events restored power output substrate-cumulative across multiple Martian winters substrate-form)
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-**Engine state:** NASA 1.148 → **1.149 Spirit MER-A Mars Exploration Rover**. MUS/ELC/SPS/TRS SCAFFOLD-PENDING.
+## Key Features
 
-**Substrate-axis-rotation #21:** v695 US-Shuttle-civilian-research → v696 Robotic-Mars-Exploration = INTER-PROGRAM substrate-form-distinct rotation per operator-authorized substrate-axis pivot per operator catch-up directive substrate-form.
+| Track | Field | Value |
+|---|---|---|
+| NASA | Mission name | Spirit MER-A Mars Exploration Rover: First MER-Program Rover + 2003-06-10 Launch from CCAFS SLC-17A on Delta II 7925-9.5 Heavy + 2004-01-04 Gusev Crater Landing |
+| NASA | Degree from | 1.148 |
+| NASA | Degree to | 1.149 |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-**ROBOTIC-DEEP-SPACE-SCIENCE substrate-axis opens substrate-anchor at v696** per operator catch-up directive substrate-form pivot substrate-cumulative with prior robotic substrate-thread (Galileo Jupiter v693 + Magellan Venus v689 + Voyager 2 Uranus v673 + Halley armada v679 + Phobos 1+2 substrate-anticipation + Mars Pathfinder Sojourner substrate-anchor 1997).
+## Cross-References
 
-**11 obs#1 first-instances NEW LOCKED:** MARS-EXPLORATION-ROVER-PROGRAM-FIRST-INSTANCE + SPIRIT-MER-A-LAUNCH-FROM-CCAFS-SLC-17A + GUSEV-CRATER-LANDING-SUBSTRATE + COLUMBIA-HILLS-HUSBAND-HILL-MEMORIAL-NAMING + FIRST-SUMMIT-OF-MARTIAN-HILL + PAST-LIQUID-WATER-HYDROTHERMAL-ACTIVITY-EVIDENCE + LONG-DURATION-MARS-SURFACE-MISSION + MARS-EXPLORATION-ROVER-ATHENA-SCIENCE-PAYLOAD + MARTIAN-DUST-DEVIL-SOLAR-ARRAY-CLEANING + CHRONOLOGICAL-FORWARD-AT-V696 + SUBSTRATE-AXIS-ROTATION-21-INTER-PROGRAM. Plus candidates: ROBOTIC-MISSION-MEMORIAL-NAMING-CONTINUITY + MER-PROGRAM-ROVER-NAMING-STUDENT-CONTEST + ROBOTIC-DEEP-SPACE-SCIENCE-SUBSTRATE-AXIS-OPENS + MER-PROGRAM-DUAL-ROVER-DEPLOYMENT + MER-OPPOSITE-HEMISPHERE-DUAL-ROVER-COVERAGE.
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.695** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.697** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-**9 cumulative cohort observations:** Rotation #21 ESTABLISHED + Operator-departure #21 + Inter-flight #22 + Memorial #23 ESTABLISHED + Sub-agent-coordination #20 (18 consecutive) + Content-filter-safe-phrasing #3 + Foreground-author-at-scale #3 + Substrate-cohort-pair-convention #2 + Chronological-forward-resumed #2.
+## Engine Position
 
-**8 substrate-anticipation forward-shadows:** MER-B Opportunity substrate-cohort-pair + Mars Express ESA + MRO + Phoenix + MSL Curiosity + InSight + Perseverance Mars-2020 + Ingenuity + Mars Sample Return substrate-thread.
+| Track | At v1.49.695 close | At v1.49.696 close |
+|---|---|---|
+| NASA degree | 1.148 | **1.149** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
 
-**ESTABLISHED lessons sustained:** #10381 obs#21 + #10384 obs#21 + #10376 obs#22 + #10380 obs#23 + #10385 obs#20. All three recovery patterns sustained 18 consecutive degrees v679-v696. **Lesson #10387 candidate obs#3 cumulative + Lesson #10388 candidate obs#3 cumulative + Lesson #10389 candidate obs#2 cumulative** all applied throughout.
+## Infrastructure
 
-Page metrics: 547 lines / 89,851 bytes / 28 cards / 7/7 canonical sections / 12 artifacts in 5/5 categories / 12/12 cross-linked. 89% lines / 81% bytes vs v1.148 WARN (PASS thresholds met).
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/1.149/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-696-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.696` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.695](../v1.49.695/00-summary.md) · **Next:** [v1.49.697](../v1.49.697/00-summary.md)

@@ -8,6 +8,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.666 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** cc-3: Cluster-Close Schema + Retroactive + TRS-Fill ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 v1.49.666 ships **the cluster-close half** of the 3-milestone counter-cadence cluster. cc-1 (v1.49.664) emitted scaffold infrastructure + 32 SCAFFOLD-PENDING stubs; cc-2 (v1.49.665) filled 12 of them; cc-3 closes the remaining 19 TRS packs + lands the two FA-663-N items deferred through the cluster + codifies the two new lessons from cc-2 retrospective into deterministic gates. Six phases shipped across 25 commits.
 
 ### Phase 1 — FA-663-7 international-PS catalog-card metadata schema (inline)

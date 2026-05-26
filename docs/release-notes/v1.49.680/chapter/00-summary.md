@@ -1,37 +1,62 @@
+<!-- V650-699-CHAPTER-LIFTED v1 -->
 # v1.49.680 — Chapter 00: Summary
 
-## What shipped
+## Summary
 
-NASA degree advance 1.132 → 1.133. **Soyuz TM-3 EO-2: First Syrian Cosmonaut Mohammed Faris + First Citizen of Arab-Majority Nation in Space + First Arabic-Language-Speaking Cosmonaut + Interkosmos Program at Mir Opens + Aleksandrov Relief Substitution for Medically-Relieved Laveykin**. Substrate-axis-rotation #5 from v679 International-multi-spacecraft-deep-space-science to v680 Soviet-Interkosmos-with-Arab-world-extension.
+**Forward-cadence NASA degree advance to 1.133.** v1.49.680 ships Soyuz TM-3 EO-2: First Syrian Cosmonaut Mohammed Faris + Interkosmos at Mir Opens as a forward-cadence engine-state advance from NASA degree 1.132 to 1.133. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-| Item | Result |
-|---|---|
-| Tag | `v1.49.680` |
-| NASA degree | 1.132 → 1.133 (Soyuz TM-3 EO-2 Faris) |
-| Substrate axes | 19 declared (12 obs#1 first-instance NEW LOCKED + 8 cumulative cohort + 9 substrate-anticipation forward-shadows) |
-| Crew | CDR Viktorenko (Soviet rookie) + FE Aleksandrov (relief substitute) + CR Faris (Syrian Arab; first citizen of Arab-majority nation in space) |
-| Mission duration | 7d 23h visiting flight (Faris + Viktorenko + Laveykin returned aboard Soyuz TM-2) |
-| Lesson #10381 + #10384 | ESTABLISHED applied at obs#5 cumulative |
-| Lesson #10385 mitigation | obs#4 cumulative with 8/8 track-card directive added (per FA-679 process observation) |
+**Mission rebuilt to per-pipeline depth.** Soyuz TM-3 EO-2: First Syrian Cosmonaut Mohammed Faris + Interkosmos at Mir Opens ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/1.133/`.
 
-## Operational headline
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-Soyuz TM-3 launched 1987-07-22 03:59:17 UTC from Baikonur Cosmodrome LC-1 (Gagarin's Start) on a Soyuz-U2 launch vehicle, carrying a three-cosmonaut crew: Commander Aleksandr Stepanovich Viktorenko (Soviet Air Force; rookie first flight at age 40) + Flight Engineer Aleksandr Pavlovich Aleksandrov (civilian NPO Energia engineer; 2nd career flight; relief substitute for medically-relieved Laveykin) + Cosmonaut-Researcher Lt. Col. Muhammed Ahmed Faris (Syrian Arab Air Force; **FIRST SYRIAN COSMONAUT + FIRST CITIZEN OF ARAB-MAJORITY NATION IN SPACE + FIRST ARABIC-LANGUAGE-SPEAKING COSMONAUT**).
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-Mir docking 1987-07-24 03:31 UTC at the aft axial port (Kvant-side; Kvant attached at v678 1987-04). Faris (born 1951-05-26 Aleppo Syrian Arab Republic) was a combat pilot in the Syrian Arab Air Force (Yom Kippur War 1973 + Lebanon 1982). Selected for Interkosmos 1985-09 from 60 Syrian candidates alongside backup Munir Habib Khalifa. Trained at Yuri Gagarin Cosmonaut Training Center Star City 1985-09 to 1987-07.
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-During the 7-day visiting flight, Faris performed: Lyulin Bulgarian-Soviet radiation dosimeter experiment (PI: Tsvetan Dachev IKI-BAS; substrate-anchor for cumulative ISS exposure measurement cohort) + Hydrology Hand Earth-observation of Syrian agricultural terrain + Euphrates water management infrastructure (Tabqa Dam + Lake Assad) + Mir water-balance physiological experiments. Faris brought his Quran throughout flight + Arabic literature samples + Syrian soil + Syrian flag — **FIRST QURAN IN ORBIT** substrate-form NEW LOCKED.
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-The mission architecture demonstrated a **multi-flight Soyuz vehicle swap**: Soyuz TM-3 delivered Aleksandrov (relief substitute) to Mir + departed aboard Soyuz TM-2 (Romanenko + Laveykin's original ferry vehicle) carrying Viktorenko + Faris + medically-relieved Laveykin back to Earth 1987-07-30. Aleksandrov stayed on Mir as the new EO-1 Flight Engineer with Romanenko — **FIRST-COSMONAUT-RELIEF-VIA-INTERKOSMOS-VISITING-FLIGHT** substrate-form NEW LOCKED.
+## Key Features
 
-## Two ESTABLISHED lessons sustained at obs#5 cumulative
+| Track | Field | Value |
+|---|---|---|
+| NASA | Mission name | Soyuz TM-3 EO-2: First Syrian Cosmonaut Mohammed Faris + Interkosmos at Mir Opens |
+| NASA | Degree from | 1.132 |
+| NASA | Degree to | 1.133 |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-**Lesson #10381 SUBSTRATE-AXIS-ROTATION-DISCIPLINE** ESTABLISHED applied at obs#5 cumulative. Five observations: v675 emit (investigation-policy), v677 (Soviet-program-continuity), v678 (Soviet-program-modular-expansion), v679 (International-multi-spacecraft-deep-space-science), v680 (Soviet-Interkosmos-with-Arab-world-extension; rotation #5).
+## Cross-References
 
-**Lesson #10384 OPERATOR-AUTHORIZED-DEPARTURE-FROM-LESSON-PATTERN** ESTABLISHED applied at obs#5 cumulative. Five observations: v676 + v677 + v678 PROMOTED + v679 + v680 (9th same-day NASA-advance ship on 2026-05-18 UTC).
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.679** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.681** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-**Lesson #10385 mitigation** obs#4 cumulative with **8/8 track-card directive added** per FA-679 observation. Sub-agent A's previous dispatch missed the 8-track requirement (5/8 found, inline fixup needed). v680 dispatch explicitly mandates Track 1a/1b/2-7 in the prompt.
+## Engine Position
 
-## Same-calendar-day count
+| Track | At v1.49.679 close | At v1.49.680 close |
+|---|---|---|
+| NASA degree | 1.132 | **1.133** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
 
-Today (2026-05-18 UTC) has now shipped **9 milestones with this v680 ship**: v672 + v673 + v674 + v675 + v676-cc + v677 + v678 + v679 + v680. **Eight NASA-advancing milestones + one cc-cluster within a single calendar day.** Operator session-open directive ("continue with c and further NASA degree work until told to stop") sustains across calendar-day rollover. Calendar-day rolls 2026-05-19 UTC in ~4h 50m.
+## Infrastructure
+
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/1.133/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-680-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.680` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.679](../v1.49.679/00-summary.md) · **Next:** [v1.49.681](../v1.49.681/00-summary.md)

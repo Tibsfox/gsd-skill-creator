@@ -1,29 +1,62 @@
+<!-- V650-699-CHAPTER-LIFTED v1 -->
 # v1.49.689 — Chapter 00: Summary
 
-**Type:** engine-cadence degree-advancing milestone — US-Shuttle-planetary-deployment-Atlantis-Venus substrate. Substrate-axis-rotation #14 intra-US substrate-form-distinct (TDRS → planetary).
+## Summary
 
-**Mission:** STS-30 Atlantis launched 1989-05-04 18:46:59 UTC from Kennedy LC-39B; landed Edwards Runway 22 1989-05-08 19:43:26 UTC; duration 4d 0h 56m 27s. **4th post-Challenger US flight + first US planetary mission from Shuttle.** Primary payload Magellan Venus radar mapper (3,449 kg launch; 12.6-cm SAR; 75-100m resolution; mapped 98% Venus surface 1990-1994). First IUS planetary deployment (substrate-distinct from prior IUS-TDRS). 11-year gap from prior US Venus mission Pioneer Venus 1978-05.
+**Forward-cadence NASA degree advance to 1.142.** v1.49.689 ships STS-30 Atlantis: First US Planetary Mission From Shuttle + Magellan Venus Radar Mapper Deployment as a forward-cadence engine-state advance from NASA degree 1.141 to 1.142. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-**52-day inter-flight gap:** STS-29→STS-30. 3rd post-RTF substrate-room measurement; Lesson #10376 promoted ESTABLISHED at obs#15.
+**Mission rebuilt to per-pipeline depth.** STS-30 Atlantis: First US Planetary Mission From Shuttle + Magellan Venus Radar Mapper Deployment ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/1.142/`.
 
-**Crew (3 still living 2026; 2 memorial substrate substrate-coincident-distinct):**
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-- CDR Capt. David Walker (Navy A-4/A-7; 2nd flight; STS-51-A 1984 PLT with Hauck; **died 2001-04-23 substrate-coincident-distinct memorial 25y pre-v689**)
-- PLT LtCol. Ronald Grabe (USAF A-7/F-111/F-15; 2nd flight; STS-51-J Atlantis maiden v668)
-- MS Norman Thagard, M.D. (USMC F-4 Vietnam combat; Yale Medical; 3rd flight; **future Mir NASA-1 1995 first American on Mir**)
-- MS Dr. Mary Cleave (Civil engineer PhD Utah State; 2nd flight; **died 2023-11-27 substrate-coincident-distinct memorial 2y 5m pre-v689; future NASA AA + Goddard SFC Director**)
-- MS LtCol. Mark Lee (USAF F-4/F-16; rookie; **future STS-82 Hubble Servicing Mission 2 1997**)
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-**Engine state:** NASA 1.141 → **1.142 STS-30 Atlantis + Magellan Venus + first US planetary mission from Shuttle**. MUS/ELC/SPS/TRS SCAFFOLD-PENDING.
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-**Substrate-axis-rotation #14:** v688 US-Shuttle-RTF-cadence-stabilization-TDRS-deployment → v689 US-Shuttle-planetary-deployment-Atlantis-Venus = intra-US substrate-form-distinct rotation.
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-**13 obs#1 first-instances NEW LOCKED:** FIRST-US-PLANETARY-MISSION-FROM-SHUTTLE + MAGELLAN-VENUS-RADAR-MAPPER-DEPLOYMENT + ATLANTIS-OV-104-FOURTH-FLIGHT + IUS-PLANETARY-DEPLOYMENT-FIRST-OPERATIONAL-USE + WALKER-RTF-VETERAN-COMMANDER-2ND-FLIGHT + WALKER-DEATH-2001-04-23-SUBSTRATE-COINCIDENT-DISTINCT + CLEAVE-FIRST-PHD-CIVIL-ENGINEER-FEMALE-ASTRONAUT + CLEAVE-DEATH-2023-11-27-SUBSTRATE-COINCIDENT-DISTINCT + THAGARD-FIRST-AMERICAN-ON-MIR-FUTURE-SUBSTRATE + LEE-ROOKIE-FUTURE-HUBBLE-SERVICING-MISSION-2 + POST-RTF-CADENCE-RESUMPTION-52-DAYS + EDWARDS-RUNWAY-22-USED-TWICE-IN-52-DAYS + VENUS-MISSION-COHORT-CONTINUATION-AFTER-PIONEER-VENUS-1978.
+## Key Features
 
-**10 cumulative cohort observations:** Rotation #14 + Operator-departure #14 (FIVE-MILESTONE-CONTINUOUS-SESSION candidate) + Cluster-resume #17 + Inter-flight #15 ESTABLISHED + Memorial #16 (Walker + Cleave) + Sub-agent-coordination #13 + RTF-cadence-continuation #2 + Planetary-mission-from-shuttle cohort opens + Dual-direction-hard-block #17 + STATE-MD-normalizer #19.
+| Track | Field | Value |
+|---|---|---|
+| NASA | Mission name | STS-30 Atlantis: First US Planetary Mission From Shuttle + Magellan Venus Radar Mapper Deployment |
+| NASA | Degree from | 1.141 |
+| NASA | Degree to | 1.142 |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-**8 substrate-anticipation forward-shadows:** STS-34 Galileo + Hubble STS-31 + STS-46 Ulysses + Magellan Venus arrival 1990-08-10 + Thagard Mir NASA-1 1995 + Lee STS-82 HSM-2 1997 + Cleave NASA AA 2004 + Walker STS-69 1995.
+## Cross-References
 
-**ESTABLISHED lessons sustained:** #10381 obs#14 + #10384 obs#14 + #10376 obs#15 + #10385 obs#13. All three recovery patterns sustained across 11 consecutive degrees (v679-v689).
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.688** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.690** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-**Memorial substrate respect.** Walker died 2001 (12y post-STS-30). Cleave died 2023 (34y post-STS-30). Substrate-form FORWARD-MEMORIAL-AFTER-MISSION-COMPLETION substrate-anchored for both. Engineering-professional memorial register.
+## Engine Position
+
+| Track | At v1.49.688 close | At v1.49.689 close |
+|---|---|---|
+| NASA degree | 1.141 | **1.142** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
+
+## Infrastructure
+
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/1.142/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-689-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.689` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.688](../v1.49.688/00-summary.md) · **Next:** [v1.49.690](../v1.49.690/00-summary.md)

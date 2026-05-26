@@ -16,6 +16,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.680 advances the engine from 1.132 to 1.133 with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** Soyuz TM-3 EO-2: First Syrian Cosmonaut Mohammed Faris + Interkosmos at Mir Open ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 Soyuz TM-3 launched 1987-07-22 03:59:17 UTC from Baikonur Cosmodrome LC-1 (Gagarin's Start) on a Soyuz-U2 (11A511U2) launch vehicle, carrying a three-cosmonaut crew on a 7-day visiting flight to Mir.
 
 **Cosmonaut-Researcher Lt. Col. Muhammed Ahmed Faris** (محمد أحمد فارس; 1951-05-26 Aleppo Syrian Arab Republic → 2024-04-19 Istanbul Turkey) — Syrian Arab Air Force combat pilot (Yom Kippur War 1973 + Lebanon 1982; MiG-21 + MiG-23). Selected for Interkosmos 1985-09 from 60 Syrian candidates alongside backup Munir Habib Khalifa. Trained at Yuri Gagarin Cosmonaut Training Center Star City 1985-09 to 1987-07. **FIRST SYRIAN COSMONAUT + FIRST CITIZEN OF ARAB-MAJORITY NATION IN SPACE + FIRST ARABIC-LANGUAGE-SPEAKING COSMONAUT.**

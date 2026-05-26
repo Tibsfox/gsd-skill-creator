@@ -13,6 +13,20 @@ This degree-advancing milestone rotates the substrate-axis sharply away from the
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.677 advances the engine from 1.129 to 1.130 with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** Soyuz T-15 First Mir Crew + Inter-Station Crew Transfer + Salyut 7 Closure ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 Soyuz T-15 (spacecraft serial 7K-ST No. 21) launched 1986-03-13 12:33:09 UTC from Baikonur Cosmodrome LC-1 (Gagarin's Start, Site 1/5) on a Soyuz-U2 launch vehicle, carrying CDR Col Leonid Denisovich Kizim (Soviet Air Force; 3rd career flight; born 1941-08-05 Krasny Liman Donetsk Oblast Ukrainian SSR; died 2010-06-14) and FE Vladimir Alekseyevich Solovyev (civilian engineer at NPO Energia; 2nd career flight; born 1946-11-11 Moscow Russian SFSR; died 2025-04-16). The crew were the SAME PAIR that had occupied Salyut 7 for 237 days in 1984 as the EO-3 expedition. Mir base block DOS-7 had launched 1986-02-20 21:28:23 UTC from Baikonur LC-200/39 on a Proton-K launch vehicle and was awaiting its first crew in empty orbit. Soyuz T-15 docked Mir's forward (-X) axial port on 1986-03-15 13:38 UTC = **FIRST-CREWED-VISIT-TO-MIR-CORE-MODULE-DOS-7 obs#1 first-instance NEW LOCKED**.
 
 The crew configured Mir's atmospheric systems, deployed Earth-observation instruments delivered by Progress 25 + Progress 26, and commissioned the Argon-16B flight management computer + the Lyappa hand-rotating arm port-transfer capability that would later enable Mir's modular-expansion architecture (Kvant 1987 + Kvant-2 1989 + Kristall 1990 + Spektr 1995 + Priroda 1996). On 1986-05-05 12:12 UTC Kizim and Solovyev undocked Soyuz T-15 from Mir and flew the orbital-transfer trajectory to Salyut 7 — which had been in unattended slow-tumble survival mode since the Soyuz T-14 crew departed 1985-11-21 due to the medical evacuation of CDR Vladimir Vasyutin. Docking at Salyut 7's forward axial port followed on 1986-05-06 16:58 UTC. This was the **FIRST-INTER-STATION-CREW-TRANSFER-IN-SAME-SPACECRAFT obs#1 first-instance NEW LOCKED CLASS-OF-ONE** — no subsequent mission has accomplished a station-to-station transit within a single sortie, and Soyuz T-15 remains the **ONLY-SPACEFLIGHT-TO-VISIT-TWO-DIFFERENT-SPACE-STATIONS obs#1 first-instance NEW LOCKED CLASS-OF-ONE** in spaceflight history.

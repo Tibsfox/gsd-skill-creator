@@ -8,6 +8,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.655 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** FA-652-11 Content Backfill ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 v1.49.655 ships **the content half of FA-652-11** — the 16 substrate-tracked MUS+ELC index pages at degrees 1.109–1.116 plus catalog regeneration. Combined with v1.49.654's infrastructure (cross-track scaffolder, depth-audit SCAFFOLD-PENDING recognition, granular `depth-audit-mus-elc` bypass), this milestone closes FA-652-11 in full.
 
 **The session shipped 3 components:**

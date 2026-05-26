@@ -1,58 +1,62 @@
+<!-- V650-699-CHAPTER-LIFTED v1 -->
 # v1.49.684 — Chapter 00: Summary
 
-## What shipped
+## Summary
 
-NASA degree advance 1.136 → 1.137. **STS-26 Discovery: Return-to-Flight After Challenger + 32-Month Stand-Down Closure + TDRS-3 Hermes Deployment + All-Veteran 5-Crew**. **Substrate-axis-rotation #9** from v683 Soviet-Afghan-Interkosmos-with-physician to US-Shuttle-Return-to-Flight. After 5 consecutive Soviet-substrate milestones v679-v683, substrate-axis returns to US-program at v684 closure of the 32-month-stand-down substrate-cohort that opened at v674.
+**Forward-cadence NASA degree advance to 1.137.** v1.49.684 ships STS-26 Discovery: Return-to-Flight After Challenger + 32-Month Stand-Down Closure + TDRS-C Deployment as a forward-cadence engine-state advance from NASA degree 1.136 to 1.137. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-| Item | Result |
-|---|---|
-| Tag | `v1.49.684` |
-| NASA degree | 1.136 → 1.137 |
-| Substrate axes | 21 declared (13 obs#1 NEW LOCKED + 8 cumulative + 8 substrate-anticipation) |
-| Crew | All 5 veteran: CDR Hauck (3rd flight) + PLT Covey (2nd) + MS Hilmers (2nd) + MS Nelson (3rd) + MS Lounge (2nd; died 2011) |
-| Mission duration | 4d 1h 0m 11s; Landed Edwards Runway 17 1988-10-03 16:37 UTC |
-| Lessons | #10381 + #10384 ESTABLISHED applied obs#9; #10385 obs#8 with all three recovery patterns |
+**Mission rebuilt to per-pipeline depth.** STS-26 Discovery: Return-to-Flight After Challenger + 32-Month Stand-Down Closure + TDRS-C Deployment ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/1.137/`.
 
-## Operational headline
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-STS-26 Discovery launched 1988-09-29 15:37:00 UTC from Kennedy Space Center LC-39B Florida — **first US crewed spaceflight after the loss of STS-51-L Challenger on 1986-01-28** (32 months 1 day stand-down). Mission duration 4d 1h 0m 11s. Landed Edwards Air Force Base Runway 17 1988-10-03 16:37 UTC.
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-**The 32-month stand-down period saw:** NASA's adoption of nearly all Rogers Commission recommendations (closeout substrate at v675), redesign of the Solid Rocket Booster field joints (capture-feature + heaters + composite o-ring backup), recertification of all orbiter thermal protection systems, overhaul of crew + ground procedures, and the deliberate selection of an all-veteran crew for the return-to-flight mission.
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-**Crew (all 5 veteran with prior Shuttle experience):**
-- **CDR Capt. Frederick "Rick" Hauck** (1941-04-11 Long Beach California; still living 2026) — Navy A-4/F-4/F-14 pilot; NASA Group 8 1978. Selected as RTF commander 1986 immediately post-Challenger — **FIRST EXPLICITLY-NAMED RETURN-TO-FLIGHT COMMANDER** substrate-form NEW LOCKED. 3rd flight after STS-7 + STS-51-A.
-- **PLT Col. Richard Covey** (1946-08-01 Fayetteville Arkansas; still living 2026) — USAF F-4/F-15; 2nd flight after STS-51-I (LEASAT-3 rescue v667).
-- **MS Col. David Hilmers** (1950-01-28 Clinton Iowa; still living 2026) — USMC A-6; 2nd flight after STS-51-J (v668). Post-NASA: pediatrician — substrate-pair with v683 Polyakov physician-cosmonaut.
-- **MS Col. George "Pinky" Nelson** (1950-07-13 Charles City Iowa; still living 2026) — civilian-USAF; PhD astronomy 1978; 3rd flight after STS-41-C (Solar Max repair) + STS-61-C (v672 Chang-Díaz). **Substrate-coincident-distinct**: STS-61-C landed 1986-01-18 = 10 days before Challenger loss.
-- **MS Col. John "Mike" Lounge** (1946-06-28 Denver Colorado → **2011-03-01 Houston Texas**; substrate-coincident-distinct 15y 2m 17d pre-ship) — USAF F-4; 2nd flight after STS-51-I (LEASAT-3 rescue v667 with Covey).
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-**Primary payload: TDRS-3 (TDRS-C "Hermes")** — 2,268 kg Tracking and Data Relay Satellite deployed via IUS (Inertial Upper Stage) two-stage solid rocket booster. Replaces TDRS-B that was lost on Challenger. Substrate-cumulative with TDRS-1 STS-6 1983-04. **TDRS-C-HERMES-DEPLOYMENT** substrate-form NEW LOCKED.
+## Key Features
 
-**Post-Challenger engineering changes first operational use:** redesigned SRB tang-and-clevis field joints (capture-feature + field-joint heaters + redundant composite secondary o-ring) + recertified orbiter thermal protection + overhauled flight procedures. **SRB-FIELD-JOINT-REDESIGN-FIRST-OPERATIONAL-USE** substrate-form NEW LOCKED. Substrate-anchor for SRB-design-evolution cohort cumulative through STS-114/STS-121 2005-2006 post-Columbia changes.
-
-**Substrate-axis-rotation #9 declared.** After 5 consecutive Soviet-substrate milestones (v679 retroactive Halley Armada + v680 Interkosmos-Faris Syrian + v681 Buran-shadow + year-in-space + v682 Bulgarian-redemption + v683 Afghan-Interkosmos + Polyakov physician), the substrate-axis returns to US-program with the Return-to-Flight closure. **5-SOVIET-MILESTONES-PRECEDE-1-US-MILESTONE-PATTERN** + **US-PROGRAM-SUBSTRATE-RETURN** substrate-forms both NEW LOCKED.
-
-## Same-calendar-day count
-
-Today (2026-05-18 UTC) — **13 milestones** with v684 ship (12 NASA-advance + 1 cc-cluster). Operator session-open directive sustains.
-
-## ESTABLISHED lessons sustained at obs#9 cumulative
-
-- **#10381 SUBSTRATE-AXIS-ROTATION-DISCIPLINE** ESTABLISHED applied (rotation #9; back to US-program)
-- **#10384 OPERATOR-AUTHORIZED-DEPARTURE-FROM-LESSON-PATTERN** ESTABLISHED applied (13th same-day ship)
-- **#10385 SUB-AGENT-PROMPT-FILENAME-COORDINATION-DRIFT** obs#8 with all three recovery patterns
-
-## 32-Month-Stand-Down Closure Cohort (NEW LOCKED at v684)
-
-| Milestone | Date | Substrate-form |
+| Track | Field | Value |
 |---|---|---|
-| v674 | 1986-01-28 | STS-51-L Challenger loss — substrate-anchor (catastrophic-loss) |
-| v675 | 1986-06-06 | Rogers Commission Report — investigation-policy |
-| v677 | 1986-03-13 | Soyuz T-15 — Soviet-program-continuity (during US stand-down) |
-| v678 | 1987-03-31 | Mir Kvant — Soviet-program-modular-expansion |
-| v679 | 1986-03 | Halley Armada (retroactive) — International-multi-spacecraft |
-| v680 | 1987-07-22 | Soyuz TM-3 Faris — Soviet-Interkosmos-Arab-world |
-| v681 | 1987-12-21 | Soyuz TM-4 year-in-space + Levchenko — Buran-shadow |
-| v682 | 1988-06-07 | Soyuz TM-5 Bulgarian — Interkosmos-redemption |
-| v683 | 1988-08-29 | Soyuz TM-6 Afghan + Polyakov — Afghan-Interkosmos |
-| **v684** | **1988-09-29** | **STS-26 RTF Discovery — substrate-cohort CLOSES at v684** |
+| NASA | Mission name | STS-26 Discovery: Return-to-Flight After Challenger + 32-Month Stand-Down Closure + TDRS-C Deployment |
+| NASA | Degree from | 1.136 |
+| NASA | Degree to | 1.137 |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
+
+## Cross-References
+
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.683** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.685** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
+
+## Engine Position
+
+| Track | At v1.49.683 close | At v1.49.684 close |
+|---|---|---|
+| NASA degree | 1.136 | **1.137** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
+
+## Infrastructure
+
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/1.137/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-684-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.684` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.683](../v1.49.683/00-summary.md) · **Next:** [v1.49.685](../v1.49.685/00-summary.md)

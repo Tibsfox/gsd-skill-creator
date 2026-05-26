@@ -8,6 +8,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.670 advances the engine from 1.124 to 1.125 with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** STS-61-B Atlantis 2nd Flight EASE/ACCESS ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 v1.49.670 ships the **fourth consecutive forward-cadence degree-advance** after the v664+v665+v666 counter-cadence cluster CLOSE. STS-61-B Atlantis (NSSDC 1985-104A) is the 23rd Shuttle flight and the 2nd flight of OV-104 Atlantis (first operational mission after v668 maiden). Launched 1985-11-26 00:29:00 UTC LC-39A KSC (NIGHT LAUNCH). 7-person crew: CDR Shaw (2nd flight; Spacelab-1 STS-9 PLT veteran) + PLT O'Connor (USMC rookie; future safety chief) + MS1 Cleave (PhD environmental engineering; Group 9 rookie) + MS2 Spring (Army Lt Col; Group 9 rookie; EASE/ACCESS EVA-er) + MS3 Ross (USAF Col; Group 9 rookie; EASE/ACCESS EVA-er; future record-tying 7-flight career) + PS1 Neri Vela (Mexican electrical engineer; first Mexican astronaut; FIRST-MEXICAN-ASTRONAUT obs#1) + PS2 Walker (McDonnell Douglas CFES industry PS; 3rd career flight; FIRST-INDUSTRY-PS-3-FLIGHT-CAREER obs#1). Payload: 3 commercial communication satellites (MORELOS-B Mexican; AUSSAT-2 Australian; SATCOM Ku-2 RCA Americom US) all deployed Days 1-3 + 2 EVAs (Days 5-6) by Spring + Ross conducting EASE/ACCESS experiments — first orbital truss-assembly and structure-erection demonstration, foundational for Freedom + ISS programs. 28.5° standard-inclination ~370 km altitude. 6d 21h 04m 49s mission, 109 orbits. Edwards AFB Runway 22 lakebed landing 1985-12-03 22:33:49 UTC.
 
 **Substrate-form anchors at v670:** nine obs#1 first-instances + seven cumulative cohort observations.

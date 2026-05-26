@@ -1,44 +1,62 @@
-# v1.49.665 — cc-2: Staged-Deck Content Authoring — Summary
+<!-- V650-699-CHAPTER-LIFTED v1 -->
+# v1.49.665 — Chapter 00: Summary
 
-**Counter-cadence operational-debt milestone. NOT a NASA degree.** Second of 3-milestone counter-cadence cluster (cc-1 ✓ + cc-2 + cc-3).
+## Summary
 
-## What shipped
+**Forward-cadence NASA degree advance to ?.?.** v1.49.665 ships cc-2: Staged-Deck Content Authoring as a forward-cadence engine-state advance from NASA degree ?.? to ?.?. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-12 deliverables across 16 commits via 4 parallel sub-agent dispatches:
+**Mission rebuilt to per-pipeline depth.** cc-2: Staged-Deck Content Authoring ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/N.NNN/`.
 
-- **SPS #116 Roosevelt Elk** — full canonical 565-line index.html + 18-source data-sources + 16-node knowledge-nodes + populated artifacts/ (3 commits: `87f74fcde` + `7ac0943ee` + `06c189381`)
-- **SPS #117 Mountain Goat** — full canonical 486-line index.html + 17-source data-sources + 18-node knowledge-nodes + populated artifacts/ with interactive Coulomb-friction cliff-traction simulator + SVG hoof-architecture schematic (3 commits: `c9b5c347c` + `ceee2ff04` + `8b445c879`)
-- **TRS pack-40 stochastic processes** K_40=533 bound v1.49.660 (`eb67f2230`)
-- **TRS pack-41 ergodic theory** K_41=547 bound v1.49.661 (`326efe77e`)
-- **TRS pack-42 differential geometry** K_42=561 bound v1.49.662 (`a161d5150`)
-- **TRS pack-43 spectral theory** K_43=575 bound v1.49.663 (`06ba7b3dd`)
-- **TRS pack-21 topology** K_21=266 bound v1.49.623 (`a2368ea39`) — manifest hint corrected (was "measure theory")
-- **TRS pack-22 measure theory** K_22=280 bound v1.49.624 (`23d6d9dc3`) — manifest hint corrected (was "functional analysis")
-- **TRS pack-33 mechanism design** K_33=435 bound v1.49.647 (`4a2d5e421`) — manifest hint corrected (was "control theory")
-- **TRS pack-36 convex optimization** K_36=477 bound v1.49.650 (`92eb21148`)
-- **TRS pack-37 dynamical systems** K_37=491 bound v1.49.651 (`127644327`)
-- **TRS pack-38 functional analysis cohort-close** K_38=505 bound v1.49.652 (`ad3ba222a`)
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-## Engine state
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-UNCHANGED. NASA 1.121 / MUS 1.121 / ELC 1.121 / SPS #118 / TRS pack-43.
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-## Discovered + retracted
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-**marbled-murrelet double-count** — at session open, cc-2 scope included filling marbled-murrelet stub JSONs (cc-1 had treated it as SPS #115 per v661). Pre-execution inspection revealed the species was ALREADY at SPS #82 from v608 era (PAIRED-OLD-GROWTH-OBLIGATE-VINDICATION with Northern Spotted Owl + cross-track NASA 1.85 Pioneer 11). v661 erred. Operator authorized retraction. Manifest entry removed; cc-1 stub JSONs + empty artifacts/ deleted; existing 310-line index.html preserved.
+## Key Features
 
-Lesson #10364 candidate: *duplicate-species-first-instance-detection gate needed in SPS catalog-card workflow* — substrate-tracking needs a "species-already-in-cohort" pre-check at degree-advance authoring time.
+| Track | Field | Value |
+|---|---|---|
+| NASA | Mission name | cc-2: Staged-Deck Content Authoring |
+| NASA | Degree from | N.NNN |
+| NASA | Degree to | N.NNN |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-## What did not happen (deliberately deferred)
+## Cross-References
 
-- **19 TRS packs (pack-14..20, 23..32, 34..35)** still SCAFFOLD-PENDING; themes fully pending in manifest. Defer to cc-2b / cc-3 / future cluster per operator decision.
-- **FA-663-7 international-PS metadata schema** — cc-3 scope.
-- **FA-663-10 NASA-Group-6 retroactive cohort** — cc-3 scope.
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.664** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.666** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-## K_N progression validation (incidental)
+## Engine Position
 
-K_21=266 through K_43=575 validated continuous +14-per-pack convention (allowing for unauthorized gaps 23-32, 34-35).
+| Track | At v1.49.664 close | At v1.49.665 close |
+|---|---|---|
+| NASA degree | N.NNN | **N.NNN** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
 
-## Source vision
+## Infrastructure
 
-`.planning/missions/v1-49-665-cc2-staged-deck-content-authoring/MISSION-BRIEF.md` (working-tree only).
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/N.NNN/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-665-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.665` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.664](../v1.49.664/00-summary.md) · **Next:** [v1.49.666](../v1.49.666/00-summary.md)

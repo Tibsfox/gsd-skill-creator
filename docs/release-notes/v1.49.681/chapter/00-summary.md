@@ -1,38 +1,62 @@
+<!-- V650-699-CHAPTER-LIFTED v1 -->
 # v1.49.681 — Chapter 00: Summary
 
-## What shipped
+## Summary
 
-NASA degree advance 1.133 → 1.134. **Soyuz TM-4: First Year-in-Space Crew (Titov + Manarov 365d 22h 39m) + Buran-Test-Pilot Cosmonaut-Researcher Levchenko (died 1988-08-06 brain tumor 8m 1d post-flight; substrate-form-meaningful in-program memorial) + Romanenko + Aleksandrov EO-1 Return**. Substrate-axis-rotation #6 from v680 Soviet-Interkosmos-Arab-world to v681 Soviet-Buran-shadow-with-year-in-space.
+**Forward-cadence NASA degree advance to 1.134.** v1.49.681 ships Soyuz TM-4: First Year-in-Space Crew (Titov + Manarov 365d 22h) + Buran-Test-Pilot Levchenko as a forward-cadence engine-state advance from NASA degree 1.133 to 1.134. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-| Item | Result |
-|---|---|
-| Tag | `v1.49.681` |
-| NASA degree | 1.133 → 1.134 |
-| Substrate axes | 21 declared (13 obs#1 NEW LOCKED + 8 cumulative + 9 substrate-anticipation) |
-| Crew | CDR Titov (twice-survived launch abort; first year-in-space) + FE Manarov (first Lak/Caucasus cosmonaut; year-in-space) + CR Levchenko (Buran-test-pilot; died 8m post-flight) |
-| Mission durations | EO-3 365d 22h 39m (Titov + Manarov) + Levchenko 7d 21h visiting |
-| Lessons | #10381 + #10384 ESTABLISHED applied obs#6 cumulative; #10385 obs#5 with Governance-and-Chain-Declarations literal directive |
+**Mission rebuilt to per-pipeline depth.** Soyuz TM-4: First Year-in-Space Crew (Titov + Manarov 365d 22h) + Buran-Test-Pilot Levchenko ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/1.134/`.
 
-## Operational headline
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-Soyuz TM-4 launched 1987-12-21 11:18:03 UTC from Baikonur Cosmodrome LC-1 (Gagarin's Start) on a Soyuz-U2 (11A511U2) launch vehicle. Mir docking 1987-12-23 12:51 UTC at +X aft port.
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-**Commander Col Vladimir Georgievich Titov** (1947-01-01 Sretensk Chita Oblast Russian SFSR → still living 2026) — Soviet Air Force test pilot whose career was marked by twice surviving catastrophic launch aborts: **Soyuz T-8 1983-04-20** lost-rendezvous when an antenna deployment failure prevented dock with Salyut 7; returned same day. **Soyuz T-10-1 1983-09-26 launch-pad abort** — an RD-107 first-stage engine ignited a fire 90 seconds before liftoff; the Launch Escape System pulled the capsule clear at 14-17 g for 5 seconds. Titov + Strekalov landed safely 4 km from the pad. **FIRST COSMONAUT TO TWICE SURVIVE A LAUNCH ABORT** substrate-form NEW LOCKED.
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-**Flight Engineer Col Musa Khiramanovich Manarov** (1951-03-22 Baku Azerbaijan SSR → still living 2026) — Soviet Air Force; rookie first flight at age 36. **First Lak (Caucasus ethnic group from Republic of Dagestan) cosmonaut.** Subsequently: Soyuz TM-11/TM-12 EO-7 1990-1991 (175d). Cumulative 541.6 days in space.
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-**Cosmonaut-Researcher Col Anatoli Semyonovich Levchenko** (1941-05-21 Krasnokutsk Kharkov Oblast Ukrainian SSR → 1988-08-06 Moscow Russian SFSR) — Soviet Air Force test pilot at Gromov Flight Research Institute. **Buran-cosmonaut-detachment 1981-1988.** Soyuz TM-4 was his orbital qualification flight (7d 21h 58m). Returned 1987-12-29 aboard Soyuz TM-3 with Romanenko + Aleksandrov (EO-1 closure). **Died 1988-08-06 of brain tumor — 8 months 1 day post-flight — substrate-form-meaningful in-program memorial** (substrate-form-distinct from preceding substrate-coincident-distinct calendar coincidences). Hero of the Soviet Union (posthumous 1990).
+## Key Features
 
-**FIRST YEAR-IN-SPACE CREW.** Titov + Manarov inherit Mir EO-3 long-duration assignment + ultimately become the **FIRST CREW TO COMPLETE A FULL YEAR IN SPACE**: launched 1987-12-21 11:18 UTC + landed Soyuz TM-6 1988-12-21 09:57 UTC = **365d 22h 39m 47s** (exactly one calendar year + 1 hour). Substrate-anchor for cumulative YEAR-IN-SPACE cohort: Polyakov 437.7d 1994-1995 (longest-ever single flight) + Kelly/Kornienko 340d 2015-2016 + Vande Hei 355d 2021-2022 + Rubio 371d 2022-2023.
+| Track | Field | Value |
+|---|---|---|
+| NASA | Mission name | Soyuz TM-4: First Year-in-Space Crew (Titov + Manarov 365d 22h) + Buran-Test-Pilot Levchenko |
+| NASA | Degree from | 1.133 |
+| NASA | Degree to | 1.134 |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-**Buran shadow program.** The Soviet Buran shuttle program (Energia-Buran reusable launch system) maintained a parallel cosmonaut-test-pilot training pipeline from 1978 onward. Buran-detachment cosmonauts flew Soyuz/Mir cosmonaut-researcher visiting flights as orbital qualification prior to potential Buran flights. Levchenko was the first to fly. Buran flew unmanned once 1988-11-15 then was cancelled 1993 due to Soviet collapse.
+## Cross-References
 
-## Same-calendar-day count
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.680** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.682** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-Today (2026-05-18 UTC) — **10 milestones** with v681 ship: v672 + v673 + v674 + v675 + v676-cc + v677 + v678 + v679 + v680 + v681. Nine NASA-advancing milestones + one cc-cluster. Operator session-open directive sustains. Calendar-day rolls 2026-05-19 UTC in ~4h.
+## Engine Position
 
-## ESTABLISHED lessons sustained
+| Track | At v1.49.680 close | At v1.49.681 close |
+|---|---|---|
+| NASA degree | 1.133 | **1.134** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
 
-- **#10381 SUBSTRATE-AXIS-ROTATION-DISCIPLINE** ESTABLISHED applied obs#6 cumulative (rotation #6)
-- **#10384 OPERATOR-AUTHORIZED-DEPARTURE-FROM-LESSON-PATTERN** ESTABLISHED applied obs#6 cumulative (10th same-day ship)
-- **#10385 SUB-AGENT-PROMPT-FILENAME-COORDINATION-DRIFT** obs#5 cumulative with **Governance-and-Chain-Declarations literal directive added** per FA-680-11 (avoids HTML entity regex mismatch)
+## Infrastructure
+
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/1.134/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-681-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.681` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.680](../v1.49.680/00-summary.md) · **Next:** [v1.49.682](../v1.49.682/00-summary.md)

@@ -1,61 +1,62 @@
-# v1.49.672 — Summary
+<!-- V650-699-CHAPTER-LIFTED v1 -->
+# v1.49.672 — Chapter 00: Summary
 
-**Type:** engine-cadence degree-advancing milestone — NASA 1.125 → 1.126. **First forward-cadence degree-advance after v671 cc cluster.**
-**Predecessor:** v1.49.671 cc cluster (NASA 1.125 unchanged); previous degree-advance was v1.49.670 STS-61-B.
-**Engine state:** NASA 1.125 → **1.126 STS-61-C Columbia 7th Flight Chang-Díaz First-Hispanic-American**. MUS/ELC/SPS/TRS SCAFFOLD-PENDING.
-**Scope:** STS-61-C sub-agent-dispatch-degree-advance + 13 artifacts + cross-track scaffolds + release notes.
+## Summary
 
-## Mission overview
+**Forward-cadence NASA degree advance to 1.126.** v1.49.672 ships STS-61-C Columbia 7th Flight Chang-Díaz First-Hispanic-American as a forward-cadence engine-state advance from NASA degree 1.125 to 1.126. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-**STS-61-C Columbia** (NSSDC 1986-003A) — 24th Shuttle flight; OV-102 Columbia 7th flight. Launched 1986-01-12 11:55:00 UTC LC-39A KSC after **7 launch-attempt scrubs** (program record). 7-person crew: CDR Hoot Gibson (2nd flight) + PLT Bolden (rookie; future NASA Administrator 2009-2017) + MS1 **Chang-Díaz** (Costa Rican-born; PhD MIT plasma physics; FIRST-HISPANIC-AMERICAN-ASTRONAUT obs#1) + MS2 Hawley (2nd flight) + MS3 Pinky Nelson (2nd flight; MMU EVA veteran) + PS1 Cenker (RCA Astro Electronics industry PS) + PS2 **Bill Nelson** (US Rep D-FL; House Subcommittee chair; CONGRESSIONAL-PS-COHORT obs#2). Payload SATCOM Ku-1 + CHAMP + MSL-2 + Goddard HRS testing. **Penultimate Shuttle flight before STS-51-L disaster (10d residual on CHALLENGER-FORWARD-SHADOW).** **First KSC-planned-Edwards-diverted landing** 1986-01-18 13:58:51 UTC Runway 22. 28.45° ~333 km. 6d 2h 03m 51s, 96 orbits.
+**Mission rebuilt to per-pipeline depth.** STS-61-C Columbia 7th Flight Chang-Díaz First-Hispanic-American ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/1.126/`.
 
-## Substrate-form anchors at v672
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-**Eight obs#1 first-instances NEW LOCKED:**
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-1. FIRST-HISPANIC-AMERICAN-ASTRONAUT (Chang-Díaz)
-2. BOLDEN-AS-FUTURE-NASA-ADMINISTRATOR-FIRST-FLIGHT
-3. MULTIPLE-LAUNCH-ATTEMPT-RECORD (7 scrubs)
-4. KSC-PLANNED-EDWARDS-DIVERTED-LANDING (first weather-diversion)
-5. RCA-ASTRO-ELECTRONICS-INDUSTRY-PS-COHORT (Cenker)
-6. CHALLENGER-FORWARD-SHADOW-PENULTIMATE-FLIGHT (10d residual)
-7. CLUSTER-RESUME-FORWARD-CADENCE-POST-CC-INTERRUPTION (first post-cc resumption)
-8. CHANG-DIAZ-AS-COSTA-RICAN-BORN-IMMIGRANT-ASTRONAUT
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-**Ten cumulative cohort observations:** CONGRESSIONAL-PS-COHORT obs#2 + GIBSON/HAWLEY/NELSON-2ND-FLIGHT (3-of-7 NASA crew) + MMU-EVA-VETERAN-COHORT + MSL-2-MATERIALS-SCIENCE obs#2 + EDWARDS-LANDING obs#8 (diverted) + ET LWT obs#25 + PNW-CONNECTION-COHORT obs#2 + TFNG-COHORT (5-of-5 NASA) + CHALLENGER-FORWARD-SHADOW residual 10d + same-day count 1/4.
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-## Engine state delta
+## Key Features
 
-| Track | Pre-v672 | Post-v672 | Note |
-|---|---|---|---|
-| NASA | 1.125 STS-61-B Atlantis 2nd | **1.126 STS-61-C Columbia Chang-Díaz** | DEGREE ADVANCE |
-| MUS  | 1.125 SCAFFOLD-PENDING | 1.126 SCAFFOLD-PENDING | Hold |
-| ELC  | 1.125 SCAFFOLD-PENDING | 1.126 SCAFFOLD-PENDING | Hold |
-| SPS  | #118 (no new species) | #118 | Hold |
-| TRS  | pack-43 | pack-43 | Hold |
-
-## Phase digest
-
-| Phase | Deliverable | Style |
+| Track | Field | Value |
 |---|---|---|
-| 837 | Mission brief | inline (gitignored) |
-| 838 | degree-sync.json + NASA 1.126 index.html (633 lines / 141,226 bytes; 104%/111% PASS) | sub-agent dispatch obs#3 |
-| 838 | 13 artifacts across 5 categories | sub-agent dispatch; zero forbidden-substring leakage |
-| 839 | MUS/ELC 1.126 SCAFFOLD-PENDING + 5-file release notes | inline |
-| 840 | bump + pre-tag-gate (incl new step 0.5) + commit + tag + push + GH release + drift cleanup | inline |
+| NASA | Mission name | STS-61-C Columbia 7th Flight Chang-Díaz First-Hispanic-American |
+| NASA | Degree from | 1.125 |
+| NASA | Degree to | 1.126 |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-## Cluster-resume + post-cc context
+## Cross-References
 
-v672 is the **first forward-cadence degree-advance after v671 cc cluster** (Lesson #10371 first operational instance, closed at v671). CLUSTER-RESUME-FORWARD-CADENCE-POST-CC-INTERRUPTION obs#1 first-instance NEW LOCKED at v672 W3 — substrate-form-stability validated through cc-interruption + resumption cycle. Same-day count at v672 close: 1/4 (calendar 2026-05-18; well under threshold).
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.671** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.673** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-## Carry-forward (FA-672-N)
+## Engine Position
 
-8 carry-forward items. FA-672-1 = STS-51-L Challenger v676 candidate (CHALLENGER-FORWARD-SHADOW closes; disaster substrate-handling required). FA-672-3 + FA-672-4 = Lessons #10369 + #10370 → **ESTABLISHED candidates at v672 W3** (obs#3).
+| Track | At v1.49.671 close | At v1.49.672 close |
+|---|---|---|
+| NASA degree | 1.125 | **1.126** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
 
-## Verification
+## Infrastructure
 
-```bash
-node tools/depth-audit.mjs 1.126 | head -5
-find www/tibsfox/com/Research/NASA/1.126/artifacts/ -type f | wc -l   # 13
-grep "milestone:" .planning/STATE.md
-```
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/1.126/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-672-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.672` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.671](../v1.49.671/00-summary.md) · **Next:** [v1.49.673](../v1.49.673/00-summary.md)

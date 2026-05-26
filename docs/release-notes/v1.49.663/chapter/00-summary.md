@@ -1,33 +1,62 @@
-# v1.49.663 — STS-51-F Challenger Spacelab-2 / Executive Summary
+<!-- V650-699-CHAPTER-LIFTED v1 -->
+# v1.49.663 — Chapter 00: Summary
 
-**Released:** 2026-05-16
-**Cadence:** engine-cadence — thirteenth degree-advancing milestone; **FOUR-CONSECUTIVE-SAME-CALENDAR-DAY-DEGREE-ADVANCE-CLUSTER obs#1 first-instance** (v660+v661+v662+v663 all 2026-05-16); fourth consecutive direct-author-with-W2-dispatch-hybrid cadence
-**NASA Mission:** STS-51-F Challenger Spacelab-2 (NSSDC 1985-063A) — Degree 1.121
+## Summary
 
-## Engine state advance
+**Forward-cadence NASA degree advance to 1.121.** v1.49.663 ships STS-51-F Challenger Spacelab-2 as a forward-cadence engine-state advance from NASA degree 1.120 to 1.121. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-- **NASA:** 1.120 → **1.121 STS-51-F Challenger Spacelab-2** (nineteenth Shuttle flight + 8th OV-099 Challenger flight + FIRST-MAIN-ENGINE-IN-FLIGHT-ABORT-TO-ORBIT (ATO) obs#1 first-instance (SSME #1 center-engine failed T+345s due to high-temperature-sensor false-trigger anomaly; ATO mode achieved 193 km × 322 km orbit ~70 nmi short of planned 178 nmi; substrate-novel + substrate-anchor for FUTURE-IN-FLIGHT-ABORT-COHORT zero subsequent through STS-135) + SPACELAB-CADENCE-NUMBERED-OUT-OF-ORDER COHORT-COMPLETION obs#2 closure (Spacelab-1+3+2 cohort numbered out-of-order complete; Lesson #10349 substrate-form closed) + HENIZE-OLDEST-FIRST-FLIGHT-AGE-58 obs#1 first-instance (K. G. Henize MS3 PhD astronomy U Michigan 1954 + NASA Group 6 1967 + age 58y 6m at launch; substrate-distinct from John Glenn STS-95 1998 age 77 = 2nd flight) + FIRST-PHD-ASTRONOMER-AS-FLIGHT-MS obs#1 (Henize professional astronomer) + ENGLAND 18y 11m 25d wait-to-first-flight obs#2 cumulative (after Lind 19y v661; NASA-GROUP-6-1967-DEFERRED-FLYER-COHORT substrate-form opens) + IPS (Instrument Pointing System) FIRST-FLIGHT obs#1 (ESA-built solar-pointing platform; 13-experiment science load; partially-fixed via on-orbit Musgrave repair) + SUN-POINTING-PLATFORM-AS-PAYLOAD substrate-form + MUSGRAVE-2ND-FLIGHT + POLYMATH-AS-MULTI-FLIGHT-ASTRONAUT obs#1 first-instance (F. Story Musgrave MD + 6-PhD-and-MD-degrees-holder; 6-flight career anticipation) + EDWARDS-AFB-MANDATORY-LANDING-COHORT obs#3 cumulative + 8TH-OV-099-CHALLENGER-FLIGHT obs#1 (most-flown orbiter) + STS-51-F-PAD-ABORT 1985-07-12 obs#1 + PAD-ABORT-AS-PRECURSOR-TO-IN-FLIGHT-ABORT obs#1 + ONLY-FLIGHT-CREW-MAJORITY obs#1 first-instance (5 of 7 crew = only-flight rate; substrate-novel) + ET-18 LWT-11 fifteenth unpainted-orange; 7-crew Fullerton CDR + Bridges PLT (only-flight) + Musgrave MS1 + England MS2 (only-flight; 18y wait) + Henize MS3 (only-flight; oldest first-flight) + Acton PS1 (only-flight) + Bartoe PS2 (only-flight); Edwards landing 1985-08-06 19:45:26 UTC Runway 23 7d 22h 45m 26s 126 orbits)
-- **MUS:** 1.120 → **1.121 John Mellencamp *Scarecrow* (Riva Records/PolyGram 824 865-1; release 1985-08-05 = DUAL-ANCHOR INSIDE STRICT obs#10 cumulative)** HEARTLAND-AMERICANA-ROCK-AS-GENRE-PIVOT obs#1 first-instance + FARM-AID-PRECURSOR-AS-SUBSTRATE-ANCHOR obs#1 (Farm Aid 1985-09-22 organized by Mellencamp + Willie Nelson + Neil Young) + ALBUM-FORM obs#18 sustains; "R.O.C.K. in the U.S.A." #2 + "Small Town" #6 + "Lonely Ol' Night" #6 chart singles; album US #2 + 5× Platinum US RIAA; FA-663-1 RESOLVED
-- **ELC:** 1.120 → **1.121 Live Aid concert 1985-07-13** (launch -16d INSIDE strict) GLOBAL-MULTI-VENUE-LIVE-CHARITY-CONCERT-AS-CULTURAL-EVENT obs#1 first-instance + DUAL-VENUE-TRANSCONTINENTAL-CONCERT obs#1 + 16-HOUR-CONCERT-DURATION obs#1 + THREE-DEGREE-CHARITY-MUSIC-ARC v657→v660→v663 obs#1 first-instance NEW LOCKED + SAME-DAY-DUAL-VENUE-MUSICIAN obs#1 (Phil Collins Concorde-supersonic cross-Atlantic to perform at both Wembley + JFK same-day); ~1.9 billion TV viewers across 150 countries; raised ~$127M for African famine relief; Queen's 20-minute set greatest-live-rock-performance; SUBSTRATE-MONOCULTURE-RISK-RESOLUTION obs#12 ENDURING-DEEP-SUSTAINED-PATTERN at 12-distinct-cultural-event-categories across 13 consecutive degrees; CASCADE-CONTAINMENT #10333 obs#17; FA-663-2 RESOLVED
-- **SPS:** #117 → **#118 Steller's Jay (*Cyanocitta stelleri* Gmelin 1788)** Corvidae/Passeriformes/Aves; FIRST-CORVID + CORVID-AS-MARBLED-MURRELET-NEST-PREDATOR-substrate-cross-resonance-CLOSURE-WITH-V661 + FIRST-PACIFIC-COAST-CRESTED-CORVID + FIRST-OPPORTUNISTIC-OMNIVORE-INTELLIGENCE-CORVID — 4-FIRST-INSTANCE substrate-pair at single cohort entry; NEST-PREDATOR-CLOSES-COHORT-WITH-PREY-AT-V661-MARBLED-MURRELET substrate-form obs#1 first-instance (Steller's Jay primary corvid nest-predator of Marbled Murrelet eggs in old-growth PNW conifer forests; substrate-novel PREDATOR-AT-N+2-PREY-AT-N substrate-closure 2-degree substrate-time-lag); within-class-family-pivot Bovidae→Corvidae per Lesson #10345 density-taper continuing; Georg Wilhelm Steller 1741 Vitus Bering expedition naturalist namesake (also Steller's Sea Eagle + Steller's Sea Lion + extinct Steller's Sea Cow); HUMBOLDT obs#13 SUSTAINED-DEEP-CONSOLIDATION; FA-663-4 RESOLVED
-- **TRS:** pack-42 K_42=561 → **pack-43 K_43=575** (14 new edges e562-e575; spectral theory — operator theory + Hilbert space + bounded-and-unbounded operators + compact operators + Fredholm theory + spectral theorem self-adjoint + functional calculus + resolvent + spectrum classifications + Sturm-Liouville theory + Weyl essential spectrum + scattering theory + perturbation theory + Hilbert-Schmidt operators; 5-level substrate-coherence with STS-51-F: IPS solar-pointing as spectral-decomposition + SSME-failure as eigenvalue-crossing-bifurcation + Henize-astronomy as Hilbert-space-of-stellar-spectra + Musgrave-polymath as multi-modal-spectrum-decomposition + Spacelab-2-13-experiments as eigenmode-decomposition; FA-663-5 RESOLVED; 31-of-31 single-pass anticipated)
+**Mission rebuilt to per-pipeline depth.** STS-51-F Challenger Spacelab-2 ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/1.121/`.
 
-## Mission ledger
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-| Field | Value |
-|---|---|
-| NSSDC ID | 1985-063A |
-| Vehicle | OV-099 Challenger — eighth flight (most-flown orbiter at this point) |
-| Pad abort | **1985-07-12 T-3s** — SSME high-pressure-oxidizer-turbopump anomaly; first observed (PAD-ABORT-AS-PRECURSOR-TO-IN-FLIGHT-ABORT obs#1) |
-| Launch | 1985-07-29 21:00:00 UTC (17:00:00 EDT), LC-39A KSC (17 days after pad abort) |
-| **In-flight abort** | **T+345s SSME #1 center failed — ATO mode (FIRST-IN-FLIGHT-ABORT-TO-ORBIT obs#1)** |
-| Landing | 1985-08-06 19:45:26 UTC (12:45:26 PDT), Edwards AFB Runway 23 (3rd consecutive Edwards landing) |
-| Duration | 7d 22h 45m 26s |
-| Orbit | 193 km × 322 km (ATO-curtailed; planned ~352 km) |
-| Inclination | 49.5° |
-| Crew | C. G. Fullerton CDR + R. D. Bridges PLT + F. S. Musgrave MS1 + A. W. England MS2 + K. G. Henize MS3 + L. W. Acton PS1 + J. F. Bartoe PS2 |
-| External Tank | **ET-18 (LWT-11)** — fifteenth unpainted-orange |
-| Payload | Spacelab-2 module + IPS (Instrument Pointing System ESA-built; FIRST-FLIGHT obs#1); 13 experiments including HRTS + SUSIM + UVST + 4 solar telescopes + cosmic-ray observatory + plasma-wave-receiver + helium-superfluid-experiment |
-| EVA | NONE (Spacelab mission excludes EVA; on-orbit IPS-repair via remote-manipulator only) |
-| Carry-forward | Musgrave: future STS-31 Hubble-deploy + STS-61 Hubble-servicing + STS-80 longest-Shuttle 1996; Henize: died 1993 climbing Mt. Everest age 66 (substrate-anticipation; disciplined-non-revelation); England + Bridges + Acton + Bartoe: only-flight + retired/left NASA; Fullerton: 2nd-and-final flight; STS-51-I 21d residual to Leasat-3-rescue-recovery |
-| Successor candidate | v1.49.664 STS-51-I Discovery 1985-08-27 (Leasat-3 RESCUE-RECOVERY closing 5-degree forward-shadow from v660; Van Hoften + Fisher direct-spacewalker rescue) |
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
+
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
+
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
+
+## Key Features
+
+| Track | Field | Value |
+|---|---|---|
+| NASA | Mission name | STS-51-F Challenger Spacelab-2 |
+| NASA | Degree from | 1.120 |
+| NASA | Degree to | 1.121 |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
+
+## Cross-References
+
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.662** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.664** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
+
+## Engine Position
+
+| Track | At v1.49.662 close | At v1.49.663 close |
+|---|---|---|
+| NASA degree | 1.120 | **1.121** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
+
+## Infrastructure
+
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/1.121/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-663-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.663` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.662](../v1.49.662/00-summary.md) · **Next:** [v1.49.664](../v1.49.664/00-summary.md)

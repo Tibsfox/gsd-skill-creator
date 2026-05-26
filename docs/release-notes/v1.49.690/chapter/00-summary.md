@@ -1,29 +1,62 @@
+<!-- V650-699-CHAPTER-LIFTED v1 -->
 # v1.49.690 — Chapter 00: Summary
 
-**Type:** engine-cadence degree-advancing milestone — US-Shuttle-Hubble-Space-Telescope-launch substrate. Substrate-axis-rotation #15 intra-US substrate-form-distinct (planetary → HST-launch).
+## Summary
 
-**Mission:** STS-31 Discovery launched 1990-04-24 12:33:51 UTC from Kennedy LC-39B; landed Edwards Runway 22 1990-04-29 13:49:57 UTC; duration 5d 1h 16m 6s. **5th post-Challenger US flight + first Hubble Space Telescope launch.** Primary payload Hubble Space Telescope (11,110 kg; 2.4m primary mirror; deployed at 614 × 615 km × 28.5° = highest operational shuttle orbit to 1990). 357-day inter-flight gap (LONG-INTER-FLIGHT-GAP substrate-class first observation).
+**Forward-cadence NASA degree advance to 1.143.** v1.49.690 ships STS-31 Discovery: First Hubble Space Telescope Launch + Discovery's 10th Flight as a forward-cadence engine-state advance from NASA degree 1.142 to 1.143. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-**HST-OBSERVATIONS-FROM-LEO substrate-cohort opens at v690.** Substrate-realizations preserved at v-future: 5 servicing missions STS-61 + STS-82 + STS-103 + STS-109 + STS-125 + projected operations through 2040+.
+**Mission rebuilt to per-pipeline depth.** STS-31 Discovery: First Hubble Space Telescope Launch + Discovery's 10th Flight ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/1.143/`.
 
-**Crew (4 still living 2026 + 1 substrate-coincident-distinct memorial):**
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-- CDR Capt. Loren Shriver (USAF F-4/F-100/F-106 + Edwards test pilot; 2nd flight; STS-51-C Discovery DoD v666; rotation-RTF-commander cohort obs#3)
-- PLT Charles Bolden Jr. (USMC AV-8B Harrier Vietnam combat 100+; 2nd flight; STS-61-C with Chang-Diaz v672; **future NASA Administrator 2009-2017**)
-- MS Steven Hawley Ph.D. astrophysicist (3rd flight; STS-41-D Discovery maiden v666 + STS-61-C v672; **first HST deployment astronaut**; future STS-82 HSM-2 1997 substrate-pair with Lee v689)
-- MS Bruce McCandless II Navy (2nd flight; STS-41-B 1984-02 **first untethered MMU spacewalker — first non-tethered EVA in history**; **died 2017-12-21 substrate-coincident-distinct memorial 9y pre-v690**)
-- MS Kathryn Sullivan Ph.D. geologist (2nd flight; STS-41-G 1984-10 **first US female spacewalker** 3h 27m with Leestma; future NOAA Administrator 2014-2017)
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-**Engine state:** NASA 1.142 → **1.143 STS-31 Discovery + Hubble Space Telescope + 614km highest-operational-shuttle-orbit**.
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-**Substrate-axis-rotation #15:** v689 US-Shuttle-planetary-deployment-Atlantis-Venus → v690 US-Shuttle-Hubble-Space-Telescope-launch = intra-US substrate-form-distinct rotation.
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-**13 obs#1 first-instances NEW LOCKED:** FIRST-HUBBLE-SPACE-TELESCOPE-LAUNCH + HIGHEST-OPERATIONAL-SHUTTLE-ORBIT-614KM-AT-V690 + DISCOVERY-OV-103-TENTH-FLIGHT + SHRIVER-RTF-VETERAN-COMMANDER-2ND-FLIGHT + BOLDEN-PILOT-FUTURE-NASA-ADMINISTRATOR-2009-2017 + HAWLEY-FIRST-HST-DEPLOYMENT-ASTRONAUT + MCCANDLESS-FIRST-UNTETHERED-MMU-SPACEWALKER-VETERAN-AT-STS-41-B + MCCANDLESS-DEATH-2017-12-21-SUBSTRATE-COINCIDENT-DISTINCT + SULLIVAN-FIRST-US-FEMALE-SPACEWALKER-VETERAN + EDWARDS-RUNWAY-22-USED-THREE-TIMES-IN-13-MONTHS + POST-RTF-CADENCE-RESUMPTION-357-DAYS + HST-OBSERVATIONS-FROM-LEO-COHORT-OPENS + ENGINEERING-PROFESSIONAL-TO-POLITICAL-APPOINTMENT-TRANSITION-COHORT-OPENS.
+## Key Features
 
-**10 cumulative cohort observations:** Rotation #15 + Operator-departure #15 (SIX-MILESTONE-CONTINUOUS-SESSION substrate-form candidate) + Cluster-resume #18 + Inter-flight #16 (LONG-INTER-FLIGHT-GAP) + Memorial #17 **promoted to ESTABLISHED** + Sub-agent-coordination #14 + RTF-cadence-continuation #3 + Forward-memorial-cohort obs#4 + Dual-direction-hard-block #18 + STATE-MD-normalizer #20.
+| Track | Field | Value |
+|---|---|---|
+| NASA | Mission name | STS-31 Discovery: First Hubble Space Telescope Launch + Discovery's 10th Flight |
+| NASA | Degree from | 1.142 |
+| NASA | Degree to | 1.143 |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-**8 substrate-anticipation forward-shadows:** HST spherical aberration discovery + 5 HST servicing missions + Bolden NASA Administrator + McCandless death.
+## Cross-References
 
-**ESTABLISHED lessons sustained/promoted:** #10381 obs#15 + #10384 obs#15 + #10376 obs#16 + **#10380 PROMOTED obs#17** + #10385 obs#14. All three recovery patterns sustained 12 consecutive degrees (v679-v690).
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.689** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.691** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-**Memorial substrate respect.** McCandless died 2017 (27y 8m post-STS-31). Substrate-form FORWARD-MEMORIAL-AFTER-MISSION-COMPLETION cohort obs#4 cumulative (Glushko v687 56d + Walker v689 12y + Cleave v689 34y + McCandless v690 28y).
+## Engine Position
+
+| Track | At v1.49.689 close | At v1.49.690 close |
+|---|---|---|
+| NASA degree | 1.142 | **1.143** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
+
+## Infrastructure
+
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/1.143/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-690-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.690` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.689](../v1.49.689/00-summary.md) · **Next:** [v1.49.691](../v1.49.691/00-summary.md)

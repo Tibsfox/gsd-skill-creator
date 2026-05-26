@@ -1,61 +1,62 @@
-# v1.49.668 — Summary
+<!-- V650-699-CHAPTER-LIFTED v1 -->
+# v1.49.668 — Chapter 00: Summary
 
-**Type:** engine-cadence degree-advancing milestone — NASA 1.122 → 1.123. **Second consecutive forward-cadence degree-advance after v664+v665+v666 counter-cadence cluster CLOSE.**
-**Predecessor:** v1.49.667 (STS-51-I Discovery LEASAT-3 Rescue; NASA 1.122).
-**Engine state:** NASA 1.122 → **1.123 STS-51-J Atlantis Maiden-Flight DoD-Classified**. MUS/ELC/SPS/TRS SCAFFOLD-PENDING acceptable per cc-cluster precedent.
-**Scope:** STS-51-J direct-author-degree-advance + 13 artifacts + cross-track scaffolds + catalog-drift fix + release notes.
+## Summary
 
-## Mission overview
+**Forward-cadence NASA degree advance to 1.123.** v1.49.668 ships STS-51-J Atlantis Maiden-Flight DoD-Classified as a forward-cadence engine-state advance from NASA degree 1.122 to 1.123. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-**STS-51-J Atlantis** (NSSDC 1985-092A) — 21st Shuttle flight; OV-104 Atlantis maiden flight (4th operational orbiter after Columbia + Challenger + Discovery; orbiter-fleet-buildup phase complete after 4 years 6 months). Launched 1985-10-03 15:15:30 UTC LC-39A KSC. 5-person crew: CDR Bobko (3rd flight; MOL-transfer Group 7 1969) + PLT Grabe (rookie) + MS1 Hilmers (rookie) + MS2 Stewart (2nd flight; first-Army-multi-flight) + PS1 Pailes (USAF MSE; only flight). 2-satellite DSCS-III dual-payload deploy via IUS-3 Day-3. ~518 km altitude (highest DoD-classified orbit to date). 4d 1h 44m 38s mission, 64 orbits. Edwards AFB Runway 23 lakebed landing.
+**Mission rebuilt to per-pipeline depth.** STS-51-J Atlantis Maiden-Flight DoD-Classified ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/1.123/`.
 
-## Substrate-form anchors at v668
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-**Six obs#1 first-instances NEW LOCKED:**
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-1. ATLANTIS-MAIDEN-FLIGHT — OV-104 first flight; 4th operational orbiter
-2. 4TH-OPERATIONAL-ORBITER-FIRST-FLIGHT — 4-orbiter-fleet complete (4-year-6-month buildup)
-3. DSCS-III-COHORT-OPERATIONAL — 2 DSCS-III via IUS-3 dual-payload (substrate-novel)
-4. BOBKO-3RD-FLIGHT — MOL-transfer Group 7; multi-program-veteran obs#5
-5. STEWART-AS-FIRST-ARMY-ASTRONAUT-MULTI-FLIGHT — STS-41-B MMU + STS-51-J
-6. HIGHEST-DOD-CLASSIFIED-ORBIT + SHORTEST-SHUTTLE-MISSION-WITH-IUS-DEPLOY — substrate-novel mission profile
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-**Six cumulative cohort observations:** DOD-CLASSIFIED-SHUTTLE obs#2 + IUS-AS-CLASSIFIED-DELIVERY obs#2 + USAF-MSE obs#2 + EDWARDS-MANDATORY-LANDING obs#5 + CLUSTER-RESUME-FORWARD-CADENCE obs#2 + TFNG cohort.
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-## Engine state delta
+## Key Features
 
-| Track | Pre-v668 | Post-v668 | Note |
-|---|---|---|---|
-| NASA | 1.122 STS-51-I Discovery | **1.123 STS-51-J Atlantis Maiden DoD** | DEGREE ADVANCE |
-| MUS  | 1.122 SCAFFOLD-PENDING | 1.123 SCAFFOLD-PENDING | scaffold-stub-only |
-| ELC  | 1.122 SCAFFOLD-PENDING | 1.123 SCAFFOLD-PENDING | scaffold-stub-only |
-| SPS  | #118 Steller's Jay (v663) | #118 (no new species) | Hold |
-| TRS  | pack-43 spectral theory (v663) | pack-43 (no new pack) | Hold |
-
-## Phase digest
-
-| Phase | Deliverable | Style |
+| Track | Field | Value |
 |---|---|---|
-| W0 | Mission brief | inline (gitignored) |
-| W1 | STATE.md + degree-sync.json | inline |
-| W2 | NASA 1.123 index.html (568 lines / 101,242 bytes) | inline; WARN depth not FAIL |
-| W3 | 13 artifacts | inline |
-| W4 | scaffold + catalog drift fix | inline |
-| W5 | 5-file release-notes | inline (this commit) |
-| T14 | bump + commit + tag + push + GH release | inline |
+| NASA | Mission name | STS-51-J Atlantis Maiden-Flight DoD-Classified |
+| NASA | Degree from | 1.122 |
+| NASA | Degree to | 1.123 |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-## Cluster-resume context
+## Cross-References
 
-v668 is the **second** forward-cadence degree-advance after v664+v665+v666 cc cluster CLOSE 2026-05-17. CLUSTER-RESUME-FORWARD-CADENCE obs#2 cumulative NEW LOCKED. Same-calendar-day degree-advance count today: 2 (v667 + v668). Lesson #10356 threshold = 4. Capacity for 2 more same-day degree-advances before re-trigger.
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.667** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.669** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-## Carry-forward (FA-668-N)
+## Engine Position
 
-9 carry-forward items inheriting v667 FA-667-N (lightly updated). FA-668-1 = next NASA target (STS-61-A Spacelab-D1 OR STS-61-B Atlantis 2nd flight). FA-668-3 = NASA 1.123 page depth at WARN (could be expanded).
+| Track | At v1.49.667 close | At v1.49.668 close |
+|---|---|---|
+| NASA degree | 1.122 | **1.123** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
 
-## Verification
+## Infrastructure
 
-```bash
-node tools/depth-audit.mjs 1.123 | head -5
-find www/tibsfox/com/Research/NASA/1.123/artifacts/ -type f | wc -l   # 13
-grep "milestone:" .planning/STATE.md
-```
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/1.123/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-668-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.668` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.667](../v1.49.667/00-summary.md) · **Next:** [v1.49.669](../v1.49.669/00-summary.md)

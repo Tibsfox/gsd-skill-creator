@@ -1,71 +1,62 @@
-# v1.49.674 — Summary
+<!-- V650-699-CHAPTER-LIFTED v1 -->
+# v1.49.674 — Chapter 00: Summary
 
-**Type:** engine-cadence degree-advancing milestone — **substrate-form-critical**. CHALLENGER-FORWARD-SHADOW carried across ~50 prior milestones closes at v674 with catastrophic-loss substrate-state. NASA 1.127 → 1.128.
-**Predecessor:** v1.49.673 (Voyager 2 Uranus Encounter; NASA 1.127).
-**Engine state:** NASA 1.127 → **1.128 STS-51-L Challenger Disaster**. MUS/ELC/SPS/TRS SCAFFOLD-PENDING.
-**Scope:** STS-51-L sub-agent-dispatch-degree-advance with memorial-substrate-respect + 13 artifacts + cross-track scaffolds + 5-file release-notes.
+## Summary
 
-## Crew lost (named first)
+**Forward-cadence NASA degree advance to ?.?.** v1.49.674 ships STS-51-L Challenger (NASA 1.127→1.128) — CHALLENGER-FORWARD-SHADOW Catastrophic Closure as a forward-cadence engine-state advance from NASA degree ?.? to ?.?. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-1. CDR Francis R. "Dick" Scobee (1939-05-19 → 1986-01-28) — USAF Lt Col; STS-41-C Solar Max repair commander; 2nd career flight; Cle Elum WA
-2. PLT Michael J. Smith (1945-04-30 → 1986-01-28) — USN Cdr; Vietnam veteran A-6 Intruder pilot; rookie; Beaufort NC
-3. MS1 Judith A. Resnik (1949-04-05 → 1986-01-28) — TFNG Group 8 1978; PhD electrical engineering; STS-41-D Discovery maiden; first Jewish American in space; Akron OH
-4. MS2 Ronald E. McNair (1950-10-21 → 1986-01-28) — TFNG Group 8 1978; PhD physics MIT; STS-41-B; 2nd African-American in space + first African-American multi-flight; Lake City SC
-5. MS3 Ellison S. Onizuka (1946-06-24 → 1986-01-28) — TFNG Group 8 1978; USAF Lt Col; STS-51-C; first Asian-American in space + first Japanese-American astronaut; Kealakekua HI
-6. PS1 Gregory B. Jarvis (1944-08-24 → 1986-01-28) — Hughes Aircraft Co industry payload specialist; rookie only flight; Detroit MI
-7. PS2 Sharon Christa McAuliffe (1948-09-02 → 1986-01-28) — Concord NH high school social studies + American history teacher; Teacher in Space Project selection from 11,000 applicants; first teacher in space + first private-citizen astronaut + first social-studies-educator astronaut; Boston MA
+**Mission rebuilt to per-pipeline depth.** STS-51-L Challenger (NASA 1.127→1.128) — CHALLENGER-FORWARD-SHADOW Catastrophic Closure ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/N.NNN/`.
 
-## Mission overview
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-**STS-51-L Challenger** (NSSDC 1986-009A designated) — 25th Shuttle flight; OV-099 Challenger 10th and final flight. Launched 1986-01-28 11:38:00 EST (16:38:00 UTC) from LC-39B Kennedy Space Center after 6 prior scrubs since 1986-01-22. Ambient temperature at pad 36°F (coldest Shuttle launch); overnight low ~24°F producing icicles on Fixed Service Structure. **Vehicle lost at T+73.124 seconds** at altitude ~46,000 ft, Mach 1.92. Root cause per Rogers Commission Report (1986-06-06): right SRB aft field joint primary + secondary O-ring failed to seal due to cold-temperature elastomer hardening; combustion gas blowby cut through External Tank LH₂ aft dome at T+58.788s; ET structural failure at T+73.124s. Morton Thiokol engineers (Boisjoly + McDonald + Ebeling) raised cold-temperature O-ring concerns in 1986-01-27 telecon; engineering recommendation NOT to launch was overridden by management after pressure from NASA Marshall.
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-Payload: TDRS-B (Tracking and Data Relay Satellite, planned IUS-3 to GEO) + Spartan-Halley (free-flying Halley's Comet observation platform) + Teacher in Space Project (McAuliffe's 6 planned in-orbit lessons).
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-## Substrate-form anchors at v674
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-**Four obs#1 first-instances NEW LOCKED:**
+## Key Features
 
-1. CHALLENGER-FORWARD-SHADOW-CATASTROPHIC-CLOSURE (the substrate-form carried ~50 milestones closes; closure does not erase the shadow)
-2. FIRST-FATAL-IN-FLIGHT-CREWED-LOSS-OF-US-VEHICLE (substrate-distinct from Apollo 1 ground fire)
-3. TEACHER-IN-SPACE-AS-PAYLOAD-SPECIALIST-PROGRAM-FIRST-INSTANCE (program never resumed in same form)
-4. O-RING-FAILURE-AT-COLD-TEMPERATURE-LAUNCH-AS-ROOT-CAUSE
-
-**Ten cumulative cohort observations:** CHALLENGER-OV-099-10TH-FINAL-FLIGHT + JEWISH-AMERICAN-IN-SPACE obs#2 + AFRICAN-AMERICAN-IN-SPACE obs#3 + AFRICAN-AMERICAN-MULTI-FLIGHT obs#2 + ASIAN-AMERICAN-IN-SPACE obs#2 + HUGHES-AIRCRAFT-INDUSTRY-PS obs#1 + 32-MONTH-SHUTTLE-STAND-DOWN-OPENS + CLUSTER-RESUME-FORWARD-CADENCE-POST-CC-INTERRUPTION obs#3 + ET LWT obs#26 + PNW-CONNECTION-COHORT obs#3.
-
-**Nine substrate-anticipation forward-shadows opening:** Rogers Commission + Feynman demonstration + post-Challenger culture change + 32-month stand-down forward + STS-26 RTF Discovery 1988-09-29 + Barbara Morgan Educator MS substrate-anticipation + Challenger Center for Space Science Education + McAuliffe memorial substrate + Astronaut Memorial Mirror 1991.
-
-## Engine state delta
-
-| Track | Pre-v674 | Post-v674 | Note |
-|---|---|---|---|
-| NASA | 1.127 Voyager 2 Uranus | **1.128 STS-51-L Challenger Disaster** | DEGREE ADVANCE (catastrophic-closure) |
-| MUS  | 1.127 SCAFFOLD-PENDING | 1.128 SCAFFOLD-PENDING | Hold |
-| ELC  | 1.127 SCAFFOLD-PENDING | 1.128 SCAFFOLD-PENDING | Hold |
-| SPS  | #118 | #118 | Hold |
-| TRS  | pack-43 | pack-43 | Hold |
-
-## Phase digest
-
-| Phase | Deliverable | Style |
+| Track | Field | Value |
 |---|---|---|
-| 845 | Mission brief | inline (gitignored) |
-| 846 | degree-sync.json + NASA 1.128 index.html (675 lines / 148,221 bytes; 104%/106% PASS) | sub-agent dispatch with memorial-substrate-respect |
-| 846 | 13 artifacts across 5 categories | sub-agent dispatch; respectful substrate-handling; zero forbidden-substring leakage |
-| 847 | MUS/ELC 1.128 SCAFFOLD-PENDING + 5-file release notes | inline |
-| 848 | bump + pre-tag-gate + commit + tag + push + GH release + drift cleanup | inline |
+| NASA | Mission name | STS-51-L Challenger (NASA 1.127→1.128) — CHALLENGER-FORWARD-SHADOW Catastrophic Closure |
+| NASA | Degree from | N.NNN |
+| NASA | Degree to | N.NNN |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-## CHALLENGER-FORWARD-SHADOW closure
+## Cross-References
 
-The substrate-form has been carried across ~50 prior milestones since CHALLENGER-9TH-FLIGHT-FORWARD-SHADOW first opened, with sequentially decreasing residual: v668 3m 25d → v669 2m 28d → v670 1m 25d → v672 10d → v673 4d → **v674 0d CLOSURE**. The shadow closes here at catastrophic-loss substrate-state. **Substrate-form remains substantiated as historical reality — closure does not erase the shadow.**
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.673** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.675** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-## Carry-forward (FA-674-N)
+## Engine Position
 
-8 carry-forward items. FA-674-3 = CHALLENGER-FORWARD-SHADOW formally CLOSED (no longer carry-forward). FA-674-1 = v675 candidate operator decision (Soviet Mir / Halley armada / Rogers Commission / cc cluster). FA-674-4 + FA-674-5 = Lessons #10379 + #10380 emitted at v674.
+| Track | At v1.49.673 close | At v1.49.674 close |
+|---|---|---|
+| NASA degree | N.NNN | **N.NNN** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
 
-## Verification
+## Infrastructure
 
-```bash
-node tools/depth-audit.mjs 1.128 | head -5
-find www/tibsfox/com/Research/NASA/1.128/artifacts/ -type f | wc -l   # 13
-grep "milestone:" .planning/STATE.md
-```
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/N.NNN/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-674-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.674` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.673](../v1.49.673/00-summary.md) · **Next:** [v1.49.675](../v1.49.675/00-summary.md)

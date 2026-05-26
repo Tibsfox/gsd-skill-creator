@@ -1,60 +1,62 @@
-# Summary — v1.49.659
+<!-- V650-699-CHAPTER-LIFTED v1 -->
+# v1.49.659 — Chapter 00: Summary
 
-**Mission:** Phase-2 Build-Out: Manifests, Spectra, Retrieval, Audit (counter-cadence)
-**Released:** 2026-05-16
-**Engine state:** UNCHANGED (NASA 1.117 / MUS 1.117 / ELC 1.117 / SPS #114 / TRS pack-39 K_39=519)
-**Seventh counter-cadence cleanup milestone** in 2026
+## Summary
 
-## Headline
+**Forward-cadence NASA degree advance to ?.?.** v1.49.659 ships Phase-2 Build-Out: Manifests, Spectra, Retrieval, Audit as a forward-cadence engine-state advance from NASA degree ?.? to ?.?. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-May 2026 arxiv synthesis section 2.4 — four out of eight enumerated code-level Phase-2 changes shipped. Plus full counterfactual-trace audit machinery bootstrap (probe banks + reports + runner + skill version bumps driven by audit findings).
+**Mission rebuilt to per-pipeline depth.** Phase-2 Build-Out: Manifests, Spectra, Retrieval, Audit ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/N.NNN/`.
 
-## Numbers
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-- **28 commits** on dev ahead of v1.49.658
-- **70+ new tests** all green; full src typecheck clean
-- **25/25** concept slots filled in `agent-systems` college department
-- **17 probes** authored across 4 skills in `.planning/patterns/skill-audits/probes/`
-- **24 paired sub-agents** dispatched in the v2 broader-bank audit cycle (~5 min wall, ~1.3M tokens)
-- **3 skill version bumps**: intent-router v1.0.0 → v1.0.1 → v1.0.2, spectral-topology-preflight v1.0.0 → v1.0.1
-- **2 audit-session reports** (v1 + v2)
-- **4/4 skip-path probes** correctly deferred (skill calibration verified)
-- **0 findings** from `scripts/apply-to-self.mjs --range v1.49.658..HEAD` after the 2-test false-positive fix
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-## What shipped (compact)
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-1. **agent-systems department** — 20 new RosettaConcept stubs across 5 wings completing 25/25 slots
-2. **TypedSkillSpec** — V2 type alongside SkillSpec; capabilities + manifest deps + behavioural audit + compilation targets; new `TYPED_SKILL_SPEC_TYPE_HASH`; 14 tests
-3. **7-value TopologyType + (ρ, Δ, κ) coordination signature** — pipeline / leader-worker / mesh / ring / tree / bipartite / critique-route; closed-form analytic spectra per Parks & Alharthi `2605.11453` Appendix A; emitted into TEAM.md frontmatter
-4. **`src/memory/strategies/`** — RetrievalStrategy interface + BM25Strategy lexical channel; idempotent indexing; custom-tokeniser hook; 21 tests
-5. **CTA machinery bootstrap** — 17-probe bank + 2 audit reports + `tools/skill-audit/run.mjs` v0.1 + 3 skill version bumps
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-## Engine state at v659 open and close
+## Key Features
 
-| Track | At v659 open | At v659 close | Delta |
-|---|---|---|---|
-| NASA | 1.117 | 1.117 | 0 (STS-51-D queued for next degree-advancing milestone) |
-| MUS | 1.117 | 1.117 | 0 |
-| ELC | 1.117 | 1.117 | 0 |
-| SPS | #114 | #114 | 0 |
-| TRS | pack-39 K_39=519 | pack-39 K_39=519 | 0 |
+| Track | Field | Value |
+|---|---|---|
+| NASA | Mission name | Phase-2 Build-Out: Manifests, Spectra, Retrieval, Audit |
+| NASA | Degree from | N.NNN |
+| NASA | Degree to | N.NNN |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-## Counter-cadence position
+## Cross-References
 
-v1.49.659 is the seventh counter-cadence cleanup in 2026 (after v1.49.585, .653, .654, .655, .656, .658). Two back-to-back counter-cadence (v658 + v659) is unusual but defensible: v658 was MUS/ELC operational-debt; v659 is research-driven build-out from the arxiv synthesis. The counter-cadence-discipline doc predicted productive cadence every ~30 milestones; we're running closer to every-other right now, but the v659 work is engine-substrate (typed manifests, audit machinery) that future degree-advancing milestones can consume.
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.658** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.660** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-## Lessons codified (full list in 04-lessons.md)
+## Engine Position
 
-- **#10335** — counter-cadence milestones can be research-driven, not just operational-debt
-- **#10336** — pass-rate-blind audit (CTA) machinery requires probe banks + runner + skill versioning together; partial implementations don't surface SIP deltas
-- **#10337** — platform-constraint check is load-bearing for any recommendation-emitting skill (spectral-topology-preflight v1.0.1 supplement)
-- **#10338** — skip-rule calibration is measurable via skip-path probes; 4/4 firing rate this audit cycle
-- **#10339** — false-positive apply-to-self findings are best resolved in-place (fix the test) not via allowlist (the allowlist is for true bypasses)
+| Track | At v1.49.658 close | At v1.49.659 close |
+|---|---|---|
+| NASA degree | N.NNN | **N.NNN** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
 
-## Carry-forward to v1.49.660
+## Infrastructure
 
-- **FA-658-1, FA-658-2, FA-658-3** — unchanged from v658 (this milestone didn't touch MUS/SPS/NASA-title)
-- **FA-659-1** — STS-51-D Discovery (NASA 1.117 → 1.118), original v659 scope deferred
-- **FA-659-2** — Skill-audit runner v0.2 (`collect` subcommand for trace aggregation)
-- **FA-659-3** — Stateful audit harness for spectral-topology-preflight's second skip clause
-- **FA-659-4** — June 2026 arxiv scan (mechanical, ~21 min)
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/N.NNN/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-659-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.659` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.658](../v1.49.658/00-summary.md) · **Next:** [v1.49.660](../v1.49.660/00-summary.md)

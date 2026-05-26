@@ -1,50 +1,62 @@
-# Summary — v1.49.658
+<!-- V650-699-CHAPTER-LIFTED v1 -->
+# v1.49.658 — Chapter 00: Summary
 
-**Mission:** MUS + ELC Catalog-Card Template Codification (counter-cadence)
-**Released:** 2026-05-16
-**Engine state:** UNCHANGED (NASA 1.117 / MUS 1.117 / ELC 1.117 / SPS #114 / TRS pack-39 K_39=519)
-**Sixth counter-cadence cleanup milestone** in 2026
+## Summary
 
-## Headline
+**Forward-cadence NASA degree advance to ?.?.** v1.49.658 ships MUS + ELC Catalog-Card Template Codification as a forward-cadence engine-state advance from NASA degree ?.? to ?.?. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-`/btw` from prior session resolved: MUS catalog cards no longer "blowing up". Normative template codified, BLOCKER gate operational at pre-tag-gate step 8, 174 over-spec cards (71 MUS + 103 ELC) backfilled to template with substrate-rich content relocated to linked per-degree pages.
+**Mission rebuilt to per-pipeline depth.** MUS + ELC Catalog-Card Template Codification ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/N.NNN/`.
 
-## Numbers
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-- **174 cards backfilled** (71 MUS + 103 ELC)
-- **172 per-degree pages** modified with relocation block (`<!-- v1.49.658-relocated:start ... :end -->`)
-- **2 R1 failures** (ELC pages with no corresponding per-degree dir; flagged for manual review)
-- **Max card byte count post-backfill:** MUS 907B / ELC 746B (both well under 1,500B BLOCKER threshold)
-- **23 new vitest assertions** across 3 test files
-- **Lesson #10334 codified** — antecedent #10268 (gate-not-vigilance)
-- **3 FA-658-N forward-routes** to v1.49.660 (NASA per-degree title backfill, SPS catalog create, TRS field retrofit)
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-## Source
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-`/btw` from prior session `b6bf3f0f` 2026-05-16T09:30:14Z while v1.49.657 was in flight:
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-> please review https://tibsfox.com/Research/MUS/ — completed degrees cards are blowing up, they need to follow a template that is concise like the 1.0 card; the detail lives in the linked page. Please make sure we follow a template to prevent drift in the future.
+## Key Features
 
-## What shipped
+| Track | Field | Value |
+|---|---|---|
+| NASA | Mission name | MUS + ELC Catalog-Card Template Codification |
+| NASA | Degree from | N.NNN |
+| NASA | Degree to | N.NNN |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-| Deliverable | Path |
-|---|---|
-| Template spec module | `tools/catalog-card-template/spec.mjs` |
-| Card extractor + validator + renderer | `tools/catalog-card-template/extractor.mjs` |
-| Gate extension (BLOCKER, exit 8) | `tools/update-catalog-indexes.mjs` |
-| MUS backfill script | `tools/mus-card-backfill.mjs` |
-| ELC backfill script | `tools/elc-card-backfill.mjs` |
-| 12 unit + 11 integration assertions | `tests/{unit,integration}/...` |
-| 2 fixtures | `tests/fixtures/catalog-card-gate/` |
+## Cross-References
 
-## What did NOT ship (forward-routed)
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.657** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.659** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-| FA | Forward-route | Target | Reason |
-|---|---|---|---|
-| FA-658-1 | NASA per-degree `<title>` backfill | v1.49.660 | NASA index JS-rendered; needs separate `<title>` byte audit |
-| FA-658-2 | SPS catalog index creation | v1.49.660 | no catalog page exists yet; needs CREATE from `degree-sync.json` |
-| FA-658-3 | TRS field retrofit + pack-39 add | v1.49.660 | architecturally clean already; missing `pack-K` + `bridge-categories` fields |
+## Engine Position
 
-## Successor
+| Track | At v1.49.657 close | At v1.49.658 close |
+|---|---|---|
+| NASA degree | N.NNN | **N.NNN** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
 
-**v1.49.659 — STS-51-D Discovery** (NASA 1.117→1.118; sixteenth Space Shuttle flight + fourth flight of OV-103; FIRST POLITICIAN IN SPACE Sen. Jake Garn + Charles D. Walker second commercial-PS + Hoffman+Griggs "flyswatter" improvised EVA-rescue; launch 1985-04-12 LC-39A landing 1985-04-19 KSC; NSSDC 1985-028A).
+## Infrastructure
+
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/N.NNN/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-658-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.658` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.657](../v1.49.657/00-summary.md) · **Next:** [v1.49.659](../v1.49.659/00-summary.md)

@@ -1,61 +1,62 @@
-# v1.49.673 — Summary
+<!-- V650-699-CHAPTER-LIFTED v1 -->
+# v1.49.673 — Chapter 00: Summary
 
-**Type:** engine-cadence degree-advancing milestone — NASA 1.126 → 1.127. **First non-Shuttle mission since v667 STS-51-I (12 milestones of Shuttle substrate broken).** First-instance application of Lesson #10376 INTER-FLIGHT-GAP-AS-SUBSTRATE-ROOM.
-**Predecessor:** v1.49.672 (STS-61-C Columbia 7th Flight Chang-Díaz; NASA 1.126).
-**Engine state:** NASA 1.126 → **1.127 Voyager 2 Uranus Encounter First-Uranus-Flyby**. MUS/ELC/SPS/TRS SCAFFOLD-PENDING.
+## Summary
 
-## Mission overview
+**Forward-cadence NASA degree advance to 1.127.** v1.49.673 ships Voyager 2 Uranus Encounter as a forward-cadence engine-state advance from NASA degree 1.126 to 1.127. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-**Voyager 2 Uranus Encounter** (NSSDC 1977-076A) — first and only Uranus encounter to date (40+ years later still the only one). Launched 1977-08-20 Cape Canaveral LC-41 Titan IIIE-Centaur AC-37; Uranus closest approach 1986-01-24 17:59 UTC at 81,500 km above cloud tops; encounter window 1986-01-22 → 1986-01-29; spacecraft age 8 years 5 months 4 days; 19.2 AU from Sun; ~2h 45m round-trip light time. 11 science instruments aboard (ISS + IRIS + PPS + UVS + PLS + LECP + CRS + MAG + PRA + PWS + RSS). Used Uranus gravity assist to commit Neptune trajectory (1989).
+**Mission rebuilt to per-pipeline depth.** Voyager 2 Uranus Encounter ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/1.127/`.
 
-## Substrate-form anchors at v673
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-**Nine obs#1 first-instances NEW LOCKED:**
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-1. VOYAGER-2-URANUS-FIRST-FLYBY-FIRST-ONLY-EVER (40+ years later still only)
-2. MIRANDA-MOST-EXTREME-TOPOGRAPHY-IN-SOLAR-SYSTEM (Verona Rupes 20 km cliffs)
-3. TILTED-DIPOLE-MAGNETOSPHERE-DISCOVERY (59° offset)
-4. 10-NEW-URANIAN-MOONS-DISCOVERED (moon count 5 → 15)
-5. INTER-FLIGHT-GAP-AS-SUBSTRATE-ROOM-FIRST-APPLICATION (Lesson #10376 first apply)
-6. NON-SHUTTLE-MISSION-IN-V667-RUN (first since v667)
-7. URANUS-AXIS-TILT-97-77-DEGREES (extreme axial tilt confirmed)
-8. GRAVITY-ASSIST-TO-NEPTUNE-COMMITMENT
-9. ICE-GIANT-CATEGORIZATION (substrate-novel from gas-giant)
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-**Four cumulative cohort observations:** VOYAGER-2-MULTI-PLANET obs#3 + VOYAGER-PROGRAM obs#5 + CLUSTER-RESUME-FORWARD-CADENCE-POST-CC-INTERRUPTION obs#2 + CHALLENGER-FORWARD-SHADOW residual 4 days.
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-## Engine state delta
+## Key Features
 
-| Track | Pre-v673 | Post-v673 | Note |
-|---|---|---|---|
-| NASA | 1.126 STS-61-C Chang-Díaz | **1.127 Voyager 2 Uranus** | DEGREE ADVANCE (non-Shuttle) |
-| MUS  | 1.126 SCAFFOLD-PENDING | 1.127 SCAFFOLD-PENDING | Hold |
-| ELC  | 1.126 SCAFFOLD-PENDING | 1.127 SCAFFOLD-PENDING | Hold |
-| SPS  | #118 | #118 | Hold |
-| TRS  | pack-43 | pack-43 | Hold |
-
-## Phase digest
-
-| Phase | Deliverable | Style |
+| Track | Field | Value |
 |---|---|---|
-| 841 | Mission brief | inline (gitignored) |
-| 842 | degree-sync.json + NASA 1.127 index.html (653 lines / 140,267 bytes; 103%/99% PASS) | sub-agent dispatch obs#4 |
-| 842 | 13 artifacts across 5 categories | sub-agent dispatch; zero forbidden-substring leakage |
-| 843 | MUS/ELC 1.127 SCAFFOLD-PENDING + 5-file release notes | inline |
-| 844 | bump + pre-tag-gate + commit + tag + push + GH release + drift cleanup | inline |
+| NASA | Mission name | Voyager 2 Uranus Encounter |
+| NASA | Degree from | 1.126 |
+| NASA | Degree to | 1.127 |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-## Same-day count + inter-flight-gap context
+## Cross-References
 
-v673 = 2/4 same-calendar-day count (v672 + v673 today; v671 cc cluster doesn't count). Capacity for 2 more before threshold re-trigger. v673 demonstrates Lesson #10376 first-instance application — Voyager 2 Uranus encounter fell exactly in the inter-flight gap between STS-61-C (1986-01-12 v672) and STS-51-L (1986-01-28 v676 candidate); substrate-room for cross-program work confirmed.
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.672** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.674** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-## Carry-forward (FA-673-N)
+## Engine Position
 
-9 carry-forward items. FA-673-3 + FA-673-4 + FA-673-5 = Lessons #10369 + #10370 + #10373 → **ESTABLISHED candidates at v673 W3** (post-soak threshold reached). FA-673-1 = v674 candidate operator decision (STS-51-L vs Soviet Soyuz T-15 vs Halley armada vs ESA Giotto vs cc cluster).
+| Track | At v1.49.672 close | At v1.49.673 close |
+|---|---|---|
+| NASA degree | 1.126 | **1.127** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
 
-## Verification
+## Infrastructure
 
-```bash
-node tools/depth-audit.mjs 1.127 | head -5
-find www/tibsfox/com/Research/NASA/1.127/artifacts/ -type f | wc -l   # 13
-grep "milestone:" .planning/STATE.md
-```
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/1.127/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-673-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.673` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.672](../v1.49.672/00-summary.md) · **Next:** [v1.49.674](../v1.49.674/00-summary.md)

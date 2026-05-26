@@ -1,38 +1,62 @@
-# v1.49.650 — STS-41-D Discovery / Executive Summary
+<!-- V650-699-CHAPTER-LIFTED v1 -->
+# v1.49.650 — Chapter 00: Summary
 
-**Released:** 2026-05-13
-**Cadence:** engine-cadence — sixth consecutive degree-advancing milestone after the v1.49.645 engine-cadence resume, the v1.49.646 cadence-sustain, the v1.49.647 cadence-sustain-at-three, the v1.49.648 cadence-sustain-at-four, and the v1.49.649 cadence-sustain-at-five; completing the **six-degree-in-two-day cadence** (v645+v646+v647 same-day 2026-05-12 + v648+v649+v650 same-day 2026-05-13)
-**NASA Mission:** STS-41-D Discovery (NSSDC 1984-093A) — Degree 1.114
+## Summary
 
-## Engine state advance
+**Forward-cadence NASA degree advance to 1.114.** v1.49.650 ships STS-41-D Discovery as a forward-cadence engine-state advance from NASA degree 1.113 to 1.114. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-- **NASA:** 1.113 → **1.114 STS-41-D Discovery** (maiden flight of OV-103 Discovery + third operational orbiter in Shuttle fleet + first RSLS pad abort after main-engine ignition 1984-06-26 SSME #1 sluggish main fuel valve + 64-day refurbish-and-reflight cycle + first woman engineer in space J. A. Resnik PhD EE Maryland 1977 + second American woman in space + first Jewish woman of any nationality + first commercial payload specialist C. D. Walker McDonnell Douglas + three-satellite commercial deploy SBS-4 + Leasat-2 frisbee + Telstar-3C + OAST-1 102-ft solar array + Hartsfield 5th dual-flight CDR MOL-transferee + Resnik forward-shadow STS-51-L 1986-01-28 + compound TFNG-disaster forward-shadow density third-of-three across v648 McNair + v649 Scobee + v650 Resnik + 97 orbits Edwards Runway 17 lake bed 1984-09-05)
-- **MUS:** 1.113 → **1.114 Stevie Wonder *The Woman in Red* (Motown 6108ML 1984-08-28)** DUAL-ANCHOR INSIDE STRICT obs#4 (launch -2d + landing -8d INSIDE strict; FIRST-AFRICAN-AMERICAN-FOUNDED-MAJOR-LABEL-AS-COHORT-ENTRY + first blind Oscar winner + Oscar dedication to Nelson Mandela; FA-650-1 RESOLVED)
-- **ELC:** 1.113 → **1.114 1984 Summer Olympics closing ceremony 1984-08-12** (launch -18d INSIDE strict; SUBSTRATE-MONOCULTURE-RISK-RESOLUTION-BY-FRAMING-DISTINCTION obs#5 ENDURING-DEEP-SUSTAINED-PATTERN; 4 cross-track NASA+ELC+SPS resonances incl. Sam-the-Olympic-Eagle ↔ Bald-Eagle convergence; FA-650-2 RESOLVED)
-- **SPS:** #110 → **#111 Bald Eagle (*Haliaeetus leucocephalus* / *H. l. washingtoniensis* PNW subspecies)** (FIRST-Accipitridae + FIRST-Accipitriformes + DDT-recovery-cascade + ESA-flagship + DIURNAL-APEX-AFTER-NOCTURNAL-APEX completes pair with v647 Spotted Owl + HUMBOLDT-STYLE-SUBSPECIES-AWARENESS obs#6 SUSTAINED-DEEP-CONSOLIDATION)
-- **TRS:** pack-35 K_35=463 → **pack-36 K_36=477** (14 new edges e464-e477; convex optimization — Boyd-Vandenberghe + Nesterov + Nemirovski + KKT + barrier methods + SDP + SOCP + interior-point + duality; 5-level substrate-coherence with STS-41-D: RSLS abort = LP feasibility-check, OAST-1 = SDP modal-analysis, Leasat-2 frisbee = bang-bang optimal-control, Walker CFES = SOCP process-optimization, Resnik PhD EE = optimization-engineering; FA-650-5 RESOLVED)
+**Mission rebuilt to per-pipeline depth.** STS-41-D Discovery ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/1.114/`.
 
-## Key substrate axes table
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-| Track | Pick | Anchor | Top substrate-novel primitives |
-|---|---|---|---|
-| NASA 1.114 | STS-41-D Discovery maiden | 1984-08-30 launch | MAIDEN-OV-103-AS-DELIVERABLE; FIRST-RSLS-PAD-ABORT; 64-DAY-REFURBISH-REFLIGHT; FIRST-WOMAN-ENGINEER; FIRST-JEWISH-WOMAN; FIRST-COMMERCIAL-PS; THREE-SAT-COMMERCIAL-DEPLOY; LEASAT-FRISBEE-DEPLOY; OAST-1; COMPOUND-TFNG-DISASTER-FORWARD-SHADOW-3-OF-3 |
-| MUS 1.114 | Stevie Wonder *The Woman in Red* | 1984-08-28 Motown 6108ML | FIRST-AFRICAN-AMERICAN-FOUNDED-MAJOR-LABEL; ARTIST-OWNED-STUDIO; FIRST-BLIND-OSCAR; OSCAR-AS-ANTI-APARTHEID-DEDICATION; SABC-BAN-AS-CONSEQUENCE; DUAL-ANCHOR INSIDE STRICT obs#4 |
-| ELC 1.114 | 1984 Summer Olympics closing 1984-08-12 | launch -18d INSIDE strict | US-OLYMPIC-RESURGENCE; COLD-WAR-BOYCOTT-AS-ABSENT-COMPETITOR; SAM-OLYMPIC-EAGLE-BALD-EAGLE-CONVERGENCE; SUBSTRATE-MONOCULTURE-RISK-RESOLUTION-BY-FRAMING-DISTINCTION obs#5 |
-| SPS #111 | Bald Eagle (*Haliaeetus leucocephalus*) | Accipitridae / Accipitriformes | FIRST-ACCIPITRIDAE; FIRST-ACCIPITRIFORMES; DDT-RECOVERY-CASCADE; DIURNAL-APEX-AFTER-NOCTURNAL-APEX; ESA-FLAGSHIP; HUMBOLDT-STYLE-SUBSPECIES obs#6 |
-| TRS pack-36 | convex optimization | K_36 = 477 edges; 14 new e464-e477 | INTERIOR-POINT-METHODS; KKT-CONDITIONS; SDP-SOCP-SECOND-ORDER; BARRIER-METHODS; DUALITY-THEORY; RSLS-ABORT-AS-LP-FEASIBILITY-CHECK; 5-LEVEL-SUBSTRATE-COHERENCE |
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-## Mission ledger
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-| Field | Value |
-|---|---|
-| NSSDC ID | 1984-093A |
-| Vehicle | OV-103 Discovery — maiden flight |
-| Launch | 1984-08-30 12:41:50 UTC, LC-39A KSC |
-| Landing | 1984-09-05 13:37:54 UTC, Edwards AFB Runway 17 lake bed |
-| Duration | 6d 0h 56m 04s; **97 orbits** |
-| Orbit | 346 × 354 km, 28.47° inclination |
-| Crew | H. W. Hartsfield Jr. CDR + M. L. Coats PLT + R. M. Mullane MS1 + S. A. Hawley MS2 + J. A. Resnik MS3 + C. D. Walker PS1 |
-| Pre-launch | 1984-06-25 T-9m scrub (GPC) + 1984-06-26 T-4s RSLS pad abort (SSME #1 sluggish main fuel valve) |
-| External Tank | ET-13 LWT-6 (sixth Lightweight Tank; tenth unpainted-orange per v633 cohort-counting convention) |
-| Payload manifest | Record 41,184 lb (STS-41-F consolidated) |
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
+
+## Key Features
+
+| Track | Field | Value |
+|---|---|---|
+| NASA | Mission name | STS-41-D Discovery |
+| NASA | Degree from | 1.113 |
+| NASA | Degree to | 1.114 |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
+
+## Cross-References
+
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.649** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.651** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
+
+## Engine Position
+
+| Track | At v1.49.649 close | At v1.49.650 close |
+|---|---|---|
+| NASA degree | 1.113 | **1.114** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
+
+## Infrastructure
+
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/1.114/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-650-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.650` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.649](../v1.49.649/00-summary.md) · **Next:** [v1.49.651](../v1.49.651/00-summary.md)

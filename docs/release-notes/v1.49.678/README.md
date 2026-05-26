@@ -25,6 +25,20 @@ Lesson #10385 obs#2 cumulative apply at v678; ESTABLISHED candidate at v679 if p
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.678 advances the engine from 1.130 to 1.131 with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** Mir Kvant Astrophysics Module + First Module Addition + First Western Instrument ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 Mir Kvant astrophysics module (Soviet designation 37KE No. 17501) launched 1987-03-31 00:06:16 UTC from Baikonur Cosmodrome LC-200/39 on a Proton-K (8K82K) heavy-lift launch vehicle — heaviest Soviet payload to LEO at that time at approximately 22,000 kg. Module designed by NPO Energia under general designer Valentin Glushko and Mir program lead Yuri Semenov; bus derived from the Soviet TKS military spaceplane Functional Cargo Block (FGB) — first civilian-program TKS-FGB use, establishing a design lineage that continues through Zarya FGB at ISS 1998.
 
 Kvant carried the Roentgen Observatory consisting of five X-ray and UV instruments, four of which were Western contributions — **FIRST WESTERN INSTRUMENTS ON A SOVIET SPACE STATION**: the SIRENE-2 coded-aperture X-ray imager from CNES France (PI Jacques Paul, Service d'Astrophysique CEA Saclay); the Pulsar X-1 X-ray spectrometer from the Soviet Institute for Space Research IKI (PI Rashid Sunyaev); the HEXE High Energy X-ray Experiment from Max Planck Institute for Extraterrestrial Physics Garching West Germany (PIs Joachim Trümper + Hubertus Reppin); the TTM wide-field X-ray imager from University of Birmingham UK and University of Cologne West Germany (PI Gerald Skinner via UK Department of Education and Science); and the GPC-Mir broadband X-ray spectrometer from IKI Soviet. The Roentgen Observatory operated 1987-1997 (TTM through 1989; HEXE through 1997) and recorded the X-ray flux from Supernova 1987A in the Large Magellanic Cloud 1987-1989 — the only naked-eye supernova since SN 1604 Kepler.

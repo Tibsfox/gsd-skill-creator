@@ -1,31 +1,62 @@
+<!-- V650-699-CHAPTER-LIFTED v1 -->
 # v1.49.685 — Chapter 00: Summary
 
-**Type:** engine-cadence degree-advancing milestone — US-Shuttle-DoD-classified-RTF-2-near-loss substrate. Substrate-axis-rotation #10.
+## Summary
 
-**Mission:** STS-27 Atlantis launched 1988-12-02 14:30:34 UTC from Kennedy LC-39B Florida; landed Edwards Runway 17 1988-12-06 23:36:11 UTC; duration 4d 9h 5m 37s. **Second US crewed spaceflight post-Challenger (64 days after STS-26 RTF landing).** DoD-classified payload Lacrosse-1 (codenamed Indigo/Onyx; NRO) = FIRST synthetic-aperture-radar reconnaissance satellite; substrate-anchor for 5-vehicle Lacrosse constellation 1988-2005.
+**Forward-cadence NASA degree advance to 1.138.** v1.49.685 ships STS-27 Atlantis: DoD-Classified Second Post-Challenger Flight + Near-Loss Tile Damage + Lacrosse-1 First-SAR-Recon Deployment as a forward-cadence engine-state advance from NASA degree 1.137 to 1.138. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-**Defining event:** **Near-loss tile damage**. ~T+85s post-launch, ablative insulation from RH SRB nose cap struck Atlantis: ~707 tile hits + 1 tile completely missing exposing aluminum substructure plate adjacent to L-band antenna. CDR Gibson + MS Mullane separately concluded reentry would kill the crew. Classification prevented public discussion for years. L-band antenna mounting plate acted as heat sink during reentry, sparing airframe. Mullane published declassified-era account in *Riding Rockets* (Scribner 2006).
+**Mission rebuilt to per-pipeline depth.** STS-27 Atlantis: DoD-Classified Second Post-Challenger Flight + Near-Loss Tile Damage + Lacrosse-1 First-SAR-Recon Deployment ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/1.138/`.
 
-**Substrate-form forward-shadow:** STS-27 → STS-107 Columbia loss 2003-02-01 = 15-year forward-shadow; identical root-cause class (ascent-debris strike of orbiter TPS). **FOAM-STRIKE-ASCENT-DEBRIS-NEAR-LOSS-AND-LOSS substrate-cohort opens at v685** with Columbia as substrate-realization at v-future.
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-**Crew (all still living 2026):**
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-- CDR Capt. Robert "Hoot" Gibson (Navy F-14; 3rd flight; future Mir commander STS-71)
-- PLT Col. Guy Gardner (USAF F-4/F-15; rookie; Vietnam combat 177 missions)
-- MS Col. Mike Mullane (USAF EWO; 3rd flight; first to observe own orbiter TPS damage via RMS; memoirist *Riding Rockets*)
-- MS Col. Jerry Ross (USAF Engineer; 2nd flight; future 7-flight veteran; 9-EVA construction)
-- MS Capt. Bill Shepherd (Navy SEAL; rookie; future ISS Expedition 1 Commander 2000)
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-**Engine state:** NASA 1.137 → **1.138 STS-27 Atlantis DoD-classified near-loss + Lacrosse-1 SAR**. MUS/ELC/SPS/TRS SCAFFOLD-PENDING.
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-**Substrate-axis-rotation #10:** v684 US-Shuttle-Return-to-Flight → v685 US-Shuttle-DoD-classified-RTF-2-near-loss = substrate-form-distinct rotation within US-program substrate-axis. First sustained-cadence US-program rotation.
+## Key Features
 
-**13 obs#1 first-instances NEW LOCKED:** DOD-CLASSIFIED-SECOND-POST-CHALLENGER + STS-27-NEAR-LOSS-TILE-DAMAGE-EVENT + STS-27-COLUMBIA-FORESHADOW + LACROSSE-1-FIRST-SAR-RECONNAISSANCE-SATELLITE + CREW-BELIEVED-DEATH-CERTAIN-DURING-REENTRY + CLASSIFICATION-PREVENTED-PUBLIC-AWARENESS-OF-NEAR-LOSS + ATLANTIS-OV-104-THIRD-FLIGHT + GIBSON-RTF-CADENCE-COMMANDER-PROGRESSION + SHEPHERD-ROOKIE-FUTURE-ISS-EXPEDITION-1-COMMANDER + ROSS-SECOND-FLIGHT-FUTURE-7-FLIGHT-VETERAN + POST-RTF-CADENCE-RESUMPTION-64-DAYS + MULLANE-FIRST-ASTRONAUT-MEMOIR-CLASSIFIED-NEAR-LOSS + FOAM-STRIKE-ASCENT-DEBRIS-NEAR-LOSS-AND-LOSS-COHORT-OPENS.
+| Track | Field | Value |
+|---|---|---|
+| NASA | Mission name | STS-27 Atlantis: DoD-Classified Second Post-Challenger Flight + Near-Loss Tile Damage + Lacrosse-1 First-SAR-Recon Deployment |
+| NASA | Degree from | 1.137 |
+| NASA | Degree to | 1.138 |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-**9 cumulative cohort observations:** Substrate-axis-rotation #10 (#10381) + Operator-authorized-departure #10 (#10384) + Cluster-resume #13 + Inter-flight-gap #11 (#10376; first post-RTF substrate-room) + Memorial-substrate-respect #12 (#10380; STILL-LIVING-CREW-AT-SHIP-DATE substrate-form) + Sub-agent-prompt-coordination #9 (#10385) + POST-RTF-CADENCE-SUSTAINING #1 NEW LOCKED + DoD-classified-payload-deployment #5 cumulative + Dual-direction-hard-block #13 (#10378).
+## Cross-References
 
-**8 substrate-anticipation forward-shadows:** STS-29 TDRS-4 + STS-30 Magellan-Venus + Buran-unmanned + Soyuz TM-7 Chrétien + Hubble STS-31 + STS-107 Columbia loss (substrate-realization) + ISS Expedition 1 Commander 2000-10-31 (12-year forward-shadow) + *Riding Rockets* memoir 2006 (18-year forward-shadow; substrate-realization of declassified near-loss documentation).
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.684** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.686** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-**ESTABLISHED lessons sustained:** #10381 obs#10 + #10384 obs#10 + #10385 obs#9 with all three recovery patterns (FA-679-10 + FA-680-10 + FA-680-11) sustained across 7 consecutive degrees (v679-v685).
+## Engine Position
 
-**Engineering-professional dedication register.** All 5 STS-27 crew still living 2026. Substrate-form STILL-LIVING-CREW-AT-SHIP-DATE — no memorial substrate at v685, contrast to v684 Lounge memorial substrate. Mullane *Riding Rockets* (2006) provides primary declassified-era documentation of the near-loss event.
+| Track | At v1.49.684 close | At v1.49.685 close |
+|---|---|---|
+| NASA degree | 1.137 | **1.138** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
+
+## Infrastructure
+
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/1.138/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-685-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.685` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.684](../v1.49.684/00-summary.md) · **Next:** [v1.49.686](../v1.49.686/00-summary.md)

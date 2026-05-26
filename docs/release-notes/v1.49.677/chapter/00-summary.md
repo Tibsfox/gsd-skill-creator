@@ -1,32 +1,62 @@
+<!-- V650-699-CHAPTER-LIFTED v1 -->
 # v1.49.677 — Chapter 00: Summary
 
-## What shipped
+## Summary
 
-NASA degree advance 1.129 → 1.130. Soyuz T-15 first crewed visit to Mir + last crewed visit to Salyut 7 + only inter-station crew transfer in a single spacecraft in spaceflight history. Substrate-axis-rotation away from v674 STS-51-L catastrophic-loss + v675 Rogers Commission investigation-policy substrate to Soviet-program-continuity-during-US-Shuttle-stand-down substrate.
+**Forward-cadence NASA degree advance to 1.130.** v1.49.677 ships Soyuz T-15 First Mir Crew + Inter-Station Crew Transfer + Salyut 7 Closure as a forward-cadence engine-state advance from NASA degree 1.129 to 1.130. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-| Item | Result |
-|---|---|
-| Tag | `v1.49.677` |
-| NASA degree | 1.129 → 1.130 (Soyuz T-15) |
-| MUS/ELC/SPS/TRS | SCAFFOLD-PENDING continues (deferred per cc-cluster precedent + FA-676 inheritance) |
-| Substrate axes | 17 declared (11 obs#1 first-instance NEW LOCKED including 2 CLASS-OF-ONE; 5 cumulative cohort; 9 substrate-anticipation forward-shadows opening) |
-| Crew | 2 (CDR Col Leonid Denisovich Kizim Soviet Air Force + FE Vladimir Alekseyevich Solovyev NPO Energia civilian engineer; both returned safely) |
-| Mission duration | 125d 0h 0m 56s (75d at Mir + 51d at Salyut 7 + transit) |
-| EVAs | 2 at Salyut 7 (1986-05-28 + 1986-05-31; total 8h 50m; Ferma-Postroitel truss-construction work) |
-| Substrate-axis rotation | US-disaster-investigation (v674-v675) → Soviet-program-continuity (v677); Lesson #10381 obs#2 cumulative ESTABLISHED candidate |
-| Class-of-one declarations | 2 (ONLY-SPACEFLIGHT-TO-VISIT-TWO-DIFFERENT-SPACE-STATIONS + FIRST-INTER-STATION-CREW-TRANSFER-IN-SAME-SPACECRAFT) |
-| Depth-audit | NASA WARN: 97% lines / 81% bytes / 5/7 canonical sections / 13/13 artifacts linked / 8/8 track-cards |
+**Mission rebuilt to per-pipeline depth.** Soyuz T-15 First Mir Crew + Inter-Station Crew Transfer + Salyut 7 Closure ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/1.130/`.
 
-## Operational headline
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-Soviet Union continued crewed spaceflight without interruption during the 32-month US Shuttle stand-down following STS-51-L. Soyuz T-15 launched 44 days after the Challenger disaster on the same calendar program-cadence the Soviets had maintained for 25 years since Vostok 1. The mission is engineering-historical substantively distinct from prior NASA-Series spaceflight-physical degrees in that it (a) is the first non-US primary-mission focus at degree level, (b) is the FIRST CREWED VISIT TO MIR — opening a 15-year crewed operational life — and (c) is simultaneously the LAST CREWED VISIT TO SALYUT 7 — closing 14 years of Salyut single-station-design crewed operations 1971-1986.
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-Two CLASS-OF-ONE substrate-form declarations enter the engine state at v677: ONLY-SPACEFLIGHT-TO-VISIT-TWO-DIFFERENT-SPACE-STATIONS (Kizim + Solovyev visited Mir + Salyut 7 within a single sortie via undocked-then-redocked Soyuz orbital transfer; no subsequent crew has done this in spaceflight history) and FIRST-INTER-STATION-CREW-TRANSFER-IN-SAME-SPACECRAFT (the 1986-05-05 Mir undock + 1986-05-06 Salyut 7 dock orbital-transfer trajectory). These are the first CLASS-OF-ONE markings in the NASA Mission Series since the program began. Class-of-one substrate-form indicates the milestone records a substrate-anchor with no expected cohort growth — the substrate is uniquely instantiated and remains uniquely instantiated.
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-## Soviet political context note
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-Mikhail Gorbachev had assumed Soviet leadership 1985-03-11. Perestroika and glasnost were in early stages. Reagan-Gorbachev Geneva Summit had occurred 1985-11-19/21. **Chernobyl reactor 4 disaster** would occur 1986-04-26 = 6 weeks into Soyuz T-15's mission, substrate-coincident but substrate-distinct from the mission. The Soviet program proceeded with restrained public-communication style (no Western-style live launch broadcast); POST-CHALLENGER-SOVIET-PROPAGANDA-RESTRAINT obs#1 first-instance NEW LOCKED.
+## Key Features
 
-## Same-calendar-day departure
+| Track | Field | Value |
+|---|---|---|
+| NASA | Mission name | Soyuz T-15 First Mir Crew + Inter-Station Crew Transfer + Salyut 7 Closure |
+| NASA | Degree from | 1.129 |
+| NASA | Degree to | 1.130 |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-Today (2026-05-18 UTC) already shipped v672 + v673 + v674 + v675 + v676 = 5 milestones, hitting and re-hitting Lesson #10371 SAME-CALENDAR-DAY-THRESHOLD-HIT (promoted ESTABLISHED at v676 W3). Operator explicit override authorized continuing into v677 NASA degree-advance same calendar day. Lesson #10384 OPERATOR-AUTHORIZED-DEPARTURE-FROM-LESSON-PATTERN obs#2 cumulative at v677 (obs#1 first instance was at v676 cc-cluster broad-cleanup variant override). ESTABLISHED candidate at obs#3.
+## Cross-References
+
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.676** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.678** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
+
+## Engine Position
+
+| Track | At v1.49.676 close | At v1.49.677 close |
+|---|---|---|
+| NASA degree | 1.129 | **1.130** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
+
+## Infrastructure
+
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/1.130/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-677-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.677` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.676](../v1.49.676/00-summary.md) · **Next:** [v1.49.678](../v1.49.678/00-summary.md)

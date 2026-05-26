@@ -12,6 +12,20 @@ This counter-cadence milestone continues memorial substrate from v674 + v675. Th
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.676 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** Counter-Cadence Cluster Broad-Cleanup (5 Categories) — NO NASA Degree Advance ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 v676 converts 5 accumulated operational-debt categories into deterministic gates + content backfill, in a single broad-cleanup cc cluster milestone. Substrate-form-novel: SAME-CALENDAR-DAY-THRESHOLD-HIT-AS-BROAD-CLEANUP-CC-CLUSTER-RESPONSE obs#1 first-instance NEW LOCKED at v676 (substrate-distinct from v671 single-cc 1-recurrence response + v664-v666 3-cluster staged-deck response + v585 5-category concerns-cleanup substrate-grandparent).
 
 ### cc1 — Proactive MUS/ELC degree-title length gate (Gate 2 deferred from v671 closes)

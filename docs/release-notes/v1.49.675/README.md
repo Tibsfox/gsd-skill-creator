@@ -20,6 +20,20 @@ This investigation milestone is also memorial substrate continuation from v674. 
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.675 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** Rogers Commission Report (NASA 1.128→1.129) — Investigation-Substrate Substrate- ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 The Presidential Commission on the Space Shuttle Challenger Accident — established by Executive Order 12546 on 1986-02-03, six days after the STS-51-L disaster — held 30 days of public hearings between 1986-02-06 and 1986-05, took testimony from approximately 160 witnesses, and produced *Report of the Presidential Commission on the Space Shuttle Challenger Accident* (1986-06-06; 5 volumes; ~256 pages main report + 4 appendix volumes). The Commission's 13 members carried substrate-form orthogonal expertise: William P. Rogers (former US Secretary of State + US Attorney General) chair; Neil A. Armstrong (Apollo 11 commander) vice-chair; Sally K. Ride (first American woman in space); Richard P. Feynman (Caltech; Nobel laureate physics 1965 for QED); Charles E. Yeager (USAF Brig Gen; sound-barrier pilot); Albert D. Wheelon (CIA / Hughes); Eugene E. Covert (MIT aeronautics); David C. Acheson (attorney); Robert B. Hotz (Aviation Week editor); Maj Gen Donald J. Kutyna (USAF DoD Shuttle); Robert W. Rummel (TWA); Joseph F. Sutter (Boeing 747 chief engineer; Seattle WA — PNW-CONNECTION-COHORT obs#4 cumulative); Arthur B.C. Walker Jr. (Stanford solar physics). Executive Director Dr. Alton G. Keel Jr.
 
 **Root-cause finding:** right Solid Rocket Booster aft field joint O-ring failure at 36°F ambient temperature exceeded qualified envelope. Morton Thiokol seal task force engineers Roger M. Boisjoly + Allan J. McDonald + Robert "Bob" Ebeling had warned against launch below 53°F in the 1986-01-27 evening telecon, but NASA Marshall pressure overrode Thiokol management's NO-GO recommendation.

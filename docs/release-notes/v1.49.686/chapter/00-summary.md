@@ -1,34 +1,62 @@
+<!-- V650-699-CHAPTER-LIFTED v1 -->
 # v1.49.686 — Chapter 00: Summary
 
-**Type:** engine-cadence degree-advancing milestone — Soviet-Franco-yearlong-endurance-return substrate. Substrate-axis-rotation #11.
+## Summary
 
-**Mission:** Soyuz TM-7 launched 1988-11-26 15:49:34 UTC from Baikonur LC-1/5 ("Gagarin's Start") on Soyuz-U2; visiting French cosmonaut Chrétien returned aboard Soyuz TM-6 descent module 1988-12-21 with EO-3 yearlong-endurance crew Titov + Manarov; EO-4 (Volkov + Krikalev + continuing-cosmonaut Polyakov) remained until 1989-04-27.
+**Forward-cadence NASA degree advance to 1.139.** v1.49.686 ships Soyuz TM-7 EO-4: 2nd French Cosmonaut Chrétien Aragatz + Titov+Manarov First Yearlong-Endurance Return (365d 22h 39m) + Polyakov Substrate-Thread Continuation as a forward-cadence engine-state advance from NASA degree 1.138 to 1.139. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-**Defining substrate events:**
-- **Aragatz mission**: 2nd French human spaceflight (Chrétien 6y 5m after Soyuz T-6); CNES-funded ~200MFF / €33M; first non-Soviet-non-American EVA (5h 57m 1988-12-09 with Titov)
-- **Yearlong endurance completed**: Titov + Manarov tied at 365 days 22 hours 39 minutes = first humans to spend 365+ days in space; substrate-anchor for YEARLONG-ENDURANCE-COMPLETED-RETURN cohort
-- **Polyakov substrate-thread**: continues from v683 EO-3 launch → v685 (still on Mir) → v686 TM-7 transition → 1989-04-27 TM-7 landing; cumulative 240d 22h 35m by v686 close
-- **Volkov father-cosmonaut-dynasty opens**: Aleksandr Volkov father of future ISS commander Sergei Volkov 1973-04-01; substrate-cohort PARENT-CHILD-COSMONAUT-COHORT opens at v686
+**Mission rebuilt to per-pipeline depth.** Soyuz TM-7 EO-4: 2nd French Cosmonaut Chrétien Aragatz + Titov+Manarov First Yearlong-Endurance Return (365d 22h 39m) + Polyakov Substrate-Thread Continuation ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/1.139/`.
 
-**Crew (6 total during transition window; all still living 2026 except Polyakov died 2022):**
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-- EO-4 CDR Aleksandr Volkov (2nd flight; father of future cosmonaut Sergei Volkov)
-- EO-4 FE Sergei Krikalev (rookie; future 803d career world-record + first Russian on Shuttle + first ISS Expedition 1 with Shepherd v685)
-- Visiting Brigadier General Jean-Loup Chrétien (2nd Soviet flight; first non-Soviet-non-American spacewalker)
-- EO-3 returning CDR Vladimir Titov (2 launch-abort survivor: T-8 docking abort + T-10-1 launch abort 19s pre-booster-explosion)
-- EO-3 returning FE Musa Manarov (first Azerbaijani cosmonaut)
-- Continuing Polyakov (substrate-thread from v683; future Polyakov 437.7d 1994-1995 substrate-realization)
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-**Engine state:** NASA 1.138 → **1.139 Soyuz TM-7 Aragatz + yearlong-endurance return + Polyakov substrate-thread**. MUS/ELC/SPS/TRS SCAFFOLD-PENDING.
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-**Substrate-axis-rotation #11:** v685 US-Shuttle-DoD-classified-RTF-2-near-loss → v686 Soviet-Franco-yearlong-endurance-return = first inter-program substrate-axis return after 2 consecutive intra-US rotations.
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-**13 obs#1 first-instances NEW LOCKED:** 2ND-FRENCH-COSMONAUT-FLIGHT-RETURN-VISIT + FIRST-NON-SOVIET-NON-AMERICAN-SPACEWALK + FIRST-YEARLONG-ENDURANCE-COMPLETED-RETURN + TITOV-MULTIPLE-LAUNCH-ABORT-SURVIVOR + MANAROV-FIRST-AZERBAIJANI-COSMONAUT + KRIKALEV-FIRST-FLIGHT-FUTURE-WORLD-RECORD-COSMONAUT-COHORT-OPENS + VOLKOV-FATHER-COSMONAUT-DYNASTY-OPENS + ARAGATZ-MISSION-CNES-FUNDED-VISIT + BAIKONUR-LC-1/5-GAGARIN-START-2ND-FRENCH-FLIGHT + PRE-GLASNOST-CLOSING-COOPERATION-FLIGHT + SOVIET-FRANCO-COOPERATION-RESUMED-AFTER-6-YEAR-GAP + 3-WAY-CREW-COMPOSITION-LAUNCHING-2-CONTINUING-2-RETURNING + PARENT-CHILD-COSMONAUT-COHORT-OPENS.
+## Key Features
 
-**10 cumulative cohort observations:** Substrate-axis-rotation #11 (#10381) + Operator-authorized-departure #11 (#10384) + Cluster-resume #14 + Inter-flight-gap #12 (#10376; FIRST-OBSERVED-SUBSTRATE-OVERLAP-INTER-PROGRAM) + Memorial #13 (#10380; Polyakov memorial) + Sub-agent-coordination #10 (#10385) + Interkosmos-at-Mir #4 + Polyakov-substrate-thread #3 + Dual-direction-hard-block #14 (#10378) + STATE-MD-normalizer #16 (#10373).
+| Track | Field | Value |
+|---|---|---|
+| NASA | Mission name | Soyuz TM-7 EO-4: 2nd French Cosmonaut Chrétien Aragatz + Titov+Manarov First Yearlong-Endurance Return (365d 22h 39m) + Polyakov Substrate-Thread Continuation |
+| NASA | Degree from | 1.138 |
+| NASA | Degree to | 1.139 |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-**8 substrate-anticipation forward-shadows:** STS-27 substrate-coincident-distinct-realized at v685 (chronologically AFTER TM-7) + STS-29 + STS-30 + Buran unmanned (intra-Soviet substrate-overlap) + Polyakov 437.7d (substrate-realization) + Krikalev 803d career + ISS Expedition 1 + Sergei Volkov ISS commander.
+## Cross-References
 
-**ESTABLISHED lessons sustained:** #10381 obs#11 + #10384 obs#11 + #10385 obs#10 with all three recovery patterns (FA-679-10 + FA-680-10 + FA-680-11) sustained across 8 consecutive degrees (v679-v686).
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.685** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.687** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-**Engineering-professional dedication register.** 5 of 6 crew still living 2026; Polyakov died 2022-09-19 (substrate-coincident-distinct 3y 8m pre-v686). Substrate-form continues Polyakov substrate-thread observed without memorial caricature.
+## Engine Position
+
+| Track | At v1.49.685 close | At v1.49.686 close |
+|---|---|---|
+| NASA degree | 1.138 | **1.139** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
+
+## Infrastructure
+
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/1.139/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-686-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.686` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.685](../v1.49.685/00-summary.md) · **Next:** [v1.49.687](../v1.49.687/00-summary.md)

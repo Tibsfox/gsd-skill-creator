@@ -8,6 +8,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.668 advances the engine from 1.122 to 1.123 with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** STS-51-J Atlantis Maiden-Flight DoD-Classified ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 v1.49.668 ships the **second consecutive forward-cadence degree-advance** after the v664+v665+v666 counter-cadence cluster CLOSE. STS-51-J Atlantis (NSSDC 1985-092A) is the 21st Shuttle flight and the maiden flight of OV-104 Atlantis, the 4th operational orbiter completing the orbiter-fleet-buildup phase after 4 years 6 months from STS-1 (1981-04). Launched 1985-10-03 15:15:30 UTC LC-39A KSC. 5-person crew: CDR Bobko (3rd flight; MOL-transfer) + PLT Grabe (rookie) + MS1 Hilmers (rookie) + MS2 Stewart (2nd flight; first-Army-multi-flight) + PS1 Pailes (USAF MSE; only flight). 2-satellite DSCS-III dual-payload deploy via IUS-3 Boeing Inertial Upper Stage Day-3 (first dual-payload IUS configuration). ~518 km altitude (highest DoD-classified orbit to date). 4d 1h 44m 38s mission, 64 orbits. Edwards AFB Runway 23 lakebed landing.
 
 **Twelve substrate-form anchors at v668:** six obs#1 first-instances + six cumulative cohort observations.

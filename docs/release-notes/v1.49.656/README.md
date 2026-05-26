@@ -8,6 +8,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.656 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** NASA Track-Card Uplift ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 v1.49.656 closes the NASA track-card drift class introduced at v1.49.645 STS-7 ship and sustained through v1.49.652 STS-51-A. Eight NASA pages had structurally-incomplete track-card grids relative to the v1.108 cohort gold-standard (which has 8 unique Track cards: 1a Mission Narrative + 1b Wall-Clock Papers + 2 Substrate Primitives + 3 MUS Cross-Track + 4 ELC Cross-Track + 5 SPS Cross-Track + 6 Creative Artifacts + 7 Runnable Simulations).
 
 **The uplift restored 8/8 track cards on all 8 affected pages** via parallel sub-agent W2 dispatches in 2 waves of 4. With this milestone, pre-tag-gate step 6 (depth-audit) ships WITHOUT `depth-audit` blanket bypass for the first time since v1.49.651 (4 milestones ago).

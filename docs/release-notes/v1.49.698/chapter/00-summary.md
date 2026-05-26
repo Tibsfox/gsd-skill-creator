@@ -1,46 +1,62 @@
+<!-- V650-699-CHAPTER-LIFTED v1 -->
 # v1.49.698 — Chapter 00: Summary
 
-**Type:** engine-cadence degree-advancing milestone — **second INTRA-AXIS continuation within ROBOTIC-DEEP-SPACE-SCIENCE substrate-axis**. No substrate-axis rotation at v698; ROBOTIC-DEEP-SPACE-SCIENCE substrate-axis (opened at v696 substrate-anchor Spirit MER-A + sustained first INTRA-PROGRAM continuation at v697 Opportunity MER-B cohort-pair REALIZATION) sustains substrate-form-stable at v698 second INTRA-AXIS continuation substrate-cumulative. Substrate-form-distinct subform within the substrate-axis: v696 + v697 surface-rover-substrate → v698 orbital-survey-substrate substrate-form-distinct first INSTANCE within ROBOTIC-DEEP-SPACE-SCIENCE substrate-axis. SUBSTRATE-AXIS-STABILITY-SUSTAINED obs#2 cumulative + SUBSTRATE-FORM-DISTINCT-ORBITAL-SURVEY-FROM-SURFACE-ROVER obs#1 first-instance NEW LOCKED at v698.
+## Summary
 
-**Mission:** Mars Reconnaissance Orbiter (MRO) launched **2005-08-12 11:43:00 UTC** from Cape Canaveral Air Force Station SLC-41 Florida on **Atlas V 401** launch vehicle — **the first Mars mission ever flown on Atlas V** substrate-form-distinct from MER's Delta II 7925-9.5 (v696) + Delta II 7925H-9.5 Heavy (v697) launch-vehicle substrate-anchors. The "401" three-digit substrate-form-code specifies 4-meter payload fairing + 0 solid strap-on boosters + 1 Centaur upper-stage engine substrate-form medium-class Atlas V configuration. Cruise duration ~210 days Type-I Earth-Mars trajectory. **Mars Orbit Insertion 2006-03-10 21:24 UTC** via ~27-minute main-engine burn (six 170-N hydrazine monopropellant thrusters firing together substrate-form; exact burn duration UNVERIFIED EXACT, primary sources vary 26.6–27.0 min) decelerated MRO into highly elliptical capture orbit ~426 km periapsis × ~45,000 km apoapsis ~35-hour period substrate-anchor. **Aerobraking 2006-03 → 2006-08/09** (~6 months ~426 passes approximate — primary JPL sources vary "more than 400" to "approximately 445"; treat ~426 as approximate) through Martian upper atmosphere reduced orbit energy substrate-cumulative. Final science orbit substrate-anchor ~250 × ~316 km altitude ~112-minute period **sun-synchronous near-polar orbit** ~93° inclination 3:00 PM local mean solar time descending node. Primary science phase began **2006-11-08** through 2008-12; multiple consecutive extended-mission phases through 2026; still operational at v698 opening ~20 years 9 months after launch substrate-form 20-YEAR-OPERATIONAL-LIFETIME-MARS-ORBITER substrate-anchor obs#1 first-instance NEW LOCKED.
+**Forward-cadence NASA degree advance to 1.151.** v1.49.698 ships Mars Reconnaissance Orbiter (MRO) Orbital-Survey Mission: First Orbital-Survey as a forward-cadence engine-state advance from NASA degree 1.150 to 1.151. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-**Substrate-axis stability sustained obs#2 cumulative at v698.** ROBOTIC-DEEP-SPACE-SCIENCE substrate-axis opened at v696 substrate-anchor → sustained at v697 substrate-cohort-pair REALIZATION → sustains substrate-form-stable at v698 second INTRA-AXIS continuation substrate-cumulative. Substrate-form-distinct subform within the substrate-axis substrate-form: surface-rover-substrate (v696 + v697) → orbital-survey-substrate (v698) substrate-form-distinct first INSTANCE within ROBOTIC-DEEP-SPACE-SCIENCE substrate-axis. SUBSTRATE-FORM-DISTINCT-ORBITAL-SURVEY-FROM-SURFACE-ROVER obs#1 first-instance NEW LOCKED at v698 records the substrate-form distinction — substrate-axis can host substrate-form-distinct subforms without rotation.
+**Mission rebuilt to per-pipeline depth.** Mars Reconnaissance Orbiter (MRO) Orbital-Survey Mission: First Orbital-Survey ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/1.151/`.
 
-**Chronological-forward sustained at v698:** 2-year 35-day chronological-forward step v697 launch 2003-07-08 → v698 launch 2005-08-12 substrate-form; CHRONOLOGICAL-FORWARD-RESUMED obs#4 cumulative substrate-form-cumulative with v694 obs#1 substrate-anchor + v696 obs#2 + v697 obs#3.
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-**Spacecraft substrate-anchor:** 2,180-kg total launch mass (1,031 kg dry + ~1,149 kg propellant) + two 6.5 m × 2.6 m articulating solar arrays (~40 m² total) + 3-m parabolic high-gain antenna substrate-form the largest deep-space HGA flown to Mars at the time substrate-anchor; HGA-3-METER-LARGEST-DEEP-SPACE-MARS-AT-TIME substrate-anchor obs#1 first-instance NEW LOCKED. Spacecraft prime contractor **Lockheed Martin Space Systems (Denver)** substrate-cumulative Mars-orbiter heritage substrate-form Mars Global Surveyor + Mars Climate Orbiter + Mars Odyssey + MRO substrate-thread.
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-**Instrument suite substrate-form-distinct from MER Athena payload by orbital substrate-form:**
-- **HiRISE** 0.3 m/px from 300 km altitude + 50 cm aperture; PI Alfred McEwen LPL U.Arizona + Ball Aerospace optics — HIRISE-0-3-METER-PER-PIXEL-HIGHEST-RESOLUTION-MARS-ORBITAL-IMAGING substrate-anchor obs#1 first-instance NEW LOCKED
-- **CRISM** 362–3,920 nm hyperspectral mineralogical mapping; PI Scott Murchie JHU/APL — CRISM-PHYLLOSILICATE-SULFATE-GLOBAL-MINERALOGICAL-MAPPING substrate-anchor obs#1 first-instance NEW LOCKED substrate-cumulative with v697 MER-B Endeavour Noachian-clay signatures substrate-thread
-- **CTX** ~6 m/px wide-area panchromatic; PI Mike Malin MSSS
-- **MARCI** daily global weather 7-band; PI Mike Malin MSSS
-- **MCS** limb-sounding 9-channel atmospheric profiling; PI Dan McCleese NASA JPL
-- **SHARAD** 15–25 MHz subsurface radar ~15-m depth resolution to ~1 km depth; PI Roberto Seu Sapienza Università di Roma — **instrument provided by ASI (Agenzia Spaziale Italiana) Italian Space Agency** — ITALIAN-ASI-INSTRUMENT-CONTRIBUTION-TO-NASA-MARS-MISSION substrate-anchor obs#1 first-instance NEW LOCKED
-- **Accelerometer** + **Electra UHF Proximity Link Telecommunications Package**
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-**Substrate-cumulative discoveries substrate-form-distinct from MER at every cumulative stage:**
-- **Recurring Slope Lineae (RSL)** — narrow dark seasonal streaks on warm Martian slopes; **originally interpreted as briny-water-related** McEwen et al. *Science* 333 (2011) + McEwen et al. *Nature Geoscience* 7 (2014); **subsequently reinterpreted as dry granular flows / dry mass-wasting substrate** by Dundas et al. *Nature Geoscience* 10 (2017) substrate-form-supersedes briny-water interpretation; current consensus is the dry granular-flow interpretation substrate-anchor
-- **CRISM global mineralogical mapping** — phyllosilicate (clay) + sulfate regional distributions substrate-cumulative with v697 MER-B Endeavour Noachian-clay signatures substrate-thread
-- **SHARAD mid-latitude buried-glacier subsurface evidence** — Burr et al. *Icarus* 200 (2009) + Holt et al. *Science* 322 (2008) substrate-form-distinct buried-glacier subsurface-radar substrate substrate-anchor
-- **HiRISE landing-site reconnaissance substrate-anchor** for substrate-anticipation Phoenix 2008-05-25 + MSL Curiosity 2012-08-06 Gale Crater + InSight 2018-11-26 Elysium Planitia + Perseverance + Ingenuity 2021-02-18 Jezero Crater — LANDING-SITE-RECONNAISSANCE-FOR-FUTURE-MARS-SURFACE-MISSIONS substrate-anchor obs#1 first-instance NEW LOCKED
-- **MARCI + MCS dust-storm documentation** 2007-06/08 global storm (substrate-cumulative the storm that minimized MER power v696 + v697 substrate-thread) + 2018-05/06 global storm (substrate-cumulative the storm that ended Opportunity v697 substrate-thread)
-- **HiRISE first active avalanches on Mars** (north polar scarps 2008) substrate-cumulative dynamic-surface-imaging substrate
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-**MRO-COMMUNICATIONS-RELAY-FOR-MARS-SURFACE-MISSIONS substrate-anchor obs#1 first-instance NEW LOCKED at v698 OPENS** substrate-cumulative supporting-infrastructure substrate-form for Phoenix 2008-05-25 → 2008-11 (5-month relay) + MSL Curiosity 2012-08-06 → present (~14 years substrate-cumulative) + InSight 2018-11-26 → 2022-12 (~4 years) + Perseverance + Ingenuity 2021-02-18 → present (~5 years substrate-cumulative).
+## Key Features
 
-**MARS-ORBITAL-SURVEY-COHORT-SUBSTRATE-ANCHOR obs#1 first-instance NEW LOCKED at v698 OPENS** substrate-cumulative through future Mars orbiters: MAVEN (NASA, 2013-11-18) + ExoMars Trace Gas Orbiter (ESA + Roscosmos, 2016-03-14) + Hope / Al Amal (UAE, 2020-07-19) + Tianwen-1 (CNSA, 2020-07-23) substrate-anticipation. Substrate-form-distinct from v697 substrate-cohort-pair-REALIZATION by **deferred-realization substrate-form** — v698 OPENS the cohort-anchor; substrate-realization occurs across future milestones.
+| Track | Field | Value |
+|---|---|---|
+| NASA | Mission name | Mars Reconnaissance Orbiter (MRO) Orbital-Survey Mission: First Orbital-Survey |
+| NASA | Degree from | 1.150 |
+| NASA | Degree to | 1.151 |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-**Memorial substrate non-applicability acknowledged at v698.** ROBOTIC-MISSION-MEMORIAL-NAMING-CONTINUITY substrate-anchor (v696 obs#1) does NOT realize at v698; remains substrate-anchor without cumulative. MRO is uncrewed robotic orbital-survey mission with descriptive-program naming substrate (Mars Reconnaissance Orbiter) substrate-form-distinct from MER individual-rover-naming substrate (Spirit + Opportunity); engineering-historical register sustained throughout substrate-form.
+## Cross-References
 
-**Engine state:** NASA 1.150 → **1.151 Mars Reconnaissance Orbiter**. MUS/ELC/SPS/TRS SCAFFOLD-PENDING.
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.697** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.699** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-**16 obs#1 first-instances NEW LOCKED:** MARS-RECONNAISSANCE-ORBITER-FIRST-INSTANCE + ATLAS-V-401-FIRST-MARS-LAUNCH + MARS-ORBITAL-SURVEY-COHORT-SUBSTRATE-ANCHOR + AEROBRAKING-TO-SCIENCE-ORBIT-SUBSTRATE-FORM + SUN-SYNCHRONOUS-NEAR-POLAR-MARS-ORBIT + HIRISE-0-3-METER-PER-PIXEL-HIGHEST-RESOLUTION-MARS-ORBITAL-IMAGING + CRISM-PHYLLOSILICATE-SULFATE-GLOBAL-MINERALOGICAL-MAPPING + SHARAD-SUBSURFACE-RADAR-MARS-ICE-MAPPING + MARCI-DAILY-GLOBAL-MARS-WEATHER-MONITORING + MCS-ATMOSPHERIC-PROFILING-MARS-CLIMATE + CTX-CONTEXT-CAMERA-WIDE-AREA-RECONNAISSANCE + MRO-COMMUNICATIONS-RELAY-FOR-MARS-SURFACE-MISSIONS-SUBSTRATE-ANCHOR + LANDING-SITE-RECONNAISSANCE-FOR-FUTURE-MARS-SURFACE-MISSIONS-SUBSTRATE-ANCHOR + ITALIAN-ASI-INSTRUMENT-CONTRIBUTION-TO-NASA-MARS-MISSION + 20-YEAR-OPERATIONAL-LIFETIME-MARS-ORBITER + SUBSTRATE-FORM-DISTINCT-ORBITAL-SURVEY-FROM-SURFACE-ROVER. Plus HGA-3-METER-LARGEST-DEEP-SPACE-MARS-AT-TIME + SUBSTRATE-COHORT-ANCHOR-OPENS-WITH-DEFERRED-REALIZATION first-instances NEW LOCKED.
+## Engine Position
 
-**4 cumulative cohort observations:** Chronological-forward-resumed #4 + Substrate-axis-stability-sustained #2 + Content-filter-safe-phrasing #5 + Foreground-author-at-scale #5. Plus Sub-agent-prompt-filename-coordination-drift #22 cumulative APPLIED FORWARD AS PREVENTIVE GATE at v698 substrate-form-distinct from v697 reactive-recovery — clean inventory with only `__pycache__` to clean (no orphan artifact files).
+| Track | At v1.49.697 close | At v1.49.698 close |
+|---|---|---|
+| NASA degree | 1.150 | **1.151** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
 
-**9 substrate-anticipation forward-shadows:** Phoenix + MSL Curiosity + MAVEN + ExoMars TGO + InSight + Hope + Tianwen-1 + Perseverance + Ingenuity + Mars Sample Return substrate-thread.
+## Infrastructure
 
-**ESTABLISHED lessons sustained:** #10381 obs#21 sustained-not-applied (no axis rotation at v698; substrate-axis stability sustained obs#2) + #10384 obs#21 sustained-not-applied (operator-directive sustained from v696 through v697 + v698) + #10376 obs#24 (2-year 35-day inter-mission gap) + #10380 obs#25 cumulative (memorial substrate non-applicability acknowledged — MRO uncrewed) + #10385 obs#22 cumulative APPLIED FORWARD AS PREVENTIVE GATE (clean inventory). **Lesson #10387 candidate obs#5 cumulative + Lesson #10388 candidate obs#5 cumulative** sustained substrate-form-stable; **Lesson #10389 candidate** sustained-but-N/A (no cohort-pair anchor or realization at v698).
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/1.151/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-698-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.698` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
 
-Page metrics: 676 lines / 153,523 bytes / 25 distinct H2 sections / 12 artifacts in 5/5 categories / 8/8 Track cards. 117.2% bytes vs v1.150 substrate-form-cumulative growth substrate.
+---
+**Prev:** [v1.49.697](../v1.49.697/00-summary.md) · **Next:** [v1.49.699](../v1.49.699/00-summary.md)

@@ -1,41 +1,62 @@
+<!-- V650-699-CHAPTER-LIFTED v1 -->
 # v1.49.678 — Chapter 00: Summary
 
-## What shipped
+## Summary
 
-NASA degree advance 1.130 → 1.131. Mir Kvant astrophysics module — first module addition to Mir core module + first Western instruments on Soviet space station + first contingency EVA in Mir era + first Soviet astrophysics observatory in orbit + recorded SN 1987A X-ray observations.
+**Forward-cadence NASA degree advance to 1.131.** v1.49.678 ships Mir Kvant Astrophysics Module + First Module Addition + First Western Instruments + First Contingency EVA in Mir Era as a forward-cadence engine-state advance from NASA degree 1.130 to 1.131. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-| Item | Result |
-|---|---|
-| Tag | `v1.49.678` |
-| NASA degree | 1.130 → 1.131 (Mir Kvant) |
-| MUS/ELC/SPS/TRS | SCAFFOLD-PENDING continues |
-| Substrate axes | 18 declared (12 obs#1 first-instance NEW LOCKED + 6 cumulative cohort + 9 substrate-anticipation forward-shadows opening) |
-| Crew (supporting) | 3 (CDR Romanenko + FE Laveykin + FE Aleksandrov-relief; all returned safely) |
-| Module mass | ~22,000 kg (heaviest Soviet payload to LEO at that time) |
-| Roentgen Observatory instruments | 5 (SIRENE-2 CNES France + Pulsar X-1 IKI Soviet + HEXE MPE Garching DE + TTM Birmingham UK + GPC-Mir IKI Soviet) |
-| Contingency EVA | 3h 40m (1987-04-11; first contingency EVA in Mir era) |
-| Lesson #10381 + #10384 | **PROMOTED TO ESTABLISHED at v678 W3** (obs#3 cumulative threshold reached) |
-| Lesson #10385 mitigation | Pre-emptively applied; measured operational benefit (+93pp href coverage + +71pp canonical-section coverage at first dispatch) |
-| Depth-audit | NASA **PASS**: 109% lines / 107% bytes / 7/7 canonical sections / 13/13 artifacts linked / 8/8 track-cards |
+**Mission rebuilt to per-pipeline depth.** Mir Kvant Astrophysics Module + First Module Addition + First Western Instruments + First Contingency EVA in Mir Era ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/1.131/`.
 
-## Operational headline
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-Mir Kvant astrophysics module (Soviet designation 37KE No. 17501) launched 1987-03-31 00:06:16 UTC from Baikonur LC-200/39 on Proton-K (8K82K) heavy-lift launch vehicle. At ~22,000 kg, Kvant was the heaviest Soviet payload to LEO at that time. Module designed by NPO Energia under general designer Valentin Glushko + Mir program lead Yuri Semenov; bus derived from Soviet TKS military spaceplane Functional Cargo Block (FGB) — first civilian-program TKS-FGB use, establishing the design lineage that continues through Zarya FGB at ISS 1998.
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-The Roentgen Observatory payload carried five X-ray and UV instruments, **four of which were Western contributions** — substrate-form FIRST-WESTERN-INSTRUMENTS-ON-SOVIET-SPACE-STATION obs#1 first-instance NEW LOCKED. Instruments: SIRENE-2 coded-aperture X-ray imager from CNES France (Jacques Paul); Pulsar X-1 X-ray spectrometer from Soviet IKI (Rashid Sunyaev); HEXE High Energy X-ray Experiment from MPE Garching West Germany (Joachim Trümper); TTM wide-field X-ray imager from University of Birmingham UK (Gerald Skinner); GPC-Mir broadband X-ray spectrometer from Soviet IKI.
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-Kvant's first docking attempt 1987-04-05 failed due to a plastic bag from Progress 28 hardware deployment lodged in Mir's aft docking node. Soyuz TM-2 EO-1 crew Romanenko + Laveykin conducted a 3h 40m contingency EVA on 1987-04-11 to clear the obstruction — **FIRST CONTINGENCY EVA IN MIR ERA**. Successful docking followed 1987-04-12 12:36 UTC. Kvant remained attached at Mir's aft port through Mir's full 15-year operational life until 2001-03-23 controlled deorbit.
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-The Roentgen Observatory's TTM + HEXE instruments recorded X-ray flux from Supernova 1987A in the Large Magellanic Cloud during 1987-1989 — SN 1987A is the only naked-eye supernova since SN 1604 Kepler. Substrate-form SUPERNOVA-1987A-X-RAY-OBSERVATIONS-FROM-KVANT obs#1 first-instance NEW LOCKED.
+## Key Features
 
-## Two ESTABLISHED lessons + one obs#2 ESTABLISHED candidate
+| Track | Field | Value |
+|---|---|---|
+| NASA | Mission name | Mir Kvant Astrophysics Module + First Module Addition + First Western Instruments + First Contingency EVA in Mir Era |
+| NASA | Degree from | 1.130 |
+| NASA | Degree to | 1.131 |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-**Lesson #10381 SUBSTRATE-AXIS-ROTATION-DISCIPLINE PROMOTED TO ESTABLISHED at v678 W3.** Three observations: v675 emit (investigation-policy rotation), v677 first-apply (Soviet-program-continuity rotation), v678 second-apply (Soviet-program-modular-expansion rotation within Soviet-program continuity). Substrate-form confirmed as engine-operational pattern.
+## Cross-References
 
-**Lesson #10384 OPERATOR-AUTHORIZED-DEPARTURE-FROM-LESSON-PATTERN PROMOTED TO ESTABLISHED at v678 W3.** Three observations: v676 obs#1 (broad-cleanup variant override of #10374), v677 obs#2 (same-calendar-day NASA-advance override of #10371), v678 obs#3 (sixth same-calendar-day NASA-advance ship today).
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.677** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.679** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-**Lesson #10385 SUB-AGENT-PROMPT-FILENAME-COORDINATION-DRIFT mitigation pre-emptively applied with measured operational benefit.** Shared filename manifest in BOTH parallel sub-agent prompts + canonical-section regex checklist in index.html prompt → 13/13 artifact href coverage at first dispatch (vs 1/14 at v677) + 7/7 canonical sections (vs 2/7 at v677) → no inline fix-up cycle required → ~5 min + ~3K tokens saved per dispatch.
+## Engine Position
 
-## Same-calendar-day count
+| Track | At v1.49.677 close | At v1.49.678 close |
+|---|---|---|
+| NASA degree | 1.130 | **1.131** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
 
-Today (2026-05-18 UTC) has now shipped 6 milestones: v672 (09:39) + v673 (10:44) + v674 (12:27) + v675 (14:14) + v676 (15:12 cc) + v677 (16:15) + v678 (this ship). Six-of-six NASA-advancing milestones plus one cc-cluster broad-cleanup within a single calendar day. Operator explicit override authorized continuing into v678 (Lesson #10384 obs#3 ESTABLISHED promotion). Calendar-day rollover 2026-05-19 UTC resets the count to 0/4.
+## Infrastructure
+
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/1.131/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-678-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.678` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.677](../v1.49.677/00-summary.md) · **Next:** [v1.49.679](../v1.49.679/00-summary.md)

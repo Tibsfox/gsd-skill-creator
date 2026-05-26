@@ -16,6 +16,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.684 advances the engine from 1.136 to 1.137 with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** STS-26 Discovery: Return-to-Flight After Challenger + 32-Month Stand-Down Closur ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 STS-26 Discovery launched 1988-09-29 15:37:00 UTC from Kennedy Space Center LC-39B Florida — **first US crewed spaceflight after the loss of STS-51-L Challenger on 1986-01-28**. The 32-month-1-day stand-down period saw NASA's adoption of nearly all Rogers Commission recommendations (v675), redesign of the Solid Rocket Booster field joints with capture-feature + heaters + composite o-ring backup, recertification of orbiter thermal protection systems, overhaul of crew + ground procedures, and the deliberate selection of an all-veteran 5-crew for the return-to-flight mission.
 
 Mission duration 4 days 1 hour 0 minutes 11 seconds. Landed Edwards Air Force Base Runway 17 at 1988-10-03 16:37 UTC.

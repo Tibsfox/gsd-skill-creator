@@ -16,6 +16,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.681 advances the engine from 1.133 to 1.134 with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** Soyuz TM-4: First Year-in-Space Crew (Titov + Manarov 365d 22h) + Buran-Test-Pil ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 Soyuz TM-4 launched 1987-12-21 11:18:03 UTC from Baikonur Cosmodrome LC-1 (Gagarin's Start) on a Soyuz-U2 (11A511U2) launch vehicle. Mir docking 1987-12-23 12:51 UTC at +X aft port.
 
 **Commander Col Vladimir Georgievich Titov** (1947-01-01 Sretensk Chita Oblast → still living 2026) — Soviet Air Force test pilot. Soyuz TM-4 was his third career launch but second qualifying spaceflight: he had survived two previous catastrophic launch aborts. **Soyuz T-8 1983-04-20**: antenna deployment failure prevented rendezvous with Salyut 7; capsule returned same day after 2d 0h 17m. **Soyuz T-10-1 1983-09-26**: an RD-107 first-stage engine ignited a fire 90 seconds before liftoff at Baikonur LC-1; the Launch Escape System (the explosive bolts on Soyuz's nose-cone tower) fired and pulled the descent capsule clear at 14-17 g for 5 seconds. The booster exploded 2 seconds after capsule clearance. Titov + Strekalov landed safely 4 km from the pad. **FIRST COSMONAUT TO TWICE SURVIVE A LAUNCH ABORT** substrate-form NEW LOCKED. Subsequent career: STS-63 Discovery 1995 (first Russian on Shuttle, part of Shuttle-Mir program) + STS-86 Atlantis 1997. Twice Hero of the Soviet Union (1988 + 1997).

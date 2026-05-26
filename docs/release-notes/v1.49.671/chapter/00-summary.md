@@ -1,55 +1,62 @@
-# v1.49.671 — Summary
+<!-- V650-699-CHAPTER-LIFTED v1 -->
+# v1.49.671 — Chapter 00: Summary
 
-**Type:** **counter-cadence cluster cc-1 milestone — NO NASA degree advance.** Triggered by Lesson #10356 four-consecutive-same-calendar-day-degree-advance threshold HIT at v670 close (4/4 on 2026-05-17). v671 first-instance operational response per Lesson #10371.
-**Predecessor:** v1.49.670 (STS-61-B Atlantis 2nd Flight EASE/ACCESS; NASA 1.125).
-**Engine state:** NASA 1.125 → **1.125 (UNCHANGED)**. MUS/ELC/SPS/TRS SCAFFOLD-PENDING continues.
-**Scope:** 1 deterministic gate (pre-tag-gate.sh step 0.5 STATE.md normalizer auto-run) + 1 meta-test + mission brief + release-notes + T14 ship.
+## Summary
 
-## Mission overview
+**Forward-cadence NASA degree advance to ?.?.** v1.49.671 ships Counter-Cadence Cluster cc-1 as a forward-cadence engine-state advance from NASA degree ?.? to ?.?. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-v1.49.671 closes the v669+v670 STATE.md normalizer drift recurrence (Lesson #10373 candidate) by converting the recurring manual fix into a deterministic pre-tag-gate step. Single-cc-milestone response sufficient for the narrow recurrence scope (Lesson #10374 candidate). Calendar rolled over to 2026-05-18; same-day count reset to 0/4. NASA degree-advance can resume at v672 (STS-61-C Columbia Chang-Diaz candidate).
+**Mission rebuilt to per-pipeline depth.** Counter-Cadence Cluster cc-1 ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/N.NNN/`.
 
-## Substrate-form anchors at v671
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-**Three obs#1 first-instances NEW LOCKED + two cumulative observations:**
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-1. SAME-CALENDAR-DAY-THRESHOLD-HIT-RESPONSE obs#1 first-instance NEW LOCKED — first operational response to Lesson #10356 threshold-hit
-2. CLUSTER-RESUME-FORWARD-CADENCE-CC-INTERRUPTION obs#1 first-instance NEW LOCKED — first time post-ESTABLISHED cluster-resume substrate-form interrupted by cc cluster
-3. STATE-MD-NORMALIZER-DRIFT-RECURRENCE-CLOSURE obs#1 first-instance NEW LOCKED — Lesson #10373 candidate
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-**Two cumulative observations:**
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-- GATE-NOT-VIGILANCE-DISCIPLINE-APPLIED obs#2 cumulative (after v664+v665+v666 cc cluster CLOSE)
-- DETERMINISTIC-GATE-AS-OPERATIONAL-RHYTHM-AT-CC-CLUSTER obs#2 cumulative
+## Key Features
 
-## Engine state delta
-
-| Track | Pre-v671 | Post-v671 | Note |
-|---|---|---|---|
-| NASA | 1.125 STS-61-B Atlantis 2nd | **1.125 (UNCHANGED)** | NO ADVANCE (cc cluster) |
-| MUS  | 1.125 SCAFFOLD-PENDING | 1.125 SCAFFOLD-PENDING | Hold |
-| ELC  | 1.125 SCAFFOLD-PENDING | 1.125 SCAFFOLD-PENDING | Hold |
-| SPS  | #118 (no new species) | #118 | Hold |
-| TRS  | pack-43 | pack-43 | Hold |
-
-## Phase digest
-
-| Phase | Deliverable | Style |
+| Track | Field | Value |
 |---|---|---|
-| 836 | Single-phase cc cluster: Gate 1 (pre-tag-gate.sh step 0.5) + meta-test + brief + release-notes + T14 ship | inline; ~10 tool uses |
+| NASA | Mission name | Counter-Cadence Cluster cc-1 |
+| NASA | Degree from | N.NNN |
+| NASA | Degree to | N.NNN |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-## Cluster-resume + threshold context
+## Cross-References
 
-v670 close hit Lesson #10356 threshold (4/4 same-calendar-day forward-cadence degree-advances). v671 is the FIRST OPERATIONAL INSTANCE of the threshold-hit-triggers-preemptive-cc-cluster discipline (Lesson #10371 obs#1 → obs#1 applied at v671). Calendar rolled over 2026-05-17 → 2026-05-18; same-day count reset to 0/4. NASA degree-advance can resume at v672 (next-day calendar window opens).
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.670** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.672** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-## Carry-forward (FA-671-N)
+## Engine Position
 
-7 carry-forward items. FA-671-1 = next NASA target STS-61-C Columbia Chang-Diaz at v672. FA-671-5 = Lesson #10373 closure soak obs#1 (ESTABLISHED candidate at obs#3).
+| Track | At v1.49.670 close | At v1.49.671 close |
+|---|---|---|
+| NASA degree | N.NNN | **N.NNN** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
 
-## Verification
+## Infrastructure
 
-```bash
-bash tools/pre-tag-gate.sh 1.49.671
-npx vitest run tests/integration/v1-49-671-meta-test.test.ts
-grep "milestone:" .planning/STATE.md
-```
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/N.NNN/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-671-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.671` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.670](../v1.49.670/00-summary.md) · **Next:** [v1.49.672](../v1.49.672/00-summary.md)

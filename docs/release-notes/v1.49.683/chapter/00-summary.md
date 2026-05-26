@@ -1,40 +1,62 @@
+<!-- V650-699-CHAPTER-LIFTED v1 -->
 # v1.49.683 — Chapter 00: Summary
 
-## What shipped
+## Summary
 
-NASA degree advance 1.135 → 1.136. **Soyuz TM-6: First Afghan Cosmonaut Lt. Col. Abdul Ahad Mohmand (Pashtun ethnicity; Royal Afghan Air Force) + Civ. Valeri Polyakov MEDICAL DOCTOR rookie FIRST PHYSICIAN ON MIR (substrate-anchor for 437.7d longest-single-spaceflight 1994-1995) + Col. Vladimir Lyakhov 3rd-flight veteran commander + Soyuz TM-5 return 24-hour delay from Igla rendezvous-sensor anomaly + manual deorbit recovery**. Substrate-axis-rotation #8 from v682 Interkosmos-Bulgarian-redemption to Soviet-Afghan-Interkosmos-with-physician-on-mir-with-soyuz-anomaly.
+**Forward-cadence NASA degree advance to 1.136.** v1.49.683 ships Soyuz TM-6: First Afghan Cosmonaut Mohmand + Polyakov First Physician on Mir + Igla Anomaly Recovery as a forward-cadence engine-state advance from NASA degree 1.135 to 1.136. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-| Item | Result |
-|---|---|
-| Tag | `v1.49.683` |
-| NASA degree | 1.135 → 1.136 |
-| Substrate axes | 20 declared (11 obs#1 NEW LOCKED + 7 cumulative + 9 substrate-anticipation) |
-| Crew | CDR Lyakhov (3rd flight veteran) + FE Polyakov (rookie physician; EO-3 augmenter; 678.7d career total) + CR Mohmand (Afghan; 8d 20h visit) |
-| Return anomaly | 24-hour delay from Igla rendezvous-sensor anomaly; manual ground-replanned deorbit |
-| Lessons | #10381 + #10384 ESTABLISHED applied obs#8; #10385 obs#7 with all three recovery patterns |
+**Mission rebuilt to per-pipeline depth.** Soyuz TM-6: First Afghan Cosmonaut Mohmand + Polyakov First Physician on Mir + Igla Anomaly Recovery ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/1.136/`.
 
-## Operational headline
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-Soyuz TM-6 launched 1988-08-29 04:23:11 UTC from Baikonur Cosmodrome LC-1 (Gagarin's Start) on a Soyuz-U2. Mir docking 1988-08-31 05:41 UTC at +X aft port. 8d 20h 27m visiting flight mission.
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-**Cosmonaut-Researcher Lt. Col. Abdul Ahad Mohmand** (born 1959-01-01 Sherzad District Nangarhar Province Afghanistan; still living 2026 in exile in Stuttgart Germany) — Royal Afghan Air Force / Afghan Air Force MiG-21 pilot 1976-1989. Pashtun ethnicity (largest ethnic group in Afghanistan + western Pakistan). Selected for Interkosmos 1988-01 from 457 Afghan candidates with backup Mohammad Dauran. Trained Yuri Gagarin Cosmonaut Training Center 7 months (shortest Interkosmos training; pre-withdrawal schedule pressure). **FIRST AFGHAN COSMONAUT + FIRST CENTRAL-ASIAN-MUSLIM COSMONAUT + FIRST PASHTUN IN SPACE** — substrate-distinct from Faris's FIRST-ARAB-MUSLIM at v680 (Mohmand's Pashtun Central-Asian Muslim substrate distinct from Faris's Arab-world Muslim substrate). Mohmand carried Quranic verses + Afghan soil + photographed Afghan landscapes for Earth-observation correlation. Subsequently emigrated to Germany 1992 to escape Afghan Civil War + later Taliban; lives in exile in Stuttgart.
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-**Commander Col. Vladimir Afanasyevich Lyakhov** (1941-07-20 Antratsyt Voroshilovgrad Oblast Ukrainian SSR → **2018-04-19 Astrakhan Russia**; substrate-coincident-distinct 8y 30d pre-ship). Soviet Air Force; 3rd career flight: Soyuz 32/EO-3 Salyut 6 1979 (175d with Ryumin) + Soyuz T-9/EO-2 Salyut 7 1983 (149d with Aleksandr-Pavlovich-Aleksandrov-Soviet — same individual from v680/v681 EO-1 return; NOT the Bulgarian Aleksandrov-Belorussian v682) + Soyuz TM-6 Mir visiting 1988. Cumulative 333.3 days in space. Twice Hero of the Soviet Union.
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-**Flight Engineer Civ. Valeri Vladimirovich Polyakov** (1942-04-27 Tula Russian SFSR → **2022-09-07 Moscow Russia**; substrate-coincident-distinct 3y 8m pre-ship). Civilian Soviet cosmonaut + medical doctor (Moscow Medical Stomatology Institute PhD physiology). Rookie first flight at age 46. **FIRST PHYSICIAN ON MIR** — stayed on Mir as EO-3-augmenter providing medical monitoring of Titov+Manarov in 8th month of year-in-space mission + extended through EO-4 + returned Soyuz TM-7 1989-04-27 (240d 22h this flight). **Substrate-anchor for POLYAKOV-LONGEST-SINGLE-SPACEFLIGHT**: Polyakov would later set the 437-day-17-hour-58-minute-16-second longest-single-spaceflight record on Soyuz TM-18/TM-20 Mir 1994-01-08 to 1995-03-22 (record still standing 2026). Cumulative 678.7 days in space. Twice Hero of the Soviet Union + Hero of the Russian Federation.
+## Key Features
 
-**Return anomaly 1988-09-07.** Lyakhov + Mohmand undocked Mir aboard Soyuz TM-5 (the Bulgarian-redemption-return vehicle from v682) for nominal deorbit return. The Igla rendezvous-sensor (used for autonomous undock-departure-burn coordination) suffered an anomaly preventing the planned deorbit burn. Soyuz TM-5 stranded in orbit for 24 hours; ground control re-planned manual deorbit sequence; eventual landing 1988-09-07 14:50 UTC — 24 hours late from nominal 1988-09-06 schedule. **24-HOUR-RETURN-DELAY-FROM-SENSOR-ANOMALY** substrate-form NEW LOCKED.
+| Track | Field | Value |
+|---|---|---|
+| NASA | Mission name | Soyuz TM-6: First Afghan Cosmonaut Mohmand + Polyakov First Physician on Mir + Igla Anomaly Recovery |
+| NASA | Degree from | 1.135 |
+| NASA | Degree to | 1.136 |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-## Same-calendar-day count
+## Cross-References
 
-Today (2026-05-18 UTC) — **12 milestones** with v683 ship. 11 NASA-advancing + 1 cc-cluster within a single calendar day. Operator session-open directive sustains.
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.682** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.684** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-## ESTABLISHED lessons sustained at obs#8 cumulative
+## Engine Position
 
-- **#10381 SUBSTRATE-AXIS-ROTATION-DISCIPLINE** ESTABLISHED applied (rotation #8)
-- **#10384 OPERATOR-AUTHORIZED-DEPARTURE-FROM-LESSON-PATTERN** ESTABLISHED applied (12th same-day ship)
-- **#10385 SUB-AGENT-PROMPT-FILENAME-COORDINATION-DRIFT** obs#7 with all three recovery patterns
+| Track | At v1.49.682 close | At v1.49.683 close |
+|---|---|---|
+| NASA degree | 1.135 | **1.136** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
 
-## Pre-Soviet-withdrawal diplomatic context
+## Infrastructure
 
-The Soyuz TM-6 flight (launched 1988-08-29) ships **4 months 15 days before scheduled 1989-02-15 Soviet withdrawal completion from Afghanistan** per Geneva Accords signed 1988-04-14. Substrate-form PRE-SOVIET-WITHDRAWAL-FROM-AFGHANISTAN-DIPLOMATIC-FLIGHT NEW LOCKED — substrate-anchor for diplomatic-flight-precedes-conflict-closure cohort.
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/1.136/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-683-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.683` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.682](../v1.49.682/00-summary.md) · **Next:** [v1.49.684](../v1.49.684/00-summary.md)

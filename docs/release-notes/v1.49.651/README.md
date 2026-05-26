@@ -11,6 +11,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.651 advances the engine from 1.114 to 1.115 with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** STS-41-G Challenger ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 **The seventh consecutive degree-advancing milestone after the engine-cadence resume, and the first degree to record six simultaneous human-spaceflight firsts in a single mission envelope.** v645 reopened the NASA cadence at NASA 1.108→1.109. v646 sustained same calendar day 2026-05-12. v647 closed the same-day three-degree advance. v648 extended to four consecutive degree advances 2026-05-13. v649 extended to five. v650 extended to six, completing the six-degree-in-two-day cadence. v651 extends to **seven consecutive degree advances** — extending the sprint into a seventh degree while sustaining substrate density — with **STS-41-G Challenger (NSSDC 1984-108A)**, the **thirteenth Space Shuttle flight** and the **sixth flight of OV-099 Challenger**, delivering the deepest single-mission first-instance density in the 1.101–1.115 cohort span: **FIRST SEVEN-PERSON CREW EVER** + **FIRST AMERICAN WOMAN EVA** (Sullivan + Leestma 3h 29m ORS hydrazine fuel-transfer demonstration; 59 kg transferred; globally obs#2 after Soviet Savitskaya 1984-07-25 at 2m 17d) + **FIRST SECOND-TIME AMERICAN WOMAN IN SPACE** (Ride; 1y 4m 17d after STS-7) + **FIRST CANADIAN ASTRONAUT** (Garneau PS1 Royal Canadian Navy Commander PhD EE Imperial College London 1973) + **FIRST AUSTRALIAN-BORN US ASTRONAUT** (Scully-Power PS2 US Navy oceanographer naturalized 1982) + **FIRST 4-FLIGHT SHUTTLE ASTRONAUT** (Crippen closes a 4-flight career arc STS-1 + STS-7 + STS-41-C + STS-41-G in 3y 5m 24d). Simultaneously, the **COMPOUND-FORWARD-SHADOW-DENSITY** three-consecutive-degree cluster (v648 McNair + v649 Scobee + v650 Resnik) RESOLVES at v651 — all seven STS-41-G crew survive the Shuttle program, and the forward-shadow density transitions from peak accumulation to RESOLVED obs#1 first-instance.
 
 STS-41-G launched **1984-10-05 07:03:00 UTC** from LC-39A at Kennedy Space Center at **57.0° inclination** — the HIGHEST-SHUTTLE-INCLINATION-TO-DATE, substrate-novel to this point in the cohort. ERBS (Earth Radiation Budget Satellite) was deployed via RMS by Ride on Flight Day 1 at ~350 nm orbit (21-year operational life 1984–2005; foundational climate radiation-balance dataset). K. D. Sullivan and D. C. Leestma performed the ORS EVA on 1984-10-11 (3h 29m; 59 kg hydrazine transferred from Challenger's OMS pods to the ORS tank) — the first on-orbit propellant transfer in spaceflight history. OSTA-3 Earth-observation suite: SIR-B (L-band SAR; Ku-band gimbal anomaly limited data downlink) + LFC + MAPS + FILE. CANEX-2 Canadian experiments operated by Garneau. IMAX 70mm cargo-bay camera (third flight; footage in *The Dream Is Alive* 1985). Landing at KSC Runway 33 concrete 1984-10-13 12:26:38 UTC; 8d 5h 23m 33s / 133 orbits.

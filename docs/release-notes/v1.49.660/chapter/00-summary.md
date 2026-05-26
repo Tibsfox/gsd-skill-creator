@@ -1,41 +1,62 @@
-# v1.49.660 — STS-51-D Discovery / Executive Summary
+<!-- V650-699-CHAPTER-LIFTED v1 -->
+# v1.49.660 — Chapter 00: Summary
 
-**Released:** 2026-05-16
-**Cadence:** engine-cadence — tenth degree-advancing milestone in the post-v644 resume cadence; first NASA degree-advance after 2-milestone counter-cadence cluster v658+v659 (catalog-card template + Phase-2 build-out) interposed between v657 and v660 on same calendar day 2026-05-16
-**NASA Mission:** STS-51-D Discovery (NSSDC 1985-028A) — Degree 1.118
+## Summary
 
-## Engine state advance
+**Forward-cadence NASA degree advance to 1.118.** v1.49.660 ships STS-51-D Discovery as a forward-cadence engine-state advance from NASA degree 1.117 to 1.118. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-- **NASA:** 1.117 → **1.118 STS-51-D Discovery** (sixteenth Shuttle flight + 4th OV-103 Discovery flight + FIRST POLITICIAN IN SPACE Sen. E. J. "Jake" Garn (R-UT) PS2 USAF Major naval-aviator-test-pilot Senate Appropriations subcommittee chair on NASA budget oversight + FIRST PHYSICIAN IN SPACE M. Rhea Seddon MS3 board-certified surgeon Vanderbilt MD 1973 + emergency-medicine UC Irvine residency NASA Group 8 TFNG 1978 + FIRST UNSCHEDULED IN-FLIGHT IMPROVISED EVA-RESCUE Hoffman MS2 + Griggs MS1 day-6 1985-04-16 3h 6m "flyswatter" aluminum-plate device + "lacrosse" net-configuration attached to RMS end-effector by Seddon via IFM-toolkit; first-of-cohort UNSCHEDULED-SHUTTLE-EVA + IMPROVISED-TOOL-FABRICATION-IN-ORBIT + RMS-AS-RESCUE-TOOL triplet + FIRST COMMERCIAL-PS-REPEAT-FLYER Charles D. Walker PS1 McDonnell Douglas CFES-V 2nd flight after STS-41-D v650 maiden CFES-V (Walker first multi-multi-flight commercial PS anticipation toward STS-61-B 1985-11-26 3rd flight) + LEASAT-3 STUCK-LEVER POST-DEPLOY-PARTIAL-FAILURE obs#1 first-instance Hughes Syncom IV-3 sequence-arming-lever stuck OFF state post-Frisbee-deploy day-2 satellite inert in low-Earth orbit substrate-novel POST-DEPLOY-PRE-ACTIVATION-PARTIAL-FAILURE distinct from STS-6 IUS-1 + STS-41-B PAM-D + opens STS-51-I 4m 15d LEASAT-3-RESCUE-RECOVERY-FORWARD-SHADOW + BOBKO CDR 2ND FLIGHT obs#1 K. J. Bobko USAF Brig Gen retired NASA Group 7 1969 from cancelled USAF MOL program first NASA-Group-7-MOL-transfer-cohort to command an orbital mission NASA-GROUP-7-MOL-TRANSFER-COHORT-COMMANDS-ORBITAL-MISSION obs#1 first-instance + 4TH-OV-103-OPERATIONAL-CADENCE-EXTENSION obs#4 (78-day turnaround from v657 STS-51-C) + ANIK-C-1-PAM-D-DEPLOY-NOMINAL obs#3 3rd-successful-PAM-D-Shuttle-deploy after STS-5 + STS-7 + TIRE-BURST-ON-LANDING obs#1 first-instance right-main-tire burst on rollout 80-knot-crosswind Runway 33 KSC SLF 4,000 ft remaining substrate-anchor for Edwards-AFB-mandatory-landing cohort policy + #10287 obs#24 DIRECT-ORDER 23-of-23 anticipated + TFNG-32-of-35 cumulative anticipated (Williams + Griggs + Hoffman + Seddon 4 new TFNGs first-flight); ET-15 LWT-8 twelfth unpainted-orange; 7-crew Bobko CDR + Williams PLT + Griggs MS1 + Hoffman MS2 + Seddon MS3 + Walker PS1 + Garn PS2; KSC landing 1985-04-19 13:54:28 UTC SLF Runway 33 109 orbits)
-- **MUS:** 1.117 → **1.118 Tom Petty and the Heartbreakers *Southern Accents* (MCA Records 5486)** SOUTHERN-ROCK-AS-GENRE-PIVOT-INSIDE-STRICT obs#1 first-instance + ALBUM-FORM streak resumed obs#15 after deliberate pause at v657 obs#14 per Lesson #10269 streak-pause-discipline + ICONIC-MUSIC-VIDEO-FORM-AS-PRIMARY-ARTIFACT obs#1 first-instance "Don't Come Around Here No More" Jeff-Stein-directed Mad-Hatter-Alice-in-Wonderland-tea-party MTV-premiere 1985-04-22 = launch +10d INSIDE strict; album release-date 1985-03-26 = launch -17d INSIDE strict + landing -24d AT-BOUNDARY narrowly OUTSIDE -21d strict single-anchor INSIDE STRICT on launch; 6th studio album produced by Petty + Jimmy Iovine + Dave Stewart longest-recording-arc-to-date 1983-1985; album US #7 Billboard 200; "Don't Come Around Here No More" #13 Billboard Hot 100; Confederate-flag-iconography-retroactively-denounced-2015 substrate-anticipation; FA-660-1 RESOLVED
-- **ELC:** 1.117 → **1.118 Coca-Cola "New Coke" announcement 1985-04-23 Lincoln Center NYC Roberto Goizueta** (launch +11d INSIDE strict; CORPORATE-MISCALCULATION-AS-CULTURAL-EVENT-AS-SUBSTRATE-NOVEL obs#1 first-instance + PUBLIC-PRODUCT-REVOLT-AS-MARKET-FEEDBACK obs#1 first-instance + "Coca-Cola Classic" reversal 78-days-later 1985-07-11 substrate-anticipation; Project Kansas internal code-name; 1,500-daily-complaint-calls + 40,000-letters + Old-Cola-Drinkers-of-America consumer-movement; congressional-hearings + broad-media-coverage; SUBSTRATE-MONOCULTURE-RISK-RESOLUTION obs#9 ENDURING-DEEP-SUSTAINED-PATTERN at 9-distinct-cultural-event-categories across 10 consecutive degrees; CASCADE-CONTAINMENT #10333 obs#14); FA-660-2 RESOLVED
-- **SPS:** #114 → **#115 Marbled Murrelet (*Brachyramphus marmoratus* Gmelin 1789)** FIRST-ALCIDAE + FIRST-OLD-GROWTH-FOREST-NESTING-MARINE-SEABIRD + FIRST-IUCN-ENDANGERED-SPECIES + FIRST-DUAL-HABITAT-OBLIGATE-MARINE-FORAGER-FOREST-NESTER (forages at sea + nests inland in old-growth conifer-forest 30-80 km from coast) + FIRST-ESA-THREATENED-AT-FEDERAL-LISTING — 5-FIRST-INSTANCE substrate-pair at single cohort entry matching v657 Sea Otter density; cohort-class-pivot from Mammalia-Marine v657 Pacific Sea Otter to **Aves-Pelagic-Forager-Forest-Nester v660** vertebrate-class-expansion (third class-pivot in three consecutive SPS entries: Amphibia → Mammalia-Marine → Aves-Pelagic-Forager-Forest-Nester); NEST-DISCOVERY-MYSTERY-1789-1974 = 185 year mystery solved at Big Basin Redwoods State Park CA by tree-climber Hoyt Foster — egg on moss-covered horizontal limb of old-growth Douglas-fir at 45m height; ARBOREAL-NESTING-MARINE-SEABIRD obs#1; ESA-Threatened 1992 CA-OR-WA-DPS + Canada-SARA-Threatened 2003 + IUCN-Endangered globally; threats: old-growth-forest-loss + corvid-nest-predation + oil-spill-mortality + gill-net-bycatch; FA-660-4 RESOLVED
-- **TRS:** pack-39 K_39=519 → **pack-40 K_40=533** (14 new edges e520-e533; stochastic processes — Markov chains + Brownian motion + Itô calculus + martingales + Lévy processes + Poisson processes + stopping times + optional-stopping theorem + filtrations + stochastic integration + Markov decision processes + hidden-Markov models + queueing theory + birth-death processes; 5-level substrate-coherence with STS-51-D: (1) improvised-EVA-rescue as MDP-with-state-uncertainty + (2) RMS-arm-control as Itô-stochastic-control + (3) debris-trajectory as Brownian-motion-in-orbital-mechanics + (4) Leasat-3-stuck-switch as Markov-chain-absorbing-state + (5) Walker-CFES-V-repeat as Lévy-process-jump-cohort; FA-660-5 RESOLVED; 28-of-28 single-pass K_N anticipated)
+**Mission rebuilt to per-pipeline depth.** STS-51-D Discovery ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/1.118/`.
 
-## Key substrate axes table
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-| Track | Pick | Anchor | Top substrate-novel primitives |
-|---|---|---|---|
-| NASA 1.118 | STS-51-D Discovery | 1985-04-12 13:59 UTC launch; 28.5° / ~407 km × ~519 km | FIRST-POLITICIAN-IN-SPACE (Garn); FIRST-PHYSICIAN-IN-SPACE (Seddon); FIRST-UNSCHEDULED-IN-FLIGHT-IMPROVISED-EVA-RESCUE (Hoffman+Griggs "flyswatter"); FIRST-COMMERCIAL-PS-REPEAT-FLYER (Walker 2nd CFES-V); LEASAT-3-STUCK-LEVER-POST-DEPLOY-PARTIAL-FAILURE obs#1; BOBKO-NASA-GROUP-7-MOL-TRANSFER-COMMANDS-ORBITAL-MISSION obs#1; 4TH-OV-103-OPERATIONAL-CADENCE-EXTENSION obs#4; ANIK-C-1-PAM-D-DEPLOY-NOMINAL obs#3; TIRE-BURST-ON-LANDING obs#1; STS-51-I-4m-15d-LEASAT-3-RESCUE-RECOVERY-FORWARD-SHADOW-OPENED |
-| MUS 1.118 | Tom Petty and the Heartbreakers *Southern Accents* | 1985-03-26 MCA Records 5486 | SOUTHERN-ROCK-AS-GENRE-PIVOT-INSIDE-STRICT obs#1; ICONIC-MUSIC-VIDEO-FORM-AS-PRIMARY-ARTIFACT obs#1 ("Don't Come Around Here No More" 1985-04-22 MTV-premiere); ALBUM-FORM-STREAK-RESUMED-OBS#15-AFTER-DELIBERATE-PAUSE-AT-V657-OBS#14; JIMMY-IOVINE-DAVE-STEWART-CO-PRODUCERS; MCA-RECORDS-COHORT-FIRST; CONFEDERATE-FLAG-ICONOGRAPHY-RETROACTIVELY-DENOUNCED-2015; LONGEST-RECORDING-ARC-TO-DATE-1983-1985 |
-| ELC 1.118 | Coca-Cola "New Coke" announcement | 1985-04-23 Lincoln Center NYC | CORPORATE-MISCALCULATION-AS-CULTURAL-EVENT-AS-SUBSTRATE-NOVEL obs#1; PUBLIC-PRODUCT-REVOLT-AS-MARKET-FEEDBACK obs#1; COCA-COLA-CLASSIC-REVERSAL-78-DAYS-LATER-1985-07-11; PROJECT-KANSAS-INTERNAL-CODE-NAME; OLD-COLA-DRINKERS-OF-AMERICA-CONSUMER-MOVEMENT; SUBSTRATE-MONOCULTURE-RISK-RESOLUTION obs#9 ENDURING-DEEP-SUSTAINED-PATTERN; CASCADE-CONTAINMENT obs#14 |
-| SPS #115 | Marbled Murrelet (*Brachyramphus marmoratus*) | Alcidae / Charadriiformes / Aves | FIRST-ALCIDAE; FIRST-OLD-GROWTH-FOREST-NESTING-MARINE-SEABIRD; FIRST-IUCN-ENDANGERED-SPECIES; FIRST-DUAL-HABITAT-OBLIGATE-MARINE-FORAGER-FOREST-NESTER; FIRST-ESA-THREATENED-AT-FEDERAL-LISTING; ARBOREAL-NESTING-MARINE-SEABIRD obs#1; NEST-DISCOVERY-MYSTERY-1789-1974 = 185-year-mystery-solved (Big Basin Redwoods + Hoyt Foster + 45m-Douglas-fir); HUMBOLDT obs#10 SUSTAINED-DEEP-CONSOLIDATION |
-| TRS pack-40 | Stochastic processes | K_40 = 533 edges; 14 new e520-e533 | MARKOV-CHAINS; BROWNIAN-MOTION; ITO-CALCULUS; MARTINGALES; LEVY-PROCESSES; POISSON-PROCESSES; STOPPING-TIMES; OPTIONAL-STOPPING-THEOREM; FILTRATIONS; STOCHASTIC-INTEGRATION; MARKOV-DECISION-PROCESSES; HIDDEN-MARKOV-MODELS; QUEUEING-THEORY; BIRTH-DEATH-PROCESSES; BRIDGE-CATEGORY obs#25; K_N-COMPLETION obs#25; 28-OF-28-SINGLE-PASS |
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-## Mission ledger
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-| Field | Value |
-|---|---|
-| NSSDC ID | 1985-028A |
-| Vehicle | OV-103 Discovery — fourth flight (78-day turnaround from STS-51-C v657 1985-01-24) |
-| Launch | 1985-04-12 13:59:05 UTC (09:59:05 EST), LC-39A KSC (55-second hold at T-31 seconds due to launch-pad-ship-blockage in restricted waters down-range obs#1 first-instance) |
-| Landing | 1985-04-19 13:54:28 UTC (08:54:28 EST), KSC Shuttle Landing Facility Runway 33; 109 orbits; right-main-tire burst on rollout 80-knot-crosswind 4,000 ft remaining (TIRE-BURST-ON-LANDING obs#1 first-instance) |
-| Duration | 6d 23h 55m 23s |
-| Orbit | ~407 km × ~519 km; 28.5° inclination |
-| Crew | K. J. Bobko CDR + D. E. Williams PLT + S. D. Griggs MS1 + J. A. Hoffman MS2 + M. R. Seddon MS3 + C. D. Walker PS1 + E. J. "Jake" Garn (R-UT) PS2 |
-| External Tank | **ET-15 (LWT-8)** — eighth Lightweight Tank; twelfth unpainted-orange per v633 cohort-counting convention starting at ET-4 chronological-flight-order |
-| Payloads deployed | Anik C-1 (Telesat Canada) via PAM-D upper stage day-1 1985-04-12 NOMINAL (PAM-D-3rd-successful-Shuttle-deploy obs#3 after STS-5 + STS-7) + Syncom IV-3 (Leasat-3, Hughes for US Navy) via Frisbee-style spring-release day-2 1985-04-13 (FRISBEE-DEPLOY obs#3 after STS-41-D Leasat-2 + STS-51-A Leasat-1); Leasat-3 sequence-arming-lever stuck OFF after deploy = inert in low-Earth orbit |
-| EVA | Hoffman + Griggs day-6 1985-04-16 3h 6m "flyswatter" + "lacrosse" improvised RMS-attached devices (FIRST-UNSCHEDULED-SHUTTLE-EVA + FIRST-IMPROVISED-TOOL-FABRICATION-IN-ORBIT + FIRST-RMS-AS-RESCUE-TOOL) — rescue UNSUCCESSFUL; Leasat-3 remained inert through STS-51-I 1985-08-27 rescue |
-| Mid-deck | CFES-V (Continuous Flow Electrophoresis System) Walker 2nd flight (COMMERCIAL-PS-REPEAT-FLYER obs#1); IFM (in-flight maintenance) of non-payload orbiter sub-system (Seddon-coordinated); IMAX cargo-bay camera NOT FLOWN |
-| Carry-forward | Hoffman: STS-35 + STS-46 + STS-61 (Hubble servicing) + STS-75 forward (5-flight career); Griggs: died T-38 crash 1989-06-17 substrate-anticipation; Seddon: STS-40 SLS-1 1991 + STS-58 Seddon-CDR 1993 forward (PHYSICIAN-CDR substrate-anticipation); Walker: STS-61-B 1985-11-26 = 3rd flight (commercial-PS-multi-flight); Bobko: STS-51-J CDR 1985-10-03 = 3rd flight (NASA-Group-7-MOL-3-flights anticipation); Williams: STS-34 CDR 1989-10-18 = 2nd flight (PILOT-RISES-TO-COMMANDER); Garn: never flew again (SINGLE-FLIGHT-POLITICIAN substrate-form anticipation); Onizuka→STS-51-L 9-month-residual forward-shadow continues |
-| Successor candidate | v1.49.661 STS-51-B Challenger Spacelab-3 1985-04-29 (Overmyer CDR + Gregory PLT + Lichtenberg + Thornton + Thagard + van den Berg + Wang — FIRST-DUTCH-PS van den Berg + 2ND-SPACELAB obs#2 + CHALLENGER-4TH-FLIGHT); alternate STS-51-G Discovery 1985-06-17 (Brandenstein CDR + first-French + first-Arab/first-royalty Al-Saud) |
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
+
+## Key Features
+
+| Track | Field | Value |
+|---|---|---|
+| NASA | Mission name | STS-51-D Discovery |
+| NASA | Degree from | 1.117 |
+| NASA | Degree to | 1.118 |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
+
+## Cross-References
+
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.659** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.661** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
+
+## Engine Position
+
+| Track | At v1.49.659 close | At v1.49.660 close |
+|---|---|---|
+| NASA degree | 1.117 | **1.118** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
+
+## Infrastructure
+
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/1.118/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-660-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.660` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.659](../v1.49.659/00-summary.md) · **Next:** [v1.49.661](../v1.49.661/00-summary.md)

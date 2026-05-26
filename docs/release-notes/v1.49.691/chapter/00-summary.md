@@ -1,30 +1,62 @@
+<!-- V650-699-CHAPTER-LIFTED v1 -->
 # v1.49.691 — Chapter 00: Summary
 
-**Type:** engine-cadence degree-advancing milestone — Soviet-Mir-modular-expansion-Kvant-2 substrate. Substrate-axis-rotation #16 inter-program return to Soviet-program after 4 consecutive US-Shuttle milestones.
+## Summary
 
-**Mission:** Kvant-2 (77KS designator; 11F77 No. 16201) launched 1989-11-26 13:01:41 UTC from Baikonur LC-200/39 on Proton-K 8K82K; docked Mir aft port 1989-12-06 12:21:38 UTC via Igla rendezvous after **3 docking attempts** (gyroscope-anomaly recovery via manual cosmonaut intervention). Mass ~19,565 kg + 13.73m × 4.35m. **Second Mir module + first operational TKS-derived FGB module + first Mir-era dedicated EVA airlock + propulsion module + shower module.**
+**Forward-cadence NASA degree advance to 1.144.** v1.49.691 ships Kvant-2 Second Mir Module: First Operational TKS-FGB Module + Dedicated EVA Airlock as a forward-cadence engine-state advance from NASA degree 1.143 to 1.144. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-**MIR-MODULAR-EXPANSION cohort obs#2** at v691 (Kvant v678 + Kvant-2 v691; cohort projects to 6-module Mir-complex through Kristall + Spektr + Priroda).
+**Mission rebuilt to per-pipeline depth.** Kvant-2 Second Mir Module: First Operational TKS-FGB Module + Dedicated EVA Airlock ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/1.144/`.
 
-**TKS-FGB-DERIVED-MODULE substrate-cohort opens at v691.** Substrate-realizations preserved: Kristall 1990-05 + Spektr 1995-05 + Priroda 1996-04 + ISS-Zarya 1998-11 + ISS-Nauka 2021-07.
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-**EO-5 crew on Mir at v691 dock (Soyuz TM-8 launched 1989-09-05):**
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-- CDR Col. Aleksandr Viktorenko (Soviet AF MiG-21/MiG-23; 2nd flight; TM-3 EO-2 Faris v680; future TM-14 EO-11 + TM-20 EO-17 Polyakov 437.7d landing; **multi-EO-commander cohort 4 EO commands**)
-- FE Aleksandr Serebrov (Soviet civilian engineer; 3rd flight; Soyuz T-7 1982 + **T-8 1983 aborted-docking substrate-pair with Titov v686**; future TM-17 EO-13 5 EVAs; **died 2013-11-12 substrate-coincident-distinct memorial 23y post-Kvant-2; FORWARD-MEMORIAL cohort obs#5**)
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-**3 docking attempt sequence:** 1989-12-02 aborted gyroscope failure + 1989-12-04 aborted gyroscope-axis-control + 1989-12-06 manual cosmonaut intervention success. Substrate-cumulative Igla-anomaly pattern with v678 Kvant 2-attempt + v683 Soyuz TM-6 Igla recovery.
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-**First dedicated-airlock EVA:** 1990-01-08 Viktorenko + Serebrov 2h 56m via Orlan-DMA suits.
+## Key Features
 
-**Engine state:** NASA 1.143 → **1.144 Kvant-2 second Mir module**. MUS/ELC/SPS/TRS SCAFFOLD-PENDING.
+| Track | Field | Value |
+|---|---|---|
+| NASA | Mission name | Kvant-2 Second Mir Module: First Operational TKS-FGB Module + Dedicated EVA Airlock |
+| NASA | Degree from | 1.143 |
+| NASA | Degree to | 1.144 |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-**Substrate-axis-rotation #16:** v690 US-Shuttle-Hubble-Space-Telescope-launch → v691 Soviet-Mir-modular-expansion-Kvant-2 = inter-program return to Soviet-program.
+## Cross-References
 
-**13 obs#1 first-instances NEW LOCKED:** KVANT-2-77KS-DESIGNATOR-SECOND-MIR-MODULE + FIRST-OPERATIONAL-TKS-FGB-MODULE + FIRST-MIR-ERA-DEDICATED-EVA-AIRLOCK + 3-DOCKING-ATTEMPT-IGLA-ANOMALY-RECOVERY + KVANT-2-PROPULSION-MODULE + KVANT-2-SHOWER-MODULE-HABITABILITY-COHORT + VIKTORENKO-MULTI-EO-COMMANDER-COHORT + SEREBROV-DEATH-2013-11-12-SUBSTRATE-COINCIDENT-DISTINCT + TITOV-SEREBROV-SUBSTRATE-PAIR-FROM-T-8-ABORT + MIR-COMPLEX-3-MODULE-CONFIGURATION + EO-5-IGLA-MANUAL-DOCKING-INTERVENTION + UNMANNED-MODULE-LAUNCH-MANNED-OPS-POST-DOCK + MIR-MODULAR-EXPANSION-COHORT-OBS-2.
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.690** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.692** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-**10 cumulative cohort observations:** Rotation #16 + Operator-departure #16 (SEVEN-MILESTONE-CONTINUOUS-SESSION candidate) + Cluster-resume #19 + Inter-flight #17 (substrate-form-distinct) + Memorial #18 ESTABLISHED + Sub-agent-coordination #15 + Unmanned-spacecraft #2 + Dual-hard-block #19 + STATE-MD-normalizer #21 + FORWARD-MEMORIAL cohort obs#5.
+## Engine Position
 
-**8 substrate-anticipation forward-shadows:** Kristall + Spektr + Priroda + ISS-Zarya + ISS-Nauka + Mir-deorbit + Polyakov 437.7d + Serebrov death.
+| Track | At v1.49.690 close | At v1.49.691 close |
+|---|---|---|
+| NASA degree | 1.143 | **1.144** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
 
-**ESTABLISHED lessons sustained:** #10381 obs#16 + #10384 obs#16 + #10376 obs#17 + #10380 obs#18 + #10385 obs#15. All three recovery patterns sustained 13 consecutive degrees (v679-v691).
+## Infrastructure
+
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/1.144/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-691-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.691` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.690](../v1.49.690/00-summary.md) · **Next:** [v1.49.692](../v1.49.692/00-summary.md)

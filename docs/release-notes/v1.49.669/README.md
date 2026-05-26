@@ -8,6 +8,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.669 advances the engine from 1.123 to 1.124 with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** STS-61-A Challenger Spacelab-D1 ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 v1.49.669 ships the **third consecutive forward-cadence degree-advance** after the v664+v665+v666 counter-cadence cluster CLOSE. STS-61-A Challenger (NSSDC 1985-090A) is the 22nd Shuttle flight and the 9th of 10 lifetime Challenger flights (CHALLENGER-FORWARD-SHADOW residual 2m 28d to STS-51-L 1986-01-28 disaster final flight). Launched 1985-10-30 17:00:00 UTC LC-39A KSC. 8-person crew (largest Shuttle crew to date; first-instance 8-person Shuttle profile): CDR Hartsfield (3rd flight; MOL-transfer) + PLT Nagel (2nd flight; first MS-to-PLT promotion) + MS1 Buchli (2nd flight; USMC-officer-on-Spacelab first-instance) + MS2 Bluford (2nd flight; first African-American multi-flight career) + MS3 Dunbar (rookie; PNW-NATIVE-ASTRONAUT obs#1 — Sunnyside WA Columbia River basin) + PS1 Furrer (West German physicist; ESA; first West German in space cohort-pair) + PS2 Messerschmid (West German physicist; ESA; first West German in space cohort-pair) + PS3 Ockels (Dutch physicist; ESA; first Dutch astronaut). Spacelab D1 "Deutschland 1" — first ESA-funded primary-payload Shuttle mission (~175M USD West German federal funding via DFVLR/DLR); 76 microgravity experiments across materials science + fluid physics + biology + medicine + navigation + plasma physics + Earth observation + technology demos. Mission control split: NASA JSC Houston manages orbiter + crew; DLR Oberpfaffenhofen near Munich manages payload operations (first non-NASA primary-payload-ops cadre in any human spaceflight). 57° high-inclination orbit ~324 km altitude. 7d 0h 44m 53s mission, 112 orbits. Edwards AFB Runway 17 concrete strip landing 1985-11-06 17:44:51 UTC.
 
 **Substrate-form anchors at v669:** nine obs#1 first-instances + seven cumulative cohort observations.

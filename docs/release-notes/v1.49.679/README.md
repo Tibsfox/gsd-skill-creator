@@ -25,6 +25,20 @@ ESTABLISHED candidate at v679 W3 if obs#3 cumulative threshold is honored.
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.679 advances the engine from 1.131 to 1.132 with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** Halley Armada 1986: First International Multi-Spacecraft Comet Intercept Campaig ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 The 1986 perihelion passage of comet 1P/Halley — the most-anticipated periodic comet return in history due to its 76-year orbital period and 1910 near-Earth approach — coincides with the first generation of nation-states capable of building outer-solar-system spacecraft. The IACG (Inter-Agency Consultative Group; founded 1981 by Roald Sagdeev / IKI Director + Roger Bonnet / ESA Director of Science + Hubert Curien / French Minister of Research + James Beggs / NASA Administrator) coordinated a six-spacecraft, four-agency intercept campaign across 22 days from 1986-03-06 to 1986-03-28.
 
 The Soviet contribution: **Vega 1** (4VeNeGa-1; launched 1984-12-15 from Baikonur LC-200/40 on Proton-K 8K82K; 4,920 kg) and **Vega 2** (4VeNeGa-2; launched 1984-12-21; identical configuration) — **DUAL-TARGET-VENUS-AND-HALLEY-MISSION** obs#1 first-instance NEW LOCKED. Each Vega deployed a Venera-heritage Venus lander + a French-designed atmospheric balloon (CNES + IKI joint development under Hubert Curien's authorization). The balloons descended 1985-06-11 and 1985-06-15 over Aphrodite Terra, remained airborne ~46 hours at altitudes 53.6 km in the Venus acid-cloud layer, transmitting wind speed + temperature + pressure data via the orbiter buses to the Soviet Deep Space Network at Yevpatoria. After Venus deployment, the orbiter buses used Venus gravity-assist for the trajectory to Halley. Vega 1 closest approach 1986-03-06 11:20 UTC at 8,890 km on the sunward side; Vega 2 closest approach 1986-03-09 09:20 UTC at 8,030 km. Both Vegas carried the TVS (TeleVision System) imaging package + 14 additional scientific instruments; ~1,500 images of Halley's nucleus and inner coma transmitted, contributing nucleus position measurements to the IACG Pathfinder Concept (see below).

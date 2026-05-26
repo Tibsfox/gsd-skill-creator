@@ -20,6 +20,20 @@ This milestone documents the loss of 7 crew aboard STS-51-L Challenger on 1986-0
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.674 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** STS-51-L Challenger (NASA 1.127→1.128) — CHALLENGER-FORWARD-SHADOW Catastrophic  ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 STS-51-L Challenger launched 1986-01-28 11:38:00 EST (16:38:00 UTC) from LC-39B Kennedy Space Center. Ambient temperature at pad: 36°F (coldest Shuttle launch to date); overnight low ~24°F producing icicles on the Fixed Service Structure. Vehicle was lost at **T+73.124 seconds** at altitude ~46,000 ft, Mach 1.92. Root cause per Rogers Commission Report (1986-06-06): right Solid Rocket Booster aft field joint primary + secondary O-ring failed to seal due to cold-temperature elastomer hardening; combustion gas blowby through the joint cut through the External Tank LH₂ aft dome at T+58.788s; ET structural failure at T+73.124s caused vehicle disintegration. Morton Thiokol engineers (Roger Boisjoly + Allan McDonald + Bob Ebeling) raised cold-temperature O-ring concerns in the 1986-01-27 evening telecon; the engineering recommendation NOT to launch was overridden by management after pressure from NASA Marshall.
 
 The mission was carrying TDRS-B (Tracking and Data Relay Satellite, planned IUS-3 to GEO) + Spartan-Halley (free-flying Halley's Comet observation platform) + the Teacher in Space Project (McAuliffe's 6 planned in-orbit lessons). Challenger OV-099 had completed 9 prior flights — STS-6 v633 maiden + STS-7 + STS-8 + STS-41-B v638 + STS-41-C + STS-41-G + STS-51-B + STS-51-F + STS-61-A v669 — and the 10th was its final. The 25th Shuttle flight ended in catastrophic-loss substrate-state.

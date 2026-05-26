@@ -1,43 +1,62 @@
+<!-- V650-699-CHAPTER-LIFTED v1 -->
 # v1.49.682 — Chapter 00: Summary
 
-## What shipped
+## Summary
 
-NASA degree advance 1.134 → 1.135. **Soyuz TM-5: Second Bulgarian Cosmonaut Aleksandr Aleksandrov-Belorussian + 9-Year Interkosmos Bulgarian-Programme Redemption + Solovyev/Savinykh Visiting Crew at Mir During Titov+Manarov Year-in-Space EO-3 5th Month**. Substrate-axis-rotation #7 from v681 Soviet-Buran-shadow-year-in-space to v682 Interkosmos-Bulgarian-programme-redemption-after-failed-first-attempt.
+**Forward-cadence NASA degree advance to 1.135.** v1.49.682 ships Soyuz TM-5: Second Bulgarian Cosmonaut Aleksandr Aleksandrov-Belorussian + 9-Year Programme Redemption as a forward-cadence engine-state advance from NASA degree 1.134 to 1.135. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-| Item | Result |
-|---|---|
-| Tag | `v1.49.682` |
-| NASA degree | 1.134 → 1.135 |
-| Substrate axes | 20 declared (11 obs#1 NEW LOCKED + 8 cumulative + 8 substrate-anticipation) |
-| Crew | CDR Solovyev (rookie; career-start of 651.8d) + FE Savinykh (3rd flight; Salyut 7 rescue veteran) + CR Aleksandrov-Belorussian (2nd Bulgarian cosmonaut; 9-year-programme redemption) |
-| Mission duration | 9d 20h 9m visiting flight |
-| Lessons | #10381 + #10384 ESTABLISHED applied obs#7 cumulative; #10385 obs#6 with all three recovery patterns |
+**Mission rebuilt to per-pipeline depth.** Soyuz TM-5: Second Bulgarian Cosmonaut Aleksandr Aleksandrov-Belorussian + 9-Year Programme Redemption ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/1.135/`.
 
-## Operational headline
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-Soyuz TM-5 launched 1988-06-07 14:03:13 UTC from Baikonur Cosmodrome LC-1 (Gagarin's Start) on a Soyuz-U2. Mir docking 1988-06-09 15:57 UTC at +X aft port (Kvant-side; Kvant attached v678 1987-04). 9d 20h 9m visiting flight during Titov + Manarov year-in-space EO-3 mission's 5th month.
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-**Cosmonaut-Researcher Maj. Aleksandr Panayotov Aleksandrov-Belorussian** (born 1951-12-01 Omurtag Bulgarian People's Republic; still living 2026) — Bulgarian People's Republic Air Force MiG-21 + MiG-23 fighter pilot. Selected for Interkosmos 1978 as backup to Georgi Ivanov (Soyuz 33 1979-04 primary). Ivanov's Soyuz 33 mission failed to dock with Salyut 6 due to main engine ignition anomaly during the rendezvous burn — backup engine ballistic re-entry; crew landed safely 1979-04-12 but mission objective unmet. The Bulgarian Interkosmos programme entered a 9-year gap. Aleksandrov-Belorussian's Soyuz TM-5 1988-06-07 visiting flight successfully docked Mir + completed 9d 20h Bulgarian-led scientific work (Spektr-256 Earth-observation spectrometer + ROZA-Mir biological adaptation experiment + Bulgarian cultural payload). **REDEMPTION-FLIGHT-AFTER-FAILED-FIRST-ATTEMPT** + **9-YEAR-INTERKOSMOS-PROGRAMME-GAP-CLOSURE** substrate-forms NEW LOCKED. **NOT to be confused with Aleksandr Pavlovich Aleksandrov the Soviet cosmonaut who flew v680/v681 EO-1 inheritance/return** — both share given-name pattern but are different patronymics + nationalities + careers.
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-**Commander Col. Anatoli Yakovlevich Solovyev** (born 1948-01-16 Riga Latvian SSR; still living 2026) — Soviet Air Force; rookie first flight at age 40. Subsequent career: Soyuz TM-9 EO-6 1990 (179d) + Soyuz TM-15 EO-12 1992-1993 (188d) + STS-71 Atlantis 1995 (10d as first Shuttle-Mir docking commander) + Soyuz TM-26 EO-24 1997-1998 (197d). **Cumulative 651.8 days in space — at career close 5th most space-experienced cosmonaut overall.** Twice Hero of the Soviet Union + Hero of the Russian Federation.
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-**Flight Engineer Civ. Viktor Petrovich Savinykh** (born 1940-03-07 Berezkiny Kirov Oblast Russian SFSR; still living 2026) — civilian Soviet cosmonaut; 3rd career flight. Previous: Soyuz T-4 EO-1 Salyut 6 1981 (74d) + **Soyuz T-13 1985 Salyut 7 rescue mission with Dzhanibekov (168d; restarted dead station after total power-system failure)**. Substrate-anchor for **SAVINYKH-RESCUE-VETERAN-VISITS-OPERATIONAL-MIR** — substrate-contrast Salyut 7 rescue 1985 (dead station; restarted manually) → Mir 1988 (operational + year-in-space crew + Kvant module attached). Twice Hero of the Soviet Union.
+## Key Features
 
-## Same-calendar-day count
+| Track | Field | Value |
+|---|---|---|
+| NASA | Mission name | Soyuz TM-5: Second Bulgarian Cosmonaut Aleksandr Aleksandrov-Belorussian + 9-Year Programme Redemption |
+| NASA | Degree from | 1.134 |
+| NASA | Degree to | 1.135 |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-Today (2026-05-18 UTC) — **11 milestones** with v682 ship: v672 + v673 + v674 + v675 + v676-cc + v677 + v678 + v679 + v680 + v681 + v682. Ten NASA-advancing milestones + one cc-cluster. Operator session-open directive sustains.
+## Cross-References
 
-## Patronymic-collision-disambiguation cohort opens at v682
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.681** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.683** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-| Cosmonaut | Patronymic | Nationality | Flights |
-|---|---|---|---|
-| Aleksandr **Pavlovich** Aleksandrov | Pavlovich | Soviet | Soyuz T-9 1983 + Soyuz TM-3 1987 (v680) + Soyuz TM-4 return 1987 (v681) |
-| Aleksandr **Panayotov** Aleksandrov-Belorussian | Panayotov | Bulgarian | Soyuz TM-5 1988 (v682) |
+## Engine Position
 
-Substrate-form-novel for cosmonaut-name-disambiguation cohort.
+| Track | At v1.49.681 close | At v1.49.682 close |
+|---|---|---|
+| NASA degree | 1.134 | **1.135** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
 
-## ESTABLISHED lessons sustained at obs#7 cumulative
+## Infrastructure
 
-- **#10381 SUBSTRATE-AXIS-ROTATION-DISCIPLINE** ESTABLISHED applied (rotation #7)
-- **#10384 OPERATOR-AUTHORIZED-DEPARTURE-FROM-LESSON-PATTERN** ESTABLISHED applied (11th same-day ship)
-- **#10385 SUB-AGENT-PROMPT-FILENAME-COORDINATION-DRIFT** obs#6 with all three recovery patterns (FA-679-10 + FA-680-10 + FA-680-11) applied
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/1.135/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-682-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.682` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.681](../v1.49.681/00-summary.md) · **Next:** [v1.49.683](../v1.49.683/00-summary.md)

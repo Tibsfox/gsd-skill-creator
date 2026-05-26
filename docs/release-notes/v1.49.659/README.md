@@ -8,6 +8,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.659 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** Phase-2 Build-Out: Manifests, Spectra, Retrieval, Audit ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 v1.49.659 ships four typed-surface deliverables called out in the May 2026 arxiv synthesis section 2.4 ("Code-level changes — Phase 2, not in this commit") plus a complete counterfactual-trace audit machinery bootstrap. Both lineages collapse the "skills as prose with implicit semantics" pattern into "skills as typed manifests with machine-checkable behavioural audit."
 
 This is the **seventh counter-cadence cleanup milestone** in 2026 (v1.49.585 → v1.49.653 → v1.49.654 → v1.49.655 → v1.49.656 → v1.49.658 → v1.49.659), but distinct from its six predecessors: those were operational debt; this one is research-driven build-out from the 60-paper May 2026 arxiv synthesis.

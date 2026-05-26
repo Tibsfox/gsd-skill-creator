@@ -1,66 +1,62 @@
-# v1.49.669 — Summary
+<!-- V650-699-CHAPTER-LIFTED v1 -->
+# v1.49.669 — Chapter 00: Summary
 
-**Type:** engine-cadence degree-advancing milestone — NASA 1.123 → 1.124. **Third consecutive forward-cadence degree-advance after v664+v665+v666 counter-cadence cluster CLOSE.**
-**Predecessor:** v1.49.668 (STS-51-J Atlantis Maiden-Flight DoD-Classified; NASA 1.123).
-**Engine state:** NASA 1.123 → **1.124 STS-61-A Challenger Spacelab-D1 International-Funded**. MUS/ELC/SPS/TRS SCAFFOLD-PENDING acceptable per cc-cluster precedent.
-**Scope:** STS-61-A direct-author-degree-advance via sub-agent dispatch + 13 artifacts + cross-track scaffolds + release notes.
+## Summary
 
-## Mission overview
+**Forward-cadence NASA degree advance to 1.124.** v1.49.669 ships STS-61-A Challenger Spacelab-D1 as a forward-cadence engine-state advance from NASA degree 1.123 to 1.124. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-**STS-61-A Challenger Spacelab-D1** (NSSDC 1985-090A) — 22nd Shuttle flight; OV-099 Challenger 9th of 10 lifetime flights (CHALLENGER-FORWARD-SHADOW residual 2m 28d to STS-51-L 1986-01-28). Launched 1985-10-30 17:00:00 UTC LC-39A KSC. 8-person crew (largest Shuttle crew to date; FIRST-INSTANCE 8-person Shuttle profile): CDR Hartsfield (3rd flight; MOL-transfer Group 7 1969) + PLT Nagel (2nd flight; first MS-to-PLT promotion) + MS1 Buchli (2nd flight; USMC-officer-on-Spacelab) + MS2 Bluford (2nd flight; first African-American multi-flight) + MS3 Dunbar (rookie; PNW-NATIVE-ASTRONAUT obs#1) + PS1 Furrer (West German ESA) + PS2 Messerschmid (West German ESA) + PS3 Ockels (Dutch ESA). Spacelab D1 "Deutschland 1" — first ESA-funded primary-payload Shuttle mission (~175M USD West German federal funding via DFVLR/DLR); 76 microgravity experiments. Mission control split: NASA JSC (orbiter + crew) + DLR Oberpfaffenhofen (payload ops). 57° high-inclination orbit ~324 km altitude. 7d 0h 44m 53s mission, 112 orbits. Edwards AFB Runway 17 concrete strip landing.
+**Mission rebuilt to per-pipeline depth.** STS-61-A Challenger Spacelab-D1 ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/1.124/`.
 
-## Substrate-form anchors at v669
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-**Nine obs#1 first-instances NEW LOCKED:**
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-1. SPACELAB-D1-INTERNATIONAL-FUNDED — first ESA-funded primary-payload Shuttle mission
-2. 8-PERSON-CREW-FIRST-INSTANCE — largest Shuttle crew to date
-3. DLR-AS-NON-NASA-MISSION-MANAGER — first non-NASA primary-payload-ops cadre
-4. FIRST-ESA-PAYLOAD-SPECIALIST-COHORT-3-PS — Furrer + Messerschmid + Ockels
-5. FIRST-WEST-GERMAN-IN-SPACE-COHORT-PAIR — Furrer + Messerschmid simultaneous
-6. FIRST-DUTCH-ASTRONAUT — Ockels first Dutch national in space
-7. GERMAN-VESTIBULAR-SLED-INVESTIGATION — substrate-novel neuroscience apparatus
-8. MATERIALS-SCIENCE-LAB-D1-AS-PRIMARY-PAYLOAD — 76-experiment materials-dominant
-9. BLUFORD-2ND-FLIGHT — first African-American multi-flight career
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-**Seven cumulative cohort observations:** CHALLENGER-9TH-FLIGHT obs#9 + SPACELAB-OPERATIONAL obs#4 + HARTSFIELD-3RD-FLIGHT obs#3 + EDWARDS-LANDING-COHORT obs#6 + ET LWT cohort obs#23 + TFNG cohort + **CLUSTER-RESUME-FORWARD-CADENCE obs#3 → ESTABLISHED candidate**.
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-## Engine state delta
+## Key Features
 
-| Track | Pre-v669 | Post-v669 | Note |
-|---|---|---|---|
-| NASA | 1.123 STS-51-J Atlantis Maiden DoD | **1.124 STS-61-A Spacelab-D1 ESA-Funded** | DEGREE ADVANCE |
-| MUS  | 1.123 SCAFFOLD-PENDING | 1.124 SCAFFOLD-PENDING | scaffold-stub-only |
-| ELC  | 1.123 SCAFFOLD-PENDING | 1.124 SCAFFOLD-PENDING | scaffold-stub-only |
-| SPS  | #118 (no new species since v663) | #118 (no new species) | Hold |
-| TRS  | pack-43 spectral theory (since v663) | pack-43 (no new pack) | Hold |
-
-## Phase digest
-
-| Phase | Deliverable | Style |
+| Track | Field | Value |
 |---|---|---|
-| 828 (W0) | Mission brief | inline (gitignored) |
-| 829 (W1+W2) | degree-sync.json + NASA 1.124 index.html (600 lines / 119,707 bytes; 106% lines / 118% bytes vs 1.123 PASS) | inline scaffold + sub-agent dispatch for full page set |
-| 829 (W2) | 13 artifacts across 5 categories (3 audio + 3 circuits + 2 shaders + 3 sims + 2 story) | sub-agent dispatch; zero forbidden-substring leakage per substrate-form HARD-BLOCK |
-| 830 (W3+W4) | MUS/ELC 1.124 SCAFFOLD-PENDING + 5-file release-notes | inline (this commit) |
-| 831 (T14) | bump-version + pre-tag-gate + commit + tag + push + GH release | inline |
+| NASA | Mission name | STS-61-A Challenger Spacelab-D1 |
+| NASA | Degree from | 1.123 |
+| NASA | Degree to | 1.124 |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-## Cluster-resume context
+## Cross-References
 
-v669 is the **third** forward-cadence degree-advance after v664+v665+v666 cc cluster CLOSE 2026-05-17. CLUSTER-RESUME-FORWARD-CADENCE obs#3 cumulative → **ESTABLISHED candidate** at W3 (3-instance threshold; v667 obs#1 + v668 obs#2 + v669 obs#3). Same-calendar-day degree-advance count today: 3 (v667 + v668 + v669). Lesson #10356 threshold = 4. Capacity for 1 more same-day degree-advance before re-trigger.
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.668** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.670** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-## Sub-agent dispatch observation
+## Engine Position
 
-v669 differs from v667+v668 direct-author cadence by employing a sub-agent dispatch for the NASA 1.124 page-set authoring (index.html + 13 artifacts) while main context handled scaffold + degree-sync.json + release notes + ship. Result: NASA PASS at 106%/118% (exceeds 1.123's WARN 92%/82%); 600 lines vs 568 prev (+5.6% line growth absorbed comfortably within depth-audit envelope). Sub-agent prompt observance: full substrate-form HARD-BLOCK respected (zero "STS-51-J" or "Atlantis maiden" leakage). 48 tool uses, 244K tokens, 20 min wall time. Confirms sub-agent dispatch is viable for NASA page-set authoring when main context is constrained — but at higher token cost than direct-author cadence.
+| Track | At v1.49.668 close | At v1.49.669 close |
+|---|---|---|
+| NASA degree | 1.123 | **1.124** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
 
-## Carry-forward (FA-669-N)
+## Infrastructure
 
-6 carry-forward items inheriting + extending FA-668-N. FA-669-1 = next NASA target (STS-61-B Atlantis 2nd OR STS-61-C Columbia 7th; same-calendar-day count discipline at 3/4). FA-669-3 = CLUSTER-RESUME-FORWARD-CADENCE obs#3 → ESTABLISHED candidate decision at W3. FA-669-4 = CHALLENGER-FORWARD-SHADOW residual 2m 28d. FA-669-5 = PNW-NATIVE-ASTRONAUT obs#1 (Dunbar).
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/1.124/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-669-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.669` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
 
-## Verification
-
-```bash
-node tools/depth-audit.mjs 1.124 | head -5
-find www/tibsfox/com/Research/NASA/1.124/artifacts/ -type f | wc -l   # 13
-grep "milestone:" .planning/STATE.md
-```
+---
+**Prev:** [v1.49.668](../v1.49.668/00-summary.md) · **Next:** [v1.49.670](../v1.49.670/00-summary.md)

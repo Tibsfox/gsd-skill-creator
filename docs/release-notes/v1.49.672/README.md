@@ -9,6 +9,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.672 advances the engine from 1.125 to 1.126 with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** STS-61-C Columbia 7th Flight Chang-Díaz First-Hispanic-American ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 v1.49.672 ships **the penultimate Shuttle flight** before the Challenger STS-51-L disaster. STS-61-C Columbia (NSSDC 1986-003A) is the 24th Shuttle flight and the 7th of Columbia OV-102. Launched 1986-01-12 11:55:00 UTC LC-39A KSC after **7 launch-attempt scrubs** (program record set in same December as v670's success) between 1985-12-18 and 1986-01-12. 7-person crew: CDR Hoot Gibson (2nd flight; future 5-flight Mir-docking commander) + PLT Charles Bolden (rookie; future NASA Administrator 2009-2017) + MS1 **Franklin Chang-Díaz** (Costa Rican-born; PhD MIT plasma physics; rookie; **FIRST-HISPANIC-AMERICAN-ASTRONAUT obs#1**) + MS2 Steven Hawley (PhD astronomy; 2nd flight; future Hubble-deploy commander) + MS3 Pinky Nelson (PhD astronomy U Washington; 2nd flight; MMU EVA veteran from STS-41-C) + PS1 Robert Cenker (RCA Astro Electronics industry PS for SATCOM Ku-1) + PS2 **Bill Nelson** (US Representative D-FL; House Subcommittee on Space Science chairman; CONGRESSIONAL-PS-COHORT obs#2 after Senator Garn). Payload: SATCOM Ku-1 (RCA Americom commercial comsat; deployed Day-1). Science: CHAMP (Comet Halley Active Monitoring Program; Halley 1986 apparition); MSL-2 (Materials Science Laboratory 2 substrate-cohort continuation from STS-61-A Spacelab D1); Goddard High Resolution Spectrograph; HAS-A; IBSE; 3M DMOS; Hitchhiker-G HHG-1. 3-day landing delay due to KSC weather; **first time KSC primary-landing-site mission diverted to Edwards** (1986-01-18 13:58:51 UTC Runway 22). 28.45° ~333 km. 6d 2h 03m 51s mission, 96 orbits. **CHALLENGER-FORWARD-SHADOW residual 10 days at v672 close.**
 
 **Substrate-form anchors at v672:** eight obs#1 first-instances + ten cumulative cohort observations.

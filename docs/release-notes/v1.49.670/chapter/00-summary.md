@@ -1,62 +1,62 @@
-# v1.49.670 — Summary
+<!-- V650-699-CHAPTER-LIFTED v1 -->
+# v1.49.670 — Chapter 00: Summary
 
-**Type:** engine-cadence degree-advancing milestone — NASA 1.124 → 1.125. **Fourth consecutive forward-cadence degree-advance after v664+v665+v666 cc cluster CLOSE.** SAME-CALENDAR-DAY-COUNT 4/4 — **Lesson #10356 threshold HIT.**
-**Predecessor:** v1.49.669 (STS-61-A Challenger Spacelab-D1; NASA 1.124).
-**Engine state:** NASA 1.124 → **1.125 STS-61-B Atlantis 2nd Flight EASE/ACCESS**. MUS/ELC/SPS/TRS SCAFFOLD-PENDING.
-**Scope:** STS-61-B sub-agent-dispatch-degree-advance + 13 artifacts + cross-track scaffolds + release notes.
+## Summary
 
-## Mission overview
+**Forward-cadence NASA degree advance to 1.125.** v1.49.670 ships STS-61-B Atlantis 2nd Flight EASE/ACCESS as a forward-cadence engine-state advance from NASA degree 1.124 to 1.125. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-**STS-61-B Atlantis EASE/ACCESS** (NSSDC 1985-104A) — 23rd Shuttle flight; OV-104 Atlantis 2nd flight (first operational mission post-maiden). Launched 1985-11-26 00:29:00 UTC LC-39A KSC (NIGHT LAUNCH). 7-person crew: CDR Shaw (2nd flight; Spacelab-1 PLT veteran) + PLT O'Connor (USMC rookie) + MS1 Cleave (Group 9 rookie) + MS2 Spring (Army Group 9 rookie; EASE/ACCESS EVA) + MS3 Ross (USAF Group 9 rookie; EASE/ACCESS EVA; future 7-flight record-tying career) + PS1 Neri Vela (Mexican; FIRST-MEXICAN-ASTRONAUT obs#1) + PS2 Walker (McDonnell Douglas CFES; 3rd flight). Payload: 3 comsats (MORELOS-B Mexican + AUSSAT-2 Australian + SATCOM Ku-2 RCA US) all Days 1-3 + EASE/ACCESS EVAs Days 5-6 = first orbital truss-assembly + structure-erection demonstration. 28.5° ~370 km. 6d 21h 04m 49s, 109 orbits. Edwards AFB Runway 22 lakebed landing.
+**Mission rebuilt to per-pipeline depth.** STS-61-B Atlantis 2nd Flight EASE/ACCESS ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/1.125/`.
 
-## Substrate-form anchors at v670
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-**Nine obs#1 first-instances NEW LOCKED:**
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-1. ATLANTIS-OPERATIONAL-CADENCE — OV-104 2nd flight; substrate-anchor for cohort through STS-135
-2. FIRST-MEXICAN-ASTRONAUT — Neri Vela
-3. EASE-ACCESS-FIRST-ON-ORBIT-CONSTRUCTION-DEMO — Spring + Ross EVAs
-4. SPACE-STATION-ASSEMBLY-TECHNIQUES-VALIDATED — first time station-class construction validated in microgravity
-5. MCDONNELL-DOUGLAS-CFES-COMMERCIAL-PS-3RD-FLIGHT — Walker first 3-flight industry-PS career
-6. MEXICAN-NATIONAL-PAYLOAD-AS-FOREIGN-FLAG-COHORT — MORELOS-B
-7. NASA-GROUP-9-COHORT-DENSITY — 3-of-7 NASA crew Group 9 (Cleave + Spring + Ross)
-8. SAME-CALENDAR-DAY-COUNT-AT-THRESHOLD — v670 close = 4/4 Lesson #10356 threshold HIT
-9. NIGHT-LAUNCH-CHALLENGER-ERA obs#2 — after STS-8 1983-08
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-**Seven cumulative cohort observations:** SHAW-2ND-FLIGHT obs#1 + 3-COMMERCIAL-COMSATS-DEPLOY + EDWARDS-AFB-LANDING obs#7 + ET LWT obs#24 + TFNG-COHORT + **CLUSTER-RESUME-FORWARD-CADENCE obs#4** (post-ESTABLISHED) + CHALLENGER-FORWARD-SHADOW residual 1m 25d.
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-## Engine state delta
+## Key Features
 
-| Track | Pre-v670 | Post-v670 | Note |
-|---|---|---|---|
-| NASA | 1.124 STS-61-A Challenger Spacelab-D1 | **1.125 STS-61-B Atlantis EASE/ACCESS** | DEGREE ADVANCE |
-| MUS  | 1.124 SCAFFOLD-PENDING | 1.125 SCAFFOLD-PENDING | scaffold-stub-only |
-| ELC  | 1.124 SCAFFOLD-PENDING | 1.125 SCAFFOLD-PENDING | scaffold-stub-only |
-| SPS  | #118 (no new species) | #118 | Hold (since v663) |
-| TRS  | pack-43 (no new pack) | pack-43 | Hold (since v663) |
-
-## Phase digest
-
-| Phase | Deliverable | Style |
+| Track | Field | Value |
 |---|---|---|
-| 832 | Mission brief | inline (gitignored) |
-| 833 | degree-sync.json + NASA 1.125 index.html (611 / 127,182; 102%/106% PASS) | sub-agent dispatch |
-| 833 | 13 artifacts across 5 categories | sub-agent dispatch; zero forbidden-substring leakage |
-| 834 | MUS/ELC 1.125 SCAFFOLD-PENDING + 5-file release notes | inline |
-| 835 | bump + pre-tag-gate + commit + tag + push + GH release + drift cleanup | inline |
+| NASA | Mission name | STS-61-B Atlantis 2nd Flight EASE/ACCESS |
+| NASA | Degree from | 1.124 |
+| NASA | Degree to | 1.125 |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-## Cluster-resume + threshold context
+## Cross-References
 
-v670 is the **fourth** forward-cadence degree-advance after v664+v665+v666 cc cluster CLOSE 2026-05-17. CLUSTER-RESUME-FORWARD-CADENCE obs#4 cumulative (post-ESTABLISHED per v669 W3 promotion). **Same-calendar-day degree-advance count at v670 close: 4/4 — Lesson #10356 threshold HIT.** v671 MUST be a counter-cadence cluster milestone per Lesson #10356 preemptive-trigger discipline. No more forward-cadence degree-advance milestones same calendar day.
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.669** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.671** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-## Carry-forward (FA-670-N)
+## Engine Position
 
-7 carry-forward items. FA-670-1 = **MANDATORY cc-cluster trigger for v671+**. FA-670-2 = MUS/ELC/SPS/TRS backfill is prime cc cluster candidate. FA-670-5/6 = sub-agent dispatch + HARD-BLOCK soaks obs#2 → ESTABLISHED candidates.
+| Track | At v1.49.669 close | At v1.49.670 close |
+|---|---|---|
+| NASA degree | 1.124 | **1.125** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
 
-## Verification
+## Infrastructure
 
-```bash
-node tools/depth-audit.mjs 1.125 | head -5
-find www/tibsfox/com/Research/NASA/1.125/artifacts/ -type f | wc -l   # 13
-grep "milestone:" .planning/STATE.md
-```
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/1.125/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-670-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.670` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.669](../v1.49.669/00-summary.md) · **Next:** [v1.49.671](../v1.49.671/00-summary.md)

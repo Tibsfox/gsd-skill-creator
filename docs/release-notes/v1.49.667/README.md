@@ -9,6 +9,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.667 advances the engine from 1.121 to 1.122 with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** STS-51-I Discovery LEASAT-3 Rescue-Recovery ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 v1.49.667 ships the cluster-resume target identified at v666 §"Cluster-resume target": STS-51-I Discovery (NSSDC 1985-076A), the 20th Shuttle flight and sixth OV-103 Discovery flight. Launched 1985-08-27 10:58:01 UTC LC-39A KSC after two scrubs (1985-08-24 IUS computer issue + 1985-08-25 thunderstorms). 5-person crew. 3-satellite commercial deploy cadence (ASC-1 + Aussat-1 + Syncom IV-4 LEASAT-4 via PAM-D Days 1-3). LEASAT-3 rendezvous-rescue Day-4 + two consecutive EVAs Day-5/6 by van Hoften (EV1) + Fisher (EV2): hand-installed bypass-jumper electrical-connector + RMS-pitched-pull spin-up maneuver, recovering LEASAT-3 from STUCK to OPERATIONAL. 7d 2h 17m 42s mission, 112 orbits. Edwards AFB Runway 23 lakebed landing (4th consecutive sustaining Lesson #10346 mandatory-landing-policy).
 
 Six substrate-form first-instances NEW LOCKED at v667. The headline substrate is **DIRECT-SPACEWALKER-CONTACT-RESCUE obs#1 first-instance**: the first successful crewed orbital satellite rescue-recovery by direct-spacewalker-contact, distinct from STS-51-D v660 improvised-flyswatter-on-RMS rescue 1985-04 which used no direct-spacewalker-contact and failed. The CLOSURE-PATTERN substrate-form `improvised-rescue-fails-then-engineered-rescue-succeeds` opens as substrate-anchor for FUTURE-CONTACT-RESCUE-COHORT toward STS-49 Intelsat-VI 1992-05 + Hubble servicing missions 1993+.

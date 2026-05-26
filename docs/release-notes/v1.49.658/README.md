@@ -8,6 +8,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.658 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** MUS + ELC Catalog-Card Template Codification ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 v1.49.658 codifies a **normative catalog-card template** at `tools/catalog-card-template/spec.mjs` + extends `tools/update-catalog-indexes.mjs --check` to enforce the template as a **BLOCKER gate** (exit code 8) at pre-tag-gate step 8. Then backfills 71 over-spec MUS cards + 103 over-spec ELC cards down to template, relocating substrate-rich content to the linked per-degree pages where the original /btw said it belongs.
 
 **Lesson #10334** is codified: *"Catalog index cards are summaries; substrate-rich detail lives only on the linked degree page."* Antecedent chain explicit: #10334 is the gate that #10268 (gate-not-vigilance) mandated.

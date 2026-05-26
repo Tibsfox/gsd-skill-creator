@@ -1,40 +1,62 @@
+<!-- V650-699-CHAPTER-LIFTED v1 -->
 # v1.49.697 — Chapter 00: Summary
 
-**Type:** engine-cadence degree-advancing milestone — **first INTRA-PROGRAM continuation within MER substrate-anchor**. No substrate-axis rotation at v697; ROBOTIC-DEEP-SPACE-SCIENCE substrate-axis (opened at v696 substrate-anchor per operator catch-up directive) sustains substrate-form-stable at v697. Substrate-form SUBSTRATE-AXIS-STABILITY-SUSTAINED obs#1 first-instance NEW LOCKED + INTRA-PROGRAM-CONTINUATION-WITHIN-MARS-EXPLORATION-ROVER-PROGRAM obs#1 first-instance NEW LOCKED at v697.
+## Summary
 
-**Mission:** Opportunity MER-B (Mars Exploration Rover B) launched 2003-07-08 03:18:15 UTC from Cape Canaveral Air Force Station SLC-17B Florida on Boeing Delta II 7925H-9.5 ("Heavy" variant) launch vehicle — **the first flight of the Delta II Heavy** substrate-form-distinct (stretched GEM-46 solid strap-on boosters substrate-anchor). First-instantaneous launch window of the day was scrubbed; the second window was used substrate-form. Cruise ~201 days Earth-Mars Type-I trajectory substrate-form-distinct from Spirit's Type-II cruise. Mars arrival 2004-01-25 05:05 UTC; landing site Eagle crater Meridiani Planum 1.948282°S / 354.47417°E — ~22 m diameter crater substrate-form "hole-in-one" inside the targeted ~60×4 km landing ellipse substrate-cumulative unintended-bullseye substrate. **Mission planned 90 sols; actual 5,111 sols** (~14 years 138 days; ~57x planned substrate-form). **Cumulative drive 45.16 km / 28.06 miles** substrate-form ~75x planned-drive. Last communication 2018-06-10 Sol 5111 during the final Mars-wide global dust storm; NASA end-of-mission declared 2019-02-13 after >1,000 recovery commands across active-listening + sweep-and-beep + final wake-up-tone strategies between August 2018 and February 2019.
+**Forward-cadence NASA degree advance to 1.150.** v1.49.697 ships Opportunity MER-B Mars Exploration Rover: Second MER-Program Rover as a forward-cadence engine-state advance from NASA degree 1.149 to 1.150. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-**Substrate-cohort-pair realization closes at v697.** MER-PROGRAM-DUAL-ROVER-DEPLOYMENT substrate-anchor opened at v696 Spirit MER-A → substrate-realization at v697 Opportunity MER-B via 28-day launch-pair (Spirit 2003-06-10 → Opportunity 2003-07-08) + 21-day landing-pair (Spirit 2004-01-04 → Opportunity 2004-01-25) + opposite-hemisphere coverage (Gusev 14.5684°S / 175.4726°E + Meridiani 1.948°S / 354.474°E ~180° longitude separation substrate-form). Lifetime asymmetry substrate-form-distinct: Spirit 2,210 operational sols vs Opportunity 5,111 sols (~2.3× lifetime substrate-form-cumulative). Lesson #10389 candidate SUBSTRATE-COHORT-PAIR-CONVENTION-ANCHORED-AT-MILESTONE obs#2 → obs#3 cumulative.
+**Mission rebuilt to per-pipeline depth.** Opportunity MER-B Mars Exploration Rover: Second MER-Program Rover ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/1.150/`.
 
-**Chronological-forward sustained at v697:** 28-day chronological-forward step v696 launch 2003-06-10 → v697 launch 2003-07-08 substrate-form; CHRONOLOGICAL-FORWARD-RESUMED obs#3 cumulative substrate-form-cumulative with v694 obs#1 substrate-anchor + v696 obs#2.
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-**Athena Science Payload substrate-anchor identical to v696:** PI Steven W. Squyres Cornell University + Pancam (Jim Bell PI Cornell) + Mini-TES (Phil Christensen PI ASU) + Mossbauer MIMOS II Cobalt-57 source iron-mineralogy (Gostar Klingelhofer Co-PI Mainz) + APXS + Microscopic Imager + Rock Abrasion Tool (RAT) Honeybee Robotics substrate-cumulative.
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-**Substrate-cumulative discoveries substrate-form-distinct from Spirit at every cumulative stage:**
-- **Hematite blueberries** ~4 mm Fe2O3 spherules at Eagle/Endurance outcrops — first in-situ confirmation of orbital TES signature that drove Meridiani site selection substrate (Squyres et al. Science 306, 2004) — HEMATITE-BLUEBERRIES-FIRST-IN-SITU-CONFIRMATION-OF-ORBITAL-TES-SIGNATURE substrate-anchor
-- **Burns formation sedimentary cross-bedding** trough cross-lamination and "festooning" — shallow-flowing-water deposition substrate (Grotzinger et al. EPSL 240, 2005) — BURNS-FORMATION-SEDIMENTARY-CROSS-BEDDING substrate-anchor
-- **Jarosite** Mossbauer-confirmed iron-sulfate substrate-cumulative direct mineralogy of acidic aqueous chemistry substrate-form-distinct from Spirit's Home-Plate hydrothermal-silica — JAROSITE-ACIDIC-AQUEOUS-CHEMISTRY-DIRECT-MINERALOGY substrate-anchor
-- **Eagle crater (Sols 1-57)** "Stone Mountain" / "El Capitan" first in-situ water evidence within weeks of landing
-- **Endurance crater (Sols ~95-315 2004-06 → 2004-12)** ~130 m crater descent and climb-out substrate-cumulative full Burns-formation stratigraphy
-- **Heat Shield Rock (Sol 339 2005-01)** iron-nickel meteorite beside the discarded heat shield — **first meteorite identified on another planet** — HEAT-SHIELD-ROCK-FIRST-METEORITE-ON-ANOTHER-PLANET substrate-anchor
-- **Victoria crater (Sol 951 arrival 2006-09-26; exit 2008-08)** ~800 m crater Duck Bay promontory-and-bay stratigraphy
-- **Endeavour crater (Sol 2709 2011-08-09 arrival)** ~22 km crater mission-team "second landing site" — pre-Burns Noachian materials + phyllosilicate clay signatures — ENDEAVOUR-CRATER-NOACHIAN-MATERIALS-PHYLLOSILICATE-SIGNATURES substrate-anchor
-- **Homestake gypsum vein** Cape York 2011-11 calcium-sulfate substrate formed by neutral-pH groundwater substrate-form-distinct from earlier acidic-evaporitic chemistry (Squyres et al. Science 336, 2012) — HOMESTAKE-GYPSUM-VEIN-NEUTRAL-PH-WATER-SUBSTRATE-DISTINCT substrate-anchor
-- **First Mars marathon 2015-03-24 Sol ~3968** — 42.195 km substrate; first wheeled vehicle to drive a marathon on another world — FIRST-MARS-MARATHON substrate-anchor
-- **Off-world distance leader 2014-07-28 Sol 3735** — surpassed Lunokhod 2 at 39 km substrate; final cumulative 45.16 km substrate-form 45-16-KM-CUMULATIVE-MARS-DRIVE substrate-anchor
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-**Memorial substrate non-realization acknowledged at v697.** ROBOTIC-MISSION-MEMORIAL-NAMING-CONTINUITY substrate-anchor (v696 obs#1) does NOT realize at v697 substrate-form; remains substrate-anchor without cumulative substrate-form-distinct. Opportunity used explorer-ship feature-naming substrate-form — Cape York / Solander Point / Cape Tribulation at Endeavour named for the Endeavour ship's geographical-exploration substrate substrate-anchor — OPPORTUNITY-EXPLORER-SHIP-FEATURE-NAMING-SUBSTRATE-FORM obs#1 first-instance NEW LOCKED at v697 substrate-form-distinct from v696 STS-107 memorial-naming substrate-form.
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-**Engine state:** NASA 1.149 → **1.150 Opportunity MER-B Mars Exploration Rover**. MUS/ELC/SPS/TRS SCAFFOLD-PENDING.
+## Key Features
 
-**Substrate-axis SUSTAINED at v697 (NOT rotated).** ROBOTIC-DEEP-SPACE-SCIENCE substrate-axis opened at v696 substrate-anchor → sustained at v697 via MER-PROGRAM-DUAL-ROVER-DEPLOYMENT substrate-cohort-pair realization within the same substrate-axis. Substrate-axis-rotation history holds at #21 (opened at v696); v697 does NOT advance rotation count. SUBSTRATE-AXIS-STABILITY-SUSTAINED obs#1 first-instance NEW LOCKED at v697 records the substrate-form distinction.
+| Track | Field | Value |
+|---|---|---|
+| NASA | Mission name | Opportunity MER-B Mars Exploration Rover: Second MER-Program Rover |
+| NASA | Degree from | 1.149 |
+| NASA | Degree to | 1.150 |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-**18 obs#1 first-instances NEW LOCKED:** OPPORTUNITY-MER-B-LAUNCH-FROM-CCAFS-SLC-17B + DELTA-II-HEAVY-FIRST-FLIGHT + MERIDIANI-PLANUM-LANDING-SUBSTRATE + EAGLE-CRATER-HOLE-IN-ONE-LANDING + HEMATITE-BLUEBERRIES-FIRST-IN-SITU-CONFIRMATION-OF-ORBITAL-TES-SIGNATURE + BURNS-FORMATION-SEDIMENTARY-CROSS-BEDDING + JAROSITE-ACIDIC-AQUEOUS-CHEMISTRY-DIRECT-MINERALOGY + HEAT-SHIELD-ROCK-FIRST-METEORITE-ON-ANOTHER-PLANET + ENDEAVOUR-CRATER-NOACHIAN-MATERIALS-PHYLLOSILICATE-SIGNATURES + HOMESTAKE-GYPSUM-VEIN-NEUTRAL-PH-WATER-SUBSTRATE-DISTINCT + FIRST-MARS-MARATHON + 5111-SOL-OPERATIONAL-LIFETIME + 45-16-KM-CUMULATIVE-MARS-DRIVE + LAST-SURVIVING-PRE-CURIOSITY-MARS-SURFACE-ASSET + MER-PROGRAM-DUAL-ROVER-DEPLOYMENT-SUBSTRATE-COHORT-PAIR-REALIZATION + MER-OPPOSITE-HEMISPHERE-DUAL-ROVER-COVERAGE-REALIZATION + OPPORTUNITY-EXPLORER-SHIP-FEATURE-NAMING-SUBSTRATE-FORM + INTRA-PROGRAM-CONTINUATION-WITHIN-MARS-EXPLORATION-ROVER-PROGRAM. Plus SUBSTRATE-AXIS-STABILITY-SUSTAINED obs#1 first-instance NEW LOCKED.
+## Cross-References
 
-**5 cumulative cohort observations:** Chronological-forward-resumed #3 + Substrate-cohort-pair-convention #3 REALIZATION + Content-filter-safe-phrasing #4 + Foreground-author-at-scale #4 + Sub-agent-prompt-filename-coordination-drift #21 (APPLIED THIS MILESTONE via main-context inventory + 7-orphan cleanup).
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.696** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.698** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-**7 substrate-anticipation forward-shadows:** Mars Express ESA + MRO + Phoenix + MSL Curiosity + InSight + Perseverance Mars-2020 + Ingenuity + Mars Sample Return substrate-thread.
+## Engine Position
 
-**ESTABLISHED lessons sustained:** #10381 obs#21 sustained-not-applied (no axis rotation at v697) + #10384 obs#21 sustained-not-applied (operator-directive sustained from v696) + #10376 obs#23 (28-day intra-program launch-pair gap) + #10380 obs#24 cumulative (memorial substrate non-realization acknowledgment) + #10385 obs#21 cumulative APPLIED (19 consecutive v679-v697). **Lesson #10387 candidate obs#4 cumulative + Lesson #10388 candidate obs#4 cumulative + Lesson #10389 candidate obs#3 cumulative REALIZATION** all applied throughout.
+| Track | At v1.49.696 close | At v1.49.697 close |
+|---|---|---|
+| NASA degree | 1.149 | **1.150** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
 
-Page metrics: 625 lines / 130,937 bytes / 24 distinct sections / 7/7 canonical sections / 12 artifacts in 5/5 categories / 8/8 Track cards / 12/12 cross-linked. 145.7% bytes vs v1.149 substrate-form-cumulative growth substrate.
+## Infrastructure
+
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/1.150/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-697-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.697` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.696](../v1.49.696/00-summary.md) · **Next:** [v1.49.698](../v1.49.698/00-summary.md)

@@ -1,70 +1,62 @@
-# 00 — Summary: v1.49.654 FA-652-11 Infrastructure + Lesson Codification
+<!-- V650-699-CHAPTER-LIFTED v1 -->
+# v1.49.654 — Chapter 00: Summary
 
-> Following v1.49.653 long-term-roadmap-closure, v1.49.654 closes the second-half of the v1.49.653 L-04 lesson-codification work plus the infrastructure-half of the FA-652-11 8-degree MUS/ELC drift counter-cadence.
+## Summary
 
-## Scope: two converging tracks
+**Forward-cadence NASA degree advance to ?.?.** v1.49.654 ships FA-652-11 Infrastructure + Lesson Codification as a forward-cadence engine-state advance from NASA degree ?.? to ?.?. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-The session combined two cleanups that share a single ship cycle:
+**Mission rebuilt to per-pipeline depth.** FA-652-11 Infrastructure + Lesson Codification ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/N.NNN/`.
 
-1. **FA-652-11 infrastructure** — surveyed in `.planning/fa-652-11-drift-survey.md` at v1.49.652 close. The 8-degree MUS/ELC gap at degrees 1.109–1.116 has been recurrence-proofed via a new scaffold tool + depth-audit awareness. The content-half (16 MUS/ELC page backfills) deferred to v1.49.655 with proper parallel W2 dispatches.
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-2. **Lesson codification (L-04 second-half)** — v1.49.653 L-04 introduced the discipline-coverage audit and surfaced 31 UNCODIFIED + 10 PARTIAL lessons across the cumulative 95-lesson corpus. v1.49.654 closes the entire gap: 47/47 lessons now COVERED.
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-## Component layout
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-| Component | Description | Status |
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
+
+## Key Features
+
+| Track | Field | Value |
 |---|---|---|
-| C04 | `tools/scaffold-cross-track-dirs.mjs` — cross-track scaffold creator | shipped |
-| C05 | `tools/depth-audit.mjs` SCAFFOLD-PENDING + granular bypass | shipped |
-| C06 | catalog-index gate validation (already detects drift) | verified — no change needed |
-| C08 | 31 UNCODIFIED lessons → manifest + discipline docs | shipped |
-| C09 | 10 PARTIAL lessons → resolved via cross-update | shipped |
-| C01 | MUS 8-page backfill (1.109–1.116) | deferred → v1.49.655 |
-| C02 | ELC 8-page backfill (1.109–1.116) | deferred → v1.49.655 |
-| C03 | MUS + ELC catalog regeneration | deferred → v1.49.655 |
+| NASA | Mission name | FA-652-11 Infrastructure + Lesson Codification |
+| NASA | Degree from | N.NNN |
+| NASA | Degree to | N.NNN |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-## Key files
+## Cross-References
 
-| Path | Purpose |
-|---|---|
-| `tools/scaffold-cross-track-dirs.mjs` | NEW — idempotent cross-track scaffolder |
-| `tools/__tests__/scaffold-cross-track-dirs.test.mjs` | NEW — 10 tests (helpers + render) |
-| `tools/depth-audit.mjs` | SCAFFOLD-PENDING marker + SC_SKIP_DEPTH_AUDIT_MUS_ELC |
-| `tools/pre-tag-gate.sh` | `depth-audit-mus-elc` bypass token in vocabulary |
-| `tools/render-claude-md/disciplines.json` | +2 domains, +35 lesson IDs |
-| `tools/render-claude-md/env-vars.json` | +SC_SKIP_DEPTH_AUDIT_MUS_ELC entry |
-| `docs/sub-agent-dispatch-discipline.md` | NEW — sub-agent dispatch discipline doc |
-| `docs/counter-cadence-discipline.md` | NEW — counter-cadence cadence discipline doc |
-| `docs/MISSION-PACKAGE-DISCIPLINE.md` | +lesson coverage appendix (10 lessons) |
-| `docs/SUBSTRATE-PROBE-DISCIPLINE.md` | +lesson coverage appendix (6 lessons) |
-| `docs/T14-SHIP-SEQUENCE.md` | +lesson coverage appendix (4 lessons) |
-| `docs/test-discipline/audit-method-corrections.md` | +lesson coverage appendix (3 lessons) |
-| `project-claude/hooks/self-mod-guard.js` | codifies #10174 inline |
-| `project-claude/hooks/git-add-blocker.js` | codifies #10201 inline |
-| `package.json` | +scaffold:cross-track + scaffold:cross-track:dry-run scripts |
-| `vitest.tools.config.mjs` | +scaffold-cross-track-dirs test path |
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.653** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.655** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-## Verification
+## Engine Position
 
-```bash
-# 54 tests passing
-npx vitest run --config vitest.tools.config.mjs \
-  tools/__tests__/depth-audit.test.mjs \
-  tools/__tests__/scaffold-cross-track-dirs.test.mjs
+| Track | At v1.49.653 close | At v1.49.654 close |
+|---|---|---|
+| NASA degree | N.NNN | **N.NNN** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
 
-# Discipline-coverage clean
-node tools/check-discipline-coverage.mjs
-# → COVERED 47 / PARTIAL 0 / UNCODIFIED 0
+## Infrastructure
 
-# Scaffold tool functional
-node tools/scaffold-cross-track-dirs.mjs --dry-run
-# → 117 NASA degrees scanned; MUS+ELC stubs would-create per gap
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/N.NNN/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-654-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.654` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
 
-# Depth-audit recognizes marker
-node tools/depth-audit.mjs 1.116
-# → MUS, ELC: SCAFFOLD-PENDING (downgraded from FAIL)
-```
-
-## What's next
-
-v1.49.655 (FA-652-11 content backfill) will use this milestone's scaffold tool as the W0 starting point. The scaffold produces minimal valid stubs; the W2 dispatches replace them with full substrate-tracked narrative cards matching the v1.0–v1.108 cohort depth.
+---
+**Prev:** [v1.49.653](../v1.49.653/00-summary.md) · **Next:** [v1.49.655](../v1.49.655/00-summary.md)

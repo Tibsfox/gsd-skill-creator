@@ -1,38 +1,62 @@
-# v1.49.651 — STS-41-G Challenger / Executive Summary
+<!-- V650-699-CHAPTER-LIFTED v1 -->
+# v1.49.651 — Chapter 00: Summary
 
-**Released:** 2026-05-13
-**Cadence:** engine-cadence — seventh consecutive degree-advancing milestone after v1.49.645 engine-cadence resume + v1.49.646 cadence-sustain + v1.49.647 cadence-sustain-at-three + v1.49.648 cadence-sustain-at-four + v1.49.649 cadence-sustain-at-five + v1.49.650 cadence-sustain-at-six; completing the **seven-degree sprint** (v645+v646+v647 same-day 2026-05-12 + v648+v649+v650+v651 same-day 2026-05-13)
-**NASA Mission:** STS-41-G Challenger (NSSDC 1984-108A) — Degree 1.115
+## Summary
 
-## Engine state advance
+**Forward-cadence NASA degree advance to 1.115.** v1.49.651 ships STS-41-G Challenger as a forward-cadence engine-state advance from NASA degree 1.114 to 1.115. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-- **NASA:** 1.114 → **1.115 STS-41-G Challenger** (thirteenth Shuttle flight + sixth OV-099 Challenger flight + FIRST-SEVEN-PERSON-SHUTTLE-CREW (Crippen CDR + McBride PLT + Ride MS1 + Sullivan MS2 + Leestma MS3 + Garneau PS1 + Scully-Power PS2) + FIRST-AMERICAN-WOMAN-EVA Sullivan + Leestma ORS 3h 29m 1984-10-11 59 kg hydrazine + FIRST-SECOND-TIME-AMERICAN-WOMAN-IN-SPACE Ride 1y 4m 17d after STS-7 + FIRST-CANADIAN-ASTRONAUT Garneau CANEX-2 + FIRST-AUSTRALIAN-BORN-US-ASTRONAUT Scully-Power OSTA-3 + FIRST-4-FLIGHT-SHUTTLE-ASTRONAUT Crippen career-arc closure + HIGHEST-SHUTTLE-INCLINATION-TO-DATE 57.0° + ERBS deploy via RMS Day 1 + OSTA-3 SIR-B+LFC+MAPS+FILE + IMAX 3rd flight + KSC Runway 33 concrete landing + COMPOUND-FORWARD-SHADOW-DENSITY RESOLVES at v651 + ET-15 LWT-8 twelfth unpainted-orange)
-- **MUS:** 1.114 → **1.115 U2 *The Unforgettable Fire* (Island Records; UK 1984-10-01 + NA 1984-10-02)** DUAL-ANCHOR INSIDE STRICT obs#5 (UK launch -4d + NA launch -3d INSIDE strict); FIRST-IRISH-BAND-AS-COHORT-ENTRY + PRODUCER-DUO-DEBUT Brian Eno + Daniel Lanois + SLANE-CASTLE-RESIDENTIAL-RECORDING + CIVIL-RIGHTS-AS-INTERNATIONAL-CULTURAL-OBSERVATION "Pride (In the Name of Love)" MLK tribute + ALBUM-FORM obs#13; FA-651-1 RESOLVED
-- **ELC:** 1.114 → **1.115 Reagan-Mondale first presidential debate 1984-10-07** (University of Louisville; launch +2d INSIDE strict; 80–100M viewers; Reagan age-issue 14-day media cycle; WOMEN-AS-INSTITUTIONAL-FIRSTS-AT-1984 cohort obs#4 via Sullivan+Ride+Ferraro+Walters; SUBSTRATE-MONOCULTURE-RISK-RESOLUTION obs#6 ENDURING-DEEP-SUSTAINED-PATTERN; FA-651-2 RESOLVED)
-- **SPS:** #111 → **#112 Sockeye Salmon (*Oncorhynchus nerka* / *O. nerka kennerlyi* Kokanee)** (FIRST-ANADROMOUS-FISH + FIRST-SALMONIDAE + FIRST-ACTINOPTERYGII obs#2 + FIRST-FISH + HOMING-PRECISION-AS-NAVIGATION + SEMELPAROUS-DEATH-AS-MISSION-COMPLETION + INDIGENOUS-FIRST-FOODS-PRINCIPLE + TREATY-RIGHTS-FISHERIES-GOVERNANCE Boldt 1974 + HUMBOLDT-STYLE-SUBSPECIES-AWARENESS obs#7 SUSTAINED-DEEP-CONSOLIDATION + PNW-CANADIAN-SHARED-WATERSHED resonance with Garneau)
-- **TRS:** pack-36 K_36=477 → **pack-37 K_37=491** (14 new edges e478–e491; dynamical systems — Poincaré + Lyapunov + Lorenz + Strogatz + KAM + chaos + ergodic theory; 5-level substrate-coherence with STS-41-G: ERBS Hamiltonian orbital mechanics, ORS Navier-Stokes fluid transfer, SIR-B SAR discrete-time dynamics, 7-crew Kuramoto synchronization, Crippen career-arc attractor trajectory; FA-651-5 RESOLVED; 25-of-25 single-pass K_N)
+**Mission rebuilt to per-pipeline depth.** STS-41-G Challenger ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/1.115/`.
 
-## Key substrate axes table
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-| Track | Pick | Anchor | Top substrate-novel primitives |
-|---|---|---|---|
-| NASA 1.115 | STS-41-G Challenger | 1984-10-05 launch; 57.0° inclination | FIRST-SEVEN-PERSON-CREW; FIRST-AMERICAN-WOMAN-EVA; FIRST-SECOND-TIME-AMERICAN-WOMAN; FIRST-CANADIAN-ASTRONAUT; FIRST-AUSTRALIAN-BORN-US-ASTRONAUT; FIRST-4-FLIGHT-SHUTTLE-ASTRONAUT; HIGHEST-INCLINATION-TO-DATE; ORS-ORBITAL-REFUELING; COMPOUND-SHADOW-RESOLVED |
-| MUS 1.115 | U2 *The Unforgettable Fire* | 1984-10-01/02 Island Records | FIRST-IRISH-BAND; DUAL-RELEASE; PRODUCER-DUO-DEBUT; SLANE-CASTLE; CIVIL-RIGHTS-INTERNATIONAL; DUAL-ANCHOR INSIDE STRICT obs#5; ALBUM-FORM obs#13 |
-| ELC 1.115 | Reagan-Mondale debate 1984-10-07 | launch +2d INSIDE strict | PRESIDENTIAL-DEBATE-MOMENTUM; REAGAN-AGE-ISSUE; FERRARO-FIRST-WOMAN-VP-NOMINEE; WOMEN-INSTITUTIONAL-FIRSTS-AT-1984 obs#4; SUBSTRATE-MONOCULTURE-RISK-RESOLUTION obs#6 |
-| SPS #112 | Sockeye Salmon (*Oncorhynchus nerka*) | Salmonidae / Salmoniformes / Actinopterygii | FIRST-ANADROMOUS; FIRST-SALMONIDAE; FIRST-FISH; HOMING-PRECISION; SEMELPAROUS-COMPLETION; INDIGENOUS-FIRST-FOODS; TREATY-RIGHTS; HUMBOLDT obs#7 |
-| TRS pack-37 | Dynamical systems | K_37 = 491 edges; 14 new e478–e491 | LORENZ-ATTRACTOR; LYAPUNOV-STABILITY; KAM-THEOREM; BIRKHOFF-ERGODIC; BRIDGE-CATEGORY obs#22; K_N-COMPLETION obs#22; 25-OF-25-SINGLE-PASS; 5-LEVEL-SUBSTRATE-COHERENCE |
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-## Mission ledger
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-| Field | Value |
-|---|---|
-| NSSDC ID | 1984-108A |
-| Vehicle | OV-099 Challenger — sixth flight |
-| Launch | 1984-10-05 07:03:00 UTC, LC-39A KSC |
-| Landing | 1984-10-13 12:26:38 UTC, KSC Runway 33 concrete |
-| Duration | 8d 5h 23m 33s; **133 orbits** |
-| Orbit | 351 × 391 km; **57.0° inclination** (HIGHEST-SHUTTLE-INCLINATION-TO-DATE) |
-| Crew | R. L. Crippen CDR + J. A. McBride PLT + S. K. Ride MS1 + K. D. Sullivan MS2 + D. C. Leestma MS3 + M. Garneau PS1 + P. D. Scully-Power PS2 |
-| EVA | K. D. Sullivan + D. C. Leestma 1984-10-11 3h 29m ORS (59 kg hydrazine transferred) |
-| External Tank | ET-15 LWT-8 (eighth Lightweight Tank; twelfth unpainted-orange per v633 convention) |
-| Payloads | ERBS deploy via RMS (Ride; Day 1); OSTA-3 (SIR-B+LFC+MAPS+FILE); ORS EVA; CANEX-2 (Garneau); IMAX 3rd flight |
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
+
+## Key Features
+
+| Track | Field | Value |
+|---|---|---|
+| NASA | Mission name | STS-41-G Challenger |
+| NASA | Degree from | 1.114 |
+| NASA | Degree to | 1.115 |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
+
+## Cross-References
+
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.650** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.652** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
+
+## Engine Position
+
+| Track | At v1.49.650 close | At v1.49.651 close |
+|---|---|---|
+| NASA degree | 1.114 | **1.115** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
+
+## Infrastructure
+
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/1.115/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-651-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.651` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.650](../v1.49.650/00-summary.md) · **Next:** [v1.49.652](../v1.49.652/00-summary.md)

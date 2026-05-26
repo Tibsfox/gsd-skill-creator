@@ -8,6 +8,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.671 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** Counter-Cadence Cluster cc-1 ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 v1.49.671 is the **counter-cadence cluster cc-1 response** to Lesson #10356 threshold-hit at v670 close. The same-calendar-day count reached 4/4 on 2026-05-17 (v667 + v668 + v669 + v670 all same-day forward-cadence degree-advances after the v664+v665+v666 cc cluster CLOSE). Per Lesson #10356 + Lesson #10371 (newly emitted at v670), threshold-hit mandates a counter-cadence response — operational-debt cleanup, no NASA degree advance — before subsequent forward-cadence work resumes.
 
 **v671 scope is narrow and surgical** — convert one specific recurring manual fix into a deterministic gate. This honors the cc cluster discipline (substrate-precedent: v585 + v664+v665+v666 multi-milestone cc clusters) while keeping the operational pause short, so NASA degree work can resume at v672 (STS-61-C Columbia first-Hispanic-astronaut Chang-Diaz).
