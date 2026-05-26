@@ -25,14 +25,15 @@ Severity: MEDIUM. First-instance observation at v1.49.716 STS-51-D Discovery reb
 | W3.5 chapter-gen bake-in | (process gate) | v1.49.709 | obs#8 cumulative (v709 + v710 + v711 + v712 + v713 + v714 + v715 + v716) |
 | #10408 candidate — Per-mission sub-agent rebuild pattern | MEDIUM | v1.49.716 | obs#1 first-instance |
 
-## Notes on campaign-launch lesson dynamics
+## Sustained-cadence findings
 
 The v1.49.716 ship validates several sustained-cadence patterns simultaneously:
 
 1. **Counter-cadence cleanup-mission cadence cycles successfully.** v1.49.585 was the first; v1.49.716 is the second. The 131-milestone gap exceeds the ~30-milestone reuse threshold registered with Lesson #10168, confirming that the pattern is operationally sustainable across long forward-cadence runs.
-
 2. **Sub-agent dispatch discipline (positive framing + dispatch-prompt density) transfers cleanly to counter-cadence ships.** The disciplines registered at forward-cadence ships v712–v715 apply identically to the v716 counter-cadence rebuild dispatch. The brief structure adapts (per-mission rebuild brief vs forward-cadence mission brief), but the positive-framing + abstract-behavioral-guidance + zero-forbidden-token-enumeration disciplines are invariant.
-
 3. **The v1.49.715 mechanical-patcher + canonical-layout-gate strategy is structurally complete but semantically incomplete by design.** The structural gate guarantees that future drift cannot ship; it does not guarantee that historical substrate-era missions match v1.0 canonical depth. The counter-cadence campaign closes the residual semantic gap one mission per ship. Both layers compose: the gate prevents new drift; the campaign closes historical drift.
-
 4. **The brief template generalizes on first authoring.** v1.118's brief is reusable for v1.119+ campaign rebuilds with mission-essentials-block adaptation (vehicle / crew / payload / EVA / engine state from each mission's degree-sync.json) + reference-page-paths adaptation (immediate-predecessor + gold-standard). Future briefs will be mission-essentials-only authoring rather than full template reauthoring.
+5. **Single-dispatch budget held at 36 tool uses against ~60-tool ceiling.** The headroom (~40% under ceiling) validates the 13-file deliverable as a comfortable per-dispatch scope. Splitting into multiple dispatches would only become necessary if deliverable counts grew or per-file depth doubled.
+6. **The structural-gate-vs-semantic-content frame is the campaign's operational thesis.** Mechanical gates close drift-of-form; counter-cadence campaigns close drift-of-content. The two are orthogonal — each requires its own discipline cycle, and conflating them produces under-served missions.
+7. **Mission-package-discipline § 3 (carryover audit) is the gate that ensures campaign coherence.** Each rebuild's lessons-carryover.json inherits from its immediate predecessor and contributes back to the v(N+1) mission; without this, the campaign becomes a sequence of unrelated rebuilds rather than a cumulative substrate-deepening.
+8. **Cadence projection target: ~10 hard-bucket rebuilds at substrate-era v1.159–v1.168 + ~9 v1.118-era deepenings at lower priority.** Total horizon ~19 future counter-cadence ships at the Lesson #10168 cadence; campaign closes the structural-gate-vs-semantic-content gap within roughly the same temporal window as the engine's next ~570 forward milestones.

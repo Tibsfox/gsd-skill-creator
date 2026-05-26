@@ -9,11 +9,27 @@
 
 ## Summary
 
-v1.49.716 launches the **NASA Canonical Sibling Files Restoration Campaign** and ships the first of its expected rebuild cycles: **v1.118 STS-51-D Discovery** receives the 14 canonical sibling files that v1.0–v1.117 missions all have but the v1.118-era build pipeline stopped producing. The campaign was queued during the v1.49.715 SDO ship session (mission package authored 2026-05-21) and triggered by a full QA scan showing 80% of 169 NASA mission pages deviating from the v1.0 canonical layout. The structural deviation was closed in the same v1.49.715 session via the canonical-layout gate + mechanical card-additive patcher (`tools/nasa-layout-restorer.mjs`); the residual scope was the per-mission deep content rebuild that this campaign addresses one mission per counter-cadence milestone.
+**Counter-cadence campaign launch.** v1.49.716 opens the **NASA Canonical Sibling Files Restoration Campaign** as the second registered counter-cadence cleanup-mission family (parent: v1.49.585 concerns-cleanup), 131 forward milestones after the first — comfortably past the ~30-milestone reuse threshold registered with Lesson #10168.
 
-**13 deliverable files (counting forest-module and retrospective subdirectories as composed paths) at `www/tibsfox/com/Research/NASA/1.118/`.** 6 track HTML pages (research, papers, organism, mathematics, curriculum, simulation) totaling ~17,180 words; 2 MD source files (research.md + organism.md) totaling ~6,054 words; 2 JSON metadata files (knowledge-nodes.json with ≥10 nodes; data-sources.json with v1.117 multi-category schema sources_nasa / sources_crew / sources_payload / sources_w1_research_docs / sources_music_cross_track / sources_elc_cross_track / sources_sps_cross_track); forest-module/NOT_APPLICABLE.md (v1.131 inline pattern, Shuttle-payload mission); retrospective/lessons-carryover.json (full inheritance + contribution schema) + retrospective/corpus-deltas.md (~500-word corpus-delta narrative). Total ~23,234 words across HTML+MD source.
+**First rebuild lands at v1.118 STS-51-D Discovery.** 13 canonical sibling files (6 track HTML + 2 MD source + 2 JSON metadata + forest-module placeholder + 2-file retrospective subdirectory) totaling ~23,234 words land at `www/tibsfox/com/Research/NASA/1.118/`, restoring the v1.0–v1.117 sibling-file convention that the v1.118-era build pipeline stopped producing.
+
+**Structural-gate-vs-semantic-content gap is the right frame.** The v1.49.715 canonical-layout gate now passes 169/169 structurally; this campaign closes the residual semantic gap one mission per counter-cadence ship. Both layers compose — the gate prevents new drift, the campaign closes historical drift.
+
+**Single sub-agent dispatch validates the brief template at 36 tool uses.** Well under the ~60-tool ceiling per `feedback_sub-agent-token-ceiling-iterative-dispatch`; positive-framing discipline carried the full 13-file deliverable set without filter trips. Lesson #10406 candidate POSITIVE-FRAMING-DISPATCH-DISCIPLINE sustained obs#5 cumulative.
+
+**Engine state UNCHANGED.** NASA degree remains at 1.168 (v1.49.715 close); MUS / ELC / SPS / TRS unchanged. No new substrate-anchors emitted; no new external citations; no new V-flags. Counter-cadence milestones are deliverable-rich and engine-state-quiet by design.
 
 **Mission rebuilt:** STS-51-D Discovery — OV-103's 4th flight; launched 1985-04-12 LC-39A; first politician in space (Garn US Senator); first woman physician in space (Seddon); first unscheduled in-flight improvised contingency EVA (Hoffman + Griggs; first improvised tool fabrication in orbit; first RMS-as-rescue-tool); first commercial-PS repeat flyer (Walker); Bobko CDR NASA Group 7 MOL-transfer 2nd career flight; Hughes Syncom IV-3 (Leasat-3) post-deploy activation-lever inertness pending future activation (FA-660-3 STS-51-I-LEASAT-3-RECOVERY-RECOVERY arc opens here). Engine state mappings: NASA 1.118 / MUS 1.118 Tom Petty Southern Accents (1985-03-26 MCA Records 5486) / ELC 1.118 Coca-Cola New Coke announcement (1985-04-23 NYC Lincoln Center) / SPS Brachyramphus marmoratus Marbled Murrelet (species #115; Alcidae / Charadriiformes / Aves).
+
+**Deliverable composition.** 6 track HTML pages (research, papers, organism, mathematics, curriculum, simulation) totaling ~17,180 words at `www/tibsfox/com/Research/NASA/1.118/`; 2 MD source files (research.md ~3,062 words + organism.md ~2,992 words) totaling ~6,054 words; 2 JSON metadata files (knowledge-nodes.json with ≥10 nodes covering mission/vehicle/crew/payload/EVA/substrate-axis entries; data-sources.json with v1.117 multi-category schema sources_nasa / sources_crew / sources_payload / sources_w1_research_docs / sources_music_cross_track / sources_elc_cross_track / sources_sps_cross_track); forest-module/NOT_APPLICABLE.md (v1.131 inline-rationale pattern reused because STS-51-D's Shuttle-payload set has no plausible Forest Sim substrate); retrospective/lessons-carryover.json with full inheritance + contribution schema; retrospective/corpus-deltas.md (~500-word corpus-delta narrative). Aggregate output ~23,234 words across HTML + MD source.
+
+**Brief authoring and dispatch protocol.** The mission package at `.planning/missions/v1-49-716-nasa-layout-restoration-campaign/` was authored during the v1.49.715 SDO ship session (2026-05-21) and triggered by a full QA scan showing 80% of 169 NASA mission pages deviating from the v1.0 canonical layout. The structural deviation was closed in the same v1.49.715 session via the canonical-layout gate + mechanical card-additive patcher (`tools/nasa-layout-restorer.mjs`); the residual scope was the per-mission deep content rebuild that this campaign now addresses one mission per counter-cadence milestone. The brief template (~1,200 words covering mission essentials + reference paths + 13-file deliverable table + authoring conventions + positive-framing discipline) is the load-bearing artifact for cleanliness — sub-agents read the brief, the immediate-predecessor reference page, and the gold-standard reference page, then write 13 deliverables in a single 36-tool-use dispatch.
+
+**Engine-state quietness is design, not accident.** Counter-cadence ships deliberately do not advance NASA / MUS / ELC / SPS / TRS forward-cadence threads — they exist to close historical content gaps that forward-cadence ships systematically can't address (forward ships always advance the engine; they don't have time-budget for revisiting earlier substrate-era content). This deliberate quietness is what allows counter-cadence ships to ship cleanly without forcing artificial substrate-anchors or thread state changes; the campaign-progress metric becomes the running ledger, not the engine-cadence advance.
+
+**Carryover-from-v585 confirms the cleanup-mission family generalizes.** v1.49.585 closed 5 categories of accumulated social-rule operational debt into deterministic gates (self-mod-guard.js + git-add-blocker.js + dead-zone citation-invariants test + chapter.mjs idempotent-write + pre-push completeness gate + ELC scorer regex unify + MUS Phase C concept-registry template + artemis-ii env-var override + .gitattributes + 16-branch prune + CLAUDE.md updates + project-claude/agents reconciliation + .planning/citation-debt.json ledger + tools/citation-debt/list.mjs + 5-file release-notes ship with meta-test). v1.49.716 opens a different family — per-mission content rebuilds — but applies the same disciplinary frame: convert the underlying gap into a deterministic, repeatable rebuild process, not a vigilance posture.
+
+**Campaign horizon and cadence projection.** The hard-bucket roster (substrate-era v1.159–v1.168) holds 10 missions; v1.118 first-rebuilt-here is the eleventh. An additional ~9 v1.118-era missions remain at lower priority for future deepening passes once the hard bucket is cleared. At Lesson #10168's ~30-milestone cadence target, the campaign closes the hard bucket in roughly the same temporal window as the engine's next ~570 forward milestones — completion projected within current-engine-operational-horizon timescales. Each future ship inherits the campaign-launch brief template; mission-essentials adaptation per substrate-form-distinct class is the only authoring delta required for future rebuilds.
 
 ## Cross-track / Engine state
 
@@ -32,9 +48,13 @@ v1.49.716 launches the **NASA Canonical Sibling Files Restoration Campaign** and
 
 ## Forward lessons emitted
 
-1 candidate lesson:
+1 candidate lesson new this milestone, 4 carryover candidates sustained:
 
-- **Lesson #10408 (candidate) — Per-mission sub-agent rebuild pattern for substrate-era canonical sibling files.** First-instance observation at v1.49.716. The single-dispatch pattern (one general-purpose sub-agent per mission, 5 Read + 13 Write tool uses, ~30-50 min budget, target v1.56 gold-standard depth not v1.117 latest-predecessor depth) produces clean ~23K-word 13-file deliverables for substrate-era missions that never received the canonical sibling files. Promotion-to-ESTABLISHED requires 3-5 clean campaign-ship observations across multiple substrate-era missions.
+- **Lesson #10408 (candidate; NEW) — Per-mission sub-agent rebuild pattern for substrate-era canonical sibling files.** First-instance observation at v1.49.716. The single-dispatch pattern (one general-purpose sub-agent per mission, 5 Read + 13 Write tool uses, ~30-50 min budget, target v1.56 gold-standard depth not v1.117 latest-predecessor depth) produces clean ~23K-word 13-file deliverables for substrate-era missions that never received the canonical sibling files. Promotion-to-ESTABLISHED requires 3-5 clean campaign-ship observations across multiple substrate-era missions.
+- **Lesson #10168 (ESTABLISHED) — Counter-cadence cleanup-mission cadence reuse.** Sustained at obs#2 (parent: v1.49.585; this ship: v1.49.716). 131-milestone gap exceeds the ~30-milestone reuse threshold; cadence is operationally productive across long forward-cadence runs.
+- **Lesson #10401 (HIGH) — MISSION-PACKAGE-DISCIPLINE §3.** Applied to the v1.118 sub-agent dispatch brief (title-line trip-vocab=0; body-secondary clean). Sustained obs#27+ cumulative.
+- **Lesson #10406 (candidate) — POSITIVE-FRAMING-DISPATCH-DISCIPLINE.** First counter-cadence ship under codified discipline. Sustained obs#5 cumulative (v712 + v713 + v714 + v715 + v716).
+- **Lesson #10407 (candidate) — DISPATCH-PROMPT-DENSITY-DISCIPLINE.** Brief-as-required-read pattern carried through dispatch. Sustained obs#4 cumulative (v713 + v714 + v715 + v716).
 
 ## Thread state
 
@@ -72,6 +92,43 @@ Plus this 5-file release-notes set:
 - `docs/release-notes/v1.49.716/chapter/03-retrospective.md`
 - `docs/release-notes/v1.49.716/chapter/04-lessons.md`
 - `docs/release-notes/v1.49.716/chapter/99-context.md`
+
+### Part A: Canonical Sibling Files Restoration Campaign — substrate-era rebuild architecture
+
+The campaign closes the residual semantic gap left after v1.49.715's structural-layout gate. Each ship rebuilds one substrate-era mission to v1.56 gold-standard depth using a single sub-agent dispatch from a templated brief.
+
+- **MISSION-PACKAGE-DISCIPLINE templated per-mission brief:** ~1,200 words covering mission essentials + reference paths + 13-file deliverable table + authoring conventions + positive-framing discipline; brief is the load-bearing artifact for cleanliness across the campaign.
+- **SINGLE-DISPATCH PER MISSION:** one general-purpose sub-agent per mission, 5 Read + 13 Write tool uses, ~30-50 min budget; comfortably under the ~60-tool sub-agent ceiling.
+- **v1.56 GOLD-STANDARD DEPTH TARGET (not v1.117 latest-predecessor depth):** Surveyor 3 totals ~19,500 words across 8 HTML+MD files; rebuilds target that band rather than the maximum-historical-depth precedent. First-restoration is the operational goal; deepening is a future-pass option.
+- **13-FILE DELIVERABLE TABLE IS FIXED ACROSS THE CAMPAIGN:** 6 track HTML (research/papers/organism/mathematics/curriculum/simulation) + 2 MD source (research.md + organism.md) + 2 JSON metadata (knowledge-nodes.json + data-sources.json) + forest-module/{contribution.md|NOT_APPLICABLE.md} + retrospective/{lessons-carryover.json + corpus-deltas.md}.
+- **REFERENCE-PAGE PATHS BLOCK PARAMETERIZES PER MISSION:** immediate-predecessor (semantic context) + gold-standard (depth+structure reference); sub-agent ingests both before authoring.
+- **FOREST-MODULE NOT_APPLICABLE PATTERN preserved for substrate-form-distinct missions:** STS-51-D's Shuttle-payload set (telecoms + commercial-pharma + senate-oversight) has no plausible Forest Sim contribution; v1.131 inline-rationale placeholder used rather than synthesizing contrived content.
+- **POSITIVE-FRAMING DISPATCH DISCIPLINE (Lesson #10406 candidate) carried throughout:** improvised contingency-response operations; activation-lever inertness pending future activation; political-oversight-as-flown precedent. Zero forbidden-token enumeration in brief.
+- **CAMPAIGN CADENCE TARGET ONE MISSION PER COUNTER-CADENCE SHIP:** Lesson #10168 reuse means counter-cadence ships fire ~every 30 forward milestones; full hard-bucket rebuild horizon spans ~10 future counter-cadence ships at this cadence.
+
+### Part B: v1.118 STS-51-D Discovery — mission rebuilt this milestone
+
+Discovery's 4th flight (OV-103), launched 1985-04-12 from LC-39A. The rebuild captures a politically and operationally remarkable Shuttle-payload mission.
+
+- **FIRST POLITICIAN IN SPACE — Senator Jake Garn (R-UT)** as Payload Specialist 1; chair of the Senate appropriations subcommittee overseeing NASA. First demonstration of political-oversight-as-flown precedent for human spaceflight.
+- **FIRST WOMAN PHYSICIAN IN SPACE — Mission Specialist Margaret Rhea Seddon, MD;** NASA Group 8 first-class astronaut; conducted biomedical observations including the first orbital "space-sick scale" calibration trials.
+- **FIRST UNSCHEDULED IMPROVISED CONTINGENCY EVA — Mission Specialists Hoffman + Griggs;** first improvised tool fabrication in orbit (the "flyswatter" deployment-pin engager); first use of the RMS as a rescue tool (attempted post-deploy activation-lever engagement on Hughes Syncom IV-3 / Leasat-3).
+- **FIRST COMMERCIAL PAYLOAD SPECIALIST REPEAT FLYER — Charles Walker (McDonnell Douglas);** second commercial-PS flight (after STS-41-D); operated the continuous-flow electrophoresis pharmaceutical experiment.
+- **BOBKO CDR NASA GROUP 7 MOL-TRANSFER 2ND CAREER FLIGHT:** Commander Karol Bobko; among the small cohort of USAF Manned Orbiting Laboratory cancellation transfers who reached orbit via the Shuttle program.
+- **HUGHES SYNCOM IV-3 (LEASAT-3) DEPLOYED WITH ACTIVATION-LEVER INERTNESS:** post-deploy spin-up sequence failed to activate the spacecraft; opens the FA-660-3 STS-51-I-LEASAT-3-RECOVERY arc (future Shuttle rendezvous to repair on-orbit).
+- **PAIRED-SPECIES SPS Brachyramphus marmoratus — Marbled Murrelet:** species #115 (Alcidae / Charadriiformes / Aves); old-growth-forest-nesting seabird with cryptic offshore foraging; substrate-bind to the maritime-Pacific-Northwest cohort.
+- **MUS 1.118 Tom Petty — Southern Accents (1985-03-26 MCA 5486)** and **ELC 1.118 Coca-Cola New Coke announcement (1985-04-23 NYC Lincoln Center)** complete the v1.118 cross-track pair; release-week-of-mission proximity for both.
+
+### Infrastructure
+
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/1.118/` — 13 deliverable files (~23,234 words across HTML + MD source)
+- **Mission package:** `.planning/missions/v1-49-716-nasa-layout-restoration-campaign/` (gitignored)
+- **Brief template:** `.planning/missions/v1-49-716-nasa-layout-restoration-campaign/brief-v1-118.md` (~1,200 words; reusable across campaign)
+- **Tracker:** `.planning/missions/v1-49-716-nasa-layout-restoration-campaign/tracker.md` (hard-bucket roster v1.159–v1.168 + v1.118 first-rebuilt)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.716` on origin
+- **Build path:** Tier 2 sub-agent dispatch (single dispatch, 36 tool uses)
+- **Cadence:** counter-cadence cleanup-mission ship #2 (parent: v1.49.585; gap 131 forward milestones)
 
 ## Decisions
 
