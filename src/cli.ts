@@ -510,66 +510,6 @@ async function main() {
       break;
     }
 
-    case 'rollback':
-    case 'rb': {
-      const skillName = args[1];
-      const targetHash = args[2];
-
-      if (!skillName) {
-        p.log.error('Usage: skill-creator rollback <skill-name> [hash]');
-        break;
-      }
-
-      const versionManager = new VersionManager();
-      const history = await versionManager.getHistory(skillName);
-
-      if (history.length === 0) {
-        p.log.error(`No version history for '${skillName}'.`);
-        break;
-      }
-
-      let selectedHash = targetHash;
-
-      if (!selectedHash) {
-        // Interactive selection
-        const selected = await p.select({
-          message: 'Select version to rollback to:',
-          options: history.map(v => ({
-            value: v.hash,
-            label: `${v.shortHash} - ${v.date.toLocaleDateString()}`,
-            hint: v.message.slice(0, 50),
-          })),
-        });
-
-        if (p.isCancel(selected)) {
-          p.cancel('Cancelled');
-          break;
-        }
-
-        selectedHash = selected as string;
-      }
-
-      // Confirm rollback
-      const confirm = await p.confirm({
-        message: `Rollback '${skillName}' to ${selectedHash.slice(0, 7)}?`,
-      });
-
-      if (p.isCancel(confirm) || !confirm) {
-        p.log.info('Rollback cancelled.');
-        break;
-      }
-
-      const result = await versionManager.rollback(skillName, selectedHash);
-
-      if (result.success) {
-        p.log.success(`Rolled back to ${selectedHash.slice(0, 7)}.`);
-        p.log.message(`Commit: ${result.message}`);
-      } else {
-        p.log.error(`Rollback failed: ${result.error}`);
-      }
-      break;
-    }
-
     case 'migrate-agent':
     case 'ma': {
       const dryRun = args.includes('--dry-run') || args.includes('-d');
@@ -886,40 +826,6 @@ async function main() {
       const { wwwCommand } = await import('./fs/commands/www.js');
       const exitCode = await wwwCommand(args.slice(1));
       if (exitCode !== 0) process.exit(exitCode);
-      break;
-    }
-
-    case 'skill': {
-      // skill <subcommand> [args] — namespaced entry point for skill-level commands.
-      // Provides `skill-creator skill test-triggering <name>` alongside the top-level
-      // `skill-creator test-triggering <name>` (Q3 dual registration).
-      const subcommand = args[1];
-      const subArgs = args.slice(2);
-
-      switch (subcommand) {
-        case 'test-triggering': {
-          const scope = parseScope(subArgs);
-          const skillName = subArgs.filter((a) => !a.startsWith('-'))[0];
-          const { testTriggeringCommand } = await import('./cli/commands/test-triggering.js');
-          const exitCode = await testTriggeringCommand(skillName, {
-            skillsDir: parseSkillsDir(subArgs, scope),
-            mock: subArgs.includes('--mock'),
-            overrideTriggering: parseStringFlag(subArgs, '--override-triggering'),
-          });
-          if (exitCode !== 0) process.exit(exitCode);
-          break;
-        }
-
-        default: {
-          p.log.message('');
-          p.log.message('Skill subcommands:');
-          p.log.message('  test-triggering <name>   Run triggering test for a skill');
-          p.log.message('');
-          p.log.message('Examples:');
-          p.log.message('  skill-creator skill test-triggering my-skill');
-          p.log.message('  skill-creator skill test-triggering my-skill --mock');
-        }
-      }
       break;
     }
 

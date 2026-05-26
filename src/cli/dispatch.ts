@@ -9,6 +9,8 @@ import { invokeCommand } from './commands/invoke.js';
 import { agentsCommand } from './commands/agents.js';
 import { teamCommand } from './commands/team.js';
 import { dacpCommand } from './commands/dacp.js';
+import { rollbackCommand } from './commands/rollback.js';
+import { skillCommand } from './commands/skill.js';
 
 export interface CliContext {
   args: string[];
@@ -40,6 +42,8 @@ export const REGISTRY: readonly CommandEntry[] = [
   { aliases: ['agents', 'ag'], handler: (ctx) => agentsCommand(ctx.args) },
   { aliases: ['team', 'tm'], handler: (ctx) => teamCommand(ctx.args) },
   { aliases: ['dacp', 'dp'], handler: (ctx) => dacpCommand(ctx.args) },
+  { aliases: ['rollback', 'rb'], handler: (ctx) => rollbackCommand(ctx.args) },
+  { aliases: ['skill'], handler: (ctx) => skillCommand(ctx.args, ctx.parseSkillsDir, ctx.parseStringFlag) },
 ];
 
 export function lookup(command: string | undefined): CommandHandler | undefined {
