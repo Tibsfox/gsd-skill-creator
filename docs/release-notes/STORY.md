@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.783`.
+The story begins at `v1.0` and continues to `v1.49.784`.
 
-**826 chapters.** 825 have retrospectives.
+**827 chapters.** 826 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -834,3 +834,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.781](v1.49.781/00-summary.md)** — Tier E Architecture: Store/Registry Naming Hygiene + MemoryStore Audit · 2026-05-26
 - **[v1.49.782](v1.49.782/00-summary.md)** — Tier E Architecture: LoaderContext Security Chokepoint · 2026-05-26
 - **[v1.49.783](v1.49.783/00-summary.md)** — STATE.md Normalizer Fix · 2026-05-26
+- **[v1.49.784](v1.49.784/00-summary.md)** — Codification: 8 v781-v783 lessons → 3 new operative disciplines · 2026-05-26
