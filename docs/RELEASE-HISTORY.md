@@ -1,15 +1,16 @@
 # Release History
 
-831 milestones shipped across the v1.0 → v1.49.788 arc. The table below lists every shipped release, newest first.
+832 milestones shipped across the v1.0 → v1.49.789 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 831 releases · 830 with retrospectives · 710 with extracted lessons · quality A:662 B:97 C:63 D:0 F:9 (avg 93) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 832 releases · 831 with retrospectives · 711 with extracted lessons · quality A:662 B:97 C:63 D:0 F:10 (avg 93) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.789](release-notes/v1.49.789) | Shelfware Verdict 1: WIRE `semantic-channel` via `dacp drift-check` | 2026-05-26 | 2 | — | — | [s](release-notes/v1.49.789/chapter/00-summary.md) [r](release-notes/v1.49.789/chapter/03-retrospective.md) [l](release-notes/v1.49.789/chapter/04-lessons.md) [c](release-notes/v1.49.789/chapter/99-context.md) | 5 | F 59 |  |
 | [v1.49.788](release-notes/v1.49.788) | IBEX NASA Interstellar Boundary Explorer SMEX-Class Earth-Orbit Energetic-Neutral-Atom All-Sky Imaging Mission | 2026-05-26 | 4 | — | — | [s](release-notes/v1.49.788/chapter/00-summary.md) [r](release-notes/v1.49.788/chapter/03-retrospective.md) [l](release-notes/v1.49.788/chapter/04-lessons.md) [c](release-notes/v1.49.788/chapter/99-context.md) | 12 | F 45 |  |
 | [v1.49.787](release-notes/v1.49.787) | Adoption Telemetry: Dashboard + Automation + Allowlist | 2026-05-26 | 2 | — | — | [s](release-notes/v1.49.787/chapter/00-summary.md) [r](release-notes/v1.49.787/chapter/03-retrospective.md) [l](release-notes/v1.49.787/chapter/04-lessons.md) [c](release-notes/v1.49.787/chapter/99-context.md) | — | F 51 |  |
 | [v1.49.786](release-notes/v1.49.786) | Adoption Telemetry: Module-Usage Scanner | 2026-05-26 | 2 | — | — | [s](release-notes/v1.49.786/chapter/00-summary.md) [r](release-notes/v1.49.786/chapter/03-retrospective.md) [l](release-notes/v1.49.786/chapter/04-lessons.md) [c](release-notes/v1.49.786/chapter/99-context.md) | — | F 49 |  |
