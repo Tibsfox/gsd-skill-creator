@@ -9,6 +9,30 @@ use crate::pty::flow::split_utf8_safe;
 use crate::pty::manager::PtyManager;
 use crate::pty::session::PtySession;
 
+/// Webview-controllable shell basenames. The PTY is interactive — once a
+/// shell is running the user types anything anyway — so the only thing
+/// worth gating is the binary that gets spawned. An untrusted webview
+/// without this gate could call pty_open with `shell = "/bin/rm"` +
+/// `args = ["-rf", "/"]` and never need a single keystroke.
+const ALLOWED_SHELLS: &[&str] = &[
+    "bash", "sh", "zsh", "fish", "dash", "ksh", "tcsh", "csh",
+    "cmd.exe", "powershell.exe", "pwsh.exe", "pwsh",
+];
+
+fn shell_allowed(shell_path: &str) -> bool {
+    // Split on both POSIX `/` and Windows `\` so that the basename check
+    // works regardless of which platform we're compiled for.
+    let basename = shell_path
+        .rsplit(|c| c == '/' || c == '\\')
+        .next()
+        .unwrap_or(shell_path);
+    if basename.is_empty() {
+        return false;
+    }
+    let lowered = basename.to_ascii_lowercase();
+    ALLOWED_SHELLS.iter().any(|s| *s == lowered)
+}
+
 /// Spawn a shell process inside a PTY and stream output via `on_data` channel.
 ///
 /// The reader runs on `tokio::task::spawn_blocking` because portable-pty's
@@ -46,6 +70,12 @@ pub async fn pty_open(
             std::env::var("SHELL").unwrap_or_else(|_| "/bin/bash".into())
         }
     });
+    if !shell_allowed(&shell_path) {
+        return Err(format!(
+            "shell '{}' not in pty_open allowlist (bash, sh, zsh, fish, dash, ksh, tcsh, csh, cmd.exe, powershell.exe, pwsh, pwsh.exe)",
+            shell_path,
+        ));
+    }
     let mut cmd = CommandBuilder::new(&shell_path);
     if let Some(ref extra_args) = args {
         for a in extra_args {
@@ -220,6 +250,8 @@ pub fn pty_close(
 
 #[cfg(test)]
 mod tests {
+    use super::shell_allowed;
+
     /// Verify that all 6 PTY command functions exist and are callable.
     /// This is a compilation test -- the real integration tests happen
     /// via TypeScript mockIPC in later plans.
@@ -233,5 +265,29 @@ mod tests {
         let _ = super::pty_pause as fn(_, _) -> _;
         let _ = super::pty_resume as fn(_, _) -> _;
         let _ = super::pty_close as fn(_, _) -> _;
+    }
+
+    #[test]
+    fn shell_allowlist_accepts_common_shells() {
+        assert!(shell_allowed("/bin/bash"));
+        assert!(shell_allowed("/usr/bin/zsh"));
+        assert!(shell_allowed("/usr/local/bin/fish"));
+        assert!(shell_allowed("bash"));
+        assert!(shell_allowed("sh"));
+        assert!(shell_allowed("cmd.exe"));
+        assert!(shell_allowed("C:\\Windows\\System32\\cmd.exe"));
+        assert!(shell_allowed("powershell.exe"));
+        assert!(shell_allowed("PowerShell.exe"));
+    }
+
+    #[test]
+    fn shell_allowlist_rejects_arbitrary_executables() {
+        assert!(!shell_allowed("/bin/rm"));
+        assert!(!shell_allowed("/usr/bin/curl"));
+        assert!(!shell_allowed("rm"));
+        assert!(!shell_allowed(""));
+        assert!(!shell_allowed("evil"));
+        assert!(!shell_allowed("/bin/bash; rm -rf /"));
+        assert!(!shell_allowed("bash.evil"));
     }
 }
