@@ -11,12 +11,12 @@ import { dirname, join } from 'path';
 import { tmpdir } from 'os';
 import type { UsageEvent, EventStoreConfig } from './types.js';
 import { DEFAULT_MAX_SIZE_BYTES } from './types.js';
-import { serializeWrite } from '../safety/write-queue.js';
+import { WriteQueue } from '../safety/write-queue.js';
 
 export class EventStore {
   private filePath: string;
   private maxSizeBytes: number;
-  private writeQueue: Promise<void> = Promise.resolve();
+  private writeQueue = new WriteQueue();
 
   constructor(config: EventStoreConfig) {
     this.filePath = config.filePath;
@@ -34,7 +34,7 @@ export class EventStore {
    * Writes are serialized through writeQueue to prevent corruption.
    */
   async append(event: UsageEvent): Promise<void> {
-    return serializeWrite(this, async () => {
+    return this.writeQueue.serialize(async () => {
       await mkdir(dirname(this.filePath), { recursive: true });
 
       const line = JSON.stringify(event) + '\n';

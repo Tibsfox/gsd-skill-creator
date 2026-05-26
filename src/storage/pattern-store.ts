@@ -2,11 +2,11 @@ import { appendFile, readFile, mkdir } from 'fs/promises';
 import { join } from 'path';
 import { Pattern, PatternCategory } from '../types/pattern.js';
 import { createChecksummedEntry, validateJsonlEntry, verifyChecksum } from '../validation/jsonl-safety.js';
-import { serializeWrite } from '../safety/write-queue.js';
+import { WriteQueue } from '../safety/write-queue.js';
 
 export class PatternStore {
   private patternsDir: string;
-  private writeQueue: Promise<void> = Promise.resolve();
+  private writeQueue = new WriteQueue();
 
   constructor(patternsDir: string = '.planning/patterns') {
     this.patternsDir = patternsDir;
@@ -32,7 +32,7 @@ export class PatternStore {
     });
 
     // Serialize writes through the queue
-    return serializeWrite(this, async () => {
+    return this.writeQueue.serialize(async () => {
       // Ensure directory exists
       await mkdir(this.patternsDir, { recursive: true });
 

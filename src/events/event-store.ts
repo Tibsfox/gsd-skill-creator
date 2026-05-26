@@ -13,7 +13,7 @@
 import { appendFile, readFile, writeFile, mkdir } from 'node:fs/promises';
 import { join } from 'node:path';
 import { EventEntrySchema } from './types.js';
-import { serializeWrite } from '../safety/write-queue.js';
+import { WriteQueue } from '../safety/write-queue.js';
 import type { EventEntry } from './types.js';
 
 /** Filename for the event log */
@@ -21,7 +21,7 @@ const EVENTS_FILENAME = 'events.jsonl';
 
 export class EventStore {
   private patternsDir: string;
-  private writeQueue: Promise<void> = Promise.resolve();
+  private writeQueue = new WriteQueue();
 
   constructor(patternsDir: string) {
     this.patternsDir = patternsDir;
@@ -43,7 +43,7 @@ export class EventStore {
       data: entry,
     };
 
-    return serializeWrite(this, async () => {
+    return this.writeQueue.serialize(async () => {
       await mkdir(this.patternsDir, { recursive: true });
       const line = JSON.stringify(envelope) + '\n';
       await appendFile(this.filePath, line, 'utf-8');
@@ -113,7 +113,7 @@ export class EventStore {
    * Uses writeQueue for serialization.
    */
   async consume(eventName: string, consumedBy: string): Promise<void> {
-    return serializeWrite(this, async () => {
+    return this.writeQueue.serialize(async () => {
       let content: string;
       try {
         content = await readFile(this.filePath, 'utf-8');
@@ -173,7 +173,7 @@ export class EventStore {
    * Uses writeQueue for serialization.
    */
   async markExpired(): Promise<void> {
-    return serializeWrite(this, async () => {
+    return this.writeQueue.serialize(async () => {
       let content: string;
       try {
         content = await readFile(this.filePath, 'utf-8');

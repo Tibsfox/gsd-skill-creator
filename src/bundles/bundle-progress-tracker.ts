@@ -18,7 +18,7 @@
 import { z } from 'zod';
 import { appendFile, readFile, mkdir } from 'node:fs/promises';
 import { join } from 'node:path';
-import { serializeWrite } from '../safety/write-queue.js';
+import { WriteQueue } from '../safety/write-queue.js';
 import type { SessionObservation } from '../types/observation.js';
 
 // ============================================================================
@@ -95,7 +95,7 @@ const BUNDLE_PROGRESS_FILENAME = 'bundle-progress.jsonl';
  */
 export class BundleProgressStore {
   private patternsDir: string;
-  private writeQueue: Promise<void> = Promise.resolve();
+  private writeQueue = new WriteQueue();
 
   constructor(patternsDir: string) {
     this.patternsDir = patternsDir;
@@ -117,7 +117,7 @@ export class BundleProgressStore {
       data: entry,
     };
 
-    return serializeWrite(this, async () => {
+    return this.writeQueue.serialize(async () => {
       await mkdir(this.patternsDir, { recursive: true });
       const line = JSON.stringify(envelope) + '\n';
       await appendFile(this.filePath, line, 'utf-8');

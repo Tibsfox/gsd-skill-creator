@@ -14,14 +14,14 @@ import { appendFile, readFile, mkdir } from 'node:fs/promises';
 import { join } from 'node:path';
 import { WorkflowRunEntrySchema } from './types.js';
 import type { WorkflowRunEntry } from './types.js';
-import { serializeWrite } from '../safety/write-queue.js';
+import { WriteQueue } from '../safety/write-queue.js';
 
 /** Filename for the workflow run log */
 const WORKFLOW_RUNS_FILENAME = 'workflow-runs.jsonl';
 
 export class WorkflowRunStore {
   private patternsDir: string;
-  private writeQueue: Promise<void> = Promise.resolve();
+  private writeQueue = new WriteQueue();
 
   constructor(patternsDir: string) {
     this.patternsDir = patternsDir;
@@ -43,7 +43,7 @@ export class WorkflowRunStore {
       data: entry,
     };
 
-    return serializeWrite(this, async () => {
+    return this.writeQueue.serialize(async () => {
       await mkdir(this.patternsDir, { recursive: true });
       const line = JSON.stringify(envelope) + '\n';
       await appendFile(this.filePath, line, 'utf-8');

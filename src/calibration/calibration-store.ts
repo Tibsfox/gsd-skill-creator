@@ -14,7 +14,7 @@ import { readFile, writeFile, appendFile, mkdir } from 'fs/promises';
 import { join, dirname } from 'path';
 import { homedir } from 'os';
 import { randomUUID } from 'crypto';
-import { serializeWrite } from '../safety/write-queue.js';
+import { WriteQueue } from '../safety/write-queue.js';
 import type {
   CalibrationEvent,
   CalibrationEventInput,
@@ -23,7 +23,7 @@ import type {
 
 export class CalibrationStore {
   private eventsPath: string;
-  private writeQueue: Promise<void> = Promise.resolve();
+  private writeQueue = new WriteQueue();
 
   /**
    * Create a new CalibrationStore instance.
@@ -125,7 +125,7 @@ export class CalibrationStore {
     await this.ensureDir();
 
     // Serialize the clear operation
-    await serializeWrite(this, async () => {
+    await this.writeQueue.serialize(async () => {
       await writeFile(this.eventsPath, '', 'utf-8');
     });
   }
@@ -171,7 +171,7 @@ export class CalibrationStore {
     await this.ensureDir();
 
     // Serialize writes to prevent interleaving
-    await serializeWrite(this, async () => {
+    await this.writeQueue.serialize(async () => {
       const line = JSON.stringify(event) + '\n';
       await appendFile(this.eventsPath, line, 'utf-8');
     });
@@ -186,7 +186,7 @@ export class CalibrationStore {
     await this.ensureDir();
 
     // Serialize the full write
-    await serializeWrite(this, async () => {
+    await this.writeQueue.serialize(async () => {
       const content = events.map(e => JSON.stringify(e)).join('\n') + '\n';
       await writeFile(this.eventsPath, content, 'utf-8');
     });

@@ -11,7 +11,7 @@
 import { z } from 'zod';
 import { readFile, appendFile, mkdir } from 'fs/promises';
 import { dirname } from 'path';
-import { serializeWrite } from './write-queue.js';
+import { WriteQueue } from './write-queue.js';
 
 // ============================================================================
 // Zod Schemas
@@ -60,7 +60,7 @@ export interface GetEntriesOptions {
  */
 export class AuditLogger {
   private readonly logPath: string;
-  private writeQueue: Promise<void> = Promise.resolve();
+  private writeQueue = new WriteQueue();
 
   constructor(logPath: string = '.claude/.audit-log.jsonl') {
     this.logPath = logPath;
@@ -161,7 +161,7 @@ export class AuditLogger {
     await this.ensureDir();
 
     // Serialize writes to prevent interleaving
-    await serializeWrite(this, async () => {
+    await this.writeQueue.serialize(async () => {
       const line = JSON.stringify(entry) + '\n';
       await appendFile(this.logPath, line, 'utf-8');
     });

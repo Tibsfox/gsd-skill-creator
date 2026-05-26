@@ -15,11 +15,11 @@ import { join, dirname } from 'path';
 import { homedir } from 'os';
 import { randomUUID } from 'crypto';
 import type { SuccessSignal } from '../types/evaluator.js';
-import { serializeWrite } from '../safety/write-queue.js';
+import { WriteQueue } from '../safety/write-queue.js';
 
 export class SuccessTracker {
   private signalsPath: string;
-  private writeQueue: Promise<void> = Promise.resolve();
+  private writeQueue = new WriteQueue();
 
   /**
    * Create a new SuccessTracker instance.
@@ -118,7 +118,7 @@ export class SuccessTracker {
   async clear(): Promise<void> {
     await this.ensureDir();
 
-    await serializeWrite(this, async () => {
+    await this.writeQueue.serialize(async () => {
       await writeFile(this.signalsPath, '', 'utf-8');
     });
   }
@@ -169,7 +169,7 @@ export class SuccessTracker {
     await this.ensureDir();
 
     // Serialize writes to prevent interleaving
-    await serializeWrite(this, async () => {
+    await this.writeQueue.serialize(async () => {
       const line = JSON.stringify(signal) + '\n';
       await appendFile(this.signalsPath, line, 'utf-8');
     });
