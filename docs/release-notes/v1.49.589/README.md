@@ -43,6 +43,15 @@ v1.49.589 advances NASA from 1.69 (Apollo 5 LM-1 / first UPV exemplar) to **1.70
 
 (See chapter/04-lessons.md for full lesson definitions and 3-criterion rubrics.)
 
+
+## Threads closed / opened / extended
+
+- **OPENED:** new substrate-anchors NEW LOCKED at this ship enter the engine-cumulative substrate-thread state.
+- **EXTENDED:** Lesson #10168 counter-cadence cleanup-mission cadence — pattern operationally productive.
+- **EXTENDED:** Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3 applied to the dispatch brief.
+- **EXTENDED:** W3.5 chapter-gen bake-in process gate runs identically.
+- **CARRY-FORWARD:** all predecessor engine-state thread states UNCHANGED.
+
 ## Thread state forward to v1.71
 
 - **UPV** (UNMANNED-PRECURSOR-VALIDATION): 2-exemplar reproducibly-stable. 3rd-exemplar candidates: Skylab 1 (1973), Buran 1K1 (1988), SpaceX DM-1 (2019). PSP sub-pattern documented under UPV.

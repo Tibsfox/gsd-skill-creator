@@ -1,5 +1,9 @@
 # v1.49.676 — Counter-Cadence Cluster Broad-Cleanup (5 Categories) — NO NASA Degree Advance
 
+**Dedication:** to disciplined per-mission canonical-sibling rebuild and the engine-state-quietness-by-design pattern that enables counter-cadence cleanup ships.
+**Engine Position:** within the canonical-sibling-rebuild campaign cadence (parent: v1.49.585 concerns-cleanup; campaign launch: v1.49.716).
+
+
 **Released:** 2026-05-18
 **Type:** **counter-cadence cluster milestone — NO NASA degree advance.** Triggered by Lesson #10371 SAME-CALENDAR-DAY-THRESHOLD-HIT second operational instance at v675 close (4/4 on 2026-05-18). Operator-authorized DEPARTURE from Lesson #10374 SINGLE-CC-MILESTONE-FOR-NARROW-THRESHOLD-RESPONSE in favor of v585 + v664-v666 broad-cleanup pattern: **5 operational-debt categories addressed in one milestone**. NASA 1.129 → 1.129 (UNCHANGED). MUS/ELC engine-state advanced from SCAFFOLD-PENDING to backfilled at 1.124-1.129; TRS pack-45 backfilled.
 **Predecessor:** v1.49.675 — Rogers Commission Report (tag `v1.49.675` / sha `d27a83783` / NASA 1.129; shipped 2026-05-18 13:44 UTC)
@@ -222,3 +226,11 @@ npx vitest run tests/integration/v1-49-676-meta-test.test.ts  # 6/6 pass
 - Sub-agent dispatch discipline: `docs/sub-agent-dispatch-discipline.md`
 - TRS pack-43 spectral theory (predecessor): `www/tibsfox/com/Research/TRS/pack-43/`
 - TRS pack-45 reliability + Bayesian-investigation (this milestone): `www/tibsfox/com/Research/TRS/pack-45/`
+
+## Infrastructure
+
+- **Mission output:** `www/tibsfox/com/Research/NASA/` per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-NNN-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence or counter-cadence per ship type

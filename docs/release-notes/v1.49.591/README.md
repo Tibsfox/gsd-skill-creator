@@ -43,6 +43,15 @@ v1.49.591 advances NASA from 1.71 (Apollo 7 / POST-FIRE-PROGRAM-RECOVERY 1-ex) t
 
 (See `chapter/04-lessons.md` for full lesson definitions and 3-criterion rubrics.)
 
+
+## Threads closed / opened / extended
+
+- **OPENED:** new substrate-anchors NEW LOCKED at this ship enter the engine-cumulative substrate-thread state.
+- **EXTENDED:** Lesson #10168 counter-cadence cleanup-mission cadence — pattern operationally productive.
+- **EXTENDED:** Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3 applied to the dispatch brief.
+- **EXTENDED:** W3.5 chapter-gen bake-in process gate runs identically.
+- **CARRY-FORWARD:** all predecessor engine-state thread states UNCHANGED.
+
 ## Thread state forward to v1.73
 
 - **ALL-UP COMMITMENT**: 2-exemplar reproducibly-stable; outcome-validated at v1.72. 3rd-exemplar candidate STS-1 (1981) or Crew Dragon Demo-2 (2020) at much later degree; failure-case anchor Soyuz 1 (1967).

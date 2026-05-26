@@ -52,6 +52,15 @@ Index sizes after work: master.json 137 records; arxiv-index.json 51 entries; cr
 - NASA CSV row count stable at 450 (Path Y reconciliation locked at v1.49.587)
 - 4 forward lessons emitted (#10183-#10186)
 
+
+## Threads closed / opened / extended
+
+- **OPENED:** new substrate-anchors NEW LOCKED at this ship enter the engine-cumulative substrate-thread state.
+- **EXTENDED:** Lesson #10168 counter-cadence cleanup-mission cadence — pattern operationally productive.
+- **EXTENDED:** Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3 applied to the dispatch brief.
+- **EXTENDED:** W3.5 chapter-gen bake-in process gate runs identically.
+- **CARRY-FORWARD:** all predecessor engine-state thread states UNCHANGED.
+
 ## Thread state forward to v1.70
 
 Apollo 6 (v1.70, 1968-04-04) is the strongest near-term candidate to advance UPV from 1-ex to 2-ex (second uncrewed Saturn V test for pogo-oscillation validation before Apollo 7 crew exposure). AGC Block II (Apollo 7 CSM Oct 1968 = v1.71) is the strongest near-term candidate to advance the IC radiation-qualification era from 1-ex to 2-ex. ALL-UP COMMITMENT 2nd-ex candidate lands at v1.72 Apollo 8.

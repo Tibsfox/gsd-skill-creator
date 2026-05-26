@@ -42,6 +42,15 @@ v1.49.590 advances NASA from 1.70 (Apollo 6 / UPV 2-ex reproducibly-stable) to *
 
 (See `chapter/04-lessons.md` for full lesson definitions and 3-criterion rubrics.)
 
+
+## Threads closed / opened / extended
+
+- **OPENED:** new substrate-anchors NEW LOCKED at this ship enter the engine-cumulative substrate-thread state.
+- **EXTENDED:** Lesson #10168 counter-cadence cleanup-mission cadence — pattern operationally productive.
+- **EXTENDED:** Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3 applied to the dispatch brief.
+- **EXTENDED:** W3.5 chapter-gen bake-in process gate runs identically.
+- **CARRY-FORWARD:** all predecessor engine-state thread states UNCHANGED.
+
 ## Thread state forward to v1.72
 
 - **POST-FIRE-PROGRAM-RECOVERY**: 1-exemplar origination. 2nd-exemplar candidate STS-26 (1988); 3-exemplar reproducibly-stable expected ~v1.49.620+.

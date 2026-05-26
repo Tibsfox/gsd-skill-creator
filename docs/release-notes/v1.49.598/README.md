@@ -1,5 +1,9 @@
 # v1.49.598 — Apollo 14 Fra Mauro Highlands (NASA degree 1.78)
 
+**Dedication:** to disciplined per-mission canonical-sibling rebuild and the engine-state-quietness-by-design pattern that enables counter-cadence cleanup ships.
+**Engine Position:** within the canonical-sibling-rebuild campaign cadence (parent: v1.49.585 concerns-cleanup; campaign launch: v1.49.716).
+
+
 **Released:** 2026-05-03
 **Type:** forward-cadence engine advance (NASA degree 1.78 + MUS 1.78 + ELC 1.78 + SPS #75)
 **Predecessor:** v1.49.597 (GSD Intelligence Dashboard; counter-cadence; engine state held flat at NASA 1.77 / MUS 1.77 / ELC 1.77 / SPS #74)
@@ -72,6 +76,15 @@ See `chapter/04-lessons.md` for full lesson body framings.
 
 **11th instance** of established three-track-plus-TRS cadence per Lesson #10197 (v1.49.587-v1.49.595 as 9 instances; v1.49.596 as 10th; v1.49.597 was counter-cadence intelligence-dashboard milestone with engine held flat; v1.49.598 is 11th forward-cadence instance). Cadence pattern remains ESTABLISHED.
 
+
+## Threads closed / opened / extended
+
+- **OPENED:** new substrate-anchors NEW LOCKED at this ship enter the engine-cumulative substrate-thread state.
+- **EXTENDED:** Lesson #10168 counter-cadence cleanup-mission cadence — pattern operationally productive.
+- **EXTENDED:** Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3 applied to the dispatch brief.
+- **EXTENDED:** W3.5 chapter-gen bake-in process gate runs identically.
+- **CARRY-FORWARD:** all predecessor engine-state thread states UNCHANGED.
+
 ## See also
 
 - `chapter/00-summary.md` — structural firsts at v1.49.598 close + engine state full enumeration
@@ -84,3 +97,11 @@ See `chapter/04-lessons.md` for full lesson body framings.
 - `www/tibsfox/com/Research/MUS/1.78/index.html` — MUS 1.78 *Tapestry* index.html (gitignored; FTP-staged)
 - `www/tibsfox/com/Research/ELC/1.78/index.html` — ELC 1.78 Moon Trees lineage index.html (gitignored; FTP-staged)
 - `www/tibsfox/com/Research/SPS/research/releases/075-marbled-murrelet/pass2-refinement.md` — SPS #75 (gitignored)
+
+## Infrastructure
+
+- **Mission output:** `www/tibsfox/com/Research/NASA/` per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-NNN-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence or counter-cadence per ship type
