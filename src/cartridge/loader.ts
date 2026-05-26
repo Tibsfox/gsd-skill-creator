@@ -31,6 +31,7 @@
 import { readFileSync } from 'node:fs';
 import { dirname, isAbsolute, resolve } from 'node:path';
 import { parse as parseYaml } from 'yaml';
+import { ensureAllowed, type LoaderContext } from '../security/loader-context.js';
 import { normalizeEvaluationChipset } from './normalizers/evaluation.js';
 import {
   CartridgeSchema,
@@ -39,9 +40,13 @@ import {
   type ResearchOutputCartridge,
 } from './types.js';
 
+const LOADER_SOURCE = 'cartridge/loader';
+
 export interface LoadCartridgeOptions {
   /** Maximum depth of nested src: chains. Defaults to 16. */
   maxDepth?: number;
+  /** Optional security chokepoint — see src/security/loader-context.ts. */
+  ctx?: LoaderContext;
 }
 
 /** Union of all top-level cartridge shapes the loader can return. */
@@ -74,10 +79,12 @@ export function loadCartridge(
   options: LoadCartridgeOptions = {},
 ): Cartridge {
   const maxDepth = options.maxDepth ?? 16;
+  const ctx = options.ctx;
   const absolutePath = isAbsolute(cartridgePath)
     ? cartridgePath
     : resolve(process.cwd(), cartridgePath);
 
+  ensureAllowed(ctx, LOADER_SOURCE, 'load-cartridge', absolutePath);
   const rawText = readFileSync(absolutePath, 'utf8');
   const rawDoc = parseYaml(rawText);
 
@@ -102,6 +109,7 @@ export function loadCartridge(
     baseDir,
     new Set(),
     maxDepth,
+    ctx,
   );
 
   return CartridgeSchema.parse(resolved);
@@ -123,10 +131,12 @@ export function loadAnyCartridge(
   options: LoadCartridgeOptions = {},
 ): AnyCartridge {
   const maxDepth = options.maxDepth ?? 16;
+  const ctx = options.ctx;
   const absolutePath = isAbsolute(cartridgePath)
     ? cartridgePath
     : resolve(process.cwd(), cartridgePath);
 
+  ensureAllowed(ctx, LOADER_SOURCE, 'load-cartridge', absolutePath);
   const rawText = readFileSync(absolutePath, 'utf8');
   const rawDoc = parseYaml(rawText);
 
@@ -150,6 +160,7 @@ export function loadAnyCartridge(
     baseDir,
     new Set(),
     maxDepth,
+    ctx,
   );
 
   return CartridgeSchema.parse(resolved);
@@ -168,6 +179,7 @@ export function parseCartridge(
   options: LoadCartridgeOptions = {},
 ): Cartridge {
   const maxDepth = options.maxDepth ?? 16;
+  const ctx = options.ctx;
   if (doc === null || typeof doc !== 'object' || Array.isArray(doc)) {
     throw new Error(
       `loader: cartridge document must be a mapping (got ${describeType(doc)})`,
@@ -179,6 +191,7 @@ export function parseCartridge(
     baseDir,
     new Set(),
     maxDepth,
+    ctx,
   );
   return CartridgeSchema.parse(resolved);
 }
@@ -192,6 +205,7 @@ function resolveCartridgeEntries(
   baseDir: string,
   visited: Set<string>,
   maxDepth: number,
+  ctx: LoaderContext | undefined,
 ): Record<string, unknown> {
   const chipsets = doc.chipsets;
   if (!Array.isArray(chipsets)) {
@@ -200,7 +214,7 @@ function resolveCartridgeEntries(
   }
 
   const resolvedChipsets = chipsets.map((entry) =>
-    resolveChipsetEntry(entry, baseDir, visited, maxDepth),
+    resolveChipsetEntry(entry, baseDir, visited, maxDepth, ctx),
   );
 
   return { ...doc, chipsets: resolvedChipsets };
@@ -211,6 +225,7 @@ function resolveChipsetEntry(
   baseDir: string,
   visited: Set<string>,
   remainingDepth: number,
+  ctx: LoaderContext | undefined,
 ): unknown {
   if (entry === null || typeof entry !== 'object' || Array.isArray(entry)) {
     return entry;
@@ -235,6 +250,7 @@ function resolveChipsetEntry(
     throw new Error(`loader: circular src: reference detected: ${chain}`);
   }
 
+  ensureAllowed(ctx, LOADER_SOURCE, 'read-file', filePath, `src: '${src}'`);
   let externalDoc: unknown;
   try {
     externalDoc = parseYaml(readFileSync(filePath, 'utf8'));
@@ -287,6 +303,7 @@ function resolveChipsetEntry(
       externalBaseDir,
       nextVisited,
       remainingDepth - 1,
+      ctx,
     );
   }
 
