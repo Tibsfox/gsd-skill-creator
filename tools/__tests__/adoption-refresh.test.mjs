@@ -13,6 +13,9 @@
  *   T6. No-changes-since-prior reports "no changes"
  *   T7. New modules detected
  *   T8. Removed modules detected
+ *   T9. Overwrite guard refuses when target JSON exists with different content
+ *   T10. --force overrides the overwrite guard
+ *   T11. Idempotent re-run (content unchanged) succeeds without --force
  */
 import { describe, it, expect, afterEach } from 'vitest';
 import {
@@ -200,5 +203,74 @@ describe('adoption-refresh', () => {
     const r2 = runRefresh();
     expect(r2.stderr).toContain('removed modules');
     expect(r2.stderr).toContain('bar');
+  });
+
+  it('T9: overwrite guard refuses when target JSON exists with different content', () => {
+    // First run at v1.49.786 writes baseline.
+    setupFixture({
+      'src/foo/index.ts': "export const FOO = 'foo';\n",
+    }, '1.49.786');
+    const r1 = runRefresh();
+    expect(r1.exitCode).toBe(0);
+    const baselineJson = join(workDir, 'docs', 'ADOPTION-BASELINE-v1.49.786.json');
+    expect(existsSync(baselineJson)).toBe(true);
+    const committedContent = readFileSync(baselineJson, 'utf8');
+
+    // Simulate "forgot to bump-version" — package.json stays at .786 while
+    // src/ gains a new module. Re-running refresh would overwrite the
+    // committed v1.49.786 baseline with different content.
+    mkdirSync(join(workDir, 'src', 'newmod'), { recursive: true });
+    writeFileSync(
+      join(workDir, 'src', 'newmod', 'index.ts'),
+      "export const NEW = 'new';\n",
+      'utf8',
+    );
+    const r2 = runRefresh();
+    expect(r2.exitCode).toBe(3);
+    expect(r2.stderr).toContain('refusing to overwrite');
+    expect(r2.stderr).toContain('forget to run');
+    expect(r2.stderr).toContain('AFTER bump-version');
+    // On-disk file is unchanged.
+    expect(readFileSync(baselineJson, 'utf8')).toBe(committedContent);
+  });
+
+  it('T10: --force overrides the overwrite guard', () => {
+    setupFixture({
+      'src/foo/index.ts': "export const FOO = 'foo';\n",
+    }, '1.49.786');
+    runRefresh();
+    const baselineJson = join(workDir, 'docs', 'ADOPTION-BASELINE-v1.49.786.json');
+    const beforeContent = readFileSync(baselineJson, 'utf8');
+
+    mkdirSync(join(workDir, 'src', 'newmod'), { recursive: true });
+    writeFileSync(
+      join(workDir, 'src', 'newmod', 'index.ts'),
+      "export const NEW = 'new';\n",
+      'utf8',
+    );
+    const r2 = runRefresh('--force');
+    expect(r2.exitCode).toBe(0);
+    expect(r2.stderr).toContain('--force overriding');
+    // On-disk file IS updated under --force.
+    expect(readFileSync(baselineJson, 'utf8')).not.toBe(beforeContent);
+  });
+
+  it('T11: idempotent re-run (content unchanged) succeeds without --force', () => {
+    setupFixture({
+      'src/foo/index.ts': "export const FOO = 'foo';\n",
+      'src/bar/index.ts': "import { FOO } from '../foo/index.js';\nexport const BAR = FOO;\n",
+    }, '1.49.786');
+    const r1 = runRefresh();
+    expect(r1.exitCode).toBe(0);
+    const baselineJson = join(workDir, 'docs', 'ADOPTION-BASELINE-v1.49.786.json');
+    const firstContent = readFileSync(baselineJson, 'utf8');
+
+    // Re-run at the same version with NO source changes.
+    const r2 = runRefresh();
+    expect(r2.exitCode).toBe(0);
+    expect(r2.stderr).not.toContain('refusing to overwrite');
+    expect(r2.stderr).not.toContain('--force overriding');
+    // Content is byte-identical.
+    expect(readFileSync(baselineJson, 'utf8')).toBe(firstContent);
   });
 });

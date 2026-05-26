@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.793`.
+The story begins at `v1.0` and continues to `v1.49.794`.
 
-**836 chapters.** 835 have retrospectives.
+**837 chapters.** 836 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -844,3 +844,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.791](v1.49.791/00-summary.md)** — Shelfware Verdict 2 + 3: ALLOWLIST `tonnetz` + `wasserstein-hebbian` (substrate-level reference implementations preserved as substrate) · 2026-05-26
 - **[v1.49.792](v1.49.792/00-summary.md)** — Shelfware Verdict 4: WIRE `koopman-memory` via `skill-creator koopman-check` CLI · 2026-05-26
 - **[v1.49.793](v1.49.793/00-summary.md)** — Shelfware Verdicts 5 + 6: Math Foundations Refresh cluster CLOSED — WIRE `coherent-functors` + `hourglass-persistence` via parallel CLIs · 2026-05-26
+- **[v1.49.794](v1.49.794/00-summary.md)** — Deterministic Gate for #10424: Adoption-Refresh Overwrite Guard · 2026-05-26

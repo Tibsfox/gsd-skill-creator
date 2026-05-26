@@ -2,7 +2,7 @@
 
 **Surface:** Authoring or extending a CLI tool in `tools/` that scans the codebase, emits metrics, or produces a comparable report; designing its test harness; piping its output to another command.
 
-**Codified at:** v1.49.790 (lesson cluster from v1.49.785-v1.49.789 — the adoption-telemetry build chain plus the PROJECT.md normalizer surfaced five distinct authoring pitfalls in close sequence).
+**Codified at:** v1.49.790 (lesson cluster from v1.49.785-v1.49.789 — the adoption-telemetry build chain plus the PROJECT.md normalizer surfaced five distinct authoring pitfalls in close sequence). **Extended at v1.49.794** with #10424 (refuse-to-overwrite guard for version-stamped baseline files), after v791 trip + 2 sequential clean applications at v792 + v793.
 
 ## Why this discipline exists
 
@@ -78,6 +78,26 @@ Observability tools whose primary value is "diff vs prior state" have a warm-up 
 
 **Anti-pattern.** Shipping a diff-emitting tool whose first-run message is silent or generic ("no changes"). Operators read "no changes" as "tool works, nothing happened" rather than "first run, no prior baseline." The next ship's operator sees the same silence and concludes the tool is broken.
 
+### Refuse to overwrite version-stamped baseline files (Lesson #10424 — ESTABLISHED, v794)
+
+A tool that writes `docs/<TOOL>-BASELINE-v${PACKAGE_VERSION}.{md,json}` embeds the current `package.json.version` in the filename. If the operator runs the tool BEFORE running `bump-version`, the filename resolves to the PREDECESSOR'S version and the predecessor's committed baseline gets overwritten in-place with the successor's content. The trip is silent: no error, no warning, the working tree just diverges from `HEAD` for a file the operator did not intend to touch.
+
+Prose-in-handoff warnings about the required sequencing don't survive multi-ship intervals — the v791 trip happened despite the v789 handoff + v790 codification retro both flagging the ordering. The fix is a deterministic guard at the tool level: refuse to overwrite when the target file exists on disk AND its content differs from what we'd write, unless `--force`.
+
+The guard does NOT depend on git. It compares disk content to proposed content:
+
+- **First-run** (file absent) → write.
+- **Idempotent re-run** (content matches) → no-op write.
+- **Overwrite-with-different-content** → refuse with helpful message; suggest `bump-version`; offer `--force` for retroactive baseline rewrites.
+
+**Anti-pattern.** Trusting prose-in-handoff sequencing warnings to prevent overwrite of version-stamped artifacts. Handoff warnings decay; deterministic guards don't.
+
+**Reference implementation.** `tools/adoption-refresh.mjs` `checkOverwriteGuard()` (added v794). Skips on `--dry-run` (read-only mode); overrides on `--force`.
+
+**Validation.** Tripped at v791 (Lesson #10424 candidate); held clean across v792, v793 by operator vigilance alone; promoted to ESTABLISHED at v794 simultaneously with the gate implementation. Guard fires once correctly in the integration trip case; idempotent re-runs and first-runs pass unaffected.
+
+**General principle (meta).** When a prose warning about non-obvious tool sequencing trips once and holds two-three ships under vigilance alone, migrate to a deterministic gate the next ship. The vigilance ledger is finite — convert the rule to code while the trip is still fresh.
+
 ## When this discipline kicks in
 
 - About to scaffold a new `tools/*.mjs` or `tools/*.ts` CLI that scans the repo.
@@ -93,6 +113,7 @@ Observability tools whose primary value is "diff vs prior state" have a warm-up 
 - ❌ Stdout-only report from a metric-emitting analyzer (no baseline file).
 - ❌ `process.exit()` immediately after a large `process.stdout.write()`.
 - ❌ Silent first-run message from a diff-emitting tool.
+- ❌ Version-stamped baseline writer with no overwrite guard — trusts handoff prose to enforce a sequencing invariant that the tool itself can enforce.
 
 ## Lesson references
 
@@ -101,3 +122,4 @@ Observability tools whose primary value is "diff vs prior state" have a warm-up 
 - **#10419** — Static-analysis tools commit a baseline so future runs can diff. Promoted from v786 candidate.
 - **#10420** — `process.exit()` during pending stdout write truncates output at pipe-buffer boundaries. Promoted from v787 candidate.
 - **#10421** — Observability tools have a warm-up period before their primary value works. Promoted from v787 candidate; **field-validated at v789** by adoption-baseline diff emitting exactly the predicted line.
+- **#10424** — Version-stamped baseline writers refuse to overwrite existing files whose content would differ, unless `--force`. Promoted from v791 candidate at v794 simultaneously with the gate implementation; meta-principle: migrate prose-in-handoff sequencing warnings to deterministic gates after one trip + 2-3 sequential clean applications under vigilance.

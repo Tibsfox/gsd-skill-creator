@@ -25,6 +25,17 @@
  *   node tools/adoption-refresh.mjs --version 1.49.787
  *   node tools/adoption-refresh.mjs --no-dashboard   # skip dashboard render
  *   node tools/adoption-refresh.mjs --dry-run        # report diff, write nothing
+ *   node tools/adoption-refresh.mjs --force          # override overwrite-guard
+ *
+ * Overwrite guard (added v1.49.794 — Lesson #10424 closure):
+ *   The baseline filename embeds the package.json version. If
+ *   adoption-refresh runs BEFORE bump-version, the filename resolves to the
+ *   PREDECESSOR'S version, and the predecessor's committed baseline gets
+ *   overwritten with the successor's content. The guard refuses to write
+ *   when `docs/ADOPTION-BASELINE-v${VERSION}.json` already exists on disk
+ *   with content that differs from what we'd write — unless `--force`.
+ *   First-run writes and idempotent re-writes (content matches) are
+ *   unaffected.
  */
 
 import { readFileSync, writeFileSync, existsSync, readdirSync, mkdirSync } from 'node:fs';
@@ -45,6 +56,7 @@ const VERSION = versionIdx >= 0 ? args[versionIdx + 1] : (() => {
 })();
 const NO_DASHBOARD = args.includes('--no-dashboard');
 const DRY_RUN = args.includes('--dry-run');
+const FORCE = args.includes('--force');
 
 const BASELINE_MD = join(ROOT, 'docs', `ADOPTION-BASELINE-v${VERSION}.md`);
 const BASELINE_JSON = join(ROOT, 'docs', `ADOPTION-BASELINE-v${VERSION}.json`);
@@ -170,6 +182,29 @@ function formatDiff(changes) {
   return lines.join('\n');
 }
 
+function checkOverwriteGuard(current) {
+  // Refuse to overwrite an existing baseline JSON whose content would
+  // differ. Catches the v791 trip class: running adoption-refresh BEFORE
+  // bump-version overwrites the predecessor's committed baseline file.
+  // First-run writes (file absent) and idempotent re-runs (content
+  // matches) are not affected. --force overrides; --dry-run skips.
+  if (DRY_RUN) return;
+  if (!existsSync(BASELINE_JSON)) return;
+  const existingContent = readFileSync(BASELINE_JSON, 'utf8');
+  const proposedContent = JSON.stringify(current, null, 2) + '\n';
+  if (existingContent === proposedContent) return;
+  if (FORCE) {
+    console.error(`[adoption-refresh] WARN: --force overriding existing baseline at ${BASELINE_JSON}`);
+    return;
+  }
+  console.error(`[adoption-refresh] FATAL: refusing to overwrite ${BASELINE_JSON}`);
+  console.error('[adoption-refresh] target baseline already exists with different content.');
+  console.error('[adoption-refresh] Did you forget to run `bump-version` first?');
+  console.error('[adoption-refresh] Adoption-refresh MUST run AFTER bump-version, not before.');
+  console.error('[adoption-refresh] Pass --force to override (e.g. retroactive baseline rewrite).');
+  process.exit(3);
+}
+
 function renderDashboard(currentJson) {
   if (NO_DASHBOARD) return;
   if (DRY_RUN) {
@@ -210,6 +245,8 @@ function main() {
   if (changes) {
     console.error(formatDiff(changes));
   }
+
+  checkOverwriteGuard(current);
 
   if (DRY_RUN) {
     console.error(`[adoption-refresh] DRY-RUN: would write ${BASELINE_MD}`);

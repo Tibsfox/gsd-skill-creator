@@ -142,12 +142,12 @@
   {
     "domain": "Static-analysis tool authoring",
     "trigger": "Authoring or extending a CLI tool in `tools/` that scans the codebase, emits metrics, or produces a comparable report; designing its test harness; piping its output to another command",
-    "summary": "Test harnesses use spawnSync (not execSync) so stderr survives exit 0; cross-module analyzers scan multiple importer roots (not just src/); metric-emitting tools commit a baseline file so future runs diff via git; CLIs flush stdout before process.exit() to avoid 64KB pipe-buffer truncation; diff-emitting observability tools document the warm-up period (first run has no prior baseline). #10421 field-validated at v789 by adoption-baseline diff emitting exactly the predicted line.",
+    "summary": "Test harnesses use spawnSync (not execSync) so stderr survives exit 0; cross-module analyzers scan multiple importer roots (not just src/); metric-emitting tools commit a baseline file so future runs diff via git; CLIs flush stdout before process.exit() to avoid 64KB pipe-buffer truncation; diff-emitting observability tools document the warm-up period (first run has no prior baseline); version-stamped baseline writers refuse to overwrite existing files with different content unless --force (v794 closure of v791 trip). #10421 field-validated at v789 by adoption-baseline diff emitting exactly the predicted line.",
     "canonical_docs": [
       "docs/static-analysis-tool-discipline.md"
     ],
-    "key_lessons": ["#10417", "#10418", "#10419", "#10420", "#10421"],
-    "codified_at_milestone": "v1.49.790 (new domain — codified from v1.49.785-789 adoption-telemetry build chain lesson cluster)"
+    "key_lessons": ["#10417", "#10418", "#10419", "#10420", "#10421", "#10424"],
+    "codified_at_milestone": "v1.49.790 (new domain — codified from v1.49.785-789 adoption-telemetry build chain lesson cluster); v1.49.794 (extended with #10424 refuse-to-overwrite guard)"
   },
   {
     "domain": "Shelfware verdict patterns",
