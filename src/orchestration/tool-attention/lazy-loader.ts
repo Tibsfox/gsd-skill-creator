@@ -11,6 +11,11 @@
  *
  * Default-OFF: returns the disabled-result sentinel when the flag is off.
  *
+ * Role: NOT a disk loader. The "load" verb here refers to lazy schema
+ * hydration via a caller-supplied callback. This module does not import
+ * `node:fs` and never touches the filesystem; intentionally bypasses the
+ * `LoaderContext` chokepoint (src/security/loader-context.ts).
+ *
  * @module orchestration/tool-attention/lazy-loader
  */
 

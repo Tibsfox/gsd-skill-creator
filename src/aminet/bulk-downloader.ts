@@ -13,6 +13,13 @@
  * 5. Verify integrity after each download
  * 6. Update mirror state atomically after each package
  *
+ * Role: NOT a disk loader. Despite the `-downloader` suffix this module
+ * does not import `node:fs` directly. Disk and network reads/writes are
+ * delegated to `mirror-state.ts` (state persistence) and
+ * `package-fetcher.ts` (network fetch). Those delegates are the appropriate
+ * sites for `LoaderContext` integration if/when needed — this orchestrator
+ * intentionally bypasses the chokepoint.
+ *
  * @module
  */
 

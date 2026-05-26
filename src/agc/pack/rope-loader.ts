@@ -5,6 +5,11 @@
  * Apollo software that flew to the moon) with URL generation and
  * structural validation. All sources reference virtualagc.github.io.
  *
+ * Role: NOT a disk loader. This module is a static catalog + URL generator;
+ * it does not import `node:fs` and never touches the filesystem. Disk reads
+ * for actual rope binaries happen in `src/agc/tools/rope-loader.ts`, which
+ * is the chokepoint-gated counterpart.
+ *
  * @module agc/pack/rope-loader
  */
 

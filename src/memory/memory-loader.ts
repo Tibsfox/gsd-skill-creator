@@ -1,3 +1,19 @@
+/**
+ * Memory entry relevance loader.
+ *
+ * Role: NOT a disk loader. Despite the `-loader` suffix this module operates
+ * exclusively on in-memory `MemoryEntry[]` arrays and a `TaskContext`. It
+ * performs relevance scoring and token-budget allocation; it does not import
+ * `node:fs` and never touches the filesystem.
+ *
+ * Filename matches the `*loader*.ts` audit-rule pattern only because of the
+ * shared semantic "load relevant memories." Intentionally bypasses the
+ * `LoaderContext` chokepoint (src/security/loader-context.ts) — there is no
+ * disk surface to gate.
+ *
+ * @module memory/memory-loader
+ */
+
 import {
   MemoryEntry,
   RelevanceScore,
