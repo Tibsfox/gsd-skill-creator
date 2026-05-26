@@ -10,8 +10,11 @@
  */
 
 import { readFile } from 'node:fs/promises';
+import { ensureAllowed, type LoaderContext } from '../../security/loader-context.js';
 import { type AgcMemory, createMemory, loadFixed } from '../memory.js';
 import { WORD15_MASK } from '../types.js';
+
+const LOADER_SOURCE = 'agc/tools/rope-loader';
 
 // ─── Constants ──────────────────────────────────────────────────────────────
 
@@ -134,12 +137,15 @@ export function loadRopeFromBuffer(
  *
  * @param filePath - Path to the rope image binary file
  * @param baseMemory - Optional base memory to load on top of
+ * @param ctx - Optional security chokepoint (src/security/loader-context.ts).
  * @returns Loaded memory state and metadata
  */
 export async function loadRopeImage(
   filePath: string,
   baseMemory?: AgcMemory,
+  ctx?: LoaderContext,
 ): Promise<LoadedRope> {
+  ensureAllowed(ctx, LOADER_SOURCE, 'read-file', filePath);
   const buffer = await readFile(filePath);
   return loadRopeFromBuffer(buffer, baseMemory);
 }
