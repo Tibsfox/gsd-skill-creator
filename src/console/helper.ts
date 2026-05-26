@@ -81,16 +81,38 @@ function readBody(req: IncomingMessage): Promise<string> {
 
 /**
  * Send a JSON response with the given status code.
+ *
+ * No Access-Control-Allow-Origin is set: callers must be same-origin
+ * with the dashboard server. Browsers will block cross-origin requests
+ * without an explicit allow header, which is the intended behavior.
  */
 function jsonResponse(
   res: ServerResponse,
   statusCode: number,
   body: Record<string, unknown>,
 ): void {
-  res.setHeader('access-control-allow-origin', '*');
   res.setHeader('content-type', 'application/json; charset=utf-8');
   res.writeHead(statusCode);
   res.end(JSON.stringify(body));
+}
+
+/**
+ * Origin allowlist check. Requests without an Origin header (curl, same-origin
+ * fetch from same-document) pass. Requests with an Origin header must match the
+ * request's Host header to be accepted — this rejects browser-side cross-origin
+ * POSTs from any other localhost-bound dev server that happens to know our port.
+ */
+function isSameOrigin(req: IncomingMessage): boolean {
+  const origin = req.headers.origin;
+  if (!origin) return true;
+  const host = req.headers.host;
+  if (!host) return false;
+  try {
+    const url = new URL(origin);
+    return url.host === host;
+  } catch {
+    return false;
+  }
 }
 
 /**
@@ -174,6 +196,13 @@ export function createHelperRouter(basePath: string): HelperRouter {
       // Method check -- only POST allowed
       if (req.method !== 'POST') {
         jsonResponse(res, 405, { error: 'Method not allowed' });
+        return true;
+      }
+
+      // Origin allowlist: reject cross-origin browser POSTs. curl / same-origin
+      // fetch (no Origin header) pass; browser cross-origin POSTs do not.
+      if (!isSameOrigin(req)) {
+        jsonResponse(res, 403, { error: 'Cross-origin request rejected' });
         return true;
       }
 

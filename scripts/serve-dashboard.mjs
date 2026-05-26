@@ -2160,7 +2160,7 @@ async function main() {
         reject(err);
       }
     });
-    server.listen(port, () => {
+    server.listen(port, '127.0.0.1', () => {
       const actualPort = server.address().port;
       console.log('');
       console.log(`  Dashboard:  http://localhost:${actualPort}`);

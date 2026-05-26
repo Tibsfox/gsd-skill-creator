@@ -353,9 +353,9 @@ describe('createHelperRouter', () => {
   });
 
   // -----------------------------------------------------------------------
-  // 14. CORS headers are set
+  // 14. No CORS wildcard is set (same-origin only)
   // -----------------------------------------------------------------------
-  it('sets CORS headers on response', async () => {
+  it('does not set Access-Control-Allow-Origin: *', async () => {
     const router = createHelperRouter(tmpDir);
     const body = JSON.stringify({
       filename: 'cors-test.json',
@@ -366,7 +366,46 @@ describe('createHelperRouter', () => {
 
     await router.handleRequest(req, res as unknown as ServerResponse);
 
-    expect(res.headers['access-control-allow-origin']).toBe('*');
+    expect(res.headers['access-control-allow-origin']).toBeUndefined();
+  });
+
+  // -----------------------------------------------------------------------
+  // 14b. Cross-origin browser POSTs are rejected
+  // -----------------------------------------------------------------------
+  it('rejects POSTs with a foreign Origin header', async () => {
+    const router = createHelperRouter(tmpDir);
+    const body = JSON.stringify({
+      filename: 'cross-origin.json',
+      content: { test: true },
+    });
+    const req = createMockReq('POST', '/api/console/message', body);
+    req.headers.host = '127.0.0.1:5174';
+    req.headers.origin = 'http://evil.example.com';
+    const res = createMockRes();
+
+    await router.handleRequest(req, res as unknown as ServerResponse);
+
+    expect(res.statusCode).toBe(403);
+    expect(JSON.parse(res.body).error).toBe('Cross-origin request rejected');
+  });
+
+  // -----------------------------------------------------------------------
+  // 14c. Matching Origin (same host) is accepted
+  // -----------------------------------------------------------------------
+  it('accepts POSTs with a matching Origin header', async () => {
+    const router = createHelperRouter(tmpDir);
+    const body = JSON.stringify({
+      filename: 'same-origin.json',
+      content: { test: true },
+    });
+    const req = createMockReq('POST', '/api/console/message', body);
+    req.headers.host = '127.0.0.1:5174';
+    req.headers.origin = 'http://127.0.0.1:5174';
+    const res = createMockRes();
+
+    await router.handleRequest(req, res as unknown as ServerResponse);
+
+    expect(res.statusCode).toBe(200);
   });
 
   // -----------------------------------------------------------------------
