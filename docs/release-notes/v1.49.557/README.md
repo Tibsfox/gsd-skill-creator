@@ -14,6 +14,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.557 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** v1.49.557 ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 On November 11, 1966, the last Gemini capsule rose into the Florida sky above Launch Complex 19 at Cape Kennedy. James Lovell -- who had already spent fourteen days in orbit on Gemini 7 and would go on to command Apollo 8 (first humans to orbit the Moon) and Apollo 13 (the successful failure) -- sat in the left seat. Buzz Aldrin -- a rookie astronaut with a Ph.D. in orbital mechanics from MIT, who would walk on the Moon thirty-two months later as the Lunar Module pilot of Apollo 11 -- sat in the right seat. Their Titan II GLV booster pushed them into orbit ninety-eight minutes after their Agena target vehicle GATV-5001A had launched from LC-14, and when the rendezvous radar failed, Aldrin performed the approach calculations by hand, using onboard charts and a sextant. The man who had written his doctoral thesis on orbital rendezvous now computed the rendezvous manually. The docking succeeded. And then Buzz Aldrin did something that five previous Gemini missions had failed to do: he worked productively outside the spacecraft for five hours and thirty minutes across three EVAs, and he returned inside without a spiking heart rate or a fogged visor or a single abandoned task.
 
 The EVA problem had haunted Gemini since Eugene Cernan's near-disaster on Gemini 9A -- heart rate 180 bpm, visor fogged, tasks abandoned, suit overheating, the spacecraft environmental control system pushed past its limits by the metabolic load of a thrashing astronaut. Michael Collins on Gemini 10: limited success, exhausted after twenty minutes of umbilical work, unable to retrieve the micrometeorite package from the Agena. Richard Gordon on Gemini 11: exhausted attaching the tether, heart rate spiking past 160 bpm, commander Pete Conrad cutting the EVA short at thirty-three minutes. The pattern was consistent across every flight: in weightlessness, without gravity to hold you in place, without friction to brace against, the simplest task becomes a full-body wrestling match with inertia. Astronauts arrived outside the spacecraft physically capable and mentally prepared, and within minutes they were exhausted, blind, and unable to complete their assigned tasks. The program had three EVA failures in a row, and the last Gemini flight was the last chance to solve the problem before Apollo needed it.

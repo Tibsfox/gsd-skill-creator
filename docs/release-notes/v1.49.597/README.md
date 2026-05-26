@@ -8,6 +8,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.597 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** GSD Intelligence Dashboard ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 v1.49.597 ships the **GSD Intelligence Dashboard** — a thin coordination shell that turns the existing rough `dashboard/` directory into a Tuesday-morning planning partner. Each component does one specialized thing — tree-sitter parses code, SQLite WAL holds the KB, the existing planning-bridge handles staging, the existing console inbox/outbox handles AI-triggered control messages — and the dashboard composes them into a single calm conversational planning surface. The Amiga Principle at full strength: the developer's attention turns into the codebase's progress without thinking about which chip is doing what.
 
 **14 components originally + 5 follow-on; 7 phases + 2 intra-milestone fold-ins.** Phase 821 (foundation: shared types + SQLite migration + JSON schemas) → Phase 822 (analyzer pipeline, Wave 1 Track A: file walker + 8 tree-sitter language analyzers + 7 finding detectors) → Phase 823 (intelligence KB, Track B: WAL store + snapshot manager + meeting state machine) → Phase 824 (server + UI, Track C: Tauri local server + planning meeting view + live work view) → Phase 825 (Wave 2 integration: mission emitter + meeting-record generator + AI investigator skill — CAPCOM gate G1) → Phase 826 (Wave 3 verification + dashboard migration: 14 safety-critical + 60 integration + 26 edge + 8 performance tests; non-breaking Intelligence tab on existing dashboard — Safety Warden BLOCK G2) → Phase 826.5 (intra-826 follow-on: IPC-to-HTTP bridge for browser-tab mode at `POST /api/intelligence/invoke`) → Phase 827 (browser-tab parity completion, folded in 2026-05-03: shared event types + 3 KBStore extensions + IntelligenceEventBus singleton + bridge wiring + integration tests) → Phase 828 (operational-debt fold-in during ship pipeline: 826.5 build-asset carryover + auto-mount ID fallback + dashboard parser drift across milestones/roadmap/requirements).

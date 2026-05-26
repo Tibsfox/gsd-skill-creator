@@ -17,6 +17,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.566 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** v1.49.566 ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 Three surveys complete in parallel at degree sixty-one. Lunar Orbiter 5 completes the photographic survey of ninety-nine percent of the lunar surface on behalf of NASA's five-mission program (1966-1968, five-of-five success). Death Cab for Cutie's 2003 *Transatlanticism* completes the band's cataloguing-approach lyric-voice survey on behalf of its eleven-album Bellingham-to-Portland catalog. North Pacific humpback whales complete an annual four-thousand-kilometer migration survey on behalf of their recovering twenty-one-thousand-individual population, and — via Noad et al. 2000 east-Australian song revolution — periodically complete cross-population cultural-transmission revolutions. Three scales, one principle: comprehensive coverage brought to closure, and the closure itself the beginning of the next survey. Each thread mirrors the others at its own tempo. The same way the Lunar Orbiter program built five spacecraft to image the lunar substrate at meter-scale resolution and stopped at the right place, Death Cab for Cutie built one breakthrough album that completed the cataloguing-songwriting register that Ben Gibbard had been developing across the Bellingham years, and the humpback population built a forty-thousand-kilometer migration arc that completes itself every year between Alaska and Hawaii. Both Lunar Orbiter 5 and Death Cab for Cutie operated as carriers transmitting a survey signal forward; each one terminated at the completion of its survey rather than at an arbitrary halt.
 
 Lunar Orbiter 5 launched from Cape Canaveral Launch Complex 13 at 22:32:00 UTC on August 1, 1967, carrying a 385.6-kilogram truncated-cone spacecraft built at Boeing Space Division in Seattle, Washington under NASA Langley Research Center management. Four days later it entered a selenocentric orbit at eighty-five degrees inclination — more polar than any Lunar Orbiter before. For twelve days (August 6-18, 1967), dual-resolution 610-mm and 80-mm cameras exposed 844 photographic frames (633 high-resolution and 211 medium-resolution) onto Eastman Kodak 70-mm aerial film, which was bimat-processed on-orbit, mechanically slit-scanned line by line, and transmitted as analog video via S-band at 2295 MHz. Resolution reached two meters at closest approach. Cumulative coverage across LO1-LO5 reached ninety-nine percent. On January 31, 1968 at 07:58:08 UTC, LO5 was commanded to impact the lunar surface at 2°47'S 83°01'W to prevent RF interference with Apollo 8's December 1968 translunar communications. The Lunar Orbiter program closed with a five-of-five success rate. Lee R. Scherer at Langley Research Center had managed all five missions and would go on to manage Viking Mars and direct Kennedy Space Center. Leo R. Day held the LO5 project office. The Boeing Space Division team in Seattle, approximately two hundred engineers at peak, built all five spacecraft on the same architectural lineage — a lineage that runs forward in parallel through Pioneer Venus Orbiter (1978), Galileo (1989), Cassini-Huygens (1997), Mars Reconnaissance Orbiter (2005), and Lunar Reconnaissance Orbiter (2009). Every Apollo landing site was selected from LO-imaged candidates.

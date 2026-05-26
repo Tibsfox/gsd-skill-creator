@@ -19,6 +19,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.577 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** JULIA-PARAMETER: Wasserstein-Everywhere ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 The catchup pass that proved the architecture was already convergent with the field. v1.49.577 is the milestone where gsd-skill-creator stopped building forward and instead swept the April-2026 arXiv-math firehose for absorptions: 370 papers triaged, 87 deep-dived, 54 paper-cards authored across 8 thematic modules (Context+Communication, Multi-agent+Mesh, Verification+Proof, Optimization, Information-Theory, Silicon-layer, Privacy+Federated+Safety, Pedagogy), and 1 featured deep-dive on the Mandelbrot/Julia paper that anchored the mission's organizing thesis. The Wave 2 INTEG synthesis matrix surfaced 40 absorption candidates (3 BLOCK + 12 HIGH + 25 MEDIUM); the user-locked decision at Part A → Part B handoff selected option C ("Wasserstein-Everywhere") from three candidate names and committed Part B to the "all candidates" scope rather than the standard top-K floor. Part B then landed every BLOCK, HIGH, and MEDIUM finding as a real deliverable across 20 phases / 20 commits, ending at `821568eea` on dev with version-bump merge to `1b9eedb9b` on main and a self-review pass cleanup at `268950204` catching 6 doc-comment drift findings (2 medium reframings + 4 low) without behavioral change.
 
 **WASSERSTEIN-EVERYWHERE THEME LANDED.** Distribution-aware bounded learning + evaluation became the unifying axis across all 14 components Part B shipped. Wasserstein direction tests in `src/ab-harness/`, IPM-bounded utility in `wasserstein-boed.ts`, distributional shifts in the e-process bridge, and the (I − P_S) safety-aware projection composing onto MB-2 all converge on the same geometric primitive: distance between distributions, not point-estimates. The thesis was not pre-declared at intake — it emerged from the Wave 2 synthesis-matrix's six convergent-discovery clusters (C1 bounded-tape extension, C2 Wasserstein-as-universal, C3 anytime-valid monitoring, C4 System-1/System-2 chipsets, C5 small-data inductive bias, C6 find-the-right-slice) and was locked at the Part A → Part B handoff CAPCOM gate. Both sides of the milestone share one structural thesis: published research has been arriving at the same distributional substrate gsd-skill-creator was already running. The catchup proved convergence, not divergence.

@@ -1,54 +1,62 @@
-# v1.49.589 — Summary
+<!-- V650-699-CHAPTER-LIFTED v1 -->
+# v1.49.589 — Chapter 00: Summary
 
-**Milestone:** Apollo 6 (NASA degree 1.70) + Simon & Garfunkel *Bookends* (MUS 1.70) + S-IC pogo accelerometer chain (ELC 1.70 — Domain 4 advance 4/6 → 5/6) + Hairy Woodpecker (SPS #67) + 4 operational-debt fold-ins (#10187 version-bump + #10188 depth-audit + #10189 incremental-Edit + #10190 README scorer-format) + TRS M0 Wave 1b (partial — packs 05-07 deferred).
+## Summary
 
-**Type:** Combined three-track-plus-TRS ship (third instance of pattern; first was v1.49.587, second was v1.49.588).
+**Forward-cadence NASA degree advance to ?.?.** v1.49.589 ships Apollo 6 (NASA degree 1.70) + Bookends + S-IC pogo accelerometer chain + Hairy Woodpecker + 4 operational-debt fold-ins + TRS Wave 1b as a forward-cadence engine-state advance from NASA degree ?.? to ?.?. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-## Structural firsts
+**Mission rebuilt to per-pipeline depth.** Apollo 6 (NASA degree 1.70) + Bookends + S-IC pogo accelerometer chain + Hairy Woodpecker + 4 operational-debt fold-ins + TRS Wave 1b ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/N.NNN/`.
 
-- **UNMANNED-PRECURSOR-VALIDATION 2-exemplar advancement** — Apollo 6 confirms the §6.6 thread originated at v1.69 Apollo 5 reaches reproducibly-stable status. The 3-criterion rubric (sole-purpose subsystem certification + cleanly distinct from prior threads + generalizable) holds across both exemplars.
-- **PARTIAL-SUCCESS-PROCEED** sub-pattern documented under UPV — Apollo 6 was a UPV mission that did not fully validate but program proceeded anyway based on schedule + risk-tolerance. Not elevated to standalone §6.6 thread per generalizability test fail.
-- **Pogo-oscillation-discovery era OPENS** — first observation at flight-vehicle scale of a long-theoretically-predicted instability (~5.25 Hz / ±0.6g axial peak in S-IC for ~30 sec / ~150 cycles).
-- **Helium-precharge pogo-fix era OPENS** — gas-accumulator detuning solution; first deployed Apollo 8 December 1968; eliminated pogo for all subsequent crewed Saturn V flights through Skylab 1.
-- **J-2 cross-coupling-failure era OPENS** — production-line wiring-error discovery (engines #2 + #3 mis-wired cutoff command path); procedural-fix tightened independent-verification on all engine-shutdown paths.
-- **Three-track-plus-TRS pattern: 3** (was 2 at v1.49.588) — pattern stability is now its own structural marker.
-- **Pre-tag-gate v6** — added optional step 6 (depth-audit, WARNING mode) closing Lesson #10188 candidate; hardens to BLOCKER at v1.49.591+.
-- **Same-day cultural anchor** — Bookends released 1968-04-03; Apollo 6 launched 1968-04-04; MLK assassination 1968-04-04 (~6h after launch). Three independent events on a 24-hour timeline create the strongest temporal-coincidence anchor in the catalog through v1.70.
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-## Engine state delta
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-| Surface | Before (v1.49.588) | After (v1.49.589) | Δ |
-|---|---|---|---|
-| NASA degree | 69 / 360 | **70 / 360** | +1 forward |
-| §6.6 register | 13 exemplars | 13 (UPV 1-ex → 2-ex; PSP absorbed) | 0 (no NEW threads; 1 promoted) |
-| MUS Pass-2 | Domain 5 6/5 | Domain 5 6/5 + **Domain 9 N/M** | +1 axis advance |
-| ELC Pass-1 | D12 5/5 closed | (Pass-2) Domain 4 4/6 → **5/6** | +1 advance toward closure |
-| simulation.js block | #69 | **#70** (apollo-6-pogo.js, canonical) | +1 |
-| Three-track-plus-TRS | 2 | **3** | +1 (pattern stability) |
-| Pre-tag-gate steps | 5 | **6** (depth-audit WARNING mode) | +1 |
-| Total vitest tests | 28,767 | **28,810** (+43 new T2.x assertions) | +43 |
-| NASA CSV rows | 450 | 450 (stable) | 0 |
-| TRS M0 cache | 137 / 51 / 53 | (pack-08 partial; full append at v1.49.590) | +5 PDFs only |
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-## Brief errors caught at G0 gate (W1a §"Brief errors caught at G0 gate")
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-10 substantive errors caught (best for any milestone through v1.70):
-- BE-1: Pogo frequency centerband 5.25 Hz (some references give 5.2-5.5 Hz; AS-502 Mission Report central value)
-- BE-2: J-2 shutdown precision T+412.92s (engine #2) and T+414.18s (engine #3) — two-decimal precision verified
-- BE-3: ~150 pogo cycles (30 sec × 5 Hz arithmetic verified)
-- BE-4: S-II engines #2 + #3 = outboard peripheral; #1 is center engine
-- BE-5: AS-502 (vehicle) vs SA-502 (Saturn V serial) — DISTINCT designations, both used in literature
-- BE-6: SPS substitute burn = 442 seconds per Apollo 6 Mission Report
-- BE-7: "Longest SPS burn until Apollo 13" — REQUIRES CARE; Apollo 13 used DPS for PC+2 burn; SPS was disabled post-O₂ rupture; framing kept but qualified as "longest single SPS burn through Apollo 11"
-- BE-8: Apollo 8 launched 1968-12-21 (verified)
-- BE-9: von Braun verdict paraphrased not direct quote (framing flagged)
-- BE-10: CM Avcoat 5026-39 ablative material specification (verified; same material used through Apollo 17)
+## Key Features
 
-## Cross-track triad summary
+| Track | Field | Value |
+|---|---|---|
+| NASA | Mission name | Apollo 6 (NASA degree 1.70) + Bookends + S-IC pogo accelerometer chain + Hairy Woodpecker + 4 operational-debt fold-ins + TRS Wave 1b |
+| NASA | Degree from | N.NNN |
+| NASA | Degree to | N.NNN |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-| Domain | Subject | Quantitative anchor | Cross-track parallel |
-|---|---|---|---|
-| Track 1 NASA | Apollo 6 AS-502 | ~5.25 Hz pogo / ±0.6g / 442s SPS | UPV 2-exemplar; PSP sub-pattern |
-| Track 2 MUS | Bookends | 7-track Side-1 suite; 5× Platinum | Same-day-as-launch release; suite-construction parallel to Saturn V |
-| Track 3 ELC | S-IC pogo accel chain | Endevco 2273A → charge amp → 4-pole LP → IRIG PCM | Detection enabled diagnosis; Domain 4 advance 4/6→5/6 |
-| Track 4 SPS | Hairy Woodpecker | ~26 bps drumming / ~1000g instantaneous bill-tip | Bill-skull-substrate resonance coupling = biological pogo analog |
+## Cross-References
+
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.588** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.590** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
+
+## Engine Position
+
+| Track | At v1.49.588 close | At v1.49.589 close |
+|---|---|---|
+| NASA degree | N.NNN | **N.NNN** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
+
+## Infrastructure
+
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/N.NNN/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-589-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.589` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.588](../v1.49.588/00-summary.md) · **Next:** [v1.49.590](../v1.49.590/00-summary.md)

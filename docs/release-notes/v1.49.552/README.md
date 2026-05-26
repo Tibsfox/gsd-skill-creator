@@ -17,6 +17,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.552 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** v1.49.552 ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 The forty-ninth paired release and the degree where one spacecraft reaches back to retrieve something from another. On July 18, 1966, Gemini 10 launched from Pad 19 at Cape Kennedy with John Young commanding and Michael Collins as pilot -- Collins' first spaceflight. Within six hours they had rendezvoused and docked with their Agena Target Vehicle 10, making Young the first person to command two space missions and Collins the first rookie to perform an extravehicular activity on his first flight. The Agena's 16,000-pound-thrust Bell 8096 engine then fired for 80 seconds, pushing the docked spacecraft to an apogee of 763 kilometers -- the highest altitude any human had reached at that time, a record that would stand until Gemini 11 surpassed it two months later. From that altitude, Collins could see the curvature of the Earth against the black of space, the Himalayas visible to the east, Africa below, the Red Sea a thin copper cut across tan desert. Then Young and Collins undocked, lowered their orbit, and rendezvoused with a second target: Agena 8, the vehicle that had been orbiting unmanned for four months since Neil Armstrong and David Scott's Gemini 8 mission in March -- the mission that had tumbled after a stuck Orbital Attitude and Maneuvering System thruster and returned to Earth without reaching its full objectives. Collins opened his hatch, floated across to Agena 8, and retrieved a micrometeorite experiment package bolted to the docking collar -- the first retrieval of an object from another spacecraft in orbit. The quiet retrieval: reaching back across four months of accumulated orbital travel to pull something useful from the past.
 
 Michael Collins would fly once more -- as Command Module Pilot on Apollo 11 in July 1969, orbiting the Moon alone for twenty-one hours and twenty-nine minutes while Neil Armstrong and Buzz Aldrin walked on the surface below. He is the astronaut everyone forgets. The one who did not walk on the Moon. The one who carried the fire -- his autobiography's title, published by Farrar, Straus and Giroux in 1974 -- and brought it home. Collins died on April 28, 2021, at age ninety. John Young flew six times: Gemini 3 (1965, smuggled corned beef sandwich), Gemini 10 (1966), Apollo 10 (1969, lunar module dress rehearsal), Apollo 16 (1972, walked on the Moon, drove the Lunar Roving Vehicle in the Descartes Highlands), STS-1 (1981, first Space Shuttle, rode Columbia off Pad 39A), and STS-9 (1983, first Spacelab mission). Six flights spanning twenty years, from 1965 to 1983 -- the longest active astronaut career in NASA history. Young died on January 5, 2018, at age eighty-seven. The slow bloom in astronaut form: a career built not on one spectacular moment but on showing up, mission after mission, decade after decade, from Mercury-era John Glenn contemporaries to Shuttle-era Sally Ride contemporaries without a single flight intervening that he did not command or support. Both Collins and Young are degree 48's dedicatees, and both are defined by the same quiet discipline the degree records.

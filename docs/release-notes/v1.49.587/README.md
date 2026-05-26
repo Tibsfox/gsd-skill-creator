@@ -9,6 +9,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.587 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** Surveyor 7 / Lady Soul / Northern Spotted Owl / SCIENCE-MAXIMIZED FINAL-OF-SERIE ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 v1.49.587 ships the **first three-track-plus-TRS forward-cadence milestone**, opening the **SCIENCE-MAXIMIZED FINAL-OF-SERIES §6.6 thread origin candidate at single-exemplar status**, **closing the ALPHA-SCATTERING §6.6 thread at 3-exemplar** (Surveyor 5 v1.62 + Surveyor 6 v1.63 + Surveyor 7 v1.68), **closing the lunar-soft-lander era** (Surveyors 1-7 series end), and **advancing the op-amp era to 2-exemplar** via the Surveyor alpha-scattering charge-sensitive preamplifier (ELC 1.68 closes Domain 2 small-signal models at 4/4). Three founding-instance artifacts at three substrates instantiate one structural primitive: **science-maximized final-of-series** — an engineering-qualified series produces a terminal mission/album/monograph whose payload is dominated by science/artistic output rather than engineering-test objectives, exploiting accumulated qualification credit on the maximally-demanding target. NASA CSV reconciled (Path Y backfill: rewrites 1.66=Pioneer 9, 1.67=OAO-2 Stargazer to match shipped reality; inserts Surveyor 7 at 1.68; renumbers subsequent rows). The Rendered Space (TRS) program's M0 Wave 0 lands in parallel: 164 load-bearing claims extracted from the 923-page first-draft *The Space Between* PDF across 21/22 packs covering 33/33 chapters, establishing the search backlog for M0 Wave 1 across the next ~10 milestones per `TRS-EXECUTION-MAP.md`.
 
 **Track 1 (NASA forward quartet — Surveyor 7):** Launched 1968-01-07 at 06:30:00 UTC on Atlas-Centaur AC-15 from CCAFS LC-36A; landed 1968-01-10 at Tycho crater rim (40.97°S, 11.44°W) — the **only Surveyor in lunar HIGHLANDS terrain** (all prior 1-6 in maria). Operated 45 days through 21 lunar nights (1968-01-10 to 1968-02-21) against 1-night design lifetime. 21,038 photos returned (V-flagged variants 21,274 / 21,091). Full instrument complement deployed simultaneously for the first time: TV camera + alpha-scattering instrument (3rd deployment, **Cm-242 source** 163d t½ 6.11 MeV) + surface sampler (2nd deployment after Surveyor 3 ONLY) + magnet array + dust detector. Alpha-scattering returned first lunar HIGHLAND elemental composition: anorthositic Al+Ca-rich, Fe+Mg-depleted vs maria-basaltic S5+S6 (Patterson, Turkevich et al. 1970 *Science* 168:825-828). Paired with **Aretha Franklin** *Lady Soul* (Atlantic SD 8176, released 1968-01-22 — 12 days after Surveyor 7 landing; Jerry Wexler + Tom Dowd + Arif Mardin produced; Columbia→Atlantic platform-qualification arc = SMFS at the album scale) and the **Northern Spotted Owl** (*Strix occidentalis caurina*, Merriam 1898; SPS #65; Forsman, Meslow & Wight 1984 *Wildlife Monographs* 87 founding monograph after 12-year observational campaign 1972-1984 = SMFS at the conservation-ecology scale).

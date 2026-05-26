@@ -9,6 +9,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.570 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** Convergent Substrate ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 v1.49.570 answers two questions simultaneously: (1) where does the April 2026 arXiv literature independently validate `gsd-skill-creator`'s architectural decisions, and where does it offer patterns we do not yet ship? And (2) which of those gap-closure patterns deliver the highest architectural leverage, implemented as default-off modules in the codebase?
 
 **Convergent-substrate research reference shipped.** The answer to (1) is `convergent-substrate.pdf` — a 21-page citation-disciplined reference covering 7 Tier-S load-bearing papers, 28 Tier-A subsystem-cluster papers, and 20 Tier-B quick-reference pointers, tied together by a 14-row GSD-component × papers mapping table. The document identifies five convergent patterns (dual verification, compression spectrum, capability-identity split, Two-Gate guardrail, harness-as-object) and five gap-closure candidates for implementation.

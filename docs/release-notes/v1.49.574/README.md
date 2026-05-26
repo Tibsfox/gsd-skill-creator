@@ -11,6 +11,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.574 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** Megakernel: One Launch, One Chipset ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 > The lesson of the Amiga was never that custom chips were better silicon. The lesson was that exposing the architecture — making the registers, the DMA, the timing visible to anyone who wanted to look — generated more value than hiding it. The megakernel literature is making the SM scheduler visible. The JEPA literature is making the dynamics of search visible. The Silicon Layer's job is to make both of them programmable from the same place that adapter selection already lives. One launch. One chipset. The spaces between were always where the work was hiding.
 
 Where v1.49.573 asked "what does the literature say about the architecture we built?", v1.49.574 asks the next question: **what does the kernel-design literature say about the chipset metaphor when you take it down to the SM scheduler?** The answer reaches across two convergent traditions, and the milestone delivers both a deep-research package (Half A) and a tier-gated typed substrate (Half B) that lets the project plan against the next engineering mission without reopening the research question.

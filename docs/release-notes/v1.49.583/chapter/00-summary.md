@@ -1,29 +1,62 @@
-# v1.49.583 — Degree 65: The Persistent Constellation — Summary
+<!-- V650-699-CHAPTER-LIFTED v1 -->
+# v1.49.583 — Chapter 00: Summary
 
-**Released:** 2026-04-27
-**NASA Mission:** Pioneer 8 / P-A (NSSDC 1967-123A)
-**S36 Part A:** Earth (Dylan Carlson) — *Earth 2: Special Low-Frequency Version* (Sub Pop SP185, 1993, Stuart Hallerman engineering at Avast! Studios, Seattle)
-**SPS Part B:** Sandhill Crane (*Antigone canadensis*, formerly *Grus canadensis*; Linnaeus 1758) — sustained territorial bugle (unison call) via ~1.0–1.2 m coiled-trachea half-wave resonator [needs citation: Fitch 1999]; Pacific Flyway staging at Sauvie Island OR + Ridgefield NWR WA + Sherman County OR
-**Tracks:** Third three-track forward-cadence degree (NASA + MUS + ELC bundled together with bidirectional cross-track links)
+## Summary
 
-## One-Line
+**Forward-cadence NASA degree advance to ?.?.** v1.49.583 ships Degree 65: The Persistent Constellation as a forward-cadence engine-state advance from NASA degree ?.? to ?.?. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-v1.65 couples Pioneer 8 — third element of the four-platform Pioneer 6/7/8/9 heliocentric solar-monitoring constellation, launched 1967-12-13 at 14:08:00 UTC on a Thor-Delta E1 (Delta 55) from CCAFS LC-17B and operational continuously for 28 years 8 months through 1996-08-22 last contact (with successful 1995 reactivation campaign confirming both transponders functional after 27.5 years) — with Earth (Dylan Carlson)'s seminal *Earth 2* (Sub Pop, 1993; three tracks across approximately 73 minutes of slowly-modulated detuned guitar drones at glacial tempo with no vocals and no conventional rhythmic articulation) and the Sandhill Crane (*Antigone canadensis*) territorial bugle (a 1–2 second resonant trumpet-call delivered with fundamental ~280–440 Hz produced via the ~1.0–1.2 m coiled-trachea half-wave resonant chamber, identity-fixed across the bird's adult tenure and dyadic in the unison-call form). All three threads embody the same structural decision — **PERSISTENT-CONSTELLATION-LISTENER**: identity is carried by a sustained signal across long durations, and survival is via multiplicity (constellation, ensemble, paired-bond) rather than single-platform robustness. v1.65 opens the §6.6 PERSISTENT-CONSTELLATION-LISTENER process variant at single-exemplar status; carries forward §6.6 ALL-UP COMMITMENT and LIFT-AND-RESET (both single-exemplar from prior degrees); SUCCESS-AFTER-FAILURE remains closed at the 3-exemplar §6.6 candidate amendment threshold from v1.64.
+**Mission rebuilt to per-pipeline depth.** Degree 65: The Persistent Constellation ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/N.NNN/`.
 
-## Structural Firsts at Degree 65
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-1. **§6.6 PERSISTENT-CONSTELLATION-LISTENER NEW variant ORIGIN at single-exemplar status.** v1.65 opens the variant: identity carried by sustained signal across long durations across an array of identical platforms; survival via multiplicity not single-platform robustness. Distinct from prior §6.6 variants — PRINCIPLE-TRINITY (one principle three channels), CHANNEL-PARALLELISM (three threads converging on a substantive point), LIFT-AND-RESET (one structural arc instantiated three times with the same temporal shape), ALL-UP COMMITMENT (one committal decision instantiated three times at three scales). PERSISTENT-CONSTELLATION-LISTENER is the temporal complement of ALL-UP COMMITMENT: where v1.64 inaugurated the single first commit, v1.65 sustains the commit across decades. CHAIN-CONVENTIONS does NOT bump from v1.4 to v1.5; the variant joins the §6.6 candidate amendments awaiting two more exemplars before promotion. Candidate exemplars explicitly registered for the 2nd and 3rd slots: Pioneer 9 (1968-11-08 launch; fourth element of the same heliocentric constellation; fourth Pioneer transponder confirmed alive into the 1990s), ISEE-3 (1978 launch; sun-Earth L1 monitor with multi-decade reactivation campaign in the 2010s), ACE (1997 launch; ongoing solar-wind monitoring at L1), Voyager 1+2 (1977 launch; the canonical multi-decade interstellar persistent-listener pair). Archive threshold ~v1.85: if the variant fails to accumulate two more exemplars by then, archive as single-exemplar narrative anomaly. **§6.6 register at degree 65: 9 exemplars across 2 reproducibly-stable + 3 candidate variants** (PRINCIPLE-TRINITY 3 + CHANNEL-PARALLELISM 3 + LIFT-AND-RESET 1 + ALL-UP COMMITMENT 1 + PERSISTENT-CONSTELLATION-LISTENER 1).
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-2. **First multi-decade-mission entry in the corpus.** Pioneer 8's 28-year 8-month operational lifetime is the longest mission entry in the NASA degree corpus through v1.65. Prior longest: Explorer 35 at 5 years 11 months (NASA 1.60 anchor). The corpus now has its first multi-decade mission entry, opening a structural framing for future multi-decade missions: Pioneer 9 (1968–1995, 27 years), Voyager 1+2 (1977–present, 49+ years), ACE (1997–present, 29+ years), Mars Exploration Rovers (Spirit 6 years; Opportunity 14 years 5 months), Mars Curiosity (2012–present), New Horizons (2006–present). The structural framing introduced at v1.65: identity-as-sustained-signal across decades is a categorically distinct mission-design pattern from short-duration high-stakes missions (Apollo crewed lunar, Mariner Mars flybys, Viking landings).
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-3. **First heliocentric-orbit deep-space mission in the corpus.** Pioneer 8's heliocentric orbit (perihelion ~1.0 AU, aphelion ~1.10 AU, period 408 days, inclination 0.4° to ecliptic) is the first deep-space heliocentric entry. Prior NASA degrees were lunar (Surveyor + Lunar Orbiter) or near-Earth (Explorer + Mariner Venus + Apollo). v1.65 opens the deep-space heliocentric monitoring category. Future watchlist degrees from the same Pioneer Heliocentric subset: Pioneer 6 (1965), Pioneer 7 (1966), Pioneer 9 (1968).
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-4. **First deep-space VLF wave-physics measurements (Scarf instrument).** Frederick L. Scarf at Stanford led the Pioneer 8 electric-field detector — the first VLF wave-physics instrument to fly on a deep-space platform. The instrument measured electrostatic and electromagnetic plasma waves in the interplanetary medium across 100 Hz to 100 kHz, establishing the wave-physics-of-the-solar-wind subdiscipline as an empirical observational science. Subsequent instruments by Scarf at TRW + JPL extended the methodology to Voyager 1+2 (1977 launch; plasma-wave instruments still operational at the heliopause crossing 2012+).
+## Key Features
 
-5. **MUS Domain 1 (Pitch & scales) closes to 6/6 with the sustained-pitch-as-identity primitive.** v1.65 closes MUS Domain 1 with the structurally distinct primitive: identity in the audible sustained tone itself, held unbroken, as the work's irreducible compositional unit. Distinct from prior Domain 1 entries: 1.26 (sympatric pitch divergence; identity in the spectral gap between voices), 1.37 (bent-string blue-third microtonality; identity in the bending arc), 1.47 (infrasonic floor; identity in the sub-audible substrate), 1.48 (modal vocabulary; identity in the mode selected), 1.50 (microtonal dialect; identity in cents-level between-pitches). The remaining below-target MUS domain after v1.65 is Domain 5 Form (5/6) — one closure away from MUS Pass-1 complete.
+| Track | Field | Value |
+|---|---|---|
+| NASA | Mission name | Degree 65: The Persistent Constellation |
+| NASA | Degree from | N.NNN |
+| NASA | Degree to | N.NNN |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-6. **ELC Domain 10 (Mixed-signal & RF) advances from 3/5 to 4/5 with the spin-modulated multi-decade beacon primitive.** v1.65 advances ELC Domain 10 with a primitive distinct from prior Domain 10 entries (1.29 K-band radiometer, 1.46 active-radar RADVS, 1.48 phase-coherent low-Earth-orbit transponder): the spin-modulated multi-decade beacon — 60-RPM body rotation imposing a sustained 1 Hz amplitude modulation on the 2292 MHz S-band carrier across 28 years of operational lifetime, with an 8 W TWT (Watkins-Johnson WJ-274 class) downlink chain feeding the JPL Deep Space Network 26-meter Goldstone/Madrid/Canberra apertures across three generations of LNA refresh (cooled paramps → maser → GaAs FET LNA). The 1 Hz spin-modulation is the engineering analog of MUS 1.65's sustained-pitch identity. ELC Pass-1 still has 4 below-target slots remaining.
+## Cross-References
 
-7. **Twenty-three first-instance declarations.** Pioneer 8 + Earth + Sandhill Crane combined — pioneer-8 + 28-year-mission + heliocentric-orbit-deep-space + deep-space-VLF + TRW-Systems-Group + 1995-reactivation-after-decades + earth-dylan-carlson + olympia-seattle-migration + sub-pop-catalog + stuart-hallerman + drone-metal + sustained-pitch-identity-mus-primitive + sandhill-crane + gruidae + gruiformes + coiled-trachea-resonator + dyadic-unison-call + pacific-flyway-staging + sustained-trumpet-identity + 1-Hz-beat-spectrum-signature + persistent-constellation-listener-variant-origin + multi-decade-mission-category + cross-track-1-Hz-engineering-analog. The density reflects the structural position: a degree that simultaneously opens one §6.6 variant (PERSISTENT-CONSTELLATION-LISTENER), opens an entirely new mission category (multi-decade), opens a new program subset (Pioneer Heliocentric), and adds first-of-kind declarations across all three tracks.
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.582** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.584** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-8. **Third three-track forward-cadence degree.** v1.65 is the third NASA degree to ship as part of a coordinated three-track forward-cadence release after v1.63 + v1.64: NASA + MUS + ELC bundled in v1.49.583 with bidirectional cross-track links. The cross-track structural binding is now reproducibly demonstrated across three consecutive degrees; future forward-cadence degrees should default to three-track when MUS and ELC CSV-derived subjects align.
+## Engine Position
+
+| Track | At v1.49.582 close | At v1.49.583 close |
+|---|---|---|
+| NASA degree | N.NNN | **N.NNN** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
+
+## Infrastructure
+
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/N.NNN/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-583-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.583` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.582](../v1.49.582/00-summary.md) · **Next:** [v1.49.584](../v1.49.584/00-summary.md)

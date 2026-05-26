@@ -1,42 +1,62 @@
-# v1.49.588 — Summary
+<!-- V650-699-CHAPTER-LIFTED v1 -->
+# v1.49.588 — Chapter 00: Summary
 
-**Milestone:** Apollo 5 LM-1 unmanned test (NASA degree 1.69) + Blood, Sweat & Tears *Child Is Father to the Man* (MUS 1.69) + AGC Block I RTL NOR radiation-screening (ELC 1.69) + Steller's Jay first-year floater behavior (SPS #66) + Track 2 deferred-item fold-in (F/25 rubric + AC10/AC7 leak hardening) + Track 3 TRS M0 Wave 1a packs 01-04.
+## Summary
 
-**Type:** Combined three-track-plus-TRS ship (second instance of the pattern; first was v1.49.587).
+**Forward-cadence NASA degree advance to ?.?.** v1.49.588 ships Apollo 5 LM-1 / BS&T / Steller's Jay / UNMANNED-PRECURSOR-VALIDATION as a forward-cadence engine-state advance from NASA degree ?.? to ?.?. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-## Structural firsts
+**Mission rebuilt to per-pipeline depth.** Apollo 5 LM-1 / BS&T / Steller's Jay / UNMANNED-PRECURSOR-VALIDATION ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/N.NNN/`.
 
-- **NEW §6.6 thread:** UNMANNED-PRECURSOR-VALIDATION (UPV) at single-exemplar origin (Apollo 5 LM-1 founding instance). Passes 3-criterion rubric per W1a §2 dossier analysis.
-- **NEW era:** IC radiation-qualification era OPENS at single-exemplar (AGC Block I founding instance; first production IC radiation-qualification for a lunar-mission guidance computer; 4,100 Philco-licensed Fairchild RTL NOR packages).
-- **ERA OPENS:** Crewed-Apollo era (Apollo 5 is precursor; first-crewed at v1.71 Apollo 7; first-crewed-lunar at v1.72 Apollo 8; first-lunar-landing at v1.75 Apollo 11).
-- **ERA OPENS:** Pyrotechnic-firing era for crewed lunar program (DPS+APS first ignitions in-flight; fire-in-the-hole abort mode validated).
-- **DOMAIN CLOSURE:** ELC Pass-1 Domain 12 (Radiation hardening) closes at 5/5.
-- **PASS-2 OVER-TARGET:** MUS Pass-2 Domain 5 (Harmony) advances to 6/5 via jazz-harmonic vocabulary deployed at album length in rock context.
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-## Engine state delta
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-| Surface | v1.49.587 close | v1.49.588 close |
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
+
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
+
+## Key Features
+
+| Track | Field | Value |
 |---|---|---|
-| NASA degree | 68/360 | **69/360** |
-| §6.6 register exemplar count | 12 | **13** |
-| MUS Pass-2 over-target axes | (Domain 3, 7) | (Domain 3, 5, 7) |
-| ELC Pass-1 closed domains | 1, 2 | **1, 2, 12** |
-| Three-track-plus-TRS pattern | 1 | **2** |
-| Three-track forward-cadence pattern | 7 | **8** |
+| NASA | Mission name | Apollo 5 LM-1 / BS&T / Steller's Jay / UNMANNED-PRECURSOR-VALIDATION |
+| NASA | Degree from | N.NNN |
+| NASA | Degree to | N.NNN |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-## Brief errors caught at G0 gate (W1a §10)
+## Cross-References
 
-Six brief errors caught (per Lesson #10178 discipline) and sourced canonically through G0-LOCKED-DECISIONS into all v1.69 build artifacts:
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.587** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.589** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-| ID | Severity | Original | Corrected |
-|---|---|---|---|
-| BE-1 | MED | Wikipedia "11h10m" | **~7h52m** (NSSDC + NASA SP-208) |
-| BE-2 | LOW | "SA-204 repurposed after fire" | SA-204 LV undamaged; only spacecraft destroyed |
-| BE-3 | MED | MISSION-BRIEF said "AGC Block II" | **AGC Block I** on LM-1 |
-| BE-4 | MED | APS "Bell + Rocketdyne co-prime" | Bell Aerospace prime; Rocketdyne sub for components |
-| BE-5 | HIGH | DPS "Rocketdyne" | **DPS = TRW/STL** prime |
-| BE-6 | LOW | LM-1 had landing legs | LM-1 had 9-foot aerodynamic conical fairing instead |
+## Engine Position
 
-## Cross-track triad summary
+| Track | At v1.49.587 close | At v1.49.588 close |
+|---|---|---|
+| NASA degree | N.NNN | **N.NNN** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
 
-The v1.49.588 cross-track triad opens UNMANNED-PRECURSOR-VALIDATION at single-exemplar across all three tracks: Apollo 5 LM-1 (DPS+APS+fire-in-the-hole subsystems), BS&T *Child Is Father to the Man* (9-piece horn-integrated rock band + jazz harmonic vocabulary at album length), Steller's Jay first-year floater (social-dominance + food-cache spatial memory). The substrate-independence of the structural primitive is the argument for UPV as a §6.6 thread distinct from prior threads.
+## Infrastructure
+
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/N.NNN/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-588-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.588` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.587](../v1.49.587/00-summary.md) · **Next:** [v1.49.589](../v1.49.589/00-summary.md)

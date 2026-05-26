@@ -13,6 +13,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.551 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** Cartridge Tarball Fix ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 **The v1.49.550 npm tarball was missing the cartridges.** The v1.49.550 publish shipped only `dist/` and `project-claude/` in the package, so `installCartridgeDir` warned "Cartridge source directory missing" for all four cartridges (`../examples/cartridges/gsd-workflow`, `gsd-debugger`, `gsd-planner`, `gsd-executor`) whenever the package was installed via `npx`. Anyone running `npx skill-creator@latest` was getting a half-installed framework with no cartridges. v1.49.551 adds the four cartridge source directories to the package `files` array so the next publish ships a complete tarball.
 
 **No code changes beyond the manifest.** This is purely a packaging fix — the `files` array in `package.json` gained four entries, the version numbers in `package.json`, `package-lock.json`, `src-tauri/Cargo.toml`, and `src-tauri/tauri.conf.json` all ticked from 1.49.550 to 1.49.551. The test surface is identical to v1.49.550; nothing in the source tree changed.

@@ -13,6 +13,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.571 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** v1.49.571 ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 **Two-half pattern copied from v1.49.570 Convergent Substrate.** Half A delivered the staged LeJEPA / SIGReg / LeWorldModel research package (verified, extended, corpus-tied-in); Half B ported the Tier 1/2 improvements from the Stage-3 mission spec into six default-off substrate modules that augment (never replace) the CAPCOM human-gate architecture. The mirroring gave the roadmapper a known-good skeleton end-to-end.
 
 **CAPCOM preservation enforced as a HARD gate for Half B.** Four-layer defense: compile-time `MissionAction` enum excludes every gate-bypass variant, runtime `assertNoGateBypassAction` guard rejects forbidden names, `AdvisoryPlan.advisoryOnly: true` is a compile-time const, and public exports are audited against forbidden names (`dispatchWave`, `bypassCapcom`, `overrideCapcom`, `writeCapcomState`, `skipGate`, `forceDispatchWave`, `executeActionAuthoritatively`, `commitPlan`, `applyAdvisoryPlan`). Every layer caught its own class of attack.

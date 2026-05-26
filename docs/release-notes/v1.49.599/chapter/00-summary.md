@@ -1,29 +1,62 @@
-# v1.49.599 — Summary
+<!-- V650-699-CHAPTER-LIFTED v1 -->
+# v1.49.599 — Chapter 00: Summary
 
-## Structural firsts at v1.49.599 close
+## Summary
 
-1. **First FAILED-mission canonical-pattern second-instance** in the gsd-skill-creator catalog. Surveyor 4 (v1.49.553) was the FAILED-mission canonical-scope precedent; Mariner 8 (v1.49.599) is the second instance. Pattern soaks toward ESTABLISHED at v600+ third instance (candidate: future Phobos 1, Mars Observer, or Beresheet build).
+**Forward-cadence NASA degree advance to ?.?.** v1.49.599 ships Mariner 8 Centaur Stage Failure as a forward-cadence engine-state advance from NASA degree ?.? to ?.?. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-2. **First cross-track substrate-convergence finding at SPS+ELC interface.** v598 had parallel ELC + SPS tracks (Moon Trees + Marbled Murrelet); v599 has converged tracks (Greenpeace founding voyage + Sea Otter species at material stake on Amchitka). The convergence emerged because the #10236 substrate-emergent discipline was applied honestly during W1 candidate evaluation; without the discipline, the parallel-track default would have been chosen.
+**Mission rebuilt to per-pipeline depth.** Mariner 8 Centaur Stage Failure ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/N.NNN/`.
 
-3. **First INSIDE-window MUS soak ESTABLISHED disposition.** 3-instance reproducibly-stable pattern across v596 (McCartney splashdown), v598 (Tapestry splashdown+1), v599 (Aqualung launch-6). 8-day envelope around mission boundaries. INSIDE-window preference is now canonical for cross-track-pairing discipline.
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-4. **First brief-mission depth-recovery soak ESTABLISHED disposition.** 3-instance corroboration (Apollo 13 + Apollo 14 + Mariner 8). Graceful-thinness pattern codified for FAILED-mission + brief-mission edge cases. Depth distribution maps onto substrate shape: thin index where mission summary is brief, full sibling pages where substrate supports it.
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-5. **First M1 Wave 2 generation pass.** Wave 2 begins per-pack M1 page authoring against the v598 Wave 0–1 substrate (m1-page-template + m1-pairing-map-skeleton + m1-schemas). v599 produces first end-to-end coverage report (`coverage-report-pack-13-v2.json`) + materialized pairing map (`pairing-map-v1.json`; 16 edges) + schema-validation walkthrough.
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-6. **First lab-director G3-boundary patch operational test (planned at Phase 838 G3).** Patch landed pre-spawn at `f4e607781`; lab-director-v599 inherits patched briefing; G3 message will be "QUALITY-BAR PASS — awaiting operator authorization via team-lead. HOLD." per Anti-pattern 6-7 prohibition on "G3 AUTHORIZED."
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-## Engine state at v1.79 close
+## Key Features
 
-- NASA degree 1.79 (Mariner 8 / FAILED launch / Centaur upper-stage tumble at T+265s; vehicle destruction T+311s; debris recovery 400 km N of Puerto Rico Atlantic; Mariner 9 inherits mission 21 days later)
-- MUS degree 1.79 (Jethro Tull *Aqualung*; Chrysalis CHR 1044 UK 1971-03-19 / Reprise MS 2035 US 1971-05-03; INSIDE Mariner 8 launch window -6d)
-- ELC degree 1.79 (Greenpeace founding voyage; Don't Make A Wave Committee Phyllis Cormack Vancouver → Akutan Sept 15 – Oct 26 1971; opposed Cannikin nuclear test on Amchitka)
-- SPS species #76 (Sea Otter / *Enhydra lutris kenyoni*; substrate-convergent with ELC via Amchitka Pacific marine substrate)
-- §6.6 register 23 LOCKED (no admit; LAUNCH-VEHICLE-FAILURE watchlist only per #10237)
-- TRS substrate M1 Wave 2 generation begins (pack-13 first end-to-end coverage report)
-- M0 substrate 23/22 (pack-13 fetched; closes v596 schedule)
+| Track | Field | Value |
+|---|---|---|
+| NASA | Mission name | Mariner 8 Centaur Stage Failure |
+| NASA | Degree from | N.NNN |
+| NASA | Degree to | N.NNN |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-## Test count delta
+## Cross-References
 
-Vitest baseline (v598 close): 28,767 passing. Post-v599 W3 vitest run: **29,479 passing** (+712 tests; 0 regressions; 17 skipped + 7 todo). The +712 delta reflects intervening test additions to the codebase between v598 ship and v599 vitest checkpoint; v599 milestone itself added no engine code (engine-state-only milestone per scope).
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.598** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.600** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
+
+## Engine Position
+
+| Track | At v1.49.598 close | At v1.49.599 close |
+|---|---|---|
+| NASA degree | N.NNN | **N.NNN** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
+
+## Infrastructure
+
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/N.NNN/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-599-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.599` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.598](../v1.49.598/00-summary.md) · **Next:** [v1.49.600](../v1.49.600/00-summary.md)

@@ -15,6 +15,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.556 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** v1.49.556 ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 **The complete picture as the organising principle of degree 52.** On May 4, 1967, seventeen days after Surveyor 3 bounced to a landing in the Ocean of Storms, an Atlas-Agena D launched from Cape Kennedy carrying a spacecraft that would change the way humans saw the Moon. Lunar Orbiter 4 was not designed to find a landing site. That question had been answered. Lunar Orbiters 1, 2, and 3 had photographed the equatorial belt at high resolution, identified eight primary Apollo landing areas, and confirmed that flat, boulder-free terrain existed within reach of the Lunar Module's descent trajectory. The landing sites were found. The equatorial band was known. And so the fourth orbiter was freed to do something no spacecraft had done before: photograph everything. The entire nearside. Pole to pole. Limb to limb. The mission planners at Langley changed the orbit from near-equatorial to near-polar -- 85.5 degrees inclination, a parameter that would let the spacecraft sweep the complete visible hemisphere as the Moon rotated beneath it. In approximately two weeks of photography, Lunar Orbiter 4 captured 546 frames -- 419 high-resolution at 60-meter resolution, 127 medium-resolution at 300 meters -- covering 99% of the lunar nearside. The first complete photographic atlas of the visible Moon. The complete picture.
 
 **The darkroom in lunar orbit scales up to a cartographic atlas.** The camera system that produced this atlas was itself an engineering marvel. Two cameras -- a 610mm high-resolution lens and an 80mm medium-resolution lens -- exposed 70mm Kodak SO-243 film through a focal-plane shutter. The film was developed onboard the spacecraft using the Kodak Bimat process, a dry transfer development system that required no liquid chemistry. The developed film was scanned line by line by a photomultiplier tube, converted to analog signal, and transmitted to Earth across 384,000 kilometers of space. A complete darkroom in lunar orbit, operating autonomously, processing and transmitting every frame before the film supply was exhausted. Boeing built the spacecraft at Langley Research Center -- the same Boeing whose commercial aircraft operations run from the Puget Sound corridor where Brandi Carlile grew up and performs. Boeing photographed the complete Moon. Boeing builds the planes that carry Carlile's fans to the Gorge. The Orientale Basin, the Tycho and Copernicus ray systems, the highland terrae, the maria, the transition zones that had previously existed only in telescopic glimpses -- all of them now resolved on Kodak emulsion, scanned to raster, and telemetered home. What began with Lunar Orbiter 1's reconnaissance tour ended at Lunar Orbiter 4's atlas. The program's fourth act is its cartographic act.

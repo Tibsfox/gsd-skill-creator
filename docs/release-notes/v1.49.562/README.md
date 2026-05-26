@@ -16,6 +16,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.562 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** v1.49.562 ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 Three bounces and a retrieval. On April 17, 1967, at 07:05:01 UTC, an Atlas-Centaur rocket rose from Launch Complex 36B at Cape Kennedy carrying the third Surveyor spacecraft on a direct-ascent trajectory to the Moon. Sixty-five hours later, on April 20 at 00:04:17 UTC, Surveyor 3 entered powered descent over Oceanus Procellarum in the same broad basalt plain where Surveyor 1 had landed ten months earlier and where Lunar Orbiter 3 had photographed Surveyor 1 from orbit two months before that. The landing sequence was nominal until the last fourteen meters. Then the radar altimeter, confused by a highly reflective patch of regolith, reported touchdown early and failed to command vernier-engine shutdown. The three 30-pound-force thrusters kept firing. Surveyor 3 bounced. It rose 10 meters, came down, bounced again 11 meters up, came down, bounced a third time to about 3 meters, and finally settled on a 12-degree crater wall 25 seconds after its first contact with the lunar surface. The spacecraft landed intact. Every instrument survived. Every antenna deployed. The soft-landing program that had just clawed back from the total loss of Surveyor 2 seven months earlier now had its second success -- achieved through an uncontrolled maneuver that no mission planner had designed. The machine landed itself, badly, on the third try, and then went to work.
 
 Two and a half years later, on November 20, 1969, Charles P. "Pete" Conrad Jr. and Alan Bean set the Apollo 12 Lunar Module Intrepid down in Oceanus Procellarum 163 meters from Surveyor 3. This was the closest precision lunar landing that had ever been achieved; Apollo 11's target circle had been ten kilometers; Conrad's target was the Surveyor itself. Conrad and Bean walked to Surveyor 3 across a sloping crater wall, approached the spacecraft from its uphill side to avoid overturning it, and cut its television camera free with bolt cutters. They also retrieved the scoop head of the Soil Mechanics Surface Sampler, the aluminum cables of the spacecraft's bulk-regolith bearings, and a section of tubing. The Smithsonian National Air and Space Museum holds the camera today. Conrad's four-mission lunar arc closes in retrospect at engine degree 56: he commanded Gemini 11 at degree 49 (September 1966), watched Surveyor 2 fail at degree 50 (September 1966), watched Surveyor 3 succeed at degree 56 (April 1967), and walked to Surveyor 3 on Apollo 12 thirty-two months after this degree's landing. The engine's first four-degree narrative thread resolves here. The degree 56 dedication reads accordingly.

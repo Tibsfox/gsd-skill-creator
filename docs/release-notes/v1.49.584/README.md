@@ -12,6 +12,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.584 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** Degree 66: Graceful Attrition + Form-as-Multiplicity-Coordination ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 v1.66 ships the closing degree of the Pioneer 6/7/8/9 four-platform heliocentric solar-monitoring constellation and the closing degree of MUS Pass-1 (Domain 5 Form 5/6 → 6/6). The triad pairs Pioneer 9 — fourth and final element of the constellation, INNER-vantage at ~0.75 AU perihelion, 14-year-9-month operational lifetime ending 1983 with TID-driven primary-TWT graceful failure — with John Luther Adams's *Become Ocean* (Cantaloupe 2013, Seattle Symphony commission; Pulitzer 2014) three-orchestral-choir palindromic structure and the Olympic Marmot (*Marmota olympus*) colony alarm-chorus coordination, and ELC 1.66 frames Pioneer 9 transmitter rad-hardness across 15-year heliocentric mission with TID accumulation and primary-TWT graceful failure as the canonical 1960s-era data point on multi-decade semiconductor degradation. All three threads embody the structural primitive **FORM-AS-MULTIPLICITY-COORDINATION** (the work's identity rides on the formal architecture across structurally-distinct elements at structurally-distinct temporal rates rather than on any single voice/element), and the engineering substrate enabling that primitive embodies **GRACEFUL-ATTRITION** (the architectural commitment that multi-platform multi-decade systems will lose individual platforms gracefully and the constellation continues). v1.66 EXTENDS PERSISTENT-CONSTELLATION-LISTENER from single-exemplar (v1.65 origin) to 2-exemplar status, and OPENS the GRACEFUL-ATTRITION §6.6 thread origin candidate at single-exemplar status. v1.66 closes MUS Domain 5 (Form) at 6/6 and CLOSES MUS Pass-1 to complete; advances ELC Domain 12 (Rad-hard) from 3/5 to 4/5; and closes the si-discrete era at the chronological boundary (Pioneer 9 launched 1968-11-08, the close of the 1962-1968 era).
 
 **FINDING. v1.49.584 is a combined three-phase ship — polish + citation triage + forward triple.** Per user direction, v1.49.584 bundles (Phase A) NASA 1.65 narrative-polish on Cards 1-14 + sidebar + footer following the v1.583 ship's identified residuals (Apollo 4 / Common Loon / Sonics 1965 v1.64 bleed-through), (Phase B) coordinated 22 V-flag citation triage with 4 parallel research-cluster agents producing evidence files, and (Phase C) Pioneer 9 + Become Ocean + Olympic Marmot forward triple. The combined ship demonstrates that quality-polish, citation-debt-paydown, and forward-cadence work can run productively in parallel within a single milestone when the workstreams share substrate (the v1.65 polish discoveries surface fact corrections that the citation triage validates and that the v1.66 build references).

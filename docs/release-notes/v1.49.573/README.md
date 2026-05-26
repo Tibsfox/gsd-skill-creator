@@ -12,6 +12,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.573 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** v1.49.573 ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 > The chipset reads the chipset literature; the federated layer reads the federated-learning literature; the safety warden reads the safety-verification literature. The Amiga Principle proved itself recursively -- architecture integrating peer-reviewed literature about the same architecture.
 
 Where v1.49.572 asked *what does a math result constrain?*, v1.49.573 asks the prior question: **what does the literature already say about the architecture we built?** The 17-23 April 2026 arXiv eess/cs harvest (150 curated papers, seven module tracks) gave seven answers -- and along the way independently rederived seven GSD architectural decisions, the strongest external validation signal the project has logged to date.

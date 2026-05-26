@@ -1,41 +1,62 @@
-# v1.49.595 — Structural Firsts + Engine State
+<!-- V650-699-CHAPTER-LIFTED v1 -->
+# v1.49.595 — Chapter 00: Summary
 
-## Structural firsts at v1.76
+## Summary
 
-- **PINPOINT-LANDING (PLND) §6.6 1-ex origination** — Apollo 12 landed within ~163m of Surveyor 3 (April 1967 robotic precursor); first crewed targeted-precision lunar landing. Three-criterion test PASS: targeted landing site / prior robotic precursor / accuracy bounded.
-- **PROCEDURAL-RECOVERY (PREC) §6.6 1-ex origination** — Aaron's SCE-to-AUX call from telemetry pattern recognition recovered Apollo 12 from twin lightning strikes (T+36.5 sec + T+52 sec). Three-criterion test PASS: anomaly during irreversible phase / telemetry-pattern recognition / single-action resolution.
-- **Path D BOTH adjudication** — second instance of dual-origination at single milestone (precedent v1.75 Path C BOTH AUC + FCSC). §6.6 register advances 17 → 19.
-- **Domain 13 (Hard Rock Foundation / Genre-Defining Sophomore) MUS 1-ex origination** — Led Zeppelin II consolidates inaugural Led Zep I template into reproducible practice; mobile-recording across 9 studios on 2 continents during 1969 world tour. MUS register 12 → 13.
-- **ELC LONG-DURATION-LUNAR-SURFACE-SCIENCE sub-thread 1-ex origination** — ALSEP central station's 8-year operational lifetime (1969-1977) opens paradigm distinct from v1.75 ALR-100 one-shot active radar.
-- **SPS second-MAMMAL exemplar** — Pacific Marten (Martes caurina) sister-species split from American Marten 2013; demonstrates mammal-class admission is reproducibly extensible across speciation events.
+**Forward-cadence NASA degree advance to ?.?.** v1.49.595 ships Apollo 12 PINPOINT LANDING + SCE-TO-AUX RECOVERY as a forward-cadence engine-state advance from NASA degree ?.? to ?.?. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-## Cross-substrate META-SOPHOMORE-REFINEMENT pattern
+**Mission rebuilt to per-pipeline depth.** Apollo 12 PINPOINT LANDING + SCE-TO-AUX RECOVERY ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/N.NNN/`.
 
-v1.76 surfaces three simultaneous sophomore-refinement instances on three substrates:
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-| Substrate | Inaugural | Sophomore (v1.76) | Refinement |
-|---|---|---|---|
-| NASA | Apollo 11 (lunar landing exists) | Apollo 12 | precision targeting + ALSEP long-arc science |
-| MUS | Led Zeppelin I (vocabulary established) | Led Zeppelin II | reproducible riffs + dynamics across world-tour pressure |
-| SPS | American Marten (mammal-class admitted) | Pacific Marten | geographic refinement via sister-species split |
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-Pattern admitted at 1-exemplar (each substrate single-instance). Cross-substrate framework META-SOPHOMORE-REFINEMENT held for v1.49.605+ when 2-ex appears in corpus cadence (candidate epoch 1972-73 or 1981-82).
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-## Engine state at close
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-| Surface | Value |
-|---|---|
-| §6.6 register | 17 → 19 (Path D BOTH PINPOINT + PROCEDURAL) |
-| MUS register | 12 → 13 (Domain 13 Hard Rock Foundation 1-ex) |
-| ELC sub-thread origin | LONG-DURATION-LUNAR-SURFACE-SCIENCE (ALSEP 1-ex) |
-| AUC thread | ESTABLISHED at 3-ex; 4th outcome-validation instance contributed |
-| FCSC thread | 2nd outcome-validation instance contributed (1-ex remains; promote at 3-ex) |
-| Lesson #10221 soak | 2nd instance PASS (0-commit drift; promote to ESTABLISHED at v1.49.597) |
-| TRS master.json | 313 → 324 records (pack-09 closure) |
-| TRS Wave 2c | 6/6 packs synthesized (~38,800 words total) |
-| Depth-audit cross-link | STRICT mode active at v1.49.595+ (BLOCKER cutover) |
-| NASA index 1.76 depth | PASS 95%/100% / 7/7 sections / 13 artifacts 5/5 cat / 13/13 cross-links |
+## Key Features
 
-## Three-track-plus-TRS cadence
+| Track | Field | Value |
+|---|---|---|
+| NASA | Mission name | Apollo 12 PINPOINT LANDING + SCE-TO-AUX RECOVERY |
+| NASA | Degree from | N.NNN |
+| NASA | Degree to | N.NNN |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-9th consecutive instance (v1.49.587 — v1.49.595). Established cadence per Lesson #10197 holds. Token envelope: ~810K Sonnet aggregate / ~6 hours wall-clock (extended by mid-W2 401 quota interruption + main-context Opus inline recovery).
+## Cross-References
+
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.594** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.596** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
+
+## Engine Position
+
+| Track | At v1.49.594 close | At v1.49.595 close |
+|---|---|---|
+| NASA degree | N.NNN | **N.NNN** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
+
+## Infrastructure
+
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/N.NNN/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-595-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.595` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.594](../v1.49.594/00-summary.md) · **Next:** [v1.49.596](../v1.49.596/00-summary.md)

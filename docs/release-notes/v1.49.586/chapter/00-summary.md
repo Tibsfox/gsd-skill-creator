@@ -1,41 +1,62 @@
-# 00 — Summary: v1.49.586 OAO-2 Stargazer / Mudhoney / Trumpeter Swan / CATALOG-WINDOW-OPENING
+<!-- V650-699-CHAPTER-LIFTED v1 -->
+# v1.49.586 — Chapter 00: Summary
 
-**Released:** 2026-04-29
-**Type:** combined two-track ship — (Track 1) NASA forward-cadence triple at degree 67 + (Track 2) operational-debt small-fix bundle (5 items inherited from v1.49.585 §4.2 carry-forward)
-**Closes:** ELC Pass-1 Domain 1 at 4/4 (DC analysis & biasing); v1.49.585 §4.2 carry-forward bundle (5 of 5 items shipped)
-**Opens:** CATALOG-WINDOW-OPENING §6.6 thread origin candidate at single-exemplar; op-amp era (1968–1975) at single-exemplar; MUS Pass-2 over-target cadence (first 6/5 advance after Pass-1 closure)
-**Engine forward-state:** ADVANCED — degree 66 → 67 (18.6% complete; 293 remaining)
+## Summary
 
-## Structural firsts
+**Forward-cadence NASA degree advance to ?.?.** v1.49.586 ships OAO-2 Stargazer / Mudhoney / Trumpeter Swan / CATALOG-WINDOW-OPENING as a forward-cadence engine-state advance from NASA degree ?.? to ?.?. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-- **First space telescope entry in NASA corpus.** OAO-2 Stargazer (NSSDC 1968-110A) is officially recognized by Guinness World Records as the first space telescope, preceding HST by 22 years. Most "first space telescope" press treats Hubble as the founder; OAO-2 quietly holds the actual title. This entry establishes the founding-instance-space-observatory lineage that flows forward through TD-1A (1972), ANS (1974), IUE (1978), HST (1990), GALEX (2003).
-- **First Smithsonian Astrophysical Observatory + University of Wisconsin Space Astronomy Lab co-mounted UV instrument suite.** Two parallel UV instrument suites on a single platform — Celescope (4× 12-inch Schwarzschild + Uvicon SEC vidicons at 1200–2900 Å) + WEP (4× UV photometers + 2× spectrometers + 1× nebular photometer at 1000–4250 Å). Establishes the multi-instrument-suite-on-single-platform space observatory architecture that subsequent missions inherit.
-- **First Davis 1972 Celescope Catalog + Code et al. 33+ paper ApJ series 1970–1980 entry in NASA corpus.** Founding-instance UV photometric reference; the only systematic UV all-sky photometric reference during the 1972–1978 gap before IUE. The 5,068-star catalog is what subsequent UV missions index against.
-- **First Cockcroft-Walton voltage-multiplier ladder entry in NASA / ELC corpus.** WEP photomultiplier biasing chain (28 V bus → ~150 V intermediate → ~1 kV cathode rail with zener clamps). The 1973-02-01 mission-end is structurally a DC bias-chain collapse — bias-rail short or ripple-induced cathode arc following capacitor ESR rise + isolation-dielectric leakage growth.
-- **First Mudhoney + *Superfuzz Bigmuff* + Sub Pop + Jack Endino + Reciprocal Recording entries in S36 corpus.** Founding-instance grunge LP opening Sub Pop's *grunge* catalog window 8 months before *Bleach* SP34. 35-year continuous Sub Pop tenure 1988–2023 (longest in label history) through *Plastic Eternity* (Sub Pop SPCD1626, April 7 2023; King County WA proclaimed April 7 2023 'Mudhoney Day').
-- **First Trumpeter Swan + Cygnus genus entry in SPS corpus.** Largest extant North American waterfowl with anomalous 1.21–1.35 m coiled tracheal acoustic resonator (3.6–4.0× predicted volume by mass per Fitch 1999). Banko 1960 NAF 63 (USFWS, 214 pp) opens 65-year recovery-monitoring catalog window: 1933 lower-48 census <70 birds → 2025 ~45–63K continental projection.
-- **First production-aesthetic-as-thesis compositional narrative in S36 corpus.** Two-pedal title-as-thesis (Univox Super-Fuzz + EHX Big Muff Pi) + 8-track analog tape + single-take vocal floor + aggressive room-mic'd drums collapse into a single thesis: the album's identity IS its production. MUS Pass-2 over-target Domain 7 advance.
-- **First MUS Pass-2 over-target advance after Pass-1 closure at v1.66.** Domain 7 (Production & mix) advances 5/5 → 6/5 over-target on the structurally-distinct production-as-thesis axis. Establishes the Pass-2 cadence template for forthcoming over-target entries on closed Pass-1 domains.
-- **First ELC Pass-1 Domain 1 (DC analysis & biasing) closure.** 3/4 → 4/4 close on the multi-year photomultiplier-cathode-bias-rail stability axis. Distinct from prior Domain-1 entries (1.07 Vanguard 1 mercury-cell discharge bias; 1.22 Mariner 4 vidicon focus-electrode DC stability; 1.41 Apollo Guidance Computer rope-driver bias network).
-- **First op-amp era (1968–1975) entry in ELC corpus.** OAO-2 launched 1968-12-07, just 30 days after Pioneer 9 (1968-11-08, si-discrete era close at v1.66). The era's hybrid character: op-amp signal path (Fairchild µA709 / National LM101 / Fairchild LM741 just-released 1968) downstream of the photomultiplier anode coexists with discrete-component bias chains (Cockcroft-Walton multiplier + electrolytic capacitors + zener clamps) on the same instrument.
-- **First brief-error correction at G0 gate via dedicated research subagent.** W1 research subagent caught 6 substantive errors in the original mission brief (NSSDC ID 103A→110A; end-cause cooling→HVPS; Code et al. catalog framing; Mudhoney CWO framing; ELC Domain 11→1; Reciprocal address). G0-LOCKED-DECISIONS.md overrode MISSION-BRIEF.md throughout the build artifacts.
-- **§6.6 CATALOG-WINDOW-OPENING thread origin candidate at single-exemplar (NEW).** Three founding-instance artifacts at three substrates instantiate one structural primitive: founding-instance-as-window-opener. Distinct from PCL (multi-platform multi-decade deployment), FAMC (coordination across multiple structurally-distinct elements), SAF (CLOSED at 3-exemplar v1.62/63/64; OAO-2 IS a SAF instance post-OAO-1 1966 but forward identity is the catalog).
+**Mission rebuilt to per-pipeline depth.** OAO-2 Stargazer / Mudhoney / Trumpeter Swan / CATALOG-WINDOW-OPENING ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/N.NNN/`.
 
-## Engine state at close
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-| Metric | Value at v1.49.586 close |
-|---|---|
-| Degree | **67 of 360** (ADVANCED from 66; +1 forward) |
-| Percent complete | **18.6%** (was 18.3%) |
-| Pass | 2 (UNCHANGED) |
-| Hard-gated forward-degree count | **8** (was 7; +1 forward) |
-| §6.6 register exemplars | **11** (was 10; +1 with CATALOG-WINDOW-OPENING origin) |
-| §6.6 candidate variants | **5** (was 4; +1 — added CATALOG-WINDOW-OPENING) |
-| MUS Pass-1 | COMPLETE (UNCHANGED — closed at v1.66) |
-| MUS Pass-2 | **opens at v1.67 with first over-target advance** (Domain 7 6/5) |
-| ELC Pass-1 Domain 1 | **CLOSED at 4/4** (was 3/4; +1 closure beat) |
-| ELC era state | **op-amp era opens at single-exemplar** (was: si-discrete CLOSED at v1.66 chronological boundary) |
-| simulation.js block count | **69** (was 68; +1 block at ship) |
-| Three-track forward-cadence count | **6** (was 5; +1 — sixth simultaneous-ship NASA + MUS + ELC) |
-| W2 build artifacts on disk | 49 files across NASA/MUS/ELC v1.67 (~712KB) |
-| Track 2 small-fix bundle | 5 of 5 items shipped (T2.1+T2.2+T2.3+T2.4+T2.5; 4 commits + 1 outside-repo edit) |
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
+
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
+
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
+
+## Key Features
+
+| Track | Field | Value |
+|---|---|---|
+| NASA | Mission name | OAO-2 Stargazer / Mudhoney / Trumpeter Swan / CATALOG-WINDOW-OPENING |
+| NASA | Degree from | N.NNN |
+| NASA | Degree to | N.NNN |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
+
+## Cross-References
+
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.585** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.587** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
+
+## Engine Position
+
+| Track | At v1.49.585 close | At v1.49.586 close |
+|---|---|---|
+| NASA degree | N.NNN | **N.NNN** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
+
+## Infrastructure
+
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/N.NNN/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-586-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.586` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.585](../v1.49.585/00-summary.md) · **Next:** [v1.49.587](../v1.49.587/00-summary.md)

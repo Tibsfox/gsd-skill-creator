@@ -10,6 +10,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.568 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** Nonlinear Frontier ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 v1.49.568 converts the already-completed nonlinear-systems-clouds research pack into live, queryable, teach-forward infrastructure across five phases. The milestone establishes a reusable substrate from a one-off research conversation and proves the research-pack → milestone-package → executable-phases pipeline end-to-end.
 
 **Research pack made executable.** Nineteen college concepts are activated across eight departments with Python + C++ + domain-third Rosetta panels, per-concept try-sessions, and dept-level parametrized tests. The try-session-runner now loads TypeScript modules alongside existing JSON. `CONCEPT-AUTHORING.md` codifies the canonical concept-authoring convention with the 200-500 char panel-length range.

@@ -15,6 +15,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.559 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** v1.49.559 ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 The fifty-sixth paired release and the degree where the crewed program stops and the robotic program keeps working. On January 27, 1967, Gus Grissom, Ed White, and Roger Chaffee burned alive in a Block I Command Module on Pad 34 at Cape Canaveral during a plugs-out rehearsal that should have been routine. Pure oxygen at 16.7 psia inside a plug-door capsule that opened inward. Velcro, foam, nylon, wiring insulation -- all of it combustible. The fire consumed them in seconds. America's crewed Moon program stopped. The press asked whether the Moon deadline was worth three lives. Congress held hearings. Engineers at North American Aviation started over on the Block II redesign. And the astronauts -- the surviving ones, the men who would eventually fly Apollo 7 and Apollo 8 and Apollo 11 -- sat in Houston and Huntsville and Downey through nearly twenty-one months of grounded flights, watching the schedule slip, watching their trained skills atrophy, watching the Moon recede.
 
 Nine days after the fire, at 01:17 UTC on February 5, 1967, an Atlas SLV-3 Agena D rose from Launch Complex 13 at Cape Canaveral carrying Lunar Orbiter 3. The robotic side was not grounded. The robotic side had never been grounded. Under Clifford H. Nelson at NASA Langley Research Center, with Boeing Aerospace Systems building the airframe and Eastman Kodak providing the photographic subsystem, the Lunar Orbiter program had been built to a different discipline than the crewed program -- no pilots to protect, no heroism to manage, no television cameras to perform for. Just the work: photograph the Moon, confirm the Apollo landing sites already surveyed by Lunar Orbiter 1 and Lunar Orbiter 2, close the cartographic loop so that when the crews flew again they would have somewhere confirmed to land. LO3 completed all of that in eight days of photography between February 15 and February 23, 1967. Twelve high-priority Apollo candidate sites imaged at stereo angles with hazard-appropriate sun conditions. 211 frames returned -- 182 high-resolution plus 29 medium-resolution. Boulders identified down to two meters in diameter. Slope gradients measured across fifty-meter baselines. Every site that Apollo 11 could have landed at was mapped before Apollo 11's Command Module had finished its redesign. The unmanned work continued, and it did not lose a frame that mattered.

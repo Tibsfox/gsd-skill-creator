@@ -23,6 +23,20 @@ Lesson #10221 (dev/main sync discipline) PROMOTED to ESTABLISHED at this milesto
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.596 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** Apollo 13 SUCCESSFUL FAILURE + LM-AS-LIFEBOAT ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 10th instance of the three-track-plus-TRS established ship cadence. This milestone is NASA degree 1.77 — Apollo 13 SUCCESSFUL FAILURE + LM-AS-LIFEBOAT (CSM-109 Odyssey + LM-7 Aquarius; AS-508; Lovell/Swigert/Haise; O2 tank #2 explosion T+55h54m53s on 1970-04-13 03:07:53 UTC; PC+2 free-return trajectory burn 4min 23sec at T+79h27m38s; CO2 mailbox improvisation; splashdown 1970-04-17 18:07:41 UTC by USS *Iwo Jima*) plus MUS 1.77 (Paul McCartney solo *McCartney*; Apple Records 1970-04-17 INSIDE +6 days narrow window; Domain 14 origination "Solo-Debut-After-Group-Dissolution") + ELC 1.77 (LM Aquarius lifeboat configuration + CO2 mailbox adapter combined; "Improvised-Hardware-Adaptation-Under-Pressure" Domain candidate subsumed under LM-AS-LIFEBOAT per G0) + SPS #74 (Northern Spotted Owl; first RAPTOR category exemplar; iconic old-growth obligate).
 
 ## Tracks

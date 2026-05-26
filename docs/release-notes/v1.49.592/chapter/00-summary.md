@@ -1,39 +1,62 @@
-# v1.49.592 — Structural Firsts + Engine State
+<!-- V650-699-CHAPTER-LIFTED v1 -->
+# v1.49.592 — Chapter 00: Summary
 
-## Structural firsts at v1.49.592 close
+## Summary
 
-1. **First crewed LM flight** — LM-3 "Spider"; Block II Apollo Lunar Module's first crewed mission
-2. **First crewed CSM-LM separation + rendezvous** — CSM "Gumdrop" + LM "Spider" tested CSM-LM transposition + extraction + Day 5 active rendezvous
-3. **First crewed LM independent flight** — LM-3 separated from CSM for ~6.5 hours; flew up to 115 miles from CSM
-4. **First crewed lunar-spacesuit EVA** — Schweickart in Apollo Block II A7L EMU pressure suit + PLSS life-support backpack; 46-minute hatch-cycle EVA Day 4 [BE-2 corrected; original brief said ~37 min]
-5. **First strapdown IMU in crewed spaceflight history** — TRW MARCO 4418 / LM AGS (entirely digital; 18-bit; 4096-word magnetic core) [BE-1 corrected; original brief said "analog logic"]
-6. **First crewed test of LM Abort Guidance System** — backup to PGNCS gimbaled-IMU primary; closes Apollo 5 v1.69 LM-1 abort-scenario sub-thread
+**Forward-cadence NASA degree advance to ?.?.** v1.49.592 ships Apollo 9 as a forward-cadence engine-state advance from NASA degree ?.? to ?.?. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-## Three new structural openings at v1.73
+**Mission rebuilt to per-pipeline depth.** Apollo 9 ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/N.NNN/`.
 
-- **Crewed-LM era opens** — every subsequent crewed Apollo (10/11/12/13/14/15/16/17 + Skylab dockings + ASTP) flies LM derivatives or CSM-LM rendezvous architecture
-- **First-PLSS-vacuum era opens** — Schweickart's 46-minute EVA validates the Portable Life Support System in vacuum, prerequisite for lunar-surface EVA at Apollo 11 v1.75
-- **First-CSM-LM-rendezvous era opens** — Day 5 active rendezvous + redocking architecture validated, prerequisite for Apollo 10 v1.74 lunar-orbit rehearsal and Apollo 11 v1.75 surface-to-orbit ascent rendezvous
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-## Engine state register
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-| Surface | Value at v1.73 close |
-|---|---|
-| NASA degree | 73/360 (20.3% complete) |
-| §6.6 exemplar count | 15 (unchanged; AGS Domain 16 + CSN Domain 10 are domain originations, not §6.6 thread originations) |
-| CHAIN-CONVENTIONS | v1.4 (fourteenth full use; no bump) |
-| Three-track-plus-TRS | 6 instances (established cadence carries) |
-| TRS M0 master.json | 305 records (was 260; +45 from Wave 1e) |
-| TRS M0 Wave progress | Wave 1d COMPLETE → Wave 1e COMPLETE; next Wave 2a synthesis at v1.49.593 |
-| Pre-tag-gate gates | 6/6 (build + vitest + completeness + CI-on-dev + www-bundles + depth-audit BLOCKER) |
-| W2-prompt discipline | MANDATORY (per v1.49.591 T2.3); now includes 7 canonical regexes (per v1.49.592 T2.1) |
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-## Cross-track resonance axes
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-Three substrates, one structural primitive (crewed-stack-validation 1st-instance):
+## Key Features
 
-1. **Apollo 9** — first complete crewed Apollo stack (CSM + LM + crew) flown together; tests separation/rejoin without orbital margin to spare
-2. **CSN debut** — first complete supergroup configuration (three solo veterans + new collective) recorded together; tests cross-pollination of three prior styles into new ensemble identity
-3. **LM AGS** — first strapdown-IMU + backup-digital-guidance complete architecture flown crewed; tests independent navigation pathway separate from PGNCS primary
+| Track | Field | Value |
+|---|---|---|
+| NASA | Mission name | Apollo 9 |
+| NASA | Degree from | N.NNN |
+| NASA | Degree to | N.NNN |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-The structural primitive is **independent-architecture-debut**: a complete configuration that can stand alone (CSN doesn't need any prior band; Apollo 9 LM doesn't need PGNCS for AGS abort path; CSN+Apollo+AGS each demonstrate their own complete configuration). This is parallel to but distinct from ALL-UP COMMITMENT (Apollo 4/8, full-stack first-flight commitment) — here the configuration is novel-as-an-integrated-whole, not first-flight-of-an-integrated-whole.
+## Cross-References
+
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.591** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.593** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
+
+## Engine Position
+
+| Track | At v1.49.591 close | At v1.49.592 close |
+|---|---|---|
+| NASA degree | N.NNN | **N.NNN** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
+
+## Infrastructure
+
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/N.NNN/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-592-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.592` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.591](../v1.49.591/00-summary.md) · **Next:** [v1.49.593](../v1.49.593/00-summary.md)

@@ -14,6 +14,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.554 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** v1.49.554 ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 The fifty-first paired release and the degree where the engine encounters its first total mission failure. On September 20, 1966, eight days after Pete Conrad and Dick Gordon splashed down from Gemini 11's record-setting flight, an Atlas-Centaur rose from Launch Complex 36A at Cape Kennedy carrying Surveyor 2. The launch was perfect. The Atlas SLV-3C stage performed nominally. The Centaur second stage -- liquid hydrogen and liquid oxygen, the highest-energy chemical propellant combination available to 1966 spaceflight -- ignited cleanly and placed the two hundred ninety-two kilogram Hughes Aircraft spacecraft on a translunar trajectory bound for Sinus Medii, the geometric heart of the lunar nearside. For sixteen hours, everything worked. The solar panel deployed. The high-gain antenna pointed at Earth. Telemetry flowed at four thousand four hundred bits per second through the Deep Space Network stations at Goldstone in California, Madrid in Spain, and Canberra in Australia. The trajectory was good. The spacecraft was healthy. Both the engineers at the Jet Propulsion Laboratory and the Hughes controllers in Culver City watched nominal telemetry for sixteen straight hours as the Moon grew larger in the nav filter and Sinus Medii crept into the landing window.
 
 Then, at T+sixteen hours and eleven minutes, JPL commanded the midcourse correction maneuver. Three Thiokol TD-339 vernier engines -- small, throttleable, hypergolic, arranged one hundred twenty degrees apart on the spacecraft's underside -- were supposed to fire in parallel to adjust the trajectory by a few meters per second of delta-v. Vernier engines 1 and 2 ignited normally. Vernier engine 3 did not. The asymmetric thrust from two of three engines created an immediate net torque. The spacecraft began to tumble. The cold-gas attitude control jets, designed for fine pointing, were overwhelmed. The rotation rate increased. The high-gain antenna swept past Earth periodically, producing intermittent telemetry -- brief windows into a deteriorating state. JPL sent repeated commands over several hours: fire all three engines, hoping to override whatever had jammed engine 3. Fire individual engines timed to the tumble period. Use the cold-gas jets to de-spin. Nothing worked. Vernier engine 3 never responded. On September 23, Surveyor 2 impacted the lunar surface southeast of Copernicus crater at approximately two thousand seven hundred meters per second. Total loss. Zero surface data returned. The first failure in fifty-one degrees of the engine.

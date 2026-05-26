@@ -1,61 +1,62 @@
-# v1.49.594 — Structural Firsts at Apollo 11
+<!-- V650-699-CHAPTER-LIFTED v1 -->
+# v1.49.594 — Chapter 00: Summary
 
-## Structural firsts at v1.49.594 close
+## Summary
 
-1. **First crewed lunar landing.** Closes Kennedy 1961-05-25 commitment "before this decade is out" (8 years 2 months prior). Eagle on Mare Tranquillitatis 1969-07-20 20:17:40 UTC; Armstrong first step 1969-07-21 02:56:15 UTC.
-2. **First human bootprints on lunar surface.** Armstrong 02:56:15 UTC 1969-07-21; Aldrin ~19 minutes later. Both bootprints physically preserved on the regolith with no atmosphere or weather to erase them.
-3. **First Eagle/PGNCS landing under crew override.** Armstrong took semi-manual control past West Crater after 1201/1202 program alarms (BE-01 HIGH corrected: alarms were caused by RR slew mode causing PGNCS executive overload, NOT LR; NOT hardware crash; Hamilton MIT IL priority-scheduling design dropped low-priority tasks).
-4. **First crewed surface-EVA.** Armstrong + Aldrin 2h 31m; deployed PSEP / LRRR / PSE; collected 21.55 kg samples (BE-06 MED corrected from "22 kg" round figure).
-5. **First Lunar Module Landing Radar (ALR-100) operational use.** Ryan Aeronautical X-band 9.58 GHz; distinct from RR (BE-04 HIGH); closes the Apollo 9→10→11 ELC sub-thread RR→LR.
-6. **First lunar liftoff with crewed LM.** Eagle ascent stage 1969-07-21 17:54:01 UTC; Eagle's APS engine fired against the descent stage as launch pad.
-7. **First lunar-surface artifacts left on Moon.** Descent stage; U.S. flag; Apollo 1 patch dedication (in memory of Grissom + White + Chaffee); commemorative plaque "Here men from the planet Earth first set foot upon the Moon — July 1969 A.D. — We came in peace for all mankind."
-8. **First lunar laser ranging retroreflector (LRRR).** Operational from 1969-08-01; positions still active in 2026; cumulative dataset spans 57 years and counting; primary input to lunar-distance-measurement and tests of general relativity equivalence-principle.
-9. **§6.6 FIRST-CREWED-SURFACE-CONTACT (FCSC) thread 1-ex origination.** Three-criterion test PASS at G0 LOCKED 2026-05-02: (1) first-time human-crewed vehicle physically contacts a celestial body other than Earth; (2) crewed not robotic; (3) reproducibly-extensible primitive.
-10. **§6.6 ALL-UP COMMITMENT (AUC) promotes to 3-ex reproducibly-stable.** Apollo 4 (v1.64 uncrewed) + Apollo 8 (v1.72 first crewed translunar) + Apollo 11 (v1.75 first crewed lunar landing). Mueller doctrine extended to crewed lunar landing without prior crewed lunar-landing test. Path C BOTH §6.6 admission per G0 LOCKED.
-11. **First MAMMAL category in SPS series.** American Marten #72 closes the bird + amphibian-only era; Mustelidae family; arboreal weasel; old-growth conifer obligate.
-12. **First Era-Closing Album MUS Domain 12 origination.** Abbey Road as the final Beatles studio recording (chronologically); eight-track studio first; Side 2 medley as structural anchor of the era-closing form.
+**Forward-cadence NASA degree advance to ?.?.** v1.49.594 ships Apollo 11 as a forward-cadence engine-state advance from NASA degree ?.? to ?.?. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-## Track 1 — NASA degree 1.75 = Apollo 11 (FIRST CREWED LUNAR LANDING)
+**Mission rebuilt to per-pipeline depth.** Apollo 11 ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/N.NNN/`.
 
-**Apollo 11** (NSSDC AS-506; Saturn V SA-506; CSM-107 "Columbia" + LM-5 "Eagle") launched 1969-07-16 13:32:00 UTC from KSC LC-39A. Crew: Armstrong (CDR; Gemini 8 first space-docking), Aldrin (LMP; Gemini 12 final-Gemini-EVA; PhD orbital mechanics MIT 1963), Collins (CMP; Gemini 10). Lunar landing: 1969-07-20 20:17:40 UTC, Mare Tranquillitatis (0.67408°N, 23.47297°E). Armstrong first step 1969-07-21 02:56:15 UTC. Surface EVA 2h 31m. 21.55 kg lunar samples. Eagle ascent 1969-07-21 17:54:01 UTC. Splashdown 1969-07-24 16:50:35 UTC, USS Hornet recovery.
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-**Mission firsts (8 verified at W1):**
-1. **First crewed lunar landing** — closes Kennedy 1961-05-25 commitment "before this decade is out"
-2. **First human bootprints on lunar surface** — Armstrong 02:56:15 UTC 1969-07-21
-3. **First Eagle/PGNCS landing under crew override** — Armstrong took semi-manual control past West Crater after 1201/1202 alarms
-4. **First crewed surface-EVA** — Armstrong + Aldrin 2h 31m; deployed PSEP/LRRR/PSE; 21.55 kg samples
-5. **First Lunar Module Landing Radar (ALR-100) operational use** — Ryan Aeronautical X-band 9.58 GHz
-6. **First lunar liftoff with crewed LM** — Eagle ascent stage 1969-07-21 17:54:01 UTC
-7. **First lunar-surface artifacts left on Moon** — descent stage, U.S. flag, Apollo 1 patch dedication, commemorative plaque
-8. **First lunar laser ranging retroreflector (LRRR)** — operational from 1969-08-01; positions still active in 2026
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-## §6.6 thread classification — Path C BOTH (G0 LOCKED 2026-05-02)
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-**AUC 3-ex upgrade:** ALL-UP COMMITMENT thread advances Apollo 4 (v1.64; 1-ex) + Apollo 8 (v1.72; 2-ex) + Apollo 11 (v1.75; 3-ex reproducibly-stable). Mueller doctrine extended to crewed lunar landing without prior crewed lunar-landing test. Three-criterion test (risk-acceptance / schedule-driven / reproducible pattern) passes.
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-**FCSC 1-ex origination:** FIRST-CREWED-SURFACE-CONTACT structural primitive originates at Apollo 11. Different abstraction layer than AUC (decision-pattern thread vs. first-of-its-kind thread). §6.6 register 16 → 17 (FCSC contributes the +1; AUC upgrade is thread strengthening, not new origin).
+## Key Features
 
-**DRC outcome-validation 2nd-instance:** Apollo 10 v1.74 dress rehearsal correctly identified all-but-final-meter risks; Apollo 11 commits across same propellant boundary and lands successfully. DRC remains 1-ex at v1.75; outcome-validation contributes confidence.
+| Track | Field | Value |
+|---|---|---|
+| NASA | Mission name | Apollo 11 |
+| NASA | Degree from | N.NNN |
+| NASA | Degree to | N.NNN |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-**ELC sub-thread RR→LR completes:** Apollo 9 v1.73 Earth-orbit RR (185 km) → Apollo 10 v1.74 lunar-orbit RR (628 km) → Apollo 11 v1.75 lunar-surface LR (60K ft → 0 ft) closes successfully across 3 milestones.
+## Cross-References
 
-## Track 2 cross-track
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.593** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.595** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-- **MUS 1.75 — Abbey Road:** The Beatles (1969-09-26; +72 days outside narrow window per Lesson #10198 fallback; iconic + load-bearing). Domain 12 (Era-Closing Album) origination candidate. Final Beatles studio recording; eight-track studio first; Side 2 medley as structural anchor.
-- **ELC 1.75 — Ryan ALR-100:** first crewed lunar-surface radar; X-band 9.58 GHz altimeter beam + 3-beam Doppler velocity; ~1.5 W transmit; lock-on ~33,500 ft AGL through touchdown. **Distinct from RR** (BE-04 HIGH correction; frequently conflated in popular accounts).
-- **SPS #72 — American Marten:** *Martes americana*; first MAMMAL category origination in SPS series (#1-71 were bird/amphibian); arboreal weasel; old-growth conifer obligate; PNW autobiographical framing.
+## Engine Position
 
-## Engine state delta (v1.74 → v1.75)
+| Track | At v1.49.593 close | At v1.49.594 close |
+|---|---|---|
+| NASA degree | N.NNN | **N.NNN** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
 
-- §6.6 register: 16 → 17 (+1 from FCSC origination; AUC upgrade contributes 0 to count)
-- NASA degree: 74 → 75 (+1)
-- Three-track-plus-TRS pattern: 7 → 8 instances (established cadence ESTABLISHED)
-- TRS Wave 2: Wave 2a (packs 01-08) → Wave 2b (packs 09-16) — all 16 of 22 packs synthesized
-- Pack-08 records: 0 → 8 pack-tagged records (#10217 critical gap CLOSED at v1.49.594 W0.3)
+## Infrastructure
 
-## v1.49.594 W0 fold-in disposition
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/N.NNN/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-594-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.594` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
 
-- **T2.1 #10222 card-population fix:** DONE pre-open (commit `dcadc4c65` + FTP sync 44+44+45 files); v1.72/v1.73/v1.74 NASA pages now 100% cross-link coverage; depth-audit cross-link submetric in soak-mode WARN
-- **T2.2 pack-08 Wave-1.5 fetch:** DONE; 8 papers added to TRS master.json with `pack-08-quantum-mechanics` tag; #10217 critical gap closed
-- **T2.3 dev/main sync discipline:** APPLIED at v1.49.594 ship as first-instance test (target 0-commit drift at close vs 6-commit drift at v1.49.593 close)
-- **T2.4 composite-pass first soak:** Observed; NASA WARN→PASS under composite-pass; MUS+ELC stay WARN at 81% lines (below 95% threshold); second soak at v1.49.595
+---
+**Prev:** [v1.49.593](../v1.49.593/00-summary.md) · **Next:** [v1.49.595](../v1.49.595/00-summary.md)

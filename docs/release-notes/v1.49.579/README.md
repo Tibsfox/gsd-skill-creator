@@ -29,6 +29,20 @@ Univariate Bayesian sequential A/B testing — extends `src/ab-harness/` (built 
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.579 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** v1.49.579 ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 **NEW SRC/BAYES-AB/ SUBSYSTEM LANDED.** v1.49.579 introduces `src/bayes-ab/` as a first-class subsystem of the gsd-skill-creator codebase: five source modules (`types.ts`, `conjugate.ts`, `ipm-boed.ts`, `coordinator.ts`, `index.ts`) plus four `__tests__/` files. The subsystem provides closed-form Beta-Bernoulli posterior updates, a Marsaglia-Tsang Gamma-based Beta sampler with Best (1978) shape-boost, an IPM-BOED design selector that consumes an explicit `modelSamples: (d, θ) => number[]` callback, and a sequential coordinator `runBayesAB` that delegates stopping authority to the existing JP-002 anytime-valid e-process at `src/orchestration/anytime-gate.ts`. The subsystem is *not* a new e-process — it consumes the canonical sequential-stopping surface already shipped at v1.49.577. Both sides converge on a single design rule: every new sequential-decision module reuses `src/orchestration/anytime-gate.ts`, and the same Type-I-error-bounded mechanism powers both the frequentist sign test in `src/ab-harness/coordinator.ts` and the Bayesian sequential loop in `src/bayes-ab/coordinator.ts`.
 
 **JP-022 SUBSTANTIVELY CLOSED AT W4.** The W4 commit `47551ad0e` is the boundary: before, `MAX_SHIFT_STDS = 1.5` and `VAR_SHRINK = 0.8` exist as `const` declarations in `src/ab-harness/wasserstein-boed.ts`; after, they don't, and `wassersteinExpectedUtility` is a thin adapter that delegates to `selectIpmBoedDesign` in the new `src/bayes-ab/ipm-boed.ts`. The module docstring upgrades from "illustrative IPM-aware heuristic" to "Verified-against arXiv:2604.21849 §3"; the `## Limitations` block trims three heuristic-posterior bullets and keeps only the multivariate / sliced-Wasserstein DEFER. Both sides of the rewrite (algorithm relocation + adapter slim-down) ship in parallel as a true delete-then-replace — no deprecation period, no soft-delete behind a flag, no shim. The `wasserstein1d` primitive itself stays put — it was correct as authored, is now exported and consumed by `src/bayes-ab/ipm-boed.ts`. Four honesty-audit tests grep the source string and assert absence of `MAX_SHIFT_STDS`, `VAR_SHRINK`, the "illustrative heuristic" framing, and the trimmed Limitations bullets — these tests are themselves a forward-protection artifact that catches any future regression that tries to reintroduce a heuristic constant under the IPM-BOED algorithm's name.

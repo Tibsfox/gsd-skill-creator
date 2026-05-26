@@ -15,6 +15,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.572 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** v1.49.572 ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 > The Amiga's Agnus, Denise, Paula, and Gary worked because each chip did exactly one thing *and* the handoffs between them were mathematically defined -- not chosen by taste.
 
 The week of April 17-23, 2026 arXiv harvest independently rederived that lesson across six mathematical domains. Each of the six research modules strengthens exactly **one** GSD asset; the synthesis lives in the mathematically-defined handoffs.

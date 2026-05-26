@@ -11,6 +11,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.583 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** Degree 65: The Persistent Constellation ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 v1.65 couples Pioneer 8 — the third element of the four-platform Pioneer 6/7/8/9 heliocentric solar-monitoring constellation, launched 1967-12-13 at 14:08:00 UTC on a Thor-Delta E1 from Cape Kennedy LC-17B and operational continuously for 28 years 8 months through 1996-08-22 last contact (with successful 1995 reactivation confirming both transponders functional after 27.5 years) — with Earth (Dylan Carlson)'s seminal *Earth 2: Special Low-Frequency Version* (Sub Pop SP185, 1993, recorded at Avast! Studios in Seattle by Stuart Hallerman; three tracks across approximately 73 minutes; slowly-modulated detuned guitar drones at glacial tempo with no vocals and no conventional rhythmic articulation) and the Sandhill Crane (*Antigone canadensis*) territorial bugle (a 1–2 second resonant trumpet-call delivered with fundamental ~280–440 Hz produced via the ~1.0–1.2 m coiled trachea half-wave resonant chamber, identity-fixed across the bird's adult tenure and dyadic in the unison-call form). All three threads embody the same structural decision — **PERSISTENT-CONSTELLATION-LISTENER**: identity is carried by a sustained signal across long durations, and survival is via multiplicity (constellation, ensemble, paired-bond) rather than via single-platform robustness. v1.65 opens the §6.6 PERSISTENT-CONSTELLATION-LISTENER process variant at single-exemplar status; CHAIN-CONVENTIONS stays at v1.4. It carries forward §6.6 ALL-UP COMMITMENT and LIFT-AND-RESET (both single-exemplar from prior degrees) without extension, and the SUCCESS-AFTER-FAILURE thread remains closed at the 3-exemplar §6.6 candidate amendment threshold from v1.64. v1.65 also closes MUS Domain 1 (Pitch & scales) at 6/6 and advances ELC Domain 10 (Mixed-signal & RF) from 3/5 to 4/5 — MUS now has only Domain 5 Form (5/6) below target, and ELC has 4 below-target Pass-1 slots remaining.
 
 **FINDING. PERSISTENT-CONSTELLATION-LISTENER opens as a §6.6 thread origin candidate at single-exemplar status — the temporal complement of ALL-UP COMMITMENT.** v1.64 opened ALL-UP COMMITMENT (the inaugural single first commit; whole-stack-bet-on-first-attempt). v1.65 opens PERSISTENT-CONSTELLATION-LISTENER as its temporal complement: the *sustained* commit that follows, where identity is carried by the unwavering held signal across decades. The distinction is structurally sharp — Apollo 4 was inaugural-first-flight; Pioneer 8 was constellation-continuation deployment number three of four. The §6.6 register grows to 9 exemplars across 2 reproducibly-stable + 3 candidate variants (PRINCIPLE-TRINITY 3 + CHANNEL-PARALLELISM 3 + LIFT-AND-RESET 1 + ALL-UP COMMITMENT 1 + PERSISTENT-CONSTELLATION-LISTENER 1). Candidate exemplars explicitly registered for the 2nd and 3rd PERSISTENT-CONSTELLATION-LISTENER slots: Pioneer 9 (1968 launch; fourth element of the same heliocentric constellation; fourth Pioneer transponder confirmed alive into the 1990s), ISEE-3 (1978 launch; sun-Earth L1 monitor with multi-decade reactivation campaign in the 2010s), ACE (1997 launch; ongoing solar-wind monitoring at L1), and Voyager 1+2 (1977 launch; the canonical multi-decade interstellar persistent-listener pair). Archive threshold ~v1.85: if the variant fails to accumulate two more exemplars by then, archive as single-exemplar narrative anomaly.

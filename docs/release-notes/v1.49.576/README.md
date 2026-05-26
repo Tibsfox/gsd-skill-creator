@@ -14,6 +14,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.576 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** v1.49.576 ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 **GSD is different from upstream, not behind it.** The mission began as a self-audit: ten OOPS documents (00-09) compared against upstream `gsd-build/get-shit-done@1.38.3` and against the local `gsd-skill-creator` repo. Part A produced the 65-row three-way alignment matrix; Part B closed every actionable row on the same release tag. The convergent-discovery framing carried over from v1.49.573-v1.49.575 and held at row granularity.
 
 **Only 17 rows are local drift, not 65.** Of the 65 matrix rows, only 17 are local drift (DIVERGENT-DRIFT), 21 are intentional substrate divergence the OOPS corpus and upstream do not yet have language for, and the remaining 27 are aligned, missing-upstream by design, or info-only. The implementation half therefore had a smaller, sharper target than a naive "audit found 65 things, fix them all" framing would have produced.

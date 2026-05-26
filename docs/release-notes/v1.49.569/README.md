@@ -15,6 +15,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.569 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** Drift in LLM Systems ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 **Two questions answered in one release.** v1.49.569 answers (1) what the current academic understanding of LLM drift is — across knowledge, alignment, and retrieval surfaces, with full citation discipline and 29-source coverage — and (2) what the gsd-skill-creator codebase does about it. The first answer is `drift-mission-final.pdf` (42 pages, 3-pass xelatex). The second is seven defense modules in `src/drift/`.
 
 **42-page, 29-source research document.** `drift-mission-final.pdf` covers four modules: Knowledge & Factual Drift (A), Alignment & Task Drift (B), Context & Retrieval/SSoT Drift (C), and Cross-Drift Coupling & GSD Ecosystem Mapping (D). Unified taxonomy of 11 phenomena in `schema/drift_taxonomy.json`. Full-PDF Opus editorial review (Phase 684.1) of all 29 papers: 24 supported, 5 partial, 0 mismatch, 0 unresolved; average rigor score 4.03 / 5.

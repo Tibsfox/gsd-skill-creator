@@ -1,45 +1,62 @@
-# v1.49.597 — Structural Firsts + Engine State
+<!-- V650-699-CHAPTER-LIFTED v1 -->
+# v1.49.597 — Chapter 00: Summary
 
-## Structural firsts at v1.49.597 close
+## Summary
 
-1. **First user-facing browser-tab feature with live-data parity** — the GSD Intelligence Dashboard at `http://localhost:3030/intelligence.html` reaches feature equivalence with the Tauri shell. All 18 KB commands dispatch via HTTP through the IPC-to-HTTP bridge; all 5 SSE event types broadcast from server to browser-tab subscribers within the 250ms target. Closes the v1.49.597 spec promise "same UI bundle in Tauri shell AND browser tab".
-2. **First mission-package-as-MILESTONE-CONTEXT cycle** — `.planning/staging/inbox/intelligence-dashboard/` (5 docs + 15 component specs from a 2026-05-02 vision-to-mission conversation) served as the entire milestone context. PROJECT.md + STATE.md were populated from the package without a `/gsd-discuss-milestone` cycle. Pattern OPENED at v1.49.597; promotes to ESTABLISHED at second instance.
-3. **First three-transport-against-one-KB architecture** — Tauri shell IPC + browser-tab HTTP bridge + vitest/Node strict-reject. Same 18-command surface; same SQLite WAL; same in-process IntelligenceEventBus singleton broadcasting to whichever transport currently has subscribers. Architectural anchor for any future dual-mode (Tauri ↔ browser-tab) work in the codebase.
-4. **First milestone with three intra-milestone Phase fold-ins** — Phase 826.5 (IPC-to-HTTP bridge, added during 826 execution), Phase 827 (browser-tab parity completion, folded in 2026-05-03 from a candidate-v1.49.598 staging package), Phase 828 (operational-debt cleanup, added during ship-pipeline manual smoke). All shipped as part of v1.49.597 rather than spinning up separate stranded-predecessor milestones. Pattern registered as Lesson #10224.
-5. **First load-bearing integration of all M1-M8 KB primitives** — the intelligence dashboard exercises the full Memory Arena stack (M1 Semantic Memory Graph indirectly via project KB, M3 Decision-Trace Ledger via the meeting-record format, M4 Branch-Context via per-meeting state machines, M5 multi-turn retrieval indirectly via the AI investigator skill's load-kb-context tool). v1.49.597 is the first milestone where the user-facing surface has full end-to-end visibility into the substrate built across v1.49.500–v1.49.596.
-6. **Tree-sitter analyzer pipeline with 8 languages + 7 cross-file finding detectors** — TS/Rust/Python/Bash/GLSL via tree-sitter, plus 3 supporting languages. 7 detector modules: dead code, hot-spots (churn × complexity), coupling, drift, schema mismatch, test gaps, doc gaps. <5-min first-pass scan target met for <100K-LOC repos.
+**Forward-cadence NASA degree advance to ?.?.** v1.49.597 ships GSD Intelligence Dashboard as a forward-cadence engine-state advance from NASA degree ?.? to ?.?. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-## Engine state at v1.49.597 close
+**Mission rebuilt to per-pipeline depth.** GSD Intelligence Dashboard ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/N.NNN/`.
 
-| Surface | Value | Change from v1.49.596 |
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
+
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
+
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
+
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
+
+## Key Features
+
+| Track | Field | Value |
 |---|---|---|
-| NASA degree | 1.77 (Apollo 13) | unchanged |
-| MUS Domain register | 14 (Solo-Debut-After-Group-Dissolution) | unchanged |
-| ELC degree | 1.77 (LM Aquarius lifeboat) | unchanged |
-| SPS series | #74 (Northern Spotted Owl) | unchanged |
-| §6.6 register | 21 exemplars | unchanged |
-| TRS substrate | M0 CLOSED at v1.49.596; M1 Foundation **deferred** to v1.49.598+ | (counter-cadence position) |
-| Three-track cadence | ESTABLISHED 10th instance at v1.49.596; this milestone is counter-cadence | (no advance) |
-| Intelligence dashboard | **NEW** — three transports, 18 commands, 5 SSE event types | (first user-facing surface) |
-| Lesson #10221 (dev/main sync) | ESTABLISHED at v1.49.596; held cleanly | (canonical now) |
-| Pre-tag-gate | 7-step composite still active (build + vitest + completeness --strict + CI-on-dev + www-bundles + depth-audit + CLAUDE.md auto-render) | unchanged |
-| Vitest count | ≥29,500 pass (was 28,767 at v1.49.596 close) | +~770 |
-| Rust cargo count | 681+ | unchanged from v1.49.596 |
+| NASA | Mission name | GSD Intelligence Dashboard |
+| NASA | Degree from | N.NNN |
+| NASA | Degree to | N.NNN |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-## Build artifacts shipped
+## Cross-References
 
-- **130 source files added/modified across 9 phases** spanning `src/intelligence/` (analyzer + KB + events + bridge), `src-tauri/src/intelligence/` (Tauri commands + file watchers), `desktop/intelligence/` (planning UI + live-work UI bundles), `dashboard/` (intelligence.html + intelligence/*.bundle.js + intelligence/*.css), `scripts/serve-dashboard.mjs` (IPC-to-HTTP bridge wiring + IntelligenceEventBus subscription), `package.json` (intelligence:build + intelligence:serve scripts).
-- **5 new SQLite tables** in `src/intelligence/db/migrations/001_initial.sql` — projects, snapshots, findings, meetings, decisions (with developer_modifications JSON column for editDecision).
-- **3 new JSON schemas** in `src/intelligence/schemas/` — vision-seed, console-request, bundle-manifest. All validate against existing `.planning/staging/` and `.planning/console/` examples.
-- **1 new auto-activating skill** at `.claude/skills/intelligence-investigator/` (Phase 825 / C12) — generates briefings + triages findings + writes meeting records when invoked from the dashboard's "investigate" action.
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.596** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.598** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-## Next milestone scope
+## Engine Position
 
-v1.49.598+ candidates (not committed; presented for triage):
+| Track | At v1.49.596 close | At v1.49.597 close |
+|---|---|---|
+| NASA degree | N.NNN | **N.NNN** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
 
-- **TRS M1 Foundation Wave 0-1** — schema work + page templates + pairing-map skeleton (deferred from v1.49.597 per counter-cadence design).
-- **Pack-11/12/13 Wave-1.5 fetches** (carry-forward from v1.49.596 close).
-- **NASA degree 1.78 candidate** per Path Y CSV (Apollo 14 likely).
-- **Real-browser Playwright smoke test** for the intelligence dashboard (closes Lesson #10222).
-- **Dashboard generator output assertion test** (closes Lesson #10223 — fail loudly when parser drift hides data).
-- **Promote 3 IntelligenceKB methods from optional to required** (cleanup task: edit/withdraw/preview decision are concretely implemented on KBStore + IntelligenceKBStub now; the optional `?` markers from C00 can be lifted).
+## Infrastructure
+
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/N.NNN/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-597-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.597` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.596](../v1.49.596/00-summary.md) · **Next:** [v1.49.598](../v1.49.598/00-summary.md)

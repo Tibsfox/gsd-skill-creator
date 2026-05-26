@@ -14,6 +14,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.550 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** Platform Alignment Milestone ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 **Platform Alignment landed twelve improvements sourced from OOPS research with zero new runtime dependencies.** The mission package at `docs/missions/platform-alignment/` enumerated twelve platform gaps — six missing hooks, three oversized Gastown skills, three activation-conflicting skill pairs, relevance-scored memory loading, skill lifecycle frontmatter, and the Wave 0 shared-contracts substrate — and the four waves executed them in order over the run-up to the v1.50 ship date. Wave 0 shipped the shared types (frontmatter schema, activation-equivalence harness, memory tag types, hook-output helper). Wave 1 added six deterministic hooks (PreCompact, PostCompact, FileChanged, PermissionDenied, Notification, WorktreeCreate) plus a worktree-cleanup shell script. Wave 2 split three oversized Gastown skills into SKILL.md + references, merged three skill pairs to end activation conflicts, added relevance-scored memory loading behind a token budget, and backfilled every SKILL.md with `format/version/status/updated` frontmatter. Wave 3 ran the full test surface, repaired two Wave 2B safety-critical regressions and two Wave 2D fixture-drift failures, and tagged the release. Zero new runtime dependencies, consistent with the cartridge-forge precedent from v1.49.549.
 
 **Gastown skill splits cut the 6-skill dispatch token cost by 67.8%.** The three oversized Gastown skills — `sling-dispatch` (2,305 words), `done-retirement` (2,267 words), `gupp-propulsion` (1,961 words) — each carried 1,500+ words of history, examples, and boundary prose in the main SKILL.md. The Wave 2B refactor pulled that content into `references/gastown-origin.md`, `references/boundaries.md`, `references/examples.md`, and left activation-critical prose in SKILL.md at ≤820 words each. Target word counts: sling-dispatch 780, done-retirement 815, gupp-propulsion 807. The full Gastown 6-skill multi-agent dispatch scenario dropped from ~24,271 tokens to ~7,813 tokens — a 67.8% reduction on the load path that users pay every time the dispatch chipset activates. Activation equivalence was proven by `assertActivationEquivalence` from Wave 0: every trigger term from the original skill is verified present in the split skill before the refactor commits.

@@ -21,6 +21,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.578 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** v1.49.578 ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 v1.49.578 is the keeper milestone: a one-day Solo-profile substantiation pass that took the four "ready for X but not actually X" footnotes from the v1.49.577 JULIA-PARAMETER handoff and turned each into a commit SHA, an on-tree path, an automated verification script, or an explicit DEFER backed by read-of-source evidence -- closing the open-items count from 5 to 1, in eleven commits across the v1.49.577 close (`1b9eedb9b`) and the v1.49.578 dev close (`520419af8`). The substantive milestone (v1.49.577) booked the value across forty absorption candidates and twenty phases. The substantiation milestone the next session collected on the receivables. No new `src/` subsystem was added. No new research was performed. No new CLAUDE.md anchor was introduced. The work was structural: write the script, move the citations, wire the second call site, find the real caller -- and where the structural shape did not fit, name the mismatch and DEFER.
 
 **HONEST-DEFER WITH EVIDENCE PATTERN ESTABLISHED.** W2a (`selector.ts`) and W2c (`mesh-degree-monitor.ts`) shipped DEFER verdicts grounded in read-of-source evidence rather than wire-up-to-close-the-line-item. Both call sites lack the streaming-decision shape that anytime-valid e-processes earn their keep against: `selector.ts` is one-shot batch ranking, `mesh-degree-monitor.ts` is event-driven plus hard-rule plus one-shot escalation. Forcing the gate into either site would have produced silent inert code that the next milestone would have to audit and likely undo. The DEFER reasoning is documented in mission-package component specs (`.planning/missions/v1-49-578-jp-substantiation/components/01-jp002-selector.md` and `components/03-jp002-mesh-degree-monitor.md`) so a future reader sees "two sites surveyed, structural reason recorded" rather than "two sites still pending." In parallel, the wired site (`draft-verify-router.ts`, W2b) demonstrates the positive case -- when the streaming-decision shape is present, the gate maps cleanly onto the call site without fighting its natural control flow. Both sides converge on the same working thesis: quality of fit is the measure, not the wire-up count.

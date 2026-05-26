@@ -8,6 +8,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.598 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** Apollo 14 Fra Mauro Highlands ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 v1.49.598 ships the **Apollo 14 Fra Mauro Highlands** milestone — the recovery mission after Apollo 13's LOI abort, attempted again with the Cortright Report hardware redesign + the first wheeled vehicle on the Moon (the Modular Equipment Transporter / MET) + the first Apollo Guidance Computer in-flight software patch (Don Eyles' uplinked DSKY abort-bit-mask, ~60 keystrokes, ~2 hours from anomaly to patch) + the first successful sample-return from the lunar highlands (42.80 kg of anorthositic material ~4.0–4.5 Gyr old, predating mare basalts by ~500 Myr).
 
 The cross-track structural pair anchors on **second-attempt-after-modest-precedent canonical re-establishment**: Apollo 14 = Apollo 13's mission attempted again; Carole King's *Tapestry* = King's solo voice attempted again after the modest *Writer* (1970) reception. Both released within the same Jan 31 – Feb 10 1971 window. *Tapestry* released 1971-02-10, INSIDE Apollo 14's mission window — the second observation point (after v596 *McCartney*) confirming the **#10232 INSIDE-window MUS pick soak**.

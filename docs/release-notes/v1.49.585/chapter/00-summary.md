@@ -1,71 +1,62 @@
-# 00 — Summary: v1.49.585 Concerns Cleanup / Foundation Shoring
+<!-- V650-699-CHAPTER-LIFTED v1 -->
+# v1.49.585 — Chapter 00: Summary
 
-**Released:** 2026-04-29
-**Type:** counter-cadence operational-debt milestone (NOT a NASA degree)
-**Closes:** five categories of social-rule operational debt → deterministic gates
-**Opens:** counter-cadence cleanup-mission cadence (recurring at ~every 30 forward milestones)
-**Engine forward-state:** UNCHANGED — degree remains 66/360 (18.3%)
+## Summary
 
-## Structural firsts
+**Forward-cadence NASA degree advance to ?.?.** v1.49.585 ships Concerns Cleanup / Foundation Shoring as a forward-cadence engine-state advance from NASA degree ?.? to ?.?. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-- **First counter-cadence cleanup milestone in engine history.** v1.49.585 ships zero NASA / MUS / ELC / SPS forward-cadence content. Its purpose is to convert accumulated prose-only safety rules and operational debt into deterministic enforcement. Establishes the precedent that quality-of-foundation milestones are first-class ship-pipeline citizens.
-- **First milestone where newly-installed gates fire against their own milestone's execution.** `self-mod-guard.js` BLOCK events fired ≥7× during W1-W3 work — the C01 hook caught real false-positives in the live harness while the milestone that installed it was still in flight. The milestone is its own integration test.
-- **First milestone where the system meta-tests itself at ship time.** Phase 3 of the W4 ship pipeline runs `check-completeness.mjs --current --strict` against v1.49.585's own release-notes; runs `chapter.mjs` idempotent-write against v1.49.585's own chapters (must produce zero diff); fires the pre-push hook against v1.49.585's own push (must BLOCK on simulated-missing files; ALLOW on clean state).
-- **First mid-mission architectural correction landed via option-C scope-expansion.** C08 was originally specced as env-var override + fail-fast (option B); user pivoted to full deprecation (option C) when the artemis-ii framing was found to be wrong. Wrapper rewrite delivered 30 lines shorter and structurally simpler than the original spec.
-- **First `.gitattributes` in the repo.** Formalizes line-ending normalization + binary-file diff strategy. Was implicit-via-`.gitignore`-and-Git-defaults until v1.49.585.
-- **First persisted citation-debt ledger.** `.planning/citation-debt.json` with 9 V-flag entries from v1.49.583-v1.49.584; `tools/citation-debt/list.mjs` makes the ledger queryable by status / mission / citation-target.
-- **First milestone with both `project-claude/agents/` and `.claude/agents/` reconciled.** Source-of-truth at 49 entries (was 10) post-promotion of 39 ad-hoc runtime-only agents; install.cjs --dry-run reports zero new agents.
+**Mission rebuilt to per-pipeline depth.** Concerns Cleanup / Foundation Shoring ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/N.NNN/`.
 
-## Engine state at close
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-| Metric | Value at v1.49.585 close |
-|---|---|
-| Degree | 66 of 360 (UNCHANGED — no forward-cadence content) |
-| Percent complete | 18.3% (UNCHANGED) |
-| Pass | 2 (UNCHANGED) |
-| Hard-gated forward-degree count | 8 (UNCHANGED — v1.59 through v1.66) |
-| §6.6 register exemplars | 10 (UNCHANGED — 2 reproducibly-stable + 4 candidate variants) |
-| MUS Pass-1 | COMPLETE (UNCHANGED — closed at v1.66) |
-| ELC era state | si-discrete CLOSED at chronological boundary (UNCHANGED) |
-| simulation.js block count | 68 (UNCHANGED) |
-| Carryforward V-flags | 9 deferred (NOW PERSISTED to `.planning/citation-debt.json`) |
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-| Operational-debt category | Items closed | Gate installed |
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
+
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
+
+## Key Features
+
+| Track | Field | Value |
 |---|---|---|
-| Self-modification safety | 1 (writes to `.claude/skills\|agents\|hooks/`) | `.claude/hooks/self-mod-guard.js` PreToolUse Write\|Edit\|MultiEdit\|Bash |
-| Accidental commits to gitignored paths | 1 (git add of `.planning/` / `.claude/` / `.archive/` / `artifacts/`) | `.claude/hooks/git-add-blocker.js` PreToolUse Bash |
-| Citation-anchor drift in src code | 4 invariants (cooldown=7d, threshold=0.20, max-corrections=3, small-data-floor=12) | `src/dead-zone/__tests__/citation-invariants.test.ts` (5 vitest) |
-| Release-notes completeness drift | 1 (5-file structure + 200-byte minimum per file) | `.git/hooks/pre-push` calling `check-completeness.mjs --current --strict` |
-| Hand-authored chapter overwrite | 1 (refresh.mjs writing over hand-authored release-notes) | `tools/release-history/chapter.mjs` checksum-skip + `--force-regenerate` flag |
+| NASA | Mission name | Concerns Cleanup / Foundation Shoring |
+| NASA | Degree from | N.NNN |
+| NASA | Degree to | N.NNN |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-## Threads closed / opened / extended
+## Cross-References
 
-- **OPENED:** counter-cadence cleanup-mission cadence (origin at v1.49.585; recurrence target ~every 30 forward milestones; recommended trigger when CONCERNS audit surfaces ≥3 categories of social-rule debt).
-- **OPENED:** deterministic operational-gate layer (5 gates installed; documented in CLAUDE.md "Operational Gates" subsection with override env-var registry).
-- **EXTENDED:** `project-claude/agents/` source-of-truth (10 → 49 entries; 39 promoted; install.cjs schema-v2 autoDiscover handles the new entries automatically).
-- **EXTENDED:** CLAUDE.md "Quick Reference" with new "Environment Variables" subsection (5 vars: `SC_SELF_MOD`, `SC_FORCE_ADD`, `SC_SKIP_PREPUSH`, `SC_INSTALL_CALLER`, `RH_ENV_FILE`; deprecated alias `ARTEMIS_REPO_ENV`).
-- **CLOSED:** artemis-ii worktree-attached `.env` as canonical PG-credentials source (replaced by `<repo-root>/.env` with backward-compat deprecation notice for `ARTEMIS_REPO_ENV`).
-- **CLOSED:** 13/16 dead branches pruned (3 worktree-attached refused — `artemis-ii` / `nasa` / `wasteland/skill-creator-integration` — left intact pending separate per-worktree decision).
-- **CARRY-FORWARD:** all v1.49.584 thread states UNCHANGED — PCL 2-exemplar, GA 1-exemplar, ALL-UP COMMITMENT 1-exemplar, LIFT-AND-RESET 1-exemplar, PRINCIPLE-TRINITY 3-stable, CHANNEL-PARALLELISM 3-stable, SUCCESS-AFTER-FAILURE CLOSED.
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.584** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.586** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-## Component delivery summary
+## Engine Position
 
-| Phase | Components | Status |
+| Track | At v1.49.584 close | At v1.49.585 close |
 |---|---|---|
-| W0 — Schemas + specs | citation-debt schema, branch-prune allowlist, citation-anchors spec, hook-conventions spec | 4/4 G0-locked |
-| W1A — Hooks + invariants | C01 self-mod-guard.js + C02 git-add-blocker.js + C03 citation-invariants.test.ts | 3/3 LIVE |
-| W1B — Pipeline robustness | C04 chapter.mjs idempotent + C05 pre-push gate + installer | 3/3 PASS |
-| W1C — Scorer + template | C06 ELC scorer regex unify + C07 MUS Phase C template | 2/2 PASS |
-| W1D — Cross-repo + git | C08 RH_ENV_FILE deprecation + C09 .gitattributes + C10 branch-prune | 3/3 PASS (option-C scope-expansion on C08) |
-| W1E — Agent reconciliation | C12 audit + apply (39 promoted) | 1/1 PASS |
-| W2 — CLAUDE.md updates | Operational Gates subsection + Environment Variables subsection + agent-count truth + artemis-ii deprecation framing | 1/1 G2-approved |
-| W3 — Citation-debt persistence | C13 ledger seed (9 entries) + C14 list.mjs CLI | 2/2 G3-approved |
-| W4 — Integration + ship | C15 verification matrix + 5-file release-notes + meta-test + bump + tag + push + GH release | IN PROGRESS |
+| NASA degree | N.NNN | **N.NNN** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
 
-**Total: 12 components landed; 64 new tests across 16 components (5 vitest in-glob + 22 vitest forward-ready in `tools/**` + 22 bash hook/installer self-test cases + 8 vitest C14 + 7 misc).**
+## Infrastructure
 
-## Watchlist for forward milestones
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/N.NNN/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-585-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.585` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
 
-- **v1.49.586 small fixes (deferred from v1.49.585 known-issues §5.1, §5.2):** make `self-mod-guard.js` BASH detection proximity-aware (require write-operator within N tokens of protected-path token); refactor `.claude/hooks/__tests__/self-mod-guard.test.sh` to use `env -i` for fully-sterile invocation.
-- **Counter-cadence cleanup-mission #2 (forward target ~v1.49.615 / +30 forward milestones):** re-run codebase audit against `.planning/codebase/CONCERNS.md`-shaped output; identify next 3+ categories of social-rule debt to gate.
-- **Citation-debt cleanup sprint (forward target ~v1.49.595):** the 9 persisted V-flag entries (1 DEFERRED Sonics archive + 4 PARTIAL NPS I&M loon counts + 2 PARTIAL Pioneer 8 LNA pages + 3 COVERED paywalled BoW/J.Zool. table pages) — most should resolve via direct outreach (UW ethnoarc, NPS I&M IRMA portal, Wiley/BoW institutional access).
+---
+**Prev:** [v1.49.584](../v1.49.584/00-summary.md) · **Next:** [v1.49.586](../v1.49.586/00-summary.md)

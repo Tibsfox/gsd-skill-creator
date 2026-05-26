@@ -17,6 +17,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.580 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** v1.49.580 ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 v1.49.580 extends the Bayesian sequential A/B harness in `src/bayes-ab/` (built at v1.49.579 as the univariate scaffold) to multivariate parameters. The univariate Beta-Bernoulli + 1-D Wasserstein-IPM-BOED + `runBayesAB` triple shipped at v1.49.579 is now flanked by a strict-generalisation multivariate triple: Dirichlet-Multinomial conjugate update + sliced-Wasserstein primitive + `selectIpmBoedDesignMv` + `runBayesABMv`. The 1-D case is the K=2 specialisation of the new code path -- Beta is a Dirichlet of dimension 2; `wasserstein1d` is `slicedWasserstein` in d=1 -- and the two surfaces are deliberately parallel rather than auto-dispatching, with a numerical-equivalence test verifying agreement at the K=2 boundary. The "Limitations -- multivariate gap" footnote on `src/ab-harness/wasserstein-boed.ts`, carried since v1.49.577, is now closed and rewritten as a pointer to the new modules.
 
 **MULTIVARIATE EXTENSION COMPLETED.** Dirichlet-Multinomial conjugate priors land for k-arm tests with categorical outcomes; the multivariate-Normal coordinate is provisioned in the type vocabulary but defers continuous-multivariate inference (Inverse-Wishart) to a separate milestone. The closed-form posterior update `alpha' = alpha + counts` mirrors the v1.49.579 Beta update `a' = a + successes` in both shape and conjugacy guarantee. Reference values verified against `scipy.stats.dirichlet`. A user with a 3-arm A/B test (or 5-rubric skill scoring, or any K-way categorical experiment) was locked out of the Bayesian sequential harness at v1.49.579; after v1.49.580 close the same user calls `selectIpmBoedDesignMv(prior, designs, mvModelSamples)` and `runBayesABMv(...)` and gets the same shape of design recommendation + sequential-stop decision back.

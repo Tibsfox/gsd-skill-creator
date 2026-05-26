@@ -17,6 +17,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.558 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** v1.49.558 ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 The fifty-fifth paired release and the first in which the engine stops to grieve. On the afternoon of January 27, 1967, three American astronauts walked across the gantry at Launch Complex 34 at Cape Kennedy and climbed into Command Module 012 atop an unfueled Saturn IB. Virgil I. "Gus" Grissom -- Mercury 7 veteran, commander of Gemini 3, forty years old, Purdue mechanical engineer and Korean War combat pilot with one hundred missions and a Distinguished Flying Cross -- took the left couch. Edward H. White II -- the first American to walk in space, thirty-six, West Point and Michigan-trained aeronautical engineer, Olympic trials hurdler, husband and father of two -- took the center. Roger B. Chaffee -- rookie, thirty-one, Purdue aeronautical engineer, Navy photo-reconnaissance pilot who had flown over Cuba during the missile crisis, never yet in space -- took the right. The test was not supposed to be dangerous. It was a plugs-out checkout. Five hours of delays accumulated. The cabin was pure oxygen at 16.7 psi, a condition chosen so the capsule could vent to in-flight pressure during launch without letting outside air in. The cabin was full of Velcro, nylon netting, foam, paper, and flight suits. The hatch was a three-piece inward-opening assembly that required ninety seconds to open under best conditions and was effectively impossible to open against internal pressure. Both sides of this release -- the Apollo 1 crew in Command Module 012 and Damien Jurado in a small studio in Seattle thirty years later -- are held together by a shared discipline: the insistence that the work proceed on the basis of an accurate description of what has happened, not a consoling version of it.
 
 At 18:31:04.7 Eastern Standard Time, a brief voltage transient appeared on telemetry. Six seconds later a voice -- most likely Chaffee's -- reported fire in the cockpit. A second transmission followed: *"We've got a bad fire. Let's get out. We're burning up."* Within seventeen seconds the cabin ruptured from internal overpressure. Flame and toxic smoke filled the white room. North American Aviation pad technicians -- Donald Babbitt, James Gleaves, L. D. Reece, Steven Clemmons, Jerry Hawkins -- worked in darkness through asphyxiating fumes and removed the hatch in approximately five minutes. The three men inside were already dead. They had lived for perhaps fifteen seconds after the first report. The Apollo 204 Review Board, chaired by Langley's Floyd Thompson with astronaut Frank Borman among its members, concluded that no single failure had caused the accident: it was the combined result of a pure-oxygen atmosphere at elevated pressure, an unacceptable volume of flammable materials, substandard wiring workmanship with chafed insulation near coolant leak paths, and an inward-opening hatch that made emergency egress effectively impossible. Borman testified before Congress that spring. The phrase he used was *"a failure of imagination."* No one had imagined a pad fire. After January 27, 1967, imagining failure became a discipline. Both the review and the redesign proceeded in parallel, each side informing the other, with the Board's findings feeding directly into the Block II specification as fast as they could be formalized.

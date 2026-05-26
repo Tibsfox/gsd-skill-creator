@@ -20,6 +20,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.582 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** v1.49.582 ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 The Saturn V and the single-take. Degree 64 of the NASA Paired Release Engine -- the second three-track forward-cadence ship after v1.63, arriving on April 27, 2026, under closing dev commit `b79892978` and closing main commit `008e74df3` -- pairs Apollo 4 (AS-501) with The Sonics's *Here Are The Sonics* and the Common Loon's territorial yodel, and in doing so opens an entirely new §6.6 process variant (ALL-UP COMMITMENT) at single-exemplar status while simultaneously closing the §6.4 SUCCESS-AFTER-FAILURE thread at the 3-exemplar candidate amendment threshold. November 9, 1967, 12:00:01 UTC. Kennedy Space Center Launch Complex 39A. Eight hours thirty-seven minutes. Thirty-six thousand five hundred forty-five feet per second at reentry. Three structural commitments at three different scales -- engineering management (Mueller's all-up Saturn V test), artistic production (the Sonics whole-album single-session live tracking), bioacoustic identity (the loon's once-fixed individual yodel signature) -- and in parallel all three say the same thing: bet the whole stack on the first commit, and the post-decision artifact becomes the load-bearing object that subsequent work builds upon. The first launch from LC-39A. The first flight of the Saturn V launch vehicle. The first major Apollo program success after the L+286-day shadow of the Apollo 1 fire. The first 1960s-era artist in the S36 corpus. The first Common Loon, the first Gaviidae family, the first Gaviiformes order, the first diving-waterfowl species, the first sensitive-species-as-lake-acidification-indicator, and the first once-fixed-individual-signature acoustic feature in the SPS corpus. Twenty-four first-instance declarations in a single degree -- the densest first-instance count the engine has produced yet.
 
 **FIRST ALL-UP FLIGHT TEST OF SATURN V LAUNCH VEHICLE.** Apollo 4 (AS-501) on November 9, 1967 was the first all-up flight test of the Saturn V -- George E. Mueller's 1963 decision to commit every Saturn V subsystem to first-flight validation rather than progressive incremental stage-by-stage testing. The all-up gambit was contested between the NASA Office of Manned Space Flight (Mueller's pro-all-up position) and the Marshall Space Flight Center (Wernher von Braun's preferred incremental approach). Apollo 4 vindicated the all-up decision: the S-IC + S-II + S-IVB stages were each validated on first flight; the S-IVB second-burn restart simulated translunar-injection successfully; the schedule-compression delivered by all-up testing made the 1969 lunar landing technically achievable. Mueller's gambit and the Sonics's whole-album single-session live tracking are in parallel the same structural decision at different operational scales -- bet the whole stack on the first commit, and the post-decision artifact becomes the load-bearing object that everything downstream builds upon.

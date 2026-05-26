@@ -12,6 +12,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.561 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** Living Sensoria ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 v1.49.561 lands eight composable modules that extend gsd-skill-creator from a pattern log into a structured sensorium, plus refinement-wave and continuation-wave extensions for adaptive control, exploration, and representation.
 
 **Eight composable modules shipped default-off.** The five mechanism modules (M1–M5) provide a semantic memory graph with Leiden community detection, a three-tier hybrid memory system with αβγ scoring and reflection, an append-only decision-trace ledger, copy-on-write branch-context experimentation, and a multi-turn retrieval loop with KVFlow-style anticipatory preloading. The three substrate/boundary/relationship modules (M6–M8) add a Lanzara net-shift receptor layer for graded skill activation, a Markov-blanket boundary enforced at the TypeScript type level with a variational free-energy minimiser, and a bidirectional teaching and co-evolution accounting system with a five-axis Quintessence vital-signs report.

@@ -14,6 +14,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.553 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** v1.49.553 ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 The fiftieth paired release and the degree where everything happens on the first try. On September 12, 1966, a Titan II launched Gemini 11 from Launch Complex 19 at Cape Kennedy with Pete Conrad commanding and Dick Gordon as pilot -- Gordon's first spaceflight, Gordon born in Seattle, Gordon a graduate of the University of Washington with a degree in chemistry, class of 1951. Eighty-five minutes later -- before completing a single revolution of the Earth -- Conrad had rendezvoused and docked with the Agena target vehicle. First orbit. First try. No multi-orbit chase. No cautious approach over hours. The M=1 rendezvous profile: the technique Apollo would need when the Lunar Module ascended from the Moon's surface with limited consumables and no time for the leisurely fourth-orbit rendezvous of earlier Gemini flights. Conrad proved it worked. Launch to docking in 85 minutes. The shortest distance between two spacecraft in the Gemini program. Both the mission planners at Houston and the flight controllers at the Mission Operations Control Room recognized that this compression was the single most important orbital-mechanics demonstration of the entire Gemini program -- the profile Apollo would inherit wholesale.
 
 Then they went higher than any human had gone before. The Agena's Bell 8247 engine fired for approximately 26 seconds, boosting the docked stack to an apogee of 1,374 km -- more than three times higher than the International Space Station's typical orbit, nearly twice the altitude Young and Collins had reached on Gemini 10 two months earlier (763 km). From that altitude, Conrad and Gordon could see the curvature of the Earth extending to the horizon in all directions. Conrad reported being able to see from Africa to Australia in a single glance. The spacecraft passed through the inner Van Allen belt. The record would stand for 26 months -- until Frank Borman, Jim Lovell, and Bill Anders flew Apollo 8 to the Moon in December 1968. Dick Gordon, the Seattle kid who had studied chemistry at the University of Washington sixteen years earlier, was now the highest-flying human in history, 1,374 km above a planet that included, somewhere below the clouds, the campus where he had learned about molecular bonds. The altitude record and the songwriting commitment mirror each other at degree 49: both sides of the paired release reach their respective maxima at the same time, the altitude record and the energy record synchronized across the dual tracks.

@@ -9,6 +9,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.586 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** OAO-2 Stargazer / Mudhoney / Trumpeter Swan / CATALOG-WINDOW-OPENING ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 v1.49.586 ships the **sixth three-track forward-cadence degree** — NASA + MUS + ELC bundled at degree 67 — and OPENS the **CATALOG-WINDOW-OPENING §6.6 thread origin candidate at single-exemplar status**. The mission opens the op-amp era (1968–1975) at single-exemplar status (ELC 1.67), advances MUS Pass-2 over-target on Domain 7 (Production & mix) at 6/5 (the first MUS Pass-2 over-target advance after Pass-1 closure at v1.66), and closes ELC Pass-1 Domain 1 (DC analysis & biasing) at 4/4. Three founding-instance artifacts at three substrates instantiate one structural primitive: **founding-instance-as-window-opener** — a single-platform / single-album / single-monograph artifact opens a previously-inaccessible documentation window AND produces a sustained multi-decade reference output that subsequent work indexes against.
 
 **Track 1 (NASA forward triple):** OAO-2 Stargazer (NSSDC 1968-110A) launched 1968-12-07 at 08:40:09 UTC on Atlas SLV-3C Centaur-D from CCAFS LC-36B — the world's first space telescope per Guinness recognition (preceding HST by 22 years). 4y 2mo continuous UV photometric science 1968-12-07 → WEP HVPS failure 1973-02-01. Output: Davis 1972 *Celescope Catalog of Ultraviolet Stellar Observations: 5068 Objects* (Smithsonian Press) + Code et al. 33+ paper ApJ series 1970–1980 + Holm & Crabb 1979 ApJS 39, 195 (Paper XXXII) Atlas of UV Stellar Spectra. The 5,068-star catalog is the only systematic UV all-sky photometric reference during the 1972–1978 gap before IUE; subsequent UV missions (TD-1A, ANS, IUE, HST, GALEX) all reference the OAO-2 photometric system. Paired with Mudhoney *Superfuzz Bigmuff* (Sub Pop SP21, October 1988; recorded July–September 1988 at Reciprocal Recording with Jack Endino on 8-track analog tape; founding-instance grunge LP opening Sub Pop's *grunge* catalog window 8 months before *Bleach* SP34) and Trumpeter Swan (*Cygnus buccinator*, Richardson 1832; Banko 1960 NAF 63 founding-instance recovery-monitoring monograph opening 65 years of subsequent waterfowl census).

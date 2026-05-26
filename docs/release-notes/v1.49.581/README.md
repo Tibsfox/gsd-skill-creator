@@ -19,6 +19,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.581 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** v1.49.581 ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 The vernier hop and the banjo-plunk call. Degree 63 of the NASA Paired Release Engine arrives on April 27, 2026 under closing dev commit `46bc78c85` and closing main commit `d031ae739`, and pairs Surveyor 6's controlled-displacement maneuver above Sinus Medii on November 17, 1967 with Ben Gibbard's first solo studio album *Former Lives* (October 16, 2012, Barsuk Records, Aaron Espinoza producing) and the Green Frog (*Lithobates clamitans*) advertisement call across Pacific Northwest lowland ponds. The first controlled liftoff from another celestial body, the first solo idiom from a Death Cab for Cutie principal, and the first Ranidae family entry in the Sound of Puget Sound corpus all converge on the same temporal arc: ORIGIN, CONTROLLED DISPLACEMENT, RELAND-WITH-PERSISTENCE. The Hughes Aircraft Surveyor bus does not redesign for the maneuver; the same MMH/MON-10 bipropellant feed, the same throttle servos, and the same propellant valves that had executed terminal descent on every prior Surveyor are commanded to a new function via new commanded sequences. Gibbard does not leave Death Cab for Cutie; *Former Lives* runs in parallel to continuing band-collective work as a deliberate timbral stripping rather than a replacement. The Green Frog does not abandon eastern North America; aquaculture and pond-stocking in the 1930s and 1940s carry its lineage west, where naturalized populations establish on the Mississippi-drainage divide's far side and persist as a stable invasive resident. Three entities, three scales, one structural shape -- the §6.6 LIFT-AND-RESET process variant opens at degree 63 at single-exemplar status, candidate exemplars are explicitly registered for the 2nd and 3rd slots (Apollo translunar trajectory adjustments at v1.66+, Sea Otter PNW reintroduction at v1.65-v1.70, S36 reunion-tour patterns), and an archive threshold is set at v1.80 in case the variant fails to accumulate.
 
 **FIRST CONTROLLED LIFTOFF FROM ANOTHER CELESTIAL BODY.** Surveyor 6's vernier hop on November 17 1967 at 10:32 UT (2.5-second coordinated three-vernier burn at 150 lbf total thrust, ~4 m vertical, ~2.4 m lateral west, soft reland) is the first instance of a spacecraft commanded to lift off a planetary surface other than Earth under autonomous-sequenced control. The maneuver predates Apollo 11 ascent (July 21, 1969) by approximately 20 months and established the operational confidence basis for subsequent ascent maneuvers -- Apollo Lunar Module ascent stages, Mars sample-return ascent vehicles, Chang'e lunar-sample-return ascent. The vernier hardware that did the work was not redesigned. The same MMH/MON-10 bipropellant feed, the same throttle servos, the same propellant valves that had executed terminal descent on every previous Surveyor were commanded to a new function via new commanded sequences. The structural lesson -- that re-execution of existing hardware under new command sequences can produce a first -- generalizes beyond Surveyor 6 and beyond celestial mechanics, and is the same pattern that runs through Gibbard's solo *Former Lives* (DCFC's same authorial voice in a stripped-back vehicle) and the Green Frog's invasive establishment (the same ranid biology in a translocated context).

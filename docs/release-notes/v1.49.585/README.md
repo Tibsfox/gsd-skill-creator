@@ -9,6 +9,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.585 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** Concerns Cleanup / Foundation Shoring ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 v1.49.585 ships the first **counter-cadence cleanup milestone** in the engine: 5 categories of accumulated *social-rule* operational debt converted into **deterministic gates** that the harness or CI executes mechanically. The milestone gates itself at ship time — the very hooks, tests, and templates installed during W1-W3 are exercised against v1.49.585's own release-notes / push / chapters during the W4 ship pipeline. This is the strongest signal that the gate is real: the system enforces its new invariants against itself before the tag lands.
 
 **12 components, 5 phases + integration.** Hooks (`self-mod-guard.js` blocking writes to `.claude/skills|agents|hooks/`; `git-add-blocker.js` blocking adds of `.planning/` / `.claude/` / `.archive/` / `artifacts/`), pipeline robustness (chapter.mjs idempotent-write preserving hand-authored release-notes; pre-push completeness gate against missing 5-file structure), scorer + template hygiene (ELC scorer regex unified with MUS; MUS Phase C concept-registry .ts authored alongside subject-spec.json template), cross-repo + git posture (artemis-ii `.env` location FULLY DEPRECATED in favor of `<repo-root>/.env` with `RH_ENV_FILE` override; `.gitattributes` formalizing line-ending + diff strategy; 13/16 dead branches pruned), agent-source reconciliation (39 ad-hoc agents promoted from `.claude/agents/` runtime mirror to `project-claude/agents/` source-of-truth), CLAUDE.md updated with Operational Gates + Environment Variables tables, citation-debt persistence (`.planning/citation-debt.json` ledger seed + `tools/citation-debt/list.mjs` query CLI). The mission converts five years of accumulated prose-only safety rules into a layer that fires automatically.
