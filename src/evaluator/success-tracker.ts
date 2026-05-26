@@ -8,7 +8,7 @@
  * Storage location: ~/.gsd-skill/evaluator/success-signals.jsonl (global)
  *
  * Uses JSONL format with write queue serialization, consistent with
- * CalibrationStore and FeedbackStore patterns.
+ * CalibrationEventStore and FeedbackStore patterns.
  */
 import { readFile, writeFile, appendFile, mkdir } from 'fs/promises';
 import { join, dirname } from 'path';

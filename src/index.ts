@@ -227,7 +227,7 @@ export * from './learning/index.js';
 
 // Calibration module
 export {
-  CalibrationStore,
+  CalibrationEventStore,
   ThresholdOptimizer,
   ThresholdHistory,
   calculateMCC,

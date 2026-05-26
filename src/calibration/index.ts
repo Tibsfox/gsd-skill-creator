@@ -21,7 +21,7 @@ export {
 } from './calibration-types.js';
 
 // Store
-export { CalibrationStore } from './calibration-store.js';
+export { CalibrationEventStore } from './calibration-event-store.js';
 
 // Optimizer
 export type {

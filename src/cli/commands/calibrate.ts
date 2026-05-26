@@ -17,7 +17,7 @@ import pc from 'picocolors';
 import { writeFile, mkdir } from 'fs/promises';
 import { dirname } from 'path';
 import {
-  CalibrationStore,
+  CalibrationEventStore,
   ThresholdOptimizer,
   ThresholdHistory,
   BenchmarkReporter,
@@ -63,7 +63,7 @@ async function handleCalibrate(args: string[]): Promise<number> {
   const preview = hasFlag(args, 'preview');
   const force = hasFlag(args, 'force', 'f');
 
-  const store = new CalibrationStore();
+  const store = new CalibrationEventStore();
   const history = new ThresholdHistory();
   const optimizer = new ThresholdOptimizer();
 
@@ -228,7 +228,7 @@ async function handleBenchmark(args: string[]): Promise<number> {
   const verbose = hasFlag(args, 'verbose', 'v');
   const jsonOnly = hasFlag(args, 'json');
 
-  const store = new CalibrationStore();
+  const store = new CalibrationEventStore();
   const history = new ThresholdHistory();
   const reporter = new BenchmarkReporter();
 

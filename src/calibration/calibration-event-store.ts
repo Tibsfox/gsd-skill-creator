@@ -9,6 +9,9 @@
  * Uses JSONL format (one JSON object per line) for efficient append operations
  * and easy streaming reads. Write queue serializes concurrent writes to prevent
  * interleaving of JSON objects.
+ *
+ * Renamed from CalibrationStore at v1.49.781 to disambiguate from
+ * src/eval/CalibrationAdjustmentStore (a separate JSON store for adjustments).
  */
 import { readFile, writeFile, appendFile, mkdir } from 'fs/promises';
 import { join, dirname } from 'path';
@@ -21,12 +24,12 @@ import type {
   CalibrationOutcome,
 } from './calibration-types.js';
 
-export class CalibrationStore {
+export class CalibrationEventStore {
   private eventsPath: string;
   private writeQueue = new WriteQueue();
 
   /**
-   * Create a new CalibrationStore instance.
+   * Create a new CalibrationEventStore instance.
    *
    * @param basePath - Optional override for storage directory (default: ~/.gsd-skill/calibration)
    */

@@ -2,10 +2,10 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { mkdir, rm, writeFile, readFile } from 'fs/promises';
 import { join } from 'path';
 import { tmpdir } from 'os';
-import { CalibrationStore } from './calibration-store.js';
+import { CalibrationEventStore } from './calibration-event-store.js';
 import type { CalibrationEventInput } from './calibration-types.js';
 
-describe('CalibrationStore', () => {
+describe('CalibrationEventStore', () => {
   const testDir = join(tmpdir(), `calibration-store-test-${Date.now()}`);
 
   beforeEach(async () => {
@@ -33,7 +33,7 @@ describe('CalibrationStore', () => {
 
   describe('record', () => {
     it('should record an event with auto-generated id and timestamp', async () => {
-      const store = new CalibrationStore(testDir);
+      const store = new CalibrationEventStore(testDir);
 
       const event = await store.record(createEventInput());
 
@@ -46,7 +46,7 @@ describe('CalibrationStore', () => {
     });
 
     it('should persist event to JSONL file', async () => {
-      const store = new CalibrationStore(testDir);
+      const store = new CalibrationEventStore(testDir);
 
       await store.record(createEventInput({ prompt: 'my test prompt' }));
 
@@ -60,7 +60,7 @@ describe('CalibrationStore', () => {
     });
 
     it('should append multiple events', async () => {
-      const store = new CalibrationStore(testDir);
+      const store = new CalibrationEventStore(testDir);
 
       await store.record(createEventInput({ prompt: 'prompt 1' }));
       await store.record(createEventInput({ prompt: 'prompt 2' }));
@@ -74,7 +74,7 @@ describe('CalibrationStore', () => {
     });
 
     it('should record event with null activatedSkill', async () => {
-      const store = new CalibrationStore(testDir);
+      const store = new CalibrationEventStore(testDir);
 
       const event = await store.record(
         createEventInput({
@@ -89,7 +89,7 @@ describe('CalibrationStore', () => {
     });
 
     it('should record event with optional sessionId', async () => {
-      const store = new CalibrationStore(testDir);
+      const store = new CalibrationEventStore(testDir);
 
       const event = await store.record(
         createEventInput({ sessionId: 'session-123' })
@@ -101,7 +101,7 @@ describe('CalibrationStore', () => {
 
   describe('updateOutcome', () => {
     it('should update outcome of existing event', async () => {
-      const store = new CalibrationStore(testDir);
+      const store = new CalibrationEventStore(testDir);
 
       const event = await store.record(
         createEventInput({ outcome: 'unknown' })
@@ -116,7 +116,7 @@ describe('CalibrationStore', () => {
     });
 
     it('should return false for non-existent event', async () => {
-      const store = new CalibrationStore(testDir);
+      const store = new CalibrationEventStore(testDir);
 
       await store.record(createEventInput());
 
@@ -128,7 +128,7 @@ describe('CalibrationStore', () => {
     });
 
     it('should preserve other events when updating', async () => {
-      const store = new CalibrationStore(testDir);
+      const store = new CalibrationEventStore(testDir);
 
       const event1 = await store.record(
         createEventInput({ prompt: 'first', outcome: 'unknown' })
@@ -152,7 +152,7 @@ describe('CalibrationStore', () => {
 
   describe('getAll', () => {
     it('should return all events', async () => {
-      const store = new CalibrationStore(testDir);
+      const store = new CalibrationEventStore(testDir);
 
       await store.record(createEventInput({ outcome: 'continued' }));
       await store.record(createEventInput({ outcome: 'corrected' }));
@@ -163,7 +163,7 @@ describe('CalibrationStore', () => {
     });
 
     it('should return empty array for empty store', async () => {
-      const store = new CalibrationStore(testDir);
+      const store = new CalibrationEventStore(testDir);
       const events = await store.getAll();
       expect(events).toEqual([]);
     });
@@ -171,7 +171,7 @@ describe('CalibrationStore', () => {
 
   describe('getKnownOutcomes', () => {
     it('should filter out unknown outcomes', async () => {
-      const store = new CalibrationStore(testDir);
+      const store = new CalibrationEventStore(testDir);
 
       await store.record(createEventInput({ outcome: 'continued' }));
       await store.record(createEventInput({ outcome: 'unknown' }));
@@ -184,7 +184,7 @@ describe('CalibrationStore', () => {
     });
 
     it('should return empty array if all unknown', async () => {
-      const store = new CalibrationStore(testDir);
+      const store = new CalibrationEventStore(testDir);
 
       await store.record(createEventInput({ outcome: 'unknown' }));
       await store.record(createEventInput({ outcome: 'unknown' }));
@@ -196,7 +196,7 @@ describe('CalibrationStore', () => {
 
   describe('count', () => {
     it('should count all events', async () => {
-      const store = new CalibrationStore(testDir);
+      const store = new CalibrationEventStore(testDir);
 
       await store.record(createEventInput({ outcome: 'continued' }));
       await store.record(createEventInput({ outcome: 'corrected' }));
@@ -206,7 +206,7 @@ describe('CalibrationStore', () => {
     });
 
     it('should count only known outcomes when filter enabled', async () => {
-      const store = new CalibrationStore(testDir);
+      const store = new CalibrationEventStore(testDir);
 
       await store.record(createEventInput({ outcome: 'continued' }));
       await store.record(createEventInput({ outcome: 'unknown' }));
@@ -218,7 +218,7 @@ describe('CalibrationStore', () => {
     });
 
     it('should return 0 for empty store', async () => {
-      const store = new CalibrationStore(testDir);
+      const store = new CalibrationEventStore(testDir);
       expect(await store.count()).toBe(0);
       expect(await store.count(true)).toBe(0);
     });
@@ -226,7 +226,7 @@ describe('CalibrationStore', () => {
 
   describe('clear', () => {
     it('should remove all events', async () => {
-      const store = new CalibrationStore(testDir);
+      const store = new CalibrationEventStore(testDir);
 
       await store.record(createEventInput());
       await store.record(createEventInput());
@@ -242,7 +242,7 @@ describe('CalibrationStore', () => {
     });
 
     it('should handle clearing empty store', async () => {
-      const store = new CalibrationStore(testDir);
+      const store = new CalibrationEventStore(testDir);
 
       await store.clear();
 
@@ -252,13 +252,13 @@ describe('CalibrationStore', () => {
 
   describe('error handling', () => {
     it('should return empty array for non-existent file', async () => {
-      const store = new CalibrationStore(join(testDir, 'nonexistent'));
+      const store = new CalibrationEventStore(join(testDir, 'nonexistent'));
       const events = await store.getAll();
       expect(events).toEqual([]);
     });
 
     it('should skip corrupted lines', async () => {
-      const store = new CalibrationStore(testDir);
+      const store = new CalibrationEventStore(testDir);
 
       // Write file with valid and invalid JSON
       const validEvent = JSON.stringify({
@@ -296,7 +296,7 @@ ${validEvent2}`;
 
   describe('concurrent writes', () => {
     it('should handle multiple concurrent writes', async () => {
-      const store = new CalibrationStore(testDir);
+      const store = new CalibrationEventStore(testDir);
 
       // Fire off multiple writes concurrently
       const promises = [];
