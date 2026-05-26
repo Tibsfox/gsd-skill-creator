@@ -1,6 +1,6 @@
 {
   "name": "gsd-skill-creator",
-  "version": "1.49.786",
+  "version": "1.49.787",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
@@ -42,6 +42,8 @@
     "pre-tag-gate": "bash tools/pre-tag-gate.sh",
     "adoption-report": "node tools/adoption-scan.mjs",
     "adoption-report:json": "node tools/adoption-scan.mjs --json",
+    "adoption-report:refresh": "node tools/adoption-refresh.mjs",
+    "adoption-report:dashboard": "node tools/adoption-scan.mjs --json | node tools/render-adoption-dashboard.mjs",
     "depth-audit": "node tools/depth-audit.mjs",
     "depth-audit:current": "node tools/depth-audit.mjs --current",
     "scaffold:cross-track": "node tools/scaffold-cross-track-dirs.mjs",

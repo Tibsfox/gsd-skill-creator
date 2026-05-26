@@ -197,4 +197,79 @@ describe('adoption-scan', () => {
     expect(foo.internalImporters).toEqual(['bar']);
     expect(foo.realCallerCount).toBe(1);
   });
+
+  // ─── v1.49.787 allowlist tests ──────────────────────────────────────────
+
+  it('T12: allowlist entries flagged with allowlisted: true + reason', () => {
+    setupFixture({
+      'src/foo/index.ts': "export const FOO = 'foo';\n",
+      'tools/adoption-scan.allowlist.json': JSON.stringify({
+        version: '1.0',
+        entries: [{ module: 'foo', reason: 'intentional fixture' }],
+      }),
+    });
+    const { records } = runScriptJson();
+    const foo = records.find((r) => r.module === 'foo');
+    expect(foo.allowlisted).toBe(true);
+    expect(foo.allowlistReason).toBe('intentional fixture');
+  });
+
+  it('T13: non-allowlisted modules report allowlisted: false + reason: null', () => {
+    setupFixture({
+      'src/foo/index.ts': "export const FOO = 'foo';\n",
+      'tools/adoption-scan.allowlist.json': JSON.stringify({ version: '1.0', entries: [] }),
+    });
+    const { records } = runScriptJson();
+    const foo = records.find((r) => r.module === 'foo');
+    expect(foo.allowlisted).toBe(false);
+    expect(foo.allowlistReason).toBeNull();
+  });
+
+  it('T14: allowlisted modules excluded from shelfware-threshold trigger', () => {
+    setupFixture({
+      'src/foo/index.ts': "export const FOO = 'foo';\n", // isolated
+      'src/bar/index.ts': "export const BAR = 'bar';\n", // isolated
+      'tools/adoption-scan.allowlist.json': JSON.stringify({
+        version: '1.0',
+        entries: [{ module: 'foo', reason: 'intentional' }],
+      }),
+    });
+    // threshold=1 means realCallerCount<1 (i.e., 0) is a violation
+    const r = runScript('--shelfware-threshold 1');
+    expect(r.exitCode).toBe(1);
+    expect(r.stderr).toContain('bar'); // bar violates
+    expect(r.stderr).not.toContain('foo'); // foo is allowlisted → excluded
+  });
+
+  it('T15: --no-allowlist disables allowlist even if file present', () => {
+    setupFixture({
+      'src/foo/index.ts': "export const FOO = 'foo';\n",
+      'tools/adoption-scan.allowlist.json': JSON.stringify({
+        version: '1.0',
+        entries: [{ module: 'foo', reason: 'intentional' }],
+      }),
+    });
+    const { records } = runScriptJson('--no-allowlist --json');
+    const foo = records.find((r) => r.module === 'foo');
+    expect(foo.allowlisted).toBe(false);
+  });
+
+  it('T16: large JSON output is captured intact (no exit-drain truncation)', () => {
+    // The v1.49.787 exit-drain fix ensures stdout flushes before process.exit().
+    // While spawnSync uses a larger buffer than the 64KB shell pipe that
+    // originally surfaced this bug, this regression check confirms large
+    // outputs survive the scanner's exit path.
+    const fixture = {};
+    for (let i = 0; i < 50; i++) {
+      fixture[`src/mod${i}/index.ts`] = `export const M${i} = ${i};\n`;
+    }
+    setupFixture(fixture);
+    const r = runScript('--json');
+    expect(r.exitCode).toBe(0);
+    expect(() => JSON.parse(r.stdout)).not.toThrow();
+    const parsed = JSON.parse(r.stdout);
+    expect(parsed.length).toBe(50);
+    // Validate the array is structurally complete (last record is whole)
+    expect(parsed[49].module).toBe('mod9'); // alphabetical: mod0, mod1, mod10, ...mod9
+  });
 });

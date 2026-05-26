@@ -61,10 +61,43 @@ const SHELFWARE_THRESHOLD = thresholdIdx >= 0 ? Number(args[thresholdIdx + 1]) :
 const ROOT_IDX = args.indexOf('--root');
 const ROOT = resolve(ROOT_IDX >= 0 ? args[ROOT_IDX + 1] : process.cwd());
 const SRC_DIR = join(ROOT, 'src');
+const allowlistIdx = args.indexOf('--allowlist');
+const ALLOWLIST_PATH = allowlistIdx >= 0
+  ? resolve(args[allowlistIdx + 1])
+  : join(ROOT, 'tools', 'adoption-scan.allowlist.json');
+const NO_ALLOWLIST = args.includes('--no-allowlist');
 
 if (!existsSync(SRC_DIR)) {
   console.error(`[adoption-scan] FATAL: src/ not found at ${SRC_DIR}`);
   process.exit(2);
+}
+
+// ─── Allowlist loading ───────────────────────────────────────────────────────
+
+/**
+ * Load operator-curated exemptions. Returns Map<module, reason>. If the file
+ * is absent or --no-allowlist is set, returns an empty map.
+ *
+ * Allowlist entries do NOT change a module's status (living/test-only/isolated)
+ * — they only prevent the --shelfware-threshold flag from triggering on the
+ * module. The full record always reports `allowlisted: bool` + `allowlistReason: string|null`
+ * so the dashboard / report can surface the exemption transparently.
+ */
+function loadAllowlist() {
+  if (NO_ALLOWLIST) return new Map();
+  if (!existsSync(ALLOWLIST_PATH)) return new Map();
+  try {
+    const raw = JSON.parse(readFileSync(ALLOWLIST_PATH, 'utf8'));
+    const map = new Map();
+    for (const e of raw.entries ?? []) {
+      if (!e.module) continue;
+      map.set(e.module, e.reason ?? '(no reason given)');
+    }
+    return map;
+  } catch (err) {
+    console.error(`[adoption-scan] WARN: cannot parse allowlist at ${ALLOWLIST_PATH}: ${err.message}`);
+    return new Map();
+  }
 }
 
 /**
@@ -182,6 +215,7 @@ function resolveToModule(importerAbsPath, specifier) {
 // ─── Scan ────────────────────────────────────────────────────────────────────
 
 function scan() {
+  const allowlist = loadAllowlist();
   const modules = listModules();
   const records = new Map();
   for (const m of modules) {
@@ -237,10 +271,10 @@ function scan() {
     }
   }
   }
-  return modules.map((m) => finalizeRecord(records.get(m)));
+  return modules.map((m) => finalizeRecord(records.get(m), allowlist));
 }
 
-function finalizeRecord(raw) {
+function finalizeRecord(raw, allowlist) {
   const realCallerCount =
     raw.internalImporters.size + raw.cliImporters.size + raw.externalImporters.size;
   const testCount = raw.testImporters.size;
@@ -248,6 +282,7 @@ function finalizeRecord(raw) {
   if (realCallerCount > 0) status = 'living';
   else if (testCount > 0) status = 'test-only';
   else status = 'isolated';
+  const allowlisted = allowlist.has(raw.module);
   return {
     module: raw.module,
     selfFiles: raw.selfFiles,
@@ -259,6 +294,8 @@ function finalizeRecord(raw) {
     realCallerCount,
     testCount,
     status,
+    allowlisted,
+    allowlistReason: allowlisted ? allowlist.get(raw.module) : null,
   };
 }
 
@@ -282,16 +319,32 @@ function formatMarkdown(records) {
   lines.push('');
 
   if (isolated.length > 0) {
+    const isolatedShelfware = isolated.filter((r) => !r.allowlisted);
+    const isolatedAllowlisted = isolated.filter((r) => r.allowlisted);
     lines.push('## Isolated modules (no importers anywhere)');
     lines.push('');
-    lines.push('These modules have zero importers — neither real code nor tests reference them. Strongest shelfware candidates.');
+    lines.push('These modules have zero importers — neither real code nor tests reference them.');
     lines.push('');
-    lines.push('| Module | self files | self importers |');
-    lines.push('|--------|-----------:|---------------:|');
-    for (const r of isolated) {
-      lines.push(`| \`${r.module}\` | ${r.selfFiles} | ${r.selfImporters} |`);
+    if (isolatedShelfware.length > 0) {
+      lines.push('### Shelfware candidates (not allowlisted)');
+      lines.push('');
+      lines.push('| Module | self files | self importers |');
+      lines.push('|--------|-----------:|---------------:|');
+      for (const r of isolatedShelfware) {
+        lines.push(`| \`${r.module}\` | ${r.selfFiles} | ${r.selfImporters} |`);
+      }
+      lines.push('');
     }
-    lines.push('');
+    if (isolatedAllowlisted.length > 0) {
+      lines.push('### Allowlisted (intentionally isolated)');
+      lines.push('');
+      lines.push('| Module | self files | reason |');
+      lines.push('|--------|-----------:|--------|');
+      for (const r of isolatedAllowlisted) {
+        lines.push(`| \`${r.module}\` | ${r.selfFiles} | ${r.allowlistReason} |`);
+      }
+      lines.push('');
+    }
   }
 
   if (testOnly.length > 0) {
@@ -324,6 +377,24 @@ function formatMarkdown(records) {
 
 // ─── Main ────────────────────────────────────────────────────────────────────
 
+function exitWhenDrained(code) {
+  // Calling process.exit() synchronously can truncate buffered stdout/stderr
+  // when output exceeds the OS pipe buffer (~64 KB on most Linux systems).
+  // Schedule the exit after the next tick so flush completes first.
+  // See Lesson #10420 candidate at v1.49.787.
+  if (process.stdout.writableLength === 0 && process.stderr.writableLength === 0) {
+    process.exit(code);
+    return;
+  }
+  let waiting = 2;
+  const maybeExit = () => { if (--waiting === 0) process.exit(code); };
+  if (process.stdout.writableLength === 0) waiting -= 1;
+  else process.stdout.once('drain', maybeExit);
+  if (process.stderr.writableLength === 0) waiting -= 1;
+  else process.stderr.once('drain', maybeExit);
+  if (waiting === 0) process.exit(code);
+}
+
 function main() {
   const records = scan();
   if (JSON_OUTPUT) {
@@ -332,16 +403,21 @@ function main() {
     process.stdout.write(formatMarkdown(records));
   }
   if (SHELFWARE_THRESHOLD !== null && !Number.isNaN(SHELFWARE_THRESHOLD)) {
-    const shelfware = records.filter((r) => r.realCallerCount < SHELFWARE_THRESHOLD);
+    // Allowlisted modules are excluded from threshold triggering — they remain
+    // visible in the report (with `allowlisted: true`) but don't fail the gate.
+    const shelfware = records.filter(
+      (r) => r.realCallerCount < SHELFWARE_THRESHOLD && !r.allowlisted,
+    );
     if (shelfware.length > 0) {
-      console.error(`[adoption-scan] THRESHOLD: ${shelfware.length} module(s) below realCallerCount<${SHELFWARE_THRESHOLD}`);
+      console.error(`[adoption-scan] THRESHOLD: ${shelfware.length} non-allowlisted module(s) below realCallerCount<${SHELFWARE_THRESHOLD}`);
       for (const r of shelfware) {
         console.error(`  - ${r.module} (status=${r.status}, realCallers=${r.realCallerCount}, testCallers=${r.testCount})`);
       }
-      process.exit(1);
+      exitWhenDrained(1);
+      return;
     }
   }
-  process.exit(0);
+  exitWhenDrained(0);
 }
 
 main();

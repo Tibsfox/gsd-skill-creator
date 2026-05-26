@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "$comment": "Adoption-scan allowlist — modules that are intentionally isolated or test-only and should NOT trigger the shelfware-threshold gate. Added v1.49.787 (Tier 1 T1.2 ship 2/3). Each entry must include a reason so future readers understand why the module is exempt.",
+  "version": "1.0",
+  "entries": [
+    {
+      "module": "dogfood",
+      "reason": "Test fixture / dogfood corpus. The module's purpose is to host self-test inputs; external imports are not expected. 66 self-files + 132 self-importers.",
+      "addedAt": "v1.49.787",
+      "addedBy": "v786 adoption-scan baseline review"
+    },
+    {
+      "module": "holomorphic",
+      "reason": "v1.47 Holomorphic Dynamics Educational Pack — content cluster, not core substrate. PROJECT.md GAP-3 (PNW vs Global Scope) lists content-area work as intentional design.",
+      "addedAt": "v1.49.787",
+      "addedBy": "v786 adoption-scan baseline review"
+    },
+    {
+      "module": "styles",
+      "reason": "0 self-files — directory stub for shared style tokens. Imports happen via build pipeline, not TS imports.",
+      "addedAt": "v1.49.787",
+      "addedBy": "v786 adoption-scan baseline review"
+    },
+    {
+      "module": "settings",
+      "reason": "1 self-file — settings reader is consumed via dynamic require() / JSON load patterns that the static-import scanner doesn't detect.",
+      "addedAt": "v1.49.787",
+      "addedBy": "v786 adoption-scan baseline review"
+    },
+    {
+      "module": "initialization",
+      "reason": "1 self-file — gsd-init bootstrap module invoked via shell CLI (`skill-creator gsd-init`), not TS import. Future ship may consolidate into a normal module path.",
+      "addedAt": "v1.49.787",
+      "addedBy": "v786 adoption-scan baseline review"
+    },
+    {
+      "module": "retro",
+      "reason": "7 self-files / 11 self-importers — retrospective tooling consumed via shell CLI (tools/session-retro/observe.mjs). TS API surface is internal-only by design.",
+      "addedAt": "v1.49.787",
+      "addedBy": "v786 adoption-scan baseline review"
+    },
+    {
+      "module": "interpreter",
+      "reason": "6 self-files / 9 self-importers — DACP interpreter consumed via shell CLI surface, not TS imports. The src/dacp/ module reads interpreter outputs through filesystem hand-off, not direct API.",
+      "addedAt": "v1.49.787",
+      "addedBy": "v786 adoption-scan baseline review"
+    },
+    {
+      "module": "upstream",
+      "reason": "Legacy substrate. v786 retrospective flagged that upstream + upstream-intelligence are both isolated and may represent a rename-in-flight. Pending operator triage — exempt from shelfware threshold while investigation is open.",
+      "addedAt": "v1.49.787",
+      "addedBy": "v786 retrospective"
+    },
+    {
+      "module": "upstream-intelligence",
+      "reason": "Legacy substrate. Companion to `upstream` — see that entry. Pending operator triage.",
+      "addedAt": "v1.49.787",
+      "addedBy": "v786 retrospective"
+    },
+    {
+      "module": "mathematical-foundations",
+      "reason": "6 self-files / 0 self-importers — namespace placeholder for the substrate-reference docs (semantic-channel.md, bounded-learning.md). The actual implementation modules (coherent-functors, ricci-curvature-audit, etc.) live as siblings and ARE adoption-tracked individually.",
+      "addedAt": "v1.49.787",
+      "addedBy": "v786 adoption-scan baseline review"
+    }
+  ]
+}

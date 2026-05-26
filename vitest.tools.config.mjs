@@ -35,6 +35,7 @@ export default defineConfig({
       'tools/__tests__/state-md-normalizer-prose.test.mjs',
       'tools/__tests__/project-md-normalizer.test.mjs',
       'tools/__tests__/adoption-scan.test.mjs',
+      'tools/__tests__/adoption-refresh.test.mjs',
       'tools/__tests__/perf-assertion-audit.test.mjs',
       'tools/__tests__/perf-assertion-audit-additive.test.mjs',
       'tools/__tests__/check-version-sequence.test.mjs',
