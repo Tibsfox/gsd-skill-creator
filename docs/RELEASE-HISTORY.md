@@ -1,15 +1,16 @@
 # Release History
 
-835 milestones shipped across the v1.0 → v1.49.792 arc. The table below lists every shipped release, newest first.
+836 milestones shipped across the v1.0 → v1.49.793 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 835 releases · 834 with retrospectives · 714 with extracted lessons · quality A:662 B:97 C:63 D:2 F:11 (avg 93) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 836 releases · 835 with retrospectives · 715 with extracted lessons · quality A:662 B:97 C:63 D:3 F:11 (avg 93) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.793](release-notes/v1.49.793) | Shelfware Verdicts 5 + 6: Math Foundations Refresh Cluster CLOSED | 2026-05-26 | 2 | — | — | [s](release-notes/v1.49.793/chapter/00-summary.md) [r](release-notes/v1.49.793/chapter/03-retrospective.md) [l](release-notes/v1.49.793/chapter/04-lessons.md) [c](release-notes/v1.49.793/chapter/99-context.md) | 5 | D 62 |  |
 | [v1.49.792](release-notes/v1.49.792) | Shelfware Verdict 4: WIRE `koopman-memory` via `skill-creator koopman-check` | 2026-05-26 | 2 | — | — | [s](release-notes/v1.49.792/chapter/00-summary.md) [r](release-notes/v1.49.792/chapter/03-retrospective.md) [l](release-notes/v1.49.792/chapter/04-lessons.md) [c](release-notes/v1.49.792/chapter/99-context.md) | 3 | D 62 |  |
 | [v1.49.791](release-notes/v1.49.791) | Shelfware Verdict 2 + 3: ALLOWLIST `tonnetz` + `wasserstein-hebbian` | 2026-05-26 | 2 | — | — | [s](release-notes/v1.49.791/chapter/00-summary.md) [r](release-notes/v1.49.791/chapter/03-retrospective.md) [l](release-notes/v1.49.791/chapter/04-lessons.md) [c](release-notes/v1.49.791/chapter/99-context.md) | 3 | F 59 |  |
 | [v1.49.790](release-notes/v1.49.790) | Codification: 7 Lessons from v785-v789 → 2 New Operative Disciplines | 2026-05-26 | 2 | — | — | [s](release-notes/v1.49.790/chapter/00-summary.md) [r](release-notes/v1.49.790/chapter/03-retrospective.md) [l](release-notes/v1.49.790/chapter/04-lessons.md) [c](release-notes/v1.49.790/chapter/99-context.md) | 3 | D 67 |  |
