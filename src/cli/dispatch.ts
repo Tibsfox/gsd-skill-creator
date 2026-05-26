@@ -4,6 +4,8 @@ import type { SkillScope } from '../types/scope.js';
 import { suggestCommand, suggestionsCommand } from './commands/suggest.js';
 import { feedbackCommand } from './commands/feedback.js';
 import { refineCommand } from './commands/refine.js';
+import { deleteCommand } from './commands/delete.js';
+import { invokeCommand } from './commands/invoke.js';
 
 export interface CliContext {
   args: string[];
@@ -30,6 +32,8 @@ export const REGISTRY: readonly CommandEntry[] = [
   { aliases: ['suggestions', 'sgs'], handler: (ctx) => suggestionsCommand(ctx.args) },
   { aliases: ['feedback', 'fb'], handler: (ctx) => feedbackCommand(ctx.args) },
   { aliases: ['refine', 'rf'], handler: (ctx) => refineCommand(ctx.args) },
+  { aliases: ['delete', 'del', 'rm'], handler: (ctx) => deleteCommand(ctx.args) },
+  { aliases: ['invoke', 'i'], handler: (ctx) => invokeCommand(ctx.args) },
 ];
 
 export function lookup(command: string | undefined): CommandHandler | undefined {

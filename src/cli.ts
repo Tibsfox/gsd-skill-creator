@@ -418,101 +418,12 @@ async function main() {
       break;
     }
 
-    case 'delete':
-    case 'del':
-    case 'rm': {
-      const scope = parseScope(args);
-      const skillName = args.filter(a => !a.startsWith('-'))[1];
-
-      if (!skillName) {
-        p.log.error('Usage: skill-creator delete <skill-name> [--project]');
-        process.exit(1);
-      }
-
-      const { skillStore: scopedStore } = createScopedStoreAndIndex(scope);
-      const exists = await scopedStore.exists(skillName);
-      if (!exists) {
-        p.log.error(`Skill "${skillName}" not found at ${scope} scope.`);
-        process.exit(1);
-      }
-
-      // Check for version at other scope
-      const otherScope: SkillScope = scope === 'user' ? 'project' : 'user';
-      const otherStore = new SkillStore(getSkillsBasePath(otherScope));
-      const existsAtOther = await otherStore.exists(skillName);
-
-      // Confirm deletion with scope-aware message
-      const confirmMsg = existsAtOther
-        ? `Delete "${skillName}" from ${scope} scope? (${otherScope}-level version will become active)`
-        : `Delete "${skillName}" from ${scope} scope?`;
-
-      const confirm = await p.confirm({
-        message: confirmMsg,
-        initialValue: false,
-      });
-
-      if (p.isCancel(confirm) || !confirm) {
-        p.log.info('Deletion cancelled.');
-        process.exit(0);
-      }
-
-      await scopedStore.delete(skillName);
-
-      if (existsAtOther) {
-        p.log.success(`Deleted "${skillName}" from ${scope} scope.`);
-        p.log.message(pc.dim(`The ${otherScope}-level version is now active.`));
-      } else {
-        p.log.success(`Deleted "${skillName}".`);
-      }
-      break;
-    }
-
     case 'resolve':
     case 'res': {
       const skillName = args.filter(a => !a.startsWith('-'))[1];
       const exitCode = await resolveCommand(skillName);
       if (exitCode !== 0) {
         process.exit(exitCode);
-      }
-      break;
-    }
-
-    case 'invoke':
-    case 'i': {
-      const skillName = args[1];
-
-      if (!skillName) {
-        console.log('Usage: skill-creator invoke <skill-name>');
-        console.log('');
-        console.log('Manually invoke a skill and load it into the session.');
-        console.log('');
-        console.log('Examples:');
-        console.log('  skill-creator invoke typescript-patterns');
-        console.log('  skill-creator i react-hooks');
-        break;
-      }
-
-      const { applicator } = createApplicationContext();
-      await applicator.initialize();
-
-      const result = await applicator.invoke(skillName);
-
-      if (result.success) {
-        console.log(`Skill '${skillName}' loaded successfully.`);
-        console.log('');
-        console.log('Token usage:', result.loadResult?.tokenCount ?? 'cached');
-        console.log('Remaining budget:', result.loadResult?.remainingBudget ?? 'n/a');
-        console.log('');
-        console.log('Content preview:');
-        console.log('─'.repeat(40));
-        const preview = result.content?.slice(0, 500) ?? '';
-        console.log(preview + (result.content && result.content.length > 500 ? '...' : ''));
-      } else {
-        console.error(`Failed to invoke skill: ${result.error}`);
-        if (result.loadResult?.reason === 'budget_exceeded') {
-          console.log('');
-          console.log('Tip: Clear some active skills or increase the token budget.');
-        }
       }
       break;
     }
