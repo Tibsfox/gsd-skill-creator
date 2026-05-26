@@ -18,8 +18,11 @@
 import { readdir, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { performance } from 'node:perf_hooks';
+import { ensureAllowed, type LoaderContext } from '../../security/loader-context.js';
 import type { KnowledgeTier, TierContent, TierLoadResult, TierDocument } from './types.js';
 import { TIER_DEFAULTS } from './types.js';
+
+const LOADER_SOURCE = 'cloud-ops/knowledge/tier-loader';
 
 // ============================================================================
 // Tier directory mapping
@@ -57,14 +60,18 @@ function estimateTokens(text: string): number {
 export class KnowledgeTierLoader {
   private readonly basePath: string;
   private readonly tierConfig: Record<KnowledgeTier, { maxTokens: number; timeoutMs: number }>;
+  private readonly ctx: LoaderContext | undefined;
 
   /**
    * @param basePath - Project root directory containing docs/cloud-ops/
    * @param overrides - Optional per-tier config overrides
+   * @param ctx - Optional security chokepoint. The per-tier directory is
+   *   gated on each `loadTier` call before any disk I/O.
    */
   constructor(
     basePath: string,
     overrides?: Partial<Record<KnowledgeTier, { maxTokens?: number; timeoutMs?: number }>>,
+    ctx?: LoaderContext,
   ) {
     this.basePath = basePath;
     this.tierConfig = {
@@ -72,6 +79,7 @@ export class KnowledgeTierLoader {
       active: { ...TIER_DEFAULTS.active, ...overrides?.active },
       reference: { ...TIER_DEFAULTS.reference, ...overrides?.reference },
     };
+    this.ctx = ctx;
   }
 
   /**
@@ -119,6 +127,7 @@ export class KnowledgeTierLoader {
     const dir = join(this.basePath, TIER_DIRS[tier]);
 
     try {
+      ensureAllowed(this.ctx, LOADER_SOURCE, 'read-dir', dir, `tier: ${tier}`);
       const content = await this.loadDocuments(dir, filter, config.timeoutMs, tier, config.maxTokens);
       return { success: true, content };
     } catch (err) {
@@ -228,8 +237,11 @@ export class KnowledgeTierLoader {
  * Load the summary tier from the given project root.
  * Creates a KnowledgeTierLoader instance internally.
  */
-export async function loadSummaryTier(basePath: string): Promise<TierLoadResult> {
-  const loader = new KnowledgeTierLoader(basePath);
+export async function loadSummaryTier(
+  basePath: string,
+  ctx?: LoaderContext,
+): Promise<TierLoadResult> {
+  const loader = new KnowledgeTierLoader(basePath, undefined, ctx);
   return loader.loadSummaryTier();
 }
 
@@ -240,8 +252,9 @@ export async function loadSummaryTier(basePath: string): Promise<TierLoadResult>
 export async function loadActiveTier(
   basePath: string,
   documentIds?: string[],
+  ctx?: LoaderContext,
 ): Promise<TierLoadResult> {
-  const loader = new KnowledgeTierLoader(basePath);
+  const loader = new KnowledgeTierLoader(basePath, undefined, ctx);
   return loader.loadActiveTier(documentIds);
 }
 
@@ -252,7 +265,8 @@ export async function loadActiveTier(
 export async function loadReferenceTier(
   basePath: string,
   documentIds: string[],
+  ctx?: LoaderContext,
 ): Promise<TierLoadResult> {
-  const loader = new KnowledgeTierLoader(basePath);
+  const loader = new KnowledgeTierLoader(basePath, undefined, ctx);
   return loader.loadReferenceTier(documentIds);
 }
