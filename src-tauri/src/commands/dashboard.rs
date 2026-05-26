@@ -17,6 +17,18 @@ pub struct GenerateResponse {
     pub error: Option<String>,
 }
 
+/// Page slugs are interpolated into the Node script and concatenated with
+/// '.html' before being joined to a temp dir. Restrict to a strict
+/// lowercase-alnum-dash alphabet to close both the JS-injection vector
+/// (line that built `'{page}.html'` unquoted) and the path-traversal
+/// vector (`..` would have escaped tmpDir on the readFileSync call).
+fn is_safe_page_slug(s: &str) -> bool {
+    !s.is_empty()
+        && s.len() <= 64
+        && s.bytes()
+            .all(|b| b.is_ascii_lowercase() || b.is_ascii_digit() || b == b'-')
+}
+
 /// Generate a single dashboard page by invoking the Node.js generator.
 ///
 /// Spawns a `node` process that imports `dist/dashboard/generator.js`,
@@ -28,6 +40,21 @@ pub fn generate_dashboard(
     planning_dir: String,
 ) -> Result<GenerateResponse, String> {
     let start = std::time::Instant::now();
+
+    if !is_safe_page_slug(&page) {
+        return Err(format!(
+            "invalid page slug '{}' (allowed: [a-z0-9-], 1-64 chars)",
+            page,
+        ));
+    }
+
+    // serde_json::to_string emits a properly-quoted JSON string literal,
+    // which is also a valid JS string literal — closes the planning_dir
+    // injection vector that the previous single-char escape missed.
+    let planning_dir_lit = serde_json::to_string(&planning_dir)
+        .map_err(|e| format!("Failed to encode planning_dir: {}", e))?;
+    let page_lit = serde_json::to_string(&page)
+        .map_err(|e| format!("Failed to encode page: {}", e))?;
 
     // Build a Node.js script that:
     // 1. Dynamically imports the compiled ESM generator
@@ -46,11 +73,11 @@ const os = require('os');
     const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'gsd-dash-'));
     try {{
         const result = await generate({{
-            planningDir: '{}',
+            planningDir: {},
             outputDir: tmpDir,
             force: true,
         }});
-        const pageFile = '{}.html';
+        const pageFile = {} + '.html';
         const htmlPath = path.join(tmpDir, pageFile);
         let html = '';
         if (fs.existsSync(htmlPath)) {{
@@ -62,8 +89,8 @@ const os = require('os');
     }}
 }})();
 "#,
-        planning_dir.replace('\'', "\\'"),
-        page,
+        planning_dir_lit,
+        page_lit,
     );
 
     let output = Command::new("node")
@@ -96,4 +123,33 @@ const os = require('os');
         duration,
         error: None,
     })
+}
+
+#[cfg(test)]
+mod tests {
+    use super::is_safe_page_slug;
+
+    #[test]
+    fn page_slug_accepts_valid() {
+        assert!(is_safe_page_slug("index"));
+        assert!(is_safe_page_slug("phase-1"));
+        assert!(is_safe_page_slug("v1-49-777"));
+        assert!(is_safe_page_slug("a"));
+        assert!(is_safe_page_slug("0"));
+        assert!(is_safe_page_slug(&"a".repeat(64)));
+    }
+
+    #[test]
+    fn page_slug_rejects_injection_attempts() {
+        assert!(!is_safe_page_slug(""));
+        assert!(!is_safe_page_slug("../etc/passwd"));
+        assert!(!is_safe_page_slug("a/b"));
+        assert!(!is_safe_page_slug("a\\b"));
+        assert!(!is_safe_page_slug("a'+process.exit(1)+'"));
+        assert!(!is_safe_page_slug("a\nb"));
+        assert!(!is_safe_page_slug("A"));
+        assert!(!is_safe_page_slug("UPPER"));
+        assert!(!is_safe_page_slug("a.b"));
+        assert!(!is_safe_page_slug(&"a".repeat(65)));
+    }
 }
