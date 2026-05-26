@@ -1,24 +1,62 @@
-# v1.49.606 — Structural Firsts + Engine State
+<!-- V650-699-CHAPTER-LIFTED v1 -->
+# v1.49.606 — Chapter 00: Summary
 
-## Structural firsts
+## Summary
 
-**Third operational application of v603 8/8 Track cards + nav-card BLOCKER gate.** v604 first / v605 second / v606 third operational application all PASS at NASA degree builds. Gate's nominal-direction reproducibility now confirmed across three consecutive engine-cadence ships. Soak observation #3 of the gate locks; gate is reproducibly stable in production.
+**Forward-cadence NASA degree advance to ?.?.** v1.49.606 ships Apollo 17 Final Crewed Lunar Landing as a forward-cadence engine-state advance from NASA degree ?.? to ?.?. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-**First launch-post-side INSIDE pick at +1 day in #10232 soak series.** *Trouble Man* by Marvin Gaye (Tamla T-322L; US release 1972-12-08) is INSIDE Apollo 17 launch envelope by +1 day. Prior post-side INSIDE picks were at +2 or greater offset; this is the tightest post-side offset in the soak series.
+**Mission rebuilt to per-pipeline depth.** Apollo 17 Final Crewed Lunar Landing ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/N.NNN/`.
 
-**First triple-boundary INSIDE membership in #10232 soak series.** *Trouble Man* sits INSIDE three Apollo 17 boundary points simultaneously: launch (+1), landing (-3), EVA-3 (-5). Escalation from v604 dual-boundary instance (Band on the Run INSIDE Jupiter close-approach + escape-velocity-ascertainment).
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-**First POSITIVE-RECURRENCE soak observation of #10246 CANDIDATE mid-build-quota-Opus-recovery pattern.** Sonnet weekly quota hit at 12:10pm America/Los_Angeles during W2.MUS + W2.ELC + W2.SPS parallel dispatch; main-context Opus inline-recovered all 3 missing index.html files per the documented v604 procedure. Recovery total: ~85KB MUS + ~88KB ELC + ~55KB SPS = ~228KB content authored inline in main context. Ship completed within session. Pattern advances toward ESTABLISHED at observation #4.
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-**TRS M1 W2 pack-02 (differential geometry) bound.** Third M0 original-substrate pack after pack-04 control theory at v604 + pack-01 probability/measure-theory at v605. 8 new cross-pack edges added; pairing-map-v6.json now 56 edges (40 v604 + 8 v605 + 8 v606). **K_6 pack-pair completeness achieved**: 15/15 pack-pairs bound across pack-01 + pack-02 + pack-04 + pack-11 + pack-12 + pack-13. Substrate-coherent with Apollo 17 (Riemannian/Gaussian intrinsic curvature on Itek lunar surface mapping; Levi-Civita geodesics on LRV-3 traverse; symplectic Hamiltonian flow on selenoid/mascon spherical-harmonic gravitational modeling; Cartan moving frames + Morse Hessians on Schmitt's stereo-photography crater geometry).
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-## Engine state at v606 close
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-| Track | Degree / Item | Substrate primitive |
+## Key Features
+
+| Track | Field | Value |
 |---|---|---|
-| NASA | 1.84 Apollo 17 | final-crewed-lunar-landing + first-scientist-astronaut + orange-soil-discovery + Blue-Marble + Mattingly-callback-via-Schmitt + max-profile + nighttime-launch |
-| MUS | 1.84 *Trouble Man* by Marvin Gaye | domain-expert-as-first-protagonist (sole-producer-credit) + discovery-at-margin (Moog) + finality-and-closure (only soundtrack) + Hayes/Mayfield/Gaye blaxploitation lineage |
-| ELC | 1.84 Marine Mammal Protection Act | domain-expert-drafted (Schevill/Kenyon/Norris) + closure-of-unrestricted-take-baseline + moratorium-as-default + PLANETARY-PERSPECTIVE-AS-STEWARDSHIP-WARRANT 2-ex CANDIDATE |
-| SPS | #81 Northern Spotted Owl | domain-expert-as-first-practitioner (Forsman 1972) + closure-of-program (1990 ESA listing) + stratigraphic-juxtaposition-at-single-site |
-| TRS | M1 W2 pack-02 bound | 56 cross-pack edges; K_6 pack-pair completeness (15/15 pairs); foundational triad + pack-04 + pack-01 + pack-02 |
-| §6.6 | ~24-26 LOCKED + ~30 watchlist | 6 new 1.84-substrate candidates + PLANETARY-PERSPECTIVE-AS-STEWARDSHIP-WARRANT 2-ex CANDIDATE evaluated |
+| NASA | Mission name | Apollo 17 Final Crewed Lunar Landing |
+| NASA | Degree from | N.NNN |
+| NASA | Degree to | N.NNN |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
+
+## Cross-References
+
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.605** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.607** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
+
+## Engine Position
+
+| Track | At v1.49.605 close | At v1.49.606 close |
+|---|---|---|
+| NASA degree | N.NNN | **N.NNN** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
+
+## Infrastructure
+
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/N.NNN/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-606-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.606` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.605](../v1.49.605/00-summary.md) · **Next:** [v1.49.607](../v1.49.607/00-summary.md)

@@ -1,39 +1,62 @@
-# v1.49.601 — Summary
+<!-- V650-699-CHAPTER-LIFTED v1 -->
+# v1.49.601 — Chapter 00: Summary
 
-## Structural firsts
+## Summary
 
-1. **Second counter-cadence operational-debt milestone** (after v1.49.585 Concerns Cleanup). Same pattern: convert prose discipline into deterministic gate. v1.49.585 closed 5 categories at once; v1.49.601 closes 1 category surgically.
-2. **First ship triggered by post-ship operator drift discovery on the live site.** The drift was invisible to all gates — `pre-tag-gate` 7 steps + `check-completeness` + CI all PASSED at v598/v599/v600 despite the catalog-index files being stale. The signal came from human eyes on the live URL, not from local tooling. v1.49.601 closes that loop: future drift cannot reach the live site because ftp-sync now refuses to upload stale catalogs.
-3. **Pre-tag-gate grows to 8 steps.** This is the first new step since v1.49.596 added step 7 (CLAUDE.md drift). The composite gate evolution: v1.49.585 introduced the gate (4 steps); v1.49.587 added CI-on-dev (step 4) + www-bundles (step 5); v1.49.591 added depth-audit (step 6, BLOCKER); v1.49.596 added CLAUDE.md drift (step 7); **v1.49.601 adds catalog-index drift (step 8, BLOCKER).** Each addition closes a class of silent-drift failure surfaced by post-ship discovery.
-4. **First milestone to ship the day after its predecessor.** v1.49.600 shipped 2026-05-04; v1.49.601 ships 2026-05-04. Both atomic ships. Counter-cadence milestones can ship faster than NASA-degree milestones because they have no W1 research wave + no W2 4-track build wave.
-5. **First milestone where the operator's discovery → spec → ship cycle was entirely under one session's context.** The drift was caught, the prevention was specced (B + C options proposed), the operator authorized "B & C," v601 was opened, the tool was built, and the milestone shipped — all without context handoff. Demonstrates the operator-in-the-loop pattern at its tightest.
+**Forward-cadence NASA degree advance to ?.?.** v1.49.601 ships Catalog-Index Auto-Derive Counter-Cadence as a forward-cadence engine-state advance from NASA degree ?.? to ?.?. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-## Engine state at close
+**Mission rebuilt to per-pipeline depth.** Catalog-Index Auto-Derive Counter-Cadence ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/N.NNN/`.
 
-- **NASA degree:** 1.80 (Mariner 9; carries forward from v600)
-- **MUS degree:** 1.80 (*Nilsson Schmilsson*; carries forward)
-- **ELC degree:** 1.80 (Stockholm Conference + UNEP; carries forward)
-- **SPS species:** #77 (Gray Whale; carries forward)
-- **§6.6 register:** 23 LOCKED (5 watchlist active: LAUNCH-VEHICLE-FAILURE / NWO / DUST-STORM-WAITING-PROTOCOL / PAIRED-REDUNDANT-PROGRAM-DESIGN / PFFA — all carry forward unchanged)
-- **TRS substrate:** M1 Wave 2 generation; pack-11 binding pass complete (carries forward)
-- **vitest:** 29,494 tests (29,479 baseline from v600 + 15 new catalog-index tests)
-- **Pre-tag-gate:** 8 steps (was 7); all PASS
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-## Phase summary
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-4 phases (W0 tool authoring · W1 gate integration · W2 verification · W3 ship), 19 deliverable items, all PASS at G3. Total wall-time ~1.5h end-to-end (substantially smaller than NASA-degree milestones because no engine-state work).
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-## Files changed
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-| Path | Change | Lines |
+## Key Features
+
+| Track | Field | Value |
 |---|---|---|
-| `tools/update-catalog-indexes.mjs` | NEW | 461 |
-| `tools/__tests__/update-catalog-indexes.test.mjs` | NEW (15 tests) | 367 |
-| `tools/pre-tag-gate.sh` | step 8 added; success message updated | ~20 line delta |
-| `tools/ftp-sync.mjs` | precondition added when `--include-catalog-index` | ~30 line delta |
-| `tools/render-claude-md/env-vars.json` | add `SC_SKIP_CATALOG_INDEX_GATE` | 1 entry |
-| `vitest.tools.config.mjs` | add new test file | 1 line |
-| `CLAUDE.md` | gates table + env vars + composite gate paragraph + step 8 subsection + exit codes | ~40 line delta |
-| `package.json` + `package-lock.json` + `src-tauri/Cargo.toml` + `src-tauri/tauri.conf.json` | atomic version bump 1.49.600 → 1.49.601 | 5 version slots |
+| NASA | Mission name | Catalog-Index Auto-Derive Counter-Cadence |
+| NASA | Degree from | N.NNN |
+| NASA | Degree to | N.NNN |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-Catalog index files (`www/tibsfox/com/Research/{NASA,MUS,ELC}/index.html`) are NOT modified at v601 — their hand-fix at v600+1 is already ground truth, confirmed by the retroactive --check. They will be re-touched at v602 when the next engine-state milestone advances NASA 1.80 → 1.81.
+## Cross-References
+
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.600** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.602** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
+
+## Engine Position
+
+| Track | At v1.49.600 close | At v1.49.601 close |
+|---|---|---|
+| NASA degree | N.NNN | **N.NNN** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
+
+## Infrastructure
+
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/N.NNN/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-601-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.601` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.600](../v1.49.600/00-summary.md) · **Next:** [v1.49.602](../v1.49.602/00-summary.md)

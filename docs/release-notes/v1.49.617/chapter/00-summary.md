@@ -1,51 +1,62 @@
-# v1.49.617 — Summary: HEAO-1 X-Ray All-Sky Survey
+<!-- V650-699-CHAPTER-LIFTED v1 -->
+# v1.49.617 — Chapter 00: Summary
 
-**Thirteenth consecutive engine-cadence degree-advancing milestone** in the v604+ run. NASA 1.93 → 1.94 + MUS 1.93 → 1.94 + ELC 1.93 → 1.94 + SPS #90 → #91 + TRS M1 W2 pack-15 → pack-16 logic-and-foundations binding. **K_16 single-pass complete-graph ACHIEVED** at v617 close — second post-K_14 extension; sixteen-pack roster fully realized in single pass at the new tier. **First post-ESTABLISHED reproducibility test passes** for #10273 + #10274 + #10275 (all v616 ESTABLISHED-promotions reproducing cleanly at obs#1). **One ESTABLISHED-promotion at v617 with SPECIALIZATION sub-form** (#10277). **First fresh regime-shift to observatory/astrophysics** — opens the arc that COBE/GRO/HST/Chandra/Webb will inherit.
+## Summary
 
-## Structural firsts logged at v617
+**Forward-cadence NASA degree advance to ?.?.** v1.49.617 ships HEAO-1 X-Ray All-Sky Survey as a forward-cadence engine-state advance from NASA degree ?.? to ?.?. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-**First all-sky X-ray survey at high sensitivity.** HEAO-1 launch 1977-08-12 06:28:59 UTC LC-17B atop final Atlas-Centaur D vehicle; 16-month mission 1977-08-12 → 1979-01-09 (525 days; battery-exhaustion end-of-life); 432×445 km × 22.7° orbit; great-circle scan perpendicular-to-Sun every 6 months across two scan periods; 4-instrument payload A1 LASS (Friedman NRL) + A2 CXE (Boldt Goddard) + A3 Modulation Collimator (Bradt MIT) + A4 Hard X-ray (Peterson UCSD); ~10× sensitive to UHURU/SAS-1 1970-1973 predecessor. **Substrate-archetype for survey-class observatory missions** — pattern inherited by COBE 1989 / Spitzer 2003 / WISE 2009 / GRO 1991.
+**Mission rebuilt to per-pipeline depth.** HEAO-1 X-Ray All-Sky Survey ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/N.NNN/`.
 
-**842-source X-ray catalog Wood 1984.** primary scientific deliverable (Wood et al. 1984 ApJS 56:507); cross-identified with optical/radio counterparts via positional accuracy; canonical X-ray source taxonomy until ROSAT 1990. SOURCE-CATALOG-AS-DELIVERABLE substrate primitive admitted; substrate parallel to MUS discography catalogs / SPS species lists / TRS pack-edge catalogs.
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-**SS 433 first relativistic-jet galactic binary discovered.** HEAO-1 + Hjellming-Johnston VLA radio identification (Margon UW + Hjellming NRAO 1979); W50 supernova remnant; first compact X-ray binary with relativistic jets. Margon-vs-Hjellming interpretive dispute on binary geometry = substrate parallel to Levin/Soffen at Viking biology = **#10276 obs#3 DISSENTING-PI fourth-daughter-primitive observation**.
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-4. **Hercules X-1 cyclotron line at 4×10¹² Gauss** (Trümper et al. 1978 ApJ 219:L105) — first cyclotron line detection at neutron-star magnetic field; cosmic X-ray background flux measurements; cyg X-1 black hole confirmation; gamma-ray burst counterpart constraints.
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-**K_16 SINGLE-PASS ACHIEVED.** TRS M1 W2 pack-16 logic-and-foundations binding extends past K_15 in a single milestone; all 120 = C(16,2) pack-pair edges realized. Pack-16 plays a **bridge-category role obs#4** (4-of-4 consecutive bridge-pattern across pack-07/14/15/16) confirming **#10273 post-ESTABLISHED reproducibility obs#1**. Substrate-coherence: source-classification logic + cross-identification Bayesian inference + spectral-fit model selection + catalog-completeness reasoning + observatory-scheduling logic. **#10274 K_N completion obs#1 CONFIRMED** at second consecutive CLEAN EXTENSION (K_15 v616 + K_16 v617 at 14-edge cadence preservation).
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-**One ESTABLISHED-promotion at v617 with SPECIALIZATION sub-form:**
-   - **#10277** REMOTE-OPERATOR-AT-PLANETARY-SCALE → ESTABLISHED at obs#3 with SPECIALIZATION sub-form (substrate-coherence at HEAO-1 LEO = LOW; primitive does NOT generalize beyond Earth-Mars latency scale; specializes to deep-space-only operator-pattern)
-   - First ESTABLISHED-promotion via SPECIALIZATION rather than GENERALIZATION; lesson taxonomy expands.
+## Key Features
 
-**#10269 obs#6 fresh planetary→observatory regime-shift hold-test PASSES.** tetra-form-plus-fourth-candidate taxonomy maintained at fresh regime back to observatory. **CANDIDATE FIFTH DAUGHTER PRIMITIVE** PI-AS-CATALOG-AUTHOR (Friedman/Wood/Boldt/Bradt/Peterson as catalog-curators rather than experiment-operators) emitted as #10282; pattern parallel to v615 Levin DISSENTING-PI but different sub-form (catalog-curator vs interpretive-dissenter). Substrate stable past six consecutive observations including triple-direction reproducibility + intra-regime second-instance + fresh planetary→observatory regime-shift.
+| Track | Field | Value |
+|---|---|---|
+| NASA | Mission name | HEAO-1 X-Ray All-Sky Survey |
+| NASA | Degree from | N.NNN |
+| NASA | Degree to | N.NNN |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-**#10276 DISSENTING-PI obs#3 toward ESTABLISHED-promotion at 3-ex.** SS 433 Margon UW vs Hjellming NRAO interpretive dispute on binary system geometry substrate parallel to Levin/Soffen at Viking biology; needs 0 more observations to ESTABLISHED-promotion (3-ex threshold MET; promotion logged at FA-617-5 next-milestone-target).
+## Cross-References
 
-**#10247 obs#10 multiple cross-anchors INSIDE-window.** Elvis Presley death 1977-08-16 +4d INSIDE cultural-anchor; Motörhead self-titled debut 1977-08-21 +9d boundary; **Voyager 2 launch 1977-08-20 +8d INSIDE-window forward (cross-mission within milestone cohort 1.94 → 1.95)**; **Phobos discovery 1877-08-12 -100y EXACT centennial cross-anchor** (substrate-scope clarification PENDING archival admission of ground-observation-scope cross-anchors). Substrate primitive holds past ten consecutive observations; multi-anchor cohort enriches the soak.
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.616** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.618** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-**First CABINET-RANK ENERGY-AGENCY-CONSOLIDATION ELC pick.** DOE Organization Act P.L. 95-91 signed Carter 1977-08-04 (= HEAO-1 launch -8d EXACT INSIDE strict ±8d boundary); consolidates ERDA + FEA + Atomic Energy Commission successor + 50+ programs into Cabinet-rank Department of Energy; first major Cabinet-rank reorganization since DoT 1967; James Schlesinger first Secretary. **#10275 multi-stakeholder-renegotiation post-ESTABLISHED reproducibility obs#1 CONFIRMED** in domestic-government domain via 4-tier stakeholder architecture (federal agencies + Cabinet executives + Congressional authorizers + state energy regulators). #10283 FIRST-CABINET-DEPARTMENT-FOR-RESEARCH-CONSOLIDATION CANDIDATE emitted.
+## Engine Position
 
-11. **First WBPHS-CONTINENTAL-SURVEY SPS pick — Northern Pintail (*Anas acuta*)** — tracked by Waterfowl Breeding Population and Habitat Survey 1955-present (USFWS + CWS joint continental-scale annual aerial survey across Alaska + Canada + N USA prairie-pothole region). WBPHS = SURVEY-INSTRUMENT-AS-CONTINENTAL-MONITORING substrate-archetype mirror to HEAO-1 all-sky X-ray survey. Cohort trophic edge **Peregrine #90 → Pintail #91 CONFIRMED** via Mills 2019 *Falco peregrinus* prey-selection on duck cohorts (peregrine falcon predation on waterfowl is a documented ecological linkage).
+| Track | At v1.49.616 close | At v1.49.617 close |
+|---|---|---|
+| NASA degree | N.NNN | **N.NNN** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
 
-12. **Steely Dan *Aja* recording-session-anchor sub-form** — release date 1977-09-23 = HEAO-1 launch +42d OUTSIDE strict ±8d but tracking sessions Village Recorders Jan-Aug 1977 INSIDE-window per #10232 obs#18 RECORDING-SESSION-ANCHOR sub-form. **#10285 RECORDING-SESSION-ANCHOR sub-form FORMALIZED** at four cumulative instances (MUS 1.86 Cobham *Spectrum* + v614 Ella Fitzgerald *Montreux '75* + v616 Pink Floyd Wish You Were Here Barrett-visit + v617 *Aja* tracking-session); promotion target at next bidirectional refinement.
+## Infrastructure
 
-**13th operational application of v603 BLOCKER gate — first-attempt PASS.** NASA 1.94 PASS at first-attempt with canonical Track 1a/1b/2/3/4/5/6/7 labels (no fix-up cycle needed). **THREE CONSECUTIVE FIRST-ATTEMPT PASSes** (v615 fix-up → v616 first-attempt → v617 first-attempt → v617 first-attempt counts as obs#16); discipline now stable. #10244 ESTABLISHED reaffirm at obs#16.
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/N.NNN/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-617-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.617` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
 
-14. **W2 wave clean across nine consecutive milestones** (v609-v617; 36-of-36 cumulative clean dispatches; W2.SPS recovered from stream-watchdog stall via Edit-only mode = **second instance of #10260 hold-test recovery pattern** — first instance v616, second instance v617; reproducibility extension confirmed at 2-of-2 stall-recovery cases).
-
-**TRS pack-16 W1.TRS canonical-edge-pair-format SUCCESS.** 14 edges parsed by build-trs-edges.mjs (FA-616-9 lesson transferred forward; canonical edge-pair format produces 14 edges per binding; bibliography format would produce 0).
-
-## Engine-state delta
-
-- NASA: 95 catalog index entries (94 + HEAO-1 1.94; auto-written by IC-613-1.4 fourth operational use)
-- MUS: 95 catalog index entries — Steely Dan *Aja* card authored at insertion point with recording-session-anchor sub-form annotation
-- ELC: 95 catalog index entries — DOE Organization Act card authored at insertion point
-- SPS: #91 species detail page at `www/tibsfox/com/Research/SPS/northern-pintail/index.html`
-- TRS: 196 total edges across 12 milestones; **K_16 ACHIEVED** — sixteen-pack roster complete at the new extension tier
-- M1 graph: 16 packs / ~110 entities / ~219 edges via TRS loader
-- §6.6 register: ~60-64 LOCKED post-v617 (delta from v616 close — new substrate primitives admitted at v617: FIRST-ALL-SKY-SURVEY-AT-HIGH-SENSITIVITY + OBSERVATORY-AS-SURVEY-INSTRUMENT + SOURCE-CATALOG-AS-DELIVERABLE + CROSS-IDENTIFICATION-WITH-COUNTERPART + REMOTE-OPERATOR-AT-PLANETARY-SCALE-SPECIALIZATION + PI-AS-CATALOG-AUTHOR-CANDIDATE + FIRST-CABINET-DEPARTMENT-FOR-RESEARCH-CONSOLIDATION-CANDIDATE + WBPHS-CONTINENTAL-SURVEY + EMERGENT-VS-DEFINITIONAL-BRIDGE-SUB-TYPE-CANDIDATE + RECORDING-SESSION-ANCHOR-FORMALIZED-CANDIDATE + K_16-SINGLE-PASS-ACHIEVED)
-
-## Through-line
-
-v1.49.617 ships HEAO-1 — first all-sky X-ray survey at high sensitivity; substrate-archetype for survey-class observatory missions; 842-source catalog Wood 1984; SS 433 first relativistic-jet galactic binary discovered; Hercules X-1 cyclotron line at 4×10¹² Gauss; cosmic X-ray background flux measurements. Cross-track: Steely Dan *Aja* (recording-session-anchor; SOURCE-CATALOG-AS-DELIVERABLE substrate via per-track sideman roster mirroring HEAO 842-source catalog) + DOE Organization Act (FIRST-CABINET-DEPARTMENT-FOR-RESEARCH-CONSOLIDATION; #10275 post-ESTABLISHED reproducibility obs#1 CONFIRMED in domestic-government domain) + Northern Pintail SPS #91 (WBPHS continental survey instrument; cohort trophic edge Peregrine #90 → Pintail CONFIRMED) + TRS pack-16 logic-and-foundations (K_16 ACHIEVED 196 edges; #10273 + #10274 post-ESTABLISHED CONFIRMED at obs#1; refinement-lesson emergent-vs-definitional bridge sub-types). #10269 obs#6 candidate fifth daughter-primitive PI-AS-CATALOG-AUTHOR. #10247 obs#10 multiple cross-anchors including Phobos -100y centennial (substrate-scope clarification PENDING archival admission). One ESTABLISHED-promotion (#10277 with SPECIALIZATION sub-form) — first ESTABLISHED via specialization rather than generalization.
+---
+**Prev:** [v1.49.616](../v1.49.616/00-summary.md) · **Next:** [v1.49.618](../v1.49.618/00-summary.md)

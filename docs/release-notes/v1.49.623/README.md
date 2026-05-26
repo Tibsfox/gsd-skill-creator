@@ -11,6 +11,20 @@
 ## Summary
 
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.623 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** ISEE-3 / ICE Paired-Triple-Mission-Architecture ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 **Engine-cadence degree-advancing milestone — eighteenth consecutive degree-advancing milestone in the v604+ run.** ISEE-3 / ICE (NSSDC 1978-079A) — **first spacecraft at Earth-Sun L1 Lagrange point; first comet flyby (Comet Giacobini-Zinner 1985-09-11); first spacecraft to sample Halley outer coma (1986-03-25); substrate-archetype for L1-LAGRANGE-AS-NEW-DELIVERABLE + MISSION-REDIRECT-AS-DELIVERABLE + TRAJECTORY-ARCHITECT-AS-PROJECT-LEAD**. Launched 1978-08-12 11:13 UTC from LC-36B Atlas-Centaur; 478 kg; 13 instruments; Van Allen UI cosmic ray + Stone Caltech CRS + Gurnett UI plasma-waves project scientist + Ogilvie GSFC project manager + Farquhar 1932-2015 trajectory architect. Renamed ICE 1982 after ISEE-3 → ICE redirect via lunar-gravity-assist 1982-1983 Farquhar trajectory. Mission end 1997-05-05; 2014 reactivation attempt. ESA ~25% participation. **ISEE-1/2/3 = NASA-ESA TRIO** driving PAIRED-TRIPLE-MISSION-ARCHITECTURE NEW LOCKED. Cross-track: The Who *Who Are You* (Polydor UK / MCA US; 1978-08-18 = ISEE-3 +6d INSIDE strict; **Keith Moon final studio album**; Moon died 1978-09-07 age 32 clomethiazole overdose at 9 Curzon Place London; RIAA Platinum; UK Albums #6 / Billboard 200 #2 highest US peak for The Who; "Who Are You" Hot 100 #14) + Executive Order 12072 Federal Space Management (signed Carter 1978-08-16 = ISEE-3 +4d INSIDE strict; mandates federal CBD prioritization; paired companion EO 12074 same-day; revoked Trump EO 14274 April 2025; 47-year operational arc) + Pacific White-Sided Dolphin SPS #96 (first Delphinidae / first Odontoceti; ODONTOCETE-AS-COHORT-NODE NEW LOCKED; echolocation 0.5-150 kHz). **Five NEW LOCKED substrate primitives at v623**: PAIRED-TRIPLE-MISSION-ARCHITECTURE + L1-LAGRANGE-AS-NEW-DELIVERABLE + MISSION-REDIRECT-AS-DELIVERABLE + TRAJECTORY-ARCHITECT-AS-PROJECT-LEAD + ODONTOCETE-AS-COHORT-NODE. **Three NEW CANDIDATES**: #10306 KEITH-MOON-FINAL-ALBUM-AS-MISSION-REDIRECT-PREFIGURATION + #10307 ECHOLOCATION-AS-ON-BOARD-TRAJECTORY-DESIGN + #10308 FEDERAL-EO-AS-LONG-OPERATIONAL-ARC.
 
 ## Engine state advances

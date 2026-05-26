@@ -1,57 +1,62 @@
-# 00 — Summary: v1.49.640 Housekeeping Cluster #7
+<!-- V650-699-CHAPTER-LIFTED v1 -->
+# v1.49.640 — Chapter 00: Summary
 
-**Released:** 2026-05-12
-**Type:** counter-cadence operational-debt cleanup (NOT a NASA degree)
-**Predecessor:** v1.49.638 → v1.49.639 → **v1.49.640** (8th counter-cadence in chain)
+## Summary
 
-## TL;DR
+**Forward-cadence NASA degree advance to ?.?.** v1.49.640 ships Housekeeping Cluster #7 as a forward-cadence engine-state advance from NASA degree ?.? to ?.?. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-v1.49.640 closes the CF-7 npm audit malware advisory chain (gsd-pi removed as phantom dep) and codifies Lesson #10199's closure-verification gate as a standing discipline artifact (`docs/MISSION-PACKAGE-DISCIPLINE.md`). Engine state UNCHANGED. Counter-cadence chain extends to 8. 4 commits between v1.49.639 ship and v1.49.640 ship.
+**Mission rebuilt to per-pipeline depth.** Housekeeping Cluster #7 ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/N.NNN/`.
 
-## Headline outcomes
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-- **CF-7 CLOSED via hybrid path (b)+(d).** `npm audit --audit-level=high` exit 0. 302 packages removed (673 → 375). 30,503 vitest pass.
-- **Lesson #10199 codified.** `docs/MISSION-PACKAGE-DISCIPLINE.md` (NEW) + `docs/test-discipline/cf-closure-verification-templates.md` (NEW) + sibling cross-ref in `docs/SUBSTRATE-PROBE-DISCIPLINE.md`. Forward-applicability: future N+k clusters get the closure-verification gate by default rather than ad-hoc.
-- **CF-8 routed via option (b)** — continue counter-cadence. STS-7 Sally Ride / Challenger NASA degree deferred to v1.49.641+.
-- **CF-9 carried forward unchanged** to Cluster #8 as CF-11.
-- **Post-ship refresh absorbed.** v1.49.639 working-tree state (dashboard + RH) landed as first commit of session at `65d47b72e`.
-- **12 new meta-test invariants** in `tests/integration/v1-49-640-meta-test.test.ts` covering all closed components + CF routing decisions + counter-cadence state.
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-## Commits on dev (since v1.49.639 ship)
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-| SHA | Subject | Notes |
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
+
+## Key Features
+
+| Track | Field | Value |
 |---|---|---|
-| `65d47b72e` | chore(release): post-ship refresh — RH+dashboard for v1.49.639 | W3 Stage 0 absorption |
-| `19b89620d` | chore(deps): npm audit fix + remove unused gsd-pi to close CF-7 | C1 hybrid (b)+(d) |
-| `33df8ec0c` | docs(test-discipline): codify Lesson #10199 closure-verification gate | C2 doc artifacts |
-| `da1ef38e1` | test(v1-49-640): integration meta-test for cluster #7 closures | W3 Stage 2 meta-test |
-| (T14) | chore(release): v1.49.640 housekeeping cluster #7 | W3 Stage 6 ship |
+| NASA | Mission name | Housekeeping Cluster #7 |
+| NASA | Degree from | N.NNN |
+| NASA | Degree to | N.NNN |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-5 commits at ship (4 already landed + 1 ship commit).
+## Cross-References
 
-## What this milestone is NOT
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.639** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.641** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-- **Not a NASA degree.** Engine state UNCHANGED (CF-8 routed to defer).
-- **Not a forward-cadence resume.** Counter-cadence chain extends to 8.
-- **Not a code refactor.** All changes are deps-removal + doc-additions + test-additions; zero src/ code patches.
-- **Not Phase-2 cartridge work.** CF-9 carried forward unchanged.
+## Engine Position
 
-## Mission package vs reality (scope-change disclosure)
+| Track | At v1.49.639 close | At v1.49.640 close |
+|---|---|---|
+| NASA degree | N.NNN | **N.NNN** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
 
-The mission package anticipated CF-7 as a single clean path (b/c/d/e) decision at ~30min wall-clock. Reality: ~40min including a mid-component pivot from path (b) to hybrid (b)+(d) plus two hidden-transitive recovery cycles (fast-xml-parser, yaml). The closure-verification gate (Lesson #10199 applied to self) worked as designed — caught CF-7 was real before C1 spawned, and stayed in the routing loop during the pivot.
+## Infrastructure
 
-Two unanticipated forward-applicability findings emerged:
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/N.NNN/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-640-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.640` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
 
-1. **Phantom-dependency pattern** — `npm audit fix` non-breaking can't remove deps not declared in `package.json`. The fix requires removing the parent declaration, not the transitive.
-2. **Hidden-transitive guard** — removing a phantom dep can break tests that relied on its transitive subtree. Pre-flight grep for src/ imports satisfied by the subtree catches this before vitest verify time.
-
-Both became candidate Lessons #10203 + #10204 in `chapter/04-lessons.md`. The hidden-transitive guard was added to `cf-closure-verification-templates.md` as a forward-improvement pattern.
-
-## See also
-
-- `01-overview.md` — full narrative + scope change disclosure
-- `02-walkthrough.md` — per-component implementation walkthrough
-- `03-retrospective.md` — what worked / burned cycles / forward-improvement
-- `04-lessons.md` — Lessons #10199 apply-to-self + #10203 + #10204
-- `05-carry-forward.md` — CF-10 / CF-11 / CF-12 routed to Cluster #8
-- `99-context.md` — cross-refs + T14 ship-pipeline trace
+---
+**Prev:** [v1.49.639](../v1.49.639/00-summary.md) · **Next:** [v1.49.641](../v1.49.641/00-summary.md)

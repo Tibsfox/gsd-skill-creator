@@ -1,40 +1,62 @@
-# v1.49.626 — Summary: Solar Maximum Mission Repair-In-Orbit Substrate
+<!-- V650-699-CHAPTER-LIFTED v1 -->
+# v1.49.626 — Chapter 00: Summary
 
-**Twenty-first consecutive engine-cadence degree-advancing milestone** in the v604+ run. NASA 1.101 → 1.102 + MUS 1.101 → 1.102 + ELC 1.101 → 1.102 + SPS #98 → #99 + TRS M1 W2 pack-23 → pack-24 harmonic/Fourier analysis. **K_24 ACHIEVED** at v626 close — tenth post-K_13 extension; harmonic/Fourier analysis binding selected for substrate-coherence with SolarMax solar-oscillation spectral analysis (Fourier decomposition of solar X-ray + UV time-series), Iron Maiden "Running Free" NWOBHM rhythmic harmonic guitar attack, EO 12192 radioactive-waste-management spectral-decay physics framework, and Pacific Tree Frog multi-modal advertisement call (harmonic frequency-stacking in advertisement calls). **Seven NEW LOCKED substrate primitives at v626 — largest single-milestone count in the engine run**: REPAIR-IN-ORBIT-AS-NEW-DELIVERABLE + SOLAR-OBSERVATORY-AS-NEW-DELIVERABLE + SAME-DAY-CLUSTER-AS-PAIRED-TRIPLE-ARCHITECTURE + NUCLEAR-PHYSICS-SUBSTRATE-CONTINUITY + SINGLE-FORM sub-form for #10232 + AMPHIBIA-AS-COHORT-NODE + EDDIE-THE-HEAD-MASCOT-AS-CULTURAL-SUBSTRATE. **FA-625-1 RESOLVED** — #10286 obs#8 PAIRED-TRIPLE post-ESTABLISHED reproducibility reaffirm (SolarMax = first solar-observatory spacecraft; third observatory class after Einstein X-ray + HEAO-3 gamma-ray; #10286 obs#8 extends PAIRED-TRIPLE to multi-class observatory-architecture domain; 3-of-3 cumulative). **FA-625-6 RESOLVED** — TRS pack-24 harmonic/Fourier analysis binding mode-choice. **FA-625-7 RESOLVED** — NASA 1.102 SolarMax verified. **#10287 obs#8 DIRECT-ORDER 7-of-7 cumulative** (SolarMax launched as single spacecraft; FA-626-2 active soak). **#10289 obs#8 ESTABLISHED-promotion target at 8-of-8** — FA-626-4 active DECISION. **#10247 obs#18 INSIDE-strict 3-event 1980-02 cluster** (Iron Maiden 1980-02-08 -6d / EO 12192 1980-02-12 -2d / SolarMax launch 1980-02-14 anchor; sixth consecutive INSIDE-strict 3-event cluster across all three time-anchored tracks simultaneously). **W2 dual-track Tier-2 inline-recovery applied** at NASA + ELC simultaneously (9th cumulative; first dual-track recovery in engine run; NASA 1/7 → 7/7 sections; ELC 63% → 87% bytes). **#10244 21st operational application** of v603 BLOCKER gate; **ELEVEN CONSECUTIVE first-attempt PASSes** at v615-v626 (minus v621 counter-cadence). SolarMax (Solar Maximum Mission) launched 1980-02-14 from LC-17A on a Delta 3910 into 574 km × 28.5° LEO; 7 instruments (C/P + HXRBS + UVSP + XRP + HXIS + GRS + ACRIM) providing simultaneous coverage from UV through gamma-ray; primary science: the solar maximum of cycle 21 (1979-1981 peak); >12,500 X-ray flares catalogued 1980-1989; ACRIM (Active Cavity Radiometer Irradiance Monitor; PI Willson) established first multi-year continuous total-solar-irradiance record 1980-1989; GRS (Gamma-Ray Spectrometer; PI Chupp) detected solar gamma-ray lines and neutrons during major flares. First spacecraft with a planned maintenance design: returned-to-service via STS-41-C (Challenger) on-orbit repair 1984-04-08 to 1984-04-13 — astronaut Nelson + van Hoften EVA replaced C/P electronics + attitude-control module; SolarMax returned to full science operations 1984-11 and operated until atmospheric reentry 1989-12-02. Cross-track: Iron Maiden "Running Free"/"Burning Ambition" 7" single (EMI 5032; SINGLE-FORM sub-form NEW LOCKED — first Iron Maiden in cohort; first single-instead-of-album in MUS catalog 1.80-1.102; Derek Riggs first Eddie the Head depiction on cover; NWOBHM debut piece; UK release 1980-02-08 -6d INSIDE strict; UK Singles Chart #34; Harris + Di'Anno + Murray + Stratton + Sampson; #10232 obs#30; #10316 EDDIE-THE-HEAD-MASCOT + #10317 NWOBHM-AS-MUSIC-INDUSTRY-REPAIR-IN-ORBIT-ANALOG NEW CANDIDATEs) + EO 12192 State Planning Council on Radioactive Waste Management (Carter signed 1980-02-12 -2d INSIDE strict; same-day trio EO 12192+12193+12194; TMI 1979 context; NWPA 1982 successor; SAME-DAY-CLUSTER-AS-PAIRED-TRIPLE-ARCHITECTURE + NUCLEAR-PHYSICS-SUBSTRATE-CONTINUITY NEW LOCKED; #10232 obs#31; #10318 + #10319 NEW CANDIDATEs; FA-625-4 #10289 obs#8 ESTABLISHED-promotion target reaffirm at administrative-scale nuclear-physics arc) + Pacific Tree Frog SPS #99 (*Pseudacris regilla*; first amphibian + first Anura + first Hylidae; AMPHIBIA-AS-COHORT-NODE NEW LOCKED; #10315 NEW CANDIDATE; multi-modal advertisement call SOLAR-OBSERVATORY analog VERY-HIGH; metamorphosis tadpole→froglet REPAIR-IN-ORBIT analog VERY-HIGH; sixth consecutive cohort-class expansion) + TRS pack-24 harmonic/Fourier analysis (K_24 ~308 edges; #10273 + #10274 + #10284 obs#9 HOLDS 12-of-12 consecutive bridge-category; FA-625-6 RESOLVED).
+## Summary
 
-## Structural firsts logged at v626
+**Forward-cadence NASA degree advance to ?.?.** v1.49.626 ships Solar Maximum Mission Repair-In-Orbit Substrate as a forward-cadence engine-state advance from NASA degree ?.? to ?.?. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-**REPAIR-IN-ORBIT-AS-NEW-DELIVERABLE NEW LOCKED.** SolarMax is the first spacecraft repaired in orbit (STS-41-C 1984-04-08 to 1984-04-13; Nelson + van Hoften replaced C/P electronics + attitude-control module on-orbit via EVA); establishes substrate-archetype for HST Servicing Missions SM1/SM2/SM3A/SM3B/SM4 + ISS assembly + Hubble servicing paradigm; distinct from all prior NASA missions in requiring a planned-maintenance EVA as part of the mission design lifecycle
+**Mission rebuilt to per-pipeline depth.** Solar Maximum Mission Repair-In-Orbit Substrate ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/N.NNN/`.
 
-**SOLAR-OBSERVATORY-AS-NEW-DELIVERABLE NEW LOCKED.** SolarMax is the first comprehensive multi-wavelength solar observatory: simultaneous UV + EUV + soft X-ray + hard X-ray + gamma-ray coverage of the solar disk; substrate-archetype for SOHO + RHESSI + TRACE + STEREO + Hinode + SDO + IRIS + Solar Orbiter + Parker Solar Probe; distinct from single-band solar monitors and from general-purpose high-energy observatories (HEAO series) in targeting the Sun as the primary science object across the full electromagnetic spectrum
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-**SINGLE-FORM sub-form NEW LOCKED for #10232.** Iron Maiden "Running Free"/"Burning Ambition" is a 7" single (EMI 5032), not an album; first single-format release in MUS catalog 1.80-1.102; sub-form designates releases where the MUS pick is a single or EP rather than LP/album; distinct from BAND-PROGRAM-COMPLETION (terminal-arc albums) and from standard album picks; SINGLE-FORM sub-form broadens #10232 INSIDE-window observation domain to include single-format releases alongside album releases
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-4. **EDDIE-THE-HEAD-MASCOT-AS-CULTURAL-SUBSTRATE NEW LOCKED** (#10316) — Derek Riggs' first Eddie the Head depiction appears on the "Running Free" single cover 1980-02-08; Eddie the Head becomes Iron Maiden's permanent visual identity (every studio album cover 1980-present; 46-year continuity; #10316 NEW CANDIDATE marks mascot-as-cultural-identity-anchor substrate)
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-5. **AMPHIBIA-AS-COHORT-NODE NEW LOCKED** (#10315) — Pacific Tree Frog (*Pseudacris regilla*) SPS #99 is the first amphibian + first Anura (frog order) + first Hylidae (tree frog family) in the SPS cohort; sixth consecutive cohort-class expansion (v620 autotroph → v622 crustacean → v623 odontocete → v624 passerine → v625 cold-water Salmonidae → v626 amphibian); AMPHIBIA-AS-COHORT-NODE captures the substrate of amphibians entering the cohort via metamorphic-lifecycle REPAIR-IN-ORBIT analog
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-6. **SAME-DAY-CLUSTER-AS-PAIRED-TRIPLE-ARCHITECTURE NEW LOCKED** (#10318) — Carter signed EO 12192 + EO 12193 (Federal Emergency Management; pre-FEMA formalization) + EO 12194 (International Trade Commission reform) on 1980-02-12 = same calendar day; SAME-DAY-CLUSTER-AS-PAIRED-TRIPLE-ARCHITECTURE captures administrative triple-issuances that mirror mission-trio architecture at single-day administrative scale; substrate distinct from MULTI-BILL-PACKAGE-AS-PAIRED-ARCHITECTURE (simultaneous legislation)
+## Key Features
 
-7. **NUCLEAR-PHYSICS-SUBSTRATE-CONTINUITY NEW LOCKED** (#10319) — SolarMax GRS (Chupp) detects solar gamma-ray lines + neutrons (nuclear reactions in solar flare magnetic reconnection zones); EO 12192 establishes radioactive-waste management framework post-TMI 1979; both arise from nuclear-physics substrate at different scales (cosmic solar-nuclear vs terrestrial radioactive-decay); NUCLEAR-PHYSICS-SUBSTRATE-CONTINUITY captures cross-track substrate coherence where NASA science and ELC policy share a nuclear-physics domain anchor at the same milestone
+| Track | Field | Value |
+|---|---|---|
+| NASA | Mission name | Solar Maximum Mission Repair-In-Orbit Substrate |
+| NASA | Degree from | N.NNN |
+| NASA | Degree to | N.NNN |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-**#10247 obs#18 INSIDE-strict 3-event 1980-02 cluster — sixth consecutive.** Iron Maiden 1980-02-08 -6d / EO 12192 1980-02-12 -2d / SolarMax launch 1980-02-14 anchor = 6-day window; sixth consecutive milestone (v620/v622/v623/v624/v625/v626) with 3-event INSIDE-strict cluster across all three time-anchored tracks simultaneously; tightest 6-day multi-track window since v624 tied at 4 days (anchor/ELC -4d/MUS -3d; v626 anchor/ELC -2d/MUS -6d)
+## Cross-References
 
-**#10244 21st operational application — ELEVENTH CONSECUTIVE first-attempt PASS.** v626 NASA 1.102 PASS at first-attempt (post-recovery); eleven consecutive first-attempt PASSes (v615-v626 minus v621 counter-cadence); discipline mandatory-mature past the double-digit milestone cadence marker established at v625
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.625** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.627** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-**K_24 ACHIEVED.** TRS pack-24 harmonic/Fourier analysis (~308 total edges); tenth post-K_13 extension; harmonic/Fourier analysis binding for substrate-coherence with SolarMax solar-oscillation spectral decomposition + Iron Maiden "Running Free" harmonic guitar attack + EO 12192 radioactive-decay spectral framework + Pacific Tree Frog advertisement-call harmonic stacking; #10273 + #10274 + #10284 obs#9 HOLDS 12-of-12 consecutive bridge-category; FA-625-6 RESOLVED
+## Engine Position
 
-**Dual-track Tier-2 inline-recovery — first simultaneous dual-track recovery in engine run.** prior eight Tier-2 recoveries were single-track (ELC only); v626 required simultaneous NASA + ELC recovery (NASA 1/7 sections FAIL → 7/7 PASS; ELC 63% bytes FAIL → 87% WARN); dual-track recovery protocol established; 9th cumulative Tier-2 application
+| Track | At v1.49.625 close | At v1.49.626 close |
+|---|---|---|
+| NASA degree | N.NNN | **N.NNN** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
 
-## Engine-state delta
+## Infrastructure
 
-- NASA: 103 catalog index entries (102 + SolarMax 1.102; first solar-observatory degree entry; REPAIR-IN-ORBIT + SOLAR-OBSERVATORY primitives registered)
-- MUS: 103 catalog index entries — Iron Maiden "Running Free" 7" single card authored with SINGLE-FORM sub-form + EDDIE-THE-HEAD-MASCOT + NWOBHM annotation
-- ELC: 103 catalog index entries — EO 12192 State Planning Council card authored with SAME-DAY-TRIO + NUCLEAR-PHYSICS-SUBSTRATE-CONTINUITY annotation
-- SPS: #99 Pacific Tree Frog species detail page; AMPHIBIA-AS-COHORT-NODE first amphibian entry; sixth consecutive cohort-class expansion
-- TRS: ~308 total edges across 20 milestones; **K_24 ACHIEVED** — twenty-fourth-pack roster complete
-- §6.6 register: ~103-109 LOCKED post-v626 (delta: seven new substrate primitives LOCKED at v626 — largest single-milestone lock count)
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/N.NNN/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-626-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.626` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
 
-## Through-line
-
-v1.49.626 ships Solar Maximum Mission — first space telescope repaired in orbit (1980-02-14 launch; 7 instruments; STS-41-C EVA repair 1984; ACRIM TSI 1980-1989; >12,500 X-ray flares). Cross-track: Iron Maiden "Running Free" single (SINGLE-FORM sub-form + EDDIE-THE-HEAD-MASCOT NEW LOCKED; NWOBHM debut; EMI 5032; 1980-02-08 -6d INSIDE strict; first Iron Maiden in cohort; #10232 obs#30; #10316+#10317 NEW CANDIDATEs) + EO 12192 State Planning Council Radioactive Waste Management (SAME-DAY-TRIO EO 12192+12193+12194 Carter 1980-02-12 -2d INSIDE strict; NUCLEAR-PHYSICS-SUBSTRATE-CONTINUITY NEW LOCKED; #10232 obs#31; #10318+#10319 NEW CANDIDATEs; FA-625-4 #10289 obs#8 ESTABLISHED-promotion reaffirm) + Pacific Tree Frog SPS #99 (AMPHIBIA-AS-COHORT-NODE NEW LOCKED; first amphibian; metamorphosis = REPAIR-IN-ORBIT analog VERY-HIGH; #10315 NEW CANDIDATE) + TRS pack-24 harmonic/Fourier analysis (K_24 ~308 edges; FA-625-6 RESOLVED). Seven substrate primitives LOCKED at v626 — record single-milestone count. FA-625-1 RESOLVED (#10286 obs#8). FA-625-6 RESOLVED (pack-24 harmonic/Fourier). FA-625-7 RESOLVED (NASA 1.102 SolarMax). W2 dual-track Tier-2 inline-recovery at NASA + ELC simultaneously (9th cumulative; first dual-track recovery); 0 FAIL findings post-recovery.
+---
+**Prev:** [v1.49.625](../v1.49.625/00-summary.md) · **Next:** [v1.49.627](../v1.49.627/00-summary.md)

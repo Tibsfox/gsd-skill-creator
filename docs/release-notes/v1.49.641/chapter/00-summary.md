@@ -1,66 +1,62 @@
-# 00 — Summary: v1.49.641 Housekeeping Cluster #8
+<!-- V650-699-CHAPTER-LIFTED v1 -->
+# v1.49.641 — Chapter 00: Summary
 
-**Released:** 2026-05-12
-**Type:** counter-cadence operational-debt cleanup (NOT a NASA degree)
-**Predecessor:** v1.49.640 → **v1.49.641** (9th counter-cadence in chain)
+## Summary
 
-## TL;DR
+**Forward-cadence NASA degree advance to ?.?.** v1.49.641 ships Housekeeping Cluster #8 as a forward-cadence engine-state advance from NASA degree ?.? to ?.?. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-v1.49.641 closes CF-11 (Phase-2 cartridge migration — RETIRED via Lesson #10199 §1.4 re-framing review; 5-cluster carry was a framing error) and CF-12 (closure-verify-cf.mjs tool implementing the W0 closure-verification gate). 4 commits between v1.49.640 ship and v1.49.641 ship. Engine state UNCHANGED. Counter-cadence chain extends to 9.
+**Mission rebuilt to per-pipeline depth.** Housekeeping Cluster #8 ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/N.NNN/`.
 
-## Headline outcomes
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-- **CF-11 RETIRED via §1.4 re-framing review.** First application of Lesson #10199 §1.4 (re-framing review for chains ≥4 clusters). Probes confirmed the original framing ("7 unfit chipsets need migration") was wrong — the chipsets aren't runtime-loaded, no enforcement requires migration, and one was already promoted out. Documented at `.planning/c0-cf11-reframing-review.md`. The §1.4 discipline worked as designed.
-- **CF-12 CLOSED via `scripts/closure-verify-cf.mjs`.** 5 probe types (npm-audit, file-snapshot, upstream-version, test-marker, hidden-transitive-guard). 9 invariant tests. Discipline doc updated to reflect tool existence.
-- **CF-10 carried forward unchanged** to v1.49.642 (as CF-13).
-- **Counter-cadence chain at 9.** Strongest precedent in this codebase.
-- **8 meta-test invariants** in `tests/integration/v1-49-641-meta-test.test.ts` covering all closures + counter-cadence state.
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-## Commits on dev (since v1.49.640 ship)
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-| SHA | Subject | Notes |
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
+
+## Key Features
+
+| Track | Field | Value |
 |---|---|---|
-| `6c2dafdfa` | feat(scripts): closure-verify-cf.mjs codifies Lesson #10199 W0 gate | C2 (CF-12 closure) |
-| `8c35f4832` | chore(release): post-ship refresh — RH+dashboard for v1.49.640 | W3 Stage 0 absorption |
-| `cfd3ddcf6` | test(v1-49-641): integration meta-test for cluster #8 closures | W3 Stage 2 |
-| (T14) | chore(release): v1.49.641 housekeeping cluster #8 | W3 Stage 6 ship |
+| NASA | Mission name | Housekeeping Cluster #8 |
+| NASA | Degree from | N.NNN |
+| NASA | Degree to | N.NNN |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-4 commits at ship (3 already landed + 1 ship commit).
+## Cross-References
 
-## What this milestone is NOT
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.640** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.642** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-- **Not a NASA degree.** Engine state UNCHANGED (CF-10 routed to defer again).
-- **Not a forward-cadence resume.** Counter-cadence chain extends to 9.
-- **Not a code refactor of cartridge subsystem.** CF-11 retirement was a re-framing review only; no source code changed.
-- **Not a new abstraction.** CF-12 tool implements an already-codified discipline (Lesson #10199 from v1.49.640) — execution support, not new structure.
+## Engine Position
 
-## §1.4 re-framing review as cluster identity
+| Track | At v1.49.640 close | At v1.49.641 close |
+|---|---|---|
+| NASA degree | N.NNN | **N.NNN** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
 
-The cluster's defining outcome: Lesson #10199 §1.4 caught its first framing error at v1.49.641 W0. CF-11 had been routed through 5+ clusters (v1.49.636 → .637 → .638 → .639 → .640 → **.641**) without closure. Per §1.4, mission-package authors at any cluster with ≥4-cluster CF chains MUST add an EXPLICIT "could the framing be wrong?" review step.
+## Infrastructure
 
-Applied to CF-11, the review surfaced:
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/N.NNN/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-641-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.641` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
 
-1. The 7 "unfit chipsets" are not loaded by the runtime cartridge loader (verified via `grep` of `loadCartridge` callsites)
-2. No build-time / runtime / CI check enforces migration
-3. The migration target (`department-adapter`) is only referenced by the `cartridge migrate` CLI subcommand, not by production code
-4. One of the 7 (math-coprocessor) was already promoted OUT of the chipset system to `coprocessors/math/` on 2026-04-19
-5. The remaining 6 are documentation/reference material at `examples/chipsets/`
-
-The framing "unfit chipsets need migration" was a category-level frame; the root mechanism was "the `cartridge migrate` CLI tool can't process these inputs, AND nothing requires it to". Different categories with different fix shapes.
-
-This is exactly the framing-error pattern §1.4 was designed to catch. The discipline worked.
-
-## CF-12 tool as discipline-as-code
-
-The closure-verification gate (Lesson #10199 §1.3 mechanical W0 step) was codified as prose at v1.49.640 C2. v1.49.641 C2 codifies it as code — `scripts/closure-verify-cf.mjs` executes the gate. The path from lesson → discipline doc → automation completed in 2 clusters.
-
-Forward improvement candidate (CF-14): per-CF probe spec format (YAML at `.planning/cf-probes/<CF-id>.yaml`) so the tool can auto-discover which probe matches each CF. Routed forward as discretionary.
-
-## See also
-
-- `01-overview.md` — full narrative
-- `02-walkthrough.md` — per-component implementation walkthrough
-- `03-retrospective.md` — what worked / forward improvements
-- `04-lessons.md` — Lesson #10199 §1.4 first apply-to-self confirmation
-- `05-carry-forward.md` — CF-13 + CF-14 routed to Cluster #9
-- `99-context.md` — cross-refs + T14 ship-pipeline trace
+---
+**Prev:** [v1.49.640](../v1.49.640/00-summary.md) · **Next:** [v1.49.642](../v1.49.642/00-summary.md)

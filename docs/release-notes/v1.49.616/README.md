@@ -11,6 +11,20 @@
 ## Summary
 
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.616 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** Viking 2 Second Mars Landing ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 **Engine-cadence degree-advancing milestone — twelfth consecutive degree-advancing milestone in the v604+ run.** Viking 2 (NSSDC 1975-083A orbiter / 1975-083C lander) — **second successful Mars surface landing; first PAIR-OF-MISSION-AS-CROSS-VALIDATION at planetary scale**. Launched 1975-09-09 18:39 UTC from Cape Canaveral LC-41 atop Titan IIIE-Centaur (twentieth Titan-Centaur flight); cruise 1975-09-09 → 1976-08-07 (~11 months); Mars orbit insertion 1976-08-07 19:29:29 UTC; lander separation + powered descent + touchdown 1976-09-03 22:37:50 UTC at 47.967°N / 134.067°E in Utopia Planitia ("Plain of Utopia"), **6,460 km from Viking 1 site at 25° higher latitude**. Lander operations 1976-09-03 → 1980-04-11 (3.6 years; ended by battery failure); orbiter operations 1976-08-07 → 1978-07-25 (1.9 years; ended by attitude-control gas exhaustion). Project scientist Gerald A. Soffen continuing from Viking 1; biology PI roster Klein/Horowitz/Oyama/Levin re-running identical PR/LR/GEx protocols at the new latitude. **Biology results reproduced Viking 1**: LR-positive + PR-positive + GEx-positive + GCMS no-organics-detected — ambiguous results at TWO independent latitudes 6,460 km apart **simultaneously reinforcing both consensus-abiotic-superoxide (Soffen-Klein) AND Levin minority-interpretation** (Levin & Straat 2016 *Astrobiology* 16:798). Viking 1 + Viking 2 simultaneous surface operations 1976-09-03 → 1980-04-11 = **3.6-year intra-mission cross-anchor** (#10247 obs#9 INTRA-MISSION sub-form). Regime continues robotic-investigator INTRA-REGIME from v615; #10269 obs#5 hold-test at intra-regime second-instance WITHOUT fresh regime-shift. Three v615-emitted CANDIDATEs reach obs#2: #10276 DISSENTING-PI fourth-daughter-primitive (Levin LR-positive at second latitude); #10277 REMOTE-OPERATOR-AT-PLANETARY-SCALE (paired-lander 3.6-year simultaneous Earth-Mars ops); #10278 CALENDAR-DAY-SAME-AS-PRIOR-MISSION (declined-signal contrast vs v615 deliberate Apollo-11 +7y).
 
 ## Engine state advances

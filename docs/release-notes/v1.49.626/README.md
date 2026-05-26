@@ -11,6 +11,20 @@
 ## Summary
 
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.626 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** Solar Maximum Mission Repair-In-Orbit Substrate ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 **Engine-cadence degree-advancing milestone — twenty-first consecutive degree-advancing milestone in the v604+ run.** Solar Maximum Mission (SolarMax/SMM; NSSDC 1980-014A) — **first space telescope repaired in orbit by STS-41-C 1984-04-08 to 1984-04-13 (Nelson + van Hoften EVA); first comprehensive multi-wavelength solar observatory; >12,500 X-ray flares catalogued; ACRIM total-solar-irradiance first multi-year continuous record 1980-1989**. Launched 1980-02-14 15:57 UTC LC-17A Delta 3910; 7 instruments: C/P House + HXRBS Dennis + UVSP Woodgate + XRP Acton + HXIS de Jager + GRS Chupp + ACRIM Willson. Cross-track: Iron Maiden "Running Free"/"Burning Ambition" 7" single (EMI 5032; UK release 1980-02-08 = SolarMax -6d INSIDE strict; #10232 obs#30; **SINGLE-FORM sub-form NEW LOCKED — first single-instead-of-album in MUS catalog 1.80-1.102**; cover art Derek Riggs first Eddie the Head depiction; NWOBHM genre debut piece; UK Singles Chart #34; **EDDIE-THE-HEAD-MASCOT-AS-CULTURAL-SUBSTRATE NEW LOCKED**) + Executive Order 12192 — State Planning Council on Radioactive Waste Management (Carter signed 1980-02-12 = SolarMax -2d INSIDE strict; #10232 obs#31; same-day Carter EO trio cluster EO 12192 + EO 12193 + EO 12194; TMI 1979 context; **SAME-DAY-CLUSTER-AS-PAIRED-TRIPLE-ARCHITECTURE NEW LOCKED**) + Pacific Tree Frog SPS #99 (*Pseudacris regilla*; **first amphibian + first Anura + first Hylidae in cohort; AMPHIBIA-AS-COHORT-NODE NEW LOCKED**; multi-modal advertisement call = SOLAR-OBSERVATORY analog VERY-HIGH; metamorphosis tadpole→froglet = REPAIR-IN-ORBIT analog VERY-HIGH; default Hollywood frog sound 1940s-2000s) + TRS M1 W2 pack-24 harmonic/Fourier analysis (K_24 ~308 edges target; FA-625-6 RESOLVED). **Seven NEW LOCKED substrate primitives at v626 — largest single-milestone count**: REPAIR-IN-ORBIT-AS-NEW-DELIVERABLE + SOLAR-OBSERVATORY-AS-NEW-DELIVERABLE + SAME-DAY-CLUSTER-AS-PAIRED-TRIPLE-ARCHITECTURE + NUCLEAR-PHYSICS-SUBSTRATE-CONTINUITY + SINGLE-FORM sub-form for #10232 + AMPHIBIA-AS-COHORT-NODE + EDDIE-THE-HEAD-MASCOT-AS-CULTURAL-SUBSTRATE. **FA-625-1 RESOLVED** (#10286 obs#8 reaffirm). **FA-625-6 RESOLVED** (TRS pack-24 harmonic/Fourier analysis). **FA-625-7 RESOLVED** (NASA 1.102 SolarMax verified). **FA-625-2 IN-PROGRESS** (#10287 obs#8 7-of-7). **FA-625-4 active DECISION** (#10289 obs#8 ESTABLISHED-promotion). **W2 dual-track Tier-2 recovery** at NASA + ELC simultaneously (9th cumulative; NASA 1/7 → 7/7 sections; ELC 63% → 87% bytes); 0 FAIL findings post-recovery.
 
 ## Engine state advances

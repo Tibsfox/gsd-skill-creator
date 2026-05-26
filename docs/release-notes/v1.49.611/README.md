@@ -11,6 +11,20 @@
 ## Summary
 
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.611 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** Skylab 3 First Long-Duration Crewed Mission ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 **Engine-cadence degree-advancing milestone.** Skylab 3 (SL-3 / NSSDC 1973-050A) — first long-duration crewed mission and longest US mission to that date (59d 11h 9m 1s, more than double Skylab 2's 28-day baseline). Saturn IB SA-207 launched 1973-07-28 11:10:50 UTC from KSC LC-39B "milkstool" with **Alan Bean** (CDR; Apollo 12 LMP Moonwalker) + **Owen Garriott** (Science Pilot; Stanford EE PhD ionospheric physicist; ATM-PI participating crew member; first PI in space) + **Jack Lousma** (Pilot; Marine Corps aviator). RCS Quad B+D thruster propellant leaks during ascent triggered SL-RES rescue infrastructure activation (CSM-119 + SA-208 staged at LC-39B; first operational crewed-rescue-mission infrastructure; never launched but established the rescue-capability ISS inherits). 6 EVAs totaling 13h 43m. **ATM solar-physics program established CMEs as a STATISTICAL CLASS** via ~110 white-light coronal transients (77 measurable per Munro & Sime 1985). Iconic observations: 1973-08-10 magnetic-flux-rope CME / 1973-08-21 H-alpha "elbow prominence" / 1973-08-26-27 prominence-coronal-transient coupling event. Mission close 1973-09-25 22:19:51 UTC splashdown 9.6 km from USS New Orleans (Pacific recovery).
 
 ## Engine state advances

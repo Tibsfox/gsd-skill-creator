@@ -11,6 +11,20 @@
 ## Summary
 
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.615 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** Viking 1 First Successful Mars Landing ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 **Engine-cadence degree-advancing milestone — eleventh consecutive degree-advancing milestone in the v604+ run.** Viking 1 (NSSDC 1975-075A orbiter / 1975-075C lander) — **first successful Mars surface landing; first complete in-situ biology + soil-chemistry + imaging surface science suite at any extraterrestrial body**. Launched 1975-08-20 21:22 UTC from Cape Canaveral LC-41 atop Titan IIIE-Centaur; cruise 1975-08-20 → 1976-06-19; Mars orbit insertion 1976-06-19 22:38 UTC; lander separation + powered descent + touchdown 1976-07-20 11:53:06 UTC at 22.697°N / 48.222°W in Chryse Planitia ("Plain of Gold") — exactly **seven calendar years after Apollo 11 lunar landing 1969-07-20** (the strongest cross-mission EXACT same-day signal in the #10247 soak chain to date; multi-year-differential cross-anchor at planetary-landing scale; deliberate per Soffen + Mutch project-meeting records). First photograph from Mars surface returned 25 seconds after touchdown. Lander operations 1976-07-20 → 1982-11-13 (6+ years; longest US extraterrestrial surface science mission to that date). Project scientist **Gerald A. Soffen** (Goddard); imaging team led by **Thomas A. Mutch** (Brown / NASA HQ); biology PI roster **Harold P. "Chuck" Klein** (overall) + **Norman H. Horowitz** (Pyrolytic Release / Caltech) + **Vance I. Oyama** (Gas Exchange / Ames) + **Gilbert V. Levin** (Labeled Release / Biospherics Inc; **dissented from consensus-abiotic-superoxide reading through 2021**). Biology results ambiguous (LR-positive / GEx-positive / PR-positive in some samples; XRF-identified strongly-oxidizing soil chemistry; Soffen-Klein consensus ruled abiotic-superoxide; Levin dissented to his death); imaging + meteorology + soil-chemistry datasets unambiguously transformative. Viking 1 succeeded where **Mars 3** (1971-12-02 touchdown; signal lost at ~14.5s) and **Mars 6** (1974-03-12 descent; signal lost ~3km altitude) failed — first-success-after-prior-failures substrate primitive at planetary scale. **Regime-shifts back to robotic-investigator** after v614 multi-government-crewed Apollo-Soyuz; #10269 obs#4 forward-generalization-holds + potential fourth daughter-primitive DISSENTING-PI-AS-OPERATOR-OF-MINORITY-INTERPRETATION emerges via Levin.
 
 ## Engine state advances

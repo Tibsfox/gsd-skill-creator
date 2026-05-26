@@ -11,6 +11,20 @@
 ## Summary
 
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.624 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** HEAO-2 / Einstein Observatory Degree-100 K-Boundary ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 **Engine-cadence degree-advancing milestone — nineteenth consecutive degree-advancing milestone in the v604+ run.** HEAO-2 / Einstein Observatory (NSSDC 1978-103A) — **first fully-imaging X-ray telescope in space; Wolter Type-I optics 56-cm aperture; 6 focal-plane instruments; >5,000 X-ray sources catalogued; Riccardo Giacconi 2002 Nobel Prize Physics for this mission; substrate-archetype for IMAGING-ASTRONOMY-AS-NEW-DELIVERABLE + NOBEL-PRIZE-AS-DELIVERABLE + ASTROPHYSICIST-AS-MUSICIAN**. Launched 1978-11-13 05:24 UTC LC-36B Atlas-Centaur SLV-3D-1; 3,130 kg; mission 1978-1981 ~2.5 years; Tananbaum project scientist; Rossi 1905-1993 collaborator; ESA + UK ~10%. **STRUCTURAL FIRST: DEGREE-100-K-BOUNDARY** — first 3-digit NASA degree (1.100); first 3-digit degree across all engine tracks (NASA + MUS + ELC simultaneously transition to 3-digit at this milestone). Cross-track: Queen *Jazz* (EMI UK EMC 3280 / Elektra US 6E-166; UK 1978-11-10 = HEAO-2 -3d INSIDE strict; #10232 obs#26; Mercury + Brian May astrophysicist Imperial College PhD 1971-1974 paused-completed-2007 + Deacon + Taylor; Mountain Studios Montreux + Super Bear Studios; 13 tracks ~44 min multi-genre mosaic; UK #2 / US #6 RIAA Platinum) + National Energy Act of 1978 (5-bill package signed Carter 1978-11-09 = HEAO-2 -4d INSIDE strict; #10232 obs#27; NECPA P.L. 95-619 + PURPA P.L. 95-617 + FUA P.L. 95-620 + ETA P.L. 95-618 + NGPA P.L. 95-621; Jackson + Dingell + Tip O'Neill tiebreaker; Schlesinger first Energy Secretary) + Pacific Wren SPS #97 (*Troglodytes pacificus*; Toews & Irwin 2008 species split; first Troglodytidae in cohort; TROGLODYTIDAE-AS-COHORT-NODE NEW LOCKED; most spectrally complex bird song in North America Brackenbury 1979 *Nature*; 12-15 syl/sec 1-10 kHz; three-phase song architecture). **Six NEW LOCKED substrate primitives at v624 — largest single-milestone primitive-lock count in engine run**: DEGREE-100-K-BOUNDARY + IMAGING-ASTRONOMY-AS-NEW-DELIVERABLE + NOBEL-PRIZE-AS-DELIVERABLE + ASTROPHYSICIST-AS-MUSICIAN + TROGLODYTIDAE-AS-COHORT-NODE + MULTI-BILL-PACKAGE-AS-PAIRED-ARCHITECTURE. **Three NEW CANDIDATES**: #10309 ASTROPHYSICIST-AS-MUSICIAN + #10310 TROGLODYTIDAE-AS-COHORT-NODE + #10311 IMAGING-ASTRONOMY-MULTI-GENRE-MOSAIC-ANALOG.
 
 ## Engine state advances

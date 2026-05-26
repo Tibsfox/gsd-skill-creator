@@ -11,6 +11,20 @@
 ## Summary
 
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.612 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** Mariner 10 First Mercury Flyby ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 **Engine-cadence degree-advancing milestone — eighth consecutive degree-advancing milestone in the v604+ run.** Mariner 10 (NSSDC 1973-085A) — first Mercury flyby, first Venus gravity assist, first dual-planet mission. Atlas-Centaur AC-34 launched 1973-11-03 05:45 UTC from Cape Canaveral LC-36B with **Bruce Murray** (Caltech imaging team / later JPL Director 1976-1982 / Planetary Society co-founder 1980), **Norman Ness** (GSFC magnetometer-PI; first detection of Mercury's intrinsic magnetic field), and **James A. Dunne** (project scientist; SP-424 historiographer) as principal investigators. Venus flyby 1974-02-05 (5,768 km closest approach; first gravity-assist from inner planet trajectory). Three Mercury encounters: I-1974-03-29 (703 km altitude / 327 K dayside / dark hemisphere mapping) + II-1974-09-21 (48,069 km / equatorial-imaging gap-fill) + III-1975-03-16 (327 km closest passage; magnetic-field intrinsic-dipole confirmation). Mission close 1975-03-24 (attitude-control fuel exhaustion; spacecraft remains in heliocentric orbit). 12,000+ images returned; 45% of Mercury's surface mapped at <1 km/pixel; intrinsic magnetic field 1.1% of Earth's discovered against pre-flight Mariner 9 prediction of zero field.
 
 ## Engine state advances

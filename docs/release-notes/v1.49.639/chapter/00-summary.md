@@ -1,85 +1,62 @@
-# 00 — Summary: v1.49.639 Housekeeping Cluster #6
+<!-- V650-699-CHAPTER-LIFTED v1 -->
+# v1.49.639 — Chapter 00: Summary
 
-## What shipped
+## Summary
 
-**6 components closed + integration meta-test + 5+1 release-notes.**
+**Forward-cadence NASA degree advance to ?.?.** v1.49.639 ships Housekeeping Cluster #6 as a forward-cadence engine-state advance from NASA degree ?.? to ?.?. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-Counter-cadence operational-debt cluster — 7th in the engine chain (.585 / .634 / .635 / .636 / .637 / .638 / **THIS**). All 6 carry-forwards routed from v1.49.638 are CLOSED. Engine state UNCHANGED.
+**Mission rebuilt to per-pipeline depth.** Housekeeping Cluster #6 ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/N.NNN/`.
 
-## The 6 closures at a glance
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-| CF | Component | Mechanism | Outcome |
-|---|---|---|---|
-| CF-1 | C1 self-mod-guard CI diagnostic | Path A in-hook tracing | CLOSED via informative null result + recognition of pre-existing skip-guard |
-| CF-2 | C1 paired diagnostic substrate | TRACE instrumentation | CLOSED — produced definitive null signal; reverted post-finding |
-| CF-3 | C5 Lesson #10197 promotion | 3-branch decision tree | CLOSED with disconfirmation (Branch ii); lesson stays as regular |
-| CF-4 | C2 audit-method correction | Discipline doc §2.4 + inventory | CLOSED via codification of grep adjacency-check requirement |
-| CF-5 | C3 pr-review-gate retirement | Project-aware conversion (operator override) | CLOSED via whitelist (gsd-build/gsd-2/gsd-pi only) |
-| CF-6 | C4 source-side ORDER-BY tiebreakers | 3 surgical patches | CLOSED via option (a) land per W0 design |
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-## The headline finding
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-**CF-1 was already resolved before v1.49.639 began.** The 5-cluster carry-forward chain (v1.49.634 → .635 → .636 → .637 → .638) framed the issue as "self-mod-guard CI install gap"; investigation at v1.49.639 C1 revealed:
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-1. The hook is gitignored in CI by design (`.gitignore:9` excludes all of `.claude/`)
-2. The 2 originally-failing tests use `it.runIf(HOOK_AVAILABLE)` skip-guard pattern
-3. In CI, `HOOK_AVAILABLE` is false; tests gracefully skip
-4. CI shows 30,285/30,285 PASS; ZERO TRACE markers (hook not invoked at all)
+## Key Features
 
-The 6th-defer escalation rule was pre-authorized but not invoked — its premise (5 prior defers without closure) was wrong. CF-1 had been closed via skip-guard pattern; the carry-forward channel had simply not been updated.
+| Track | Field | Value |
+|---|---|---|
+| NASA | Mission name | Housekeeping Cluster #6 |
+| NASA | Degree from | N.NNN |
+| NASA | Degree to | N.NNN |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-This is the kind of multi-cluster framing-error pattern that surfaces as a forward lesson candidate at chapter 04-lessons.md.
+## Cross-References
 
-## Engine state baseline
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.638** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.640** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-| Substrate | v1.49.638 | v1.49.639 | Delta |
-|---|---|---|---|
-| NASA degree | 108 | 108 | 0 (counter-cadence) |
-| MUS pack | 108 | 108 | 0 |
-| ELC degree | 108 | 108 | 0 |
-| SPS index | #105 | #105 | 0 |
-| TRS pack | pack-30 | pack-30 | 0 |
-| Last degree-advancing | v1.49.631 | v1.49.631 | unchanged |
+## Engine Position
 
-Forward-cadence engine resumption candidate: STS-7 Sally Ride / Challenger at v1.49.640+.
+| Track | At v1.49.638 close | At v1.49.639 close |
+|---|---|---|
+| NASA degree | N.NNN | **N.NNN** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
 
-## Test surface delta
+## Infrastructure
 
-- **Net new TS tests:** +13 (C2 ×4, C3 ×2, C4 ×2, meta-test ×7; one C2 test overlaps in surface with meta-test)
-- **Net new Rust tests:** 0
-- **Net new tools tests:** 0
-- **Source patches:** 3 ORDER-BY tiebreakers in `src/intelligence/kb/store.ts` (lines 301/871/916)
-- **Doc revisions:** `docs/SUBSTRATE-PROBE-DISCIPLINE.md` (+§2.4); `docs/test-discipline/audit-method-corrections.md` NEW
-- **Hook revert:** TRACE instrumentation removed from `project-claude/hooks/self-mod-guard.js` post-finding
-- **User-level config edit:** `~/.claude/hooks/pr-review-gate.sh` project-aware whitelist (OUTSIDE this repo; tracked via `.planning/pr-review-gate-conversion-record.md`)
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/N.NNN/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-639-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.639` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
 
-Vitest total at ship: ≥30,290 (baseline 30,285 + meta-test +7 - some test-count adjustments).
-
-## Activation profile (actual vs spec)
-
-| Phase | Spec mode | Actual | Notes |
-|---|---|---|---|
-| W0 | ~7-10k | ~12k | Substrate probes surfaced 2 spec corrections (C3 USER-LEVEL substrate; C4 line-numbers) |
-| W1A (C1) | ~50k | ~30k | Faster than spec — finding was a definitive null, not requiring multi-iteration debugging |
-| W1B (C2+C3) | ~20k | ~25k | C3 added project-aware design + invariant test beyond original retire-only spec |
-| W1C (C4) | ~15-30k | ~12k | Bounded scope (3 sites, not 7); fast |
-| W2 (C5) | ~8k | ~5k | Mechanical 3-branch decision; operator routed |
-| W3 (C6) | ~50k | (in progress) | Meta-test + release-notes |
-| **Total** | **~150-170k** | **~85k + W3** | Likely ~135k at ship |
-
-## What's next at C6
-
-- ✓ Integration meta-test (7 invariants; PASS locally; commit `fd47bb63e`)
-- → 5+1 release-notes (this milestone's chapter — IN PROGRESS)
-- → Pre-tag-gate composite verify
-- → T13 quality-bar verdict
-- → Operator G3 authorization (T14 atomic ship)
-
-## See also
-
-- `01-overview.md` — full narrative + scope-change disclosure
-- `02-walkthrough.md` — per-component walkthrough with commit anchors
-- `03-retrospective.md` — what worked / cycles burned / forward lessons
-- `04-lessons.md` — forward lessons #10199+ + Lesson #10197 disconfirmation note
-- `05-carry-forward.md` — Cluster #7 inventory (CF-7 through CF-9)
-- `99-context.md` — cross-references and pointers
+---
+**Prev:** [v1.49.638](../v1.49.638/00-summary.md) · **Next:** [v1.49.640](../v1.49.640/00-summary.md)

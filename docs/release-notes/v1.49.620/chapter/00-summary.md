@@ -1,55 +1,62 @@
-# v1.49.620 — Summary: Pioneer Venus 1 Twin-Mission-Pair Continuation
+<!-- V650-699-CHAPTER-LIFTED v1 -->
+# v1.49.620 — Chapter 00: Summary
 
-**Sixteenth consecutive engine-cadence degree-advancing milestone** in the v604+ run. NASA 1.96 → 1.97 + MUS 1.96 → 1.97 + ELC 1.96 → 1.97 + SPS #93 → #94 + TRS M1 W2 pack-18 → pack-19 graph-theory binding. **K_19 single-pass complete-graph ACHIEVED** at v620 close — fifth post-K_13 extension; nineteen-pack roster fully realized in single pass at the new tier; 14-edge cadence preserved across seven consecutive milestones (K_13 → K_19). **Fourth post-ESTABLISHED reproducibility test passes** for #10275 (SSOD-I full-UN-membership-Special-Session-with-civil-society-access reproduces multi-stakeholder-renegotiation primitive at 6-of-6 cumulative domain forms; sub-form-independence CONFIRMED). **Two ESTABLISHED-promotions at v620**: #10286 TWIN-MISSION-PAIR-CONTINUATION at 3-ex (Viking + Voyager + Pioneer-Venus = 3-of-3 substrate domains) + #10287 DIRECT-ORDER sub-form distinct from INVERSION sub-form (PV1 launched first AND numbered first; substrate primitive establishes naming-execution-order taxonomy as 2 distinct sub-forms). **#10269 obs#9 intra-regime second-instance HOLDS** at inner-planetary-orbital regime; tetra-form-plus-fifth-ESTABLISHED taxonomy maintained.
+## Summary
 
-## Structural firsts logged at v620
+**Forward-cadence NASA degree advance to ?.?.** v1.49.620 ships Pioneer Venus 1 Twin-Mission-Pair Continuation as a forward-cadence engine-state advance from NASA degree ?.? to ?.?. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-**First US spacecraft to orbit Venus.** Pioneer Venus 1 Orbiter launch 1978-05-20 13:13:00 UTC LCC-36A atop Atlas SLV-3D Centaur-D1AR; Hughes HS-507 spin-stabilized bus at 5 RPM; 16-instrument scientific payload (PVR Pettengill MIT + IRRP Diner JPL + UVS Stewart LASP + neutral-mass-spec + magnetometer Russell + Langmuir-probe + retarding-potential-analyzer + ion-mass-spec + plasma-analyzer + cloud-photopolarimeter + gamma-ray-burst + electric-field + plasma-wave + atmospheric-drag + radio-occultation + S/X-band-tracking); 6.5-month cruise; Venus orbit insertion 1978-12-04 15:58 UTC via Thiokol Star-24 solid retrorocket autonomous burn (4-7 light-min Earth-Venus latency precluded real-time intervention); elliptical polar orbit; 5,055 orbits across 14 years; 243-day design life vastly exceeded; mission end 1992-10-08 19:22 UTC final signal + atmospheric disintegration ~1992-10-22; Charles F. Hall (1920-1999) project manager NASA Ames Research Center same manager as Pioneer 10/11 outer-planet missions; Larry Colin Ames project scientist; 114 scientists from 34 colleges/universities + 14 federal labs + 15 industrial facilities + 10 foreign countries.
+**Mission rebuilt to per-pipeline depth.** Pioneer Venus 1 Twin-Mission-Pair Continuation ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/N.NNN/`.
 
-**First near-complete topographic map of any planet's surface from orbit.** Pettengill 1980 *J. Geophys. Res.* 85(A13):8261; Pioneer Venus Radar Mapper PVR achieved 93% surface coverage at ~35 km horizontal resolution and 200 m vertical resolution; Maxwell Montes peak 11 km above mean planetary radius; PLANETARY-RADAR-AS-DELIVERABLE NEW LOCKED at v620. Other firsts: Russell 1980 first characterization of Venus magnetic field as induced not intrinsic (no planetary dynamo); Stewart 1980 first detection of Venus airglow; first comprehensive atmospheric profile from 100 km altitude to surface from orbital radio occultation; first gamma-ray burst catalog from Venus orbit (318 bursts 1978-1992; part of interplanetary triangulation network); longest-lived US Venus mission at 14 years vs next-longest Soviet Venera orbiters at ~2 years.
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-**TWIN-MISSION-PAIR-CONTINUATION ESTABLISHED-PROMOTION at 3-ex.** #10286 ESTABLISHED at v620 close via Viking-pair (v615/v616) + Voyager-pair (v618/v619) + Pioneer-Venus-pair (v620 PV1 + v621 PV2 anticipated) = 3-of-3 substrate domains; PV1 + PV2 paired-spacecraft from same NASA Ames Research Center program with Hall as project manager + same Atlas-Centaur LCC-36A launch vehicle family + 80-day staggered launch separation (PV1 1978-05-20 + PV2 1978-08-08) + complementary mission architectures (PV1 long-duration orbital radar mapping + PV2 short-duration atmospheric multiprobe). Substrate primitive captures paired-spacecraft architecture from shared project origin with differentiated payloads; promotes to ESTABLISHED at obs#3.
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-**CHRONOLOGICAL-AND-NUMERICAL-NAMING-DIRECT-ORDER sub-form bifurcation.** #10287 obs#3 DIRECT-ORDER sub-form distinct from INVERSION sub-form. PV1 launched first 1978-05-20 AND numbered first; sub-form distinct from V1 launched-second-numbered-first INVERSION at v619 (Voyager pair). Substrate primitive establishes naming-execution-order taxonomy with 2 distinct sub-forms confirmed. #10302 NEW CANDIDATE DIRECT-ORDER-VS-INVERSION-SUB-FORM-BIFURCATION captures the meta-classification refinement.
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-**PLANETARY-RADAR-AS-DELIVERABLE substrate primitive (NEW LOCKED).** Pettengill PVR first complete topographic map of Venus 93% coverage substrate-archetype for orbital-radar-mapping; Magellan 1989-1994 follows; broader class of synthetic-aperture radar orbital observatories; substrate-archetype for PI-AS-CATALOG-AUTHOR continuation. #10297 NEW CANDIDATE.
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-**VENUS-AS-EARTH-COMPARATIVE-PLANET substrate primitive (NEW LOCKED).** IRRP Diner + UVS Stewart + ONMS together quantified Venus atmosphere CO2 dominance (96.5%) + sulfuric acid cloud layers + 462°C surface temperature regime; established Venus and Earth began with comparable atmospheric and geological starting conditions but diverged through runaway greenhouse mechanism; foundational case study for Earth climate science; comparative-planetology substrate frames Venus as Earth's twin that went wrong. #10301 NEW CANDIDATE.
+## Key Features
 
-**First autotroph (plant) in SPS cohort.** Pacific Yew (*Taxus brevifolia*) #94 = AUTOTROPH-AS-COHORT-NODE NEW LOCKED. Cohort architecture transitions from animal-only #77-#93 to plant-included; cohort gains its first production-node class: yew as food/habitat substrate for multiple existing cohort members. #10298 NEW CANDIDATE.
+| Track | Field | Value |
+|---|---|---|
+| NASA | Mission name | Pioneer Venus 1 Twin-Mission-Pair Continuation |
+| NASA | Degree from | N.NNN |
+| NASA | Degree to | N.NNN |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-**EXACT-CALENDAR-MATCH-CROSS-TRACK substrate primitive (NEW LOCKED).** PV1 14-year operation 1978-12-04 → 1992-10-08 = Pacific Yew 14-year NCI taxol drug-development program 1978-1992 EXACT same calendar boundaries; not merely rough correspondence — substrate primitive captures cross-track exact-calendar coincidence at 14-year scale across NASA + SPS tracks. #10300 NEW CANDIDATE.
+## Cross-References
 
-**TAXOL-DEVELOPMENT-AS-PLANETARY-RADAR-MAPPING substrate-archetype (NEW).** NCI 30,000-sample botanical screening program 1958-1971 (USDA partnership; Arthur S. Barclay Pacific Yew sample collection August 1962 Gifford Pinchot National Forest) parallels PVR Venus radar systematic mapping at substrate-architectural level; both are systematic-survey-instrument deliverables that map a previously unknown surface (Venus topography; plant secondary chemistry); substrate primitive for SCIENCE-PROGRAM-AS-CARTOGRAPHIC-DELIVERABLE. #10299 NEW CANDIDATE.
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.619** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.621** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-**K_19 SINGLE-PASS ACHIEVED.** TRS M1 W2 pack-19 graph-theory binding extends past K_18 in a single milestone; all 171 = C(19,2) pack-pair edges realized. Pack-19 plays a **bridge-category role obs#7** (7-of-7 consecutive bridge-pattern across pack-07/14/15/16/17/18/19) confirming **#10273 + #10274 post-ESTABLISHED reproducibility obs#4 HOLDS**. **#10284 post-ESTABLISHED reproducibility obs#2 HOLDS MIXED-leaning-EMERGENT** via pack-19 mixed character (5 definitional + 6 emergent + 3 hybrid).
+## Engine Position
 
-**#10269 obs#9 intra-regime second-instance HOLDS.** planetary regime continues from v619 outer-planets-fast-trajectory to v620 inner-planetary-orbital regime; tetra-form-plus-fifth-ESTABLISHED taxonomy maintained at #10282 PI-AS-CATALOG-AUTHOR ESTABLISHED-promotion target via Pettengill PVR catalog + Russell magnetometer + Stewart airglow + Wani-Wall taxol structure papers.
+| Track | At v1.49.619 close | At v1.49.620 close |
+|---|---|---|
+| NASA degree | N.NNN | **N.NNN** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
 
-**First single-unambiguous-date INSIDE-strict primary MUS pick.** #10232 obs#21; Kraftwerk *The Man-Machine* Kling Klang 1C 064-32843 INSIDE-strict on single documented release date (1978-05-19 = PV1 launch -1d primary documentary consensus; no date discrepancy). Cohort-unique first Kraftwerk entry MUS catalog 1.80-1.97; Berlin diptych pair with *Trans-Europe Express* 1977-04-01 = paired-album-architecture mirrors PV1+PV2 paired-spacecraft architecture.
+## Infrastructure
 
-**PAIRED-ALBUM-ARCHITECTURE-AS-MISSION-CROSS-VALIDATION reaffirm.** Kraftwerk *Trans-Europe Express* 1977 + *The Man-Machine* 1978 paired-album diptych at 13-month separation mirrors PV1 + PV2 paired-spacecraft architecture at 80-day separation; same Kling Klang Studio + same four-member lineup + same Kling Klang/EMI Electrola label infrastructure; #10294 obs#2 reaffirm at MUS scale.
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/N.NNN/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-620-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.620` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
 
-**Cleanest substrate-fit ELC pick in v615-v620 cohort.** SSOD-I opened UN Headquarters New York 1978-05-23 = PV1 launch +3d EXACT INSIDE strict ±8d window (5 days of headroom). **#10275 obs#4 multi-stakeholder-renegotiation post-ESTABLISHED reproducibility VERY HIGH** at full-UN-membership-Special-Session-with-civil-society-access domain (6-of-6 cumulative domain forms: Helsinki + LDC + ENMOD + DOE + UNCOD + Torrijos-Carter + SSOD-I); sub-form-independence CONFIRMED across 6 distinct institutional-architecture sub-forms. 8-of-8 substrate primitives scored HIGH or VERY HIGH in W1 evaluation.
-
-**47-year SSOD-I institutional arc.** SSOD-I institutional framework (Conference on Disarmament + UNDC + UNIDIR + Advisory Board + annual Disarmament Week) operated continuously from 1978 to 2026 = 47-year operational arc vastly exceeding 14-year PV1 mission lifetime; substrate analog for #10288 DECADAL-LATITUDE-OF-INVESTIGATOR / MULTI-DECADE-MISSION-OPERATION ESTABLISHED reaffirm at obs#4.
-
-**Three-event INSIDE-strict 1977-1978 cluster.** Kraftwerk 1978-05-19 -1d / PV1 launch 1978-05-20 / SSOD-I opening 1978-05-23 +3d = music + space + multilateral-disarmament simultaneous within 4-day window; #10247 obs#13 INSIDE-strict 3-event cluster substrate primitive holds past thirteen consecutive observations.
-
-**16th operational application of v603 BLOCKER gate — first-attempt PASS.** NASA 1.97 PASS at first-attempt with canonical Track 1a/1b/2/3/4/5/6/7 labels (no fix-up cycle needed). **SIX CONSECUTIVE FIRST-ATTEMPT PASSes** (v615 fix-up → v616/v617/v618/v619/v620 first-attempt). #10244 ESTABLISHED reaffirm at obs#19.
-
-18. **W2 wave clean across twelve consecutive milestones** (v609-v620; 48-of-48 cumulative clean dispatches) — chunked Write+Edit dispatch discipline ESTABLISHED reaffirm at obs#16 / obs#12 / obs#12 across #10246 + #10260 + #10262.
-
-## Engine-state delta
-
-- NASA: 98 catalog index entries (97 + Pioneer Venus 1 1.97; auto-written by IC-613-1.4 seventh operational use)
-- MUS: 98 catalog index entries — Kraftwerk *The Man-Machine* card authored at insertion point with TWIN-MISSION-PAIR-CONTINUATION + Berlin-diptych cross-anchor annotation
-- ELC: 98 catalog index entries — SSOD-I card authored at insertion point with field-dominance + multi-stakeholder-renegotiation obs#4 annotation
-- SPS: #94 species detail page at `www/tibsfox/com/Research/SPS/pacific-yew/index.html`
-- TRS: 238 total edges across 15 milestones; **K_19 ACHIEVED** — nineteen-pack roster complete at the new extension tier
-- M1 graph: 19 packs / ~131 entities / ~261 edges via TRS loader
-- §6.6 register: ~77-81 LOCKED post-v620 (delta from v619 close — six new substrate primitives admitted at v620 plus #10286 + #10287 ESTABLISHED-promotions)
-
-## Through-line
-
-v1.49.620 ships Pioneer Venus 1 — first US spacecraft to orbit Venus (1978-12-04); first near-complete topographic map of any planet's surface from orbit (Pettengill 1980 PVR 93% Venus surface coverage); 14-year operation 1978-1992; PV1 + PV2 paired-mission architecture confirms TWIN-MISSION-PAIR-CONTINUATION as third paired-spacecraft after Viking + Voyager. Cross-track: Kraftwerk *The Man-Machine* (Berlin diptych pair with *Trans-Europe Express* = paired-album-architecture cross-validation; #10294 obs#2 reaffirm; 56-year career arc DECADAL-LATITUDE; AFN American Forces Network drum-pattern origin; Synthanorma Sequencer as compositional engine; El Lissitzky Constructivist visual reference; first single-date INSIDE-strict at -1d) + UN First Special Session on Disarmament (TWIN-MISSION-PAIR-CONTINUATION via SSOD-I + SSOD-II 1982 paired-architecture; #10275 obs#4 post-ESTABLISHED reproducibility VERY HIGH at full-UN-membership-Special-Session domain; SPACE-TREATY-PARALLEL via OST 1967 + paragraph 80 outer-space-arms-prevention; +3d EXACT INSIDE strict cleanest in v615-v620; 8-of-8 primitives scored HIGH or VERY HIGH) + Pacific Yew SPS #94 (FIRST autotroph in cohort; AUTOTROPH-AS-COHORT-NODE NEW LOCKED; 14-year NCI taxol program 1978-1992 = EXACT calendar match with PV1 14-year operation; NCI 30,000-sample systematic survey parallels PVR Venus mapping; Pacific Yew × European Yew comparative-chemistry pair parallels VENUS-AS-EARTH-COMPARATIVE-PLANET) + TRS pack-19 graph-theory (K_19 ACHIEVED 238 edges; #10273 + #10274 post-ESTABLISHED obs#4 HOLDS at 7-of-7 consecutive bridge-category packs; #10284 obs#2 HOLDS MIXED-leaning-EMERGENT). Six new substrate primitives admitted at v620 first-of-their-kind milestone. Two ESTABLISHED-promotions: #10286 TWIN-MISSION-PAIR-CONTINUATION + #10287 DIRECT-ORDER sub-form bifurcation. #10247 obs#13 INSIDE-strict 3-event cluster anchor.
+---
+**Prev:** [v1.49.619](../v1.49.619/00-summary.md) · **Next:** [v1.49.621](../v1.49.621/00-summary.md)

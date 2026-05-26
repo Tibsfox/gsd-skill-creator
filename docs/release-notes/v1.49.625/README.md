@@ -11,6 +11,20 @@
 ## Summary
 
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.625 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** HEAO-3 Program-Trio Completion ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 **Engine-cadence degree-advancing milestone — twentieth consecutive degree-advancing milestone in the v604+ run.** HEAO-3 (NSSDC 1979-082A) — **third and final spacecraft of the HEAO observatory program; gamma-ray spectroscopy + cosmic-ray heavy-element composition + hard X-ray all-sky survey; first galactic 26Al diffuse emission detection proving ongoing massive-star nucleosynthesis Mahoney 1984 ApJ 286:578; HEAO-program-trio COMPLETION at 3-of-3 (HEAO-1 v617 + HEAO-2 v624 + HEAO-3 v625)**. Launched 1979-09-20 05:28 UTC LC-36B Atlas-Centaur; mission 1979-1981 ~20 months; 3 instruments: HRGRS (Jacobson JPL; Ge(Li) detector 0.05-10 MeV high-spectral-resolution) + C2 (Israel+Binns Washington U; heavy cosmic-ray composition Z=17-28) + IRC (Wiedenbeck Caltech; iron-group elements 22-28). **Second program-trio after ISEE-1/2/3 v623; #10286 obs#7 PAIRED-TRIPLE-MISSION-ARCHITECTURE substrate test continuing at 2-of-2 cumulative confirmation across 2 program-trios.** Cross-track: Eagles *The Long Run* (Asylum Records 5E-508; US release 1979-09-24 = HEAO-3 +4d INSIDE strict; #10232 obs#28; final classic-era Eagles album; disbandment 1980-07-31 + reunion 1994 *Hell Freezes Over*; BAND-PROGRAM-COMPLETION-AT-ALBUM-SCALE NEW LOCKED; Frey + Henley + Walsh + Felder + Schmit; Bill Szymczyk producer; 10 tracks ~42 min; Billboard 200 #1 9 weeks; RIAA 7× Platinum; "Heartache Tonight" Hot 100 #1) + Executive Order 12157 (signed Carter 1979-09-14 = HEAO-3 -6d INSIDE strict; #10232 obs#29; President's Management Improvement Council PMIC; 18-member council chaired by OMB Director McIntyre; revoked Reagan EO 12331 1981-10-19) + Bull Trout SPS #98 (*Salvelinus confluentus*; Suttle 1980 species split from Dolly Varden; first Salvelinus in cohort; SALVELINUS-AS-COHORT-NODE NEW LOCKED; 3 ecotypes = TRIPLE-ECOTYPE-ARCHITECTURE analog to HEAO trio; cold-water obligate 12-14°C; ESA Threatened 1998-1999). **Five NEW LOCKED substrate primitives at v625**: GAMMA-RAY-SPECTROSCOPY-AS-NEW-DELIVERABLE + NUCLEOSYNTHESIS-RADIOACTIVITY-AS-DELIVERABLE + HEAVY-COSMIC-RAY-COMPOSITION-AS-DELIVERABLE + SALVELINUS-AS-COHORT-NODE + BAND-PROGRAM-COMPLETION. **Three NEW CANDIDATES**: #10312 BAND-PROGRAM-COMPLETION-AT-ALBUM-SCALE + #10313 SALVELINUS-AS-COHORT-NODE + #10314 GAMMA-RAY-SPECTROSCOPY-AS-MULTI-TRACK-MOSAIC-ANALOG. **FA-624-1 RESOLVED** at v625 #10286 obs#7 reaffirm. **FA-624-6 RESOLVED** — TRS pack-23 integration theory binding. **FA-624-7 RESOLVED** — NASA 1.101 HEAO-3 verified. **W2 inline-recovery applied** at ELC (Tier-2 inline-Edit recovery; 8th cumulative; depth recovered 76% → 95% bytes).
 
 ## Engine state advances

@@ -11,6 +11,20 @@
 ## Summary
 
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.619 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** Voyager 1 Twin-Mission-Pair Completion ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 **Engine-cadence degree-advancing milestone — fifteenth consecutive degree-advancing milestone in the v604+ run.** Voyager 1 (NSSDC 1977-084A) — **first human-built object to enter interstellar space (2012-08-25 at ~121-122 AU); most distant human-built object from Earth (~172.59 AU March 2026 = ~23 hr one-way light travel time); substrate-archetype for mission-critical-decision-point trajectory architecture; Pale Blue Dot 1990-02-14 as cosmic-perspective cultural-payload-tertiary-deliverable beyond Golden Record**. Launched 1977-09-05 12:56:01 UTC from Cape Canaveral LC-41 atop Titan IIIE-Centaur — 16 days after Voyager 2 from same pad / same vehicle line / identical 721.9 kg TOPS-bus + identical 11-instrument payload + identical Golden Record. Faster JST trajectory arrived at Jupiter 1979-03-05 four months ahead of V2's 1979-07-09 closest approach; numbering reflects arrival order not launch order = CHRONOLOGICAL-VS-NUMERICAL-NAMING-INVERSION REVERSAL sub-form (V1 launched-second-numbered-first reverses V2 launched-first-numbered-second). Mission-critical decision: Titan close flyby 1980-11-12 06:21 UTC at 6,490 km — first detailed atmospheric characterization of solar system's only moon with dense atmosphere — trajectory ejected spacecraft ecliptic-north precluding Uranus + Neptune. Edward C. Stone (1936-2024) project scientist 1972-2022 = 50-year tenure. Five new substrate primitives admitted at v619: PALE-BLUE-DOT-AS-CULTURAL-SUBSTRATE + TITAN-CLOSE-FLYBY-AS-MISSION-CRITICAL-DECISION + COAST-SALISH-FIRST-SALMON-CEREMONY + PAIRED-ALBUM-ARCHITECTURE-AS-MISSION-CROSS-VALIDATION + SEPTEMBER-1977-THREE-EVENT-SIMULTANEITY-CLUSTER. **Two ESTABLISHED-promotions at v619: #10288 DECADAL-LATITUDE-OF-INVESTIGATOR at 3-ex (Stone 50y / Pop 59y / Lemmy 40y triad) + #10279 PAIRED-RECOVERY-PROGRAM at 3-ex (Bald Eagle+Peregrine paired federal recovery + Coho+Chinook NOAA 2013 paired ESA = 3-of-3).**
 
 ## Engine state advances

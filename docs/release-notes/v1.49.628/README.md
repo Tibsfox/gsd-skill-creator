@@ -11,6 +11,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.628 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** STS-2 Columbia First Vehicle Reuse ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 **Engine-cadence degree-advancing milestone — twenty-third consecutive degree-advancing milestone in the v604+ run** (after v607 + v621 counter-cadence skips). STS-2 Columbia (NSSDC 1981-110A; OV-102 Columbia second flight) — **first reuse of a previously-flown crewed orbital spacecraft; first crewed Remote-Manipulator-System Canadarm test in space; first refurbished SRB pair from STS-1 Atlantic recovery; mission truncated in-flight 5d→2d after Fuel Cell #1 internal-heater failure ~T+5h; commander Joe Engle + pilot Richard Truly; launched 1981-11-12 LC-39A KSC; 36 orbits / 54h 13m; landed Edwards AFB Runway 23 1981-11-14**. Cross-track: OMD *Architecture & Morality* (Dindisc DIN 6; UK release 1981-11-06 = STS-2 launch -6d INSIDE strict ±8d; #10232 obs#34; **ALBUM-FORM continues from v627**; Andy McCluskey + Paul Humphreys; UK Albums #3; BPI Platinum; Mellotron-loop + sequencer-driven architecture; **SEQUENCER-AS-ARTICULATED-MECHANISM parallel to RMS Canadarm; ARCHITECTURE-AS-DELIVERABLE NEW LOCKED**) + Double Eagle V Pacific Balloon Crossing (launched Nagashima Japan 1981-11-10 = STS-2 launch -2d INSIDE strict; landed Covelo California 1981-11-12 = STS-2 launch DAY = 0d **DUAL-ANCHOR** INSIDE strict; Ben Abruzzo + Larry Newman + Rocky Aoki + Ron Clark; 84h 31m / ~8,600 km; **DUAL-ANCHOR-SAME-DAY-LANDING NEW LOCKED; Abruzzo + Newman 1978 Atlantic Double Eagle II veterans = CREW-REUSE-AS-DELIVERABLE parallel to vehicle-reuse**; #10232 obs#34 MULTI-EVENT-COMPLEX sub-form continues; #10327 + #10329 NEW CANDIDATEs) + Steller's Jay SPS **#101** (*Cyanocitta stelleri*; **first Corvidae + first corvid in SPS cohort; CORVID-AS-COHORT-NODE NEW LOCKED**; BC provincial bird since 1987; tool-using avian cognition + spatial memory + raptor-voice mimicry; named for Georg Wilhelm Steller died 1746-11-12 = same month-day as STS-2 launch 1981-11-12; RMS-AS-DELIVERABLE corvid biological-tool-use substrate parallel; #10329 NEW CANDIDATE) + TRS M1 W2 pack-26 category theory K_26 (~336 edges target; FA-627-6 RESOLVED). **Ten NEW LOCKED substrate primitives at v628**: REUSE-OF-CREWED-ORBITAL-SPACECRAFT-AS-NEW-DELIVERABLE + REMOTE-MANIPULATOR-SYSTEM-AS-NEW-DELIVERABLE + SRB-REUSE-AFTER-RECOVERY-AS-DELIVERABLE + MISSION-TRUNCATION-IN-FLIGHT-AS-DELIVERABLE + APOLLO-BACKUP-AS-PRIMARY-CREW + MOL-TRANSFEREE-AS-PILOT + CORVID-AS-COHORT-NODE + DUAL-ANCHOR-SAME-DAY-LANDING + CREW-REUSE-AS-DELIVERABLE + ARCHITECTURE-AS-DELIVERABLE. **FA-627-6 RESOLVED** (TRS pack-26 category theory); **FA-627-7 RESOLVED** (STS-2 Columbia verified as NASA 1.104); **FA-627-2 active soak #10287 obs#10 9-of-9 cumulative; FA-627-4 #10289 obs#10 continuing passive**. **Thirteenth consecutive first-attempt PASS** target. **Tier-2 recovery applied** (NASA 0/8 track-cards + ELC bytes-thin → recovery 6 Edits; TENTH cumulative recovery this session).
 
 ## Key Features

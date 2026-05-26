@@ -11,6 +11,20 @@
 ## Summary
 
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.613 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** Skylab 4 / Comet Kohoutek ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 **Engine-cadence degree-advancing milestone — ninth consecutive degree-advancing milestone in the v604+ run.** Skylab 4 (NSSDC 1973-090A) — third and final crewed mission to Skylab Orbital Workshop; **longest US crewed spaceflight to that date at 84d 1h 16m**; **first all-rookie crew since Armstrong on Gemini 8 (1966)**; **first comet-observation campaign from above-atmosphere** (Comet C/1973 E1 Kohoutek; perihelion 1973-12-28 at 0.142 AU; 1973-12-13 → 1974-01-08 multi-instrument campaign; produced first hydrogen Lyman-α coma profile from above-atmosphere; first water-ice cometary spectroscopy supporting Whipple dirty-snowball model decisively); **final flying Apollo Block II CSM (CSM-118) + final crewed Saturn-1B (SA-208)**. Saturn 1B SA-208 launched 1973-11-16 14:01:23 UTC from KSC LC-39B with **Gerald P. Carr** (CDR; USMC colonel; Apollo backup), **Edward G. Gibson** (SPT; PhD physics Caltech 1964 — second physicist-in-space after Garriott), **William R. Pogue** (PLT; USAF Thunderbirds aerobatic demo pilot). 4× EVA totaling 22h 13m including Carr/Pogue 1973-12-25 7h 1m Christmas Day longest-of-program. ATM coronal-hole-as-solar-wind-source confirmed at high-confidence. 1973-12-28 ~90-min inadvertent radio-off coincidence (NASA authoritative position: **NO STRIKE** actually occurred — was three-shift-workload overlap; reframe **COHESION-UNDER-SATURATION** sub-form per #10269 obs#2). Splashdown 1974-02-08 15:16:53 UTC Pacific Ocean ~280 km ESE San Diego; recovered USS *New Orleans* LPH-11. Total 1214 orbits / ~55.5M km mission distance.
 
 ## Engine state advances

@@ -11,6 +11,20 @@
 
 ## Summary
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.645 advances the engine from 1.108 to 1.109 with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** STS-7 Sally Ride ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 **The first degree-advancing milestone after the 12-cluster counter-cadence pause.** The chain that opened at v1.49.585 (operational-debt closures) and ran through v1.49.643 (carry-forward bankruptcy) and v1.49.644 (post-bankruptcy resume) ended on 2026-05-12 with engine state still seated at NASA 1.108. v1.49.645 is the resumption of the NASA degree cadence — and the mission it carries is one of the substrate-densest the cohort has yet shipped.
 
 **STS-7 Challenger (NSSDC 1983-057A)** — the **seventh Space Shuttle orbital flight** and the **second flight of OV-099 Challenger** — launched on **1983-06-18 at 11:33:00 UTC** from LC-39A, Kennedy Space Center, with a five-member crew of mixed cohorts. Commander **Robert L. Crippen** (USN; MOL transferee 1969; Pilot of STS-1 in April 1981) returned to flight as the **first astronaut to fly two Shuttle missions** and the **first Pilot-to-Commander progression in program history**. Pilot **Frederick H. "Rick" Hauck** (USN; NASA Group 8 "TFNG" 1978; A-6 Intruder pilot, 114 combat missions Vietnam; future STS-26 Discovery Return-to-Flight commander 1988 post-Challenger disaster) flew his first mission. Mission Specialist 1 **Sally K. Ride** — PhD physics Stanford 1978; NASA Group 8 1978; her dissertation researched the interaction of X-rays with the interstellar medium — became the **first American woman in space** and the **third woman in space worldwide** after Soviet cosmonauts Valentina Tereshkova on Vostok 6 (1963-06-16) and Svetlana Savitskaya on Soyuz T-7 / Salyut 7 (1982-08-19). At 32 years old at launch, she was the **youngest American to fly in space** at that date. Mission Specialist 2 **John M. Fabian** (USAF; NASA Group 8; doctorate in aeronautics and astronautics from the University of Washington 1974) operated the Remote Manipulator System during the SPAS-01 deploy-and-retrieve sequence on Flight Day 5. Mission Specialist 3 **Norman E. Thagard** (USMC; F-4 Phantom II pilot, 163 combat missions Vietnam; MD UT Southwestern 1977; later first American on Mir 1995) was added to the crew on 1982-12-21 specifically to conduct in-flight space-motion-sickness research — the **first physician as mission crew on a Shuttle flight**.

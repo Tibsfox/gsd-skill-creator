@@ -11,6 +11,20 @@
 ## Summary
 
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.614 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** Apollo-Soyuz Test Project ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 **Engine-cadence degree-advancing milestone — tenth consecutive degree-advancing milestone in the v604+ run.** Apollo-Soyuz Test Project (ASTP / NSSDC 1975-066A US side / 1975-065A Soyuz 19) — **first international crewed spaceflight; first US-Soviet docking** via APAS-75 androgynous adapter (Vladimir Syromyatnikov designer); **final Apollo Block II CSM-111 + final crewed Saturn IB SA-210** (stages fabricated 1967, 8 years storage before flying). Saturn IB SA-210 launched 1975-07-15 19:50:00 UTC from KSC LC-39B with **Thomas P. Stafford** (CDR; Gemini 6/9, Apollo 10), **Vance D. Brand** (CMP; rookie), **Donald K. "Deke" Slayton** (DMP; Mercury 7 selectee 1959; grounded 1962-1972 for paroxysmal atrial fibrillation; first flight at age 51 after 13-year grounding); Soyuz-U 11A511 launched 1975-07-15 12:20:00 UTC from Baikonur LC-1 with **Alexei Leonov** (CDR; Voskhod 2 1965 first EVA) + **Valeri Kubasov** (FE; Soyuz 6 1969 first orbital welding; previously replaced on Soyuz 11 1971 for benign lung mass — eerily paralleling Slayton's later splashdown-recovery lung lesion discovery). Rendezvous and dock 1975-07-17 16:09:09 UTC over the Atlantic west of Portugal via APAS-75; ~44 hours docked; 4 separate crew exchanges + televised Stafford-Leonov handshake; 5 joint experiments (UV stellar absorption / multi-purpose furnace / artificial-eclipse via Apollo eclipsing Soyuz / cosmic-ray-spectrum cross-calibration / microbial exchange). Soyuz 19 landed 1975-07-21 in Kazakhstan; Apollo splashed down 1975-07-24 21:18 UTC in Pacific ~595 km west of Honolulu (corrected from MISSION-BRIEF's 365 km). Brand inhaled ~300 ppm MMH/N₂O₄ toxic fumes during splashdown attitude-jet leak (~400 ppm 30-second-fatal threshold; Stafford's mask retrieval averted fatal exposure; crew hospitalized 2-week chemical-pneumonia recovery; Slayton's hospital workup discovered benign lung lesion); USS *New Orleans* LPH-11 recovery. **6-year US crewed gap follows until STS-1 1981-04-12 (longest US crewed gap until that date).**
 
 ## Engine state advances

@@ -1,43 +1,62 @@
-# v1.49.615 — Summary: Viking 1 First Successful Mars Landing
+<!-- V650-699-CHAPTER-LIFTED v1 -->
+# v1.49.615 — Chapter 00: Summary
 
-**Eleventh consecutive engine-cadence degree-advancing milestone** in the v604+ run. NASA 1.91 → 1.92 + MUS 1.91 → 1.92 + ELC 1.91 → 1.92 + SPS #88 → #89 + TRS M1 W2 pack-07 → pack-14 information-geometry binding. **K_14 single-pass complete-graph ACHIEVED** at v615 close — first post-K_13 extension; fourteen-pack roster fully realized in single pass at the new tier.
+## Summary
 
-## Structural firsts logged at v615
+**Forward-cadence NASA degree advance to ?.?.** v1.49.615 ships Viking 1 First Successful Mars Landing as a forward-cadence engine-state advance from NASA degree ?.? to ?.?. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-**First survival on Mars + first complete in-situ surface science suite at any extraterrestrial body.** Viking 1 lander touchdown 1976-07-20 11:53:06 UTC at Chryse Planitia 22.697°N / 48.222°W; first photograph from Mars surface returned 25 seconds after touchdown; lander operations 1976-07-20 → 1982-11-13 (6+ years); succeeded where Mars 3 (~14.5s signal) + Mars 6 (~3km signal) failed.
+**Mission rebuilt to per-pipeline depth.** Viking 1 First Successful Mars Landing ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/N.NNN/`.
 
-**First remote search for extraterrestrial life.** three biology experiments (Labeled Release / Gas Exchange / Pyrolytic Release) returning ambiguous LR-positive + GEx-positive + PR-positive readings; XRFS-identified strongly-oxidizing regolith; Soffen-Klein consensus ruled abiotic-superoxide; **Gilbert Levin dissented from consensus through 2021** (Levin Labeled Release dissent = candidate fourth daughter-primitive DISSENTING-PI-AS-OPERATOR-OF-MINORITY-INTERPRETATION at #10269 obs#4).
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-**K_14 SINGLE-PASS ACHIEVED.** TRS M1 W2 pack-14 information-geometry binding extends past K_13 plateau in a single milestone; all 91 = C(14,2) pack-pair edges realized. Pack-14 plays a **bridge-category role obs#2** (4/4/3/2 balanced cross-cluster distribution; Riemannian information manifolds + Fisher information + Fokker-Planck + KL-divergence + group-theoretic codes + persistence diagrams + projective embeddings). #10273 bridge-category vs cluster-internal CANDIDATE 2-of-2 toward ESTABLISHED.
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-**#10269 obs#4 — FOURTH daughter-primitive candidate emerges.** DISSENTING-PI-AS-OPERATOR-OF-MINORITY-INTERPRETATION (Levin Labeled Release dissent against Soffen/Klein consensus from 1976-2021). Tri-form taxonomy (INVESTIGATOR-AS-EXPERIMENT-OPERATOR + CDR-AS-MISSION-DECISION-OPERATOR + CDR-AS-DIPLOMATIC-OPERATOR) holds + potential fourth sub-form. Substrate stable past four consecutive observations across three regime-shift directions + the new robotic regime hold-test.
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-**Strongest cross-mission EXACT same-day signal in #10247 soak chain.** Viking 1 landing 1976-07-20 = Apollo 11 lunar landing 1969-07-20 +7y EXACT. Multi-year-differential cross-anchor at planetary-landing scale; deliberate NASA mission-design choice per Soffen + Mutch project-meeting records. Bonus same-day signal: Parliament *The Clones of Dr. Funkenstein* released 1976-07-20 = exact Mars-landing day (declined-but-noted parallel signal for soak-density accounting per FA-615-9).
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-**First sub-form +10d boundary-edge extension of #10232 ESTABLISHED.** London Dumping Convention entry into force 1975-08-30 = Viking 1 launch 1975-08-20 +10d. First ELC pick at the +10d boundary-edge sub-form (substrate-evaluation logged at FA-615-8 for soak).
+## Key Features
 
-**#10270 ESTABLISHED-promotion at obs#3.** sub-form distinction CANDIDATE promotes via 3-ex bidirectional refinement; three-option taxonomy holds; potential fourth-option dissent-as-substrate emerges; **promotes to ESTABLISHED at 3-ex** with sub-form distinction sustained.
+| Track | Field | Value |
+|---|---|---|
+| NASA | Mission name | Viking 1 First Successful Mars Landing |
+| NASA | Degree from | N.NNN |
+| NASA | Degree to | N.NNN |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-**#10266 ESTABLISHED-promotion at obs#3.** content-filter false-positive REPRODUCED at v615 W1.MUS (build agent hit content-filter on *Born to Run* lyrics quotation; mitigation re-dispatch with neutral prose succeeded; promotes to ESTABLISHED at 3-ex).
+## Cross-References
 
-**#10271 obs#3 supports saturating/inverse hypothesis.** v615 has 4 anchors (launch / orbit insertion / landing / Apollo-11 +7y cross) / 1-2 fresh same-day signals = ratio 0.25-0.5; saturating-vs-inverse hypothesis confirmed (NEGATIVE-IN-LINEAR rejection holds at obs#3).
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.614** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.616** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-**#10265 FIRST NEGATIVE in chain at obs#3.** pack-14 differential-cluster 3 ≥ projective-pair 2; informative anomaly attributable to pack-14's disciplinary identity as differential-geometric theory; not failure of substrate primitive.
+## Engine Position
 
-**11th operational application of v603 BLOCKER gate.** NASA 1.92 PASS after fix-up (8/8 Track cards + nav-card / 6/7 NASA-canonical sections).
+| Track | At v1.49.614 close | At v1.49.615 close |
+|---|---|---|
+| NASA degree | N.NNN | **N.NNN** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
 
-12. **W2 wave clean across seven consecutive milestones** (v609 + v610 + v611 + v612 + v613 + v614 + v615; 28-of-28 cumulative clean dispatches; chunked Write+Edit pattern continues post-ESTABLISHED reproducibility per #10246 + #10260 + #10262 ESTABLISHED).
+## Infrastructure
 
-## Engine-state delta
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/N.NNN/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-615-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.615` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
 
-- NASA: 93 catalog index entries (92 + Viking 1 1.92; auto-written by IC-613-1.4 second operational use)
-- MUS: 93 catalog index entries — Springsteen *Born to Run* card authored at insertion point between MUS 1.91 and 1.87
-- ELC: 93 catalog index entries — London Dumping Convention card authored at insertion point between ELC 1.91 and 1.87
-- SPS: #89 species detail page at `www/tibsfox/com/Research/SPS/bald-eagle/index.html`
-- TRS: 168 total edges across 10 milestones; **K_14 ACHIEVED** — fourteen-pack roster complete at the new extension tier
-- M1 graph: 14 packs / ~99 entities / ~191 edges via TRS loader
-- §6.6 register: ~52-56 LOCKED post-v615 (delta from v614 close — new substrate primitives admitted at v615: FIRST-SUCCESSFUL-AFTER-PRIOR-FAILURES + AMBIGUOUS-RESULT-AS-VALID-SCIENCE + CALENDAR-DAY-SAME-AS-PRIOR-MISSION + REMOTE-OPERATOR-AT-PLANETARY-SCALE + DISSENTING-PI-AS-OPERATOR-OF-MINORITY-INTERPRETATION + PRISTINE-ENVIRONMENT-PRESERVATION + K_14-SINGLE-PASS-ACHIEVED)
-
-## Through-line
-
-v1.49.615 ships Viking 1 — first survival on Mars; first complete in-situ biology+chemistry+imaging surface science; lander operations 1976-07-20 → 1982-11-13 (6+ years); biology results ambiguous (LR/PR/GEx positive → consensus-abiotic-superoxide; Levin dissent through 2021). Cross-track: *Born to Run* (third-album-breakthrough as FIRST-SURVIVAL-AT-NEW-FRONTIER mirror) + London Dumping Convention (PRISTINE-ENVIRONMENT-PRESERVATION mirror to Viking planetary-protection bioshield) + Bald Eagle SPS #89 (FIRST-SUCCESSFUL-AFTER-PRIOR-FAILURES mirror to Mars 3/Mars 6 → Viking 1; FA-614-8 closes cohort-internal trophic accumulation reactivation) + TRS pack-14 information geometry (K_14 ACHIEVED first post-K_13 extension). Strongest cross-mission EXACT same-day signal in soak chain via Apollo 11 +7y anniversary cross-anchor.
+---
+**Prev:** [v1.49.614](../v1.49.614/00-summary.md) · **Next:** [v1.49.616](../v1.49.616/00-summary.md)

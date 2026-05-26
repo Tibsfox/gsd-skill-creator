@@ -11,6 +11,20 @@
 ## Summary
 
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.620 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** Pioneer Venus 1 Twin-Mission-Pair Continuation ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 **Engine-cadence degree-advancing milestone — sixteenth consecutive degree-advancing milestone in the v604+ run.** Pioneer Venus 1 Orbiter (NSSDC 1978-051A; also Pioneer 12) — **first US spacecraft to orbit Venus (1978-12-04); first near-complete topographic map of any planet's surface from orbit (Pettengill 1980 PVR 93% Venus surface coverage at ~35 km horizontal resolution); longest-lived US Venus mission at 14 years 1978-1992; substrate-archetype for orbital-radar-mapping**. Launched 1978-05-20 13:13:00 UTC from Cape Canaveral LCC-36A atop an Atlas SLV-3D Centaur-D1AR; Hughes HS-507 spin-stabilized bus at 5 RPM; mass 582 kg launch / 517 kg dry; 16-instrument scientific payload. Charles F. Hall (1920-1999) project manager NASA Ames Research Center (same manager as Pioneer 10/11 outer-planet missions); Larry Colin Ames project scientist; 114 scientists from 34 colleges/universities + 14 federal labs + 15 industrial facilities + 10 foreign countries. Sister Pioneer Venus 2 Multiprobe (NSSDC 1978-078A) launched 1978-08-08 from same LCC-36A pad — third paired-spacecraft mission after Viking + Voyager = **#10286 TWIN-MISSION-PAIR-CONTINUATION ESTABLISHED-PROMOTION ACHIEVED at 3-ex (3-of-3 substrate domains)**. PV1 launched first AND numbered first = **#10287 obs#3 CHRONOLOGICAL-AND-NUMERICAL-NAMING-DIRECT-ORDER sub-form bifurcation** distinct from V1 INVERSION at v619. Six new substrate primitives admitted at v620: PLANETARY-RADAR-AS-DELIVERABLE + VENUS-AS-EARTH-COMPARATIVE-PLANET + AUTOTROPH-AS-COHORT-NODE + TAXOL-DEVELOPMENT-AS-PLANETARY-RADAR-MAPPING + EXACT-CALENDAR-MATCH-CROSS-TRACK + DIRECT-ORDER-VS-INVERSION-SUB-FORM-BIFURCATION. **Two ESTABLISHED-promotions at v620: #10286 TWIN-MISSION-PAIR-CONTINUATION at 3-ex (Viking + Voyager + Pioneer-Venus paired-spacecraft = 3-of-3) + #10287 DIRECT-ORDER sub-form distinct from INVERSION sub-form.**
 
 ## Engine state advances

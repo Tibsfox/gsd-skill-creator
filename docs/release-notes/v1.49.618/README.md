@@ -11,6 +11,20 @@
 ## Summary
 
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.618 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** Voyager 2 Outer-Planets Grand Tour ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 **Engine-cadence degree-advancing milestone — fourteenth consecutive degree-advancing milestone in the v604+ run.** Voyager 2 (NSSDC 1977-076A) — **first and only spacecraft to complete close flyby of all four outer planets; only spacecraft ever to flyby Uranus + Neptune; substrate-archetype for grand-tour-class multi-planet trajectories exploiting rare planetary alignments**. Launched 1977-08-20 14:29:00 UTC from Cape Canaveral LC-41 atop Titan IIIE-Centaur (the same vehicle line that delivered HEAO-1 eight days earlier from an adjacent pad). 12-year primary mission Jupiter 1979-07-09 / Saturn 1981-08-26 / Uranus 1986-01-24 / Neptune 1989-08-25; Voyager Interstellar Mission 1989-present; heliopause crossing 2018-11-05 at 119.7 AU; current ~143 AU 2026 (~19.75 hr one-way light travel time). 12 instruments / 11 investigations under Bradford A. Smith (ISS) / Rudolf A. Hanel (IRIS) / A. Lyle Broadfoot (UVS) / Norman F. Ness (MAG) / Herbert S. Bridge (PLS) / Stamatios M. Krimigis (LECP) / Edward C. Stone (CRS + project scientist 1972-2022 50-year tenure). Voyager Golden Record cultural-payload-secondary-deliverable. **First fresh observatory→planetary regime-shift after v617 intra-regime second-instance**: observatory regime → outer-planets-grand-tour regime (#10269 obs#7 hold-test passes; tetra-form-plus-fifth-candidate taxonomy maintained). Six new substrate primitives admitted at v618: GRAND-TOUR-AS-SUBSTRATE-ARCHETYPE + CHRONOLOGICAL-VS-NUMERICAL-NAMING-INVERSION + TWIN-MISSION-PAIR-ARCHITECTURE + CULTURAL-PAYLOAD-AS-SECONDARY-DELIVERABLE + DECADAL-LATITUDE-OF-INVESTIGATOR + DEEP-SPACE-LATENCY-RETURNS.
 
 ## Engine state advances

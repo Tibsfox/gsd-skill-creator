@@ -11,6 +11,20 @@
 ## Summary
 
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.609 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** Skylab Station Launch ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 **Engine-cadence degree-advancing milestone.** Skylab — first US space station — launched 1973-05-14 17:30:00 UTC on Saturn V SA-513 (the LAST Saturn V flight; freed by an Apollo cancellation). Orbital Workshop = converted Saturn IVB upper stage S-IVB-212 (wet→dry conversion); ~89,800 kg launch mass; orbit 434×442 km × 50.04°. **T+63s anomaly:** micrometeoroid + thermal shield ripped free, took solar array #2, jammed array #1; orbital insertion successful but interior 38°C / power 25-50% nominal. **Survive-by-in-flight-repair:** Skylab 2 launched 1973-05-25 with Conrad/Kerwin/Weitz; parasol-sunshield deployment 1973-05-26 15:38 UTC dropped temp to ~24°C; EVA 1973-06-07 freed jammed solar array. The architecture-pivot from transit (Apollo) to inhabit (Skylab) makes Shuttle / Mir / ISS thinkable.
 
 ## Engine state advances

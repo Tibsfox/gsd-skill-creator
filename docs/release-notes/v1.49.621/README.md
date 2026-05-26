@@ -11,6 +11,20 @@
 ## Summary
 
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.621 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** SCRIBE Build-Out ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 **Counter-cadence operational milestone — NASA degree stays at 1.92** (predecessor v1.49.620 Pioneer Venus 1 closed the previous degree-advancing cycle; v1.49.621 ships substrate work without advancing NASA / MUS / ELC / SPS / Seattle 360). This is the **substrate-continuity thesis** instantiated at the operational layer: 5 SCRIBE track cartridges (T1 markup-lineage, T2 svg-substrate, T3 code-svg-hdl-bridge, T4 dashboard-lod-rendering, T5 retrieval-provenance) compose into **one foundational chipset** at the first-of-its-kind `cartridges/foundational/scribe/` directory. 24 already-shipped Part-1 capabilities + 16 newly-wired Part-2 capabilities = **40 of 47 SCRIBE capabilities live**; 4 explicit deferrals (CAP-024 Tauri-native, CAP-046 chip-as-document silicon, CAP-047 Lean formal verification, CAP-041 viewer-embed) + 3 light/partial classifications (CAP-040, CAP-021, CAP-019 reclassified to runtime). 9 source components + 1 verification component shipped across 4 waves; ~16% of fleet token ceiling spent.
 
 ## Engine state advances

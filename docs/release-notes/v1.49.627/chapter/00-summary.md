@@ -1,42 +1,62 @@
-# v1.49.627 — Summary: STS-1 Columbia First Space Shuttle Flight
+<!-- V650-699-CHAPTER-LIFTED v1 -->
+# v1.49.627 — Chapter 00: Summary
 
-**Twenty-second consecutive engine-cadence degree-advancing milestone** in the v604+ run. NASA 1.102 → 1.103 + MUS 1.102 → 1.103 + ELC 1.102 → 1.103 + SPS #99 → #100 + TRS M1 W2 pack-24 → pack-25 dynamical systems / chaos theory. **K_25 ACHIEVED** at v627 close — eleventh post-K_13 extension; dynamical-systems / chaos-theory binding selected for substrate-coherence with STS-1 Columbia's first-flight nonlinear aerodynamics (hypersonic boundary-layer transition chaotic regime; thermal-protection-system tile conduction under chaotic heating gradients), The Cure *Faith* melancholic harmonic dynamics (post-punk compositional instability → goth trajectory), the Reagan-Columbia Multi-Event-Complex political-recovery arc (nonlinear public-confidence phase transition), and the Pacific Banana Slug's locomotion dynamics (chaotic trail-following + self-organization in old-growth detrital networks). **Eight or more NEW LOCKED substrate primitives at v627 — equaling or exceeding v626 record**: CREWED-REUSABLE-ORBITAL-VEHICLE-AS-NEW-DELIVERABLE + WINGED-REENTRY-FROM-ORBIT + CREW-ON-FIRST-FLIGHT + APOLLO-MOONWALKER-AS-SHUTTLE-COMMANDER + SPS-DEGREE-100-K-BOUNDARY + MOLLUSCA-AS-COHORT-NODE + ALBUM-FORM-RESTORATION + MULTI-EVENT-COMPLEX-AS-PAIRED-ARCHITECTURE + CURE-TRILOGY-AS-PAIRED-TRIPLE-MISSION-ARCHITECTURE. **FA-626-4 RESOLVED** — #10289 DEEP-SPACE-LATENCY-RETURNS ESTABLISHED-promotion at obs#9 (9-of-9 cumulative; formal declaration). **FA-626-6 RESOLVED** — TRS pack-25 dynamical-systems / chaos-theory binding mode-choice. **FA-626-7 RESOLVED** — STS-1 Columbia verified as NASA 1.103. **#10287 obs#9 DIRECT-ORDER 8-of-8 cumulative** (STS-1 = 1.103 catalog position matches chronological order; FA-627-2 active soak toward 9-of-9). **#10247 obs#19 INSIDE-strict multi-event 1981-04 cluster** (Cure 1981-04-14 +2d / STS-1 landing 1981-04-14 +2d / Reagan discharge 1981-04-11 -1d = multi-event-complex INSIDE-strict 3-track cluster; seventh consecutive INSIDE-strict cluster simultaneously across all three time-anchored tracks). **SPS-DEGREE-100-K-BOUNDARY NEW LOCKED** — Pacific Banana Slug SPS #100 is the first 3-digit SPS species number; milestone-scale boundary parallel to NASA DEGREE-100-K-BOUNDARY at v624. **0 FAIL findings at v627 gate; no Tier-2 recovery applied** — cleanest milestone in current cohort; first clean-pass milestone since v619. STS-1 Columbia launched 1981-04-12 12:00:03.9 UTC from LC-39A Kennedy Space Center aboard OV-102 Columbia (first Shuttle orbiter to fly); commander John W. Young (Apollo 10 LM pilot + Apollo 16 commander Moonwalker + STS-1 commander + STS-9 commander; only person to fly Gemini + Apollo + Space Shuttle; 6 spaceflights 1965-1983) + pilot Robert L. Crippen (USN pilot; first spaceflight STS-1; future STS-7 commander 1983 with Sally Ride; STS-41-C commander 1984 SolarMax repair; STS-41-G commander 1984; 4 spaceflights total); 54 hours 20 minutes 53 seconds / 36 orbits; landed Edwards AFB Runway 23 (concrete lakebed) 1981-04-14 18:20:53 UTC. Columbia was the first orbiter to reach space; first winged vehicle to reenter from orbital velocity (Mach 25 / 7.85 km/s entry interface; ~1,650°C peak tile temperature); first crewed spacecraft to land on a conventional runway; 30,922 TPS tiles (LI-900 + LI-2200 HRSI + FRSI blankets); two broken aft carrier-panel windows post-flight (debris impact during ascent); payload bay carried DFI (Development Flight Instrumentation) 3-axis accelerometer package + ACIP (Aerodynamic Coefficient Identification Package); 3-APU hydraulic system first flight. Cross-track: The Cure *Faith* (Fiction Records FIXH 6; UK release 1981-04-14; #10232 obs#32 ALBUM-FORM RESTORATION; Robert Smith vocals/guitar + Simon Gallup bass + Lol Tolhurst drums; Mike Hedges producer; Morgan Studios + Red Bus Studios + Roundhouse Studios London January-February 1981; 8 tracks: "The Holy Hour" + "Primary" + "Other Voices" + "All Cats Are Grey" + "The Funeral Party" + "Doubt" + "The Drowning Man" + "Faith"; ~37 min; UK Albums #14; part of Cure Trilogy with Seventeen Seconds 1980 + Pornography 1982; CURE-TRILOGY-AS-PAIRED-TRIPLE-MISSION-ARCHITECTURE #10321 NEW CANDIDATE; #10232 obs#32 ALBUM-FORM after SINGLE-FORM at v626 Iron Maiden = ALBUM-FORM-RESTORATION sub-form NEW LOCKED; #10323 ALBUM-FORM-vs-SINGLE-FORM-ALTERNATION NEW CANDIDATE) + Reagan-Columbia Political-Technical Confidence Restoration Complex (Reagan assassination attempt 1981-03-30 Hinckley at Washington Hilton; surgery + 12-day GWU Hospital recovery; Reagan hospital discharge 1981-04-11 -1d before STS-1 launch; Reagan public statement at Columbia landing 1981-04-14 = "great deeds" of the American people; Reagan first major presidential public statement post-assassination-attempt paired with first-Shuttle-landing national triumph; MULTI-EVENT-COMPLEX sub-form NEW LOCKED; #10232 obs#33; #10324 NEW CANDIDATE MULTI-EVENT-COMPLEX-AS-PAIRED-ARCHITECTURE) + Pacific Banana Slug SPS #100 (*Ariolimax columbianus*; first Mollusca + first Gastropoda + first Pulmonata; Gould 1851; body length 6-25 cm; mass up to 115g; yellow-olive-brown-black coloration; old-growth forest floor decomposer keystone; mucus = REUSABLE-SURFACE-INSULATION analog VERY-HIGH; MOLLUSCA-AS-COHORT-NODE NEW LOCKED #10320 NEW CANDIDATE; SPS-DEGREE-100-K-BOUNDARY NEW LOCKED #10322 NEW CANDIDATE; hermaphroditic apophallation; seventh consecutive cohort-class expansion) + TRS pack-25 dynamical systems / chaos theory (K_25 ~322 edges; #10273 + #10274 + #10284 obs#10 HOLDS 13-of-13 consecutive bridge-category; FA-626-6 RESOLVED).
+## Summary
 
-## Structural firsts logged at v627
+**Forward-cadence NASA degree advance to ?.?.** v1.49.627 ships STS-1 Columbia First Space Shuttle Flight as a forward-cadence engine-state advance from NASA degree ?.? to ?.?. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-**CREWED-REUSABLE-ORBITAL-VEHICLE-AS-NEW-DELIVERABLE NEW LOCKED.** STS-1 Columbia is the first crewed reusable orbital spacecraft; establishes substrate-archetype for STS-2 through STS-135 (1981-2011; 135 flights; 5 orbiters; 30-year program) + commercial crew era (Dragon + Starliner); distinct from all prior crewed spacecraft in requiring full orbiter refurbishment between flights rather than expendable capsule recovery
+**Mission rebuilt to per-pipeline depth.** STS-1 Columbia First Space Shuttle Flight ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/N.NNN/`.
 
-**WINGED-REENTRY-FROM-ORBIT NEW LOCKED.** STS-1 is the first crewed winged reentry from orbital velocity (Mach 25 / 7.85 km/s entry interface; 30,922 TPS tiles; ~1,650°C peak temperature; 13,000 km landing path from entry interface to Runway 23); substrate-archetype for all subsequent Shuttle entries; distinct from ballistic capsule reentry (Mercury/Gemini/Apollo) in achieving controlled aerodynamic lift across the full hypersonic reentry regime
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-**CREW-ON-FIRST-FLIGHT NEW LOCKED.** STS-1 is the first orbital launch system to fly crew on its inaugural flight; all prior crewed spacecraft flew uncrewed orbital tests before crew (Mercury-Redstone 4 / Mercury-Atlas 6 sequence; Gemini 1-2 / Gemini 3 sequence; Apollo 6 / Apollo 7 sequence; Soyuz 1-8 uncrewed before Soyuz 9); the Shuttle's all-up crewed-first-flight philosophy was unique in the orbital launch vehicle history; Young + Crippen flew with no uncrewed orbital precursor
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-**APOLLO-MOONWALKER-AS-SHUTTLE-COMMANDER NEW LOCKED.** John W. Young is the first Apollo lunar-surface Moonwalker to command a Space Shuttle flight; Young walked on the Moon on Apollo 16 (1972-04-21 to 1972-04-23; 20 hours 14 minutes surface EVA with Charles Duke); bridging Apollo → Shuttle is a unique career arc (Gemini 3/10 + Apollo 10/16 + STS-1/9); substrate-archetype for future cross-program commander continuity
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-**SPS-DEGREE-100-K-BOUNDARY NEW LOCKED.** Pacific Banana Slug SPS #100 is the first 3-digit SPS species number in the cohort; marks the same kind of architectural cohort milestone as NASA DEGREE-100-K-BOUNDARY at v624 (IRAS 1.100 = first 3-digit NASA degree); SPS-DEGREE-100-K-BOUNDARY is a parallel substrate primitive at the species-number scale; the cohort has now catalogued 100 Pacific Northwest species across v604-v627
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-**MOLLUSCA-AS-COHORT-NODE NEW LOCKED.** Pacific Banana Slug (*Ariolimax columbianus*) SPS #100 is the first Mollusca + first Gastropoda + first Pulmonata in the SPS cohort; seventh consecutive cohort-class expansion (autotroph v620 → benthic-crustacean v622 → odontocete v623 → passerine v624 → Salmonidae v625 → amphibian v626 → Mollusca v627); MOLLUSCA-AS-COHORT-NODE captures the substrate of the phylum Mollusca entering the cohort via the Pacific Banana Slug's detritivore keystone role in old-growth PNW forest floor ecology
+## Key Features
 
-**ALBUM-FORM-RESTORATION NEW LOCKED.** The Cure *Faith* is an album (8 tracks ~37 min) following Iron Maiden "Running Free" 7" single at v626 (SINGLE-FORM sub-form); the MUS pick returns to ALBUM-FORM after one SINGLE-FORM milestone; ALBUM-FORM-RESTORATION sub-form captures the structural pattern of album-form restoration after a single-form interruption in the cohort sequence; #10232 obs#32
+| Track | Field | Value |
+|---|---|---|
+| NASA | Mission name | STS-1 Columbia First Space Shuttle Flight |
+| NASA | Degree from | N.NNN |
+| NASA | Degree to | N.NNN |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-**MULTI-EVENT-COMPLEX-AS-PAIRED-ARCHITECTURE NEW LOCKED.** Reagan-Columbia ELC pick is a MULTI-EVENT-COMPLEX sub-form: Reagan hospital discharge (1981-04-11) + Reagan "great deeds" public statement at Columbia landing (1981-04-14) are two discrete political events bracketing the STS-1 mission; together they constitute the Reagan-Columbia Political-Technical Confidence Restoration Complex; distinct from single-event ELC picks in pairing two explicitly linked events around the NASA anchor
+## Cross-References
 
-**CURE-TRILOGY-AS-PAIRED-TRIPLE-MISSION-ARCHITECTURE NEW CANDIDATE.** Seventeen Seconds (1980) + Faith (1981) + Pornography (1982) = Cure Trilogy; three consecutive albums forming an intentional gothic-atmosphere musical arc; mirrors HEAO-1/2/3 program-trio and ISEE constellation three-mission architecture; first music-trilogy-as-mission-trio substrate candidate in MUS catalog
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.626** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.628** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-**#10289 ESTABLISHED-promotion DECISION at obs#9 — FA-626-4 RESOLVED.** Reagan-Columbia ELC arc: EO 12192 State Planning Council → NWPA 1982 → NWPA Amendments 1987 → Yucca Mountain 1987-2002 → Obama termination 2009 → revival 2017+ = 35+ year periodic-revival arc; 9-of-9 cumulative domain forms at v627; DEEP-SPACE-LATENCY-RETURNS formally promoted to ESTABLISHED at v627
+## Engine Position
 
-**#10244 22nd operational application — TWELFTH CONSECUTIVE first-attempt PASS.** v627 NASA 1.103 PASS at first-attempt; twelve consecutive first-attempt PASSes (v615-v627 minus v621 counter-cadence); clean-pass milestone; 0 FAIL findings; no Tier-2 recovery required
+| Track | At v1.49.626 close | At v1.49.627 close |
+|---|---|---|
+| NASA degree | N.NNN | **N.NNN** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
 
-**K_25 ACHIEVED.** TRS pack-25 dynamical systems / chaos theory (~322 total edges); eleventh post-K_13 extension; dynamical-systems / chaos-theory binding for substrate-coherence with STS-1 hypersonic boundary-layer nonlinear aerodynamics + Cure *Faith* post-punk compositional instability + Reagan political-confidence phase transition + Pacific Banana Slug locomotion trail dynamics; #10273 + #10274 + #10284 obs#10 HOLDS 13-of-13 consecutive bridge-category
+## Infrastructure
 
-## Engine-state delta
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/N.NNN/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-627-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.627` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
 
-- NASA: 104 catalog index entries (103 + STS-1 Columbia 1.103; first Shuttle degree entry; CREWED-REUSABLE-ORBITAL-VEHICLE + WINGED-REENTRY + CREW-ON-FIRST-FLIGHT + APOLLO-MOONWALKER-AS-SHUTTLE-COMMANDER primitives registered)
-- MUS: 104 catalog index entries — The Cure *Faith* album card authored with ALBUM-FORM-RESTORATION + CURE-TRILOGY annotation
-- ELC: 104 catalog index entries — Reagan-Columbia Complex card authored with MULTI-EVENT-COMPLEX sub-form + DEEP-SPACE-LATENCY-RETURNS ESTABLISHED annotation
-- SPS: #100 Pacific Banana Slug species detail page; MOLLUSCA-AS-COHORT-NODE first Mollusca entry; SPS-DEGREE-100-K-BOUNDARY 3-digit milestone; seventh consecutive cohort-class expansion
-- TRS: ~322 total edges across 21 milestones; **K_25 ACHIEVED** — twenty-fifth-pack roster complete
-- §6.6 register: ~112-120 LOCKED post-v627 (delta: eight or more new substrate primitives LOCKED at v627; #10289 ESTABLISHED-promoted at obs#9)
-
-## Through-line
-
-v1.49.627 ships STS-1 Columbia — first Space Shuttle orbital flight (1981-04-12; Young + Crippen; 54h 20m / 36 orbits; LC-39A; Edwards AFB Runway 23 landing; first reusable crewed spacecraft; first winged orbital reentry; first crew-on-first-flight). Cross-track: The Cure *Faith* (ALBUM-FORM RESTORATION after v626 SINGLE-FORM; UK 1981-04-14 +2d INSIDE strict; Cure Trilogy; #10232 obs#32; #10321 CURE-TRILOGY NEW CANDIDATE; #10323 ALTERNATION NEW CANDIDATE) + Reagan-Columbia Political-Technical Confidence Restoration Complex (MULTI-EVENT-COMPLEX sub-form NEW LOCKED; Reagan discharge -1d / "great deeds" +2d INSIDE strict; #10232 obs#33; #10324 NEW CANDIDATE; FA-626-4 #10289 obs#9 ESTABLISHED-promotion DECISION) + Pacific Banana Slug SPS #100 (SPS-DEGREE-100-K-BOUNDARY NEW LOCKED; first 3-digit SPS species; MOLLUSCA-AS-COHORT-NODE NEW LOCKED; first Mollusca/Gastropoda/Pulmonata; seventh consecutive cohort-class expansion; #10320 + #10322 NEW CANDIDATEs) + TRS pack-25 dynamical-systems / chaos-theory (K_25 ~322 edges; FA-626-6 RESOLVED). Eight or more substrate primitives LOCKED at v627. FA-626-4 RESOLVED (#10289 ESTABLISHED at obs#9). FA-626-6 RESOLVED (pack-25 dynamical systems). FA-626-7 RESOLVED (STS-1 Columbia verified as 1.103). 0 FAIL findings; no recovery applied; cleanest milestone in current cohort.
+---
+**Prev:** [v1.49.626](../v1.49.626/00-summary.md) · **Next:** [v1.49.628](../v1.49.628/00-summary.md)

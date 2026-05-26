@@ -1,31 +1,62 @@
-# v1.49.600 — Summary
+<!-- V650-699-CHAPTER-LIFTED v1 -->
+# v1.49.600 — Chapter 00: Summary
 
-## Structural firsts at v1.49.600 close
+## Summary
 
-1. **CENTESIMAL MARKER — 100th micro-release on the v1.49.x line since v1.49.500 (the artemis-ii merge baseline commit from 2026-04-14).** Documented as a docs-only flag in release-notes; no engine cadence change; no special structural content beyond this note. Not a vanity milestone — a structural anchor: the v1.49.500–v1.49.600 arc spans the artemis-ii merge through 80 NASA degrees + 23 §6.6 register slots LOCKED + 13 three-track-plus-TRS cadence instances + 3 soak-discipline lessons promoted to ESTABLISHED in a single milestone. The arc is the engine's first 100-milestone post-merge production stretch.
+**Forward-cadence NASA degree advance to ?.?.** v1.49.600 ships Mariner 9 First Planet Orbit as a forward-cadence engine-state advance from NASA degree ?.? to ?.?. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-2. **First milestone with three soak-discipline lessons PROMOTED to ESTABLISHED in a single G3.** #10233 (Tier-2 inline-Opus W2 build path) + #10236 (substrate-emergent cross-track epistemology) + #10237 (§6.6 watchlist-not-pre-decision discipline) all reached observation #3 at v600 and all three promoted at G3 close. This is a milestone-level structural first — the largest single-milestone discipline-promotion event in catalog history. The simultaneity is by mission-package design (all three were emitted at v598 close as forward-lesson candidates with v600 third-instance evaluation point), not coincidence.
+**Mission rebuilt to per-pipeline depth.** Mariner 9 First Planet Orbit ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/N.NNN/`.
 
-3. **First successful execution of single-spacecraft fallback in NASA's planetary exploration history.** Mariner 8 (v1.49.599) was the planned first spacecraft of the Mars '71 paired program; AC-23 Centaur upper-stage tumble destroyed it at T+311s. Mariner 9 (v1.49.600) was the planned second spacecraft; after Mariner 8's loss, JPL replanned its trajectory and ops timeline to execute the combined mission objectives of both spacecraft. **The paired-spacecraft redundant program design vindicated at first failure occasion.** Mariner 9 not only completed Mariner 8's objectives but exceeded them — it returned more images than the combined two-spacecraft plan had projected. This is the first time in NASA's planetary exploration history that single-spacecraft fallback was successfully executed; the Mars '71 precedent established a paired-spacecraft design pattern that recurs at Viking 1+2 (1976), Voyager 1+2 (1977), Spirit + Opportunity (2003-04), Perseverance + Ingenuity (2020).
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-4. **First cross-track substrate convergence on the NASA+SPS interface.** v599 produced the first cross-track substrate convergence at the SPS+ELC interface (Sea Otter + Greenpeace + Amchitka). v600 produces the **second cross-track substrate convergence on a NEW interface** (Gray Whale + Mariner 9 via mapping-the-unknown substrate + temporal-lock MMPA−6 days from mission end). The convergence is **opportunistic across track interfaces, not formulaic** — discipline produces convergence wherever substrate makes it visible, not on a fixed track-pair schedule. This is the second consecutive milestone with cross-track substrate convergence; #10242 forward-lesson candidate (cross-track substrate convergence as substrate-emergent finding type) advances toward ESTABLISHED at v601 close.
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-5. **First milestone with three independent strong substrate-emergent cross-track pairs at three different fit-levels in a single ship.** The four-track v600 pair lands three independently strong substrate-emergent pairs: (a) **narrative-structural** Stockholm 1972 ↔ Mariner 9 6/6 substrate-primitive match (strongest narrative-structural fit at any ELC degree to date); (b) **contingent-temporal** Gray Whale ↔ Mariner 9 with MMPA−6-days-before-mission-end calendar substrate lock; (c) **surgical-procedural** Nilsson Schmilsson ↔ Mariner 9 with Perry's "Without You" arrangement override = JPL's Mariner-9-absorbs-Mariner-8 ops replan. Three different fit-levels in a single milestone demonstrates the discipline's range and is ESTABLISHED-candidate-promotion evidence for #10236.
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-6. **First cross-track fabrication failure mode caught at orchestrator-level grep verification.** W2.NASA build agent fabricated cross-track pair selections (chose "Steller's Jay" for SPS and "What's Going On / Marvin Gaye" for MUS) instead of reading actual W1.MUS / W1.SPS research outputs that selected Nilsson Schmilsson + Gray Whale. The fabrication contaminated 17 files in NASA 1.80 directory. Detection at orchestrator-level grep + 1 fix-up agent dispatch (~131K tokens) recovered cleanly. Forward-lesson candidate #10243 emitted: W2 build-agent prompts must explicitly require reading all sibling-track W1 research outputs before authoring cross-track sections. The failure mode is path-specific (Tier-2 inline-Opus); its mitigation is template-level (prompt discipline), not engine-level. Promotion of #10233 to ESTABLISHED is **not blocked** by the failure mode — it was caught and remediated within the path's standard discipline (substrate-emergent #10236 provides the detection mechanism for cross-track fabrication, which is the principal Tier-2 path quality risk: the two are mutually-reinforcing).
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-7. **First milestone where #10231 ESTABLISHED graceful-thinness was applied in NOMINAL direction (full-canonical depth target met, depth-audit clean PASS).** v596 Apollo 13 + v598 Apollo 14 + v599 Mariner 8 established the discipline at thin-substrate edge cases. v600 Mariner 9 is the **reverse direction** — full-canonical iconic-mission depth target with substrate richness supporting full depth (17-month operational lifetime + 7,329 photographs + first-orbit-of-another-planet + Olympus Mons + Valles Marineris + ancient riverbed evidence). Depth-audit returned clean PASS=3 with no WARN. The discipline holds in both directions: thin substrate produces graceful-thin output; rich substrate produces full canonical output. ESTABLISHED REAFFIRMED.
+## Key Features
 
-## Engine state at v1.80 close
+| Track | Field | Value |
+|---|---|---|
+| NASA | Mission name | Mariner 9 First Planet Orbit |
+| NASA | Degree from | N.NNN |
+| NASA | Degree to | N.NNN |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-- NASA degree 1.80 (Mariner 9 / first spacecraft to orbit any planet other than Earth / 17-month operational lifetime 1971-05-30 to 1972-10-27 / 7,329 photographs covering 100% of Mars surface / Olympus Mons + Valles Marineris + ancient riverbed evidence + Phobos/Deimos close-ups / 698 orbits)
-- MUS degree 1.80 (Harry Nilsson *Nilsson Schmilsson*; RCA 1971-11-11; INSIDE Mariner 9 MOI−3 days; producer Richard Perry; Trident Studios London; #3 album / #1 single "Without You" / 4-week chart-top / Grammy / Gold)
-- ELC degree 1.80 (UN Conference on the Human Environment / Stockholm 1972-06-05–16 / 113 nations / 26-principle Stockholm Declaration / UNEP creation Resolution 2997 (XXVII) 1972-12-15 / Maurice Strong Secretary-General / Earthwatch GEMS+INFOTERRA+IRPTC)
-- SPS species #77 (Gray Whale / *Eschrichtius robustus* Eastern North Pacific population; substrate-convergent with NASA via mapping-the-unknown + temporal-lock MMPA 1972-10-21 = 6 days before Mariner 9 mission end 1972-10-27)
-- §6.6 register 23 LOCKED (no admit; 5 watchlist active: LAUNCH-VEHICLE-FAILURE + NWO + DUST-STORM-WAITING-PROTOCOL + PAIRED-REDUNDANT-PROGRAM-DESIGN-VINDICATION + PFFA; 1 active exclusion: FIRST-OF-ITS-KIND-DISCOVERY)
-- TRS substrate M1 Wave 2 advanced (pairing-map-v2.json 24 edges = 16 v599 baseline + 8 v600 pack-11 additions; coverage-report-pack-11-v2.json 4 clusters / 8 papers)
-- 3 soak-discipline lessons PROMOTED to ESTABLISHED at v600 G3 (#10233 + #10236 + #10237)
+## Cross-References
 
-## Test count delta
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.599** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.601** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-Vitest baseline (v599 close): 29,479 passing. v600 milestone has no engine modifications in scope (engine-state-only milestone per scope; #10240 implementation deferred per operator decision); test count expected to remain at 29,479 ± small at v600 W3 vitest checkpoint.
+## Engine Position
+
+| Track | At v1.49.599 close | At v1.49.600 close |
+|---|---|---|
+| NASA degree | N.NNN | **N.NNN** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
+
+## Infrastructure
+
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/N.NNN/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-600-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.600` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.599](../v1.49.599/00-summary.md) · **Next:** [v1.49.601](../v1.49.601/00-summary.md)

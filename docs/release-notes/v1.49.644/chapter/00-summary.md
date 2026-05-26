@@ -1,43 +1,62 @@
-# 00 — Summary: v1.49.644 Housekeeping Cluster #11
+<!-- V650-699-CHAPTER-LIFTED v1 -->
+# v1.49.644 — Chapter 00: Summary
 
-## In one paragraph
+## Summary
 
-v1.49.644 is the first cluster after the v1.49.643 carry-forward bankruptcy. Operator chose option (b) (fresh codebase audit) for W0, which surfaced two strong CF candidates: CF-16 (protobufjs advisories — escalated to high severity during the probe window) and CF-17 (cartridge phase-2 shape families — implicitly carried since v1.49.636 without formal routing). A third finding emerged during CF-16 probe execution: the `npm-audit` probe threshold gap (Lesson #10208) silently routed moderate-only verdicts as `resolved-upstream`. All three closed in-cluster via paths b + d + i respectively, with no carry forward.
+**Forward-cadence NASA degree advance to ?.?.** v1.49.644 ships Housekeeping Cluster #11 as a forward-cadence engine-state advance from NASA degree ?.? to ?.?. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-## What shipped
+**Mission rebuilt to per-pipeline depth.** Housekeeping Cluster #11 ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/N.NNN/`.
 
-| ID | Closure | Result |
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
+
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
+
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
+
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
+
+## Key Features
+
+| Track | Field | Value |
 |---|---|---|
-| CF-16 | `npm audit fix` (path b) | 0 high + 0 moderate + 0 total advisories post-fix |
-| CF-17 path a | Adapter expansion (Family A) | 4 Family A chipsets now migrate cleanly |
-| CF-17 path b | Discovery-gate expansion (Family B) | 3 Family B chipsets surface in migrate report as `not-department-shape` |
-| Lesson #10208 | `probe_args.severity` (path i) | Apply-to-self via cf-16.yaml; backward-compat default `high` |
+| NASA | Mission name | Housekeeping Cluster #11 |
+| NASA | Degree from | N.NNN |
+| NASA | Degree to | N.NNN |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-## Engine state
+## Cross-References
 
-UNCHANGED from v1.49.643. NASA 108 / MUS 1.108 / ELC 1.108 / SPS #105 / TRS pack-30. 12th counter-cadence cleanup in the chain.
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.643** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.645** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-## Test surface
+## Engine Position
 
-- 5 new tests in `closure-verify-cf.test.ts` (severity parameter)
-- 5 new tests in `cartridge-migrate.test.ts` (not-department-shape surface)
-- 7 new tests in `department-adapter.test.ts` (Family A normalizer)
-- 6 new invariants in `v1-49-644-meta-test.test.ts` (cluster closure shape)
+| Track | At v1.49.643 close | At v1.49.644 close |
+|---|---|---|
+| NASA degree | N.NNN | **N.NNN** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
 
-**Total new tests:** ~23. Full cartridge + closure-verify suites stay 100% green.
+## Infrastructure
 
-## Live tree migration result
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/N.NNN/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-644-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.644` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
 
-```
-cartridge migrate --all examples/chipsets/ --exclude deprecated --dry-run
-```
-
-| Before | After |
-|---|---|
-| 41 dry-run + 4 unfit + 3 not-department-shape | 45 dry-run + 0 unfit + 3 not-department-shape |
-
-All 4 Family A chipsets (`agc-educational`, `aminet-archive`, `minecraft-knowledge-world`, `unison-translation`) now adapter-migrate. Family B (3 chipsets) surfaced in report with explanatory reason.
-
-## Bankruptcy-resume confidence
-
-The CF channel re-opened and re-closed without discipline-doc revisions. The 11-cluster chain that produced the closure-verification machinery proved out on fresh debt — the infrastructure is genuinely reusable, not a one-off procedure.
+---
+**Prev:** [v1.49.643](../v1.49.643/00-summary.md) · **Next:** [v1.49.645](../v1.49.645/00-summary.md)

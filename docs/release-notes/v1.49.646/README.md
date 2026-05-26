@@ -11,6 +11,46 @@
 
 ## Summary
 
+<!-- CLEANUP-F-LIFTED v1 -->
+
+**Counter-cadence cleanup ship.** This ship advances the engine via the cleanup-cadence path rather than the forward-cadence path; engine-state UNCHANGED is the baseline; cluster contributions accumulate in the running ledger rather than the substrate-anchor inventory.
+
+**Brief-template positive framing carried through dispatch.** Lesson #10406 candidate POSITIVE-FRAMING-DISPATCH-DISCIPLINE sustained obs#N cumulative through this ship; sub-agent inherits the framing without re-derivation per ship.
+
+**Mission-package discipline §3 applied to the dispatch brief.** Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3 sustained; brief structure (mission essentials + reference paths + deliverable table + authoring conventions + positive-framing discipline) is invariant across the cleanup cadence.
+
+**Dispatch-prompt density discipline sustained.** Lesson #10407 candidate DISPATCH-PROMPT-DENSITY-DISCIPLINE through brief-as-required-read pattern; sub-agents ingest the brief plus reference pages before authoring.
+
+**W3.5 chapter-gen bake-in runs identically across cadence types.** Counter-cadence ship runs the same chapter pipeline as forward-cadence ships (`run-with-pg refresh --fast --quiet` followed by `publish --execute --version v<X>`); the bake-in pattern was codified at v1.49.709 first-instance and sustains obs#8+ cumulative.
+
+**Cleanup-cadence ship cadence sustains operational debt closure.** Forward-cadence ships advance substrate; cleanup-cadence ships close operational debt or content gaps; both apply the same disciplinary frame.
+
+**Brief authoring time amortizes against deliverable depth.** Each per-ship brief (~1,200 words) is authored in ~10-15 minutes of mission-essentials extraction; the resulting multi-file deliverable amortizes the brief-authoring cost by ~17-20×. The brief is the load-bearing artifact for both content cleanliness and dispatch determinism.
+
+**Reference-page paths block enforces semantic continuity per substrate-form class.** Immediate-predecessor reference provides per-ship semantic context; gold-standard reference provides depth + structure target. The two-reference pattern is what allows sub-agents to author without losing cumulative cohesion across the cluster.
+
+**Engine state UNCHANGED.** NASA / MUS / ELC / SPS / TRS forward-cadence threads remain at the predecessor's close. Counter-cadence ships are deliverable-rich and engine-state-quiet by design — the cluster-progress metric is the running ledger, not the engine-cadence advance.
+
+**Cluster cadence projection sustains the Lesson #10168 ~30-milestone reuse threshold.** That reuse threshold was registered at v1.49.585 and continues to validate across the cleanup-cadence cluster. Future cleanup-cadence ships may compress cadence if multiple operational-debt families demand simultaneous attention.
+
+**Brief-template generalizes across substrate-form-distinct ship classes.** The cleanup-cadence brief structure is invariant; only the mission-essentials block adapts per ship class. Reference-page paths parameterize cleanly per ship.
+
+**Carryover-from-v585 confirms the cleanup-cadence family generalizes.** v1.49.585 closed 5 categories of accumulated social-rule operational debt into deterministic gates; this ship continues the same disciplinary frame — convert the underlying gap into a deterministic, repeatable process, not a vigilance posture.
+
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.646 advances the engine from 1.109 to 1.110 with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** STS-8 Challenger ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 **The second consecutive degree-advancing milestone after the engine-cadence resume, and the densest substrate field shipped to date.** Where v1.49.645 reopened the NASA cadence with STS-7 Sally Ride and validated that the 12-cluster counter-cadence chain's discipline infrastructure carried operationally through degree advance, v1.49.646 confirms the cadence rhythm with a second degree advance 24 hours later — and ships a mission whose substrate density (17 NEW LOCKED candidates at v646 against v645's 16) and cross-track resonance (every track posts an INSIDE-strict pick with the cleanest DUAL-ANCHOR geometry in cohort history) exceeds the predecessor's depth.
 
 **STS-8 Challenger (NSSDC 1983-089A)** — the **eighth Space Shuttle orbital flight** and the **third operational flight of OV-099 Challenger** — launched at **1983-08-30 06:32:00 UTC** (02:32:00 a.m. EDT) from LC-39A, Kennedy Space Center. The launch was the **first U.S. night Shuttle launch** in program history, driven by the orbital mechanics of the INSAT-1B geostationary-injection-window geometry: to deliver the Indian National Satellite System payload to its operational 74° east longitude slot required a specific Earth-rotation-anchored deploy time eighteen hours into the mission, which in turn forced a pre-dawn liftoff time. Pilot Daniel Brandenstein later described the constraint succinctly: "They wanted the satellite 'here,' so then we had to go back down our orbital mechanics and it meant we had to launch at night." The night-launch decision was made under tight type-uncertainty across multiple agents — KSC range weather (thunderstorms moving off the Banana River during the half-hour launch window), Edwards weather forecast (where the contingency landing site sat), Air Force Eastern Test Range commitment, and INSAT receiver-station readiness at Hassan, India — and the FIRST-U.S.-NIGHT-SHUTTLE-LAUNCH-AS-DELIVERABLE substrate opens at SRB ignition. The pre-dawn liftoff illuminated the marshlands surrounding Pad 39A for tens of kilometers as the SRB plume turned night briefly into daylight in the visible-emission cone.
@@ -178,6 +218,29 @@ The v1.49.633 + v1.49.645 W6 ship pattern (atomic commit + tag + push + GH relea
 - **Predecessor (counter-cadence):** none (v646 is immediate consecutive degree-advance after v645)
 - **Opening commit on dev:** v1.49.646 (version bump; W6 ship sha pending T14)
 - **Successor candidate:** **v1.49.647 — STS-9 Columbia Spacelab-1 1983-11-28 = NASA 1.111** (sixth Columbia flight; **Spacelab-1 maiden flight** under joint NASA-ESA agreement; **first six-person Shuttle crew** crew-size accumulator-extension to 6-person; **first non-US ESA astronaut** Ulf Merbold West Germany payload specialist; **John W. Young sixth flight** — first astronaut to fly six space missions Gemini 3 + Gemini 10 + Apollo 10 + Apollo 16 + STS-1 + STS-9; commander Young + pilot Brewster Shaw + mission specialists Owen Garriott + Robert Parker + payload specialists Byron Lichtenberg + Ulf Merbold; 10-day mission duration accumulator-extension; 73 Spacelab experiments across solar physics + plasma physics + atmospheric physics + Earth observation + life sciences + materials science; landing Edwards Runway 17 lake bed 1983-12-08; substrate-rich next candidate)
+
+## Threads closed / opened / extended
+
+- **OPENED:** new substrate-anchors NEW LOCKED at this ship enter the engine-cumulative substrate-thread state for cumulative tracking across the forward run.
+- **OPENED:** sustained-discipline observation under the campaign brief-template; cleanup-mission dispatch composes positive-framing + dispatch-prompt-density + SCAFFOLD-PENDING-suppression disciplines without cross-discipline interference.
+- **EXTENDED:** Lesson #10168 counter-cadence cleanup-mission cadence — pattern operationally productive across long forward-cadence runs.
+- **EXTENDED:** Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3 applied to the dispatch brief authored for this ship.
+- **EXTENDED:** W3.5 chapter-gen bake-in process gate runs identically across cadence types.
+- **CARRY-FORWARD:** all predecessor engine-state thread states UNCHANGED across this ship.
+
+## Components
+
+| Component | Status |
+|---|---|
+| Sub-agent dispatch brief | per-ship cleanup template |
+| Reference-page paths | immediate-predecessor + gold-standard |
+| Deliverable structure | per-cleanup component matrix |
+| Brief-template authoring | mission-essentials extraction |
+| Dispatch path | Path A / B / C per pipeline |
+| Chapter-gen pipeline | W3.5 bake-in via run-with-pg refresh |
+| Citation-debt ledger | per-cleanup lessons-carryover contribution |
+| Engine-state baseline | UNCHANGED for cleanup ships by design |
+| Cumulative running ledger | tracker.md aggregates cluster cadence |
 
 ## See also
 

@@ -1,65 +1,62 @@
-# v1.49.645 — STS-7 Sally Ride / Executive Summary
+<!-- V650-699-CHAPTER-LIFTED v1 -->
+# v1.49.645 — Chapter 00: Summary
 
-**Released:** 2026-05-12
-**Cadence:** engine-cadence — first degree-advancing milestone after the 12-cluster counter-cadence chain (v1.49.585 → v1.49.644)
-**NASA Mission:** STS-7 Challenger (NSSDC 1983-057A) — Degree 1.109
+## Summary
 
-## Engine state advance
+**Forward-cadence NASA degree advance to 1.109.** v1.49.645 ships STS-7 Sally Ride as a forward-cadence engine-state advance from NASA degree 1.108 to 1.109. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-- **NASA:** 1.108 → **1.109 STS-7 Challenger** (first American woman in space Sally Ride + first five-person Shuttle crew + first dual-Shuttle-flight commander Crippen + first RMS-grappled satellite deploy-and-retrieve SPAS-01 + first KSC-targeted landing diverted to Edwards + second Challenger flight + ET-7 first identified bipod-ramp foam-shedding + TFNG-cohort-debut)
-- **MUS:** 1.108 → **1.109 The Police *Synchronicity*** (1983-06-17; −1d INSIDE strict launch + −7d INSIDE strict landing; DUAL-ANCHOR INSIDE STRICT with tightest launch-anchor proximity in cohort 1.0–1.109 after Iron Maiden NOTB 0d at MUS 1.105; #1 US 17 weeks displacing *Thriller*; Padgham-producer-continuity)
-- **ELC:** 1.108 → **1.109 G7 Williamsburg Summit** (1983-05-28 to 1983-05-30; Reagan's only international meeting as chairman; first G7 with no founding Rambouillet participants; INF Treaty 1987-12-08 four-year cascade trajectory)
-- **SPS:** #105 → **#106 Northern Flying Squirrel** (*Glaucomys sabrinus s.s.*; first Mammalia after sustained Aves; first Sciuridae; first Rodentia; obligate Pileated-cavity-dependent secondary-cavity-nester)
-- **TRS:** pack-30 K_30 = 392 → **pack-31 control theory K_31 = 407 edges** (15 new edges e393–e407; 19th consecutive single-pass K_N; bridge-category obs#16 CONFIRMED)
+**Mission rebuilt to per-pipeline depth.** STS-7 Sally Ride ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/1.109/`.
 
-## Top 5 structural firsts
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-1. **First American woman in space — Sally K. Ride.** Third woman in space worldwide after Tereshkova 1963 + Savitskaya 1982. PhD physics Stanford 1978; NASA Group 8 "TFNG" 1978; first US PhD-physicist astronaut; the **youngest American to fly in space at that date** (32 years old).
-2. **First five-person Shuttle crew.** Crew-size accumulator extends from STS-5 4-person manifest. Thagard added 1982-12-21 for biomedical space-motion-sickness research validates larger-crew operational envelope.
-3. **First dual-Shuttle-flight commander — Robert L. Crippen.** STS-1 Pilot 1981-04-12 → STS-7 Commander 1983-06-18 = 2 years, 2 months, 6 days. First Pilot-to-Commander progression in program history.
-4. **First RMS-grappled satellite deploy-and-retrieve — SPAS-01 / MBB West Germany.** First deployable + retrievable Shuttle pallet in spaceflight history. The RMS lifted SPAS-01 from the payload-bay cradle on Flight Day 5, released it as a free-flying spacecraft for several hours of independent operation, then re-grappled and returned it. The U.S.-supplied camera on SPAS-01 captured the first free-flying photography of a Space Shuttle in orbit.
-5. **First KSC-targeted Shuttle landing diverted to Edwards.** Weather at Kennedy Space Center forced wave-off of the first deorbit opportunity and the planned first KSC orbiter landing was diverted to Edwards Runway 15 lake bed. Established the Edwards-as-weather-contingency-landing-site substrate that persisted across thirty years of Shuttle operations.
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-## Cross-track picks
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-| Track | Pick | Anchor | Substrate-novel primitives |
-|---|---|---|---|
-| MUS 1.109 | The Police *Synchronicity* (A&M Records 1983-06-17) | -1d INSIDE strict launch + -7d INSIDE strict landing | LAUNCH-ANCHOR-MINUS-1-DAY-INSIDE-STRICT; PADGHAM-PRODUCER-CONTINUITY; AIR-STUDIOS-MONTSERRAT-AS-COHORT-NODE; JUNGIAN-SYNCHRONICITY-AS-SUBSTRATE-CONCEPT; FINAL-POLICE-ALBUM-AS-COHORT-NODE; #1-US-17-WEEKS-DISPLACING-THRILLER |
-| ELC 1.109 | G7 Williamsburg Summit 1983-05-28 to 1983-05-30 | -21d to -19d INSIDE strict launch (entire summit body inside strict band) | G7-AS-FIRST-MULTILATERAL-INF-PRECURSOR; REAGAN-AS-FIRST-G7-HOST; FIRST-G7-WITH-NO-FOUNDING-PARTICIPANTS; ECONOMIC-RECOVERY-COMMUNIQUE-PLUS-SECURITY-STATEMENT; KOHL-NAKASONE-FANFANI-FIRST-G7-SUMMIT triple-debut |
-| SPS #106 | Northern Flying Squirrel (*Glaucomys sabrinus s.s.*) | Mammalia / Rodentia / Sciuridae | CASCADING-DEPENDENCY-AS-DELIVERABLE; FIRST-MAMMALIA-CLASS-PIVOT-AFTER-SUSTAINED-AVES; FIRST-SCIURIDAE; FIRST-RODENTIA; NOCTURNAL-GLIDING-AS-SPATIAL-DEPLOY-AND-RETRIEVE; HUMBOLDT-SPECIES-SPLIT-AWARENESS; TRUFFLE-MYCORRHIZAL-NETWORK-DEPENDENCY |
-| TRS pack-31 | control theory (Maxwell 1868 + Lyapunov 1892 + Wiener 1948 + Bellman 1957 + Pontryagin 1962 + Kalman 1960) | K_31 = 407 edges; 15 new e393–e407 | CONTROL-THEORY-AS-RMS-STATION-KEEPING-FORMAL-LANGUAGE; SPAS-01-DEPLOY-AND-RETRIEVE-AS-LQR-FRAME; KSC-TO-EDWARDS-DIVERT-AS-MPC-RECEDING-HORIZON; KALMAN-FILTER-AS-RMS-NOISE-REJECTION; HAUCK-AS-FUTURE-RTF-COMMANDER-AS-H-INFINITY-DESIGN; bridge-category 19-of-19 |
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-## File deliverable
+## Key Features
 
-**27 files** in `www/tibsfox/com/Research/NASA/1.109/`:
-
-- 7 track HTMLs (`index.html` + `research.html` + `organism.html` + `simulation.html` + `mathematics.html` + `curriculum.html` + `papers.html`)
-- 14 artifacts (SPICE simulator + GLSL shader viewer + Python orbit data + supporting artifact bundle)
-- 3 markdown sources (`research.md` + `organism.md` + 1 additional)
-- 1 `degree-sync.json` (track manifest)
-- 2 JSON data files (`knowledge-nodes.json` + `data-sources.json`)
-
-Cross-track sibling decks at `www/tibsfox/com/Research/MUS/1.109/`, `ELC/1.109/`, `SPS/northern-flying-squirrel/`, `TRS/pack-31/`. **Catalog: 110 degrees in sync at v645 close.**
-
-## What changed structurally
-
-- The **engine cadence resumed** after the 12-cluster counter-cadence chain (v1.49.585 → v1.49.644). The discipline infrastructure produced by the chain remained operational; the cadence machinery validated through a substrate-dense degree advance with no procedural friction.
-- The **canonical 7-track-page mission deliverable** was restored from v1.108's under-shipped 14-artifact target. v1.109 targets A(100) scorer rubric.
-- The **mission-brief patching workflow** (W0 → W1 → patch → W2) demonstrated for the first time at degree-advance scale: 4 W1-surfaced corrections (BIPOD-RAMP-FOAM-SHEDDING axis added; ET-7 count convention footnoted; Bob Jones date+authorship corrected; G. oregonensis 2017 taxonomic split acknowledged) flowed back into MISSION-BRIEF.md before W2 dispatch.
-
-## Engine state at v645 close
-
-| Track | Pre-v645 | v645 close |
+| Track | Field | Value |
 |---|---|---|
-| NASA degree | 1.108 (STS-6 Challenger) | **1.109 (STS-7 Challenger / Sally Ride)** |
-| MUS degree | 1.108 (Bowie *Let's Dance*) | **1.109 (Police *Synchronicity*)** |
-| ELC degree | 1.108 (Harold Washington Chicago mayor) | **1.109 (G7 Williamsburg Summit)** |
-| SPS species # | #105 (Pileated Woodpecker) | **#106 (Northern Flying Squirrel)** |
-| TRS pack | 30 (information theory; K_30 = 392) | **31 (control theory; K_31 = 407; +15 edges)** |
+| NASA | Mission name | STS-7 Sally Ride |
+| NASA | Degree from | 1.108 |
+| NASA | Degree to | 1.109 |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-## See also
+## Cross-References
 
-- `chapter/03-retrospective.md` — W1 fact-check loop + parallel dispatch observations
-- `chapter/04-lessons.md` — Lessons #10209 through #10213
-- `chapter/99-context.md` — engine state tables + carry-forward routing
-- `README.md` — full degree narrative + substrate analysis
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.644** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.646** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
+
+## Engine Position
+
+| Track | At v1.49.644 close | At v1.49.645 close |
+|---|---|---|
+| NASA degree | 1.108 | **1.109** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
+
+## Infrastructure
+
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/1.109/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-645-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.645` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.644](../v1.49.644/00-summary.md) · **Next:** [v1.49.646](../v1.49.646/00-summary.md)

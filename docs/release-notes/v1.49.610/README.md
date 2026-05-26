@@ -11,6 +11,20 @@
 ## Summary
 
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.610 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** Skylab 2 First Crewed Station Mission + Rescue Completion ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 **Engine-cadence degree-advancing milestone.** Skylab 2 (SL-2 / NSSDC 1973-032A) — first crewed mission to Skylab and rescue completion of v609 launch arc. Saturn IB SA-206 launched 1973-05-25 13:00 UTC from KSC LC-39B "milkstool" with Pete Conrad (CDR; Apollo 12 Moonwalker) + Joseph Kerwin (Science Pilot; **first US physician in space**) + Paul Weitz (Pilot). Stand-up EVA hooked-rod attempt failed; hard-dock 1973-05-26 03:50 UTC after 5 attempts; **parasol sunshield deployment 1973-05-26 15:38 UTC** via T-handle through MDA scientific airlock dropped interior temperature 38°C→24°C; **EVA 1973-06-07** Conrad+Kerwin freed jammed solar array #1 via 25-foot pole + ratchet + cable-cutter (Marshall-engineered) restoring full ~7 kW power. Mission close 1973-06-22 splashdown 9.6 km from USS Ticonderoga; **28d 0h 49m 49s — longest US mission to date.** The architecture v609 introduced as theoretical-by-engineering is here vindicated by execution: real humans, real EVA tools, real success. Pre-Shuttle / pre-Mir / pre-ISS lineage gets its operational anchor.
 
 ## Engine state advances

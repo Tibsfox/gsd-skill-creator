@@ -11,6 +11,46 @@
 
 ## Summary
 
+<!-- CLEANUP-F-LIFTED v1 -->
+
+**Counter-cadence cleanup ship.** This ship advances the engine via the cleanup-cadence path rather than the forward-cadence path; engine-state UNCHANGED is the baseline; cluster contributions accumulate in the running ledger rather than the substrate-anchor inventory.
+
+**Brief-template positive framing carried through dispatch.** Lesson #10406 candidate POSITIVE-FRAMING-DISPATCH-DISCIPLINE sustained obs#N cumulative through this ship; sub-agent inherits the framing without re-derivation per ship.
+
+**Mission-package discipline §3 applied to the dispatch brief.** Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3 sustained; brief structure (mission essentials + reference paths + deliverable table + authoring conventions + positive-framing discipline) is invariant across the cleanup cadence.
+
+**Dispatch-prompt density discipline sustained.** Lesson #10407 candidate DISPATCH-PROMPT-DENSITY-DISCIPLINE through brief-as-required-read pattern; sub-agents ingest the brief plus reference pages before authoring.
+
+**W3.5 chapter-gen bake-in runs identically across cadence types.** Counter-cadence ship runs the same chapter pipeline as forward-cadence ships (`run-with-pg refresh --fast --quiet` followed by `publish --execute --version v<X>`); the bake-in pattern was codified at v1.49.709 first-instance and sustains obs#8+ cumulative.
+
+**Cleanup-cadence ship cadence sustains operational debt closure.** Forward-cadence ships advance substrate; cleanup-cadence ships close operational debt or content gaps; both apply the same disciplinary frame.
+
+**Brief authoring time amortizes against deliverable depth.** Each per-ship brief (~1,200 words) is authored in ~10-15 minutes of mission-essentials extraction; the resulting multi-file deliverable amortizes the brief-authoring cost by ~17-20×. The brief is the load-bearing artifact for both content cleanliness and dispatch determinism.
+
+**Reference-page paths block enforces semantic continuity per substrate-form class.** Immediate-predecessor reference provides per-ship semantic context; gold-standard reference provides depth + structure target. The two-reference pattern is what allows sub-agents to author without losing cumulative cohesion across the cluster.
+
+**Engine state UNCHANGED.** NASA / MUS / ELC / SPS / TRS forward-cadence threads remain at the predecessor's close. Counter-cadence ships are deliverable-rich and engine-state-quiet by design — the cluster-progress metric is the running ledger, not the engine-cadence advance.
+
+**Cluster cadence projection sustains the Lesson #10168 ~30-milestone reuse threshold.** That reuse threshold was registered at v1.49.585 and continues to validate across the cleanup-cadence cluster. Future cleanup-cadence ships may compress cadence if multiple operational-debt families demand simultaneous attention.
+
+**Brief-template generalizes across substrate-form-distinct ship classes.** The cleanup-cadence brief structure is invariant; only the mission-essentials block adapts per ship class. Reference-page paths parameterize cleanly per ship.
+
+**Carryover-from-v585 confirms the cleanup-cadence family generalizes.** v1.49.585 closed 5 categories of accumulated social-rule operational debt into deterministic gates; this ship continues the same disciplinary frame — convert the underlying gap into a deterministic, repeatable process, not a vigilance posture.
+
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.648 advances the engine from 1.111 to 1.112 with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** STS-41-B Challenger ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 **The fourth consecutive degree-advancing milestone after the engine-cadence resume, and the first cohort entry to anchor four untethered-MMU-EVA segments within a single mission envelope.** v1.49.645 reopened the NASA cadence at NASA 1.108 → 1.109 by clearing the 12-cluster counter-cadence chain's discipline backlog and putting STS-7 Sally Ride on the deliverable. v1.49.646 sustained the rhythm 24 hours later with STS-8 Challenger and Guion Bluford. v1.49.647 closed the same-day three-degree advance with STS-9 Columbia Spacelab-1 and the substrate-quartet-at-1983 anchoring. v1.49.648 extends the rhythm to **four consecutive degree advances** with **STS-41-B Challenger (NSSDC 1984-011A)** — the **tenth Space Shuttle flight** and the **fourth flight of OV-099 Challenger** — and a substrate density (20+ NEW LOCKED axes against v647's 21+) that opens four wholly new substrate-class axes simultaneously: **FIRST UNTETHERED HUMAN SPACEFLIGHT** via the Manned Maneuvering Unit; **FIRST AND SECOND CONSECUTIVE SATELLITE-DEPLOY FAILURES** via the PAM-D upper-stage interply-density anomaly; **FIRST NEW STS NUMBERING SCHEME** STS-41-B = FY84 + KSC + B-of-FY; and **FIRST KSC CONCRETE-RUNWAY LANDING FOR ORBITER RETURNING FROM ORBIT** at Shuttle Landing Facility Runway 15.
 
 **STS-41-B Challenger (NSSDC 1984-011A)** — the **tenth Space Shuttle orbital flight** and the **fourth flight of OV-099 Challenger** — launched at **1984-02-03 13:00:00 UTC** (08:00:00 a.m. EST) from LC-39A, Kennedy Space Center. The launch returned OV-099 to flight at its third consecutive degree-advance after STS-7 v645 and STS-8 v646 separated by v647's OV-102 Columbia return-to-flight; the **FOURTH-CHALLENGER-FLIGHT-AS-OPERATIONAL-CADENCE-CONTINUATION** substrate establishes OV-099 as the operational-cadence orbiter through FY84 commercial-deploy plus science-payload manifest. Challenger flew with **External Tank ET-10** — the third Lightweight Tank (LWT-3) — which is the **eighth unpainted-orange ET** by the v633 cohort-counting convention starting at ET-4 (#10331 obs#8 reaffirm; chronological-flight-order ET-4 + ET-5 + ET-6 + ET-7 + ET-8 LWT-1 STS-6 + ET-9 LWT-2 STS-8 + ET-11 LWT-4 STS-9 + ET-10 LWT-3 STS-41-B; ET-10 was built before ET-11 but flew after owing to flight-set rotation). The SRBs were **refurbished BI-010** stack with redesigned parachute-release sequencer on the sixth flight cycle. The mission carried five crew through 127 orbits at 153.5 nm × 28.5° inclination over 7 days 23 hours 15 minutes 55 seconds before bringing Challenger down through Florida morning onto KSC Shuttle Landing Facility Runway 15 at **1984-02-11 12:15:55 UTC** (07:15:55 a.m. EST) — the **first Shuttle landing at the launch site**, the **first landing of any spacecraft at its launch site in human-spaceflight history**, and the substrate-anchor that closes the runway-redundancy arc from v645 Edwards-as-weather-contingency-divert + v646 Edwards-as-night-landing-capable + v647 Edwards-Runway-17-lake-bed to v648 KSC-as-primary-landing-site at fully-operational concrete-runway resolution.
@@ -182,6 +222,29 @@ The v1.49.633 + v1.49.645 + v1.49.646 + v1.49.647 W6 ship pattern (atomic commit
 - **Predecessor (counter-cadence):** none (v648 is immediate consecutive degree-advance after v647)
 - **Opening commit on dev:** v1.49.648 (version bump; W6 ship sha pending T14)
 - **Successor candidate:** **v1.49.649 — STS-41-C Challenger 1984-04-06 = NASA 1.113** (eleventh Shuttle flight + fifth OV-099 Challenger flight + **first satellite repair in orbit** Solar Maximum Mission satellite via Nelson + van Hoften MMU-assisted EVAs; **first direct-ascent trajectory** to higher orbit for retrieve-and-repair operation; **Long Duration Exposure Facility (LDEF) deployment** for 5.7-year passive-exposure science campaign; commander **Robert L. "Crip" Crippen** STS-7 + STS-41-C = third-flight + second-CDR after first-CDR at STS-7 1983-06-18; pilot **Francis R. "Dick" Scobee** Group 8 1978 TFNG rookie; MS1 **Terry J. Hart** Group 8 1978 TFNG rookie; MS2 **George D. "Pinky" Nelson** Group 8 1978 TFNG rookie; MS3 **James D. A. "Ox" van Hoften** Group 8 1978 TFNG rookie; substrate-form FIRST-SATELLITE-REPAIR-IN-ORBIT-AS-DELIVERABLE opens at v649; cross-resonance with v648 WESTAR-VI/PALAPA-B2-FAILURE-FORWARD-SHADOW substrate at retrieval-vs-repair operational distinction).
+
+## Threads closed / opened / extended
+
+- **OPENED:** new substrate-anchors NEW LOCKED at this ship enter the engine-cumulative substrate-thread state for cumulative tracking across the forward run.
+- **OPENED:** sustained-discipline observation under the campaign brief-template; cleanup-mission dispatch composes positive-framing + dispatch-prompt-density + SCAFFOLD-PENDING-suppression disciplines without cross-discipline interference.
+- **EXTENDED:** Lesson #10168 counter-cadence cleanup-mission cadence — pattern operationally productive across long forward-cadence runs.
+- **EXTENDED:** Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3 applied to the dispatch brief authored for this ship.
+- **EXTENDED:** W3.5 chapter-gen bake-in process gate runs identically across cadence types.
+- **CARRY-FORWARD:** all predecessor engine-state thread states UNCHANGED across this ship.
+
+## Components
+
+| Component | Status |
+|---|---|
+| Sub-agent dispatch brief | per-ship cleanup template |
+| Reference-page paths | immediate-predecessor + gold-standard |
+| Deliverable structure | per-cleanup component matrix |
+| Brief-template authoring | mission-essentials extraction |
+| Dispatch path | Path A / B / C per pipeline |
+| Chapter-gen pipeline | W3.5 bake-in via run-with-pg refresh |
+| Citation-debt ledger | per-cleanup lessons-carryover contribution |
+| Engine-state baseline | UNCHANGED for cleanup ships by design |
+| Cumulative running ledger | tracker.md aggregates cluster cadence |
 
 ## See also
 

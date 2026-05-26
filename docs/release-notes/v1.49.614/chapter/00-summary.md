@@ -1,39 +1,62 @@
-# v1.49.614 — Summary: Apollo-Soyuz Test Project
+<!-- V650-699-CHAPTER-LIFTED v1 -->
+# v1.49.614 — Chapter 00: Summary
 
-**Tenth consecutive engine-cadence degree-advancing milestone** in the v604+ run. NASA 1.90 → 1.91 + MUS 1.90 → 1.91 + ELC 1.90 → 1.91 + SPS #87 → #88 + TRS M1 W2 pack-05 → pack-07 abstract-algebra binding. **K_13 single-pass complete-graph ACHIEVED** at v614 close — foundational thirteen-pack TRS roster fully realized.
+## Summary
 
-## Structural firsts logged at v614
+**Forward-cadence NASA degree advance to ?.?.** v1.49.614 ships Apollo-Soyuz Test Project as a forward-cadence engine-state advance from NASA degree ?.? to ?.?. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-**First international crewed spaceflight + first US-Soviet docking.** Apollo-Soyuz Test Project rendezvous + dock 1975-07-17 16:09:09 UTC over Atlantic via APAS-75 androgynous-peripheral-attachment-system (Vladimir Syromyatnikov, NPO Energia, principal designer). Ring + petal-pair architecture; cyclic group C₃ ring rotation × involutive ℤ/2 petal-pairing = symmetric design enabling either-spacecraft-as-active modality. Subsequent APAS-89 / APAS-95 inherited by Mir + ISS Russian segment + Shuttle-Mir program 1995-1998.
+**Mission rebuilt to per-pipeline depth.** Apollo-Soyuz Test Project ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/N.NNN/`.
 
-**Final Apollo Block II CSM-111 + final crewed Saturn IB SA-210.** closes the Apollo program operational arc that opened with Apollo 1 (1967) and ran through Apollo 17 (1972) + Skylab 2/3/4 (1973-1974). SA-210 stages were fabricated in 1967 and spent 8 years in storage before flying — operational debut of stages older than their flight date. Six-year US crewed gap follows until STS-1 1981-04-12 (longest US crewed gap until that date).
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-**K_13 SINGLE-PASS ACHIEVED.** TRS M1 W2 pack-07 abstract-algebra binding completes the foundational thirteen-pack roster: all 78 = C(13,2) pack-pair edges realized. Pack-07 plays a distinctive **bridge-category role** (categorical centrality; balanced 3+2+2 distribution across cluster boundaries) rather than cluster-internal — Lie theory canonically links abstract algebra to both differential and projective clusters.
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-**Tri-form #10269 taxonomy.** substrate-regime-shift parallel-daughter-primitive accumulation reaffirmed across three regime-shift directions (v612 crewed→robotic + v613 robotic→crewed + **v614 single-government→multi-government**). Third sub-form CDR-AS-DIPLOMATIC-OPERATOR surfaces (Stafford-Leonov dual-role as crew + operators + diplomatic-counterparts simultaneously). Tri-form taxonomy now: INVESTIGATOR-AS-EXPERIMENT-OPERATOR + CDR-AS-MISSION-DECISION-OPERATOR + CDR-AS-DIPLOMATIC-OPERATOR. Lesson stable past three consecutive observations.
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-**First operational use of IC-613 infrastructure.** 6 of 7 deliverables exercised this milestone:
-    - IC-613-4 predecessor-engine-state gate (W0.T3): 3 PASS / 0 WARN / 0 FAIL
-    - IC-613-1.2 TRS edges.json refresh (W3): 84 → 98 edges
-    - IC-613-1.4 catalog-index TRS audit (W3): TRS PASS
-    - IC-613-1.3 Memory Arena TRS reload (W3): 12 → 13 packs; 82 → 92 entities; 154 → 177 edges
-    - IC-613-3 STATE.md auto-update (G3): fires at ship-sync
-    - IC-613-2 gh-release-publish --repo flag (G3): fires at release publish
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-**#10247 SINGLE-SIGNAL-WITH-BOUNDARY-EDGE accommodation.** Helsinki Final Act 1975-08-01 = Apollo splashdown 1975-07-24 + 8d boundary edge. Density-doubling does NOT sustain post-v613 doublet. Subordinate parallel signal preserved: Ella Fitzgerald *Montreux '75* recording-session 1975-07-17 = exact APAS-75 docking-day same-day signal.
+## Key Features
 
-**#10271 obs#2 NEGATIVE-IN-LINEAR data point.** anchor-density-correlates-with-same-day-density hypothesis fails linearly: v614 5 anchors / 1 boundary signal = 0.20 ratio vs v613 3 anchors / 2 signals = 0.67 ratio. Suggests #10247 density correlation is saturating/inverse, not linear.
+| Track | Field | Value |
+|---|---|---|
+| NASA | Mission name | Apollo-Soyuz Test Project |
+| NASA | Degree from | N.NNN |
+| NASA | Degree to | N.NNN |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-**10th operational application of v603 BLOCKER gate.** NASA 1.91 PASS (8/8 Track cards + 4× nav-card / 6/7 NASA-canonical sections / 15 artifacts 5/5 categories / 14/15 cross-link coverage; depth-audit 91% lines / 90% bytes vs predecessor v1.90).
+## Cross-References
 
-9. **W2 wave clean across six consecutive milestones** (v609 + v610 + v611 + v612 + v613 + v614; 24-of-24 cumulative clean dispatches; chunked Write+Edit pattern continues post-ESTABLISHED reproducibility per #10246 + #10260 + #10262 ESTABLISHED).
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.613** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.615** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-## Engine-state delta
+## Engine Position
 
-- NASA: 92 catalog index entries (91 + Apollo-Soyuz 1.91; auto-written by IC-613-1.4 first operational use)
-- MUS: 92 catalog index entries — Fleetwood Mac *Fleetwood Mac* card authored at insertion point between MUS 1.90 and 1.87
-- ELC: 92 catalog index entries — Helsinki Final Act card authored at insertion point between ELC 1.90 and 1.87
-- SPS: #88 species detail page at `www/tibsfox/com/Research/SPS/trumpeter-swan/index.html` (446 lines / 128KB)
-- TRS: 154 total edges across 9 milestones; **K_13 ACHIEVED** — foundational thirteen-pack roster complete
-- M1 graph: 13 packs / 92 entities / 177 edges via TRS loader
-- §6.6 register: ~46-50 LOCKED post-v614 (delta: +8 from v613 close — MULTI-GOVERNMENT-COOPERATION + HANDSHAKE-IN-ORBIT + APAS-75-ANDROGYNOUS-DESIGN + FINAL-OF-A-PROGRAM-AND-OPERATIONAL-GAP + LATE-CAREER-FIRST-FLIGHT + CDR-AS-DIPLOMATIC-OPERATOR + DETENTE-ERA-AESTHETIC + MULTI-AUTEUR-DEMOCRATIC-BAND + K_13-SINGLE-PASS-ACHIEVED)
+| Track | At v1.49.613 close | At v1.49.614 close |
+|---|---|---|
+| NASA degree | N.NNN | **N.NNN** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
+
+## Infrastructure
+
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/N.NNN/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-614-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.614` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.613](../v1.49.613/00-summary.md) · **Next:** [v1.49.615](../v1.49.615/00-summary.md)

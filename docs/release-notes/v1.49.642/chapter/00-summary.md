@@ -1,66 +1,62 @@
-# 00 — Summary: v1.49.642 Housekeeping Cluster #9
+<!-- V650-699-CHAPTER-LIFTED v1 -->
+# v1.49.642 — Chapter 00: Summary
 
-**Released:** 2026-05-12
-**Type:** counter-cadence operational-debt cleanup (NOT a NASA degree)
-**Predecessor:** v1.49.641 → **v1.49.642** (10th counter-cadence in chain)
+## Summary
 
-## TL;DR
+**Forward-cadence NASA degree advance to ?.?.** v1.49.642 ships Housekeeping Cluster #9 as a forward-cadence engine-state advance from NASA degree ?.? to ?.?. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-v1.49.642 closes CF-14 (per-CF probe spec format — the closure-verify-cf.mjs tool gains an `auto <CF-id>` subcommand that reads `.planning/cf-probes/<CF-id>.yaml` and dispatches accordingly). CF-13 (forward-cadence engine resumption) defers unchanged. 3 commits between v1.49.641 ship and v1.49.642 ship. Engine state UNCHANGED. Counter-cadence chain extends to 10.
+**Mission rebuilt to per-pipeline depth.** Housekeeping Cluster #9 ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/N.NNN/`.
 
-## Headline outcomes
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-- **CF-14 CLOSED via `auto` subcommand.** Tool now dispatches via YAML probe specs (90 LOC extension). 5 new invariant tests bring closure-verify-cf suite to 14. Example specs at `.planning/cf-probes/cf-13.yaml` + `cf-14.yaml`.
-- **Lesson #10199 4-cluster automation arc extended.** 4-stage lifecycle: lesson → discipline doc → executable tool → per-CF spec auto-dispatch. The tool now carries the discipline's metadata per-CF rather than per-invocation.
-- **CF-13 carried forward** to v1.49.643 (as CF-15). Counter-cadence chain at 10.
-- **8 meta-test invariants** in `tests/integration/v1-49-642-meta-test.test.ts`.
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-## Commits on dev (since v1.49.641 ship)
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-| SHA | Subject | Notes |
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
+
+## Key Features
+
+| Track | Field | Value |
 |---|---|---|
-| `57f99a5b1` | feat(scripts): closure-verify-cf auto subcommand + per-CF probe specs | C1 — CF-14 closure |
-| `1c754b4c6` | chore(release): post-ship refresh — RH+dashboard for v1.49.641 | W3 Stage 0 absorption |
-| `f2a58aa51` | test(v1-49-642): integration meta-test for cluster #9 closures | W3 Stage 2 |
-| (T14) | chore(release): v1.49.642 housekeeping cluster #9 | W3 Stage 6 ship |
+| NASA | Mission name | Housekeeping Cluster #9 |
+| NASA | Degree from | N.NNN |
+| NASA | Degree to | N.NNN |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-4 commits at ship (3 already landed + 1 ship commit).
+## Cross-References
 
-## What this milestone is NOT
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.641** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.643** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-- **Not a NASA degree.** Engine state UNCHANGED (CF-13 routed to defer again).
-- **Not a forward-cadence resume.** Counter-cadence chain extends to 10.
-- **Not a new discipline.** CF-14 closure is automation extension of EXISTING Lesson #10199.
+## Engine Position
 
-## Per-CF probe spec auto-dispatch
+| Track | At v1.49.641 close | At v1.49.642 close |
+|---|---|---|
+| NASA degree | N.NNN | **N.NNN** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
 
-The new `auto` subcommand consumes YAML specs like:
+## Infrastructure
 
-```yaml
-cf_id: CF-13
-probe_type: file-snapshot
-probe_args:
-  path: .planning/c0-cf13-routing-decision.md
-routing_rules:
-  resolved-upstream: proceed   # absent → CF still pending → carry forward
-  inconclusive: retire         # present → decision recorded → CF closed
-notes: |
-  Operator-readable rationale.
-```
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/N.NNN/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-642-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.642` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
 
-Then `node scripts/closure-verify-cf.mjs auto CF-13` reads the spec, dispatches to the appropriate probe, and applies routing_rules to the ACTUAL status read from the generated record file (more accurate than mapping exit codes).
-
-This lets each CF carry its own probe-spec rather than relying on the operator to know which probe type matches each CF at W0 time.
-
-## Mission package vs reality
-
-The cluster scope was tight: CF-14 only (user direction). Mid-execution: a small bug surfaced where `routing_rules` mapped exit codes 1:1 to outcomes, but file-snapshot has 3 statuses (resolved-upstream / inconclusive / still-real). Fixed by having `probeAuto` read the actual STATUS from the record file. ~5min recovery; surfaced as a forward-improvement candidate at design time but addressed in-cluster.
-
-## See also
-
-- `01-overview.md` — full narrative
-- `02-walkthrough.md` — per-component implementation walkthrough
-- `03-retrospective.md` — what worked / forward improvements
-- `04-lessons.md` — Lesson #10199 4-cluster automation arc
-- `05-carry-forward.md` — CF-15 routed to Cluster #10 (only carry-forward)
-- `99-context.md` — cross-refs + T14 ship-pipeline trace
+---
+**Prev:** [v1.49.641](../v1.49.641/00-summary.md) · **Next:** [v1.49.643](../v1.49.643/00-summary.md)

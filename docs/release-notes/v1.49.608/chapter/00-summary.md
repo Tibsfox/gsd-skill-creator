@@ -1,35 +1,62 @@
-# v1.49.608 — Structural Firsts + Engine State
+<!-- V650-699-CHAPTER-LIFTED v1 -->
+# v1.49.608 — Chapter 00: Summary
 
-## Structural firsts at v608
+## Summary
 
-**First sister-mission paired-program-design-vindication ADMIT.** #10241 promoted to §6.6 LOCKED at 2-ex (Pioneer 10 v604 + Pioneer 11 v608). The pattern itself is a §6.6 register exemplar: pattern emerges, stays watchlist, second instance confirms, only then admit.
-**First 3-of-3 paired-architecture triplet within ±60d window.** Beatles paired-LP + CITES paired-list + Pioneer paired-flight — three independent paired-by-design structural units in March-April 1973.
-**K_7 pack-pair completeness achieved single-pass at TRS M1 W2.** pack-09 functional analysis bound to K_6 with 14 new cross-pack edges (vs prior 8-per-pass average) — strongest binding density to date; confirms SUBSTRATE-COHERENCE-PREDICTS-CROSS-PACK-DENSITY at obs #4.
-**First multilateral-treaty preamble admitted to PLANETARY-PERSPECTIVE-AS-STEWARDSHIP-WARRANT register.** CITES preamble's "irreplaceable part of the natural systems of the earth" framing extends the warrant primitive from US-statutory (NEPA, MMPA) to multilateral-treaty register.
-**Fourth operational application of v603 track-card + nav-card BLOCKER gate.** All 8/8 Track cards + ≥1 nav-card present on NASA 1.85 — clean PASS.
+**Forward-cadence NASA degree advance to ?.?.** v1.49.608 ships Pioneer 11 First Saturn Flyby as a forward-cadence engine-state advance from NASA degree ?.? to ?.?. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-## Engine state at v608 close
+**Mission rebuilt to per-pipeline depth.** Pioneer 11 First Saturn Flyby ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/N.NNN/`.
 
-| Track | v607 close | v608 close | Δ |
-|---|---|---|---|
-| NASA | 1.84 (Apollo 17; HELD across counter-cadence) | **1.85 (Pioneer 11)** | +1 |
-| MUS | 1.84 (*Trouble Man* / Marvin Gaye / 1972-12-08; HELD) | **1.85 (Beatles Red+Blue / 1973-04-02 paired-LP)** | +1 |
-| ELC | 1.84 (MMPA / 1972-12-21; HELD) | **1.85 (CITES / 1973-03-03 paired-list)** | +1 |
-| SPS | #81 Northern Spotted Owl (HELD) | **#82 Marbled Murrelet** | +1 |
-| TRS M1 W2 | 56 cross-pack edges / K_6 complete | **70 cross-pack edges / K_7 complete** | +14 / +1 graph rank |
-| §6.6 LOCKED | ~24-26 entries | **~28-30 entries** (after #10241 + PLANETARY-PERSPECTIVE + PAIRED-OLD-GROWTH-OBLIGATE + SUBSTRATE-COHERENCE-PREDICTS-CROSS-PACK-DENSITY admits) | +4 |
-| §6.6 watchlist | ~30 candidates | ~38 candidates (8 new at 1-ex; 4 promoted to LOCKED) | +4 net |
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-## Wave summary
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-| Wave | Wall | Outcome |
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
+
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
+
+## Key Features
+
+| Track | Field | Value |
 |---|---|---|
-| W0 | ~30 min | scaffold + version bump 1.49.607→1.49.608 + carry-forward fold-in (12 items) |
-| W1 | ~75 min | 5 parallel research subagents — 7,324 NASA + 9,260 MUS + 11,268 ELC + 6,212 SPS + 5,155 TRS = 39,219 words total |
-| W2 | ~120 min (with stall recovery) | 5 build dispatches; 2 Sonnet+Opus stalls at long Write step → main-context Opus chunked Write+Edit pattern succeeded; final builds: NASA 542 lines + 4 companion HTML + 13 artifact files + forest-module + 3 JSON; MUS 427 lines; ELC 686 lines; SPS 310 lines |
-| W3 | ~30 min | depth-audit (NASA WARN 85%/80%, MUS WARN 87%/93%, ELC PASS 115%/148%; all submetrics PASS); §6.6 evaluation + 4 ADMITs + 8 new 1-ex watchlist; #10246 PROMOTED to ESTABLISHED at obs#4; catalog-index sync (NASA auto-update + MUS+ELC manual cards) |
-| W4+G3 | TODO | release-notes 5-file (this) + pre-tag-gate 8-step + tag + push + ship-sync + RH refresh + FTP sync + GH release |
+| NASA | Mission name | Pioneer 11 First Saturn Flyby |
+| NASA | Degree from | N.NNN |
+| NASA | Degree to | N.NNN |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-## Counter-cadence interleave note
+## Cross-References
 
-v607 Code Atlas was a counter-cadence operational milestone (engine state HELD). v608 resumes degree-advancing cadence. The counter-cadence interleave appears not to have disrupted soak observation continuity — engine-cadence-only items (#10231/#10233/#10236/#10237/#10242/#10244) all reaffirm at obs#7-8 at v608 as if v607 had not occurred.
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.607** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.609** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
+
+## Engine Position
+
+| Track | At v1.49.607 close | At v1.49.608 close |
+|---|---|---|
+| NASA degree | N.NNN | **N.NNN** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
+
+## Infrastructure
+
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/N.NNN/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-608-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.608` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.607](../v1.49.607/00-summary.md) · **Next:** [v1.49.609](../v1.49.609/00-summary.md)

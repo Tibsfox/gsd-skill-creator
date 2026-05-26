@@ -11,6 +11,20 @@
 ## Summary
 
 
+<!-- SHORT-FINDINGS-PREPENDED v1 -->
+
+**Forward-cadence NASA degree advance.** v1.49.622 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+
+**Per-mission canonical-sibling rebuild.** Pioneer Venus 2 Multiprobe Twin-Mission-Pair Completion ships as the per-mission canonical deliverable set.
+
+**Engine-state quietness for non-NASA tracks.** MUS / ELC / SPS / TRS scaffolding remains SCAFFOLD-PENDING across this ship.
+
+**Carryover discipline sustained.** Lesson #10168 + Lesson #10401 + W3.5 chapter-gen bake-in all apply identically.
+
+**Per-pipeline dispatch path:** Path A sub-agent first-pass clean, Path B salvage, or Path C hand-author.
+
+**Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
+
 **Engine-cadence degree-advancing milestone — seventeenth consecutive degree-advancing milestone in the v604+ run.** Pioneer Venus 2 Multiprobe (NSSDC 1978-078A; also Pioneer 13) — **first US spacecraft to deploy multiple atmospheric entry probes at Venus; first direct atmospheric measurements of Venus cloud layers at three altitudes simultaneously; first US surface signal from Venus (Day Probe 67-min post-impact signal); substrate-archetype for MULTI-PROBE-DEPLOYMENT-AS-DELIVERABLE fragmentation-deployment missions**. Launched 1978-08-08 21:33 UTC from Cape Canaveral LCC-36A atop Atlas SLV-3D Centaur D1AR; 904 kg total (Bus + 1 Large Probe + 3 Small Probes); same Charles F. Hall project manager + Larry Colin project scientist as PV1. Entry 1978-12-09 18:21 UTC — five days after PV1 orbit insertion 1978-12-04. Hoffman NMS atmosphere CO2 96.5%; Knollenberg LCPS 3-mode cloud particle size 1µm/3µm/7µm; Seiff LAS atmospheric profile. Sister-spacecraft completion of Pioneer Venus paired architecture (PV1 v620 + PV2 v622) = **Pioneer-Venus pair as third Twin-Mission-Pair in v615-v622 engine run (Viking + Voyager + Pioneer-Venus)**. PV2 launched second AND numbered second = **#10287 obs#4 DIRECT-ORDER sub-form reaffirm** (sub-form independence preserved at second-instance test). **No ESTABLISHED-promotions at v622** (counter to v620's two promotions) — v622 is reproducibility-test milestone for promoted observations. **#10286 obs#4 post-ESTABLISHED reproducibility PASSES** — first post-ESTABLISHED reproducibility test after TWIN-MISSION-PAIR-CONTINUATION promotion at v620, substrate stability confirmed beyond promotion threshold. Three new substrate primitives LOCKED at v622: MULTI-PROBE-DEPLOYMENT-AS-DELIVERABLE + BENTHIC-INVERTEBRATE-AS-COHORT-NODE + TRIBAL-CONSULTATION-FRAMEWORK sub-form.
 
 ## Engine state advances

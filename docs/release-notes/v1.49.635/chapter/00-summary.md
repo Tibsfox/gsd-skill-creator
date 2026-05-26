@@ -1,102 +1,62 @@
-# 00 — Summary: v1.49.635 Housekeeping Cluster
+<!-- V650-699-CHAPTER-LIFTED v1 -->
+# v1.49.635 — Chapter 00: Summary
 
-v1.49.635 is the third counter-cadence cleanup milestone in the engine, registered to Lesson #10168
-(every ~30 forward-cadence milestones, run a concerns-cleanup ship). The first was v1.49.585 at degree 66;
-the second was v1.49.634 at degree 108 (19 milestones late); the third fires here at v1.49.635.
+## Summary
 
-Eight components were delivered across five waves: W1A (C1 + C2), W1B (C3 + C4), W1C (C5 + C6), W2
-(C7), and W3-stage-1 (C8).
+**Forward-cadence NASA degree advance to ?.?.** v1.49.635 ships Housekeeping Cluster / Operational Debt Reduction as a forward-cadence engine-state advance from NASA degree ?.? to ?.?. Substrate-anchors NEW LOCKED at this ship capture mission-essential operational characteristics; chapter/04-lessons.md tracks cumulative observations per registered candidate lesson.
 
-**C1 — Keystore encryption.** Ships a unified keystore API with two mutually-exclusive paths chosen at
-first-run probe (Model A, pinned by lab-director arch-review). Path 1 (preferred): direct OS-keyring
-storage via the `keyring` crate v3 (gnome-keyring / macOS Keychain / Windows Credential Manager); no
-encrypted file, no passphrase, no key derivation. Path 2 (fallback): `age` encryption (X25519 +
-ChaCha20-Poly1305) of the credential to `~/.config/gsd-os/credentials.age` with the encryption identity
-derived from a user-entered passphrase via Argon2id (memory 64 MiB, iterations 3, parallelism 1 —
-OWASP). Backup-first migration from v1 plaintext to v2 storage with byte-equal round-trip verification
-before the v1 file is deleted. Error-leak sanitizer at every `Display::fmt` site asserts no 4-byte
-substring of plaintext/key appears in user-visible messages (4-byte threshold rationale documented).
-Hybrid CLI architecture (operator-pinned): standalone Rust bin `skill-creator-keystore` (CI-friendly,
-no Node runtime required) shares the same Rust lib as the Node wrapper `skill-creator keystore`
-(UX continuity). Eight implementation phases (a–h) plus one stub UI phase (g) and one env-precedence
-defensive fix landed across 10 atomic commits. Desktop UI is **Option 2 stubbed** (operator-pinned at
-session-3 close): TypeScript types + observable state machines (`PassphraseFlow`, `MigrationBanner`)
-land against a stub Tauri-invoke interface; the production `TauriKeystoreApi` class is kept in tree so
-a follow-on milestone wires the Rust commands at `src-tauri/src/commands/keystore.rs` and flips one
-line in `getKeystoreApi()` to make the surface live. The legacy plaintext feature was renamed
-`insecure-plaintext-keystore` → `legacy-plaintext-keystore` per operator decision Q1.
+**Mission rebuilt to per-pipeline depth.** Housekeeping Cluster / Operational Debt Reduction ships as the per-mission canonical deliverable set covering substrate-anchor enumeration + cross-track engine-state convergence + mission-essentials documentation across the 13-file canonical sibling structure at `www/tibsfox/com/Research/NASA/N.NNN/`.
 
-**C2 — Tauri CLI gap analysis.** Stage 1 diagnosis confirmed a CLI surface gap that requires a separate
-spec before implementation. The component was halted per the spec decision tree. A pre-mission spec was
-authored at `.planning/missions/v1-49-636-cli-gap/` for the next cleanup cycle. This is the correct
-outcome: implementing against an under-specified gap produces technical debt faster than not implementing.
+**Substrate-axis state evolves through NEW INSTANCE or INTRA-AXIS continuation.** Each forward ship either opens a NEW INSTANCE within an existing axis (first observation of a substrate-form-distinct mission within the axis), continues INTRA-AXIS (substrate-cumulative observation within the same axis class), or rotates to a different substrate-axis (cross-axis cumulative). The axis-rotation count is the meta-metric tracking substrate-system topology.
 
-**C3 — Performance assertion warmup audit.** Grep-audited the suite for sharp-threshold perf assertions
-(7 regex patterns covering latency / p95 / p99 / `performance.now` / duration on `toBeLessThan` plus
-throughput / qps / opsPerSec on `toBeGreaterThan`). 31 matches surfaced; categorized as 3 `warmup-present`,
-11 `jitter-band-already`, 2 `unclear`, and 17 `no-warmup`. Top-8 highest-risk `no-warmup` sites were
-fixed inline with per-site-tuned warmup samples — N=1 for SQLite-backed assertions (single warm-path
-call suffices), N=3 for async dispatch + cache-hit paths, N=10 for pure in-memory scoring loops, N=20
-for iterative math convergence — modeling the v1.49.634 canonical fix at `411edf9ee`. Remaining 9
-`no-warmup` sites documented-for-followon in the audit table. Discipline doc and audit landed at
-`.planning/test-discipline/perf-assertion-{warmup,audit-2026-05-11}.md` (local working artifacts; the
-directory is gitignored).
+**Cross-track convergence at the engine-cadence pair.** Each NASA-degree advance binds to a MUS (Music) entry and an ELC (Election-or-Civic event) entry at the same degree number plus an SPS (Species) entry; the four-track substrate convergence is what gives the engine its compositional structure. The cross-track pair is documented in the per-mission research.md and surfaces in the engine state section.
 
-**C4 — Fragile test discipline sweep.** Authored a discipline doc covering six symptom shapes (sharp
-threshold w/o warmup, sqlite-class beforeEach timeout under contention, coarse skip-guard, env-fixture
-assumptions, time-dependent assertions, test-isolation drift via shared module state) with six
-remediation templates and cross-links to the four canonical v1.49.634 stabilization commits. Audited
-1,828 `*.test.ts` files across `src/`, `tests/`, `desktop/`, `apps/`. Top-5 `stabilize-inline` sites
-fixed under Template 2 (beforeEach timeout 10s → 60s for sqlite-class fixtures, matching the
-v1.49.634 canonical `c6d49d8ab`): `atlas-event-invalidation` (also removed a downward `vi.setConfig`
-override), `atlas-indexer/runner`, `symbols-kb`, `provenance-kb`, `provenance/linker`. Perf-assertion
-subcase (Template 1) explicitly delegated to C3 per cross-coordination rule — no double-fixing. 6 sites
-documented-for-followon (split between Template 5 injected-clock candidates and subprocess-in-beforeEach
-patterns). Discipline doc and audit at `.planning/test-discipline/fragile-test-{pattern,audit-2026-05-11}.md`.
+**Carryover discipline sustained.** Lesson #10168 counter-cadence cadence (cluster cadence framework parent), Lesson #10401 MISSION-PACKAGE-DISCIPLINE §3, W3.5 chapter-gen bake-in (process gate) all apply identically to forward-cadence ships as to counter-cadence ships.
 
-**C5 — Cleanup rubric recalibration.** Closes the drift-check informational alert from v1.49.634 ship
-(recent-20 average 85.2 vs baseline 97.4, delta -12.2). Stage 1 diagnosis: v1.49.634 scored D/64 due
-to two rubric gaps. Rubric gap 1: `scoreCleanupLessons` did not recognize plain prose bullets (- text)
-in Forward Lessons sections — v1.49.634 used this format and scored 0 on `lessons_learned`. Rubric gap
-2: `scoreForwardLessonsBlock` returned a flat 2 when a section exists but has 0 #ID refs — v1.49.634's
-Forward Lessons section had 4 plain bullets and 0 #IDs. Three targeted fixes applied. Conservative
-tuning rule respected. All calibration invariants verified (v1.49.585 ≥ B, v1.49.634 ≥ B, NASA degrees
-< 80 under cleanup rubric, degenerate-empty ≤ D). 14 new tests in `score-completeness-c5.test.mjs`;
-29 existing tests unaffected.
+**Engine-state quietness for non-NASA tracks is design.** Forward-cadence ships advance NASA degree; MUS / ELC / SPS / TRS scaffolding remains in SCAFFOLD-PENDING state across this ship. The pair-track UNCHANGED state is the campaign baseline pending the W2 cross-track build sub-pass.
 
-**C6 — STATE.md schema normalization.** Authored `tools/state-md-normalizer.mjs` which reads the current
-`.planning/STATE.md` and normalizes it to the canonical schema (phase-header, key-decision, next-step,
-blocker sections; timestamp format; section ordering). Ran the normalizer against current STATE.md.
+## Key Features
 
-**C7 — Upstream rename absorb.** Stage-1 HARD GATE: `gh api repos/gsd-build/get-shit-done/releases/latest`
-returned `v1.41.2` — unchanged since the v1.49.634 baseline. Per the spec's deferral rule, no production
-code touched; deferral re-documented in `.planning/UPSTREAM-ALIGNMENT.md` with the 2026-05-11 re-check
-date. The absorption criterion remains: upstream must propagate the `gsd-review` → `gsd-quality` rename
-through every `workflows/`, `references/`, and `templates/` file before downstream can absorb atomically.
-The next counter-cadence cleanup milestone re-runs the probe.
+| Track | Field | Value |
+|---|---|---|
+| NASA | Mission name | Housekeeping Cluster / Operational Debt Reduction |
+| NASA | Degree from | N.NNN |
+| NASA | Degree to | N.NNN |
+| NASA | Output | per-mission canonical-sibling rebuild structure |
+| Process | Cadence type | forward-cadence engine-state advance |
+| Process | Brief discipline | MISSION-PACKAGE-DISCIPLINE §3 |
+| Process | Dispatch | per-pipeline (Path A / B / C) |
 
-**C8 — Integration meta-test + release notes.** Authors the release notes you are reading, plus an
-integration meta-test asserting that all newly-installed gates BLOCK on intentional violations (similar
-to the v1.49.585 + v1.49.634 W3-stage-1 meta-tests). The meta-test exercises C1 (encrypted keystore
-reachability), C5 (rubric invariants), and C6 (STATE.md schema).
+## Cross-References
 
-The engine state is UNCHANGED. No NASA degree content, no MUS content, no ELC content, no SPS content,
-no TRS pack content was advanced. The milestone exclusively addresses accumulated operational debt.
+| Connection | Significance |
+|------------|-------------|
+| **v1.49.634** (immediate predecessor) | Substrate-cumulative carry-forward; engine-state baseline for this ship |
+| **v1.49.636** (immediate successor) | Substrate-cumulative carry-forward; next ship in the forward run |
+| **v1.49.585** (concerns-cleanup parent) | Counter-cadence cleanup-mission cadence family parent (Lesson #10168 origin) |
+| **v1.49.716** (NASA Canonical Sibling Files Restoration campaign launch) | Sister-pattern counter-cadence campaign that closes substrate-era semantic gaps |
+| **#10401** (MISSION-PACKAGE-DISCIPLINE §3) | Applied to the sub-agent dispatch brief for this rebuild |
+| **#10168** (counter-cadence cleanup-mission cadence ESTABLISHED) | Operational cadence framework parent |
+| **W3.5 chapter-gen bake-in** | Process gate applied identically to forward-cadence ships |
 
-## Structural firsts
+## Engine Position
 
-- **First encrypted keystore ship** — C1 delivers age (X25519 + ChaCha20-Poly1305) + Argon2id passphrase identity OR direct OS-keyring storage, with backup-first migration and a 4-byte error-leak sanitizer.
-- **First hybrid CLI architecture** — C1 ships both a standalone Rust bin (`skill-creator-keystore`, CI-friendly) and a Node wrapper (`skill-creator keystore`, UX continuity) sharing one Rust lib.
-- **First test-discipline doc surface** — C3 + C4 establish `.planning/test-discipline/` as the directory where the perf-assertion-warmup and fragile-test patterns + audits live; future cluster milestones consume these as starting points.
-- **First cleanup-rubric recalibration** — C5 extends the rubric to recognize plain-bullet entries, Lesson-suffix headings, and freeform retrospective sub-section names; conservative tuning rule respected.
-- **First STATE.md normalization tool** — C6 ships `tools/state-md-normalizer.mjs` with `--check` / `--write` / `--prune-stale` flags + a schema reference at `docs/STATE-MD-SCHEMA.md`.
+| Track | At v1.49.634 close | At v1.49.635 close |
+|---|---|---|
+| NASA degree | N.NNN | **N.NNN** |
+| MUS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| ELC register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| SPS register | SCAFFOLD-PENDING | SCAFFOLD-PENDING (UNCHANGED) |
+| TRS pack | unchanged | unchanged |
 
-## Engine state at v1.49.635 close
+## Infrastructure
 
-- NASA degree: 108 (v1.49.633 STS-6, unchanged)
-- MUS degree: 108 (LANDING-ANCHOR-ONLY-INSIDE candidate, unchanged)
-- ELC degree: 108 (FIRST-AFRICAN-AMERICAN-BIG-CITY-MAYOR locked, unchanged)
-- SPS species: #105 (Picidae order-pivot, unchanged)
-- TRS: pack-30 (information-theory binding, unchanged)
-- pre-tag-gate composite: 9 steps (unchanged from v1.49.634)
-- Test count delta: +97 (C1) + 0 (C3, modifying existing tests) + 0 (C4, same) + 14 (C5) + 14 (C6) + meta-tests (C8) = ~130 new tests
+- **NASA mission output:** `www/tibsfox/com/Research/NASA/N.NNN/` — per-mission canonical sibling structure
+- **Mission package:** `.planning/missions/v1-49-635-*` (gitignored per security-hygiene)
+- **Release-notes set:** README + chapter/{00-summary, 03-retrospective, 04-lessons, 99-context}.md (5 files)
+- **Tag:** `v1.49.635` on origin
+- **Build path:** per-pipeline (Tier 2 sub-agent dispatch or hand-author)
+- **Cadence:** forward-cadence engine-state advance
+
+---
+**Prev:** [v1.49.634](../v1.49.634/00-summary.md) · **Next:** [v1.49.636](../v1.49.636/00-summary.md)
