@@ -341,4 +341,60 @@ describe('PipelineActivationDispatch', () => {
       expect(result.error).toMatch(/no resolver/i);
     });
   });
+
+  // ============================================================================
+  // T1.3 Substrate-Consumer Wire: onPredictions hook
+  // ============================================================================
+
+  describe('onPredictions hook (T1.3 substrate-consumer wire)', () => {
+    it('invokes the hook with the activated skill after a successful skill activation', async () => {
+      const calls: Array<{ name: string; count: number }> = [];
+      const ctx: ActivationContext = {
+        resolveSkill: async () => ({
+          path: '.claude/skills/test/SKILL.md',
+          content: 'x'.repeat(40),
+        }),
+        onPredictions: (name, predictions) => {
+          calls.push({ name, count: predictions.length });
+        },
+      };
+      const dispatch = new PipelineActivationDispatch(ctx);
+      const result = await dispatch.activate(
+        move({ name: 'demo-skill', mode: 'lite' }),
+      );
+
+      expect(result.status).toBe('success');
+
+      // Hook is fire-and-forget; allow a microtask to drain.
+      await new Promise((resolve) => setImmediate(resolve));
+
+      expect(calls).toHaveLength(1);
+      expect(calls[0]?.name).toBe('demo-skill');
+      // With the predictive-skill-loader opt-in flag off (default), predictions are empty.
+      expect(calls[0]?.count).toBe(0);
+    });
+
+    it('does not break activation when the hook throws', async () => {
+      const ctx: ActivationContext = {
+        resolveSkill: async () => ({
+          path: '.claude/skills/test/SKILL.md',
+          content: 'x'.repeat(40),
+        }),
+        onPredictions: () => {
+          throw new Error('hook exploded');
+        },
+      };
+      const dispatch = new PipelineActivationDispatch(ctx);
+      const result = await dispatch.activate(
+        move({ name: 'demo-skill', mode: 'full' }),
+      );
+
+      // Activation succeeds even though the hook throws (fire-and-forget contract).
+      expect(result.status).toBe('success');
+      expect(result.tokenEstimate).toBeGreaterThan(0);
+
+      // Drain microtasks to ensure the hook actually fired and the rejection was swallowed.
+      await new Promise((resolve) => setImmediate(resolve));
+    });
+  });
 });

@@ -16,6 +16,8 @@
 
 import type { MoveInstruction, ActivationMode, MoveTargetType } from './types.js';
 import type { OffloadOperation, OffloadResult } from '../blitter/types.js';
+import { predictNextSkills } from '../../predictive-skill-loader/index.js';
+import type { SkillPrediction } from '../../predictive-skill-loader/index.js';
 
 // ============================================================================
 // Interfaces
@@ -40,6 +42,24 @@ export interface ActivationContext {
 
   /** Execute an offload operation. Returns the result. */
   executeOffload?: (operation: OffloadOperation) => Promise<OffloadResult>;
+
+  /**
+   * Observe predicted complementary skills after a successful skill activation.
+   *
+   * When set, the dispatch invokes the predictive-skill-loader after a
+   * successful lite/full skill activation and passes the ranked predictions
+   * (empty when the predictive-skill-loader opt-in flag is off). Subscriber-
+   * gated: the dispatch performs no predictor work when this hook is unset.
+   *
+   * Errors thrown by the hook or the predictor are swallowed -- activation
+   * never fails because of a prediction-side failure.
+   *
+   * Role: T1.3 substrate-consumer wire (src/ -> predictive-skill-loader -> .college/).
+   */
+  onPredictions?: (
+    currentSkill: string,
+    predictions: SkillPrediction[],
+  ) => void | Promise<void>;
 }
 
 /**
@@ -203,6 +223,7 @@ export class PipelineActivationDispatch {
     }
 
     if (instruction.mode === 'lite') {
+      this.emitPredictions(instruction.name);
       return {
         status: 'success',
         tokenEstimate: 200,
@@ -210,10 +231,32 @@ export class PipelineActivationDispatch {
     }
 
     // Full mode
+    this.emitPredictions(instruction.name);
     return {
       status: 'success',
       tokenEstimate: Math.ceil(skill.content.length / 4),
     };
+  }
+
+  /**
+   * Fire-and-forget complementary-skill prediction.
+   *
+   * Subscriber-gated (no-op when no `onPredictions` hook); the predictive-
+   * skill-loader's own default-off flag is the second safety layer. Errors
+   * from either layer are swallowed so a prediction failure cannot mask a
+   * successful activation.
+   */
+  private emitPredictions(currentSkill: string): void {
+    const hook = this.context.onPredictions;
+    if (!hook) return;
+    Promise.resolve()
+      .then(async () => {
+        const predictions = await predictNextSkills(currentSkill, {});
+        await hook(currentSkill, predictions);
+      })
+      .catch(() => {
+        /* prediction is observability-only; never break activation */
+      });
   }
 
   /**
