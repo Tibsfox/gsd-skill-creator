@@ -2,10 +2,11 @@
 
 _Generated 2026-05-27 from `release_history.*`. Source of truth: Postgres._
 
-**880 releases.** 879 with retrospective. 728 with extracted lessons.
+**881 releases.** 880 with retrospective. 728 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
+| `v1.49.838` | Audit Inverse-Check (Stale-Entry Detector) | 2026-05-27 | ✓ | — | [read](v1.49.838/00-summary.md) |
 | `v1.49.837` | `predictive.low_confidence_threshold` Observation Source Wired | 2026-05-27 | ✓ | — | [read](v1.49.837/00-summary.md) |
 | `v1.49.836` | `publish.mjs` Destination-Side Hand-Author Preservation | 2026-05-27 | ✓ | — | [read](v1.49.836/00-summary.md) |
 | `v1.49.835` | `lowConfidenceThreshold` Calibration Scaffold (Full) | 2026-05-27 | ✓ | — | [read](v1.49.835/00-summary.md) |
