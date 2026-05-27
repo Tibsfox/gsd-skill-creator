@@ -5,14 +5,22 @@
 
 import { execFile } from 'node:child_process';
 import { access } from 'node:fs/promises';
+import { ensureProcessAllowed, type ProcessContext } from '../../security/process-context.js';
 import type { ExtractionConfig } from '../types.js';
 import type { ExtractionResult, RawPage } from './types.js';
 import { detectParts, detectChapters } from './chapter-detector.js';
 import { tagMusiXTeX, parseSections, extractMathExpressions, detectCrossRefs } from './section-parser.js';
 
-function runPdftotext(sourcePath: string): Promise<{ stdout: string; stderr: string }> {
+const PROCESS_SOURCE = 'dogfood/extraction/extractor';
+
+function runPdftotext(
+  sourcePath: string,
+  ctx?: ProcessContext,
+): Promise<{ stdout: string; stderr: string }> {
+  const argv = ['-layout', sourcePath, '-'];
+  ensureProcessAllowed(ctx, PROCESS_SOURCE, 'exec-file', 'pdftotext', argv);
   return new Promise((resolve, reject) => {
-    execFile('pdftotext', ['-layout', sourcePath, '-'], (error, stdout, stderr) => {
+    execFile('pdftotext', argv, (error, stdout, stderr) => {
       if (error) {
         reject(error);
       } else {
@@ -37,7 +45,8 @@ const DEFAULT_CONFIG: Omit<ExtractionConfig, 'sourcePath'> = {
  * @returns ExtractionResult with parts, chapters, rawPages, and warnings.
  */
 export async function extractPdf(
-  config: Partial<ExtractionConfig> & { sourcePath: string }
+  config: Partial<ExtractionConfig> & { sourcePath: string },
+  ctx?: ProcessContext,
 ): Promise<ExtractionResult> {
   if (!config.sourcePath) {
     throw new Error('sourcePath is required');
@@ -56,7 +65,7 @@ export async function extractPdf(
   // Run pdftotext -layout
   let stdout: string;
   try {
-    const result = await runPdftotext(fullConfig.sourcePath);
+    const result = await runPdftotext(fullConfig.sourcePath, ctx);
     stdout = result.stdout;
   } catch (err: unknown) {
     const error = err as NodeJS.ErrnoException;

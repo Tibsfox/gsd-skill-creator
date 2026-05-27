@@ -5,8 +5,11 @@
  * Part of the PyDMD dogfood install pipeline (Phase 404).
  */
 
+import { ensureProcessAllowed, type ProcessContext } from '../../../security/process-context.js';
 import type { HealthCheckConfig, HealthReport } from '../types.js';
 import type { CommandExecutor } from './venv-manager.js';
+
+const PROCESS_SOURCE = 'dogfood/pydmd/install/health-check';
 
 // --- Default executor (real subprocess -- tests always inject mock) ---
 
@@ -210,6 +213,7 @@ function classifyOverall(
 export async function runHealthCheck(
   config: HealthCheckConfig,
   exec: CommandExecutor = defaultExec,
+  ctx?: ProcessContext,
 ): Promise<HealthReport> {
   const warnings: string[] = [];
 
@@ -221,6 +225,10 @@ export async function runHealthCheck(
     // pytest (default)
     args = ['-m', 'pytest', 'tests/', '--tb=short', '--no-header', '-q', '--timeout=60'];
   }
+
+  // ProcessContextDenied is load-bearing per #10427 — hoist outside the
+  // try/catch below which swallows exec errors into a fail report.
+  ensureProcessAllowed(ctx, PROCESS_SOURCE, 'exec-file', config.venvResult.pythonPath, args);
 
   let stdout = '';
   let stderr = '';

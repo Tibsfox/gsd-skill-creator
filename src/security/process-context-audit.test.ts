@@ -47,9 +47,9 @@ const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
   'src/cli/commands/pic2html.ts',
   'src/cli/commands/terminal.ts',
   'src/dashboard/collectors/git-collector.ts',
-  'src/dogfood/extraction/extractor.ts',
-  'src/dogfood/pydmd/install/health-check.ts',
-  'src/dogfood/pydmd/install/venv-manager.ts',
+  // dogfood family fully wired at v1.49.827 batch chip (extractor + pydmd
+  // install/health-check + install/venv-manager) — all 3 use internal-helper
+  // or hoisted-check pattern per #10433; wire cost ~14-26 LOC each.
   'src/drift/cli.ts',
   // git/core family fully wired:
   //   v1.49.820 first-chip (branch-manager);

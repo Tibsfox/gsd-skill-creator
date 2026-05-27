@@ -5,7 +5,10 @@
  * Part of the PyDMD dogfood install pipeline (Phase 404).
  */
 
+import { ensureProcessAllowed, type ProcessContext } from '../../../security/process-context.js';
 import type { VenvConfig, VenvResult, PythonProjectInfo } from '../types.js';
+
+const PROCESS_SOURCE = 'dogfood/pydmd/install/venv-manager';
 
 // --- Types ---
 
@@ -87,13 +90,19 @@ export async function createVenv(
   config: VenvConfig,
   projectInfo: PythonProjectInfo,
   exec: CommandExecutor = defaultExec,
+  ctx?: ProcessContext,
 ): Promise<VenvResult> {
   const errors: string[] = [];
 
+  // ProcessContextDenied is load-bearing per #10427 — each check is hoisted
+  // outside its respective swallowing try/catch below.
+
   // Step 1: Create venv
   const pythonCmd = `python${config.pythonVersion}`;
+  const venvArgs = ['-m', 'venv', config.venvPath];
+  ensureProcessAllowed(ctx, PROCESS_SOURCE, 'exec-file', pythonCmd, venvArgs);
   try {
-    const venvResult = await exec(pythonCmd, ['-m', 'venv', config.venvPath]);
+    const venvResult = await exec(pythonCmd, venvArgs);
     if (venvResult.exitCode !== 0) {
       return makeFailResult(config.venvPath, [
         `Failed to create venv: ${venvResult.stderr || 'python venv creation failed'}`,
@@ -108,8 +117,10 @@ export async function createVenv(
   const pyPath = pythonBin(config.venvPath);
 
   // Step 2: Upgrade pip
+  const pipUpgradeArgs = ['-m', 'pip', 'install', '--upgrade', 'pip'];
+  ensureProcessAllowed(ctx, PROCESS_SOURCE, 'exec-file', pyPath, pipUpgradeArgs);
   try {
-    await exec(pyPath, ['-m', 'pip', 'install', '--upgrade', 'pip'], {
+    await exec(pyPath, pipUpgradeArgs, {
       cwd: config.projectPath,
       timeout: PIP_UPGRADE_TIMEOUT,
     });
@@ -120,6 +131,7 @@ export async function createVenv(
 
   // Step 3: Install dependencies
   const installArgs = buildInstallArgs(config);
+  ensureProcessAllowed(ctx, PROCESS_SOURCE, 'exec-file', pyPath, installArgs);
   try {
     const installResult = await exec(pyPath, installArgs, {
       cwd: config.projectPath,
@@ -127,14 +139,14 @@ export async function createVenv(
     });
     if (installResult.exitCode !== 0) {
       // Install failed -- cleanup and return
-      await cleanupVenv(config.venvPath, exec);
+      await cleanupVenv(config.venvPath, exec, ctx);
       return makeFailResult(config.venvPath, [
         `pip install failed: ${installResult.stderr || 'unknown error'}`,
       ]);
     }
   } catch (err) {
     // Likely timeout
-    await cleanupVenv(config.venvPath, exec);
+    await cleanupVenv(config.venvPath, exec, ctx);
     return makeFailResult(config.venvPath, [
       `pip install timed out: ${err instanceof Error ? err.message : String(err)}`,
     ]);
@@ -142,8 +154,10 @@ export async function createVenv(
 
   // Step 4: Get installed packages via pip freeze
   let installedPackages: string[] = [];
+  const freezeArgs = ['-m', 'pip', 'freeze'];
+  ensureProcessAllowed(ctx, PROCESS_SOURCE, 'exec-file', pyPath, freezeArgs);
   try {
-    const freezeResult = await exec(pyPath, ['-m', 'pip', 'freeze']);
+    const freezeResult = await exec(pyPath, freezeArgs);
     if (freezeResult.exitCode === 0) {
       installedPackages = freezeResult.stdout
         .split('\n')
@@ -156,8 +170,10 @@ export async function createVenv(
 
   // Step 5: Check disk usage
   let sizeBytes = 0;
+  const duArgs = ['-sb', config.venvPath];
+  ensureProcessAllowed(ctx, PROCESS_SOURCE, 'exec-file', 'du', duArgs);
   try {
-    const duResult = await exec('du', ['-sb', config.venvPath]);
+    const duResult = await exec('du', duArgs);
     if (duResult.exitCode === 0) {
       const sizeStr = duResult.stdout.split('\t')[0];
       sizeBytes = parseInt(sizeStr, 10) || 0;
@@ -168,7 +184,7 @@ export async function createVenv(
 
   // Disk budget enforcement
   if (sizeBytes > DISK_HARD_LIMIT_BYTES) {
-    await cleanupVenv(config.venvPath, exec);
+    await cleanupVenv(config.venvPath, exec, ctx);
     return makeFailResult(config.venvPath, [
       `Disk budget exceeded: venv is ${(sizeBytes / (1024 * 1024 * 1024)).toFixed(1)}GB (2GB limit)`,
     ]);
@@ -196,9 +212,12 @@ export async function createVenv(
 export async function cleanupVenv(
   venvPath: string,
   exec: CommandExecutor = defaultExec,
+  ctx?: ProcessContext,
 ): Promise<void> {
+  const rmArgs = ['-rf', venvPath];
+  ensureProcessAllowed(ctx, PROCESS_SOURCE, 'exec-file', 'rm', rmArgs);
   try {
-    await exec('rm', ['-rf', venvPath]);
+    await exec('rm', rmArgs);
   } catch {
     // Swallow errors -- best-effort cleanup
   }

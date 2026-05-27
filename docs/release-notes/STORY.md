@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.826`.
+The story begins at `v1.0` and continues to `v1.49.827`.
 
-**869 chapters.** 868 have retrospectives.
+**870 chapters.** 869 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -877,3 +877,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.824](v1.49.824/00-summary.md)** — Codification Ship: Promote #10433 + #10434 · 2026-05-27
 - **[v1.49.825](v1.49.825/00-summary.md)** — Batch Chip: `git/core` Family ProcessContext · 2026-05-27
 - **[v1.49.826](v1.49.826/00-summary.md)** — T1.3 Ship 3: ActivationSelector onPredictions Wire (Second Production Caller) · 2026-05-27
+- **[v1.49.827](v1.49.827/00-summary.md)** — Batch Chip: dogfood Family ProcessContext (extractor + pydmd install health-check + venv-manager) · 2026-05-27
