@@ -176,3 +176,60 @@ describe('ActivationSelector — topK cap', () => {
     expect(decisions.length).toBe(2);
   });
 });
+
+// ─── T1.3 substrate-consumer wire (v1.49.826) ──────────────────────────────
+//
+// Second production caller of the `onPredictions` hook pattern; first was
+// `src/chipset/copper/activation.ts` (v1.49.810). When an activated decision
+// fires, the selector invokes the predictive-skill-loader and surfaces the
+// (possibly empty, default-off-flag-gated) predictions to the subscriber.
+// Errors are swallowed so prediction failures cannot break selection.
+
+describe('ActivationSelector — onPredictions hook (T1.3 substrate-consumer wire)', () => {
+  it('invokes onPredictions for each activated decision', async () => {
+    const calls: Array<{ skill: string; predictionCount: number }> = [];
+    const sel = new ActivationSelector({
+      writer: new ActivationWriter(tempTraceFile()),
+      onPredictions: (skill, predictions) => {
+        calls.push({ skill, predictionCount: predictions.length });
+      },
+    });
+    const decisions = await sel.select('debug failing test', candidatesFixture());
+    // Let the fire-and-forget microtask resolve.
+    await new Promise((resolve) => setTimeout(resolve, 10));
+    const activatedIds = decisions.filter((d) => d.activated).map((d) => d.id);
+    // Hook fires once per activated decision; not for non-activated ones.
+    expect(calls.length).toBe(activatedIds.length);
+    for (const call of calls) {
+      expect(activatedIds).toContain(call.skill);
+      // Default-off predictive-skill-loader flag → empty predictions array.
+      expect(call.predictionCount).toBeGreaterThanOrEqual(0);
+    }
+  });
+
+  it('does not fire onPredictions when no hook is set (subscriber-gated)', async () => {
+    // Mainly an absence-test: if the dispatch crashes when no hook is set,
+    // the surrounding select() call will throw. The presence of THIS test
+    // and its passing is the assertion.
+    const sel = new ActivationSelector({
+      writer: new ActivationWriter(tempTraceFile()),
+    });
+    const decisions = await sel.select('debug failing test', candidatesFixture());
+    expect(decisions.length).toBeGreaterThan(0);
+  });
+
+  it('selection succeeds even when the hook throws (fire-and-forget contract)', async () => {
+    const sel = new ActivationSelector({
+      writer: new ActivationWriter(tempTraceFile()),
+      onPredictions: () => {
+        throw new Error('hook intentionally throws');
+      },
+    });
+    // If the hook's throw propagates, this assertion would fail.
+    const decisions = await sel.select('debug failing test', candidatesFixture());
+    // Let the swallow path run.
+    await new Promise((resolve) => setTimeout(resolve, 10));
+    expect(decisions.length).toBeGreaterThan(0);
+    expect(decisions.some((d) => d.activated)).toBe(true);
+  });
+});

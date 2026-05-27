@@ -33,6 +33,8 @@ import { ActivationWriter } from '../traces/activation-writer.js';
 // Flag-off path is byte-identical to v1.49.561 pre-refinement (SC-MA2-01).
 import type { ActorSignal } from '../ace/actor-update.js';
 import { applyActorSignalToScore } from '../ace/actor-update.js';
+import { predictNextSkills } from '../predictive-skill-loader/index.js';
+import type { SkillPrediction } from '../predictive-skill-loader/index.js';
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -92,6 +94,26 @@ export interface SelectorOptions {
   actor?: string;
   /** Top-k cap on returned decisions. Default: all candidates. */
   topK?: number;
+  /**
+   * Observe predicted complementary skills after each activated decision.
+   *
+   * When set, the selector invokes the predictive-skill-loader for each
+   * activated decision and passes the ranked predictions to the hook
+   * (empty when the predictive-skill-loader opt-in flag is off). Subscriber-
+   * gated: the selector performs no predictor work when this hook is unset.
+   *
+   * Errors thrown by the hook or the predictor are swallowed — selection
+   * never fails because of a prediction-side failure.
+   *
+   * Role: T1.3 substrate-consumer wire (src/ → predictive-skill-loader →
+   * .college/). Second production caller of this pattern after
+   * `src/chipset/copper/activation.ts` (v1.49.810). #10426 second-instance
+   * threshold met at v1.49.826.
+   */
+  onPredictions?: (
+    currentSkill: string,
+    predictions: SkillPrediction[],
+  ) => void | Promise<void>;
 }
 
 // ─── Selector ───────────────────────────────────────────────────────────────
@@ -118,6 +140,9 @@ export class ActivationSelector {
   private readonly fireAndForgetTrace: boolean;
   private readonly actor: string;
   private readonly topK: number | undefined;
+  private readonly onPredictions:
+    | ((currentSkill: string, predictions: SkillPrediction[]) => void | Promise<void>)
+    | undefined;
 
   constructor(opts: SelectorOptions = {}) {
     this.scorer = new MemoryScorer(opts.scorer);
@@ -131,6 +156,7 @@ export class ActivationSelector {
     this.fireAndForgetTrace = opts.fireAndForgetTrace ?? false;
     this.actor = opts.actor ?? 'm5-selector';
     this.topK = opts.topK;
+    this.onPredictions = opts.onPredictions;
   }
 
   /**
@@ -245,7 +271,37 @@ export class ActivationSelector {
     // --- 5) M3 trace write per decision ---------------------------------
     await this._writeTraces(query, sliced);
 
+    // --- 6) T1.3 substrate-consumer wire (Lesson #10433 candidate pattern):
+    // fire-and-forget complementary-skill prediction for each activated
+    // decision. Subscriber-gated (no-op when onPredictions is unset). The
+    // predictive-skill-loader's own default-off flag is the second safety
+    // layer. Errors are swallowed so prediction failure cannot mask a
+    // successful selection. Second instance of the v810 copper/activation
+    // pattern; #10426 second-instance threshold met.
+    for (const decision of sliced) {
+      if (decision.activated) {
+        this._emitPredictions(decision.id);
+      }
+    }
+
     return sliced;
+  }
+
+  /**
+   * Fire-and-forget complementary-skill prediction for an activated skill.
+   * Mirrors `src/chipset/copper/activation.ts:emitPredictions` (v1.49.810).
+   */
+  private _emitPredictions(currentSkill: string): void {
+    const hook = this.onPredictions;
+    if (!hook) return;
+    Promise.resolve()
+      .then(async () => {
+        const predictions = await predictNextSkills(currentSkill, {});
+        await hook(currentSkill, predictions);
+      })
+      .catch(() => {
+        /* prediction is observability-only; never break selection */
+      });
   }
 
   // ─── Helpers ──────────────────────────────────────────────────────────────
