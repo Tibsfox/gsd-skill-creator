@@ -2,7 +2,7 @@
 
 **Surface:** Introducing a chokepoint, interface, or generator-template to N existing modules with high call-site multiplicity; authoring a generator that may run on partial input.
 
-**Codified at:** v1.49.784 (lesson cluster from v1.49.782 LoaderContext chokepoint + v1.49.783 STATE.md normalizer fix).
+**Codified at:** v1.49.784 (lesson cluster from v1.49.782 LoaderContext chokepoint + v1.49.783 STATE.md normalizer fix); v1.49.802 (extended with Lesson #10426 second-instance cross-class registry extraction from the v1.49.795-801 T1.1 arc).
 
 ## Why this discipline exists
 
@@ -48,20 +48,48 @@ Skip-the-line behavior solves all three:
 
 **Reference implementation.** `tools/state-md-normalizer.mjs::generateCurrentPosition` + `generateEngineStateBaseline` — emit `Shipped:` when `shipped_at` is set, skip when absent; build the Predecessor line from whichever of `{tag, sha}` are present.
 
+### Cross-class registry extraction at the SECOND class instance (Lesson #10426)
+
+When a primitive accumulates instances across multiple classes (e.g. threshold classes with different observation sources, message-handler classes with different transports, parser classes with different formats), extract the per-class registry at the **second** class instance — not the first, not the third.
+
+**Why not the first instance.** Premature. You don't yet know what's varying. A single instance contains no contrast; the abstraction shape is speculation.
+
+**Why not the third instance.** The second class shipped using a temporary wrong-source measure (or a copy-pasted dispatch), accumulating semantic confusion in documentation that has to be unwound when the third class arrives. Test fixtures, docstrings, and operator-facing surfaces all encode the temporary measure as if it were the design.
+
+**Why the second instance.** You know exactly what's varying — the contrast between class 1 and class 2 is concrete. The registry's shape is determined by the two real instances rather than by projection from one or speculation about future ones.
+
+The pattern composes with [`#10422`](shelfware-verdict-patterns.md) (verdict-pattern surface separation) and [`#10423`](shelfware-verdict-patterns.md) (lightest wire that satisfies the verdict): those rules govern *how much* surface to add at any point; #10426 governs *when* to extract abstraction across that surface.
+
+**How to apply.** When adding a feature that crosses a class boundary the codebase has not seen before:
+
+1. Recon answers "is this a one-off or the start of a pattern?" (See Lesson #10412 — recon-first as default.)
+2. If a one-off: treat it as such; do not speculate about future classes.
+3. If a pattern: extract the per-class registry **now**, not at the third instance. The abstraction is small, the surface is clean, and downstream consumers see a single dispatcher rather than per-call branching.
+
+**Anti-pattern.** Reusing the first class's source for a new class because it is the lightest *technical* wire. Cross-class semantic dishonesty (e.g. reusing `suggestions.json` as the source for a `token_budget.*` threshold) is more expensive than the registry extraction by every subsequent surface that has to encode "well, for token-budget this means something different."
+
+**Reference implementation.** `src/bounded-learning/observation-sources.ts` — `observationSourceFor(threshold)` + `loadObservationsForThreshold(threshold, options)`. Extracted at v1.49.798 when `token_budget.warn_at_percent` became the first threshold in a second class. Three consumer-side validations followed within the same chained session (v799 audit log, v800 watch loop, v801 `/sc:status` summary). Each consumer is ~5–8 lines instead of ~15–25 lines because the dispatch lives in the registry.
+
+**Empirical break-even.** In a multi-ship chain where the architectural extraction enables 3+ consumers, the extraction pays for itself: the v798 extraction added ~30 min over the lightest-wire option but saved ~10–15 min on each of v799, v800, v801. Net positive at the third consumer.
+
 ## When this discipline kicks in
 
 - Adding a new function/options-bag parameter that will be passed to N existing modules.
 - Designing a security or invariant chokepoint that should NOT block existing callers from continuing to work.
 - Writing a generator/template that may receive partial input from hand-authoring.
 - Choosing between "fail loudly on missing field" and "produce a placeholder."
+- Adding the SECOND instance of a class-typed family where the first instance has not yet been abstracted.
 
 ## Anti-pattern summary
 
 - ❌ Required-from-day-one chokepoint parameters.
 - ❌ `UNKNOWN`/`TODO`/placeholder sentinels in generator output.
 - ❌ Two-state (works / breaks) chokepoint design when three states (permissive / audit-only / enforced) are achievable for free.
+- ❌ Reusing the first class's data source for a new class because it is the lightest *technical* wire; cross-class semantic dishonesty compounds with every downstream consumer.
+- ❌ Deferring per-class abstraction extraction to the third instance — the second instance has already shipped under the temporary measure, and unwinding the surface costs more than the extraction would have.
 
 ## Lesson references
 
-- **#10414** — Optional `ctx?` parameter is the cheapest retrofit pattern for chokepoint introduction. v782 candidate.
-- **#10416** — Tolerant generators are the default for hand-authored ↔ generated round-trips. v783 candidate.
+- **#10414** — Optional `ctx?` parameter is the cheapest retrofit pattern for chokepoint introduction. v782 candidate, promoted at v784.
+- **#10416** — Tolerant generators are the default for hand-authored ↔ generated round-trips. v783 candidate, promoted at v784.
+- **#10426** — Extract per-class registries at the SECOND class instance, not the third. v798 candidate, promoted at v802.

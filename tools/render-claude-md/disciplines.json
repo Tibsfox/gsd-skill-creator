@@ -121,13 +121,13 @@
   },
   {
     "domain": "Architecture-retrofit patterns",
-    "trigger": "Introducing a chokepoint, interface, or generator-template to N existing modules with high call-site multiplicity; authoring a generator that may run on partial input",
-    "summary": "Optional `ctx?` parameter pattern for chokepoint retrofit — three states (undefined→legacy permissive; defaultLoaderContext()→audit-only; restricted→enforced); zero call-site churn. Tolerant generators emit skip-the-line over `UNKNOWN`/`TODO`/placeholder sentinels — placeholders pollute output, break round-trip, and mask the schema gap. Exception: emit the default when the field has a load-bearing default value.",
+    "trigger": "Introducing a chokepoint, interface, or generator-template to N existing modules with high call-site multiplicity; authoring a generator that may run on partial input; adding the SECOND instance of a class-typed family",
+    "summary": "Optional `ctx?` parameter pattern for chokepoint retrofit — three states (undefined→legacy permissive; defaultLoaderContext()→audit-only; restricted→enforced); zero call-site churn. Tolerant generators emit skip-the-line over `UNKNOWN`/`TODO`/placeholder sentinels — placeholders pollute output, break round-trip, and mask the schema gap. Exception: emit the default when the field has a load-bearing default value. Cross-class registries extract at the SECOND class instance (not first, not third) — the contrast between two real instances determines the registry shape; deferring to the third class ships a temporary wrong-source measure that has to be unwound.",
     "canonical_docs": [
       "docs/architecture-retrofit-patterns.md"
     ],
-    "key_lessons": ["#10414", "#10416"],
-    "codified_at_milestone": "v1.49.784 (new domain — codified from v1.49.782 LoaderContext + v1.49.783 normalizer fix lesson cluster)"
+    "key_lessons": ["#10414", "#10416", "#10426"],
+    "codified_at_milestone": "v1.49.784 (new domain — codified from v1.49.782 LoaderContext + v1.49.783 normalizer fix lesson cluster); v1.49.802 (extended with #10426 second-instance cross-class registry extraction from T1.1 arc)"
   },
   {
     "domain": "Deferred-maintenance escalation",
@@ -159,5 +159,25 @@
     ],
     "key_lessons": ["#10422", "#10423"],
     "codified_at_milestone": "v1.49.790 (new domain — codified from v1.49.789 first shelfware verdict lesson cluster)"
+  },
+  {
+    "domain": "Bounded-learning calibration",
+    "trigger": "Designing or extending the bounded-learning calibration loop in `src/bounded-learning/`; choosing the statistical primitive for an anytime-valid threshold-update decision; adding a new calibratable threshold class",
+    "summary": "Two-sided likelihood-ratio e-processes on bounded binary observations at |x|=1 are insensitive to unanimous direction (cosh(λ)·exp(−λ²/2) ≤ 1 for all λ ≥ 0); use two one-sided e-processes at Bonferroni α/2 instead. Math-check-before-test-fixture convention: compute E_n/E_{n-1} under unanimous evidence by hand before writing the trip-point assertion — if the ratio is ≤ 1 the construction is unfit. Per-class observation sources are necessary surface; the lightest-wire discipline does NOT apply to necessary surface (cross-ref Architecture-retrofit patterns #10426).",
+    "canonical_docs": [
+      "docs/bounded-learning-calibration-discipline.md"
+    ],
+    "key_lessons": ["#10425"],
+    "codified_at_milestone": "v1.49.802 (new domain — codified from v1.49.795 T1.1 ship 1 e-process design lesson)"
+  },
+  {
+    "domain": "Failure-mode contracts",
+    "trigger": "Designing a new surface (function, module, CLI flag, skill prompt section, hook) where silent-vs-loud failure asymmetry is in play; adding a `try { ... } catch { /* ignore */ }` block; reviewing a long-running primitive's transient-error handling",
+    "summary": "Forensic, dashboard, and observability surfaces fail silently; load-bearing surfaces fail loudly. Test: does the user's next decision depend on this surface's output? If yes → load-bearing → propagate. If no → accessory → swallow at surface boundary. Contract documentation convention: explicit `// best-effort silent` or `// fail loudly` marker in docstring paired with at least one test assertion that exercises the failure path; surfaces without the paired test are stochastic.",
+    "canonical_docs": [
+      "docs/failure-mode-contracts.md"
+    ],
+    "key_lessons": ["#10427"],
+    "codified_at_milestone": "v1.49.802 (new domain — codified from v1.49.799-801 three-instance audit-log + watch-loop + /sc:status lesson cluster)"
   }
 ]
