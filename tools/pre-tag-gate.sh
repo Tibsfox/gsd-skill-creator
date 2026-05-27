@@ -669,16 +669,18 @@ fi
 # Surfaces lesson IDs that appear in 2+ retrospectives but are not captured in
 # tools/render-claude-md/disciplines.json or any cited discipline doc.
 #
-# v1.49.821 (T2.2 part 1): adds ceiling-based enforcement infrastructure.
-# DISCIPLINE_COVERAGE_CEILING bounds the maximum allowed UNCODIFIED count. If
-# UNCODIFIED count > ceiling, the gate WARNs (default) or FAILS (when
-# SC_PRE_TAG_GATE_REQUIRE=discipline-coverage is set). Override the ceiling
-# via SC_DISCIPLINE_COVERAGE_CEILING (default = 50, current state at v821 = 39).
-# v822 will flip the default to BLOCK at the ceiling.
+# v1.49.821 (T2.2 part 1): added ceiling-based enforcement infrastructure.
+# v1.49.822 (T2.2 part 2): FLIPPED default to BLOCK at ceiling. SC_DISCIPLINE_COVERAGE_CEILING
+# now defaults to 41 (was 50), exactly current count (39) + 2 buffer. Ships
+# adding ≥3 new UNCODIFIED entries hit BLOCK by default; operators must either
+# codify lessons OR raise SC_DISCIPLINE_COVERAGE_CEILING explicitly.
 #
-# WARN-only by default — discipline-as-data scaling is operator-driven; the gate
-# just surfaces the gap. SC_PRE_TAG_GATE_REQUIRE=discipline-coverage to block.
-DISCIPLINE_COVERAGE_CEILING="${SC_DISCIPLINE_COVERAGE_CEILING:-50}"
+# SC_PRE_TAG_GATE_REQUIRE=discipline-coverage is the legacy escape valve and
+# still works: when set, even WITHIN-ceiling states FAIL on any UNCODIFIED.
+# Operators wanting to disable the ceiling-BLOCK behavior can:
+#   1. Raise SC_DISCIPLINE_COVERAGE_CEILING to a higher value (forward-progress mode).
+#   2. Set SC_PRE_TAG_GATE_BYPASS=discipline-coverage to skip the step entirely.
+DISCIPLINE_COVERAGE_CEILING="${SC_DISCIPLINE_COVERAGE_CEILING:-41}"
 if gate_bypassed "discipline-coverage"; then
   log "[pre-tag-gate] step 13/15: SKIPPED"
 else
@@ -692,15 +694,13 @@ else
     echo "[pre-tag-gate]   Run: node tools/check-discipline-coverage.mjs for the full report" >&2
     if [ "${UNCODIFIED_COUNT:-0}" -gt "${DISCIPLINE_COVERAGE_CEILING}" ]; then
       echo "[pre-tag-gate]   CEILING EXCEEDED: UNCODIFIED $UNCODIFIED_COUNT > ceiling $DISCIPLINE_COVERAGE_CEILING" >&2
-      if gate_required "discipline-coverage"; then
-        echo "[pre-tag-gate] FAIL: discipline-coverage ceiling exceeded — codify lessons OR raise SC_DISCIPLINE_COVERAGE_CEILING" >&2
-        exit 15
-      fi
+      echo "[pre-tag-gate] FAIL: discipline-coverage ceiling exceeded (v822 default-BLOCK flip) — codify lessons OR raise SC_DISCIPLINE_COVERAGE_CEILING" >&2
+      exit 15
     elif gate_required "discipline-coverage"; then
-      echo "[pre-tag-gate] FAIL: discipline-coverage escalated — codify uncodified lessons into discipline docs / manifest" >&2
+      echo "[pre-tag-gate] FAIL: discipline-coverage escalated (legacy strict mode) — codify uncodified lessons into discipline docs / manifest" >&2
       exit 15
     fi
-    log "[pre-tag-gate] step 13/15: WARN (informational; set SC_PRE_TAG_GATE_REQUIRE=discipline-coverage to block; ceiling=$DISCIPLINE_COVERAGE_CEILING)"
+    log "[pre-tag-gate] step 13/15: WARN (within-ceiling: $UNCODIFIED_COUNT ≤ $DISCIPLINE_COVERAGE_CEILING; ceiling-exceed will BLOCK by default since v822)"
   else
     log "[pre-tag-gate] step 13/15: PASS (no uncodified lessons)"
   fi
