@@ -1,5 +1,6 @@
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { PypiRegistryAdapter } from './pypi.js';
+import { EgressContextDenied, type EgressContext } from '../../security/egress-context.js';
 
 const stubFetch = (body: unknown, status = 200) => {
   vi.stubGlobal(
@@ -107,5 +108,57 @@ describe('PypiRegistryAdapter', () => {
     });
 
     expect(health.isDeprecated).toBe(true);
+  });
+
+  describe('EgressContext integration', () => {
+    it('throws EgressContextDenied when ctx restricts the registry URL', async () => {
+      const ctx: EgressContext = {
+        allowList: [],
+        audit: { record() {} },
+      };
+      const fetchSpy = vi.fn();
+      vi.stubGlobal('fetch', fetchSpy);
+
+      const adapter = new PypiRegistryAdapter();
+      await expect(
+        adapter.fetchHealth(
+          {
+            name: 'requests',
+            version: '2.31.0',
+            ecosystem: 'pypi',
+            sourceManifest: '/project/requirements.txt',
+          },
+          ctx,
+        ),
+      ).rejects.toThrow(EgressContextDenied);
+
+      expect(fetchSpy).not.toHaveBeenCalled();
+    });
+
+    it('records an audit entry when ctx allows the URL', async () => {
+      const records: { source: string; target: string }[] = [];
+      const ctx: EgressContext = {
+        allowList: [/^https:\/\/pypi\.org\//],
+        audit: {
+          record(r) {
+            records.push({ source: r.source, target: r.target });
+          },
+        },
+      };
+      stubFetch({ info: { version: '1.0', classifiers: [], description: '' }, releases: {} });
+      const adapter = new PypiRegistryAdapter();
+      await adapter.fetchHealth(
+        {
+          name: 'requests',
+          version: '1.0',
+          ecosystem: 'pypi',
+          sourceManifest: '/project/requirements.txt',
+        },
+        ctx,
+      );
+      expect(records).toHaveLength(1);
+      expect(records[0].source).toBe('dependency-auditor/pypi-registry');
+      expect(records[0].target).toBe('https://pypi.org/pypi/requests/json');
+    });
   });
 });

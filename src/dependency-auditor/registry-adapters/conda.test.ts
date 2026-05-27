@@ -1,5 +1,6 @@
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { CondaRegistryAdapter } from './conda.js';
+import { EgressContextDenied, type EgressContext } from '../../security/egress-context.js';
 
 afterEach(() => {
   vi.unstubAllGlobals();
@@ -97,5 +98,70 @@ describe('CondaRegistryAdapter', () => {
     expect(health.isArchived).toBe(false);
     expect(health.isDeprecated).toBe(false);
     expect(health.maintainerCount).toBeNull();
+  });
+
+  describe('EgressContext integration', () => {
+    it('throws EgressContextDenied when ctx restricts the registry URL (first channel)', async () => {
+      const ctx: EgressContext = {
+        allowList: [],
+        audit: { record() {} },
+      };
+      const fetchSpy = vi.fn();
+      vi.stubGlobal('fetch', fetchSpy);
+
+      const adapter = new CondaRegistryAdapter();
+      await expect(
+        adapter.fetchHealth(
+          {
+            name: 'numpy',
+            version: '1.26.4',
+            ecosystem: 'conda',
+            sourceManifest: '/project/environment.yml',
+          },
+          ctx,
+        ),
+      ).rejects.toThrow(EgressContextDenied);
+
+      // Denial fires for conda-forge URL BEFORE any fetch can run.
+      expect(fetchSpy).not.toHaveBeenCalled();
+    });
+
+    it('records audit entries for each channel probed when ctx allows', async () => {
+      const records: { source: string; target: string }[] = [];
+      const ctx: EgressContext = {
+        allowList: [/^https:\/\/api\.anaconda\.org\//],
+        audit: {
+          record(r) {
+            records.push({ source: r.source, target: r.target });
+          },
+        },
+      };
+      // First channel (conda-forge) returns 404 → fall through to bioconda.
+      vi.stubGlobal(
+        'fetch',
+        vi
+          .fn()
+          .mockResolvedValueOnce({ ok: false, status: 404, json: () => Promise.resolve({}) })
+          .mockResolvedValueOnce({
+            ok: true,
+            status: 200,
+            json: () => Promise.resolve(biocondaResponse),
+          }),
+      );
+      const adapter = new CondaRegistryAdapter();
+      await adapter.fetchHealth(
+        {
+          name: 'biopython',
+          version: '1.83',
+          ecosystem: 'conda',
+          sourceManifest: '/project/environment.yml',
+        },
+        ctx,
+      );
+      expect(records).toHaveLength(2);
+      expect(records[0].source).toBe('dependency-auditor/conda-registry');
+      expect(records[0].target).toBe('https://api.anaconda.org/package/conda-forge/biopython');
+      expect(records[1].target).toBe('https://api.anaconda.org/package/bioconda/biopython');
+    });
   });
 });

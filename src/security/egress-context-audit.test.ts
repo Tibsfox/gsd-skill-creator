@@ -46,11 +46,8 @@ const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
   'src/aminet/package-fetcher.ts',
   'src/chips/anthropic-chip.ts',
   'src/chips/http-client.ts',
-  'src/dependency-auditor/registry-adapters/cargo.ts',
-  'src/dependency-auditor/registry-adapters/conda.ts',
-  // npm.ts wired through EgressContext at v1.49.809.
-  'src/dependency-auditor/registry-adapters/pypi.ts',
-  'src/dependency-auditor/registry-adapters/rubygems.ts',
+  // 5 registry adapters wired through EgressContext: npm.ts at v1.49.809;
+  // cargo.ts + conda.ts + pypi.ts + rubygems.ts batch at v1.49.811.
   'src/intelligence/ipc.ts',
   'src/mcp/skill-installer.ts',
   'src/site/deploy.ts',

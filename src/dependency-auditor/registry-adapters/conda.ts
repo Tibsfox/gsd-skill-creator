@@ -1,10 +1,19 @@
 /**
  * conda registry adapter — tries conda-forge, then bioconda on the Anaconda API.
+ *
+ * Wired through the EgressContext chokepoint at v1.49.811 (second batch
+ * KNOWN_UNWIRED migration following v1.49.809 npm). `ensureEgressAllowed`
+ * is hoisted OUTSIDE each channel's network-failure try/catch per Lesson
+ * #10427 — EgressContextDenied must propagate even when the channel-probe
+ * swallows accessory network errors.
  */
 
 import type { DependencyRecord, RegistryHealth } from '../types.js';
 import type { RegistryAdapter } from '../registry-adapter.js';
 import type { RateLimiter } from '../rate-limiter.js';
+import { ensureEgressAllowed, type EgressContext } from '../../security/egress-context.js';
+
+const EGRESS_SOURCE = 'dependency-auditor/conda-registry';
 
 function nullHealth(name: string): RegistryHealth {
   return {
@@ -21,8 +30,15 @@ function nullHealth(name: string): RegistryHealth {
 async function tryChannel(
   channel: string,
   name: string,
+  ctx?: EgressContext,
 ): Promise<RegistryHealth | null> {
   const url = `https://api.anaconda.org/package/${channel}/${encodeURIComponent(name)}`;
+
+  // Hoisted OUTSIDE the channel-probe try/catch per Lesson #10427:
+  // EgressContextDenied is load-bearing and must propagate even when
+  // accessory network errors are swallowed for channel-probe fallback.
+  ensureEgressAllowed(ctx, EGRESS_SOURCE, 'fetch', url);
+
   let resp: Response;
 
   try {
@@ -50,13 +66,13 @@ async function tryChannel(
 export class CondaRegistryAdapter implements RegistryAdapter {
   constructor(private readonly rateLimiter?: RateLimiter) {}
 
-  async fetchHealth(dep: DependencyRecord): Promise<RegistryHealth> {
+  async fetchHealth(dep: DependencyRecord, ctx?: EgressContext): Promise<RegistryHealth> {
     if (this.rateLimiter) await this.rateLimiter.acquire();
 
-    const fromForge = await tryChannel('conda-forge', dep.name);
+    const fromForge = await tryChannel('conda-forge', dep.name, ctx);
     if (fromForge) return fromForge;
 
-    const fromBioconda = await tryChannel('bioconda', dep.name);
+    const fromBioconda = await tryChannel('bioconda', dep.name, ctx);
     if (fromBioconda) return fromBioconda;
 
     return nullHealth(dep.name);

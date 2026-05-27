@@ -1,10 +1,17 @@
 /**
  * PyPI registry adapter — fetches RegistryHealth from pypi.org/pypi.
+ *
+ * Wired through the EgressContext chokepoint at v1.49.811 (second batch
+ * KNOWN_UNWIRED migration following v1.49.809 npm). `ensureEgressAllowed`
+ * is hoisted OUTSIDE the network-failure try/catch per Lesson #10427.
  */
 
 import type { DependencyRecord, RegistryHealth } from '../types.js';
 import type { RegistryAdapter } from '../registry-adapter.js';
 import type { RateLimiter } from '../rate-limiter.js';
+import { ensureEgressAllowed, type EgressContext } from '../../security/egress-context.js';
+
+const EGRESS_SOURCE = 'dependency-auditor/pypi-registry';
 
 function nullHealth(name: string): RegistryHealth {
   return {
@@ -21,10 +28,15 @@ function nullHealth(name: string): RegistryHealth {
 export class PypiRegistryAdapter implements RegistryAdapter {
   constructor(private readonly rateLimiter?: RateLimiter) {}
 
-  async fetchHealth(dep: DependencyRecord): Promise<RegistryHealth> {
+  async fetchHealth(dep: DependencyRecord, ctx?: EgressContext): Promise<RegistryHealth> {
     if (this.rateLimiter) await this.rateLimiter.acquire();
 
     const url = `https://pypi.org/pypi/${encodeURIComponent(dep.name)}/json`;
+
+    // Hoisted OUTSIDE the network-failure try/catch per Lesson #10427:
+    // EgressContextDenied is load-bearing and must propagate.
+    ensureEgressAllowed(ctx, EGRESS_SOURCE, 'fetch', url);
+
     let resp: Response;
 
     try {

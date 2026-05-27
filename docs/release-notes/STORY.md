@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.810`.
+The story begins at `v1.0` and continues to `v1.49.811`.
 
-**853 chapters.** 852 have retrospectives.
+**854 chapters.** 853 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -861,3 +861,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.808](v1.49.808/00-summary.md)** — S2 Adoption Telemetry Trend Report · 2026-05-27
 - **[v1.49.809](v1.49.809/00-summary.md)** — KNOWN_UNWIRED Chip 1: NpmRegistryAdapter · 2026-05-27
 - **[v1.49.810](v1.49.810/00-summary.md)** — T1.3 Option A: gnn-predictor Wired Into Copper Activation · 2026-05-27
+- **[v1.49.811](v1.49.811/00-summary.md)** — Batch Chip: cargo + conda + pypi + rubygems Registry Adapters · 2026-05-27

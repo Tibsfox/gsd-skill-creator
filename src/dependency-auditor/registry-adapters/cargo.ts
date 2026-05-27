@@ -2,13 +2,19 @@
  * Cargo (crates.io) registry adapter.
  *
  * Note: crates.io requires a User-Agent header — requests without it receive 403.
+ *
+ * Wired through the EgressContext chokepoint at v1.49.811 (second batch
+ * KNOWN_UNWIRED migration following v1.49.809 npm). `ensureEgressAllowed`
+ * is hoisted OUTSIDE the network-failure try/catch per Lesson #10427.
  */
 
 import type { DependencyRecord, RegistryHealth } from '../types.js';
 import type { RegistryAdapter } from '../registry-adapter.js';
 import type { RateLimiter } from '../rate-limiter.js';
+import { ensureEgressAllowed, type EgressContext } from '../../security/egress-context.js';
 
 const USER_AGENT = 'gsd-skill-creator/1.0 (https://github.com/Tibsfox/gsd-skill-creator)';
+const EGRESS_SOURCE = 'dependency-auditor/cargo-registry';
 
 function nullHealth(name: string): RegistryHealth {
   return {
@@ -25,10 +31,15 @@ function nullHealth(name: string): RegistryHealth {
 export class CargoRegistryAdapter implements RegistryAdapter {
   constructor(private readonly rateLimiter?: RateLimiter) {}
 
-  async fetchHealth(dep: DependencyRecord): Promise<RegistryHealth> {
+  async fetchHealth(dep: DependencyRecord, ctx?: EgressContext): Promise<RegistryHealth> {
     if (this.rateLimiter) await this.rateLimiter.acquire();
 
     const url = `https://crates.io/api/v1/crates/${encodeURIComponent(dep.name)}`;
+
+    // Hoisted OUTSIDE the network-failure try/catch per Lesson #10427:
+    // EgressContextDenied is load-bearing and must propagate.
+    ensureEgressAllowed(ctx, EGRESS_SOURCE, 'fetch', url);
+
     let resp: Response;
 
     try {
