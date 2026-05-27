@@ -58,7 +58,12 @@ const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
   'src/git/gates/pre-flight.ts',
   'src/git/workflows/contribute.ts',
   'src/intelligence/analyzer/findings/stalled.ts',
-  'src/intelligence/analyzer/git.ts',
+  // src/intelligence/analyzer/git.ts removed v1.49.834 stale-entry cleanup —
+  // file already called ensureProcessAllowed (hoisted outside catch per
+  // #10427) since v1.49.806; grandfathered allowlist entry was silently
+  // double-protected (audit short-circuits on KNOWN_UNWIRED.has before
+  // checking the actual wire). First stale-entry chip; closes asymmetry
+  // noted in v1.49.806 forward-observation that audit is unidirectional.
   'src/intelligence/provenance/linker.ts',
   'src/learn/acquirer.ts',
   'src/learning/version-manager.ts',
