@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.820`.
+The story begins at `v1.0` and continues to `v1.49.821`.
 
-**863 chapters.** 862 have retrospectives.
+**864 chapters.** 863 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -871,3 +871,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.818](v1.49.818/00-summary.md)** — T2.3 Wedge Close: FlagLookup Discriminated Union Extract · 2026-05-27
 - **[v1.49.819](v1.49.819/00-summary.md)** — Batch Chip: aminet Family ProcessContext Wiring · 2026-05-27
 - **[v1.49.820](v1.49.820/00-summary.md)** — First Chip: git/core/branch-manager ProcessContext Wiring · 2026-05-27
+- **[v1.49.821](v1.49.821/00-summary.md)** — T2.2 Part 1: Discipline-coverage Gate Ceiling Infrastructure · 2026-05-27

@@ -667,25 +667,40 @@ fi
 
 # ----- step 13/15: discipline coverage audit (v1.49.653, L-04, CONCERNS §23.4) -----
 # Surfaces lesson IDs that appear in 2+ retrospectives but are not captured in
-# tools/render-claude-md/disciplines.json or any cited discipline doc. WARN-only
-# by default — discipline-as-data scaling is operator-driven; the gate just
-# surfaces the gap. SC_PRE_TAG_GATE_REQUIRE=discipline-coverage to block.
+# tools/render-claude-md/disciplines.json or any cited discipline doc.
+#
+# v1.49.821 (T2.2 part 1): adds ceiling-based enforcement infrastructure.
+# DISCIPLINE_COVERAGE_CEILING bounds the maximum allowed UNCODIFIED count. If
+# UNCODIFIED count > ceiling, the gate WARNs (default) or FAILS (when
+# SC_PRE_TAG_GATE_REQUIRE=discipline-coverage is set). Override the ceiling
+# via SC_DISCIPLINE_COVERAGE_CEILING (default = 50, current state at v821 = 39).
+# v822 will flip the default to BLOCK at the ceiling.
+#
+# WARN-only by default — discipline-as-data scaling is operator-driven; the gate
+# just surfaces the gap. SC_PRE_TAG_GATE_REQUIRE=discipline-coverage to block.
+DISCIPLINE_COVERAGE_CEILING="${SC_DISCIPLINE_COVERAGE_CEILING:-50}"
 if gate_bypassed "discipline-coverage"; then
   log "[pre-tag-gate] step 13/15: SKIPPED"
 else
-  log "[pre-tag-gate] step 13/15: discipline coverage audit"
+  log "[pre-tag-gate] step 13/15: discipline coverage audit (ceiling=$DISCIPLINE_COVERAGE_CEILING)"
   COVERAGE_OUTPUT="$(node "$REPO_ROOT/tools/check-discipline-coverage.mjs" 2>&1)" || true
   COVERAGE_EXIT=$?
   UNCODIFIED_COUNT="$(echo "$COVERAGE_OUTPUT" | grep -oE "UNCODIFIED.*: [0-9]+" | head -1 | grep -oE "[0-9]+$" || echo "0")"
   PARTIAL_COUNT="$(echo "$COVERAGE_OUTPUT" | grep -oE "PARTIAL.*: [0-9]+" | head -1 | grep -oE "[0-9]+$" || echo "0")"
   if [ "${UNCODIFIED_COUNT:-0}" -gt 0 ]; then
-    echo "[pre-tag-gate] INFO: $UNCODIFIED_COUNT uncodified lesson(s) + $PARTIAL_COUNT partial match(es)" >&2
+    echo "[pre-tag-gate] INFO: $UNCODIFIED_COUNT uncodified lesson(s) + $PARTIAL_COUNT partial match(es) (ceiling=$DISCIPLINE_COVERAGE_CEILING)" >&2
     echo "[pre-tag-gate]   Run: node tools/check-discipline-coverage.mjs for the full report" >&2
-    if gate_required "discipline-coverage"; then
+    if [ "${UNCODIFIED_COUNT:-0}" -gt "${DISCIPLINE_COVERAGE_CEILING}" ]; then
+      echo "[pre-tag-gate]   CEILING EXCEEDED: UNCODIFIED $UNCODIFIED_COUNT > ceiling $DISCIPLINE_COVERAGE_CEILING" >&2
+      if gate_required "discipline-coverage"; then
+        echo "[pre-tag-gate] FAIL: discipline-coverage ceiling exceeded — codify lessons OR raise SC_DISCIPLINE_COVERAGE_CEILING" >&2
+        exit 15
+      fi
+    elif gate_required "discipline-coverage"; then
       echo "[pre-tag-gate] FAIL: discipline-coverage escalated — codify uncodified lessons into discipline docs / manifest" >&2
       exit 15
     fi
-    log "[pre-tag-gate] step 13/15: WARN (informational; set SC_PRE_TAG_GATE_REQUIRE=discipline-coverage to block)"
+    log "[pre-tag-gate] step 13/15: WARN (informational; set SC_PRE_TAG_GATE_REQUIRE=discipline-coverage to block; ceiling=$DISCIPLINE_COVERAGE_CEILING)"
   else
     log "[pre-tag-gate] step 13/15: PASS (no uncodified lessons)"
   fi

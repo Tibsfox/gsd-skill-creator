@@ -54,21 +54,36 @@ const NOTES_DIR = resolve(REPO_ROOT, 'docs/release-notes');
 const LESSON_ID_RE = /Lesson\s+(#\d{4,5})/g;
 
 function parseArgs(argv) {
-  const opts = { json: false, strict: false };
+  const opts = { json: false, strict: false, maxUncodified: null };
   for (const a of argv) {
     if (a === '--json') opts.json = true;
     else if (a === '--strict') opts.strict = true;
-    else if (a === '-h' || a === '--help') {
+    else if (a.startsWith('--max-uncodified=')) {
+      const raw = a.slice('--max-uncodified='.length);
+      const n = Number(raw);
+      if (!Number.isFinite(n) || !Number.isInteger(n) || n < 0) {
+        process.stderr.write(`--max-uncodified requires a non-negative integer (got "${raw}")\n`);
+        process.exit(2);
+      }
+      opts.maxUncodified = n;
+    } else if (a === '-h' || a === '--help') {
       process.stdout.write(
         [
-          'Usage: node tools/check-discipline-coverage.mjs [--json] [--strict]',
+          'Usage: node tools/check-discipline-coverage.mjs [--json] [--strict] [--max-uncodified=N]',
           '',
           'Audits release-notes lesson IDs against the disciplines manifest at',
           'tools/render-claude-md/disciplines.json.',
           '',
+          'Flags:',
+          '  --json              JSON output',
+          '  --strict            exit 1 if ANY UNCODIFIED findings',
+          '  --max-uncodified=N  exit 1 if UNCODIFIED count > N (threshold gate;',
+          '                      v1.49.821 T2.2 infrastructure for ceiling-based',
+          '                      enforcement; works alongside or instead of --strict)',
+          '',
           'Exit codes:',
-          '  0  clean (or non-strict with UNCODIFIED findings)',
-          '  1  UNCODIFIED findings AND --strict',
+          '  0  clean (or non-strict with UNCODIFIED findings within ceiling)',
+          '  1  UNCODIFIED findings AND --strict, OR UNCODIFIED count > --max-uncodified',
           '  2  CLI arg error',
           '  3  inputs missing',
           '',
@@ -235,6 +250,15 @@ function main() {
   }
 
   if (opts.strict && buckets.UNCODIFIED.length > 0) {
+    process.exit(1);
+  }
+  if (opts.maxUncodified !== null && buckets.UNCODIFIED.length > opts.maxUncodified) {
+    if (!opts.json) {
+      process.stderr.write(
+        `\nUNCODIFIED count ${buckets.UNCODIFIED.length} EXCEEDS ceiling ${opts.maxUncodified}.\n` +
+          `T2.2 ceiling enforcement (v1.49.821+): codify lessons or raise --max-uncodified.\n`,
+      );
+    }
     process.exit(1);
   }
   process.exit(0);
