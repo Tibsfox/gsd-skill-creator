@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.806`.
+The story begins at `v1.0` and continues to `v1.49.807`.
 
-**849 chapters.** 848 have retrospectives.
+**850 chapters.** 849 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -857,3 +857,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.804](v1.49.804/00-summary.md)** — Bounded-Learning Log Query Subcommand · 2026-05-27
 - **[v1.49.805](v1.49.805/00-summary.md)** — Codification Ship: Promote #10428 + #10429 + #10430 (S3 + S4 + S7 Levers) · 2026-05-27
 - **[v1.49.806](v1.49.806/00-summary.md)** — S6 Chokepoint Extension: EgressContext + ProcessContext · 2026-05-27
+- **[v1.49.807](v1.49.807/00-summary.md)** — S5 Normalizer Gate Idempotency + PROJECT.md Drift Cap · 2026-05-27

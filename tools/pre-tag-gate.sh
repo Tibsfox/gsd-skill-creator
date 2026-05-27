@@ -315,7 +315,19 @@ elif [ -f "$REPO_ROOT/.planning/STATE.md" ]; then
   node tools/state-md-normalizer.mjs --write >/dev/null 2>&1 || true
   # Clean up the backup file the normalizer leaves on actual rewrites
   rm -f "$REPO_ROOT"/.planning/STATE.md.backup-before-normalize-* 2>/dev/null || true
-  log "[pre-tag-gate] step 0.5/15: PASS (STATE.md normalized in-place)"
+  # v1.49.807 S5 closure: post-write --check round catches any residual drift
+  # that survives the --write pass. The historical non-idempotency wedge
+  # (omitted Engine state baseline) was closed in v1.49.783 (commit e5d0cbc69);
+  # this round is the deterministic regression detector — if --check exits
+  # nonzero after a successful --write, the normalizer has regressed.
+  if ! node tools/state-md-normalizer.mjs --check >/dev/null 2>&1; then
+    echo "[pre-tag-gate] FAIL: state-md-normalizer --check failed AFTER --write" >&2
+    echo "[pre-tag-gate]   This indicates a non-idempotency regression in the normalizer." >&2
+    echo "[pre-tag-gate]   Diagnose: node tools/state-md-normalizer.mjs --check" >&2
+    echo "[pre-tag-gate]   Closed in v1.49.794 (e5d0cbc69); recurrence would be a real regression." >&2
+    exit 1
+  fi
+  log "[pre-tag-gate] step 0.5/15: PASS (STATE.md normalized + idempotency verified)"
 else
   log "[pre-tag-gate] step 0.5/15: SKIPPED (no STATE.md; CI/clean-repo path)"
 fi
@@ -764,6 +776,14 @@ fi
 # rows, unrecognized statuses, "Last updated" >30d old. WARN-only by
 # default — PROJECT.md is gitignored hand-authored prose; auto-fix is
 # out of scope. Promote to BLOCKER via SC_PRE_TAG_GATE_REQUIRE=project-md.
+#
+# v1.49.807 S5 tightening: bounded patch-drift gate. The latest-shipped
+# version drift is the recurring class; if PROJECT.md's "Latest shipped
+# release" trails package.json by more than SC_PROJECT_MD_MAX_PATCH_DRIFT
+# (default 3) patch versions, escalate that finding to FAIL regardless of
+# the global SC_PRE_TAG_GATE_REQUIRE flag. Other drift findings remain
+# WARN-only — they still demand operator attention but don't block ship.
+#
 # Closes audit strengthening lever S5 (audit
 # .planning/AUDIT-2026-05-26-core-functions-retrospective.md).
 if gate_bypassed "project-md"; then
@@ -777,6 +797,28 @@ else
     echo "$PROJECT_MD_OUTPUT" | head -25 >&2
     echo "[pre-tag-gate]   Diagnose: node tools/project-md-normalizer.mjs --check" >&2
     echo "[pre-tag-gate]   Fix: hand-edit .planning/PROJECT.md (gitignored)" >&2
+
+    # v1.49.807 S5: bounded patch-drift gate on the latest-shipped-version line.
+    # Parse a finding of the form:
+    #   [WARN] latest-shipped-version-drift: "Latest shipped release" lists v1.49.801 but package.json is v1.49.806 ...
+    # If the patch-version gap exceeds the threshold, escalate to FAIL.
+    MAX_PATCH_DRIFT="${SC_PROJECT_MD_MAX_PATCH_DRIFT:-3}"
+    PATCH_DRIFT_LINE="$(echo "$PROJECT_MD_OUTPUT" | grep -E 'latest-shipped-version-drift.*lists v[0-9]+\.[0-9]+\.[0-9]+ but package\.json is v[0-9]+\.[0-9]+\.[0-9]+' | head -1)"
+    if [ -n "$PATCH_DRIFT_LINE" ]; then
+      DOC_PATCH="$(echo "$PATCH_DRIFT_LINE" | sed -nE 's/.*lists v[0-9]+\.[0-9]+\.([0-9]+).*/\1/p')"
+      PKG_PATCH="$(echo "$PATCH_DRIFT_LINE" | sed -nE 's/.*package\.json is v[0-9]+\.[0-9]+\.([0-9]+).*/\1/p')"
+      if [ -n "$DOC_PATCH" ] && [ -n "$PKG_PATCH" ]; then
+        DRIFT=$((PKG_PATCH - DOC_PATCH))
+        if [ "$DRIFT" -gt "$MAX_PATCH_DRIFT" ]; then
+          echo "[pre-tag-gate] FAIL: latest-shipped patch-drift is $DRIFT (max $MAX_PATCH_DRIFT)" >&2
+          echo "[pre-tag-gate]   Hand-edit .planning/PROJECT.md's \"Latest shipped release\" line" >&2
+          echo "[pre-tag-gate]   to within $MAX_PATCH_DRIFT patches of package.json before tagging." >&2
+          echo "[pre-tag-gate]   Bypass: SC_PROJECT_MD_MAX_PATCH_DRIFT=<N> (raise the ceiling)." >&2
+          exit 19
+        fi
+      fi
+    fi
+
     if gate_required "project-md"; then
       echo "[pre-tag-gate] FAIL: project-md escalated — update .planning/PROJECT.md before tagging" >&2
       exit 19
