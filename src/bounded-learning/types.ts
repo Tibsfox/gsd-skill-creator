@@ -26,8 +26,9 @@ export type SuggestionDecision = 'accepted' | 'dismissed' | 'deferred' | 'pendin
 /**
  * Configuration thresholds the loop can calibrate. Wired through the CLI:
  * `suggestions.min_occurrences` (v1.49.795), `suggestions.cooldown_days`
- * (v1.49.796), and `suggestions.auto_dismiss_after_days` (v1.49.797).
- * Future ships extend to the remaining members.
+ * (v1.49.796), `suggestions.auto_dismiss_after_days` (v1.49.797), and
+ * `token_budget.warn_at_percent` (v1.49.798). Future ships extend to the
+ * remaining members.
  */
 export type CalibratableThreshold =
   | 'suggestions.min_occurrences'

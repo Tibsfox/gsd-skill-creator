@@ -139,6 +139,40 @@ describe('runCalibrationLoop — suggestions.cooldown_days (v1.49.796)', () => {
   });
 });
 
+describe('runCalibrationLoop — token_budget.warn_at_percent (v1.49.798)', () => {
+  it('threshold-agnostic primitive accepts token_budget threshold', () => {
+    const obs10 = Array.from({ length: 10 }, (_, i) => obs(1, `s-${i}`));
+    const rec = runCalibrationLoop('token_budget.warn_at_percent', 4, obs10);
+    expect(rec.threshold).toBe('token_budget.warn_at_percent');
+    expect(rec.direction).toBe('decrease');
+    expect(rec.rejected).toBe(true);
+    expect(rec.proposedValue).toBe(3);
+    expect(rec.reason).toContain('lower');
+    expect(rec.reason).toContain('4 → 3');
+  });
+
+  it('recommends increase on dismiss-skew when observations provided', () => {
+    const obs10 = Array.from({ length: 10 }, (_, i) => obs(-1, `s-${i}`));
+    const rec = runCalibrationLoop('token_budget.warn_at_percent', 4, obs10);
+    expect(rec.direction).toBe('increase');
+    expect(rec.proposedValue).toBe(5);
+  });
+
+  it('holds with zero observations (matches v798 CLI behavior for unwired source)', () => {
+    const rec = runCalibrationLoop('token_budget.warn_at_percent', 4, []);
+    expect(rec.direction).toBe('hold');
+    expect(rec.observations).toBe(0);
+    expect(rec.proposedValue).toBeNull();
+  });
+
+  it('clamps proposed decrease at the absolute floor (1) for token_budget too', () => {
+    const obs10 = Array.from({ length: 10 }, (_, i) => obs(1, `s-${i}`));
+    const rec = runCalibrationLoop('token_budget.warn_at_percent', 1, obs10);
+    expect(rec.direction).toBe('decrease');
+    expect(rec.proposedValue).toBe(1);
+  });
+});
+
 describe('runCalibrationLoop — suggestions.auto_dismiss_after_days (v1.49.797)', () => {
   it('recommends decrease on accept-skew (auto-dismiss pending sooner)', () => {
     const obs10 = Array.from({ length: 10 }, (_, i) => obs(1, `s-${i}`));

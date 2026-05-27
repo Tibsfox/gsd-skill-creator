@@ -17,18 +17,24 @@
  *   2 — config file not found / unreadable
  *
  * Wired thresholds:
- *   - `suggestions.min_occurrences`        (v1.49.795)
- *   - `suggestions.cooldown_days`          (v1.49.796)
+ *   - `suggestions.min_occurrences`         (v1.49.795)
+ *   - `suggestions.cooldown_days`           (v1.49.796)
  *   - `suggestions.auto_dismiss_after_days` (v1.49.797)
+ *   - `token_budget.warn_at_percent`        (v1.49.798)
  *
- * All three thresholds share the same observation source (operator
- * accept/dismiss decisions on surfaced suggestions). Direction is interpreted
- * per-threshold but uses the same mapping: accept-skew ⇒ DECREASE,
+ * Observation sources are now per-threshold-class (introduced v1.49.798):
+ * `suggestions.*` thresholds read operator accept/dismiss decisions from
+ * `.planning/patterns/suggestions.json`; `token_budget.*` thresholds have
+ * no observation source captured yet, so the calibration loop returns
+ * `direction: hold` with `observations: 0` — honest "wire exists, source
+ * not yet captured" baseline. See `bounded-learning/observation-sources.ts`.
+ *
+ * Direction interpretation for wired sources: accept-skew ⇒ DECREASE,
  * dismiss-skew ⇒ INCREASE.
- *   - For `cooldown_days`, DECREASE means re-surface sooner; INCREASE means
- *     re-surface later.
- *   - For `auto_dismiss_after_days`, DECREASE means auto-dismiss pending
- *     suggestions sooner; INCREASE means keep them in the queue longer.
+ *   - For `cooldown_days`, DECREASE means re-surface sooner.
+ *   - For `auto_dismiss_after_days`, DECREASE means auto-dismiss sooner.
+ *   - For `token_budget.warn_at_percent`, the direction is per-event
+ *     response semantics (not yet defined — source unwired).
  *
  * @module cli/commands/bounded-learning
  */
@@ -41,12 +47,12 @@ import { join } from 'node:path';
 
 import {
   applyRecommendation,
-  entriesToObservations,
+  loadObservationsForThreshold,
+  observationSourceFor,
   runCalibrationLoop,
   readThresholdValue,
   type CalibratableThreshold,
   type CalibrationRecommendation,
-  type SuggestionEntry,
 } from '../../bounded-learning/index.js';
 
 const DEFAULT_THRESHOLD: CalibratableThreshold = 'suggestions.min_occurrences';
@@ -54,6 +60,7 @@ const SUPPORTED_THRESHOLDS: CalibratableThreshold[] = [
   'suggestions.min_occurrences',
   'suggestions.cooldown_days',
   'suggestions.auto_dismiss_after_days',
+  'token_budget.warn_at_percent',
 ];
 
 const DEFAULT_SUGGESTIONS_PATH = join(process.cwd(), '.planning', 'patterns', 'suggestions.json');
@@ -128,23 +135,8 @@ function parseThresholdKey(raw: string | null): CalibratableThreshold | null {
 }
 
 // ============================================================================
-// Suggestion loading
+// Config loading
 // ============================================================================
-
-async function loadSuggestions(path: string): Promise<SuggestionEntry[]> {
-  if (!existsSync(path)) return [];
-  const raw = await readFile(path, 'utf8');
-  const trimmed = raw.trim();
-  if (trimmed.length === 0) return [];
-  let parsed: unknown;
-  try {
-    parsed = JSON.parse(trimmed);
-  } catch {
-    return [];
-  }
-  if (!Array.isArray(parsed)) return [];
-  return parsed as SuggestionEntry[];
-}
 
 async function loadConfig(path: string): Promise<unknown | null> {
   if (!existsSync(path)) return null;
@@ -165,10 +157,12 @@ function renderText(
   applied: 'dry-run' | 'applied' | 'noop',
   applyReason: string | null,
 ): void {
+  const source = observationSourceFor(rec.threshold);
   p.log.info(`bounded-learning calibration — ${rec.threshold}`);
   console.log('');
   console.log(`  ${pc.dim('current value:')}     ${rec.currentValue}`);
-  console.log(`  ${pc.dim('observations:')}      ${rec.observations} (terminal accept/dismiss only)`);
+  console.log(`  ${pc.dim('observation source:')} ${source.sourceId}${source.wired ? '' : pc.yellow(' (NOT YET CAPTURED)')}`);
+  console.log(`  ${pc.dim('observations:')}      ${rec.observations}`);
   console.log(`  ${pc.dim('mean observation:')}  ${rec.meanObservation.toFixed(4)}`);
   console.log(`  ${pc.dim('evidence (E_t):')}    ${rec.evidence.toFixed(4)}`);
   console.log(`  ${pc.dim('rejection threshold:')} ${rec.rejectionThreshold.toFixed(4)} (= 1/α at α=${rec.alpha})`);
@@ -215,6 +209,7 @@ function renderJson(
   applied: 'dry-run' | 'applied' | 'noop',
   applyReason: string | null,
 ): void {
+  const source = observationSourceFor(rec.threshold);
   console.log(
     JSON.stringify(
       {
@@ -231,6 +226,11 @@ function renderJson(
         reason: rec.reason,
         applied,
         applyReason,
+        observationSource: {
+          sourceId: source.sourceId,
+          wired: source.wired,
+          description: source.description,
+        },
       },
       null,
       2,
@@ -333,9 +333,8 @@ export async function boundedLearningCommand(args: string[]): Promise<number> {
     return 2;
   }
 
-  // ── Load suggestions + map to observations ─────────────────────────────
-  const entries = await loadSuggestions(suggestionsPath);
-  const observations = entriesToObservations(entries);
+  // ── Load observations from per-class source (v1.49.798) ────────────────
+  const observations = await loadObservationsForThreshold(threshold, { suggestionsPath });
 
   // ── Run calibration loop ───────────────────────────────────────────────
   const loopConfig: { alpha?: number; lambda?: number } = {};

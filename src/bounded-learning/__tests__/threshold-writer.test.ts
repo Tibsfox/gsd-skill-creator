@@ -171,6 +171,32 @@ describe('applyRecommendation', () => {
     expect(readThresholdValue(onDisk, 'suggestions.auto_dismiss_after_days')).toBe(30);
   });
 
+  it('writes token_budget.warn_at_percent through to disk and preserves siblings (v1.49.798)', async () => {
+    writeConfig({
+      suggestions: { min_occurrences: 3, cooldown_days: 7, auto_dismiss_after_days: 30 },
+      token_budget: { max_percent: 5, warn_at_percent: 4 },
+    });
+    const rec = makeRecommendation({
+      threshold: 'token_budget.warn_at_percent',
+      currentValue: 4,
+      proposedValue: 3,
+      direction: 'decrease',
+      meanObservation: 1,
+      reason: 'token_budget.warn_at_percent test recommendation',
+    });
+    const outcome = await applyRecommendation(rec, { configPath, apply: true });
+    expect(outcome.kind).toBe('applied');
+    if (outcome.kind !== 'applied') throw new Error('unreachable');
+    expect(outcome.previousValue).toBe(4);
+    expect(outcome.newValue).toBe(3);
+    const onDisk = JSON.parse(readFileSync(configPath, 'utf8'));
+    expect(readThresholdValue(onDisk, 'token_budget.warn_at_percent')).toBe(3);
+    expect(readThresholdValue(onDisk, 'token_budget.max_percent')).toBe(5);
+    expect(readThresholdValue(onDisk, 'suggestions.min_occurrences')).toBe(3);
+    expect(readThresholdValue(onDisk, 'suggestions.cooldown_days')).toBe(7);
+    expect(readThresholdValue(onDisk, 'suggestions.auto_dismiss_after_days')).toBe(30);
+  });
+
   it('writes auto_dismiss_after_days through to disk and preserves siblings (v1.49.797)', async () => {
     writeConfig({ suggestions: { min_occurrences: 3, cooldown_days: 7, auto_dismiss_after_days: 30 } });
     const rec = makeRecommendation({

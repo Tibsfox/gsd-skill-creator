@@ -281,6 +281,56 @@ describe('boundedLearningCommand — --threshold suggestions.cooldown_days (v1.4
   });
 });
 
+describe('boundedLearningCommand — --threshold token_budget.warn_at_percent (v1.49.798)', () => {
+  beforeEach(() => {
+    writeConfig({
+      suggestions: { min_occurrences: 3, cooldown_days: 7, auto_dismiss_after_days: 30 },
+      token_budget: { max_percent: 5, warn_at_percent: 4 },
+    });
+  });
+
+  it('reads token_budget.warn_at_percent and reports hold + unwired source (zero data)', async () => {
+    writeSuggestions(
+      // Even with suggestions data, token_budget threshold should NOT consume it.
+      Array.from({ length: 10 }, (_, i) => ({ id: `s-${i}`, state: 'accepted' })),
+    );
+    const code = await boundedLearningCommand(
+      baseArgs(['--threshold', 'token_budget.warn_at_percent', '--json']),
+    );
+    expect(code).toBe(0);
+    const out = JSON.parse(collectLog());
+    expect(out.threshold).toBe('token_budget.warn_at_percent');
+    expect(out.currentValue).toBe(4);
+    expect(out.direction).toBe('hold');
+    expect(out.observations).toBe(0);
+    expect(out.observationSource.sourceId).toBe('token-budget-events');
+    expect(out.observationSource.wired).toBe(false);
+  });
+
+  it('does not write to config when --apply is passed with zero observations', async () => {
+    writeSuggestions([]);
+    const code = await boundedLearningCommand(
+      baseArgs(['--threshold', 'token_budget.warn_at_percent', '--apply', '--json']),
+    );
+    expect(code).toBe(0);
+    const out = JSON.parse(collectLog());
+    expect(out.applied).toBe('noop');
+    const onDisk = JSON.parse(readFileSync(configPath, 'utf8'));
+    expect(onDisk.token_budget.warn_at_percent).toBe(4);
+  });
+
+  it('suggestions thresholds still show wired source in JSON output', async () => {
+    writeSuggestions([]);
+    const code = await boundedLearningCommand(
+      baseArgs(['--threshold', 'suggestions.min_occurrences', '--json']),
+    );
+    expect(code).toBe(0);
+    const out = JSON.parse(collectLog());
+    expect(out.observationSource.sourceId).toBe('suggestions.json');
+    expect(out.observationSource.wired).toBe(true);
+  });
+});
+
 describe('boundedLearningCommand — --threshold suggestions.auto_dismiss_after_days (v1.49.797)', () => {
   beforeEach(() => {
     // Live-default auto_dismiss_after_days = 30; siblings preserved.

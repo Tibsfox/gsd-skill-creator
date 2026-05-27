@@ -8,9 +8,11 @@
  * to a configuration threshold when Ville's bound is crossed.
  *
  * Wired thresholds: `suggestions.min_occurrences` (v1.49.795),
- * `suggestions.cooldown_days` (v1.49.796), and
- * `suggestions.auto_dismiss_after_days` (v1.49.797). Future ships extend
- * to the remaining members of `CalibratableThreshold`.
+ * `suggestions.cooldown_days` (v1.49.796),
+ * `suggestions.auto_dismiss_after_days` (v1.49.797), and
+ * `token_budget.warn_at_percent` (v1.49.798). v798 introduces the first
+ * non-suggestions threshold class; see `observation-sources.ts` for the
+ * per-class source registry.
  *
  * @module bounded-learning
  */
@@ -41,3 +43,12 @@ export {
   setThresholdValue,
 } from './threshold-writer.js';
 export type { ApplyOutcome } from './threshold-writer.js';
+
+export {
+  loadObservationsForThreshold,
+  observationSourceFor,
+} from './observation-sources.js';
+export type {
+  ObservationLoaderOptions,
+  ObservationSourceInfo,
+} from './observation-sources.js';
