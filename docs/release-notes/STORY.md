@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.839`.
+The story begins at `v1.0` and continues to `v1.49.840`.
 
-**882 chapters.** 881 have retrospectives.
+**883 chapters.** 882 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -890,3 +890,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.837](v1.49.837/00-summary.md)** — `predictive.low_confidence_threshold` Observation Source Wired · 2026-05-27
 - **[v1.49.838](v1.49.838/00-summary.md)** — Audit Inverse-Check (Stale-Entry Detector) · 2026-05-27
 - **[v1.49.839](v1.49.839/00-summary.md)** — ProcessContext Singleton Chip: `intelligence/analyzer/findings/stalled.ts` · 2026-05-27
+- **[v1.49.840](v1.49.840/00-summary.md)** — Codification Ship: Promote #10436 + #10437 · 2026-05-27

@@ -172,13 +172,13 @@
   },
   {
     "domain": "Failure-mode contracts",
-    "trigger": "Designing a new surface (function, module, CLI flag, skill prompt section, hook) where silent-vs-loud failure asymmetry is in play; adding a `try { ... } catch { /* ignore */ }` block; reviewing a long-running primitive's transient-error handling",
-    "summary": "Forensic, dashboard, and observability surfaces fail silently; load-bearing surfaces fail loudly. Test: does the user's next decision depend on this surface's output? If yes → load-bearing → propagate. If no → accessory → swallow at surface boundary. Contract documentation convention: explicit `// best-effort silent` or `// fail loudly` marker in docstring paired with at least one test assertion that exercises the failure path; surfaces without the paired test are stochastic.",
+    "trigger": "Designing a new surface (function, module, CLI flag, skill prompt section, hook) where silent-vs-loud failure asymmetry is in play; adding a `try { ... } catch { /* ignore */ }` block; reviewing a long-running primitive's transient-error handling; adding a subscriber-gated observability hook on a context/options type",
+    "summary": "Forensic, dashboard, and observability surfaces fail silently; load-bearing surfaces fail loudly. Test: does the user's next decision depend on this surface's output? If yes → load-bearing → propagate. If no → accessory → swallow at surface boundary. Contract documentation convention: explicit `// best-effort silent` or `// fail loudly` marker in docstring paired with at least one test assertion that exercises the failure path; surfaces without the paired test are stochastic. Subscriber-gated observability-only context-hook pattern (#10437): substrate-consumer hooks recur in a 5-element shape (optional `?` field + subscriber gate + fire-and-forget Promise + .catch(() => {}) swallow + two-argument derived-data signature). PAIR co-location (when multiple hooks live on the same surface) shares one try/catch to prevent per-hook drift.",
     "canonical_docs": [
       "docs/failure-mode-contracts.md"
     ],
-    "key_lessons": ["#10427"],
-    "codified_at_milestone": "v1.49.802 (new domain — codified from v1.49.799-801 three-instance audit-log + watch-loop + /sc:status lesson cluster)"
+    "key_lessons": ["#10427", "#10437"],
+    "codified_at_milestone": "v1.49.802 (new domain — codified from v1.49.799-801 three-instance audit-log + watch-loop + /sc:status lesson cluster); v1.49.840 (extended with #10437 subscriber-gated context-hook pattern from v810+v826 onPredictions + v830+v832 fallbackProvider four-instance evidence set + PAIR co-location refinement)"
   },
   {
     "domain": "Meta-cadence",
@@ -215,16 +215,18 @@
   },
   {
     "domain": "Two-layer closure for procedure-rooted drift",
-    "trigger": "Designing a closure for a drift class that originates from a multi-step operator procedure; reviewing whether a one-layer fix (detector OR source-eliminator alone) is structurally complete; planning a counter-cadence ship targeting an operational-debt class",
-    "summary": "Procedure-rooted drift classes (where an operator-discretion step is forgettable/skippable) require BOTH a source eliminator (deterministic tool replacing the discretion step + post-condition check) AND a detector gate (structural check catching bypass). Either layer alone is incomplete: source-without-detector lets future operators work around the tool; detector-without-source leaves the human-error window open. Case study: STATE.md v805→v806 drift closed in v807 (detector: pre-tag-gate step 0.5) + v813 (source: atomic-writer `tools/state-md-set-shipped.mjs`). Apply at every counter-cadence ship targeting a known procedure-rooted drift.",
+    "trigger": "Designing a closure for a drift class that originates from a multi-step operator procedure OR from a tool blindly overwriting destination files that may contain hand-authored content; reviewing whether a one-layer fix (detector OR source-eliminator alone) is structurally complete; planning a counter-cadence ship targeting an operational-debt class",
+    "summary": "Procedure-rooted drift classes (where an operator-discretion step is forgettable/skippable) require BOTH a source eliminator (deterministic tool replacing the discretion step + post-condition check) AND a detector gate (structural check catching bypass). Either layer alone is incomplete: source-without-detector lets future operators work around the tool; detector-without-source leaves the human-error window open. Case study: STATE.md v805→v806 drift closed in v807 (detector: pre-tag-gate step 0.5) + v813 (source: atomic-writer `tools/state-md-set-shipped.mjs`). Generalizes to file-overwrite drift (#10436): v836 publish.mjs `shouldPublishToDestination` is the destination-side preservation layer paired with chapter.mjs's source-side preservation (from v585 C04). The manual recovery procedure operators worked around for 251 ships (`git checkout HEAD -- <chapters>`) was the alarm bell for a missing destination-side detector. Apply at every counter-cadence ship targeting a known procedure-rooted or file-overwrite drift class.",
     "canonical_docs": [
       "docs/two-layer-closure-discipline.md",
       "tools/state-md-set-shipped.mjs",
       "tools/pre-tag-gate.sh",
+      "tools/release-history/publish.mjs",
+      "tools/release-history/chapter.mjs",
       "docs/T14-SHIP-SEQUENCE.md"
     ],
-    "key_lessons": ["#10431"],
-    "codified_at_milestone": "v1.49.814 (new domain — codified from v807+v813 case study; extends #10414 gate-not-vigilance to procedure-rooted drift specifically)"
+    "key_lessons": ["#10431", "#10436"],
+    "codified_at_milestone": "v1.49.814 (new domain — codified from v807+v813 case study; extends #10414 gate-not-vigilance to procedure-rooted drift specifically); v1.49.840 (extended with #10436 file-overwrite drift sub-class from v813 STATE.md + v836 publish.mjs two-instance evidence)"
   },
   {
     "domain": "KNOWN_UNWIRED allowlists as migration-debt ledger",

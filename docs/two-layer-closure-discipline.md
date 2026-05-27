@@ -125,3 +125,91 @@ ship promoting it). Possible future closures the discipline applies to:
 - Release-notes 5-file scaffolding drift (completeness check is the detector;
   no source eliminator yet)
 - STATE.md `.backup-*` file accumulation (no detector; would need both layers)
+
+## File-overwrite drift sub-class (Lesson #10436)
+
+**Codified at:** v1.49.840 (from v813 STATE.md + v836 publish.mjs two-instance
+evidence — the two-layer pattern generalizes from operator-procedure-rooted
+drift to *tool-procedure-rooted file-overwrite drift*).
+
+The two-layer shape applies cleanly to a sibling drift class: a tool blindly
+overwrites destination files that may contain hand-authored content not
+present in the source. The structural shape is identical — both layers
+remain necessary — but the drift origin shifts from "operator forgets a
+step" to "tool overwrites without checking."
+
+### Mapping the layers
+
+| Layer | v813 (operator-procedure drift) | v836 (file-overwrite drift) |
+|---|---|---|
+| Source eliminator | `tools/state-md-set-shipped.mjs` atomic writer | `chapter.mjs` `writeChapterIdempotent` + `openerMatches` (source-side preservation; existed since v1.49.585 C04) |
+| Detector / destination-side preservation | `tools/pre-tag-gate.sh` step 0.5 canonical-form check | `publish.mjs` `shouldPublishToDestination` (destination-side preservation gate) |
+
+The v836 case revealed an asymmetry: the source layer (`chapter.mjs` C04
+preservation) had existed for 251 ships, but the missing destination layer
+(`publish.mjs` overwrite-without-check) created drift that operators worked
+around with `git checkout HEAD -- <chapters>` after each ship. The manual
+recovery procedure was the alarm bell for a missing detector layer.
+
+### When the sub-class applies
+
+A drift class fits the file-overwrite sub-class when:
+
+- The drift originates from a tool blindly writing a destination file (not an
+  operator forgetting a step).
+- The same content exists in two locations: a *source* file (where hand-edits
+  are made) and a *destination* file (where the tool writes).
+- The tool reads from the source and writes to the destination without
+  comparing — so hand-authored content present only in the destination is
+  silently destroyed.
+
+### How to apply the sub-class
+
+1. **Identify both file locations.** Where do hand-edits land? Where does the
+   tool write?
+2. **Build or confirm source-side preservation.** The source file's writer
+   must compare against existing content and preserve hand-authored sections.
+   For chapter scaffolds, the convention is "preserve any chapter whose
+   opener line differs from the canonical opener."
+3. **Build destination-side preservation.** The publish/sync tool must apply
+   the same comparison rule at the destination file. The check fires per
+   destination file, not just at the source.
+4. **Provide an `--force-overwrite` flag** for the legitimate case (a fresh
+   re-render that *should* clobber). The default is preserve.
+5. **Log preserve decisions** so they accumulate visible evidence the gate is
+   firing — `PRESERVED <path>` log lines per ship.
+
+### Anti-patterns specific to this sub-class
+
+- **Source-side preservation without destination-side.** This was the v585→v836
+  state of `chapter.mjs` + `publish.mjs`: source preserved but destination
+  blindly overwrote. The operator's manual recovery (`git checkout HEAD --`)
+  is the smell.
+- **A single combined preservation check at one of the two layers.** Source-
+  only preservation lets destination-side stale renders clobber; destination-
+  only preservation lets a fresh scaffold pass through and destroy source-side
+  hand-edits.
+- **No log lines for preserved files.** Without visible evidence the gate is
+  firing, future ships can't validate the preservation contract is operating;
+  9 PRESERVED log lines across v837+v838+v839 confirmed v836's gate worked
+  end-to-end under sustained exercise.
+
+### Reference implementation: v836 publish-preservation gate
+
+The v836 implementation, validated across v837-v839:
+
+- `tools/release-history/publish.mjs` — `shouldPublishToDestination(sourceContent, destPath, forceOverwrite)` helper, wired into per-target + toplevel publish loops.
+- `tools/release-history/chapter.mjs` — pre-existing `writeChapterIdempotent` + `openerMatches` (the source-side layer; refactored at v836 to export `openerMatches` via `tools/release-history/opener-match.mjs`).
+- `--force-overwrite` flag on `publish.mjs` for the legitimate re-render case.
+- `files_preserved` count in publish stats output.
+
+The destination-side gate fired 9 times across 3 subsequent ships (v837+v838+v839 T14 publish steps; 3 PRESERVED log lines per ship for `00-summary.md` + `03-retrospective.md` + `99-context.md`). No hand-authored content clobbered after v836.
+
+### Cross-reference to #10431
+
+This sub-class IS a #10431 application — both layers required, same shape, same
+anti-patterns. The naming distinction (procedure-rooted vs file-overwrite) is
+descriptive of the drift *origin*, not a structural change to the discipline.
+A future ship that closes a third drift class with both layers present should
+treat them as additional case studies under #10431 + #10436 rather than as
+separate disciplines.

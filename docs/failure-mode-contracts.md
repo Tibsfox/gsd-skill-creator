@@ -101,6 +101,132 @@ The discipline lives in the contrast: the SAME module has both contracts, scoped
 - ❌ Tear-down-on-first-error in a long-running primitive. Transient errors are survivable; the operator should not have to restart.
 - ❌ Bundling load-bearing and accessory operations into the same try-block. The accessory's failure will either propagate (wrong) or silently swallow the load-bearing failure (catastrophically wrong).
 
+## Subscriber-gated observability-only context-hook pattern (Lesson #10437)
+
+**Codified at:** v1.49.840 (from a 4-instance evidence set: v810 + v826
+`onPredictions` + v830 + v832 `fallbackProvider`; the latter two co-located
+on the same surface as a PAIR).
+
+A specific structural shape recurs across substrate-consumer context hooks:
+the hook exists to let a future consumer subscribe to an observability event
+emitted by the producer, but the hook MUST cost zero when no consumer is
+attached AND MUST never tear down the producer when the consumer errors.
+
+### Structural shape
+
+```typescript
+interface SomeContext {
+  // ... required fields ...
+  onSomeEvent?: (a: A, b: B) => void | Promise<void>;
+}
+
+// Inside the producer (`emitSomething` or equivalent):
+if (this.ctx.onSomeEvent !== undefined && this.subscribers.length > 0) {
+  // Two-layer subscriber gate: only fire when (a) the hook is wired AND
+  // (b) there is at least one subscriber to consume what the hook emits.
+  Promise.resolve(this.ctx.onSomeEvent(a, b)).catch(() => { /* swallow */ });
+}
+```
+
+Five elements together define the shape:
+
+1. **Optional `?` field** on the context/options type — default-unset, no
+   default-attached subscriber.
+2. **Subscriber gate** at the call site — the producer skips the call when
+   no consumer is attached (a single `if` check or an empty-array test).
+3. **Fire-and-forget Promise wrapper** — `Promise.resolve(hookResult)`
+   normalizes sync and async consumers without awaiting.
+4. **`.catch(() => {})`** — errors thrown by the consumer are swallowed at
+   the producer boundary; the producer's load-bearing path continues.
+5. **Two-argument shape** — the hook receives `(currentSubject, derivedData)`,
+   never the producer's internal state. This keeps the consumer's failure
+   blast radius limited to the data we passed it.
+
+The pattern IS a refinement of #10427's accessory-surface contract. The
+producer's load-bearing path (e.g. returning a `PredictionResult`) does NOT
+depend on the consumer's output, so silent failure is correct. The subscriber
+gate prevents the cost of the call when no consumer is wired; the
+`.catch(() => {})` prevents the consumer's failure from corrupting the
+producer's path.
+
+### Reference implementations
+
+| Ship | Hook | Location | Notes |
+|---|---|---|---|
+| v1.49.810 | `onPredictions` 1st instance | copper `_emitPredictions` path | Establishes the shape: hook + subscriber gate + .catch() |
+| v1.49.826 | `onPredictions` 2nd instance | selector `_emitPredictions` path | 2nd instance promoted the pattern under #10426 (second-instance rule) |
+| v1.49.830 | `fallbackProvider` 1st instance | copper `ActivationContext` | Cross-rootdir variant (src/ ↔ .college/); same 5-element shape |
+| v1.49.832 | `fallbackProvider` 2nd instance | selector `ActivationContext` | Co-located with `onPredictions` — PAIR pattern |
+
+### PAIR co-location refinement
+
+At v830 + v832, BOTH `onPredictions` and `fallbackProvider` are present on
+the same surface, fire from the same producer code path, and share the same
+catch block. The PAIR co-location is a meaningful refinement — when a surface
+has multiple subscriber-gated hooks, sharing the catch block reduces
+boilerplate and prevents per-hook error-handling drift.
+
+```typescript
+// PAIR co-location: both hooks share one try/catch.
+try {
+  if (this.ctx.onPredictions !== undefined && predictions.length > 0) {
+    Promise.resolve(this.ctx.onPredictions(currentSkill, predictions)).catch(() => {});
+  }
+  if (this.ctx.fallbackProvider !== undefined && predictions.length === 0) {
+    Promise.resolve(this.ctx.fallbackProvider(currentSkill)).catch(() => {});
+  }
+} catch {
+  // Both hooks are observability-only; producer continues regardless.
+}
+```
+
+### How to apply
+
+When adding a new subscriber-gated hook to a producer:
+
+1. **Type it optional** on the context/options type. Document in the JSDoc
+   that the hook is observability-only and that the producer ignores its
+   return value.
+2. **Apply the subscriber gate** — early-return or skip the call when no
+   consumer is attached. The gate is structural, not vigilance.
+3. **Wrap in `Promise.resolve(...).catch(() => {})`** even if the hook is
+   synchronous — the wrapper normalizes async consumers and prevents
+   future async migrations from corrupting the contract.
+4. **Pass a derived two-argument shape** — not the producer's internal state.
+5. **Co-locate with existing PAIR hooks** when adding to a surface that
+   already has one — share the catch block.
+6. **Add a test** that asserts the producer's load-bearing path returns
+   normally when the hook throws.
+
+### Anti-patterns
+
+- **Hook called without subscriber gate** — every producer run pays the
+  function-call cost even when no consumer is wired. The gate is a one-line
+  check, not a performance optimization.
+- **`await hookResult`** instead of fire-and-forget — turns the consumer
+  into a load-bearing dependency. If the consumer hangs, the producer hangs.
+- **Per-hook try/catch** when multiple hooks co-locate — boilerplate that
+  drifts; one hook ends up missing the catch and a consumer's throw
+  cascades into the producer.
+- **Passing producer-internal references** through the hook — the consumer
+  may mutate state the producer assumes is stable; the producer's
+  load-bearing path becomes data-dependent on the consumer.
+
+### Cross-reference
+
+- **#10427** — This pattern IS a #10427 application; subscriber-gated hooks
+  are a specific shape of accessory surface. #10437 documents the structural
+  pattern; #10427 documents the broader silent-vs-loud contract.
+- **#10426** — The second-instance rule promoted both `onPredictions`
+  (v810→v826) and `fallbackProvider` (v830→v832) on their own; this
+  codification unifies them into a single discipline rather than two parallel
+  ones.
+- **Cross-rootdir wire pattern (#10435)** — `fallbackProvider` is also a
+  cross-rootdir wire instance. The hook shape is orthogonal to the rootdir
+  partition; some subscriber-gated hooks cross rootdirs (fallbackProvider),
+  others stay in-rootdir (onPredictions).
+
 ## Lesson reference
 
 - **#10427** — Forensic/dashboard/observability surfaces fail silently; load-bearing surfaces fail loudly. v799–v801 three-instance candidate, promoted at v802.
+- **#10437** — Subscriber-gated observability-only context-hook pattern. v810 + v826 (`onPredictions`) + v830 + v832 (`fallbackProvider`) four-instance evidence set, promoted at v840 as a refinement of #10427's accessory-surface contract.
