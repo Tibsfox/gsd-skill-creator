@@ -9,6 +9,9 @@
  */
 
 import { execFile } from 'node:child_process';
+import { ensureProcessAllowed, type ProcessContext } from '../../security/process-context.js';
+
+const PROCESS_SOURCE = 'git/core/branch-manager';
 import * as path from 'node:path';
 import { assertClean, detectState } from './state-machine.js';
 import { loadConfig } from './repo-manager.js';
@@ -103,6 +106,7 @@ export async function createBranch(
   repoPath: string,
   name: string,
   options?: { worktree?: boolean },
+  ctx?: ProcessContext,
 ): Promise<BranchResult> {
   await assertClean(repoPath);
 
@@ -125,6 +129,7 @@ export async function createBranch(
       scriptPath,
       [repoPath, branchName, worktreePath],
       repoPath,
+      ctx,
     );
     const result = JSON.parse(stdout);
 
@@ -139,9 +144,9 @@ export async function createBranch(
   }
 
   // Create branch without worktree
-  await execGit('git', ['checkout', '-b', branchName, config.devBranch], repoPath);
-  await execGit('git', ['checkout', config.devBranch], repoPath);
-  await execGit('git', ['config', `branch.${branchName}.pushRemote`, 'origin'], repoPath);
+  await execGit('git', ['checkout', '-b', branchName, config.devBranch], repoPath, ctx);
+  await execGit('git', ['checkout', config.devBranch], repoPath, ctx);
+  await execGit('git', ['config', `branch.${branchName}.pushRemote`, 'origin'], repoPath, ctx);
 
   return { branch: branchName };
 }
@@ -152,18 +157,19 @@ export async function createBranch(
  * @param repoPath - Absolute path to the git repository
  * @returns Array of BranchInfo objects
  */
-export async function listBranches(repoPath: string): Promise<BranchInfo[]> {
+export async function listBranches(repoPath: string, ctx?: ProcessContext): Promise<BranchInfo[]> {
   const branchOutput = await execGit(
     'git',
     ['branch', '-v', '--format=%(refname:short) %(objectname:short) %(subject) %(upstream:track)'],
     repoPath,
+    ctx,
   );
 
   const currentBranch = (
-    await execGit('git', ['branch', '--show-current'], repoPath)
+    await execGit('git', ['branch', '--show-current'], repoPath, ctx)
   ).trim();
 
-  const worktrees = await listWorktrees(repoPath);
+  const worktrees = await listWorktrees(repoPath, ctx);
   const worktreeMap = new Map<string, string>();
   for (const wt of worktrees) {
     if (wt.branch) {
@@ -193,8 +199,8 @@ export async function listBranches(repoPath: string): Promise<BranchInfo[]> {
  * @param repoPath - Absolute path to the git repository
  * @returns Array of WorktreeInfo objects
  */
-export async function listWorktrees(repoPath: string): Promise<WorktreeInfo[]> {
-  const output = await execGit('git', ['worktree', 'list', '--porcelain'], repoPath);
+export async function listWorktrees(repoPath: string, ctx?: ProcessContext): Promise<WorktreeInfo[]> {
+  const output = await execGit('git', ['worktree', 'list', '--porcelain'], repoPath, ctx);
   const worktrees: WorktreeInfo[] = [];
 
   const blocks = output.split('\n\n').filter((b) => b.trim());
@@ -245,6 +251,7 @@ export async function removeBranch(
   repoPath: string,
   name: string,
   options?: { force?: boolean },
+  ctx?: ProcessContext,
 ): Promise<void> {
   const config = await loadConfig(repoPath);
 
@@ -257,7 +264,7 @@ export async function removeBranch(
   }
 
   // Check for associated worktree
-  const worktreeOutput = await execGit('git', ['worktree', 'list', '--porcelain'], repoPath);
+  const worktreeOutput = await execGit('git', ['worktree', 'list', '--porcelain'], repoPath, ctx);
   const hasWorktree = worktreeOutput.includes(`branch refs/heads/${name}`);
 
   if (hasWorktree) {
@@ -268,7 +275,7 @@ export async function removeBranch(
         const pathLine = block.split('\n').find((l) => l.startsWith('worktree '));
         if (pathLine) {
           const wtPath = pathLine.substring('worktree '.length);
-          await execGit('git', ['worktree', 'remove', wtPath], repoPath);
+          await execGit('git', ['worktree', 'remove', wtPath], repoPath, ctx);
         }
         break;
       }
@@ -277,7 +284,7 @@ export async function removeBranch(
 
   if (options?.force) {
     // Force delete — skip merge check
-    await execGit('git', ['branch', '-D', name], repoPath);
+    await execGit('git', ['branch', '-D', name], repoPath, ctx);
     return;
   }
 
@@ -287,6 +294,7 @@ export async function removeBranch(
       'git',
       ['merge-base', '--is-ancestor', name, config.devBranch],
       repoPath,
+      ctx,
     );
   } catch {
     throw new Error(
@@ -294,7 +302,7 @@ export async function removeBranch(
     );
   }
 
-  await execGit('git', ['branch', '-d', name], repoPath);
+  await execGit('git', ['branch', '-d', name], repoPath, ctx);
 }
 
 // --- Internal helpers ---
@@ -303,7 +311,9 @@ export async function removeBranch(
  * Execute a command via execFile and return stdout.
  * Uses execFile (not exec) to avoid shell injection.
  */
-function execGit(cmd: string, args: string[], cwd: string): Promise<string> {
+function execGit(cmd: string, args: string[], cwd: string, ctx?: ProcessContext): Promise<string> {
+  // ProcessContextDenied is load-bearing per #10427 — propagate to caller.
+  ensureProcessAllowed(ctx, PROCESS_SOURCE, 'exec-file', cmd, args);
   return new Promise((resolve, reject) => {
     execFile(cmd, args, { cwd }, (err, stdout, _stderr) => {
       if (err) {

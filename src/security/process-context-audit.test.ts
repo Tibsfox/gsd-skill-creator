@@ -51,7 +51,8 @@ const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
   'src/dogfood/pydmd/install/health-check.ts',
   'src/dogfood/pydmd/install/venv-manager.ts',
   'src/drift/cli.ts',
-  'src/git/core/branch-manager.ts',
+  // git/core/branch-manager wired at v1.49.820 first-chip (4-entry family;
+  // remaining 3: repo-manager, state-machine, sync-manager — future batch).
   'src/git/core/repo-manager.ts',
   'src/git/core/state-machine.ts',
   'src/git/core/sync-manager.ts',
