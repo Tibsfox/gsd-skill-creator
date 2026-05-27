@@ -1,11 +1,50 @@
 # Release History — Chapter Index
 
-_Generated 2026-05-26 from `release_history.*`. Source of truth: Postgres._
+_Generated 2026-05-27 from `release_history.*`. Source of truth: Postgres._
 
-**831 releases.** 830 with retrospective. 710 with extracted lessons.
+**870 releases.** 869 with retrospective. 728 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
+| `v1.49.827` | Batch Chip: dogfood Family ProcessContext (extractor + pydmd install health-check + venv-manager) | 2026-05-27 | ✓ | — | [read](v1.49.827/00-summary.md) |
+| `v1.49.826` | T1.3 Ship 3: ActivationSelector onPredictions Wire (Second Production Caller) | 2026-05-27 | ✓ | — | [read](v1.49.826/00-summary.md) |
+| `v1.49.825` | Batch Chip: `git/core` Family ProcessContext (repo-manager + state-machine + sync-manager) | 2026-05-27 | ✓ | — | [read](v1.49.825/00-summary.md) |
+| `v1.49.824` | Codification Ship: Promote #10433 + #10434 | 2026-05-27 | ✓ | — | [read](v1.49.824/00-summary.md) |
+| `v1.49.823` | T1.3 Ship 2: ObservationBridge Wire (Cross-Rootdir Interface Pattern) | 2026-05-27 | ✓ | — | [read](v1.49.823/00-summary.md) |
+| `v1.49.822` | T2.2 Part 2: Discipline-coverage Gate Default-BLOCK Flip | 2026-05-27 | ✓ | — | [read](v1.49.822/00-summary.md) |
+| `v1.49.821` | T2.2 Part 1: Discipline-coverage Gate Ceiling Infrastructure | 2026-05-27 | ✓ | — | [read](v1.49.821/00-summary.md) |
+| `v1.49.820` | First Chip: `git/core/branch-manager` ProcessContext Wiring | 2026-05-27 | ✓ | — | [read](v1.49.820/00-summary.md) |
+| `v1.49.819` | Batch Chip: aminet Family ProcessContext Wiring | 2026-05-27 | ✓ | — | [read](v1.49.819/00-summary.md) |
+| `v1.49.818` | T2.3 Wedge Close: FlagLookup Discriminated Union Extract | 2026-05-27 | ✓ | — | [read](v1.49.818/00-summary.md) |
+| `v1.49.817` | T2.3 Wedge Close: c12-load-kb-context Flake (retry-bump + structural-cause documentation) | 2026-05-27 | ✓ | — | [read](v1.49.817/00-summary.md) |
+| `v1.49.816` | Counter-cadence Chip: `state-md-set-shipped` Colon-safe milestone_name + `--check` Time-determinism | 2026-05-27 | ✓ | — | [read](v1.49.816/00-summary.md) |
+| `v1.49.815` | T2.3 Wedge Close: PMTiles Refcounted Archive Close (HIGH-01) | 2026-05-27 | ✓ | — | [read](v1.49.815/00-summary.md) |
+| `v1.49.814` | Codification Ship: Promote #10431 + #10432 | 2026-05-27 | ✓ | — | [read](v1.49.814/00-summary.md) |
+| `v1.49.813` | Post-T14-reset STATE.md Drift Closure: Atomic Writer Tool | 2026-05-27 | ✓ | — | [read](v1.49.813/00-summary.md) |
+| `v1.49.812` | First ProcessContext Chip: intelligence/analyzer/git.ts | 2026-05-27 | ✓ | — | [read](v1.49.812/00-summary.md) |
+| `v1.49.811` | Batch Chip: cargo + conda + pypi + rubygems Registry Adapters | 2026-05-27 | ✓ | — | [read](v1.49.811/00-summary.md) |
+| `v1.49.810` | T1.3 Option A: gnn-predictor Wired Into Copper Activation | 2026-05-27 | ✓ | — | [read](v1.49.810/00-summary.md) |
+| `v1.49.809` | KNOWN_UNWIRED Chip 1: NpmRegistryAdapter | 2026-05-27 | ✓ | — | [read](v1.49.809/00-summary.md) |
+| `v1.49.808` | S2 Adoption Telemetry Trend Report | 2026-05-27 | ✓ | — | [read](v1.49.808/00-summary.md) |
+| `v1.49.807` | S5 Normalizer Gate Idempotency + PROJECT.md Drift Cap | 2026-05-27 | ✓ | — | [read](v1.49.807/00-summary.md) |
+| `v1.49.806` | S6 Chokepoint Extension: EgressContext + ProcessContext | 2026-05-27 | ✓ | 5 | [read](v1.49.806/00-summary.md) |
+| `v1.49.805` | Codification Ship: S3 + S4 + S7 Strengthening Levers | 2026-05-27 | ✓ | 4 | [read](v1.49.805/00-summary.md) |
+| `v1.49.804` | Bounded-Learning Log Query Subcommand | 2026-05-27 | ✓ | 5 | [read](v1.49.804/00-summary.md) |
+| `v1.49.803` | Real Token-Budget Observation Source | 2026-05-27 | ✓ | 4 | [read](v1.49.803/00-summary.md) |
+| `v1.49.802` | Codification Ship: Promote #10425 + #10426 + #10427 to ESTABLISHED | 2026-05-27 | ✓ | 3 | [read](v1.49.802/00-summary.md) |
+| `v1.49.801` | T1.1 Ship 7: `/sc:status` Bounded-Learning Integration (Final Chained-Session Ship) | 2026-05-27 | ✓ | 3 | [read](v1.49.801/00-summary.md) |
+| `v1.49.800` | T1.1 Ship 6: Bounded-Learning `--watch` Mode | 2026-05-27 | ✓ | 4 | [read](v1.49.800/00-summary.md) |
+| `v1.49.799` | T1.1 Ship 5: Bounded-Learning Audit Log | 2026-05-27 | ✓ | 5 | [read](v1.49.799/00-summary.md) |
+| `v1.49.798` | T1.1 Ship 4: Wire `token_budget.warn_at_percent` + Per-Class Observation-Source Registry | 2026-05-27 | ✓ | 4 | [read](v1.49.798/00-summary.md) |
+| `v1.49.797` | T1.1 Ship 3: Wire `suggestions.auto_dismiss_after_days` | 2026-05-27 | ✓ | 4 | [read](v1.49.797/00-summary.md) |
+| `v1.49.796` | T1.1 Ship 2: Wire `suggestions.cooldown_days` | 2026-05-27 | ✓ | 4 | [read](v1.49.796/00-summary.md) |
+| `v1.49.795` | T1.1 Ship 1: Bounded-Learning Calibration Loop | 2026-05-26 | ✓ | 5 | [read](v1.49.795/00-summary.md) |
+| `v1.49.794` | Deterministic Gate for #10424: Adoption-Refresh Overwrite Guard | 2026-05-26 | ✓ | 4 | [read](v1.49.794/00-summary.md) |
+| `v1.49.793` | Shelfware Verdicts 5 + 6: Math Foundations Refresh Cluster CLOSED | 2026-05-26 | ✓ | 5 | [read](v1.49.793/00-summary.md) |
+| `v1.49.792` | Shelfware Verdict 4: WIRE `koopman-memory` via `skill-creator koopman-check` | 2026-05-26 | ✓ | 3 | [read](v1.49.792/00-summary.md) |
+| `v1.49.791` | Shelfware Verdict 2 + 3: ALLOWLIST `tonnetz` + `wasserstein-hebbian` | 2026-05-26 | ✓ | 3 | [read](v1.49.791/00-summary.md) |
+| `v1.49.790` | Codification: 7 Lessons from v785-v789 → 2 New Operative Disciplines | 2026-05-26 | ✓ | 3 | [read](v1.49.790/00-summary.md) |
+| `v1.49.789` | Shelfware Verdict 1: WIRE `semantic-channel` via `dacp drift-check` | 2026-05-26 | ✓ | 5 | [read](v1.49.789/00-summary.md) |
 | `v1.49.788` | IBEX NASA Interstellar Boundary Explorer SMEX-Class Earth-Orbit Energetic-Neutral-Atom All-Sky Imaging Mission | 2026-05-26 | ✓ | 12 | [read](v1.49.788/00-summary.md) |
 | `v1.49.787` | Adoption Telemetry: Dashboard + Automation + Allowlist | 2026-05-26 | ✓ | — | [read](v1.49.787/00-summary.md) |
 | `v1.49.786` | Adoption Telemetry: Module-Usage Scanner | 2026-05-26 | ✓ | — | [read](v1.49.786/00-summary.md) |

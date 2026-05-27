@@ -840,10 +840,10 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.787](v1.49.787/00-summary.md)** — Adoption Telemetry: Dashboard + Automation + Allowlist · 2026-05-26
 - **[v1.49.788](v1.49.788/00-summary.md)** — IBEX NASA Interstellar Boundary Explorer SMEX-Class Earth-Orbit Energetic-Neutral-Atom All-Sky Imaging Mission · 2026-05-26
 - **[v1.49.789](v1.49.789/00-summary.md)** — Shelfware Verdict 1: WIRE `semantic-channel` via `dacp drift-check` · 2026-05-26
-- **[v1.49.790](v1.49.790/00-summary.md)** — Codification Ship: 7 candidate lessons promoted to ESTABLISHED across 2 new operative-discipline domains (Static-analysis tool authoring, Shelfware verdict patterns) · 2026-05-26
-- **[v1.49.791](v1.49.791/00-summary.md)** — Shelfware Verdict 2 + 3: ALLOWLIST `tonnetz` + `wasserstein-hebbian` (substrate-level reference implementations preserved as substrate) · 2026-05-26
-- **[v1.49.792](v1.49.792/00-summary.md)** — Shelfware Verdict 4: WIRE `koopman-memory` via `skill-creator koopman-check` CLI · 2026-05-26
-- **[v1.49.793](v1.49.793/00-summary.md)** — Shelfware Verdicts 5 + 6: Math Foundations Refresh cluster CLOSED — WIRE `coherent-functors` + `hourglass-persistence` via parallel CLIs · 2026-05-26
+- **[v1.49.790](v1.49.790/00-summary.md)** — Codification: 7 Lessons from v785-v789 → 2 New Operative Disciplines · 2026-05-26
+- **[v1.49.791](v1.49.791/00-summary.md)** — Shelfware Verdict 2 + 3: ALLOWLIST `tonnetz` + `wasserstein-hebbian` · 2026-05-26
+- **[v1.49.792](v1.49.792/00-summary.md)** — Shelfware Verdict 4: WIRE `koopman-memory` via `skill-creator koopman-check` · 2026-05-26
+- **[v1.49.793](v1.49.793/00-summary.md)** — Shelfware Verdicts 5 + 6: Math Foundations Refresh Cluster CLOSED · 2026-05-26
 - **[v1.49.794](v1.49.794/00-summary.md)** — Deterministic Gate for #10424: Adoption-Refresh Overwrite Guard · 2026-05-26
 - **[v1.49.795](v1.49.795/00-summary.md)** — T1.1 Ship 1: Bounded-Learning Calibration Loop · 2026-05-26
 - **[v1.49.796](v1.49.796/00-summary.md)** — T1.1 Ship 2: Wire `suggestions.cooldown_days` · 2026-05-27
@@ -851,11 +851,11 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.798](v1.49.798/00-summary.md)** — T1.1 Ship 4: Wire `token_budget.warn_at_percent` + Per-Class Observation-Source Registry · 2026-05-27
 - **[v1.49.799](v1.49.799/00-summary.md)** — T1.1 Ship 5: Bounded-Learning Audit Log · 2026-05-27
 - **[v1.49.800](v1.49.800/00-summary.md)** — T1.1 Ship 6: Bounded-Learning `--watch` Mode · 2026-05-27
-- **[v1.49.801](v1.49.801/00-summary.md)** — T1.1 Ship 7: `/sc:status` Bounded-Learning Integration (T1.1 ARC CLOSED) · 2026-05-27
-- **[v1.49.802](v1.49.802/00-summary.md)** — Codification Ship: Promote #10425 + #10426 + #10427 · 2026-05-27
+- **[v1.49.801](v1.49.801/00-summary.md)** — T1.1 Ship 7: `/sc:status` Bounded-Learning Integration (Final Chained-Session Ship) · 2026-05-27
+- **[v1.49.802](v1.49.802/00-summary.md)** — Codification Ship: Promote #10425 + #10426 + #10427 to ESTABLISHED · 2026-05-27
 - **[v1.49.803](v1.49.803/00-summary.md)** — Real Token-Budget Observation Source · 2026-05-27
 - **[v1.49.804](v1.49.804/00-summary.md)** — Bounded-Learning Log Query Subcommand · 2026-05-27
-- **[v1.49.805](v1.49.805/00-summary.md)** — Codification Ship: Promote #10428 + #10429 + #10430 (S3 + S4 + S7 Levers) · 2026-05-27
+- **[v1.49.805](v1.49.805/00-summary.md)** — Codification Ship: S3 + S4 + S7 Strengthening Levers · 2026-05-27
 - **[v1.49.806](v1.49.806/00-summary.md)** — S6 Chokepoint Extension: EgressContext + ProcessContext · 2026-05-27
 - **[v1.49.807](v1.49.807/00-summary.md)** — S5 Normalizer Gate Idempotency + PROJECT.md Drift Cap · 2026-05-27
 - **[v1.49.808](v1.49.808/00-summary.md)** — S2 Adoption Telemetry Trend Report · 2026-05-27
@@ -866,15 +866,15 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.813](v1.49.813/00-summary.md)** — Post-T14-reset STATE.md Drift Closure: Atomic Writer Tool · 2026-05-27
 - **[v1.49.814](v1.49.814/00-summary.md)** — Codification Ship: Promote #10431 + #10432 · 2026-05-27
 - **[v1.49.815](v1.49.815/00-summary.md)** — T2.3 Wedge Close: PMTiles Refcounted Archive Close (HIGH-01) · 2026-05-27
-- **[v1.49.816](v1.49.816/00-summary.md)** — Counter-cadence Chip: state-md-set-shipped Colon-safe milestone_name + --check Time-determinism · 2026-05-27
+- **[v1.49.816](v1.49.816/00-summary.md)** — Counter-cadence Chip: `state-md-set-shipped` Colon-safe milestone_name + `--check` Time-determinism · 2026-05-27
 - **[v1.49.817](v1.49.817/00-summary.md)** — T2.3 Wedge Close: c12-load-kb-context Flake (retry-bump + structural-cause documentation) · 2026-05-27
 - **[v1.49.818](v1.49.818/00-summary.md)** — T2.3 Wedge Close: FlagLookup Discriminated Union Extract · 2026-05-27
 - **[v1.49.819](v1.49.819/00-summary.md)** — Batch Chip: aminet Family ProcessContext Wiring · 2026-05-27
-- **[v1.49.820](v1.49.820/00-summary.md)** — First Chip: git/core/branch-manager ProcessContext Wiring · 2026-05-27
+- **[v1.49.820](v1.49.820/00-summary.md)** — First Chip: `git/core/branch-manager` ProcessContext Wiring · 2026-05-27
 - **[v1.49.821](v1.49.821/00-summary.md)** — T2.2 Part 1: Discipline-coverage Gate Ceiling Infrastructure · 2026-05-27
 - **[v1.49.822](v1.49.822/00-summary.md)** — T2.2 Part 2: Discipline-coverage Gate Default-BLOCK Flip · 2026-05-27
 - **[v1.49.823](v1.49.823/00-summary.md)** — T1.3 Ship 2: ObservationBridge Wire (Cross-Rootdir Interface Pattern) · 2026-05-27
 - **[v1.49.824](v1.49.824/00-summary.md)** — Codification Ship: Promote #10433 + #10434 · 2026-05-27
-- **[v1.49.825](v1.49.825/00-summary.md)** — Batch Chip: `git/core` Family ProcessContext · 2026-05-27
+- **[v1.49.825](v1.49.825/00-summary.md)** — Batch Chip: `git/core` Family ProcessContext (repo-manager + state-machine + sync-manager) · 2026-05-27
 - **[v1.49.826](v1.49.826/00-summary.md)** — T1.3 Ship 3: ActivationSelector onPredictions Wire (Second Production Caller) · 2026-05-27
 - **[v1.49.827](v1.49.827/00-summary.md)** — Batch Chip: dogfood Family ProcessContext (extractor + pydmd install health-check + venv-manager) · 2026-05-27

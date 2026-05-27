@@ -1,15 +1,16 @@
 # Release History
 
-869 milestones shipped across the v1.0 → v1.49.826 arc. The table below lists every shipped release, newest first.
+870 milestones shipped across the v1.0 → v1.49.827 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 869 releases · 868 with retrospectives · 728 with extracted lessons · quality A:662 B:97 C:63 D:11 F:36 (avg 91) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 870 releases · 869 with retrospectives · 728 with extracted lessons · quality A:662 B:97 C:63 D:11 F:37 (avg 91) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.827](release-notes/v1.49.827) | Batch Chip: dogfood Family ProcessContext (extractor + pydmd install health-check + venv-manager) | 2026-05-27 | 2 | — | — | [s](release-notes/v1.49.827/chapter/00-summary.md) [r](release-notes/v1.49.827/chapter/03-retrospective.md) [l](release-notes/v1.49.827/chapter/04-lessons.md) [c](release-notes/v1.49.827/chapter/99-context.md) | — | F 28 |  |
 | [v1.49.826](release-notes/v1.49.826) | T1.3 Ship 3: ActivationSelector onPredictions Wire (Second Production Caller) | 2026-05-27 | 2 | — | — | [s](release-notes/v1.49.826/chapter/00-summary.md) [r](release-notes/v1.49.826/chapter/03-retrospective.md) [l](release-notes/v1.49.826/chapter/04-lessons.md) [c](release-notes/v1.49.826/chapter/99-context.md) | — | F 40 |  |
 | [v1.49.825](release-notes/v1.49.825) | Batch Chip: `git/core` Family ProcessContext (repo-manager + state-machine + sync-manager) | 2026-05-27 | 2 | — | — | [s](release-notes/v1.49.825/chapter/00-summary.md) [r](release-notes/v1.49.825/chapter/03-retrospective.md) [l](release-notes/v1.49.825/chapter/04-lessons.md) [c](release-notes/v1.49.825/chapter/99-context.md) | — | F 25 |  |
 | [v1.49.824](release-notes/v1.49.824) | Codification Ship: Promote #10433 + #10434 | 2026-05-27 | 2 | — | — | [s](release-notes/v1.49.824/chapter/00-summary.md) [r](release-notes/v1.49.824/chapter/03-retrospective.md) [l](release-notes/v1.49.824/chapter/04-lessons.md) [c](release-notes/v1.49.824/chapter/99-context.md) | — | F 30 |  |
