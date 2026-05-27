@@ -40,6 +40,7 @@ Commands:
   koopman-check, kc Advisory koopman-memory invariant check (identity retention, zero-input retention, Lipschitz bound)
   coherent-check, cc Advisory coherent-functors coherence check (naturality, identity, composition, direct-sum)
   hourglass-check, hc Advisory hourglass-persistence audit (holes, contraction-index, waists)
+  bounded-learning, bl Bounded-learning calibration loop (skill-creator threshold recommendations)
   reload-embeddings, re  Reload embedding model (retry after fallback)
   calibrate, cal    Optimize activation threshold from calibration data
   benchmark, bench  Measure simulator accuracy vs real activation

@@ -11,6 +11,7 @@ import { dacpCommand } from './commands/dacp.js';
 import { koopmanCheckCommand } from './commands/koopman-check.js';
 import { coherentCheckCommand } from './commands/coherent-check.js';
 import { hourglassCheckCommand } from './commands/hourglass-check.js';
+import { boundedLearningCommand } from './commands/bounded-learning.js';
 import { rollbackCommand } from './commands/rollback.js';
 import { skillCommand } from './commands/skill.js';
 import { printHelp } from './help.js';
@@ -147,6 +148,10 @@ export const REGISTRY: readonly CommandEntry[] = [
   } },
   { aliases: ['hourglass-check', 'hc'], handler: async (ctx) => {
     const exitCode = await hourglassCheckCommand(ctx.args);
+    process.exitCode = exitCode;
+  } },
+  { aliases: ['bounded-learning', 'bl'], handler: async (ctx) => {
+    const exitCode = await boundedLearningCommand(ctx.args);
     process.exitCode = exitCode;
   } },
   { aliases: ['rollback', 'rb'], handler: (ctx) => rollbackCommand(ctx.args) },
