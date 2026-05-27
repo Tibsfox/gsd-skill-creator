@@ -293,14 +293,14 @@ describe('boundedLearningCommand — --summary mode (v1.49.801)', () => {
     });
   });
 
-  it('emits JSON summary of all 4 wired thresholds with currentValue + observationSource', async () => {
+  it('emits JSON summary of all 5 wired thresholds with currentValue + observationSource', async () => {
     const code = await boundedLearningCommand(
       ['--config', configPath, '--audit-log', auditLogPath, '--summary'],
     );
     expect(code).toBe(0);
     const out = JSON.parse(collectLog());
-    expect(out.thresholds).toHaveLength(4);
-    expect(out.wiredThresholdCount).toBe(4);
+    expect(out.thresholds).toHaveLength(5);
+    expect(out.wiredThresholdCount).toBe(5);
     const minOcc = out.thresholds.find((t: { threshold: string }) => t.threshold === 'suggestions.min_occurrences');
     expect(minOcc.currentValue).toBe(3);
     expect(minOcc.observationSource.sourceId).toBe('suggestions.json');
@@ -310,6 +310,10 @@ describe('boundedLearningCommand — --summary mode (v1.49.801)', () => {
     // v1.49.803: token_budget.warn_at_percent observation source now wired.
     expect(tokenBudget.observationSource.wired).toBe(true);
     expect(tokenBudget.observationSource.sourceId).toBe('token-budget-events');
+    // v1.49.837: predictive.low_confidence_threshold observation source now wired.
+    const predictive = out.thresholds.find((t: { threshold: string }) => t.threshold === 'predictive.low_confidence_threshold');
+    expect(predictive.observationSource.wired).toBe(true);
+    expect(predictive.observationSource.sourceId).toBe('predictive-low-confidence-events');
   });
 
   it('reports auditLog totalEntries=0 + lastEntryAt=null when log is empty', async () => {

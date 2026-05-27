@@ -38,9 +38,14 @@ import { readFile } from 'node:fs/promises';
 import { entriesToObservations } from './suggestions-mapper.js';
 import {
   DEFAULT_TOKEN_BUDGET_EVENTS_PATH,
-  eventsToObservations,
+  eventsToObservations as tokenBudgetEventsToObservations,
   readTokenBudgetEvents,
 } from './token-budget-events.js';
+import {
+  DEFAULT_PREDICTIVE_LOW_CONFIDENCE_EVENTS_PATH,
+  eventsToObservations as predictiveEventsToObservations,
+  readPredictiveLowConfidenceEvents,
+} from './predictive-low-confidence-events.js';
 import type { CalibrationObservation, CalibratableThreshold } from './types.js';
 import type { SuggestionEntry } from './suggestions-mapper.js';
 
@@ -53,6 +58,11 @@ export interface ObservationLoaderOptions {
   suggestionsPath?: string;
   /** Path to token-budget-events.jsonl (consumed by token_budget.* threshold class; v803). */
   tokenBudgetEventsPath?: string;
+  /**
+   * Path to predictive-low-confidence-events.jsonl (consumed by
+   * predictive.* threshold class; v837).
+   */
+  predictiveLowConfidenceEventsPath?: string;
 }
 
 /**
@@ -106,9 +116,9 @@ export function observationSourceFor(threshold: CalibratableThreshold): Observat
       sourceId: 'predictive-low-confidence-events',
       description:
         'Operator response to predictive-skill-loader low-confidence ' +
-        'fallback events (NOT YET CAPTURED — awaiting production wire ' +
-        'of fallbackProvider in copper/orchestration call paths)',
-      wired: false,
+        'fallback events (v1.49.837 wire — append-only JSONL at ' +
+        '.planning/patterns/predictive-low-confidence-events.jsonl)',
+      wired: true,
     };
   }
   // Defensive fallback for future threshold classes.
@@ -138,13 +148,15 @@ async function loadSuggestionsFromFile(path: string): Promise<SuggestionEntry[]>
  * Dispatch to the per-class loader and return the resulting observations.
  *
  * Wired classes:
- *   - `suggestions.*`              — reads `suggestions.json`.
+ *   - `suggestions.*`                — reads `suggestions.json`.
  *   - `token_budget.warn_at_percent` — reads `token-budget-events.jsonl` (v803).
+ *   - `predictive.low_confidence_threshold` — reads
+ *     `predictive-low-confidence-events.jsonl` (v837).
  *
- * Unwired classes (`token_budget.max_percent`, `observation.*`,
- * `predictive.low_confidence_threshold`) return an empty array — the
- * calibration loop then returns `direction: 'hold'` with `observations: 0`,
- * the honest outcome for "wire exists, source not yet captured."
+ * Unwired classes (`token_budget.max_percent`, `observation.*`) return an
+ * empty array — the calibration loop then returns `direction: 'hold'` with
+ * `observations: 0`, the honest outcome for "wire exists, source not yet
+ * captured."
  */
 export async function loadObservationsForThreshold(
   threshold: CalibratableThreshold,
@@ -158,12 +170,17 @@ export async function loadObservationsForThreshold(
   if (threshold === 'token_budget.warn_at_percent') {
     const path = options.tokenBudgetEventsPath ?? DEFAULT_TOKEN_BUDGET_EVENTS_PATH;
     const events = await readTokenBudgetEvents(path);
-    return eventsToObservations(events);
+    return tokenBudgetEventsToObservations(events);
+  }
+  if (threshold === 'predictive.low_confidence_threshold') {
+    const path =
+      options.predictiveLowConfidenceEventsPath
+      ?? DEFAULT_PREDICTIVE_LOW_CONFIDENCE_EVENTS_PATH;
+    const events = await readPredictiveLowConfidenceEvents(path);
+    return predictiveEventsToObservations(events);
   }
   // Unwired classes return empty; honest "no data captured" baseline.
   // - 'token_budget.max_percent'
   // - 'observation.retention_days'
-  // - 'predictive.low_confidence_threshold' (v835 scaffold; awaiting
-  //   production fallbackProvider wire + activation telemetry)
   return [];
 }

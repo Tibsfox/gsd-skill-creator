@@ -46,11 +46,11 @@ describe('observationSourceFor — per-class registry (v1.49.798)', () => {
     expect(info.wired).toBe(false);
   });
 
-  it('classifies predictive.low_confidence_threshold as unwired predictive-low-confidence-events source (v1.49.835 scaffold)', () => {
+  it('classifies predictive.low_confidence_threshold as WIRED predictive-low-confidence-events source (v1.49.837 flip)', () => {
     const info = observationSourceFor('predictive.low_confidence_threshold');
     expect(info.sourceId).toBe('predictive-low-confidence-events');
-    expect(info.wired).toBe(false);
-    expect(info.description).toMatch(/fallbackProvider/);
+    expect(info.wired).toBe(true);
+    expect(info.description).toMatch(/v1\.49\.837 wire/);
   });
 });
 
@@ -139,9 +139,29 @@ describe('loadObservationsForThreshold — per-class dispatch (v1.49.798)', () =
     expect(obs).toEqual([]);
   });
 
-  it('returns empty array for predictive.low_confidence_threshold (v1.49.835 scaffold; observation source not yet wired)', async () => {
+  it('reads predictive-low-confidence events JSONL when present (v1.49.837 wire)', async () => {
+    const eventsPath = join(workDir, 'predictive-low-confidence-events.jsonl');
+    writeFileSync(
+      eventsPath,
+      [
+        JSON.stringify({ timestamp: '2026-05-27T00:00:00.000Z', kind: 'useful' }),
+        JSON.stringify({ timestamp: '2026-05-27T00:01:00.000Z', kind: 'not_useful' }),
+        JSON.stringify({ timestamp: '2026-05-27T00:02:00.000Z', kind: 'useful' }),
+      ].join('\n') + '\n',
+      'utf8',
+    );
     const obs = await loadObservationsForThreshold('predictive.low_confidence_threshold', {
-      suggestionsPath,
+      predictiveLowConfidenceEventsPath: eventsPath,
+    });
+    expect(obs).toHaveLength(3);
+    // useful → -1 (favors increase), not_useful → +1 (favors decrease).
+    // Polarity inverted relative to token-budget by design.
+    expect(obs.map((o) => o.value)).toEqual([-1, 1, -1]);
+  });
+
+  it('returns empty array for predictive.low_confidence_threshold when JSONL is missing (honest no-data baseline)', async () => {
+    const obs = await loadObservationsForThreshold('predictive.low_confidence_threshold', {
+      predictiveLowConfidenceEventsPath: join(workDir, 'never-written.jsonl'),
     });
     expect(obs).toEqual([]);
   });

@@ -82,6 +82,12 @@ import {
   type TokenBudgetEvent,
   type TokenBudgetEventKind,
 } from '../../bounded-learning/index.js';
+import {
+  DEFAULT_PREDICTIVE_LOW_CONFIDENCE_EVENTS_PATH,
+  appendPredictiveLowConfidenceEvent,
+  type PredictiveLowConfidenceEvent,
+  type PredictiveLowConfidenceEventKind,
+} from '../../bounded-learning/predictive-low-confidence-events.js';
 import { getFlagValue } from '../lib/flag-lookup.js';
 
 const DEFAULT_THRESHOLD: CalibratableThreshold = 'suggestions.min_occurrences';
@@ -90,6 +96,7 @@ const SUPPORTED_THRESHOLDS: CalibratableThreshold[] = [
   'suggestions.cooldown_days',
   'suggestions.auto_dismiss_after_days',
   'token_budget.warn_at_percent',
+  'predictive.low_confidence_threshold',
 ];
 
 const DEFAULT_SUGGESTIONS_PATH = join(process.cwd(), '.planning', 'patterns', 'suggestions.json');
@@ -126,6 +133,9 @@ Options:
   --suggestions <path> Path to suggestions.json (default .planning/patterns/suggestions.json)
   --token-budget-events <path>
                        Path to token-budget-events.jsonl (default .planning/patterns/token-budget-events.jsonl)
+  --predictive-low-confidence-events <path>
+                       Path to predictive-low-confidence-events.jsonl
+                       (default .planning/patterns/predictive-low-confidence-events.jsonl; v1.49.837)
   --config <path>      Path to skill-creator.json (default .planning/skill-creator.json)
   --apply              Apply the recommendation to skill-creator.json (default: dry-run)
   --audit-log <path>   Override audit-log JSONL path (default .planning/patterns/bounded-learning-log.jsonl)
@@ -133,12 +143,18 @@ Options:
   --watch              Re-run loop on suggestions.json or skill-creator.json changes (cross-session calibration)
   --watch-debounce <ms> Watch-mode debounce window (default 200ms; only with --watch)
   --summary            Emit JSON summary of all wired thresholds + audit-log state (v1.49.801)
-  --record-event       Record a token-budget event (v1.49.803). Requires --kind.
-  --kind <responsive|ignored>
-                       Operator outcome after a warn event (with --record-event)
+  --record-event       Record an operator-outcome event (v1.49.803 / v1.49.837).
+                       Default branch: token-budget. --kind responsive|ignored.
+                       With --threshold predictive.low_confidence_threshold:
+                       predictive branch. --kind useful|not_useful (v837).
+  --kind <responsive|ignored | useful|not_useful>
+                       Operator outcome after a warn / fallback event (with --record-event)
                        or events-log filter (with --query --log events).
-  --usage-percent <N>  usagePercent reading at warn time (optional, with --record-event).
-  --warn-at-percent <N>  warn_at_percent threshold at warn time (optional, with --record-event).
+  --usage-percent <N>  usagePercent reading at warn time (with --record-event, token-budget branch).
+  --warn-at-percent <N>  warn_at_percent threshold at warn time (with --record-event, token-budget branch).
+  --current-skill <S>  skill that triggered the fallback (with --record-event, predictive branch; v837).
+  --max-score <N>      max prediction score at fallback time (with --record-event, predictive branch; v837).
+  --threshold-value <N>  lowConfidenceThreshold value in effect (with --record-event, predictive branch; v837).
   --reason <string>    Free-form operator note (optional, with --record-event).
   --query              Query an append-only JSONL log (v1.49.804).
   --log <audit|events> With --query: pick log (default audit).
@@ -558,9 +574,17 @@ async function runSummary(args: string[]): Promise<number> {
 }
 
 /**
- * --record-event mode (v1.49.803): append one operator-outcome event to the
- * token-budget-events JSONL log. Invoked by /sc:status and /sc:start skill
- * prompts when they emit (or follow up on) a token-budget warn line.
+ * --record-event mode: append one operator-outcome event to a JSONL log.
+ *
+ * Default behavior (v1.49.803, no --threshold or --threshold token_budget.*):
+ *   Records to `token-budget-events.jsonl`. --kind responsive|ignored.
+ *   Invoked by /sc:status and /sc:start when they emit (or follow up on) a
+ *   token-budget warn line.
+ *
+ * v1.49.837 extension (--threshold predictive.low_confidence_threshold):
+ *   Records to `predictive-low-confidence-events.jsonl`. --kind useful|not_useful.
+ *   May be invoked by substrate consumers' fallback dispatch (auto-emit) or
+ *   manually by the operator after reviewing a fallback's suggestions.
  *
  * Best-effort silent write per Lesson #10427 (failure-mode contracts,
  * ESTABLISHED v802). The CLI exit code reflects argument-validation
@@ -570,6 +594,17 @@ async function runRecordEvent(
   args: string[],
   flags: { json: boolean; quiet: boolean },
 ): Promise<number> {
+  // Dispatch by threshold (default token-budget for backward-compat).
+  const thresholdLookup = getFlagValue(args, '--threshold');
+  const thresholdValue = thresholdLookup.present && thresholdLookup.value !== null
+    ? thresholdLookup.value
+    : 'token_budget.warn_at_percent';
+
+  if (thresholdValue === 'predictive.low_confidence_threshold') {
+    return runRecordPredictiveEvent(args, flags);
+  }
+
+  // Default branch: token-budget event recording (v803 behavior unchanged).
   const kindLookup = getFlagValue(args, '--kind');
   if (!kindLookup.present || kindLookup.value === null) {
     if (flags.json) {
@@ -623,6 +658,81 @@ async function runRecordEvent(
     console.log(JSON.stringify({ recorded: true, event }));
   } else if (!flags.quiet) {
     p.log.success(`Recorded token-budget ${kind} event at ${event.timestamp}.`);
+  }
+  return 0;
+}
+
+/**
+ * v1.49.837 — predictive-low-confidence event recording branch of
+ * --record-event. Polarity-inverted from token-budget: --kind useful|not_useful.
+ *
+ * Polarity: useful → -1 (favor raising threshold; fallback fires more often);
+ * not_useful → +1 (favor lowering threshold; fallback fires less often).
+ *
+ * Best-effort silent write per Lesson #10427.
+ */
+async function runRecordPredictiveEvent(
+  args: string[],
+  flags: { json: boolean; quiet: boolean },
+): Promise<number> {
+  const kindLookup = getFlagValue(args, '--kind');
+  const supported = ['useful', 'not_useful'];
+  if (!kindLookup.present || kindLookup.value === null) {
+    if (flags.json) {
+      console.log(JSON.stringify({ error: 'missing-flag', flag: '--kind', supported }));
+    } else if (!flags.quiet) {
+      p.log.error(`--record-event (predictive) requires --kind <useful|not_useful>.`);
+    }
+    return 1;
+  }
+  if (kindLookup.value !== 'useful' && kindLookup.value !== 'not_useful') {
+    if (flags.json) {
+      console.log(JSON.stringify({ error: 'invalid-flag', flag: '--kind', value: kindLookup.value, supported }));
+    } else if (!flags.quiet) {
+      p.log.error(`--kind must be 'useful' or 'not_useful'; got '${kindLookup.value}'.`);
+    }
+    return 1;
+  }
+  const kind: PredictiveLowConfidenceEventKind = kindLookup.value;
+
+  const pathLookup = getFlagValue(args, '--predictive-low-confidence-events');
+  const path = pathLookup.present && pathLookup.value !== null
+    ? pathLookup.value
+    : DEFAULT_PREDICTIVE_LOW_CONFIDENCE_EVENTS_PATH;
+
+  const event: PredictiveLowConfidenceEvent = {
+    timestamp: new Date().toISOString(),
+    kind,
+  };
+  const currentSkillLookup = getFlagValue(args, '--current-skill');
+  if (currentSkillLookup.present && currentSkillLookup.value !== null) {
+    event.currentSkill = currentSkillLookup.value;
+  }
+  const maxScoreLookup = getFlagValue(args, '--max-score');
+  if (maxScoreLookup.present) {
+    const parsed = parsePositiveFloat(maxScoreLookup.value);
+    if (parsed !== null) event.maxScore = parsed;
+  }
+  const thresholdValueLookup = getFlagValue(args, '--threshold-value');
+  if (thresholdValueLookup.present) {
+    const parsed = parsePositiveFloat(thresholdValueLookup.value);
+    if (parsed !== null) event.thresholdValue = parsed;
+  }
+  const reasonLookup = getFlagValue(args, '--reason');
+  if (reasonLookup.present && reasonLookup.value !== null) {
+    event.reason = reasonLookup.value;
+  }
+
+  try {
+    await appendPredictiveLowConfidenceEvent(event, { path });
+  } catch {
+    // Best-effort silent per Lesson #10427.
+  }
+
+  if (flags.json) {
+    console.log(JSON.stringify({ recorded: true, event }));
+  } else if (!flags.quiet) {
+    p.log.success(`Recorded predictive-low-confidence ${kind} event at ${event.timestamp}.`);
   }
   return 0;
 }
