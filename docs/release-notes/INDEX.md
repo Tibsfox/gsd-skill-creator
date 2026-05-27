@@ -2,10 +2,11 @@
 
 _Generated 2026-05-27 from `release_history.*`. Source of truth: Postgres._
 
-**881 releases.** 880 with retrospective. 728 with extracted lessons.
+**882 releases.** 881 with retrospective. 728 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
+| `v1.49.839` | ProcessContext Singleton Chip: `intelligence/analyzer/findings/stalled.ts` | 2026-05-27 | ✓ | — | [read](v1.49.839/00-summary.md) |
 | `v1.49.838` | Audit Inverse-Check (Stale-Entry Detector) | 2026-05-27 | ✓ | — | [read](v1.49.838/00-summary.md) |
 | `v1.49.837` | `predictive.low_confidence_threshold` Observation Source Wired | 2026-05-27 | ✓ | — | [read](v1.49.837/00-summary.md) |
 | `v1.49.836` | `publish.mjs` Destination-Side Hand-Author Preservation | 2026-05-27 | ✓ | — | [read](v1.49.836/00-summary.md) |
@@ -814,8 +815,8 @@ _Generated 2026-05-27 from `release_history.*`. Source of truth: Postgres._
 | `v1.49.23` | Unison Language & Math Co-Processor Completion | 2026-03-08 | ✓ | 23 | [read](v1.49.23/00-summary.md) |
 | `v1.49.22` | PNW Research Series | 2026-03-07 | ✓ | 24 | [read](v1.49.22/00-summary.md) |
 | `v1.49.21` | Image to Mission Pipeline | 2026-03-07 | ✓ | 22 | [read](v1.49.21/00-summary.md) |
-| `v1.49.20.1` | Documentation Reflections | 2026-03-06 | — | — | [read](v1.49.20.1/00-summary.md) |
 | `v1.49.20` | Documentation Consolidation | 2026-03-06 | ✓ | 13 | [read](v1.49.20/00-summary.md) |
+| `v1.49.20.1` | Documentation Reflections | 2026-03-06 | — | — | [read](v1.49.20.1/00-summary.md) |
 | `v1.49.19` | Gastown Chipset Integration | 2026-03-06 | ✓ | 19 | [read](v1.49.19/00-summary.md) |
 | `v1.49.18` | Space Between Observatory | 2026-03-06 | ✓ | 17 | [read](v1.49.18/00-summary.md) |
 | `v1.49.17` | The Space Between | 2026-03-04 | ✓ | 19 | [read](v1.49.17/00-summary.md) |
