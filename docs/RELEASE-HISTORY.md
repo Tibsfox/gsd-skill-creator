@@ -1,15 +1,16 @@
 # Release History
 
-842 milestones shipped across the v1.0 → v1.49.799 arc. The table below lists every shipped release, newest first.
+843 milestones shipped across the v1.0 → v1.49.800 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 842 releases · 841 with retrospectives · 721 with extracted lessons · quality A:662 B:97 C:63 D:7 F:13 (avg 93) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 843 releases · 842 with retrospectives · 722 with extracted lessons · quality A:662 B:97 C:63 D:8 F:13 (avg 93) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.800](release-notes/v1.49.800) | T1.1 Ship 6: Bounded-Learning `--watch` Mode | 2026-05-27 | 2 | — | — | [s](release-notes/v1.49.800/chapter/00-summary.md) [r](release-notes/v1.49.800/chapter/03-retrospective.md) [l](release-notes/v1.49.800/chapter/04-lessons.md) [c](release-notes/v1.49.800/chapter/99-context.md) | 4 | D 62 |  |
 | [v1.49.799](release-notes/v1.49.799) | T1.1 Ship 5: Bounded-Learning Audit Log | 2026-05-27 | 2 | — | — | [s](release-notes/v1.49.799/chapter/00-summary.md) [r](release-notes/v1.49.799/chapter/03-retrospective.md) [l](release-notes/v1.49.799/chapter/04-lessons.md) [c](release-notes/v1.49.799/chapter/99-context.md) | 5 | D 65 |  |
 | [v1.49.798](release-notes/v1.49.798) | T1.1 Ship 4: Wire `token_budget.warn_at_percent` + Per-Class Observation-Source Registry | 2026-05-27 | 2 | — | — | [s](release-notes/v1.49.798/chapter/00-summary.md) [r](release-notes/v1.49.798/chapter/03-retrospective.md) [l](release-notes/v1.49.798/chapter/04-lessons.md) [c](release-notes/v1.49.798/chapter/99-context.md) | 4 | D 65 |  |
 | [v1.49.797](release-notes/v1.49.797) | T1.1 Ship 3: Wire `suggestions.auto_dismiss_after_days` | 2026-05-27 | 2 | — | — | [s](release-notes/v1.49.797/chapter/00-summary.md) [r](release-notes/v1.49.797/chapter/03-retrospective.md) [l](release-notes/v1.49.797/chapter/04-lessons.md) [c](release-notes/v1.49.797/chapter/99-context.md) | 4 | F 59 |  |
