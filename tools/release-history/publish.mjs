@@ -23,12 +23,15 @@
 //   node tools/release-history/publish.mjs --target tibsfox   # only tibsfox.com staging
 //   node tools/release-history/publish.mjs --version v1.49.39 # one release
 //   node tools/release-history/publish.mjs --since v1.49.500  # recent only
+//   node tools/release-history/publish.mjs --force-overwrite  # bypass destination preservation
 
 import { readFileSync, readdirSync, writeFileSync, mkdirSync, statSync, existsSync } from 'node:fs';
 import { join, dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 import { loadConfig, REPO_ROOT } from './config.mjs';
 import { openDb } from './db.mjs';
+import { openerMatches } from './opener-match.mjs';
 
 const ctx_cfg = loadConfig();
 const ROADMAP_DIR = ctx_cfg.roadmap_dir_abs;
@@ -61,6 +64,43 @@ function isAllowlisted(basename) {
   return false;
 }
 
+// v1.49.836 — destination-side hand-author preservation.
+// publish.mjs is a COPIER: source `.planning/roadmap/<v>/<file>` → destination
+// `docs/release-notes/<v>/chapter/<file>` (and tibsfox.com staging). Without
+// destination-side checks, a hand-authored chapter at the destination is
+// silently clobbered by the next publish run. This mirrors chapter.mjs's C04
+// idempotent-write preservation but checks the destination (not the source).
+//
+// Decision tree:
+//   1. forceOverwrite=true → write
+//   2. destination does not exist → write
+//   3. destination <200 bytes (stub) → write
+//   4. destination opener matches source opener (prior copy / DB-derivable) → write
+//   5. destination opener does not match source → PRESERVE (hand-authored)
+//
+// Conservative bias: when in doubt, PRESERVE. A false-preserve costs nothing
+// (next refresh+publish re-evaluates); a false-overwrite destroys hand-
+// authored content (v834/v835 incident).
+export function shouldPublishToDestination(sourceContent, destPath, forceOverwrite) {
+  if (forceOverwrite) return { write: true, reason: 'force-overwrite flag' };
+  if (!existsSync(destPath)) return { write: true, reason: 'destination did not exist' };
+
+  let existing;
+  try {
+    existing = readFileSync(destPath, 'utf8');
+  } catch (e) {
+    return { write: true, reason: `existing unreadable: ${e.message}` };
+  }
+
+  if (existing.length < 200) return { write: true, reason: 'destination <200 bytes (stub)' };
+
+  if (openerMatches(existing.slice(0, 200), sourceContent.slice(0, 200))) {
+    return { write: true, reason: 'opener matches source (prior copy or DB-derivable)' };
+  }
+
+  return { write: false, reason: 'destination opener non-derivable; preserved as hand-authored' };
+}
+
 function leakScan(content, path) {
   const violations = [];
   const lines = content.split(/\r?\n/);
@@ -88,6 +128,7 @@ async function ensurePublishTargetTable(client) {
 async function main() {
   const args = process.argv.slice(2);
   const execute = args.includes('--execute');
+  const forceOverwrite = args.includes('--force-overwrite');
   const onlyTarget = (() => {
     const i = args.indexOf('--target');
     return i >= 0 ? args[i + 1] : null;
@@ -139,7 +180,9 @@ async function main() {
     files_unchanged: 0,
     files_blocked: 0,
     files_skipped: 0,
+    files_preserved: 0,
     violations: [],
+    preserved: [],
   };
 
   for (const version of chapterDirs) {
@@ -186,6 +229,17 @@ async function main() {
           continue;
         }
 
+        // v1.49.836 — destination-side hand-author preservation gate.
+        // Prevents publish from clobbering hand-authored content at the
+        // destination (v834/v835 incident). Mirrors chapter.mjs C04 logic.
+        const decision = shouldPublishToDestination(content, targetPath, forceOverwrite);
+        if (!decision.write) {
+          stats.files_preserved++;
+          stats.preserved.push({ version, file, target: targetKey, targetPath, reason: decision.reason });
+          console.error(`[publish] PRESERVED ${version}/${file} → ${target.name}: ${decision.reason}`);
+          continue;
+        }
+
         if (execute) {
           mkdirSync(dirname(targetPath), { recursive: true });
           writeFileSync(targetPath, content);
@@ -219,6 +273,16 @@ async function main() {
     }
     for (const target of toplevelTargets) {
       const targetPath = resolve(REPO_ROOT, renderDest(target.dest, { version: '', file }));
+
+      // v1.49.836 — same destination-side preservation for toplevel files.
+      const decision = shouldPublishToDestination(content, targetPath, forceOverwrite);
+      if (!decision.write) {
+        stats.files_preserved++;
+        stats.preserved.push({ version: '_top_', file, target: target.name, targetPath, reason: decision.reason });
+        console.error(`[publish] PRESERVED _top_/${file} → ${target.name}: ${decision.reason}`);
+        continue;
+      }
+
       if (execute) {
         mkdirSync(dirname(targetPath), { recursive: true });
         writeFileSync(targetPath, content);
@@ -230,12 +294,13 @@ async function main() {
   await client.close();
   writeFileSync(REPORT_FILE, JSON.stringify(stats, null, 2));
 
-  console.error(`[publish] ${stats.mode} — ${stats.files_published} published, ${stats.files_unchanged} unchanged, ${stats.files_blocked} BLOCKED, ${stats.files_skipped} skipped`);
+  console.error(`[publish] ${stats.mode} — ${stats.files_published} published, ${stats.files_unchanged} unchanged, ${stats.files_preserved} preserved, ${stats.files_blocked} BLOCKED, ${stats.files_skipped} skipped`);
   console.log(JSON.stringify({
     mode: stats.mode,
     considered: stats.files_considered,
     published: stats.files_published,
     unchanged: stats.files_unchanged,
+    preserved: stats.files_preserved,
     blocked: stats.files_blocked,
     skipped: stats.files_skipped,
     violation_count: stats.violations.length,
@@ -245,4 +310,9 @@ async function main() {
   process.exit(stats.files_blocked > 0 ? 1 : 0);
 }
 
-main().catch(e => { console.error('[publish] fatal:', e.message); console.error(e.stack); process.exit(2); });
+// v1.49.836 — guard auto-run so `import { shouldPublishToDestination }` from
+// a test file does NOT trigger main() (and its PG connect attempt).
+const isEntryPoint = process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1];
+if (isEntryPoint) {
+  main().catch(e => { console.error('[publish] fatal:', e.message); console.error(e.stack); process.exit(2); });
+}
