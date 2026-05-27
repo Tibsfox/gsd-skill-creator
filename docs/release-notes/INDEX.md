@@ -2,10 +2,11 @@
 
 _Generated 2026-05-27 from `release_history.*`. Source of truth: Postgres._
 
-**877 releases.** 876 with retrospective. 728 with extracted lessons.
+**878 releases.** 877 with retrospective. 728 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
+| `v1.49.835` | `lowConfidenceThreshold` Calibration Scaffold (Full) | 2026-05-27 | ✓ | — | [read](v1.49.835/00-summary.md) |
 | `v1.49.834` | ProcessContext Stale-Entry Cleanup (`intelligence/analyzer/git.ts`) | 2026-05-27 | ✓ | — | [read](v1.49.834/00-summary.md) |
 | `v1.49.833` | Codify Cross-Rootdir Wire Pattern as Discipline (Lesson #10435) | 2026-05-27 | ✓ | — | [read](v1.49.833/00-summary.md) |
 | `v1.49.832` | T1.3 Option C Integration (Selector 2nd-Caller Wire + tests/integration/ Cross-Rootdir Verification) | 2026-05-27 | ✓ | — | [read](v1.49.832/00-summary.md) |
