@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.813`.
+The story begins at `v1.0` and continues to `v1.49.814`.
 
-**856 chapters.** 855 have retrospectives.
+**857 chapters.** 856 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -864,3 +864,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.811](v1.49.811/00-summary.md)** — Batch Chip: cargo + conda + pypi + rubygems Registry Adapters · 2026-05-27
 - **[v1.49.812](v1.49.812/00-summary.md)** — First ProcessContext Chip: intelligence/analyzer/git.ts · 2026-05-27
 - **[v1.49.813](v1.49.813/00-summary.md)** — Post-T14-reset STATE.md Drift Closure: Atomic Writer Tool · 2026-05-27
+- **[v1.49.814](v1.49.814/00-summary.md)** — Codification Ship: Promote #10431 + #10432 · 2026-05-27

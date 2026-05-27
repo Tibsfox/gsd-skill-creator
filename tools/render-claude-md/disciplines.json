@@ -212,5 +212,31 @@
     ],
     "key_lessons": ["#10414", "#10426", "#10427"],
     "codified_at_milestone": "v1.49.806 (new domain — codified from S6 lever in 2026-05-26 core-functions audit retrospective; extends #10414 LoaderContext pattern to network egress + child-process spawn surfaces)"
+  },
+  {
+    "domain": "Two-layer closure for procedure-rooted drift",
+    "trigger": "Designing a closure for a drift class that originates from a multi-step operator procedure; reviewing whether a one-layer fix (detector OR source-eliminator alone) is structurally complete; planning a counter-cadence ship targeting an operational-debt class",
+    "summary": "Procedure-rooted drift classes (where an operator-discretion step is forgettable/skippable) require BOTH a source eliminator (deterministic tool replacing the discretion step + post-condition check) AND a detector gate (structural check catching bypass). Either layer alone is incomplete: source-without-detector lets future operators work around the tool; detector-without-source leaves the human-error window open. Case study: STATE.md v805→v806 drift closed in v807 (detector: pre-tag-gate step 0.5) + v813 (source: atomic-writer `tools/state-md-set-shipped.mjs`). Apply at every counter-cadence ship targeting a known procedure-rooted drift.",
+    "canonical_docs": [
+      "docs/two-layer-closure-discipline.md",
+      "tools/state-md-set-shipped.mjs",
+      "tools/pre-tag-gate.sh",
+      "docs/T14-SHIP-SEQUENCE.md"
+    ],
+    "key_lessons": ["#10431"],
+    "codified_at_milestone": "v1.49.814 (new domain — codified from v807+v813 case study; extends #10414 gate-not-vigilance to procedure-rooted drift specifically)"
+  },
+  {
+    "domain": "KNOWN_UNWIRED allowlists as migration-debt ledger",
+    "trigger": "Introducing a new audit-test that enforces a cross-cutting invariant on src/ files with grandfathered call sites; reviewing how to grandfather existing call sites without permanently exempting them; planning chip-down ships against an existing allowlist; consolidating allowlist entries when N siblings are all wired",
+    "summary": "When a chokepoint or cross-cutting audit-test is introduced into a mature codebase, it MUST grandfather existing call sites via a named allowlist in the audit-test itself. The allowlist is debt, not exemption — should asymptote toward zero as chip ships consume it. Per-ship release notes record `<surface> KNOWN_UNWIRED N → N-K`. Established pattern at v806 (initial 16 egress + 38 process allowlist entries) + v809+v811+v812 (3 chip ships demonstrating the migration cadence). Forward observation: the v806 audit-test enforcement is unidirectional (catches missing wires but not stale allowlist entries); inverse check is a future enhancement.",
+    "canonical_docs": [
+      "docs/known-unwired-ledger-discipline.md",
+      "src/security/egress-context-audit.test.ts",
+      "src/security/process-context-audit.test.ts",
+      "src/security/loader-context-audit.test.ts"
+    ],
+    "key_lessons": ["#10432"],
+    "codified_at_milestone": "v1.49.814 (new domain — codified from v806 introduction + v809+v811+v812 chip-ship demonstration; companion to Security chokepoints discipline)"
   }
 ]
