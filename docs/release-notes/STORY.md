@@ -79,8 +79,8 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.17](v1.49.17/00-summary.md)** — The Space Between · 2026-03-04
 - **[v1.49.18](v1.49.18/00-summary.md)** — Space Between Observatory · 2026-03-06
 - **[v1.49.19](v1.49.19/00-summary.md)** — Gastown Chipset Integration · 2026-03-06
-- **[v1.49.20](v1.49.20/00-summary.md)** — Documentation Consolidation · 2026-03-06
 - **[v1.49.20.1](v1.49.20.1/00-summary.md)** — Documentation Reflections · 2026-03-06
+- **[v1.49.20](v1.49.20/00-summary.md)** — Documentation Consolidation · 2026-03-06
 - **[v1.49.21](v1.49.21/00-summary.md)** — Image to Mission Pipeline · 2026-03-07
 - **[v1.49.22](v1.49.22/00-summary.md)** — PNW Research Series · 2026-03-07
 - **[v1.49.23](v1.49.23/00-summary.md)** — Unison Language & Math Co-Processor Completion · 2026-03-08
@@ -880,8 +880,8 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.827](v1.49.827/00-summary.md)** — Batch Chip: dogfood Family ProcessContext (extractor + pydmd install health-check + venv-manager) · 2026-05-27
 - **[v1.49.828](v1.49.828/00-summary.md)** — Batch Chip: scribe/netlist-renderer Family ProcessContext (available + netlistsvg-driver + yosys-driver) · 2026-05-27
 - **[v1.49.829](v1.49.829/00-summary.md)** — T1.3 Application-Boundary Wire (ObservationBridge ↔ translateSessionEvent Cross-Rootdir Integration Test) · 2026-05-27
-- **[v1.49.830](v1.49.830/00-summary.md)** — T1.3 Option C Framework (ConceptFallbackProvider Interface + Threshold + Copper Wire) · 2026-05-27
+- **[v1.49.830](v1.49.830/00-summary.md)** — T1.3 Option C Framework (ConceptFallbackProvider Interface + Threshold Setting + Copper Wire) · 2026-05-27
 - **[v1.49.831](v1.49.831/00-summary.md)** — T1.3 Option C Impl (RosettaConceptFallback in .college/integration/) · 2026-05-27
 - **[v1.49.832](v1.49.832/00-summary.md)** — T1.3 Option C Integration (Selector 2nd-Caller Wire + tests/integration/ Cross-Rootdir Verification) · 2026-05-27
 - **[v1.49.833](v1.49.833/00-summary.md)** — Codify Cross-Rootdir Wire Pattern as Discipline (Lesson #10435) · 2026-05-27
-- **[v1.49.834](v1.49.834/00-summary.md)** — ProcessContext Stale-Entry Cleanup (intelligence/analyzer/git.ts) · 2026-05-27
+- **[v1.49.834](v1.49.834/00-summary.md)** — ProcessContext Stale-Entry Cleanup (`intelligence/analyzer/git.ts`) · 2026-05-27
