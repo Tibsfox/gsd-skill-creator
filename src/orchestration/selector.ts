@@ -33,8 +33,11 @@ import { ActivationWriter } from '../traces/activation-writer.js';
 // Flag-off path is byte-identical to v1.49.561 pre-refinement (SC-MA2-01).
 import type { ActorSignal } from '../ace/actor-update.js';
 import { applyActorSignalToScore } from '../ace/actor-update.js';
-import { predictNextSkills } from '../predictive-skill-loader/index.js';
-import type { SkillPrediction } from '../predictive-skill-loader/index.js';
+import { predictNextSkillsWithMeta } from '../predictive-skill-loader/index.js';
+import type {
+  ConceptFallbackProvider,
+  SkillPrediction,
+} from '../predictive-skill-loader/index.js';
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -114,6 +117,18 @@ export interface SelectorOptions {
     currentSkill: string,
     predictions: SkillPrediction[],
   ) => void | Promise<void>;
+
+  /**
+   * Cross-rootdir low-confidence fallback (T1.3 Option C, v1.49.832).
+   *
+   * Second production caller of the `fallbackProvider` pattern after
+   * `src/chipset/copper/activation.ts` (v1.49.830). Subscriber-gated; the
+   * selector performs no fallback work when this provider is unset. Errors
+   * are swallowed alongside any onPredictions errors so selection never
+   * fails because of a fallback failure. Mirrors the v1.49.830 wire shape
+   * exactly.
+   */
+  fallbackProvider?: ConceptFallbackProvider;
 }
 
 // ─── Selector ───────────────────────────────────────────────────────────────
@@ -143,6 +158,7 @@ export class ActivationSelector {
   private readonly onPredictions:
     | ((currentSkill: string, predictions: SkillPrediction[]) => void | Promise<void>)
     | undefined;
+  private readonly fallbackProvider: ConceptFallbackProvider | undefined;
 
   constructor(opts: SelectorOptions = {}) {
     this.scorer = new MemoryScorer(opts.scorer);
@@ -157,6 +173,7 @@ export class ActivationSelector {
     this.actor = opts.actor ?? 'm5-selector';
     this.topK = opts.topK;
     this.onPredictions = opts.onPredictions;
+    this.fallbackProvider = opts.fallbackProvider;
   }
 
   /**
@@ -289,18 +306,34 @@ export class ActivationSelector {
 
   /**
    * Fire-and-forget complementary-skill prediction for an activated skill.
-   * Mirrors `src/chipset/copper/activation.ts:emitPredictions` (v1.49.810).
+   * Mirrors `src/chipset/copper/activation.ts:emitPredictions` (v1.49.810 +
+   * v1.49.830 low-confidence fallback extension). Subscriber-gated at two
+   * layers: skips entirely when neither `onPredictions` nor `fallbackProvider`
+   * is wired.
    */
   private _emitPredictions(currentSkill: string): void {
     const hook = this.onPredictions;
-    if (!hook) return;
+    const fallback = this.fallbackProvider;
+    if (!hook && !fallback) return;
     Promise.resolve()
       .then(async () => {
-        const predictions = await predictNextSkills(currentSkill, {});
-        await hook(currentSkill, predictions);
+        const { predictions, lowConfidenceThreshold } =
+          await predictNextSkillsWithMeta(currentSkill, {});
+        if (hook) {
+          await hook(currentSkill, predictions);
+        }
+        if (fallback) {
+          const maxScore =
+            predictions.length === 0
+              ? 0
+              : Math.max(...predictions.map((p) => p.score));
+          if (maxScore < lowConfidenceThreshold) {
+            await fallback.onLowConfidence(currentSkill, maxScore);
+          }
+        }
       })
       .catch(() => {
-        /* prediction is observability-only; never break selection */
+        /* prediction + fallback are observability-only; never break selection */
       });
   }
 

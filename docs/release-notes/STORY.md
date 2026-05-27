@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.831`.
+The story begins at `v1.0` and continues to `v1.49.832`.
 
-**874 chapters.** 873 have retrospectives.
+**875 chapters.** 874 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -882,3 +882,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.829](v1.49.829/00-summary.md)** — T1.3 Application-Boundary Wire (ObservationBridge ↔ translateSessionEvent Cross-Rootdir Integration Test) · 2026-05-27
 - **[v1.49.830](v1.49.830/00-summary.md)** — T1.3 Option C Framework (ConceptFallbackProvider Interface + Threshold + Copper Wire) · 2026-05-27
 - **[v1.49.831](v1.49.831/00-summary.md)** — T1.3 Option C Impl (RosettaConceptFallback in .college/integration/) · 2026-05-27
+- **[v1.49.832](v1.49.832/00-summary.md)** — T1.3 Option C Integration (Selector 2nd-Caller Wire + tests/integration/ Cross-Rootdir Verification) · 2026-05-27

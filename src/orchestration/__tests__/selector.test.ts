@@ -12,6 +12,10 @@ import { randomUUID } from 'node:crypto';
 import { promises as fs } from 'node:fs';
 import { ActivationSelector, select, type Candidate } from '../selector.js';
 import { ActivationWriter } from '../../traces/activation-writer.js';
+import type {
+  ConceptFallbackProvider,
+  ConceptSuggestion,
+} from '../../predictive-skill-loader/index.js';
 
 // ─── Helpers ───────────────────────────────────────────────────────────────
 
@@ -228,6 +232,94 @@ describe('ActivationSelector — onPredictions hook (T1.3 substrate-consumer wir
     // If the hook's throw propagates, this assertion would fail.
     const decisions = await sel.select('debug failing test', candidatesFixture());
     // Let the swallow path run.
+    await new Promise((resolve) => setTimeout(resolve, 10));
+    expect(decisions.length).toBeGreaterThan(0);
+    expect(decisions.some((d) => d.activated)).toBe(true);
+  });
+});
+
+// ─── T1.3 Option C low-confidence fallback wire (v1.49.832) ────────────────
+//
+// Second production caller of the `fallbackProvider` pattern after
+// `src/chipset/copper/activation.ts` (v1.49.830). Mirrors the copper unit-test
+// coverage at the selector boundary.
+
+describe('ActivationSelector — fallbackProvider (T1.3 Option C low-confidence wire)', () => {
+  function recordingProvider(): {
+    provider: ConceptFallbackProvider;
+    calls: Array<{ skill: string; maxScore: number }>;
+  } {
+    const calls: Array<{ skill: string; maxScore: number }> = [];
+    const provider: ConceptFallbackProvider = {
+      async onLowConfidence(skill, maxScore) {
+        calls.push({ skill, maxScore });
+        const suggestion: ConceptSuggestion = {
+          conceptId: 'analogous-concept',
+          rendered: 'fallback rendered text',
+          via: 'test-mock',
+        };
+        return [suggestion];
+      },
+    };
+    return { provider, calls };
+  }
+
+  it('fires fallbackProvider for each activated decision when only the provider is wired', async () => {
+    const { provider, calls } = recordingProvider();
+    const sel = new ActivationSelector({
+      writer: new ActivationWriter(tempTraceFile()),
+      fallbackProvider: provider,
+    });
+    const decisions = await sel.select('debug failing test', candidatesFixture());
+    await new Promise((resolve) => setTimeout(resolve, 10));
+
+    const activatedIds = decisions.filter((d) => d.activated).map((d) => d.id);
+    // Default-off predictive-skill-loader → empty predictions → max-score 0
+    // → 0 < default 0.30 → fallback fires once per activated decision.
+    expect(calls.length).toBe(activatedIds.length);
+    for (const call of calls) {
+      expect(activatedIds).toContain(call.skill);
+      expect(call.maxScore).toBe(0);
+    }
+  });
+
+  it('fires both onPredictions AND fallbackProvider when both are wired', async () => {
+    const predictionCalls: string[] = [];
+    const { provider, calls: fallbackCalls } = recordingProvider();
+    const sel = new ActivationSelector({
+      writer: new ActivationWriter(tempTraceFile()),
+      onPredictions: (skill) => {
+        predictionCalls.push(skill);
+      },
+      fallbackProvider: provider,
+    });
+    const decisions = await sel.select('debug failing test', candidatesFixture());
+    await new Promise((resolve) => setTimeout(resolve, 10));
+
+    const activatedIds = decisions.filter((d) => d.activated).map((d) => d.id);
+    expect(predictionCalls.length).toBe(activatedIds.length);
+    expect(fallbackCalls.length).toBe(activatedIds.length);
+  });
+
+  it('does not fire fallbackProvider when neither hook nor provider is wired', async () => {
+    const sel = new ActivationSelector({
+      writer: new ActivationWriter(tempTraceFile()),
+    });
+    const decisions = await sel.select('debug failing test', candidatesFixture());
+    expect(decisions.length).toBeGreaterThan(0);
+    // No observable side effect to assert beyond "selection didn't crash".
+  });
+
+  it('selection succeeds even when the fallback throws (fire-and-forget contract)', async () => {
+    const sel = new ActivationSelector({
+      writer: new ActivationWriter(tempTraceFile()),
+      fallbackProvider: {
+        async onLowConfidence() {
+          throw new Error('fallback intentionally throws');
+        },
+      },
+    });
+    const decisions = await sel.select('debug failing test', candidatesFixture());
     await new Promise((resolve) => setTimeout(resolve, 10));
     expect(decisions.length).toBeGreaterThan(0);
     expect(decisions.some((d) => d.activated)).toBe(true);
