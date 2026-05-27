@@ -21,6 +21,12 @@ export interface PredictiveSkillLoaderConfig {
   hops: number;
   /** Per-hop decay (0,1]. Default 0.5. */
   decay: number;
+  /**
+   * Top-score threshold below which substrate consumers invoke the
+   * ConceptFallbackProvider (when one is wired). Default 0.30. Tunable via
+   * bounded-learning calibration in a later milestone.
+   */
+  lowConfidenceThreshold: number;
 }
 
 export const DEFAULT_PREDICTIVE_SKILL_LOADER_CONFIG: PredictiveSkillLoaderConfig = {
@@ -28,6 +34,7 @@ export const DEFAULT_PREDICTIVE_SKILL_LOADER_CONFIG: PredictiveSkillLoaderConfig
   topK: 5,
   hops: 2,
   decay: 0.5,
+  lowConfidenceThreshold: 0.30,
 };
 
 function projectRoot(): string {
@@ -69,7 +76,11 @@ export function readPredictiveSkillLoaderConfig(
   const topK = asNumber((block as Record<string, unknown>).topK, DEFAULT_PREDICTIVE_SKILL_LOADER_CONFIG.topK);
   const hops = asNumber((block as Record<string, unknown>).hops, DEFAULT_PREDICTIVE_SKILL_LOADER_CONFIG.hops);
   const decay = asNumber((block as Record<string, unknown>).decay, DEFAULT_PREDICTIVE_SKILL_LOADER_CONFIG.decay);
-  return { enabled, topK, hops, decay };
+  const lowConfidenceThreshold = asNumber(
+    (block as Record<string, unknown>).lowConfidenceThreshold,
+    DEFAULT_PREDICTIVE_SKILL_LOADER_CONFIG.lowConfidenceThreshold,
+  );
+  return { enabled, topK, hops, decay, lowConfidenceThreshold };
 }
 
 function extractBlock(raw: unknown): Record<string, unknown> | null {

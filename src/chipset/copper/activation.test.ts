@@ -8,6 +8,10 @@ import type { MoveInstruction } from './types.js';
 import type { OffloadOperation, OffloadResult } from '../blitter/types.js';
 import { PipelineActivationDispatch } from './activation.js';
 import type { ActivationContext, ActivationResult } from './activation.js';
+import type {
+  ConceptFallbackProvider,
+  ConceptSuggestion,
+} from '../../predictive-skill-loader/index.js';
 
 // ============================================================================
 // Helpers
@@ -394,6 +398,121 @@ describe('PipelineActivationDispatch', () => {
       expect(result.tokenEstimate).toBeGreaterThan(0);
 
       // Drain microtasks to ensure the hook actually fired and the rejection was swallowed.
+      await new Promise((resolve) => setImmediate(resolve));
+    });
+  });
+
+  // ============================================================================
+  // T1.3 Option C: fallbackProvider low-confidence wire (v1.49.830)
+  // ============================================================================
+
+  describe('fallbackProvider (T1.3 Option C low-confidence wire)', () => {
+    function recordingProvider(): {
+      provider: ConceptFallbackProvider;
+      calls: Array<{ skill: string; maxScore: number }>;
+    } {
+      const calls: Array<{ skill: string; maxScore: number }> = [];
+      const provider: ConceptFallbackProvider = {
+        async onLowConfidence(skill, maxScore) {
+          calls.push({ skill, maxScore });
+          const suggestion: ConceptSuggestion = {
+            conceptId: 'analogous-concept',
+            rendered: 'fallback rendered text',
+            via: 'test-mock',
+          };
+          return [suggestion];
+        },
+      };
+      return { provider, calls };
+    }
+
+    it('fires the fallback when no onPredictions hook is wired (subscriber-gated by fallback alone)', async () => {
+      const { provider, calls } = recordingProvider();
+      const ctx: ActivationContext = {
+        resolveSkill: async () => ({
+          path: '.claude/skills/test/SKILL.md',
+          content: 'x'.repeat(40),
+        }),
+        fallbackProvider: provider,
+      };
+      const dispatch = new PipelineActivationDispatch(ctx);
+      const result = await dispatch.activate(
+        move({ name: 'demo-skill', mode: 'lite' }),
+      );
+
+      expect(result.status).toBe('success');
+
+      // Fire-and-forget; drain microtasks.
+      await new Promise((resolve) => setImmediate(resolve));
+
+      // Flag-off path: predictions empty → max-score 0 < default 0.30 → fallback fires.
+      expect(calls).toHaveLength(1);
+      expect(calls[0]?.skill).toBe('demo-skill');
+      expect(calls[0]?.maxScore).toBe(0);
+    });
+
+    it('fires both onPredictions AND fallback when both are wired and max-score is below threshold', async () => {
+      const predictionCalls: string[] = [];
+      const { provider, calls: fallbackCalls } = recordingProvider();
+      const ctx: ActivationContext = {
+        resolveSkill: async () => ({
+          path: '.claude/skills/test/SKILL.md',
+          content: 'x'.repeat(40),
+        }),
+        onPredictions: (name) => {
+          predictionCalls.push(name);
+        },
+        fallbackProvider: provider,
+      };
+      const dispatch = new PipelineActivationDispatch(ctx);
+      const result = await dispatch.activate(
+        move({ name: 'demo-skill', mode: 'lite' }),
+      );
+
+      expect(result.status).toBe('success');
+      await new Promise((resolve) => setImmediate(resolve));
+
+      expect(predictionCalls).toEqual(['demo-skill']);
+      expect(fallbackCalls).toHaveLength(1);
+    });
+
+    it('does NOT fire fallback when neither hook nor provider is wired (zero predictor work)', async () => {
+      const ctx: ActivationContext = {
+        resolveSkill: async () => ({
+          path: '.claude/skills/test/SKILL.md',
+          content: 'x'.repeat(40),
+        }),
+      };
+      const dispatch = new PipelineActivationDispatch(ctx);
+      const result = await dispatch.activate(
+        move({ name: 'demo-skill', mode: 'lite' }),
+      );
+
+      expect(result.status).toBe('success');
+      // No calls to drain — no observable side effect to check beyond status.
+    });
+
+    it('does not break activation when the fallback throws', async () => {
+      const ctx: ActivationContext = {
+        resolveSkill: async () => ({
+          path: '.claude/skills/test/SKILL.md',
+          content: 'x'.repeat(40),
+        }),
+        fallbackProvider: {
+          async onLowConfidence() {
+            throw new Error('fallback exploded');
+          },
+        },
+      };
+      const dispatch = new PipelineActivationDispatch(ctx);
+      const result = await dispatch.activate(
+        move({ name: 'demo-skill', mode: 'full' }),
+      );
+
+      expect(result.status).toBe('success');
+      expect(result.tokenEstimate).toBeGreaterThan(0);
+
+      // Drain microtasks to confirm the rejection was swallowed.
       await new Promise((resolve) => setImmediate(resolve));
     });
   });

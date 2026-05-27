@@ -55,7 +55,7 @@ describe('integration: load -> predict -> prewarm', () => {
     const result = await predictNextSkillsWithMeta(
       'a',
       { recentSkills: ['c'] },
-      { config: { enabled: true, topK: 5, hops: 3, decay: 0.5 }, model },
+      { config: { enabled: true, topK: 5, hops: 3, decay: 0.5, lowConfidenceThreshold: 0.30 }, model },
     );
     expect(result.disabled).toBe(false);
     expect(result.predictions.length).toBeGreaterThan(0);
@@ -77,7 +77,7 @@ describe('integration: load -> predict -> prewarm', () => {
     const result = await predictNextSkills(
       'a',
       { topK: 1 },
-      { config: { enabled: true, topK: 5, hops: 2, decay: 0.5 }, model },
+      { config: { enabled: true, topK: 5, hops: 2, decay: 0.5, lowConfidenceThreshold: 0.30 }, model },
     );
     expect(result.length).toBe(1);
   });
@@ -88,7 +88,7 @@ describe('integration: load -> predict -> prewarm', () => {
     const preds = await predictNextSkills(
       'a',
       {},
-      { config: { enabled: true, topK: 10, hops: 3, decay: 0.5 }, model },
+      { config: { enabled: true, topK: 10, hops: 3, decay: 0.5, lowConfidenceThreshold: 0.30 }, model },
     );
     const ids = preds.map((p) => p.skillId);
     // Direct neighbors b, c
@@ -104,7 +104,7 @@ describe('integration: load -> predict -> prewarm', () => {
     const preds = await predictNextSkills(
       'a',
       {},
-      { config: { enabled: true, topK: 5, hops: 2, decay: 0.5 }, model },
+      { config: { enabled: true, topK: 5, hops: 2, decay: 0.5, lowConfidenceThreshold: 0.30 }, model },
     );
     const n = await prewarmCache(preds, null);
     expect(n).toBe(0);

@@ -69,6 +69,10 @@ export type {
 
 export type { CachePrewarmerOptions } from './cache-prewarmer.js';
 export type { PredictiveSkillLoaderConfig } from './settings.js';
+export type {
+  ConceptFallbackProvider,
+  ConceptSuggestion,
+} from './fallback.js';
 
 export {
   loadCollegeGraph,
@@ -109,6 +113,12 @@ export interface PredictionResult {
   predictions: SkillPrediction[];
   /** True when the flag was off; `predictions` is guaranteed empty. */
   disabled: boolean;
+  /**
+   * Top-score threshold below which substrate consumers should invoke their
+   * `ConceptFallbackProvider` (v1.49.830). Sourced from settings so callers
+   * don't need a second config read on the hot path.
+   */
+  lowConfidenceThreshold: number;
 }
 
 /**
@@ -139,7 +149,11 @@ export async function predictNextSkillsWithMeta(
   const cfg =
     opts.config ?? readPredictiveSkillLoaderConfig(opts.settingsPath);
   if (!cfg.enabled) {
-    return { predictions: [], disabled: true };
+    return {
+      predictions: [],
+      disabled: true,
+      lowConfidenceThreshold: cfg.lowConfidenceThreshold,
+    };
   }
   const model =
     opts.model ??
@@ -149,7 +163,11 @@ export async function predictNextSkillsWithMeta(
     });
   const topK = context.topK ?? cfg.topK;
   const predictions = predictLinks(model, currentSkill, context, topK);
-  return { predictions, disabled: false };
+  return {
+    predictions,
+    disabled: false,
+    lowConfidenceThreshold: cfg.lowConfidenceThreshold,
+  };
 }
 
 /**

@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.829`.
+The story begins at `v1.0` and continues to `v1.49.830`.
 
-**872 chapters.** 871 have retrospectives.
+**873 chapters.** 872 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -880,3 +880,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.827](v1.49.827/00-summary.md)** — Batch Chip: dogfood Family ProcessContext (extractor + pydmd install health-check + venv-manager) · 2026-05-27
 - **[v1.49.828](v1.49.828/00-summary.md)** — Batch Chip: scribe/netlist-renderer Family ProcessContext (available + netlistsvg-driver + yosys-driver) · 2026-05-27
 - **[v1.49.829](v1.49.829/00-summary.md)** — T1.3 Application-Boundary Wire (ObservationBridge ↔ translateSessionEvent Cross-Rootdir Integration Test) · 2026-05-27
+- **[v1.49.830](v1.49.830/00-summary.md)** — T1.3 Option C Framework (ConceptFallbackProvider Interface + Threshold + Copper Wire) · 2026-05-27

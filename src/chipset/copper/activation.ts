@@ -16,8 +16,11 @@
 
 import type { MoveInstruction, ActivationMode, MoveTargetType } from './types.js';
 import type { OffloadOperation, OffloadResult } from '../blitter/types.js';
-import { predictNextSkills } from '../../predictive-skill-loader/index.js';
-import type { SkillPrediction } from '../../predictive-skill-loader/index.js';
+import { predictNextSkillsWithMeta } from '../../predictive-skill-loader/index.js';
+import type {
+  ConceptFallbackProvider,
+  SkillPrediction,
+} from '../../predictive-skill-loader/index.js';
 
 // ============================================================================
 // Interfaces
@@ -60,6 +63,22 @@ export interface ActivationContext {
     currentSkill: string,
     predictions: SkillPrediction[],
   ) => void | Promise<void>;
+
+  /**
+   * Cross-rootdir low-confidence fallback (T1.3 Option C, v1.49.830).
+   *
+   * When set, the dispatch invokes `onLowConfidence` after a prediction round
+   * if the top-score is strictly below the `lowConfidenceThreshold` carried by
+   * the prediction result. Subscriber-gated; the dispatch performs zero
+   * fallback work when this provider is unset. Errors are swallowed alongside
+   * any onPredictions errors so activation never fails because of a fallback
+   * failure.
+   *
+   * Implementations may live outside src/ (e.g. `.college/integration/`); the
+   * `ConceptFallbackProvider` interface is duck-typed and references no
+   * .college/ types. Mirrors the v1.49.823 SkillActivationObserver wire shape.
+   */
+  fallbackProvider?: ConceptFallbackProvider;
 }
 
 /**
@@ -241,21 +260,42 @@ export class PipelineActivationDispatch {
   /**
    * Fire-and-forget complementary-skill prediction.
    *
-   * Subscriber-gated (no-op when no `onPredictions` hook); the predictive-
-   * skill-loader's own default-off flag is the second safety layer. Errors
-   * from either layer are swallowed so a prediction failure cannot mask a
-   * successful activation.
+   * Subscriber-gated at two layers: skips entirely when neither
+   * `onPredictions` nor `fallbackProvider` is set (the predictive-skill-loader
+   * is not exercised at all in that case). Errors from any layer are
+   * swallowed so a prediction or fallback failure cannot mask a successful
+   * activation.
+   *
+   * Low-confidence fallback (T1.3 Option C, v1.49.830): when a
+   * `fallbackProvider` is wired, the dispatch invokes
+   * `onLowConfidence(currentSkill, maxScore)` whenever the top prediction
+   * score is strictly below the `lowConfidenceThreshold` carried by the
+   * predict result. An empty predictions array counts as max-score 0, which
+   * is below any non-negative threshold.
    */
   private emitPredictions(currentSkill: string): void {
     const hook = this.context.onPredictions;
-    if (!hook) return;
+    const fallback = this.context.fallbackProvider;
+    if (!hook && !fallback) return;
     Promise.resolve()
       .then(async () => {
-        const predictions = await predictNextSkills(currentSkill, {});
-        await hook(currentSkill, predictions);
+        const { predictions, lowConfidenceThreshold } =
+          await predictNextSkillsWithMeta(currentSkill, {});
+        if (hook) {
+          await hook(currentSkill, predictions);
+        }
+        if (fallback) {
+          const maxScore =
+            predictions.length === 0
+              ? 0
+              : Math.max(...predictions.map((p) => p.score));
+          if (maxScore < lowConfidenceThreshold) {
+            await fallback.onLowConfidence(currentSkill, maxScore);
+          }
+        }
       })
       .catch(() => {
-        /* prediction is observability-only; never break activation */
+        /* prediction + fallback are observability-only; never break activation */
       });
   }
 

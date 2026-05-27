@@ -124,7 +124,7 @@ describe('orchestration byte-identical preservation (CAPCOM Gate G12)', () => {
     const on = await predictNextSkillsWithMeta(
       'a',
       {},
-      { config: { enabled: true, topK: 5, hops: 2, decay: 0.5 }, model },
+      { config: { enabled: true, topK: 5, hops: 2, decay: 0.5, lowConfidenceThreshold: 0.30 }, model },
     );
     expect(on.disabled).toBe(false);
     expect(on.predictions.length).toBeGreaterThan(0);
