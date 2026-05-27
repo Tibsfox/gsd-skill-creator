@@ -33,6 +33,7 @@ export default defineConfig({
       'tools/__tests__/tauri-boundary-audit.test.mjs',
       'tools/__tests__/state-md-normalizer.test.mjs',
       'tools/__tests__/state-md-normalizer-prose.test.mjs',
+      'tools/__tests__/state-md-set-shipped.test.mjs',
       'tools/__tests__/project-md-normalizer.test.mjs',
       'tools/__tests__/adoption-scan.test.mjs',
       'tools/__tests__/adoption-refresh.test.mjs',

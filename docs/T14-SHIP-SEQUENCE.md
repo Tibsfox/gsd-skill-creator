@@ -115,6 +115,16 @@ are stable references; insertion of new steps SHOULD use decimal sub-steps
 
 11.  STATE.md normalize (with prose validator)
 
+11.5. STATE.md shipped-state reset (v1.49.813 — closes v805→v806 drift class)
+       - `node tools/state-md-set-shipped.mjs --version v<X> --name "<Subtitle>" --degree <NASA-degree> --predecessor v<PRED> --predecessor-sha <SHA>`
+       - Atomic writer: emits a fully-normalized STATE.md from the milestone metadata
+         and runs the normalizer post-write to confirm canonical form.
+       - REPLACES the prior hand-edit + manual normalize flow that was the v805→v806
+         drift source (closed informationally by v807 step-0.5 post-write check;
+         deterministically by this step).
+       - Idempotent: re-running with the same args produces identical output.
+       - Exit 0 = STATE.md written + normalize-check confirms canonical form.
+
 12.  HANDOFF doc finalization
 ```
 
