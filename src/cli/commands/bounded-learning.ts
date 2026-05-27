@@ -27,6 +27,12 @@
  * `--audit-log <path>`; disable with `--no-audit-log`). Appends are
  * best-effort — failures never block the CLI (v1.49.799).
  *
+ * `--watch` mode (v1.49.800): re-runs the calibration loop whenever
+ * `--suggestions` or `--config` is rewritten on disk. Debounce window
+ * defaults to 200ms; override via `--watch-debounce <ms>`. Stops on
+ * SIGINT (Ctrl+C) for interactive use; tests inject an AbortSignal via
+ * the `watchSignal` option to the command function.
+ *
  * Observation sources are now per-threshold-class (introduced v1.49.798):
  * `suggestions.*` thresholds read operator accept/dismiss decisions from
  * `.planning/patterns/suggestions.json`; `token_budget.*` thresholds have
@@ -58,6 +64,7 @@ import {
   loadObservationsForThreshold,
   observationSourceFor,
   runCalibrationLoop,
+  runWatchLoop,
   readThresholdValue,
   type CalibratableThreshold,
   type CalibrationRecommendation,
@@ -107,6 +114,8 @@ Options:
   --apply              Apply the recommendation to skill-creator.json (default: dry-run)
   --audit-log <path>   Override audit-log JSONL path (default .planning/patterns/bounded-learning-log.jsonl)
   --no-audit-log       Disable audit-log writes for this invocation
+  --watch              Re-run loop on suggestions.json or skill-creator.json changes (cross-session calibration)
+  --watch-debounce <ms> Watch-mode debounce window (default 200ms; only with --watch)
   --quiet, -q          Machine-readable CSV output
   --json               JSON output
   --help, -h           Show this help
@@ -249,10 +258,91 @@ function renderJson(
 }
 
 // ============================================================================
+// Per-tick helper (v1.49.800)
+// ============================================================================
+
+interface TickContext {
+  threshold: CalibratableThreshold;
+  alpha: number | undefined;
+  lambda: number | undefined;
+  suggestionsPath: string;
+  configPath: string;
+  auditLogPath: string;
+  apply: boolean;
+  json: boolean;
+  quiet: boolean;
+  noAuditLog: boolean;
+}
+
+/**
+ * Run a single calibration tick: load config, load observations, run the
+ * loop, apply, append audit log, render output. Returns the exit code
+ * for this tick. Called once for one-shot mode and on every debounced
+ * change in --watch mode.
+ */
+async function runCalibrationTick(ctx: TickContext): Promise<number> {
+  const config = await loadConfig(ctx.configPath);
+  if (config === null) {
+    if (ctx.json) {
+      console.log(JSON.stringify({ error: 'config-not-found', path: ctx.configPath }));
+    } else if (!ctx.quiet) {
+      p.log.error(`Could not read config at ${ctx.configPath}.`);
+    }
+    return 2;
+  }
+  const currentValue = readThresholdValue(config, ctx.threshold);
+  if (currentValue === undefined) {
+    if (ctx.json) {
+      console.log(JSON.stringify({ error: 'threshold-not-in-config', threshold: ctx.threshold, path: ctx.configPath }));
+    } else if (!ctx.quiet) {
+      p.log.error(`Threshold ${ctx.threshold} not found in config at ${ctx.configPath}.`);
+    }
+    return 2;
+  }
+
+  const observations = await loadObservationsForThreshold(ctx.threshold, { suggestionsPath: ctx.suggestionsPath });
+
+  const loopConfig: { alpha?: number; lambda?: number } = {};
+  if (ctx.alpha !== undefined) loopConfig.alpha = ctx.alpha;
+  if (ctx.lambda !== undefined) loopConfig.lambda = ctx.lambda;
+  const recommendation = runCalibrationLoop(ctx.threshold, currentValue, observations, loopConfig);
+
+  const outcome = await applyRecommendation(recommendation, { apply: ctx.apply, configPath: ctx.configPath });
+  const appliedKind: 'dry-run' | 'applied' | 'noop' =
+    outcome.kind === 'applied' ? 'applied'
+      : outcome.kind === 'dry-run' ? 'dry-run'
+      : 'noop';
+  const applyReason = outcome.kind === 'noop' ? outcome.reason : null;
+
+  if (!ctx.noAuditLog) {
+    const entry = buildAuditLogEntry(recommendation, appliedKind);
+    try {
+      await appendAuditLogEntry(entry, { path: ctx.auditLogPath });
+    } catch {
+      // Audit log is best-effort.
+    }
+  }
+
+  if (ctx.json) {
+    renderJson(recommendation, appliedKind, applyReason);
+  } else if (ctx.quiet) {
+    renderQuiet(recommendation, appliedKind);
+  } else {
+    renderText(recommendation, appliedKind, applyReason);
+  }
+  return 0;
+}
+
+// ============================================================================
 // Command Entry Point
 // ============================================================================
 
-export async function boundedLearningCommand(args: string[]): Promise<number> {
+export interface BoundedLearningCommandOptions {
+  /** Abort signal for --watch mode cooperative shutdown (test-only hook). */
+  watchSignal?: AbortSignal;
+}
+
+export async function boundedLearningCommand(args: string[], options: BoundedLearningCommandOptions = {}): Promise<number> {
   if (args.includes('--help') || args.includes('-h')) {
     showBoundedLearningHelp();
     return 0;
@@ -323,67 +413,77 @@ export async function boundedLearningCommand(args: string[]): Promise<number> {
     ? configLookup.value
     : DEFAULT_CONFIG_PATH;
 
-  // ── Read current threshold value from config ───────────────────────────
-  const config = await loadConfig(configPath);
-  if (config === null) {
-    if (json) {
-      console.log(JSON.stringify({ error: 'config-not-found', path: configPath }));
-    } else if (!quiet) {
-      p.log.error(`Could not read config at ${configPath}.`);
-    }
-    return 2;
-  }
-  const currentValue = readThresholdValue(config, threshold);
-  if (currentValue === undefined) {
-    if (json) {
-      console.log(JSON.stringify({ error: 'threshold-not-in-config', threshold, path: configPath }));
-    } else if (!quiet) {
-      p.log.error(`Threshold ${threshold} not found in config at ${configPath}.`);
-    }
-    return 2;
-  }
-
-  // ── Load observations from per-class source (v1.49.798) ────────────────
-  const observations = await loadObservationsForThreshold(threshold, { suggestionsPath });
-
-  // ── Run calibration loop ───────────────────────────────────────────────
-  const loopConfig: { alpha?: number; lambda?: number } = {};
-  if (alpha !== undefined) loopConfig.alpha = alpha;
-  if (lambda !== undefined) loopConfig.lambda = lambda;
-  const recommendation = runCalibrationLoop(threshold, currentValue, observations, loopConfig);
-
-  // ── Apply (or dry-run) ─────────────────────────────────────────────────
-  const outcome = await applyRecommendation(recommendation, { apply, configPath });
-  const appliedKind: 'dry-run' | 'applied' | 'noop' =
-    outcome.kind === 'applied' ? 'applied'
-      : outcome.kind === 'dry-run' ? 'dry-run'
-      : 'noop';
-  const applyReason = outcome.kind === 'noop' ? outcome.reason : null;
-
-  // ── Append to audit log (v1.49.799) ────────────────────────────────────
   const noAuditLog = args.includes('--no-audit-log');
-  if (!noAuditLog) {
-    const auditLogLookup = getFlagValue(args, '--audit-log');
-    const auditLogPath = auditLogLookup.present && auditLogLookup.value !== null
-      ? auditLogLookup.value
-      : DEFAULT_AUDIT_LOG_PATH;
-    const entry = buildAuditLogEntry(recommendation, appliedKind);
-    try {
-      await appendAuditLogEntry(entry, { path: auditLogPath });
-    } catch {
-      // Audit log is best-effort — failures here MUST NOT block the
-      // operator's CLI invocation. Surface in JSON output via a warning
-      // field; silent in text/quiet renderers.
-    }
+  const auditLogLookup = getFlagValue(args, '--audit-log');
+  const auditLogPath = auditLogLookup.present && auditLogLookup.value !== null
+    ? auditLogLookup.value
+    : DEFAULT_AUDIT_LOG_PATH;
+
+  const ctx: TickContext = {
+    threshold,
+    alpha,
+    lambda,
+    suggestionsPath,
+    configPath,
+    auditLogPath,
+    apply,
+    json,
+    quiet,
+    noAuditLog,
+  };
+
+  // ── Watch mode (v1.49.800) ─────────────────────────────────────────────
+  const watch = args.includes('--watch');
+  if (watch) {
+    const debounceLookup = getFlagValue(args, '--watch-debounce');
+    const debounceMs = debounceLookup.present
+      ? parsePositiveFloat(debounceLookup.value) ?? 200
+      : 200;
+    return runInWatchMode(ctx, debounceMs, options.watchSignal);
   }
 
-  // ── Render ─────────────────────────────────────────────────────────────
-  if (json) {
-    renderJson(recommendation, appliedKind, applyReason);
-  } else if (quiet) {
-    renderQuiet(recommendation, appliedKind);
+  // ── One-shot mode ──────────────────────────────────────────────────────
+  return runCalibrationTick(ctx);
+}
+
+/**
+ * --watch mode: fire one initial tick, then re-fire on every debounced
+ * change to suggestionsPath or configPath. Stops on AbortSignal abort or
+ * SIGINT. Always returns 0 from this entry (ticks may individually
+ * return non-zero but are not propagated; failures surface via output).
+ */
+async function runInWatchMode(
+  ctx: TickContext,
+  debounceMs: number,
+  externalSignal: AbortSignal | undefined,
+): Promise<number> {
+  // Compose the signal: prefer external (test injection); fall back to a
+  // SIGINT-driven controller for interactive use.
+  let signal: AbortSignal;
+  let sigintHandler: (() => void) | null = null;
+  if (externalSignal) {
+    signal = externalSignal;
   } else {
-    renderText(recommendation, appliedKind, applyReason);
+    const controller = new AbortController();
+    sigintHandler = () => controller.abort();
+    process.once('SIGINT', sigintHandler);
+    signal = controller.signal;
+  }
+
+  const handle = runWatchLoop(
+    [ctx.suggestionsPath, ctx.configPath],
+    async () => {
+      await runCalibrationTick(ctx);
+    },
+    { debounceMs, signal, fireImmediately: true },
+  );
+
+  try {
+    await handle.done;
+  } finally {
+    if (sigintHandler !== null) {
+      process.removeListener('SIGINT', sigintHandler);
+    }
   }
   return 0;
 }

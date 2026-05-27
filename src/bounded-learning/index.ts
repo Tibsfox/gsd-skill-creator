@@ -60,3 +60,6 @@ export {
   readAuditLog,
 } from './audit-log.js';
 export type { AuditLogEntry } from './audit-log.js';
+
+export { runWatchLoop } from './watch-loop.js';
+export type { WatchLoopHandle, WatchLoopOptions } from './watch-loop.js';

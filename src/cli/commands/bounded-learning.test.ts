@@ -285,6 +285,60 @@ describe('boundedLearningCommand — --threshold suggestions.cooldown_days (v1.4
   });
 });
 
+describe('boundedLearningCommand — --watch mode (v1.49.800)', () => {
+  beforeEach(() => {
+    writeConfig({ suggestions: { min_occurrences: 3, cooldown_days: 7, auto_dismiss_after_days: 30 }, token_budget: { max_percent: 5, warn_at_percent: 4 } });
+  });
+
+  it('fires one initial tick and exits cleanly when signal aborts before any change', async () => {
+    writeSuggestions([]);
+    const controller = new AbortController();
+    queueMicrotask(() => controller.abort());
+    const code = await boundedLearningCommand(
+      baseArgs(['--watch', '--watch-debounce', '50', '--json']),
+      { watchSignal: controller.signal },
+    );
+    expect(code).toBe(0);
+    const log = collectLog();
+    expect(log).toContain('"threshold"');
+  });
+
+  it('re-runs the tick when --suggestions changes', async () => {
+    writeSuggestions([]);
+    const controller = new AbortController();
+    const cmdPromise = boundedLearningCommand(
+      baseArgs(['--watch', '--watch-debounce', '50', '--json']),
+      { watchSignal: controller.signal },
+    );
+    // Allow initial tick + watcher setup.
+    await new Promise((r) => setTimeout(r, 80));
+    writeSuggestions(Array.from({ length: 10 }, (_, i) => ({ id: `s-${i}`, state: 'accepted' })));
+    await new Promise((r) => setTimeout(r, 200));
+    controller.abort();
+    const code = await cmdPromise;
+    expect(code).toBe(0);
+    // Audit log should now have >= 2 entries (initial + post-change).
+    const raw = readFileSync(auditLogPath, 'utf8');
+    const lines = raw.split('\n').filter((l) => l.length > 0);
+    expect(lines.length).toBeGreaterThanOrEqual(2);
+    // Last entry should reflect the new accept-skew (decrease recommendation).
+    const last = JSON.parse(lines[lines.length - 1]!);
+    expect(last.direction).toBe('decrease');
+    expect(last.proposedValue).toBe(2);
+  });
+
+  it('honors --watch-debounce override', async () => {
+    writeSuggestions([]);
+    const controller = new AbortController();
+    queueMicrotask(() => controller.abort());
+    const code = await boundedLearningCommand(
+      baseArgs(['--watch', '--watch-debounce', '10', '--json']),
+      { watchSignal: controller.signal },
+    );
+    expect(code).toBe(0);
+  });
+});
+
 describe('boundedLearningCommand — audit log (v1.49.799)', () => {
   beforeEach(() => {
     writeConfig({ suggestions: { min_occurrences: 3, cooldown_days: 7, auto_dismiss_after_days: 30 }, token_budget: { max_percent: 5, warn_at_percent: 4 } });
