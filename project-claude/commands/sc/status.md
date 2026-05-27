@@ -127,6 +127,70 @@ Also show a brief breakdown if there are non-pending entries:
 Total suggestions: 7 (3 pending, 2 accepted, 1 dismissed, 1 deferred)
 ```
 
+## Step 5.5: Display bounded-learning calibration state (v1.49.801)
+
+Run the following command via the Bash tool with a 5-second timeout (best-effort — failures here MUST NOT block the rest of /sc:status):
+
+```bash
+npx skill-creator bounded-learning --summary 2>/dev/null
+```
+
+Parse the JSON output. If the command errored, skip the rest of this step silently.
+
+Expected shape:
+
+```json
+{
+  "thresholds": [
+    {
+      "threshold": "suggestions.min_occurrences",
+      "currentValue": 3,
+      "observationSource": { "sourceId": "suggestions.json", "wired": true },
+      "lastTick": { "timestamp": "...", "direction": "hold", "proposedValue": null, "applied": "noop" } | null
+    },
+    ...
+  ],
+  "auditLog": {
+    "path": ".planning/patterns/bounded-learning-log.jsonl",
+    "totalEntries": 42,
+    "lastEntryAt": "2026-05-27T02:30:00Z" | null
+  },
+  "pendingRecommendations": [
+    { "threshold": "suggestions.min_occurrences", "currentValue": 3, "proposedValue": 2, "direction": "decrease" }
+  ],
+  "wiredThresholdCount": 4
+}
+```
+
+Render as a markdown section:
+
+```
+### Bounded-Learning Calibration
+
+| Threshold | Current | Source | Last Tick |
+|-----------|---------|--------|-----------|
+| suggestions.min_occurrences | 3 | suggestions.json | hold (2 min ago) |
+| suggestions.cooldown_days | 7 | suggestions.json | (no runs yet) |
+| suggestions.auto_dismiss_after_days | 30 | suggestions.json | (no runs yet) |
+| token_budget.warn_at_percent | 4 | token-budget-events (unwired) | (no runs yet) |
+
+Audit log: 42 entries (last 2 min ago) at .planning/patterns/bounded-learning-log.jsonl
+```
+
+For each threshold:
+- Annotate `observationSource.sourceId` with `(unwired)` suffix when `observationSource.wired === false`.
+- Annotate `lastTick` as `(no runs yet)` when `null`; otherwise render `<direction> (<relative time>)` where relative time is computed from `timestamp` vs now.
+
+If `pendingRecommendations.length > 0`, append a warning block:
+
+```
+WARNING: 1 calibration recommendation pending operator review.
+  - suggestions.min_occurrences: 3 -> 2 (decrease)
+Run `skill-creator bounded-learning --threshold <key> --apply` to apply.
+```
+
+Skip this entire step silently if `wiredThresholdCount === 0` or the JSON parse fails.
+
 ## Step 6: Display quick links
 
 ```
@@ -146,6 +210,8 @@ Total suggestions: 7 (3 pending, 2 accepted, 1 dismissed, 1 deferred)
 - Total budget percentage is shown with visual progress bar
 - Pending suggestion count is read from suggestions.json
 - Warning is shown when budget exceeds warn_at_percent threshold
-- Gracefully handles missing config file, missing skills, missing suggestions.json
+- Bounded-learning calibration state is shown when `skill-creator bounded-learning --summary` succeeds (v1.49.801)
+- Pending calibration-recommendation warnings appear when operator review is required
+- Gracefully handles missing config file, missing skills, missing suggestions.json, and absent bounded-learning CLI
 - Quick links to related commands are displayed
 </success_criteria>

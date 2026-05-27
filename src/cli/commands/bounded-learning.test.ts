@@ -285,6 +285,75 @@ describe('boundedLearningCommand — --threshold suggestions.cooldown_days (v1.4
   });
 });
 
+describe('boundedLearningCommand — --summary mode (v1.49.801)', () => {
+  beforeEach(() => {
+    writeConfig({
+      suggestions: { min_occurrences: 3, cooldown_days: 7, auto_dismiss_after_days: 30 },
+      token_budget: { max_percent: 5, warn_at_percent: 4 },
+    });
+  });
+
+  it('emits JSON summary of all 4 wired thresholds with currentValue + observationSource', async () => {
+    const code = await boundedLearningCommand(
+      ['--config', configPath, '--audit-log', auditLogPath, '--summary'],
+    );
+    expect(code).toBe(0);
+    const out = JSON.parse(collectLog());
+    expect(out.thresholds).toHaveLength(4);
+    expect(out.wiredThresholdCount).toBe(4);
+    const minOcc = out.thresholds.find((t: { threshold: string }) => t.threshold === 'suggestions.min_occurrences');
+    expect(minOcc.currentValue).toBe(3);
+    expect(minOcc.observationSource.sourceId).toBe('suggestions.json');
+    expect(minOcc.observationSource.wired).toBe(true);
+    const tokenBudget = out.thresholds.find((t: { threshold: string }) => t.threshold === 'token_budget.warn_at_percent');
+    expect(tokenBudget.currentValue).toBe(4);
+    expect(tokenBudget.observationSource.wired).toBe(false);
+  });
+
+  it('reports auditLog totalEntries=0 + lastEntryAt=null when log is empty', async () => {
+    const code = await boundedLearningCommand(
+      ['--config', configPath, '--audit-log', auditLogPath, '--summary'],
+    );
+    expect(code).toBe(0);
+    const out = JSON.parse(collectLog());
+    expect(out.auditLog.totalEntries).toBe(0);
+    expect(out.auditLog.lastEntryAt).toBeNull();
+    expect(out.pendingRecommendations).toEqual([]);
+  });
+
+  it('reports lastTick + pendingRecommendation when prior --apply has run', async () => {
+    // Seed the audit log by running a normal tick that produces a decrease + dry-run.
+    writeSuggestions(Array.from({ length: 10 }, (_, i) => ({ id: `s-${i}`, state: 'accepted' })));
+    await boundedLearningCommand(baseArgs(['--json']));
+    // Re-spy on console.log so we only collect the --summary output.
+    logSpy.mockClear();
+    const code = await boundedLearningCommand(
+      ['--config', configPath, '--audit-log', auditLogPath, '--summary'],
+    );
+    expect(code).toBe(0);
+    const out = JSON.parse(collectLog());
+    const minOcc = out.thresholds.find((t: { threshold: string }) => t.threshold === 'suggestions.min_occurrences');
+    expect(minOcc.lastTick).not.toBeNull();
+    expect(minOcc.lastTick.direction).toBe('decrease');
+    expect(minOcc.lastTick.applied).toBe('dry-run');
+    expect(out.pendingRecommendations).toHaveLength(1);
+    expect(out.pendingRecommendations[0].threshold).toBe('suggestions.min_occurrences');
+    expect(out.pendingRecommendations[0].proposedValue).toBe(2);
+  });
+
+  it('reports currentValue=null when config is missing the threshold key', async () => {
+    writeConfig({}); // empty config
+    const code = await boundedLearningCommand(
+      ['--config', configPath, '--audit-log', auditLogPath, '--summary'],
+    );
+    expect(code).toBe(0);
+    const out = JSON.parse(collectLog());
+    for (const t of out.thresholds) {
+      expect(t.currentValue).toBeNull();
+    }
+  });
+});
+
 describe('boundedLearningCommand — --watch mode (v1.49.800)', () => {
   beforeEach(() => {
     writeConfig({ suggestions: { min_occurrences: 3, cooldown_days: 7, auto_dismiss_after_days: 30 }, token_budget: { max_percent: 5, warn_at_percent: 4 } });

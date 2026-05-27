@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.800`.
+The story begins at `v1.0` and continues to `v1.49.801`.
 
-**843 chapters.** 842 have retrospectives.
+**844 chapters.** 843 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -851,3 +851,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.798](v1.49.798/00-summary.md)** — T1.1 Ship 4: Wire `token_budget.warn_at_percent` + Per-Class Observation-Source Registry · 2026-05-27
 - **[v1.49.799](v1.49.799/00-summary.md)** — T1.1 Ship 5: Bounded-Learning Audit Log · 2026-05-27
 - **[v1.49.800](v1.49.800/00-summary.md)** — T1.1 Ship 6: Bounded-Learning `--watch` Mode · 2026-05-27
+- **[v1.49.801](v1.49.801/00-summary.md)** — T1.1 Ship 7: `/sc:status` Bounded-Learning Integration (T1.1 ARC CLOSED) · 2026-05-27

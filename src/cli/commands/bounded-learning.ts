@@ -63,9 +63,11 @@ import {
   buildAuditLogEntry,
   loadObservationsForThreshold,
   observationSourceFor,
+  readAuditLog,
   runCalibrationLoop,
   runWatchLoop,
   readThresholdValue,
+  type AuditLogEntry,
   type CalibratableThreshold,
   type CalibrationRecommendation,
 } from '../../bounded-learning/index.js';
@@ -116,6 +118,7 @@ Options:
   --no-audit-log       Disable audit-log writes for this invocation
   --watch              Re-run loop on suggestions.json or skill-creator.json changes (cross-session calibration)
   --watch-debounce <ms> Watch-mode debounce window (default 200ms; only with --watch)
+  --summary            Emit JSON summary of all wired thresholds + audit-log state (v1.49.801)
   --quiet, -q          Machine-readable CSV output
   --json               JSON output
   --help, -h           Show this help
@@ -352,6 +355,11 @@ export async function boundedLearningCommand(args: string[], options: BoundedLea
   const json = args.includes('--json');
   const apply = args.includes('--apply');
 
+  // ── --summary mode (v1.49.801) ─────────────────────────────────────────
+  if (args.includes('--summary')) {
+    return runSummary(args);
+  }
+
   // ── Parse --threshold ──────────────────────────────────────────────────
   const thresholdLookup = getFlagValue(args, '--threshold');
   let threshold: CalibratableThreshold;
@@ -444,6 +452,73 @@ export async function boundedLearningCommand(args: string[], options: BoundedLea
 
   // ── One-shot mode ──────────────────────────────────────────────────────
   return runCalibrationTick(ctx);
+}
+
+/**
+ * --summary mode (v1.49.801): emit a JSON summary of all wired thresholds
+ * + audit-log state. Consumed by `/sc:status` to surface bounded-learning
+ * calibration health alongside the existing skill-budget dashboard.
+ */
+async function runSummary(args: string[]): Promise<number> {
+  const configLookup = getFlagValue(args, '--config');
+  const configPath = configLookup.present && configLookup.value !== null
+    ? configLookup.value
+    : DEFAULT_CONFIG_PATH;
+
+  const auditLogLookup = getFlagValue(args, '--audit-log');
+  const auditLogPath = auditLogLookup.present && auditLogLookup.value !== null
+    ? auditLogLookup.value
+    : DEFAULT_AUDIT_LOG_PATH;
+
+  const config = await loadConfig(configPath);
+  const entries = await readAuditLog(auditLogPath);
+
+  // Build per-threshold summary: current value + last audit entry for it.
+  const thresholdSummaries = SUPPORTED_THRESHOLDS.map((threshold) => {
+    const currentValue = config !== null ? readThresholdValue(config, threshold) : undefined;
+    const source = observationSourceFor(threshold);
+    const matchingEntries = entries.filter((e) => e.threshold === threshold);
+    const lastEntry: AuditLogEntry | undefined = matchingEntries[matchingEntries.length - 1];
+    return {
+      threshold,
+      currentValue: currentValue ?? null,
+      observationSource: {
+        sourceId: source.sourceId,
+        wired: source.wired,
+      },
+      lastTick: lastEntry === undefined ? null : {
+        timestamp: lastEntry.timestamp,
+        direction: lastEntry.direction,
+        proposedValue: lastEntry.proposedValue,
+        applied: lastEntry.applied,
+      },
+    };
+  });
+
+  // Pending recommendations: most recent entry per threshold where
+  // direction != 'hold' AND applied == 'dry-run'.
+  const pendingRecommendations = thresholdSummaries
+    .filter((s) => s.lastTick !== null && s.lastTick.direction !== 'hold' && s.lastTick.applied === 'dry-run')
+    .map((s) => ({
+      threshold: s.threshold,
+      currentValue: s.currentValue,
+      proposedValue: s.lastTick?.proposedValue ?? null,
+      direction: s.lastTick?.direction ?? 'hold',
+    }));
+
+  const summary = {
+    thresholds: thresholdSummaries,
+    auditLog: {
+      path: auditLogPath,
+      totalEntries: entries.length,
+      lastEntryAt: entries.length > 0 ? entries[entries.length - 1]!.timestamp : null,
+    },
+    pendingRecommendations,
+    wiredThresholdCount: SUPPORTED_THRESHOLDS.length,
+  };
+
+  console.log(JSON.stringify(summary, null, 2));
+  return 0;
 }
 
 /**
