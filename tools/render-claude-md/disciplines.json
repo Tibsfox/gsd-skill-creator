@@ -238,5 +238,20 @@
     ],
     "key_lessons": ["#10432", "#10434"],
     "codified_at_milestone": "v1.49.814 (new domain — codified from v806 introduction + v809+v811+v812 chip-ship demonstration; companion to Security chokepoints discipline); v1.49.824 (extended with #10434 ratchet-ledger generalization from v821 discipline-coverage ceiling case study)"
+  },
+  {
+    "domain": "Cross-rootdir wire pattern",
+    "trigger": "Authoring a wire between src/ and .college/ (or any future rootdir pair) where the two rootdirs cannot import each other directly; declaring duck-typed interfaces in one rootdir + satisfying structurally in the other; verifying the wire works end-to-end at the application boundary",
+    "summary": "Cross-rootdir wires follow a 4-step pattern: (1) declare the interface in the CONSUMER rootdir with minimal primitive field types; (2) implement the satisfier in the PROVIDER rootdir via duck typing (no `implements` keyword; no cross-import); (3) bridge via an optional context field that's no-op when unset; (4) verify with a `tests/integration/*.integration.test.ts` test that has visibility into BOTH rootdirs. Two subordinate patterns: local-interface redeclaration discipline (when the satisfier RETURNS a typed value, the provider rootdir must locally redeclare the result type byte-equivalently — drift between the two declarations is silent), and `Pick<T, K>` structural-handle narrowing (when constructor opts accept concrete classes, type them as `Pick<>` so tests can pass thin mocks without a cast while real instances still flow through subtyping).",
+    "canonical_docs": [
+      "docs/cross-rootdir-wire-discipline.md",
+      "src/predictive-skill-loader/fallback.ts",
+      ".college/integration/rosetta-concept-fallback.ts",
+      "tests/integration/copper-rosetta-fallback-wire.integration.test.ts",
+      ".college/integration/observation-bridge.ts",
+      "tests/integration/college-observation-bridge-wire.integration.test.ts"
+    ],
+    "key_lessons": ["#10435"],
+    "codified_at_milestone": "v1.49.833 (new domain — codified from 5-instance evidence set v823 SkillActivationObserver declaration + v829 application-boundary verification + v830 ConceptFallbackProvider framework + v831 RosettaConceptFallback implementation + v832 selector 2nd-caller wire + tests/integration/ verification)"
   }
 ]
