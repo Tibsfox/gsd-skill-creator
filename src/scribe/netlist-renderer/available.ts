@@ -9,6 +9,9 @@
  */
 
 import { spawn } from 'node:child_process';
+import { ensureProcessAllowed, type ProcessContext } from '../../security/process-context.js';
+
+const PROCESS_SOURCE = 'scribe/netlist-renderer/available';
 
 /** Result shape returned by isAvailable(). */
 export interface AvailabilityResult {
@@ -35,12 +38,13 @@ let CACHED: AvailabilityResult | null = null;
 export async function isAvailable(
   yosysBin = 'yosys',
   netlistsvgBin = 'netlistsvg',
+  ctx?: ProcessContext,
 ): Promise<AvailabilityResult> {
   if (CACHED !== null) return CACHED;
 
   const [yosysOk, netlistsvgOk] = await Promise.all([
-    probeCommand(yosysBin, ['-V']),
-    probeCommand(netlistsvgBin, ['--version']),
+    probeCommand(yosysBin, ['-V'], ctx),
+    probeCommand(netlistsvgBin, ['--version'], ctx),
   ]);
 
   const reasons: string[] = [];
@@ -75,7 +79,10 @@ export function _resetCache(): void {
  * command exits with code 0 within 5 seconds. Returns false on any error
  * (ENOENT, non-zero exit, timeout).
  */
-function probeCommand(bin: string, args: string[]): Promise<boolean> {
+function probeCommand(bin: string, args: string[], ctx?: ProcessContext): Promise<boolean> {
+  // ProcessContextDenied is load-bearing per #10427 — hoist outside the
+  // Promise's try/catch which swallows spawn errors into resolve(false).
+  ensureProcessAllowed(ctx, PROCESS_SOURCE, 'spawn', bin, args);
   return new Promise<boolean>(resolve => {
     let settled = false;
     const settle = (ok: boolean): void => {

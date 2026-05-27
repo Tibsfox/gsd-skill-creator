@@ -68,9 +68,10 @@ const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
   'src/retro/changelog-watch.ts',
   'src/scan-arxiv/bridge.ts',
   'src/scan-arxiv/ranker.ts',
-  'src/scribe/netlist-renderer/available.ts',
-  'src/scribe/netlist-renderer/netlistsvg-driver.ts',
-  'src/scribe/netlist-renderer/yosys-driver.ts',
+  // scribe/netlist-renderer family fully wired at v1.49.828 batch chip
+  // (available + netlistsvg-driver + yosys-driver) — all 3 use the
+  // internal-helper pattern (#10433) with hoisted check (#10427) for
+  // spawn-based subprocess invocation; wire cost ~14-16 LOC each.
   'src/skill/version-backfill.ts',
   'src/terminal/launcher.ts',
   'src/terminal/session.ts',

@@ -23,6 +23,9 @@ import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 
 import { NetlistRenderError } from '../types/errors.js';
+import { ensureProcessAllowed, type ProcessContext } from '../../security/process-context.js';
+
+const PROCESS_SOURCE = 'scribe/netlist-renderer/yosys-driver';
 
 /** Options for runYosys(). */
 export interface YosysOptions {
@@ -49,6 +52,7 @@ export interface YosysOptions {
 export async function runYosys(
   verilogSource: string,
   opts: YosysOptions = {},
+  ctx?: ProcessContext,
 ): Promise<string> {
   const { yosysBin = 'yosys', tmpDir: baseTmpDir } = opts;
   const parentDir = baseTmpDir ?? tmpdir();
@@ -74,7 +78,7 @@ export async function runYosys(
     ].join('; ');
 
     // Run Yosys.
-    await spawnYosys(yosysBin, yosysScript);
+    await spawnYosys(yosysBin, yosysScript, ctx);
 
     // Read JSON netlist.
     const json = await readFile(outputJson, 'utf8');
@@ -93,7 +97,10 @@ export async function runYosys(
  * Spawn yosys with the given script and wait for it to complete.
  * Captures stderr for error context.
  */
-function spawnYosys(bin: string, script: string): Promise<void> {
+function spawnYosys(bin: string, script: string, ctx?: ProcessContext): Promise<void> {
+  // ProcessContextDenied is load-bearing per #10427 — hoist outside the
+  // Promise's try/catch which wraps spawn errors into NetlistRenderError.
+  ensureProcessAllowed(ctx, PROCESS_SOURCE, 'spawn', bin, ['-q', '-p', script]);
   return new Promise<void>((resolve, reject) => {
     let child: ReturnType<typeof spawn>;
     try {

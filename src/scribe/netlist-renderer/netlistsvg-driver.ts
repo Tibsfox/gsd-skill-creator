@@ -17,6 +17,9 @@ import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 
 import { NetlistRenderError } from '../types/errors.js';
+import { ensureProcessAllowed, type ProcessContext } from '../../security/process-context.js';
+
+const PROCESS_SOURCE = 'scribe/netlist-renderer/netlistsvg-driver';
 
 /** Options for runNetlistsvg(). */
 export interface NetlistsvgOptions {
@@ -40,6 +43,7 @@ export interface NetlistsvgOptions {
 export async function runNetlistsvg(
   jsonNetlist: string,
   opts: NetlistsvgOptions = {},
+  ctx?: ProcessContext,
 ): Promise<string> {
   const { netlistsvgBin = 'netlistsvg', tmpDir: baseTmpDir } = opts;
   const parentDir = baseTmpDir ?? tmpdir();
@@ -55,7 +59,7 @@ export async function runNetlistsvg(
     await writeFile(inputJson, jsonNetlist, 'utf8');
 
     // Run netlistsvg.
-    await spawnNetlistsvg(netlistsvgBin, inputJson, outputSvg);
+    await spawnNetlistsvg(netlistsvgBin, inputJson, outputSvg, ctx);
 
     // Read SVG output.
     const svg = await readFile(outputSvg, 'utf8');
@@ -84,7 +88,11 @@ function spawnNetlistsvg(
   bin: string,
   inputJson: string,
   outputSvg: string,
+  ctx?: ProcessContext,
 ): Promise<void> {
+  // ProcessContextDenied is load-bearing per #10427 — hoist outside the
+  // Promise's try/catch which wraps spawn errors into NetlistRenderError.
+  ensureProcessAllowed(ctx, PROCESS_SOURCE, 'spawn', bin, [inputJson, '-o', outputSvg]);
   return new Promise<void>((resolve, reject) => {
     let child: ReturnType<typeof spawn>;
     try {
