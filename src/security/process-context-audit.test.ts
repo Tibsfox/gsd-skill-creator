@@ -57,7 +57,11 @@ const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
   //   all 3 use internal-helper pattern (#10433); wire cost ~14-18 LOC each.
   'src/git/gates/pre-flight.ts',
   'src/git/workflows/contribute.ts',
-  'src/intelligence/analyzer/findings/stalled.ts',
+  // src/intelligence/analyzer/findings/stalled.ts wired v1.49.839 —
+  // optional ctx?: ProcessContext threaded through hasRecentGitActivity +
+  // detectStalledMissions; ensureProcessAllowed hoisted outside the
+  // best-effort-silent try/catch per #10427. Forensic surface semantics
+  // preserved; load-bearing security denials propagate to the caller.
   // src/intelligence/analyzer/git.ts removed v1.49.834 stale-entry cleanup —
   // file already called ensureProcessAllowed (hoisted outside catch per
   // #10427) since v1.49.806; grandfathered allowlist entry was silently

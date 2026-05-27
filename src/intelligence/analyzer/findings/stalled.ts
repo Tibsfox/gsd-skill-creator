@@ -12,6 +12,10 @@ import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import type { IntelligenceKB } from '../../types.js';
 import type { RawFinding } from './aggregator.js';
+import {
+  ensureProcessAllowed,
+  type ProcessContext,
+} from '../../../security/process-context.js';
 
 const execFileAsync = promisify(execFile);
 
@@ -21,8 +25,22 @@ const STALL_THRESHOLD_MS = STALL_THRESHOLD_DAYS * 24 * 60 * 60 * 1000;
 /**
  * Check if a given file path has any commits in the last N days via git log.
  * Returns true if recent commits found, false if not or if git is unavailable.
+ *
+ * ProcessContext wire (v1.49.839): `ensureProcessAllowed` hoisted OUTSIDE
+ * the swallow-everything try/catch per Lesson #10427 (failure-mode contracts
+ * — load-bearing security denials must propagate even when forensic surfaces
+ * are best-effort silent). A `ProcessContextDenied` from a deny-listed git
+ * binary throws to the caller; all other failures (git unavailable, not in
+ * a repo, exec timeout) remain silently swallowed as before.
  */
-async function hasRecentGitActivity(filePath: string, sinceMs: number): Promise<boolean> {
+async function hasRecentGitActivity(
+  filePath: string,
+  sinceMs: number,
+  ctx?: ProcessContext,
+): Promise<boolean> {
+  // Hoisted outside the try/catch: security denials propagate even though
+  // the forensic surface below is best-effort silent.
+  ensureProcessAllowed(ctx, 'intelligence/analyzer/findings/stalled', 'exec-file', 'git');
   try {
     const sinceDate = new Date(Date.now() - sinceMs).toISOString();
     const { stdout } = await execFileAsync(
@@ -41,6 +59,7 @@ export async function detectStalledMissions(
   kb: IntelligenceKB,
   projectId: string,
   snapshotId: string,
+  ctx?: ProcessContext,
 ): Promise<RawFinding[]> {
   const findings: RawFinding[] = [];
 
@@ -69,10 +88,13 @@ export async function detectStalledMissions(
     // Not old enough to be stalled
     if (emittedTime >= cutoff) continue;
 
-    // Check if there has been recent git activity on the emission path
+    // Check if there has been recent git activity on the emission path.
+    // ProcessContextDenied from hasRecentGitActivity propagates to the
+    // caller (load-bearing security denial). All other git-availability
+    // errors are swallowed inside hasRecentGitActivity.
     const emissionPath = decision.emission_path;
     if (emissionPath) {
-      const hasActivity = await hasRecentGitActivity(emissionPath, STALL_THRESHOLD_MS);
+      const hasActivity = await hasRecentGitActivity(emissionPath, STALL_THRESHOLD_MS, ctx);
       if (hasActivity) continue; // activity found — not stalled
     }
 
