@@ -199,5 +199,18 @@
     ],
     "key_lessons": ["#10429"],
     "codified_at_milestone": "v1.49.805 (new domain — codified from S4 lever in 2026-05-26 core-functions audit retrospective)"
+  },
+  {
+    "domain": "Security chokepoints",
+    "trigger": "Adding a new src/ caller that reads from disk, issues a network request, or spawns a child process; reviewing whether a new module needs to thread an existing `ctx?` parameter; migrating a KNOWN_UNWIRED entry from one of the audit-test allowlists",
+    "summary": "Three sibling chokepoints — LoaderContext (filesystem, v782), EgressContext (network egress, v806), ProcessContext (child-process spawn, v806) — share a common shape (optional `ctx?` param, allow-list pattern, audit sink, `*ContextDenied` error) but specialize their targets. Each chokepoint's audit-test (`src/security/*-context-audit.test.ts`) is the runtime enforcement: greps src/ for the surface's signature, accepts either `ensure*Allowed(` calls or `Role: NOT a <surface> caller` docstring exemption, grandfathered existing call sites tracked in KNOWN_UNWIRED. Security denials are load-bearing per #10427 — hoist `ensure*Allowed(` OUTSIDE try/catch blocks that swallow errors.",
+    "canonical_docs": [
+      "docs/security-chokepoints.md",
+      "src/security/loader-context.ts",
+      "src/security/egress-context.ts",
+      "src/security/process-context.ts"
+    ],
+    "key_lessons": ["#10414", "#10426", "#10427"],
+    "codified_at_milestone": "v1.49.806 (new domain — codified from S6 lever in 2026-05-26 core-functions audit retrospective; extends #10414 LoaderContext pattern to network egress + child-process spawn surfaces)"
   }
 ]

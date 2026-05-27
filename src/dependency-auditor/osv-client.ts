@@ -5,7 +5,10 @@
  * An empty OsvVulnerability[] explicitly means "clean — no known vulnerabilities".
  */
 
+import { ensureEgressAllowed, type EgressContext } from '../security/egress-context.js';
 import type { DependencyRecord, OsvVulnerability, Ecosystem } from './types.js';
+
+const EGRESS_SOURCE = 'dependency-auditor/osv-client';
 
 /** OSV ecosystem names differ from our internal Ecosystem type. */
 const OSV_ECOSYSTEM_MAP: Record<Ecosystem, string> = {
@@ -67,9 +70,15 @@ export class OsvClient {
    * Query OSV for vulnerabilities across multiple dependencies in one batch
    * request.  Returns a Map keyed by `${ecosystem}:${name}`.
    * Never throws for individual dependency errors — returns empty array instead.
+   *
+   * @param ctx Optional egress chokepoint (v1.49.806). When provided, every
+   *   outbound request is checked against `ctx.allowList` and recorded in
+   *   `ctx.audit`. When omitted, behaves identically to the historical
+   *   permissive call site.
    */
   async queryBatch(
     deps: DependencyRecord[],
+    ctx?: EgressContext,
   ): Promise<Map<string, OsvVulnerability[]>> {
     if (deps.length === 0) return new Map();
 
@@ -81,6 +90,11 @@ export class OsvClient {
     }));
 
     const url = 'https://api.osv.dev/v1/querybatch';
+    // Chokepoint check BEFORE the try/catch — policy denials are load-bearing
+    // and must propagate (per #10427), not be swallowed by the graceful
+    // network-failure degradation below.
+    ensureEgressAllowed(ctx, EGRESS_SOURCE, 'fetch', url, 'POST');
+
     let resp: Response;
 
     try {

@@ -3,8 +3,10 @@
  * Single import point for all security types, components, and IPC utilities.
  *
  * Consolidates security types (Phase 367-01), dashboard components (Phase 372),
- * IPC constants for Tauri command/event wiring (Phase 374-01), and the
- * `LoaderContext` Tier-E disk-loader chokepoint (v1.49.782).
+ * IPC constants for Tauri command/event wiring (Phase 374-01), and the three
+ * Tier-E security chokepoints: `LoaderContext` (v1.49.782, disk loaders),
+ * `EgressContext` (v1.49.806, network egress), and `ProcessContext`
+ * (v1.49.806, child-process spawn). See `docs/security-chokepoints.md`.
  *
  * @module security
  */
@@ -29,6 +31,48 @@ export {
   LoaderContextDenied,
   ensureAllowed,
 } from './loader-context.js';
+
+// ============================================================================
+// EgressContext (v1.49.806) — Tier E network-egress chokepoint
+// ============================================================================
+
+export type {
+  UrlPattern,
+  EgressOp,
+  EgressAuditRecord,
+  EgressAuditSink,
+  EgressContext,
+} from './egress-context.js';
+
+export {
+  matchesUrlAllowList,
+  NULL_EGRESS_AUDIT_SINK,
+  CapturingEgressAuditSink,
+  defaultEgressContext,
+  EgressContextDenied,
+  ensureEgressAllowed,
+} from './egress-context.js';
+
+// ============================================================================
+// ProcessContext (v1.49.806) — Tier E child-process chokepoint
+// ============================================================================
+
+export type {
+  CommandPattern,
+  ProcessOp,
+  ProcessAuditRecord,
+  ProcessAuditSink,
+  ProcessContext,
+} from './process-context.js';
+
+export {
+  matchesCommandAllowList,
+  NULL_PROCESS_AUDIT_SINK,
+  CapturingProcessAuditSink,
+  defaultProcessContext,
+  ProcessContextDenied,
+  ensureProcessAllowed,
+} from './process-context.js';
 
 // ============================================================================
 // Types from Phase 367-01 (src/types/security.ts)

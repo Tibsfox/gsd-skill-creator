@@ -18,11 +18,15 @@
  *
  * Migration policy: new disk-loaders MUST accept `ctx?: LoaderContext`
  * and route every fs read through `ensureAllowed(ctx, path, op)`.
- * Enforced by `tools/security/audit-loader-context.mjs` (run by
- * pre-tag-gate) which greps for `node:fs` imports in any
- * `src` path matching `loader.ts` and rejects files lacking either the
- * chokepoint shape or an explicit `Role: NOT a disk loader` header
+ * Enforced by `src/security/loader-context-audit.test.ts` (a vitest harness
+ * run as part of the standard test suite) which greps for `node:fs` imports
+ * in any `src/` path matching `loader.ts` and rejects files lacking either
+ * the chokepoint shape or an explicit `Role: NOT a disk loader` header
  * doc comment.
+ *
+ * Sibling chokepoints (v1.49.806): `EgressContext` for network egress,
+ * `ProcessContext` for child-process spawn. See
+ * `docs/security-chokepoints.md` for the cross-surface catalog.
  *
  * @module security/loader-context
  */

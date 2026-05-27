@@ -8,7 +8,10 @@
 import { exec } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
+import { ensureProcessAllowed, type ProcessContext } from '../security/process-context.js';
 import type { Ecosystem } from './types.js';
+
+const PROCESS_SOURCE = 'dependency-auditor/dry-run-gate';
 
 export interface DryRunResult {
   ecosystem: Ecosystem;
@@ -65,7 +68,19 @@ const CONFLICT_PATTERNS: Record<Ecosystem, RegExp[]> = {
 };
 
 export class DryRunGate {
-  async check(projectRoot: string, ecosystem: Ecosystem): Promise<DryRunResult> {
+  /**
+   * Run the dry-run / check command for the given ecosystem.
+   *
+   * @param ctx Optional process chokepoint (v1.49.806). When provided, the
+   *   executable name (first token of `cmd`) is checked against
+   *   `ctx.allowList` and recorded in `ctx.audit`. When omitted, behaves
+   *   identically to the historical permissive call site.
+   */
+  async check(
+    projectRoot: string,
+    ecosystem: Ecosystem,
+    ctx?: ProcessContext,
+  ): Promise<DryRunResult> {
     const cmdFactory = COMMANDS[ecosystem];
     const cmd = cmdFactory(projectRoot);
 
@@ -77,6 +92,13 @@ export class DryRunGate {
         rawOutput: '',
       };
     }
+
+    // Chokepoint check BEFORE spawn — split the shell-string into command + argv
+    // for audit; the executable (first token) is what allowList vets.
+    const tokens = cmd.split(/\s+/);
+    const command = tokens[0] ?? '';
+    const argv = tokens.slice(1);
+    ensureProcessAllowed(ctx, PROCESS_SOURCE, 'exec', command, argv, `cwd=${projectRoot}`);
 
     const { stdout, stderr, exitCode, commandNotFound } = await runCommand(
       cmd,
