@@ -96,3 +96,46 @@ resolution) is preferred over blanket bypass when multiple tracks have
 independent drift profiles. Apply: when introducing a new
 SC_PRE_TAG_GATE_BYPASS token, prefer the most-granular form that still
 expresses operator intent.
+
+## Lesson #10430 — Finer-grained counter-cadence alternation (codified v1.49.805)
+
+The historical baseline (Lesson #10168) is "counter-cadence cleanup
+mission every ~30 forward milestones." The audit streak v784-v804
+showed an alternative cadence shape: **alternate ~5 forward + 1
+codification + 1 calibration + 5 forward...** rather than batching
+30 milestones of operational debt into a discrete cleanup cluster.
+
+**Why the finer cadence is the gate-not-vigilance analog for cadence
+itself:** the 30-milestone cleanup-cluster pattern requires the
+operator to *remember* that a cleanup is due. A finer alternation
+makes the cleanup contiguous with forward work, so there is no
+explicit "is it time to do a cleanup?" decision — the next ship is
+either forward or counter, decided by whichever axis is overdue at
+the time.
+
+**When the finer cadence applies:**
+
+- Forward-cadence engine has clear unused bandwidth (e.g., 8+ ships
+  at a single NASA degree, or a substrate-builder sequence with no
+  consume / calibrate ships in between).
+- ≥1 ESTABLISHED lesson candidate sitting in the backlog ≥10 ships
+  beyond its codification-ready date.
+- ≥1 calibratable threshold has accumulated ≥20 observations without
+  the loop being run (post-T1.1 baseline).
+
+**When the 30-milestone batching cadence still applies:**
+
+- The audit-streak baseline (≥3 categories of social-rule debt in a
+  CONCERNS-style audit) — batched cleanup remains the right move when
+  the surfaces are multi-category and benefit from a coherent
+  framing.
+- New-discipline introduction (≥1 wholly new operational axis being
+  codified) — batching gives the new discipline doc enough surrounding
+  context to mature its framing.
+
+**The two cadences are complements, not alternatives.** The 30-ship
+batched cleanup remains the high-leverage discipline-introduction
+ship; the finer ~5-1-1 alternation is the steady-state maintenance
+ship pattern. See [meta-cadence-discipline.md](meta-cadence-discipline.md)
+for the three-axis (codify / consume / calibrate) framework that
+makes the finer cadence's axis-naming load-bearing.

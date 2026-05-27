@@ -102,12 +102,12 @@
   {
     "domain": "Counter-cadence cadence",
     "trigger": "Planning a non-degree-advancing milestone; converting accumulated social-rule debt into deterministic gates; meta-testing newly-introduced gates at ship time",
-    "summary": "Counter-cadence cleanup-mission pattern productive every ~30 forward milestones; gate-not-vigilance discipline (convert offending rule to a gate, not a re-emphasized prose rule); meta-test newly-installed gates against the milestone's own release-notes during T14; discipline-as-code in 3-cluster lifecycle; cluster-close forward-notes are load-bearing decisions; phantom-deps npm-audit fix + probe threshold gap",
+    "summary": "Counter-cadence cleanup-mission pattern productive every ~30 forward milestones; gate-not-vigilance discipline (convert offending rule to a gate, not a re-emphasized prose rule); meta-test newly-installed gates against the milestone's own release-notes during T14; discipline-as-code in 3-cluster lifecycle; cluster-close forward-notes are load-bearing decisions; phantom-deps npm-audit fix + probe threshold gap; finer-grained ~5-1-1 alternation as the steady-state maintenance complement to 30-ship batched cleanup (#10430)",
     "canonical_docs": [
       "docs/counter-cadence-discipline.md"
     ],
-    "key_lessons": ["#10168", "#10169", "#10170", "#10196", "#10203", "#10205", "#10208", "#10265", "#10266"],
-    "codified_at_milestone": "v1.49.654 (new domain — codified from v1.49.585-651 lesson cluster)"
+    "key_lessons": ["#10168", "#10169", "#10170", "#10196", "#10203", "#10205", "#10208", "#10265", "#10266", "#10430"],
+    "codified_at_milestone": "v1.49.654 (new domain — codified from v1.49.585-651 lesson cluster); finer-cadence pattern appended v1.49.805 (S7 lever)"
   },
   {
     "domain": "Ledger-driven work",
@@ -179,5 +179,25 @@
     ],
     "key_lessons": ["#10427"],
     "codified_at_milestone": "v1.49.802 (new domain — codified from v1.49.799-801 three-instance audit-log + watch-loop + /sc:status lesson cluster)"
+  },
+  {
+    "domain": "Meta-cadence",
+    "trigger": "Planning a counter-cadence cleanup-mission; deciding which operational debt to spend a non-degree-advancing ship on; auditing whether the project's three operational axes (codify / consume / calibrate) are in balance",
+    "summary": "Three operational axes — codify (~7-10 ships), consume (≤6 ships from substrate to first non-test caller), calibrate (~10 ships per wired threshold tick). Cadence-overdue check is prose-only and informational: each axis names its overdue trigger; the operator picks; the next counter-cadence's scope discussion NAMES the proposed axis even if a different axis wins on operator priority. The naming is the load-bearing discipline; the choice is operator-bounded.",
+    "canonical_docs": [
+      "docs/meta-cadence-discipline.md"
+    ],
+    "key_lessons": ["#10428"],
+    "codified_at_milestone": "v1.49.805 (new domain — codified from S3 lever in 2026-05-26 core-functions audit retrospective)"
+  },
+  {
+    "domain": "Substrate opt-in paths",
+    "trigger": "Authoring docs that surface opt-in flags to operators; reviewing whether a new substrate ship needs a public-surface entry; deciding what a new operator's second-30-minutes path should look like",
+    "summary": "Per-substrate four-field shape: what it unlocks / what it costs / opt-in mechanic / when to defer. Public surface (this doc) is the WHY-truth source; `docs/MODULE-DEFAULTS.md` is the flag-truth source. Add new entries below their axis grouping (observability / learning / execution / safety) in ship order. Retire entries only on codebase removal, not on default-flip (note inline). Cross-link to the canonical flag-truth doc; do NOT duplicate flag tables.",
+    "canonical_docs": [
+      "docs/SUBSTRATE-OPT-IN-PATHS.md"
+    ],
+    "key_lessons": ["#10429"],
+    "codified_at_milestone": "v1.49.805 (new domain — codified from S4 lever in 2026-05-26 core-functions audit retrospective)"
   }
 ]
