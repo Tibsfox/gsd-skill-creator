@@ -223,4 +223,30 @@ describe('EgressContext chokepoint audit', () => {
       }
     }
   });
+
+  // v1.49.838 — inverse-check (stale-entry detector). Mirrors the
+  // process-context-audit.test.ts inverse-check; closes the unidirectional
+  // asymmetry that v834 surfaced manually for the ProcessContext family.
+  // For EgressContext, the equivalent off-by-one would be a file that calls
+  // ensureEgressAllowed but still carries a stale KNOWN_UNWIRED entry. This
+  // gate fires deterministically on the next ship after the drift is
+  // introduced.
+  it('KNOWN_UNWIRED entries do NOT call ensureEgressAllowed (stale-entry detector)', () => {
+    const stale: string[] = [];
+    for (const path of KNOWN_UNWIRED) {
+      const abs = join(ROOT, path);
+      const content = readFileSync(abs, 'utf8');
+      if (ENSURE_EGRESS_ALLOWED_REGEX.test(content)) {
+        stale.push(path);
+      }
+    }
+    if (stale.length > 0) {
+      throw new Error(
+        `${stale.length} KNOWN_UNWIRED entr${stale.length === 1 ? 'y calls' : 'ies call'} ` +
+          `ensureEgressAllowed() — the file${stale.length === 1 ? '' : 's'} ${stale.length === 1 ? 'is' : 'are'} ` +
+          `wired but the allowlist ${stale.length === 1 ? 'entry is' : 'entries are'} stale. Remove from ` +
+          `KNOWN_UNWIRED:\n  ${stale.join('\n  ')}`,
+      );
+    }
+  });
 });

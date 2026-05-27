@@ -211,4 +211,33 @@ describe('ProcessContext chokepoint audit', () => {
       }
     }
   });
+
+  // v1.49.838 — inverse-check (stale-entry detector). Closes the
+  // unidirectional asymmetry that v834 surfaced manually: a file can be
+  // wired (calls ensureProcessAllowed) but still carry a stale KNOWN_UNWIRED
+  // entry indefinitely without test failure. v812 missed the allowlist edit
+  // when wiring intelligence/analyzer/git.ts; the off-by-one propagated
+  // through 22 subsequent ships before v834 caught it manually.
+  //
+  // This inverse-check fires on the NEXT ship after a stale entry is
+  // introduced, replacing the per-ship recon discipline with a deterministic
+  // gate.
+  it('KNOWN_UNWIRED entries do NOT call ensureProcessAllowed (stale-entry detector)', () => {
+    const stale: string[] = [];
+    for (const path of KNOWN_UNWIRED) {
+      const abs = join(ROOT, path);
+      const content = readFileSync(abs, 'utf8');
+      if (ENSURE_PROCESS_ALLOWED_REGEX.test(content)) {
+        stale.push(path);
+      }
+    }
+    if (stale.length > 0) {
+      throw new Error(
+        `${stale.length} KNOWN_UNWIRED entr${stale.length === 1 ? 'y calls' : 'ies call'} ` +
+          `ensureProcessAllowed() — the file${stale.length === 1 ? '' : 's'} ${stale.length === 1 ? 'is' : 'are'} ` +
+          `wired but the allowlist ${stale.length === 1 ? 'entry is' : 'entries are'} stale. Remove from ` +
+          `KNOWN_UNWIRED:\n  ${stale.join('\n  ')}`,
+      );
+    }
+  });
 });

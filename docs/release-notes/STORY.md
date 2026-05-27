@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.837`.
+The story begins at `v1.0` and continues to `v1.49.838`.
 
-**880 chapters.** 879 have retrospectives.
+**881 chapters.** 880 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -888,3 +888,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.835](v1.49.835/00-summary.md)** — `lowConfidenceThreshold` Calibration Scaffold (Full) · 2026-05-27
 - **[v1.49.836](v1.49.836/00-summary.md)** — `publish.mjs` Destination-Side Hand-Author Preservation · 2026-05-27
 - **[v1.49.837](v1.49.837/00-summary.md)** — `predictive.low_confidence_threshold` Observation Source Wired · 2026-05-27
+- **[v1.49.838](v1.49.838/00-summary.md)** — Audit Inverse-Check (Stale-Entry Detector) · 2026-05-27
