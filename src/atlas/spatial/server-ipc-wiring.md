@@ -42,6 +42,6 @@ The empty-symbols 200 response confirms the SQL path is live (PostGIS extension 
 
 ## Tile cache
 
-`pmtiles-reader.ts` uses an `lru-cache@^11` (max 256 entries, 5-min TTL) for tile bodies plus a separate LRU (max 4) for `PMTiles` archive instances. Caches are cleared via `clearPmtilesCaches()` (test hook) or by restarting the server.
+`pmtiles-reader.ts` uses an `lru-cache@^11` (max 256 entries, 5-min TTL) for tile bodies plus a separate LRU (max 64) for `PMTiles` archive instances. Archive `dispose` is refcounted — the underlying file-handle close defers until the entry's inflight `getZxy` count drains to zero (HIGH-01 refcount close v815). Caches are cleared via `clearPmtilesCaches()` (test hook) or by restarting the server.
 
 The legacy `inflight` deprecation pattern is intentionally avoided — `lru-cache@^11` is the upstream-recommended replacement.

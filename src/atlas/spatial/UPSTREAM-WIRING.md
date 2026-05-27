@@ -47,7 +47,7 @@ Architecture:
 
 ## PMTiles reader wiring (component 05) — DONE
 
-`src/atlas/spatial/pmtiles-reader.ts` uses pmtiles@4's `PMTiles` class with a Node-side `NodeFileSource` (file-handle based byte-range reads). Tile bodies cached via `LRUCache` (256 entries, 5-min TTL); archive instances cached via a separate `LRUCache` (max 4, with file-handle close on dispose). `clearPmtilesCaches()` exposed for tests and ops.
+`src/atlas/spatial/pmtiles-reader.ts` uses pmtiles@4's `PMTiles` class with a Node-side `NodeFileSource` (file-handle based byte-range reads). Tile bodies cached via `LRUCache` (256 entries, 5-min TTL); archive instances cached via a separate `LRUCache` (max 64, refcounted dispose — close defers until the entry's inflight `getZxy` count drains to zero, HIGH-01 refcount close v815). `clearPmtilesCaches()` exposed for tests and ops.
 
 ## FlatGeobuf wiring (component 06) — DONE (live mode auto-engages)
 

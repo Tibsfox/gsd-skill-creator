@@ -9,13 +9,15 @@
  * `lru-cache@^11` (replaces the `inflight`-style coalescing pattern that
  * was deprecated upstream).
  *
- * Concurrency invariants (post-REVIEW.md remediation 2026-05-10):
+ * Concurrency invariants:
  *   - `NodeFileSource` promise-caches its file-handle open so concurrent
- *     first-callers share a single descriptor (HIGH-02 fix).
- *   - `archiveCache` raises `max` to 64 (handles are cheap) and defers
- *     `dispose`-driven close behind a 30-second grace window so in-flight
- *     reads don't hit a closed fd (HIGH-01 interim fix; refcount-based
- *     close is the long-term plan).
+ *     first-callers share a single descriptor (HIGH-02 fix, v629).
+ *   - `archiveCache` entries carry an inflight refcount; `dispose` defers
+ *     the underlying `source.close()` until refcount drains to zero
+ *     (HIGH-01 refcount-based close, v815, replaces the 30s grace timer).
+ *     `fetchTileViaPMTiles` brackets `getZxy` with acquire/release so the
+ *     refcount spans the whole multi-range-read operation, not just a
+ *     single `source.getBytes` call.
  *   - `resolvePmtilesPath` rejects names whose resolved path escapes the
  *     configured `ATLAS_PMTILES_DIR` (MED-03 fix).
  *
@@ -65,8 +67,9 @@ export function validatePMTilesMagic(path: string): boolean {
 /**
  * Node-side `Source` impl for pmtiles@4. The file handle is opened lazily and
  * promise-cached so concurrent first-callers share one descriptor (HIGH-02
- * fix). Caller may `close()` to release; the LRU below also closes after a
- * grace window when an entry is evicted.
+ * fix). Caller may `close()` to release; the archive LRU below also closes
+ * via the refcounted dispose path once the entry's inflight count drains
+ * to zero (HIGH-01 refcount-based close).
  */
 export class NodeFileSource implements Source {
   /**
@@ -103,25 +106,45 @@ export class NodeFileSource implements Source {
 }
 
 /**
- * Archive-instance LRU. Each entry holds a NodeFileSource (one open file
- * handle) plus pmtiles@4's internal directory cache.
- *
- * `max: 64` keeps eviction rare under typical load. `dispose` defers close
- * behind a 30-second grace window so any in-flight `getZxy` (which may
- * issue a deferred root→leaf second range read) completes before the
- * underlying fd disappears (HIGH-01 fix). Refcount-based close is the
- * long-term plan; the grace window is the interim correctness guarantee.
+ * Refcounted archive cache entry. `inflight` is incremented by callers
+ * around `archive.getZxy(...)` and decremented in `finally`. When the LRU
+ * evicts the entry, `dispose` checks `inflight`: if zero, it closes the
+ * source immediately; otherwise it marks `closeRequested = true` and the
+ * final `release` (the decrement that brings `inflight` back to zero)
+ * triggers the actual close. This guarantees the fd survives every
+ * in-flight `getZxy` even when pmtiles@4 issues deferred root→leaf range
+ * reads on the same source. (HIGH-01 refcount-based close, v815.)
  */
-const ARCHIVE_CLOSE_GRACE_MS = 30_000;
-const archiveCache = new LRUCache<string, PMTiles>({
-  max: 64,
-  dispose: (archive) => {
-    const src = archive.source as NodeFileSource;
-    if (src && typeof src.close === 'function') {
-      setTimeout(() => { void src.close(); }, ARCHIVE_CLOSE_GRACE_MS).unref();
-    }
-  },
-});
+type RefcountedArchive = {
+  archive: PMTiles;
+  source: NodeFileSource;
+  inflight: number;
+  closeRequested: boolean;
+};
+
+/**
+ * Archive-instance LRU. `max: 64` keeps eviction rare under typical load.
+ * Recreated lazily so `__resetArchiveCacheForTest` can swap `max` between
+ * test runs.
+ */
+const DEFAULT_ARCHIVE_CACHE_MAX = 64;
+let archiveCacheMax = DEFAULT_ARCHIVE_CACHE_MAX;
+let _archiveCache: LRUCache<string, RefcountedArchive> | null = null;
+
+function archiveCacheInstance(): LRUCache<string, RefcountedArchive> {
+  if (_archiveCache) return _archiveCache;
+  _archiveCache = new LRUCache<string, RefcountedArchive>({
+    max: archiveCacheMax,
+    dispose: (entry) => {
+      if (entry.inflight === 0) {
+        void entry.source.close();
+      } else {
+        entry.closeRequested = true;
+      }
+    },
+  });
+  return _archiveCache;
+}
 
 /**
  * Tile-body LRU. Atlas tiles are immutable for the lifetime of a snapshot,
@@ -134,16 +157,21 @@ const tileBodyCache = new LRUCache<string, Buffer>({
 });
 
 /**
- * Get-or-create a PMTiles archive for the given path. Re-uses the file
- * handle across calls.
+ * Get-or-create a refcounted archive entry for the given path. Re-uses the
+ * file handle across calls. Callers MUST `entry.inflight++` before
+ * awaiting `archive.getZxy(...)` and decrement in `finally`; the
+ * decrement also triggers the deferred close when applicable.
  */
-function getArchive(path: string): PMTiles {
-  let archive = archiveCache.get(path);
-  if (!archive) {
-    archive = new PMTiles(new NodeFileSource(path));
-    archiveCache.set(path, archive);
+function getArchive(path: string): RefcountedArchive {
+  const cache = archiveCacheInstance();
+  let entry = cache.get(path);
+  if (!entry) {
+    const source = new NodeFileSource(path);
+    const archive = new PMTiles(source);
+    entry = { archive, source, inflight: 0, closeRequested: false };
+    cache.set(path, entry);
   }
-  return archive;
+  return entry;
 }
 
 /**
@@ -165,13 +193,20 @@ export async function fetchTileViaPMTiles(
   const cached = tileBodyCache.get(cacheKey);
   if (cached !== undefined) return cached;
 
-  const archive = getArchive(path);
-  const tile = await archive.getZxy(z, x, y);
-  if (!tile) return null;
-
-  const buf = Buffer.from(tile.data);
-  tileBodyCache.set(cacheKey, buf);
-  return buf;
+  const entry = getArchive(path);
+  entry.inflight++;
+  try {
+    const tile = await entry.archive.getZxy(z, x, y);
+    if (!tile) return null;
+    const buf = Buffer.from(tile.data);
+    tileBodyCache.set(cacheKey, buf);
+    return buf;
+  } finally {
+    entry.inflight--;
+    if (entry.closeRequested && entry.inflight === 0) {
+      void entry.source.close();
+    }
+  }
 }
 
 /**
@@ -186,16 +221,42 @@ export async function fetchTileForCoord(
 
 /**
  * Test / ops hook: clear the in-memory caches. Called by tests between cases
- * and by ops to force a re-read after a swap. The grace-window-deferred
- * source closes are NOT awaited — they fire asynchronously on the unref'd
- * timer queue.
+ * and by ops to force a re-read after a swap. Closes on evicted entries
+ * fire asynchronously (deferred until inflight refcount drains to zero per
+ * the v815 refcount-based close).
  */
 export function clearPmtilesCaches(): void {
-  archiveCache.clear();
+  _archiveCache?.clear();
   tileBodyCache.clear();
 }
 
 /** Diagnostic: cache occupancy for ops dashboards. */
 export function pmtilesCacheStats(): { archives: number; tiles: number } {
-  return { archives: archiveCache.size, tiles: tileBodyCache.size };
+  return { archives: _archiveCache?.size ?? 0, tiles: tileBodyCache.size };
+}
+
+/**
+ * Test-only hook. Drops the archive cache and (optionally) sets a new `max`
+ * for the next call to `archiveCacheInstance()`. Tests use a small max
+ * (e.g. 2) to exercise the eviction race against a manageable archive
+ * count. Pass no argument or `{ max: undefined }` to reset to the default.
+ */
+export function __resetArchiveCacheForTest(opts?: { max?: number }): void {
+  _archiveCache?.clear();
+  _archiveCache = null;
+  archiveCacheMax = opts?.max ?? DEFAULT_ARCHIVE_CACHE_MAX;
+}
+
+/**
+ * Test-only hook. Returns the refcounted cache entry for a path (or
+ * `undefined` if not cached). Tests use this to inspect the `inflight` /
+ * `closeRequested` fields and to drive the refcount through scenarios
+ * that real `getZxy` calls would complete too fast to observe.
+ */
+export function __getArchiveEntryForTest(path: string): {
+  source: NodeFileSource;
+  inflight: number;
+  closeRequested: boolean;
+} | undefined {
+  return _archiveCache?.peek(path);
 }

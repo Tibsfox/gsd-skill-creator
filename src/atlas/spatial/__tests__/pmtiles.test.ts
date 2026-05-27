@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { writeFileSync, unlinkSync, existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { tmpdir } from 'node:os';
@@ -10,6 +10,8 @@ import {
   clearPmtilesCaches,
   pmtilesCacheStats,
   NodeFileSource,
+  __resetArchiveCacheForTest,
+  __getArchiveEntryForTest,
 } from '../pmtiles-reader.js';
 import {
   tileToAtlasBBox,
@@ -253,5 +255,96 @@ describe('buildSymbolTilePyramid → pmtiles@4 reader round-trip', () => {
     // Mid-pyramid tile may or may not exist depending on fixture density;
     // either is fine — the reader follows the leaf pointer either way.
     if (tDeep) expect(tDeep.data.byteLength).toBeGreaterThan(0);
+  });
+});
+
+// ── HIGH-01 refcount-based close (v815) ─────────────────────────────────────
+
+describe('archiveCache refcounted dispose (HIGH-01 refcount close)', () => {
+  // Build three tiny real PMTiles files so the cache holds real archives.
+  // Then drive the eviction race via `__getArchiveEntryForTest` to inspect
+  // `inflight` / `closeRequested` directly — real `getZxy` calls complete
+  // too fast to observe the deferred-close window in a test.
+  const tmpA = resolve(tmpdir(), 'pmtiles-rc-A.pmtiles');
+  const tmpB = resolve(tmpdir(), 'pmtiles-rc-B.pmtiles');
+  const tmpC = resolve(tmpdir(), 'pmtiles-rc-C.pmtiles');
+
+  async function makeTiny(path: string): Promise<void> {
+    const client = mockClient({
+      bbox: [{ min_x: 0, min_y: 0, max_x: 100, max_y: 100 }],
+      symbols: [{ id: 'a', x: 10, y: 10, qualified_name: 'm.a', kind: 'function' }],
+    });
+    await buildSymbolTilePyramid({ pgClient: client, outPath: path, minZoom: 0, maxZoom: 0 });
+  }
+
+  beforeEach(async () => {
+    __resetArchiveCacheForTest({ max: 2 });
+    await makeTiny(tmpA);
+    await makeTiny(tmpB);
+    await makeTiny(tmpC);
+  });
+
+  afterEach(() => {
+    [tmpA, tmpB, tmpC].forEach((p) => { if (existsSync(p)) unlinkSync(p); });
+    __resetArchiveCacheForTest();
+  });
+
+  it('closes the source immediately on eviction when inflight is 0', async () => {
+    const closeSpy = vi.spyOn(NodeFileSource.prototype, 'close');
+    try {
+      // Seed cache with A and B. With max=2, both fit.
+      await fetchTileViaPMTiles(tmpA, 0, 0, 0);
+      await fetchTileViaPMTiles(tmpB, 0, 0, 0);
+      expect(closeSpy).not.toHaveBeenCalled();
+      expect(pmtilesCacheStats().archives).toBe(2);
+
+      // Fetch C evicts A (LRU). A's inflight was 0 at eviction time, so
+      // dispose closes A's source immediately (fire-and-forget).
+      await fetchTileViaPMTiles(tmpC, 0, 0, 0);
+      // Wait one microtask tick for the void close() to schedule.
+      await Promise.resolve();
+      expect(closeSpy).toHaveBeenCalledTimes(1);
+      const closedThis = closeSpy.mock.instances[0] as unknown as NodeFileSource;
+      expect(closedThis.filePath).toBe(tmpA);
+      expect(pmtilesCacheStats().archives).toBe(2); // B + C
+    } finally {
+      closeSpy.mockRestore();
+    }
+  });
+
+  it('defers the source close on eviction when inflight > 0, then closes on release', async () => {
+    const closeSpy = vi.spyOn(NodeFileSource.prototype, 'close');
+    try {
+      // Seed A in cache.
+      await fetchTileViaPMTiles(tmpA, 0, 0, 0);
+      expect(closeSpy).not.toHaveBeenCalled();
+
+      // Simulate an in-flight getZxy on A by incrementing inflight directly.
+      const entryA = __getArchiveEntryForTest(tmpA)!;
+      expect(entryA).toBeDefined();
+      expect(entryA.inflight).toBe(0);
+      entryA.inflight = 1;
+
+      // Fill cache (B) then evict A by fetching C. With max=2, C eviction-displaces A.
+      await fetchTileViaPMTiles(tmpB, 0, 0, 0);
+      await fetchTileViaPMTiles(tmpC, 0, 0, 0);
+      await Promise.resolve();
+
+      // A's dispose ran but close was deferred — source still has its handle.
+      expect(closeSpy).not.toHaveBeenCalled();
+      expect(entryA.closeRequested).toBe(true);
+
+      // Caller's `finally` block (release): drop inflight to 0 and fire
+      // the pending close exactly as `fetchTileViaPMTiles` does.
+      entryA.inflight = 0;
+      if (entryA.closeRequested && entryA.inflight === 0) {
+        await entryA.source.close();
+      }
+      expect(closeSpy).toHaveBeenCalledTimes(1);
+      const closedThis = closeSpy.mock.instances[0] as unknown as NodeFileSource;
+      expect(closedThis.filePath).toBe(tmpA);
+    } finally {
+      closeSpy.mockRestore();
+    }
   });
 });
