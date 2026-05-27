@@ -9,6 +9,9 @@
 import { execFile } from 'node:child_process';
 import { assertClean } from './state-machine.js';
 import { loadConfig } from './repo-manager.js';
+import { ensureProcessAllowed, type ProcessContext } from '../../security/process-context.js';
+
+const PROCESS_SOURCE = 'git/core/sync-manager';
 
 // --- Public types ---
 
@@ -54,8 +57,9 @@ export interface SyncResult {
 export async function sync(
   repoPath: string,
   options?: SyncOptions,
+  ctx?: ProcessContext,
 ): Promise<SyncResult> {
-  await assertClean(repoPath);
+  await assertClean(repoPath, ctx);
 
   const config = await loadConfig(repoPath);
   const strategy = options?.strategy ?? 'rebase';
@@ -63,13 +67,14 @@ export async function sync(
   const upstreamRef = `upstream/${config.mainBranch}`;
 
   // Fetch upstream
-  await execGit('git', ['fetch', 'upstream'], repoPath);
+  await execGit('git', ['fetch', 'upstream'], repoPath, ctx);
 
   // Count new commits
   const countOutput = await execGit(
     'git',
     ['rev-list', '--count', `${config.devBranch}..${upstreamRef}`],
     repoPath,
+    ctx,
   );
   const newCommits = parseInt(countOutput.trim(), 10) || 0;
 
@@ -84,6 +89,7 @@ export async function sync(
       'git',
       ['log', '--oneline', `${config.devBranch}..${upstreamRef}`],
       repoPath,
+      ctx,
     );
     const upstreamLog = logOutput
       .split('\n')
@@ -99,9 +105,9 @@ export async function sync(
 
   // Apply changes
   if (strategy === 'merge') {
-    return applyMerge(repoPath, upstreamRef, newCommits);
+    return applyMerge(repoPath, upstreamRef, newCommits, ctx);
   }
-  return applyRebase(repoPath, upstreamRef, newCommits);
+  return applyRebase(repoPath, upstreamRef, newCommits, ctx);
 }
 
 // --- Internal helpers ---
@@ -113,10 +119,11 @@ async function applyRebase(
   repoPath: string,
   upstreamRef: string,
   newCommits: number,
+  ctx?: ProcessContext,
 ): Promise<SyncResult> {
   try {
-    await execGit('git', ['rebase', upstreamRef], repoPath);
-    const head = await execGit('git', ['rev-parse', 'HEAD'], repoPath);
+    await execGit('git', ['rebase', upstreamRef], repoPath, ctx);
+    const head = await execGit('git', ['rev-parse', 'HEAD'], repoPath, ctx);
     return {
       newCommits,
       conflicted: false,
@@ -124,8 +131,8 @@ async function applyRebase(
     };
   } catch {
     // Conflict — get file list then abort
-    const conflictFiles = await getConflictFiles(repoPath);
-    await execGit('git', ['rebase', '--abort'], repoPath);
+    const conflictFiles = await getConflictFiles(repoPath, ctx);
+    await execGit('git', ['rebase', '--abort'], repoPath, ctx);
     return {
       newCommits: 0,
       conflicted: true,
@@ -141,10 +148,11 @@ async function applyMerge(
   repoPath: string,
   upstreamRef: string,
   newCommits: number,
+  ctx?: ProcessContext,
 ): Promise<SyncResult> {
   try {
-    await execGit('git', ['merge', upstreamRef, '--no-ff'], repoPath);
-    const head = await execGit('git', ['rev-parse', 'HEAD'], repoPath);
+    await execGit('git', ['merge', upstreamRef, '--no-ff'], repoPath, ctx);
+    const head = await execGit('git', ['rev-parse', 'HEAD'], repoPath, ctx);
     return {
       newCommits,
       conflicted: false,
@@ -152,8 +160,8 @@ async function applyMerge(
     };
   } catch {
     // Conflict — get file list then abort
-    const conflictFiles = await getConflictFiles(repoPath);
-    await execGit('git', ['merge', '--abort'], repoPath);
+    const conflictFiles = await getConflictFiles(repoPath, ctx);
+    await execGit('git', ['merge', '--abort'], repoPath, ctx);
     return {
       newCommits: 0,
       conflicted: true,
@@ -165,12 +173,13 @@ async function applyMerge(
 /**
  * Get list of files with conflicts.
  */
-async function getConflictFiles(repoPath: string): Promise<string[]> {
+async function getConflictFiles(repoPath: string, ctx?: ProcessContext): Promise<string[]> {
   try {
     const output = await execGit(
       'git',
       ['diff', '--name-only', '--diff-filter=U'],
       repoPath,
+      ctx,
     );
     return output
       .split('\n')
@@ -182,8 +191,16 @@ async function getConflictFiles(repoPath: string): Promise<string[]> {
 
 /**
  * Execute a command via execFile and return stdout.
+ * Chokepoint-wired: ensureProcessAllowed BEFORE spawn.
+ * ProcessContextDenied is load-bearing per #10427 — propagate to caller.
  */
-function execGit(cmd: string, args: string[], cwd: string): Promise<string> {
+function execGit(
+  cmd: string,
+  args: string[],
+  cwd: string,
+  ctx?: ProcessContext,
+): Promise<string> {
+  ensureProcessAllowed(ctx, PROCESS_SOURCE, 'exec-file', cmd, args, `cwd=${cwd}`);
   return new Promise((resolve, reject) => {
     execFile(cmd, args, { cwd }, (err, stdout, _stderr) => {
       if (err) {

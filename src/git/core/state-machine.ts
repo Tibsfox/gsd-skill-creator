@@ -12,6 +12,9 @@ import { execSync } from 'node:child_process';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import type { GitState, GitStateReport, RemoteInfo } from '../types.js';
+import { ensureProcessAllowed, type ProcessContext } from '../../security/process-context.js';
+
+const PROCESS_SOURCE = 'git/core/state-machine';
 
 /**
  * Valid state transition map.
@@ -36,10 +39,10 @@ const TRANSITIONS: Record<GitState, GitState[]> = {
  * @returns A complete GitStateReport snapshot
  * @throws Error if the path is not a git repository
  */
-export async function detectState(repoPath: string): Promise<GitStateReport> {
+export async function detectState(repoPath: string, ctx?: ProcessContext): Promise<GitStateReport> {
   // Verify it is a git repo
   try {
-    exec('git rev-parse --git-dir', repoPath);
+    exec('git rev-parse --git-dir', repoPath, ctx);
   } catch {
     throw new Error(`Not a git repository: ${repoPath}`);
   }
@@ -47,7 +50,7 @@ export async function detectState(repoPath: string): Promise<GitStateReport> {
   // Detect branch
   let branch: string | null;
   try {
-    const rawBranch = exec('git rev-parse --abbrev-ref HEAD', repoPath);
+    const rawBranch = exec('git rev-parse --abbrev-ref HEAD', repoPath, ctx);
     branch = rawBranch === 'HEAD' ? null : rawBranch;
   } catch {
     branch = null;
@@ -61,7 +64,7 @@ export async function detectState(repoPath: string): Promise<GitStateReport> {
     fs.existsSync(path.join(gitDir, 'rebase-apply'));
 
   // Parse porcelain v2 status
-  const statusOutput = exec('git status --porcelain=v2', repoPath);
+  const statusOutput = exec('git status --porcelain=v2', repoPath, ctx);
   const lines = statusOutput ? statusOutput.split('\n').filter((l) => l.length > 0) : [];
 
   const staged: string[] = [];
@@ -114,7 +117,7 @@ export async function detectState(repoPath: string): Promise<GitStateReport> {
   let ahead = 0;
   let behind = 0;
   try {
-    const counts = exec('git rev-list --left-right --count HEAD...@{upstream}', repoPath);
+    const counts = exec('git rev-list --left-right --count HEAD...@{upstream}', repoPath, ctx);
     const parts = counts.split(/\s+/);
     if (parts.length >= 2) {
       ahead = parseInt(parts[0], 10) || 0;
@@ -125,7 +128,7 @@ export async function detectState(repoPath: string): Promise<GitStateReport> {
   }
 
   // Detect remotes
-  const remotes = parseRemotes(repoPath);
+  const remotes = parseRemotes(repoPath, ctx);
 
   return {
     state,
@@ -146,8 +149,12 @@ export async function detectState(repoPath: string): Promise<GitStateReport> {
  * @param expected - The expected GitState
  * @throws Error if the actual state does not match expected
  */
-export async function assertState(repoPath: string, expected: GitState): Promise<void> {
-  const report = await detectState(repoPath);
+export async function assertState(
+  repoPath: string,
+  expected: GitState,
+  ctx?: ProcessContext,
+): Promise<void> {
+  const report = await detectState(repoPath, ctx);
   if (report.state !== expected) {
     throw new Error(
       `Git state assertion failed: expected ${expected} but got ${report.state}`,
@@ -164,8 +171,8 @@ export async function assertState(repoPath: string, expected: GitState): Promise
  * @param repoPath - Absolute path to the git repository
  * @throws Error if the repository has any uncommitted changes or untracked files
  */
-export async function assertClean(repoPath: string): Promise<void> {
-  const report = await detectState(repoPath);
+export async function assertClean(repoPath: string, ctx?: ProcessContext): Promise<void> {
+  const report = await detectState(repoPath, ctx);
   const issues: string[] = [];
 
   if (report.state !== 'CLEAN') {
@@ -203,8 +210,14 @@ export function isValidTransition(from: GitState, to: GitState, operation: strin
 
 /**
  * Execute a git command synchronously and return trimmed stdout.
+ * Chokepoint-wired: splits shell-string into command + argv for audit.
+ * ProcessContextDenied is load-bearing per #10427 — propagate to caller.
  */
-function exec(command: string, cwd: string): string {
+function exec(command: string, cwd: string, ctx?: ProcessContext): string {
+  const tokens = command.split(/\s+/);
+  const exe = tokens[0] ?? '';
+  const argv = tokens.slice(1);
+  ensureProcessAllowed(ctx, PROCESS_SOURCE, 'exec', exe, argv, `cwd=${cwd}`);
   return execSync(command, { cwd, encoding: 'utf-8', stdio: ['pipe', 'pipe', 'pipe'] }).trim();
 }
 
@@ -239,10 +252,10 @@ function extractFilePath(line: string): string {
  * Parse git remotes from `git remote -v` output.
  * Returns only fetch entries (one per remote name).
  */
-function parseRemotes(repoPath: string): RemoteInfo[] {
+function parseRemotes(repoPath: string, ctx?: ProcessContext): RemoteInfo[] {
   let output: string;
   try {
-    output = exec('git remote -v', repoPath);
+    output = exec('git remote -v', repoPath, ctx);
   } catch {
     return [];
   }
@@ -264,7 +277,7 @@ function parseRemotes(repoPath: string): RemoteInfo[] {
     // Get fetch refspec
     let fetchRefspec = '';
     try {
-      fetchRefspec = exec(`git config remote.${name}.fetch`, repoPath);
+      fetchRefspec = exec(`git config remote.${name}.fetch`, repoPath, ctx);
     } catch {
       fetchRefspec = `+refs/heads/*:refs/remotes/${name}/*`;
     }

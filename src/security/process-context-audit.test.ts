@@ -51,11 +51,10 @@ const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
   'src/dogfood/pydmd/install/health-check.ts',
   'src/dogfood/pydmd/install/venv-manager.ts',
   'src/drift/cli.ts',
-  // git/core/branch-manager wired at v1.49.820 first-chip (4-entry family;
-  // remaining 3: repo-manager, state-machine, sync-manager — future batch).
-  'src/git/core/repo-manager.ts',
-  'src/git/core/state-machine.ts',
-  'src/git/core/sync-manager.ts',
+  // git/core family fully wired:
+  //   v1.49.820 first-chip (branch-manager);
+  //   v1.49.825 batch chip (repo-manager + state-machine + sync-manager) —
+  //   all 3 use internal-helper pattern (#10433); wire cost ~14-18 LOC each.
   'src/git/gates/pre-flight.ts',
   'src/git/workflows/contribute.ts',
   'src/intelligence/analyzer/findings/stalled.ts',
