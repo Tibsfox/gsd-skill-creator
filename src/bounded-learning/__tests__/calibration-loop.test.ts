@@ -138,3 +138,42 @@ describe('runCalibrationLoop — suggestions.cooldown_days (v1.49.796)', () => {
     expect(rec.proposedValue).toBe(1);
   });
 });
+
+describe('runCalibrationLoop — suggestions.auto_dismiss_after_days (v1.49.797)', () => {
+  it('recommends decrease on accept-skew (auto-dismiss pending sooner)', () => {
+    const obs10 = Array.from({ length: 10 }, (_, i) => obs(1, `s-${i}`));
+    const rec = runCalibrationLoop('suggestions.auto_dismiss_after_days', 30, obs10);
+    expect(rec.threshold).toBe('suggestions.auto_dismiss_after_days');
+    expect(rec.direction).toBe('decrease');
+    expect(rec.rejected).toBe(true);
+    expect(rec.proposedValue).toBe(29);
+    expect(rec.reason).toContain('lower');
+    expect(rec.reason).toContain('30 → 29');
+  });
+
+  it('recommends increase on dismiss-skew (keep pending longer)', () => {
+    const obs10 = Array.from({ length: 10 }, (_, i) => obs(-1, `s-${i}`));
+    const rec = runCalibrationLoop('suggestions.auto_dismiss_after_days', 30, obs10);
+    expect(rec.threshold).toBe('suggestions.auto_dismiss_after_days');
+    expect(rec.direction).toBe('increase');
+    expect(rec.rejected).toBe(true);
+    expect(rec.proposedValue).toBe(31);
+    expect(rec.reason).toContain('raise');
+    expect(rec.reason).toContain('30 → 31');
+  });
+
+  it('holds with insufficient evidence at the live default value (30)', () => {
+    const obs5 = Array.from({ length: 5 }, (_, i) => obs(1, `s-${i}`));
+    const rec = runCalibrationLoop('suggestions.auto_dismiss_after_days', 30, obs5);
+    expect(rec.direction).toBe('hold');
+    expect(rec.proposedValue).toBeNull();
+    expect(rec.currentValue).toBe(30);
+  });
+
+  it('clamps proposed decrease at the absolute floor (1)', () => {
+    const obs10 = Array.from({ length: 10 }, (_, i) => obs(1, `s-${i}`));
+    const rec = runCalibrationLoop('suggestions.auto_dismiss_after_days', 1, obs10);
+    expect(rec.direction).toBe('decrease');
+    expect(rec.proposedValue).toBe(1);
+  });
+});

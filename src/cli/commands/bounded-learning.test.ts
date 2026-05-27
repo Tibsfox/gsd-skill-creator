@@ -281,6 +281,70 @@ describe('boundedLearningCommand — --threshold suggestions.cooldown_days (v1.4
   });
 });
 
+describe('boundedLearningCommand — --threshold suggestions.auto_dismiss_after_days (v1.49.797)', () => {
+  beforeEach(() => {
+    // Live-default auto_dismiss_after_days = 30; siblings preserved.
+    writeConfig({ suggestions: { min_occurrences: 3, cooldown_days: 7, auto_dismiss_after_days: 30 } });
+  });
+
+  it('reads the auto_dismiss_after_days threshold from config and reports current value', async () => {
+    writeSuggestions([]);
+    const code = await boundedLearningCommand(
+      baseArgs(['--threshold', 'suggestions.auto_dismiss_after_days', '--json']),
+    );
+    expect(code).toBe(0);
+    const out = JSON.parse(collectLog());
+    expect(out.threshold).toBe('suggestions.auto_dismiss_after_days');
+    expect(out.currentValue).toBe(30);
+    expect(out.direction).toBe('hold');
+  });
+
+  it('recommends decrease (29) after 10 unanimous accepts', async () => {
+    writeSuggestions(
+      Array.from({ length: 10 }, (_, i) => ({ id: `s-${i}`, state: 'accepted' })),
+    );
+    const code = await boundedLearningCommand(
+      baseArgs(['--threshold', 'suggestions.auto_dismiss_after_days', '--json']),
+    );
+    expect(code).toBe(0);
+    const out = JSON.parse(collectLog());
+    expect(out.threshold).toBe('suggestions.auto_dismiss_after_days');
+    expect(out.direction).toBe('decrease');
+    expect(out.currentValue).toBe(30);
+    expect(out.proposedValue).toBe(29);
+    expect(out.applied).toBe('dry-run');
+  });
+
+  it('recommends increase (31) after 10 unanimous dismisses', async () => {
+    writeSuggestions(
+      Array.from({ length: 10 }, (_, i) => ({ id: `s-${i}`, state: 'dismissed' })),
+    );
+    const code = await boundedLearningCommand(
+      baseArgs(['--threshold', 'suggestions.auto_dismiss_after_days', '--json']),
+    );
+    expect(code).toBe(0);
+    const out = JSON.parse(collectLog());
+    expect(out.direction).toBe('increase');
+    expect(out.proposedValue).toBe(31);
+  });
+
+  it('writes auto_dismiss_after_days=29 to config when --apply is passed (siblings preserved)', async () => {
+    writeSuggestions(
+      Array.from({ length: 10 }, (_, i) => ({ id: `s-${i}`, state: 'accepted' })),
+    );
+    const code = await boundedLearningCommand(
+      baseArgs(['--threshold', 'suggestions.auto_dismiss_after_days', '--apply', '--json']),
+    );
+    expect(code).toBe(0);
+    const out = JSON.parse(collectLog());
+    expect(out.applied).toBe('applied');
+    const onDisk = JSON.parse(readFileSync(configPath, 'utf8'));
+    expect(onDisk.suggestions.auto_dismiss_after_days).toBe(29);
+    expect(onDisk.suggestions.min_occurrences).toBe(3);
+    expect(onDisk.suggestions.cooldown_days).toBe(7);
+  });
+});
+
 describe('boundedLearningCommand — malformed input tolerance', () => {
   it('ignores garbage suggestions.json (treats as empty)', async () => {
     writeFileSync(suggestionsPath, '<<<not json>>>', 'utf8');

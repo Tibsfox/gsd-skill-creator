@@ -170,4 +170,25 @@ describe('applyRecommendation', () => {
     expect(readThresholdValue(onDisk, 'suggestions.min_occurrences')).toBe(3);
     expect(readThresholdValue(onDisk, 'suggestions.auto_dismiss_after_days')).toBe(30);
   });
+
+  it('writes auto_dismiss_after_days through to disk and preserves siblings (v1.49.797)', async () => {
+    writeConfig({ suggestions: { min_occurrences: 3, cooldown_days: 7, auto_dismiss_after_days: 30 } });
+    const rec = makeRecommendation({
+      threshold: 'suggestions.auto_dismiss_after_days',
+      currentValue: 30,
+      proposedValue: 29,
+      direction: 'decrease',
+      meanObservation: 1,
+      reason: 'auto_dismiss_after_days test recommendation',
+    });
+    const outcome = await applyRecommendation(rec, { configPath, apply: true });
+    expect(outcome.kind).toBe('applied');
+    if (outcome.kind !== 'applied') throw new Error('unreachable');
+    expect(outcome.previousValue).toBe(30);
+    expect(outcome.newValue).toBe(29);
+    const onDisk = JSON.parse(readFileSync(configPath, 'utf8'));
+    expect(readThresholdValue(onDisk, 'suggestions.auto_dismiss_after_days')).toBe(29);
+    expect(readThresholdValue(onDisk, 'suggestions.min_occurrences')).toBe(3);
+    expect(readThresholdValue(onDisk, 'suggestions.cooldown_days')).toBe(7);
+  });
 });

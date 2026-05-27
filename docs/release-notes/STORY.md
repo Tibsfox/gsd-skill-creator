@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.796`.
+The story begins at `v1.0` and continues to `v1.49.797`.
 
-**839 chapters.** 838 have retrospectives.
+**840 chapters.** 839 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -847,3 +847,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.794](v1.49.794/00-summary.md)** — Deterministic Gate for #10424: Adoption-Refresh Overwrite Guard · 2026-05-26
 - **[v1.49.795](v1.49.795/00-summary.md)** — T1.1 Ship 1: Bounded-Learning Calibration Loop · 2026-05-26
 - **[v1.49.796](v1.49.796/00-summary.md)** — T1.1 Ship 2: Wire `suggestions.cooldown_days` · 2026-05-27
+- **[v1.49.797](v1.49.797/00-summary.md)** — T1.1 Ship 3: Wire `suggestions.auto_dismiss_after_days` · 2026-05-27

@@ -17,14 +17,18 @@
  *   2 — config file not found / unreadable
  *
  * Wired thresholds:
- *   - `suggestions.min_occurrences` (v1.49.795)
- *   - `suggestions.cooldown_days`   (v1.49.796)
+ *   - `suggestions.min_occurrences`        (v1.49.795)
+ *   - `suggestions.cooldown_days`          (v1.49.796)
+ *   - `suggestions.auto_dismiss_after_days` (v1.49.797)
  *
- * Both thresholds share the same observation source (operator accept/dismiss
- * decisions on surfaced suggestions). Direction is interpreted per-threshold
- * but uses the same mapping: accept-skew ⇒ DECREASE, dismiss-skew ⇒ INCREASE.
- * For `cooldown_days`, DECREASE means re-surface sooner; INCREASE means
- * re-surface later.
+ * All three thresholds share the same observation source (operator
+ * accept/dismiss decisions on surfaced suggestions). Direction is interpreted
+ * per-threshold but uses the same mapping: accept-skew ⇒ DECREASE,
+ * dismiss-skew ⇒ INCREASE.
+ *   - For `cooldown_days`, DECREASE means re-surface sooner; INCREASE means
+ *     re-surface later.
+ *   - For `auto_dismiss_after_days`, DECREASE means auto-dismiss pending
+ *     suggestions sooner; INCREASE means keep them in the queue longer.
  *
  * @module cli/commands/bounded-learning
  */
@@ -49,6 +53,7 @@ const DEFAULT_THRESHOLD: CalibratableThreshold = 'suggestions.min_occurrences';
 const SUPPORTED_THRESHOLDS: CalibratableThreshold[] = [
   'suggestions.min_occurrences',
   'suggestions.cooldown_days',
+  'suggestions.auto_dismiss_after_days',
 ];
 
 const DEFAULT_SUGGESTIONS_PATH = join(process.cwd(), '.planning', 'patterns', 'suggestions.json');
