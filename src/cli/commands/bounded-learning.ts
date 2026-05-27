@@ -22,6 +22,11 @@
  *   - `suggestions.auto_dismiss_after_days` (v1.49.797)
  *   - `token_budget.warn_at_percent`        (v1.49.798)
  *
+ * Every invocation appends a single JSON line to
+ * `.planning/patterns/bounded-learning-log.jsonl` (configurable via
+ * `--audit-log <path>`; disable with `--no-audit-log`). Appends are
+ * best-effort — failures never block the CLI (v1.49.799).
+ *
  * Observation sources are now per-threshold-class (introduced v1.49.798):
  * `suggestions.*` thresholds read operator accept/dismiss decisions from
  * `.planning/patterns/suggestions.json`; `token_budget.*` thresholds have
@@ -46,7 +51,10 @@ import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 
 import {
+  DEFAULT_AUDIT_LOG_PATH,
+  appendAuditLogEntry,
   applyRecommendation,
+  buildAuditLogEntry,
   loadObservationsForThreshold,
   observationSourceFor,
   runCalibrationLoop,
@@ -97,6 +105,8 @@ Options:
   --suggestions <path> Path to suggestions.json (default .planning/patterns/suggestions.json)
   --config <path>      Path to skill-creator.json (default .planning/skill-creator.json)
   --apply              Apply the recommendation to skill-creator.json (default: dry-run)
+  --audit-log <path>   Override audit-log JSONL path (default .planning/patterns/bounded-learning-log.jsonl)
+  --no-audit-log       Disable audit-log writes for this invocation
   --quiet, -q          Machine-readable CSV output
   --json               JSON output
   --help, -h           Show this help
@@ -349,6 +359,23 @@ export async function boundedLearningCommand(args: string[]): Promise<number> {
       : outcome.kind === 'dry-run' ? 'dry-run'
       : 'noop';
   const applyReason = outcome.kind === 'noop' ? outcome.reason : null;
+
+  // ── Append to audit log (v1.49.799) ────────────────────────────────────
+  const noAuditLog = args.includes('--no-audit-log');
+  if (!noAuditLog) {
+    const auditLogLookup = getFlagValue(args, '--audit-log');
+    const auditLogPath = auditLogLookup.present && auditLogLookup.value !== null
+      ? auditLogLookup.value
+      : DEFAULT_AUDIT_LOG_PATH;
+    const entry = buildAuditLogEntry(recommendation, appliedKind);
+    try {
+      await appendAuditLogEntry(entry, { path: auditLogPath });
+    } catch {
+      // Audit log is best-effort — failures here MUST NOT block the
+      // operator's CLI invocation. Surface in JSON output via a warning
+      // field; silent in text/quiet renderers.
+    }
+  }
 
   // ── Render ─────────────────────────────────────────────────────────────
   if (json) {

@@ -52,3 +52,11 @@ export type {
   ObservationLoaderOptions,
   ObservationSourceInfo,
 } from './observation-sources.js';
+
+export {
+  DEFAULT_AUDIT_LOG_PATH,
+  appendAuditLogEntry,
+  buildAuditLogEntry,
+  readAuditLog,
+} from './audit-log.js';
+export type { AuditLogEntry } from './audit-log.js';

@@ -9,7 +9,7 @@
  */
 
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { mkdtempSync, writeFileSync, readFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, writeFileSync, readFileSync, rmSync, existsSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
@@ -41,6 +41,7 @@ import { boundedLearningCommand } from './bounded-learning.js';
 let tmpRoot: string;
 let suggestionsPath: string;
 let configPath: string;
+let auditLogPath: string;
 let logSpy: ReturnType<typeof vi.spyOn>;
 
 function writeConfig(value: unknown): void {
@@ -56,13 +57,16 @@ function collectLog(): string {
 }
 
 function baseArgs(extra: string[] = []): string[] {
-  return ['--suggestions', suggestionsPath, '--config', configPath, ...extra];
+  // Always pass an audit-log path inside tmpRoot so tests never write to
+  // the real audit-log path under the project planning dir (v1.49.799).
+  return ['--suggestions', suggestionsPath, '--config', configPath, '--audit-log', auditLogPath, ...extra];
 }
 
 beforeEach(() => {
   tmpRoot = mkdtempSync(join(tmpdir(), 'bounded-learning-cli-test-'));
   suggestionsPath = join(tmpRoot, 'suggestions.json');
   configPath = join(tmpRoot, 'skill-creator.json');
+  auditLogPath = join(tmpRoot, 'bounded-learning-log.jsonl');
   writeConfig({ suggestions: { min_occurrences: 3 } });
   logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
 });
@@ -278,6 +282,66 @@ describe('boundedLearningCommand — --threshold suggestions.cooldown_days (v1.4
     const onDisk = JSON.parse(readFileSync(configPath, 'utf8'));
     expect(onDisk.suggestions.cooldown_days).toBe(6);
     expect(onDisk.suggestions.min_occurrences).toBe(3);
+  });
+});
+
+describe('boundedLearningCommand — audit log (v1.49.799)', () => {
+  beforeEach(() => {
+    writeConfig({ suggestions: { min_occurrences: 3, cooldown_days: 7, auto_dismiss_after_days: 30 }, token_budget: { max_percent: 5, warn_at_percent: 4 } });
+  });
+
+  it('writes one JSONL entry per invocation to --audit-log path', async () => {
+    writeSuggestions([]);
+    const code = await boundedLearningCommand(baseArgs(['--json']));
+    expect(code).toBe(0);
+    expect(existsSync(auditLogPath)).toBe(true);
+    const raw = readFileSync(auditLogPath, 'utf8');
+    const lines = raw.split('\n').filter((l) => l.length > 0);
+    expect(lines).toHaveLength(1);
+    const entry = JSON.parse(lines[0]!);
+    expect(entry.threshold).toBe('suggestions.min_occurrences');
+    expect(entry.applied).toBe('noop');
+    expect(entry.observationSource.sourceId).toBe('suggestions.json');
+    expect(typeof entry.timestamp).toBe('string');
+  });
+
+  it('appends a second entry on the second invocation without truncating', async () => {
+    writeSuggestions([]);
+    await boundedLearningCommand(baseArgs(['--json']));
+    await boundedLearningCommand(baseArgs(['--threshold', 'suggestions.cooldown_days', '--json']));
+    const raw = readFileSync(auditLogPath, 'utf8');
+    const lines = raw.split('\n').filter((l) => l.length > 0);
+    expect(lines).toHaveLength(2);
+    expect(JSON.parse(lines[0]!).threshold).toBe('suggestions.min_occurrences');
+    expect(JSON.parse(lines[1]!).threshold).toBe('suggestions.cooldown_days');
+  });
+
+  it('captures applied=applied when --apply triggers a write', async () => {
+    writeSuggestions(Array.from({ length: 10 }, (_, i) => ({ id: `s-${i}`, state: 'accepted' })));
+    await boundedLearningCommand(baseArgs(['--apply', '--json']));
+    const raw = readFileSync(auditLogPath, 'utf8');
+    const lines = raw.split('\n').filter((l) => l.length > 0);
+    expect(lines).toHaveLength(1);
+    const entry = JSON.parse(lines[0]!);
+    expect(entry.applied).toBe('applied');
+    expect(entry.proposedValue).toBe(2);
+    expect(entry.direction).toBe('decrease');
+  });
+
+  it('does NOT write the audit log when --no-audit-log is passed', async () => {
+    writeSuggestions([]);
+    await boundedLearningCommand(baseArgs(['--no-audit-log', '--json']));
+    expect(existsSync(auditLogPath)).toBe(false);
+  });
+
+  it('captures token_budget threshold runs with unwired source metadata', async () => {
+    writeSuggestions([]);
+    await boundedLearningCommand(baseArgs(['--threshold', 'token_budget.warn_at_percent', '--json']));
+    const raw = readFileSync(auditLogPath, 'utf8');
+    const entry = JSON.parse(raw.trim());
+    expect(entry.threshold).toBe('token_budget.warn_at_percent');
+    expect(entry.observationSource.wired).toBe(false);
+    expect(entry.observationSource.sourceId).toBe('token-budget-events');
   });
 });
 
