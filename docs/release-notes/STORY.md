@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.815`.
+The story begins at `v1.0` and continues to `v1.49.816`.
 
-**858 chapters.** 857 have retrospectives.
+**859 chapters.** 858 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -866,3 +866,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.813](v1.49.813/00-summary.md)** — Post-T14-reset STATE.md Drift Closure: Atomic Writer Tool · 2026-05-27
 - **[v1.49.814](v1.49.814/00-summary.md)** — Codification Ship: Promote #10431 + #10432 · 2026-05-27
 - **[v1.49.815](v1.49.815/00-summary.md)** — T2.3 Wedge Close: PMTiles Refcounted Archive Close (HIGH-01) · 2026-05-27
+- **[v1.49.816](v1.49.816/00-summary.md)** — Counter-cadence Chip: state-md-set-shipped Colon-safe milestone_name + --check Time-determinism · 2026-05-27

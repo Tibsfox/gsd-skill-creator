@@ -91,6 +91,43 @@ describe('buildShippedStateContent', () => {
     expect(content).toMatch(/^milestone: v1\.49\.813$/m);
     expect(content).not.toMatch(/^milestone: vv/m);
   });
+
+  // v815 milestone_name colon footgun: a name like
+  // "T2.3 Wedge Close: PMTiles ..." interpolated unquoted breaks the YAML
+  // parse on the post-write normalize-check. Fix uses jsYaml.dump to
+  // auto-quote scalars with significant characters.
+  it('YAML-quotes milestone_name when it contains a colon', () => {
+    const content = buildShippedStateContent({
+      version: 'v1.49.815',
+      name: 'T2.3 Wedge Close: PMTiles Refcounted Archive Close (HIGH-01)',
+      degree: '1.178',
+      predecessor: 'v1.49.814',
+      predecessorSha: 'aaaaaaa',
+      date: '2026-05-27',
+      lastUpdated: '2026-05-27T10:00:00.000Z',
+    });
+    expect(content).toContain(
+      "milestone_name: 'T2.3 Wedge Close: PMTiles Refcounted Archive Close (HIGH-01)'",
+    );
+  });
+
+  it('round-trips colon-containing milestone_name through js-yaml parser', async () => {
+    const jsYaml = (await import('js-yaml')).default;
+    const colonName = 'T2.3 Wedge Close: PMTiles Refcounted Archive Close (HIGH-01)';
+    const content = buildShippedStateContent({
+      version: 'v1.49.815',
+      name: colonName,
+      degree: '1.178',
+      predecessor: 'v1.49.814',
+      predecessorSha: 'aaaaaaa',
+      date: '2026-05-27',
+      lastUpdated: '2026-05-27T10:00:00.000Z',
+    });
+    const fmMatch = content.match(/^---\n([\s\S]*?)\n---/);
+    expect(fmMatch).not.toBeNull();
+    const parsed = jsYaml.load(fmMatch[1]);
+    expect(parsed.milestone_name).toBe(colonName);
+  });
 });
 
 // ─── CLI: arg validation ────────────────────────────────────────────────
