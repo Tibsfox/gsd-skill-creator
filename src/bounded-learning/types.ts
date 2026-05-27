@@ -26,9 +26,13 @@ export type SuggestionDecision = 'accepted' | 'dismissed' | 'deferred' | 'pendin
 /**
  * Configuration thresholds the loop can calibrate. Wired through the CLI:
  * `suggestions.min_occurrences` (v1.49.795), `suggestions.cooldown_days`
- * (v1.49.796), `suggestions.auto_dismiss_after_days` (v1.49.797), and
- * `token_budget.warn_at_percent` (v1.49.798). Future ships extend to the
- * remaining members.
+ * (v1.49.796), `suggestions.auto_dismiss_after_days` (v1.49.797),
+ * `token_budget.warn_at_percent` (v1.49.798), and
+ * `predictive.low_confidence_threshold` (v1.49.835 — calibration scaffold
+ * only; observation source not yet wired, awaiting production
+ * `fallbackProvider` deployment + activation telemetry).
+ *
+ * Future ships extend to the remaining members.
  */
 export type CalibratableThreshold =
   | 'suggestions.min_occurrences'
@@ -36,7 +40,8 @@ export type CalibratableThreshold =
   | 'suggestions.auto_dismiss_after_days'
   | 'token_budget.warn_at_percent'
   | 'token_budget.max_percent'
-  | 'observation.retention_days';
+  | 'observation.retention_days'
+  | 'predictive.low_confidence_threshold';
 
 /**
  * Direction in which the loop recommends adjusting a threshold.

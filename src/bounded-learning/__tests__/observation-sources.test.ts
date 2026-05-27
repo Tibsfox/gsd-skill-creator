@@ -45,6 +45,13 @@ describe('observationSourceFor — per-class registry (v1.49.798)', () => {
     expect(info.sourceId).toBe('observation-retention-events');
     expect(info.wired).toBe(false);
   });
+
+  it('classifies predictive.low_confidence_threshold as unwired predictive-low-confidence-events source (v1.49.835 scaffold)', () => {
+    const info = observationSourceFor('predictive.low_confidence_threshold');
+    expect(info.sourceId).toBe('predictive-low-confidence-events');
+    expect(info.wired).toBe(false);
+    expect(info.description).toMatch(/fallbackProvider/);
+  });
 });
 
 describe('loadObservationsForThreshold — per-class dispatch (v1.49.798)', () => {
@@ -127,6 +134,13 @@ describe('loadObservationsForThreshold — per-class dispatch (v1.49.798)', () =
 
   it('returns empty array for observation.* thresholds', async () => {
     const obs = await loadObservationsForThreshold('observation.retention_days', {
+      suggestionsPath,
+    });
+    expect(obs).toEqual([]);
+  });
+
+  it('returns empty array for predictive.low_confidence_threshold (v1.49.835 scaffold; observation source not yet wired)', async () => {
+    const obs = await loadObservationsForThreshold('predictive.low_confidence_threshold', {
       suggestionsPath,
     });
     expect(obs).toEqual([]);

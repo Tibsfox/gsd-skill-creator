@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.834`.
+The story begins at `v1.0` and continues to `v1.49.835`.
 
-**877 chapters.** 876 have retrospectives.
+**878 chapters.** 877 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -885,3 +885,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.832](v1.49.832/00-summary.md)** — T1.3 Option C Integration (Selector 2nd-Caller Wire + tests/integration/ Cross-Rootdir Verification) · 2026-05-27
 - **[v1.49.833](v1.49.833/00-summary.md)** — Codify Cross-Rootdir Wire Pattern as Discipline (Lesson #10435) · 2026-05-27
 - **[v1.49.834](v1.49.834/00-summary.md)** — ProcessContext Stale-Entry Cleanup (`intelligence/analyzer/git.ts`) · 2026-05-27
+- **[v1.49.835](v1.49.835/00-summary.md)** — lowConfidenceThreshold Calibration Scaffold (Full) · 2026-05-27
