@@ -27,6 +27,12 @@
  * `--audit-log <path>`; disable with `--no-audit-log`). Appends are
  * best-effort — failures never block the CLI (v1.49.799).
  *
+ * `--query` mode (v1.49.804): read an append-only JSONL log
+ * (`--log audit|events`) and emit filtered entries in text / quiet / JSON.
+ * Filters: `--last N`, `--since <ISO>`, `--threshold <key>` (audit only),
+ * `--kind responsive|ignored` (events only). Read-only consumer surface
+ * for the three append-only logs shipped v799–v803.
+ *
  * `--watch` mode (v1.49.800): re-runs the calibration loop whenever
  * `--suggestions` or `--config` is rewritten on disk. Debounce window
  * defaults to 200ms; override via `--watch-debounce <ms>`. Stops on
@@ -66,6 +72,7 @@ import {
   loadObservationsForThreshold,
   observationSourceFor,
   readAuditLog,
+  readTokenBudgetEvents,
   runCalibrationLoop,
   runWatchLoop,
   readThresholdValue,
@@ -127,10 +134,17 @@ Options:
   --summary            Emit JSON summary of all wired thresholds + audit-log state (v1.49.801)
   --record-event       Record a token-budget event (v1.49.803). Requires --kind.
   --kind <responsive|ignored>
-                       Operator outcome after a warn event (with --record-event).
+                       Operator outcome after a warn event (with --record-event)
+                       or events-log filter (with --query --log events).
   --usage-percent <N>  usagePercent reading at warn time (optional, with --record-event).
   --warn-at-percent <N>  warn_at_percent threshold at warn time (optional, with --record-event).
   --reason <string>    Free-form operator note (optional, with --record-event).
+  --query              Query an append-only JSONL log (v1.49.804).
+  --log <audit|events> With --query: pick log (default audit).
+                       audit = bounded-learning-log.jsonl (loop history),
+                       events = token-budget-events.jsonl (operator outcomes).
+  --last <N>           With --query: return the last N entries (default unlimited).
+  --since <ISO>        With --query: filter entries whose timestamp >= ISO 8601.
   --quiet, -q          Machine-readable CSV output
   --json               JSON output
   --help, -h           Show this help
@@ -381,6 +395,11 @@ export async function boundedLearningCommand(args: string[], options: BoundedLea
     return runRecordEvent(args, { json, quiet });
   }
 
+  // ── --query mode (v1.49.804) ───────────────────────────────────────────
+  if (args.includes('--query')) {
+    return runQuery(args, { json, quiet });
+  }
+
   // ── Parse --threshold ──────────────────────────────────────────────────
   const thresholdLookup = getFlagValue(args, '--threshold');
   let threshold: CalibratableThreshold;
@@ -616,6 +635,211 @@ async function runRecordEvent(
     p.log.success(`Recorded token-budget ${kind} event at ${event.timestamp}.`);
   }
   return 0;
+}
+
+/**
+ * --query mode (v1.49.804): read an append-only JSONL log and emit the
+ * filtered entries in text / quiet / JSON format. Closes the no-readback
+ * gap left by the three append-only logs shipped v799–v803.
+ *
+ * Filters:
+ *   --log audit|events   pick log (default audit)
+ *   --last <N>           last N entries (default unlimited)
+ *   --since <ISO>        keep entries with timestamp >= ISO 8601
+ *   --threshold <key>    audit-log only: filter on entry.threshold
+ *   --kind <kind>        events log only: filter on event.kind
+ *
+ * Read-only surface. Tolerant of malformed lines (skipped silently per
+ * existing read primitives). Missing log returns empty result.
+ */
+async function runQuery(
+  args: string[],
+  flags: { json: boolean; quiet: boolean },
+): Promise<number> {
+  // ── Pick log ──────────────────────────────────────────────────────────
+  const logLookup = getFlagValue(args, '--log');
+  let log: 'audit' | 'events';
+  if (!logLookup.present) {
+    log = 'audit';
+  } else if (logLookup.value === 'audit' || logLookup.value === 'events') {
+    log = logLookup.value;
+  } else {
+    if (flags.json) {
+      console.log(JSON.stringify({ error: 'invalid-flag', flag: '--log', value: logLookup.value, supported: ['audit', 'events'] }));
+    } else if (!flags.quiet) {
+      p.log.error(`--log must be 'audit' or 'events'; got '${logLookup.value ?? '<missing>'}'.`);
+    }
+    return 1;
+  }
+
+  // ── Parse --last ──────────────────────────────────────────────────────
+  const lastLookup = getFlagValue(args, '--last');
+  let last: number | null = null;
+  if (lastLookup.present) {
+    const parsed = parsePositiveFloat(lastLookup.value);
+    if (parsed === null || !Number.isInteger(parsed)) {
+      if (flags.json) {
+        console.log(JSON.stringify({ error: 'invalid-flag', flag: '--last', value: lastLookup.value }));
+      } else if (!flags.quiet) {
+        p.log.error(`--last must be a positive integer; got '${lastLookup.value ?? '<missing>'}'.`);
+      }
+      return 1;
+    }
+    last = parsed;
+  }
+
+  // ── Parse --since ─────────────────────────────────────────────────────
+  const sinceLookup = getFlagValue(args, '--since');
+  let sinceMs: number | null = null;
+  if (sinceLookup.present) {
+    if (sinceLookup.value === null) {
+      if (flags.json) {
+        console.log(JSON.stringify({ error: 'invalid-flag', flag: '--since', value: null }));
+      } else if (!flags.quiet) {
+        p.log.error(`--since requires an ISO 8601 timestamp.`);
+      }
+      return 1;
+    }
+    const parsedMs = Date.parse(sinceLookup.value);
+    if (Number.isNaN(parsedMs)) {
+      if (flags.json) {
+        console.log(JSON.stringify({ error: 'invalid-flag', flag: '--since', value: sinceLookup.value }));
+      } else if (!flags.quiet) {
+        p.log.error(`--since must be a parseable ISO 8601 timestamp; got '${sinceLookup.value}'.`);
+      }
+      return 1;
+    }
+    sinceMs = parsedMs;
+  }
+
+  // ── Dispatch + filter ─────────────────────────────────────────────────
+  if (log === 'audit') {
+    const pathLookup = getFlagValue(args, '--audit-log');
+    const path = pathLookup.present && pathLookup.value !== null
+      ? pathLookup.value
+      : DEFAULT_AUDIT_LOG_PATH;
+
+    const thresholdLookup = getFlagValue(args, '--threshold');
+    let thresholdFilter: CalibratableThreshold | null = null;
+    if (thresholdLookup.present) {
+      const parsed = parseThresholdKey(thresholdLookup.value);
+      if (parsed === null) {
+        if (flags.json) {
+          console.log(JSON.stringify({ error: 'invalid-flag', flag: '--threshold', value: thresholdLookup.value, supported: SUPPORTED_THRESHOLDS }));
+        } else if (!flags.quiet) {
+          p.log.error(`--threshold must be one of: ${SUPPORTED_THRESHOLDS.join(', ')}; got '${thresholdLookup.value ?? '<missing>'}'.`);
+        }
+        return 1;
+      }
+      thresholdFilter = parsed;
+    }
+
+    const all = await readAuditLog(path);
+    let filtered = all;
+    if (thresholdFilter !== null) {
+      filtered = filtered.filter((e) => e.threshold === thresholdFilter);
+    }
+    if (sinceMs !== null) {
+      filtered = filtered.filter((e) => Date.parse(e.timestamp) >= sinceMs!);
+    }
+    if (last !== null && filtered.length > last) {
+      filtered = filtered.slice(filtered.length - last);
+    }
+    renderAuditQueryResult(filtered, { json: flags.json, quiet: flags.quiet, path });
+    return 0;
+  }
+
+  // log === 'events'
+  const pathLookup = getFlagValue(args, '--token-budget-events');
+  const path = pathLookup.present && pathLookup.value !== null
+    ? pathLookup.value
+    : DEFAULT_TOKEN_BUDGET_EVENTS_PATH;
+
+  const kindLookup = getFlagValue(args, '--kind');
+  let kindFilter: TokenBudgetEventKind | null = null;
+  if (kindLookup.present) {
+    if (kindLookup.value !== 'responsive' && kindLookup.value !== 'ignored') {
+      if (flags.json) {
+        console.log(JSON.stringify({ error: 'invalid-flag', flag: '--kind', value: kindLookup.value, supported: ['responsive', 'ignored'] }));
+      } else if (!flags.quiet) {
+        p.log.error(`--kind must be 'responsive' or 'ignored'; got '${kindLookup.value ?? '<missing>'}'.`);
+      }
+      return 1;
+    }
+    kindFilter = kindLookup.value;
+  }
+
+  const all = await readTokenBudgetEvents(path);
+  let filtered = all;
+  if (kindFilter !== null) {
+    filtered = filtered.filter((e) => e.kind === kindFilter);
+  }
+  if (sinceMs !== null) {
+    filtered = filtered.filter((e) => Date.parse(e.timestamp) >= sinceMs!);
+  }
+  if (last !== null && filtered.length > last) {
+    filtered = filtered.slice(filtered.length - last);
+  }
+  renderEventsQueryResult(filtered, { json: flags.json, quiet: flags.quiet, path });
+  return 0;
+}
+
+function renderAuditQueryResult(
+  entries: AuditLogEntry[],
+  flags: { json: boolean; quiet: boolean; path: string },
+): void {
+  if (flags.json) {
+    console.log(JSON.stringify({ log: 'audit', path: flags.path, count: entries.length, entries }));
+    return;
+  }
+  if (flags.quiet) {
+    for (const e of entries) {
+      console.log([e.timestamp, e.threshold, e.currentValue, e.proposedValue ?? '', e.direction, e.observations, e.applied].join(','));
+    }
+    return;
+  }
+  p.log.info(`bounded-learning audit log — ${flags.path}`);
+  console.log('');
+  if (entries.length === 0) {
+    p.log.info('  (no matching entries)');
+    return;
+  }
+  for (const e of entries) {
+    const proposed = e.proposedValue === null ? '—' : String(e.proposedValue);
+    console.log(`  ${e.timestamp}  ${pc.dim(e.threshold)}  ${e.currentValue}→${proposed}  ${e.direction.toUpperCase()}  obs=${e.observations}  ${pc.dim(e.applied)}`);
+  }
+  console.log('');
+  p.log.info(`${entries.length} entr${entries.length === 1 ? 'y' : 'ies'}`);
+}
+
+function renderEventsQueryResult(
+  events: TokenBudgetEvent[],
+  flags: { json: boolean; quiet: boolean; path: string },
+): void {
+  if (flags.json) {
+    console.log(JSON.stringify({ log: 'events', path: flags.path, count: events.length, entries: events }));
+    return;
+  }
+  if (flags.quiet) {
+    for (const e of events) {
+      console.log([e.timestamp, e.kind, e.usagePercent ?? '', e.warnAtPercent ?? '', (e.reason ?? '').replace(/,/g, ';')].join(','));
+    }
+    return;
+  }
+  p.log.info(`token-budget events log — ${flags.path}`);
+  console.log('');
+  if (events.length === 0) {
+    p.log.info('  (no matching events)');
+    return;
+  }
+  for (const e of events) {
+    const usage = e.usagePercent === undefined ? '' : ` usage=${e.usagePercent}`;
+    const warnAt = e.warnAtPercent === undefined ? '' : ` warn_at=${e.warnAtPercent}`;
+    const reason = e.reason === undefined ? '' : `  ${pc.dim(e.reason)}`;
+    console.log(`  ${e.timestamp}  ${e.kind.toUpperCase()}${usage}${warnAt}${reason}`);
+  }
+  console.log('');
+  p.log.info(`${events.length} event${events.length === 1 ? '' : 's'}`);
 }
 
 /**

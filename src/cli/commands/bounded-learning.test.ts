@@ -704,3 +704,266 @@ describe('boundedLearningCommand — malformed input tolerance', () => {
     expect(out.observations).toBe(0);
   });
 });
+
+describe('boundedLearningCommand — --query mode (v1.49.804)', () => {
+  let tokenBudgetEventsPath: string;
+
+  function writeAuditEntries(entries: Array<Record<string, unknown>>): void {
+    const lines = entries.map((e) => JSON.stringify(e)).join('\n') + '\n';
+    writeFileSync(auditLogPath, lines, 'utf8');
+  }
+
+  function writeEventEntries(events: Array<Record<string, unknown>>): void {
+    const lines = events.map((e) => JSON.stringify(e)).join('\n') + '\n';
+    writeFileSync(tokenBudgetEventsPath, lines, 'utf8');
+  }
+
+  beforeEach(() => {
+    tokenBudgetEventsPath = join(tmpRoot, 'token-budget-events.jsonl');
+  });
+
+  it('--query defaults to audit log + emits empty result when log missing', async () => {
+    const code = await boundedLearningCommand([
+      '--query',
+      '--audit-log', join(tmpRoot, 'no-such-log.jsonl'),
+      '--json',
+    ]);
+    expect(code).toBe(0);
+    const out = JSON.parse(collectLog());
+    expect(out.log).toBe('audit');
+    expect(out.count).toBe(0);
+    expect(out.entries).toEqual([]);
+  });
+
+  it('--query --log audit returns all entries by default', async () => {
+    writeAuditEntries([
+      { timestamp: '2026-05-27T01:00:00.000Z', threshold: 'suggestions.min_occurrences', currentValue: 3, proposedValue: null, direction: 'hold', applied: 'noop' },
+      { timestamp: '2026-05-27T02:00:00.000Z', threshold: 'suggestions.cooldown_days', currentValue: 7, proposedValue: 6, direction: 'decrease', applied: 'dry-run' },
+    ]);
+    const code = await boundedLearningCommand([
+      '--query', '--log', 'audit',
+      '--audit-log', auditLogPath,
+      '--json',
+    ]);
+    expect(code).toBe(0);
+    const out = JSON.parse(collectLog());
+    expect(out.count).toBe(2);
+    expect(out.entries[0].threshold).toBe('suggestions.min_occurrences');
+    expect(out.entries[1].direction).toBe('decrease');
+  });
+
+  it('--query --log audit --last N returns last N entries', async () => {
+    writeAuditEntries([
+      { timestamp: '2026-05-27T01:00:00.000Z', threshold: 'suggestions.min_occurrences', currentValue: 3, proposedValue: null, direction: 'hold', applied: 'noop' },
+      { timestamp: '2026-05-27T02:00:00.000Z', threshold: 'suggestions.cooldown_days', currentValue: 7, proposedValue: 6, direction: 'decrease', applied: 'dry-run' },
+      { timestamp: '2026-05-27T03:00:00.000Z', threshold: 'suggestions.auto_dismiss_after_days', currentValue: 30, proposedValue: 31, direction: 'increase', applied: 'dry-run' },
+    ]);
+    const code = await boundedLearningCommand([
+      '--query', '--log', 'audit', '--last', '2',
+      '--audit-log', auditLogPath,
+      '--json',
+    ]);
+    expect(code).toBe(0);
+    const out = JSON.parse(collectLog());
+    expect(out.count).toBe(2);
+    expect(out.entries[0].threshold).toBe('suggestions.cooldown_days');
+    expect(out.entries[1].threshold).toBe('suggestions.auto_dismiss_after_days');
+  });
+
+  it('--query --log audit --since filters by ISO timestamp', async () => {
+    writeAuditEntries([
+      { timestamp: '2026-05-27T01:00:00.000Z', threshold: 'suggestions.min_occurrences', currentValue: 3, proposedValue: null, direction: 'hold', applied: 'noop' },
+      { timestamp: '2026-05-27T02:30:00.000Z', threshold: 'suggestions.cooldown_days', currentValue: 7, proposedValue: 6, direction: 'decrease', applied: 'dry-run' },
+      { timestamp: '2026-05-27T04:00:00.000Z', threshold: 'suggestions.auto_dismiss_after_days', currentValue: 30, proposedValue: 31, direction: 'increase', applied: 'dry-run' },
+    ]);
+    const code = await boundedLearningCommand([
+      '--query', '--log', 'audit', '--since', '2026-05-27T02:00:00.000Z',
+      '--audit-log', auditLogPath,
+      '--json',
+    ]);
+    expect(code).toBe(0);
+    const out = JSON.parse(collectLog());
+    expect(out.count).toBe(2);
+    expect(out.entries[0].threshold).toBe('suggestions.cooldown_days');
+  });
+
+  it('--query --log audit --threshold filters by threshold key', async () => {
+    writeAuditEntries([
+      { timestamp: '2026-05-27T01:00:00.000Z', threshold: 'suggestions.min_occurrences', currentValue: 3, proposedValue: null, direction: 'hold', applied: 'noop' },
+      { timestamp: '2026-05-27T02:00:00.000Z', threshold: 'suggestions.cooldown_days', currentValue: 7, proposedValue: 6, direction: 'decrease', applied: 'dry-run' },
+      { timestamp: '2026-05-27T03:00:00.000Z', threshold: 'suggestions.cooldown_days', currentValue: 6, proposedValue: 5, direction: 'decrease', applied: 'applied' },
+    ]);
+    const code = await boundedLearningCommand([
+      '--query', '--log', 'audit', '--threshold', 'suggestions.cooldown_days',
+      '--audit-log', auditLogPath,
+      '--json',
+    ]);
+    expect(code).toBe(0);
+    const out = JSON.parse(collectLog());
+    expect(out.count).toBe(2);
+    expect(out.entries.every((e: { threshold: string }) => e.threshold === 'suggestions.cooldown_days')).toBe(true);
+  });
+
+  it('--query --log audit --quiet emits CSV one line per entry', async () => {
+    writeAuditEntries([
+      { timestamp: '2026-05-27T01:00:00.000Z', threshold: 'suggestions.min_occurrences', currentValue: 3, proposedValue: null, direction: 'hold', applied: 'noop' },
+      { timestamp: '2026-05-27T02:00:00.000Z', threshold: 'suggestions.cooldown_days', currentValue: 7, proposedValue: 6, direction: 'decrease', applied: 'dry-run' },
+    ]);
+    const code = await boundedLearningCommand([
+      '--query', '--log', 'audit',
+      '--audit-log', auditLogPath,
+      '--quiet',
+    ]);
+    expect(code).toBe(0);
+    const lines = collectLog().split('\n').filter((l) => l.length > 0);
+    expect(lines).toHaveLength(2);
+    expect(lines[0]).toContain('suggestions.min_occurrences');
+    expect(lines[1]).toContain('decrease');
+  });
+
+  it('--query --log events returns events log entries', async () => {
+    writeEventEntries([
+      { timestamp: '2026-05-27T01:00:00.000Z', kind: 'responsive' },
+      { timestamp: '2026-05-27T02:00:00.000Z', kind: 'ignored', usagePercent: 85, warnAtPercent: 80 },
+    ]);
+    const code = await boundedLearningCommand([
+      '--query', '--log', 'events',
+      '--token-budget-events', tokenBudgetEventsPath,
+      '--json',
+    ]);
+    expect(code).toBe(0);
+    const out = JSON.parse(collectLog());
+    expect(out.log).toBe('events');
+    expect(out.count).toBe(2);
+    expect(out.entries[1].usagePercent).toBe(85);
+  });
+
+  it('--query --log events --kind filters by event kind', async () => {
+    writeEventEntries([
+      { timestamp: '2026-05-27T01:00:00.000Z', kind: 'responsive' },
+      { timestamp: '2026-05-27T02:00:00.000Z', kind: 'ignored' },
+      { timestamp: '2026-05-27T03:00:00.000Z', kind: 'responsive' },
+    ]);
+    const code = await boundedLearningCommand([
+      '--query', '--log', 'events', '--kind', 'responsive',
+      '--token-budget-events', tokenBudgetEventsPath,
+      '--json',
+    ]);
+    expect(code).toBe(0);
+    const out = JSON.parse(collectLog());
+    expect(out.count).toBe(2);
+    expect(out.entries.every((e: { kind: string }) => e.kind === 'responsive')).toBe(true);
+  });
+
+  it('--query --log events --last + --since compose correctly', async () => {
+    writeEventEntries([
+      { timestamp: '2026-05-27T01:00:00.000Z', kind: 'responsive' },
+      { timestamp: '2026-05-27T02:00:00.000Z', kind: 'ignored' },
+      { timestamp: '2026-05-27T03:00:00.000Z', kind: 'responsive' },
+      { timestamp: '2026-05-27T04:00:00.000Z', kind: 'ignored' },
+    ]);
+    const code = await boundedLearningCommand([
+      '--query', '--log', 'events',
+      '--since', '2026-05-27T02:00:00.000Z',
+      '--last', '2',
+      '--token-budget-events', tokenBudgetEventsPath,
+      '--json',
+    ]);
+    expect(code).toBe(0);
+    const out = JSON.parse(collectLog());
+    expect(out.count).toBe(2);
+    expect(out.entries[0].timestamp).toBe('2026-05-27T03:00:00.000Z');
+    expect(out.entries[1].timestamp).toBe('2026-05-27T04:00:00.000Z');
+  });
+
+  it('--query --log events --quiet emits CSV with reason commas sanitized', async () => {
+    writeEventEntries([
+      { timestamp: '2026-05-27T01:00:00.000Z', kind: 'ignored', reason: 'a, b, c' },
+    ]);
+    const code = await boundedLearningCommand([
+      '--query', '--log', 'events',
+      '--token-budget-events', tokenBudgetEventsPath,
+      '--quiet',
+    ]);
+    expect(code).toBe(0);
+    const out = collectLog();
+    expect(out).toContain('a; b; c');
+    expect(out).not.toContain('a, b, c');
+  });
+
+  it('--query --log invalid exits 1 with JSON error', async () => {
+    const code = await boundedLearningCommand([
+      '--query', '--log', 'bogus',
+      '--json',
+    ]);
+    expect(code).toBe(1);
+    const out = JSON.parse(collectLog());
+    expect(out.error).toBe('invalid-flag');
+    expect(out.flag).toBe('--log');
+  });
+
+  it('--query --last 0 exits 1', async () => {
+    const code = await boundedLearningCommand([
+      '--query', '--last', '0',
+      '--json',
+    ]);
+    expect(code).toBe(1);
+    const out = JSON.parse(collectLog());
+    expect(out.error).toBe('invalid-flag');
+    expect(out.flag).toBe('--last');
+  });
+
+  it('--query --since not-an-iso exits 1', async () => {
+    const code = await boundedLearningCommand([
+      '--query', '--since', 'not a date',
+      '--json',
+    ]);
+    expect(code).toBe(1);
+    const out = JSON.parse(collectLog());
+    expect(out.error).toBe('invalid-flag');
+    expect(out.flag).toBe('--since');
+  });
+
+  it('--query --log audit --threshold BAD exits 1', async () => {
+    const code = await boundedLearningCommand([
+      '--query', '--log', 'audit', '--threshold', 'no.such.threshold',
+      '--json',
+    ]);
+    expect(code).toBe(1);
+    const out = JSON.parse(collectLog());
+    expect(out.error).toBe('invalid-flag');
+    expect(out.flag).toBe('--threshold');
+  });
+
+  it('--query --log events --kind BAD exits 1', async () => {
+    const code = await boundedLearningCommand([
+      '--query', '--log', 'events', '--kind', 'maybe',
+      '--json',
+    ]);
+    expect(code).toBe(1);
+    const out = JSON.parse(collectLog());
+    expect(out.error).toBe('invalid-flag');
+    expect(out.flag).toBe('--kind');
+  });
+
+  it('--query tolerates malformed lines in the JSONL log', async () => {
+    writeFileSync(
+      tokenBudgetEventsPath,
+      [
+        JSON.stringify({ timestamp: '2026-05-27T01:00:00.000Z', kind: 'responsive' }),
+        '{not json',
+        JSON.stringify({ timestamp: '2026-05-27T02:00:00.000Z', kind: 'ignored' }),
+        '',
+      ].join('\n'),
+      'utf8',
+    );
+    const code = await boundedLearningCommand([
+      '--query', '--log', 'events',
+      '--token-budget-events', tokenBudgetEventsPath,
+      '--json',
+    ]);
+    expect(code).toBe(0);
+    const out = JSON.parse(collectLog());
+    expect(out.count).toBe(2);
+  });
+});
