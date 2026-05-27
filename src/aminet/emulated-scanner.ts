@@ -15,6 +15,9 @@
 import { execFile } from 'node:child_process';
 import { existsSync, readFileSync } from 'node:fs';
 import type { ScanVerdict } from './types.js';
+import { ensureProcessAllowed, type ProcessContext } from '../security/process-context.js';
+
+const PROCESS_SOURCE = 'aminet/emulated-scanner';
 
 // ============================================================================
 // Types
@@ -177,7 +180,7 @@ function parseCheckXOutput(stdout: string): ScanVerdict {
  * @param config - Emulated scan configuration
  * @returns EmulatedScanResult with verdict and metadata
  */
-export function runEmulatedScan(config: EmulatedScanConfig): Promise<EmulatedScanResult> {
+export function runEmulatedScan(config: EmulatedScanConfig, ctx?: ProcessContext): Promise<EmulatedScanResult> {
   return new Promise<EmulatedScanResult>((resolve) => {
     // Pre-flight check: FS-UAE binary exists
     if (!existsSync(config.fsUaePath)) {
@@ -220,6 +223,21 @@ export function runEmulatedScan(config: EmulatedScanConfig): Promise<EmulatedSca
       `--fast_memory=8192`,
       `--end_config=1`,
     ];
+
+    // ProcessContextDenied is load-bearing per #10427 — guard before spawn.
+    try {
+      ensureProcessAllowed(ctx, PROCESS_SOURCE, 'exec-file', config.fsUaePath, args);
+    } catch (denied) {
+      clearTimeout(timeout);
+      resolve({
+        ran: false,
+        verdict: 'unscanned',
+        tool: 'fs-uae',
+        output: denied instanceof Error ? denied.message : String(denied),
+        timedOut: false,
+      });
+      return;
+    }
 
     execFile(
       config.fsUaePath,

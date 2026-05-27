@@ -15,8 +15,11 @@ import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { platform } from 'node:os';
 import type { ToolStatus } from './types.js';
+import { ensureProcessAllowed, type ProcessContext } from '../security/process-context.js';
 
 const execFileAsync = promisify(execFile);
+
+const PROCESS_SOURCE = 'aminet/tool-validator';
 
 /** Timeout for tool availability checks (5 seconds) */
 const CHECK_TIMEOUT_MS = 5_000;
@@ -44,7 +47,8 @@ function getUnlzxInstallGuide(): string {
 /**
  * Check availability of lha tool.
  */
-async function checkLha(os: string): Promise<ToolStatus> {
+async function checkLha(os: string, ctx?: ProcessContext): Promise<ToolStatus> {
+  ensureProcessAllowed(ctx, PROCESS_SOURCE, 'exec-file', 'lha', ['--version']);
   try {
     const { stdout } = await execFileAsync('lha', ['--version'], {
       timeout: CHECK_TIMEOUT_MS,
@@ -75,7 +79,8 @@ async function checkLha(os: string): Promise<ToolStatus> {
  * This means the tool IS available -- it just needs arguments.
  * An ENOENT error means the tool is not installed.
  */
-async function checkUnlzx(): Promise<ToolStatus> {
+async function checkUnlzx(ctx?: ProcessContext): Promise<ToolStatus> {
+  ensureProcessAllowed(ctx, PROCESS_SOURCE, 'exec-file', 'unlzx', []);
   try {
     await execFileAsync('unlzx', [], { timeout: CHECK_TIMEOUT_MS });
     // If it succeeds (exit 0), it's available
@@ -127,8 +132,8 @@ async function checkUnlzx(): Promise<ToolStatus> {
  *
  * @returns Array of 2 ToolStatus entries (lha, unlzx)
  */
-export async function validateExtractionTools(): Promise<ToolStatus[]> {
+export async function validateExtractionTools(ctx?: ProcessContext): Promise<ToolStatus[]> {
   const os = platform();
-  const [lha, unlzx] = await Promise.all([checkLha(os), checkUnlzx()]);
+  const [lha, unlzx] = await Promise.all([checkLha(os, ctx), checkUnlzx(ctx)]);
   return [lha, unlzx];
 }

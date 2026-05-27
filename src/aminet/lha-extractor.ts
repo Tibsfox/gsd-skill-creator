@@ -17,8 +17,11 @@ import { mkdtempSync, readdirSync } from 'node:fs';
 import { join, resolve, relative, normalize, sep } from 'node:path';
 import { tmpdir } from 'node:os';
 import type { ExtractionResult } from './types.js';
+import { ensureProcessAllowed, type ProcessContext } from '../security/process-context.js';
 
 const execFileAsync = promisify(execFile);
+
+const PROCESS_SOURCE = 'aminet/lha-extractor';
 
 /** Timeout for extraction operations (30 seconds) */
 const EXTRACTION_TIMEOUT_MS = 30_000;
@@ -139,11 +142,15 @@ function getLhaInstallGuide(): string {
  * console.log(result.extractDir); // '/tmp/lha-abc123'
  * console.log(result.format);     // 'lha'
  */
-export async function extractLha(archivePath: string): Promise<ExtractionResult> {
+export async function extractLha(archivePath: string, ctx?: ProcessContext): Promise<ExtractionResult> {
   const extractDir = mkdtempSync(join(tmpdir(), 'lha-'));
 
+  // ProcessContextDenied is load-bearing per #10427 — hoist outside the catch.
+  const argv = [`-efq2w=${extractDir}`, archivePath];
+  ensureProcessAllowed(ctx, PROCESS_SOURCE, 'exec-file', 'lha', argv);
+
   try {
-    await execFileAsync('lha', [`-efq2w=${extractDir}`, archivePath], {
+    await execFileAsync('lha', argv, {
       timeout: EXTRACTION_TIMEOUT_MS,
     });
   } catch (err: unknown) {

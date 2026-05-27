@@ -18,8 +18,11 @@ import { mkdtempSync, readdirSync, rmSync } from 'node:fs';
 import { join, resolve, relative } from 'node:path';
 import { tmpdir } from 'node:os';
 import type { ExtractionResult } from './types.js';
+import { ensureProcessAllowed, type ProcessContext } from '../security/process-context.js';
 
 const execFileAsync = promisify(execFile);
+
+const PROCESS_SOURCE = 'aminet/lzx-extractor';
 
 /** Timeout for extraction operations (30 seconds) */
 const EXTRACTION_TIMEOUT_MS = 30_000;
@@ -59,14 +62,18 @@ function walkDirectory(dir: string, root: string): string[] {
  * @returns ExtractionResult with file list and temp directory
  * @throws Error if unlzx is not installed or extraction fails
  */
-export async function extractLzx(archivePath: string): Promise<ExtractionResult> {
+export async function extractLzx(archivePath: string, ctx?: ProcessContext): Promise<ExtractionResult> {
   const extractDir = mkdtempSync(join(tmpdir(), 'aminet-lzx-'));
 
   // MUST be absolute since cwd changes the working directory
   const absArchive = resolve(archivePath);
 
+  // ProcessContextDenied is load-bearing per #10427 — hoist outside the catch.
+  const argv = ['-x', absArchive];
+  ensureProcessAllowed(ctx, PROCESS_SOURCE, 'exec-file', 'unlzx', argv);
+
   try {
-    await execFileAsync('unlzx', ['-x', absArchive], {
+    await execFileAsync('unlzx', argv, {
       cwd: extractDir,
       timeout: EXTRACTION_TIMEOUT_MS,
     });

@@ -39,11 +39,8 @@ const SRC = resolve(__dirname, '..', '..', 'src');
  * Grandfathered at v1.49.806. Chip this list down ship-by-ship.
  */
 const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
-  'src/aminet/emulated-scanner.ts',
-  'src/aminet/emulator-launch.ts',
-  'src/aminet/lha-extractor.ts',
-  'src/aminet/lzx-extractor.ts',
-  'src/aminet/tool-validator.ts',
+  // aminet family wired at v1.49.819 batch chip (5 files: emulated-scanner,
+  // emulator-launch, lha-extractor, lzx-extractor, tool-validator).
   'src/chipset/blitter/executor.ts',
   'src/chipset/harness-integrity.ts',
   'src/cli/commands/keystore.ts',

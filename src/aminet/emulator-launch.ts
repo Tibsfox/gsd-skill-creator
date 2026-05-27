@@ -12,6 +12,9 @@
  */
 
 import { execFile } from 'node:child_process';
+import { ensureProcessAllowed, type ProcessContext } from '../security/process-context.js';
+
+const PROCESS_SOURCE = 'aminet/emulator-launch';
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import type { HardwareProfileId, LaunchConfig, LaunchResult } from './types.js';
@@ -121,6 +124,7 @@ export function writeFsUaeConfig(configString: string, outputPath: string): void
 export async function launchEmulator(
   config: LaunchConfig,
   configDir: string,
+  ctx?: ProcessContext,
 ): Promise<LaunchResult> {
   // Validate hard drives
   if (config.hardDrives.length === 0) {
@@ -157,6 +161,9 @@ export async function launchEmulator(
 
   // Determine FS-UAE binary
   const fsUaeBin = config.fsUaePath ?? 'fs-uae';
+
+  // ProcessContextDenied is load-bearing per #10427 — hoist outside the catch.
+  ensureProcessAllowed(ctx, PROCESS_SOURCE, 'exec-file', fsUaeBin, [configPath]);
 
   // Spawn FS-UAE
   try {
