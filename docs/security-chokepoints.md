@@ -64,6 +64,25 @@ Each chokepoint's audit test enforces this contract at vitest time (which is gat
 
 The migration is incremental — one file at a time, one ship at a time. There is no requirement to migrate the entire `KNOWN_UNWIRED` set in a single sweep.
 
+## Internal-helper pattern for `ctx?` threading (Lesson #10433)
+
+When migrating a file with MANY spawn / fetch / read call sites, look for an **internal helper** that already wraps the side-effecting operation. Threading `ctx?` through the helper costs `1 LOC + helper-update` regardless of how many public callers exist; threading it through each public function costs `N LOC + N call-site updates`.
+
+| Ship | File | Spawn-call multiplicity | Internal helper? | Wire shape |
+|---|---|---|---|---|
+| v1.49.809 | `src/intelligence/analyzer/git.ts` | many | Yes (`execGit`) | thread `ctx?` through helper; public functions pass it down → ~14 LOC delta |
+| v1.49.820 | `src/git/core/branch-manager.ts` | 10 calls + 1 helper | Yes (`execGit`) | thread `ctx?` through helper; 4 public functions threaded; 10 call-site updates → 14 LOC delta |
+
+Files **without** an internal helper require N `ensure*Allowed` hoists at N call sites. If a file has 10 spawn calls and no helper, the wire cost is ~10× higher than a file with one.
+
+**Implication for batch-chip planning:**
+
+1. When sizing a batch chip (e.g., v819 aminet 5-file batch, v825-candidate git/core 3-file batch), audit each candidate file for an internal helper FIRST.
+2. Prefer batches where most files share the helper pattern — wall-clock cost is then `~1 LOC × N files` rather than `~10 LOC × N files`.
+3. Files WITHOUT a helper are still chip-eligible but typically take a full single-file ship rather than fitting into a batch.
+
+The pattern is observed at 2 instances (v809 + v820); promotion threshold per #10426 (cross-class registry extraction at 2nd instance) met at v820. Generalization candidate confirmed in v1.49.823 handoff.
+
 ## Anti-patterns
 
 - ❌ **Calling `ensure*Allowed` inside a try/catch that swallows errors.** The chokepoint denial is a load-bearing signal and must propagate. The fix: hoist the `ensure*Allowed` call OUT of the try block.
@@ -73,6 +92,7 @@ The migration is incremental — one file at a time, one ship at a time. There i
 
 ## Cross-references
 
+- **Lesson #10433** — Internal-helper pattern for `ctx?` threading. When a file has an internal helper wrapping the side-effecting op, thread `ctx?` through the helper for `1 LOC × N callsites`; without a helper, the cost is `N LOC × N callsites`. Audit each batch-chip candidate for a helper first. Codified v1.49.824 from v809 + v820 case studies.
 - **Lesson #10414** — Optional `ctx?` parameter is the cheapest retrofit pattern for chokepoint introduction. `docs/architecture-retrofit-patterns.md`.
 - **Lesson #10426** — Extract per-class registries at the SECOND class instance. The three chokepoints are themselves the validating instance set for the discipline — they are siblings with the same shape but specialized targets, not parameterizations of a generic abstraction (per #10423, the lightest wire that satisfies the verdict).
 - **Lesson #10427** — Failure-mode contracts. Security chokepoint denials are load-bearing and must propagate; do not swallow `*ContextDenied` exceptions. `docs/failure-mode-contracts.md`.

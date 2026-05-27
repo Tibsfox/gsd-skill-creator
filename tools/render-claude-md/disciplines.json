@@ -203,15 +203,15 @@
   {
     "domain": "Security chokepoints",
     "trigger": "Adding a new src/ caller that reads from disk, issues a network request, or spawns a child process; reviewing whether a new module needs to thread an existing `ctx?` parameter; migrating a KNOWN_UNWIRED entry from one of the audit-test allowlists",
-    "summary": "Three sibling chokepoints — LoaderContext (filesystem, v782), EgressContext (network egress, v806), ProcessContext (child-process spawn, v806) — share a common shape (optional `ctx?` param, allow-list pattern, audit sink, `*ContextDenied` error) but specialize their targets. Each chokepoint's audit-test (`src/security/*-context-audit.test.ts`) is the runtime enforcement: greps src/ for the surface's signature, accepts either `ensure*Allowed(` calls or `Role: NOT a <surface> caller` docstring exemption, grandfathered existing call sites tracked in KNOWN_UNWIRED. Security denials are load-bearing per #10427 — hoist `ensure*Allowed(` OUTSIDE try/catch blocks that swallow errors.",
+    "summary": "Three sibling chokepoints — LoaderContext (filesystem, v782), EgressContext (network egress, v806), ProcessContext (child-process spawn, v806) — share a common shape (optional `ctx?` param, allow-list pattern, audit sink, `*ContextDenied` error) but specialize their targets. Each chokepoint's audit-test (`src/security/*-context-audit.test.ts`) is the runtime enforcement: greps src/ for the surface's signature, accepts either `ensure*Allowed(` calls or `Role: NOT a <surface> caller` docstring exemption, grandfathered existing call sites tracked in KNOWN_UNWIRED. Security denials are load-bearing per #10427 — hoist `ensure*Allowed(` OUTSIDE try/catch blocks that swallow errors. Internal-helper pattern (#10433): when a file already wraps the side-effecting op in an internal helper, thread `ctx?` through the helper for 1 LOC × N callsites; files without a helper take N LOC × N callsites.",
     "canonical_docs": [
       "docs/security-chokepoints.md",
       "src/security/loader-context.ts",
       "src/security/egress-context.ts",
       "src/security/process-context.ts"
     ],
-    "key_lessons": ["#10414", "#10426", "#10427"],
-    "codified_at_milestone": "v1.49.806 (new domain — codified from S6 lever in 2026-05-26 core-functions audit retrospective; extends #10414 LoaderContext pattern to network egress + child-process spawn surfaces)"
+    "key_lessons": ["#10414", "#10426", "#10427", "#10433"],
+    "codified_at_milestone": "v1.49.806 (new domain — codified from S6 lever in 2026-05-26 core-functions audit retrospective; extends #10414 LoaderContext pattern to network egress + child-process spawn surfaces); v1.49.824 (extended with #10433 internal-helper pattern for ctx? threading from v809 + v820 case studies)"
   },
   {
     "domain": "Two-layer closure for procedure-rooted drift",
@@ -229,14 +229,14 @@
   {
     "domain": "KNOWN_UNWIRED allowlists as migration-debt ledger",
     "trigger": "Introducing a new audit-test that enforces a cross-cutting invariant on src/ files with grandfathered call sites; reviewing how to grandfather existing call sites without permanently exempting them; planning chip-down ships against an existing allowlist; consolidating allowlist entries when N siblings are all wired",
-    "summary": "When a chokepoint or cross-cutting audit-test is introduced into a mature codebase, it MUST grandfather existing call sites via a named allowlist in the audit-test itself. The allowlist is debt, not exemption — should asymptote toward zero as chip ships consume it. Per-ship release notes record `<surface> KNOWN_UNWIRED N → N-K`. Established pattern at v806 (initial 16 egress + 38 process allowlist entries) + v809+v811+v812 (3 chip ships demonstrating the migration cadence). Forward observation: the v806 audit-test enforcement is unidirectional (catches missing wires but not stale allowlist entries); inverse check is a future enhancement.",
+    "summary": "When a chokepoint or cross-cutting audit-test is introduced into a mature codebase, it MUST grandfather existing call sites via a named allowlist in the audit-test itself. The allowlist is debt, not exemption — should asymptote toward zero as chip ships consume it. Per-ship release notes record `<surface> KNOWN_UNWIRED N → N-K`. Established pattern at v806 (initial 16 egress + 38 process allowlist entries) + v809+v811+v812 (3 chip ships demonstrating the migration cadence). Forward observation: the v806 audit-test enforcement is unidirectional (catches missing wires but not stale allowlist entries); inverse check is a future enhancement. Generalization beyond chokepoints (#10434): the same ratchet-ledger shape works for any cross-cutting observability+enforcement surface where the current state has N enumerated out-of-conformance entries and each is independently chip-able — v821 discipline-coverage ceiling generalizes the chokepoint KNOWN_UNWIRED pattern to per-discipline UNCODIFIED counts.",
     "canonical_docs": [
       "docs/known-unwired-ledger-discipline.md",
       "src/security/egress-context-audit.test.ts",
       "src/security/process-context-audit.test.ts",
       "src/security/loader-context-audit.test.ts"
     ],
-    "key_lessons": ["#10432"],
-    "codified_at_milestone": "v1.49.814 (new domain — codified from v806 introduction + v809+v811+v812 chip-ship demonstration; companion to Security chokepoints discipline)"
+    "key_lessons": ["#10432", "#10434"],
+    "codified_at_milestone": "v1.49.814 (new domain — codified from v806 introduction + v809+v811+v812 chip-ship demonstration; companion to Security chokepoints discipline); v1.49.824 (extended with #10434 ratchet-ledger generalization from v821 discipline-coverage ceiling case study)"
   }
 ]

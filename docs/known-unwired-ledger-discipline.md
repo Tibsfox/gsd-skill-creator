@@ -103,6 +103,68 @@ observability tool could emit the count as a time-series (alongside the
 adoption-baseline JSON files from `tools/adoption-refresh.mjs`); the
 trajectory is operator-actionable. Out of scope this ship.
 
+## Generalization beyond chokepoints (Lesson #10434)
+
+The KNOWN_UNWIRED shape — a named, visible, ratcheted ledger of
+out-of-conformance entries that an enforcement gate consults — is NOT
+chokepoint-specific. The same structural pattern works for any cross-cutting
+observability + enforcement surface where:
+
+1. The current state has N out-of-conformance entries.
+2. Each entry is independently chip-able toward conformance.
+3. Operator-driven ratchet replaces a single-step migration.
+
+### Case study: discipline-coverage ceiling (v1.49.821 + v1.49.822)
+
+The T2.2 audit wedge closed at v1.49.821 + v1.49.822 with the same shape:
+
+| Aspect | KNOWN_UNWIRED (chokepoints, v806) | Discipline-coverage ceiling (v821+v822) |
+|---|---|---|
+| Surface tracked | per-file presence of `ensure*Allowed` | per-discipline UNCODIFIED count |
+| Initial state | 16 egress + 38 process grandfathered | 50 ceiling on UNCODIFIED count |
+| Chip mechanism | per-file wire → remove from set | per-discipline codify → count drops |
+| Gate enforcement | audit-test BLOCK if file missing wire + not in set | pre-tag-gate BLOCK if count > ceiling |
+| Default behavior | BLOCK with explicit opt-out | BLOCK with explicit opt-out (`SC_DISCIPLINE_COVERAGE_CEILING`) |
+| Asymptote target | 0 entries | 0 UNCODIFIED |
+| Trajectory documentation | per-ship release notes `N → N-K` | per-ship release notes `ceiling N → N-K` |
+
+Both surfaces share:
+- A current-state metric exposed at audit-time
+- A ratchet mechanic (each chip ship reduces the count)
+- Strict-mode preserved (legacy opt-in retains old semantics)
+- Default-BLOCK with operator-visible ceiling-or-allowlist override
+
+### When to reach for this generalization
+
+Whenever a NEW cross-cutting invariant needs enforcement against a mature
+codebase where:
+
+- The conformance work is too large for a single ship
+- Per-entry chip cost is bounded (each entry is independently fix-able)
+- The gate has BOTH measurement (current count) AND threshold (ceiling) shapes available
+
+Reach for: a count-ledger gate (this generalization) instead of either
+(a) a strict gate that fails the build until 100% conformance OR (b) a
+documented-only "social rule" that drifts.
+
+### Anti-generalization
+
+The ratchet-ledger shape is NOT the right tool when:
+
+- Per-entry conformance is binary AND must be enforced at write-time (use the
+  chokepoint pattern directly — KNOWN_UNWIRED is the load-bearing inventory)
+- The list of out-of-conformance entries is unbounded or unenumerable
+  (e.g., "all dependency licenses must be MIT-compatible" — the conformance
+  surface is per-edge, not per-entry)
+- The ratchet direction is unclear (some entries should stay out of
+  conformance permanently — those want an exemption mechanism, not a debt
+  counter)
+
+Promotion threshold per #10426 (cross-class registry extraction at 2nd
+instance) met at v821 (instance #2: discipline-coverage ceiling generalizes
+the chokepoint KNOWN_UNWIRED pattern). Codified v1.49.824 from v806 + v821
+case studies.
+
 ## Anti-patterns
 
 - **Allowlist marked "stable" or "permanent".** The KNOWN_UNWIRED list is
