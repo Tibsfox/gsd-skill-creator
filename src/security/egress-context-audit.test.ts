@@ -48,7 +48,7 @@ const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
   'src/chips/http-client.ts',
   'src/dependency-auditor/registry-adapters/cargo.ts',
   'src/dependency-auditor/registry-adapters/conda.ts',
-  'src/dependency-auditor/registry-adapters/npm.ts',
+  // npm.ts wired through EgressContext at v1.49.809.
   'src/dependency-auditor/registry-adapters/pypi.ts',
   'src/dependency-auditor/registry-adapters/rubygems.ts',
   'src/intelligence/ipc.ts',

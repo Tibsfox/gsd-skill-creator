@@ -1,5 +1,6 @@
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { NpmRegistryAdapter } from './npm.js';
+import { EgressContextDenied, type EgressContext } from '../../security/egress-context.js';
 
 const stubFetch = (body: unknown, status = 200) => {
   vi.stubGlobal(
@@ -98,5 +99,66 @@ describe('NpmRegistryAdapter', () => {
         sourceManifest: '/project/package.json',
       }),
     ).rejects.toThrow('npm registry unreachable');
+  });
+
+  // v1.49.809: EgressContext chokepoint wire.
+  describe('EgressContext integration', () => {
+    it('throws EgressContextDenied when ctx restricts the registry URL', async () => {
+      // Restricted ctx with NO allowed patterns — every URL is denied.
+      const ctx: EgressContext = {
+        allowList: [],
+        audit: { record() {} },
+      };
+      const fetchSpy = vi.fn();
+      vi.stubGlobal('fetch', fetchSpy);
+
+      const adapter = new NpmRegistryAdapter();
+      await expect(
+        adapter.fetchHealth(
+          {
+            name: 'express',
+            version: '4.0.0',
+            ecosystem: 'npm',
+            sourceManifest: '/project/package.json',
+          },
+          ctx,
+        ),
+      ).rejects.toThrow(EgressContextDenied);
+
+      // ensureEgressAllowed must be called BEFORE fetch (#10427) — so fetch
+      // never executes when the policy denies.
+      expect(fetchSpy).not.toHaveBeenCalled();
+    });
+
+    it('records an audit entry when ctx allows the URL', async () => {
+      const records: { source: string; target: string }[] = [];
+      const ctx: EgressContext = {
+        allowList: [/^https:\/\/registry\.npmjs\.org\//],
+        audit: {
+          record(r) {
+            records.push({ source: r.source, target: r.target });
+          },
+        },
+      };
+      stubFetch({
+        'dist-tags': { latest: '1.0.0' },
+        time: { '1.0.0': '2024-01-01T00:00:00.000Z' },
+        maintainers: [],
+        versions: { '1.0.0': {} },
+      });
+      const adapter = new NpmRegistryAdapter();
+      await adapter.fetchHealth(
+        {
+          name: 'express',
+          version: '1.0.0',
+          ecosystem: 'npm',
+          sourceManifest: '/project/package.json',
+        },
+        ctx,
+      );
+      expect(records).toHaveLength(1);
+      expect(records[0].source).toBe('dependency-auditor/npm-registry');
+      expect(records[0].target).toBe('https://registry.npmjs.org/express');
+    });
   });
 });

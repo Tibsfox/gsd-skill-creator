@@ -33,6 +33,7 @@ import type {
   IncrementalScanState,
 } from './types.js';
 import type { RegistryAdapter } from './registry-adapter.js';
+import { EgressContextDenied } from '../security/egress-context.js';
 
 async function hashFile(path: string): Promise<string> {
   try {
@@ -111,9 +112,12 @@ export class AuditOrchestrator {
         staleDeps.map(async (dep) => {
           const adapter = this.adapters[dep.ecosystem];
           try {
-            const registryHealth = await adapter.fetchHealth(dep);
+            const registryHealth = await adapter.fetchHealth(dep, this.config.egressContext);
             return { dep, registryHealth };
-          } catch {
+          } catch (err) {
+            // Security denials are LOAD-BEARING (Lesson #10427) — propagate.
+            // Network failures + 5xx + parse errors are accessory — swallow.
+            if (err instanceof EgressContextDenied) throw err;
             // Graceful degradation: return null health on adapter failure
             return {
               dep,
@@ -132,7 +136,7 @@ export class AuditOrchestrator {
       );
 
       // Step 4: Fetch OSV vulnerabilities for stale deps
-      const vulnMap = await this.osvClient.queryBatch(staleDeps);
+      const vulnMap = await this.osvClient.queryBatch(staleDeps, this.config.egressContext);
 
       // Step 5: Build fresh HealthSignals
       for (const { dep, registryHealth } of healthResults) {

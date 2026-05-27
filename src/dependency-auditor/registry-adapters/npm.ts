@@ -1,10 +1,19 @@
 /**
  * npm registry adapter — fetches RegistryHealth from registry.npmjs.org.
+ *
+ * Wired through the EgressContext chokepoint at v1.49.809 (first KNOWN_UNWIRED
+ * migration from the v806 grandfathered list). The `ensureEgressAllowed`
+ * call is hoisted OUTSIDE the network-failure try/catch per Lesson #10427
+ * (security denials must propagate; the orchestrator's catch site re-throws
+ * EgressContextDenied so the policy signal isn't lost).
  */
 
 import type { DependencyRecord, RegistryHealth } from '../types.js';
 import type { RegistryAdapter } from '../registry-adapter.js';
 import type { RateLimiter } from '../rate-limiter.js';
+import { ensureEgressAllowed, type EgressContext } from '../../security/egress-context.js';
+
+const EGRESS_SOURCE = 'dependency-auditor/npm-registry';
 
 function nullHealth(name: string): RegistryHealth {
   return {
@@ -21,10 +30,17 @@ function nullHealth(name: string): RegistryHealth {
 export class NpmRegistryAdapter implements RegistryAdapter {
   constructor(private readonly rateLimiter?: RateLimiter) {}
 
-  async fetchHealth(dep: DependencyRecord): Promise<RegistryHealth> {
+  async fetchHealth(dep: DependencyRecord, ctx?: EgressContext): Promise<RegistryHealth> {
     if (this.rateLimiter) await this.rateLimiter.acquire();
 
     const url = `https://registry.npmjs.org/${encodeURIComponent(dep.name)}`;
+
+    // Hoisted OUTSIDE the network-failure try/catch per Lesson #10427:
+    // EgressContextDenied is load-bearing and must propagate. The orchestrator
+    // is responsible for re-throwing it from its catch site (which it does at
+    // audit-orchestrator.ts:line).
+    ensureEgressAllowed(ctx, EGRESS_SOURCE, 'fetch', url);
+
     let resp: Response;
 
     try {

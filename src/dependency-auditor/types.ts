@@ -90,6 +90,14 @@ export interface AuditorConfig {
   stateFilePath?: string;
   /** When true, the resolver runs in dry-run mode and makes no changes. */
   dryRunEnabled?: boolean;
+  /**
+   * Optional EgressContext threaded to wired registry adapters + osv-client.
+   * When undefined, wired adapters (v1.49.809+: npm) use the call-site
+   * default (permissive-with-audit). When restricted, disallowed URLs throw
+   * EgressContextDenied — which the orchestrator re-throws from its adapter
+   * catch block per Lesson #10427.
+   */
+  egressContext?: import('../security/egress-context.js').EgressContext;
 }
 
 // ─── Constants ───────────────────────────────────────────────────────────────
