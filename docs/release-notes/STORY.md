@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.822`.
+The story begins at `v1.0` and continues to `v1.49.823`.
 
-**865 chapters.** 864 have retrospectives.
+**866 chapters.** 865 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -873,3 +873,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.820](v1.49.820/00-summary.md)** — First Chip: git/core/branch-manager ProcessContext Wiring · 2026-05-27
 - **[v1.49.821](v1.49.821/00-summary.md)** — T2.2 Part 1: Discipline-coverage Gate Ceiling Infrastructure · 2026-05-27
 - **[v1.49.822](v1.49.822/00-summary.md)** — T2.2 Part 2: Discipline-coverage Gate Default-BLOCK Flip · 2026-05-27
+- **[v1.49.823](v1.49.823/00-summary.md)** — T1.3 Ship 2: ObservationBridge Wire (Cross-Rootdir Interface Pattern) · 2026-05-27

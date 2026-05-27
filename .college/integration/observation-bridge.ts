@@ -25,9 +25,9 @@ import type { PanelId } from '../rosetta-core/types.js';
 export interface CollegeObservationEvent {
   /** Unique event identifier */
   id: string;
-  /** Whether this was an exploration or translation */
-  type: 'exploration' | 'translation';
-  /** The concept that was explored/translated */
+  /** Event source category */
+  type: 'exploration' | 'translation' | 'skill-activation';
+  /** The concept that was explored/translated, OR the skill name on skill-activation */
   conceptId: string;
   /** Department containing the concept (present for explorations) */
   departmentId?: string;
@@ -37,6 +37,8 @@ export interface CollegeObservationEvent {
   panelIds?: PanelId[];
   /** Translation ID (present for translations) */
   translationId?: string;
+  /** Session ID (present for skill-activation events) */
+  sessionId?: string;
   /** Unix timestamp (Date.now()) */
   timestamp: number;
   /** Estimated token cost of the operation (optional) */
@@ -152,6 +154,34 @@ export class ObservationBridge {
   }
 
   /**
+   * Record a skill-activation event from src/dashboard.
+   *
+   * Structurally satisfies the `SkillActivationObserver` interface declared in
+   * `src/dashboard/activity-tab-toggle.ts`. Added v1.49.823 per T1.3 Ship 2
+   * recon — connects the src/dashboard `skill-activate` event flow to the
+   * College's observation pipeline across the rootdir boundary (interface
+   * declared in src/; implementation here in .college/; wire established at
+   * the application boundary).
+   *
+   * @param skillName - Human-readable skill name (becomes conceptId)
+   * @param sessionId - Session identifier for the activation
+   * @returns The emitted CollegeObservationEvent
+   */
+  onSkillActivate(skillName: string, sessionId: string): CollegeObservationEvent {
+    const event: CollegeObservationEvent = {
+      id: this.nextId(),
+      type: 'skill-activation',
+      conceptId: skillName,
+      sessionId,
+      timestamp: Date.now(),
+    };
+
+    this.buffer.push(event);
+    this.notify(event);
+    return event;
+  }
+
+  /**
    * Register a listener for observation events.
    */
   addListener(fn: Listener): void {
@@ -228,6 +258,7 @@ export class ObservationBridge {
     for (const event of events) {
       if (event.type === 'exploration') toolSet.add('college-explorer');
       if (event.type === 'translation') toolSet.add('rosetta-core');
+      if (event.type === 'skill-activation') toolSet.add('skill-activate');
     }
 
     return {

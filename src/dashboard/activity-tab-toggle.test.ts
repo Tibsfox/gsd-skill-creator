@@ -155,6 +155,50 @@ describe('translateSessionEvent', () => {
     const entry = translateSessionEvent(makeEvent({ type: 'adapter-load', entityName: 'GitHub Adapter' }));
     expect(entry.description).toBe('Adapter GitHub Adapter loaded');
   });
+
+  // -------------------------------------------------------------------------
+  // ObservationBridge wire (v1.49.823 T1.3 Ship 2)
+  // -------------------------------------------------------------------------
+
+  it('calls observer.onSkillActivate when observer provided and event is skill-activate', () => {
+    const calls: Array<{ skillName: string; sessionId: string }> = [];
+    const observer = {
+      onSkillActivate(skillName: string, sessionId: string): void {
+        calls.push({ skillName, sessionId });
+      },
+    };
+
+    translateSessionEvent(
+      makeEvent({ type: 'skill-activate', entityId: 'session-42', entityName: 'gsd-debug' }),
+      observer,
+    );
+
+    expect(calls).toEqual([{ skillName: 'gsd-debug', sessionId: 'session-42' }]);
+  });
+
+  it('does NOT call observer.onSkillActivate for non-skill-activate events', () => {
+    const calls: Array<{ skillName: string; sessionId: string }> = [];
+    const observer = {
+      onSkillActivate(skillName: string, sessionId: string): void {
+        calls.push({ skillName, sessionId });
+      },
+    };
+
+    translateSessionEvent(makeEvent({ type: 'agent-start' }), observer);
+    translateSessionEvent(makeEvent({ type: 'plan-complete' }), observer);
+    translateSessionEvent(makeEvent({ type: 'skill-deactivate' }), observer);
+
+    expect(calls).toEqual([]);
+  });
+
+  it('returns the same FeedEntry whether observer is provided or not', () => {
+    const event = makeEvent({ type: 'skill-activate', entityId: 'S-1', entityName: 'foo' });
+    const noObserver = translateSessionEvent(event);
+    const withObserver = translateSessionEvent(event, {
+      onSkillActivate: (): void => undefined,
+    });
+    expect(withObserver).toEqual(noObserver);
+  });
 });
 
 // ===========================================================================
@@ -320,7 +364,7 @@ describe('integration', () => {
       makeEvent({ type: 'phase-start', entityId: 'P-42', entityName: '42 - Design', domain: 'infrastructure', timestamp: '2026-02-14T10:02:00Z' }),
     ];
 
-    const feedEntries = events.map(translateSessionEvent);
+    const feedEntries = events.map((e) => translateSessionEvent(e));
     const html = renderActivityFeed(feedEntries);
 
     // Verify entries rendered with correct shapes and identifiers

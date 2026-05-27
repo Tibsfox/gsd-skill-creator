@@ -62,6 +62,22 @@ const EVENT_ENTITY_MAP: Record<SessionEvent['type'], FeedEntry['entityType']> = 
   'adapter-load': 'adapter',
 };
 
+/**
+ * Optional observer that records skill-activate events to a downstream sink
+ * (e.g., the College's ObservationBridge). Structural duck-type — any object
+ * with `onSkillActivate(skillName, sessionId)` satisfies the contract. The
+ * rootdir boundary (`tsconfig.json` has `rootDir: "src"`) prevents direct
+ * import of `.college/integration/observation-bridge.ts` here; the bridge
+ * implements this interface independently and the wire is set up at the
+ * application boundary (e.g., src-tauri/) where both rootdirs are visible.
+ *
+ * Added v1.49.823 per T1.3 Ship 2 (recon at `.planning/T1.3-RECON-2026-05-27.md`).
+ */
+export interface SkillActivationObserver {
+  /** Called when a skill-activate SessionEvent is translated. */
+  onSkillActivate(skillName: string, sessionId: string): void;
+}
+
 /** Description template functions for each SessionEvent type. */
 const DESCRIPTION_TEMPLATES: Record<SessionEvent['type'], (name: string) => string> = {
   'agent-start': (n) => `${n} started`,
@@ -86,10 +102,21 @@ const DESCRIPTION_TEMPLATES: Record<SessionEvent['type'], (name: string) => stri
  * Maps the event type to an entity type and generates a human-readable
  * description. The timestamp is preserved as occurredAt for sort order.
  *
+ * When `observer` is provided AND the event type is `skill-activate`, also
+ * dispatches to `observer.onSkillActivate(event.entityName, event.entityId)`.
+ * This is the v1.49.823 wire for the College's ObservationBridge (T1.3 Ship 2).
+ *
  * @param event - Raw session observer event.
+ * @param observer - Optional SkillActivationObserver to record skill-activate events.
  * @returns FeedEntry suitable for renderActivityFeed.
  */
-export function translateSessionEvent(event: SessionEvent): FeedEntry {
+export function translateSessionEvent(
+  event: SessionEvent,
+  observer?: SkillActivationObserver,
+): FeedEntry {
+  if (observer && event.type === 'skill-activate') {
+    observer.onSkillActivate(event.entityName, event.entityId);
+  }
   return {
     entityType: EVENT_ENTITY_MAP[event.type],
     domain: event.domain,

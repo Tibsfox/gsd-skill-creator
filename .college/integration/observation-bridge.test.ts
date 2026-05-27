@@ -208,4 +208,55 @@ describe('ObservationBridge', () => {
     expect(observation.topFiles).toEqual([]);
     expect(observation.topTools).toEqual([]);
   });
+
+  // ─── onSkillActivate (v1.49.823 T1.3 Ship 2) ────────────────────────────
+
+  it('onSkillActivate() emits a skill-activation event with conceptId=skillName and sessionId', () => {
+    const bridge = new ObservationBridge(makeConfig());
+    const listener = vi.fn();
+    bridge.addListener(listener);
+
+    const event = bridge.onSkillActivate('gsd-debug', 'session-99');
+
+    expect(event.type).toBe('skill-activation');
+    expect(event.conceptId).toBe('gsd-debug');
+    expect(event.sessionId).toBe('session-99');
+    expect(event.timestamp).toBeGreaterThan(0);
+    expect(listener).toHaveBeenCalledWith(event);
+  });
+
+  it('onSkillActivate() events accumulate in the buffer and flush together', () => {
+    const bridge = new ObservationBridge(makeConfig());
+    bridge.onSkillActivate('skill-1', 'sess');
+    bridge.onSkillActivate('skill-2', 'sess');
+    bridge.onSkillActivate('skill-3', 'sess');
+
+    const flushed = bridge.flush();
+    expect(flushed).toHaveLength(3);
+    expect(flushed.map((e) => e.conceptId)).toEqual(['skill-1', 'skill-2', 'skill-3']);
+    expect(flushed.every((e) => e.type === 'skill-activation')).toBe(true);
+  });
+
+  it('toSessionObservation() with skill-activation events includes "skill-activate" tool', () => {
+    const bridge = new ObservationBridge(makeConfig());
+    bridge.onSkillActivate('foo', 'sess');
+    bridge.onSkillActivate('bar', 'sess');
+
+    const observation = bridge.toSessionObservation(bridge.flush());
+    expect(observation.topTools).toContain('skill-activate');
+    expect(observation.metrics.toolCalls).toBe(2);
+  });
+
+  it('ObservationBridge satisfies the SkillActivationObserver structural contract', () => {
+    // Demonstrates the cross-rootdir wire: ObservationBridge implements the
+    // structural shape that src/dashboard/activity-tab-toggle's
+    // SkillActivationObserver interface requires (onSkillActivate(skillName,
+    // sessionId)). This test verifies the shape WITHOUT importing from src/
+    // (rootdir boundary). Operators wiring at the application boundary can
+    // pass a bridge instance where a SkillActivationObserver is expected.
+    const bridge = new ObservationBridge(makeConfig());
+    const observer: { onSkillActivate(name: string, sessionId: string): unknown } = bridge;
+    const result = observer.onSkillActivate('test-skill', 'sess-x');
+    expect(result).toBeDefined();
+  });
 });
