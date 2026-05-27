@@ -149,4 +149,25 @@ describe('applyRecommendation', () => {
     expect(outcome.reason).toContain('not found in config');
     expect(existsSync(configPath)).toBe(true);
   });
+
+  it('writes cooldown_days through to disk and preserves siblings (v1.49.796)', async () => {
+    writeConfig({ suggestions: { min_occurrences: 3, cooldown_days: 7, auto_dismiss_after_days: 30 } });
+    const rec = makeRecommendation({
+      threshold: 'suggestions.cooldown_days',
+      currentValue: 7,
+      proposedValue: 6,
+      direction: 'decrease',
+      meanObservation: 1,
+      reason: 'cooldown_days test recommendation',
+    });
+    const outcome = await applyRecommendation(rec, { configPath, apply: true });
+    expect(outcome.kind).toBe('applied');
+    if (outcome.kind !== 'applied') throw new Error('unreachable');
+    expect(outcome.previousValue).toBe(7);
+    expect(outcome.newValue).toBe(6);
+    const onDisk = JSON.parse(readFileSync(configPath, 'utf8'));
+    expect(readThresholdValue(onDisk, 'suggestions.cooldown_days')).toBe(6);
+    expect(readThresholdValue(onDisk, 'suggestions.min_occurrences')).toBe(3);
+    expect(readThresholdValue(onDisk, 'suggestions.auto_dismiss_after_days')).toBe(30);
+  });
 });

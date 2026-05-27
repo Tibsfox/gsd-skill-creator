@@ -24,8 +24,9 @@
 export type SuggestionDecision = 'accepted' | 'dismissed' | 'deferred' | 'pending';
 
 /**
- * Configuration thresholds the loop can calibrate. v1.49.795 wires only
- * `suggestions.min_occurrences`; future ships add the remaining members.
+ * Configuration thresholds the loop can calibrate. Wired through the CLI:
+ * `suggestions.min_occurrences` (v1.49.795) and `suggestions.cooldown_days`
+ * (v1.49.796). Future ships extend to the remaining members.
  */
 export type CalibratableThreshold =
   | 'suggestions.min_occurrences'

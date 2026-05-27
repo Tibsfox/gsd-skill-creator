@@ -218,6 +218,69 @@ describe('boundedLearningCommand — --apply gate', () => {
   });
 });
 
+describe('boundedLearningCommand — --threshold suggestions.cooldown_days (v1.49.796)', () => {
+  beforeEach(() => {
+    // Live-default cooldown_days = 7; min_occurrences sibling preserved.
+    writeConfig({ suggestions: { min_occurrences: 3, cooldown_days: 7 } });
+  });
+
+  it('reads the cooldown_days threshold from config and reports current value', async () => {
+    writeSuggestions([]);
+    const code = await boundedLearningCommand(
+      baseArgs(['--threshold', 'suggestions.cooldown_days', '--json']),
+    );
+    expect(code).toBe(0);
+    const out = JSON.parse(collectLog());
+    expect(out.threshold).toBe('suggestions.cooldown_days');
+    expect(out.currentValue).toBe(7);
+    expect(out.direction).toBe('hold');
+  });
+
+  it('recommends decrease (6) after 10 unanimous accepts', async () => {
+    writeSuggestions(
+      Array.from({ length: 10 }, (_, i) => ({ id: `s-${i}`, state: 'accepted' })),
+    );
+    const code = await boundedLearningCommand(
+      baseArgs(['--threshold', 'suggestions.cooldown_days', '--json']),
+    );
+    expect(code).toBe(0);
+    const out = JSON.parse(collectLog());
+    expect(out.threshold).toBe('suggestions.cooldown_days');
+    expect(out.direction).toBe('decrease');
+    expect(out.currentValue).toBe(7);
+    expect(out.proposedValue).toBe(6);
+    expect(out.applied).toBe('dry-run');
+  });
+
+  it('recommends increase (8) after 10 unanimous dismisses', async () => {
+    writeSuggestions(
+      Array.from({ length: 10 }, (_, i) => ({ id: `s-${i}`, state: 'dismissed' })),
+    );
+    const code = await boundedLearningCommand(
+      baseArgs(['--threshold', 'suggestions.cooldown_days', '--json']),
+    );
+    expect(code).toBe(0);
+    const out = JSON.parse(collectLog());
+    expect(out.direction).toBe('increase');
+    expect(out.proposedValue).toBe(8);
+  });
+
+  it('writes cooldown_days=6 to config when --apply is passed (siblings preserved)', async () => {
+    writeSuggestions(
+      Array.from({ length: 10 }, (_, i) => ({ id: `s-${i}`, state: 'accepted' })),
+    );
+    const code = await boundedLearningCommand(
+      baseArgs(['--threshold', 'suggestions.cooldown_days', '--apply', '--json']),
+    );
+    expect(code).toBe(0);
+    const out = JSON.parse(collectLog());
+    expect(out.applied).toBe('applied');
+    const onDisk = JSON.parse(readFileSync(configPath, 'utf8'));
+    expect(onDisk.suggestions.cooldown_days).toBe(6);
+    expect(onDisk.suggestions.min_occurrences).toBe(3);
+  });
+});
+
 describe('boundedLearningCommand — malformed input tolerance', () => {
   it('ignores garbage suggestions.json (treats as empty)', async () => {
     writeFileSync(suggestionsPath, '<<<not json>>>', 'utf8');

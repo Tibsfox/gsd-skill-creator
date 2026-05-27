@@ -7,8 +7,9 @@
  * emits a `CalibrationRecommendation` proposing a single-step adjustment
  * to a configuration threshold when Ville's bound is crossed.
  *
- * Ship 1 (v1.49.795) wires the loop to `suggestions.min_occurrences` only.
- * Future ships extend to additional thresholds in `CalibratableThreshold`.
+ * Wired thresholds: `suggestions.min_occurrences` (v1.49.795) and
+ * `suggestions.cooldown_days` (v1.49.796). Future ships extend to the
+ * remaining members of `CalibratableThreshold`.
  *
  * @module bounded-learning
  */

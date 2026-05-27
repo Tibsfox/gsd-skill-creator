@@ -16,8 +16,15 @@
  *   1 — invalid flag or argument
  *   2 — config file not found / unreadable
  *
- * Ship 1 (v1.49.795): wires only `suggestions.min_occurrences`. The CLI
- * argument surface anticipates future thresholds via `--threshold`.
+ * Wired thresholds:
+ *   - `suggestions.min_occurrences` (v1.49.795)
+ *   - `suggestions.cooldown_days`   (v1.49.796)
+ *
+ * Both thresholds share the same observation source (operator accept/dismiss
+ * decisions on surfaced suggestions). Direction is interpreted per-threshold
+ * but uses the same mapping: accept-skew ⇒ DECREASE, dismiss-skew ⇒ INCREASE.
+ * For `cooldown_days`, DECREASE means re-surface sooner; INCREASE means
+ * re-surface later.
  *
  * @module cli/commands/bounded-learning
  */
@@ -39,7 +46,10 @@ import {
 } from '../../bounded-learning/index.js';
 
 const DEFAULT_THRESHOLD: CalibratableThreshold = 'suggestions.min_occurrences';
-const SUPPORTED_THRESHOLDS: CalibratableThreshold[] = ['suggestions.min_occurrences'];
+const SUPPORTED_THRESHOLDS: CalibratableThreshold[] = [
+  'suggestions.min_occurrences',
+  'suggestions.cooldown_days',
+];
 
 const DEFAULT_SUGGESTIONS_PATH = join(process.cwd(), '.planning', 'patterns', 'suggestions.json');
 const DEFAULT_CONFIG_PATH = join(process.cwd(), '.planning', 'skill-creator.json');

@@ -99,3 +99,42 @@ describe('runCalibrationLoop', () => {
     expect(rec.alpha).toBe(0.1);
   });
 });
+
+describe('runCalibrationLoop — suggestions.cooldown_days (v1.49.796)', () => {
+  it('recommends decrease on accept-skew (re-surface sooner)', () => {
+    const obs10 = Array.from({ length: 10 }, (_, i) => obs(1, `s-${i}`));
+    const rec = runCalibrationLoop('suggestions.cooldown_days', 7, obs10);
+    expect(rec.threshold).toBe('suggestions.cooldown_days');
+    expect(rec.direction).toBe('decrease');
+    expect(rec.rejected).toBe(true);
+    expect(rec.proposedValue).toBe(6);
+    expect(rec.reason).toContain('lower');
+    expect(rec.reason).toContain('7 → 6');
+  });
+
+  it('recommends increase on dismiss-skew (re-surface later)', () => {
+    const obs10 = Array.from({ length: 10 }, (_, i) => obs(-1, `s-${i}`));
+    const rec = runCalibrationLoop('suggestions.cooldown_days', 7, obs10);
+    expect(rec.threshold).toBe('suggestions.cooldown_days');
+    expect(rec.direction).toBe('increase');
+    expect(rec.rejected).toBe(true);
+    expect(rec.proposedValue).toBe(8);
+    expect(rec.reason).toContain('raise');
+    expect(rec.reason).toContain('7 → 8');
+  });
+
+  it('holds with insufficient evidence at the live default value (7)', () => {
+    const obs5 = Array.from({ length: 5 }, (_, i) => obs(1, `s-${i}`));
+    const rec = runCalibrationLoop('suggestions.cooldown_days', 7, obs5);
+    expect(rec.direction).toBe('hold');
+    expect(rec.proposedValue).toBeNull();
+    expect(rec.currentValue).toBe(7);
+  });
+
+  it('clamps proposed decrease at the absolute floor (1)', () => {
+    const obs10 = Array.from({ length: 10 }, (_, i) => obs(1, `s-${i}`));
+    const rec = runCalibrationLoop('suggestions.cooldown_days', 1, obs10);
+    expect(rec.direction).toBe('decrease');
+    expect(rec.proposedValue).toBe(1);
+  });
+});
