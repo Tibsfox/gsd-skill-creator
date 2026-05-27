@@ -1,6 +1,6 @@
 {
   "name": "gsd-skill-creator",
-  "version": "1.49.807",
+  "version": "1.49.808",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
@@ -43,6 +43,8 @@
     "adoption-report": "node tools/adoption-scan.mjs",
     "adoption-report:json": "node tools/adoption-scan.mjs --json",
     "adoption-report:refresh": "node tools/adoption-refresh.mjs",
+    "adoption-report:trends": "node tools/adoption-trends.mjs --write",
+    "adoption-report:trends:check": "node tools/adoption-trends.mjs --check",
     "adoption-report:dashboard": "node tools/adoption-scan.mjs --json | node tools/render-adoption-dashboard.mjs",
     "depth-audit": "node tools/depth-audit.mjs",
     "depth-audit:current": "node tools/depth-audit.mjs --current",
