@@ -86,8 +86,16 @@ function runScript(projectId: string): string {
 
 // Subprocess-heavy tests (bash + python3 + sqlite3 chain) can be slow under
 // vitest parallel pool when workers race on fork limits. Each test executes
-// 4-7 subprocesses serially so 60-90s headroom is realistic.
-describe('C12 / T7 — load-kb-context.sh', { retry: 1, timeout: 90_000 }, () => {
+// 4-7 subprocesses serially: per `runScript` call, the bash script spawns
+// 4× sqlite3 + 1× python3 + 1× bash itself = ~6 forks. 7 tests in this file
+// × ~6 = ~42 forks; concurrent with siblings (c12-end-to-end-flow,
+// c12-write-briefing) sharing the same fork-spawn budget, the file can
+// time out under heavy suite load even though isolated runs complete in
+// ~10s. retry=3 (4 total attempts) makes the flake practically zero;
+// per-file pool isolation would require vitest.config.ts project changes
+// (deferred per #10416 lightest-wire). Re-flagged at v802; closed v817
+// per #10415 deferred-maintenance escalation.
+describe('C12 / T7 — load-kb-context.sh', { retry: 3, timeout: 90_000 }, () => {
   it('missing DB → emits well-formed empty context with warning', () => {
     const out = runScript('test-proj');
     const parsed = JSON.parse(out);

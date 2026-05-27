@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.816`.
+The story begins at `v1.0` and continues to `v1.49.817`.
 
-**859 chapters.** 858 have retrospectives.
+**860 chapters.** 859 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -867,3 +867,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.814](v1.49.814/00-summary.md)** — Codification Ship: Promote #10431 + #10432 · 2026-05-27
 - **[v1.49.815](v1.49.815/00-summary.md)** — T2.3 Wedge Close: PMTiles Refcounted Archive Close (HIGH-01) · 2026-05-27
 - **[v1.49.816](v1.49.816/00-summary.md)** — Counter-cadence Chip: state-md-set-shipped Colon-safe milestone_name + --check Time-determinism · 2026-05-27
+- **[v1.49.817](v1.49.817/00-summary.md)** — T2.3 Wedge Close: c12-load-kb-context Flake (retry-bump + structural-cause documentation) · 2026-05-27
