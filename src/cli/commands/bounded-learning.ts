@@ -58,7 +58,9 @@ import { join } from 'node:path';
 
 import {
   DEFAULT_AUDIT_LOG_PATH,
+  DEFAULT_TOKEN_BUDGET_EVENTS_PATH,
   appendAuditLogEntry,
+  appendTokenBudgetEvent,
   applyRecommendation,
   buildAuditLogEntry,
   loadObservationsForThreshold,
@@ -70,6 +72,8 @@ import {
   type AuditLogEntry,
   type CalibratableThreshold,
   type CalibrationRecommendation,
+  type TokenBudgetEvent,
+  type TokenBudgetEventKind,
 } from '../../bounded-learning/index.js';
 
 const DEFAULT_THRESHOLD: CalibratableThreshold = 'suggestions.min_occurrences';
@@ -112,6 +116,8 @@ Options:
   --alpha <N>          Type-I error level (default 0.05)
   --lambda <N>         Martingale rate (default 0.5)
   --suggestions <path> Path to suggestions.json (default .planning/patterns/suggestions.json)
+  --token-budget-events <path>
+                       Path to token-budget-events.jsonl (default .planning/patterns/token-budget-events.jsonl)
   --config <path>      Path to skill-creator.json (default .planning/skill-creator.json)
   --apply              Apply the recommendation to skill-creator.json (default: dry-run)
   --audit-log <path>   Override audit-log JSONL path (default .planning/patterns/bounded-learning-log.jsonl)
@@ -119,6 +125,12 @@ Options:
   --watch              Re-run loop on suggestions.json or skill-creator.json changes (cross-session calibration)
   --watch-debounce <ms> Watch-mode debounce window (default 200ms; only with --watch)
   --summary            Emit JSON summary of all wired thresholds + audit-log state (v1.49.801)
+  --record-event       Record a token-budget event (v1.49.803). Requires --kind.
+  --kind <responsive|ignored>
+                       Operator outcome after a warn event (with --record-event).
+  --usage-percent <N>  usagePercent reading at warn time (optional, with --record-event).
+  --warn-at-percent <N>  warn_at_percent threshold at warn time (optional, with --record-event).
+  --reason <string>    Free-form operator note (optional, with --record-event).
   --quiet, -q          Machine-readable CSV output
   --json               JSON output
   --help, -h           Show this help
@@ -269,6 +281,7 @@ interface TickContext {
   alpha: number | undefined;
   lambda: number | undefined;
   suggestionsPath: string;
+  tokenBudgetEventsPath: string;
   configPath: string;
   auditLogPath: string;
   apply: boolean;
@@ -303,7 +316,10 @@ async function runCalibrationTick(ctx: TickContext): Promise<number> {
     return 2;
   }
 
-  const observations = await loadObservationsForThreshold(ctx.threshold, { suggestionsPath: ctx.suggestionsPath });
+  const observations = await loadObservationsForThreshold(ctx.threshold, {
+    suggestionsPath: ctx.suggestionsPath,
+    tokenBudgetEventsPath: ctx.tokenBudgetEventsPath,
+  });
 
   const loopConfig: { alpha?: number; lambda?: number } = {};
   if (ctx.alpha !== undefined) loopConfig.alpha = ctx.alpha;
@@ -358,6 +374,11 @@ export async function boundedLearningCommand(args: string[], options: BoundedLea
   // ── --summary mode (v1.49.801) ─────────────────────────────────────────
   if (args.includes('--summary')) {
     return runSummary(args);
+  }
+
+  // ── --record-event mode (v1.49.803) ────────────────────────────────────
+  if (args.includes('--record-event')) {
+    return runRecordEvent(args, { json, quiet });
   }
 
   // ── Parse --threshold ──────────────────────────────────────────────────
@@ -416,6 +437,11 @@ export async function boundedLearningCommand(args: string[], options: BoundedLea
     ? suggestionsLookup.value
     : DEFAULT_SUGGESTIONS_PATH;
 
+  const tokenBudgetEventsLookup = getFlagValue(args, '--token-budget-events');
+  const tokenBudgetEventsPath = tokenBudgetEventsLookup.present && tokenBudgetEventsLookup.value !== null
+    ? tokenBudgetEventsLookup.value
+    : DEFAULT_TOKEN_BUDGET_EVENTS_PATH;
+
   const configLookup = getFlagValue(args, '--config');
   const configPath = configLookup.present && configLookup.value !== null
     ? configLookup.value
@@ -432,6 +458,7 @@ export async function boundedLearningCommand(args: string[], options: BoundedLea
     alpha,
     lambda,
     suggestionsPath,
+    tokenBudgetEventsPath,
     configPath,
     auditLogPath,
     apply,
@@ -518,6 +545,76 @@ async function runSummary(args: string[]): Promise<number> {
   };
 
   console.log(JSON.stringify(summary, null, 2));
+  return 0;
+}
+
+/**
+ * --record-event mode (v1.49.803): append one operator-outcome event to the
+ * token-budget-events JSONL log. Invoked by /sc:status and /sc:start skill
+ * prompts when they emit (or follow up on) a token-budget warn line.
+ *
+ * Best-effort silent write per Lesson #10427 (failure-mode contracts,
+ * ESTABLISHED v802). The CLI exit code reflects argument-validation
+ * failures, not filesystem failures during the append.
+ */
+async function runRecordEvent(
+  args: string[],
+  flags: { json: boolean; quiet: boolean },
+): Promise<number> {
+  const kindLookup = getFlagValue(args, '--kind');
+  if (!kindLookup.present || kindLookup.value === null) {
+    if (flags.json) {
+      console.log(JSON.stringify({ error: 'missing-flag', flag: '--kind', supported: ['responsive', 'ignored'] }));
+    } else if (!flags.quiet) {
+      p.log.error(`--record-event requires --kind <responsive|ignored>.`);
+    }
+    return 1;
+  }
+  if (kindLookup.value !== 'responsive' && kindLookup.value !== 'ignored') {
+    if (flags.json) {
+      console.log(JSON.stringify({ error: 'invalid-flag', flag: '--kind', value: kindLookup.value, supported: ['responsive', 'ignored'] }));
+    } else if (!flags.quiet) {
+      p.log.error(`--kind must be 'responsive' or 'ignored'; got '${kindLookup.value}'.`);
+    }
+    return 1;
+  }
+  const kind: TokenBudgetEventKind = kindLookup.value;
+
+  const pathLookup = getFlagValue(args, '--token-budget-events');
+  const path = pathLookup.present && pathLookup.value !== null
+    ? pathLookup.value
+    : DEFAULT_TOKEN_BUDGET_EVENTS_PATH;
+
+  const event: TokenBudgetEvent = {
+    timestamp: new Date().toISOString(),
+    kind,
+  };
+  const usageLookup = getFlagValue(args, '--usage-percent');
+  if (usageLookup.present) {
+    const parsed = parsePositiveFloat(usageLookup.value);
+    if (parsed !== null) event.usagePercent = parsed;
+  }
+  const warnAtLookup = getFlagValue(args, '--warn-at-percent');
+  if (warnAtLookup.present) {
+    const parsed = parsePositiveFloat(warnAtLookup.value);
+    if (parsed !== null) event.warnAtPercent = parsed;
+  }
+  const reasonLookup = getFlagValue(args, '--reason');
+  if (reasonLookup.present && reasonLookup.value !== null) {
+    event.reason = reasonLookup.value;
+  }
+
+  try {
+    await appendTokenBudgetEvent(event, { path });
+  } catch {
+    // Best-effort silent per Lesson #10427.
+  }
+
+  if (flags.json) {
+    console.log(JSON.stringify({ recorded: true, event }));
+  } else if (!flags.quiet) {
+    p.log.success(`Recorded token-budget ${kind} event at ${event.timestamp}.`);
+  }
   return 0;
 }
 

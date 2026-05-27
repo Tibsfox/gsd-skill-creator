@@ -27,14 +27,14 @@ describe('observationSourceFor — per-class registry (v1.49.798)', () => {
     expect(info.wired).toBe(true);
   });
 
-  it('classifies token_budget.* thresholds as unwired token-budget-events source', () => {
+  it('classifies token_budget.warn_at_percent as WIRED token-budget-events source (v1.49.803)', () => {
     const info = observationSourceFor('token_budget.warn_at_percent');
     expect(info.sourceId).toBe('token-budget-events');
-    expect(info.wired).toBe(false);
-    expect(info.description).toContain('NOT YET CAPTURED');
+    expect(info.wired).toBe(true);
+    expect(info.description).not.toContain('NOT YET CAPTURED');
   });
 
-  it('classifies token_budget.max_percent under the same unwired source', () => {
+  it('classifies token_budget.max_percent as unwired (still pending; only warn_at_percent wired at v1.49.803)', () => {
     const info = observationSourceFor('token_budget.max_percent');
     expect(info.sourceId).toBe('token-budget-events');
     expect(info.wired).toBe(false);
@@ -78,15 +78,49 @@ describe('loadObservationsForThreshold — per-class dispatch (v1.49.798)', () =
     expect(obs[1]?.value).toBe(-1);
   });
 
-  it('returns empty array for token_budget.* thresholds (source not yet captured)', async () => {
+  it('reads token-budget-events for token_budget.warn_at_percent (v1.49.803)', async () => {
     // Suggestions data is present but MUST NOT be consumed by token_budget threshold.
     writeFileSync(
       suggestionsPath,
       JSON.stringify(Array.from({ length: 10 }, (_, i) => ({ id: `s-${i}`, state: 'accepted' }))),
       'utf8',
     );
+    const tokenBudgetEventsPath = join(workDir, 'token-budget-events.jsonl');
+    writeFileSync(
+      tokenBudgetEventsPath,
+      [
+        JSON.stringify({ timestamp: '2026-05-27T00:00:00.000Z', kind: 'responsive' }),
+        JSON.stringify({ timestamp: '2026-05-27T00:01:00.000Z', kind: 'ignored' }),
+      ].join('\n') + '\n',
+      'utf8',
+    );
     const obs = await loadObservationsForThreshold('token_budget.warn_at_percent', {
       suggestionsPath,
+      tokenBudgetEventsPath,
+    });
+    expect(obs).toHaveLength(2);
+    expect(obs[0]?.value).toBe(1);
+    expect(obs[0]?.decision).toBe('accepted');
+    expect(obs[1]?.value).toBe(-1);
+    expect(obs[1]?.decision).toBe('dismissed');
+  });
+
+  it('returns empty for token_budget.warn_at_percent when events file missing (honest baseline)', async () => {
+    const obs = await loadObservationsForThreshold('token_budget.warn_at_percent', {
+      tokenBudgetEventsPath: join(workDir, 'does-not-exist.jsonl'),
+    });
+    expect(obs).toEqual([]);
+  });
+
+  it('returns empty for token_budget.max_percent regardless of events file (still unwired at v1.49.803)', async () => {
+    const tokenBudgetEventsPath = join(workDir, 'token-budget-events.jsonl');
+    writeFileSync(
+      tokenBudgetEventsPath,
+      JSON.stringify({ timestamp: '2026-05-27T00:00:00.000Z', kind: 'responsive' }) + '\n',
+      'utf8',
+    );
+    const obs = await loadObservationsForThreshold('token_budget.max_percent', {
+      tokenBudgetEventsPath,
     });
     expect(obs).toEqual([]);
   });

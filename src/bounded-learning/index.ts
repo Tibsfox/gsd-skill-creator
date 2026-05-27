@@ -54,6 +54,16 @@ export type {
 } from './observation-sources.js';
 
 export {
+  DEFAULT_TOKEN_BUDGET_EVENTS_PATH,
+  appendTokenBudgetEvent,
+  eventKindToValue,
+  eventToObservation,
+  eventsToObservations,
+  readTokenBudgetEvents,
+} from './token-budget-events.js';
+export type { TokenBudgetEvent, TokenBudgetEventKind } from './token-budget-events.js';
+
+export {
   DEFAULT_AUDIT_LOG_PATH,
   appendAuditLogEntry,
   buildAuditLogEntry,

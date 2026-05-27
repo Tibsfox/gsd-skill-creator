@@ -9,24 +9,25 @@
  * ## Why a registry (v1.49.798)
  *
  * v1.49.795-797 wired three thresholds in the `suggestions.*` class, all
- * reading from `.planning/patterns/suggestions.json`. v798 introduces the
+ * reading from `.planning/patterns/suggestions.json`. v798 introduced the
  * first threshold in a NEW class (`token_budget.*`), forcing the question:
  * is `entriesToObservations(suggestionsPath)` the right signal source for
  * token-budget calibration? Answer: no — operator accept/dismiss decisions
  * on surfaced suggestions tell us nothing about whether the token-budget
  * warn threshold is appropriately set.
  *
- * The right signal for token-budget would be operator response to a warn
- * event ("did the operator reduce skill load when warned, or ignore the
- * warning?"). No such signal is captured today. v798 wires the threshold
- * with an EMPTY observation source for `token_budget.*` and documents the
- * gap; a future ship will add a real token-budget observation source.
+ * The right signal for token-budget is operator response to a warn event
+ * ("did the operator reduce skill load when warned, or ignore the warning?").
+ * v798 wired the threshold with an EMPTY observation source for
+ * `token_budget.*` and documented the gap; v803 closes it by adding
+ * `token-budget-events.ts` (append-only JSONL log of operator responses
+ * to skill-load token-budget warn events).
  *
- * The architectural decision — per-class observation source — is the
+ * The architectural decision — per-class observation source — was the
  * second-instance abstraction extraction. v795-797 had one class and one
- * source (no abstraction needed); v798 has two classes and two sources
- * (abstraction warranted). Per disciplines #10422 + #10423, extract at the
- * second instance, not earlier.
+ * source (no abstraction needed); v798 had two classes and two sources
+ * (abstraction warranted). Per Lesson #10426 (ESTABLISHED at v802),
+ * extract at the second instance, not earlier.
  *
  * @module bounded-learning/observation-sources
  */
@@ -35,6 +36,11 @@ import { existsSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 
 import { entriesToObservations } from './suggestions-mapper.js';
+import {
+  DEFAULT_TOKEN_BUDGET_EVENTS_PATH,
+  eventsToObservations,
+  readTokenBudgetEvents,
+} from './token-budget-events.js';
 import type { CalibrationObservation, CalibratableThreshold } from './types.js';
 import type { SuggestionEntry } from './suggestions-mapper.js';
 
@@ -45,6 +51,8 @@ import type { SuggestionEntry } from './suggestions-mapper.js';
 export interface ObservationLoaderOptions {
   /** Path to suggestions.json (consumed by suggestions.* threshold class). */
   suggestionsPath?: string;
+  /** Path to token-budget-events.jsonl (consumed by token_budget.* threshold class; v803). */
+  tokenBudgetEventsPath?: string;
 }
 
 /**
@@ -72,10 +80,17 @@ export function observationSourceFor(threshold: CalibratableThreshold): Observat
       wired: true,
     };
   }
+  if (threshold === 'token_budget.warn_at_percent') {
+    return {
+      sourceId: 'token-budget-events',
+      description: 'Operator response to skill-load token-budget warn events',
+      wired: true,
+    };
+  }
   if (threshold.startsWith('token_budget.')) {
     return {
       sourceId: 'token-budget-events',
-      description: 'Operator response to skill-load token-budget warn events (NOT YET CAPTURED)',
+      description: 'Operator response to skill-load token-budget warn events (NOT YET CAPTURED for this threshold)',
       wired: false,
     };
   }
@@ -112,11 +127,14 @@ async function loadSuggestionsFromFile(path: string): Promise<SuggestionEntry[]>
 /**
  * Dispatch to the per-class loader and return the resulting observations.
  *
- * For wired classes (`suggestions.*`), reads the actual data source. For
- * unwired classes (`token_budget.*`, `observation.*`), returns an empty
- * array — the calibration loop will then return `direction: 'hold'` with
- * `observations: 0`, which is the honest outcome for "wire exists, source
- * not yet captured."
+ * Wired classes:
+ *   - `suggestions.*`              — reads `suggestions.json`.
+ *   - `token_budget.warn_at_percent` — reads `token-budget-events.jsonl` (v803).
+ *
+ * Unwired classes (`token_budget.max_percent`, `observation.*`) return an
+ * empty array — the calibration loop then returns `direction: 'hold'` with
+ * `observations: 0`, the honest outcome for "wire exists, source not yet
+ * captured."
  */
 export async function loadObservationsForThreshold(
   threshold: CalibratableThreshold,
@@ -126,6 +144,11 @@ export async function loadObservationsForThreshold(
     if (options.suggestionsPath === undefined) return [];
     const entries = await loadSuggestionsFromFile(options.suggestionsPath);
     return entriesToObservations(entries);
+  }
+  if (threshold === 'token_budget.warn_at_percent') {
+    const path = options.tokenBudgetEventsPath ?? DEFAULT_TOKEN_BUDGET_EVENTS_PATH;
+    const events = await readTokenBudgetEvents(path);
+    return eventsToObservations(events);
   }
   // Unwired classes return empty; honest "no data captured" baseline.
   return [];

@@ -103,6 +103,24 @@ CRITICAL: Budget usage (5.3%) exceeds the maximum (5%).
 Skill loading may be throttled. Remove skills to restore headroom.
 ```
 
+### Step 4.6: Record token-budget calibration event (v1.49.803)
+
+After the budget overview above is rendered, decide whether this invocation is a "responsive" or "ignored" outcome relative to a prior warn event, and record it via the bounded-learning CLI.
+
+The decision rule is simple:
+
+- If a `WARNING:` or `CRITICAL:` line was emitted in step 4 of this invocation: kind = `ignored` (operator is currently over the warn threshold).
+- If a `WARNING:` or `CRITICAL:` line was emitted in the PREVIOUS `/sc:status` invocation but NOT this one (i.e. `usagePercent < warn_at_percent` now): kind = `responsive` (operator reduced load).
+- If no warn line was emitted in either invocation: skip this step entirely.
+
+Run via Bash with a 2-second timeout (best-effort silent per Lesson #10427 — failures MUST NOT block the rest of /sc:status):
+
+```bash
+npx skill-creator bounded-learning --record-event --kind <responsive|ignored> --usage-percent <N> --warn-at-percent <N> --quiet 2>/dev/null
+```
+
+If the previous-invocation state is unknown (no prior `/sc:status` in this session), skip the `responsive` branch and only record `ignored` when emitted this turn.
+
 ## Step 5: Display pending suggestions count
 
 Read `.planning/patterns/suggestions.json` using the Read tool. If the file doesn't exist or is empty, display:
@@ -172,7 +190,7 @@ Render as a markdown section:
 | suggestions.min_occurrences | 3 | suggestions.json | hold (2 min ago) |
 | suggestions.cooldown_days | 7 | suggestions.json | (no runs yet) |
 | suggestions.auto_dismiss_after_days | 30 | suggestions.json | (no runs yet) |
-| token_budget.warn_at_percent | 4 | token-budget-events (unwired) | (no runs yet) |
+| token_budget.warn_at_percent | 4 | token-budget-events | (no runs yet) |
 
 Audit log: 42 entries (last 2 min ago) at .planning/patterns/bounded-learning-log.jsonl
 ```

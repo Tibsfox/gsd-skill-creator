@@ -307,7 +307,9 @@ describe('boundedLearningCommand — --summary mode (v1.49.801)', () => {
     expect(minOcc.observationSource.wired).toBe(true);
     const tokenBudget = out.thresholds.find((t: { threshold: string }) => t.threshold === 'token_budget.warn_at_percent');
     expect(tokenBudget.currentValue).toBe(4);
-    expect(tokenBudget.observationSource.wired).toBe(false);
+    // v1.49.803: token_budget.warn_at_percent observation source now wired.
+    expect(tokenBudget.observationSource.wired).toBe(true);
+    expect(tokenBudget.observationSource.sourceId).toBe('token-budget-events');
   });
 
   it('reports auditLog totalEntries=0 + lastEntryAt=null when log is empty', async () => {
@@ -351,6 +353,102 @@ describe('boundedLearningCommand — --summary mode (v1.49.801)', () => {
     for (const t of out.thresholds) {
       expect(t.currentValue).toBeNull();
     }
+  });
+});
+
+describe('boundedLearningCommand — --record-event mode (v1.49.803)', () => {
+  let tokenBudgetEventsPath: string;
+
+  beforeEach(() => {
+    tokenBudgetEventsPath = join(tmpRoot, 'token-budget-events.jsonl');
+  });
+
+  it('--record-event without --kind exits 1 with JSON error', async () => {
+    const code = await boundedLearningCommand([
+      '--record-event',
+      '--token-budget-events', tokenBudgetEventsPath,
+      '--json',
+    ]);
+    expect(code).toBe(1);
+    const out = JSON.parse(collectLog());
+    expect(out.error).toBe('missing-flag');
+    expect(out.flag).toBe('--kind');
+  });
+
+  it('--record-event with invalid --kind exits 1', async () => {
+    const code = await boundedLearningCommand([
+      '--record-event',
+      '--kind', 'maybe',
+      '--token-budget-events', tokenBudgetEventsPath,
+      '--json',
+    ]);
+    expect(code).toBe(1);
+    const out = JSON.parse(collectLog());
+    expect(out.error).toBe('invalid-flag');
+  });
+
+  it('--record-event --kind responsive appends one JSONL line to the events file', async () => {
+    const code = await boundedLearningCommand([
+      '--record-event',
+      '--kind', 'responsive',
+      '--token-budget-events', tokenBudgetEventsPath,
+      '--json',
+    ]);
+    expect(code).toBe(0);
+    expect(existsSync(tokenBudgetEventsPath)).toBe(true);
+    const raw = readFileSync(tokenBudgetEventsPath, 'utf8');
+    const lines = raw.split('\n').filter((l) => l.length > 0);
+    expect(lines).toHaveLength(1);
+    const entry = JSON.parse(lines[0]!);
+    expect(entry.kind).toBe('responsive');
+    expect(typeof entry.timestamp).toBe('string');
+  });
+
+  it('--record-event --kind ignored captures optional usagePercent + warnAtPercent + reason', async () => {
+    const code = await boundedLearningCommand([
+      '--record-event',
+      '--kind', 'ignored',
+      '--usage-percent', '8',
+      '--warn-at-percent', '4',
+      '--reason', 'continued past warn',
+      '--token-budget-events', tokenBudgetEventsPath,
+      '--json',
+    ]);
+    expect(code).toBe(0);
+    const raw = readFileSync(tokenBudgetEventsPath, 'utf8');
+    const entry = JSON.parse(raw.trim());
+    expect(entry.kind).toBe('ignored');
+    expect(entry.usagePercent).toBe(8);
+    expect(entry.warnAtPercent).toBe(4);
+    expect(entry.reason).toBe('continued past warn');
+  });
+
+  it('subsequent calibration on token_budget.warn_at_percent reads the recorded events', async () => {
+    writeConfig({
+      suggestions: { min_occurrences: 3, cooldown_days: 7, auto_dismiss_after_days: 30 },
+      token_budget: { max_percent: 5, warn_at_percent: 4 },
+    });
+    // Record 10 responsive events — strong accept-skew signal → decrease recommendation.
+    for (let i = 0; i < 10; i++) {
+      await boundedLearningCommand([
+        '--record-event',
+        '--kind', 'responsive',
+        '--token-budget-events', tokenBudgetEventsPath,
+        '--quiet',
+      ]);
+    }
+    logSpy.mockClear();
+    const code = await boundedLearningCommand(baseArgs([
+      '--threshold', 'token_budget.warn_at_percent',
+      '--token-budget-events', tokenBudgetEventsPath,
+      '--json',
+    ]));
+    expect(code).toBe(0);
+    const out = JSON.parse(collectLog());
+    expect(out.threshold).toBe('token_budget.warn_at_percent');
+    expect(out.observations).toBe(10);
+    expect(out.direction).toBe('decrease');
+    expect(out.observationSource.wired).toBe(true);
   });
 });
 
@@ -457,13 +555,14 @@ describe('boundedLearningCommand — audit log (v1.49.799)', () => {
     expect(existsSync(auditLogPath)).toBe(false);
   });
 
-  it('captures token_budget threshold runs with unwired source metadata', async () => {
+  it('captures token_budget threshold runs with wired source metadata (v1.49.803)', async () => {
     writeSuggestions([]);
     await boundedLearningCommand(baseArgs(['--threshold', 'token_budget.warn_at_percent', '--json']));
     const raw = readFileSync(auditLogPath, 'utf8');
     const entry = JSON.parse(raw.trim());
     expect(entry.threshold).toBe('token_budget.warn_at_percent');
-    expect(entry.observationSource.wired).toBe(false);
+    // v1.49.803: source now wired to token-budget-events.jsonl.
+    expect(entry.observationSource.wired).toBe(true);
     expect(entry.observationSource.sourceId).toBe('token-budget-events');
   });
 });
@@ -476,13 +575,17 @@ describe('boundedLearningCommand — --threshold token_budget.warn_at_percent (v
     });
   });
 
-  it('reads token_budget.warn_at_percent and reports hold + unwired source (zero data)', async () => {
+  it('reads token_budget.warn_at_percent and reports hold + wired source (zero events at v1.49.803)', async () => {
     writeSuggestions(
       // Even with suggestions data, token_budget threshold should NOT consume it.
       Array.from({ length: 10 }, (_, i) => ({ id: `s-${i}`, state: 'accepted' })),
     );
     const code = await boundedLearningCommand(
-      baseArgs(['--threshold', 'token_budget.warn_at_percent', '--json']),
+      baseArgs([
+        '--threshold', 'token_budget.warn_at_percent',
+        '--token-budget-events', join(tmpRoot, 'token-budget-events.jsonl'),
+        '--json',
+      ]),
     );
     expect(code).toBe(0);
     const out = JSON.parse(collectLog());
@@ -491,7 +594,9 @@ describe('boundedLearningCommand — --threshold token_budget.warn_at_percent (v
     expect(out.direction).toBe('hold');
     expect(out.observations).toBe(0);
     expect(out.observationSource.sourceId).toBe('token-budget-events');
-    expect(out.observationSource.wired).toBe(false);
+    // v1.49.803: wire now exists; events file is empty so still no observations,
+    // but the source is wired.
+    expect(out.observationSource.wired).toBe(true);
   });
 
   it('does not write to config when --apply is passed with zero observations', async () => {
