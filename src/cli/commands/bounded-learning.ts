@@ -82,6 +82,7 @@ import {
   type TokenBudgetEvent,
   type TokenBudgetEventKind,
 } from '../../bounded-learning/index.js';
+import { getFlagValue } from '../lib/flag-lookup.js';
 
 const DEFAULT_THRESHOLD: CalibratableThreshold = 'suggestions.min_occurrences';
 const SUPPORTED_THRESHOLDS: CalibratableThreshold[] = [
@@ -156,17 +157,6 @@ Exit codes: 0 success | 1 invalid flag | 2 config not found.
 // ============================================================================
 // Argument parsing
 // ============================================================================
-
-type FlagLookup =
-  | { present: false }
-  | { present: true; value: string | null };
-
-function getFlagValue(args: string[], flag: string): FlagLookup {
-  const idx = args.indexOf(flag);
-  if (idx < 0) return { present: false };
-  if (idx === args.length - 1) return { present: true, value: null };
-  return { present: true, value: args[idx + 1] ?? null };
-}
 
 function parsePositiveFloat(raw: string | null): number | null {
   if (raw === null) return null;

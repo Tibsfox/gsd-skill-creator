@@ -29,6 +29,7 @@ import {
   spectralData,
 } from '../../koopman-memory/index.js';
 import type { KoopmanState } from '../../koopman-memory/index.js';
+import { getFlagValue } from '../lib/flag-lookup.js';
 
 // ============================================================================
 // Help
@@ -65,17 +66,6 @@ Options:
 // ============================================================================
 // Helpers
 // ============================================================================
-
-type FlagLookup =
-  | { present: false }
-  | { present: true; value: string | null };
-
-function getFlagValue(args: string[], flag: string): FlagLookup {
-  const idx = args.indexOf(flag);
-  if (idx < 0) return { present: false };
-  if (idx === args.length - 1) return { present: true, value: null };
-  return { present: true, value: args[idx + 1] ?? null };
-}
 
 function parsePositiveInt(raw: string | null): number | null {
   if (raw === null) return null;
