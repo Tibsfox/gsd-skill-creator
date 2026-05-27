@@ -4,14 +4,27 @@
  * gitMetadata: fetch commit_count, author_count, last_modified for a file.
  * Uses child_process.execFile with FIXED args only — never a shell string (D-22-05, S2).
  * Returns null if git is unavailable, repo is absent, or file is untracked.
+ *
+ * Wired through the ProcessContext chokepoint at v1.49.812 (first
+ * KNOWN_UNWIRED migration from the v806 grandfathered process list).
+ * `ensureProcessAllowed` is hoisted OUTSIDE the swallow-everything try/catch
+ * per Lesson #10427: ProcessContextDenied is load-bearing and must propagate
+ * even though accessory git errors continue to swallow to null.
  */
 
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
+import {
+  ensureProcessAllowed,
+  ProcessContextDenied,
+  type ProcessContext,
+} from '../../security/process-context.js';
 
 const execFileAsync = promisify(execFile);
+
+const PROCESS_SOURCE = 'intelligence/analyzer/git';
 
 export interface GitFileMetadata {
   /** ISO-8601 timestamp of the most recent commit touching this file. */
@@ -34,6 +47,7 @@ export interface GitFileMetadata {
 export async function gitMetadata(
   filePath: string,
   repoRoot?: string,
+  ctx?: ProcessContext,
 ): Promise<GitFileMetadata | null> {
   const root = repoRoot ?? dirname(filePath);
 
@@ -42,18 +56,26 @@ export async function gitMetadata(
     return null;
   }
 
+  const args = [
+    'log',
+    '--follow',
+    '--format=%H|%ae|%aI', // hash | author email | ISO author date
+    '--',
+    filePath, // file path is a fixed arg in the args array, never in a shell string
+  ];
+
+  // Hoisted OUTSIDE the swallow-everything try/catch per Lesson #10427:
+  // ProcessContextDenied is load-bearing and must propagate even though
+  // accessory git errors (ENOENT, permission, untracked-file) continue to
+  // swallow to null below.
+  ensureProcessAllowed(ctx, PROCESS_SOURCE, 'exec-file', 'git', args);
+
   try {
     // Get all commit hashes + author emails + timestamps for this file
     // Fixed args — NO shell interpolation (S2 invariant: only allowlisted args)
     const { stdout: logOutput } = await execFileAsync(
       'git',
-      [
-        'log',
-        '--follow',
-        '--format=%H|%ae|%aI', // hash | author email | ISO author date
-        '--',
-        filePath, // file path is a fixed arg in the args array, never in a shell string
-      ],
+      args,
       { cwd: root, timeout: 10000 },
     );
 
@@ -88,7 +110,10 @@ export async function gitMetadata(
       author_count: authors.size,
       commit_count_90d: count90d,
     };
-  } catch {
+  } catch (err) {
+    // Load-bearing per #10427: ProcessContextDenied must propagate even
+    // though accessory git errors (ENOENT, permission, untracked) swallow.
+    if (err instanceof ProcessContextDenied) throw err;
     // git not found, permission error, or other failure — return null gracefully
     return null;
   }

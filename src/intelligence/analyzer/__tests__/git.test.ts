@@ -8,6 +8,10 @@ import { mkdir, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
+import {
+  ProcessContextDenied,
+  type ProcessContext,
+} from '../../../security/process-context.js';
 
 const execFileAsync = promisify(execFile);
 
@@ -76,5 +80,68 @@ describe('gitMetadata', () => {
     // The key invariant: function did NOT execute "rm -rf ..."
     // We just verify it returns null or a valid result without throwing
     expect(result === null || typeof result === 'object').toBe(true);
+  });
+
+  describe('ProcessContext integration', () => {
+    it('throws ProcessContextDenied when ctx restricts the git command', async () => {
+      const tmp = join(tmpdir(), `git-test-pc-denied-${Date.now()}`);
+      await mkdir(tmp, { recursive: true });
+
+      try {
+        // Real git repo so we get PAST the hasGitRepo early-return and into ensureProcessAllowed.
+        await execFileAsync('git', ['init', '--initial-branch=main', tmp]);
+        await execFileAsync('git', ['-C', tmp, 'config', 'user.email', 'test@test.com']);
+        await execFileAsync('git', ['-C', tmp, 'config', 'user.name', 'Test User']);
+        await writeFile(join(tmp, 'file.ts'), 'export const x = 1;');
+        await execFileAsync('git', ['-C', tmp, 'add', 'file.ts']);
+        await execFileAsync('git', ['-C', tmp, 'commit', '-m', 'c1']);
+
+        const ctx: ProcessContext = {
+          allowList: [], // deny all
+          audit: { record() {} },
+        };
+
+        const { gitMetadata } = await import('../git.js');
+        await expect(gitMetadata(join(tmp, 'file.ts'), tmp, ctx)).rejects.toThrow(
+          ProcessContextDenied,
+        );
+      } finally {
+        await rm(tmp, { recursive: true, force: true });
+      }
+    });
+
+    it('records an audit entry when ctx allows the git command', async () => {
+      const tmp = join(tmpdir(), `git-test-pc-allowed-${Date.now()}`);
+      await mkdir(tmp, { recursive: true });
+
+      try {
+        await execFileAsync('git', ['init', '--initial-branch=main', tmp]);
+        await execFileAsync('git', ['-C', tmp, 'config', 'user.email', 'test@test.com']);
+        await execFileAsync('git', ['-C', tmp, 'config', 'user.name', 'Test User']);
+        await writeFile(join(tmp, 'file.ts'), 'export const x = 1;');
+        await execFileAsync('git', ['-C', tmp, 'add', 'file.ts']);
+        await execFileAsync('git', ['-C', tmp, 'commit', '-m', 'c1']);
+
+        const records: { source: string; target: string; argv: readonly string[] }[] = [];
+        const ctx: ProcessContext = {
+          allowList: ['git'],
+          audit: {
+            record(r) {
+              records.push({ source: r.source, target: r.target, argv: r.argv });
+            },
+          },
+        };
+
+        const { gitMetadata } = await import('../git.js');
+        const result = await gitMetadata(join(tmp, 'file.ts'), tmp, ctx);
+        expect(result).not.toBeNull();
+        expect(records).toHaveLength(1);
+        expect(records[0].source).toBe('intelligence/analyzer/git');
+        expect(records[0].target).toBe('git');
+        expect(records[0].argv[0]).toBe('log');
+      } finally {
+        await rm(tmp, { recursive: true, force: true });
+      }
+    });
   });
 });
