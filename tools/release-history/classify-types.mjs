@@ -6,7 +6,14 @@
 //   degree       — paired-engine release (Part A + Part B in header, prose-style)
 //   milestone    — major milestone marker (name mentions milestone/complete/shipped;
 //                  or major platform-level work)
-//   feature      — new functionality (default for non-fix, non-degree)
+//   chip         — small operational ship (codification, KNOWN_UNWIRED chip,
+//                  scaffold, stale-entry cleanup, wedge close, audit
+//                  inverse-check, atomic-writer tool). Distinguished by
+//                  recurring scope markers in the name. Per v1.49.841 these
+//                  baseline separately from substantive features so the
+//                  drift-check doesn't fire false positives during
+//                  operational-debt sessions.
+//   feature      — new functionality (default for non-fix, non-degree, non-chip)
 //   patch        — small fix/bugfix/hotfix
 //
 // Usage:
@@ -19,9 +26,9 @@ import { join } from 'node:path';
 import { loadConfig, REPO_ROOT } from './config.mjs';
 import { openDb } from './db.mjs';
 
-// Priority order: degree → milestone → patch → feature (default).
+// Priority order: degree → milestone → patch → chip → feature (default).
 // Returns { type, confidence, reason }.
-function classify(release, readmeText) {
+export function classify(release, readmeText) {
   const name = (release.name || '').trim();
   const nameLower = name.toLowerCase();
 
@@ -56,6 +63,16 @@ function classify(release, readmeText) {
     return { type: 'milestone', confidence: 0.70, reason: 'semver patch = 0' };
   }
 
+  // Chip: small operational ship. Keywords are scope markers that have
+  // become recurring in the post-v800 operational-debt cadence. Word-boundary
+  // anchors keep "Chipset" (Gastown Chipset) from matching "Chip". The
+  // Codify regex is title-case to avoid catching prose mentions in degree
+  // titles. See v1.49.841 retrospective.
+  const chipMarkers = /\b(Chip|Codification Ship|Codify|Scaffold|Singleton|Stale[- ]Entry|Wedge Close|Inverse[- ]Check|Atomic Writer)\b/;
+  if (chipMarkers.test(name)) {
+    return { type: 'chip', confidence: 0.85, reason: 'name marks chip-class ship' };
+  }
+
   // Default: feature.
   return { type: 'feature', confidence: 0.50, reason: 'default (no strong signal)' };
 }
@@ -84,7 +101,7 @@ async function main() {
     return;
   }
 
-  const dist = { degree: 0, milestone: 0, feature: 0, patch: 0 };
+  const dist = { degree: 0, milestone: 0, feature: 0, patch: 0, chip: 0 };
   let classified = 0;
 
   for (const r of releases) {
@@ -108,8 +125,16 @@ async function main() {
   await db.close();
 
   console.error(`[classify-types] ${classified} releases classified`);
-  console.error(`  degree: ${dist.degree} | milestone: ${dist.milestone} | feature: ${dist.feature} | patch: ${dist.patch}`);
+  console.error(`  degree: ${dist.degree} | milestone: ${dist.milestone} | feature: ${dist.feature} | chip: ${dist.chip} | patch: ${dist.patch}`);
   console.log(JSON.stringify({ classified, distribution: dist }, null, 2));
 }
 
-main().catch(e => { console.error('[classify-types] fatal:', e.message); console.error(e.stack); process.exit(2); });
+// Entrypoint guard so importing for tests (chip-classification regex
+// coverage) doesn't try to open a DB connection. Mirror the pattern in
+// quality-drift-check.mjs's caller usage.
+import { fileURLToPath } from 'node:url';
+import { argv } from 'node:process';
+const isMain = fileURLToPath(import.meta.url) === argv[1];
+if (isMain) {
+  main().catch(e => { console.error('[classify-types] fatal:', e.message); console.error(e.stack); process.exit(2); });
+}
