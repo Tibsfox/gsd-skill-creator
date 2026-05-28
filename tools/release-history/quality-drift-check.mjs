@@ -45,7 +45,11 @@ const T = Object.assign({
   per_type_min_samples: 3,
 }, cfg.quality_drift || {});
 
-const KNOWN_TYPES = ['degree', 'milestone', 'feature', 'chip', 'patch'];
+// v1.49.855: 'task' added as the sixth type. Task-shaped ships (T-prefix /
+// S-prefix names) carry minimal release notes by design and score F on the
+// structured rubric — same F-by-design property as 'chip'. Per-type baselines
+// keep recent-cadence shifts toward task work from firing false drift alerts.
+const KNOWN_TYPES = ['degree', 'milestone', 'feature', 'chip', 'task', 'patch'];
 
 const args = process.argv.slice(2);
 const updateBaseline = args.includes('--update-baseline');
@@ -112,9 +116,11 @@ async function main() {
   }
 
   // "recent all F" alert is type-aware — degree-type releases use a prose
-  // format that scores low on the structured rubric by design, and chip-type
-  // ships (v1.49.841+) score F by design on the substantive-feature rubric.
-  // Only fire when feature/milestone/patch in the recent window are all F.
+  // format that scores low on the structured rubric by design; chip-type
+  // ships (v1.49.841+) score F by design on the substantive-feature rubric;
+  // task-type ships (v1.49.855+ — T-prefix / S-prefix) carry minimal release
+  // notes by design and likewise score F. Only fire when
+  // feature/milestone/patch in the recent window are all F.
   const recentWindow = recent.slice(0, T.recent20_all_F_alert);
   const authoredTypes = new Set(['feature', 'milestone', 'patch']);
   const authoredRecent = recentWindow.filter(r => authoredTypes.has(r.release_type));

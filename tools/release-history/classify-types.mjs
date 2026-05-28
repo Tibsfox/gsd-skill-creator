@@ -13,7 +13,13 @@
 //                  baseline separately from substantive features so the
 //                  drift-check doesn't fire false positives during
 //                  operational-debt sessions.
-//   feature      — new functionality (default for non-fix, non-degree, non-chip)
+//   task         — task-ID-prefixed ship (T1.x, T2.x, T3.x, Sn) — task-shaped
+//                  feature work with minimal release-notes that scores F on the
+//                  structured rubric by design. Per v1.49.855 these baseline
+//                  separately from substantive features (the v1.49.841 forward-
+//                  flag closed here).
+//   feature      — new functionality (default for non-fix, non-degree, non-chip,
+//                  non-task)
 //   patch        — small fix/bugfix/hotfix
 //
 // Usage:
@@ -26,7 +32,7 @@ import { join } from 'node:path';
 import { loadConfig, REPO_ROOT } from './config.mjs';
 import { openDb } from './db.mjs';
 
-// Priority order: degree → milestone → patch → chip → feature (default).
+// Priority order: degree → milestone → patch → chip → task → feature (default).
 // Returns { type, confidence, reason }.
 export function classify(release, readmeText) {
   const name = (release.name || '').trim();
@@ -73,6 +79,20 @@ export function classify(release, readmeText) {
     return { type: 'chip', confidence: 0.85, reason: 'name marks chip-class ship' };
   }
 
+  // Task: title STARTS WITH a task-ID prefix (T1.x, T2.x, T3.x, Sn). v1.49.855
+  // closure of v1.49.841 forward-flag. Task-shaped ships have minimal release
+  // notes by design (T-prefix is the canonical signal that the ship is a
+  // single planning-task closure, not a substantive-feature release). Anchored
+  // to title start so degree titles mentioning S-prefix segment numbers
+  // (e.g. "S36 Return") aren't misclassified — those still resolve to degree
+  // earlier in this function. Codification ships mentioning S-prefix work
+  // (v805 "Codification Ship: S3 + S4 + S7") also still resolve to chip
+  // earlier per the chipMarkers regex.
+  const taskMarkers = /^[TS]\d+(\.\d+)?\s/;
+  if (taskMarkers.test(name)) {
+    return { type: 'task', confidence: 0.80, reason: 'name starts with task-ID prefix (T1.x/T2.x/Sn)' };
+  }
+
   // Default: feature.
   return { type: 'feature', confidence: 0.50, reason: 'default (no strong signal)' };
 }
@@ -101,7 +121,7 @@ async function main() {
     return;
   }
 
-  const dist = { degree: 0, milestone: 0, feature: 0, patch: 0, chip: 0 };
+  const dist = { degree: 0, milestone: 0, feature: 0, patch: 0, chip: 0, task: 0 };
   let classified = 0;
 
   for (const r of releases) {
@@ -125,7 +145,7 @@ async function main() {
   await db.close();
 
   console.error(`[classify-types] ${classified} releases classified`);
-  console.error(`  degree: ${dist.degree} | milestone: ${dist.milestone} | feature: ${dist.feature} | chip: ${dist.chip} | patch: ${dist.patch}`);
+  console.error(`  degree: ${dist.degree} | milestone: ${dist.milestone} | feature: ${dist.feature} | chip: ${dist.chip} | task: ${dist.task} | patch: ${dist.patch}`);
   console.log(JSON.stringify({ classified, distribution: dist }, null, 2));
 }
 

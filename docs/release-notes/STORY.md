@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.854`.
+The story begins at `v1.0` and continues to `v1.49.855`.
 
-**897 chapters.** 896 have retrospectives.
+**898 chapters.** 897 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -905,3 +905,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.852](v1.49.852/00-summary.md)** — Stale-import cleanup: `src/scan-arxiv/bridge.ts` (KNOWN_UNWIRED Process 13→12) · 2026-05-28
 - **[v1.49.853](v1.49.853/00-summary.md)** — ProcessContext singleton chip: `src/dashboard/collectors/git-collector.ts` (KNOWN_UNWIRED Process 12→11; closes chip-cluster) · 2026-05-28
 - **[v1.49.854](v1.49.854/00-summary.md)** — Verify ship: mesh-default-executor integration test against real git (first verify-overdue ship under #10438) · 2026-05-28
+- **[v1.49.855](v1.49.855/00-summary.md)** — Quality-drift scorer refinement: `task` sub-type for T-prefix/S-prefix work (v841 forward-flag closure) · 2026-05-28
