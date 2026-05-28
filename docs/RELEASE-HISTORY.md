@@ -1,15 +1,16 @@
 # Release History
 
-897 milestones shipped across the v1.0 → v1.49.854 arc. The table below lists every shipped release, newest first.
+898 milestones shipped across the v1.0 → v1.49.855 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 897 releases · 896 with retrospectives · 728 with extracted lessons · quality A:662 B:97 C:63 D:11 F:64 (avg 89) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 898 releases · 897 with retrospectives · 728 with extracted lessons · quality A:662 B:97 C:63 D:11 F:65 (avg 89) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.855](release-notes/v1.49.855) | Quality-drift scorer refinement: `task` sub-type for T-prefix/S-prefix work | 2026-05-28 | 2 | — | — | [s](release-notes/v1.49.855/chapter/00-summary.md) [r](release-notes/v1.49.855/chapter/03-retrospective.md) [l](release-notes/v1.49.855/chapter/04-lessons.md) [c](release-notes/v1.49.855/chapter/99-context.md) | — | F 24 |  |
 | [v1.49.854](release-notes/v1.49.854) | Verify ship: mesh-default-executor integration test against real git | 2026-05-28 | 2 | — | — | [s](release-notes/v1.49.854/chapter/00-summary.md) [r](release-notes/v1.49.854/chapter/03-retrospective.md) [l](release-notes/v1.49.854/chapter/04-lessons.md) [c](release-notes/v1.49.854/chapter/99-context.md) | — | F 20 |  |
 | [v1.49.853](release-notes/v1.49.853) | ProcessContext singleton chip: `src/dashboard/collectors/git-collector.ts` | 2026-05-28 | 2 | — | — | [s](release-notes/v1.49.853/chapter/00-summary.md) [r](release-notes/v1.49.853/chapter/03-retrospective.md) [l](release-notes/v1.49.853/chapter/04-lessons.md) [c](release-notes/v1.49.853/chapter/99-context.md) | — | F 24 |  |
 | [v1.49.852](release-notes/v1.49.852) | Stale-import cleanup: `src/scan-arxiv/bridge.ts` | 2026-05-28 | 2 | — | — | [s](release-notes/v1.49.852/chapter/00-summary.md) [r](release-notes/v1.49.852/chapter/03-retrospective.md) [l](release-notes/v1.49.852/chapter/04-lessons.md) [c](release-notes/v1.49.852/chapter/99-context.md) | — | F 24 |  |
