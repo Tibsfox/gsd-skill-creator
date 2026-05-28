@@ -76,17 +76,98 @@ Out of scope:
    sibling entries share a common shape, batch them in one ship after the
    first-chip establishes the per-family template.
 
+## Inverse-audit: stale-entry detection (Lesson #10443)
+
+The v806 audit-tests are unidirectional: they enforce "files NOT in
+KNOWN_UNWIRED but containing the signature MUST call `ensure*Allowed`" but
+do NOT enforce the inverse — that allowlist entries are still
+load-bearing. Two distinct **stale-entry shapes** can accumulate silently
+under the unidirectional check.
+
+### Shape A — wired-but-still-in-allowlist
+
+A file calls `ensure*Allowed` AND is still listed in `KNOWN_UNWIRED`. The
+audit short-circuits on `KNOWN_UNWIRED.has(label)` before inspecting the
+actual wire, so the entry is double-protected.
+
+**First instance:** v1.49.834 surfaced `src/intelligence/analyzer/git.ts`
+— the file had been wired since v1.49.812 but the allowlist edit was
+silently skipped that ship; the off-by-one persisted across 22 milestones
+of release-notes count claims before manual recon caught it.
+
+**Inline closure:** v1.49.838 added the inverse-check directly inside
+`src/security/process-context-audit.test.ts` and
+`src/security/egress-context-audit.test.ts`:
+
+```ts
+it('KNOWN_UNWIRED entries do NOT call ensure*Allowed (stale-entry detector)', () => {
+  // for each entry: throw if ensure*Allowed call site found
+});
+```
+
+### Shape B — import-without-use
+
+A file imports the chokepoint module via named imports AND is in
+`KNOWN_UNWIRED` AND does NOT actually call any of the imported names
+anywhere in the file body. The audit's "entry imports child_process"
+check passes (the import is syntactically present) but no real spawn
+ever happens.
+
+**First instance:** v1.49.852 surfaced `src/scan-arxiv/bridge.ts` —
+imported `execFileSync` from `node:child_process` but never called it
+(likely leftover from an earlier version where the bridge ran an
+external script). Removing the dead import + the allowlist entry was
+the chip.
+
+Shape B applies only to import-driven chokepoints (ProcessContext).
+EgressContext is signature-driven (`fetch(` as a global), so its
+existing "KNOWN_UNWIRED contains `fetch(`" check IS the shape-B
+equivalent. LoaderContext has no allowlist, so neither shape applies.
+
+### The cross-audit tool
+
+`tools/security/check-stale-known-unwired.mjs` runs both shape-A and
+shape-B inverse-checks against the ProcessContext and EgressContext
+audit-test files. It regex-extracts each `KNOWN_UNWIRED` set, reads the
+referenced source files, and emits a structured report (human-readable
+by default, JSON via `--json`). Exit 0 if clean, 1 if any stale entries.
+Designed to be invoked from `tools/pre-tag-gate.sh` or ad-hoc; mirrors
+the inline vitest inverse-checks at the cross-audit layer.
+
+### How to apply (when a third stale-shape surfaces)
+
+The discipline scales by adding one inverse-check per stale-shape:
+
+1. **Identify the stale shape.** Name the shape, find the first
+   instance, document the detection rule.
+2. **Add an inline inverse-check** to the chokepoint's audit-test for
+   automatic CI enforcement.
+3. **Extend `tools/security/check-stale-known-unwired.mjs`** with the
+   same logic so ad-hoc + pre-tag-gate runs catch the shape.
+4. **Add a Shape X section to this discipline doc** under "Inverse-audit:
+   stale-entry detection" with the first-instance evidence.
+
+The 2-instance promotion rule (#10426) applies at the META level: two
+distinct stale-shapes (A + B) prove the inverse-audit isn't shape-A-
+specific. A third shape extends the same discipline rather than creating
+a new one.
+
+### Cross-references
+
+- **#10421** (Static-analysis tool authoring) — the cross-audit tool
+  follows the spawnSync-not-execSync, JSON-output-as-machine-readable,
+  exit-code-as-signal conventions.
+- **#10427** (Failure-mode contracts) — stale entries are a
+  silent-vs-loud asymmetry; the inverse-check converts the silence to
+  loudness at audit time.
+- **#10432** (parent — KNOWN_UNWIRED as migration-debt ledger) — the
+  inverse-audit closes the unidirectionality flagged in the v812
+  forward-observation.
+- **#10434** (KNOWN_UNWIRED generalization beyond chokepoints) — the
+  inverse-audit shape generalizes too; any ratcheted-allowlist gate
+  benefits from the same stale-shape catalog.
+
 ## Forward observations
-
-### Unidirectional enforcement asymmetry
-
-The v806 audit-tests enforce "files NOT in KNOWN_UNWIRED but containing the
-signature MUST call ensure*Allowed" but do NOT enforce the inverse: a wired
-file can carry a stale KNOWN_UNWIRED entry indefinitely without test failure.
-A future enhancement should add the inverse check ("files in KNOWN_UNWIRED
-must NOT also call ensure*Allowed"). Flagged at v812 retrospective. Not
-urgent — the per-ship release-notes discipline catches it manually at chip
-cadence.
 
 ### Block-comment consolidation when N-of-N siblings are wired
 
