@@ -182,13 +182,13 @@
   },
   {
     "domain": "Meta-cadence",
-    "trigger": "Planning a counter-cadence cleanup-mission; deciding which operational debt to spend a non-degree-advancing ship on; auditing whether the project's three operational axes (codify / consume / calibrate) are in balance",
-    "summary": "Three operational axes — codify (~7-10 ships), consume (≤6 ships from substrate to first non-test caller), calibrate (~10 ships per wired threshold tick). Cadence-overdue check is prose-only and informational: each axis names its overdue trigger; the operator picks; the next counter-cadence's scope discussion NAMES the proposed axis even if a different axis wins on operator priority. The naming is the load-bearing discipline; the choice is operator-bounded.",
+    "trigger": "Planning a counter-cadence cleanup-mission; deciding which operational debt to spend a non-degree-advancing ship on; auditing whether the project's four operational axes (codify / consume / calibrate / verify) are in balance",
+    "summary": "Four operational axes — codify (~7-10 ships), consume (≤6 ships from substrate to first non-test caller), calibrate (~10 ships per wired threshold tick), verify (~10 ships per substrate-with-callers-but-no-integration-test; added v1.49.844 with v829+v832 evidence base, lesson-promotion deferred to next codify ship). Cadence-overdue check is prose-only and informational: each axis names its overdue trigger; the operator picks; the next counter-cadence's scope discussion NAMES the proposed axis even if a different axis wins on operator priority. The naming is the load-bearing discipline; the choice is operator-bounded.",
     "canonical_docs": [
       "docs/meta-cadence-discipline.md"
     ],
     "key_lessons": ["#10428"],
-    "codified_at_milestone": "v1.49.805 (new domain — codified from S3 lever in 2026-05-26 core-functions audit retrospective)"
+    "codified_at_milestone": "v1.49.805 (new domain — codified from S3 lever in 2026-05-26 core-functions audit retrospective); v1.49.844 (verify-axis added as canonical-doc home for v829+v832 evidence base; numbered-lesson promotion deferred to next codify ship per #10426)"
   },
   {
     "domain": "Substrate opt-in paths",
