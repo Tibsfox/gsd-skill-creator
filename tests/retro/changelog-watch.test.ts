@@ -2,6 +2,12 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { detectVersion, parseChangelog, classifyFeatures, runChangelogWatch } from '../../src/retro/changelog-watch.js';
 import { ChangelogWatchResultSchema } from '../../src/retro/types.js';
 import type { ChangelogEntry } from '../../src/retro/types.js';
+import {
+  defaultProcessContext,
+  ProcessContextDenied,
+  CapturingProcessAuditSink,
+  type ProcessContext,
+} from '../../src/security/process-context.js';
 
 // Mock child_process at module level -- return string since detectVersion
 // uses { encoding: 'utf-8' } which makes execSync return string.
@@ -28,6 +34,43 @@ describe('changelog-watch', () => {
       });
       const version = detectVersion();
       expect(version).toBe('unknown');
+    });
+
+    it('propagates ProcessContextDenied when claude is not in the allowList', () => {
+      // Security-denial wire v1.49.849 — ensureProcessAllowed hoisted OUTSIDE
+      // the try/catch per Lesson #10427. Operator-supplied ctx with an empty
+      // allowList rejects 'claude'; the rejection must propagate (NOT be
+      // swallowed into the 'unknown' return path).
+      const sink = new CapturingProcessAuditSink();
+      const restrictiveCtx: ProcessContext = { allowList: [], audit: sink };
+      expect(() => detectVersion(restrictiveCtx)).toThrow(ProcessContextDenied);
+      expect(sink.records).toHaveLength(1);
+      expect(sink.records[0]?.target).toBe('claude');
+      expect(sink.records[0]?.allowed).toBe(false);
+    });
+
+    it('continues to return version when ctx allows claude', () => {
+      mockExecSync.mockReturnValue('claude v2.1.5\n');
+      const sink = new CapturingProcessAuditSink();
+      const permissiveCtx: ProcessContext = { allowList: ['claude'], audit: sink };
+      const version = detectVersion(permissiveCtx);
+      expect(version).toBe('2.1.5');
+      expect(sink.records).toHaveLength(1);
+      expect(sink.records[0]?.allowed).toBe(true);
+    });
+
+    it('defaultProcessContext allows the spawn (audit-only, no restrictions)', () => {
+      // defaultProcessContext supplies an explicit context with a permissive
+      // allowList ([/.*/]) — useful for opt-in auditability without
+      // enforcement. The custom audit sink lets the test confirm the
+      // record was emitted.
+      mockExecSync.mockReturnValue('claude v2.1.5\n');
+      const sink = new CapturingProcessAuditSink();
+      const ctx = defaultProcessContext(sink);
+      const version = detectVersion(ctx);
+      expect(version).toBe('2.1.5');
+      expect(sink.records).toHaveLength(1);
+      expect(sink.records[0]?.allowed).toBe(true);
     });
   });
 

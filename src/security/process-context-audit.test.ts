@@ -83,7 +83,12 @@ const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
   // Same shape — ctx? threaded through createProxyCommitter; passes ctx to
   // createMeshWorktreeManager so both executors share one security context.
   'src/orchestrator/extension/extension-detector.ts',
-  'src/retro/changelog-watch.ts',
+  // src/retro/changelog-watch.ts wired v1.49.849 — singleton chip.
+  // Optional ctx?: ProcessContext threaded through detectVersion +
+  // runChangelogWatch opts; ensureProcessAllowed hoisted OUTSIDE the
+  // best-effort-silent try/catch per #10427. Forensic accessory semantics
+  // preserved (CLI-not-installed continues to return 'unknown' silently);
+  // load-bearing security denials propagate via ProcessContextDenied throw.
   'src/scan-arxiv/bridge.ts',
   'src/scan-arxiv/ranker.ts',
   // scribe/netlist-renderer family fully wired at v1.49.828 batch chip

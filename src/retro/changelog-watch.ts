@@ -9,10 +9,22 @@
  * Side effects isolated to detectVersion() (calls execSync). All other
  * functions are pure.
  *
+ * ProcessContext wire (v1.49.849): `ensureProcessAllowed` hoisted OUTSIDE
+ * the swallow-everything try/catch per Lesson #10427. The detectVersion
+ * surface is a forensic accessory (returns 'unknown' on any spawn failure)
+ * — but security denials are load-bearing and must propagate. A
+ * `ProcessContextDenied` from a deny-listed `claude` binary throws to the
+ * caller; all other failures (CLI not installed, timeout, parse failure)
+ * remain silently swallowed and return 'unknown' as before.
+ *
  * @module retro/changelog-watch
  */
 
 import { execSync } from 'child_process';
+import {
+  ensureProcessAllowed,
+  type ProcessContext,
+} from '../security/process-context.js';
 import type { ChangelogEntry, ChangelogWatchResult } from './types.js';
 
 // ============================================================================
@@ -65,8 +77,13 @@ const WATCH_KEYWORDS = [
  *
  * Returns the parsed version string (e.g., "2.1.5") or 'unknown' if the
  * CLI is not available or output cannot be parsed.
+ *
+ * Security: `ensureProcessAllowed` hoisted OUTSIDE the try per Lesson
+ * #10427 — `ProcessContextDenied` propagates while CLI-not-installed +
+ * timeout + parse failure continue to return 'unknown' silently.
  */
-export function detectVersion(): string {
+export function detectVersion(ctx?: ProcessContext): string {
+  ensureProcessAllowed(ctx, 'retro/changelog-watch', 'exec', 'claude', ['--version']);
   try {
     const output = execSync('claude --version', {
       encoding: 'utf-8',
@@ -215,8 +232,9 @@ export function classifyFeatures(entries: ChangelogEntry[]): ChangelogEntry[] {
 export function runChangelogWatch(opts?: {
   versionStart?: string;
   changelogText?: string;
+  ctx?: ProcessContext;
 }): ChangelogWatchResult {
-  const versionEnd = detectVersion();
+  const versionEnd = detectVersion(opts?.ctx);
   const versionStart = opts?.versionStart ?? 'unknown';
 
   let features: ChangelogEntry[] = [];

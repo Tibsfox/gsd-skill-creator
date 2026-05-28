@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.848`.
+The story begins at `v1.0` and continues to `v1.49.849`.
 
-**891 chapters.** 890 have retrospectives.
+**892 chapters.** 891 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -899,3 +899,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.846](v1.49.846/00-summary.md)** — Auto-emit-from-substrate: predict-low-confidence Event JSONL Wired into Both Production emit-prediction Call Sites · 2026-05-28
 - **[v1.49.847](v1.49.847/00-summary.md)** — Codification Ship: Promote #10438 + #10439 + #10440 + #10441 + #10442 (Five-Lesson Backlog Clear) · 2026-05-28
 - **[v1.49.848](v1.49.848/00-summary.md)** — Help text expansion: 20 missing commands surfaced in `printHelp()` · 2026-05-28
+- **[v1.49.849](v1.49.849/00-summary.md)** — ProcessContext singleton chip: `src/retro/changelog-watch.ts` (KNOWN_UNWIRED Process 16→15) · 2026-05-28
