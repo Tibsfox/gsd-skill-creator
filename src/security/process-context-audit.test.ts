@@ -100,7 +100,12 @@ const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
   // (available + netlistsvg-driver + yosys-driver) — all 3 use the
   // internal-helper pattern (#10433) with hoisted check (#10427) for
   // spawn-based subprocess invocation; wire cost ~14-16 LOC each.
-  'src/skill/version-backfill.ts',
+  // src/skill/version-backfill.ts wired v1.49.851 — singleton chip.
+  // Optional ctx?: ProcessContext threaded through gitLastModifiedDate
+  // (second positional param); ensureProcessAllowed hoisted OUTSIDE the
+  // best-effort-silent try/catch per #10427. Forensic accessory semantics
+  // preserved (git-unavailable / untracked-file continues to return null
+  // silently); ProcessContextDenied propagates.
   // src/terminal/launcher.ts wired v1.49.842 — terminal family batch chip.
   // Optional ctx?: ProcessContext threaded through LaunchOptions; the
   // ensureProcessAllowed call sits naturally outside any catch (the spawn

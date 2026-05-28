@@ -15,6 +15,10 @@ import { execSync } from 'node:child_process';
 import { readFileSync, writeFileSync, readdirSync, statSync } from 'node:fs';
 import { isCliEntrypoint } from '../cli/entrypoint-guard.js';
 import { join } from 'node:path';
+import {
+  ensureProcessAllowed,
+  type ProcessContext,
+} from '../security/process-context.js';
 import { SKILL_FORMAT_DATE, type SkillStatus } from './frontmatter-types.js';
 
 const DEFAULT_VERSION = '1.0.0';
@@ -81,7 +85,23 @@ export function parseFrontmatter(content: string): ParsedFile {
   return { frontmatter: parsed, frontmatterText: raw, body, hasFrontmatter: true };
 }
 
-export function gitLastModifiedDate(path: string): string | null {
+/**
+ * ProcessContext wire (v1.49.851): `ensureProcessAllowed` hoisted OUTSIDE
+ * the swallow-everything try/catch per Lesson #10427. The function is a
+ * forensic accessory (returns null on any failure; callers fall back to
+ * today's UTC date) — but security denials are load-bearing and must
+ * propagate. `ProcessContextDenied` throws to the caller; all other
+ * failures (git unavailable, file untracked, parse failure) continue to
+ * return null silently.
+ */
+export function gitLastModifiedDate(path: string, ctx?: ProcessContext): string | null {
+  ensureProcessAllowed(ctx, 'skill/version-backfill', 'exec', 'git', [
+    'log',
+    '-1',
+    '--format=%ai',
+    '--',
+    path,
+  ]);
   try {
     const out = execSync(`git log -1 --format=%ai -- ${JSON.stringify(path)}`, {
       encoding: 'utf8',

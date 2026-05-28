@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.850`.
+The story begins at `v1.0` and continues to `v1.49.851`.
 
-**893 chapters.** 892 have retrospectives.
+**894 chapters.** 893 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -901,3 +901,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.848](v1.49.848/00-summary.md)** — Help text expansion: 20 missing commands surfaced in `printHelp()` · 2026-05-28
 - **[v1.49.849](v1.49.849/00-summary.md)** — ProcessContext singleton chip: `src/retro/changelog-watch.ts` (KNOWN_UNWIRED Process 16→15) · 2026-05-28
 - **[v1.49.850](v1.49.850/00-summary.md)** — ProcessContext singleton chip: `src/orchestrator/extension/extension-detector.ts` (KNOWN_UNWIRED Process 15→14) · 2026-05-28
+- **[v1.49.851](v1.49.851/00-summary.md)** — ProcessContext singleton chip: `src/skill/version-backfill.ts` (KNOWN_UNWIRED Process 14→13) · 2026-05-28
