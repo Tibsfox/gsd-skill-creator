@@ -173,4 +173,33 @@ describe('searchEquivalents', () => {
     expect(results).toEqual([]);
     expect(fetch).not.toHaveBeenCalled();
   });
+
+  describe('EgressContext wire (v1.49.864)', () => {
+    it('throws EgressContextDenied when ctx denies the npm search URL', async () => {
+      const { EgressContextDenied, CapturingEgressAuditSink } = await import(
+        '../security/egress-context.js'
+      );
+      const sink = new CapturingEgressAuditSink();
+      const restrictiveCtx = { allowList: [], audit: sink };
+      const dep = makeDep('test-pkg', 'npm');
+      await expect(searchEquivalents(dep, {}, restrictiveCtx)).rejects.toThrow(
+        EgressContextDenied,
+      );
+      expect(sink.records).toHaveLength(1);
+      expect(sink.records[0]?.target).toContain('registry.npmjs.org');
+      expect(sink.records[0]?.allowed).toBe(false);
+    });
+
+    it('returns [] for non-npm ecosystems WITHOUT invoking ensureEgressAllowed', async () => {
+      const { CapturingEgressAuditSink } = await import(
+        '../security/egress-context.js'
+      );
+      const sink = new CapturingEgressAuditSink();
+      const ctx = { allowList: [], audit: sink };
+      const dep = makeDep('test-pkg', 'cargo');
+      const results = await searchEquivalents(dep, {}, ctx);
+      expect(results).toEqual([]);
+      expect(sink.records).toHaveLength(0);
+    });
+  });
 });

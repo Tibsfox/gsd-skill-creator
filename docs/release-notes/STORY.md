@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.863`.
+The story begins at `v1.0` and continues to `v1.49.864`.
 
-**906 chapters.** 905 have retrospectives.
+**907 chapters.** 906 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -914,3 +914,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.861](v1.49.861/00-summary.md)** — ProcessContext singleton chip: `src/cli/commands/keystore.ts` · 2026-05-28
 - **[v1.49.862](v1.49.862/00-summary.md)** — ProcessContext singleton chip: `src/scan-arxiv/ranker.ts` · 2026-05-28
 - **[v1.49.863](v1.49.863/00-summary.md)** — EgressContext singleton chip: `src/terminal/health.ts` · 2026-05-28
+- **[v1.49.864](v1.49.864/00-summary.md)** — EgressContext singleton chip: `src/alternative-discoverer/equivalent-searcher.ts` · 2026-05-28

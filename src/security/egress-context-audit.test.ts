@@ -39,7 +39,12 @@ const SRC = resolve(__dirname, '..', '..', 'src');
  * Grandfathered at v1.49.806. Chip this list down ship-by-ship.
  */
 const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
-  'src/alternative-discoverer/equivalent-searcher.ts',
+  // src/alternative-discoverer/equivalent-searcher.ts wired v1.49.864 —
+  // second Egress chip. ctx?: EgressContext threaded through
+  // searchEquivalents + EquivalentSearcher.search; ensureEgressAllowed
+  // hoisted OUTSIDE the fault-tolerant try/catch per #10427. Forensic
+  // accessory semantics preserved (not-OK / parse / network errors continue
+  // to return [] silently); EgressContextDenied propagates.
   'src/alternative-discoverer/fork-finder.ts',
   'src/aminet/index-fetcher.ts',
   'src/aminet/index-freshness.ts',

@@ -9,6 +9,10 @@
 
 import type { DependencyRecord } from '../dependency-auditor/types.js';
 import type { AlternativeReport } from './types.js';
+import {
+  ensureEgressAllowed,
+  type EgressContext,
+} from '../security/egress-context.js';
 
 // ─── npm search API types ─────────────────────────────────────────────────────
 
@@ -44,6 +48,7 @@ const NPM_SEARCH_HEADERS = {
 export async function searchEquivalents(
   dep: DependencyRecord,
   registryMeta: Record<string, unknown>,
+  ctx?: EgressContext,
 ): Promise<AlternativeReport[]> {
   // Only npm has a public unauthenticated search API
   if (dep.ecosystem !== 'npm') return [];
@@ -55,13 +60,17 @@ export async function searchEquivalents(
     : [dep.name];
 
   const searchText = keywords.join(' ');
+  const url = `${NPM_SEARCH_URL}?text=${encodeURIComponent(searchText)}&size=5`;
+
+  // Security: hoisted check outside the try — EgressContextDenied propagates
+  // while the registry's not-OK / parse-error / network-error cases continue
+  // to return [] silently per the forensic-accessory contract. Wire v1.49.864
+  // per Lesson #10427.
+  ensureEgressAllowed(ctx, 'alternative-discoverer/equivalent-searcher', 'fetch', url);
 
   let response: NpmSearchResponse;
   try {
-    const res = await fetch(
-      `${NPM_SEARCH_URL}?text=${encodeURIComponent(searchText)}&size=5`,
-      { headers: NPM_SEARCH_HEADERS },
-    );
+    const res = await fetch(url, { headers: NPM_SEARCH_HEADERS });
     if (!res.ok) return [];
     response = (await res.json()) as NpmSearchResponse;
   } catch {
@@ -102,7 +111,11 @@ export async function searchEquivalents(
 
 /** Class wrapper for searchEquivalents, providing a stateful API surface. */
 export class EquivalentSearcher {
-  search(dep: DependencyRecord, meta: Record<string, unknown>): Promise<AlternativeReport[]> {
-    return searchEquivalents(dep, meta);
+  search(
+    dep: DependencyRecord,
+    meta: Record<string, unknown>,
+    ctx?: EgressContext,
+  ): Promise<AlternativeReport[]> {
+    return searchEquivalents(dep, meta, ctx);
   }
 }
