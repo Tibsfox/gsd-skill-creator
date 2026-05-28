@@ -1,15 +1,16 @@
 # Release History
 
-912 milestones shipped across the v1.0 → v1.49.869 arc. The table below lists every shipped release, newest first.
+913 milestones shipped across the v1.0 → v1.49.870 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 912 releases · 911 with retrospectives · 728 with extracted lessons · quality A:662 B:97 C:63 D:11 F:79 (avg 88) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 913 releases · 912 with retrospectives · 728 with extracted lessons · quality A:662 B:97 C:63 D:11 F:80 (avg 88) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.870](release-notes/v1.49.870) | ProcessContext singleton chip: `src/learning/version-manager.ts` (Track 4 chip #1) | 2026-05-28 | 2 | — | — | [s](release-notes/v1.49.870/chapter/00-summary.md) [r](release-notes/v1.49.870/chapter/03-retrospective.md) [l](release-notes/v1.49.870/chapter/04-lessons.md) [c](release-notes/v1.49.870/chapter/99-context.md) | — | F 25 |  |
 | [v1.49.869](release-notes/v1.49.869) | Pre-tag-gate Integration: Cross-Audit Tool as Step 18/18 (Deterministic Gate) | 2026-05-28 | 2 | — | — | [s](release-notes/v1.49.869/chapter/00-summary.md) [r](release-notes/v1.49.869/chapter/03-retrospective.md) [l](release-notes/v1.49.869/chapter/04-lessons.md) [c](release-notes/v1.49.869/chapter/99-context.md) | — | F 23 |  |
 | [v1.49.868](release-notes/v1.49.868) | Codification Ship: Promote #10444 (Size-Ascending Chip-Pick Reveals Wire-Shape Diversity) + Refine #10443 (Continuous-Verification Mode) | 2026-05-28 | 2 | — | — | [s](release-notes/v1.49.868/chapter/00-summary.md) [r](release-notes/v1.49.868/chapter/03-retrospective.md) [l](release-notes/v1.49.868/chapter/04-lessons.md) [c](release-notes/v1.49.868/chapter/99-context.md) | — | F 34 |  |
 | [v1.49.867](release-notes/v1.49.867) | EgressContext singleton chip: `src/alternative-discoverer/fork-finder.ts` (Track 3 close) | 2026-05-28 | 2 | — | — | [s](release-notes/v1.49.867/chapter/00-summary.md) [r](release-notes/v1.49.867/chapter/03-retrospective.md) [l](release-notes/v1.49.867/chapter/04-lessons.md) [c](release-notes/v1.49.867/chapter/99-context.md) | — | F 33 |  |
