@@ -1,15 +1,16 @@
 # Release History
 
-904 milestones shipped across the v1.0 → v1.49.861 arc. The table below lists every shipped release, newest first.
+905 milestones shipped across the v1.0 → v1.49.862 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 904 releases · 903 with retrospectives · 728 with extracted lessons · quality A:662 B:97 C:63 D:11 F:71 (avg 89) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 905 releases · 904 with retrospectives · 728 with extracted lessons · quality A:662 B:97 C:63 D:11 F:72 (avg 89) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.862](release-notes/v1.49.862) | ProcessContext singleton chip: `src/scan-arxiv/ranker.ts` | 2026-05-28 | 2 | — | — | [s](release-notes/v1.49.862/chapter/00-summary.md) [r](release-notes/v1.49.862/chapter/03-retrospective.md) [l](release-notes/v1.49.862/chapter/04-lessons.md) [c](release-notes/v1.49.862/chapter/99-context.md) | — | F 24 |  |
 | [v1.49.861](release-notes/v1.49.861) | ProcessContext singleton chip: `src/cli/commands/keystore.ts` | 2026-05-28 | 2 | — | — | [s](release-notes/v1.49.861/chapter/00-summary.md) [r](release-notes/v1.49.861/chapter/03-retrospective.md) [l](release-notes/v1.49.861/chapter/04-lessons.md) [c](release-notes/v1.49.861/chapter/99-context.md) | — | F 24 |  |
 | [v1.49.860](release-notes/v1.49.860) | ProcessContext singleton chip: `src/intelligence/provenance/linker.ts` | 2026-05-28 | 2 | — | — | [s](release-notes/v1.49.860/chapter/00-summary.md) [r](release-notes/v1.49.860/chapter/03-retrospective.md) [l](release-notes/v1.49.860/chapter/04-lessons.md) [c](release-notes/v1.49.860/chapter/99-context.md) | — | F 24 |  |
 | [v1.49.859](release-notes/v1.49.859) | ProcessContext singleton chip: `src/chipset/blitter/executor.ts` | 2026-05-28 | 2 | — | — | [s](release-notes/v1.49.859/chapter/00-summary.md) [r](release-notes/v1.49.859/chapter/03-retrospective.md) [l](release-notes/v1.49.859/chapter/04-lessons.md) [c](release-notes/v1.49.859/chapter/99-context.md) | — | F 24 |  |
