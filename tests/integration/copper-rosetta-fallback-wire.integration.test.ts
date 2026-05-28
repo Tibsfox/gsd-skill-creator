@@ -23,6 +23,15 @@
  */
 
 import { describe, expect, it, vi } from 'vitest';
+// v1.49.846 auto-emit-from-substrate: copper/activation.ts now appends a JSONL
+// event whenever a low-confidence prediction triggers. This integration test
+// exercises that path with the real predictive-skill-loader (flag-off → empty
+// predictions → low-confidence always fires). Mock the appender so we don't
+// pollute the operator's calibration data at
+// `.planning/patterns/predictive-low-confidence-events.jsonl`.
+vi.mock('../../src/bounded-learning/predictive-low-confidence-events.js', () => ({
+  appendPredictiveLowConfidenceEvent: vi.fn(async () => '/mock/path'),
+}));
 import { PipelineActivationDispatch } from '../../src/chipset/copper/activation.js';
 import type { ActivationContext } from '../../src/chipset/copper/activation.js';
 import type { MoveInstruction } from '../../src/chipset/copper/types.js';

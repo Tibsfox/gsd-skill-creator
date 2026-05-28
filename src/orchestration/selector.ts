@@ -38,6 +38,7 @@ import type {
   ConceptFallbackProvider,
   SkillPrediction,
 } from '../predictive-skill-loader/index.js';
+import { appendPredictiveLowConfidenceEvent } from '../bounded-learning/predictive-low-confidence-events.js';
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -322,18 +323,29 @@ export class ActivationSelector {
         if (hook) {
           await hook(currentSkill, predictions);
         }
-        if (fallback) {
-          const maxScore =
-            predictions.length === 0
-              ? 0
-              : Math.max(...predictions.map((p) => p.score));
-          if (maxScore < lowConfidenceThreshold) {
+        const maxScore =
+          predictions.length === 0
+            ? 0
+            : Math.max(...predictions.map((p) => p.score));
+        const isLowConfidence = maxScore < lowConfidenceThreshold;
+        if (isLowConfidence) {
+          // v1.49.846 auto-emit-from-substrate: see copper/activation.ts for the
+          // canonical rationale. Mirror is structural; default kind 'not_useful'
+          // mirrors v845 CLI default. Second instance of the auto-emit pattern.
+          // Fire-and-forget — must not serialize with fallback.
+          appendPredictiveLowConfidenceEvent({
+            timestamp: new Date().toISOString(),
+            kind: 'not_useful',
+          }).catch(() => {
+            /* auto-emit is observability-only; never break selection */
+          });
+          if (fallback) {
             await fallback.onLowConfidence(currentSkill, maxScore);
           }
         }
       })
       .catch(() => {
-        /* prediction + fallback are observability-only; never break selection */
+        /* prediction + fallback + auto-emit are observability-only; never break selection */
       });
   }
 

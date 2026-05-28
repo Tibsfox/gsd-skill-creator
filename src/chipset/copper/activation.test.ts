@@ -13,6 +13,17 @@ import type {
   ConceptSuggestion,
 } from '../../predictive-skill-loader/index.js';
 
+// v1.49.846 auto-emit-from-substrate: mock the JSONL appender so test runs
+// don't pollute the operator's real calibration data at
+// `.planning/patterns/predictive-low-confidence-events.jsonl`. The auto-emit
+// fires whenever a low-confidence prediction triggers, which happens in
+// every flag-off prediction path test below.
+vi.mock('../../bounded-learning/predictive-low-confidence-events.js', () => ({
+  appendPredictiveLowConfidenceEvent: vi.fn(async () => '/mock/path'),
+}));
+import { appendPredictiveLowConfidenceEvent } from '../../bounded-learning/predictive-low-confidence-events.js';
+const appendSpy = vi.mocked(appendPredictiveLowConfidenceEvent);
+
 // ============================================================================
 // Helpers
 // ============================================================================
@@ -514,6 +525,118 @@ describe('PipelineActivationDispatch', () => {
 
       // Drain microtasks to confirm the rejection was swallowed.
       await new Promise((resolve) => setImmediate(resolve));
+    });
+  });
+
+  // ============================================================================
+  // v1.49.846: auto-emit-from-substrate
+  //
+  // Pairs with v845 predict-next CLI (manual-recorder). The substrate auto-
+  // recorder appends a JSONL event with kind='not_useful' whenever the
+  // predict path returns low-confidence, regardless of fallback wiring. This
+  // closes the v837 forward-flag gap where the loop's read-side was wired
+  // but no production write-side path existed inside src/.
+  // ============================================================================
+
+  describe('auto-emit-from-substrate (v1.49.846)', () => {
+    function clearSpy() {
+      appendSpy.mockClear();
+      appendSpy.mockResolvedValue('/mock/path');
+    }
+
+    it('appends a low-confidence event when fallbackProvider is wired (default flag-off path)', async () => {
+      clearSpy();
+      const ctx: ActivationContext = {
+        resolveSkill: async () => ({
+          path: '.claude/skills/test/SKILL.md',
+          content: 'x'.repeat(40),
+        }),
+        fallbackProvider: {
+          async onLowConfidence() {
+            return null;
+          },
+        },
+      };
+      const dispatch = new PipelineActivationDispatch(ctx);
+      const result = await dispatch.activate(
+        move({ name: 'demo-skill', mode: 'lite' }),
+      );
+      expect(result.status).toBe('success');
+      await new Promise((resolve) => setImmediate(resolve));
+
+      expect(appendSpy).toHaveBeenCalledTimes(1);
+      const arg = appendSpy.mock.calls[0]?.[0];
+      expect(arg?.kind).toBe('not_useful');
+      expect(arg?.timestamp).toMatch(/^\d{4}-\d{2}-\d{2}T/);
+    });
+
+    it('appends a low-confidence event when only onPredictions is wired (no fallback)', async () => {
+      clearSpy();
+      const ctx: ActivationContext = {
+        resolveSkill: async () => ({
+          path: '.claude/skills/test/SKILL.md',
+          content: 'x'.repeat(40),
+        }),
+        onPredictions: () => undefined,
+      };
+      const dispatch = new PipelineActivationDispatch(ctx);
+      const result = await dispatch.activate(
+        move({ name: 'demo-skill', mode: 'lite' }),
+      );
+      expect(result.status).toBe('success');
+      await new Promise((resolve) => setImmediate(resolve));
+
+      // The auto-emit fires independent of fallback wiring (v846 design
+      // decision): the calibration loop sees evidence whenever predict
+      // returns low-confidence, not only when fallback consumed it.
+      expect(appendSpy).toHaveBeenCalledTimes(1);
+      expect(appendSpy.mock.calls[0]?.[0]?.kind).toBe('not_useful');
+    });
+
+    it('does NOT append when neither hook nor fallback is wired (predict path is gated)', async () => {
+      clearSpy();
+      const ctx: ActivationContext = {
+        resolveSkill: async () => ({
+          path: '.claude/skills/test/SKILL.md',
+          content: 'x'.repeat(40),
+        }),
+      };
+      const dispatch = new PipelineActivationDispatch(ctx);
+      const result = await dispatch.activate(
+        move({ name: 'demo-skill', mode: 'lite' }),
+      );
+      expect(result.status).toBe('success');
+      await new Promise((resolve) => setImmediate(resolve));
+
+      // No subscriber → emitPredictions returns early → predict never runs
+      // → no auto-emit. Preserves the zero-cost-when-unsubscribed property.
+      expect(appendSpy).not.toHaveBeenCalled();
+    });
+
+    it('activation succeeds even when appendPredictiveLowConfidenceEvent rejects', async () => {
+      clearSpy();
+      appendSpy.mockRejectedValueOnce(new Error('disk full'));
+      const ctx: ActivationContext = {
+        resolveSkill: async () => ({
+          path: '.claude/skills/test/SKILL.md',
+          content: 'x'.repeat(40),
+        }),
+        fallbackProvider: {
+          async onLowConfidence() {
+            return null;
+          },
+        },
+      };
+      const dispatch = new PipelineActivationDispatch(ctx);
+      const result = await dispatch.activate(
+        move({ name: 'demo-skill', mode: 'lite' }),
+      );
+
+      // Auto-emit failure is swallowed by the outer .catch per the
+      // observability-only failure contract (#10427).
+      expect(result.status).toBe('success');
+      await new Promise((resolve) => setImmediate(resolve));
+      expect(appendSpy).toHaveBeenCalledTimes(1);
     });
   });
 });

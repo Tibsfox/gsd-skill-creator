@@ -5,7 +5,7 @@
  * @module orchestration/__tests__/selector.test
  */
 
-import { describe, it, expect, afterEach } from 'vitest';
+import { describe, it, expect, afterEach, vi } from 'vitest';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { randomUUID } from 'node:crypto';
@@ -16,6 +16,14 @@ import type {
   ConceptFallbackProvider,
   ConceptSuggestion,
 } from '../../predictive-skill-loader/index.js';
+
+// v1.49.846 auto-emit-from-substrate: mock the JSONL appender so test runs
+// don't pollute the operator's real calibration data. Mirrors copper/activation.test.ts.
+vi.mock('../../bounded-learning/predictive-low-confidence-events.js', () => ({
+  appendPredictiveLowConfidenceEvent: vi.fn(async () => '/mock/path'),
+}));
+import { appendPredictiveLowConfidenceEvent } from '../../bounded-learning/predictive-low-confidence-events.js';
+const appendSpy = vi.mocked(appendPredictiveLowConfidenceEvent);
 
 // ─── Helpers ───────────────────────────────────────────────────────────────
 
@@ -323,5 +331,85 @@ describe('ActivationSelector — fallbackProvider (T1.3 Option C low-confidence 
     await new Promise((resolve) => setTimeout(resolve, 10));
     expect(decisions.length).toBeGreaterThan(0);
     expect(decisions.some((d) => d.activated)).toBe(true);
+  });
+});
+
+// ─── v1.49.846 auto-emit-from-substrate ────────────────────────────────────
+//
+// Mirror of `src/chipset/copper/activation.test.ts` auto-emit-from-substrate
+// coverage. The selector is the second emit-prediction call site; the
+// auto-recorder wire must fire there too so calibration evidence accrues
+// from both production callers.
+
+describe('ActivationSelector — auto-emit-from-substrate (v1.49.846)', () => {
+  function clearSpy() {
+    appendSpy.mockClear();
+    appendSpy.mockResolvedValue('/mock/path');
+  }
+
+  it('appends a low-confidence event for each activated decision when fallback is wired', async () => {
+    clearSpy();
+    const sel = new ActivationSelector({
+      writer: new ActivationWriter(tempTraceFile()),
+      fallbackProvider: {
+        async onLowConfidence() {
+          return null;
+        },
+      },
+    });
+    const decisions = await sel.select('debug failing test', candidatesFixture());
+    await new Promise((resolve) => setTimeout(resolve, 10));
+
+    const activatedCount = decisions.filter((d) => d.activated).length;
+    expect(activatedCount).toBeGreaterThan(0);
+    expect(appendSpy).toHaveBeenCalledTimes(activatedCount);
+    for (const call of appendSpy.mock.calls) {
+      expect(call[0]?.kind).toBe('not_useful');
+      expect(call[0]?.timestamp).toMatch(/^\d{4}-\d{2}-\d{2}T/);
+    }
+  });
+
+  it('appends low-confidence events when only onPredictions is wired (no fallback)', async () => {
+    clearSpy();
+    const sel = new ActivationSelector({
+      writer: new ActivationWriter(tempTraceFile()),
+      onPredictions: () => undefined,
+    });
+    const decisions = await sel.select('debug failing test', candidatesFixture());
+    await new Promise((resolve) => setTimeout(resolve, 10));
+
+    const activatedCount = decisions.filter((d) => d.activated).length;
+    expect(activatedCount).toBeGreaterThan(0);
+    // Auto-emit independent of fallback wiring (v846 design decision).
+    expect(appendSpy).toHaveBeenCalledTimes(activatedCount);
+  });
+
+  it('does NOT append when neither hook nor fallback is wired (predict path is gated)', async () => {
+    clearSpy();
+    const sel = new ActivationSelector({
+      writer: new ActivationWriter(tempTraceFile()),
+    });
+    const decisions = await sel.select('debug failing test', candidatesFixture());
+    await new Promise((resolve) => setTimeout(resolve, 10));
+    expect(decisions.length).toBeGreaterThan(0);
+    expect(appendSpy).not.toHaveBeenCalled();
+  });
+
+  it('selection succeeds even when appendPredictiveLowConfidenceEvent rejects', async () => {
+    clearSpy();
+    appendSpy.mockRejectedValue(new Error('disk full'));
+    const sel = new ActivationSelector({
+      writer: new ActivationWriter(tempTraceFile()),
+      fallbackProvider: {
+        async onLowConfidence() {
+          return null;
+        },
+      },
+    });
+    const decisions = await sel.select('debug failing test', candidatesFixture());
+    await new Promise((resolve) => setTimeout(resolve, 10));
+    expect(decisions.length).toBeGreaterThan(0);
+    expect(decisions.some((d) => d.activated)).toBe(true);
+    expect(appendSpy).toHaveBeenCalled();
   });
 });
