@@ -897,16 +897,16 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.844](v1.49.844/00-summary.md)** — Meta-cadence Verify Axis (Canonical-doc Home for v829+v832) · 2026-05-27
 - **[v1.49.845](v1.49.845/00-summary.md)** — Production Caller of Predict Path: `predict-next` CLI Command · 2026-05-27
 - **[v1.49.846](v1.49.846/00-summary.md)** — Auto-emit-from-substrate: predict-low-confidence Event JSONL Wired into Both Production emit-prediction Call Sites · 2026-05-28
-- **[v1.49.847](v1.49.847/00-summary.md)** — Codification Ship: Promote #10438 + #10439 + #10440 + #10441 + #10442 (Five-Lesson Backlog Clear) · 2026-05-28
+- **[v1.49.847](v1.49.847/00-summary.md)** — Codification Ship: Promote #10438 + #10439 + #10440 + #10441 + #10442 · 2026-05-28
 - **[v1.49.848](v1.49.848/00-summary.md)** — Help text expansion: 20 missing commands surfaced in `printHelp()` · 2026-05-28
-- **[v1.49.849](v1.49.849/00-summary.md)** — ProcessContext singleton chip: `src/retro/changelog-watch.ts` (KNOWN_UNWIRED Process 16→15) · 2026-05-28
-- **[v1.49.850](v1.49.850/00-summary.md)** — ProcessContext singleton chip: `src/orchestrator/extension/extension-detector.ts` (KNOWN_UNWIRED Process 15→14) · 2026-05-28
-- **[v1.49.851](v1.49.851/00-summary.md)** — ProcessContext singleton chip: `src/skill/version-backfill.ts` (KNOWN_UNWIRED Process 14→13) · 2026-05-28
-- **[v1.49.852](v1.49.852/00-summary.md)** — Stale-import cleanup: `src/scan-arxiv/bridge.ts` (KNOWN_UNWIRED Process 13→12) · 2026-05-28
-- **[v1.49.853](v1.49.853/00-summary.md)** — ProcessContext singleton chip: `src/dashboard/collectors/git-collector.ts` (KNOWN_UNWIRED Process 12→11; closes chip-cluster) · 2026-05-28
-- **[v1.49.854](v1.49.854/00-summary.md)** — Verify ship: mesh-default-executor integration test against real git (first verify-overdue ship under #10438) · 2026-05-28
-- **[v1.49.855](v1.49.855/00-summary.md)** — Quality-drift scorer refinement: `task` sub-type for T-prefix/S-prefix work (v841 forward-flag closure) · 2026-05-28
-- **[v1.49.856](v1.49.856/00-summary.md)** — Verify ship: substrate-auto-emit → calibration-loop end-to-end (campaign closes 9/9) · 2026-05-28
+- **[v1.49.849](v1.49.849/00-summary.md)** — ProcessContext singleton chip: `src/retro/changelog-watch.ts` · 2026-05-28
+- **[v1.49.850](v1.49.850/00-summary.md)** — ProcessContext singleton chip: `src/orchestrator/extension/extension-detector.ts` · 2026-05-28
+- **[v1.49.851](v1.49.851/00-summary.md)** — ProcessContext singleton chip: `src/skill/version-backfill.ts` · 2026-05-28
+- **[v1.49.852](v1.49.852/00-summary.md)** — Stale-import cleanup: `src/scan-arxiv/bridge.ts` · 2026-05-28
+- **[v1.49.853](v1.49.853/00-summary.md)** — ProcessContext singleton chip: `src/dashboard/collectors/git-collector.ts` · 2026-05-28
+- **[v1.49.854](v1.49.854/00-summary.md)** — Verify ship: mesh-default-executor integration test against real git · 2026-05-28
+- **[v1.49.855](v1.49.855/00-summary.md)** — Quality-drift scorer refinement: `task` sub-type for T-prefix/S-prefix work · 2026-05-28
+- **[v1.49.856](v1.49.856/00-summary.md)** — Verify ship: substrate-auto-emit → calibration-loop end-to-end · 2026-05-28
 - **[v1.49.857](v1.49.857/00-summary.md)** — Codification Ship: Promote #10443 (Inverse-audit Stale-Entry Detection) · 2026-05-28
 - **[v1.49.858](v1.49.858/00-summary.md)** — ProcessContext singleton chip: `src/drift/cli.ts` · 2026-05-28
 - **[v1.49.859](v1.49.859/00-summary.md)** — ProcessContext singleton chip: `src/chipset/blitter/executor.ts` · 2026-05-28
@@ -917,5 +917,5 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.864](v1.49.864/00-summary.md)** — EgressContext singleton chip: `src/alternative-discoverer/equivalent-searcher.ts` · 2026-05-28
 - **[v1.49.865](v1.49.865/00-summary.md)** — EgressContext singleton chip: `src/aminet/index-freshness.ts` · 2026-05-28
 - **[v1.49.866](v1.49.866/00-summary.md)** — EgressContext singleton chip: `src/site/deploy.ts` · 2026-05-28
-- **[v1.49.867](v1.49.867/00-summary.md)** — EgressContext singleton chip: `src/alternative-discoverer/fork-finder.ts` (Track 3 close + campaign close) · 2026-05-28
+- **[v1.49.867](v1.49.867/00-summary.md)** — EgressContext singleton chip: `src/alternative-discoverer/fork-finder.ts` (Track 3 close) · 2026-05-28
 - **[v1.49.868](v1.49.868/00-summary.md)** — Codification Ship: Promote #10444 (Size-Ascending Chip-Pick Reveals Wire-Shape Diversity) + Refine #10443 (Continuous-Verification Mode) · 2026-05-28

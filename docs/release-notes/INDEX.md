@@ -2,10 +2,33 @@
 
 _Generated 2026-05-28 from `release_history.*`. Source of truth: Postgres._
 
-**888 releases.** 887 with retrospective. 728 with extracted lessons.
+**911 releases.** 910 with retrospective. 728 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
+| `v1.49.868` | Codification Ship: Promote #10444 (Size-Ascending Chip-Pick Reveals Wire-Shape Diversity) + Refine #10443 (Continuous-Verification Mode) | 2026-05-28 | ✓ | — | [read](v1.49.868/00-summary.md) |
+| `v1.49.867` | EgressContext singleton chip: `src/alternative-discoverer/fork-finder.ts` (Track 3 close) | 2026-05-28 | ✓ | — | [read](v1.49.867/00-summary.md) |
+| `v1.49.866` | EgressContext singleton chip: `src/site/deploy.ts` | 2026-05-28 | ✓ | — | [read](v1.49.866/00-summary.md) |
+| `v1.49.865` | EgressContext singleton chip: `src/aminet/index-freshness.ts` | 2026-05-28 | ✓ | — | [read](v1.49.865/00-summary.md) |
+| `v1.49.864` | EgressContext singleton chip: `src/alternative-discoverer/equivalent-searcher.ts` | 2026-05-28 | ✓ | — | [read](v1.49.864/00-summary.md) |
+| `v1.49.863` | EgressContext singleton chip: `src/terminal/health.ts` | 2026-05-28 | ✓ | — | [read](v1.49.863/00-summary.md) |
+| `v1.49.862` | ProcessContext singleton chip: `src/scan-arxiv/ranker.ts` | 2026-05-28 | ✓ | — | [read](v1.49.862/00-summary.md) |
+| `v1.49.861` | ProcessContext singleton chip: `src/cli/commands/keystore.ts` | 2026-05-28 | ✓ | — | [read](v1.49.861/00-summary.md) |
+| `v1.49.860` | ProcessContext singleton chip: `src/intelligence/provenance/linker.ts` | 2026-05-28 | ✓ | — | [read](v1.49.860/00-summary.md) |
+| `v1.49.859` | ProcessContext singleton chip: `src/chipset/blitter/executor.ts` | 2026-05-28 | ✓ | — | [read](v1.49.859/00-summary.md) |
+| `v1.49.858` | ProcessContext singleton chip: `src/drift/cli.ts` | 2026-05-28 | ✓ | — | [read](v1.49.858/00-summary.md) |
+| `v1.49.857` | Codification Ship: Promote #10443 (Inverse-audit Stale-Entry Detection) | 2026-05-28 | ✓ | — | [read](v1.49.857/00-summary.md) |
+| `v1.49.856` | Verify ship: substrate-auto-emit → calibration-loop end-to-end | 2026-05-28 | ✓ | — | [read](v1.49.856/00-summary.md) |
+| `v1.49.855` | Quality-drift scorer refinement: `task` sub-type for T-prefix/S-prefix work | 2026-05-28 | ✓ | — | [read](v1.49.855/00-summary.md) |
+| `v1.49.854` | Verify ship: mesh-default-executor integration test against real git | 2026-05-28 | ✓ | — | [read](v1.49.854/00-summary.md) |
+| `v1.49.853` | ProcessContext singleton chip: `src/dashboard/collectors/git-collector.ts` | 2026-05-28 | ✓ | — | [read](v1.49.853/00-summary.md) |
+| `v1.49.852` | Stale-import cleanup: `src/scan-arxiv/bridge.ts` | 2026-05-28 | ✓ | — | [read](v1.49.852/00-summary.md) |
+| `v1.49.851` | ProcessContext singleton chip: `src/skill/version-backfill.ts` | 2026-05-28 | ✓ | — | [read](v1.49.851/00-summary.md) |
+| `v1.49.850` | ProcessContext singleton chip: `src/orchestrator/extension/extension-detector.ts` | 2026-05-28 | ✓ | — | [read](v1.49.850/00-summary.md) |
+| `v1.49.849` | ProcessContext singleton chip: `src/retro/changelog-watch.ts` | 2026-05-28 | ✓ | — | [read](v1.49.849/00-summary.md) |
+| `v1.49.848` | Help text expansion: 20 missing commands surfaced in `printHelp()` | 2026-05-28 | ✓ | — | [read](v1.49.848/00-summary.md) |
+| `v1.49.847` | Codification Ship: Promote #10438 + #10439 + #10440 + #10441 + #10442 | 2026-05-28 | ✓ | — | [read](v1.49.847/00-summary.md) |
+| `v1.49.846` | Auto-emit-from-substrate: predict-low-confidence Event JSONL Wired into Both Production emit-prediction Call Sites | 2026-05-28 | ✓ | — | [read](v1.49.846/00-summary.md) |
 | `v1.49.845` | Production Caller of Predict Path: `predict-next` CLI Command | 2026-05-27 | ✓ | — | [read](v1.49.845/00-summary.md) |
 | `v1.49.844` | Meta-cadence Verify Axis (Canonical-doc Home for v829+v832) | 2026-05-27 | ✓ | — | [read](v1.49.844/00-summary.md) |
 | `v1.49.843` | ProcessContext Mesh Family Batch Chip | 2026-05-27 | ✓ | — | [read](v1.49.843/00-summary.md) |
