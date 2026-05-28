@@ -94,7 +94,13 @@ const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
   // best-effort-silent try/catch per #10427. Forensic accessory semantics
   // preserved (CLI-not-installed continues to return 'unknown' silently);
   // load-bearing security denials propagate via ProcessContextDenied throw.
-  'src/scan-arxiv/bridge.ts',
+  // src/scan-arxiv/bridge.ts stale-import cleanup v1.49.852 — execFileSync
+  // was imported but never called; removing the dead import takes the file
+  // out of audit scope cleanly. Second stale-entry chip (cf. v1.49.834
+  // intelligence/analyzer/git.ts which was a different stale-entry shape:
+  // wired-but-still-in-allowlist; this one is import-without-use). Confirms
+  // the v1.49.806 forward-observation that audit unidirectionality leaves
+  // both stale-shape variants undetected by the runtime check.
   'src/scan-arxiv/ranker.ts',
   // scribe/netlist-renderer family fully wired at v1.49.828 batch chip
   // (available + netlistsvg-driver + yosys-driver) — all 3 use the
