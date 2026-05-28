@@ -19,6 +19,11 @@ import { join, dirname } from 'node:path';
 import { homedir } from 'node:os';
 import type { TerminalConfig } from '../../integration/config/terminal-types.js';
 import { checkHealth } from '../../terminal/health.js';
+import {
+  ensureProcessAllowed,
+  ProcessContextDenied,
+  type ProcessContext,
+} from '../../security/process-context.js';
 
 // ---------------------------------------------------------------------------
 // PID file management
@@ -232,7 +237,7 @@ export async function terminalCommand(args: string[]): Promise<number> {
 // Subcommand handlers
 // ---------------------------------------------------------------------------
 
-async function handleStart(config: TerminalConfig): Promise<number> {
+async function handleStart(config: TerminalConfig, ctx?: ProcessContext): Promise<number> {
   const existingPid = readPid();
   if (existingPid !== null && isProcessAlive(existingPid)) {
     const url = buildUrl(config);
@@ -266,6 +271,12 @@ async function handleStart(config: TerminalConfig): Promise<number> {
 
     const spawnArgs = [...prefix, ...wettyArgs];
 
+    // ProcessContext wire (v1.49.842): security check before spawn.
+    // ProcessContextDenied propagates UP from the catch (load-bearing
+    // security denial per #10427); other errors are absorbed into the
+    // CLI JSON output as before.
+    ensureProcessAllowed(ctx, 'cli/commands/terminal', 'spawn', cmd);
+
     const child = spawn(cmd, spawnArgs, {
       detached: true,
       stdio: 'ignore',
@@ -295,6 +306,9 @@ async function handleStart(config: TerminalConfig): Promise<number> {
     }, null, 2));
     return 0;
   } catch (err) {
+    // Re-throw load-bearing security denials per #10427 — the swallow-
+    // everything CLI catch is for operational errors, not authorization.
+    if (err instanceof ProcessContextDenied) throw err;
     const message = err instanceof Error ? err.message : String(err);
     console.log(JSON.stringify({ action: 'start', error: message }, null, 2));
     return 1;

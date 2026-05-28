@@ -11,6 +11,7 @@
 import { spawn } from 'node:child_process';
 import type { ChildProcess } from 'node:child_process';
 import type { WettyProcess, LaunchOptions, ShutdownOptions } from './types.js';
+import { ensureProcessAllowed } from '../security/process-context.js';
 
 /**
  * Map of active child processes keyed by PID.
@@ -37,7 +38,13 @@ const DEFAULT_GRACE_PERIOD_MS = 5000;
  * @returns WettyProcess with pid, status, url, and timestamps
  */
 export async function launchWetty(options: LaunchOptions): Promise<WettyProcess> {
-  const { config, command, allowIframe } = options;
+  const { config, command, allowIframe, ctx } = options;
+
+  // ProcessContext wire (v1.49.842): security check runs BEFORE spawn so
+  // `ProcessContextDenied` propagates to the caller. This surface has no
+  // swallowing try/catch around the spawn — the check is naturally outside
+  // any catch by structure.
+  ensureProcessAllowed(ctx, 'terminal/launcher', 'spawn', 'wetty');
 
   // Build CLI args from config
   const args: string[] = [

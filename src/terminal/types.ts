@@ -9,6 +9,7 @@
  */
 
 import type { TerminalConfig } from '../integration/config/terminal-types.js';
+import type { ProcessContext } from '../security/process-context.js';
 
 /** Process lifecycle states. */
 export type ProcessStatus = 'starting' | 'running' | 'stopping' | 'stopped' | 'error';
@@ -37,6 +38,12 @@ export interface LaunchOptions {
   command?: string;
   /** Whether to allow iframe embedding (adds --allow-iframe flag). Default: true. */
   allowIframe?: boolean;
+  /**
+   * Optional security context for the wetty spawn (v1.49.842 chip).
+   * When provided, `ensureProcessAllowed` runs before spawn. When absent,
+   * permissive legacy behavior preserved.
+   */
+  ctx?: ProcessContext;
 }
 
 /** Options for shutdown behavior. */

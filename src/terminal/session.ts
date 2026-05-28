@@ -8,6 +8,10 @@
  */
 
 import { execSync } from 'node:child_process';
+import {
+  ensureProcessAllowed,
+  type ProcessContext,
+} from '../security/process-context.js';
 
 /**
  * List active tmux session names.
@@ -15,8 +19,15 @@ import { execSync } from 'node:child_process';
  * Runs `tmux list-sessions -F '#{session_name}'` and returns
  * an array of session names. Returns empty array if tmux is
  * not installed or no sessions exist.
+ *
+ * ProcessContext wire (v1.49.842): `ensureProcessAllowed` hoisted
+ * OUTSIDE the swallow-everything try/catch per Lesson #10427 — security
+ * denials must propagate even when forensic listing is best-effort
+ * silent on tmux-unavailable. `ProcessContextDenied` from a deny-listed
+ * tmux throws to the caller; tmux-unavailable still returns [].
  */
-export function listTmuxSessions(): string[] {
+export function listTmuxSessions(ctx?: ProcessContext): string[] {
+  ensureProcessAllowed(ctx, 'terminal/session', 'exec-sync', 'tmux');
   try {
     const output = execSync('tmux list-sessions -F "#{session_name}"', {
       encoding: 'utf-8',

@@ -45,7 +45,11 @@ const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
   'src/chipset/harness-integrity.ts',
   'src/cli/commands/keystore.ts',
   'src/cli/commands/pic2html.ts',
-  'src/cli/commands/terminal.ts',
+  // src/cli/commands/terminal.ts wired v1.49.842 — terminal family batch chip
+  // (3 files; wired together with terminal/launcher.ts + terminal/session.ts).
+  // ctx?: ProcessContext threaded through handleStart; ensureProcessAllowed
+  // called before spawn; ProcessContextDenied re-thrown from the swallow-
+  // everything CLI catch per #10427.
   'src/dashboard/collectors/git-collector.ts',
   // dogfood family fully wired at v1.49.827 batch chip (extractor + pydmd
   // install/health-check + install/venv-manager) — all 3 use internal-helper
@@ -82,8 +86,14 @@ const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
   // internal-helper pattern (#10433) with hoisted check (#10427) for
   // spawn-based subprocess invocation; wire cost ~14-16 LOC each.
   'src/skill/version-backfill.ts',
-  'src/terminal/launcher.ts',
-  'src/terminal/session.ts',
+  // src/terminal/launcher.ts wired v1.49.842 — terminal family batch chip.
+  // Optional ctx?: ProcessContext threaded through LaunchOptions; the
+  // ensureProcessAllowed call sits naturally outside any catch (the spawn
+  // surface has no swallowing try/catch around the spawn itself).
+  // src/terminal/session.ts wired v1.49.842 — terminal family batch chip.
+  // ensureProcessAllowed hoisted OUTSIDE the tmux-unavailable try/catch
+  // per #10427; ProcessContextDenied propagates while tmux-not-installed
+  // still returns [] silently.
 ]);
 
 /** Walk `src/` and return absolute paths matching `*.ts`. */
