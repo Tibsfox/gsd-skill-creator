@@ -15,6 +15,10 @@
 
 import type { IndexMetadata, AminetMirrorConfig, AminetPackage, AminetIndex, FreshnessCheck } from './types.js';
 import { parseIndexLine } from './index-parser.js';
+import {
+  ensureEgressAllowed,
+  type EgressContext,
+} from '../security/egress-context.js';
 
 // ============================================================================
 // checkFreshness
@@ -75,9 +79,17 @@ export function checkFreshness(
  * @returns Parsed array of recently-added packages.
  * @throws Error if HTTP fetch fails.
  */
-export async function fetchRecent(config: AminetMirrorConfig): Promise<AminetPackage[]> {
+export async function fetchRecent(
+  config: AminetMirrorConfig,
+  ctx?: EgressContext,
+): Promise<AminetPackage[]> {
   const mirror = config.mirrors[0];
   const url = `${mirror}/aminet/RECENT`;
+
+  // Security: hoisted check outside the fetch — EgressContextDenied
+  // propagates immediately; the strict-fail HTTP-error path stays
+  // untouched. Wire v1.49.865 per Lesson #10427.
+  ensureEgressAllowed(ctx, 'aminet/index-freshness', 'fetch', url);
 
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), config.timeoutMs);

@@ -47,7 +47,10 @@ const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
   // to return [] silently); EgressContextDenied propagates.
   'src/alternative-discoverer/fork-finder.ts',
   'src/aminet/index-fetcher.ts',
-  'src/aminet/index-freshness.ts',
+  // src/aminet/index-freshness.ts wired v1.49.865 — third Egress chip.
+  // ctx?: EgressContext threaded through fetchRecent; ensureEgressAllowed
+  // hoisted BEFORE the fetch call. Strict-fail surface (HTTP-error throws)
+  // unchanged; EgressContextDenied propagates per #10427.
   'src/aminet/package-fetcher.ts',
   'src/chips/anthropic-chip.ts',
   'src/chips/http-client.ts',

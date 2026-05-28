@@ -418,3 +418,26 @@ describe('barrel file (src/aminet/index.ts)', () => {
     expect(barrel.HUNK_END).toBe(0x000003F2);
   });
 });
+
+describe('fetchRecent — EgressContext wire (v1.49.865)', () => {
+  it('throws EgressContextDenied when ctx denies the RECENT URL', async () => {
+    const { fetchRecent } = await import('./index-freshness.js');
+    const { EgressContextDenied, CapturingEgressAuditSink } = await import(
+      '../security/egress-context.js'
+    );
+    const sink = new CapturingEgressAuditSink();
+    const restrictiveCtx = { allowList: [], audit: sink };
+    const config = {
+      mirrors: ['http://uk.aminet.net'],
+      timeoutMs: 1000,
+      userAgent: 'test',
+      cacheDir: '/tmp/aminet-test',
+    };
+    await expect(fetchRecent(config, restrictiveCtx)).rejects.toThrow(
+      EgressContextDenied,
+    );
+    expect(sink.records).toHaveLength(1);
+    expect(sink.records[0]?.target).toBe('http://uk.aminet.net/aminet/RECENT');
+    expect(sink.records[0]?.allowed).toBe(false);
+  });
+});
