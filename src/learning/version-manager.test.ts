@@ -5,6 +5,11 @@ import { tmpdir } from 'os';
 import { exec } from 'child_process';
 import { promisify } from 'util';
 import { VersionManager } from './version-manager.js';
+import {
+  type ProcessContext,
+  ProcessContextDenied,
+  NULL_PROCESS_AUDIT_SINK,
+} from '../security/process-context.js';
 
 const execAsync = promisify(exec);
 
@@ -192,6 +197,49 @@ describe('VersionManager', () => {
 
       expect(diff).toContain('-Line 2');
       expect(diff).toContain('+Modified Line');
+    });
+  });
+
+  // ==========================================================================
+  // ProcessContext wire (v1.49.870 — Track 4 chip #1; internal-helper pattern)
+  // ==========================================================================
+  describe('ProcessContext wire (v1.49.870)', () => {
+    it('threads ctx? through constructor without breaking default callers', () => {
+      // Default ctx (undefined) preserves legacy permissive behavior.
+      const defaultManager = new VersionManager('.claude/skills', testDir);
+      expect(defaultManager).toBeInstanceOf(VersionManager);
+    });
+
+    it('uses ctx audit sink when threaded; getHistory returns empty for untracked skill', async () => {
+      const events: Array<{ source: string; target: string }> = [];
+      const ctx: ProcessContext = {
+        allowList: ['sh'],
+        audit: {
+          record: (e) => events.push({ source: e.source, target: e.target }),
+        },
+      };
+
+      const managerWithCtx = new VersionManager('.claude/skills', testDir, ctx);
+      const history = await managerWithCtx.getHistory('nonexistent-skill');
+      expect(history).toEqual([]);
+
+      // The internal-helper git() ran ensureProcessAllowed at least once
+      // (called by getHistory's `git log --follow` invocation).
+      expect(events.length).toBeGreaterThan(0);
+      expect(events[0].source).toBe('learning/version-manager');
+      expect(events[0].target).toBe('sh');
+    });
+
+    it('throws ProcessContextDenied when ctx denies sh exec', async () => {
+      const ctx: ProcessContext = {
+        allowList: [], // empty allow-list denies all
+        audit: NULL_PROCESS_AUDIT_SINK,
+      };
+
+      const managerWithCtx = new VersionManager('.claude/skills', testDir, ctx);
+      await expect(managerWithCtx.getHistory('test-skill')).rejects.toBeInstanceOf(
+        ProcessContextDenied,
+      );
     });
   });
 });

@@ -99,7 +99,17 @@ const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
   // catch around the spawn). The helper-internal hoist is preferred over
   // per-call-site hoist when N>1 call sites share the helper (DRY).
   'src/learn/acquirer.ts',
-  'src/learning/version-manager.ts',
+  // src/learning/version-manager.ts wired v1.49.870 — Track 4 chip #1
+  // (smallest LOC of remaining 6 KNOWN_UNWIRED Process entries: 177 LOC).
+  // ctx?: ProcessContext threaded through constructor (third param after
+  // skillsDir + workDir); internal-helper pattern (#10433) — single
+  // ensureProcessAllowed at the top of the private git() helper before
+  // execAsync. The full command string passes as argv[1] to /bin/sh -c;
+  // the audit records op='exec' + target='sh' + argv=['-c', command].
+  // ProcessContextDenied re-thrown from getHistory/getVersionContent/
+  // rollback/compareVersions/getCurrentHash swallow-everything catches
+  // per #10427 (security denials are load-bearing). 14/14 tests pass
+  // including 3 new ProcessContext wire test cases.
   // src/mesh/mesh-worktree.ts wired v1.49.843 — mesh family batch chip
   // (2 files; wired together with proxy-committer.ts).
   // Optional ctx?: ProcessContext threaded through createMeshWorktreeManager;

@@ -1,6 +1,11 @@
 import { exec } from 'child_process';
 import { promisify } from 'util';
 import { SkillVersion } from '../types/learning.js';
+import {
+  ensureProcessAllowed,
+  ProcessContextDenied,
+  type ProcessContext,
+} from '../security/process-context.js';
 
 const execAsync = promisify(exec);
 
@@ -19,16 +24,23 @@ export interface RollbackResult {
 export class VersionManager {
   private skillsDir: string;
   private workDir: string;
+  private ctx?: ProcessContext;
 
-  constructor(skillsDir = '.claude/skills', workDir = '.') {
+  constructor(skillsDir = '.claude/skills', workDir = '.', ctx?: ProcessContext) {
     this.skillsDir = skillsDir;
     this.workDir = workDir;
+    this.ctx = ctx;
   }
 
   /**
    * Run a git command in the work directory
    */
   private async git(command: string): Promise<string> {
+    // Security: hoisted ensureProcessAllowed at the single internal-helper
+    // spawn site (#10433 internal-helper pattern). The full command string
+    // is passed as argv to /bin/sh -c; the audit records the exec semantics.
+    // ProcessContextDenied propagates per #10427 (no swallowing try/catch).
+    ensureProcessAllowed(this.ctx, 'learning/version-manager', 'exec', 'sh', ['-c', command]);
     const { stdout } = await execAsync(command, {
       encoding: 'utf8',
       cwd: this.workDir,
@@ -72,6 +84,9 @@ export class VersionManager {
 
       return versions;
     } catch (err) {
+      // #10427: ProcessContextDenied is load-bearing — re-throw before the
+      // swallow-everything fallthrough so security denials propagate.
+      if (err instanceof ProcessContextDenied) throw err;
       const error = err as { code?: string; message?: string };
       if (error.code === 'ENOENT' || error.message?.includes('not a git repository')) {
         throw new Error('Git is not available or this is not a git repository');
@@ -90,6 +105,7 @@ export class VersionManager {
     try {
       return await this.git(`git show ${hash}:"${skillPath}"`);
     } catch (err) {
+      if (err instanceof ProcessContextDenied) throw err;
       const error = err as { message?: string };
       if (error.message?.includes('does not exist') || error.message?.includes('invalid object name')) {
         throw new Error(`Version ${hash.slice(0, 7)} not found for skill ${skillName}`);
@@ -139,6 +155,8 @@ export class VersionManager {
         message: commitMessage,
       };
     } catch (err) {
+      // #10427: security denials propagate even from result-wrapping catches.
+      if (err instanceof ProcessContextDenied) throw err;
       const error = err as { message?: string };
       return {
         success: false,
@@ -156,6 +174,7 @@ export class VersionManager {
     try {
       return await this.git(`git diff ${hash1} ${hash2} -- "${skillPath}"`);
     } catch (err) {
+      if (err instanceof ProcessContextDenied) throw err;
       const error = err as { message?: string };
       throw new Error(`Failed to compare versions: ${error.message}`);
     }
@@ -170,7 +189,9 @@ export class VersionManager {
     try {
       const stdout = await this.git(`git log -1 --format="%H" -- "${skillPath}"`);
       return stdout.trim() || null;
-    } catch {
+    } catch (err) {
+      // #10427: security denial is load-bearing even from getCurrentHash.
+      if (err instanceof ProcessContextDenied) throw err;
       return null;
     }
   }
