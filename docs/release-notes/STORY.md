@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.870`.
+The story begins at `v1.0` and continues to `v1.49.871`.
 
-**913 chapters.** 912 have retrospectives.
+**914 chapters.** 913 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -921,3 +921,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.868](v1.49.868/00-summary.md)** — Codification Ship: Promote #10444 (Size-Ascending Chip-Pick Reveals Wire-Shape Diversity) + Refine #10443 (Continuous-Verification Mode) · 2026-05-28
 - **[v1.49.869](v1.49.869/00-summary.md)** — Pre-tag-gate Integration: Cross-Audit Tool as Step 18/18 (Deterministic Gate) · 2026-05-28
 - **[v1.49.870](v1.49.870/00-summary.md)** — ProcessContext singleton chip: `src/learning/version-manager.ts` (Track 4 chip #1) · 2026-05-28
+- **[v1.49.871](v1.49.871/00-summary.md)** — ProcessContext singleton chip: `src/git/workflows/contribute.ts` (Track 4 chip #2) · 2026-05-28

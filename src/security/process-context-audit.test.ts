@@ -79,7 +79,17 @@ const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
   //   v1.49.825 batch chip (repo-manager + state-machine + sync-manager) —
   //   all 3 use internal-helper pattern (#10433); wire cost ~14-18 LOC each.
   'src/git/gates/pre-flight.ts',
-  'src/git/workflows/contribute.ts',
+  // src/git/workflows/contribute.ts wired v1.49.871 — Track 4 chip #2
+  // (second-smallest LOC of remaining 5 KNOWN_UNWIRED Process entries:
+  // 183 LOC pre-wire). ctx?: ProcessContext threaded through contribute()
+  // as 4th param; closure-capture pattern (#10444 wire-shape catalog) —
+  // module-level exec() helper refactored into a closure inside
+  // contribute() that captures ctx. Single ensureProcessAllowed at the
+  // closure's top protects ~12 spawn sites (git fetch/rebase/checkout/
+  // merge/push, gh pr create, which gh, rebase --abort). exec semantics:
+  // op='exec-sync' target='sh' argv=['-c', command]. ProcessContextDenied
+  // re-thrown from 4 swallow-everything catches (sync recovery + merge
+  // wrap + push wrap + gh-availability wrap) per #10427.
   // src/intelligence/analyzer/findings/stalled.ts wired v1.49.839 —
   // optional ctx?: ProcessContext threaded through hasRecentGitActivity +
   // detectStalledMissions; ensureProcessAllowed hoisted outside the

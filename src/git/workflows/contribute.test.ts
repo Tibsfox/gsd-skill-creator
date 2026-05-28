@@ -37,6 +37,11 @@ vi.mock('node:fs', () => ({
 import { contribute } from './contribute.js';
 import type { ContributeResult } from './contribute.js';
 import type { GatePromptFn, PRPromptFn, PRGateDecision, GatePresentation } from '../gates/hitl-gate.js';
+import {
+  type ProcessContext,
+  ProcessContextDenied,
+  NULL_PROCESS_AUDIT_SINK,
+} from '../../security/process-context.js';
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -259,5 +264,57 @@ describe('contribute', () => {
     // Gate 1 promptFn called twice (first sync-first, then approve)
     expect(promptFn).toHaveBeenCalledTimes(2);
     expect(result.merged).toBe(true);
+  });
+
+  // ==========================================================================
+  // ProcessContext wire (v1.49.871 — Track 4 chip #2; closure-capture pattern)
+  // ==========================================================================
+  describe('ProcessContext wire (v1.49.871)', () => {
+    it('default (undefined ctx) preserves legacy permissive behavior', async () => {
+      const promptFn: GatePromptFn = vi.fn().mockResolvedValue(makeApproveGate1());
+      const prPromptFn: PRPromptFn = vi.fn().mockResolvedValue(makeApprovePR());
+      // Calling without ctx; should run normally per legacy permissive default.
+      const result = await contribute('/repo', promptFn, prPromptFn);
+      expect(result.merged).toBe(true);
+    });
+
+    it('uses ctx audit sink when threaded; records every exec invocation', async () => {
+      const events: Array<{ source: string; target: string; argvHead: string }> = [];
+      const ctx: ProcessContext = {
+        allowList: ['sh'],
+        audit: {
+          record: (e) => events.push({
+            source: e.source,
+            target: e.target,
+            argvHead: e.argv[0] ?? '',
+          }),
+        },
+      };
+      const promptFn: GatePromptFn = vi.fn().mockResolvedValue(makeApproveGate1());
+      const prPromptFn: PRPromptFn = vi.fn().mockResolvedValue(makeApprovePR());
+
+      await contribute('/repo', promptFn, prPromptFn, ctx);
+
+      expect(events.length).toBeGreaterThan(0);
+      // All events come from the closure-captured exec helper
+      for (const ev of events) {
+        expect(ev.source).toBe('git/workflows/contribute');
+        expect(ev.target).toBe('sh');
+        expect(ev.argvHead).toBe('-c');
+      }
+    });
+
+    it('throws ProcessContextDenied when ctx denies sh exec', async () => {
+      const ctx: ProcessContext = {
+        allowList: [], // deny all
+        audit: NULL_PROCESS_AUDIT_SINK,
+      };
+      const promptFn: GatePromptFn = vi.fn().mockResolvedValue(makeApproveGate1());
+      const prPromptFn: PRPromptFn = vi.fn().mockResolvedValue(makeApprovePR());
+
+      await expect(contribute('/repo', promptFn, prPromptFn, ctx)).rejects.toBeInstanceOf(
+        ProcessContextDenied,
+      );
+    });
   });
 });

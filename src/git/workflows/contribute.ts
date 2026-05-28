@@ -21,6 +21,11 @@ import type { GateDecision, GitOperationLog } from '../types.js';
 import { presentMergeGate, presentPRGate } from '../gates/hitl-gate.js';
 import type { GatePromptFn, PRPromptFn, PRGateDecision } from '../gates/hitl-gate.js';
 import { detectState } from '../core/state-machine.js';
+import {
+  ensureProcessAllowed,
+  ProcessContextDenied,
+  type ProcessContext,
+} from '../../security/process-context.js';
 
 // === Types ===
 
@@ -35,10 +40,6 @@ export interface ContributeResult {
 }
 
 // === Helpers ===
-
-function exec(command: string, cwd: string): string {
-  return execSync(command, { cwd, encoding: 'utf-8', stdio: ['pipe', 'pipe', 'pipe'] }).trim();
-}
 
 function logOperation(
   repoPath: string,
@@ -71,7 +72,18 @@ export async function contribute(
   repoPath: string,
   promptFn: GatePromptFn,
   prPromptFn: PRPromptFn,
+  ctx?: ProcessContext,
 ): Promise<ContributeResult> {
+  // Closure-captured exec with hoisted security check (#10433 internal-
+  // helper applied via closure-capture per v862 ranker.ts precedent).
+  // execSync runs commands through /bin/sh -c; the audit records the
+  // exec semantics. ProcessContextDenied propagates through every
+  // exec() call site below (no swallowing catch around the spawn).
+  const exec = (command: string, cwd: string): string => {
+    ensureProcessAllowed(ctx, 'git/workflows/contribute', 'exec-sync', 'sh', ['-c', command]);
+    return execSync(command, { cwd, encoding: 'utf-8', stdio: ['pipe', 'pipe', 'pipe'] }).trim();
+  };
+
   const commands: string[] = [];
 
   // === Gate 1: dev -> main merge ===
@@ -92,9 +104,15 @@ export async function contribute(
         exec('git fetch upstream', repoPath);
         exec('git rebase upstream/main', repoPath);
         commands.push('git fetch upstream', 'git rebase upstream/main');
-      } catch {
+      } catch (err) {
+        // #10427: security denial is load-bearing.
+        if (err instanceof ProcessContextDenied) throw err;
         // Sync failed — abort and re-present
-        try { exec('git rebase --abort', repoPath); } catch { /* empty */ }
+        try {
+          exec('git rebase --abort', repoPath);
+        } catch (abortErr) {
+          if (abortErr instanceof ProcessContextDenied) throw abortErr;
+        }
       }
       // Loop back to re-present Gate 1
       continue;
@@ -116,6 +134,8 @@ export async function contribute(
     exec('git checkout dev', repoPath);
     commands.push('git checkout main', 'git merge --no-ff dev', 'git checkout dev');
   } catch (err) {
+    // #10427: security denial propagates even from merge-result wrapping catch.
+    if (err instanceof ProcessContextDenied) throw err;
     const errMsg = err instanceof Error ? err.message : String(err);
     logOperation(repoPath, 'contribute', commands, false, `Merge failed: ${errMsg}`);
     return {
@@ -158,11 +178,13 @@ export async function contribute(
       prUrl = result;
       prCreated = true;
       commands.push('git push origin main', 'gh pr create');
-    } catch {
+    } catch (err) {
+      if (err instanceof ProcessContextDenied) throw err;
       // Push/PR creation failed
       prCreated = false;
     }
-  } catch {
+  } catch (err) {
+    if (err instanceof ProcessContextDenied) throw err;
     // gh CLI not available — provide manual URL
     prUrl = 'https://github.com/upstream/repo/compare/main...user:main';
     prCreated = true;
