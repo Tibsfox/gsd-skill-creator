@@ -75,8 +75,13 @@ const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
   'src/intelligence/provenance/linker.ts',
   'src/learn/acquirer.ts',
   'src/learning/version-manager.ts',
-  'src/mesh/mesh-worktree.ts',
-  'src/mesh/proxy-committer.ts',
+  // src/mesh/mesh-worktree.ts wired v1.49.843 — mesh family batch chip
+  // (2 files; wired together with proxy-committer.ts).
+  // Optional ctx?: ProcessContext threaded through createMeshWorktreeManager;
+  // default GitExecutor wraps execSync with ensureProcessAllowed per #10433.
+  // src/mesh/proxy-committer.ts wired v1.49.843 — mesh family batch chip.
+  // Same shape — ctx? threaded through createProxyCommitter; passes ctx to
+  // createMeshWorktreeManager so both executors share one security context.
   'src/orchestrator/extension/extension-detector.ts',
   'src/retro/changelog-watch.ts',
   'src/scan-arxiv/bridge.ts',

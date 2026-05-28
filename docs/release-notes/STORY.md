@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.842`.
+The story begins at `v1.0` and continues to `v1.49.843`.
 
-**885 chapters.** 884 have retrospectives.
+**886 chapters.** 885 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -893,3 +893,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.840](v1.49.840/00-summary.md)** — Codification Ship: Promote #10436 + #10437 · 2026-05-27
 - **[v1.49.841](v1.49.841/00-summary.md)** — Quality-drift Scorer Recalibration: `chip` Release-type + Per-type Baselines · 2026-05-27
 - **[v1.49.842](v1.49.842/00-summary.md)** — ProcessContext Terminal Family Batch Chip · 2026-05-27
+- **[v1.49.843](v1.49.843/00-summary.md)** — ProcessContext Mesh Family Batch Chip · 2026-05-27

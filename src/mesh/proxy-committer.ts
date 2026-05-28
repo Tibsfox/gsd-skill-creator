@@ -10,6 +10,7 @@
 
 import type { GitExecutor, MeshWorktreeManager } from './mesh-worktree.js';
 import { createMeshWorktreeManager } from './mesh-worktree.js';
+import { ensureProcessAllowed, type ProcessContext } from '../security/process-context.js';
 
 // ============================================================================
 // Pure function
@@ -128,17 +129,29 @@ export class ProxyCommitter {
 /**
  * Creates a ProxyCommitter with the given executor and worktree manager,
  * or sensible defaults.
+ *
+ * ProcessContext wire (v1.49.843): optional `ctx?: ProcessContext` is
+ * threaded into the default executor and `ensureProcessAllowed` runs
+ * before each execSync per #10433 internal-helper pattern. The same
+ * ctx is passed to `createMeshWorktreeManager` so both executors share
+ * a single security context. Injected executors are not wrapped —
+ * security is the caller's responsibility when injecting a custom executor.
  */
 export function createProxyCommitter(
   gitExecutor?: GitExecutor,
   worktreeManager?: MeshWorktreeManager,
+  ctx?: ProcessContext,
 ): ProxyCommitter {
   const defaultExecutor: GitExecutor = (cmd) => {
+    const tokens = cmd.trim().split(/\s+/);
+    const exe = tokens[0] ?? '';
+    const argv = tokens.slice(1);
+    ensureProcessAllowed(ctx, 'mesh/proxy-committer', 'exec-sync', exe, argv);
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { execSync } = require('node:child_process');
     return execSync(cmd, { encoding: 'utf8' }) as string;
   };
   const executor = gitExecutor || defaultExecutor;
-  const wtm = worktreeManager || createMeshWorktreeManager(executor);
+  const wtm = worktreeManager || createMeshWorktreeManager(executor, ctx);
   return new ProxyCommitter(executor, wtm);
 }

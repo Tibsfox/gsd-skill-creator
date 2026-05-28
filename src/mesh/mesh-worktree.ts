@@ -9,6 +9,7 @@
  */
 
 import { z } from 'zod';
+import { ensureProcessAllowed, type ProcessContext } from '../security/process-context.js';
 
 // ============================================================================
 // Pure function
@@ -129,9 +130,23 @@ export class MeshWorktreeManager {
 /**
  * Creates a MeshWorktreeManager with the given executor or a default
  * that shells out to real git via execSync.
+ *
+ * ProcessContext wire (v1.49.843): optional `ctx?: ProcessContext` is
+ * threaded into the default executor and `ensureProcessAllowed` runs
+ * before each execSync per #10433 internal-helper pattern. When `ctx`
+ * is undefined, permissive legacy behavior preserved. Injected
+ * executors are not wrapped — security is the caller's responsibility
+ * when injecting a custom executor.
  */
-export function createMeshWorktreeManager(gitExecutor?: GitExecutor): MeshWorktreeManager {
+export function createMeshWorktreeManager(
+  gitExecutor?: GitExecutor,
+  ctx?: ProcessContext,
+): MeshWorktreeManager {
   const defaultExecutor: GitExecutor = (cmd) => {
+    const tokens = cmd.trim().split(/\s+/);
+    const exe = tokens[0] ?? '';
+    const argv = tokens.slice(1);
+    ensureProcessAllowed(ctx, 'mesh/mesh-worktree', 'exec-sync', exe, argv);
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { execSync } = require('node:child_process');
     return execSync(cmd, { encoding: 'utf8' }) as string;
