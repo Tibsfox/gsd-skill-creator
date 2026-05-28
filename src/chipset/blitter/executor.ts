@@ -16,6 +16,10 @@ import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import type { OffloadOperation, OffloadResult } from './types.js';
 import { SignalBus, createCompletionSignal } from './signals.js';
+import {
+  ensureProcessAllowed,
+  type ProcessContext,
+} from '../../security/process-context.js';
 
 // Environment variables passed through to the spawned interpreter. Only
 // locale/runtime essentials are inherited from the parent process; offload
@@ -57,7 +61,10 @@ const INTERPRETERS: Record<string, string> = {
  * @param operation - The offload operation to execute
  * @returns Execution result with exit code, output, and timing
  */
-export async function executeOffloadOp(operation: OffloadOperation): Promise<OffloadResult> {
+export async function executeOffloadOp(
+  operation: OffloadOperation,
+  ctx?: ProcessContext,
+): Promise<OffloadResult> {
   const startTime = Date.now();
 
   // Reject the legacy 'custom' scriptType. It previously direct-executed
@@ -113,6 +120,18 @@ export async function executeOffloadOp(operation: OffloadOperation): Promise<Off
   }
 
   let timedOut = false;
+
+  // Security: hoisted check outside the Promise — ProcessContextDenied
+  // propagates to the caller via the async-function throw machinery.
+  // Wire v1.49.859 per Lesson #10427. The temp script file is cleaned up
+  // synchronously below in the failure branch so a denial doesn't leak
+  // the temp directory.
+  try {
+    ensureProcessAllowed(ctx, 'chipset/blitter/executor', 'spawn', interpreter, [scriptPath]);
+  } catch (denial) {
+    await rm(scriptDir, { recursive: true, force: true }).catch(() => {});
+    throw denial;
+  }
 
   return new Promise<OffloadResult>((resolve) => {
     const child = spawn(interpreter, [scriptPath], {
@@ -207,8 +226,8 @@ export class OffloadExecutor {
    * @param operation - The operation to execute
    * @returns Execution result
    */
-  async execute(operation: OffloadOperation): Promise<OffloadResult> {
-    const result = await executeOffloadOp(operation);
+  async execute(operation: OffloadOperation, ctx?: ProcessContext): Promise<OffloadResult> {
+    const result = await executeOffloadOp(operation, ctx);
 
     if (this.signalBus) {
       const signal = createCompletionSignal(result);

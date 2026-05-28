@@ -41,7 +41,12 @@ const SRC = resolve(__dirname, '..', '..', 'src');
 const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
   // aminet family wired at v1.49.819 batch chip (5 files: emulated-scanner,
   // emulator-launch, lha-extractor, lzx-extractor, tool-validator).
-  'src/chipset/blitter/executor.ts',
+  // src/chipset/blitter/executor.ts wired v1.49.859 — singleton chip.
+  // Optional ctx?: ProcessContext threaded through executeOffloadOp +
+  // OffloadExecutor.execute; ensureProcessAllowed hoisted OUTSIDE the
+  // Promise constructor with synchronous temp-dir cleanup on denial per
+  // #10427. Interpreter (bash/node/python3) + [scriptPath] argv exposed
+  // to the audit; spawned process inherits the security context contract.
   'src/chipset/harness-integrity.ts',
   'src/cli/commands/keystore.ts',
   'src/cli/commands/pic2html.ts',

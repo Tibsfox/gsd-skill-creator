@@ -11,6 +11,11 @@ import type { OffloadOperation } from './types.js';
 import { executeOffloadOp, OffloadExecutor } from './executor.js';
 import { SignalBus } from './signals.js';
 import type { CompletionSignal } from './types.js';
+import {
+  ProcessContextDenied,
+  CapturingProcessAuditSink,
+  type ProcessContext,
+} from '../../security/process-context.js';
 
 describe('executeOffloadOp', () => {
   let tempDir: string;
@@ -223,4 +228,75 @@ describe('OffloadExecutor', () => {
     expect(received).toHaveLength(1);
     expect(received[0].status).toBe('timeout');
   }, 10000);
+});
+
+describe('ProcessContext wire (v1.49.859)', () => {
+  let tempDir: string;
+
+  beforeEach(async () => {
+    tempDir = await mkdtemp(join(tmpdir(), 'offload-test-'));
+  });
+
+  afterEach(async () => {
+    await rm(tempDir, { recursive: true, force: true });
+  });
+
+  it('throws ProcessContextDenied when ctx denies the interpreter spawn', async () => {
+    // Security wire v1.49.859: hoisted ensureProcessAllowed throws BEFORE
+    // the spawn happens. The empty allowList rejects the bash interpreter;
+    // the rejection propagates through the async-function throw machinery.
+    const sink = new CapturingProcessAuditSink();
+    const restrictiveCtx: ProcessContext = { allowList: [], audit: sink };
+    const operation: OffloadOperation = {
+      id: 'test:denied',
+      script: 'echo never-runs',
+      scriptType: 'bash',
+      workingDir: tempDir,
+      timeout: 5000,
+      env: {},
+    };
+    await expect(executeOffloadOp(operation, restrictiveCtx)).rejects.toThrow(
+      ProcessContextDenied,
+    );
+    expect(sink.records).toHaveLength(1);
+    expect(sink.records[0]?.target).toBe('bash');
+    expect(sink.records[0]?.allowed).toBe(false);
+  });
+
+  it('executes when ctx allows the interpreter', async () => {
+    const sink = new CapturingProcessAuditSink();
+    const permissiveCtx: ProcessContext = { allowList: ['bash'], audit: sink };
+    const operation: OffloadOperation = {
+      id: 'test:allowed',
+      script: '#!/bin/bash\necho ok',
+      scriptType: 'bash',
+      workingDir: tempDir,
+      timeout: 5000,
+      env: {},
+    };
+    const result = await executeOffloadOp(operation, permissiveCtx);
+    expect(result.exitCode).toBe(0);
+    expect(result.stdout.trim()).toBe('ok');
+    expect(sink.records).toHaveLength(1);
+    expect(sink.records[0]?.allowed).toBe(true);
+  });
+
+  it('propagates ProcessContextDenied through OffloadExecutor.execute', async () => {
+    const executor = new OffloadExecutor();
+    const sink = new CapturingProcessAuditSink();
+    const restrictiveCtx: ProcessContext = { allowList: [], audit: sink };
+    const operation: OffloadOperation = {
+      id: 'test:wrapper-denied',
+      script: 'echo never-runs',
+      scriptType: 'bash',
+      workingDir: tempDir,
+      timeout: 5000,
+      env: {},
+    };
+    await expect(executor.execute(operation, restrictiveCtx)).rejects.toThrow(
+      ProcessContextDenied,
+    );
+    expect(sink.records).toHaveLength(1);
+    expect(sink.records[0]?.allowed).toBe(false);
+  });
 });
