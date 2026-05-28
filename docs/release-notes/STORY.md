@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.872`.
+The story begins at `v1.0` and continues to `v1.49.873`.
 
-**915 chapters.** 914 have retrospectives.
+**916 chapters.** 915 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -923,3 +923,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.870](v1.49.870/00-summary.md)** — ProcessContext singleton chip: `src/learning/version-manager.ts` (Track 4 chip #1) · 2026-05-28
 - **[v1.49.871](v1.49.871/00-summary.md)** — ProcessContext singleton chip: `src/git/workflows/contribute.ts` (Track 4 chip #2) · 2026-05-28
 - **[v1.49.872](v1.49.872/00-summary.md)** — ProcessContext singleton chip: `src/cli/commands/pic2html.ts` (Track 4 chip #3) · 2026-05-28
+- **[v1.49.873](v1.49.873/00-summary.md)** — ProcessContext singleton chip: `src/git/gates/pre-flight.ts` (Track 4 chip #4) · 2026-05-28

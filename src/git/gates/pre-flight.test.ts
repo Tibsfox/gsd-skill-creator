@@ -20,6 +20,11 @@ vi.mock('node:fs', () => ({
 // Import after mocks are set up
 import { preFlightMerge, preFlightPR } from './pre-flight.js';
 import type { PreFlightResult, PreFlightCheck, CommitEntry } from './pre-flight.js';
+import {
+  type ProcessContext,
+  ProcessContextDenied,
+  NULL_PROCESS_AUDIT_SINK,
+} from '../../security/process-context.js';
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -346,5 +351,58 @@ describe('preFlightPR', () => {
     // Not blocking
     const blockers = result.checks.filter((c: PreFlightCheck) => c.level === 'BLOCKING' && !c.passed);
     expect(blockers).toHaveLength(0);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// ProcessContext wire (v1.49.873 — Track 4 chip #4; module-internal-helper)
+// ---------------------------------------------------------------------------
+
+describe('pre-flight ProcessContext wire (v1.49.873)', () => {
+  beforeEach(() => {
+    mockExecSync.mockReset();
+    setupCleanRepo();
+  });
+
+  it('preFlightMerge: default (undefined ctx) preserves legacy permissive behavior', async () => {
+    const result = await preFlightMerge('/repo');
+    expect(result).toBeDefined();
+    expect(result.checks.length).toBeGreaterThan(0);
+  });
+
+  it('preFlightMerge: ctx audit sink records every exec invocation', async () => {
+    const events: Array<{ source: string; target: string }> = [];
+    const ctx: ProcessContext = {
+      allowList: ['sh'],
+      audit: {
+        record: (e) => events.push({ source: e.source, target: e.target }),
+      },
+    };
+    await preFlightMerge('/repo', ctx);
+    expect(events.length).toBeGreaterThan(0);
+    for (const ev of events) {
+      expect(ev.source).toBe('git/gates/pre-flight');
+      expect(ev.target).toBe('sh');
+    }
+  });
+
+  it('preFlightMerge: throws ProcessContextDenied when ctx denies sh exec', async () => {
+    const ctx: ProcessContext = {
+      allowList: [], // deny all
+      audit: NULL_PROCESS_AUDIT_SINK,
+    };
+    await expect(preFlightMerge('/repo', ctx)).rejects.toBeInstanceOf(
+      ProcessContextDenied,
+    );
+  });
+
+  it('preFlightPR: throws ProcessContextDenied when ctx denies sh exec', async () => {
+    const ctx: ProcessContext = {
+      allowList: [],
+      audit: NULL_PROCESS_AUDIT_SINK,
+    };
+    await expect(preFlightPR('/repo', ctx)).rejects.toBeInstanceOf(
+      ProcessContextDenied,
+    );
   });
 });
