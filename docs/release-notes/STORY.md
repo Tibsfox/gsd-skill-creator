@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.852`.
+The story begins at `v1.0` and continues to `v1.49.853`.
 
-**895 chapters.** 894 have retrospectives.
+**896 chapters.** 895 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -903,3 +903,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.850](v1.49.850/00-summary.md)** — ProcessContext singleton chip: `src/orchestrator/extension/extension-detector.ts` (KNOWN_UNWIRED Process 15→14) · 2026-05-28
 - **[v1.49.851](v1.49.851/00-summary.md)** — ProcessContext singleton chip: `src/skill/version-backfill.ts` (KNOWN_UNWIRED Process 14→13) · 2026-05-28
 - **[v1.49.852](v1.49.852/00-summary.md)** — Stale-import cleanup: `src/scan-arxiv/bridge.ts` (KNOWN_UNWIRED Process 13→12) · 2026-05-28
+- **[v1.49.853](v1.49.853/00-summary.md)** — ProcessContext singleton chip: `src/dashboard/collectors/git-collector.ts` (KNOWN_UNWIRED Process 12→11; closes chip-cluster) · 2026-05-28

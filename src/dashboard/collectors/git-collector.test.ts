@@ -1,5 +1,10 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import type { GitCommitMetric } from './types.js';
+import {
+  CapturingProcessAuditSink,
+  ProcessContextDenied,
+  type ProcessContext,
+} from '../../security/process-context.js';
 
 // ---------------------------------------------------------------------------
 // Mock child_process before importing the module under test
@@ -320,5 +325,35 @@ describe('collectGitMetrics', () => {
     expect(result.commits).toHaveLength(1);
     expect(result.commits[0].phase).toBe(94);
     expect(result.totalCommits).toBe(1);
+  });
+
+  describe('ProcessContext wire (v1.49.853)', () => {
+    it('propagates ProcessContextDenied when git is not in the allowList', async () => {
+      const sink = new CapturingProcessAuditSink();
+      const restrictiveCtx: ProcessContext = { allowList: [], audit: sink };
+      await expect(collectGitMetrics({}, restrictiveCtx)).rejects.toThrow(
+        ProcessContextDenied,
+      );
+      expect(sink.records).toHaveLength(1);
+      expect(sink.records[0]?.target).toBe('git');
+      expect(sink.records[0]?.allowed).toBe(false);
+    });
+
+    it('emits an allowed audit record when ctx permits git', async () => {
+      mockExecFile.mockResolvedValue({ stdout: '', stderr: '' });
+      const sink = new CapturingProcessAuditSink();
+      const permissiveCtx: ProcessContext = { allowList: ['git'], audit: sink };
+      const result = await collectGitMetrics({}, permissiveCtx);
+      expect(result.commits).toEqual([]);
+      expect(sink.records).toHaveLength(1);
+      expect(sink.records[0]?.allowed).toBe(true);
+      expect(sink.records[0]?.target).toBe('git');
+    });
+
+    it('preserves backward-compat: legacy (no-ctx) calls still work', async () => {
+      mockExecFile.mockResolvedValue({ stdout: '', stderr: '' });
+      const result = await collectGitMetrics({});
+      expect(result.totalCommits).toBe(0);
+    });
   });
 });

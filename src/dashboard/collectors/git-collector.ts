@@ -9,6 +9,10 @@
 
 import { execFile } from 'child_process';
 import { promisify } from 'util';
+import {
+  ensureProcessAllowed,
+  type ProcessContext,
+} from '../../security/process-context.js';
 import type {
   GitCommitMetric,
   GitCollectorResult,
@@ -177,6 +181,7 @@ function computeTimeRange(
  */
 export async function collectGitMetrics(
   options: GitCollectorOptions = {},
+  ctx?: ProcessContext,
 ): Promise<GitCollectorResult> {
   const { maxCommits = 500, since, phase, cwd } = options;
 
@@ -191,6 +196,11 @@ export async function collectGitMetrics(
   if (since) {
     args.push(`--since=${since}`);
   }
+
+  // Security: hoisted ensureProcessAllowed propagates ProcessContextDenied
+  // even though the try below swallows all git failures into an empty result
+  // per the fault-tolerant contract. Wire v1.49.853 per Lesson #10427.
+  ensureProcessAllowed(ctx, 'dashboard/collectors/git-collector', 'exec-file', 'git', args);
 
   try {
     const { stdout } = await execFileAsync('git', args, {

@@ -50,7 +50,12 @@ const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
   // ctx?: ProcessContext threaded through handleStart; ensureProcessAllowed
   // called before spawn; ProcessContextDenied re-thrown from the swallow-
   // everything CLI catch per #10427.
-  'src/dashboard/collectors/git-collector.ts',
+  // src/dashboard/collectors/git-collector.ts wired v1.49.853 — singleton chip.
+  // Optional ctx?: ProcessContext threaded through collectGitMetrics as a
+  // second positional parameter (after options); ensureProcessAllowed hoisted
+  // OUTSIDE the fault-tolerant try/catch per #10427. Forensic accessory
+  // semantics preserved (not-a-repo / git-unavailable continues to return
+  // empty result silently); ProcessContextDenied propagates.
   // dogfood family fully wired at v1.49.827 batch chip (extractor + pydmd
   // install/health-check + install/venv-manager) — all 3 use internal-helper
   // or hoisted-check pattern per #10433; wire cost ~14-26 LOC each.
