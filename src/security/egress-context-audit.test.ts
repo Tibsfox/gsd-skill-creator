@@ -45,7 +45,12 @@ const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
   // hoisted OUTSIDE the fault-tolerant try/catch per #10427. Forensic
   // accessory semantics preserved (not-OK / parse / network errors continue
   // to return [] silently); EgressContextDenied propagates.
-  'src/alternative-discoverer/fork-finder.ts',
+  // src/alternative-discoverer/fork-finder.ts wired v1.49.867 — fifth and
+  // final Egress chip of Track 3 (closes the campaign). ctx?: EgressContext
+  // threaded through findForks + ForkFinder.find; ensureEgressAllowed hoisted
+  // at TWO sites (forks-list fetch + per-fork releases fetch inside
+  // Promise.all). Forensic accessory semantics preserved (all errors return
+  // []); EgressContextDenied propagates per #10427.
   'src/aminet/index-fetcher.ts',
   // src/aminet/index-freshness.ts wired v1.49.865 — third Egress chip.
   // ctx?: EgressContext threaded through fetchRecent; ensureEgressAllowed

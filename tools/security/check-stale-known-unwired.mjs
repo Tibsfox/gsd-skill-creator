@@ -68,8 +68,12 @@ const AUDITS = [
 /** Extract KNOWN_UNWIRED entries from an audit-test source file via regex. */
 function extractKnownUnwired(auditPath) {
   const content = readFileSync(auditPath, 'utf8');
+  // Hardened regex: require the closing `]);` to be at the start of a line
+  // (after optional whitespace). Non-greedy match across `[]` substrings
+  // inside comments (v867 surfaced this — "all errors return [])" inside a
+  // comment used to trip the prior `]\s*\)` terminator).
   const setMatch = content.match(
-    /const\s+KNOWN_UNWIRED\s*:\s*ReadonlySet<string>\s*=\s*new\s+Set\s*\(\s*\[([\s\S]*?)\]\s*\)/,
+    /const\s+KNOWN_UNWIRED\s*:\s*ReadonlySet<string>\s*=\s*new\s+Set\s*\(\s*\[([\s\S]*?)^\s*\]\s*\)/m,
   );
   if (!setMatch) return [];
   return [...setMatch[1].matchAll(/'([^']+\.ts)'/g)].map((m) => m[1]);

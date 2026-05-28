@@ -8,6 +8,10 @@
 
 import type { DependencyRecord } from '../dependency-auditor/types.js';
 import type { AlternativeReport } from './types.js';
+import {
+  ensureEgressAllowed,
+  type EgressContext,
+} from '../security/egress-context.js';
 
 // ─── GitHub URL extraction ────────────────────────────────────────────────────
 
@@ -71,6 +75,7 @@ const DAYS_365_MS = 365 * 24 * 60 * 60 * 1000;
 export async function findForks(
   dep: DependencyRecord,
   registryMeta: Record<string, unknown>,
+  ctx?: EgressContext,
 ): Promise<AlternativeReport[]> {
   const ghRepo = extractGitHubRepo(registryMeta);
   if (!ghRepo) return [];
@@ -78,12 +83,17 @@ export async function findForks(
   const { owner, repo } = ghRepo;
 
   // Fetch forks list
+  const forksUrl = `https://api.github.com/repos/${owner}/${repo}/forks?sort=stargazers&per_page=10`;
+
+  // Security: hoisted check outside the try — EgressContextDenied propagates
+  // while not-OK / parse / network errors continue to return [] silently.
+  // Wire v1.49.867 per Lesson #10427. Two fetch sites total (this list +
+  // per-fork releases); the second hoist sits inside Promise.all below.
+  ensureEgressAllowed(ctx, 'alternative-discoverer/fork-finder', 'fetch', forksUrl);
+
   let forks: GitHubFork[];
   try {
-    const res = await fetch(
-      `https://api.github.com/repos/${owner}/${repo}/forks?sort=stargazers&per_page=10`,
-      { headers: GITHUB_API_HEADERS },
-    );
+    const res = await fetch(forksUrl, { headers: GITHUB_API_HEADERS });
     if (!res.ok) return [];
     forks = (await res.json()) as GitHubFork[];
   } catch {
@@ -97,12 +107,13 @@ export async function findForks(
 
   await Promise.all(
     forks.map(async (fork) => {
+      const releasesUrl = `https://api.github.com/repos/${fork.owner.login}/${fork.name}/releases?per_page=1`;
+      // Security: hoisted check outside the try — same pattern as the forks
+      // fetch above. Wire v1.49.867 per Lesson #10427.
+      ensureEgressAllowed(ctx, 'alternative-discoverer/fork-finder', 'fetch', releasesUrl);
       let releases: GitHubRelease[];
       try {
-        const res = await fetch(
-          `https://api.github.com/repos/${fork.owner.login}/${fork.name}/releases?per_page=1`,
-          { headers: GITHUB_API_HEADERS },
-        );
+        const res = await fetch(releasesUrl, { headers: GITHUB_API_HEADERS });
         if (!res.ok) return;
         releases = (await res.json()) as GitHubRelease[];
       } catch {
@@ -145,7 +156,11 @@ export async function findForks(
 
 /** Class wrapper for findForks, providing a stateful API surface. */
 export class ForkFinder {
-  find(dep: DependencyRecord, meta: Record<string, unknown>): Promise<AlternativeReport[]> {
-    return findForks(dep, meta);
+  find(
+    dep: DependencyRecord,
+    meta: Record<string, unknown>,
+    ctx?: EgressContext,
+  ): Promise<AlternativeReport[]> {
+    return findForks(dep, meta, ctx);
   }
 }

@@ -169,4 +169,38 @@ describe('findForks', () => {
     const results = await finder.find(dep, meta);
     expect(results).toEqual([]);
   });
+
+  describe('EgressContext wire (v1.49.867)', () => {
+    it('throws EgressContextDenied when ctx denies the GitHub API URL', async () => {
+      const { EgressContextDenied, CapturingEgressAuditSink } = await import(
+        '../security/egress-context.js'
+      );
+      const sink = new CapturingEgressAuditSink();
+      const restrictiveCtx = { allowList: [], audit: sink };
+      const dep = makeDep('old-pkg');
+      const meta = makeMeta({
+        repository: 'https://github.com/owner/repo',
+      });
+      await expect(findForks(dep, meta, restrictiveCtx)).rejects.toThrow(
+        EgressContextDenied,
+      );
+      expect(sink.records).toHaveLength(1);
+      expect(sink.records[0]?.target).toContain('api.github.com');
+      expect(sink.records[0]?.target).toContain('/forks');
+      expect(sink.records[0]?.allowed).toBe(false);
+    });
+
+    it('returns [] for non-GitHub deps WITHOUT invoking ensureEgressAllowed', async () => {
+      const { CapturingEgressAuditSink } = await import(
+        '../security/egress-context.js'
+      );
+      const sink = new CapturingEgressAuditSink();
+      const ctx = { allowList: [], audit: sink };
+      const dep = makeDep('old-pkg');
+      const meta = {}; // no repository → extractGitHubRepo returns null
+      const results = await findForks(dep, meta, ctx);
+      expect(results).toEqual([]);
+      expect(sink.records).toHaveLength(0);
+    });
+  });
 });
