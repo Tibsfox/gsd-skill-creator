@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.868`.
+The story begins at `v1.0` and continues to `v1.49.869`.
 
-**911 chapters.** 910 have retrospectives.
+**912 chapters.** 911 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -919,3 +919,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.866](v1.49.866/00-summary.md)** — EgressContext singleton chip: `src/site/deploy.ts` · 2026-05-28
 - **[v1.49.867](v1.49.867/00-summary.md)** — EgressContext singleton chip: `src/alternative-discoverer/fork-finder.ts` (Track 3 close) · 2026-05-28
 - **[v1.49.868](v1.49.868/00-summary.md)** — Codification Ship: Promote #10444 (Size-Ascending Chip-Pick Reveals Wire-Shape Diversity) + Refine #10443 (Continuous-Verification Mode) · 2026-05-28
+- **[v1.49.869](v1.49.869/00-summary.md)** — Pre-tag-gate Integration: Cross-Audit Tool as Step 18/18 (Deterministic Gate) · 2026-05-28

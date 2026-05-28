@@ -844,5 +844,35 @@ else
   fi
 fi
 
-log "[pre-tag-gate] all 17 checks PASS — safe to \`git tag\` and merge to main"
+# ----- step 18/18: KNOWN_UNWIRED stale-entry cross-audit (v1.49.869) -----
+# Runs tools/security/check-stale-known-unwired.mjs against the
+# ProcessContext + EgressContext audit-test files. Detects two stale-
+# entry shapes (Shape A — wired-but-still-in-allowlist; Shape B —
+# import-without-use). Promotes the v1.49.858-867 operator-invoked
+# continuous-verification discipline (codified at v868 as refinement of
+# Lesson #10443) to a deterministic gate. The v857 tool's first
+# real-world bug surfaced at v867 (vacuous-true parser); the same gate
+# would have caught any wire-shape comment colliding with the regex
+# extractor in continuous operation.
+#
+# BLOCKER by default — set SC_PRE_TAG_GATE_BYPASS=stale-known-unwired
+# to override (emergency only — fix the stale entry instead).
+if gate_bypassed "stale-known-unwired"; then
+  log "[pre-tag-gate] step 18/18: SKIPPED"
+else
+  log "[pre-tag-gate] step 18/18: KNOWN_UNWIRED stale-entry cross-audit"
+  STALE_OUTPUT="$(node "$REPO_ROOT/tools/security/check-stale-known-unwired.mjs" 2>&1)"
+  STALE_EXIT=$?
+  if [ "$STALE_EXIT" -ne 0 ]; then
+    echo "[pre-tag-gate] FAIL: KNOWN_UNWIRED stale entries detected" >&2
+    echo "$STALE_OUTPUT" | head -30 >&2
+    echo "[pre-tag-gate]   Diagnose: node tools/security/check-stale-known-unwired.mjs" >&2
+    echo "[pre-tag-gate]   Fix: remove the stale entry from the named audit-test's KNOWN_UNWIRED set" >&2
+    echo "[pre-tag-gate]   Bypass: SC_PRE_TAG_GATE_BYPASS=stale-known-unwired (emergency only)" >&2
+    exit 20
+  fi
+  log "[pre-tag-gate] step 18/18: PASS (no stale KNOWN_UNWIRED entries)"
+fi
+
+log "[pre-tag-gate] all 18 checks PASS — safe to \`git tag\` and merge to main"
 exit 0
