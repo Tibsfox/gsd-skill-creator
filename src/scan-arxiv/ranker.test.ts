@@ -592,3 +592,56 @@ describe('createRanker — cache and pre-rank behaviour', () => {
     }
   });
 });
+
+describe('buildCliJudge — ProcessContext wire (v1.49.862)', () => {
+  it('throws ProcessContextDenied when ctx denies the claude binary spawn', async () => {
+    const { buildCliJudge } = await import('./ranker.js');
+    const { ProcessContextDenied, CapturingProcessAuditSink } = await import(
+      '../security/process-context.js'
+    );
+    const sink = new CapturingProcessAuditSink();
+    const restrictiveCtx = { allowList: [], audit: sink };
+    const judgeFn = buildCliJudge('claude-haiku-4-5-20251001', 0.20, restrictiveCtx);
+    const paper: ArxivPaper = {
+      arxivId: '2026.0001',
+      title: 'test',
+      abstract: 'test abstract',
+      authors: ['a'],
+      categories: ['cs.AI'],
+      publishedAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      pdfUrl: 'https://arxiv.org/pdf/test.pdf',
+      absUrl: 'https://arxiv.org/abs/test',
+    };
+    await expect(judgeFn(paper)).rejects.toThrow(ProcessContextDenied);
+    expect(sink.records).toHaveLength(1);
+    expect(sink.records[0]?.target).toBe('claude');
+    expect(sink.records[0]?.allowed).toBe(false);
+  });
+
+  it('exposes the spawn argv to the audit sink', async () => {
+    const { buildCliJudge } = await import('./ranker.js');
+    const { ProcessContextDenied, CapturingProcessAuditSink } = await import(
+      '../security/process-context.js'
+    );
+    const sink = new CapturingProcessAuditSink();
+    const restrictiveCtx = { allowList: [], audit: sink };
+    const judgeFn = buildCliJudge('claude-opus-4-7', 0.50, restrictiveCtx);
+    const paper: ArxivPaper = {
+      arxivId: '2026.0002',
+      title: 'test',
+      abstract: 'test abstract',
+      authors: ['a'],
+      categories: ['cs.AI'],
+      publishedAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      pdfUrl: 'https://arxiv.org/pdf/test.pdf',
+      absUrl: 'https://arxiv.org/abs/test',
+    };
+    await expect(judgeFn(paper)).rejects.toThrow(ProcessContextDenied);
+    expect(sink.records[0]?.argv).toContain('--model');
+    expect(sink.records[0]?.argv).toContain('claude-opus-4-7');
+    expect(sink.records[0]?.argv).toContain('--max-budget-usd');
+    expect(sink.records[0]?.argv).toContain('0.5');
+  });
+});

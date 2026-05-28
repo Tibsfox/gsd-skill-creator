@@ -28,6 +28,10 @@ import { promises as fs } from 'node:fs';
 import * as path from 'node:path';
 import * as os from 'node:os';
 import { spawn } from 'node:child_process';
+import {
+  ensureProcessAllowed,
+  type ProcessContext,
+} from '../security/process-context.js';
 import type {
   ArxivPaper,
   Ranker,
@@ -149,6 +153,8 @@ export interface RankerOptions {
   embedder?: TextEmbedder;
   /** Injected LLM judge (testing). */
   judge?: JudgeFn;
+  /** Security context for child-process spawns (CLI backend). */
+  ctx?: ProcessContext;
 }
 
 // === Utilities ===
@@ -223,7 +229,11 @@ function buildSdkJudge(model: string, temperature: number): JudgeFn {
  * session instead. Runs from os.tmpdir() so the CLI does not auto-discover
  * the host repo's CLAUDE.md/hooks (which would inflate per-call token cost).
  */
-export function buildCliJudge(model: string, maxBudgetUsd: number): JudgeFn {
+export function buildCliJudge(
+  model: string,
+  maxBudgetUsd: number,
+  ctx?: ProcessContext,
+): JudgeFn {
   return async (paper: ArxivPaper) => {
     const prompt = buildJudgePrompt(paper);
     const args = [
@@ -234,6 +244,10 @@ export function buildCliJudge(model: string, maxBudgetUsd: number): JudgeFn {
       '--exclude-dynamic-system-prompt-sections',
       '--max-budget-usd', String(maxBudgetUsd),
     ];
+    // Security: hoisted check outside the Promise — synchronous throw of
+    // ProcessContextDenied propagates through the JudgeFn caller's await
+    // back to rankBatch. Wire v1.49.862 per Lesson #10427.
+    ensureProcessAllowed(ctx, 'scan-arxiv/ranker', 'spawn', 'claude', args);
     const { stdout, stderr, code } = await new Promise<{
       stdout: string;
       stderr: string;
@@ -280,6 +294,7 @@ function buildDefaultJudge(
   temperature: number,
   backend: JudgeBackend,
   cliMaxBudgetUsd: number,
+  ctx?: ProcessContext,
 ): JudgeFn {
   // 'embedding-only' short-circuits inside rankBatch before any judge call;
   // the function returned here is a guard that throws if rankBatch ever
@@ -297,7 +312,7 @@ function buildDefaultJudge(
       : backend;
   return resolved === 'sdk'
     ? buildSdkJudge(model, temperature)
-    : buildCliJudge(model, cliMaxBudgetUsd);
+    : buildCliJudge(model, cliMaxBudgetUsd, ctx);
 }
 
 /**
@@ -460,10 +475,11 @@ export function createRanker(opts: RankerOptions = {}): Ranker {
     weights = DEFAULT_DOMAIN_WEIGHTS,
     embedder = buildDefaultEmbedder(),
     judge,
+    ctx,
   } = opts;
 
   const judgeFn: JudgeFn =
-    judge ?? buildDefaultJudge(llmJudgeModel, temperature, judgeBackend, cliMaxBudgetUsd);
+    judge ?? buildDefaultJudge(llmJudgeModel, temperature, judgeBackend, cliMaxBudgetUsd, ctx);
   const cache = createCacheStore(cacheDir, noCache);
   // noCache=true implies a fully uncached call, so it suppresses the
   // embedding cache too. noEmbeddingCache is the surgical opt-out.
