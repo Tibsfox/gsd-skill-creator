@@ -127,7 +127,18 @@ const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
   // spawnSync; ProcessContextDenied propagates naturally (no swallowing
   // catch around the spawn). The helper-internal hoist is preferred over
   // per-call-site hoist when N>1 call sites share the helper (DRY).
-  'src/learn/acquirer.ts',
+  // src/learn/acquirer.ts wired v1.49.874 — Track 4 chip #5 (509 LOC
+  // pre-wire). New safeExecFile() module-internal helper (#10433) wraps
+  // ensureProcessAllowed + execFileSync. ctx?: ProcessContext threaded
+  // through acquireSource (3rd param) + 6 internal helpers
+  // (acquireLocalFile + acquireArchive + acquireGitHub + acquireUrl +
+  // extractPdfText + extractDocxText + extractEpubText). 9 spawn sites
+  // refactored from execFileSync to safeExecFile. Each spawn records
+  // op='exec-file' + target=<actual binary: unzip/tar/git/curl/
+  // pdftotext> + actual argv — better security visibility than the
+  // shell-exec target='sh' pattern from v870-v873. ProcessContextDenied
+  // re-thrown from 3 result-wrapping catches (pdftotext fallback, docx
+  // extraction, epub extraction) per #10427.
   // src/learning/version-manager.ts wired v1.49.870 — Track 4 chip #1
   // (smallest LOC of remaining 6 KNOWN_UNWIRED Process entries: 177 LOC).
   // ctx?: ProcessContext threaded through constructor (third param after

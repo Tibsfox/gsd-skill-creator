@@ -18,6 +18,11 @@ import {
   type SourceType,
   type StagedContent,
 } from './acquirer.js';
+import {
+  type ProcessContext,
+  ProcessContextDenied,
+  NULL_PROCESS_AUDIT_SINK,
+} from '../security/process-context.js';
 
 let tmpDir: string;
 
@@ -290,5 +295,53 @@ describe('staging area', () => {
 
     expect(result.stagingDir).toBe(customDir);
     expect(fs.existsSync(customDir)).toBe(true);
+  });
+
+  // ========================================================================
+  // ProcessContext wire (v1.49.874 — Track 4 chip #5; module-internal-helper)
+  // ========================================================================
+  describe('ProcessContext wire (v1.49.874)', () => {
+    it('default (undefined ctx) preserves legacy permissive behavior on local file', async () => {
+      const mdPath = path.join(tmpDir, 'default-ctx.md');
+      fs.writeFileSync(mdPath, '# Default ctx test');
+      const result = await acquireSource(mdPath, { stagingDir: path.join(tmpDir, '.staging') });
+      expect(result.source.type).toBe('local-file');
+      expect(result.staged.length).toBe(1);
+    });
+
+    it('throws ProcessContextDenied when ctx denies execFile on an archive', async () => {
+      const ctx: ProcessContext = {
+        allowList: [], // deny all execFile
+        audit: NULL_PROCESS_AUDIT_SINK,
+      };
+      // Create a fake .zip to trigger acquireArchive's unzip spawn
+      const zipPath = path.join(tmpDir, 'fake.zip');
+      fs.writeFileSync(zipPath, Buffer.from([0x50, 0x4b, 0x03, 0x04]));
+
+      await expect(
+        acquireSource(zipPath, { stagingDir: path.join(tmpDir, '.staging') }, ctx),
+      ).rejects.toBeInstanceOf(ProcessContextDenied);
+    });
+
+    it('records audit event with target=unzip when extracting a .docx via permissive ctx', async () => {
+      const events: Array<{ source: string; target: string }> = [];
+      const ctx: ProcessContext = {
+        allowList: ['unzip', 'tar', 'pdftotext', 'git', 'curl'],
+        audit: {
+          record: (e) => events.push({ source: e.source, target: e.target }),
+        },
+      };
+      // Fake .docx — won't actually extract content, but the wire fires
+      // before the spawn fails.
+      const docxPath = path.join(tmpDir, 'fake.docx');
+      fs.writeFileSync(docxPath, Buffer.from([0x50, 0x4b, 0x03, 0x04]));
+
+      await acquireSource(docxPath, { stagingDir: path.join(tmpDir, '.staging') }, ctx);
+
+      expect(events.length).toBeGreaterThan(0);
+      // First event from unzip spawn (extractDocxText)
+      expect(events[0].source).toBe('learn/acquirer');
+      expect(events[0].target).toBe('unzip');
+    });
   });
 });

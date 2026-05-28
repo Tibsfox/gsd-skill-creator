@@ -8,7 +8,26 @@
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import * as os from 'node:os';
-import { execFileSync } from 'node:child_process';
+import { execFileSync, type ExecFileSyncOptions } from 'node:child_process';
+import {
+  ensureProcessAllowed,
+  ProcessContextDenied,
+  type ProcessContext,
+} from '../security/process-context.js';
+
+// Module-internal helper: hoists ensureProcessAllowed at the single helper
+// site (#10433). All 9 spawn sites in this module route through here so
+// the security check is DRY. The execFileSync result is returned as a
+// string when encoding is supplied; tests rely on this contract.
+function safeExecFile(
+  ctx: ProcessContext | undefined,
+  command: string,
+  args: readonly string[],
+  opts: ExecFileSyncOptions = {},
+): string | Buffer {
+  ensureProcessAllowed(ctx, 'learn/acquirer', 'exec-file', command, args);
+  return execFileSync(command, args as string[], opts);
+}
 
 // === Types ===
 
@@ -94,7 +113,11 @@ export function detectSourceType(input: string): { type: SourceType; familiarity
 
 // === Main Entry Point ===
 
-export async function acquireSource(input: string, options?: AcquireOptions): Promise<AcquisitionResult> {
+export async function acquireSource(
+  input: string,
+  options?: AcquireOptions,
+  ctx?: ProcessContext,
+): Promise<AcquisitionResult> {
   const detected = detectSourceType(input);
   const stagingDir = options?.stagingDir ?? path.join(process.cwd(), '.learn-staging');
   const maxFileSize = options?.maxFileSize ?? DEFAULT_MAX_FILE_SIZE;
@@ -115,16 +138,16 @@ export async function acquireSource(input: string, options?: AcquireOptions): Pr
 
   switch (detected.type) {
     case 'local-file':
-      staged = [await acquireLocalFile(input, stagingDir, maxFileSize)];
+      staged = [await acquireLocalFile(input, stagingDir, maxFileSize, ctx)];
       break;
     case 'archive':
-      staged = await acquireArchive(input, stagingDir, maxFileSize, maxTotalSize, errors);
+      staged = await acquireArchive(input, stagingDir, maxFileSize, maxTotalSize, errors, ctx);
       break;
     case 'github-url':
-      staged = await acquireGitHub(input, stagingDir, githubScope, maxFileSize, errors);
+      staged = await acquireGitHub(input, stagingDir, githubScope, maxFileSize, errors, ctx);
       break;
     case 'url':
-      staged = [await acquireUrl(input, stagingDir, maxFileSize, timeout)];
+      staged = [await acquireUrl(input, stagingDir, maxFileSize, timeout, ctx)];
       break;
   }
 
@@ -143,6 +166,7 @@ async function acquireLocalFile(
   filePath: string,
   stagingDir: string,
   maxFileSize: number,
+  ctx?: ProcessContext,
 ): Promise<StagedContent> {
   if (!fs.existsSync(filePath)) {
     throw new Error(`Source not found: ${filePath}`);
@@ -163,13 +187,13 @@ async function acquireLocalFile(
       content = fs.readFileSync(filePath, 'utf-8');
       break;
     case '.pdf':
-      content = extractPdfText(filePath);
+      content = extractPdfText(filePath, ctx);
       break;
     case '.docx':
-      content = extractDocxText(filePath);
+      content = extractDocxText(filePath, ctx);
       break;
     case '.epub':
-      content = extractEpubText(filePath);
+      content = extractEpubText(filePath, ctx);
       break;
     default:
       content = fs.readFileSync(filePath, 'utf-8');
@@ -197,6 +221,7 @@ async function acquireArchive(
   maxFileSize: number,
   maxTotalSize: number,
   errors: AcquisitionError[],
+  ctx?: ProcessContext,
 ): Promise<StagedContent[]> {
   const stat = fs.statSync(archivePath);
   if (stat.size > maxTotalSize) {
@@ -208,7 +233,7 @@ async function acquireArchive(
 
   if (isZip) {
     // List zip contents
-    const listOutput = execFileSync('unzip', ['-l', archivePath], { encoding: 'utf-8' });
+    const listOutput = safeExecFile(ctx, 'unzip', ['-l', archivePath], { encoding: 'utf-8' }) as string;
     const lines = listOutput.split('\n');
     const files: string[] = [];
 
@@ -229,7 +254,7 @@ async function acquireArchive(
       }
 
       try {
-        const content = execFileSync('unzip', ['-p', archivePath, file], { encoding: 'utf-8' });
+        const content = safeExecFile(ctx, 'unzip', ['-p', archivePath, file], { encoding: 'utf-8' }) as string;
         const basename = path.basename(file, ext);
         const stagedFilename = `${basename}.staged.txt`;
         const stagedPath = path.join(stagingDir, stagedFilename);
@@ -248,7 +273,7 @@ async function acquireArchive(
     }
   } else {
     // tar.gz / tgz
-    const listOutput = execFileSync('tar', ['-tzf', archivePath], { encoding: 'utf-8' });
+    const listOutput = safeExecFile(ctx, 'tar', ['-tzf', archivePath], { encoding: 'utf-8' }) as string;
     const files = listOutput.split('\n').filter(f => f.trim() && !f.endsWith('/'));
 
     for (const file of files) {
@@ -259,7 +284,7 @@ async function acquireArchive(
       }
 
       try {
-        const content = execFileSync('tar', ['-xzf', archivePath, '-O', file], { encoding: 'utf-8' });
+        const content = safeExecFile(ctx, 'tar', ['-xzf', archivePath, '-O', file], { encoding: 'utf-8' }) as string;
         const basename = path.basename(file, ext);
         const stagedFilename = `${basename}.staged.txt`;
         const stagedPath = path.join(stagingDir, stagedFilename);
@@ -289,11 +314,13 @@ async function acquireGitHub(
   scope: string[],
   maxFileSize: number,
   errors: AcquisitionError[],
+  ctx?: ProcessContext,
 ): Promise<StagedContent[]> {
   const tempCloneDir = path.join(os.tmpdir(), `learn-github-${Date.now()}`);
 
   try {
-    execFileSync(
+    safeExecFile(
+      ctx,
       'git',
       ['clone', '--depth', '1', '--single-branch', url, tempCloneDir],
       { stdio: 'pipe', timeout: 60_000 },
@@ -323,7 +350,7 @@ async function acquireGitHub(
       }
 
       try {
-        const result = await acquireLocalFile(file, stagingDir, maxFileSize);
+        const result = await acquireLocalFile(file, stagingDir, maxFileSize, ctx);
         staged.push(result);
       } catch (err) {
         errors.push({ file: relPath, reason: (err as Error).message, fatal: false });
@@ -346,17 +373,19 @@ async function acquireUrl(
   stagingDir: string,
   maxFileSize: number,
   timeout: number,
+  ctx?: ProcessContext,
 ): Promise<StagedContent> {
   const tempFile = path.join(os.tmpdir(), `learn-url-${Date.now()}${path.extname(url) || '.txt'}`);
 
   try {
-    execFileSync(
+    safeExecFile(
+      ctx,
       'curl',
       ['-sL', '--max-time', String(Math.ceil(timeout / 1000)), '-o', tempFile, url],
       { stdio: 'pipe', timeout: timeout + 5000 },
     );
 
-    return await acquireLocalFile(tempFile, stagingDir, maxFileSize);
+    return await acquireLocalFile(tempFile, stagingDir, maxFileSize, ctx);
   } finally {
     if (fs.existsSync(tempFile)) {
       fs.unlinkSync(tempFile);
@@ -366,13 +395,14 @@ async function acquireUrl(
 
 // === Text Extraction Helpers ===
 
-function extractPdfText(filePath: string): string {
+function extractPdfText(filePath: string, ctx?: ProcessContext): string {
   // Prefer the system `pdftotext` binary (poppler-utils) when available.
   // The regex parser below only handles literal Tj/TJ operands and fails
   // silently on modern PDFs that use Type 1/CFF font subsets — which is
   // most papers from arxiv, IEEE, ACM, etc. pdftotext decodes those.
   try {
-    const text = execFileSync(
+    const text = (safeExecFile(
+      ctx,
       'pdftotext',
       ['-layout', '-nopgbrk', '-q', filePath, '-'],
       {
@@ -381,9 +411,11 @@ function extractPdfText(filePath: string): string {
         timeout: 30_000,
         stdio: ['ignore', 'pipe', 'ignore'],
       },
-    ).trim();
+    ) as string).trim();
     if (text.length > 0) return text;
-  } catch {
+  } catch (err) {
+    // #10427: security denial is load-bearing even from forensic-fallback catches.
+    if (err instanceof ProcessContextDenied) throw err;
     // pdftotext not installed, errored, or produced empty output —
     // fall through to the regex parser below.
   }
@@ -422,13 +454,13 @@ function extractPdfText(filePath: string): string {
   return textParts.join(' ').replace(/\s+/g, ' ').trim() || '(PDF text extraction: no readable text found)';
 }
 
-function extractDocxText(filePath: string): string {
+function extractDocxText(filePath: string, ctx?: ProcessContext): string {
   // docx is a zip archive. Extract word/document.xml and strip XML tags.
   const tempDir = path.join(os.tmpdir(), `learn-docx-${Date.now()}`);
   fs.mkdirSync(tempDir, { recursive: true });
 
   try {
-    execFileSync('unzip', ['-o', filePath, 'word/document.xml', '-d', tempDir], { stdio: 'pipe' });
+    safeExecFile(ctx, 'unzip', ['-o', filePath, 'word/document.xml', '-d', tempDir], { stdio: 'pipe' });
     const xmlPath = path.join(tempDir, 'word', 'document.xml');
     if (!fs.existsSync(xmlPath)) {
       return '(DOCX extraction: word/document.xml not found)';
@@ -436,20 +468,22 @@ function extractDocxText(filePath: string): string {
     const xml = fs.readFileSync(xmlPath, 'utf-8');
     // Strip XML tags, keep text content
     return xml.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
-  } catch {
+  } catch (err) {
+    // #10427: security denial propagates even from result-wrapping catches.
+    if (err instanceof ProcessContextDenied) throw err;
     return '(DOCX extraction failed)';
   } finally {
     fs.rmSync(tempDir, { recursive: true, force: true });
   }
 }
 
-function extractEpubText(filePath: string): string {
+function extractEpubText(filePath: string, ctx?: ProcessContext): string {
   // epub is a zip archive with XHTML content files
   const tempDir = path.join(os.tmpdir(), `learn-epub-${Date.now()}`);
   fs.mkdirSync(tempDir, { recursive: true });
 
   try {
-    execFileSync('unzip', ['-o', filePath, '-d', tempDir], { stdio: 'pipe' });
+    safeExecFile(ctx, 'unzip', ['-o', filePath, '-d', tempDir], { stdio: 'pipe' });
 
     // Find all xhtml/html files
     const htmlFiles = walkDir(tempDir).filter(
@@ -463,7 +497,9 @@ function extractEpubText(filePath: string): string {
     }
 
     return parts.join('\n\n').trim() || '(EPUB extraction: no readable content found)';
-  } catch {
+  } catch (err) {
+    // #10427: security denial propagates even from result-wrapping catches.
+    if (err instanceof ProcessContextDenied) throw err;
     return '(EPUB extraction failed)';
   } finally {
     fs.rmSync(tempDir, { recursive: true, force: true });
