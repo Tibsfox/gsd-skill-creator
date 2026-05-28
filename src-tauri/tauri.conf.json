@@ -1,7 +1,7 @@
 {
   "$schema": "./gen/schemas/desktop-schema.json",
   "productName": "GSD-OS",
-  "version": "1.49.844",
+  "version": "1.49.845",
   "identifier": "com.gsd.os",
   "build": {
     "beforeDevCommand": "cd desktop && npm run dev",

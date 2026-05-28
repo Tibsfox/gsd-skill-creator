@@ -275,6 +275,10 @@ export const REGISTRY: readonly CommandEntry[] = [
     const { adviseParallelizationCommand } = await import('./commands/advise-parallelization.js');
     return adviseParallelizationCommand(ctx.args.slice(1));
   } },
+  { aliases: ['predict-next', 'pn'], handler: async (ctx) => {
+    const { predictNextCommand } = await import('./commands/predict-next.js');
+    return predictNextCommand(ctx.args.slice(1));
+  } },
   { aliases: ['terminal', 'term'], handler: async (ctx) => {
     const { terminalCommand } = await import('./commands/terminal.js');
     return terminalCommand(ctx.args.slice(1));
