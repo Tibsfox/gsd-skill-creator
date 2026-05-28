@@ -21,6 +21,10 @@ import pc from 'picocolors';
 import { readFile, writeFile } from 'fs/promises';
 import { existsSync } from 'fs';
 import { basename, extname } from 'path';
+import {
+  ensureProcessAllowed,
+  type ProcessContext,
+} from '../../security/process-context.js';
 
 // ── Types ──
 
@@ -80,7 +84,7 @@ interface ImageData {
   getPixel: (x: number, y: number) => RGB;
 }
 
-async function loadImage(path: string): Promise<ImageData> {
+async function loadImage(path: string, ctx?: ProcessContext): Promise<ImageData> {
   // Use the canvas-less approach: decode PNG/BMP/PPM via raw parsing
   // For broad format support, shell out to ImageMagick or Python
   const ext = extname(path).toLowerCase();
@@ -94,8 +98,7 @@ async function loadImage(path: string): Promise<ImageData> {
   const { execSync } = await import('child_process');
   const tmpPath = `/tmp/pic2html_pixels_${process.pid}.bin`;
 
-  try {
-    execSync(`python3 -c "
+  const pythonScript = `
 from PIL import Image
 import struct, sys
 img = Image.open('${path.replace(/'/g, "\\'")}').convert('RGB')
@@ -107,7 +110,17 @@ with open('${tmpPath}', 'wb') as f:
         for x in range(w):
             r, g, b = pixels[x, y]
             f.write(bytes([r, g, b]))
-"`, { stdio: 'pipe' });
+`;
+
+  // Security: hoist-at-top before single spawn site (#10444 catalog —
+  // hoist-at-top is the simplest viable shape when N=1 spawn site). The
+  // shell-exec wraps `python3 -c <script>`; target='sh' argv records the
+  // actual spawn semantics. ProcessContextDenied propagates through the
+  // try/finally (finally only handles tmpfile cleanup, not security errors).
+  ensureProcessAllowed(ctx, 'cli/commands/pic2html', 'exec-sync', 'sh', ['-c', `python3 -c "${pythonScript}"`]);
+
+  try {
+    execSync(`python3 -c "${pythonScript}"`, { stdio: 'pipe' });
 
     const buf = await readFile(tmpPath);
     const width = buf.readUInt32LE(0);
@@ -250,7 +263,11 @@ function generateHTML(img: ImageData, opts: Pic2HtmlOptions): string {
 
 // ── Main command ──
 
-export async function pic2html(imagePath: string, opts: Pic2HtmlOptions): Promise<void> {
+export async function pic2html(
+  imagePath: string,
+  opts: Pic2HtmlOptions,
+  ctx?: ProcessContext,
+): Promise<void> {
   p.intro(pc.cyan('pic2html') + pc.dim(' — image to HTML table art'));
 
   if (!existsSync(imagePath)) {
@@ -261,7 +278,7 @@ export async function pic2html(imagePath: string, opts: Pic2HtmlOptions): Promis
   const spinner = p.spinner();
   spinner.start('Loading image...');
 
-  let img = await loadImage(imagePath);
+  let img = await loadImage(imagePath, ctx);
 
   if (opts.maxWidth) {
     img = scaleImage(img, opts.maxWidth);

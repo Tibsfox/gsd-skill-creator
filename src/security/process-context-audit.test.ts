@@ -54,7 +54,17 @@ const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
   // in shellOut. The child.on('error') handler catches ENOENT but NOT
   // security denials — those are load-bearing per #10427 and propagate
   // synchronously through the async-function throw machinery.
-  'src/cli/commands/pic2html.ts',
+  // src/cli/commands/pic2html.ts wired v1.49.872 — Track 4 chip #3
+  // (third-smallest LOC of remaining 4 KNOWN_UNWIRED Process entries:
+  // 311 LOC pre-wire). ctx?: ProcessContext threaded through pic2html()
+  // as 3rd param + loadImage() as 2nd param; hoist-at-top wire shape
+  // (#10444 catalog — N=1 spawn site, single ensureProcessAllowed). The
+  // shell-exec wraps python3 -c <script>; target='sh' argv=['-c',
+  // 'python3 -c "..."']. Refactored python script into a local const
+  // (pythonScript) so the hoist + the spawn reference the same string
+  // for audit fidelity. ProcessContextDenied propagates through the
+  // try/finally (finally only handles tmpfile cleanup; security errors
+  // never reach finally because hoist fires before try).
   // src/cli/commands/terminal.ts wired v1.49.842 — terminal family batch chip
   // (3 files; wired together with terminal/launcher.ts + terminal/session.ts).
   // ctx?: ProcessContext threaded through handleStart; ensureProcessAllowed
