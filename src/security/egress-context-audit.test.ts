@@ -56,7 +56,15 @@ const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
   // ctx?: EgressContext threaded through fetchRecent; ensureEgressAllowed
   // hoisted BEFORE the fetch call. Strict-fail surface (HTTP-error throws)
   // unchanged; EgressContextDenied propagates per #10427.
-  'src/aminet/package-fetcher.ts',
+  // src/aminet/package-fetcher.ts wired v1.49.876 — Track 5 chip #1
+  // (Track 5 open; 177 LOC). ctx?: EgressContext threaded through
+  // fetchPackage (3rd param) + fetchReadme (5th param); two-site
+  // hoisted-check shape (#10444 catalog) — ensureEgressAllowed hoisted
+  // before BOTH fetch sites (lha + readme). EgressContextDenied
+  // re-thrown from the mirror-aggregation catch in fetchPackage;
+  // fetchReadme's check is hoisted OUTSIDE the result-wrapping try/
+  // catch so security denials propagate regardless of the non-fatal
+  // readme fallback per #10427.
   'src/chips/anthropic-chip.ts',
   'src/chips/http-client.ts',
   // 5 registry adapters wired through EgressContext: npm.ts at v1.49.809;

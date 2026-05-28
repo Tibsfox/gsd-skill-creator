@@ -18,6 +18,11 @@ import { tmpdir } from 'node:os';
 
 import { fetchPackage } from './package-fetcher.js';
 import type { AminetPackage, DownloadConfig } from './types.js';
+import {
+  type EgressContext,
+  EgressContextDenied,
+  NULL_EGRESS_AUDIT_SINK,
+} from '../security/egress-context.js';
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -256,5 +261,46 @@ describe('fetchPackage', () => {
 
     const readmeUrl = fetchedUrls.find((u) => u.endsWith('.readme'));
     expect(readmeUrl).toBe('https://aminet.net/util/misc/Tool.readme');
+  });
+
+  // ==========================================================================
+  // EgressContext wire (v1.49.876 — Track 5 chip #1; two-site hoisted-check)
+  // ==========================================================================
+  describe('EgressContext wire (v1.49.876)', () => {
+    it('default (undefined ctx) preserves legacy permissive behavior', async () => {
+      globalThis.fetch = async () =>
+        new Response(LHA_BODY, { status: 200 });
+      const result = await fetchPackage(PKG, makeConfig());
+      expect(result.lhaData).toBeDefined();
+    });
+
+    it('throws EgressContextDenied when ctx denies all egress', async () => {
+      globalThis.fetch = async () =>
+        new Response(LHA_BODY, { status: 200 });
+      const ctx: EgressContext = {
+        allowList: [],
+        audit: NULL_EGRESS_AUDIT_SINK,
+      };
+      await expect(fetchPackage(PKG, makeConfig(), ctx)).rejects.toBeInstanceOf(
+        EgressContextDenied,
+      );
+    });
+
+    it('records audit event with source=aminet/package-fetcher for the lha fetch', async () => {
+      globalThis.fetch = async () =>
+        new Response(LHA_BODY, { status: 200 });
+      const events: Array<{ source: string; target: string }> = [];
+      const ctx: EgressContext = {
+        allowList: [/.*/],
+        audit: {
+          record: (e) => events.push({ source: e.source, target: e.target }),
+        },
+      };
+      await fetchPackage(PKG, makeConfig(), ctx);
+
+      expect(events.length).toBeGreaterThan(0);
+      expect(events[0].source).toBe('aminet/package-fetcher');
+      expect(events[0].target).toContain('Tool.lha');
+    });
   });
 });

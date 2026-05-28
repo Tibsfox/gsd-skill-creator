@@ -17,6 +17,11 @@ import { writeFileSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 
 import type { AminetPackage, DownloadConfig } from './types.js';
+import {
+  ensureEgressAllowed,
+  EgressContextDenied,
+  type EgressContext,
+} from '../security/egress-context.js';
 
 // ============================================================================
 // FetchResult
@@ -61,6 +66,7 @@ export interface FetchResult {
 export async function fetchPackage(
   pkg: AminetPackage,
   config: DownloadConfig,
+  ctx?: EgressContext,
 ): Promise<FetchResult> {
   const errors: Array<{ mirror: string; error: Error }> = [];
 
@@ -70,6 +76,13 @@ export async function fetchPackage(
       // No hardcoded /aminet/ prefix -- the mirror URL already contains
       // any needed prefix (e.g., "http://de.aminet.net/aminet")
       const lhaUrl = `${mirror}/${pkg.fullPath}`;
+
+      // Security: hoist-at-top before each fetch in the loop (two-site
+      // hoisted-check shape per #10444; sibling site in fetchReadme).
+      // Each mirror iteration gets its own check — denial fires synchronously
+      // before fetch initiates a connection. EgressContextDenied propagates
+      // through the swallow-everything catch via #10427 re-throw below.
+      ensureEgressAllowed(ctx, 'aminet/package-fetcher', 'fetch', lhaUrl);
 
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), config.timeoutMs);
@@ -105,10 +118,14 @@ export async function fetchPackage(
         mirror,
         config,
         dirPath,
+        ctx,
       );
 
       return { lhaPath, lhaData, readmePath, readmeData };
     } catch (err) {
+      // #10427: security denial is load-bearing — propagate through the
+      // mirror-failure aggregation catch.
+      if (err instanceof EgressContextDenied) throw err;
       errors.push({
         mirror,
         error: err instanceof Error ? err : new Error(String(err)),
@@ -140,11 +157,18 @@ async function fetchReadme(
   mirror: string,
   config: DownloadConfig,
   dirPath: string,
+  ctx?: EgressContext,
 ): Promise<{ readmePath: string | null; readmeData: Buffer | null }> {
-  try {
-    const readmeFullPath = pkg.fullPath.replace(/\.lha$/, '.readme');
-    const readmeUrl = `${mirror}/${readmeFullPath}`;
+  const readmeFullPath = pkg.fullPath.replace(/\.lha$/, '.readme');
+  const readmeUrl = `${mirror}/${readmeFullPath}`;
 
+  // Security: hoist-at-top before fetch (sibling of fetchPackage's check;
+  // two-site hoisted-check shape per #10444). EgressContextDenied propagates
+  // OUTSIDE the result-wrapping try/catch per #10427 — denial blocks the
+  // readme attempt regardless of fetchPackage's fault-tolerant fallback.
+  ensureEgressAllowed(ctx, 'aminet/package-fetcher', 'fetch', readmeUrl);
+
+  try {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), config.timeoutMs);
 
