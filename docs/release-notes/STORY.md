@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.867`.
+The story begins at `v1.0` and continues to `v1.49.868`.
 
-**910 chapters.** 909 have retrospectives.
+**911 chapters.** 910 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -918,3 +918,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.865](v1.49.865/00-summary.md)** — EgressContext singleton chip: `src/aminet/index-freshness.ts` · 2026-05-28
 - **[v1.49.866](v1.49.866/00-summary.md)** — EgressContext singleton chip: `src/site/deploy.ts` · 2026-05-28
 - **[v1.49.867](v1.49.867/00-summary.md)** — EgressContext singleton chip: `src/alternative-discoverer/fork-finder.ts` (Track 3 close + campaign close) · 2026-05-28
+- **[v1.49.868](v1.49.868/00-summary.md)** — Codification Ship: Promote #10444 (Size-Ascending Chip-Pick Reveals Wire-Shape Diversity) + Refine #10443 (Continuous-Verification Mode) · 2026-05-28

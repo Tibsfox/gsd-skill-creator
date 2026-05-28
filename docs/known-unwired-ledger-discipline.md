@@ -134,6 +134,71 @@ by default, JSON via `--json`). Exit 0 if clean, 1 if any stale entries.
 Designed to be invoked from `tools/pre-tag-gate.sh` or ad-hoc; mirrors
 the inline vitest inverse-checks at the cross-audit layer.
 
+### Continuous-verification mode
+
+The v857 cross-audit tool was authored with a single integration mode:
+run it ad-hoc to surface stale entries. The v1.49.858-867 chip campaign
+(10 chips back-to-back) demonstrated a second mode — invoke it after
+every chip ship as a continuous-verification check — and validated the
+tool's operational tightness across ten consecutive Process and Egress
+chips. The discipline is the operational productionization of #10443.
+
+**The per-ship workflow.** After each chip ship that touches a
+KNOWN_UNWIRED audit-test:
+
+1. Apply the wire (add `ctx?` parameter, hoist `ensure*Allowed`, remove
+   the KNOWN_UNWIRED entry).
+2. `npm run build` — must pass.
+3. **Run `node tools/security/check-stale-known-unwired.mjs`** — must
+   report clean.
+4. Proceed to T14.
+
+The third step closes the per-ship verification loop: the chip's wire
+intent + the audit-test allowlist edit + the tool's structural view of
+the file are cross-checked in the same operator session, before the tag
+push. The cost is sub-second per invocation; the value is catching
+stale-shape regressions at chip-time rather than at the next codify
+recon.
+
+**Tools-detecting-silent-failures must themselves fail loudly.** The
+v857 tool was built to catch silent stale entries in the allowlist; the
+v1.49.867 chip surfaced the tool's own first real-world bug — a
+substring `all errors return []` inside a wire-shape comment collided
+with the regex extractor's non-greedy `[\s\S]*?\]\s*\)` terminator. The
+tool reported 0 entries instead of 6 for Egress and was "clean" by
+vacuous truth. The fix — anchoring the regex terminator to line-start
+with the multi-line flag, `[\s\S]*?^\s*\]\s*\)/m` — shipped in the same
+ship as the chip that triggered it.
+
+The sibling pattern: any layer designed to surface silent-vs-loud
+asymmetry (per #10427) must itself be checked for silent failures in
+its detection path. A tool that vacuously reports "clean" because its
+parser failed silently is worse than no tool — it actively hides what
+it was built to surface. Vitest fixtures with deliberate parse-failure
+cases + at least one sanity-check assertion against the real allowlist
+counts catches both shapes (the v857 test suite did the former; the
+v867 fix added the latter as a fixture line).
+
+**Validated scale.** v1.49.858 through v1.49.867 — 10 consecutive chip
+ships, 9 consecutive clean tool runs, 1 self-bug-fix at instance 10.
+The discipline catches its own gaps; the v867 tool fix proves the
+system works.
+
+**How to apply.**
+
+1. **After authoring a new ratchet-ledger gate**, also author its
+   continuous-verification tool and a vitest suite that exercises both
+   "clean" and "trip" cases against synthetic allowlist fixtures.
+2. **Add at least one sanity-check assertion** that compares the tool's
+   structural-view count against the actual allowlist file's enumerated
+   entries. Drift between the two is the alarm bell for vacuous-true
+   parse failure.
+3. **Invoke the tool from the per-ship chip-ship workflow** — between
+   `npm run build` and `pre-tag-gate` — so it runs before any
+   side-effecting ship action. Promote to a deterministic pre-tag-gate
+   step when the chip cadence stabilizes (operator-invoked → automatic
+   transition closes the verification gap).
+
 ### How to apply (when a third stale-shape surfaces)
 
 The discipline scales by adding one inverse-check per stale-shape:

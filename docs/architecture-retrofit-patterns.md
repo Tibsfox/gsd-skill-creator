@@ -2,7 +2,7 @@
 
 **Surface:** Introducing a chokepoint, interface, or generator-template to N existing modules with high call-site multiplicity; authoring a generator that may run on partial input.
 
-**Codified at:** v1.49.784 (lesson cluster from v1.49.782 LoaderContext chokepoint + v1.49.783 STATE.md normalizer fix); v1.49.802 (extended with Lesson #10426 second-instance cross-class registry extraction from the v1.49.795-801 T1.1 arc); v1.49.847 (extended with Lesson #10440 production-caller path-narrowing from v845 + v846 two-instance evidence).
+**Codified at:** v1.49.784 (lesson cluster from v1.49.782 LoaderContext chokepoint + v1.49.783 STATE.md normalizer fix); v1.49.802 (extended with Lesson #10426 second-instance cross-class registry extraction from the v1.49.795-801 T1.1 arc); v1.49.847 (extended with Lesson #10440 production-caller path-narrowing from v845 + v846 two-instance evidence); v1.49.868 (extended with Lesson #10444 size-ascending chip-pick reveals wire-shape diversity from v858-v862 Process + v863-v867 Egress two-cluster evidence).
 
 ## Why this discipline exists
 
@@ -131,6 +131,109 @@ is incidental. Narrow the scope.
 - #10412 — recon-first; the path-vs-wrapper question is the recon
   question that surfaces this lesson.
 
+### Size-ascending chip-pick reveals wire-shape diversity (Lesson #10444)
+
+When chipping down a KNOWN_UNWIRED allowlist (#10432) by picking
+entries **smallest-LOC first**, the size-ascending traversal
+incidentally surfaces the catalog of viable wire shapes — at zero
+explicit planning cost. The cluster's first ship is the simplest
+template; each subsequent (larger) chip adds a richer shape; the
+campaign-close wire-shape catalog is a free byproduct.
+
+**Why this works.** File size correlates with structural complexity in
+chokepoint retrofits:
+
+- **Small files (~70-200 LOC)** trend toward a single-function module
+  with one spawn/fetch site. The viable shape is **hoist-at-top** —
+  single `ensure*Allowed` call at the top of the entry function.
+- **Mid-size files (~200-400 LOC)** introduce a Promise wrapper, a
+  factory, or a callback boundary. Shapes: **hoist-outside-Promise**
+  (with or without cleanup-on-denial) or **closure-capture** (factory
+  returns a function that captures `ctx`).
+- **Larger files (~400-800 LOC)** often have multiple sibling spawn or
+  fetch sites wrapped in an existing internal helper. Shape:
+  **internal-helper** (#10433) — thread `ctx?` through the helper, one
+  `ensure*Allowed` protects N call sites.
+- **Larger files with dependency injection** expose the **DI-executor
+  + tokenized-argv** shape (#10441) or the Egress analog
+  **DI-fetch-wrapper** — the default executor closes over `ctx?` and
+  checks before delegating; injected executors bypass (caller owns
+  security).
+- **Cross-cutting modules** (multiple sites, no shared helper) expose
+  the **two-site hoisted-check** shape — each site gets its own hoist
+  before its try block.
+
+The smallest-LOC chip is the cheapest first ship; it also exercises
+the simplest wire shape, so the cluster's first ship is the simplest
+template. By the time the cluster closes, the wire-shape catalog is
+complete without anyone having explicitly planned variant coverage.
+
+**Empirical evidence (2 instances).**
+
+- **Track 2 — Process chip cluster (v1.49.858-862).** 5 chips ordered
+  ascending by LOC (81 → 220 → 408 → 167 → 560). 5 distinct wire
+  shapes: hoist-at-top → hoist-outside-Promise+cleanup →
+  internal-helper → hoist-outside-Promise (no cleanup) →
+  closure-capture.
+- **Track 3 — Egress chip cluster (v1.49.863-867).** 5 chips ordered
+  ascending by LOC (73 → 108 → 161 → 193 → 151). 5 distinct wire
+  shapes: hoist-at-top fetch → hoist-with-early-return-bypass →
+  hoist-before-fetch (strict-fail) → DI-fetch-wrapper → two-site
+  hoisted-check.
+
+10 chips across 2 chokepoint surfaces → 10 distinct wire shapes, no
+variant-coverage planning involved. The size-ascending heuristic
+surfaced #10433 and #10441 variants naturally at the LOC bands where
+those shapes structurally belong.
+
+**How to apply.**
+
+1. **Sort the candidates by `wc -l` ascending.** Pick the smallest
+   first.
+2. **Ship the chip with whatever shape the file requires.** Do not
+   force-fit a shape from the previous chip; the shape is a property
+   of the file, not of the campaign.
+3. **Document the wire shape in the release-notes README** (e.g.,
+   "hoist-at-top spawnSync", "internal-helper", "two-site
+   hoisted-check"). The catalog builds as you go.
+4. **At cluster close, the wire-shape catalog is the campaign
+   artifact.** No explicit catalog-building step required.
+
+**Composition with other rules.**
+
+- **#10422 / #10423 (lightest wire that satisfies the verdict)** — at
+  each chip, pick the lightest shape that satisfies the chokepoint's
+  audit. Size-ascending picks the lightest shapes first by accident;
+  the per-chip rule is `lightest viable shape for THIS file`, not
+  `lightest shape overall`.
+- **#10433 (internal-helper for ctx? threading)** — emerges naturally
+  at the LOC band where files have multiple sibling spawn/fetch sites
+  in a pre-existing helper. The size-ascending traversal hits this
+  band in the middle of the cluster, not at the start.
+- **#10440 (production-caller path-narrowing)** — the wire shape
+  follows the file's own structure; do not accrete wrapper-class
+  scaffolding to force a shape from another chip.
+- **#10432 (KNOWN_UNWIRED ratchet-ledger)** — the chip cadence (one per
+  ship) is the substrate; size-ascending is the picking order within
+  the cadence.
+
+**Anti-pattern.** Picking the most "interesting" or "important" file
+first because it's the highest-LOC or highest-call-multiplicity entry.
+That puts the most complex wire shape at the start of the campaign
+and buries the simple shapes — the operator builds muscle memory on
+the hardest case, then unwinds it on the easy cases. Size-ascending
+inverts this: build muscle memory on the simplest case, let the
+cluster surface the harder shapes naturally as LOC grows.
+
+**Anti-pattern.** Force-fitting every chip in a cluster into one wire
+shape because the previous chip used that shape. The shape is a
+property of the file, not of the campaign. Force-fitting accretes the
+peer-dependency surface that #10440 flags as unnecessary.
+
+**Reference implementation.** v1.49.857-867 11-ship campaign README
+(10-chip wire-shape catalog table; one wire shape per chip, all
+distinct, ascending by LOC within each track).
+
 ## When this discipline kicks in
 
 - Adding a new function/options-bag parameter that will be passed to N existing modules.
@@ -138,6 +241,7 @@ is incidental. Narrow the scope.
 - Writing a generator/template that may receive partial input from hand-authoring.
 - Choosing between "fail loudly on missing field" and "produce a placeholder."
 - Adding the SECOND instance of a class-typed family where the first instance has not yet been abstracted.
+- Chipping down a KNOWN_UNWIRED allowlist (or any cross-cutting ratchet ledger) and choosing the picking order for the chip cluster.
 
 ## Anti-pattern summary
 
@@ -146,6 +250,8 @@ is incidental. Narrow the scope.
 - ❌ Two-state (works / breaks) chokepoint design when three states (permissive / audit-only / enforced) are achievable for free.
 - ❌ Reusing the first class's data source for a new class because it is the lightest *technical* wire; cross-class semantic dishonesty compounds with every downstream consumer.
 - ❌ Deferring per-class abstraction extraction to the third instance — the second instance has already shipped under the temporary measure, and unwinding the surface costs more than the extraction would have.
+- ❌ Picking the highest-LOC or highest-risk file first when chipping a ratchet-ledger cluster — forces the most complex wire shape at the start of the campaign and buries the simple shapes.
+- ❌ Force-fitting every chip in a cluster into one wire shape because the previous chip used it — wire shape is a property of the file, not of the campaign.
 
 ## Lesson references
 
@@ -153,3 +259,4 @@ is incidental. Narrow the scope.
 - **#10416** — Tolerant generators are the default for hand-authored ↔ generated round-trips. v783 candidate, promoted at v784.
 - **#10426** — Extract per-class registries at the SECOND class instance, not the third. v798 candidate, promoted at v802.
 - **#10440** — Production-caller scope-reduction via path-narrowing: when a forward-flag names a wrapper class but the underlying path is directly callable, call the path directly. v845 + v846 candidate, promoted at v847.
+- **#10444** — Size-ascending chip-pick reveals wire-shape diversity at zero explicit cost. v858-v862 Process cluster + v863-v867 Egress cluster 2-instance evidence, promoted at v868.
