@@ -2,10 +2,11 @@
 
 _Generated 2026-05-28 from `release_history.*`. Source of truth: Postgres._
 
-**917 releases.** 916 with retrospective. 728 with extracted lessons.
+**918 releases.** 917 with retrospective. 728 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
+| `v1.49.875` | ProcessContext singleton chip: `src/chipset/harness-integrity.ts` (Track 4 CLOSE) | 2026-05-28 | ✓ | — | [read](v1.49.875/00-summary.md) |
 | `v1.49.874` | ProcessContext singleton chip: `src/learn/acquirer.ts` (Track 4 chip #5) | 2026-05-28 | ✓ | — | [read](v1.49.874/00-summary.md) |
 | `v1.49.873` | ProcessContext singleton chip: `src/git/gates/pre-flight.ts` (Track 4 chip #4) | 2026-05-28 | ✓ | — | [read](v1.49.873/00-summary.md) |
 | `v1.49.872` | ProcessContext singleton chip: `src/cli/commands/pic2html.ts` (Track 4 chip #3) | 2026-05-28 | ✓ | — | [read](v1.49.872/00-summary.md) |
@@ -850,8 +851,8 @@ _Generated 2026-05-28 from `release_history.*`. Source of truth: Postgres._
 | `v1.49.23` | Unison Language & Math Co-Processor Completion | 2026-03-08 | ✓ | 23 | [read](v1.49.23/00-summary.md) |
 | `v1.49.22` | PNW Research Series | 2026-03-07 | ✓ | 24 | [read](v1.49.22/00-summary.md) |
 | `v1.49.21` | Image to Mission Pipeline | 2026-03-07 | ✓ | 22 | [read](v1.49.21/00-summary.md) |
-| `v1.49.20.1` | Documentation Reflections | 2026-03-06 | — | — | [read](v1.49.20.1/00-summary.md) |
 | `v1.49.20` | Documentation Consolidation | 2026-03-06 | ✓ | 13 | [read](v1.49.20/00-summary.md) |
+| `v1.49.20.1` | Documentation Reflections | 2026-03-06 | — | — | [read](v1.49.20.1/00-summary.md) |
 | `v1.49.19` | Gastown Chipset Integration | 2026-03-06 | ✓ | 19 | [read](v1.49.19/00-summary.md) |
 | `v1.49.18` | Space Between Observatory | 2026-03-06 | ✓ | 17 | [read](v1.49.18/00-summary.md) |
 | `v1.49.17` | The Space Between | 2026-03-04 | ✓ | 19 | [read](v1.49.17/00-summary.md) |
