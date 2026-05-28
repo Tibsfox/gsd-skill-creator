@@ -51,7 +51,13 @@ const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
   'src/intelligence/ipc.ts',
   'src/mcp/skill-installer.ts',
   'src/site/deploy.ts',
-  'src/terminal/health.ts',
+  // src/terminal/health.ts wired v1.49.863 — first chip of Track 3 (Egress).
+  // Optional ctx?: EgressContext threaded through checkHealth as a third
+  // positional parameter (after url + timeoutMs); ensureEgressAllowed hoisted
+  // OUTSIDE the fault-tolerant try/catch per #10427. Forensic accessory
+  // semantics preserved (connection-refused / timeout / status-error continue
+  // to return the structured HealthCheckResult silently); EgressContextDenied
+  // propagates to the caller.
 ]);
 
 /**

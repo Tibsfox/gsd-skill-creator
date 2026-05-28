@@ -169,4 +169,38 @@ describe('checkHealth', () => {
       );
     });
   });
+
+  describe('EgressContext wire (v1.49.863)', () => {
+    it('throws EgressContextDenied when ctx denies the URL', async () => {
+      const { EgressContextDenied, CapturingEgressAuditSink } = await import(
+        '../security/egress-context.js'
+      );
+      const sink = new CapturingEgressAuditSink();
+      const restrictiveCtx = { allowList: [], audit: sink };
+      await expect(
+        checkHealth('http://localhost:3000/terminal', 1000, restrictiveCtx),
+      ).rejects.toThrow(EgressContextDenied);
+      expect(sink.records).toHaveLength(1);
+      expect(sink.records[0]?.target).toBe('http://localhost:3000/terminal');
+      expect(sink.records[0]?.allowed).toBe(false);
+    });
+
+    it('passes through to fetch when ctx allows the URL', async () => {
+      const { CapturingEgressAuditSink } = await import(
+        '../security/egress-context.js'
+      );
+      const sink = new CapturingEgressAuditSink();
+      const ctx = {
+        allowList: ['http://localhost:3000/'],
+        audit: sink,
+      };
+      vi.mocked(globalThis.fetch).mockResolvedValueOnce(
+        new Response(null, { status: 200 }),
+      );
+      const result = await checkHealth('http://localhost:3000/terminal', 1000, ctx);
+      expect(result.healthy).toBe(true);
+      expect(sink.records).toHaveLength(1);
+      expect(sink.records[0]?.allowed).toBe(true);
+    });
+  });
 });

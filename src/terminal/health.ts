@@ -9,6 +9,10 @@
  */
 
 import type { HealthCheckResult } from './types.js';
+import {
+  ensureEgressAllowed,
+  type EgressContext,
+} from '../security/egress-context.js';
 
 /** Default timeout for health check probes (ms). */
 const DEFAULT_TIMEOUT_MS = 3000;
@@ -28,8 +32,17 @@ const DEFAULT_TIMEOUT_MS = 3000;
  * @param timeoutMs - Timeout in milliseconds (default 3000)
  * @returns Health check result with healthy flag, status, timing, and errors
  */
-export async function checkHealth(url: string, timeoutMs: number = DEFAULT_TIMEOUT_MS): Promise<HealthCheckResult> {
+export async function checkHealth(
+  url: string,
+  timeoutMs: number = DEFAULT_TIMEOUT_MS,
+  ctx?: EgressContext,
+): Promise<HealthCheckResult> {
   const start = Date.now();
+
+  // Security: hoisted check outside the try — EgressContextDenied propagates
+  // while connection-refused / timeout / status-error continue to return the
+  // structured forensic-accessory result silently. Wire v1.49.863 per #10427.
+  ensureEgressAllowed(ctx, 'terminal/health', 'fetch', url);
 
   try {
     const response = await fetch(url, {
