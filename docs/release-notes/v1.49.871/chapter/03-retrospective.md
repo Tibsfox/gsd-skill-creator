@@ -15,7 +15,7 @@
 
 ## What went wrong
 
-- Nothing significant this ship. ~5 min savings vs v870 because the test setup pattern transferred directly.
+- Nothing significant during the wire itself. The post-ship retrospective file did get truncated by an editor stub at one point during the ship pipeline and had to be restored from the original draft — minor process annoyance but no impact on the actual wire or test surface.
 
 ## Future-improvement candidates surfaced this ship
 
