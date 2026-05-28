@@ -304,3 +304,65 @@ describe('ProvenanceLinker — integration', () => {
     expect(result[0].added_lines).toBe(4);
   });
 });
+
+describe('ProvenanceLinker — ProcessContext wire (v1.49.860)', () => {
+  it('throws ProcessContextDenied when ctx denies git spawn via resolveMissionCommits', async () => {
+    const { resolveMissionCommits } = await import('../linker.js');
+    const {
+      ProcessContextDenied,
+      CapturingProcessAuditSink,
+    } = await import('../../../security/process-context.js');
+    const db = new Database(':memory:');
+    applyMigrations(db, MIGRATIONS_DIR);
+    // Disable FKs so we can seed a mission_links row without the full
+    // meetings + decisions chain (the wire test only exercises git invocation).
+    db.pragma('foreign_keys = OFF');
+    db.prepare(
+      "INSERT INTO mission_links (decision_id, artifact_kind, artifact_ref, recorded_at) VALUES ('m1', 'commit_range', 'HEAD~1..HEAD', '2026-05-28T00:00:00Z')",
+    ).run();
+    const sink = new CapturingProcessAuditSink();
+    const restrictiveCtx = { allowList: [], audit: sink };
+    expect(() => resolveMissionCommits(db, '/tmp', restrictiveCtx)).toThrow(
+      ProcessContextDenied,
+    );
+    expect(sink.records).toHaveLength(1);
+    expect(sink.records[0]?.target).toBe('git');
+    expect(sink.records[0]?.allowed).toBe(false);
+    db.close();
+  });
+
+  it('returns empty array when ctx is undefined and no mission_links exist (backward-compat)', async () => {
+    const { resolveMissionCommits } = await import('../linker.js');
+    const db = new Database(':memory:');
+    applyMigrations(db, MIGRATIONS_DIR);
+    const result = resolveMissionCommits(db, '/tmp');
+    expect(result).toEqual([]);
+    db.close();
+  });
+
+  it('propagates ProcessContextDenied through ProvenanceLinker.run', async () => {
+    const {
+      ProcessContextDenied,
+      CapturingProcessAuditSink,
+    } = await import('../../../security/process-context.js');
+    const db = new Database(':memory:');
+    applyMigrations(db, MIGRATIONS_DIR);
+    db.pragma('foreign_keys = OFF');
+    db.prepare(
+      "INSERT INTO mission_links (decision_id, artifact_kind, artifact_ref, recorded_at) VALUES ('m1', 'commit_range', 'HEAD~1..HEAD', '2026-05-28T00:00:00Z')",
+    ).run();
+    const linker = new ProvenanceLinker(db);
+    const sink = new CapturingProcessAuditSink();
+    const restrictiveCtx = { allowList: [], audit: sink };
+    expect(() =>
+      linker.run(
+        { snapshot_id: 's1', project_dir: '/tmp', file_paths: [] },
+        undefined,
+        restrictiveCtx,
+      ),
+    ).toThrow(ProcessContextDenied);
+    expect(sink.records).toHaveLength(1);
+    expect(sink.records[0]?.allowed).toBe(false);
+    db.close();
+  });
+});

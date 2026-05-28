@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.859`.
+The story begins at `v1.0` and continues to `v1.49.860`.
 
-**902 chapters.** 901 have retrospectives.
+**903 chapters.** 902 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -910,3 +910,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.857](v1.49.857/00-summary.md)** — Codification Ship: Promote #10443 (Inverse-audit Stale-Entry Detection) · 2026-05-28
 - **[v1.49.858](v1.49.858/00-summary.md)** — ProcessContext singleton chip: `src/drift/cli.ts` · 2026-05-28
 - **[v1.49.859](v1.49.859/00-summary.md)** — ProcessContext singleton chip: `src/chipset/blitter/executor.ts` · 2026-05-28
+- **[v1.49.860](v1.49.860/00-summary.md)** — ProcessContext singleton chip: `src/intelligence/provenance/linker.ts` · 2026-05-28

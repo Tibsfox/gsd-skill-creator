@@ -25,6 +25,10 @@ import {
   attributeFile,
   buildShaToMissionIndex,
 } from './mission-attribution.js';
+import {
+  ensureProcessAllowed,
+  type ProcessContext,
+} from '../../security/process-context.js';
 import type {
   GitFileChange,
   LineAttribution,
@@ -45,7 +49,11 @@ interface GitErr {
 }
 type GitResult = GitOk | GitErr;
 
-function git(cwd: string, args: string[]): GitResult {
+function git(cwd: string, args: string[], ctx?: ProcessContext): GitResult {
+  // Security: internal-helper pattern per #10433 — hoist the chokepoint
+  // check at the single spawn site. ProcessContextDenied propagates;
+  // no swallowing try/catch around the spawn.
+  ensureProcessAllowed(ctx, 'intelligence/provenance/linker', 'spawn-sync', 'git', args);
   const r = spawnSync('git', args, {
     cwd,
     encoding: 'utf-8',
@@ -155,6 +163,7 @@ export function parseGitLogNameStatusNumstat(stdout: string): GitFileChange[] {
 export function resolveMissionCommits(
   db: Database.Database,
   project_dir: string,
+  ctx?: ProcessContext,
 ): MissionCommitMap[] {
   let rows: Array<{ decision_id: string; artifact_kind: string; artifact_ref: string }>;
   try {
@@ -196,7 +205,7 @@ export function resolveMissionCommits(
         'rev-list',
         '--no-walk',
         ...(ref.includes('..') ? [ref] : [ref]),
-      ]);
+      ], ctx);
       if (r.ok) {
         for (const sha of r.stdout.split('\n').map((s) => s.trim()).filter(Boolean)) {
           add(mission_id, sha);
@@ -279,11 +288,15 @@ export class ProvenanceLinker {
    * before writing, producing a deterministic final state regardless of
    * how many times the linker is invoked.
    */
-  run(cfg: LinkerConfig, opts?: { mode?: 'append' | 'replace' }): LinkerResult {
+  run(
+    cfg: LinkerConfig,
+    opts?: { mode?: 'append' | 'replace' },
+    ctx?: ProcessContext,
+  ): LinkerResult {
     if (opts?.mode === 'replace') {
       this.clearSnapshotProvenance(cfg.snapshot_id);
     }
-    const missionMaps = resolveMissionCommits(this._db, cfg.project_dir);
+    const missionMaps = resolveMissionCommits(this._db, cfg.project_dir, ctx);
     const idx = buildShaToMissionIndex(missionMaps);
 
     // ── 1. files_changed ─────────────────────────────────────────────
@@ -297,7 +310,7 @@ export class ProvenanceLinker {
         '--name-status',
         '--numstat',
         ...allShas,
-      ]);
+      ], ctx);
       if (r.ok) fileChanges = parseGitLogNameStatusNumstat(r.stdout);
     }
 
@@ -319,7 +332,7 @@ export class ProvenanceLinker {
         if (fc.change_kind !== 'D') set.add(fc.file_path);
       }
       // Filter to files git currently tracks.
-      const lsfiles = git(cfg.project_dir, ['ls-files']);
+      const lsfiles = git(cfg.project_dir, ['ls-files'], ctx);
       if (lsfiles.ok) {
         const tracked = new Set(
           lsfiles.stdout.split('\n').map((s) => s.trim()).filter(Boolean),
@@ -342,7 +355,7 @@ export class ProvenanceLinker {
         '--',
         f,
       ];
-      const r = git(cfg.project_dir, args);
+      const r = git(cfg.project_dir, args, ctx);
       if (!r.ok) continue;
       filesBlamed++;
       const parsed = parseBlamePorcelain(r.stdout);

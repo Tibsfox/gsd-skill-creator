@@ -86,7 +86,13 @@ const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
   // double-protected (audit short-circuits on KNOWN_UNWIRED.has before
   // checking the actual wire). First stale-entry chip; closes asymmetry
   // noted in v1.49.806 forward-observation that audit is unidirectional.
-  'src/intelligence/provenance/linker.ts',
+  // src/intelligence/provenance/linker.ts wired v1.49.860 — singleton chip.
+  // Internal-helper pattern per #10433: ctx? threaded through git() helper
+  // (4 call sites) + resolveMissionCommits + ProvenanceLinker.run.
+  // ensureProcessAllowed called at the top of the git() helper before
+  // spawnSync; ProcessContextDenied propagates naturally (no swallowing
+  // catch around the spawn). The helper-internal hoist is preferred over
+  // per-call-site hoist when N>1 call sites share the helper (DRY).
   'src/learn/acquirer.ts',
   'src/learning/version-manager.ts',
   // src/mesh/mesh-worktree.ts wired v1.49.843 — mesh family batch chip
