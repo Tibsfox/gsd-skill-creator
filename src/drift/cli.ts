@@ -19,6 +19,10 @@
 import { spawnSync } from 'node:child_process';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import {
+  ensureProcessAllowed,
+  type ProcessContext,
+} from '../security/process-context.js';
 
 const here = dirname(fileURLToPath(import.meta.url));
 // src/drift/cli.ts → three levels up to repo root, then into scripts/drift
@@ -50,7 +54,10 @@ See docs/cli/drift-audit.md for detailed reference.
 `.trim());
 }
 
-export async function driftCommand(args: string[]): Promise<number> {
+export async function driftCommand(
+  args: string[],
+  ctx?: ProcessContext,
+): Promise<number> {
   if (args.length === 0 || args[0] === '--help' || args[0] === '-h' || args[0] === 'help') {
     printHelp();
     return 0;
@@ -61,7 +68,12 @@ export async function driftCommand(args: string[]): Promise<number> {
 
   switch (sub) {
     case 'audit': {
-      const result = spawnSync(process.execPath, [DRIFT_AUDIT_SCRIPT, ...rest], {
+      const spawnArgs = [DRIFT_AUDIT_SCRIPT, ...rest];
+      // Security: hoisted check outside the spawn — there is no swallowing
+      // try/catch around this spawn, so ProcessContextDenied propagates
+      // naturally to the caller. Wire v1.49.858 per Lesson #10427.
+      ensureProcessAllowed(ctx, 'drift/cli', 'spawn-sync', process.execPath, spawnArgs);
+      const result = spawnSync(process.execPath, spawnArgs, {
         stdio: 'inherit',
         encoding: 'utf8',
       });

@@ -59,7 +59,11 @@ const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
   // dogfood family fully wired at v1.49.827 batch chip (extractor + pydmd
   // install/health-check + install/venv-manager) — all 3 use internal-helper
   // or hoisted-check pattern per #10433; wire cost ~14-26 LOC each.
-  'src/drift/cli.ts',
+  // src/drift/cli.ts wired v1.49.858 — singleton chip.
+  // Optional ctx?: ProcessContext threaded through driftCommand as a
+  // second positional parameter (after args); ensureProcessAllowed hoisted
+  // OUTSIDE the spawnSync call. No swallowing try/catch around the spawn —
+  // ProcessContextDenied propagates naturally to the CLI dispatcher.
   // git/core family fully wired:
   //   v1.49.820 first-chip (branch-manager);
   //   v1.49.825 batch chip (repo-manager + state-machine + sync-manager) —
