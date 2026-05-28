@@ -1,15 +1,16 @@
 # Release History
 
-889 milestones shipped across the v1.0 → v1.49.846 arc. The table below lists every shipped release, newest first.
+890 milestones shipped across the v1.0 → v1.49.847 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 889 releases · 888 with retrospectives · 728 with extracted lessons · quality A:662 B:97 C:63 D:11 F:56 (avg 90) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 890 releases · 889 with retrospectives · 728 with extracted lessons · quality A:662 B:97 C:63 D:11 F:57 (avg 90) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.847](release-notes/v1.49.847) | Codification Ship: Promote #10438 + #10439 + #10440 + #10441 + #10442 | 2026-05-28 | 2 | — | — | [s](release-notes/v1.49.847/chapter/00-summary.md) [r](release-notes/v1.49.847/chapter/03-retrospective.md) [l](release-notes/v1.49.847/chapter/04-lessons.md) [c](release-notes/v1.49.847/chapter/99-context.md) | — | F 34 |  |
 | [v1.49.846](release-notes/v1.49.846) | Auto-emit-from-substrate: predict-low-confidence Event JSONL Wired into Both Production emit-prediction Call Sites | 2026-05-28 | 2 | — | — | [s](release-notes/v1.49.846/chapter/00-summary.md) [r](release-notes/v1.49.846/chapter/03-retrospective.md) [l](release-notes/v1.49.846/chapter/04-lessons.md) [c](release-notes/v1.49.846/chapter/99-context.md) | — | F 25 |  |
 | [v1.49.845](release-notes/v1.49.845) | Production Caller of Predict Path: `predict-next` CLI Command | 2026-05-27 | 2 | — | — | [s](release-notes/v1.49.845/chapter/00-summary.md) [r](release-notes/v1.49.845/chapter/03-retrospective.md) [l](release-notes/v1.49.845/chapter/04-lessons.md) [c](release-notes/v1.49.845/chapter/99-context.md) | — | F 25 |  |
 | [v1.49.844](release-notes/v1.49.844) | Meta-cadence Verify Axis (Canonical-doc Home for v829+v832) | 2026-05-27 | 2 | — | — | [s](release-notes/v1.49.844/chapter/00-summary.md) [r](release-notes/v1.49.844/chapter/03-retrospective.md) [l](release-notes/v1.49.844/chapter/04-lessons.md) [c](release-notes/v1.49.844/chapter/99-context.md) | — | F 31 |  |
