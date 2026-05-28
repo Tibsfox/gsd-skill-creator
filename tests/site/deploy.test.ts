@@ -107,4 +107,35 @@ describe('verifyDeployment', () => {
     expect(result.llmsTxtOk).toBe(false);
     expect(result.errors.length).toBeGreaterThan(0);
   });
+
+  describe('EgressContext wire (v1.49.866)', () => {
+    it('throws EgressContextDenied when ctx denies the default fetch path', async () => {
+      const { EgressContextDenied, CapturingEgressAuditSink } = await import(
+        '../../src/security/egress-context'
+      );
+      const sink = new CapturingEgressAuditSink();
+      const restrictiveCtx = { allowList: [], audit: sink };
+      // No fetchFn → falls through to defaultFetch which calls ensureEgressAllowed.
+      await expect(
+        verifyDeployment('https://denied.example.com', undefined, restrictiveCtx),
+      ).rejects.toThrow(EgressContextDenied);
+      expect(sink.records).toHaveLength(1);
+      expect(sink.records[0]?.allowed).toBe(false);
+    });
+
+    it('bypasses ensureEgressAllowed when caller provides explicit fetchFn', async () => {
+      const { CapturingEgressAuditSink } = await import(
+        '../../src/security/egress-context'
+      );
+      const sink = new CapturingEgressAuditSink();
+      const ctx = { allowList: [], audit: sink };
+      const fetchFn = vi.fn(async () => ({ ok: true, status: 200 }));
+      const result = await verifyDeployment('https://example.com', fetchFn, ctx);
+      expect(result.indexOk).toBe(true);
+      expect(result.llmsTxtOk).toBe(true);
+      // Caller-supplied fetchFn owns its own security boundary; defaultFetch
+      // not invoked → no audit records.
+      expect(sink.records).toHaveLength(0);
+    });
+  });
 });

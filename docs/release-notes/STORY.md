@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.865`.
+The story begins at `v1.0` and continues to `v1.49.866`.
 
-**908 chapters.** 907 have retrospectives.
+**909 chapters.** 908 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -916,3 +916,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.863](v1.49.863/00-summary.md)** — EgressContext singleton chip: `src/terminal/health.ts` · 2026-05-28
 - **[v1.49.864](v1.49.864/00-summary.md)** — EgressContext singleton chip: `src/alternative-discoverer/equivalent-searcher.ts` · 2026-05-28
 - **[v1.49.865](v1.49.865/00-summary.md)** — EgressContext singleton chip: `src/aminet/index-freshness.ts` · 2026-05-28
+- **[v1.49.866](v1.49.866/00-summary.md)** — EgressContext singleton chip: `src/site/deploy.ts` · 2026-05-28

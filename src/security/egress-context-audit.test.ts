@@ -58,7 +58,11 @@ const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
   // cargo.ts + conda.ts + pypi.ts + rubygems.ts batch at v1.49.811.
   'src/intelligence/ipc.ts',
   'src/mcp/skill-installer.ts',
-  'src/site/deploy.ts',
+  // src/site/deploy.ts wired v1.49.866 — fourth Egress chip. ctx?: EgressContext
+  // threaded through verifyDeployment → defaultFetch wrapper; ensureEgressAllowed
+  // hoisted at the top of defaultFetch BEFORE the fetch. Injected FetchFn
+  // overrides bypass the check (caller owns security). EgressContextDenied
+  // propagates through the async-function throw machinery per #10427.
   // src/terminal/health.ts wired v1.49.863 — first chip of Track 3 (Egress).
   // Optional ctx?: EgressContext threaded through checkHealth as a third
   // positional parameter (after url + timeoutMs); ensureEgressAllowed hoisted

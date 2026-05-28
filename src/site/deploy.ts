@@ -1,4 +1,8 @@
 import { basename } from 'node:path';
+import {
+  ensureEgressAllowed,
+  type EgressContext,
+} from '../security/egress-context.js';
 import type { DeployConfig } from './types.js';
 
 /* ------------------------------------------------------------------ */
@@ -121,8 +125,9 @@ export async function dryRun(
 export async function verifyDeployment(
   siteUrl: string,
   fetchFn?: FetchFn,
+  ctx?: EgressContext,
 ): Promise<VerificationResult> {
-  const doFetch = fetchFn ?? defaultFetch;
+  const doFetch = fetchFn ?? ((url: string) => defaultFetch(url, ctx));
   const errors: string[] = [];
 
   const indexRes = await doFetch(`${siteUrl}/`);
@@ -187,7 +192,13 @@ async function defaultWalk(dir: string): Promise<string[]> {
 /** Default fetch wrapper */
 async function defaultFetch(
   url: string,
+  ctx?: EgressContext,
 ): Promise<{ ok: boolean; status: number }> {
+  // Security: hoisted check before fetch — EgressContextDenied propagates
+  // through the async-function throw machinery. Injected fetchFn callers
+  // bypass this check (they own their own security boundary). Wire v1.49.866
+  // per Lesson #10427.
+  ensureEgressAllowed(ctx, 'site/deploy', 'fetch', url);
   const res = await fetch(url);
   return { ok: res.ok, status: res.status };
 }
