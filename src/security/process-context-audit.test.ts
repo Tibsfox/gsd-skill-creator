@@ -47,7 +47,16 @@ const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
   // Promise constructor with synchronous temp-dir cleanup on denial per
   // #10427. Interpreter (bash/node/python3) + [scriptPath] argv exposed
   // to the audit; spawned process inherits the security context contract.
-  'src/chipset/harness-integrity.ts',
+  // src/chipset/harness-integrity.ts wired v1.49.875 — Track 4 chip #6
+  // (Track 4 close; 1440 LOC pre-wire — largest file of the campaign).
+  // Despite size, only N=1 spawn site (`git ls-files --cached "*.env"`
+  // in checkNoEnvFilesTracked). Hoist-at-top wire shape (#10444 catalog
+  // — spawn-site count predicts shape more precisely than LOC band; v875
+  // confirms the v872 forward-observation). ctx?: ProcessContext added
+  // as parameter to checkNoEnvFilesTracked; single ensureProcessAllowed
+  // before execSync. ProcessContextDenied re-thrown from 1 swallow-
+  // everything catch per #10427. Demonstrates that LARGE LOC + SMALL
+  // spawn-count = simple wire shape.
   // src/cli/commands/keystore.ts wired v1.49.861 — singleton chip.
   // Optional ctx?: ProcessContext threaded through keystoreCommand +
   // shellOut; ensureProcessAllowed hoisted OUTSIDE the Promise constructor

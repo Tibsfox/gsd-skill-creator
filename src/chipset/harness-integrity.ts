@@ -13,6 +13,11 @@
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { execSync } from 'node:child_process';
+import {
+  ensureProcessAllowed,
+  ProcessContextDenied,
+  type ProcessContext,
+} from '../security/process-context.js';
 
 // ---------------------------------------------------------------------------
 // Path resolution
@@ -250,9 +255,14 @@ export function checkClaudeGitignored(): InvariantResult {
   };
 }
 
-export function checkNoEnvFilesTracked(): InvariantResult {
+export function checkNoEnvFilesTracked(ctx?: ProcessContext): InvariantResult {
+  // Security: hoist-at-top before single spawn site (#10444 catalog —
+  // hoist-at-top is canonical for N=1 spawn site, even in large files).
+  // The shell-exec wraps `git ls-files --cached`; target='sh' argv=['-c', cmd].
+  const command = 'git ls-files --cached "*.env" ".env" ".env.*"';
+  ensureProcessAllowed(ctx, 'chipset/harness-integrity', 'exec-sync', 'sh', ['-c', command]);
   try {
-    const output = execSync('git ls-files --cached "*.env" ".env" ".env.*"', {
+    const output = execSync(command, {
       cwd: PROJECT_ROOT,
       encoding: 'utf8',
       timeout: 5000,
@@ -266,7 +276,9 @@ export function checkNoEnvFilesTracked(): InvariantResult {
         ? `Tracked .env files found: ${output}`
         : 'No .env files tracked by git',
     };
-  } catch {
+  } catch (err) {
+    // #10427: security denial is load-bearing even from result-wrapping catches.
+    if (err instanceof ProcessContextDenied) throw err;
     return {
       name: 'no-env-tracked',
       passed: true,

@@ -15,6 +15,11 @@ import * as fs from 'node:fs';
 import * as os from 'node:os';
 import * as path from 'node:path';
 import { execSync } from 'node:child_process';
+import {
+  type ProcessContext,
+  ProcessContextDenied,
+  NULL_PROCESS_AUDIT_SINK,
+} from '../security/process-context.js';
 
 import {
   checkHookScriptsExecutable,
@@ -659,6 +664,39 @@ describe('Harness Integrity', () => {
         failures,
         `Invariant failures:\n${failures.join('\n')}`,
       ).toHaveLength(0);
+    });
+  });
+
+  // ==========================================================================
+  // ProcessContext wire (v1.49.875 — Track 4 chip #6 close; hoist-at-top)
+  // ==========================================================================
+  describe('ProcessContext wire (v1.49.875)', () => {
+    it('checkNoEnvFilesTracked: default (undefined ctx) preserves legacy behavior', () => {
+      const result = checkNoEnvFilesTracked();
+      expect(result.name).toBe('no-env-tracked');
+      expect(typeof result.passed).toBe('boolean');
+    });
+
+    it('checkNoEnvFilesTracked: throws ProcessContextDenied when ctx denies sh exec', () => {
+      const ctx: ProcessContext = {
+        allowList: [],
+        audit: NULL_PROCESS_AUDIT_SINK,
+      };
+      expect(() => checkNoEnvFilesTracked(ctx)).toThrow(ProcessContextDenied);
+    });
+
+    it('checkNoEnvFilesTracked: records audit event with source=chipset/harness-integrity', () => {
+      const events: Array<{ source: string; target: string }> = [];
+      const ctx: ProcessContext = {
+        allowList: ['sh'],
+        audit: {
+          record: (e) => events.push({ source: e.source, target: e.target }),
+        },
+      };
+      checkNoEnvFilesTracked(ctx);
+      expect(events.length).toBe(1);
+      expect(events[0].source).toBe('chipset/harness-integrity');
+      expect(events[0].target).toBe('sh');
     });
   });
 });
