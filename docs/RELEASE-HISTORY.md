@@ -1,15 +1,16 @@
 # Release History
 
-892 milestones shipped across the v1.0 → v1.49.849 arc. The table below lists every shipped release, newest first.
+893 milestones shipped across the v1.0 → v1.49.850 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 892 releases · 891 with retrospectives · 728 with extracted lessons · quality A:662 B:97 C:63 D:11 F:59 (avg 90) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 893 releases · 892 with retrospectives · 728 with extracted lessons · quality A:662 B:97 C:63 D:11 F:60 (avg 90) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.850](release-notes/v1.49.850) | ProcessContext singleton chip: `src/orchestrator/extension/extension-detector.ts` | 2026-05-28 | 2 | — | — | [s](release-notes/v1.49.850/chapter/00-summary.md) [r](release-notes/v1.49.850/chapter/03-retrospective.md) [l](release-notes/v1.49.850/chapter/04-lessons.md) [c](release-notes/v1.49.850/chapter/99-context.md) | — | F 20 |  |
 | [v1.49.849](release-notes/v1.49.849) | ProcessContext singleton chip: `src/retro/changelog-watch.ts` | 2026-05-28 | 2 | — | — | [s](release-notes/v1.49.849/chapter/00-summary.md) [r](release-notes/v1.49.849/chapter/03-retrospective.md) [l](release-notes/v1.49.849/chapter/04-lessons.md) [c](release-notes/v1.49.849/chapter/99-context.md) | — | F 20 |  |
 | [v1.49.848](release-notes/v1.49.848) | Help text expansion: 20 missing commands surfaced in `printHelp()` | 2026-05-28 | 2 | — | — | [s](release-notes/v1.49.848/chapter/00-summary.md) [r](release-notes/v1.49.848/chapter/03-retrospective.md) [l](release-notes/v1.49.848/chapter/04-lessons.md) [c](release-notes/v1.49.848/chapter/99-context.md) | — | F 30 |  |
 | [v1.49.847](release-notes/v1.49.847) | Codification Ship: Promote #10438 + #10439 + #10440 + #10441 + #10442 | 2026-05-28 | 2 | — | — | [s](release-notes/v1.49.847/chapter/00-summary.md) [r](release-notes/v1.49.847/chapter/03-retrospective.md) [l](release-notes/v1.49.847/chapter/04-lessons.md) [c](release-notes/v1.49.847/chapter/99-context.md) | — | F 34 |  |
