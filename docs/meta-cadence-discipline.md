@@ -8,8 +8,10 @@ the project's operational axes are in balance.
 the 2026-05-26 core-functions audit retrospective).
 **Verify-axis added at:** v1.49.844 (canonical-doc home for the
 verification/integration-only ships observation; v829 + v832 evidence
-base. Promotion-to-numbered-lesson deferred until next codify ship per
-#10426).
+base).
+**Numbered-lesson promotions:** v1.49.847 — #10438 (verify axis as a
+first-class numbered lesson) + #10439 (CLI manual + substrate auto-emit
+duality as the calibrate-axis completeness criterion).
 
 ---
 
@@ -137,6 +139,151 @@ respectively. The shape would mirror the existing
 This is a tentative observation, not a candidate. The prose check is
 sufficient until the third codification ship under this discipline
 surfaces enough evidence to justify the tool.
+
+---
+
+---
+
+## Lesson #10438 — Verify axis: prove-the-wire-works as a first-class axis
+
+**Codified at:** v1.49.847 (canonical-doc home set at v844; numbered-lesson
+promotion this ship).
+
+A verify ship adds no new substrate, no new caller, and no new calibratable
+threshold. It adds the integration test that EXISTING substrate-and-caller
+could have been carrying since the substrate landed. The work is
+qualitatively distinct from the three earlier axes: codify produces a doc;
+consume produces a caller; calibrate produces a threshold update. Verify
+produces a proof — a test that exercises the existing wire against real
+(not mocked) collaborators.
+
+### Evidence (2 instances; both cross-rootdir integration tests)
+
+- **v1.49.829** — `tests/integration/college-observation-bridge-wire.integration.test.ts`.
+  Exercises the cross-rootdir ObservationBridge ↔ translateSessionEvent wire
+  end-to-end. Small src/ delta; substantial test infrastructure; proves the
+  v824 wire works against real ObservationContext + ConsumedSubstrate
+  primitives.
+- **v1.49.832** — `tests/integration/copper-rosetta-fallback-wire.integration.test.ts`.
+  Exercises the ConceptFallbackProvider selector wire from src/ → .college/.
+  Same shape: small src/ delta, substantial test fixture, proves the v830
+  wire fires end-to-end.
+
+### Why two instances was enough
+
+v829 + v832 are NOT minor variations on a single pattern. v829 tests an
+observation-bridge wire; v832 tests a fallback-provider wire. Both are
+cross-rootdir (src/ ↔ .college/) — a property that #10435 makes
+structurally testable but does not itself require the integration test.
+The fact that two independent wires of different shapes both needed the
+same kind of follow-up ship is the contrast that promotes the axis.
+
+### How to apply
+
+When a substrate ship's retrospective lists "no integration test yet" as a
+known gap, the verify ship is the named follow-up. The trigger is
+`≥10 ships since first non-test caller landed and no integration test
+exists` — that gives the wire enough operational time for the test surface
+to settle, but not so much that the substrate becomes shelfware (per
+#10422).
+
+### Anti-patterns
+
+- ❌ Bundling verify work into a consume ship. Inflates scope past a clean
+  operator-session and the verify work tends to get under-tested.
+- ❌ Skipping verify because "unit tests cover it." Unit tests against mocks
+  prove the wire's signature; integration tests against real collaborators
+  prove the wire's behavior. Both are necessary; neither substitutes for
+  the other.
+- ❌ Verify ship without a named substrate target. If you can't point at
+  "this is the substrate whose wire I'm proving," the ship is exploratory,
+  not a verify ship.
+
+### Cross-references
+
+- **#10428** — verify is the fourth axis of meta-cadence; this lesson
+  formalizes the axis added structurally at v844.
+- **#10435** — cross-rootdir wire pattern is the test-coverage gap that
+  the v829 + v832 verify ships closed.
+- **#10422** — shelfware verdict patterns; verify ships are the
+  production-side validation that complements the verdict-side
+  observability.
+
+---
+
+## Lesson #10439 — CLI manual + substrate auto-emit duality (calibrate-axis completeness rule)
+
+**Codified at:** v1.49.847 (from v803 + v845/v846 two-instance evidence).
+
+A calibratable threshold's calibration loop is structurally incomplete
+until BOTH write callers ship:
+
+1. **Manual recorder** — a CLI surface that lets an operator emit a single
+   labeled event with explicit polarity. Examples:
+   `skill-creator predict-next <skill> --useful`/`--not-useful` (v845);
+   token-budget CLI mode flag (v803).
+2. **Substrate auto-recorder** — a production-traffic path that auto-emits
+   events with a default polarity, so the loop sees real-world data without
+   operator action. Examples: copper/activation + selector auto-emit on
+   low-confidence (v846); `/sc:status` integration writing token-budget
+   events (v803).
+
+### Why both halves are needed
+
+The CLI alone produces only operator-attributed events (useful for
+spot-checks and synthetic test runs). The auto-recorder alone produces
+only traffic-attributed events (useful for steady-state calibration but
+cannot exercise edge-case polarities at will). Together, they let the
+calibration loop see both the rare-event distribution (operator-driven)
+and the steady-state distribution (traffic-driven).
+
+### Evidence (2 instances; full 3-ship pattern per threshold)
+
+| Threshold | Read-side wire | CLI manual recorder | Substrate auto-recorder |
+|---|---|---|---|
+| `token_budget.warn_at_percent` | v1.49.798 (registry extraction) + v801 (calibration loop) | v1.49.803 (CLI mode flag) | v1.49.803 (`/sc:status` Step 4.6) |
+| `predictive.low_confidence_threshold` | v1.49.837 (observation source registered) | v1.49.845 (`predict-next <skill> --useful`/`--not-useful`) | v1.49.846 (copper/activation + selector auto-emit) |
+
+### How to apply
+
+When shipping a new calibratable threshold, plan for THREE ships:
+observation-source registration → CLI manual recorder → substrate
+auto-recorder. The order matters: observation-source first (read side),
+CLI second (cheap-to-verify operator flow), substrate auto-recorder third
+(traffic flow).
+
+Default polarity for the auto-recorder MUST mirror the CLI's parseArgs
+default. If the CLI defaults to `--not-useful`, the substrate auto-recorder
+writes `not_useful` events. This consistency lets the calibration loop
+compute meaningful statistics across both event sources.
+
+### Forward-test trigger
+
+Any future calibratable-threshold ship that registers a read-side
+observation source. Within 6 ships (per #10428 consume-axis cadence), both
+write callers SHOULD have shipped, OR a retrospective should explicitly
+flag the missing halves as deferred-but-tracked.
+
+### Anti-patterns
+
+- ❌ Shipping the read-side wire without the write callers. The threshold
+  becomes substrate-without-callers — the consume-axis shape #10428 is
+  designed to surface.
+- ❌ Shipping ONLY the CLI manual recorder. Traffic doesn't exercise it;
+  calibration runs on synthetic-only data.
+- ❌ Shipping ONLY the auto-recorder. Operator can't generate edge-case
+  polarities to validate the loop's behavior.
+- ❌ Diverging polarity defaults between the CLI and the auto-recorder.
+  Calibration statistics become apples-to-oranges across event sources.
+
+### Cross-references
+
+- **#10428** — meta-cadence; this lesson refines the calibrate-axis
+  completeness criterion.
+- **#10437** — subscriber-gated observability hook; v846's auto-emit uses
+  this shape inside the existing emitPredictions chain.
+- **#10427** — failure-mode contracts; both CLI and auto-recorder writes
+  are accessory surfaces (must fail silently).
 
 ---
 

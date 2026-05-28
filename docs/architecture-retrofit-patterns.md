@@ -2,7 +2,7 @@
 
 **Surface:** Introducing a chokepoint, interface, or generator-template to N existing modules with high call-site multiplicity; authoring a generator that may run on partial input.
 
-**Codified at:** v1.49.784 (lesson cluster from v1.49.782 LoaderContext chokepoint + v1.49.783 STATE.md normalizer fix); v1.49.802 (extended with Lesson #10426 second-instance cross-class registry extraction from the v1.49.795-801 T1.1 arc).
+**Codified at:** v1.49.784 (lesson cluster from v1.49.782 LoaderContext chokepoint + v1.49.783 STATE.md normalizer fix); v1.49.802 (extended with Lesson #10426 second-instance cross-class registry extraction from the v1.49.795-801 T1.1 arc); v1.49.847 (extended with Lesson #10440 production-caller path-narrowing from v845 + v846 two-instance evidence).
 
 ## Why this discipline exists
 
@@ -72,6 +72,65 @@ The pattern composes with [`#10422`](shelfware-verdict-patterns.md) (verdict-pat
 
 **Empirical break-even.** In a multi-ship chain where the architectural extraction enables 3+ consumers, the extraction pays for itself: the v798 extraction added ~30 min over the lightest-wire option but saved ~10–15 min on each of v799, v800, v801. Net positive at the third consumer.
 
+### Production-caller scope-reduction via path-narrowing (Lesson #10440)
+
+When a forward-flag from a prior ship names a **wrapper class** as the
+production-caller target (e.g., "wire `ActivationSelector` with
+`fallbackProvider`") but the underlying **path** the wrapper exercises is
+directly callable, prefer to call the path directly. The wrapper is an
+integration concern — it composes lifecycle, scheduling, or DI — but the
+path's behavior does not require its composition wrapper to be exercised.
+
+**Why this matters.** Wrapper-class instantiation often requires building
+peer dependencies (mock factories, executor injectors, lifecycle context)
+that are NOT load-bearing for the path under test. The simpler scope —
+call the path directly — avoids accreting those dependencies into the
+caller surface.
+
+**When the rule applies:**
+
+- The forward-flag specifies a class (e.g., `ActivationSelector`,
+  `PipelineActivationDispatch`).
+- The path the class exercises is exposed as a free function or static
+  module export (e.g., `predictNextSkillsWithMeta`,
+  `appendPredictiveLowConfidenceEvent`).
+- The wrapper class itself has zero production callers
+  (substrate-ahead-of-demand).
+
+In this configuration, instantiating the class is incidental to exercising
+the path. Call the path directly.
+
+**Evidence (2 instances).**
+
+- **v1.49.845** — CLI calls `predictNextSkillsWithMeta +
+  appendPredictiveLowConfidenceEvent` directly. The v837 forward-flag had
+  named `ActivationSelector` + `PipelineActivationDispatch` as wire
+  targets; the CLI bypasses both and exercises the path.
+- **v1.49.846** — Substrate auto-emit lives inside the existing
+  `emitPredictions` chain at the call site, calling
+  `appendPredictiveLowConfidenceEvent` directly. No new wrapper class
+  introduced.
+
+**Anti-pattern.** Constructing the named wrapper class in the production
+caller because the forward-flag named it. The wrapper's composition
+becomes an unrelated dependency of the production caller; future refactors
+of the wrapper will ripple into callers that don't actually use the
+wrapper's composition.
+
+**How to recognize the smell.** If a production-caller PR diff is
+dominated by mock executors, lifecycle context constructors, or DI
+plumbing, but the underlying path call is one or two lines, the wrapper
+is incidental. Narrow the scope.
+
+**Cross-references.**
+
+- #10422 — shelfware verdict patterns; lightest-wire discipline applied
+  to the production caller's call shape.
+- #10423 — lightest wire that satisfies the verdict; this lesson is the
+  production-caller specialization of that rule.
+- #10412 — recon-first; the path-vs-wrapper question is the recon
+  question that surfaces this lesson.
+
 ## When this discipline kicks in
 
 - Adding a new function/options-bag parameter that will be passed to N existing modules.
@@ -93,3 +152,4 @@ The pattern composes with [`#10422`](shelfware-verdict-patterns.md) (verdict-pat
 - **#10414** — Optional `ctx?` parameter is the cheapest retrofit pattern for chokepoint introduction. v782 candidate, promoted at v784.
 - **#10416** — Tolerant generators are the default for hand-authored ↔ generated round-trips. v783 candidate, promoted at v784.
 - **#10426** — Extract per-class registries at the SECOND class instance, not the third. v798 candidate, promoted at v802.
+- **#10440** — Production-caller scope-reduction via path-narrowing: when a forward-flag names a wrapper class but the underlying path is directly callable, call the path directly. v845 + v846 candidate, promoted at v847.

@@ -2,7 +2,7 @@
 
 **Surface:** Tier-E security chokepoints — three sibling modules with a shared shape that gate filesystem reads, network egress, and child-process spawn behind an optional `ctx?` parameter.
 
-**Codified at:** v1.49.782 (LoaderContext, first instance); v1.49.806 (EgressContext + ProcessContext, second and third instances; this doc).
+**Codified at:** v1.49.782 (LoaderContext, first instance); v1.49.806 (EgressContext + ProcessContext, second and third instances; this doc); v1.49.847 (extended with Lesson #10441 DI-executor + tokenized-argv wire shape from v825 + v843 three-instance evidence).
 
 ## What this doc catalogs
 
@@ -83,6 +83,82 @@ Files **without** an internal helper require N `ensure*Allowed` hoists at N call
 
 The pattern is observed at 2 instances (v809 + v820); promotion threshold per #10426 (cross-class registry extraction at 2nd instance) met at v820. Generalization candidate confirmed in v1.49.823 handoff.
 
+## DI-executor + tokenized-argv wire shape (Lesson #10441)
+
+**Codified at:** v1.49.847 (from v825 + v843 three-instance evidence).
+
+When a module exposes a factory that accepts an optional injected executor
+for testability — and the default executor takes a free-form `cmd` string —
+the ProcessContext wire pattern specializes #10433's internal-helper shape:
+
+```ts
+export function createFooManager(
+  executor?: SomeExecutor,
+  ctx?: ProcessContext,
+): SomeManager {
+  const defaultExecutor: SomeExecutor = (cmd) => {
+    const tokens = cmd.trim().split(/\s+/);
+    const exe = tokens[0] ?? '';
+    const argv = tokens.slice(1);
+    ensureProcessAllowed(ctx, 'module/source', 'op', exe, argv);
+    return execSync(cmd, { encoding: 'utf8' }) as string;
+  };
+  return new SomeManager(executor || defaultExecutor);
+}
+```
+
+Five structural properties define the shape:
+
+1. **Optional `ctx?: ProcessContext`** as a positional factory parameter.
+2. **The default executor closes over `ctx`** — the security check runs
+   ONLY on the default-executor path.
+3. **Injected executors are NOT wrapped** — caller-injected security is
+   the caller's responsibility (test mocks; production custom-executor
+   patterns).
+4. **The cmd string is tokenized** to extract executable + argv for the
+   allow-list check and audit record.
+5. **The default executor IS the internal helper** from #10433 — `ctx`
+   threads through it once and applies to all calls through it.
+
+### Evidence (3 instances)
+
+| Ship | File | Notes |
+|---|---|---|
+| v1.49.825 | `src/git/core/repo-manager.ts` | First instance; established the shape. |
+| v1.49.843 | `src/mesh/mesh-worktree.ts` | Second instance; mesh family. |
+| v1.49.843 | `src/mesh/proxy-committer.ts` | Third instance; mesh family. |
+
+### When to use this shape vs. the spawn-call shape
+
+- Use **DI-executor + tokenized-argv** when the file exposes a factory
+  with an executor injection point. The wrap happens once at the executor,
+  not at each call site.
+- Use the **spawn-call wrap** (#10433 internal-helper proper) when the
+  file has a single internal helper that all spawn calls flow through but
+  no executor-injection seam.
+- Use the **per-callsite wrap** when neither helper nor executor seam
+  exists. Highest cost; only appropriate for low-spawn-count files.
+
+### Anti-patterns
+
+- ❌ **Wrapping the injected executor.** Defeats the test-injection
+  contract; mocks built by tests get unexpectedly gated by ProcessContext.
+- ❌ **Splitting cmd on `' '` without trim.** Leading or trailing
+  whitespace produces empty argv entries; the allow-list match fails or
+  audits a malformed exe-name.
+- ❌ **Calling `ensureProcessAllowed` from the factory body, not the
+  default executor.** The check runs once at factory time rather than on
+  every spawn — bypassing it for every call.
+
+### Cross-references
+
+- #10433 — parent discipline; DI-executor is a sub-class of the
+  internal-helper pattern.
+- #10414 — optional `ctx?` parameter; the DI-executor shape uses this
+  pattern at the factory boundary.
+- #10427 — failure-mode contracts; the `ensureProcessAllowed` call sits
+  at the function root of the default executor, OUTSIDE any swallow-catch.
+
 ## Anti-patterns
 
 - ❌ **Calling `ensure*Allowed` inside a try/catch that swallows errors.** The chokepoint denial is a load-bearing signal and must propagate. The fix: hoist the `ensure*Allowed` call OUT of the try block.
@@ -93,6 +169,7 @@ The pattern is observed at 2 instances (v809 + v820); promotion threshold per #1
 ## Cross-references
 
 - **Lesson #10433** — Internal-helper pattern for `ctx?` threading. When a file has an internal helper wrapping the side-effecting op, thread `ctx?` through the helper for `1 LOC × N callsites`; without a helper, the cost is `N LOC × N callsites`. Audit each batch-chip candidate for a helper first. Codified v1.49.824 from v809 + v820 case studies.
+- **Lesson #10441** — DI-executor + tokenized-argv wire shape for ProcessContext. When a module exposes a factory with an optional injected executor for testability, the default executor closes over `ctx?`, tokenizes the cmd string to extract executable + argv, and calls `ensureProcessAllowed` before delegating. A sub-class of #10433: the default executor IS the internal helper. Codified v1.49.847 from v825 + v843 three-instance evidence.
 - **Lesson #10414** — Optional `ctx?` parameter is the cheapest retrofit pattern for chokepoint introduction. `docs/architecture-retrofit-patterns.md`.
 - **Lesson #10426** — Extract per-class registries at the SECOND class instance. The three chokepoints are themselves the validating instance set for the discipline — they are siblings with the same shape but specialized targets, not parameterizations of a generic abstraction (per #10423, the lightest wire that satisfies the verdict).
 - **Lesson #10427** — Failure-mode contracts. Security chokepoint denials are load-bearing and must propagate; do not swallow `*ContextDenied` exceptions. `docs/failure-mode-contracts.md`.

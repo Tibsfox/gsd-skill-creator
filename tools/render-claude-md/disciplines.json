@@ -122,12 +122,12 @@
   {
     "domain": "Architecture-retrofit patterns",
     "trigger": "Introducing a chokepoint, interface, or generator-template to N existing modules with high call-site multiplicity; authoring a generator that may run on partial input; adding the SECOND instance of a class-typed family",
-    "summary": "Optional `ctx?` parameter pattern for chokepoint retrofit — three states (undefined→legacy permissive; defaultLoaderContext()→audit-only; restricted→enforced); zero call-site churn. Tolerant generators emit skip-the-line over `UNKNOWN`/`TODO`/placeholder sentinels — placeholders pollute output, break round-trip, and mask the schema gap. Exception: emit the default when the field has a load-bearing default value. Cross-class registries extract at the SECOND class instance (not first, not third) — the contrast between two real instances determines the registry shape; deferring to the third class ships a temporary wrong-source measure that has to be unwound.",
+    "summary": "Optional `ctx?` parameter pattern for chokepoint retrofit — three states (undefined→legacy permissive; defaultLoaderContext()→audit-only; restricted→enforced); zero call-site churn. Tolerant generators emit skip-the-line over `UNKNOWN`/`TODO`/placeholder sentinels — placeholders pollute output, break round-trip, and mask the schema gap. Exception: emit the default when the field has a load-bearing default value. Cross-class registries extract at the SECOND class instance (not first, not third) — the contrast between two real instances determines the registry shape; deferring to the third class ships a temporary wrong-source measure that has to be unwound. Production-caller scope-reduction via path-narrowing (#10440): when a forward-flag names a wrapper class but the underlying path is directly callable, call the path directly — wrapper-class instantiation accretes peer-dependency surface that is not load-bearing for the path under test.",
     "canonical_docs": [
       "docs/architecture-retrofit-patterns.md"
     ],
-    "key_lessons": ["#10414", "#10416", "#10426"],
-    "codified_at_milestone": "v1.49.784 (new domain — codified from v1.49.782 LoaderContext + v1.49.783 normalizer fix lesson cluster); v1.49.802 (extended with #10426 second-instance cross-class registry extraction from T1.1 arc)"
+    "key_lessons": ["#10414", "#10416", "#10426", "#10440"],
+    "codified_at_milestone": "v1.49.784 (new domain — codified from v1.49.782 LoaderContext + v1.49.783 normalizer fix lesson cluster); v1.49.802 (extended with #10426 second-instance cross-class registry extraction from T1.1 arc); v1.49.847 (extended with #10440 production-caller path-narrowing from v845 + v846 two-instance evidence)"
   },
   {
     "domain": "Deferred-maintenance escalation",
@@ -173,22 +173,22 @@
   {
     "domain": "Failure-mode contracts",
     "trigger": "Designing a new surface (function, module, CLI flag, skill prompt section, hook) where silent-vs-loud failure asymmetry is in play; adding a `try { ... } catch { /* ignore */ }` block; reviewing a long-running primitive's transient-error handling; adding a subscriber-gated observability hook on a context/options type",
-    "summary": "Forensic, dashboard, and observability surfaces fail silently; load-bearing surfaces fail loudly. Test: does the user's next decision depend on this surface's output? If yes → load-bearing → propagate. If no → accessory → swallow at surface boundary. Contract documentation convention: explicit `// best-effort silent` or `// fail loudly` marker in docstring paired with at least one test assertion that exercises the failure path; surfaces without the paired test are stochastic. Subscriber-gated observability-only context-hook pattern (#10437): substrate-consumer hooks recur in a 5-element shape (optional `?` field + subscriber gate + fire-and-forget Promise + .catch(() => {}) swallow + two-argument derived-data signature). PAIR co-location (when multiple hooks live on the same surface) shares one try/catch to prevent per-hook drift.",
+    "summary": "Forensic, dashboard, and observability surfaces fail silently; load-bearing surfaces fail loudly. Test: does the user's next decision depend on this surface's output? If yes → load-bearing → propagate. If no → accessory → swallow at surface boundary. Contract documentation convention: explicit `// best-effort silent` or `// fail loudly` marker in docstring paired with at least one test assertion that exercises the failure path; surfaces without the paired test are stochastic. Subscriber-gated observability-only context-hook pattern (#10437): substrate-consumer hooks recur in a 5-element shape (optional `?` field + subscriber gate + fire-and-forget Promise + .catch(() => {}) swallow + two-argument derived-data signature). PAIR co-location (when multiple hooks live on the same surface) shares one try/catch to prevent per-hook drift. Re-throw ProcessContextDenied from CLI swallow-catch (#10442): CLI surfaces that absorb ALL errors into structured JSON output must re-throw `ProcessContextDenied` as the first line of the catch block — security denials are load-bearing per #10427 and must propagate even when operational errors are absorbed for UX.",
     "canonical_docs": [
       "docs/failure-mode-contracts.md"
     ],
-    "key_lessons": ["#10427", "#10437"],
-    "codified_at_milestone": "v1.49.802 (new domain — codified from v1.49.799-801 three-instance audit-log + watch-loop + /sc:status lesson cluster); v1.49.840 (extended with #10437 subscriber-gated context-hook pattern from v810+v826 onPredictions + v830+v832 fallbackProvider four-instance evidence set + PAIR co-location refinement)"
+    "key_lessons": ["#10427", "#10437", "#10442"],
+    "codified_at_milestone": "v1.49.802 (new domain — codified from v1.49.799-801 three-instance audit-log + watch-loop + /sc:status lesson cluster); v1.49.840 (extended with #10437 subscriber-gated context-hook pattern from v810+v826 onPredictions + v830+v832 fallbackProvider four-instance evidence set + PAIR co-location refinement); v1.49.847 (extended with #10442 re-throw ProcessContextDenied from CLI swallow-catch from v820 + v842 two-instance evidence)"
   },
   {
     "domain": "Meta-cadence",
     "trigger": "Planning a counter-cadence cleanup-mission; deciding which operational debt to spend a non-degree-advancing ship on; auditing whether the project's four operational axes (codify / consume / calibrate / verify) are in balance",
-    "summary": "Four operational axes — codify (~7-10 ships), consume (≤6 ships from substrate to first non-test caller), calibrate (~10 ships per wired threshold tick), verify (~10 ships per substrate-with-callers-but-no-integration-test; added v1.49.844 with v829+v832 evidence base, lesson-promotion deferred to next codify ship). Cadence-overdue check is prose-only and informational: each axis names its overdue trigger; the operator picks; the next counter-cadence's scope discussion NAMES the proposed axis even if a different axis wins on operator priority. The naming is the load-bearing discipline; the choice is operator-bounded.",
+    "summary": "Four operational axes — codify (~7-10 ships), consume (≤6 ships from substrate to first non-test caller), calibrate (~10 ships per wired threshold tick), verify (~10 ships per substrate-with-callers-but-no-integration-test; #10438 promoted at v847 from v829+v832 evidence). Cadence-overdue check is prose-only and informational: each axis names its overdue trigger; the operator picks; the next counter-cadence's scope discussion NAMES the proposed axis even if a different axis wins on operator priority. CLI manual + substrate auto-emit duality (#10439): a calibratable threshold's loop is structurally incomplete until BOTH write callers ship — a CLI manual recorder (operator-attributed events with explicit polarity) AND a substrate auto-recorder (traffic-attributed events with a default polarity that mirrors the CLI default). Plan THREE ships per threshold: observation-source registration → CLI manual recorder → substrate auto-recorder.",
     "canonical_docs": [
       "docs/meta-cadence-discipline.md"
     ],
-    "key_lessons": ["#10428"],
-    "codified_at_milestone": "v1.49.805 (new domain — codified from S3 lever in 2026-05-26 core-functions audit retrospective); v1.49.844 (verify-axis added as canonical-doc home for v829+v832 evidence base; numbered-lesson promotion deferred to next codify ship per #10426)"
+    "key_lessons": ["#10428", "#10438", "#10439"],
+    "codified_at_milestone": "v1.49.805 (new domain — codified from S3 lever in 2026-05-26 core-functions audit retrospective); v1.49.844 (verify-axis added as canonical-doc home for v829+v832 evidence base); v1.49.847 (numbered-lesson promotions: #10438 verify axis + #10439 CLI manual + substrate auto-emit duality from v803 + v845/v846 evidence)"
   },
   {
     "domain": "Substrate opt-in paths",
@@ -203,15 +203,15 @@
   {
     "domain": "Security chokepoints",
     "trigger": "Adding a new src/ caller that reads from disk, issues a network request, or spawns a child process; reviewing whether a new module needs to thread an existing `ctx?` parameter; migrating a KNOWN_UNWIRED entry from one of the audit-test allowlists",
-    "summary": "Three sibling chokepoints — LoaderContext (filesystem, v782), EgressContext (network egress, v806), ProcessContext (child-process spawn, v806) — share a common shape (optional `ctx?` param, allow-list pattern, audit sink, `*ContextDenied` error) but specialize their targets. Each chokepoint's audit-test (`src/security/*-context-audit.test.ts`) is the runtime enforcement: greps src/ for the surface's signature, accepts either `ensure*Allowed(` calls or `Role: NOT a <surface> caller` docstring exemption, grandfathered existing call sites tracked in KNOWN_UNWIRED. Security denials are load-bearing per #10427 — hoist `ensure*Allowed(` OUTSIDE try/catch blocks that swallow errors. Internal-helper pattern (#10433): when a file already wraps the side-effecting op in an internal helper, thread `ctx?` through the helper for 1 LOC × N callsites; files without a helper take N LOC × N callsites.",
+    "summary": "Three sibling chokepoints — LoaderContext (filesystem, v782), EgressContext (network egress, v806), ProcessContext (child-process spawn, v806) — share a common shape (optional `ctx?` param, allow-list pattern, audit sink, `*ContextDenied` error) but specialize their targets. Each chokepoint's audit-test (`src/security/*-context-audit.test.ts`) is the runtime enforcement: greps src/ for the surface's signature, accepts either `ensure*Allowed(` calls or `Role: NOT a <surface> caller` docstring exemption, grandfathered existing call sites tracked in KNOWN_UNWIRED. Security denials are load-bearing per #10427 — hoist `ensure*Allowed(` OUTSIDE try/catch blocks that swallow errors. Internal-helper pattern (#10433): when a file already wraps the side-effecting op in an internal helper, thread `ctx?` through the helper for 1 LOC × N callsites; files without a helper take N LOC × N callsites. DI-executor + tokenized-argv wire shape (#10441): when a module exposes a factory with an optional injected executor for testability, the default executor closes over `ctx?`, tokenizes the cmd string to extract executable + argv, and calls `ensureProcessAllowed` before delegating — a sub-class of #10433 where the default executor IS the internal helper.",
     "canonical_docs": [
       "docs/security-chokepoints.md",
       "src/security/loader-context.ts",
       "src/security/egress-context.ts",
       "src/security/process-context.ts"
     ],
-    "key_lessons": ["#10414", "#10426", "#10427", "#10433"],
-    "codified_at_milestone": "v1.49.806 (new domain — codified from S6 lever in 2026-05-26 core-functions audit retrospective; extends #10414 LoaderContext pattern to network egress + child-process spawn surfaces); v1.49.824 (extended with #10433 internal-helper pattern for ctx? threading from v809 + v820 case studies)"
+    "key_lessons": ["#10414", "#10426", "#10427", "#10433", "#10441"],
+    "codified_at_milestone": "v1.49.806 (new domain — codified from S6 lever in 2026-05-26 core-functions audit retrospective; extends #10414 LoaderContext pattern to network egress + child-process spawn surfaces); v1.49.824 (extended with #10433 internal-helper pattern for ctx? threading from v809 + v820 case studies); v1.49.847 (extended with #10441 DI-executor + tokenized-argv wire shape from v825 + v843 three-instance evidence)"
   },
   {
     "domain": "Two-layer closure for procedure-rooted drift",

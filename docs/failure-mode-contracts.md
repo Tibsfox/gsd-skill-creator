@@ -2,7 +2,7 @@
 
 **Surface:** Designing a new surface (function, module, CLI flag, skill prompt section, hook) where the asymmetric cost of silent vs loud failure is in play; reviewing an existing surface that has been emitting either spurious user-facing errors or invisible silent degradations.
 
-**Codified at:** v1.49.802 (lesson cluster from v1.49.799 audit log + v1.49.800 watch loop + v1.49.801 `/sc:status` Step 5.5 — three independent instances of best-effort-silent failure contracts in one chained session).
+**Codified at:** v1.49.802 (lesson cluster from v1.49.799 audit log + v1.49.800 watch loop + v1.49.801 `/sc:status` Step 5.5 — three independent instances of best-effort-silent failure contracts in one chained session); v1.49.840 (extended with #10437 subscriber-gated context-hook pattern); v1.49.847 (extended with #10442 re-throw ProcessContextDenied from CLI swallow-catch).
 
 ## Why this discipline exists
 
@@ -226,7 +226,92 @@ When adding a new subscriber-gated hook to a producer:
   partition; some subscriber-gated hooks cross rootdirs (fallbackProvider),
   others stay in-rootdir (onPredictions).
 
+## Re-throw ProcessContextDenied from CLI swallow-catch (Lesson #10442)
+
+**Codified at:** v1.49.847 (from v820 + v842 two-instance evidence).
+
+When a CLI surface has a try/catch that absorbs ALL errors into structured
+output (typically JSON for the user), the #10427 contract requires that
+security denials propagate while operational errors are absorbed. The
+implementation is one line at the top of the catch block:
+
+```ts
+try {
+  await someSpawningOp();
+} catch (err) {
+  if (err instanceof ProcessContextDenied) throw err;
+  // operational error: serialize to JSON and exit with code 1
+  output({ error: String(err) });
+  process.exit(1);
+}
+```
+
+### Why this matters
+
+A CLI catch that turns ALL errors into JSON output (including
+authorization failures) defeats the #10427 load-bearing-fails-loudly rule.
+The user gets `{"error": "ProcessContextDenied: ..."}` and the CLI exits
+with code 1 — an operational-failure exit code, indistinguishable from a
+normal CLI failure. Callers (other tools, CI pipelines, shell scripts)
+cannot distinguish "authorization denied" from "command not found" from
+"spawn failed."
+
+Re-throwing the specific class restores propagation while preserving CLI
+UX for non-security errors. The catch block still handles the normal
+failure path; the security path bypasses it.
+
+### Evidence (2 instances)
+
+- **v1.49.820** — `src/git/branch-manager.ts`. First CLI surface to apply
+  the pattern; the function has a swallow-everything wrapper for git
+  failures, and the re-throw was added to let `ProcessContextDenied`
+  propagate through the wrapper.
+- **v1.49.842** — `src/cli/commands/terminal.ts`. CLI catch absorbing for
+  UX; same pattern applied to a terminal-spawn surface.
+
+### How to apply
+
+When adding `ensureProcessAllowed` to a CLI surface that already has a
+swallow-catch:
+
+1. **Hoist** `ensureProcessAllowed` OUTSIDE the try block if possible
+   (preferred per security-chokepoints anti-pattern guidance).
+2. **If hoisting is structurally impossible** (the catch block wraps
+   user-input → spawn-command translation), add
+   `if (err instanceof ProcessContextDenied) throw err;` as the FIRST
+   line of the catch block.
+3. **Do not** add the re-throw lower in the catch block — it must precede
+   any side-effecting error-reporting code so the load-bearing failure
+   propagates before the catch block's accessory work begins.
+
+### Forward-test trigger
+
+Any future CLI command with a swallowing try/catch around a spawn that
+needs to propagate authorization-class failures.
+
+### Anti-patterns
+
+- ❌ Letting `ProcessContextDenied` be JSON-serialized as an operational
+  error. The CLI exit code reads as "command failed" rather than
+  "authorization denied."
+- ❌ Re-throwing AFTER `console.error` or `output()` calls in the catch
+  block. The error-reporting code runs once for the denial and once again
+  at the outer caller's catch — duplicate messages.
+- ❌ Re-throwing `instanceof Error` (the parent class). That re-throws
+  EVERY error, defeating the swallow-catch entirely; the catch block
+  becomes a no-op.
+
+### Cross-references
+
+- **#10427** — parent discipline; this lesson is a specific shape of the
+  load-bearing-vs-accessory contract.
+- **#10437** — subscriber-gated observability-only context-hook; sibling
+  shape (different surface class, same parent contract).
+- **Security chokepoints** — the `ensureProcessAllowed` placement guidance
+  is the structural prerequisite for the re-throw shape.
+
 ## Lesson reference
 
 - **#10427** — Forensic/dashboard/observability surfaces fail silently; load-bearing surfaces fail loudly. v799–v801 three-instance candidate, promoted at v802.
 - **#10437** — Subscriber-gated observability-only context-hook pattern. v810 + v826 (`onPredictions`) + v830 + v832 (`fallbackProvider`) four-instance evidence set, promoted at v840 as a refinement of #10427's accessory-surface contract.
+- **#10442** — Re-throw `ProcessContextDenied` from CLI swallow-catch. v820 + v842 two-instance evidence, promoted at v847 as a refinement of #10427's load-bearing-fails-loudly rule.
