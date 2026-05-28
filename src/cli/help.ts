@@ -14,11 +14,19 @@ Commands:
   validate, v       Validate skill structure and metadata
   detect-conflicts, dc  Detect semantic conflicts between skills
   score-activation, sa  Score skill activation likelihood
+  tractability, tract   Classify skill tractability (single skill or repo audit)
+  model-affinity, aff   Evaluate per-skill model affinity (single or audit)
+  representation-audit, rep-audit  Audit representation coverage (collapse detector)
+  output-structure, os  Inspect/migrate skill output_structure frontmatter
   migrate, mg       Migrate legacy flat-file skills to subdirectory format
   migrate-agent, ma Migrate agents with legacy tools format
+  migrate-plane, mp Migrate skills to the substrate-plane layout
   sync-reserved     Show/update reserved skill names list
   test, t           Manage skill test cases
+  test-triggering   Test skill activation via subagent + naive prompt
+  skill             Skill-namespaced subcommands (test-triggering)
   simulate, sim     Predict which skill would activate for a prompt
+  predict-next, pn  Predict next-likely skill activation + record calibration event
   budget, bg        Show character budget usage across all skills
   budget-estimate, be  Show token budget estimates per agent profile
   capabilities, cap  Generate or show capability manifest (CAPABILITIES.md)
@@ -30,9 +38,13 @@ Commands:
   suggest, sg       Analyze patterns and review skill suggestions
   suggestions, sgs  List/manage skill suggestions
   feedback, fb      View feedback for skills
+  teach             Append a structured teaching entry (symbiosis)
+  co-evolution, coevo  Run symbiosis co-evolution pass + report
+  quintessence, quint  Show symbiosis quintessence narrative report
   refine, rf        Generate and apply skill refinements
   history, hist     View skill version history
   audit, au         Show skill evolution: drift, contradictions, version diffs
+  critique, crit    Adversarial critique loop (spec-compliance, code-quality, link-check)
   rollback, rb      Rollback skill to previous version
   agents, ag        Manage agent suggestions from skill clusters
   team, tm          Manage agent teams (create, list, validate, spawn, status)
@@ -41,9 +53,12 @@ Commands:
   coherent-check, cc Advisory coherent-functors coherence check (naturality, identity, composition, direct-sum)
   hourglass-check, hc Advisory hourglass-persistence audit (holes, contraction-index, waists)
   bounded-learning, bl Bounded-learning calibration loop (skill-creator threshold recommendations)
+  sensoria          Inspect skill net-shift response curve across a ligand sweep
   reload-embeddings, re  Reload embedding model (retry after fallback)
   calibrate, cal    Optimize activation threshold from calibration data
   benchmark, bench  Measure simulator accuracy vs real activation
+  eval              Run skill evaluations (multi-model benchmarks, view results)
+  ab, ab-test       Skill A/B harness (variant comparison, status, list)
   discover, disc    Discover skill candidates from session history
   quality, q        Show per-skill health scores (precision, success rate, efficiency)
   graph, gr         Output Mermaid diagram of skill relationships
@@ -53,16 +68,21 @@ Commands:
   install, inst     Install a skill from local file or remote URL
   gsd-init, gi      Install GSD skill-creator integration into a project
   mcp-server        Start MCP server for skill browsing/installation
+  coprocessor, cp   Coprocessor MCP tools (list-tools, capabilities, vram, call)
   session, sess     Manage session continuity (save, restore, handoff)
   purge, pg         Compact and clean observation JSONL files
   orchestrator, orch  GSD orchestrator (discover, state, classify, lifecycle)
   workflow, wf      Manage skill workflows (create, run, list, status)
   role, rl          Manage skill roles (create, list)
   bundle, bd        Manage work bundles (create, list, activate, deactivate, status)
+  cartridge         Manage skill cartridges (load, validate, scaffold, eval, dedup, fork)
+  chip              Manage chips (status, health, list, capabilities)
+  keystore          Manage encrypted credential keystore (migrate, set, status)
   integration, int  Manage skill-creator integration config (validate, show)
   config, cfg       Manage GSD configuration (validate)
   event, ev         Manage skill events (list, emit, consume, suggest, expire)
   dashboard, db     Generate GSD Planning Docs Dashboard from .planning/
+  plane-status, ps  Show complex-plane health metrics (versine, exsecant, chord)
   terminal, term    Manage Wetty terminal server (start, stop, status, restart)
   project, proj     Manage GSD projects (init, list, status)
   pack              Browse educational packs (list, info)
