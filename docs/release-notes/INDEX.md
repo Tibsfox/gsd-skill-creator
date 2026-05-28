@@ -2,10 +2,11 @@
 
 _Generated 2026-05-28 from `release_history.*`. Source of truth: Postgres._
 
-**916 releases.** 915 with retrospective. 728 with extracted lessons.
+**917 releases.** 916 with retrospective. 728 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
+| `v1.49.874` | ProcessContext singleton chip: `src/learn/acquirer.ts` (Track 4 chip #5) | 2026-05-28 | ✓ | — | [read](v1.49.874/00-summary.md) |
 | `v1.49.873` | ProcessContext singleton chip: `src/git/gates/pre-flight.ts` (Track 4 chip #4) | 2026-05-28 | ✓ | — | [read](v1.49.873/00-summary.md) |
 | `v1.49.872` | ProcessContext singleton chip: `src/cli/commands/pic2html.ts` (Track 4 chip #3) | 2026-05-28 | ✓ | — | [read](v1.49.872/00-summary.md) |
 | `v1.49.871` | ProcessContext singleton chip: `src/git/workflows/contribute.ts` (Track 4 chip #2) | 2026-05-28 | ✓ | — | [read](v1.49.871/00-summary.md) |
