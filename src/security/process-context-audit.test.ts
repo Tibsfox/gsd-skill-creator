@@ -82,7 +82,12 @@ const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
   // src/mesh/proxy-committer.ts wired v1.49.843 — mesh family batch chip.
   // Same shape — ctx? threaded through createProxyCommitter; passes ctx to
   // createMeshWorktreeManager so both executors share one security context.
-  'src/orchestrator/extension/extension-detector.ts',
+  // src/orchestrator/extension/extension-detector.ts wired v1.49.850 —
+  // singleton chip. Optional ctx?: ProcessContext threaded through
+  // detectExtension as a second parameter (after overrides); ensureProcessAllowed
+  // hoisted INSIDE the no-override branch (Strategy 1) BEFORE the try per
+  // #10427. Forensic accessory semantics preserved (CLI-not-installed falls
+  // through to Strategy 2 silently); ProcessContextDenied propagates.
   // src/retro/changelog-watch.ts wired v1.49.849 — singleton chip.
   // Optional ctx?: ProcessContext threaded through detectVersion +
   // runChangelogWatch opts; ensureProcessAllowed hoisted OUTSIDE the

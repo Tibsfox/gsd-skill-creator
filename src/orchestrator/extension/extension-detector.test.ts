@@ -10,6 +10,11 @@ import { mkdtemp, rm } from 'fs/promises';
 import { join } from 'path';
 import { tmpdir } from 'os';
 import { detectExtension, createNullCapabilities } from './extension-detector.js';
+import {
+  CapturingProcessAuditSink,
+  ProcessContextDenied,
+  type ProcessContext,
+} from '../../security/process-context.js';
 
 describe('createNullCapabilities', () => {
   it('returns object with detected=false', () => {
@@ -111,5 +116,35 @@ describe('detectExtension', () => {
     });
     expect(caps.detected).toBe(false);
     expect(caps.detectionMethod).toBe('none');
+  });
+
+  describe('ProcessContext wire (v1.49.850)', () => {
+    it('propagates ProcessContextDenied when skill-creator is not in the allowList and no override is provided', async () => {
+      // No override → Strategy 1 (CLI binary check) runs and triggers
+      // ensureProcessAllowed before execSync. Operator-supplied ctx with
+      // an empty allowList rejects 'skill-creator'; the rejection must
+      // propagate (NOT be swallowed into Strategy 2's silent fall-through).
+      const sink = new CapturingProcessAuditSink();
+      const restrictiveCtx: ProcessContext = { allowList: [], audit: sink };
+      await expect(detectExtension(undefined, restrictiveCtx)).rejects.toThrow(
+        ProcessContextDenied,
+      );
+      expect(sink.records).toHaveLength(1);
+      expect(sink.records[0]?.target).toBe('skill-creator');
+      expect(sink.records[0]?.allowed).toBe(false);
+    });
+
+    it('does not invoke ensureProcessAllowed when an override skips Strategy 1', async () => {
+      // overrides.cliAvailable=true → early-return before execSync; no
+      // ensureProcessAllowed call → no audit record emitted even with ctx.
+      const sink = new CapturingProcessAuditSink();
+      const restrictiveCtx: ProcessContext = { allowList: [], audit: sink };
+      const caps = await detectExtension(
+        { cliAvailable: true, cliVersion: '1.7.0' },
+        restrictiveCtx,
+      );
+      expect(caps.detected).toBe(true);
+      expect(sink.records).toHaveLength(0);
+    });
   });
 });

@@ -7,11 +7,22 @@
  * 2. dist/ directory check (fallback)
  *
  * Supports DI overrides for testing without real installation.
+ *
+ * ProcessContext wire (v1.49.850): `ensureProcessAllowed` hoisted inside
+ * the no-override branch (Strategy 1) BEFORE the try/catch per Lesson
+ * #10427. Detection is a forensic accessory (returns null capabilities on
+ * any spawn failure) — but security denials are load-bearing and must
+ * propagate. `ProcessContextDenied` throws to the caller; CLI-not-found +
+ * timeout failures continue to fall through to Strategy 2 silently.
  */
 
 import { execSync } from 'node:child_process';
 import { access } from 'node:fs/promises';
 import { join } from 'node:path';
+import {
+  ensureProcessAllowed,
+  type ProcessContext,
+} from '../../security/process-context.js';
 import { ExtensionCapabilitiesSchema } from './types.js';
 import type { ExtensionCapabilities, DetectionOverrides } from './types.js';
 
@@ -57,6 +68,7 @@ function buildCapabilities(
  */
 export async function detectExtension(
   overrides?: DetectionOverrides,
+  ctx?: ProcessContext,
 ): Promise<ExtensionCapabilities> {
   // Strategy 1: CLI binary check
   if (overrides?.cliAvailable !== undefined) {
@@ -65,7 +77,16 @@ export async function detectExtension(
     }
     // Explicitly false -- skip to Strategy 2
   } else {
-    // No override -- try real CLI binary
+    // No override -- try real CLI binary.
+    // Security: hoisted ensureProcessAllowed propagates ProcessContextDenied
+    // even though the try below swallows CLI-not-found / timeout silently.
+    ensureProcessAllowed(
+      ctx,
+      'orchestrator/extension/extension-detector',
+      'exec',
+      'skill-creator',
+      ['--version'],
+    );
     try {
       const output = execSync('skill-creator --version 2>/dev/null', {
         encoding: 'utf-8',
