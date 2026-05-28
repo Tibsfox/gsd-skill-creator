@@ -12,6 +12,10 @@
 
 - **fetchReadme's catch is result-wrapping (non-fatal).** The original code returned nulls on any error. I moved the hoist OUTSIDE the try/catch so security denial blocks the readme attempt regardless of the fallback. This is the same #10427 pattern as v863's terminal/health.ts (fault-tolerant accessory; hoist outside try).
 
+## What went wrong
+
+- Post-ship retrospective truncation by RH publish pipeline (third instance now: v871, v875, v876). The pattern is consistent enough to be promotion-eligible as a defect note. Restored from in-context content.
+
 ## Verdict on scope
 
 Track 5 opens cleanly. Pattern reuse from v863-v867 makes the Egress cluster lower-friction than Track 4 (which surfaced 5 distinct wire shapes). Track 5 will likely exercise more variants of two-site hoisted-check + hoist-at-top + the DI-fetch-wrapper from v866.
