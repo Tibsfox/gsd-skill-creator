@@ -30,6 +30,7 @@
 ## What went wrong
 
 - ESM/CJS confusion in the test file — initial test used `require()` to inline-import (CJS pattern); had to refactor to top-level static import (ESM-correct). Caught immediately by vitest. ~2 min recovery.
+- Post-ship retrospective truncation by RH publish pipeline (same as v871). Restored from in-context content.
 
 ## Future-improvement candidates surfaced this ship (now PROMOTION-ELIGIBLE)
 
