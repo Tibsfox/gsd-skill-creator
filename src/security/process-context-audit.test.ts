@@ -48,7 +48,12 @@ const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
   // #10427. Interpreter (bash/node/python3) + [scriptPath] argv exposed
   // to the audit; spawned process inherits the security context contract.
   'src/chipset/harness-integrity.ts',
-  'src/cli/commands/keystore.ts',
+  // src/cli/commands/keystore.ts wired v1.49.861 — singleton chip.
+  // Optional ctx?: ProcessContext threaded through keystoreCommand +
+  // shellOut; ensureProcessAllowed hoisted OUTSIDE the Promise constructor
+  // in shellOut. The child.on('error') handler catches ENOENT but NOT
+  // security denials — those are load-bearing per #10427 and propagate
+  // synchronously through the async-function throw machinery.
   'src/cli/commands/pic2html.ts',
   // src/cli/commands/terminal.ts wired v1.49.842 — terminal family batch chip
   // (3 files; wired together with terminal/launcher.ts + terminal/session.ts).

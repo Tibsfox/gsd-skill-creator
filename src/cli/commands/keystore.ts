@@ -37,6 +37,10 @@
 import { spawn } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
+import {
+  ensureProcessAllowed,
+  type ProcessContext,
+} from '../../security/process-context.js';
 
 export interface KeystoreCommandIO {
   stdout: (chunk: string) => void;
@@ -84,6 +88,7 @@ export function resolveKeystoreBin(): string | null {
 export async function keystoreCommand(
   args: string[],
   io: KeystoreCommandIO = DEFAULT_IO,
+  ctx?: ProcessContext,
 ): Promise<number> {
   if (args.length === 0 || args[0] === '--help' || args[0] === '-h') {
     printHelp(io);
@@ -103,7 +108,7 @@ export async function keystoreCommand(
     return 127;
   }
 
-  return shellOut(bin, args, io);
+  return shellOut(bin, args, io, ctx);
 }
 
 function printHelp(io: KeystoreCommandIO): void {
@@ -139,7 +144,14 @@ function shellOut(
   bin: string,
   args: string[],
   io: KeystoreCommandIO,
+  ctx?: ProcessContext,
 ): Promise<number> {
+  // Security: hoisted check outside the Promise — synchronous throw of
+  // ProcessContextDenied propagates from this function call through the
+  // async keystoreCommand wrapper to the CLI dispatcher. The child.on('error')
+  // handler below only catches post-spawn errors (ENOENT, etc.), NOT security
+  // denials which must be load-bearing per Lesson #10427.
+  ensureProcessAllowed(ctx, 'cli/commands/keystore', 'spawn', bin, args);
   return new Promise<number>((resolveExit) => {
     const child = spawn(bin, args, {
       stdio: ['inherit', 'pipe', 'pipe'],

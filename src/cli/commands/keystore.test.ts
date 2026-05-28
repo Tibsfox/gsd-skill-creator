@@ -228,3 +228,44 @@ describe('keystore migrate --to-keyring (v1.49.637 cluster #4 C2 stub polish)', 
     expect(binSrc).toContain('return ExitCode::from(3);');
   });
 });
+
+describe('keystoreCommand ProcessContext wire (v1.49.861)', () => {
+  it('throws ProcessContextDenied when ctx denies the keystore binary spawn', async () => {
+    const { ProcessContextDenied, CapturingProcessAuditSink } = await import(
+      '../../security/process-context.js'
+    );
+    const sink = new CapturingProcessAuditSink();
+    const restrictiveCtx = { allowList: [], audit: sink };
+    const io = makeIO();
+    // Use 'status' subcommand — passes the validation gate so it reaches shellOut.
+    await expect(keystoreCommand(['status'], io, restrictiveCtx)).rejects.toThrow(
+      ProcessContextDenied,
+    );
+    expect(sink.records).toHaveLength(1);
+    expect(sink.records[0]?.allowed).toBe(false);
+  });
+
+  it('returns 0 on --help without invoking ensureProcessAllowed', async () => {
+    const { CapturingProcessAuditSink } = await import(
+      '../../security/process-context.js'
+    );
+    const sink = new CapturingProcessAuditSink();
+    const ctx = { allowList: [], audit: sink };
+    const io = makeIO();
+    const code = await keystoreCommand(['--help'], io, ctx);
+    expect(code).toBe(0);
+    expect(sink.records).toHaveLength(0);
+  });
+
+  it('returns 2 on unknown subcommand without invoking ensureProcessAllowed', async () => {
+    const { CapturingProcessAuditSink } = await import(
+      '../../security/process-context.js'
+    );
+    const sink = new CapturingProcessAuditSink();
+    const ctx = { allowList: [], audit: sink };
+    const io = makeIO();
+    const code = await keystoreCommand(['unknown-sub'], io, ctx);
+    expect(code).toBe(2);
+    expect(sink.records).toHaveLength(0);
+  });
+});
