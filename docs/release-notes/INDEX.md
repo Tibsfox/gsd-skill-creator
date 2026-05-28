@@ -1,11 +1,17 @@
 # Release History — Chapter Index
 
-_Generated 2026-05-27 from `release_history.*`. Source of truth: Postgres._
+_Generated 2026-05-28 from `release_history.*`. Source of truth: Postgres._
 
-**882 releases.** 881 with retrospective. 728 with extracted lessons.
+**888 releases.** 887 with retrospective. 728 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
+| `v1.49.845` | Production Caller of Predict Path: `predict-next` CLI Command | 2026-05-27 | ✓ | — | [read](v1.49.845/00-summary.md) |
+| `v1.49.844` | Meta-cadence Verify Axis (Canonical-doc Home for v829+v832) | 2026-05-27 | ✓ | — | [read](v1.49.844/00-summary.md) |
+| `v1.49.843` | ProcessContext Mesh Family Batch Chip | 2026-05-27 | ✓ | — | [read](v1.49.843/00-summary.md) |
+| `v1.49.842` | ProcessContext Terminal Family Batch Chip | 2026-05-27 | ✓ | — | [read](v1.49.842/00-summary.md) |
+| `v1.49.841` | Quality-drift Scorer Recalibration: `chip` Release-type + Per-type Baselines | 2026-05-27 | ✓ | — | [read](v1.49.841/00-summary.md) |
+| `v1.49.840` | Codification Ship: Promote #10436 + #10437 | 2026-05-27 | ✓ | — | [read](v1.49.840/00-summary.md) |
 | `v1.49.839` | ProcessContext Singleton Chip: `intelligence/analyzer/findings/stalled.ts` | 2026-05-27 | ✓ | — | [read](v1.49.839/00-summary.md) |
 | `v1.49.838` | Audit Inverse-Check (Stale-Entry Detector) | 2026-05-27 | ✓ | — | [read](v1.49.838/00-summary.md) |
 | `v1.49.837` | `predictive.low_confidence_threshold` Observation Source Wired | 2026-05-27 | ✓ | — | [read](v1.49.837/00-summary.md) |
