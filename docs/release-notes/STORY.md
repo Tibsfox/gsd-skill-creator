@@ -79,8 +79,8 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.17](v1.49.17/00-summary.md)** — The Space Between · 2026-03-04
 - **[v1.49.18](v1.49.18/00-summary.md)** — Space Between Observatory · 2026-03-06
 - **[v1.49.19](v1.49.19/00-summary.md)** — Gastown Chipset Integration · 2026-03-06
-- **[v1.49.20](v1.49.20/00-summary.md)** — Documentation Consolidation · 2026-03-06
 - **[v1.49.20.1](v1.49.20.1/00-summary.md)** — Documentation Reflections · 2026-03-06
+- **[v1.49.20](v1.49.20/00-summary.md)** — Documentation Consolidation · 2026-03-06
 - **[v1.49.21](v1.49.21/00-summary.md)** — Image to Mission Pipeline · 2026-03-07
 - **[v1.49.22](v1.49.22/00-summary.md)** — PNW Research Series · 2026-03-07
 - **[v1.49.23](v1.49.23/00-summary.md)** — Unison Language & Math Co-Processor Completion · 2026-03-08
@@ -931,4 +931,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.878](v1.49.878/00-summary.md)** — EgressContext singleton chip: `src/chips/anthropic-chip.ts` (Track 5 chip #3) · 2026-05-28
 - **[v1.49.879](v1.49.879/00-summary.md)** — EgressContext singleton chip: `src/chips/http-client.ts` (Track 5 chip #4) · 2026-05-28
 - **[v1.49.880](v1.49.880/00-summary.md)** — EgressContext singleton chip: `src/mcp/skill-installer.ts` (Track 5 chip #5) · 2026-05-28
-- **[v1.49.881](v1.49.881/00-summary.md)** — EgressContext singleton chip: `src/intelligence/ipc.ts` (Track 5 CLOSE; module-singleton variant) · 2026-05-28
+- **[v1.49.881](v1.49.881/00-summary.md)** — EgressContext singleton chip: `src/intelligence/ipc.ts` (Track 5 CLOSE) · 2026-05-28
