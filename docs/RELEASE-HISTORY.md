@@ -1,15 +1,16 @@
 # Release History
 
-933 milestones shipped across the v1.0 → v1.49.890 arc. The table below lists every shipped release, newest first.
+934 milestones shipped across the v1.0 → v1.49.891 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 933 releases · 932 with retrospectives · 735 with extracted lessons · quality A:662 B:97 C:63 D:11 F:100 (avg 87) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 934 releases · 933 with retrospectives · 736 with extracted lessons · quality A:662 B:97 C:63 D:11 F:101 (avg 87) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.891](release-notes/v1.49.891) | Substrate Auto-Emit: `observation.retention_days` Retention-Sweep Consumer | 2026-05-28 | 2 | — | — | [s](release-notes/v1.49.891/chapter/00-summary.md) [r](release-notes/v1.49.891/chapter/03-retrospective.md) [l](release-notes/v1.49.891/chapter/04-lessons.md) [c](release-notes/v1.49.891/chapter/99-context.md) | 1 | F 55 |  |
 | [v1.49.890](release-notes/v1.49.890) | Third LoaderContext Chip: src/eval/calibration-adjustment-store.ts | 2026-05-28 | 2 | — | — | [s](release-notes/v1.49.890/chapter/00-summary.md) [r](release-notes/v1.49.890/chapter/03-retrospective.md) [l](release-notes/v1.49.890/chapter/04-lessons.md) [c](release-notes/v1.49.890/chapter/99-context.md) | 1 | F 59 |  |
 | [v1.49.889](release-notes/v1.49.889) | Second LoaderContext Chip: src/intelligence/atlas-indexer/file-walker.ts | 2026-05-28 | 2 | — | — | [s](release-notes/v1.49.889/chapter/00-summary.md) [r](release-notes/v1.49.889/chapter/03-retrospective.md) [l](release-notes/v1.49.889/chapter/04-lessons.md) [c](release-notes/v1.49.889/chapter/99-context.md) | 1 | F 59 |  |
 | [v1.49.888](release-notes/v1.49.888) | Bounded-Learning Read-Side Wire: `token_budget.max_percent` | 2026-05-28 | 2 | — | — | [s](release-notes/v1.49.888/chapter/00-summary.md) [r](release-notes/v1.49.888/chapter/03-retrospective.md) [l](release-notes/v1.49.888/chapter/04-lessons.md) [c](release-notes/v1.49.888/chapter/99-context.md) | 1 | F 51 |  |
