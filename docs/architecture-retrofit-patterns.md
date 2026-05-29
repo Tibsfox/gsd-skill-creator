@@ -2,7 +2,7 @@
 
 **Surface:** Introducing a chokepoint, interface, or generator-template to N existing modules with high call-site multiplicity; authoring a generator that may run on partial input.
 
-**Codified at:** v1.49.784 (lesson cluster from v1.49.782 LoaderContext chokepoint + v1.49.783 STATE.md normalizer fix); v1.49.802 (extended with Lesson #10426 second-instance cross-class registry extraction from the v1.49.795-801 T1.1 arc); v1.49.847 (extended with Lesson #10440 production-caller path-narrowing from v845 + v846 two-instance evidence); v1.49.868 (extended with Lesson #10444 size-ascending chip-pick reveals wire-shape diversity from v858-v862 Process + v863-v867 Egress two-cluster evidence); v1.49.883 (extended with Lessons #10445 spawn-site count as primary wire-shape predictor, #10447 router-with-conditional-bypass, #10448 shared-helper hoist sub-variant catalog — all three from the v868-v882 post-Track-5 codify ship).
+**Codified at:** v1.49.784 (lesson cluster from v1.49.782 LoaderContext chokepoint + v1.49.783 STATE.md normalizer fix); v1.49.802 (extended with Lesson #10426 second-instance cross-class registry extraction from the v1.49.795-801 T1.1 arc); v1.49.847 (extended with Lesson #10440 production-caller path-narrowing from v845 + v846 two-instance evidence); v1.49.868 (extended with Lesson #10444 size-ascending chip-pick reveals wire-shape diversity from v858-v862 Process + v863-v867 Egress two-cluster evidence); v1.49.883 (extended with Lessons #10445 spawn-site count as primary wire-shape predictor, #10447 router-with-conditional-bypass, #10448 shared-helper hoist sub-variant catalog — all three from the v868-v882 post-Track-5 codify ship); v1.49.899 (extended with Lesson #10455 class-stored hoist-at-top sub-variant from v890 + v896 + v897 three-instance evidence); v1.49.910 (extended with Lesson #10459 class-multi-method consolidated-gate sub-variant from v902 + v907 + v908 three-instance evidence).
 
 ## Why this discipline exists
 
@@ -409,6 +409,7 @@ that matches the file's existing structure rather than force-fitting.
 | **two-site hoisted-check** | Each of N sibling sites gets its own hoist. | v1.49.876 `aminet/package-fetcher.ts` (N=2) | N=2 sibling sites without a shared helper. |
 | **class-instance two-site** | `ctx?` stored as instance field; each method hoists before its own side effect. | v1.49.878 `chips/anthropic-chip.ts` (N=2 methods) | Class-based file with multiple methods each performing the gated op. |
 | **class-stored hoist-at-top** | `ctx?` stored as `private readonly ctx?` field via constructor; single fs-op method hoists `this.ctx`. | v1.49.890 `eval/calibration-adjustment-store.ts` (N=1 method) | Class-based file with EXACTLY ONE fs-op method; preserves public method signature unchanged. |
+| **class-multi-method consolidated-gate** | `ctx?` stored as `private readonly ctx?` field; each of M public read methods hoists once on the class-wrapped SCOPE; private fs-ops inherit transitively. | v1.49.902 `orchestrator/state/state-reader.ts` (M=1 public, N internal) | Class wrapping a directory/namespace with M public read methods fanning into N private fs-op methods (see #10459). |
 | **internal-helper-method** | Shared `private` method on a class wraps the side effect; `ctx?` threaded through the method. | v1.49.870 `learning/version-manager.ts` (N=7) | Class with many sibling spawn-calls behind a private helper. |
 | **module-internal-helper** | Free-function helper at module scope; `ctx?` threaded through the helper signature. | v1.49.873 `git/gates/pre-flight.ts` (N=12) | Module with a free-function helper; high N benefits from one-LOC-per-callsite. |
 
@@ -581,6 +582,106 @@ specialization.
 the class. The class-stored form preserves the public surface; per-
 method threading is the wrong abstraction for N=1 class-method.
 
+### Class-multi-method consolidated-gate sub-variant of #10448 (Lesson #10459)
+
+When the file under chip is a class that **wraps a directory (or
+namespace) scope** and has M public read methods (M ≥ 1) that fan out
+into N private fs-op methods (N ≥ 1), the cheapest correct wire shape
+is **class-multi-method consolidated-gate**: each public read method
+hoists a single `ensureAllowed` on the class-wrapped scope, and every
+private fs-op inherits the gate through transitive call.
+
+```ts
+export class FileStore {
+  private readonly memoryDir: string;
+  private readonly ctx?: LoaderContext;     // 1. store as readonly field
+
+  constructor(memoryDir: string, ctx?: LoaderContext) {
+    this.memoryDir = memoryDir;
+    this.ctx = ctx;                          // 2. accept in constructor
+  }
+
+  async list(): Promise<MemoryRecord[]> {
+    // 3. hoist ONCE at the top of the public method, on the WRAPPED SCOPE
+    ensureAllowed(this.ctx, LOADER_SOURCE, 'read-dir', this.memoryDir);
+    return this.listMdFiles();               // private fs-ops inherit transitively
+  }
+  // count(), has(), get(), query() — same hoist, same scope
+}
+```
+
+**Distinct from class-stored hoist-at-top (#10455, N=1 fs-op method).**
+#10455 gates at the single fs-op *site* and its audit target is the
+*file path*. The consolidated-gate sub-variant gates at the public-API
+*entry* — above the private fs-op methods that fan out — and its audit
+target is the *wrapped directory scope*. The shared property is one
+audit per public call regardless of internal fan-out; the difference is
+whether the gate lives at the fs-op site (N=1) or the public entry
+(internals fan out).
+
+**Distinct from class-instance multi-method read-side (v904).** The
+v904 shape gates N≥2 parallel public methods whose audit target is a
+single FILE (`this.filePath`); the consolidated-gate sub-variant wraps a
+DIRECTORY. The audit-granularity decision follows from what the class
+wraps — single file → file path target; directory → scope target.
+
+**Evidence (3 instances — ESTABLISHED).**
+
+| Ship | File | LOC | Public read methods | Wrapped scope | Mixed-mode method |
+|---|---|---|---|---|---|
+| v1.49.902 | `orchestrator/state/state-reader.ts` | 190 | 1 (`read`) | `this.planningDir` | none |
+| v1.49.907 | `memory/file-store.ts` | 516 | 5 (`list`, `count`, `has`, `get`, `query`) | `this.memoryDir` | `get()` (read-then-write internally) |
+| v1.49.908 | `memory/conversation-store.ts` | 531 | 3 + 1 mixed-external | `this.storePath` | `ingestSessionLog(logPath)` — gates the EXTERNAL path |
+
+The three instances span M=1, M=5, M=3 — the sub-variant generalizes
+from "1 public + N internal" to "M public + N internal" with no
+structural change.
+
+**Mixed-mode handling (v908 contribution).**
+
+- **Read-then-write internal** — gate the read at the top of the public
+  method; the internal write inherits the implicit out-of-scope status
+  (the v907 `get()` pattern; no double gate, no double audit).
+- **Read from an EXTERNAL path** — gate the *external path*, not the
+  class scope (the v908 `ingestSessionLog(logPath)` pattern).
+
+**Wire mechanics.**
+
+1. Add `ctx?: LoaderContext` as the optional final constructor parameter.
+2. Store it as `private readonly ctx?: LoaderContext` (per #10455 idiom).
+3. Add a `LOADER_SOURCE = 'module/path/file'` constant.
+4. At the top of each public read method: `ensureAllowed(this.ctx, LOADER_SOURCE, <op>, <target>)`.
+5. `<target>` is the class-wrapped scope for in-scope reads; the external
+   path parameter for cross-scope reads.
+6. `<op>` is `'read-dir'` for scope reads, `'read-file'` for path-targeted reads.
+7. Write-side methods are NOT gated (per #10457).
+
+**How to apply.**
+
+1. Identify the file as a class that wraps a directory/namespace with M
+   public read methods fanning into N private fs-op methods.
+2. Add `private readonly ctx?: LoaderContext` field + optional constructor arg.
+3. Hoist `ensureAllowed` on the wrapped scope at the top of EACH public
+   read method (above the private fs-op fan-out).
+4. Document write-side / read-then-write-internal methods as out-of-scope
+   per #10457.
+5. Add an audit-record-count test asserting exactly M audits under M
+   public-method invocations (per #10456) — proves the consolidated gate
+   emits one audit per public call regardless of internal fan-out.
+
+**Anti-pattern.** Placing the hoist at each private fs-op method instead
+of the public entry. That emits N audits per public call, conflates
+internal fan-out with caller intent, and re-couples every internal
+refactor to the audit surface. The consolidated gate at the public entry
+is the right granularity when internals fan out (cross-ref #10456's
+exact-N assertion catches accidental drift in either direction).
+
+**Anti-pattern.** Using class-stored hoist-at-top (#10455) for a class
+whose single public method orchestrates N private fs-op methods — the
+N=1 specialization gates the lone fs-op site, but a public orchestrator
+should gate at its own entry so the audit target is the wrapped scope,
+not an arbitrary internal path.
+
 ## When this discipline kicks in
 
 - Adding a new function/options-bag parameter that will be passed to N existing modules.
@@ -615,3 +716,4 @@ method threading is the wrong abstraction for N=1 class-method.
 - **#10447** — Router-with-conditional-bypass wire shape. When a router branches between gated and non-gated paths, thread `ctx?` only into the gated branch; leave the bypass branch's signature unchanged. v864 + v880 two-instance evidence, promoted at v883.
 - **#10448** — Shared-helper hoist sub-variant catalog (hoist-at-top / two-site / class-instance two-site / internal-helper-method / module-internal-helper + carry-forward `module-singleton`). Track 5 wire-shape table appended. v868-v882 12-chip cluster evidence, promoted at v883.
 - **#10455** — Class-stored hoist-at-top sub-variant of #10448. When the chip file is a class with EXACTLY ONE fs-op method (N=1 class-method), accept `ctx?` via constructor, store as `private readonly ctx?`, hoist `this.ctx` in the single fs-op method outside the ENOENT-tolerant try/catch. Distinct from class-instance two-site (N≥2 methods) and from module-function hoist-at-top (preserves public method signature unchanged). v890 + v896 + v897 three-instance evidence, promoted at v899.
+- **#10459** — Class-multi-method consolidated-gate sub-variant of #10448. When the chip file is a class that wraps a directory/namespace scope with M public read methods (M ≥ 1) fanning into N private fs-op methods, hoist `ensureAllowed` ONCE at the top of each public read method on the class-wrapped scope; private fs-ops inherit the gate transitively. Audit target is the wrapped SCOPE (vs. #10455's file path for the N=1 single-fs-op-method case, vs. v904's per-file target for parallel public methods). Mixed-mode methods gate the external path (read-from-external) or inherit out-of-scope (read-then-write internal). One audit per public call regardless of internal fan-out (cross-ref #10456 exact-N assertion). v902 + v907 + v908 three-instance evidence, promoted at v910.
