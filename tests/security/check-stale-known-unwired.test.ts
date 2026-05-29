@@ -45,12 +45,16 @@ describe('check-stale-known-unwired tool', () => {
     const parsed = JSON.parse(result.stdout);
     expect(parsed.stale).toBe(false);
     expect(Array.isArray(parsed.reports)).toBe(true);
-    expect(parsed.reports.length).toBe(2);
+    // v1.49.885: LoaderContext added as third audit.
+    expect(parsed.reports.length).toBe(3);
     const processReport = parsed.reports.find((r) => r.audit === 'ProcessContext');
     expect(processReport).toBeDefined();
     // Both chokepoints fully wired at v881; KNOWN_UNWIRED entryCount may be 0.
     expect(typeof processReport.entryCount).toBe('number');
     expect(processReport.entryCount).toBeGreaterThanOrEqual(0);
+    const loaderReport = parsed.reports.find((r) => r.audit === 'LoaderContext');
+    expect(loaderReport).toBeDefined();
+    expect(loaderReport.entryCount).toBeGreaterThan(0); // 15 at v885 ship time
   });
 });
 
@@ -102,6 +106,7 @@ const ENSURE = '${ensureName}';
       'ensureProcessAllowed',
     );
     writeAuditFile('egress-context-audit.test.ts', [], 'ensureEgressAllowed');
+    writeAuditFile('loader-context-audit.test.ts', [], 'ensureAllowed');
     writeSrcFile(
       'src/wired-but-listed.ts',
       `import { execFileSync } from 'node:child_process';
@@ -130,6 +135,7 @@ export function run(ctx) {
       'ensureProcessAllowed',
     );
     writeAuditFile('egress-context-audit.test.ts', [], 'ensureEgressAllowed');
+    writeAuditFile('loader-context-audit.test.ts', [], 'ensureAllowed');
     writeSrcFile(
       'src/import-without-use.ts',
       `import { execFileSync } from 'node:child_process';
@@ -158,6 +164,7 @@ export function run() {
       'ensureProcessAllowed',
     );
     writeAuditFile('egress-context-audit.test.ts', [], 'ensureEgressAllowed');
+    writeAuditFile('loader-context-audit.test.ts', [], 'ensureAllowed');
     writeSrcFile(
       'src/legit-unwired.ts',
       `import { execFileSync } from 'node:child_process';
@@ -181,6 +188,7 @@ export function run() {
       'ensureProcessAllowed',
     );
     writeAuditFile('egress-context-audit.test.ts', [], 'ensureEgressAllowed');
+    writeAuditFile('loader-context-audit.test.ts', [], 'ensureAllowed');
 
     const tool = join(tmpRoot, 'tools', 'security', 'check-stale-known-unwired.mjs');
     const result = spawnSync('node', [tool, '--json'], { cwd: tmpRoot, encoding: 'utf8' });

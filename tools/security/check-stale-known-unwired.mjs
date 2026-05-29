@@ -63,6 +63,17 @@ const AUDITS = [
     namedImportPattern: null,
     detectImportWithoutUse: false,
   },
+  {
+    name: 'LoaderContext',
+    auditFile: 'src/security/loader-context-audit.test.ts',
+    ensureName: 'ensureAllowed',
+    // v1.49.885 — LoaderContext ratchet-ledger opened with 15 entries.
+    // Surface check: node:fs / node:fs/promises imports.
+    importPattern: /(?:node:)?fs(?:\/promises)?/,
+    namedImportPattern:
+      /import\s*(?:type\s+)?\{([^}]+)\}\s*from\s*['"](?:node:)?fs(?:\/promises)?['"]/g,
+    detectImportWithoutUse: true,
+  },
 ];
 
 /** Extract KNOWN_UNWIRED entries from an audit-test source file via regex. */
@@ -100,11 +111,23 @@ function checkImportWithoutUse(content, namedImportPattern) {
   const matches = [...content.matchAll(re)];
   if (matches.length === 0) return null;
 
+  // v1.49.885 fix: when an import is aliased (`X as Y`), the local binding
+  // is `Y` — that's the name that may appear in the file body. Pre-v885
+  // this logic stripped the alias and searched for the original name,
+  // which produced false-positive Shape B reports for files that use the
+  // alias actively (e.g. `import { promises as fs } from 'node:fs'`
+  // followed by `fs.readFile(...)`). 2nd instance of "tool itself fails
+  // silently" class after v867 regex-hardening (carry-forward observation
+  // from v883 #10443 forward-cadence).
   const namesByImport = matches.map((m) => ({
     fullMatch: m[0],
     names: m[1]
       .split(',')
-      .map((s) => s.trim().split(/\s+as\s+/)[0].trim())
+      .map((s) => {
+        const parts = s.trim().split(/\s+as\s+/);
+        // If `X as Y`, the local binding is `Y`; otherwise it's `X`.
+        return (parts[1] ?? parts[0]).trim();
+      })
       .filter((s) => s.length > 0 && /^[A-Za-z_$][\w$]*$/.test(s)),
   }));
 
