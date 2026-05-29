@@ -20,6 +20,11 @@ import {
   fetchAminetIndex,
 } from './index-fetcher.js';
 import type { AminetMirrorConfig, IndexMetadata } from './types.js';
+import {
+  type EgressContext,
+  EgressContextDenied,
+  NULL_EGRESS_AUDIT_SINK,
+} from '../security/egress-context.js';
 
 // ---------------------------------------------------------------------------
 // Fixtures
@@ -349,5 +354,23 @@ describe('fetchAminetIndex', () => {
     };
 
     await expect(fetchAminetIndex(config)).rejects.toThrow(/abort|timeout|mirrors.*failed/i);
+  });
+
+  describe('EgressContext wire (v1.49.877)', () => {
+    it('throws EgressContextDenied when ctx denies all egress', async () => {
+      const ctx: EgressContext = {
+        allowList: [],
+        audit: NULL_EGRESS_AUDIT_SINK,
+      };
+      const config: AminetMirrorConfig = {
+        mirrors: ['https://example.test'],
+        cacheDir: mkdtempSync(join(tmpdir(), 'idx-test-')),
+        userAgent: 'Test/1.0',
+        timeoutMs: 5000,
+      };
+      await expect(fetchAminetIndex(config, ctx)).rejects.toBeInstanceOf(
+        EgressContextDenied,
+      );
+    });
   });
 });

@@ -23,6 +23,11 @@ import {
 import { join } from 'node:path';
 
 import type { AminetMirrorConfig, IndexMetadata } from './types.js';
+import {
+  ensureEgressAllowed,
+  EgressContextDenied,
+  type EgressContext,
+} from '../security/egress-context.js';
 
 // ============================================================================
 // decompressIndex
@@ -141,12 +146,20 @@ export async function loadCachedIndex(
  */
 export async function fetchAminetIndex(
   config: AminetMirrorConfig,
+  ctx?: EgressContext,
 ): Promise<{ content: string; metadata: IndexMetadata }> {
   const errors: Array<{ mirror: string; error: Error }> = [];
 
   for (const mirror of config.mirrors) {
     try {
       const url = `${mirror}/aminet/INDEX.gz`;
+
+      // Security: hoist-at-top before single fetch in mirror loop
+      // (#10444 catalog — N=1 fetch site per iteration; hoist-at-top
+      // canonical). EgressContextDenied propagates via re-throw in the
+      // mirror-aggregation catch per #10427.
+      ensureEgressAllowed(ctx, 'aminet/index-fetcher', 'fetch', url);
+
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), config.timeoutMs);
 
@@ -196,6 +209,8 @@ export async function fetchAminetIndex(
 
       return { content, metadata };
     } catch (err) {
+      // #10427: security denial is load-bearing.
+      if (err instanceof EgressContextDenied) throw err;
       errors.push({
         mirror,
         error: err instanceof Error ? err : new Error(String(err)),

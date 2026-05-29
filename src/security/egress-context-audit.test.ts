@@ -51,7 +51,11 @@ const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
   // at TWO sites (forks-list fetch + per-fork releases fetch inside
   // Promise.all). Forensic accessory semantics preserved (all errors return
   // []); EgressContextDenied propagates per #10427.
-  'src/aminet/index-fetcher.ts',
+  // src/aminet/index-fetcher.ts wired v1.49.877 — Track 5 chip #2
+  // (213 LOC). ctx?: EgressContext threaded through fetchAminetIndex
+  // (2nd param); hoist-at-top inside mirror loop (#10444 N=1-fetch-per-
+  // iteration canonical). EgressContextDenied re-thrown from mirror-
+  // aggregation catch per #10427.
   // src/aminet/index-freshness.ts wired v1.49.865 — third Egress chip.
   // ctx?: EgressContext threaded through fetchRecent; ensureEgressAllowed
   // hoisted BEFORE the fetch call. Strict-fail surface (HTTP-error throws)
