@@ -9,11 +9,20 @@
  * rather than relying on a hardcoded state machine. This means the
  * lifecycle coordinator can determine what happened and what should
  * happen next purely from the filesystem.
+ *
+ * Accepts an optional `LoaderContext` (Tier-E security chokepoint,
+ * v1.49.782). When provided, the scanned phases-subdirectory path must
+ * be admitted by `ctx.allowList` before `readdir()` reads from disk.
+ * Seventh LoaderContext chip at v1.49.900 (module-function hoist-at-top
+ * sub-variant per #10448).
  */
 
 import { readdir } from 'node:fs/promises';
 import { join } from 'node:path';
+import { ensureAllowed, type LoaderContext } from '../../security/loader-context.js';
 import type { PhaseArtifacts } from './types.js';
+
+const LOADER_SOURCE = 'orchestrator/lifecycle/artifact-scanner';
 
 // ============================================================================
 // Filename Patterns
@@ -85,15 +94,26 @@ function emptyArtifacts(phaseDirectory: string): PhaseArtifacts {
  *
  * If the directory does not exist, returns empty artifacts (does not throw).
  *
+ * When `ctx` is provided, the resolved phase directory path must be admitted
+ * by `ctx.allowList`. The gate is hoisted ABOVE the try/catch that swallows
+ * ENOENT so `LoaderContextDenied` propagates per #10442.
+ *
  * @param phasesDir - Path to the phases parent directory (e.g., '.planning/phases')
  * @param phaseDirectory - Phase directory name (e.g., '39-lifecycle-coordination')
+ * @param ctx - Optional LoaderContext for chokepoint enforcement (v1.49.900)
  * @returns PhaseArtifacts describing the contents of the phase directory
  */
 export async function scanPhaseArtifacts(
   phasesDir: string,
   phaseDirectory: string,
+  ctx?: LoaderContext,
 ): Promise<PhaseArtifacts> {
   const fullPath = join(phasesDir, phaseDirectory);
+
+  // Security chokepoint: gate on the resolved phase directory before the read.
+  // Hoisted OUTSIDE the try/catch below so LoaderContextDenied propagates
+  // even when the directory is missing (#10442 invariant).
+  ensureAllowed(ctx, LOADER_SOURCE, 'read-dir', fullPath);
 
   let files: string[];
   try {

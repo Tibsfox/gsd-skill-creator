@@ -62,6 +62,7 @@ const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
   // v1.49.892: src/dacp/bus/scanner.ts chipped (two-site hoisted-check, #10448 sub-variant; both scanForBundles + scanPriorityDirWithBundles gate independently). 12 → 11.
   // v1.49.896: src/skill-workflows/workflow-run-store.ts chipped (hoist-at-top, N=1 readAll() site; class-stored ctx mirrors v890 calibration-adjustment-store pattern; append() out-of-scope per LoaderContext read-side design). 11 → 10.
   // v1.49.897: src/discovery/scan-state-store.ts chipped (hoist-at-top, N=1 load() site; class-stored ctx — THIRD instance of class-stored hoist-at-top sub-variant alongside v890+v896 → PROMOTES sub-variant; addExclude/removeExclude derived methods each emit 1 audit via transitive load(); save() out-of-scope per LoaderContext read-side design). 10 → 9.
+  // v1.49.900: src/orchestrator/lifecycle/artifact-scanner.ts chipped (hoist-at-top, N=1 readdir site; module-function form per #10448 base sub-variant; ctx?: LoaderContext as optional 3rd param — non-breaking to lifecycle-coordinator.ts:91 production caller). 9 → 8.
   // Sort: alphabetical-by-path (preserves git-blame discipline; LOC band
   // documented inline for chip-picking via #10445).
   'src/aminet/emulated-scanner.ts',                          // 287 LOC
@@ -71,7 +72,6 @@ const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
   'src/intelligence/kb/store.ts',                            // 1399 LOC (largest; may warrant Role: marker review before wire)
   'src/memory/conversation-store.ts',                        // 531 LOC
   'src/memory/file-store.ts',                                // 516 LOC
-  'src/orchestrator/lifecycle/artifact-scanner.ts',          // 176 LOC
   'src/orchestrator/state/state-reader.ts',                  // 190 LOC
 ]);
 

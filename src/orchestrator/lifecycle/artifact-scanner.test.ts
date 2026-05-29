@@ -11,6 +11,12 @@ import { mkdtempSync, writeFileSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { scanPhaseArtifacts } from './artifact-scanner.js';
+import {
+  CapturingAuditSink,
+  defaultLoaderContext,
+  LoaderContextDenied,
+  type LoaderContext,
+} from '../../security/loader-context.js';
 
 // ============================================================================
 // Fixtures
@@ -248,5 +254,97 @@ describe('scanPhaseArtifacts', () => {
     expect(result.hasResearch).toBe(true);
     expect(result.hasUat).toBe(true);
     expect(result.hasVerification).toBe(true);
+  });
+});
+
+// ============================================================================
+// LoaderContext chokepoint integration (v1.49.900 — seventh LoaderContext chip)
+// ============================================================================
+
+describe('LoaderContext chokepoint integration (v1.49.900)', () => {
+  it('emits exactly one audit record when ctx is provided', async () => {
+    const phasesDir = createTempPhasesDir();
+    const phaseDir = '39-lifecycle-coordination';
+    const fullDir = join(phasesDir, phaseDir);
+    const { mkdirSync } = await import('node:fs');
+    mkdirSync(fullDir, { recursive: true });
+    writeFileSync(join(fullDir, '39-01-PLAN.md'), '# Plan 1');
+
+    const sink = new CapturingAuditSink();
+    await scanPhaseArtifacts(phasesDir, phaseDir, defaultLoaderContext(sink));
+
+    expect(sink.records).toHaveLength(1);
+    const rec = sink.records[0];
+    expect(rec.source).toBe('orchestrator/lifecycle/artifact-scanner');
+    expect(rec.op).toBe('read-dir');
+    expect(rec.target).toBe(fullDir);
+    expect(rec.allowed).toBe(true);
+  });
+
+  it('throws LoaderContextDenied when phase dir is not in allowList — denial propagates ABOVE ENOENT swallow (#10442)', async () => {
+    const phasesDir = createTempPhasesDir();
+    const phaseDir = '99-does-not-exist';
+    const sink = new CapturingAuditSink();
+    const restrictedCtx: LoaderContext = {
+      allowList: ['/somewhere/that/does/not/match'],
+      audit: sink,
+    };
+    // Directory does not exist (readdir would normally be swallowed and
+    // return empty artifacts), but the denial must still throw because
+    // ensureAllowed runs BEFORE readdir. This is the #10442 hoist-above-
+    // try/catch invariant.
+    await expect(
+      scanPhaseArtifacts(phasesDir, phaseDir, restrictedCtx),
+    ).rejects.toBeInstanceOf(LoaderContextDenied);
+    expect(sink.records).toHaveLength(1);
+    expect(sink.records[0].allowed).toBe(false);
+  });
+
+  it('legacy permissive mode when ctx is undefined (scan works without audit)', async () => {
+    const phasesDir = createTempPhasesDir();
+    const phaseDir = '39-lifecycle-coordination';
+    const fullDir = join(phasesDir, phaseDir);
+    const { mkdirSync } = await import('node:fs');
+    mkdirSync(fullDir, { recursive: true });
+    writeFileSync(join(fullDir, '39-01-PLAN.md'), '# Plan 1');
+
+    const result = await scanPhaseArtifacts(phasesDir, phaseDir);
+    expect(result.planIds).toEqual(['39-01']);
+  });
+
+  it('admits phase dir via prefix-pattern (trailing slash) in allowList', async () => {
+    const phasesDir = createTempPhasesDir();
+    const phaseDir = '39-lifecycle-coordination';
+    const fullDir = join(phasesDir, phaseDir);
+    const { mkdirSync } = await import('node:fs');
+    mkdirSync(fullDir, { recursive: true });
+
+    const sink = new CapturingAuditSink();
+    const prefixCtx: LoaderContext = {
+      allowList: [`${phasesDir}/`],
+      audit: sink,
+    };
+    await scanPhaseArtifacts(phasesDir, phaseDir, prefixCtx);
+    expect(sink.records).toHaveLength(1);
+    expect(sink.records[0].allowed).toBe(true);
+  });
+
+  it('emits exactly N audit records under N invocations (#10456 module-function direct-call variant)', async () => {
+    const phasesDir = createTempPhasesDir();
+    const { mkdirSync } = await import('node:fs');
+    const dirs = ['39-a', '40-b', '41-c'];
+    for (const d of dirs) {
+      mkdirSync(join(phasesDir, d), { recursive: true });
+    }
+    const sink = new CapturingAuditSink();
+    const ctx = defaultLoaderContext(sink);
+    for (const d of dirs) {
+      await scanPhaseArtifacts(phasesDir, d, ctx);
+    }
+    expect(sink.records).toHaveLength(3);
+    expect(sink.records.every((r) => r.op === 'read-dir')).toBe(true);
+    expect(sink.records.map((r) => r.target).sort()).toEqual(
+      dirs.map((d) => join(phasesDir, d)).sort(),
+    );
   });
 });
