@@ -1,15 +1,16 @@
 # Release History
 
-935 milestones shipped across the v1.0 → v1.49.892 arc. The table below lists every shipped release, newest first.
+936 milestones shipped across the v1.0 → v1.49.893 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 935 releases · 934 with retrospectives · 737 with extracted lessons · quality A:662 B:97 C:63 D:11 F:102 (avg 87) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 936 releases · 935 with retrospectives · 738 with extracted lessons · quality A:662 B:97 C:63 D:11 F:103 (avg 87) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.893](release-notes/v1.49.893) | Substrate Auto-Emit: `token_budget.max_percent` Ceiling Check | 2026-05-28 | 2 | — | — | [s](release-notes/v1.49.893/chapter/00-summary.md) [r](release-notes/v1.49.893/chapter/03-retrospective.md) [l](release-notes/v1.49.893/chapter/04-lessons.md) [c](release-notes/v1.49.893/chapter/99-context.md) | 2 | F 55 |  |
 | [v1.49.892](release-notes/v1.49.892) | Fourth LoaderContext Chip: `dacp/bus/scanner.ts` (Two-Site Hoisted-Check) | 2026-05-28 | 2 | — | — | [s](release-notes/v1.49.892/chapter/00-summary.md) [r](release-notes/v1.49.892/chapter/03-retrospective.md) [l](release-notes/v1.49.892/chapter/04-lessons.md) [c](release-notes/v1.49.892/chapter/99-context.md) | 1 | F 44 |  |
 | [v1.49.891](release-notes/v1.49.891) | Substrate Auto-Emit: `observation.retention_days` Retention-Sweep Consumer | 2026-05-28 | 2 | — | — | [s](release-notes/v1.49.891/chapter/00-summary.md) [r](release-notes/v1.49.891/chapter/03-retrospective.md) [l](release-notes/v1.49.891/chapter/04-lessons.md) [c](release-notes/v1.49.891/chapter/99-context.md) | 1 | F 55 |  |
 | [v1.49.890](release-notes/v1.49.890) | Third LoaderContext Chip: src/eval/calibration-adjustment-store.ts | 2026-05-28 | 2 | — | — | [s](release-notes/v1.49.890/chapter/00-summary.md) [r](release-notes/v1.49.890/chapter/03-retrospective.md) [l](release-notes/v1.49.890/chapter/04-lessons.md) [c](release-notes/v1.49.890/chapter/99-context.md) | 1 | F 59 |  |
