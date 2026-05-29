@@ -76,8 +76,8 @@ const THRESHOLDS_MANIFEST = [
   {
     threshold: 'observation.retention_days',
     wired_first_caller_ship: 'v1.49.891',
-    integration_test_ship: null,
-    notes: 'SUBSTRATE WIRED v1.49.891 (retention-substrate.ts runObservationRetentionSweep — production caller that reads observation.retention_days, runs RetentionManager.prune(), auto-emits a too_aggressive event per #10437). Read-side wired at v1.49.884. Integration test deferred (within 10-ship verify-axis budget).',
+    integration_test_ship: 'v1.49.894',
+    notes: 'SUBSTRATE WIRED v1.49.891 (retention-substrate.ts). Read-side wired at v1.49.884. Integration test at v1.49.894 (3 ships after wire — within 10-ship verify-axis budget per #10428). Second instance of "substrate→calibration end-to-end test" pattern (after v856 predictive low-confidence).',
   },
   {
     threshold: 'predictive.low_confidence_threshold',
