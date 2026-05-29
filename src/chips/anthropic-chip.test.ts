@@ -9,6 +9,11 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { AnthropicChip } from './anthropic-chip.js';
 import type { ChipConfig } from './types.js';
+import {
+  type EgressContext,
+  EgressContextDenied,
+  NULL_EGRESS_AUDIT_SINK,
+} from '../security/egress-context.js';
 
 // ============================================================================
 // Mock fetch globally
@@ -263,5 +268,45 @@ describe('AnthropicChip.capabilities()', () => {
 
     // Known Claude models have 200K context
     expect(caps.maxContextLength).toBeGreaterThanOrEqual(200000);
+  });
+});
+
+describe('EgressContext wire (v1.49.878)', () => {
+  it('chat: throws EgressContextDenied when ctx denies egress', async () => {
+    const ctx: EgressContext = {
+      allowList: [],
+      audit: NULL_EGRESS_AUDIT_SINK,
+    };
+    const chip = new AnthropicChip(baseConfig, ctx);
+    mockFetch.mockResolvedValue(makeJsonResponse(makeAnthropicResponse('hi')));
+    await expect(
+      chip.chat([{ role: 'user', content: 'hi' }]),
+    ).rejects.toBeInstanceOf(EgressContextDenied);
+  });
+
+  it('health: throws EgressContextDenied when ctx denies egress', async () => {
+    const ctx: EgressContext = {
+      allowList: [],
+      audit: NULL_EGRESS_AUDIT_SINK,
+    };
+    const chip = new AnthropicChip(baseConfig, ctx);
+    mockFetch.mockResolvedValue(makeJsonResponse({ ok: true }));
+    await expect(chip.health()).rejects.toBeInstanceOf(EgressContextDenied);
+  });
+
+  it('records audit event with source=chips/anthropic-chip when chat is allowed', async () => {
+    const events: Array<{ source: string; target: string }> = [];
+    const ctx: EgressContext = {
+      allowList: [/.*/],
+      audit: {
+        record: (e) => events.push({ source: e.source, target: e.target }),
+      },
+    };
+    mockFetch.mockResolvedValue(makeJsonResponse(makeAnthropicResponse('hi')));
+    const chip = new AnthropicChip(baseConfig, ctx);
+    await chip.chat([{ role: 'user', content: 'hi' }]);
+    expect(events.length).toBeGreaterThan(0);
+    expect(events[0].source).toBe('chips/anthropic-chip');
+    expect(events[0].target).toContain('/v1/messages');
   });
 });

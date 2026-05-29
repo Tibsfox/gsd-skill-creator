@@ -69,7 +69,14 @@ const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
   // fetchReadme's check is hoisted OUTSIDE the result-wrapping try/
   // catch so security denials propagate regardless of the non-fatal
   // readme fallback per #10427.
-  'src/chips/anthropic-chip.ts',
+  // src/chips/anthropic-chip.ts wired v1.49.878 — Track 5 chip #3
+  // (247 LOC). Class-based wire: ctx?: EgressContext added to
+  // constructor (2nd param) + stored as private field; chat() +
+  // health() hoist ensureEgressAllowed before their respective fetches.
+  // Two-site hoisted-check via class-instance variant of #10444.
+  // EgressContextDenied propagates naturally from chat (strict-fail);
+  // health() also has explicit re-throw in result-wrapping catch per
+  // #10427.
   'src/chips/http-client.ts',
   // 5 registry adapters wired through EgressContext: npm.ts at v1.49.809;
   // cargo.ts + conda.ts + pypi.ts + rubygems.ts batch at v1.49.811.

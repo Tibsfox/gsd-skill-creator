@@ -20,6 +20,11 @@ import type {
   ChipConfig,
 } from './types.js';
 import { DEFAULT_TIMEOUT_MS, DEFAULT_MAX_TOKENS, DEFAULT_TEMPERATURE } from './types.js';
+import {
+  ensureEgressAllowed,
+  EgressContextDenied,
+  type EgressContext,
+} from '../security/egress-context.js';
 
 // ============================================================================
 // Anthropic API response shapes (internal -- not exported)
@@ -80,14 +85,16 @@ export class AnthropicChip implements ModelChip {
 
   private readonly apiKey: string | undefined;
   private readonly defaultModel: string;
+  private readonly ctx?: EgressContext;
 
   /**
    * Create an Anthropic chip.
    *
    * @param config - Chip configuration; must have type='anthropic'
+   * @param ctx    - Optional EgressContext for network egress control
    * @throws Error if config.type !== 'anthropic'
    */
-  constructor(config: ChipConfig) {
+  constructor(config: ChipConfig, ctx?: EgressContext) {
     if (config.type !== 'anthropic') {
       throw new Error(
         `AnthropicChip requires type='anthropic', got '${config.type}'`,
@@ -98,6 +105,7 @@ export class AnthropicChip implements ModelChip {
     this.defaultModel = config.defaultModel;
     // Resolve API key: config value takes priority over environment variable
     this.apiKey = config.apiKey ?? process.env['ANTHROPIC_API_KEY'];
+    this.ctx = ctx;
   }
 
   /**
@@ -132,9 +140,17 @@ export class AnthropicChip implements ModelChip {
       body['system'] = systemMessage.content;
     }
 
+    const chatUrl = `${ANTHROPIC_API_BASE}/v1/messages`;
+
+    // Security: hoist-at-top before fetch in chat() (#10444 catalog —
+    // two-site hoisted-check via class instance variant; sibling site
+    // in health()). EgressContextDenied propagates through the strict-
+    // fail surface naturally (no swallowing catch around the spawn).
+    ensureEgressAllowed(this.ctx, 'chips/anthropic-chip', 'fetch', chatUrl);
+
     let response: Response;
     try {
-      response = await fetch(`${ANTHROPIC_API_BASE}/v1/messages`, {
+      response = await fetch(chatUrl, {
         method: 'POST',
         headers: this.buildHeaders(),
         body: JSON.stringify(body),
@@ -186,8 +202,15 @@ export class AnthropicChip implements ModelChip {
       max_tokens: 1,
     };
 
+    const healthUrl = `${ANTHROPIC_API_BASE}/v1/messages`;
+
+    // Security: hoist-at-top before fetch in health() (sibling of chat()'s
+    // check). Hoisted OUTSIDE the result-wrapping try/catch so security
+    // denial propagates regardless of the fault-tolerant fallback per #10427.
+    ensureEgressAllowed(this.ctx, 'chips/anthropic-chip', 'fetch', healthUrl);
+
     try {
-      const response = await fetch(`${ANTHROPIC_API_BASE}/v1/messages`, {
+      const response = await fetch(healthUrl, {
         method: 'POST',
         headers: this.buildHeaders(),
         body: JSON.stringify(body),
@@ -203,7 +226,10 @@ export class AnthropicChip implements ModelChip {
       }
 
       return { available: true, latencyMs, lastChecked };
-    } catch {
+    } catch (err) {
+      // #10427: security denial is load-bearing; propagate even from this
+      // result-wrapping catch. Hoist above already covers but defensive.
+      if (err instanceof EgressContextDenied) throw err;
       clearTimeout(timeoutId);
       return { available: false, latencyMs: null, lastChecked };
     }
