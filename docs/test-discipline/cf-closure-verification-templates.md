@@ -225,6 +225,87 @@ it('derived methods (X / Y / Z) emit one audit record per call via transitive M'
 
 ---
 
+## Template 6: Fake-fixture wire test (Lesson #10458)
+
+When a wire test exercises a chokepoint check (ProcessContext / EgressContext / LoaderContext spawn / exec / read gate) but doesn't need real data, use a minimal fake-bytes fixture with the correct extension and magic-byte signature. The chokepoint gate fires synchronously before the side-effecting operation — the fact that the operation would fail on the fake data never matters because the security throw happens first.
+
+### When this applies
+
+- The test exercises a chokepoint wire (ProcessContext / EgressContext / LoaderContext).
+- The gated code path requires a file argument with a specific extension or magic-byte signature (to bypass early-return checks or to dispatch to the right branch).
+- Constructing a "real" fixture (valid PNG / valid ZIP / valid PDF / valid archive) is wasteful when the chokepoint gate fires before any decoding.
+
+### Test pattern
+
+```ts
+beforeAll(() => {
+  tmpRoot = mkdtempSync(join(tmpdir(), 'wire-test-'));
+  fakePath = join(tmpRoot, 'fake.png');
+  // Minimal magic-byte signature — 4 bytes is enough for type detection.
+  // The wire check fires synchronously before any actual decoding.
+  writeFileSync(fakePath, Buffer.from([0x89, 0x50, 0x4e, 0x47]));
+});
+
+it('throws *ContextDenied when ctx denies the spawn', async () => {
+  const ctx: ProcessContext = {
+    allowList: [], // deny all
+    audit: NULL_PROCESS_AUDIT_SINK,
+  };
+  await expect(processFile(fakePath, ctx)).rejects.toBeInstanceOf(ProcessContextDenied);
+});
+
+it('records audit event when ctx is threaded and target is allowed', async () => {
+  const events: AuditRecord[] = [];
+  const ctx: ProcessContext = {
+    allowList: ['python3'],
+    audit: { record: (e) => events.push(e) },
+  };
+  // May throw at spawn (fake PNG can't be decoded) but the wire records
+  // the audit event BEFORE the spawn fires.
+  await processFile(fakePath, ctx).catch(() => {
+    // Spawn-time error from python3 (PIL can't decode fake PNG) is expected.
+    // The wire test only cares that the audit event was recorded.
+  });
+  expect(events.length).toBeGreaterThan(0);
+});
+```
+
+### Magic-byte signature catalog
+
+| Extension | First 4 bytes | Use case |
+|---|---|---|
+| `.png` | `0x89 0x50 0x4e 0x47` | Image processing wires (pic2html, etc.) |
+| `.zip` | `0x50 0x4b 0x03 0x04` | Archive extraction wires (acquirer `.zip` path) |
+| `.docx` | `0x50 0x4b 0x03 0x04` | ZIP-based document wires (acquirer `.docx` path; same as `.zip`) |
+| `.pdf` | `0x25 0x50 0x44 0x46` (`%PDF`) | PDF processing wires |
+| `.gz` | `0x1f 0x8b 0x08 0x00` | Gzip-archive wires |
+
+Add new entries when a chip surfaces a new extension.
+
+### Evidence (3 instances)
+
+| Ship | File | Fake fixture | Wire under test |
+|---|---|---|---|
+| v1.49.872 | `cli/commands/pic2html.test.ts` | `fake.png` (4 bytes PNG magic) | ProcessContext spawn of `sh`/`python3` via PIL |
+| v1.49.874 | `learn/acquirer.test.ts` | `fake.zip` (4 bytes ZIP magic) | ProcessContext exec of `unzip` for archive extraction |
+| v1.49.874 | `learn/acquirer.test.ts` | `fake.docx` (4 bytes ZIP magic — docx is ZIP-format) | ProcessContext exec of `unzip` via docx-extraction path |
+
+### Anti-patterns
+
+- ❌ **Constructing a real valid file (e.g., generating a real PNG with `sharp`) for chokepoint wire tests.** Wastes ~10-100x the LOC and adds dependency surface. The chokepoint gate fires before any decoding; the fixture's validity beyond magic-byte signature is irrelevant.
+- ❌ **Asserting on processing-result success in a permissive-mode wire test.** The fake fixture WILL fail processing (python3 / unzip cannot handle 4-byte invalid bytes). Tests must assert on the audit-record emission, not the processing outcome. Wrap the call in `.catch(() => {})` and comment that spawn-time errors are expected.
+- ❌ **Skipping the magic-byte signature when the gated code path uses file-type detection.** A zero-byte file or wrong-extension file will trigger a different code branch (early-return on bad type), bypassing the chokepoint entirely. The 4-byte signature is the minimum to route through the right branch.
+- ❌ **Real-file fixtures committed to the repo.** Even when the test "works," real fixtures bloat the repo and create maintenance debt. Generate fake fixtures in `beforeAll` and clean up in `afterAll`.
+
+### Cross-references
+
+- **#10456** — Audit-record-count assertion (Template 5); often paired with the fake-fixture pattern when the wire test asserts multiple audit emissions.
+- **#10442** — Hoist gates ABOVE swallow-catches; the chokepoint must fire before the try/catch that would absorb the fake-file processing failure.
+- **#10448** — Shared-helper hoist sub-variant catalog; wire shape determines where in the entry function the chokepoint sits, which determines whether a fake fixture suffices.
+- **#10427** — Failure-mode contracts; the fake-fixture pattern depends on the chokepoint being load-bearing (failures propagate) rather than accessory (failures swallowed).
+
+---
+
 ## How to use this catalogue
 
 1. At W0, identify which template matches the CF's shape (read CF source description).

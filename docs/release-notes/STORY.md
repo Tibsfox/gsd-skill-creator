@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.900`.
+The story begins at `v1.0` and continues to `v1.49.901`.
 
-**943 chapters.** 942 have retrospectives.
+**944 chapters.** 943 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -951,3 +951,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.898](v1.49.898/00-summary.md)** — Verify-Axis Integration Test: `token_budget.max_percent` (Substrate→Calibration End-to-End — 3rd Instance PROMOTES Pattern) · 2026-05-29
 - **[v1.49.899](v1.49.899/00-summary.md)** — Counter-Cadence Codify Ship: Promote #10455 (Class-Stored Hoist-at-Top) + #10456 (Audit-Record-Count Test) + #10457 (Read-Side-Only at Write-Bearing) + #10453 to ESTABLISHED · 2026-05-29
 - **[v1.49.900](v1.49.900/00-summary.md)** — Seventh LoaderContext Chip: `orchestrator/lifecycle/artifact-scanner.ts` (Module-Function Hoist-at-Top) · 2026-05-29
+- **[v1.49.901](v1.49.901/00-summary.md)** — Counter-Cadence Codify Ship: Promote #10458 (Fake-Fixture Wire Test Pattern) · 2026-05-29
