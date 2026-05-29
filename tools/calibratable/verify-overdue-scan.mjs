@@ -75,9 +75,9 @@ const THRESHOLDS_MANIFEST = [
   },
   {
     threshold: 'observation.retention_days',
-    wired_first_caller_ship: null,
+    wired_first_caller_ship: 'v1.49.891',
     integration_test_ship: null,
-    notes: 'READ-SIDE WIRED v1.49.884 (observation-retention-events.ts + CLI manual recorder); substrate auto-emit deferred (mirrors v837 → v846 staging). wired_first_caller_ship will set when substrate auto-emit ships.',
+    notes: 'SUBSTRATE WIRED v1.49.891 (retention-substrate.ts runObservationRetentionSweep — production caller that reads observation.retention_days, runs RetentionManager.prune(), auto-emits a too_aggressive event per #10437). Read-side wired at v1.49.884. Integration test deferred (within 10-ship verify-axis budget).',
   },
   {
     threshold: 'predictive.low_confidence_threshold',
