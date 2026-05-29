@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.888`.
+The story begins at `v1.0` and continues to `v1.49.889`.
 
-**931 chapters.** 930 have retrospectives.
+**932 chapters.** 931 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -939,3 +939,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.886](v1.49.886/00-summary.md)** — Counter-Cadence Codify Ship: Promote #10450 (Tools Fail Loudly) + #10451 (Read-Side Wire Recipe) · 2026-05-28
 - **[v1.49.887](v1.49.887/00-summary.md)** — First LoaderContext Chip: src/console/reader.ts (109 LOC) · 2026-05-28
 - **[v1.49.888](v1.49.888/00-summary.md)** — Bounded-Learning Read-Side Wire: token_budget.max_percent · 2026-05-28
+- **[v1.49.889](v1.49.889/00-summary.md)** — Second LoaderContext Chip: src/intelligence/atlas-indexer/file-walker.ts (120 LOC) · 2026-05-28

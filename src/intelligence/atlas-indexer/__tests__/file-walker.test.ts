@@ -3,6 +3,12 @@ import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { walkProjectFiles } from '../file-walker.js';
+import {
+  CapturingAuditSink,
+  defaultLoaderContext,
+  LoaderContextDenied,
+  type LoaderContext,
+} from '../../../security/loader-context.js';
 
 let root: string;
 
@@ -64,5 +70,69 @@ describe('atlas-indexer walkProjectFiles', () => {
   it('returns empty for nonexistent root rather than throwing', async () => {
     const out = await walkProjectFiles(join(root, 'does-not-exist'));
     expect(out).toEqual([]);
+  });
+
+  describe('LoaderContext chokepoint integration (v1.49.889)', () => {
+    it('emits exactly one audit record per walkProjectFiles call when ctx is provided', async () => {
+      touch('src/a.ts', '');
+      touch('src/b.ts', '');
+      const sink = new CapturingAuditSink();
+      await walkProjectFiles(root, { ctx: defaultLoaderContext(sink) });
+      expect(sink.records).toHaveLength(1);
+      const rec = sink.records[0];
+      expect(rec.source).toBe('atlas-indexer/file-walker');
+      expect(rec.op).toBe('read-dir');
+      expect(rec.target).toBe(root);
+      expect(rec.allowed).toBe(true);
+    });
+
+    it('emits one audit record regardless of file/directory count', async () => {
+      touch('src/a.ts', '');
+      touch('src/b.ts', '');
+      touch('src/deep/c.ts', '');
+      touch('src/deep/deeper/d.ts', '');
+      const sink = new CapturingAuditSink();
+      await walkProjectFiles(root, { ctx: defaultLoaderContext(sink) });
+      expect(sink.records).toHaveLength(1);
+    });
+
+    it('throws LoaderContextDenied when root is not in allowList', async () => {
+      const sink = new CapturingAuditSink();
+      const restrictedCtx: LoaderContext = {
+        allowList: ['/somewhere/that/does/not/match'],
+        audit: sink,
+      };
+      await expect(walkProjectFiles(root, { ctx: restrictedCtx })).rejects.toBeInstanceOf(LoaderContextDenied);
+      expect(sink.records).toHaveLength(1);
+      expect(sink.records[0].allowed).toBe(false);
+    });
+
+    it('legacy permissive mode when ctx is undefined (no audit)', async () => {
+      touch('src/a.ts', '');
+      const out = await walkProjectFiles(root);
+      expect(out.length).toBe(1);
+    });
+
+    it('admits root via prefix-pattern (trailing slash) in allowList', async () => {
+      touch('src/a.ts', '');
+      const sink = new CapturingAuditSink();
+      const prefixCtx: LoaderContext = {
+        allowList: [`${root}/`],
+        audit: sink,
+      };
+      await walkProjectFiles(root, { ctx: prefixCtx });
+      expect(sink.records).toHaveLength(1);
+      expect(sink.records[0].allowed).toBe(true);
+    });
+
+    it('rejects denial BEFORE attempting realpath (denied path may not exist)', async () => {
+      const sink = new CapturingAuditSink();
+      const restrictedCtx: LoaderContext = {
+        allowList: ['/explicitly/only/this'],
+        audit: sink,
+      };
+      const nonexistent = join(root, 'never-created-dir');
+      await expect(walkProjectFiles(nonexistent, { ctx: restrictedCtx })).rejects.toBeInstanceOf(LoaderContextDenied);
+    });
   });
 });

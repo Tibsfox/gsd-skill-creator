@@ -5,10 +5,20 @@
  * .cache, .vscode, .idea, coverage, __pycache__) and an optional caller
  * filter. Symlink-loop-safe via realpath + visited set. Depth-bounded to
  * guard against pathological repos.
+ *
+ * Accepts an optional `LoaderContext` (Tier-E security chokepoint, v1.49.782).
+ * When provided, the walk `root` must be admitted by `ctx.allowList`. All
+ * subsequent fs operations (realpath, readdir, stat) are confined under
+ * `root` via path.join + symlink-loop guard, so a single top-of-function
+ * `ensureAllowed` gate is sufficient — one audit record per `walkProjectFiles`
+ * call. Second LoaderContext chip at v1.49.889 (mirrors v887 hoist-at-top).
  */
 
 import { readdir, realpath, stat } from 'node:fs/promises';
 import { join, relative } from 'node:path';
+import { ensureAllowed, type LoaderContext } from '../../security/loader-context.js';
+
+const LOADER_SOURCE = 'atlas-indexer/file-walker';
 
 const DEFAULT_SKIP_DIRS: ReadonlySet<string> = new Set([
   'node_modules',
@@ -34,6 +44,12 @@ export interface WalkOptions {
   maxDepth?: number;
   /** Files larger than this byte size are skipped. Default 1 MiB. */
   maxFileBytes?: number;
+  /**
+   * Optional security chokepoint (v1.49.889 chip). When provided, the walk
+   * `root` must be admitted by `ctx.allowList`. Single gate at top of
+   * `walkProjectFiles` covers the recursive walk (all paths under root).
+   */
+  ctx?: LoaderContext;
 }
 
 /**
@@ -45,6 +61,11 @@ export async function walkProjectFiles(
   root: string,
   opts: WalkOptions = {},
 ): Promise<string[]> {
+  // Security chokepoint: gate on root. All recursive fs operations are
+  // confined under root via path.join + symlink-loop guard. Hoisted OUTSIDE
+  // the try/catch below so LoaderContextDenied propagates per #10442.
+  ensureAllowed(opts.ctx, LOADER_SOURCE, 'read-dir', root);
+
   const maxDepth = opts.maxDepth ?? 32;
   const maxFileBytes = opts.maxFileBytes ?? 1024 * 1024;
   const visited = new Set<string>();
