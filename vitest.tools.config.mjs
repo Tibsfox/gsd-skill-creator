@@ -41,6 +41,7 @@ export default defineConfig({
       'tools/__tests__/perf-assertion-audit.test.mjs',
       'tools/__tests__/perf-assertion-audit-additive.test.mjs',
       'tools/__tests__/check-version-sequence.test.mjs',
+      'tools/__tests__/check-discipline-coverage.test.mjs',
       'scripts/__tests__/ci-gate-enum.test.mjs',
       'scripts/__tests__/apply-to-self.test.mjs',
       'scripts/__tests__/apply-to-self-posix-ere.test.mjs',

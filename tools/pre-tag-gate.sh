@@ -671,38 +671,54 @@ fi
 #
 # v1.49.821 (T2.2 part 1): added ceiling-based enforcement infrastructure.
 # v1.49.822 (T2.2 part 2): FLIPPED default to BLOCK at ceiling. SC_DISCIPLINE_COVERAGE_CEILING
-# now defaults to 41 (was 50), exactly current count (39) + 2 buffer. Ships
-# adding ≥3 new UNCODIFIED entries hit BLOCK by default; operators must either
-# codify lessons OR raise SC_DISCIPLINE_COVERAGE_CEILING explicitly.
+# defaulted to 41 (was 50), current count (39) + 2 buffer.
+# v1.49.912 (UNCODIFIED+PARTIAL both 0 after v910/v911 drain): RATCHETED the
+# UNCODIFIED default 41 → 5 (restores near-term sensitivity now that the
+# backlog is drained), and ADDED a companion SC_DISCIPLINE_PARTIAL_CEILING
+# (default 5) so PARTIAL drift BLOCKs at its ceiling the way UNCODIFIED does —
+# the v910 retro flagged that PARTIAL was parsed but never gated. When NASA
+# degree-advance resumes (accumulates lessons fast), raise the relevant
+# ceiling env-var for forward-progress mode.
 #
 # SC_PRE_TAG_GATE_REQUIRE=discipline-coverage is the legacy escape valve and
 # still works: when set, even WITHIN-ceiling states FAIL on any UNCODIFIED.
+# (PARTIAL is intentionally NOT escalated by legacy strict mode — it is gated
+# ONLY by its own ceiling SC_DISCIPLINE_PARTIAL_CEILING, never by REQUIRE.)
 # Operators wanting to disable the ceiling-BLOCK behavior can:
-#   1. Raise SC_DISCIPLINE_COVERAGE_CEILING to a higher value (forward-progress mode).
+#   1. Raise SC_DISCIPLINE_COVERAGE_CEILING / SC_DISCIPLINE_PARTIAL_CEILING (forward-progress mode).
 #   2. Set SC_PRE_TAG_GATE_BYPASS=discipline-coverage to skip the step entirely.
-DISCIPLINE_COVERAGE_CEILING="${SC_DISCIPLINE_COVERAGE_CEILING:-41}"
+DISCIPLINE_COVERAGE_CEILING="${SC_DISCIPLINE_COVERAGE_CEILING:-5}"
+DISCIPLINE_PARTIAL_CEILING="${SC_DISCIPLINE_PARTIAL_CEILING:-5}"
 if gate_bypassed "discipline-coverage"; then
   log "[pre-tag-gate] step 13/15: SKIPPED"
 else
-  log "[pre-tag-gate] step 13/15: discipline coverage audit (ceiling=$DISCIPLINE_COVERAGE_CEILING)"
+  log "[pre-tag-gate] step 13/15: discipline coverage audit (uncodified-ceiling=$DISCIPLINE_COVERAGE_CEILING partial-ceiling=$DISCIPLINE_PARTIAL_CEILING)"
   COVERAGE_OUTPUT="$(node "$REPO_ROOT/tools/check-discipline-coverage.mjs" 2>&1)" || true
-  COVERAGE_EXIT=$?
   UNCODIFIED_COUNT="$(echo "$COVERAGE_OUTPUT" | grep -oE "UNCODIFIED.*: [0-9]+" | head -1 | grep -oE "[0-9]+$" || echo "0")"
   PARTIAL_COUNT="$(echo "$COVERAGE_OUTPUT" | grep -oE "PARTIAL.*: [0-9]+" | head -1 | grep -oE "[0-9]+$" || echo "0")"
-  if [ "${UNCODIFIED_COUNT:-0}" -gt 0 ]; then
-    echo "[pre-tag-gate] INFO: $UNCODIFIED_COUNT uncodified lesson(s) + $PARTIAL_COUNT partial match(es) (ceiling=$DISCIPLINE_COVERAGE_CEILING)" >&2
+  if [ "${UNCODIFIED_COUNT:-0}" -gt 0 ] || [ "${PARTIAL_COUNT:-0}" -gt 0 ]; then
+    echo "[pre-tag-gate] INFO: $UNCODIFIED_COUNT uncodified lesson(s) (ceiling=$DISCIPLINE_COVERAGE_CEILING) + $PARTIAL_COUNT partial match(es) (ceiling=$DISCIPLINE_PARTIAL_CEILING)" >&2
     echo "[pre-tag-gate]   Run: node tools/check-discipline-coverage.mjs for the full report" >&2
-    if [ "${UNCODIFIED_COUNT:-0}" -gt "${DISCIPLINE_COVERAGE_CEILING}" ]; then
+    DISCIPLINE_COVERAGE_BLOCK=0
+    if [ "${UNCODIFIED_COUNT:-0}" -gt "${DISCIPLINE_COVERAGE_CEILING:-0}" ]; then
       echo "[pre-tag-gate]   CEILING EXCEEDED: UNCODIFIED $UNCODIFIED_COUNT > ceiling $DISCIPLINE_COVERAGE_CEILING" >&2
-      echo "[pre-tag-gate] FAIL: discipline-coverage ceiling exceeded (v822 default-BLOCK flip) — codify lessons OR raise SC_DISCIPLINE_COVERAGE_CEILING" >&2
+      DISCIPLINE_COVERAGE_BLOCK=1
+    fi
+    if [ "${PARTIAL_COUNT:-0}" -gt "${DISCIPLINE_PARTIAL_CEILING:-0}" ]; then
+      echo "[pre-tag-gate]   CEILING EXCEEDED: PARTIAL $PARTIAL_COUNT > ceiling $DISCIPLINE_PARTIAL_CEILING" >&2
+      DISCIPLINE_COVERAGE_BLOCK=1
+    fi
+    if [ "$DISCIPLINE_COVERAGE_BLOCK" -eq 1 ]; then
+      echo "[pre-tag-gate] FAIL: discipline-coverage ceiling exceeded (v822 UNCODIFIED-block + v912 PARTIAL-block) — codify lessons OR raise SC_DISCIPLINE_COVERAGE_CEILING / SC_DISCIPLINE_PARTIAL_CEILING" >&2
       exit 15
-    elif gate_required "discipline-coverage"; then
+    fi
+    if [ "${UNCODIFIED_COUNT:-0}" -gt 0 ] && gate_required "discipline-coverage"; then
       echo "[pre-tag-gate] FAIL: discipline-coverage escalated (legacy strict mode) — codify uncodified lessons into discipline docs / manifest" >&2
       exit 15
     fi
-    log "[pre-tag-gate] step 13/15: WARN (within-ceiling: $UNCODIFIED_COUNT ≤ $DISCIPLINE_COVERAGE_CEILING; ceiling-exceed will BLOCK by default since v822)"
+    log "[pre-tag-gate] step 13/15: WARN (within ceilings: UNCODIFIED $UNCODIFIED_COUNT ≤ $DISCIPLINE_COVERAGE_CEILING, PARTIAL $PARTIAL_COUNT ≤ $DISCIPLINE_PARTIAL_CEILING; ceiling-exceed BLOCKs since v822/v912)"
   else
-    log "[pre-tag-gate] step 13/15: PASS (no uncodified lessons)"
+    log "[pre-tag-gate] step 13/15: PASS (no uncodified or partial lessons)"
   fi
 fi
 

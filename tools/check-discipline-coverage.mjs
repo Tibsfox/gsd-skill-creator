@@ -22,13 +22,16 @@
 //                   highest-risk gaps.
 //
 // Usage:
-//   node tools/check-discipline-coverage.mjs                  (human-readable report)
+//   node tools/check-discipline-coverage.mjs                     (human-readable report)
 //   node tools/check-discipline-coverage.mjs --json
-//   node tools/check-discipline-coverage.mjs --strict         (exit 1 if any UNCODIFIED)
+//   node tools/check-discipline-coverage.mjs --strict            (exit 1 if any UNCODIFIED)
+//   node tools/check-discipline-coverage.mjs --max-uncodified=N  (exit 1 if UNCODIFIED > N)
+//   node tools/check-discipline-coverage.mjs --max-partial=N     (exit 1 if PARTIAL > N)
 //
 // Exit codes:
-//   0  scan clean (or non-strict with UNCODIFIED findings)
-//   1  UNCODIFIED findings present AND --strict
+//   0  scan clean (or within all ceilings)
+//   1  UNCODIFIED findings AND --strict; OR UNCODIFIED > --max-uncodified;
+//      OR PARTIAL > --max-partial
 //   2  CLI argument error
 //   3  manifest or retrospective tree missing
 
@@ -54,7 +57,7 @@ const NOTES_DIR = resolve(REPO_ROOT, 'docs/release-notes');
 const LESSON_ID_RE = /Lesson\s+(#\d{4,5})/g;
 
 function parseArgs(argv) {
-  const opts = { json: false, strict: false, maxUncodified: null };
+  const opts = { json: false, strict: false, maxUncodified: null, maxPartial: null };
   for (const a of argv) {
     if (a === '--json') opts.json = true;
     else if (a === '--strict') opts.strict = true;
@@ -66,10 +69,18 @@ function parseArgs(argv) {
         process.exit(2);
       }
       opts.maxUncodified = n;
+    } else if (a.startsWith('--max-partial=')) {
+      const raw = a.slice('--max-partial='.length);
+      const n = Number(raw);
+      if (!Number.isFinite(n) || !Number.isInteger(n) || n < 0) {
+        process.stderr.write(`--max-partial requires a non-negative integer (got "${raw}")\n`);
+        process.exit(2);
+      }
+      opts.maxPartial = n;
     } else if (a === '-h' || a === '--help') {
       process.stdout.write(
         [
-          'Usage: node tools/check-discipline-coverage.mjs [--json] [--strict] [--max-uncodified=N]',
+          'Usage: node tools/check-discipline-coverage.mjs [--json] [--strict] [--max-uncodified=N] [--max-partial=N]',
           '',
           'Audits release-notes lesson IDs against the disciplines manifest at',
           'tools/render-claude-md/disciplines.json.',
@@ -80,10 +91,14 @@ function parseArgs(argv) {
           '  --max-uncodified=N  exit 1 if UNCODIFIED count > N (threshold gate;',
           '                      v1.49.821 T2.2 infrastructure for ceiling-based',
           '                      enforcement; works alongside or instead of --strict)',
+          '  --max-partial=N     exit 1 if PARTIAL count > N (companion ceiling gate;',
+          '                      v1.49.912 — surfaces partial-coverage drift the way',
+          '                      --max-uncodified surfaces uncodified drift)',
           '',
           'Exit codes:',
-          '  0  clean (or non-strict with UNCODIFIED findings within ceiling)',
-          '  1  UNCODIFIED findings AND --strict, OR UNCODIFIED count > --max-uncodified',
+          '  0  clean (or within all ceilings)',
+          '  1  UNCODIFIED findings AND --strict; OR UNCODIFIED count > --max-uncodified;',
+          '     OR PARTIAL count > --max-partial',
           '  2  CLI arg error',
           '  3  inputs missing',
           '',
@@ -257,6 +272,17 @@ function main() {
       process.stderr.write(
         `\nUNCODIFIED count ${buckets.UNCODIFIED.length} EXCEEDS ceiling ${opts.maxUncodified}.\n` +
           `T2.2 ceiling enforcement (v1.49.821+): codify lessons or raise --max-uncodified.\n`,
+      );
+    }
+    process.exit(1);
+  }
+  if (opts.maxPartial !== null && buckets.PARTIAL.length > opts.maxPartial) {
+    if (!opts.json) {
+      process.stderr.write(
+        `\nPARTIAL count ${buckets.PARTIAL.length} EXCEEDS ceiling ${opts.maxPartial}.\n` +
+          `PARTIAL-ceiling enforcement (v1.49.912): a partial match is in the manifest OR a\n` +
+          `discipline doc but not both — resolve by adding the lesson ID to BOTH (manifest\n` +
+          `key_lessons AND a cited canonical_doc), or raise --max-partial.\n`,
       );
     }
     process.exit(1);

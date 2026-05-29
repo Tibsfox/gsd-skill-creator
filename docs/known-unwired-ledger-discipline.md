@@ -280,6 +280,30 @@ Both surfaces share:
 - Strict-mode preserved (legacy opt-in retains old semantics)
 - Default-BLOCK with operator-visible ceiling-or-allowlist override
 
+### Post-drain ratchet + symmetric companion ceiling (v1.49.912)
+
+A count-ledger ceiling is only as sensitive as the gap between the current
+count and the ceiling. When v910 (PARTIAL 8 → 0) and v911 (UNCODIFIED 39 → 0)
+drained both buckets to zero, the `SC_DISCIPLINE_COVERAGE_CEILING=41` gate was
+left with 41 entries of slack — it would not fire until a large new backlog
+reaccumulated. v1.49.912 ratcheted the UNCODIFIED ceiling **41 → 5** to restore
+near-term sensitivity. **Ratchet a drained ceiling down within ~1 ship of the
+drain** — a slack ceiling silently tolerates re-accumulation, which is exactly
+the drift the gate exists to catch. The env-var override
+(`SC_DISCIPLINE_COVERAGE_CEILING`) remains the forward-progress escape valve for
+when a fast-accumulating campaign (e.g. a NASA degree-advance run) resumes.
+
+v912 also closed a **parsed-but-ungated** asymmetry the v910 retro flagged: step
+13 of `tools/pre-tag-gate.sh` already parsed the PARTIAL count into
+`PARTIAL_COUNT` but only ever gated on UNCODIFIED, so PARTIAL drift was invisible
+to the gate (it drifted to 8 unchecked across the whole v903–v909 campaign). The
+fix adds a symmetric `SC_DISCIPLINE_PARTIAL_CEILING` (default 5) plus the
+`--max-partial=N` companion flag on `check-discipline-coverage.mjs`, mirroring
+`--max-uncodified=N`. **A metric a gate already computes but never enforces is
+silent-drift surface — gate every parsed metric, or stop parsing it.** The two
+ceilings are gated independently (either exceeding its ceiling BLOCKs); the
+legacy strict-mode escape valve stays UNCODIFIED-only.
+
 ### When to reach for this generalization
 
 Whenever a NEW cross-cutting invariant needs enforcement against a mature
