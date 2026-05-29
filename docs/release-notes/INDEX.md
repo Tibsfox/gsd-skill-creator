@@ -2,10 +2,11 @@
 
 _Generated 2026-05-29 from `release_history.*`. Source of truth: Postgres._
 
-**920 releases.** 919 with retrospective. 728 with extracted lessons.
+**921 releases.** 920 with retrospective. 728 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
+| `v1.49.878` | EgressContext singleton chip: `src/chips/anthropic-chip.ts` (Track 5 chip #3) | 2026-05-28 | ✓ | — | [read](v1.49.878/00-summary.md) |
 | `v1.49.877` | EgressContext singleton chip: `src/aminet/index-fetcher.ts` (Track 5 chip #2) | 2026-05-28 | ✓ | — | [read](v1.49.877/00-summary.md) |
 | `v1.49.876` | EgressContext singleton chip: `src/aminet/package-fetcher.ts` (Track 5 chip #1) | 2026-05-28 | ✓ | — | [read](v1.49.876/00-summary.md) |
 | `v1.49.875` | ProcessContext singleton chip: `src/chipset/harness-integrity.ts` (Track 4 CLOSE) | 2026-05-28 | ✓ | — | [read](v1.49.875/00-summary.md) |
