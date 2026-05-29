@@ -69,9 +69,9 @@ const THRESHOLDS_MANIFEST = [
   },
   {
     threshold: 'token_budget.max_percent',
-    wired_first_caller_ship: null,
+    wired_first_caller_ship: 'v1.49.893',
     integration_test_ship: null,
-    notes: 'READ-SIDE WIRED v1.49.888 (token-budget-max-events.ts + CLI manual recorder); substrate auto-emit deferred (mirrors v837 → v846, v884 → v891 staging). wired_first_caller_ship will set when substrate auto-emit ships.',
+    notes: 'SUBSTRATE WIRED v1.49.893 (token-budget/ceiling-substrate.ts runTokenBudgetCeilingCheck — production caller that reads token_budget.max_percent, compares against usagePercent, auto-emits an outcome-driven event per #10437). Read-side wired at v1.49.888. Integration test deferred (within 10-ship verify-axis budget). Second instance of substrate-wrapper pattern (promotes v891 candidate to 2-instance ESTABLISHED).',
   },
   {
     threshold: 'observation.retention_days',

@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.892`.
+The story begins at `v1.0` and continues to `v1.49.893`.
 
-**935 chapters.** 934 have retrospectives.
+**936 chapters.** 935 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -937,9 +937,10 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.884](v1.49.884/00-summary.md)** — Bounded-Learning Verify-Axis Chip: observation.retention_days Read-Side Wire · 2026-05-28
 - **[v1.49.885](v1.49.885/00-summary.md)** — LoaderContext Chip-Down Opener: Audit Extension + KNOWN_UNWIRED Ledger Initialization · 2026-05-28
 - **[v1.49.886](v1.49.886/00-summary.md)** — Counter-Cadence Codify Ship: Promote #10450 (Tools Fail Loudly) + #10451 (Read-Side Wire Recipe) · 2026-05-28
-- **[v1.49.887](v1.49.887/00-summary.md)** — First LoaderContext Chip: src/console/reader.ts (109 LOC) · 2026-05-28
-- **[v1.49.888](v1.49.888/00-summary.md)** — Bounded-Learning Read-Side Wire: token_budget.max_percent · 2026-05-28
-- **[v1.49.889](v1.49.889/00-summary.md)** — Second LoaderContext Chip: src/intelligence/atlas-indexer/file-walker.ts (120 LOC) · 2026-05-28
-- **[v1.49.890](v1.49.890/00-summary.md)** — Third LoaderContext Chip: src/eval/calibration-adjustment-store.ts (read-side only) · 2026-05-28
-- **[v1.49.891](v1.49.891/00-summary.md)** — Substrate Auto-Emit: observation.retention_days Retention-Sweep Consumer · 2026-05-28
-- **[v1.49.892](v1.49.892/00-summary.md)** — Fourth LoaderContext Chip: `src/dacp/bus/scanner.ts` (two-site hoisted-check) · 2026-05-28
+- **[v1.49.887](v1.49.887/00-summary.md)** — First LoaderContext Chip: src/console/reader.ts · 2026-05-28
+- **[v1.49.888](v1.49.888/00-summary.md)** — Bounded-Learning Read-Side Wire: `token_budget.max_percent` · 2026-05-28
+- **[v1.49.889](v1.49.889/00-summary.md)** — Second LoaderContext Chip: src/intelligence/atlas-indexer/file-walker.ts · 2026-05-28
+- **[v1.49.890](v1.49.890/00-summary.md)** — Third LoaderContext Chip: src/eval/calibration-adjustment-store.ts · 2026-05-28
+- **[v1.49.891](v1.49.891/00-summary.md)** — Substrate Auto-Emit: `observation.retention_days` Retention-Sweep Consumer · 2026-05-28
+- **[v1.49.892](v1.49.892/00-summary.md)** — Fourth LoaderContext Chip: `dacp/bus/scanner.ts` (Two-Site Hoisted-Check) · 2026-05-28
+- **[v1.49.893](v1.49.893/00-summary.md)** — Substrate Auto-Emit: `token_budget.max_percent` Ceiling Check (zero UNWIRED reached) · 2026-05-28
