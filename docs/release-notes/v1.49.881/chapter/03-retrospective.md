@@ -20,6 +20,10 @@ Track 5 (Egress): 6/6 chips closed at v881. KNOWN_UNWIRED 6→0.
 
 The chokepoint migration that started at v806 with 16 grandfathered entries each is now fully drained. 12 chip ships in this campaign (v870-v881) consumed the remaining inventory. Plus 24+ chip ships in prior campaigns (v807-v867). Total: ~36-40 chip ships to drain both ratchets to zero.
 
+## What went wrong
+
+- Post-ship retrospective truncation by RH publish pipeline (5th instance now: v871, v875, v876, v880, v881). Pattern very reliable; restoration takes ~30s.
+
 ## Future-improvement candidates
 
 ### Module-singleton variant (NEW; below threshold at 1 instance)
