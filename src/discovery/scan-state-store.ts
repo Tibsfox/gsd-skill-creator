@@ -9,12 +9,21 @@
  * gracefully by falling back to empty default state.
  *
  * All Zod schemas use .passthrough() for forward compatibility.
+ *
+ * Accepts an optional `LoaderContext` (Tier-E security chokepoint, v1.49.782).
+ * When provided, the store's `statePath` must be admitted by `ctx.allowList`
+ * before `load()` reads from disk. `save()` is intentionally NOT gated —
+ * LoaderContext is by design a READ-side chokepoint per its docstring; the
+ * write path is out of scope. Sixth LoaderContext chip at v1.49.897.
  */
 
 import { z } from 'zod';
 import { readFile, writeFile, rename, mkdir } from 'node:fs/promises';
 import { join, dirname } from 'node:path';
 import { homedir } from 'node:os';
+import { ensureAllowed, type LoaderContext } from '../security/loader-context.js';
+
+const LOADER_SOURCE = 'discovery/scan-state-store';
 
 // ============================================================================
 // Constants
@@ -80,11 +89,13 @@ export type ScanState = z.infer<typeof ScanStateSchema>;
  */
 export class ScanStateStore {
   private readonly statePath: string;
+  private readonly ctx?: LoaderContext;
 
-  constructor(statePath?: string) {
+  constructor(statePath?: string, ctx?: LoaderContext) {
     this.statePath = statePath ?? join(
       homedir(), '.gsd-skill-creator', 'discovery', 'scan-state.json',
     );
+    this.ctx = ctx;
   }
 
   /**
@@ -94,8 +105,16 @@ export class ScanStateStore {
    * - File does not exist (first run)
    * - File contains corrupt/unparseable JSON
    * - File contents fail Zod schema validation
+   *
+   * When ctx was provided at construction, the path must be admitted by
+   * `ctx.allowList`. Gate is hoisted ABOVE the try/catch that swallows
+   * ENOENT so `LoaderContextDenied` propagates per #10442.
    */
   async load(): Promise<ScanState> {
+    // Security chokepoint: gate on the resolved path before the read.
+    // Hoisted OUTSIDE the try/catch below so LoaderContextDenied propagates.
+    ensureAllowed(this.ctx, LOADER_SOURCE, 'read-file', this.statePath);
+
     let content: string;
     try {
       content = await readFile(this.statePath, 'utf-8');

@@ -3,6 +3,12 @@ import { mkdtempSync, writeFileSync, readFileSync, rmSync, existsSync, readdirSy
 import { join } from 'path';
 import os from 'os';
 import { ScanStateStore } from './scan-state-store.js';
+import {
+  CapturingAuditSink,
+  defaultLoaderContext,
+  LoaderContextDenied,
+  type LoaderContext,
+} from '../security/loader-context.js';
 
 /** Valid state fixture covering all fields */
 const validState = {
@@ -276,5 +282,116 @@ describe('ScanStateStore', () => {
     const keys = Object.keys(loaded.sessions);
     expect(keys.length).toBe(1);
     expect(['proj:sess-1', 'proj:sess-2']).toContain(keys[0]);
+  });
+});
+
+// ============================================================================
+// LoaderContext chokepoint integration (v1.49.897 — sixth LoaderContext chip)
+// ============================================================================
+
+describe('LoaderContext chokepoint integration (v1.49.897)', () => {
+  let tmpDir: string;
+
+  function createTmpDir(): string {
+    tmpDir = mkdtempSync(join(os.tmpdir(), 'scan-state-loader-'));
+    return tmpDir;
+  }
+
+  afterEach(() => {
+    if (tmpDir && existsSync(tmpDir)) {
+      rmSync(tmpDir, { recursive: true });
+    }
+  });
+
+  it('emits exactly one audit record on load when ctx is provided', async () => {
+    createTmpDir();
+    const statePath = join(tmpDir, 'scan-state.json');
+    const sink = new CapturingAuditSink();
+    const store = new ScanStateStore(statePath, defaultLoaderContext(sink));
+    await store.load();
+    expect(sink.records).toHaveLength(1);
+    const rec = sink.records[0];
+    expect(rec.source).toBe('discovery/scan-state-store');
+    expect(rec.op).toBe('read-file');
+    expect(rec.target).toBe(statePath);
+    expect(rec.allowed).toBe(true);
+  });
+
+  it('throws LoaderContextDenied when statePath is not in allowList — denial propagates ABOVE ENOENT swallow', async () => {
+    createTmpDir();
+    const statePath = join(tmpDir, 'scan-state.json');
+    const sink = new CapturingAuditSink();
+    const restrictedCtx: LoaderContext = {
+      allowList: ['/somewhere/that/does/not/match'],
+      audit: sink,
+    };
+    const store = new ScanStateStore(statePath, restrictedCtx);
+    // File does not exist (missing-file is tolerated as empty by load), but
+    // the denial must still throw because ensureAllowed runs BEFORE readFile.
+    // This is the #10442 hoist-above-try/catch invariant.
+    await expect(store.load()).rejects.toBeInstanceOf(LoaderContextDenied);
+    expect(sink.records).toHaveLength(1);
+    expect(sink.records[0].allowed).toBe(false);
+  });
+
+  it('legacy permissive mode when ctx is undefined (load works without audit)', async () => {
+    createTmpDir();
+    const statePath = join(tmpDir, 'scan-state.json');
+    const store = new ScanStateStore(statePath);
+    const state = await store.load();
+    expect(state).toEqual({
+      version: 1,
+      sessions: {},
+      excludeProjects: [],
+    });
+  });
+
+  it('admits statePath via prefix-pattern (trailing slash) in allowList', async () => {
+    createTmpDir();
+    const statePath = join(tmpDir, 'scan-state.json');
+    const sink = new CapturingAuditSink();
+    const prefixCtx: LoaderContext = {
+      allowList: [`${tmpDir}/`],
+      audit: sink,
+    };
+    const store = new ScanStateStore(statePath, prefixCtx);
+    await store.load();
+    expect(sink.records).toHaveLength(1);
+    expect(sink.records[0].allowed).toBe(true);
+  });
+
+  it('save() is not gated by LoaderContext (read-side chokepoint by design)', async () => {
+    createTmpDir();
+    const statePath = join(tmpDir, 'scan-state.json');
+    const sink = new CapturingAuditSink();
+    const restrictedCtx: LoaderContext = {
+      allowList: ['/somewhere/that/does/not/match'],
+      audit: sink,
+    };
+    const store = new ScanStateStore(statePath, restrictedCtx);
+    // save() succeeds even though the path is not in allowList — the
+    // chokepoint is intentionally read-only per LoaderContext docstring.
+    await expect(
+      store.save({ version: 1, sessions: {}, excludeProjects: [] }),
+    ).resolves.toBeUndefined();
+    expect(sink.records).toHaveLength(0);
+  });
+
+  it('derived methods (addExclude / removeExclude) emit two audit records per call via transitive load+save→load', async () => {
+    createTmpDir();
+    const statePath = join(tmpDir, 'scan-state.json');
+    const sink = new CapturingAuditSink();
+    const ctx = defaultLoaderContext(sink);
+    const store = new ScanStateStore(statePath, ctx);
+    // Seed an initial state (save is not gated → no audit record).
+    await store.save({ version: 1, sessions: {}, excludeProjects: [] });
+    expect(sink.records).toHaveLength(0);
+    // addExclude → load() (1 audit) + save() (0 audit) = 1 audit per call.
+    // removeExclude → load() (1 audit) + save() (0 audit) = 1 audit per call.
+    await store.addExclude('project-a');
+    await store.removeExclude('project-a');
+    expect(sink.records).toHaveLength(2);
+    expect(sink.records.every(r => r.op === 'read-file')).toBe(true);
+    expect(sink.records.every(r => r.target === statePath)).toBe(true);
   });
 });
