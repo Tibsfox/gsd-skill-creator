@@ -143,6 +143,89 @@ describe('FileStore', () => {
     await store.remove(record.id);
     expect(await store.has(record.id)).toBe(false);
   });
+
+  // ──────────────────────────────────────────────────────────────────────────
+  // LoaderContext chokepoint integration (v1.49.907)
+  // ──────────────────────────────────────────────────────────────────────────
+
+  describe('LoaderContext chokepoint integration (v1.49.907)', () => {
+    it('list emits exactly one audit record per call (scope-gated on memoryDir)', async () => {
+      const { CapturingAuditSink, defaultLoaderContext } = await import(
+        '../../security/loader-context.js'
+      );
+      const sink = new CapturingAuditSink();
+      const ctx = defaultLoaderContext(sink);
+      const wired = new FileStore(dir, ctx);
+      await wired.list();
+      expect(sink.records.length).toBe(1);
+      expect(sink.records[0]?.op).toBe('read-dir');
+      expect(sink.records[0]?.target).toBe(dir);
+    });
+
+    it('count emits exactly one audit record per call', async () => {
+      const { CapturingAuditSink, defaultLoaderContext } = await import(
+        '../../security/loader-context.js'
+      );
+      const sink = new CapturingAuditSink();
+      const ctx = defaultLoaderContext(sink);
+      const wired = new FileStore(dir, ctx);
+      await wired.count();
+      expect(sink.records.length).toBe(1);
+    });
+
+    it('throws LoaderContextDenied when ctx rejects memoryDir on list', async () => {
+      const { LoaderContextDenied, CapturingAuditSink } = await import(
+        '../../security/loader-context.js'
+      );
+      const sink = new CapturingAuditSink();
+      const restrictiveCtx = { allowList: [], audit: sink };
+      const wired = new FileStore(dir, restrictiveCtx);
+      await expect(wired.list()).rejects.toThrow(LoaderContextDenied);
+      expect(sink.records.length).toBe(1);
+      expect(sink.records[0]?.allowed).toBe(false);
+    });
+
+    it('store does NOT gate (write-side out-of-scope per #10457)', async () => {
+      const { CapturingAuditSink, defaultLoaderContext } = await import(
+        '../../security/loader-context.js'
+      );
+      const sink = new CapturingAuditSink();
+      const ctx = defaultLoaderContext(sink);
+      const wired = new FileStore(dir, ctx);
+      await wired.store(makeRecord({ name: 'write-test' }));
+      // store is write-side: 0 audit records.
+      expect(sink.records.length).toBe(0);
+    });
+
+    it('emits exactly N=4 audit records under K=4 public read-method calls (#10456 8th variant)', async () => {
+      const { CapturingAuditSink, defaultLoaderContext } = await import(
+        '../../security/loader-context.js'
+      );
+      const sink = new CapturingAuditSink();
+      const ctx = defaultLoaderContext(sink);
+      const wired = new FileStore(dir, ctx);
+      const record = makeRecord({ name: 'audit-test' });
+      await wired.store(record); // write-side, 0 audits
+      sink.clear();
+      // 4 read-side public methods: list + count + has + query = 4 audits.
+      // (get is excluded because it ALSO calls store() internally to update
+      // access metadata; including it would add 0 extra audits since store
+      // is write-side.)
+      await wired.list();
+      await wired.count();
+      await wired.has(record.id);
+      await wired.query({ text: 'audit', limit: 10 });
+      expect(sink.records.length).toBe(4);
+    });
+
+    it('legacy permissive mode (no ctx) preserves prior behavior', async () => {
+      const legacy = new FileStore(dir);
+      const record = makeRecord({ name: 'legacy-test' });
+      await legacy.store(record);
+      const result = await legacy.list();
+      expect(result.length).toBe(1);
+    });
+  });
 });
 
 // ─── IndexManager ────────────────────────────────────────────────────────────

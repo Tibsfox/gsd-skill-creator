@@ -21,6 +21,9 @@ import type {
   MemoryStore,
   MemoryType,
 } from './types.js';
+import { ensureAllowed, type LoaderContext } from '../security/loader-context.js';
+
+const LOADER_SOURCE = 'memory/file-store';
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
@@ -285,7 +288,23 @@ export class FileStore implements MemoryStore {
   /** In-memory index: memory ID -> filename. Built lazily on first access. */
   private index: Map<string, string> | null = null;
 
-  constructor(private readonly memoryDir: string) {}
+  /**
+   * Optional LoaderContext (Tier-E security chokepoint, v1.49.782).
+   * Class-instance multi-method scope-gated wire (v1.49.907) — each public
+   * read method (`get`, `query`, `has`, `count`, `list`) gates on
+   * `this.memoryDir` scope at top, with all transitive private fs ops
+   * inheriting the gate. Write-side methods (`store`, `remove`) and the
+   * helper `ensureDir` are intentionally out-of-scope per #10457.
+   * Extension of v902's class-multi-method consolidated-gate pattern to
+   * N=5 public read methods, sharing class-stored ctx per #10455 idiom.
+   * Thirteenth LoaderContext chip — 2nd instance of v902 consolidated-gate
+   * candidate → PROMOTES v902 sub-variant toward 3-instance.
+   */
+  private readonly ctx?: LoaderContext;
+
+  constructor(private readonly memoryDir: string, ctx?: LoaderContext) {
+    this.ctx = ctx;
+  }
 
   // ─── Public API ──────────────────────────────────────────────────────────
 
@@ -324,6 +343,11 @@ export class FileStore implements MemoryStore {
    * Returns null if the memory does not exist.
    */
   async get(id: string): Promise<MemoryRecord | null> {
+    // Class-multi-method consolidated-gate. Hoisted at top — covers all
+    // transitive private fs ops (findFileById's readdir + readFile;
+    // readRecord's readFile). The store() call at the end is write-side
+    // (out-of-scope per #10457).
+    ensureAllowed(this.ctx, LOADER_SOURCE, 'read-dir', this.memoryDir);
     const filename = await this.findFileById(id);
     if (!filename) return null;
 
@@ -348,6 +372,8 @@ export class FileStore implements MemoryStore {
    * Returns results sorted by relevance score descending.
    */
   async query(q: MemoryQuery): Promise<MemoryResult[]> {
+    // Class-multi-method consolidated-gate. Hoisted at top.
+    ensureAllowed(this.ctx, LOADER_SOURCE, 'read-dir', this.memoryDir);
     const allRecords = await this.readAllRecords();
     const keywords = q.text
       .toLowerCase()
@@ -417,12 +443,14 @@ export class FileStore implements MemoryStore {
 
   /** Check if a memory exists at this tier by ID. */
   async has(id: string): Promise<boolean> {
+    ensureAllowed(this.ctx, LOADER_SOURCE, 'read-dir', this.memoryDir);
     const filename = await this.findFileById(id);
     return filename !== null;
   }
 
   /** Count the number of `.md` memory files in the directory. */
   async count(): Promise<number> {
+    ensureAllowed(this.ctx, LOADER_SOURCE, 'read-dir', this.memoryDir);
     const files = await this.listMdFiles();
     return files.length;
   }
@@ -432,6 +460,7 @@ export class FileStore implements MemoryStore {
    * Reads and parses every `.md` file.
    */
   async list(): Promise<MemoryRecord[]> {
+    ensureAllowed(this.ctx, LOADER_SOURCE, 'read-dir', this.memoryDir);
     return this.readAllRecords();
   }
 
