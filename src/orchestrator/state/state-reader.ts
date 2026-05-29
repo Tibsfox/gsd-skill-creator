@@ -9,6 +9,17 @@
  * This is the primary API surface consumed by Phase 38 (intent
  * classification), Phase 39 (lifecycle coordination), Phase 40 (CLI),
  * and Phase 45 (work state persistence).
+ *
+ * Accepts an optional `LoaderContext` (Tier-E security chokepoint,
+ * v1.49.782). When provided, `this.planningDir` must be admitted by
+ * `ctx.allowList` before `read()` performs any disk operation. All
+ * internal fs ops (`access` for directoryExists, four `readFileSafe`
+ * calls for the planning artifacts, `readdir` for resolvePhaseDirectories)
+ * are scoped under `this.planningDir`, so a single gate at the public
+ * `read()` entry covers them all. Eighth LoaderContext chip at v1.49.902
+ * — class-multi-method consolidated public-entry gate (#10448 candidate
+ * sub-variant; sibling of #10455 class-stored hoist-at-top for the
+ * N=1 fs-op-method case).
  */
 
 import { access } from 'node:fs/promises';
@@ -20,6 +31,9 @@ import { parseRoadmap } from './roadmap-parser.js';
 import { parseState } from './state-parser.js';
 import { parseProject } from './project-parser.js';
 import { parseConfig } from './config-reader.js';
+import { ensureAllowed, type LoaderContext } from '../../security/loader-context.js';
+
+const LOADER_SOURCE = 'orchestrator/state/state-reader';
 
 /**
  * Default config produced by parsing an empty object through Zod.
@@ -40,7 +54,11 @@ function getDefaultConfig() {
  * ```
  */
 export class ProjectStateReader {
-  constructor(private planningDir: string) {}
+  private readonly ctx?: LoaderContext;
+
+  constructor(private planningDir: string, ctx?: LoaderContext) {
+    this.ctx = ctx;
+  }
 
   /**
    * Read all .planning/ artifacts and assemble into ProjectState.
@@ -51,9 +69,21 @@ export class ProjectStateReader {
    * 4. Resolve phase directory paths from phases/ subdirectory
    * 5. Assemble into ProjectState with boolean flags
    *
+   * When `ctx` was provided at construction, `this.planningDir` must be
+   * admitted by `ctx.allowList`. Gate is hoisted at the top of this
+   * public entry, BEFORE any disk operation, so `LoaderContextDenied`
+   * propagates before the directoryExists swallow catches anything (per
+   * #10442). All internal fs ops (access, readFileSafe×4, readdir) are
+   * scoped under `this.planningDir` and inherit this single gate.
+   *
    * @returns Complete ProjectState (always returns, never throws)
    */
   async read(): Promise<ProjectState> {
+    // Security chokepoint: gate the entire read operation on planningDir.
+    // Hoisted ABOVE directoryExists() so LoaderContextDenied propagates
+    // before the try/catch inside directoryExists swallows ENOENT.
+    ensureAllowed(this.ctx, LOADER_SOURCE, 'read-dir', this.planningDir);
+
     // Check if planningDir exists
     const exists = await this.directoryExists(this.planningDir);
     if (!exists) {

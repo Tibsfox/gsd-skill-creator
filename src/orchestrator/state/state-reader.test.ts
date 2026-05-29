@@ -16,6 +16,12 @@ import { mkdir, writeFile, rm } from 'fs/promises';
 import { join } from 'path';
 import { tmpdir } from 'os';
 import { ProjectStateReader } from './state-reader.js';
+import {
+  CapturingAuditSink,
+  defaultLoaderContext,
+  LoaderContextDenied,
+  type LoaderContext,
+} from '../../security/loader-context.js';
 
 // ============================================================================
 // Fixtures
@@ -499,5 +505,128 @@ A TypeScript project for creating and validating Claude Code skills, agents, tea
     // Config
     expect(state.config.mode).toBe('yolo');
     expect(state.config.model_profile).toBe('quality');
+  });
+});
+
+// ============================================================================
+// LoaderContext chokepoint integration (v1.49.902 — eighth LoaderContext chip)
+// ============================================================================
+//
+// Wire shape: class-multi-method consolidated public-entry gate.
+//
+// ProjectStateReader has 3 fs-op surfaces internally (`directoryExists`
+// via `access`, four `readFileSafe` calls for the planning artifacts,
+// `resolvePhaseDirectories` via `readdir`), all scoped under
+// `this.planningDir`. A single `ensureAllowed(ctx, 'read-dir',
+// this.planningDir)` at the top of public `read()` covers them all —
+// the internals inherit through transitive call.
+//
+// NEW 1-instance sub-variant candidate for #10448. Sibling of #10455
+// (class-stored hoist-at-top for N=1 fs-op-method); will ripen to a
+// 3-instance promotion if 2 more class-multi-method LoaderContext
+// chips follow.
+//
+// Audit emission: 1 record per public `read()` call. This is the 4th
+// audit-record-count variant for #10456 (class-multi-method
+// consolidated-gate) after v892 (two-site outer-loop), v896 (derived-
+// method ripple), v897 (mixed read/write derived methods), and v900
+// (module-function direct-call).
+describe('LoaderContext chokepoint integration (v1.49.902)', () => {
+  let testDir: string;
+
+  beforeEach(() => {
+    testDir = join(
+      tmpdir(),
+      `gsd-state-reader-loader-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+    );
+  });
+
+  afterEach(async () => {
+    await rm(testDir, { recursive: true, force: true });
+  });
+
+  it('emits exactly one audit record per read() call when ctx is provided', async () => {
+    await mkdir(testDir, { recursive: true });
+    await writeFile(join(testDir, 'ROADMAP.md'), '# Roadmap\n');
+
+    const sink = new CapturingAuditSink();
+    const reader = new ProjectStateReader(testDir, defaultLoaderContext(sink));
+    await reader.read();
+
+    expect(sink.records).toHaveLength(1);
+    const rec = sink.records[0];
+    expect(rec.source).toBe('orchestrator/state/state-reader');
+    expect(rec.op).toBe('read-dir');
+    expect(rec.target).toBe(testDir);
+    expect(rec.allowed).toBe(true);
+  });
+
+  it('throws LoaderContextDenied when planningDir is not in allowList — denial propagates ABOVE directoryExists ENOENT swallow (#10442)', async () => {
+    const sink = new CapturingAuditSink();
+    const restrictedCtx: LoaderContext = {
+      allowList: ['/somewhere/that/does/not/match'],
+      audit: sink,
+    };
+    // testDir does not exist (directoryExists would normally swallow ENOENT
+    // and return uninitializedState), but the denial must still throw
+    // because ensureAllowed runs BEFORE directoryExists. This is the
+    // #10442 hoist-above-try/catch invariant.
+    const reader = new ProjectStateReader(testDir, restrictedCtx);
+    await expect(reader.read()).rejects.toBeInstanceOf(LoaderContextDenied);
+    expect(sink.records).toHaveLength(1);
+    expect(sink.records[0].allowed).toBe(false);
+  });
+
+  it('legacy permissive mode when ctx is undefined preserves prior behavior', async () => {
+    await mkdir(testDir, { recursive: true });
+    const reader = new ProjectStateReader(testDir);
+    const state = await reader.read();
+    // Directory exists but is empty — legacy behavior returns initialized=true
+    // with all four artifact flags false. The point of this test is to prove
+    // that omitting ctx does not throw and does not gate.
+    expect(state.initialized).toBe(true);
+    expect(state.hasRoadmap).toBe(false);
+    expect(state.hasState).toBe(false);
+    expect(state.hasProject).toBe(false);
+    expect(state.hasConfig).toBe(false);
+  });
+
+  it('admits planningDir via prefix-pattern (trailing slash) in allowList', async () => {
+    await mkdir(testDir, { recursive: true });
+    await writeFile(join(testDir, 'ROADMAP.md'), '# Roadmap\n');
+
+    const sink = new CapturingAuditSink();
+    const parent = join(testDir, '..');
+    const prefixCtx: LoaderContext = {
+      allowList: [`${parent}/`],
+      audit: sink,
+    };
+    const reader = new ProjectStateReader(testDir, prefixCtx);
+    await reader.read();
+    expect(sink.records).toHaveLength(1);
+    expect(sink.records[0].allowed).toBe(true);
+  });
+
+  it('emits exactly N audit records under N public read() invocations (#10456 4th variant: class-multi-method consolidated-gate)', async () => {
+    await mkdir(testDir, { recursive: true });
+    await writeFile(join(testDir, 'ROADMAP.md'), '# Roadmap\n');
+
+    const sink = new CapturingAuditSink();
+    const ctx = defaultLoaderContext(sink);
+    const reader = new ProjectStateReader(testDir, ctx);
+
+    // 4 public read() calls — class has 3 internal fs-op surfaces per call,
+    // but the consolidated gate at the public entry emits exactly 1 audit
+    // record per call regardless of internal complexity. The internal
+    // access/readFileSafe×4/readdir all inherit through transitive call.
+    await reader.read();
+    await reader.read();
+    await reader.read();
+    await reader.read();
+
+    expect(sink.records).toHaveLength(4);
+    expect(sink.records.every((r) => r.op === 'read-dir')).toBe(true);
+    expect(sink.records.every((r) => r.target === testDir)).toBe(true);
+    expect(sink.records.every((r) => r.allowed === true)).toBe(true);
   });
 });
