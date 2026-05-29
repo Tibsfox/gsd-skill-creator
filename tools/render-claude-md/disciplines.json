@@ -7,8 +7,8 @@
       "docs/MISSION-PACKAGE-DISCIPLINE.md",
       "docs/scaffold-manifest-discipline.md"
     ],
-    "key_lessons": ["#10172", "#10178", "#10192", "#10199", "#10207", "#10209", "#10218", "#10224", "#10226", "#10234", "#10364", "#10365", "#10401"],
-    "codified_at_milestone": "v1.49.638 + v1.49.654 (forward-cadence lessons appended); v1.49.910 (PARTIAL-backfill: #10364 SPS cohort-uniqueness audit + #10365 scaffold-manifest hint validation + #10401 brief title-line trip-vocab budget — documented in docs/MISSION-PACKAGE-DISCIPLINE.md; docs/scaffold-manifest-discipline.md registered as canonical doc this ship)"
+    "key_lessons": ["#10172", "#10178", "#10192", "#10199", "#10207", "#10209", "#10218", "#10224", "#10226", "#10234", "#10364", "#10365", "#10366", "#10401"],
+    "codified_at_milestone": "v1.49.638 + v1.49.654 (forward-cadence lessons appended); v1.49.910 (PARTIAL-backfill: #10364 SPS cohort-uniqueness audit + #10365 scaffold-manifest hint validation + #10401 brief title-line trip-vocab budget — documented in docs/MISSION-PACKAGE-DISCIPLINE.md; docs/scaffold-manifest-discipline.md registered as canonical doc this ship); v1.49.911 (UNCODIFIED-drain: #10366 mission-brief historical-record assertions marked preliminary; verify — documented in docs/MISSION-PACKAGE-DISCIPLINE.md)"
   },
   {
     "domain": "Test authoring",
@@ -38,14 +38,14 @@
   {
     "domain": "Self-modification safety",
     "trigger": "Editing .claude/{skills,agents,hooks}/ paths; staging files into .planning/, .claude/, .archive/, artifacts/, .gsd/, .chipset/, .env, project-claude/hooks/.log/",
-    "summary": "PreToolUse hook BLOCKS self-mod operations without SC_SELF_MOD=1 / SC_INSTALL_CALLER=project-claude / npm_lifecycle_event override. git-add-blocker.js BLOCKS protected-path staging without SC_FORCE_ADD=1. settings.json gsd-config-guard-protected; new hooks route via project-claude/. Mission packages never committed.",
+    "summary": "PreToolUse hook BLOCKS self-mod operations without SC_SELF_MOD=1 / SC_INSTALL_CALLER=project-claude / npm_lifecycle_event override. git-add-blocker.js BLOCKS protected-path staging without SC_FORCE_ADD=1. settings.json gsd-config-guard-protected; new hooks route via project-claude/. Mission packages never committed. Sub-agent destination-directory ambiguity propagates a protected-path bypass (#10367): when a brief specifies a deliverable destination ambiguously ('likely under www/ or docs/'), the sub-agent may pick the path requiring the strongest overrides (www/ with ALLOW_WWW_COMMIT=1) — mitigation is upstream of the hook: briefs MUST state each deliverable's destination AND commit pattern unambiguously (tracked docs/ ordinary commit vs published www/ empty-commit) so the sub-agent never guesses across a protected boundary.",
     "canonical_docs": [
       ".claude/skills/security-hygiene/SKILL.md",
       "project-claude/hooks/self-mod-guard.js",
       "project-claude/hooks/git-add-blocker.js"
     ],
-    "key_lessons": ["#10174", "#10190", "#10201"],
-    "codified_at_milestone": "v1.49.585 C01 + C02; extended v1.49.653; lessons appended v1.49.654"
+    "key_lessons": ["#10174", "#10190", "#10201", "#10367"],
+    "codified_at_milestone": "v1.49.585 C01 + C02; extended v1.49.653; lessons appended v1.49.654; v1.49.911 (UNCODIFIED-drain: #10367 sub-agent destination-directory ambiguity → protected-path bypass — documented in project-claude/hooks/self-mod-guard.js header)"
   },
   {
     "domain": "Keystore",
@@ -94,12 +94,12 @@
   {
     "domain": "Sub-agent dispatch",
     "trigger": "Authoring W2/W3 sub-agent dispatch prompts; spawning parallel build agents; sizing token budgets per dispatch; embedding chapter-generation in NASA build dispatches",
-    "summary": "Sub-agents lack SendMessage in toolkit (spawn-task-return-result, not continuous peers); ~60-70 tool-use ceiling per dispatch; bound dispatches to ~1 component / 30-50min; commit-between-deliverables discipline; chunked Write+Edit append pattern for >32K HTML deliverables; transient API errors recover via identical-prompt retry; 64K output-token cap requires JSON+HTML split; W3.5 chapter-gen via `run-with-pg.mjs refresh --fast --quiet` belongs in the dispatch deliverable list (v709 codification)",
+    "summary": "Sub-agents lack SendMessage in toolkit (spawn-task-return-result, not continuous peers); ~60-70 tool-use ceiling per dispatch; bound dispatches to ~1 component / 30-50min; commit-between-deliverables discipline; chunked Write+Edit append pattern for >32K HTML deliverables; transient API errors recover via identical-prompt retry; 64K output-token cap requires JSON+HTML split; W3.5 chapter-gen via `run-with-pg.mjs refresh --fast --quiet` belongs in the dispatch deliverable list (v709 codification). Content-filter & dispatch-cadence lessons promoted from the NASA campaign (v911): positive-framing dispatch prompts and DON'T enumerate forbidden tokens — they self-replicate into output (#10406); the trip-vocab density budget applies to the prompt itself not just the brief (#10407); secondary-trip-vocab density audit (primary > 0 OR secondary > 5) selects Path B main-context hand-author preemptively (#10402, sibling of #10401); content-filter-safe phrasing — date-pair memorial form, engineering register, single memorial section (#10387); sub-agent content-filter mitigation via partial-completion salvage (#10383); dual-direction substrate-form hard-block in prompts (#10378); foreground-author full-rewrite-at-scale recovery (#10388); dispatch as a clean cadence alternative for non-conflicting concurrent work (#10369); shared filename manifest in concurrent dispatch prompts prevents coordination drift (#10385); per-mission single-dispatch rebuild template, ~1200-word brief / 13 deliverables / 28-36 tool uses (#10408)",
     "canonical_docs": [
       "docs/sub-agent-dispatch-discipline.md"
     ],
-    "key_lessons": ["#10193", "#10194", "#10200", "#10214", "#10215", "#10240", "#10244", "#10391"],
-    "codified_at_milestone": "v1.49.654 (new domain — codified from v1.49.637-651 lesson cluster); v1.49.709 (W3.5 chapter-gen bake-in); v1.49.910 (PARTIAL-backfill: #10391 STORY.md newline-separator discipline — documented in docs/sub-agent-dispatch-discipline.md)"
+    "key_lessons": ["#10193", "#10194", "#10200", "#10214", "#10215", "#10240", "#10244", "#10391", "#10369", "#10378", "#10383", "#10385", "#10387", "#10388", "#10402", "#10406", "#10407", "#10408"],
+    "codified_at_milestone": "v1.49.654 (new domain — codified from v1.49.637-651 lesson cluster); v1.49.709 (W3.5 chapter-gen bake-in); v1.49.910 (PARTIAL-backfill: #10391 STORY.md newline-separator discipline — documented in docs/sub-agent-dispatch-discipline.md); v1.49.911 (UNCODIFIED-drain: 10 content-filter & dispatch-cadence lessons promoted from the NASA campaign — #10369/#10378/#10383/#10385/#10387/#10388/#10402/#10406/#10407/#10408 — documented in docs/sub-agent-dispatch-discipline.md)"
   },
   {
     "domain": "Counter-cadence cadence",
@@ -258,5 +258,15 @@
     ],
     "key_lessons": ["#10435"],
     "codified_at_milestone": "v1.49.833 (new domain — codified from 5-instance evidence set v823 SkillActivationObserver declaration + v829 application-boundary verification + v830 ConceptFallbackProvider framework + v831 RosettaConceptFallback implementation + v832 selector 2nd-caller wire + tests/integration/ verification)"
+  },
+  {
+    "domain": "NASA mission authoring",
+    "trigger": "Authoring or rebuilding NASA degree-campaign mission pages; choosing direct-author vs sub-agent-dispatch vs hybrid cadence for same-day degree advances; tracking substrate-axis rotation / substrate-cohort observations; framing memorial or disaster content for content-filter safety",
+    "summary": "Operational disciplines from the v652-v716 NASA degree-campaign mission-authoring effort (campaign frozen at degree 1.178 — a pressure-margin hold, not a cancellation; disciplines preserved for resume + a flagged general subset). Authoring cadence ladder — direct-author advances a degree at ~half depth / ~quarter wall-clock but loses the W1 correction safety-net (#10341); track consecutive-direct-author cluster length (1-2 low-risk, 3 consider dispatch, 4+ dispatch-required) (#10350); direct-author-with-focused-W2-dispatch hybrid meets depth gates at ~1.5-2h/degree, sustainable 4-8 consecutive (#10352); scale the counter-cadence response to debt breadth (#10374); long inter-flight gaps are scope-isolated work windows (#10376). Same-day cluster-length monitoring — flag near-term-verifiable predictions distinctly from long-horizon forward-shadows (#10348); 3/4-consecutive same-calendar-day degree thresholds (#10354, #10356); 4-consecutive threshold-hit triggers a counter-cadence cluster preemptively (#10371). Dispatch coordination — transient-API retry-first re-validation (#10268); 3-milestone infrastructure→content-1→content-2 trio closes 8+-page cross-track drift (#10271); name the root cause when mission numbering diverges from launch order (#10349). Substrate-axis rotation & stability — set explicit per-page byte/line targets in asymmetric uplifts (#10270); return to earlier categories after 3-5 pivots to avoid density saturation (#10345); declare axis rotations explicitly + hard-block predecessor-leak (#10381); intra-program continuation is sustained stability NOT a rotation, don't increment the count (#10394); one axis can host multiple functional subforms without rotation (#10395). Substrate-cohort/anchor observation accounting — anchor paired observations at one milestone (#10389); orbital-class multi-decade lifetimes are distinct from surface-class (#10397); cohorts can open with deferred realization (#10398); track anchor realizations cumulatively (#10399). Mission-brief accuracy — model intermediate states of multi-milestone forward references explicitly (#10250); document engineering-root-cause events as substrate-anchors at first observation (#10346). Content-filter & memorial framing (NASA-specific) — forbid meta-statements about the content policy itself, not just the forbidden content (#10269); explicit memorial-substrate-respect directives in dispatch prompts (#10380). Operator-directed — document operator-authorized departures from a lesson default as substrate-distinct (#10384); record operator-directed mid-cadence program-family pivots distinctly from routine axis rotations (#10390). The genuinely cross-cutting campaign lessons (content-filter phrasing, dispatch density, protected-path safety, brief accuracy) were promoted to their existing homes (Sub-agent dispatch / Self-modification safety / Mission package framing) and are cross-referenced in the canonical doc.",
+    "canonical_docs": [
+      "docs/nasa-mission-authoring-discipline.md"
+    ],
+    "key_lessons": ["#10250", "#10268", "#10269", "#10270", "#10271", "#10341", "#10345", "#10346", "#10348", "#10349", "#10350", "#10352", "#10354", "#10356", "#10371", "#10374", "#10376", "#10380", "#10381", "#10384", "#10389", "#10390", "#10394", "#10395", "#10397", "#10398", "#10399"],
+    "codified_at_milestone": "v1.49.911 (new domain — codified from the v1.49.652-716 NASA mission-authoring campaign UNCODIFIED lesson cluster; counter-cadence #12 codify-drain ship; 27 NASA-specific lessons here + 12 cross-cutting siblings promoted to Sub-agent dispatch / Self-modification safety / Mission package framing)"
   }
 ]

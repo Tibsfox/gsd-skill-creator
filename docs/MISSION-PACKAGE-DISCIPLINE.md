@@ -343,6 +343,20 @@ documented in its first-emit retrospective at
   any hint not corroborated. Helper tool
   `tools/validate-manifest-hints.mjs` proposed and deferred at v666
   (FA-666-N forward).
+- **Lesson #10366** — mission-brief historical-record assertions should be
+  marked preliminary (codified v1.49.911). When a W0 brief asserts a
+  historical fact (crew biographies, mission counts, cohort assignments,
+  date bindings) that is not yet sourced to an authoritative reference
+  (NSSDC, NASA bios, mission reports), mark each assertion
+  `(preliminary; verify)` or place it under an explicit verification
+  section rather than stating it as authoritative. This delegates the check
+  to the first sub-agent step, catching precedent-inheritance errors before
+  they propagate into the build. Evidence: v1.49.666 — a brief inherited a
+  cohort-assignment claim verbatim from its predecessor; the W1 verification
+  step caught the unsourced precedent. Sibling of the W1 brief-error catch
+  discipline (#10178) and the forward-reference state-tracking lesson #10250
+  (NASA mission authoring — model intermediate states of multi-milestone
+  forward references explicitly).
 - **Lesson #10401** — brief trip-vocab budget discipline (codified
   v1.49.707 above as §3); evidence: 9-mission v700-v706 investigation
   characterized the title-line trip-vocab regex

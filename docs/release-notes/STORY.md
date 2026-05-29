@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.910`.
+The story begins at `v1.0` and continues to `v1.49.911`.
 
-**953 chapters.** 952 have retrospectives.
+**954 chapters.** 953 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -961,3 +961,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.908](v1.49.908/00-summary.md)** — Fourteenth LoaderContext Chip: `memory/conversation-store.ts` (Class-Multi-Method Consolidated-Gate — 3rd Instance PROMOTES to ESTABLISHED) · 2026-05-29
 - **[v1.49.909](v1.49.909/00-summary.md)** — Fifteenth LoaderContext Chip: `intelligence/kb/store.ts` (VERDICT — "Role: NOT a disk loader") — CLOSES KNOWN_UNWIRED Loader to 0 · 2026-05-29
 - **[v1.49.910](v1.49.910/00-summary.md)** — Counter-Cadence Codify Ship: Promote #10459 (Class-Multi-Method Consolidated-Gate) ESTABLISHED + Clear 8 PARTIAL Discipline-Coverage Entries · 2026-05-29
+- **[v1.49.911](v1.49.911/00-summary.md)** — Counter-Cadence Codify Ship: UNCODIFIED Drain — NASA Mission Authoring Domain + Reusable-Subset Promotion (39 → 0) · 2026-05-29

@@ -16,6 +16,16 @@
 //     project-claude/install.cjs (which runs under SC_INSTALL_CALLER=project-claude
 //     allowlist). Direct edits to .claude/settings.json are BLOCKed by an
 //     existing pre-v1.49.585 hook.
+//   Lesson #10367 — sub-agent destination-directory ambiguity propagates a
+//     protected-path bypass (codified v1.49.911). When a mission brief
+//     specifies a sub-agent deliverable destination ambiguously ("likely
+//     under www/ or docs/"), the sub-agent may pick the path that requires
+//     the strongest overrides (e.g. www/ with ALLOW_WWW_COMMIT=1), bypassing
+//     this guard's intent through the path of least resistance. Mitigation
+//     is upstream of the hook: mission briefs MUST state each deliverable's
+//     destination AND commit pattern unambiguously — tracked reference docs
+//     (docs/, ordinary commit) vs published-site content (www/, empty-commit
+//     pattern) — so the sub-agent never guesses across a protected boundary.
 //
 // Spec:    .planning/missions/v1-49-585-concerns-cleanup/components/01-self-mod-guard.md
 // Contract: .planning/missions/v1-49-585-concerns-cleanup/work/specs/hook-conventions.md
