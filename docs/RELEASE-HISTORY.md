@@ -1,15 +1,16 @@
 # Release History
 
-919 milestones shipped across the v1.0 → v1.49.876 arc. The table below lists every shipped release, newest first.
+920 milestones shipped across the v1.0 → v1.49.877 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 919 releases · 918 with retrospectives · 728 with extracted lessons · quality A:662 B:97 C:63 D:11 F:86 (avg 88) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 920 releases · 919 with retrospectives · 728 with extracted lessons · quality A:662 B:97 C:63 D:11 F:87 (avg 88) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.877](release-notes/v1.49.877) | EgressContext singleton chip: `src/aminet/index-fetcher.ts` (Track 5 chip #2) | 2026-05-28 | 3 | — | — | [s](release-notes/v1.49.877/chapter/00-summary.md) [r](release-notes/v1.49.877/chapter/03-retrospective.md) [l](release-notes/v1.49.877/chapter/04-lessons.md) [c](release-notes/v1.49.877/chapter/99-context.md) | — | F 29 |  |
 | [v1.49.876](release-notes/v1.49.876) | EgressContext singleton chip: `src/aminet/package-fetcher.ts` (Track 5 chip #1) | 2026-05-28 | 3 | — | — | [s](release-notes/v1.49.876/chapter/00-summary.md) [r](release-notes/v1.49.876/chapter/03-retrospective.md) [l](release-notes/v1.49.876/chapter/04-lessons.md) [c](release-notes/v1.49.876/chapter/99-context.md) | — | F 26 |  |
 | [v1.49.875](release-notes/v1.49.875) | ProcessContext singleton chip: `src/chipset/harness-integrity.ts` (Track 4 CLOSE) | 2026-05-28 | 2 | — | — | [s](release-notes/v1.49.875/chapter/00-summary.md) [r](release-notes/v1.49.875/chapter/03-retrospective.md) [l](release-notes/v1.49.875/chapter/04-lessons.md) [c](release-notes/v1.49.875/chapter/99-context.md) | — | F 23 |  |
 | [v1.49.874](release-notes/v1.49.874) | ProcessContext singleton chip: `src/learn/acquirer.ts` (Track 4 chip #5) | 2026-05-28 | 2 | — | — | [s](release-notes/v1.49.874/chapter/00-summary.md) [r](release-notes/v1.49.874/chapter/03-retrospective.md) [l](release-notes/v1.49.874/chapter/04-lessons.md) [c](release-notes/v1.49.874/chapter/99-context.md) | — | F 20 |  |
