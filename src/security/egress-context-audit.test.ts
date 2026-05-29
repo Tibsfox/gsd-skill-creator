@@ -86,7 +86,12 @@ const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
   // 5 registry adapters wired through EgressContext: npm.ts at v1.49.809;
   // cargo.ts + conda.ts + pypi.ts + rubygems.ts batch at v1.49.811.
   'src/intelligence/ipc.ts',
-  'src/mcp/skill-installer.ts',
+  // src/mcp/skill-installer.ts wired v1.49.880 — Track 5 chip #5 (401
+  // LOC). ctx?: EgressContext threaded through installSkill (4th param)
+  // + installFromRemote (4th param); single hoist-at-top before the
+  // fetch in installFromRemote. EgressContextDenied propagates through
+  // outer try/finally per #10427. installFromLocal path bypasses ctx
+  // (no network egress).
   // src/site/deploy.ts wired v1.49.866 — fourth Egress chip. ctx?: EgressContext
   // threaded through verifyDeployment → defaultFetch wrapper; ensureEgressAllowed
   // hoisted at the top of defaultFetch BEFORE the fetch. Injected FetchFn

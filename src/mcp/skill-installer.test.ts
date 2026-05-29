@@ -12,6 +12,11 @@ import { tmpdir } from 'node:os';
 import matter from 'gray-matter';
 import { packSkill } from './skill-packager.js';
 import { installSkill, type InstallResult } from './skill-installer.js';
+import {
+  type EgressContext,
+  EgressContextDenied,
+  NULL_EGRESS_AUDIT_SINK,
+} from '../security/egress-context.js';
 
 // ── Helpers ─────────────────────────────────────────────────────────────
 
@@ -655,6 +660,18 @@ describe('skill-installer', () => {
 
       expect(result.success).toBe(true);
       expect(result.skillName).toBe('valid-yaml');
+    });
+  });
+
+  describe('EgressContext wire (v1.49.880)', () => {
+    it('installFromRemote: throws EgressContextDenied when ctx denies egress', async () => {
+      const ctx: EgressContext = {
+        allowList: [],
+        audit: NULL_EGRESS_AUDIT_SINK,
+      };
+      await expect(
+        installSkill('https://example.test/skill.tar.gz', '/tmp/x', undefined, ctx),
+      ).rejects.toBeInstanceOf(EgressContextDenied);
     });
   });
 });

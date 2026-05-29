@@ -18,6 +18,11 @@ import { validateContentSafety } from './content-validator.js';
 import type { SkillPackageManifest } from './skill-packager.js';
 import { safeParseFrontmatter } from '../validation/yaml-safety.js';
 import { SkillMetadataSchema } from '../validation/skill-validation.js';
+import {
+  ensureEgressAllowed,
+  EgressContextDenied,
+  type EgressContext,
+} from '../security/egress-context.js';
 
 /** Default maximum download size: 10 MB */
 const DEFAULT_MAX_DOWNLOAD_BYTES = 10 * 1024 * 1024;
@@ -53,12 +58,13 @@ export async function installSkill(
   source: string,
   targetDir: string,
   options?: InstallOptions,
+  ctx?: EgressContext,
 ): Promise<InstallResult> {
   const isRemote =
     source.startsWith('http://') || source.startsWith('https://');
 
   if (isRemote) {
-    return installFromRemote(source, targetDir, options);
+    return installFromRemote(source, targetDir, options, ctx);
   }
   return installFromLocal(source, targetDir);
 }
@@ -103,10 +109,17 @@ async function installFromRemote(
   url: string,
   targetDir: string,
   options?: InstallOptions,
+  ctx?: EgressContext,
 ): Promise<InstallResult> {
   const maxBytes = options?.maxDownloadBytes ?? DEFAULT_MAX_DOWNLOAD_BYTES;
   const tempDir = await mkdtemp(join(tmpdir(), 'skill-install-'));
   const downloadPath = join(tempDir, 'download.tar.gz');
+
+  // Security: hoist-at-top before single fetch (#10444 catalog — N=1
+  // fetch site). Hoisted OUTSIDE the try/finally so EgressContextDenied
+  // propagates BEFORE temp-dir setup completes; mkdtemp above runs but
+  // is cleaned in finally. Per #10427 the security check fires first.
+  ensureEgressAllowed(ctx, 'mcp/skill-installer', 'fetch', url);
 
   try {
     // 1. Download with size limit
