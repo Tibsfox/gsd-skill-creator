@@ -348,3 +348,93 @@ describe('archiveCache refcounted dispose (HIGH-01 refcount close)', () => {
     }
   });
 });
+
+// ── LoaderContext chokepoint integration (v1.49.905) ─────────────────────
+
+describe('pmtiles-reader LoaderContext chokepoint integration (v1.49.905)', () => {
+  const tmpFile = resolve(tmpdir(), 'pmtiles-loaderctx-test.pmtiles');
+
+  afterEach(() => {
+    clearPmtilesCaches();
+    if (existsSync(tmpFile)) unlinkSync(tmpFile);
+  });
+
+  it('validatePMTilesMagic emits exactly one audit record per call', async () => {
+    const { CapturingAuditSink, defaultLoaderContext } = await import(
+      '../../../security/loader-context.js'
+    );
+    const sink = new CapturingAuditSink();
+    const ctx = defaultLoaderContext(sink);
+    const buf = Buffer.alloc(16);
+    buf.set(PMTILES_MAGIC, 0);
+    writeFileSync(tmpFile, buf);
+    const result = validatePMTilesMagic(tmpFile, ctx);
+    expect(result).toBe(true);
+    expect(sink.records.length).toBe(1);
+    expect(sink.records[0]?.op).toBe('read-file');
+    expect(sink.records[0]?.target).toBe(tmpFile);
+  });
+
+  it('validatePMTilesMagic throws LoaderContextDenied above try/catch ENOENT swallow', async () => {
+    const { LoaderContextDenied, CapturingAuditSink } = await import(
+      '../../../security/loader-context.js'
+    );
+    const sink = new CapturingAuditSink();
+    const restrictiveCtx = { allowList: [], audit: sink };
+    expect(() => validatePMTilesMagic('/restricted/path.pmtiles', restrictiveCtx)).toThrow(
+      LoaderContextDenied,
+    );
+    expect(sink.records.length).toBe(1);
+    expect(sink.records[0]?.allowed).toBe(false);
+  });
+
+  it('fetchTileViaPMTiles emits 2 audit records (own gate + transitive validatePMTilesMagic)', async () => {
+    const { CapturingAuditSink, defaultLoaderContext } = await import(
+      '../../../security/loader-context.js'
+    );
+    const sink = new CapturingAuditSink();
+    const ctx = defaultLoaderContext(sink);
+    // Build a real PMTiles file using the test infrastructure.
+    const buf = Buffer.alloc(16);
+    buf.set(PMTILES_MAGIC, 0);
+    writeFileSync(tmpFile, buf);
+    sink.clear();
+    try {
+      await fetchTileViaPMTiles(tmpFile, 0, 0, 0, ctx);
+    } catch {
+      // Expect failure since this is not a real PMTiles archive — the
+      // test asserts on audit emission, not on archive validity.
+    }
+    // 2 audits: 1 from fetchTileViaPMTiles top-of-function gate + 1 from
+    // the transitive validatePMTilesMagic call. Per v892 two-site
+    // hoisted-check discipline — both entry points gate independently.
+    expect(sink.records.length).toBe(2);
+    expect(sink.records.every((r) => r.op === 'read-file')).toBe(true);
+  });
+
+  it('fetchTileForCoord passes ctx through to fetchTileViaPMTiles', async () => {
+    const { CapturingAuditSink, defaultLoaderContext } = await import(
+      '../../../security/loader-context.js'
+    );
+    const sink = new CapturingAuditSink();
+    const ctx = defaultLoaderContext(sink);
+    const buf = Buffer.alloc(16);
+    buf.set(PMTILES_MAGIC, 0);
+    writeFileSync(tmpFile, buf);
+    sink.clear();
+    try {
+      const { fetchTileForCoord } = await import('../pmtiles-reader.js');
+      await fetchTileForCoord(tmpFile, { z: 0, x: 0, y: 0 }, ctx);
+    } catch {
+      // Expect failure on invalid PMTiles; test asserts on ctx propagation.
+    }
+    expect(sink.records.length).toBe(2);
+  });
+
+  it('legacy permissive mode (no ctx) preserves prior behavior on validatePMTilesMagic', () => {
+    const buf = Buffer.alloc(16);
+    buf.set(PMTILES_MAGIC, 0);
+    writeFileSync(tmpFile, buf);
+    expect(validatePMTilesMagic(tmpFile)).toBe(true);
+  });
+});

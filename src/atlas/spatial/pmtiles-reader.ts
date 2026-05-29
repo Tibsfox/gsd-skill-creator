@@ -21,6 +21,13 @@
  *   - `resolvePmtilesPath` rejects names whose resolved path escapes the
  *     configured `ATLAS_PMTILES_DIR` (MED-03 fix).
  *
+ * Accepts an optional `LoaderContext` (Tier-E security chokepoint, v1.49.782).
+ * Module-function two-site hoisted-check (#10448 sub-variant; mixed sync+async
+ * ops): `validatePMTilesMagic` (sync `readFileSync`) and `fetchTileViaPMTiles`
+ * (async `open` via NodeFileSource) gate independently. Eleventh LoaderContext
+ * chip at v1.49.905; sibling of v892 dacp/bus/scanner.ts (pure async two-site)
+ * and v903 keystore.ts (pure sync two-site).
+ *
  * Reference: PMTiles v3 spec at github.com/protomaps/PMTiles/blob/main/spec/v3/
  * and Part A research mission §2.5.7.
  */
@@ -32,6 +39,12 @@ import { LRUCache } from 'lru-cache';
 import { PMTiles, type Source, type RangeResponse } from 'pmtiles';
 import { PMTILES_MAGIC } from './format-constants.js';
 import type { TileCoord } from './types.js';
+import {
+  ensureAllowed,
+  type LoaderContext,
+} from '../../security/loader-context.js';
+
+const LOADER_SOURCE = 'atlas/spatial/pmtiles-reader';
 
 /**
  * Resolve a `pmtiles_name` query parameter into an absolute on-disk path,
@@ -52,8 +65,13 @@ export function resolvePmtilesPath(name: string | null): string {
 /**
  * Validate that a file's first 8 bytes match the PMTiles v3 magic.
  * Cheap check before constructing the reader.
+ *
+ * Optional `ctx?: LoaderContext` gates the `readFileSync` site BEFORE the
+ * try/catch swallow (per #10442). Direct callers admitted through the
+ * chokepoint; `fetchTileViaPMTiles` also gates independently.
  */
-export function validatePMTilesMagic(path: string): boolean {
+export function validatePMTilesMagic(path: string, ctx?: LoaderContext): boolean {
+  ensureAllowed(ctx, LOADER_SOURCE, 'read-file', path);
   try {
     const buf = readFileSync(path, { flag: 'r' }).subarray(0, 8);
     if (buf.length < 8) return false;
@@ -178,14 +196,22 @@ function getArchive(path: string): RefcountedArchive {
  * Fetch a single tile from a PMTiles file. Returns the tile bytes or `null`
  * if the tile is absent at (z, x, y). Throws if the file is not a valid
  * PMTiles archive.
+ *
+ * Optional `ctx?: LoaderContext` gates the archive open (async) via the
+ * NodeFileSource that backs the PMTiles archive. Hoisted at the top of
+ * this function; covers the implicit `open()` performed by the cached
+ * NodeFileSource on first `getBytes` call. Sibling gate at
+ * `validatePMTilesMagic` also fires when this function calls into it.
  */
 export async function fetchTileViaPMTiles(
   path: string,
   z: number,
   x: number,
   y: number,
+  ctx?: LoaderContext,
 ): Promise<Buffer | null> {
-  if (!validatePMTilesMagic(path)) {
+  ensureAllowed(ctx, LOADER_SOURCE, 'read-file', path);
+  if (!validatePMTilesMagic(path, ctx)) {
     throw new Error(`pmtiles file missing magic bytes or unreadable: ${path}`);
   }
 
@@ -215,8 +241,9 @@ export async function fetchTileViaPMTiles(
 export async function fetchTileForCoord(
   pmtilesPath: string,
   coord: TileCoord,
+  ctx?: LoaderContext,
 ): Promise<Buffer | null> {
-  return fetchTileViaPMTiles(pmtilesPath, coord.z, coord.x, coord.y);
+  return fetchTileViaPMTiles(pmtilesPath, coord.z, coord.x, coord.y, ctx);
 }
 
 /**
