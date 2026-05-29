@@ -46,6 +46,11 @@ import {
   eventsToObservations as predictiveEventsToObservations,
   readPredictiveLowConfidenceEvents,
 } from './predictive-low-confidence-events.js';
+import {
+  DEFAULT_OBSERVATION_RETENTION_EVENTS_PATH,
+  eventsToObservations as observationRetentionEventsToObservations,
+  readObservationRetentionEvents,
+} from './observation-retention-events.js';
 import type { CalibrationObservation, CalibratableThreshold } from './types.js';
 import type { SuggestionEntry } from './suggestions-mapper.js';
 
@@ -63,6 +68,11 @@ export interface ObservationLoaderOptions {
    * predictive.* threshold class; v837).
    */
   predictiveLowConfidenceEventsPath?: string;
+  /**
+   * Path to observation-retention-events.jsonl (consumed by
+   * `observation.retention_days`; v884 read-side wire).
+   */
+  observationRetentionEventsPath?: string;
 }
 
 /**
@@ -104,10 +114,21 @@ export function observationSourceFor(threshold: CalibratableThreshold): Observat
       wired: false,
     };
   }
+  if (threshold === 'observation.retention_days') {
+    return {
+      sourceId: 'observation-retention-events',
+      description:
+        'Operator (or substrate auto-emit) classification of retention-sweep ' +
+        'outcomes (v1.49.884 read-side wire — append-only JSONL at ' +
+        '.planning/patterns/observation-retention-events.jsonl). Substrate ' +
+        'auto-emit deferred per #10439 staging (mirrors v837 → v845/v846).',
+      wired: true,
+    };
+  }
   if (threshold.startsWith('observation.')) {
     return {
       sourceId: 'observation-retention-events',
-      description: 'Observation-retention compaction / drop events (NOT YET CAPTURED)',
+      description: 'Observation-retention compaction / drop events (NOT YET CAPTURED for this threshold)',
       wired: false,
     };
   }
@@ -179,8 +200,14 @@ export async function loadObservationsForThreshold(
     const events = await readPredictiveLowConfidenceEvents(path);
     return predictiveEventsToObservations(events);
   }
+  if (threshold === 'observation.retention_days') {
+    const path =
+      options.observationRetentionEventsPath
+      ?? DEFAULT_OBSERVATION_RETENTION_EVENTS_PATH;
+    const events = await readObservationRetentionEvents(path);
+    return observationRetentionEventsToObservations(events);
+  }
   // Unwired classes return empty; honest "no data captured" baseline.
   // - 'token_budget.max_percent'
-  // - 'observation.retention_days'
   return [];
 }

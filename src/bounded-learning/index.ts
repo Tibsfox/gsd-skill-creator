@@ -64,6 +64,19 @@ export {
 export type { TokenBudgetEvent, TokenBudgetEventKind } from './token-budget-events.js';
 
 export {
+  DEFAULT_OBSERVATION_RETENTION_EVENTS_PATH,
+  appendObservationRetentionEvent,
+  eventKindToValue as observationRetentionEventKindToValue,
+  eventToObservation as observationRetentionEventToObservation,
+  eventsToObservations as observationRetentionEventsToObservations,
+  readObservationRetentionEvents,
+} from './observation-retention-events.js';
+export type {
+  ObservationRetentionEvent,
+  ObservationRetentionEventKind,
+} from './observation-retention-events.js';
+
+export {
   DEFAULT_AUDIT_LOG_PATH,
   appendAuditLogEntry,
   buildAuditLogEntry,

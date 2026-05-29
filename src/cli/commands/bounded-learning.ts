@@ -88,6 +88,12 @@ import {
   type PredictiveLowConfidenceEvent,
   type PredictiveLowConfidenceEventKind,
 } from '../../bounded-learning/predictive-low-confidence-events.js';
+import {
+  DEFAULT_OBSERVATION_RETENTION_EVENTS_PATH,
+  appendObservationRetentionEvent,
+  type ObservationRetentionEvent,
+  type ObservationRetentionEventKind,
+} from '../../bounded-learning/observation-retention-events.js';
 import { getFlagValue } from '../lib/flag-lookup.js';
 
 const DEFAULT_THRESHOLD: CalibratableThreshold = 'suggestions.min_occurrences';
@@ -97,6 +103,7 @@ const SUPPORTED_THRESHOLDS: CalibratableThreshold[] = [
   'suggestions.auto_dismiss_after_days',
   'token_budget.warn_at_percent',
   'predictive.low_confidence_threshold',
+  'observation.retention_days',
 ];
 
 const DEFAULT_SUGGESTIONS_PATH = join(process.cwd(), '.planning', 'patterns', 'suggestions.json');
@@ -604,6 +611,10 @@ async function runRecordEvent(
     return runRecordPredictiveEvent(args, flags);
   }
 
+  if (thresholdValue === 'observation.retention_days') {
+    return runRecordObservationRetentionEvent(args, flags);
+  }
+
   // Default branch: token-budget event recording (v803 behavior unchanged).
   const kindLookup = getFlagValue(args, '--kind');
   if (!kindLookup.present || kindLookup.value === null) {
@@ -733,6 +744,83 @@ async function runRecordPredictiveEvent(
     console.log(JSON.stringify({ recorded: true, event }));
   } else if (!flags.quiet) {
     p.log.success(`Recorded predictive-low-confidence ${kind} event at ${event.timestamp}.`);
+  }
+  return 0;
+}
+
+/**
+ * v1.49.884 — observation-retention event recording branch of
+ * --record-event. Polarity matches token-budget (NOT predictive):
+ * --kind too_aggressive|too_lax.
+ *
+ * Polarity: too_aggressive → -1 (favor RAISING the threshold; keep entries
+ * longer); too_lax → +1 (favor LOWERING the threshold; drop entries sooner).
+ *
+ * Best-effort silent write per Lesson #10427.
+ */
+async function runRecordObservationRetentionEvent(
+  args: string[],
+  flags: { json: boolean; quiet: boolean },
+): Promise<number> {
+  const kindLookup = getFlagValue(args, '--kind');
+  const supported = ['too_aggressive', 'too_lax'];
+  if (!kindLookup.present || kindLookup.value === null) {
+    if (flags.json) {
+      console.log(JSON.stringify({ error: 'missing-flag', flag: '--kind', supported }));
+    } else if (!flags.quiet) {
+      p.log.error(`--record-event (observation-retention) requires --kind <too_aggressive|too_lax>.`);
+    }
+    return 1;
+  }
+  if (kindLookup.value !== 'too_aggressive' && kindLookup.value !== 'too_lax') {
+    if (flags.json) {
+      console.log(JSON.stringify({ error: 'invalid-flag', flag: '--kind', value: kindLookup.value, supported }));
+    } else if (!flags.quiet) {
+      p.log.error(`--kind must be 'too_aggressive' or 'too_lax'; got '${kindLookup.value}'.`);
+    }
+    return 1;
+  }
+  const kind: ObservationRetentionEventKind = kindLookup.value;
+
+  const pathLookup = getFlagValue(args, '--observation-retention-events');
+  const path = pathLookup.present && pathLookup.value !== null
+    ? pathLookup.value
+    : DEFAULT_OBSERVATION_RETENTION_EVENTS_PATH;
+
+  const event: ObservationRetentionEvent = {
+    timestamp: new Date().toISOString(),
+    kind,
+  };
+  const droppedLookup = getFlagValue(args, '--dropped-count');
+  if (droppedLookup.present) {
+    const parsed = parsePositiveFloat(droppedLookup.value);
+    if (parsed !== null) event.droppedCount = parsed;
+  }
+  const retainedLookup = getFlagValue(args, '--retained-count');
+  if (retainedLookup.present) {
+    const parsed = parsePositiveFloat(retainedLookup.value);
+    if (parsed !== null) event.retainedCount = parsed;
+  }
+  const retentionDaysLookup = getFlagValue(args, '--retention-days');
+  if (retentionDaysLookup.present) {
+    const parsed = parsePositiveFloat(retentionDaysLookup.value);
+    if (parsed !== null) event.retentionDays = parsed;
+  }
+  const reasonLookup = getFlagValue(args, '--reason');
+  if (reasonLookup.present && reasonLookup.value !== null) {
+    event.reason = reasonLookup.value;
+  }
+
+  try {
+    await appendObservationRetentionEvent(event, { path });
+  } catch {
+    // Best-effort silent per Lesson #10427.
+  }
+
+  if (flags.json) {
+    console.log(JSON.stringify({ recorded: true, event }));
+  } else if (!flags.quiet) {
+    p.log.success(`Recorded observation-retention ${kind} event at ${event.timestamp}.`);
   }
   return 0;
 }

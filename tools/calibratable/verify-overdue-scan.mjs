@@ -77,7 +77,7 @@ const THRESHOLDS_MANIFEST = [
     threshold: 'observation.retention_days',
     wired_first_caller_ship: null,
     integration_test_ship: null,
-    notes: 'NOT YET WIRED. observation source unwired per src/bounded-learning/observation-sources.ts.',
+    notes: 'READ-SIDE WIRED v1.49.884 (observation-retention-events.ts + CLI manual recorder); substrate auto-emit deferred (mirrors v837 → v846 staging). wired_first_caller_ship will set when substrate auto-emit ships.',
   },
   {
     threshold: 'predictive.low_confidence_threshold',

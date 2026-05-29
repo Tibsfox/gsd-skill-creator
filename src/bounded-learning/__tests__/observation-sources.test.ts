@@ -40,10 +40,11 @@ describe('observationSourceFor — per-class registry (v1.49.798)', () => {
     expect(info.wired).toBe(false);
   });
 
-  it('classifies observation.* thresholds as unwired observation-retention-events source', () => {
+  it('classifies observation.retention_days as WIRED observation-retention-events source (v1.49.884 flip)', () => {
     const info = observationSourceFor('observation.retention_days');
     expect(info.sourceId).toBe('observation-retention-events');
-    expect(info.wired).toBe(false);
+    expect(info.wired).toBe(true);
+    expect(info.description).toMatch(/v1\.49\.884 read-side wire/);
   });
 
   it('classifies predictive.low_confidence_threshold as WIRED predictive-low-confidence-events source (v1.49.837 flip)', () => {
@@ -132,9 +133,29 @@ describe('loadObservationsForThreshold — per-class dispatch (v1.49.798)', () =
     expect(obs).toEqual([]);
   });
 
-  it('returns empty array for observation.* thresholds', async () => {
+  it('reads observation-retention events JSONL when present (v1.49.884 wire)', async () => {
+    const eventsPath = join(workDir, 'observation-retention-events.jsonl');
+    writeFileSync(
+      eventsPath,
+      [
+        JSON.stringify({ timestamp: '2026-05-28T00:00:00.000Z', kind: 'too_aggressive' }),
+        JSON.stringify({ timestamp: '2026-05-28T00:01:00.000Z', kind: 'too_lax' }),
+        JSON.stringify({ timestamp: '2026-05-28T00:02:00.000Z', kind: 'too_aggressive' }),
+      ].join('\n') + '\n',
+      'utf8',
+    );
     const obs = await loadObservationsForThreshold('observation.retention_days', {
-      suggestionsPath,
+      observationRetentionEventsPath: eventsPath,
+    });
+    expect(obs).toHaveLength(3);
+    // too_aggressive → -1 (favor raise), too_lax → +1 (favor lower).
+    // Same polarity shape as token-budget.
+    expect(obs.map((o) => o.value)).toEqual([-1, 1, -1]);
+  });
+
+  it('returns empty array for observation.retention_days when JSONL is missing (honest no-data baseline)', async () => {
+    const obs = await loadObservationsForThreshold('observation.retention_days', {
+      observationRetentionEventsPath: join(workDir, 'never-written.jsonl'),
     });
     expect(obs).toEqual([]);
   });
