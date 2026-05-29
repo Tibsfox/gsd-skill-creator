@@ -98,6 +98,34 @@ The guard does NOT depend on git. It compares disk content to proposed content:
 
 **General principle (meta).** When a prose warning about non-obvious tool sequencing trips once and holds two-three ships under vigilance alone, migrate to a deterministic gate the next ship. The vigilance ledger is finite — convert the rule to code while the trip is still fresh.
 
+### Static-analysis tool parsers must handle common code-shape variants OR fail loudly (Lesson #10450)
+
+Static-analysis tools that parse source code to emit findings are themselves parsers — and their parsers can be wrong. When a tool greps for an import shape (`/import\s+\{([^}]+)\}\s+from/`) or names a token (`/]\s*\)/` as the terminator of a `Set` literal), the regex encodes assumptions about what source code looks like. When the assumption fails, the tool produces incorrect findings *silently* — it doesn't crash, it just emits the wrong answer.
+
+This is a sibling discipline to [failure-mode contracts](failure-mode-contracts.md) (#10427): a tool whose entire purpose is to surface silent failures must not itself fail silently. A false positive trains operators to dismiss findings; a false negative hides real problems. Both are worse than a tool that crashes loudly on input it doesn't know how to parse.
+
+**Two real-world instances in the same tool:**
+
+- **v1.49.867** — `tools/security/check-stale-known-unwired.mjs` regex for KNOWN_UNWIRED set terminator was `/]\s*\)/`. The pattern matched `])` inside a code comment that said `"all errors return [])"` and treated the comment as the set's terminator, dropping every entry after the comment. **False negative** — entries silently dropped from scanning. Fixed by hardening the regex to require multi-line flag + line-anchored closing brace.
+
+- **v1.49.885** — Same tool's Shape B detector stripped `as <alias>` from named imports and searched the file body for the ORIGINAL name. For `import { promises as fs } from 'node:fs'` (active idiom in production code) followed by `fs.readFile(...)`, the file uses the alias actively but the detector reported it as stale (import-without-use). **False positive** — a real-world entry surfaced as fake. Fixed by extracting the local binding (`Y` from `X as Y`) instead of the original name.
+
+Two parser bugs in the same tool, two different shapes (false negative vs false positive), both surfaced through real-world use rather than test fixtures. The discipline-level lesson: tool sanity-fixtures should exercise common code-shape variants the parser may encounter:
+
+1. **Aliased named imports** (`import { X as Y } from ...`).
+2. **Brackets inside comments** (`/* matches [] */`, `// here is [])`).
+3. **Namespace imports** (`import * as ns from ...`).
+4. **Dynamic imports** (`await import(...)`).
+5. **Re-exports** (`export { X } from ...`).
+
+A new chokepoint added to a cross-cutting tool's AUDITS array should include sanity-test fixtures for the shape combinations the chokepoint surface may use. If the surface uses `import { X as Y }` heavily and the tool's tests only cover `import { X }`, add the aliased fixture before shipping.
+
+**Mitigating discipline:** add inline assertions inside the tool that compare structural-view counts against ground-truth counts (`assert(extractedEntries.length === knownUnwiredFileLineCount)`). When the counts diverge, the parser is wrong about the shape it just scanned.
+
+**Validation.** Two instances; both in `check-stale-known-unwired.mjs`. The first (v867) was caught by continuous-verification mode (operator re-running tool after each chip ship); the second (v885) was caught by the LoaderContext addition surfacing the false positive on the first run. Both bugs would have been caught at tool authoring time if sanity-fixtures had covered the relevant code shape — neither was caught at authoring time because the fixture set was incomplete.
+
+**Anti-pattern.** Shipping a parser-driven static-analysis tool whose test fixtures cover only the simplest input shapes. The tool's correctness becomes operator-vigilance-bound — every new chokepoint added is a risk surface for surfacing a latent bug.
+
 ## When this discipline kicks in
 
 - About to scaffold a new `tools/*.mjs` or `tools/*.ts` CLI that scans the repo.
@@ -123,3 +151,4 @@ The guard does NOT depend on git. It compares disk content to proposed content:
 - **#10420** — `process.exit()` during pending stdout write truncates output at pipe-buffer boundaries. Promoted from v787 candidate.
 - **#10421** — Observability tools have a warm-up period before their primary value works. Promoted from v787 candidate; **field-validated at v789** by adoption-baseline diff emitting exactly the predicted line.
 - **#10424** — Version-stamped baseline writers refuse to overwrite existing files whose content would differ, unless `--force`. Promoted from v791 candidate at v794 simultaneously with the gate implementation; meta-principle: migrate prose-in-handoff sequencing warnings to deterministic gates after one trip + 2-3 sequential clean applications under vigilance.
+- **#10450** — Static-analysis tool parsers must handle common code-shape variants OR fail loudly. Two-instance promotion: v867 (regex terminator inside comments — false negative) + v885 (alias-stripping in named-import extractor — false positive). Sibling discipline to #10427 failure-mode contracts: tools surfacing silent failures must not themselves fail silently. Mitigating discipline: tool sanity-fixtures should exercise aliased imports / brackets-in-comments / namespace imports / dynamic imports / re-exports.

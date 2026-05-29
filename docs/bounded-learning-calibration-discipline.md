@@ -62,6 +62,29 @@ Calibratable thresholds belong to classes that draw from different observation s
 - ❌ Letting the test fixture's trip-point assertion *be* the math check. The assertion encodes a prediction; if the prediction is wrong because the construction is wrong, the test failure surfaces the bug only after the fixture and primitive are both written.
 - ❌ Reusing an existing observation source for a new threshold class because it's the lightest technical wire. Per-class observation sources are *necessary surface* (cross-reference Lesson #10426); the lightest-wire discipline applies to unnecessary surface, not necessary surface.
 
+### Calibrate-axis read-side wire recipe (Lesson #10451)
+
+When wiring a new calibratable threshold's observation source (the read side per #10439's three-ship duality), the work follows a 7-step recipe that's now been applied twice (v837 predictive, v884 observation-retention):
+
+1. **New module** `src/bounded-learning/<class>-events.ts` mirroring `predictive-low-confidence-events.ts`. Defines: event-kind union, `eventKindToValue` map to `[-1, +1]`, `eventToObservation` lifter to `CalibrationObservation`, `appendXEvent` / `readXEvents` JSONL I/O, `DEFAULT_X_EVENTS_PATH`. Failure contract: best-effort silent (per #10427).
+2. **Dispatcher update** `src/bounded-learning/observation-sources.ts`: add branch to `observationSourceFor` flipping `wired: true`; add branch to `loadObservationsForThreshold` dispatching to the new module's read path; add new option (`<class>EventsPath`) to `ObservationLoaderOptions`.
+3. **Public-API exports** `src/bounded-learning/index.ts`: re-export new module's surface. Use `as <alias>` re-exports when `eventKindToValue` / `eventToObservation` collide with existing named exports.
+4. **CLI manual recorder** `src/cli/commands/bounded-learning.ts`: add threshold to `SUPPORTED_THRESHOLDS` array; add dispatch branch in `runRecordEvent`; add new `runRecord<Class>Event` function handling `--kind` + optional metadata flags + `--<class>-events <path>` override. Best-effort silent write per #10427.
+5. **Read-side tests** `src/bounded-learning/__tests__/<class>-events.test.ts`: polarity map, `eventToObservation` lift, `eventsToObservations` no-filter, JSONL append/read round-trip, malformed-line tolerance, unknown-kind skip, missing-field skip. 13 tests in the v884 instance.
+6. **Dispatcher tests** `src/bounded-learning/__tests__/observation-sources.test.ts`: flip `wired: false` → `wired: true` assertion; add new round-trip test reading the new JSONL through the dispatcher; add empty-file honest-baseline test.
+7. **CLI tests** `src/cli/commands/bounded-learning.test.ts`: `--summary` mode assertion bumps `thresholds.length` and `wiredThresholdCount` by 1.
+
+**Polarity convention.** Match the threshold semantics: when raising the threshold REDUCES surface frequency (warn / sweep / cap), `+1` favors LOWERING the threshold (positive evidence = "the surface fired but was useful → fire more often" → lower); `-1` favors RAISING (negative evidence = "the surface fired but was noisy / damaging → fire less often" → raise). When raising the threshold INCREASES surface frequency (predictive low-confidence fallback), the polarity inverts (`-1` favors RAISING). Math-check by hand before writing the test fixture per [Lesson #10425](#two-sided-likelihood-ratios-on-bounded-binary-observations-are-insensitive-to-unanimous-direction-lesson-10425).
+
+**Substrate auto-emit deferred per #10439 staging.** This recipe lands only the read-side (steps 1-7); the substrate auto-recorder (write-side, traffic-attributed) ships in a follow-on. Document the deferred auto-emit in the recipe ship's retrospective + cross-link from #10439's table.
+
+**Math-check pre-condition** (sibling of #10425): before writing step-5 tests, run the per-step evidence-growth-rate check by hand. For unanimous evidence in either direction, the one-sided e-process at `λ=0.5` must grow above 1 (the rejection threshold under Bonferroni-combined α/2). The Bonferroni-combined one-sided construction (from #10425's resolution) passes this check on bounded binary observations.
+
+**Evidence.** v837 (predictive.low_confidence_threshold) + v884 (observation.retention_days). Both followed the same 7-step recipe; v884 took ~30 minutes from "decide which threshold" to "all tests green," indicating the recipe has consolidated.
+
+**Anti-pattern.** Shipping the read-side wire without registering polarity-default match between CLI and (deferred) substrate auto-emit. The substrate write-side ship will need to mirror the CLI's `--kind` default to keep #10439's statistical compatibility — bake this into the recipe's release-notes so the deferred ship doesn't drift.
+
 ## Lesson reference
 
 - **#10425** — Two-sided likelihood-ratio e-processes on bounded binary observations are insensitive to unanimous direction; use Bonferroni-combined one-sided instead. v795 candidate, promoted at v802.
+- **#10451** — Calibrate-axis read-side wire recipe (7-step pattern). Two-instance promotion at v886: v837 predictive + v884 observation-retention. Sibling of #10439's three-ship duality (read-side + CLI manual + substrate auto-emit); #10451 captures the read-side procedure.

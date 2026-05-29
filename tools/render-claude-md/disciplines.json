@@ -142,12 +142,12 @@
   {
     "domain": "Static-analysis tool authoring",
     "trigger": "Authoring or extending a CLI tool in `tools/` that scans the codebase, emits metrics, or produces a comparable report; designing its test harness; piping its output to another command",
-    "summary": "Test harnesses use spawnSync (not execSync) so stderr survives exit 0; cross-module analyzers scan multiple importer roots (not just src/); metric-emitting tools commit a baseline file so future runs diff via git; CLIs flush stdout before process.exit() to avoid 64KB pipe-buffer truncation; diff-emitting observability tools document the warm-up period (first run has no prior baseline); version-stamped baseline writers refuse to overwrite existing files with different content unless --force (v794 closure of v791 trip). #10421 field-validated at v789 by adoption-baseline diff emitting exactly the predicted line.",
+    "summary": "Test harnesses use spawnSync (not execSync) so stderr survives exit 0; cross-module analyzers scan multiple importer roots (not just src/); metric-emitting tools commit a baseline file so future runs diff via git; CLIs flush stdout before process.exit() to avoid 64KB pipe-buffer truncation; diff-emitting observability tools document the warm-up period (first run has no prior baseline); version-stamped baseline writers refuse to overwrite existing files with different content unless --force (v794 closure of v791 trip). #10421 field-validated at v789 by adoption-baseline diff emitting exactly the predicted line. Static-analysis tool parsers must handle common code-shape variants OR fail loudly (#10450): two real-world bugs in the same tool — v867 regex terminator inside comments (false negative) + v885 alias-stripping in named-import extractor (false positive). Sibling of #10427 failure-mode contracts: tools surfacing silent failures must not themselves fail silently. Mitigating discipline: sanity-fixtures exercise aliased imports / brackets-in-comments / namespace imports / dynamic imports / re-exports; inline assertions compare structural-view count against ground-truth count.",
     "canonical_docs": [
       "docs/static-analysis-tool-discipline.md"
     ],
-    "key_lessons": ["#10417", "#10418", "#10419", "#10420", "#10421", "#10424"],
-    "codified_at_milestone": "v1.49.790 (new domain — codified from v1.49.785-789 adoption-telemetry build chain lesson cluster); v1.49.794 (extended with #10424 refuse-to-overwrite guard)"
+    "key_lessons": ["#10417", "#10418", "#10419", "#10420", "#10421", "#10424", "#10450"],
+    "codified_at_milestone": "v1.49.790 (new domain — codified from v1.49.785-789 adoption-telemetry build chain lesson cluster); v1.49.794 (extended with #10424 refuse-to-overwrite guard); v1.49.886 (extended with #10450 tool-parser-must-fail-loudly from v867+v885 two-instance evidence)"
   },
   {
     "domain": "Shelfware verdict patterns",
@@ -163,12 +163,12 @@
   {
     "domain": "Bounded-learning calibration",
     "trigger": "Designing or extending the bounded-learning calibration loop in `src/bounded-learning/`; choosing the statistical primitive for an anytime-valid threshold-update decision; adding a new calibratable threshold class",
-    "summary": "Two-sided likelihood-ratio e-processes on bounded binary observations at |x|=1 are insensitive to unanimous direction (cosh(λ)·exp(−λ²/2) ≤ 1 for all λ ≥ 0); use two one-sided e-processes at Bonferroni α/2 instead. Math-check-before-test-fixture convention: compute E_n/E_{n-1} under unanimous evidence by hand before writing the trip-point assertion — if the ratio is ≤ 1 the construction is unfit. Per-class observation sources are necessary surface; the lightest-wire discipline does NOT apply to necessary surface (cross-ref Architecture-retrofit patterns #10426).",
+    "summary": "Two-sided likelihood-ratio e-processes on bounded binary observations at |x|=1 are insensitive to unanimous direction (cosh(λ)·exp(−λ²/2) ≤ 1 for all λ ≥ 0); use two one-sided e-processes at Bonferroni α/2 instead. Math-check-before-test-fixture convention: compute E_n/E_{n-1} under unanimous evidence by hand before writing the trip-point assertion — if the ratio is ≤ 1 the construction is unfit. Per-class observation sources are necessary surface; the lightest-wire discipline does NOT apply to necessary surface (cross-ref Architecture-retrofit patterns #10426). Calibrate-axis read-side wire recipe (#10451): 7-step pattern applied at v837 (predictive) + v884 (observation-retention) — new events module mirror, dispatcher branch + wired-flag flip, public-API exports with alias if collision, CLI manual recorder dispatch + recorder function, read-side tests (~13), dispatcher tests with wired-flag flip + round-trip, CLI --summary count bump. Polarity convention matches threshold semantics (raise reduces fire-frequency → +1 favors lower); inverted for thresholds where raise INCREASES fire-frequency (predictive). Substrate auto-emit deferred per #10439 staging.",
     "canonical_docs": [
       "docs/bounded-learning-calibration-discipline.md"
     ],
-    "key_lessons": ["#10425"],
-    "codified_at_milestone": "v1.49.802 (new domain — codified from v1.49.795 T1.1 ship 1 e-process design lesson)"
+    "key_lessons": ["#10425", "#10451"],
+    "codified_at_milestone": "v1.49.802 (new domain — codified from v1.49.795 T1.1 ship 1 e-process design lesson); v1.49.886 (extended with #10451 read-side wire recipe from v837+v884 two-instance evidence)"
   },
   {
     "domain": "Failure-mode contracts",
