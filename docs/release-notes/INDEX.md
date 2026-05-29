@@ -2,10 +2,11 @@
 
 _Generated 2026-05-29 from `release_history.*`. Source of truth: Postgres._
 
-**928 releases.** 927 with retrospective. 730 with extracted lessons.
+**929 releases.** 928 with retrospective. 731 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
+| `v1.49.886` | Counter-Cadence Codify Ship: Promote #10450 (Tools Fail Loudly) + #10451 (Read-Side Wire Recipe) | 2026-05-28 | ✓ | 1 | [read](v1.49.886/00-summary.md) |
 | `v1.49.885` | LoaderContext Chip-Down Opener: Audit Extension + KNOWN_UNWIRED Ledger Initialization | 2026-05-28 | ✓ | 2 | [read](v1.49.885/00-summary.md) |
 | `v1.49.884` | Bounded-Learning Verify-Axis Chip: observation.retention_days Read-Side Wire | 2026-05-28 | ✓ | 1 | [read](v1.49.884/00-summary.md) |
 | `v1.49.883` | Codification Ship: Promote 5 Refinements from the v868-v882 Campaign (Post-Track-5 Codify) | 2026-05-28 | ✓ | — | [read](v1.49.883/00-summary.md) |
