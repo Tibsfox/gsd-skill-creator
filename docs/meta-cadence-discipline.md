@@ -303,14 +303,33 @@ The verify-axis trigger from #10428 says: each calibratable threshold should hav
 6. **Missing-file tolerance** — call `loadObservationsForThreshold` with a path to a never-written file; assert `observations` is `[]`. Pins the writer-contract tolerance.
 7. **Malformed-line tolerance** — pre-seed the JSONL with `'{not valid json\n'`, then write a valid event via the substrate; assert the reader sees exactly 1 event (silent-skip malformed). Pins the writer-contract tolerance.
 
-### Evidence (2 instances)
+### Evidence (3 instances — ESTABLISHED v899)
 
 | Threshold | First substrate-write | Integration test | Ships-after-wire |
 |---|---|---|---|
 | `predictive.low_confidence_threshold` | v1.49.846 | v1.49.856 | 10 (canonical trigger) |
 | `observation.retention_days` | v1.49.891 | v1.49.894 | 3 (early within budget) |
+| `token_budget.max_percent` | v1.49.893 | v1.49.898 | 5 (within budget) |
 
-Both instances follow the 7-step shape. v894 shipped early within budget; nothing prevents earlier ship when substrate is fresh and bug-detection signal is strongest.
+All three instances follow the 7-step shape. Two of three shipped early within budget; nothing prevents earlier ship when substrate is fresh and bug-detection signal is strongest.
+
+### Substrate-specific variation axes
+
+The 7-step shape is the common structure; each instance specializes on axes the canonical test shape doesn't cover. Future ships should mirror the closest matching row.
+
+| Axis | v856 (predictive) | v894 (retention) | v898 (token-budget-max) |
+|------|------|------|------|
+| Substrate execution | async | async | **sync** (only fire-and-forget is async) |
+| Kind selection | inverse polarity | default-fixed | **outcome-driven** (kind falls out of the inequality) |
+| Boundary case | n/a | retention-day cutoff | **strict-less-than ceiling** (usage==max → blocked) |
+| Polarity invariance | inverse (+1 = raise) | normal (+1 = lower) | normal (+1 = lower) |
+| Override mechanism | n/a | `defaultKind` option | `defaultKind` option |
+| Suppress auto-emit | n/a | n/a | `autoEmit: false` |
+| Multi-event ordering | preserved (async await) | preserved (async await) | **NOT preserved** (sync spawn fire-and-forget) |
+
+**Sync-substrate ordering subtlety (v898 surface).** When the substrate is synchronous but the auto-emit is fire-and-forget per #10437, back-to-back calls spawn Promise chains that complete in undefined order at the filesystem layer. The multi-event accumulation assertion MUST be order-independent (count + net-polarity) rather than sequence-based. This is a v898-surfaced refinement of step 5's polarity assertion. Promotion-eligible if a future substrate exhibits the same pattern.
+
+**Outcome-driven kind subtlety (v898 surface).** When the substrate IS the comparison (rather than wrapping async work that doesn't determine polarity, as in v891), the kind selection falls out of the inequality being checked. Test both polarities from a single substrate-API surface to prove the threshold flows through the kind-selection logic, not just the polarity-mapping logic.
 
 ### How to apply
 
@@ -318,7 +337,7 @@ After a calibratable threshold's substrate auto-emit ships (the third ship in #1
 
 ### Forward-test trigger
 
-Any future calibratable-threshold substrate ship. The verify-axis budget extends 10 ships from that substrate's ship version. v1.49.893 (token_budget.max_percent) is the next pending integration test; budget extends to v1.49.903.
+Any future calibratable-threshold substrate ship. The verify-axis budget extends 10 ships from that substrate's ship version. As of v1.49.899 all 7 wired calibratable thresholds are COVERED; the next ship that wires a new threshold opens a fresh 10-ship verify-axis window.
 
 ### Anti-patterns
 

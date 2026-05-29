@@ -2,7 +2,7 @@
 
 **Surface:** Tier-E security chokepoints — three sibling modules with a shared shape that gate filesystem reads, network egress, and child-process spawn behind an optional `ctx?` parameter.
 
-**Codified at:** v1.49.782 (LoaderContext, first instance); v1.49.806 (EgressContext + ProcessContext, second and third instances; this doc); v1.49.847 (extended with Lesson #10441 DI-executor + tokenized-argv wire shape from v825 + v843 three-instance evidence); v1.49.883 (extended with Lesson #10449 execFile vs shell-exec audit target accuracy from v853 + v874 two-instance evidence).
+**Codified at:** v1.49.782 (LoaderContext, first instance); v1.49.806 (EgressContext + ProcessContext, second and third instances; this doc); v1.49.847 (extended with Lesson #10441 DI-executor + tokenized-argv wire shape from v825 + v843 three-instance evidence); v1.49.883 (extended with Lesson #10449 execFile vs shell-exec audit target accuracy from v853 + v874 two-instance evidence); v1.49.899 (extended with Lesson #10457 read-side-only chokepoint at write-bearing classes from v890 + v896 + v897 three-instance evidence).
 
 ## What this doc catalogs
 
@@ -286,6 +286,52 @@ uses `child_process.exec` or `child_process.execSync`:
   an internal-helper-with-wrapper variant that combines the
   tokenize + direct-exec + `ensureProcessAllowed` shape into one helper.
 
+## Read-side-only chokepoint at write-bearing classes (Lesson #10457)
+
+LoaderContext is a READ-side chokepoint by design. When a wired class has BOTH read and write methods, ONLY the read methods are gated; the write methods are intentionally out-of-scope.
+
+**Why this exists.** LoaderContext's docstring at `src/security/loader-context.ts` declares it scopes the disk-read surface: filesystem reads, directory scans, file-existence checks. The write surface (file creation, append, rename) would require a separate `WriterContext` chokepoint — no such surface exists today. Gating writes through LoaderContext would either:
+- Misrepresent the chokepoint's scope (`source` field documents "read-file" but op was an append), OR
+- Require dual-scoping that conflates read + write semantics for no observable security benefit.
+
+**Convention.** When chipping a class-based KNOWN_UNWIRED entry where the class has both read and write methods:
+- Gate ONLY the read methods (typically `load`, `readAll`, `find`).
+- Document write methods inline (`save() intentionally NOT gated — LoaderContext is a read-side chokepoint by design`).
+- Test the discipline explicitly: assert that calling the write method with a restricted ctx still succeeds AND emits zero audit records.
+
+**Test pattern.**
+
+```ts
+it('save() is not gated by LoaderContext (read-side chokepoint by design)', async () => {
+  const sink = new CapturingAuditSink();
+  const restrictedCtx: LoaderContext = {
+    allowList: ['/somewhere/that/does/not/match'],
+    audit: sink,
+  };
+  const store = new MyStore(statePath, restrictedCtx);
+  // save() succeeds even though the path is not in allowList — the
+  // chokepoint is intentionally read-only per LoaderContext docstring.
+  await expect(store.save({ ... })).resolves.toBeUndefined();
+  expect(sink.records).toHaveLength(0);
+});
+```
+
+The assertion is load-bearing — it prevents accidental future gating drift where someone adds `ensureAllowed` to a write method "for symmetry" without realizing the chokepoint's scope.
+
+**Evidence (3 instances).**
+
+| Ship | File | Gated method | Not-gated method |
+|---|---|---|---|
+| v1.49.890 | `eval/calibration-adjustment-store.ts` | `load()` | `save()` |
+| v1.49.896 | `skill-workflows/workflow-run-store.ts` | `readAll()` | `append()` |
+| v1.49.897 | `discovery/scan-state-store.ts` | `load()` | `save()` |
+
+Each ship documents the not-gated discipline in both the class docstring (inline rationale) and the test suite (explicit assertion).
+
+**Cross-cuts.** The pattern composes with #10455 (class-stored hoist-at-top is the typical wire shape for these classes) and #10456 (audit-record-count test catches both directions — gated read should emit N, not-gated write should emit 0).
+
+**When NOT to apply.** Classes whose only fs operation is write (no read method) are out of scope for LoaderContext entirely. The audit-test's name-pattern (`loader|reader|scanner|walker|store`) catches them but the inspection step should mark them as "no read surface — exempt." Use the docstring exemption pattern `Role: NOT a disk loader (write-only)` rather than entering KNOWN_UNWIRED.
+
 ## Anti-patterns
 
 - ❌ **Calling `ensure*Allowed` inside a try/catch that swallows errors.** The chokepoint denial is a load-bearing signal and must propagate. The fix: hoist the `ensure*Allowed` call OUT of the try block.
@@ -298,6 +344,7 @@ uses `child_process.exec` or `child_process.execSync`:
 - **Lesson #10433** — Internal-helper pattern for `ctx?` threading. When a file has an internal helper wrapping the side-effecting op, thread `ctx?` through the helper for `1 LOC × N callsites`; without a helper, the cost is `N LOC × N callsites`. Audit each batch-chip candidate for a helper first. Codified v1.49.824 from v809 + v820 case studies.
 - **Lesson #10441** — DI-executor + tokenized-argv wire shape for ProcessContext. When a module exposes a factory with an optional injected executor for testability, the default executor closes over `ctx?`, tokenizes the cmd string to extract executable + argv, and calls `ensureProcessAllowed` before delegating. A sub-class of #10433: the default executor IS the internal helper. Codified v1.49.847 from v825 + v843 three-instance evidence.
 - **Lesson #10449** — `execFile` vs shell-`exec` audit target accuracy. Direct-exec records the actual binary; shell-exec records `sh`. Prefer direct-exec for new ProcessContext wires when no shell features are required. Refines #10427's audit-fidelity component. Codified v1.49.883 from v853 + v874 two-instance evidence.
+- **Lesson #10457** — Read-side-only chokepoint at write-bearing classes. When a wired class has both read and write methods, only the read methods are gated; the write methods are intentionally out-of-scope per LoaderContext's read-side design. Test the discipline explicitly with a not-gated-write assertion. Cross-cuts #10455 (class-stored hoist-at-top wire shape) and #10456 (audit-record-count test). Codified v1.49.899 from v890 + v896 + v897 three-instance evidence.
 - **Lesson #10414** — Optional `ctx?` parameter is the cheapest retrofit pattern for chokepoint introduction. `docs/architecture-retrofit-patterns.md`.
 - **Lesson #10426** — Extract per-class registries at the SECOND class instance. The three chokepoints are themselves the validating instance set for the discipline — they are siblings with the same shape but specialized targets, not parameterizations of a generic abstraction (per #10423, the lightest wire that satisfies the verdict).
 - **Lesson #10427** — Failure-mode contracts. Security chokepoint denials are load-bearing and must propagate; do not swallow `*ContextDenied` exceptions. `docs/failure-mode-contracts.md`.

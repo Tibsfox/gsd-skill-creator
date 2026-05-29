@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.898`.
+The story begins at `v1.0` and continues to `v1.49.899`.
 
-**941 chapters.** 940 have retrospectives.
+**942 chapters.** 941 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -949,3 +949,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.896](v1.49.896/00-summary.md)** — Fifth LoaderContext Chip: `skill-workflows/workflow-run-store.ts` (Class-Stored Hoist-at-Top) · 2026-05-29
 - **[v1.49.897](v1.49.897/00-summary.md)** — Sixth LoaderContext Chip: `discovery/scan-state-store.ts` (Class-Stored Hoist-at-Top — 3rd Instance PROMOTES Sub-Variant) · 2026-05-29
 - **[v1.49.898](v1.49.898/00-summary.md)** — Verify-Axis Integration Test: `token_budget.max_percent` (Substrate→Calibration End-to-End — 3rd Instance PROMOTES Pattern) · 2026-05-29
+- **[v1.49.899](v1.49.899/00-summary.md)** — Counter-Cadence Codify Ship: Promote #10455 (Class-Stored Hoist-at-Top) + #10456 (Audit-Record-Count Test) + #10457 (Read-Side-Only at Write-Bearing) + #10453 to ESTABLISHED · 2026-05-29

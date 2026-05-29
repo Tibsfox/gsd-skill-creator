@@ -170,6 +170,61 @@ done
 
 ---
 
+## Template 5: Audit-record-count assertion for chokepoint-gated reads (Lesson #10456)
+
+When a chokepoint-gated method has derived methods that transitively call it, the integration test MUST assert exactly N audit records under N invocations. This is the load-bearing regression detector against silent fidelity reductions — a future caching refactor (e.g., memoizing `readAll`) would silently reduce audit emissions, breaking observability without breaking unit tests.
+
+### When this applies
+
+- A class has a single gated fs-op method (e.g., `readAll`, `load`).
+- Multiple public methods on the same class call the gated method transitively (e.g., `getRunEntries` → `readAll`, `addExclude` → `load + save`).
+- Test must prove the gate fires per derived-method call, not per overall test execution.
+
+### Test pattern
+
+```ts
+it('derived methods (X / Y / Z) emit one audit record per call via transitive M', async () => {
+  const sink = new CapturingAuditSink();
+  const ctx = defaultLoaderContext(sink);
+  const store = new MyStore(path, ctx);
+  // Each derived method calls M() exactly once → N audit records total.
+  await store.X();
+  await store.Y();
+  await store.Z();
+  expect(sink.records).toHaveLength(3);
+  expect(sink.records.every(r => r.op === 'read-file')).toBe(true);
+  expect(sink.records.every(r => r.target === path)).toBe(true);
+});
+```
+
+### Variants
+
+- **Two-site outer-loop** (v892 `dacp/bus/scanner.ts`): assert 9 records (1 outer + 8 inner-loop transitive calls).
+- **Derived-method ripple** (v896 `workflow-run-store.ts`): assert 3 records under 3 derived-method invocations (`getRunEntries`/`getLatestRun`/`getCompletedSteps`).
+- **Mixed read/write derived methods** (v897 `scan-state-store.ts`): assert 2 records under 2 derived methods (`addExclude`/`removeExclude`) that each call `load + save`; the explicit `save()` between them MUST emit 0 (cross-ref #10457 read-side-only design).
+
+### Evidence (3 instances)
+
+| Ship | File | Assertion | Cross-ref |
+|---|---|---|---|
+| v1.49.892 | `dacp/bus/scanner.ts` | 9 records under outer invocation (1 outer + 8 inner-loop) | #10448 two-site hoisted-check |
+| v1.49.896 | `skill-workflows/workflow-run-store.ts` | 3 records under 3 derived-method calls | #10455 class-stored hoist-at-top + derived-method ripple |
+| v1.49.897 | `discovery/scan-state-store.ts` | 2 records under 2 derived methods (each calls load+save); save between them emits 0 | #10455 + #10457 read-side-only |
+
+### Anti-patterns
+
+- ❌ **Test asserts count = "at least 1" instead of exact N.** Silent fidelity reductions pass under the loose assertion. The whole point of the count test is the exact-N invariant.
+- ❌ **Test skips the write-emits-zero assertion when the class has write methods.** Without it, accidental future gating of writes (per #10457 anti-pattern) goes unnoticed.
+- ❌ **Assertion conflates emitted-count with invocation-count when invocations are async-fire-and-forget.** The substrate→calibration end-to-end test pattern (#10453) emits async-fire-and-forget records whose order is undefined; count-based + net-polarity-based assertions are correct, sequence-based assertions are NOT (cross-ref the v898 retrospective).
+
+### Cross-references
+
+- **#10455** — Class-stored hoist-at-top sub-variant of #10448; the typical wire shape that produces derived-method ripple.
+- **#10457** — Read-side-only chokepoint at write-bearing classes; the test pattern explicitly asserts write emits 0.
+- **#10453** — Substrate→calibration end-to-end test pattern; sibling test discipline for the calibration-loop axis.
+
+---
+
 ## How to use this catalogue
 
 1. At W0, identify which template matches the CF's shape (read CF source description).

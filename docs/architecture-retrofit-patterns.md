@@ -408,6 +408,7 @@ that matches the file's existing structure rather than force-fitting.
 | **hoist-at-top** | Top of the entry function, OUTSIDE any try/catch. | v1.49.872 `cli/commands/pic2html.ts` (N=1) | Single spawn/fetch site; high-LOC orchestrations with N=1. |
 | **two-site hoisted-check** | Each of N sibling sites gets its own hoist. | v1.49.876 `aminet/package-fetcher.ts` (N=2) | N=2 sibling sites without a shared helper. |
 | **class-instance two-site** | `ctx?` stored as instance field; each method hoists before its own side effect. | v1.49.878 `chips/anthropic-chip.ts` (N=2 methods) | Class-based file with multiple methods each performing the gated op. |
+| **class-stored hoist-at-top** | `ctx?` stored as `private readonly ctx?` field via constructor; single fs-op method hoists `this.ctx`. | v1.49.890 `eval/calibration-adjustment-store.ts` (N=1 method) | Class-based file with EXACTLY ONE fs-op method; preserves public method signature unchanged. |
 | **internal-helper-method** | Shared `private` method on a class wraps the side effect; `ctx?` threaded through the method. | v1.49.870 `learning/version-manager.ts` (N=7) | Class with many sibling spawn-calls behind a private helper. |
 | **module-internal-helper** | Free-function helper at module scope; `ctx?` threaded through the helper signature. | v1.49.873 `git/gates/pre-flight.ts` (N=12) | Module with a free-function helper; high N benefits from one-LOC-per-callsite. |
 
@@ -492,6 +493,94 @@ specifies how to pick the shape based on N. Both lessons compose:
 an existing sub-variant. The catalog's value is in the shared
 vocabulary; sub-variant name proliferation defeats it.
 
+### Class-stored hoist-at-top sub-variant of #10448 (Lesson #10455)
+
+When the file under chip is a class with EXACTLY ONE fs-op method
+(N=1 class-method), the cheapest wire shape is **class-stored
+hoist-at-top**:
+
+```ts
+export class ScanStateStore {
+  private readonly statePath: string;
+  private readonly ctx?: LoaderContext;       // 1. store as readonly field
+
+  constructor(statePath: string, ctx?: LoaderContext) {
+    this.statePath = statePath;
+    this.ctx = ctx;                            // 2. accept in constructor
+  }
+
+  async load(): Promise<ScanState> {
+    // 3. hoist at TOP of the fs-op method, OUTSIDE any try/catch
+    ensureAllowed(this.ctx, LOADER_SOURCE, 'read-file', this.statePath);
+
+    try {
+      const content = await readFile(this.statePath, 'utf-8');
+      // ...
+    } catch (err) {
+      if (isENOENT(err)) return this.createEmpty();
+      throw err;
+    }
+  }
+}
+```
+
+**Distinct from `class-instance two-site`.** The class-instance
+two-site sub-variant (v878) applies when the class has N≥2 fs-op
+methods, each of which hoists independently. Class-stored
+hoist-at-top is the N=1 specialization: one method, one hoist, ctx
+stored once at construction.
+
+**Distinct from module-function `hoist-at-top`.** v872's hoist-at-top
+is the module-function form — `ctx` threads per-call through the
+function signature. The class-stored form threads ctx ONCE through
+the constructor; the public method signature is preserved unchanged.
+This matters when the wired class has many callers using single-arg
+constructors — the change is non-breaking.
+
+**Evidence (3 instances).**
+
+| Ship | File | LOC | fs-op method | Other methods |
+|---|---|---|---|---|
+| v1.49.890 | `eval/calibration-adjustment-store.ts` | 150 | `load()` | `save()` (not gated; see #10457) |
+| v1.49.896 | `skill-workflows/workflow-run-store.ts` | 138 | `readAll()` | `append()` (not gated); `getRunEntries`/`getLatestRun`/`getCompletedSteps` (transitive — emit one audit per derived-method call) |
+| v1.49.897 | `discovery/scan-state-store.ts` | 176 | `load()` | `save()`/`addExclude`/`removeExclude` (`save` not gated; derived methods emit one audit per call via transitive `load`) |
+
+All three ships:
+- Add `private readonly ctx?: LoaderContext` instance field.
+- Modify constructor: `(statePath, ctx?: LoaderContext)` — non-breaking, optional second arg.
+- Hoist `ensureAllowed(this.ctx, LOADER_SOURCE, 'read-file', this.path)` at the top of the single fs-op method, OUTSIDE the ENOENT-tolerant try/catch (per #10442).
+- Leave the write-side method (`save`/`append`) intentionally not gated — LoaderContext is a read-side chokepoint by design (cross-ref #10457).
+
+**Composition with derived-method ripple.** When the wired class has
+derived methods that transitively call the fs-op method (e.g.,
+v896's `getRunEntries` calls `readAll`; v897's `addExclude` calls
+`load`), each derived-method call emits one audit record. The
+integration test should assert this exact count to prevent silent
+fidelity reductions from a future caching refactor (cross-ref #10456).
+
+**How to apply.**
+
+1. Identify the file as class-based with a single fs-op method.
+2. Add `private readonly ctx?: LoaderContext` field.
+3. Modify constructor to accept `ctx?` as optional second arg.
+4. Hoist `ensureAllowed` at top of the fs-op method, outside the
+   try/catch (per #10442).
+5. Document write-side method as out-of-scope per LoaderContext
+   read-side design (cross-ref #10457).
+6. Add tests for: emit-one-audit-on-fs-op-method-call, denial-
+   propagates-above-ENOENT-swallow, legacy-permissive (single-arg),
+   prefix-pattern admission, save/append-not-gated, and derived-
+   method audit-record-count if derived methods exist.
+
+**Anti-pattern.** Wiring a class with N≥2 fs-op methods as class-
+stored hoist-at-top — pick `class-instance two-site` instead so each
+method gates independently. The class-stored form is a 1-method
+specialization.
+
+**Anti-pattern.** Threading `ctx?` through every public method of
+the class. The class-stored form preserves the public surface; per-
+method threading is the wrong abstraction for N=1 class-method.
+
 ## When this discipline kicks in
 
 - Adding a new function/options-bag parameter that will be passed to N existing modules.
@@ -525,3 +614,4 @@ vocabulary; sub-variant name proliferation defeats it.
 - **#10445** — Spawn-site count (N) as primary wire-shape predictor; refines #10444 at the LOC-vs-N edge case (high-LOC files with N=1 → hoist-at-top, not the richer shape LOC predicts). v872 + v875 two-instance evidence, promoted at v883.
 - **#10447** — Router-with-conditional-bypass wire shape. When a router branches between gated and non-gated paths, thread `ctx?` only into the gated branch; leave the bypass branch's signature unchanged. v864 + v880 two-instance evidence, promoted at v883.
 - **#10448** — Shared-helper hoist sub-variant catalog (hoist-at-top / two-site / class-instance two-site / internal-helper-method / module-internal-helper + carry-forward `module-singleton`). Track 5 wire-shape table appended. v868-v882 12-chip cluster evidence, promoted at v883.
+- **#10455** — Class-stored hoist-at-top sub-variant of #10448. When the chip file is a class with EXACTLY ONE fs-op method (N=1 class-method), accept `ctx?` via constructor, store as `private readonly ctx?`, hoist `this.ctx` in the single fs-op method outside the ENOENT-tolerant try/catch. Distinct from class-instance two-site (N≥2 methods) and from module-function hoist-at-top (preserves public method signature unchanged). v890 + v896 + v897 three-instance evidence, promoted at v899.
