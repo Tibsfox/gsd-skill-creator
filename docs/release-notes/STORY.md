@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.903`.
+The story begins at `v1.0` and continues to `v1.49.904`.
 
-**946 chapters.** 945 have retrospectives.
+**947 chapters.** 946 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -954,3 +954,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.901](v1.49.901/00-summary.md)** — Counter-Cadence Codify Ship: Promote #10458 (Fake-Fixture Wire Test Pattern) · 2026-05-29
 - **[v1.49.902](v1.49.902/00-summary.md)** — Eighth LoaderContext Chip: `orchestrator/state/state-reader.ts` (Class-Multi-Method Consolidated Public-Entry Gate) · 2026-05-29
 - **[v1.49.903](v1.49.903/00-summary.md)** — Ninth LoaderContext Chip: `cli/commands/keystore.ts` (Sync Two-Site Hoisted-Check) · 2026-05-29
+- **[v1.49.904](v1.49.904/00-summary.md)** — Tenth LoaderContext Chip: `events/skill-event-store.ts` (Class-Instance Multi-Method Read-Side) · 2026-05-29

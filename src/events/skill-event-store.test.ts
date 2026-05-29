@@ -303,4 +303,105 @@ describe('SkillEventStore', () => {
       expect(entries).toHaveLength(10);
     });
   });
+
+  // --------------------------------------------------------------------------
+  // LoaderContext chokepoint integration (v1.49.904)
+  // --------------------------------------------------------------------------
+
+  describe('LoaderContext chokepoint integration (v1.49.904)', () => {
+    it('readAll emits exactly one audit record per call when ctx is provided', async () => {
+      const { CapturingAuditSink, defaultLoaderContext } = await import(
+        '../security/loader-context.js'
+      );
+      const sink = new CapturingAuditSink();
+      const ctx = defaultLoaderContext(sink);
+      const wiredStore = new SkillEventStore(tmpDir, ctx);
+      await wiredStore.emit(makeEntry({ event_name: 'lint:complete' }));
+      sink.clear();
+      await wiredStore.readAll();
+      expect(sink.records.length).toBe(1);
+      expect(sink.records[0]?.op).toBe('read-file');
+      expect(sink.records[0]?.allowed).toBe(true);
+    });
+
+    it('throws LoaderContextDenied when ctx rejects filePath on readAll', async () => {
+      const { LoaderContextDenied, CapturingAuditSink } = await import(
+        '../security/loader-context.js'
+      );
+      const sink = new CapturingAuditSink();
+      const restrictiveCtx = { allowList: [], audit: sink };
+      const wiredStore = new SkillEventStore(tmpDir, restrictiveCtx);
+      await expect(wiredStore.readAll()).rejects.toThrow(LoaderContextDenied);
+      expect(sink.records.length).toBe(1);
+      expect(sink.records[0]?.allowed).toBe(false);
+    });
+
+    it('consume gates the read-side independently from readAll', async () => {
+      const { CapturingAuditSink, defaultLoaderContext } = await import(
+        '../security/loader-context.js'
+      );
+      const sink = new CapturingAuditSink();
+      const ctx = defaultLoaderContext(sink);
+      const wiredStore = new SkillEventStore(tmpDir, ctx);
+      await wiredStore.emit(makeEntry({ event_name: 'lint:complete' }));
+      sink.clear();
+      await wiredStore.consume('lint:complete', 'test-consumer');
+      // consume emits 1 audit on its read-side; the writeFile at the end is
+      // out-of-scope per #10457.
+      expect(sink.records.length).toBe(1);
+      expect(sink.records[0]?.op).toBe('read-file');
+    });
+
+    it('markExpired gates the read-side independently', async () => {
+      const { CapturingAuditSink, defaultLoaderContext } = await import(
+        '../security/loader-context.js'
+      );
+      const sink = new CapturingAuditSink();
+      const ctx = defaultLoaderContext(sink);
+      const wiredStore = new SkillEventStore(tmpDir, ctx);
+      await wiredStore.emit(makeEntry({ event_name: 'lint:complete' }));
+      sink.clear();
+      await wiredStore.markExpired();
+      // markExpired emits 1 audit on its read-side; writeFile out-of-scope.
+      expect(sink.records.length).toBe(1);
+      expect(sink.records[0]?.op).toBe('read-file');
+    });
+
+    it('emit does NOT gate (write-side out-of-scope per #10457)', async () => {
+      const { CapturingAuditSink, defaultLoaderContext } = await import(
+        '../security/loader-context.js'
+      );
+      const sink = new CapturingAuditSink();
+      const ctx = defaultLoaderContext(sink);
+      const wiredStore = new SkillEventStore(tmpDir, ctx);
+      await wiredStore.emit(makeEntry({ event_name: 'lint:complete' }));
+      // emit is write-side: 0 audit records.
+      expect(sink.records.length).toBe(0);
+    });
+
+    it('legacy permissive mode (no ctx) preserves prior behavior', async () => {
+      const legacyStore = new SkillEventStore(tmpDir);
+      await legacyStore.emit(makeEntry({ event_name: 'lint:complete' }));
+      const entries = await legacyStore.readAll();
+      expect(entries).toHaveLength(1);
+    });
+
+    it('emits exactly N=4 audit records under K=4 read-side invocations (#10456 5th variant)', async () => {
+      const { CapturingAuditSink, defaultLoaderContext } = await import(
+        '../security/loader-context.js'
+      );
+      const sink = new CapturingAuditSink();
+      const ctx = defaultLoaderContext(sink);
+      const wiredStore = new SkillEventStore(tmpDir, ctx);
+      await wiredStore.emit(makeEntry({ event_name: 'lint:complete' }));
+      sink.clear();
+      // 4 read-side invocations: readAll + getPending (transitive readAll) +
+      // consume + markExpired = 4 audit records (1 per call).
+      await wiredStore.readAll();
+      await wiredStore.getPending();
+      await wiredStore.consume('lint:complete', 'test-consumer');
+      await wiredStore.markExpired();
+      expect(sink.records.length).toBe(4);
+    });
+  });
 });

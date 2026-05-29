@@ -11,6 +11,14 @@
  *
  * Renamed from EventStore at v1.49.781 to disambiguate from
  * src/telemetry/TelemetryEventStore (a separate skill-usage telemetry store).
+ *
+ * Accepts an optional `LoaderContext` (Tier-E security chokepoint, v1.49.782).
+ * Class-instance multi-method read-side wire (extension of #10455 to N>1
+ * read methods). Three read methods (`readAll`, `consume`, `markExpired`)
+ * each hoist `ensureAllowed` independently on `this.filePath`. The
+ * `getPending` method calls `readAll` transitively — inherits the gate.
+ * The `emit` write-side method is out-of-scope per #10457 (LoaderContext
+ * gates reads; writes are not gated). Tenth LoaderContext chip at v1.49.904.
  */
 
 import { appendFile, readFile, writeFile, mkdir } from 'node:fs/promises';
@@ -18,6 +26,12 @@ import { join } from 'node:path';
 import { EventEntrySchema } from './types.js';
 import { WriteQueue } from '../safety/write-queue.js';
 import type { EventEntry } from './types.js';
+import {
+  ensureAllowed,
+  type LoaderContext,
+} from '../security/loader-context.js';
+
+const LOADER_SOURCE = 'events/skill-event-store';
 
 /** Filename for the event log */
 const EVENTS_FILENAME = 'events.jsonl';
@@ -25,9 +39,11 @@ const EVENTS_FILENAME = 'events.jsonl';
 export class SkillEventStore {
   private patternsDir: string;
   private writeQueue = new WriteQueue();
+  private readonly ctx?: LoaderContext;
 
-  constructor(patternsDir: string) {
+  constructor(patternsDir: string, ctx?: LoaderContext) {
     this.patternsDir = patternsDir;
+    this.ctx = ctx;
   }
 
   private get filePath(): string {
@@ -59,6 +75,9 @@ export class SkillEventStore {
    * Skips corrupted or invalid lines gracefully.
    */
   async readAll(): Promise<EventEntry[]> {
+    // Security chokepoint: gate ABOVE the readFile try/catch ENOENT swallow
+    // per #10442. Class-stored ctx, hoisted at top of read method.
+    ensureAllowed(this.ctx, LOADER_SOURCE, 'read-file', this.filePath);
     let content: string;
     try {
       content = await readFile(this.filePath, 'utf-8');
@@ -116,6 +135,10 @@ export class SkillEventStore {
    * Uses writeQueue for serialization.
    */
   async consume(eventName: string, consumedBy: string): Promise<void> {
+    // Security chokepoint: gate the read-side BEFORE the writeQueue acquires
+    // its lock. Hoisted ABOVE the readFile try/catch (per #10442). The
+    // writeFile at the end is out-of-scope per #10457 (read-side-only gate).
+    ensureAllowed(this.ctx, LOADER_SOURCE, 'read-file', this.filePath);
     return this.writeQueue.serialize(async () => {
       let content: string;
       try {
@@ -176,6 +199,10 @@ export class SkillEventStore {
    * Uses writeQueue for serialization.
    */
   async markExpired(): Promise<void> {
+    // Security chokepoint: gate the read-side BEFORE the writeQueue acquires
+    // its lock. Hoisted ABOVE the readFile try/catch (per #10442). The
+    // writeFile at the end is out-of-scope per #10457 (read-side-only gate).
+    ensureAllowed(this.ctx, LOADER_SOURCE, 'read-file', this.filePath);
     return this.writeQueue.serialize(async () => {
       let content: string;
       try {
