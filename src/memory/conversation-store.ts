@@ -33,6 +33,9 @@
 import { readFile, writeFile, mkdir, readdir, stat } from 'node:fs/promises';
 import { join, basename } from 'node:path';
 import { randomUUID } from 'node:crypto';
+import { ensureAllowed, type LoaderContext } from '../security/loader-context.js';
+
+const LOADER_SOURCE = 'memory/conversation-store';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -136,11 +139,25 @@ export class ConversationStore {
   private turnIndex: Map<string, ConversationTurn[]> = new Map(); // sessionId → turns
   private initialized = false;
 
-  constructor(config: ConversationStoreConfig) {
+  /**
+   * Optional LoaderContext (Tier-E security chokepoint, v1.49.782).
+   * Class-multi-method consolidated-gate wire (v1.49.908) — 3rd instance of
+   * v902 sub-variant; PROMOTES to ESTABLISHED at 3-instance per #10448
+   * catalog promotion discipline. Public read methods (`search`,
+   * `listSessions`, `getStats`) gate on `this.storePath` scope; the
+   * `ingestSessionLog` mixed-mode method gates on its `logPath` parameter
+   * (the read-side disk touch) before the read-then-write loop. Write-only
+   * methods (`ingestTurn`, `endSession`, `init` mkdirs) out-of-scope per
+   * #10457. Class-stored ctx per #10455 idiom.
+   */
+  private readonly ctx?: LoaderContext;
+
+  constructor(config: ConversationStoreConfig, ctx?: LoaderContext) {
     this.storePath = config.storePath;
     this.chunksDir = join(config.storePath, 'chunks');
     this.indexFile = join(config.storePath, 'sessions.json');
     this.maxActiveSessions = config.maxActiveSessions ?? 100;
+    this.ctx = ctx;
   }
 
   // ─── Lifecycle ──────────────────────────────────────────────────────────
@@ -222,6 +239,10 @@ export class ConversationStore {
    * Parses the log, extracts turns, and indexes them.
    */
   async ingestSessionLog(logPath: string, sessionId?: string): Promise<ConversationSession> {
+    // Gate on logPath BEFORE the readFile that's about to fire. The
+    // ingestTurn loop below performs writes that are out-of-scope per
+    // #10457; only the read of the external log file gates.
+    ensureAllowed(this.ctx, LOADER_SOURCE, 'read-file', logPath);
     await this.init();
 
     const sid = sessionId ?? randomUUID();
@@ -298,6 +319,10 @@ export class ConversationStore {
     limit = 20,
     sessionFilter?: string[]
   ): Promise<ConversationSearchResult[]> {
+    // Class-multi-method consolidated-gate on storePath scope. Covers
+    // transitive readFile (in init) + readdir (in searchChunkFiles via
+    // loadSessionFromDisk).
+    ensureAllowed(this.ctx, LOADER_SOURCE, 'read-dir', this.storePath);
     await this.init();
 
     const queryLower = query.toLowerCase();
@@ -390,6 +415,7 @@ export class ConversationStore {
    * List all sessions, most recent first.
    */
   async listSessions(): Promise<ConversationSession[]> {
+    ensureAllowed(this.ctx, LOADER_SOURCE, 'read-dir', this.storePath);
     await this.init();
     const sessions = Array.from(this.sessions.values());
     sessions.sort((a, b) => b.startedAt.getTime() - a.startedAt.getTime());
@@ -404,6 +430,7 @@ export class ConversationStore {
     newestSession: Date | null;
     diskUsageBytes: number;
   }> {
+    ensureAllowed(this.ctx, LOADER_SOURCE, 'read-dir', this.storePath);
     await this.init();
 
     let totalTurns = 0;

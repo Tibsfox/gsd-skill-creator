@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.907`.
+The story begins at `v1.0` and continues to `v1.49.908`.
 
-**950 chapters.** 949 have retrospectives.
+**951 chapters.** 950 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -958,3 +958,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.905](v1.49.905/00-summary.md)** — Eleventh LoaderContext Chip: `atlas/spatial/pmtiles-reader.ts` (Module-Function Two-Site, Mixed Sync+Async) · 2026-05-29
 - **[v1.49.906](v1.49.906/00-summary.md)** — Twelfth LoaderContext Chip: `aminet/emulated-scanner.ts` (Module-Function Multi-Site Mixed-Chokepoint) · 2026-05-29
 - **[v1.49.907](v1.49.907/00-summary.md)** — Thirteenth LoaderContext Chip: `memory/file-store.ts` (Class-Multi-Method Consolidated-Gate — 2nd Instance PROMOTES v902 Sub-Variant) · 2026-05-29
+- **[v1.49.908](v1.49.908/00-summary.md)** — Fourteenth LoaderContext Chip: `memory/conversation-store.ts` (Class-Multi-Method Consolidated-Gate — 3rd Instance PROMOTES to ESTABLISHED) · 2026-05-29
