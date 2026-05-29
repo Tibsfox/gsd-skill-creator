@@ -10,9 +10,12 @@
 
 import { readdir, readFile, rename, mkdir } from 'node:fs/promises';
 import { join } from 'node:path';
+import { ensureAllowed, type LoaderContext } from '../security/loader-context.js';
 import { MessageEnvelopeSchema } from './schema.js';
 import { CONSOLE_DIRS } from './types.js';
 import type { MessageEnvelope } from './types.js';
+
+const LOADER_SOURCE = 'console/reader';
 
 /**
  * Reads and acknowledges pending messages from the inbox.
@@ -23,12 +26,21 @@ import type { MessageEnvelope } from './types.js';
  *
  * Malformed files (invalid JSON or invalid schema) are moved to
  * acknowledged/ to prevent infinite retry loops.
+ *
+ * Accepts an optional `LoaderContext` (Tier-E security chokepoint, v1.49.782).
+ * When provided, the reader's `basePath` must be admitted by `ctx.allowList`.
+ * All subsequent fs operations (mkdir(ackDir), readdir(pendingDir),
+ * readFile/rename under basePath) are confined under basePath via path.join,
+ * so a single top-of-method `ensureAllowed` gate is sufficient — one audit
+ * record per `readPending()` call. First LoaderContext chip at v1.49.887.
  */
 export class MessageReader {
   private readonly basePath: string;
+  private readonly ctx?: LoaderContext;
 
-  constructor(basePath: string) {
+  constructor(basePath: string, ctx?: LoaderContext) {
     this.basePath = basePath;
+    this.ctx = ctx;
   }
 
   /**
@@ -47,6 +59,11 @@ export class MessageReader {
   async readPending(): Promise<MessageEnvelope[]> {
     const pendingDir = join(this.basePath, CONSOLE_DIRS.inboxPending);
     const ackDir = join(this.basePath, CONSOLE_DIRS.inboxAcknowledged);
+
+    // Security chokepoint: gate on basePath. All subsequent fs operations are
+    // confined under basePath via path.join. Hoisted OUTSIDE the try/catch
+    // below so LoaderContextDenied propagates per #10442.
+    ensureAllowed(this.ctx, LOADER_SOURCE, 'read-dir', this.basePath);
 
     // Ensure acknowledged directory exists
     await mkdir(ackDir, { recursive: true });

@@ -16,6 +16,12 @@ import { MessageWriter } from './writer.js';
 import { ensureConsoleDirectory } from './directory.js';
 import { CONSOLE_DIRS } from './types.js';
 import type { MessageEnvelope } from './types.js';
+import {
+  CapturingAuditSink,
+  defaultLoaderContext,
+  LoaderContextDenied,
+  type LoaderContext,
+} from '../security/loader-context.js';
 
 describe('MessageReader', () => {
   let tmpDir: string;
@@ -168,5 +174,74 @@ describe('MessageReader', () => {
     expect(messages[0].payload).toEqual({ seq: 1 });
     expect(messages[1].payload).toEqual({ seq: 2 });
     expect(messages[2].payload).toEqual({ seq: 3 });
+  });
+
+  describe('LoaderContext chokepoint integration (v1.49.887)', () => {
+    it('emits exactly one audit record per readPending call when ctx is provided', async () => {
+      const sink = new CapturingAuditSink();
+      const ctxReader = new MessageReader(tmpDir, defaultLoaderContext(sink));
+
+      await ctxReader.readPending();
+
+      expect(sink.records).toHaveLength(1);
+      const rec = sink.records[0];
+      expect(rec.source).toBe('console/reader');
+      expect(rec.op).toBe('read-dir');
+      expect(rec.target).toBe(tmpDir);
+      expect(rec.allowed).toBe(true);
+    });
+
+    it('emits one audit record per readPending call regardless of file count', async () => {
+      const sink = new CapturingAuditSink();
+      const ctxReader = new MessageReader(tmpDir, defaultLoaderContext(sink));
+      const pendingDir = join(tmpDir, CONSOLE_DIRS.inboxPending);
+
+      writeFileSync(
+        join(pendingDir, '1000-milestone-submit.json'),
+        JSON.stringify(makeEnvelope(1)),
+      );
+      writeFileSync(
+        join(pendingDir, '2000-config-update.json'),
+        JSON.stringify(makeEnvelope(2, { type: 'config-update' })),
+      );
+
+      await ctxReader.readPending();
+
+      expect(sink.records).toHaveLength(1);
+    });
+
+    it('throws LoaderContextDenied when basePath is not in allowList', async () => {
+      const sink = new CapturingAuditSink();
+      const restrictedCtx: LoaderContext = {
+        allowList: ['/somewhere/that/does/not/match'],
+        audit: sink,
+      };
+      const deniedReader = new MessageReader(tmpDir, restrictedCtx);
+
+      await expect(deniedReader.readPending()).rejects.toBeInstanceOf(LoaderContextDenied);
+
+      expect(sink.records).toHaveLength(1);
+      expect(sink.records[0].allowed).toBe(false);
+    });
+
+    it('legacy permissive mode when ctx is undefined (no audit, no denial)', async () => {
+      const legacyReader = new MessageReader(tmpDir);
+      const result = await legacyReader.readPending();
+      expect(Array.isArray(result)).toBe(true);
+    });
+
+    it('admits basePath via prefix-pattern (trailing slash) in allowList', async () => {
+      const sink = new CapturingAuditSink();
+      const prefixCtx: LoaderContext = {
+        allowList: [`${tmpDir}/`],
+        audit: sink,
+      };
+      const prefixReader = new MessageReader(tmpDir, prefixCtx);
+
+      await prefixReader.readPending();
+
+      expect(sink.records).toHaveLength(1);
+      expect(sink.records[0].allowed).toBe(true);
+    });
   });
 });
