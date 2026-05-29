@@ -277,4 +277,83 @@ describe('emulated-scanner', () => {
       expect(result.timedOut).toBe(false);
     });
   });
+
+  // --------------------------------------------------------------------------
+  // LoaderContext chokepoint integration (v1.49.906)
+  // --------------------------------------------------------------------------
+
+  describe('LoaderContext chokepoint integration (v1.49.906)', () => {
+    it('loadKnownGoodHashes emits 1 audit when file missing (site-1 existsSync only)', async () => {
+      const { CapturingAuditSink, defaultLoaderContext } = await import(
+        '../security/loader-context.js'
+      );
+      const sink = new CapturingAuditSink();
+      const ctx = defaultLoaderContext(sink);
+      mockExistsSync.mockReturnValue(false);
+      const missingPath = join(tempDir, 'missing.json');
+      loadKnownGoodHashes(missingPath, ctx);
+      // 1 audit: site 1 fires, then file-missing returns early before site 2.
+      expect(sink.records.length).toBe(1);
+      expect(sink.records[0]?.op).toBe('exists-check');
+    });
+
+    it('loadKnownGoodHashes emits 2 audits when file exists (sites 1 + 2)', async () => {
+      const { CapturingAuditSink, defaultLoaderContext } = await import(
+        '../security/loader-context.js'
+      );
+      const sink = new CapturingAuditSink();
+      const ctx = defaultLoaderContext(sink);
+      mockExistsSync.mockReturnValue(true);
+      const hashPath = join(tempDir, 'known-good.json');
+      writeFileSync(hashPath, JSON.stringify({ version: 1, hashes: {} }));
+      loadKnownGoodHashes(hashPath, ctx);
+      // 2 audits: site 1 (exists-check) + site 2 (read-file).
+      expect(sink.records.length).toBe(2);
+      expect(sink.records[0]?.op).toBe('exists-check');
+      expect(sink.records[1]?.op).toBe('read-file');
+    });
+
+    it('loadKnownGoodHashes throws LoaderContextDenied on site-1 when ctx rejects path', async () => {
+      const { LoaderContextDenied, CapturingAuditSink } = await import(
+        '../security/loader-context.js'
+      );
+      const sink = new CapturingAuditSink();
+      const restrictiveCtx = { allowList: [], audit: sink };
+      expect(() => loadKnownGoodHashes('/restricted/hashes.json', restrictiveCtx)).toThrow(
+        LoaderContextDenied,
+      );
+      expect(sink.records.length).toBe(1);
+      expect(sink.records[0]?.allowed).toBe(false);
+    });
+
+    it('runEmulatedScan emits 1 LoaderContext audit on fsUaePath existsSync (site 3)', async () => {
+      const { CapturingAuditSink, defaultLoaderContext } = await import(
+        '../security/loader-context.js'
+      );
+      const sink = new CapturingAuditSink();
+      const loaderCtx = defaultLoaderContext(sink);
+      mockExistsSync.mockReturnValue(false);
+      const config: EmulatedScanConfig = {
+        filePath: join(tempDir, 'test.lha'),
+        fsUaePath: '/usr/local/bin/fs-uae',
+        kickstartPath: null,
+        timeoutMs: 5000,
+        workDir: tempDir,
+      };
+      const result = await runEmulatedScan(config, undefined, loaderCtx);
+      // Site 3: 1 audit for fsUaePath existsSync. Kickstart null check is not
+      // a disk op; spawn never happens because fsUaePath is reported missing.
+      expect(sink.records.length).toBe(1);
+      expect(sink.records[0]?.op).toBe('exists-check');
+      expect(result.ran).toBe(false);
+      expect(result.verdict).toBe('unscanned');
+    });
+
+    it('legacy permissive mode (no ctx) preserves prior behavior on loadKnownGoodHashes', () => {
+      mockExistsSync.mockReturnValue(false);
+      const result = loadKnownGoodHashes('/no/such/file.json');
+      expect(result).toBeInstanceOf(Map);
+      expect(result.size).toBe(0);
+    });
+  });
 });

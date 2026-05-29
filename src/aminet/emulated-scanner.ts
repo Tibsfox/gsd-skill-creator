@@ -10,14 +10,23 @@
  * Community checksums offer a fast complementary check by comparing
  * file SHA-256 hashes against a known-good list maintained by the
  * Aminet community.
+ *
+ * Accepts an optional `LoaderContext` (Tier-E security chokepoint, v1.49.782).
+ * Twelfth LoaderContext chip at v1.49.906 — module-function multi-site
+ * mixed-chokepoint wire. `loadKnownGoodHashes` gates 2 sync sites
+ * (existsSync + readFileSync) on the same path; `runEmulatedScan` gates 1
+ * sync existsSync site on fsUaePath alongside its existing ProcessContext
+ * (v861). Sibling chokepoints stay separate per #10449.
  */
 
 import { execFile } from 'node:child_process';
 import { existsSync, readFileSync } from 'node:fs';
 import type { ScanVerdict } from './types.js';
 import { ensureProcessAllowed, type ProcessContext } from '../security/process-context.js';
+import { ensureAllowed, type LoaderContext } from '../security/loader-context.js';
 
 const PROCESS_SOURCE = 'aminet/emulated-scanner';
+const LOADER_SOURCE = 'aminet/emulated-scanner';
 
 // ============================================================================
 // Types
@@ -117,11 +126,19 @@ export function lookupChecksum(
  * @param filePath - Absolute path to the known-good.json file
  * @returns Map from Aminet path to SHA-256 hash
  */
-export function loadKnownGoodHashes(filePath: string): Map<string, string> {
+export function loadKnownGoodHashes(
+  filePath: string,
+  ctx?: LoaderContext,
+): Map<string, string> {
+  // Site 1: existsSync. Sync multi-site hoisted-check (#10448 sub-variant).
+  ensureAllowed(ctx, LOADER_SOURCE, 'exists-check', filePath);
   if (!existsSync(filePath)) {
     return new Map();
   }
 
+  // Site 2: readFileSync. Same path as site 1 but a distinct disk op —
+  // preserves audit-count signal (1 audit = missing file, 2 audits = read).
+  ensureAllowed(ctx, LOADER_SOURCE, 'read-file', filePath);
   const raw = readFileSync(filePath, 'utf-8');
   const parsed = JSON.parse(raw) as { version: number; hashes: Record<string, string> };
   const result = new Map<string, string>();
@@ -180,8 +197,16 @@ function parseCheckXOutput(stdout: string): ScanVerdict {
  * @param config - Emulated scan configuration
  * @returns EmulatedScanResult with verdict and metadata
  */
-export function runEmulatedScan(config: EmulatedScanConfig, ctx?: ProcessContext): Promise<EmulatedScanResult> {
+export function runEmulatedScan(
+  config: EmulatedScanConfig,
+  ctx?: ProcessContext,
+  loaderCtx?: LoaderContext,
+): Promise<EmulatedScanResult> {
   return new Promise<EmulatedScanResult>((resolve) => {
+    // Site 3: existsSync on fsUaePath. Gate via LoaderContext BEFORE the
+    // disk touch. Sibling chokepoints (ProcessContext for spawn at line ~232)
+    // stay separate per #10449.
+    ensureAllowed(loaderCtx, LOADER_SOURCE, 'exists-check', config.fsUaePath);
     // Pre-flight check: FS-UAE binary exists
     if (!existsSync(config.fsUaePath)) {
       resolve({
