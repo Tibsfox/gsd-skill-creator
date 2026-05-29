@@ -1,15 +1,16 @@
 # Release History
 
-944 milestones shipped across the v1.0 → v1.49.901 arc. The table below lists every shipped release, newest first.
+945 milestones shipped across the v1.0 → v1.49.902 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 944 releases · 943 with retrospectives · 746 with extracted lessons · quality A:662 B:97 C:63 D:11 F:111 (avg 87) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 945 releases · 944 with retrospectives · 746 with extracted lessons · quality A:662 B:97 C:63 D:11 F:112 (avg 86) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.902](release-notes/v1.49.902) | Eighth LoaderContext Chip: `orchestrator/state/state-reader.ts` (Class-Multi-Method Consolidated Public-Entry Gate) | 2026-05-29 | 2 | — | — | [s](release-notes/v1.49.902/chapter/00-summary.md) [r](release-notes/v1.49.902/chapter/03-retrospective.md) [l](release-notes/v1.49.902/chapter/04-lessons.md) [c](release-notes/v1.49.902/chapter/99-context.md) | — | F 35 |  |
 | [v1.49.901](release-notes/v1.49.901) | Counter-Cadence Codify Ship: Promote #10458 (Fake-Fixture Wire Test Pattern) | 2026-05-29 | 2 | — | — | [s](release-notes/v1.49.901/chapter/00-summary.md) [r](release-notes/v1.49.901/chapter/03-retrospective.md) [l](release-notes/v1.49.901/chapter/04-lessons.md) [c](release-notes/v1.49.901/chapter/99-context.md) | 3 | F 38 |  |
 | [v1.49.900](release-notes/v1.49.900) | Seventh LoaderContext Chip: `orchestrator/lifecycle/artifact-scanner.ts` (Module-Function Hoist-at-Top) | 2026-05-29 | 2 | — | — | [s](release-notes/v1.49.900/chapter/00-summary.md) [r](release-notes/v1.49.900/chapter/03-retrospective.md) [l](release-notes/v1.49.900/chapter/04-lessons.md) [c](release-notes/v1.49.900/chapter/99-context.md) | 3 | F 41 |  |
 | [v1.49.899](release-notes/v1.49.899) | Counter-Cadence Codify Ship: Promote #10455 (Class-Stored Hoist-at-Top) + #10456 (Audit-Record-Count Test) + #10457 (Read-Side-Only at Write-Bearing) + #10453 to ESTABLISHED | 2026-05-29 | 2 | — | — | [s](release-notes/v1.49.899/chapter/00-summary.md) [r](release-notes/v1.49.899/chapter/03-retrospective.md) [l](release-notes/v1.49.899/chapter/04-lessons.md) [c](release-notes/v1.49.899/chapter/99-context.md) | 4 | F 44 |  |
