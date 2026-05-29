@@ -7,13 +7,22 @@
  *
  * Scans priority-0 through priority-7 in strict order, returning entries
  * sorted by priority then timestamp.
+ *
+ * Accepts an optional `LoaderContext` (Tier-E security chokepoint, v1.49.782).
+ * Two-site hoisted-check (#10448 sub-variant): both exported entry points
+ * (`scanForBundles`, `scanPriorityDirWithBundles`) gate independently — direct
+ * callers of the latter are still admitted through the chokepoint. Fourth
+ * LoaderContext chip at v1.49.892.
  */
 
 import { readdir, stat } from 'node:fs/promises';
 import { join } from 'node:path';
 
+import { ensureAllowed, type LoaderContext } from '../../security/loader-context.js';
 import type { BusConfig } from '../../den/types.js';
 import type { DACPBusEntry } from './types.js';
+
+const LOADER_SOURCE = 'dacp/bus/scanner';
 
 // ============================================================================
 // Constants
@@ -35,17 +44,26 @@ const PRIORITY_COUNT = 8;
  *
  * @param config - Bus configuration
  * @param targetAgent - Optional agent ID to filter by
+ * @param ctx - Optional security chokepoint. When provided, `config.busDir`
+ *   must be admitted; each priority subdir is also re-gated via
+ *   `scanPriorityDirWithBundles`.
  * @returns Array of bus entries in priority order
  */
 export async function scanForBundles(
   config: BusConfig,
   targetAgent?: string,
+  ctx?: LoaderContext,
 ): Promise<DACPBusEntry[]> {
+  // Security chokepoint: gate on the bus directory before the priority loop.
+  // Two-site hoisted-check (#10448 sub-variant) — scanPriorityDirWithBundles
+  // also re-gates each subdir for callers that invoke it directly.
+  ensureAllowed(ctx, LOADER_SOURCE, 'read-dir', config.busDir);
+
   const allEntries: DACPBusEntry[] = [];
 
   for (let p = 0; p < PRIORITY_COUNT; p++) {
     const dirPath = join(config.busDir, `priority-${p}`);
-    const entries = await scanPriorityDirWithBundles(dirPath, p);
+    const entries = await scanPriorityDirWithBundles(dirPath, p, ctx);
     allEntries.push(...entries);
   }
 
@@ -71,12 +89,19 @@ export async function scanForBundles(
  *
  * @param dirPath - Absolute path to the priority directory
  * @param priority - Priority level (0-7) for the entries
+ * @param ctx - Optional security chokepoint. When provided, `dirPath` must
+ *   be admitted before the readdir/stat sequence runs.
  * @returns Array of bus entries sorted by timestamp ascending
  */
 export async function scanPriorityDirWithBundles(
   dirPath: string,
   priority: number,
+  ctx?: LoaderContext,
 ): Promise<DACPBusEntry[]> {
+  // Security chokepoint: gate on dirPath. Hoisted OUTSIDE the readdir
+  // try/catch below so LoaderContextDenied propagates per #10442.
+  ensureAllowed(ctx, LOADER_SOURCE, 'read-dir', dirPath);
+
   let entries: string[];
 
   try {

@@ -12,6 +12,12 @@ import { scanForBundles, scanPriorityDirWithBundles } from './scanner.js';
 import { initBus, sendMessage } from '../../den/bus.js';
 import { encodeMessage, messageFilename } from '../../den/encoder.js';
 import type { BusConfig, BusMessage } from '../../den/types.js';
+import {
+  CapturingAuditSink,
+  defaultLoaderContext,
+  LoaderContextDenied,
+  type LoaderContext,
+} from '../../security/loader-context.js';
 
 // ============================================================================
 // Helpers
@@ -186,5 +192,101 @@ describe('scanPriorityDirWithBundles', () => {
     const entries = await scanPriorityDirWithBundles(priDir, 3);
     expect(entries.length).toBe(1);
     expect(entries[0].opcode).toBe('EXEC');
+  });
+});
+
+// ============================================================================
+// LoaderContext chokepoint integration (v1.49.892 — two-site hoisted-check)
+// ============================================================================
+
+describe('LoaderContext chokepoint integration (v1.49.892)', () => {
+  let config: BusConfig;
+  let cleanup: () => Promise<void>;
+
+  beforeEach(async () => {
+    ({ config, cleanup } = await makeTempConfig());
+    await initBus(config);
+  });
+
+  afterEach(async () => {
+    await cleanup();
+  });
+
+  it('emits an audit record for the busDir at scanForBundles + one per priority subdir scanned', async () => {
+    const msg = makeMessage({ priority: 3 });
+    await writeMsgAndBundle(join(config.busDir, 'priority-3'), msg, false);
+
+    const sink = new CapturingAuditSink();
+    await scanForBundles(config, undefined, defaultLoaderContext(sink));
+
+    // 1 outer (busDir) + 8 inner (priority-0..priority-7) = 9
+    expect(sink.records.length).toBe(9);
+    expect(sink.records[0].source).toBe('dacp/bus/scanner');
+    expect(sink.records[0].op).toBe('read-dir');
+    expect(sink.records[0].target).toBe(config.busDir);
+    expect(sink.records.every((r) => r.allowed === true)).toBe(true);
+  });
+
+  it('throws LoaderContextDenied at scanForBundles when busDir is not in allowList', async () => {
+    const sink = new CapturingAuditSink();
+    const restrictedCtx: LoaderContext = {
+      allowList: ['/nowhere/at/all'],
+      audit: sink,
+    };
+    await expect(scanForBundles(config, undefined, restrictedCtx)).rejects.toBeInstanceOf(
+      LoaderContextDenied,
+    );
+    expect(sink.records).toHaveLength(1);
+    expect(sink.records[0].allowed).toBe(false);
+    expect(sink.records[0].target).toBe(config.busDir);
+  });
+
+  it('throws LoaderContextDenied at scanPriorityDirWithBundles when dirPath is not in allowList (direct caller)', async () => {
+    const sink = new CapturingAuditSink();
+    const restrictedCtx: LoaderContext = {
+      allowList: ['/somewhere/else'],
+      audit: sink,
+    };
+    const priDir = join(config.busDir, 'priority-3');
+    await expect(
+      scanPriorityDirWithBundles(priDir, 3, restrictedCtx),
+    ).rejects.toBeInstanceOf(LoaderContextDenied);
+    expect(sink.records).toHaveLength(1);
+    expect(sink.records[0].target).toBe(priDir);
+  });
+
+  it('legacy permissive mode when ctx is undefined (no audit, no denial)', async () => {
+    const msg = makeMessage({ priority: 3 });
+    await writeMsgAndBundle(join(config.busDir, 'priority-3'), msg, false);
+
+    const entries = await scanForBundles(config);
+    expect(entries.length).toBe(1);
+  });
+
+  it('admits busDir via prefix-pattern in allowList', async () => {
+    const msg = makeMessage({ priority: 3 });
+    await writeMsgAndBundle(join(config.busDir, 'priority-3'), msg, false);
+
+    const sink = new CapturingAuditSink();
+    const prefixCtx: LoaderContext = {
+      allowList: [`${config.busDir}/`],
+      audit: sink,
+    };
+    const entries = await scanForBundles(config, undefined, prefixCtx);
+    expect(entries.length).toBe(1);
+    expect(sink.records.every((r) => r.allowed === true)).toBe(true);
+  });
+
+  it('denial at outer scanForBundles propagates BEFORE the priority loop runs', async () => {
+    const sink = new CapturingAuditSink();
+    const restrictedCtx: LoaderContext = {
+      allowList: ['/explicitly/only/this'],
+      audit: sink,
+    };
+    await expect(scanForBundles(config, undefined, restrictedCtx)).rejects.toBeInstanceOf(
+      LoaderContextDenied,
+    );
+    // Only the outer busDir audit record — no priority subdir was scanned.
+    expect(sink.records).toHaveLength(1);
   });
 });

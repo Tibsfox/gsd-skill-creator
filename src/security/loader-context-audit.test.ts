@@ -59,12 +59,12 @@ const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
   // v1.49.887: src/console/reader.ts chipped (hoist-at-top, N=1). 15 → 14.
   // v1.49.889: src/intelligence/atlas-indexer/file-walker.ts chipped (hoist-at-top, N=1 entry point). 14 → 13.
   // v1.49.890: src/eval/calibration-adjustment-store.ts chipped (read-side gated at load(); save() out-of-scope per LoaderContext read-side design). 13 → 12.
+  // v1.49.892: src/dacp/bus/scanner.ts chipped (two-site hoisted-check, #10448 sub-variant; both scanForBundles + scanPriorityDirWithBundles gate independently). 12 → 11.
   // Sort: alphabetical-by-path (preserves git-blame discipline; LOC band
   // documented inline for chip-picking via #10445).
   'src/aminet/emulated-scanner.ts',                          // 287 LOC
   'src/atlas/spatial/pmtiles-reader.ts',                     // 262 LOC
   'src/cli/commands/keystore.ts',                            // 179 LOC (already ProcessContext-wired @ v861; LoaderContext-wire is a separate concern)
-  'src/dacp/bus/scanner.ts',                                 // 174 LOC
   'src/discovery/scan-state-store.ts',                       // 176 LOC
   'src/events/skill-event-store.ts',                         // 222 LOC
   'src/intelligence/kb/store.ts',                            // 1399 LOC (largest; may warrant Role: marker review before wire)
