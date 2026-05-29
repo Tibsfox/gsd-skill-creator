@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.895`.
+The story begins at `v1.0` and continues to `v1.49.896`.
 
-**938 chapters.** 937 have retrospectives.
+**939 chapters.** 938 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -79,8 +79,8 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.17](v1.49.17/00-summary.md)** — The Space Between · 2026-03-04
 - **[v1.49.18](v1.49.18/00-summary.md)** — Space Between Observatory · 2026-03-06
 - **[v1.49.19](v1.49.19/00-summary.md)** — Gastown Chipset Integration · 2026-03-06
-- **[v1.49.20](v1.49.20/00-summary.md)** — Documentation Consolidation · 2026-03-06
 - **[v1.49.20.1](v1.49.20.1/00-summary.md)** — Documentation Reflections · 2026-03-06
+- **[v1.49.20](v1.49.20/00-summary.md)** — Documentation Consolidation · 2026-03-06
 - **[v1.49.21](v1.49.21/00-summary.md)** — Image to Mission Pipeline · 2026-03-07
 - **[v1.49.22](v1.49.22/00-summary.md)** — PNW Research Series · 2026-03-07
 - **[v1.49.23](v1.49.23/00-summary.md)** — Unison Language & Math Co-Processor Completion · 2026-03-08
@@ -946,3 +946,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.893](v1.49.893/00-summary.md)** — Substrate Auto-Emit: `token_budget.max_percent` Ceiling Check · 2026-05-28
 - **[v1.49.894](v1.49.894/00-summary.md)** — Verify-Axis Integration Test: `observation.retention_days` Substrate→Calibration End-to-End · 2026-05-28
 - **[v1.49.895](v1.49.895/00-summary.md)** — Counter-Cadence Codify Ship: Promote #10452 (Substrate-Wrapper Pattern) + #10453 (Substrate→Calibration End-to-End Test) + #10454 (Fire-and-Forget Test-Side Wait) · 2026-05-28
+- **[v1.49.896](v1.49.896/00-summary.md)** — Fifth LoaderContext Chip: `skill-workflows/workflow-run-store.ts` (Class-Stored Hoist-at-Top) · 2026-05-29

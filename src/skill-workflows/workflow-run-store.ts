@@ -8,6 +8,12 @@
  * Writes are serialized through a write queue to prevent race conditions.
  * Reads are corruption-tolerant (invalid lines are skipped).
  * Each entry is validated via Zod safeParse on read.
+ *
+ * Accepts an optional `LoaderContext` (Tier-E security chokepoint, v1.49.782).
+ * When provided, the store's `filePath` must be admitted by `ctx.allowList`
+ * before `readAll()` reads from disk. `append()` is intentionally NOT gated —
+ * LoaderContext is by design a READ-side chokepoint per its docstring; the
+ * write path is out of scope. Fifth LoaderContext chip at v1.49.896.
  */
 
 import { appendFile, readFile, mkdir } from 'node:fs/promises';
@@ -15,16 +21,21 @@ import { join } from 'node:path';
 import { WorkflowRunEntrySchema } from './types.js';
 import type { WorkflowRunEntry } from './types.js';
 import { WriteQueue } from '../safety/write-queue.js';
+import { ensureAllowed, type LoaderContext } from '../security/loader-context.js';
 
 /** Filename for the workflow run log */
 const WORKFLOW_RUNS_FILENAME = 'workflow-runs.jsonl';
 
+const LOADER_SOURCE = 'skill-workflows/workflow-run-store';
+
 export class WorkflowRunStore {
   private patternsDir: string;
   private writeQueue = new WriteQueue();
+  private readonly ctx?: LoaderContext;
 
-  constructor(patternsDir: string) {
+  constructor(patternsDir: string, ctx?: LoaderContext) {
     this.patternsDir = patternsDir;
+    this.ctx = ctx;
   }
 
   private get filePath(): string {
@@ -54,8 +65,16 @@ export class WorkflowRunStore {
    * Read all workflow run entries from the JSONL log.
    * Returns empty array if file does not exist.
    * Skips corrupted or invalid lines gracefully.
+   *
+   * When ctx was provided at construction, the path must be admitted by
+   * `ctx.allowList`. Gate is hoisted ABOVE the try/catch that swallows
+   * ENOENT so `LoaderContextDenied` propagates per #10442.
    */
   async readAll(): Promise<WorkflowRunEntry[]> {
+    // Security chokepoint: gate on the resolved path before the read.
+    // Hoisted OUTSIDE the try/catch below so LoaderContextDenied propagates.
+    ensureAllowed(this.ctx, LOADER_SOURCE, 'read-file', this.filePath);
+
     let content: string;
     try {
       content = await readFile(this.filePath, 'utf-8');

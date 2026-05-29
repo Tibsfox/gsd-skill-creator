@@ -60,6 +60,7 @@ const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
   // v1.49.889: src/intelligence/atlas-indexer/file-walker.ts chipped (hoist-at-top, N=1 entry point). 14 → 13.
   // v1.49.890: src/eval/calibration-adjustment-store.ts chipped (read-side gated at load(); save() out-of-scope per LoaderContext read-side design). 13 → 12.
   // v1.49.892: src/dacp/bus/scanner.ts chipped (two-site hoisted-check, #10448 sub-variant; both scanForBundles + scanPriorityDirWithBundles gate independently). 12 → 11.
+  // v1.49.896: src/skill-workflows/workflow-run-store.ts chipped (hoist-at-top, N=1 readAll() site; class-stored ctx mirrors v890 calibration-adjustment-store pattern; append() out-of-scope per LoaderContext read-side design). 11 → 10.
   // Sort: alphabetical-by-path (preserves git-blame discipline; LOC band
   // documented inline for chip-picking via #10445).
   'src/aminet/emulated-scanner.ts',                          // 287 LOC
@@ -72,7 +73,6 @@ const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
   'src/memory/file-store.ts',                                // 516 LOC
   'src/orchestrator/lifecycle/artifact-scanner.ts',          // 176 LOC
   'src/orchestrator/state/state-reader.ts',                  // 190 LOC
-  'src/skill-workflows/workflow-run-store.ts',               // 138 LOC
 ]);
 
 /** Name patterns that bring a file into LoaderContext audit scope. */

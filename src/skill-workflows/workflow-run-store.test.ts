@@ -18,6 +18,12 @@ import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { WorkflowRunStore } from './workflow-run-store.js';
 import type { WorkflowRunEntry } from './types.js';
+import {
+  CapturingAuditSink,
+  defaultLoaderContext,
+  LoaderContextDenied,
+  type LoaderContext,
+} from '../security/loader-context.js';
 
 // ============================================================================
 // Helpers
@@ -179,5 +185,84 @@ describe('WorkflowRunStore - getCompletedSteps', () => {
     expect(completed).toContain('c');
     expect(completed).not.toContain('b');
     expect(completed).toHaveLength(2);
+  });
+});
+
+// ============================================================================
+// LoaderContext chokepoint integration (v1.49.896 — fifth LoaderContext chip)
+// ============================================================================
+
+describe('LoaderContext chokepoint integration (v1.49.896)', () => {
+  const filePath = (): string => join(tmpDir, 'workflow-runs.jsonl');
+
+  it('emits exactly one audit record on readAll when ctx is provided', async () => {
+    const sink = new CapturingAuditSink();
+    const store = new WorkflowRunStore(tmpDir, defaultLoaderContext(sink));
+    await store.readAll();
+    expect(sink.records).toHaveLength(1);
+    const rec = sink.records[0];
+    expect(rec.source).toBe('skill-workflows/workflow-run-store');
+    expect(rec.op).toBe('read-file');
+    expect(rec.target).toBe(filePath());
+    expect(rec.allowed).toBe(true);
+  });
+
+  it('throws LoaderContextDenied when filePath is not in allowList — denial propagates ABOVE ENOENT swallow', async () => {
+    const sink = new CapturingAuditSink();
+    const restrictedCtx: LoaderContext = {
+      allowList: ['/somewhere/that/does/not/match'],
+      audit: sink,
+    };
+    const store = new WorkflowRunStore(tmpDir, restrictedCtx);
+    // File does not exist (missing-file is tolerated as empty by readAll), but
+    // the denial must still throw because ensureAllowed runs BEFORE readFile.
+    // This is the #10442 hoist-above-try/catch invariant.
+    await expect(store.readAll()).rejects.toBeInstanceOf(LoaderContextDenied);
+    expect(sink.records).toHaveLength(1);
+    expect(sink.records[0].allowed).toBe(false);
+  });
+
+  it('legacy permissive mode when ctx is undefined (readAll works without audit)', async () => {
+    const store = new WorkflowRunStore(tmpDir);
+    const entries = await store.readAll();
+    expect(entries).toEqual([]);
+  });
+
+  it('admits filePath via prefix-pattern (trailing slash) in allowList', async () => {
+    const sink = new CapturingAuditSink();
+    const prefixCtx: LoaderContext = {
+      allowList: [`${tmpDir}/`],
+      audit: sink,
+    };
+    const store = new WorkflowRunStore(tmpDir, prefixCtx);
+    await store.readAll();
+    expect(sink.records).toHaveLength(1);
+    expect(sink.records[0].allowed).toBe(true);
+  });
+
+  it('append() is not gated by LoaderContext (read-side chokepoint by design)', async () => {
+    const sink = new CapturingAuditSink();
+    const restrictedCtx: LoaderContext = {
+      allowList: ['/somewhere/that/does/not/match'],
+      audit: sink,
+    };
+    const store = new WorkflowRunStore(tmpDir, restrictedCtx);
+    // append() succeeds even though the path is not in allowList — the
+    // chokepoint is intentionally read-only per LoaderContext docstring.
+    await expect(store.append(makeEntry())).resolves.toBeUndefined();
+    expect(sink.records).toHaveLength(0);
+  });
+
+  it('derived methods (getRunEntries / getLatestRun / getCompletedSteps) emit one audit record per call via readAll', async () => {
+    const sink = new CapturingAuditSink();
+    const ctx = defaultLoaderContext(sink);
+    const store = new WorkflowRunStore(tmpDir, ctx);
+    // Each derived method calls readAll() exactly once → 3 audit records total.
+    await store.getRunEntries('run-1');
+    await store.getLatestRun('test-workflow');
+    await store.getCompletedSteps('run-1');
+    expect(sink.records).toHaveLength(3);
+    expect(sink.records.every(r => r.op === 'read-file')).toBe(true);
+    expect(sink.records.every(r => r.target === filePath())).toBe(true);
   });
 });
