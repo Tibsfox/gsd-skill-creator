@@ -42,6 +42,11 @@ import {
   readTokenBudgetEvents,
 } from './token-budget-events.js';
 import {
+  DEFAULT_TOKEN_BUDGET_MAX_EVENTS_PATH,
+  eventsToObservations as tokenBudgetMaxEventsToObservations,
+  readTokenBudgetMaxEvents,
+} from './token-budget-max-events.js';
+import {
   DEFAULT_PREDICTIVE_LOW_CONFIDENCE_EVENTS_PATH,
   eventsToObservations as predictiveEventsToObservations,
   readPredictiveLowConfidenceEvents,
@@ -61,8 +66,13 @@ import type { SuggestionEntry } from './suggestions-mapper.js';
 export interface ObservationLoaderOptions {
   /** Path to suggestions.json (consumed by suggestions.* threshold class). */
   suggestionsPath?: string;
-  /** Path to token-budget-events.jsonl (consumed by token_budget.* threshold class; v803). */
+  /** Path to token-budget-events.jsonl (consumed by token_budget.warn_at_percent; v803). */
   tokenBudgetEventsPath?: string;
+  /**
+   * Path to token-budget-max-events.jsonl (consumed by
+   * `token_budget.max_percent`; v888 read-side wire).
+   */
+  tokenBudgetMaxEventsPath?: string;
   /**
    * Path to predictive-low-confidence-events.jsonl (consumed by
    * predictive.* threshold class; v837).
@@ -107,10 +117,22 @@ export function observationSourceFor(threshold: CalibratableThreshold): Observat
       wired: true,
     };
   }
+  if (threshold === 'token_budget.max_percent') {
+    return {
+      sourceId: 'token-budget-max-events',
+      description:
+        'Operator outcome at the hard token-budget ceiling — under_budget ' +
+        '/ blocked (v1.49.888 read-side wire — append-only JSONL at ' +
+        '.planning/patterns/token-budget-max-events.jsonl). Substrate ' +
+        'auto-emit deferred per #10439 staging (mirrors v837 → v845/v846 ' +
+        'and v884 → v891).',
+      wired: true,
+    };
+  }
   if (threshold.startsWith('token_budget.')) {
     return {
       sourceId: 'token-budget-events',
-      description: 'Operator response to skill-load token-budget warn events (NOT YET CAPTURED for this threshold)',
+      description: 'Operator response to skill-load token-budget events (NOT YET CAPTURED for this threshold)',
       wired: false,
     };
   }
@@ -171,11 +193,13 @@ async function loadSuggestionsFromFile(path: string): Promise<SuggestionEntry[]>
  * Wired classes:
  *   - `suggestions.*`                — reads `suggestions.json`.
  *   - `token_budget.warn_at_percent` — reads `token-budget-events.jsonl` (v803).
+ *   - `token_budget.max_percent`     — reads `token-budget-max-events.jsonl` (v888).
  *   - `predictive.low_confidence_threshold` — reads
  *     `predictive-low-confidence-events.jsonl` (v837).
+ *   - `observation.retention_days`   — reads `observation-retention-events.jsonl` (v884).
  *
- * Unwired classes (`token_budget.max_percent`, `observation.*`) return an
- * empty array — the calibration loop then returns `direction: 'hold'` with
+ * Unwired classes (none remaining as of v888) return an empty array —
+ * the calibration loop then returns `direction: 'hold'` with
  * `observations: 0`, the honest outcome for "wire exists, source not yet
  * captured."
  */
@@ -193,6 +217,12 @@ export async function loadObservationsForThreshold(
     const events = await readTokenBudgetEvents(path);
     return tokenBudgetEventsToObservations(events);
   }
+  if (threshold === 'token_budget.max_percent') {
+    const path =
+      options.tokenBudgetMaxEventsPath ?? DEFAULT_TOKEN_BUDGET_MAX_EVENTS_PATH;
+    const events = await readTokenBudgetMaxEvents(path);
+    return tokenBudgetMaxEventsToObservations(events);
+  }
   if (threshold === 'predictive.low_confidence_threshold') {
     const path =
       options.predictiveLowConfidenceEventsPath
@@ -207,7 +237,6 @@ export async function loadObservationsForThreshold(
     const events = await readObservationRetentionEvents(path);
     return observationRetentionEventsToObservations(events);
   }
-  // Unwired classes return empty; honest "no data captured" baseline.
-  // - 'token_budget.max_percent'
+  // No unwired classes remain as of v888.
   return [];
 }

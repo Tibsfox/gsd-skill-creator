@@ -64,6 +64,19 @@ export {
 export type { TokenBudgetEvent, TokenBudgetEventKind } from './token-budget-events.js';
 
 export {
+  DEFAULT_TOKEN_BUDGET_MAX_EVENTS_PATH,
+  appendTokenBudgetMaxEvent,
+  eventKindToValue as tokenBudgetMaxEventKindToValue,
+  eventToObservation as tokenBudgetMaxEventToObservation,
+  eventsToObservations as tokenBudgetMaxEventsToObservations,
+  readTokenBudgetMaxEvents,
+} from './token-budget-max-events.js';
+export type {
+  TokenBudgetMaxEvent,
+  TokenBudgetMaxEventKind,
+} from './token-budget-max-events.js';
+
+export {
   DEFAULT_OBSERVATION_RETENTION_EVENTS_PATH,
   appendObservationRetentionEvent,
   eventKindToValue as observationRetentionEventKindToValue,

@@ -34,10 +34,11 @@ describe('observationSourceFor — per-class registry (v1.49.798)', () => {
     expect(info.description).not.toContain('NOT YET CAPTURED');
   });
 
-  it('classifies token_budget.max_percent as unwired (still pending; only warn_at_percent wired at v1.49.803)', () => {
+  it('classifies token_budget.max_percent as WIRED token-budget-max-events source (v1.49.888 flip)', () => {
     const info = observationSourceFor('token_budget.max_percent');
-    expect(info.sourceId).toBe('token-budget-events');
-    expect(info.wired).toBe(false);
+    expect(info.sourceId).toBe('token-budget-max-events');
+    expect(info.wired).toBe(true);
+    expect(info.description).toMatch(/v1\.49\.888 read-side wire/);
   });
 
   it('classifies observation.retention_days as WIRED observation-retention-events source (v1.49.884 flip)', () => {
@@ -120,15 +121,37 @@ describe('loadObservationsForThreshold — per-class dispatch (v1.49.798)', () =
     expect(obs).toEqual([]);
   });
 
-  it('returns empty for token_budget.max_percent regardless of events file (still unwired at v1.49.803)', async () => {
+  it('reads token-budget-max events JSONL when present (v1.49.888 wire)', async () => {
+    // warn-events should NOT be consulted for max_percent — separate JSONL.
     const tokenBudgetEventsPath = join(workDir, 'token-budget-events.jsonl');
     writeFileSync(
       tokenBudgetEventsPath,
       JSON.stringify({ timestamp: '2026-05-27T00:00:00.000Z', kind: 'responsive' }) + '\n',
       'utf8',
     );
+    const tokenBudgetMaxEventsPath = join(workDir, 'token-budget-max-events.jsonl');
+    writeFileSync(
+      tokenBudgetMaxEventsPath,
+      [
+        JSON.stringify({ timestamp: '2026-05-28T00:00:00.000Z', kind: 'under_budget' }),
+        JSON.stringify({ timestamp: '2026-05-28T00:01:00.000Z', kind: 'blocked' }),
+        JSON.stringify({ timestamp: '2026-05-28T00:02:00.000Z', kind: 'under_budget' }),
+      ].join('\n') + '\n',
+      'utf8',
+    );
     const obs = await loadObservationsForThreshold('token_budget.max_percent', {
       tokenBudgetEventsPath,
+      tokenBudgetMaxEventsPath,
+    });
+    expect(obs).toHaveLength(3);
+    // under_budget → +1 (favor lower), blocked → -1 (favor raise).
+    // Same polarity shape as warn-events + observation-retention.
+    expect(obs.map((o) => o.value)).toEqual([1, -1, 1]);
+  });
+
+  it('returns empty array for token_budget.max_percent when JSONL is missing (honest no-data baseline)', async () => {
+    const obs = await loadObservationsForThreshold('token_budget.max_percent', {
+      tokenBudgetMaxEventsPath: join(workDir, 'never-written.jsonl'),
     });
     expect(obs).toEqual([]);
   });

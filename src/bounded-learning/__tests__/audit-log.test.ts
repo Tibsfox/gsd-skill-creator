@@ -57,11 +57,11 @@ describe('buildAuditLogEntry — derives entry from recommendation (v1.49.799)',
     expect(entry.observationSource.wired).toBe(true);
   });
 
-  it('reflects unwired source for token_budget.max_percent (still unwired at v1.49.803)', () => {
+  it('reflects WIRED source for token_budget.max_percent (v1.49.888 read-side wire)', () => {
     const rec = makeRecommendation({ threshold: 'token_budget.max_percent' });
     const entry = buildAuditLogEntry(rec, 'noop');
-    expect(entry.observationSource.sourceId).toBe('token-budget-events');
-    expect(entry.observationSource.wired).toBe(false);
+    expect(entry.observationSource.sourceId).toBe('token-budget-max-events');
+    expect(entry.observationSource.wired).toBe(true);
   });
 
   it('preserves proposedValue=null for hold direction', () => {

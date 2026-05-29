@@ -65,8 +65,10 @@ import { join } from 'node:path';
 import {
   DEFAULT_AUDIT_LOG_PATH,
   DEFAULT_TOKEN_BUDGET_EVENTS_PATH,
+  DEFAULT_TOKEN_BUDGET_MAX_EVENTS_PATH,
   appendAuditLogEntry,
   appendTokenBudgetEvent,
+  appendTokenBudgetMaxEvent,
   applyRecommendation,
   buildAuditLogEntry,
   loadObservationsForThreshold,
@@ -81,6 +83,8 @@ import {
   type CalibrationRecommendation,
   type TokenBudgetEvent,
   type TokenBudgetEventKind,
+  type TokenBudgetMaxEvent,
+  type TokenBudgetMaxEventKind,
 } from '../../bounded-learning/index.js';
 import {
   DEFAULT_PREDICTIVE_LOW_CONFIDENCE_EVENTS_PATH,
@@ -102,6 +106,7 @@ const SUPPORTED_THRESHOLDS: CalibratableThreshold[] = [
   'suggestions.cooldown_days',
   'suggestions.auto_dismiss_after_days',
   'token_budget.warn_at_percent',
+  'token_budget.max_percent',
   'predictive.low_confidence_threshold',
   'observation.retention_days',
 ];
@@ -140,6 +145,9 @@ Options:
   --suggestions <path> Path to suggestions.json (default .planning/patterns/suggestions.json)
   --token-budget-events <path>
                        Path to token-budget-events.jsonl (default .planning/patterns/token-budget-events.jsonl)
+  --token-budget-max-events <path>
+                       Path to token-budget-max-events.jsonl
+                       (default .planning/patterns/token-budget-max-events.jsonl; v1.49.888)
   --predictive-low-confidence-events <path>
                        Path to predictive-low-confidence-events.jsonl
                        (default .planning/patterns/predictive-low-confidence-events.jsonl; v1.49.837)
@@ -309,6 +317,7 @@ interface TickContext {
   lambda: number | undefined;
   suggestionsPath: string;
   tokenBudgetEventsPath: string;
+  tokenBudgetMaxEventsPath: string;
   configPath: string;
   auditLogPath: string;
   apply: boolean;
@@ -346,6 +355,7 @@ async function runCalibrationTick(ctx: TickContext): Promise<number> {
   const observations = await loadObservationsForThreshold(ctx.threshold, {
     suggestionsPath: ctx.suggestionsPath,
     tokenBudgetEventsPath: ctx.tokenBudgetEventsPath,
+    tokenBudgetMaxEventsPath: ctx.tokenBudgetMaxEventsPath,
   });
 
   const loopConfig: { alpha?: number; lambda?: number } = {};
@@ -474,6 +484,11 @@ export async function boundedLearningCommand(args: string[], options: BoundedLea
     ? tokenBudgetEventsLookup.value
     : DEFAULT_TOKEN_BUDGET_EVENTS_PATH;
 
+  const tokenBudgetMaxEventsLookup = getFlagValue(args, '--token-budget-max-events');
+  const tokenBudgetMaxEventsPath = tokenBudgetMaxEventsLookup.present && tokenBudgetMaxEventsLookup.value !== null
+    ? tokenBudgetMaxEventsLookup.value
+    : DEFAULT_TOKEN_BUDGET_MAX_EVENTS_PATH;
+
   const configLookup = getFlagValue(args, '--config');
   const configPath = configLookup.present && configLookup.value !== null
     ? configLookup.value
@@ -491,6 +506,7 @@ export async function boundedLearningCommand(args: string[], options: BoundedLea
     lambda,
     suggestionsPath,
     tokenBudgetEventsPath,
+    tokenBudgetMaxEventsPath,
     configPath,
     auditLogPath,
     apply,
@@ -615,7 +631,11 @@ async function runRecordEvent(
     return runRecordObservationRetentionEvent(args, flags);
   }
 
-  // Default branch: token-budget event recording (v803 behavior unchanged).
+  if (thresholdValue === 'token_budget.max_percent') {
+    return runRecordTokenBudgetMaxEvent(args, flags);
+  }
+
+  // Default branch: token-budget warn event recording (v803 behavior unchanged).
   const kindLookup = getFlagValue(args, '--kind');
   if (!kindLookup.present || kindLookup.value === null) {
     if (flags.json) {
@@ -821,6 +841,79 @@ async function runRecordObservationRetentionEvent(
     console.log(JSON.stringify({ recorded: true, event }));
   } else if (!flags.quiet) {
     p.log.success(`Recorded observation-retention ${kind} event at ${event.timestamp}.`);
+  }
+  return 0;
+}
+
+/**
+ * v1.49.888 — token-budget MAX event recording branch of --record-event.
+ * Polarity matches warn-events and observation-retention (NOT predictive):
+ * --kind under_budget|blocked.
+ *
+ * Polarity: under_budget → +1 (favor LOWERING the ceiling; operator had
+ * headroom); blocked → -1 (favor RAISING the ceiling; operator was
+ * blocked at the hard limit).
+ *
+ * Best-effort silent write per Lesson #10427.
+ */
+async function runRecordTokenBudgetMaxEvent(
+  args: string[],
+  flags: { json: boolean; quiet: boolean },
+): Promise<number> {
+  const kindLookup = getFlagValue(args, '--kind');
+  const supported = ['under_budget', 'blocked'];
+  if (!kindLookup.present || kindLookup.value === null) {
+    if (flags.json) {
+      console.log(JSON.stringify({ error: 'missing-flag', flag: '--kind', supported }));
+    } else if (!flags.quiet) {
+      p.log.error(`--record-event (token-budget-max) requires --kind <under_budget|blocked>.`);
+    }
+    return 1;
+  }
+  if (kindLookup.value !== 'under_budget' && kindLookup.value !== 'blocked') {
+    if (flags.json) {
+      console.log(JSON.stringify({ error: 'invalid-flag', flag: '--kind', value: kindLookup.value, supported }));
+    } else if (!flags.quiet) {
+      p.log.error(`--kind must be 'under_budget' or 'blocked'; got '${kindLookup.value}'.`);
+    }
+    return 1;
+  }
+  const kind: TokenBudgetMaxEventKind = kindLookup.value;
+
+  const pathLookup = getFlagValue(args, '--token-budget-max-events');
+  const path = pathLookup.present && pathLookup.value !== null
+    ? pathLookup.value
+    : DEFAULT_TOKEN_BUDGET_MAX_EVENTS_PATH;
+
+  const event: TokenBudgetMaxEvent = {
+    timestamp: new Date().toISOString(),
+    kind,
+  };
+  const usageLookup = getFlagValue(args, '--usage-percent');
+  if (usageLookup.present) {
+    const parsed = parsePositiveFloat(usageLookup.value);
+    if (parsed !== null) event.usagePercent = parsed;
+  }
+  const maxPctLookup = getFlagValue(args, '--max-percent');
+  if (maxPctLookup.present) {
+    const parsed = parsePositiveFloat(maxPctLookup.value);
+    if (parsed !== null) event.maxPercent = parsed;
+  }
+  const reasonLookup = getFlagValue(args, '--reason');
+  if (reasonLookup.present && reasonLookup.value !== null) {
+    event.reason = reasonLookup.value;
+  }
+
+  try {
+    await appendTokenBudgetMaxEvent(event, { path });
+  } catch {
+    // Best-effort silent per Lesson #10427.
+  }
+
+  if (flags.json) {
+    console.log(JSON.stringify({ recorded: true, event }));
+  } else if (!flags.quiet) {
+    p.log.success(`Recorded token-budget-max ${kind} event at ${event.timestamp}.`);
   }
   return 0;
 }

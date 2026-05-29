@@ -293,14 +293,14 @@ describe('boundedLearningCommand — --summary mode (v1.49.801)', () => {
     });
   });
 
-  it('emits JSON summary of all 6 wired thresholds with currentValue + observationSource', async () => {
+  it('emits JSON summary of all 7 wired thresholds with currentValue + observationSource', async () => {
     const code = await boundedLearningCommand(
       ['--config', configPath, '--audit-log', auditLogPath, '--summary'],
     );
     expect(code).toBe(0);
     const out = JSON.parse(collectLog());
-    expect(out.thresholds).toHaveLength(6);
-    expect(out.wiredThresholdCount).toBe(6);
+    expect(out.thresholds).toHaveLength(7);
+    expect(out.wiredThresholdCount).toBe(7);
     const minOcc = out.thresholds.find((t: { threshold: string }) => t.threshold === 'suggestions.min_occurrences');
     expect(minOcc.currentValue).toBe(3);
     expect(minOcc.observationSource.sourceId).toBe('suggestions.json');
