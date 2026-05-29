@@ -17,6 +17,10 @@ When a router function dispatches to multiple implementations, only some of whic
 
 **2 instances** (v864 + v880). Promotion-eligible at next codify as a refinement to #10444 — "router-with-conditional-bypass" sub-pattern.
 
+## What went wrong
+
+- Post-ship retrospective truncation by RH publish pipeline (4th instance now: v871, v875, v876, v880). Pattern reliable; restoration takes ~30s.
+
 ## Verdict on scope
 
 One chip away from Track 5 close. v881 ipc.ts (516 LOC) is the last KNOWN_UNWIRED Egress entry.
