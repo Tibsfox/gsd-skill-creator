@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.880`.
+The story begins at `v1.0` and continues to `v1.49.881`.
 
-**923 chapters.** 922 have retrospectives.
+**924 chapters.** 923 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -931,3 +931,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.878](v1.49.878/00-summary.md)** — EgressContext singleton chip: `src/chips/anthropic-chip.ts` (Track 5 chip #3) · 2026-05-28
 - **[v1.49.879](v1.49.879/00-summary.md)** — EgressContext singleton chip: `src/chips/http-client.ts` (Track 5 chip #4) · 2026-05-28
 - **[v1.49.880](v1.49.880/00-summary.md)** — EgressContext singleton chip: `src/mcp/skill-installer.ts` (Track 5 chip #5) · 2026-05-28
+- **[v1.49.881](v1.49.881/00-summary.md)** — EgressContext singleton chip: `src/intelligence/ipc.ts` (Track 5 CLOSE; module-singleton variant) · 2026-05-28

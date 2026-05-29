@@ -161,6 +161,29 @@ export interface MissionForFileSummary {
   line_count: number;
 }
 
+// ─── EgressContext (v1.49.881 Track 5 CLOSE) ────────────────────────────────────
+// Module-level singleton ctx for the browser-tab fetch path.
+// Set via setIpcEgressContext(); read by invoke()'s fetch hoist.
+// This pattern avoids threading ctx? through ~20 exported wrapper functions
+// (would be high-churn for an internal API). The setter is called once at
+// app initialization; the singleton flows into every invoke() call.
+
+import {
+  ensureEgressAllowed,
+  type EgressContext,
+} from '../security/egress-context.js';
+
+let ipcEgressContext: EgressContext | undefined = undefined;
+
+/**
+ * Set the EgressContext used by the browser-tab fetch path inside invoke().
+ * Call once at app initialization; subsequent calls override.
+ * Safe to leave undefined (legacy permissive mode).
+ */
+export function setIpcEgressContext(ctx: EgressContext | undefined): void {
+  ipcEgressContext = ctx;
+}
+
 // ─── Tauri API imports (guarded) ────────────────────────────────────────────────
 
 // Lazily imported to avoid crashes in non-Tauri environments (tests, SSR).
@@ -202,7 +225,16 @@ async function invoke<T>(cmd: string, args?: Record<string, unknown>): Promise<T
     // so test environments that haven't installed an HTTP stub fail loudly.
     throw new Error(`intelligence-server: not connected (cmd=${cmd})`);
   }
-  const resp = await fetch('/api/intelligence/invoke', {
+
+  // Security: hoist-at-top before fetch in the browser-tab path. Reads the
+  // module-level singleton ipcEgressContext set via setIpcEgressContext()
+  // at app initialization (#10444 module-singleton variant of shared-helper
+  // hoist). EgressContextDenied propagates naturally per #10427 (no
+  // swallowing catch around the spawn).
+  const url = '/api/intelligence/invoke';
+  ensureEgressAllowed(ipcEgressContext, 'intelligence/ipc', 'fetch', url);
+
+  const resp = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ cmd, args: args ?? {} }),

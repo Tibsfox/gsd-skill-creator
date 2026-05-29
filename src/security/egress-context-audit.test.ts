@@ -85,7 +85,15 @@ const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
   // _fetch's retry-classification catch per #10427.
   // 5 registry adapters wired through EgressContext: npm.ts at v1.49.809;
   // cargo.ts + conda.ts + pypi.ts + rubygems.ts batch at v1.49.811.
-  'src/intelligence/ipc.ts',
+  // src/intelligence/ipc.ts wired v1.49.881 — Track 5 CLOSE chip #6
+  // (516 LOC, largest of Track 5). Module-singleton variant of
+  // shared-helper hoist (#10444): setIpcEgressContext() setter writes
+  // to module-level ipcEgressContext variable; invoke() reads it for
+  // the single fetch in browser-tab path. Avoids threading ctx? through
+  // ~20 exported wrapper functions (high-churn for an internal API).
+  // EgressContextDenied propagates naturally per #10427 (no swallowing
+  // catch around fetch). KNOWN_UNWIRED Egress 1→0 — Egress chokepoint
+  // fully wired across src/.
   // src/mcp/skill-installer.ts wired v1.49.880 — Track 5 chip #5 (401
   // LOC). ctx?: EgressContext threaded through installSkill (4th param)
   // + installFromRemote (4th param); single hoist-at-top before the
