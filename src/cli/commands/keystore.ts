@@ -41,6 +41,12 @@ import {
   ensureProcessAllowed,
   type ProcessContext,
 } from '../../security/process-context.js';
+import {
+  ensureAllowed,
+  type LoaderContext,
+} from '../../security/loader-context.js';
+
+const LOADER_SOURCE = 'cli/commands/keystore';
 
 export interface KeystoreCommandIO {
   stdout: (chunk: string) => void;
@@ -56,11 +62,21 @@ const DEFAULT_IO: KeystoreCommandIO = {
 /**
  * Resolve the `skill-creator-keystore` binary path. See module header for
  * resolution order.
+ *
+ * Accepts an optional `LoaderContext` (Tier-E security chokepoint, v1.49.782).
+ * Sync two-site hoisted-check (#10448 sub-variant): both `existsSync` sites
+ * — KEYSTORE_BIN override + candidate-loop — gate independently. Ninth
+ * LoaderContext chip at v1.49.903 — NEW sync-existsSync wire shape; sibling
+ * of v892 dacp/bus/scanner.ts async two-site hoisted-check.
  */
-export function resolveKeystoreBin(): string | null {
+export function resolveKeystoreBin(loaderCtx?: LoaderContext): string | null {
   const envOverride = process.env.KEYSTORE_BIN;
-  if (envOverride && existsSync(envOverride)) {
-    return envOverride;
+  if (envOverride) {
+    // Site 1: KEYSTORE_BIN override path. Gate before existsSync.
+    ensureAllowed(loaderCtx, LOADER_SOURCE, 'exists-check', envOverride);
+    if (existsSync(envOverride)) {
+      return envOverride;
+    }
   }
   // Release install: bin on $PATH. We can't easily check $PATH without
   // spawning `which`/`where`; we rely on `spawn` to surface ENOENT.
@@ -73,6 +89,8 @@ export function resolveKeystoreBin(): string | null {
     resolve(process.cwd(), 'src-tauri/target/debug/skill-creator-keystore'),
   ];
   for (const candidate of candidates) {
+    // Site 2: candidate-loop. Gate each candidate before existsSync.
+    ensureAllowed(loaderCtx, LOADER_SOURCE, 'exists-check', candidate);
     if (existsSync(candidate)) {
       return candidate;
     }
@@ -89,6 +107,7 @@ export async function keystoreCommand(
   args: string[],
   io: KeystoreCommandIO = DEFAULT_IO,
   ctx?: ProcessContext,
+  loaderCtx?: LoaderContext,
 ): Promise<number> {
   if (args.length === 0 || args[0] === '--help' || args[0] === '-h') {
     printHelp(io);
@@ -102,7 +121,7 @@ export async function keystoreCommand(
     return 2;
   }
 
-  const bin = resolveKeystoreBin();
+  const bin = resolveKeystoreBin(loaderCtx);
   if (!bin) {
     io.stderr('error: cannot resolve `skill-creator-keystore` binary\n');
     return 127;

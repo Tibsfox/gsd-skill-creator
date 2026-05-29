@@ -64,11 +64,11 @@ const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
   // v1.49.897: src/discovery/scan-state-store.ts chipped (hoist-at-top, N=1 load() site; class-stored ctx — THIRD instance of class-stored hoist-at-top sub-variant alongside v890+v896 → PROMOTES sub-variant; addExclude/removeExclude derived methods each emit 1 audit via transitive load(); save() out-of-scope per LoaderContext read-side design). 10 → 9.
   // v1.49.900: src/orchestrator/lifecycle/artifact-scanner.ts chipped (hoist-at-top, N=1 readdir site; module-function form per #10448 base sub-variant; ctx?: LoaderContext as optional 3rd param — non-breaking to lifecycle-coordinator.ts:91 production caller). 9 → 8.
   // v1.49.902: src/orchestrator/state/state-reader.ts chipped (class-multi-method consolidated public-entry gate; N=3 internal fs-op surfaces — access + 4× readFileSafe + readdir — all scoped under this.planningDir; one gate at public read() covers all internals via transitive call. NEW 1-instance sub-variant candidate for #10448; sibling of #10455 class-stored hoist-at-top for the N=1 case. 5 production callers in session.ts + orchestrator.ts use single-arg constructor — non-breaking via optional 2nd ctx param. Audit emission: 1 record per public read() call — 4th #10456 variant). 8 → 7.
+  // v1.49.903: src/cli/commands/keystore.ts chipped (NEW sync-existsSync wire shape; N=2 distinct existsSync sites in resolveKeystoreBin — KEYSTORE_BIN env override + candidate-loop. Sync two-site hoisted-check sub-variant of #10448; sibling of v892 dacp/bus/scanner.ts async two-site hoisted-check. loaderCtx threads independently from ProcessContext (already wired @ v861) — sibling chokepoints stay separate per #10449. Audit emission: 1 record per existsSync call). 7 → 6.
   // Sort: alphabetical-by-path (preserves git-blame discipline; LOC band
   // documented inline for chip-picking via #10445).
   'src/aminet/emulated-scanner.ts',                          // 287 LOC
   'src/atlas/spatial/pmtiles-reader.ts',                     // 262 LOC
-  'src/cli/commands/keystore.ts',                            // 179 LOC (already ProcessContext-wired @ v861; LoaderContext-wire is a separate concern)
   'src/events/skill-event-store.ts',                         // 222 LOC
   'src/intelligence/kb/store.ts',                            // 1399 LOC (largest; may warrant Role: marker review before wire)
   'src/memory/conversation-store.ts',                        // 531 LOC

@@ -229,6 +229,72 @@ describe('keystore migrate --to-keyring (v1.49.637 cluster #4 C2 stub polish)', 
   });
 });
 
+describe('keystoreCommand LoaderContext chokepoint integration (v1.49.903)', () => {
+  it('emits audit records for each existsSync site via resolveKeystoreBin', async () => {
+    const { CapturingAuditSink, defaultLoaderContext } = await import(
+      '../../security/loader-context.js'
+    );
+    const sink = new CapturingAuditSink();
+    const loaderCtx = defaultLoaderContext(sink);
+    delete process.env.KEYSTORE_BIN;
+    resolveKeystoreBin(loaderCtx);
+    // Site 2 emits 2 audit records (one per candidate in the for-loop).
+    // Site 1 only fires when envOverride is set.
+    expect(sink.records.length).toBe(2);
+    expect(sink.records.every((r) => r.op === 'exists-check')).toBe(true);
+    expect(sink.records.every((r) => r.allowed === true)).toBe(true);
+  });
+
+  it('emits site-1 audit record when KEYSTORE_BIN is set', async () => {
+    const { CapturingAuditSink, defaultLoaderContext } = await import(
+      '../../security/loader-context.js'
+    );
+    const sink = new CapturingAuditSink();
+    const loaderCtx = defaultLoaderContext(sink);
+    const stub = join(workRoot, 'fake-bin');
+    writeFileSync(stub, '#!/bin/sh\nexit 0\n');
+    chmodSync(stub, 0o755);
+    process.env.KEYSTORE_BIN = stub;
+    resolveKeystoreBin(loaderCtx);
+    // Site 1 fires + returns early → only 1 audit record (no loop).
+    expect(sink.records.length).toBe(1);
+    expect(sink.records[0]?.target).toBe(stub);
+    expect(sink.records[0]?.op).toBe('exists-check');
+  });
+
+  it('throws LoaderContextDenied when ctx rejects KEYSTORE_BIN override path', async () => {
+    const { LoaderContextDenied, CapturingAuditSink } = await import(
+      '../../security/loader-context.js'
+    );
+    const sink = new CapturingAuditSink();
+    const restrictiveCtx = { allowList: [], audit: sink };
+    process.env.KEYSTORE_BIN = '/some/restricted/path';
+    expect(() => resolveKeystoreBin(restrictiveCtx)).toThrow(LoaderContextDenied);
+    expect(sink.records.length).toBe(1);
+    expect(sink.records[0]?.allowed).toBe(false);
+  });
+
+  it('legacy permissive mode (no loaderCtx) preserves prior behavior', () => {
+    delete process.env.KEYSTORE_BIN;
+    const result = resolveKeystoreBin();
+    expect(typeof result).toBe('string');
+    expect(result).toBeTruthy();
+  });
+
+  it('threads loaderCtx through keystoreCommand to resolveKeystoreBin', async () => {
+    const { CapturingAuditSink, defaultLoaderContext } = await import(
+      '../../security/loader-context.js'
+    );
+    const sink = new CapturingAuditSink();
+    const loaderCtx = defaultLoaderContext(sink);
+    const io = makeIO();
+    const code = await keystoreCommand(['--help'], io, undefined, loaderCtx);
+    expect(code).toBe(0);
+    // Help path returns early before resolveKeystoreBin — no audit records.
+    expect(sink.records.length).toBe(0);
+  });
+});
+
 describe('keystoreCommand ProcessContext wire (v1.49.861)', () => {
   it('throws ProcessContextDenied when ctx denies the keystore binary spawn', async () => {
     const { ProcessContextDenied, CapturingProcessAuditSink } = await import(
