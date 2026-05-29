@@ -58,6 +58,7 @@ const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
   // Initial allowlist v1.49.885 — 15 entries.
   // v1.49.887: src/console/reader.ts chipped (hoist-at-top, N=1). 15 → 14.
   // v1.49.889: src/intelligence/atlas-indexer/file-walker.ts chipped (hoist-at-top, N=1 entry point). 14 → 13.
+  // v1.49.890: src/eval/calibration-adjustment-store.ts chipped (read-side gated at load(); save() out-of-scope per LoaderContext read-side design). 13 → 12.
   // Sort: alphabetical-by-path (preserves git-blame discipline; LOC band
   // documented inline for chip-picking via #10445).
   'src/aminet/emulated-scanner.ts',                          // 287 LOC
@@ -65,7 +66,6 @@ const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
   'src/cli/commands/keystore.ts',                            // 179 LOC (already ProcessContext-wired @ v861; LoaderContext-wire is a separate concern)
   'src/dacp/bus/scanner.ts',                                 // 174 LOC
   'src/discovery/scan-state-store.ts',                       // 176 LOC
-  'src/eval/calibration-adjustment-store.ts',                // 129 LOC
   'src/events/skill-event-store.ts',                         // 222 LOC
   'src/intelligence/kb/store.ts',                            // 1399 LOC (largest; may warrant Role: marker review before wire)
   'src/memory/conversation-store.ts',                        // 531 LOC

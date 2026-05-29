@@ -7,6 +7,12 @@
  * Renamed from CalibrationStore at v1.49.781 to disambiguate from
  * src/calibration/CalibrationEventStore (a separate JSONL event log).
  *
+ * Accepts an optional `LoaderContext` (Tier-E security chokepoint, v1.49.782).
+ * When provided, the store's `filePath` must be admitted by `ctx.allowList`
+ * before `load()` reads from disk. `save()` is intentionally NOT gated —
+ * LoaderContext is by design a READ-side chokepoint per its docstring; the
+ * write path is out of scope. Third LoaderContext chip at v1.49.890.
+ *
  * CAL-02: Per-tier calibration claims
  * CAL-03: model_context schema integration
  */
@@ -17,6 +23,9 @@ import { CapabilityClassSchema } from './capability-classifier.js';
 import type { CapabilityClass } from './capability-classifier.js';
 import { CalibrationAdjustmentSchema } from './model-aware-grader.js';
 import type { CalibrationAdjustment } from './model-aware-grader.js';
+import { ensureAllowed, type LoaderContext } from '../security/loader-context.js';
+
+const LOADER_SOURCE = 'eval/calibration-adjustment-store';
 
 // ============================================================================
 // Schema
@@ -48,17 +57,28 @@ function defaultAdjustment(): CalibrationAdjustment {
 export class CalibrationAdjustmentStore {
   private data: Map<CapabilityClass, CalibrationAdjustment>;
   private filePath: string;
+  private readonly ctx?: LoaderContext;
 
-  constructor(filePath: string) {
+  constructor(filePath: string, ctx?: LoaderContext) {
     this.filePath = filePath;
     this.data = new Map();
+    this.ctx = ctx;
   }
 
   /**
    * Load calibration data from file. Missing file returns defaults (no error).
+   *
+   * When ctx was provided at construction, the path must be admitted by
+   * `ctx.allowList`. Gate is hoisted ABOVE the try/catch that swallows
+   * ENOENT so `LoaderContextDenied` propagates per #10442.
    */
   async load(path?: string): Promise<void> {
     const p = path ?? this.filePath;
+
+    // Security chokepoint: gate on the resolved path before the read.
+    // Hoisted OUTSIDE the try/catch below so LoaderContextDenied propagates.
+    ensureAllowed(this.ctx, LOADER_SOURCE, 'read-file', p);
+
     try {
       const content = await fs.readFile(p, 'utf-8');
       const parsed = CalibrationFileSchema.parse(JSON.parse(content));

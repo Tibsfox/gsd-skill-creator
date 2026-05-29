@@ -3,6 +3,12 @@ import { CalibrationAdjustmentStore } from './calibration-adjustment-store.js';
 import { promises as fs } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
+import {
+  CapturingAuditSink,
+  defaultLoaderContext,
+  LoaderContextDenied,
+  type LoaderContext,
+} from '../security/loader-context.js';
 
 describe('CalibrationAdjustmentStore', () => {
   let tmpDir: string;
@@ -77,5 +83,77 @@ describe('CalibrationAdjustmentStore', () => {
 
     store.setAdjustment('small', { knownLimitationWeight: 1.5 });
     expect(store.getAdjustment('small').knownLimitationWeight).toBe(1);
+  });
+
+  describe('LoaderContext chokepoint integration (v1.49.890)', () => {
+    it('emits exactly one audit record on load when ctx is provided', async () => {
+      const sink = new CapturingAuditSink();
+      const store = new CalibrationAdjustmentStore(filePath, defaultLoaderContext(sink));
+      await store.load();
+      expect(sink.records).toHaveLength(1);
+      const rec = sink.records[0];
+      expect(rec.source).toBe('eval/calibration-adjustment-store');
+      expect(rec.op).toBe('read-file');
+      expect(rec.target).toBe(filePath);
+      expect(rec.allowed).toBe(true);
+    });
+
+    it('throws LoaderContextDenied when filePath is not in allowList', async () => {
+      const sink = new CapturingAuditSink();
+      const restrictedCtx: LoaderContext = {
+        allowList: ['/somewhere/that/does/not/match'],
+        audit: sink,
+      };
+      const store = new CalibrationAdjustmentStore(filePath, restrictedCtx);
+      await expect(store.load()).rejects.toBeInstanceOf(LoaderContextDenied);
+      expect(sink.records).toHaveLength(1);
+      expect(sink.records[0].allowed).toBe(false);
+    });
+
+    it('legacy permissive mode when ctx is undefined (load works without audit)', async () => {
+      const store = new CalibrationAdjustmentStore(filePath);
+      await store.load();
+      expect(store.getAdjustment('small').passRateAdjustment).toBe(0);
+    });
+
+    it('admits filePath via prefix-pattern (trailing slash) in allowList', async () => {
+      const sink = new CapturingAuditSink();
+      const prefixCtx: LoaderContext = {
+        allowList: [`${tmpDir}/`],
+        audit: sink,
+      };
+      const store = new CalibrationAdjustmentStore(filePath, prefixCtx);
+      await store.load();
+      expect(sink.records).toHaveLength(1);
+      expect(sink.records[0].allowed).toBe(true);
+    });
+
+    it('audits the override path when load(overridePath) is called', async () => {
+      const sink = new CapturingAuditSink();
+      // Admit BOTH constructor path and the override path
+      const ctx: LoaderContext = {
+        allowList: [/.*/],
+        audit: sink,
+      };
+      const store = new CalibrationAdjustmentStore(filePath, ctx);
+      const overridePath = join(tmpDir, 'override-calibration.json');
+      await store.load(overridePath);
+      expect(sink.records).toHaveLength(1);
+      expect(sink.records[0].target).toBe(overridePath);
+    });
+
+    it('save() is not gated by LoaderContext (read-side chokepoint by design)', async () => {
+      const sink = new CapturingAuditSink();
+      const restrictedCtx: LoaderContext = {
+        allowList: ['/somewhere/that/does/not/match'],
+        audit: sink,
+      };
+      const store = new CalibrationAdjustmentStore(filePath, restrictedCtx);
+      // save() succeeds even though the path is not in allowList — the chokepoint
+      // is intentionally read-only per LoaderContext docstring.
+      store.setAdjustment('small', { passRateAdjustment: 0.1 });
+      await expect(store.save()).resolves.toBeUndefined();
+      expect(sink.records).toHaveLength(0);
+    });
   });
 });
