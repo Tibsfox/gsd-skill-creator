@@ -84,7 +84,33 @@ When wiring a new calibratable threshold's observation source (the read side per
 
 **Anti-pattern.** Shipping the read-side wire without registering polarity-default match between CLI and (deferred) substrate auto-emit. The substrate write-side ship will need to mirror the CLI's `--kind` default to keep #10439's statistical compatibility — bake this into the recipe's release-notes so the deferred ship doesn't drift.
 
+### Substrate-wrapper pattern for calibratable thresholds (Lesson #10452)
+
+The substrate write-side ship in #10439's three-ship duality (CLI manual + substrate auto-emit) follows a thin-function shape that has now been applied twice (v891 observation-retention, v893 token-budget-ceiling). The pattern is:
+
+1. **A small module** (`src/<domain>/<class>-substrate.ts`) exporting a single `runX` function.
+2. **A minimal config-shape interface** (`X_Config`) avoiding import of the full operator-config type.
+3. **An options bag** with three standard flags: `autoEmit?: boolean` (default true), `eventsPath?: string` (override the default JSONL path), `defaultKind?: <Class>EventKind` (override the auto-emit kind).
+4. **The substrate body** does one of:
+   - Bridges to an existing substrate (e.g., `RetentionManager.prune`) and returns its result, OR
+   - Performs a pure threshold comparison and returns the outcome.
+5. **The auto-emit** is fire-and-forget per #10437: build the event, call `append<Class>Event(event, appendOptions).catch(() => {})`. The substrate's return value MUST NOT depend on the auto-emit's success.
+
+**Two sub-variants of the kind selection:**
+
+- **Default-fixed** (v891 retention): substrate returns work-count; polarity is operator-intent; default kind is the conservative bias (e.g., `too_aggressive` favors raising retention to keep more data). Operator flips via CLI manual recorder.
+- **Outcome-driven** (v893 ceiling-check): substrate IS a comparison; polarity falls out of the result; default kind is the comparison outcome (e.g., `under_budget` when usage < ceiling, `blocked` when usage >= ceiling). The `defaultKind` option still allows operator override.
+
+**Discriminator** between sub-variants: *does the substrate's natural output determine polarity?* If yes → outcome-driven. If no → default-fixed (pick conservative bias + document rationale + pin via test).
+
+**Cross-link**: #10451 captures the read-side procedure (the 7-step read-side recipe); #10452 captures the write-side procedure (the substrate-wrapper pattern). Together they enable both halves of #10439's CLI manual + substrate auto-emit duality. The 3-ship-per-threshold staging (observation source registration → CLI manual recorder → substrate auto-recorder) is the same; #10452 names the THIRD ship's structural pattern.
+
+**Evidence.** v891 (`runObservationRetentionSweep` — default-fixed) + v893 (`runTokenBudgetCeilingCheck` — outcome-driven). Both followed the substrate-wrapper shape; v893 ~25min from start to ship (recipe-mature).
+
+**Anti-pattern.** Forcing default-fixed shape on outcome-driven substrates (or vice-versa). The polarity-derivation question is the discriminator; don't paper over the substrate's natural shape.
+
 ## Lesson reference
 
 - **#10425** — Two-sided likelihood-ratio e-processes on bounded binary observations are insensitive to unanimous direction; use Bonferroni-combined one-sided instead. v795 candidate, promoted at v802.
-- **#10451** — Calibrate-axis read-side wire recipe (7-step pattern). Two-instance promotion at v886: v837 predictive + v884 observation-retention. Sibling of #10439's three-ship duality (read-side + CLI manual + substrate auto-emit); #10451 captures the read-side procedure.
+- **#10451** — Calibrate-axis read-side wire recipe (7-step pattern). Two-instance promotion at v886: v837 predictive + v884 observation-retention. **STABLE at v888** (3rd instance: token_budget.max_percent). Sibling of #10439's three-ship duality (read-side + CLI manual + substrate auto-emit); #10451 captures the read-side procedure.
+- **#10452** — Substrate-wrapper pattern for calibratable thresholds (write-side procedure). v891 retention (default-fixed sub-variant) + v893 ceiling-check (outcome-driven sub-variant), promoted at v895. Sibling of #10451: #10451 is the read-side procedure, #10452 is the write-side procedure; both ship under #10439's three-ship duality.

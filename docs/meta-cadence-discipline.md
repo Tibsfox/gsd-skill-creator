@@ -287,6 +287,57 @@ flag the missing halves as deferred-but-tracked.
 
 ---
 
+## Lesson #10453 — Substrate→calibration end-to-end integration test pattern (verify-axis closing-move)
+
+**Codified at:** v1.49.895 (from v856 predictive-low-confidence + v894 observation-retention two-instance evidence).
+
+The verify-axis trigger from #10428 says: each calibratable threshold should have an integration test verifying the substrate-to-caller wire within 10 ships of the threshold first being wired by a production caller. Per #10438, unit tests against mocks prove the wire's signature; integration tests against real collaborators prove the wire's behavior. Lesson #10453 captures the canonical test shape for the closing-move integration test.
+
+### The 7-step test shape
+
+1. **Temp dir setup** via `mkdtempSync(join(tmpdir(), '<class>-verify-'))` in `beforeEach`; cleanup via `rmSync(tempDir, { recursive: true, force: true })` in `afterEach`. Test file lives at `tests/integration/<class>-end-to-end.integration.test.ts`.
+2. **Substrate-side write** — invoke the substrate function with retention/threshold/usage arguments that will trigger the auto-emit. The substrate's return value is the first assertion (prunedCount, underBudget, etc.).
+3. **Fire-and-forget wait** — `await new Promise<void>((resolve) => setTimeout(resolve, 50))` to let the auto-emit's `mkdir + appendFile` chain settle on real disk. Captured in Lesson #10454.
+4. **Calibration-loop read** — `await loadObservationsForThreshold('<threshold>', { <class>EventsPath: eventsPath })`.
+5. **Polarity assertion** — `expect(observations[0]?.value).toBe(<expected polarity>)`. For multi-event tests, accumulate polarities and assert the net sum (which encodes the operator-facing calibration signal).
+6. **Missing-file tolerance** — call `loadObservationsForThreshold` with a path to a never-written file; assert `observations` is `[]`. Pins the writer-contract tolerance.
+7. **Malformed-line tolerance** — pre-seed the JSONL with `'{not valid json\n'`, then write a valid event via the substrate; assert the reader sees exactly 1 event (silent-skip malformed). Pins the writer-contract tolerance.
+
+### Evidence (2 instances)
+
+| Threshold | First substrate-write | Integration test | Ships-after-wire |
+|---|---|---|---|
+| `predictive.low_confidence_threshold` | v1.49.846 | v1.49.856 | 10 (canonical trigger) |
+| `observation.retention_days` | v1.49.891 | v1.49.894 | 3 (early within budget) |
+
+Both instances follow the 7-step shape. v894 shipped early within budget; nothing prevents earlier ship when substrate is fresh and bug-detection signal is strongest.
+
+### How to apply
+
+After a calibratable threshold's substrate auto-emit ships (the third ship in #10439's three-ship duality), file the integration test ship within 10 ships. Use this test shape; mirror the v856 or v894 file as a starting skeleton (change the substrate function, the events module imports, the polarity-mapping facts).
+
+### Forward-test trigger
+
+Any future calibratable-threshold substrate ship. The verify-axis budget extends 10 ships from that substrate's ship version. v1.49.893 (token_budget.max_percent) is the next pending integration test; budget extends to v1.49.903.
+
+### Anti-patterns
+
+- ❌ Skipping the multi-event accumulation test. Single-event tests prove the wire works once; multi-event tests prove polarity flows through ordered writes (the calibration loop's actual interface).
+- ❌ Asserting on the substrate's return value without also asserting on the calibration loop's read. The integration test's job is to prove the WIRE — both halves must be exercised.
+- ❌ Using `setImmediate` instead of `setTimeout(50ms)`. The fire-and-forget Promise's `mkdir + appendFile` chain needs real OS time to settle (see Lesson #10454).
+- ❌ Omitting missing-file or malformed-line tolerance tests. These pin the writer's contract; without them, a future refactor could break tolerance silently.
+
+### Cross-references
+
+- **#10428** — meta-cadence verify-axis; this lesson formalizes the canonical closing-move test shape.
+- **#10438** — mocks-prove-signature, integration-proves-behavior; this lesson IS the canonical "integration-proves-behavior" recipe for calibratable thresholds.
+- **#10437** — subscriber-gated observability; the fire-and-forget wait pattern in step 3 is the test-side complement of #10437's substrate-side discipline.
+- **#10451** — read-side wire recipe (this lesson tests the wire that #10451's recipe builds).
+- **#10452** — substrate-wrapper pattern (this lesson tests the wire that #10452's pattern builds).
+- **#10454** — `setTimeout(50ms)` test-side wait (this lesson uses #10454's pattern in step 3).
+
+---
+
 ## Cross-references
 
 - [Counter-cadence discipline](counter-cadence-discipline.md) — the

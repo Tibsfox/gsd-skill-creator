@@ -481,9 +481,72 @@ swallow-catch around the gated operation:
   home for the inline helper; the wrapper form can live in a sibling
   utility module.
 
+## Lesson #10454 — Fire-and-forget test-side wait via `setTimeout(50ms)` (not `setImmediate`)
+
+**Codified at:** v1.49.895 (from v891 + v893 + v894 three-instance evidence).
+
+When asserting on a fire-and-forget Promise's side effects (e.g., its `mkdir + appendFile` chain has actually settled on disk), the test-side wait MUST use a real timeout, not `setImmediate(resolve)` or `process.nextTick`. The fire-and-forget pattern (per #10437) detaches the Promise from the caller's `await` chain; the OS-level I/O needs wall-clock time to complete, not just an event-loop tick.
+
+### The pattern
+
+```typescript
+async function waitForAutoEmit(): Promise<void> {
+  await new Promise<void>((resolve) => setTimeout(resolve, 50));
+}
+
+// in the test:
+runSubstrateAction(...);   // fires the auto-emit
+await waitForAutoEmit();   // 50ms is enough for mkdir + appendFile on real disk
+const events = await readEvents(eventsPath);
+expect(events).toHaveLength(1);
+```
+
+### Why `setTimeout(50ms)` and not `setImmediate`
+
+The fire-and-forget auto-emit chain is roughly:
+
+1. Build the event object (synchronous, microtask-fast).
+2. `await mkdir(dirname(path), { recursive: true })` (kernel sys-call; OS-level).
+3. `await appendFile(path, line, 'utf8')` (kernel sys-call; OS-level).
+4. `.catch(() => {})` swallow.
+
+Steps 2 and 3 are real fs operations that require OS scheduling. `setImmediate(resolve)` only advances the event loop by one tick — the kernel may not have completed the writes. `setTimeout(50ms)` gives enough wall-clock for typical mkdir + appendFile to complete on real disk (verified empirically v891 + v893 + v894).
+
+### Evidence (3 instances)
+
+| Ship | Test file | Substrate | Fire-and-forget surface |
+|---|---|---|---|
+| v1.49.891 | `src/observation/retention-substrate.test.ts` | `runObservationRetentionSweep` | `appendObservationRetentionEvent` |
+| v1.49.893 | `src/token-budget/ceiling-substrate.test.ts` | `runTokenBudgetCeilingCheck` | `appendTokenBudgetMaxEvent` |
+| v1.49.894 | `tests/integration/observation-retention-end-to-end.integration.test.ts` | `runObservationRetentionSweep` (integration) | `appendObservationRetentionEvent` |
+
+All three use the same `waitForAutoEmit` helper function shape. Promoting to ESTABLISHED at v895 with 3 instances of identical use.
+
+### How to apply
+
+When testing any function that triggers a fire-and-forget Promise per #10437, define a local `waitForAutoEmit` helper at the top of the test file and call it between the substrate-action and the assertion. Don't try to `await` the inner Promise (that would defeat fire-and-forget).
+
+### Anti-patterns
+
+- ❌ **`setImmediate(resolve)`** — event-loop tick is too fast; kernel I/O hasn't completed.
+- ❌ **`process.nextTick`** — same problem at a finer granularity.
+- ❌ **No wait at all** — race condition; passes locally on fast disk, flakes on CI under load.
+- ❌ **Awaiting the fire-and-forget Promise directly** — defeats the contract; the production substrate doesn't await.
+
+### Limitation
+
+The `.catch(() => {})` swallow is the structural protection for fire-and-forget failure modes; tests can't reliably trigger the failure path without OS-level setup (read-only filesystem, ENOSPC simulation). Both v891 and v893 tests assert only that the substrate function returns a valid result — they don't actually exercise the catch arm. This is a known test-discipline limitation; the protection is correct-by-construction rather than test-verified.
+
+### Cross-references
+
+- **#10427** — parent discipline; fire-and-forget IS the canonical "accessory surface fails silently" shape.
+- **#10437** — subscriber-gated observability hook; this lesson is the test-side complement of #10437's substrate-side discipline.
+- **#10453** — substrate→calibration end-to-end integration test pattern; uses this `setTimeout(50ms)` pattern in its step 3.
+
 ## Lesson reference
 
 - **#10427** — Forensic/dashboard/observability surfaces fail silently; load-bearing surfaces fail loudly. v799–v801 three-instance candidate, promoted at v802.
 - **#10437** — Subscriber-gated observability-only context-hook pattern. v810 + v826 (`onPredictions`) + v830 + v832 (`fallbackProvider`) four-instance evidence set, promoted at v840 as a refinement of #10427's accessory-surface contract.
 - **#10442** — Re-throw `ProcessContextDenied` from CLI swallow-catch. v820 + v842 two-instance evidence, promoted at v847 as a refinement of #10427's load-bearing-fails-loudly rule.
 - **#10446** — Multi-catch helper (`rethrowIfDenied` inline form / `callOrRethrowDenial` higher-order form) for chokepoint denials. ~30-instance evidence across v868-v882 Track 4+5 chokepoint campaigns, promoted at v883 as a refinement of #10442 generalized across ProcessContext + EgressContext (and LoaderContext when its campaign reaches catch-site multiplicity).
+- **#10454** — Fire-and-forget test-side wait via `setTimeout(50ms)`. v891 + v893 + v894 three-instance evidence, promoted at v895 as a test-discipline refinement of #10437's substrate-side fire-and-forget contract.
