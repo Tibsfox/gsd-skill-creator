@@ -2,7 +2,7 @@
 
 **Surface:** Designing a new surface (function, module, CLI flag, skill prompt section, hook) where the asymmetric cost of silent vs loud failure is in play; reviewing an existing surface that has been emitting either spurious user-facing errors or invisible silent degradations.
 
-**Codified at:** v1.49.802 (lesson cluster from v1.49.799 audit log + v1.49.800 watch loop + v1.49.801 `/sc:status` Step 5.5 — three independent instances of best-effort-silent failure contracts in one chained session); v1.49.840 (extended with #10437 subscriber-gated context-hook pattern); v1.49.847 (extended with #10442 re-throw ProcessContextDenied from CLI swallow-catch).
+**Codified at:** v1.49.802 (lesson cluster from v1.49.799 audit log + v1.49.800 watch loop + v1.49.801 `/sc:status` Step 5.5 — three independent instances of best-effort-silent failure contracts in one chained session); v1.49.840 (extended with #10437 subscriber-gated context-hook pattern); v1.49.847 (extended with #10442 re-throw ProcessContextDenied from CLI swallow-catch); v1.49.883 (extended with #10446 multi-catch helper for ProcessContextDenied + EgressContextDenied re-throw across ~30 catch sites from the v868-v882 Track 4+5 chokepoint cluster).
 
 ## Why this discipline exists
 
@@ -310,8 +310,180 @@ needs to propagate authorization-class failures.
 - **Security chokepoints** — the `ensureProcessAllowed` placement guidance
   is the structural prerequisite for the re-throw shape.
 
+## Multi-catch helper for chokepoint denials (Lesson #10446)
+
+**Codified at:** v1.49.883 (from ~30-instance evidence across the
+v868-v882 Track 4 ProcessContext + Track 5 EgressContext chip clusters).
+
+#10442 codified the per-catch single-class re-throw. When a chokepoint
+campaign chips many call sites across both ProcessContext AND
+EgressContext, the per-catch re-throw multiplies into ~30 nearly
+identical inline `if (err instanceof XContextDenied) throw err;` lines
+across the codebase. The discipline survives — every site re-throws —
+but the boilerplate becomes mechanical.
+
+The refinement is a **helper** that hides the multi-class type-check.
+Two forms; pick the one that matches the catch shape.
+
+### Inline helper form
+
+```ts
+// src/security/index.ts (or co-located with the chokepoints):
+export function rethrowIfDenied(err: unknown): void {
+  if (err instanceof ProcessContextDenied) throw err;
+  if (err instanceof EgressContextDenied) throw err;
+  // LoaderContextDenied joins when the LoaderContext campaign reaches
+  // catch-site multiplicity high enough to justify the import.
+}
+```
+
+Used at the catch block:
+
+```ts
+try {
+  await fetchOrSpawn();
+} catch (err) {
+  rethrowIfDenied(err);
+  output({ error: String(err) });
+  process.exit(1);
+}
+```
+
+### Higher-order wrapper form
+
+```ts
+export async function callOrRethrowDenial<T>(
+  fn: () => Promise<T>,
+): Promise<T | undefined> {
+  try {
+    return await fn();
+  } catch (err) {
+    if (err instanceof ProcessContextDenied) throw err;
+    if (err instanceof EgressContextDenied) throw err;
+    return undefined;  // operational-failure default; caller can detect.
+  }
+}
+```
+
+Used at the call site:
+
+```ts
+const result = await callOrRethrowDenial(() => fetchOrSpawn());
+if (result === undefined) { /* operational failure path */ }
+```
+
+### Which form to pick
+
+- **Inline helper** — use when the catch block has bespoke
+  error-reporting logic (CLI output, JSON serialization, exit-code
+  selection). The helper re-throws denials; the rest of the catch
+  block runs unchanged for operational errors. This is the form that
+  matches most #10442 catch sites — the catch block has work to do.
+- **Higher-order wrapper** — use when the caller's "operational
+  failure" path is a simple undefined / null / sentinel return. The
+  wrapper hides the try/catch entirely; the caller becomes a single
+  expression with a typed result. Fits modules where operational
+  failures degrade gracefully without per-call recovery logic.
+
+### Why this refinement matters
+
+Without the helper, every new chip ship adds 1–N inline re-throw
+lines. By Track 4 close (v875), the running total across both
+chokepoint clusters reached ~30 inline re-throws. Each is correct;
+the discipline holds. But:
+
+- **Drift surface area scales with N.** Each re-throw line is a place
+  where a future refactor can forget to update when LoaderContextDenied
+  joins. Centralizing to one helper means one site to update.
+- **Audit fidelity.** The helper's body is the source of truth for
+  "which denials propagate." Reading the catch block of any
+  chokepoint-adjacent module immediately shows the discipline at work.
+- **Test surface.** A single test for `rethrowIfDenied` covers all
+  catch sites by reference; per-call tests asserting the re-throw
+  shape are no longer needed.
+
+### Evidence (~30 instances across v868-v882)
+
+Track 4 (ProcessContext, v870-v875):
+
+| Ship | #10427 catches |
+|---|---|
+| v1.49.870 | 5 |
+| v1.49.871 | 4 |
+| v1.49.872 | 0 (hoist-at-top; no catch block) |
+| v1.49.873 | 11 |
+| v1.49.874 | 3 |
+| v1.49.875 | 1 |
+
+Track 5 (EgressContext, v876-v881):
+
+| Ship | #10427 catches |
+|---|---|
+| v1.49.876 | 1 |
+| v1.49.877 | 1 |
+| v1.49.878 | 1 |
+| v1.49.879 | 1 |
+| v1.49.880 | 0 (hoist-at-top; no catch block) |
+| v1.49.881 | 0 (hoist-at-top; no catch block) |
+
+Total: **28 re-throw instances** across 12 chip ships, plus a small
+number from earlier campaigns (v820, v842 the #10442 instances; v853
+git-collector). The substrate-of-evidence is well past the 2-instance
+promotion bar.
+
+### How to apply
+
+When adding a chokepoint wire to a file that has an existing
+swallow-catch around the gated operation:
+
+1. **First — try to hoist `ensure*Allowed` OUTSIDE the try/catch.**
+   This is the preferred shape per `docs/security-chokepoints.md`.
+   When hoisting is possible, you don't need the helper at all.
+2. **If hoisting is structurally impossible** (the catch wraps the
+   user-input → operation translation; the operation itself depends
+   on a value computed inside the try), apply the helper.
+3. **Import the helper** from `src/security/index.ts` (inline form)
+   or from a `safety` utility module (wrapper form).
+4. **Insert `rethrowIfDenied(err)` as the FIRST line of the catch
+   block** (inline form). Or wrap the call in `callOrRethrowDenial`
+   (wrapper form).
+5. **Add a test** asserting the load-bearing denial path: inject a
+   `*ContextDenied` thrower; assert it propagates past the catch
+   block; assert that an operational error still gets absorbed.
+
+### Anti-patterns
+
+- ❌ **Inline `if (err instanceof XContextDenied) throw err;` at the
+  catch site instead of importing the helper.** Each new chip ship
+  adds one more drift surface. The helper is the source of truth;
+  inline duplication defeats the centralization.
+- ❌ **Combining the helper with a `throw err` for unrelated error
+  classes.** The helper's contract is narrow: only chokepoint
+  denials propagate. Mixing in `instanceof TimeoutError` etc. blurs
+  the contract and surprises future operators expecting the helper's
+  body to enumerate ONLY denials.
+- ❌ **Importing the helper but placing it AFTER `console.error` or
+  `output()` calls.** Same anti-pattern as #10442 — the
+  error-reporting code runs once before the helper re-throws, then
+  once again at the outer catch.
+- ❌ **Using the wrapper form when the catch block has bespoke
+  reporting logic.** The wrapper's "operational failure" path
+  collapses to `undefined`, hiding information the caller needed.
+  Use the inline form when error detail matters at the catch site.
+
+### Cross-references
+
+- **#10427** — parent discipline; the helper IS a structural shape of
+  #10427's load-bearing-fails-loudly contract for chokepoint denials.
+- **#10442** — per-catch single-class re-throw; this lesson generalizes
+  #10442's pattern across multiple chokepoint classes.
+- **Security chokepoints** — the chokepoint module is the canonical
+  home for the inline helper; the wrapper form can live in a sibling
+  utility module.
+
 ## Lesson reference
 
 - **#10427** — Forensic/dashboard/observability surfaces fail silently; load-bearing surfaces fail loudly. v799–v801 three-instance candidate, promoted at v802.
 - **#10437** — Subscriber-gated observability-only context-hook pattern. v810 + v826 (`onPredictions`) + v830 + v832 (`fallbackProvider`) four-instance evidence set, promoted at v840 as a refinement of #10427's accessory-surface contract.
 - **#10442** — Re-throw `ProcessContextDenied` from CLI swallow-catch. v820 + v842 two-instance evidence, promoted at v847 as a refinement of #10427's load-bearing-fails-loudly rule.
+- **#10446** — Multi-catch helper (`rethrowIfDenied` inline form / `callOrRethrowDenial` higher-order form) for chokepoint denials. ~30-instance evidence across v868-v882 Track 4+5 chokepoint campaigns, promoted at v883 as a refinement of #10442 generalized across ProcessContext + EgressContext (and LoaderContext when its campaign reaches catch-site multiplicity).

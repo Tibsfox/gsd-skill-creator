@@ -2,7 +2,7 @@
 
 **Surface:** Tier-E security chokepoints — three sibling modules with a shared shape that gate filesystem reads, network egress, and child-process spawn behind an optional `ctx?` parameter.
 
-**Codified at:** v1.49.782 (LoaderContext, first instance); v1.49.806 (EgressContext + ProcessContext, second and third instances; this doc); v1.49.847 (extended with Lesson #10441 DI-executor + tokenized-argv wire shape from v825 + v843 three-instance evidence).
+**Codified at:** v1.49.782 (LoaderContext, first instance); v1.49.806 (EgressContext + ProcessContext, second and third instances; this doc); v1.49.847 (extended with Lesson #10441 DI-executor + tokenized-argv wire shape from v825 + v843 three-instance evidence); v1.49.883 (extended with Lesson #10449 execFile vs shell-exec audit target accuracy from v853 + v874 two-instance evidence).
 
 ## What this doc catalogs
 
@@ -159,6 +159,133 @@ Five structural properties define the shape:
 - #10427 — failure-mode contracts; the `ensureProcessAllowed` call sits
   at the function root of the default executor, OUTSIDE any swallow-catch.
 
+## execFile vs shell-exec audit target accuracy (Lesson #10449)
+
+**Codified at:** v1.49.883 (from v853 git-collector + v874 safeExecFile
+two-instance evidence).
+
+When wiring a ProcessContext chokepoint, the audit record's `command`
+field SHOULD name the actual binary being spawned — not the shell
+that's about to interpret the argv. The choice between `execFile`
+(direct binary execution) and `exec` (shell-mediated) determines
+which name lands in the audit log.
+
+### The asymmetry
+
+```ts
+// shell-exec form (Node `child_process.exec`):
+ensureProcessAllowed(ctx, source, 'exec', 'sh', ['-c', cmdString]);
+exec(cmdString);
+// audit record names: sh -c "<cmd>"
+
+// direct-exec form (Node `child_process.execFile`):
+ensureProcessAllowed(ctx, source, 'exec-file', exeName, argv);
+execFile(exeName, argv);
+// audit record names: <exeName> <argv...>
+```
+
+For audit fidelity, `<exeName> <argv...>` is preferable for three
+reasons:
+
+1. **The audit log answers "what binary ran?" directly.** A grep for
+   `git ` or `npm ` returns the actual git/npm invocations, not every
+   shell-mediated call.
+2. **Allow-list matching is more precise.** A pattern like
+   `^git \(clone\|fetch\)` matches direct-exec records but requires
+   `^sh -c "git \(clone\|fetch\)` matching against the shell-exec
+   record, and the inner cmd may have quoting variations that defeat
+   the match.
+3. **Reduces blast radius of allow-list over-grants.** Allowing
+   `sh -c` is broad — it admits arbitrary shell-mediated commands
+   under one allow-list entry. Allowing `git` admits only git
+   invocations.
+
+### When direct-exec is the right shape
+
+Use `execFile` (and audit as the direct binary target) when:
+
+- The command is a static binary invocation (no shell features
+  required: no globs, no pipes, no redirection, no variable expansion).
+- The argv is composable from typed values (not interpolated string
+  fragments).
+- The audit allow-list should distinguish between binary classes.
+
+This is the **majority** of chokepoint-gated spawn sites in the
+codebase. Git operations, npm scripts, native binary invocations all
+fit. The default ship shape SHOULD be direct-exec.
+
+### When shell-exec remains appropriate
+
+Use `exec` (and accept the `sh` audit record) when:
+
+- The command genuinely requires shell features: piping (`|`),
+  redirection (`> file`), variable expansion (`$VAR`), globbing.
+- The command is constructed by an operator template (e.g., a hook
+  script's user-provided command line) and forcing direct-exec would
+  require parsing the shell language.
+- The fidelity loss is a known cost the audit log explicitly accepts
+  (e.g., a "shell-hook" tag in the audit op-name flags this for
+  reviewers).
+
+In these cases, the shell-exec form is correct; the audit fidelity
+loss is a known property of the surface.
+
+### Evidence (2 instances)
+
+| Ship | File | Form before | Form after | Audit fidelity gain |
+|---|---|---|---|---|
+| v1.49.853 | `src/upstream-intelligence/git-collector.ts` | `exec("git clone ...")` audit `sh` | `execFile("git", ["clone", ...])` audit `git` | Direct git invocation distinguishable from shell-mediated callers. |
+| v1.49.874 | `src/learn/acquirer.ts` | `exec(cmdString)` audit `sh` | `safeExecFile(binary, argv)` audit `<binary>` | 9 spawn sites now record their actual binary targets instead of all reading `sh`. |
+
+Both ships replaced shell-exec with `execFile` (or a thin wrapper)
+and gained audit-fidelity for the actual binary target. Neither lost
+required shell semantics — both commands were static binary
+invocations.
+
+### How to apply
+
+When wiring a `ProcessContext` chokepoint to a file that currently
+uses `child_process.exec` or `child_process.execSync`:
+
+1. **Audit the command.** Does it require shell features (pipes,
+   globs, redirection, variable expansion)? If no, proceed to direct-
+   exec. If yes, keep shell-exec but document the fidelity trade-off
+   in the audit-op tag.
+2. **Tokenize the cmd string** into `[exeName, ...argv]`. The tokenize
+   step composes with #10441's DI-executor wire shape.
+3. **Replace `exec(cmdString)` with `execFile(exeName, argv)`** (or
+   `spawn(exeName, argv)` if streaming).
+4. **Update the `ensureProcessAllowed` call** to pass `exeName` (not
+   `'sh'`) and `argv` (not `['-c', cmdString]`).
+5. **Update the audit-op tag** from `'exec'` (shell-mediated) to
+   `'exec-file'` (direct) so the audit record encodes the shape.
+6. **Tighten the allow-list** to match the actual binary classes the
+   file invokes (e.g., `git`, `npm`, not `sh`).
+
+### Anti-patterns
+
+- ❌ **Keeping `exec(cmdString)` "because it works" when the command
+  is a static binary invocation.** The audit record will read `sh`
+  forever, and the allow-list either over-grants `sh -c` (admitting
+  arbitrary shell commands) or accumulates fragile cmd-string-prefix
+  matches.
+- ❌ **Tokenizing manually on `' '` without `trim()`** — empty argv
+  entries from leading/trailing whitespace defeat the allow-list match.
+  Use `cmd.trim().split(/\s+/)` (cross-ref #10441 anti-pattern).
+- ❌ **Recording `'exec'` as the audit op-name for a direct-exec call.**
+  The op-name is part of the audit record's semantics; `'exec-file'`
+  signals "we know what binary this is" to reviewers and grep patterns.
+
+### Cross-references
+
+- **#10427** — parent discipline; audit fidelity is a property of the
+  load-bearing audit surface.
+- **#10441** — DI-executor + tokenized-argv wire shape; tokenization
+  is the structural prerequisite for direct-exec.
+- **#10433** — internal-helper pattern; v1.49.874's `safeExecFile` is
+  an internal-helper-with-wrapper variant that combines the
+  tokenize + direct-exec + `ensureProcessAllowed` shape into one helper.
+
 ## Anti-patterns
 
 - ❌ **Calling `ensure*Allowed` inside a try/catch that swallows errors.** The chokepoint denial is a load-bearing signal and must propagate. The fix: hoist the `ensure*Allowed` call OUT of the try block.
@@ -170,6 +297,7 @@ Five structural properties define the shape:
 
 - **Lesson #10433** — Internal-helper pattern for `ctx?` threading. When a file has an internal helper wrapping the side-effecting op, thread `ctx?` through the helper for `1 LOC × N callsites`; without a helper, the cost is `N LOC × N callsites`. Audit each batch-chip candidate for a helper first. Codified v1.49.824 from v809 + v820 case studies.
 - **Lesson #10441** — DI-executor + tokenized-argv wire shape for ProcessContext. When a module exposes a factory with an optional injected executor for testability, the default executor closes over `ctx?`, tokenizes the cmd string to extract executable + argv, and calls `ensureProcessAllowed` before delegating. A sub-class of #10433: the default executor IS the internal helper. Codified v1.49.847 from v825 + v843 three-instance evidence.
+- **Lesson #10449** — `execFile` vs shell-`exec` audit target accuracy. Direct-exec records the actual binary; shell-exec records `sh`. Prefer direct-exec for new ProcessContext wires when no shell features are required. Refines #10427's audit-fidelity component. Codified v1.49.883 from v853 + v874 two-instance evidence.
 - **Lesson #10414** — Optional `ctx?` parameter is the cheapest retrofit pattern for chokepoint introduction. `docs/architecture-retrofit-patterns.md`.
 - **Lesson #10426** — Extract per-class registries at the SECOND class instance. The three chokepoints are themselves the validating instance set for the discipline — they are siblings with the same shape but specialized targets, not parameterizations of a generic abstraction (per #10423, the lightest wire that satisfies the verdict).
 - **Lesson #10427** — Failure-mode contracts. Security chokepoint denials are load-bearing and must propagate; do not swallow `*ContextDenied` exceptions. `docs/failure-mode-contracts.md`.

@@ -48,7 +48,9 @@ describe('check-stale-known-unwired tool', () => {
     expect(parsed.reports.length).toBe(2);
     const processReport = parsed.reports.find((r) => r.audit === 'ProcessContext');
     expect(processReport).toBeDefined();
-    expect(processReport.entryCount).toBeGreaterThan(0);
+    // Both chokepoints fully wired at v881; KNOWN_UNWIRED entryCount may be 0.
+    expect(typeof processReport.entryCount).toBe('number');
+    expect(processReport.entryCount).toBeGreaterThanOrEqual(0);
   });
 });
 

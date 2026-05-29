@@ -2,7 +2,7 @@
 
 **Surface:** Introducing a chokepoint, interface, or generator-template to N existing modules with high call-site multiplicity; authoring a generator that may run on partial input.
 
-**Codified at:** v1.49.784 (lesson cluster from v1.49.782 LoaderContext chokepoint + v1.49.783 STATE.md normalizer fix); v1.49.802 (extended with Lesson #10426 second-instance cross-class registry extraction from the v1.49.795-801 T1.1 arc); v1.49.847 (extended with Lesson #10440 production-caller path-narrowing from v845 + v846 two-instance evidence); v1.49.868 (extended with Lesson #10444 size-ascending chip-pick reveals wire-shape diversity from v858-v862 Process + v863-v867 Egress two-cluster evidence).
+**Codified at:** v1.49.784 (lesson cluster from v1.49.782 LoaderContext chokepoint + v1.49.783 STATE.md normalizer fix); v1.49.802 (extended with Lesson #10426 second-instance cross-class registry extraction from the v1.49.795-801 T1.1 arc); v1.49.847 (extended with Lesson #10440 production-caller path-narrowing from v845 + v846 two-instance evidence); v1.49.868 (extended with Lesson #10444 size-ascending chip-pick reveals wire-shape diversity from v858-v862 Process + v863-v867 Egress two-cluster evidence); v1.49.883 (extended with Lessons #10445 spawn-site count as primary wire-shape predictor, #10447 router-with-conditional-bypass, #10448 shared-helper hoist sub-variant catalog — all three from the v868-v882 post-Track-5 codify ship).
 
 ## Why this discipline exists
 
@@ -234,6 +234,264 @@ peer-dependency surface that #10440 flags as unnecessary.
 (10-chip wire-shape catalog table; one wire shape per chip, all
 distinct, ascending by LOC within each track).
 
+### Spawn-site count as primary wire-shape predictor (Lesson #10445)
+
+LOC is a coarse predictor of wire-shape complexity. The richer predictor
+is **spawn-site count (N)** — how many places in the file issue the
+side-effecting operation the chokepoint is gating (spawn, fetch, read).
+
+**Why N dominates LOC at the extremes.** Two counter-examples from the
+v868-v882 campaign:
+
+- **v1.49.872 — `src/cli/commands/pic2html.ts` (311 LOC, N=1).**
+  Mid-band LOC but a single spawn site. The viable shape was
+  **hoist-at-top**, the simplest in the catalog — not the
+  internal-helper or DI-executor shapes that the 311-LOC band would
+  predict from #10444's LOC heuristic.
+- **v1.49.875 — `src/chipset/harness-integrity.ts` (1440 LOC, N=1).**
+  Largest LOC in the entire Track 4 cluster but still N=1. The viable
+  shape was again **hoist-at-top** at the single spawn site. The 1440
+  LOC's complexity lived in the surrounding orchestration, NOT in
+  spawn-call multiplicity.
+
+In both cases, the LOC heuristic would have predicted a richer shape
+(internal-helper, DI-executor, or class-private-method). The actual
+shape was determined by N=1.
+
+**How to apply.** When sizing a chip ship:
+
+1. **First pass — sort by LOC ascending** per #10444. This is the
+   cheap heuristic and stays the default picking order.
+2. **Second pass — for each candidate, count spawn/fetch sites (N)
+   before estimating wall-clock.** A high-LOC file with N=1 is a
+   small ship; a mid-LOC file with N=10 is a larger ship.
+3. **The wire shape selection then follows N more than LOC:**
+   - **N=1 → hoist-at-top** (regardless of LOC). The shape is the
+     simplest viable wire.
+   - **N=2 + co-located → two-site hoisted-check.** Both hoists are
+     mechanical; the catch-block #10427 re-throw is the only nuance.
+   - **N≥3 with a pre-existing internal helper → internal-helper
+     (#10433).** Thread `ctx?` through the helper once.
+   - **N≥3 without an internal helper but with a factory + injected
+     executor → DI-executor (#10441).** Wrap the default executor.
+   - **N≥3 without helper or executor seam → per-callsite hoists.**
+     Highest cost; consider whether a refactor extracting an internal
+     helper is the better first step.
+
+**Evidence (2 instances).**
+
+| Ship | File | LOC | N | LOC-heuristic prediction | Actual shape |
+|---|---|---|---|---|---|
+| v1.49.872 | `cli/commands/pic2html.ts` | 311 | 1 | hoist-outside-Promise / closure-capture | hoist-at-top |
+| v1.49.875 | `chipset/harness-integrity.ts` | 1440 | 1 | internal-helper / DI-executor | hoist-at-top |
+
+Both ships used the simplest shape in the catalog because N=1. The
+LOC heuristic would have force-fit a richer shape and accreted
+unnecessary scaffolding per #10440's anti-pattern.
+
+**Composition with #10444.** This refinement does NOT replace the
+size-ascending pick order — LOC is still the right first-pass sort
+because (a) LOC is observable without opening the file, and (b)
+LOC-ascending still surfaces wire-shape diversity at zero planning
+cost when N tracks with LOC (which it does for the majority of files,
+hence #10444's empirical validation). The refinement applies at the
+second pass: AFTER picking the smallest unpicked candidate, count N
+before estimating effort and selecting the shape.
+
+**Anti-pattern.** Estimating wall-clock or selecting wire-shape from
+LOC alone when the file is a high-LOC orchestration with a single
+spawn site. The estimate will be too high; the shape selection will
+force-fit a richer pattern.
+
+**Anti-pattern.** Demanding "the smallest LOC AND the smallest N first."
+The double-sort can starve the cluster — a large-LOC small-N candidate
+is still a small ship. Take it; the wire-shape catalog will surface
+the same diversity.
+
+### Router-with-conditional-bypass wire shape (Lesson #10447)
+
+When a public surface routes between a chokepoint-gated path and a
+non-gated path (e.g., a function that installs from a local copy
+vs. downloading from a remote URL), apply **router-with-conditional-
+bypass**: keep the router itself unchanged; thread `ctx?` only into
+the gated path; let the non-gated path remain a literal bypass.
+
+```ts
+// Router function: unchanged. The two callees own their own
+// chokepoint contracts.
+export async function installSkill(
+  name: string,
+  source: string,
+  options?: InstallOptions,
+  ctx?: EgressContext,
+): Promise<InstallResult> {
+  if (isLocalPath(source)) {
+    return installFromLocal(name, source, options);
+    //                                              ^ no ctx — bypass
+  }
+  return installFromRemote(name, source, options, ctx);
+  //                                              ^^^^ gated
+}
+```
+
+**Why this shape exists.** The router's branches genuinely differ in
+chokepoint scope: the local path's side effect (copying bytes from
+disk) is governed by LoaderContext, not EgressContext; the remote
+path's side effect (downloading bytes from a URL) is governed by
+EgressContext. Threading `ctx?: EgressContext` into the local path
+would either (a) lie about its scope or (b) accrete a dual-ctx
+signature for no observable benefit.
+
+The router-with-conditional-bypass is a structural pattern: the
+chokepoint scope is a property of the destination branch, not of the
+router.
+
+**Evidence (2 instances).**
+
+| Ship | File | Router | Gated path | Bypassed path |
+|---|---|---|---|---|
+| v1.49.864 | `src/upstream-intelligence/git-collector.ts` | `collect()` | remote-clone branch (fetch via `git clone --depth 1`) | local-copy branch (no network egress) |
+| v1.49.880 | `src/mcp/skill-installer.ts` | `installSkill()` | `installFromRemote()` (HTTP fetch) | `installFromLocal()` (cp from disk) |
+
+Both ships left the router unchanged; both threaded `ctx?` only into
+the gated path; both kept the bypassed path's signature unchanged.
+
+**How to apply.**
+
+1. **Identify whether the router branches differ in chokepoint
+   scope.** If yes, this shape applies.
+2. **Thread `ctx?` only into the gated path.** Add it as the last
+   positional parameter of that path's function signature.
+3. **Leave the router itself unchanged** except for the new optional
+   parameter on the router signature and the pass-through to the
+   gated branch.
+4. **Document the routing decision in the function docstring** so
+   future operators can tell at a glance which branch is gated.
+
+**Cross-references.**
+
+- #10440 — production-caller scope-reduction; this shape is a
+  router-level specialization (the router IS the production caller
+  that narrows scope by branch).
+- #10444 — size-ascending chip-pick; router-with-conditional-bypass
+  emerges in the mid-to-large LOC band where files internally route.
+- Security chokepoints LoaderContext / EgressContext / ProcessContext
+  are scope-distinct chokepoints; the router shape composes naturally
+  with the scope-per-branch invariant.
+
+**Anti-pattern.** Threading `ctx?: EgressContext` into the
+local-copy branch "for symmetry." The branch does not perform egress;
+the parameter is dead weight, adds confusion at every caller, and may
+gate future refactors of the local path into the wrong chokepoint
+contract.
+
+**Anti-pattern.** Lifting the chokepoint check to the router itself
+and unconditionally calling `ensure*Allowed` regardless of branch.
+The local path does not need the check; the audit log fills with
+false-positive entries; the allow-list grows with paths the
+chokepoint should not be gating.
+
+### Shared-helper hoist sub-variant catalog (Lesson #10448)
+
+#10444 named "shared-helper hoist" as one wire shape; the v868-v882
+campaign surfaced five distinct sub-variants of the shape across 12
+chip ships. Each sub-variant is a different answer to "where does the
+chokepoint check live in this file's structure?"
+
+The five sub-variants emerge naturally from size-ascending traversal
+of mixed-shape files. The catalog below pairs each sub-variant with
+its first-instance evidence; future chips should pick the sub-variant
+that matches the file's existing structure rather than force-fitting.
+
+| Sub-variant | Hoist location | First instance | Best fit |
+|---|---|---|---|
+| **hoist-at-top** | Top of the entry function, OUTSIDE any try/catch. | v1.49.872 `cli/commands/pic2html.ts` (N=1) | Single spawn/fetch site; high-LOC orchestrations with N=1. |
+| **two-site hoisted-check** | Each of N sibling sites gets its own hoist. | v1.49.876 `aminet/package-fetcher.ts` (N=2) | N=2 sibling sites without a shared helper. |
+| **class-instance two-site** | `ctx?` stored as instance field; each method hoists before its own side effect. | v1.49.878 `chips/anthropic-chip.ts` (N=2 methods) | Class-based file with multiple methods each performing the gated op. |
+| **internal-helper-method** | Shared `private` method on a class wraps the side effect; `ctx?` threaded through the method. | v1.49.870 `learning/version-manager.ts` (N=7) | Class with many sibling spawn-calls behind a private helper. |
+| **module-internal-helper** | Free-function helper at module scope; `ctx?` threaded through the helper signature. | v1.49.873 `git/gates/pre-flight.ts` (N=12) | Module with a free-function helper; high N benefits from one-LOC-per-callsite. |
+
+**Also-ran sub-variants from the broader campaign:**
+
+- **closure-capture** (v1.49.871) — factory returns functions that
+  close over `ctx`. Same shape as `internal-helper-method` but at the
+  function-factory boundary instead of the class boundary.
+- **safeExecFile wrapper** (v1.49.874) — wrapper helper that calls
+  `execFile` (NOT `exec`) so the audit record captures the actual
+  binary target rather than `sh`. Specializes
+  `module-internal-helper` for ProcessContext + audit-fidelity (cross-
+  ref #10449).
+
+#### Track 5 wire-shape catalog (Egress, v876-v881)
+
+Track 5 closed with 6 chips ordered ascending by LOC. The
+size-ascending traversal surfaced four shapes (one NEW, two from the
+sub-variant catalog above, one router specialization) without
+explicit variant-coverage planning, mirroring the Track 4 retrospective.
+
+| Ship | File | LOC | N | Wire shape | #10427 catches |
+|---|---|---|---|---|---|
+| v1.49.876 | `aminet/package-fetcher.ts` | 177 | 2 | two-site hoisted-check | 1 |
+| v1.49.877 | `aminet/index-fetcher.ts` | 213 | 1 (per loop iter) | hoist-at-top inside mirror loop | 1 |
+| v1.49.878 | `chips/anthropic-chip.ts` | 247 | 2 | class-instance two-site | 1 |
+| v1.49.879 | `chips/http-client.ts` | 350 | 2 | class-instance two-site (sibling of v878) | 1 |
+| v1.49.880 | `mcp/skill-installer.ts` | 401 | 1 (gated path) | router-with-conditional-bypass + hoist-at-top (see #10447) | 0 |
+| v1.49.881 | `intelligence/ipc.ts` | 516 | 1 | **module-singleton** (NEW; 1 instance — see anti-pattern note below) | 0 |
+
+Cluster artifact: 5 distinct shape categories observed across 6 chips,
+with no force-fitting and a 5th #10444 cluster validation. The
+#10427 re-throw catalog from Track 5 added 4 instances to the running
+~30-instance total motivating #10446.
+
+**Carry-forward — `module-singleton` (v1.49.881).** A new sub-variant
+emerged at v881 ipc.ts: a `setIpcEgressContext(ctx)` setter writes a
+module-level `let ipcEgressContext: EgressContext | undefined`
+variable that the `invoke()` function reads before its single fetch.
+This avoids threading `ctx?` through ~20 exported wrapper functions
+that all delegate to `invoke()`.
+
+This is **1 instance** (below the 2-instance promotion bar). It is
+catalogued here as a carry-forward observation, NOT as a promoted
+sub-variant. If a second instance appears in a future ship, promote
+to the table above. Until then, treat it as a known-but-unsanctioned
+shape: appropriate when N=1 AND the surrounding wrapper count is
+high enough that threading `ctx?` through each wrapper has a real
+cost.
+
+**Anti-pattern (carry-forward).** Reaching for `module-singleton`
+when N≥2 or the wrapper count is low. The module-singleton pattern
+inverts the optional-`ctx?` discipline (#10414) — the chokepoint
+state moves from per-call argument to module-level mutable state.
+The cost is observability: tests must remember to reset the
+singleton; concurrent contexts can race; the read-side `invoke()`
+doesn't carry the context in its signature.
+
+**How to apply (the broader shape).**
+
+1. Open the file. Identify the gated operation (spawn / fetch / read).
+2. Count N — number of distinct call sites.
+3. Inspect the file's existing structure:
+   - **Is there an internal helper that all sites flow through?** Use
+     `module-internal-helper` or `internal-helper-method` depending on
+     scope (free function vs class method).
+   - **Are there N sibling sites with no shared helper?** Use
+     `two-site hoisted-check` (or class-instance variant if the file
+     is class-based).
+   - **Is the file a router with branches in different chokepoint
+     scopes?** Use `router-with-conditional-bypass` (#10447).
+   - **Is N=1?** Use `hoist-at-top` regardless of LOC.
+4. Document the chosen sub-variant in the release-notes README. The
+   sub-variant catalog grows as new files surface; future chips reuse
+   names from this catalog.
+
+**Composition with #10445.** Sub-variant selection is N-driven; #10445
+specifies how to pick the shape based on N. Both lessons compose:
+#10448 names the shape; #10445 says which shape applies given N.
+
+**Anti-pattern.** Inventing a new sub-variant name when the file fits
+an existing sub-variant. The catalog's value is in the shared
+vocabulary; sub-variant name proliferation defeats it.
+
 ## When this discipline kicks in
 
 - Adding a new function/options-bag parameter that will be passed to N existing modules.
@@ -252,6 +510,10 @@ distinct, ascending by LOC within each track).
 - ❌ Deferring per-class abstraction extraction to the third instance — the second instance has already shipped under the temporary measure, and unwinding the surface costs more than the extraction would have.
 - ❌ Picking the highest-LOC or highest-risk file first when chipping a ratchet-ledger cluster — forces the most complex wire shape at the start of the campaign and buries the simple shapes.
 - ❌ Force-fitting every chip in a cluster into one wire shape because the previous chip used it — wire shape is a property of the file, not of the campaign.
+- ❌ Estimating wall-clock or selecting wire-shape from LOC alone when a high-LOC orchestration has N=1 — both the estimate and the shape choice will be wrong.
+- ❌ Threading `ctx?` into a router's non-gated branch "for symmetry" — the branch does not perform the side effect; the parameter is dead weight and gates future scope refactors.
+- ❌ Inventing a new shared-helper-hoist sub-variant name when the file fits an existing sub-variant in the #10448 catalog — the shared vocabulary is the value.
+- ❌ Reaching for `module-singleton` when N≥2 or the wrapper count is low — inverts #10414's optional-`ctx?` discipline and moves the chokepoint state into module-level mutable state.
 
 ## Lesson references
 
@@ -260,3 +522,6 @@ distinct, ascending by LOC within each track).
 - **#10426** — Extract per-class registries at the SECOND class instance, not the third. v798 candidate, promoted at v802.
 - **#10440** — Production-caller scope-reduction via path-narrowing: when a forward-flag names a wrapper class but the underlying path is directly callable, call the path directly. v845 + v846 candidate, promoted at v847.
 - **#10444** — Size-ascending chip-pick reveals wire-shape diversity at zero explicit cost. v858-v862 Process cluster + v863-v867 Egress cluster 2-instance evidence, promoted at v868.
+- **#10445** — Spawn-site count (N) as primary wire-shape predictor; refines #10444 at the LOC-vs-N edge case (high-LOC files with N=1 → hoist-at-top, not the richer shape LOC predicts). v872 + v875 two-instance evidence, promoted at v883.
+- **#10447** — Router-with-conditional-bypass wire shape. When a router branches between gated and non-gated paths, thread `ctx?` only into the gated branch; leave the bypass branch's signature unchanged. v864 + v880 two-instance evidence, promoted at v883.
+- **#10448** — Shared-helper hoist sub-variant catalog (hoist-at-top / two-site / class-instance two-site / internal-helper-method / module-internal-helper + carry-forward `module-singleton`). Track 5 wire-shape table appended. v868-v882 12-chip cluster evidence, promoted at v883.

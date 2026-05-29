@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.882`.
+The story begins at `v1.0` and continues to `v1.49.883`.
 
-**925 chapters.** 924 have retrospectives.
+**926 chapters.** 925 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -933,3 +933,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.880](v1.49.880/00-summary.md)** — EgressContext singleton chip: `src/mcp/skill-installer.ts` (Track 5 chip #5) · 2026-05-28
 - **[v1.49.881](v1.49.881/00-summary.md)** — EgressContext singleton chip: `src/intelligence/ipc.ts` (Track 5 CLOSE) · 2026-05-28
 - **[v1.49.882](v1.49.882/00-summary.md)** — Verify-overdue forecast scan tool (campaign CLOSE) · 2026-05-28
+- **[v1.49.883](v1.49.883/00-summary.md)** — Codification Ship: Promote 5 Refinements from the v868-v882 Campaign (Post-Track-5 Codify) · 2026-05-28
