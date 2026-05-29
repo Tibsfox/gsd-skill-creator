@@ -54,7 +54,9 @@ describe('check-stale-known-unwired tool', () => {
     expect(processReport.entryCount).toBeGreaterThanOrEqual(0);
     const loaderReport = parsed.reports.find((r) => r.audit === 'LoaderContext');
     expect(loaderReport).toBeDefined();
-    expect(loaderReport.entryCount).toBeGreaterThan(0); // 15 at v885 ship time
+    // v1.49.909: LoaderContext ratchet closed to 0 entries (was 15 at v885).
+    // Assertion relaxed to "non-negative" to match the closed-ledger state.
+    expect(loaderReport.entryCount).toBeGreaterThanOrEqual(0);
   });
 });
 

@@ -8,6 +8,18 @@
  *   D-23-01..D-23-12, D-23-22..D-23-26.
  *
  * Phase 823 / C04.
+ *
+ * Role: NOT a disk loader. KBStore is a SQLite-database-backed store
+ * (via better-sqlite3 native binding). The only `node:fs` usage is
+ * `mkdirSync` to create the parent directory required for SQLite to
+ * open its DB file — that operation is write-side (creates a directory)
+ * and intentionally out-of-scope of the LoaderContext chokepoint per
+ * #10457 (LoaderContext is a READ-side chokepoint by design). All
+ * actual data reads/writes go through the better-sqlite3 binding,
+ * which does not touch `node:fs` at the JS layer. v1.49.909 closed
+ * the KNOWN_UNWIRED Loader ledger via this verdict rather than a wire
+ * — first instance of "Role: NOT a disk loader" verdict applied as
+ * the closing-move on a chip campaign.
  */
 
 import Database from 'better-sqlite3';
