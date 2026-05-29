@@ -77,7 +77,12 @@ const KNOWN_UNWIRED: ReadonlySet<string> = new Set([
   // EgressContextDenied propagates naturally from chat (strict-fail);
   // health() also has explicit re-throw in result-wrapping catch per
   // #10427.
-  'src/chips/http-client.ts',
+  // src/chips/http-client.ts wired v1.49.879 — Track 5 chip #4 (350 LOC).
+  // Class-based: ctx?: EgressContext added to constructor (2nd param) +
+  // stored as private field. stream() + _fetch() each hoist before fetch.
+  // Two-site hoisted-check via class-instance variant of #10444 (sibling
+  // pattern of v878 anthropic-chip). EgressContextDenied re-thrown from
+  // _fetch's retry-classification catch per #10427.
   // 5 registry adapters wired through EgressContext: npm.ts at v1.49.809;
   // cargo.ts + conda.ts + pypi.ts + rubygems.ts batch at v1.49.811.
   'src/intelligence/ipc.ts',

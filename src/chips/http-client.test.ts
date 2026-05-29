@@ -11,6 +11,11 @@ import * as http from 'node:http';
 import type { AddressInfo } from 'node:net';
 import { HttpClient, classifyError } from './http-client.js';
 import type { HttpClientConfig } from './http-client.js';
+import {
+  type EgressContext,
+  EgressContextDenied,
+  NULL_EGRESS_AUDIT_SINK,
+} from '../security/egress-context.js';
 
 // ============================================================================
 // Helpers
@@ -380,5 +385,29 @@ describe('classifyError', () => {
   it('returns network for connection-level errors', () => {
     expect(classifyError(new Error('ECONNREFUSED'))).toBe('network');
     expect(classifyError(new Error('fetch failed'))).toBe('network');
+  });
+});
+
+describe('EgressContext wire (v1.49.879)', () => {
+  it('get(): throws EgressContextDenied when ctx denies egress', async () => {
+    const ctx: EgressContext = {
+      allowList: [],
+      audit: NULL_EGRESS_AUDIT_SINK,
+    };
+    const client = new HttpClient({ maxRetries: 0, timeoutMs: 1000 }, ctx);
+    await expect(
+      client.get<{ ok: boolean }>('http://example.test/api'),
+    ).rejects.toBeInstanceOf(EgressContextDenied);
+  });
+
+  it('stream(): throws EgressContextDenied when ctx denies egress', async () => {
+    const ctx: EgressContext = {
+      allowList: [],
+      audit: NULL_EGRESS_AUDIT_SINK,
+    };
+    const client = new HttpClient({ timeoutMs: 1000 }, ctx);
+    await expect(
+      client.stream('http://example.test/api', { hi: true }),
+    ).rejects.toBeInstanceOf(EgressContextDenied);
   });
 });

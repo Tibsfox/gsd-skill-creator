@@ -9,6 +9,11 @@
  */
 
 import type { ErrorCategory, ChatResponse } from './types.js';
+import {
+  ensureEgressAllowed,
+  EgressContextDenied,
+  type EgressContext,
+} from '../security/egress-context.js';
 
 // ============================================================================
 // Configuration
@@ -153,9 +158,11 @@ async function parseSSEStream(
 
 export class HttpClient {
   private readonly config: HttpClientConfig;
+  private readonly ctx?: EgressContext;
 
-  constructor(config?: Partial<HttpClientConfig>) {
+  constructor(config?: Partial<HttpClientConfig>, ctx?: EgressContext) {
     this.config = { ...DEFAULT_CONFIG, ...config };
+    this.ctx = ctx;
   }
 
   /**
@@ -191,6 +198,12 @@ export class HttpClient {
 
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), this.config.timeoutMs);
+
+    // Security: hoist-at-top before fetch in stream() (#10444 two-site
+    // hoisted-check via class-instance variant; sibling site in _fetch()).
+    // Hoisted OUTSIDE the result-wrapping try/catch so EgressContextDenied
+    // propagates regardless of the strict-fail fallback per #10427.
+    ensureEgressAllowed(this.ctx, 'chips/http-client', 'fetch', url);
 
     try {
       const response = await fetch(url, {
@@ -280,6 +293,11 @@ export class HttpClient {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), this.config.timeoutMs);
 
+      // Security: hoist-at-top before fetch (sibling of stream()'s check;
+      // fires every retry attempt). EgressContextDenied propagates via
+      // re-throw in the retry catch block below per #10427.
+      ensureEgressAllowed(this.ctx, 'chips/http-client', 'fetch', url);
+
       try {
         const response = await fetch(url, {
           method,
@@ -319,6 +337,8 @@ export class HttpClient {
           };
         }
       } catch (err) {
+        // #10427: security denial is load-bearing — propagate before retry classification.
+        if (err instanceof EgressContextDenied) throw err;
         clearTimeout(timeoutId);
         const category = classifyError(err);
         lastError = err instanceof Error ? err.message : String(err);
