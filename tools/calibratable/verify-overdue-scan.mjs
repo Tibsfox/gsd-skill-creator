@@ -70,8 +70,8 @@ const THRESHOLDS_MANIFEST = [
   {
     threshold: 'token_budget.max_percent',
     wired_first_caller_ship: 'v1.49.893',
-    integration_test_ship: null,
-    notes: 'SUBSTRATE WIRED v1.49.893 (token-budget/ceiling-substrate.ts runTokenBudgetCeilingCheck — production caller that reads token_budget.max_percent, compares against usagePercent, auto-emits an outcome-driven event per #10437). Read-side wired at v1.49.888. Integration test deferred (within 10-ship verify-axis budget). Second instance of substrate-wrapper pattern (promotes v891 candidate to 2-instance ESTABLISHED).',
+    integration_test_ship: 'v1.49.898',
+    notes: 'SUBSTRATE WIRED v1.49.893 (token-budget/ceiling-substrate.ts runTokenBudgetCeilingCheck — production caller that reads token_budget.max_percent, compares against usagePercent, auto-emits an outcome-driven event per #10437). Read-side wired at v1.49.888. Integration test at v1.49.898 (5 ships after wire — within 10-ship verify-axis budget per #10428). THIRD instance of "substrate→calibration end-to-end test" pattern (after v856 predictive low-confidence + v894 observation-retention) — promotes pattern to ESTABLISHED at the 3-instance bar. Distinct from v894 in that the substrate is outcome-driven (kind falls out of the inequality), not default-fixed.',
   },
   {
     threshold: 'observation.retention_days',
