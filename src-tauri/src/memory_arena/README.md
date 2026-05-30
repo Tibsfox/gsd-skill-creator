@@ -150,6 +150,12 @@ Criterion benchmarks live at `src-tauri/benches/arena_bench.rs` and cover:
   the previously-unwired `CgroupEnforcer` (default-off; grows `memory.max` in
   steps up to the hard cap, else rejects). CI-runnable.
   See [`docs/memory-arena/M15-baseline.md`](../../../docs/memory-arena/M15-baseline.md).
+- **M16** = live migration + adoption proof (verify-axis). Confirmed
+  `migrateJsonToArenaSet` losslessly ingests the real 107 MB `.grove/arena.json`
+  with 752 namespace bindings resolving end-to-end (17/17 in
+  `grove-migration-live.test.ts`), and hardened that proof with a corpus-absent
+  `describe.skipIf` skip-guard (gitignored-artifact safe).
+  See [`docs/memory-arena/M16-baseline.md`](../../../docs/memory-arena/M16-baseline.md).
 
 **Re-run command:**
 ```bash

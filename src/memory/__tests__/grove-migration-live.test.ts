@@ -18,6 +18,16 @@ import { ContentAddressedSetStore } from '../content-addressed-set-store.js';
 import { bytesToBase64, base64ToBytes, type InvokeFn } from '../rust-arena.js';
 import { GroveNamespace } from '../../mesh/grove-namespace.js';
 
+// `.grove/arena.json` is a gitignored runtime artifact: generated in CI by
+// tools/import-filesystem-skills.ts, and present locally from real usage. When
+// it is absent (e.g. a fresh checkout / a local `vitest run` that skipped the
+// generation step) the live proof SKIPS rather than hard-failing — matching the
+// `wwwHarnessAvailable` guard in vitest.config.ts and the skip-guards in the
+// sibling corpus tests (multi-hop-retrieval, memory-eval-suite). Where the
+// corpus exists the suite runs in full and asserts lossless migration +
+// end-to-end name resolution.
+const liveCorpusExists = existsSync(join(process.cwd(), '.grove', 'arena.json'));
+
 /**
  * Mock ArenaSet that tracks all allocations and tier distribution.
  * Real enough for migration validation, but doesn't require Rust/IPC.
@@ -100,7 +110,7 @@ function makeLiveTestArena() {
   };
 }
 
-describe('Live Migration: .grove/arena.json', () => {
+describe.skipIf(!liveCorpusExists)('Live Migration: .grove/arena.json', () => {
   let liveArenaJsonPath: string;
   let groveDir: string;
 
@@ -334,7 +344,7 @@ describe('Live Migration: .grove/arena.json', () => {
 //   5. Abstention               10. Summarization
 // ============================================================================
 
-describe('BEAM-Style Probing: Structural Retrieval', () => {
+describe.skipIf(!liveCorpusExists)('BEAM-Style Probing: Structural Retrieval', () => {
   let store: ContentAddressedSetStore;
   let ns: GroveNamespace;
 
