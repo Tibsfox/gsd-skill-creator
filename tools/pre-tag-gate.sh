@@ -145,6 +145,7 @@
 #   1   build failed
 #   2   vitest failed
 #   21  tools-suite (vitest.tools.config.mjs) failed (BLOCKER as of v1.49.913)
+#   22  tools-node-test (node --test on tools/ + scripts/ node:test files) failed (BLOCKER as of v1.49.914)
 #   3   completeness gate failed
 #   4   CI-on-dev failed / pending
 #   5   www-bundles build failed
@@ -166,7 +167,7 @@
 #   SC_PRE_TAG_GATE_BYPASS=<csv>   skip these steps entirely
 #   SC_PRE_TAG_GATE_REQUIRE=<csv>  escalate WARN-only steps to BLOCKER
 #
-#   step-name vocabulary: build version-sequence vitest tools-suite completeness ci-gate
+#   step-name vocabulary: build version-sequence vitest tools-suite tools-node-test completeness ci-gate
 #                         www-bundles depth-audit depth-audit-mus-elc claude-md catalog-index
 #                         tauri-boundary apply-to-self scaffolder-residue
 #                         citation-debt-sync story-drift discipline-coverage
@@ -228,7 +229,7 @@ log() {
 #       Escalate WARN-only steps to BLOCKER status.
 #
 # Step-name vocabulary (matches gate step labels):
-#   build version-sequence vitest tools-suite completeness ci-gate www-bundles
+#   build version-sequence vitest tools-suite tools-node-test completeness ci-gate www-bundles
 #   depth-audit depth-audit-mus-elc claude-md catalog-index tauri-boundary apply-to-self
 #   scaffolder-residue citation-debt-sync story-drift
 #
@@ -296,7 +297,7 @@ gate_required() {
 if [ -n "$_PTG_BYPASS_RAW" ] || [ -n "$_PTG_REQUIRE_RAW" ]; then
   [ -n "$_PTG_BYPASS_RAW" ]  && log "[pre-tag-gate] active BYPASS:  $_PTG_BYPASS_RAW"
   [ -n "$_PTG_REQUIRE_RAW" ] && log "[pre-tag-gate] active REQUIRE: $_PTG_REQUIRE_RAW"
-  log "[pre-tag-gate] (step names: build|version-sequence|vitest|tools-suite|completeness|ci-gate|www-bundles|depth-audit|depth-audit-mus-elc|claude-md|catalog-index|tauri-boundary|apply-to-self|scaffolder-residue|citation-debt-sync|story-drift|discipline-coverage|sps-cohort-uniqueness|nasa-canonical-layout|nasa-canonical-sidebar|project-md)"
+  log "[pre-tag-gate] (step names: build|version-sequence|vitest|tools-suite|tools-node-test|completeness|ci-gate|www-bundles|depth-audit|depth-audit-mus-elc|claude-md|catalog-index|tauri-boundary|apply-to-self|scaffolder-residue|citation-debt-sync|story-drift|discipline-coverage|sps-cohort-uniqueness|nasa-canonical-layout|nasa-canonical-sidebar|project-md)"
 fi
 
 # ----- step 0.5: STATE.md normalizer auto-run (v1.49.671, Lesson #10373) -----
@@ -387,6 +388,27 @@ else
     exit 21
   fi
   log "[pre-tag-gate] step 2.5/15: PASS"
+fi
+
+# ----- step 2.7/15: tools-node-test gate (v1.49.914 — closes the v1.49.913-OPENED gap) -----
+# Two node:test files under tools/ run in NO gate at all: vitest cannot execute
+# them, so step 2.5 tools-suite skips them, and before this step nothing ran
+# them. This step runs them via Node's built-in test runner. The runner is
+# DYNAMICALLY DISCOVERED by check-tools-test-coverage.mjs (same classifier as
+# its report — no hardcoded list), so a NEW node:test file added later is
+# auto-covered without touching this gate. Bypass:
+# SC_PRE_TAG_GATE_BYPASS=tools-node-test (legacy SC_SKIP_TOOLS_NODE_TEST=1).
+if gate_bypassed "tools-node-test" "SC_SKIP_TOOLS_NODE_TEST"; then
+  log "[pre-tag-gate] step 2.7/15: SKIPPED (tools-node-test)"
+else
+  log "[pre-tag-gate] step 2.7/15: tools-node-test (node --test on tools/ + scripts/ node:test files — v1.49.914)"
+  if ! node tools/check-tools-test-coverage.mjs --run-node-test; then
+    echo "[pre-tag-gate] FAIL: tools-node-test (node --test) exited non-zero" >&2
+    echo "[pre-tag-gate]   Reproduce: node tools/check-tools-test-coverage.mjs --run-node-test" >&2
+    echo "[pre-tag-gate]   These are Node built-in test-runner (node --test) files, NOT covered by vitest." >&2
+    exit 22
+  fi
+  log "[pre-tag-gate] step 2.7/15: PASS"
 fi
 
 log "[pre-tag-gate] step 3/15: release-notes completeness gate"

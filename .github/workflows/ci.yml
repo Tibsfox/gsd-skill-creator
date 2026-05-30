@@ -70,3 +70,9 @@ jobs:
             --teams examples/teams \
             --chipsets data/chipset
       - run: npx vitest run
+      # v1.49.914: tools/+scripts/ suite is NOT covered by the main vitest config
+      # (vitest.config.ts scopes to src/ .college/ tests/ www/). Enforce it in CI too,
+      # not just at pre-tag-gate (closes the v1.49.913 OPENED single-enforcement-point gap).
+      - run: npx vitest run --config vitest.tools.config.mjs
+      # node:test files (Node built-in runner; vitest can't execute them)
+      - run: node tools/check-tools-test-coverage.mjs --run-node-test

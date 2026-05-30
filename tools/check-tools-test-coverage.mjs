@@ -29,6 +29,7 @@
  */
 
 import { readFileSync, readdirSync, statSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
 import { join, dirname, relative, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
@@ -190,4 +191,74 @@ function fail2(msg) {
   process.exitCode = 2;
 }
 
-main();
+// ---------------------------------------------------------------------------
+// node:test RUNNER mode (v1.49.914).
+//
+// vitest cannot execute node:test files, so before these flags they ran in NO
+// gate at all (reported by `main()` but never run). The runner closes that gap,
+// discovering the node:test files via the SAME `classify()` used by the report —
+// single source of truth, no hardcoded list, so a new node:test file is auto-
+// covered. REPO_ROOT resolution is shared with `main()` so paths are correct
+// regardless of CWD.
+// ---------------------------------------------------------------------------
+
+/** Discover node:test files under SCAN_DIRS as repo-relative POSIX paths. */
+function discoverNodeTestFiles() {
+  const files = [];
+  for (const d of SCAN_DIRS) collectTestFiles(join(REPO_ROOT, d), files);
+  files.sort();
+  const nodeTestFiles = [];
+  for (const abs of files) {
+    if (classify(abs) === 'node:test') {
+      nodeTestFiles.push(relative(REPO_ROOT, abs).split('\\').join('/'));
+    }
+  }
+  return nodeTestFiles;
+}
+
+/**
+ * --print-node-test: print discovered node:test files (one repo-relative path
+ * per line) to stdout, then exit 0. Same classifier as the report.
+ */
+function printNodeTest() {
+  const nodeTestFiles = discoverNodeTestFiles();
+  const out = nodeTestFiles.join('\n') + (nodeTestFiles.length ? '\n' : '');
+  // Flush stdout before exit (#10419 — avoid 64KB pipe-buffer truncation).
+  process.stdout.write(out, () => process.exit(0));
+}
+
+/**
+ * --run-node-test: discover node:test files (same classifier) and run them via
+ * Node's built-in test runner (`node --test`), inheriting stdio. Exit with the
+ * child's status. If ZERO node:test files are discovered, print a notice to
+ * stderr and exit 0 — an empty `node --test` invocation must never run.
+ */
+function runNodeTest() {
+  const nodeTestFiles = discoverNodeTestFiles();
+  if (nodeTestFiles.length === 0) {
+    process.stderr.write(
+      `[tools-test-coverage] no node:test files discovered under ${SCAN_DIRS.join('/ + ')}/ — nothing to run.\n`,
+    );
+    process.exit(0);
+  }
+  // Absolute paths so `node --test` resolves regardless of CWD.
+  const absFiles = nodeTestFiles.map((rel) => join(REPO_ROOT, rel));
+  const res = spawnSync(process.execPath, ['--test', ...absFiles], {
+    stdio: 'inherit',
+    cwd: REPO_ROOT,
+  });
+  process.exit(res.status == null ? 1 : res.status);
+}
+
+// ---------------------------------------------------------------------------
+// Flag dispatch. Flags are independent; default (no recognized flag) behavior
+// is byte-identical to the original drift-guard report.
+// ---------------------------------------------------------------------------
+const argv = process.argv.slice(2);
+if (argv.includes('--print-node-test')) {
+  printNodeTest();
+} else if (argv.includes('--run-node-test')) {
+  runNodeTest();
+} else {
+  main();
+}

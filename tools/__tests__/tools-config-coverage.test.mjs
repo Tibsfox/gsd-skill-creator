@@ -252,4 +252,55 @@ describe('check-tools-test-coverage — live apply-to-self (regression guard)', 
     // Non-vacuous: there really are vitest files on disk being checked.
     expect(j.vitest_count).toBeGreaterThan(40);
   });
+
+  it('default (no-flag) drift-guard report is unchanged (v1.49.914 regression guard)', () => {
+    // The new --print-node-test / --run-node-test flags must NOT alter the
+    // default report path. This pins the success line byte-for-byte.
+    const r = spawnSync(process.execPath, [TOOL], { cwd: REPO_ROOT, encoding: 'utf8' });
+    expect(r.status).toBe(0);
+    expect(r.stdout).toContain('PASS — include list covers all vitest test files');
+  });
+});
+
+describe('check-tools-test-coverage — node:test runner mode (v1.49.914)', () => {
+  // node:test-side drift-guard (Layer-2 companion to the vitest include-list
+  // guard above). The vitest guard catches a new VITEST file that escapes the
+  // include list; this guard catches a new NODE:TEST file that escapes the
+  // node --test runner — forcing an explicit acknowledgement here.
+  const EXPECTED_NODE_TEST_FILES = [
+    'tools/citation-debt/__tests__/list.test.mjs',
+    'tools/release-history/__tests__/phases-plans-extraction.test.mjs',
+  ].sort();
+
+  it('--print-node-test lists EXACTLY the two known node:test files, exit 0', () => {
+    const r = spawnSync(process.execPath, [TOOL, '--print-node-test'], {
+      cwd: REPO_ROOT,
+      encoding: 'utf8',
+    });
+    expect(r.status).toBe(0);
+    const discovered = (r.stdout || '')
+      .split('\n')
+      .map((l) => l.trim())
+      .filter(Boolean)
+      .sort();
+    // Exact-set equality: a NEW node:test file added later breaks this until it
+    // is acknowledged here (and wired into the node --test gate via the runner).
+    expect(discovered).toEqual(EXPECTED_NODE_TEST_FILES);
+  });
+
+  it('--run-node-test exits 0 on the current tree and runs node\'s test runner', () => {
+    // The two node:test suites are fast (~1s); allow a generous 30s budget.
+    const r = spawnSync(process.execPath, [TOOL, '--run-node-test'], {
+      cwd: REPO_ROOT,
+      encoding: 'utf8',
+      timeout: 30000,
+    });
+    if (r.status !== 0) {
+      throw new Error(`--run-node-test exited ${r.status}:\n${r.stdout}\n${r.stderr}`);
+    }
+    expect(r.status).toBe(0);
+    // node --test emits TAP; the summary lines prove the runner actually ran.
+    const out = `${r.stdout || ''}\n${r.stderr || ''}`;
+    expect(out).toMatch(/# pass|tests \d+/);
+  });
 });

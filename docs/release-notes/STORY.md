@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.913`.
+The story begins at `v1.0` and continues to `v1.49.914`.
 
-**956 chapters.** 955 have retrospectives.
+**957 chapters.** 956 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -964,3 +964,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.911](v1.49.911/00-summary.md)** — Counter-Cadence Codify Ship: UNCODIFIED Drain — NASA Mission Authoring Domain + Reusable-Subset Promotion (39 → 0) · 2026-05-29
 - **[v1.49.912](v1.49.912/00-summary.md)** — Gate-Tightening Micro-Ship: Discipline-Coverage Ceiling Ratchet (41→5) + PARTIAL Companion Ceiling · 2026-05-29
 - **[v1.49.913](v1.49.913/00-summary.md)** — Tools-Suite Gate Wiring + Silent-Rot Green-Up (8 red files) + Layer-2 Drift-Guard · 2026-05-29
+- **[v1.49.914](v1.49.914/00-summary.md)** — Tools-Suite Cluster Closure: node:test Gate + CI-Enforcement + Layer-2 node:test Drift-Guard · 2026-05-29
