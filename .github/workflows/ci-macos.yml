@@ -1,0 +1,67 @@
+# Cross-platform CI — macOS vitest lane (milestone v1.49.920 / audit T3.1).
+#
+# DELIBERATELY DECOUPLED from the ship-blocking ci-gate. The pre-tag-gate
+# "ci-gate" (tools/pre-tag-gate.sh step 4) verifies CI green on origin/dev by
+# matching the dev-tip headSha against `gh run list --branch dev` and reading
+# the RUN-LEVEL conclusion. This workflow has NO `push` trigger, so it never
+# produces a dev-tip push run and therefore can never block or delay a ship.
+# It runs nightly (cross-platform regression signal + flake surfacing), on
+# manual dispatch, and on PRs into main.
+#
+# Promotion path (a follow-on ship, NOT this one): once N consecutive nightly
+# runs are green-stable, fold macos-latest into ci.yml's `test` job as a
+# `strategy.matrix` over os and retire this file, so macOS becomes load-bearing
+# for the ship gate.
+#
+# Scope is the TypeScript vitest surface ONLY. The Rust backend (src-tauri) has
+# no CI on any OS and uses Linux-only libc/mmap constants (MAP_HUGETLB etc.)
+# that would not compile on macOS; Rust-in-CI is a separate, larger item.
+name: CI (macOS)
+
+on:
+  schedule:
+    # Nightly at 09:00 UTC (~01:00-02:00 PT). Non-blocking — surfaces
+    # cross-platform regressions in the TS suite once per day.
+    - cron: '0 9 * * *'
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-macos-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test-macos:
+    name: Test (macOS)
+    runs-on: macos-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci
+      # Mirror the Linux `test` job (ci.yml) exactly. Build dist/ first —
+      # several tests import compiled artifacts from dist/intelligence/
+      # (c12-write-briefing, intelligence-investigator harness, dashboard
+      # smoke). Without this they fail on a missing dist/ tree.
+      - run: npm run build
+      - name: Generate Grove arena snapshot (fixture for grove-migration-live tests)
+        run: |
+          npx tsx tools/import-filesystem-skills.ts \
+            --skills .claude/skills \
+            --skills examples/skills \
+            --agents .claude/agents \
+            --agents examples/agents/gsd \
+            --teams examples/teams \
+            --chipsets data/chipset
+      - run: npx vitest run
+      # v1.49.914: tools/+scripts/ suite is not covered by the main vitest
+      # config; run it here too for cross-platform parity with the Linux gate.
+      - run: npx vitest run --config vitest.tools.config.mjs
+      # node:test files (Node built-in runner; vitest can't execute them).
+      - run: node tools/check-tools-test-coverage.mjs --run-node-test
