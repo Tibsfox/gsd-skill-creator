@@ -879,7 +879,11 @@ else
     #   [WARN] latest-shipped-version-drift: "Latest shipped release" lists v1.49.801 but package.json is v1.49.806 ...
     # If the patch-version gap exceeds the threshold, escalate to FAIL.
     MAX_PATCH_DRIFT="${SC_PROJECT_MD_MAX_PATCH_DRIFT:-3}"
-    PATCH_DRIFT_LINE="$(echo "$PROJECT_MD_OUTPUT" | grep -E 'latest-shipped-version-drift.*lists v[0-9]+\.[0-9]+\.[0-9]+ but package\.json is v[0-9]+\.[0-9]+\.[0-9]+' | head -1)"
+    # NOTE: `|| true` is load-bearing. Under `set -euo pipefail`, a non-drift
+    # PROJECT.md WARN means grep finds no match → exits 1 → pipefail propagates
+    # through the substitution → set -e aborts the whole gate. The empty-result
+    # case is handled below by `[ -n "$PATCH_DRIFT_LINE" ]`; let it reach there.
+    PATCH_DRIFT_LINE="$(echo "$PROJECT_MD_OUTPUT" | grep -E 'latest-shipped-version-drift.*lists v[0-9]+\.[0-9]+\.[0-9]+ but package\.json is v[0-9]+\.[0-9]+\.[0-9]+' | head -1 || true)"
     if [ -n "$PATCH_DRIFT_LINE" ]; then
       DOC_PATCH="$(echo "$PATCH_DRIFT_LINE" | sed -nE 's/.*lists v[0-9]+\.[0-9]+\.([0-9]+).*/\1/p')"
       PKG_PATCH="$(echo "$PATCH_DRIFT_LINE" | sed -nE 's/.*package\.json is v[0-9]+\.[0-9]+\.([0-9]+).*/\1/p')"
