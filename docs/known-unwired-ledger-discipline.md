@@ -335,6 +335,100 @@ instance) met at v821 (instance #2: discipline-coverage ceiling generalizes
 the chokepoint KNOWN_UNWIRED pattern). Codified v1.49.824 from v806 + v821
 case studies.
 
+## Gate-enforce every runnable surface, paired with a drift-guard (Lesson #10461)
+
+**A test/observability/policy surface that runs nowhere enforced silently
+rots. Gate-enforce every such surface, and pair the gate with a drift-guard
+so the enforced SET — or its REFERENCE DATA — cannot silently drift.**
+
+This is the generalization the KNOWN_UNWIRED ledger and its inverse-audit
+(#10443) point toward, lifted off chokepoints entirely. A `KNOWN_UNWIRED`
+allowlist is one instance of a broader class: **any surface whose correctness
+depends on being run**. If nothing runs it (or nothing pins its reference
+data), it rots — and the rot is silent because the surface's whole job was to
+be the thing that would have shouted.
+
+### The two-layer shape
+
+| Layer | Role | Failure mode if absent |
+|---|---|---|
+| **Layer 1 — enforce** | Wire the surface's own check into a gated + CI-run suite, so the surface runs every ship. | The surface runs nowhere; regressions accumulate unseen. |
+| **Layer 2 — drift-guard** | A structural check that the ENFORCED SET (the include-list, the runner's file-set) or the surface's REFERENCE DATA (an allowlist, a baseline) cannot drift out of sync with reality. | The enforcement runs, but its inputs silently go stale; the gate passes on a lie. |
+
+Either layer alone is incomplete. Layer 1 without Layer 2 ships a gate whose
+coverage quietly shrinks (a new test never gets added to the include-list).
+Layer 2 without Layer 1 pins a set that nothing actually runs.
+
+### Three-instance evidence — the drift-form catalog
+
+| # | Ship | Unenforced surface | How it rotted | Layer 1 (enforce) | Layer 2 (drift-guard) | Drift form |
+|---|---|---|---|---|---|---|
+| 1 | v1.49.913 | `vitest.tools.config.mjs` (~40 tools/+scripts/ vitest tests) | ran nowhere → 8 files silently red ~2 weeks | pre-tag-gate step 2.5 `tools-suite` + CI | `tools-config-coverage.test.mjs` explicit include-list vs disk | **omission-drift** (a file on disk missing from the set) |
+| 2 | v1.49.914 | 2 `tools/` `node:test` files (21 tests) | vitest can't run them; no other runner | pre-tag-gate step 2.7 `tools-node-test` + CI | `--print-node-test` exact-set `toEqual` | **silent-addition-drift** (a file added to the set with no runner) |
+| 3 | v1.49.915 | `atlas-deps-audit` policy tool (ADR-0003 acceptance test) | never gate-wired since v607 → its `CROSS_TREE_ALLOW_PATTERNS` allowlist drifted stale vs the v905 LoaderContext chokepoint wire → a false-positive violation nothing surfaced | live-tree Case 6 in the gate+CI tools suite | Case 6 IS the drift-guard (asserts the real tree passes; fails loudly on a new un-allowlisted import) | **reference-data-staleness** (allowlist vs disk reality) |
+
+**What the third instance generalizes.** Instances 1 and 2 rot as *"the tests
+don't run."* Instance 3 rots as *"the reference data went stale."* Same
+disease (unenforced ⇒ silent rot), same cure (wire the surface's own check
+into the gated suite so the surface enforces itself). The drift-form catalog
+now spans three shapes — **omission-drift** (explicit include-list vs disk),
+**silent-addition-drift** (exact-set `toEqual`), and **reference-data-staleness**
+(allowlist vs disk reality). A `KNOWN_UNWIRED` allowlist is precisely a
+reference-data surface: the inverse-audit (#10443) is the Layer-2 drift-guard
+for it, and the cross-audit tool `tools/security/check-stale-known-unwired.mjs`
+is that drift-guard wired into the gate.
+
+### When to apply
+
+When introducing OR auditing any surface whose value depends on being run each
+ship:
+
+- A test suite (vitest config include-list, a per-runner file-set)
+- A second runner that the primary runner cannot execute (node:test under vitest)
+- A static-analysis / policy tool whose allowlist or baseline must track reality
+  (`atlas-deps-audit`, the adoption baseline, the discipline-coverage manifest)
+- Any observability surface that emits a metric a gate consults
+
+Ask the two questions: **(1) Does this run on a gate + in CI every ship?** If
+not, it can rot unseen — add Layer 1. **(2) Can its enforced set or reference
+data drift out of sync with disk reality without anything failing?** If yes,
+add Layer 2.
+
+### How to apply
+
+1. **Wire Layer 1.** Register the surface's own check into the gated suite
+   (`vitest.tools.config.mjs` + pre-tag-gate + CI). Confirm the first CI run
+   concludes green — wiring into CI is only half the work; watch the run land
+   (`gh run view`, not `gh run watch`'s exit code).
+2. **Wire Layer 2.** Add the structural drift-guard matching the surface's
+   drift form: include-list-vs-disk for omission-drift, exact-set `toEqual` for
+   silent-addition-drift, allowlist-vs-disk (an inverse-audit / live-tree
+   acceptance test) for reference-data-staleness.
+3. **Make the surface enforce itself where possible.** The cleanest Layer-2 for
+   a policy tool is the tool's own acceptance test run against the live tree
+   (v915 Case 6): one assertion both enforces the policy AND fails loudly the
+   moment the reference data drifts.
+
+### Cross-references
+
+- **#10443 (inverse-audit / stale-entry detection)** — the Layer-2 drift-guard
+  for a `KNOWN_UNWIRED` allowlist specifically; #10461 names the general class
+  that contains it.
+- **#10432 / #10434 (this discipline)** — the ratchet-ledger is one runnable
+  surface; #10461 is the rule for keeping every such surface enforced + pinned.
+- **#10427 (failure-mode contracts)** — the silent-rot is a silent-vs-loud
+  asymmetry; both layers convert silence to loudness (Layer 1 at run-time,
+  Layer 2 at drift-time).
+- **#10450 (static-analysis tool robustness)** — instance 3's stale-allowlist
+  false-positive is the same family; a tool whose reference data rots must be
+  gate-run so the rot is caught.
+- **ADR-0003** (atlas clean-room policy) — the allowlist's authority;
+  §Verification is the now-enforced acceptance test (v915 Case 6).
+
+Promotion threshold per #10426 met across v913 (omission-drift) + v914
+(silent-addition-drift) + v915 (reference-data-staleness) — three distinct
+drift forms prove the rule is not test-suite-specific. Codified v1.49.916.
+
 ## Anti-patterns
 
 - **Allowlist marked "stable" or "permanent".** The KNOWN_UNWIRED list is

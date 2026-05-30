@@ -56,16 +56,66 @@ export async function openDb(cfg) {
   throw new Error(`Unknown db.driver '${driver}'. Expected 'postgres' or 'sqlite'.`);
 }
 
+/**
+ * Resolve Postgres connection input from the environment.
+ *
+ * Preference order:
+ *   1. The connection-URL env var (cfg.db.postgres_url_env, default
+ *      RH_POSTGRES_URL) — used verbatim when set (the canonical path; the
+ *      run-with-pg wrapper loads it from <repo-root>/.env).
+ *   2. PG_HOST/PG_PORT/PG_USER/PG_DB + PGPASSWORD assembled into a config
+ *      object — taken whenever a password OR a host is configured.
+ *
+ * Behavior contract: this preserves the historical openPostgres SUCCESS paths
+ * exactly (URL verbatim; PG* object incl. passwordless local auth — trust/peer/
+ * ~/.pgpass — where a host is configured but no PGPASSWORD; init.mjs treats
+ * 'host set, no password' the same way). It changes only the FAILURE path:
+ * where the old code handed `password: undefined` to pg and let it surface the
+ * opaque `SASL: SCRAM-SERVER-FIRST-MESSAGE: client password must be a string`,
+ * this throws FIRST with a loud, actionable message — but ONLY when NO
+ * connection coordinate is resolvable at all (no URL, no PGPASSWORD, no
+ * PG_HOST). Per #10427 (failure-mode contracts) a load-bearing surface fails
+ * loudly with a message that NAMES the fix.
+ *
+ * That opaque pg SASL error (seen on direct, un-wrapped invocation) is exactly
+ * what mis-led the v1.49.915 handoff into attributing an advisory drift-check
+ * exit-1 to a "PG-credential bug" — an opaque error message is a misdiagnosis
+ * generator. Exported for direct unit testing (no network, no `pg` import).
+ */
+export function resolvePgCredentials(cfg, env = process.env) {
+  const urlEnv = cfg?.db?.postgres_url_env || 'RH_POSTGRES_URL';
+  const connString = env[urlEnv];
+  if (connString) return { connString };
+  // A password OR a host is enough to attempt a connection. Passwordless local
+  // auth (trust/peer/Unix-socket/~/.pgpass) supplies the secret out-of-band, so
+  // a configured host with no PGPASSWORD is a legitimate state — let pg, not
+  // this resolver, decide. (Preserves the old unconditional object-build for
+  // every case where it could have connected.)
+  if (env.PGPASSWORD || env.PG_HOST) {
+    return {
+      connConfig: {
+        host:     env.PG_HOST || 'localhost',
+        port:     parseInt(env.PG_PORT || '5432', 10),
+        user:     env.PG_USER || 'postgres',
+        password: env.PGPASSWORD,
+        database: env.PG_DB || 'postgres',
+      },
+    };
+  }
+  throw new Error(
+    `Postgres driver selected but no connection is resolvable: ` +
+    `$${urlEnv}, $PGPASSWORD, and $PG_HOST are all unset.\n` +
+    `  Fix: run release-history tools through the wrapper that loads the canonical .env:\n` +
+    `    node tools/release-history/run-with-pg.mjs <subcommand>\n` +
+    `  Or export ${urlEnv}=postgresql://user:pass@host:port/db ` +
+    `(canonical .env: <repo-root>/.env).`
+  );
+}
+
 async function openPostgres(cfg) {
   const { default: pg } = await import('pg');
-  const connString = process.env[cfg.db?.postgres_url_env || 'RH_POSTGRES_URL'];
-  const client = new pg.Client(connString || {
-    host:     process.env.PG_HOST || 'localhost',
-    port:     parseInt(process.env.PG_PORT || '5432', 10),
-    user:     process.env.PG_USER || 'postgres',
-    password: process.env.PGPASSWORD,
-    database: process.env.PG_DB || 'postgres',
-  });
+  const { connString, connConfig } = resolvePgCredentials(cfg);
+  const client = new pg.Client(connString || connConfig);
   await client.connect();
 
   const schema = cfg.db?.postgres_schema || 'release_history';

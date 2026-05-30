@@ -44,6 +44,16 @@
     "CLASSIFIED|PRIVATE — "
   ],
 
+  "_leak_scan_allowlist_comment": "Narrow, auditable exceptions for KNOWN self-referential leak-scan false positives (a doc that NAMES a leak pattern while documenting the leak-hardening itself). A violation is excused only on an EXACT version+file+pattern match; a real leak in any other file, a new pattern in the same file, or the same pattern in another release still BLOCKS. Each entry MUST carry a reason. Consumed by tools/release-history/publish.mjs leakScan.",
+  "leak_scan_allowlist": [
+    {
+      "version": "v1.49.588",
+      "file": "03-retrospective.md",
+      "pattern": "fox-companies",
+      "reason": "Self-referential documentation, not a private-path leak. The v588 T2.2 retrospective documents the AC7/AC10 leak-scan hardening and quotes the narrowed .planning/(fox-companies|agent-memory)/ regex it describes, so the bare 'fox-companies' pattern (local override) matches its own documentation. Surfaced v1.49.916 when refresh.mjs began running the previously-skipped audit step (AC7)."
+    }
+  ],
+
   "ghosts": [],
 
   "classifier": {

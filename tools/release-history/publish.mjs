@@ -101,12 +101,34 @@ export function shouldPublishToDestination(sourceContent, destPath, forceOverwri
   return { write: false, reason: 'destination opener non-derivable; preserved as hand-authored' };
 }
 
-function leakScan(content, path) {
+// v1.49.916 — leak-scan false-positive allowlist. A leak-scan violation is
+// EXCUSED only when an allowlist entry matches the file's release + basename AND
+// the EXACT pattern source that fired. Deliberately narrow: it never excuses a
+// pattern globally, only one documented self-referential occurrence — e.g. a
+// retrospective that NAMES a leak-scan pattern while documenting the leak-
+// hardening work itself (v1.49.588/03-retrospective.md trips the bare
+// `fox-companies` pattern by quoting the `\.planning/(?:fox-companies|agent-
+// memory)/` regex it describes). Every entry carries a `reason`. Security
+// posture preserved: a real leak in any OTHER file, a NEW pattern in the same
+// file, or the same pattern in a different release still BLOCKS. Surfaced when
+// v916's refresh.mjs fix began running the previously-skipped audit step (AC7).
+const LEAK_SCAN_ALLOWLIST = ctx_cfg.leak_scan_allowlist || [];
+
+export function leakAllowlistExcuses(allowlist, version, file, patternSource) {
+  return (allowlist || []).some(e =>
+    e.version === version && e.file === file && e.pattern === patternSource);
+}
+
+// `patterns` and `allowlist` default to the module-level config-derived values;
+// they are injectable so the gate logic is unit-testable without config coupling.
+export function leakScan(content, opts = {}) {
+  const { version, file, patterns = FORBIDDEN, allowlist = LEAK_SCAN_ALLOWLIST } = opts;
   const violations = [];
   const lines = content.split(/\r?\n/);
   for (let i = 0; i < lines.length; i++) {
-    for (const re of FORBIDDEN) {
+    for (const re of patterns) {
       if (re.test(lines[i])) {
+        if (leakAllowlistExcuses(allowlist, version, file, re.source)) continue;
         violations.push({ line: i + 1, pattern: re.source, sample: lines[i].slice(0, 120) });
       }
     }
@@ -202,7 +224,7 @@ async function main() {
       const checksum = sha256(content);
 
       // Leak scan (hard gate)
-      const violations = leakScan(content);
+      const violations = leakScan(content, { version, file });
       if (violations.length > 0) {
         stats.files_blocked++;
         stats.violations.push({
@@ -265,7 +287,7 @@ async function main() {
     if (!existsSync(srcPath)) continue;
     stats.files_considered++;
     const content = readFileSync(srcPath, 'utf8');
-    const violations = leakScan(content);
+    const violations = leakScan(content, { version: '_top_', file });
     if (violations.length > 0) {
       stats.files_blocked++;
       stats.violations.push({ version: '_top_', file, count: violations.length, sample: violations.slice(0, 2) });

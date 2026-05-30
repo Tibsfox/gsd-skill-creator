@@ -21,7 +21,7 @@
 
 import { spawnSync } from 'node:child_process';
 import { resolve, dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const TOOLS = join(REPO_ROOT, 'tools', 'release-history');
@@ -50,6 +50,25 @@ const STEPS = [
   { name: 'audit',             script: 'audit.mjs',               required: true },
 ];
 
+// Advisory (non-fatal) step exits — these report a CONDITION, not a failure,
+// and must NOT abort the pipeline:
+//   scan        exits 2 on filesystem-vs-RELEASE-HISTORY drift (expected in flight)
+//   drift-check exits 1 on quality drift — advisory per scripts/release-history-
+//               refresh.sh's documented contract ("1 = drift-check warned ...
+//               advisory, not a blocker"). Before v1.49.916 refresh.mjs treated
+//               this by-design exit-1 as a pipeline failure, aborting BEFORE the
+//               final `audit` step and reporting overall FAIL on every drift —
+//               which is what the v915 handoff misread as a "PG-credential bug".
+// Anything else non-zero is a real failure. NOTE: drift-check exit 2 is a FATAL
+// crash (e.g. unresolved PG credentials → the resolvePgCredentials throw) and is
+// deliberately NOT advisory — it stays fatal so a genuine credential break still
+// aborts the pipeline.
+export function isAdvisoryExit(stepName, status) {
+  if (stepName === 'scan' && status === 2) return true;
+  if (stepName === 'drift-check' && status === 1) return true;
+  return false;
+}
+
 function run(step) {
   const start = Date.now();
   if (!quiet) console.error(`[refresh] ▶ ${step.name}`);
@@ -61,10 +80,13 @@ function run(step) {
   });
   const ms = Date.now() - start;
   if (r.status !== 0 && r.status !== null) {
-    // audit returns non-zero on FAIL; ingest returns non-zero on errors
-    // scan returns 2 on drift (non-fatal) — allow
-    if (step.name === 'scan' && r.status === 2) {
-      if (!quiet) console.error(`[refresh] ⚠ ${step.name} reports drift (expected in flight)`);
+    // audit returns non-zero on FAIL; ingest returns non-zero on errors.
+    // Advisory exits (scan drift / drift-check quality drift) are non-fatal.
+    if (isAdvisoryExit(step.name, r.status)) {
+      const note = step.name === 'scan'
+        ? 'reports drift (expected in flight)'
+        : 'reports quality drift (advisory, non-blocking)';
+      if (!quiet) console.error(`[refresh] ⚠ ${step.name} ${note}`);
       return { ok: true, ms, warn: true };
     }
     console.error(`[refresh] ✗ ${step.name} exit=${r.status} (${ms}ms)`);
@@ -74,32 +96,42 @@ function run(step) {
   return { ok: true, ms };
 }
 
-let failed = false;
-const results = {};
-for (const step of STEPS) {
-  if (!step.required) {
-    if (!quiet) console.error(`[refresh] — skipping ${step.name} (flag)`);
-    results[step.name] = { skipped: true };
-    continue;
+function main() {
+  let failed = false;
+  const results = {};
+  for (const step of STEPS) {
+    if (!step.required) {
+      if (!quiet) console.error(`[refresh] — skipping ${step.name} (flag)`);
+      results[step.name] = { skipped: true };
+      continue;
+    }
+    const r = run(step);
+    results[step.name] = r;
+    if (!r.ok) {
+      failed = true;
+      if (step.name === 'audit') break; // audit fail is informational, keep going elsewhere
+      break;
+    }
   }
-  const r = run(step);
-  results[step.name] = r;
-  if (!r.ok) {
-    failed = true;
-    if (step.name === 'audit') break; // audit fail is informational, keep going elsewhere
-    break;
+
+  if (publish && !failed) {
+    const r = run({ name: 'publish (dry-run)', script: 'publish.mjs' });
+    results.publish = r;
   }
+
+  const totalMs = Object.values(results).reduce((s, r) => s + (r.ms || 0), 0);
+  const warned = Object.values(results).some(r => r && r.warn);
+  console.log(JSON.stringify({
+    overall: failed ? 'FAIL' : warned ? 'PASS (with advisories)' : 'PASS',
+    total_ms: totalMs,
+    steps: results,
+  }, null, 2));
+  process.exit(failed ? 1 : 0);
 }
 
-if (publish && !failed) {
-  const r = run({ name: 'publish (dry-run)', script: 'publish.mjs' });
-  results.publish = r;
+// Entrypoint guard: run the pipeline ONLY when invoked as a CLI, never on
+// import — so tests can import isAdvisoryExit without spawning the whole
+// pipeline (same import-time-side-effect hardening v915 applied to chapter.mjs).
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main();
 }
-
-const totalMs = Object.values(results).reduce((s, r) => s + (r.ms || 0), 0);
-console.log(JSON.stringify({
-  overall: failed ? 'FAIL' : 'PASS',
-  total_ms: totalMs,
-  steps: results,
-}, null, 2));
-process.exit(failed ? 1 : 0);
