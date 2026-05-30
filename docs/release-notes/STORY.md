@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.916`.
+The story begins at `v1.0` and continues to `v1.49.917`.
 
-**959 chapters.** 958 have retrospectives.
+**960 chapters.** 959 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -967,3 +967,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.914](v1.49.914/00-summary.md)** — Tools-Suite Cluster Closure: node:test Gate + CI-Enforcement + Layer-2 node:test Drift-Guard · 2026-05-29
 - **[v1.49.915](v1.49.915/00-summary.md)** — Counter-Cadence Tools-Suite Hygiene: atlas-deps-audit Flake-Audit + Tools-Suite CI-Hardening (mus-smoke skip-guard + chapter.mjs entrypoint guard) — #10461 3rd Instance · 2026-05-30
 - **[v1.49.916](v1.49.916/00-summary.md)** — Counter-Cadence Codify + Tool-Robustness Ship: Codify #10461 (Gate-Enforce-Every-Runnable-Surface + Drift-Guard) + Release-History PG/Refresh Robustness (Advisory Drift-Check + Loud Credential Error) + AC7 Leak-Scan False-Positive Allowlist · 2026-05-30
+- **[v1.49.917](v1.49.917/00-summary.md)** — Counter-Cadence Codify + Audit-Step Semantics: Codify #10462 (Describe-the-Pattern-Never-Quote-the-Literal Leak-Scanner Authoring Rule + Allowlist-vs-Scrub Decision) + refresh.mjs Audit-Step Semantics Cleanup (Inert Dead-Branch Removal; Audit Stays Fatal Load-Bearing Gate) · 2026-05-30

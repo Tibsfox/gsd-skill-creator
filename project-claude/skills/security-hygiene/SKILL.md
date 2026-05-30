@@ -73,6 +73,48 @@ Defaults and enforcement:
 Referenced by C5 W3.P6 tool-tracker (telemetry writer wiring) and the
 post-tool-use observation hook.
 
+## Authoring around the leak-scanner — don't re-trip the control (Lesson #10462)
+
+The release-history publisher (`tools/release-history/publish.mjs`, `leakScan`) runs
+a hard leak-scan gate over every published chapter. Its effective patterns combine
+committed base patterns with operator-private patterns loaded from the gitignored
+`release-history.local.json`, so the scan is **operator-machine-specific**: a fresh
+CI checkout sees only the base patterns and never the local ones.
+
+Two failure modes recur whenever you DOCUMENT leak-scan or security-hardening work:
+
+1. **The control's own documentation re-trips it.** A retrospective that quotes a
+   leak *pattern* verbatim (e.g. v1.49.588 quoting the narrowed private-path regex
+   it was describing) matches that pattern and is HARD-BLOCKED — even though it
+   contains no real secret.
+2. **The recursion trap.** Documenting the *fix* for #1 by enumerating the private
+   literals the control guards (company / email / credential-var) embeds those
+   values into published content — a genuine leak the scanner correctly blocks.
+   The v1.49.916 retrospective re-tripped exactly this way while documenting the
+   v916 AC7 allowlist fix.
+
+**Authoring rule: describe the pattern, never quote the literal.** In release notes,
+retrospectives, or docs that touch leak-scan work, refer to a pattern by name or
+shape ("the company-name local pattern", "the credential-var form") — never paste
+the regex source and never paste the private value.
+
+**Allowlist-vs-scrub decision rule:**
+
+- The doc legitimately quotes a leak **PATTERN** (a regex, for self-referential
+  documentation) → add a narrow `leak_scan_allowlist` entry in the committed
+  `release-history.config.json`, keyed on the EXACT `version` + `file` + `pattern`
+  source, with a `reason`. Never widen to a global pattern exemption.
+- The content embeds a genuinely-private **VALUE** → **SCRUB the value** from the
+  content. Never allowlist a private value into published output — the allowlist is
+  for pattern-quoting docs only, never for secrets.
+
+This pairs the loud surface (the leak-scan gate) with the authoring discipline that
+keeps it from firing on its own documentation. See
+[`docs/failure-mode-contracts.md`](../../../docs/failure-mode-contracts.md) (#10427
+silent-vs-loud surfaces) and
+[`docs/known-unwired-ledger-discipline.md`](../../../docs/known-unwired-ledger-discipline.md)
+(#10461 gate-enforce-every-runnable-surface + drift-guard).
+
 ## The Staging Layer Principle
 
 "The user's ability to work should be reasonable. Security should also be reasonable. We strive for the clean intersection." Do not over-alert. Do not create friction for normal operations. Surface findings only when something genuinely warrants attention.

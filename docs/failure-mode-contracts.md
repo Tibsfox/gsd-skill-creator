@@ -550,3 +550,7 @@ The `.catch(() => {})` swallow is the structural protection for fire-and-forget 
 - **#10442** — Re-throw `ProcessContextDenied` from CLI swallow-catch. v820 + v842 two-instance evidence, promoted at v847 as a refinement of #10427's load-bearing-fails-loudly rule.
 - **#10446** — Multi-catch helper (`rethrowIfDenied` inline form / `callOrRethrowDenial` higher-order form) for chokepoint denials. ~30-instance evidence across v868-v882 Track 4+5 chokepoint campaigns, promoted at v883 as a refinement of #10442 generalized across ProcessContext + EgressContext (and LoaderContext when its campaign reaches catch-site multiplicity).
 - **#10454** — Fire-and-forget test-side wait via `setTimeout(50ms)`. v891 + v893 + v894 three-instance evidence, promoted at v895 as a test-discipline refinement of #10437's substrate-side fire-and-forget contract.
+
+## Related disciplines (other homes)
+
+- **#10462 — describe the pattern, never quote the literal** (home: `.claude/skills/security-hygiene/SKILL.md`). A sibling of #10427: documenting a *loud* security control — the release-history leak-scan gate — must not feed it the literal it guards. Quoting a scan pattern, or embedding a private value, in published notes re-trips the control on its own documentation. Decision rule: allowlist a pattern-quoting doc on an exact version+file+pattern key; scrub a private value (never allowlist secrets). Codified v1.49.917.

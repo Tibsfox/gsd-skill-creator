@@ -47,6 +47,10 @@ const STEPS = [
   { name: 'regen-history-md',  script: 'regen-history-md.mjs',    required: true },
   { name: 'reconcile',         script: 'pipeline-reconciler.mjs', required: true },
   { name: 'drift-check',       script: 'quality-drift-check.mjs', required: true },
+  // `audit` MUST remain the final step. main()'s loop breaks on the first
+  // non-advisory failure, and audit is a load-bearing verification gate (AC
+  // checks incl. the AC7 leak-scan), so any step appended after it would be
+  // skipped whenever an earlier step fails. Keep audit last.
   { name: 'audit',             script: 'audit.mjs',               required: true },
 ];
 
@@ -108,8 +112,13 @@ function main() {
     const r = run(step);
     results[step.name] = r;
     if (!r.ok) {
+      // Any non-advisory step failure aborts the pipeline. `audit` (the final
+      // step) is a load-bearing verification gate — it runs the AC checks
+      // including the AC7 leak-scan, so a failure there is fatal and loud
+      // (failure-mode-contracts #10427), exactly like every other required
+      // step. Truly advisory exits (scan drift, drift-check quality drift) are
+      // filtered out by isAdvisoryExit() before they reach here.
       failed = true;
-      if (step.name === 'audit') break; // audit fail is informational, keep going elsewhere
       break;
     }
   }
