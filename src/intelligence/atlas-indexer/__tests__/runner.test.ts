@@ -7,7 +7,7 @@
  */
 
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
-import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, realpathSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -97,7 +97,9 @@ class CapturingBus {
 // runtime is ~50ms. Canonical pattern: c6d49d8ab / c49528c42.
 // Discipline doc: .planning/test-discipline/fragile-test-pattern.md (Template 2).
 beforeEach(() => {
-  projectRoot = mkdtempSync(join(tmpdir(), 'atlas-runner-'));
+  // realpath so projectRoot matches the runner's realpath-normalized paths —
+  // macOS tmpdir() is under /var → /private/var (no-op on Linux).
+  projectRoot = realpathSync(mkdtempSync(join(tmpdir(), 'atlas-runner-')));
   dbPath = join(projectRoot, 'atlas.db');
   db = new Database(dbPath);
   db.pragma('journal_mode = WAL');
@@ -361,7 +363,7 @@ describe('atlas-indexer runner — concurrency', () => {
 
   // Hook timeout bumped to 60s — same sqlite/WAL/fsync contention as outer beforeEach.
   beforeEach(() => {
-    cRoot = mkdtempSync(join(tmpdir(), 'atlas-conc-'));
+    cRoot = realpathSync(mkdtempSync(join(tmpdir(), 'atlas-conc-')));
     const cDbPath = join(cRoot, 'atlas.db');
     cDb = new Database(cDbPath);
     cDb.pragma('journal_mode = WAL');

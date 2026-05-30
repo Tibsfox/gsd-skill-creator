@@ -1,12 +1,16 @@
 import { describe, it, expect } from 'vitest';
-import { mkdtempSync, symlinkSync, writeFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, realpathSync, symlinkSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { isCliEntrypoint } from './entrypoint-guard.js';
 
 function withTempDir<T>(fn: (dir: string) => T): T {
-  const dir = mkdtempSync(join(tmpdir(), 'epg-'));
+  // realpath the temp dir so the constructed importMetaUrl matches what
+  // isCliEntrypoint compares against (realpathSync of argv[1]). On macOS
+  // tmpdir() lives under /var → /private/var, so the un-resolved mkdtemp path
+  // diverges from the realpath; on Linux this is a no-op.
+  const dir = realpathSync(mkdtempSync(join(tmpdir(), 'epg-')));
   try {
     return fn(dir);
   } finally {

@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
-import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, realpathSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { walkProjectFiles } from '../file-walker.js';
@@ -19,7 +19,9 @@ function touch(rel: string, body = ''): void {
 }
 
 beforeEach(() => {
-  root = mkdtempSync(join(tmpdir(), 'atlas-walker-'));
+  // realpath so root matches walkProjectFiles' realpath-normalized output —
+  // on macOS tmpdir() is under /var → /private/var (no-op on Linux).
+  root = realpathSync(mkdtempSync(join(tmpdir(), 'atlas-walker-')));
 });
 afterEach(() => {
   rmSync(root, { recursive: true, force: true });
