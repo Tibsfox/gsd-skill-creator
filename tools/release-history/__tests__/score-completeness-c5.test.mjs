@@ -27,11 +27,20 @@ import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { scoreRelease, isCleanupMission } from '../score-completeness.mjs';
+import { frozenCorpus } from './fixtures/frozen-corpus.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = join(HERE, '..', '..', '..');
 
 function buildCorpus(relPath) {
+  // Calibration-target releases read a frozen snapshot (v1.49.913) so their
+  // graded assertions are immune to live release-notes edits. relPaths without a
+  // v1.49.NNN tail (synthetic fixtures under tests/fixtures/) fall through to live.
+  const vm = relPath.match(/v1\.49\.\d+$/);
+  if (vm) {
+    const frozen = frozenCorpus(vm[0]);
+    if (frozen !== null) return frozen;
+  }
   const readmePath = join(REPO_ROOT, relPath, 'README.md');
   if (!existsSync(readmePath)) return null;
   let text = readFileSync(readmePath, 'utf8');

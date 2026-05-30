@@ -60,7 +60,12 @@ import { readFileSync, existsSync, statSync, readdirSync } from 'node:fs';
 import { join, dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
-import { Client } from 'basic-ftp';
+// NOTE: `basic-ftp` is lazy-imported inside main() (the live-upload path) rather
+// than at module top-level. It is an optional, undeclared runtime dependency
+// needed ONLY for real (non-dry-run) FTP sync. A top-level import makes the
+// module unloadable when basic-ftp is absent, which broke the pure-helper test
+// suite (v1.49.913). The dynamic import lives in the same `if (!dryRun)` branch
+// as the Client instantiation, so behavior on the live path is unchanged.
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 
@@ -444,6 +449,7 @@ async function main() {
 
   let client;
   if (!dryRun) {
+    const { Client } = await import('basic-ftp'); // lazy — see top-of-file note
     client = new Client();
     client.ftp.verbose = false;
     try {

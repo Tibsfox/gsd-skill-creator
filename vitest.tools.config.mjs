@@ -1,6 +1,14 @@
-// Forward-ready vitest config for tools/ + scripts/ tests.
-// Used to verify T2.1 scorer + T2.2 bump-version + T2.3 depth-audit
-// invariants until the root vitest config widens to include these dirs.
+// Vitest config for tools/ + scripts/ tests (NOT covered by the root
+// vitest.config.ts, which scopes to src/ .college/ tests/ www/).
+//
+// GATE-ENFORCED as of v1.49.913: pre-tag-gate runs this suite (step "tools-suite",
+// SC_SKIP_TOOLS_SUITE to skip). Before that it ran nowhere enforced and silently
+// rotted red (15 failing catalog/scorer/ftp tests went unseen for ~2 weeks).
+//
+// The include list is EXPLICIT (not a glob) because tools/ also holds node:test
+// files (Node's built-in runner) that vitest cannot execute. The list is kept in
+// sync with disk by tools/check-tools-test-coverage.mjs, exercised via
+// tools/__tests__/tools-config-coverage.test.mjs (the Layer-2 drift-guard below).
 //
 // Usage: npx vitest run --config vitest.tools.config.mjs
 import { defineConfig } from 'vitest/config';
@@ -42,6 +50,17 @@ export default defineConfig({
       'tools/__tests__/perf-assertion-audit-additive.test.mjs',
       'tools/__tests__/check-version-sequence.test.mjs',
       'tools/__tests__/check-discipline-coverage.test.mjs',
+      // Layer-2 drift-guard for this very include list (v1.49.913). Backed by
+      // tools/check-tools-test-coverage.mjs; fails if a tools/ or scripts/ vitest
+      // file is missing here (the rot that hid 15 red tests for ~2 weeks).
+      'tools/__tests__/tools-config-coverage.test.mjs',
+      // v1.49.913 reconciliation: vitest files that existed on disk under tools/
+      // but were never registered here, so they ran NOWHERE enforced.
+      'tools/elc-smoke/__tests__/scorer-regex.test.mjs',
+      'tools/mus-smoke/__tests__/build-template-instruction.test.mjs',
+      'tools/release-history/__tests__/chapter-idempotent.test.mjs',
+      'tools/release-history/__tests__/classify-types-chip.test.mjs',
+      'tools/release-history/__tests__/run-with-pg-env.test.mjs',
       'scripts/__tests__/ci-gate-enum.test.mjs',
       'scripts/__tests__/apply-to-self.test.mjs',
       'scripts/__tests__/apply-to-self-posix-ere.test.mjs',

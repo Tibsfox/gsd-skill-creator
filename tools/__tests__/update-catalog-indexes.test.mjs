@@ -63,8 +63,22 @@ ${setBody}
   writeFileSync(join(researchRoot, 'NASA', 'index.html'), html, 'utf8');
 }
 
+// Cards carry the degree-meta fields the W2.2 template BLOCKER gate requires
+// (added v1.49.658 — tools/catalog-card-template/spec.mjs TRACK_TEMPLATES):
+// MUS needs /^S\d+$/ + SPS + NASA; ELC needs NASA + Flight subset. The
+// href="${d}/index.html" is preserved so the degree-href drift audit is
+// unaffected. Pre-W2.2 these helpers emitted bare <div>${d}</div> cards, which
+// the newer template gate correctly rejects (templateDrift → exit 8); see
+// v1.49.913 ship. The drift-injecting tests (missing/extra href) still produce
+// drift via the href set, independent of these meta fields.
 function makeMUSIndex(researchRoot, degrees) {
-  const cards = degrees.map((d) => `<div class="degree-card"><a href="${d}/index.html"><div>${d}</div></a></div>`).join('\n');
+  const cards = degrees.map((d) => `<div class="degree-card"><a href="${d}/index.html">
+  <div class="degree-num">MUS ${d}</div>
+  <div class="degree-title">Title ${d}</div>
+  <div class="degree-meta"><strong>S36:</strong> Artist</div>
+  <div class="degree-meta"><strong>SPS:</strong> Species</div>
+  <div class="degree-meta"><strong>NASA:</strong> Mission</div>
+</a></div>`).join('\n');
   const html = `<!DOCTYPE html>
 <html><head><title>MUS</title></head><body>
 ${cards}
@@ -73,7 +87,12 @@ ${cards}
 }
 
 function makeELCIndex(researchRoot, degrees) {
-  const cards = degrees.map((d) => `<div class="degree-card"><a href="${d}/index.html"><div>${d}</div></a></div>`).join('\n');
+  const cards = degrees.map((d) => `<div class="degree-card"><a href="${d}/index.html">
+  <div class="degree-num">ELC ${d}</div>
+  <div class="degree-title">Title ${d}</div>
+  <div class="degree-meta"><strong>NASA:</strong> Mission</div>
+  <div class="degree-meta"><strong>Flight subset:</strong> Subset</div>
+</a></div>`).join('\n');
   const html = `<!DOCTYPE html>
 <html><head><title>ELC</title></head><body>
 ${cards}

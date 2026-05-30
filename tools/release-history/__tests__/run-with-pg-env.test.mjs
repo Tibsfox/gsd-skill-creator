@@ -14,7 +14,7 @@
  * verification time via direct shell invocation.
  */
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
-import { mkdtempSync, writeFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, writeFileSync, rmSync, existsSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -44,11 +44,18 @@ describe('C08 — run-with-pg.mjs env-file resolution', () => {
     return spawnSync('node', [WRAPPER, '--check'], { env, encoding: 'utf-8' });
   }
 
-  it('CF-C08-01: default → uses <repo-root>/.env (assumes dev environment has it)', () => {
+  it('CF-C08-01: default → uses <repo-root>/.env (skipped if .env absent — env-coupled)', () => {
+    // Env-coupled: the wrapper's default resolution targets <repo-root>/.env,
+    // present on a dev machine (so it runs under pre-tag-gate) but NOT in CI / a
+    // clean checkout. Skip cleanly when absent rather than fail. v1.49.913 also
+    // fixes the prior assertion: `expect(...).toContain(...) || expect(...)` never
+    // reached the fallback because expect() throws on failure (it does not return
+    // a falsy value to short-circuit), and the literal 'defau' substring is not
+    // in the wrapper's output anyway.
+    if (!existsSync(join(REPO_ROOT, '.env'))) return;
     const result = run({});
     expect(result.status).toBe(0);
-    expect(result.stdout).toContain('default <repo-root>/.env'.toLowerCase().slice(0, 5)) // partial match
-      || expect(result.stdout).toMatch(/--check OK/);
+    expect(result.stdout).toMatch(/--check OK/);
   });
 
   it('CF-C08-02: RH_ENV_FILE override honored when valid', () => {

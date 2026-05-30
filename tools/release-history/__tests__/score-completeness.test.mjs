@@ -19,11 +19,16 @@ import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { scoreRelease, isCleanupMission, isMultiTrackTrs } from '../score-completeness.mjs';
+import { frozenCorpus } from './fixtures/frozen-corpus.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = join(HERE, '..', '..', '..');
 
 function buildCorpus(version) {
+  // Calibration-target releases (v585/v634/v587) read a frozen snapshot so their
+  // graded assertions are immune to live release-notes edits (v1.49.913).
+  const frozen = frozenCorpus(version);
+  if (frozen !== null) return frozen;
   const readmePath = join(REPO_ROOT, 'docs', 'release-notes', version, 'README.md');
   if (!existsSync(readmePath)) return null;
   let text = readFileSync(readmePath, 'utf8');

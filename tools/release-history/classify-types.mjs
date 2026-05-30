@@ -47,10 +47,21 @@ export function classify(release, readmeText) {
     if (hasPartA && hasPartB) {
       return { type: 'degree', confidence: 0.95, reason: 'Part A + Part B header' };
     }
-    // Name-based degree detection as a fallback (for chapter-only releases).
-    if (/\bdegree\s+\w+/i.test(name)) {
-      return { type: 'degree', confidence: 0.85, reason: 'name contains "Degree N"' };
-    }
+  }
+  // Name-based degree detection — a "Degree <number>" title is a strong signal
+  // even when the README body is absent. Hoisted out of the `if (readmeText)`
+  // guard at v1.49.913: production passes readmeText only when the README exists
+  // (classify-types.mjs main), so degree-named releases with no README used to
+  // fall through to 'feature'. The Part A/B check above still takes precedence
+  // (higher confidence) whenever a README is present, so this is a no-op on the
+  // README-present path and only fixes the no-README edge case.
+  //
+  // Anchored to `degree <digit>` (not `\w+`) so prose compounds like
+  // "180-degree Turn", "Third-degree Burn Fix", or "High-degree Polynomial" are
+  // NOT misclassified as degree — a latent over-match the hoist would otherwise
+  // newly expose on the no-README path. Real NASA degrees are always numbered.
+  if (/\bdegree\s+\d/i.test(name)) {
+    return { type: 'degree', confidence: 0.85, reason: 'name contains "Degree <number>"' };
   }
 
   // Milestone markers (strong name signals).

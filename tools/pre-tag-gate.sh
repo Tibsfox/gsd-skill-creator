@@ -144,6 +144,7 @@
 #   0   all checks PASS
 #   1   build failed
 #   2   vitest failed
+#   21  tools-suite (vitest.tools.config.mjs) failed (BLOCKER as of v1.49.913)
 #   3   completeness gate failed
 #   4   CI-on-dev failed / pending
 #   5   www-bundles build failed
@@ -165,7 +166,7 @@
 #   SC_PRE_TAG_GATE_BYPASS=<csv>   skip these steps entirely
 #   SC_PRE_TAG_GATE_REQUIRE=<csv>  escalate WARN-only steps to BLOCKER
 #
-#   step-name vocabulary: build version-sequence vitest completeness ci-gate
+#   step-name vocabulary: build version-sequence vitest tools-suite completeness ci-gate
 #                         www-bundles depth-audit depth-audit-mus-elc claude-md catalog-index
 #                         tauri-boundary apply-to-self scaffolder-residue
 #                         citation-debt-sync story-drift discipline-coverage
@@ -227,7 +228,7 @@ log() {
 #       Escalate WARN-only steps to BLOCKER status.
 #
 # Step-name vocabulary (matches gate step labels):
-#   build version-sequence vitest completeness ci-gate www-bundles
+#   build version-sequence vitest tools-suite completeness ci-gate www-bundles
 #   depth-audit depth-audit-mus-elc claude-md catalog-index tauri-boundary apply-to-self
 #   scaffolder-residue citation-debt-sync story-drift
 #
@@ -295,7 +296,7 @@ gate_required() {
 if [ -n "$_PTG_BYPASS_RAW" ] || [ -n "$_PTG_REQUIRE_RAW" ]; then
   [ -n "$_PTG_BYPASS_RAW" ]  && log "[pre-tag-gate] active BYPASS:  $_PTG_BYPASS_RAW"
   [ -n "$_PTG_REQUIRE_RAW" ] && log "[pre-tag-gate] active REQUIRE: $_PTG_REQUIRE_RAW"
-  log "[pre-tag-gate] (step names: build|version-sequence|vitest|completeness|ci-gate|www-bundles|depth-audit|depth-audit-mus-elc|claude-md|catalog-index|tauri-boundary|apply-to-self|scaffolder-residue|citation-debt-sync|story-drift|discipline-coverage|sps-cohort-uniqueness|nasa-canonical-layout|nasa-canonical-sidebar|project-md)"
+  log "[pre-tag-gate] (step names: build|version-sequence|vitest|tools-suite|completeness|ci-gate|www-bundles|depth-audit|depth-audit-mus-elc|claude-md|catalog-index|tauri-boundary|apply-to-self|scaffolder-residue|citation-debt-sync|story-drift|discipline-coverage|sps-cohort-uniqueness|nasa-canonical-layout|nasa-canonical-sidebar|project-md)"
 fi
 
 # ----- step 0.5: STATE.md normalizer auto-run (v1.49.671, Lesson #10373) -----
@@ -365,6 +366,28 @@ if ! npx vitest run --silent; then
   exit 2
 fi
 log "[pre-tag-gate] step 2/15: PASS"
+
+# ----- step 2.5/15: tools-suite gate (v1.49.913 — closes silent-rot of tools/ + scripts/ tests) -----
+# The main `npx vitest run` (step 2) does NOT cover tools/ + scripts/ tests
+# (vitest.config.ts scopes to src/ .college/ tests/ www/). Those tests ran
+# nowhere enforced and silently rotted red — 15 failing catalog/scorer/ftp tests
+# went unseen for ~2 weeks. This step runs vitest.tools.config.mjs, which
+# includes tools-config-coverage.test.mjs (the Layer-2 drift-guard that fails if
+# a new vitest test file is omitted from the include list). Bypass:
+# SC_PRE_TAG_GATE_BYPASS=tools-suite (legacy SC_SKIP_TOOLS_SUITE=1).
+if gate_bypassed "tools-suite" "SC_SKIP_TOOLS_SUITE"; then
+  log "[pre-tag-gate] step 2.5/15: SKIPPED (tools-suite)"
+else
+  log "[pre-tag-gate] step 2.5/15: tools-suite (vitest.tools.config.mjs — v1.49.913)"
+  if ! npx vitest run --config vitest.tools.config.mjs --silent; then
+    echo "[pre-tag-gate] FAIL: tools-suite (vitest.tools.config.mjs) exited non-zero" >&2
+    echo "[pre-tag-gate]   tools/ + scripts/ tests not covered by the main suite (step 2)." >&2
+    echo "[pre-tag-gate]   Reproduce: npx vitest run --config vitest.tools.config.mjs" >&2
+    echo "[pre-tag-gate]   If a vitest file is 'missing from include list', add it to vitest.tools.config.mjs." >&2
+    exit 21
+  fi
+  log "[pre-tag-gate] step 2.5/15: PASS"
+fi
 
 log "[pre-tag-gate] step 3/15: release-notes completeness gate"
 if ! node tools/release-history/check-completeness.mjs --current --strict; then

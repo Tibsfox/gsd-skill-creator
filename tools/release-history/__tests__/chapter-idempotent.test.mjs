@@ -107,11 +107,21 @@ describe('C04 — writeChapterIdempotent', () => {
     expect(readFileSync(target, 'utf-8')).toBe(GENERATED_OPENER_TEMPLATE);
   });
 
-  it('byte-identical content: PRESERVE (no-op)', () => {
+  it('byte-identical content (≥200 bytes): PRESERVE (no-op)', () => {
     const target = join(tmp, '00-summary.md');
-    writeFileSync(target, GENERATED_OPENER_TEMPLATE);
+    // The <200-byte stub rule (CF-C04-04) fires BEFORE the byte-identical check,
+    // so a sub-200-byte template could never reach the byte-identical branch
+    // (the original template is ~140 bytes). Pad past the stub threshold with
+    // derivable body so the opener still matches and the byte-identical path is
+    // exercised. v1.49.913 fix.
+    const big =
+      GENERATED_OPENER_TEMPLATE +
+      '\n' +
+      '- Detail line that pads the generated chapter past the 200-byte stub threshold.\n'.repeat(4);
+    expect(big.length).toBeGreaterThanOrEqual(200);
+    writeFileSync(target, big);
 
-    const result = writeChapterIdempotent(target, GENERATED_OPENER_TEMPLATE, false);
+    const result = writeChapterIdempotent(target, big, false);
 
     expect(result.wrote).toBe(false);
     expect(result.reason).toMatch(/byte-identical/);

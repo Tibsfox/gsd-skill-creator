@@ -48,7 +48,10 @@
 import { readFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { Client } from 'basic-ftp';
+// `basic-ftp` is lazy-imported inside main() (the live-delete path) — it is an
+// optional, undeclared runtime dependency needed ONLY for real (non-dry-run)
+// FTP operations. A top-level import makes the module unloadable when basic-ftp
+// is absent, breaking the pure-helper test suite (v1.49.913). See ftp-sync.mjs.
 
 import {
   parseEnv,
@@ -275,6 +278,7 @@ async function main() {
 
   let client;
   if (!dryRun) {
+    const { Client } = await import('basic-ftp'); // lazy — see top-of-file note
     client = new Client();
     client.ftp.verbose = false;
     try {
