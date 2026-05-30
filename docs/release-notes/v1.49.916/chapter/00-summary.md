@@ -25,7 +25,7 @@ Two fixes, both in the "tool robustness" theme:
 
 ## 3. AC7 leak-scan false-positive allowlist (un-masked by fix #2)
 
-Making `drift-check` advisory let the previously-skipped `audit` step run — and it surfaced a **benign, pre-existing audit FAIL** hidden for ~330 ships: **AC7 (publish dry-run) blocked 1 file**. The block is a **self-referential false positive** — `v1.49.588/03-retrospective.md` documents the AC7/AC10 leak-scan hardening and quotes the `\.planning/(?:fox-companies|agent-memory)/` regex it describes, so the bare `fox-companies` leak pattern (a gitignored local override) matches its own documentation. No real private-path leak.
+Making `drift-check` advisory let the previously-skipped `audit` step run — and it surfaced a **benign, pre-existing audit FAIL** hidden for ~330 ships: **AC7 (publish dry-run) blocked 1 file**. The block is a **self-referential false positive** — `v1.49.588/03-retrospective.md` documents the AC7/AC10 leak-scan hardening and quotes the private-directory path regex it describes, so a bare company-name leak pattern (a gitignored local override) matched its own documentation. No real private-path leak.
 
 - **`publish.mjs`** — a narrow, dependency-injectable `leak_scan_allowlist`: a violation is excused only on an **exact `version`+`file`+`pattern` match**, each entry carrying a `reason`. A real leak in any other file, a new pattern in the same file, or the same pattern in another release still BLOCKS.
 - **`release-history.config.json`** — the one committed, auditable allowlist entry for the v588 self-reference.

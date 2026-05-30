@@ -24,7 +24,7 @@ So the *real* "exits 1 every ship" cause was `refresh.mjs` not honoring drift-ch
 
 ## AC7 — un-masked, characterized, fixed
 
-Making drift advisory let the `audit` step run for the first time in ~330 ships and surfaced **AC7 (publish dry-run): 1 blocked file** — `v1.49.588/03-retrospective.md`, a **self-referential false positive**: the retrospective documents the AC7/AC10 leak-scan hardening and quotes the `\.planning/(?:fox-companies|agent-memory)/` regex, so the bare `fox-companies` pattern (a gitignored local override) matches its own documentation. No real leak. Fixed with a narrow, exact-match, committed `leak_scan_allowlist` (operator-selected via AskUserQuestion over track-separately / source-edit).
+Making drift advisory let the `audit` step run for the first time in ~330 ships and surfaced **AC7 (publish dry-run): 1 blocked file** — `v1.49.588/03-retrospective.md`, a **self-referential false positive**: the retrospective documents the AC7/AC10 leak-scan hardening and quotes the private-directory path regex, so a bare company-name pattern (a gitignored local override) matched its own documentation. No real leak. Fixed with a narrow, exact-match, committed `leak_scan_allowlist` (operator-selected via AskUserQuestion over track-separately / source-edit).
 
 ## Verification trail
 
@@ -49,7 +49,7 @@ Milestone-specific notes:
 
 1. **NASA forward-cadence at 1.179** — the standing highest-leverage move; codify/gate/verify debt near-zero. 134 consecutive ships at the 1.178 pressure-margin record.
 2. **Audit-step semantics review** — decide whether `refresh.mjs`'s `audit` failure should be fatal (current) or advisory (the dead-branch comment's stated intent); resolve the inert `if (audit) break` smell at the same time.
-3. **`fox-companies`-pattern breadth** — the bare `fox-companies` leak pattern (local override) is broad enough that future retrospectives naming it will re-trip; consider narrowing the local pattern or extending the allowlist per occurrence.
+3. **Local leak-pattern breadth (observed live this ship).** The bare company-name leak pattern (local override) is broad enough that any retrospective *naming* it re-trips — including this ship's own draft notes, which enumerated the private identifiers and were scrubbed to abstract descriptions rather than allowlisted (genuinely-private strings such as an operator email or credential-var name must NOT be allowlisted into published content — only documentation that incidentally quotes a pattern, like v588, warrants an allowlist). Consider narrowing the local pattern; treat "describe the pattern, never quote the literal" as the authoring rule for leak-scanner retrospectives.
 
 ## Known issues carried forward (unchanged this ship)
 

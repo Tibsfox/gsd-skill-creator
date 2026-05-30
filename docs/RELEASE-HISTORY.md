@@ -1,15 +1,16 @@
 # Release History
 
-958 milestones shipped across the v1.0 → v1.49.915 arc. The table below lists every shipped release, newest first.
+959 milestones shipped across the v1.0 → v1.49.916 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 958 releases · 957 with retrospectives · 750 with extracted lessons · quality A:662 B:98 C:62 D:12 F:124 (avg 86) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 959 releases · 958 with retrospectives · 750 with extracted lessons · quality A:662 B:98 C:62 D:12 F:125 (avg 86) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.916](release-notes/v1.49.916) | Counter-Cadence Codify + Tool-Robustness Ship: Codify #10461 (Gate-Enforce-Every-Runnable-Surface + Drift-Guard) + Release-History PG/Refresh Robustness (Advisory Drift-Check + Loud Credential Error) + AC7 Leak-Scan False-Positive Allowlist | 2026-05-30 | 2 | — | — | [s](release-notes/v1.49.916/chapter/00-summary.md) [r](release-notes/v1.49.916/chapter/03-retrospective.md) [l](release-notes/v1.49.916/chapter/04-lessons.md) [c](release-notes/v1.49.916/chapter/99-context.md) | — | F 29 |  |
 | [v1.49.915](release-notes/v1.49.915) | Counter-Cadence Tools-Suite Hygiene: atlas-deps-audit Flake-Audit (De-Noise + Stale-Allowlist Fix + Live-Tree Enforcement) + Tools-Suite CI-Hardening (mus-smoke skip-guard + chapter.mjs entrypoint guard) — #10461 3rd Instance | 2026-05-30 | 2 | — | — | [s](release-notes/v1.49.915/chapter/00-summary.md) [r](release-notes/v1.49.915/chapter/03-retrospective.md) [l](release-notes/v1.49.915/chapter/04-lessons.md) [c](release-notes/v1.49.915/chapter/99-context.md) | — | D 63 |  |
 | [v1.49.914](release-notes/v1.49.914) | Tools-Suite Cluster Closure: node:test Gate + CI-Enforcement + Layer-2 node:test Drift-Guard | 2026-05-29 | 2 | — | — | [s](release-notes/v1.49.914/chapter/00-summary.md) [r](release-notes/v1.49.914/chapter/03-retrospective.md) [l](release-notes/v1.49.914/chapter/04-lessons.md) [c](release-notes/v1.49.914/chapter/99-context.md) | — | F 49 |  |
 | [v1.49.913](release-notes/v1.49.913) | Tools-Suite Gate Wiring + Silent-Rot Green-Up + Layer-2 Drift-Guard | 2026-05-29 | 2 | — | — | [s](release-notes/v1.49.913/chapter/00-summary.md) [r](release-notes/v1.49.913/chapter/03-retrospective.md) [l](release-notes/v1.49.913/chapter/04-lessons.md) [c](release-notes/v1.49.913/chapter/99-context.md) | — | F 55 |  |
