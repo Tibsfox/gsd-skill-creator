@@ -8391,6 +8391,121 @@ mod m13_kernel_launch_tests {
 
         assert_eq!(host_output[0], expected, "XOR of 0xAA^0xBB^0xCC should be 0x{expected:02X}");
     }
+
+    // ── M14·D1: NVRTC runtime CUDA-C compilation ───────────────────────
+
+    /// CUDA C source equivalent to the hand-authored `BATCH_XOR_CHECKSUM_PTX`.
+    const CUDA_XOR_CHECKSUM_SRC: &str = r#"
+extern "C" __global__ void batch_xor_checksum(
+    const unsigned char* input,
+    unsigned int* output,
+    unsigned int chunk_size,
+    unsigned int num_chunks)
+{
+    unsigned int gid = blockIdx.x * blockDim.x + threadIdx.x;
+    if (gid >= num_chunks) return;
+    unsigned int acc = 0;
+    const unsigned char* base = input + (unsigned long long)gid * chunk_size;
+    for (unsigned int i = 0; i < chunk_size; i++) {
+        acc ^= (unsigned int)base[i];
+    }
+    output[gid] = acc;
+}
+"#;
+
+    /// Trivial in-place increment kernel with the canonical `(u8*, u32)` shape.
+    const CUDA_INCREMENT_SRC: &str = r#"
+extern "C" __global__ void increment(unsigned char* data, unsigned int len) {
+    unsigned int gid = blockIdx.x * blockDim.x + threadIdx.x;
+    if (gid < len) {
+        data[gid] = data[gid] + 1;
+    }
+}
+"#;
+
+    #[test]
+    fn compile_cuda_trivial_kernel_loads() {
+        let ctx = VramContext::new(0).expect("CUDA device 0");
+        let kernel = ctx.compile_cuda("extern \"C\" __global__ void noop() { }", "noop");
+        assert!(kernel.is_ok(), "NVRTC compile failed: {:?}", kernel.err());
+    }
+
+    #[test]
+    fn compile_cuda_bad_source_surfaces_error() {
+        let ctx = VramContext::new(0).expect("CUDA device 0");
+        // Undeclared identifiers + invalid statement → NVRTC compile error.
+        let res = ctx.compile_cuda(
+            "extern \"C\" __global__ void broken() { this is not valid cuda }",
+            "broken",
+        );
+        assert!(res.is_err(), "expected NVRTC compile failure");
+        let msg = format!("{:?}", res.err().unwrap());
+        assert!(msg.contains("nvrtc compile"), "error should name the nvrtc stage: {msg}");
+    }
+
+    #[test]
+    fn nvrtc_compiled_checksum_matches_hand_ptx() {
+        let ctx = VramContext::new(0).expect("CUDA device 0");
+        let ptx_kernel = ctx.load_ptx(BATCH_XOR_CHECKSUM_PTX, "batch_xor_checksum")
+            .expect("load hand PTX");
+        let cuda_kernel = ctx.compile_cuda(CUDA_XOR_CHECKSUM_SRC, "batch_xor_checksum")
+            .expect("nvrtc compile");
+
+        // 4 chunks of 8 bytes: chunk c = [c+1; 8].
+        let num_chunks: u32 = 4;
+        let chunk_size: u32 = 8;
+        let total = (num_chunks * chunk_size) as usize;
+        let mut host_input = vec![0u8; total];
+        for c in 0..num_chunks as usize {
+            for b in 0..chunk_size as usize {
+                host_input[c * chunk_size as usize + b] = (c + 1) as u8;
+            }
+        }
+        let mut input = ctx.alloc(total).expect("alloc input");
+        ctx.upload(&host_input, &mut input).expect("upload");
+        let handle = KernelHandle::from_data_len("batch_xor_checksum", num_chunks, 256);
+
+        let mut out_ptx = ctx.stream().alloc_zeros::<u32>(num_chunks as usize).expect("alloc out");
+        let mut out_cuda = ctx.stream().alloc_zeros::<u32>(num_chunks as usize).expect("alloc out");
+        unsafe {
+            ctx.launch_checksum(&ptx_kernel, &handle, &input.slice, &mut out_ptx, chunk_size, num_chunks)
+                .expect("launch ptx");
+            ctx.launch_checksum(&cuda_kernel, &handle, &input.slice, &mut out_cuda, chunk_size, num_chunks)
+                .expect("launch cuda");
+        }
+        let mut host_ptx = vec![0u32; num_chunks as usize];
+        let mut host_cuda = vec![0u32; num_chunks as usize];
+        ctx.stream().memcpy_dtoh(&out_ptx, &mut host_ptx).expect("download ptx");
+        ctx.stream().memcpy_dtoh(&out_cuda, &mut host_cuda).expect("download cuda");
+
+        assert_eq!(host_ptx, host_cuda, "NVRTC-compiled kernel must match hand-PTX byte-for-byte");
+        assert!(host_cuda.iter().all(|&c| c == 0), "8 identical bytes XOR to 0");
+    }
+
+    // ── M14·D2: generic in-place launch ────────────────────────────────
+
+    #[test]
+    fn launch_inplace_increments_buffer() {
+        let ctx = VramContext::new(0).expect("CUDA device 0");
+        let kernel = ctx.compile_cuda(CUDA_INCREMENT_SRC, "increment")
+            .expect("nvrtc compile increment");
+
+        let host_input: Vec<u8> = (0..32u8).collect();
+        let len = host_input.len() as u32;
+        let mut buf = ctx.alloc(host_input.len()).expect("alloc");
+        ctx.upload(&host_input, &mut buf).expect("upload");
+
+        let handle = KernelHandle::from_data_len("increment", len, 256);
+        unsafe {
+            ctx.launch_inplace_u8(&kernel, &handle, &mut buf.slice, len).expect("launch inplace");
+        }
+
+        let mut host_out = vec![0u8; host_input.len()];
+        ctx.download(&buf, &mut host_out).expect("download");
+        for (i, &v) in host_out.iter().enumerate() {
+            assert_eq!(v, host_input[i].wrapping_add(1), "byte {i} should be incremented once");
+        }
+    }
 }
 
 // =========================================================================
@@ -8649,5 +8764,87 @@ mod vram_verify_checksums_tests {
         // At least one should be 0 (chunks 0 and 2) and one should be 0xFF
         assert!(checksums.contains(&0), "expected at least one zero checksum");
         assert!(checksums.contains(&0xFF), "expected 0xFF checksum");
+    }
+
+    // ── M14·D2: apply_kernel over a VRAM chunk ─────────────────────────
+
+    const CUDA_INCREMENT_SRC: &str = r#"
+extern "C" __global__ void increment(unsigned char* data, unsigned int len) {
+    unsigned int gid = blockIdx.x * blockDim.x + threadIdx.x;
+    if (gid < len) {
+        data[gid] = data[gid] + 1;
+    }
+}
+"#;
+
+    #[test]
+    fn apply_kernel_transforms_chunk_in_place() {
+        let ctx = std::sync::Arc::new(VramContext::new(0).expect("CUDA device 0"));
+        let kernel = ctx.compile_cuda(CUDA_INCREMENT_SRC, "increment").expect("compile increment");
+        let mut pool = VramPool::new(ctx.clone(), TierKind::Vector, 8, 16, unlimited_policy())
+            .expect("VramPool");
+
+        let id = pool.alloc(&[10u8, 20, 30, 40]).expect("alloc");
+        pool.apply_kernel(id, &kernel).expect("apply");
+
+        let got = pool.get(id).expect("get");
+        assert_eq!(got, vec![11u8, 21, 31, 41], "every byte incremented on-device");
+    }
+
+    // ── M14·D3: verify_against_host integrity verdict ──────────────────
+
+    fn host_xor(bytes: &[u8]) -> u32 {
+        bytes.iter().fold(0u32, |acc, &b| acc ^ b as u32)
+    }
+
+    #[test]
+    fn verify_against_host_clean_pool_passes() {
+        let ctx = std::sync::Arc::new(VramContext::new(0).expect("CUDA device 0"));
+        let mut pool = VramPool::new(ctx, TierKind::Vector, 4, 16, unlimited_policy())
+            .expect("VramPool");
+
+        let p0 = [1u8, 2, 3, 4];
+        let p1 = [0xFFu8, 0, 0, 0];
+        let id0 = pool.alloc(&p0).expect("alloc 0");
+        let id1 = pool.alloc(&p1).expect("alloc 1");
+
+        let mut expected = std::collections::HashMap::new();
+        expected.insert(id0, host_xor(&p0));
+        expected.insert(id1, host_xor(&p1));
+
+        let report = pool.verify_against_host(&expected).expect("verify");
+        assert!(report.ok, "clean pool should pass; mismatches: {:?}", report.mismatches);
+        assert!(report.mismatches.is_empty());
+    }
+
+    #[test]
+    fn verify_against_host_detects_tampered_expectation() {
+        let ctx = std::sync::Arc::new(VramContext::new(0).expect("CUDA device 0"));
+        let mut pool = VramPool::new(ctx, TierKind::Vector, 4, 16, unlimited_policy())
+            .expect("VramPool");
+
+        let p0 = [1u8, 2, 3, 4];
+        let p1 = [9u8, 8, 7, 6];
+        let id0 = pool.alloc(&p0).expect("alloc 0");
+        let id1 = pool.alloc(&p1).expect("alloc 1");
+
+        let mut expected = std::collections::HashMap::new();
+        expected.insert(id0, host_xor(&p0));
+        expected.insert(id1, host_xor(&p1) ^ 0xFF); // wrong expected for id1 only
+
+        let report = pool.verify_against_host(&expected).expect("verify");
+        assert!(!report.ok, "tampered expectation must fail");
+        assert_eq!(report.mismatches, vec![id1], "exactly the tampered chunk is flagged");
+    }
+
+    #[test]
+    fn verify_against_host_empty_pool_passes() {
+        let ctx = std::sync::Arc::new(VramContext::new(0).expect("CUDA device 0"));
+        let pool = VramPool::new(ctx, TierKind::Vector, 4, 16, unlimited_policy())
+            .expect("VramPool");
+        let expected = std::collections::HashMap::new();
+        let report = pool.verify_against_host(&expected).expect("verify");
+        assert!(report.ok);
+        assert!(report.mismatches.is_empty());
     }
 }

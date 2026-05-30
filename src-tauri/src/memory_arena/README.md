@@ -24,7 +24,7 @@ See `memory/amiga-ram-storage-design.md` for the full philosophy:
 
 Not `tmpfs`. Not `/dev/shm`. Not OS-managed. We own every byte.
 
-## Module layout (M13)
+## Module layout (M14)
 
 | File | Lines | Purpose |
 |---|---|---|
@@ -37,7 +37,7 @@ Not `tmpfs`. Not `/dev/shm`. Not OS-managed. We own every byte.
 | `warm_start.rs` | 420 | `WarmStart::open`, `ColdSource` + `AsyncColdSource` traits, `InMemoryColdSource` |
 | `persistence.rs` | 873 | Checkpoint (v1 dense + v2 sparse) + append-only journal |
 | `pg_cold.rs` | 127 | `PgColdSource` — PostgreSQL-backed ColdSource (feature = postgres) |
-| `vram.rs` | 622 | `VramContext`, `VramPool`, `PinnedBuffer`, `GpuTopology`, `KernelHandle` (feature = cuda) |
+| `vram.rs` | 989 | `VramContext`, `VramPool`, `PinnedBuffer`, `GpuTopology`, `KernelHandle`, `CudaKernel` (NVRTC `compile_cuda`), `IntegrityReport` (feature = cuda) |
 | `handle.rs` | 161 | Opaque `ArenaHandle` + `TierKind` string conversion helpers |
 | `error.rs` | 109 | `ArenaError` enum + `ArenaResult<T>` |
 | `mod.rs` | 54 | Module re-exports |
@@ -140,6 +140,11 @@ Criterion benchmarks live at `src-tauri/benches/arena_bench.rs` and cover:
 - **M11** = `SyncAllocator<A>` Mutex wrapper + `AsyncColdSource` trait with blanket impl.
 - **M12** = `PinnedBuffer` (MAP_LOCKED) + VRAM sweep integration tests (cuda).
 - **M13** = `GpuTopology` multi-GPU discovery + `KernelHandle` launch config (cuda).
+- **M14** = GPU compute (cuda). `VramContext::compile_cuda` (NVRTC runtime
+  CUDA-C→PTX), `launch_inplace_u8` + `VramPool::apply_kernel` (generic
+  `(u8*, u32)` in-place kernels over arena VRAM chunks), `verify_against_host`
+  → `IntegrityReport` (consumes the `verify_checksums` GPU kernel as a verdict).
+  See [`docs/memory-arena/M14-baseline.md`](../../../docs/memory-arena/M14-baseline.md).
 
 **Re-run command:**
 ```bash

@@ -421,6 +421,18 @@ pub struct VramPool {
     next_id: u64,
 }
 
+/// Outcome of a GPU-side integrity check over a [`VramPool`]. Produced by
+/// [`VramPool::verify_against_host`]: `ok` is true exactly when every chunk's
+/// GPU-computed checksum matched its caller-supplied expected value.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct IntegrityReport {
+    /// True when `mismatches` is empty.
+    pub ok: bool,
+    /// Chunk ids whose GPU checksum did not match the expected value — or that
+    /// had no expected entry supplied.
+    pub mismatches: Vec<ChunkId>,
+}
+
 impl VramPool {
     /// Create a new VramPool with `num_slots` capacity.
     pub fn new(
@@ -586,6 +598,56 @@ impl VramPool {
             .map_err(|e| ArenaError::CudaError(e.to_string()))?;
 
         Ok((chunk_ids, checksums))
+    }
+
+    /// Apply a compiled in-place transform kernel to an existing VRAM chunk.
+    ///
+    /// The kernel must export the canonical `(u8* data, u32 len)` signature
+    /// (see [`VramContext::launch_inplace_u8`]). The transform runs on the
+    /// device over the chunk's own bytes; the result stays GPU-resident and is
+    /// observable via [`get`](Self::get). Launch geometry is one thread per
+    /// byte (`grid = ceil(len / 256)`).
+    pub fn apply_kernel(&mut self, id: ChunkId, kernel: &CudaKernel) -> ArenaResult<()> {
+        let ctx = self.context.clone();
+        let &slot_idx = self.directory.get(&id)
+            .ok_or(ArenaError::UnknownChunkId(id.as_u64()))?;
+        let slot = self.slots[slot_idx].as_mut()
+            .ok_or(ArenaError::UnknownChunkId(id.as_u64()))?;
+        let len = slot.alloc.size_bytes() as u32;
+        if len == 0 {
+            return Ok(());
+        }
+        let handle = KernelHandle::from_data_len("inplace", len, 256);
+        // SAFETY: `slot.alloc.slice` is a live device allocation of exactly
+        // `len` bytes; the `(u8*, u32)` kernel contract bounds-checks gid < len.
+        unsafe {
+            ctx.launch_inplace_u8(kernel, &handle, &mut slot.alloc.slice, len)?;
+        }
+        Ok(())
+    }
+
+    /// Verify every chunk's GPU-computed XOR checksum against caller-supplied
+    /// expected values — turning [`verify_checksums`](Self::verify_checksums)
+    /// from a raw checksum dump into an integrity verdict. Runs the batch
+    /// checksum kernel once, then compares per-chunk: any chunk whose GPU
+    /// checksum differs from its `expected` entry (or that has no entry) is
+    /// reported as a mismatch.
+    pub fn verify_against_host(
+        &self,
+        expected: &HashMap<ChunkId, u32>,
+    ) -> ArenaResult<IntegrityReport> {
+        let (ids, checksums) = self.verify_checksums()?;
+        let mut mismatches = Vec::new();
+        for (id, actual) in ids.iter().zip(checksums.iter()) {
+            match expected.get(id) {
+                Some(exp) if exp == actual => {}
+                _ => mismatches.push(*id),
+            }
+        }
+        Ok(IntegrityReport {
+            ok: mismatches.is_empty(),
+            mismatches,
+        })
     }
 }
 
@@ -772,6 +834,24 @@ impl VramContext {
         Ok(CudaKernel { _module: module, func })
     }
 
+    /// Compile CUDA C source to PTX at runtime via NVRTC, then load the named
+    /// function. Unlike [`load_ptx`](Self::load_ptx) (which takes pre-written
+    /// PTX assembly), this accepts high-level CUDA C — far more ergonomic than
+    /// hand-authoring PTX.
+    ///
+    /// The kernel entry point MUST be declared `extern "C" __global__` so its
+    /// symbol is exported un-mangled and matches `fn_name`. On compile failure
+    /// the NVRTC compiler log is surfaced in the returned error.
+    pub fn compile_cuda(&self, cuda_src: &str, fn_name: &str) -> ArenaResult<CudaKernel> {
+        let ptx = cudarc::nvrtc::compile_ptx(cuda_src)
+            .map_err(|e| ArenaError::CudaError(format!("nvrtc compile: {e:?}")))?;
+        let module = self.ctx.load_module(ptx)
+            .map_err(|e| ArenaError::CudaError(format!("load_module: {e}")))?;
+        let func = module.load_function(fn_name)
+            .map_err(|e| ArenaError::CudaError(format!("load_function({fn_name}): {e}")))?;
+        Ok(CudaKernel { _module: module, func })
+    }
+
     /// Launch a checksum kernel: computes per-chunk XOR checksums on the GPU.
     ///
     /// - `kernel`: loaded CudaKernel with the `batch_xor_checksum` entry point
@@ -802,6 +882,41 @@ impl VramContext {
             .arg(&num_chunks)
             .launch(cfg)
             .map_err(|e| ArenaError::CudaError(format!("launch: {e}")))?;
+        self.stream.synchronize()
+            .map_err(|e| ArenaError::CudaError(format!("synchronize: {e}")))?;
+        Ok(())
+    }
+
+    /// Launch a generic in-place transform kernel over a device buffer.
+    ///
+    /// The kernel must export the canonical in-place signature
+    /// `(unsigned char* data, unsigned int len)` and is responsible for its
+    /// own bounds checking (the convention is one thread per byte; the kernel
+    /// guards `gid < len`). The buffer is mutated on the device and the call
+    /// synchronizes on the default stream before returning.
+    ///
+    /// This is the generic counterpart to [`launch_checksum`](Self::launch_checksum):
+    /// any kernel of the `(u8*, u32)` shape — compiled from PTX via
+    /// [`load_ptx`](Self::load_ptx) or from CUDA C via
+    /// [`compile_cuda`](Self::compile_cuda) — can be applied to arena VRAM.
+    ///
+    /// # Safety
+    /// `buf` must be a valid device allocation of at least `len` bytes and the
+    /// kernel must not write outside `[0, len)`.
+    pub unsafe fn launch_inplace_u8(
+        &self,
+        kernel: &CudaKernel,
+        handle: &KernelHandle,
+        buf: &mut CudaSlice<u8>,
+        len: u32,
+    ) -> ArenaResult<()> {
+        let cfg = handle.launch_config();
+        self.stream
+            .launch_builder(&kernel.func)
+            .arg(buf)
+            .arg(&len)
+            .launch(cfg)
+            .map_err(|e| ArenaError::CudaError(format!("launch_inplace: {e}")))?;
         self.stream.synchronize()
             .map_err(|e| ArenaError::CudaError(format!("synchronize: {e}")))?;
         Ok(())
