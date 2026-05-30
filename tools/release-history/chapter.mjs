@@ -16,6 +16,7 @@
 
 import { writeFileSync, readFileSync, mkdirSync, existsSync, statSync } from 'node:fs';
 import { join, basename } from 'node:path';
+import { pathToFileURL } from 'node:url';
 import { loadConfig, REPO_ROOT } from './config.mjs';
 import { openDb } from './db.mjs';
 import { normalizeOpener, openerMatches } from './opener-match.mjs';
@@ -396,8 +397,19 @@ async function main() {
   console.log(JSON.stringify({ chapters: chapterCount, files: fileCount, idempotent_writes: writeLog.length }, null, 2));
 }
 
-main().catch(e => {
-  console.error('[chapter] fatal:', e.message);
-  console.error(e.stack);
-  process.exit(2);
-});
+// Entrypoint guard: run main() (which queries PG and writes chapters) ONLY when
+// chapter.mjs is executed directly as a CLI — NOT when a test imports
+// writeChapterIdempotent. Without this guard, `import … from './chapter.mjs'`
+// runs main() as an import side effect; in CI (no PG) the empty release set
+// throws `undefined.version`, and because main() is fire-and-forget its async
+// process.exit(2) lands on whichever vitest file is running and fails the run
+// non-deterministically. (Entrypoint-guard discipline; cf. the src/cli.ts
+// main()-at-module-load fix.) Closed v1.49.915 — v914's tools-suite CI-wiring
+// exposed this import-time side effect.
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main().catch(e => {
+    console.error('[chapter] fatal:', e.message);
+    console.error(e.stack);
+    process.exit(2);
+  });
+}

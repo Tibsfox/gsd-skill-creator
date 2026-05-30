@@ -8,11 +8,14 @@
  * Authored 2026-04-28 in v1.49.585 component C07.
  * Spec: .planning/missions/v1-49-585-concerns-cleanup/components/07-mus-phase-c-template.md
  *
- * NOTE: this test file lives at tools/mus-smoke/__tests__/ which is OUTSIDE the
- * current vitest include glob (vitest.config.ts scopes to src/**, .college/**,
- * tests/**). It is forward-ready: a future milestone widening vitest scope to
- * tools/** will activate this test automatically. For v1.49.585, the same
- * assertions are run inline at C00/G1 verification time via direct grep.
+ * NOTE: this test reads the canonical template under `.planning/`, which is
+ * GITIGNORED — present in a local working tree but ABSENT on a fresh CI checkout.
+ * The v1.49.913 tools-suite vitest config (vitest.tools.config.mjs) + the v1.49.914
+ * CI-wiring activated this file (it was authored when tools/ was outside vitest
+ * scope, per the original forward-ready note). Per Lesson #10182 (meta-test
+ * skip-guards against gitignored runtime artifacts), the suite SKIPS when the
+ * template is absent so CI stays green; when present (local), all assertions run.
+ * Closed v1.49.915 (the v914 CI-wiring exposed the missing skip-guard as a CI red).
  */
 import { describe, it, expect } from 'vitest';
 import { readFileSync, existsSync } from 'node:fs';
@@ -28,7 +31,11 @@ const TEMPLATE_PATH = join(
   '.planning/templates/MUS-PHASE-C-BUILD-TEMPLATE.md',
 );
 
-describe('MUS Phase C build template — concept-registry authoring instruction', () => {
+// .planning/ is gitignored — absent on a fresh CI checkout (Lesson #10182). Skip the
+// whole suite when the template is missing so CI stays green; run fully when present.
+const TEMPLATE_PRESENT = existsSync(TEMPLATE_PATH);
+
+describe.skipIf(!TEMPLATE_PRESENT)('MUS Phase C build template — concept-registry authoring instruction', () => {
   it('CF-C07-01: template file exists at .planning/templates/MUS-PHASE-C-BUILD-TEMPLATE.md', () => {
     expect(existsSync(TEMPLATE_PATH)).toBe(true);
   });

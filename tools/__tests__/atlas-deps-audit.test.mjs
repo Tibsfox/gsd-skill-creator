@@ -1,14 +1,22 @@
 /**
  * atlas-deps-audit.mjs — vitest invariant tests (v1.49.607 W4a)
  *
- * 5 cases:
+ * 6 cases:
  *   1. Clean atlas surface passes (PASS + exit 0)
  *   2. Fixture with introduced bare-import fails with clear message
  *   3. Fixture with allowed cross-tree import passes
  *   4. --json mode produces parseable JSON
  *   5. --strict alias (same behavior as default on violation: exit 1)
+ *   6. Live regression: the real atlas tree passes the audit (guards the
+ *      CROSS_TREE_ALLOW_PATTERNS allowlist against drift; ADR-0003 acceptance test)
  *
- * Hermetic: uses tmp dirs with synthesized .ts fixtures.
+ * Cases 1-5 are hermetic (tmp dirs with synthesized .ts fixtures). Cases 2/5
+ * deliberately trigger a violation and assert the `FAIL` message on stderr; that
+ * stderr is captured into err.stderr (NOT echoed to the vitest console) via
+ * stdio:pipe in runAudit — the un-piped echo caused a false-alarm ship mis-read at
+ * v1.49.914 (see docs/test-discipline/flake-audit-2026-05-30.md). Case 6 is
+ * intentionally NON-hermetic — it scans the live src/atlas +
+ * desktop/intelligence/atlas surfaces against the real package.json baseline.
  * Run via: npx vitest run --config vitest.tools.config.mjs
  */
 
@@ -44,7 +52,11 @@ function runAudit(extraArgs = '', env = {}) {
   // The script reads REPO_ROOT from its own __dirname, so we pass --root override.
   const cmd = `node "${SCRIPT_PATH}" --root "${REPO_ROOT}" --atlas-root "${tmpRoot}" ${extraArgs}`;
   try {
-    const stdout = execSync(cmd, { encoding: 'utf8', env: { ...process.env, ...env } });
+    // stdio: pipe stderr (not inherit) so the negative-path cases' expected
+    // `atlas-deps-audit: FAIL …` line lands in err.stderr for assertions WITHOUT
+    // leaking to the vitest console (that leak read as a real failure during the
+    // v1.49.914 ship — see docs/test-discipline/flake-audit-2026-05-30.md).
+    const stdout = execSync(cmd, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'], env: { ...process.env, ...env } });
     return { stdout, stderr: '', exitCode: 0 };
   } catch (err) {
     return {
@@ -141,5 +153,31 @@ export const cloneDeep = lodash.cloneDeep;
     expect(withStrict.exitCode).toBe(1);
     expect(withoutStrict.exitCode).toBe(1);
     expect(withStrict.stderr).toContain('lodash');
+  });
+
+  // ── Case 6: live regression — real atlas tree passes the audit ────────────
+  // NON-hermetic by design: scans the actual src/atlas + desktop/intelligence/atlas
+  // surfaces (no --atlas-root override) against the real package.json baseline. This
+  // is the ADR-0003 acceptance test (docs/adr/0003-atlas-clean-room-policy.md §
+  // Verification) wired into the gate+CI-enforced tools suite. It locks the live
+  // CROSS_TREE_ALLOW_PATTERNS allowlist: a new un-allowlisted cross-tree import (e.g.
+  // a future security-chokepoint wire) or a new external atlas dep fails loudly here.
+  // Regression target: the v1.49.905 LoaderContext wire in spatial/pmtiles-reader.ts
+  // went un-allowlisted until v1.49.915 — the audit reported a false-positive
+  // violation because nothing gate-ran it against the real tree.
+  it('the live atlas tree passes the audit (guards CROSS_TREE_ALLOW_PATTERNS against drift)', () => {
+    const stdout = execSync(`node "${SCRIPT_PATH}" --json`, {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'pipe'],
+    });
+    const parsed = JSON.parse(stdout);
+    expect(
+      parsed.pass,
+      `atlas-deps-audit found ${parsed.violations} live violation(s): ` +
+        `${JSON.stringify(parsed.results)} — either allowlist a legitimate in-tree ` +
+        `primitive in CROSS_TREE_ALLOW_PATTERNS (ADR-0003 cat. b) or remove the ` +
+        `external dep from the atlas surface.`,
+    ).toBe(true);
+    expect(parsed.violations).toBe(0);
   });
 });

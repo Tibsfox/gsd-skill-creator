@@ -20,6 +20,8 @@
  *   src/intelligence/kb/provenance.ts
  *   src/intelligence/provenance/
  *   src/atlas/           (intra-primitive imports from desktop/intelligence/atlas/)
+ *   src/security/loader-context.ts  (Tier-E LoaderContext chokepoint; wired into
+ *                        atlas at v1.49.905 by spatial/pmtiles-reader.ts; ADR-0003 cat. b)
  *
  * Exit codes:
  *   0 = no violations
@@ -91,6 +93,13 @@ const CROSS_TREE_ALLOW_PATTERNS = [
   /\/src\/intelligence\/kb\/provenance\.js/,
   // src/intelligence/provenance/
   /\/src\/intelligence\/provenance\//,
+  // src/security/loader-context.ts — Tier-E LoaderContext security chokepoint
+  // (v1.49.782 surface; wired into the atlas surface at v1.49.905 by
+  // spatial/pmtiles-reader.ts). ADR-0003 category (b): an existing repo-root
+  // primitive in src/* outside atlas. Imported as '../../security/loader-context.js'
+  // (no 'src/' segment in the relative specifier), so this pattern matches the
+  // chokepoint by its file suffix rather than a /src/ prefix.
+  /\/security\/loader-context\.js$/,
 ];
 
 // ── collect all .ts files under roots ───────────────────────────────────────
