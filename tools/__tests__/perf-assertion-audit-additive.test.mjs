@@ -20,7 +20,7 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { detectShape, SHAPE_PATTERNS } from '../perf-assertion-audit.mjs';
+import { detectShape, SHAPE_PATTERNS, toPosixEre } from '../perf-assertion-audit.mjs';
 
 describe('perf-assertion-audit additive/subtractive shape (v1.49.637 C7 Sub-1a)', () => {
   it('catches multiplier-only relative-ratio (regression baseline, no behavior change)', () => {
@@ -56,10 +56,42 @@ describe('perf-assertion-audit additive/subtractive shape (v1.49.637 C7 Sub-1a)'
 
   it('SHAPE_PATTERNS.relative-ratio regex compiles and is exported', () => {
     expect(SHAPE_PATTERNS['relative-ratio']).toBeInstanceOf(RegExp);
-    // The broadened pattern contains the additive trailing class.
-    expect(SHAPE_PATTERNS['relative-ratio'].source).toContain('[\\d.+ \\-]*');
+    // The broadened pattern contains the additive trailing class. NOTE the
+    // class is `[0-9...]`, NOT `[\d...]`: a JS shorthand nested inside a
+    // `[...]` would be mistranslated by toPosixEre (see portability test).
+    expect(SHAPE_PATTERNS['relative-ratio'].source).toContain('[0-9.+ \\-]*');
     // And the pre-multiplier alternation (digit before `*`) for the
     // `expect(x).toBeLessThan(N * ident + K)` shape.
     expect(SHAPE_PATTERNS['relative-ratio'].source).toContain('\\d+(\\.\\d+)?\\s*\\*');
+  });
+
+  // Regression guard for the v1.49.921-followup BSD/macOS git-grep fix.
+  // Every SHAPE_PATTERN source is fed to `git grep -E` via gitGrep(); BSD
+  // git grep aborts on lazy quantifiers and on shorthand classes nested in
+  // `[...]`. These assertions pin the invariant so a future edit can't
+  // silently re-introduce a pattern that errors only on macOS.
+  describe('POSIX-ERE portability (BSD/macOS git grep safe)', () => {
+    for (const [name, re] of Object.entries(SHAPE_PATTERNS)) {
+      it(`${name}: source has no lazy quantifier and no shorthand class inside [...]`, () => {
+        expect(re.source).not.toMatch(/[*+?]\?/); // no +? *? ??
+        expect(re.source).not.toMatch(/\[[^\]]*\\[dsw]/); // no [\d ...] etc.
+      });
+      it(`${name}: toPosixEre output is lazy-free and shorthand-free`, () => {
+        const ere = toPosixEre(re.source);
+        expect(ere).not.toMatch(/[*+?]\?/);
+        expect(ere).not.toContain('\\d');
+        expect(ere).not.toContain('\\s');
+        expect(ere).not.toContain('[['); // no malformed nested class
+      });
+    }
+
+    it('toPosixEre strips lazy quantifiers and translates shorthand classes', () => {
+      expect(toPosixEre('a+?')).toBe('a+');
+      expect(toPosixEre('a*?')).toBe('a*');
+      expect(toPosixEre('a??')).toBe('a?');
+      expect(toPosixEre('\\d+')).toBe('[0-9]+');
+      expect(toPosixEre('\\s*')).toBe('[ \\t]*');
+      expect(toPosixEre('[^)]+?x')).toBe('[^)]+x');
+    });
   });
 });

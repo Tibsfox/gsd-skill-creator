@@ -47,8 +47,14 @@ const SHAPE_PATTERNS = {
   //       `expect(geoAvg).toBeLessThan(3 * baselineAvg + 5)`)
   // The alternation matches either order; both end with optional
   // additive/subtractive trailing constants.
+  // NOTE: keep this POSIX-ERE portable — its `.source` is fed to `git grep
+  // -E` (see gitGrep). No lazy quantifiers (`+?`) and no JS shorthand class
+  // (`\d`/`\s`) INSIDE a `[...]`; BSD/macOS git grep rejects the former and
+  // ereCompat mistranslates the latter. `\d`/`\s` at top level are fine
+  // (ereCompat translates them). detectShape uses only `.test()`, so greedy
+  // vs lazy and `[0-9…]` vs `[\d…]` are behaviourally identical here.
   'relative-ratio':
-    /expect\([^)]+\)\.toBeLessThan\(([^)]+\*\s*\d+(\.\d+)?|\d+(\.\d+)?\s*\*\s*[^)]+?)[\d.+ \-]*\)/,
+    /expect\([^)]+\)\.toBeLessThan\(([^)]+\*\s*\d+(\.\d+)?|\d+(\.\d+)?\s*\*\s*[^)]+)[0-9.+ \-]*\)/,
 };
 
 // Native-module-backed import signatures — when a test file imports any
@@ -71,16 +77,32 @@ const IO_BOUND_HINTS = [
 ];
 
 /**
+ * Translate a JS-regex `.source` into a POSIX-ERE-portable pattern accepted
+ * by both GNU and BSD (macOS) `git grep -E`.
+ *
+ * Two portability hazards motivate this:
+ *  - JS shorthand classes (`\d`/`\s`/`\w`) are not POSIX ERE — translate the
+ *    top-level ones to character classes. (Top-level ONLY: do not nest a
+ *    shorthand inside a `[...]` in the caller's pattern — the blunt replace
+ *    would mistranslate `[\d...]` to the malformed `[[0-9]...]`.)
+ *  - Lazy quantifiers (`+?`/`*?`/`??`) are a PCRE/JS feature; BSD git grep
+ *    rejects them as "repetition-operator operand invalid". POSIX matching is
+ *    greedy, so the trailing `?` is safely dropped.
+ */
+function toPosixEre(pattern) {
+  return pattern
+    .replace(/\\d/g, '[0-9]')
+    .replace(/\\s/g, '[ \\t]')
+    .replace(/([*+?])\?/g, '$1');
+}
+
+/**
  * Run `git grep -n` for an extended regex across SOURCE_ROOTS.
  * Returns an array of `{ path, lineNumber, snippet }` records.
- *
- * Note: POSIX ERE does NOT understand JS regex shorthand classes
- * (`\d`, `\s`, `\w`). We translate `\d` to `[0-9]` before invoking git
- * grep so callers can pass JS regex `.source` directly.
+ * Callers pass a JS regex `.source`; toPosixEre() makes it BSD-safe.
  */
 function gitGrep(pattern) {
-  // Translate JS shorthand to POSIX ERE equivalents.
-  const ereCompat = pattern.replace(/\\d/g, '[0-9]').replace(/\\s/g, '[ \\t]');
+  const ereCompat = toPosixEre(pattern);
   const result = spawnSync(
     'git',
     ['grep', '-n', '-E', ereCompat, '--', ...SOURCE_ROOTS],
@@ -246,7 +268,7 @@ function main(argv) {
 }
 
 // Exported for tests.
-export { runAudit, classifyTierUp, detectShape, SHAPE_PATTERNS };
+export { runAudit, classifyTierUp, detectShape, toPosixEre, SHAPE_PATTERNS };
 
 // Run main when invoked directly.
 if (import.meta.url === `file://${process.argv[1]}`) {
