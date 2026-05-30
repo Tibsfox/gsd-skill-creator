@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.918`.
+The story begins at `v1.0` and continues to `v1.49.919`.
 
-**961 chapters.** 960 have retrospectives.
+**962 chapters.** 961 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -969,3 +969,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.916](v1.49.916/00-summary.md)** — Counter-Cadence Codify + Tool-Robustness Ship: Codify #10461 (Gate-Enforce-Every-Runnable-Surface + Drift-Guard) + Release-History PG/Refresh Robustness (Advisory Drift-Check + Loud Credential Error) + AC7 Leak-Scan False-Positive Allowlist · 2026-05-30
 - **[v1.49.917](v1.49.917/00-summary.md)** — Counter-Cadence Codify + Audit-Step Semantics: Codify #10462 (Describe-the-Pattern-Never-Quote-the-Literal Leak-Scanner Authoring Rule + Allowlist-vs-Scrub Decision) + refresh.mjs Audit-Step Semantics Cleanup (Inert Dead-Branch Removal; Audit Stays Fatal Load-Bearing Gate) · 2026-05-30
 - **[v1.49.918](v1.49.918/00-summary.md)** — Memory Arena Resume (M14–M16): GPU Compute (NVRTC Runtime Compile + Generic In-Place Launch + verify_checksums Integrity Verdict) + Opt-in cgroup Memory Ceiling on ArenaSet + Live Migration Adoption Proof (107MB Corpus, 752 Bindings Resolve) + Corpus-Absent Skip-Guard · 2026-05-30
+- **[v1.49.919](v1.49.919/00-summary.md)** — GAP-Table Reconciliation: GAP-4 GPU Pipeline E2E CLOSED + Proven (Coprocessor Typed-Client Contract-Drift Repair — normalizeToolResult Adapter + Fixture Drift-Guard + Skill-Activation→cuRAND GPU Proof on RTX 4060 Ti) + GAP-5 Minecraft Knowledge World Scoped-Out (ADR 0005, Intentional Out-of-Scope) · 2026-05-30

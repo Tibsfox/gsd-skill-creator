@@ -51,22 +51,70 @@ export interface ToolResult<T = unknown> {
   meta: ToolResultMeta;
 }
 
-/** VRAM budget report from `math.vram`. */
+/**
+ * VRAM budget report from `math.vram` (and the nested `vram` block of
+ * `math.capabilities`). Field names mirror the Python server verbatim —
+ * captured from a live `coprocessors/math/` probe on 2026-05-30. The server
+ * is the source of truth; keep this in sync.
+ */
 export interface VramReport {
   budget_mb: number;
-  used_mb: number;
-  free_mb: number;
-  per_chip: Record<ChipName, number>;
+  allocated_mb: number;
+  utilization_pct: number;
+  active_allocations: number;
+  backend: string;
+  gpu_name: string;
+  gpu_free_mb: number;
+  gpu_total_mb: number;
 }
 
-/** Capabilities report from `math.capabilities`. */
+/** Per-chip capability record nested under `CapabilitiesReport.chips`. */
+export interface ChipCapability {
+  /** Upper-case chip identifier, e.g. "STATOS". */
+  chip: string;
+  operations: string[];
+  /** Operations that dispatch to the GPU when CUDA is available. */
+  gpu_accelerated: string[];
+  /** Operations that always run on the CPU oracle. */
+  cpu_fallback: string[];
+  precision: Precision[];
+  /** Backend description, e.g. "cuRAND+custom". */
+  backend: string;
+  enabled: boolean;
+  /** SYMBEX-only: NVRTC JIT availability + cache stats. */
+  jit_available?: boolean;
+  jit_cache?: Record<string, unknown>;
+}
+
+/** GPU device info nested under `CapabilitiesReport.gpu`. */
+export interface GpuInfo {
+  name: string;
+  compute_capability: [number, number];
+  total_memory_mb: number;
+  free_memory_mb: number;
+  available: boolean;
+}
+
+/** CUDA stream isolation status from `math.streams`. */
+export interface StreamsReport {
+  dedicated_stream: boolean;
+  stream_priority: number;
+  active_ops: number;
+  max_concurrent_ops: number;
+  sync_after_op: boolean;
+}
+
+/**
+ * Capabilities report from `math.capabilities`. Mirrors the live server
+ * response (probed 2026-05-30): a flat object with `chips`, `gpu`, `vram`,
+ * `streams`, and `config` keys.
+ */
 export interface CapabilitiesReport {
-  chips: Record<ChipName, { enabled: boolean; gpu_ops: string[]; cpu_ops: string[] }>;
-  gpu_available: boolean;
-  gpu_name?: string;
-  cuda_version?: string;
-  default_precision: Precision;
-  vram_budget_mb: number;
+  chips: Record<ChipName, ChipCapability>;
+  gpu: GpuInfo;
+  vram: VramReport;
+  streams: StreamsReport;
+  config: { default_precision: Precision; thermal_limit_c: number };
 }
 
 /** Transport configuration for spawning the Python MCP server. */

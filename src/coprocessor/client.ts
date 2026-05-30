@@ -13,10 +13,13 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type {
   CapabilitiesReport,
+  ChipName,
   CoprocessorClientOptions,
   Precision,
+  StreamsReport,
   ToolName,
   ToolResult,
+  ToolResultMeta,
   VramReport,
 } from './types.js';
 
@@ -25,6 +28,57 @@ const __dirname = dirname(__filename);
 
 function defaultCoprocessorRoot(): string {
   return resolve(__dirname, '..', '..', 'coprocessors', 'math');
+}
+
+/** Meta-ish keys the Python server attaches to every compute result. */
+const META_KEYS = ['backend', 'precision', 'computation_time_ms', 'operation', 'jit_cached'] as const;
+
+/**
+ * Normalise the Python server's flat response dict into the `{ value, meta }`
+ * envelope this client exposes.
+ *
+ * The server returns flat dicts, not a pre-built envelope — captured from a
+ * live `coprocessors/math/` probe on 2026-05-30:
+ *   - single-value ops (det, gemm, solve, gradient, transform, batch_eval,
+ *     symbex.eval): `{ result, backend, precision, computation_time_ms, ... }`
+ *   - spread ops (monte_carlo, describe, svd, fft, ifft, spectrum, regression,
+ *     verify): payload fields at top level alongside the meta keys
+ *   - report ops (capabilities, vram, streams): flat report, no `result`
+ *   - failures: `{ error, ..., backend: "error" }`
+ *
+ * This adapter is the single source of truth for that mapping:
+ *   - `meta.device`     ← `backend` ("gpu" iff the op ran on the GPU)
+ *   - `meta.elapsed_ms` ← `computation_time_ms`
+ *   - `value`           ← `result` when present, else the payload with the
+ *                         meta keys stripped.
+ *
+ * Server-side errors are LOAD-BEARING — a failed computation must not
+ * masquerade as a value — so they propagate as a thrown Error (per the
+ * failure-mode-contracts discipline #10427) rather than a malformed result.
+ */
+export function normalizeToolResult<T = unknown>(name: ToolName, raw: unknown): ToolResult<T> {
+  const obj = raw && typeof raw === 'object' ? (raw as Record<string, unknown>) : {};
+  if ('error' in obj) {
+    throw new Error(`Coprocessor tool ${name} failed: ${String(obj.error)}`);
+  }
+  const chip = (name.includes('.') ? name.split('.')[0] : name) as ChipName | 'math';
+  const { backend, precision } = obj;
+  const meta: ToolResultMeta = {
+    chip,
+    tool: name,
+    device: backend === 'gpu' ? 'gpu' : 'cpu',
+    precision: precision === 'fp32' || precision === 'fp64' ? precision : 'fp64',
+    elapsed_ms: typeof obj.computation_time_ms === 'number' ? obj.computation_time_ms : 0,
+  };
+  let value: unknown;
+  if ('result' in obj) {
+    value = obj.result;
+  } else {
+    const cleaned: Record<string, unknown> = { ...obj };
+    for (const k of META_KEYS) delete cleaned[k];
+    value = cleaned;
+  }
+  return { value: value as T, meta };
 }
 
 export class CoprocessorClient {
@@ -96,7 +150,7 @@ export class CoprocessorClient {
     if (first.type !== 'text' || typeof first.text !== 'string') {
       throw new Error(`Coprocessor tool ${name} returned non-text content`);
     }
-    return JSON.parse(first.text) as ToolResult<T>;
+    return normalizeToolResult<T>(name, JSON.parse(first.text));
   }
 
   // ── META ──────────────────────────────────────────────────────────────
@@ -109,8 +163,8 @@ export class CoprocessorClient {
     return this.callTool<VramReport>('math.vram');
   }
 
-  async streams(): Promise<ToolResult<Record<string, unknown>>> {
-    return this.callTool<Record<string, unknown>>('math.streams');
+  async streams(): Promise<ToolResult<StreamsReport>> {
+    return this.callTool<StreamsReport>('math.streams');
   }
 
   // ── ALGEBRUS (linear algebra) ────────────────────────────────────────
@@ -130,8 +184,8 @@ export class CoprocessorClient {
     return this.callTool<number[]>('algebrus.solve', args);
   }
 
-  async svd(args: { a: number[][]; precision?: Precision }): Promise<ToolResult<{ u: number[][]; s: number[]; vt: number[][] }>> {
-    return this.callTool<{ u: number[][]; s: number[]; vt: number[][] }>('algebrus.svd', args);
+  async svd(args: { a: number[][]; precision?: Precision }): Promise<ToolResult<{ U: number[][]; s: number[]; Vt: number[][] }>> {
+    return this.callTool<{ U: number[][]; s: number[]; Vt: number[][] }>('algebrus.svd', args);
   }
 
   async eigen(args: { a: number[][]; precision?: Precision }): Promise<ToolResult<{ eigenvalues: number[]; eigenvectors: number[][] }>> {
@@ -172,22 +226,22 @@ export class CoprocessorClient {
 
   // ── STATOS (statistics) ──────────────────────────────────────────────
 
-  async describe(args: { data: number[]; precision?: Precision }): Promise<ToolResult<{ mean: number; median: number; stddev: number; variance: number; min: number; max: number; quartiles: number[] }>> {
-    return this.callTool<{ mean: number; median: number; stddev: number; variance: number; min: number; max: number; quartiles: number[] }>(
+  async describe(args: { data: number[]; precision?: Precision }): Promise<ToolResult<{ mean: number; median: number; std: number; var: number; min: number; max: number; count: number; q25: number; q75: number }>> {
+    return this.callTool<{ mean: number; median: number; std: number; var: number; min: number; max: number; count: number; q25: number; q75: number }>(
       'statos.describe',
       args,
     );
   }
 
-  async monteCarlo(args: { expression: string; param_ranges: Record<string, [number, number]>; n_paths?: number; precision?: Precision }): Promise<ToolResult<{ mean: number; stddev: number; percentiles: Record<string, number> }>> {
-    return this.callTool<{ mean: number; stddev: number; percentiles: Record<string, number> }>(
+  async monteCarlo(args: { expression: string; param_ranges: Record<string, [number, number]>; n_paths?: number; precision?: Precision }): Promise<ToolResult<{ mean: number; std: number; min: number; max: number; q05: number; q95: number; n_paths: number }>> {
+    return this.callTool<{ mean: number; std: number; min: number; max: number; q05: number; q95: number; n_paths: number }>(
       'statos.monte_carlo',
       args,
     );
   }
 
-  async regression(args: { x: number[]; y: number[]; degree?: number; precision?: Precision }): Promise<ToolResult<{ coefficients: number[]; r_squared: number; residuals: number[] }>> {
-    return this.callTool<{ coefficients: number[]; r_squared: number; residuals: number[] }>(
+  async regression(args: { x: number[]; y: number[]; degree?: number; precision?: Precision }): Promise<ToolResult<{ coefficients: number[]; r_squared: number }>> {
+    return this.callTool<{ coefficients: number[]; r_squared: number }>(
       'statos.regression',
       args,
     );
@@ -199,7 +253,7 @@ export class CoprocessorClient {
     return this.callTool<number[]>('symbex.eval', args);
   }
 
-  async verify(args: { expression: string; param_name: string; values: number[]; expected: number | number[]; tolerance?: number; precision?: Precision }): Promise<ToolResult<{ passed: boolean; max_error: number }>> {
-    return this.callTool<{ passed: boolean; max_error: number }>('symbex.verify', args);
+  async verify(args: { expression: string; param_name: string; values: number[]; expected: number | number[]; tolerance?: number; precision?: Precision }): Promise<ToolResult<{ verified: boolean; max_error: number; tolerance: number; n_points: number }>> {
+    return this.callTool<{ verified: boolean; max_error: number; tolerance: number; n_points: number }>('symbex.verify', args);
   }
 }

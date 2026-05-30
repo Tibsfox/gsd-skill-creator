@@ -2,10 +2,12 @@
  * Coprocessor applicator hook — pre-warms GPU math chips for loaded skills
  * that declare a `coprocessor:` frontmatter block.
  *
- * Strictly additive and default-off. The global flag
- * `gsd-skill-creator.coprocessor.enabled` in `.claude/settings.json`
- * gates the whole module. When the flag is false, the hook short-circuits
- * and the pipeline is byte-identical to a build that never imported it.
+ * Strictly additive and default-ON (since 2026-04-23 per operator request —
+ * see `readCoprocessorEnabledFlag` below). The global flag
+ * `gsd-skill-creator.coprocessor.enabled` in `.claude/gsd-skill-creator.json`
+ * gates the whole module. When the flag is explicitly false, the hook
+ * short-circuits and the pipeline is byte-identical to a build that never
+ * imported it.
  *
  * When enabled, the stage scans each loaded skill's frontmatter for a
  * `coprocessor:` entry (either an array shorthand of chip names or an

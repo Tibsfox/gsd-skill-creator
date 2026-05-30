@@ -4,14 +4,19 @@
  * Spawns the actual Python MCP server at `coprocessors/math/` and exercises
  * a handful of tool calls against it. GATED: only runs when the environment
  * variable `COPROCESSOR_LIVE_TESTS=1` is set, so default `npm test` stays
- * lean and CI doesn't fail on machines without the Python + mcp package
- * prerequisites.
+ * lean and CI doesn't fail on machines without the Python prerequisites.
  *
  * To run locally:
- *   COPROCESSOR_LIVE_TESTS=1 npx vitest run src/coprocessor/__tests__/live.integration.test.ts
+ *   COPROCESSOR_LIVE_TESTS=1 \
+ *   COPROCESSOR_PYTHON=/path/to/python \
+ *   npx vitest run src/coprocessor/__tests__/live.integration.test.ts
  *
- * Requirements: a Python interpreter on PATH with the `mcp` package
- * importable and the repo-root `coprocessors/math/` tree available.
+ * Requirements: a Python interpreter on PATH (or COPROCESSOR_PYTHON) with the
+ * `mcp`, `numpy`, and `scipy` packages importable and the repo-root
+ * `coprocessors/math/` tree available.
+ *
+ * Assertions reflect the server's REAL flat wire shapes (probed 2026-05-30),
+ * normalised into the `{ value, meta }` envelope by `normalizeToolResult`.
  */
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { CoprocessorClient } from '../client.js';
@@ -41,16 +46,17 @@ describeLive('CoprocessorClient (live Python server)', () => {
       expect(caps.value.chips[chip]).toBeDefined();
       expect(typeof caps.value.chips[chip].enabled).toBe('boolean');
     }
-    expect(['fp32', 'fp64']).toContain(caps.value.default_precision);
-    expect(caps.value.vram_budget_mb).toBeGreaterThan(0);
+    expect(['fp32', 'fp64']).toContain(caps.value.config.default_precision);
+    expect(caps.value.vram.budget_mb).toBeGreaterThan(0);
+    expect(typeof caps.value.gpu.available).toBe('boolean');
   }, 20_000);
 
   it('reports a VRAM budget', async () => {
     const report = await client.vram();
     expect(report.value.budget_mb).toBeGreaterThan(0);
-    expect(report.value.used_mb).toBeGreaterThanOrEqual(0);
-    expect(report.value.free_mb).toBeGreaterThanOrEqual(0);
-    expect(report.value.used_mb + report.value.free_mb).toBeLessThanOrEqual(report.value.budget_mb + 1);
+    expect(report.value.allocated_mb).toBeGreaterThanOrEqual(0);
+    expect(report.value.gpu_free_mb).toBeGreaterThanOrEqual(0);
+    expect(report.value.gpu_total_mb).toBeGreaterThanOrEqual(report.value.gpu_free_mb);
   }, 20_000);
 
   it('computes algebrus.det of a known 2x2 matrix (CPU-fallback safe)', async () => {
@@ -64,7 +70,7 @@ describeLive('CoprocessorClient (live Python server)', () => {
   it('describes a constant vector correctly', async () => {
     const result = await client.describe({ data: [5, 5, 5, 5, 5] });
     expect(result.value.mean).toBeCloseTo(5, 10);
-    expect(result.value.stddev).toBeCloseTo(0, 10);
+    expect(result.value.std).toBeCloseTo(0, 10);
     expect(result.value.min).toBe(5);
     expect(result.value.max).toBe(5);
   }, 20_000);

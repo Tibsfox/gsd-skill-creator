@@ -13,10 +13,17 @@ import type { ChipName, CoprocessorActivationSpec } from './types.js';
 
 let sharedClient: CoprocessorClient | null = null;
 
-/** Lazily initialise and return the shared coprocessor client. */
+/**
+ * Lazily initialise and return the shared coprocessor client.
+ *
+ * Honors the `COPROCESSOR_PYTHON` env var so the default-on activation path
+ * can target a non-`python3` interpreter (e.g. a venv with `mcp`/`numpy`/
+ * `scipy`) on machines where the bare `python3` lacks the server deps.
+ */
 export async function getSharedClient(): Promise<CoprocessorClient> {
   if (sharedClient) return sharedClient;
-  sharedClient = new CoprocessorClient();
+  const pythonPath = process.env.COPROCESSOR_PYTHON;
+  sharedClient = new CoprocessorClient(pythonPath ? { pythonPath } : {});
   await sharedClient.connect();
   return sharedClient;
 }

@@ -67,8 +67,8 @@ async function listTools(client: CoprocessorClient): Promise<number> {
   const caps = await client.capabilities();
   for (const [chip, info] of Object.entries(caps.value.chips)) {
     process.stdout.write(`[${chip}] enabled=${info.enabled}\n`);
-    for (const op of info.gpu_ops) process.stdout.write(`    ${chip}.${op}  (gpu)\n`);
-    for (const op of info.cpu_ops) process.stdout.write(`    ${chip}.${op}  (cpu-only)\n`);
+    for (const op of info.gpu_accelerated) process.stdout.write(`    ${chip}.${op}  (gpu)\n`);
+    for (const op of info.cpu_fallback) process.stdout.write(`    ${chip}.${op}  (cpu-only)\n`);
   }
   return 0;
 }
