@@ -444,18 +444,29 @@ else
     echo "[pre-tag-gate] FAIL: cannot derive nameWithOwner from remote.origin.url" >&2
     exit 4
   fi
-  RUN_JSON="$(gh run list --repo "$REPO_NWO" --branch dev --limit 10 \
-    --json status,conclusion,headSha,databaseId,url 2>&1)" || {
+  # Pin the ship-blocking workflow explicitly. Without --workflow, `gh run
+  # list` returns runs from ALL workflows on dev — including the decoupled,
+  # non-blocking ci-macos.yml lane ("CI (macOS)"), which can be
+  # workflow_dispatch'd onto dev and would then win the most-recent `.[0]`
+  # selection at the same dev-tip SHA. That made the gate read the WRONG
+  # workflow's conclusion (a false FAIL when the macOS lane is in_progress or
+  # red while the Linux CI is green). Restrict to the Linux ship-gate workflow.
+  # Override the workflow file via SC_CI_GATE_WORKFLOW (e.g. after folding
+  # macOS into ci.yml's matrix per the ci-macos.yml promotion path).
+  CI_GATE_WORKFLOW="${SC_CI_GATE_WORKFLOW:-ci.yml}"
+  RUN_JSON="$(gh run list --repo "$REPO_NWO" --branch dev --workflow "$CI_GATE_WORKFLOW" --limit 10 \
+    --json status,conclusion,headSha,databaseId,url,workflowName 2>&1)" || {
     echo "[pre-tag-gate] FAIL: gh run list returned error: $RUN_JSON" >&2
     exit 4
   }
   MATCHING="$(echo "$RUN_JSON" | jq --arg sha "$DEV_SHA" '[.[] | select(.headSha == $sha)] | .[0]')"
   if [ "$MATCHING" = "null" ] || [ -z "$MATCHING" ]; then
-    echo "[pre-tag-gate] FAIL: no CI run found for origin/dev tip $DEV_SHA" >&2
+    echo "[pre-tag-gate] FAIL: no '$CI_GATE_WORKFLOW' CI run found for origin/dev tip $DEV_SHA" >&2
     echo "[pre-tag-gate]   Possible causes:" >&2
     echo "[pre-tag-gate]     a) you have unpushed commits on dev → \`git push origin dev\`" >&2
     echo "[pre-tag-gate]     b) CI is queued but not yet started → wait + retry" >&2
-    echo "[pre-tag-gate]     c) CI workflow does not run on this branch (config gap)" >&2
+    echo "[pre-tag-gate]     c) '$CI_GATE_WORKFLOW' does not run on this branch, or was renamed" >&2
+    echo "[pre-tag-gate]        (override the workflow file via SC_CI_GATE_WORKFLOW=<file>)" >&2
     echo "[pre-tag-gate]   Override (emergency): SC_SKIP_CI_GATE=1" >&2
     exit 4
   fi
