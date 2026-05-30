@@ -1860,6 +1860,82 @@ mod arena_set_tests {
         }
     }
 
+    // ── M15: opt-in cgroup memory enforcement on ArenaSet ──────────────
+
+    use crate::memory_arena::cgroup::{CgroupEnforcer, GROWTH_STEP_BYTES, HARD_CAP_BYTES};
+
+    /// Write a mock cgroup v2 memory control directory (never the real one).
+    fn mock_cgroup(dir: &std::path::Path, current: u64, max: u64) {
+        std::fs::write(dir.join("memory.max"), max.to_string()).unwrap();
+        std::fs::write(dir.join("memory.current"), current.to_string()).unwrap();
+        std::fs::write(dir.join("memory.swap.max"), "0").unwrap();
+    }
+
+    #[test]
+    fn alloc_without_cgroup_enforcer_is_passthrough() {
+        let tmp = tempdir().unwrap();
+        let config = ArenaSetConfig::new(tmp.path()).with_pool(pool_spec(TierKind::Hot, 0));
+        let mut set = ArenaSet::create(config).expect("create");
+        assert!(!set.has_cgroup_enforcer());
+        assert!(set.cgroup_state().is_none());
+        // Default-off: alloc succeeds with no cgroup interaction.
+        let id1 = set.alloc(TierKind::Hot, vec![1u8; 64]).expect("alloc 1");
+        let id2 = set.alloc(TierKind::Hot, vec![2u8; 64]).expect("alloc 2");
+        assert_ne!(id1.as_u64(), id2.as_u64());
+    }
+
+    #[test]
+    fn alloc_with_cgroup_enforcer_passes_when_headroom() {
+        let arena_dir = tempdir().unwrap();
+        let cg_dir = tempdir().unwrap();
+        mock_cgroup(cg_dir.path(), 1 << 30, 8u64 << 30); // 1 GiB used, 8 GiB max
+        let config = ArenaSetConfig::new(arena_dir.path()).with_pool(pool_spec(TierKind::Hot, 0));
+        let mut set = ArenaSet::create(config).expect("create");
+        set.attach_cgroup_enforcer(
+            CgroupEnforcer::from_path(cg_dir.path().to_path_buf()).expect("from_path"),
+        );
+        assert!(set.has_cgroup_enforcer());
+        let _ = set.alloc(TierKind::Hot, vec![7u8; 64]).expect("alloc within headroom");
+        // Ample headroom → no grow; limit unchanged.
+        let state = set.cgroup_state().expect("attached").expect("state");
+        assert_eq!(state.limit_bytes, 8u64 << 30);
+    }
+
+    #[test]
+    fn alloc_with_cgroup_enforcer_grows_limit_under_pressure() {
+        let arena_dir = tempdir().unwrap();
+        let cg_dir = tempdir().unwrap();
+        let max0 = 8u64 << 30;
+        // Only 10 bytes of headroom → any real payload forces one grow step.
+        mock_cgroup(cg_dir.path(), max0 - 10, max0);
+        let config = ArenaSetConfig::new(arena_dir.path()).with_pool(pool_spec(TierKind::Hot, 0));
+        let mut set = ArenaSet::create(config).expect("create");
+        set.attach_cgroup_enforcer(
+            CgroupEnforcer::from_path(cg_dir.path().to_path_buf()).expect("from_path"),
+        );
+        let _ = set.alloc(TierKind::Hot, vec![0u8; 64]).expect("alloc forces a grow");
+        // memory.max grew by exactly one step.
+        let new_max = std::fs::read_to_string(cg_dir.path().join("memory.max")).unwrap();
+        assert_eq!(new_max.trim(), (max0 + GROWTH_STEP_BYTES).to_string());
+    }
+
+    #[test]
+    fn alloc_with_cgroup_enforcer_rejects_at_hard_cap() {
+        let arena_dir = tempdir().unwrap();
+        let cg_dir = tempdir().unwrap();
+        // memory.max already at the hard cap with no headroom → cannot grow.
+        mock_cgroup(cg_dir.path(), HARD_CAP_BYTES - 5, HARD_CAP_BYTES);
+        let config = ArenaSetConfig::new(arena_dir.path()).with_pool(pool_spec(TierKind::Hot, 0));
+        let mut set = ArenaSet::create(config).expect("create");
+        set.attach_cgroup_enforcer(
+            CgroupEnforcer::from_path(cg_dir.path().to_path_buf()).expect("from_path"),
+        );
+        let err = set
+            .alloc(TierKind::Hot, vec![0u8; 64])
+            .expect_err("allocation must be rejected at the ceiling");
+        assert!(matches!(err, ArenaError::CgroupError(_)), "got {err:?}");
+    }
+
     #[test]
     fn arena_set_creates_backing_files_and_manifest() {
         let tmp = tempdir().unwrap();

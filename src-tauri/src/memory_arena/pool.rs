@@ -28,6 +28,7 @@ use std::path::{Path, PathBuf};
 use serde::{Deserialize, Serialize};
 
 use crate::memory_arena::arena::Arena;
+use crate::memory_arena::cgroup::{CgroupEnforcer, CgroupMemoryState};
 use crate::memory_arena::error::{ArenaError, ArenaResult};
 use crate::memory_arena::types::{
     AllocatorSelector, ArenaConfig, ChunkId, ChunkState, SweepReport, TierKind, MAX_CHUNK_SIZE,
@@ -429,6 +430,13 @@ pub struct ArenaSet {
     /// so hysteresis timing can be asserted deterministically without
     /// wall-clock sleeps.
     now_ns: fn() -> u64,
+    /// Optional cgroup v2 memory enforcer. `None` by default (opt-in): an
+    /// ArenaSet only consults — and grows — a cgroup `memory.max` ceiling
+    /// when an enforcer is attached via [`attach_cgroup_enforcer`]. Without
+    /// one, no cgroup control file is ever touched.
+    ///
+    /// [`attach_cgroup_enforcer`]: ArenaSet::attach_cgroup_enforcer
+    cgroup: Option<CgroupEnforcer>,
     /// VRAM pool for Vector tier (device memory). Only present when a
     /// VramContext was provided at creation time AND a Vector pool spec
     /// exists. VRAM crossfades route through this pool instead of the
@@ -531,6 +539,7 @@ impl ArenaSet {
             manifest,
             crossfade_registry: CrossfadeRegistry::new(),
             now_ns: real_now_ns,
+            cgroup: None,
             #[cfg(feature = "cuda")]
             vram_pool,
             #[cfg(feature = "cuda")]
@@ -592,6 +601,7 @@ impl ArenaSet {
             manifest,
             crossfade_registry: CrossfadeRegistry::new(),
             now_ns: real_now_ns,
+            cgroup: None,
             #[cfg(feature = "cuda")]
             vram_pool,
             #[cfg(feature = "cuda")]
@@ -703,6 +713,7 @@ impl ArenaSet {
             manifest,
             crossfade_registry,
             now_ns: real_now_ns,
+            cgroup: None,
             // VRAM pools are not persisted — they must be re-created
             // with a fresh VramContext after process restart. VRAM is
             // volatile by definition (see MISSION.md non-goals).
@@ -739,6 +750,53 @@ impl ArenaSet {
 
     pub fn tiers(&self) -> impl Iterator<Item = TierKind> + '_ {
         self.pools.keys().copied()
+    }
+
+    /// Attach a cgroup v2 memory enforcer (opt-in; default is no enforcement).
+    ///
+    /// Once attached, [`alloc`](Self::alloc) reserves headroom against the
+    /// cgroup `memory.max` ceiling before each allocation, growing the limit
+    /// in steps up to the hard cap. Default-off matches the project's universal
+    /// opt-in posture: an ArenaSet without an enforcer never touches a cgroup
+    /// control file. The caller chooses the enforcer's target — typically
+    /// [`CgroupEnforcer::discover`] for this process's real cgroup, or
+    /// [`CgroupEnforcer::from_path`] for a specific (or mock) cgroup directory.
+    pub fn attach_cgroup_enforcer(&mut self, enforcer: CgroupEnforcer) {
+        self.cgroup = Some(enforcer);
+    }
+
+    /// True when a cgroup enforcer is attached.
+    pub fn has_cgroup_enforcer(&self) -> bool {
+        self.cgroup.is_some()
+    }
+
+    /// Current cgroup memory state, or `None` when no enforcer is attached.
+    pub fn cgroup_state(&self) -> Option<ArenaResult<CgroupMemoryState>> {
+        self.cgroup.as_ref().map(|e| e.state())
+    }
+
+    /// Allocate `payload` into `tier`'s pool — the cgroup-aware allocation
+    /// entry point.
+    ///
+    /// When a cgroup enforcer is attached, this first ensures the cgroup
+    /// memory ceiling has headroom for the payload (growing `memory.max` in
+    /// steps up to the hard cap). If the hard cap is reached and headroom is
+    /// still insufficient, the allocation fails with [`ArenaError::CgroupError`]
+    /// rather than letting the process drift toward an OOM kill. With no
+    /// enforcer attached this is a thin pass-through to the tier pool.
+    pub fn alloc(&mut self, tier: TierKind, payload: Vec<u8>) -> ArenaResult<ChunkId> {
+        if let Some(enforcer) = self.cgroup.as_mut() {
+            let need = payload.len() as u64;
+            if !enforcer.ensure_headroom(need)? {
+                return Err(ArenaError::CgroupError(format!(
+                    "memory ceiling reached: cannot reserve {need} bytes within the \
+                     {}-byte hard cap",
+                    crate::memory_arena::cgroup::HARD_CAP_BYTES
+                )));
+            }
+        }
+        let pool = self.pool_mut(tier).ok_or(ArenaError::UnknownTier(tier))?;
+        pool.alloc(payload)
     }
 
     /// Access the VRAM pool, if one was configured.

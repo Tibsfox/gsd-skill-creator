@@ -71,7 +71,7 @@ All items from the original M1 non-goals list have been delivered:
 | CUDA kernel launches | M13 (KernelHandle) |
 
 **Remaining non-goals:**
-- cgroup `MemoryMax` enforcement (deferred — not yet needed)
+- ~~cgroup `MemoryMax` enforcement~~ — delivered in M15 (opt-in `ArenaSet` wire)
 - Datatypes plugin pattern (Grove handles serialization)
 
 ## Benchmarks
@@ -145,6 +145,11 @@ Criterion benchmarks live at `src-tauri/benches/arena_bench.rs` and cover:
   `(u8*, u32)` in-place kernels over arena VRAM chunks), `verify_against_host`
   → `IntegrityReport` (consumes the `verify_checksums` GPU kernel as a verdict).
   See [`docs/memory-arena/M14-baseline.md`](../../../docs/memory-arena/M14-baseline.md).
+- **M15** = opt-in cgroup memory ceiling. `ArenaSet::alloc(tier, payload)`
+  cgroup-aware chokepoint + `attach_cgroup_enforcer` / `cgroup_state`; consumes
+  the previously-unwired `CgroupEnforcer` (default-off; grows `memory.max` in
+  steps up to the hard cap, else rejects). CI-runnable.
+  See [`docs/memory-arena/M15-baseline.md`](../../../docs/memory-arena/M15-baseline.md).
 
 **Re-run command:**
 ```bash

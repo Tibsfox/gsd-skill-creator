@@ -424,8 +424,10 @@ pub async fn arena_set_alloc(
     let tier_kind = tier_kind_from_str(&tier).map_err(|_| format!("unknown tier: {}", tier))?;
     let payload = B64.decode(&payload_base64).map_err(|e| format!("base64 decode: {}", e))?;
 
-    let pool = set.pool_mut(tier_kind).ok_or_else(|| format!("no pool for tier: {}", tier))?;
-    let id = pool.alloc(payload).map_err(err_string)?;
+    // Route through ArenaSet::alloc — the cgroup-aware allocation chokepoint.
+    // With no enforcer attached (the default) this is identical to the old
+    // pool_mut(...).alloc(...) path.
+    let id = set.alloc(tier_kind, payload).map_err(err_string)?;
     Ok(AllocResponse { chunk_id: id.as_u64() })
 }
 
