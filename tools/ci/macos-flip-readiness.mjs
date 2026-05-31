@@ -13,6 +13,14 @@
  * conclusion was uniformly `success`). This tool makes the gate DETERMINISTIC
  * and CHECKABLE, in the gate-not-vigilance spirit of #10428 / two-layer-closure.
  *
+ * LIFECYCLE: the flip EXECUTED at v1.49.928. The tool now reads ci.yml to report
+ * the current state — once the macOS leg is load-bearing (no gated
+ * `continue-on-error`), the READY guidance switches from "safe to flip: delete the
+ * line" to "already flipped; here is how to REVERT". The streak math is unchanged
+ * and remains informational post-flip (a tool that kept telling operators to
+ * "delete continue-on-error" after the line was already gone would be the
+ * stale-guidance failure #10427 warns against).
+ *
  * Readiness = the most recent run of `consecutive` distinct ORGANIC-churn commits
  * on the macOS leg were ALL green, and that count >= N. INERT commits (docs /
  * release / CI-config only — they re-run an unchanged test surface) are
@@ -26,10 +34,13 @@
  * flip SOONER on weaker evidence (under-cautious); misclassifying organic→inert
  * only DEFERS the flip (safe). When in doubt, inert.
  *
- * Health is read from the JOB conclusion, never the RUN conclusion — the staged
- * `continue-on-error` keeps a red macOS leg OUT of the run-level conclusion
- * (#10463 empirical masking fact), so `gh run list ... .conclusion` is uniformly
- * `success` and useless for this purpose.
+ * Health is read from the JOB conclusion, never the RUN conclusion. Pre-flip
+ * (v1.49.923-927) the STAGED `continue-on-error` masked a red macOS leg OUT of the
+ * run-level conclusion (#10463 empirical masking fact), so `gh run list ...
+ * .conclusion` was uniformly `success` and useless here. Post-flip (v1.49.928+) the
+ * macOS outcome IS folded into the run conclusion, but the per-leg JOB conclusion
+ * is still the cleaner signal (the run conclusion aggregates ubuntu+macOS and
+ * cannot attribute a red to the macOS leg specifically). Either way: read the JOB.
  *
  * This is an ADVISORY readiness reporter, not a ship gate: nothing auto-runs it
  * as a blocker. The exit code is a convenience for `&&` chaining a future flip
@@ -44,6 +55,7 @@
  *   node tools/ci/macos-flip-readiness.mjs --limit=50      # scan more recent runs
  *   node tools/ci/macos-flip-readiness.mjs --runs-file=F   # inject runs JSON (tests; no gh/git)
  *   node tools/ci/macos-flip-readiness.mjs --root=DIR      # git root for churn derivation
+ *   node tools/ci/macos-flip-readiness.mjs --ci-file=F     # ci.yml path for flip-state detection
  *
  * --runs-file JSON: array NEWEST-FIRST of run records. Each record:
  *   { "sha": "<full-or-short>", "macosConclusion": "success"|"failure"|...,
@@ -59,6 +71,7 @@
 
 import { spawnSync } from 'node:child_process';
 import { readFileSync, realpathSync } from 'node:fs';
+import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 // ─── the organic-churn predicate (pure) ──────────────────────────────────────
@@ -109,6 +122,26 @@ export function classifyChurn(changedFiles) {
     if (ORGANIC_ROOTS.some((root) => f.startsWith(root))) return 'organic';
   }
   return 'inert';
+}
+
+// ─── flip-state detection (pure) ─────────────────────────────────────────────
+
+// The staged macOS leg carries `continue-on-error: ${{ matrix.os == 'macos-latest' }}`.
+// The v1.49.928 load-bearing flip DELETED that line. Detect which state ci.yml is
+// in so the readiness guidance stays honest across the lifecycle (#10427: a tool
+// that keeps saying "safe to flip: delete continue-on-error" after the line is gone
+// is itself the stale-guidance failure it exists to prevent).
+const STAGED_MACOS_COE =
+  /continue-on-error:\s*\$\{\{\s*matrix\.os\s*==\s*'macos-latest'\s*\}\}/;
+
+/**
+ * Classify ci.yml content as 'staged' (macOS leg still non-blocking — the gated
+ * continue-on-error is present), 'flipped' (load-bearing — the line is gone), or
+ * 'unknown' (no ci.yml text to read). Pure: takes the file text (or null/undefined).
+ */
+export function detectFlipState(ciYmlText) {
+  if (typeof ciYmlText !== 'string' || ciYmlText.length === 0) return 'unknown';
+  return STAGED_MACOS_COE.test(ciYmlText) ? 'staged' : 'flipped';
 }
 
 // ─── the streak computation (pure) ───────────────────────────────────────────
@@ -278,6 +311,16 @@ function buildLiveRuns({ repo, limit, root, n }) {
   return runs;
 }
 
+/** Read ci.yml text for flip-state detection; null if unreadable (→ 'unknown'). */
+function readCiYml(root, ciFileOverride) {
+  const path = ciFileOverride || join(root, '.github', 'workflows', 'ci.yml');
+  try {
+    return readFileSync(path, 'utf8');
+  } catch {
+    return null;
+  }
+}
+
 // ─── CLI ─────────────────────────────────────────────────────────────────────
 
 function parseArgs(argv) {
@@ -292,6 +335,7 @@ function parseArgs(argv) {
     limit: Number(get('limit', DEFAULT_LIMIT)),
     runsFile: get('runs-file', null),
     root: get('root', process.cwd()),
+    ciFile: get('ci-file', null),
   };
 }
 
@@ -315,11 +359,19 @@ function renderHuman(result, runs) {
   if (result.broke) {
     lines.push(`  streak broken by organic ${result.broke.macosConclusion} at ${result.broke.sha}`);
   }
+  const flipped = result.flipState === 'flipped';
   if (result.ready) {
     lines.push('');
     lines.push(`  VERDICT: READY ✓ — ${result.streak} consecutive organic-churn green macOS runs.`);
-    lines.push('  Safe to flip: delete `continue-on-error` from .github/workflows/ci.yml AND');
-    lines.push('  update tests/integration/ci-matrix-parity.test.ts (the #10461 drift-guard).');
+    if (flipped) {
+      lines.push('  The macOS leg is ALREADY load-bearing — the flip executed at v1.49.928');
+      lines.push('  (ci.yml has no gated `continue-on-error`); this readout is informational.');
+      lines.push('  To REVERT to staged/non-blocking: re-add the gated `continue-on-error` to');
+      lines.push('  .github/workflows/ci.yml AND invert tests/integration/ci-matrix-parity.test.ts.');
+    } else {
+      lines.push('  Safe to flip: delete `continue-on-error` from .github/workflows/ci.yml AND');
+      lines.push('  update tests/integration/ci-matrix-parity.test.ts (the #10461 drift-guard).');
+    }
   } else {
     const need = Math.max(0, result.n - result.streak);
     lines.push('');
@@ -327,6 +379,10 @@ function renderHuman(result, runs) {
       `  VERDICT: NOT READY — need ${need} more consecutive organic-churn green macOS push(es).`,
     );
     lines.push('  Docs/release/CI-only ships do NOT count (they re-run an unchanged test surface).');
+    if (flipped) {
+      lines.push('  NOTE: the macOS leg is ALREADY load-bearing (flip executed v1.49.928); this');
+      lines.push('  streak is historical/informational, not a pending-flip gate.');
+    }
     if (result.windowExhausted) {
       lines.push('  NOTE: the streak is window-bounded (not broken by a red) — pass a larger');
       lines.push('  --limit to scan further back if older organic greens may exist.');
@@ -371,6 +427,8 @@ function main() {
   // is the --limit gh run rows (deduped to fewer distinct commits); in --runs-file
   // mode the window IS the supplied array.
   result.limit = args.runsFile ? null : args.limit;
+  // Lifecycle: read ci.yml so the guidance is honest pre- vs post-flip.
+  result.flipState = detectFlipState(readCiYml(args.root, args.ciFile));
   const text = args.json ? JSON.stringify(result, null, 2) : renderHuman(result, runs);
   // Return-and-set-exitCode (no process.exit during a pending write) avoids the
   // pipe-buffer truncation #10420 documents.

@@ -13,9 +13,26 @@ import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { classifyChurn, computeReadiness } from '../macos-flip-readiness.mjs';
+import { classifyChurn, computeReadiness, detectFlipState } from '../macos-flip-readiness.mjs';
 
 const TOOL_PATH = resolve(fileURLToPath(import.meta.url), '..', '..', 'macos-flip-readiness.mjs');
+
+// Minimal ci.yml fixtures for flip-state detection (detectFlipState + --ci-file CLI).
+const STAGED_CI = `jobs:
+  test:
+    runs-on: \${{ matrix.os }}
+    continue-on-error: \${{ matrix.os == 'macos-latest' }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+`;
+const FLIPPED_CI = `jobs:
+  test:
+    runs-on: \${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+`;
 
 function runCli(runs, extraArgs = []) {
   const dir = mkdtempSync(join(tmpdir(), 'macos-flip-'));
@@ -96,6 +113,32 @@ describe('classifyChurn', () => {
   it('does not false-positive on a path that merely contains a root substring', () => {
     // "mysrc/" / "atools/" must NOT match the "src/" / "tools/" prefixes.
     expect(classifyChurn(['mysrc/a.ts', 'atools/b.mjs'])).toBe('inert');
+  });
+});
+
+// ─── detectFlipState ─────────────────────────────────────────────────────────
+
+describe('detectFlipState', () => {
+  it("is 'staged' when the macOS-gated continue-on-error is present", () => {
+    expect(detectFlipState(STAGED_CI)).toBe('staged');
+  });
+
+  it("is 'flipped' when the gated continue-on-error is absent (post-v1.49.928)", () => {
+    expect(detectFlipState(FLIPPED_CI)).toBe('flipped');
+  });
+
+  it("is 'flipped' when a comment references continue-on-error without the colon token", () => {
+    // ci.yml's flip comment mentions `continue-on-error` (no colon) — must NOT be
+    // misread as staged. Mirrors the real reworded comment shape.
+    const commentedFlip =
+      FLIPPED_CI + "    # the `continue-on-error` line was deleted at v1.49.928\n";
+    expect(detectFlipState(commentedFlip)).toBe('flipped');
+  });
+
+  it("is 'unknown' for empty / null / undefined input", () => {
+    expect(detectFlipState('')).toBe('unknown');
+    expect(detectFlipState(null)).toBe('unknown');
+    expect(detectFlipState(undefined)).toBe('unknown');
   });
 });
 
@@ -293,5 +336,58 @@ describe('CLI', () => {
     expect(parsed.ready).toBe(false);
     expect(parsed.streak).toBe(1);
     expect(parsed.inertSkipped).toBe(4);
+  });
+
+  it('post-flip (--ci-file flipped): READY guidance says "ALREADY load-bearing" / REVERT, not "Safe to flip"', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'macos-flip-ci-'));
+    try {
+      const ci = join(dir, 'ci.yml');
+      writeFileSync(ci, FLIPPED_CI);
+      const runs = [
+        { sha: 'a', macosConclusion: 'success', changedFiles: ['src/x.ts'] },
+        { sha: 'b', macosConclusion: 'success', changedFiles: ['src/y.ts'] },
+        { sha: 'c', macosConclusion: 'success', changedFiles: ['src/z.ts'] },
+      ];
+      const { status, stdout } = runCli(runs, [`--ci-file=${ci}`]);
+      expect(status).toBe(0);
+      expect(stdout).toContain('READY');
+      expect(stdout).toContain('ALREADY load-bearing');
+      expect(stdout).toContain('REVERT');
+      expect(stdout).not.toContain('Safe to flip');
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
+  it('pre-flip (--ci-file staged): READY guidance says "Safe to flip", not the post-flip REVERT text', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'macos-flip-ci-'));
+    try {
+      const ci = join(dir, 'ci.yml');
+      writeFileSync(ci, STAGED_CI);
+      const runs = [
+        { sha: 'a', macosConclusion: 'success', changedFiles: ['src/x.ts'] },
+        { sha: 'b', macosConclusion: 'success', changedFiles: ['src/y.ts'] },
+        { sha: 'c', macosConclusion: 'success', changedFiles: ['src/z.ts'] },
+      ];
+      const { status, stdout } = runCli(runs, [`--ci-file=${ci}`]);
+      expect(status).toBe(0);
+      expect(stdout).toContain('Safe to flip');
+      expect(stdout).not.toContain('ALREADY load-bearing');
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
+  it('--json includes flipState (flipped via --ci-file)', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'macos-flip-ci-'));
+    try {
+      const ci = join(dir, 'ci.yml');
+      writeFileSync(ci, FLIPPED_CI);
+      const runs = [{ sha: 'a', macosConclusion: 'success', changedFiles: ['src/x.ts'] }];
+      const { stdout } = runCli(runs, ['--json', `--ci-file=${ci}`]);
+      expect(JSON.parse(stdout).flipState).toBe('flipped');
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
   });
 });

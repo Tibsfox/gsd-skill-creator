@@ -1,13 +1,16 @@
 /**
- * CI cross-platform matrix — parity + staged-non-blocking drift-guard
+ * CI cross-platform matrix — parity + load-bearing drift-guard
  * (milestone v1.49.923; supersedes the v1.49.920 two-file ci-macos-parity guard).
  *
  * History: v1.49.920 stood up a SEPARATE `.github/workflows/ci-macos.yml` lane,
  * decoupled from the ship gate, guarded by a two-file parity test. v1.49.923
  * folded `macos-latest` into `ci.yml`'s `test` job as a `strategy.matrix` over
- * `os` and RETIRED `ci-macos.yml` (the documented promotion path), but did so in
- * the STAGED form: the macOS leg carries `continue-on-error` so it runs on every
- * push for signal WITHOUT yet being load-bearing for the ship gate.
+ * `os` and RETIRED `ci-macos.yml` (the documented promotion path), in the STAGED
+ * form: the macOS leg carried `continue-on-error` so it ran on every push for
+ * signal WITHOUT yet being load-bearing for the ship gate. v1.49.928 FLIPPED it to
+ * load-bearing — the readiness gate (`tools/ci/macos-flip-readiness.mjs`) reached
+ * 3/3 organic-churn greens, so the `continue-on-error` line was deleted and the
+ * macOS leg now blocks a ship exactly like the ubuntu leg.
  *
  * This guard pins three load-bearing invariants (cross-ref #10461 gate-enforce-
  * every-runnable-surface + drift-guard pairing; two-layer-closure-discipline):
@@ -18,15 +21,15 @@
  *     job runs the full test-command set, so a future edit that drops an OS or a
  *     test invocation is caught.
  *
- *   STAGED / NON-BLOCKING — the macOS leg MUST keep `continue-on-error` gated on
- *     `matrix.os == 'macos-latest'`. The pre-tag-gate ci-gate reads the run-level
- *     conclusion; `continue-on-error` keeps a macOS-only failure out of it, so the
- *     ship is never blocked by the (still-unproven) macOS lane. Flipping macOS to
- *     load-bearing — deleting that `continue-on-error` line once N consecutive
- *     green macOS pushes accumulate ACROSS ORGANIC CHURN (check the streak with
- *     `node tools/ci/macos-flip-readiness.mjs`; release/docs ships do not count) —
- *     is a DELIBERATE act that must also update this test. If someone removes it
- *     silently, this guard forces the conversation.
+ *   LOAD-BEARING — the macOS leg MUST NOT carry `continue-on-error` (the v1.49.928
+ *     flip deleted it). The pre-tag-gate ci-gate reads the run-level conclusion, and
+ *     with nothing masking the macOS leg, a macOS-only failure now blocks a ship
+ *     exactly like an ubuntu failure. REVERTING to non-blocking — re-adding a
+ *     `continue-on-error` gated on `matrix.os == 'macos-latest'`, or a step-level one
+ *     that masks BOTH legs — is a DELIBERATE act that must also update this test. If
+ *     someone re-stages it silently, this guard forces the conversation. The flip was
+ *     driven by a deterministic readiness verdict (`node tools/ci/macos-flip-
+ *     readiness.mjs` -> READY 3/3 across organic churn; release/docs ships do not count).
  *
  *   RETIREMENT — `ci-macos.yml` must NOT exist. A re-created separate lane would
  *     re-introduce the `.[0]` run-selection ambiguity the v1.49.922 ci-gate pin
@@ -52,7 +55,7 @@ const testJob = nextJobRel >= 0 ? afterHeader.slice(0, nextJobRel) : afterHeader
 const osListMatch = testJob.match(/os:\s*\[([^\]]*)\]/);
 const osList = osListMatch ? osListMatch[1] : '';
 
-describe('CI cross-platform matrix — parity + staged-non-blocking drift-guard', () => {
+describe('CI cross-platform matrix — parity + load-bearing drift-guard', () => {
   it('RETIREMENT — the separate ci-macos.yml lane no longer exists', () => {
     expect(existsSync(join(REPO_ROOT, '.github/workflows/ci-macos.yml'))).toBe(false);
   });
@@ -73,23 +76,25 @@ describe('CI cross-platform matrix — parity + staged-non-blocking drift-guard'
     expect(osList).toContain('macos-latest');
   });
 
-  it('STAGED — the macOS leg is NON-BLOCKING via continue-on-error gated on macos-latest', () => {
-    // Load-bearing: removing/altering this is the deliberate "flip to blocking"
-    // act and MUST update this test. A silent removal fails here.
-    expect(testJob).toMatch(
+  it('LOAD-BEARING — the macOS leg is ship-blocking (the staged continue-on-error is GONE)', () => {
+    // v1.49.928 flip: the macOS-gated `continue-on-error` line was deleted, so the
+    // macOS leg now contributes to the run-level conclusion the ship gate reads.
+    // Re-adding it (reverting macOS to non-blocking) is the deliberate reverse act
+    // and MUST update this test. A silent re-stage fails here.
+    expect(testJob).not.toMatch(
       /continue-on-error:\s*\$\{\{\s*matrix\.os\s*==\s*'macos-latest'\s*\}\}/,
     );
   });
 
-  it('STAGED — exactly ONE continue-on-error in the job (no step-level masking on the ubuntu leg)', () => {
-    // The only continue-on-error must be the job-level matrix-gated one. A
-    // second occurrence would be a step-level continue-on-error, which masks
-    // that step on BOTH legs — including the load-bearing ubuntu leg. Forbid it.
+  it('LOAD-BEARING — ZERO continue-on-error in the test job (neither leg is masked)', () => {
+    // Both legs are load-bearing now. ANY continue-on-error — job-level (re-staging
+    // the macOS leg) or step-level (which masks a step on BOTH legs, including the
+    // ubuntu leg) — would silently weaken the gate. Forbid all of them.
     const count = (testJob.match(/continue-on-error:/g) || []).length;
-    expect(count).toBe(1);
+    expect(count).toBe(0);
   });
 
-  it('STAGED — fail-fast is disabled so a macOS failure cannot cancel the ubuntu leg', () => {
+  it('LOAD-BEARING — fail-fast is disabled so neither leg cancels the other', () => {
     expect(testJob).toMatch(/fail-fast:\s*false/);
   });
 

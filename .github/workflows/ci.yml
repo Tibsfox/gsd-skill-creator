@@ -46,17 +46,16 @@ jobs:
   test:
     name: Test (${{ matrix.os }})
     runs-on: ${{ matrix.os }}
-    # v1.49.923: macos-latest folded into this matrix (STAGED, NON-BLOCKING).
-    # The macOS leg runs on every push to main/dev for cross-platform signal,
-    # but `continue-on-error` keeps its result OUT of the run-level conclusion,
-    # so the pre-tag-gate ci-gate (tools/pre-tag-gate.sh step 4, which reads that
-    # conclusion) is never blocked by a macOS-only failure. The ubuntu leg stays
-    # load-bearing. Flip macOS to load-bearing by deleting the `continue-on-error`
-    # line once N consecutive green macOS pushes accumulate ACROSS ORGANIC CHURN —
-    # run `node tools/ci/macos-flip-readiness.mjs` to check the streak (release/docs
-    # ships do not count). That flip MUST also update tests/integration/
-    # ci-matrix-parity.test.ts (the drift-guard).
-    continue-on-error: ${{ matrix.os == 'macos-latest' }}
+    # v1.49.923: macos-latest folded into this matrix as a STAGED `continue-on-error`
+    # non-blocking leg — per-push cross-platform signal without ship-blocking power.
+    # v1.49.928: FLIPPED TO LOAD-BEARING. The `continue-on-error` line (gated on
+    # `matrix.os == 'macos-latest'`) was deleted after 3 consecutive green macOS
+    # pushes accumulated ACROSS ORGANIC CHURN (`node tools/ci/macos-flip-readiness.mjs`
+    # -> READY 3/3, the deliberate flip gate). Both legs now contribute to the
+    # run-level conclusion the pre-tag-gate ci-gate (tools/pre-tag-gate.sh step 4)
+    # reads, so a macOS-only failure blocks a ship exactly like an ubuntu failure.
+    # The flip was paired with the mandatory update to tests/integration/
+    # ci-matrix-parity.test.ts (the #10461 drift-guard) — a silent flip fails it.
     timeout-minutes: 60
     strategy:
       fail-fast: false
