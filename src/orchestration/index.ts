@@ -5,6 +5,7 @@
  */
 export type {
   Candidate,
+  SelectContext,
   SelectorDecision,
   SelectorOptions,
 } from './selector.js';

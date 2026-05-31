@@ -39,6 +39,8 @@ import type {
   SkillPrediction,
 } from '../predictive-skill-loader/index.js';
 import { appendPredictiveLowConfidenceEvent } from '../bounded-learning/predictive-low-confidence-events.js';
+import { applyStochasticBridge } from '../stochastic/selector-bridge.js';
+import type { TractabilityClass } from '../tractability/selector-api.js';
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -73,6 +75,25 @@ export interface SelectorDecision {
   };
   /** Whether the selector chose to activate this candidate. */
   activated: boolean;
+}
+
+/** Per-call context for {@link ActivationSelector.select}. */
+export interface SelectContext {
+  /** Optional MA-2 ACE actor signal (phase 655). */
+  aceSignal?: ActorSignal;
+  /**
+   * MA-3 branch-context gate. When true AND the selector was constructed with
+   * `stochastic.enabled`, the activated set is stochastically re-ordered. Default
+   * false (deterministic). Live-session stochasticity requires ME-3 validation first.
+   */
+  inBranchContext?: boolean;
+  /**
+   * ME-1 tractability class that scales the exploration temperature
+   * (tractable 1.0 / unknown 0.5 / coin-flip 0.3). Default 'unknown'.
+   */
+  tractabilityClass?: TractabilityClass;
+  /** Seeded RNG in [0,1) for reproducible exploration. Defaults to Math.random. */
+  rng?: () => number;
 }
 
 export interface SelectorOptions {
@@ -130,6 +151,23 @@ export interface SelectorOptions {
    * exactly.
    */
   fallbackProvider?: ConceptFallbackProvider;
+
+  /**
+   * MA-3 / MD-2 stochastic exploration (opt-in). Default OFF → select() is
+   * byte-identical to the deterministic ranking (SC-MA3-01). When `enabled` AND
+   * the per-call `context.inBranchContext` is true, the bridge promotes a
+   * temperature-weighted softmax sample to position 0 over the full ranked set
+   * BEFORE the topK slice. `baseTemperature` (default 1.0) is scaled per the
+   * per-call `context.tractabilityClass`. For reproducible exploration, supply a
+   * seeded `context.rng` (e.g. a per-branch `mulberry32(seed)`); otherwise the
+   * bridge falls back to `Math.random`.
+   */
+  stochastic?: {
+    /** Master switch. Default false (deterministic, byte-identical). */
+    enabled?: boolean;
+    /** Base Boltzmann temperature before tractability scaling. Default 1.0. */
+    baseTemperature?: number;
+  };
 }
 
 // ─── Selector ───────────────────────────────────────────────────────────────
@@ -160,6 +198,8 @@ export class ActivationSelector {
     | ((currentSkill: string, predictions: SkillPrediction[]) => void | Promise<void>)
     | undefined;
   private readonly fallbackProvider: ConceptFallbackProvider | undefined;
+  private readonly stochasticEnabled: boolean;
+  private readonly stochasticBaseTemperature: number;
 
   constructor(opts: SelectorOptions = {}) {
     this.scorer = new MemoryScorer(opts.scorer);
@@ -175,6 +215,8 @@ export class ActivationSelector {
     this.topK = opts.topK;
     this.onPredictions = opts.onPredictions;
     this.fallbackProvider = opts.fallbackProvider;
+    this.stochasticEnabled = opts.stochastic?.enabled ?? false;
+    this.stochasticBaseTemperature = opts.stochastic?.baseTemperature ?? 1.0;
   }
 
   /**
@@ -191,7 +233,7 @@ export class ActivationSelector {
   async select(
     query: string,
     candidates: Candidate[],
-    context: { aceSignal?: ActorSignal } = {},
+    context: SelectContext = {},
   ): Promise<SelectorDecision[]> {
     if (candidates.length === 0) return [];
     const now = Date.now();
@@ -284,7 +326,23 @@ export class ActivationSelector {
       return a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
     });
 
-    const sliced = this.topK !== undefined ? decisions.slice(0, this.topK) : decisions;
+    // MA-3 / MD-2 stochastic exploration (opt-in). Promotes a softmax-sampled
+    // winner to position 0 over the FULL ranked set BEFORE the topK slice, so
+    // the single-selection path (topK=1) explores instead of always taking the
+    // deterministic argmax. Byte-identical no-op when disabled / outside a branch
+    // context / temperature ≤ 0 — the bridge returns the same array reference
+    // (SC-MA3-01), so the default flag-off path is unchanged.
+    const ranked = this.stochasticEnabled
+      ? applyStochasticBridge(decisions, {
+          stochasticEnabled: true,
+          inBranchContext: context.inBranchContext ?? false,
+          baseTemperature: this.stochasticBaseTemperature,
+          tractabilityClass: context.tractabilityClass ?? 'unknown',
+          rng: context.rng,
+        })
+      : decisions;
+
+    const sliced = this.topK !== undefined ? ranked.slice(0, this.topK) : ranked;
 
     // --- 5) M3 trace write per decision ---------------------------------
     await this._writeTraces(query, sliced);
@@ -456,7 +514,7 @@ export async function select(
   query: string,
   candidates: Candidate[],
   opts: SelectorOptions = {},
-  context: { aceSignal?: ActorSignal } = {},
+  context: SelectContext = {},
 ): Promise<SelectorDecision[]> {
   const sel = new ActivationSelector(opts);
   return sel.select(query, candidates, context);
