@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.927`.
+The story begins at `v1.0` and continues to `v1.49.928`.
 
-**970 chapters.** 969 have retrospectives.
+**971 chapters.** 970 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -79,8 +79,8 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.17](v1.49.17/00-summary.md)** — The Space Between · 2026-03-04
 - **[v1.49.18](v1.49.18/00-summary.md)** — Space Between Observatory · 2026-03-06
 - **[v1.49.19](v1.49.19/00-summary.md)** — Gastown Chipset Integration · 2026-03-06
-- **[v1.49.20.1](v1.49.20.1/00-summary.md)** — Documentation Reflections · 2026-03-06
 - **[v1.49.20](v1.49.20/00-summary.md)** — Documentation Consolidation · 2026-03-06
+- **[v1.49.20.1](v1.49.20.1/00-summary.md)** — Documentation Reflections · 2026-03-06
 - **[v1.49.21](v1.49.21/00-summary.md)** — Image to Mission Pipeline · 2026-03-07
 - **[v1.49.22](v1.49.22/00-summary.md)** — PNW Research Series · 2026-03-07
 - **[v1.49.23](v1.49.23/00-summary.md)** — Unison Language & Math Co-Processor Completion · 2026-03-08
@@ -978,3 +978,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.925](v1.49.925/00-summary.md)** — Operationalize the #10463 Flip Gate: macOS-Flip Readiness Checker · 2026-05-31
 - **[v1.49.926](v1.49.926/00-summary.md)** — Complete the `token_budget.warn_at_percent` Loop: Substrate Auto-Emit + Verify E2E · 2026-05-31
 - **[v1.49.927](v1.49.927/00-summary.md)** — Wire the MA-3 Stochastic Bridge into the M5 Selector · 2026-05-31
+- **[v1.49.928](v1.49.928/00-summary.md)** — Flip the macOS CI Matrix Leg to Load-Bearing (#10463 Rung 3) · 2026-05-31
