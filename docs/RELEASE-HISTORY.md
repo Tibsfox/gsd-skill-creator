@@ -1,13 +1,14 @@
 # Release History
 
-974 milestones shipped across the v1.0 → v1.49.931 arc. The table below lists every shipped release, newest first.
+975 milestones shipped across the v1.0 → v1.49.932 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
-**Snapshot:** 974 releases · 931 with retrospectives · 753 with extracted lessons · quality A:653 B:98 C:69 D:13 F:141 (avg 85) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 975 releases · 932 with retrospectives · 754 with extracted lessons · quality A:653 B:98 C:69 D:13 F:142 (avg 85) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.932](release-notes/v1.49.932) | Recover v931 red CI: fixture fix + gate the integration project | 2026-05-31 | 2 | — | — | [s](release-notes/v1.49.932/chapter/00-summary.md) [r](release-notes/v1.49.932/chapter/03-retrospective.md) [l](release-notes/v1.49.932/chapter/04-lessons.md) [c](release-notes/v1.49.932/chapter/99-context.md) | 2 | F 33 |  |
 | [v1.49.931](release-notes/v1.49.931) | In-branch stochastic selector wire into M4 exploration (CF2a) | 2026-05-31 | 3 | — | — | [s](release-notes/v1.49.931/chapter/00-summary.md) [r](release-notes/v1.49.931/chapter/03-retrospective.md) [l](release-notes/v1.49.931/chapter/04-lessons.md) [c](release-notes/v1.49.931/chapter/99-context.md) | 1 | F 29 |  |
 | [v1.49.930](release-notes/v1.49.930) | Standing .college/→src/ import gate + dead-code cleanup (CF1) | 2026-05-31 | 4 | — | — | [s](release-notes/v1.49.930/chapter/00-summary.md) [r](release-notes/v1.49.930/chapter/03-retrospective.md) [l](release-notes/v1.49.930/chapter/04-lessons.md) [c](release-notes/v1.49.930/chapter/99-context.md) | 2 | F 33 |  |
 | [v1.49.929](release-notes/v1.49.929) | Close the College concept-fallback selector wire (GAP-2) | 2026-05-31 | 3 | — | — | [s](release-notes/v1.49.929/chapter/00-summary.md) [r](release-notes/v1.49.929/chapter/03-retrospective.md) [l](release-notes/v1.49.929/chapter/04-lessons.md) [c](release-notes/v1.49.929/chapter/99-context.md) | 2 | F 33 |  |
