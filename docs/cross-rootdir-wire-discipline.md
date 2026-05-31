@@ -58,6 +58,21 @@ Three benefits:
 
 **Anti-pattern.** Typing the constructor option as the full concrete class then forcing tests to write `mock as unknown as ConcreteClass`. Loses the duck-typing ergonomics for no payoff.
 
+### Composition-root closure is architecturally N/A — step 4 IS the closure (Lesson #10435 corollary, v1.49.929)
+
+A natural question after a cross-rootdir wire is: "where does production code CONSTRUCT the `.college/` provider and INJECT it into the `src/` consumer?" The answer is that there is no SOUND production site, and one is not needed. The boundary is enforced **asymmetrically**:
+
+- **`src/` → `.college/` is a hard tsc error.** `src/` sits under the build's `rootDir`/`include`; importing a module outside that root fails compilation. A composition root in `src/` therefore cannot even reference the `.college/` provider.
+- **`.college/` → `src/` is NOT tsc-enforced** (`.college/` is excluded from the build's `include`), but it is forbidden by this discipline (failure mode #1: relative reach-across breaks at vitest-project separation and runtime bundling) and by the separate-dist-tree invariant. The lone latent instance — `.college/departments/cloud-systems/extensions/runbook-interface.ts` importing `src/types/openstack.js` (dead code, no importers) — is exactly the cautionary case: it "compiles" only because tsc never sees `.college/`, and it would break the moment `.college/` shipped independently. See the carried-forward table.
+
+So neither rootdir hosts a sound composition root: one direction is compile-blocked, the other is discipline-forbidden and runtime-fragile. The ONLY location with sound visibility into both is the vitest `integration` project (`tests/integration/`).
+
+Therefore **step 4 (the integration test) IS the closure**, not a precursor to some later "organic composition root." Looking for an `src/` factory that does `new RosettaConceptFallback(...)` and threads it into a live dispatcher is chasing a construct the boundary forbids. The optional `ctx?`/`fallbackProvider?` field (step 3) stays unset in `src/` production and is wired only at the application boundary (the integration test), which is exactly where both rootdirs are soundly visible.
+
+This is the de-facto definition-of-done for every cross-rootdir consume-axis closure in this codebase: the `SkillActivationObserver` family (v823/v829) and the `ConceptFallbackProvider` family (v830-832, completed v929) both close at integration-test proof. **GAP-2** ("College of Knowledge Not Wired") closed at v929 on this basis, once BOTH production callers of the concept-fallback wire — copper `PipelineActivationDispatch` (v832 test) and M5 `ActivationSelector` (v929 test) — had application-boundary integration tests. Cross-ref the verify axis (#10438, `docs/meta-cadence-discipline.md`): a verify ship proves an existing substrate-and-caller wire end-to-end without adding new substrate, caller, or threshold.
+
+**Anti-pattern.** Leaving a cross-rootdir consume-axis "open" because no `src/` composition root exists. The composition root is the integration test; absence of an (impossible) `src/` constructor is not an open gap.
+
 ## When this discipline applies
 
 - Authoring a new wire from `src/` into `.college/` (substrate consumer → rosetta-engine producer).
@@ -83,6 +98,7 @@ Three benefits:
 | Substrate-consumer hook PAIR pattern (`onPredictions` + `fallbackProvider` co-located, both fire-and-forget, both two-layer subscriber-gated) | 2 (v830 copper + v832 selector) | Codification deferred to next codify ship; eligible at v833 |
 | `onPredictions` substrate-consumer wire pattern (specific to the predictive-skill-loader integration) | 2 (v810 + v826) | Codification deferred to next codify ship; eligible from prior chain |
 | Fail-soft fallback pattern (try/catch returning `null` at every external boundary) | 1 (v831) | Wait for 2nd |
-| Verification/integration-only ships (small src/ delta + substantial test infrastructure) | 2 (v829 + v832) | Codification candidate for #10428 meta-cadence axis extension; deferred |
+| Verification/integration-only ships (small src/ delta + substantial test infrastructure) | 3 (v829 + v832 + v929) | CODIFIED as the verify axis (#10438, `docs/meta-cadence-discipline.md`); v929 `selector-rosetta-fallback-wire.integration.test.ts` is the 3rd instance and closes the GAP-2 selector-caller symmetry gap |
+| Latent `.college/` → `src/` cross-import (failure mode #1) | 1 (`.college/departments/cloud-systems/extensions/runbook-interface.ts` type-imports `src/types/openstack.js`; dead code, no importers) | Cleanup candidate — replace with a local type declaration (per the local-interface redeclaration discipline) or delete the unused file. Not tsc-caught because `.college/` is outside the build `include`; surfaced by the v929 adversarial verify. A standing `.college/`→`src/` import audit would gate this class (gate-not-vigilance) |
 
 These observations all sit within or adjacent to the cross-rootdir wire family. Future codify ships will consolidate them into either this discipline (as subordinate sections) or new sibling disciplines depending on whether the patterns generalize beyond cross-rootdir wires.
