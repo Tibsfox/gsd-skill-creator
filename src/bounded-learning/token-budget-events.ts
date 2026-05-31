@@ -79,7 +79,12 @@ export interface TokenBudgetEvent {
   timestamp: string;
   /** Operator outcome after the warn event. */
   kind: TokenBudgetEventKind;
-  /** The usagePercent reading that triggered the original warn (best-effort). */
+  /**
+   * A usagePercent reading associated with this event (best-effort). For the
+   * CLI manual recorder this is the reading that triggered the original warn;
+   * for the substrate auto-emit (`warn-substrate.ts`, v926) this is the
+   * FOLLOW-UP reading that determined the outcome.
+   */
   usagePercent?: number;
   /** The warn_at_percent threshold value at the time of the warn (best-effort). */
   warnAtPercent?: number;

@@ -63,9 +63,9 @@ const THRESHOLDS_MANIFEST = [
   },
   {
     threshold: 'token_budget.warn_at_percent',
-    wired_first_caller_ship: 'v1.49.798',
-    integration_test_ship: 'v1.49.799',
-    notes: 'token_budget class first; second-instance trigger for #10426 cross-class registry extraction.',
+    wired_first_caller_ship: 'v1.49.926',
+    integration_test_ship: 'v1.49.926',
+    notes: 'SUBSTRATE WIRED v1.49.926 (token-budget/warn-substrate.ts runTokenBudgetWarnCheck — the long-deferred substrate auto-emit half; first TRAFFIC-attributed production caller). Read-side + CLI manual recorder shipped v803 (the FIRST #10439 CLI+substrate duality — read+CLI only until v926). Integration test at v1.49.926 (0 ships after substrate wire — ships together). FOURTH instance of "substrate→calibration end-to-end test" pattern (after v856 predictive, v894 retention, v898 ceiling). MASKED-DEBT CORRECTION: the prior manifest entry (wired v798 / tested v799) was a MISATTRIBUTION — v798 was threshold REGISTRATION (read-side stub) and v799 a unit-test/audit-log ship (chore(release): T1.1 ship 5 bounded-learning audit log), neither the canonical #10453 substrate→calibration wire. warn was the lone token_budget.* sibling missing its substrate-auto-emit until v926; the masked entry reported COVERED for ~122 ships. Outcome-driven kind (like v893 ceiling), not default-fixed (v891 retention); two-reading concept (follow-up reading classifies the operator response).',
   },
   {
     threshold: 'token_budget.max_percent',
