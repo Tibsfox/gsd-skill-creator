@@ -71,6 +71,7 @@ export default defineConfig({
       'scripts/__tests__/apply-to-self-sweep-substrate.test.mjs',
       'scripts/__tests__/sweep-old-slot-label.test.mjs',
       'scripts/__tests__/append-story-entry.test.mjs',
+      'tools/ci/__tests__/macos-flip-readiness.test.mjs',
     ],
     globals: true,
     testTimeout: 15000,

@@ -23,8 +23,10 @@
  *     conclusion; `continue-on-error` keeps a macOS-only failure out of it, so the
  *     ship is never blocked by the (still-unproven) macOS lane. Flipping macOS to
  *     load-bearing — deleting that `continue-on-error` line once N consecutive
- *     green macOS pushes accumulate — is a DELIBERATE act that must also update
- *     this test. If someone removes it silently, this guard forces the conversation.
+ *     green macOS pushes accumulate ACROSS ORGANIC CHURN (check the streak with
+ *     `node tools/ci/macos-flip-readiness.mjs`; release/docs ships do not count) —
+ *     is a DELIBERATE act that must also update this test. If someone removes it
+ *     silently, this guard forces the conversation.
  *
  *   RETIREMENT — `ci-macos.yml` must NOT exist. A re-created separate lane would
  *     re-introduce the `.[0]` run-selection ambiguity the v1.49.922 ci-gate pin

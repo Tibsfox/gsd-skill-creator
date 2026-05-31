@@ -52,8 +52,10 @@ jobs:
     # so the pre-tag-gate ci-gate (tools/pre-tag-gate.sh step 4, which reads that
     # conclusion) is never blocked by a macOS-only failure. The ubuntu leg stays
     # load-bearing. Flip macOS to load-bearing by deleting the `continue-on-error`
-    # line once N consecutive green macOS pushes accumulate — that flip MUST also
-    # update tests/integration/ci-matrix-parity.test.ts (the drift-guard).
+    # line once N consecutive green macOS pushes accumulate ACROSS ORGANIC CHURN —
+    # run `node tools/ci/macos-flip-readiness.mjs` to check the streak (release/docs
+    # ships do not count). That flip MUST also update tests/integration/
+    # ci-matrix-parity.test.ts (the drift-guard).
     continue-on-error: ${{ matrix.os == 'macos-latest' }}
     timeout-minutes: 60
     strategy:
