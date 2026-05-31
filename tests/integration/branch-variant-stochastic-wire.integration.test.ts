@@ -118,6 +118,43 @@ describe('CF2a — in-branch stochastic branch-variant selection', () => {
     ).rejects.toThrow(/non-empty/);
   });
 
+  it('NaN importance is sanitised → no silently-wrong winner (regression: scorer importanceScore)', async () => {
+    // `importance` is a public, unvalidated [0,1] field. A NaN importance once
+    // produced a NaN composite score that defeated the desc-by-score sort
+    // comparator, mis-seating the poisoned variant at position 0 → a
+    // silently-wrong winner on BOTH the deterministic and the stochastic path.
+    // The scorer now sanitises NaN gamma → 0 (no boost). 'b' is the true argmax
+    // (query match + finite importance); 'a' carries the NaN.
+    const poisoned: BranchVariant[] = [
+      { id: 'a', content: 'alpha refactor', importance: NaN },
+      { id: 'b', content: 'beta refactor', importance: 0.9 },
+      { id: 'c', content: 'gamma refactor', importance: 0.1 },
+    ];
+
+    // Deterministic path: the true argmax wins, NOT the NaN variant.
+    // (Pre-fix this returned 'a' with score NaN — the load-bearing assertion.)
+    const det = await selectBranchVariant({
+      query: 'beta refactor',
+      variants: poisoned,
+      stochasticEnabled: false,
+    });
+    expect(det.chosenId).toBe('b');
+    expect(det.chosenId).not.toBe('a');
+    // No NaN leaked into any decision score.
+    for (const d of det.decisions) expect(Number.isFinite(d.score)).toBe(true);
+
+    // Stochastic path: still finite scores, winner is always a real variant.
+    const sto = await selectBranchVariant({
+      query: 'beta refactor',
+      variants: poisoned,
+      stochasticEnabled: true,
+      branchSeed: 5,
+      baseTemperature: 1.0,
+    });
+    expect(['a', 'b', 'c']).toContain(sto.chosenId);
+    for (const d of sto.decisions) expect(Number.isFinite(d.score)).toBe(true);
+  });
+
   // ── explore() in-loop wire ────────────────────────────────────────────────
   describe('explore() consumes selectBranchVariant', () => {
     let tmpRoot: string;

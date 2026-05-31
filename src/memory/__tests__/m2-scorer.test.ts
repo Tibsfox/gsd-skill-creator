@@ -222,6 +222,25 @@ describe('CF-M2-01: αβγ scorer formula correctness', () => {
     expect(importanceScore(makeEntry({ gamma: 1.5 }))).toBe(1);
   });
 
+  it('importance: NaN gamma → 0 (sanitised, never propagates NaN)', () => {
+    // A NaN gamma (reachable from the unvalidated public Candidate.importance
+    // field) must collapse to 0, not NaN — otherwise it propagates into the
+    // composite score and defeats the desc-by-score ranking sort comparator.
+    expect(importanceScore(makeEntry({ gamma: NaN }))).toBe(0);
+    // ±Infinity still clamps to the [0,1] bounds (behaviour unchanged).
+    expect(importanceScore(makeEntry({ gamma: Infinity }))).toBe(1);
+    expect(importanceScore(makeEntry({ gamma: -Infinity }))).toBe(0);
+    // The full scoreEntry composition stays finite under a NaN gamma.
+    const s = new MemoryScorer();
+    const { score, importance } = s.scoreEntry(
+      makeEntry({ gamma: NaN, content: 'debug session' }),
+      tokenize('debug session'),
+      Date.now(),
+    );
+    expect(importance).toBe(0);
+    expect(Number.isFinite(score)).toBe(true);
+  });
+
   it('throws RangeError for weights outside [0,1]', () => {
     expect(() => new MemoryScorer({ alpha: -0.1 })).toThrow(RangeError);
     expect(() => new MemoryScorer({ beta:  1.1  })).toThrow(RangeError);

@@ -18,6 +18,19 @@
  *   When effective temperature ≤ 1e-9, the bridge returns the M5 decisions
  *   unchanged (argmax == top-k in a sorted list).
  *
+ * Precondition contract (verified at CF2b — absorb-to-deterministic, never throw):
+ *   - `decisions` MUST be pre-sorted desc-by-score, with FINITE scores. M5
+ *     `select()` sorts unconditionally before calling this bridge, so position 0
+ *     is the deterministic argmax. The flag-off / branch-off / T=0 paths return
+ *     the array unchanged and so rely on that invariant. (Score finiteness is
+ *     the scorer's job: a NaN score would defeat the upstream sort — see
+ *     `importanceScore` in src/memory/scorer.ts, which sanitises NaN → 0.)
+ *   - Non-finite / non-positive `temperature` is ABSORBED, never thrown: ≤ 0 and
+ *     −Inf hit the T=0 valve; NaN/+Inf bypass it but are caught downstream by
+ *     softmax's Z-guard (→ argmax) or its T→∞ branch (→ uniform). No sign/finite
+ *     temperature guard is added here BY DESIGN — a throw would contradict the
+ *     sanitize-not-throw contract that softmax already pins (softmax.test.ts).
+ *
  * Usage:
  *   ```ts
  *   import { applyStochasticBridge } from './selector-bridge.js';

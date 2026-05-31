@@ -110,10 +110,18 @@ export function recencyScore(tsMs: number, nowMs: number, halfLifeHours: number)
  * as the importance annotation. When gamma > 0.2 (above default), the entry
  * is more important; when 0, it carries no annotation boost.
  *
- * Clamped to [0, 1].
+ * Clamped to [0, 1]. A `NaN` gamma is treated as 0 (no boost): NaN is not a
+ * valid importance hint, and `Math.max(0, Math.min(1, NaN))` is itself NaN,
+ * which would propagate into the composite ranking score and defeat the
+ * desc-by-score sort comparator (`b.score - a.score` is NaN for a NaN operand,
+ * leaving the entry mis-seated — a silently-wrong winner). `gamma` reaches here
+ * unvalidated from the public `Candidate.importance` field (see selector.ts),
+ * so this is the load-bearing sanitisation site. ±Infinity already clamps to
+ * the [0, 1] bounds via Math.min/Math.max; only NaN needs the explicit guard.
  */
 export function importanceScore(entry: MemoryEntry): number {
-  return Math.max(0, Math.min(1, entry.gamma));
+  const gamma = Number.isNaN(entry.gamma) ? 0 : entry.gamma;
+  return Math.max(0, Math.min(1, gamma));
 }
 
 // ─── Scorer ───────────────────────────────────────────────────────────────────
