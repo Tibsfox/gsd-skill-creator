@@ -133,13 +133,16 @@ describe('CF2a — in-branch stochastic branch-variant selection', () => {
       mkdirSync(branchDir, { recursive: true });
       mkdirSync(traceDir, { recursive: true });
       const manifest: BranchManifest = {
-        branchId,
+        id: branchId,
         skillName: 'test-skill',
-        forkedAt: '2026-05-31T00:00:00.000Z',
-        trunkHashAtFork: 'deadbeef',
+        parentHash: 'deadbeef',
+        parentByteLength: 5,
+        createdAt: 1_780_000_000_000,
+        state: 'open',
         exploreSessionCount: 0,
         tracePaths: [],
-        state: 'open',
+        proposedByteLength: 6,
+        deltaFraction: 0.1,
       };
       writeFileSync(
         join(branchDir, 'manifest.json'),

@@ -411,6 +411,29 @@ else
   log "[pre-tag-gate] step 2.7/15: PASS"
 fi
 
+# ----- step 2.8/15: integration-project gate (v1.49.932 — closes the v1.49.931 red-CI escape) -----
+# The main `npx vitest run` (step 2) does NOT run the integration project: the
+# root vitest project EXCLUDES **/*.integration.test.ts, and the `integration`
+# project is opt-in (vitest.config.ts). CI runs it as its own step
+# (.github/workflows/ci.yml: `npx vitest run --project integration`). Before this
+# step, a red integration test passed the local gate and failed only in CI — the
+# v1.49.931 regression (a malformed BranchManifest fixture turned main red). This
+# mirrors CI exactly so the gate and CI agree on "green" (#10461
+# gate-enforce-every-runnable-surface). Bypass:
+# SC_PRE_TAG_GATE_BYPASS=integration.
+if gate_bypassed "integration" "SC_SKIP_INTEGRATION"; then
+  log "[pre-tag-gate] step 2.8/15: SKIPPED (integration)"
+else
+  log "[pre-tag-gate] step 2.8/15: integration (npx vitest run --project integration — v1.49.932)"
+  if ! npx vitest run --project integration --silent; then
+    echo "[pre-tag-gate] FAIL: integration project failed" >&2
+    echo "[pre-tag-gate]   Reproduce: npx vitest run --project integration" >&2
+    echo "[pre-tag-gate]   These are *.integration.test.ts files, NOT run by step 2's plain vitest run." >&2
+    exit 28
+  fi
+  log "[pre-tag-gate] step 2.8/15: PASS"
+fi
+
 log "[pre-tag-gate] step 3/15: release-notes completeness gate"
 if ! node tools/release-history/check-completeness.mjs --current --strict; then
   echo "[pre-tag-gate] FAIL: completeness gate failed" >&2
