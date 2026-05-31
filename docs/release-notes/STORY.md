@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.922`.
+The story begins at `v1.0` and continues to `v1.49.923`.
 
-**965 chapters.** 964 have retrospectives.
+**966 chapters.** 965 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -973,3 +973,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.920](v1.49.920/00-summary.md)** — Cross-Platform CI: macOS vitest Lane (Decoupled Separate Workflow — Nightly + workflow_dispatch + PR, No push Trigger So It Never Enters the Ship-Gate dev-tip Match; Mirrors the Linux test Job) + Parity/Decoupling Drift-Guard (#10461 Pairing) · 2026-05-30
 - **[v1.49.921](v1.49.921/00-summary.md)** — macOS Lane First Run: 6 Cross-Platform Bugs Fixed (tmpdir /var→/private/var Symlink Test Hardening — realpath the mkdtemp Root in entrypoint-guard + atlas-indexer file-walker/runner; Source Unchanged) · 2026-05-30
 - **[v1.49.922](v1.49.922/00-summary.md)** — Ship-Tooling Cross-Platform Hardening: perf-assertion-audit git-grep BSD/macOS Portability (toPosixEre + Lazy-Quantifier Strip; Closed a Latent Linux Under-Count 75→90) + ci-gate Workflow-Pin (--workflow ci.yml; Excludes the Non-Blocking macOS Lane from .[0] Selection) + step-17 Gate-Abort Fix (|| true on Non-Drift PROJECT.md WARN) — macOS Lane Now Green End-to-End Incl. node:test · 2026-05-30
+- **[v1.49.923](v1.49.923/00-summary.md)** — Staged macOS Lane Promotion: Folded macos-latest into the ci.yml test Matrix as a NON-BLOCKING Leg (continue-on-error gated on matrix.os + fail-fast:false — Per-Push Signal, Run-Level Conclusion Unaffected So the Ship-Gate Can't Be Blocked) + Retired the Decoupled ci-macos.yml + Rewrote the Drift-Guard (ci-matrix-parity.test.ts — Matrix-Parity + Staged-Non-Blocking + Retirement, 9 Tests) — Empirically Proven on Real GitHub Actions (continue-on-error Leg Fail → Run Conclusion success) · 2026-05-30
