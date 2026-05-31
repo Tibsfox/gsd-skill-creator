@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.925`.
+The story begins at `v1.0` and continues to `v1.49.926`.
 
-**968 chapters.** 967 have retrospectives.
+**969 chapters.** 968 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -976,3 +976,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.923](v1.49.923/00-summary.md)** — Staged macOS Lane Promotion: Folded macos-latest into the ci.yml test Matrix as a NON-BLOCKING Leg (continue-on-error gated on matrix.os + fail-fast:false — Per-Push Signal, Run-Level Conclusion Unaffected So the Ship-Gate Can't Be Blocked) + Retired the Decoupled ci-macos.yml + Rewrote the Drift-Guard (ci-matrix-parity.test.ts — Matrix-Parity + Staged-Non-Blocking + Retirement, 9 Tests) — Empirically Proven on Real GitHub Actions (continue-on-error Leg Fail → Run Conclusion success) · 2026-05-30
 - **[v1.49.924](v1.49.924/00-summary.md)** — Counter-Cadence Codify (#19): Promoted the v1.49.923 Candidate to First-Class Manifest Lesson #10463 — Staged CI-Lane Promotion via a Non-Blocking Matrix Leg (continue-on-error Gated on the Matrix Dimension + fail-fast:false → Per-Push Signal With the Run-Level Conclusion Unaffected, So an Unproven Lane Can't Block a Ship; the Intermediate Rung Between a Decoupled-Nightly Lane and a Load-Bearing One) + the Empirical GitHub-Actions Masking Fact (continue-on-error Leg Fail → Run Conclusion success Unless a needs:[job] Downstream Consumes It) + the ci-matrix-parity Drift-Guard as the #10461 Enforcement Layer — Home: Static-Analysis Tool Authoring; Manifest 149→150 · 2026-05-31
 - **[v1.49.925](v1.49.925/00-summary.md)** — Operationalize the #10463 Flip Gate: macOS-Flip Readiness Checker (Organic-Churn Predicate + Consecutive-Green Streak vs N; gate-not-vigilance) · 2026-05-31
+- **[v1.49.926](v1.49.926/00-summary.md)** — Complete the token_budget.warn_at_percent Loop: Substrate Auto-Emit + Verify · 2026-05-31
