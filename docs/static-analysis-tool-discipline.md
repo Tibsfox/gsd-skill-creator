@@ -2,7 +2,7 @@
 
 **Surface:** Authoring or extending a CLI tool in `tools/` that scans the codebase, emits metrics, or produces a comparable report; designing its test harness; piping its output to another command.
 
-**Codified at:** v1.49.790 (lesson cluster from v1.49.785-v1.49.789 — the adoption-telemetry build chain plus the PROJECT.md normalizer surfaced five distinct authoring pitfalls in close sequence). **Extended at v1.49.794** with #10424 (refuse-to-overwrite guard for version-stamped baseline files), after v791 trip + 2 sequential clean applications at v792 + v793.
+**Codified at:** v1.49.790 (lesson cluster from v1.49.785-v1.49.789 — the adoption-telemetry build chain plus the PROJECT.md normalizer surfaced five distinct authoring pitfalls in close sequence). **Extended at v1.49.794** with #10424 (refuse-to-overwrite guard for version-stamped baseline files), after v791 trip + 2 sequential clean applications at v792 + v793. **Extended at v1.49.886** with #10450 (parsers must handle code-shape variants or fail loudly). **Extended at v1.49.924** with #10463 (staged CI-lane promotion via a non-blocking matrix leg + its structural drift-guard).
 
 ## Why this discipline exists
 
@@ -126,6 +126,40 @@ A new chokepoint added to a cross-cutting tool's AUDITS array should include san
 
 **Anti-pattern.** Shipping a parser-driven static-analysis tool whose test fixtures cover only the simplest input shapes. The tool's correctness becomes operator-vigilance-bound — every new chokepoint added is a risk surface for surfacing a latent bug.
 
+### Staged CI-lane promotion via a non-blocking matrix leg (Lesson #10463)
+
+Promoting an unproven CI lane (a new OS, runtime, or toolchain) straight into the ship-blocking workflow couples ship cadence to a lane with no track record: a flaky or genuinely-broken leg can red-block a release at T14. Decoupling the lane entirely (a separate no-push nightly workflow) is the safe-but-blind opposite extreme — it never blocks a ship, but produces no per-push signal, so regressions surface late. The **staged** middle rung is a matrix leg that runs on every push yet cannot block a ship:
+
+```yaml
+strategy:
+  fail-fast: false
+  matrix:
+    os: [ubuntu-latest, macos-latest]
+runs-on: ${{ matrix.os }}
+continue-on-error: ${{ matrix.os == 'macos-latest' }}
+```
+
+`continue-on-error` on the new leg (gated on the new matrix dimension value) plus `fail-fast: false` (so a red new-leg never cancels the proven leg) buys immediate per-push signal — the lane runs on every push and a failure shows a visible red X on that leg — while keeping the **run-level conclusion**, which the ship gate reads, unaffected by the new leg's outcome.
+
+**Empirically-established supporting fact — verify against ground truth, not docs/reasoning (#10427 sibling).** A job-level `continue-on-error` matrix leg that FAILS still yields a run-level conclusion of `success` — **UNLESS** a `needs: [<job>]` downstream job consumes the deceptive per-leg success, in which case that downstream job can fail the run and re-couple the lane to the ship gate. When the workflow's jobs are independent (no `needs:` edge into the matrixed job), the masking is clean. This was settled with an isolated throwaway-branch probe (a passing blocking leg + a failing `continue-on-error` leg → failing leg `failure`, run-level conclusion `success`) after an adversarial review put a *sourced* blocker on the assumption — the cited "the workflow fails" cases all involved a `needs:` downstream, which this repo's `ci.yml` does not have. Secondary sources set the hypothesis; the probe was the test.
+
+**The drift-guard is the enforcement layer (sibling of #10461 — gate-enforce-every-runnable-surface + drift-guard pairing).** A structural parity test (`tests/integration/ci-matrix-parity.test.ts`) pins the matrix shape, the staged `continue-on-error` property, and the retired lane's absence. Because the guard asserts the `continue-on-error` line exists, the **load-bearing flip** — deleting `continue-on-error` once a green track record accumulates — is forced to be a deliberate act that also updates the test; a silent flip fails CI. That is the #10461 discipline (pin the property AND make every edit to it update the guard) applied to a CI-config invariant rather than to a code allowlist.
+
+**Promote on a track record, not a single green (#10428 meta-cadence — staged rungs over a one-shot promotion).** The three rungs are: decoupled nightly lane → non-blocking matrix leg → load-bearing leg. The flip from the second rung to the third is deferred until N consecutive green pushes of the new leg accumulate — and "green pushes from the promotion ship itself" do not count as a diversity track record; the data must come from organic development churn across diverse changes.
+
+**Checking the lane's health.** Because the run-level conclusion is green even when the staged leg reds, the leg's true health is read from the **job** conclusion, not the run conclusion:
+
+```bash
+gh run view <id> --json jobs \
+  -q '.jobs[] | select(.name|contains("<new-dim>")) | .conclusion' -R <owner/repo>
+```
+
+**Reference implementation.** `.github/workflows/ci.yml` (`test` job, `strategy.matrix.os` with the macOS leg `continue-on-error`) + `tests/integration/ci-matrix-parity.test.ts` (the drift-guard). Introduced v1.49.923 (the macOS lane's second rung); the v920 decoupled `ci-macos.yml` lane was the first rung and was retired in the same ship.
+
+**Anti-pattern.** Full-promoting an unproven lane straight into the ship-blocking matrix with no `continue-on-error` staging — a flaky or broken leg can red-block a ship at T14, which is exactly what a decoupled lane was avoiding. Second anti-pattern: deleting `continue-on-error` to make a lane load-bearing without updating the drift-guard — a guard that pins the staged line fails CI (correct), but a guard that does *not* pin the property lets the flip happen silently with no record.
+
+**Validation.** Single-instance promotion at v1.49.923 (operator-authorized codification at v1.49.924); the empirical GitHub-Actions masking fact — verified on a real throwaway-branch run — is the load-bearing evidence rather than a three-instance pattern count. The drift-guard `ci-matrix-parity.test.ts` (9 tests) is green; the load-bearing flip remains the open carry-forward, pending a green track record.
+
 ## When this discipline kicks in
 
 - About to scaffold a new `tools/*.mjs` or `tools/*.ts` CLI that scans the repo.
@@ -133,6 +167,7 @@ A new chokepoint added to a cross-cutting tool's AUDITS array should include san
 - About to write a test harness for a CLI that uses WARN-on-exit-0 (story-drift, discipline-coverage, project-md, adoption-refresh, dacp drift-check, sps-cohort-uniqueness, others).
 - About to add a new metric-emitting analyzer that operators will want to track over time.
 - About to ship the FIRST run of a diff-emitting observability tool.
+- About to promote an unproven CI lane (new OS / runtime / toolchain) into the ship-blocking workflow, or to author a structural drift-guard that pins a CI-config invariant (matrix shape, staged-leg property, retired-lane absence).
 
 ## Anti-pattern summary
 
@@ -142,6 +177,7 @@ A new chokepoint added to a cross-cutting tool's AUDITS array should include san
 - ❌ `process.exit()` immediately after a large `process.stdout.write()`.
 - ❌ Silent first-run message from a diff-emitting tool.
 - ❌ Version-stamped baseline writer with no overwrite guard — trusts handoff prose to enforce a sequencing invariant that the tool itself can enforce.
+- ❌ Full-promoting an unproven CI lane straight into the ship-blocking matrix (no `continue-on-error` staging) — a flaky leg can red-block a ship at T14; or flipping a staged leg to load-bearing without updating its drift-guard.
 
 ## Lesson references
 
@@ -152,3 +188,4 @@ A new chokepoint added to a cross-cutting tool's AUDITS array should include san
 - **#10421** — Observability tools have a warm-up period before their primary value works. Promoted from v787 candidate; **field-validated at v789** by adoption-baseline diff emitting exactly the predicted line.
 - **#10424** — Version-stamped baseline writers refuse to overwrite existing files whose content would differ, unless `--force`. Promoted from v791 candidate at v794 simultaneously with the gate implementation; meta-principle: migrate prose-in-handoff sequencing warnings to deterministic gates after one trip + 2-3 sequential clean applications under vigilance.
 - **#10450** — Static-analysis tool parsers must handle common code-shape variants OR fail loudly. Two-instance promotion: v867 (regex terminator inside comments — false negative) + v885 (alias-stripping in named-import extractor — false positive). Sibling discipline to #10427 failure-mode contracts: tools surfacing silent failures must not themselves fail silently. Mitigating discipline: tool sanity-fixtures should exercise aliased imports / brackets-in-comments / namespace imports / dynamic imports / re-exports.
+- **#10463** — Staged CI-lane promotion via a non-blocking matrix leg: `continue-on-error: ${{ matrix.<dim> == '<new>' }}` + `fail-fast: false` is the intermediate rung between a decoupled-nightly lane and a load-bearing one — per-push signal without ship-blocking power. Empirical GitHub-Actions fact (verified on a throwaway-branch probe): a job-level `continue-on-error` leg that fails still yields run-level conclusion `success` unless a `needs:[<job>]` downstream consumes the per-leg success. The drift-guard `tests/integration/ci-matrix-parity.test.ts` is the #10461 enforcement layer; the load-bearing flip (deleting `continue-on-error`) is a deliberate test-updating act. Sibling of #10428 (meta-cadence — staged rungs over one-shot promotion). Promoted from v1.49.923 candidate; codified v1.49.924 (single-instance, operator-authorized — the empirical masking fact is the load-bearing evidence).
