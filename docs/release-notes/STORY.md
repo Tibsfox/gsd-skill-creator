@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.930`.
+The story begins at `v1.0` and continues to `v1.49.932`.
 
-**973 chapters.** 930 have retrospectives.
+**975 chapters.** 974 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -79,8 +79,8 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.17](v1.49.17/00-summary.md)** — The Space Between · 2026-03-04
 - **[v1.49.18](v1.49.18/00-summary.md)** — Space Between Observatory · 2026-03-06
 - **[v1.49.19](v1.49.19/00-summary.md)** — Gastown Chipset Integration · 2026-03-06
-- **[v1.49.20.1](v1.49.20.1/00-summary.md)** — Documentation Reflections · 2026-03-06
 - **[v1.49.20](v1.49.20/00-summary.md)** — Documentation Consolidation · 2026-03-06
+- **[v1.49.20.1](v1.49.20.1/00-summary.md)** — Documentation Reflections · 2026-03-06
 - **[v1.49.21](v1.49.21/00-summary.md)** — Image to Mission Pipeline · 2026-03-07
 - **[v1.49.22](v1.49.22/00-summary.md)** — PNW Research Series · 2026-03-07
 - **[v1.49.23](v1.49.23/00-summary.md)** — Unison Language & Math Co-Processor Completion · 2026-03-08
@@ -981,3 +981,5 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.928](v1.49.928/00-summary.md)** — Flip the macOS CI Matrix Leg to Load-Bearing (#10463 rung 3) · 2026-05-31
 - **[v1.49.929](v1.49.929/00-summary.md)** — Close the College concept-fallback selector wire (GAP-2) · 2026-05-31
 - **[v1.49.930](v1.49.930/00-summary.md)** — Standing .college/→src/ import gate + dead-code cleanup (CF1) · 2026-05-31
+- **[v1.49.931](v1.49.931/00-summary.md)** — In-branch stochastic selector wire into M4 exploration (CF2a) · 2026-05-31
+- **[v1.49.932](v1.49.932/00-summary.md)** — Recover v931 red CI: integration-test fixture fix + gate the integration suite · 2026-05-31
