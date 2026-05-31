@@ -48,6 +48,14 @@ export type {
 } from './explore.js';
 export { explore } from './explore.js';
 
+// select-variant (M4 in-branch consumer of the M5 stochastic selector)
+export type {
+  BranchVariant,
+  SelectBranchVariantOptions,
+  BranchVariantSelection,
+} from './select-variant.js';
+export { selectBranchVariant } from './select-variant.js';
+
 // commit
 export type { CommitOptions, CommitResult, CommitOutcome } from './commit.js';
 export { COMMIT_LOCK_FILENAME, commit } from './commit.js';

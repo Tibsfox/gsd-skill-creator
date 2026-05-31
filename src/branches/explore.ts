@@ -31,6 +31,12 @@ import { randomUUID } from 'node:crypto';
 import { readManifest, writeManifest } from './fork.js';
 import { ActivationWriter } from '../traces/activation-writer.js';
 import type { BranchManifest } from './manifest.js';
+import {
+  selectBranchVariant,
+  type BranchVariant,
+  type BranchVariantSelection,
+} from './select-variant.js';
+import type { TractabilityClass } from '../tractability/selector-api.js';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -80,6 +86,12 @@ export interface ExploreResult {
 
   /** Per-session results, in session order. */
   sessions: ExploreSessionResult[];
+
+  /**
+   * The stochastic variant selection made for this explore() call, when
+   * `variantSelection` was supplied in the options. Absent otherwise.
+   */
+  variantSelection?: BranchVariantSelection;
 }
 
 /**
@@ -129,6 +141,33 @@ export interface ExploreOptions {
    * Override for ActivationWriter (DI for tests).
    */
   activationWriter?: ActivationWriter;
+
+  /**
+   * Optional stochastic branch-variant selection (M4 in-branch consumer of the
+   * M5 selector). When supplied, `explore()` chooses WHICH variant body to run
+   * as the branch side via {@link selectBranchVariant} — the first production
+   * caller of the selector's `inBranchContext: true` path — instead of reading
+   * `skill.md` from the branch directory. Default (field absent) → unchanged:
+   * the branch body is read from disk.
+   *
+   * Reproducible: a given `branchSeed` + `variants` + `query` selects the same
+   * variant every run. With the stochastic flag off or a single variant, the
+   * choice collapses to the deterministic top-ranked variant.
+   */
+  variantSelection?: {
+    /** Query describing the exploration goal. */
+    query: string;
+    /** Candidate variants (each carrying a `body` to run if chosen). */
+    variants: Array<BranchVariant & { body: string }>;
+    /** Per-branch seed for reproducible selection. */
+    branchSeed?: number;
+    /** ME-1 tractability class. Defaults to 'unknown'. */
+    tractabilityClass?: TractabilityClass;
+    /** Override the stochastic master flag (default: read from settings). */
+    stochasticEnabled?: boolean;
+    /** Base Boltzmann temperature. Defaults to 1.0. */
+    baseTemperature?: number;
+  };
 }
 
 // ─── explore() ───────────────────────────────────────────────────────────────
@@ -151,6 +190,7 @@ export async function explore(opts: ExploreOptions): Promise<ExploreResult> {
     runSkill,
     traceDir = '.planning/traces/branches',
     activationWriter,
+    variantSelection,
   } = opts;
 
   const branchDir = join(branchesDir, branchId);
@@ -162,8 +202,27 @@ export async function explore(opts: ExploreOptions): Promise<ExploreResult> {
     );
   }
 
-  // Read the branched skill body.
-  const branchBody = await fs.readFile(join(branchDir, 'skill.md'), 'utf8');
+  // Determine the branch body. When a stochastic variant selection is supplied,
+  // choose WHICH variant body to run via the M5 in-branch selector (the M4 frame
+  // is the sanctioned home for in-branch stochasticity — the ME-3 gate). The
+  // chosen variant's `body` is used as the branch side; the selection is returned
+  // on the result. Default (no variantSelection) → read `skill.md` from disk.
+  let chosenSelection: BranchVariantSelection | undefined;
+  let branchBody: string;
+  if (variantSelection) {
+    chosenSelection = await selectBranchVariant({
+      query: variantSelection.query,
+      variants: variantSelection.variants,
+      branchSeed: variantSelection.branchSeed,
+      tractabilityClass: variantSelection.tractabilityClass,
+      stochasticEnabled: variantSelection.stochasticEnabled,
+      baseTemperature: variantSelection.baseTemperature,
+    });
+    // The chosen variant always carries a `body` (the field type requires it).
+    branchBody = chosenSelection.chosen.body ?? '';
+  } else {
+    branchBody = await fs.readFile(join(branchDir, 'skill.md'), 'utf8');
+  }
 
   // Set up M3 activation writer.
   const writer = activationWriter ?? new ActivationWriter(join(traceDir, `${branchId}.jsonl`));
@@ -215,7 +274,9 @@ export async function explore(opts: ExploreOptions): Promise<ExploreResult> {
   await writeManifest(branchDir, updatedManifest);
   manifest = updatedManifest;
 
-  return { manifest, sessions };
+  return chosenSelection
+    ? { manifest, sessions, variantSelection: chosenSelection }
+    : { manifest, sessions };
 }
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
