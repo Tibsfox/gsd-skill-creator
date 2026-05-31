@@ -44,8 +44,22 @@ jobs:
       - run: npm run build
 
   test:
-    name: Test
-    runs-on: ubuntu-latest
+    name: Test (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    # v1.49.923: macos-latest folded into this matrix (STAGED, NON-BLOCKING).
+    # The macOS leg runs on every push to main/dev for cross-platform signal,
+    # but `continue-on-error` keeps its result OUT of the run-level conclusion,
+    # so the pre-tag-gate ci-gate (tools/pre-tag-gate.sh step 4, which reads that
+    # conclusion) is never blocked by a macOS-only failure. The ubuntu leg stays
+    # load-bearing. Flip macOS to load-bearing by deleting the `continue-on-error`
+    # line once N consecutive green macOS pushes accumulate — that flip MUST also
+    # update tests/integration/ci-matrix-parity.test.ts (the drift-guard).
+    continue-on-error: ${{ matrix.os == 'macos-latest' }}
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

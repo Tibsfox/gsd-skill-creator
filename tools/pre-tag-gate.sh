@@ -445,14 +445,16 @@ else
     exit 4
   fi
   # Pin the ship-blocking workflow explicitly. Without --workflow, `gh run
-  # list` returns runs from ALL workflows on dev — including the decoupled,
-  # non-blocking ci-macos.yml lane ("CI (macOS)"), which can be
-  # workflow_dispatch'd onto dev and would then win the most-recent `.[0]`
-  # selection at the same dev-tip SHA. That made the gate read the WRONG
-  # workflow's conclusion (a false FAIL when the macOS lane is in_progress or
-  # red while the Linux CI is green). Restrict to the Linux ship-gate workflow.
-  # Override the workflow file via SC_CI_GATE_WORKFLOW (e.g. after folding
-  # macOS into ci.yml's matrix per the ci-macos.yml promotion path).
+  # list` returns runs from ALL workflows on dev; pinning to ci.yml makes the
+  # most-recent `.[0]` selection at the dev-tip SHA deterministic regardless of
+  # what other workflows run on dev.
+  # Before v1.49.923 a SEPARATE non-blocking ci-macos.yml lane ("CI (macOS)")
+  # could be workflow_dispatch'd onto dev and win that `.[0]` selection — a false
+  # FAIL when it was in_progress/red while ci.yml was green. v1.49.923 folded
+  # macOS into ci.yml as a NON-BLOCKING matrix leg (continue-on-error), so its
+  # result no longer affects the run-level conclusion this gate reads; the pin
+  # stays as a guard against any future push-triggered workflow on dev.
+  # Override the workflow file via SC_CI_GATE_WORKFLOW.
   CI_GATE_WORKFLOW="${SC_CI_GATE_WORKFLOW:-ci.yml}"
   RUN_JSON="$(gh run list --repo "$REPO_NWO" --branch dev --workflow "$CI_GATE_WORKFLOW" --limit 10 \
     --json status,conclusion,headSha,databaseId,url,workflowName 2>&1)" || {
