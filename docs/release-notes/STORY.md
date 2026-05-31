@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.926`.
+The story begins at `v1.0` and continues to `v1.49.927`.
 
-**969 chapters.** 968 have retrospectives.
+**970 chapters.** 969 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -79,8 +79,8 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.17](v1.49.17/00-summary.md)** — The Space Between · 2026-03-04
 - **[v1.49.18](v1.49.18/00-summary.md)** — Space Between Observatory · 2026-03-06
 - **[v1.49.19](v1.49.19/00-summary.md)** — Gastown Chipset Integration · 2026-03-06
-- **[v1.49.20](v1.49.20/00-summary.md)** — Documentation Consolidation · 2026-03-06
 - **[v1.49.20.1](v1.49.20.1/00-summary.md)** — Documentation Reflections · 2026-03-06
+- **[v1.49.20](v1.49.20/00-summary.md)** — Documentation Consolidation · 2026-03-06
 - **[v1.49.21](v1.49.21/00-summary.md)** — Image to Mission Pipeline · 2026-03-07
 - **[v1.49.22](v1.49.22/00-summary.md)** — PNW Research Series · 2026-03-07
 - **[v1.49.23](v1.49.23/00-summary.md)** — Unison Language & Math Co-Processor Completion · 2026-03-08
@@ -959,21 +959,22 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.906](v1.49.906/00-summary.md)** — Twelfth LoaderContext Chip: `aminet/emulated-scanner.ts` (Module-Function Multi-Site Mixed-Chokepoint) · 2026-05-29
 - **[v1.49.907](v1.49.907/00-summary.md)** — Thirteenth LoaderContext Chip: `memory/file-store.ts` (Class-Multi-Method Consolidated-Gate — 2nd Instance PROMOTES v902 Sub-Variant) · 2026-05-29
 - **[v1.49.908](v1.49.908/00-summary.md)** — Fourteenth LoaderContext Chip: `memory/conversation-store.ts` (Class-Multi-Method Consolidated-Gate — 3rd Instance PROMOTES to ESTABLISHED) · 2026-05-29
-- **[v1.49.909](v1.49.909/00-summary.md)** — Fifteenth LoaderContext Chip: `intelligence/kb/store.ts` (VERDICT — "Role: NOT a disk loader") — CLOSES KNOWN_UNWIRED Loader to 0 · 2026-05-29
+- **[v1.49.909](v1.49.909/00-summary.md)** — _(unnamed)_ · 2026-05-29
 - **[v1.49.910](v1.49.910/00-summary.md)** — Counter-Cadence Codify Ship: Promote #10459 (Class-Multi-Method Consolidated-Gate) ESTABLISHED + Clear 8 PARTIAL Discipline-Coverage Entries · 2026-05-29
-- **[v1.49.911](v1.49.911/00-summary.md)** — Counter-Cadence Codify Ship: UNCODIFIED Drain — NASA Mission Authoring Domain + Reusable-Subset Promotion (39 → 0) · 2026-05-29
-- **[v1.49.912](v1.49.912/00-summary.md)** — Gate-Tightening Micro-Ship: Discipline-Coverage Ceiling Ratchet (41→5) + PARTIAL Companion Ceiling · 2026-05-29
-- **[v1.49.913](v1.49.913/00-summary.md)** — Tools-Suite Gate Wiring + Silent-Rot Green-Up (8 red files) + Layer-2 Drift-Guard · 2026-05-29
+- **[v1.49.911](v1.49.911/00-summary.md)** — Counter-Cadence Codify Ship: UNCODIFIED Drain — NASA Mission Authoring Domain + Reusable-Subset Promotion · 2026-05-29
+- **[v1.49.912](v1.49.912/00-summary.md)** — Gate-Tightening Micro-Ship: Discipline-Coverage Ceiling Ratchet (41 → 5) + PARTIAL Companion Ceiling · 2026-05-29
+- **[v1.49.913](v1.49.913/00-summary.md)** — Tools-Suite Gate Wiring + Silent-Rot Green-Up + Layer-2 Drift-Guard · 2026-05-29
 - **[v1.49.914](v1.49.914/00-summary.md)** — Tools-Suite Cluster Closure: node:test Gate + CI-Enforcement + Layer-2 node:test Drift-Guard · 2026-05-29
-- **[v1.49.915](v1.49.915/00-summary.md)** — Counter-Cadence Tools-Suite Hygiene: atlas-deps-audit Flake-Audit + Tools-Suite CI-Hardening (mus-smoke skip-guard + chapter.mjs entrypoint guard) — #10461 3rd Instance · 2026-05-30
+- **[v1.49.915](v1.49.915/00-summary.md)** — Counter-Cadence Tools-Suite Hygiene: atlas-deps-audit Flake-Audit (De-Noise + Stale-Allowlist Fix + Live-Tree Enforcement) + Tools-Suite CI-Hardening (mus-smoke skip-guard + chapter.mjs entrypoint guard) — #10461 3rd Instance · 2026-05-30
 - **[v1.49.916](v1.49.916/00-summary.md)** — Counter-Cadence Codify + Tool-Robustness Ship: Codify #10461 (Gate-Enforce-Every-Runnable-Surface + Drift-Guard) + Release-History PG/Refresh Robustness (Advisory Drift-Check + Loud Credential Error) + AC7 Leak-Scan False-Positive Allowlist · 2026-05-30
-- **[v1.49.917](v1.49.917/00-summary.md)** — Counter-Cadence Codify + Audit-Step Semantics: Codify #10462 (Describe-the-Pattern-Never-Quote-the-Literal Leak-Scanner Authoring Rule + Allowlist-vs-Scrub Decision) + refresh.mjs Audit-Step Semantics Cleanup (Inert Dead-Branch Removal; Audit Stays Fatal Load-Bearing Gate) · 2026-05-30
-- **[v1.49.918](v1.49.918/00-summary.md)** — Memory Arena Resume (M14–M16): GPU Compute (NVRTC Runtime Compile + Generic In-Place Launch + verify_checksums Integrity Verdict) + Opt-in cgroup Memory Ceiling on ArenaSet + Live Migration Adoption Proof (107MB Corpus, 752 Bindings Resolve) + Corpus-Absent Skip-Guard · 2026-05-30
-- **[v1.49.919](v1.49.919/00-summary.md)** — GAP-Table Reconciliation: GAP-4 GPU Pipeline E2E CLOSED + Proven (Coprocessor Typed-Client Contract-Drift Repair — normalizeToolResult Adapter + Fixture Drift-Guard + Skill-Activation→cuRAND GPU Proof on RTX 4060 Ti) + GAP-5 Minecraft Knowledge World Scoped-Out (ADR 0005, Intentional Out-of-Scope) · 2026-05-30
-- **[v1.49.920](v1.49.920/00-summary.md)** — Cross-Platform CI: macOS vitest Lane (Decoupled Separate Workflow — Nightly + workflow_dispatch + PR, No push Trigger So It Never Enters the Ship-Gate dev-tip Match; Mirrors the Linux test Job) + Parity/Decoupling Drift-Guard (#10461 Pairing) · 2026-05-30
-- **[v1.49.921](v1.49.921/00-summary.md)** — macOS Lane First Run: 6 Cross-Platform Bugs Fixed (tmpdir /var→/private/var Symlink Test Hardening — realpath the mkdtemp Root in entrypoint-guard + atlas-indexer file-walker/runner; Source Unchanged) · 2026-05-30
-- **[v1.49.922](v1.49.922/00-summary.md)** — Ship-Tooling Cross-Platform Hardening: perf-assertion-audit git-grep BSD/macOS Portability (toPosixEre + Lazy-Quantifier Strip; Closed a Latent Linux Under-Count 75→90) + ci-gate Workflow-Pin (--workflow ci.yml; Excludes the Non-Blocking macOS Lane from .[0] Selection) + step-17 Gate-Abort Fix (|| true on Non-Drift PROJECT.md WARN) — macOS Lane Now Green End-to-End Incl. node:test · 2026-05-30
-- **[v1.49.923](v1.49.923/00-summary.md)** — Staged macOS Lane Promotion: Folded macos-latest into the ci.yml test Matrix as a NON-BLOCKING Leg (continue-on-error gated on matrix.os + fail-fast:false — Per-Push Signal, Run-Level Conclusion Unaffected So the Ship-Gate Can't Be Blocked) + Retired the Decoupled ci-macos.yml + Rewrote the Drift-Guard (ci-matrix-parity.test.ts — Matrix-Parity + Staged-Non-Blocking + Retirement, 9 Tests) — Empirically Proven on Real GitHub Actions (continue-on-error Leg Fail → Run Conclusion success) · 2026-05-30
-- **[v1.49.924](v1.49.924/00-summary.md)** — Counter-Cadence Codify (#19): Promoted the v1.49.923 Candidate to First-Class Manifest Lesson #10463 — Staged CI-Lane Promotion via a Non-Blocking Matrix Leg (continue-on-error Gated on the Matrix Dimension + fail-fast:false → Per-Push Signal With the Run-Level Conclusion Unaffected, So an Unproven Lane Can't Block a Ship; the Intermediate Rung Between a Decoupled-Nightly Lane and a Load-Bearing One) + the Empirical GitHub-Actions Masking Fact (continue-on-error Leg Fail → Run Conclusion success Unless a needs:[job] Downstream Consumes It) + the ci-matrix-parity Drift-Guard as the #10461 Enforcement Layer — Home: Static-Analysis Tool Authoring; Manifest 149→150 · 2026-05-31
-- **[v1.49.925](v1.49.925/00-summary.md)** — Operationalize the #10463 Flip Gate: macOS-Flip Readiness Checker (Organic-Churn Predicate + Consecutive-Green Streak vs N; gate-not-vigilance) · 2026-05-31
-- **[v1.49.926](v1.49.926/00-summary.md)** — Complete the token_budget.warn_at_percent Loop: Substrate Auto-Emit + Verify · 2026-05-31
+- **[v1.49.917](v1.49.917/00-summary.md)** — Counter-Cadence Codify + Audit-Step Semantics · 2026-05-30
+- **[v1.49.918](v1.49.918/00-summary.md)** — Memory Arena Resume (M14–M16) · 2026-05-30
+- **[v1.49.919](v1.49.919/00-summary.md)** — GAP-table Reconciliation (GAP-4 closed, GAP-5 scoped-out) · 2026-05-30
+- **[v1.49.920](v1.49.920/00-summary.md)** — Cross-Platform CI: macOS vitest Lane (Decoupled) · 2026-05-30
+- **[v1.49.921](v1.49.921/00-summary.md)** — macOS Lane First Run: 6 Cross-Platform Bugs Fixed (tmpdir-Symlink Test Hardening) · 2026-05-30
+- **[v1.49.922](v1.49.922/00-summary.md)** — Ship-Tooling Cross-Platform Hardening (macOS Lane Green End-to-End) · 2026-05-30
+- **[v1.49.923](v1.49.923/00-summary.md)** — Staged macOS Lane Promotion (Non-Blocking ci.yml Matrix) · 2026-05-30
+- **[v1.49.924](v1.49.924/00-summary.md)** — Counter-Cadence Codify: Staged CI-Lane Promotion (#10463) · 2026-05-31
+- **[v1.49.925](v1.49.925/00-summary.md)** — Operationalize the #10463 Flip Gate: macOS-Flip Readiness Checker · 2026-05-31
+- **[v1.49.926](v1.49.926/00-summary.md)** — Complete the `token_budget.warn_at_percent` Loop: Substrate Auto-Emit + Verify E2E · 2026-05-31
+- **[v1.49.927](v1.49.927/00-summary.md)** — Wire the MA-3 Stochastic Bridge into the M5 Selector · 2026-05-31
