@@ -1,15 +1,16 @@
 # Release History
 
-967 milestones shipped across the v1.0 → v1.49.924 arc. The table below lists every shipped release, newest first.
+968 milestones shipped across the v1.0 → v1.49.925 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
 
 > **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 2 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
-**Snapshot:** 967 releases · 966 with retrospectives · 750 with extracted lessons · quality A:662 B:98 C:62 D:12 F:133 (avg 85) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 968 releases · 967 with retrospectives · 750 with extracted lessons · quality A:662 B:98 C:62 D:12 F:134 (avg 85) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.925](release-notes/v1.49.925) | Operationalize the #10463 Flip Gate: macOS-Flip Readiness Checker | 2026-05-31 | 3 | — | — | [s](release-notes/v1.49.925/chapter/00-summary.md) [r](release-notes/v1.49.925/chapter/03-retrospective.md) [l](release-notes/v1.49.925/chapter/04-lessons.md) [c](release-notes/v1.49.925/chapter/99-context.md) | — | F 33 |  |
 | [v1.49.924](release-notes/v1.49.924) | Counter-Cadence Codify: Staged CI-Lane Promotion (#10463) | 2026-05-31 | 3 | — | — | [s](release-notes/v1.49.924/chapter/00-summary.md) [r](release-notes/v1.49.924/chapter/03-retrospective.md) [l](release-notes/v1.49.924/chapter/04-lessons.md) [c](release-notes/v1.49.924/chapter/99-context.md) | — | F 30 |  |
 | [v1.49.923](release-notes/v1.49.923) | Staged macOS Lane Promotion (Non-Blocking ci.yml Matrix) | 2026-05-30 | 3 | — | — | [s](release-notes/v1.49.923/chapter/00-summary.md) [r](release-notes/v1.49.923/chapter/03-retrospective.md) [l](release-notes/v1.49.923/chapter/04-lessons.md) [c](release-notes/v1.49.923/chapter/99-context.md) | — | F 49 |  |
 | [v1.49.922](release-notes/v1.49.922) | Ship-Tooling Cross-Platform Hardening (macOS Lane Green End-to-End) | 2026-05-30 | 5 | — | — | [s](release-notes/v1.49.922/chapter/00-summary.md) [r](release-notes/v1.49.922/chapter/03-retrospective.md) [l](release-notes/v1.49.922/chapter/04-lessons.md) [c](release-notes/v1.49.922/chapter/99-context.md) | — | F 43 |  |
