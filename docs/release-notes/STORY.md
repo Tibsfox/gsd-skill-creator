@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.928`.
+The story begins at `v1.0` and continues to `v1.49.929`.
 
-**971 chapters.** 970 have retrospectives.
+**972 chapters.** 971 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -979,3 +979,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.926](v1.49.926/00-summary.md)** — Complete the `token_budget.warn_at_percent` Loop: Substrate Auto-Emit + Verify E2E · 2026-05-31
 - **[v1.49.927](v1.49.927/00-summary.md)** — Wire the MA-3 Stochastic Bridge into the M5 Selector · 2026-05-31
 - **[v1.49.928](v1.49.928/00-summary.md)** — Flip the macOS CI Matrix Leg to Load-Bearing (#10463 Rung 3) · 2026-05-31
+- **[v1.49.929](v1.49.929/00-summary.md)** — Close the College Concept-Fallback Selector Wire (GAP-2) · 2026-05-31
