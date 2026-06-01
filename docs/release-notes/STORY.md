@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.932`.
+The story begins at `v1.0` and continues to `v1.49.933`.
 
-**975 chapters.** 974 have retrospectives.
+**976 chapters.** 975 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -982,4 +982,5 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.929](v1.49.929/00-summary.md)** — Close the College concept-fallback selector wire (GAP-2) · 2026-05-31
 - **[v1.49.930](v1.49.930/00-summary.md)** — Standing .college/→src/ import gate + dead-code cleanup (CF1) · 2026-05-31
 - **[v1.49.931](v1.49.931/00-summary.md)** — In-branch stochastic selector wire into M4 exploration (CF2a) · 2026-05-31
-- **[v1.49.932](v1.49.932/00-summary.md)** — Recover v931 red CI: integration-test fixture fix + gate the integration suite · 2026-05-31
+- **[v1.49.932](v1.49.932/00-summary.md)** — Recover v931 red CI: fixture fix + gate the integration project · 2026-05-31
+- **[v1.49.933](v1.49.933/00-summary.md)** — Sanitize NaN importance: close a silently-wrong-winner bug surfaced by the CF2b audit · 2026-05-31
