@@ -1,13 +1,14 @@
 # Release History
 
-980 milestones shipped across the v1.0 → v1.49.937 arc. The table below lists every shipped release, newest first.
+981 milestones shipped across the v1.0 → v1.49.938 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
-**Snapshot:** 980 releases · 937 with retrospectives · 759 with extracted lessons · quality A:653 B:98 C:69 D:13 F:147 (avg 85) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 981 releases · 938 with retrospectives · 760 with extracted lessons · quality A:653 B:98 C:69 D:13 F:148 (avg 84) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.938](release-notes/v1.49.938) | cargo lane flip-readiness gate (lane-stability model) | 2026-06-01 | 3 | — | — | [s](release-notes/v1.49.938/chapter/00-summary.md) [r](release-notes/v1.49.938/chapter/03-retrospective.md) [l](release-notes/v1.49.938/chapter/04-lessons.md) [c](release-notes/v1.49.938/chapter/99-context.md) | 2 | F 29 |  |
 | [v1.49.937](release-notes/v1.49.937) | CF4d: algebrus.eigen complex-serialization wire fix | 2026-06-01 | 3 | — | — | [s](release-notes/v1.49.937/chapter/00-summary.md) [r](release-notes/v1.49.937/chapter/03-retrospective.md) [l](release-notes/v1.49.937/chapter/04-lessons.md) [c](release-notes/v1.49.937/chapter/99-context.md) | 1 | F 29 |  |
 | [v1.49.936](release-notes/v1.49.936) | CF4a: staged non-blocking cargo CI lane | 2026-06-01 | 3 | — | — | [s](release-notes/v1.49.936/chapter/00-summary.md) [r](release-notes/v1.49.936/chapter/03-retrospective.md) [l](release-notes/v1.49.936/chapter/04-lessons.md) [c](release-notes/v1.49.936/chapter/99-context.md) | 1 | F 35 |  |
 | [v1.49.935](release-notes/v1.49.935) | CF4b: first `coprocessor:` skill consumer + CF4c eigen verdict | 2026-06-01 | 3 | — | — | [s](release-notes/v1.49.935/chapter/00-summary.md) [r](release-notes/v1.49.935/chapter/03-retrospective.md) [l](release-notes/v1.49.935/chapter/04-lessons.md) [c](release-notes/v1.49.935/chapter/99-context.md) | 1 | F 25 |  |
