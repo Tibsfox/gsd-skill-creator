@@ -59,14 +59,31 @@ def svd(a: list, precision: str = "fp64") -> dict:
     }
 
 
+def _to_complex_pairs(x):
+    """Recursively map a nested list of complex scalars to JSON-safe {re, im}.
+
+    `scipy.linalg.eig` always returns a complex dtype (even for real
+    eigenvalues), so a raw `vals.tolist()` yields Python `complex` objects that
+    `json.dumps` cannot serialize. Emitting {re, im} pairs makes the eigen
+    result wire-safe and gives a stable, lossless contract (CF4d).
+    """
+    if isinstance(x, list):
+        return [_to_complex_pairs(v) for v in x]
+    return {"re": x.real, "im": x.imag}
+
+
 def eigen(a: list, precision: str = "fp64") -> dict:
     dtype = np.float32 if precision == "fp32" else np.float64
     A = np.array(a, dtype=dtype)
     t = time.perf_counter()
     vals, vecs = la.eig(A)
     elapsed = time.perf_counter() - t
+    # eig() yields a complex dtype; force-cast BOTH arrays to complex so every
+    # leaf serializes to a uniform {re, im} pair. (Eigenvectors of a symmetric
+    # input come back real-dtype — the cast keeps the wire contract stable.)
     return {
-        "eigenvalues": vals.tolist(), "eigenvectors": vecs.tolist(),
+        "eigenvalues": _to_complex_pairs(vals.astype(np.complex128).tolist()),
+        "eigenvectors": _to_complex_pairs(vecs.astype(np.complex128).tolist()),
         "backend": "cpu", "precision": precision,
         "computation_time_ms": round(elapsed * 1000, 3), "operation": "eigen",
     }

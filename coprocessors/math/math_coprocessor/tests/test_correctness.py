@@ -64,8 +64,12 @@ class TestAlgebrusCorrectness:
     def test_eigendecomposition(self, mat_2x2):
         """Eigendecomposition: A @ v = lambda * v for each eigenpair."""
         result = algebrus.eigen(mat_2x2)
-        vals = np.array(result["eigenvalues"])
-        vecs = np.array(result["eigenvectors"])
+        # eigen emits JSON-safe {re, im} pairs (CF4d); rebuild complex arrays.
+        vals = np.array([complex(d["re"], d["im"]) for d in result["eigenvalues"]])
+        vecs = np.array([
+            [complex(c["re"], c["im"]) for c in row]
+            for row in result["eigenvectors"]
+        ])
         A = np.array(mat_2x2)
 
         for i in range(len(vals)):

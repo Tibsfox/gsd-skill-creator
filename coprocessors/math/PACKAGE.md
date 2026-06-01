@@ -83,14 +83,14 @@ Add to your Claude MCP settings (`.claude/settings.json` or project settings):
 > `docs/ledger-driven-work-discipline.md` (#10411) this is the load-bearing third interface-conformance
 > verdict — a deliberate role boundary, not a gap to close. **Do not add a GPU eigen path.**
 >
-> **Separate deferred defect (orthogonal to the GPU question), deferred to a dedicated follow-up ship:** `eigen` currently errors on
-> *every* call through the typed MCP client because `scipy.linalg.eig` always returns a `complex` dtype (even
-> for real eigenvalues) and the server's `json.dumps` has no complex encoder — the result is rewrapped as
-> `{error, backend:"error"}` and the client correctly throws (`Coprocessor tool algebrus.eigen failed:
-> Object of type complex is not JSON serializable`). Fixing it changes eigen's result contract (complex
-> eigenvalues need a `{re, im}`
-> representation + a TS type update), so it earns its own ship. `det`/`inv` share the CPU-only role but are
-> wire-safe because they emit real floats.
+> **Wire-serialization defect — RESOLVED (CF4d, v1.49.937).** Orthogonal to the GPU question above.
+> `eigen` previously errored on *every* call through the typed MCP client because `scipy.linalg.eig` always
+> returns a `complex` dtype (even for real eigenvalues) and the server's `json.dumps` had no complex encoder —
+> the result was rewrapped as `{error, backend:"error"}` and the client correctly threw (`Object of type
+> complex is not JSON serializable`). `cpu.eigen` now force-casts both eigenvalues and eigenvectors to a
+> complex dtype and emits JSON-safe `{re, im}` pairs (`fallback/cpu.py:_to_complex_pairs`); the TS contract
+> is `EigenResult` (`src/coprocessor/types.ts`). The fix only made the existing CPU result wire-safe — eigen
+> remains CPU-only. `det`/`inv` share the CPU-only role and were already wire-safe (real-float output).
 
 ### FOURIER — Signal Processing
 

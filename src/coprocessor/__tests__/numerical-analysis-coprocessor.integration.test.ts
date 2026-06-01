@@ -97,6 +97,31 @@ describeLive('numerical-analysis coprocessor consumer → live server (CF4b)', (
     expect(r.meta.tool).toBe('algebrus.solve');
   }, 20_000);
 
+  it('algebrus.eigen returns complex {re,im} eigenpairs — real case (CF4d)', async () => {
+    // eig(diag(2, 3)) => eigenvalues {2, 3}, all imaginary parts ~0.
+    // Pre-CF4d this threw ("Object of type complex is not JSON serializable").
+    const r = await client.eigen({ a: [[2, 0], [0, 3]] });
+    expect(r.meta.tool).toBe('algebrus.eigen');
+    expect(['gpu', 'cpu']).toContain(r.meta.device);
+    const vals = [...r.value.eigenvalues].sort((a, b) => a.re - b.re);
+    expect(vals[0].re).toBeCloseTo(2, 6);
+    expect(vals[1].re).toBeCloseTo(3, 6);
+    for (const ev of r.value.eigenvalues) expect(ev.im).toBeCloseTo(0, 9);
+    // eigenvectors arrive as {re,im} pairs too (stable wire contract)
+    expect(r.value.eigenvectors).toHaveLength(2);
+    expect(r.value.eigenvectors[0][0]).toHaveProperty('re');
+    expect(r.value.eigenvectors[0][0]).toHaveProperty('im');
+  }, 20_000);
+
+  it('algebrus.eigen carries genuinely complex eigenvalues — rotation case (CF4d)', async () => {
+    // eig([[0,-1],[1,0]]) => eigenvalues ±i  (re ~0, im = -1 and +1)
+    const r = await client.eigen({ a: [[0, -1], [1, 0]] });
+    const vals = [...r.value.eigenvalues].sort((a, b) => a.im - b.im);
+    expect(vals[0].im).toBeCloseTo(-1, 6);
+    expect(vals[1].im).toBeCloseTo(1, 6);
+    for (const ev of vals) expect(ev.re).toBeCloseTo(0, 9);
+  }, 20_000);
+
   it('statos.describe matches the numpy-stats oracle', async () => {
     // population std of 1..5 = sqrt(2)
     const r = await client.describe({ data: [1, 2, 3, 4, 5] });

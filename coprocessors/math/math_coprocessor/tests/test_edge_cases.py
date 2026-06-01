@@ -53,8 +53,9 @@ class TestEdgeCases:
         np.testing.assert_allclose(result["s"], [5.0], atol=1e-12)
 
         result = algebrus.eigen(m)
+        # eigen emits {re, im} pairs (CF4d); compare the real parts.
         np.testing.assert_allclose(
-            np.real(result["eigenvalues"]), [5.0], atol=1e-12
+            [d["re"] for d in result["eigenvalues"]], [5.0], atol=1e-12
         )
 
         result = algebrus.det(m)

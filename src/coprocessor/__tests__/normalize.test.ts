@@ -61,6 +61,22 @@ const STREAMS = { dedicated_stream: true, stream_priority: 1, active_ops: 1, max
 
 const EIGEN_ERROR = { error: 'eigen requires a square matrix', operation: 'eigen', backend: 'error' };
 
+// algebrus.eigen success — verbatim {re, im} wire shape (CF4d). scipy.linalg.eig
+// always returns complex; the server force-casts both arrays to complex so
+// eigenvalues AND eigenvectors are uniformly {re, im} pairs. Captured from a
+// live probe of diag(2, 3) on 2026-06-01.
+const EIGEN_CPU = {
+  eigenvalues: [{ re: 2, im: 0 }, { re: 3, im: 0 }],
+  eigenvectors: [
+    [{ re: 1, im: 0 }, { re: 0, im: 0 }],
+    [{ re: 0, im: 0 }, { re: 1, im: 0 }],
+  ],
+  backend: 'cpu',
+  precision: 'fp64',
+  computation_time_ms: 0.3,
+  operation: 'eigen',
+};
+
 const META_KEYS = ['backend', 'precision', 'computation_time_ms', 'operation', 'jit_cached'];
 
 describe('normalizeToolResult', () => {
@@ -135,6 +151,21 @@ describe('normalizeToolResult', () => {
     const v = r.value as typeof STREAMS;
     expect(v.dedicated_stream).toBe(true);
     expect(r.meta.device).toBe('cpu');
+  });
+
+  it('maps eigen complex {re,im} pairs to value, stripping meta (CF4d)', () => {
+    const r = normalizeToolResult('algebrus.eigen', EIGEN_CPU);
+    const v = r.value as { eigenvalues: { re: number; im: number }[]; eigenvectors: { re: number; im: number }[][] };
+    expect(v.eigenvalues).toEqual([{ re: 2, im: 0 }, { re: 3, im: 0 }]);
+    expect(v.eigenvectors).toHaveLength(2);
+    expect(v.eigenvectors[0][0]).toEqual({ re: 1, im: 0 });
+    // every meta key is stripped from the spread-op value
+    for (const k of META_KEYS) {
+      expect(v as Record<string, unknown>).not.toHaveProperty(k);
+    }
+    expect(r.meta.device).toBe('cpu');
+    expect(r.meta.chip).toBe('algebrus');
+    expect(r.meta.tool).toBe('algebrus.eigen');
   });
 
   it('throws (does not return a bogus value) on a server-side error', () => {

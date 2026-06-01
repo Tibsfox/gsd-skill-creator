@@ -52,6 +52,30 @@ export interface ToolResult<T = unknown> {
 }
 
 /**
+ * A complex number as it travels over the coprocessor wire. Only
+ * `algebrus.eigen` emits complex-valued results — `scipy.linalg.eig` always
+ * returns a complex dtype, so the Python server encodes each scalar as an
+ * `{ re, im }` pair (CF4d). Structurally identical to the holomorphic module's
+ * `ComplexNumber`, but declared locally to keep the coprocessor client
+ * standalone (no cross-module import).
+ */
+export interface Complex {
+  re: number;
+  im: number;
+}
+
+/**
+ * Result payload of `algebrus.eigen`. Both fields are complex-valued: even a
+ * real-symmetric input is force-cast to a complex dtype server-side so the
+ * wire shape stays stable (CF4d). `eigenvectors` mirrors scipy's eigenvector
+ * matrix in row-major form — column `c` is the eigenvector for `eigenvalues[c]`.
+ */
+export interface EigenResult {
+  eigenvalues: Complex[];
+  eigenvectors: Complex[][];
+}
+
+/**
  * VRAM budget report from `math.vram` (and the nested `vram` block of
  * `math.capabilities`). Field names mirror the Python server verbatim —
  * captured from a live `coprocessors/math/` probe on 2026-05-30. The server

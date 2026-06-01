@@ -35,9 +35,11 @@ export type { SupervisorPolicy, WatchdogOptions, WatchdogStatus } from './watchd
 export type {
   CapabilitiesReport,
   ChipName,
+  Complex,
   CoprocessorActivationSpec,
   CoprocessorClientOptions,
   CoprocessorTransportConfig,
+  EigenResult,
   Precision,
   ToolName,
   ToolResult,

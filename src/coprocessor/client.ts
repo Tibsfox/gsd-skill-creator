@@ -15,6 +15,7 @@ import type {
   CapabilitiesReport,
   ChipName,
   CoprocessorClientOptions,
+  EigenResult,
   Precision,
   StreamsReport,
   ToolName,
@@ -41,8 +42,8 @@ const META_KEYS = ['backend', 'precision', 'computation_time_ms', 'operation', '
  * live `coprocessors/math/` probe on 2026-05-30:
  *   - single-value ops (det, gemm, solve, gradient, transform, batch_eval,
  *     symbex.eval): `{ result, backend, precision, computation_time_ms, ... }`
- *   - spread ops (monte_carlo, describe, svd, fft, ifft, spectrum, regression,
- *     verify): payload fields at top level alongside the meta keys
+ *   - spread ops (monte_carlo, describe, svd, eigen, fft, ifft, spectrum,
+ *     regression, verify): payload fields at top level alongside the meta keys
  *   - report ops (capabilities, vram, streams): flat report, no `result`
  *   - failures: `{ error, ..., backend: "error" }`
  *
@@ -188,8 +189,8 @@ export class CoprocessorClient {
     return this.callTool<{ U: number[][]; s: number[]; Vt: number[][] }>('algebrus.svd', args);
   }
 
-  async eigen(args: { a: number[][]; precision?: Precision }): Promise<ToolResult<{ eigenvalues: number[]; eigenvectors: number[][] }>> {
-    return this.callTool<{ eigenvalues: number[]; eigenvectors: number[][] }>('algebrus.eigen', args);
+  async eigen(args: { a: number[][]; precision?: Precision }): Promise<ToolResult<EigenResult>> {
+    return this.callTool<EigenResult>('algebrus.eigen', args);
   }
 
   async det(args: { a: number[][]; precision?: Precision }): Promise<ToolResult<number>> {
