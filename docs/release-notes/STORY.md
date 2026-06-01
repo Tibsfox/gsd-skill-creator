@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.942`.
+The story begins at `v1.0` and continues to `v1.49.943`.
 
-**985 chapters.** 984 have retrospectives.
+**986 chapters.** 985 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -993,3 +993,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.940](v1.49.940/00-summary.md)** — gateway integration tests on ephemeral ports (EADDRINUSE flake closed) · 2026-06-01
 - **[v1.49.941](v1.49.941/00-summary.md)** — security: resolve critical vitest-UI + moderate qs advisories (vitest → 4.1.8) · 2026-06-01
 - **[v1.49.942](v1.49.942/00-summary.md)** — macOS flip-readiness Set-boundary test hardening (counter-cadence #21) · 2026-06-01
+- **[v1.49.943](v1.49.943/00-summary.md)** — defer-biased-gate Set-boundary lesson #10464 + named-transparency pins · 2026-06-01
