@@ -6,6 +6,12 @@ This changelog is not strictly Keep-a-Changelog format. It is deliberately narra
 
 ---
 
+## 2026-06-01 — numerical-analysis becomes the reference `coprocessor:` consumer (CF4b)
+
+**What changed:** `examples/skills/math/numerical-analysis/SKILL.md` now declares `coprocessor: [algebrus, statos]` in its frontmatter and documents the integration in a new "Coprocessor Acceleration" section. This makes it the **first shipped skill to declare a `coprocessor:` block** — closing the long-dormant state where the default-on activation hook (`src/coprocessor/`) had a typed client, an activation pipeline, and a live MCP server, but no skill in the shipped library declared the frontmatter that drives it. It is a *declared* consumer: the block is read by the library `SkillApplicator.apply()` path and the tests below; the shipped `skill-creator invoke` CLI loads skills directly and does not yet run that pre-warm stage.
+
+**Why:** numerical-analysis is the domain-perfect host — its content (numerical linear algebra, regression, conditioning) maps directly onto the `algebrus` and `statos` chips. The frontmatter round-trip is guarded always-on by `src/coprocessor/__tests__/numerical-analysis-coprocessor.test.ts` (runs under `npm test`/CI); the live end-to-end activation (frontmatter → `activateCoprocessor` → live server → chip availability + oracle compute) is proven gated by the sibling `*.integration.test.ts` (`COPROCESSOR_LIVE_TESTS=1`). Alongside, the `algebrus.eigen` interface-conformance verdict was recorded (INTENTIONALLY DIFFERENT ROLE — CPU-only by design) in `coprocessors/math/PACKAGE.md`.
+
 ## 2026-04-10 — Imported 8 artifacts missing from examples/
 
 **What changed:** Added 8 artifacts that existed in `project-claude/` (the source tree that gets installed to `.claude/` via `project-claude/install.cjs`) but had never been imported to `examples/`. The library went from 127 to 135 artifacts.

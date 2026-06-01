@@ -26,7 +26,7 @@ chips:
     cpu_fallback:
       - solve
       - svd
-      - eigen
+      - eigen          # CPU-only by design — no GPU path (see PACKAGE.md conformance verdict, CF4c)
       - det
       - inv
 

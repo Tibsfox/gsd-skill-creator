@@ -31,6 +31,17 @@ Pure functional tooling. Math-coprocessor is the reference example:
 symbolic linear algebra ops with no skills, no agents, no teams — just a
 block of pure functions bound to a type signature.
 
+The first shipped skill to **declare** a consumer of this chipset is
+`examples/skills/math/numerical-analysis/SKILL.md`, which declares
+`coprocessor: [algebrus, statos]` in its frontmatter. The activation pipeline's
+pre-warm stage `createCoprocessorStage` (→ `parseCoprocessorSpec` →
+`activateCoprocessor`, in `src/coprocessor/`) reads that block and pre-warms the
+named chips when a host drives skills through `SkillApplicator.apply()`; the
+shipped CLI does not yet run that stage. The frontmatter round-trip is guarded
+always-on by `src/coprocessor/__tests__/numerical-analysis-coprocessor.test.ts`;
+the live end-to-end activation is proven (gated on `COPROCESSOR_LIVE_TESTS=1`) by
+the sibling `numerical-analysis-coprocessor.integration.test.ts`.
+
 ### `graphics`
 Rendering pipelines. A graphics chipset declares:
 

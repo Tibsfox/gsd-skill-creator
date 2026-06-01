@@ -5,10 +5,11 @@ type: skill
 category: math
 status: stable
 origin: tibsfox
-modified: false
+modified: true
 first_seen: 2026-04-12
 first_path: examples/skills/math/numerical-analysis/SKILL.md
 superseded_by: null
+coprocessor: [algebrus, statos]
 ---
 # Numerical Analysis
 
@@ -261,6 +262,19 @@ An algorithm is **numerically stable** if small perturbations in the input produ
 ### Conditioning
 
 The **condition number** kappa(A) of a matrix A measures how sensitive Ax = b is to perturbations in A or b. For linear systems: relative error in x <= kappa(A) * relative error in b. When kappa(A) is large, the problem is ill-conditioned and even a stable algorithm produces inaccurate results.
+
+## Coprocessor Acceleration
+
+This skill declares `coprocessor: [algebrus, statos]` in its frontmatter — making it the first shipped skill to **declare** a consumer of the math coprocessor (`coprocessors/math/`, the `coprocessor` chipset's canonical example). The declaration is read by the activation pipeline's pre-warm stage `createCoprocessorStage` (→ `extractCoprocessorRaw` → `parseCoprocessorSpec` → `activateCoprocessor`, in `src/coprocessor/`), which — when the coprocessor is enabled (default-on; disable it with `{ "gsd-skill-creator": { "coprocessor": { "enabled": false } } }` in `.claude/gsd-skill-creator.json`) and a Python MCP server with `mcp` + `numpy` + `scipy` is reachable — pre-warms the named chips so the first real tool call doesn't pay the discovery cost. Note: that stage runs only when a host drives skills through `SkillApplicator.apply()`; the shipped `skill-creator invoke` CLI loads skills directly and does not yet run it, so today the pre-warm is exercised by the library `apply()` path and the tests below, not by a default CLI session.
+
+The declared chips back this skill's computational content:
+
+- **`algebrus`** (linear algebra) — `gemm` (GPU-accelerated via cuBLAS whenever a CUDA device is present), `solve`/`svd` (GPU-promoted when cuSOLVER is available), and `det` (CPU oracle) underpin the linear systems behind Newton's method for systems, least-squares fits, and the conditioning analysis above. Where a GPU path runs, the NumPy/SciPy CPU oracle returns the same result up to floating-point tolerance; `meta.device` reports which path actually ran.
+- **`statos`** (statistics) — `describe`, `regression`, and `monte_carlo` cover descriptive statistics, polynomial regression, and stochastic integration (`monte_carlo` is the cuRAND-accelerated path when a GPU is present).
+
+**Op-conformance note.** `algebrus.eigen` is **intentionally CPU-only** — it has no GPU acceleration path by design (see the verdict in `coprocessors/math/PACKAGE.md`). A separate, deferred wire-serialization defect makes `eigen` unusable through the typed client today (documented alongside that verdict); `gemm`/`solve`/`svd`/`det` are the wire-safe surface this skill builds on.
+
+The end-to-end activation path against a live server is proven in `src/coprocessor/__tests__/numerical-analysis-coprocessor.integration.test.ts` (gated on `COPROCESSOR_LIVE_TESTS=1`); the always-on round-trip of this shipped frontmatter is proven in `numerical-analysis-coprocessor.test.ts`.
 
 ## When to Use This Skill
 
