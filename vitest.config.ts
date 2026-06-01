@@ -109,8 +109,17 @@ export default defineConfig({
           exclude: ['**/node_modules/**', 'dist/**'],
         },
       },
-      // Integration tests — env-gated via GSD_*_INTEGRATION=1 inside the files.
-      // Opt-in only: selected via `vitest run --project integration`.
+      // Integration tests (*.integration.test.ts). NOT opt-in: this project sits in the
+      // `projects` array unconditionally, so it runs on every bare `vitest run` — which is
+      // exactly what CI (ci.yml `npx vitest run`) and the local pre-tag-gate execute.
+      // `vitest run --project integration` RESTRICTS a run to ONLY this project (focused
+      // local runs); it does not enable an otherwise-skipped project.
+      // The PROJECT is not env-gated. Individual files may self-skip at runtime — e.g.
+      // src/critique/loop.integration.test.ts gates its describe block behind
+      // GSD_CRITIQUE_INTEGRATION=1 — but that is per-file, not project-level.
+      // (Corrected after v1.49.940: the prior "env-gated / opt-in only" comment was false
+      // and had obscured that the gateway fixed-port race was a latent CI flake, not a
+      // local-only gate annoyance.)
       {
         test: {
           name: 'integration',
