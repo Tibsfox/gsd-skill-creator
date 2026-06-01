@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.934`.
+The story begins at `v1.0` and continues to `v1.49.935`.
 
-**977 chapters.** 976 have retrospectives.
+**978 chapters.** 977 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -79,8 +79,8 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.17](v1.49.17/00-summary.md)** — The Space Between · 2026-03-04
 - **[v1.49.18](v1.49.18/00-summary.md)** — Space Between Observatory · 2026-03-06
 - **[v1.49.19](v1.49.19/00-summary.md)** — Gastown Chipset Integration · 2026-03-06
-- **[v1.49.20.1](v1.49.20.1/00-summary.md)** — Documentation Reflections · 2026-03-06
 - **[v1.49.20](v1.49.20/00-summary.md)** — Documentation Consolidation · 2026-03-06
+- **[v1.49.20.1](v1.49.20.1/00-summary.md)** — Documentation Reflections · 2026-03-06
 - **[v1.49.21](v1.49.21/00-summary.md)** — Image to Mission Pipeline · 2026-03-07
 - **[v1.49.22](v1.49.22/00-summary.md)** — PNW Research Series · 2026-03-07
 - **[v1.49.23](v1.49.23/00-summary.md)** — Unison Language & Math Co-Processor Completion · 2026-03-08
@@ -985,3 +985,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.932](v1.49.932/00-summary.md)** — Recover v931 red CI: fixture fix + gate the integration project · 2026-05-31
 - **[v1.49.933](v1.49.933/00-summary.md)** — Sanitize NaN importance: close a silently-wrong-winner bug · 2026-05-31
 - **[v1.49.934](v1.49.934/00-summary.md)** — CF3: integration-test proofs for the 3 dormant substrates · 2026-06-01
+- **[v1.49.935](v1.49.935/00-summary.md)** — CF4b: first coprocessor: skill consumer + CF4c eigen verdict · 2026-06-01
