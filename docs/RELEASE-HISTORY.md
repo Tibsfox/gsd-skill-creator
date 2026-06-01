@@ -1,13 +1,14 @@
 # Release History
 
-985 milestones shipped across the v1.0 → v1.49.942 arc. The table below lists every shipped release, newest first.
+986 milestones shipped across the v1.0 → v1.49.943 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
-**Snapshot:** 985 releases · 984 with retrospectives · 763 with extracted lessons · quality A:662 B:98 C:62 D:12 F:151 (avg 84) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 986 releases · 985 with retrospectives · 763 with extracted lessons · quality A:662 B:98 C:62 D:12 F:152 (avg 84) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.943](release-notes/v1.49.943) | defer-biased-gate Set-boundary lesson promotion (#10464) + named-transparency pins (counter-cadence) | 2026-06-01 | 4 | — | — | [s](release-notes/v1.49.943/chapter/00-summary.md) [r](release-notes/v1.49.943/chapter/03-retrospective.md) [l](release-notes/v1.49.943/chapter/04-lessons.md) [c](release-notes/v1.49.943/chapter/99-context.md) | — | F 31 |  |
 | [v1.49.942](release-notes/v1.49.942) | macOS flip-readiness Set-boundary test hardening (counter-cadence) | 2026-06-01 | 3 | — | — | [s](release-notes/v1.49.942/chapter/00-summary.md) [r](release-notes/v1.49.942/chapter/03-retrospective.md) [l](release-notes/v1.49.942/chapter/04-lessons.md) [c](release-notes/v1.49.942/chapter/99-context.md) | — | F 25 |  |
 | [v1.49.941](release-notes/v1.49.941) | security: resolve critical vitest-UI + moderate qs advisories (vitest family → 4.1.8) | 2026-06-01 | 4 | — | — | [s](release-notes/v1.49.941/chapter/00-summary.md) [r](release-notes/v1.49.941/chapter/03-retrospective.md) [l](release-notes/v1.49.941/chapter/04-lessons.md) [c](release-notes/v1.49.941/chapter/99-context.md) | 1 | F 26 |  |
 | [v1.49.940](release-notes/v1.49.940) | gateway integration tests on ephemeral ports (EADDRINUSE flake closed) | 2026-06-01 | 3 | — | — | [s](release-notes/v1.49.940/chapter/00-summary.md) [r](release-notes/v1.49.940/chapter/03-retrospective.md) [l](release-notes/v1.49.940/chapter/04-lessons.md) [c](release-notes/v1.49.940/chapter/99-context.md) | 1 | F 23 |  |
