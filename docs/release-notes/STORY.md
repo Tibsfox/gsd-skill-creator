@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.935`.
+The story begins at `v1.0` and continues to `v1.49.936`.
 
-**978 chapters.** 977 have retrospectives.
+**979 chapters.** 978 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -985,4 +985,5 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.932](v1.49.932/00-summary.md)** — Recover v931 red CI: fixture fix + gate the integration project · 2026-05-31
 - **[v1.49.933](v1.49.933/00-summary.md)** — Sanitize NaN importance: close a silently-wrong-winner bug · 2026-05-31
 - **[v1.49.934](v1.49.934/00-summary.md)** — CF3: integration-test proofs for the 3 dormant substrates · 2026-06-01
-- **[v1.49.935](v1.49.935/00-summary.md)** — CF4b: first coprocessor: skill consumer + CF4c eigen verdict · 2026-06-01
+- **[v1.49.935](v1.49.935/00-summary.md)** — CF4b: first `coprocessor:` skill consumer + CF4c eigen verdict · 2026-06-01
+- **[v1.49.936](v1.49.936/00-summary.md)** — CF4a: staged non-blocking cargo CI lane · 2026-06-01
