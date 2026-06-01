@@ -17,6 +17,7 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { mkdtemp, rm } from 'node:fs/promises';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
+import type { AddressInfo } from 'node:net';
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js';
 import { InMemoryTransport } from '@modelcontextprotocol/sdk/inMemory.js';
@@ -106,11 +107,6 @@ function sampleTraceEvent(overrides?: Partial<TraceEvent>): TraceEvent {
     payload: { result: 'ok' },
     ...overrides,
   };
-}
-
-let gatewayPortCounter = 14100;
-function getPort(): number {
-  return gatewayPortCounter++;
 }
 
 // ============================================================================
@@ -474,7 +470,6 @@ describe('TEST-03: Gateway End-to-End with Real Tools', () => {
 
   beforeEach(async () => {
     tempDir = await mkdtemp(join(tmpdir(), 'mcp-integration-'));
-    port = getPort();
 
     storedToken = createTokenInfo(['admin']);
     const tokenPath = join(tempDir, 'gateway-token');
@@ -487,15 +482,19 @@ describe('TEST-03: Gateway End-to-End with Real Tools', () => {
       skills: { skillsDir: tempDir },
     });
 
+    // Bind an OS-assigned ephemeral port (port: 0); read the actual bound
+    // port back from the socket. Avoids fixed-port collisions under
+    // vitest file-parallelism.
     gateway = await startGateway(
       {
-        port,
+        port: 0,
         host: '127.0.0.1',
         tokenPath,
         enableJsonResponse: true,
       },
       factory,
     );
+    port = (gateway.httpServer.address() as AddressInfo).port;
   });
 
   afterEach(async () => {
@@ -721,12 +720,15 @@ describe('TEST-03: Gateway End-to-End with Real Tools', () => {
     const readTokenPath = join(tempDir, 'read-token');
     await writeToken(readTokenPath, readToken);
 
-    // Stop current gateway and restart with read token + all tools
+    // Stop current gateway and restart with read token + all tools, again on
+    // an OS-assigned ephemeral port. Re-read the bound port afterwards: the
+    // module-scoped createClientTransport() reads `port`, so it must reflect
+    // the restarted server (and avoids re-binding the just-freed port).
     await gateway.stop();
 
     gateway = await startGateway(
       {
-        port,
+        port: 0,
         host: '127.0.0.1',
         tokenPath: readTokenPath,
         enableJsonResponse: true,
@@ -736,6 +738,7 @@ describe('TEST-03: Gateway End-to-End with Real Tools', () => {
         skills: { skillsDir: tempDir },
       }),
     );
+    port = (gateway.httpServer.address() as AddressInfo).port;
 
     const transport = createClientTransport(readToken.token);
     const client = new Client({ name: 'read-only-client', version: '1.0.0' });

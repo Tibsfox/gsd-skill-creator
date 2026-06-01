@@ -83,7 +83,9 @@ function defaultServerFactory(): McpServer {
  * 4. Dispatches authenticated requests to the correct session transport
  * 5. Handles errors gracefully with structured JSON-RPC responses
  *
- * @param config - Partial gateway configuration (defaults applied via schema)
+ * @param config - Partial gateway configuration (defaults applied via schema).
+ *   Pass `port: 0` to bind an OS-assigned ephemeral port; read the actual
+ *   bound port from the returned handle's `httpServer.address()`.
  * @param serverFactory - Optional factory for creating MCP server instances per session
  * @returns A handle to the running gateway server
  */
@@ -125,8 +127,14 @@ export async function startGateway(
     });
   });
 
+  // Resolve the actual bound port -- this differs from resolvedConfig.port
+  // when port 0 was requested (OS-assigned ephemeral binding).
+  const address = httpServer.address();
+  const boundPort =
+    typeof address === 'object' && address !== null ? address.port : resolvedConfig.port;
+
   console.error(
-    `[gateway] MCP gateway server listening on ${resolvedConfig.host}:${resolvedConfig.port}`,
+    `[gateway] MCP gateway server listening on ${resolvedConfig.host}:${boundPort}`,
   );
 
   const stop = async () => {

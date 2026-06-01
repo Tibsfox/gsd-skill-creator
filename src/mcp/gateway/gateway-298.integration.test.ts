@@ -12,6 +12,7 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { mkdtemp, rm } from 'node:fs/promises';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
+import type { AddressInfo } from 'node:net';
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js';
 import { startGateway, type GatewayHandle } from './server.js';
@@ -21,12 +22,6 @@ import { createTokenInfo, writeToken } from './token-manager.js';
 import type { TokenInfo } from './types.js';
 
 // ── Helpers ─────────────────────────────────────────────────────────────
-
-let portCounter = 14100;
-
-function getPort(): number {
-  return portCounter++;
-}
 
 function createClientTransport(port: number, token: string): StreamableHTTPClientTransport {
   return new StreamableHTTPClientTransport(
@@ -56,7 +51,6 @@ describe('Gateway 298 Integration', () => {
 
   beforeEach(async () => {
     tempDir = await mkdtemp(join(tmpdir(), 'gateway-298-'));
-    port = getPort();
 
     // Create a known token
     storedToken = createTokenInfo(['admin']);
@@ -91,15 +85,19 @@ describe('Gateway 298 Integration', () => {
       },
     });
 
+    // Bind an OS-assigned ephemeral port (port: 0); read the actual bound
+    // port back from the socket. Avoids fixed-port collisions under
+    // vitest file-parallelism.
     gateway = await startGateway(
       {
-        port,
+        port: 0,
         host: '127.0.0.1',
         tokenPath,
         enableJsonResponse: true,
       },
       factory,
     );
+    port = (gateway.httpServer.address() as AddressInfo).port;
   });
 
   afterEach(async () => {

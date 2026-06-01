@@ -10,6 +10,7 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { mkdtemp, rm } from 'node:fs/promises';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
+import type { AddressInfo } from 'node:net';
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
@@ -19,13 +20,6 @@ import { createTokenInfo, writeToken } from './token-manager.js';
 import type { TokenInfo } from './types.js';
 
 // ── Helpers ─────────────────────────────────────────────────────────────
-
-let portCounter = 13100;
-
-/** Get a unique port for each test to avoid conflicts. */
-function getPort(): number {
-  return portCounter++;
-}
 
 /**
  * Create an MCP server factory that registers test tools.
@@ -92,23 +86,25 @@ describe('Gateway Integration', () => {
 
   beforeEach(async () => {
     tempDir = await mkdtemp(join(tmpdir(), 'gateway-integration-'));
-    port = getPort();
 
     // Create a known token
     storedToken = createTokenInfo(['admin']);
     const tokenPath = join(tempDir, 'gateway-token');
     await writeToken(tokenPath, storedToken);
 
-    // Start gateway with test server factory
+    // Start gateway on an OS-assigned ephemeral port (port: 0) to avoid
+    // fixed-port collisions under vitest file-parallelism, then read the
+    // actual bound port back from the listening socket.
     gateway = await startGateway(
       {
-        port,
+        port: 0,
         host: '127.0.0.1',
         tokenPath,
         enableJsonResponse: true,
       },
       () => testServerFactory(),
     );
+    port = (gateway.httpServer.address() as AddressInfo).port;
   });
 
   afterEach(async () => {

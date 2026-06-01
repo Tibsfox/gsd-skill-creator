@@ -53,8 +53,12 @@ export const DEFAULT_TOKEN_PATH = '~/.gsd/gateway-token';
 
 /** Gateway server configuration schema. */
 export const GatewayConfigSchema = z.object({
-  /** Port to listen on. */
-  port: z.number().int().min(1).max(65535).default(DEFAULT_GATEWAY_PORT),
+  /**
+   * Port to listen on. Use 0 to bind an OS-assigned ephemeral port; the
+   * actual bound port is then available from the returned handle's
+   * `httpServer.address()`. Defaults to DEFAULT_GATEWAY_PORT.
+   */
+  port: z.number().int().min(0).max(65535).default(DEFAULT_GATEWAY_PORT),
   /** Host to bind to. */
   host: z.string().default(DEFAULT_GATEWAY_HOST),
   /** Path to the bearer token file. */

@@ -10,6 +10,7 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { mkdtemp, rm, mkdir, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
+import type { AddressInfo } from 'node:net';
 import matter from 'gray-matter';
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js';
@@ -20,12 +21,6 @@ import type { TokenInfo } from '../types.js';
 import { registerSkillReadTools, registerSkillWriteTools } from './skill-tools.js';
 
 // ── Helpers ─────────────────────────────────────────────────────────────
-
-let portCounter = 15100;
-
-function getPort(): number {
-  return portCounter++;
-}
 
 function createClientTransport(port: number, token: string): StreamableHTTPClientTransport {
   return new StreamableHTTPClientTransport(
@@ -67,16 +62,17 @@ describe('Skill Tools Integration', () => {
     tempDir = await mkdtemp(join(tmpdir(), 'skill-tools-integration-'));
     skillsDir = join(tempDir, '.claude', 'skills');
     await mkdir(skillsDir, { recursive: true });
-    port = getPort();
 
     storedToken = createTokenInfo(['admin']);
     const tokenPath = join(tempDir, 'gateway-token');
     await writeToken(tokenPath, storedToken);
 
-    // Create gateway with skill tools
+    // Bind an OS-assigned ephemeral port (port: 0); read the actual bound
+    // port back from the socket. Avoids fixed-port collisions under
+    // vitest file-parallelism.
     gateway = await startGateway(
       {
-        port,
+        port: 0,
         host: '127.0.0.1',
         tokenPath,
         enableJsonResponse: true,
@@ -91,6 +87,7 @@ describe('Skill Tools Integration', () => {
         return server;
       },
     );
+    port = (gateway.httpServer.address() as AddressInfo).port;
   });
 
   afterEach(async () => {
