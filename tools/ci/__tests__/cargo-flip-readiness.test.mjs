@@ -256,6 +256,23 @@ describe('computeReadiness', () => {
     expect(r.broke).toBeNull(); // ...nor broke the streak
   });
 
+  it('the named transparent conclusions (stale / startup_failure / in_progress) do NOT advance', () => {
+    // Extends the GREEN Set-boundary pin (#10464). The gate comment enumerates
+    // stale / startup_failure / in_progress as "no verdict" states that are transparent
+    // (neither GREEN nor BREAKING), but only `neutral` was test-pinned. Each must behave
+    // exactly like `neutral`: the discriminating [green, X, green] @ n=3 shape FAILS if X
+    // drifts into GREEN (streak would reach 3 / ready true) OR into BREAKING (broke set) —
+    // so it catches a Set edit in either direction. Mirrors macos-flip-readiness
+    // (macOS<->cargo Set-boundary symmetry).
+    for (const concl of ['stale', 'startup_failure', 'in_progress']) {
+      const runs = [green('a'), { sha: 'noverdict', cargoConclusion: concl, churn: 'tracked' }, green('b')];
+      const r = computeReadiness(runs, { n: 3 });
+      expect(r.streak).toBe(2); // only the two greens counted...
+      expect(r.ready).toBe(false);
+      expect(r.broke).toBeNull(); // ...neither advanced nor broke the streak
+    }
+  });
+
   it('a tracked commit with no cargo verdict (skipped/null) is transparent', () => {
     const runs = [
       green('a'),
