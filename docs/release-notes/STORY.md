@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.939`.
+The story begins at `v1.0` and continues to `v1.49.940`.
 
-**982 chapters.** 981 have retrospectives.
+**983 chapters.** 982 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -990,3 +990,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.937](v1.49.937/00-summary.md)** — CF4d: algebrus.eigen complex-serialization wire fix · 2026-06-01
 - **[v1.49.938](v1.49.938/00-summary.md)** — cargo lane flip-readiness gate (lane-stability #10463) · 2026-06-01
 - **[v1.49.939](v1.49.939/00-summary.md)** — cargo lane flipped to load-bearing (#10463 two-rung complete) · 2026-06-01
+- **[v1.49.940](v1.49.940/00-summary.md)** — gateway integration tests on ephemeral ports (EADDRINUSE flake closed) · 2026-06-01
