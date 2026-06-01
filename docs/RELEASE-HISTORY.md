@@ -1,13 +1,14 @@
 # Release History
 
-977 milestones shipped across the v1.0 → v1.49.934 arc. The table below lists every shipped release, newest first.
+978 milestones shipped across the v1.0 → v1.49.935 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
-**Snapshot:** 977 releases · 934 with retrospectives · 756 with extracted lessons · quality A:653 B:98 C:69 D:13 F:144 (avg 85) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 978 releases · 935 with retrospectives · 757 with extracted lessons · quality A:653 B:98 C:69 D:13 F:145 (avg 85) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.935](release-notes/v1.49.935) | CF4b: first `coprocessor:` skill consumer + CF4c eigen verdict | 2026-06-01 | 3 | — | — | [s](release-notes/v1.49.935/chapter/00-summary.md) [r](release-notes/v1.49.935/chapter/03-retrospective.md) [l](release-notes/v1.49.935/chapter/04-lessons.md) [c](release-notes/v1.49.935/chapter/99-context.md) | 1 | F 25 |  |
 | [v1.49.934](release-notes/v1.49.934) | CF3: integration-test proofs for the 3 dormant substrates | 2026-06-01 | 3 | — | — | [s](release-notes/v1.49.934/chapter/00-summary.md) [r](release-notes/v1.49.934/chapter/03-retrospective.md) [l](release-notes/v1.49.934/chapter/04-lessons.md) [c](release-notes/v1.49.934/chapter/99-context.md) | 1 | F 33 |  |
 | [v1.49.933](release-notes/v1.49.933) | Sanitize NaN importance: close a silently-wrong-winner bug | 2026-05-31 | 4 | — | — | [s](release-notes/v1.49.933/chapter/00-summary.md) [r](release-notes/v1.49.933/chapter/03-retrospective.md) [l](release-notes/v1.49.933/chapter/04-lessons.md) [c](release-notes/v1.49.933/chapter/99-context.md) | 1 | F 29 |  |
 | [v1.49.932](release-notes/v1.49.932) | Recover v931 red CI: fixture fix + gate the integration project | 2026-05-31 | 2 | — | — | [s](release-notes/v1.49.932/chapter/00-summary.md) [r](release-notes/v1.49.932/chapter/03-retrospective.md) [l](release-notes/v1.49.932/chapter/04-lessons.md) [c](release-notes/v1.49.932/chapter/99-context.md) | 2 | F 33 |  |
