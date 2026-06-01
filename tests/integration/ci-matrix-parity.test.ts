@@ -118,30 +118,36 @@ describe('CI cross-platform matrix — parity + load-bearing drift-guard', () =>
 });
 
 /**
- * CI cargo lane — STAGED non-blocking drift-guard (CF4a, milestone v1.49.936).
+ * CI cargo lane — LOAD-BEARING drift-guard (CF4a v1.49.936 staged → v1.49.939 flipped).
  *
- * The cargo lane is the FIRST CI job that compiles the Rust/Tauri crate. It is
- * introduced in the STAGED form (the v1.49.923 macOS pattern, #10463): a separate
- * job carrying `continue-on-error: true` so it runs on every push for per-push Rust
- * signal WITHOUT being load-bearing for the ship gate. These asserts pin the staged
- * properties — the INVERSE of the macOS LOAD-BEARING pins above. FLIP-to-load-bearing
- * (a LATER ship) deletes `continue-on-error` and MUST invert the STAGED assertion
- * below (to `.not.toMatch`), exactly as the v1.49.928 macOS flip inverted its guard.
- * A silent flip — or a silent drop/re-stage of the lane — fails here.
+ * The cargo lane is the FIRST CI job that compiles the Rust/Tauri crate. It was
+ * introduced STAGED (the v1.49.923 macOS pattern, #10463): a separate job carrying a
+ * job-level `continue-on-error` so it ran on every push for per-push Rust signal WITHOUT
+ * being load-bearing for the ship gate. v1.49.939 FLIPPED it to LOAD-BEARING — the cargo
+ * flip-readiness gate (`tools/ci/cargo-flip-readiness.mjs`, lane-stability model) reached
+ * READY 3/3, so the job-level `continue-on-error` was DELETED and the cargo job (an
+ * independent leaf, no `needs:`) now folds into the run-level conclusion the ship gate
+ * reads. These asserts now pin the LOAD-BEARING property (the staged `continue-on-error`
+ * is GONE) — mirroring the macOS pins above. RE-STAGING (re-adding a job- or step-level
+ * `continue-on-error` to make the lane non-blocking again) is the deliberate reverse act
+ * and MUST update this test; a silent re-stage fails here. The flip was driven by the
+ * gate's deterministic READY verdict (release/docs greens count for cargo — every push
+ * fully recompiles the crate — unlike the macOS organic-churn model).
  */
-describe('CI cargo lane — staged non-blocking drift-guard (CF4a, v1.49.936)', () => {
+describe('CI cargo lane — load-bearing drift-guard (CF4a v1.49.936 → flipped v1.49.939)', () => {
   it('the cargo lane exists in ci.yml and runs on ubuntu-latest', () => {
     expect(cargoJob.length).toBeGreaterThan(0);
     expect(cargoJob).toMatch(/runs-on:\s*ubuntu-latest/);
   });
 
-  it('STAGED — the cargo lane is non-blocking (continue-on-error: true)', () => {
-    // The staged marker (#10463). FLIP-to-load-bearing deletes this KEY and MUST
-    // update this assertion (invert to .not.toMatch), per the v1.49.928 macOS template.
-    // Anchored to a real YAML key (`\n<indent>continue-on-error:`) so the explanatory
-    // comment quoting it does NOT satisfy the assertion — else deleting the key while
-    // leaving the comment would silently keep this green and defeat the flip guard.
-    expect(cargoJob).toMatch(/\n[ \t]+continue-on-error:[ \t]*true/);
+  it('LOAD-BEARING — the cargo lane is ship-blocking (the staged continue-on-error is GONE)', () => {
+    // v1.49.939 flip: the job-level `continue-on-error: true` was DELETED, so the cargo
+    // job's failure now folds into the run-level conclusion the ship gate reads. Re-adding
+    // it (reverting the lane to non-blocking) is the deliberate reverse act and MUST update
+    // this test. Anchored to a real YAML key (`\n<indent>continue-on-error:`) so the
+    // explanatory comments that still quote `continue-on-error: true` do NOT satisfy the
+    // match (the `#` breaks the `\n<ws>continue-on-error:` anchor) — a silent re-stage fails.
+    expect(cargoJob).not.toMatch(/\n[ \t]+continue-on-error:[ \t]*true/);
   });
 
   it('INDEPENDENT — the cargo lane has no `needs:` key (a failure cannot move the run-level conclusion)', () => {

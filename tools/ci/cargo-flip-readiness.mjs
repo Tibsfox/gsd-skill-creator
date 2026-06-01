@@ -26,8 +26,8 @@
  *   lane-defining / lane-modifying commit's own green is a SELF-TEST of that change,
  *   not independent evidence the FIXED lane is stable — exactly the #10463 rule that
  *   "green pushes from the promotion ship itself do not count." This generalizes
- *   cleanly: the v1.49.936 introduction `ci(cargo)` commit (0cb1dfb65), and the future
- *   flip commit that DELETES `continue-on-error`, both touch ci.yml → both transparent.
+ *   cleanly: the v1.49.936 introduction `ci(cargo)` commit (0cb1dfb65), and the v1.49.939
+ *   flip commit that DELETED `continue-on-error`, both touch ci.yml → both transparent.
  *   Every other push runs the unchanged lane → its cargo conclusion counts.
  *   The predicate is a TIGHT, defer-biased classifier: when in doubt (empty/missing
  *   change list, ci.yml touched), classify UNTRACKED. Misclassifying tracked→untracked
@@ -100,8 +100,8 @@ export function classifyCommit(changedFiles) {
 
 // ─── flip-state detection (pure) ─────────────────────────────────────────────
 
-// The STAGED cargo job carries a job-level `continue-on-error: true`. The flip
-// DELETES that key. Isolate the cargo job block (from its `\n  cargo:\n` header to
+// The STAGED cargo job carried a job-level `continue-on-error: true`. The v1.49.939
+// flip DELETED that key. Isolate the cargo job block (from its `\n  cargo:\n` header to
 // the next top-level 2-space job header, or EOF) and look for the key INSIDE it, so
 // (a) a `continue-on-error` elsewhere (e.g. a future step-level one in another job)
 // does not read as the cargo lane being staged, and (b) the explanatory COMMENT that

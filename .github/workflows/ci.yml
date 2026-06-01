@@ -96,21 +96,26 @@ jobs:
     name: Cargo Test (no-default-features)
     runs-on: ubuntu-latest
     # v1.49.936 (CF4a): STAGED non-blocking cargo lane — the FIRST CI job that compiles
-    # the Rust/Tauri crate (src-tauri/). Follows the v1.49.923 macOS staging pattern
-    # (#10463): `continue-on-error: true` keeps a cargo failure from blocking a ship,
-    # because the pre-tag-gate ci-gate (tools/pre-tag-gate.sh step 4) reads the RUN-LEVEL
-    # conclusion, which an INDEPENDENT `continue-on-error` job does not affect (proven
-    # empirically at v1.49.923 — ci.yml jobs carry no `needs:` between them, so nothing
-    # downstream consumes this leg's deceptive success). Buys per-push Rust signal while
-    # the lane proves itself across an N-green window. FLIP-TO-LOAD-BEARING is a LATER
-    # ship: delete `continue-on-error` + invert the ci-matrix-parity drift-guard (a silent
-    # flip fails the test), per the v920->v923->v928 macOS three-rung template.
+    # the Rust/Tauri crate (src-tauri/). Followed the v1.49.923 macOS staging pattern
+    # (#10463): a job-level `continue-on-error: true` kept a cargo failure from blocking a
+    # ship while the lane proved itself across an N-green window.
+    # v1.49.939: FLIPPED TO LOAD-BEARING. The `continue-on-error: true` line was DELETED
+    # after the cargo flip-readiness gate (`node tools/ci/cargo-flip-readiness.mjs`)
+    # reached READY 3/3. That gate uses a LANE-STABILITY model (not the macOS organic-churn
+    # model): every push fully recompiles the crate, so consecutive green cargo runs on
+    # commits that did not modify the lane definition ARE the track record. The cargo job
+    # is an INDEPENDENT leaf (no `needs:`), so with `continue-on-error` gone its failure
+    # now folds into the RUN-LEVEL conclusion the pre-tag-gate ci-gate (tools/pre-tag-gate.sh
+    # step 4) reads — a cargo failure blocks a ship exactly like an ubuntu test failure.
+    # The flip was paired with the mandatory inversion of the STAGED assertion in
+    # tests/integration/ci-matrix-parity.test.ts (the #10461 drift-guard) — a silent flip
+    # fails it. Cargo's promotion is a two-rung sequence (staged v1.49.936 -> load-bearing
+    # v1.49.939; no decoupled-nightly first rung, unlike the macOS v920->v923->v928 arc).
     # `--no-default-features` keeps the build minimal + explicit; the GPU-only `cuda`
     # and DB-bound `postgres` features are `optional` and already off (there is no
     # `[features] default` list), so they stay excluded either way (GH runners have
     # neither a GPU nor a DB). Local baseline at introduction: 848 passed / 0 failed
     # / 1 ignored (verified headless, from a clean `cargo clean -p gsd-os`).
-    continue-on-error: true
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
