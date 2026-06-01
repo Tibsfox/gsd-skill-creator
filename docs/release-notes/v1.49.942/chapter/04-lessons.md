@@ -1,0 +1,12 @@
+# v1.49.942 — Lessons
+
+No new manifest lesson (manifest stays **150**). This ship is the **second observation** of a carried-forward candidate; it is recorded below and remains a promotion candidate rather than being promoted in-ship (to keep a thin counter-cadence sweep surgical).
+
+## Carried-forward observation candidates
+
+- **Pin the advance/break Set boundaries of a defer-biased gate with mutation-proven tests — now 2 instances.** A flip-readiness gate that classifies CI conclusions through a `GREEN` Set (advances the streak) and a `BREAKING` Set (resets it), with everything else transparent, encodes a defer-bias: misclassification may only defer the flip, never advance it. The Sets being correct in *code* is not enough — without tests pinning the boundaries, a later refactor that shrinks `BREAKING` (a non-failure conclusion falls through to transparent and bridges the streak) or expands `GREEN` (a non-success conclusion counts) passes the whole suite while silently breaking the defer-bias. Pin both boundaries with tests that are mutation-proven to red under exactly those edits.
+  - Instance 1: **cargo** gate, v1.49.938 (`cargo-flip-readiness.test.mjs`) — surfaced by adversarial review.
+  - Instance 2: **macOS** gate, v1.49.942 (`macos-flip-readiness.test.mjs`) — this ship, mirroring instance 1.
+  - The recurrence satisfies the "promote on second instance" rule; promotion (disciplines.json + manifest 150→151) is a clean follow-on codify ship. Lives in the Static-analysis-tool-authoring domain (#10417-#10421, #10450, #10463), adjacent to "a staged-lane flip-readiness gate's counting model must match the lane's FAILURE MODE" (#10463 cargo/macOS counting-model distinction).
+
+- **Mirror a sibling's hardening shape verbatim before generalizing it.** When a second instance of a class-typed family (here, the two flip-readiness gates) needs the same hardening a sibling already received, copy the sibling's test shape first and adapt only the surface differences (`cargoConclusion`→`macosConclusion`, `churn:'tracked'`→`churn:'organic'`). This keeps the family boundary-test-symmetric and makes a future "pin this in both gates" sweep mechanical. Resisting the urge to *expand* the scope (the dismissed `stale`/`startup_failure` finding) is what preserved the symmetry. Cross-ref the cross-class-registry-at-second-instance discipline (#10416) and the audit-record-count exact-N discipline (#10456).
