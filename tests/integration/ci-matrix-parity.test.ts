@@ -55,6 +55,13 @@ const testJob = nextJobRel >= 0 ? afterHeader.slice(0, nextJobRel) : afterHeader
 const osListMatch = testJob.match(/os:\s*\[([^\]]*)\]/);
 const osList = osListMatch ? osListMatch[1] : '';
 
+// Isolate the `cargo` job the same way (CF4a, v1.49.936) — bounded to the next
+// top-level (2-space) job header, or EOF if it is the last job.
+const cargoJobIdx = ci.indexOf('\n  cargo:\n');
+const cargoAfter = cargoJobIdx >= 0 ? ci.slice(cargoJobIdx + 1) : '';
+const cargoNextRel = cargoAfter.search(/\n {2}[A-Za-z0-9_-]+:\n/);
+const cargoJob = cargoNextRel >= 0 ? cargoAfter.slice(0, cargoNextRel) : cargoAfter;
+
 describe('CI cross-platform matrix — parity + load-bearing drift-guard', () => {
   it('RETIREMENT — the separate ci-macos.yml lane no longer exists', () => {
     expect(existsSync(join(REPO_ROOT, '.github/workflows/ci-macos.yml'))).toBe(false);
@@ -107,5 +114,62 @@ describe('CI cross-platform matrix — parity + load-bearing drift-guard', () =>
 
   it('PARITY — the Grove arena fixture-gen prelude is present in the test job', () => {
     expect(testJob).toMatch(/import-filesystem-skills\.ts/);
+  });
+});
+
+/**
+ * CI cargo lane — STAGED non-blocking drift-guard (CF4a, milestone v1.49.936).
+ *
+ * The cargo lane is the FIRST CI job that compiles the Rust/Tauri crate. It is
+ * introduced in the STAGED form (the v1.49.923 macOS pattern, #10463): a separate
+ * job carrying `continue-on-error: true` so it runs on every push for per-push Rust
+ * signal WITHOUT being load-bearing for the ship gate. These asserts pin the staged
+ * properties — the INVERSE of the macOS LOAD-BEARING pins above. FLIP-to-load-bearing
+ * (a LATER ship) deletes `continue-on-error` and MUST invert the STAGED assertion
+ * below (to `.not.toMatch`), exactly as the v1.49.928 macOS flip inverted its guard.
+ * A silent flip — or a silent drop/re-stage of the lane — fails here.
+ */
+describe('CI cargo lane — staged non-blocking drift-guard (CF4a, v1.49.936)', () => {
+  it('the cargo lane exists in ci.yml and runs on ubuntu-latest', () => {
+    expect(cargoJob.length).toBeGreaterThan(0);
+    expect(cargoJob).toMatch(/runs-on:\s*ubuntu-latest/);
+  });
+
+  it('STAGED — the cargo lane is non-blocking (continue-on-error: true)', () => {
+    // The staged marker (#10463). FLIP-to-load-bearing deletes this KEY and MUST
+    // update this assertion (invert to .not.toMatch), per the v1.49.928 macOS template.
+    // Anchored to a real YAML key (`\n<indent>continue-on-error:`) so the explanatory
+    // comment quoting it does NOT satisfy the assertion — else deleting the key while
+    // leaving the comment would silently keep this green and defeat the flip guard.
+    expect(cargoJob).toMatch(/\n[ \t]+continue-on-error:[ \t]*true/);
+  });
+
+  it('INDEPENDENT — the cargo lane has no `needs:` key (a failure cannot move the run-level conclusion)', () => {
+    // Per v1.49.923: an independent job-level continue-on-error job that FAILS still
+    // yields run-level conclusion `success` UNLESS a `needs:[cargo]` downstream consumes
+    // it. The ship ci-gate reads run-level, so the lane MUST stay a leaf. Anchored to a
+    // real YAML key so the comment's prose mention of `needs:` is not a false positive.
+    expect(cargoJob).not.toMatch(/\n[ \t]+needs:/);
+  });
+
+  it('INDEPENDENT (inverse) — no OTHER job consumes the cargo lane via `needs:`', () => {
+    // The non-blocking guarantee also requires nothing DOWNSTREAM needs the cargo job:
+    // a `needs: [..., cargo]` elsewhere would let the lane's failure fail that consumer
+    // (and the run), making the lane load-bearing-by-proxy. Assert no `needs:` line
+    // anywhere in ci.yml references cargo. (Scoped over the whole file, not just the job.)
+    expect(ci).not.toMatch(/\n[ \t]+needs:[^\n]*\bcargo\b/);
+  });
+
+  it('SCOPE — the cargo lane runs `cargo test --no-default-features` on src-tauri', () => {
+    // --no-default-features keeps the build minimal/explicit (cuda + postgres are
+    // optional and already off — there is no `default` features list). The FULL command
+    // string is asserted (not its fragments) so the comment's mention is not a match.
+    expect(cargoJob).toContain('cargo test --no-default-features --manifest-path src-tauri/Cargo.toml');
+  });
+
+  it('PRELUDE — installs the Tauri webkit2gtk system deps before compiling', () => {
+    // Tauri 2.x links webkit2gtk-4.1 on Linux; without the apt prelude the lane is
+    // red-on-compile. Pins the dep so a silent removal is caught.
+    expect(cargoJob).toContain('libwebkit2gtk-4.1-dev');
   });
 });

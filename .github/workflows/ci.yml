@@ -91,3 +91,37 @@ jobs:
       - run: npx vitest run --config vitest.tools.config.mjs
       # node:test files (Node built-in runner; vitest can't execute them)
       - run: node tools/check-tools-test-coverage.mjs --run-node-test
+
+  cargo:
+    name: Cargo Test (no-default-features)
+    runs-on: ubuntu-latest
+    # v1.49.936 (CF4a): STAGED non-blocking cargo lane — the FIRST CI job that compiles
+    # the Rust/Tauri crate (src-tauri/). Follows the v1.49.923 macOS staging pattern
+    # (#10463): `continue-on-error: true` keeps a cargo failure from blocking a ship,
+    # because the pre-tag-gate ci-gate (tools/pre-tag-gate.sh step 4) reads the RUN-LEVEL
+    # conclusion, which an INDEPENDENT `continue-on-error` job does not affect (proven
+    # empirically at v1.49.923 — ci.yml jobs carry no `needs:` between them, so nothing
+    # downstream consumes this leg's deceptive success). Buys per-push Rust signal while
+    # the lane proves itself across an N-green window. FLIP-TO-LOAD-BEARING is a LATER
+    # ship: delete `continue-on-error` + invert the ci-matrix-parity drift-guard (a silent
+    # flip fails the test), per the v920->v923->v928 macOS three-rung template.
+    # `--no-default-features` keeps the build minimal + explicit; the GPU-only `cuda`
+    # and DB-bound `postgres` features are `optional` and already off (there is no
+    # `[features] default` list), so they stay excluded either way (GH runners have
+    # neither a GPU nor a DB). Local baseline at introduction: 848 passed / 0 failed
+    # / 1 ignored (verified headless, from a clean `cargo clean -p gsd-os`).
+    continue-on-error: true
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      # Tauri 2.x links webkit2gtk-4.1 on Linux; the GH ubuntu image does not ship it.
+      # Deps per README.md "Build from source (Ubuntu/Debian)", plus pkg-config (the
+      # webkit2gtk-sys build probe; preinstalled on GH runners but listed for self-containment).
+      - name: Install Tauri Linux system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev build-essential pkg-config curl wget file \
+            libxdo-dev libssl-dev libayatana-appindicator3-dev librsvg2-dev
+      # GH ubuntu-latest ships a stable Rust toolchain (rustup); no setup action needed.
+      - name: cargo test (no default features)
+        run: cargo test --no-default-features --manifest-path src-tauri/Cargo.toml
