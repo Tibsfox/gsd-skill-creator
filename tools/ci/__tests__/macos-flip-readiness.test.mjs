@@ -194,6 +194,33 @@ describe('computeReadiness', () => {
     expect(r.broke).toMatchObject({ sha: 'bad', macosConclusion: 'failure' });
   });
 
+  it('an organic breaking non-failure conclusion (timed_out / cancelled / action_required) ALSO breaks', () => {
+    // Pins the BREAKING Set boundary (defer-bias). A flaky-infra timeout/cancel is the
+    // canonical lane-reliability signal this gate exists to de-risk — it MUST break the
+    // streak, not fall through to the transparent "no verdict" branch (which would
+    // silently ADVANCE the flip on a flaky leg). Without this, shrinking BREAKING to
+    // just ['failure'] passes the rest of the suite. Mirrors cargo-flip-readiness (v938).
+    for (const concl of ['timed_out', 'cancelled', 'action_required']) {
+      const runs = [green('a'), { sha: 'flaky', macosConclusion: concl, churn: 'organic' }, green('b'), green('c')];
+      const r = computeReadiness(runs, { n: 3 });
+      expect(r.streak).toBe(1);
+      expect(r.ready).toBe(false);
+      expect(r.broke).toMatchObject({ sha: 'flaky', macosConclusion: concl });
+    }
+  });
+
+  it('an organic non-green non-breaking conclusion (neutral) is transparent — does NOT advance', () => {
+    // Pins the GREEN Set boundary (defer-bias). Only `success` may increment the streak;
+    // a `neutral` (or any other non-success, non-breaking) organic conclusion must be
+    // transparent — never counted — else a non-green run would ADVANCE the flip. Without
+    // this, expanding GREEN to ['success','neutral'] passes the rest of the suite.
+    const runs = [green('a'), { sha: 'neut', macosConclusion: 'neutral', churn: 'organic' }, green('b')];
+    const r = computeReadiness(runs, { n: 3 });
+    expect(r.streak).toBe(2); // only the two greens counted; neutral neither advanced...
+    expect(r.ready).toBe(false);
+    expect(r.broke).toBeNull(); // ...nor broke the streak
+  });
+
   it('an organic commit with no leg verdict (skipped/null) is transparent', () => {
     const runs = [
       green('a'),
