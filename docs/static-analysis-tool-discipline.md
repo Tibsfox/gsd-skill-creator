@@ -2,7 +2,7 @@
 
 **Surface:** Authoring or extending a CLI tool in `tools/` that scans the codebase, emits metrics, or produces a comparable report; designing its test harness; piping its output to another command.
 
-**Codified at:** v1.49.790 (lesson cluster from v1.49.785-v1.49.789 — the adoption-telemetry build chain plus the PROJECT.md normalizer surfaced five distinct authoring pitfalls in close sequence). **Extended at v1.49.794** with #10424 (refuse-to-overwrite guard for version-stamped baseline files), after v791 trip + 2 sequential clean applications at v792 + v793. **Extended at v1.49.886** with #10450 (parsers must handle code-shape variants or fail loudly). **Extended at v1.49.924** with #10463 (staged CI-lane promotion via a non-blocking matrix leg + its structural drift-guard).
+**Codified at:** v1.49.790 (lesson cluster from v1.49.785-v1.49.789 — the adoption-telemetry build chain plus the PROJECT.md normalizer surfaced five distinct authoring pitfalls in close sequence). **Extended at v1.49.794** with #10424 (refuse-to-overwrite guard for version-stamped baseline files), after v791 trip + 2 sequential clean applications at v792 + v793. **Extended at v1.49.886** with #10450 (parsers must handle code-shape variants or fail loudly). **Extended at v1.49.924** with #10463 (staged CI-lane promotion via a non-blocking matrix leg + its structural drift-guard). **Extended at v1.49.943** with #10464 (pin the GREEN/BREAKING Set boundaries of a defer-biased gate with a mutation-proven discriminating fixture — two-instance promotion from cargo v938 + macOS v942).
 
 ## Why this discipline exists
 
@@ -168,6 +168,33 @@ gh run view <id> --json jobs \
 
 **Validation.** Single-instance promotion at v1.49.923 (operator-authorized codification at v1.49.924); the empirical GitHub-Actions masking fact — verified on a real throwaway-branch run — is the load-bearing evidence rather than a three-instance pattern count. The drift-guard `ci-matrix-parity.test.ts` (9 tests) is green. **The load-bearing flip EXECUTED at v1.49.928** — the third and final rung. The gate (`macos-flip-readiness.mjs`) reached **READY — streak 3/3** once organic-churn greens accumulated (v926 banked organic green #2, v927 #3), and the flip deleted `continue-on-error` and *inverted* the drift-guard in one commit; the gate's deterministic READY verdict drove the flip with no operator vigilance (gate-not-vigilance validated end-to-end). The checker authoring itself had earlier surfaced a predicate bug against ground truth (package*.json inflating release commits to "organic" → spurious READY 3/3), a fresh instance of #10427 (verify against ground truth, not reasoning). The same v928 ship made the checker **lifecycle-aware** (closing a self-referential #10427: a flip-gate tool that keeps printing "Safe to flip: delete `continue-on-error`" *after* the line is gone is itself stale guidance). It now reads ci.yml via `detectFlipState()` and, once the leg is load-bearing, switches its READY guidance to "already flipped (v1.49.928) — here is how to REVERT"; the streak math is unchanged and becomes informational post-flip.
 
+### Pin the GREEN/BREAKING Set boundaries of a defer-biased gate (Lesson #10464)
+
+A flip-readiness gate (`macos-flip-readiness.mjs`, `cargo-flip-readiness.mjs`) sorts each CI-leg conclusion into one of three buckets: a **GREEN** Set (`{success}`) whose members advance the consecutive-green streak, a **BREAKING** Set (`{failure, timed_out, cancelled, action_required}`) whose members break the streak and stop the walk, and an implicit **transparent** remainder — everything else (`neutral`, `skipped`, `stale`, `startup_failure`, `in_progress`, `null`, missing) — that neither advances nor breaks. The gate's entire safety property is *defer-bias*: a misclassification must only ever DEFER the flip, never advance it. That property lives entirely in the two Set boundaries, and each has a silent failure direction:
+
+- **A conclusion drifting INTO the GREEN Set** (e.g. someone "helpfully" expands GREEN to `{success, neutral}`) lets a non-green run advance the flip — the exact false-positive the gate exists to prevent.
+- **A flaky-infra conclusion NOT being in the BREAKING Set** (e.g. shrinking BREAKING to just `{failure}`) lets a `timed_out`/`cancelled` leg fall through to the transparent branch, so a flaky lane silently advances the flip instead of breaking the streak.
+
+Neither drift is caught by the gate's happy-path tests (N consecutive plain greens pass wherever the boundary sits), so the boundaries must be pinned *explicitly*.
+
+**The discriminating fixture.** Pin the GREEN boundary with `[green, X, green]` at `n=3` and assert `streak === 2`, `ready === false`, `broke === null`. One fixture catches drift in *either* direction:
+
+- `X` moved into GREEN → streak reaches 3, `ready` true → the `streak === 2` assertion reds.
+- `X` moved into BREAKING → `broke` is set, walk stops at streak 1 → the `broke === null` assertion reds.
+- `X` correctly transparent → only the two greens count → streak 2, not ready, broke null → passes.
+
+A `[green, X, green, green]` @ `n=3` shape pushes the streak to `n` in the transparent case too, so `ready` is true regardless of where `X` sits — you lose the `ready === false` lever that makes a defer-bias violation visible (the transparent and X-in-GREEN cases differ only in a streak count nobody is asserting on). The GREEN-boundary test MUST use exactly two greens so the transparent case stays `streak < n` / `ready === false`.
+
+**Pin every named transparent state, not just one.** The gate comment enumerates `neutral`/`skipped`/`stale`/`startup_failure`/`in_progress`/`null` as transparent. A test that pins only `neutral` leaves `stale`/`startup_failure`/`in_progress` free to drift into GREEN undetected. Pin each named state the comment promises is transparent.
+
+**Mutation-proof, both suites.** Each boundary test is mutation-proven by temporarily widening a Set and confirming exactly the pinning test reds: GREEN += `stale` reds the GREEN-boundary test; BREAKING += `in_progress` reds it too; `git checkout` restores green. Run the proof on both `macos-flip-readiness` and `cargo-flip-readiness` — the two gates share Set definitions byte-for-byte, so their boundary tests stay symmetric.
+
+**Reference implementation.** `tools/ci/__tests__/macos-flip-readiness.test.mjs` + `tools/ci/__tests__/cargo-flip-readiness.test.mjs` — the BREAKING-boundary test (`timed_out`/`cancelled`/`action_required` ALSO break), the GREEN-boundary `neutral` test, and the named-transparent (`stale`/`startup_failure`/`in_progress`) test. The gate sources (`*-flip-readiness.mjs`) are unchanged — these are test-only pins of behavior the gates already had.
+
+**Validation.** Two-instance promotion: cargo BREAKING+GREEN boundaries pinned at v1.49.938 (after an adversarial review found a tracked `timed_out`/`cancelled` could fall through and advance the flip); macOS mirror at v1.49.942; the named-transparent (`stale`/`startup_failure`/`in_progress`) extension landed in both suites at v1.49.943, completing the macOS↔cargo Set-boundary symmetry. The gate sources were never touched — the discipline is "pin the boundary the gate already enforces so a future Set edit cannot silently break defer-bias."
+
+**Anti-pattern.** A defer-biased gate whose Set boundaries are exercised only by happy-path tests (N plain greens). The safety property is invisible to those tests; a one-token Set edit silently inverts the bias and no test reds.
+
 ## When this discipline kicks in
 
 - About to scaffold a new `tools/*.mjs` or `tools/*.ts` CLI that scans the repo.
@@ -177,6 +204,7 @@ gh run view <id> --json jobs \
 - About to ship the FIRST run of a diff-emitting observability tool.
 - About to promote an unproven CI lane (new OS / runtime / toolchain) into the ship-blocking workflow, or to author a structural drift-guard that pins a CI-config invariant (matrix shape, staged-leg property, retired-lane absence).
 - About to flip a staged (`continue-on-error`) CI lane to load-bearing — run the matching readiness checker first (`tools/ci/macos-flip-readiness.mjs` for the macOS matrix leg; `tools/ci/cargo-flip-readiness.mjs` for the cargo lane) to confirm a green track record, not just greens from release/CI ships. Note the two checkers use *different* counting models (organic-churn vs lane-stability) — see the sibling-gate note above.
+- About to edit the GREEN or BREAKING conclusion Set of a flip-readiness gate (or any defer-biased streak gate) — pin the boundary first with the discriminating `[green, X, green]` @ `n=3` fixture (`streak === 2`, `ready === false`, `broke === null`) so the edit cannot silently invert defer-bias, and keep the macOS + cargo suites symmetric.
 
 ## Anti-pattern summary
 
@@ -187,6 +215,7 @@ gh run view <id> --json jobs \
 - ❌ Silent first-run message from a diff-emitting tool.
 - ❌ Version-stamped baseline writer with no overwrite guard — trusts handoff prose to enforce a sequencing invariant that the tool itself can enforce.
 - ❌ Full-promoting an unproven CI lane straight into the ship-blocking matrix (no `continue-on-error` staging) — a flaky leg can red-block a ship at T14; or flipping a staged leg to load-bearing without updating its drift-guard.
+- ❌ A defer-biased gate (only `success` advances) whose GREEN/BREAKING Set boundaries are exercised only by happy-path N-green fixtures — a one-token Set edit silently inverts the bias and no test reds.
 
 ## Lesson references
 
@@ -198,3 +227,4 @@ gh run view <id> --json jobs \
 - **#10424** — Version-stamped baseline writers refuse to overwrite existing files whose content would differ, unless `--force`. Promoted from v791 candidate at v794 simultaneously with the gate implementation; meta-principle: migrate prose-in-handoff sequencing warnings to deterministic gates after one trip + 2-3 sequential clean applications under vigilance.
 - **#10450** — Static-analysis tool parsers must handle common code-shape variants OR fail loudly. Two-instance promotion: v867 (regex terminator inside comments — false negative) + v885 (alias-stripping in named-import extractor — false positive). Sibling discipline to #10427 failure-mode contracts: tools surfacing silent failures must not themselves fail silently. Mitigating discipline: tool sanity-fixtures should exercise aliased imports / brackets-in-comments / namespace imports / dynamic imports / re-exports.
 - **#10463** — Staged CI-lane promotion via a non-blocking matrix leg: `continue-on-error: ${{ matrix.<dim> == '<new>' }}` + `fail-fast: false` is the intermediate rung between a decoupled-nightly lane and a load-bearing one — per-push signal without ship-blocking power. Empirical GitHub-Actions fact (verified on a throwaway-branch probe): a job-level `continue-on-error` leg that fails still yields run-level conclusion `success` unless a `needs:[<job>]` downstream consumes the per-leg success. The drift-guard `tests/integration/ci-matrix-parity.test.ts` is the #10461 enforcement layer; the load-bearing flip (deleting `continue-on-error`) is a deliberate test-updating act. Sibling of #10428 (meta-cadence — staged rungs over one-shot promotion). Promoted from v1.49.923 candidate; codified v1.49.924 (single-instance, operator-authorized — the empirical masking fact is the load-bearing evidence). **The load-bearing flip executed at v1.49.928** (the gate hit READY 3/3 across organic churn), completing the three-rung sequence; the drift-guard inverted to pin `continue-on-error` absence.
+- **#10464** — Pin the GREEN/BREAKING conclusion-Set boundaries of a defer-biased flip-readiness gate with mutation-proven tests using a discriminating `[green, X, green]` @ `n=3` fixture (`streak === 2`, `ready === false`, `broke === null` catches X drifting into GREEN *or* into BREAKING); pin each named transparent state (`neutral`/`skipped`/`stale`/`startup_failure`/`in_progress`/`null`), not just one. Two-instance promotion: cargo v938 + macOS v942; the `stale`/`startup_failure`/`in_progress` named-transparent extension + macOS↔cargo symmetry landed at v943. Gate sources unchanged — test-only pins of behavior the gates already enforced.
