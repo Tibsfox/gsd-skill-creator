@@ -14,6 +14,7 @@
  */
 
 import { SessionObserver, SessionEndData } from '../observation/session-observer.js';
+import { readIntegrationConfig } from '../integration/config/index.js';
 
 // Claude Code sends snake_case fields, map to our internal interface
 interface ClaudeCodeSessionEndInput {
@@ -79,8 +80,21 @@ async function main(): Promise<void> {
     activeSkills: [],  // Not provided by Claude Code
   };
 
+  // Load the operator's `observation.retention_days` so the session-end prune
+  // is governed by config and feeds the calibration loop. Best-effort: a
+  // missing config returns the default (90); a malformed config falls back to
+  // the legacy prune (config-load is an accessory surface per Lesson #10427 —
+  // it MUST NOT break session observation).
+  let observationRetentionDays: number | undefined;
   try {
-    const observer = new SessionObserver();
+    const config = await readIntegrationConfig();
+    observationRetentionDays = config.observation.retention_days;
+  } catch {
+    observationRetentionDays = undefined;
+  }
+
+  try {
+    const observer = new SessionObserver(undefined, undefined, undefined, observationRetentionDays);
     const result = await observer.onSessionEnd(endData);
 
     if (result) {

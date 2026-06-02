@@ -3,6 +3,7 @@ import { writeFile, readFile, mkdir } from 'fs/promises';
 import { TranscriptParser } from './transcript-parser.js';
 import { PatternSummarizer } from './pattern-summarizer.js';
 import { RetentionManager } from './retention-manager.js';
+import { runObservationRetentionSweep } from './retention-substrate.js';
 import { PatternStore } from '../storage/pattern-store.js';
 import { EphemeralStore } from './ephemeral-store.js';
 import { PromotionEvaluator } from './promotion-evaluator.js';
@@ -38,11 +39,13 @@ export class SessionObserver {
   private squasher: ObservationSquasher;
   private rateLimiter: ObservationRateLimiter;
   private cacheDir: string;
+  private observationRetentionDays?: number;
 
   constructor(
     patternsDir: string = '.planning/patterns',
     retentionConfig?: Partial<RetentionConfig>,
     rateLimitConfig?: Partial<RateLimitConfig>,
+    observationRetentionDays?: number,
   ) {
     this.parser = new TranscriptParser();
     this.summarizer = new PatternSummarizer();
@@ -53,6 +56,11 @@ export class SessionObserver {
     this.squasher = new ObservationSquasher();
     this.rateLimiter = new ObservationRateLimiter(rateLimitConfig);
     this.cacheDir = patternsDir;
+    // When set, the session-end prune is routed through the
+    // `observation.retention_days` calibratable-threshold substrate so each
+    // sweep also auto-emits a traffic-attributed ObservationRetentionEvent for
+    // the bounded-learning calibration loop (#10439 substrate auto-recorder).
+    this.observationRetentionDays = observationRetentionDays;
   }
 
   /**
@@ -130,9 +138,23 @@ export class SessionObserver {
     // Promote accumulated ephemeral entries
     await this.promoteEphemeralEntries();
 
-    // Prune old patterns
+    // Prune old patterns. When an `observation.retention_days` value is
+    // configured, route the prune through the calibratable-threshold substrate
+    // so the sweep is governed by the operator's retention config AND emits a
+    // traffic-attributed observation for the calibration loop (the first
+    // production caller of runObservationRetentionSweep — #10428 consume /
+    // #10439 auto-recorder). Falls back to the legacy maxEntries+maxAgeDays
+    // prune when no retention_days is threaded (preserves prior behavior).
     const sessionsFile = join(this.cacheDir, 'sessions.jsonl');
-    await this.retentionManager.prune(sessionsFile);
+    if (this.observationRetentionDays !== undefined) {
+      await runObservationRetentionSweep(
+        { observation: { retention_days: this.observationRetentionDays } },
+        sessionsFile,
+        { eventsPath: join(this.cacheDir, 'observation-retention-events.jsonl') },
+      );
+    } else {
+      await this.retentionManager.prune(sessionsFile);
+    }
 
     return summary;
   }

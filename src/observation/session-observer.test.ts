@@ -3,6 +3,7 @@ import { writeFile, readFile, mkdir, rm } from 'fs/promises';
 import { join } from 'path';
 import { tmpdir } from 'os';
 import { SessionObserver, SessionStartData, SessionEndData } from './session-observer.js';
+import { readObservationRetentionEvents } from '../bounded-learning/observation-retention-events.js';
 
 describe('SessionObserver', () => {
   const testDir = join(tmpdir(), `session-observer-test-${Date.now()}`);
@@ -584,6 +585,89 @@ describe('SessionObserver', () => {
         .map(line => JSON.parse(line))
         .find((entry: { data: { sessionId: string } }) => entry.data.sessionId === 'trigger-discard');
       expect(triggerEntry).toBeDefined();
+    });
+  });
+
+  // v1.49.944 (counter-cadence #23, consume axis): the session-end prune is the
+  // first production caller of the `observation.retention_days` substrate.
+  // When the observer is threaded a retention_days value (the session-end hook
+  // loads it from the integration config), the prune routes through
+  // runObservationRetentionSweep, which auto-emits a traffic-attributed
+  // ObservationRetentionEvent for the bounded-learning calibration loop.
+  describe('observation.retention_days substrate wire (consume)', () => {
+    // Drive onSessionEnd to completion with a minimal non-empty transcript.
+    async function runSession(observer: SessionObserver, sessionId: string): Promise<void> {
+      const startData: SessionStartData = {
+        sessionId,
+        transcriptPath,
+        cwd: testDir,
+        source: 'startup',
+        model: 'claude-3-opus',
+        startTime: Date.now() - 60000,
+      };
+      await observer.onSessionStart(startData);
+
+      const transcriptEntries = [
+        {
+          uuid: '1',
+          parentUuid: null,
+          isSidechain: false,
+          sessionId,
+          timestamp: new Date().toISOString(),
+          type: 'user',
+          message: { role: 'user', content: 'Hello' },
+        },
+        {
+          uuid: '2',
+          parentUuid: '1',
+          isSidechain: false,
+          sessionId,
+          timestamp: new Date().toISOString(),
+          type: 'tool_use',
+          tool_name: 'Read',
+          tool_input: { file_path: '/home/user/test.ts' },
+        },
+      ];
+      await writeFile(
+        transcriptPath,
+        transcriptEntries.map((e) => JSON.stringify(e)).join('\n') + '\n',
+      );
+
+      const summary = await observer.onSessionEnd({
+        sessionId,
+        transcriptPath,
+        cwd: testDir,
+        reason: 'logout',
+      });
+      expect(summary).not.toBeNull();
+      // Let the fire-and-forget auto-emit settle on real disk (#10454).
+      await new Promise<void>((resolve) => setTimeout(resolve, 50));
+    }
+
+    it('auto-emits an observation-retention event when retention_days is threaded', async () => {
+      const observer = new SessionObserver(patternsDir, undefined, undefined, 90);
+      await runSession(observer, 'retention-wire-on');
+
+      const eventsPath = join(patternsDir, 'observation-retention-events.jsonl');
+      const events = await readObservationRetentionEvents(eventsPath);
+
+      expect(events.length).toBeGreaterThanOrEqual(1);
+      const event = events[events.length - 1];
+      // Default substrate polarity: conservative bias toward keeping more.
+      expect(event.kind).toBe('too_aggressive');
+      expect(event.retentionDays).toBe(90);
+      // A fresh sweep drops nothing, but the event MUST still be emitted so the
+      // calibration loop sees per-sweep traffic.
+      expect(typeof event.droppedCount).toBe('number');
+    });
+
+    it('does NOT auto-emit when retention_days is not threaded (legacy prune)', async () => {
+      const observer = new SessionObserver(patternsDir);
+      await runSession(observer, 'retention-wire-off');
+
+      const eventsPath = join(patternsDir, 'observation-retention-events.jsonl');
+      const events = await readObservationRetentionEvents(eventsPath);
+      expect(events).toEqual([]);
     });
   });
 });
