@@ -1,13 +1,18 @@
 import { describe, it, expect } from 'vitest';
+import { mkdtempSync, writeFileSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 
 import { ALL_CALIBRATABLE_THRESHOLDS } from '../../bounded-learning/types.js';
 import type { CalibratableThreshold } from '../../bounded-learning/types.js';
 import {
   calibrateVerdict,
+  verifyVerdict,
   buildCadenceReport,
   cadenceCommand,
   CADENCE_AXES,
   CALIBRATE_OBSERVATION_CONJUNCT,
+  END_TO_END_TEST_RE,
   type ThresholdObservationCount,
 } from './cadence.js';
 
@@ -80,6 +85,130 @@ describe('cadence command', () => {
 
     it('the first-conjunct threshold is 20', () => {
       expect(CALIBRATE_OBSERVATION_CONJUNCT).toBe(20);
+    });
+  });
+
+  describe('END_TO_END_TEST_RE — dedicated-end-to-end naming convention (#10453)', () => {
+    it('matches only *-end-to-end.integration.test.ts files', () => {
+      expect(END_TO_END_TEST_RE.test('observation-retention-end-to-end.integration.test.ts')).toBe(true);
+      expect(END_TO_END_TEST_RE.test('token-budget-max-end-to-end.integration.test.ts')).toBe(true);
+      // A plain integration test is NOT a dedicated end-to-end test.
+      expect(END_TO_END_TEST_RE.test('college-observation-bridge-wire.integration.test.ts')).toBe(false);
+      expect(END_TO_END_TEST_RE.test('foo.test.ts')).toBe(false);
+      // Needs the full `.integration.test.ts` suffix, not just `end-to-end`.
+      expect(END_TO_END_TEST_RE.test('something-end-to-end.test.ts')).toBe(false);
+    });
+  });
+
+  describe('verifyVerdict (pure) — dedicated-end-to-end coverage', () => {
+    it('a threshold referenced by a dedicated end-to-end test is covered', () => {
+      const v = verifyVerdict(['observation.retention_days'], [
+        { file: 'r-end-to-end.integration.test.ts', content: 'exercises observation.retention_days' },
+      ]);
+      expect(v.status).toBe('not-overdue');
+      expect(v.uncovered).toEqual([]);
+      expect(v.perThreshold[0].covered).toBe(true);
+      expect(v.perThreshold[0].coveringTests).toEqual(['r-end-to-end.integration.test.ts']);
+    });
+
+    it('a threshold referenced by NO end-to-end test is a candidate', () => {
+      const v = verifyVerdict(['token_budget.max_percent'], [
+        { file: 'other-end-to-end.integration.test.ts', content: 'unrelated content' },
+      ]);
+      expect(v.status).toBe('candidate');
+      expect(v.uncovered).toEqual(['token_budget.max_percent']);
+    });
+
+    it('mixed input names only the uncovered threshold', () => {
+      const v = verifyVerdict(['observation.retention_days', 'token_budget.max_percent'], [
+        { file: 'r-end-to-end.integration.test.ts', content: 'observation.retention_days here' },
+      ]);
+      expect(v.status).toBe('candidate');
+      expect(v.uncovered).toEqual(['token_budget.max_percent']);
+    });
+
+    it('no end-to-end tests -> every wired threshold is uncovered', () => {
+      const v = verifyVerdict(['observation.retention_days'], []);
+      expect(v.status).toBe('candidate');
+      expect(v.uncovered).toEqual(['observation.retention_days']);
+    });
+
+    it('no wired thresholds -> not overdue', () => {
+      const v = verifyVerdict([], [{ file: 'x-end-to-end.integration.test.ts', content: 'whatever' }]);
+      expect(v.status).toBe('not-overdue');
+    });
+  });
+
+  describe('verify axis — restricts coverage to dedicated end-to-end files', () => {
+    it('an incidental mention in a NON-end-to-end integration test does NOT count as coverage', async () => {
+      const dir = mkdtempSync(join(tmpdir(), 'cadence-verify-'));
+      try {
+        // A DEDICATED end-to-end test referencing one real threshold.
+        writeFileSync(
+          join(dir, 'retention-end-to-end.integration.test.ts'),
+          '// exercises observation.retention_days substrate -> calibration end-to-end\n',
+        );
+        // A NON-dedicated integration test that merely MENTIONS another threshold.
+        // The pre-v1.49.948 global-substring heuristic would have counted this as coverage.
+        writeFileSync(
+          join(dir, 'unrelated.integration.test.ts'),
+          '// incidental: token_budget.max_percent appears here, not an end-to-end calibration test\n',
+        );
+
+        const [verify] = await buildCadenceReport('verify', { integrationDir: dir });
+        const per = verify.data.perThreshold as Array<{
+          threshold: string;
+          covered: boolean;
+          coveringTests: string[];
+        }>;
+        const retention = per.find((p) => p.threshold === 'observation.retention_days')!;
+        const maxPct = per.find((p) => p.threshold === 'token_budget.max_percent')!;
+
+        // The dedicated end-to-end file covers retention.
+        expect(retention.covered).toBe(true);
+        expect(retention.coveringTests).toEqual(['retention-end-to-end.integration.test.ts']);
+        // The incidental mention in a NON-end-to-end file does NOT cover max_percent.
+        expect(maxPct.covered).toBe(false);
+        // Only the dedicated end-to-end file is considered.
+        expect(verify.data.endToEndTests).toEqual(['retention-end-to-end.integration.test.ts']);
+      } finally {
+        rmSync(dir, { recursive: true, force: true });
+      }
+    });
+
+    it('an unreadable integration dir -> manual (cannot judge)', async () => {
+      const [verify] = await buildCadenceReport('verify', {
+        integrationDir: join(tmpdir(), 'cadence-verify-does-not-exist-' + process.pid),
+      });
+      expect(verify.status).toBe('manual');
+      expect(verify.machineReadable).toBe(false);
+    });
+  });
+
+  describe('verify axis (live repo)', () => {
+    it('flags suggestions.* as lacking a dedicated end-to-end test; the other 4 are covered', async () => {
+      const [verify] = await buildCadenceReport('verify');
+      expect(verify.axis).toBe('verify');
+      expect(verify.status).toBe('candidate');
+      const uncovered = verify.data.uncovered as string[];
+      // The 3 suggestions.* thresholds have no dedicated *-end-to-end test.
+      expect(uncovered).toEqual(
+        expect.arrayContaining([
+          'suggestions.min_occurrences',
+          'suggestions.cooldown_days',
+          'suggestions.auto_dismiss_after_days',
+        ]),
+      );
+      // The 4 thresholds with dedicated end-to-end tests are covered (stable).
+      const per = verify.data.perThreshold as Array<{ threshold: string; covered: boolean }>;
+      for (const t of [
+        'token_budget.warn_at_percent',
+        'token_budget.max_percent',
+        'observation.retention_days',
+        'predictive.low_confidence_threshold',
+      ]) {
+        expect(per.find((p) => p.threshold === t)!.covered).toBe(true);
+      }
     });
   });
 
