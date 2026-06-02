@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.946`.
+The story begins at `v1.0` and continues to `v1.49.947`.
 
-**989 chapters.** 988 have retrospectives.
+**990 chapters.** 989 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -997,3 +997,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.944](v1.49.944/00-summary.md)** — wire session-end prune through the observation.retention_days substrate (counter-cadence consume) · 2026-06-01
 - **[v1.49.945](v1.49.945/00-summary.md)** — serialize the ANTHROPIC_API_KEY env-var Rust tests (close the v939 cargo-lane flake) · 2026-06-01
 - **[v1.49.946](v1.49.946/00-summary.md)** — honor observation.max_entries in the session-end prune (count-cap config wire) · 2026-06-01
+- **[v1.49.947](v1.49.947/00-summary.md)** — skill-creator cadence CLI: deterministic meta-cadence overdue-check (counter-cadence #24, gate-not-vigilance) · 2026-06-01
