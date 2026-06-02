@@ -136,9 +136,15 @@ describe('verify v891 substrate-auto-emit → calibration-loop read wire end-to-
     );
 
     expect(observations).toHaveLength(3);
-    // First two are too_aggressive (-1), third is too_lax (+1)
+    // Two sweeps emit too_aggressive (-1), one emits too_lax (+1). The per-sweep
+    // auto-emits are fire-and-forget (#10437), so the three appends to the shared
+    // JSONL race and the on-disk ORDER is non-deterministic — assert
+    // order-independently (count by polarity + net), NOT by sequence, per #10453
+    // (the documented anti-pattern is `toEqual([-1, -1, 1])`, which flakes under
+    // I/O load when the +1 append wins the race).
     const values = observations.map((o) => o.value);
-    expect(values).toEqual([-1, -1, 1]);
+    expect(values.filter((v) => v === -1)).toHaveLength(2);
+    expect(values.filter((v) => v === 1)).toHaveLength(1);
 
     // Net polarity: -1 (more too_aggressive → raise threshold signal)
     const net = values.reduce((s, v) => s + v, 0);
