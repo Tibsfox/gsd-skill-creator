@@ -44,6 +44,37 @@ export type CalibratableThreshold =
   | 'predictive.low_confidence_threshold';
 
 /**
+ * Runtime enumeration of every `CalibratableThreshold` union member.
+ *
+ * The union is a compile-time type; tools that must iterate the thresholds at
+ * runtime (e.g. the `skill-creator cadence` meta-cadence checker) need a
+ * concrete array. Keep this in lockstep with the union above — the
+ * `cadence` command's tests assert the two stay aligned so a future union
+ * edit that forgets this array fails loudly.
+ */
+export const ALL_CALIBRATABLE_THRESHOLDS = [
+  'suggestions.min_occurrences',
+  'suggestions.cooldown_days',
+  'suggestions.auto_dismiss_after_days',
+  'token_budget.warn_at_percent',
+  'token_budget.max_percent',
+  'observation.retention_days',
+  'predictive.low_confidence_threshold',
+] as const satisfies readonly CalibratableThreshold[];
+
+/**
+ * Compile-time completeness guard: if a `CalibratableThreshold` union member is
+ * added WITHOUT being appended to `ALL_CALIBRATABLE_THRESHOLDS`, the union no
+ * longer extends the array's element type and this assignment fails to compile.
+ * Pairs with the array's `satisfies` (which rejects a non-member typo) to pin
+ * both directions of the type/runtime-array drift (#10461).
+ */
+type _AllThresholdsCovered =
+  CalibratableThreshold extends (typeof ALL_CALIBRATABLE_THRESHOLDS)[number] ? true : never;
+const _allThresholdsCovered: _AllThresholdsCovered = true;
+void _allThresholdsCovered;
+
+/**
  * Direction in which the loop recommends adjusting a threshold.
  *
  * - `'decrease'` — operator decisions skew accept (positive evidence); lower

@@ -41,6 +41,7 @@ import { detectConflictsCommand } from './commands/detect-conflicts.js';
 import { scoreActivationCommand } from './commands/score-activation.js';
 import { simulateCommand, simulateHelp } from './commands/simulate.js';
 import { calibrateCommand, calibrateHelp } from './commands/calibrate.js';
+import { cadenceCommand } from './commands/cadence.js';
 import { publishCommand } from './commands/publish.js';
 import { installCommand } from './commands/install.js';
 import { critiqueCommand } from './commands/critique.js';
@@ -152,6 +153,10 @@ export const REGISTRY: readonly CommandEntry[] = [
   } },
   { aliases: ['bounded-learning', 'bl'], handler: async (ctx) => {
     const exitCode = await boundedLearningCommand(ctx.args);
+    process.exitCode = exitCode;
+  } },
+  { aliases: ['cadence', 'cad'], handler: async (ctx) => {
+    const exitCode = await cadenceCommand(ctx.args);
     process.exitCode = exitCode;
   } },
   { aliases: ['rollback', 'rb'], handler: (ctx) => rollbackCommand(ctx.args) },

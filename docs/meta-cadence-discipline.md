@@ -121,24 +121,50 @@ discipline; the choice is operator-bounded.
 
 ---
 
-## Forward-shadow: programmatic cadence-overdue check
+## Programmatic cadence-overdue check (`skill-creator cadence`)
 
-The cadence-overdue check is currently prose-only. A future ship could
-encode each axis's overdue trigger as a CLI subcommand:
+**Realized at v1.49.947** (forward-shadow promoted to a built tool after the
+prose check was MISAPPLIED twice in one session — v1.49.944 read calibrate's
+`>=20` conjunct as met when the max was 12, and false-positived consume by
+string-matching `wired:false` against the defensive catch-all branches in
+`observation-sources.ts`). Both were trigger-READING errors — exactly what a
+deterministic surface prevents (gate-not-vigilance / discipline-as-code).
 
-- `skill-creator cadence --axis codify --check` → exit 0 if not overdue,
-  exit 1 with a description if overdue.
-- Same for `--axis consume`, `--axis calibrate`, and `--axis verify`.
+```
+skill-creator cadence                       # human-readable report (all axes)
+skill-creator cadence --json                # structured per-axis JSON
+skill-creator cadence --check               # exit 1 if any axis is a candidate
+skill-creator cadence --axis calibrate --check
+```
 
-The CLI would read manifest entries (codify), observation-source
-registry wired flags (consume), audit-log entries (calibrate), and
-integration-test presence for substrate-with-callers (verify)
-respectively. The shape would mirror the existing
-`bounded-learning --summary` JSON output: structured per-axis report.
+The tool reports a per-axis verdict — `not-overdue` / `candidate` / `manual`:
 
-This is a tentative observation, not a candidate. The prose check is
-sufficient until the third codification ship under this discipline
-surfaces enough evidence to justify the tool.
+- **calibrate** (machine-readable): enumerates `ALL_CALIBRATABLE_THRESHOLDS`,
+  reads the ACTUAL observation count for each wired threshold, and reports
+  whether any has reached the `>=20` first conjunct. Defeats the v944 misread.
+- **consume** (machine-readable): enumerates the REAL `CalibratableThreshold`
+  union members and counts the genuinely `wired:false` ones — the defensive
+  catch-alls never appear because the tool iterates real members, not the
+  registry source. Defeats the v944 false positive.
+- **codify** (`manual`): no structured ESTABLISHED-candidate backlog exists, so
+  the tool reports the manifest lesson count for context and defers to the prose
+  check.
+- **verify** (heuristic): reports whether any `tests/integration/` file
+  references each wired threshold's string. A best-effort signal, labelled as
+  such; surfaced a real asymmetry on first run (the 4 later thresholds have
+  dedicated `*-end-to-end` integration tests; the 3 original `suggestions.*`
+  thresholds do not).
+
+**Honest limit:** the second conjunct of every trigger — "`>=N` ships since the
+last X" — is NOT machine-tracked (no per-axis last-ship marker), so when a first
+conjunct is met the verdict is `candidate` (flag for the operator to confirm the
+ships-since conjunct), never a silent definitive "overdue". The prose check
+still owns that conjunct. The tool is a deterministic FIRST-CONJUNCT surface, not
+a full replacement for operator judgement.
+
+Source: `src/cli/commands/cadence.ts`; the threshold enumeration +
+type/runtime-array drift guard live in `src/bounded-learning/types.ts`
+(`ALL_CALIBRATABLE_THRESHOLDS` + a compile-time completeness assertion, #10461).
 
 ---
 
