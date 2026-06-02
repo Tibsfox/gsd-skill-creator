@@ -58,7 +58,7 @@ export { selectBranchVariant } from './select-variant.js';
 
 // commit
 export type { CommitOptions, CommitResult, CommitOutcome } from './commit.js';
-export { COMMIT_LOCK_FILENAME, commit } from './commit.js';
+export { COMMIT_LOCK_FILENAME, COMMIT_LOCK_PREFIX, commitRoundKey, commit } from './commit.js';
 
 // abort
 export type { AbortOptions, AbortResult } from './abort.js';

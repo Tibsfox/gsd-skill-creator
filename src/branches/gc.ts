@@ -111,7 +111,7 @@ export async function gc(opts: GcOptions = {}): Promise<GcReport> {
   }
 
   for (const entry of entries) {
-    // Skip hidden files (e.g. .commit-lock).
+    // Skip hidden files (e.g. the per-round .commit-lock-<roundKey> markers).
     if (entry.startsWith('.')) continue;
 
     const branchDir = join(branchesDir, entry);

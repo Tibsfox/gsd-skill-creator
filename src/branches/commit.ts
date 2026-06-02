@@ -6,22 +6,57 @@
  * advisory lock wins; all others receive a clear diagnostic and abort.
  *
  * First-commit-wins mechanism (CF-M4-02, CF-M4-03):
- *   1. Attempt to create a lock file at `.planning/branches/.commit-lock`
- *      using `fs.open(path, 'ax')` — the 'ax' flag fails with EEXIST if the
- *      file already exists. `O_CREAT | O_EXCL` is atomic on POSIX and on
- *      Windows NTFS via `CREATE_NEW`; exactly one racer succeeds.
- *   2. Write the winning branch ID + timestamp into the lock file.
- *   3. If the open fails with EEXIST, read the lock to identify the winner
- *      for the loser's diagnostic, then abort this branch.
- *   4. The winner merges the skill body into trunk and removes the lock.
+ *   The winner is selected by atomically creating a PER-ROUND lock file at
+ *   `.planning/branches/.commit-lock-<roundKey>` via `fs.open(path, 'ax')` —
+ *   the 'ax' flag fails with EEXIST if the file exists. `O_CREAT | O_EXCL` is
+ *   atomic on POSIX and on Windows NTFS via `CREATE_NEW`; exactly one racer
+ *   creates it. The winner writes its branch ID into the lock, merges the
+ *   skill body into trunk, and — on the success path — LEAVES THE LOCK IN
+ *   PLACE. Losers (EEXIST) read the lock to name the winner in their
+ *   diagnostic, then mark their own manifest 'aborted'.
+ *
+ * Permanent winner record (NOT a releasable mutex) — fixes the double-win:
+ *   The lock is keyed on
+ *       roundKey = sha256(resolve(trunkPath) + '\0' + parentHash)
+ *   which ALL sibling branches in one race share (same trunk, same parent
+ *   generation) but a FUTURE round does not — a branch forked from the now-
+ *   updated trunk has a different parentHash, hence a different lock, and can
+ *   commit. Because the winner never removes the lock on success, a lagging
+ *   racer's 'ax' open always observes EEXIST and loses. Pre-v1.49.948 the lock
+ *   was a single releasable global file (`.commit-lock`): the winner unlinked
+ *   it after its slow trunk write, reopening the 'ax' window so a late racer
+ *   could double-win. Keying off permanent per-round state closes that window
+ *   with zero timing dependence (no spin/backoff). Only the winner's ERROR
+ *   path releases the lock — so a commit that fails after acquiring the lock
+ *   does not permanently wedge the round.
  *
  * No tie-break:
- *   `ax` is the sole atomic winner-selection primitive. Earlier revisions
- *   implemented a "steal via rename" tie-break based on `manifest.createdAt`
- *   — that code is removed because it broke correctness (multiple older
- *   branches could each succeed at stealing, producing multiple winners in
- *   the N≥3 race). `manifest.createdAt` is still recorded in the lock entry
- *   for observability but is no longer consulted for winner selection.
+ *   `ax` is the sole atomic winner-selection primitive. `manifest.createdAt`
+ *   is recorded in the lock entry for observability but is never consulted for
+ *   winner selection.
+ *
+ * Round-key boundary:
+ *   `roundKey` resolves `trunkPath` against `process.cwd()`; racing callers
+ *   MUST pass a consistent trunkPath spelling across siblings (the coordinator
+ *   and the tests do). Two unrelated trunks — or two parent generations of the
+ *   same trunk — get distinct roundKeys and never block each other.
+ *
+ *   The key uses `parentHash` as the generation marker, which assumes each
+ *   commit advances the trunk (fork requires a non-trivial refinement in
+ *   practice). A degenerate 0-delta commit leaves the trunk unchanged, so a
+ *   later commit forked from the same parent state collides on roundKey and is
+ *   blocked — committing the identical (trunk, parent-generation) twice is
+ *   idempotently rejected as a late sibling rather than double-applied.
+ *
+ * Crash recovery:
+ *   The lock is released on the winner's ERROR path but NOT on a hard process
+ *   kill (SIGKILL/OOM) between acquiring the lock and finishing the commit —
+ *   that leaves a permanent `.commit-lock-<roundKey>` marker, and `gc()` skips
+ *   dotfiles, so the affected ROUND stays wedged until the marker is removed by
+ *   hand (`rm .planning/branches/.commit-lock-<roundKey>`). This is strictly
+ *   narrower than the pre-v1.49.948 single global lock, whose orphan wedged
+ *   EVERY trunk's commits, not one round. Age-based marker reaping in `gc()`
+ *   (the `acquiredAt` field is recorded for exactly this) is a future option.
  *
  * Trunk merge:
  *   The committed skill body is written to `trunkPath` supplied by the caller.
@@ -39,25 +74,55 @@
  */
 
 import { promises as fs } from 'node:fs';
-import { join } from 'node:path';
+import { join, resolve, dirname } from 'node:path';
+import { createHash, randomUUID } from 'node:crypto';
 import { readManifest, writeManifest, DEFAULT_BRANCHES_DIR } from './fork.js';
 import type { BranchManifest } from './manifest.js';
 import { recordBranchResolved } from '../reinforcement/channel-sources.js';
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
-/** Advisory lock filename under branchesDir. */
+/**
+ * Legacy global advisory-lock filename (pre-v1.49.948) and the stem of the
+ * per-round lock names. Retained as a stable export; no longer created as a
+ * standalone file. Winner selection now uses a permanent per-round lock named
+ * `COMMIT_LOCK_PREFIX + commitRoundKey(...)`.
+ */
 export const COMMIT_LOCK_FILENAME = '.commit-lock';
+
+/** Filename prefix for the permanent per-round winner-record lock. */
+export const COMMIT_LOCK_PREFIX = '.commit-lock-';
+
+/**
+ * Compute the per-round winner key.
+ *
+ * All sibling branches racing to commit the SAME trunk from the SAME parent
+ * generation share this key; a future round (forked from the updated trunk,
+ * hence a different `parentHash`) does not. `trunkPath` is resolved against the
+ * process cwd so racing callers that spell the path differently still collide —
+ * callers MUST pass a consistent trunkPath across siblings.
+ */
+export function commitRoundKey(trunkPath: string, parentHash: string): string {
+  return createHash('sha256')
+    .update(resolve(trunkPath), 'utf8')
+    .update(Buffer.from([0])) // real NUL byte: impossible in a filesystem path
+    .update(parentHash, 'utf8')
+    .digest('hex');
+}
 
 // ─── Lock shape ───────────────────────────────────────────────────────────────
 
 interface LockEntry {
-  /** The branch ID that holds the lock. */
+  /** The branch ID that holds the lock (the round winner). */
   branchId: string;
   /** The manifest.createdAt of the winning branch (observability only). */
   createdAt: number;
   /** Unix ms when the lock was acquired. */
   acquiredAt: number;
+  /** The parent generation hash this round was contended on (observability). */
+  parentHash: string;
+  /** The trunk path this round committed to (observability). */
+  trunkPath: string;
 }
 
 // ─── Commit options ───────────────────────────────────────────────────────────
@@ -121,11 +186,13 @@ export interface CommitResult {
 /**
  * Attempt to commit a branch into trunk using first-commit-wins semantics.
  *
- * If this branch wins the lock race: writes the skill body to trunkPath,
- * marks the manifest as 'committed', releases the lock.
+ * If this branch wins the per-round lock race: writes the skill body to
+ * trunkPath, marks the manifest as 'committed', and LEAVES the per-round lock
+ * in place as the permanent winner record (it is released only if the commit
+ * itself fails after the lock was acquired).
  *
- * If another branch holds the lock: marks this branch 'aborted', returns
- * outcome='blocked' with a diagnostic naming the winner.
+ * If another sibling already won this round: marks this branch 'aborted',
+ * returns outcome='blocked' with a diagnostic naming the winner.
  *
  * @throws Error if the branch is not in 'open' state.
  */
@@ -146,9 +213,15 @@ export async function commit(opts: CommitOptions): Promise<CommitResult> {
     );
   }
 
-  const lockPath = join(branchesDir, COMMIT_LOCK_FILENAME);
+  // Permanent per-round winner lock. All sibling branches racing to commit
+  // this trunk from this parent generation share `lockPath`; a future round
+  // (forked from the updated trunk → different parentHash) does not.
+  const lockPath = join(
+    branchesDir,
+    COMMIT_LOCK_PREFIX + commitRoundKey(trunkPath, manifest.parentHash),
+  );
 
-  // ── Try to acquire the advisory lock (atomic 'ax' open) ──────────────────
+  // ── Try to acquire the per-round lock (atomic 'ax' open) ──────────────────
   let won = false;
   let winnerEntry: LockEntry | null = null;
 
@@ -159,6 +232,8 @@ export async function commit(opts: CommitOptions): Promise<CommitResult> {
       branchId,
       createdAt: manifest.createdAt,
       acquiredAt: ts,
+      parentHash: manifest.parentHash,
+      trunkPath,
     };
     try {
       await fd.writeFile(JSON.stringify(entry), 'utf8');
@@ -184,10 +259,11 @@ export async function commit(opts: CommitOptions): Promise<CommitResult> {
   }
 
   // ── Loser: identify winner for diagnostic ────────────────────────────────
-  // `ax` is the sole atomic winner selector. If we lost, read the lock to
-  // name the winner in our diagnostic. If the winner has already released
-  // the lock (fast path), winnerEntry stays null and the diagnostic falls
-  // back to "unknown".
+  // `ax` is the sole atomic winner selector. If we lost, read the permanent
+  // round lock to name the winner in our diagnostic. The lock is normally
+  // present (the winner keeps it), but if the winner is still mid-write or
+  // its commit failed and released it, winnerEntry stays null and the
+  // diagnostic falls back to "unknown".
   if (!won) {
     try {
       const raw = await fs.readFile(lockPath, 'utf8');
@@ -203,18 +279,24 @@ export async function commit(opts: CommitOptions): Promise<CommitResult> {
       // Read the branched skill body.
       const branchBody = await fs.readFile(join(branchDir, 'skill.md'), 'utf8');
 
-      // Write to trunk path (ensure parent dir exists).
-      const { dirname } = await import('node:path');
+      // Write to trunk path atomically (write-then-rename, like writeManifest):
+      // a process crash mid-write must not leave a partially-written trunk. The
+      // temp lives in the same directory so the rename is atomic on one volume.
       await fs.mkdir(dirname(trunkPath), { recursive: true });
-      await fs.writeFile(trunkPath, branchBody, 'utf8');
+      const trunkTmp = trunkPath + '.tmp.' + randomUUID();
+      await fs.writeFile(trunkTmp, branchBody, 'utf8');
+      await fs.rename(trunkTmp, trunkPath);
 
       // Mark manifest as committed.
       const committed: BranchManifest = { ...manifest, state: 'committed', committedAt: ts };
       await writeManifest(branchDir, committed);
       manifest = committed;
 
-      // Release the lock.
-      await fs.unlink(lockPath).catch(() => {/* ignore if already gone */});
+      // Do NOT release the lock on success: it is the PERMANENT winner record
+      // for this round. Releasing it (as pre-v1.49.948 did) reopens the 'ax'
+      // selection window so a lagging racer would double-win. A future round
+      // forked from the updated trunk has a different parentHash → different
+      // lock → can still commit.
 
       // MA-6: emit branch_resolved reinforcement (committed path).
       if (opts.emitReinforcement !== false) {
@@ -238,7 +320,9 @@ export async function commit(opts: CommitOptions): Promise<CommitResult> {
         manifest,
       };
     } catch (err) {
-      // Something went wrong after acquiring the lock — release and rethrow.
+      // Commit failed after acquiring the lock. Release the per-round lock so
+      // the round is not permanently wedged (a sibling/retry can still win),
+      // then rethrow. This is the ONLY path that releases on the winner side.
       await fs.unlink(lockPath).catch(() => {/* ignore */});
       throw err;
     }

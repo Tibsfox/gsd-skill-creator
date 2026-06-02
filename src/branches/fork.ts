@@ -114,6 +114,10 @@ export async function fork(opts: ForkOptions): Promise<ForkResult> {
   } = opts;
 
   // Enforce 20% bound before touching the filesystem.
+  // Note: a 0-delta proposal (proposedBody === parentBody) is permitted here.
+  // It leaves the trunk unchanged on commit, so two such branches from the same
+  // parent share a commit roundKey (see branches/commit.ts) and the second is
+  // idempotently blocked rather than double-applied.
   const delta = computeDelta(parentBody, proposedBody);
   if (delta.exceeds) {
     throw new Error(deltaRejectionMessage(delta));
