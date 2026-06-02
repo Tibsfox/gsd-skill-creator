@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.944`.
+The story begins at `v1.0` and continues to `v1.49.945`.
 
-**987 chapters.** 986 have retrospectives.
+**988 chapters.** 987 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -995,3 +995,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.942](v1.49.942/00-summary.md)** — macOS flip-readiness Set-boundary test hardening (counter-cadence #21) · 2026-06-01
 - **[v1.49.943](v1.49.943/00-summary.md)** — defer-biased-gate Set-boundary lesson #10464 + named-transparency pins · 2026-06-01
 - **[v1.49.944](v1.49.944/00-summary.md)** — wire session-end prune through the observation.retention_days substrate (counter-cadence consume) · 2026-06-01
+- **[v1.49.945](v1.49.945/00-summary.md)** — serialize the ANTHROPIC_API_KEY env-var Rust tests (close the v939 cargo-lane flake) · 2026-06-01
