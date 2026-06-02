@@ -22,11 +22,15 @@
  *     reports how many are genuinely `wired:false` — the defensive catch-alls
  *     never appear because we iterate real members, not the registry source.
  *
- * The second conjunct of each trigger — "N ships since the last X" — is NOT
- * machine-tracked (there is no per-axis last-ship marker), so when a first
- * conjunct is met the verdict is `candidate` (flag for the operator to confirm
- * the ships-since conjunct), never a silent definitive "overdue". The codify
- * axis has no cleanly machine-readable signal (no structured ESTABLISHED-
+ * The second conjunct of each trigger — "`>=N` ships since the last X" — is
+ * machine-tracked (v1.49.950) via the `cadence_advances: [axis, ...]` frontmatter
+ * marker on release-notes READMEs: the most recent ship tagging an axis anchors
+ * its ships-since count. When a first conjunct is met AND
+ * `>=CADENCE_SHIPS_SINCE_CONJUNCT` ships have shipped since the last advance, the
+ * verdict is `overdue` (the gate fires). When the first conjunct is met but the
+ * anchor is unknown (no marker yet) or ships-since is below the threshold, the
+ * verdict stays `candidate` — never a false `overdue`. The codify axis has no
+ * cleanly machine-readable first-conjunct signal (no structured ESTABLISHED-
  * candidate backlog), so it reports `manual` with the manifest lesson count for
  * context. The verify axis uses a heuristic restricted to the DEDICATED
  * `*-end-to-end.integration.test.ts` files (the #10453 substrate->calibration
@@ -39,9 +43,11 @@
  * graph wire detection); a true substrate-to-caller wire detector is future
  * work.
  *
- * Exit codes (with `--check`):
- *   0  no checked axis is a candidate (not-overdue / manual)
- *   1  at least one checked axis is a candidate (first conjunct met)
+ * Exit codes (with `--check`) — a TRUE gate, fires only on definitive overdue:
+ *   0  no checked axis is `overdue` (not-overdue / candidate / manual)
+ *   1  at least one checked axis is `overdue` (BOTH conjuncts machine-met)
+ *   2  invalid --axis
+ *   (`candidate` is advisory — printed, but does not fire the gate.)
  *
  * Usage:
  *   skill-creator cadence                 human-readable report (all axes)
@@ -71,12 +77,17 @@ export type CadenceAxis = (typeof CADENCE_AXES)[number];
 
 /**
  * - `not-overdue` — the machine-readable first conjunct is definitively NOT met.
- * - `candidate`   — the first conjunct IS met; the operator must confirm the
- *   `>=N ships since last X` conjunct before declaring the axis overdue.
+ * - `candidate`   — the first conjunct IS met, but the `>=N ships since last X`
+ *   second conjunct is unknown or not yet reached (no `cadence_advances` marker,
+ *   or fewer than the threshold ships since the last one).
+ * - `overdue`     — BOTH conjuncts are machine-determined met: the first conjunct
+ *   is met AND `>=CADENCE_SHIPS_SINCE_CONJUNCT` ships have shipped since the axis
+ *   last advanced (per release-notes `cadence_advances` frontmatter). The gate
+ *   (`--check`) fires on this.
  * - `manual`      — the axis has no cleanly machine-readable signal; the prose
  *   check stands.
  */
-export type CadenceStatus = 'not-overdue' | 'candidate' | 'manual';
+export type CadenceStatus = 'not-overdue' | 'candidate' | 'overdue' | 'manual';
 
 export interface AxisReport {
   axis: CadenceAxis;
@@ -128,6 +139,109 @@ function countManifestLessons(): number | null {
   } catch {
     return null;
   }
+}
+
+/** The second-conjunct threshold: `>=N` ships since the axis last advanced. */
+export const CADENCE_SHIPS_SINCE_CONJUNCT = 10;
+
+/**
+ * Frontmatter field a release-notes README uses to declare which meta-cadence
+ * axes its ship advanced, e.g. `cadence_advances: [consume, calibrate]`. The
+ * most recent ship tagging an axis anchors that axis's ships-since count.
+ */
+const CADENCE_ADVANCES_RE = /^cadence_advances:\s*\[([^\]]*)\]\s*$/m;
+
+export interface AxisAdvance {
+  /** The version of the most recent ship that advanced this axis. */
+  lastVersion: string;
+  /** Ships shipped AFTER that ship (0 = it is the latest ship). */
+  shipsSince: number;
+}
+
+/** Semver compare for `vX.Y.Z` release-notes directory names. */
+function compareVersions(a: string, b: string): number {
+  const pa = a.replace(/^v/, '').split('.').map(Number);
+  const pb = b.replace(/^v/, '').split('.').map(Number);
+  for (let i = 0; i < 3; i++) {
+    if ((pa[i] ?? 0) !== (pb[i] ?? 0)) return (pa[i] ?? 0) - (pb[i] ?? 0);
+  }
+  return 0;
+}
+
+/**
+ * Read the machine-readable SECOND conjunct: scan release-notes READMEs for the
+ * `cadence_advances: [axis, ...]` frontmatter marker and compute, per axis, the
+ * version that last advanced it and how many ships have shipped since. Axes
+ * never tagged are absent from the map (ships-since unknown -> stays candidate).
+ *
+ * This is the per-axis last-ship marker the v1.49.947 tool deliberately left
+ * operator-tracked. A ship records the axes it advanced in its README
+ * frontmatter; the most recent such ship per axis anchors the count.
+ */
+export function readAxisAdvances(releaseNotesDir: string): Partial<Record<CadenceAxis, AxisAdvance>> {
+  let versions: string[];
+  try {
+    versions = readdirSync(releaseNotesDir, { withFileTypes: true })
+      .filter((e) => e.isDirectory() && /^v\d+\.\d+\.\d+$/.test(e.name))
+      .map((e) => e.name)
+      .sort(compareVersions);
+  } catch {
+    return {};
+  }
+
+  const lastIdx: Partial<Record<CadenceAxis, number>> = {};
+  const lastVer: Partial<Record<CadenceAxis, string>> = {};
+  versions.forEach((v, i) => {
+    let fm = '';
+    try {
+      fm = readFileSync(join(releaseNotesDir, v, 'README.md'), 'utf8');
+    } catch {
+      return;
+    }
+    const m = CADENCE_ADVANCES_RE.exec(fm);
+    if (!m) return;
+    const axes = m[1]
+      .split(',')
+      .map((s) => s.trim().replace(/^['"]|['"]$/g, ''))
+      .filter(Boolean);
+    for (const a of axes) {
+      if ((CADENCE_AXES as readonly string[]).includes(a)) {
+        lastIdx[a as CadenceAxis] = i;
+        lastVer[a as CadenceAxis] = v;
+      }
+    }
+  });
+
+  const out: Partial<Record<CadenceAxis, AxisAdvance>> = {};
+  const total = versions.length;
+  for (const a of CADENCE_AXES) {
+    const idx = lastIdx[a];
+    if (idx !== undefined) {
+      out[a] = { lastVersion: lastVer[a]!, shipsSince: total - 1 - idx };
+    }
+  }
+  return out;
+}
+
+/**
+ * Upgrade a first-conjunct `candidate` to a definitive `overdue` when the
+ * second conjunct (`>=CADENCE_SHIPS_SINCE_CONJUNCT` ships since the axis last
+ * advanced) is also machine-determined met. A `candidate` with unknown or
+ * insufficient ships-since stays `candidate` — never a false `overdue`.
+ * Non-candidate statuses are returned unchanged.
+ */
+export function shipsSinceUpgrade(
+  status: CadenceStatus,
+  shipsSince: number | undefined,
+): CadenceStatus {
+  if (status !== 'candidate') return status;
+  if (shipsSince !== undefined && shipsSince >= CADENCE_SHIPS_SINCE_CONJUNCT) return 'overdue';
+  return status;
+}
+
+/** `--check` exit code: 1 (gate fires) iff any axis is definitively `overdue`. */
+export function cadenceCheckExitCode(reports: AxisReport[]): number {
+  return reports.some((r) => r.status === 'overdue') ? 1 : 0;
 }
 
 export interface ThresholdObservationCount {
@@ -334,6 +448,46 @@ export interface CadenceReportOptions {
   suggestionsPath?: string;
   /** Override the tests/integration/ directory the verify axis reads (tests). */
   integrationDir?: string;
+  /** Override the docs/release-notes/ directory the ships-since reader scans (tests). */
+  releaseNotesDir?: string;
+}
+
+/**
+ * Apply the machine-readable second conjunct: a `candidate` whose axis has
+ * `>=CADENCE_SHIPS_SINCE_CONJUNCT` ships since its last `cadence_advances`
+ * marker becomes `overdue`. Annotates `detail` with the ships-since basis and
+ * records `shipsSince` / `lastAdvanceVersion` in `data` either way.
+ */
+function applyShipsSince(
+  report: AxisReport,
+  advances: Partial<Record<CadenceAxis, AxisAdvance>>,
+): AxisReport {
+  const adv = advances[report.axis];
+  const shipsSince = adv?.shipsSince;
+  const data = { ...report.data, shipsSince: shipsSince ?? null, lastAdvanceVersion: adv?.lastVersion ?? null };
+  const upgraded = shipsSinceUpgrade(report.status, shipsSince);
+
+  if (upgraded === 'overdue') {
+    return {
+      ...report,
+      status: 'overdue',
+      data,
+      detail:
+        `OVERDUE — first conjunct met AND ${shipsSince} ships since the last ${report.axis} advance ` +
+        `(${adv!.lastVersion}) >= ${CADENCE_SHIPS_SINCE_CONJUNCT}. ` + report.detail,
+    };
+  }
+
+  if (report.status === 'candidate') {
+    const note =
+      shipsSince === undefined
+        ? ` [ships-since: unknown — no ${report.axis} advance tagged; add cadence_advances: [${report.axis}] ` +
+          `to a release-notes README to enable overdue detection]`
+        : ` [ships-since: ${shipsSince} (< ${CADENCE_SHIPS_SINCE_CONJUNCT}) since ${adv!.lastVersion}]`;
+    return { ...report, data, detail: report.detail + note };
+  }
+
+  return { ...report, data };
 }
 
 /** Run the requested axis check(s). */
@@ -349,7 +503,10 @@ export async function buildCadenceReport(
     reports.push(await checkCalibrate(opts.suggestionsPath ?? DEFAULT_SUGGESTIONS_PATH));
   }
   if (want('verify')) reports.push(checkVerify(opts.integrationDir ?? INTEGRATION_DIR));
-  return reports;
+
+  // Apply the machine-readable second conjunct (ships-since) to every report.
+  const advances = readAxisAdvances(opts.releaseNotesDir ?? RELEASE_NOTES_DIR);
+  return reports.map((r) => applyShipsSince(r, advances));
 }
 
 function parseAxis(args: string[]): CadenceAxis | undefined | 'invalid' {
@@ -379,6 +536,7 @@ export async function cadenceCommand(args: string[] = []): Promise<number> {
   }
 
   const reports = await buildCadenceReport(axis);
+  const overdue = reports.filter((r) => r.status === 'overdue');
   const candidates = reports.filter((r) => r.status === 'candidate');
 
   if (json) {
@@ -386,6 +544,7 @@ export async function cadenceCommand(args: string[] = []): Promise<number> {
       JSON.stringify(
         {
           axis: axis ?? 'all',
+          overdueCount: overdue.length,
           candidateCount: candidates.length,
           reports,
         },
@@ -398,20 +557,36 @@ export async function cadenceCommand(args: string[] = []): Promise<number> {
     console.log('='.repeat(60));
     for (const r of reports) {
       const tag =
-        r.status === 'candidate' ? '[CANDIDATE]' : r.status === 'manual' ? '[MANUAL]   ' : '[ok]       ';
+        r.status === 'overdue'
+          ? '[OVERDUE]  '
+          : r.status === 'candidate'
+            ? '[CANDIDATE]'
+            : r.status === 'manual'
+              ? '[MANUAL]   '
+              : '[ok]       ';
       console.log(`${tag} ${r.axis}: ${r.detail}`);
     }
     console.log('='.repeat(60));
     if (check) {
+      const parts: string[] = [];
+      if (overdue.length > 0) {
+        parts.push(`${overdue.length} axis(es) OVERDUE (both conjuncts met) — gate fires (exit 1).`);
+      }
+      if (candidates.length > 0) {
+        parts.push(
+          `${candidates.length} axis(es) CANDIDATE (first conjunct met; ships-since unconfirmed or < ${CADENCE_SHIPS_SINCE_CONJUNCT}) — advisory, does not fire the gate.`,
+        );
+      }
       console.log(
-        candidates.length > 0
-          ? `${candidates.length} axis(es) flagged as CANDIDATE — confirm the ships-since conjunct, then scope the next counter-cadence.`
+        parts.length > 0
+          ? parts.join(' ')
           : `No axis machine-determinably overdue. (Manual axes still warrant the prose check.)`,
       );
     }
   }
 
-  // --check exit semantics: 1 if any axis is a machine-readable candidate.
-  if (check) return candidates.length > 0 ? 1 : 0;
+  // --check is a true gate: fires (exit 1) only on a definitive `overdue`
+  // (both conjuncts machine-determined). `candidate` is advisory (exit 0).
+  if (check) return cadenceCheckExitCode(reports);
   return 0;
 }

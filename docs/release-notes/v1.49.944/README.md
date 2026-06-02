@@ -2,6 +2,7 @@
 title: "v1.49.944 — wire the session-end prune through the observation.retention_days substrate (counter-cadence consume)"
 version: v1.49.944
 date: 2026-06-01
+cadence_advances: [consume]
 summary: >
   Counter-cadence consume ship (#23) that closes the genuine consume gap the
   v1.49.943 meta-cadence overdue-check surfaced: the observation.retention_days

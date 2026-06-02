@@ -2,6 +2,7 @@
 title: "v1.49.946 — honor observation.max_entries in the session-end prune (count-cap config wire)"
 version: v1.49.946
 date: 2026-06-01
+cadence_advances: [consume]
 summary: >
   Consume sibling of v1.49.944 that closes the deferred max_entries half of the
   session-end retention wire. v944 routed the session-end prune through the

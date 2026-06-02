@@ -133,11 +133,11 @@ deterministic surface prevents (gate-not-vigilance / discipline-as-code).
 ```
 skill-creator cadence                       # human-readable report (all axes)
 skill-creator cadence --json                # structured per-axis JSON
-skill-creator cadence --check               # exit 1 if any axis is a candidate
+skill-creator cadence --check               # exit 1 if any axis is OVERDUE (true gate)
 skill-creator cadence --axis calibrate --check
 ```
 
-The tool reports a per-axis verdict — `not-overdue` / `candidate` / `manual`:
+The tool reports a per-axis verdict — `not-overdue` / `candidate` / `overdue` / `manual`:
 
 - **calibrate** (machine-readable): enumerates `ALL_CALIBRATABLE_THRESHOLDS`,
   reads the ACTUAL observation count for each wired threshold, and reports
@@ -155,12 +155,23 @@ The tool reports a per-axis verdict — `not-overdue` / `candidate` / `manual`:
   dedicated `*-end-to-end` integration tests; the 3 original `suggestions.*`
   thresholds do not).
 
-**Honest limit:** the second conjunct of every trigger — "`>=N` ships since the
-last X" — is NOT machine-tracked (no per-axis last-ship marker), so when a first
-conjunct is met the verdict is `candidate` (flag for the operator to confirm the
-ships-since conjunct), never a silent definitive "overdue". The prose check
-still owns that conjunct. The tool is a deterministic FIRST-CONJUNCT surface, not
-a full replacement for operator judgement.
+**Second conjunct (machine-tracked at v1.49.950):** the second conjunct of every
+trigger — "`>=10` ships since the last X" — is now machine-tracked via a
+`cadence_advances: [axis, ...]` frontmatter marker on release-notes READMEs. The
+most recent ship tagging an axis anchors its ships-since count; when a first
+conjunct is met AND `>=CADENCE_SHIPS_SINCE_CONJUNCT` (10) ships have shipped since
+that anchor, the verdict is `overdue` and `--check` fires (exit 1). When the first
+conjunct is met but the anchor is unknown (no marker yet) or ships-since is below
+10, the verdict stays `candidate` — never a false `overdue`. A ship records the
+axes it advanced in its README frontmatter (e.g. v1.49.944 and v1.49.946 are
+tagged `[consume]`); the tool reads them with `readAxisAdvances`. `candidate` is
+advisory (printed, does not fire the gate); `overdue` is the gate-blocking verdict.
+
+The tool is therefore a TWO-conjunct surface: the first conjunct is computed from
+live state (observations / wired registry / dedicated end-to-end tests), the
+second from the `cadence_advances` markers. It remains operator-augmentable — an
+axis with no marker stays `candidate` rather than guessing — but a tagged axis can
+now reach a definitive `overdue` with no operator vigilance.
 
 Source: `src/cli/commands/cadence.ts`; the threshold enumeration +
 type/runtime-array drift guard live in `src/bounded-learning/types.ts`

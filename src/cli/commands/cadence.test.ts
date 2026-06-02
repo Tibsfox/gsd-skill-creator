@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { mkdtempSync, writeFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
@@ -10,11 +10,28 @@ import {
   verifyVerdict,
   buildCadenceReport,
   cadenceCommand,
+  readAxisAdvances,
+  shipsSinceUpgrade,
+  cadenceCheckExitCode,
   CADENCE_AXES,
   CALIBRATE_OBSERVATION_CONJUNCT,
+  CADENCE_SHIPS_SINCE_CONJUNCT,
   END_TO_END_TEST_RE,
+  type AxisReport,
+  type CadenceStatus,
   type ThresholdObservationCount,
 } from './cadence.js';
+
+/** Build a synthetic docs/release-notes/ dir with per-version cadence_advances frontmatter. */
+function makeReleaseNotes(versions: Array<{ v: string; advances?: string[] }>): string {
+  const dir = mkdtempSync(join(tmpdir(), 'cadence-rn-'));
+  for (const { v, advances } of versions) {
+    mkdirSync(join(dir, v), { recursive: true });
+    const fm = advances ? `cadence_advances: [${advances.join(', ')}]\n` : '';
+    writeFileSync(join(dir, v, 'README.md'), `---\nversion: ${v}\n${fm}---\n# ${v}\n`);
+  }
+  return dir;
+}
 
 describe('cadence command', () => {
   describe('ALL_CALIBRATABLE_THRESHOLDS drift guard (#10461)', () => {
@@ -224,6 +241,127 @@ describe('cadence command', () => {
       expect(consume.status).toBe('not-overdue');
       expect(consume.machineReadable).toBe(true);
       expect(consume.data.genuinelyUnwired as string[]).toEqual([]);
+    });
+  });
+
+  describe('ships-since second conjunct (#10428 — candidate -> overdue upgrade)', () => {
+    it('CADENCE_SHIPS_SINCE_CONJUNCT is 10', () => {
+      expect(CADENCE_SHIPS_SINCE_CONJUNCT).toBe(10);
+    });
+
+    describe('shipsSinceUpgrade (pure)', () => {
+      it('candidate + >=10 ships -> overdue (pins the >= boundary)', () => {
+        expect(shipsSinceUpgrade('candidate', 10)).toBe('overdue');
+        expect(shipsSinceUpgrade('candidate', 15)).toBe('overdue');
+      });
+      it('candidate + <10 ships -> candidate', () => {
+        expect(shipsSinceUpgrade('candidate', 9)).toBe('candidate');
+        expect(shipsSinceUpgrade('candidate', 0)).toBe('candidate');
+      });
+      it('candidate + unknown ships -> candidate (never a false overdue)', () => {
+        expect(shipsSinceUpgrade('candidate', undefined)).toBe('candidate');
+      });
+      it('non-candidate statuses are never upgraded', () => {
+        expect(shipsSinceUpgrade('not-overdue', 100)).toBe('not-overdue');
+        expect(shipsSinceUpgrade('manual', 100)).toBe('manual');
+      });
+    });
+
+    describe('readAxisAdvances', () => {
+      it('computes ships-since from the most recent cadence_advances marker', () => {
+        const dir = makeReleaseNotes([
+          { v: 'v1.0.0', advances: ['consume'] },
+          { v: 'v1.0.1' },
+          { v: 'v1.0.2', advances: ['consume', 'verify'] },
+          { v: 'v1.0.3' },
+          { v: 'v1.0.4' },
+        ]);
+        try {
+          const adv = readAxisAdvances(dir);
+          // consume last advanced at v1.0.2 (idx 2 of 5) -> shipsSince = 5-1-2 = 2.
+          expect(adv.consume).toEqual({ lastVersion: 'v1.0.2', shipsSince: 2 });
+          expect(adv.verify).toEqual({ lastVersion: 'v1.0.2', shipsSince: 2 });
+          // calibrate never tagged -> absent (ships-since unknown).
+          expect(adv.calibrate).toBeUndefined();
+        } finally {
+          rmSync(dir, { recursive: true, force: true });
+        }
+      });
+
+      it('sorts by semver, not lexicographically (v1.0.10 is newer than v1.0.9)', () => {
+        const versions: Array<{ v: string; advances?: string[] }> = [{ v: 'v1.0.0', advances: ['consume'] }];
+        for (let i = 1; i <= 10; i++) versions.push({ v: `v1.0.${i}` });
+        const dir = makeReleaseNotes(versions);
+        try {
+          // 11 dirs; consume at idx 0 -> shipsSince = 11-1-0 = 10.
+          expect(readAxisAdvances(dir).consume).toEqual({ lastVersion: 'v1.0.0', shipsSince: 10 });
+        } finally {
+          rmSync(dir, { recursive: true, force: true });
+        }
+      });
+
+      it('returns {} for an unreadable dir', () => {
+        expect(readAxisAdvances(join(tmpdir(), 'cadence-rn-nope-' + process.pid))).toEqual({});
+      });
+    });
+
+    describe('cadenceCheckExitCode (pure)', () => {
+      const r = (status: CadenceStatus): AxisReport => ({
+        axis: 'verify',
+        status,
+        machineReadable: true,
+        detail: '',
+        data: {},
+      });
+      it('returns 1 iff any report is overdue (the true gate)', () => {
+        expect(cadenceCheckExitCode([r('overdue')])).toBe(1);
+        expect(cadenceCheckExitCode([r('candidate'), r('not-overdue')])).toBe(0);
+        expect(cadenceCheckExitCode([r('manual')])).toBe(0);
+      });
+    });
+
+    describe('end-to-end: ships-since upgrades a live candidate axis', () => {
+      it('verify flips to overdue when its advance is >=10 ships back', async () => {
+        // v1.0.0 tags verify, then 10 more ships -> shipsSince(verify) = 10.
+        const versions: Array<{ v: string; advances?: string[] }> = [{ v: 'v1.0.0', advances: ['verify'] }];
+        for (let i = 1; i <= 10; i++) versions.push({ v: `v1.0.${i}` });
+        const rnDir = makeReleaseNotes(versions);
+        try {
+          const [verify] = await buildCadenceReport('verify', { releaseNotesDir: rnDir });
+          // verify is a live candidate (3 suggestions.* uncovered) -> now overdue.
+          expect(verify.status).toBe('overdue');
+          expect(verify.data.shipsSince).toBe(10);
+          expect(verify.data.lastAdvanceVersion).toBe('v1.0.0');
+          expect(cadenceCheckExitCode([verify])).toBe(1);
+        } finally {
+          rmSync(rnDir, { recursive: true, force: true });
+        }
+      });
+
+      it('verify stays candidate when its advance is <10 ships back', async () => {
+        const versions: Array<{ v: string; advances?: string[] }> = [{ v: 'v1.0.0', advances: ['verify'] }];
+        for (let i = 1; i <= 5; i++) versions.push({ v: `v1.0.${i}` }); // shipsSince = 5
+        const rnDir = makeReleaseNotes(versions);
+        try {
+          const [verify] = await buildCadenceReport('verify', { releaseNotesDir: rnDir });
+          expect(verify.status).toBe('candidate');
+          expect(verify.data.shipsSince).toBe(5);
+          expect(cadenceCheckExitCode([verify])).toBe(0);
+        } finally {
+          rmSync(rnDir, { recursive: true, force: true });
+        }
+      });
+
+      it('verify stays candidate when no verify advance is tagged (unknown anchor)', async () => {
+        const rnDir = makeReleaseNotes([{ v: 'v1.0.0', advances: ['consume'] }, { v: 'v1.0.1' }]);
+        try {
+          const [verify] = await buildCadenceReport('verify', { releaseNotesDir: rnDir });
+          expect(verify.status).toBe('candidate');
+          expect(verify.data.shipsSince).toBeNull();
+        } finally {
+          rmSync(rnDir, { recursive: true, force: true });
+        }
+      });
     });
   });
 
