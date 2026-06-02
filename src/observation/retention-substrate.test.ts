@@ -156,4 +156,45 @@ describe('runObservationRetentionSweep (v1.49.891 substrate auto-emit)', () => {
     );
     expect(result.prunedCount).toBe(0);
   });
+
+  // v1.49.946: the sweep now honors `observation.max_entries` as the count cap
+  // (previously the RetentionManager hardcoded default of 100 always applied).
+  it('applies observation.max_entries as the count cap (keeps newest)', async () => {
+    // 5 recent entries (all within the age window) — only the count cap prunes.
+    const now = Date.now();
+    const lines: string[] = [];
+    for (let i = 0; i < 5; i++) {
+      lines.push(JSON.stringify({ timestamp: now - i * 1000, content: `entry-${i}` }));
+    }
+    writeFileSync(jsonlPath, lines.join('\n') + '\n', 'utf8');
+
+    const result = await runObservationRetentionSweep(
+      { observation: { retention_days: 90, max_entries: 2 } },
+      jsonlPath,
+      { eventsPath, autoEmit: false },
+    );
+
+    // 5 entries, cap 2 → 3 pruned (newest 2 kept). Mutation guard: dropping the
+    // max_entries threading reverts to the default cap (100) → prunedCount 0.
+    expect(result.prunedCount).toBe(3);
+    expect(result.maxEntries).toBe(2);
+  });
+
+  it('defaults the count cap to 100 when max_entries is omitted (backward-compat)', async () => {
+    writeFileSync(
+      jsonlPath,
+      JSON.stringify({ timestamp: Date.now(), content: 'recent' }) + '\n',
+      'utf8',
+    );
+
+    const result = await runObservationRetentionSweep(
+      { observation: { retention_days: 90 } },
+      jsonlPath,
+      { eventsPath, autoEmit: false },
+    );
+
+    // One recent entry, no threaded cap → nothing pruned; effective cap is 100.
+    expect(result.prunedCount).toBe(0);
+    expect(result.maxEntries).toBe(100);
+  });
 });

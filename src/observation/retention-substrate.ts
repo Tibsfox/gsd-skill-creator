@@ -44,6 +44,14 @@ import { appendObservationRetentionEvent } from '../bounded-learning/observation
 export interface ObservationRetentionConfig {
   observation: {
     retention_days: number;
+    /**
+     * Optional count cap (`observation.max_entries`, config default 1000).
+     * When provided, the sweep keeps at most this many newest entries in
+     * addition to the age prune. When omitted, the `RetentionManager` default
+     * (100) applies — preserving the pre-v1.49.946 behavior for callers that
+     * thread only `retention_days`.
+     */
+    max_entries?: number;
   };
 }
 
@@ -68,6 +76,11 @@ export interface RetentionSweepOptions {
 export interface RetentionSweepResult {
   prunedCount: number;
   retentionDays: number;
+  /**
+   * The effective count cap applied (the threaded `max_entries`, or the
+   * `RetentionManager` default of 100 when none was threaded).
+   */
+  maxEntries: number;
 }
 
 /**
@@ -82,7 +95,13 @@ export async function runObservationRetentionSweep(
   options: RetentionSweepOptions = {},
 ): Promise<RetentionSweepResult> {
   const retentionDays = config.observation.retention_days;
-  const manager = new RetentionManager({ maxAgeDays: retentionDays });
+  const maxEntries = config.observation.max_entries;
+  const manager = new RetentionManager(
+    maxEntries !== undefined
+      ? { maxAgeDays: retentionDays, maxEntries }
+      : { maxAgeDays: retentionDays },
+  );
+  const effectiveMaxEntries = manager.getConfig().maxEntries;
   const prunedCount = await manager.prune(filePath);
 
   if (options.autoEmit !== false) {
@@ -104,5 +123,5 @@ export async function runObservationRetentionSweep(
     });
   }
 
-  return { prunedCount, retentionDays };
+  return { prunedCount, retentionDays, maxEntries: effectiveMaxEntries };
 }

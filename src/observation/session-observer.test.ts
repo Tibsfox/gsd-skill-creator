@@ -669,5 +669,30 @@ describe('SessionObserver', () => {
       const events = await readObservationRetentionEvents(eventsPath);
       expect(events).toEqual([]);
     });
+
+    // v1.49.946 (consume sibling of v944): the session-end prune's count cap now
+    // honors the operator's `observation.max_entries` (5th ctor arg) instead of
+    // the RetentionManager hardcoded default (100).
+    it('honors a threaded observation.max_entries as the session-end count cap', async () => {
+      // Pre-seed sessions.jsonl with 5 recent entries (all within the age window,
+      // so only the count cap can prune them).
+      const sessionsFile = join(patternsDir, 'sessions.jsonl');
+      const now = Date.now();
+      const seeded: string[] = [];
+      for (let i = 0; i < 5; i++) {
+        seeded.push(JSON.stringify({ timestamp: now - i * 1000, sessionId: `seed-${i}`, tier: 'persistent' }));
+      }
+      await writeFile(sessionsFile, seeded.join('\n') + '\n');
+
+      // retention_days=90 keeps all by age; max_entries=2 caps the count.
+      const observer = new SessionObserver(patternsDir, undefined, undefined, 90, 2);
+      await runSession(observer, 'max-entries-wire');
+
+      const content = await readFile(sessionsFile, 'utf-8');
+      const lines = content.split('\n').filter((l) => l.trim());
+      // The count cap fired: exactly max_entries (2) survive. Mutation guard:
+      // dropping the 5th-arg threading reverts to the default cap (100) → 5+ kept.
+      expect(lines.length).toBe(2);
+    });
   });
 });

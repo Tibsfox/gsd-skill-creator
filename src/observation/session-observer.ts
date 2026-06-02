@@ -40,12 +40,14 @@ export class SessionObserver {
   private rateLimiter: ObservationRateLimiter;
   private cacheDir: string;
   private observationRetentionDays?: number;
+  private observationMaxEntries?: number;
 
   constructor(
     patternsDir: string = '.planning/patterns',
     retentionConfig?: Partial<RetentionConfig>,
     rateLimitConfig?: Partial<RateLimitConfig>,
     observationRetentionDays?: number,
+    observationMaxEntries?: number,
   ) {
     this.parser = new TranscriptParser();
     this.summarizer = new PatternSummarizer();
@@ -61,6 +63,11 @@ export class SessionObserver {
     // sweep also auto-emits a traffic-attributed ObservationRetentionEvent for
     // the bounded-learning calibration loop (#10439 substrate auto-recorder).
     this.observationRetentionDays = observationRetentionDays;
+    // When set (v1.49.946), the session-end prune's count cap honors the
+    // operator's `observation.max_entries` (config default 1000) instead of the
+    // RetentionManager hardcoded default (100). Threaded alongside retention_days
+    // from the same config load; undefined falls back to the legacy default cap.
+    this.observationMaxEntries = observationMaxEntries;
   }
 
   /**
@@ -148,7 +155,14 @@ export class SessionObserver {
     const sessionsFile = join(this.cacheDir, 'sessions.jsonl');
     if (this.observationRetentionDays !== undefined) {
       await runObservationRetentionSweep(
-        { observation: { retention_days: this.observationRetentionDays } },
+        {
+          observation: {
+            retention_days: this.observationRetentionDays,
+            // v1.49.946: honor `observation.max_entries` for the count cap when
+            // threaded; undefined leaves the RetentionManager default (100).
+            max_entries: this.observationMaxEntries,
+          },
+        },
         sessionsFile,
         { eventsPath: join(this.cacheDir, 'observation-retention-events.jsonl') },
       );

@@ -80,21 +80,25 @@ async function main(): Promise<void> {
     activeSkills: [],  // Not provided by Claude Code
   };
 
-  // Load the operator's `observation.retention_days` so the session-end prune
-  // is governed by config and feeds the calibration loop. Best-effort: a
-  // missing config returns the default (90); a malformed config falls back to
+  // Load the operator's `observation.retention_days` (age cap) and
+  // `observation.max_entries` (count cap) so the session-end prune is governed
+  // by config and feeds the calibration loop. Best-effort: a missing config
+  // returns the schema defaults (90 / 1000); a malformed config falls back to
   // the legacy prune (config-load is an accessory surface per Lesson #10427 —
   // it MUST NOT break session observation).
   let observationRetentionDays: number | undefined;
+  let observationMaxEntries: number | undefined;
   try {
     const config = await readIntegrationConfig();
     observationRetentionDays = config.observation.retention_days;
+    observationMaxEntries = config.observation.max_entries;
   } catch {
     observationRetentionDays = undefined;
+    observationMaxEntries = undefined;
   }
 
   try {
-    const observer = new SessionObserver(undefined, undefined, undefined, observationRetentionDays);
+    const observer = new SessionObserver(undefined, undefined, undefined, observationRetentionDays, observationMaxEntries);
     const result = await observer.onSessionEnd(endData);
 
     if (result) {
