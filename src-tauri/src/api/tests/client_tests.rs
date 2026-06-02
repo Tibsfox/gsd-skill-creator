@@ -16,6 +16,7 @@ fn client_requires_key() {
 
 #[test]
 fn client_default_model() {
+    let _env = super::lock_anthropic_env();
     unsafe { std::env::set_var("ANTHROPIC_API_KEY", "sk-ant-test-model"); }
     let ks = KeyStore::load().unwrap();
     let client = AnthropicClient::new(ks).unwrap();
@@ -25,6 +26,7 @@ fn client_default_model() {
 
 #[test]
 fn client_default_max_tokens() {
+    let _env = super::lock_anthropic_env();
     unsafe { std::env::set_var("ANTHROPIC_API_KEY", "sk-ant-test-tokens"); }
     let ks = KeyStore::load().unwrap();
     let client = AnthropicClient::new(ks).unwrap();

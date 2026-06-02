@@ -4,6 +4,7 @@ use crate::api::keystore::{KeyStore, KeyStoreError};
 
 #[test]
 fn load_from_env_var() {
+    let _env = super::lock_anthropic_env();
     // Set env var for this test
     unsafe { std::env::set_var("ANTHROPIC_API_KEY", "sk-ant-test123"); }
     let result = KeyStore::load();
@@ -16,6 +17,7 @@ fn load_from_env_var() {
 
 #[test]
 fn no_key_found() {
+    let _env = super::lock_anthropic_env();
     // Ensure no env var is set
     unsafe { std::env::remove_var("ANTHROPIC_API_KEY"); }
     let result = KeyStore::load();
@@ -28,6 +30,7 @@ fn no_key_found() {
 
 #[test]
 fn key_never_in_debug_output() {
+    let _env = super::lock_anthropic_env();
     let secret_key = "sk-ant-supersecret-key-12345";
     unsafe { std::env::set_var("ANTHROPIC_API_KEY", secret_key); }
     let ks = KeyStore::load().unwrap();
