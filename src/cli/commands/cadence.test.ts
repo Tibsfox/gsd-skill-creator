@@ -203,22 +203,24 @@ describe('cadence command', () => {
   });
 
   describe('verify axis (live repo)', () => {
-    it('flags suggestions.* as lacking a dedicated end-to-end test; the other 4 are covered', async () => {
+    // v1.49.951 closed the last verify gap: the three suggestions.* thresholds
+    // now have a dedicated end-to-end test, so the live verify axis is
+    // not-overdue with nothing uncovered. This is the live-tree drift guard that
+    // the bounded-learning verify coverage holds (#10461): if any wired
+    // threshold loses (or gains without coverage) its dedicated *-end-to-end
+    // test, this fails.
+    it('all wired thresholds have a dedicated end-to-end test (not-overdue)', async () => {
       const [verify] = await buildCadenceReport('verify');
       expect(verify.axis).toBe('verify');
-      expect(verify.status).toBe('candidate');
-      const uncovered = verify.data.uncovered as string[];
-      // The 3 suggestions.* thresholds have no dedicated *-end-to-end test.
-      expect(uncovered).toEqual(
-        expect.arrayContaining([
-          'suggestions.min_occurrences',
-          'suggestions.cooldown_days',
-          'suggestions.auto_dismiss_after_days',
-        ]),
-      );
-      // The 4 thresholds with dedicated end-to-end tests are covered (stable).
+      expect(verify.status).toBe('not-overdue');
+      expect(verify.data.uncovered).toEqual([]);
+      // Every wired threshold — including the three suggestions.* closed at
+      // v1.49.951 — is covered.
       const per = verify.data.perThreshold as Array<{ threshold: string; covered: boolean }>;
       for (const t of [
+        'suggestions.min_occurrences',
+        'suggestions.cooldown_days',
+        'suggestions.auto_dismiss_after_days',
         'token_budget.warn_at_percent',
         'token_budget.max_percent',
         'observation.retention_days',
@@ -326,15 +328,23 @@ describe('cadence command', () => {
         const versions: Array<{ v: string; advances?: string[] }> = [{ v: 'v1.0.0', advances: ['verify'] }];
         for (let i = 1; i <= 10; i++) versions.push({ v: `v1.0.${i}` });
         const rnDir = makeReleaseNotes(versions);
+        // Empty integration dir -> every wired threshold uncovered -> verify is a
+        // candidate, independent of the live repo's coverage (which became
+        // not-overdue at v1.49.951). Isolates the ships-since upgrade logic.
+        const intDir = mkdtempSync(join(tmpdir(), 'cadence-int-empty-'));
         try {
-          const [verify] = await buildCadenceReport('verify', { releaseNotesDir: rnDir });
-          // verify is a live candidate (3 suggestions.* uncovered) -> now overdue.
+          const [verify] = await buildCadenceReport('verify', {
+            releaseNotesDir: rnDir,
+            integrationDir: intDir,
+          });
+          // candidate + >=10 ships since the verify advance -> overdue.
           expect(verify.status).toBe('overdue');
           expect(verify.data.shipsSince).toBe(10);
           expect(verify.data.lastAdvanceVersion).toBe('v1.0.0');
           expect(cadenceCheckExitCode([verify])).toBe(1);
         } finally {
           rmSync(rnDir, { recursive: true, force: true });
+          rmSync(intDir, { recursive: true, force: true });
         }
       });
 
@@ -342,24 +352,34 @@ describe('cadence command', () => {
         const versions: Array<{ v: string; advances?: string[] }> = [{ v: 'v1.0.0', advances: ['verify'] }];
         for (let i = 1; i <= 5; i++) versions.push({ v: `v1.0.${i}` }); // shipsSince = 5
         const rnDir = makeReleaseNotes(versions);
+        const intDir = mkdtempSync(join(tmpdir(), 'cadence-int-empty-'));
         try {
-          const [verify] = await buildCadenceReport('verify', { releaseNotesDir: rnDir });
+          const [verify] = await buildCadenceReport('verify', {
+            releaseNotesDir: rnDir,
+            integrationDir: intDir,
+          });
           expect(verify.status).toBe('candidate');
           expect(verify.data.shipsSince).toBe(5);
           expect(cadenceCheckExitCode([verify])).toBe(0);
         } finally {
           rmSync(rnDir, { recursive: true, force: true });
+          rmSync(intDir, { recursive: true, force: true });
         }
       });
 
       it('verify stays candidate when no verify advance is tagged (unknown anchor)', async () => {
         const rnDir = makeReleaseNotes([{ v: 'v1.0.0', advances: ['consume'] }, { v: 'v1.0.1' }]);
+        const intDir = mkdtempSync(join(tmpdir(), 'cadence-int-empty-'));
         try {
-          const [verify] = await buildCadenceReport('verify', { releaseNotesDir: rnDir });
+          const [verify] = await buildCadenceReport('verify', {
+            releaseNotesDir: rnDir,
+            integrationDir: intDir,
+          });
           expect(verify.status).toBe('candidate');
           expect(verify.data.shipsSince).toBeNull();
         } finally {
           rmSync(rnDir, { recursive: true, force: true });
+          rmSync(intDir, { recursive: true, force: true });
         }
       });
     });
