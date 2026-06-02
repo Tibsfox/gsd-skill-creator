@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.948`.
+The story begins at `v1.0` and continues to `v1.49.949`.
 
-**991 chapters.** 990 have retrospectives.
+**992 chapters.** 991 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -999,3 +999,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.946](v1.49.946/00-summary.md)** — honor observation.max_entries in the session-end prune (count-cap config wire) · 2026-06-01
 - **[v1.49.947](v1.49.947/00-summary.md)** — skill-creator cadence CLI: deterministic meta-cadence overdue-check (counter-cadence #24, gate-not-vigilance) · 2026-06-01
 - **[v1.49.948](v1.49.948/00-summary.md)** — fix M4 branches first-commit-wins double-win (permanent per-round commit lock; un-bypasses the vitest gate) · 2026-06-02
+- **[v1.49.949](v1.49.949/00-summary.md)** — harden the cadence verify axis (dedicated end-to-end test detection) · 2026-06-02
