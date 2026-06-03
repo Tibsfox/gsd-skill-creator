@@ -950,14 +950,16 @@ describe('cadence command', () => {
       expect(detectThresholdWireWith(T, content, ts)).toBe(false);
     });
 
-    it('UNDER-reports a nested self-call id(id(x)) but TERMINATES (documented bound)', () => {
-      // The `seen` cycle guard blocks the inner id() once the outer adds 'id',
-      // so the nested form is a safe under-report (not a hang) — the next bound.
+    it('RESOLVES a nested self-call id(id(x)) (v1.49.963 — v959 bound closed)', () => {
+      // The argument path in resolveCallReturn now resolves under `seen` minus the
+      // current name, so the inner id() is no longer mistaken for the body cycle.
+      // Full coverage + termination guards live in the v1.49.963 block below.
       const content =
         `${SUB}\n${READER_IMPORT}\n` +
         `function id(t: string) { return t; }\n` +
         `await loadObservationsForThreshold(id(id('${T}')), {});`;
-      expect(detectThresholdWireWith(T, content, ts)).toBe(false);
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true);
+      expect(detectThresholdWireWith(T, content, null)).toBe(false);
     });
 
     it('resolves the CORRECT threshold only through a param-return (no cross-wire)', () => {
@@ -1071,6 +1073,212 @@ describe('cadence command', () => {
         `function id(t: string) { return t; }\n` +
         `await loadObservationsForThreshold(id('${T}'), {});`;
       expect(detectThresholdWire(T, content)).toBe(true);
+    });
+  });
+
+  // --- v1.49.963 detector lifts: parenthesized-PARAM forwarding (the collect-side
+  // analogue of v959's paren unwrap — collectFn now strips grouping parens before
+  // its param-forwarding `ts.isIdentifier` checks) + nested-self-call resolution
+  // (the argument path in resolveCallReturn resolves under `seen` minus the current
+  // name). Both close bounds v1.49.959 documented. Robustness-only: every shape is
+  // absent from every real e2e file (the live-repo invariant test confirms the
+  // verify verdict is byte-identical), and each positive is paired against the
+  // regex (which sees neither shape -> false).
+  describe('detectThresholdWire (AST) — parenthesized-param forwarding + nested self-call (v1.49.963)', () => {
+    const T = 'observation.retention_days';
+    const X = 'token_budget.max_percent';
+    const SUB = `import { runFoo } from '../../src/foo/foo-substrate.js';`;
+
+    // --- parenthesized-param forwarding: all FOUR collect sites (v959 only
+    // unwrapped on the RESOLUTION side; these are the ATTRIBUTION sites). ---
+    it('FOLLOWS a wrapper forwarding a PARENTHESIZED param to the reader (load((t)))', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function readFor(t: string) { return loadObservationsForThreshold((t), {}); }\n` +
+        `await readFor('${T}');`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true);
+      expect(detectThresholdWireWith(T, content, null)).toBe(false);
+    });
+
+    it('FOLLOWS a DOUBLE-parenthesized param forward (load(((t)))) — recursion', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function readFor(t: string) { return loadObservationsForThreshold(((t)), {}); }\n` +
+        `await readFor('${T}');`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true);
+    });
+
+    it('FOLLOWS a parenthesized param across an inter-fn EDGE (inner((t)))', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function inner(t: string) { return loadObservationsForThreshold(t, {}); }\n` +
+        `function outer(t: string) { return inner((t)); }\n` +
+        `await outer('${T}');`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true);
+      expect(detectThresholdWireWith(T, content, null)).toBe(false);
+    });
+
+    it('RESOLVES a parenthesized param-RETURN (function id(t){ return (t); })', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function id(t: string) { return (t); }\n` +
+        `await loadObservationsForThreshold(id('${T}'), {});`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true);
+      expect(detectThresholdWireWith(T, content, null)).toBe(false);
+    });
+
+    it('RESOLVES a parenthesized concise-arrow param identity ((t) => (t))', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `const id = (t: string) => (t);\n` +
+        `await loadObservationsForThreshold(id('${T}'), {});`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true);
+    });
+
+    it('does NOT over-report a paren wrapper-param that SHARES a module-const name (scope-accuracy)', () => {
+      // `(t)` inside `w` is the PARAMETER, not the module const `t`; isParamInScope
+      // must still keep it from resolving against the flat const map after unwrap.
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `const t = '${X}';\n` +
+        `function w(t: string) { return loadObservationsForThreshold((t), {}); }\n` +
+        `void t;\n` +
+        `await w('runtime');`;
+      expect(detectThresholdWireWith(X, content, ts)).toBe(false);
+      expect(detectThresholdWireWith(X, content, null)).toBe(false);
+    });
+
+    it('does NOT over-unwrap — a parenthesized CALL arg stays a call, not a forwarded param', () => {
+      // `(getX())` unwraps to a CallExpression, NOT an identifier, so it is not
+      // mis-attributed as a param-forward; it resolves only via the return-value
+      // path (getX returns X, queried as T -> false).
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function getX(): string { return '${X}'; }\n` +
+        `function w(t: string) { return loadObservationsForThreshold((getX()), {}); }\n` +
+        `await w('${T}');`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(false);
+    });
+
+    // --- nested self-call resolution + termination guards ---
+    it('RESOLVES a nested self-call id(id(lit))', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function id(t: string) { return t; }\n` +
+        `await loadObservationsForThreshold(id(id('${T}')), {});`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true);
+      expect(detectThresholdWireWith(T, content, null)).toBe(false);
+    });
+
+    it('RESOLVES a TRIPLE-nested self-call id(id(id(lit)))', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function id(t: string) { return t; }\n` +
+        `await loadObservationsForThreshold(id(id(id('${T}'))), {});`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true);
+    });
+
+    it('does NOT over-report a nested self-call with a NON-literal innermost arg', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function id(t: string) { return t; }\n` +
+        `await loadObservationsForThreshold(id(id(unknownVar)), {});`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(false);
+      expect(detectThresholdWireWith(T, content, null)).toBe(false);
+    });
+
+    it('a nested self-call resolves the queried threshold only (no cross-wire)', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function id(t: string) { return t; }\n` +
+        `await loadObservationsForThreshold(id(id('${X}')), {});`;
+      expect(detectThresholdWireWith(X, content, ts)).toBe(true);
+      expect(detectThresholdWireWith(T, content, ts)).toBe(false);
+    });
+
+    it('TERMINATES + under-reports a genuine self body-cycle (self(){ return self(); })', () => {
+      // The BODY-return loop keeps the full `seen`, so a true cycle still bails.
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function self(): any { return self(); }\n` +
+        `await loadObservationsForThreshold(self(), {});`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(false);
+    });
+
+    it('astWireFacts TERMINATES (no stack overflow) on a cycle re-entering through an ARGUMENT', () => {
+      // Load-bearing termination case: a(t){return t} b(){return a(b())}. Resolving
+      // a's argument b() removes only 'a' from the guard, so the nested b() still
+      // trips the RETAINED 'b' guard and terminates. A FRESH set (instead of
+      // `new Set(seen)`) recurses unboundedly -> RangeError; computeWireFacts would
+      // MASK that via its regex fallback, so assert on astWireFacts DIRECTLY (the
+      // un-wrapped AST path) to pin the `new Set(seen)` choice. The call completes,
+      // never throws, and under-reports (b() is unresolvable).
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function a(t: any): any { return t; }\n` +
+        `function b(): any { return a(b()); }\n` +
+        `await loadObservationsForThreshold(a(b()), {});`;
+      // Explicit no-throw makes the fresh-`new Set()` mutant detection visible
+      // (the mutant throws RangeError here; the implicit form would also fail).
+      expect(() => astWireFacts(content, ts)).not.toThrow();
+      const facts = astWireFacts(content, ts);
+      expect(facts.callsReaderWith.has(T)).toBe(false);
+    });
+
+    // --- parenthesized binding initializers (alias + call-binding sites), the
+    // collect-side analogue completing the v1.49.963 paren-unwrap symmetry. ---
+    it('RESOLVES a parenthesized ALIAS binding initializer (const a = (b))', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `const b = '${T}';\n` +
+        `const a = (b);\n` +
+        `await loadObservationsForThreshold(a, {});`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true);
+      expect(detectThresholdWireWith(T, content, null)).toBe(false);
+    });
+
+    it('RESOLVES a parenthesized CALL binding initializer (const a = (getT()))', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function getT() { return '${T}'; }\n` +
+        `const a = (getT());\n` +
+        `await loadObservationsForThreshold(a, {});`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true);
+      expect(detectThresholdWireWith(T, content, null)).toBe(false);
+    });
+
+    it('does NOT over-report a parenthesized binding initializer to an unresolvable name', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `const a = (unknownVar);\n` +
+        `await loadObservationsForThreshold(a, {});`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(false);
+    });
+
+    it('the public (memoized, lazy AST) detectThresholdWire resolves a nested self-call', () => {
+      // Proves the lift is on the live path the verify axis uses, not just the seam.
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function id(t: string) { return t; }\n` +
+        `await loadObservationsForThreshold(id(id('${T}')), {});`;
+      expect(detectThresholdWire(T, content)).toBe(true);
+    });
+
+    it('a function-local block shadowing a same-named param never leaks the module const (#1a investigated-benign)', () => {
+      // #1(a): a block redeclares the param name `t` (= module const X), but the
+      // function still returns the PARAM `t` (the inner const is block-scoped). The
+      // param-return resolves to the call-site arg ('T') — CORRECT — and the module
+      // const X is NEVER leaked into the wire (param-returns resolve via call-site
+      // args, never the flat binding maps). No code changed for #1(a) at v963; this
+      // pins that the shape the handoff feared is already conservative.
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `const t = '${X}';\n` +
+        `function id(t: string) { { const t = '${X}'; void t; } return t; }\n` +
+        `void t;\n` +
+        `await loadObservationsForThreshold(id('${T}'), {});`;
+      expect(detectThresholdWireWith(X, content, ts)).toBe(false); // no leak of the module const
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true); // param resolves to the call-site arg
     });
   });
 

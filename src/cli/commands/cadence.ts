@@ -482,8 +482,12 @@ export function regexWireFacts(content: string): WireFacts {
  *
  * The depth caps the v1.49.955 detector documented (one wrapper hop, one binding
  * level) are lifted, the v1.49.956-documented return-value bound is closed by
- * v1.49.957, and the v1.49.957-documented param-return-through and
- * parenthesized-literal bounds are closed by v1.49.959; the regex fallback still
+ * v1.49.957, the v1.49.957-documented param-return-through and
+ * parenthesized-literal bounds are closed by v1.49.959, and the parenthesized-
+ * PARAM-forwarding bound (a wrapper forwarding `(t)` to the reader, a
+ * `return (t)` / `(t) => (t)` param identity, or a `const a = (b)` / `(getT())`
+ * binding initializer) plus the nested-self-call bound (`load(id(id('x')))`)
+ * are closed by v1.49.963; the regex fallback still
  * covers none of these. Wrapper and return
  * detection span free `function` declarations and `const`-bound arrow/function
  * expressions (the forms every test uses) — methods on classes remain out of
@@ -501,9 +505,13 @@ export function regexWireFacts(content: string): WireFacts {
  * return-value resolution; (4) `isParamInScope` stops every binding-resolution
  * hop from following a name that is actually a parameter in scope. The residual
  * after these (a single name declared once but read across genuinely distinct
- * lexical scopes; a function-local block that shadows a same-named param; a
- * nested self-call such as `id(id('x'))`) is a contrived shape absent from every
- * real test and no worse than the regex.
+ * lexical scopes) is a contrived shape absent from every real test and no worse
+ * than the regex. (A function-local block that shadows a same-named param was
+ * investigated at v1.49.963 and is already conservative — a param-return resolves
+ * via the call-site arg, never the flat binding maps, and a block shadow whose
+ * function does not unconditionally return an expression is dropped by the
+ * storage gate; the nested-self-call `id(id('x'))` bound was closed the same
+ * milestone via the argument-path cycle-guard relaxation in resolveCallReturn.)
  */
 export function astWireFacts(content: string, ts: TsModule): WireFacts {
   const sf = ts.createSourceFile('e2e.ts', content, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
@@ -565,6 +573,15 @@ export function astWireFacts(content: string, ts: TsModule): WireFacts {
     }
     return false;
   };
+
+  // Unwrap an N-level parenthesized grouping `((expr))` to its inner expression.
+  // ParenthesizedExpression is the ONLY node kind unwrapped (never `as`, a call,
+  // or any other kind), so this never changes WHICH expression kind collectFn
+  // attributes — it only strips redundant grouping before the `ts.isIdentifier`
+  // param-forwarding checks below, the collect-side analogue of the
+  // resolveExpr/literalOf paren unwraps on the resolution side (v1.49.963).
+  const unwrapParens = (expr: TS.Expression): TS.Expression =>
+    ts.isParenthesizedExpression(expr) ? unwrapParens(expr.expression) : expr;
 
   // A string-literal-ish initializer/argument resolved WITHOUT following identifiers.
   const literalOf = (expr: TS.Expression): string | undefined => {
@@ -636,7 +653,8 @@ export function astWireFacts(content: string, ts: TsModule): WireFacts {
           // pushing the identifier to `rets`, where `isParamInScope` would drop
           // it to undefined and the divergence guard would mask the param path
           // (v1.49.959).
-          const pi = ts.isIdentifier(n.expression) ? paramIndexOf(n.expression) : -1;
+          const retExpr = unwrapParens(n.expression);
+          const pi = ts.isIdentifier(retExpr) ? paramIndexOf(retExpr) : -1;
           if (pi >= 0) retParamIdx.push(pi);
           else rets.push(n.expression);
         } else unconditionalExprReturn = false; // bare `return;` -> undefined path
@@ -644,7 +662,7 @@ export function astWireFacts(content: string, ts: TsModule): WireFacts {
       }
       if (!ts.isCallExpression(n)) return;
       if (calleeIsReader(n)) {
-        const a0 = n.arguments[0];
+        const a0 = n.arguments[0] && unwrapParens(n.arguments[0]);
         if (a0 && ts.isIdentifier(a0)) {
           const pi = paramIndexOf(a0);
           if (pi >= 0 && !readerParamArgs.includes(pi)) readerParamArgs.push(pi);
@@ -654,7 +672,8 @@ export function astWireFacts(content: string, ts: TsModule): WireFacts {
       const c = n.expression;
       if (ts.isIdentifier(c)) {
         const argMap: Array<[number, number]> = [];
-        n.arguments.forEach((arg, ap) => {
+        n.arguments.forEach((rawArg, ap) => {
+          const arg = unwrapParens(rawArg);
           if (ts.isIdentifier(arg)) {
             const pi = paramIndexOf(arg);
             if (pi >= 0) argMap.push([ap, pi]);
@@ -673,7 +692,8 @@ export function astWireFacts(content: string, ts: TsModule): WireFacts {
     } else {
       // arrow concise body: the body IS the (only) return value — classify a
       // bare param identity (`(t) => t`) as a param-return too (v1.49.959).
-      const pi = ts.isIdentifier(fn.body) ? paramIndexOf(fn.body) : -1;
+      const bodyExpr = unwrapParens(fn.body);
+      const pi = ts.isIdentifier(bodyExpr) ? paramIndexOf(bodyExpr) : -1;
       if (pi >= 0) retParamIdx.push(pi);
       else rets.push(fn.body);
     }
@@ -694,20 +714,25 @@ export function astWireFacts(content: string, ts: TsModule): WireFacts {
   };
   eachNode(sf, (n) => {
     if (ts.isVariableDeclaration(n) && ts.isIdentifier(n.name) && n.initializer) {
-      const v = literalOf(n.initializer);
+      // Unwrap grouping parens on the initializer so `const a = (b)` (alias) and
+      // `const a = (getT())` (call-binding) register symmetrically with the
+      // literal branch (literalOf already unwraps) and the four collectFn
+      // attribution sites — the binding-init analogue of the v1.49.963 unwrap.
+      const init = unwrapParens(n.initializer);
+      const v = literalOf(init);
       if (v !== undefined) {
         stringBindings.set(n.name.text, v);
         bindingDeclCount.set(n.name.text, (bindingDeclCount.get(n.name.text) ?? 0) + 1);
-      } else if (ts.isIdentifier(n.initializer)) {
-        aliasBindings.set(n.name.text, n.initializer);
+      } else if (ts.isIdentifier(init)) {
+        aliasBindings.set(n.name.text, init);
         bindingDeclCount.set(n.name.text, (bindingDeclCount.get(n.name.text) ?? 0) + 1);
-      } else if (ts.isCallExpression(n.initializer)) {
+      } else if (ts.isCallExpression(init)) {
         // const NAME = getThreshold() — a binding whose value is a call's return
         // (v1.49.957). Resolved later via the same return-value dataflow.
-        callBindings.set(n.name.text, n.initializer);
+        callBindings.set(n.name.text, init);
         bindingDeclCount.set(n.name.text, (bindingDeclCount.get(n.name.text) ?? 0) + 1);
-      } else if (ts.isArrowFunction(n.initializer) || ts.isFunctionExpression(n.initializer)) {
-        collectFn(n.name.text, n.initializer);
+      } else if (ts.isArrowFunction(init) || ts.isFunctionExpression(init)) {
+        collectFn(n.name.text, init);
       }
     } else if (ts.isFunctionDeclaration(n) && n.name) {
       collectFn(n.name.text, n);
@@ -841,9 +866,12 @@ export function astWireFacts(content: string, ts: TsModule): WireFacts {
   // to different literals, the call resolves to `undefined` (not wired).
   //
   // The shared `seen` set breaks return cycles (`a(){ return b() } b(){ return
-  // a() }`) and is threaded across the binding/alias guards AND the argument
-  // resolution so a single name is never resolved twice on one path — a nested
-  // self-call (`load(id(id('x')))`) is therefore a safe under-report, not a hang.
+  // a() }`): the BODY-return loop below threads it unchanged. The PARAM-argument
+  // loop instead resolves under `seen` minus the current name, because a call's
+  // arguments are finite caller-scope sub-nodes (never the cyclic recursion the
+  // guard protects) — so a nested self-call (`load(id(id('x')))`) RESOLVES
+  // (v1.49.963), while a genuine cycle that re-enters through an argument still
+  // terminates because every OTHER in-progress name stays in the set.
   const resolveCallReturn = (call: TS.CallExpression, seen: Set<string>): string | undefined => {
     const callee = call.expression;
     if (!ts.isIdentifier(callee)) return undefined;
@@ -871,7 +899,18 @@ export function astWireFacts(content: string, ts: TsModule): WireFacts {
       for (const r of rets!) if (!merge(resolveExpr(r, seen))) return undefined;
     }
     if (hasParams) {
-      for (const pi of paramIdxs!) if (!merge(resolveExpr(call.arguments[pi], seen))) return undefined;
+      // The substituted argument lives at THIS call site (caller scope) and is a
+      // strict sub-node of `call`, so a same-named call nested in the argument
+      // (`load(id(id('x')))`) is finite, NOT the body-recursion cycle the `seen`
+      // guard exists to break. Resolve it under `seen` MINUS this name so the
+      // nested self-call resolves instead of tripping the `seen.has(name)` bail;
+      // every OTHER in-progress name stays guarded, so a genuine cycle that
+      // re-enters through an argument (`a(t){return t} b(){return a(b())}`) still
+      // terminates as an under-report (v1.49.963 — the bound v1.49.959 left open).
+      // Cloning `seen` (not a fresh set) is load-bearing for that termination.
+      const argSeen = new Set(seen);
+      argSeen.delete(name);
+      for (const pi of paramIdxs!) if (!merge(resolveExpr(call.arguments[pi], argSeen))) return undefined;
     }
     return resolved;
   };
