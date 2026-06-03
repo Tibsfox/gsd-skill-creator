@@ -362,6 +362,223 @@ describe('cadence command', () => {
     });
   });
 
+  // --- v1.49.956: lift the v1.49.955 depth caps to a FULL inter-procedural
+  // call-graph (N-hop wrapper chains) + N-level const/let binding chains. Each
+  // case was a documented FALSE-negative of the v955 detector (cap), and a
+  // false-negative of the regex too — so the AST verdict (..., ts) is paired with
+  // the regex verdict (..., null) to make the lift load-bearing.
+  describe('detectThresholdWire (AST) — full inter-procedural call-graph + N-level binding (v1.49.956)', () => {
+    const T = 'observation.retention_days';
+    const X = 'token_budget.max_percent';
+    const SUB = `import { runFoo } from '../../src/foo/foo-substrate.js';`;
+
+    it('FOLLOWS a depth-2 wrapper chain (outer -> inner -> reader) — v955 cap lifted', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function inner(t: string) { return loadObservationsForThreshold(t, {}); }\n` +
+        `function outer(t: string) { return inner(t); }\n` +
+        `await outer('${T}');`;
+      // AST: the fixpoint propagates inner's reader-reaching param through outer.
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true);
+      // Regex: the only reader call has a non-literal arg `t` -> missed.
+      expect(detectThresholdWireWith(T, content, null)).toBe(false);
+    });
+
+    it('FOLLOWS a depth-3 wrapper chain (c -> b -> a -> reader)', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function a(t: string) { return loadObservationsForThreshold(t, {}); }\n` +
+        `function b(t: string) { return a(t); }\n` +
+        `function c(t: string) { return b(t); }\n` +
+        `await c('${T}');`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true);
+    });
+
+    it('FOLLOWS a hop that forwards a NON-zero param index to a reader-reaching wrapper', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `const inner = (p: string, t: string) => loadObservationsForThreshold(t, { p });\n` +
+        `const outer = (p: string, t: string) => inner(p, t);\n` +
+        `await outer('/tmp/x', '${T}');`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true);
+    });
+
+    it('RESOLVES a 2-level const alias chain (const b = a; const a = lit) — v955 cap lifted', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `const a = '${T}';\n` +
+        `const b = a;\n` +
+        `await loadObservationsForThreshold(b, {});`;
+      // AST: the alias chain b -> a -> literal resolves.
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true);
+      // Regex: the call arg is an identifier, not a quoted literal -> missed.
+      expect(detectThresholdWireWith(T, content, null)).toBe(false);
+    });
+
+    it('RESOLVES a 3-level const alias chain (c -> b -> a -> lit)', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `const a = '${T}';\nconst b = a;\nconst c = b;\n` +
+        `await loadObservationsForThreshold(c, {});`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true);
+    });
+
+    it('RESOLVES a combined N-hop + N-level case (outer(b) where b -> a -> lit)', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `const a = '${T}';\nconst b = a;\n` +
+        `function inner(t: string) { return loadObservationsForThreshold(t, {}); }\n` +
+        `function outer(t: string) { return inner(t); }\n` +
+        `await outer(b);`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true);
+      expect(detectThresholdWireWith(T, content, null)).toBe(false);
+    });
+
+    it('resolves the CORRECT threshold only under deep resolution (no cross-wire)', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `const a = '${X}';\nconst b = a;\n` +
+        `function inner(t: string) { return loadObservationsForThreshold(t, {}); }\n` +
+        `function outer(t: string) { return inner(t); }\n` +
+        `await outer(b);`;
+      expect(detectThresholdWireWith(X, content, ts)).toBe(true);
+      expect(detectThresholdWireWith(T, content, ts)).toBe(false);
+    });
+
+    it('TERMINATES on a wrapper mutual-recursion cycle with no reader call (not wired)', () => {
+      // f -> g -> f, neither calls the reader: the fixpoint converges to empty
+      // reaches-sets, so no infinite loop and the threshold is NOT wired.
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function f(t: string): unknown { return g(t); }\n` +
+        `function g(t: string): unknown { return f(t); }\n` +
+        `await f('${T}');`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(false);
+    });
+
+    it('TERMINATES on a binding reference cycle (const a = b; const b = a) (not wired)', () => {
+      // The visited-set in resolveIdentifier breaks the a <-> b cycle; resolution
+      // yields no literal -> not wired (and does not hang).
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `const a = b;\nconst b = a;\n` +
+        `await loadObservationsForThreshold(b, {});`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(false);
+    });
+
+    it('a deep wrapper that REACHES the reader but is only called with a param does NOT over-report', () => {
+      // `mid` reaches the reader (mid -> inner -> reader), but the outermost call
+      // `top(t)` is inside `wrap`, forwarding wrap's PARAM — never a literal. With
+      // no literal entering the chain, nothing is wired. Guards against the
+      // fixpoint resolving a param against the flat binding map (cf. isParamInScope).
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `const t = '${X}';\n` +
+        `function inner(t: string) { return loadObservationsForThreshold(t, {}); }\n` +
+        `function mid(t: string) { return inner(t); }\n` +
+        `function wrap(t: string) { return mid(t); }\n` +
+        `void t;`;
+      // wrap/mid/inner all reach the reader, but no call site passes a literal.
+      expect(detectThresholdWireWith(X, content, ts)).toBe(false);
+    });
+
+    it('an alias chain that ends at a PARAMETER is not resolved against the flat const map', () => {
+      // Inside `w`, `const c = t` aliases the PARAM t; the module-level `const a`
+      // shares no name, so nothing leaks. w is never called with a literal -> the
+      // reader call (via c -> param t) resolves to nothing -> not wired.
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function w(t: string) { const c = t; return loadObservationsForThreshold(c, {}); }\n` +
+        `void w;`;
+      expect(detectThresholdWireWith(X, content, ts)).toBe(false);
+      expect(detectThresholdWireWith(T, content, ts)).toBe(false);
+    });
+
+    it('the public (memoized, lazy AST) detectThresholdWire resolves a combined N-hop + N-level wire', () => {
+      // The combined case is resolvable ONLY by the lifted AST path; proves the
+      // lift is on the live path the verify axis actually uses (not just the seam).
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `const a = '${T}';\nconst b = a;\n` +
+        `function inner(t: string) { return loadObservationsForThreshold(t, {}); }\n` +
+        `function outer(t: string) { return inner(t); }\n` +
+        `await outer(b);`;
+      expect(detectThresholdWire(T, content)).toBe(true);
+    });
+  });
+
+  // --- v1.49.956 over-report guards (closing the two adversarial-review findings
+  // on the lifted detector). Both shapes are contrived (no real e2e file has
+  // them) and the lift's over-report direction is conservative for an advisory
+  // gate, but a precision detector should not over-report at all — these pin the
+  // guards. The regex fallback is ALSO conservative on these inputs (the reader
+  // arg is a bare identifier, not a quoted literal), so AST == regex == false.
+  describe('detectThresholdWire (AST) — over-report guards (v1.49.956 review findings)', () => {
+    const T = 'observation.retention_days';
+    const X = 'token_budget.max_percent';
+    const SUB = `import { runFoo } from '../../src/foo/foo-substrate.js';`;
+
+    it('does NOT over-report when a nested callback param shadows the outer wrapper param (finding #1)', () => {
+      // `collectFn` must attribute the reader call's `t` to the NESTED arrow's own
+      // param, not to `outer`'s same-named param — so `outer` is NOT a wrapper and
+      // `outer('${T}')` does not wire. `eachOwnNode` (no descent into nested
+      // function bodies) is what makes this hold.
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function outer(t: string) { return [1].map((t) => loadObservationsForThreshold(t, {})); }\n` +
+        `await outer('${T}');`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(false);
+      expect(detectThresholdWireWith(T, content, null)).toBe(false);
+    });
+
+    it('does NOT over-report a .forEach callback param shadow (common idiom, finding #1)', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function f(t: string) { ['a'].forEach((t) => { loadObservationsForThreshold(t, {}); }); }\n` +
+        `await f('${T}');`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(false);
+      expect(detectThresholdWireWith(T, content, null)).toBe(false);
+    });
+
+    it('does NOT over-report when a function-local const shadows a module const of the same name (finding #2)', () => {
+      // The flat binding map cannot distinguish module `const c` from the function
+      // -local `const c`; the name is declared twice -> dropped as ambiguous ->
+      // the reader call's `c` resolves to nothing -> not wired (the reader is
+      // never actually called with the '${X}' literal).
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `const c = '${X}';\n` +
+        `function w(p: unknown) { const c = '${T}'; return loadObservationsForThreshold(c, {}); }\n` +
+        `void w;`;
+      expect(detectThresholdWireWith(X, content, ts)).toBe(false);
+      expect(detectThresholdWireWith(T, content, ts)).toBe(false);
+      expect(detectThresholdWireWith(X, content, null)).toBe(false);
+    });
+
+    it('does NOT over-report a pure-alias const-name collision across scopes (finding #2)', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `const lit = '${X}';\nconst c = lit;\n` +
+        `function w(p: string) { const c = p; return loadObservationsForThreshold(c, {}); }\n` +
+        `void w;`;
+      expect(detectThresholdWireWith(X, content, ts)).toBe(false);
+      expect(detectThresholdWireWith(X, content, null)).toBe(false);
+    });
+
+    it('a name declared ONCE still resolves — the ambiguity drop is not over-broad (boundary)', () => {
+      // Single-declaration `a`/`b` resolve (pins that the count>1 drop only fires
+      // on genuine redeclaration, not on every binding).
+      const once = `${SUB}\n${READER_IMPORT}\nconst a = '${T}';\nconst b = a;\nawait loadObservationsForThreshold(b, {});`;
+      expect(detectThresholdWireWith(T, once, ts)).toBe(true);
+      // The SAME name `a` redeclared (module + a second decl) -> ambiguous -> dropped.
+      const twice =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `const a = '${T}';\nfunction w(p: unknown) { const a = '${T}'; return loadObservationsForThreshold(a, {}); }\n` +
+        `void w;\nawait loadObservationsForThreshold(a, {});`;
+      expect(detectThresholdWireWith(T, twice, ts)).toBe(false);
+    });
+  });
+
   describe('WireFacts primitives — astWireFacts / regexWireFacts / specifier REs', () => {
     const T = 'observation.retention_days';
 

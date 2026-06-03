@@ -40,13 +40,15 @@
  * `loadObservationsForThreshold` call (the calibration read / caller end) AND
  * import a substrate/events module (the write end). v1.49.953 replaced the
  * v1.49.947/950 string-presence heuristic (which an incidental comment mention
- * satisfied) with a regex; v1.49.955 replaces that regex with a TypeScript-AST
- * parse + intra-file dataflow + depth-1 call-graph (see {@link astWireFacts}):
- * comments/JSDoc/string occurrences no longer match, the callee must resolve to
- * the IMPORTED reader binding (aliases and namespace imports followed), and the
- * threshold argument is resolved through variable and wrapper indirection. The
- * regex survives as a graceful fallback when the compiler cannot be loaded. The
- * v1.49.949 restriction to dedicated end-to-end files still applies.
+ * satisfied) with a regex; v1.49.955 replaced that regex with a TypeScript-AST
+ * parse + intra-file dataflow + depth-1 call-graph; v1.49.956 lifted the depth
+ * caps to a full inter-procedural call-graph + N-level binding chains (see
+ * {@link astWireFacts}): comments/JSDoc/string occurrences no longer match, the
+ * callee must resolve to the IMPORTED reader binding (aliases and namespace
+ * imports followed), and the threshold argument is resolved through N-level
+ * variable and N-hop wrapper indirection. The regex survives as a graceful
+ * fallback when the compiler cannot be loaded. The v1.49.949 restriction to
+ * dedicated end-to-end files still applies.
  *
  * Exit codes (with `--check`) — a TRUE gate, fires only on definitive overdue:
  *   0  no checked axis is `overdue` (not-overdue / candidate / manual)
@@ -438,9 +440,10 @@ export function regexWireFacts(content: string): WireFacts {
 }
 
 /**
- * AST + intra-file dataflow + depth-1 call-graph wire detection (v1.49.955).
- * Parses the test source with the TypeScript compiler and resolves the wire
- * STRUCTURALLY rather than by raw-text regex:
+ * AST + intra-file dataflow + inter-procedural call-graph wire detection
+ * (v1.49.955 introduced the AST path; v1.49.956 lifted the depth caps to full
+ * inter-procedural resolution). Parses the test source with the TypeScript
+ * compiler and resolves the wire STRUCTURALLY rather than by raw-text regex:
  *
  *   - CALLER end is a real `CallExpression` — comments, JSDoc examples, and
  *     string literals that merely CONTAIN the call text are ignored (they are not
@@ -451,23 +454,41 @@ export function regexWireFacts(content: string): WireFacts {
  *     are followed.
  *   - The threshold ARGUMENT is resolved through intra-file dataflow: a direct
  *     string literal, a no-substitution template, `'x' as const`, OR an
- *     identifier bound to a string-literal `const`/`let` (one level).
- *   - A depth-1 CALL GRAPH is followed: a call to a local wrapper function that
- *     forwards one of its parameters to the reader resolves the wrapper's
- *     argument at the call site (`function w(t){ return load(t) }; w('x')`).
+ *     identifier bound to a string literal through an N-LEVEL `const`/`let` alias
+ *     chain (`const b = a; const a = 'x'`). Chains are cycle-guarded (a visited
+ *     set) and param-guarded at EVERY hop (an alias that resolves to a function
+ *     parameter is not followed — the threshold flows in at the call site).
+ *   - An N-HOP CALL GRAPH is followed: a monotone fixpoint computes which
+ *     `(local function, parameter index)` pairs transitively forward to the
+ *     reader's threshold argument — directly (`function w(t){ return load(t) }`)
+ *     or through any chain of intermediate local wrappers
+ *     (`function inner(t){ return load(t) }; function outer(t){ return inner(t) };
+ *     outer('x')`). The threshold argument at each wrapper call site is then
+ *     resolved by the same dataflow as a direct reader call. The fixpoint is over
+ *     a finite (function × param-index) domain, so it terminates even on mutual
+ *     recursion (`f -> g -> f` with no reader call resolves to nothing).
  *   - SUBSTRATE end is a real `ImportDeclaration` whose specifier matches
  *     {@link SUBSTRATE_SPECIFIER_RE} (an import line inside a comment does not
  *     count).
  *
- * Inter-procedural resolution is capped at one hop (a wrapper calling another
- * wrapper is not followed) and binding resolution at one level — both bounded on
- * purpose and documented here; the regex fallback covers neither. The
- * `const`/`let` binding map is also scope-FLAT (module-order last-write-wins): a
- * same-named string binding redeclared in a nested block is not lexically
- * resolved. The one place this matters — a parameter shadowing a module const of
- * the same name — IS handled (see `isParamInScope`); the residual (two block
- * consts of the same name, both string-literal, one threshold-shaped) is a
- * contrived shape absent from every real test and no worse than the regex.
+ * The depth caps the v1.49.955 detector documented (one wrapper hop, one binding
+ * level) are now lifted; the regex fallback still covers neither. Wrapper
+ * detection spans free `function` declarations and `const`-bound arrow/function
+ * expressions (the forms every test uses) — methods on classes remain out of
+ * scope (no real e2e test is class-based).
+ *
+ * Resolution is name-based, not fully lexically-scoped, so three guards keep it
+ * from over-reporting a wire when a name means different things in different
+ * scopes (all err toward NOT wiring — the conservative direction for a coverage
+ * gate): (1) `collectFn` attributes call arguments to a function's parameters via
+ * `eachOwnNode`, which does NOT descend into nested function bodies, so a nested
+ * callback's same-named param is never mistaken for the outer function's; (2) a
+ * binding NAME declared more than once in the file (`const x` at two scopes) is
+ * dropped as AMBIGUOUS rather than resolved against an arbitrary one; (3)
+ * `isParamInScope` stops every binding-resolution hop from following a name that
+ * is actually a parameter in scope. The residual after these (e.g. a single name
+ * declared once but read across genuinely distinct lexical scopes) is a contrived
+ * shape absent from every real test and no worse than the regex.
  */
 export function astWireFacts(content: string, ts: TsModule): WireFacts {
   const sf = ts.createSourceFile('e2e.ts', content, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
@@ -476,7 +497,8 @@ export function astWireFacts(content: string, ts: TsModule): WireFacts {
   const readerLocals = new Set<string>(); // local names bound to the imported reader
   const readerNamespaces = new Set<string>(); // `import * as ns` from the reader module
   const stringBindings = new Map<string, string>(); // const/let NAME = '<literal>'
-  const wrappers = new Map<string, number>(); // local fn NAME -> param index forwarded to reader
+  const aliasBindings = new Map<string, TS.Identifier>(); // const/let NAME = <otherIdentifier>
+  const bindingDeclCount = new Map<string, number>(); // declarations per binding name
 
   // Pass 1 — imports: substrate flag + reader binding names (named + alias + namespace).
   for (const stmt of sf.statements) {
@@ -499,6 +521,26 @@ export function astWireFacts(content: string, ts: TsModule): WireFacts {
     node.forEachChild((c) => eachNode(c, cb));
   };
 
+  const isFunctionLike = (n: TS.Node): boolean =>
+    ts.isFunctionDeclaration(n) ||
+    ts.isFunctionExpression(n) ||
+    ts.isArrowFunction(n) ||
+    ts.isMethodDeclaration(n);
+
+  // Like `eachNode` but does NOT descend into nested function/arrow/method
+  // bodies, so a walk rooted at one function visits only that function's OWN
+  // code. `collectFn` uses this to attribute call arguments to the correct
+  // function's parameters: an identifier inside a nested callback refers to the
+  // nested function's scope (its own param, or a closure), NOT the outer
+  // function's same-named param — descending would mis-attribute it and falsely
+  // mark the outer a reader-reaching wrapper (review finding, v1.49.956).
+  const eachOwnNode = (node: TS.Node, cb: (n: TS.Node) => void): void => {
+    cb(node);
+    node.forEachChild((c) => {
+      if (!isFunctionLike(c)) eachOwnNode(c, cb);
+    });
+  };
+
   const calleeIsReader = (call: TS.CallExpression): boolean => {
     const c = call.expression;
     if (ts.isIdentifier(c)) return readerLocals.has(c.text);
@@ -515,44 +557,121 @@ export function astWireFacts(content: string, ts: TsModule): WireFacts {
     return undefined;
   };
 
-  // Pass 2 — collect string-literal bindings and depth-1 reader wrappers.
-  const wrapperParamIndex = (
+  // The call-graph facts collected for one local function: its parameter names
+  // (by index), the param indices it forwards DIRECTLY to the reader's threshold
+  // arg (base case), and its outgoing calls to other local functions with the
+  // map of {arg position -> this fn's param index} for each identifier argument
+  // that is one of this fn's params (the forwarding edges the fixpoint walks).
+  interface FnInfo {
+    params: string[];
+    readerParamArgs: number[];
+    edges: Array<{ callee: string; argMap: Array<[argPos: number, paramIdx: number]> }>;
+  }
+  const fns = new Map<string, FnInfo>();
+
+  // Pass 2a — collect, for each local function, the forwarding facts above.
+  const collectFn = (
+    name: string,
     fn: TS.FunctionDeclaration | TS.ArrowFunction | TS.FunctionExpression,
-  ): number | undefined => {
-    if (!fn.body) return undefined;
+  ): void => {
+    if (!fn.body) return;
     const params = fn.parameters.map((p) => (ts.isIdentifier(p.name) ? p.name.text : ''));
-    let idx: number | undefined;
-    eachNode(fn.body, (n) => {
-      if (idx !== undefined || !ts.isCallExpression(n) || !calleeIsReader(n)) return;
-      const a0 = n.arguments[0];
-      if (a0 && ts.isIdentifier(a0)) {
-        const i = params.indexOf(a0.text);
-        if (i >= 0) idx = i;
+    const paramIndexOf = (id: TS.Identifier): number => params.indexOf(id.text);
+    const readerParamArgs: number[] = [];
+    const edges: FnInfo['edges'] = [];
+    eachOwnNode(fn.body, (n) => {
+      if (!ts.isCallExpression(n)) return;
+      if (calleeIsReader(n)) {
+        const a0 = n.arguments[0];
+        if (a0 && ts.isIdentifier(a0)) {
+          const pi = paramIndexOf(a0);
+          if (pi >= 0 && !readerParamArgs.includes(pi)) readerParamArgs.push(pi);
+        }
+        return;
+      }
+      const c = n.expression;
+      if (ts.isIdentifier(c)) {
+        const argMap: Array<[number, number]> = [];
+        n.arguments.forEach((arg, ap) => {
+          if (ts.isIdentifier(arg)) {
+            const pi = paramIndexOf(arg);
+            if (pi >= 0) argMap.push([ap, pi]);
+          }
+        });
+        if (argMap.length > 0) edges.push({ callee: c.text, argMap });
       }
     });
-    return idx;
+    if (readerParamArgs.length > 0 || edges.length > 0) {
+      fns.set(name, { params, readerParamArgs, edges });
+    }
   };
   eachNode(sf, (n) => {
     if (ts.isVariableDeclaration(n) && ts.isIdentifier(n.name) && n.initializer) {
       const v = literalOf(n.initializer);
-      if (v !== undefined) stringBindings.set(n.name.text, v);
-      else if (ts.isArrowFunction(n.initializer) || ts.isFunctionExpression(n.initializer)) {
-        const i = wrapperParamIndex(n.initializer);
-        if (i !== undefined) wrappers.set(n.name.text, i);
+      if (v !== undefined) {
+        stringBindings.set(n.name.text, v);
+        bindingDeclCount.set(n.name.text, (bindingDeclCount.get(n.name.text) ?? 0) + 1);
+      } else if (ts.isIdentifier(n.initializer)) {
+        aliasBindings.set(n.name.text, n.initializer);
+        bindingDeclCount.set(n.name.text, (bindingDeclCount.get(n.name.text) ?? 0) + 1);
+      } else if (ts.isArrowFunction(n.initializer) || ts.isFunctionExpression(n.initializer)) {
+        collectFn(n.name.text, n.initializer);
       }
     } else if (ts.isFunctionDeclaration(n) && n.name) {
-      const i = wrapperParamIndex(n);
-      if (i !== undefined) wrappers.set(n.name.text, i);
+      collectFn(n.name.text, n);
     }
   });
+  // Flat (non-lexical) binding maps cannot tell a function-local `const x` from a
+  // module-level `const x` of the same name. A name declared as a literal/alias
+  // binding more than once in the file is therefore AMBIGUOUS — resolving it
+  // could pick the wrong scope's value and over-report a wire. Drop such names so
+  // resolution stays conservative (an unresolved arg is simply not wired),
+  // matching the regex fallback's behavior (review finding, v1.49.956).
+  for (const [name, count] of bindingDeclCount) {
+    if (count > 1) {
+      stringBindings.delete(name);
+      aliasBindings.delete(name);
+    }
+  }
+
+  // Pass 2b — monotone fixpoint: `reaches[fn]` = the set of `fn`'s param indices
+  // that transitively forward to the reader's threshold arg. Seed with each
+  // function's direct (base-case) forwards, then propagate across call edges
+  // until no set grows. A call `F(...)` forwarding F's param `pi` into callee G's
+  // arg position `ap` adds `pi` to `reaches[F]` when `ap ∈ reaches[G]`. The
+  // domain (functions × param indices) is finite, so this terminates regardless
+  // of recursion (mutual recursion with no reader call converges to empty sets).
+  const reaches = new Map<string, Set<number>>();
+  for (const [name, info] of fns) reaches.set(name, new Set(info.readerParamArgs));
+  let changed = true;
+  while (changed) {
+    changed = false;
+    for (const [name, info] of fns) {
+      const set = reaches.get(name)!;
+      for (const edge of info.edges) {
+        const calleeReaches = reaches.get(edge.callee);
+        if (!calleeReaches) continue;
+        for (const [argPos, paramIdx] of edge.argMap) {
+          if (calleeReaches.has(argPos) && !set.has(paramIdx)) {
+            set.add(paramIdx);
+            changed = true;
+          }
+        }
+      }
+    }
+  }
+  // A local function "wraps" the reader iff at least one of its param indices
+  // reaches the threshold arg; that set indexes which call-site args to resolve.
+  const wrappers = new Map<string, Set<number>>();
+  for (const [name, set] of reaches) if (set.size > 0) wrappers.set(name, set);
 
   // True iff `id` is bound as a PARAMETER of a lexically-enclosing function. Such
   // an identifier is locally bound (the threshold flows in at the wrapper's call
   // site, resolved separately) and must NOT be resolved against the flat
-  // module-level `stringBindings` — otherwise a `const t = '<threshold>'` that
-  // merely shares a wrapper param's name would falsely mark the threshold wired
-  // even when the wrapper is never called with that literal. Uses the parent
-  // pointers enabled by `createSourceFile(..., setParentNodes=true)`.
+  // module-level binding maps — otherwise a `const t = '<threshold>'` that merely
+  // shares a wrapper param's name would falsely mark the threshold wired even
+  // when the wrapper is never called with that literal. Uses the parent pointers
+  // enabled by `createSourceFile(..., setParentNodes=true)`.
   const isParamInScope = (id: TS.Identifier): boolean => {
     for (let p: TS.Node | undefined = id.parent; p; p = p.parent) {
       if (
@@ -568,12 +687,30 @@ export function astWireFacts(content: string, ts: TsModule): WireFacts {
     return false;
   };
 
-  // Pass 3 — resolve threshold args at every reader call AND depth-1 wrapper call.
+  // Resolve an identifier to a string literal through an N-LEVEL `const`/`let`
+  // alias chain (`const b = a; const a = 'x'`). Guards at EVERY hop: a binding
+  // that points at a function parameter is not followed (the threshold flows in
+  // at the call site), and a `seen` set breaks reference cycles (`const a = b;
+  // const b = a`) so resolution always terminates.
+  const resolveIdentifier = (id: TS.Identifier, seen: Set<string>): string | undefined => {
+    if (isParamInScope(id)) return undefined;
+    const name = id.text;
+    if (seen.has(name)) return undefined;
+    seen.add(name);
+    const lit = stringBindings.get(name);
+    if (lit !== undefined) return lit;
+    const next = aliasBindings.get(name);
+    if (next) return resolveIdentifier(next, seen);
+    return undefined;
+  };
+
+  // Pass 3 — resolve threshold args at every reader call AND every wrapper call
+  // (at each param index the fixpoint proved forwards to the reader).
   const resolveArg = (expr: TS.Expression | undefined): string | undefined => {
     if (!expr) return undefined;
     const lit = literalOf(expr);
     if (lit !== undefined) return lit;
-    if (ts.isIdentifier(expr) && !isParamInScope(expr)) return stringBindings.get(expr.text);
+    if (ts.isIdentifier(expr)) return resolveIdentifier(expr, new Set());
     return undefined;
   };
   const callsReaderWith = new Set<string>();
@@ -586,8 +723,10 @@ export function astWireFacts(content: string, ts: TsModule): WireFacts {
     }
     const c = n.expression;
     if (ts.isIdentifier(c) && wrappers.has(c.text)) {
-      const s = resolveArg(n.arguments[wrappers.get(c.text)!]);
-      if (s !== undefined) callsReaderWith.add(s);
+      for (const idx of wrappers.get(c.text)!) {
+        const s = resolveArg(n.arguments[idx]);
+        if (s !== undefined) callsReaderWith.add(s);
+      }
     }
   });
 
@@ -649,7 +788,7 @@ const wireFactsCache = new Map<string, WireFacts>();
  * end) AND passes the threshold to a real `loadObservationsForThreshold` call
  * (caller end) — see {@link astWireFacts} for everything the AST path resolves
  * that the v1.49.953 regex could not (comments/strings, aliases, namespaces,
- * variable + depth-1 wrapper indirection). Facts are memoized per file content so
+ * N-level variable + N-hop wrapper indirection). Facts are memoized per file content so
  * {@link verifyVerdict}'s per-(threshold, file) calls parse each file once.
  */
 export function detectThresholdWire(threshold: string, content: string): boolean {
@@ -689,8 +828,9 @@ export function detectThresholdWireWith(
  * passing only dedicated end-to-end files (see {@link END_TO_END_TEST_RE}) —
  * that restriction is the v1.49.949 hardening over the v1.49.947 global-substring
  * scan; v1.49.953 added structural wire detection (a dedicated file that only
- * MENTIONS the threshold no longer counts) and v1.49.955 upgraded it from regex
- * to a TypeScript-AST + call-graph parse (see {@link detectThresholdWire}).
+ * MENTIONS the threshold no longer counts), v1.49.955 upgraded it from regex to a
+ * TypeScript-AST + depth-1 call-graph parse, and v1.49.956 lifted that to a full
+ * inter-procedural call-graph + N-level binding chains (see {@link detectThresholdWire}).
  */
 export function verifyVerdict(
   wired: readonly CalibratableThreshold[],
