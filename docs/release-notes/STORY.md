@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.956`.
+The story begins at `v1.0` and continues to `v1.49.957`.
 
-**999 chapters.** 998 have retrospectives.
+**1000 chapters.** 999 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -1007,3 +1007,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.954](v1.49.954/00-summary.md)** — PROJECT.md latest-shipped source eliminator (counter-cadence #25) · 2026-06-02
 - **[v1.49.955](v1.49.955/00-summary.md)** — AST/call-graph wire detector for the cadence verify axis (counter-cadence #26) · 2026-06-02
 - **[v1.49.956](v1.49.956/00-summary.md)** — inter-procedural call-graph + N-level binding for the cadence verify detector · 2026-06-02
+- **[v1.49.957](v1.49.957/00-summary.md)** — return-value dataflow for the cadence verify wire detector · 2026-06-02
