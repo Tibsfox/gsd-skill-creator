@@ -167,12 +167,13 @@
 #   SC_PRE_TAG_GATE_BYPASS=<csv>   skip these steps entirely
 #   SC_PRE_TAG_GATE_REQUIRE=<csv>  escalate WARN-only steps to BLOCKER
 #
-#   step-name vocabulary: build version-sequence vitest tools-suite tools-node-test completeness ci-gate
-#                         www-bundles depth-audit depth-audit-mus-elc claude-md catalog-index
-#                         tauri-boundary apply-to-self scaffolder-residue
-#                         citation-debt-sync story-drift discipline-coverage
-#                         sps-cohort-uniqueness nasa-canonical-layout
-#                         nasa-canonical-sidebar project-md
+#   step-name vocabulary: the gate's honored bypass tokens are the
+#   gate_bypassed "<token>" calls at each step below. The full list is enumerated
+#   AND parity-pinned in the runtime step-names help log + in
+#   tools/render-claude-md/env-vars.json (drift-guard:
+#   tests/integration/bypass-vocab-parity.test.ts). Core steps build, vitest,
+#   completeness, www-bundles run unconditionally; version-sequence keeps its own
+#   SC_SKIP_VERSION_SEQUENCE_CHECK — none is wired into this CSV.
 #
 # Legacy per-step env vars (SC_SKIP_*_GATE, SC_REQUIRE_*) are honored with a
 # DEPRECATION WARNING for one milestone cycle to ease migration.
@@ -228,10 +229,9 @@ log() {
 #   SC_PRE_TAG_GATE_REQUIRE=apply-to-self,citation-debt-sync,story-drift
 #       Escalate WARN-only steps to BLOCKER status.
 #
-# Step-name vocabulary (matches gate step labels):
-#   build version-sequence vitest tools-suite tools-node-test completeness ci-gate www-bundles
-#   depth-audit depth-audit-mus-elc claude-md catalog-index tauri-boundary apply-to-self
-#   scaffolder-residue citation-debt-sync story-drift
+# Step-name vocabulary: see the runtime step-names help log below +
+# tools/render-claude-md/env-vars.json (both parity-pinned by
+# tests/integration/bypass-vocab-parity.test.ts).
 #
 # Legacy SC_SKIP_* / SC_REQUIRE_* env vars continue to be honored with a
 # deprecation warning for one milestone cycle. Use the new CSV form for new
@@ -297,7 +297,7 @@ gate_required() {
 if [ -n "$_PTG_BYPASS_RAW" ] || [ -n "$_PTG_REQUIRE_RAW" ]; then
   [ -n "$_PTG_BYPASS_RAW" ]  && log "[pre-tag-gate] active BYPASS:  $_PTG_BYPASS_RAW"
   [ -n "$_PTG_REQUIRE_RAW" ] && log "[pre-tag-gate] active REQUIRE: $_PTG_REQUIRE_RAW"
-  log "[pre-tag-gate] (step names: build|version-sequence|vitest|tools-suite|tools-node-test|completeness|ci-gate|www-bundles|depth-audit|depth-audit-mus-elc|claude-md|catalog-index|tauri-boundary|apply-to-self|scaffolder-residue|citation-debt-sync|story-drift|discipline-coverage|sps-cohort-uniqueness|nasa-canonical-layout|nasa-canonical-sidebar|project-md|stale-known-unwired|state-backups)"
+  log "[pre-tag-gate] (step names: tools-suite|tools-node-test|integration|ci-gate|depth-audit|depth-audit-mus-elc|claude-md|card-template-length|catalog-index|tauri-boundary|apply-to-self|scaffolder-residue|citation-debt-sync|story-drift|discipline-coverage|sps-cohort-uniqueness|nasa-canonical-layout|nasa-canonical-sidebar|project-md|stale-known-unwired|state-backups)"
 fi
 
 # ----- step 0.5: STATE.md normalizer auto-run (v1.49.671, Lesson #10373) -----
