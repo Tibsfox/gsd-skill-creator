@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.963`.
+The story begins at `v1.0` and continues to `v1.49.964`.
 
-**1006 chapters.** 1005 have retrospectives.
+**1007 chapters.** 1006 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -1014,3 +1014,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.961](v1.49.961/00-summary.md)** — STATE.md backup-file two-layer closure (counter-cadence #28) · 2026-06-03
 - **[v1.49.962](v1.49.962/00-summary.md)** — bypass-vocab parity drift-guard (counter-cadence #29) · 2026-06-03
 - **[v1.49.963](v1.49.963/00-summary.md)** — verify-detector paren-param + nested-self-call bounds · 2026-06-03
+- **[v1.49.964](v1.49.964/00-summary.md)** — M4 orphan trunk-tmp cleanup on commit-lock reap · 2026-06-03
