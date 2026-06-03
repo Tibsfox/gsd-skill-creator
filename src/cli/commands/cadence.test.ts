@@ -667,15 +667,18 @@ describe('cadence command', () => {
       expect(detectThresholdWireWith(T, content, ts)).toBe(false);
     });
 
-    it('does NOT resolve a function that returns one of its PARAMETERS (documented forward bound)', () => {
-      // `id` returns its param `t`; the value depends on the call site, so the
-      // return is param-dependent and resolves to nothing — the param-return-
-      // through case is the next documented bound (not over-reported).
+    it('RESOLVES a function that returns one of its PARAMETERS via the call-site arg (v957 bound closed at v959)', () => {
+      // `id` returns its param `t`; v1.49.959 resolves it by substituting the
+      // matching argument at the call site — `id('${T}')` -> '${T}'. (Was the
+      // documented forward bound; full param-return-through coverage lives in the
+      // dedicated v959 describe block below.)
       const content =
         `${SUB}\n${READER_IMPORT}\n` +
         `function id(t: string) { return t; }\n` +
         `await loadObservationsForThreshold(id('${T}'), {});`;
-      expect(detectThresholdWireWith(T, content, ts)).toBe(false);
+      // AST: param-return-through substitutes the call-site arg.
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true);
+      // Regex: the reader arg is a call expression, not a quoted literal -> missed.
       expect(detectThresholdWireWith(T, content, null)).toBe(false);
     });
 
@@ -689,9 +692,11 @@ describe('cadence command', () => {
       expect(detectThresholdWireWith(X, content, ts)).toBe(false);
     });
 
-    it('does NOT resolve when ANY return path is unresolvable, even if another is a literal', () => {
-      // First return is the param (unresolvable); the literal second return does
-      // NOT rescue it — an unresolvable path means the literal is not guaranteed.
+    it('does NOT resolve when a param-return path DIVERGES from a literal return path', () => {
+      // `maybe` returns its param `t` on one path and the literal '${T}' on
+      // another. v1.49.959 resolves the param path to the call-site arg ('x'),
+      // which DIVERGES from '${T}' -> ambiguous -> not wired (the unified
+      // divergence guard spans literal AND param-substituted returns).
       const content =
         `${SUB}\n${READER_IMPORT}\n` +
         `function maybe(t: string, f: boolean) { if (f) { return t; } return '${T}'; }\n` +
@@ -872,6 +877,200 @@ describe('cadence command', () => {
       // separate counters; the shared counter drops returnExprs[getT] (count 2).
       expect(detectThresholdWireWith(T, content, ts)).toBe(false);
       expect(detectThresholdWireWith(X, content, ts)).toBe(false);
+    });
+  });
+
+  // --- v1.49.959 detector lifts: param-return-through (a fn returning one of its
+  // OWN params resolves via the call-site argument) + parenthesized-literal/call
+  // unwrap. Both are robustness-only (absent from every real e2e file; the live-
+  // repo invariant test confirms the verify verdict is byte-identical). Each
+  // positive is paired against the regex (which sees neither shape -> false).
+  describe('detectThresholdWire (AST) — param-return-through + parenthesized literal (v1.49.959)', () => {
+    const T = 'observation.retention_days';
+    const X = 'token_budget.max_percent';
+    const SUB = `import { runFoo } from '../../src/foo/foo-substrate.js';`;
+
+    // --- param-return-through (BOUND 1) ---
+    it('RESOLVES a NON-ZERO param index returned (pick(a, t) => t)', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function pick(a: string, t: string) { return t; }\n` +
+        `await loadObservationsForThreshold(pick('ignored', '${T}'), {});`;
+      // The arg at the RETURNED param's index ('${T}') is substituted, not arg 0.
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true);
+      expect(detectThresholdWireWith(T, content, null)).toBe(false);
+    });
+
+    it('RESOLVES a concise-arrow param identity (const id = (t) => t)', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `const id = (t: string) => t;\n` +
+        `await loadObservationsForThreshold(id('${T}'), {});`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true);
+    });
+
+    it('RESOLVES a param-return whose call-site arg is itself a const (id(lit))', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `const lit = '${T}';\n` +
+        `function id(t: string) { return t; }\n` +
+        `await loadObservationsForThreshold(id(lit), {});`;
+      // The substituted arg `lit` resolves through the binding map first.
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true);
+    });
+
+    it('COMPOSES param-return-through into a wrapper (outer(id(lit)))', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function id(t: string) { return t; }\n` +
+        `function outer(t: string) { return loadObservationsForThreshold(t, {}); }\n` +
+        `await outer(id('${T}'));`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true);
+    });
+
+    it('does NOT over-report a param-return called with a NON-literal arg (guard)', () => {
+      // The substituted arg is an unresolvable identifier -> undefined -> not wired.
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function id(t: string) { return t; }\n` +
+        `await loadObservationsForThreshold(id(unknownVar), {});`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(false);
+      expect(detectThresholdWireWith(T, content, null)).toBe(false);
+    });
+
+    it('drops a param-returning function declared TWICE (ambiguity drop covers returnParams)', () => {
+      // Shared declaration counter drops returnParams[id]; mutation guard for the
+      // `returnParams.delete(name)` line in the ambiguity loop.
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function id(t: string) { return t; }\n` +
+        `function w() { function id(t: string) { return t; } void id; }\n` +
+        `void w;\n` +
+        `await loadObservationsForThreshold(id('${T}'), {});`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(false);
+    });
+
+    it('UNDER-reports a nested self-call id(id(x)) but TERMINATES (documented bound)', () => {
+      // The `seen` cycle guard blocks the inner id() once the outer adds 'id',
+      // so the nested form is a safe under-report (not a hang) — the next bound.
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function id(t: string) { return t; }\n` +
+        `await loadObservationsForThreshold(id(id('${T}')), {});`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(false);
+    });
+
+    it('resolves the CORRECT threshold only through a param-return (no cross-wire)', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function id(t: string) { return t; }\n` +
+        `await loadObservationsForThreshold(id('${X}'), {});`;
+      expect(detectThresholdWireWith(X, content, ts)).toBe(true);
+      expect(detectThresholdWireWith(T, content, ts)).toBe(false);
+    });
+
+    it('does NOT over-report a param-return with an implicit-undefined fall-through (storage-gate guard)', () => {
+      // `maybe` returns its param `t` only when `c`; the !c path falls through to
+      // implicit undefined, so the literal is NOT guaranteed to reach the reader.
+      // The returnParams storage gate requires unconditionalExprReturn, so `maybe`
+      // is never stored -> not wired. Pins the `&& unconditionalExprReturn`
+      // conjunct for the PARAM path (mirrors the v957 finding-#2 guard, which only
+      // covered LITERAL returns; this is the asymmetric-unsafe over-report case).
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function maybe(c: boolean, t: string) { if (c) { return t; } }\n` +
+        `await loadObservationsForThreshold(maybe(true, '${T}'), {});`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(false);
+      expect(detectThresholdWireWith(T, content, null)).toBe(false);
+    });
+
+    it('does NOT over-report a param-return preceded by a bare `return;` (storage-gate guard)', () => {
+      // A bare `return;` is an undefined completion path -> unconditionalExprReturn
+      // false -> returnParams not stored even though the last statement returns the
+      // param. Second pin for the storage-gate conjunct on the param path.
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function maybe(c: boolean, t: string) { if (c) { return; } return t; }\n` +
+        `await loadObservationsForThreshold(maybe(false, '${T}'), {});`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(false);
+    });
+
+    // --- parenthesized literal / call (BOUND 2) ---
+    // Branch-coverage note (v959 review): the literalOf paren branch and the
+    // resolveExpr paren branch are each UNIQUELY killed by one test — literalOf by
+    // 'const t = (lit)' (decl-init reads literalOf directly) and resolveExpr by
+    // '(getT())' (a parenthesized CALL literalOf cannot see). The reader-arg paren
+    // tests below route through resolveExpr's unwrap, so they are end-to-end
+    // confirmations rather than independent literalOf-branch coverage.
+    it('RESOLVES a parenthesized literal reader arg (load((lit)))', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `await loadObservationsForThreshold(('${T}'), {});`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true);
+      expect(detectThresholdWireWith(T, content, null)).toBe(false);
+    });
+
+    it('RESOLVES a DOUBLE-parenthesized literal (load(((lit))))', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `await loadObservationsForThreshold((('${T}')), {});`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true);
+    });
+
+    it('RESOLVES a parenthesized as-const literal (load((lit as const)))', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `await loadObservationsForThreshold(('${T}' as const), {});`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true);
+    });
+
+    it('RESOLVES a const bound to a parenthesized literal (const t = (lit); load(t))', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `const t = ('${T}');\n` +
+        `await loadObservationsForThreshold(t, {});`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true);
+    });
+
+    it('RESOLVES an arrow returning a parenthesized literal (() => (lit))', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `const getT = () => ('${T}');\n` +
+        `await loadObservationsForThreshold(getT(), {});`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true);
+    });
+
+    it('RESOLVES a return of a parenthesized literal (return (lit))', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function getT() { return ('${T}'); }\n` +
+        `await loadObservationsForThreshold(getT(), {});`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true);
+    });
+
+    it('RESOLVES a parenthesized CALL reader arg (load((getT()))) — resolveExpr unwrap', () => {
+      // literalOf cannot see a call; resolveExpr must unwrap the paren to reach
+      // resolveCallReturn (dedicated mutation guard for the resolveExpr branch).
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function getT() { return '${T}'; }\n` +
+        `await loadObservationsForThreshold((getT()), {});`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true);
+    });
+
+    it('does NOT over-report a parenthesized unresolvable arg (load((unknownVar)))', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `await loadObservationsForThreshold((unknownVar), {});`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(false);
+    });
+
+    it('the public (memoized, lazy AST) detectThresholdWire resolves a param-return wire', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function id(t: string) { return t; }\n` +
+        `await loadObservationsForThreshold(id('${T}'), {});`;
+      expect(detectThresholdWire(T, content)).toBe(true);
     });
   });
 
