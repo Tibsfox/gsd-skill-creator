@@ -1,13 +1,14 @@
 # Release History
 
-1002 milestones shipped across the v1.0 → v1.49.959 arc. The table below lists every shipped release, newest first.
+1003 milestones shipped across the v1.0 → v1.49.960 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
-**Snapshot:** 1002 releases · 1001 with retrospectives · 763 with extracted lessons · quality A:662 B:98 C:62 D:12 F:168 (avg 84) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 1003 releases · 1002 with retrospectives · 763 with extracted lessons · quality A:662 B:98 C:62 D:12 F:169 (avg 84) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.960](release-notes/v1.49.960) | M4 intent-journal crash recovery for wedged commits | 2026-06-03 | 3 | — | — | [s](release-notes/v1.49.960/chapter/00-summary.md) [r](release-notes/v1.49.960/chapter/03-retrospective.md) [l](release-notes/v1.49.960/chapter/04-lessons.md) [c](release-notes/v1.49.960/chapter/99-context.md) | — | F 39 |  |
 | [v1.49.959](release-notes/v1.49.959) | param-return-through + parenthesized-literal detector lifts | 2026-06-03 | 3 | — | — | [s](release-notes/v1.49.959/chapter/00-summary.md) [r](release-notes/v1.49.959/chapter/03-retrospective.md) [l](release-notes/v1.49.959/chapter/04-lessons.md) [c](release-notes/v1.49.959/chapter/99-context.md) | — | F 33 |  |
 | [v1.49.958](release-notes/v1.49.958) | release-notes 5-file scaffolding source eliminator (counter-cadence #27) | 2026-06-02 | 3 | — | — | [s](release-notes/v1.49.958/chapter/00-summary.md) [r](release-notes/v1.49.958/chapter/03-retrospective.md) [l](release-notes/v1.49.958/chapter/04-lessons.md) [c](release-notes/v1.49.958/chapter/99-context.md) | — | F 28 |  |
 | [v1.49.957](release-notes/v1.49.957) | return-value dataflow for the cadence verify wire detector | 2026-06-02 | 3 | — | — | [s](release-notes/v1.49.957/chapter/00-summary.md) [r](release-notes/v1.49.957/chapter/03-retrospective.md) [l](release-notes/v1.49.957/chapter/04-lessons.md) [c](release-notes/v1.49.957/chapter/99-context.md) | — | F 40 |  |
