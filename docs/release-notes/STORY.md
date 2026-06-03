@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.958`.
+The story begins at `v1.0` and continues to `v1.49.959`.
 
-**1001 chapters.** 1000 have retrospectives.
+**1002 chapters.** 1001 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -1009,3 +1009,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.956](v1.49.956/00-summary.md)** — inter-procedural call-graph + N-level binding for the cadence verify detector · 2026-06-02
 - **[v1.49.957](v1.49.957/00-summary.md)** — return-value dataflow for the cadence verify wire detector · 2026-06-02
 - **[v1.49.958](v1.49.958/00-summary.md)** — release-notes 5-file scaffolding source eliminator (counter-cadence #27) · 2026-06-02
+- **[v1.49.959](v1.49.959/00-summary.md)** — param-return-through + parenthesized-literal lifts for the cadence verify detector · 2026-06-03
