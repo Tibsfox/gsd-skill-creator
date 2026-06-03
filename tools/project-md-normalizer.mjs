@@ -8,8 +8,7 @@
  * "Current Milestone" and had GAP-6 (DACP docs) flagged Open despite closure
  * at v1.49.572 T1c (`docs/substrate/semantic-channel.md`).
  *
- * What it does (check-only first ship; --write not implemented to avoid
- * auto-rewriting hand-authored prose):
+ * What --check does:
  *
  *   1. Verifies required top-level sections exist.
  *   2. Verifies the "Latest shipped release" version matches package.json.
@@ -17,25 +16,49 @@
  *      statuses come from a known enum.
  *   4. Surfaces "Last updated" staleness as a WARN.
  *
- * Conservative by design: this normalizer does NOT auto-rewrite prose. It
- * just surfaces drift so the operator can hand-edit. Mirrors the discipline
- * established by tools/state-md-normalizer.mjs (v1.49.783) but with a much
- * smaller automation scope, since PROJECT.md is prose-heavy.
+ * What --write does (v1.49.954 — the source-eliminator paired with --check's
+ * detector, completing the two-layer closure #10431 for the "Latest shipped
+ * release" hand-edit drift class):
+ *
+ *   `--write --version vX --name "..." [--date YYYY-MM-DD]` updates ONLY the
+ *   three STRUCTURED lines — "Latest shipped release", "Predecessor", and
+ *   "Last updated" — leaving ALL hand-authored prose untouched. It ROTATES the
+ *   current latest-shipped (version + name) into the Predecessor line, sets the
+ *   new latest-shipped from the args, and refreshes the Last-updated date. It is
+ *   idempotent (re-running when already at vX rotates nothing) and runs a
+ *   post-condition self-check (the result must pass --check's latest-shipped
+ *   validation). PROJECT.md is gitignored (local-only ground truth), so --write
+ *   is a LOCAL ship-sequence step (it replaces the manual hand-edit). The
+ *   conservative-by-design stance still holds: --write touches no prose, only
+ *   the deterministically-derivable structured lines.
  *
  * CLI flags:
- *   --check   Exit 1 if drift detected; print findings to stderr.
+ *   --check                       Exit 1 if drift detected; findings to stderr.
+ *   --write --version --name      Rewrite the structured lines (see above).
  *
  * Exit codes:
- *   0   no drift
- *   1   drift detected
- *   2   fatal error (file missing, malformed package.json, etc.)
+ *   0   no drift (--check) / write succeeded (--write)
+ *   1   drift detected (--check)
+ *   2   fatal error (file missing, malformed package.json, bad --write args)
  */
 
-import { readFileSync, existsSync, statSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, statSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const args = new Set(process.argv.slice(2));
 const CHECK_ONLY = args.has('--check') || args.size === 0;
+
+/** Em-dash used as the version/name separator (escape keeps this source ASCII). */
+const EM_DASH = '\u2014';
+
+/** Read a `--flag value` or `--flag=value` argument; undefined if absent. */
+function getArgValue(flag) {
+  const argv = process.argv.slice(2);
+  const i = argv.indexOf(flag);
+  if (i !== -1 && i + 1 < argv.length) return argv[i + 1];
+  const eq = argv.find((a) => a.startsWith(flag + '='));
+  return eq ? eq.slice(flag.length + 1) : undefined;
+}
 
 const REPO_ROOT = resolve(process.cwd());
 const PROJECT_PATH = resolve(REPO_ROOT, '.planning', 'PROJECT.md');
@@ -256,6 +279,74 @@ function formatFindings(findings) {
   return out.join('\n');
 }
 
+/**
+ * Match the "Latest shipped release" line, capturing:
+ *   [1] the prefix up to and including the `:** ` (preserves the parenthetical),
+ *   [2] the version (X.Y.Z, no leading v),
+ *   [3] the milestone name (between the `vX — ` and the closing `**`).
+ */
+const LATEST_LINE_RE =
+  /^(\*\*Latest shipped release[^:]*:\*\*\s*)\*\*v([0-9]+\.[0-9]+\.[0-9]+)\s+[—-]\s+([^*]+?)\*\*.*$/m;
+
+/** Match the "Predecessor" line up to its version + name (rewritten on rotate). */
+const PREDECESSOR_LINE_RE =
+  /^(\*\*Predecessor[^:]*:\*\*\s*)v[0-9]+\.[0-9]+\.[0-9]+\s+[—-]\s+.*$/m;
+
+/** Narrow, prose-preserving rewrite of the three structured PROJECT.md lines. */
+function writeMode() {
+  const body = readFileOrFail(PROJECT_PATH, '.planning/PROJECT.md');
+  const rawVersion = getArgValue('--version');
+  const name = getArgValue('--name');
+  if (!rawVersion || !name) {
+    console.error('[project-md-normalizer] FATAL: --write requires --version and --name');
+    process.exit(2);
+  }
+  const version = rawVersion.replace(/^v/, '');
+  const date = getArgValue('--date') ?? new Date().toISOString().slice(0, 10);
+
+  const m = body.match(LATEST_LINE_RE);
+  if (!m) {
+    console.error('[project-md-normalizer] FATAL: --write found no "Latest shipped release" line to rewrite');
+    process.exit(2);
+  }
+  const [, prefix, oldVersion, oldNameRaw] = m;
+  const oldName = oldNameRaw.trim();
+
+  let out = body;
+
+  // Rotate the current latest-shipped into the Predecessor line — but only when
+  // actually advancing (idempotent: re-running at the same version rotates
+  // nothing, so the predecessor is never clobbered with the current version).
+  if (oldVersion !== version && PREDECESSOR_LINE_RE.test(out)) {
+    out = out.replace(PREDECESSOR_LINE_RE, `$1v${oldVersion} ${EM_DASH} ${oldName}.`);
+  }
+
+  // Rewrite the latest-shipped line from the args (prefix/parenthetical preserved).
+  out = out.replace(
+    LATEST_LINE_RE,
+    `${prefix}**v${version} ${EM_DASH} ${name}** (shipped ${date}; tag \`v${version}\`).`,
+  );
+
+  // Refresh the Last-updated date, preserving any trailing prose after it.
+  out = out.replace(/^(\*\*Last updated:\*\*\s*)\d{4}-\d{2}-\d{2}/m, `$1${date}`);
+
+  writeFileSync(PROJECT_PATH, out, 'utf8');
+
+  // Post-condition self-check (#10431 source-eliminator + post-condition): the
+  // result MUST pass the latest-shipped validation against the written version.
+  const findings = [];
+  checkLatestShippedRelease(out, version, findings);
+  const drift = findings.find((f) => f.code === 'latest-shipped-version-drift');
+  if (drift) {
+    console.error(`[project-md-normalizer] FATAL: post-write check failed: ${drift.message}`);
+    process.exit(2);
+  }
+
+  const action = oldVersion === version ? 'refreshed (already at)' : `rotated ${oldVersion} -> predecessor;`;
+  console.log(`[project-md-normalizer] WRITE: ${action} latest-shipped now v${version} (${date}).`);
+  process.exit(0);
+}
+
 function main() {
   const body = readFileOrFail(PROJECT_PATH, '.planning/PROJECT.md');
   const expectedVersion = loadPackageVersion();
@@ -291,4 +382,8 @@ function main() {
   process.exit(0);
 }
 
-main();
+if (args.has('--write')) {
+  writeMode();
+} else {
+  main();
+}

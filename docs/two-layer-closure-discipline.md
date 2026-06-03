@@ -37,6 +37,24 @@ The drift originated when an operator hand-edited STATE.md after T14 step 11
 the normalizer. v807 added the detector; v813 added the source eliminator.
 Both layers shipped together as a complete closure.
 
+## Case study: the PROJECT.md "Latest shipped release" drift class
+
+This doc flagged the PROJECT.md case as OPEN at v813 — a detector existed but no
+source eliminator, so the structured "Latest shipped release" / "Predecessor" /
+"Last updated" lines were hand-edited every ship. Counter-cadence #25 closed it
+at v1.49.954, the detector-first inversion of the STATE.md case:
+
+| Layer | Ship | Mechanism |
+|---|---|---|
+| Detector | v1.49.785 (S5) | `tools/project-md-normalizer.mjs --check` — pre-tag-gate step 17 verifies the "Latest shipped release" version against package.json (tolerant of the predecessor patch during T14) |
+| Source eliminator | v1.49.954 | `tools/project-md-normalizer.mjs --write --version --name` — narrow, prose-preserving rewrite of the three STRUCTURED lines only: rotates the current latest-shipped into Predecessor, sets the new latest-shipped, refreshes Last-updated. Idempotent + a post-condition self-check. Replaces the per-ship hand-edit |
+
+The drift was visible twice during the v1.49.951-953 batch (two hand-edits + one
+pre-tag-gate WARN). PROJECT.md is gitignored (local-only ground truth), so the
+source eliminator is a LOCAL ship-sequence step; the conservative-by-design
+normalizer touches no hand-authored prose, only the deterministically-derivable
+structured lines.
+
 ## When to apply
 
 Whenever a retrospective surfaces a drift class with this shape:
@@ -47,7 +65,9 @@ Whenever a retrospective surfaces a drift class with this shape:
 
 Examples in scope:
 - STATE.md hand-edit + normalize (closed at v813)
-- PROJECT.md "Latest shipped release" hand-edit (open; flagged at v813)
+- PROJECT.md "Latest shipped release" hand-edit (closed at v1.49.954 —
+  `project-md-normalizer.mjs --write` is the source eliminator; pre-tag-gate
+  step 17 / `--check` is the pre-existing detector; see the case study below)
 - Release-notes file scaffolding (any drift between v<X> dir and expected
   5-file set; currently caught by completeness check but no source eliminator)
 

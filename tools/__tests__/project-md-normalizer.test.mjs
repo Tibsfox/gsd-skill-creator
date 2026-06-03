@@ -21,6 +21,7 @@ import {
   mkdtempSync,
   mkdirSync,
   writeFileSync,
+  readFileSync,
   rmSync,
 } from 'node:fs';
 import { join, dirname } from 'node:path';
@@ -211,5 +212,96 @@ describe('project-md-normalizer', () => {
     setupEnv({ projectContent: fixture, packageVersion: '1.49.785' });
     const r = runScript('--check');
     expect(r.exitCode).toBe(0);
+  });
+});
+
+// ─── --write mode (v1.49.954) ─────────────────────────────────────────────────
+
+const EM = '—'; // em-dash
+
+/** A richer fixture with both a Latest-shipped and a Predecessor line. */
+function makeProjectMdWithPredecessor(latestV, latestName, predV, predName, date = '2026-06-01') {
+  return [
+    '# Test Project Overview',
+    '',
+    '## What This Is',
+    'Test project description.',
+    '',
+    '## Core Value',
+    'Test value.',
+    '',
+    '## Current State',
+    '',
+    `**Latest shipped release (on dev = main, 0-commit drift):** **v${latestV} ${EM} ${latestName}** (shipped ${date}; tag \`v${latestV}\`).`,
+    `**Predecessor (last shipped before this):** v${predV} ${EM} ${predName}.`,
+    '',
+    'HAND-AUTHORED PROSE that must be preserved verbatim across --write.',
+    '',
+    '## Tech Stack',
+    'TS + Rust.',
+    '',
+    '## Architecture Gaps',
+    '',
+    '| ID | Gap | Priority | Status |',
+    '|----|-----|----------|--------|',
+    '| GAP-1 | Sample gap | Critical | CLOSED (test citation) |',
+    '',
+    `**Last updated:** ${date} ${EM} test fixture.`,
+    '',
+  ].join('\n');
+}
+
+describe('project-md-normalizer --write', () => {
+  it('W1: rotates latest->predecessor, sets new latest, refreshes date', () => {
+    const fixture = makeProjectMdWithPredecessor('1.49.952', 'Old Milestone', '1.49.951', 'Older Milestone');
+    setupEnv({ projectContent: fixture, packageVersion: '1.49.953' });
+    const r = runScript('--write --version v1.49.953 --name New_Milestone --date 2026-06-02');
+    expect(r.exitCode).toBe(0);
+    expect(r.stdout).toContain('latest-shipped now v1.49.953');
+
+    const written = readFileSync(projectPath, 'utf8');
+    expect(written).toContain(`**v1.49.953 ${EM} New_Milestone** (shipped 2026-06-02; tag \`v1.49.953\`).`);
+    // The old latest (v952) rotated into Predecessor.
+    expect(written).toContain(`**Predecessor (last shipped before this):** v1.49.952 ${EM} Old Milestone.`);
+    expect(written).toContain('**Last updated:** 2026-06-02');
+  });
+
+  it('W2: preserves hand-authored prose and the GAP table verbatim', () => {
+    const fixture = makeProjectMdWithPredecessor('1.49.952', 'Old', '1.49.951', 'Older');
+    setupEnv({ projectContent: fixture, packageVersion: '1.49.953' });
+    runScript('--write --version 1.49.953 --name X --date 2026-06-02');
+    const written = readFileSync(projectPath, 'utf8');
+    expect(written).toContain('HAND-AUTHORED PROSE that must be preserved verbatim across --write.');
+    expect(written).toContain('| GAP-1 | Sample gap | Critical | CLOSED (test citation) |');
+    expect(written).toContain('## Tech Stack');
+  });
+
+  it('W3: is idempotent — re-running at the same version does not clobber the predecessor', () => {
+    const fixture = makeProjectMdWithPredecessor('1.49.953', 'Current', '1.49.952', 'Prev');
+    setupEnv({ projectContent: fixture, packageVersion: '1.49.953' });
+    const r = runScript('--write --version 1.49.953 --name Current --date 2026-06-02');
+    expect(r.exitCode).toBe(0);
+    const written = readFileSync(projectPath, 'utf8');
+    // Predecessor stays v952 (NOT rotated to v953).
+    expect(written).toContain(`**Predecessor (last shipped before this):** v1.49.952 ${EM} Prev.`);
+    expect(written).toContain(`**v1.49.953 ${EM} Current**`);
+  });
+
+  it('W4: --write without --version or --name exits 2', () => {
+    const fixture = makeProjectMdWithPredecessor('1.49.952', 'Old', '1.49.951', 'Older');
+    setupEnv({ projectContent: fixture, packageVersion: '1.49.953' });
+    expect(runScript('--write --version v1.49.953').exitCode).toBe(2);
+    expect(runScript('--write --name OnlyName').exitCode).toBe(2);
+  });
+
+  it('W5: after --write, --check passes against the bumped package.json (two-layer pairing)', () => {
+    const fixture = makeProjectMdWithPredecessor('1.49.952', 'Old', '1.49.951', 'Older');
+    setupEnv({ projectContent: fixture, packageVersion: '1.49.953' });
+    // Omit --date so Last-updated defaults to today -> the staleness check never
+    // trips (this test asserts a fully-clean --check).
+    runScript('--write --version 1.49.953 --name New');
+    const check = runScript('--check');
+    expect(check.exitCode).toBe(0);
+    expect(check.stdout).toContain('no drift');
   });
 });
