@@ -55,6 +55,22 @@ are stable references; insertion of new steps SHOULD use decimal sub-steps
 (e.g. `2.5`) to preserve numbering continuity for downstream docs.
 
 ```
+0.   Release-notes scaffold + fill (BEFORE step 1's completeness gate; v1.49.958)
+       - `node tools/release-history/scaffold-release-notes.mjs --version v<X>
+         --name "<Subtitle>" [--type "<type(scope)>"]` emits the canonical 5-file
+         structure (README + chapter/{00,03,04,99}) with a scaffold-pending
+         marker per section. Re-running creates only missing files and resets
+         untouched (pristine) scaffolds; any file with hand-authored edits
+         (filled OR partially filled) is preserved, so a re-run never clobbers
+         work-in-progress. `--check` reports structure drift without writing.
+       - FILL every marked section with real content. All scaffold-pending
+         markers MUST be removed before shipping: step 1's completeness gate
+         (`check-completeness.mjs --strict`) BLOCKs any file still carrying one.
+         Source eliminator + FILL gate = the two-layer closure for the
+         release-notes scaffolding drift class (#10431/#10436).
+       - Do NOT reproduce the scaffold-pending marker literal in published prose
+         (#10462 self-referential trap) — describe it, never quote it.
+
 1.   Pre-tag-gate composite (tools/pre-tag-gate.sh)
        - build, vitest, completeness, depth-audit, CLAUDE.md drift,
          catalog-index drift, tauri-boundary, apply-to-self,

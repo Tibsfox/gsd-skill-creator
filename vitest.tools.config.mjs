@@ -65,6 +65,7 @@ export default defineConfig({
       'tools/release-history/__tests__/db-pg-credentials.test.mjs',
       'tools/release-history/__tests__/refresh-advisory-exit.test.mjs',
       'tools/release-history/__tests__/publish-leak-allowlist.test.mjs',
+      'tools/release-history/__tests__/scaffold-release-notes.test.mjs',
       'scripts/__tests__/ci-gate-enum.test.mjs',
       'scripts/__tests__/apply-to-self.test.mjs',
       'scripts/__tests__/apply-to-self-posix-ere.test.mjs',

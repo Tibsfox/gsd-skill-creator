@@ -55,6 +55,28 @@ source eliminator is a LOCAL ship-sequence step; the conservative-by-design
 normalizer touches no hand-authored prose, only the deterministically-derivable
 structured lines.
 
+## Case study: the release-notes 5-file scaffolding drift class
+
+This doc flagged the release-notes case as OPEN through v957 — the completeness
+check detected a malformed `docs/release-notes/<version>/` directory, but the
+five files (README + four chapters) were hand-created before each tag with no
+source eliminator. Counter-cadence #27 closed it at v1.49.958:
+
+| Layer | Ship | Mechanism |
+|---|---|---|
+| Detector | pre-existing + v1.49.958 | `tools/release-history/check-completeness.mjs` — missing-file + under-200-byte BLOCKs (pre-tag-gate step 3); v1.49.958 adds a BLOCK for any file still carrying the scaffold-pending marker (the FILL half) |
+| Source eliminator | v1.49.958 | `tools/release-history/scaffold-release-notes.mjs --write` — emits the canonical 5-file structure deterministically, prose-preserving (preserves any file with hand-authored edits — filled OR partially filled; only missing files + untouched pristine scaffolds are written), with a non-strict presence post-condition |
+
+This case added a refinement worth carrying forward: when the eliminator emits a
+fillable SKELETON rather than a finished artifact, the closure needs a ship-time
+FILL gate so the skeleton cannot ship unfilled. Structure-presence (the
+scaffolder's `--check`) and fill-completeness (`check-completeness --strict`) are
+distinct properties on distinct surfaces — keeping them separate lets the
+eliminator's post-condition be non-strict while the ship gate still refuses an
+unfilled scaffold. The marker token is the single source of truth shared by the
+two tools (imported, not duplicated — #10461) and is kept out of all published
+release-notes prose (#10462 self-referential trap).
+
 ## When to apply
 
 Whenever a retrospective surfaces a drift class with this shape:
@@ -69,7 +91,8 @@ Examples in scope:
   `project-md-normalizer.mjs --write` is the source eliminator; pre-tag-gate
   step 17 / `--check` is the pre-existing detector; see the case study below)
 - Release-notes file scaffolding (any drift between v<X> dir and expected
-  5-file set; currently caught by completeness check but no source eliminator)
+  5-file set; detector = completeness check, source eliminator =
+  `scaffold-release-notes.mjs` — closed at v1.49.958, counter-cadence #27)
 
 Examples out of scope (single-step procedures or no detector available):
 - "Run tests before pushing" — the test is the detector + the procedure;
@@ -137,13 +160,13 @@ When designing a closure for a procedure-rooted drift:
 
 ## Forward observation
 
-If a 3rd two-layer closure ships in a future counter-cadence ship, this
-discipline becomes ESTABLISHED-and-applied (currently 1 case study, this
-ship promoting it). Possible future closures the discipline applies to:
+This discipline is now ESTABLISHED-and-applied: three two-layer closures have
+shipped — STATE.md (detector v807 / eliminator v813), PROJECT.md (detector v785
+/ eliminator v954), and release-notes 5-file scaffolding (detector pre-existing /
+eliminator v958). The next procedure-rooted or file-overwrite drift class should
+be closed with both layers as a matter of course, treated as an application of
+#10431 / #10436 rather than a new discipline. Remaining candidate:
 
-- PROJECT.md "Latest shipped release" hand-edit drift
-- Release-notes 5-file scaffolding drift (completeness check is the detector;
-  no source eliminator yet)
 - STATE.md `.backup-*` file accumulation (no detector; would need both layers)
 
 ## File-overwrite drift sub-class (Lesson #10436)

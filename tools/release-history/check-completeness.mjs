@@ -23,6 +23,12 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { resolve, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+// Single source of truth for the scaffold-pending marker (v1.49.958). The
+// scaffolder emits this exact HTML comment per unfilled section; --strict below
+// BLOCKS any release-notes file still carrying it (the FILL half of the
+// two-layer closure #10431). Matching the full COMMENT (not the bare token)
+// lets published prose name the token freely without self-tripping (#10462).
+import { SCAFFOLD_PENDING_MARKER } from './scaffold-release-notes.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(HERE, '..', '..');
@@ -74,7 +80,10 @@ if (!/^v\d+\.\d+(\.\d+)?$/.test(version)) {
   process.exit(2);
 }
 
-const releaseDir = join(REPO_ROOT, 'docs', 'release-notes', version);
+// Release-notes root: default <repo>/docs/release-notes; SC_RELEASE_NOTES_ROOT
+// relocates it (test-isolation / alternate-tree seam, shared with the scaffolder).
+const releaseNotesRoot = process.env.SC_RELEASE_NOTES_ROOT || join(REPO_ROOT, 'docs', 'release-notes');
+const releaseDir = join(releaseNotesRoot, version);
 
 const findings = [];
 for (const rel of REQUIRED) {
@@ -85,11 +94,19 @@ for (const rel of REQUIRED) {
   }
   if (strict) {
     try {
-      const sz = readFileSync(p, 'utf8').length;
-      if (sz < 200) {
+      const content = readFileSync(p, 'utf8');
+      if (content.length < 200) {
         // v1.49.585 C05: undersized files BLOCK under --strict (was WARN; the gate
         // is intended to be blocking when the operator explicitly opted in to strict).
-        findings.push({ severity: 'BLOCK', file: rel, reason: `too short (${sz} bytes; need ≥200)` });
+        findings.push({ severity: 'BLOCK', file: rel, reason: `too short (${content.length} bytes; need ≥200)` });
+      }
+      // v1.49.958: an unfilled scaffold (one still carrying the scaffold-pending
+      // marker emitted by scaffold-release-notes.mjs) must not ship. This is the
+      // ship-time FILL gate paired with the structure source eliminator
+      // (two-layer-closure #10431/#10436). Run the scaffolder, fill the marked
+      // sections, then ship.
+      if (content.includes(SCAFFOLD_PENDING_MARKER)) {
+        findings.push({ severity: 'BLOCK', file: rel, reason: 'scaffold-pending: replace the scaffolded section markers with real content before shipping' });
       }
     } catch (e) {
       findings.push({ severity: 'BLOCK', file: rel, reason: `unreadable: ${e.message}` });
