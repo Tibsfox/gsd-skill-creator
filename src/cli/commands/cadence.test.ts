@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import * as ts from 'typescript';
 
 import { ALL_CALIBRATABLE_THRESHOLDS } from '../../bounded-learning/types.js';
 import type { CalibratableThreshold } from '../../bounded-learning/types.js';
@@ -9,6 +10,9 @@ import {
   calibrateVerdict,
   verifyVerdict,
   detectThresholdWire,
+  detectThresholdWireWith,
+  regexWireFacts,
+  astWireFacts,
   buildCadenceReport,
   cadenceCommand,
   readAxisAdvances,
@@ -18,10 +22,15 @@ import {
   CALIBRATE_OBSERVATION_CONJUNCT,
   CADENCE_SHIPS_SINCE_CONJUNCT,
   END_TO_END_TEST_RE,
+  SUBSTRATE_SPECIFIER_RE,
+  READER_MODULE_RE,
   type AxisReport,
   type CadenceStatus,
   type ThresholdObservationCount,
 } from './cadence.js';
+
+/** A realistic reader import line — every real end-to-end test has one. */
+const READER_IMPORT = `import { loadObservationsForThreshold } from '../../src/bounded-learning/observation-sources.js';`;
 
 /** Build a synthetic docs/release-notes/ dir with per-version cadence_advances frontmatter. */
 function makeReleaseNotes(versions: Array<{ v: string; advances?: string[] }>): string {
@@ -150,7 +159,9 @@ describe('cadence command', () => {
     });
 
     it('a calibration-reader call WITHOUT a substrate import does not wire', () => {
-      const content = `await loadObservationsForThreshold('${T}', { path });`;
+      // Reader imported + a real call, but NO substrate import -> isolates the
+      // substrate-end conjunct.
+      const content = `${READER_IMPORT}\nawait loadObservationsForThreshold('${T}', { path });`;
       expect(detectThresholdWire(T, content)).toBe(false);
     });
 
@@ -159,9 +170,9 @@ describe('cadence command', () => {
       expect(detectThresholdWire(T, content)).toBe(false);
     });
 
-    it('detects a multi-line reader call (the call style some tests use)', () => {
+    it('detects a multi-line reader call (the call style every real test uses)', () => {
       const content =
-        `import { appendEvt } from '../../src/x-events.js';\n` +
+        `import { appendEvt } from '../../src/x-events.js';\n${READER_IMPORT}\n` +
         `const obs = await loadObservationsForThreshold(\n  '${T}',\n  { eventsPath },\n);`;
       expect(detectThresholdWire(T, content)).toBe(true);
     });
@@ -180,13 +191,227 @@ describe('cadence command', () => {
 
     it('accepts suggestion-store and -events substrate module specifiers', () => {
       const sug =
-        `import { SuggestionStore } from '../../src/detection/suggestion-store.js';\n` +
+        `import { SuggestionStore } from '../../src/detection/suggestion-store.js';\n${READER_IMPORT}\n` +
         `await loadObservationsForThreshold('${T}', { p });`;
       const evt =
-        `import { appendEvt } from '../../src/bounded-learning/x-events.js';\n` +
+        `import { appendEvt } from '../../src/bounded-learning/x-events.js';\n${READER_IMPORT}\n` +
         `await loadObservationsForThreshold('${T}', { p });`;
       expect(detectThresholdWire(T, sug)).toBe(true);
       expect(detectThresholdWire(T, evt)).toBe(true);
+    });
+  });
+
+  // --- v1.49.955: AST + dataflow + depth-1 call-graph precision the regex lacked.
+  // Each case pairs the AST verdict (detectThresholdWireWith(..., ts)) against the
+  // regex fallback verdict (..., null) to MAKE the difference load-bearing: the
+  // AST path is correct, and the regex path is shown to be wrong in the same test.
+  describe('detectThresholdWire (AST) — precision over the v1.49.953 regex', () => {
+    const T = 'observation.retention_days';
+    const SUB = `import { runFoo } from '../../src/foo/foo-substrate.js';`;
+
+    it('IGNORES the reader call when it appears only in a JSDoc/comment (regex false-positives)', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `/** example: loadObservationsForThreshold('${T}', opts) */\n` +
+        `// also loadObservationsForThreshold('${T}', opts)\n` +
+        `const noop = 1;`;
+      // AST: the call text lives in comments -> no CallExpression -> not wired.
+      expect(detectThresholdWireWith(T, content, ts)).toBe(false);
+      // Regex: raw-text match in the comment -> WRONGLY wired. The AST fixes this.
+      expect(detectThresholdWireWith(T, content, null)).toBe(true);
+    });
+
+    it('IGNORES the reader call when it appears only inside a string literal', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `const sql = "loadObservationsForThreshold('${T}', x)";`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(false);
+      expect(detectThresholdWireWith(T, content, null)).toBe(true);
+    });
+
+    it('IGNORES a substrate "import" that is only in a comment (regex false-positives)', () => {
+      const content =
+        `${READER_IMPORT}\n` +
+        `// import { appendEvt } from '../../src/foo-events.js';\n` +
+        `await loadObservationsForThreshold('${T}', { p });`;
+      // AST: the only -events reference is a comment, not a real ImportDeclaration.
+      expect(detectThresholdWireWith(T, content, ts)).toBe(false);
+      // Regex: SUBSTRATE_MODULE_RE matches the commented `from '...-events.js'`.
+      expect(detectThresholdWireWith(T, content, null)).toBe(true);
+    });
+
+    it('RESOLVES a threshold passed via a string-literal const (regex false-negatives)', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `const T = '${T}';\n` +
+        `await loadObservationsForThreshold(T, { p });`;
+      // AST: dataflow resolves T -> literal.
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true);
+      // Regex: the call arg is an identifier, not a quoted literal -> missed.
+      expect(detectThresholdWireWith(T, content, null)).toBe(false);
+    });
+
+    it("RESOLVES a 'x' as const binding", () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `const T = '${T}' as const;\n` +
+        `await loadObservationsForThreshold(T, { p });`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true);
+    });
+
+    it('FOLLOWS an import alias (regex false-negatives)', () => {
+      const content =
+        `${SUB}\n` +
+        `import { loadObservationsForThreshold as load } from '../../src/bounded-learning/observation-sources.js';\n` +
+        `await load('${T}', { p });`;
+      // AST: the alias binding resolves to the imported reader.
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true);
+      // Regex: looks for the literal `loadObservationsForThreshold(` -> missed.
+      expect(detectThresholdWireWith(T, content, null)).toBe(false);
+    });
+
+    it('FOLLOWS a namespace import (os.loadObservationsForThreshold)', () => {
+      const content =
+        `${SUB}\n` +
+        `import * as os from '../../src/bounded-learning/observation-sources.js';\n` +
+        `await os.loadObservationsForThreshold('${T}', { p });`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true);
+      // The regex ALSO matches here — but only because its lookbehind cannot tell
+      // `os.` apart from a bare call; that blindness is WRONG in the next case.
+      expect(detectThresholdWireWith(T, content, null)).toBe(true);
+    });
+
+    it('does NOT follow a namespace import from a non-reader module (binding-accuracy)', () => {
+      const content =
+        `${SUB}\n` +
+        `import * as other from '../../src/some/other-module.js';\n` +
+        `await other.loadObservationsForThreshold('${T}', { p });`;
+      // AST: the namespace is not from observation-sources -> not a reader call.
+      expect(detectThresholdWireWith(T, content, ts)).toBe(false);
+      // Regex: blindly matches `other.loadObservationsForThreshold('...')` -> WRONGLY wired.
+      expect(detectThresholdWireWith(T, content, null)).toBe(true);
+    });
+
+    it('FOLLOWS a depth-1 wrapper that forwards a parameter to the reader', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function readFor(t: string) { return loadObservationsForThreshold(t, { p }); }\n` +
+        `await readFor('${T}');`;
+      // AST: the wrapper forwards its 1st param -> resolve the call-site literal.
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true);
+      // Regex: `readFor('...')` is not a reader call; `loadObservationsForThreshold(t` has no literal.
+      expect(detectThresholdWireWith(T, content, null)).toBe(false);
+    });
+
+    it('FOLLOWS an arrow-const wrapper forwarding a non-zero param index', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `const readFor = (path: string, t: string) => loadObservationsForThreshold(t, { path });\n` +
+        `await readFor('/tmp/x', '${T}');`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true);
+    });
+
+    it('does NOT match a LOCAL function that merely shares the reader name (binding-accuracy)', () => {
+      const content =
+        `${SUB}\n` +
+        `function loadObservationsForThreshold(_t: string, _o: unknown) { return []; }\n` +
+        `loadObservationsForThreshold('${T}', {});`;
+      // AST: the callee resolves to a LOCAL decl, not an imported binding -> not wired.
+      expect(detectThresholdWireWith(T, content, ts)).toBe(false);
+      // Regex: raw-text match -> WRONGLY wired.
+      expect(detectThresholdWireWith(T, content, null)).toBe(true);
+    });
+
+    it('does NOT cross-wire a different threshold under dataflow resolution', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `const T = 'token_budget.max_percent';\n` +
+        `await loadObservationsForThreshold(T, { p });`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(false);
+      expect(detectThresholdWireWith('token_budget.max_percent', content, ts)).toBe(true);
+    });
+
+    it('a wrapper param shadowing a same-named threshold const does NOT over-report (scope-accuracy)', () => {
+      // The reader call inside `w` forwards the PARAMETER `t`; the module-level
+      // `const t` merely shares the name. Because `w` is never called with a
+      // literal, the threshold is NOT wired — `isParamInScope` keeps the param
+      // from resolving against the flat const map (review finding #3).
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `const t = 'token_budget.max_percent';\n` +
+        `function w(t: string) { return loadObservationsForThreshold(t, {}); }\n` +
+        `void t;`;
+      expect(detectThresholdWireWith('token_budget.max_percent', content, ts)).toBe(false);
+    });
+
+    it('but the SAME wrapper IS wired when actually called with the literal (fix keeps the feature)', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `const t = 'token_budget.max_percent';\n` +
+        `function w(t: string) { return loadObservationsForThreshold(t, {}); }\n` +
+        `await w('token_budget.max_percent');`;
+      expect(detectThresholdWireWith('token_budget.max_percent', content, ts)).toBe(true);
+    });
+
+    it('the public (lazy-loaded, memoized) detectThresholdWire uses the AST path', () => {
+      // Variable indirection is resolvable ONLY by the AST path; if the public
+      // entry point silently fell back to regex (compiler failed to load), this
+      // would be false. So it doubles as proof loadTypeScript() works in-process.
+      const content = `${SUB}\n${READER_IMPORT}\nconst T = '${T}';\nawait loadObservationsForThreshold(T, {});`;
+      expect(detectThresholdWire(T, content)).toBe(true);
+    });
+  });
+
+  describe('WireFacts primitives — astWireFacts / regexWireFacts / specifier REs', () => {
+    const T = 'observation.retention_days';
+
+    it('astWireFacts extracts both conjuncts from a realistic wired file', () => {
+      const f = astWireFacts(wiredContent(T), ts);
+      expect(f.importsSubstrate).toBe(true);
+      expect([...f.callsReaderWith]).toContain(T);
+    });
+
+    it('astWireFacts reports importsSubstrate=false when no substrate import', () => {
+      const f = astWireFacts(`${READER_IMPORT}\nawait loadObservationsForThreshold('${T}', {});`, ts);
+      expect(f.importsSubstrate).toBe(false);
+      expect([...f.callsReaderWith]).toEqual([T]); // caller end still detected
+    });
+
+    it('regexWireFacts collects every literal passed to the reader (fallback shape)', () => {
+      const content =
+        `import { x } from '../foo-events.js';\n` +
+        `loadObservationsForThreshold('a', {}); loadObservationsForThreshold('b', {});`;
+      const f = regexWireFacts(content);
+      expect(f.importsSubstrate).toBe(true);
+      expect([...f.callsReaderWith].sort()).toEqual(['a', 'b']);
+    });
+
+    it('SUBSTRATE_SPECIFIER_RE matches the three substrate naming schemes only', () => {
+      expect(SUBSTRATE_SPECIFIER_RE.test('../x/foo-substrate.js')).toBe(true);
+      expect(SUBSTRATE_SPECIFIER_RE.test('../x/foo-events.js')).toBe(true);
+      expect(SUBSTRATE_SPECIFIER_RE.test('../detection/suggestion-store.js')).toBe(true);
+      expect(SUBSTRATE_SPECIFIER_RE.test('../x/observation-sources.js')).toBe(false);
+    });
+
+    it('READER_MODULE_RE matches the observation-sources module', () => {
+      expect(READER_MODULE_RE.test('../../src/bounded-learning/observation-sources.js')).toBe(true);
+      expect(READER_MODULE_RE.test('../../src/some/other-module.js')).toBe(false);
+    });
+
+    it('FAIL-SOFT (#10427): a throwing compiler degrades to the regex fallback', () => {
+      // Force the AST branch to throw, then assert computeWireFacts caught it and
+      // returned the regex verdict (wiredContent is a direct-literal file the
+      // regex handles). Exercises the silent catch path that the `..., null`
+      // cases bypass (they never enter astWireFacts at all).
+      const boom = {
+        createSourceFile() {
+          throw new Error('synthetic compiler failure');
+        },
+      } as unknown as typeof ts;
+      const T = 'observation.retention_days';
+      expect(detectThresholdWireWith(T, wiredContent(T), boom)).toBe(true);
+      // And a non-wired file still reads false through the fallback.
+      expect(detectThresholdWireWith(T, mentionContent(T), boom)).toBe(false);
     });
   });
 

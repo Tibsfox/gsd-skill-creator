@@ -35,14 +35,18 @@
  * context. The verify axis checks the DEDICATED
  * `*-end-to-end.integration.test.ts` files (the #10453 substrate->calibration
  * closing-move convention): a wired threshold is "covered" iff one of those
- * dedicated end-to-end tests STRUCTURALLY WIRES it (v1.49.953). Structural
- * wiring requires the test to exercise BOTH ends of the wire — pass the
- * threshold as a string-literal argument to a real `loadObservationsForThreshold(`
- * call (the calibration read / caller end) AND import a substrate/events module
- * (the write end) — replacing the v1.49.947/950 string-presence heuristic, which
- * an incidental comment mention satisfied. The v1.49.949 restriction to dedicated
- * end-to-end files still applies. It is still a structural (not full call-graph)
- * check, but a dedicated file that merely MENTIONS a threshold no longer counts.
+ * dedicated end-to-end tests STRUCTURALLY WIRES it. Structural wiring requires
+ * the test to exercise BOTH ends of the wire — pass the threshold to a real
+ * `loadObservationsForThreshold` call (the calibration read / caller end) AND
+ * import a substrate/events module (the write end). v1.49.953 replaced the
+ * v1.49.947/950 string-presence heuristic (which an incidental comment mention
+ * satisfied) with a regex; v1.49.955 replaces that regex with a TypeScript-AST
+ * parse + intra-file dataflow + depth-1 call-graph (see {@link astWireFacts}):
+ * comments/JSDoc/string occurrences no longer match, the callee must resolve to
+ * the IMPORTED reader binding (aliases and namespace imports followed), and the
+ * threshold argument is resolved through variable and wrapper indirection. The
+ * regex survives as a graceful fallback when the compiler cannot be loaded. The
+ * v1.49.949 restriction to dedicated end-to-end files still applies.
  *
  * Exit codes (with `--check`) — a TRUE gate, fires only on definitive overdue:
  *   0  no checked axis is `overdue` (not-overdue / candidate / manual)
@@ -65,6 +69,9 @@
 
 import { join } from 'node:path';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
+import { createRequire } from 'node:module';
+
+import type * as TS from 'typescript';
 
 import { ALL_CALIBRATABLE_THRESHOLDS } from '../../bounded-learning/types.js';
 import type { CalibratableThreshold } from '../../bounded-learning/types.js';
@@ -372,38 +379,302 @@ export const CALIBRATION_READER = 'loadObservationsForThreshold';
  */
 export const SUBSTRATE_MODULE_RE = /from\s+['"][^'"]*(?:-substrate|-events|suggestion-store)[^'"]*['"]/;
 
-/** Escape a string for safe embedding inside a RegExp source. */
-function escapeRegExp(s: string): string {
-  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+/**
+ * Minimal structural type for the lazily-required TypeScript compiler module.
+ * Declared via `typeof import('typescript')` so it is ERASED at runtime — the
+ * compiler is never statically imported (it would load on EVERY CLI dispatch,
+ * since `dispatch.ts` imports this module eagerly). It is required lazily inside
+ * {@link loadTypeScript}, only when the verify axis actually parses a test file.
+ */
+type TsModule = typeof import('typescript');
+
+/** Import-specifier fragments that mark a SUBSTRATE (write-side) module. */
+export const SUBSTRATE_SPECIFIER_RE = /(?:-substrate|-events|suggestion-store)/;
+
+/**
+ * Module-specifier fragment identifying the calibration-reader module. Used to
+ * qualify an `import * as ns from '...'` namespace import before treating
+ * `ns.loadObservationsForThreshold(...)` as a real reader call.
+ */
+export const READER_MODULE_RE = /observation-sources/;
+
+/**
+ * Global form of the v1.49.953 caller regex: captures EVERY threshold literal
+ * passed to a `loadObservationsForThreshold(` call. The `(?<![A-Za-z0-9_])`
+ * lookbehind anchors a real identifier boundary (a name merely ENDING with the
+ * reader's name does not match). Used by the regex fallback only.
+ */
+const READER_CALL_GLOBAL_RE = new RegExp(
+  `(?<![A-Za-z0-9_])${CALIBRATION_READER}\\(\\s*['"]([^'"]+)['"]`,
+  'g',
+);
+
+/**
+ * The two facts that decide whether a test wires a threshold, extracted ONCE per
+ * file (independent of any specific threshold):
+ *   - `importsSubstrate` — the file imports a substrate/events module (write end).
+ *   - `callsReaderWith`  — the set of threshold string-literals actually passed to
+ *     a real `loadObservationsForThreshold` call (caller end).
+ *
+ * A threshold is wired iff `importsSubstrate && callsReaderWith.has(threshold)`.
+ */
+export interface WireFacts {
+  importsSubstrate: boolean;
+  callsReaderWith: ReadonlySet<string>;
 }
 
 /**
- * Structural substrate-to-caller wire detection (v1.49.953). A dedicated
- * end-to-end test "wires" a threshold iff it exercises BOTH ends of the
- * substrate -> calibration wire:
+ * Regex fallback — the v1.49.953 detector, generalized to emit every threshold a
+ * file's reader calls reference. Used when the TypeScript compiler cannot be
+ * loaded (e.g. a production CLI installed without devDependencies) or when AST
+ * parsing throws. Sound for the common direct-literal call style, but blind to
+ * comments/strings, import aliases, namespace imports, and variable/wrapper
+ * indirection — the exact gaps {@link astWireFacts} closes.
+ */
+export function regexWireFacts(content: string): WireFacts {
+  const callsReaderWith = new Set<string>();
+  for (const m of content.matchAll(READER_CALL_GLOBAL_RE)) callsReaderWith.add(m[1]);
+  return { importsSubstrate: SUBSTRATE_MODULE_RE.test(content), callsReaderWith };
+}
+
+/**
+ * AST + intra-file dataflow + depth-1 call-graph wire detection (v1.49.955).
+ * Parses the test source with the TypeScript compiler and resolves the wire
+ * STRUCTURALLY rather than by raw-text regex:
  *
- *   - CALLER end: the threshold appears as a string-literal argument to a real
- *     `loadObservationsForThreshold(` call (the calibration read), not merely
- *     somewhere in the file. Whitespace/newlines between the `(` and the literal
- *     are allowed (the multi-line call style some tests use).
- *   - SUBSTRATE end: the file imports a substrate/events module (the write side).
+ *   - CALLER end is a real `CallExpression` — comments, JSDoc examples, and
+ *     string literals that merely CONTAIN the call text are ignored (they are not
+ *     call nodes). The callee must resolve to the IMPORTED reader binding (a
+ *     locally defined function that happens to share the name does NOT match);
+ *     import ALIASES (`loadObservationsForThreshold as load`) and namespace
+ *     imports (`import * as os from '...observation-sources...'` -> `os.load…`)
+ *     are followed.
+ *   - The threshold ARGUMENT is resolved through intra-file dataflow: a direct
+ *     string literal, a no-substitution template, `'x' as const`, OR an
+ *     identifier bound to a string-literal `const`/`let` (one level).
+ *   - A depth-1 CALL GRAPH is followed: a call to a local wrapper function that
+ *     forwards one of its parameters to the reader resolves the wrapper's
+ *     argument at the call site (`function w(t){ return load(t) }; w('x')`).
+ *   - SUBSTRATE end is a real `ImportDeclaration` whose specifier matches
+ *     {@link SUBSTRATE_SPECIFIER_RE} (an import line inside a comment does not
+ *     count).
  *
- * This replaces the v1.49.947/950 string-presence heuristic (`content.includes`),
- * which an incidental comment mention or an unrelated reference satisfied. It is
- * still a structural (not full call-graph) check, but it requires the test to
- * actually call the calibration reader WITH the threshold AND import a substrate
- * — a much stronger signal that the substrate -> calibration wire is exercised.
+ * Inter-procedural resolution is capped at one hop (a wrapper calling another
+ * wrapper is not followed) and binding resolution at one level — both bounded on
+ * purpose and documented here; the regex fallback covers neither. The
+ * `const`/`let` binding map is also scope-FLAT (module-order last-write-wins): a
+ * same-named string binding redeclared in a nested block is not lexically
+ * resolved. The one place this matters — a parameter shadowing a module const of
+ * the same name — IS handled (see `isParamInScope`); the residual (two block
+ * consts of the same name, both string-literal, one threshold-shaped) is a
+ * contrived shape absent from every real test and no worse than the regex.
+ */
+export function astWireFacts(content: string, ts: TsModule): WireFacts {
+  const sf = ts.createSourceFile('e2e.ts', content, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
+
+  let importsSubstrate = false;
+  const readerLocals = new Set<string>(); // local names bound to the imported reader
+  const readerNamespaces = new Set<string>(); // `import * as ns` from the reader module
+  const stringBindings = new Map<string, string>(); // const/let NAME = '<literal>'
+  const wrappers = new Map<string, number>(); // local fn NAME -> param index forwarded to reader
+
+  // Pass 1 — imports: substrate flag + reader binding names (named + alias + namespace).
+  for (const stmt of sf.statements) {
+    if (!ts.isImportDeclaration(stmt) || !ts.isStringLiteral(stmt.moduleSpecifier)) continue;
+    const spec = stmt.moduleSpecifier.text;
+    if (SUBSTRATE_SPECIFIER_RE.test(spec)) importsSubstrate = true;
+    const nb = stmt.importClause?.namedBindings;
+    if (nb && ts.isNamedImports(nb)) {
+      for (const el of nb.elements) {
+        const imported = (el.propertyName ?? el.name).text;
+        if (imported === CALIBRATION_READER) readerLocals.add(el.name.text);
+      }
+    } else if (nb && ts.isNamespaceImport(nb) && READER_MODULE_RE.test(spec)) {
+      readerNamespaces.add(nb.name.text);
+    }
+  }
+
+  const eachNode = (node: TS.Node, cb: (n: TS.Node) => void): void => {
+    cb(node);
+    node.forEachChild((c) => eachNode(c, cb));
+  };
+
+  const calleeIsReader = (call: TS.CallExpression): boolean => {
+    const c = call.expression;
+    if (ts.isIdentifier(c)) return readerLocals.has(c.text);
+    if (ts.isPropertyAccessExpression(c) && ts.isIdentifier(c.expression)) {
+      return readerNamespaces.has(c.expression.text) && c.name.text === CALIBRATION_READER;
+    }
+    return false;
+  };
+
+  // A string-literal-ish initializer/argument resolved WITHOUT following identifiers.
+  const literalOf = (expr: TS.Expression): string | undefined => {
+    if (ts.isStringLiteralLike(expr)) return expr.text;
+    if (ts.isAsExpression(expr)) return literalOf(expr.expression);
+    return undefined;
+  };
+
+  // Pass 2 — collect string-literal bindings and depth-1 reader wrappers.
+  const wrapperParamIndex = (
+    fn: TS.FunctionDeclaration | TS.ArrowFunction | TS.FunctionExpression,
+  ): number | undefined => {
+    if (!fn.body) return undefined;
+    const params = fn.parameters.map((p) => (ts.isIdentifier(p.name) ? p.name.text : ''));
+    let idx: number | undefined;
+    eachNode(fn.body, (n) => {
+      if (idx !== undefined || !ts.isCallExpression(n) || !calleeIsReader(n)) return;
+      const a0 = n.arguments[0];
+      if (a0 && ts.isIdentifier(a0)) {
+        const i = params.indexOf(a0.text);
+        if (i >= 0) idx = i;
+      }
+    });
+    return idx;
+  };
+  eachNode(sf, (n) => {
+    if (ts.isVariableDeclaration(n) && ts.isIdentifier(n.name) && n.initializer) {
+      const v = literalOf(n.initializer);
+      if (v !== undefined) stringBindings.set(n.name.text, v);
+      else if (ts.isArrowFunction(n.initializer) || ts.isFunctionExpression(n.initializer)) {
+        const i = wrapperParamIndex(n.initializer);
+        if (i !== undefined) wrappers.set(n.name.text, i);
+      }
+    } else if (ts.isFunctionDeclaration(n) && n.name) {
+      const i = wrapperParamIndex(n);
+      if (i !== undefined) wrappers.set(n.name.text, i);
+    }
+  });
+
+  // True iff `id` is bound as a PARAMETER of a lexically-enclosing function. Such
+  // an identifier is locally bound (the threshold flows in at the wrapper's call
+  // site, resolved separately) and must NOT be resolved against the flat
+  // module-level `stringBindings` — otherwise a `const t = '<threshold>'` that
+  // merely shares a wrapper param's name would falsely mark the threshold wired
+  // even when the wrapper is never called with that literal. Uses the parent
+  // pointers enabled by `createSourceFile(..., setParentNodes=true)`.
+  const isParamInScope = (id: TS.Identifier): boolean => {
+    for (let p: TS.Node | undefined = id.parent; p; p = p.parent) {
+      if (
+        (ts.isFunctionDeclaration(p) ||
+          ts.isFunctionExpression(p) ||
+          ts.isArrowFunction(p) ||
+          ts.isMethodDeclaration(p)) &&
+        p.parameters.some((par) => ts.isIdentifier(par.name) && par.name.text === id.text)
+      ) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  // Pass 3 — resolve threshold args at every reader call AND depth-1 wrapper call.
+  const resolveArg = (expr: TS.Expression | undefined): string | undefined => {
+    if (!expr) return undefined;
+    const lit = literalOf(expr);
+    if (lit !== undefined) return lit;
+    if (ts.isIdentifier(expr) && !isParamInScope(expr)) return stringBindings.get(expr.text);
+    return undefined;
+  };
+  const callsReaderWith = new Set<string>();
+  eachNode(sf, (n) => {
+    if (!ts.isCallExpression(n)) return;
+    if (calleeIsReader(n)) {
+      const s = resolveArg(n.arguments[0]);
+      if (s !== undefined) callsReaderWith.add(s);
+      return;
+    }
+    const c = n.expression;
+    if (ts.isIdentifier(c) && wrappers.has(c.text)) {
+      const s = resolveArg(n.arguments[wrappers.get(c.text)!]);
+      if (s !== undefined) callsReaderWith.add(s);
+    }
+  });
+
+  return { importsSubstrate, callsReaderWith };
+}
+
+/**
+ * Lazily require the TypeScript compiler (memoized for the process). Returns
+ * `null` if it cannot be loaded — the detector then degrades to
+ * {@link regexWireFacts}. typescript is a devDependency; a production CLI
+ * installed without devDeps lacks it, but the cadence command is a repo-meta
+ * tool that only runs from inside the repo (where it is present), so the AST path
+ * is the live one and the fallback is a safety net.
+ */
+let tsLoadAttempted = false;
+let tsModuleCache: TsModule | null = null;
+function loadTypeScript(): TsModule | null {
+  if (tsLoadAttempted) return tsModuleCache;
+  tsLoadAttempted = true;
+  try {
+    tsModuleCache = createRequire(import.meta.url)('typescript') as TsModule;
+  } catch {
+    tsModuleCache = null;
+  }
+  return tsModuleCache;
+}
+
+/**
+ * Compute {@link WireFacts}: AST when `ts` is available, regex fallback otherwise
+ * (compiler not installed) or if the parse throws. Pure given `ts`.
+ *
+ * FAIL-SOFT contract (failure-mode-contracts #10427): this degrades SILENTLY to
+ * the weaker regex on both compiler-missing and parse-throw. That is the correct
+ * direction here precisely BECAUSE the verify axis is an ADVISORY gate — its
+ * worst silent failure is a missed cadence nudge, never a broken ship or a
+ * spurious `overdue` (the divergences all err toward over-reporting coverage,
+ * the conservative direction for a coverage gate; `cadence` is wired into no hook
+ * and not into pre-tag-gate/CI). The general static-analysis-tool rule (#10450)
+ * prefers fail-LOUD; this is a documented, test-paired exception for an advisory
+ * surface. The throw-then-regex path is exercised by a dedicated test.
+ */
+function computeWireFacts(content: string, ts: TsModule | null): WireFacts {
+  if (ts) {
+    try {
+      return astWireFacts(content, ts);
+    } catch {
+      // fail-soft (#10427): advisory gate — degrade to regex rather than throw.
+      return regexWireFacts(content);
+    }
+  }
+  return regexWireFacts(content);
+}
+
+const wireFactsCache = new Map<string, WireFacts>();
+
+/**
+ * Structural substrate-to-caller wire detection (v1.49.955, AST). A dedicated
+ * end-to-end test "wires" a threshold iff it imports a substrate module (write
+ * end) AND passes the threshold to a real `loadObservationsForThreshold` call
+ * (caller end) — see {@link astWireFacts} for everything the AST path resolves
+ * that the v1.49.953 regex could not (comments/strings, aliases, namespaces,
+ * variable + depth-1 wrapper indirection). Facts are memoized per file content so
+ * {@link verifyVerdict}'s per-(threshold, file) calls parse each file once.
  */
 export function detectThresholdWire(threshold: string, content: string): boolean {
-  // The `(?<![A-Za-z0-9_])` guard anchors the call to a real identifier boundary
-  // so a hypothetical function whose name merely ENDS with the reader's name does
-  // not match.
-  const callerRe = new RegExp(
-    `(?<![A-Za-z0-9_])${CALIBRATION_READER}\\(\\s*['"]${escapeRegExp(threshold)}['"]`,
-  );
-  const callsCalibrationReader = callerRe.test(content);
-  const importsSubstrate = SUBSTRATE_MODULE_RE.test(content);
-  return callsCalibrationReader && importsSubstrate;
+  let facts = wireFactsCache.get(content);
+  if (!facts) {
+    facts = computeWireFacts(content, loadTypeScript());
+    if (wireFactsCache.size > 256) wireFactsCache.clear();
+    wireFactsCache.set(content, facts);
+  }
+  return facts.importsSubstrate && facts.callsReaderWith.has(threshold);
+}
+
+/**
+ * Deterministic-seam variant of {@link detectThresholdWire} for tests: force the
+ * AST path by passing a real `ts` module, or the regex fallback by passing
+ * `null`. Not memoized (each call recomputes), so both paths can be exercised
+ * independently within one process.
+ */
+export function detectThresholdWireWith(
+  threshold: string,
+  content: string,
+  ts: TsModule | null,
+): boolean {
+  const facts = computeWireFacts(content, ts);
+  return facts.importsSubstrate && facts.callsReaderWith.has(threshold);
 }
 
 /**
@@ -417,8 +688,9 @@ export function detectThresholdWire(threshold: string, content: string): boolean
  * the on-disk `tests/integration/` directory. The caller is responsible for
  * passing only dedicated end-to-end files (see {@link END_TO_END_TEST_RE}) —
  * that restriction is the v1.49.949 hardening over the v1.49.947 global-substring
- * scan; the v1.49.953 structural wire detection hardens it further (a dedicated
- * file that only MENTIONS the threshold no longer counts).
+ * scan; v1.49.953 added structural wire detection (a dedicated file that only
+ * MENTIONS the threshold no longer counts) and v1.49.955 upgraded it from regex
+ * to a TypeScript-AST + call-graph parse (see {@link detectThresholdWire}).
  */
 export function verifyVerdict(
   wired: readonly CalibratableThreshold[],
