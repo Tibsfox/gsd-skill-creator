@@ -442,8 +442,9 @@ export function regexWireFacts(content: string): WireFacts {
 /**
  * AST + intra-file dataflow + inter-procedural call-graph wire detection
  * (v1.49.955 introduced the AST path; v1.49.956 lifted the depth caps to full
- * inter-procedural resolution). Parses the test source with the TypeScript
- * compiler and resolves the wire STRUCTURALLY rather than by raw-text regex:
+ * inter-procedural resolution; v1.49.957 added return-value dataflow). Parses the
+ * test source with the TypeScript compiler and resolves the wire STRUCTURALLY
+ * rather than by raw-text regex:
  *
  *   - CALLER end is a real `CallExpression` — comments, JSDoc examples, and
  *     string literals that merely CONTAIN the call text are ignored (they are not
@@ -453,11 +454,17 @@ export function regexWireFacts(content: string): WireFacts {
  *     imports (`import * as os from '...observation-sources...'` -> `os.load…`)
  *     are followed.
  *   - The threshold ARGUMENT is resolved through intra-file dataflow: a direct
- *     string literal, a no-substitution template, `'x' as const`, OR an
- *     identifier bound to a string literal through an N-LEVEL `const`/`let` alias
- *     chain (`const b = a; const a = 'x'`). Chains are cycle-guarded (a visited
- *     set) and param-guarded at EVERY hop (an alias that resolves to a function
- *     parameter is not followed — the threshold flows in at the call site).
+ *     string literal, a no-substitution template, `'x' as const`, an identifier
+ *     bound to a string literal through an N-LEVEL `const`/`let` alias chain
+ *     (`const b = a; const a = 'x'`), OR a call to a local function that RETURNS
+ *     a string literal (`loadObservationsForThreshold(getThreshold())`, or a
+ *     `const t = getThreshold()` binding read at the call) — the v1.49.957
+ *     return-value dataflow. Chains are cycle-guarded (a visited set, shared
+ *     across the alias and return-cycle guards) and param-guarded at EVERY hop
+ *     (an alias that resolves to a function parameter is not followed — the
+ *     threshold flows in at the call site). A function that returns one of its
+ *     own parameters is NOT resolved (the value depends on the call site; that
+ *     param-return-through case is the documented next bound).
  *   - An N-HOP CALL GRAPH is followed: a monotone fixpoint computes which
  *     `(local function, parameter index)` pairs transitively forward to the
  *     reader's threshold argument — directly (`function w(t){ return load(t) }`)
@@ -472,22 +479,25 @@ export function regexWireFacts(content: string): WireFacts {
  *     count).
  *
  * The depth caps the v1.49.955 detector documented (one wrapper hop, one binding
- * level) are now lifted; the regex fallback still covers neither. Wrapper
- * detection spans free `function` declarations and `const`-bound arrow/function
+ * level) are lifted, and the v1.49.956-documented return-value bound is closed by
+ * v1.49.957; the regex fallback still covers none of these. Wrapper and return
+ * detection span free `function` declarations and `const`-bound arrow/function
  * expressions (the forms every test uses) — methods on classes remain out of
  * scope (no real e2e test is class-based).
  *
- * Resolution is name-based, not fully lexically-scoped, so three guards keep it
+ * Resolution is name-based, not fully lexically-scoped, so four guards keep it
  * from over-reporting a wire when a name means different things in different
  * scopes (all err toward NOT wiring — the conservative direction for a coverage
  * gate): (1) `collectFn` attributes call arguments to a function's parameters via
  * `eachOwnNode`, which does NOT descend into nested function bodies, so a nested
  * callback's same-named param is never mistaken for the outer function's; (2) a
  * binding NAME declared more than once in the file (`const x` at two scopes) is
- * dropped as AMBIGUOUS rather than resolved against an arbitrary one; (3)
- * `isParamInScope` stops every binding-resolution hop from following a name that
- * is actually a parameter in scope. The residual after these (e.g. a single name
- * declared once but read across genuinely distinct lexical scopes) is a contrived
+ * dropped as AMBIGUOUS rather than resolved against an arbitrary one; (3) a
+ * function NAME with a body declared more than once is likewise dropped before
+ * return-value resolution; (4) `isParamInScope` stops every binding-resolution
+ * hop from following a name that is actually a parameter in scope. The residual
+ * after these (a single name declared once but read across genuinely distinct
+ * lexical scopes; a function that returns one of its parameters) is a contrived
  * shape absent from every real test and no worse than the regex.
  */
 export function astWireFacts(content: string, ts: TsModule): WireFacts {
@@ -498,6 +508,7 @@ export function astWireFacts(content: string, ts: TsModule): WireFacts {
   const readerNamespaces = new Set<string>(); // `import * as ns` from the reader module
   const stringBindings = new Map<string, string>(); // const/let NAME = '<literal>'
   const aliasBindings = new Map<string, TS.Identifier>(); // const/let NAME = <otherIdentifier>
+  const callBindings = new Map<string, TS.CallExpression>(); // const/let NAME = someFn(...)
   const bindingDeclCount = new Map<string, number>(); // declarations per binding name
 
   // Pass 1 — imports: substrate flag + reader binding names (named + alias + namespace).
@@ -569,6 +580,15 @@ export function astWireFacts(content: string, ts: TsModule): WireFacts {
   }
   const fns = new Map<string, FnInfo>();
 
+  // Per local function: the expressions it can RETURN (its OWN scope only —
+  // nested function returns belong to the nested function). Used to resolve a
+  // reader/wrapper call whose threshold ARGUMENT is a call to a local function
+  // returning a string literal — `loadObservationsForThreshold(getThreshold())`
+  // (v1.49.957 return-value dataflow). Kept separate from FnInfo (which models
+  // PARAM forwarding) because a literal return is param-independent: it resolves
+  // from the function body alone, never from the call site's arguments.
+  const returnExprs = new Map<string, TS.Expression[]>();
+
   // Pass 2a — collect, for each local function, the forwarding facts above.
   const collectFn = (
     name: string,
@@ -579,7 +599,19 @@ export function astWireFacts(content: string, ts: TsModule): WireFacts {
     const paramIndexOf = (id: TS.Identifier): number => params.indexOf(id.text);
     const readerParamArgs: number[] = [];
     const edges: FnInfo['edges'] = [];
+    const rets: TS.Expression[] = [];
+    // True only while every completion path is known to return an EXPRESSION.
+    // A bare `return;` or an implicit fall-through is a path that yields
+    // `undefined` at runtime, so the literal is not guaranteed to reach the
+    // reader — such a function must NOT resolve to its literal returns (review
+    // finding #2, v1.49.957; the divergence guard in resolveCallReturn drops it).
+    let unconditionalExprReturn = true;
     eachOwnNode(fn.body, (n) => {
+      if (ts.isReturnStatement(n)) {
+        if (n.expression) rets.push(n.expression);
+        else unconditionalExprReturn = false; // bare `return;` -> undefined path
+        return;
+      }
       if (!ts.isCallExpression(n)) return;
       if (calleeIsReader(n)) {
         const a0 = n.arguments[0];
@@ -601,9 +633,27 @@ export function astWireFacts(content: string, ts: TsModule): WireFacts {
         if (argMap.length > 0) edges.push({ callee: c.text, argMap });
       }
     });
+    if (ts.isBlock(fn.body)) {
+      // A block can complete via an implicit `return undefined` unless its LAST
+      // statement is a return-with-expression. Conservatively treat anything else
+      // (a trailing if/loop/expression statement, an empty body) as a possible
+      // undefined completion path so the literal returns do not resolve.
+      const last = fn.body.statements[fn.body.statements.length - 1];
+      if (!last || !(ts.isReturnStatement(last) && last.expression)) unconditionalExprReturn = false;
+    } else {
+      rets.push(fn.body); // arrow concise body: the body IS the (only) return value
+    }
     if (readerParamArgs.length > 0 || edges.length > 0) {
       fns.set(name, { params, readerParamArgs, edges });
     }
+    if (rets.length > 0 && unconditionalExprReturn) {
+      returnExprs.set(name, (returnExprs.get(name) ?? []).concat(rets));
+    }
+    // One shared declaration counter (v1.49.957): every binding AND every bodied
+    // function increments it, so a name that is ambiguous in ANY way — declared
+    // twice as a binding, twice as a function, or once as each — is dropped from
+    // every resolution map below (extends the v1.49.956 binding ambiguity drop).
+    bindingDeclCount.set(name, (bindingDeclCount.get(name) ?? 0) + 1);
   };
   eachNode(sf, (n) => {
     if (ts.isVariableDeclaration(n) && ts.isIdentifier(n.name) && n.initializer) {
@@ -613,6 +663,11 @@ export function astWireFacts(content: string, ts: TsModule): WireFacts {
         bindingDeclCount.set(n.name.text, (bindingDeclCount.get(n.name.text) ?? 0) + 1);
       } else if (ts.isIdentifier(n.initializer)) {
         aliasBindings.set(n.name.text, n.initializer);
+        bindingDeclCount.set(n.name.text, (bindingDeclCount.get(n.name.text) ?? 0) + 1);
+      } else if (ts.isCallExpression(n.initializer)) {
+        // const NAME = getThreshold() — a binding whose value is a call's return
+        // (v1.49.957). Resolved later via the same return-value dataflow.
+        callBindings.set(n.name.text, n.initializer);
         bindingDeclCount.set(n.name.text, (bindingDeclCount.get(n.name.text) ?? 0) + 1);
       } else if (ts.isArrowFunction(n.initializer) || ts.isFunctionExpression(n.initializer)) {
         collectFn(n.name.text, n.initializer);
@@ -627,10 +682,18 @@ export function astWireFacts(content: string, ts: TsModule): WireFacts {
   // could pick the wrong scope's value and over-report a wire. Drop such names so
   // resolution stays conservative (an unresolved arg is simply not wired),
   // matching the regex fallback's behavior (review finding, v1.49.956).
+  // A name declared more than once (across bindings AND bodied functions) is
+  // ambiguous under the flat maps — a fn-local `const x`/`function x` shadowing a
+  // module-level one of the same name. Drop it from EVERY resolution map so the
+  // call/identifier resolves to nothing rather than against an arbitrary scope
+  // (v1.49.957 extends the v1.49.956 binding ambiguity drop to functions and
+  // call-bindings via the shared counter).
   for (const [name, count] of bindingDeclCount) {
     if (count > 1) {
       stringBindings.delete(name);
       aliasBindings.delete(name);
+      callBindings.delete(name);
+      returnExprs.delete(name);
     }
   }
 
@@ -672,6 +735,21 @@ export function astWireFacts(content: string, ts: TsModule): WireFacts {
   // shares a wrapper param's name would falsely mark the threshold wired even
   // when the wrapper is never called with that literal. Uses the parent pointers
   // enabled by `createSourceFile(..., setParentNodes=true)`.
+  //
+  // A parameter's binding name can be an identifier OR a destructuring pattern
+  // (`{ t }`, `[t]`, `{ a: t }`, `{ t } = {}`, `{ a: { t } }`); each binds its
+  // INNER identifier names locally, so they too flow in at the call site and must
+  // not resolve against the flat module maps (review finding #1, v1.49.957 — a
+  // destructured param defeated the prior identifier-only check and over-reported;
+  // this also closed the same latent hole on the v1.49.956 wrapper/direct path).
+  const bindingNameBinds = (name: TS.BindingName, target: string): boolean => {
+    if (ts.isIdentifier(name)) return name.text === target;
+    for (const el of name.elements) {
+      if (ts.isOmittedExpression(el)) continue;
+      if (bindingNameBinds(el.name, target)) return true;
+    }
+    return false;
+  };
   const isParamInScope = (id: TS.Identifier): boolean => {
     for (let p: TS.Node | undefined = id.parent; p; p = p.parent) {
       if (
@@ -679,7 +757,7 @@ export function astWireFacts(content: string, ts: TsModule): WireFacts {
           ts.isFunctionExpression(p) ||
           ts.isArrowFunction(p) ||
           ts.isMethodDeclaration(p)) &&
-        p.parameters.some((par) => ts.isIdentifier(par.name) && par.name.text === id.text)
+        p.parameters.some((par) => bindingNameBinds(par.name, id.text))
       ) {
         return true;
       }
@@ -701,18 +779,64 @@ export function astWireFacts(content: string, ts: TsModule): WireFacts {
     if (lit !== undefined) return lit;
     const next = aliasBindings.get(name);
     if (next) return resolveIdentifier(next, seen);
+    const call = callBindings.get(name);
+    if (call) return resolveCallReturn(call, seen);
+    return undefined;
+  };
+
+  // Resolve a call to a LOCAL function to the single string literal it RETURNS,
+  // when that literal is the same on every completion path — the v1.49.957
+  // return-value dataflow that closes the v1.49.956-documented bound
+  // (`loadObservationsForThreshold(getThreshold())`). Only the function-name
+  // form `f(...)` is followed (a method call `o.m()` is not a local function).
+  // Call ARGUMENTS are ignored on purpose: a param-independent literal return
+  // resolves from the body alone, while a function returning one of its
+  // parameters yields `undefined` here — the value depends on the call site, the
+  // param-return-through case left as the next documented forward bound (this
+  // holds for identifier AND destructured params via `isParamInScope`).
+  // Conservative on divergence: the function only enters `returnExprs` when it
+  // UNCONDITIONALLY returns an expression on every path (collectFn drops it on a
+  // bare `return;` or an implicit `undefined` fall-through); and here, if any
+  // collected return is unresolvable, or two paths resolve to different literals,
+  // the call resolves to `undefined` (not wired). The shared `seen` set breaks
+  // return cycles (`function a(){ return b(); } function b(){ return a(); }`) and
+  // is threaded across the binding/alias guards so a single name is never
+  // resolved twice on one path.
+  const resolveCallReturn = (call: TS.CallExpression, seen: Set<string>): string | undefined => {
+    const callee = call.expression;
+    if (!ts.isIdentifier(callee)) return undefined;
+    const name = callee.text;
+    if (seen.has(name)) return undefined;
+    const rets = returnExprs.get(name);
+    if (!rets || rets.length === 0) return undefined;
+    seen.add(name);
+    let resolved: string | undefined;
+    for (const r of rets) {
+      const v = resolveExpr(r, seen);
+      if (v === undefined) return undefined;
+      if (resolved === undefined) resolved = v;
+      else if (resolved !== v) return undefined;
+    }
+    return resolved;
+  };
+
+  // Resolve any threshold-bearing expression to a string literal: a direct
+  // literal, an identifier (through the binding/alias/call-binding chains), or a
+  // call to a literal-returning local function. One `seen` set is threaded
+  // across all three so every guard sees the same in-progress name set.
+  const resolveExpr = (expr: TS.Expression | undefined, seen: Set<string>): string | undefined => {
+    if (!expr) return undefined;
+    const lit = literalOf(expr);
+    if (lit !== undefined) return lit;
+    if (ts.isIdentifier(expr)) return resolveIdentifier(expr, seen);
+    if (ts.isCallExpression(expr)) return resolveCallReturn(expr, seen);
     return undefined;
   };
 
   // Pass 3 — resolve threshold args at every reader call AND every wrapper call
   // (at each param index the fixpoint proved forwards to the reader).
-  const resolveArg = (expr: TS.Expression | undefined): string | undefined => {
-    if (!expr) return undefined;
-    const lit = literalOf(expr);
-    if (lit !== undefined) return lit;
-    if (ts.isIdentifier(expr)) return resolveIdentifier(expr, new Set());
-    return undefined;
-  };
+  const resolveArg = (expr: TS.Expression | undefined): string | undefined =>
+    resolveExpr(expr, new Set());
   const callsReaderWith = new Set<string>();
   eachNode(sf, (n) => {
     if (!ts.isCallExpression(n)) return;
@@ -788,7 +912,7 @@ const wireFactsCache = new Map<string, WireFacts>();
  * end) AND passes the threshold to a real `loadObservationsForThreshold` call
  * (caller end) — see {@link astWireFacts} for everything the AST path resolves
  * that the v1.49.953 regex could not (comments/strings, aliases, namespaces,
- * N-level variable + N-hop wrapper indirection). Facts are memoized per file content so
+ * N-level variable + N-hop wrapper + return-value indirection). Facts are memoized per file content so
  * {@link verifyVerdict}'s per-(threshold, file) calls parse each file once.
  */
 export function detectThresholdWire(threshold: string, content: string): boolean {

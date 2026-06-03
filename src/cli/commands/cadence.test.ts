@@ -579,6 +579,302 @@ describe('cadence command', () => {
     });
   });
 
+  // --- v1.49.957: return-value dataflow. Closes the bound v1.49.956 documented
+  // ("a reader call taking a function's return value is not resolved"). A call to
+  // a LOCAL function that returns a string literal now resolves to that literal,
+  // both as a direct reader/wrapper argument and through a `const = call()`
+  // binding. Each case was a documented false-negative of the v955/v956 detector
+  // and of the regex — so the AST verdict (..., ts) is paired with the regex
+  // verdict (..., null) to make the lift load-bearing.
+  describe('detectThresholdWire (AST) — return-value dataflow (v1.49.957)', () => {
+    const T = 'observation.retention_days';
+    const X = 'token_budget.max_percent';
+    const SUB = `import { runFoo } from '../../src/foo/foo-substrate.js';`;
+
+    it('RESOLVES a reader call taking a literal-returning function (load(getThreshold())) — v956 bound closed', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function getThreshold() { return '${T}'; }\n` +
+        `await loadObservationsForThreshold(getThreshold(), {});`;
+      // AST: getThreshold()'s single literal return resolves.
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true);
+      // Regex: the reader arg is a call expression, not a quoted literal -> missed.
+      expect(detectThresholdWireWith(T, content, null)).toBe(false);
+    });
+
+    it('RESOLVES an arrow-const that returns a literal (const getT = () => lit)', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `const getT = () => '${T}';\n` +
+        `await loadObservationsForThreshold(getT(), {});`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true);
+      expect(detectThresholdWireWith(T, content, null)).toBe(false);
+    });
+
+    it("RESOLVES a returned 'x' as const", () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function getT() { return '${T}' as const; }\n` +
+        `await loadObservationsForThreshold(getT(), {});`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true);
+    });
+
+    it('RESOLVES a function that returns a function-local const (return-of-binding)', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function getT() { const v = '${T}'; return v; }\n` +
+        `await loadObservationsForThreshold(getT(), {});`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true);
+    });
+
+    it('RESOLVES a const bound to a call return (const t = getThreshold(); load(t))', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function getThreshold() { return '${T}'; }\n` +
+        `const t = getThreshold();\n` +
+        `await loadObservationsForThreshold(t, {});`;
+      // AST: callBindings(t) -> getThreshold() return -> literal.
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true);
+      expect(detectThresholdWireWith(T, content, null)).toBe(false);
+    });
+
+    it('RESOLVES a wrapper called with a literal-returning function (outer(getThreshold()))', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function getT() { return '${T}'; }\n` +
+        `function outer(t: string) { return loadObservationsForThreshold(t, {}); }\n` +
+        `await outer(getT());`;
+      // Composes return-value resolution with the wrapper fixpoint.
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true);
+      expect(detectThresholdWireWith(T, content, null)).toBe(false);
+    });
+
+    it('FOLLOWS an N-level return chain (a returns b(); b returns lit)', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function inner() { return '${T}'; }\n` +
+        `function outer() { return inner(); }\n` +
+        `await loadObservationsForThreshold(outer(), {});`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true);
+    });
+
+    it('resolves the CORRECT threshold only through a return value (no cross-wire)', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function getT() { return '${X}'; }\n` +
+        `await loadObservationsForThreshold(getT(), {});`;
+      expect(detectThresholdWireWith(X, content, ts)).toBe(true);
+      expect(detectThresholdWireWith(T, content, ts)).toBe(false);
+    });
+
+    it('does NOT resolve a function that returns one of its PARAMETERS (documented forward bound)', () => {
+      // `id` returns its param `t`; the value depends on the call site, so the
+      // return is param-dependent and resolves to nothing — the param-return-
+      // through case is the next documented bound (not over-reported).
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function id(t: string) { return t; }\n` +
+        `await loadObservationsForThreshold(id('${T}'), {});`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(false);
+      expect(detectThresholdWireWith(T, content, null)).toBe(false);
+    });
+
+    it('does NOT resolve when return paths DIVERGE to different literals (ambiguous)', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function pick(f: boolean) { if (f) { return '${T}'; } return '${X}'; }\n` +
+        `await loadObservationsForThreshold(pick(true), {});`;
+      // Two distinct literal returns -> ambiguous -> not wired (neither literal).
+      expect(detectThresholdWireWith(T, content, ts)).toBe(false);
+      expect(detectThresholdWireWith(X, content, ts)).toBe(false);
+    });
+
+    it('does NOT resolve when ANY return path is unresolvable, even if another is a literal', () => {
+      // First return is the param (unresolvable); the literal second return does
+      // NOT rescue it — an unresolvable path means the literal is not guaranteed.
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function maybe(t: string, f: boolean) { if (f) { return t; } return '${T}'; }\n` +
+        `await loadObservationsForThreshold(maybe('x', false), {});`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(false);
+    });
+
+    it('does NOT over-report a redeclared function name (return-value ambiguity drop)', () => {
+      // `getT` is declared twice (module + a nested decl); the flat returnExprs map
+      // cannot tell the scopes apart, so the name is dropped as ambiguous and the
+      // module-level call resolves to nothing — even though both bodies return the
+      // SAME literal (mirrors the v956 binding ambiguity drop).
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function getT() { return '${T}'; }\n` +
+        `function w() { function getT() { return '${T}'; } void getT; }\n` +
+        `void w;\n` +
+        `await loadObservationsForThreshold(getT(), {});`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(false);
+    });
+
+    it('a function name declared ONCE still resolves — the ambiguity drop is not over-broad (boundary)', () => {
+      const once =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function getT() { return '${T}'; }\n` +
+        `await loadObservationsForThreshold(getT(), {});`;
+      expect(detectThresholdWireWith(T, once, ts)).toBe(true);
+    });
+
+    it('TERMINATES on a return cycle (a returns b(); b returns a()) (not wired)', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function a(): string { return b(); }\n` +
+        `function b(): string { return a(); }\n` +
+        `await loadObservationsForThreshold(a(), {});`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(false);
+    });
+
+    it('does NOT follow a METHOD call return (o.m()) — only the local function-name form', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `const o = { m: () => '${T}' };\n` +
+        `await loadObservationsForThreshold(o.m(), {});`;
+      // The callee is a property access, not a bare identifier -> not resolved.
+      expect(detectThresholdWireWith(T, content, ts)).toBe(false);
+    });
+
+    it('the public (memoized, lazy AST) detectThresholdWire resolves a return-value wire', () => {
+      // Return-value resolution is reachable ONLY by the AST path; proves the lift
+      // is on the live path the verify axis uses, not just the test seam.
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function getThreshold() { return '${T}'; }\n` +
+        `await loadObservationsForThreshold(getThreshold(), {});`;
+      expect(detectThresholdWire(T, content)).toBe(true);
+    });
+  });
+
+  // --- v1.49.957 over-report guards (closing the two adversarial-review findings
+  // on the return-value lift). Both are contrived (no real e2e file has them) and
+  // conservative-direction, but a precision detector must not over-report — these
+  // pin the fixes. AST == regex == false on these inputs (the reader arg is a call
+  // or a bare identifier, never a quoted literal), so both verdicts read false.
+  describe('detectThresholdWire (AST) — v957 review-fix over-report guards', () => {
+    const T = 'observation.retention_days';
+    const X = 'token_budget.max_percent';
+    const SUB = `import { runFoo } from '../../src/foo/foo-substrate.js';`;
+
+    // Finding #1 — a DESTRUCTURED parameter is locally bound and must not resolve
+    // against a module const that merely shares the inner name (isParamInScope now
+    // recurses binding patterns). Each returns its destructured param, whose value
+    // is the call site's, not the module const.
+    it('does NOT over-report an object-destructured param return ({ t }) (finding #1)', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `const t = '${X}';\n` +
+        `function readOpt({ t }: { t: string }) { return t; }\n` +
+        `await loadObservationsForThreshold(readOpt({ t: 'runtime' }), {});`;
+      expect(detectThresholdWireWith(X, content, ts)).toBe(false);
+      expect(detectThresholdWireWith(X, content, null)).toBe(false);
+    });
+
+    it('does NOT over-report a RENAMED destructured param return ({ a: t }) (finding #1)', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `const t = '${X}';\n` +
+        `function readOpt({ a: t }: { a: string }) { return t; }\n` +
+        `await loadObservationsForThreshold(readOpt({ a: 'runtime' }), {});`;
+      expect(detectThresholdWireWith(X, content, ts)).toBe(false);
+    });
+
+    it('does NOT over-report an ARRAY-destructured param return ([t]) (finding #1)', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `const t = '${X}';\n` +
+        `function readOpt([t]: string[]) { return t; }\n` +
+        `await loadObservationsForThreshold(readOpt(['runtime']), {});`;
+      expect(detectThresholdWireWith(X, content, ts)).toBe(false);
+    });
+
+    it('does NOT over-report a NESTED destructured param return ({ a: { t } }) (finding #1)', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `const t = '${X}';\n` +
+        `function readOpt({ a: { t } }: { a: { t: string } }) { return t; }\n` +
+        `await loadObservationsForThreshold(readOpt({ a: { t: 'runtime' } }), {});`;
+      expect(detectThresholdWireWith(X, content, ts)).toBe(false);
+    });
+
+    it('does NOT over-report a destructured param on the DIRECT reader call (latent v956 hole closed)', () => {
+      // The reader call inside `w` forwards the destructured param `t`; `w` is
+      // never called with a literal. Before the isParamInScope binding-pattern
+      // fix, `t` resolved against the module const and over-reported (this was a
+      // pre-existing v956 wrapper/direct-path bug the v957 review surfaced).
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `const t = '${X}';\n` +
+        `function w({ t }: { t: string }) { return loadObservationsForThreshold(t, {}); }\n` +
+        `void w;`;
+      expect(detectThresholdWireWith(X, content, ts)).toBe(false);
+    });
+
+    it('still WIRES a legit identifier-return helper (binding-pattern fix is not over-broad)', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function getThreshold() { return '${T}'; }\n` +
+        `await loadObservationsForThreshold(getThreshold(), {});`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true);
+    });
+
+    // Finding #2 — an implicit `undefined` fall-through or a bare `return;` is a
+    // completion path that does NOT return the literal, so the function must not
+    // resolve (collectFn now requires an unconditional expression return).
+    it('does NOT over-report an implicit-undefined fall-through (if without else/trailing return) (finding #2)', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function getT(c: boolean) { if (c) { return '${T}'; } }\n` +
+        `await loadObservationsForThreshold(getT(true), {});`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(false);
+      expect(detectThresholdWireWith(T, content, null)).toBe(false);
+    });
+
+    it('does NOT over-report a bare `return;` before a literal return (finding #2)', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function getT(c: boolean) { if (c) { return; } return '${T}'; }\n` +
+        `await loadObservationsForThreshold(getT(false), {});`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(false);
+    });
+
+    it('does NOT over-report an arrow-BLOCK with an implicit fall-through (finding #2)', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `const getT = (c: boolean) => { if (c) { return '${T}'; } };\n` +
+        `await loadObservationsForThreshold(getT(true), {});`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(false);
+    });
+
+    it('still WIRES an unconditional multi-statement body (fall-through fix is not over-broad)', () => {
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `function getT() { const v = '${T}'; return v; }\n` +
+        `await loadObservationsForThreshold(getT(), {});`;
+      expect(detectThresholdWireWith(T, content, ts)).toBe(true);
+    });
+
+    it('drops a name declared as BOTH a binding and a function across scopes (merged ambiguity counter)', () => {
+      // `getT` is a module-level string const AND a nested function — the shared
+      // declaration counter makes the name ambiguous, so neither the value read
+      // nor the call resolves.
+      const content =
+        `${SUB}\n${READER_IMPORT}\n` +
+        `const getT = '${X}';\n` +
+        `function w() { function getT() { return '${T}'; } void getT; }\n` +
+        `void w;\n` +
+        `await loadObservationsForThreshold(getT(), {});`;
+      // The call form would resolve the nested function's return (T) under
+      // separate counters; the shared counter drops returnExprs[getT] (count 2).
+      expect(detectThresholdWireWith(T, content, ts)).toBe(false);
+      expect(detectThresholdWireWith(X, content, ts)).toBe(false);
+    });
+  });
+
   describe('WireFacts primitives — astWireFacts / regexWireFacts / specifier REs', () => {
     const T = 'observation.retention_days';
 
