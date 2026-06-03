@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.961`.
+The story begins at `v1.0` and continues to `v1.49.962`.
 
-**1004 chapters.** 1003 have retrospectives.
+**1005 chapters.** 1004 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -1012,3 +1012,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.959](v1.49.959/00-summary.md)** — param-return-through + parenthesized-literal lifts for the cadence verify detector · 2026-06-03
 - **[v1.49.960](v1.49.960/00-summary.md)** — M4 intent-journal crash recovery for wedged commits · 2026-06-03
 - **[v1.49.961](v1.49.961/00-summary.md)** — STATE.md backup-file two-layer closure (counter-cadence #28) · 2026-06-03
+- **[v1.49.962](v1.49.962/00-summary.md)** — bypass-vocab parity drift-guard (counter-cadence #29) · 2026-06-03
