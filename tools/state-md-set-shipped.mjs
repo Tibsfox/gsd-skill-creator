@@ -47,6 +47,7 @@ const jsYaml = require('js-yaml');
 const REPO_ROOT = resolve(process.cwd());
 const STATE_PATH = resolve(REPO_ROOT, '.planning', 'STATE.md');
 const NORMALIZER_PATH = resolve(REPO_ROOT, 'tools', 'state-md-normalizer.mjs');
+const BACKUP_CLEANER_PATH = resolve(REPO_ROOT, 'tools', 'state-md-clean-backups.mjs');
 
 // YAML-safe scalar emission via js-yaml. Strings with ':', '#', leading-'-',
 // or other YAML-significant chars get auto-quoted (single-quoted form);
@@ -230,6 +231,22 @@ function main() {
     console.error('[state-md-set-shipped] post-write normalize-check FAILED:');
     if (checkResult.stderr) console.error(checkResult.stderr.toString());
     process.exit(2);
+  }
+
+  // SOURCE ELIMINATOR (v1.49.961 / counter-cadence #28): the normalizer --write
+  // above leaves a timestamped `.planning/STATE.md.backup-before-normalize-*` on
+  // any actual rewrite, and citation-debt apply-diff leaves `.bak.*` siblings —
+  // historically cleaned by a forgettable manual `rm`. Self-clean them here (the
+  // END-of-T14 reset point) so they never accumulate; the matching pre-tag-gate
+  // detector blocks any that slip through. Best-effort: a cleanup hiccup warns
+  // but does not fail the reset (the detector is the backstop at the next ship).
+  const cleanResult = spawnSync('node', [BACKUP_CLEANER_PATH, '--write'], {
+    cwd: REPO_ROOT,
+    stdio: 'pipe',
+  });
+  if (cleanResult.status !== 0) {
+    console.warn('[state-md-set-shipped] WARN: backup self-clean exited non-zero (non-fatal):');
+    if (cleanResult.stderr) console.warn(cleanResult.stderr.toString());
   }
 
   console.log(`[state-md-set-shipped] WROTE STATE.md for ${a.version} + normalize-check PASS`);

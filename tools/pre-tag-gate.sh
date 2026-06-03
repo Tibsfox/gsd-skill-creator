@@ -297,7 +297,7 @@ gate_required() {
 if [ -n "$_PTG_BYPASS_RAW" ] || [ -n "$_PTG_REQUIRE_RAW" ]; then
   [ -n "$_PTG_BYPASS_RAW" ]  && log "[pre-tag-gate] active BYPASS:  $_PTG_BYPASS_RAW"
   [ -n "$_PTG_REQUIRE_RAW" ] && log "[pre-tag-gate] active REQUIRE: $_PTG_REQUIRE_RAW"
-  log "[pre-tag-gate] (step names: build|version-sequence|vitest|tools-suite|tools-node-test|completeness|ci-gate|www-bundles|depth-audit|depth-audit-mus-elc|claude-md|catalog-index|tauri-boundary|apply-to-self|scaffolder-residue|citation-debt-sync|story-drift|discipline-coverage|sps-cohort-uniqueness|nasa-canonical-layout|nasa-canonical-sidebar|project-md)"
+  log "[pre-tag-gate] (step names: build|version-sequence|vitest|tools-suite|tools-node-test|completeness|ci-gate|www-bundles|depth-audit|depth-audit-mus-elc|claude-md|catalog-index|tauri-boundary|apply-to-self|scaffolder-residue|citation-debt-sync|story-drift|discipline-coverage|sps-cohort-uniqueness|nasa-canonical-layout|nasa-canonical-sidebar|project-md|stale-known-unwired|state-backups)"
 fi
 
 # ----- step 0.5: STATE.md normalizer auto-run (v1.49.671, Lesson #10373) -----
@@ -962,8 +962,10 @@ if gate_bypassed "stale-known-unwired"; then
   log "[pre-tag-gate] step 18/18: SKIPPED"
 else
   log "[pre-tag-gate] step 18/18: KNOWN_UNWIRED stale-entry cross-audit"
-  STALE_OUTPUT="$(node "$REPO_ROOT/tools/security/check-stale-known-unwired.mjs" 2>&1)"
-  STALE_EXIT=$?
+  # `&& X=0 || X=$?` preserves the real exit code under `set -euo pipefail`
+  # (a bare `OUTPUT="$(...)"` would abort the script on a non-zero exit BEFORE
+  # the FAIL block; a plain `|| true` would mask the code to 0 and never fire).
+  STALE_OUTPUT="$(node "$REPO_ROOT/tools/security/check-stale-known-unwired.mjs" 2>&1)" && STALE_EXIT=0 || STALE_EXIT=$?
   if [ "$STALE_EXIT" -ne 0 ]; then
     echo "[pre-tag-gate] FAIL: KNOWN_UNWIRED stale entries detected" >&2
     echo "$STALE_OUTPUT" | head -30 >&2
@@ -975,5 +977,34 @@ else
   log "[pre-tag-gate] step 18/18: PASS (no stale KNOWN_UNWIRED entries)"
 fi
 
-log "[pre-tag-gate] all 18 checks PASS — safe to \`git tag\` and merge to main"
+# ----- step 19/19: .planning/ backup-file accumulation check (v1.49.961 cc#28) -----
+# Two-layer closure (#10431/#10436) for the .planning/ backup-file drift class:
+# tools/state-md-normalizer.mjs and tools/citation-debt/apply-diff.mjs each leave
+# timestamped backups in the (gitignored) .planning/ working tree. The source
+# eliminator (tools/state-md-clean-backups.mjs --write, self-run at the T14 reset
+# by state-md-set-shipped.mjs) removes them; this detector (--check, narrow
+# tool-written-prefix scope) BLOCKS a ship if any slip through (e.g. a
+# citation-debt .bak.* or a post-gate STATE backup). BLOCKER by default — the fix
+# is one command.
+# Bypass: SC_PRE_TAG_GATE_BYPASS=state-backups (emergency only — run --write instead).
+if gate_bypassed "state-backups"; then
+  log "[pre-tag-gate] step 19/19: SKIPPED (state-backups)"
+else
+  log "[pre-tag-gate] step 19/19: .planning/ backup-file accumulation check"
+  # `&& X=0 || X=$?` preserves the real exit code under `set -euo pipefail` (a
+  # bare `OUTPUT="$(...)"` aborts the script on the cleaner's exit-1 BEFORE this
+  # FAIL block + exit 21; a plain `|| true` would mask the code to 0 and the
+  # detector would never fire — see the matching note on step 18).
+  BK_OUTPUT="$(node "$REPO_ROOT/tools/state-md-clean-backups.mjs" --check 2>&1)" && BK_EXIT=0 || BK_EXIT=$?
+  if [ "$BK_EXIT" -ne 0 ]; then
+    echo "[pre-tag-gate] FAIL: lingering .planning/ backup file(s) detected" >&2
+    echo "$BK_OUTPUT" | head -20 >&2
+    echo "[pre-tag-gate]   Fix: node tools/state-md-clean-backups.mjs --write" >&2
+    echo "[pre-tag-gate]   Bypass: SC_PRE_TAG_GATE_BYPASS=state-backups (emergency only)" >&2
+    exit 21
+  fi
+  log "[pre-tag-gate] step 19/19: PASS (no lingering backups)"
+fi
+
+log "[pre-tag-gate] all 19 checks PASS — safe to \`git tag\` and merge to main"
 exit 0

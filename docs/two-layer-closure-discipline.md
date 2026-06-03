@@ -93,6 +93,17 @@ Examples in scope:
 - Release-notes file scaffolding (any drift between v<X> dir and expected
   5-file set; detector = completeness check, source eliminator =
   `scaffold-release-notes.mjs` — closed at v1.49.958, counter-cadence #27)
+- `.planning/` backup-file accumulation (tool-written `STATE.md.backup-*` +
+  `citation-debt.json.bak.*` never cleaned; source eliminator =
+  `state-md-clean-backups.mjs --write`, self-run at the T14 reset; detector =
+  pre-tag-gate step 19 `--check` — closed at v1.49.961, counter-cadence #28).
+  Within a ship the detector runs FIRST (in the gate) and the source eliminator
+  runs LAST (the reset), so step 19's job is to catch the PREVIOUS ship's residue
+  if its best-effort self-clean silently failed. The intended residual: an
+  off-cycle backup (a manual `state-md-normalizer.mjs --write` or
+  `citation-debt/apply-diff.mjs` run BETWEEN ships) is caught-and-BLOCKED at the
+  next ship's step 19, where the operator runs `--write` — the detector is the
+  backstop; no in-loop hook is needed.
 
 Examples out of scope (single-step procedures or no detector available):
 - "Run tests before pushing" — the test is the detector + the procedure;
@@ -160,14 +171,17 @@ When designing a closure for a procedure-rooted drift:
 
 ## Forward observation
 
-This discipline is now ESTABLISHED-and-applied: three two-layer closures have
+This discipline is now ESTABLISHED-and-applied: four two-layer closures have
 shipped — STATE.md (detector v807 / eliminator v813), PROJECT.md (detector v785
-/ eliminator v954), and release-notes 5-file scaffolding (detector pre-existing /
-eliminator v958). The next procedure-rooted or file-overwrite drift class should
-be closed with both layers as a matter of course, treated as an application of
-#10431 / #10436 rather than a new discipline. Remaining candidate:
+/ eliminator v954), release-notes 5-file scaffolding (detector pre-existing /
+eliminator v958), and `.planning/` backup-file accumulation (eliminator
+`state-md-clean-backups.mjs` + detector pre-tag-gate step 19, both new at
+v1.49.961, counter-cadence #28). The next procedure-rooted or file-overwrite
+drift class should be closed with both layers as a matter of course, treated as
+an application of #10431 / #10436 rather than a new discipline.
 
-- STATE.md `.backup-*` file accumulation (no detector; would need both layers)
+Remaining candidates: none currently enumerated — scope the next counter-cadence
+from a ledger when one surfaces.
 
 ## File-overwrite drift sub-class (Lesson #10436)
 

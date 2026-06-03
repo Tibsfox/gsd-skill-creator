@@ -53,15 +53,20 @@ describe('v1.49.869 integration meta-test (pre-tag-gate cross-audit integration)
   });
 
   // ==========================================================================
-  // C2 — Final summary updated to "all 18 checks PASS"
+  // C2 — Final summary present and past the pre-v869 17-count
+  //
+  // The absolute final count is a single moving fact pinned by the NEWEST
+  // step-addition meta-test (v961 owns "all 19 checks PASS"); this test stays
+  // count-agnostic so a future step addition does not have to edit it — it only
+  // guards that a final summary exists and the pre-v869 17-count is gone.
   // ==========================================================================
-  it('C2 — final summary reports 18 checks (was 17 pre-v869)', () => {
+  it('C2 — final summary present and the pre-v869 17-count is gone', () => {
     const gate = readFileSync(GATE_PATH, 'utf8');
 
-    // The final summary message reports the new total
-    expect(gate).toMatch(/all 18 checks PASS/);
+    // A final summary message reports SOME total (count-agnostic).
+    expect(gate).toMatch(/all \d+ checks PASS/);
 
-    // The pre-v869 "all 17 checks PASS" summary is gone
+    // The pre-v869 "all 17 checks PASS" summary is gone (the v869 step landed).
     expect(gate).not.toMatch(/all 17 checks PASS/);
   });
 
@@ -77,8 +82,8 @@ describe('v1.49.869 integration meta-test (pre-tag-gate cross-audit integration)
     expect(step18Pos).toBeGreaterThan(-1);
     expect(step18Pos).toBeGreaterThan(step17Pos);
 
-    // The final summary appears after both
-    const finalSummaryPos = gate.indexOf('all 18 checks PASS');
+    // The final summary appears after both (count-agnostic match).
+    const finalSummaryPos = gate.search(/all \d+ checks PASS/);
     expect(finalSummaryPos).toBeGreaterThan(step18Pos);
   });
 });
