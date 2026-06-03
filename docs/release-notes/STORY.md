@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.951`.
+The story begins at `v1.0` and continues to `v1.49.952`.
 
-**994 chapters.** 993 have retrospectives.
+**995 chapters.** 994 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -1002,3 +1002,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.949](v1.49.949/00-summary.md)** — harden the cadence verify axis (dedicated end-to-end test detection) · 2026-06-02
 - **[v1.49.950](v1.49.950/00-summary.md)** — machine-track the cadence ships-since second conjunct (candidate -> overdue gate) · 2026-06-02
 - **[v1.49.951](v1.49.951/00-summary.md)** — close the last bounded-learning verify gap (suggestions.* end-to-end test) · 2026-06-02
+- **[v1.49.952](v1.49.952/00-summary.md)** — close the M4 commit-lock crash-recovery boundary (write-ahead + gc reaping) · 2026-06-02
