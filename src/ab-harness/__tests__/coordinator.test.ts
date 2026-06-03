@@ -15,8 +15,9 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { promises as fs } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
-import { randomUUID } from 'node:crypto';
+import { randomUUID, createHash } from 'node:crypto';
 import { runAB, type RunABOptions } from '../coordinator.js';
+import { COMMIT_LOCK_PREFIX } from '../../branches/commit.js';
 import type { TractabilityClass } from '../../tractability/selector-api.js';
 
 // ─── Test helpers ─────────────────────────────────────────────────────────────
@@ -186,6 +187,63 @@ describe('LS-41 — planted-significant outcomes commit B', () => {
 
     const written = await fs.readFile(trunkPath, 'utf8');
     expect(written).toBe(VARIANT_BODY);
+  });
+});
+
+// ─── v1.49.960: recover() wire — a prior wedged round heals before the commit ──
+describe('v1.49.960 — coordinator recover() wire heals a prior wedged round', () => {
+  let tmpDir: string;
+  beforeEach(async () => { tmpDir = await makeTmpDir(); });
+  afterEach(async () => { await cleanup(tmpDir); });
+
+  it('forward-completes a pre-seeded committing:true wedge on branchesDir during runAB', async () => {
+    const sha256 = (s: string): string => createHash('sha256').update(s, 'utf8').digest('hex');
+    const trunkPath = join(tmpDir, 'skill.md');
+    const branchesDir = join(tmpDir, 'branches');
+    await fs.writeFile(trunkPath, PARENT_BODY, 'utf8');
+    await fs.mkdir(branchesDir, { recursive: true });
+
+    // Seed an independent wedged round (a DIFFERENT trunk, so it cannot collide
+    // with runAB's own commit) — committing:true, staged tmp, un-advanced trunk,
+    // branch dir absent (reaped). recover() must heal it before the commit round.
+    const oldTrunk = join(tmpDir, 'old-skill.md');
+    const healedBody = 'a prior crashed commit body that recover() must replay\n';
+    const tmp = oldTrunk + '.tmp.' + randomUUID();
+    await fs.writeFile(tmp, healedBody, 'utf8');
+    await fs.writeFile(
+      join(branchesDir, COMMIT_LOCK_PREFIX + 'priorRound'),
+      JSON.stringify({
+        branchId: 'reaped-prior-winner',
+        committing: true,
+        trunkPath: oldTrunk,
+        trunkTmp: tmp,
+        bodyHash: sha256(healedBody),
+        acquiredAt: 1,
+      }),
+      'utf8',
+    );
+    expect(await fs.access(oldTrunk).then(() => true, () => false)).toBe(false);
+
+    const result = await runAB({
+      skillName: 'gsd-explore',
+      trunkBody: PARENT_BODY,
+      variantBody: VARIANT_BODY,
+      trunkPath,
+      tractability: 'tractable',
+      samplesPerVariant: 15,
+      alpha: 0.10,
+      baseNoiseFloor: 2.0,
+      branchesDir,
+      traceDir: join(tmpDir, 'traces'),
+      runSkill: makeScorer(40, 50), // commit-B
+      settings: { enabled: true },
+    });
+
+    // The experiment still completed AND the prior wedge was healed by the wire.
+    expect(result.status).toBe('completed');
+    if (result.status !== 'completed') return;
+    expect(result.committed).toBe(true);
+    expect(await fs.readFile(oldTrunk, 'utf8')).toBe(healedBody);
   });
 });
 

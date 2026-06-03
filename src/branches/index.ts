@@ -71,3 +71,7 @@ export {
   DEFAULT_OPEN_MAX_AGE_MS,
   gc,
 } from './gc.js';
+
+// recover (v1.49.960 — crash-recovery replay of wedged commit rounds)
+export type { RecoverOptions, RecoverReport } from './recover.js';
+export { recover } from './recover.js';

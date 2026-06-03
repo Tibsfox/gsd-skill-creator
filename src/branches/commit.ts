@@ -60,9 +60,25 @@
  *   leaves `committing: true`, so `gc()` KEEPS the marker (the trunk may be
  *   advanced — never reopen the double-win). `gc()` reaps only on an EXPLICIT
  *   `committing: false`, so a legacy marker (pre-v1.49.952, no field) is kept.
- *   Residual: a crash in the sub-instruction window between the flip and the
- *   rename leaves `committing: true` with the trunk un-advanced → that one round
- *   stays wedged (safe; removable by hand). See `branches/gc.ts`.
+ *   Former residual (CLOSED v1.49.960): a crash in the sub-instruction window
+ *   between the flip and the rename leaves `committing: true` with the trunk
+ *   un-advanced. The flip now ALSO records `trunkTmp` + `bodyHash` (an intent
+ *   journal), so `recover()` forward-completes that wedged round idempotently by
+ *   re-applying the rename. See `branches/gc.ts` and `branches/recover.ts`.
+ *
+ *   Remaining minor residuals (both COSMETIC, neither a wedge or data loss):
+ *   (1) Orphan trunk-tmp leak — a crash AFTER staging the trunk tmp but BEFORE
+ *   the `committing: true` flip leaves a `committing: false` marker (gc() reaps
+ *   it, round un-wedged) plus an orphan `<trunkPath>.tmp.<uuid>` in the trunk's
+ *   directory. The acquisition marker does not record `trunkTmp` (it is computed
+ *   later, inside the winner path), so nothing auto-cleans that stray tmp; it is
+ *   a bounded-per-crash disk leak removable by hand. (2) Torn marker — the flip
+ *   is a plain (non-atomic) overwrite, so a crash mid-write leaves either (a) a
+ *   truncated/invalid-JSON marker (both `recover()` and `gc()` skip it -> kept,
+ *   wedged, hand-removable) or (b) the prior `committing: false` bytes intact
+ *   (gc() reaps it as un-won, correct — degrading into residual (1)'s tmp leak).
+ *   A torn write can only truncate, never forge a valid `committing: true` marker
+ *   missing the journal fields.
  *
  * Trunk merge:
  *   The committed skill body is written to `trunkPath` supplied by the caller.
@@ -141,6 +157,19 @@ interface LockEntry {
    * a legacy marker is conservatively kept.
    */
   committing: boolean;
+  /**
+   * Intent-journal fields (v1.49.960), written ALONGSIDE `committing: true` in
+   * the write-ahead so the trunk rename is idempotently REPLAYABLE by `recover()`
+   * after a crash in the flip->rename window. `trunkTmp` is the staged trunk-body
+   * temp path and `bodyHash` is its sha256; `recover()` re-applies
+   * `rename(trunkTmp, trunkPath)` only when the staged body still hashes to
+   * `bodyHash` and the trunk does not yet hold it. Absent at acquisition
+   * (`committing: false`) and on pre-v1.49.960 markers — `recover()` skips a
+   * `committing: true` marker that lacks them (cannot replay). See
+   * `branches/recover.ts`.
+   */
+  trunkTmp?: string;
+  bodyHash?: string;
 }
 
 // ─── Commit options ───────────────────────────────────────────────────────────
@@ -316,7 +345,20 @@ export async function commit(opts: CommitOptions): Promise<CommitResult> {
       // overwrite is non-atomic, but a crash mid-write leaves a corrupt marker
       // that the reaper conservatively skips (keeps). Winner selection (the 'ax'
       // open above) and the never-unlink-on-success behaviour are unchanged.
-      await fs.writeFile(lockPath, JSON.stringify({ ...winnerEntry, committing: true }), 'utf8');
+      //
+      // INTENT JOURNAL (v1.49.960): the same write also records `trunkTmp` + the
+      // staged body's `bodyHash`, turning the marker into a replay journal. A
+      // crash in the sub-instruction window between this write and the rename
+      // below leaves `committing: true` with the trunk un-advanced — previously a
+      // permanently wedged round (gc() keeps it; never reopens the double-win).
+      // `recover()` now forward-completes it idempotently by re-applying the
+      // rename (guarded by `bodyHash`). See `branches/recover.ts`.
+      const bodyHash = createHash('sha256').update(branchBody, 'utf8').digest('hex');
+      await fs.writeFile(
+        lockPath,
+        JSON.stringify({ ...winnerEntry, committing: true, trunkTmp, bodyHash }),
+        'utf8',
+      );
 
       await fs.rename(trunkTmp, trunkPath);
 

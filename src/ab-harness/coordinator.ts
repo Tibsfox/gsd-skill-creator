@@ -37,6 +37,7 @@ import { fork as m4Fork, type ForkOptions } from '../branches/fork.js';
 import { explore as m4Explore, type RunSkillFn } from '../branches/explore.js';
 import { commit as m4Commit } from '../branches/commit.js';
 import { abort as m4Abort } from '../branches/abort.js';
+import { recover as m4Recover } from '../branches/recover.js';
 import type { TractabilityClass } from '../tractability/selector-api.js';
 import { runSignificanceTest, type ABDecision, type SignificanceResult } from './stats.js';
 import { requiredSampleSize } from './sample-size.js';
@@ -328,6 +329,19 @@ export async function runAB(opts: RunABOptions): Promise<ABRunOutcome> {
       tractability,
       warnings,
     };
+
+    // ── 4.5. Recover any prior wedged commit round (v1.49.960) ──────────────────
+    // A previous round may have crashed in the commit() flip->rename window,
+    // leaving a `committing: true` marker with the trunk un-advanced (a round
+    // gc() keeps but never reopens). recover() forward-completes it idempotently
+    // so this round commits against a consistent trunk. Best-effort: a recovery
+    // failure leaves the wedge as the pre-existing SAFE residual and must never
+    // block the experiment (liveness, not a load-bearing verdict input).
+    try {
+      await m4Recover({ branchesDir });
+    } catch {
+      // swallowed — recovery must never affect the experiment outcome.
+    }
 
     // ── 5. Commit or abort ─────────────────────────────────────────────────────
     let committed = false;
