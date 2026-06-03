@@ -1,13 +1,63 @@
 /**
- * M4 Branch-Context Experimentation — garbage collection of orphan branches.
+ * M4 Branch-Context Experimentation — garbage collection of orphan branches
+ * and orphan per-round commit-lock markers.
  *
- * `gc()` scans the branches directory and deletes branches that:
- *   1. Are in terminal state ('committed' or 'aborted') AND older than
- *      `maxAgeMs` milliseconds (measured from manifest.createdAt), OR
- *   2. Are in 'open' state AND older than `maxOpenAgeMs` milliseconds
- *      (i.e. stuck branches that were never committed or aborted).
+ * `gc()` runs two independent passes over the branches directory:
+ *
+ *   1. Commit-lock reaping (v1.49.952). Per-round winner-record markers
+ *      (`.commit-lock-<roundKey>`, written by `commit()`) are normally
+ *      PERMANENT — `commit()` deliberately leaves the winner's marker in place
+ *      so a lagging sibling always loses the `ax` race (this is the v1.49.948
+ *      double-win fix). A hard process kill (SIGKILL/OOM) between acquiring the
+ *      marker and finishing the commit is the ONE case that leaves an ORPHAN
+ *      marker — the round is wedged because no winner ever committed. This pass
+ *      reaps such orphans by age, closing the M4 crash-recovery liveness gap.
+ *
+ *   2. Branch reaping. Deletes branch directories that are either:
+ *        - in terminal state ('committed' or 'aborted') AND older than
+ *          `terminalMaxAgeMs` (measured from manifest.createdAt), OR
+ *        - in 'open' state AND older than `openMaxAgeMs` (stuck branches that
+ *          were never committed or aborted).
+ *
+ * ## Why reaping a commit-lock marker is sound
+ *
+ * The marker is a PERMANENT winner record after a SUCCESSFUL commit: reaping it
+ * would re-open the `ax` selection window so a sibling still forked from the
+ * same parent generation (same `roundKey`) could double-win — exactly the
+ * v1.49.948 bug, merely time-delayed. The prime directive is therefore NEVER to
+ * reap a marker whose round was won (the v1.49.948 exactly-one-winner-per-round
+ * invariant).
+ *
+ * Soundness comes from a WRITE-AHEAD in `commit()` (v1.49.952): the marker
+ * records `committing: false` at lock acquisition and is flipped to
+ * `committing: true` immediately BEFORE the trunk rename (`fs.rename`). The
+ * reaper reaps an old marker ONLY when it explicitly records `committing: false`
+ * — which PROVES the crash preceded the trunk write, so the round was never won
+ * (its body never reached the trunk) and reaping merely un-wedges the round.
+ *
+ * A marker recording `committing: true` (the trunk rename was reached or
+ * completed — the round may be won), a legacy marker with no `committing` field
+ * (pre-v1.49.952, cannot be classified), a young marker (a possibly-in-flight
+ * commit, guarded by the age threshold), or a corrupt/unreadable marker are all
+ * conservatively KEPT/SKIPPED. Because the reaper consults a durable, immutable-
+ * once-`true` intent flag rather than the mutable trunk content or the winner's
+ * lifecycle state, it is robust to a crash anywhere in the commit timeline,
+ * including the trunk-rename-before-manifest-write window AND a later round that
+ * happens to restore the parent body — neither can flip a `true` back to
+ * `false`.
+ *
+ * Residual (safe; tiny): a crash in the sub-instruction window between the
+ * `committing: true` write and the trunk rename leaves `committing: true` with
+ * the trunk un-advanced, so that one round stays wedged (kept, never reaped) —
+ * removable by hand. This trades a hair of liveness for guaranteed safety.
+ *
+ * The two passes are ordered so the lock pass runs before the branch pass — the
+ * reaping decision reads only the marker (not the winner branch), so it is
+ * independent of `readdir` ordering and of any branch the branch pass deletes.
  *
  * Default ages:
+ *   - Commit-lock markers: 1 hour (3_600_000 ms) — orders of magnitude longer
+ *     than any real commit, short enough to un-wedge a crashed round promptly.
  *   - Terminal branches: 7 days (604_800_000 ms)
  *   - Open/orphan branches: 30 days (2_592_000_000 ms)
  *
@@ -29,6 +79,7 @@
 import { promises as fs } from 'node:fs';
 import { join } from 'node:path';
 import { readManifest, DEFAULT_BRANCHES_DIR } from './fork.js';
+import { COMMIT_LOCK_PREFIX } from './commit.js';
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -37,6 +88,16 @@ export const DEFAULT_TERMINAL_MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000;
 
 /** Default max age for orphan open branches before GC (30 days). */
 export const DEFAULT_OPEN_MAX_AGE_MS = 30 * 24 * 60 * 60 * 1000;
+
+/**
+ * Default max age for an orphan commit-lock marker before reaping (1 hour).
+ *
+ * A healthy commit holds the marker for milliseconds, so 1 hour is far longer
+ * than any in-flight commit yet short enough to un-wedge a crashed round
+ * promptly. Combined with the winner-branch-`open` guard, this never reaps a
+ * permanent winner record (those keep their branch `committed`).
+ */
+export const DEFAULT_COMMIT_LOCK_MAX_AGE_MS = 60 * 60 * 1000;
 
 // ─── GC options ───────────────────────────────────────────────────────────────
 
@@ -57,6 +118,13 @@ export interface GcOptions {
    * Defaults to 30 days.
    */
   openMaxAgeMs?: number;
+
+  /**
+   * Max age in ms (measured from the marker's `acquiredAt`) for an orphan
+   * per-round commit-lock marker before reaping. Defaults to 1 hour. Set to
+   * `Infinity` to disable commit-lock reaping entirely.
+   */
+  commitLockMaxAgeMs?: number;
 
   /**
    * Override for Date.now() in tests.
@@ -80,6 +148,27 @@ export interface GcReport {
   /** Branch IDs that had unreadable manifests and were skipped. */
   skipped: string[];
 
+  /**
+   * Commit-lock marker filenames reaped as crash orphans (or that would be
+   * reaped in dry-run): old enough AND recording an explicit `committing: false`
+   * (the crash provably preceded the trunk write — round never won).
+   */
+  reapedLocks: string[];
+
+  /**
+   * Commit-lock marker filenames retained: `committing: true` (the trunk write
+   * was reached — the round may be won), a legacy marker with no `committing`
+   * field (pre-v1.49.952, cannot classify), or a marker younger than the
+   * threshold (a possibly-in-flight commit).
+   */
+  keptLocks: string[];
+
+  /**
+   * Commit-lock marker filenames skipped: unreadable / corrupt / missing a
+   * usable `acquiredAt`, so they cannot be classified (conservatively kept).
+   */
+  skippedLocks: string[];
+
   /** Whether this was a dry-run. */
   dryRun: boolean;
 }
@@ -87,7 +176,8 @@ export interface GcReport {
 // ─── gc() ────────────────────────────────────────────────────────────────────
 
 /**
- * Garbage-collect orphan and expired branches from the branches directory.
+ * Garbage-collect orphan and expired branches, plus orphan commit-lock markers,
+ * from the branches directory.
  *
  * @returns GcReport summarising what was deleted, kept, or skipped.
  */
@@ -96,11 +186,20 @@ export async function gc(opts: GcOptions = {}): Promise<GcReport> {
     branchesDir = DEFAULT_BRANCHES_DIR,
     terminalMaxAgeMs = DEFAULT_TERMINAL_MAX_AGE_MS,
     openMaxAgeMs = DEFAULT_OPEN_MAX_AGE_MS,
+    commitLockMaxAgeMs = DEFAULT_COMMIT_LOCK_MAX_AGE_MS,
     now = Date.now(),
     dryRun = false,
   } = opts;
 
-  const report: GcReport = { deleted: [], kept: [], skipped: [], dryRun };
+  const report: GcReport = {
+    deleted: [],
+    kept: [],
+    skipped: [],
+    reapedLocks: [],
+    keptLocks: [],
+    skippedLocks: [],
+    dryRun,
+  };
 
   let entries: string[];
   try {
@@ -110,8 +209,25 @@ export async function gc(opts: GcOptions = {}): Promise<GcReport> {
     return report;
   }
 
+  // ── Pass 1: reap orphan commit-lock markers ───────────────────────────────
+  // Runs FIRST so every winner branch's manifest is still on disk when its
+  // marker's reaping decision reads it — the decision is independent of the
+  // branch pass below (and of readdir ordering).
+  const lockMarkers = entries.filter((e) => e.startsWith(COMMIT_LOCK_PREFIX));
+  for (const marker of lockMarkers) {
+    await reapCommitLock(marker, {
+      branchesDir,
+      commitLockMaxAgeMs,
+      now,
+      dryRun,
+      report,
+    });
+  }
+
+  // ── Pass 2: reap orphan / expired branches ────────────────────────────────
   for (const entry of entries) {
-    // Skip hidden files (e.g. the per-round .commit-lock-<roundKey> markers).
+    // Skip ALL hidden files (commit-lock markers handled in pass 1; any other
+    // dotfile is not a branch directory).
     if (entry.startsWith('.')) continue;
 
     const branchDir = join(branchesDir, entry);
@@ -151,4 +267,70 @@ export async function gc(opts: GcOptions = {}): Promise<GcReport> {
   }
 
   return report;
+}
+
+// ─── commit-lock reaping ───────────────────────────────────────────────────────
+
+interface ReapContext {
+  branchesDir: string;
+  commitLockMaxAgeMs: number;
+  now: number;
+  dryRun: boolean;
+  report: GcReport;
+}
+
+/**
+ * Decide whether a single `.commit-lock-<roundKey>` marker is a reapable crash
+ * orphan, and reap it (unless dry-run) if so. The reap condition is SOUND by
+ * construction (see the module docstring): reap iff the marker is older than the
+ * threshold AND it explicitly records `committing: false` — proving (via the
+ * v1.49.952 commit() write-ahead) that the crash preceded the trunk write, so
+ * the round was never won. A `committing: true` marker (trunk may be advanced),
+ * a legacy marker with no `committing` field, a young marker, or a corrupt /
+ * unreadable marker are all conservatively KEPT/SKIPPED — never reaped.
+ */
+async function reapCommitLock(marker: string, ctx: ReapContext): Promise<void> {
+  const { branchesDir, commitLockMaxAgeMs, now, dryRun, report } = ctx;
+  const lockPath = join(branchesDir, marker);
+
+  let parsed: { acquiredAt?: unknown; committing?: unknown };
+  try {
+    parsed = JSON.parse(await fs.readFile(lockPath, 'utf8')) as typeof parsed;
+  } catch {
+    // Unreadable / corrupt marker — cannot classify; conservatively keep.
+    report.skippedLocks.push(marker);
+    return;
+  }
+
+  const acquiredAt = typeof parsed.acquiredAt === 'number' ? parsed.acquiredAt : undefined;
+  if (acquiredAt === undefined) {
+    // No usable timestamp — cannot age-check; conservatively keep.
+    report.skippedLocks.push(marker);
+    return;
+  }
+
+  if (now - acquiredAt <= commitLockMaxAgeMs) {
+    // Younger than the threshold — could be an in-flight commit; keep.
+    report.keptLocks.push(marker);
+    return;
+  }
+
+  // SOUND reap condition: only an EXPLICIT `committing: false` proves the crash
+  // preceded the trunk write (round never won). `true` (trunk may be advanced),
+  // a missing field (legacy marker), or any non-false value is KEPT — never
+  // reopen the v1.49.948 double-win.
+  if (parsed.committing !== false) {
+    report.keptLocks.push(marker);
+    return;
+  }
+
+  if (!dryRun) {
+    try {
+      await fs.rm(lockPath, { force: true });
+    } catch {
+      report.skippedLocks.push(marker);
+      return;
+    }
+  }
+  report.reapedLocks.push(marker);
 }

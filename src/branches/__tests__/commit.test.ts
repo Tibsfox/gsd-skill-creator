@@ -72,6 +72,27 @@ describe('commit — single branch', () => {
     expect(trunkContent).toBe(proposedBody);
   });
 
+  it('write-ahead: the permanent winner marker records committing:true after a successful commit', async () => {
+    // v1.49.952: commit() flips the marker's committing flag to true immediately
+    // before the trunk rename. The marker is the PERMANENT winner record, so
+    // gc() reads committing:true and KEEPS it (never reaps a won round).
+    const branchesDir = tempDir();
+    const trunkPath = join(tempDir(), 'trunk.md');
+    const parentBody = 'p'.repeat(500);
+    const { manifest: m } = await fork({
+      parentBody,
+      proposedBody: smallChange(parentBody),
+      skillName: 'commit-writeahead',
+      branchesDir,
+    });
+
+    await commit({ branchId: m.id, branchesDir, trunkPath });
+
+    const lockPath = join(branchesDir, COMMIT_LOCK_PREFIX + commitRoundKey(trunkPath, m.parentHash));
+    const lock = JSON.parse(await fs.readFile(lockPath, 'utf8')) as { committing?: boolean };
+    expect(lock.committing).toBe(true);
+  });
+
   it('marks manifest as committed with committedAt timestamp', async () => {
     const branchesDir = tempDir();
     const trunkPath = join(tempDir(), 'trunk.md');

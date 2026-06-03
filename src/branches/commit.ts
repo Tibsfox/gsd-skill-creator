@@ -48,15 +48,21 @@
  *   blocked — committing the identical (trunk, parent-generation) twice is
  *   idempotently rejected as a late sibling rather than double-applied.
  *
- * Crash recovery:
+ * Crash recovery (v1.49.952):
  *   The lock is released on the winner's ERROR path but NOT on a hard process
  *   kill (SIGKILL/OOM) between acquiring the lock and finishing the commit —
- *   that leaves a permanent `.commit-lock-<roundKey>` marker, and `gc()` skips
- *   dotfiles, so the affected ROUND stays wedged until the marker is removed by
- *   hand (`rm .planning/branches/.commit-lock-<roundKey>`). This is strictly
- *   narrower than the pre-v1.49.948 single global lock, whose orphan wedged
- *   EVERY trunk's commits, not one round. Age-based marker reaping in `gc()`
- *   (the `acquiredAt` field is recorded for exactly this) is a future option.
+ *   that leaves a permanent `.commit-lock-<roundKey>` marker. `gc()` now reaps
+ *   such crash orphans by age, made SOUND by a write-ahead: the marker records
+ *   `committing: false` at acquisition and is flipped to `committing: true`
+ *   immediately BEFORE the trunk rename (see the winner path). A crash with the
+ *   marker still `committing: false` provably never reached the trunk write, so
+ *   `gc()` reaps it (round un-won → un-wedge); a crash at-or-after the flip
+ *   leaves `committing: true`, so `gc()` KEEPS the marker (the trunk may be
+ *   advanced — never reopen the double-win). `gc()` reaps only on an EXPLICIT
+ *   `committing: false`, so a legacy marker (pre-v1.49.952, no field) is kept.
+ *   Residual: a crash in the sub-instruction window between the flip and the
+ *   rename leaves `committing: true` with the trunk un-advanced → that one round
+ *   stays wedged (safe; removable by hand). See `branches/gc.ts`.
  *
  * Trunk merge:
  *   The committed skill body is written to `trunkPath` supplied by the caller.
@@ -123,6 +129,18 @@ interface LockEntry {
   parentHash: string;
   /** The trunk path this round committed to (observability). */
   trunkPath: string;
+  /**
+   * Write-ahead commit-intent flag (v1.49.952). Written `false` at lock
+   * acquisition and flipped to `true` immediately BEFORE the trunk rename, so a
+   * crash that left an orphan marker can be classified by `gc()`: `false` means
+   * the trunk write was never reached (round provably un-won → reapable), while
+   * `true` means the trunk write was reached or completed (the round may be won
+   * → the marker is KEPT). This is the durable signal that makes crash-orphan
+   * reaping sound without consulting mutable trunk content. Older markers
+   * (pre-v1.49.952) omit the field; `gc()` reaps only on an EXPLICIT `false`, so
+   * a legacy marker is conservatively kept.
+   */
+  committing: boolean;
 }
 
 // ─── Commit options ───────────────────────────────────────────────────────────
@@ -234,6 +252,7 @@ export async function commit(opts: CommitOptions): Promise<CommitResult> {
       acquiredAt: ts,
       parentHash: manifest.parentHash,
       trunkPath,
+      committing: false, // flipped to true just before the trunk rename
     };
     try {
       await fd.writeFile(JSON.stringify(entry), 'utf8');
@@ -275,6 +294,9 @@ export async function commit(opts: CommitOptions): Promise<CommitResult> {
 
   // ── Winner path ───────────────────────────────────────────────────────────
   if (won && winnerEntry) {
+    // Declared outside the try so the catch can clean up a leftover temp file
+    // if a step after its creation (the write-ahead, or the rename) fails.
+    let trunkTmp: string | undefined;
     try {
       // Read the branched skill body.
       const branchBody = await fs.readFile(join(branchDir, 'skill.md'), 'utf8');
@@ -283,8 +305,19 @@ export async function commit(opts: CommitOptions): Promise<CommitResult> {
       // a process crash mid-write must not leave a partially-written trunk. The
       // temp lives in the same directory so the rename is atomic on one volume.
       await fs.mkdir(dirname(trunkPath), { recursive: true });
-      const trunkTmp = trunkPath + '.tmp.' + randomUUID();
+      trunkTmp = trunkPath + '.tmp.' + randomUUID();
       await fs.writeFile(trunkTmp, branchBody, 'utf8');
+
+      // WRITE-AHEAD (v1.49.952): durably record commit-intent in the marker
+      // BEFORE the trunk rename. This is what lets gc()'s crash-orphan reaper be
+      // sound: a crash before this point leaves `committing: false` (the trunk
+      // write was never reached → safe to reap), while a crash at-or-after this
+      // point leaves `committing: true` (the trunk may be advanced → keep). The
+      // overwrite is non-atomic, but a crash mid-write leaves a corrupt marker
+      // that the reaper conservatively skips (keeps). Winner selection (the 'ax'
+      // open above) and the never-unlink-on-success behaviour are unchanged.
+      await fs.writeFile(lockPath, JSON.stringify({ ...winnerEntry, committing: true }), 'utf8');
+
       await fs.rename(trunkTmp, trunkPath);
 
       // Mark manifest as committed.
@@ -322,8 +355,10 @@ export async function commit(opts: CommitOptions): Promise<CommitResult> {
     } catch (err) {
       // Commit failed after acquiring the lock. Release the per-round lock so
       // the round is not permanently wedged (a sibling/retry can still win),
-      // then rethrow. This is the ONLY path that releases on the winner side.
+      // and best-effort remove any leftover trunk temp, then rethrow. This is
+      // the ONLY path that releases on the winner side.
       await fs.unlink(lockPath).catch(() => {/* ignore */});
+      if (trunkTmp !== undefined) await fs.unlink(trunkTmp).catch(() => {/* ignore */});
       throw err;
     }
   }
