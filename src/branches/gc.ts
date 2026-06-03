@@ -288,12 +288,18 @@ interface ReapContext {
  * the round was never won. A `committing: true` marker (trunk may be advanced),
  * a legacy marker with no `committing` field, a young marker, or a corrupt /
  * unreadable marker are all conservatively KEPT/SKIPPED — never reaped.
+ *
+ * On reap, the marker's recorded `trunkTmp` (written at acquisition since
+ * v1.49.964) is also unlinked best-effort — clearing the orphan staged tmp a
+ * crash before the `committing: true` flip would otherwise leak. This is sound
+ * for the same reason the reap is: an explicit `committing: false` proves the
+ * rename never consumed the tmp, so it is always an orphan here.
  */
 async function reapCommitLock(marker: string, ctx: ReapContext): Promise<void> {
   const { branchesDir, commitLockMaxAgeMs, now, dryRun, report } = ctx;
   const lockPath = join(branchesDir, marker);
 
-  let parsed: { acquiredAt?: unknown; committing?: unknown };
+  let parsed: { acquiredAt?: unknown; committing?: unknown; trunkTmp?: unknown };
   try {
     parsed = JSON.parse(await fs.readFile(lockPath, 'utf8')) as typeof parsed;
   } catch {
@@ -330,6 +336,15 @@ async function reapCommitLock(marker: string, ctx: ReapContext): Promise<void> {
     } catch {
       report.skippedLocks.push(marker);
       return;
+    }
+    // Best-effort: unlink the orphan trunk tmp this reaped round staged before
+    // crashing. SOUND because we only reach here on an EXPLICIT `committing:
+    // false` (the trunk rename provably never ran — see the check above), so the
+    // staged tmp is definitively an orphan, never a won round's in-flight body. A
+    // missing tmp (crash before staging, or already consumed) is a no-op
+    // (v1.49.964; accessory cleanup — silent best-effort per #10427).
+    if (typeof parsed.trunkTmp === 'string') {
+      await fs.rm(parsed.trunkTmp, { force: true }).catch(() => { /* orphan may already be gone */ });
     }
   }
   report.reapedLocks.push(marker);

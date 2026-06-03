@@ -66,19 +66,20 @@
  *   journal), so `recover()` forward-completes that wedged round idempotently by
  *   re-applying the rename. See `branches/gc.ts` and `branches/recover.ts`.
  *
- *   Remaining minor residuals (both COSMETIC, neither a wedge or data loss):
- *   (1) Orphan trunk-tmp leak — a crash AFTER staging the trunk tmp but BEFORE
- *   the `committing: true` flip leaves a `committing: false` marker (gc() reaps
- *   it, round un-wedged) plus an orphan `<trunkPath>.tmp.<uuid>` in the trunk's
- *   directory. The acquisition marker does not record `trunkTmp` (it is computed
- *   later, inside the winner path), so nothing auto-cleans that stray tmp; it is
- *   a bounded-per-crash disk leak removable by hand. (2) Torn marker — the flip
- *   is a plain (non-atomic) overwrite, so a crash mid-write leaves either (a) a
- *   truncated/invalid-JSON marker (both `recover()` and `gc()` skip it -> kept,
- *   wedged, hand-removable) or (b) the prior `committing: false` bytes intact
- *   (gc() reaps it as un-won, correct — degrading into residual (1)'s tmp leak).
- *   A torn write can only truncate, never forge a valid `committing: true` marker
- *   missing the journal fields.
+ *   Former residual (CLOSED v1.49.964): orphan trunk-tmp leak — a crash AFTER
+ *   staging the trunk tmp but BEFORE the `committing: true` flip leaves a
+ *   `committing: false` marker (gc() reaps it, round un-wedged) plus an orphan
+ *   `<trunkPath>.tmp.<uuid>`. `trunkTmp` is now generated up front and recorded
+ *   in the ACQUISITION marker (`committing: false`), so gc() unlinks the orphan
+ *   tmp when it reaps that marker — no hand cleanup needed. See `branches/gc.ts`.
+ *
+ *   Remaining minor residual (COSMETIC, neither a wedge nor data loss): a torn
+ *   marker — the flip is a plain (non-atomic) overwrite, so a crash mid-write
+ *   leaves either (a) a truncated/invalid-JSON marker (both `recover()` and
+ *   `gc()` skip it -> kept, wedged, hand-removable) or (b) the prior
+ *   `committing: false` bytes intact (gc() reaps it as un-won, correct, and now
+ *   also unlinks the recorded trunkTmp). A torn write can only truncate, never
+ *   forge a valid `committing: true` marker missing the journal fields.
  *
  * Trunk merge:
  *   The committed skill body is written to `trunkPath` supplied by the caller.
@@ -158,15 +159,17 @@ interface LockEntry {
    */
   committing: boolean;
   /**
-   * Intent-journal fields (v1.49.960), written ALONGSIDE `committing: true` in
-   * the write-ahead so the trunk rename is idempotently REPLAYABLE by `recover()`
-   * after a crash in the flip->rename window. `trunkTmp` is the staged trunk-body
-   * temp path and `bodyHash` is its sha256; `recover()` re-applies
-   * `rename(trunkTmp, trunkPath)` only when the staged body still hashes to
-   * `bodyHash` and the trunk does not yet hold it. Absent at acquisition
-   * (`committing: false`) and on pre-v1.49.960 markers — `recover()` skips a
-   * `committing: true` marker that lacks them (cannot replay). See
-   * `branches/recover.ts`.
+   * Intent-journal fields. `trunkTmp` (the staged trunk-body temp path) is
+   * recorded at BOTH lock acquisition (alongside `committing: false`, so gc() can
+   * unlink the orphan tmp left by a crash before the flip — v1.49.964) AND the
+   * write-ahead flip (alongside `committing: true` + `bodyHash`, so `recover()`
+   * can idempotently REPLAY `rename(trunkTmp, trunkPath)` after a crash in the
+   * flip->rename window — v1.49.960). `bodyHash` is the staged body's sha256,
+   * written ONLY at the flip; `recover()` re-applies the rename only when the
+   * staged body still hashes to `bodyHash` and the trunk does not yet hold it.
+   * `bodyHash` is absent at acquisition and on pre-v1.49.960 markers —
+   * `recover()` skips a `committing: true` marker that lacks it (cannot replay).
+   * See `branches/recover.ts` and `branches/gc.ts`.
    */
   trunkTmp?: string;
   bodyHash?: string;
@@ -268,6 +271,15 @@ export async function commit(opts: CommitOptions): Promise<CommitResult> {
     COMMIT_LOCK_PREFIX + commitRoundKey(trunkPath, manifest.parentHash),
   );
 
+  // Stage path for the trunk body, generated ONCE up front so the acquisition
+  // marker can record it (alongside `committing: false`). A crash after staging
+  // this tmp but before the `committing: true` flip leaves a `committing: false`
+  // marker that gc() reaps; recording trunkTmp here lets gc() also unlink the
+  // orphan tmp it would otherwise leak (v1.49.964 — former residual (1)). The
+  // winner path stages to and renames from this exact path; the flip re-affirms
+  // it alongside `committing: true` + bodyHash for recover()'s replay.
+  const trunkTmp = trunkPath + '.tmp.' + randomUUID();
+
   // ── Try to acquire the per-round lock (atomic 'ax' open) ──────────────────
   let won = false;
   let winnerEntry: LockEntry | null = null;
@@ -282,6 +294,7 @@ export async function commit(opts: CommitOptions): Promise<CommitResult> {
       parentHash: manifest.parentHash,
       trunkPath,
       committing: false, // flipped to true just before the trunk rename
+      trunkTmp, // recorded at acquisition so gc() can unlink the orphan on a pre-flip crash (v1.49.964)
     };
     try {
       await fd.writeFile(JSON.stringify(entry), 'utf8');
@@ -323,9 +336,6 @@ export async function commit(opts: CommitOptions): Promise<CommitResult> {
 
   // ── Winner path ───────────────────────────────────────────────────────────
   if (won && winnerEntry) {
-    // Declared outside the try so the catch can clean up a leftover temp file
-    // if a step after its creation (the write-ahead, or the rename) fails.
-    let trunkTmp: string | undefined;
     try {
       // Read the branched skill body.
       const branchBody = await fs.readFile(join(branchDir, 'skill.md'), 'utf8');
@@ -333,8 +343,10 @@ export async function commit(opts: CommitOptions): Promise<CommitResult> {
       // Write to trunk path atomically (write-then-rename, like writeManifest):
       // a process crash mid-write must not leave a partially-written trunk. The
       // temp lives in the same directory so the rename is atomic on one volume.
+      // `trunkTmp` was generated up front and recorded in the acquisition marker,
+      // so a crash after this stage but before the `committing: true` flip leaves
+      // a `committing: false` marker carrying trunkTmp — gc() unlinks the orphan.
       await fs.mkdir(dirname(trunkPath), { recursive: true });
-      trunkTmp = trunkPath + '.tmp.' + randomUUID();
       await fs.writeFile(trunkTmp, branchBody, 'utf8');
 
       // WRITE-AHEAD (v1.49.952): durably record commit-intent in the marker
@@ -400,7 +412,7 @@ export async function commit(opts: CommitOptions): Promise<CommitResult> {
       // and best-effort remove any leftover trunk temp, then rethrow. This is
       // the ONLY path that releases on the winner side.
       await fs.unlink(lockPath).catch(() => {/* ignore */});
-      if (trunkTmp !== undefined) await fs.unlink(trunkTmp).catch(() => {/* ignore */});
+      await fs.unlink(trunkTmp).catch(() => {/* ignore — may not have been staged yet */});
       throw err;
     }
   }

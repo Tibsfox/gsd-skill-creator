@@ -76,7 +76,7 @@ describe('gc()', () => {
    */
   async function makeLock(
     roundKey: string,
-    entry: { branchId?: string; acquiredAt?: number | 'absent'; committing?: boolean | 'absent' },
+    entry: { branchId?: string; acquiredAt?: number | 'absent'; committing?: boolean | 'absent'; trunkTmp?: string },
   ): Promise<string> {
     const marker = COMMIT_LOCK_PREFIX + roundKey;
     const body: Record<string, unknown> = {
@@ -87,8 +87,16 @@ describe('gc()', () => {
     };
     if (entry.acquiredAt !== 'absent') body.acquiredAt = entry.acquiredAt;
     if (entry.committing !== 'absent') body.committing = entry.committing;
+    if (entry.trunkTmp !== undefined) body.trunkTmp = entry.trunkTmp;
     await fs.writeFile(join(dir, marker), JSON.stringify(body), 'utf8');
     return marker;
+  }
+
+  /** Stage a fake trunk tmp on disk and return its path (the v1.49.964 orphan). */
+  async function stageTmp(name = 'trunk.md.tmp.' + randomUUID()): Promise<string> {
+    const tmpPath = join(dir, name);
+    await fs.writeFile(tmpPath, 'staged-body', 'utf8');
+    return tmpPath;
   }
 
   // ── Branch reaping (previously untested core) ─────────────────────────────
@@ -204,6 +212,62 @@ describe('gc()', () => {
     const report = await gc({ branchesDir: dir, now: NOW, commitLockMaxAgeMs: Infinity });
     expect(report.keptLocks).toEqual([marker]);
     expect(existsSync(join(dir, marker))).toBe(true);
+  });
+
+  // ── Orphan trunk-tmp cleanup (v1.49.964) ──────────────────────────────────
+  // commit() records trunkTmp in the ACQUISITION marker (committing:false), so
+  // gc() can unlink the orphan staged tmp left by a crash before the flip.
+
+  it('reaps an orphan AND unlinks its recorded trunk-tmp (committing:false, old)', async () => {
+    const tmp = await stageTmp();
+    const marker = await makeLock('round-orphan', { acquiredAt: NOW - 2 * HOUR, committing: false, trunkTmp: tmp });
+    expect(existsSync(tmp)).toBe(true);
+    const report = await gc({ branchesDir: dir, now: NOW });
+    expect(report.reapedLocks).toEqual([marker]);
+    expect(existsSync(join(dir, marker))).toBe(false);
+    expect(existsSync(tmp)).toBe(false); // the orphan tmp is unlinked
+  });
+
+  it('SAFETY: does NOT unlink the trunk-tmp of a committing:true (won) marker', async () => {
+    // A won round's staged tmp may be mid-rename or recover()'s to replay —
+    // never touch it. The unlink rides the same committing:false reap gate.
+    const tmp = await stageTmp();
+    const marker = await makeLock('round-won', { acquiredAt: NOW - 2 * HOUR, committing: true, trunkTmp: tmp });
+    const report = await gc({ branchesDir: dir, now: NOW });
+    expect(report.keptLocks).toEqual([marker]);
+    expect(existsSync(tmp)).toBe(true); // won round's tmp preserved
+  });
+
+  it('does NOT unlink the trunk-tmp of a YOUNG committing:false marker (possibly in-flight)', async () => {
+    const tmp = await stageTmp();
+    const marker = await makeLock('round-young', { acquiredAt: NOW - 60_000, committing: false, trunkTmp: tmp });
+    const report = await gc({ branchesDir: dir, now: NOW });
+    expect(report.keptLocks).toEqual([marker]);
+    expect(existsSync(tmp)).toBe(true); // in-flight round's tmp preserved
+  });
+
+  it('tolerates an already-gone trunk-tmp on reap (rename consumed it, or crash before staging)', async () => {
+    const ghostTmp = join(dir, 'trunk.md.tmp.' + randomUUID()); // never created on disk
+    const marker = await makeLock('round-ghost', { acquiredAt: NOW - 2 * HOUR, committing: false, trunkTmp: ghostTmp });
+    const report = await gc({ branchesDir: dir, now: NOW }); // must not throw
+    expect(report.reapedLocks).toEqual([marker]);
+    expect(existsSync(join(dir, marker))).toBe(false);
+  });
+
+  it('dry-run reports the reapable marker but unlinks NOTHING (marker + tmp both survive)', async () => {
+    const tmp = await stageTmp();
+    const marker = await makeLock('round-dry', { acquiredAt: NOW - 2 * HOUR, committing: false, trunkTmp: tmp });
+    const report = await gc({ branchesDir: dir, now: NOW, dryRun: true });
+    expect(report.reapedLocks).toEqual([marker]);
+    expect(existsSync(join(dir, marker))).toBe(true);
+    expect(existsSync(tmp)).toBe(true);
+  });
+
+  it('reaps a legacy committing:false marker with NO trunkTmp field cleanly (no throw)', async () => {
+    const marker = await makeLock('round-notmp', { acquiredAt: NOW - 2 * HOUR, committing: false });
+    const report = await gc({ branchesDir: dir, now: NOW });
+    expect(report.reapedLocks).toEqual([marker]);
+    expect(existsSync(join(dir, marker))).toBe(false);
   });
 
   it('order-independence: reaps a committing:false marker AND deletes a >30d open branch in one run', async () => {
