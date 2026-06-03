@@ -32,16 +32,17 @@
  * verdict stays `candidate` — never a false `overdue`. The codify axis has no
  * cleanly machine-readable first-conjunct signal (no structured ESTABLISHED-
  * candidate backlog), so it reports `manual` with the manifest lesson count for
- * context. The verify axis uses a heuristic restricted to the DEDICATED
+ * context. The verify axis checks the DEDICATED
  * `*-end-to-end.integration.test.ts` files (the #10453 substrate->calibration
  * closing-move convention): a wired threshold is "covered" iff one of those
- * dedicated end-to-end tests references its string. Restricting to dedicated
- * end-to-end files — rather than every integration file (the v1.49.947
- * global-substring heuristic) — means an incidental mention of a threshold
- * string in an unrelated integration test no longer counts as coverage. It is
- * still a heuristic (filename-convention + string-presence, not import/call-
- * graph wire detection); a true substrate-to-caller wire detector is future
- * work.
+ * dedicated end-to-end tests STRUCTURALLY WIRES it (v1.49.953). Structural
+ * wiring requires the test to exercise BOTH ends of the wire — pass the
+ * threshold as a string-literal argument to a real `loadObservationsForThreshold(`
+ * call (the calibration read / caller end) AND import a substrate/events module
+ * (the write end) — replacing the v1.49.947/950 string-presence heuristic, which
+ * an incidental comment mention satisfied. The v1.49.949 restriction to dedicated
+ * end-to-end files still applies. It is still a structural (not full call-graph)
+ * check, but a dedicated file that merely MENTIONS a threshold no longer counts.
  *
  * Exit codes (with `--check`) — a TRUE gate, fires only on definitive overdue:
  *   0  no checked axis is `overdue` (not-overdue / candidate / manual)
@@ -351,20 +352,73 @@ function checkCodify(): AxisReport {
 export interface ThresholdCoverage {
   threshold: CalibratableThreshold;
   covered: boolean;
-  /** Dedicated end-to-end test file(s) that reference this threshold. */
+  /** Dedicated end-to-end test file(s) that wire this threshold. */
   coveringTests: string[];
 }
 
 /**
+ * The calibration read-side entry point — the "caller" that consumes
+ * substrate-emitted observations. A dedicated end-to-end test wires a threshold
+ * by passing it as a string-literal argument to a real call of this function.
+ */
+export const CALIBRATION_READER = 'loadObservationsForThreshold';
+
+/**
+ * Import-path fragments that identify a substrate (write-side) module — the
+ * other end of the wire. All five dedicated end-to-end tests import their
+ * substrate from a path matching one of these (`*-substrate`, `*-events`, or the
+ * `suggestion-store`). A new substrate with a different naming scheme that fails
+ * this must extend the pattern; the live-tree drift guard test forces that.
+ */
+export const SUBSTRATE_MODULE_RE = /from\s+['"][^'"]*(?:-substrate|-events|suggestion-store)[^'"]*['"]/;
+
+/** Escape a string for safe embedding inside a RegExp source. */
+function escapeRegExp(s: string): string {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+/**
+ * Structural substrate-to-caller wire detection (v1.49.953). A dedicated
+ * end-to-end test "wires" a threshold iff it exercises BOTH ends of the
+ * substrate -> calibration wire:
+ *
+ *   - CALLER end: the threshold appears as a string-literal argument to a real
+ *     `loadObservationsForThreshold(` call (the calibration read), not merely
+ *     somewhere in the file. Whitespace/newlines between the `(` and the literal
+ *     are allowed (the multi-line call style some tests use).
+ *   - SUBSTRATE end: the file imports a substrate/events module (the write side).
+ *
+ * This replaces the v1.49.947/950 string-presence heuristic (`content.includes`),
+ * which an incidental comment mention or an unrelated reference satisfied. It is
+ * still a structural (not full call-graph) check, but it requires the test to
+ * actually call the calibration reader WITH the threshold AND import a substrate
+ * — a much stronger signal that the substrate -> calibration wire is exercised.
+ */
+export function detectThresholdWire(threshold: string, content: string): boolean {
+  // The `(?<![A-Za-z0-9_])` guard anchors the call to a real identifier boundary
+  // so a hypothetical function whose name merely ENDS with the reader's name does
+  // not match.
+  const callerRe = new RegExp(
+    `(?<![A-Za-z0-9_])${CALIBRATION_READER}\\(\\s*['"]${escapeRegExp(threshold)}['"]`,
+  );
+  const callsCalibrationReader = callerRe.test(content);
+  const importsSubstrate = SUBSTRATE_MODULE_RE.test(content);
+  return callsCalibrationReader && importsSubstrate;
+}
+
+/**
  * Pure verify-axis verdict: a wired threshold is "covered" iff at least one of
- * the supplied DEDICATED end-to-end tests references its string. A threshold
- * with no covering end-to-end test is a `candidate` (integration-coverage gap).
+ * the supplied DEDICATED end-to-end tests STRUCTURALLY WIRES it (see
+ * {@link detectThresholdWire}). A threshold with no wiring end-to-end test is a
+ * `candidate` (integration-coverage gap).
  *
  * Extracted as a pure function (mirrors {@link calibrateVerdict}) so the
  * coverage logic is testable with synthetic test-file entries, independent of
  * the on-disk `tests/integration/` directory. The caller is responsible for
  * passing only dedicated end-to-end files (see {@link END_TO_END_TEST_RE}) —
- * that restriction is the hardening over the v1.49.947 global-substring scan.
+ * that restriction is the v1.49.949 hardening over the v1.49.947 global-substring
+ * scan; the v1.49.953 structural wire detection hardens it further (a dedicated
+ * file that only MENTIONS the threshold no longer counts).
  */
 export function verifyVerdict(
   wired: readonly CalibratableThreshold[],
@@ -377,7 +431,7 @@ export function verifyVerdict(
 } {
   const perThreshold: ThresholdCoverage[] = wired.map((threshold) => {
     const coveringTests = endToEndTests
-      .filter((t) => t.content.includes(threshold))
+      .filter((t) => detectThresholdWire(threshold, t.content))
       .map((t) => t.file);
     return { threshold, covered: coveringTests.length > 0, coveringTests };
   });
@@ -385,11 +439,11 @@ export function verifyVerdict(
   const status: CadenceStatus = uncovered.length > 0 ? 'candidate' : 'not-overdue';
   const detail =
     status === 'candidate'
-      ? `${uncovered.length} wired threshold(s) with NO dedicated *-end-to-end integration test: ` +
-        `${uncovered.join(', ')}; CANDIDATE (heuristic: dedicated-end-to-end-file reference) — confirm a ` +
+      ? `${uncovered.length} wired threshold(s) with NO dedicated *-end-to-end integration test that ` +
+        `structurally wires substrate -> calibration: ${uncovered.join(', ')}; CANDIDATE — confirm a ` +
         `substrate-to-caller end-to-end test exists and >=10 ships since the first non-test caller (operator-tracked).`
-      : `all ${wired.length} wired thresholds are referenced by a dedicated *-end-to-end integration test ` +
-        `(${endToEndTests.length} such file(s)); no integration-coverage gap detected -> not overdue.`;
+      : `all ${wired.length} wired thresholds are structurally wired by a dedicated *-end-to-end integration ` +
+        `test (${endToEndTests.length} such file(s)); no integration-coverage gap detected -> not overdue.`;
   return { status, perThreshold, uncovered, detail };
 }
 

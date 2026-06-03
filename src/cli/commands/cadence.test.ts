@@ -8,6 +8,7 @@ import type { CalibratableThreshold } from '../../bounded-learning/types.js';
 import {
   calibrateVerdict,
   verifyVerdict,
+  detectThresholdWire,
   buildCadenceReport,
   cadenceCommand,
   readAxisAdvances,
@@ -31,6 +32,24 @@ function makeReleaseNotes(versions: Array<{ v: string; advances?: string[] }>): 
     writeFileSync(join(dir, v, 'README.md'), `---\nversion: ${v}\n${fm}---\n# ${v}\n`);
   }
   return dir;
+}
+
+/**
+ * Synthetic dedicated-end-to-end content that STRUCTURALLY WIRES a threshold
+ * (v1.49.953): a substrate/events import (write end) + a real
+ * loadObservationsForThreshold(threshold-literal) call (caller end).
+ */
+function wiredContent(threshold: string): string {
+  return [
+    `import { runFoo } from '../../src/foo/foo-substrate.js';`,
+    `import { loadObservationsForThreshold } from '../../src/bounded-learning/observation-sources.js';`,
+    `const obs = await loadObservationsForThreshold('${threshold}', { path });`,
+  ].join('\n');
+}
+
+/** Synthetic dedicated-end-to-end content that only MENTIONS a threshold (no wire). */
+function mentionContent(threshold: string): string {
+  return `// this file mentions ${threshold} in a comment but never wires it\n`;
 }
 
 describe('cadence command', () => {
@@ -117,10 +136,64 @@ describe('cadence command', () => {
     });
   });
 
-  describe('verifyVerdict (pure) — dedicated-end-to-end coverage', () => {
-    it('a threshold referenced by a dedicated end-to-end test is covered', () => {
+  describe('detectThresholdWire (pure) — structural substrate-to-caller detection (v1.49.953)', () => {
+    const T = 'observation.retention_days';
+
+    it('wires iff a substrate import AND a loadObservationsForThreshold(threshold-literal) call', () => {
+      expect(detectThresholdWire(T, wiredContent(T))).toBe(true);
+    });
+
+    it('a comment-only MENTION does not wire (the key hardening over string-presence)', () => {
+      expect(detectThresholdWire(T, mentionContent(T))).toBe(false);
+      // Even the bare threshold string somewhere in the file is not enough.
+      expect(detectThresholdWire(T, `const x = '${T}'; // not passed to the reader`)).toBe(false);
+    });
+
+    it('a calibration-reader call WITHOUT a substrate import does not wire', () => {
+      const content = `await loadObservationsForThreshold('${T}', { path });`;
+      expect(detectThresholdWire(T, content)).toBe(false);
+    });
+
+    it('a substrate import WITHOUT a reader call does not wire', () => {
+      const content = `import { runFoo } from '../../src/foo/foo-substrate.js';\n// mentions ${T}`;
+      expect(detectThresholdWire(T, content)).toBe(false);
+    });
+
+    it('detects a multi-line reader call (the call style some tests use)', () => {
+      const content =
+        `import { appendEvt } from '../../src/x-events.js';\n` +
+        `const obs = await loadObservationsForThreshold(\n  '${T}',\n  { eventsPath },\n);`;
+      expect(detectThresholdWire(T, content)).toBe(true);
+    });
+
+    it('does not wire a DIFFERENT threshold passed to the reader', () => {
+      const content = wiredContent('token_budget.max_percent');
+      expect(detectThresholdWire(T, content)).toBe(false);
+    });
+
+    it('does not match an identifier that merely ENDS with the reader name (boundary guard)', () => {
+      const content =
+        `import { runFoo } from '../../src/foo/foo-substrate.js';\n` +
+        `await myloadObservationsForThreshold('${T}', { path });`;
+      expect(detectThresholdWire(T, content)).toBe(false);
+    });
+
+    it('accepts suggestion-store and -events substrate module specifiers', () => {
+      const sug =
+        `import { SuggestionStore } from '../../src/detection/suggestion-store.js';\n` +
+        `await loadObservationsForThreshold('${T}', { p });`;
+      const evt =
+        `import { appendEvt } from '../../src/bounded-learning/x-events.js';\n` +
+        `await loadObservationsForThreshold('${T}', { p });`;
+      expect(detectThresholdWire(T, sug)).toBe(true);
+      expect(detectThresholdWire(T, evt)).toBe(true);
+    });
+  });
+
+  describe('verifyVerdict (pure) — structural-wire coverage', () => {
+    it('a threshold structurally wired by a dedicated end-to-end test is covered', () => {
       const v = verifyVerdict(['observation.retention_days'], [
-        { file: 'r-end-to-end.integration.test.ts', content: 'exercises observation.retention_days' },
+        { file: 'r-end-to-end.integration.test.ts', content: wiredContent('observation.retention_days') },
       ]);
       expect(v.status).toBe('not-overdue');
       expect(v.uncovered).toEqual([]);
@@ -128,7 +201,15 @@ describe('cadence command', () => {
       expect(v.perThreshold[0].coveringTests).toEqual(['r-end-to-end.integration.test.ts']);
     });
 
-    it('a threshold referenced by NO end-to-end test is a candidate', () => {
+    it('a dedicated file that only MENTIONS the threshold is a candidate (not covered)', () => {
+      const v = verifyVerdict(['observation.retention_days'], [
+        { file: 'r-end-to-end.integration.test.ts', content: mentionContent('observation.retention_days') },
+      ]);
+      expect(v.status).toBe('candidate');
+      expect(v.uncovered).toEqual(['observation.retention_days']);
+    });
+
+    it('a threshold wired by NO end-to-end test is a candidate', () => {
       const v = verifyVerdict(['token_budget.max_percent'], [
         { file: 'other-end-to-end.integration.test.ts', content: 'unrelated content' },
       ]);
@@ -138,7 +219,7 @@ describe('cadence command', () => {
 
     it('mixed input names only the uncovered threshold', () => {
       const v = verifyVerdict(['observation.retention_days', 'token_budget.max_percent'], [
-        { file: 'r-end-to-end.integration.test.ts', content: 'observation.retention_days here' },
+        { file: 'r-end-to-end.integration.test.ts', content: wiredContent('observation.retention_days') },
       ]);
       expect(v.status).toBe('candidate');
       expect(v.uncovered).toEqual(['token_budget.max_percent']);
@@ -151,7 +232,9 @@ describe('cadence command', () => {
     });
 
     it('no wired thresholds -> not overdue', () => {
-      const v = verifyVerdict([], [{ file: 'x-end-to-end.integration.test.ts', content: 'whatever' }]);
+      const v = verifyVerdict([], [
+        { file: 'x-end-to-end.integration.test.ts', content: wiredContent('observation.retention_days') },
+      ]);
       expect(v.status).toBe('not-overdue');
     });
   });
@@ -160,10 +243,10 @@ describe('cadence command', () => {
     it('an incidental mention in a NON-end-to-end integration test does NOT count as coverage', async () => {
       const dir = mkdtempSync(join(tmpdir(), 'cadence-verify-'));
       try {
-        // A DEDICATED end-to-end test referencing one real threshold.
+        // A DEDICATED end-to-end test that STRUCTURALLY WIRES one real threshold.
         writeFileSync(
           join(dir, 'retention-end-to-end.integration.test.ts'),
-          '// exercises observation.retention_days substrate -> calibration end-to-end\n',
+          wiredContent('observation.retention_days'),
         );
         // A NON-dedicated integration test that merely MENTIONS another threshold.
         // The pre-v1.49.948 global-substring heuristic would have counted this as coverage.
