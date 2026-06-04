@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "$comment": "Agent-adoption-scan allowlist — agents that have NO scripted dispatch site but are NOT dormant, and so should NOT trigger the --dormant-threshold gate. Added v1.49.975 (Ship 2.3 of the 2026-06-03 audit plan). Each entry must include a reason. An allowlist entry does NOT change an agent's status (it still reads 'dormant' in the report) — it only documents WHY the zero-site result is expected and exempts it from the gate. See docs/AGENT-ADOPTION-VERDICTS.md for the full per-agent disposition.",
+  "version": "1.0",
+  "entries": [
+    {
+      "agent": "gsd-orchestrator",
+      "reason": "Description-dispatched. The GSD master intent-router ('Invoke when unsure which GSD command to run') is invoked by Claude Code on description match, not a scripted subagent_type=. Installed via a standalone manifest entry + autoDiscover; backed by the live src/orchestrator/ module and the `skill-creator orchestrator` CLI; load-bearing (relocating it breaks render-claude-md classifyAgents / pre-tag-gate step 7 + INVENTORY-MANIFEST + install.cjs). NOT dormant.",
+      "addedAt": "v1.49.975",
+      "addedBy": "v975 Ship 2.3 agent adoption scan"
+    },
+    {
+      "agent": "doc-linter",
+      "reason": "Description-dispatched. Model-invoked documentation-audit review subagent (read-only Read/Glob/Grep); member of the agents.json 'generic infra' category and a named exception in tools/check-scaffolder-residue.mjs. No scripted subagent_type= by design. Load-bearing (relocating breaks render-claude-md step 7 + INVENTORY-MANIFEST). NOT dormant.",
+      "addedAt": "v1.49.975",
+      "addedBy": "v975 Ship 2.3 agent adoption scan"
+    },
+    {
+      "agent": "codebase-navigator",
+      "reason": "Description-dispatched. Model-invoked read-only architecture-analysis review subagent; member of the agents.json 'generic infra' category. No scripted subagent_type= by design. Load-bearing (relocating breaks render-claude-md step 7 + INVENTORY-MANIFEST). NOT dormant.",
+      "addedAt": "v1.49.975",
+      "addedBy": "v975 Ship 2.3 agent adoption scan"
+    },
+    {
+      "agent": "changelog-generator",
+      "reason": "Description-dispatched. Model-invoked changelog review subagent; member of the agents.json 'generic infra' category. No scripted subagent_type= by design. Load-bearing (relocating breaks render-claude-md step 7 + INVENTORY-MANIFEST). NOT dormant.",
+      "addedAt": "v1.49.975",
+      "addedBy": "v975 Ship 2.3 agent adoption scan"
+    },
+    {
+      "agent": "pipeline-reconciler",
+      "reason": "Script-twin. The pipeline-reconciliation WORK runs deterministically as tools/release-history/pipeline-reconciler.mjs (refresh.mjs step 'reconcile', required:true) — not as an agent dispatch. The agent .md is the spec twin of that script. Name-collision trap: a naive grep would read the .mjs hit as a dispatch. KEEP as the documented spec; the agent itself is intentionally not dispatched.",
+      "addedAt": "v1.49.975",
+      "addedBy": "v975 Ship 2.3 agent adoption scan"
+    },
+    {
+      "agent": "quality-drift-watcher",
+      "reason": "Script-twin. The quality-drift scoring WORK runs deterministically as tools/release-history/quality-drift-check.mjs (refresh.mjs step 'drift-check', required:true) — not as an agent dispatch. The agent .md is the spec twin of that script. Same name-collision class as pipeline-reconciler. KEEP as the documented spec; the agent itself is intentionally not dispatched.",
+      "addedAt": "v1.49.975",
+      "addedBy": "v975 Ship 2.3 agent adoption scan"
+    },
+    {
+      "agent": "gsd-intel-updater",
+      "reason": "Orphaned GSD-suite agent (writes structured intel to .planning/intel/). Coherent purpose but no command/workflow currently dispatches it. Parked with a dated retire-or-resume triage gate rather than retired (operator decision, Ship 2.3) — a future GSD intel/map consumer may wire it. Retire-or-resume review by 2027-06-04: if still unwired, relocate to examples/agents/deprecated/. NOT a description-dispatched agent (it has no model-invocation contract today); the gate exists so this exemption does not become permanent shelfware like the src/ `upstream` entry.",
+      "addedAt": "v1.49.975",
+      "addedBy": "v975 Ship 2.3 agent adoption scan"
+    }
+  ]
+}

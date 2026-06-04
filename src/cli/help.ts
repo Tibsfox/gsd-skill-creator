@@ -168,6 +168,8 @@ Agent Composition:
     - model: optional model alias (sonnet, opus, haiku, inherit)
 
   Run 'agents validate' to check all agents for format issues.
+  Run 'agents adoption' to scan dispatch sites — which agents are living
+  vs dormant (the agent-tier sibling of the src/ adoption scan).
   Run 'migrate-agent' to fix agents with legacy format.
 
   Note: User-level agents (~/.claude/agents/) have a known discovery
@@ -295,6 +297,7 @@ Examples:
   skill-creator agents suggest      # Analyze co-activations, suggest agents
   skill-creator agents list         # List agents with validation status
   skill-creator agents validate     # Check all agents for format issues
+  skill-creator agents adoption     # Scan dispatch sites: living vs dormant
   skill-creator budget              # Show budget usage for user scope
   skill-creator budget --project    # Show budget usage for project scope
   skill-creator detect-conflicts    # Scan all skills for conflicts

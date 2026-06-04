@@ -46,6 +46,7 @@ export default defineConfig({
       'tools/__tests__/project-md-normalizer.test.mjs',
       'tools/__tests__/state-md-clean-backups.test.mjs',
       'tools/__tests__/adoption-scan.test.mjs',
+      'tools/__tests__/agent-adoption-scan.test.mjs',
       'tools/__tests__/adoption-refresh.test.mjs',
       'tools/__tests__/adoption-trends.test.mjs',
       'tools/__tests__/adoption-baseline-freshness.test.mjs',

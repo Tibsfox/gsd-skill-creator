@@ -3,8 +3,9 @@ import pc from 'picocolors';
 import { createStores } from '../../index.js';
 import { listAgentsInDir } from './migrate-agent.js';
 import { validateAgentFrontmatter } from '../../validation/agent-validation.js';
+import { ensureProcessAllowed, type ProcessContext } from '../../security/process-context.js';
 
-export async function agentsCommand(args: string[]): Promise<number> {
+export async function agentsCommand(args: string[], ctx?: ProcessContext): Promise<number> {
   const subcommand = args[1];
   const { skillStore } = createStores();
   const { AgentSuggestionManager } = await import('../../agents/index.js');
@@ -187,6 +188,34 @@ export async function agentsCommand(args: string[]): Promise<number> {
       return 0;
     }
 
+    case 'adoption':
+    case 'ad': {
+      // Repo-maintainer / self-audit command: the agent-tier sibling of
+      // `npm run adoption-report`. Thin, faithful wrapper over the standalone
+      // scanner tool so there is no format drift — it forwards every flag
+      // after `adoption` (--json, --dormant-threshold N, --no-allowlist,
+      // --root, --agents-dir) and inherits the tool's stdio + exit code.
+      const { spawnSync } = await import('node:child_process');
+      const { existsSync } = await import('node:fs');
+      const { join } = await import('node:path');
+      const toolPath = join(process.cwd(), 'tools', 'agent-adoption-scan.mjs');
+      if (!existsSync(toolPath)) {
+        p.log.warn('agent adoption scan is a repo-maintainer command.');
+        p.log.message(`  Run it from the gsd-skill-creator repo root (not found: ${pc.dim('tools/agent-adoption-scan.mjs')}).`);
+        p.log.message(`  See ${pc.cyan('docs/AGENT-ADOPTION-VERDICTS.md')} for the per-agent disposition.`);
+        return 1;
+      }
+      const forwarded = args.slice(2);
+      // Route through the ProcessContext chokepoint (src/security/process-context.ts).
+      // ctx is undefined at the dispatch boundary today (no-op), but threading it
+      // keeps this caller inside the governed surface rather than bypassing it.
+      ensureProcessAllowed(ctx, 'cli/commands/agents', 'spawn-sync', process.execPath, [toolPath, ...forwarded]);
+      const result = spawnSync(process.execPath, [toolPath, ...forwarded], {
+        stdio: 'inherit',
+      });
+      return result.status ?? 1;
+    }
+
     default: {
       p.log.message('');
       p.log.message(pc.bold('Agent Management:'));
@@ -202,11 +231,14 @@ export async function agentsCommand(args: string[]): Promise<number> {
       p.log.message(`    ${pc.cyan('agents suggest')}    Analyze co-activations, suggest agents`);
       p.log.message(`    ${pc.cyan('agents list')}       List agents with validation status`);
       p.log.message(`    ${pc.cyan('agents validate')}   Check all agent files for format issues`);
+      p.log.message(`    ${pc.cyan('agents adoption')}   Scan dispatch sites: living vs dormant agents`);
       p.log.message('');
       p.log.message('  Examples:');
       p.log.message('    skill-creator agents suggest');
       p.log.message('    skill-creator agents list');
       p.log.message('    skill-creator agents validate');
+      p.log.message('    skill-creator agents adoption');
+      p.log.message('    skill-creator agents adoption --json');
       return 0;
     }
   }

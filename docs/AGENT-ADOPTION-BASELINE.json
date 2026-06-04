@@ -1,0 +1,923 @@
+[
+  {
+    "agent": "capcom",
+    "workflowRefs": [],
+    "templateRefs": [],
+    "commandRefs": [],
+    "skillRefs": [
+      ".claude/skills/cartridge-forge/SKILL.md",
+      ".claude/skills/team-control/SKILL.md",
+      "project-claude/skills/cartridge-forge/SKILL.md",
+      "project-claude/skills/team-control/SKILL.md"
+    ],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 4,
+    "testRefCount": 0,
+    "status": "living",
+    "allowlisted": false,
+    "allowlistReason": null
+  },
+  {
+    "agent": "changelog-generator",
+    "workflowRefs": [],
+    "templateRefs": [],
+    "commandRefs": [],
+    "skillRefs": [],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 0,
+    "testRefCount": 0,
+    "status": "dormant",
+    "allowlisted": true,
+    "allowlistReason": "Description-dispatched. Model-invoked changelog review subagent; member of the agents.json 'generic infra' category. No scripted subagent_type= by design. Load-bearing (relocating breaks render-claude-md step 7 + INVENTORY-MANIFEST). NOT dormant."
+  },
+  {
+    "agent": "codebase-navigator",
+    "workflowRefs": [],
+    "templateRefs": [],
+    "commandRefs": [],
+    "skillRefs": [],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 0,
+    "testRefCount": 0,
+    "status": "dormant",
+    "allowlisted": true,
+    "allowlistReason": "Description-dispatched. Model-invoked read-only architecture-analysis review subagent; member of the agents.json 'generic infra' category. No scripted subagent_type= by design. Load-bearing (relocating breaks render-claude-md step 7 + INVENTORY-MANIFEST). NOT dormant."
+  },
+  {
+    "agent": "doc-linter",
+    "workflowRefs": [],
+    "templateRefs": [],
+    "commandRefs": [],
+    "skillRefs": [],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 0,
+    "testRefCount": 0,
+    "status": "dormant",
+    "allowlisted": true,
+    "allowlistReason": "Description-dispatched. Model-invoked documentation-audit review subagent (read-only Read/Glob/Grep); member of the agents.json 'generic infra' category and a named exception in tools/check-scaffolder-residue.mjs. No scripted subagent_type= by design. Load-bearing (relocating breaks render-claude-md step 7 + INVENTORY-MANIFEST). NOT dormant."
+  },
+  {
+    "agent": "flight-ops",
+    "workflowRefs": [],
+    "templateRefs": [],
+    "commandRefs": [],
+    "skillRefs": [
+      ".claude/skills/team-control/SKILL.md",
+      "project-claude/skills/team-control/SKILL.md"
+    ],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 2,
+    "testRefCount": 0,
+    "status": "living",
+    "allowlisted": false,
+    "allowlistReason": null
+  },
+  {
+    "agent": "gsd-advisor-researcher",
+    "workflowRefs": [
+      ".claude/get-shit-done/workflows/discuss-phase.md",
+      ".claude/get-shit-done/workflows/discuss-phase/modes/advisor.md"
+    ],
+    "templateRefs": [],
+    "commandRefs": [],
+    "skillRefs": [],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 2,
+    "testRefCount": 0,
+    "status": "living",
+    "allowlisted": false,
+    "allowlistReason": null
+  },
+  {
+    "agent": "gsd-ai-researcher",
+    "workflowRefs": [
+      ".claude/get-shit-done/workflows/ai-integration-phase.md"
+    ],
+    "templateRefs": [
+      ".claude/get-shit-done/templates/AI-SPEC.md"
+    ],
+    "commandRefs": [
+      ".claude/commands/gsd/ai-integration-phase.md"
+    ],
+    "skillRefs": [],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 3,
+    "testRefCount": 0,
+    "status": "living",
+    "allowlisted": false,
+    "allowlistReason": null
+  },
+  {
+    "agent": "gsd-assumptions-analyzer",
+    "workflowRefs": [
+      ".claude/get-shit-done/workflows/discuss-phase-assumptions.md"
+    ],
+    "templateRefs": [],
+    "commandRefs": [],
+    "skillRefs": [],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 1,
+    "testRefCount": 0,
+    "status": "living",
+    "allowlisted": false,
+    "allowlistReason": null
+  },
+  {
+    "agent": "gsd-code-fixer",
+    "workflowRefs": [
+      ".claude/get-shit-done/workflows/code-review-fix.md",
+      ".claude/get-shit-done/workflows/code-review.md"
+    ],
+    "templateRefs": [],
+    "commandRefs": [
+      ".claude/commands/gsd/code-review.md"
+    ],
+    "skillRefs": [
+      ".claude/skills/execution-grounded-selection/SKILL.md",
+      "project-claude/skills/execution-grounded-selection/SKILL.md"
+    ],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 5,
+    "testRefCount": 0,
+    "status": "living",
+    "allowlisted": false,
+    "allowlistReason": null
+  },
+  {
+    "agent": "gsd-code-reviewer",
+    "workflowRefs": [
+      ".claude/get-shit-done/workflows/code-review-fix.md",
+      ".claude/get-shit-done/workflows/code-review.md",
+      ".claude/get-shit-done/workflows/quick.md"
+    ],
+    "templateRefs": [],
+    "commandRefs": [
+      ".claude/commands/gsd/code-review.md"
+    ],
+    "skillRefs": [],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 4,
+    "testRefCount": 0,
+    "status": "living",
+    "allowlisted": false,
+    "allowlistReason": null
+  },
+  {
+    "agent": "gsd-codebase-mapper",
+    "workflowRefs": [
+      ".claude/get-shit-done/workflows/execute-phase.md",
+      ".claude/get-shit-done/workflows/execute-phase/steps/codebase-drift-gate.md",
+      ".claude/get-shit-done/workflows/map-codebase.md",
+      ".claude/get-shit-done/workflows/scan.md"
+    ],
+    "templateRefs": [],
+    "commandRefs": [
+      ".claude/commands/gsd/map-codebase.md"
+    ],
+    "skillRefs": [],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 5,
+    "testRefCount": 0,
+    "status": "living",
+    "allowlisted": false,
+    "allowlistReason": null
+  },
+  {
+    "agent": "gsd-debug-session-manager",
+    "workflowRefs": [
+      ".claude/get-shit-done/workflows/debug.md"
+    ],
+    "templateRefs": [],
+    "commandRefs": [
+      ".claude/commands/gsd/debug.md"
+    ],
+    "skillRefs": [],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 2,
+    "testRefCount": 0,
+    "status": "living",
+    "allowlisted": false,
+    "allowlistReason": null
+  },
+  {
+    "agent": "gsd-debugger",
+    "workflowRefs": [
+      ".claude/get-shit-done/workflows/debug.md",
+      ".claude/get-shit-done/workflows/diagnose-issues.md",
+      ".claude/get-shit-done/workflows/execute-phase.md"
+    ],
+    "templateRefs": [
+      ".claude/get-shit-done/templates/debug-subagent-prompt.md"
+    ],
+    "commandRefs": [
+      ".claude/commands/gsd/debug.md"
+    ],
+    "skillRefs": [
+      ".claude/skills/gsd-guide/SKILL.md",
+      "project-claude/skills/gsd-guide/SKILL.md"
+    ],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 7,
+    "testRefCount": 0,
+    "status": "living",
+    "allowlisted": false,
+    "allowlistReason": null
+  },
+  {
+    "agent": "gsd-doc-classifier",
+    "workflowRefs": [
+      ".claude/get-shit-done/workflows/ingest-docs.md"
+    ],
+    "templateRefs": [],
+    "commandRefs": [],
+    "skillRefs": [],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 1,
+    "testRefCount": 0,
+    "status": "living",
+    "allowlisted": false,
+    "allowlistReason": null
+  },
+  {
+    "agent": "gsd-doc-synthesizer",
+    "workflowRefs": [
+      ".claude/get-shit-done/workflows/ingest-docs.md"
+    ],
+    "templateRefs": [],
+    "commandRefs": [],
+    "skillRefs": [],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 1,
+    "testRefCount": 0,
+    "status": "living",
+    "allowlisted": false,
+    "allowlistReason": null
+  },
+  {
+    "agent": "gsd-doc-verifier",
+    "workflowRefs": [
+      ".claude/get-shit-done/workflows/docs-update.md"
+    ],
+    "templateRefs": [],
+    "commandRefs": [
+      ".claude/commands/gsd/docs-update.md"
+    ],
+    "skillRefs": [],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 2,
+    "testRefCount": 0,
+    "status": "living",
+    "allowlisted": false,
+    "allowlistReason": null
+  },
+  {
+    "agent": "gsd-doc-writer",
+    "workflowRefs": [
+      ".claude/get-shit-done/workflows/docs-update.md"
+    ],
+    "templateRefs": [],
+    "commandRefs": [
+      ".claude/commands/gsd/docs-update.md"
+    ],
+    "skillRefs": [],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 2,
+    "testRefCount": 0,
+    "status": "living",
+    "allowlisted": false,
+    "allowlistReason": null
+  },
+  {
+    "agent": "gsd-domain-researcher",
+    "workflowRefs": [
+      ".claude/get-shit-done/workflows/ai-integration-phase.md"
+    ],
+    "templateRefs": [
+      ".claude/get-shit-done/templates/AI-SPEC.md"
+    ],
+    "commandRefs": [
+      ".claude/commands/gsd/ai-integration-phase.md"
+    ],
+    "skillRefs": [],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 3,
+    "testRefCount": 0,
+    "status": "living",
+    "allowlisted": false,
+    "allowlistReason": null
+  },
+  {
+    "agent": "gsd-eval-auditor",
+    "workflowRefs": [
+      ".claude/get-shit-done/workflows/eval-review.md"
+    ],
+    "templateRefs": [
+      ".claude/get-shit-done/templates/AI-SPEC.md"
+    ],
+    "commandRefs": [],
+    "skillRefs": [],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 2,
+    "testRefCount": 0,
+    "status": "living",
+    "allowlisted": false,
+    "allowlistReason": null
+  },
+  {
+    "agent": "gsd-eval-planner",
+    "workflowRefs": [
+      ".claude/get-shit-done/workflows/ai-integration-phase.md"
+    ],
+    "templateRefs": [],
+    "commandRefs": [
+      ".claude/commands/gsd/ai-integration-phase.md"
+    ],
+    "skillRefs": [],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 2,
+    "testRefCount": 0,
+    "status": "living",
+    "allowlisted": false,
+    "allowlistReason": null
+  },
+  {
+    "agent": "gsd-executor",
+    "workflowRefs": [
+      ".claude/get-shit-done/workflows/audit-fix.md",
+      ".claude/get-shit-done/workflows/execute-phase.md",
+      ".claude/get-shit-done/workflows/execute-phase/steps/codebase-drift-gate.md",
+      ".claude/get-shit-done/workflows/execute-plan.md",
+      ".claude/get-shit-done/workflows/quick.md",
+      ".claude/get-shit-done/workflows/settings-integrations.md"
+    ],
+    "templateRefs": [],
+    "commandRefs": [
+      ".claude/commands/gsd/quick.md"
+    ],
+    "skillRefs": [
+      ".claude/skills/gsd-guide/SKILL.md",
+      "project-claude/skills/gsd-guide/SKILL.md"
+    ],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 9,
+    "testRefCount": 0,
+    "status": "living",
+    "allowlisted": false,
+    "allowlistReason": null
+  },
+  {
+    "agent": "gsd-framework-selector",
+    "workflowRefs": [
+      ".claude/get-shit-done/workflows/ai-integration-phase.md"
+    ],
+    "templateRefs": [],
+    "commandRefs": [
+      ".claude/commands/gsd/ai-integration-phase.md"
+    ],
+    "skillRefs": [],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 2,
+    "testRefCount": 0,
+    "status": "living",
+    "allowlisted": false,
+    "allowlistReason": null
+  },
+  {
+    "agent": "gsd-integration-checker",
+    "workflowRefs": [
+      ".claude/get-shit-done/workflows/audit-milestone.md",
+      ".claude/get-shit-done/workflows/execute-phase.md"
+    ],
+    "templateRefs": [],
+    "commandRefs": [],
+    "skillRefs": [
+      ".claude/skills/gsd-guide/SKILL.md",
+      "project-claude/skills/gsd-guide/SKILL.md"
+    ],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 4,
+    "testRefCount": 0,
+    "status": "living",
+    "allowlisted": false,
+    "allowlistReason": null
+  },
+  {
+    "agent": "gsd-intel-updater",
+    "workflowRefs": [],
+    "templateRefs": [],
+    "commandRefs": [],
+    "skillRefs": [],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 0,
+    "testRefCount": 0,
+    "status": "dormant",
+    "allowlisted": true,
+    "allowlistReason": "Orphaned GSD-suite agent (writes structured intel to .planning/intel/). Coherent purpose but no command/workflow currently dispatches it. Parked with a dated retire-or-resume triage gate rather than retired (operator decision, Ship 2.3) — a future GSD intel/map consumer may wire it. Retire-or-resume review by 2027-06-04: if still unwired, relocate to examples/agents/deprecated/. NOT a description-dispatched agent (it has no model-invocation contract today); the gate exists so this exemption does not become permanent shelfware like the src/ `upstream` entry."
+  },
+  {
+    "agent": "gsd-nyquist-auditor",
+    "workflowRefs": [
+      ".claude/get-shit-done/workflows/execute-phase.md",
+      ".claude/get-shit-done/workflows/validate-phase.md"
+    ],
+    "templateRefs": [],
+    "commandRefs": [],
+    "skillRefs": [],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 2,
+    "testRefCount": 0,
+    "status": "living",
+    "allowlisted": false,
+    "allowlistReason": null
+  },
+  {
+    "agent": "gsd-orchestrator",
+    "workflowRefs": [],
+    "templateRefs": [],
+    "commandRefs": [],
+    "skillRefs": [],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 0,
+    "testRefCount": 0,
+    "status": "dormant",
+    "allowlisted": true,
+    "allowlistReason": "Description-dispatched. The GSD master intent-router ('Invoke when unsure which GSD command to run') is invoked by Claude Code on description match, not a scripted subagent_type=. Installed via a standalone manifest entry + autoDiscover; backed by the live src/orchestrator/ module and the `skill-creator orchestrator` CLI; load-bearing (relocating it breaks render-claude-md classifyAgents / pre-tag-gate step 7 + INVENTORY-MANIFEST + install.cjs). NOT dormant."
+  },
+  {
+    "agent": "gsd-pattern-mapper",
+    "workflowRefs": [
+      ".claude/get-shit-done/workflows/plan-phase.md",
+      ".claude/get-shit-done/workflows/settings.md"
+    ],
+    "templateRefs": [],
+    "commandRefs": [],
+    "skillRefs": [],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 2,
+    "testRefCount": 0,
+    "status": "living",
+    "allowlisted": false,
+    "allowlistReason": null
+  },
+  {
+    "agent": "gsd-phase-researcher",
+    "workflowRefs": [
+      ".claude/get-shit-done/workflows/discuss-phase-assumptions.md",
+      ".claude/get-shit-done/workflows/discuss-phase.md",
+      ".claude/get-shit-done/workflows/execute-phase.md",
+      ".claude/get-shit-done/workflows/explore.md",
+      ".claude/get-shit-done/workflows/plan-phase.md",
+      ".claude/get-shit-done/workflows/quick.md"
+    ],
+    "templateRefs": [
+      ".claude/get-shit-done/templates/context.md"
+    ],
+    "commandRefs": [
+      ".claude/commands/gsd/plan-phase.md"
+    ],
+    "skillRefs": [
+      ".claude/skills/gsd-guide/SKILL.md",
+      "project-claude/skills/gsd-guide/SKILL.md"
+    ],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 10,
+    "testRefCount": 0,
+    "status": "living",
+    "allowlisted": false,
+    "allowlistReason": null
+  },
+  {
+    "agent": "gsd-plan-checker",
+    "workflowRefs": [
+      ".claude/get-shit-done/workflows/execute-phase.md",
+      ".claude/get-shit-done/workflows/import.md",
+      ".claude/get-shit-done/workflows/plan-phase.md",
+      ".claude/get-shit-done/workflows/quick.md",
+      ".claude/get-shit-done/workflows/verify-work.md"
+    ],
+    "templateRefs": [],
+    "commandRefs": [
+      ".claude/commands/gsd/import.md",
+      ".claude/commands/gsd/plan-phase.md",
+      ".claude/commands/gsd/plan-review-convergence.md",
+      "project-claude/commands/gsd/plan-review-convergence.md"
+    ],
+    "skillRefs": [
+      ".claude/skills/gsd-guide/SKILL.md",
+      "project-claude/skills/gsd-guide/SKILL.md"
+    ],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 11,
+    "testRefCount": 0,
+    "status": "living",
+    "allowlisted": false,
+    "allowlistReason": null
+  },
+  {
+    "agent": "gsd-planner",
+    "workflowRefs": [
+      ".claude/get-shit-done/workflows/discuss-phase-assumptions.md",
+      ".claude/get-shit-done/workflows/discuss-phase.md",
+      ".claude/get-shit-done/workflows/execute-phase.md",
+      ".claude/get-shit-done/workflows/import.md",
+      ".claude/get-shit-done/workflows/plan-phase.md",
+      ".claude/get-shit-done/workflows/quick.md",
+      ".claude/get-shit-done/workflows/settings-integrations.md",
+      ".claude/get-shit-done/workflows/verify-work.md"
+    ],
+    "templateRefs": [
+      ".claude/get-shit-done/templates/AI-SPEC.md",
+      ".claude/get-shit-done/templates/context.md",
+      ".claude/get-shit-done/templates/phase-prompt.md",
+      ".claude/get-shit-done/templates/planner-subagent-prompt.md",
+      ".claude/get-shit-done/templates/spec.md"
+    ],
+    "commandRefs": [
+      ".claude/commands/gsd/plan-phase.md",
+      ".claude/commands/gsd/plan-review-convergence.md",
+      ".claude/commands/gsd/quick.md",
+      "project-claude/commands/gsd/plan-review-convergence.md"
+    ],
+    "skillRefs": [
+      ".claude/skills/gsd-guide/SKILL.md",
+      "project-claude/skills/gsd-guide/SKILL.md"
+    ],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 19,
+    "testRefCount": 0,
+    "status": "living",
+    "allowlisted": false,
+    "allowlistReason": null
+  },
+  {
+    "agent": "gsd-project-researcher",
+    "workflowRefs": [
+      ".claude/get-shit-done/workflows/new-milestone.md",
+      ".claude/get-shit-done/workflows/new-project.md"
+    ],
+    "templateRefs": [],
+    "commandRefs": [],
+    "skillRefs": [
+      ".claude/skills/gsd-guide/SKILL.md",
+      "project-claude/skills/gsd-guide/SKILL.md"
+    ],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 4,
+    "testRefCount": 0,
+    "status": "living",
+    "allowlisted": false,
+    "allowlistReason": null
+  },
+  {
+    "agent": "gsd-research-synthesizer",
+    "workflowRefs": [
+      ".claude/get-shit-done/workflows/new-milestone.md",
+      ".claude/get-shit-done/workflows/new-project.md"
+    ],
+    "templateRefs": [],
+    "commandRefs": [],
+    "skillRefs": [
+      ".claude/skills/gsd-guide/SKILL.md",
+      "project-claude/skills/gsd-guide/SKILL.md"
+    ],
+    "teamRefs": [
+      ".claude/teams/gsd-research-team/config.json"
+    ],
+    "testRefs": [],
+    "realRefCount": 5,
+    "testRefCount": 0,
+    "status": "living",
+    "allowlisted": false,
+    "allowlistReason": null
+  },
+  {
+    "agent": "gsd-roadmapper",
+    "workflowRefs": [
+      ".claude/get-shit-done/workflows/ingest-docs.md",
+      ".claude/get-shit-done/workflows/new-milestone.md",
+      ".claude/get-shit-done/workflows/new-project.md"
+    ],
+    "templateRefs": [],
+    "commandRefs": [
+      ".claude/commands/gsd/ingest-docs.md"
+    ],
+    "skillRefs": [
+      ".claude/skills/gsd-guide/SKILL.md",
+      "project-claude/skills/gsd-guide/SKILL.md"
+    ],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 6,
+    "testRefCount": 0,
+    "status": "living",
+    "allowlisted": false,
+    "allowlistReason": null
+  },
+  {
+    "agent": "gsd-security-auditor",
+    "workflowRefs": [
+      ".claude/get-shit-done/workflows/secure-phase.md"
+    ],
+    "templateRefs": [],
+    "commandRefs": [],
+    "skillRefs": [],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 1,
+    "testRefCount": 0,
+    "status": "living",
+    "allowlisted": false,
+    "allowlistReason": null
+  },
+  {
+    "agent": "gsd-ui-auditor",
+    "workflowRefs": [
+      ".claude/get-shit-done/workflows/execute-phase.md",
+      ".claude/get-shit-done/workflows/ui-review.md"
+    ],
+    "templateRefs": [],
+    "commandRefs": [],
+    "skillRefs": [],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 2,
+    "testRefCount": 0,
+    "status": "living",
+    "allowlisted": false,
+    "allowlistReason": null
+  },
+  {
+    "agent": "gsd-ui-checker",
+    "workflowRefs": [
+      ".claude/get-shit-done/workflows/execute-phase.md",
+      ".claude/get-shit-done/workflows/ui-phase.md"
+    ],
+    "templateRefs": [
+      ".claude/get-shit-done/templates/UI-SPEC.md"
+    ],
+    "commandRefs": [
+      ".claude/commands/gsd/ui-phase.md"
+    ],
+    "skillRefs": [],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 4,
+    "testRefCount": 0,
+    "status": "living",
+    "allowlisted": false,
+    "allowlistReason": null
+  },
+  {
+    "agent": "gsd-ui-researcher",
+    "workflowRefs": [
+      ".claude/get-shit-done/workflows/execute-phase.md",
+      ".claude/get-shit-done/workflows/ui-phase.md"
+    ],
+    "templateRefs": [
+      ".claude/get-shit-done/templates/UI-SPEC.md"
+    ],
+    "commandRefs": [
+      ".claude/commands/gsd/ui-phase.md"
+    ],
+    "skillRefs": [],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 4,
+    "testRefCount": 0,
+    "status": "living",
+    "allowlisted": false,
+    "allowlistReason": null
+  },
+  {
+    "agent": "gsd-user-profiler",
+    "workflowRefs": [
+      ".claude/get-shit-done/workflows/profile-user.md"
+    ],
+    "templateRefs": [],
+    "commandRefs": [],
+    "skillRefs": [],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 1,
+    "testRefCount": 0,
+    "status": "living",
+    "allowlisted": false,
+    "allowlistReason": null
+  },
+  {
+    "agent": "gsd-verifier",
+    "workflowRefs": [
+      ".claude/get-shit-done/workflows/execute-phase.md",
+      ".claude/get-shit-done/workflows/quick.md",
+      ".claude/get-shit-done/workflows/settings-integrations.md"
+    ],
+    "templateRefs": [
+      ".claude/get-shit-done/templates/spec.md"
+    ],
+    "commandRefs": [],
+    "skillRefs": [
+      ".claude/skills/gsd-guide/SKILL.md",
+      "project-claude/skills/gsd-guide/SKILL.md"
+    ],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 6,
+    "testRefCount": 0,
+    "status": "living",
+    "allowlisted": false,
+    "allowlistReason": null
+  },
+  {
+    "agent": "lab-director",
+    "workflowRefs": [],
+    "templateRefs": [],
+    "commandRefs": [],
+    "skillRefs": [
+      ".claude/skills/team-control/SKILL.md",
+      "project-claude/skills/team-control/SKILL.md"
+    ],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 2,
+    "testRefCount": 0,
+    "status": "living",
+    "allowlisted": false,
+    "allowlistReason": null
+  },
+  {
+    "agent": "pipeline-reconciler",
+    "workflowRefs": [],
+    "templateRefs": [],
+    "commandRefs": [],
+    "skillRefs": [],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 0,
+    "testRefCount": 0,
+    "status": "dormant",
+    "allowlisted": true,
+    "allowlistReason": "Script-twin. The pipeline-reconciliation WORK runs deterministically as tools/release-history/pipeline-reconciler.mjs (refresh.mjs step 'reconcile', required:true) — not as an agent dispatch. The agent .md is the spec twin of that script. Name-collision trap: a naive grep would read the .mjs hit as a dispatch. KEEP as the documented spec; the agent itself is intentionally not dispatched."
+  },
+  {
+    "agent": "quality-drift-watcher",
+    "workflowRefs": [],
+    "templateRefs": [],
+    "commandRefs": [],
+    "skillRefs": [],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 0,
+    "testRefCount": 0,
+    "status": "dormant",
+    "allowlisted": true,
+    "allowlistReason": "Script-twin. The quality-drift scoring WORK runs deterministically as tools/release-history/quality-drift-check.mjs (refresh.mjs step 'drift-check', required:true) — not as an agent dispatch. The agent .md is the spec twin of that script. Same name-collision class as pipeline-reconciler. KEEP as the documented spec; the agent itself is intentionally not dispatched."
+  },
+  {
+    "agent": "uc-brainstorm-engine",
+    "workflowRefs": [],
+    "templateRefs": [],
+    "commandRefs": [],
+    "skillRefs": [
+      ".claude/skills/team-control/SKILL.md",
+      ".claude/skills/uc-observatory/SKILL.md",
+      "project-claude/skills/team-control/SKILL.md"
+    ],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 3,
+    "testRefCount": 0,
+    "status": "living",
+    "allowlisted": false,
+    "allowlistReason": null
+  },
+  {
+    "agent": "uc-perf-analyst",
+    "workflowRefs": [],
+    "templateRefs": [],
+    "commandRefs": [],
+    "skillRefs": [
+      ".claude/skills/team-control/SKILL.md",
+      ".claude/skills/uc-observatory/SKILL.md",
+      "project-claude/skills/team-control/SKILL.md"
+    ],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 3,
+    "testRefCount": 0,
+    "status": "living",
+    "allowlisted": false,
+    "allowlistReason": null
+  },
+  {
+    "agent": "uc-proof-engineer",
+    "workflowRefs": [],
+    "templateRefs": [],
+    "commandRefs": [],
+    "skillRefs": [
+      ".claude/skills/team-control/SKILL.md",
+      ".claude/skills/uc-observatory/SKILL.md",
+      "project-claude/skills/team-control/SKILL.md"
+    ],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 3,
+    "testRefCount": 0,
+    "status": "living",
+    "allowlisted": false,
+    "allowlistReason": null
+  },
+  {
+    "agent": "uc-retro-analyst",
+    "workflowRefs": [],
+    "templateRefs": [],
+    "commandRefs": [],
+    "skillRefs": [
+      ".claude/skills/team-control/SKILL.md",
+      ".claude/skills/uc-observatory/SKILL.md",
+      "project-claude/skills/team-control/SKILL.md"
+    ],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 3,
+    "testRefCount": 0,
+    "status": "living",
+    "allowlisted": false,
+    "allowlistReason": null
+  },
+  {
+    "agent": "uc-skill-forger",
+    "workflowRefs": [],
+    "templateRefs": [],
+    "commandRefs": [],
+    "skillRefs": [
+      ".claude/skills/team-control/SKILL.md",
+      ".claude/skills/uc-observatory/SKILL.md",
+      "project-claude/skills/team-control/SKILL.md"
+    ],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 3,
+    "testRefCount": 0,
+    "status": "living",
+    "allowlisted": false,
+    "allowlistReason": null
+  },
+  {
+    "agent": "watchdog",
+    "workflowRefs": [],
+    "templateRefs": [],
+    "commandRefs": [],
+    "skillRefs": [
+      ".claude/skills/gupp-propulsion/SKILL.md",
+      ".claude/skills/gupp-propulsion/heartbeat.md",
+      ".claude/skills/gupp-propulsion/references/boundaries.md",
+      ".claude/skills/gupp-propulsion/references/gastown-origin.md",
+      ".claude/skills/gupp-propulsion/references/runtime-strategies.md",
+      ".claude/skills/team-control/SKILL.md",
+      "project-claude/skills/gupp-propulsion/SKILL.md",
+      "project-claude/skills/gupp-propulsion/heartbeat.md",
+      "project-claude/skills/gupp-propulsion/references/boundaries.md",
+      "project-claude/skills/gupp-propulsion/references/gastown-origin.md",
+      "project-claude/skills/gupp-propulsion/references/runtime-strategies.md",
+      "project-claude/skills/team-control/SKILL.md"
+    ],
+    "teamRefs": [],
+    "testRefs": [],
+    "realRefCount": 12,
+    "testRefCount": 0,
+    "status": "living",
+    "allowlisted": false,
+    "allowlistReason": null
+  }
+]
