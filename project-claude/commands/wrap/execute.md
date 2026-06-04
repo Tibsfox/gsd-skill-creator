@@ -23,6 +23,10 @@ Wrap GSD execute-phase with automatic skill loading before execution and observa
 If skill loading or observation capture fails at any point, the GSD command still runs normally. The wrapper enhances but never blocks.
 </objective>
 
+<companion-skills>
+As the **first step in handler dispatch** (before Step 2 skill loading), invoke the `intent-router` skill to classify the request's information-need and return a strategy label, a token budget, and a retrieval depth. Use that to specialise downstream skill loading rather than defaulting one retriever for everything. Advisory and best-effort: if intent-router is unavailable, proceed with the default loading path (the wrapper never blocks).
+</companion-skills>
+
 <process>
 
 ## Step 0: Parse Arguments

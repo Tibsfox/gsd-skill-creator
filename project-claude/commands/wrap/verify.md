@@ -23,6 +23,13 @@ Wrap GSD verify-work with automatic skill loading before verification and observ
 If skill loading or observation capture fails at any point, the GSD command still runs normally. The wrapper enhances but never blocks.
 </objective>
 
+<companion-skills>
+- As the **first step in handler dispatch** (before Step 2 skill loading), invoke the `intent-router` skill to classify the request's information-need and pick the retrieval strategy + token budget for verification-relevant loading.
+- When `gsd:verify-work` (or a fix step) produces **multiple candidate fixes/outputs**, use the `execution-grounded-selection` skill to disambiguate by running the candidates and clustering by behavioural fingerprint, instead of output-majority voting — execution-based selection dominates output-majority voting (Semantic Voting, arxiv 2605.08680v1).
+
+Both are advisory and best-effort: if a companion skill is unavailable, proceed normally (the wrapper never blocks).
+</companion-skills>
+
 <process>
 
 ## Step 0: Parse Arguments

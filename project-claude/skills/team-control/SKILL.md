@@ -30,6 +30,8 @@ Both modes share the same four-agent architecture, autonomy principles, context 
 
 Agent definitions: `.claude/agents/lab-director.md`, `flight-ops.md`, `capcom.md`, `watchdog.md`.
 
+**Team pre-flight (topology check).** Before launching the team — spawning the four agents, or any larger fan-out flight-ops sizes up — run the `spectral-topology-preflight` skill on the proposed communication graph. It builds the row-stochastic operator from the team graph and emits a (ρ, Δ, κ) coordination signature plus a pass/fail verdict against per-task-class thresholds, so coordination defects are caught **pre-dispatch** rather than mid-run. Honor a fail verdict (adjust the topology) before flight-ops spawns work.
+
 ## Autonomy Principles (shared)
 
 1. **lab-director IS the human** — no waiting for external approval

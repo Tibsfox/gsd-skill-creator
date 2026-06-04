@@ -111,6 +111,10 @@ I've noticed we run the same lint -> test -> fix cycle after every code change.
 Want me to capture this as a skill so it happens automatically?
 ```
 
+## Auditing a Skill (counterfactual)
+
+Pass-rate is blind to most skill effects — a skill can change behavior in hundreds of ways while pass-rate barely moves. **When a skill is created, modified, or proposed for retirement, run the `skill-counterfactual-audit` skill** before finalizing. It runs a paired probe (the same task once with the skill loaded and once without), segments and aligns both traces into goal-directed phases, and emits a SIP report (surface anchoring, template copy, excess planning, task recovery, off-task artifact). Treat its findings as the behavioral-impact signal pass-rate cannot give you: a low-impact skill is a retirement candidate; a high-negative-impact skill needs revision, not just a green test. This is the audit gate for the skill lifecycle this skill manages.
+
 ## Anti-Patterns
 
 - Do not execute GSD phases without checking for relevant learned skills first
