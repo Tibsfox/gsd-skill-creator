@@ -6,6 +6,20 @@ This changelog is not strictly Keep-a-Changelog format. It is deliberately narra
 
 ---
 
+## 2026-06-04 — de-hardcode the catalog tooling; re-catalog the whole storefront (Ship 2.1, v1.49.970)
+
+**What changed:** the six `examples/tools/` scripts (`install`, `validate`, `catalog-gen`, `generate-category-readmes`, `license-report`, `backfill-frontmatter`) each carried their **own frozen category allowlist** — `SKILL_CATEGORIES = {gsd, research, media, dev, ops, workflow, patterns, orchestration, state, deprecated}` and the 8/5 sibling sets for agents/teams. The taxonomy had since grown to **40+ college/department domains** (`math`, `physics`, `music`, … plus `gsd-meta`), but the allowlists never did. The result: `install --all` silently served only the allowlisted slice (~19% of the tree), `validate` flagged every other category as `(unclassified)` and never validated its artifacts, and the count badge + per-category READMEs were frozen.
+
+The allowlists are gone. Category discovery now lives in one place — `examples/tools/catalog-core.mjs` — and is **structural**: a directory under `examples/<type>/` is a category if it holds artifact sub-directories, and an (unclassified) artifact if it holds its metadata file directly. The six tools import `discoverCategories` / `isArtifactDir` from there. Concretely this shipped:
+
+- **312 skills / 343 agents / 135 teams / 48 chipsets** now counted (badge was a stale `60/56/12/7`).
+- **125 new category READMEs** generated (every domain now has one); descriptions composed from a `DOMAIN_DESCRIPTIONS` map shared across the three types.
+- **Two stale top-level duplicate skills** removed — `skills/vision-to-mission/` and `skills/research-mission-generator/` were re-installed flat outside Stage-2 classification; the canonical 9-field copies already live in `skills/research/`.
+- **Two flat-file agents normalized** — `agents/gsd-meta/{pipeline-reconciler,quality-drift-watcher}.md` were the only agents not following the `dir/AGENT.md` convention (so the walk never saw them); converted to dirs with backfilled frontmatter.
+- **Five `gsd-meta` skills backfilled** — they carried `status: active` (not a valid status) and were missing six required fields (`type`, `category`, `origin`, `modified`, `first_seen`, `first_path`); `superseded_by: null` was added alongside for parity with the compliant shape (seven added lines in total).
+
+**Why:** a storefront that silently omits four-fifths of itself is worse than a small one — browsers and the `install` path both trust the tooling to be complete. Keeping the category list on disk (not in six copies of a hardcoded Set) means the next domain that lands is served automatically. A `tests/integration/examples-catalog-parity.test.ts` drift-guard now pins three invariants under CI + the pre-tag-gate vitest step: `validate --strict` exits clean over the whole tree, each tool's discovered categories equal the disk directories, and the badge counts equal disk reality. (Gating via the test layer rather than a new pre-tag-gate shell step keeps the gate's step-count denominator unchanged.)
+
 ## 2026-06-01 — numerical-analysis becomes the reference `coprocessor:` consumer (CF4b)
 
 **What changed:** `examples/skills/math/numerical-analysis/SKILL.md` now declares `coprocessor: [algebrus, statos]` in its frontmatter and documents the integration in a new "Coprocessor Acceleration" section. This makes it the **first shipped skill to declare a `coprocessor:` block** — closing the long-dormant state where the default-on activation hook (`src/coprocessor/`) had a typed client, an activation pipeline, and a live MCP server, but no skill in the shipped library declared the frontmatter that drives it. It is a *declared* consumer: the block is read by the library `SkillApplicator.apply()` path and the tests below; the shipped `skill-creator invoke` CLI loads skills directly and does not yet run that pre-warm stage.

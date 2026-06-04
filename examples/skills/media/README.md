@@ -10,7 +10,7 @@ Media production — audio engineering, AV studio, ffmpeg workflows, LaTeX autho
 | [av-studio](av-studio/) | Audio/video studio production — multi-track editing, color grading, motion graphics, compositing, l… | tibsfox | stable |
 | [ffmpeg-media](ffmpeg-media/) | FFmpeg media processing — video/audio conversion, trimming, encoding, filters, streaming. CLI and f… | tibsfox | stable |
 | [latex-authoring](latex-authoring/) | LaTeX document authoring with arXiv submission best practices, Overleaf patterns, and academic publ… | tibsfox | stable |
-| [publish-pipeline](publish-pipeline/) | Markdown to HTML/PDF build + FTP sync to tibsfox.com. Pandoc + xelatex templates, branded output, a… | tibsfox | stable |
+| [publish-pipeline](publish-pipeline/) | Markdown to HTML/PDF build + FTP sync to configured remote host. Pandoc + xelatex templates, brande… | tibsfox | stable |
 
 ---
 

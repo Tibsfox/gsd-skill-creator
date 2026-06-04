@@ -2,15 +2,16 @@
 
 Get-Shit-Done workflow skills — migration, onboarding, preflight, and decision tracing.
 
-## Artifacts (5)
+## Artifacts (6)
 
 | Artifact | Description | Origin | Status |
 |---|---|---|---|
+| [cartridge-forge](cartridge-forge/) | Use when the user asks to forge, scaffold, or author a new cartridge — content cartridge, departmen… | tibsfox | stable |
 | [gsd-migrate](gsd-migrate/) | Migrates existing projects to GSD structure without rewriting history. Activates when user mentions… | tibsfox | stable |
 | [gsd-onboard](gsd-onboard/) | GSD tutorial and command reference. Use when user is new to GSD or asks about commands. | tibsfox | stable |
-| [gsd-preflight](gsd-preflight/) | Validates GSD artifacts before running workflows. Use when user mentions 'preflight', 'validate', o… | tibsfox | stable |
+| [gsd-preflight](gsd-preflight/) | Use when GSD commands are failing or .planning/ artifacts look inconsistent. Run before any GSD exe… | tibsfox | stable |
 | [gsd-trace](gsd-trace/) | Traces decisions and requirements through GSD artifacts. Use when user asks "why did we...", "what… | tibsfox | stable |
-| [gsd-workflow](gsd-workflow/) | > | tibsfox | stable |
+| [gsd-workflow](gsd-workflow/) | Use when the user asks "what should I work on", mentions GSD phases, ROADMAP, or .planning/ artifac… | tibsfox | stable |
 
 ---
 
