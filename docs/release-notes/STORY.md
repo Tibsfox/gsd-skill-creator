@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.974`.
+The story begins at `v1.0` and continues to `v1.49.975`.
 
-**1017 chapters.** 1016 have retrospectives.
+**1018 chapters.** 1017 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -1025,3 +1025,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.972](v1.49.972/00-summary.md)** — park MA/MB/MD control-theory island + retire intrinsic-telemetry (D3) · 2026-06-04
 - **[v1.49.973](v1.49.973/00-summary.md)** — update sub-agent dispatch discipline for opus 4.8 harness (Ship 1.3) · 2026-06-04
 - **[v1.49.974](v1.49.974/00-summary.md)** — skills source-of-truth promotion + research-skill wires (Ship 2.2) · 2026-06-04
+- **[v1.49.975](v1.49.975/00-summary.md)** — agent adoption scan + dormant-agent verdicts · 2026-06-04
