@@ -1,13 +1,14 @@
 # Release History
 
-1009 milestones shipped across the v1.0 → v1.49.966 arc. The table below lists every shipped release, newest first.
+1010 milestones shipped across the v1.0 → v1.49.967 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
-**Snapshot:** 1009 releases · 1008 with retrospectives · 763 with extracted lessons · quality A:662 B:98 C:62 D:12 F:175 (avg 83) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 1010 releases · 1009 with retrospectives · 763 with extracted lessons · quality A:662 B:98 C:62 D:12 F:176 (avg 83) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.967](release-notes/v1.49.967) | examples/ catalog frontmatter hygiene | 2026-06-04 | 3 | — | — | [s](release-notes/v1.49.967/chapter/00-summary.md) [r](release-notes/v1.49.967/chapter/03-retrospective.md) [l](release-notes/v1.49.967/chapter/04-lessons.md) [c](release-notes/v1.49.967/chapter/99-context.md) | — | F 35 |  |
 | [v1.49.966](release-notes/v1.49.966) | pre-tag-gate self-consistency + exit-21 collision fix | 2026-06-03 | 3 | — | — | [s](release-notes/v1.49.966/chapter/00-summary.md) [r](release-notes/v1.49.966/chapter/03-retrospective.md) [l](release-notes/v1.49.966/chapter/04-lessons.md) [c](release-notes/v1.49.966/chapter/99-context.md) | — | F 39 |  |
 | [v1.49.965](release-notes/v1.49.965) | adoption-baseline freshness gate + tool | 2026-06-03 | 3 | — | — | [s](release-notes/v1.49.965/chapter/00-summary.md) [r](release-notes/v1.49.965/chapter/03-retrospective.md) [l](release-notes/v1.49.965/chapter/04-lessons.md) [c](release-notes/v1.49.965/chapter/99-context.md) | — | F 39 |  |
 | [v1.49.964](release-notes/v1.49.964) | M4 orphan trunk-tmp cleanup on commit-lock reap | 2026-06-03 | 3 | — | — | [s](release-notes/v1.49.964/chapter/00-summary.md) [r](release-notes/v1.49.964/chapter/03-retrospective.md) [l](release-notes/v1.49.964/chapter/04-lessons.md) [c](release-notes/v1.49.964/chapter/99-context.md) | — | F 26 |  |
