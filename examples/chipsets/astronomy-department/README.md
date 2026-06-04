@@ -4,7 +4,9 @@ type: chipset
 category: chipset
 status: stable
 origin: tibsfox
+modified: false
 first_seen: 2026-04-12
+first_path: examples/chipsets/astronomy-department/README.md
 description: >
   Coordinated astronomy department — seven named agents, six knowledge
   skills, three teams. Batch-9 instantiation of the department template pattern.

@@ -3,6 +3,14 @@ name: cartridge-forge
 description: Use when the user asks to forge, scaffold, or author a new cartridge — content cartridge, department cartridge, or chipset bundle. Drives the cartridge-forge loop (scaffold → fill → gate checks → commit) via the skill-creator cartridge CLI.
 description-frequency: on-demand
 user-invocable: true
+type: skill
+category: gsd
+status: stable
+origin: tibsfox
+modified: false
+first_seen: 2026-04-15
+first_path: examples/skills/gsd/cartridge-forge/SKILL.md
+superseded_by: null
 ---
 
 # Cartridge Forge
