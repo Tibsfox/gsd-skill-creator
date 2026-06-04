@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.965`.
+The story begins at `v1.0` and continues to `v1.49.966`.
 
-**1008 chapters.** 1007 have retrospectives.
+**1009 chapters.** 1008 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -79,8 +79,8 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.17](v1.49.17/00-summary.md)** — The Space Between · 2026-03-04
 - **[v1.49.18](v1.49.18/00-summary.md)** — Space Between Observatory · 2026-03-06
 - **[v1.49.19](v1.49.19/00-summary.md)** — Gastown Chipset Integration · 2026-03-06
-- **[v1.49.20](v1.49.20/00-summary.md)** — Documentation Consolidation · 2026-03-06
 - **[v1.49.20.1](v1.49.20.1/00-summary.md)** — Documentation Reflections · 2026-03-06
+- **[v1.49.20](v1.49.20/00-summary.md)** — Documentation Consolidation · 2026-03-06
 - **[v1.49.21](v1.49.21/00-summary.md)** — Image to Mission Pipeline · 2026-03-07
 - **[v1.49.22](v1.49.22/00-summary.md)** — PNW Research Series · 2026-03-07
 - **[v1.49.23](v1.49.23/00-summary.md)** — Unison Language & Math Co-Processor Completion · 2026-03-08
@@ -1016,3 +1016,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.963](v1.49.963/00-summary.md)** — verify-detector paren-param + nested-self-call bounds · 2026-06-03
 - **[v1.49.964](v1.49.964/00-summary.md)** — M4 orphan trunk-tmp cleanup on commit-lock reap · 2026-06-03
 - **[v1.49.965](v1.49.965/00-summary.md)** — adoption-baseline freshness gate + tool · 2026-06-03
+- **[v1.49.966](v1.49.966/00-summary.md)** — pre-tag-gate self-consistency + exit-21 collision fix · 2026-06-03
