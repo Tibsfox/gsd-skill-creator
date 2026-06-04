@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.968`.
+The story begins at `v1.0` and continues to `v1.49.969`.
 
-**1011 chapters.** 1010 have retrospectives.
+**1012 chapters.** 1011 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -1019,3 +1019,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.966](v1.49.966/00-summary.md)** — pre-tag-gate self-consistency + exit-21 collision fix · 2026-06-03
 - **[v1.49.967](v1.49.967/00-summary.md)** — examples/ catalog frontmatter hygiene + stray test-skill cleanup · 2026-06-04
 - **[v1.49.968](v1.49.968/00-summary.md)** — codify adversarial pre-push ship review (T14 step + workflow) · 2026-06-04
+- **[v1.49.969](v1.49.969/00-summary.md)** — ME-2 model-affinity dispatch actuator · 2026-06-04
