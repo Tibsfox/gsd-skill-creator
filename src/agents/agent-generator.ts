@@ -12,6 +12,11 @@ import {
   assertSafePath,
   PathTraversalError,
 } from '../validation/path-safety.js';
+import {
+  resolveDispatchModel,
+  type DispatchModel,
+} from '../model-affinity/actuator.js';
+import type { AffinityDecision } from '../model-affinity/policy.js';
 
 /**
  * Warning message for user-level agent creation.
@@ -43,9 +48,26 @@ export interface GeneratedAgent {
 
 export interface AgentGeneratorConfig {
   agentsDir: string;            // Output directory (default .claude/agents)
-  model: 'inherit' | 'sonnet' | 'opus' | 'haiku';  // Model to use
+  model: DispatchModel;         // Model to use ('inherit' | 'sonnet' | 'opus' | 'haiku')
   tools: string[];              // Default tools for generated agents
   scope?: 'user' | 'project';   // Scope for detecting when warning is needed
+  /**
+   * ME-2 model-affinity dispatch actuator (default-off, CF-ME2-01).
+   *
+   * When `enabled`, the generated agent's `model:` frontmatter is raised to the
+   * strongest escalation among the bundled skills' model-affinity `decisions`
+   * (resolved by the caller via `getAffinityDecision` / `batchAffinityDecisions`,
+   * keyed by skill name). When absent or `enabled: false`, the generated agent's
+   * model is exactly `config.model` — byte-identical to the pre-ME2 baseline.
+   *
+   * Callers bridge the master flag via `readModelAffinityEnabledFlag()`; the
+   * resolver itself is pure and takes `enabled` directly (see
+   * `src/model-affinity/actuator.ts`).
+   */
+  modelAffinity?: {
+    enabled: boolean;
+    decisions?: ReadonlyMap<string, AffinityDecision | null>;
+  };
 }
 
 export const DEFAULT_AGENT_GENERATOR_CONFIG: AgentGeneratorConfig = {
@@ -98,12 +120,18 @@ export class AgentGenerator {
     // Validate and correct tools before generating content
     const correctedTools = this.validateAndCorrectTools();
 
+    // ME-2 actuator: resolve the dispatch model from the bundled skills'
+    // model-affinity escalation decisions. No-op (returns config.model) when
+    // the feature is disabled — byte-identical to the pre-ME2 baseline.
+    const effectiveModel = this.resolveEffectiveModel(cluster.skills);
+
     const content = this.formatAgentMarkdown({
       name,
       description,
       skills: cluster.skills,
       skillDescriptions,
       tools: correctedTools,
+      model: effectiveModel,
     });
 
     // Validate the generated frontmatter
@@ -111,7 +139,7 @@ export class AgentGenerator {
       name,
       description,
       tools: correctedTools.join(', '),
-      model: this.config.model,
+      model: effectiveModel,
       skills: cluster.skills,
     };
 
@@ -189,14 +217,35 @@ export class AgentGenerator {
     return descriptions;
   }
 
+  /**
+   * Resolve the effective dispatch model for a generated agent.
+   *
+   * When the ME-2 actuator is enabled (`config.modelAffinity.enabled`), raises
+   * the model to the strongest escalation among the bundled skills' affinity
+   * decisions (see `resolveDispatchModel`). Otherwise — and when no
+   * `modelAffinity` config is present — returns `config.model` unchanged, so the
+   * generated agent is byte-identical to the pre-ME2 baseline (CF-ME2-01).
+   */
+  private resolveEffectiveModel(skills: string[]): DispatchModel {
+    const ma = this.config.modelAffinity;
+    if (!ma?.enabled) return this.config.model;
+
+    const decisions = new Map<string, AffinityDecision | null>();
+    for (const skill of skills) {
+      decisions.set(skill, ma.decisions?.get(skill) ?? null);
+    }
+    return resolveDispatchModel(decisions, this.config.model, true).model;
+  }
+
   private formatAgentMarkdown(opts: {
     name: string;
     description: string;
     skills: string[];
     skillDescriptions: Map<string, string>;
     tools: string[];
+    model: DispatchModel;
   }): string {
-    const { name, description, skills, skillDescriptions, tools } = opts;
+    const { name, description, skills, skillDescriptions, tools, model } = opts;
 
     // Build skill list for body
     const skillList = skills
@@ -207,7 +256,7 @@ export class AgentGenerator {
 name: ${name}
 description: ${description}
 tools: ${tools.join(', ')}
-model: ${this.config.model}
+model: ${model}
 skills:
 ${skills.map(s => `  - ${s}`).join('\n')}
 ---

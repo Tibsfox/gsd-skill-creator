@@ -32,6 +32,10 @@ export {
 export type { CandidateAffinityInput, EscalationSummary } from './api.js';
 export { getAffinityDecision, batchAffinityDecisions, summariseEscalations } from './api.js';
 
+// Dispatch actuator (escalateTo → resolved dispatch model string)
+export type { DispatchModel, DispatchModelResolution } from './actuator.js';
+export { resolveDispatchModel } from './actuator.js';
+
 // CLI
 export type { ModelAffinityCliOptions } from './cli.js';
 export { modelAffinityCommand, modelAffinityHelp, DEFAULT_SCAN_DIRS } from './cli.js';
