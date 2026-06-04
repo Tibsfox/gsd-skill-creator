@@ -15,7 +15,7 @@
  *   - --json emits machine-readable output for tooling consumers.
  *   - --quiet suppresses per-card detail; just emits the PASS/FAIL summary.
  *
- * Pre-tag-gate integration: runs as step 7.6/14 (right before step 8
+ * Pre-tag-gate integration: runs as step 7.6 (right before step 8
  * catalog-index drift BLOCKER). Designed to fail-fast with a friendly
  * "fix your degree-title BEFORE catalog drift fires" message.
  *

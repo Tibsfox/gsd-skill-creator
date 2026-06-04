@@ -5,11 +5,11 @@
  * backup-file accumulation drift class. The source eliminator
  * (tools/state-md-clean-backups.mjs --write, self-run at the T14 reset by
  * state-md-set-shipped.mjs) removes the tool-written backups; this meta-test
- * pins the DETECTOR layer — pre-tag-gate.sh step 19/19 --check.
+ * pins the DETECTOR layer — pre-tag-gate.sh step 19 --check.
  *
  * Gates exercised:
- *   C1 — pre-tag-gate.sh step 19/19 invokes the cleaner --check, BLOCKS by
- *        default (exit 21), and is gateable via SC_PRE_TAG_GATE_BYPASS=state-backups.
+ *   C1 — pre-tag-gate.sh step 19 invokes the cleaner --check, BLOCKS by
+ *        default (exit 24), and is gateable via SC_PRE_TAG_GATE_BYPASS=state-backups.
  *   C2 — Final summary present + the pre-v961 18-count is gone. Count-agnostic
  *        since v1.49.965 added step 20 (v1-49-965-meta-test now owns the count).
  *   C3 — Step 19 appears after step 18 and before the final summary.
@@ -29,16 +29,21 @@ const SET_SHIPPED_PATH = join(REPO_ROOT, 'tools/state-md-set-shipped.mjs');
 const TOOLS_CONFIG_PATH = join(REPO_ROOT, 'vitest.tools.config.mjs');
 
 describe('v1.49.961 integration meta-test (cc#28 .planning backup two-layer closure)', () => {
-  it('C1 — pre-tag-gate.sh step 19/19 backup-file check BLOCKS and is gateable', () => {
+  it('C1 — pre-tag-gate.sh step 19 backup-file check BLOCKS and is gateable', () => {
     const gate = readFileSync(GATE_PATH, 'utf8');
 
-    expect(gate).toMatch(/step 19\/19: \.planning\/ backup-file accumulation check/);
+    // Denominator-agnostic — per-step denominators are owned by
+    // pre-tag-gate-self-consistency.test.ts (Ship 0.2).
+    expect(gate).toMatch(/step 19\/\d+: \.planning\/ backup-file accumulation check/);
     // Invokes the cleaner in --check (detector) mode.
     expect(gate).toMatch(/node "\$REPO_ROOT\/tools\/state-md-clean-backups\.mjs" --check/);
     // Gateable via the named bypass token.
     expect(gate).toMatch(/gate_bypassed "state-backups"/);
-    // FAIL path exits with the documented (unused) exit code 21.
-    expect(gate).toMatch(/exit 21/);
+    // FAIL path exits with exit code 24. cc#28 originally used 21 believing it
+    // "unused", but tools-suite has owned 21 since v913 — Ship 0.2 (v966) resolved
+    // the collision by reassigning state-backups 21->24. Global exit-code uniqueness
+    // is pinned by pre-tag-gate-self-consistency.test.ts.
+    expect(gate).toMatch(/exit 24/);
     // FAIL path references the one-command fix.
     expect(gate).toMatch(/Fix: node tools\/state-md-clean-backups\.mjs --write/);
     // The bypass token is in the operator-facing step-names vocabulary line.
@@ -70,11 +75,11 @@ describe('v1.49.961 integration meta-test (cc#28 .planning backup two-layer clos
 
   it('C3 — step 19 appears after step 18 and before the final summary', () => {
     const gate = readFileSync(GATE_PATH, 'utf8');
-    const step18Pos = gate.indexOf('step 18/18: KNOWN_UNWIRED stale-entry cross-audit');
+    const step18Pos = gate.search(/step 18\/\d+: KNOWN_UNWIRED stale-entry cross-audit/);
     // Regex .search() (NOT a quoted planning-path literal) so the apply-to-self
     // existsSync-no-skip-guard heuristic -- which flags readFileSync paired with
     // a quoted planning-dir path -- does not false-positive on this gate match.
-    const step19Pos = gate.search(/step 19\/19: \S+ backup-file accumulation check/);
+    const step19Pos = gate.search(/step 19\/\d+: \S+ backup-file accumulation check/);
     // Count-agnostic summary match (v965 added step 20 between step 19 and the
     // summary; step 19 is still BEFORE the final summary, just no longer adjacent).
     const summaryPos = gate.search(/all \d+ checks PASS/);

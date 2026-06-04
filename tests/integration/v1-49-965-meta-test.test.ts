@@ -38,9 +38,12 @@ const T14_PATH = join(REPO_ROOT, 'docs/T14-SHIP-SEQUENCE.md');
 const ENV_VARS_PATH = join(REPO_ROOT, 'tools/render-claude-md/env-vars.json');
 
 describe('v1.49.965 integration meta-test (Ship 0.1 adoption-baseline freshness gate)', () => {
-  it('C1 — step 20/20 adoption-freshness: WARN-only default, escalatable, gateable', () => {
+  it('C1 — step 20 adoption-freshness: WARN-only default, escalatable, gateable', () => {
     const gate = readFileSync(GATE_PATH, 'utf8');
-    expect(gate).toMatch(/step 20\/20: adoption-baseline freshness/);
+    // Denominator-agnostic: per-step denominators are owned by
+    // pre-tag-gate-self-consistency.test.ts (Ship 0.2). The ABSOLUTE count stays
+    // pinned by C2 below ("all 20 checks PASS").
+    expect(gate).toMatch(/step 20\/\d+: adoption-baseline freshness/);
     // Invokes the freshness tool.
     expect(gate).toMatch(/node "\$REPO_ROOT\/tools\/adoption-baseline-freshness\.mjs"/);
     // WARN-only by default + escalation hook.
@@ -63,8 +66,8 @@ describe('v1.49.965 integration meta-test (Ship 0.1 adoption-baseline freshness 
 
   it('C3 — step 20 appears after step 19 and before the final summary', () => {
     const gate = readFileSync(GATE_PATH, 'utf8');
-    const step19Pos = gate.search(/step 19\/19: \S+ backup-file accumulation check/);
-    const step20Pos = gate.search(/step 20\/20: adoption-baseline freshness/);
+    const step19Pos = gate.search(/step 19\/\d+: \S+ backup-file accumulation check/);
+    const step20Pos = gate.search(/step 20\/\d+: adoption-baseline freshness/);
     const summaryPos = gate.indexOf('all 20 checks PASS');
     expect(step19Pos).toBeGreaterThan(-1);
     expect(step20Pos).toBeGreaterThan(step19Pos);

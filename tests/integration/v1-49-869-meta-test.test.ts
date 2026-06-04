@@ -7,7 +7,7 @@
  * step.
  *
  * Gates exercised:
- *   C1 — pre-tag-gate.sh step 18/18 KNOWN_UNWIRED stale-entry cross-audit
+ *   C1 — pre-tag-gate.sh step 18 KNOWN_UNWIRED stale-entry cross-audit
  *        (codifies the per-ship workflow validated across v858-v867 10
  *        consecutive applications + v867 first-real-world-bug fix).
  *
@@ -31,13 +31,14 @@ const GATE_PATH = join(REPO_ROOT, 'tools/pre-tag-gate.sh');
 
 describe('v1.49.869 integration meta-test (pre-tag-gate cross-audit integration)', () => {
   // ==========================================================================
-  // C1 — pre-tag-gate.sh step 18/18 KNOWN_UNWIRED stale-entry cross-audit
+  // C1 — pre-tag-gate.sh step 18 KNOWN_UNWIRED stale-entry cross-audit
   // ==========================================================================
-  it('C1 — pre-tag-gate.sh exposes step 18/18 KNOWN_UNWIRED stale-entry cross-audit', () => {
+  it('C1 — pre-tag-gate.sh exposes step 18 KNOWN_UNWIRED stale-entry cross-audit', () => {
     const gate = readFileSync(GATE_PATH, 'utf8');
 
-    // The new step exists with the documented label
-    expect(gate).toMatch(/step 18\/18: KNOWN_UNWIRED stale-entry cross-audit/);
+    // The new step exists with the documented label (denominator-agnostic: the
+    // per-step denominator is owned by pre-tag-gate-self-consistency.test.ts).
+    expect(gate).toMatch(/step 18\/\d+: KNOWN_UNWIRED stale-entry cross-audit/);
 
     // The step invokes the v857 cross-audit tool
     expect(gate).toMatch(/node "\$REPO_ROOT\/tools\/security\/check-stale-known-unwired\.mjs"/);
@@ -76,8 +77,8 @@ describe('v1.49.869 integration meta-test (pre-tag-gate cross-audit integration)
   it('C3 — step 18 cross-audit appears after step 17 PROJECT.md drift check', () => {
     const gate = readFileSync(GATE_PATH, 'utf8');
 
-    const step17Pos = gate.indexOf('step 17/17: PROJECT.md drift check');
-    const step18Pos = gate.indexOf('step 18/18: KNOWN_UNWIRED stale-entry cross-audit');
+    const step17Pos = gate.search(/step 17\/\d+: PROJECT\.md drift check/);
+    const step18Pos = gate.search(/step 18\/\d+: KNOWN_UNWIRED stale-entry cross-audit/);
     expect(step17Pos).toBeGreaterThan(-1);
     expect(step18Pos).toBeGreaterThan(-1);
     expect(step18Pos).toBeGreaterThan(step17Pos);
