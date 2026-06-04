@@ -2,7 +2,7 @@
  * Heuristics-Free Skill Space — settings reader.
  *
  * Reads `.claude/gsd-skill-creator.json` and exposes per-module opt-in state
- * for the six Half B modules. Pure function: no side effects.
+ * for the Half B modules. Pure function: no side effects.
  *
  * Default at every flag is FALSE. The config file must explicitly opt-in any
  * module. Missing file, missing block, or missing flag → false.
@@ -16,8 +16,7 @@ import path from 'node:path';
 export type HeuristicsFreeModule =
   | 'skill_isotropy_audit'
   | 'sigreg'
-  | 'mission_world_model'
-  | 'intrinsic_telemetry';
+  | 'mission_world_model';
 
 export interface HeuristicsFreeSkillSpaceConfig {
   skill_isotropy_audit: { enabled: boolean };
@@ -29,7 +28,6 @@ export interface HeuristicsFreeSkillSpaceConfig {
     cemIterations: number;
     planningHorizon: number;
   };
-  intrinsic_telemetry: { enabled: boolean; minSamples: number };
 }
 
 const DEFAULTS: HeuristicsFreeSkillSpaceConfig = {
@@ -42,7 +40,6 @@ const DEFAULTS: HeuristicsFreeSkillSpaceConfig = {
     cemIterations: 3,
     planningHorizon: 3,
   },
-  intrinsic_telemetry: { enabled: false, minSamples: 5 },
 };
 
 function projectRoot(): string {
@@ -80,10 +77,6 @@ export function readHeuristicsFreeConfig(): HeuristicsFreeSkillSpaceConfig {
       planningHorizon: Number(
         block.mission_world_model?.planningHorizon ?? DEFAULTS.mission_world_model.planningHorizon,
       ),
-    },
-    intrinsic_telemetry: {
-      enabled: Boolean(block.intrinsic_telemetry?.enabled ?? false),
-      minSamples: Number(block.intrinsic_telemetry?.minSamples ?? DEFAULTS.intrinsic_telemetry.minSamples),
     },
   };
 }

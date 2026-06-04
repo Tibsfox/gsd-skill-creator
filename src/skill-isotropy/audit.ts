@@ -31,8 +31,8 @@ export const DEFAULT_AUDIT_CONFIG: IsotropyAuditConfig = {
  * Run one Isotropy Audit over a skill-embedding snapshot.
  *
  * Pure function: no I/O, no side effects. Produces a structured report that a
- * caller can log, persist, or feed into the Phase 733 Intrinsic Telemetry
- * correlation pipeline.
+ * caller can log, persist, or feed into downstream correlation / analysis
+ * tooling.
  *
  * Complexity: O(M · N · K) where M = numDirections, N = skill count,
  * K = embedding dim. For a typical library (N ~ 500, K ~ 384, M = 16) the

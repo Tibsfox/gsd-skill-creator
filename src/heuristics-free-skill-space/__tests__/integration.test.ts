@@ -24,7 +24,6 @@ import type { HeuristicsFreeSkillSpaceConfig } from '../index.js';
 import * as skillIsotropy from '../../skill-isotropy/index.js';
 import * as sigregMod from '../../sigreg/index.js';
 import * as missionWorldModel from '../../mission-world-model/index.js';
-import * as intrinsicTelemetry from '../../intrinsic-telemetry/index.js';
 
 // The live-config checks only make sense on an installation where the developer
 // has opted modules in. `.claude/gsd-skill-creator.json` is gitignored by project
@@ -42,16 +41,13 @@ describe('readHeuristicsFreeConfig', () => {
     expect(typeof cfg.skill_isotropy_audit.enabled).toBe('boolean');
     expect(typeof cfg.sigreg.enabled).toBe('boolean');
     expect(typeof cfg.mission_world_model.enabled).toBe('boolean');
-    expect(typeof cfg.intrinsic_telemetry.enabled).toBe('boolean');
     expect(typeof cfg.mission_world_model.latentDim).toBe('number');
-    expect(typeof cfg.intrinsic_telemetry.minSamples).toBe('number');
   });
 
   it('isModuleEnabled returns a boolean for each module', () => {
     expect(typeof isModuleEnabled('skill_isotropy_audit')).toBe('boolean');
     expect(typeof isModuleEnabled('sigreg')).toBe('boolean');
     expect(typeof isModuleEnabled('mission_world_model')).toBe('boolean');
-    expect(typeof isModuleEnabled('intrinsic_telemetry')).toBe('boolean');
   });
 });
 
@@ -64,7 +60,6 @@ describe.runIf(LIVE_CONFIG_PRESENT)('live .claude/gsd-skill-creator.json (develo
     expect(raw).toContain('skill_isotropy_audit');
     expect(raw).toContain('sigreg');
     expect(raw).toContain('mission_world_model');
-    expect(raw).toContain('intrinsic_telemetry');
   });
 
   it('every Half B flag has an `enabled` boolean field (schema shape)', () => {
@@ -80,7 +75,6 @@ describe.runIf(LIVE_CONFIG_PRESENT)('live .claude/gsd-skill-creator.json (develo
     expect(typeof block.skill_isotropy_audit.enabled).toBe('boolean');
     expect(typeof block.sigreg.enabled).toBe('boolean');
     expect(typeof block.mission_world_model.enabled).toBe('boolean');
-    expect(typeof block.intrinsic_telemetry.enabled).toBe('boolean');
   });
 });
 
@@ -90,28 +84,25 @@ describe.runIf(!LIVE_CONFIG_PRESENT)('live config absent (CI / fresh checkout)',
     expect(cfg.skill_isotropy_audit.enabled).toBe(false);
     expect(cfg.sigreg.enabled).toBe(false);
     expect(cfg.mission_world_model.enabled).toBe(false);
-    expect(cfg.intrinsic_telemetry.enabled).toBe(false);
   });
 
   it('isModuleEnabled returns false for every module without a config file', () => {
     expect(isModuleEnabled('skill_isotropy_audit')).toBe(false);
     expect(isModuleEnabled('sigreg')).toBe(false);
     expect(isModuleEnabled('mission_world_model')).toBe(false);
-    expect(isModuleEnabled('intrinsic_telemetry')).toBe(false);
   });
 });
 
 // ---------- module registry ----------
 
 describe('HEURISTICS_FREE_MODULES registry', () => {
-  it('registers all six LEJEPA Half B surfaces', () => {
+  it('registers all five LEJEPA Half B surfaces', () => {
     const ids = HEURISTICS_FREE_MODULES.map((m) => m.id);
     expect(ids).toContain('skill_isotropy_audit');
     expect(ids).toContain('sigreg');
     expect(ids).toContain('single_lambda_audit');
     expect(ids).toContain('heuristics_audit');
     expect(ids).toContain('mission_world_model');
-    expect(ids).toContain('intrinsic_telemetry');
   });
 
   it('maps each module to its LEJEPA requirement ID + phase number', () => {
@@ -122,7 +113,6 @@ describe('HEURISTICS_FREE_MODULES registry', () => {
     expect(byReq['LEJEPA-15']).toEqual({ phase: 730 });
     expect(byReq['LEJEPA-16']).toEqual({ phase: 731 });
     expect(byReq['LEJEPA-17']).toEqual({ phase: 732 });
-    expect(byReq['LEJEPA-18']).toEqual({ phase: 733 });
   });
 
   it('every code-backed module has a capcomImpact advisory', () => {
@@ -153,11 +143,6 @@ describe('SC-CONT-FLAG-OFF analogue — modules produce no side effects at impor
     expect(missionWorldModel.FORBIDDEN_ACTION_NAMES.length).toBeGreaterThan(0);
   });
 
-  it('importing intrinsic-telemetry does not dispatch, write, or alter CAPCOM', () => {
-    expect(typeof intrinsicTelemetry.correlateSignals).toBe('function');
-    expect(intrinsicTelemetry.CANDIDATE_SIGNALS.length).toBeGreaterThanOrEqual(6);
-  });
-
   it('NOT invoking any module API leaves no trace (pure function surface only)', () => {
     // The entire Half B module set is pure-function-only at the public boundary.
     // If any import caused an I/O side effect at load time, it would have to be
@@ -167,7 +152,6 @@ describe('SC-CONT-FLAG-OFF analogue — modules produce no side effects at impor
       a: typeof skillIsotropy,
       b: typeof sigregMod,
       c: typeof missionWorldModel,
-      d: typeof intrinsicTelemetry,
     };
     for (const v of Object.values(probe)) expect(v).toBe('object');
   });
@@ -190,7 +174,6 @@ describe('MB-1 Lyapunov + MB-5 dead-zone composition contracts', () => {
       skillIsotropy as unknown as Record<string, unknown>,
       sigregMod as unknown as Record<string, unknown>,
       missionWorldModel as unknown as Record<string, unknown>,
-      intrinsicTelemetry as unknown as Record<string, unknown>,
     ];
     for (const mod of modules) {
       for (const name of forbidden) expect(mod[name]).toBeUndefined();
@@ -239,21 +222,6 @@ describe('MB-1 Lyapunov + MB-5 dead-zone composition contracts', () => {
       seed: 1,
     });
     expect(report2.findings).toBeInstanceOf(Array);
-  });
-
-  it('intrinsic-telemetry report is pure: same input ⇒ same output (no dead-zone bypass)', () => {
-    const input = {
-      sig1: [
-        { missionId: 'm1', signalValue: 0.1, qualityScore: 1 },
-        { missionId: 'm2', signalValue: 0.2, qualityScore: 2 },
-        { missionId: 'm3', signalValue: 0.3, qualityScore: 3 },
-        { missionId: 'm4', signalValue: 0.4, qualityScore: 4 },
-        { missionId: 'm5', signalValue: 0.5, qualityScore: 5 },
-      ],
-    };
-    const a = intrinsicTelemetry.correlateSignals(input);
-    const b = intrinsicTelemetry.correlateSignals(input);
-    expect(a).toEqual(b);
   });
 });
 

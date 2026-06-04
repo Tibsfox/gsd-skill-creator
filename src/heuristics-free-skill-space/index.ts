@@ -26,7 +26,7 @@ export {
   isModuleEnabled,
 } from './settings.js';
 
-/** The six LEJEPA-* substrate surfaces registered by v1.49.571. */
+/** The five LEJEPA-* substrate surfaces (intrinsic-telemetry retired v1.49.972). */
 export const HEURISTICS_FREE_MODULES = [
   {
     id: 'skill_isotropy_audit',
@@ -62,12 +62,5 @@ export const HEURISTICS_FREE_MODULES = [
     phase: 732,
     path: 'src/mission-world-model/',
     capcomImpact: 'advisory only; hard CAPCOM preservation gate; predictor cannot emit gate-bypass actions',
-  },
-  {
-    id: 'intrinsic_telemetry',
-    requirement: 'LEJEPA-18',
-    phase: 733,
-    path: 'src/intrinsic-telemetry/',
-    capcomImpact: 'pure correlation report; no dispatch',
   },
 ] as const;

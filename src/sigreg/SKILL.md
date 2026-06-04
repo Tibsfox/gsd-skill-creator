@@ -64,4 +64,3 @@ Ported from https://github.com/rbalestr-lab/lejepa under the MIT license.
 ## Related modules
 
 - `src/skill-isotropy/` — Skill Space Isotropy Audit (Phase 728) — read-only audit use case
-- `src/intrinsic-telemetry/` — Phase 733 — SIGReg-on-embeddings is a candidate signal

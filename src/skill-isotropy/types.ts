@@ -95,7 +95,7 @@ export interface IsotropyAuditReport {
   verdict: 'healthy' | 'watch' | 'collapse-suspected';
   /**
    * Reproducibility tag: concatenation of config + seed (if set). Useful for
-   * the Phase 733 Intrinsic Telemetry correlation pipeline.
+   * downstream correlation / analysis tooling.
    */
   runTag: string;
 }
