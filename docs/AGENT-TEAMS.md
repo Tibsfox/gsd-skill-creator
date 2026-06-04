@@ -1,5 +1,14 @@
 # Agent Teams
 
+> **Status: dormant on the dev line (paused pending a runtime).** The agent-teams
+> primitive validates, inspects, and manages team configs, but there is **no
+> execution runtime** — no `team run` verb exists, and `team spawn` is a readiness
+> CHECK only (as of v1.49.971 it no longer scaffolds agent files). The 4 demo teams
+> are no longer installed to `.claude/teams/`; they remain as reference examples
+> under `examples/teams/`. See [`AGENT-TEAMS-DORMANT.md`](AGENT-TEAMS-DORMANT.md)
+> for the disposition, what still works, and the resume condition. The CLI verbs
+> and validation below remain fully supported.
+
 Agent teams coordinate multiple Claude Code agents working together on complex tasks. Teams support leader-worker, pipeline, swarm, and custom topologies.
 
 ## Team Configuration

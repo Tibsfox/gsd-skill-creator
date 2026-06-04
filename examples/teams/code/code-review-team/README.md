@@ -12,6 +12,14 @@ superseded_by: null
 ---
 # Code Review Team
 
+> **Dormant — reference example only.** The agent-teams primitive has no
+> execution runtime on the dev line (there is no `team run` verb; the CLI
+> validates and inspects team configs but cannot launch them). This team is a
+> **structural reference**, not a runnable team, and is **no longer installed**
+> to `.claude/teams/` (decommissioned from `project-claude/manifest.json` at
+> v1.49.971). Paused pending a team runtime — see
+> [`docs/AGENT-TEAMS-DORMANT.md`](../../../../docs/AGENT-TEAMS-DORMANT.md).
+
 Multi-perspective code review with specialized reviewers that analyze code from four distinct angles: correctness, security, performance, and maintainability. A coordinator synthesizes all findings into a prioritized, actionable review.
 
 ## When to Use This Team

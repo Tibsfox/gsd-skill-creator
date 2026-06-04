@@ -12,6 +12,14 @@ superseded_by: null
 ---
 # Doc Generation Team
 
+> **Dormant — reference example only.** The agent-teams primitive has no
+> execution runtime on the dev line (there is no `team run` verb; the CLI
+> validates and inspects team configs but cannot launch them). This team is a
+> **structural reference**, not a runnable team, and is **no longer installed**
+> to `.claude/teams/` (decommissioned from `project-claude/manifest.json` at
+> v1.49.971). Paused pending a team runtime — see
+> [`docs/AGENT-TEAMS-DORMANT.md`](../../../../docs/AGENT-TEAMS-DORMANT.md).
+
 Documentation generation pipeline with specialized writers that produce API references, architecture docs, and user guides from source code analysis. A coordinator ensures consistency and accuracy across all generated documentation.
 
 ## When to Use This Team

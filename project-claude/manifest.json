@@ -194,16 +194,6 @@
         "description": "Test for snapshot session hook"
       },
       {
-        "source": "teams/gsd-debug-team/config.json",
-        "target": ".claude/teams/gsd-debug-team/config.json",
-        "description": "GSD adversarial debugging team"
-      },
-      {
-        "source": "teams/gsd-research-team/config.json",
-        "target": ".claude/teams/gsd-research-team/config.json",
-        "description": "GSD parallel research team"
-      },
-      {
         "source": "skills/test-generator/SKILL.md",
         "target": ".claude/skills/test-generator/SKILL.md",
         "description": "Test generator skill (GSD example)"
@@ -257,16 +247,6 @@
         "source": "agents/doc-linter.md",
         "target": ".claude/agents/doc-linter.md",
         "description": "Documentation linter agent (GSD example)"
-      },
-      {
-        "source": "teams/code-review-team/config.json",
-        "target": ".claude/teams/code-review-team/config.json",
-        "description": "Code review team (GSD example)"
-      },
-      {
-        "source": "teams/doc-generation-team/config.json",
-        "target": ".claude/teams/doc-generation-team/config.json",
-        "description": "Documentation generation team (GSD example)"
       },
       {
         "source": "commands/sc/start.md",

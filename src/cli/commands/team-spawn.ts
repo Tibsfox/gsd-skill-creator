@@ -1,9 +1,12 @@
 /**
  * CLI command for checking team spawn readiness.
  *
- * Validates that all member agent files exist and are resolvable.
- * When agents are missing, displays fuzzy name suggestions and
- * offers to generate the missing files interactively.
+ * Validates that all member agent files exist and are resolvable, and when
+ * agents are missing displays fuzzy name suggestions and reports which member
+ * agents are unresolved. Agent-file scaffolding is DISABLED: the agent-teams
+ * primitive has no execution runtime on the dev line, so spawn is a readiness
+ * CHECK only and never writes agent files (the prior interactive scaffold was a
+ * self-mod foot-gun). See docs/AGENT-TEAMS-DORMANT.md.
  *
  * Three-tier output: text (styled with spinners), quiet (CSV-like), JSON.
  */
@@ -14,7 +17,6 @@ import {
   TeamStore,
   getTeamsBasePath,
   validateMemberAgents,
-  writeTeamAgentFiles,
 } from '../../teams/index.js';
 import type { MemberResolutionResult } from '../../teams/index.js';
 import type { TeamConfig } from '../../types/team.js';
@@ -34,8 +36,9 @@ Usage:
   skill-creator team spawn <team-name>
   skill-creator tm sp my-team
 
-Validates that all member agent files exist and are resolvable.
-Offers to generate missing agent files interactively.
+Validates that all member agent files exist and are resolvable, and reports
+which member agents are unresolved. Agent-file scaffolding is paused — the
+agent-teams primitive is dormant (no runtime). See docs/AGENT-TEAMS-DORMANT.md.
 
 Options:
   --scope=<scope>   Scope to search: project, user, or both (default)
@@ -116,70 +119,6 @@ function outputQuiet(teamName: string, allReady: boolean): void {
 }
 
 // ============================================================================
-// Interactive Fix
-// ============================================================================
-
-/**
- * Offer to generate missing agent files interactively.
- *
- * For each missing agent, prompts the user to confirm generation.
- * Uses writeTeamAgentFiles from the teams module to create agent files.
- *
- * @param config - The team configuration
- * @param missingResults - Resolution results for missing agents only
- * @returns Number of agents generated
- */
-async function offerInteractiveFix(
-  config: TeamConfig,
-  missingResults: MemberResolutionResult[]
-): Promise<number> {
-  let generated = 0;
-
-  for (const result of missingResults) {
-    const member = config.members.find(
-      (m) => m.agentId === result.agentId
-    );
-    if (!member) continue;
-
-    const shouldGenerate = await p.confirm({
-      message: `Generate missing agent file for '${result.agentId}'?`,
-    });
-
-    if (p.isCancel(shouldGenerate) || !shouldGenerate) {
-      continue;
-    }
-
-    // Determine tools from the member's index signature
-    const tools =
-      ((member as Record<string, unknown>).tools as string[]) ?? [];
-
-    const agentResult = writeTeamAgentFiles(
-      [
-        {
-          agentId: member.agentId,
-          name: member.name,
-          agentType: member.agentType,
-          tools,
-        },
-      ],
-      config.name,
-      '.claude/agents'
-    );
-
-    if (agentResult.created.length > 0) {
-      p.log.success(
-        `Created agent file: .claude/agents/${result.agentId}.md`
-      );
-      generated++;
-    } else {
-      p.log.warn(`Agent file already exists for '${result.agentId}'.`);
-    }
-  }
-
-  return generated;
-}
-
-// ============================================================================
 // Text Output
 // ============================================================================
 
@@ -242,9 +181,10 @@ function outputText(
 /**
  * CLI command for checking team spawn readiness.
  *
- * Validates that all member agent files exist and are resolvable.
- * Offers to generate missing agent files interactively when not
- * in quiet or JSON mode.
+ * Validates that all member agent files exist and are resolvable, and reports
+ * which member agents are found or missing. It does NOT scaffold or write agent
+ * files — the agent-teams primitive is dormant (no runtime), so spawn is a
+ * readiness CHECK only. See docs/AGENT-TEAMS-DORMANT.md.
  *
  * @param args - Command-line arguments (after 'team spawn')
  * @returns Exit code: 0 when all members resolved, 1 when any missing
@@ -319,21 +259,22 @@ export async function teamSpawnCommand(args: string[]): Promise<number> {
     return allReady ? 0 : 1;
   }
 
-  // Text output with interactive fix for missing agents
+  // Text output: report readiness only. Agent-file scaffolding is intentionally
+  // disabled — the agent-teams primitive has no execution runtime on the dev
+  // line, so spawn validates and reports but never writes agent files (the
+  // prior interactive scaffold was a self-mod foot-gun). See
+  // docs/AGENT-TEAMS-DORMANT.md.
   outputText(teamName, results);
 
   if (missing.length > 0) {
     p.log.message('');
-    const generated = await offerInteractiveFix(config, missing);
-
-    if (generated > 0) {
-      p.log.message('');
-      p.log.message(
-        pc.dim(
-          `Generated ${generated} agent file(s). Re-run spawn to verify readiness.`
-        )
-      );
-    }
+    p.log.message(
+      pc.dim(
+        'Missing member agents are reported above. Agent-file scaffolding is ' +
+          'paused — the agent-teams primitive is dormant (no runtime). ' +
+          'See docs/AGENT-TEAMS-DORMANT.md.'
+      )
+    );
   }
 
   return allReady ? 0 : 1;
