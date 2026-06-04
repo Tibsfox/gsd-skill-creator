@@ -24,16 +24,18 @@
   },
   {
     "domain": "Ship pipeline",
-    "trigger": "Touching tools/pre-tag-gate.sh, T14 ship steps, or hook scripts",
-    "summary": "Apply-to-self enforcement, CI-gate override rationale (enumerated CSV per Lesson #10185), no Co-Authored-By trailers (v1.49.621), T14 step ordering (Lesson #10197), dev/main 0-commit drift via ship-sync, cross-link-strict flag, gh-CLI background-task git-discovery quirk",
+    "trigger": "Touching tools/pre-tag-gate.sh, T14 ship steps, or hook scripts; authoring or running the T14 adversarial ship review",
+    "summary": "Apply-to-self enforcement, CI-gate override rationale (enumerated CSV per Lesson #10185), no Co-Authored-By trailers (v1.49.621), T14 step ordering (Lesson #10197), dev/main 0-commit drift via ship-sync, cross-link-strict flag, gh-CLI background-task git-discovery quirk. Pre-push adversarial ship review (v1.49.968 Ship 1.1, ADVISORY/staged #10463): after the code commit and BEFORE `git push origin dev`, run the reusable Workflow `tools/ship-review/adversarial-ship-review.mjs` over the diff — five parallel READ-ONLY lens reviewers (correctness / scope / guard-soundness / doc-accuracy / security) → adversarial VERIFY sub-stage → fix every CONFIRMED REAL finding IN CODE (never explain it away in prose), then re-run the gate. Reviewers are the Explore agentType; do NOT use worktree isolation (a fresh worktree lacks node_modules → probes fail) — the learned best practice is read-only / additive-probe-only + a post-run `git status` clean-check (feedback_workflow-agents-invalidate-file-read-state); re-Read a file before Edit if a probe touched it. SCALE to blast radius (trivial deterministically-checked edits may use direct multi-angle verification instead of the full panel). The deterministic pre-tag-gate attestation rung is deferred (a gate step would bump the count 20→21 and force a denominator re-normalization). The mechanism caught real defects pre-push in v965 (3 BLOCKERs), v966 (1 MAJOR), and 11/35 F4 ships. Distinct from the GitHub-PR-flavored `adversarial-pr-review` skill (issue-spec cross-ref) — this reviews the LOCAL pre-push diff.",
     "canonical_docs": [
       ".planning/ship-pipeline-discipline/apply-to-self-allowlist.md",
       ".planning/ship-pipeline-discipline/ci-gate-override-rationale.md",
       "docs/T14-SHIP-SEQUENCE.md",
+      "docs/adversarial-ship-review.md",
+      "tools/ship-review/adversarial-ship-review.mjs",
       "tools/pre-tag-gate.sh"
     ],
     "key_lessons": ["#10176", "#10183", "#10184", "#10185", "#10188", "#10191", "#10197", "#10202", "#10204", "#10220", "#10221", "#10222"],
-    "codified_at_milestone": "v1.49.636+ + v1.49.654 (ship-pipeline lessons appended); v1.49.910 (PARTIAL-backfill: #10176 pre-tag-gate composite HARD RULE + #10183 version-sequence sanity step 1.5 + #10188 POSIX-ERE→depth-audit gate step 6 — all documented in tools/pre-tag-gate.sh, registered as canonical doc this ship)"
+    "codified_at_milestone": "v1.49.636+ + v1.49.654 (ship-pipeline lessons appended); v1.49.910 (PARTIAL-backfill: #10176 pre-tag-gate composite HARD RULE + #10183 version-sequence sanity step 1.5 + #10188 POSIX-ERE→depth-audit gate step 6 — all documented in tools/pre-tag-gate.sh, registered as canonical doc this ship); v1.49.968 (Ship 1.1: pre-push adversarial ship review codified as T14 step P + reusable workflow tools/ship-review/adversarial-ship-review.mjs + canonical doc docs/adversarial-ship-review.md + drift-guard tests/integration/adversarial-ship-review-discipline.test.ts)"
   },
   {
     "domain": "Self-modification safety",

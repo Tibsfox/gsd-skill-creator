@@ -55,6 +55,25 @@ are stable references; insertion of new steps SHOULD use decimal sub-steps
 (e.g. `2.5`) to preserve numbering continuity for downstream docs.
 
 ```
+P.   Adversarial ship review (PRE-PUSH; v1.49.968 Ship 1.1 — ADVISORY, staged #10463)
+       - After the code commit(s) and BEFORE `git push origin dev`, run the multi-agent
+         adversarial review on the diff; fix every CONFIRMED REAL finding IN CODE
+         (never explain it away in prose), then proceed to push → CI → pre-tag-gate.
+       - `Workflow({ scriptPath: 'tools/ship-review/adversarial-ship-review.mjs',
+         args: { base: '<first-code-commit>^', intent: '<one paragraph: what the ship does>' } })`
+       - Reviewers are READ-ONLY (Explore agentType); do NOT use worktree isolation
+         (fresh worktree lacks node_modules → probes fail). After the run, `git status`
+         the tree and `git checkout`/restore any leak before trusting it; re-Read a file
+         before Edit if a probe touched it (file-read-state invalidation).
+       - SCALE to blast radius: a trivial, deterministically-checked, mechanical edit MAY
+         use direct multi-angle verification instead of the full five-lens panel — note
+         the scale-down in the retrospective.
+       - ADVISORY only this rung; the deterministic pre-tag-gate attestation is a FUTURE
+         rung (a gate step would bump the count 20→21 and force a denominator
+         re-normalization, which belongs in its own ship).
+       - Canonical: docs/adversarial-ship-review.md. Caught real defects pre-push in
+         v965 (3 BLOCKERs), v966 (1 MAJOR), and 11/35 F4 ships.
+
 0.   Release-notes scaffold + fill (BEFORE step 1's completeness gate; v1.49.958)
        - `node tools/release-history/scaffold-release-notes.mjs --version v<X>
          --name "<Subtitle>" [--type "<type(scope)>"]` emits the canonical 5-file
@@ -207,6 +226,7 @@ Milestone-specific notes:
 |---|---|---|
 | 2026-05-11 | Initial canonical doc. T14 sequence documented with STORY-gate as step 2.5 (post bump-version, pre git-tag). | v1.49.638 C2 (Lesson #10197 closure) |
 | 2026-06-03 | Added step 2.7 adoption-baseline refresh (post bump-version, pre chore-commit): `adoption-refresh.mjs` + `adoption-trends.mjs --write`. SOURCE-ELIMINATOR half of the two-layer closure (#10431/#10436) for the baseline-freeze drift class; DETECTOR is pre-tag-gate step 20 (adoption-freshness, WARN-only). | v1.49.965 Ship 0.1 (audit T1.3) |
+| 2026-06-04 | Added pre-flight step P — adversarial ship review on the diff before `git push origin dev` (ADVISORY, staged #10463). Reusable workflow `tools/ship-review/adversarial-ship-review.mjs`; canonical doc `docs/adversarial-ship-review.md`; drift-guard `tests/integration/adversarial-ship-review-discipline.test.ts`. | v1.49.968 Ship 1.1 (audit T1.4) |
 
 ## Lesson coverage (codified v1.49.654 C08+C09)
 
