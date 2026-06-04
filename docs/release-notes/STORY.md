@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.964`.
+The story begins at `v1.0` and continues to `v1.49.965`.
 
-**1007 chapters.** 1006 have retrospectives.
+**1008 chapters.** 1007 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -79,8 +79,8 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.17](v1.49.17/00-summary.md)** — The Space Between · 2026-03-04
 - **[v1.49.18](v1.49.18/00-summary.md)** — Space Between Observatory · 2026-03-06
 - **[v1.49.19](v1.49.19/00-summary.md)** — Gastown Chipset Integration · 2026-03-06
-- **[v1.49.20.1](v1.49.20.1/00-summary.md)** — Documentation Reflections · 2026-03-06
 - **[v1.49.20](v1.49.20/00-summary.md)** — Documentation Consolidation · 2026-03-06
+- **[v1.49.20.1](v1.49.20.1/00-summary.md)** — Documentation Reflections · 2026-03-06
 - **[v1.49.21](v1.49.21/00-summary.md)** — Image to Mission Pipeline · 2026-03-07
 - **[v1.49.22](v1.49.22/00-summary.md)** — PNW Research Series · 2026-03-07
 - **[v1.49.23](v1.49.23/00-summary.md)** — Unison Language & Math Co-Processor Completion · 2026-03-08
@@ -988,17 +988,17 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.935](v1.49.935/00-summary.md)** — CF4b: first `coprocessor:` skill consumer + CF4c eigen verdict · 2026-06-01
 - **[v1.49.936](v1.49.936/00-summary.md)** — CF4a: staged non-blocking cargo CI lane · 2026-06-01
 - **[v1.49.937](v1.49.937/00-summary.md)** — CF4d: algebrus.eigen complex-serialization wire fix · 2026-06-01
-- **[v1.49.938](v1.49.938/00-summary.md)** — cargo lane flip-readiness gate (lane-stability #10463) · 2026-06-01
+- **[v1.49.938](v1.49.938/00-summary.md)** — cargo lane flip-readiness gate (lane-stability model) · 2026-06-01
 - **[v1.49.939](v1.49.939/00-summary.md)** — cargo lane flipped to load-bearing (#10463 two-rung complete) · 2026-06-01
 - **[v1.49.940](v1.49.940/00-summary.md)** — gateway integration tests on ephemeral ports (EADDRINUSE flake closed) · 2026-06-01
-- **[v1.49.941](v1.49.941/00-summary.md)** — security: resolve critical vitest-UI + moderate qs advisories (vitest → 4.1.8) · 2026-06-01
-- **[v1.49.942](v1.49.942/00-summary.md)** — macOS flip-readiness Set-boundary test hardening (counter-cadence #21) · 2026-06-01
-- **[v1.49.943](v1.49.943/00-summary.md)** — defer-biased-gate Set-boundary lesson #10464 + named-transparency pins · 2026-06-01
-- **[v1.49.944](v1.49.944/00-summary.md)** — wire session-end prune through the observation.retention_days substrate (counter-cadence consume) · 2026-06-01
+- **[v1.49.941](v1.49.941/00-summary.md)** — security: resolve critical vitest-UI + moderate qs advisories (vitest family → 4.1.8) · 2026-06-01
+- **[v1.49.942](v1.49.942/00-summary.md)** — macOS flip-readiness Set-boundary test hardening (counter-cadence) · 2026-06-01
+- **[v1.49.943](v1.49.943/00-summary.md)** — defer-biased-gate Set-boundary lesson promotion (#10464) + named-transparency pins (counter-cadence) · 2026-06-01
+- **[v1.49.944](v1.49.944/00-summary.md)** — wire the session-end prune through the observation.retention_days substrate (counter-cadence consume) · 2026-06-01
 - **[v1.49.945](v1.49.945/00-summary.md)** — serialize the ANTHROPIC_API_KEY env-var Rust tests (close the v939 cargo-lane flake) · 2026-06-01
 - **[v1.49.946](v1.49.946/00-summary.md)** — honor observation.max_entries in the session-end prune (count-cap config wire) · 2026-06-01
-- **[v1.49.947](v1.49.947/00-summary.md)** — skill-creator cadence CLI: deterministic meta-cadence overdue-check (counter-cadence #24, gate-not-vigilance) · 2026-06-01
-- **[v1.49.948](v1.49.948/00-summary.md)** — fix M4 branches first-commit-wins double-win (permanent per-round commit lock; un-bypasses the vitest gate) · 2026-06-02
+- **[v1.49.947](v1.49.947/00-summary.md)** — `skill-creator cadence` CLI: deterministic meta-cadence overdue-check (counter-cadence #24) · 2026-06-01
+- **[v1.49.948](v1.49.948/00-summary.md)** — fix M4 branches first-commit-wins double-win (permanent per-round commit lock) · 2026-06-02
 - **[v1.49.949](v1.49.949/00-summary.md)** — harden the cadence verify axis (dedicated end-to-end test detection) · 2026-06-02
 - **[v1.49.950](v1.49.950/00-summary.md)** — machine-track the cadence ships-since second conjunct (candidate -> overdue gate) · 2026-06-02
 - **[v1.49.951](v1.49.951/00-summary.md)** — close the last bounded-learning verify gap (suggestions.* end-to-end test) · 2026-06-02
@@ -1009,9 +1009,10 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.956](v1.49.956/00-summary.md)** — inter-procedural call-graph + N-level binding for the cadence verify detector · 2026-06-02
 - **[v1.49.957](v1.49.957/00-summary.md)** — return-value dataflow for the cadence verify wire detector · 2026-06-02
 - **[v1.49.958](v1.49.958/00-summary.md)** — release-notes 5-file scaffolding source eliminator (counter-cadence #27) · 2026-06-02
-- **[v1.49.959](v1.49.959/00-summary.md)** — param-return-through + parenthesized-literal lifts for the cadence verify detector · 2026-06-03
+- **[v1.49.959](v1.49.959/00-summary.md)** — param-return-through + parenthesized-literal detector lifts · 2026-06-03
 - **[v1.49.960](v1.49.960/00-summary.md)** — M4 intent-journal crash recovery for wedged commits · 2026-06-03
 - **[v1.49.961](v1.49.961/00-summary.md)** — STATE.md backup-file two-layer closure (counter-cadence #28) · 2026-06-03
 - **[v1.49.962](v1.49.962/00-summary.md)** — bypass-vocab parity drift-guard (counter-cadence #29) · 2026-06-03
 - **[v1.49.963](v1.49.963/00-summary.md)** — verify-detector paren-param + nested-self-call bounds · 2026-06-03
 - **[v1.49.964](v1.49.964/00-summary.md)** — M4 orphan trunk-tmp cleanup on commit-lock reap · 2026-06-03
+- **[v1.49.965](v1.49.965/00-summary.md)** — adoption-baseline freshness gate + tool · 2026-06-03
