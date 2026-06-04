@@ -1,13 +1,14 @@
 # Release History
 
-1018 milestones shipped across the v1.0 → v1.49.975 arc. The table below lists every shipped release, newest first.
+1019 milestones shipped across the v1.0 → v1.49.976 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
-**Snapshot:** 1018 releases · 1017 with retrospectives · 763 with extracted lessons · quality A:662 B:98 C:62 D:12 F:184 (avg 83) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 1019 releases · 1018 with retrospectives · 763 with extracted lessons · quality A:662 B:98 C:62 D:12 F:185 (avg 83) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.976](release-notes/v1.49.976) | team schema reconcile + chipset taxonomy/validate fixes | 2026-06-04 | 3 | — | — | [s](release-notes/v1.49.976/chapter/00-summary.md) [r](release-notes/v1.49.976/chapter/03-retrospective.md) [l](release-notes/v1.49.976/chapter/04-lessons.md) [c](release-notes/v1.49.976/chapter/99-context.md) | — | F 29 |  |
 | [v1.49.975](release-notes/v1.49.975) | agent adoption scan + dormant-agent verdicts | 2026-06-04 | 3 | — | — | [s](release-notes/v1.49.975/chapter/00-summary.md) [r](release-notes/v1.49.975/chapter/03-retrospective.md) [l](release-notes/v1.49.975/chapter/04-lessons.md) [c](release-notes/v1.49.975/chapter/99-context.md) | — | F 35 |  |
 | [v1.49.974](release-notes/v1.49.974) | skills source-of-truth promotion + research-skill wires | 2026-06-04 | 3 | — | — | [s](release-notes/v1.49.974/chapter/00-summary.md) [r](release-notes/v1.49.974/chapter/03-retrospective.md) [l](release-notes/v1.49.974/chapter/04-lessons.md) [c](release-notes/v1.49.974/chapter/99-context.md) | — | F 39 |  |
 | [v1.49.973](release-notes/v1.49.973) | update sub-agent dispatch discipline for opus 4.8 harness | 2026-06-04 | 3 | — | — | [s](release-notes/v1.49.973/chapter/00-summary.md) [r](release-notes/v1.49.973/chapter/03-retrospective.md) [l](release-notes/v1.49.973/chapter/04-lessons.md) [c](release-notes/v1.49.973/chapter/99-context.md) | — | F 40 |  |
