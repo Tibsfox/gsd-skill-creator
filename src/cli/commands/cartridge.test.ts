@@ -1,5 +1,5 @@
 /**
- * Cartridge CLI tests — CL-01..CL-14 + help smoke.
+ * Cartridge CLI tests — CL-01..CL-16 + help smoke.
  *
  * Tests the pure `cartridgeCommand(args, io)` entry point with an injected IO
  * sink. Does not spawn the real binary — these are library-level tests.
@@ -8,6 +8,7 @@
 import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { cartridgeCommand, type CartridgeCommandIO } from './cartridge.js';
 
@@ -255,6 +256,25 @@ teams: {}
       .map((w: { message: string }) => w.message)
       .join('\n');
     expect(joined).toContain('known-validation-debt');
+  });
+
+  it('CL-16 validate accepts a kind:research-output cartridge', async () => {
+    // Regression: handleValidate used loadCartridge(), which throws for
+    // research-output cartridges. It now uses loadAnyCartridge() + dispatches
+    // to validateResearchOutputCartridge(), so the 5 committed research-output
+    // example cartridges validate via the CLI.
+    const io = makeIO();
+    const path = fileURLToPath(
+      new URL(
+        '../../../examples/cartridges/svg-substrate/cartridge.yaml',
+        import.meta.url,
+      ),
+    );
+    const code = await cartridgeCommand(['validate', path, '--json'], io);
+    expect(code).toBe(0);
+    const parsed = JSON.parse(io.out.join('\n'));
+    expect(parsed.valid).toBe(true);
+    expect(parsed.errors).toEqual([]);
   });
 
   it('cartridge --help prints usage and exits 0 (smoke)', async () => {

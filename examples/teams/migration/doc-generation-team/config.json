@@ -1,35 +1,42 @@
 {
   "name": "doc-generation-team",
   "description": "Documentation generation pipeline with specialized writers for API docs, architecture docs, and user guides. Writers are scoped to docs/ and README.md only.",
-  "topology": "leader-worker",
+  "leadAgentId": "doc-coordinator",
+  "createdAt": "2026-02-08T00:00:00.000Z",
   "members": [
     {
-      "name": "doc-coordinator",
-      "role": "leader",
-      "description": "Assigns documentation scope to writers, reviews drafts for accuracy and consistency, ensures cross-references between docs are correct, and maintains a unified voice and terminology across all generated documentation.",
+      "agentId": "doc-coordinator",
+      "name": "Doc Coordinator",
+      "agentType": "coordinator",
+      "model": "sonnet",
       "tools": ["Read", "Glob", "Grep"],
-      "model": "sonnet"
+      "prompt": "Assigns documentation scope to writers, reviews drafts for accuracy and consistency, ensures cross-references between docs are correct, and maintains a unified voice and terminology across all generated documentation."
     },
     {
-      "name": "api-doc-writer",
-      "role": "worker",
-      "description": "Generates API endpoint documentation, request/response schemas, authentication guides, error code references, and usage examples. Reads source code to extract route definitions, types, and validation rules. Writes output to docs/ directory only.",
+      "agentId": "api-doc-writer",
+      "name": "API Doc Writer",
+      "agentType": "specialist",
+      "model": "sonnet",
       "tools": ["Read", "Write", "Glob", "Grep"],
-      "model": "sonnet"
+      "prompt": "Generates API endpoint documentation, request/response schemas, authentication guides, error code references, and usage examples. Reads source code to extract route definitions, types, and validation rules. Writes output to docs/ directory only."
     },
     {
-      "name": "architecture-writer",
-      "role": "worker",
-      "description": "Generates system design documentation, component relationship diagrams (as text), data flow descriptions, dependency maps, and deployment architecture overviews. Reads source code structure to infer architecture. Writes output to docs/ directory only.",
+      "agentId": "architecture-writer",
+      "name": "Architecture Writer",
+      "agentType": "specialist",
+      "model": "sonnet",
       "tools": ["Read", "Write", "Glob", "Grep"],
-      "model": "sonnet"
+      "prompt": "Generates system design documentation, component relationship diagrams (as text), data flow descriptions, dependency maps, and deployment architecture overviews. Reads source code structure to infer architecture. Writes output to docs/ directory only."
     },
     {
-      "name": "guide-writer",
-      "role": "worker",
-      "description": "Generates README files, getting started guides, tutorials, FAQ pages, and troubleshooting guides. Reads existing code and docs to create user-facing content. Writes output to docs/ directory and README.md only.",
+      "agentId": "guide-writer",
+      "name": "Guide Writer",
+      "agentType": "specialist",
+      "model": "sonnet",
       "tools": ["Read", "Write", "Glob", "Grep"],
-      "model": "sonnet"
+      "prompt": "Generates README files, getting started guides, tutorials, FAQ pages, and troubleshooting guides. Reads existing code and docs to create user-facing content. Writes output to docs/ directory and README.md only."
     }
-  ]
+  ],
+  "version": 1,
+  "topology": "leader-worker"
 }

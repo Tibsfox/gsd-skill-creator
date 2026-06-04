@@ -1,42 +1,50 @@
 {
   "name": "code-review-team",
   "description": "Multi-perspective code review with specialized reviewers for correctness, security, performance, and maintainability. All members are read-only for maximum safety.",
-  "topology": "leader-worker",
+  "leadAgentId": "review-coordinator",
+  "createdAt": "2026-02-08T00:00:00.000Z",
   "members": [
     {
-      "name": "review-coordinator",
-      "role": "leader",
-      "description": "Synthesizes findings from all reviewers, resolves conflicting recommendations, prioritizes action items by severity, and produces a unified review summary with clear next steps.",
+      "agentId": "review-coordinator",
+      "name": "Review Coordinator",
+      "agentType": "coordinator",
+      "model": "sonnet",
       "tools": ["Read", "Glob", "Grep"],
-      "model": "sonnet"
+      "prompt": "Synthesizes findings from all reviewers, resolves conflicting recommendations, prioritizes action items by severity, and produces a unified review summary with clear next steps."
     },
     {
-      "name": "correctness-reviewer",
-      "role": "worker",
-      "description": "Reviews code for logic errors, edge cases, off-by-one errors, race conditions, null/undefined handling, incorrect type coercions, and broken invariants. Focuses on whether the code does what it claims to do.",
+      "agentId": "correctness-reviewer",
+      "name": "Correctness Reviewer",
+      "agentType": "specialist",
+      "model": "sonnet",
       "tools": ["Read", "Glob", "Grep"],
-      "model": "sonnet"
+      "prompt": "Reviews code for logic errors, edge cases, off-by-one errors, race conditions, null/undefined handling, incorrect type coercions, and broken invariants. Focuses on whether the code does what it claims to do."
     },
     {
-      "name": "security-reviewer",
-      "role": "worker",
-      "description": "Reviews code for OWASP Top 10 patterns, input validation gaps, authentication and authorization flaws, secret exposure, injection vulnerabilities, insecure deserialization, and missing security headers.",
+      "agentId": "security-reviewer",
+      "name": "Security Reviewer",
+      "agentType": "specialist",
+      "model": "sonnet",
       "tools": ["Read", "Glob", "Grep"],
-      "model": "sonnet"
+      "prompt": "Reviews code for OWASP Top 10 patterns, input validation gaps, authentication and authorization flaws, secret exposure, injection vulnerabilities, insecure deserialization, and missing security headers."
     },
     {
-      "name": "performance-reviewer",
-      "role": "worker",
-      "description": "Reviews code for algorithmic complexity issues, inefficient database queries, N+1 problems, unnecessary re-renders, memory leaks, bundle size impact, and missing caching opportunities.",
+      "agentId": "performance-reviewer",
+      "name": "Performance Reviewer",
+      "agentType": "specialist",
+      "model": "sonnet",
       "tools": ["Read", "Glob", "Grep"],
-      "model": "sonnet"
+      "prompt": "Reviews code for algorithmic complexity issues, inefficient database queries, N+1 problems, unnecessary re-renders, memory leaks, bundle size impact, and missing caching opportunities."
     },
     {
-      "name": "maintainability-reviewer",
-      "role": "worker",
-      "description": "Reviews code for naming clarity, single responsibility violations, DRY violations, test coverage gaps, missing documentation, excessive coupling, and inconsistency with project conventions.",
+      "agentId": "maintainability-reviewer",
+      "name": "Maintainability Reviewer",
+      "agentType": "specialist",
+      "model": "sonnet",
       "tools": ["Read", "Glob", "Grep"],
-      "model": "sonnet"
+      "prompt": "Reviews code for naming clarity, single responsibility violations, DRY violations, test coverage gaps, missing documentation, excessive coupling, and inconsistency with project conventions."
     }
-  ]
+  ],
+  "version": 1,
+  "topology": "leader-worker"
 }

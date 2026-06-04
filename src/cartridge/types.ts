@@ -108,7 +108,7 @@ export const BenchmarkSchema = z.object({
 export type Benchmark = z.infer<typeof BenchmarkSchema>;
 
 // ============================================================================
-// Chipset kinds — discriminated union over 8 functional roles
+// Chipset kinds — discriminated union over 9 functional roles
 // ============================================================================
 
 // -- content --------------------------------------------------------------

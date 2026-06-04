@@ -81,19 +81,24 @@ Reference cartridge: `examples/cartridges/gfx-reference/`.
 Essays, vocabulary, references. Space-Between ships most of its payload
 here. Content chipsets never contain skills or agents.
 
-### `muse`
-Observation relays and Center Camp wiring. Muses are first-class citizens
-of the chipset taxonomy rather than an ad-hoc sub-folder.
+### `voice`
+Tone, vocabulary, and stylistic orientation for a cartridge's persona. A
+voice chipset declares a `vocabulary` list, an `orientation` (an `angle`
+in `[0, 2π]` and a `magnitude` in `[0, 1]`), and a `voice` block (`tone`
+plus a `style` from `{narrative, technical, conversational, observational,
+welcoming}`). An optional `museAffinity` array names the muses a voice
+draws on — muses live as a *field* on `voice`, not as a standalone kind.
 
 ### `evaluation`
 Gates and benchmarks that cartridges must pass before ship. The evaluation
 chipset is how a cartridge evaluates *itself*: schema validity, affinity
 coverage, domain coverage, benchmark hit-rate.
 
-### `forge`
-The capability chipset that backs `skill-creator cartridge …` itself.
-This is the dogfood chipset: the forge that produces cartridges *is* a
-cartridge. Six skills, five agents, three teams.
+### `metrics`
+Activation tracking and benchmarks. A metrics chipset declares which
+events to count under `activation_tracking` (`triggers`, `skill_loads`,
+`agent_routes`, `team_uses`), a `benchmarks` array, and one or more
+`telemetry_sinks` from `{grove, jsonl, stdout}`.
 
 ## The Amiga Principle
 

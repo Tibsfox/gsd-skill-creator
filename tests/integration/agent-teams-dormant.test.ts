@@ -20,6 +20,10 @@
 import { describe, expect, it } from 'vitest';
 import { readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
+import {
+  validateTeamConfig,
+  validateTopologyRules,
+} from '../../src/validation/team-validation.js';
 
 const REPO = process.cwd();
 const MANIFEST = join(REPO, 'project-claude', 'manifest.json');
@@ -38,6 +42,14 @@ const EXAMPLE_README = {
   'doc-generation-team': 'examples/teams/migration/doc-generation-team/README.md',
   'gsd-debug-team': 'examples/teams/ops/gsd-debug-team/README.md',
   'gsd-research-team': 'examples/teams/migration/gsd-research-team/README.md',
+} as const;
+
+// Sibling config.json for each example team (the validated artifact).
+const EXAMPLE_CONFIG = {
+  'code-review-team': 'examples/teams/code/code-review-team/config.json',
+  'doc-generation-team': 'examples/teams/migration/doc-generation-team/config.json',
+  'gsd-debug-team': 'examples/teams/ops/gsd-debug-team/config.json',
+  'gsd-research-team': 'examples/teams/migration/gsd-research-team/config.json',
 } as const;
 
 interface StandaloneEntry {
@@ -108,5 +120,30 @@ describe('agent-teams primitive — dormant disposition drift-guard (D2, v1.49.9
       readFileSync(join(REPO, 'docs', 'AGENT-TEAMS.md'), 'utf8'),
       'docs/AGENT-TEAMS.md should link to the dormant disposition doc',
     ).toContain('AGENT-TEAMS-DORMANT.md');
+  });
+
+  // Ship 2.4 (v1.49.976): the 2 old-dialect demo configs (code-review-team,
+  // doc-generation-team) were migrated to the current team schema so
+  // `team validate --all` reports 4/4 with no schema-dialect drift. This
+  // assertion pins that — it fails loudly if any example config regresses to
+  // the legacy role/description shape (missing agentId/leadAgentId/createdAt).
+  it('SCHEMA PARITY — all 4 example team config.json validate (no schema-dialect drift, v1.49.976)', () => {
+    for (const t of DEMO_TEAMS) {
+      const cfgPath = join(REPO, EXAMPLE_CONFIG[t]);
+      expect(
+        existsSync(cfgPath),
+        `${EXAMPLE_CONFIG[t]} should exist (the validated artifact beside the README)`,
+      ).toBe(true);
+      const raw = JSON.parse(readFileSync(cfgPath, 'utf8')) as unknown;
+      const result = validateTeamConfig(raw);
+      expect(
+        result.valid,
+        `${t}/config.json must pass team schema validation (no old/new dialect drift): ${result.errors.join('; ')}`,
+      ).toBe(true);
+      expect(result.errors, `${t} schema errors`).toEqual([]);
+      // VALID-07 topology rules must also pass (exactly 1 coordinator for leader-worker).
+      const topo = validateTopologyRules(result.data!);
+      expect(topo.errors, `${t} topology errors`).toEqual([]);
+    }
   });
 });

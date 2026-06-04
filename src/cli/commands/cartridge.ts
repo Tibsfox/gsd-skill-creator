@@ -28,14 +28,18 @@ import {
 } from '../../cartridge/department-adapter.js';
 import { evalCartridge } from '../../cartridge/eval.js';
 import { forkCartridge } from '../../cartridge/fork.js';
-import { loadCartridge } from '../../cartridge/loader.js';
+import { loadAnyCartridge, loadCartridge } from '../../cartridge/loader.js';
 import { collectMetrics } from '../../cartridge/metrics.js';
 import {
   scaffoldCartridge,
   type ScaffoldTemplate,
 } from '../../cartridge/scaffold.js';
 import { scaffoldCompanions } from '../../cartridge/scaffold-companions.js';
-import { validateCartridge } from '../../cartridge/validator.js';
+import { isResearchOutputCartridge } from '../../cartridge/types.js';
+import {
+  validateCartridge,
+  validateResearchOutputCartridge,
+} from '../../cartridge/validator.js';
 
 export interface CartridgeCommandIO {
   stdout: (line: string) => void;
@@ -180,8 +184,10 @@ function handleValidate(args: string[], io: CartridgeCommandIO): number {
   const path = positional[0];
   if (!path) return usageError(io, 'validate requires <path>');
   const allowDebt = args.includes('--allow-validation-debt');
-  const cartridge = loadCartridge(path);
-  const raw = validateCartridge(cartridge);
+  const cartridge = loadAnyCartridge(path);
+  const raw = isResearchOutputCartridge(cartridge)
+    ? validateResearchOutputCartridge(cartridge)
+    : validateCartridge(cartridge);
   const debtErrors = raw.errors.filter((e) =>
     VALIDATION_DEBT_MARKERS.some((m) => e.path.includes(m)),
   );
