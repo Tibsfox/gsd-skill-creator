@@ -44,7 +44,7 @@ GUPP enforcement adapts to each runtime via the Runtime HAL. The HAL exposes `ge
 - `startup_fallback` — Codex (tmux `gt prime`, medium fidelity)
 - `polling` — Gemini / Cursor / unknown (prompt preamble + state polling)
 
-A Deacon heartbeat loop runs inside the witness-observer at the configured `nudge_interval`, detecting agents that received hooks but stalled. After `restart_threshold`, the watchdog requests a session restart. Per-runtime strategy tables, configurable thresholds, and the full heartbeat protocol are in [`references/runtime-strategies.md`](references/runtime-strategies.md).
+A Deacon heartbeat loop runs inside the witness-observer at the configured `nudge_interval`, detecting agents that received hooks but stalled. After `restart_threshold`, the watchdog requests a session restart. Per-runtime strategy tables, configurable thresholds, the full heartbeat protocol, and the Claude Code HAL note are in [`references/runtime-strategies.md`](references/runtime-strategies.md).
 
 ## Safety Boundaries
 

@@ -213,6 +213,14 @@ evaluation:
 # ==========================================================================
 # Provider capabilities matrix. The chipset adapts its behavior
 # based on which runtime is available.
+#
+# HAL note (Claude Code / Opus 4.8): the `polling` GUPP/startup strategy used
+# for runtimes without hook_injection (gemini / cursor / unknown) is a FALLBACK
+# and is obsolete on Claude Code, which has proactive background agents
+# (run_in_background), automatic main-loop re-invocation on completion, and
+# SessionStart hook_injection. DO NOT DELETE the polling fallback or the
+# non-claude_code providers — multi-runtime support is a design goal
+# (claude_code is the only first-class adapter; the others degrade gracefully).
 
 runtime:
   providers:

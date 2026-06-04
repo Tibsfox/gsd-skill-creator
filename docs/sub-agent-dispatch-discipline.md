@@ -4,43 +4,99 @@
 
 **Codified at:** v1.49.654 (FA-652-11 C08 lesson codification).
 
+## Harness update — Claude Code / Opus 4.8 (1M context), 2026-06 (v1.49.973)
+
+The "Architectural facts" below were codified for the **v1.49.637–654 dispatch
+harness**. On **Claude Code with Opus 4.8 (1M context)** plus the Workflow/Agent
+primitives, the orchestration surface gained new capabilities — but several of
+the old constraints **still hold empirically**. This update therefore *narrows*
+the one premise that genuinely changed (the "no SendMessage / one-way only"
+premise) and **reaffirms** the constraints that still apply. The
+constrained-harness machinery (chunked Write+Edit; post-trip salvage cleanup)
+is **retained** — it is correct on constrained / non-Claude-Code runtimes. Per
+the runtime HAL, `claude-code` is the only first-class adapter; 14 other runtimes
+are registration-only, so the fallback guidance is load-bearing for multi-runtime
+support. **Do not delete it.**
+
+**New capabilities on Claude Code (per the Agent/Workflow tool contracts):**
+
+- **Background agents.** `run_in_background` runs an agent asynchronously and
+  re-invokes the main loop on completion — long jobs no longer block.
+- **Orchestrator→agent continuation.** **SendMessage** continues a previously
+  spawned agent (addressable by id/name); a fresh `Agent` call starts clean — so
+  a dispatch is not strictly one-shot fire-and-forget. *Caveat (Lesson #10158,
+  do not ignore):* a SendMessage to an agent that is **wrapping up / finished**
+  may NOT integrate mid-flight corrections — apply corrections from the **main
+  context**, do not queue them to a finishing agent. Continuation is reliable for
+  resuming idle/paused work, not for injecting late fact-fixes into a
+  consolidating agent.
+- **Resumable Workflows.** A Workflow can be relaunched with `resumeFromRunId`;
+  completed `agent()` calls return cached results (same-session). This is the
+  Workflow tool's documented resume — not a guarantee about arbitrary spawned
+  agents.
+- **1M-context window** relieves *context exhaustion* as a driver of mid-flight
+  termination — but see the constraints below, which still hold.
+
+**Still in effect on Claude Code (do NOT assume lifted):**
+
+- **The ~60-70 tool-use band still describes real dispatches.** Empirically,
+  v1.49.729–v1.49.773 dispatches run **~28-54 tool uses** and the band is still
+  referenced as active (a v1.49.767 fresh-build test at a 95K target landed at
+  47). Keep sizing by **~1 component**; the 1M window changed the *cause* (no
+  longer context exhaustion), not the operating band.
+- **Output-size discipline holds.** There is no evidence the per-dispatch output
+  cap is lifted; large single-file deliverables still use chunked Write+Edit, and
+  very large HTML/JSON is still split.
+- **Spawn-task-return-result is each agent's RETURN contract**, and fan-out
+  agents **do not peer-message** each other. Only orchestrator↔agent continuation
+  (above) changed.
+
 ## Architectural facts
 
-1. **Sub-agents lack SendMessage** in their toolkit. The model is
-   spawn-task-return-result, not continuous-peer messaging
-   (**Lesson #10193**, v1.49.637 cluster). Author dispatches assuming
-   one-way input and one-shot deliverable return.
+Codified for the v1.49.637–654 harness; read each through the *Harness update*
+above. On Claude Code these remain the operating model **except** the
+orchestration refinement in Fact #1.
 
-2. **Sub-agents hit a ~60-70 tool-use ceiling per dispatch** before
-   they terminate mid-flight (**Lesson #10194** token-ceiling). Bound
-   each dispatch to a scope of ~1 component / 30-50 wall-clock minutes
-   worth of work. Anything larger gets split.
+1. **Spawn-task-return-result is the return contract** (**Lesson #10193**,
+   v1.49.637 cluster). Each agent takes one-way input and returns one
+   deliverable; fan-out agents do not peer-message. *Refined on Claude Code:* the
+   orchestrator can continue a single spawned agent via SendMessage and resume
+   Workflows via `resumeFromRunId` — but not as a mid-flight-correction channel
+   to a finishing agent (Lesson #10158).
 
-3. **The 64K output-token cap on each dispatch** means HTML + JSON
-   deliverables exceeding ~50K combined characters must be pre-split
-   into separate dispatches per file-type (**Lesson #10214**, applied
-   v1.49.648 W2-NASA at obs#2 reaffirm).
+2. **~60-70 tool-use band per dispatch** (**Lesson #10194**); bound each
+   dispatch to ~1 component / 30-50 wall-clock minutes. *Still active on Opus
+   4.8 — empirically ~28-54 tool uses (v1.49.729–773); the 1M window removed
+   context-exhaustion as the cause, not the band.*
 
-4. **Chunked Write+Edit append pattern** is the canonical pattern for
-   producing >32K HTML deliverables in a single dispatch
-   (**Lesson #10240**, v1.49.651). The dispatch begins with a Write of
-   the first ~30K, then repeated Edits append further sections.
+3. **Output-size discipline** (**Lesson #10214**): HTML + JSON deliverables
+   exceeding ~50K combined are split per file-type. *No evidence the per-dispatch
+   output cap is lifted on Opus 4.8 — keep splitting large deliverables.*
+
+4. **Chunked Write+Edit append pattern** for >32K HTML in one dispatch
+   (**Lesson #10240**, v1.49.651): Write the first ~30K, then repeated Edits
+   append. *Still valid on Opus 4.8 for large single-file deliverables.*
 
 5. **Transient API errors during W3 stages** recover via identical-prompt
-   retry as the first-resort recovery strategy (**Lesson #10215**). The
-   dispatch author should NOT modify the prompt on first retry — the
-   error is API-side, not prompt-side.
+   retry as the first-resort recovery strategy (**Lesson #10215**). Do NOT
+   modify the prompt on first retry — the error is API-side, not prompt-side.
 
 ## Dispatch-author checklist
 
 When spawning a sub-agent dispatch:
 
-- [ ] Scope sized to ~1 component / ≤50 min
-- [ ] Output-format budget: HTML and JSON split if combined ≥50K
+- [ ] Scope sized to ~1 component / 30-50 min; the ~60-70 tool-use band still
+      applies on Claude Code (empirically ~28-54 uses, v729-v773)
+- [ ] Output-format budget: split HTML/JSON if combined ≥50K — output-size
+      discipline still applies (no evidence the cap is lifted)
 - [ ] Commit-between-deliverables instruction embedded in prompt
       (Lesson #10200: dispatches with self-correction stages need ≥2
       internal commit boundaries)
-- [ ] No reliance on inter-agent SendMessage (Lesson #10193)
+- [ ] Sequential multi-stage on Claude Code (one agent across ≥2 dependent
+      stages): continue ONE agent via SendMessage, or run a resumable Workflow
+      (`resumeFromRunId`). Do NOT SendMessage to parallel fan-out agents, and do
+      NOT queue mid-flight fact-corrections to a finishing agent — apply those
+      from the main context (Lessons #10193 / #10158)
 - [ ] Prompt includes the no-Co-Authored-By-Claude reminder (v1.49.621
       policy; see Ship pipeline discipline)
 - [ ] Retry-policy noted if W3-stage and API-error-prone
@@ -63,6 +119,13 @@ Apply: counter-cadence milestones authoring W3 wave plans can size up to
 wave plans must declare new substrate (forward-shadow at obs#1).
 
 ## Post-trip salvage cleanup (codified v1.49.707)
+
+> **Recovery / fallback pattern.** This disk-salvage workflow applies when a
+> dispatch **trips the content filter** mid-flight (a failure mode that persists
+> on all harnesses) and on **constrained / non-Claude-Code runtimes**. On Claude
+> Code, background agents + resumable Workflows reduce *context-exhaustion*
+> failures, but content-filter trips still require this salvage path. Retained
+> intentionally (see the *Harness update* at the top).
 
 **Surface:** when a sub-agent dispatch trips the Anthropic content filter
 mid-flight at ~36 tool uses, do not default to rewrite-from-scratch.

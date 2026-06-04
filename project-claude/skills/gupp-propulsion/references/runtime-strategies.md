@@ -62,6 +62,22 @@ switch (strategy) {
 }
 ```
 
+## HAL note — Claude Code / Opus 4.8 (polling is the non-Claude-Code fallback)
+
+The `polling` strategy (Gemini / Cursor / unknown runtimes) is a **fallback** for
+runtimes that lack hook or startup-injection capability. On **Claude Code** it is
+**obsolete**: proactive background agents (`run_in_background` + automatic
+re-invocation of the main loop on completion) and SessionStart `hook_injection`
+already provide propulsion without filesystem polling.
+
+**Do not delete** the polling strategy, the Gemini / Cursor paths, or the GUPP
+machinery — multi-runtime support is a design goal. Per the runtime HAL,
+`claude-code` is the only first-class adapter; the other runtimes are
+registration-only and degrade gracefully to polling. Preserve polling as the
+safety net for non-Claude-Code environments; when adapters for those runtimes
+land, polling remains the fallback whenever a runtime lacks hook or
+startup-injection capability.
+
 ## Configurable Thresholds
 
 All GUPP timing parameters are configurable through the chipset YAML. Defaults are tuned for typical LLM agent behavior but can be adjusted per-project or per-runtime based on observed performance.
