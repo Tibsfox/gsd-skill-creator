@@ -10,8 +10,8 @@
  * Gates exercised:
  *   C1 — pre-tag-gate.sh step 19/19 invokes the cleaner --check, BLOCKS by
  *        default (exit 21), and is gateable via SC_PRE_TAG_GATE_BYPASS=state-backups.
- *   C2 — Final summary advanced to "all 19 checks PASS" (the authoritative
- *        current count; v869 is now count-agnostic).
+ *   C2 — Final summary present + the pre-v961 18-count is gone. Count-agnostic
+ *        since v1.49.965 added step 20 (v1-49-965-meta-test now owns the count).
  *   C3 — Step 19 appears after step 18 and before the final summary.
  *   C4 — The source eliminator is wired into the T14 reset (state-md-set-shipped).
  *   C5 — The cleaner test is registered in the tools-suite include list (#10461
@@ -45,10 +45,13 @@ describe('v1.49.961 integration meta-test (cc#28 .planning backup two-layer clos
     expect(gate).toMatch(/state-backups\)"/);
   });
 
-  it('C2 — final summary reports the authoritative 19-check count', () => {
+  it('C2 — final summary present and the pre-v961 18-count is gone (count-agnostic)', () => {
     const gate = readFileSync(GATE_PATH, 'utf8');
-    expect(gate).toMatch(/all 19 checks PASS/);
-    // The pre-v961 18-count summary is gone (the step-19 addition landed).
+    // Count-agnostic since v1.49.965 (Ship 0.1) added step 20: the ABSOLUTE final
+    // count is owned by the NEWEST step-addition meta-test (v1-49-965-meta-test now
+    // pins "all 20 checks PASS"). This test only guards that v961's step-19
+    // increment landed — a summary exists and the pre-v961 18-count is gone.
+    expect(gate).toMatch(/all \d+ checks PASS/);
     expect(gate).not.toMatch(/all 18 checks PASS/);
   });
 
@@ -72,7 +75,9 @@ describe('v1.49.961 integration meta-test (cc#28 .planning backup two-layer clos
     // existsSync-no-skip-guard heuristic -- which flags readFileSync paired with
     // a quoted planning-dir path -- does not false-positive on this gate match.
     const step19Pos = gate.search(/step 19\/19: \S+ backup-file accumulation check/);
-    const summaryPos = gate.indexOf('all 19 checks PASS');
+    // Count-agnostic summary match (v965 added step 20 between step 19 and the
+    // summary; step 19 is still BEFORE the final summary, just no longer adjacent).
+    const summaryPos = gate.search(/all \d+ checks PASS/);
     expect(step18Pos).toBeGreaterThan(-1);
     expect(step19Pos).toBeGreaterThan(step18Pos);
     expect(summaryPos).toBeGreaterThan(step19Pos);

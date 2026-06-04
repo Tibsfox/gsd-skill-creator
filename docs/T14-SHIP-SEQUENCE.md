@@ -106,10 +106,32 @@ are stable references; insertion of new steps SHOULD use decimal sub-steps
        - See: docs/citation-debt-syntax.md for the formal block syntax.
        - Closes CONCERNS §9.3 part 2 (L-03).
 
+2.7. adoption-baseline refresh (v1.49.965 Ship 0.1, audit T1.3 — LOAD-BEARING)
+       - `node tools/adoption-refresh.mjs`  (writes docs/ADOPTION-BASELINE-v<X>.{md,json}
+         + renders dashboard/adoption.html)
+       - `node tools/adoption-trends.mjs --write`  (refreshes docs/ADOPTION-TRENDS.md)
+       - MUST run AFTER step 2 (bump-version): the baseline filename embeds
+         package.json.version, and adoption-refresh's overwrite-guard (#10424)
+         refuses to clobber a predecessor baseline. Running it pre-bump would
+         write the PREDECESSOR's filename.
+       - This is the SOURCE-ELIMINATOR half of the two-layer closure (#10431/#10436)
+         for the baseline-freeze drift class: the baseline silently froze at
+         v1.49.801 for ~163 ships because nothing made this step mandatory. The
+         DETECTOR half is pre-tag-gate step 20 (adoption-freshness, WARN-only).
+       - Ordering note: pre-tag-gate (step 1) runs PRE bump-version, so its
+         adoption-freshness check reads the PREDECESSOR baseline. In steady state
+         that baseline was written by the PRIOR ship's step 2.7 and matches the
+         pre-bump version (drift 0 → FRESH). The first ship after a freeze WARNs
+         once (the alarm), then this step re-arms it; from the next ship on it is
+         FRESH. Skipping this step for >SC_ADOPTION_BASELINE_MAX_DRIFT (default 30)
+         ships re-trips the WARN.
+       - Included in the step-3 chore(release) commit.
+
 3.   chore(release): commit
        - `git commit -m "chore(release): v<X> <subtitle>"`
        - includes the bump-version manifest changes + the public STORY.md
-         append from step 2.5 + any citation-debt.json updates from step 2.6.
+         append from step 2.5 + any citation-debt.json updates from step 2.6
+         + the adoption baseline/trends/dashboard from step 2.7.
 
 4.   git tag v<X>
 
@@ -184,6 +206,7 @@ Milestone-specific notes:
 | Date | Change | Driver |
 |---|---|---|
 | 2026-05-11 | Initial canonical doc. T14 sequence documented with STORY-gate as step 2.5 (post bump-version, pre git-tag). | v1.49.638 C2 (Lesson #10197 closure) |
+| 2026-06-03 | Added step 2.7 adoption-baseline refresh (post bump-version, pre chore-commit): `adoption-refresh.mjs` + `adoption-trends.mjs --write`. SOURCE-ELIMINATOR half of the two-layer closure (#10431/#10436) for the baseline-freeze drift class; DETECTOR is pre-tag-gate step 20 (adoption-freshness, WARN-only). | v1.49.965 Ship 0.1 (audit T1.3) |
 
 ## Lesson coverage (codified v1.49.654 C08+C09)
 

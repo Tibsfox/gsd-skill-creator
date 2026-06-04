@@ -162,6 +162,9 @@
 #   17  nasa-canonical-layout drift (BLOCKER as of v1.49.716)
 #   18  nasa-canonical-sidebar drift (BLOCKER as of 2026-05-24)
 #   19  project-md drift escalation (BLOCKER only when require flag set; default WARN-only)
+#   20  stale-known-unwired entries present (BLOCKER)
+#   21  state-backups: lingering .planning/ backup file(s) (BLOCKER as of v1.49.961 cc#28)
+#   23  adoption-freshness escalation (BLOCKER only when require flag set; default WARN-only — v1.49.965 Ship 0.1)
 #
 # Step overrides (v1.49.653 consolidation; CONCERNS §26):
 #   SC_PRE_TAG_GATE_BYPASS=<csv>   skip these steps entirely
@@ -297,7 +300,7 @@ gate_required() {
 if [ -n "$_PTG_BYPASS_RAW" ] || [ -n "$_PTG_REQUIRE_RAW" ]; then
   [ -n "$_PTG_BYPASS_RAW" ]  && log "[pre-tag-gate] active BYPASS:  $_PTG_BYPASS_RAW"
   [ -n "$_PTG_REQUIRE_RAW" ] && log "[pre-tag-gate] active REQUIRE: $_PTG_REQUIRE_RAW"
-  log "[pre-tag-gate] (step names: tools-suite|tools-node-test|integration|ci-gate|depth-audit|depth-audit-mus-elc|claude-md|card-template-length|catalog-index|tauri-boundary|apply-to-self|scaffolder-residue|citation-debt-sync|story-drift|discipline-coverage|sps-cohort-uniqueness|nasa-canonical-layout|nasa-canonical-sidebar|project-md|stale-known-unwired|state-backups)"
+  log "[pre-tag-gate] (step names: tools-suite|tools-node-test|integration|ci-gate|depth-audit|depth-audit-mus-elc|claude-md|card-template-length|catalog-index|tauri-boundary|apply-to-self|scaffolder-residue|citation-debt-sync|story-drift|discipline-coverage|sps-cohort-uniqueness|nasa-canonical-layout|nasa-canonical-sidebar|project-md|stale-known-unwired|state-backups|adoption-freshness)"
 fi
 
 # ----- step 0.5: STATE.md normalizer auto-run (v1.49.671, Lesson #10373) -----
@@ -1006,5 +1009,38 @@ else
   log "[pre-tag-gate] step 19/19: PASS (no lingering backups)"
 fi
 
-log "[pre-tag-gate] all 19 checks PASS — safe to \`git tag\` and merge to main"
+# ----- step 20/20: adoption-baseline freshness (v1.49.965 Ship 0.1, audit T1.3) -----
+# The adoption shelfware-telemetry baseline (docs/ADOPTION-BASELINE-v*.json, written
+# by tools/adoption-refresh.mjs) silently FROZE at v1.49.801 for ~163 ships because
+# nothing gated its freshness — the #10461 un-gated-runnable-surface class: the alarm
+# the project built to answer the 2026-05-26 audit's #1 concern went quiet unnoticed.
+# This step re-arms it: WARN when the newest committed baseline trails the shipping
+# version by more than SC_ADOPTION_BASELINE_MAX_DRIFT ships (default 30, FORWARD-
+# PROGRESS mode — NOT exact-match, so a fresh baseline is not forced on every ship).
+# WARN-only by default (#10463 staged promotion); escalate to BLOCKER via
+# SC_PRE_TAG_GATE_REQUIRE=adoption-freshness. Fix: node tools/adoption-refresh.mjs
+# (run AFTER bump-version, #10424). Bypass: SC_PRE_TAG_GATE_BYPASS=adoption-freshness.
+if gate_bypassed "adoption-freshness"; then
+  log "[pre-tag-gate] step 20/20: SKIPPED (adoption-freshness)"
+else
+  log "[pre-tag-gate] step 20/20: adoption-baseline freshness"
+  # `&& X=0 || X=$?` preserves the real exit code under `set -euo pipefail` (a bare
+  # `OUTPUT="$(...)"` aborts on the tool's exit-1 BEFORE the WARN/FAIL handling — see
+  # the matching note on steps 18/19).
+  AF_OUTPUT="$(node "$REPO_ROOT/tools/adoption-baseline-freshness.mjs" 2>&1)" && AF_EXIT=0 || AF_EXIT=$?
+  if [ "$AF_EXIT" -ne 0 ]; then
+    echo "[pre-tag-gate] WARN: adoption baseline is stale" >&2
+    echo "$AF_OUTPUT" | head -10 >&2
+    echo "[pre-tag-gate]   Fix: node tools/adoption-refresh.mjs (AFTER bump-version)" >&2
+    if gate_required "adoption-freshness"; then
+      echo "[pre-tag-gate] FAIL: adoption-freshness escalated to BLOCKER (SC_PRE_TAG_GATE_REQUIRE)" >&2
+      exit 23
+    fi
+    log "[pre-tag-gate] step 20/20: WARN (informational; set SC_PRE_TAG_GATE_REQUIRE=adoption-freshness to block)"
+  else
+    log "[pre-tag-gate] step 20/20: PASS"
+  fi
+fi
+
+log "[pre-tag-gate] all 20 checks PASS — safe to \`git tag\` and merge to main"
 exit 0
