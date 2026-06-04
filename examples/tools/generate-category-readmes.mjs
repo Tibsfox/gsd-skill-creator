@@ -14,6 +14,7 @@ import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { argv, exit } from 'node:process';
+import { CATEGORIZED_TYPES, metadataFileFor, discoverCategories } from './catalog-core.mjs';
 
 const CATEGORY_DESCRIPTIONS = {
   skills: {
@@ -26,6 +27,7 @@ const CATEGORY_DESCRIPTIONS = {
     patterns: 'Pattern catalogs — SQL, API design, Docker, accessibility, CI/CD, infrastructure, Kubernetes, and more.',
     orchestration: 'Agent orchestration — fleet mission, mayor coordinator, sling dispatch, propulsion, runtime HAL, witness observer.',
     state: 'State and persistence — beads state, hook persistence, inter-agent channels (mail, nudge), token budgets, retirement pipelines.',
+    'gsd-meta': 'GSD meta-skills for the skill-creator workflow itself — batch rewrites, checkpoint/resume, portable schema generation, session observation, and decision-framework invocation.',
     deprecated: 'Superseded skills. Preserved for reference and archaeological lineage; not installed by default.',
   },
   agents: {
@@ -36,6 +38,7 @@ const CATEGORY_DESCRIPTIONS = {
     ops: 'Operations agents — incident analyzer, deployment validator, SLO monitor, capacity planner, drift detector, runbook executor, release risk scorer.',
     ui: 'UI-facing agents — UI researcher, UI checker, UI auditor for GSD frontend phases.',
     audit: 'Audit and analysis agents — compliance, infrastructure, pipeline, performance, dependency health, documentation linting, vulnerability triage, codebase navigation, cost optimization.',
+    'gsd-meta': 'GSD meta-agents for the release-history pipeline itself — pipeline reconciliation (DB-vs-disk drift) and quality-drift watching across release archives.',
     deprecated: 'Superseded agents. Preserved for reference and archaeological lineage; not installed by default.',
   },
   teams: {
@@ -47,18 +50,76 @@ const CATEGORY_DESCRIPTIONS = {
   },
 };
 
-const SKILL_CATEGORIES = Object.keys(CATEGORY_DESCRIPTIONS.skills);
-const AGENT_CATEGORIES = Object.keys(CATEGORY_DESCRIPTIONS.agents);
-const TEAM_CATEGORIES = Object.keys(CATEGORY_DESCRIPTIONS.teams);
+// Domain-level descriptions for the college/department categories. These are
+// shared across skills/agents/teams — descriptionFor() composes the final
+// category description as "<Title> <skills|agents|teams> — <blurb>". A curated
+// entry in CATEGORY_DESCRIPTIONS (above) always wins over a domain blurb.
+const DOMAIN_DESCRIPTIONS = {
+  art: 'drawing and observation, color theory, the creative process, art history and movements, sculpture, and digital art',
+  astronomy: 'naked-eye and instrumental observation, celestial coordinates, orbital mechanics, stellar spectroscopy, the cosmic distance ladder, and cosmology',
+  business: 'organizational strategy, entrepreneurship and innovation, corporate finance, operations and lean, business law, and ethics and governance',
+  chemistry: 'atomic structure, chemical bonding, organic chemistry, reactions and stoichiometry, analytical methods, and materials chemistry',
+  'cloud-systems': 'service architecture, distributed storage and consensus, cloud identity and auth, networking, and cloud reliability engineering',
+  coding: 'programming fundamentals, algorithms and data structures, software design, computational thinking, debugging and testing, and systems programming',
+  communication: 'public speaking, persuasion and rhetoric, active listening, interpersonal communication, conflict resolution, and media literacy',
+  'critical-thinking': 'logical reasoning, argument evaluation, evidence assessment, cognitive biases, decision-making, and creative thinking',
+  'data-science': 'data wrangling and visualization, statistical modeling, machine-learning foundations, experimental design, and ethics and governance',
+  'digital-literacy': 'information evaluation, digital citizenship, data privacy, media creation, computational literacy, and algorithmic awareness',
+  economics: 'micro- and macroeconomics, behavioral and development economics, international trade, and public policy',
+  electronics: 'DC/AC circuit analysis, digital logic design, semiconductor device physics, microcontroller firmware, signal processing, and test and measurement',
+  engineering: 'the design process, systems engineering, structural analysis, prototyping and fabrication, technical communication, and engineering ethics',
+  environmental: 'climate science, ecosystem dynamics, biogeochemical cycles, human-impact assessment, sustainability design, and environmental justice',
+  geography: 'physical and human geography, cartography and GIS, geopolitics, fieldwork methods, and environmental geography',
+  history: 'source analysis, historiography, causation and consequence, continuity and change, oral history, and historical perspective-taking',
+  'home-economics': 'meal planning and food technique, household budgeting, household systems design, time-and-motion, and sustainable-household pedagogy',
+  languages: 'grammar and syntax, phonetics and phonology, pragmatics, vocabulary acquisition, translation and interpretation, and learning strategies',
+  learning: 'the science of learning — deliberate practice, mastery and Bloom\'s taxonomy, scaffolding and the ZPD, constructivism, mindset and motivation, and prepared environments',
+  logic: 'propositional, predicate, and modal logic, mathematical proof, informal fallacies, and critical argumentation',
+  materials: 'iron, steel, and nonferrous processes, materials characterization and selection, structural failure analysis, and nanomaterials',
+  math: 'proof technique, algebraic reasoning, geometric intuition, numerical analysis, pattern recognition, and mathematical modeling',
+  'mind-body': 'yoga and alignment, breath and meditation, somatic movement, internal arts (tai chi, qigong), martial discipline, and contemplative traditions',
+  music: 'harmony, counterpoint, rhythm and meter, form analysis, orchestration, and ear training',
+  'nature-studies': 'field identification, nature journaling, ecosystem mapping, bird and species observation, and taxonomic classification',
+  nutrition: 'nutrition-science foundations, nutrient metabolism, dietary assessment, feeding pedagogy, food policy, and contested claims',
+  philosophy: 'formal logic, epistemology, metaphysics, ethics, political philosophy, and critical thinking',
+  'physical-education': 'movement fundamentals, cardiovascular fitness, strength and conditioning, coaching pedagogy, sport education, and inclusive PE',
+  physics: 'classical mechanics, electromagnetism, thermodynamics, quantum mechanics, relativity and astrophysics, and experimental methods',
+  'problem-solving': 'problem comprehension, strategy selection, metacognitive monitoring, design thinking, mathematical problem-solving, and collaboration',
+  'project-management': 'agile methods, estimation and planning, risk management, stakeholder communication, quality assurance, and retrospective learning',
+  psychology: 'cognitive, developmental, social, and clinical foundations, behavioral neuroscience, and research methods',
+  rca: 'classical methods, causal inference, systems-theoretic analysis (STAMP/STPA), distributed-systems failure, human factors, and blameless postmortems',
+  reading: 'phonics and decoding, reading comprehension, literary and critical analysis, vocabulary development, and information literacy',
+  science: 'the scientific method, experimental design, data analysis, earth and life systems, history and philosophy of science, and science communication',
+  'spatial-computing': 'spatial reasoning, 3D interaction design, immersive environment and world building, embodied computing, and augmented-reality tracking',
+  statistics: 'descriptive and inferential statistics, probability theory, regression modeling, Bayesian methods, and statistical computing',
+  technology: 'digital systems, human-computer interaction, emerging tech, cybersecurity, responsible innovation, and design thinking',
+  theology: 'scripture and interpretation, systematic and philosophical theology, comparative religion, ethics and practice, and mysticism',
+  trades: 'workshop practice, tool and machine use, measurement and tolerance, materials and fit, craft methodology, and apprenticeship pedagogy',
+  writing: 'narrative craft, expository and research writing, poetry, voice and style, and revision and editing',
+};
 
-function metadataFileFor(type, artifactDir) {
-  switch (type) {
-    case 'skills':   return join(artifactDir, 'SKILL.md');
-    case 'agents':   return join(artifactDir, 'AGENT.md');
-    case 'teams':    return join(artifactDir, 'README.md');
-    case 'chipsets': return join(artifactDir, 'README.md');
-    default:         return null;
-  }
+// Title-case a category slug for the generated heading/lead-in
+// (e.g. 'home-economics' -> 'Home Economics', 'gsd-meta' -> 'GSD Meta',
+// 'rca' -> 'RCA'). Known acronyms are upper-cased rather than title-cased.
+const ACRONYMS = { gsd: 'GSD', rca: 'RCA', ui: 'UI', ai: 'AI' };
+function titleCaseCategory(category) {
+  return category.split('-')
+    .map(w => ACRONYMS[w] || (w.charAt(0).toUpperCase() + w.slice(1)))
+    .join(' ');
+}
+
+const TYPE_NOUN = { skills: 'skills', agents: 'agents', teams: 'teams' };
+
+// Resolve a category's description. Curated per-(type, category) text in
+// CATEGORY_DESCRIPTIONS wins; otherwise compose a domain-level description from
+// DOMAIN_DESCRIPTIONS (shared across skills/agents/teams for college/department
+// domains); otherwise a neutral placeholder.
+function descriptionFor(type, category) {
+  const curated = CATEGORY_DESCRIPTIONS[type]?.[category];
+  if (curated) return curated;
+  const domain = DOMAIN_DESCRIPTIONS[category];
+  if (domain) return `${titleCaseCategory(category)} ${TYPE_NOUN[type] || type} — ${domain}`;
+  return '(no description)';
 }
 
 async function parseFrontmatter(content) {
@@ -146,7 +207,7 @@ async function artifactsInCategory(root, type, category) {
 }
 
 function renderCategoryReadme(type, category, artifacts) {
-  const description = CATEGORY_DESCRIPTIONS[type]?.[category] || '(no description)';
+  const description = descriptionFor(type, category);
   const label = `examples/${type}/${category}/`;
   const header = `# ${label}\n\n${description}\n`;
 
@@ -183,15 +244,12 @@ async function main() {
 
   console.log(`Generating category READMEs in ${examplesRoot}${dryRun ? ' (dry run)' : ''}...`);
 
-  const toGenerate = [
-    ['skills', SKILL_CATEGORIES],
-    ['agents', AGENT_CATEGORIES],
-    ['teams', TEAM_CATEGORIES],
-  ];
-
   let created = 0, updated = 0, unchanged = 0;
 
-  for (const [type, categories] of toGenerate) {
+  for (const type of CATEGORIZED_TYPES) {
+    // Categories discovered structurally from disk (catalog-core.mjs), NOT a
+    // hardcoded list — so every category gets a README.
+    const categories = await discoverCategories(examplesRoot, type);
     for (const category of categories) {
       const catDir = join(examplesRoot, type, category);
       if (!existsSync(catDir)) continue;

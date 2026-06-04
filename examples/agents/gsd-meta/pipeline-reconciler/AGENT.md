@@ -6,6 +6,14 @@ model: sonnet
 color: orange
 effort: low
 maxTurns: 20
+type: agent
+category: gsd-meta
+status: stable
+origin: tibsfox
+modified: false
+first_seen: 2026-04-18
+first_path: examples/agents/gsd-meta/pipeline-reconciler/AGENT.md
+superseded_by: null
 ---
 
 <role>

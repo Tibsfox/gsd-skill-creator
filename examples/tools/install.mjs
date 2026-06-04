@@ -18,6 +18,7 @@ import { existsSync } from 'node:fs';
 import { join, dirname, basename, resolve } from 'node:path';
 import { homedir } from 'node:os';
 import { argv, exit } from 'node:process';
+import { CATEGORIZED_TYPES, metadataFileFor, isArtifactDir } from './catalog-core.mjs';
 
 const HELP = `
 examples/tools/install.mjs — copy artifacts from examples/ into a target .claude/
@@ -97,47 +98,37 @@ async function parseFrontmatter(content) {
   return fm;
 }
 
-function metadataFileFor(type, artifactDir) {
-  switch (type) {
-    case 'skills':   return join(artifactDir, 'SKILL.md');
-    case 'agents':   return join(artifactDir, 'AGENT.md');
-    case 'teams':    return join(artifactDir, 'README.md');
-    case 'chipsets': return join(artifactDir, 'README.md');
-    default:         return null;
-  }
-}
-
-const SKILL_CATEGORIES = new Set([
-  'gsd', 'research', 'media', 'dev', 'ops',
-  'workflow', 'patterns', 'orchestration', 'state', 'deprecated',
-]);
-const AGENT_CATEGORIES = new Set([
-  'gsd', 'research', 'media', 'dev', 'ops', 'ui', 'audit', 'deprecated',
-]);
-const TEAM_CATEGORIES = new Set(['code', 'ops', 'infra', 'migration', 'deprecated']);
-
 async function walkArtifacts(examplesRoot) {
   // Returns [{ type, category, name, path, isDir, frontmatter }]
+  // Categories are discovered structurally from disk (catalog-core.mjs), NOT
+  // from a hardcoded allowlist — so install --all serves the whole tree.
   const artifacts = [];
-  const typesWithCategories = [
-    ['skills', SKILL_CATEGORIES],
-    ['agents', AGENT_CATEGORIES],
-    ['teams', TEAM_CATEGORIES],
-  ];
 
-  for (const [type, catSet] of typesWithCategories) {
+  for (const type of CATEGORIZED_TYPES) {
     const typeDir = join(examplesRoot, type);
     if (!existsSync(typeDir)) continue;
     const topEntries = await readdir(typeDir, { withFileTypes: true });
     for (const ent of topEntries) {
       if (ent.name.startsWith('.') || ent.name === 'README.md') continue;
-      if (!ent.isDirectory() || !catSet.has(ent.name)) continue;
-      const catDir = join(typeDir, ent.name);
-      const inner = await readdir(catDir, { withFileTypes: true });
+      if (!ent.isDirectory()) continue;
+      const topDir = join(typeDir, ent.name);
+
+      if (isArtifactDir(type, topDir)) {
+        // Legacy pre-Stage-2 artifact placed directly under the type dir.
+        const metaPath = metadataFileFor(type, topDir);
+        const fm = await parseFrontmatter(await readFile(metaPath, 'utf8'));
+        artifacts.push({
+          type, category: '(unclassified)', name: ent.name, path: topDir,
+          isDir: true, metaPath, frontmatter: fm || {},
+        });
+        continue;
+      }
+
+      const inner = await readdir(topDir, { withFileTypes: true });
       for (const e of inner) {
         if (e.name.startsWith('.') || e.name === 'README.md') continue;
         if (!e.isDirectory()) continue;
-        const artifactDir = join(catDir, e.name);
+        const artifactDir = join(topDir, e.name);
         const metaPath = metadataFileFor(type, artifactDir);
         if (!metaPath || !existsSync(metaPath)) continue;
         const fm = await parseFrontmatter(await readFile(metaPath, 'utf8'));

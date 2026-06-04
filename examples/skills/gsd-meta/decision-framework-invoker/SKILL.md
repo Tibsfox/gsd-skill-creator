@@ -3,8 +3,15 @@ name: decision-framework-invoker
 description: "Triggers for automatically invoking the decision-framework skill before irreversible or high-blast-radius operations. Use as a checkpoint: when a proposed action matches a trigger pattern, pause and run the appropriate framework (first-principles, inversion, decision matrix, second-order thinking) before proceeding. Prevents ad-hoc calls from becoming regret."
 format: 2025-10-02
 version: 1.0.0
-status: active
+status: stable
 updated: 2026-04-17
+type: skill
+category: gsd-meta
+origin: tibsfox
+modified: false
+first_seen: 2026-04-17
+first_path: examples/skills/gsd-meta/decision-framework-invoker/SKILL.md
+superseded_by: null
 ---
 
 # Decision Framework Invoker

@@ -3,8 +3,15 @@ name: batch-rewrite-pattern
 description: "Cascade the same edit pattern across N files safely. Use when applying the same refactor to multiple files (e.g. swap import paths across 11 scripts, rename a symbol, migrate a call signature). Detects the common-shape-across-files situation and turns an N-file cascade into a planned audit → apply → verify workflow instead of N sequential manual edits."
 format: 2025-10-02
 version: 1.0.0
-status: active
+status: stable
 updated: 2026-04-17
+type: skill
+category: gsd-meta
+origin: tibsfox
+modified: false
+first_seen: 2026-04-17
+first_path: examples/skills/gsd-meta/batch-rewrite-pattern/SKILL.md
+superseded_by: null
 ---
 
 # Batch Rewrite Pattern

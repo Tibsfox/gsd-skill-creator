@@ -24,6 +24,7 @@ import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { argv, exit } from 'node:process';
+import { isArtifactDir } from './catalog-core.mjs';
 
 const STAGE_2_DATE = '2026-04-10';
 
@@ -32,14 +33,6 @@ const TACHES_OVERRIDES = new Set([
   'security-reviewer', 'doc-linter',
 ]);
 
-const SKILL_CATEGORIES = new Set([
-  'gsd', 'research', 'media', 'dev', 'ops',
-  'workflow', 'patterns', 'orchestration', 'state', 'deprecated',
-]);
-const AGENT_CATEGORIES = new Set([
-  'gsd', 'research', 'media', 'dev', 'ops', 'ui', 'audit', 'deprecated',
-]);
-const TEAM_CATEGORIES = new Set(['code', 'ops', 'infra', 'migration', 'deprecated']);
 
 // ─── Frontmatter surgery ────────────────────────────────────────────────────
 // We treat the frontmatter block as text. No full YAML parsing. We detect
@@ -183,11 +176,12 @@ async function ensureReadmeForDir(dirPath, name, type, category, dryRun) {
 async function walkAndBackfill(root, dryRun) {
   const results = [];
 
-  // skills
+  // skills — categories discovered structurally (catalog-core.mjs), not allowlisted.
   const skillsDir = join(root, 'skills');
   if (existsSync(skillsDir)) {
     for (const catEnt of await readdir(skillsDir, { withFileTypes: true })) {
-      if (!catEnt.isDirectory() || !SKILL_CATEGORIES.has(catEnt.name)) continue;
+      if (!catEnt.isDirectory() || catEnt.name === 'README.md') continue;
+      if (isArtifactDir('skills', join(skillsDir, catEnt.name))) continue; // unclassified artifact, not a category
       const catDir = join(skillsDir, catEnt.name);
       for (const e of await readdir(catDir, { withFileTypes: true })) {
         if (e.name.startsWith('.') || e.name === 'README.md') continue;
@@ -199,11 +193,12 @@ async function walkAndBackfill(root, dryRun) {
     }
   }
 
-  // agents
+  // agents — categories discovered structurally (catalog-core.mjs), not allowlisted.
   const agentsDir = join(root, 'agents');
   if (existsSync(agentsDir)) {
     for (const catEnt of await readdir(agentsDir, { withFileTypes: true })) {
-      if (!catEnt.isDirectory() || !AGENT_CATEGORIES.has(catEnt.name)) continue;
+      if (!catEnt.isDirectory() || catEnt.name === 'README.md') continue;
+      if (isArtifactDir('agents', join(agentsDir, catEnt.name))) continue; // unclassified artifact, not a category
       const catDir = join(agentsDir, catEnt.name);
       for (const e of await readdir(catDir, { withFileTypes: true })) {
         if (e.name.startsWith('.') || e.name === 'README.md') continue;
@@ -215,11 +210,12 @@ async function walkAndBackfill(root, dryRun) {
     }
   }
 
-  // teams (sidecar)
+  // teams (sidecar) — categories discovered structurally (catalog-core.mjs), not allowlisted.
   const teamsDir = join(root, 'teams');
   if (existsSync(teamsDir)) {
     for (const catEnt of await readdir(teamsDir, { withFileTypes: true })) {
-      if (!catEnt.isDirectory() || !TEAM_CATEGORIES.has(catEnt.name)) continue;
+      if (!catEnt.isDirectory() || catEnt.name === 'README.md') continue;
+      if (isArtifactDir('teams', join(teamsDir, catEnt.name))) continue; // unclassified artifact, not a category
       const catDir = join(teamsDir, catEnt.name);
       for (const e of await readdir(catDir, { withFileTypes: true })) {
         if (e.name.startsWith('.') || e.name === 'README.md') continue;

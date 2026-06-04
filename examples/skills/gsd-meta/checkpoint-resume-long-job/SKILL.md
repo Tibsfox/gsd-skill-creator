@@ -3,8 +3,15 @@ name: checkpoint-resume-long-job
 description: "Persist progress for long-running jobs (batched LLM calls, large ingestions, multi-hour syncs) so that a context reset, crash, or interrupt doesn't lose work. Use whenever a job iterates over N items and completing item K matters independently. Provides a resumable.mjs library pattern plus the skill's invocation heuristics."
 format: 2025-10-02
 version: 1.0.0
-status: active
+status: stable
 updated: 2026-04-17
+type: skill
+category: gsd-meta
+origin: tibsfox
+modified: false
+first_seen: 2026-04-17
+first_path: examples/skills/gsd-meta/checkpoint-resume-long-job/SKILL.md
+superseded_by: null
 ---
 
 # Checkpoint & Resume for Long Jobs

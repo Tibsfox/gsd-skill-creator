@@ -6,6 +6,14 @@ model: sonnet
 color: yellow
 effort: low
 maxTurns: 15
+type: agent
+category: gsd-meta
+status: stable
+origin: tibsfox
+modified: false
+first_seen: 2026-04-18
+first_path: examples/agents/gsd-meta/quality-drift-watcher/AGENT.md
+superseded_by: null
 ---
 
 <role>

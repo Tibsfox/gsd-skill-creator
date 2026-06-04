@@ -11,28 +11,9 @@ import { readdir, readFile, writeFile, mkdir } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { argv, exit } from 'node:process';
+import { CATEGORIZED_TYPES, metadataFileFor, isArtifactDir } from './catalog-core.mjs';
 
 const CSV_HEADER = 'name,type,location,project_scope,is_unique,superseded_by,first_seen_path,first_seen_date,notes';
-
-const SKILL_CATEGORIES = new Set([
-  'gsd', 'research', 'media', 'dev', 'ops',
-  'workflow', 'patterns', 'orchestration', 'state', 'deprecated',
-]);
-const AGENT_CATEGORIES = new Set([
-  'gsd', 'research', 'media', 'dev', 'ops', 'ui', 'audit', 'deprecated',
-]);
-const TEAM_CATEGORIES = new Set(['code', 'ops', 'infra', 'migration', 'deprecated']);
-const CHIPSET_CATEGORIES = new Set(['chipset', 'deprecated']);
-
-function metadataFileFor(type, artifactDir) {
-  switch (type) {
-    case 'skills':   return join(artifactDir, 'SKILL.md');
-    case 'agents':   return join(artifactDir, 'AGENT.md');
-    case 'teams':    return join(artifactDir, 'README.md');
-    case 'chipsets': return join(artifactDir, 'README.md');
-    default:         return null;
-  }
-}
 
 async function parseFrontmatter(content) {
   if (!content.startsWith('---\n')) return null;
@@ -54,13 +35,10 @@ async function parseFrontmatter(content) {
 
 async function walkArtifacts(root) {
   const results = [];
-  const typesWithCategories = [
-    ['skills', SKILL_CATEGORIES],
-    ['agents', AGENT_CATEGORIES],
-    ['teams', TEAM_CATEGORIES],
-  ];
 
-  for (const [type, catSet] of typesWithCategories) {
+  // Categories discovered structurally from disk (catalog-core.mjs), NOT a
+  // hardcoded allowlist — so the badge + catalog count the whole tree.
+  for (const type of CATEGORIZED_TYPES) {
     const typeDir = join(root, type);
     if (!existsSync(typeDir)) continue;
     const topEntries = await readdir(typeDir, { withFileTypes: true });
@@ -68,15 +46,15 @@ async function walkArtifacts(root) {
       if (ent.name.startsWith('.') || ent.name === 'README.md') continue;
       if (!ent.isDirectory()) continue;
       const subPath = join(typeDir, ent.name);
-      if (catSet.has(ent.name)) {
+      if (isArtifactDir(type, subPath)) {
+        await collect(type, '(unclassified)', ent.name, subPath, results);
+      } else {
         const inner = await readdir(subPath, { withFileTypes: true });
         for (const e of inner) {
           if (e.name.startsWith('.') || e.name === 'README.md') continue;
           if (!e.isDirectory()) continue;
           await collect(type, ent.name, e.name, join(subPath, e.name), results);
         }
-      } else {
-        await collect(type, '(unclassified)', ent.name, subPath, results);
       }
     }
   }

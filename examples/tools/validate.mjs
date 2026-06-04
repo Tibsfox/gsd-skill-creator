@@ -13,6 +13,7 @@ import { readdir, readFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { join, dirname, basename } from 'node:path';
 import { argv, exit } from 'node:process';
+import { CATEGORIZED_TYPES, metadataFileFor, isArtifactDir } from './catalog-core.mjs';
 
 const REQUIRED_FIELDS = [
   'name', 'type', 'category', 'status',
@@ -22,19 +23,6 @@ const REQUIRED_FIELDS = [
 const VALID_TYPES = new Set(['skill', 'agent', 'team', 'chipset']);
 const VALID_STATUS = new Set(['stable', 'experimental', 'deprecated']);
 const VALID_ORIGIN = new Set(['tibsfox', 'gsd', 'taches-cc-resources', 'community']);
-
-const SKILL_CATEGORIES = new Set([
-  'gsd', 'research', 'media', 'dev', 'ops',
-  'workflow', 'patterns', 'orchestration', 'state', 'deprecated',
-]);
-const AGENT_CATEGORIES = new Set([
-  'gsd', 'research', 'media', 'dev', 'ops',
-  'ui', 'audit', 'deprecated',
-]);
-const TEAM_CATEGORIES = new Set([
-  'code', 'ops', 'infra', 'migration', 'deprecated',
-]);
-const CHIPSET_CATEGORIES = new Set(['chipset', 'deprecated']); // chipsets use 'chipset' as the flat category
 
 function parseArgs(args) {
   const parsed = { strict: false, name: null, help: false };
@@ -66,31 +54,13 @@ async function parseFrontmatter(content) {
   return fm;
 }
 
-// Pick the metadata file for a given type — where the 9-field frontmatter lives.
-// Skills:   SKILL.md
-// Agents:   AGENT.md
-// Teams:    README.md sidecar (alongside config.json)
-// Chipsets: README.md sidecar (alongside chipset.yaml)
-function metadataFileFor(type, artifactDir) {
-  switch (type) {
-    case 'skills':   return join(artifactDir, 'SKILL.md');
-    case 'agents':   return join(artifactDir, 'AGENT.md');
-    case 'teams':    return join(artifactDir, 'README.md');
-    case 'chipsets': return join(artifactDir, 'README.md');
-    default:         return null;
-  }
-}
-
 async function walkArtifacts(root) {
   const results = [];
-  const types = [
-    ['skills', SKILL_CATEGORIES],
-    ['agents', AGENT_CATEGORIES],
-    ['teams', TEAM_CATEGORIES],
-  ];
 
-  // Skills, agents, teams: category subfolders
-  for (const [type, catSet] of types) {
+  // Skills, agents, teams: category subfolders discovered structurally from
+  // disk (catalog-core.mjs), NOT a hardcoded allowlist. A top-level dir is a
+  // category unless it is itself a legacy pre-Stage-2 (unclassified) artifact.
+  for (const type of CATEGORIZED_TYPES) {
     const typeDir = join(root, type);
     if (!existsSync(typeDir)) continue;
 
@@ -100,16 +70,16 @@ async function walkArtifacts(root) {
       if (!ent.isDirectory()) continue;
 
       const subPath = join(typeDir, ent.name);
-      if (catSet.has(ent.name)) {
+      if (isArtifactDir(type, subPath)) {
+        // Pre-Stage-2 unclassified artifact placed directly under the type dir.
+        await collect(type, '(unclassified)', ent.name, subPath, results);
+      } else {
         const inner = await readdir(subPath, { withFileTypes: true });
         for (const e of inner) {
           if (e.name.startsWith('.') || e.name === 'README.md') continue;
           if (!e.isDirectory()) continue;
           await collect(type, ent.name, e.name, join(subPath, e.name), results);
         }
-      } else {
-        // Pre-Stage-2 unclassified
-        await collect(type, '(unclassified)', ent.name, subPath, results);
       }
     }
   }

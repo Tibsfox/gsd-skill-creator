@@ -3,8 +3,15 @@ name: session-observatory-live
 description: "Conversational guide for using tools/session-retro/observe.mjs to capture friction, wins, corrections, decisions, gaps, tool-use, and checkpoints as they happen during a session. Use at session start (to kick off the log), at inflection points (to record events), and at session end (to archive and feed the retrospective generator)."
 format: 2025-10-02
 version: 1.0.0
-status: active
+status: stable
 updated: 2026-04-17
+type: skill
+category: gsd-meta
+origin: tibsfox
+modified: false
+first_seen: 2026-04-17
+first_path: examples/skills/gsd-meta/session-observatory-live/SKILL.md
+superseded_by: null
 ---
 
 # Session Observatory — Live Event Logging
