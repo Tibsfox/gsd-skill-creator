@@ -1,13 +1,14 @@
 # Release History
 
-1012 milestones shipped across the v1.0 → v1.49.969 arc. The table below lists every shipped release, newest first.
+1013 milestones shipped across the v1.0 → v1.49.970 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
-**Snapshot:** 1012 releases · 1011 with retrospectives · 763 with extracted lessons · quality A:662 B:98 C:62 D:12 F:178 (avg 83) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 1013 releases · 1012 with retrospectives · 763 with extracted lessons · quality A:662 B:98 C:62 D:12 F:179 (avg 83) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.970](release-notes/v1.49.970) | de-hardcode examples/ catalog tooling + re-catalog storefront | 2026-06-04 | 5 | — | — | [s](release-notes/v1.49.970/chapter/00-summary.md) [r](release-notes/v1.49.970/chapter/03-retrospective.md) [l](release-notes/v1.49.970/chapter/04-lessons.md) [c](release-notes/v1.49.970/chapter/99-context.md) | — | F 39 |  |
 | [v1.49.969](release-notes/v1.49.969) | ME-2 model-affinity dispatch actuator | 2026-06-04 | 3 | — | — | [s](release-notes/v1.49.969/chapter/00-summary.md) [r](release-notes/v1.49.969/chapter/03-retrospective.md) [l](release-notes/v1.49.969/chapter/04-lessons.md) [c](release-notes/v1.49.969/chapter/99-context.md) | — | F 35 |  |
 | [v1.49.968](release-notes/v1.49.968) | codify adversarial pre-push ship review | 2026-06-04 | 3 | — | — | [s](release-notes/v1.49.968/chapter/00-summary.md) [r](release-notes/v1.49.968/chapter/03-retrospective.md) [l](release-notes/v1.49.968/chapter/04-lessons.md) [c](release-notes/v1.49.968/chapter/99-context.md) | — | F 39 |  |
 | [v1.49.967](release-notes/v1.49.967) | examples/ catalog frontmatter hygiene | 2026-06-04 | 3 | — | — | [s](release-notes/v1.49.967/chapter/00-summary.md) [r](release-notes/v1.49.967/chapter/03-retrospective.md) [l](release-notes/v1.49.967/chapter/04-lessons.md) [c](release-notes/v1.49.967/chapter/99-context.md) | — | F 35 |  |
