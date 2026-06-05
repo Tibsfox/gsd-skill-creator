@@ -1,13 +1,14 @@
 # Release History
 
-1022 milestones shipped across the v1.0 → v1.49.979 arc. The table below lists every shipped release, newest first.
+1023 milestones shipped across the v1.0 → v1.49.980 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
-**Snapshot:** 1022 releases · 1021 with retrospectives · 763 with extracted lessons · quality A:662 B:98 C:62 D:12 F:188 (avg 83) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 1023 releases · 1022 with retrospectives · 763 with extracted lessons · quality A:662 B:98 C:62 D:12 F:189 (avg 83) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.980](release-notes/v1.49.980) | Co-activation consumer wire | 2026-06-05 | 4 | — | — | [s](release-notes/v1.49.980/chapter/00-summary.md) [r](release-notes/v1.49.980/chapter/03-retrospective.md) [l](release-notes/v1.49.980/chapter/04-lessons.md) [c](release-notes/v1.49.980/chapter/99-context.md) | — | F 36 |  |
 | [v1.49.979](release-notes/v1.49.979) | sc-learn + scan-arxiv CLI dispatch wire | 2026-06-05 | 3 | — | — | [s](release-notes/v1.49.979/chapter/00-summary.md) [r](release-notes/v1.49.979/chapter/03-retrospective.md) [l](release-notes/v1.49.979/chapter/04-lessons.md) [c](release-notes/v1.49.979/chapter/99-context.md) | — | F 33 |  |
 | [v1.49.978](release-notes/v1.49.978) | reachability shelfware disposition | 2026-06-05 | 3 | — | — | [s](release-notes/v1.49.978/chapter/00-summary.md) [r](release-notes/v1.49.978/chapter/03-retrospective.md) [l](release-notes/v1.49.978/chapter/04-lessons.md) [c](release-notes/v1.49.978/chapter/99-context.md) | — | F 33 |  |
 | [v1.49.977](release-notes/v1.49.977) | reachability-aware adoption scanner | 2026-06-05 | 3 | — | — | [s](release-notes/v1.49.977/chapter/00-summary.md) [r](release-notes/v1.49.977/chapter/03-retrospective.md) [l](release-notes/v1.49.977/chapter/04-lessons.md) [c](release-notes/v1.49.977/chapter/99-context.md) | — | F 29 |  |
