@@ -56,11 +56,27 @@ jobs:
     # reads, so a macOS-only failure blocks a ship exactly like an ubuntu failure.
     # The flip was paired with the mandatory update to tests/integration/
     # ci-matrix-parity.test.ts (the #10461 drift-guard) — a silent flip fails it.
+    # v1.49.985 (Phase 4): windows-latest folded in as the NEXT STAGED leg, mirroring
+    # the v1.49.923 macOS staging. It carries the gated `continue-on-error` below so it
+    # runs every push for cross-platform signal WITHOUT ship-blocking power, while the
+    # ubuntu + macOS legs stay LOAD-BEARING. Windows is expected RED initially (the
+    # suite carries Unix assumptions — path separators, /tmp, fs perms, EOL); the
+    # staged leg surfaces the signal to drive it green. Flip to load-bearing is gated
+    # on `node tools/ci/windows-flip-readiness.mjs` reaching READY 3/3 across organic
+    # churn, paired with the mandatory ci-matrix-parity.test.ts update (#10461 drift-
+    # guard) — a silent flip fails it. The job-level `defaults.run.shell: bash` makes
+    # the multi-line run steps (the Grove fixture-gen prelude) and the npm/npx
+    # invocations execute under Git Bash on the windows runner instead of PowerShell,
+    # so all three legs run identical step scripts.
+    continue-on-error: ${{ matrix.os == 'windows-latest' }}
     timeout-minutes: 60
+    defaults:
+      run:
+        shell: bash
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest, macos-latest, windows-latest]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

@@ -79,6 +79,7 @@ export default defineConfig({
       'scripts/__tests__/append-story-entry.test.mjs',
       'tools/ci/__tests__/macos-flip-readiness.test.mjs',
       'tools/ci/__tests__/cargo-flip-readiness.test.mjs',
+      'tools/ci/__tests__/windows-flip-readiness.test.mjs',
     ],
     globals: true,
     testTimeout: 15000,

@@ -12,14 +12,14 @@
  * 3/3 organic-churn greens, so the `continue-on-error` line was deleted and the
  * macOS leg now blocks a ship exactly like the ubuntu leg.
  *
- * This guard pins three load-bearing invariants (cross-ref #10461 gate-enforce-
+ * This guard pins four load-bearing invariants (cross-ref #10461 gate-enforce-
  * every-runnable-surface + drift-guard pairing; two-layer-closure-discipline):
  *
- *   PARITY — because both OSes are legs of ONE job definition, they run the exact
+ *   PARITY — because all OSes are legs of ONE job definition, they run the exact
  *     same steps by construction (no two-file drift is possible anymore). We still
- *     assert the matrix includes BOTH ubuntu-latest and macos-latest and that the
- *     job runs the full test-command set, so a future edit that drops an OS or a
- *     test invocation is caught.
+ *     assert the matrix includes ubuntu-latest, macos-latest, AND windows-latest and
+ *     that the job runs the full test-command set, so a future edit that drops an OS
+ *     or a test invocation is caught.
  *
  *   LOAD-BEARING — the macOS leg MUST NOT carry `continue-on-error` (the v1.49.928
  *     flip deleted it). The pre-tag-gate ci-gate reads the run-level conclusion, and
@@ -30,6 +30,17 @@
  *     someone re-stages it silently, this guard forces the conversation. The flip was
  *     driven by a deterministic readiness verdict (`node tools/ci/macos-flip-
  *     readiness.mjs` -> READY 3/3 across organic churn; release/docs ships do not count).
+ *
+ *   STAGED-WINDOWS — v1.49.985 (Phase 4) folded `windows-latest` into the SAME matrix
+ *     as the NEXT staged leg, mirroring the v1.49.923 macOS staging. It carries
+ *     `continue-on-error: ${{ matrix.os == 'windows-latest' }}` so it runs every push
+ *     for cross-platform signal WITHOUT ship-blocking power, while ubuntu + macOS stay
+ *     load-bearing. So the test job must carry EXACTLY ONE `continue-on-error` — the
+ *     windows-gated one — never zero (windows would have silently gone load-bearing
+ *     without the paired update) and never a job-unconditional or step-level one (which
+ *     would mask the ubuntu/macOS legs too). The flip to load-bearing is gated on
+ *     `node tools/ci/windows-flip-readiness.mjs` -> READY 3/3 across organic churn and
+ *     MUST update this test (delete the line; restore the load-bearing ZERO-COE assert).
  *
  *   RETIREMENT — `ci-macos.yml` must NOT exist. A re-created separate lane would
  *     re-introduce the `.[0]` run-selection ambiguity the v1.49.922 ci-gate pin
@@ -78,9 +89,10 @@ describe('CI cross-platform matrix — parity + load-bearing drift-guard', () =>
     expect(testJob).toMatch(/matrix:/);
   });
 
-  it('PARITY — the matrix includes BOTH ubuntu-latest and macos-latest', () => {
+  it('PARITY — the matrix includes ubuntu-latest, macos-latest, AND windows-latest', () => {
     expect(osList).toContain('ubuntu-latest');
     expect(osList).toContain('macos-latest');
+    expect(osList).toContain('windows-latest');
   });
 
   it('LOAD-BEARING — the macOS leg is ship-blocking (the staged continue-on-error is GONE)', () => {
@@ -93,12 +105,20 @@ describe('CI cross-platform matrix — parity + load-bearing drift-guard', () =>
     );
   });
 
-  it('LOAD-BEARING — ZERO continue-on-error in the test job (neither leg is masked)', () => {
-    // Both legs are load-bearing now. ANY continue-on-error — job-level (re-staging
-    // the macOS leg) or step-level (which masks a step on BOTH legs, including the
-    // ubuntu leg) — would silently weaken the gate. Forbid all of them.
+  it('STAGED-WINDOWS — EXACTLY ONE continue-on-error, the windows-staging gate (ubuntu + macOS unmasked)', () => {
+    // v1.49.985 (Phase 4): windows-latest was folded in as a STAGED non-blocking leg
+    // carrying `continue-on-error: ${{ matrix.os == 'windows-latest' }}`; ubuntu + macOS
+    // stay LOAD-BEARING. So the test job must contain EXACTLY ONE continue-on-error and
+    // it MUST be the windows-gated one — no job-unconditional COE (masks every leg), no
+    // step-level COE (masks a step on every leg including ubuntu/macOS), no re-staged
+    // macOS gate. Adding windows was the deliberate act that updated this assertion (it
+    // was ZERO pre-v985); FLIPPING windows to load-bearing later (deleting the line) is
+    // the next deliberate act that MUST update it again. A silent change either way fails.
     const count = (testJob.match(/continue-on-error:/g) || []).length;
-    expect(count).toBe(0);
+    expect(count).toBe(1);
+    expect(testJob).toMatch(
+      /continue-on-error:\s*\$\{\{\s*matrix\.os\s*==\s*'windows-latest'\s*\}\}/,
+    );
   });
 
   it('LOAD-BEARING — fail-fast is disabled so neither leg cancels the other', () => {
