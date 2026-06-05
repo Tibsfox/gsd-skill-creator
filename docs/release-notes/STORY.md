@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.980`.
+The story begins at `v1.0` and continues to `v1.49.981`.
 
-**1023 chapters.** 1022 have retrospectives.
+**1024 chapters.** 1023 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -1031,3 +1031,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.978](v1.49.978/00-summary.md)** — reachability shelfware disposition: 2 wired, 14 allowlisted, upstream pair retired · 2026-06-05
 - **[v1.49.979](v1.49.979/00-summary.md)** — sc-learn + scan-arxiv CLI dispatch wire · 2026-06-05
 - **[v1.49.980](v1.49.980/00-summary.md)** — wire co-activation consumer (envelope unwrap + skill-mining) · 2026-06-05
+- **[v1.49.981](v1.49.981/00-summary.md)** — skill-mining default-on + bootstrap co-activation thresholds (Ship 5.1c) · 2026-06-05
