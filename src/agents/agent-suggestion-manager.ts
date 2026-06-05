@@ -1,8 +1,8 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { verifyChecksum } from '../validation/jsonl-safety.js';
-import { CoActivationTracker, SkillCoActivation } from './co-activation-tracker.js';
-import { ClusterDetector, SkillCluster } from './cluster-detector.js';
+import { CoActivationTracker, SkillCoActivation, CoActivationConfig } from './co-activation-tracker.js';
+import { ClusterDetector, SkillCluster, ClusterConfig } from './cluster-detector.js';
 import { AgentGenerator, GeneratedAgent } from './agent-generator.js';
 import { SessionObservation } from '../types/observation.js';
 import { SkillStore } from '../storage/skill-store.js';
@@ -22,6 +22,29 @@ export interface AgentSuggestion {
   dismissReason?: string;
 }
 
+/**
+ * Ship 5.1c bootstrap thresholds for the co-activation → agent-suggestion path.
+ *
+ * The shared DEFAULT_*_CONFIG constants (also read by graph.ts, event-suggester,
+ * bundle-suggester) are deliberately left UNCHANGED — these lower the bar ONLY
+ * for this consumer. Rationale: this repo's transcript history shows no skill
+ * pair ever co-occurring in more than one session, so the global gate of 5
+ * within a 14-day window would essentially never fire. A bootstrap gate of 2
+ * co-occurrences within 30 days lets a genuinely recurring pair surface once
+ * `observation.mine_active_skills` (default ON as of 5.1c) starts populating
+ * activeSkills. Both minCoActivations knobs must be lowered together: the net
+ * edge gate is max(tracker, detector). Revisit upward once real post-flip volume
+ * accrues. (`stabilityDays` is intentionally not set — it is not read as a
+ * filter; see cluster-detector.ts.)
+ */
+export const BOOTSTRAP_COACTIVATION_CONFIG: Partial<CoActivationConfig> = {
+  minCoActivations: 2,
+  recencyDays: 30,
+};
+export const BOOTSTRAP_CLUSTER_CONFIG: Partial<ClusterConfig> = {
+  minCoActivations: 2,
+};
+
 export class AgentSuggestionManager {
   private tracker: CoActivationTracker;
   private detector: ClusterDetector;
@@ -30,10 +53,16 @@ export class AgentSuggestionManager {
 
   constructor(
     patternsDir: string = '.planning/patterns',
-    skillStore?: SkillStore
+    skillStore?: SkillStore,
+    coActivationConfig?: Partial<CoActivationConfig>,
+    clusterConfig?: Partial<ClusterConfig>,
   ) {
-    this.tracker = new CoActivationTracker();
-    this.detector = new ClusterDetector();
+    // Layer any caller override over the 5.1c bootstrap thresholds (which in turn
+    // layer over each class's DEFAULT_*_CONFIG): overriding one knob keeps the
+    // bootstrap values for the rest, rather than silently reverting to the global
+    // defaults.
+    this.tracker = new CoActivationTracker({ ...BOOTSTRAP_COACTIVATION_CONFIG, ...coActivationConfig });
+    this.detector = new ClusterDetector({ ...BOOTSTRAP_CLUSTER_CONFIG, ...clusterConfig });
     this.generator = new AgentGenerator(skillStore ?? new SkillStore());
     this.suggestionsPath = path.join(patternsDir, 'agent-suggestions.json');
   }

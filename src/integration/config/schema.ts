@@ -60,10 +60,13 @@ const ObservationSchema = z.object({
   retention_days: z.number().min(1).max(365).default(90),
   max_entries: z.number().min(100).max(100000).default(1000),
   capture_corrections: z.boolean().default(true),
-  // 5.1b: opt-in transcript skill-mining. Default false keeps the session-end
-  // write path byte-identical (activeSkills stays []); flipping it on feeds the
-  // co-activation / `agents suggest` learning loop from the live transcript.
-  mine_active_skills: z.boolean().default(false),
+  // 5.1c: transcript skill-mining, default ON (was opt-in/false in 5.1b). Records
+  // the session's distinct skill names at session end so the co-activation /
+  // `agents suggest` learning loop has real input. Operators can opt out with
+  // `false`; when off, the session-end write path is byte-identical (activeSkills
+  // stays []). NOTE: only fills configs that OMIT this key — installs created by
+  // 5.1b carry an explicit `false` and need a manual flip (see ship notes).
+  mine_active_skills: z.boolean().default(true),
 });
 
 // ============================================================================
@@ -116,7 +119,8 @@ export const IntegrationConfigSchema = z.object({
     retention_days: 90,
     max_entries: 1000,
     capture_corrections: true,
-    mine_active_skills: false,
+    // Keep in sync with the field default at ObservationSchema.mine_active_skills.
+    mine_active_skills: true,
   })),
   suggestions: SuggestionSchema.default(() => ({
     min_occurrences: 3,

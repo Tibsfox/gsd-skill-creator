@@ -83,9 +83,10 @@ export interface ObservationConfig {
   /**
    * Whether to mine active skill names from the live session transcript
    * (Skill tool_use blocks) so co-activation detection has real input.
-   * Default `false`: the session-end hook records `activeSkills: []` and the
-   * write path is byte-identical to pre-5.1b behavior. Opt-in (staged-rollout
-   * posture) — flipping it on un-starves the `agents suggest` learning loop.
+   * Default `true` (5.1c): un-starves the `agents suggest` learning loop by
+   * recording the session's distinct skill names at session end. Set `false`
+   * to opt out — the session-end hook then records `activeSkills: []` and the
+   * write path is byte-identical to pre-5.1b behavior.
    */
   mine_active_skills: boolean;
 }

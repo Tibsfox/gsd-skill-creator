@@ -178,18 +178,18 @@ describe('CONFIG-03: Observation retention', () => {
     expect(config.observation.retention_days).toBe(90);
   });
 
-  // 5.1b: opt-in transcript skill-mining flag (default off, staged rollout).
-  it('defaults mine_active_skills to false', () => {
+  // 5.1c: transcript skill-mining flag now defaults ON (was opt-in/false in 5.1b).
+  it('defaults mine_active_skills to true', () => {
     const config = IntegrationConfigSchema.parse({});
-    expect(config.observation.mine_active_skills).toBe(false);
+    expect(config.observation.mine_active_skills).toBe(true);
   });
 
-  it('allows setting mine_active_skills to true without affecting other fields', () => {
+  it('allows opting out of mine_active_skills without affecting other fields', () => {
     const config = IntegrationConfigSchema.parse({
-      observation: { mine_active_skills: true },
+      observation: { mine_active_skills: false },
     });
 
-    expect(config.observation.mine_active_skills).toBe(true);
+    expect(config.observation.mine_active_skills).toBe(false);
     expect(config.observation.retention_days).toBe(90);
     expect(config.observation.capture_corrections).toBe(true);
   });

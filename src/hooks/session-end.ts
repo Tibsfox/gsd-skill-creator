@@ -97,8 +97,9 @@ async function main(): Promise<void> {
     const config = await readIntegrationConfig();
     observationRetentionDays = config.observation.retention_days;
     observationMaxEntries = config.observation.max_entries;
-    // 5.1b: opt-in transcript skill-mining (default false). When off, the
-    // observer records activeSkills:[] exactly as before (byte-identical).
+    // Transcript skill-mining (config default true as of 5.1c; 5.1b added it as
+    // opt-in/false). When off, the observer records activeSkills:[] exactly as
+    // before (byte-identical).
     mineActiveSkills = config.observation.mine_active_skills;
   } catch {
     observationRetentionDays = undefined;

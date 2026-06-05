@@ -629,9 +629,9 @@ function installIntegrationConfig() {
       retention_days: 90,
       max_entries: 1000,
       capture_corrections: true,
-      // Opt-in: mine active skill names from the session transcript so
-      // co-activation / `agents suggest` has real input (5.1b). Off by default.
-      mine_active_skills: false
+      // Mine active skill names from the session transcript so co-activation /
+      // `agents suggest` has real input (5.1c). On by default; set false to opt out.
+      mine_active_skills: true
     },
     suggestions: {
       min_occurrences: 3,

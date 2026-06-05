@@ -71,10 +71,12 @@ export class SessionObserver {
     // from the same config load; undefined falls back to the legacy default cap.
     this.observationMaxEntries = observationMaxEntries;
     // 5.1b: when true, mine activeSkills from the parsed transcript (Skill
-    // tool_use blocks) so co-activation detection has real input. Default false
-    // keeps the recorded observation byte-identical to pre-5.1b behavior
-    // (activeSkills carries only what the caller passed, i.e. []). Gated by the
-    // operator's `observation.mine_active_skills` config flag (default false).
+    // tool_use blocks) so co-activation detection has real input. When false the
+    // recorded observation is byte-identical to pre-5.1b behavior (activeSkills
+    // carries only what the caller passed, i.e. []). Gated by the operator's
+    // `observation.mine_active_skills` config flag (default true as of 5.1c).
+    // This ctor param itself defaults false — a fail-closed fallback for callers
+    // that don't thread the config; the session-end hook always passes it.
     this.mineActiveSkills = mineActiveSkills;
   }
 
