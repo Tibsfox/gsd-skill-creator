@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.982`.
+The story begins at `v1.0` and continues to `v1.49.983`.
 
-**1025 chapters.** 1024 have retrospectives.
+**1026 chapters.** 1025 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -1033,3 +1033,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.980](v1.49.980/00-summary.md)** — wire co-activation consumer (envelope unwrap + skill-mining) · 2026-06-05
 - **[v1.49.981](v1.49.981/00-summary.md)** — skill-mining default-on + bootstrap co-activation thresholds (Ship 5.1c) · 2026-06-05
 - **[v1.49.982](v1.49.982/00-summary.md)** — outcome-driven retention substrate + bidirectional apply-guard (Ship 5.2) · 2026-06-05
+- **[v1.49.983](v1.49.983/00-summary.md)** — GAP-7 deterministic trip-vocab check · 2026-06-05

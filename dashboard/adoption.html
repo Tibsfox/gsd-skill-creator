@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>gsd-skill-creator — Adoption Telemetry</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --panel: #161b22;
+      --border: #30363d;
+      --text: #c9d1d9;
+      --text-muted: #8b949e;
+      --link: #58a6ff;
+      --code-bg: #1f2428;
+      --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+      --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    }
+    body { font-family: var(--sans); margin: 0; padding: 0; background: var(--bg); color: var(--text); }
+    .wrap { max-width: 1240px; margin: 0 auto; padding: 32px 24px; }
+    h1 { margin: 0 0 8px 0; font-weight: 700; font-size: 28px; }
+    .subtitle { color: var(--text-muted); margin-bottom: 24px; }
+    .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 24px; }
+    .summary-card { background: var(--panel); border: 1px solid var(--border); border-radius: 6px; padding: 16px; }
+    .summary-card .label { color: var(--text-muted); font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .summary-card .value { font-size: 32px; font-weight: 700; font-family: var(--mono); margin-top: 4px; }
+    .summary-card.alert .value { color: #f97316; }
+    .summary-card.good .value { color: #22c55e; }
+    .summary-card.crit .value { color: #ef4444; }
+    table { width: 100%; border-collapse: collapse; background: var(--panel); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+    th, td { padding: 8px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 14px; }
+    th { background: #1c2128; font-weight: 600; color: var(--text-muted); text-transform: uppercase; font-size: 12px; letter-spacing: 0.05em; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover { background: rgba(56, 139, 253, 0.05); }
+    tr.allowlisted { opacity: 0.7; }
+    td.num { text-align: right; font-family: var(--mono); }
+    code { background: var(--code-bg); padding: 1px 6px; border-radius: 3px; font-family: var(--mono); font-size: 13px; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 11px; font-weight: 600; text-transform: uppercase; color: #0d1117; letter-spacing: 0.05em; }
+    .allowlist-tag { background: var(--code-bg); color: var(--text-muted); padding: 2px 6px; border-radius: 3px; font-size: 10px; margin-left: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .callers { color: var(--text-muted); font-size: 13px; }
+    .meta { color: var(--text-muted); font-size: 13px; margin: 24px 0 16px 0; }
+    .meta a { color: var(--link); text-decoration: none; }
+    .legend { display: flex; gap: 16px; margin-bottom: 16px; font-size: 13px; color: var(--text-muted); }
+    .legend .item { display: flex; align-items: center; gap: 6px; }
+    .legend .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+    .legend .dot.living { background: #22c55e; }
+    .legend .dot.test-only { background: #f97316; }
+    .legend .dot.isolated { background: #ef4444; }
+    .nav { margin-bottom: 24px; font-size: 14px; }
+    .nav a { color: var(--link); margin-right: 16px; text-decoration: none; }
+    .nav a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="nav">
+      <a href="index.html">← Dashboard</a>
+      <a href="state.html">State</a>
+      <a href="milestones.html">Milestones</a>
+    </div>
+
+    <h1>Adoption Telemetry</h1>
+    <div class="subtitle">TypeScript-import-surface adoption for <code>src/&lt;module&gt;/</code> directories. Updated by <code>npm run adoption-report:refresh</code>.</div>
+
+    <div class="summary-grid">
+      <div class="summary-card"><div class="label">Total modules</div><div class="value">151</div></div>
+      <div class="summary-card good"><div class="label">Living</div><div class="value">98</div></div>
+      <div class="summary-card alert"><div class="label">Test-only</div><div class="value">45</div></div>
+      <div class="summary-card crit"><div class="label">Isolated</div><div class="value">8</div></div>
+      <div class="summary-card"><div class="label">Allowlisted</div><div class="value">29</div></div>
+      <div class="summary-card alert"><div class="label">Shelfware (non-allowlisted)</div><div class="value">38</div></div>
+    </div>
+
+    <div class="legend">
+      <div class="item"><span class="dot isolated"></span> isolated — no importers</div>
+      <div class="item"><span class="dot test-only"></span> test-only — only test imports</div>
+      <div class="item"><span class="dot living"></span> living — ≥1 real caller</div>
+    </div>
+
+    <div class="meta">
+      Generated <code>2026-06-05T20:38:51.210Z</code> · Baseline source: <a href="../docs/ADOPTION-BASELINE-v1.49.787.md">docs/ADOPTION-BASELINE-v1.49.787.md</a>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Module</th>
+          <th>Status</th>
+          <th class="num">Self files</th>
+          <th class="num">Real callers</th>
+          <th class="num">Test callers</th>
+          <th>Callers</th>
+        </tr>
+      </thead>
+      <tbody>
+
+    <tr class="status-isolated allowlisted">
+      <td><code>dogfood</code></td>
+      <td><span class="badge" style="background:#ef4444">isolated</span> <span class="allowlist-tag">allowlisted</span></td>
+      <td class="num">66</td>
+      <td class="num">0</td>
+      <td class="num">0</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-isolated allowlisted">
+      <td><code>holomorphic</code></td>
+      <td><span class="badge" style="background:#ef4444">isolated</span> <span class="allowlist-tag">allowlisted</span></td>
+      <td class="num">25</td>
+      <td class="num">0</td>
+      <td class="num">0</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-isolated allowlisted">
+      <td><code>initialization</code></td>
+      <td><span class="badge" style="background:#ef4444">isolated</span> <span class="allowlist-tag">allowlisted</span></td>
+      <td class="num">1</td>
+      <td class="num">0</td>
+      <td class="num">0</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-isolated allowlisted">
+      <td><code>interpreter</code></td>
+      <td><span class="badge" style="background:#ef4444">isolated</span> <span class="allowlist-tag">allowlisted</span></td>
+      <td class="num">6</td>
+      <td class="num">0</td>
+      <td class="num">0</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-isolated allowlisted">
+      <td><code>mathematical-foundations</code></td>
+      <td><span class="badge" style="background:#ef4444">isolated</span> <span class="allowlist-tag">allowlisted</span></td>
+      <td class="num">6</td>
+      <td class="num">0</td>
+      <td class="num">0</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-isolated allowlisted">
+      <td><code>retro</code></td>
+      <td><span class="badge" style="background:#ef4444">isolated</span> <span class="allowlist-tag">allowlisted</span></td>
+      <td class="num">7</td>
+      <td class="num">0</td>
+      <td class="num">0</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-isolated allowlisted">
+      <td><code>settings</code></td>
+      <td><span class="badge" style="background:#ef4444">isolated</span> <span class="allowlist-tag">allowlisted</span></td>
+      <td class="num">1</td>
+      <td class="num">0</td>
+      <td class="num">0</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-isolated allowlisted">
+      <td><code>styles</code></td>
+      <td><span class="badge" style="background:#ef4444">isolated</span> <span class="allowlist-tag">allowlisted</span></td>
+      <td class="num">0</td>
+      <td class="num">0</td>
+      <td class="num">0</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only">
+      <td><code>activation-steering</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span></td>
+      <td class="num">11</td>
+      <td class="num">0</td>
+      <td class="num">5</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only">
+      <td><code>agc</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span></td>
+      <td class="num">69</td>
+      <td class="num">0</td>
+      <td class="num">33</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only">
+      <td><code>alternative-discoverer</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span></td>
+      <td class="num">12</td>
+      <td class="num">0</td>
+      <td class="num">5</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only">
+      <td><code>aminet</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span></td>
+      <td class="num">77</td>
+      <td class="num">0</td>
+      <td class="num">38</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only">
+      <td><code>artifactnet-provenance</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span></td>
+      <td class="num">11</td>
+      <td class="num">0</td>
+      <td class="num">5</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only">
+      <td><code>bounded-learning-empirical</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span></td>
+      <td class="num">11</td>
+      <td class="num">0</td>
+      <td class="num">5</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only">
+      <td><code>brainstorm</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span></td>
+      <td class="num">52</td>
+      <td class="num">0</td>
+      <td class="num">13</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only">
+      <td><code>catalog</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span></td>
+      <td class="num">8</td>
+      <td class="num">0</td>
+      <td class="num">3</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only">
+      <td><code>citations</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span></td>
+      <td class="num">68</td>
+      <td class="num">0</td>
+      <td class="num">15</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only">
+      <td><code>cloud-ops</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span></td>
+      <td class="num">23</td>
+      <td class="num">0</td>
+      <td class="num">7</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only">
+      <td><code>code-absorber</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span></td>
+      <td class="num">12</td>
+      <td class="num">0</td>
+      <td class="num">5</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only">
+      <td><code>compression-spectrum</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span></td>
+      <td class="num">4</td>
+      <td class="num">0</td>
+      <td class="num">1</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only">
+      <td><code>convergent</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span></td>
+      <td class="num">6</td>
+      <td class="num">0</td>
+      <td class="num">2</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only">
+      <td><code>dependency-resolver</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span></td>
+      <td class="num">13</td>
+      <td class="num">0</td>
+      <td class="num">5</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only">
+      <td><code>experience-compression</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span></td>
+      <td class="num">11</td>
+      <td class="num">0</td>
+      <td class="num">5</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only">
+      <td><code>fl-threat-model</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span></td>
+      <td class="num">10</td>
+      <td class="num">0</td>
+      <td class="num">4</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only">
+      <td><code>hardware-infrastructure</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span></td>
+      <td class="num">14</td>
+      <td class="num">0</td>
+      <td class="num">2</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only">
+      <td><code>heuristics-free-skill-space</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span></td>
+      <td class="num">3</td>
+      <td class="num">0</td>
+      <td class="num">2</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only">
+      <td><code>hooks</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span></td>
+      <td class="num">7</td>
+      <td class="num">0</td>
+      <td class="num">2</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only">
+      <td><code>knowledge</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span></td>
+      <td class="num">43</td>
+      <td class="num">0</td>
+      <td class="num">22</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only">
+      <td><code>launcher</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span></td>
+      <td class="num">6</td>
+      <td class="num">0</td>
+      <td class="num">2</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only">
+      <td><code>mcp-defense</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span></td>
+      <td class="num">5</td>
+      <td class="num">0</td>
+      <td class="num">1</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only">
+      <td><code>mission-world-model</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span></td>
+      <td class="num">6</td>
+      <td class="num">0</td>
+      <td class="num">2</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only">
+      <td><code>promptcluster-batcheffect</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span></td>
+      <td class="num">9</td>
+      <td class="num">0</td>
+      <td class="num">4</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only">
+      <td><code>random</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span></td>
+      <td class="num">2</td>
+      <td class="num">0</td>
+      <td class="num">1</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only">
+      <td><code>reasoning-graphs</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span></td>
+      <td class="num">4</td>
+      <td class="num">0</td>
+      <td class="num">1</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only">
+      <td><code>rumor-delay-model</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span></td>
+      <td class="num">9</td>
+      <td class="num">0</td>
+      <td class="num">4</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only">
+      <td><code>runtime-hal</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span></td>
+      <td class="num">2</td>
+      <td class="num">0</td>
+      <td class="num">1</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only">
+      <td><code>scribe</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span></td>
+      <td class="num">59</td>
+      <td class="num">0</td>
+      <td class="num">22</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only">
+      <td><code>sigreg</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span></td>
+      <td class="num">5</td>
+      <td class="num">0</td>
+      <td class="num">2</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only">
+      <td><code>skill-creator</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span></td>
+      <td class="num">36</td>
+      <td class="num">0</td>
+      <td class="num">21</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only">
+      <td><code>skilldex-auditor</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span></td>
+      <td class="num">10</td>
+      <td class="num">0</td>
+      <td class="num">4</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only">
+      <td><code>spatial-awareness</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span></td>
+      <td class="num">25</td>
+      <td class="num">0</td>
+      <td class="num">12</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only">
+      <td><code>stackelberg-pricing</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span></td>
+      <td class="num">10</td>
+      <td class="num">0</td>
+      <td class="num">4</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only">
+      <td><code>token-budget</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span></td>
+      <td class="num">4</td>
+      <td class="num">0</td>
+      <td class="num">2</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only">
+      <td><code>trust-tiers</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span></td>
+      <td class="num">5</td>
+      <td class="num">0</td>
+      <td class="num">1</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only">
+      <td><code>utils</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span></td>
+      <td class="num">2</td>
+      <td class="num">0</td>
+      <td class="num">1</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only">
+      <td><code>vtm</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span></td>
+      <td class="num">57</td>
+      <td class="num">0</td>
+      <td class="num">29</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only allowlisted">
+      <td><code>dead-zone</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span> <span class="allowlist-tag">allowlisted</span></td>
+      <td class="num">12</td>
+      <td class="num">0</td>
+      <td class="num">10</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only allowlisted">
+      <td><code>eligibility</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span> <span class="allowlist-tag">allowlisted</span></td>
+      <td class="num">10</td>
+      <td class="num">0</td>
+      <td class="num">8</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only allowlisted">
+      <td><code>langevin</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span> <span class="allowlist-tag">allowlisted</span></td>
+      <td class="num">11</td>
+      <td class="num">0</td>
+      <td class="num">8</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only allowlisted">
+      <td><code>learnable-k_h</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span> <span class="allowlist-tag">allowlisted</span></td>
+      <td class="num">15</td>
+      <td class="num">0</td>
+      <td class="num">11</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only allowlisted">
+      <td><code>temperature</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span> <span class="allowlist-tag">allowlisted</span></td>
+      <td class="num">11</td>
+      <td class="num">0</td>
+      <td class="num">8</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only allowlisted">
+      <td><code>tonnetz</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span> <span class="allowlist-tag">allowlisted</span></td>
+      <td class="num">7</td>
+      <td class="num">0</td>
+      <td class="num">2</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-test-only allowlisted">
+      <td><code>wasserstein-hebbian</code></td>
+      <td><span class="badge" style="background:#f97316">test-only</span> <span class="allowlist-tag">allowlisted</span></td>
+      <td class="num">7</td>
+      <td class="num">0</td>
+      <td class="num">2</td>
+      <td class="callers">—</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>activation</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">8</td>
+      <td class="num">1</td>
+      <td class="num">3</td>
+      <td class="callers">cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>coherent-functors</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">11</td>
+      <td class="num">1</td>
+      <td class="num">4</td>
+      <td class="callers">cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>console</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">29</td>
+      <td class="num">1</td>
+      <td class="num">16</td>
+      <td class="callers">`dashboard`</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>discovery</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">45</td>
+      <td class="num">1</td>
+      <td class="num">21</td>
+      <td class="callers">cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>drift</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">22</td>
+      <td class="num">1</td>
+      <td class="num">9</td>
+      <td class="callers">cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>evaluator</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">9</td>
+      <td class="num">1</td>
+      <td class="num">4</td>
+      <td class="callers">cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>fs</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">13</td>
+      <td class="num">1</td>
+      <td class="num">0</td>
+      <td class="callers">cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>hourglass-persistence</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">8</td>
+      <td class="num">1</td>
+      <td class="num">2</td>
+      <td class="callers">cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>keystore</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">2</td>
+      <td class="num">1</td>
+      <td class="num">1</td>
+      <td class="callers">1 external</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>koopman-memory</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">8</td>
+      <td class="num">1</td>
+      <td class="num">2</td>
+      <td class="callers">cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>lod</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">4</td>
+      <td class="num">1</td>
+      <td class="num">3</td>
+      <td class="callers">`memory`</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>representation-audit</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">12</td>
+      <td class="num">1</td>
+      <td class="num">8</td>
+      <td class="callers">cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>ricci-curvature-audit</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">8</td>
+      <td class="num">1</td>
+      <td class="num">2</td>
+      <td class="callers">`hourglass-persistence`</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>roles</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">9</td>
+      <td class="num">1</td>
+      <td class="num">4</td>
+      <td class="callers">cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>scan-arxiv</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">29</td>
+      <td class="num">1</td>
+      <td class="num">13</td>
+      <td class="callers">`commands`</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>semantic-channel</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">7</td>
+      <td class="num">1</td>
+      <td class="num">2</td>
+      <td class="callers">cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>site</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">30</td>
+      <td class="num">1</td>
+      <td class="num">2</td>
+      <td class="callers">`critique`</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>skill</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">8</td>
+      <td class="num">1</td>
+      <td class="num">4</td>
+      <td class="callers">cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>skill-workflows</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">15</td>
+      <td class="num">1</td>
+      <td class="num">8</td>
+      <td class="callers">cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>staging</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">99</td>
+      <td class="num">1</td>
+      <td class="num">49</td>
+      <td class="callers">`dashboard`</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>symbiosis</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">20</td>
+      <td class="num">1</td>
+      <td class="num">13</td>
+      <td class="callers">cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>telemetry</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">14</td>
+      <td class="num">1</td>
+      <td class="num">7</td>
+      <td class="callers">`application`</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>ab-harness</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">22</td>
+      <td class="num">2</td>
+      <td class="num">14</td>
+      <td class="callers">`bayes-ab`, cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>bundles</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">19</td>
+      <td class="num">2</td>
+      <td class="num">9</td>
+      <td class="callers">`cartridge`, cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>chipset</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">83</td>
+      <td class="num">2</td>
+      <td class="num">39</td>
+      <td class="callers">`observation`, `types`</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>coprocessor</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">15</td>
+      <td class="num">2</td>
+      <td class="num">8</td>
+      <td class="callers">`application`, cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>critique</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">21</td>
+      <td class="num">2</td>
+      <td class="num">12</td>
+      <td class="callers">cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>dashboard</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">151</td>
+      <td class="num">2</td>
+      <td class="num">73</td>
+      <td class="callers">`launcher`, cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>den</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">44</td>
+      <td class="num">2</td>
+      <td class="num">31</td>
+      <td class="callers">`dacp`, `mcp`</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>events</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">11</td>
+      <td class="num">2</td>
+      <td class="num">5</td>
+      <td class="callers">`types`, cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>git</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">23</td>
+      <td class="num">2</td>
+      <td class="num">8</td>
+      <td class="callers">`commands`, cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>learn</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">35</td>
+      <td class="num">2</td>
+      <td class="num">18</td>
+      <td class="callers">`commands`, `scan-arxiv`</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>model-affinity</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">14</td>
+      <td class="num">2</td>
+      <td class="num">9</td>
+      <td class="callers">`agents`, cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>portability</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">7</td>
+      <td class="num">2</td>
+      <td class="num">3</td>
+      <td class="callers">`mcp`, cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>retrieval</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">8</td>
+      <td class="num">2</td>
+      <td class="num">4</td>
+      <td class="callers">`application`, `workflows`</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>stochastic</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">10</td>
+      <td class="num">2</td>
+      <td class="num">8</td>
+      <td class="callers">`branches`, `orchestration`</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>terminal</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">10</td>
+      <td class="num">2</td>
+      <td class="num">5</td>
+      <td class="callers">`launcher`, cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>anytime-valid</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">4</td>
+      <td class="num">3</td>
+      <td class="num">1</td>
+      <td class="callers">`ab-harness`, `bounded-learning`, `orchestration`</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>branches</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">19</td>
+      <td class="num">3</td>
+      <td class="num">12</td>
+      <td class="callers">`ab-harness`, `cli-status.ts`, `symbiosis`</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>calibration</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">12</td>
+      <td class="num">3</td>
+      <td class="num">6</td>
+      <td class="callers">`index.ts`, `observation`, cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>cartridge</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">61</td>
+      <td class="num">3</td>
+      <td class="num">34</td>
+      <td class="callers">`orchestration`, `traces`, cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>commands</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">10</td>
+      <td class="num">3</td>
+      <td class="num">5</td>
+      <td class="callers">`scan-arxiv`, cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>composition</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">9</td>
+      <td class="num">3</td>
+      <td class="num">4</td>
+      <td class="callers">`workflows`, cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>conflicts</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">7</td>
+      <td class="num">3</td>
+      <td class="num">4</td>
+      <td class="callers">`index.ts`, `teams`, cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>detection</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">9</td>
+      <td class="num">3</td>
+      <td class="num">4</td>
+      <td class="callers">`discovery`, cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>eval</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">23</td>
+      <td class="num">3</td>
+      <td class="num">14</td>
+      <td class="callers">`critique`, `mesh`, cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>graph</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">16</td>
+      <td class="num">3</td>
+      <td class="num">12</td>
+      <td class="callers">`cli-status.ts`, `orchestration`, `umwelt`</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>identifiers</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">8</td>
+      <td class="num">3</td>
+      <td class="num">3</td>
+      <td class="callers">`agents`, `dashboard`, `detection`</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>mcp</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">106</td>
+      <td class="num">3</td>
+      <td class="num">44</td>
+      <td class="callers">cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>output-structure</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">11</td>
+      <td class="num">3</td>
+      <td class="num">9</td>
+      <td class="callers">`model-affinity`, `tractability`, cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>plane</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">30</td>
+      <td class="num">3</td>
+      <td class="num">17</td>
+      <td class="callers">`application`, cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>predictive-skill-loader</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">12</td>
+      <td class="num">3</td>
+      <td class="num">7</td>
+      <td class="callers">`chipset`, `orchestration`, cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>simulation</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">10</td>
+      <td class="num">3</td>
+      <td class="num">4</td>
+      <td class="callers">`index.ts`, `testing`, cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>workflows</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">4</td>
+      <td class="num">3</td>
+      <td class="num">0</td>
+      <td class="callers">`index.ts`, cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>dacp</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">41</td>
+      <td class="num">4</td>
+      <td class="num">16</td>
+      <td class="callers">`catalog`, `interpreter`, `semantic-channel`, cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>disclosure</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">12</td>
+      <td class="num">4</td>
+      <td class="num">6</td>
+      <td class="callers">`detection`, `storage`, `workflows`, cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>nlp</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">3</td>
+      <td class="num">4</td>
+      <td class="num">0</td>
+      <td class="callers">`application`, `brainstorm`, `embeddings`, `orchestrator`</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>reinforcement</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">9</td>
+      <td class="num">4</td>
+      <td class="num">6</td>
+      <td class="callers">`branches`, `eligibility`, `symbiosis`, `umwelt`</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>sensoria</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">10</td>
+      <td class="num">4</td>
+      <td class="num">9</td>
+      <td class="callers">`application`, `orchestration`, `symbiosis`, cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>traces</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">18</td>
+      <td class="num">4</td>
+      <td class="num">21</td>
+      <td class="callers">`branches`, `cartridge`, `orchestration`, `reinforcement`</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>agents</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">9</td>
+      <td class="num">5</td>
+      <td class="num">5</td>
+      <td class="callers">`bundles`, `events`, `plane`, cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>mesh</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">70</td>
+      <td class="num">5</td>
+      <td class="num">38</td>
+      <td class="callers">`branches`, `reinforcement`, `traces`, 2 external</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>observation</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">38</td>
+      <td class="num">5</td>
+      <td class="num">21</td>
+      <td class="callers">`dashboard`, `hooks`, `orchestrator`, cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>orchestration</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">44</td>
+      <td class="num">5</td>
+      <td class="num">36</td>
+      <td class="callers">`application`, `bayes-ab`, `branches`, `cartridge`, `stochastic`</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>chips</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">17</td>
+      <td class="num">6</td>
+      <td class="num">14</td>
+      <td class="callers">`eval`, `mcp`, `mesh`, cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>learning</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">13</td>
+      <td class="num">6</td>
+      <td class="num">6</td>
+      <td class="callers">`index.ts`, cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>memory</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">63</td>
+      <td class="num">6</td>
+      <td class="num">42</td>
+      <td class="callers">`graph`, `mcp`, `mesh`, `orchestration`, 2 external</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>bounded-learning</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">27</td>
+      <td class="num">7</td>
+      <td class="num">19</td>
+      <td class="callers">`chipset`, `observation`, `orchestration`, `token-budget`, cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>capabilities</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">26</td>
+      <td class="num">7</td>
+      <td class="num">14</td>
+      <td class="callers">`index.ts`, `orchestrator`, `staging`, cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>integration</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">60</td>
+      <td class="num">7</td>
+      <td class="num">44</td>
+      <td class="callers">`dashboard`, `hooks`, `launcher`, `terminal`, cli, 1 external</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>orchestrator</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">90</td>
+      <td class="num">7</td>
+      <td class="num">39</td>
+      <td class="callers">`capabilities`, `mcp`, `skill-workflows`, cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>teams</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">17</td>
+      <td class="num">7</td>
+      <td class="num">9</td>
+      <td class="callers">`index.ts`, cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>testing</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">14</td>
+      <td class="num">7</td>
+      <td class="num">6</td>
+      <td class="callers">`chips`, `evaluator`, `index.ts`, `mesh`, cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>tractability</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">9</td>
+      <td class="num">8</td>
+      <td class="num">8</td>
+      <td class="callers">`ab-harness`, `branches`, `langevin`, `orchestration`, `stochastic`, `symbiosis`, +2</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>application</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">21</td>
+      <td class="num">10</td>
+      <td class="num">15</td>
+      <td class="callers">`coprocessor`, `index.ts`, `integration`, `retrieval`, `sensoria`, `telemetry`, +3</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>safety</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">47</td>
+      <td class="num">11</td>
+      <td class="num">25</td>
+      <td class="callers">`bundles`, `calibration`, `evaluator`, `events`, `learning`, `projection`, +5</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>embeddings</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">21</td>
+      <td class="num">12</td>
+      <td class="num">20</td>
+      <td class="callers">`application`, `conflicts`, `discovery`, `index.ts`, `orchestrator`, `retrieval`, +5</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>atlas</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">69</td>
+      <td class="num">13</td>
+      <td class="num">23</td>
+      <td class="callers">`intelligence`, 12 external</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>cli</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">137</td>
+      <td class="num">15</td>
+      <td class="num">53</td>
+      <td class="callers">`commands`, `scribe`, `skill`, cli</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>intelligence</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">207</td>
+      <td class="num">26</td>
+      <td class="num">121</td>
+      <td class="callers">26 external</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>validation</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">37</td>
+      <td class="num">26</td>
+      <td class="num">32</td>
+      <td class="callers">`agents`, `capabilities`, `critique`, `dashboard`, `detection`, `disclosure`, +10</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>storage</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">6</td>
+      <td class="num">39</td>
+      <td class="num">35</td>
+      <td class="callers">`agents`, `application`, `capabilities`, `chips`, `composition`, `dashboard`, +14</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>security</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">10</td>
+      <td class="num">40</td>
+      <td class="num">45</td>
+      <td class="callers">`agc`, `alternative-discoverer`, `aminet`, `atlas`, `cartridge`, `chips`, +31</td>
+    </tr>
+    <tr class="status-living">
+      <td><code>types</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span></td>
+      <td class="num">32</td>
+      <td class="num">82</td>
+      <td class="num">154</td>
+      <td class="callers">`ace`, `activation`, `agents`, `application`, `branches`, `bundles`, +51</td>
+    </tr>
+    <tr class="status-living allowlisted">
+      <td><code>amiga</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span> <span class="allowlist-tag">allowlisted</span></td>
+      <td class="num">87</td>
+      <td class="num">1</td>
+      <td class="num">43</td>
+      <td class="callers">`knowledge`</td>
+    </tr>
+    <tr class="status-living allowlisted">
+      <td><code>audio-engineering</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span> <span class="allowlist-tag">allowlisted</span></td>
+      <td class="num">15</td>
+      <td class="num">1</td>
+      <td class="num">2</td>
+      <td class="callers">`hardware-infrastructure`</td>
+    </tr>
+    <tr class="status-living allowlisted">
+      <td><code>bayes-ab</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span> <span class="allowlist-tag">allowlisted</span></td>
+      <td class="num">23</td>
+      <td class="num">1</td>
+      <td class="num">14</td>
+      <td class="callers">`ab-harness`</td>
+    </tr>
+    <tr class="status-living allowlisted">
+      <td><code>cache</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span> <span class="allowlist-tag">allowlisted</span></td>
+      <td class="num">8</td>
+      <td class="num">1</td>
+      <td class="num">5</td>
+      <td class="callers">`orchestration`</td>
+    </tr>
+    <tr class="status-living allowlisted">
+      <td><code>components</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span> <span class="allowlist-tag">allowlisted</span></td>
+      <td class="num">2</td>
+      <td class="num">1</td>
+      <td class="num">1</td>
+      <td class="callers">`security`</td>
+    </tr>
+    <tr class="status-living allowlisted">
+      <td><code>engines</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span> <span class="allowlist-tag">allowlisted</span></td>
+      <td class="num">16</td>
+      <td class="num">1</td>
+      <td class="num">10</td>
+      <td class="callers">`integration`</td>
+    </tr>
+    <tr class="status-living allowlisted">
+      <td><code>health-diagnostician</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span> <span class="allowlist-tag">allowlisted</span></td>
+      <td class="num">14</td>
+      <td class="num">1</td>
+      <td class="num">9</td>
+      <td class="callers">`alternative-discoverer`</td>
+    </tr>
+    <tr class="status-living allowlisted">
+      <td><code>projection</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span> <span class="allowlist-tag">allowlisted</span></td>
+      <td class="num">12</td>
+      <td class="num">1</td>
+      <td class="num">11</td>
+      <td class="callers">`langevin`</td>
+    </tr>
+    <tr class="status-living allowlisted">
+      <td><code>skill-isotropy</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span> <span class="allowlist-tag">allowlisted</span></td>
+      <td class="num">6</td>
+      <td class="num">1</td>
+      <td class="num">2</td>
+      <td class="callers">`sigreg`</td>
+    </tr>
+    <tr class="status-living allowlisted">
+      <td><code>skill-promotion</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span> <span class="allowlist-tag">allowlisted</span></td>
+      <td class="num">6</td>
+      <td class="num">1</td>
+      <td class="num">2</td>
+      <td class="callers">`ab-harness`</td>
+    </tr>
+    <tr class="status-living allowlisted">
+      <td><code>umwelt</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span> <span class="allowlist-tag">allowlisted</span></td>
+      <td class="num">13</td>
+      <td class="num">1</td>
+      <td class="num">8</td>
+      <td class="callers">`symbiosis`</td>
+    </tr>
+    <tr class="status-living allowlisted">
+      <td><code>lyapunov</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span> <span class="allowlist-tag">allowlisted</span></td>
+      <td class="num">9</td>
+      <td class="num">2</td>
+      <td class="num">10</td>
+      <td class="callers">`learnable-k_h`, `projection`</td>
+    </tr>
+    <tr class="status-living allowlisted">
+      <td><code>dependency-auditor</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span> <span class="allowlist-tag">allowlisted</span></td>
+      <td class="num">25</td>
+      <td class="num">4</td>
+      <td class="num">23</td>
+      <td class="callers">`alternative-discoverer`, `code-absorber`, `dependency-resolver`, `health-diagnostician`</td>
+    </tr>
+    <tr class="status-living allowlisted">
+      <td><code>ace</code></td>
+      <td><span class="badge" style="background:#22c55e">living</span> <span class="allowlist-tag">allowlisted</span></td>
+      <td class="num">12</td>
+      <td class="num">5</td>
+      <td class="num">9</td>
+      <td class="callers">`dead-zone`, `learnable-k_h`, `lyapunov`, `orchestration`, `projection`</td>
+    </tr>
+      </tbody>
+    </table>
+
+    <p class="meta">Sorted shelfware-risk first: isolated → test-only → living, then by real-caller count ascending. Allowlisted entries appear at the bottom of each status group with reduced opacity.</p>
+  </div>
+</body>
+</html>
