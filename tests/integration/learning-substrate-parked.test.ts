@@ -180,24 +180,35 @@ describe('reachability-v2 — control-theory island reachability (Ship 3.1, v1.4
   });
 });
 
-// The 14 reachability-only shelfware modules disposed via ALLOWLIST at v1.49.978
-// (the other two of the Ship-3.1 "16" were WIRED — git, skill).
+// The reachability-only shelfware modules disposed via ALLOWLIST at v1.49.978.
+// Ship 3.2 allowlisted 14; Ship 3.3 (v1.49.979) WIRED three of them — commands,
+// learn, scan-arxiv (the sc-learn/scan-arxiv CLI registration) — leaving 11 here.
+// (git + skill were the two of the Ship-3.1 "16" already WIRED at Ship 3.2.)
 const SHIP32_ALLOWLISTED = [
   'amiga',
   'audio-engineering',
   'bayes-ab',
   'cache',
-  'commands',
   'components',
   'dependency-auditor',
   'engines',
   'health-diagnostician',
-  'learn',
-  'scan-arxiv',
   'skill-isotropy',
   'skill-promotion',
   'umwelt',
 ] as const;
+
+// Ship 3.3 (v1.49.979) WIRE-cluster follow-up: registering the sc-learn +
+// scan-arxiv CLI surface flips these three modules reachableFromProduction.
+// scan-arxiv.ts is the over-determining root — dispatch → commands/scan-arxiv.ts
+// → scan-arxiv/bridge.ts → commands/sc-learn.ts → learn/* — so a single edge
+// flips all three; the `learn` command registration is the operator-chosen
+// first-class surface (and fixes the previously-dead bridge.ts run-ingestion.sh
+// line). Module-level reachable=true is coarse: learn/heuristics/* (6 files),
+// commands/{sc-install,sc-unlearn,security-init}, and scan-arxiv/{dedup-cli,
+// aggregate-generators,primitive-enrichment} remain unreachable (file-level
+// residual noted in docs/SHELFWARE-VERDICTS.md).
+const SHIP33_WIRED = ['commands', 'learn', 'scan-arxiv'] as const;
 
 describe('Ship 3.2 — reachability-only shelfware disposition (v1.49.978)', () => {
   const records = scan() as Array<{
@@ -226,7 +237,7 @@ describe('Ship 3.2 — reachability-only shelfware disposition (v1.49.978)', () 
     ).toEqual([]);
   });
 
-  it('ALLOWLIST — the 14 disposed modules carry the v978 provenance + dated gate and read allowlisted-unreachable', () => {
+  it('ALLOWLIST — the 11 still-parked modules carry the v978 provenance + dated gate and read allowlisted-unreachable', () => {
     const entries = allowlist();
     for (const mod of SHIP32_ALLOWLISTED) {
       const e = entries.find((x) => x.module === mod);
@@ -249,6 +260,23 @@ describe('Ship 3.2 — reachability-only shelfware disposition (v1.49.978)', () 
       expect(r, `${mod} must be in the scan`).toBeTruthy();
       expect(r!.reachableFromProduction, `${mod} must be reachable after the dispatch wire`).toBe(true);
       expect(r!.allowlisted, `${mod} should NOT need an allowlist (it is wired)`).toBe(false);
+    }
+  });
+
+  it('WIRE (Ship 3.3) — commands, learn, scan-arxiv reachable via the sc-learn/scan-arxiv CLI registration (no allowlist)', () => {
+    const entries = allowlist().map((e) => e.module);
+    for (const mod of SHIP33_WIRED) {
+      const r = byModule.get(mod);
+      expect(r, `${mod} must be in the scan`).toBeTruthy();
+      expect(
+        r!.reachableFromProduction,
+        `${mod} must be reachable after the Ship 3.3 dispatch wire (learn/arxiv commands)`,
+      ).toBe(true);
+      expect(r!.allowlisted, `${mod} should NOT read allowlisted in the live scan (it is wired)`).toBe(false);
+      expect(
+        entries,
+        `${mod} allowlist entry must be REMOVED at Ship 3.3 (mirrors git/skill — wired, not allowlisted)`,
+      ).not.toContain(mod);
     }
   });
 

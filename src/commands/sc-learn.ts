@@ -36,6 +36,7 @@ import { generateLearnedSkill } from '../learn/generators/skill-generator.js';
 import { generateAgent } from '../learn/generators/agent-generator.js';
 import { generateTeam } from '../learn/generators/team-generator.js';
 import { generateLearningReport } from '../learn/report-generator.js';
+import { isCliEntrypoint } from '../cli/entrypoint-guard.js';
 
 // === Exported Types ===
 
@@ -355,4 +356,147 @@ export async function scLearn(
     changeset,
     errors,
   };
+}
+
+// === CLI Shell ===
+//
+// Thin arg-parsing wrapper so `sc-learn` is invokable as a first-class command
+// (`skill-creator learn <source>`) and as a standalone `npx tsx` entrypoint —
+// the latter is what `src/scan-arxiv/bridge.ts` generates into run-ingestion.sh.
+// scLearn() above stays a pure library orchestrator; this is the only CLI layer.
+
+const LEARN_HELP = `skill-creator learn — ingest a source into the skill-knowledge pipeline
+
+Usage:
+  skill-creator learn <source> [options]
+
+Arguments:
+  <source>                 Path or URL to the document/repo to learn from
+
+Options:
+  --domain <name>          Domain hint for primitive extraction (e.g. arxiv-cs)
+  --depth <level>          Pipeline depth: shallow | standard | deep (default: standard)
+  --scope <a,b,c>          Comma-separated GitHub sub-paths to scope a repo source
+  --dry-run                Run the full pipeline but record no changeset
+  --yes, -y                Auto-approve the HITL hygiene gate WITH warnings
+                           (non-interactive; the caller accepts responsibility).
+                           Without it, internet/STRANGER content blocks for an
+                           interactive decision and no-ops on a non-TTY (safe).
+  --help, -h               Print this help text`;
+
+/**
+ * CLI entry point for `skill-creator learn`. Returns an exit code:
+ * 0 = success (incl. a deliberate HITL rejection), 1 = pipeline error, 2 = bad args.
+ */
+export async function main(argv: string[]): Promise<number> {
+  const options: ScLearnOptions = {};
+  let source: string | undefined;
+  let autoApprove = false;
+
+  for (let i = 0; i < argv.length; i++) {
+    const flag = argv[i];
+    const next = argv[i + 1];
+
+    switch (flag) {
+      case '--help':
+      case '-h':
+        console.log(LEARN_HELP);
+        return 0;
+
+      case '--domain':
+        if (!next || next.startsWith('--')) {
+          console.error('[learn] --domain requires a value');
+          return 2;
+        }
+        options.domain = next;
+        i++;
+        break;
+
+      case '--depth':
+        if (next !== 'shallow' && next !== 'standard' && next !== 'deep') {
+          console.error('[learn] --depth must be one of: shallow, standard, deep');
+          return 2;
+        }
+        options.depth = next;
+        i++;
+        break;
+
+      case '--scope':
+        if (!next || next.startsWith('--')) {
+          console.error('[learn] --scope requires a comma-separated value');
+          return 2;
+        }
+        options.scope = next.split(',').map((s) => s.trim()).filter(Boolean);
+        i++;
+        break;
+
+      case '--dry-run':
+        options.dryRun = true;
+        break;
+
+      case '--yes':
+      case '-y':
+      case '--approve-warnings':
+        autoApprove = true;
+        break;
+
+      default:
+        if (flag.startsWith('-')) {
+          console.error(`[learn] unknown flag: ${flag}`);
+          return 2;
+        }
+        if (source === undefined) {
+          source = flag;
+        } else {
+          console.error(`[learn] unexpected extra argument: ${flag}`);
+          return 2;
+        }
+        break;
+    }
+  }
+
+  if (!source) {
+    console.error(`[learn] missing <source>\n\n${LEARN_HELP}`);
+    return 2;
+  }
+
+  // STRANGER/internet content is never auto-approved by the gate (Three Laws);
+  // --yes injects an explicit auto-approve-with-warnings promptFn (mirroring the
+  // tools/ingest-*.mts callers), printing findings so they stay visible. Without
+  // --yes the gate falls back to its interactive default (safe no-op on non-TTY).
+  if (autoApprove) {
+    options.promptFn = async (message, choices) => {
+      console.log('[learn] --- sc:learn HITL gate findings ---');
+      console.log(message);
+      console.log(`[learn] --- auto-approving WITH warnings (--yes; choices were: ${choices.join('|')}) ---`);
+      return 'approved-with-warnings';
+    };
+  }
+
+  options.onProgress = (stage, detail) => {
+    process.stdout.write(`[learn] [${stage}] ${detail}\n`);
+  };
+
+  const result = await scLearn(source, options);
+
+  console.log(`\n[learn] success:            ${result.success}`);
+  console.log(`[learn] sessionId:          ${result.sessionId}`);
+  console.log(`[learn] primitives added:   ${result.report.primitivesAdded}`);
+  console.log(`[learn] primitives updated: ${result.report.primitivesUpdated}`);
+  console.log(`[learn] primitives skipped: ${result.report.primitivesSkipped}`);
+  console.log(`[learn] conflicts:          ${result.report.conflictsPresented}`);
+  console.log(`[learn] skills generated:   ${result.report.skillCount}`);
+  console.log(`[learn] agents generated:   ${result.report.agentCount}`);
+  console.log(`[learn] teams generated:    ${result.report.teamCount}`);
+  if (result.errors.length > 0) {
+    console.error(`[learn] errors: ${result.errors.length}`);
+    result.errors.forEach((e, idx) => console.error(`  [${idx}] ${e}`));
+  }
+
+  return result.success ? 0 : 1;
+}
+
+// Entrypoint guard — do NOT call main at module load time (import-safe).
+if (isCliEntrypoint(import.meta.url)) {
+  main(process.argv.slice(2)).then((code) => process.exit(code));
 }

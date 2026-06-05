@@ -136,12 +136,6 @@
       "addedBy": "v978 Ship 3.2 shelfware disposition (reachability-v2)"
     },
     {
-      "module": "commands",
-      "reason": "CLI command orchestrators (sc-learn knowledge-ingestion pipeline, scan-arxiv, sc-install, sc-unlearn, security-init). Consumed today via the tools/ingest-*.mts pipeline and standalone `npx tsx` entrypoints (shell-invoked, like the `initialization`/`retro`/`interpreter` allowlist entries), not via the npm-bin dispatch registry. First-class CLI registration is deferred to a follow-up ship. Generic resume (CLI registration of the sc-learn/scan-arxiv surface); retire-or-resume review by 2027-06-05.",
-      "addedAt": "v1.49.978",
-      "addedBy": "v978 Ship 3.2 shelfware disposition (reachability-v2)"
-    },
-    {
       "module": "components",
       "reason": "Security-dashboard UI render functions (SecurityPanel; Phase 372). Re-exported by src/security/index.ts, but that barrel has zero non-test production importers, so it is unreachable from the TS production graph; it is, however, the TS half of a TS<->Rust dashboard IPC contract mirrored in src-tauri/src/security/types.rs. Preserved (not retired) to avoid orphaning the cross-language contract; the Rust/Tauri layer is out of audit scope. Generic resume (wiring the security dashboard); retire-or-resume review by 2027-06-05.",
       "addedAt": "v1.49.978",
@@ -162,18 +156,6 @@
     {
       "module": "health-diagnostician",
       "reason": "Era-D ecosystem health-diagnosis substrate (classification, Python compat matrix, conflict detection, severity scoring; v1.49.549). Part of the same latent dependency island as the allowlisted dependency-auditor; its DiagnosisResult/DiagnosisReport contract types are consumed by the sibling alternative-discoverer module, so it is parked with the island rather than retired (a node-level retire would relocate its domain types into a kept consumer). Generic resume (a dependency-management consumer); retire-or-resume review by 2027-06-05.",
-      "addedAt": "v1.49.978",
-      "addedBy": "v978 Ship 3.2 shelfware disposition (reachability-v2)"
-    },
-    {
-      "module": "learn",
-      "reason": "Document-acquisition + processing pipeline for skill learning (acquire/sanitize/analyze/extract/dedup/merge/HITL-gate; v1.35.0). Consumed by src/commands/sc-learn.ts (value imports) + integration tests; reachable from production only once the sc-learn CLI is registered (deferred with `commands`). Tested, maintained latent infrastructure. Generic resume (sc-learn CLI registration); retire-or-resume review by 2027-06-05.",
-      "addedAt": "v1.49.978",
-      "addedBy": "v978 Ship 3.2 shelfware disposition (reachability-v2)"
-    },
-    {
-      "module": "scan-arxiv",
-      "reason": "ArXiv fetch/rank/ingest bridge for the sc-learn pipeline (v1.49.659). Consumed via src/commands/scan-arxiv.ts (a standalone `npx tsx` entrypoint) + five tools/*.mts ingestion scripts — shell-invoked, not via the npm-bin dispatch registry. First-class CLI registration is deferred with `commands`. Generic resume (scan-arxiv CLI registration); retire-or-resume review by 2027-06-05.",
       "addedAt": "v1.49.978",
       "addedBy": "v978 Ship 3.2 shelfware disposition (reachability-v2)"
     },

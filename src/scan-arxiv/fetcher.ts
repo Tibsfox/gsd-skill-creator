@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { XMLParser } from 'fast-xml-parser';
+import { ensureEgressAllowed, type EgressContext } from '../security/egress-context.js';
 import type { ArxivPaper, Fetcher } from './types.js';
 
 // ---------------------------------------------------------------------------
@@ -20,6 +21,15 @@ export interface FetcherOptions {
   timeoutMs?: number;
   /** default 3 with exponential backoff */
   retryAttempts?: number;
+  /**
+   * Tier-E egress chokepoint. When provided, every outbound arxiv API request
+   * is gated through `ensureEgressAllowed` before the fetch happens (the live
+   * fetch goes through an indirected `fetchFn`/`getFetch()` seam that the
+   * `fetch(`-grep egress audit cannot see, so the guard is threaded explicitly
+   * here). Omit for the historical permissive behavior (existing `npx tsx`
+   * callers + injected-fetch tests).
+   */
+  ctx?: EgressContext;
 }
 
 // ---------------------------------------------------------------------------
@@ -290,6 +300,7 @@ export function createFetcher(opts?: FetcherOptions): Fetcher {
   const noCache = opts?.noCache ?? false;
   const timeoutMs = opts?.timeoutMs ?? DEFAULT_TIMEOUT_MS;
   const retryAttempts = opts?.retryAttempts ?? DEFAULT_RETRY_ATTEMPTS;
+  const egressCtx = opts?.ctx;
 
   // Allow tests to inject a custom fetch function via a symbol on globalThis
   // (not part of the public API; only used in tests).
@@ -313,6 +324,9 @@ export function createFetcher(opts?: FetcherOptions): Fetcher {
     // rest of the query but restore `+` so the OR semantics survive.
     const safeQuery = encodeURIComponent(searchQuery).replace(/%2B/g, '+');
     const url = `${baseUrl}?search_query=${safeQuery}&${params.toString()}`;
+    // Tier-E egress gate (no-op when ctx is undefined). Hoisted BEFORE the
+    // network request so an EgressContextDenied surfaces before any bytes leave.
+    ensureEgressAllowed(egressCtx, 'scan-arxiv/fetcher', 'fetch', url);
     const xml = await fetchWithRetry(url, timeoutMs, retryAttempts, getFetch());
     return { xml, url };
   }

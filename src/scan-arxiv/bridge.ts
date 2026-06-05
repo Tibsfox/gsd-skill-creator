@@ -89,7 +89,7 @@ for i in "\${!ENTRIES[@]}"; do
     esac
   fi
 
-  npx tsx src/commands/sc-learn.ts "$PDF_URL" --domain arxiv-cs --depth standard
+  npx tsx src/commands/sc-learn.ts "$PDF_URL" --domain arxiv-cs --depth standard --yes
   # After success, append the ID to seen-ids.json
   npx tsx src/scan-arxiv/dedup-cli.ts mark-seen "$ARXIV_ID" "{{RUN_ID}}/report.md"
 done

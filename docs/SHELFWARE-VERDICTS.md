@@ -64,13 +64,13 @@ entry, or the deletion commit.
 | `audio-engineering` | ALLOWLISTED | v1.49.978 | allowlist `audio-engineering` entry | Ship 3.2. Educational content cartridge (v1.49.16) — content cluster like `holomorphic`; type-only enrichment refs + one test, both unreachable. |
 | `bayes-ab` | ALLOWLISTED | v1.49.978 | allowlist `bayes-ab` entry | Ship 3.2. Bayesian A/B substrate (IPM-BOED + Wasserstein per arXiv:2604.21849); reachable only via `ab-harness/wasserstein-boed.ts`, which the shipped sign-test coordinator doesn't invoke. Reference substrate like tonnetz/wasserstein-hebbian. |
 | `cache` | ALLOWLISTED | v1.49.978 | allowlist `cache` entry | Ship 3.2. M5 orchestration substrate (PrefixIndex/StepGraph/Preloader; JP-007); reachable only via the unexported, test-only `orchestration/draft-verify-router.ts` (the unwired predictive-skill-loader frontier). Wiring would manufacture a path to dormant code. |
-| `commands` | ALLOWLISTED | v1.49.978 | allowlist `commands` entry | Ship 3.2. CLI orchestrators (sc-learn/scan-arxiv/sc-install/sc-unlearn/security-init) consumed via `tools/ingest-*.mts` + standalone `npx tsx` (shell-invoked, like `initialization`/`retro`/`interpreter`); first-class dispatch registration deferred to a follow-up. |
+| `commands` | WIRED | v1.49.979 | `src/cli/dispatch.ts` `learn` + `arxiv`/`scan-arxiv` entries; `src/cli/commands/arxiv.ts`; `src/commands/sc-learn.ts` `main()` | Ship 3.3 (WIRE-cluster follow-up to Ship 3.2's deferral). Registered the sc-learn + scan-arxiv CLI surface into dispatch: `skill-creator learn <source>` (new `main()` arg-parser added to sc-learn.ts) + `skill-creator arxiv`. Module reachable from `src/cli.ts`. **Coarse flip:** only `sc-learn.ts` + `scan-arxiv.ts` of the 5 module files become reachable; `sc-install.ts`/`sc-unlearn.ts`/`security-init.ts` stay file-level unreachable (Ship 3.3 note below). |
 | `components` | ALLOWLISTED | v1.49.978 | allowlist `components` entry | Ship 3.2. SecurityPanel dashboard render fns (Phase 372); re-exported by `security/index.ts` (zero non-test importers) but TS half of a TS↔Rust IPC contract mirrored in `src-tauri/src/security/types.rs`. Preserved (not retired) to avoid orphaning the cross-language contract (Rust/Tauri out of scope). |
 | `dependency-auditor` | ALLOWLISTED | v1.49.978 | allowlist `dependency-auditor` entry | Ship 3.2. Era-D dependency-audit substrate; **not shelfware** — its npm/cargo/conda/pypi/rubygems adapters carry wired EgressContext/ProcessContext security chokepoints (v1.49.806-809). Retiring would delete egress enforcement. |
 | `engines` | ALLOWLISTED | v1.49.978 | allowlist `engines` entry | Ship 3.2. Math-foundations engine substrate (v1.49.570); reachable only via the test-only `integration/mfe-skill-type.ts` chain, explicit future activation path (`wireMfeIntoExistingPipeline`). |
 | `health-diagnostician` | ALLOWLISTED | v1.49.978 | allowlist `health-diagnostician` entry | Ship 3.2. Era-D health-diagnosis substrate; part of the same latent dependency island as `dependency-auditor`. Its `DiagnosisResult`/`DiagnosisReport` contract types are consumed by the kept `alternative-discoverer`, so parked with the island rather than retired (a node-level retire would relocate domain types into a kept consumer). |
-| `learn` | ALLOWLISTED | v1.49.978 | allowlist `learn` entry | Ship 3.2. Document-acquisition/processing pipeline (v1.35.0) consumed by `commands/sc-learn.ts` (value imports); reachable from production once the sc-learn CLI is registered (deferred with `commands`). Tested, maintained infrastructure. |
-| `scan-arxiv` | ALLOWLISTED | v1.49.978 | allowlist `scan-arxiv` entry | Ship 3.2. ArXiv fetch/rank/ingest bridge (v1.49.659) consumed via the standalone `commands/scan-arxiv.ts` `npx tsx` entrypoint + five `tools/*.mts` scripts; first-class CLI registration deferred with `commands`. |
+| `learn` | WIRED | v1.49.979 | `src/commands/sc-learn.ts` `main()`; `src/cli/dispatch.ts` `learn` entry | Ship 3.3. The sc-learn `main()` arg-parser value-imports all 14 `src/learn/*` pipeline stages, so registering `skill-creator learn` flips the module reachable. `--yes` injects an auto-approve-with-warnings promptFn (mirrors `tools/ingest-*.mts`); without it the HITL gate stays interactive (safe no-op on non-TTY, never auto-approves STRANGER content per the Three Laws). **Coarse flip:** `learn/heuristics/*` (6 files, zero non-test importers) remain unreachable. |
+| `scan-arxiv` | WIRED | v1.49.979 | `src/cli/commands/arxiv.ts`; `src/cli/dispatch.ts` `arxiv`/`scan-arxiv` entry; `src/scan-arxiv/fetcher.ts` EgressContext | Ship 3.3. Registered `skill-creator arxiv` via a safe-default router: no-flag runs the LOCAL embedding ranker (`--judge-backend embedding-only`) — no LLM billing, no `claude -p` subprocess; `--rank` opts into the cost-bearing `auto` backend. The live arxiv egress is now gated through a threaded `EgressContext` (arxiv-host allow-list) in the fetcher, matching the install-remote chokepoint standard (the indirected `getFetch()` seam is invisible to the `fetch(`-grep audit, so the guard is explicit). **Coarse flip:** `dedup-cli.ts`/`aggregate-generators.ts`/`primitive-enrichment.ts` stay file-level unreachable (`dedup-cli` is a separate `process.argv` shell entrypoint). |
 | `skill-isotropy` | ALLOWLISTED | v1.49.978 | allowlist `skill-isotropy` entry | Ship 3.2. Skill-Space Isotropy Audit (SSIA, LEJEPA Half-B, Phase 728); read-only default-OFF audit substrate consumed only by `sigreg` (test-only). Wiring a CLI would contradict the default-OFF design. |
 | `skill-promotion` | ALLOWLISTED | v1.49.978 | allowlist `skill-promotion` entry | Ship 3.2. Thermodynamic ROI gate (JP-005 / arXiv:2604.20897, Wave 2); consumed only by the Wave-3 `ab-harness/bo-autotune.ts` skeleton (test-only); meant to be consumed by the BO loop, not a CLI. |
 | `umwelt` | ALLOWLISTED | v1.49.978 | allowlist `umwelt` entry | Ship 3.2. M7 Umwelt core Living-Sensoria substrate (v1.49.640/647); type-only re-exports in `types/index.ts` (safe); only impl consumer (`symbiosis/m7-adapter.ts`) is test-only. |
@@ -107,6 +107,27 @@ v786 triage, finally resolved). After this ship the generated baseline's `## Liv
 unreachable from production` section contains **zero non-allowlisted rows** — the
 reachability-only shelfware set is empty. This invariant is pinned by the Ship 3.2
 drift-guard block in `tests/integration/learning-substrate-parked.test.ts`.
+
+**Ship 3.3 — CLOSED (v1.49.979):** the WIRE-cluster follow-up Ship 3.2 explicitly
+deferred. Registered the sc-learn + scan-arxiv CLI surface into dispatch, flipping
+**3** of Ship 3.2's 14 ALLOWLISTED modules to **WIRED** — `commands`, `learn`,
+`scan-arxiv` (allowlist 32→29; the Ship 3.2 ALLOWLIST drift-guard set 14→11). The
+import closure is a directional chain — dispatch → `commands/scan-arxiv.ts` →
+`scan-arxiv/bridge.ts` → `commands/sc-learn.ts` → `learn/*` — so registering
+`scan-arxiv` alone over-determines all three; the `learn` command is the
+operator-chosen first-class surface and also repairs the previously-dead
+`bridge.ts` `run-ingestion.sh` line (the generated `npx tsx … sc-learn.ts` call now
+resolves to a real entrypoint, with `--yes` so it doesn't double-prompt over the
+script's own `read -rp` gate). scan-arxiv was wired **safe-default + egress-guarded**
+per the operator decision (local rank unless `--rank`; arxiv-host EgressContext).
+**Known file-level residual (module-level `reachable=true` masks it):** within the
+now-reachable modules, `learn/heuristics/*` (6 files, zero non-test importers),
+`commands/{sc-install,sc-unlearn,security-init}.ts`, and
+`scan-arxiv/{dedup-cli,aggregate-generators,primitive-enrichment}.ts` remain
+file-level unreachable — a future file-granularity disposition candidate, NOT a
+module-level shelfware row. (The stale `initialization` allowlist entry — `src/initialization/`
+is `isolated`/unreachable with zero importers — is a separate adjacent retire
+candidate, left out of Ship 3.3 scope.)
 
 ## Open candidates
 

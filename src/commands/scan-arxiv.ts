@@ -11,6 +11,21 @@ import { parseArgv, resolveOptions, formatHelpText } from '../scan-arxiv/options
 import { createFetcher } from '../scan-arxiv/fetcher.js';
 import { createRanker } from '../scan-arxiv/ranker.js';
 import { isCliEntrypoint } from '../cli/entrypoint-guard.js';
+import {
+  NULL_EGRESS_AUDIT_SINK,
+  type EgressContext,
+} from '../security/egress-context.js';
+
+/**
+ * Egress allow-list for the arxiv fetch. The fetcher only ever reaches the
+ * arxiv export API host; restricting egress to arxiv.org/export.arxiv.org
+ * matches the install-remote chokepoint standard (skill-installer threads its
+ * own EgressContext) and denies any redirected/hijacked host before bytes leave.
+ */
+const ARXIV_EGRESS_CTX: EgressContext = {
+  allowList: [/^https?:\/\/export\.arxiv\.org\//, /^https?:\/\/arxiv\.org\//],
+  audit: NULL_EGRESS_AUDIT_SINK,
+};
 
 // Wave 2A delivers bridge.ts in parallel with this file.
 // If bridge.ts does not exist yet (parallel wave not landed), the import below
@@ -53,7 +68,7 @@ export async function main(
     `categories=${resolved.categories.join(',')}`,
   );
 
-  const fetcher = createFetcher({ noCache: resolved.noCache });
+  const fetcher = createFetcher({ noCache: resolved.noCache, ctx: ARXIV_EGRESS_CTX });
   const papers = await fetcher.fetchMonth(resolved.month, resolved.categories);
   console.log(`[scan-arxiv] fetched ${papers.length} papers`);
 

@@ -16,6 +16,8 @@ import { rollbackCommand } from './commands/rollback.js';
 import { skillCommand } from './commands/skill.js';
 import { gitCommand } from './commands/git.js';
 import { skillInventoryCommand } from './commands/skill-inventory.js';
+import { arxivCommand } from './commands/arxiv.js';
+import { main as learnCommand } from '../commands/sc-learn.js';
 import { printHelp } from './help.js';
 import { createStores, createApplicationContext } from '../index.js';
 import { createSkillWorkflow } from '../workflows/create-skill-workflow.js';
@@ -168,6 +170,12 @@ export const REGISTRY: readonly CommandEntry[] = [
   } },
   { aliases: ['skill-inventory', 'inventory', 'inv'], handler: async () => {
     process.exitCode = await skillInventoryCommand();
+  } },
+  { aliases: ['learn'], handler: async (ctx) => {
+    process.exitCode = await learnCommand(ctx.args.slice(1));
+  } },
+  { aliases: ['arxiv', 'scan-arxiv'], handler: async (ctx) => {
+    process.exitCode = await arxivCommand(ctx.args.slice(1));
   } },
 
   // ---- pure-dispatch with own arg slice ----
