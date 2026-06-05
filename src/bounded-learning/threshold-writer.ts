@@ -17,14 +17,56 @@ import type {
   CalibratableThreshold,
   CalibrationRecommendation,
 } from './types.js';
+import {
+  DEFAULT_OBSERVATION_RETENTION_EVENTS_PATH,
+  readObservationRetentionEvents,
+} from './observation-retention-events.js';
 
 /**
  * Outcome of a `applyRecommendation` call.
+ *
+ * - `refused` (v1.49.982): a change WAS recommended but a safety guard blocked
+ *   the apply (distinct from `noop`, which means no change was recommended).
  */
 export type ApplyOutcome =
   | { kind: 'noop'; reason: string }
+  | { kind: 'refused'; reason: string }
   | { kind: 'dry-run'; proposedConfig: unknown; proposedValue: number }
   | { kind: 'applied'; previousValue: number; newValue: number; configPath: string };
+
+/**
+ * Defense-in-depth guard (v1.49.982 — Ship 5.2 / Option D).
+ *
+ * The `observation.retention_days` auto-emit signal was degenerate (one-way
+ * `too_aggressive`) until the v982 substrate fix. Applying a calibration
+ * recommendation against a one-directional signal raises the threshold as if
+ * it were learned evidence — a "false vindication worse than null" (see
+ * `docs/retention-substrate-outcome-driven-debt.md`). This guard converts the
+ * doc-discipline rule "never `--apply` until the signal is verifiably
+ * bidirectional" into enforced code: the apply is refused unless the on-disk
+ * events contain BOTH `too_lax` AND `too_aggressive` (so it also blocks a
+ * future all-`too_lax` degenerate corpus, not just today's all-`too_aggressive`
+ * one). Dry-run is intentionally NOT guarded — it is the intended post-fix path.
+ *
+ * Placed at the `applyRecommendation` chokepoint so it covers the CLI,
+ * `--watch` mode, and any future scheduler in one spot.
+ *
+ * @returns a refusal reason string when the apply must be blocked, else `null`.
+ */
+async function retentionApplyRefusal(eventsPath: string): Promise<string | null> {
+  const events = await readObservationRetentionEvents(eventsPath);
+  const hasTooLax = events.some((e) => e.kind === 'too_lax');
+  const hasTooAggressive = events.some((e) => e.kind === 'too_aggressive');
+  if (hasTooLax && hasTooAggressive) return null;
+  return (
+    `Refusing --apply for observation.retention_days: the on-disk retention ` +
+    `signal is not verifiably bidirectional (too_lax=${hasTooLax}, ` +
+    `too_aggressive=${hasTooAggressive}). Applying on a one-directional signal ` +
+    `is a false vindication — see docs/retention-substrate-outcome-driven-debt.md. ` +
+    `Accumulate both polarities (the v982 outcome-driven substrate emits them ` +
+    `from real sweeps) before applying.`
+  );
+}
 
 /**
  * Default skill-creator config path. Tests override via `configPath`.
@@ -105,7 +147,7 @@ async function atomicWriteJson(path: string, value: unknown): Promise<void> {
  */
 export async function applyRecommendation(
   recommendation: CalibrationRecommendation,
-  options: { apply?: boolean; configPath?: string } = {},
+  options: { apply?: boolean; configPath?: string; retentionEventsPath?: string } = {},
 ): Promise<ApplyOutcome> {
   const apply = options.apply ?? false;
   const configPath = options.configPath ?? DEFAULT_CONFIG_PATH;
@@ -153,6 +195,17 @@ export async function applyRecommendation(
       proposedConfig,
       proposedValue: recommendation.proposedValue,
     };
+  }
+
+  // Defense-in-depth: refuse to APPLY a retention change on a one-directional
+  // signal (v982 / Ship 5.2 Option D). Dry-run above is unaffected.
+  if (recommendation.threshold === 'observation.retention_days') {
+    const refusal = await retentionApplyRefusal(
+      options.retentionEventsPath ?? DEFAULT_OBSERVATION_RETENTION_EVENTS_PATH,
+    );
+    if (refusal !== null) {
+      return { kind: 'refused', reason: refusal };
+    }
   }
 
   await atomicWriteJson(configPath, proposedConfig);

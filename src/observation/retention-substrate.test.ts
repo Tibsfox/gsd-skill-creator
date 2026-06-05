@@ -3,7 +3,8 @@ import { mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
-import { runObservationRetentionSweep } from './retention-substrate.js';
+import { runObservationRetentionSweep, deriveAgePressureKind, DEFAULT_AGE_PRESSURE_BAND } from './retention-substrate.js';
+import type { PruneStats } from './retention-manager.js';
 import { readObservationRetentionEvents } from '../bounded-learning/observation-retention-events.js';
 
 describe('runObservationRetentionSweep (v1.49.891 substrate auto-emit)', () => {
@@ -56,7 +57,9 @@ describe('runObservationRetentionSweep (v1.49.891 substrate auto-emit)', () => {
     expect(result.retentionDays).toBe(30);
   });
 
-  it('auto-emits an observation-retention event after prune (default kind too_aggressive)', async () => {
+  it('derives too_aggressive when the sweep drops the entire corpus (v982)', async () => {
+    // One entry, 100 days old, retention_days 30 → it is pruned and nothing is
+    // retained. retainedCount 0 + prunedCount > 0 ⇒ the window dropped everything.
     writeFileSync(
       jsonlPath,
       JSON.stringify({ timestamp: Date.now() - 100 * 24 * 60 * 60 * 1000, content: 'old' }) + '\n',
@@ -75,13 +78,16 @@ describe('runObservationRetentionSweep (v1.49.891 substrate auto-emit)', () => {
     expect(events).toHaveLength(1);
     expect(events[0].kind).toBe('too_aggressive');
     expect(events[0].droppedCount).toBe(1);
+    expect(events[0].retainedCount).toBe(0);
     expect(events[0].retentionDays).toBe(30);
   });
 
-  it('auto-emit defaults to too_aggressive (conservative bias toward keeping more data)', async () => {
-    writeFileSync(jsonlPath, '', 'utf8'); // empty file → 0 pruned
+  it('emits NOTHING on an empty corpus (neutral / no basis — v982)', async () => {
+    // Empty file → 0 pruned, 0 retained → no age basis → in-band/neutral.
+    // (Pre-v982 this emitted a degenerate too_aggressive unconditionally.)
+    writeFileSync(jsonlPath, '', 'utf8');
 
-    await runObservationRetentionSweep(
+    const result = await runObservationRetentionSweep(
       { observation: { retention_days: 90 } },
       jsonlPath,
       { eventsPath },
@@ -89,10 +95,88 @@ describe('runObservationRetentionSweep (v1.49.891 substrate auto-emit)', () => {
 
     await waitForAutoEmit();
 
+    expect(result.emittedKind).toBeNull();
+    const events = await readObservationRetentionEvents(eventsPath);
+    expect(events).toEqual([]);
+  });
+
+  it('derives too_lax when the surviving corpus is far younger than the window (v982)', async () => {
+    // Three entries all ~5 days old, retention_days 90 → all retained, none
+    // pruned. R = 5/90 ≈ 0.056 < band.low (0.5) ⇒ window over-generous.
+    const fiveDaysAgo = Date.now() - 5 * 24 * 60 * 60 * 1000;
+    writeFileSync(
+      jsonlPath,
+      [
+        JSON.stringify({ timestamp: fiveDaysAgo, content: 'a' }),
+        JSON.stringify({ timestamp: fiveDaysAgo, content: 'b' }),
+        JSON.stringify({ timestamp: fiveDaysAgo, content: 'c' }),
+      ].join('\n') + '\n',
+      'utf8',
+    );
+
+    const result = await runObservationRetentionSweep(
+      { observation: { retention_days: 90 } },
+      jsonlPath,
+      { eventsPath },
+    );
+
+    await waitForAutoEmit();
+
+    expect(result.emittedKind).toBe('too_lax');
+    const events = await readObservationRetentionEvents(eventsPath);
+    expect(events).toHaveLength(1);
+    expect(events[0].kind).toBe('too_lax');
+    expect(events[0].droppedCount).toBe(0);
+    expect(events[0].retainedCount).toBe(3);
+  });
+
+  it('derives too_aggressive when dropping at a packed window edge (v982)', async () => {
+    // One entry 85 days old (retained), one 100 days old (dropped), retention 90.
+    // oldest retained ≈ 85 → R ≈ 0.944 ≥ band.high (0.9) AND prunedCount > 0.
+    writeFileSync(
+      jsonlPath,
+      [
+        JSON.stringify({ timestamp: Date.now() - 85 * 24 * 60 * 60 * 1000, content: 'edge' }),
+        JSON.stringify({ timestamp: Date.now() - 100 * 24 * 60 * 60 * 1000, content: 'old' }),
+      ].join('\n') + '\n',
+      'utf8',
+    );
+
+    const result = await runObservationRetentionSweep(
+      { observation: { retention_days: 90 } },
+      jsonlPath,
+      { eventsPath },
+    );
+
+    await waitForAutoEmit();
+
+    expect(result.emittedKind).toBe('too_aggressive');
     const events = await readObservationRetentionEvents(eventsPath);
     expect(events).toHaveLength(1);
     expect(events[0].kind).toBe('too_aggressive');
-    expect(events[0].droppedCount).toBe(0);
+    expect(events[0].droppedCount).toBe(1);
+    expect(events[0].retainedCount).toBe(1);
+  });
+
+  it('emits NOTHING for an in-band sweep (R between low and high — v982)', async () => {
+    // One entry 60 days old, retention 90 → R = 0.667 ∈ [0.5, 0.9), no drops.
+    writeFileSync(
+      jsonlPath,
+      JSON.stringify({ timestamp: Date.now() - 60 * 24 * 60 * 60 * 1000, content: 'mid' }) + '\n',
+      'utf8',
+    );
+
+    const result = await runObservationRetentionSweep(
+      { observation: { retention_days: 90 } },
+      jsonlPath,
+      { eventsPath },
+    );
+
+    await waitForAutoEmit();
+
+    expect(result.emittedKind).toBeNull();
+    const events = await readObservationRetentionEvents(eventsPath);
+    expect(events).toEqual([]);
   });
 
   it('respects autoEmit: false (no event written)', async () => {
@@ -196,5 +280,62 @@ describe('runObservationRetentionSweep (v1.49.891 substrate auto-emit)', () => {
     // One recent entry, no threaded cap → nothing pruned; effective cap is 100.
     expect(result.prunedCount).toBe(0);
     expect(result.maxEntries).toBe(100);
+  });
+});
+
+describe('deriveAgePressureKind (v1.49.982 — outcome-driven band)', () => {
+  const stats = (over: Partial<PruneStats>): PruneStats => ({
+    prunedCount: 0,
+    retainedCount: 0,
+    oldestRetainedAgeDays: null,
+    ...over,
+  });
+
+  it('empty corpus (0 retained, 0 pruned) → null (neutral)', () => {
+    expect(deriveAgePressureKind(stats({}), 90)).toBeNull();
+  });
+
+  it('dropped the entire corpus (0 retained, >0 pruned) → too_aggressive', () => {
+    expect(deriveAgePressureKind(stats({ prunedCount: 3 }), 90)).toBe('too_aggressive');
+  });
+
+  it('packed edge (R ≥ high) with drops → too_aggressive', () => {
+    // 85/90 ≈ 0.944 ≥ 0.9
+    expect(
+      deriveAgePressureKind(stats({ prunedCount: 1, retainedCount: 2, oldestRetainedAgeDays: 85 }), 90),
+    ).toBe('too_aggressive');
+  });
+
+  it('packed edge (R ≥ high) but NO drops → null (perfect fit, not aggressive)', () => {
+    expect(
+      deriveAgePressureKind(stats({ prunedCount: 0, retainedCount: 2, oldestRetainedAgeDays: 88 }), 90),
+    ).toBeNull();
+  });
+
+  it('young corpus (R < low) → too_lax', () => {
+    // 5/90 ≈ 0.056 < 0.5
+    expect(
+      deriveAgePressureKind(stats({ prunedCount: 0, retainedCount: 3, oldestRetainedAgeDays: 5 }), 90),
+    ).toBe('too_lax');
+  });
+
+  it('in-band (low ≤ R < high) → null (neutral)', () => {
+    // 60/90 ≈ 0.667 ∈ [0.5, 0.9)
+    expect(
+      deriveAgePressureKind(stats({ prunedCount: 0, retainedCount: 1, oldestRetainedAgeDays: 60 }), 90),
+    ).toBeNull();
+  });
+
+  it('non-positive retention_days → null (no denominator)', () => {
+    expect(
+      deriveAgePressureKind(stats({ retainedCount: 1, oldestRetainedAgeDays: 5 }), 0),
+    ).toBeNull();
+  });
+
+  it('honors a custom band', () => {
+    const s = stats({ prunedCount: 0, retainedCount: 2, oldestRetainedAgeDays: 30 });
+    // 30/90 ≈ 0.333: too_lax under default low 0.5, neutral under low 0.2.
+    expect(deriveAgePressureKind(s, 90, DEFAULT_AGE_PRESSURE_BAND)).toBe('too_lax');
+    expect(deriveAgePressureKind(s, 90, { low: 0.2, high: 0.9 })).toBeNull();
   });
 });

@@ -223,7 +223,7 @@ async function loadConfig(path: string): Promise<unknown | null> {
 
 function renderText(
   rec: CalibrationRecommendation,
-  applied: 'dry-run' | 'applied' | 'noop',
+  applied: 'dry-run' | 'applied' | 'noop' | 'refused',
   applyReason: string | null,
 ): void {
   const source = observationSourceFor(rec.threshold);
@@ -249,6 +249,8 @@ function renderText(
     p.log.success(`Applied: ${rec.threshold} = ${rec.proposedValue}`);
   } else if (applied === 'dry-run') {
     p.log.info(`Dry-run: pass --apply to write skill-creator.json`);
+  } else if (applied === 'refused') {
+    p.log.warn(applyReason ?? `Refused: ${rec.threshold} apply blocked by safety guard.`);
   } else if (applyReason) {
     p.log.info(applyReason);
   }
@@ -256,7 +258,7 @@ function renderText(
 
 function renderQuiet(
   rec: CalibrationRecommendation,
-  applied: 'dry-run' | 'applied' | 'noop',
+  applied: 'dry-run' | 'applied' | 'noop' | 'refused',
 ): void {
   console.log(
     [
@@ -275,7 +277,7 @@ function renderQuiet(
 
 function renderJson(
   rec: CalibrationRecommendation,
-  applied: 'dry-run' | 'applied' | 'noop',
+  applied: 'dry-run' | 'applied' | 'noop' | 'refused',
   applyReason: string | null,
 ): void {
   const source = observationSourceFor(rec.threshold);
@@ -324,6 +326,12 @@ interface TickContext {
   json: boolean;
   quiet: boolean;
   noAuditLog: boolean;
+  /**
+   * Override the observation-retention events path (used for BOTH loading
+   * retention observations and the v982 bidirectional apply-guard). Defaults
+   * to the module default; injected by tests. (v1.49.982)
+   */
+  retentionEventsPath?: string;
 }
 
 /**
@@ -352,23 +360,46 @@ async function runCalibrationTick(ctx: TickContext): Promise<number> {
     return 2;
   }
 
-  const observations = await loadObservationsForThreshold(ctx.threshold, {
+  const loadOptions: {
+    suggestionsPath: string;
+    tokenBudgetEventsPath: string;
+    tokenBudgetMaxEventsPath: string;
+    observationRetentionEventsPath?: string;
+  } = {
     suggestionsPath: ctx.suggestionsPath,
     tokenBudgetEventsPath: ctx.tokenBudgetEventsPath,
     tokenBudgetMaxEventsPath: ctx.tokenBudgetMaxEventsPath,
-  });
+  };
+  if (ctx.retentionEventsPath !== undefined) {
+    loadOptions.observationRetentionEventsPath = ctx.retentionEventsPath;
+  }
+  const observations = await loadObservationsForThreshold(ctx.threshold, loadOptions);
 
   const loopConfig: { alpha?: number; lambda?: number } = {};
   if (ctx.alpha !== undefined) loopConfig.alpha = ctx.alpha;
   if (ctx.lambda !== undefined) loopConfig.lambda = ctx.lambda;
   const recommendation = runCalibrationLoop(ctx.threshold, currentValue, observations, loopConfig);
 
-  const outcome = await applyRecommendation(recommendation, { apply: ctx.apply, configPath: ctx.configPath });
-  const appliedKind: 'dry-run' | 'applied' | 'noop' =
+  const applyOptions: { apply: boolean; configPath: string; retentionEventsPath?: string } = {
+    apply: ctx.apply,
+    configPath: ctx.configPath,
+  };
+  if (ctx.retentionEventsPath !== undefined) {
+    applyOptions.retentionEventsPath = ctx.retentionEventsPath;
+  }
+  const outcome = await applyRecommendation(recommendation, applyOptions);
+  // `refused` (v982): a change was recommended but a safety guard blocked the
+  // write. Recorded as a first-class audit/render state (forensically distinct
+  // from a plain noop), with the reason surfaced and a non-zero exit so
+  // scripts/CI catch it.
+  const refused = outcome.kind === 'refused';
+  const appliedKind: 'dry-run' | 'applied' | 'noop' | 'refused' =
     outcome.kind === 'applied' ? 'applied'
       : outcome.kind === 'dry-run' ? 'dry-run'
+      : outcome.kind === 'refused' ? 'refused'
       : 'noop';
-  const applyReason = outcome.kind === 'noop' ? outcome.reason : null;
+  const applyReason =
+    outcome.kind === 'noop' || outcome.kind === 'refused' ? outcome.reason : null;
 
   if (!ctx.noAuditLog) {
     const entry = buildAuditLogEntry(recommendation, appliedKind);
@@ -386,7 +417,7 @@ async function runCalibrationTick(ctx: TickContext): Promise<number> {
   } else {
     renderText(recommendation, appliedKind, applyReason);
   }
-  return 0;
+  return refused ? 1 : 0;
 }
 
 // ============================================================================
@@ -396,6 +427,12 @@ async function runCalibrationTick(ctx: TickContext): Promise<number> {
 export interface BoundedLearningCommandOptions {
   /** Abort signal for --watch mode cooperative shutdown (test-only hook). */
   watchSignal?: AbortSignal;
+  /**
+   * Override the observation-retention events path for both the load side and
+   * the v982 bidirectional apply-guard (test-only hook; production reads the
+   * module default at `.planning/patterns/observation-retention-events.jsonl`).
+   */
+  retentionEventsPath?: string;
 }
 
 export async function boundedLearningCommand(args: string[], options: BoundedLearningCommandOptions = {}): Promise<number> {
@@ -513,6 +550,7 @@ export async function boundedLearningCommand(args: string[], options: BoundedLea
     json,
     quiet,
     noAuditLog,
+    ...(options.retentionEventsPath !== undefined ? { retentionEventsPath: options.retentionEventsPath } : {}),
   };
 
   // ── Watch mode (v1.49.800) ─────────────────────────────────────────────

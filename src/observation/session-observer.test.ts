@@ -644,7 +644,18 @@ describe('SessionObserver', () => {
       await new Promise<void>((resolve) => setTimeout(resolve, 50));
     }
 
-    it('auto-emits an observation-retention event when retention_days is threaded', async () => {
+    it('auto-emits too_lax when the swept corpus is far younger than the window (v982)', async () => {
+      // Seed sessions.jsonl with a young corpus (~5 days old). retention_days 90
+      // ⇒ oldest-retained R ≈ 0.056 < band.low (0.5) ⇒ window over-generous ⇒
+      // too_lax. (Pre-v982 the substrate emitted a hardcoded too_aggressive
+      // regardless of the actual corpus — the degenerate signal.)
+      const sessionsFile = join(patternsDir, 'sessions.jsonl');
+      const fiveDaysAgo = Date.now() - 5 * 24 * 60 * 60 * 1000;
+      const seeded = [0, 1, 2].map((i) =>
+        JSON.stringify({ timestamp: fiveDaysAgo, sessionId: `seed-${i}`, tier: 'persistent' }),
+      );
+      await writeFile(sessionsFile, seeded.join('\n') + '\n');
+
       const observer = new SessionObserver(patternsDir, undefined, undefined, 90);
       await runSession(observer, 'retention-wire-on');
 
@@ -653,12 +664,42 @@ describe('SessionObserver', () => {
 
       expect(events.length).toBeGreaterThanOrEqual(1);
       const event = events[events.length - 1];
-      // Default substrate polarity: conservative bias toward keeping more.
-      expect(event.kind).toBe('too_aggressive');
+      expect(event.kind).toBe('too_lax');
       expect(event.retentionDays).toBe(90);
-      // A fresh sweep drops nothing, but the event MUST still be emitted so the
-      // calibration loop sees per-sweep traffic.
       expect(typeof event.droppedCount).toBe('number');
+      expect(typeof event.retainedCount).toBe('number');
+    });
+
+    it('auto-emits too_aggressive when dropping at a packed window edge (v982)', async () => {
+      const sessionsFile = join(patternsDir, 'sessions.jsonl');
+      const eventsPath = join(patternsDir, 'observation-retention-events.jsonl');
+      const observer = new SessionObserver(patternsDir, undefined, undefined, 90);
+
+      // (1) Packed edge: 85-day entry (retained) + 100-day entry (dropped),
+      // retention 90 ⇒ oldest retained ≈ 85, R ≈ 0.944 ≥ band.high (0.9) AND a
+      // drop occurred ⇒ too_aggressive.
+      await writeFile(
+        sessionsFile,
+        [
+          JSON.stringify({ timestamp: Date.now() - 85 * 24 * 60 * 60 * 1000, sessionId: 'edge', tier: 'persistent' }),
+          JSON.stringify({ timestamp: Date.now() - 100 * 24 * 60 * 60 * 1000, sessionId: 'old', tier: 'persistent' }),
+        ].join('\n') + '\n',
+      );
+      await runSession(observer, 'retention-wire-aggressive');
+      let events = await readObservationRetentionEvents(eventsPath);
+      expect(events.length).toBeGreaterThanOrEqual(1);
+      expect(events[events.length - 1].kind).toBe('too_aggressive');
+
+      // (2) Contrast on the SAME wire: a young corpus (~5 days) yields too_lax.
+      // A single hardcoded kind cannot satisfy BOTH branches, so this pair is
+      // self-discriminating against a regression to the pre-v982 constant.
+      await writeFile(
+        sessionsFile,
+        JSON.stringify({ timestamp: Date.now() - 5 * 24 * 60 * 60 * 1000, sessionId: 'young', tier: 'persistent' }) + '\n',
+      );
+      await runSession(observer, 'retention-wire-aggressive-contrast');
+      events = await readObservationRetentionEvents(eventsPath);
+      expect(events[events.length - 1].kind).toBe('too_lax');
     });
 
     it('does NOT auto-emit when retention_days is not threaded (legacy prune)', async () => {

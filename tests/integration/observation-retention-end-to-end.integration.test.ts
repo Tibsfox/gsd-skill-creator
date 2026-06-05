@@ -104,23 +104,29 @@ describe('verify v891 substrate-auto-emit → calibration-loop read wire end-to-
     );
 
     expect(observations).toHaveLength(1);
-    // Default kind is 'too_aggressive' → polarity -1 (favor RAISING retention)
+    // v982 outcome-driven: the single old entry is pruned and NOTHING is
+    // retained (retainedCount 0 + prunedCount > 0) → the window dropped the
+    // entire corpus → too_aggressive → polarity -1 (favor RAISING retention).
     expect(observations[0]?.value).toBe(-1);
   });
 
   it('substrate writes accumulate across multiple sweeps; calibration loop sees all', async () => {
-    // Three sweeps with the same threshold (each fire-and-forget emits one event)
+    // v982: the auto-emit kind is now OUTCOME-DRIVEN, so a sweep over an empty
+    // corpus is neutral and emits nothing. This test targets accumulation +
+    // order-independent/race-tolerant reads (#10453), not the derivation, so it
+    // forces the kinds via defaultKind (the manual-recorder override path) to
+    // produce a deterministic 2×too_aggressive + 1×too_lax mix.
     writeFileSync(patternsPath, '', 'utf8');
 
     await runObservationRetentionSweep(
       { observation: { retention_days: 30 } },
       patternsPath,
-      { eventsPath },
+      { eventsPath, defaultKind: 'too_aggressive' },
     );
     await runObservationRetentionSweep(
       { observation: { retention_days: 60 } },
       patternsPath,
-      { eventsPath },
+      { eventsPath, defaultKind: 'too_aggressive' },
     );
     await runObservationRetentionSweep(
       { observation: { retention_days: 90 } },

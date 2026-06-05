@@ -37,6 +37,7 @@ vi.mock('picocolors', () => ({
 }));
 
 import { boundedLearningCommand } from './bounded-learning.js';
+import { readAuditLog } from '../../bounded-learning/audit-log.js';
 
 let tmpRoot: string;
 let suggestionsPath: string;
@@ -219,6 +220,69 @@ describe('boundedLearningCommand — --apply gate', () => {
     expect(out.applied).toBe('noop');
     const onDisk = JSON.parse(readFileSync(configPath, 'utf8'));
     expect(onDisk.suggestions.min_occurrences).toBe(3);
+  });
+});
+
+describe('boundedLearningCommand — retention bidirectional apply-guard (v1.49.982 / Ship 5.2 Option D)', () => {
+  let retentionEventsPath: string;
+
+  beforeEach(() => {
+    retentionEventsPath = join(tmpRoot, 'observation-retention-events.jsonl');
+    // observation.retention_days threshold target.
+    writeConfig({ observation: { retention_days: 90 } });
+  });
+
+  function writeRetentionEvents(kinds: Array<'too_aggressive' | 'too_lax'>): void {
+    const lines = kinds.map((kind, i) =>
+      JSON.stringify({ timestamp: `2026-06-05T00:00:${String(i % 60).padStart(2, '0')}.000Z`, kind, droppedCount: 3, retentionDays: 90 }),
+    );
+    writeFileSync(retentionEventsPath, lines.join('\n') + '\n', 'utf8');
+  }
+
+  it('refuses --apply on a one-directional signal: exit 1, audit "refused", config untouched', async () => {
+    // 20 too_aggressive → the e-process rejects and recommends increase, but the
+    // signal is one-directional (0 too_lax) so the guard blocks the write.
+    writeRetentionEvents(Array.from({ length: 20 }, () => 'too_aggressive'));
+
+    const code = await boundedLearningCommand(
+      baseArgs(['--threshold', 'observation.retention_days', '--apply', '--json']),
+      { retentionEventsPath },
+    );
+
+    expect(code).toBe(1);
+    const out = JSON.parse(collectLog());
+    expect(out.direction).toBe('increase');
+    expect(out.applied).toBe('refused');
+    expect(out.applyReason).toContain('not verifiably bidirectional');
+
+    // Config NOT written.
+    const onDisk = JSON.parse(readFileSync(configPath, 'utf8'));
+    expect(onDisk.observation.retention_days).toBe(90);
+
+    // Audit entry is forensically distinct from a plain noop.
+    const audit = await readAuditLog(auditLogPath);
+    expect(audit[audit.length - 1]?.applied).toBe('refused');
+  });
+
+  it('applies --apply once the signal is verifiably bidirectional', async () => {
+    // 20 too_aggressive + 2 too_lax → recommendation still increase, but both
+    // polarities present ⇒ guard lifts ⇒ write proceeds.
+    writeRetentionEvents([
+      ...Array.from({ length: 20 }, () => 'too_aggressive' as const),
+      'too_lax',
+      'too_lax',
+    ]);
+
+    const code = await boundedLearningCommand(
+      baseArgs(['--threshold', 'observation.retention_days', '--apply', '--json']),
+      { retentionEventsPath },
+    );
+
+    expect(code).toBe(0);
+    const out = JSON.parse(collectLog());
+    expect(out.applied).toBe('applied');
+    const onDisk = JSON.parse(readFileSync(configPath, 'utf8'));
+    expect(onDisk.observation.retention_days).toBe(91);
   });
 });
 

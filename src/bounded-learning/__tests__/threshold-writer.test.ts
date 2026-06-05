@@ -218,3 +218,84 @@ describe('applyRecommendation', () => {
     expect(readThresholdValue(onDisk, 'suggestions.cooldown_days')).toBe(7);
   });
 });
+
+describe('applyRecommendation — retention bidirectional guard (v1.49.982 / Ship 5.2 Option D)', () => {
+  let eventsPath: string;
+
+  beforeEach(() => {
+    eventsPath = join(tmpRoot, 'observation-retention-events.jsonl');
+  });
+
+  function writeEvents(kinds: Array<'too_aggressive' | 'too_lax'>): void {
+    const lines = kinds.map((kind, i) =>
+      JSON.stringify({ timestamp: `2026-06-0${(i % 9) + 1}T00:00:00.000Z`, kind, droppedCount: 3, retentionDays: 90 }),
+    );
+    writeFileSync(eventsPath, lines.join('\n') + (lines.length ? '\n' : ''), 'utf8');
+  }
+
+  const retentionRec = () =>
+    makeRecommendation({
+      threshold: 'observation.retention_days',
+      currentValue: 90,
+      proposedValue: 91,
+      direction: 'increase',
+      reason: 'retention guard test',
+    });
+
+  it('refuses --apply when the signal is one-directional (only too_aggressive)', async () => {
+    writeConfig({ observation: { retention_days: 90 } });
+    writeEvents(['too_aggressive', 'too_aggressive', 'too_aggressive']);
+    const outcome = await applyRecommendation(retentionRec(), { configPath, apply: true, retentionEventsPath: eventsPath });
+    expect(outcome.kind).toBe('refused');
+    if (outcome.kind !== 'refused') throw new Error('unreachable');
+    expect(outcome.reason).toContain('not verifiably bidirectional');
+    // On-disk config untouched.
+    const onDisk = JSON.parse(readFileSync(configPath, 'utf8'));
+    expect(readThresholdValue(onDisk, 'observation.retention_days')).toBe(90);
+  });
+
+  it('refuses --apply when there are no retention events at all', async () => {
+    writeConfig({ observation: { retention_days: 90 } });
+    // eventsPath intentionally not created (missing file → 0 events).
+    const outcome = await applyRecommendation(retentionRec(), { configPath, apply: true, retentionEventsPath: eventsPath });
+    expect(outcome.kind).toBe('refused');
+    const onDisk = JSON.parse(readFileSync(configPath, 'utf8'));
+    expect(readThresholdValue(onDisk, 'observation.retention_days')).toBe(90);
+  });
+
+  it('refuses --apply when the signal is one-directional (only too_lax)', async () => {
+    // The guard is symmetric: a future all-too_lax corpus is just as degenerate.
+    writeConfig({ observation: { retention_days: 90 } });
+    writeEvents(['too_lax', 'too_lax']);
+    const outcome = await applyRecommendation(retentionRec(), { configPath, apply: true, retentionEventsPath: eventsPath });
+    expect(outcome.kind).toBe('refused');
+  });
+
+  it('applies when the signal is verifiably bidirectional (both kinds present)', async () => {
+    writeConfig({ observation: { retention_days: 90 } });
+    writeEvents(['too_aggressive', 'too_lax', 'too_aggressive']);
+    const outcome = await applyRecommendation(retentionRec(), { configPath, apply: true, retentionEventsPath: eventsPath });
+    expect(outcome.kind).toBe('applied');
+    const onDisk = JSON.parse(readFileSync(configPath, 'utf8'));
+    expect(readThresholdValue(onDisk, 'observation.retention_days')).toBe(91);
+  });
+
+  it('does NOT guard dry-run (the intended post-fix path)', async () => {
+    writeConfig({ observation: { retention_days: 90 } });
+    writeEvents(['too_aggressive']); // one-directional
+    const outcome = await applyRecommendation(retentionRec(), { configPath, apply: false, retentionEventsPath: eventsPath });
+    expect(outcome.kind).toBe('dry-run');
+    // Dry-run never writes regardless.
+    const onDisk = JSON.parse(readFileSync(configPath, 'utf8'));
+    expect(readThresholdValue(onDisk, 'observation.retention_days')).toBe(90);
+  });
+
+  it('does NOT guard other thresholds (retention signal is irrelevant to them)', async () => {
+    writeConfig({ suggestions: { min_occurrences: 3 } });
+    writeEvents(['too_aggressive']); // one-directional retention, but rec is for a different threshold
+    const outcome = await applyRecommendation(makeRecommendation(), { configPath, apply: true, retentionEventsPath: eventsPath });
+    expect(outcome.kind).toBe('applied');
+    const onDisk = JSON.parse(readFileSync(configPath, 'utf8'));
+    expect(readThresholdValue(onDisk, 'suggestions.min_occurrences')).toBe(2);
+  });
+});

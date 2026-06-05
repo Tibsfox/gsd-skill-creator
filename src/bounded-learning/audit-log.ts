@@ -69,8 +69,12 @@ export interface AuditLogEntry {
   evidence: number;
   /** Configured alpha. */
   alpha: number;
-  /** Applied outcome: dry-run / applied / noop. */
-  applied: 'dry-run' | 'applied' | 'noop';
+  /**
+   * Applied outcome. `refused` (v1.49.982) means a change was recommended but
+   * a safety guard blocked the write — forensically distinct from a plain
+   * `noop` (no change recommended / concurrent edit).
+   */
+  applied: 'dry-run' | 'applied' | 'noop' | 'refused';
   /** Per-class observation source metadata (v798 registry). */
   observationSource: {
     sourceId: string;
@@ -85,7 +89,7 @@ export interface AuditLogEntry {
  */
 export function buildAuditLogEntry(
   rec: CalibrationRecommendation,
-  applied: 'dry-run' | 'applied' | 'noop',
+  applied: 'dry-run' | 'applied' | 'noop' | 'refused',
   options: { now?: () => Date } = {},
 ): AuditLogEntry {
   const now = options.now ?? (() => new Date());
