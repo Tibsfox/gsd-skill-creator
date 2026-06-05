@@ -46,18 +46,6 @@
       "addedBy": "v786 adoption-scan baseline review"
     },
     {
-      "module": "upstream",
-      "reason": "Legacy substrate. v786 retrospective flagged that upstream + upstream-intelligence are both isolated and may represent a rename-in-flight. Pending operator triage — exempt from shelfware threshold while investigation is open.",
-      "addedAt": "v1.49.787",
-      "addedBy": "v786 retrospective"
-    },
-    {
-      "module": "upstream-intelligence",
-      "reason": "Legacy substrate. Companion to `upstream` — see that entry. Pending operator triage.",
-      "addedAt": "v1.49.787",
-      "addedBy": "v786 retrospective"
-    },
-    {
       "module": "mathematical-foundations",
       "reason": "6 self-files / 0 self-importers — namespace placeholder for the substrate-reference docs (semantic-channel.md, bounded-learning.md). The actual implementation modules (coherent-functors, ricci-curvature-audit, etc.) live as siblings and ARE adoption-tracked individually.",
       "addedAt": "v1.49.787",
@@ -122,6 +110,90 @@
       "reason": "MA/MB/MD control-theory learning-substrate island (MD-5 per-(skill, task-type) learnable K_H heads). Flag-gated default-OFF, flag-off byte-identical; test-only, reachable only within the island (imports ace + lyapunov), not from a production entry point. Parked pending a learning-loop runtime consumer (generic resume, not v1.50-specific); retire-or-resume review by 2027-06-04. See docs/learning-substrate-parked.md.",
       "addedAt": "v1.49.972",
       "addedBy": "v972 D3 control-theory island park"
+    },
+    {
+      "module": "amiga",
+      "reason": "Mission-orchestration substrate (MC-1/ME-1/CE-1/GL-1 + meta-mission harness, 45 files). Its only production edge is a single test-only import in src/knowledge/event-bridge.ts (itself unreachable), so reachability-v2 (Ship 3.1) confirms unreachable. Large designed substrate preserved (not retired) pending a mission-orchestration runtime consumer. Generic resume (a future mission-orchestration runtime); retire-or-resume review by 2027-06-05.",
+      "addedAt": "v1.49.978",
+      "addedBy": "v978 Ship 3.2 shelfware disposition (reachability-v2)"
+    },
+    {
+      "module": "audio-engineering",
+      "reason": "Educational content cartridge (36 audio-engineering concepts across 6 domains, 32 citations; v1.49.16). Content cluster, not core substrate — analogous to the allowlisted `holomorphic` pack. Imported only by type-only college-enrichment refs + one cartridge test, both unreachable. Default-OFF, zero import side-effects. Generic resume (a content-delivery/curriculum surface); retire-or-resume review by 2027-06-05.",
+      "addedAt": "v1.49.978",
+      "addedBy": "v978 Ship 3.2 shelfware disposition (reachability-v2)"
+    },
+    {
+      "module": "bayes-ab",
+      "reason": "Bayesian sequential A/B substrate (IPM-BOED design selector + Wasserstein-1/sliced-Wasserstein primitives + conjugate priors per arXiv:2604.21849; v1.49.579+). Reachable only via ab-harness/wasserstein-boed.ts, which the shipped sign-test coordinator does not invoke. Substrate-level reference like tonnetz/wasserstein-hebbian; default-OFF, comprehensive tests. Generic resume (a Bayesian coordinator evolution); retire-or-resume review by 2027-06-05.",
+      "addedAt": "v1.49.978",
+      "addedBy": "v978 Ship 3.2 shelfware disposition (reachability-v2)"
+    },
+    {
+      "module": "cache",
+      "reason": "M5 agentic-orchestration substrate (PrefixIndex prefix cache + StepGraph k-gram predictor + Preloader skill prewarmer; JP-007 speculative decoding; v1.49.561). Reachable only via orchestration/draft-verify-router.ts, which is unexported and test-only (the unwired predictive-skill-loader frontier) — wiring an artificial CLI would manufacture a path to dormant code. Default-OFF. Generic resume (an anticipatory-preload runtime, cf. Ship 4.2); retire-or-resume review by 2027-06-05.",
+      "addedAt": "v1.49.978",
+      "addedBy": "v978 Ship 3.2 shelfware disposition (reachability-v2)"
+    },
+    {
+      "module": "commands",
+      "reason": "CLI command orchestrators (sc-learn knowledge-ingestion pipeline, scan-arxiv, sc-install, sc-unlearn, security-init). Consumed today via the tools/ingest-*.mts pipeline and standalone `npx tsx` entrypoints (shell-invoked, like the `initialization`/`retro`/`interpreter` allowlist entries), not via the npm-bin dispatch registry. First-class CLI registration is deferred to a follow-up ship. Generic resume (CLI registration of the sc-learn/scan-arxiv surface); retire-or-resume review by 2027-06-05.",
+      "addedAt": "v1.49.978",
+      "addedBy": "v978 Ship 3.2 shelfware disposition (reachability-v2)"
+    },
+    {
+      "module": "components",
+      "reason": "Security-dashboard UI render functions (SecurityPanel; Phase 372). Re-exported by src/security/index.ts, but that barrel has zero non-test production importers, so it is unreachable from the TS production graph; it is, however, the TS half of a TS<->Rust dashboard IPC contract mirrored in src-tauri/src/security/types.rs. Preserved (not retired) to avoid orphaning the cross-language contract; the Rust/Tauri layer is out of audit scope. Generic resume (wiring the security dashboard); retire-or-resume review by 2027-06-05.",
+      "addedAt": "v1.49.978",
+      "addedBy": "v978 Ship 3.2 shelfware disposition (reachability-v2)"
+    },
+    {
+      "module": "dependency-auditor",
+      "reason": "Era-D multi-ecosystem dependency-audit substrate (manifest discovery + OSV vulnerability querying; npm/cargo/conda/pypi/rubygems adapters; v1.49.549). Unreachable by import-surface, but its registry adapters carry WIRED EgressContext/ProcessContext security chokepoints (v1.49.806-809) — load-bearing security infrastructure, not shelfware; retiring would delete egress enforcement. Generic resume (an adoption/resolution consumer); retire-or-resume review by 2027-06-05.",
+      "addedAt": "v1.49.978",
+      "addedBy": "v978 Ship 3.2 shelfware disposition (reachability-v2)"
+    },
+    {
+      "module": "engines",
+      "reason": "Mathematical-foundations engine substrate (composition/dependency-graph/path-finder/plane-classifier/plane-navigator/proof-composer/property-checkers/verification engines; v1.49.570). Reachable only via integration/mfe-skill-type.ts (test-only chain) with an explicit future activation path (wireMfeIntoExistingPipeline). Default-OFF, well-tested. Generic resume (the MFE pipeline wiring); retire-or-resume review by 2027-06-05.",
+      "addedAt": "v1.49.978",
+      "addedBy": "v978 Ship 3.2 shelfware disposition (reachability-v2)"
+    },
+    {
+      "module": "health-diagnostician",
+      "reason": "Era-D ecosystem health-diagnosis substrate (classification, Python compat matrix, conflict detection, severity scoring; v1.49.549). Part of the same latent dependency island as the allowlisted dependency-auditor; its DiagnosisResult/DiagnosisReport contract types are consumed by the sibling alternative-discoverer module, so it is parked with the island rather than retired (a node-level retire would relocate its domain types into a kept consumer). Generic resume (a dependency-management consumer); retire-or-resume review by 2027-06-05.",
+      "addedAt": "v1.49.978",
+      "addedBy": "v978 Ship 3.2 shelfware disposition (reachability-v2)"
+    },
+    {
+      "module": "learn",
+      "reason": "Document-acquisition + processing pipeline for skill learning (acquire/sanitize/analyze/extract/dedup/merge/HITL-gate; v1.35.0). Consumed by src/commands/sc-learn.ts (value imports) + integration tests; reachable from production only once the sc-learn CLI is registered (deferred with `commands`). Tested, maintained latent infrastructure. Generic resume (sc-learn CLI registration); retire-or-resume review by 2027-06-05.",
+      "addedAt": "v1.49.978",
+      "addedBy": "v978 Ship 3.2 shelfware disposition (reachability-v2)"
+    },
+    {
+      "module": "scan-arxiv",
+      "reason": "ArXiv fetch/rank/ingest bridge for the sc-learn pipeline (v1.49.659). Consumed via src/commands/scan-arxiv.ts (a standalone `npx tsx` entrypoint) + five tools/*.mts ingestion scripts — shell-invoked, not via the npm-bin dispatch registry. First-class CLI registration is deferred with `commands`. Generic resume (scan-arxiv CLI registration); retire-or-resume review by 2027-06-05.",
+      "addedAt": "v1.49.978",
+      "addedBy": "v978 Ship 3.2 shelfware disposition (reachability-v2)"
+    },
+    {
+      "module": "skill-isotropy",
+      "reason": "Skill-Space Isotropy Audit (SSIA; Hyperspherical Cramer-Wold anisotropy detector; LEJEPA Half-B, Phase 728, v1.49.571). Read-only, pure-function, default-OFF audit substrate; consumed only by sigreg (itself test-only). Wiring a CLI would contradict the default-OFF design. Generic resume (a learning-loop isotropy consumer); retire-or-resume review by 2027-06-05.",
+      "addedAt": "v1.49.978",
+      "addedBy": "v978 Ship 3.2 shelfware disposition (reachability-v2)"
+    },
+    {
+      "module": "skill-promotion",
+      "reason": "Thermodynamic skill-promotion ROI gate (Landauer-floor deployment-horizon ROI per JP-005 / arXiv:2604.20897; Wave 2, Phase 835). Consumed only by ab-harness/bo-autotune.ts (a Wave-3 BO skeleton, test-only); meant to be consumed programmatically by the BO loop, not as a CLI. Generic resume (Wave-3 bo-autotune integration, JP-018); retire-or-resume review by 2027-06-05.",
+      "addedAt": "v1.49.978",
+      "addedBy": "v978 Ship 3.2 shelfware disposition (reachability-v2)"
+    },
+    {
+      "module": "umwelt",
+      "reason": "M7 Umwelt — categorical generative model + Markov-blanket partition + variational free-energy minimiser (core Living Sensoria M1..M8 substrate; v1.49.640/647). Type re-exports in src/types/index.ts are type-only (safe); the only implementation consumer (symbiosis/m7-adapter.ts) is test-only. Default-OFF preserved substrate. Generic resume (an M5/learning-loop Living-Sensoria consumer); retire-or-resume review by 2027-06-05.",
+      "addedAt": "v1.49.978",
+      "addedBy": "v978 Ship 3.2 shelfware disposition (reachability-v2)"
     }
   ]
 }

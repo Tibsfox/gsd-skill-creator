@@ -49,6 +49,8 @@ Commands:
   agents, ag        Manage agent suggestions from skill clusters
   team, tm          Manage agent teams (create, list, validate, spawn, status)
   dacp, dp          Manage DACP handoff protocol (status, set-level, history, analyze, export, drift-check)
+  git               Deterministic git workflow (install, status, sync, work, gate merge|pr, worktree list)
+  skill-inventory, inv  Report skill lifecycle state (status counts, stale skills, deprecated)
   koopman-check, kc Advisory koopman-memory invariant check (identity retention, zero-input retention, Lipschitz bound)
   coherent-check, cc Advisory coherent-functors coherence check (naturality, identity, composition, direct-sum)
   hourglass-check, hc Advisory hourglass-persistence audit (holes, contraction-index, waists)

@@ -14,6 +14,8 @@ import { hourglassCheckCommand } from './commands/hourglass-check.js';
 import { boundedLearningCommand } from './commands/bounded-learning.js';
 import { rollbackCommand } from './commands/rollback.js';
 import { skillCommand } from './commands/skill.js';
+import { gitCommand } from './commands/git.js';
+import { skillInventoryCommand } from './commands/skill-inventory.js';
 import { printHelp } from './help.js';
 import { createStores, createApplicationContext } from '../index.js';
 import { createSkillWorkflow } from '../workflows/create-skill-workflow.js';
@@ -161,6 +163,12 @@ export const REGISTRY: readonly CommandEntry[] = [
   } },
   { aliases: ['rollback', 'rb'], handler: (ctx) => rollbackCommand(ctx.args) },
   { aliases: ['skill'], handler: (ctx) => skillCommand(ctx.args, ctx.parseSkillsDir, ctx.parseStringFlag) },
+  { aliases: ['git'], handler: async (ctx) => {
+    process.exitCode = await gitCommand(ctx.args.slice(1));
+  } },
+  { aliases: ['skill-inventory', 'inventory', 'inv'], handler: async () => {
+    process.exitCode = await skillInventoryCommand();
+  } },
 
   // ---- pure-dispatch with own arg slice ----
   { aliases: ['cartridge'], handler: (ctx) => cartridgeCommand(ctx.args.slice(1)) },

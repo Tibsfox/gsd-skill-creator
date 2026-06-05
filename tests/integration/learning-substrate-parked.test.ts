@@ -179,3 +179,97 @@ describe('reachability-v2 — control-theory island reachability (Ship 3.1, v1.4
     }
   });
 });
+
+// The 14 reachability-only shelfware modules disposed via ALLOWLIST at v1.49.978
+// (the other two of the Ship-3.1 "16" were WIRED — git, skill).
+const SHIP32_ALLOWLISTED = [
+  'amiga',
+  'audio-engineering',
+  'bayes-ab',
+  'cache',
+  'commands',
+  'components',
+  'dependency-auditor',
+  'engines',
+  'health-diagnostician',
+  'learn',
+  'scan-arxiv',
+  'skill-isotropy',
+  'skill-promotion',
+  'umwelt',
+] as const;
+
+describe('Ship 3.2 — reachability-only shelfware disposition (v1.49.978)', () => {
+  const records = scan() as Array<{
+    module: string;
+    status: string;
+    reachableFromProduction: boolean;
+    allowlisted: boolean;
+  }>;
+  const byModule = new Map(records.map((r) => [r.module, r]));
+
+  it('the reachability-only shelfware set is EMPTY — every living-but-unreachable module is allowlisted', () => {
+    const unreachableLiving = records.filter(
+      (r) => r.status === 'living' && !r.reachableFromProduction,
+    );
+    // anti-vacuous (#10450): there ARE living-but-unreachable modules (the allowlisted
+    // island + the v978 parked substrate); the headline invariant is meaningful only
+    // because this set is non-empty.
+    expect(
+      unreachableLiving.length,
+      'there should be living-but-unreachable modules to keep this guard non-vacuous',
+    ).toBeGreaterThan(5);
+    const nonAllowlisted = unreachableLiving.filter((r) => !r.allowlisted).map((r) => r.module);
+    expect(
+      nonAllowlisted,
+      'after Ship 3.2 NO living-but-unreachable module may be non-allowlisted (all wired/allowlisted/retired)',
+    ).toEqual([]);
+  });
+
+  it('ALLOWLIST — the 14 disposed modules carry the v978 provenance + dated gate and read allowlisted-unreachable', () => {
+    const entries = allowlist();
+    for (const mod of SHIP32_ALLOWLISTED) {
+      const e = entries.find((x) => x.module === mod);
+      expect(e, `${mod} must be allowlisted (Ship 3.2 disposition)`).toBeTruthy();
+      expect(e!.addedBy, `${mod} must carry the v978 Ship 3.2 provenance`).toContain('Ship 3.2');
+      expect(
+        e!.reason,
+        `${mod} must carry the dated retire-or-resume gate (no open-ended park)`,
+      ).toMatch(/retire-or-resume review by 2027-06-05/);
+      const r = byModule.get(mod);
+      expect(r, `${mod} must be in the scan`).toBeTruthy();
+      expect(r!.allowlisted, `${mod} must read allowlisted in the live scan`).toBe(true);
+      expect(r!.reachableFromProduction, `${mod} is parked, still unreachable`).toBe(false);
+    }
+  });
+
+  it('WIRE — git and skill are now reachable from production (no allowlist needed)', () => {
+    for (const mod of ['git', 'skill'] as const) {
+      const r = byModule.get(mod);
+      expect(r, `${mod} must be in the scan`).toBeTruthy();
+      expect(r!.reachableFromProduction, `${mod} must be reachable after the dispatch wire`).toBe(true);
+      expect(r!.allowlisted, `${mod} should NOT need an allowlist (it is wired)`).toBe(false);
+    }
+  });
+
+  it('RETIRE — upstream + upstream-intelligence are deleted, but the config namespace survives', () => {
+    expect(existsSync(join(REPO, 'src', 'upstream')), 'src/upstream/ should be deleted').toBe(false);
+    expect(
+      existsSync(join(REPO, 'src', 'upstream-intelligence')),
+      'src/upstream-intelligence/ should be deleted',
+    ).toBe(false);
+    expect(byModule.has('upstream'), 'upstream should be gone from the scan').toBe(false);
+    expect(byModule.has('upstream-intelligence'), 'upstream-intelligence should be gone from the scan').toBe(false);
+    const mods = allowlist().map((e) => e.module);
+    expect(mods, 'upstream allowlist entry removed').not.toContain('upstream');
+    expect(mods, 'upstream-intelligence allowlist entry removed').not.toContain('upstream-intelligence');
+    // The `gsd-skill-creator.upstream-intelligence.*.enabled` config namespace is how the
+    // 10 living Half-B modules read their flags — it is NOT the retired barrel module and
+    // MUST survive the retire.
+    const settings = readFileSync(join(REPO, 'src', 'skilldex-auditor', 'settings.ts'), 'utf8');
+    expect(
+      settings,
+      'the upstream-intelligence config namespace must survive the module retire',
+    ).toContain('upstream-intelligence');
+  });
+});
