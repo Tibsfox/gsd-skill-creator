@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.978`.
+The story begins at `v1.0` and continues to `v1.49.979`.
 
-**1021 chapters.** 1020 have retrospectives.
+**1022 chapters.** 1021 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -1029,3 +1029,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.976](v1.49.976/00-summary.md)** — team schema reconcile + chipset taxonomy/validate fixes · 2026-06-04
 - **[v1.49.977](v1.49.977/00-summary.md)** — reachability-aware adoption scanner (Ship 3.1) · 2026-06-05
 - **[v1.49.978](v1.49.978/00-summary.md)** — reachability shelfware disposition: 2 wired, 14 allowlisted, upstream pair retired · 2026-06-05
+- **[v1.49.979](v1.49.979/00-summary.md)** — sc-learn + scan-arxiv CLI dispatch wire · 2026-06-05
