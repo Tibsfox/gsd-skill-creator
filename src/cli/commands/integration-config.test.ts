@@ -16,9 +16,10 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { integrationConfigCommand } from './integration-config.js';
 
-// Mock fs/promises for controlled file reading
+// Mock fs/promises for controlled file reading + writing (migrate --apply)
 vi.mock('fs/promises', () => ({
   readFile: vi.fn(),
+  writeFile: vi.fn(),
 }));
 
 // Mock @clack/prompts to suppress output during tests
@@ -34,9 +35,19 @@ vi.mock('@clack/prompts', () => ({
   outro: vi.fn(),
 }));
 
-import { readFile } from 'fs/promises';
+import { readFile, writeFile } from 'fs/promises';
 
 const mockReadFile = vi.mocked(readFile);
+const mockWriteFile = vi.mocked(writeFile);
+
+/** Find the JSON object emitted to stdout (helper for migrate --json assertions). */
+function parseJsonOutput(spy: ReturnType<typeof vi.spyOn>): Record<string, unknown> {
+  const call = spy.mock.calls.find((c: unknown[]) => {
+    try { JSON.parse(c[0] as string); return true; } catch { return false; }
+  });
+  if (!call) throw new Error('no JSON output found');
+  return JSON.parse(call[0] as string);
+}
 
 describe('integrationConfigCommand', () => {
   let consoleLogSpy: ReturnType<typeof vi.spyOn>;
@@ -300,6 +311,121 @@ describe('integrationConfigCommand', () => {
       const exitCode2 = await integrationConfigCommand(['validate']);
 
       expect(exitCode1).toBe(exitCode2);
+    });
+  });
+
+  // ============================================================================
+  // migrate subcommand (v1.49.984 — delete explicit mine_active_skills:false)
+  // ============================================================================
+
+  describe('migrate subcommand', () => {
+    it('dry-run (no --apply) on explicit-false: exit 0, delete-key, NO write', async () => {
+      mockReadFile.mockResolvedValue(
+        JSON.stringify({ observation: { mine_active_skills: false, retention_days: 90 } }, null, 2),
+      );
+
+      const exitCode = await integrationConfigCommand(['migrate', '--json']);
+      expect(exitCode).toBe(0);
+      expect(mockWriteFile).not.toHaveBeenCalled();
+
+      const out = parseJsonOutput(consoleLogSpy);
+      expect(out.action).toBe('delete-key');
+      expect(out.applied).toBe(false);
+    });
+
+    it('--apply on explicit-false: deletes the key, backs up the original, sibling fields preserved', async () => {
+      const original = JSON.stringify(
+        { observation: { mine_active_skills: false, retention_days: 90, max_entries: 1000 } },
+        null, 2,
+      );
+      mockReadFile.mockResolvedValue(original);
+      mockWriteFile.mockResolvedValue(undefined);
+
+      const exitCode = await integrationConfigCommand(['migrate', '--apply', '--json']);
+      expect(exitCode).toBe(0);
+
+      // Two writes: backup first (original content), then the migrated config.
+      expect(mockWriteFile).toHaveBeenCalledTimes(2);
+      const [backupPath, backupContent] = mockWriteFile.mock.calls[0] as [string, string];
+      expect(backupPath).toMatch(/^\.planning\/skill-creator\.json\.bak\.\d+$/);
+      expect(backupContent).toBe(original);
+
+      const [cfgPath, cfgContent] = mockWriteFile.mock.calls[1] as [string, string];
+      expect(cfgPath).toBe('.planning/skill-creator.json');
+      const written = JSON.parse(cfgContent);
+      expect(written.observation.mine_active_skills).toBeUndefined(); // key removed
+      expect(written.observation.retention_days).toBe(90);            // sibling preserved
+      expect(written.observation.max_entries).toBe(1000);             // sibling preserved
+      expect(cfgContent.endsWith('\n')).toBe(true);                   // trailing newline
+
+      const out = parseJsonOutput(consoleLogSpy);
+      expect(out.action).toBe('delete-key');
+      expect(out.applied).toBe(true);
+      expect(out.backup).toMatch(/\.bak\.\d+$/);
+    });
+
+    it('no-op when the key is absent (already inherits the default)', async () => {
+      mockReadFile.mockResolvedValue(JSON.stringify({ observation: { retention_days: 90 } }, null, 2));
+
+      const exitCode = await integrationConfigCommand(['migrate', '--apply', '--json']);
+      expect(exitCode).toBe(0);
+      expect(mockWriteFile).not.toHaveBeenCalled();
+      expect(parseJsonOutput(consoleLogSpy).action).toBe('none');
+    });
+
+    it('no-op when the key is already true', async () => {
+      mockReadFile.mockResolvedValue(JSON.stringify({ observation: { mine_active_skills: true } }, null, 2));
+
+      const exitCode = await integrationConfigCommand(['migrate', '--apply', '--json']);
+      expect(exitCode).toBe(0);
+      expect(mockWriteFile).not.toHaveBeenCalled();
+      expect(parseJsonOutput(consoleLogSpy).action).toBe('none');
+    });
+
+    it('no-op (exit 0) when the config file is missing', async () => {
+      const err = new Error('ENOENT') as NodeJS.ErrnoException;
+      err.code = 'ENOENT';
+      mockReadFile.mockRejectedValue(err);
+
+      const exitCode = await integrationConfigCommand(['migrate', '--json']);
+      expect(exitCode).toBe(0);
+      expect(mockWriteFile).not.toHaveBeenCalled();
+      expect(parseJsonOutput(consoleLogSpy).action).toBe('none');
+    });
+
+    it('exit 1 on unparseable JSON (no write)', async () => {
+      mockReadFile.mockResolvedValue('{bad');
+
+      const exitCode = await integrationConfigCommand(['migrate', '--apply']);
+      expect(exitCode).toBe(1);
+      expect(mockWriteFile).not.toHaveBeenCalled();
+    });
+
+    it('--apply succeeds even when an UNRELATED sibling is schema-invalid (delete-only is provably safe)', async () => {
+      // retention_days:9999 is out of the valid range, but migrate only removes
+      // mine_active_skills and must NOT be blocked by unrelated pre-existing drift
+      // (the operator runs `validate` for that). The drift is preserved untouched.
+      const original = JSON.stringify({ observation: { mine_active_skills: false, retention_days: 9999 } }, null, 2);
+      mockReadFile.mockResolvedValue(original);
+      mockWriteFile.mockResolvedValue(undefined);
+
+      const exitCode = await integrationConfigCommand(['migrate', '--apply', '--json']);
+      expect(exitCode).toBe(0);
+      expect(mockWriteFile).toHaveBeenCalledTimes(2);
+      const [, cfgContent] = mockWriteFile.mock.calls[1] as [string, string];
+      const written = JSON.parse(cfgContent);
+      expect(written.observation.mine_active_skills).toBeUndefined();
+      expect(written.observation.retention_days).toBe(9999); // unrelated drift preserved
+      expect(parseJsonOutput(consoleLogSpy).applied).toBe(true);
+    });
+
+    it('idempotent: re-running on the post-migration (absent-key) config is a no-op', async () => {
+      // First apply removes the key; simulate the resulting on-disk state.
+      mockReadFile.mockResolvedValue(JSON.stringify({ observation: { retention_days: 90 } }, null, 2));
+      const exitCode = await integrationConfigCommand(['migrate', '--apply', '--json']);
+      expect(exitCode).toBe(0);
+      expect(mockWriteFile).not.toHaveBeenCalled();
+      expect(parseJsonOutput(consoleLogSpy).action).toBe('none');
     });
   });
 });

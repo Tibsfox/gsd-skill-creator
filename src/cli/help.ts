@@ -82,7 +82,7 @@ Commands:
   cartridge         Manage skill cartridges (load, validate, scaffold, eval, dedup, fork)
   chip              Manage chips (status, health, list, capabilities)
   keystore          Manage encrypted credential keystore (migrate, set, status)
-  integration, int  Manage skill-creator integration config (validate, show)
+  integration, int  Manage skill-creator integration config (validate, show, migrate)
   config, cfg       Manage GSD configuration (validate)
   event, ev         Manage skill events (list, emit, consume, suggest, expire)
   dashboard, db     Generate GSD Planning Docs Dashboard from .planning/
