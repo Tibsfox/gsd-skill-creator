@@ -4,6 +4,7 @@ import { join } from 'path';
 import { tmpdir } from 'os';
 import { SessionObserver, SessionStartData, SessionEndData } from './session-observer.js';
 import { readObservationRetentionEvents } from '../bounded-learning/observation-retention-events.js';
+import { readIntegrationConfig } from '../integration/config/index.js';
 
 describe('SessionObserver', () => {
   const testDir = join(tmpdir(), `session-observer-test-${Date.now()}`);
@@ -788,6 +789,85 @@ describe('SessionObserver', () => {
       const summary = await runWith(observer, 'mine-on');
       expect(summary).not.toBeNull();
       expect(summary!.activeSkills).toEqual(['context-handoff', 'graphify']);
+    });
+  });
+
+  // Item-2 (v1.49.983 — Ship 5.3): prove the mining pipeline FIRES under the
+  // production config path, end-to-end, and lands non-empty activeSkills on
+  // DISK. The 5.1c re-audit found 0/126 sessions.jsonl records with non-empty
+  // activeSkills — which could mean "real sessions had <2 skills" OR "mining
+  // never fired". This test removes the ambiguity: with this repo's config
+  // shape (mine_active_skills ABSENT → Zod-inherits the 5.1c true default),
+  // threaded exactly as src/hooks/session-end.ts threads it, a ≥2-skill session
+  // writes its mined skills into the persisted sessions.jsonl record the
+  // re-audit reads. So a future empty record means a genuinely <2-skill
+  // session, not a broken pipeline.
+  describe('active-skill mining — production config wiring (v1.49.983 item-2)', () => {
+    it('config default (absent key → true) drives the hook wiring to persist non-empty activeSkills on disk', async () => {
+      // 1. This repo's actual config shape: the key is ABSENT, so Zod fills the
+      //    5.1c default (true). This is the default passive accrual relies on.
+      const configPath = join(testDir, 'skill-creator.json');
+      await writeFile(
+        configPath,
+        JSON.stringify({ observation: { retention_days: 90, max_entries: 1000 } }, null, 2) + '\n',
+      );
+      const config = await readIntegrationConfig(configPath);
+      expect(config.observation.mine_active_skills).toBe(true);
+
+      // 2. Construct the observer EXACTLY as src/hooks/session-end.ts:111 does
+      //    (config → 4th/5th/6th ctor args), no hardcoded `true`.
+      const observer = new SessionObserver(
+        patternsDir,
+        undefined,
+        undefined,
+        config.observation.retention_days,
+        config.observation.max_entries,
+        config.observation.mine_active_skills,
+      );
+
+      const sessionId = 'prod-wire';
+      await observer.onSessionStart({
+        sessionId, transcriptPath, cwd: testDir,
+        source: 'startup', model: 'claude-3-opus', startTime: Date.now() - 300000,
+      });
+
+      // 3. High-signal transcript (promotes to persistent) + one assistant entry
+      //    carrying two nested Skill tool_use blocks (the only place skills
+      //    surface). The nested blocks add no top-level toolCalls, so promotion
+      //    signal is identical to the existing high-signal routing test.
+      const transcriptEntries = [
+        { uuid: '1', parentUuid: null, isSidechain: false, sessionId, timestamp: new Date().toISOString(), type: 'user', message: { role: 'user', content: 'msg 1' } },
+        { uuid: '2', parentUuid: '1', isSidechain: false, sessionId, timestamp: new Date().toISOString(), type: 'tool_use', tool_name: 'Read', tool_input: { file_path: '/a.ts' } },
+        { uuid: '3', parentUuid: '2', isSidechain: false, sessionId, timestamp: new Date().toISOString(), type: 'user', message: { role: 'user', content: 'msg 2' } },
+        { uuid: '4', parentUuid: '3', isSidechain: false, sessionId, timestamp: new Date().toISOString(), type: 'tool_use', tool_name: 'Bash', tool_input: { command: 'npm test' } },
+        { uuid: '5', parentUuid: '4', isSidechain: false, sessionId, timestamp: new Date().toISOString(), type: 'user', message: { role: 'user', content: 'msg 3' } },
+        { uuid: '6', parentUuid: '5', isSidechain: false, sessionId, timestamp: new Date().toISOString(), type: 'tool_use', tool_name: 'Edit', tool_input: { file_path: '/b.ts' } },
+        { uuid: '7', parentUuid: '6', isSidechain: false, sessionId, timestamp: new Date().toISOString(), type: 'user', message: { role: 'user', content: 'msg 4' } },
+        { uuid: '8', parentUuid: '7', isSidechain: false, sessionId, timestamp: new Date().toISOString(), type: 'tool_use', tool_name: 'Read', tool_input: { file_path: '/c.ts' } },
+        { uuid: '9', parentUuid: '8', isSidechain: false, sessionId, timestamp: new Date().toISOString(), type: 'user', message: { role: 'user', content: 'msg 5' } },
+        { uuid: '10', parentUuid: '9', isSidechain: false, sessionId, timestamp: new Date().toISOString(), type: 'tool_use', tool_name: 'Bash', tool_input: { command: 'git status' } },
+        { uuid: '11', parentUuid: '10', isSidechain: false, sessionId, timestamp: new Date().toISOString(), type: 'assistant', message: { role: 'assistant', content: [
+          { type: 'tool_use', name: 'Skill', input: { skill: 'graphify' } },
+          { type: 'tool_use', name: 'Skill', input: { skill: 'session-awareness' } },
+        ] } },
+      ];
+      await writeFile(transcriptPath, transcriptEntries.map((e) => JSON.stringify(e)).join('\n') + '\n');
+
+      const summary = await observer.onSessionEnd({ sessionId, transcriptPath, cwd: testDir, reason: 'logout' });
+
+      // 4. The returned summary carries the mined skills...
+      expect(summary).not.toBeNull();
+      expect(summary!.tier).toBe('persistent');
+      expect(summary!.activeSkills).toEqual(['graphify', 'session-awareness']);
+
+      // 5. ...and they are PERSISTED to sessions.jsonl — under the PatternStore
+      //    envelope's `.data`, which is exactly where the re-audit reads
+      //    activeSkills (it found 0/126 non-empty; this proves a non-empty write).
+      const sessionsFile = join(patternsDir, 'sessions.jsonl');
+      const lines = (await readFile(sessionsFile, 'utf-8')).trim().split('\n');
+      const stored = JSON.parse(lines[lines.length - 1]!);
+      expect(stored.data.sessionId).toBe(sessionId);
+      expect(stored.data.activeSkills).toEqual(['graphify', 'session-awareness']);
     });
   });
 });

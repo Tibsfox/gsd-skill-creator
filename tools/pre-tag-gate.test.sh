@@ -55,20 +55,15 @@ else
   fail "bash syntax check failed"
 fi
 
-# Test 3: contains expected step labels (13 steps as of v1.49.653 L-04).
-# v1.49.601 added catalog-index step 8, v1.49.634 added tauri-boundary step 9,
-# v1.49.636 added apply-to-self step 9.5, v1.49.653 added scaffolder-residue
-# step 10 + citation-debt step 11 + STORY-drift step 12 + discipline-coverage step 13.
-if grep -q "step 6/" "$GATE" \
-   && grep -q "step 7/" "$GATE" \
-   && grep -q "step 8/" "$GATE" \
-   && grep -q "step 9/" "$GATE" \
-   && grep -q "step 9.5/" "$GATE" \
-   && grep -q "step 10/13: scaffolder-residue audit" "$GATE" \
-   && grep -q "step 11/13: citation-debt ledger sync" "$GATE" \
-   && grep -q "step 12/13: STORY.md drift detection" "$GATE" \
-   && grep -q "step 13/13: discipline coverage audit" "$GATE"; then
-  ok "all 13 step labels present"
+# Test 3: contains expected step labels. The gate grew to 21 integer steps as of
+# v1.49.983 (Ship 5.3 added step 21 trip-vocab budget; v1.49.965 added step 20
+# adoption-freshness). Spot-check stable mid labels + the two newest steps + the
+# final summary count rather than asserting every label (which churns each ship).
+if grep -q "step 6/21" "$GATE" \
+   && grep -q "step 20/21" "$GATE" \
+   && grep -q "step 21/21: trip-vocab budget" "$GATE" \
+   && grep -q "all 21 checks PASS" "$GATE"; then
+  ok "current step labels present (21 steps incl. trip-vocab)"
 else
   fail "step labels missing or wrong count"
 fi
@@ -182,7 +177,10 @@ else
 fi
 
 # Test 18: each consolidatable step uses gate_bypassed
-EXPECTED_STEPS="ci-gate depth-audit claude-md catalog-index tauri-boundary apply-to-self scaffolder-residue citation-debt-sync story-drift discipline-coverage"
+# Representative subset of overridable steps (the gate has ~23 gate_bypassed
+# steps total; this checks the load-bearing ones incl. the two newest:
+# adoption-freshness v965 + trip-vocab v983).
+EXPECTED_STEPS="ci-gate depth-audit claude-md catalog-index tauri-boundary apply-to-self scaffolder-residue citation-debt-sync story-drift discipline-coverage adoption-freshness trip-vocab"
 ALL_OK=1
 for step in $EXPECTED_STEPS; do
   if ! grep -q "gate_bypassed \"$step\"" "$GATE"; then
@@ -191,7 +189,7 @@ for step in $EXPECTED_STEPS; do
   fi
 done
 if [ "$ALL_OK" = "1" ]; then
-  ok "all 10 overridable steps use gate_bypassed"
+  ok "listed overridable steps (12, representative subset) use gate_bypassed"
 else
   fail "some steps missing gate_bypassed integration"
 fi
@@ -199,7 +197,7 @@ fi
 # Test 19: CSV-form smoke test — SC_PRE_TAG_GATE_BYPASS=ci-gate,depth-audit
 # We can't run the full gate cheaply, but we can verify the prelude handles it.
 # Extract just the prelude (everything up to "log "[pre-tag-gate] step 1/12") + a gate_bypassed call.
-PRELUDE_END_LINE=$(grep -n 'log "\[pre-tag-gate\] step 1/13' "$GATE" | head -1 | cut -d: -f1)
+PRELUDE_END_LINE=$(grep -n 'log "\[pre-tag-gate\] step 1/21' "$GATE" | head -1 | cut -d: -f1)
 if [ -n "$PRELUDE_END_LINE" ]; then
   PRELUDE_CONTENT=$(head -n "$PRELUDE_END_LINE" "$GATE")
   # Append a test invocation

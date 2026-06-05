@@ -8,15 +8,16 @@
  *     (#10463 staged promotion), escalatable to BLOCKER via SC_PRE_TAG_GATE_REQUIRE.
  *   - SOURCE ELIMINATOR: T14-SHIP-SEQUENCE.md step 2.7 (adoption-refresh post-bump).
  *
- * As the NEWEST step-addition meta-test, this file OWNS the absolute gate count
- * ("all 20 checks PASS"); the prior owner (v1-49-961-meta-test) was made
- * count-agnostic in the same ship (the repo's single-count-owner convention).
+ * This file OWNED the absolute gate count ("all 20 checks PASS") from v965 until
+ * v983 (Ship 5.3) added step 21 (trip-vocab) and took over as the count owner;
+ * C2/C3 here were made count-agnostic at v983 per the single-count-owner
+ * convention (the v983 meta-test now pins "all 21 checks PASS").
  *
  * Gates exercised:
  *   C1 — step 20/20 adoption-freshness invokes the freshness tool, is WARN-only by
  *        default, escalates to BLOCKER (exit 23) under gate_required, is gateable
  *        via SC_PRE_TAG_GATE_BYPASS=adoption-freshness, and names the fix.
- *   C2 — final summary advanced to "all 20 checks PASS" (the pre-v965 19-count gone).
+ *   C2 — (count-agnostic since v983) step-20 adoption-freshness present; pre-v965 19-count gone.
  *   C3 — step 20 appears after step 19 and before the final summary.
  *   C4 — exit 23 is UNIQUE (no collision with tools-node-test's exit 22).
  *   C5 — step 20 captures the tool exit code without tripping set -e (the
@@ -41,8 +42,8 @@ describe('v1.49.965 integration meta-test (Ship 0.1 adoption-baseline freshness 
   it('C1 — step 20 adoption-freshness: WARN-only default, escalatable, gateable', () => {
     const gate = readFileSync(GATE_PATH, 'utf8');
     // Denominator-agnostic: per-step denominators are owned by
-    // pre-tag-gate-self-consistency.test.ts (Ship 0.2). The ABSOLUTE count stays
-    // pinned by C2 below ("all 20 checks PASS").
+    // pre-tag-gate-self-consistency.test.ts (Ship 0.2). The ABSOLUTE count is
+    // owned by the v983 meta-test ("all 21 checks PASS"); C2 here is count-agnostic.
     expect(gate).toMatch(/step 20\/\d+: adoption-baseline freshness/);
     // Invokes the freshness tool.
     expect(gate).toMatch(/node "\$REPO_ROOT\/tools\/adoption-baseline-freshness\.mjs"/);
@@ -57,10 +58,14 @@ describe('v1.49.965 integration meta-test (Ship 0.1 adoption-baseline freshness 
     expect(gate).toMatch(/adoption-freshness\)"/);
   });
 
-  it('C2 — final summary advanced to "all 20 checks PASS" (pre-v965 19-count gone)', () => {
+  it('C2 — the v965 adoption-freshness step landed; absolute count now owned by the v983 meta-test', () => {
     const gate = readFileSync(GATE_PATH, 'utf8');
-    expect(gate).toMatch(/all 20 checks PASS/);
-    // The pre-v965 19-count summary is gone (the step-20 addition landed).
+    // COUNT-AGNOSTIC as of v983: the newest step-addition meta-test owns the
+    // "all N checks PASS" count (single-count-owner convention; v983 took over
+    // when step 21 trip-vocab landed). This test only pins that v965's step-20
+    // addition is still present and the pre-v965 19-count is gone.
+    expect(gate).toMatch(/step 20\/\d+: adoption-baseline freshness/);
+    expect(gate).toMatch(/all \d+ checks PASS/);
     expect(gate).not.toMatch(/all 19 checks PASS/);
   });
 
@@ -68,7 +73,7 @@ describe('v1.49.965 integration meta-test (Ship 0.1 adoption-baseline freshness 
     const gate = readFileSync(GATE_PATH, 'utf8');
     const step19Pos = gate.search(/step 19\/\d+: \S+ backup-file accumulation check/);
     const step20Pos = gate.search(/step 20\/\d+: adoption-baseline freshness/);
-    const summaryPos = gate.indexOf('all 20 checks PASS');
+    const summaryPos = gate.search(/all \d+ checks PASS/);
     expect(step19Pos).toBeGreaterThan(-1);
     expect(step20Pos).toBeGreaterThan(step19Pos);
     expect(summaryPos).toBeGreaterThan(step20Pos);

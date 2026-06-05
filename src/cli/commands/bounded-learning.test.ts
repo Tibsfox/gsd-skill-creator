@@ -223,7 +223,7 @@ describe('boundedLearningCommand — --apply gate', () => {
   });
 });
 
-describe('boundedLearningCommand — retention bidirectional apply-guard (v1.49.982 / Ship 5.2 Option D)', () => {
+describe('boundedLearningCommand — retention apply-guard (v1.49.982 Ship 5.2 Option D; hardened v1.49.983 Ship 5.3)', () => {
   let retentionEventsPath: string;
 
   beforeEach(() => {
@@ -239,6 +239,7 @@ describe('boundedLearningCommand — retention bidirectional apply-guard (v1.49.
     writeFileSync(retentionEventsPath, lines.join('\n') + '\n', 'utf8');
   }
 
+  // ── Tier 1: presence (v982) ────────────────────────────────────────────
   it('refuses --apply on a one-directional signal: exit 1, audit "refused", config untouched', async () => {
     // 20 too_aggressive → the e-process rejects and recommends increase, but the
     // signal is one-directional (0 too_lax) so the guard blocks the write.
@@ -264,9 +265,38 @@ describe('boundedLearningCommand — retention bidirectional apply-guard (v1.49.
     expect(audit[audit.length - 1]?.applied).toBe('refused');
   });
 
-  it('applies --apply once the signal is verifiably bidirectional', async () => {
-    // 20 too_aggressive + 2 too_lax → recommendation still increase, but both
-    // polarities present ⇒ guard lifts ⇒ write proceeds.
+  // ── Tier 2: depth + balance (v983 hardening) ───────────────────────────
+  it('refuses --apply on the real-shaped 26:1 corpus (minority below the depth floor)', async () => {
+    // The actual on-disk corpus the v983 dry-run probe ran against: 26
+    // too_aggressive + the single post-v982 too_lax. Both polarities present
+    // (Tier 1 passes) but minority=1 < 3 ⇒ Tier 2 refuses — this is the
+    // degenerate case the probe exposed (meanObservation −0.926, increase).
+    writeRetentionEvents([
+      ...Array.from({ length: 26 }, () => 'too_aggressive' as const),
+      'too_lax',
+    ]);
+
+    const code = await boundedLearningCommand(
+      baseArgs(['--threshold', 'observation.retention_days', '--apply', '--json']),
+      { retentionEventsPath },
+    );
+
+    expect(code).toBe(1);
+    const out = JSON.parse(collectLog());
+    expect(out.direction).toBe('increase');
+    expect(out.applied).toBe('refused');
+    expect(out.applyReason).toContain('too imbalanced to apply');
+
+    const onDisk = JSON.parse(readFileSync(configPath, 'utf8'));
+    expect(onDisk.observation.retention_days).toBe(90);
+    const audit = await readAuditLog(auditLogPath);
+    expect(audit[audit.length - 1]?.applied).toBe('refused');
+  });
+
+  it('refuses --apply when minority polarity is present but too thin (< 3 events)', async () => {
+    // 20 too_aggressive + 2 too_lax: Tier 1 passes (both present), but
+    // minority=2 < MIN_BIDIRECTIONAL_MINORITY_COUNT (3) ⇒ Tier 2 refuses.
+    // (This corpus APPLIED before the v983 hardening.)
     writeRetentionEvents([
       ...Array.from({ length: 20 }, () => 'too_aggressive' as const),
       'too_lax',
@@ -278,8 +308,52 @@ describe('boundedLearningCommand — retention bidirectional apply-guard (v1.49.
       { retentionEventsPath },
     );
 
+    expect(code).toBe(1);
+    const out = JSON.parse(collectLog());
+    expect(out.applied).toBe('refused');
+    expect(out.applyReason).toContain('too imbalanced to apply');
+    const onDisk = JSON.parse(readFileSync(configPath, 'utf8'));
+    expect(onDisk.observation.retention_days).toBe(90);
+  });
+
+  it('refuses --apply when minority is deep enough but the share is too lopsided (< 0.2)', async () => {
+    // 30 too_aggressive + 4 too_lax: minority=4 ≥ 3 (clears the depth floor)
+    // but share 4/34 ≈ 0.118 < 0.2 ⇒ Tier 2 refuses on the balance ratio.
+    writeRetentionEvents([
+      ...Array.from({ length: 30 }, () => 'too_aggressive' as const),
+      ...Array.from({ length: 4 }, () => 'too_lax' as const),
+    ]);
+
+    const code = await boundedLearningCommand(
+      baseArgs(['--threshold', 'observation.retention_days', '--apply', '--json']),
+      { retentionEventsPath },
+    );
+
+    expect(code).toBe(1);
+    const out = JSON.parse(collectLog());
+    expect(out.applied).toBe('refused');
+    expect(out.applyReason).toContain('too imbalanced to apply');
+    const onDisk = JSON.parse(readFileSync(configPath, 'utf8'));
+    expect(onDisk.observation.retention_days).toBe(90);
+  });
+
+  it('applies --apply once the signal is deep AND balanced enough', async () => {
+    // 22 too_aggressive + 6 too_lax → recommendation still increase (evidence
+    // exp(0.375·22 − 0.625·6) = exp(4.5) ≈ 90 ≥ 40), minority=6 ≥ 3, and share
+    // 6/28 ≈ 0.214 ≥ 0.2 ⇒ both guard tiers lift ⇒ write proceeds.
+    writeRetentionEvents([
+      ...Array.from({ length: 22 }, () => 'too_aggressive' as const),
+      ...Array.from({ length: 6 }, () => 'too_lax' as const),
+    ]);
+
+    const code = await boundedLearningCommand(
+      baseArgs(['--threshold', 'observation.retention_days', '--apply', '--json']),
+      { retentionEventsPath },
+    );
+
     expect(code).toBe(0);
     const out = JSON.parse(collectLog());
+    expect(out.direction).toBe('increase');
     expect(out.applied).toBe('applied');
     const onDisk = JSON.parse(readFileSync(configPath, 'utf8'));
     expect(onDisk.observation.retention_days).toBe(91);

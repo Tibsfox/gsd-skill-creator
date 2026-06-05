@@ -219,7 +219,7 @@ describe('applyRecommendation', () => {
   });
 });
 
-describe('applyRecommendation — retention bidirectional guard (v1.49.982 / Ship 5.2 Option D)', () => {
+describe('applyRecommendation — retention apply-guard (v1.49.982 Ship 5.2 Option D; hardened v1.49.983 Ship 5.3)', () => {
   let eventsPath: string;
 
   beforeEach(() => {
@@ -271,9 +271,45 @@ describe('applyRecommendation — retention bidirectional guard (v1.49.982 / Shi
     expect(outcome.kind).toBe('refused');
   });
 
-  it('applies when the signal is verifiably bidirectional (both kinds present)', async () => {
+  it('refuses --apply on a bidirectional-but-thin corpus (minority < 3) — v983 Tier 2', async () => {
+    // Both polarities present (Tier 1 passes) but the minority polarity has only
+    // 1 event ⇒ Tier 2 refuses (this corpus APPLIED before the v983 hardening).
     writeConfig({ observation: { retention_days: 90 } });
     writeEvents(['too_aggressive', 'too_lax', 'too_aggressive']);
+    const outcome = await applyRecommendation(retentionRec(), { configPath, apply: true, retentionEventsPath: eventsPath });
+    expect(outcome.kind).toBe('refused');
+    if (outcome.kind !== 'refused') throw new Error('unreachable');
+    expect(outcome.reason).toContain('too imbalanced to apply');
+    const onDisk = JSON.parse(readFileSync(configPath, 'utf8'));
+    expect(readThresholdValue(onDisk, 'observation.retention_days')).toBe(90);
+  });
+
+  it('refuses --apply on a deep-but-lopsided corpus (minority share < 0.2) — v983 Tier 2', async () => {
+    // minority=3 clears the depth floor, but 3/16 ≈ 0.19 < 0.2 ⇒ balance refuse.
+    writeConfig({ observation: { retention_days: 90 } });
+    writeEvents([...Array(13).fill('too_aggressive' as const), ...Array(3).fill('too_lax' as const)]);
+    const outcome = await applyRecommendation(retentionRec(), { configPath, apply: true, retentionEventsPath: eventsPath });
+    expect(outcome.kind).toBe('refused');
+    if (outcome.kind !== 'refused') throw new Error('unreachable');
+    expect(outcome.reason).toContain('too imbalanced to apply');
+  });
+
+  it('applies when the signal is deep AND balanced enough (minority ≥ 3 AND share ≥ 0.2)', async () => {
+    writeConfig({ observation: { retention_days: 90 } });
+    // 3 + 3 → minority 3, share 0.5 ⇒ both guard tiers lift ⇒ write proceeds.
+    writeEvents(['too_aggressive', 'too_aggressive', 'too_aggressive', 'too_lax', 'too_lax', 'too_lax']);
+    const outcome = await applyRecommendation(retentionRec(), { configPath, apply: true, retentionEventsPath: eventsPath });
+    expect(outcome.kind).toBe('applied');
+    const onDisk = JSON.parse(readFileSync(configPath, 'utf8'));
+    expect(readThresholdValue(onDisk, 'observation.retention_days')).toBe(91);
+  });
+
+  it('applies at the exact minority-share boundary (3/15 = 0.2) — pins the ≥ 0.2 (strict-<) semantics', async () => {
+    writeConfig({ observation: { retention_days: 90 } });
+    // 12 + 3 → minority 3 (≥ 3) and share 3/15 = exactly 0.2 (the ≤ 4:1 cap). The
+    // guard uses `share < 0.2` (strict) so the boundary is INCLUSIVE → applies.
+    // Locks the operator's ≥-0.2 intent against a future < → <= flip.
+    writeEvents([...Array(12).fill('too_aggressive' as const), ...Array(3).fill('too_lax' as const)]);
     const outcome = await applyRecommendation(retentionRec(), { configPath, apply: true, retentionEventsPath: eventsPath });
     expect(outcome.kind).toBe('applied');
     const onDisk = JSON.parse(readFileSync(configPath, 'utf8'));

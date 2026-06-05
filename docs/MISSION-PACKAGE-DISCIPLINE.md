@@ -258,24 +258,23 @@ The three modes are distinct:
 - **Title-density extrinsic (JWST first attempt)** — phrasing chose trip-vocab when alternates existed. Re-author the brief with title-line=0; sub-agent dispatch then succeeds.
 - **Body-density intrinsic (Artemis I)** — secondary-class vocabulary is intrinsic to the mission narrative (hurricanes, scrubs, leaks, communications-not-established). Two paths: (a) hand-author the full deliverable, or (b) salvage-cleanup the partial sub-agent deliverable per §3.4 below.
 
-### 3.3 Pre-dispatch checklist
+### 3.3 Pre-dispatch checklist (automated v1.49.983 — GAP-7)
 
-Before any build sub-agent dispatch, verify:
+Before any build sub-agent dispatch, run the deterministic checker. It encodes the §3.1 primary + secondary classes in code (no LLM; identical input → identical verdict), so the manual greps below are no longer needed:
 
 ```bash
-# Title-line trip-vocab check (primary, hard)
-grep -oE "deferr|trip|content-filter|impact|terminal-event|crash|destruct|kinetic" \
-  .planning/missions/v1-49-<N>-<slug>/MISSION-BRIEF.md | head -1 | wc -l
-# Want: 0 in the H1 title-line
+# Brief: title-line PRIMARY budget 0 + body SECONDARY density (default ≤ 5)
+node tools/trip-vocab-check.mjs .planning/missions/v1-49-<N>-<slug>/MISSION-BRIEF.md --mode brief
 
-# Body secondary-class density check (advisory)
-grep -cE "hurricane|scrub|leak|did not establish|communications not established|ablat" \
-  .planning/missions/v1-49-<N>-<slug>/MISSION-BRIEF.md
-# Want: < 10 across the full body
+# Dispatch prompt (#10407 — the budget applies to the PROMPT too): PRIMARY
+# anywhere 0 + SECONDARY density
+node tools/trip-vocab-check.mjs --stdin --mode prompt < dispatch-prompt.txt
 ```
 
-If title-line > 0: re-author the brief title until it scores 0.
-If body-secondary ≥ 10 and the count is **intrinsic** (cannot be reduced without losing substrate-anchors): hand-author or substitute mission.
+Exit `0` = within budget; exit `1` = TRIP-RISK (re-author the title and/or reduce density; if intrinsic, select Path B hand-author). Pass `--secondary-max 10` for the original advisory threshold; the default `5` is the #10402 strict operational rule. The tool reports class TOTALS and how many classes matched — never the matched tokens (#10462 "describe, don't quote"). The pre-tag-gate runs it in `--mode page` against the current NASA degree's `index.html` as a standing local advisory (step 21, WARN-first).
+
+If title-line PRIMARY > 0: re-author the brief title until it scores 0.
+If body SECONDARY is over budget and the count is **intrinsic** (cannot be reduced without losing substrate-anchors): hand-author or substitute mission.
 
 ### 3.4 Salvage-cleanup escape hatch
 

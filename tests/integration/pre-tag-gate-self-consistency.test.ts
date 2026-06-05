@@ -118,7 +118,7 @@ describe('pre-tag-gate self-consistency (Ship 0.2)', () => {
 
     it('PARITY — every step label shares ONE denominator', () => {
       const dens = new Set(labels.map((l) => l.den));
-      expect([...dens]).toEqual([20]); // the canonical count after v966 normalization
+      expect([...dens]).toEqual([21]); // canonical count: v966 normalized, v983 bumped 20→21 (step 21 trip-vocab)
     });
 
     it('PARITY — the shared denominator equals the "all N checks PASS" summary count', () => {
@@ -134,12 +134,14 @@ describe('pre-tag-gate self-consistency (Ship 0.2)', () => {
       expect(maxStep).toBe(extractSummaryCount(gate));
     });
 
-    it('ANCHOR — an early step (0.5) and the last step (20) both carry the canonical /20', () => {
+    it('ANCHOR — an early step (0.5) and the last step (21) both carry the canonical /21', () => {
       // Pins that the normalization reached the early steps (the pre-v966 /15 region)
-      // AND the running-total tail — a partial revert trips one of these.
-      expect(gate).toMatch(/step 0\.5\/20:/);
-      expect(gate).toMatch(/step 20\/20:/);
+      // AND the running-total tail — a partial revert trips one of these. v983 bumped
+      // the canonical denominator 20→21 when step 21 (trip-vocab) was added.
+      expect(gate).toMatch(/step 0\.5\/21:/);
+      expect(gate).toMatch(/step 21\/21:/);
       expect(gate).not.toMatch(/step [0-9.]+\/15:/); // the frozen /15 denominator is gone
+      expect(gate).not.toMatch(/step [0-9.]+\/20:/); // the pre-v983 /20 denominator is gone
     });
   });
 

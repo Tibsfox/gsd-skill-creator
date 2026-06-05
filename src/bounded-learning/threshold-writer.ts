@@ -35,19 +35,49 @@ export type ApplyOutcome =
   | { kind: 'applied'; previousValue: number; newValue: number; configPath: string };
 
 /**
- * Defense-in-depth guard (v1.49.982 — Ship 5.2 / Option D).
+ * Minimum count of the MINORITY retention-event polarity required before an
+ * `--apply` is permitted (v1.49.983 — Ship 5.3 guard hardening). One or two
+ * events of the rarer kind can be an artifact: the FIRST real `too_lax`
+ * accrued post-v982 against a 26-strong `too_aggressive` pile, and the v983
+ * dry-run probe showed the e-process recommending an increase off that 26:1
+ * corpus (meanObservation −0.926, evidence 9182). Requiring ≥3 means the
+ * minority direction is a pattern, not a fluke.
+ */
+const MIN_BIDIRECTIONAL_MINORITY_COUNT = 3;
+
+/**
+ * Minimum SHARE the minority polarity must hold of the two-sided corpus
+ * (`too_lax` + `too_aggressive`) before an `--apply` is permitted
+ * (v1.49.983). 0.2 caps the imbalance at 4:1 — equivalently
+ * `|meanObservation| ≤ 0.6` — so a lopsided pile can no longer drive the
+ * one-sided e-process to a "false vindication" change while the presence
+ * check alone (v982) mechanically passes.
+ */
+const MIN_BIDIRECTIONAL_MINORITY_FRACTION = 0.2;
+
+/**
+ * Defense-in-depth guard (v1.49.982 Ship 5.2 / Option D; hardened v1.49.983
+ * Ship 5.3).
  *
  * The `observation.retention_days` auto-emit signal was degenerate (one-way
  * `too_aggressive`) until the v982 substrate fix. Applying a calibration
- * recommendation against a one-directional signal raises the threshold as if
- * it were learned evidence — a "false vindication worse than null" (see
+ * recommendation against a degenerate signal raises the threshold as if it
+ * were learned evidence — a "false vindication worse than null" (see
  * `docs/retention-substrate-outcome-driven-debt.md`). This guard converts the
  * doc-discipline rule "never `--apply` until the signal is verifiably
- * bidirectional" into enforced code: the apply is refused unless the on-disk
- * events contain BOTH `too_lax` AND `too_aggressive` (so it also blocks a
- * future all-`too_lax` degenerate corpus, not just today's all-`too_aggressive`
- * one). Dry-run is intentionally NOT guarded — it is the intended post-fix path.
+ * bidirectional" into enforced code, in two tiers:
  *
+ *  1. **Presence** (v982): both `too_lax` AND `too_aggressive` must exist at
+ *     all (also blocks a future all-`too_lax` degenerate corpus, not just
+ *     today's all-`too_aggressive` one).
+ *  2. **Depth + balance** (v983): the mechanical presence check passed at 26:1
+ *     (one `too_lax`, `meanObservation` −0.926) and the loop still recommended
+ *     an increase off essentially one-directional evidence. So the minority
+ *     polarity must also be deep enough (≥ {@link MIN_BIDIRECTIONAL_MINORITY_COUNT})
+ *     AND a large enough share (≥ {@link MIN_BIDIRECTIONAL_MINORITY_FRACTION})
+ *     for the corpus to be trustworthy bidirectional evidence.
+ *
+ * Dry-run is intentionally NOT guarded — it is the intended post-fix probe.
  * Placed at the `applyRecommendation` chokepoint so it covers the CLI,
  * `--watch` mode, and any future scheduler in one spot.
  *
@@ -55,17 +85,43 @@ export type ApplyOutcome =
  */
 async function retentionApplyRefusal(eventsPath: string): Promise<string | null> {
   const events = await readObservationRetentionEvents(eventsPath);
-  const hasTooLax = events.some((e) => e.kind === 'too_lax');
-  const hasTooAggressive = events.some((e) => e.kind === 'too_aggressive');
-  if (hasTooLax && hasTooAggressive) return null;
-  return (
-    `Refusing --apply for observation.retention_days: the on-disk retention ` +
-    `signal is not verifiably bidirectional (too_lax=${hasTooLax}, ` +
-    `too_aggressive=${hasTooAggressive}). Applying on a one-directional signal ` +
-    `is a false vindication — see docs/retention-substrate-outcome-driven-debt.md. ` +
-    `Accumulate both polarities (the v982 outcome-driven substrate emits them ` +
-    `from real sweeps) before applying.`
-  );
+  const tooLax = events.filter((e) => e.kind === 'too_lax').length;
+  const tooAggressive = events.filter((e) => e.kind === 'too_aggressive').length;
+
+  // Tier 1 — presence.
+  if (tooLax === 0 || tooAggressive === 0) {
+    return (
+      `Refusing --apply for observation.retention_days: the on-disk retention ` +
+      `signal is not verifiably bidirectional (too_lax=${tooLax}, ` +
+      `too_aggressive=${tooAggressive}). Applying on a one-directional signal ` +
+      `is a false vindication — see docs/retention-substrate-outcome-driven-debt.md. ` +
+      `Accumulate both polarities (the v982 outcome-driven substrate emits them ` +
+      `from real sweeps) before applying.`
+    );
+  }
+
+  // Tier 2 — depth + balance. Both polarities exist, but a thin or lopsided
+  // corpus still lets the majority dominate the one-sided e-process.
+  const total = tooLax + tooAggressive;
+  const minority = Math.min(tooLax, tooAggressive);
+  const minorityFraction = minority / total;
+  if (
+    minority < MIN_BIDIRECTIONAL_MINORITY_COUNT ||
+    minorityFraction < MIN_BIDIRECTIONAL_MINORITY_FRACTION
+  ) {
+    return (
+      `Refusing --apply for observation.retention_days: the retention signal is ` +
+      `bidirectional but too imbalanced to apply (too_lax=${tooLax}, ` +
+      `too_aggressive=${tooAggressive}; minority=${minority}, ` +
+      `share=${minorityFraction.toFixed(3)}). Require the minority polarity to ` +
+      `reach ≥ ${MIN_BIDIRECTIONAL_MINORITY_COUNT} events AND ≥ ` +
+      `${MIN_BIDIRECTIONAL_MINORITY_FRACTION} share (≤ 4:1) so a lopsided pile ` +
+      `cannot drive a false-vindication change — see ` +
+      `docs/retention-substrate-outcome-driven-debt.md.`
+    );
+  }
+
+  return null;
 }
 
 /**
