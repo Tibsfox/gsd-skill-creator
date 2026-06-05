@@ -73,6 +73,15 @@ Quick reference for all commands organized by workflow stage.
 | [team spawn](#team-spawn) | `tm sp` | Check team readiness (agent resolution) |
 | [team status](#team-status) | `tm s` | Show team details and validation summary |
 
+### Integration: Config Management
+
+| Command | Alias | Description |
+|---------|-------|-------------|
+| [integration](#integration) | `int` | Manage integration config (validate, show, migrate) |
+| [integration validate](#integration-validate) | | Validate config against the schema (default subcommand) |
+| [integration show](#integration-show) | | Display effective config (file merged with defaults) |
+| [integration migrate](#integration-migrate) | | Delete an explicit `observation.mine_active_skills: false` (pre-5.1c) |
+
 ---
 
 ## Global Options
@@ -2173,6 +2182,187 @@ For each table, you can interactively select which candidates to turn into draft
 
 ---
 
+## Integration: Config Management
+
+Commands for inspecting and maintaining the skill-creator integration config at `.planning/skill-creator.json` — the file that controls feature toggles, token budget, observation retention, and suggestion thresholds. A missing file means all defaults are used; a partial file is merged with defaults, so you only specify the values you override.
+
+All subcommands share the `--config=PATH` and `--json` options. The command alias is `int`.
+
+---
+
+### integration
+
+Manage the integration config — dispatcher for the `validate`, `show`, and `migrate` subcommands.
+
+**Synopsis:**
+
+```
+skill-creator integration [validate|show|migrate] [--config=PATH] [--json] [--apply]
+skill-creator int [validate|show|migrate] [options]
+```
+
+**Description:**
+
+Entry point for the integration-config subcommands. With no subcommand, runs `validate`. The alias `int` works everywhere `integration` does.
+
+**Subcommands:**
+
+- `validate` — Validate the config against the schema (default)
+- `show` — Display the effective config (file merged with defaults)
+- `migrate` — Migrate a pre-5.1c config (delete an explicit `observation.mine_active_skills: false`)
+
+**Options:**
+
+- `--config=PATH`: Path to the config file (default: `.planning/skill-creator.json`)
+- `--json`: Output results as JSON (machine-readable)
+- `--apply`: (`migrate` only) Write the change; otherwise dry-run/report only
+- `--help, -h`: Show usage
+
+**Examples:**
+
+```bash
+# Validate (the default subcommand)
+skill-creator integration
+
+# Short form
+skill-creator int show
+```
+
+---
+
+### integration validate
+
+Validate the integration config against its schema.
+
+**Synopsis:**
+
+```
+skill-creator integration validate [--config=PATH] [--json]
+```
+
+**Description:**
+
+Reads the config file, parses it as JSON, and validates it against the Zod schema, reporting field-level errors. A missing config file is not an error — defaults are reported and the command exits 0. This is the default subcommand, so `skill-creator integration` with no subcommand runs it.
+
+**Options:**
+
+- `--config=PATH`: Path to the config file (default: `.planning/skill-creator.json`)
+- `--json`: Emit `{ valid, errors, config }` as JSON
+
+**Examples:**
+
+```bash
+# Validate the default config
+skill-creator integration validate
+
+# JSON output for CI
+skill-creator integration validate --json
+
+# Validate a config at a custom path
+skill-creator int validate --config=/custom/path.json
+```
+
+**JSON output:**
+
+```json
+{
+  "valid": true,
+  "errors": [],
+  "config": { "...": "effective config" }
+}
+```
+
+On failure, `valid` is `false` and `errors` is an array of `{ "field": "...", "message": "..." }` entries.
+
+---
+
+### integration show
+
+Display the effective config (file merged with defaults).
+
+**Synopsis:**
+
+```
+skill-creator integration show [--config=PATH] [--json]
+```
+
+**Description:**
+
+Reads the config file, merges it with defaults, and prints the effective configuration. If no file exists, all defaults are shown. Invalid JSON or a schema-invalid file exits 1.
+
+**Options:**
+
+- `--config=PATH`: Path to the config file (default: `.planning/skill-creator.json`)
+- `--json`: Print the effective config as raw JSON
+
+**Examples:**
+
+```bash
+# Show the effective config
+skill-creator integration show
+
+# JSON output
+skill-creator integration show --json
+```
+
+---
+
+### integration migrate
+
+Migrate a pre-5.1c config so skill mining re-inherits the current default.
+
+**Synopsis:**
+
+```
+skill-creator integration migrate [--config=PATH] [--json] [--apply]
+```
+
+**Description:**
+
+When the `observation.mine_active_skills` toggle first shipped (5.1b) it defaulted to `false`, so some installs pinned `false` explicitly. The 5.1c rollout flipped the default to `true`, but an explicit `false` still overrides the default. This subcommand **deletes** an explicit `observation.mine_active_skills: false` so the config re-inherits the new default (`true`) — and self-heals on any future default change, matching what a fresh install looks like.
+
+Only an explicit `false` is a migration target. An absent key already inherits the default (no-op), and `true` is already enabled (no-op).
+
+`migrate` is **dry-run by default**: it reports what it would do and exits without writing. Pass `--apply` to write the change; the original is first backed up to `<path>.bak.<timestamp>`. An allowlist guard aborts the write if anything other than `observation.mine_active_skills` would change, protecting sibling keys (e.g. `observation.retention_days`). The operation is idempotent.
+
+This subcommand is **operator-invoked only** — it is intentionally not run by the installer (`install.cjs`), which never touches an existing config.
+
+**Options:**
+
+- `--config=PATH`: Path to the config file (default: `.planning/skill-creator.json`)
+- `--json`: Emit the migration result as JSON
+- `--apply`: Write the change (delete the key) and back up the original; without it, dry-run only
+
+**Examples:**
+
+```bash
+# Dry-run: report what would change (default)
+skill-creator integration migrate
+
+# Apply the migration (writes + .bak backup)
+skill-creator integration migrate --apply
+
+# Migrate a config at a custom path, JSON output
+skill-creator int migrate --config=/custom/path.json --json
+```
+
+**JSON output:**
+
+```json
+{
+  "path": ".planning/skill-creator.json",
+  "action": "delete-key",
+  "applied": false,
+  "reason": "Would delete explicit observation.mine_active_skills:false so it re-inherits the default (true). Re-run with --apply to write."
+}
+```
+
+- `action`: `delete-key` (a migration is available or was applied), `none` (nothing to migrate), or `error` (refused or failed)
+- `applied`: `true` only after a successful `--apply` write
+- `backup`: path to the `.bak.<timestamp>` copy (present only on a successful `--apply`)
+
+---
+
 ## Exit Codes
 
 Commands return exit codes for CI/scripting integration:
@@ -2188,6 +2378,7 @@ Commands return exit codes for CI/scripting integration:
 | team validate | All teams valid (or only warnings) | One or more teams have errors |
 | team spawn | All member agents resolved | One or more agents missing |
 | discover | Pipeline completes, drafts written | Error during scan/extract/rank |
+| integration | Config valid / shown / nothing to migrate / migration applied | Validation errors, unparseable JSON, or a refused/failed migrate |
 | (all others) | Success | Error occurred |
 
 ### Threshold Flags for CI
@@ -2223,6 +2414,9 @@ Commands supporting `--json` output for scripting:
 | team validate | `--json` | Validation result with errors/warnings |
 | team spawn | `--json` | Readiness status with member resolution |
 | team status | `--json` | Full config with validation summary |
+| integration validate | `--json` | `{ valid, errors, config }` |
+| integration show | `--json` | Effective config object |
+| integration migrate | `--json` | `{ path, action, applied, reason, backup? }` |
 
 ### JSON Schema: detect-conflicts
 
