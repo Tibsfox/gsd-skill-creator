@@ -16,6 +16,14 @@
  *   T9. Shelfware threshold passes when nothing violates
  *   T10. Type-only imports counted as real callers (intentional)
  *   T11. Multiple importers from same module counted once
+ *
+ * Reachability dimension (Ship 3.1 / v1.49.977):
+ *   T17. Module reachable from a production root (src/cli.ts) — and transitively
+ *   T18. Module reachable from the library root (src/index.ts)
+ *   T19. Living-but-unreachable — imported only inside an unreachable cycle
+ *   T20. FILE-level granularity — module-level reachability would over-report
+ *   T21. Desktop import seeds reachability; tools/ import does NOT (dev tooling)
+ *   T22. Dynamic import() string-literal edges are followed for reachability
  */
 import { describe, it, expect, afterEach } from 'vitest';
 import {
@@ -271,5 +279,87 @@ describe('adoption-scan', () => {
     expect(parsed.length).toBe(50);
     // Validate the array is structurally complete (last record is whole)
     expect(parsed[49].module).toBe('mod9'); // alphabetical: mod0, mod1, mod10, ...mod9
+  });
+
+  // ─── v1.49.977 reachability dimension (Ship 3.1) ─────────────────────────
+
+  it('T17: module reachable from the CLI root (src/cli.ts), transitively', () => {
+    setupFixture({
+      'src/cli.ts': "import { A } from './a/index.js';\nimport { B } from './b/index.js';\nconsole.log(A, B);\n",
+      'src/a/index.ts': 'export const A = 1;\n',
+      'src/b/index.ts': "import { C } from '../c/index.js';\nexport const B = C;\n",
+      'src/c/index.ts': 'export const C = 3;\n',
+    });
+    const { records } = runScriptJson();
+    const by = (m) => records.find((r) => r.module === m);
+    expect(by('a').reachableFromProduction).toBe(true); // direct from cli root
+    expect(by('b').reachableFromProduction).toBe(true); // direct from cli root
+    expect(by('c').reachableFromProduction).toBe(true); // transitive via b
+  });
+
+  it('T18: module reachable from the library root (src/index.ts)', () => {
+    setupFixture({
+      'src/index.ts': "export { D } from './d/index.js';\n",
+      'src/d/index.ts': 'export const D = 4;\n',
+    });
+    const { records } = runScriptJson();
+    expect(records.find((r) => r.module === 'd').reachableFromProduction).toBe(true);
+  });
+
+  it('T19: living-but-unreachable — imported only inside an unreachable cycle', () => {
+    setupFixture({
+      'src/x/index.ts': 'export const X = 1;\n',
+      'src/y/index.ts': "import { X } from '../x/index.js';\nexport const Y = X;\n", // y imports x; nobody imports y; no root
+    });
+    const { records } = runScriptJson();
+    const x = records.find((r) => r.module === 'x');
+    // x is `living` by import-surface (y is a non-test importer) yet unreachable.
+    expect(x.status).toBe('living');
+    expect(x.reachableFromProduction).toBe(false);
+  });
+
+  it('T20: FILE-level granularity — a reachable module importing X via an unreachable file does NOT make X reachable', () => {
+    setupFixture({
+      'src/cli.ts': "import { A } from './m/a.js';\nconsole.log(A);\n",
+      'src/m/a.ts': 'export const A = 1;\n', // reachable from cli
+      'src/m/b.ts': "import { X } from '../x/index.js';\nexport const B = X;\n", // imports x; b is NOT reached by anything
+      'src/x/index.ts': 'export const X = 9;\n',
+    });
+    const { records } = runScriptJson();
+    const m = records.find((r) => r.module === 'm');
+    const x = records.find((r) => r.module === 'x');
+    expect(m.reachableFromProduction).toBe(true); // via m/a.ts
+    expect(x.status).toBe('living'); // module m imports x (via b.ts)
+    // Module-level reachability would WRONGLY mark x reachable (m is reachable AND
+    // imports x). File-level correctly reports x unreachable: m/b.ts is not reached.
+    expect(x.reachableFromProduction).toBe(false);
+  });
+
+  it('T21: desktop/ import seeds reachability; tools/ import does NOT (dev tooling)', () => {
+    setupFixture({
+      'src/cli.ts': 'export const ROOT = 0;\n', // a present root (imports nothing relevant)
+      'src/deskmod/index.ts': 'export const DM = 1;\n',
+      'desktop/widget.ts': "import { DM } from '../src/deskmod/index.js';\n",
+      'src/toolmod/index.ts': 'export const TM = 1;\n',
+      'tools/runner.mjs': "import { TM } from '../src/toolmod/index.js';\n",
+    });
+    const { records } = runScriptJson();
+    const desk = records.find((r) => r.module === 'deskmod');
+    const tool = records.find((r) => r.module === 'toolmod');
+    // Both are `living` (each has a real external importer)...
+    expect(desk.status).toBe('living');
+    expect(tool.status).toBe('living');
+    // ...but only the shipped desktop app confers production reachability.
+    expect(desk.reachableFromProduction).toBe(true);
+    expect(tool.reachableFromProduction).toBe(false);
+  });
+
+  it('T22: dynamic import() string-literal edges are followed for reachability', () => {
+    setupFixture({
+      'src/cli.ts': "export async function run() { const { D } = await import('./dyn/index.js'); return D; }\n",
+      'src/dyn/index.ts': 'export const D = 1;\n',
+    });
+    const { records } = runScriptJson();
+    expect(records.find((r) => r.module === 'dyn').reachableFromProduction).toBe(true);
   });
 });

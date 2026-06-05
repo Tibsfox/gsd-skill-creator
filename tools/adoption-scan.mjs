@@ -19,14 +19,40 @@
  *     - internal   : importer is some other src/<other-module>/
  *     - external   : importer is outside src/ (scripts/, tools/, etc.)
  *
- * Per-module status verdicts:
+ * Per-module status verdicts (import-surface dimension):
  *   - living      : ≥1 real caller (internal OR cli OR external — non-test)
  *   - test-only   : importers exist BUT all are test files
  *   - isolated    : zero importers anywhere
  *
- * Limitations (intentional for v786 ship 1/N):
- *   - Static analysis only. A module imported but never invoked at runtime
- *     still counts as 'living'. Future ship can add runtime call-graph.
+ * Reachability dimension (v2, Ship 3.1 / v1.49.977):
+ *   In addition to import-surface, each record carries
+ *   `reachableFromProduction: boolean` — whether the module is reachable by a
+ *   FILE-level static-import walk from the project's DECLARED production entry
+ *   points: the npm `bin`/`main` roots (src/cli.ts + src/index.ts) + the two
+ *   registered Claude Code hooks (src/hooks/session-{start,end}.ts) + the src/
+ *   frontier imported by the SHIPPED desktop/Tauri app (desktop/, src-tauri/).
+ *   Dev/CI tooling (tools/, scripts/) is NOT a production root — a module reachable
+ *   only from build tooling is not in any shipped artifact. This is STRICTER than
+ *   import-surface: a module can be `living` (imported by non-test code) yet
+ *   `reachableFromProduction:false` when every file that reaches it is itself
+ *   unreachable from a shipped entry point — e.g. modules reached only via dev
+ *   tooling, or the MB control-theory leaves lyapunov/projection, whose only
+ *   importers are other (unreachable) island members.
+ *   Reachability is computed at FILE granularity then lifted to modules (a module
+ *   is reachable iff ≥1 of its non-test files is reachable); MODULE-level
+ *   reachability would be wrong here — orchestration-the-module is reachable AND
+ *   imports ace, but its reachable files do not. The reachability dimension is
+ *   telemetry + a drift-guard oracle; it does NOT feed --shelfware-threshold
+ *   (which stays import-surface) so it cannot trip the gate.
+ *
+ * Limitations:
+ *   - Static analysis only (both dimensions). A module reachable at import time
+ *     but never invoked at runtime still counts as reachable. Dynamic `import()`
+ *     specifiers ARE followed (the CLI dispatcher uses them); runtime-flag gating
+ *     is NOT modeled — a statically-reachable-but-flag-off path reads reachable.
+ *     Type-only imports are followed too (conservative: biases toward reachable).
+ *     Modules invoked only via shell/`require()` (initialization, retro,
+ *     interpreter, settings) read unreachable-from-production and stay allowlisted.
  *   - Cross-module imports are detected via specifier path patterns:
  *       import ... from '../<module>/...'
  *       import ... from '../../<module>/...'
@@ -53,6 +79,7 @@
 
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join, resolve, relative, sep, dirname } from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 const args = process.argv.slice(2);
 const JSON_OUTPUT = args.includes('--json');
@@ -109,6 +136,39 @@ function loadAllowlist() {
  * Directories not present on disk are silently skipped.
  */
 const EXTERNAL_IMPORTER_DIRS = ['tools', 'scripts', 'src-tauri', 'desktop'];
+
+/**
+ * Production entry roots for the reachability dimension (Ship 3.1) — src/ source
+ * files that are DECLARED runtime entry points of the npm package + the registered
+ * hooks:
+ *   - cli.ts                 — package.json `bin.skill-creator` → dist/cli.js
+ *   - index.ts               — package.json `main` → dist/index.js (library surface)
+ *   - hooks/session-start.ts, hooks/session-end.ts — the two Claude Code hooks
+ *     registered in .claude/settings.json (shebang Node entry points)
+ * Paths are relative to src/.
+ */
+const REACHABILITY_ROOTS = [
+  'cli.ts',
+  'index.ts',
+  join('hooks', 'session-start.ts'),
+  join('hooks', 'session-end.ts'),
+];
+
+/**
+ * Other SHIPPED products whose direct src/ imports also count as production entry
+ * points: the desktop/Tauri app (`desktop/`) and the Tauri backend (`src-tauri/`).
+ * The BFS is seeded with the src/ files these import (resolved at file level), so a
+ * src/ module reachable from the desktop app — but not from the npm CLI/library —
+ * still reads reachableFromProduction:true. This keeps the reachability dimension
+ * consistent with the import-surface dimension, which already counts desktop/ as a
+ * real-caller dir (EXTERNAL_IMPORTER_DIRS). Crucially this EXCLUDES tools/ and
+ * scripts/ — those are dev/CI tooling, not shipped products, so a module reachable
+ * only from them reads reachableFromProduction:false (it stays `living` in the
+ * import-surface dimension via externalImporters). That asymmetry is the whole point
+ * of the stricter dimension: "imported by something" ≠ "reachable from a shipped
+ * entry point".
+ */
+const PRODUCTION_EXTERNAL_DIRS = ['desktop', 'src-tauri'];
 
 // ─── Module enumeration ──────────────────────────────────────────────────────
 
@@ -212,10 +272,101 @@ function resolveToModule(importerAbsPath, specifier) {
   return segs[0];
 }
 
+// ─── File-level reachability (Ship 3.1) ──────────────────────────────────────
+
+const SRC_EXTS = ['.ts', '.tsx', '.mts', '.cts', '.mjs', '.cjs', '.js', '.jsx'];
+
+/**
+ * Resolve an import specifier to an absolute source FILE inside src/, or null.
+ * Unlike resolveToModule (which stops at the module name), this performs full
+ * source resolution — mapping compiled-extension specifiers (`./foo.js`) back to
+ * the TS source, trying source extensions, and falling back to `<dir>/index.*`.
+ * Used only by the file-level reachability walk.
+ */
+function resolveToFile(importerAbsPath, specifier) {
+  if (specifier.startsWith('node:')) return null;
+  if (!specifier.startsWith('.') && !specifier.startsWith('src/')) return null;
+  const base = specifier.startsWith('src/')
+    ? resolve(ROOT, specifier)
+    : resolve(dirname(importerAbsPath), specifier);
+  const noExt = base.replace(/\.(?:js|mjs|cjs|jsx|ts|tsx|mts|cts)$/, '');
+  const candidates = [];
+  for (const ext of SRC_EXTS) candidates.push(noExt + ext);
+  candidates.push(base);
+  for (const ext of SRC_EXTS) candidates.push(join(base, 'index' + ext));
+  for (const c of candidates) {
+    const relFromSrc = relative(SRC_DIR, c);
+    if (relFromSrc.startsWith('..') || relFromSrc.startsWith(sep)) continue; // outside src/
+    if (existsSync(c) && statSync(c).isFile()) return c;
+  }
+  return null;
+}
+
+/**
+ * Compute the set of module names reachable from the production entry roots via a
+ * FILE-level static-import walk over non-test src/ files (Ship 3.1). Returns
+ * Set<moduleName>. A module is reachable iff ≥1 of its non-test files is reachable
+ * from a root. See REACHABILITY_ROOTS and the header doc for why this is computed
+ * at file granularity (module-level reachability would over-report).
+ */
+function computeReachableModules() {
+  // Build the file-level import graph over non-test src files.
+  const edges = new Map(); // absFile -> Set<absFile>
+  for (const file of walkTsFiles(SRC_DIR)) {
+    if (isTestPath(file)) continue;
+    const targets = new Set();
+    for (const spec of extractSpecifiers(readFileSync(file, 'utf8'))) {
+      const t = resolveToFile(file, spec);
+      if (t && !isTestPath(t)) targets.add(t);
+    }
+    edges.set(file, targets);
+  }
+  // BFS/DFS seeds: (1) the npm package + hook entry roots, (2) the src/ frontier
+  // directly imported by the shipped desktop/Tauri products (NOT dev tooling).
+  const reachableFiles = new Set();
+  const stack = [];
+  const addSeed = (p) => {
+    if (existsSync(p) && statSync(p).isFile() && !reachableFiles.has(p)) {
+      reachableFiles.add(p);
+      stack.push(p);
+    }
+  };
+  for (const r of REACHABILITY_ROOTS) addSeed(join(SRC_DIR, r));
+  for (const d of PRODUCTION_EXTERNAL_DIRS) {
+    const dirAbs = join(ROOT, d);
+    if (!existsSync(dirAbs)) continue;
+    for (const file of walkTsFiles(dirAbs)) {
+      if (isTestPath(file)) continue;
+      for (const spec of extractSpecifiers(readFileSync(file, 'utf8'))) {
+        const t = resolveToFile(file, spec);
+        if (t && !isTestPath(t)) addSeed(t); // src/ file imported by a shipped product
+      }
+    }
+  }
+  while (stack.length > 0) {
+    const f = stack.pop();
+    const outs = edges.get(f);
+    if (!outs) continue;
+    for (const t of outs) {
+      if (!reachableFiles.has(t)) {
+        reachableFiles.add(t);
+        stack.push(t);
+      }
+    }
+  }
+  // Lift file reachability to module reachability (first path segment under src/).
+  const reachableModules = new Set();
+  for (const f of reachableFiles) {
+    reachableModules.add(relative(SRC_DIR, f).split(sep)[0]);
+  }
+  return reachableModules;
+}
+
 // ─── Scan ────────────────────────────────────────────────────────────────────
 
 function scan() {
   const allowlist = loadAllowlist();
+  const reachableModules = computeReachableModules();
   const modules = listModules();
   const records = new Map();
   for (const m of modules) {
@@ -271,10 +422,10 @@ function scan() {
     }
   }
   }
-  return modules.map((m) => finalizeRecord(records.get(m), allowlist));
+  return modules.map((m) => finalizeRecord(records.get(m), allowlist, reachableModules));
 }
 
-function finalizeRecord(raw, allowlist) {
+function finalizeRecord(raw, allowlist, reachableModules) {
   const realCallerCount =
     raw.internalImporters.size + raw.cliImporters.size + raw.externalImporters.size;
   const testCount = raw.testImporters.size;
@@ -294,6 +445,7 @@ function finalizeRecord(raw, allowlist) {
     realCallerCount,
     testCount,
     status,
+    reachableFromProduction: reachableModules ? reachableModules.has(raw.module) : null,
     allowlisted,
     allowlistReason: allowlisted ? allowlist.get(raw.module) : null,
   };
@@ -313,9 +465,14 @@ function formatMarkdown(records) {
   const testOnly = records.filter((r) => r.status === 'test-only');
   const living = records.filter((r) => r.status === 'living');
 
-  lines.push(`**Summary:** ${records.length} modules — ${living.length} living · ${testOnly.length} test-only · ${isolated.length} isolated.`);
+  const reachable = records.filter((r) => r.reachableFromProduction === true);
+  const unreachable = records.filter((r) => r.reachableFromProduction === false);
+
+  lines.push(`**Summary:** ${records.length} modules — ${living.length} living · ${testOnly.length} test-only · ${isolated.length} isolated. **Reachability:** ${reachable.length} reachable-from-production · ${unreachable.length} unreachable-from-production.`);
   lines.push('');
-  lines.push('**What this measures:** TypeScript-import-surface adoption. A module is "living" if ≥1 non-test TS file (in `src/`, `tools/`, `scripts/`, `src-tauri/`, or `desktop/`) imports it. Modules invoked only via npm-scripts or shell-spawn (e.g., `node tools/foo.mjs <module-arg>`) will show as test-only — their CLI binary may still be in use even when their TS API is dormant.');
+  lines.push('**What this measures (import-surface):** TypeScript-import-surface adoption. A module is "living" if ≥1 non-test TS file (in `src/`, `tools/`, `scripts/`, `src-tauri/`, or `desktop/`) imports it. Modules invoked only via npm-scripts or shell-spawn (e.g., `node tools/foo.mjs <module-arg>`) will show as test-only — their CLI binary may still be in use even when their TS API is dormant.');
+  lines.push('');
+  lines.push('**What this measures (reachability, Ship 3.1):** `reachableFromProduction` is the stricter dimension — whether a file-level static-import walk from the declared production entry roots (`src/cli.ts`, `src/index.ts`, `src/hooks/session-{start,end}.ts`) reaches any non-test file of the module. A module imported only by dev/CI tooling (`tools/`, `scripts/`) or only inside an unreachable import cycle is `living` but **unreachable-from-production**. This dimension does NOT feed `--shelfware-threshold` (which stays import-surface).');
   lines.push('');
 
   if (isolated.length > 0) {
@@ -356,6 +513,21 @@ function formatMarkdown(records) {
     lines.push('|--------|-----------:|---------------:|');
     for (const r of testOnly.sort((a, b) => a.module.localeCompare(b.module))) {
       lines.push(`| \`${r.module}\` | ${r.selfFiles} | ${r.testCount} |`);
+    }
+    lines.push('');
+  }
+
+  const livingUnreachable = living.filter((r) => r.reachableFromProduction === false);
+  if (livingUnreachable.length > 0) {
+    lines.push('## Living but unreachable from production (reachability-v2, Ship 3.1)');
+    lines.push('');
+    lines.push('These modules are `living` by import-surface (≥1 non-test importer) but are NOT reachable by a file-level static-import walk from the declared production entry roots (`src/cli.ts`, `src/index.ts`, `src/hooks/session-{start,end}.ts`). They are imported only by code that is itself unreachable from a root (e.g. an intra-island cycle), or only by dev/CI tooling under `tools/` / `scripts/`. An **allowlisted** row is an accepted park/reference; a **non-allowlisted** row is a shelfware signal the import-surface dimension misses.');
+    lines.push('');
+    lines.push('| Module | real callers | allowlisted | note |');
+    lines.push('|--------|-------------:|:-----------:|------|');
+    for (const r of livingUnreachable.sort((a, b) => a.module.localeCompare(b.module))) {
+      const note = r.allowlisted ? 'allowlisted (park/reference)' : '**not allowlisted — shelfware review**';
+      lines.push(`| \`${r.module}\` | ${r.realCallerCount} | ${r.allowlisted ? 'yes' : 'NO'} | ${note} |`);
     }
     lines.push('');
   }
@@ -420,4 +592,10 @@ function main() {
   exitWhenDrained(0);
 }
 
-main();
+export { scan, finalizeRecord, computeReachableModules, resolveToFile, REACHABILITY_ROOTS };
+
+// Run as a script only — allow importing scan()/computeReachableModules() from
+// tests (e.g. the reachability drift-guard) without triggering main()/process.exit.
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main();
+}

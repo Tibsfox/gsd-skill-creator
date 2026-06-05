@@ -28,20 +28,32 @@ D3 **parks** the island rather than wiring or retiring it:
 
 | Module | Code | Role | adoption-scan status | Reachable from production? |
 |--------|------|------|----------------------|----------------------------|
-| `src/ace/` | MA-2 | ACE actor-critic (import sink) | living | only via the default-OFF M5 orchestration-selector edge |
-| `src/eligibility/` | MA-1 | TD(λ) eligibility traces | test-only | no |
-| `src/lyapunov/` | MB-1 | Lyapunov-stable K_H adaptation | living* | no — only island importers (learnable-k_h, projection) |
-| `src/projection/` | MB-2 | smooth projection operators | living* | no — only island importer (langevin) |
-| `src/dead-zone/` | MB-5 | dead-zone bounded learning | test-only | no |
-| `src/langevin/` | MD-3 | Langevin noise injection | test-only | no (imports projection) |
-| `src/temperature/` | MD-4 | annealed temperature schedule | test-only | no |
-| `src/learnable-k_h/` | MD-5 | per-(skill, task-type) learnable K_H heads | test-only | no (imports ace + lyapunov) |
+| `src/ace/` | MA-2 | ACE actor-critic (import sink) | living | scanner: **true** — static value-edge from the default-OFF M5 orchestration-selector |
+| `src/eligibility/` | MA-1 | TD(λ) eligibility traces | test-only | scanner: false |
+| `src/lyapunov/` | MB-1 | Lyapunov-stable K_H adaptation | living* | scanner: **false** — only island importers (learnable-k_h, projection) |
+| `src/projection/` | MB-2 | smooth projection operators | living* | scanner: **false** — only island importer (langevin) |
+| `src/dead-zone/` | MB-5 | dead-zone bounded learning | test-only | scanner: false |
+| `src/langevin/` | MD-3 | Langevin noise injection | test-only | scanner: false (imports projection) |
+| `src/temperature/` | MD-4 | annealed temperature schedule | test-only | scanner: false |
+| `src/learnable-k_h/` | MD-5 | per-(skill, task-type) learnable K_H heads | test-only | scanner: false (imports ace + lyapunov) |
 
-`*` `lyapunov` and `projection` read **`living`** by the current import-surface
-scanner only because other *island* modules import them — they have **zero**
-production importers. This is exactly the case the reachability-aware scanner v2
-(audit Ship 3.1) is meant to reclassify; until then, the allowlist entry records
-that their "living" status is intra-island, not production reachability.
+`*` `lyapunov` and `projection` read **`living`** by the import-surface scanner only
+because other *island* modules import them — they have **zero** production importers.
+The reachability-aware scanner v2 (audit **Ship 3.1**) **landed at v1.49.977** and now
+reclassifies exactly this case: both report **`reachableFromProduction:false`**. The
+`ace` row is the one exception — see the note below the table.
+
+**Reachability-v2 verdict (v1.49.977):** the file-level reachability walk
+(`tools/adoption-scan.mjs`, from the npm `bin`/`main` roots + hooks + the shipped
+desktop/Tauri frontier; dev tooling excluded) reports **7 of 8** island modules as
+`reachableFromProduction:false`. `ace` (the sink) reports **`true`** because its sole
+non-island edge — the static **value**-import of `applyActorSignalToScore` from the
+production M5 selector `src/orchestration/selector.ts` — is statically reachable. The
+flag-off byte-identical guarantee is **runtime** (the `aceSignal !== null` guard in
+`selector.ts`), not static, so a static scanner correctly reports `ace` reachable.
+This vindicates the D3 framing ("`ace` is the sink with one flag-gated production
+edge → wiring it advances only 1/8") and is pinned by the
+`tests/integration/learning-substrate-parked.test.ts` reachability drift-guard.
 
 ## What is NOT in the island
 

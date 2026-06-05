@@ -54,8 +54,37 @@ entry, or the deletion commit.
 | `koopman-memory` | WIRED | v1.49.792 | `src/cli/commands/koopman-check.ts` | Exposed the three advisory retention invariants (`checkIdentityRetention`, `checkZeroInputRetention`, `checkLipschitzBound`) plus operator construction + spectral-data through a new top-level `skill-creator koopman-check`/`kc` CLI. Three-tier output (text/quiet/JSON). HARD-preservation invariants intact: `src/memory/` runtime untouched; only `import type` references; G8 HARD-preservation gate preserved; advisory-only exit-code 0 invariant. |
 | `coherent-functors` | WIRED | v1.49.793 | `src/cli/commands/coherent-check.ts` | Exposed the four coherence predicates (`checkNaturality`, `checkIdentity`, `checkComposition`, `checkDirectSum`) plus the aggregate `checkCoherence` and `identityFunctor` factory through a new top-level `skill-creator coherent-check`/`cc` CLI. Three-tier output (text/quiet/JSON). G6 HARD-preservation gate preserved; advisory-only exit-code 0 invariant. |
 | `hourglass-persistence` | WIRED | v1.49.793 | `src/cli/commands/hourglass-check.ts` | Exposed the topological-hole detector + contraction-index computation + waist detection + audit-finding emitter through a new top-level `skill-creator hourglass-check`/`hc` CLI. Canonical fixtures (hourglass / chain / empty) provide no-arg smoke check. Three-tier output (text/quiet/JSON). Standard CAPCOM preservation gate preserved; advisory-only exit-code 0 invariant. |
-| MA/MB/MD control-theory island (`ace`, `eligibility`, `lyapunov`, `projection`, `dead-zone`, `langevin`, `temperature`, `learnable-k_h`) | ALLOWLISTED | v1.49.972 | `docs/learning-substrate-parked.md`; 8 `tools/adoption-scan.allowlist.json` entries (`addedBy: v972 D3 control-theory island park`) | D3: 8-module control-theory learning-substrate island; `ace` (MA-2) is the import sink (the others import it). Flag-gated default-OFF, flag-off byte-identical; unreachable from any production entry point (`lyapunov`/`projection` read `living` only via intra-island imports — reachability-v2, Ship 3.1). Parked not wired (`ace` is the sink → wiring it advances only 1/8) and not retired (latent tested capability). Generic resume (a learning-loop runtime consumes the substrate, not v1.50-specific); retire-or-resume review by 2027-06-04. |
+| MA/MB/MD control-theory island (`ace`, `eligibility`, `lyapunov`, `projection`, `dead-zone`, `langevin`, `temperature`, `learnable-k_h`) | ALLOWLISTED | v1.49.972 | `docs/learning-substrate-parked.md`; 8 `tools/adoption-scan.allowlist.json` entries (`addedBy: v972 D3 control-theory island park`) | D3: 8-module control-theory learning-substrate island; `ace` (MA-2) is the import sink (the others import it). Flag-gated default-OFF, flag-off byte-identical. **Reachability-v2 (Ship 3.1, v1.49.977)** now confirms the dormancy in tooling: 7/8 report `reachableFromProduction:false` — `lyapunov`/`projection` read `living` only via intra-island imports; the 5 MA-1/MB/MD leaves are test-only. `ace` (the sink) reports `reachableFromProduction:true`: its one non-island edge — the static **value**-import of `applyActorSignalToScore` from the production M5 selector `orchestration/selector.ts` — is statically reachable (the default-OFF guarantee is *runtime*, via the `aceSignal !== null` guard, not static, so a static scanner correctly reports it reachable). Parked not wired (`ace` is the sink → wiring it advances only 1/8) and not retired (latent tested capability). Generic resume (a learning-loop runtime consumes the substrate, not v1.50-specific); retire-or-resume review by 2027-06-04. |
 | `intrinsic-telemetry` | RETIRED | v1.49.972 | deletion commit (`src/intrinsic-telemetry/` removed); `docs/learning-substrate-parked.md` | D3: genuine shelfware (LEJEPA-18 / Phase 733), 0 production importers, superseded by the static `tools/adoption-scan.mjs` import-surface scanner (which shipped and is gated) rather than the never-consumed runtime-telemetry approach. Removal un-registered it from `heuristics-free-skill-space` (settings union + `HEURISTICS_FREE_MODULES` registry + integration test). |
+
+## Reachability dimension (Ship 3.1, v1.49.977)
+
+`tools/adoption-scan.mjs` carries a second, stricter dimension alongside the
+import-surface status: **`reachableFromProduction: boolean`**. It is a FILE-level
+static-import walk from the project's *declared, shipped* entry points — the npm
+`bin`/`main` roots (`src/cli.ts`, `src/index.ts`), the two registered Claude Code
+hooks (`src/hooks/session-{start,end}.ts`), and the `src/` frontier imported by the
+shipped desktop/Tauri app (`desktop/`, `src-tauri/`). Dev/CI tooling (`tools/`,
+`scripts/`) is deliberately **NOT** a root: a module reachable only from the build
+tooling is `living` in the import-surface dimension but not in any shipped artifact.
+
+Why a separate dimension: import-surface answers "does *anything* import this?",
+which over-reports liveness. A module can be `living` yet `reachableFromProduction:false`
+when every file that reaches it is itself unreachable from a shipped entry — the
+motivating case being the MA/MB/MD island (`lyapunov`/`projection` are imported only
+by other, unreachable island members). Reachability is computed at file granularity
+then lifted to modules (a module is reachable iff ≥1 of its non-test files is
+reachable) — module-level reachability would over-report (e.g. `orchestration` is
+reachable AND imports `ace`, but the reachable *files* of `orchestration` do not).
+The dimension is telemetry + a drift-guard oracle; it does **not** feed
+`--shelfware-threshold` (which stays import-surface), so it cannot trip the gate.
+
+**Open Ship 3.2 input:** as of v1.49.977 the scan flags **16 non-allowlisted**
+`living`-but-`reachableFromProduction:false` modules (a `## Living but unreachable
+from production` section in the generated baseline `.md`). These are the genuine
+reachability-only shelfware candidates the import-surface dimension missed; they are
+the triage input for **Ship 3.2** (dispose / wire / allowlist each), not verdicted
+here.
 
 ## Open candidates
 
