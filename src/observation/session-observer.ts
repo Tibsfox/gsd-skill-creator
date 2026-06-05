@@ -41,6 +41,7 @@ export class SessionObserver {
   private cacheDir: string;
   private observationRetentionDays?: number;
   private observationMaxEntries?: number;
+  private mineActiveSkills: boolean;
 
   constructor(
     patternsDir: string = '.planning/patterns',
@@ -48,6 +49,7 @@ export class SessionObserver {
     rateLimitConfig?: Partial<RateLimitConfig>,
     observationRetentionDays?: number,
     observationMaxEntries?: number,
+    mineActiveSkills: boolean = false,
   ) {
     this.parser = new TranscriptParser();
     this.summarizer = new PatternSummarizer();
@@ -68,6 +70,12 @@ export class SessionObserver {
     // RetentionManager hardcoded default (100). Threaded alongside retention_days
     // from the same config load; undefined falls back to the legacy default cap.
     this.observationMaxEntries = observationMaxEntries;
+    // 5.1b: when true, mine activeSkills from the parsed transcript (Skill
+    // tool_use blocks) so co-activation detection has real input. Default false
+    // keeps the recorded observation byte-identical to pre-5.1b behavior
+    // (activeSkills carries only what the caller passed, i.e. []). Gated by the
+    // operator's `observation.mine_active_skills` config flag (default false).
+    this.mineActiveSkills = mineActiveSkills;
   }
 
   /**
@@ -108,6 +116,16 @@ export class SessionObserver {
       return null; // Empty session, nothing to observe
     }
 
+    // 5.1b: optionally un-starve activeSkills by mining the already-parsed
+    // transcript (no second parse). Merge with any skills the caller supplied,
+    // de-duplicated and sorted. When mining is off (default) this is exactly
+    // `data.activeSkills || []` — byte-identical to pre-5.1b behavior.
+    const activeSkills = this.mineActiveSkills
+      ? Array.from(
+          new Set([...(data.activeSkills ?? []), ...this.parser.extractActiveSkills(entries)]),
+        ).sort()
+      : data.activeSkills || [];
+
     // Summarize session
     const summary = this.summarizer.summarize(
       entries,
@@ -116,7 +134,7 @@ export class SessionObserver {
       Date.now(),
       startData.source,
       data.reason,
-      data.activeSkills || []
+      activeSkills
     );
 
     // Rate limit check before writing (INT-03)

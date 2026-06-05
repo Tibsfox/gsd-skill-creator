@@ -695,4 +695,58 @@ describe('SessionObserver', () => {
       expect(lines.length).toBe(2);
     });
   });
+
+  // 5.1b: optional transcript skill-mining. Skills surface as Skill tool_use
+  // blocks nested in message.content[]. Default off → activeSkills stays []
+  // (byte-identical to pre-5.1b). The 6th ctor arg (the operator's
+  // `observation.mine_active_skills` flag) un-starves co-activation detection.
+  describe('active-skill mining (mine_active_skills flag)', () => {
+    async function runWith(observer: SessionObserver, sessionId: string) {
+      await observer.onSessionStart({
+        sessionId,
+        transcriptPath,
+        cwd: testDir,
+        source: 'startup',
+        model: 'claude-3-opus',
+        startTime: Date.now() - 60000,
+      });
+      const transcriptEntries = [
+        {
+          uuid: '1', parentUuid: null, isSidechain: false, sessionId,
+          timestamp: new Date().toISOString(), type: 'user',
+          message: { role: 'user', content: 'use a couple skills' },
+        },
+        {
+          uuid: '2', parentUuid: '1', isSidechain: false, sessionId,
+          timestamp: new Date().toISOString(), type: 'assistant',
+          message: {
+            role: 'assistant',
+            content: [
+              { type: 'tool_use', name: 'Skill', input: { skill: 'graphify' } },
+              { type: 'tool_use', name: 'Skill', input: { skill: 'context-handoff' } },
+            ],
+          },
+        },
+      ];
+      await writeFile(
+        transcriptPath,
+        transcriptEntries.map((e) => JSON.stringify(e)).join('\n') + '\n',
+      );
+      return observer.onSessionEnd({ sessionId, transcriptPath, cwd: testDir, reason: 'logout' });
+    }
+
+    it('records activeSkills:[] when mining is OFF (default — byte-identical)', async () => {
+      const observer = new SessionObserver(patternsDir);
+      const summary = await runWith(observer, 'mine-off');
+      expect(summary).not.toBeNull();
+      expect(summary!.activeSkills).toEqual([]);
+    });
+
+    it('mines distinct sorted skill names from the transcript when mining is ON', async () => {
+      const observer = new SessionObserver(patternsDir, undefined, undefined, undefined, undefined, true);
+      const summary = await runWith(observer, 'mine-on');
+      expect(summary).not.toBeNull();
+      expect(summary!.activeSkills).toEqual(['context-handoff', 'graphify']);
+    });
+  });
 });

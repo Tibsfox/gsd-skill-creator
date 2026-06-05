@@ -71,13 +71,17 @@ async function main(): Promise<void> {
     process.exit(1);
   }
 
-  // Map snake_case input to our internal camelCase interface
+  // Map snake_case input to our internal camelCase interface.
+  // activeSkills stays [] here: when `observation.mine_active_skills` is enabled
+  // the SessionObserver mines the real skill names from the parsed transcript
+  // (5.1b). The legacy `// Not provided by Claude Code` premise is stale — skill
+  // names ARE recoverable from the transcript the hook receives.
   const endData: SessionEndData = {
     sessionId: rawData.session_id,
     transcriptPath: rawData.transcript_path,
     cwd: rawData.cwd,
     reason: rawData.reason || 'other',
-    activeSkills: [],  // Not provided by Claude Code
+    activeSkills: [],
   };
 
   // Load the operator's `observation.retention_days` (age cap) and
@@ -88,17 +92,22 @@ async function main(): Promise<void> {
   // it MUST NOT break session observation).
   let observationRetentionDays: number | undefined;
   let observationMaxEntries: number | undefined;
+  let mineActiveSkills = false;
   try {
     const config = await readIntegrationConfig();
     observationRetentionDays = config.observation.retention_days;
     observationMaxEntries = config.observation.max_entries;
+    // 5.1b: opt-in transcript skill-mining (default false). When off, the
+    // observer records activeSkills:[] exactly as before (byte-identical).
+    mineActiveSkills = config.observation.mine_active_skills;
   } catch {
     observationRetentionDays = undefined;
     observationMaxEntries = undefined;
+    mineActiveSkills = false;
   }
 
   try {
-    const observer = new SessionObserver(undefined, undefined, undefined, observationRetentionDays, observationMaxEntries);
+    const observer = new SessionObserver(undefined, undefined, undefined, observationRetentionDays, observationMaxEntries, mineActiveSkills);
     const result = await observer.onSessionEnd(endData);
 
     if (result) {

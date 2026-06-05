@@ -19,6 +19,30 @@ import type {
 import type { SessionObservation } from '../../types/observation.js';
 
 /**
+ * Unwrap a PatternStore checksummed envelope
+ * `{ timestamp, category, data, _checksum }` to its inner observation.
+ *
+ * sessions.jsonl is written by PatternStore.append, which wraps every record
+ * in this envelope. Reading the top-level fields directly (as
+ * {@link isSessionObservation} does) never matches, so the dashboard silently
+ * dropped every session. Bare/legacy records (no envelope) pass through
+ * unchanged. Mirrors the same fix in agents/agent-suggestion-manager.loadSessions.
+ */
+function unwrapEnvelope(entry: unknown): unknown {
+  if (typeof entry !== 'object' || entry === null) return entry;
+  const obj = entry as Record<string, unknown>;
+  if (
+    typeof obj.category === 'string' &&
+    obj.data !== null &&
+    typeof obj.data === 'object' &&
+    !Array.isArray(obj.data)
+  ) {
+    return obj.data;
+  }
+  return entry;
+}
+
+/**
  * Check if a parsed JSONL entry has the shape of a SessionObservation
  * (session-type entry with sessionId, startTime, endTime).
  */
@@ -69,7 +93,7 @@ async function readSessionsFile(path: string): Promise<SessionMetric[]> {
 
     for (const line of lines) {
       try {
-        const parsed = JSON.parse(line);
+        const parsed = unwrapEnvelope(JSON.parse(line));
         if (isSessionObservation(parsed)) {
           sessions.push(toSessionMetric(parsed));
         }

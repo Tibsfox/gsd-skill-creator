@@ -171,6 +171,7 @@ describe('readIntegrationConfig', () => {
           retention_days: 30,
           max_entries: 500,
           capture_corrections: false,
+          mine_active_skills: false,
         },
         suggestions: {
           min_occurrences: 5,

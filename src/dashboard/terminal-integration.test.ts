@@ -51,7 +51,7 @@ const fullConfig: IntegrationConfig = {
     wrapper_commands: true,
   },
   token_budget: { max_percent: 5, warn_at_percent: 4 },
-  observation: { retention_days: 90, max_entries: 1000, capture_corrections: true },
+  observation: { retention_days: 90, max_entries: 1000, capture_corrections: true, mine_active_skills: false },
   suggestions: { min_occurrences: 3, cooldown_days: 7, auto_dismiss_after_days: 30 },
   terminal: defaultTerminal,
 };

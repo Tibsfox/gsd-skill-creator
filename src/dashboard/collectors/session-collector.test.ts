@@ -234,6 +234,41 @@ describe('collectSessionMetrics', () => {
   });
 
   // -------------------------------------------------------------------------
+  // 5b. Reads PatternStore checksummed-envelope records (5.1a unwrap)
+  // -------------------------------------------------------------------------
+  it('unwraps PatternStore envelope records (the real sessions.jsonl format)', async () => {
+    // sessions.jsonl is written by PatternStore.append as
+    // { timestamp, category, data: <obs>, _checksum }. Before the unwrap fix the
+    // collector read the top-level fields, never matched, and dropped every row.
+    const obs = JSON.parse(buildSessionLine({ sessionId: 'env-001', durationMinutes: 42 }));
+    const envelope = JSON.stringify({
+      timestamp: 1707580800000,
+      category: 'sessions',
+      data: obs,
+      _checksum: 'unused-by-the-collector',
+    });
+    // A bare legacy record alongside it must still be read.
+    const bare = buildSessionLine({ sessionId: 'bare-002' });
+
+    mockReadFile.mockImplementation(async (path: string) => {
+      if (path.includes('sessions.jsonl')) return [envelope, bare].join('\n');
+      throw makeEnoent(path);
+    });
+
+    const result = await collectSessionMetrics({
+      sessionsPath: '/mock/sessions.jsonl',
+      cachePath: '/mock/.session-cache.json',
+    });
+
+    expect(result.sessions).toHaveLength(2);
+    const env = result.sessions.find((s) => s.sessionId === 'env-001');
+    expect(env).toBeDefined();
+    expect(env!.durationMinutes).toBe(42);
+    expect(env!.activeSkills).toEqual(['git-commit', 'beautiful-commits']);
+    expect(result.sessions.some((s) => s.sessionId === 'bare-002')).toBe(true);
+  });
+
+  // -------------------------------------------------------------------------
   // 6. Returns totalSessions count matching sessions.length
   // -------------------------------------------------------------------------
   it('returns totalSessions count', async () => {

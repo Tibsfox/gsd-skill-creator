@@ -126,6 +126,36 @@ export class TranscriptParser {
   }
 
   /**
+   * Extract the distinct skill names activated during the session.
+   *
+   * Skills surface in the live Claude Code transcript as `Skill` tool_use
+   * blocks nested inside `message.content[]` (e.g.
+   * `{ type: 'tool_use', name: 'Skill', input: { skill: 'context-handoff' } }`)
+   * — NOT as top-level `tool_name` entries. This descends into the content
+   * blocks and collects `input.skill`. Sidechain (sub-agent) entries are
+   * already excluded by {@link parse}/{@link parseString}, so sub-agent skill
+   * invocations are not counted. Returns a sorted, de-duplicated list.
+   */
+  extractActiveSkills(entries: TranscriptEntry[]): string[] {
+    const skills = new Set<string>();
+
+    for (const entry of entries) {
+      const content = entry.message?.content;
+      if (!Array.isArray(content)) continue;
+
+      for (const block of content) {
+        if (block.type !== 'tool_use' || block.name !== 'Skill') continue;
+        const skill = block.input?.skill;
+        if (typeof skill === 'string' && skill.trim()) {
+          skills.add(skill.trim());
+        }
+      }
+    }
+
+    return Array.from(skills).sort();
+  }
+
+  /**
    * Get tool usage counts
    */
   extractToolCounts(entries: TranscriptEntry[]): Map<string, number> {

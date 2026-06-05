@@ -80,6 +80,14 @@ export interface ObservationConfig {
   max_entries: number;
   /** Whether to capture user corrections as observations. */
   capture_corrections: boolean;
+  /**
+   * Whether to mine active skill names from the live session transcript
+   * (Skill tool_use blocks) so co-activation detection has real input.
+   * Default `false`: the session-end hook records `activeSkills: []` and the
+   * write path is byte-identical to pre-5.1b behavior. Opt-in (staged-rollout
+   * posture) — flipping it on un-starves the `agents suggest` learning loop.
+   */
+  mine_active_skills: boolean;
 }
 
 // ============================================================================

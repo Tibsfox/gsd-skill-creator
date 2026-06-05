@@ -266,6 +266,7 @@ describe('toSiliconPanelData', () => {
         retention_days: 30,
         max_entries: 10000,
         capture_corrections: true,
+        mine_active_skills: false,
       },
       suggestions: {
         min_occurrences: 3,
@@ -307,6 +308,7 @@ describe('toSiliconPanelData', () => {
         retention_days: 30,
         max_entries: 10000,
         capture_corrections: true,
+        mine_active_skills: false,
       },
       suggestions: {
         min_occurrences: 3,
@@ -374,6 +376,7 @@ describe('collectBudgetSiliconData', () => {
         retention_days: 30,
         max_entries: 10000,
         capture_corrections: true,
+        mine_active_skills: false,
       },
       suggestions: {
         min_occurrences: 3,

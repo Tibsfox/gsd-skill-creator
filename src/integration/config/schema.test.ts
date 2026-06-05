@@ -178,6 +178,28 @@ describe('CONFIG-03: Observation retention', () => {
     expect(config.observation.retention_days).toBe(90);
   });
 
+  // 5.1b: opt-in transcript skill-mining flag (default off, staged rollout).
+  it('defaults mine_active_skills to false', () => {
+    const config = IntegrationConfigSchema.parse({});
+    expect(config.observation.mine_active_skills).toBe(false);
+  });
+
+  it('allows setting mine_active_skills to true without affecting other fields', () => {
+    const config = IntegrationConfigSchema.parse({
+      observation: { mine_active_skills: true },
+    });
+
+    expect(config.observation.mine_active_skills).toBe(true);
+    expect(config.observation.retention_days).toBe(90);
+    expect(config.observation.capture_corrections).toBe(true);
+  });
+
+  it('rejects a non-boolean mine_active_skills', () => {
+    expect(() =>
+      IntegrationConfigSchema.parse({ observation: { mine_active_skills: 'yes' } }),
+    ).toThrow(z.ZodError);
+  });
+
   it('accepts boundary values for max_entries (100 and 100000)', () => {
     const low = IntegrationConfigSchema.parse({
       observation: { max_entries: 100 },
@@ -371,6 +393,7 @@ describe('Full config roundtrip', () => {
         retention_days: 180,
         max_entries: 5000,
         capture_corrections: false,
+        mine_active_skills: false,
       },
       suggestions: {
         min_occurrences: 5,
@@ -512,6 +535,7 @@ describe('Full config roundtrip with terminal', () => {
         retention_days: 180,
         max_entries: 5000,
         capture_corrections: false,
+        mine_active_skills: false,
       },
       suggestions: {
         min_occurrences: 5,

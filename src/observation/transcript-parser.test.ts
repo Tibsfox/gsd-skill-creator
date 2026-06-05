@@ -62,6 +62,77 @@ this is not valid json
     });
   });
 
+  describe('extractActiveSkills', () => {
+    // Skills surface in the live transcript as Skill tool_use blocks nested in
+    // message.content[], on assistant entries — NOT top-level tool_name (5.1b).
+    function entry(uuid: string, skill: string, isSidechain = false): string {
+      return JSON.stringify({
+        uuid,
+        parentUuid: null,
+        isSidechain,
+        sessionId: 's1',
+        timestamp: '2026-01-30T12:00:00Z',
+        type: 'assistant',
+        message: {
+          role: 'assistant',
+          content: [
+            { type: 'text', text: 'invoking a skill' },
+            { type: 'tool_use', name: 'Skill', input: { skill } },
+          ],
+        },
+      });
+    }
+
+    it('mines distinct, sorted skill names from nested Skill tool_use blocks', () => {
+      const entries = parser.parseString(
+        [entry('1', 'context-handoff'), entry('2', 'graphify'), entry('3', 'context-handoff')].join('\n'),
+      );
+      expect(parser.extractActiveSkills(entries)).toEqual(['context-handoff', 'graphify']);
+    });
+
+    it('excludes sidechain (sub-agent) skill invocations', () => {
+      // parseString drops isSidechain entries, so their skills never count.
+      const entries = parser.parseString(
+        [entry('1', 'main-skill'), entry('2', 'subagent-skill', true)].join('\n'),
+      );
+      expect(parser.extractActiveSkills(entries)).toEqual(['main-skill']);
+    });
+
+    it('ignores non-Skill tool_use blocks and entries without content arrays', () => {
+      const content = [
+        JSON.stringify({
+          uuid: '1', parentUuid: null, isSidechain: false, sessionId: 's1',
+          timestamp: '2026-01-30T12:00:00Z', type: 'assistant',
+          message: { role: 'assistant', content: [{ type: 'tool_use', name: 'Read', input: { file_path: '/a.ts' } }] },
+        }),
+        JSON.stringify({
+          uuid: '2', parentUuid: null, isSidechain: false, sessionId: 's1',
+          timestamp: '2026-01-30T12:00:01Z', type: 'user',
+          message: { role: 'user', content: 'plain string content, no blocks' },
+        }),
+        entry('3', 'real-skill'),
+      ].join('\n');
+      const entries = parser.parseString(content);
+      expect(parser.extractActiveSkills(entries)).toEqual(['real-skill']);
+    });
+
+    it('excludes empty and whitespace-only skill names (guards the byte-identity invariant)', () => {
+      // Mutation guard: dropping the `.trim()` filter would let '' / '   ' leak
+      // into the skill set and break the flag-off byte-identical contract.
+      const entries = parser.parseString(
+        [entry('1', ''), entry('2', '   '), entry('3', 'kept')].join('\n'),
+      );
+      expect(parser.extractActiveSkills(entries)).toEqual(['kept']);
+    });
+
+    it('returns an empty array when no skills were activated', () => {
+      const entries = parser.parseString(
+        '{"uuid":"1","parentUuid":null,"isSidechain":false,"sessionId":"s1","timestamp":"2026-01-30T12:00:00Z","type":"user","message":{"role":"user","content":"hi"}}',
+      );
+      expect(parser.extractActiveSkills(entries)).toEqual([]);
+    });
+  });
+
   describe('extractFilePaths', () => {
     it('should extract read and written files', () => {
       const entries = parser.parseString(`

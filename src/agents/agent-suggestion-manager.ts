@@ -1,5 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import { verifyChecksum } from '../validation/jsonl-safety.js';
 import { CoActivationTracker, SkillCoActivation } from './co-activation-tracker.js';
 import { ClusterDetector, SkillCluster } from './cluster-detector.js';
 import { AgentGenerator, GeneratedAgent } from './agent-generator.js';
@@ -160,10 +161,45 @@ export class AgentSuggestionManager {
     if (!fs.existsSync(p)) return [];
 
     const content = fs.readFileSync(p, 'utf8');
-    return content
-      .split('\n')
-      .filter(line => line.trim())
-      .map(line => JSON.parse(line) as SessionObservation);
+    const sessions: SessionObservation[] = [];
+    for (const line of content.split('\n')) {
+      if (!line.trim()) continue;
+
+      let parsed: unknown;
+      try {
+        parsed = JSON.parse(line);
+      } catch {
+        // Skip a single malformed line rather than throwing on the whole file.
+        continue;
+      }
+      if (parsed === null || typeof parsed !== 'object' || Array.isArray(parsed)) continue;
+      const obj = parsed as Record<string, unknown>;
+
+      // PatternStore.append writes each observation as a checksummed envelope
+      // `{ timestamp, category, data, _checksum }` (see storage/pattern-store.ts +
+      // validation/jsonl-safety.ts). Without unwrapping `.data`, session.startTime
+      // and session.activeSkills resolve to undefined, every record fails the
+      // CoActivationTracker recency filter (co-activation-tracker.ts), and the
+      // `agents suggest` path is silently dead. Detect the envelope and return the
+      // inner observation; bare/legacy records (no envelope) pass through. Verify
+      // the checksum when present and skip tampered entries, mirroring
+      // PatternStore.read semantics.
+      const isEnvelope =
+        typeof obj.category === 'string' &&
+        obj.data !== null &&
+        typeof obj.data === 'object' &&
+        !Array.isArray(obj.data);
+
+      if (isEnvelope) {
+        if (typeof obj._checksum === 'string' && !verifyChecksum(obj).valid) {
+          continue; // tampered entry — skip, never throw
+        }
+        sessions.push(obj.data as unknown as SessionObservation);
+      } else {
+        sessions.push(obj as unknown as SessionObservation);
+      }
+    }
+    return sessions;
   }
 
   private async loadSuggestions(): Promise<AgentSuggestion[]> {
