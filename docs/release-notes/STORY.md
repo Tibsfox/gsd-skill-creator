@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.992`.
+The story begins at `v1.0` and continues to `v1.49.993`.
 
-**1035 chapters.** 1034 have retrospectives.
+**1036 chapters.** 1035 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -1043,3 +1043,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.990](v1.49.990/00-summary.md)** — Voyager 2 NASA Grand-Tour Four-Giant-Planet and Interstellar Mission · 2026-06-06
 - **[v1.49.991](v1.49.991/00-summary.md)** — Pioneer 10 NASA Outer-Planets Trailblazer and Outer-Heliosphere Precursor Mission · 2026-06-06
 - **[v1.49.992](v1.49.992/00-summary.md)** — Pioneer 11 NASA First-Saturn-Flyby and Paired Outer-Heliosphere Precursor Mission · 2026-06-06
+- **[v1.49.993](v1.49.993/00-summary.md)** — New Horizons NASA Pluto Reconnaissance and Outer-Heliosphere Frontier Mission · 2026-06-06
