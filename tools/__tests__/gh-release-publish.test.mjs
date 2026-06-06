@@ -99,7 +99,10 @@ describe('gh-release-publish.sh', () => {
     expect(r.stdout).not.toContain('v1.49.596-rn.md');
   });
 
-  it('places the temp file in $HOME (snap-confinement requirement)', () => {
+  // snap-confinement (forcing the temp file into $HOME) is a Linux-packaging
+  // concern; the exact $HOME path echo does not translate under Git Bash on
+  // windows-latest (native vs MSYS path form), and snap does not exist there.
+  it.skipIf(process.platform === 'win32')('places the temp file in $HOME (snap-confinement requirement)', () => {
     writeReleaseNotes('1.49.596');
     const r = runScript('1.49.596');
     expect(r.stdout).toContain(`${fakeHome}/v1-49-596-rn.md`);

@@ -6,7 +6,7 @@
  */
 import { describe, it, expect } from 'vitest';
 import { spawnSync } from 'node:child_process';
-import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, existsSync, rmSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, existsSync, rmSync, symlinkSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -188,9 +188,12 @@ describe('state-md-set-shipped CLI: write + check', () => {
         readFileSync(TOOL_PATH, 'utf8'),
         'utf8',
       );
-      // js-yaml dep — point at the real node_modules so the normalizer can require it.
-      const setupNodeModules = spawnSync('ln', ['-s', resolve(process.cwd(), 'node_modules'), join(tmp, 'node_modules')], { encoding: 'utf8' });
-      expect(setupNodeModules.status).toBe(0);
+      // js-yaml dep — junction the real node_modules so the normalizer can
+      // require it. fs.symlinkSync('junction') is cross-platform (a real dir
+      // junction on Windows, a normal symlink elsewhere) — avoids depending on
+      // a `ln` binary, which is absent / MSYS-quirky on windows-latest.
+      symlinkSync(resolve(process.cwd(), 'node_modules'), join(tmp, 'node_modules'), 'junction');
+      expect(existsSync(join(tmp, 'node_modules'))).toBe(true);
 
       const result = spawnSync(
         'node',

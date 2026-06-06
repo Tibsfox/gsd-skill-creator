@@ -42,6 +42,7 @@
 
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const REPO_ROOT = resolve(process.cwd());
 const DEFAULT_PUBLIC_PATH = resolve(REPO_ROOT, 'docs/release-notes/STORY.md');
@@ -283,7 +284,10 @@ function isDirectInvocation() {
   // process.argv[1] resolves to the script's absolute path when invoked
   // directly; differs when imported.
   const invokedPath = process.argv[1] ? resolve(process.argv[1]) : '';
-  const thisPath = resolve(new URL(import.meta.url).pathname);
+  // fileURLToPath (NOT new URL().pathname): on Windows the pathname is
+  // "/D:/a/.../x.mjs" (leading slash, forward slashes) which never equals the
+  // native resolve(argv[1]) — so main() never ran and stdout was empty.
+  const thisPath = fileURLToPath(import.meta.url);
   return invokedPath === thisPath;
 }
 

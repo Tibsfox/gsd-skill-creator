@@ -31,7 +31,7 @@
  */
 
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
-import { execSync } from 'node:child_process';
+import { execFileSync } from 'node:child_process';
 import { resolve } from 'node:path';
 
 const args = new Set(process.argv.slice(2));
@@ -79,7 +79,7 @@ if (!milestone) {
 // Check if a git tag matching the STATE.md milestone exists.
 let stateMilestoneSha = null;
 try {
-  stateMilestoneSha = execSync(`git rev-parse "${milestone}^{commit}"`, {
+  stateMilestoneSha = execFileSync('git', ['rev-parse', `${milestone}^{commit}`], {
     encoding: 'utf8',
     stdio: ['pipe', 'pipe', 'pipe'],
   }).trim();
@@ -108,14 +108,19 @@ try {
   // paused v1.50.x branch in gsd-skill-creator). Without this filter, the
   // script would erroneously advance dev/main to a v1.50.x tag that's not
   // reachable from the active branch's history.
-  const tagsRaw = execSync(`git tag --merged HEAD -l 'v*.*.*' --sort=-version:refname`, {
+  // execFileSync (no shell): the 'v*.*.*' glob must reach git verbatim. Via a
+  // shell string, cmd.exe on Windows does NOT strip the single quotes, so git
+  // sees the literal pattern "'v*.*.*'", matches zero tags, and the tool never
+  // advances (10 windows-latest failures, rung-2 finding). Argv form is
+  // shell-free and identical on both platforms.
+  const tagsRaw = execFileSync('git', ['tag', '--merged', 'HEAD', '-l', 'v*.*.*', '--sort=-version:refname'], {
     encoding: 'utf8',
     stdio: ['pipe', 'pipe', 'pipe'],
   }).trim();
   const tags = tagsRaw ? tagsRaw.split('\n').filter(Boolean) : [];
   if (tags.length > 0 && tags[0] !== milestone) {
     latestTag = tags[0];
-    latestTagSha = execSync(`git rev-parse "${latestTag}^{commit}"`, {
+    latestTagSha = execFileSync('git', ['rev-parse', `${latestTag}^{commit}`], {
       encoding: 'utf8',
       stdio: ['pipe', 'pipe', 'pipe'],
     }).trim();
