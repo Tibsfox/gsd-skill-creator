@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.989`.
+The story begins at `v1.0` and continues to `v1.49.990`.
 
-**1032 chapters.** 1031 have retrospectives.
+**1033 chapters.** 1032 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -1040,3 +1040,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.987](v1.49.987/00-summary.md)** — AMIGA revive: wired amiga CLI command + corpus mode · 2026-06-06
 - **[v1.49.988](v1.49.988/00-summary.md)** — Wind NASA Comprehensive In-Situ Solar-Wind Monitor at Sun-Earth L1 Halo Orbit (NASA 1.178→1.179) · 2026-06-06
 - **[v1.49.989](v1.49.989/00-summary.md)** — Voyager 1 NASA Grand-Tour Outer-Planets and Interstellar Mission · 2026-06-06
+- **[v1.49.990](v1.49.990/00-summary.md)** — Voyager 2 NASA Grand-Tour Four-Giant-Planet and Interstellar Mission · 2026-06-06
