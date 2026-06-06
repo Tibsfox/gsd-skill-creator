@@ -17,6 +17,7 @@
 
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 interface BriefingPayload {
   body: string;
@@ -84,8 +85,10 @@ async function main() {
   // Load KBStore lazily (after validation passes).
   let KBStore: typeof import('../../../../src/intelligence/kb/store.js').KBStore;
   try {
+    // pathToFileURL: import() needs a file:// URL for an absolute path on Windows
+    // (a bare 'C:\...' path is rejected); on POSIX file:///abs is equally valid.
     const mod = (await import(
-      resolve(process.cwd(), 'dist/intelligence/kb/store.js')
+      pathToFileURL(resolve(process.cwd(), 'dist/intelligence/kb/store.js')).href
     )) as typeof import('../../../../src/intelligence/kb/store.js');
     KBStore = mod.KBStore;
   } catch (err) {
