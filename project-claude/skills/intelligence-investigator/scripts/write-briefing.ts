@@ -50,7 +50,7 @@ async function main() {
   ) => Array<{ field: string; message: string }>;
   try {
     const mod = (await import(
-      resolve(process.cwd(), 'dist/intelligence/investigator/verify-briefing.js')
+      pathToFileURL(resolve(process.cwd(), 'dist/intelligence/investigator/verify-briefing.js')).href
     )) as typeof import('../../../../src/intelligence/investigator/verify-briefing.js');
     verify = mod.verify as never;
   } catch (err) {

@@ -16,6 +16,7 @@
 
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 interface Briefing {
   body?: string;
@@ -36,7 +37,7 @@ async function main() {
   let verify: (b: Briefing) => Array<{ field: string; message: string }>;
   try {
     const mod = (await import(
-      resolve(process.cwd(), 'dist/intelligence/investigator/verify-briefing.js')
+      pathToFileURL(resolve(process.cwd(), 'dist/intelligence/investigator/verify-briefing.js')).href
     )) as typeof import('../../../../src/intelligence/investigator/verify-briefing.js');
     verify = mod.verify;
   } catch (err) {
