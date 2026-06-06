@@ -19,7 +19,7 @@
  */
 
 import { join, dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = join(HERE, '..');
@@ -399,7 +399,10 @@ async function main() {
   // Dynamically import the compiled atlas syntax API
   let api;
   try {
-    api = await import(DIST_ATLAS);
+    // pathToFileURL: a raw native absolute path is not a valid ESM specifier on
+    // Windows (D:\a\...\index.js throws ERR_UNSUPPORTED_ESM_URL_SCHEME) — must
+    // be a file:// URL. No-op semantics on POSIX. (rung-2 cross-platform CI.)
+    api = await import(pathToFileURL(DIST_ATLAS).href);
   } catch (err) {
     process.stderr.write(`atlas-perf-bench: ERROR — could not load ${DIST_ATLAS}\n`);
     process.stderr.write(`  ${err.message}\n`);
