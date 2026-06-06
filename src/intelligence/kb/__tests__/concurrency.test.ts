@@ -76,13 +76,13 @@ run().catch(err => {
 
 async function spawnWorker(scriptPath: string): Promise<{ ok: boolean; count?: number; error?: string }> {
   return new Promise((resolve, reject) => {
-    const tsxPath = join(REPO_ROOT, 'node_modules', '.bin', 'tsx');
-    // On Windows the .bin/tsx entry is a shell shim (no .exe); spawn() can only
-    // launch the .cmd variant directly, otherwise it throws ENOENT.
-    const tsxBin = process.platform === 'win32' ? `${tsxPath}.cmd` : tsxPath;
+    // Run the TS worker via `node --import tsx` (process.execPath is the node
+    // binary on every platform). Spawning node_modules/.bin/tsx directly fails on
+    // Windows: the bare shim is not an .exe (ENOENT), and its .cmd variant cannot
+    // be spawn()'d without a shell (EINVAL, per Node's CVE-2024-27980 hardening).
     const child = spawn(
-      tsxBin,
-      [scriptPath],
+      process.execPath,
+      ['--import', 'tsx', scriptPath],
       {
         cwd: REPO_ROOT,
         env: { ...process.env },

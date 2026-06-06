@@ -71,14 +71,14 @@ function runWriter(briefingPath: string): { stdout: string; status: number } {
   // exits non-zero BEFORE attempting the KB write whenever the verifier
   // reports violations — that's the contract under test here.
   try {
-    // On Windows `npx` is a `.cmd` shim; execFileSync without shell can't launch
-    // the bare name and throws ENOENT. Use the `.cmd` variant on win32 (no-op on
-    // POSIX). The underlying write-briefing.ts only chains to node/better-sqlite3
-    // (no bash/python/sqlite3), so the spawn fix is sufficient — no skip needed.
-    const npxBin = process.platform === 'win32' ? 'npx.cmd' : 'npx';
+    // Run the TS shim via `node --import tsx` (process.execPath is node on every
+    // platform). `npx tsx` is unusable on Windows: npx is a `.cmd` shim that
+    // execFileSync cannot launch without a shell (ENOENT/EINVAL). write-briefing.ts
+    // only chains to node/better-sqlite3 (no bash/python/sqlite3), so this is
+    // sufficient — no skip needed.
     const stdout = execFileSync(
-      npxBin,
-      ['tsx', SCRIPT_PATH, 'test-proj', briefingPath],
+      process.execPath,
+      ['--import', 'tsx', SCRIPT_PATH, 'test-proj', briefingPath],
       {
         encoding: 'utf8',
         env: {

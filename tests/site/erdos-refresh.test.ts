@@ -9,7 +9,10 @@ const PY_SCRIPT = path.join(REPO_ROOT, 'scripts', 'erdos-refresh.py');
 const SNAPSHOT = path.join(REPO_ROOT, 'scripts', 'data', 'erdos-ai-contributions.json');
 const TRACKER_LIVE = path.join(REPO_ROOT, 'ERDOS-TRACKER.md');
 
-describe('scripts/erdos-refresh.py (Phase 682)', () => {
+// windows: erdos-refresh.py is a Python tool invoked as `python3`; on windows-latest
+// the `python3` alias hits the Microsoft Store stub and hangs (test timeout), so gate
+// the whole suite. The Python tool itself is exercised on the load-bearing ubuntu/macOS legs.
+describe.skipIf(process.platform === 'win32')('scripts/erdos-refresh.py (Phase 682)', () => {
   let tmpdir: string;
   let tmpTracker: string;
 
