@@ -23,7 +23,7 @@
 
 import { IncomingMessage, ServerResponse } from 'node:http';
 import { writeFile, mkdir } from 'node:fs/promises';
-import { join, resolve, relative } from 'node:path';
+import { resolve, relative, sep } from 'node:path';
 import { CONSOLE_DIRS } from './types.js';
 import { BridgeLogger } from './bridge-logger.js';
 
@@ -268,8 +268,10 @@ export function createHelperRouter(basePath: string): HelperRouter {
       // Log the successful write
       await safeLog(body.filename, subdirectory, contentStr.length, 'success');
 
-      // Return relative path from console root
-      const relativePath = relative(consoleRoot, targetPath);
+      // Return relative path from console root. path.relative() emits the
+      // platform separator (backslash on win32); normalize to forward-slash so
+      // the JSON API contract is canonical across platforms (no-op on POSIX).
+      const relativePath = relative(consoleRoot, targetPath).split(sep).join('/');
       jsonResponse(res, 200, { ok: true, path: relativePath });
       return true;
     },

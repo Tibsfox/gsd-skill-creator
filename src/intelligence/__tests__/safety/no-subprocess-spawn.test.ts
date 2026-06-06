@@ -11,10 +11,22 @@
 
 import { describe, it, expect } from 'vitest';
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
-import { join, resolve } from 'node:path';
+import { join, resolve, sep } from 'node:path';
 
 const REPO_ROOT = resolve(__dirname, '../../../../');
 const RUST_INTELLIGENCE_DIR = join(REPO_ROOT, 'src-tauri/src/intelligence');
+
+// path.join emits backslashes on Windows; canonical repo-relative identifiers
+// (and the exempt-file set below) use forward slashes. Strip the repo root and
+// normalize separators so the lookup/reporting works on every platform.
+// On POSIX `sep` is '/' so this is a no-op there and a fix on win32.
+function toRepoRel(full: string): string {
+  let rel = full;
+  if (rel.startsWith(REPO_ROOT)) {
+    rel = rel.slice(REPO_ROOT.length).replace(/^[\\/]+/, '');
+  }
+  return rel.split(sep).join('/');
+}
 
 const FORBIDDEN_RUST_CODE_PATTERNS = [
   // Match actual code uses — not comments
@@ -93,7 +105,7 @@ describe('S2: no subprocess spawn in intelligence code (G2 BLOCK)', () => {
     const offenders: Array<{ file: string; pattern: string; line: number }> = [];
 
     for (const f of files) {
-      const rel = f.replace(REPO_ROOT + '/', '');
+      const rel = toRepoRel(f);
       if (RUST_S2_EXEMPT_FILES.has(rel)) continue;
       const lines = readFileSync(f, 'utf8').split('\n');
       for (let i = 0; i < lines.length; i++) {
@@ -155,7 +167,7 @@ describe('S2: no subprocess spawn in intelligence code (G2 BLOCK)', () => {
         for (const pat of TS_SPAWN_PATTERNS) {
           if (pat.test(line)) {
             offenders.push({
-              file: f.replace(REPO_ROOT + '/', ''),
+              file: toRepoRel(f),
               pattern: pat.source,
               line: i + 1,
             });
@@ -183,7 +195,7 @@ describe('S2: no subprocess spawn in intelligence code (G2 BLOCK)', () => {
         for (const pat of TS_SPAWN_PATTERNS) {
           if (pat.test(line)) {
             offenders.push({
-              file: f.replace(REPO_ROOT + '/', ''),
+              file: toRepoRel(f),
               pattern: pat.source,
               line: i + 1,
             });

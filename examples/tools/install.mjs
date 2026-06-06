@@ -16,6 +16,7 @@
 import { readdir, readFile, writeFile, mkdir, copyFile, stat } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { join, dirname, basename, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { homedir } from 'node:os';
 import { argv, exit } from 'node:process';
 import { CATEGORIZED_TYPES, metadataFileFor, isArtifactDir } from './catalog-core.mjs';
@@ -261,7 +262,7 @@ async function main() {
   const args = parseArgs(argv.slice(2));
   if (args.help) { console.log(HELP); return; }
 
-  const scriptDir = dirname(new URL(import.meta.url).pathname);
+  const scriptDir = dirname(fileURLToPath(import.meta.url));
   const examplesRoot = dirname(scriptDir);
   const targetRoot = expandTarget(args.target);
 

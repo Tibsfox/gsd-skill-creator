@@ -13,6 +13,7 @@
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { argv, exit } from 'node:process';
 import { CATEGORIZED_TYPES, metadataFileFor, discoverCategories } from './catalog-core.mjs';
 
@@ -239,7 +240,7 @@ See [\`../../CHANGELOG.md\`](../../CHANGELOG.md) for the library's evolution his
 
 async function main() {
   const dryRun = argv.includes('--dry-run');
-  const scriptDir = dirname(new URL(import.meta.url).pathname);
+  const scriptDir = dirname(fileURLToPath(import.meta.url));
   const examplesRoot = dirname(scriptDir);
 
   console.log(`Generating category READMEs in ${examplesRoot}${dryRun ? ' (dry run)' : ''}...`);

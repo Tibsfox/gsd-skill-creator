@@ -12,7 +12,7 @@
 // Closes: OGA-025 (MEDIUM).
 
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
-import { resolve, join } from 'node:path';
+import { resolve, join, basename as pathBasename } from 'node:path';
 import {
   parseFrontmatter,
   serializeFrontmatter,
@@ -156,7 +156,7 @@ export function migrateDirectory({ dir, write = false }) {
   let changed = 0;
   for (const path of files) {
     const text = readFileSync(path, 'utf-8');
-    const basename = path.split('/').pop() ?? path;
+    const basename = pathBasename(path);
     const result = migrateDocument({ text, basename });
     byType[result.type] = (byType[result.type] ?? 0) + 1;
     if (result.changed) {

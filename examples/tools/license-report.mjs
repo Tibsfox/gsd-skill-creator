@@ -14,6 +14,7 @@
 import { readdir, readFile, writeFile, mkdir } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { argv, exit } from 'node:process';
 import { CATEGORIZED_TYPES, metadataFileFor, isArtifactDir } from './catalog-core.mjs';
 
@@ -121,7 +122,7 @@ function escapeCsv(v) {
 }
 
 async function main() {
-  const scriptDir = dirname(new URL(import.meta.url).pathname);
+  const scriptDir = dirname(fileURLToPath(import.meta.url));
   const examplesRoot = dirname(scriptDir);
   const projectRoot = dirname(examplesRoot);
   const outPath = join(projectRoot, '.planning', 'license-audit.csv');

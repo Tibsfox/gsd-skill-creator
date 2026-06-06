@@ -6,9 +6,16 @@ import { describe, it, expect, beforeAll } from 'vitest';
 import { fileURLToPath } from 'node:url';
 import { mkdir, writeFile, symlink, rm } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, relative, sep } from 'node:path';
 import { tmpdir } from 'node:os';
 import { walkProject, isBinary } from '../walk.js';
+
+// walkProject returns absolute paths. Relativize against `root` and normalize
+// the platform separator to '/' so canonical comparisons hold on win32
+// (path.relative emits backslashes there; no-op on POSIX).
+function relPaths(root: string, files: string[]): string[] {
+  return files.map((f) => relative(root, f).split(sep).join('/'));
+}
 
 // ─── T2 file walker tests ─────────────────────────────────
 
@@ -16,7 +23,7 @@ describe('walkProject', () => {
   it('respects .gitignore — returns only non-ignored files', async () => {
     const fixtureRoot = fileURLToPath(new URL('./fixtures/simple-project', import.meta.url));
     const files = await walkProject(fixtureRoot, {});
-    const rel = files.map(f => f.replace(fixtureRoot + '/', ''));
+    const rel = relPaths(fixtureRoot, files);
     expect(rel).toContain('src/index.ts');
     expect(rel).toContain('src/helper.ts');
     expect(rel).toContain('src/utils.ts');
@@ -34,7 +41,7 @@ describe('walkProject', () => {
 
     try {
       const files = await walkProject(tmp, {});
-      const rel = files.map(f => f.replace(tmp + '/', ''));
+      const rel = relPaths(tmp, files);
       expect(rel).toContain('index.ts');
       expect(rel.every(f => !f.includes('node_modules'))).toBe(true);
     } finally {
@@ -54,7 +61,7 @@ describe('walkProject', () => {
 
     try {
       const files = await walkProject(tmp, {});
-      const rel = files.map(f => f.replace(tmp + '/', ''));
+      const rel = relPaths(tmp, files);
       expect(rel).toContain('main.ts');
       expect(rel.every(f => !f.startsWith('target/') && !f.startsWith('dist/') && !f.startsWith('.git/'))).toBe(true);
     } finally {
@@ -95,7 +102,7 @@ describe('walkProject', () => {
 
     try {
       const files = await walkProject(tmp, { excludePatterns: ['*.generated.ts'] });
-      const rel = files.map(f => f.replace(tmp + '/', ''));
+      const rel = relPaths(tmp, files);
       expect(rel).toContain('a.ts');
       expect(rel).not.toContain('b.generated.ts');
     } finally {
@@ -112,7 +119,7 @@ describe('walkProject', () => {
 
     try {
       const files = await walkProject(tmp, {});
-      const rel = files.map(f => f.replace(tmp + '/', ''));
+      const rel = relPaths(tmp, files);
       expect(rel).toContain('kept.ts');
       expect(rel).not.toContain('ignored.ts');
     } finally {

@@ -96,6 +96,11 @@ export function createTestKB(projectId = 'test-proj'): TestKB {
     new Date().toISOString(),
   );
 
+  // Track every KBStore opened via createKBStore() so cleanup() can close them
+  // BEFORE removing the tmp dir. On Windows an open SQLite handle locks the file,
+  // so rmSync throws EBUSY (POSIX allows unlink-while-open; Windows does not).
+  const stores: Array<import('../../kb/store.js').KBStore> = [];
+
   return {
     db,
     projectDir,
@@ -105,9 +110,19 @@ export function createTestKB(projectId = 'test-proj'): TestKB {
       const { KBStore } = await import('../../kb/store.js');
       const kb = new KBStore({ registryPath });
       await kb.ensureRegistry();
+      stores.push(kb);
       return kb;
     },
     cleanup() {
+      // Close KBStore connections (registry + cached project DBs) first, then the
+      // factory's own project DB, before unlinking — see the `stores` note above.
+      for (const kb of stores) {
+        try {
+          kb.close();
+        } catch {
+          // Already closed
+        }
+      }
       try {
         db.close();
       } catch {

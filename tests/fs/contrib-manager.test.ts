@@ -73,7 +73,10 @@ describe("ContribManager", () => {
 
   it("includes config upstream_forks not already in upstream dir", async () => {
     const cfg = defaultConfig();
-    (cfg.upstream_forks as Record<string, string>)["remote-fork"] = "/nonexistent/path";
+    // Use a path under the fresh tmpRoot that is guaranteed not to exist on any
+    // platform. A POSIX-absolute literal like "/nonexistent/path" is not reliably
+    // absent on Windows runners, where existsSync may resolve it unexpectedly.
+    (cfg.upstream_forks as Record<string, string>)["remote-fork"] = join(tmpRoot, "no-such-fork-dir");
 
     const mgr = new ContribManager(tmpRoot, cfg);
     const result = await mgr.list();

@@ -31,6 +31,8 @@
  * @module security/loader-context
  */
 
+import { sep } from 'node:path';
+
 // ============================================================================
 // Pattern matching
 // ============================================================================
@@ -50,7 +52,12 @@ export type PathPattern = string | RegExp | ((path: string) => boolean);
 export function matchesAllowList(allowList: readonly PathPattern[], path: string): boolean {
   for (const pat of allowList) {
     if (typeof pat === 'string') {
-      if (pat.endsWith('/')) {
+      // A trailing separator marks a directory-prefix pattern. Accept BOTH the
+      // POSIX '/' and the platform separator so callers that build patterns
+      // with `path.sep` (backslash on win32) get prefix-matching there too.
+      // On POSIX `sep === '/'`, so this is a no-op relative to the historical
+      // forward-slash-only behavior.
+      if (pat.endsWith('/') || pat.endsWith(sep)) {
         if (path === pat.slice(0, -1) || path.startsWith(pat)) return true;
       } else if (path === pat) {
         return true;

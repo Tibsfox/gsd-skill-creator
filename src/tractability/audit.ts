@@ -18,7 +18,7 @@
  */
 
 import { readFile, readdir, stat } from 'node:fs/promises';
-import { join, isAbsolute } from 'node:path';
+import { join, isAbsolute, sep } from 'node:path';
 import { classifySkill } from './classifier.js';
 import { resolveOutputStructure } from '../output-structure/frontmatter.js';
 import type { ClassificationResult } from './classifier.js';
@@ -179,7 +179,11 @@ async function collectSkillFiles(dir: string): Promise<string[]> {
  * For other `.md` files: use the filename without extension.
  */
 function skillNameFromPath(filePath: string): string {
-  const parts = filePath.split('/');
+  // Split on the platform separator (and '/') so the derived name is the
+  // directory/filename segment, not the whole path. On Windows join() emits
+  // '\' so a '/'-only split would return the entire path as one element and
+  // skill names would be wrong. On POSIX sep === '/' so this is a no-op.
+  const parts = filePath.split(sep).flatMap((p) => p.split('/'));
   const filename = parts[parts.length - 1]!;
   if (filename === 'SKILL.md' && parts.length >= 2) {
     return parts[parts.length - 2]!;

@@ -12,6 +12,7 @@
 import { readdir, readFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { join, dirname, basename } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { argv, exit } from 'node:process';
 import { CATEGORIZED_TYPES, metadataFileFor, isArtifactDir } from './catalog-core.mjs';
 
@@ -193,7 +194,7 @@ async function main() {
     return;
   }
 
-  const scriptDir = dirname(new URL(import.meta.url).pathname);
+  const scriptDir = dirname(fileURLToPath(import.meta.url));
   const examplesRoot = dirname(scriptDir);
 
   console.log(`Validating ${examplesRoot} ...`);

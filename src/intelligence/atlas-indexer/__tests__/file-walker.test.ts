@@ -1,8 +1,15 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { mkdtempSync, mkdirSync, realpathSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { join, relative, sep } from 'node:path';
 import { walkProjectFiles } from '../file-walker.js';
+
+// walkProjectFiles returns absolute paths. Relativize against `root` and
+// normalize the platform separator to '/' so the canonical comparison holds
+// on win32 (path.relative emits backslashes there; no-op on POSIX).
+function relPath(root: string, abs: string): string {
+  return relative(root, abs).split(sep).join('/');
+}
 import {
   CapturingAuditSink,
   defaultLoaderContext,
@@ -38,7 +45,7 @@ describe('atlas-indexer walkProjectFiles', () => {
     touch('__pycache__/x.pyc', '');
 
     const out = await walkProjectFiles(root);
-    const rels = out.map((p) => p.slice(root.length + 1)).sort();
+    const rels = out.map((p) => relPath(root, p)).sort();
     expect(rels).toEqual(['src/a.ts', 'src/b.py']);
   });
 
@@ -48,7 +55,7 @@ describe('atlas-indexer walkProjectFiles', () => {
     const out = await walkProjectFiles(root, {
       fileFilter: (rel) => !rel.endsWith('drop.ts'),
     });
-    const rels = out.map((p) => p.slice(root.length + 1)).sort();
+    const rels = out.map((p) => relPath(root, p)).sort();
     expect(rels).toEqual(['src/keep.ts']);
   });
 
@@ -56,7 +63,7 @@ describe('atlas-indexer walkProjectFiles', () => {
     touch('src/big.ts', 'x'.repeat(2048));
     touch('src/small.ts', 'y');
     const out = await walkProjectFiles(root, { maxFileBytes: 100 });
-    const rels = out.map((p) => p.slice(root.length + 1));
+    const rels = out.map((p) => relPath(root, p));
     expect(rels).toContain('src/small.ts');
     expect(rels).not.toContain('src/big.ts');
   });

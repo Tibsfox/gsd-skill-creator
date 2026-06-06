@@ -10,7 +10,7 @@
 // Closes: OGA-024 (MEDIUM).
 
 import { readFileSync, writeFileSync, readdirSync, statSync } from 'node:fs';
-import { resolve, join } from 'node:path';
+import { resolve, join, basename as pathBasename } from 'node:path';
 import { execSync } from 'node:child_process';
 
 export const HALF_LIFE_VALUES = /** @type {const} */ ([
@@ -185,7 +185,7 @@ export function migrateDirectory({ dir, write = false, defaultHalfLife = '1mo' }
   let changed = 0;
   for (const path of files) {
     const text = readFileSync(path, 'utf-8');
-    const basename = path.split('/').pop() ?? path;
+    const basename = pathBasename(path);
     const lastAccessedIso = gitMtimeIso(path);
     const result = migrateDocument({
       text,

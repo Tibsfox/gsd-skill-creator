@@ -109,7 +109,10 @@ describe('Harness Integrity', () => {
   });
 
   describe('Permission Invariants', () => {
-    it('all shell hook scripts are executable', () => {
+    // windows: git does not preserve the Unix 0o111 exec bit on checkout, so
+    // stat.mode & 0o111 is always 0 on win32 (mode reports as 100666). The
+    // exec-bit invariant is fundamentally POSIX; skip just this assertion.
+    it.skipIf(process.platform === 'win32')('all shell hook scripts are executable', () => {
       const results = checkHookScriptsExecutable();
 
       // There should be at least one .sh hook

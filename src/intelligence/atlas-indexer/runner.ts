@@ -21,7 +21,7 @@
  */
 
 import { readFile } from 'node:fs/promises';
-import { relative } from 'node:path';
+import { relative, sep } from 'node:path';
 import type Database from 'better-sqlite3';
 import type {
   AtlasLanguage,
@@ -103,7 +103,12 @@ export async function runAtlasIndexer(
       const lang = detectAtlasLanguage(abs);
       if (!lang) continue;
       if (langFilter && !langFilter.has(lang)) continue;
-      candidates.push({ abs, rel: relative(opts.projectPath, abs), lang });
+      // `rel` is the canonical file_path key persisted into the symbols KB and
+      // queried (e.g. listSymbolsForFile('pkg/calc.py')) with forward slashes.
+      // path.relative() emits the platform separator (backslash on win32), so
+      // normalize to '/' to keep the key canonical across platforms (no-op on POSIX).
+      const rel = relative(opts.projectPath, abs).split(sep).join('/');
+      candidates.push({ abs, rel, lang });
     }
     const filesTotal = candidates.length;
 

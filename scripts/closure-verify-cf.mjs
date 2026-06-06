@@ -19,6 +19,14 @@ import { dirname, resolve } from 'node:path';
 import { parse as parseYaml } from 'yaml';
 
 const REPO_ROOT = process.cwd();
+
+// On Windows, `npm`/`npx` are `.cmd` shims; spawnSync without shell can't find
+// the bare name and returns ENOENT (status: null), which derails the probe's
+// exit-code-based status mapping. Resolve to the `.cmd` name on win32. On POSIX
+// the bare name is correct (no-op).
+const isWin = process.platform === 'win32';
+const bin = (name) => (isWin ? `${name}.cmd` : name);
+
 const PROBES = {
   'npm-audit': probeNpmAudit,
   'file-snapshot': probeFileSnapshot,
@@ -100,7 +108,7 @@ function probeNpmAudit(args) {
   }
 
   console.log(`[closure-verify] npm-audit probe for ${cfId} (severity=${severity})...`);
-  const res = spawnSync('npm', ['audit', `--audit-level=${severity}`, '--json'], {
+  const res = spawnSync(bin('npm'), ['audit', `--audit-level=${severity}`, '--json'], {
     cwd: REPO_ROOT,
     encoding: 'utf-8',
   });
@@ -255,11 +263,11 @@ function probeUpstreamVersion(args) {
   if (!cfId || !pkgName) usage(1);
 
   console.log(`[closure-verify] upstream-version probe for ${cfId}: ${pkgName}...`);
-  const versions = spawnSync('npm', ['view', pkgName, 'versions', '--json'], {
+  const versions = spawnSync(bin('npm'), ['view', pkgName, 'versions', '--json'], {
     cwd: REPO_ROOT,
     encoding: 'utf-8',
   });
-  const deprecated = spawnSync('npm', ['view', pkgName, 'deprecated'], {
+  const deprecated = spawnSync(bin('npm'), ['view', pkgName, 'deprecated'], {
     cwd: REPO_ROOT,
     encoding: 'utf-8',
   });
@@ -309,7 +317,7 @@ function probeTestMarker(args) {
   if (!cfId || !testFile) usage(1);
 
   console.log(`[closure-verify] test-marker probe for ${cfId}: ${testFile}...`);
-  const res = spawnSync('npx', ['vitest', 'run', testFile, '--reporter=dot'], {
+  const res = spawnSync(bin('npx'), ['vitest', 'run', testFile, '--reporter=dot'], {
     cwd: REPO_ROOT,
     encoding: 'utf-8',
   });
@@ -357,7 +365,7 @@ function probeHiddenTransitiveGuard(args) {
 
   console.log(`[closure-verify] hidden-transitive-guard probe for ${pkgName}...`);
   console.log(`[closure-verify]   listing transitive subtree of ${pkgName}...`);
-  const lsResult = spawnSync('npm', ['ls', pkgName, '--depth=Infinity', '--json'], {
+  const lsResult = spawnSync(bin('npm'), ['ls', pkgName, '--depth=Infinity', '--json'], {
     cwd: REPO_ROOT,
     encoding: 'utf-8',
   });

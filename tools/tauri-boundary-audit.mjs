@@ -19,7 +19,7 @@
 //   2  invalid args / not in repo
 
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
-import { dirname, join, relative, resolve } from 'node:path';
+import { dirname, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -29,6 +29,12 @@ const REPO_ROOT = resolve(__dirname, '..');
 const SRC_DIR = join(REPO_ROOT, 'src');
 const DESKTOP_DIR = join(REPO_ROOT, 'desktop');
 const ALLOWLIST_PATH = join(REPO_ROOT, 'tools', 'tauri-boundary-audit.allowlist.json');
+
+// Canonical relative path: forward-slash separators on every platform. The
+// allowlist JSON and the gate's downstream consumers key on '/'-separated
+// paths; path.relative() emits '\' on Windows, so normalize here. On POSIX
+// this is a no-op (sep is already '/').
+const relPosix = (from, to) => relative(from, to).split(sep).join('/');
 
 const FILE_EXT_RE = /\.(ts|tsx|js|mjs|cjs)$/;
 const TEST_FILE_RE = /\.(test|spec)\.[tj]sx?$/;
@@ -139,7 +145,7 @@ function scanSrcForTauri(files) {
     TAURI_IMPORT_RE.lastIndex = 0;
     while ((match = TAURI_IMPORT_RE.exec(content)) !== null) {
       violations.push({
-        file: relative(REPO_ROOT, file),
+        file: relPosix(REPO_ROOT, file),
         line: lineNumberOf(content, match.index),
         importPath: match[1],
         kind: 'src-imports-tauri',
@@ -154,7 +160,7 @@ function scanDesktopForNode(files) {
   for (const file of files) {
     if (TEST_FILE_RE.test(file)) continue;
     // Also skip vite config and similar build-time files
-    const base = file.split('/').pop() ?? '';
+    const base = file.split(/[/\\]/).pop() ?? '';
     if (base === 'vite.config.ts' || base === 'vitest.config.ts') continue;
     let raw;
     try {
@@ -175,7 +181,7 @@ function scanDesktopForNode(files) {
       }
       if (isNode) {
         violations.push({
-          file: relative(REPO_ROOT, file),
+          file: relPosix(REPO_ROOT, file),
           line: lineNumberOf(content, match.index),
           importPath: spec,
           kind: 'desktop-imports-node',

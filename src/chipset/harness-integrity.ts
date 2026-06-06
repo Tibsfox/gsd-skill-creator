@@ -150,10 +150,15 @@ export function checkHookScriptsExecutable(): InvariantResult[] {
   }
 
   const hookFiles = fs.readdirSync(hooksDir()).filter((f) => f.endsWith('.sh'));
+  // The Unix exec bit (0o111) is not a meaningful concept on Windows: git does
+  // not preserve it on checkout and fs.stat reports mode 100666 regardless of
+  // intent. Treat presence of the .sh file as the portable invariant on win32;
+  // the exec-bit check only runs on POSIX where it is authoritative.
+  const isWindows = process.platform === 'win32';
   for (const file of hookFiles) {
     const fullPath = path.join(hooksDir(), file);
     const stat = fs.statSync(fullPath);
-    const isExec = (stat.mode & 0o111) !== 0;
+    const isExec = isWindows || (stat.mode & 0o111) !== 0;
     results.push({
       name: `hook-executable:${file}`,
       passed: isExec,
