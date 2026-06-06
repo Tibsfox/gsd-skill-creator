@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
-import { readFile, mkdir, rm } from 'fs/promises';
+import { readFile, mkdir, rm, readdir } from 'fs/promises';
 import { join } from 'path';
 import { tmpdir } from 'os';
 import { SuggestionStore } from './suggestion-store.js';
@@ -68,6 +68,42 @@ describe('SuggestionStore', () => {
 
       expect(parsed).toHaveLength(1);
       expect(parsed[0].candidate.pattern).toBe('kubectl');
+    });
+  });
+
+  describe('save (atomic write, EXDEV-safe)', () => {
+    // Regression: save() must stage its temp file in the TARGET directory, not
+    // os.tmpdir(). Staging in tmpdir then rename()-ing across to the target
+    // throws EXDEV when tmpdir is on a different filesystem.
+    it('survives an unwritable os.tmpdir (does not stage there)', async () => {
+      const store = new SuggestionStore(testDir);
+      // Redirect every var os.tmpdir() consults (TMPDIR on POSIX, TEMP/TMP on
+      // Windows) at a path that does not exist. The old implementation staged
+      // its temp file under os.tmpdir() and would fail here; the fixed one
+      // stages inside testDir and is unaffected.
+      const saved = { TMPDIR: process.env.TMPDIR, TEMP: process.env.TEMP, TMP: process.env.TMP };
+      const bogus = join(testDir, 'no-such-tmp-dir');
+      process.env.TMPDIR = bogus;
+      process.env.TEMP = bogus;
+      process.env.TMP = bogus;
+      try {
+        const added = await store.addCandidates([createCandidate('cmd-exdev', 'exdev')]);
+        expect(added).toHaveLength(1);
+        const loaded = await store.load();
+        expect(loaded.map((s) => s.candidate.id)).toContain('cmd-exdev');
+      } finally {
+        for (const [k, v] of Object.entries(saved)) {
+          if (v === undefined) delete process.env[k];
+          else process.env[k] = v;
+        }
+      }
+    });
+
+    it('leaves no temp-file litter in the target dir after save', async () => {
+      const store = new SuggestionStore(testDir);
+      await store.addCandidates([createCandidate('cmd-litter', 'litter')]);
+      const entries = await readdir(testDir);
+      expect(entries).toEqual(['suggestions.json']);
     });
   });
 

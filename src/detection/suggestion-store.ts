@@ -1,6 +1,5 @@
-import { readFile, writeFile, rename, mkdir } from 'fs/promises';
+import { readFile, writeFile, rename, mkdir, unlink } from 'fs/promises';
 import { join, dirname } from 'path';
-import { tmpdir } from 'os';
 import {
   Suggestion,
   SuggestionState,
@@ -42,17 +41,30 @@ export class SuggestionStore {
    * Save suggestions with atomic write (temp file + rename)
    */
   private async save(suggestions: Suggestion[]): Promise<void> {
-    // Ensure parent directory exists
-    await mkdir(dirname(this.suggestionsPath), { recursive: true });
+    const dir = dirname(this.suggestionsPath);
 
-    // Write to temp file first
+    // Ensure parent directory exists
+    await mkdir(dir, { recursive: true });
+
+    // Stage the temp file in the SAME directory as the target so the rename is
+    // an atomic, same-filesystem operation. Staging in os.tmpdir() and renaming
+    // across to the target throws EXDEV ("cross-device link not permitted")
+    // whenever tmpdir is on a different mount than the target (e.g. a tmpfs
+    // /tmp with the repo on another disk, or a CI runner with a separate TMPDIR
+    // volume). A same-directory rename works on POSIX and Windows alike.
     const tempPath = join(
-      tmpdir(),
-      `suggestions-${Date.now()}-${Math.random().toString(36).slice(2)}.json`
+      dir,
+      `.suggestions-${Date.now()}-${Math.random().toString(36).slice(2)}.json.tmp`
     );
 
     await writeFile(tempPath, JSON.stringify(suggestions, null, 2), 'utf-8');
-    await rename(tempPath, this.suggestionsPath);
+    try {
+      await rename(tempPath, this.suggestionsPath);
+    } catch (err) {
+      // Best-effort cleanup so a failed rename leaves no temp-file litter.
+      await unlink(tempPath).catch(() => {});
+      throw err;
+    }
   }
 
   /**
