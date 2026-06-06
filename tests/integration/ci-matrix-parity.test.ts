@@ -31,16 +31,15 @@
  *     driven by a deterministic readiness verdict (`node tools/ci/macos-flip-
  *     readiness.mjs` -> READY 3/3 across organic churn; release/docs ships do not count).
  *
- *   STAGED-WINDOWS — v1.49.985 (Phase 4) folded `windows-latest` into the SAME matrix
- *     as the NEXT staged leg, mirroring the v1.49.923 macOS staging. It carries
- *     `continue-on-error: ${{ matrix.os == 'windows-latest' }}` so it runs every push
- *     for cross-platform signal WITHOUT ship-blocking power, while ubuntu + macOS stay
- *     load-bearing. So the test job must carry EXACTLY ONE `continue-on-error` — the
- *     windows-gated one — never zero (windows would have silently gone load-bearing
- *     without the paired update) and never a job-unconditional or step-level one (which
- *     would mask the ubuntu/macOS legs too). The flip to load-bearing is gated on
- *     `node tools/ci/windows-flip-readiness.mjs` -> READY 3/3 across organic churn and
- *     MUST update this test (delete the line; restore the load-bearing ZERO-COE assert).
+ *   LOAD-BEARING-WINDOWS — v1.49.985 (Phase 4) folded `windows-latest` into the SAME
+ *     matrix as a STAGED `continue-on-error: ${{ matrix.os == 'windows-latest' }}` leg;
+ *     Phase-4 rung-3 (2026-06-06) FLIPPED it to load-bearing once `node tools/ci/
+ *     windows-flip-readiness.mjs` reached READY 3/3 across organic churn — the gated
+ *     line was deleted. So the test job must now carry ZERO `continue-on-error`: all
+ *     three legs (ubuntu, macOS, windows) are ship-blocking. RE-STAGING windows
+ *     (re-adding the windows-gated line) — or any job-unconditional / step-level COE
+ *     that masks a leg — is the deliberate reverse act and MUST update this test; a
+ *     silent re-stage fails here.
  *
  *   RETIREMENT — `ci-macos.yml` must NOT exist. A re-created separate lane would
  *     re-introduce the `.[0]` run-selection ambiguity the v1.49.922 ci-gate pin
@@ -105,20 +104,19 @@ describe('CI cross-platform matrix — parity + load-bearing drift-guard', () =>
     );
   });
 
-  it('STAGED-WINDOWS — EXACTLY ONE continue-on-error, the windows-staging gate (ubuntu + macOS unmasked)', () => {
-    // v1.49.985 (Phase 4): windows-latest was folded in as a STAGED non-blocking leg
-    // carrying `continue-on-error: ${{ matrix.os == 'windows-latest' }}`; ubuntu + macOS
-    // stay LOAD-BEARING. So the test job must contain EXACTLY ONE continue-on-error and
-    // it MUST be the windows-gated one — no job-unconditional COE (masks every leg), no
-    // step-level COE (masks a step on every leg including ubuntu/macOS), no re-staged
-    // macOS gate. Adding windows was the deliberate act that updated this assertion (it
-    // was ZERO pre-v985); FLIPPING windows to load-bearing later (deleting the line) is
-    // the next deliberate act that MUST update it again. A silent change either way fails.
-    const count = (testJob.match(/continue-on-error:/g) || []).length;
-    expect(count).toBe(1);
-    expect(testJob).toMatch(
+  it('LOAD-BEARING — the windows leg is ship-blocking (staged continue-on-error GONE; ZERO in the test job)', () => {
+    // v1.49.985 staged windows with `continue-on-error: ${{ matrix.os == 'windows-latest' }}`.
+    // Phase-4 rung-3 (2026-06-06) FLIPPED it to load-bearing: the gate (`node tools/ci/
+    // windows-flip-readiness.mjs` -> READY 3/3 across organic churn) was met and the line
+    // was deleted. Now ALL THREE legs (ubuntu, macOS, windows) are load-bearing, so the
+    // test job must carry ZERO continue-on-error. Re-staging windows (re-adding the
+    // windows-gated line), or any job-unconditional / step-level COE that masks a leg, is
+    // the deliberate reverse act and MUST update this test — a silent re-stage fails here.
+    expect(testJob).not.toMatch(
       /continue-on-error:\s*\$\{\{\s*matrix\.os\s*==\s*'windows-latest'\s*\}\}/,
     );
+    const count = (testJob.match(/continue-on-error:/g) || []).length;
+    expect(count).toBe(0);
   });
 
   it('LOAD-BEARING — fail-fast is disabled so neither leg cancels the other', () => {

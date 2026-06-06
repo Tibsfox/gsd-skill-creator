@@ -56,19 +56,21 @@ jobs:
     # reads, so a macOS-only failure blocks a ship exactly like an ubuntu failure.
     # The flip was paired with the mandatory update to tests/integration/
     # ci-matrix-parity.test.ts (the #10461 drift-guard) — a silent flip fails it.
-    # v1.49.985 (Phase 4): windows-latest folded in as the NEXT STAGED leg, mirroring
-    # the v1.49.923 macOS staging. It carries the gated `continue-on-error` below so it
-    # runs every push for cross-platform signal WITHOUT ship-blocking power, while the
-    # ubuntu + macOS legs stay LOAD-BEARING. Windows is expected RED initially (the
-    # suite carries Unix assumptions — path separators, /tmp, fs perms, EOL); the
-    # staged leg surfaces the signal to drive it green. Flip to load-bearing is gated
-    # on `node tools/ci/windows-flip-readiness.mjs` reaching READY 3/3 across organic
-    # churn, paired with the mandatory ci-matrix-parity.test.ts update (#10461 drift-
-    # guard) — a silent flip fails it. The job-level `defaults.run.shell: bash` makes
-    # the multi-line run steps (the Grove fixture-gen prelude) and the npm/npx
-    # invocations execute under Git Bash on the windows runner instead of PowerShell,
-    # so all three legs run identical step scripts.
-    continue-on-error: ${{ matrix.os == 'windows-latest' }}
+    # v1.49.985 (Phase 4): windows-latest folded in as a STAGED `continue-on-error`
+    # leg, mirroring the v1.49.923 macOS staging — per-push cross-platform signal
+    # WITHOUT ship-blocking power while the suite's Unix assumptions (path separators,
+    # ESM import URLs, cmd.exe shell quoting, unix-only spawns) were driven out.
+    # Phase 4 rung 3 (2026-06-06): FLIPPED TO LOAD-BEARING. The `continue-on-error`
+    # line (gated on `matrix.os == 'windows-latest'`) was deleted after 3 consecutive
+    # green windows pushes accumulated ACROSS ORGANIC CHURN (`node tools/ci/windows-
+    # flip-readiness.mjs` -> READY 3/3, the deliberate flip gate). All three legs now
+    # contribute to the run-level conclusion the pre-tag-gate ci-gate reads, so a
+    # windows-only failure blocks a ship exactly like an ubuntu failure. The flip was
+    # paired with the mandatory ci-matrix-parity.test.ts update (#10461 drift-guard) —
+    # a silent flip fails it. The job-level `defaults.run.shell: bash` keeps the multi-
+    # line run steps (the Grove fixture-gen prelude) + npm/npx invocations on Git Bash
+    # on the windows runner instead of PowerShell, so all three legs run identical
+    # step scripts.
     timeout-minutes: 60
     defaults:
       run:
