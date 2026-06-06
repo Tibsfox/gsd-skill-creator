@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.994`.
+The story begins at `v1.0` and continues to `v1.49.995`.
 
-**1037 chapters.** 1036 have retrospectives.
+**1038 chapters.** 1037 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -1045,3 +1045,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.992](v1.49.992/00-summary.md)** — Pioneer 11 NASA First-Saturn-Flyby and Paired Outer-Heliosphere Precursor Mission · 2026-06-06
 - **[v1.49.993](v1.49.993/00-summary.md)** — New Horizons NASA Pluto Reconnaissance and Outer-Heliosphere Frontier Mission · 2026-06-06
 - **[v1.49.994](v1.49.994/00-summary.md)** — Cassini-Huygens NASA-ESA-ASI Saturn System Flagship and Heliosphere ENA Imaging Mission · 2026-06-06
+- **[v1.49.995](v1.49.995/00-summary.md)** — FAST Fast Auroral Snapshot Explorer NASA Small Explorer High-Cadence Magnetosphere Mission · 2026-06-06
