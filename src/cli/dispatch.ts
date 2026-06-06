@@ -276,6 +276,10 @@ export const REGISTRY: readonly CommandEntry[] = [
     const { integrationConfigCommand } = await import('./commands/integration-config.js');
     return integrationConfigCommand(ctx.args.slice(1));
   } },
+  { aliases: ['amiga', 'am'], handler: async (ctx) => {
+    const { amigaCommand } = await import('./commands/amiga.js');
+    return amigaCommand(ctx.args.slice(1));
+  } },
   { aliases: ['graph', 'gr'], handler: async (ctx) => {
     const { graphCommand } = await import('./commands/graph.js');
     return graphCommand(ctx.args.slice(1));

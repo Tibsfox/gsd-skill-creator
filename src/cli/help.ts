@@ -64,6 +64,7 @@ Commands:
   eval              Run skill evaluations (multi-model benchmarks, view results)
   ab, ab-test       Skill A/B harness (variant comparison, status, list)
   discover, disc    Discover skill candidates from session history
+  amiga, am         Mine skill candidates via the AMIGA meta-mission detector (--corpus, --emit)
   quality, q        Show per-skill health scores (precision, success rate, efficiency)
   graph, gr         Output Mermaid diagram of skill relationships
   impact, imp       Analyze inheritance impact of modifying a skill

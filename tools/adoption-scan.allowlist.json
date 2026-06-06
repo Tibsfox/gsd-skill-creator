@@ -112,12 +112,6 @@
       "addedBy": "v972 D3 control-theory island park"
     },
     {
-      "module": "amiga",
-      "reason": "Mission-orchestration substrate (MC-1/ME-1/CE-1/GL-1 + meta-mission harness, 45 files). Its only production edge is a single test-only import in src/knowledge/event-bridge.ts (itself unreachable), so reachability-v2 (Ship 3.1) confirms unreachable. Large designed substrate preserved (not retired) pending a mission-orchestration runtime consumer. Generic resume (a future mission-orchestration runtime); retire-or-resume review by 2027-06-05.",
-      "addedAt": "v1.49.978",
-      "addedBy": "v978 Ship 3.2 shelfware disposition (reachability-v2)"
-    },
-    {
       "module": "audio-engineering",
       "reason": "Educational content cartridge (36 audio-engineering concepts across 6 domains, 32 citations; v1.49.16). Content cluster, not core substrate — analogous to the allowlisted `holomorphic` pack. Imported only by type-only college-enrichment refs + one cartridge test, both unreachable. Default-OFF, zero import side-effects. Generic resume (a content-delivery/curriculum surface); retire-or-resume review by 2027-06-05.",
       "addedAt": "v1.49.978",

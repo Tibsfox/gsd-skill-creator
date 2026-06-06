@@ -62,6 +62,7 @@ Quick reference for all commands organized by workflow stage.
 | Command | Alias | Description |
 |---------|-------|-------------|
 | [discover](#discover) | `disc` | Scan session logs, extract patterns, rank candidates, generate draft skills |
+| [amiga](#amiga) | `am` | Mine candidates via the AMIGA meta-mission detector + CE-1 attribution (`--corpus`, `--emit`) |
 
 ### Teams: Multi-Agent Coordination
 
@@ -2182,6 +2183,68 @@ For each table, you can interactively select which candidates to turn into draft
 
 ---
 
+## amiga
+
+Mine skill candidates from real session transcripts by driving them through the AMIGA meta-mission `SkillCandidateDetector` + CE-1 attribution ledger, then map the result onto `SuggestionStore` candidates so they surface in `sc:suggest`.
+
+This is the first-class promotion of `tools/spike-amiga-revive.mjs` — the dormant `src/amiga` substrate's production runtime consumer. Unlike `discover` (which clusters prompts and tool n-grams via the SC-native pipeline), `amiga` projects a session's ordered tool-use stream onto the AMIGA mission-event vocabulary and runs the dormant meta-mission/CE-1 code paths.
+
+**Aliases:** `am`
+
+**Usage:**
+
+```bash
+skill-creator amiga [<transcript>] [options]
+```
+
+**Options:**
+
+| Option | Description |
+|--------|-------------|
+| `--corpus` | Process every transcript in the projects dir and aggregate candidates (deduped by id, occurrences summed, sessions/tools unioned) |
+| `--emit` | Land candidates in `<patterns-dir>/suggestions.json` via `SuggestionStore` so they surface in `sc:suggest`. Dry-run by default (writes nothing without `--emit`) |
+| `--patterns-dir <dir>` | Target patterns dir for `--emit` (default `.planning/patterns`) |
+| `--projects-dir <dir>` | Transcript source dir (default: the cwd's `~/.claude/projects/<slug>` folder) |
+| `--limit <n>` | Cap emitted workflow candidates (default 10 single / 20 corpus). Structural candidates are always kept |
+| `--json` | Machine-readable output |
+| `--help, -h` | Show usage |
+
+**Description:**
+
+The pipeline has two layers over the same session:
+
+1. **Detector** — `SessionEventBridge` projects the tool-use stream onto two views: a mission/ledger log (drives the lifecycle-aware `attribution_cluster` / `provisioning_workflow` methods) and a tool-sequence log (drives `sequence_repetition`, surfacing real cross-tool workflow cycles like `read-to-edit-cycle`). Structural candidates plus the highest-occurrence non-self-loop workflows are kept.
+2. **CE-1 attribution** — the same ledger envelopes flow through `InvocationRecorder` → `AttributionLedger` → `WeightingEngine`, producing a per-tool weight vector (and, in `--corpus` mode, the mean attribution weight per tool across all sessions).
+
+With no transcript argument, the largest transcript is analyzed. With `--corpus`, every transcript is analyzed and candidates are aggregated. Candidate ids are `amiga-<name>`, so `--emit` is idempotent (re-running adds 0 new).
+
+**Examples:**
+
+```bash
+# Analyze the largest transcript (dry-run)
+skill-creator amiga
+
+# Aggregate the whole corpus and land candidates in sc:suggest
+skill-creator amiga --corpus --emit
+
+# Machine-readable single-transcript analysis
+skill-creator amiga ~/.claude/projects/<slug>/<id>.jsonl --json
+```
+
+**Exit Codes:**
+
+| Code | Meaning |
+|------|---------|
+| 0 | Seam proven — candidate(s) detected AND CE-1 attribution captured |
+| 1 | No transcripts found, nothing analyzable, no attribution, or an error |
+
+**Notes:**
+
+- Dry-run by default — only `--emit` writes, and it only ever adds to `suggestions.json` (additive, deduped by id).
+- Candidates are left **pending** for human review via `skill-creator suggest`; nothing is auto-promoted to a skill.
+
+---
+
 ## Integration: Config Management
 
 Commands for inspecting and maintaining the skill-creator integration config at `.planning/skill-creator.json` — the file that controls feature toggles, token budget, observation retention, and suggestion thresholds. A missing file means all defaults are used; a partial file is merged with defaults, so you only specify the values you override.
@@ -2378,6 +2441,7 @@ Commands return exit codes for CI/scripting integration:
 | team validate | All teams valid (or only warnings) | One or more teams have errors |
 | team spawn | All member agents resolved | One or more agents missing |
 | discover | Pipeline completes, drafts written | Error during scan/extract/rank |
+| amiga | Seam proven (candidate detected AND CE-1 attribution captured) | No transcripts / nothing analyzable / no attribution / error |
 | integration | Config valid / shown / nothing to migrate / migration applied | Validation errors, unparseable JSON, or a refused/failed migrate |
 | (all others) | Success | Error occurred |
 
@@ -2417,6 +2481,7 @@ Commands supporting `--json` output for scripting:
 | integration validate | `--json` | `{ valid, errors, config }` |
 | integration show | `--json` | Effective config object |
 | integration migrate | `--json` | `{ path, action, applied, reason, backup? }` |
+| amiga | `--json` | single: `{ mode, transcript, sessionId, toolUses, topTools, missionId, structuralCandidates, workflowCandidates, candidates[], attribution, emit?, seamProven }`; corpus: `{ mode, projectsDir, sessionsAnalyzed, sessionsSkipped, totalToolUses, totalCaptured, totalErrors, candidates[], meanWeights[], emit?, seamProven }` |
 
 ### JSON Schema: detect-conflicts
 

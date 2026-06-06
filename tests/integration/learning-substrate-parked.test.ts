@@ -182,10 +182,11 @@ describe('reachability-v2 — control-theory island reachability (Ship 3.1, v1.4
 
 // The reachability-only shelfware modules disposed via ALLOWLIST at v1.49.978.
 // Ship 3.2 allowlisted 14; Ship 3.3 (v1.49.979) WIRED three of them — commands,
-// learn, scan-arxiv (the sc-learn/scan-arxiv CLI registration) — leaving 11 here.
+// learn, scan-arxiv (the sc-learn/scan-arxiv CLI registration) — leaving 11; then
+// v1.49.987 WIRED amiga (the dispatch `amiga` command gave the dormant
+// meta-mission/CE-1 substrate its production runtime consumer) — leaving 10 here.
 // (git + skill were the two of the Ship-3.1 "16" already WIRED at Ship 3.2.)
 const SHIP32_ALLOWLISTED = [
-  'amiga',
   'audio-engineering',
   'bayes-ab',
   'cache',
@@ -237,7 +238,7 @@ describe('Ship 3.2 — reachability-only shelfware disposition (v1.49.978)', () 
     ).toEqual([]);
   });
 
-  it('ALLOWLIST — the 11 still-parked modules carry the v978 provenance + dated gate and read allowlisted-unreachable', () => {
+  it('ALLOWLIST — the 10 still-parked modules carry the v978 provenance + dated gate and read allowlisted-unreachable', () => {
     const entries = allowlist();
     for (const mod of SHIP32_ALLOWLISTED) {
       const e = entries.find((x) => x.module === mod);
@@ -278,6 +279,26 @@ describe('Ship 3.2 — reachability-only shelfware disposition (v1.49.978)', () 
         `${mod} allowlist entry must be REMOVED at Ship 3.3 (mirrors git/skill — wired, not allowlisted)`,
       ).not.toContain(mod);
     }
+  });
+
+  it('WIRE (v1.49.987) — amiga is reachable via the dispatch `amiga` command (no allowlist)', () => {
+    // Promoting tools/spike-amiga-revive.mjs into src/cli/commands/amiga.ts (wired
+    // in dispatch.ts) gives the dormant meta-mission detector + CE-1 ledger their
+    // first production runtime consumer: dispatch → commands/amiga.ts →
+    // amiga/spike/* → amiga/meta-mission + amiga/ce1. So amiga flips
+    // reachableFromProduction:true and, per the git/skill + Ship-3.3 precedent,
+    // carries NO allowlist entry (wired, not allowlisted).
+    const r = byModule.get('amiga');
+    expect(r, 'amiga must be in the scan').toBeTruthy();
+    expect(
+      r!.reachableFromProduction,
+      'amiga must be reachable after the dispatch amiga-command wire',
+    ).toBe(true);
+    expect(r!.allowlisted, 'amiga should NOT read allowlisted (it is wired)').toBe(false);
+    expect(
+      allowlist().map((e) => e.module),
+      'amiga allowlist entry must be REMOVED at v1.49.987 (mirrors git/skill — wired, not allowlisted)',
+    ).not.toContain('amiga');
   });
 
   it('RETIRE — upstream + upstream-intelligence are deleted, but the config namespace survives', () => {
