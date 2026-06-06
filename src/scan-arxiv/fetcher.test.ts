@@ -4,6 +4,7 @@
  */
 
 import { readFileSync, rmSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { createFetcher } from './fetcher.js';
@@ -14,7 +15,7 @@ import type { ArxivPaper } from './types.js';
 // ---------------------------------------------------------------------------
 
 const FIXTURE_PATH = join(
-  new URL('.', import.meta.url).pathname,
+  fileURLToPath(new URL('.', import.meta.url)),
   '__fixtures__/arxiv-sample.xml',
 );
 
@@ -64,7 +65,7 @@ function buildEntry(
 // ---------------------------------------------------------------------------
 
 const TEMP_CACHE = join(
-  new URL('.', import.meta.url).pathname,
+  fileURLToPath(new URL('.', import.meta.url)),
   '__fixtures__/__test-cache__',
 );
 

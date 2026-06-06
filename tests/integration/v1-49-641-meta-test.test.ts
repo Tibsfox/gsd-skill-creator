@@ -55,7 +55,11 @@ describe('v1.49.641 integration meta-test', () => {
 
   // ─── C2 (CF-12 closure-verify-cf.mjs tool) ───────────────────────────
 
-  it('C2: scripts/closure-verify-cf.mjs exists and is executable', () => {
+  // windows: NTFS / git-on-Windows does not preserve Unix execute bits, so
+  // statSync().mode never carries 0o111 on the windows-latest runner. The
+  // existence half of this assertion is still covered by the probe-type test
+  // below; the execute-bit check is POSIX-only.
+  it.skipIf(process.platform === 'win32')('C2: scripts/closure-verify-cf.mjs exists and is executable', () => {
     expect(existsSync(CLOSURE_VERIFY_SCRIPT)).toBe(true);
     const stat = statSync(CLOSURE_VERIFY_SCRIPT);
     // octal 0o111 = at least one execute bit (user/group/other) set

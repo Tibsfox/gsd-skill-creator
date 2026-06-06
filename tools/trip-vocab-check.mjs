@@ -63,6 +63,7 @@
  */
 
 import { readFileSync } from 'node:fs';
+import { pathToFileURL } from 'node:url';
 
 // ── Canonical token classes (MISSION-PACKAGE-DISCIPLINE.md §3.1) ────────────
 // PRIMARY: title-line hard-budget tokens. SECONDARY: body-density tokens.
@@ -251,6 +252,6 @@ function main() {
 }
 
 // Run as CLI unless imported (the analyzeTripVocab export is for tests).
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   main();
 }

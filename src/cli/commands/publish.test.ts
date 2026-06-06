@@ -93,10 +93,20 @@ function makeStatusJson(overrides: Record<string, unknown> = {}): string {
   });
 }
 
-/** Find the call to writeFile that wrote to a path ending with `suffix`. */
+/**
+ * Find the call to writeFile that wrote to a path ending with `suffix`.
+ * Normalizes path separators to '/' so a suffix containing a slash (e.g.
+ * `triggering-logs/overrides.log`) still matches on Windows, where join()
+ * produces backslash separators.
+ */
 function findWriteCall(suffix: string): unknown[] | undefined {
   const calls = (mockWriteFile as ReturnType<typeof vi.fn>).mock.calls as unknown[][];
-  return calls.find((c) => typeof c[0] === 'string' && (c[0] as string).endsWith(suffix));
+  const wantSuffix = suffix.replaceAll('\\', '/');
+  return calls.find(
+    (c) =>
+      typeof c[0] === 'string' &&
+      (c[0] as string).replaceAll('\\', '/').endsWith(wantSuffix),
+  );
 }
 
 // ============================================================================

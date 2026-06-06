@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { mkdtempSync, writeFileSync, mkdirSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { join, sep } from 'node:path';
 
 import {
   backfillSkillContent,
@@ -148,7 +148,8 @@ describe('version-backfill: runBackfill end-to-end', () => {
       writeFileSync(join(refDir, 'extra.md'), 'not a skill');
       const files = findSkillFiles(root);
       expect(files.length).toBe(1);
-      expect(files[0]).toMatch(/s1\/SKILL\.md$/);
+      // Normalize separators so the assertion holds on Windows (path.join → \).
+      expect(files[0].split(sep).join('/')).toMatch(/s1\/SKILL\.md$/);
     } finally {
       rmSync(root, { recursive: true, force: true });
     }

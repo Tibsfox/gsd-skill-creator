@@ -16,6 +16,7 @@
 // The adapter rewrites to `?` for SQLite on the fly.
 
 import { existsSync, readFileSync } from 'node:fs';
+import { pathToFileURL } from 'node:url';
 import { dirname } from 'node:path';
 
 const SCHEMA_PREFIX_RE = /\brelease_history\./g;
@@ -223,7 +224,7 @@ async function openSqlite(cfg) {
 }
 
 // CLI self-test: `node tools/release-history/db.mjs`
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const { loadConfig } = await import('./config.mjs');
   const cfg = loadConfig();
   const db = await openDb(cfg);

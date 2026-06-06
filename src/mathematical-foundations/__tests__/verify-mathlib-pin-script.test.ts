@@ -23,7 +23,9 @@ describe('verify-mathlib-pin.sh — existence + permissions', () => {
     expect(existsSync(SCRIPT_PATH)).toBe(true);
   });
 
-  it('script is executable (mode bit ≥ 700)', () => {
+  // windows: the executable mode bit is a POSIX file-mode concept; git checkouts
+  // on Windows do not preserve it, so this assertion is POSIX-only.
+  it.skipIf(process.platform === 'win32')('script is executable (mode bit ≥ 700)', () => {
     const mode = statSync(SCRIPT_PATH).mode & 0o777;
     expect(mode & 0o700).toBe(0o700);
   });
@@ -34,7 +36,9 @@ describe('verify-mathlib-pin.sh — existence + permissions', () => {
   });
 });
 
-describe('verify-mathlib-pin.sh — SHA parse against the canonical lean-toolchain.md', () => {
+// windows: these cases spawn `awk` directly (a POSIX tool not on the default
+// PATH of GitHub windows-latest runners) to round-trip the script's SHA parse.
+describe.skipIf(process.platform === 'win32')('verify-mathlib-pin.sh — SHA parse against the canonical lean-toolchain.md', () => {
   it('extracts the same 40-char SHA via the script as awk extracts directly', () => {
     // Run the script's awk extractor directly to round-trip the parse.
     const awkProgram = [
@@ -84,7 +88,9 @@ describe('verify-mathlib-pin.sh — SHA parse against the canonical lean-toolcha
   });
 });
 
-describe('verify-mathlib-pin.sh — --no-build path', () => {
+// windows: this spawns the `#!/usr/bin/env bash` script directly; Windows cannot
+// execute a shebang script without a POSIX shell, so this case is POSIX-only.
+describe.skipIf(process.platform === 'win32')('verify-mathlib-pin.sh — --no-build path', () => {
   it('exits 0 with --no-build when no checkout exists yet (parse-only success)', () => {
     // Use a non-existent mathlib dir so the early --no-build branch fires
     // before the elan check.

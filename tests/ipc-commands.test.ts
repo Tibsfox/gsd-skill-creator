@@ -10,6 +10,7 @@
  */
 
 import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { fileURLToPath } from 'node:url';
 
 // vi.hoisted runs before vi.mock hoisting, making mockInvoke available
 // to the vi.mock factory functions below.
@@ -20,13 +21,13 @@ const { mockInvoke } = vi.hoisted(() => {
 // Mock the Tauri core module using the absolute path that desktop resolves to.
 // vi.mock is hoisted, so we inline the path computation.
 vi.mock(
-  new URL('../desktop/node_modules/@tauri-apps/api/core', import.meta.url).pathname,
+  fileURLToPath(new URL('../desktop/node_modules/@tauri-apps/api/core', import.meta.url)),
   () => ({ invoke: mockInvoke }),
 );
 
 // Mock the Tauri event module (needed for event listener imports in commands.test.ts)
 vi.mock(
-  new URL('../desktop/node_modules/@tauri-apps/api/event', import.meta.url).pathname,
+  fileURLToPath(new URL('../desktop/node_modules/@tauri-apps/api/event', import.meta.url)),
   () => ({ listen: vi.fn() }),
 );
 

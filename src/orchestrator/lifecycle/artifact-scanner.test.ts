@@ -8,7 +8,7 @@
 
 import { describe, it, expect, afterEach } from 'vitest';
 import { mkdtempSync, writeFileSync, rmSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, sep } from 'node:path';
 import { tmpdir } from 'node:os';
 import { scanPhaseArtifacts } from './artifact-scanner.js';
 import {
@@ -320,8 +320,12 @@ describe('LoaderContext chokepoint integration (v1.49.900)', () => {
     mkdirSync(fullDir, { recursive: true });
 
     const sink = new CapturingAuditSink();
+    // Prefix-pattern uses the platform path separator: the audited target is
+    // the child `phasesDir/<phaseDir>`, so a literal '/' separator would never
+    // match the backslash child path on win32 (matchesAllowList does a raw
+    // string startsWith).
     const prefixCtx: LoaderContext = {
-      allowList: [`${phasesDir}/`],
+      allowList: [`${phasesDir}${sep}`],
       audit: sink,
     };
     await scanPhaseArtifacts(phasesDir, phaseDir, prefixCtx);

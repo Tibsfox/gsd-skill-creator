@@ -32,8 +32,11 @@ describe('resolvePmtilesPath', () => {
     expect(resolvePmtilesPath(null)).toMatch(/symbols\.pmtiles$/);
   });
   it('uses ATLAS_PMTILES_DIR env when set', () => {
-    process.env.ATLAS_PMTILES_DIR = '/tmp/atlas-test';
-    expect(resolvePmtilesPath('foo')).toBe('/tmp/atlas-test/foo.pmtiles');
+    // Build the dir + expected path with the same path API the code uses so
+    // the assertion holds on Windows (backslash sep, drive-letter resolve).
+    const dir = resolve(tmpdir(), 'atlas-test');
+    process.env.ATLAS_PMTILES_DIR = dir;
+    expect(resolvePmtilesPath('foo')).toBe(resolve(dir, 'foo.pmtiles'));
     delete process.env.ATLAS_PMTILES_DIR;
   });
 });

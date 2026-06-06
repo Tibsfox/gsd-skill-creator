@@ -29,10 +29,23 @@
 
 import { describe, expect, it } from 'vitest';
 import { readFileSync, readdirSync, statSync } from 'node:fs';
-import { join, relative, resolve } from 'node:path';
+import { join, relative, resolve, sep } from 'node:path';
 
 const ROOT = resolve(__dirname, '..', '..');
 const SRC = resolve(__dirname, '..', '..', 'src');
+
+/**
+ * Relative path from ROOT, normalized to forward slashes.
+ *
+ * The KNOWN_NOT_EGRESS / KNOWN_UNWIRED allowlists are authored with
+ * forward slashes ('src/dashboard/x.ts'). On Windows, `relative()` yields
+ * backslashes ('src\\dashboard\\x.ts'), which would never match the
+ * allowlists or the it.each() label. Normalize to '/' so the audit is
+ * platform-independent.
+ */
+function relPosix(absPath: string): string {
+  return relative(ROOT, absPath).split(sep).join('/');
+}
 
 /**
  * Server-side fetch callers not yet wired through the EgressContext chokepoint.
@@ -175,7 +188,7 @@ const ROLE_BOUNDARY_REGEX = /Role:\s*NOT\s+an\s+egress\s+caller/i;
 function inspect(absPath: string): Inspection {
   const content = readFileSync(absPath, 'utf8');
   return {
-    path: relative(ROOT, absPath),
+    path: relPosix(absPath),
     hasFetchCall: FETCH_CALL_REGEX.test(content),
     callsEnsureEgressAllowed: ENSURE_EGRESS_ALLOWED_REGEX.test(content),
     hasRoleBoundary: ROLE_BOUNDARY_REGEX.test(content),
@@ -189,7 +202,7 @@ describe('EgressContext chokepoint audit', () => {
     expect(files.length).toBeGreaterThan(50);
   });
 
-  it.each(files.map((f) => [relative(ROOT, f), f]))(
+  it.each(files.map((f) => [relPosix(f), f]))(
     'enforces chokepoint on %s',
     (label, absPath) => {
       const result = inspect(absPath);

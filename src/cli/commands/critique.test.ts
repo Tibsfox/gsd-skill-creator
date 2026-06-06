@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { dirname, join } from 'node:path';
+import { dirname, join, sep } from 'node:path';
 
 // ============================================================================
 // Mock setup — must be before imports of the module under test
@@ -121,7 +121,11 @@ describe('critiqueCommand', () => {
 
     const calls = (writeFile as ReturnType<typeof vi.fn>).mock.calls;
     const logCall = calls.find((c: unknown[]) =>
-      typeof c[0] === 'string' && c[0].includes('.local/critique-logs/') && c[0].endsWith('.json'),
+      // Normalize to '/' so the path-substring check holds on Windows, where
+      // join() yields backslash separators.
+      typeof c[0] === 'string' &&
+      c[0].split(sep).join('/').includes('.local/critique-logs/') &&
+      c[0].endsWith('.json'),
     );
     expect(logCall).toBeDefined();
   });

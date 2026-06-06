@@ -5,7 +5,7 @@
 
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { mkdtemp, rm, writeFile, mkdir } from 'node:fs/promises';
-import { join } from 'node:path';
+import { join, sep } from 'node:path';
 import { tmpdir } from 'node:os';
 
 import { scanForBundles, scanPriorityDirWithBundles } from './scanner.js';
@@ -268,8 +268,13 @@ describe('LoaderContext chokepoint integration (v1.49.892)', () => {
     await writeMsgAndBundle(join(config.busDir, 'priority-3'), msg, false);
 
     const sink = new CapturingAuditSink();
+    // Prefix-pattern uses the platform path separator so the inner
+    // priority-N subdir audits (busDir/priority-3, etc.) match on Windows
+    // (backslash) as well as POSIX (forward slash). matchesAllowList does a
+    // raw string startsWith — a literal '/' would never match a backslash
+    // child path on win32.
     const prefixCtx: LoaderContext = {
-      allowList: [`${config.busDir}/`],
+      allowList: [`${config.busDir}${sep}`],
       audit: sink,
     };
     const entries = await scanForBundles(config, undefined, prefixCtx);

@@ -6,6 +6,7 @@
  */
 
 import { rmSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { createFetcher } from './fetcher.js';
@@ -13,7 +14,7 @@ import { createFetcher } from './fetcher.js';
 const LIVE = process.env.SCAN_ARXIV_LIVE === '1';
 
 const LIVE_CACHE_DIR = join(
-  new URL('.', import.meta.url).pathname,
+  fileURLToPath(new URL('.', import.meta.url)),
   '__fixtures__/__live-cache__',
 );
 

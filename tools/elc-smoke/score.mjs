@@ -13,7 +13,7 @@
  */
 import { readFile, readdir, access } from 'node:fs/promises';
 import { resolve, join, dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { spawnSync } from 'node:child_process';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -362,7 +362,7 @@ async function main() {
   process.exit(results.every((r) => r.pass) ? 0 : 1);
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   main().catch((err) => { console.error(err); process.exit(2); });
 }
 

@@ -20,6 +20,7 @@
 //   --severity info|warn|critical|all             Filter by severity (default: all)
 
 import fs from 'node:fs';
+import { pathToFileURL } from 'node:url';
 import path from 'node:path';
 
 // ---------------------------------------------------------------------------
@@ -331,6 +332,6 @@ export function main() {
 }
 
 // Only run main when invoked directly (not when imported as a module).
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   main();
 }

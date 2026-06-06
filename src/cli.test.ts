@@ -22,8 +22,13 @@ describe('parseSkillsDir', () => {
   });
 
   it('preserves an absolute --skills-dir path', () => {
-    const args = ['critique', 'foo', '--skills-dir', '/abs/path'];
-    expect(parseSkillsDir(args, 'user')).toBe('/abs/path');
+    // Use a platform-absolute path so the assertion holds on Windows too
+    // (a bare POSIX '/abs/path' is NOT absolute on Windows and gets
+    // drive-prefixed by pathResolve). resolve() of an absolute path is a
+    // no-op, so this still exercises the "absolute path preserved" contract.
+    const abs = resolve('/abs/path');
+    const args = ['critique', 'foo', '--skills-dir', abs];
+    expect(parseSkillsDir(args, 'user')).toBe(abs);
   });
 
   it('falls back to user scope default when --skills-dir is absent', () => {

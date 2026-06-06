@@ -75,7 +75,10 @@ afterEach(() => {
 
 // --- safe-merge.sh tests (SCRIPT-02) ---
 
-describe('safe-merge.sh', () => {
+// windows: these tests execute POSIX shell scripts via `bash "<...>.sh"`;
+// GH windows-latest cannot spawn a .sh directly (spawn EFTYPE) and has no
+// guaranteed bash. The scripts only run in POSIX contexts.
+describe.skipIf(process.platform === 'win32')('safe-merge.sh', () => {
   it('performs successful --no-ff merge', () => {
     const { repoPath, mainBranch, featureBranch } = createRepoWithBranches();
     tempDirs.push(repoPath);
@@ -158,7 +161,8 @@ describe('safe-merge.sh', () => {
 
 // --- pr-bundle.sh tests (SCRIPT-03) ---
 
-describe('pr-bundle.sh', () => {
+// windows: executes POSIX shell scripts via bash (see note above).
+describe.skipIf(process.platform === 'win32')('pr-bundle.sh', () => {
   it('generates diff summary with commits and stats', () => {
     const { repoPath, mainBranch } = createRepoWithBranches();
     tempDirs.push(repoPath);
@@ -212,7 +216,8 @@ describe('pr-bundle.sh', () => {
 
 // --- worktree-setup.sh tests (SCRIPT-04) ---
 
-describe('worktree-setup.sh', () => {
+// windows: executes POSIX shell scripts via bash (see note above).
+describe.skipIf(process.platform === 'win32')('worktree-setup.sh', () => {
   it('creates a worktree with branch tracking', () => {
     const repo = createTempRepo();
     tempDirs.push(repo);

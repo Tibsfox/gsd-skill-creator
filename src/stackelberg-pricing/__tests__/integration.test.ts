@@ -13,6 +13,7 @@
  */
 
 import * as fs from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import * as path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import {
@@ -227,7 +228,7 @@ describe('PricingSolution JSON round-trip', () => {
 describe('reference-only verification', () => {
   it('no src/orchestration or src/dacp or src/capcom imports in module source files', () => {
     const moduleDir = path.resolve(
-      path.dirname(new URL(import.meta.url).pathname),
+      path.dirname(fileURLToPath(import.meta.url)),
       '..',
     );
     const files = fs.readdirSync(moduleDir).filter(
@@ -248,7 +249,7 @@ describe('reference-only verification', () => {
 describe('public surface — no Fox Companies IP names', () => {
   it('module source files contain no Fox Companies IP names', () => {
     const moduleDir = path.resolve(
-      path.dirname(new URL(import.meta.url).pathname),
+      path.dirname(fileURLToPath(import.meta.url)),
       '..',
     );
     const files = fs.readdirSync(moduleDir).filter(

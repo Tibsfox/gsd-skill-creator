@@ -27,7 +27,10 @@ const SETTINGS = join(REPO_ROOT, 'project-claude', 'settings.json');
 
 const REQUIRED_EVENTS = ['PostCompact', 'FileChanged', 'PermissionDenied', 'SubagentSpawn'];
 
-describe('CF-H-034: tool-tracker.sh registration + privacy tier B', () => {
+// windows: this suite executes a POSIX shell script (tool-tracker.sh) via bash
+// and asserts on Unix file-mode execute bits — neither is portable to the
+// windows-latest GH runner.
+describe.skipIf(process.platform === 'win32')('CF-H-034: tool-tracker.sh registration + privacy tier B', () => {
   it('tool-tracker.sh exists and is executable', () => {
     expect(existsSync(TRACKER)).toBe(true);
     const st = statSync(TRACKER);

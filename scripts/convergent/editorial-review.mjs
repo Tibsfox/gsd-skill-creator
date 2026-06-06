@@ -22,6 +22,7 @@
 //     [--overrides <path-to-overrides.json>]   (optional per-entry overrides)
 
 import fs from 'node:fs';
+import { pathToFileURL } from 'node:url';
 import path from 'node:path';
 
 // ----------------------------------------------------------------------------
@@ -221,6 +222,6 @@ export async function main(argv = process.argv) {
   }
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   main().catch((e) => { console.error(e); process.exit(1); });
 }

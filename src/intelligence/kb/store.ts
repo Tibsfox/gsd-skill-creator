@@ -23,6 +23,7 @@
  */
 
 import Database from 'better-sqlite3';
+import { fileURLToPath } from 'node:url';
 import { mkdirSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { homedir } from 'node:os';
@@ -132,7 +133,7 @@ export class KBStore implements IntelligenceKB {
 
     this._migrationsDir =
       opts?.migrationsDir ??
-      join(dirname(new URL(import.meta.url).pathname), '..', 'db', 'migrations');
+      join(dirname(fileURLToPath(import.meta.url)), '..', 'db', 'migrations');
 
     this._busyTimeoutMs = opts?.busyTimeoutMs ?? 5000;
   }

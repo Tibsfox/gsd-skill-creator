@@ -3,6 +3,7 @@
  */
 
 import { describe, it, expect, beforeAll } from 'vitest';
+import { fileURLToPath } from 'node:url';
 import { mkdir, writeFile, symlink, rm } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
@@ -13,7 +14,7 @@ import { walkProject, isBinary } from '../walk.js';
 
 describe('walkProject', () => {
   it('respects .gitignore — returns only non-ignored files', async () => {
-    const fixtureRoot = new URL('./fixtures/simple-project', import.meta.url).pathname;
+    const fixtureRoot = fileURLToPath(new URL('./fixtures/simple-project', import.meta.url));
     const files = await walkProject(fixtureRoot, {});
     const rel = files.map(f => f.replace(fixtureRoot + '/', ''));
     expect(rel).toContain('src/index.ts');
@@ -135,13 +136,13 @@ describe('walkProject', () => {
 
 describe('isBinary', () => {
   it('plain text file → false', async () => {
-    const fixtureRoot = new URL('./fixtures/simple-project', import.meta.url).pathname;
+    const fixtureRoot = fileURLToPath(new URL('./fixtures/simple-project', import.meta.url));
     const result = await isBinary(join(fixtureRoot, 'src/index.ts'));
     expect(result).toBe(false);
   });
 
   it('random-bytes fixture → true', async () => {
-    const fixtureRoot = new URL('./fixtures/binary-project', import.meta.url).pathname;
+    const fixtureRoot = fileURLToPath(new URL('./fixtures/binary-project', import.meta.url));
     const result = await isBinary(join(fixtureRoot, 'binary.bin'));
     expect(result).toBe(true);
   });

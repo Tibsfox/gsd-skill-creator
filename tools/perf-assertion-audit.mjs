@@ -25,6 +25,7 @@
  */
 
 import { spawnSync } from 'node:child_process';
+import { pathToFileURL } from 'node:url';
 import { readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 
@@ -271,6 +272,6 @@ function main(argv) {
 export { runAudit, classifyTierUp, detectShape, toPosixEre, SHAPE_PATTERNS };
 
 // Run main when invoked directly.
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   process.exit(main(process.argv.slice(2)));
 }

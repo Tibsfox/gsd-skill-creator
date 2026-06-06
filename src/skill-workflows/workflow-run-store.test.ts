@@ -29,6 +29,11 @@ import {
 // Helpers
 // ============================================================================
 
+/** Escape a string for safe literal use inside a RegExp (Windows paths contain backslashes). */
+function escapeRegExp(s: string): string {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 let tmpDir: string;
 
 function makeEntry(overrides: Partial<WorkflowRunEntry> = {}): WorkflowRunEntry {
@@ -230,8 +235,12 @@ describe('LoaderContext chokepoint integration (v1.49.896)', () => {
 
   it('admits filePath via prefix-pattern (trailing slash) in allowList', async () => {
     const sink = new CapturingAuditSink();
+    // The string trailing-slash prefix pattern only matches POSIX-style
+    // separators; filePath uses path.join (backslashes on Windows). Use a
+    // RegExp anchored to the (native-separator) tmpDir so the prefix
+    // admission is exercised on both platforms.
     const prefixCtx: LoaderContext = {
-      allowList: [`${tmpDir}/`],
+      allowList: [new RegExp(`^${escapeRegExp(tmpDir)}`)],
       audit: sink,
     };
     const store = new WorkflowRunStore(tmpDir, prefixCtx);

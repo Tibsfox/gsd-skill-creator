@@ -119,7 +119,10 @@ describe('resolveKeystoreBin', () => {
   });
 });
 
-describe('keystoreCommand subprocess pass-through', () => {
+// windows: stubs are `#!/bin/sh` scripts spawned directly — Windows cannot
+// execute a shebang script without a POSIX shell, so these spawn-based cases
+// are POSIX-only.
+describe.skipIf(process.platform === 'win32')('keystoreCommand subprocess pass-through', () => {
   it('returns exit code from the stub bin', async () => {
     const stub = join(workRoot, 'stub-success');
     writeFileSync(
@@ -155,7 +158,10 @@ describe('keystoreCommand subprocess pass-through', () => {
   // Coverage of that handler shape is implicit in the spawn-error logic.
 });
 
-describe('keystore migrate --to-keyring (v1.49.637 cluster #4 C2 stub polish)', () => {
+// windows: these two cases spawn `#!/bin/sh` stub bins (POSIX-only). The
+// platform-agnostic help-text + Rust-source-read cases live in their own
+// (non-skipped) describe block below so Windows still covers them.
+describe.skipIf(process.platform === 'win32')('keystore migrate --to-keyring (v1.49.637 cluster #4 C2 stub polish)', () => {
   it('passes through exit code 3 from the M3-stub bin', async () => {
     // Stub bin emitting the polished stub message (Path-2 → Path-1 deferral
     // + .planning/path-2-to-path-1-migration.md doc reference) and exit 3.
@@ -200,7 +206,9 @@ describe('keystore migrate --to-keyring (v1.49.637 cluster #4 C2 stub polish)', 
     // Stdout must be empty for the stub path.
     expect(io.out.join('')).toBe('');
   });
+});
 
+describe('keystore migrate --to-keyring help + substrate invariants', () => {
   it('keystore.ts help text references the M3-deferral version (NOT stale v1.49.650)', async () => {
     const io = makeIO();
     const code = await keystoreCommand(['--help'], io);

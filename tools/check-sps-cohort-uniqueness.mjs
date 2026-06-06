@@ -45,6 +45,7 @@
 //     authoring a new SPS species page).
 
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
+import { pathToFileURL } from 'node:url';
 import { execSync } from 'node:child_process';
 import { join, resolve } from 'node:path';
 
@@ -249,6 +250,6 @@ Exit codes:
   process.exit(0);
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   main();
 }

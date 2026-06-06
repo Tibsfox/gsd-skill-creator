@@ -6,6 +6,7 @@
  */
 
 import { describe, expect, it } from 'vitest';
+import { fileURLToPath } from 'node:url';
 import * as sigregModule from '../index.js';
 import {
   LEJEPA_DEFAULT_CONFIG,
@@ -270,7 +271,7 @@ describe('sigreg', () => {
     const fs = await import('node:fs');
     const path = await import('node:path');
     const dir = path.resolve(
-      path.dirname(new URL(import.meta.url).pathname),
+      path.dirname(fileURLToPath(import.meta.url)),
       '..',
     );
     const sigregSource = fs.readFileSync(path.join(dir, 'sigreg.ts'), 'utf8');
@@ -286,7 +287,7 @@ describe('sigreg', () => {
     const path = await import('node:path');
     const skill = fs.readFileSync(
       path.join(
-        path.dirname(new URL(import.meta.url).pathname),
+        path.dirname(fileURLToPath(import.meta.url)),
         '..',
         'SKILL.md',
       ),
@@ -300,7 +301,7 @@ describe('sigreg', () => {
     const fs = await import('node:fs');
     const path = await import('node:path');
     const dir = path.resolve(
-      path.dirname(new URL(import.meta.url).pathname),
+      path.dirname(fileURLToPath(import.meta.url)),
       '..',
     );
     function countNonComment(src: string): number {

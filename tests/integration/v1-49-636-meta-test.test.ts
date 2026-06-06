@@ -31,6 +31,7 @@ import {
   existsSync,
   mkdirSync,
   mkdtempSync,
+  readFileSync,
   rmSync,
   writeFileSync,
 } from 'node:fs';
@@ -270,7 +271,7 @@ describe('v1.49.636 integration meta-test', () => {
       // skip-guard per Lesson #10180.
       return;
     }
-    const content = execSync(`cat "${path}"`, { encoding: 'utf8' });
+    const content = readFileSync(path, 'utf8');
     // v1.49.653 L-02 widened the step count from /9 to /13; the assertions
     // check that the *steps* are still present, decoupled from the suffix.
     expect(content).toContain('step 1.5/');

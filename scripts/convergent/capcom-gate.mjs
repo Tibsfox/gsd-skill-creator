@@ -30,6 +30,7 @@
 //     [--force]   (only valid mid-wave; BLOCK still exits 2 regardless)
 
 import fs from 'node:fs';
+import { pathToFileURL } from 'node:url';
 import path from 'node:path';
 
 const WAVES = new Set(['W0', 'W1A', 'W1B', 'W1C', 'W2', 'W3']);
@@ -355,6 +356,6 @@ export async function main(argv = process.argv) {
   process.exit(result.effectiveExit);
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   main().catch((e) => { console.error(e); process.exit(3); });
 }

@@ -18,7 +18,7 @@
  */
 
 import { readFile, readdir, stat } from 'node:fs/promises';
-import { join } from 'node:path';
+import { join, isAbsolute } from 'node:path';
 import { classifySkill } from './classifier.js';
 import { resolveOutputStructure } from '../output-structure/frontmatter.js';
 import type { ClassificationResult } from './classifier.js';
@@ -240,10 +240,12 @@ export async function runAudit(options: AuditOptions = {}): Promise<AuditReport>
 
   const cwd = options.cwd ?? process.cwd();
 
-  // Build directory list
+  // Build directory list. isAbsolute() (not startsWith('/')) so absolute
+  // extraDirs on Windows (e.g. C:\…\Temp\ref-skills-xxx) are not re-joined
+  // under cwd. On POSIX the two are equivalent for these inputs.
   const dirs = [
-    ...DEFAULT_SCAN_DIRS.map((d) => (d.startsWith('/') ? d : join(cwd, d))),
-    ...(options.extraDirs ?? []).map((d) => (d.startsWith('/') ? d : join(cwd, d))),
+    ...DEFAULT_SCAN_DIRS.map((d) => (isAbsolute(d) ? d : join(cwd, d))),
+    ...(options.extraDirs ?? []).map((d) => (isAbsolute(d) ? d : join(cwd, d))),
   ];
 
   // Collect all skill files

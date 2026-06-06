@@ -9,7 +9,7 @@
 
 import { describe, it, expect } from 'vitest';
 import { readFileSync, readdirSync } from 'node:fs';
-import { resolve, dirname, join } from 'node:path';
+import { resolve, dirname, basename, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   splitFrontmatter,
@@ -42,7 +42,7 @@ describe('CF-H-032: skill SOT discovery', () => {
   });
 
   it('finds the four expected anchor skills', () => {
-    const names = SKILL_FILES.map((p) => p.split('/').slice(-2)[0]);
+    const names = SKILL_FILES.map((p) => basename(dirname(p)));
     expect(names).toContain('security-hygiene');
     expect(names).toContain('sling-dispatch');
     expect(names).toContain('done-retirement');
@@ -51,7 +51,7 @@ describe('CF-H-032: skill SOT discovery', () => {
 });
 
 describe('CF-H-032: agentskills.io spec field coverage', () => {
-  it.each(SKILL_FILES.map((p) => [p.split('/').slice(-2)[0], p] as const))(
+  it.each(SKILL_FILES.map((p) => [basename(dirname(p)), p] as const))(
     '%s declares version, format, triggers, and status',
     (_name, path) => {
       const text = readFileSync(path, 'utf-8');
@@ -66,7 +66,7 @@ describe('CF-H-032: agentskills.io spec field coverage', () => {
 });
 
 describe('CF-H-032: spec field values are canonical', () => {
-  it.each(SKILL_FILES.map((p) => [p.split('/').slice(-2)[0], p] as const))(
+  it.each(SKILL_FILES.map((p) => [basename(dirname(p)), p] as const))(
     '%s uses canonical SPEC_FORMAT and a semver-shaped version',
     (_name, path) => {
       const text = readFileSync(path, 'utf-8');
@@ -86,7 +86,7 @@ describe('CF-H-032: spec field values are canonical', () => {
 });
 
 describe('CF-H-032: status uses uppercase lifecycle values', () => {
-  it.each(SKILL_FILES.map((p) => [p.split('/').slice(-2)[0], p] as const))(
+  it.each(SKILL_FILES.map((p) => [basename(dirname(p)), p] as const))(
     '%s status is one of DRAFT/ACTIVE/DEPRECATED/RETIRED/ARCHIVED',
     (_name, path) => {
       const text = readFileSync(path, 'utf-8');
@@ -100,7 +100,7 @@ describe('CF-H-032: status uses uppercase lifecycle values', () => {
 });
 
 describe('CF-H-032: triggers field is a non-empty list', () => {
-  it.each(SKILL_FILES.map((p) => [p.split('/').slice(-2)[0], p] as const))(
+  it.each(SKILL_FILES.map((p) => [basename(dirname(p)), p] as const))(
     '%s declares at least one trigger entry',
     (_name, path) => {
       const text = readFileSync(path, 'utf-8');

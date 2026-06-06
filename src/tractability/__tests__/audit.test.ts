@@ -12,6 +12,7 @@
  */
 
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { fileURLToPath } from 'node:url';
 import { mkdtemp, writeFile, mkdir, rm } from 'node:fs/promises';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
@@ -277,7 +278,7 @@ describe('runAudit — whole-repo smoke', () => {
   it('scans .claude/skills and returns a report with total > 0', async () => {
     // Use the actual repo root to smoke-test real skill discovery
     // __tests__/ is 3 levels inside the repo: src/tractability/__tests__/
-    const repoRoot = new URL('../../..', import.meta.url).pathname;
+    const repoRoot = fileURLToPath(new URL('../../..', import.meta.url));
     const report = await runAudit({
       featureEnabled: true,
       cwd: repoRoot,

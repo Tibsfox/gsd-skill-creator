@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { mkdtemp, writeFile, rm } from "node:fs/promises";
-import { join } from "node:path";
+import { join, resolve, sep } from "node:path";
 import { tmpdir } from "node:os";
 import {
   ScConfigSchema,
@@ -179,7 +179,11 @@ describe("resolveProjectPath", () => {
   it("resolves relative home path against root", () => {
     const config = defaultConfig(); // home: "projects"
     const resolved = resolveProjectPath("/home/user/sc", config);
-    expect(resolved).toBe("/home/user/sc/projects");
+    // resolveProjectPath uses path.resolve, which yields native separators and
+    // (on Windows) a drive prefix. Build the expected value with the same API
+    // and normalize separators so the assertion is portable.
+    const expected = resolve("/home/user/sc", "projects");
+    expect(resolved.split(sep).join("/")).toBe(expected.split(sep).join("/"));
   });
 
   it("returns absolute home path unchanged", () => {

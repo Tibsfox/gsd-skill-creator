@@ -10,6 +10,11 @@ import {
   type LoaderContext,
 } from '../security/loader-context.js';
 
+/** Escape a string for safe literal use inside a RegExp (Windows paths contain backslashes). */
+function escapeRegExp(s: string): string {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 /** Valid state fixture covering all fields */
 const validState = {
   version: 1,
@@ -350,8 +355,12 @@ describe('LoaderContext chokepoint integration (v1.49.897)', () => {
     createTmpDir();
     const statePath = join(tmpDir, 'scan-state.json');
     const sink = new CapturingAuditSink();
+    // The string trailing-slash prefix pattern only matches POSIX-style
+    // separators; statePath uses path.join (backslashes on Windows). Use a
+    // RegExp anchored to the (native-separator) tmpDir so the prefix
+    // admission is exercised on both platforms.
     const prefixCtx: LoaderContext = {
-      allowList: [`${tmpDir}/`],
+      allowList: [new RegExp(`^${escapeRegExp(tmpDir)}`)],
       audit: sink,
     };
     const store = new ScanStateStore(statePath, prefixCtx);

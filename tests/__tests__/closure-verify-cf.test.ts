@@ -14,7 +14,7 @@
  */
 
 import { describe, it, expect, afterEach } from 'vitest';
-import { existsSync, readFileSync, unlinkSync } from 'node:fs';
+import { existsSync, readFileSync, unlinkSync, mkdirSync, writeFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { resolve } from 'node:path';
 
@@ -199,10 +199,9 @@ describe('closure-verify-cf.mjs', () => {
     });
 
     it('validates required fields in spec', () => {
-      // Use writeFileSync via spawnSync to avoid an extra import
       const malformed = `cf_id: ${TEST_SPEC_ID}\nprobe_type: file-snapshot\n`;
-      spawnSync('mkdir', ['-p', SPEC_DIR]);
-      spawnSync('bash', ['-c', `cat > '${testSpecPath()}' <<EOF\n${malformed}\nEOF`]);
+      mkdirSync(SPEC_DIR, { recursive: true });
+      writeFileSync(testSpecPath(), `${malformed}\n`, 'utf-8');
 
       const r = runProbe(['auto', TEST_SPEC_ID]);
       expect(r.status).toBe(1);
@@ -220,8 +219,8 @@ routing_rules:
 notes: |
   Test spec for auto dispatch.
 `;
-      spawnSync('mkdir', ['-p', SPEC_DIR]);
-      spawnSync('bash', ['-c', `cat > '${testSpecPath()}' <<'EOF'\n${specYaml}\nEOF`]);
+      mkdirSync(SPEC_DIR, { recursive: true });
+      writeFileSync(testSpecPath(), `${specYaml}\n`, 'utf-8');
 
       const r = runProbe(['auto', TEST_SPEC_ID]);
       expect(r.status).toBe(0);
@@ -238,8 +237,8 @@ probe_type: not-a-real-probe
 probe_args: {}
 routing_rules: {resolved-upstream: retire}
 `;
-      spawnSync('mkdir', ['-p', SPEC_DIR]);
-      spawnSync('bash', ['-c', `cat > '${testSpecPath()}' <<'EOF'\n${specYaml}\nEOF`]);
+      mkdirSync(SPEC_DIR, { recursive: true });
+      writeFileSync(testSpecPath(), `${specYaml}\n`, 'utf-8');
 
       const r = runProbe(['auto', TEST_SPEC_ID]);
       expect(r.status).toBe(1);
@@ -252,8 +251,8 @@ probe_type: auto
 probe_args: {}
 routing_rules: {resolved-upstream: retire}
 `;
-      spawnSync('mkdir', ['-p', SPEC_DIR]);
-      spawnSync('bash', ['-c', `cat > '${testSpecPath()}' <<'EOF'\n${specYaml}\nEOF`]);
+      mkdirSync(SPEC_DIR, { recursive: true });
+      writeFileSync(testSpecPath(), `${specYaml}\n`, 'utf-8');
 
       const r = runProbe(['auto', TEST_SPEC_ID]);
       expect(r.status).toBe(1);
@@ -272,8 +271,8 @@ routing_rules:
 notes: |
   Apply-to-self test for the v1.49.644 C3 threshold-enhancement.
 `;
-      spawnSync('mkdir', ['-p', SPEC_DIR]);
-      spawnSync('bash', ['-c', `cat > '${testSpecPath()}' <<'EOF'\n${specYaml}\nEOF`]);
+      mkdirSync(SPEC_DIR, { recursive: true });
+      writeFileSync(testSpecPath(), `${specYaml}\n`, 'utf-8');
 
       const r = runProbe(['auto', TEST_SPEC_ID]);
       expect([0, 1]).toContain(r.status);  // 0 if no vulns at moderate+, 1 otherwise

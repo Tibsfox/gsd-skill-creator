@@ -31,7 +31,7 @@
  *   node scripts/apply-to-self.mjs   (defaults to latest tag .. HEAD)
  */
 
-import { execSync } from 'node:child_process';
+import { execSync, execFileSync } from 'node:child_process';
 import { readFileSync, readdirSync, existsSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -267,8 +267,13 @@ export function listNewTestFiles({ diffRange, cwd = process.cwd() } = {}) {
     return [];
   }
   try {
-    const out = execSync(
-      `git diff --name-only --diff-filter=A ${diffRange} -- ${DEFAULT_NEW_TEST_GLOBS.map((g) => `'${g}'`).join(' ')}`,
+    // execFileSync (arg array, no shell) so glob pathspecs are passed to git
+    // verbatim — POSIX shells must not glob-expand them and Windows cmd.exe
+    // must not leave the single-quotes attached (the prior shell-string form
+    // broke pathspec matching on the windows-latest runner).
+    const out = execFileSync(
+      'git',
+      ['diff', '--name-only', '--diff-filter=A', diffRange, '--', ...DEFAULT_NEW_TEST_GLOBS],
       { encoding: 'utf8', cwd },
     );
     return out

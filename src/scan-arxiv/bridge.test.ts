@@ -200,7 +200,9 @@ describe('buildBridge', () => {
   });
 
   // Test 5: run-ingestion.sh has mode 0755
-  it('run-ingestion.sh is created with mode 0755', async () => {
+  // windows: POSIX file-mode bits (0o755) are not represented on win32 (fs.chmod
+  // is a no-op there), so the executable-bit assertion is meaningless.
+  it.skipIf(process.platform === 'win32')('run-ingestion.sh is created with mode 0755', async () => {
     const result = await buildBridge(makeInputs({}, tmpBase));
     const stat = fs.statSync(result.shellScriptPath);
     // Extract permission bits (octal)
@@ -209,7 +211,9 @@ describe('buildBridge', () => {
   });
 
   // Test 6: run-ingestion.sh passes bash -n (syntax check)
-  it('run-ingestion.sh is syntactically valid (bash -n)', async () => {
+  // windows: requires a POSIX `bash` on PATH to syntax-check the shell script;
+  // GH windows-latest has no guaranteed bash for this.
+  it.skipIf(process.platform === 'win32')('run-ingestion.sh is syntactically valid (bash -n)', async () => {
     const result = await buildBridge(makeInputs({}, tmpBase));
     expect(() =>
       execFileSync('bash', ['-n', result.shellScriptPath], { stdio: 'pipe' }),

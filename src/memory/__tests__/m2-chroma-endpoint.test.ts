@@ -6,6 +6,7 @@
  */
 
 import { describe, it, expect } from 'vitest';
+import { fileURLToPath } from 'node:url';
 import { readdir, readFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { DEFAULT_CHROMA_URL } from '../read-write-reflect.js';
@@ -23,7 +24,7 @@ const M2_SOURCE_FILES    = [
 ];
 
 const memoryDir = resolve(
-  new URL(import.meta.url).pathname,
+  fileURLToPath(import.meta.url),
   '../../', // from __tests__/ to src/memory/
 );
 

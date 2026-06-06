@@ -24,6 +24,7 @@
 //     [--force]          (re-download even if <out>/<id>.pdf exists)
 
 import fs from 'node:fs';
+import { pathToFileURL } from 'node:url';
 import path from 'node:path';
 
 const ARXIV_PDF = 'https://arxiv.org/pdf/';
@@ -158,6 +159,6 @@ export async function main(argv = process.argv) {
   process.exit(err > 0 ? 1 : 0);
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   main().catch((e) => { console.error(e); process.exit(2); });
 }

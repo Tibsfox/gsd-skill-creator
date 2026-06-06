@@ -1,9 +1,14 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { homedir } from "node:os";
-import { join } from "node:path";
+import { join, sep, isAbsolute } from "node:path";
 
 // Store original env values
 const originalEnv = { ...process.env };
+
+/** Normalize native path separators to "/" so POSIX-style assertions hold on Windows. */
+function norm(p: string | undefined): string | undefined {
+  return p === undefined ? undefined : p.split(sep).join("/");
+}
 
 describe("XDG Base Directory utilities", () => {
   beforeEach(() => {
@@ -31,7 +36,7 @@ describe("XDG Base Directory utilities", () => {
     it("uses XDG_CONFIG_HOME when set to absolute path", async () => {
       process.env.XDG_CONFIG_HOME = "/custom/config";
       const { configDir } = await loadXdg();
-      expect(configDir()).toBe("/custom/config/gsd-os");
+      expect(norm(configDir())).toBe("/custom/config/gsd-os");
     });
 
     it("falls back to ~/.config when XDG_CONFIG_HOME is unset", async () => {
@@ -50,7 +55,7 @@ describe("XDG Base Directory utilities", () => {
     it("uses XDG_DATA_HOME when set to absolute path", async () => {
       process.env.XDG_DATA_HOME = "/custom/data";
       const { dataDir } = await loadXdg();
-      expect(dataDir()).toBe("/custom/data/gsd-os");
+      expect(norm(dataDir())).toBe("/custom/data/gsd-os");
     });
 
     it("falls back to ~/.local/share when XDG_DATA_HOME is unset", async () => {
@@ -63,7 +68,7 @@ describe("XDG Base Directory utilities", () => {
     it("uses XDG_STATE_HOME when set to absolute path", async () => {
       process.env.XDG_STATE_HOME = "/custom/state";
       const { stateDir } = await loadXdg();
-      expect(stateDir()).toBe("/custom/state/gsd-os");
+      expect(norm(stateDir())).toBe("/custom/state/gsd-os");
     });
 
     it("falls back to ~/.local/state when XDG_STATE_HOME is unset", async () => {
@@ -76,7 +81,7 @@ describe("XDG Base Directory utilities", () => {
     it("uses XDG_CACHE_HOME when set to absolute path", async () => {
       process.env.XDG_CACHE_HOME = "/custom/cache";
       const { cacheDir } = await loadXdg();
-      expect(cacheDir()).toBe("/custom/cache/gsd-os");
+      expect(norm(cacheDir())).toBe("/custom/cache/gsd-os");
     });
 
     it("falls back to ~/.cache when XDG_CACHE_HOME is unset", async () => {
@@ -94,7 +99,7 @@ describe("XDG Base Directory utilities", () => {
     it("returns path when XDG_RUNTIME_DIR is set to absolute path", async () => {
       process.env.XDG_RUNTIME_DIR = "/run/user/1000";
       const { runtimeDir } = await loadXdg();
-      expect(runtimeDir()).toBe("/run/user/1000/gsd-os");
+      expect(norm(runtimeDir())).toBe("/run/user/1000/gsd-os");
     });
 
     it("returns undefined when XDG_RUNTIME_DIR is relative", async () => {
@@ -113,10 +118,12 @@ describe("XDG Base Directory utilities", () => {
   describe("cross-cutting concerns", () => {
     it("all returned paths are absolute", async () => {
       const { configDir, dataDir, stateDir, cacheDir } = await loadXdg();
-      expect(configDir().startsWith("/")).toBe(true);
-      expect(dataDir().startsWith("/")).toBe(true);
-      expect(stateDir().startsWith("/")).toBe(true);
-      expect(cacheDir().startsWith("/")).toBe(true);
+      // Use path.isAbsolute (not a leading-"/" check) so this holds on Windows,
+      // where absolute paths begin with a drive letter rather than "/".
+      expect(isAbsolute(configDir())).toBe(true);
+      expect(isAbsolute(dataDir())).toBe(true);
+      expect(isAbsolute(stateDir())).toBe(true);
+      expect(isAbsolute(cacheDir())).toBe(true);
     });
 
     it("all paths include gsd-os subdirectory", async () => {

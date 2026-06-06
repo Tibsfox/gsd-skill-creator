@@ -13,7 +13,7 @@
 
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { mkdir, writeFile, rm } from 'fs/promises';
-import { join } from 'path';
+import { join, sep } from 'path';
 import { tmpdir } from 'os';
 import { ProjectStateReader } from './state-reader.js';
 import {
@@ -597,8 +597,12 @@ describe('LoaderContext chokepoint integration (v1.49.902)', () => {
 
     const sink = new CapturingAuditSink();
     const parent = join(testDir, '..');
+    // Prefix-pattern uses the platform path separator: the audited target is
+    // the child `testDir`, so a literal '/' separator would never match the
+    // backslash child path on win32 (matchesAllowList does a raw string
+    // startsWith).
     const prefixCtx: LoaderContext = {
-      allowList: [`${parent}/`],
+      allowList: [`${parent}${sep}`],
       audit: sink,
     };
     const reader = new ProjectStateReader(testDir, prefixCtx);

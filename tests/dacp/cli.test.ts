@@ -19,17 +19,25 @@ import { dacpSetLevelCommand } from '../../src/cli/commands/dacp-set-level.js';
 
 let testDir: string;
 let originalHome: string | undefined;
+let originalUserProfile: string | undefined;
 
 beforeEach(() => {
   testDir = join(tmpdir(), `dacp-cli-test-${Date.now()}-${Math.random().toString(36).slice(2)}`);
   mkdirSync(testDir, { recursive: true });
   originalHome = process.env.HOME;
-  // Point HOME to test dir so CLI reads/writes there
+  originalUserProfile = process.env.USERPROFILE;
+  // Point the home dir to the test dir so the CLI reads/writes there.
+  // os.homedir() reads HOME on POSIX but USERPROFILE on Windows, so set both
+  // to keep this portable across platforms.
   process.env.HOME = testDir;
+  process.env.USERPROFILE = testDir;
 });
 
 afterEach(() => {
-  process.env.HOME = originalHome;
+  if (originalHome === undefined) delete process.env.HOME;
+  else process.env.HOME = originalHome;
+  if (originalUserProfile === undefined) delete process.env.USERPROFILE;
+  else process.env.USERPROFILE = originalUserProfile;
   try {
     rmSync(testDir, { recursive: true, force: true });
   } catch {

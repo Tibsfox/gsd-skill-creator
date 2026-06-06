@@ -6,8 +6,14 @@ import {
 
 /** Helper: build an in-memory directory tree for the walker. */
 function mockWalker(tree: Record<string, 'file' | 'dir'>) {
+  // The walker joins paths with path.join (OS separator), so on Windows it
+  // hands us backslash paths. The tree keys use forward slashes, so normalize
+  // separators to '/' before every lookup to keep the mock platform-agnostic.
+  const toPosix = (p: string): string => p.replaceAll('\\', '/');
+
   const readDir = async (dir: string): Promise<string[]> => {
-    const prefix = dir.endsWith('/') ? dir : dir + '/';
+    const d = toPosix(dir);
+    const prefix = d.endsWith('/') ? d : d + '/';
     const entries = new Set<string>();
     for (const p of Object.keys(tree)) {
       if (p.startsWith(prefix) && p !== prefix) {
@@ -22,7 +28,8 @@ function mockWalker(tree: Record<string, 'file' | 'dir'>) {
   const stat = async (
     fullPath: string,
   ): Promise<{ isDirectory: () => boolean }> => {
-    const normalized = fullPath.endsWith('/') ? fullPath.slice(0, -1) : fullPath;
+    const p = toPosix(fullPath);
+    const normalized = p.endsWith('/') ? p.slice(0, -1) : p;
     const kind = tree[normalized] ?? tree[normalized + '/'] ?? 'file';
     return { isDirectory: () => kind === 'dir' };
   };
