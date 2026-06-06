@@ -1,13 +1,14 @@
 # Release History
 
-1033 milestones shipped across the v1.0 → v1.49.990 arc. The table below lists every shipped release, newest first.
+1034 milestones shipped across the v1.0 → v1.49.991 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
-**Snapshot:** 1033 releases · 1032 with retrospectives · 766 with extracted lessons · quality A:665 B:98 C:62 D:12 F:196 (avg 82) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 1034 releases · 1033 with retrospectives · 767 with extracted lessons · quality A:666 B:98 C:62 D:12 F:196 (avg 82) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.991](release-notes/v1.49.991) | Pioneer 10 NASA Outer-Planets Trailblazer and Outer-Heliosphere Precursor Mission | 2026-06-06 | 3 | 6 | — | [s](release-notes/v1.49.991/chapter/00-summary.md) [r](release-notes/v1.49.991/chapter/03-retrospective.md) [l](release-notes/v1.49.991/chapter/04-lessons.md) [c](release-notes/v1.49.991/chapter/99-context.md) | 14 | A 99 |  |
 | [v1.49.990](release-notes/v1.49.990) | Voyager 2 NASA Grand-Tour Four-Giant-Planet and Interstellar Mission | 2026-06-06 | 3 | 6 | — | [s](release-notes/v1.49.990/chapter/00-summary.md) [r](release-notes/v1.49.990/chapter/03-retrospective.md) [l](release-notes/v1.49.990/chapter/04-lessons.md) [c](release-notes/v1.49.990/chapter/99-context.md) | 13 | A 99 |  |
 | [v1.49.989](release-notes/v1.49.989) | Voyager 1 NASA Grand-Tour Outer-Planets and Interstellar Mission | 2026-06-06 | 3 | 6 | — | [s](release-notes/v1.49.989/chapter/00-summary.md) [r](release-notes/v1.49.989/chapter/03-retrospective.md) [l](release-notes/v1.49.989/chapter/04-lessons.md) [c](release-notes/v1.49.989/chapter/99-context.md) | 12 | A 99 |  |
 | [v1.49.988](release-notes/v1.49.988) | Wind NASA Comprehensive In-Situ Solar-Wind Monitor at Sun-Earth L1 Halo Orbit | 2026-06-06 | 3 | 6 | — | [s](release-notes/v1.49.988/chapter/00-summary.md) [r](release-notes/v1.49.988/chapter/03-retrospective.md) [l](release-notes/v1.49.988/chapter/04-lessons.md) [c](release-notes/v1.49.988/chapter/99-context.md) | 12 | A 99 |  |
