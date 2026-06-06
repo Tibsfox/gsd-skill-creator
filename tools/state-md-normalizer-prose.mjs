@@ -39,6 +39,7 @@
 
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
 
 const require = createRequire(import.meta.url);
@@ -246,7 +247,10 @@ export function formatFindingsForStderr(result) {
 // ─── CLI entry point (for standalone use; integration is via state-md-normalizer.mjs)
 function isDirectInvocation() {
   const invokedPath = process.argv[1] ? resolve(process.argv[1]) : '';
-  const thisPath = resolve(new URL(import.meta.url).pathname);
+  // fileURLToPath (NOT new URL().pathname): on Windows the pathname is
+  // "/D:/.../x.mjs" (leading slash, forward slashes) which never equals the
+  // native resolve(argv[1]) — so cli() would silently never run on windows.
+  const thisPath = fileURLToPath(import.meta.url);
   return invokedPath === thisPath;
 }
 

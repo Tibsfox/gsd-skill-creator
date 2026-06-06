@@ -39,6 +39,7 @@ import {
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const NORMALIZER_SCRIPT = resolve(HERE, '..', 'state-md-normalizer.mjs');
+const PROSE_SCRIPT = resolve(HERE, '..', 'state-md-normalizer-prose.mjs');
 
 function makeStateFixture({
   milestone = 'v1.49.637',
@@ -309,5 +310,19 @@ describe('state-md-normalizer-prose — integration with state-md-normalizer.mjs
     expect(result.stderr).toContain('prose-body milestone drift');
     // Wrapper in state-md-normalizer.mjs prints SC_REQUIRE_PROSE_SYNC line on hard-fail
     expect(result.stderr).toContain('SC_REQUIRE_PROSE_SYNC=1');
+  });
+
+  // Direct-CLI invocation (`node state-md-normalizer-prose.mjs`). The integration
+  // tests above only drive the WRAPPER, so the prose file's own isDirectInvocation
+  // guard was never exercised — which let a `new URL().pathname` Windows bug sit
+  // latent (cli() silently never ran on windows; thisPath "/D:/.." != argv[1]).
+  it('runs cli() when invoked directly (--json emits parseable output)', () => {
+    writeFileSync(statePath, makeStateFixture(), 'utf8');
+    const r = spawnSync('node', [PROSE_SCRIPT, '--json'], { cwd: workDir, encoding: 'utf8' });
+    expect(r.status).toBe(0);
+    // Pre-fix on windows this stdout was EMPTY (guard false → cli() skipped).
+    expect(r.stdout.trim().length).toBeGreaterThan(0);
+    const parsed = JSON.parse(r.stdout);
+    expect(parsed.frontmatterMilestone).toBe('v1.49.637');
   });
 });
