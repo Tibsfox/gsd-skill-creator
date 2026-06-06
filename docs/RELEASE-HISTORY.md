@@ -1,13 +1,14 @@
 # Release History
 
-1030 milestones shipped across the v1.0 → v1.49.987 arc. The table below lists every shipped release, newest first.
+1031 milestones shipped across the v1.0 → v1.49.988 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
-**Snapshot:** 1030 releases · 1029 with retrospectives · 763 with extracted lessons · quality A:662 B:98 C:62 D:12 F:196 (avg 82) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 1031 releases · 1030 with retrospectives · 764 with extracted lessons · quality A:663 B:98 C:62 D:12 F:196 (avg 82) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.988](release-notes/v1.49.988) | Wind NASA Comprehensive In-Situ Solar-Wind Monitor at Sun-Earth L1 Halo Orbit | 2026-06-06 | 3 | 6 | — | [s](release-notes/v1.49.988/chapter/00-summary.md) [r](release-notes/v1.49.988/chapter/03-retrospective.md) [l](release-notes/v1.49.988/chapter/04-lessons.md) [c](release-notes/v1.49.988/chapter/99-context.md) | 12 | A 99 |  |
 | [v1.49.987](release-notes/v1.49.987) | AMIGA revive: wired amiga CLI command + corpus mode | 2026-06-06 | 5 | — | — | [s](release-notes/v1.49.987/chapter/00-summary.md) [r](release-notes/v1.49.987/chapter/03-retrospective.md) [l](release-notes/v1.49.987/chapter/04-lessons.md) [c](release-notes/v1.49.987/chapter/99-context.md) | — | F 24 |  |
 | [v1.49.986](release-notes/v1.49.986) | Phase 4 rungs 2-3 — windows CI cross-platform green + load-bearing flip | 2026-06-06 | 14 | — | — | [s](release-notes/v1.49.986/chapter/00-summary.md) [r](release-notes/v1.49.986/chapter/03-retrospective.md) [l](release-notes/v1.49.986/chapter/04-lessons.md) [c](release-notes/v1.49.986/chapter/99-context.md) | — | F 40 |  |
 | [v1.49.985](release-notes/v1.49.985) | staged windows-latest CI test leg (Phase 4) | 2026-06-05 | 4 | — | — | [s](release-notes/v1.49.985/chapter/00-summary.md) [r](release-notes/v1.49.985/chapter/03-retrospective.md) [l](release-notes/v1.49.985/chapter/04-lessons.md) [c](release-notes/v1.49.985/chapter/99-context.md) | — | F 36 |  |
