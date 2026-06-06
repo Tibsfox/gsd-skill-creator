@@ -20,7 +20,7 @@
  * `src-tauri/src/intelligence/atlas.rs::SqliteAtlasKbDelegate::request_index_snapshot`.
  */
 
-import { readFile } from 'node:fs/promises';
+import { readFile, realpath } from 'node:fs/promises';
 import { relative, sep } from 'node:path';
 import type Database from 'better-sqlite3';
 import type {
@@ -98,6 +98,19 @@ export async function runAtlasIndexer(
     const allPaths = await walkProjectFiles(opts.projectPath, {
       fileFilter: opts.fileFilter,
     });
+    // walkProjectFiles returns absolute paths under its OWN `await realpath(root)`
+    // (node:fs/promises). On win32 the raw opts.projectPath and its async-realpath
+    // can differ (8.3 short-name / casing), so relativizing `abs` against the RAW
+    // opts.projectPath leaves a stray prefix. Relativize against the same async
+    // realpath the walker uses (computed once). No-op on POSIX.
+    let projectReal: string;
+    try {
+      projectReal = await realpath(opts.projectPath);
+    } catch {
+      // Path may not exist (walk returned []) — fall back to the raw path so
+      // the (empty) candidate loop below still behaves identically.
+      projectReal = opts.projectPath;
+    }
     const candidates: Array<{ abs: string; rel: string; lang: AtlasLanguage }> = [];
     for (const abs of allPaths) {
       const lang = detectAtlasLanguage(abs);
@@ -107,7 +120,7 @@ export async function runAtlasIndexer(
       // queried (e.g. listSymbolsForFile('pkg/calc.py')) with forward slashes.
       // path.relative() emits the platform separator (backslash on win32), so
       // normalize to '/' to keep the key canonical across platforms (no-op on POSIX).
-      const rel = relative(opts.projectPath, abs).split(sep).join('/');
+      const rel = relative(projectReal, abs).split(sep).join('/');
       candidates.push({ abs, rel, lang });
     }
     const filesTotal = candidates.length;

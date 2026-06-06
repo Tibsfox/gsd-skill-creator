@@ -41,9 +41,10 @@ describe('P6/migration: apply all SQL migrations to fresh DB under 100ms (PERF â
     const { tmpdir } = await import('node:os');
 
     const tmpDir = mkdtempSync(pathJoin(tmpdir(), 'gsd-p6-'));
+    let kb: import('../../kb/store.js').KBStore | undefined;
     try {
       const { KBStore } = await import('../../kb/store.js');
-      const kb = new KBStore({ registryPath: pathJoin(tmpDir, 'registry.db') });
+      kb = new KBStore({ registryPath: pathJoin(tmpDir, 'registry.db') });
 
       const start = performance.now();
       // ensureRegistry() triggers migration on first call
@@ -55,6 +56,10 @@ describe('P6/migration: apply all SQL migrations to fresh DB under 100ms (PERF â
       }
       expect(elapsed).toBeLessThan(5000);
     } finally {
+      // Close the registry SQLite handle BEFORE unlinking the tmp dir. On
+      // Windows an open handle locks registry.db (+ -wal/-shm), so rmSync
+      // throws EBUSY; POSIX allows unlink-while-open so this is a no-op there.
+      kb?.close();
       rmSync(tmpDir, { recursive: true, force: true });
     }
   });

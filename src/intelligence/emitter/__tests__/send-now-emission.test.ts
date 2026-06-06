@@ -101,7 +101,16 @@ describe('C10 / T7 — emitSendNow', () => {
     const f = buildPopulatedKB();
     const emitter = new MissionEmitter({ kb: f.kb, stagingRoot });
     const result = await emitter.emitSendNow(f.decision.id);
-    expect(result.vision_doc_path).toContain('/staging/inbox/');
-    expect(result.vision_doc_path).not.toContain('/bundles/');
+    // vision_doc_path is a raw filesystem path (join(stagingRoot, ...) under a
+    // mkdtemp dir) that must round-trip through existsSync/readFileSync, so the
+    // PRODUCT keeps native separators. On win32 that yields backslashes; the
+    // '/staging/inbox/' substring check is a path-shape assertion, so normalize
+    // separators in the TEST before toContain (no-op on POSIX).
+    const visionDocPathPosix = result.vision_doc_path.replaceAll(
+      String.fromCharCode(92),
+      '/',
+    );
+    expect(visionDocPathPosix).toContain('/staging/inbox/');
+    expect(visionDocPathPosix).not.toContain('/bundles/');
   });
 });

@@ -35,7 +35,9 @@ describe('C12 / T1-T6 — skill structure', () => {
 
   it('SKILL.md has valid frontmatter (name + description + allowed-tools)', () => {
     const skill = readFileSync(resolve(SKILL_ROOT, 'SKILL.md'), 'utf8');
-    expect(skill).toMatch(/^---\nname: intelligence-investigator\n/);
+    // Tolerate CRLF line endings (Windows checkout with core.autocrlf) — the
+    // frontmatter delimiter + name line may be terminated by \r\n.
+    expect(skill).toMatch(/^---\r?\nname: intelligence-investigator\r?\n/);
     expect(skill).toMatch(/description:/);
     expect(skill).toMatch(/allowed-tools:.*Read.*Glob.*sqlite3.*Write/);
   });
@@ -97,7 +99,11 @@ describe('C12 / T1-T6 — skill structure', () => {
     expect(md).toMatch(/Anti-pattern|never label `high`/i);
   });
 
-  it('load-kb-context.sh has executable bit', () => {
+  // windows: NTFS has no POSIX executable bit; git for Windows cannot reflect
+  // the stored 100755 mode on checkout, so (stat.mode & 0o111) is always 0.
+  // The exec bit is meaningful only on the POSIX runtime that actually runs the
+  // bash skill harness. All other structure assertions stay platform-agnostic.
+  it.skipIf(process.platform === 'win32')('load-kb-context.sh has executable bit', () => {
     const path = resolve(SKILL_ROOT, 'scripts/load-kb-context.sh');
     const stat = statSync(path);
     expect((stat.mode & 0o111) !== 0).toBe(true);

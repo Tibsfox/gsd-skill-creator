@@ -23,6 +23,11 @@ const MIGRATIONS_DIR = resolve(here, '../../db/migrations');
 
 let tmpDir: string;
 let store: KBStore;
+// Track every raw better-sqlite3 handle this test opens directly (outside the
+// KBStore) so afterEach can close them before rmSync. On Windows an open SQLite
+// handle locks the file (+ -wal/-shm), so unlink throws EBUSY; POSIX allows
+// unlink-while-open so closing here is harmless there.
+let openDBs: Database.Database[] = [];
 
 const PROJECT_ID = 'test-caching-proj' as ProjectId;
 
@@ -72,7 +77,9 @@ beforeEach(() => {
   const projectDir = join(tmpDir, 'proj');
   mkdirSync(projectDir, { recursive: true });
 
-  buildProjectDB(projectDir);
+  // buildProjectDB returns an OPEN handle that the test never used otherwise;
+  // track it so afterEach can close it before rmSync (Windows EBUSY guard).
+  openDBs.push(buildProjectDB(projectDir));
   registerProjectInRegistry(registryPath, projectDir);
 
   store = new KBStore({ registryPath, migrationsDir: MIGRATIONS_DIR });
@@ -80,6 +87,16 @@ beforeEach(() => {
 
 afterEach(() => {
   store.close();
+  // Close every raw handle opened directly by the test before unlinking, or
+  // Windows holds an EBUSY lock on the still-open intelligence.db.
+  for (const db of openDBs) {
+    try {
+      db.close();
+    } catch {
+      // Already closed.
+    }
+  }
+  openDBs = [];
   rmSync(tmpDir, { recursive: true, force: true });
 });
 

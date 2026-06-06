@@ -77,8 +77,11 @@ run().catch(err => {
 async function spawnWorker(scriptPath: string): Promise<{ ok: boolean; count?: number; error?: string }> {
   return new Promise((resolve, reject) => {
     const tsxPath = join(REPO_ROOT, 'node_modules', '.bin', 'tsx');
+    // On Windows the .bin/tsx entry is a shell shim (no .exe); spawn() can only
+    // launch the .cmd variant directly, otherwise it throws ENOENT.
+    const tsxBin = process.platform === 'win32' ? `${tsxPath}.cmd` : tsxPath;
     const child = spawn(
-      tsxPath,
+      tsxBin,
       [scriptPath],
       {
         cwd: REPO_ROOT,

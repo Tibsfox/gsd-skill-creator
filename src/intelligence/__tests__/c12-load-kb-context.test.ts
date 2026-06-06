@@ -95,7 +95,8 @@ function runScript(projectId: string): string {
 // per-file pool isolation would require vitest.config.ts project changes
 // (deferred per #10416 lightest-wire). Re-flagged at v802; closed v817
 // per #10415 deferred-maintenance escalation.
-describe('C12 / T7 — load-kb-context.sh', { retry: 3, timeout: 90_000 }, () => {
+// windows: runs the POSIX bash skill harness (load-kb-context.sh / bash+python3+sqlite3)
+describe.skipIf(process.platform === 'win32')('C12 / T7 — load-kb-context.sh', { retry: 3, timeout: 90_000 }, () => {
   it('missing DB → emits well-formed empty context with warning', () => {
     const out = runScript('test-proj');
     const parsed = JSON.parse(out);

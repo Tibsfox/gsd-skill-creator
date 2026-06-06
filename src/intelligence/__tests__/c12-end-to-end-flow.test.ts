@@ -196,7 +196,8 @@ describe('C12 / T10 — skill activation flow', () => {
 });
 
 describe('C12 / T11 — end-to-end briefing flow', () => {
-  it('full flow: request → context load → compose → self-check → status write', () => {
+  // windows: runs the POSIX bash skill harness (load-kb-context.sh / bash+python3+sqlite3)
+  it.skipIf(process.platform === 'win32')('full flow: request → context load → compose → self-check → status write', () => {
     seedKB();
     const { id, respondTo } = writeRequest('intelligence.refresh_briefing', []);
 
@@ -294,7 +295,8 @@ describe('C12 / T12 — performance + timeout (D-25-34, D-25-35)', () => {
     expect(t1 - t0).toBeLessThan(1000); // 100 verifies in <1s; the AI compose step is what 30s budgets
   });
 
-  it('load-kb-context on 30-finding KB completes within budget', () => {
+  // windows: runs the POSIX bash skill harness (load-kb-context.sh / bash+python3+sqlite3)
+  it.skipIf(process.platform === 'win32')('load-kb-context on 30-finding KB completes within budget', () => {
     seedKB();
     const t0 = performance.now();
     const out = execFileSync(

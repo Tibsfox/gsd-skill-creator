@@ -111,7 +111,10 @@ describe('createHelperRouter', () => {
     expect(res.statusCode).toBe(200);
     const parsed = JSON.parse(res.body);
     expect(parsed.ok).toBe(true);
-    expect(parsed.path).toContain(join('inbox', 'pending', 'test-message.json'));
+    // The API returns a canonical forward-slash path (helper.ts normalizes
+    // path.relative()'s platform separator to '/'), so assert the '/' literal
+    // rather than a join()-built path (which is backslash on win32).
+    expect(parsed.path).toContain('inbox/pending/test-message.json');
 
     // Verify file actually exists on disk
     const filePath = join(tmpDir, '.planning/console/inbox/pending/test-message.json');

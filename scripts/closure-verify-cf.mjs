@@ -20,12 +20,19 @@ import { parse as parseYaml } from 'yaml';
 
 const REPO_ROOT = process.cwd();
 
-// On Windows, `npm`/`npx` are `.cmd` shims; spawnSync without shell can't find
-// the bare name and returns ENOENT (status: null), which derails the probe's
-// exit-code-based status mapping. Resolve to the `.cmd` name on win32. On POSIX
-// the bare name is correct (no-op).
+// On Windows, `npm`/`npx` are `.cmd` shims. Two problems compound:
+//   1. spawnSync with the bare name can't resolve the shim via PATH (ENOENT).
+//   2. Since Node's CVE-2024-27980 fix, spawnSync of a `.cmd`/`.bat` file
+//      WITHOUT `shell: true` throws EINVAL — so appending `.cmd` alone is not
+//      enough; the call must also run through the shell.
+// Running the shim through `shell: true` resolves both: cmd.exe finds `npm`/`npx`
+// on PATH and is permitted to execute the batch shim. On POSIX both the `.cmd`
+// suffix and the shell wrapper are skipped (bare name, no shell) — a no-op.
 const isWin = process.platform === 'win32';
 const bin = (name) => (isWin ? `${name}.cmd` : name);
+// Spawn options that make `.cmd` shims runnable on win32 (shell: true) while
+// staying a plain exec on POSIX. Merge into per-call spawnSync option objects.
+const winShellOpts = isWin ? { shell: true } : {};
 
 const PROBES = {
   'npm-audit': probeNpmAudit,
@@ -111,6 +118,7 @@ function probeNpmAudit(args) {
   const res = spawnSync(bin('npm'), ['audit', `--audit-level=${severity}`, '--json'], {
     cwd: REPO_ROOT,
     encoding: 'utf-8',
+    ...winShellOpts,
   });
 
   let parsed = null;
@@ -266,10 +274,12 @@ function probeUpstreamVersion(args) {
   const versions = spawnSync(bin('npm'), ['view', pkgName, 'versions', '--json'], {
     cwd: REPO_ROOT,
     encoding: 'utf-8',
+    ...winShellOpts,
   });
   const deprecated = spawnSync(bin('npm'), ['view', pkgName, 'deprecated'], {
     cwd: REPO_ROOT,
     encoding: 'utf-8',
+    ...winShellOpts,
   });
 
   let parsedVersions = [];
@@ -320,6 +330,7 @@ function probeTestMarker(args) {
   const res = spawnSync(bin('npx'), ['vitest', 'run', testFile, '--reporter=dot'], {
     cwd: REPO_ROOT,
     encoding: 'utf-8',
+    ...winShellOpts,
   });
   const status = res.status === 0 ? 'resolved-upstream' : 'still-real';
   const stdoutTail = (res.stdout ?? '').split('\n').slice(-15).join('\n');
@@ -368,6 +379,7 @@ function probeHiddenTransitiveGuard(args) {
   const lsResult = spawnSync(bin('npm'), ['ls', pkgName, '--depth=Infinity', '--json'], {
     cwd: REPO_ROOT,
     encoding: 'utf-8',
+    ...winShellOpts,
   });
 
   let tree = null;

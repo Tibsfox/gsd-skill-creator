@@ -1,14 +1,19 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { mkdtempSync, mkdirSync, realpathSync, writeFileSync, rmSync } from 'node:fs';
+import { realpath } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, relative, sep } from 'node:path';
 import { walkProjectFiles } from '../file-walker.js';
 
-// walkProjectFiles returns absolute paths. Relativize against `root` and
-// normalize the platform separator to '/' so the canonical comparison holds
-// on win32 (path.relative emits backslashes there; no-op on POSIX).
-function relPath(root: string, abs: string): string {
-  return relative(root, abs).split(sep).join('/');
+// walkProjectFiles returns absolute paths under its OWN async-realpath of root
+// (`await realpath(root)` from node:fs/promises). On win32, the sync and async
+// realpath can produce different canonical forms (8.3 short-name / casing), so
+// relativizing against the sync-realpath `root` leaves a stray prefix. Use the
+// SAME async realpath base the walker uses, then normalize the separator to '/'
+// (no-op on POSIX where realpathSync and async realpath agree and sep === '/').
+async function relPath(root: string, abs: string): Promise<string> {
+  const base = await realpath(root);
+  return relative(base, abs).split(sep).join('/');
 }
 import {
   CapturingAuditSink,
@@ -45,7 +50,7 @@ describe('atlas-indexer walkProjectFiles', () => {
     touch('__pycache__/x.pyc', '');
 
     const out = await walkProjectFiles(root);
-    const rels = out.map((p) => relPath(root, p)).sort();
+    const rels = (await Promise.all(out.map((p) => relPath(root, p)))).sort();
     expect(rels).toEqual(['src/a.ts', 'src/b.py']);
   });
 
@@ -55,7 +60,7 @@ describe('atlas-indexer walkProjectFiles', () => {
     const out = await walkProjectFiles(root, {
       fileFilter: (rel) => !rel.endsWith('drop.ts'),
     });
-    const rels = out.map((p) => relPath(root, p)).sort();
+    const rels = (await Promise.all(out.map((p) => relPath(root, p)))).sort();
     expect(rels).toEqual(['src/keep.ts']);
   });
 
@@ -63,7 +68,7 @@ describe('atlas-indexer walkProjectFiles', () => {
     touch('src/big.ts', 'x'.repeat(2048));
     touch('src/small.ts', 'y');
     const out = await walkProjectFiles(root, { maxFileBytes: 100 });
-    const rels = out.map((p) => relPath(root, p));
+    const rels = await Promise.all(out.map((p) => relPath(root, p)));
     expect(rels).toContain('src/small.ts');
     expect(rels).not.toContain('src/big.ts');
   });
