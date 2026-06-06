@@ -52,8 +52,11 @@ async function readJson(p) {
 async function exists(p) { try { await access(p); return true; } catch { return false; } }
 async function listDir(d) { try { return await readdir(d, { withFileTypes: true }); } catch { return []; } }
 function which(bin) {
-  const r = spawnSync('which', [bin], { encoding: 'utf8' });
-  return r.status === 0 ? r.stdout.trim() : null;
+  // 'which' is Unix-only; Windows uses 'where'. Both exit 0 when found; 'where'
+  // can list multiple matches (one per line), so take the first.
+  const cmd = process.platform === 'win32' ? 'where' : 'which';
+  const r = spawnSync(cmd, [bin], { encoding: 'utf8' });
+  return r.status === 0 ? r.stdout.trim().split(/\r?\n/)[0] : null;
 }
 function numericDegree(d) {
   const m = /^(\d+)\.(\d+)$/.exec(d);

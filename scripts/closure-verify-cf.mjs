@@ -14,8 +14,8 @@
  */
 
 import { spawnSync } from 'node:child_process';
-import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
-import { dirname, resolve } from 'node:path';
+import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
+import { dirname, relative, resolve, sep } from 'node:path';
 import { parse as parseYaml } from 'yaml';
 
 const REPO_ROOT = process.cwd();
@@ -33,6 +33,28 @@ const bin = (name) => (isWin ? `${name}.cmd` : name);
 // Spawn options that make `.cmd` shims runnable on win32 (shell: true) while
 // staying a plain exec on POSIX. Merge into per-call spawnSync option objects.
 const winShellOpts = isWin ? { shell: true } : {};
+
+// Node-native recursive text search — replaces `grep -rl <needle> <dir>`, which
+// is absent on Windows cmd.exe (and `grep` is not a `.cmd` shim winShellOpts can
+// reach). Returns repo-relative POSIX paths whose text contains the literal
+// `needle`, matching the original `grep -rl` filename-list semantics.
+function grepFilesContaining(needle, dir, root) {
+  const out = [];
+  function walk(d) {
+    let entries;
+    try { entries = readdirSync(d, { withFileTypes: true }); } catch { return; }
+    for (const e of entries) {
+      if (e.name === 'node_modules' || e.name === '.git') continue;
+      const full = resolve(d, e.name);
+      if (e.isDirectory()) { walk(full); continue; }
+      let text;
+      try { text = readFileSync(full, 'utf-8'); } catch { continue; }
+      if (text.includes(needle)) out.push(relative(root, full).split(sep).join('/'));
+    }
+  }
+  walk(dir);
+  return out;
+}
 
 const PROBES = {
   'npm-audit': probeNpmAudit,
@@ -401,14 +423,12 @@ function probeHiddenTransitiveGuard(args) {
   console.log(`[closure-verify]   subtree size: ${subtreePkgs.size} packages`);
   console.log(`[closure-verify]   grepping src/ for direct imports of any subtree package...`);
 
+  const srcDir = resolve(REPO_ROOT, 'src');
   const hits = [];
   for (const pkg of subtreePkgs) {
-    const grep = spawnSync('grep', ['-rl', `from '${pkg}'`, 'src/'], {
-      cwd: REPO_ROOT,
-      encoding: 'utf-8',
-    });
-    if (grep.status === 0 && grep.stdout.trim().length > 0) {
-      hits.push({ pkg, files: grep.stdout.trim().split('\n') });
+    const files = grepFilesContaining(`from '${pkg}'`, srcDir, REPO_ROOT);
+    if (files.length > 0) {
+      hits.push({ pkg, files });
     }
   }
 
