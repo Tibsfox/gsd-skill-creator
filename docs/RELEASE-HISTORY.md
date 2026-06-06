@@ -1,13 +1,14 @@
 # Release History
 
-1028 milestones shipped across the v1.0 → v1.49.985 arc. The table below lists every shipped release, newest first.
+1029 milestones shipped across the v1.0 → v1.49.986 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
-**Snapshot:** 1028 releases · 1027 with retrospectives · 763 with extracted lessons · quality A:662 B:98 C:62 D:12 F:194 (avg 82) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 1029 releases · 1028 with retrospectives · 763 with extracted lessons · quality A:662 B:98 C:62 D:12 F:195 (avg 82) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.986](release-notes/v1.49.986) | Phase 4 rungs 2-3 — windows CI cross-platform green + load-bearing flip | 2026-06-06 | 14 | — | — | [s](release-notes/v1.49.986/chapter/00-summary.md) [r](release-notes/v1.49.986/chapter/03-retrospective.md) [l](release-notes/v1.49.986/chapter/04-lessons.md) [c](release-notes/v1.49.986/chapter/99-context.md) | — | F 40 |  |
 | [v1.49.985](release-notes/v1.49.985) | staged windows-latest CI test leg (Phase 4) | 2026-06-05 | 4 | — | — | [s](release-notes/v1.49.985/chapter/00-summary.md) [r](release-notes/v1.49.985/chapter/03-retrospective.md) [l](release-notes/v1.49.985/chapter/04-lessons.md) [c](release-notes/v1.49.985/chapter/99-context.md) | — | F 36 |  |
 | [v1.49.984](release-notes/v1.49.984) | skill-mining config migrator (integration migrate) | 2026-06-05 | 3 | — | — | [s](release-notes/v1.49.984/chapter/00-summary.md) [r](release-notes/v1.49.984/chapter/03-retrospective.md) [l](release-notes/v1.49.984/chapter/04-lessons.md) [c](release-notes/v1.49.984/chapter/99-context.md) | — | F 28 |  |
 | [v1.49.983](release-notes/v1.49.983) | GAP-7 deterministic trip-vocab check | 2026-06-05 | 3 | — | — | [s](release-notes/v1.49.983/chapter/00-summary.md) [r](release-notes/v1.49.983/chapter/03-retrospective.md) [l](release-notes/v1.49.983/chapter/04-lessons.md) [c](release-notes/v1.49.983/chapter/99-context.md) | — | F 43 |  |
