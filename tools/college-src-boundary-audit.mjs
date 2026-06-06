@@ -39,10 +39,14 @@
  */
 
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
-import { join, dirname, extname, resolve as resolvePath } from 'node:path';
+import { join, dirname, extname, relative, resolve as resolvePath, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
+
+// Normalize native separators to POSIX so the '/src/' segment test (and the
+// repo-relative file field) hold on Windows — rung-2 cross-platform CI work.
+const toPosix = (p) => p.split(sep).join('/');
 
 // ── argument parsing ────────────────────────────────────────────────────────
 const argv = process.argv.slice(2);
@@ -136,7 +140,7 @@ function classify(spec, filePath) {
 
   // Relative imports — resolve and check whether they land in src/.
   if (spec.startsWith('./') || spec.startsWith('../')) {
-    const resolved = resolvePath(dirname(filePath), spec);
+    const resolved = toPosix(resolvePath(dirname(filePath), spec));
     // A path that contains a /src/ segment but is NOT inside a /.college/ segment
     // has reached across the rootdir boundary.
     if (resolved.includes('/src/') && !resolved.includes('/.college/')) {
@@ -172,7 +176,7 @@ for (const file of allFiles) {
         }
       }
       violations.push({
-        file: file.replace(REPO_ROOT + '/', ''),
+        file: toPosix(relative(REPO_ROOT, file)),
         line: lineNum,
         spec,
         kind: result.kind,

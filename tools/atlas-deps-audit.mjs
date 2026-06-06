@@ -34,10 +34,14 @@
  */
 
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
-import { join, dirname, extname } from 'node:path';
+import { join, dirname, extname, relative, resolve as resolvePath, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
+
+// Normalize native separators to POSIX so path prefix/relative comparisons hold
+// on Windows (where paths carry '\\') — rung-2 cross-platform CI work.
+const toPosix = (p) => p.split(sep).join('/');
 
 // ── argument parsing ────────────────────────────────────────────────────────
 const argv = process.argv.slice(2);
@@ -185,10 +189,13 @@ function classify(spec, filePath) {
     // Check if a cross-tree relative import resolves outside the atlas surface
     // by looking for known non-allowed substrate paths.
     const isCrossTree = !ATLAS_ROOTS.some(root => {
-      // Resolve the import relative to the file and check prefix
+      // Resolve the import relative to the file's dir and check prefix. Both
+      // sides are normalized to POSIX so the prefix test holds on Windows —
+      // a raw `file://` + backslash path made every intra-tree import read as
+      // cross-tree (274 false violations on windows-latest, rung-2 finding).
       try {
-        const resolved = new URL(spec, `file://${filePath}`).pathname;
-        return resolved.startsWith(root);
+        const resolved = resolvePath(dirname(filePath), spec);
+        return toPosix(resolved).startsWith(toPosix(root));
       } catch {
         return false;
       }
@@ -246,7 +253,7 @@ for (const file of allFiles) {
         }
       }
       violations.push({
-        file: file.replace(REPO_ROOT + '/', ''),
+        file: toPosix(relative(REPO_ROOT, file)),
         line: lineNum,
         spec,
         kind: result.kind,

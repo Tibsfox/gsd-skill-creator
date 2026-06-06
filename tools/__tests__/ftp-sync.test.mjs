@@ -16,9 +16,14 @@
  */
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
-import { join, dirname } from 'node:path';
+import { join, dirname, sep } from 'node:path';
 import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
+
+// localAbs is a NATIVE filesystem path (kept native — it is handed to
+// basic-ftp's uploadFrom). Substring assertions on logical '/'-joined
+// sub-paths must normalize separators so they hold on Windows.
+const toPosix = (p) => p.split(sep).join('/');
 
 import {
   parseEnv,
@@ -198,8 +203,8 @@ describe('buildManifest', () => {
     mkdirSync(dir, { recursive: true });
     writeFileSync(join(dir, 'index.html'), 'page');
     const m = buildManifest(tmpRoot, version);
-    expect(m.tracks.NASA[0].localAbs).toContain(tmpRoot);
-    expect(m.tracks.NASA[0].localAbs).toContain('NASA/1.71/index.html');
+    expect(toPosix(m.tracks.NASA[0].localAbs)).toContain(toPosix(tmpRoot));
+    expect(toPosix(m.tracks.NASA[0].localAbs)).toContain('NASA/1.71/index.html');
   });
 });
 
@@ -248,7 +253,7 @@ describe('buildManifest --include-catalog-index (Lesson #10206; T2.3 v1.49.592)'
     const nasaCatalog = m.tracks.NASA.find((e) => e.kind === 'catalog');
     expect(nasaCatalog).toBeDefined();
     expect(nasaCatalog.remoteAbs).toBe('/NASA/index.html');
-    expect(nasaCatalog.localAbs).toContain('NASA/index.html');
+    expect(toPosix(nasaCatalog.localAbs)).toContain('NASA/index.html');
     expect(nasaCatalog.localAbs).not.toContain('1.73');  // NOT the version dir
   });
 
@@ -395,7 +400,7 @@ describe('buildManifestScribe (Component 08 — public deployment SCRIBE mode)',
     const m = buildManifestScribe(tmpRoot);
     expect(m.files).toHaveLength(1);
     expect(m.files[0].size).toBe(5);
-    expect(m.files[0].localAbs).toContain('SCRIBE/test.txt');
+    expect(toPosix(m.files[0].localAbs)).toContain('SCRIBE/test.txt');
     expect(m.totalBytes).toBe(5);
   });
 

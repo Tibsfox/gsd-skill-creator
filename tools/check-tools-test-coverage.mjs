@@ -30,7 +30,7 @@
 
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
-import { join, dirname, relative, resolve } from 'node:path';
+import { join, dirname, relative, resolve, sep } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -108,7 +108,10 @@ async function main() {
   const nodeTestFiles = [];
   const unknownFiles = [];
   for (const abs of files) {
-    const rel = relative(REPO_ROOT, abs);
+    // Repo-relative POSIX path: the include list uses '/' separators, so on
+    // Windows `relative()` (which yields '\\') must be normalized before the
+    // includeSet membership tests below — else every file reads as "missing".
+    const rel = relative(REPO_ROOT, abs).split(sep).join('/');
     const kind = classify(abs);
     if (kind === 'vitest') vitestFiles.push(rel);
     else if (kind === 'node:test') nodeTestFiles.push(rel);
@@ -118,7 +121,7 @@ async function main() {
   // Drift: vitest files NOT in the include list.
   const missing = vitestFiles.filter((rel) => !includeSet.has(rel));
   // Stale: include entries that no longer exist on disk.
-  const onDisk = new Set(files.map((abs) => relative(REPO_ROOT, abs)));
+  const onDisk = new Set(files.map((abs) => relative(REPO_ROOT, abs).split(sep).join('/')));
   const stale = include
     .map((p) => p.replace(/^\.\//, ''))
     .filter((p) => p.endsWith('.test.mjs') && !onDisk.has(p));
