@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.986`.
+The story begins at `v1.0` and continues to `v1.49.987`.
 
-**1029 chapters.** 1028 have retrospectives.
+**1030 chapters.** 1029 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -1037,3 +1037,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.984](v1.49.984/00-summary.md)** — skill-mining config migrator (integration migrate) · 2026-06-05
 - **[v1.49.985](v1.49.985/00-summary.md)** — staged windows-latest CI test leg (Phase 4) · 2026-06-05
 - **[v1.49.986](v1.49.986/00-summary.md)** — windows CI cross-platform green + load-bearing flip (Phase 4 rungs 2-3) · 2026-06-06
+- **[v1.49.987](v1.49.987/00-summary.md)** — AMIGA revive: wired amiga CLI command + corpus mode · 2026-06-06
