@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.998`.
+The story begins at `v1.0` and continues to `v1.49.999`.
 
-**1041 chapters.** 1040 have retrospectives.
+**1042 chapters.** 1041 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -1049,3 +1049,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.996](v1.49.996/00-summary.md)** — DE-1 Dynamics Explorer 1 Global Auroral Imaging and Magnetosphere-Ionosphere Coupling Mission · 2026-06-06
 - **[v1.49.997](v1.49.997/00-summary.md)** — IMAGE Imager for Magnetopause-to-Aurora Global Exploration First Global Magnetosphere Imaging Mission · 2026-06-06
 - **[v1.49.998](v1.49.998/00-summary.md)** — Polar Global Geospace Science Polar Multi-Wavelength Auroral Imaging and Polar-Cusp In-Situ Mission · 2026-06-06
+- **[v1.49.999](v1.49.999/00-summary.md)** — AMPTE Active Magnetospheric Particle Tracer Explorers Ring-Current Composition and Tracer-Release Mission · 2026-06-06
