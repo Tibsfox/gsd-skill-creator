@@ -1,13 +1,14 @@
 # Release History
 
-1046 milestones shipped across the v1.0 → v1.49.1003 arc. The table below lists every shipped release, newest first.
+1047 milestones shipped across the v1.0 → v1.49.1004 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
-**Snapshot:** 1046 releases · 1045 with retrospectives · 779 with extracted lessons · quality A:678 B:98 C:62 D:12 F:196 (avg 83) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 1047 releases · 1046 with retrospectives · 780 with extracted lessons · quality A:679 B:98 C:62 D:12 F:196 (avg 83) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.1004](release-notes/v1.49.1004) | AE Atmosphere Explorer Upper-Atmosphere In-Situ Aeronomy Mission | 2026-06-07 | 3 | 6 | — | [s](release-notes/v1.49.1004/chapter/00-summary.md) [r](release-notes/v1.49.1004/chapter/03-retrospective.md) [l](release-notes/v1.49.1004/chapter/04-lessons.md) [c](release-notes/v1.49.1004/chapter/99-context.md) | 11 | A 99 |  |
 | [v1.49.1003](release-notes/v1.49.1003) | OGO Orbiting Geophysical Observatory Comprehensive Geophysical Survey Program Mission | 2026-06-07 | 3 | 6 | — | [s](release-notes/v1.49.1003/chapter/00-summary.md) [r](release-notes/v1.49.1003/chapter/03-retrospective.md) [l](release-notes/v1.49.1003/chapter/04-lessons.md) [c](release-notes/v1.49.1003/chapter/99-context.md) | 11 | A 99 |  |
 | [v1.49.1002](release-notes/v1.49.1002) | TWINS Two Wide-angle Imaging Neutral-atom Spectrometers Stereoscopic Magnetosphere Imaging Mission | 2026-06-07 | 3 | 6 | — | [s](release-notes/v1.49.1002/chapter/00-summary.md) [r](release-notes/v1.49.1002/chapter/03-retrospective.md) [l](release-notes/v1.49.1002/chapter/04-lessons.md) [c](release-notes/v1.49.1002/chapter/99-context.md) | 11 | A 99 |  |
 | [v1.49.1001](release-notes/v1.49.1001) | ISEE-1/2 International Sun-Earth Explorer Mother-Daughter Variable-Separation Boundary-Physics Mission | 2026-06-06 | 3 | 6 | — | [s](release-notes/v1.49.1001/chapter/00-summary.md) [r](release-notes/v1.49.1001/chapter/03-retrospective.md) [l](release-notes/v1.49.1001/chapter/04-lessons.md) [c](release-notes/v1.49.1001/chapter/99-context.md) | 11 | A 99 |  |
