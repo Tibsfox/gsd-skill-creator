@@ -1,13 +1,14 @@
 # Release History
 
-1042 milestones shipped across the v1.0 → v1.49.999 arc. The table below lists every shipped release, newest first.
+1043 milestones shipped across the v1.0 → v1.49.1000 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
-**Snapshot:** 1042 releases · 1041 with retrospectives · 775 with extracted lessons · quality A:674 B:98 C:62 D:12 F:196 (avg 82) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 1043 releases · 1042 with retrospectives · 776 with extracted lessons · quality A:675 B:98 C:62 D:12 F:196 (avg 82) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.1000](release-notes/v1.49.1000) | CRRES Combined Release and Radiation Effects Satellite Radiation-Belt Environment Mapping Mission | 2026-06-06 | 3 | 6 | — | [s](release-notes/v1.49.1000/chapter/00-summary.md) [r](release-notes/v1.49.1000/chapter/03-retrospective.md) [l](release-notes/v1.49.1000/chapter/04-lessons.md) [c](release-notes/v1.49.1000/chapter/99-context.md) | 11 | A 99 |  |
 | [v1.49.999](release-notes/v1.49.999) | AMPTE Active Magnetospheric Particle Tracer Explorers Ring-Current Composition and Tracer-Release Mission | 2026-06-06 | 3 | 6 | — | [s](release-notes/v1.49.999/chapter/00-summary.md) [r](release-notes/v1.49.999/chapter/03-retrospective.md) [l](release-notes/v1.49.999/chapter/04-lessons.md) [c](release-notes/v1.49.999/chapter/99-context.md) | 12 | A 99 |  |
 | [v1.49.998](release-notes/v1.49.998) | Polar Global Geospace Science Polar Multi-Wavelength Auroral Imaging and Polar-Cusp In-Situ Mission | 2026-06-06 | 3 | 6 | — | [s](release-notes/v1.49.998/chapter/00-summary.md) [r](release-notes/v1.49.998/chapter/03-retrospective.md) [l](release-notes/v1.49.998/chapter/04-lessons.md) [c](release-notes/v1.49.998/chapter/99-context.md) | 12 | A 99 |  |
 | [v1.49.997](release-notes/v1.49.997) | IMAGE Imager for Magnetopause-to-Aurora Global Exploration First Global Magnetosphere Imaging Mission | 2026-06-06 | 3 | 6 | — | [s](release-notes/v1.49.997/chapter/00-summary.md) [r](release-notes/v1.49.997/chapter/03-retrospective.md) [l](release-notes/v1.49.997/chapter/04-lessons.md) [c](release-notes/v1.49.997/chapter/99-context.md) | 1/12 | A 99 |  |
