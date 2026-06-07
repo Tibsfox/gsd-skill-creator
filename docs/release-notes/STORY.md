@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.1006`.
+The story begins at `v1.0` and continues to `v1.49.1007`.
 
-**1049 chapters.** 1048 have retrospectives.
+**1050 chapters.** 1049 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -1057,3 +1057,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.1004](v1.49.1004/00-summary.md)** — AE Atmosphere Explorer Upper-Atmosphere In-Situ Aeronomy Mission · 2026-06-07
 - **[v1.49.1005](v1.49.1005/00-summary.md)** — OSO Orbiting Solar Observatory Continuous Solar-Cycle Monitoring Program Mission · 2026-06-07
 - **[v1.49.1006](v1.49.1006/00-summary.md)** — TRACE Transition Region and Coronal Explorer High-Resolution Solar EUV Imaging Mission · 2026-06-07
+- **[v1.49.1007](v1.49.1007/00-summary.md)** — RHESSI Reuven Ramaty High Energy Solar Spectroscopic Imager Hard-X-Ray Gamma-Ray Flare Imaging Mission · 2026-06-07
