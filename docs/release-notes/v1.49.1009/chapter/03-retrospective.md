@@ -1,0 +1,35 @@
+# Retrospective — v1.49.1009
+
+## What Worked
+
+- **Single comprehensive build dispatch.** Per the established NASA streamlined T14 ship sequence pattern, the v1009 build was scoped to a single dispatch covering all www/ deliverables, the canonical-pairings updates, the predecessor forward-link updates, the retrospective surfaces, and the W3.5 chapter-gen step.
+- **Axis-continuation framing handled cleanly.** The substrate-axis continuation was framed as SOLAR-OBSERVATORY-AXIS-INTRA-CONTINUATION obs#5 (axis-rotation #26 sustained at obs#5) with OSO at obs#1, TRACE at obs#2, RHESSI at obs#3, IRIS at obs#4, and Parker Solar Probe at obs#5, consistently across the index, the JSONs, the nav md files, and the README. The index trip-vocab page check returned PASS with zero primary classes in the title line.
+- **Identifier-in-lists discipline preserved.** All substrate-anchor identifiers appear in bulleted lists, table cells, or anchor-pill spans rather than embedded in narrative paragraphs, satisfying the layout gate and the IDENTIFIER-NOT-PROSE-DISCIPLINE.
+- **Dedication word-count discipline preserved.** Both the index.html dedication and the organism.html dedication are within the 200-word cap.
+- **Reference template recognition.** The v1.199 IRIS template files were used as the immediate reference — same CSS structure, same nav-card pair pattern, same sidebar and track-grid patterns — with a distinct corona-gold palette, and the structural template preserved exactly.
+- **Pairing files updated in both formats.** The new canonical-pairings record was appended consistently to both the TSV (15-column tab-delimited) and the JSON (mirroring the existing entry structure), keeping the two data files in lockstep at 201 records.
+- **Positive-framing discipline held on a near-Sun topic.** The first flight through the corona, the closest approach, the in-situ source-region measurements, and the switchback discovery were framed throughout as the achievements they were, the Sun's heat framed as the operating condition the mission was engineered to fly within, and the shield described as radiating and non-ablative, keeping the trip-vocab page check clean.
+- **Shader rename and retheme handled cleanly.** The predecessor's `interface-region-spectrograph-viewer.frag` was renamed to `near-sun-corona-probe-viewer.frag` and rethemed to the Parker Solar Probe near-Sun flight (the shielded approach, the corona dive, the magnetic switchbacks, and the closest-approach trajectory), with the viewer.html and the index/simulation references updated to match.
+
+## What Could Be Better
+
+- **The shader renders procedural structure rather than archived data.** The Parker Solar Probe near-sun-corona-probe shader uses analytic geometry and procedural noise rather than loading actual Parker Solar Probe observations from the NASA and Johns Hopkins APL archives. A future revision could load encoded FIELDS and SWEAP records for a higher-fidelity rendering keyed to real observations.
+- **The spacecraft diorama is a forthcoming artifact.** The 3D-printable diorama STL files are referenced as forthcoming rather than provided; a future ship could include the actual STL geometry of the spacecraft, its thermal protection shield, and the model of the corona.
+- **The solar sidebar table is illustrative rather than exhaustive.** The sidebar lists representative lineage elements (Parker Solar Probe, IRIS, RHESSI, TRACE, OSO) but does not enumerate the full Parker Solar Probe instrument and orbit roster with each perihelion distance; a future revision could expand the table with per-orbit perihelion conditions.
+- **The source-region physics is described rather than computed.** The way the corona is heated and the wind is accelerated is described but not run against archived data; a future ship could map the plasma and field from a real perihelion pass.
+
+## Surprises
+
+- **The hottest place in the catalog is the one the mission was built to work within.** Parker Solar Probe flies through the corona, yet the radiating shield holds the instruments near room temperature, so the catalog's near-Sun entry is the mission for which the Sun's heat is the designed operating condition.
+- **A fire-following woodpecker mirrors the spacecraft that flies toward the Sun.** The Black-backed Woodpecker, which moves toward the heat-touched forest other birds avoid, enters as the moving-toward-the-heat mirror to the first spacecraft through the corona, so the catalog pairs a fire-following woodpecker with a Sun-bound mission.
+- **A pine whose cones open in the heat mirrors the mission enabled by the heat.** The Lodgepole Pine's serotinous cones open only in intense heat, so the catalog's near-Sun mission is paired with a mountain pine whose potential, like the mission, is released by the very heat others endure.
+
+## Lessons Learned
+
+1. **Flying to the source measures the wind where remote sensing only inferred it.** Rather than observing the corona from afar, Parker Solar Probe flew into it and sampled the plasma and fields in place, showing that an in-situ measurement at the source reads the wind where it is born.
+2. **A radiating shield turns the heat into the operating condition.** By absorbing the sunlight and radiating it away, the carbon-composite shield keeps the instruments near room temperature, showing that the Sun's heat can be the condition a mission is engineered to work within rather than a thing to avoid.
+3. **Borrowed planetary momentum can bring a spacecraft to the Sun.** By using seven Venus gravity assists to lower the perihelion across successive orbits, Parker Solar Probe reached the corona without the fuel a direct dive would require, showing that a sequence of flybys can carry a spacecraft to the source.
+4. **An in-place measurement finds structure a distant view smooths away.** By reading the near-Sun solar wind directly, Parker Solar Probe discovered the magnetic switchbacks, showing that the young wind holds structure only an in-situ measurement at the source can reveal.
+5. **A continuation can carry an axis from remote sensing to in-situ measurement.** By flying to the source the prior observatories watched from afar, Parker Solar Probe sustained the solar-observatory axis at obs#5 on the same target, showing that an axis can deepen from remote sensing to direct measurement without rotating away.
+6. **A round-number capstone can complete an axis.** By carrying the solar watch all the way to the Sun at degree 1.200, Parker Solar Probe completed the axis from monitoring and imaging down to in-situ measurement at the source, showing that a capstone can close a thread cleanly.
+7. **A reference template carries forward cleanly across a distinct-palette mission.** Because Parker Solar Probe reuses the canonical card structure of the v1.199 template, the build preserved the structural template exactly and swapped the content to the near-Sun flight with a distinct corona-gold / switchback-orange / shield-bright palette, making the distinct-palette mission a clean build.
