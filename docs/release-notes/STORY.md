@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.1001`.
+The story begins at `v1.0` and continues to `v1.49.1002`.
 
-**1044 chapters.** 1043 have retrospectives.
+**1045 chapters.** 1044 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -1052,3 +1052,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.999](v1.49.999/00-summary.md)** — AMPTE Active Magnetospheric Particle Tracer Explorers Ring-Current Composition and Tracer-Release Mission · 2026-06-06
 - **[v1.49.1000](v1.49.1000/00-summary.md)** — CRRES Combined Release and Radiation Effects Satellite Radiation-Belt Environment Mapping Mission · 2026-06-06
 - **[v1.49.1001](v1.49.1001/00-summary.md)** — ISEE-1/2 International Sun-Earth Explorer Mother-Daughter Variable-Separation Boundary-Physics Mission · 2026-06-06
+- **[v1.49.1002](v1.49.1002/00-summary.md)** — TWINS Two Wide-angle Imaging Neutral-atom Spectrometers Stereoscopic Magnetosphere Imaging Mission · 2026-06-07
