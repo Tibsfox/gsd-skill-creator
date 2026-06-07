@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.1004`.
+The story begins at `v1.0` and continues to `v1.49.1005`.
 
-**1047 chapters.** 1046 have retrospectives.
+**1048 chapters.** 1047 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -1055,3 +1055,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.1002](v1.49.1002/00-summary.md)** — TWINS Two Wide-angle Imaging Neutral-atom Spectrometers Stereoscopic Magnetosphere Imaging Mission · 2026-06-07
 - **[v1.49.1003](v1.49.1003/00-summary.md)** — OGO Orbiting Geophysical Observatory Comprehensive Geophysical Survey Program Mission · 2026-06-07
 - **[v1.49.1004](v1.49.1004/00-summary.md)** — AE Atmosphere Explorer Upper-Atmosphere In-Situ Aeronomy Mission · 2026-06-07
+- **[v1.49.1005](v1.49.1005/00-summary.md)** — OSO Orbiting Solar Observatory Continuous Solar-Cycle Monitoring Program Mission · 2026-06-07
