@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.1008`.
+The story begins at `v1.0` and continues to `v1.49.1009`.
 
-**1051 chapters.** 1050 have retrospectives.
+**1052 chapters.** 1051 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -1059,3 +1059,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.1006](v1.49.1006/00-summary.md)** — TRACE Transition Region and Coronal Explorer High-Resolution Solar EUV Imaging Mission · 2026-06-07
 - **[v1.49.1007](v1.49.1007/00-summary.md)** — RHESSI Reuven Ramaty High Energy Solar Spectroscopic Imager Hard-X-Ray Gamma-Ray Flare Imaging Mission · 2026-06-07
 - **[v1.49.1008](v1.49.1008/00-summary.md)** — IRIS Interface Region Imaging Spectrograph Chromosphere and Transition-Region UV Imaging-Spectroscopy Mission · 2026-06-07
+- **[v1.49.1009](v1.49.1009/00-summary.md)** — Parker Solar Probe First Spacecraft Through the Solar Corona In-Situ Near-Sun Mission · 2026-06-07
