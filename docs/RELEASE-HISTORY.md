@@ -1,13 +1,14 @@
 # Release History
 
-1049 milestones shipped across the v1.0 → v1.49.1006 arc. The table below lists every shipped release, newest first.
+1050 milestones shipped across the v1.0 → v1.49.1007 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
-**Snapshot:** 1049 releases · 1048 with retrospectives · 782 with extracted lessons · quality A:681 B:98 C:62 D:12 F:196 (avg 83) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 1050 releases · 1049 with retrospectives · 783 with extracted lessons · quality A:682 B:98 C:62 D:12 F:196 (avg 83) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.1007](release-notes/v1.49.1007) | RHESSI Reuven Ramaty High Energy Solar Spectroscopic Imager Hard-X-Ray Gamma-Ray Flare Imaging Mission | 2026-06-07 | 3 | 6 | — | [s](release-notes/v1.49.1007/chapter/00-summary.md) [r](release-notes/v1.49.1007/chapter/03-retrospective.md) [l](release-notes/v1.49.1007/chapter/04-lessons.md) [c](release-notes/v1.49.1007/chapter/99-context.md) | 11 | A 99 |  |
 | [v1.49.1006](release-notes/v1.49.1006) | TRACE Transition Region and Coronal Explorer High-Resolution Solar EUV Imaging Mission | 2026-06-07 | 3 | 6 | — | [s](release-notes/v1.49.1006/chapter/00-summary.md) [r](release-notes/v1.49.1006/chapter/03-retrospective.md) [l](release-notes/v1.49.1006/chapter/04-lessons.md) [c](release-notes/v1.49.1006/chapter/99-context.md) | 11 | A 99 |  |
 | [v1.49.1005](release-notes/v1.49.1005) | OSO Orbiting Solar Observatory Continuous Solar-Cycle Monitoring Program Mission | 2026-06-07 | 3 | 6 | — | [s](release-notes/v1.49.1005/chapter/00-summary.md) [r](release-notes/v1.49.1005/chapter/03-retrospective.md) [l](release-notes/v1.49.1005/chapter/04-lessons.md) [c](release-notes/v1.49.1005/chapter/99-context.md) | 11 | A 99 |  |
 | [v1.49.1004](release-notes/v1.49.1004) | AE Atmosphere Explorer Upper-Atmosphere In-Situ Aeronomy Mission | 2026-06-07 | 3 | 6 | — | [s](release-notes/v1.49.1004/chapter/00-summary.md) [r](release-notes/v1.49.1004/chapter/03-retrospective.md) [l](release-notes/v1.49.1004/chapter/04-lessons.md) [c](release-notes/v1.49.1004/chapter/99-context.md) | 11 | A 99 |  |
