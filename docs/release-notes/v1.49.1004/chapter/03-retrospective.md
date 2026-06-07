@@ -1,0 +1,35 @@
+# Retrospective — v1.49.1004
+
+## What Worked
+
+- **Single comprehensive build dispatch.** Per the established NASA streamlined T14 ship sequence pattern, the v1004 build was scoped to a single dispatch covering all www/ deliverables, the canonical-pairings updates, the predecessor forward-link updates, the retrospective surfaces, and the W3.5 chapter-gen step.
+- **Axis-continuation framing handled cleanly.** The magnetosphere-axis continuation was framed as MAGNETOSPHERE-AXIS-INTRA-CONTINUATION obs#10 with the reopened axis spanning v995 FAST (obs#1), v996 DE-1 (obs#2), v997 IMAGE (obs#3), v998 Polar (obs#4), v999 AMPTE (obs#5), v1000 CRRES (obs#6), v1001 ISEE-1/2 (obs#7), v1002 TWINS (obs#8), v1003 OGO (obs#9), and v1004 AE (obs#10), consistently across the index, the JSONs, the nav md files, and the README. The index trip-vocab page check returned PASS with zero primary classes in the title line.
+- **Identifier-in-lists discipline preserved.** All substrate-anchor identifiers appear in bulleted lists, table cells, or anchor-pill spans rather than embedded in narrative paragraphs, satisfying the layout gate and the IDENTIFIER-NOT-PROSE-DISCIPLINE.
+- **Dedication word-count discipline preserved.** Both the index.html dedication and the organism.html dedication are within the 200-word cap.
+- **Reference template recognition.** The v1.194 OGO template files were used as the immediate reference — same CSS structure, same nav-card pair pattern, same sidebar and track-grid patterns — with palette tokens renamed for AE (--euv-amber, --neutral-blue, --ion-teal, --airglow-violet) and a distinct aeronomy palette, and the structural template preserved exactly.
+- **Pairing files updated in both formats.** The new canonical-pairings record was appended consistently to both the TSV (15-column tab-delimited) and the JSON (mirroring the existing entry structure), keeping the two data files in lockstep at 196 records.
+- **Positive-framing discipline held on an in-situ-sampling topic.** The orbit-dip technique, the in-situ sampling of the lower thermosphere, and the comprehensive aeronomy suite were framed throughout as the science return they enabled, with re-entry and orbit decay kept minimal and factual, keeping the trip-vocab page check clean.
+- **In-situ source-region framing kept clean.** AE was described throughout as the in-situ aeronomy of the ionosphere-and-thermosphere source region that supplies the magnetosphere, so the program entry stays distinct from the survey and imaging missions in the catalog.
+
+## What Could Be Better
+
+- **The shader renders procedural structure rather than archived data.** The AE orbit-dip aeronomy shader uses analytic geometry and procedural noise rather than loading actual AE in-situ datasets from the NASA Space Physics Data Facility. A future revision could load encoded AE in-situ data for a higher-fidelity rendering keyed to the real data.
+- **The orbit-dip observatory diorama is a forthcoming artifact.** The 3D-printable diorama STL files are referenced as forthcoming rather than provided; a future ship could include the actual STL geometry of the observatory, its complement of instruments, and the dipping orbit through the stratified layers.
+- **The aeronomy sidebar table is illustrative rather than exhaustive.** The sidebar lists representative lineage elements (AE, OGO, AMPTE, Polar, FAST) but does not enumerate the full AE-A through AE-E roster with each instrument complement; a future revision could expand the table with per-observatory dates and instrument suites.
+- **The empirical-model fit is described rather than computed.** The empirical-model fit that turns the in-situ samples into a standard description is described but not run against archived data; a future ship could fit the model from real AE-era in-situ datasets.
+
+## Surprises
+
+- **A 1963 explorer prefigured the dedicated in-situ aeronomy series.** The first Atmosphere Explorer flew as early as 1963, long before the orbit-dip second generation, so the catalog's dedicated in-situ aeronomy substrate has a first-generation root a full decade before the comprehensive observatories.
+- **A plunge-diving bird mirrors the orbit-dip technique.** The Belted Kingfisher, which holds a height and plunges into the denser water to sample it before rising, enters as the orbit-dip mirror to the observatories that dipped perigee into the lower thermosphere and lifted it again, so the catalog pairs a plunge-diving bird with an orbit-dipping mission.
+- **A bog plant carries a comprehensive sensing surface.** The Round-leaved Sundew's small round leaf carries many sensing tentacles that sample directly, so the catalog's comprehensive aeronomy suite is paired with a plant that carries many direct samplers on one structure.
+
+## Lessons Learned
+
+1. **A dedicated series can sample directly what others only infer.** Rather than passing through the upper atmosphere and inferring its properties, AE was built specifically to measure it in situ, showing that a dedicated series turns a remotely inferred region into a directly sampled one.
+2. **Onboard propulsion can reach a region a stable orbit cannot.** By lowering perigee into the lower thermosphere to sample and raising it again, the orbit-dip technique reached an altitude band a satellite cannot sustain an orbit in, showing that controlled propulsion can give an instrument repeated direct access to an otherwise unreachable region.
+3. **A comprehensive simultaneous suite ties many quantities together.** By measuring neutral composition, ion composition, temperatures, solar EUV flux, airglow, and photoelectrons at once, AE could relate the chemistry, the energy balance, and the solar driving of the upper atmosphere from one platform, showing that a comprehensive suite turns separate measurements into a tied picture.
+4. **Direct in-situ samples found an empirical model.** The AE in-situ dataset across altitude, latitude, season, and solar activity founded the MSIS empirical thermosphere reference-model lineage, showing that a consistent set of direct samples can give a standard description that endures.
+5. **Measuring the driving with the response grounds the picture.** By measuring the solar EUV flux together with the response of the air, AE could relate the energy input from the Sun to the state of the upper atmosphere, showing that measuring the driver alongside the result grounds the picture of cause and effect.
+6. **The source region can be sampled directly at the bottom of the system.** By sampling the ionosphere and thermosphere in situ, AE measured the source region that supplies the magnetosphere with plasma, showing that the bottom of the coupled system can be measured directly rather than inferred from above.
+7. **A reference template carries forward cleanly across a distinct-palette mission.** Because AE reuses the canonical card structure of the v1.194 template, the build preserved the structural template exactly and swapped the content to the in-situ aeronomy with a distinct EUV-amber / neutral-blue / ion-teal / airglow-violet palette, making the distinct-palette mission a clean build.
