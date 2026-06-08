@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.1015`.
+The story begins at `v1.0` and continues to `v1.49.1016`.
 
-**1058 chapters.** 1057 have retrospectives.
+**1059 chapters.** 1058 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -1066,3 +1066,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.1013](v1.49.1013/00-summary.md)** — Compton Gamma Ray Observatory Gamma-Ray Great Observatory All-Sky Survey and Burst Monitoring Mission · 2026-06-08
 - **[v1.49.1014](v1.49.1014/00-summary.md)** — Swift Gamma-Ray Burst Rapid Localization and Multiwavelength Afterglow Follow-Up Mission · 2026-06-08
 - **[v1.49.1015](v1.49.1015/00-summary.md)** — Fermi Gamma-ray Space Telescope Continuous High-Energy All-Sky Survey Mission · 2026-06-08
+- **[v1.49.1016](v1.49.1016/00-summary.md)** — Kepler Space Telescope Exoplanet Transit-Photometry Survey and First Statistical Census Mission · 2026-06-08
