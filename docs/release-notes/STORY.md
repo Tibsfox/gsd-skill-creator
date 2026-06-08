@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.1018`.
+The story begins at `v1.0` and continues to `v1.49.1019`.
 
-**1061 chapters.** 1060 have retrospectives.
+**1062 chapters.** 1061 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -1069,3 +1069,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.1016](v1.49.1016/00-summary.md)** — Kepler Space Telescope Exoplanet Transit-Photometry Survey and First Statistical Census Mission · 2026-06-08
 - **[v1.49.1017](v1.49.1017/00-summary.md)** — TESS Transiting Exoplanet Survey Satellite All-Sky Transit Survey of Nearby Bright Stars Mission · 2026-06-08
 - **[v1.49.1018](v1.49.1018/00-summary.md)** — Landsat Earth-Observation Multispectral Land-Imaging Continuous Earth-Surface Record Mission · 2026-06-08
+- **[v1.49.1019](v1.49.1019/00-summary.md)** — Terra EOS Flagship Multi-Instrument Whole-Earth-System Observation Mission · 2026-06-08
