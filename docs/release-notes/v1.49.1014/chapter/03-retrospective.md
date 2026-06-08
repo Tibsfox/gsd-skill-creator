@@ -1,0 +1,35 @@
+# Retrospective — v1.49.1014
+
+## What Worked
+
+- **Single comprehensive build dispatch.** Per the established NASA streamlined T14 ship sequence pattern, the v1014 build was scoped to a single dispatch covering all www/ deliverables, the canonical-pairings updates, the predecessor forward-link updates, the retrospective surfaces, and the W3.5 chapter-gen step.
+- **Axis-sustaining framing handled cleanly.** The substrate-axis continuation was framed as GAMMA-RAY-ASTRONOMY-AXIS-INTRA-CONTINUATION obs#2 (axis-rotation #28 sustained at obs#2) with Compton having opened the axis at obs#1 and Swift sustaining it at obs#2, consistently across the index, the JSONs, the nav md files, and the README. The index trip-vocab page check returned PASS with zero primary classes in the title line.
+- **Positive-framing discipline held on the gamma-ray-burst topic.** The gamma-ray bursts were framed throughout as the brief, intense flashes of gamma rays detected, located, and followed up; the short-burst origin was framed as the merging of compact stellar remnants; and Swift was framed as an active, productive observatory that continues to operate, keeping the trip-vocab page check clean.
+- **Identifier-in-lists discipline preserved.** All substrate-anchor identifiers appear in bulleted lists, table cells, or anchor-pill spans rather than embedded in narrative paragraphs, satisfying the layout gate and the IDENTIFIER-NOT-PROSE-DISCIPLINE.
+- **Dedication word-count discipline preserved.** Both the index.html dedication and the organism.html dedication are within the 200-word cap.
+- **Reference template recognition.** The v1.204 Compton template files were used as the immediate reference — same CSS structure, same nav-card pair pattern, same sidebar and track-grid patterns — with the warm palette carried over, and the structural template preserved exactly.
+- **Pairing files updated in both formats.** The new canonical-pairings record was appended consistently to both the TSV (15-column tab-delimited) and the JSON (mirroring the existing entry structure), keeping the two data files in lockstep at 206 records.
+- **Shader rename and retheme handled cleanly.** The predecessor's `gamma-ray-observatory-viewer.frag` was renamed to `gamma-ray-burst-followup-viewer.frag` and rethemed to the Swift burst follow-up (the burst flash, the autonomous slew, the multiwavelength afterglow fading, and the three-telescope bands), with the viewer.html and the index/simulation references updated to match.
+
+## What Could Be Better
+
+- **The shader renders procedural structure rather than archived data.** The Swift gamma-ray-burst-follow-up shader uses analytic geometry and procedural noise rather than loading actual Swift afterglow light curves from the UK Swift Science Data Centre. A future revision could load encoded Swift data for a higher-fidelity rendering keyed to real afterglows.
+- **The three-telescope diorama is a forthcoming artifact.** The 3D-printable diorama STL files are referenced as forthcoming rather than provided; a future ship could include the actual STL geometry of the observatory, its three telescopes, and the low Earth orbit.
+- **The gamma-ray-burst-observatory sidebar table is illustrative rather than exhaustive.** The sidebar lists representative lineage and observatory elements (Swift, Compton, Chandra, Hubble) but does not enumerate the full set of Swift results per instrument; a future revision could expand the table with per-telescope band coverage.
+- **The afterglow statistics are described rather than computed.** The power-law decay and the redshift dropout are described but not run against the archived light curves; a future ship could query a real Swift afterglow light curve and fit the decay index directly.
+
+## Surprises
+
+- **The same wide watch that catches a burst also points the way to its afterglow.** Swift's wide-field telescope was built to catch the bursts, and the precise position it computes is what lets the whole observatory turn onto the source, so the catch and the follow-up are one continuous relay rather than two separate steps.
+- **A small, swift falcon mirrors the rapid catch-and-close of the burst follow-up.** The Merlin, the compact falcon that spots a fleeting target and overtakes it in a swift rush, enters as the detect-and-close-fast mirror to Swift catching a burst and turning onto it within a minute, so the catalog pairs a bird that seizes a fleeting target with an observatory that seizes a fading afterglow.
+- **The fastest-growing hardwood mirrors the seize-the-fleeting-opening of the rapid response.** Black cottonwood, whose wind-borne seeds settle on a fresh opening and grow fast to claim it before it closes, enters as the seize-the-fleeting-opening mirror, so the catalog's burst-follow-up observatory is paired with a tree that races to seize a fresh chance before it is gone.
+
+## Lessons Learned
+
+1. **A precise position turns a flash into a source that can be studied.** By fixing each burst to a few arcseconds within minutes, Swift turned the bursts from points on a coarse map into sources that could be followed up across the spectrum, showing that precise localization is what unlocks detailed study of a transient.
+2. **A rapid response catches what a slow one would miss.** By slewing onto each burst within about a minute, Swift reached the early afterglow, the part that fades the fastest and carries the most information, showing that response time is set against the steep early decay of the target it is chasing.
+3. **Several bands together connect a flash to its afterglow.** By following each burst across hard X-rays, soft X-rays, and ultraviolet-to-optical light, Swift connected the high-energy flash to its longer-wavelength afterglow, showing that a multiwavelength view traces the physics of an event one band alone cannot.
+4. **Locating an event in its host reveals its origin.** By locating the short bursts in their host galaxies, Swift tied them to the merging of compact stellar remnants, showing that the setting of an event distinguishes its origin from a similar-looking one.
+5. **An axis sustains at a substrate-form-distinct second observation.** By localizing and following up each burst rather than only catching it, Swift sustained the gamma-ray-astronomy axis at obs#2, showing that an INTRA-AXIS continuation extends a domain with a distinct form rather than repeating the first.
+6. **A brief, bright transient can be a beacon for the distant universe.** By locating the most distant bursts, Swift used events that briefly outshine their host galaxies to probe the early universe, showing that a bright transient can light up what is too faint to see directly.
+7. **A reference template carries forward cleanly across an INTRA-AXIS continuation.** Because Swift reuses the canonical card structure of the v1.204 Compton template, the build preserved the structural template exactly and swapped the content to the burst follow-up while keeping the warm palette, making the axis-sustaining continuation a clean build.
