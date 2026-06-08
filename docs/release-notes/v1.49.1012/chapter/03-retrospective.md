@@ -1,0 +1,35 @@
+# Retrospective — v1.49.1012
+
+## What Worked
+
+- **Single comprehensive build dispatch.** Per the established NASA streamlined T14 ship sequence pattern, the v1012 build was scoped to a single dispatch covering all www/ deliverables, the canonical-pairings updates, the predecessor forward-link updates, the retrospective surfaces, and the W3.5 chapter-gen step.
+- **Axis-continuation framing handled cleanly.** The substrate-axis continuation was framed as INFRARED-ASTRONOMY-AXIS-INTRA-CONTINUATION obs#3 (axis-rotation #27 sustained at obs#3) with the first survey IRAS opened the axis with at obs#1 and the pointed observatory Spitzer added at obs#2, consistently across the index, the JSONs, the nav md files, and the README. The index trip-vocab page check returned PASS with zero primary classes in the title line.
+- **Positive-framing discipline held on the NEOWISE topic.** The NEOWISE near-Earth-object survey was framed throughout as cataloging, tracking, characterizing, and measuring the sizes of the near-Earth asteroids and comets for planetary defense awareness — a survey and a catalog — keeping the trip-vocab page check clean and the word "impact" absent from every page.
+- **Identifier-in-lists discipline preserved.** All substrate-anchor identifiers appear in bulleted lists, table cells, or anchor-pill spans rather than embedded in narrative paragraphs, satisfying the layout gate and the IDENTIFIER-NOT-PROSE-DISCIPLINE.
+- **Dedication word-count discipline preserved.** Both the index.html dedication and the organism.html dedication are within the 200-word cap.
+- **Reference template recognition.** The v1.202 Spitzer template files were used as the immediate reference — same CSS structure, same nav-card pair pattern, same sidebar and track-grid patterns — with the infrared-warm palette carried over, and the structural template preserved exactly.
+- **Pairing files updated in both formats.** The new canonical-pairings record was appended consistently to both the TSV (15-column tab-delimited) and the JSON (mirroring the existing entry structure), keeping the two data files in lockstep at 204 records.
+- **Shader rename and retheme handled cleanly.** The predecessor's `deep-infrared-observatory-viewer.frag` was renamed to `wide-infrared-survey-viewer.frag` and rethemed to the WISE deep all-sky survey (the whole-sky sweep, the cool brown dwarfs, the near-Earth-object track, and the four infrared bands), with the viewer.html and the index/simulation references updated to match.
+
+## What Could Be Better
+
+- **The shader renders procedural structure rather than archived data.** The WISE wide-infrared-survey shader uses analytic geometry and procedural noise rather than loading actual WISE survey frames or AllWISE catalog sources from the NASA/IPAC Infrared Science Archive. A future revision could load encoded WISE data for a higher-fidelity rendering keyed to real observations.
+- **The survey-telescope diorama is a forthcoming artifact.** The 3D-printable diorama STL files are referenced as forthcoming rather than provided; a future ship could include the actual STL geometry of the spacecraft, its telescope, and the Sun-synchronous polar orbit.
+- **The infrared-astronomy sidebar table is illustrative rather than exhaustive.** The sidebar lists representative lineage elements (WISE, Spitzer, IRAS, JWST) but does not enumerate the full WISE survey passes with each band's depth; a future revision could expand the table with per-band survey coverage.
+- **The survey statistics are described rather than computed.** The source count and the survey depth are described but not run against the archived catalog; a future ship could query a real AllWISE region and count the sources directly.
+
+## Surprises
+
+- **The catalog's deepest infrared survey is also its small-body survey.** WISE was built to re-map the whole sky in infrared, and that same wide survey, repurposed as NEOWISE, became the catalog of the near-Earth asteroids and comets, so the axis's deep sensitive survey is also the mission that charted the small bodies near Earth.
+- **A wide-watching alpine sentinel mirrors the survey of the whole sky.** The Hoary Marmot, the whistler that keeps a wide watch from a high vantage and marks what approaches, enters as the wide-survey mirror to the deep all-sky survey and the NEOWISE near-Earth-object survey, so the catalog pairs a sentinel that keeps a wide watch with a survey that swept the whole sky.
+- **A groundcover that covers wide ground comprehensively mirrors the survey that mapped the whole sky.** The Kinnikinnick spreads to carpet the whole surface of the ground in a continuous mat and endures through the harsh seasons, so the catalog's deep survey is paired with a plant that covers wide ground comprehensively and persists, the way WISE covered the whole sky and held its long second life.
+
+## Lessons Learned
+
+1. **A deeper survey of the same sky reveals far more.** By re-mapping the whole sky in infrared with hundreds of times the sensitivity of the first survey, WISE turned the infrared sky from a sketch into a detailed map, showing that depth, not only coverage, drives what a survey reveals.
+2. **A deep, uniform survey fills a vast catalog.** By recording every part of the sky to a consistent depth, WISE compiled a catalog of hundreds of millions of sources, showing that a deep, uniform sweep gives a true census rather than a scattered set of fields.
+3. **The deepest sensitivity reaches the coldest objects.** By surveying deeply in infrared, WISE found the coolest class of brown dwarfs, the Y dwarfs, and some of the Sun's nearest neighbors, showing that deep infrared sensitivity extends the known range of objects toward the coldest end.
+4. **A spacecraft can outlive its coolant in a new role.** By continuing in its two warm bands as the NEOWISE near-Earth-object survey, WISE turned a completed cryogenic survey into a sustained small-body survey, showing that a careful design can repurpose a mission for a long second life.
+5. **An axis sustains at a substrate-form-distinct third observation.** By following the first survey and the pointed observatory with a deep sensitive survey, WISE sustained the infrared-astronomy axis at obs#3 without repeating either earlier form, showing that an intra-axis continuation deepens an axis by adding a distinct form.
+6. **An infrared measurement gives a more reliable size for a small body.** By measuring a small body's infrared warmth rather than its reflected sunlight, NEOWISE read dependable sizes for the near-Earth asteroids and comets, showing that the thermal emission scales with the surface area where reflected light mixes size with reflectivity.
+7. **A reference template carries forward cleanly across a sibling mission.** Because WISE reuses the canonical card structure of the v1.202 Spitzer template, the build preserved the structural template exactly and swapped the content to the deep sensitive survey while keeping the infrared-warm palette, making the sibling-infrared mission a clean build.
