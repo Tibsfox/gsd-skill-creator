@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.1012`.
+The story begins at `v1.0` and continues to `v1.49.1013`.
 
-**1055 chapters.** 1054 have retrospectives.
+**1056 chapters.** 1055 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -1063,3 +1063,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.1010](v1.49.1010/00-summary.md)** — IRAS Infrared Astronomical Satellite First Infrared All-Sky Survey Mission · 2026-06-07
 - **[v1.49.1011](v1.49.1011/00-summary.md)** — Spitzer Space Telescope Infrared Great Observatory Deep-Infrared Imaging and Spectroscopy Mission · 2026-06-08
 - **[v1.49.1012](v1.49.1012/00-summary.md)** — WISE Wide-field Infrared Survey Explorer Deep Infrared All-Sky Survey and NEOWISE Mission · 2026-06-08
+- **[v1.49.1013](v1.49.1013/00-summary.md)** — Compton Gamma Ray Observatory Gamma-Ray Great Observatory All-Sky Survey and Burst Monitoring Mission · 2026-06-08
