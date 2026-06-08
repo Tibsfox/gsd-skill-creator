@@ -1,0 +1,35 @@
+# Retrospective — v1.49.1013
+
+## What Worked
+
+- **Single comprehensive build dispatch.** Per the established NASA streamlined T14 ship sequence pattern, the v1013 build was scoped to a single dispatch covering all www/ deliverables, the canonical-pairings updates, the predecessor forward-link updates, the retrospective surfaces, and the W3.5 chapter-gen step.
+- **Axis-opening framing handled cleanly.** The substrate-axis opening was framed as GAMMA-RAY-ASTRONOMY-AXIS obs#1 (axis-rotation #28 OPENED at obs#1) with the infrared axis sustaining three observations from v1010 IRAS through v1012 WISE and reaching a natural pair of forms before the rotation, consistently across the index, the JSONs, the nav md files, and the README. The index trip-vocab page check returned PASS with zero primary classes in the title line.
+- **Positive-framing discipline held on the gamma-ray-burst topic.** The gamma-ray bursts were framed throughout as the brief, intense flashes of gamma rays observed, catalogued, and measured, the all-sky monitoring, and the uniform distribution across the sky, and the end-of-mission return was framed as a planned, fully controlled reentry into a remote ocean area, keeping the trip-vocab page check clean.
+- **Identifier-in-lists discipline preserved.** All substrate-anchor identifiers appear in bulleted lists, table cells, or anchor-pill spans rather than embedded in narrative paragraphs, satisfying the layout gate and the IDENTIFIER-NOT-PROSE-DISCIPLINE.
+- **Dedication word-count discipline preserved.** Both the index.html dedication and the organism.html dedication are within the 200-word cap.
+- **Reference template recognition.** The v1.203 WISE template files were used as the immediate reference — same CSS structure, same nav-card pair pattern, same sidebar and track-grid patterns — with the warm palette carried over, and the structural template preserved exactly.
+- **Pairing files updated in both formats.** The new canonical-pairings record was appended consistently to both the TSV (15-column tab-delimited) and the JSON (mirroring the existing entry structure), keeping the two data files in lockstep at 205 records.
+- **Shader rename and retheme handled cleanly.** The predecessor's `wide-infrared-survey-viewer.frag` was renamed to `gamma-ray-observatory-viewer.frag` and rethemed to the Compton gamma-ray survey (the all-sky gamma-ray map, the gamma-ray bursts, the Great-Observatory pointing, and the four-instrument bands), with the viewer.html and the index/simulation references updated to match.
+
+## What Could Be Better
+
+- **The shader renders procedural structure rather than archived data.** The Compton gamma-ray-observatory shader uses analytic geometry and procedural noise rather than loading actual BATSE burst positions or the EGRET all-sky map from NASA's HEASARC. A future revision could load encoded Compton data for a higher-fidelity rendering keyed to real observations.
+- **The four-instrument diorama is a forthcoming artifact.** The 3D-printable diorama STL files are referenced as forthcoming rather than provided; a future ship could include the actual STL geometry of the observatory, its four instruments, and the low Earth orbit.
+- **The gamma-ray-astronomy sidebar table is illustrative rather than exhaustive.** The sidebar lists representative lineage and Great-Observatory elements (Compton, Hubble, Chandra, Spitzer) but does not enumerate the full set of Compton results per instrument; a future revision could expand the table with per-instrument energy coverage.
+- **The burst statistics are described rather than computed.** The isotropy statistic and the burst count are described but not run against the archived catalog; a future ship could query the real BATSE catalog and compute the distribution directly.
+
+## Surprises
+
+- **The catalog's first gamma-ray survey is also its first all-sky-burst census.** Compton was built to survey the gamma-ray sky, and that same wide watch, through BATSE, became the first large census of the gamma-ray bursts, so the axis's first survey is also the mission that turned the bursts into a measured population.
+- **A wide-sky aerial insectivore mirrors the survey of the whole gamma-ray sky.** The Common Nighthawk, the long-winged bird that patrols a wide expanse of the open sky and catches the brief, sudden event on the wing, enters as the wide-sky mirror to the all-sky gamma-ray-burst monitor, so the catalog pairs a bird that watches the open sky and catches the brief flash with an observatory that watched the whole sky for the brief flashes of gamma-ray bursts.
+- **A pioneer wildflower of the most energetic events mirrors the survey of the most energetic sky.** Fireweed flourishes in the wake of the most energetic disturbances and returns its bright stand across a wide range, so the catalog's first gamma-ray survey is paired with a plant drawn to where the energy is greatest, the way Compton observed the most energetic sources in the universe.
+
+## Lessons Learned
+
+1. **A new band of the spectrum opens a new way of seeing the sky.** By surveying the whole sky in gamma rays, the highest-energy light, Compton revealed a sky of the most energetic sources where lower-energy telescopes show little, showing that each band of the spectrum opens a distinct view of the universe.
+2. **A single observatory carrying complementary instruments spans a wide energy range.** By carrying four complementary instruments on one platform, Compton spanned six decades of photon energy from soft gamma rays to the very highest, showing that complementary instruments let one observatory study a source across a wide span.
+3. **A continuous all-sky watch turns rare events into a measured population.** By watching the entire sky continuously, BATSE caught several thousand gamma-ray bursts, showing that a continuous all-sky monitor turns brief, unpredictable events into a large, well-measured population.
+4. **A uniform distribution across the sky places sources beyond the galaxy.** By finding the bursts spread uniformly across the whole sky, BATSE placed them far beyond our galaxy at cosmological distances, showing that the spatial distribution of a population reveals where it lies.
+5. **An axis opens at a substrate-form-distinct first observation.** By surveying the whole sky in gamma rays for the first time, Compton opened the gamma-ray-astronomy axis at obs#1, showing that an axis-opening rotation begins a new domain rather than extending an old one.
+6. **The physics of detection ties an observatory to its name.** By building COMPTEL around the Compton-scattering geometry, the mission tied its name to the way it sees, showing how the underlying physics of detection shapes an instrument's design.
+7. **A reference template carries forward cleanly across a rotation.** Because Compton reuses the canonical card structure of the v1.203 WISE template, the build preserved the structural template exactly and swapped the content to the gamma-ray survey while keeping the warm palette, making the axis-opening rotation a clean build.
