@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.1022`.
+The story begins at `v1.0` and continues to `v1.49.1023`.
 
-**1065 chapters.** 1064 have retrospectives.
+**1066 chapters.** 1065 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -1073,3 +1073,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.1020](v1.49.1020/00-summary.md)** — Aqua EOS Afternoon Water-Cycle Observatory Mission · 2026-06-08
 - **[v1.49.1021](v1.49.1021/00-summary.md)** — Magellan Venus Radar Surface-Mapping Mission · 2026-06-08
 - **[v1.49.1022](v1.49.1022/00-summary.md)** — MESSENGER Mercury Orbital Imaging, Geochemistry, and Magnetic-Field Mapping Mission · 2026-06-09
+- **[v1.49.1023](v1.49.1023/00-summary.md)** — Dawn NASA Vesta and Ceres Ion-Propelled Protoplanet and Dwarf-Planet Orbital Exploration Mission · 2026-06-09
