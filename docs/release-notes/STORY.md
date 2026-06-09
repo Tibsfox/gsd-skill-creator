@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.1020`.
+The story begins at `v1.0` and continues to `v1.49.1021`.
 
-**1063 chapters.** 1062 have retrospectives.
+**1064 chapters.** 1063 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -1071,3 +1071,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.1018](v1.49.1018/00-summary.md)** — Landsat Earth-Observation Multispectral Land-Imaging Continuous Earth-Surface Record Mission · 2026-06-08
 - **[v1.49.1019](v1.49.1019/00-summary.md)** — Terra EOS Flagship Multi-Instrument Whole-Earth-System Observation Mission · 2026-06-08
 - **[v1.49.1020](v1.49.1020/00-summary.md)** — Aqua EOS Afternoon Water-Cycle Observatory Mission · 2026-06-08
+- **[v1.49.1021](v1.49.1021/00-summary.md)** — Magellan Venus Radar Surface-Mapping Mission · 2026-06-08
