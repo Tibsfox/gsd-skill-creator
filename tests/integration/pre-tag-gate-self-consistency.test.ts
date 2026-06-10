@@ -118,7 +118,9 @@ describe('pre-tag-gate self-consistency (Ship 0.2)', () => {
 
     it('PARITY — every step label shares ONE denominator', () => {
       const dens = new Set(labels.map((l) => l.den));
-      expect([...dens]).toEqual([21]); // canonical count: v966 normalized, v983 bumped 20→21 (step 21 trip-vocab)
+      // canonical count: v966 normalized, v983 bumped 20→21 (step 21 trip-vocab),
+      // v1029 bumped 21→22 (step 22 ship-review-attestation)
+      expect([...dens]).toEqual([22]);
     });
 
     it('PARITY — the shared denominator equals the "all N checks PASS" summary count', () => {
@@ -134,14 +136,16 @@ describe('pre-tag-gate self-consistency (Ship 0.2)', () => {
       expect(maxStep).toBe(extractSummaryCount(gate));
     });
 
-    it('ANCHOR — an early step (0.5) and the last step (21) both carry the canonical /21', () => {
+    it('ANCHOR — an early step (0.5) and the last step (22) both carry the canonical /22', () => {
       // Pins that the normalization reached the early steps (the pre-v966 /15 region)
       // AND the running-total tail — a partial revert trips one of these. v983 bumped
       // the canonical denominator 20→21 when step 21 (trip-vocab) was added.
-      expect(gate).toMatch(/step 0\.5\/21:/);
-      expect(gate).toMatch(/step 21\/21:/);
+      // v1029 bumped 21→22 when step 22 (ship-review-attestation) was added.
+      expect(gate).toMatch(/step 0\.5\/22:/);
+      expect(gate).toMatch(/step 22\/22:/);
       expect(gate).not.toMatch(/step [0-9.]+\/15:/); // the frozen /15 denominator is gone
       expect(gate).not.toMatch(/step [0-9.]+\/20:/); // the pre-v983 /20 denominator is gone
+      expect(gate).not.toMatch(/step [0-9.]+\/21:/); // the pre-v1029 /21 denominator is gone
     });
   });
 
@@ -206,6 +210,12 @@ describe('pre-tag-gate self-consistency (Ship 0.2)', () => {
       expect(occurrences(gate, /^\s*exit\s+24\b/gm)).toBe(1); // state-backups, alone
       // The state-backups step body now exits 24 (not the colliding 21).
       expect(gate).toMatch(/state-md-clean-backups[\s\S]*?\n\s*exit\s+24\b/);
+    });
+
+    it('exit 26 is uniquely assigned to ship-review-attestation (v1029)', () => {
+      // Mirrors the collision-resolution pins above. exit 26 was verified free at v1.49.1029.
+      expect(occurrences(gate, /^\s*exit\s+26\b/gm)).toBe(1); // ship-review-attestation, alone
+      expect(gate).toMatch(/ship-review-attestation[\s\S]*?\n\s*exit\s+26\b/);
     });
 
     it('UNIQUENESS — the exit-code legend has no duplicate code', () => {

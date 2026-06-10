@@ -55,7 +55,7 @@ are stable references; insertion of new steps SHOULD use decimal sub-steps
 (e.g. `2.5`) to preserve numbering continuity for downstream docs.
 
 ```
-P.   Adversarial ship review (PRE-PUSH; v1.49.968 Ship 1.1 — ADVISORY, staged #10463)
+P.   Adversarial ship review (PRE-PUSH; v1.49.968 Ship 1.1 — REQUIRED as of v1.49.1029)
        - After the code commit(s) and BEFORE `git push origin dev`, run the multi-agent
          adversarial review on the diff; fix every CONFIRMED REAL finding IN CODE
          (never explain it away in prose), then proceed to push → CI → pre-tag-gate.
@@ -67,12 +67,18 @@ P.   Adversarial ship review (PRE-PUSH; v1.49.968 Ship 1.1 — ADVISORY, staged 
          before Edit if a probe touched it (file-read-state invalidation).
        - SCALE to blast radius: a trivial, deterministically-checked, mechanical edit MAY
          use direct multi-angle verification instead of the full five-lens panel — note
-         the scale-down in the retrospective.
-       - ADVISORY only this rung; the deterministic pre-tag-gate attestation is a FUTURE
-         rung (a gate step would bump the count 20→21 and force a denominator
-         re-normalization, which belongs in its own ship).
+         the scale-down in the retrospective (use `--mode scaled --notes "<why>"`).
+       - After the review, write the attestation: `node tools/ship-review/write-attestation.mjs
+         --mode full --base <first-code-commit>^ --confirmed N` (for NASA content-review
+         ships use `--mode content`; for deliberate scale-downs `--mode scaled --notes "<why>"`).
+       - Pre-tag-gate step 22 enforces the attestation is present and fresh for THIS ship
+         (exit 26 if missing/stale; bypass token ship-review-attestation for emergencies).
+       - Promoted from ADVISORY (staged #10463) to REQUIRED at v1.49.1029: K=30 clean ships,
+         evidence = 51 reviewed ships since v968 + caught-defect ledger (v965: 3 BLOCKERs;
+         v966: 1 MAJOR; v982; 11/35 F4; v1027: 1 BLOCKER + 1 MAJOR; v1028: 1 MAJOR).
        - Canonical: docs/adversarial-ship-review.md. Caught real defects pre-push in
-         v965 (3 BLOCKERs), v966 (1 MAJOR), and 11/35 F4 ships.
+         v965 (3 BLOCKERs), v966 (1 MAJOR), v982, 11/35 F4, v1027 (1 BLOCKER + 1 MAJOR),
+         and v1028 (1 MAJOR).
 
 0.   Release-notes scaffold + fill (BEFORE step 1's completeness gate; v1.49.958)
        - `node tools/release-history/scaffold-release-notes.mjs --version v<X>
@@ -227,6 +233,7 @@ Milestone-specific notes:
 | 2026-05-11 | Initial canonical doc. T14 sequence documented with STORY-gate as step 2.5 (post bump-version, pre git-tag). | v1.49.638 C2 (Lesson #10197 closure) |
 | 2026-06-03 | Added step 2.7 adoption-baseline refresh (post bump-version, pre chore-commit): `adoption-refresh.mjs` + `adoption-trends.mjs --write`. SOURCE-ELIMINATOR half of the two-layer closure (#10431/#10436) for the baseline-freeze drift class; DETECTOR is pre-tag-gate step 20 (adoption-freshness, WARN-only). | v1.49.965 Ship 0.1 (audit T1.3) |
 | 2026-06-04 | Added pre-flight step P — adversarial ship review on the diff before `git push origin dev` (ADVISORY, staged #10463). Reusable workflow `tools/ship-review/adversarial-ship-review.mjs`; canonical doc `docs/adversarial-ship-review.md`; drift-guard `tests/integration/adversarial-ship-review-discipline.test.ts`. | v1.49.968 Ship 1.1 (audit T1.4) |
+| 2026-06-10 | Step P promoted from ADVISORY to REQUIRED. Pre-tag-gate step 22 (ship-review-attestation, exit 26) enforces that `write-attestation.mjs` was run after the review (K=30; 51 reviewed ships since v968; caught-defect ledger: v965 3 BLOCKERs, v966, v982, 11/35 F4, v1027 1 BLOCKER + 1 MAJOR, v1028 1 MAJOR). Gate count 21→22. | v1.49.1029 (audit §10 ship 3) |
 
 ## Lesson coverage (codified v1.49.654 C08+C09)
 

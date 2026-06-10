@@ -2,9 +2,10 @@
 
 **Status:** Canonical reference for the T14 adversarial review step.
 **Codified:** v1.49.968 (Ship 1.1 of the 2026-06-03 audit plan).
-**Authority:** Advisory step in the operator-driven T14 sequence (see
-[`docs/T14-SHIP-SEQUENCE.md`](T14-SHIP-SEQUENCE.md)). Staged per #10463 — advisory
-now, gate-enforced later (see "Staged promotion" below).
+**Promoted:** v1.49.1029 — step P is now REQUIRED (gate-enforced via attestation; see
+"Promotion" below). Previously ADVISORY (staged #10463).
+**Authority:** Required step in the operator-driven T14 sequence (see
+[`docs/T14-SHIP-SEQUENCE.md`](T14-SHIP-SEQUENCE.md)).
 
 ---
 
@@ -134,20 +135,54 @@ each `confirmed` finding in code, then proceed with push → CI → pre-tag-gate
 
 ---
 
-## Staged promotion (#10463)
+## Promotion (executed v1.49.1029)
 
-This lands **advisory** (a documented T14 step + a reusable workflow), which is rung
-1 of the staged-promotion ladder. The deterministic **gate-enforcement** rung (a
-pre-tag-gate attestation that the review ran on the diff) is deliberately deferred:
+This step was initially **advisory** (staged #10463, v1.49.968 Ship 1.1). The
+gate-enforcement rung was promoted at v1.49.1029 after meeting the K=30 evidence bar
+(one full `SC_ADOPTION_BASELINE_MAX_DRIFT` window of consecutive reviewed ships).
 
-- The adversarial review is a *judgment* step performed by LLM agents; a bash gate
-  can only check an *attestation artifact*, not re-run the judgment.
-- Adding a pre-tag-gate step would bump the gate's step count 20 → 21 and force a
-  re-normalization of every printed `step X/20` denominator + the exit-code legend
-  (pinned by `tests/integration/pre-tag-gate-self-consistency.test.ts`, v966). That
-  coupling belongs in its own ship, not bundled with the codification.
+**Evidence for promotion:**
+- **51 distinct release versions** since v968 have the adversarial review documented in
+  their release notes (across ~116 ships in range; NASA ships run the content-review variant).
+- **Caught-defect ledger** kept growing: v965 (3 BLOCKERs: cross-line false-FRESH,
+  exit-22 collision, missing T14 step), v966 (1 MAJOR: whitespace-fragile regex),
+  v982, 11/35 F4 ships, v1027 (1 BLOCKER + 1 MAJOR), v1028 (1 MAJOR).
 
-Promote to a gate-enforced attestation rung after K clean advisory ships.
+**Attestation contract:**
+
+After the adversarial review, write the attestation artifact:
+```
+node tools/ship-review/write-attestation.mjs \
+  --mode full \
+  --base <first-code-commit>^ \
+  --confirmed N \
+  [--fixed N] [--workflow-run <id>] [--notes "<text>"]
+```
+
+Modes: `full` (default five-lens panel), `scaled` (deliberate scale-down; requires `--notes`),
+`content` (NASA content-review variant).
+
+The attestation file is `.planning/ship-review/last-attestation.json` (local working-tree only;
+gitignored via `.planning/`). It carries:
+- `reviewedHead` — the git SHA at write time
+- `mode` — the review mode enum
+- `writtenAt` — ISO-8601 UTC timestamp
+
+**Gate enforcement (step 22):** Pre-tag-gate step 22 (ship-review-attestation, exit 26) runs
+`tools/ship-review/write-attestation.mjs --check` which validates three conditions:
+1. File exists, parses, has `reviewedHead`, `mode` ∈ {full, scaled, content}, `writtenAt`.
+2. `git merge-base --is-ancestor <reviewedHead> HEAD` — the reviewed commits are in this history.
+3. `<reviewedHead>` is NOT an ancestor of the newest tag — freshness: a stale attestation from
+   the previous ship BLOCKs (run step P again for THIS ship). Skipped when no tag exists.
+
+Exit 26 if missing/stale/invalid. Bypass token: `ship-review-attestation` (emergency only).
+
+**Revert instructions:** To revert to ADVISORY: delete gate step 22 from
+`tools/pre-tag-gate.sh`, update the summary line + denominator from 22 back to 21,
+restore `docs/T14-SHIP-SEQUENCE.md` step P header to "ADVISORY", update
+`tests/integration/pre-tag-gate-self-consistency.test.ts` to expect denominator `[21]`
+and anchors `step 0.5/21:` + `step 21/21:` (remove the `/22` anchors and
+`not.toMatch(/step [0-9.]+\/21:/)` guard).
 
 ---
 

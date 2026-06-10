@@ -55,15 +55,16 @@ else
   fail "bash syntax check failed"
 fi
 
-# Test 3: contains expected step labels. The gate grew to 21 integer steps as of
-# v1.49.983 (Ship 5.3 added step 21 trip-vocab budget; v1.49.965 added step 20
-# adoption-freshness). Spot-check stable mid labels + the two newest steps + the
-# final summary count rather than asserting every label (which churns each ship).
-if grep -q "step 6/21" "$GATE" \
-   && grep -q "step 20/21" "$GATE" \
-   && grep -q "step 21/21: trip-vocab budget" "$GATE" \
-   && grep -q "all 21 checks PASS" "$GATE"; then
-  ok "current step labels present (21 steps incl. trip-vocab)"
+# Test 3: contains expected step labels. The gate grew to 22 integer steps as of
+# v1.49.1029 (step 22 ship-review-attestation added; v1.49.983 added step 21
+# trip-vocab budget; v1.49.965 added step 20 adoption-freshness). Spot-check
+# stable mid labels + the newest steps + the final summary count rather than
+# asserting every label (which churns each ship).
+if grep -q "step 6/22" "$GATE" \
+   && grep -q "step 21/22: trip-vocab budget" "$GATE" \
+   && grep -q "step 22/22: ship-review attestation check" "$GATE" \
+   && grep -q "all 22 checks PASS" "$GATE"; then
+  ok "current step labels present (22 steps incl. ship-review-attestation)"
 else
   fail "step labels missing or wrong count"
 fi
@@ -197,7 +198,7 @@ fi
 # Test 19: CSV-form smoke test — SC_PRE_TAG_GATE_BYPASS=ci-gate,depth-audit
 # We can't run the full gate cheaply, but we can verify the prelude handles it.
 # Extract just the prelude (everything up to "log "[pre-tag-gate] step 1/12") + a gate_bypassed call.
-PRELUDE_END_LINE=$(grep -n 'log "\[pre-tag-gate\] step 1/21' "$GATE" | head -1 | cut -d: -f1)
+PRELUDE_END_LINE=$(grep -n 'log "\[pre-tag-gate\] step 1/22' "$GATE" | head -1 | cut -d: -f1)
 if [ -n "$PRELUDE_END_LINE" ]; then
   PRELUDE_CONTENT=$(head -n "$PRELUDE_END_LINE" "$GATE")
   # Append a test invocation
