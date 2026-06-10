@@ -13,7 +13,7 @@ status: ACTIVE
 updated: 2026-04-15
 triggers:
   - user provides an image and wants it turned into a build spec or mission
-  - "image to mission" or "i2m" is requested
+  - '"image to mission" or "i2m" is requested'
   - capturing visual or design energy from an image into code or a mission package
 ---
 
