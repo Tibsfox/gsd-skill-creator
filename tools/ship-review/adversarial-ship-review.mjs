@@ -1,15 +1,16 @@
 export const meta = {
   name: 'adversarial-ship-review',
-  description: 'Adversarial pre-push review of the current ship diff: parallel dimension-reviewers -> structured findings -> adversarial verify -> confirmed defects to fix in code before push',
-  whenToUse: 'Run at T14 on the ship diff (after the code commit, before `git push origin dev`). Reviewers are read-only; the orchestrator fixes confirmed REAL findings in code, then re-runs the gate.',
+  description: 'Adversarial pre-push review of the current ship diff: parallel dimension-reviewers -> structured findings -> adversarial verify -> cross-lens synthesis judge -> fix-now list to fix in code before push',
+  whenToUse: 'Run at T14 step P on the ship diff (after the code commit, before `git push origin dev`). Reviewers are read-only; the orchestrator fixes every fixNow finding in code, then re-runs the gate.',
   phases: [
     { title: 'Review' },
     { title: 'Verify' },
+    { title: 'Judge' },
   ],
 }
 
 // ---------------------------------------------------------------------------
-// adversarial-ship-review.mjs
+// adversarial-ship-review.mjs (v2 — v1.49.1029 Ship 3)
 //
 // A WORKFLOW-RUNTIME SCRIPT (not a standalone Node CLI). It is executed by the
 // Claude Code Workflow tool — `Workflow({ scriptPath:
@@ -20,24 +21,35 @@ export const meta = {
 // which pins this file's structural contract.
 //
 // This codifies the ad-hoc "adversarial Workflow review" that recent ships used
-// before push (it caught real BLOCKERs in v1.49.965 Ship 0.1 and a real MAJOR in
-// v1.49.966 Ship 0.2, and a real defect in 11/35 F4 ships). See the canonical
-// process doc docs/adversarial-ship-review.md.
+// before push (it caught real BLOCKERs in v1.49.965 Ship 0.1, a real MAJOR in
+// v1.49.966 Ship 0.2, a real defect in 11/35 F4 ships, and a BLOCKER + MAJORs in
+// v1027/v1028). See the canonical process doc docs/adversarial-ship-review.md.
+//
+// v2 folds in the judge IP proven across the 11 untracked NASA 4-auditor review
+// clones (AUDIT-2026-06-09 §4b): a CROSS-LENS SYNTHESIS JUDGE that dedupes
+// findings across lenses, independently RE-READS every cited location
+// (anti-hallucination — never trusts a reviewer's quote), applies an exception
+// allow-list of known-correct steady states, and classifies each surviving
+// finding with a 3-way verdict enum (real-fix-now | real-minor-optional |
+// rejected-false-positive) instead of a flat boolean.
 //
 // ISOLATION DISCIPLINE (load-bearing — feedback_workflow-agents-invalidate-file-read-state):
-//   Reviewers run as the read-only `Explore` agent type (no Edit/Write/NotebookEdit
-//   in its toolkit), so they CANNOT mutate the source under review. Worktree
-//   isolation is deliberately NOT used: a fresh worktree lacks node_modules, so
-//   tsx/vitest probes fail there. If a reviewer needs to PROBE runtime behavior it
-//   must be additive-only (write a throwaway probe-*.mts in the repo root, never
-//   edit the source). The orchestrator MUST `git status` the tree after this
-//   workflow and `git checkout`/restore before trusting it (belt-and-suspenders;
-//   Explore agents leave zero leaks, but a non-read-only agentType override would).
+//   Reviewers AND the judge run as the read-only `Explore` agent type (no
+//   Edit/Write/NotebookEdit in its toolkit), so they CANNOT mutate the source
+//   under review. Worktree isolation is deliberately NOT used: a fresh worktree
+//   lacks node_modules, so tsx/vitest probes fail there. If a reviewer needs to
+//   PROBE runtime behavior it must be additive-only (write a throwaway
+//   probe-*.mts in the repo root, never edit the source). The orchestrator MUST
+//   `git status` the tree after this workflow and `git checkout`/restore before
+//   trusting it (belt-and-suspenders; Explore agents leave zero leaks, but a
+//   non-read-only agentType override would).
 //
 // args (all optional):
-//   { base?: string,         // diff base ref; default 'HEAD~1' (the just-made code commit)
-//     intent?: string,       // one-paragraph statement of what the ship is supposed to do
-//     dimensions?: string[] } // subset of dimension keys to run; default: all five
+//   { base?: string,          // diff base ref; default 'HEAD~1' (the just-made code commit)
+//     intent?: string,        // one-paragraph statement of what the ship is supposed to do
+//     dimensions?: string[],  // subset of dimension keys to run; default: all five
+//     exceptions?: string[] } // ship-specific known-correct steady states, appended to
+//                             // STANDING_EXCEPTIONS and injected into every prompt
 // ---------------------------------------------------------------------------
 
 // The Workflow runtime may deliver `args` either as an object OR — depending on the
@@ -52,6 +64,20 @@ else if (typeof args === 'string' && args.trim()) {
 }
 const BASE = A.base || 'HEAD~1'
 const INTENT = A.intent || '(no ship-intent provided — infer it from the commit message and diff)'
+
+// Exception allow-list (NASA judge IP): KNOWN-CORRECT STEADY STATES of this repo
+// that look like defects to a fresh reviewer but are by-design. Stated positively
+// (what IS correct), never as forbidden-token enumerations. Ship-specific entries
+// arrive via args.exceptions. A finding that merely restates one of these is a
+// false positive; the judge rejects it.
+const STANDING_EXCEPTIONS = [
+  'Gate step 12 STORY-drift printing a WARN pre-bump is the designed steady state (INV-1); it self-resolves at T14 step 2.5 and is not a defect to fix.',
+  '`node project-claude/install.cjs --dry-run` exiting 1 with 2 warnings is the documented steady state of the installed tree.',
+  'The installed-tree differs for .claude/agents/gsd-executor.md and .claude/agents/gsd-planner.md are the two intentional marker-block agents (installed-newer by design; never deployed over).',
+]
+const EXCEPTIONS = STANDING_EXCEPTIONS.concat(
+  Array.isArray(A.exceptions) ? A.exceptions.filter((e) => typeof e === 'string' && e.trim()) : [],
+)
 
 // The five review lenses. Each is blind to the others; diversity catches failure
 // modes redundancy can't (perspective-diverse verify, Workflow quality patterns).
@@ -115,12 +141,13 @@ const FINDINGS_SCHEMA = {
       items: {
         type: 'object',
         additionalProperties: false,
-        required: ['severity', 'title', 'detail', 'location'],
+        required: ['severity', 'title', 'detail', 'location', 'confidence'],
         properties: {
-          severity: { type: 'string', description: 'BLOCKER | MAJOR | MINOR | INFO' },
+          severity: { type: 'string', enum: ['BLOCKER', 'MAJOR', 'MINOR', 'INFO'] },
           title: { type: 'string' },
           detail: { type: 'string', description: 'what is wrong and why it matters' },
           location: { type: 'string', description: 'file:line or file' },
+          confidence: { type: 'string', enum: ['high', 'medium', 'low'] },
           suggested_fix: { type: 'string' },
         },
       },
@@ -135,8 +162,43 @@ const VERDICT_SCHEMA = {
   properties: {
     real: { type: 'boolean', description: 'true = a genuine defect that MUST be fixed before push; false = refuted / not real' },
     reason: { type: 'string', description: 'the evidence that confirms or refutes the finding' },
-    confidence: { type: 'string', description: 'high | medium | low' },
+    confidence: { type: 'string', enum: ['high', 'medium', 'low'] },
   },
+}
+
+// 3-way verdict enum (NASA judge IP): real-fix-now = genuine, fix in code before
+// push; real-minor-optional = genuine but MINOR, operator discretion; rejected-
+// false-positive = not a defect (the judge explains why in `problem`).
+const JUDGE_SCHEMA = {
+  type: 'object',
+  additionalProperties: false,
+  required: ['summary', 'classified'],
+  properties: {
+    summary: { type: 'string' },
+    classified: {
+      type: 'array',
+      items: {
+        type: 'object',
+        additionalProperties: false,
+        required: ['severity', 'title', 'location', 'problem', 'verdict'],
+        properties: {
+          severity: { type: 'string', enum: ['BLOCKER', 'MAJOR', 'MINOR'] },
+          title: { type: 'string' },
+          location: { type: 'string' },
+          problem: { type: 'string', description: 'what is wrong (or, for a rejection, why it is a false positive)' },
+          suggested_fix: { type: 'string' },
+          mergedFrom: { type: 'array', items: { type: 'string' }, description: 'lens keys this entry dedupes across' },
+          verdict: { type: 'string', enum: ['real-fix-now', 'real-minor-optional', 'rejected-false-positive'] },
+        },
+      },
+    },
+  },
+}
+
+function exceptionsBlock() {
+  return `KNOWN-CORRECT STEADY STATES (an observation that merely restates one of these is
+NOT a finding — treat it as already explained):
+${EXCEPTIONS.map((e, i) => `  ${i + 1}. ${e}`).join('\n')}`
 }
 
 function context() {
@@ -148,6 +210,8 @@ THE DIFF UNDER REVIEW: \`git diff ${BASE}\` (also useful: \`git diff ${BASE} --s
 
 SHIP INTENT (what this change is supposed to accomplish):
 ${INTENT}
+
+${exceptionsBlock()}
 
 HARD RULES:
 - READ-ONLY. Use Read / Grep / Glob and read-only Bash (git diff/log/show, grep, cat, ls,
@@ -181,7 +245,7 @@ const perDimension = await pipeline(
 YOUR LENS — ${dim.focus}
 
 Review the diff strictly through THIS lens. Return the FINDINGS schema: dimension="${dim.key}",
-verdict CLEAN or FINDINGS, and a findings[] array (severity/title/detail/location/suggested_fix).`,
+verdict CLEAN or FINDINGS, and a findings[] array (severity/title/detail/location/confidence/suggested_fix).`,
       { label: dim.label, phase: 'Review', schema: FINDINGS_SCHEMA, agentType: 'Explore' },
     ),
   // Stage 2 — adversarially verify each non-INFO finding from this lens.
@@ -217,7 +281,7 @@ supported by the source. Give the evidence either way.`,
 )
 
 // ---------------------------------------------------------------------------
-// Aggregate. The orchestrator reads `confirmed` and fixes each in code before push.
+// Aggregate the per-finding refuter results.
 // ---------------------------------------------------------------------------
 const confirmed = perDimension.flatMap((d) => (d && d.confirmed) || [])
 const rejected = perDimension.flatMap((d) => (d && d.rejected) || [])
@@ -229,11 +293,76 @@ const bySeverity = confirmed.reduce((acc, c) => {
 
 log(`adversarial-ship-review: ${confirmed.length} confirmed (${JSON.stringify(bySeverity)}), ${rejected.length} refuted`)
 
+// ---------------------------------------------------------------------------
+// Phase 3 (Judge) — cross-lens synthesis (NASA judge IP, AUDIT-2026-06-09 §4b).
+// One judge sees ALL confirmed findings together: dedupes across lenses,
+// independently re-reads every cited location, applies the exception allow-list,
+// and classifies each survivor with the 3-way verdict. The judge may downgrade
+// or reject a confirmed finding (with evidence) but may NOT resurrect a
+// refuter-rejected one — rejected findings are provided as context only.
+// ---------------------------------------------------------------------------
+let judge = null
+if (confirmed.length > 0) {
+  phase('Judge')
+  judge = await agent(
+    `${context()}
+
+You are the CROSS-LENS SYNTHESIS JUDGE of this review. ${requested.length} independent
+lens reviewers ran; every non-INFO finding was then adversarially verified by a skeptic.
+The findings below SURVIVED refutation. Your duties:
+
+1. RE-READ: for EACH finding, open the cited file/location yourself and confirm the claim
+   is really present as described — never trust the reviewer's quote or the refuter's
+   paraphrase (they can both hallucinate line numbers and content).
+2. DEDUPE: merge findings that describe the same underlying defect across lenses into ONE
+   entry (record the merged lens keys in mergedFrom).
+3. EXCEPTIONS: a finding that merely restates a KNOWN-CORRECT STEADY STATE from the list
+   above is a false positive — reject it and name the exception.
+4. CLASSIFY each surviving entry with the 3-way verdict:
+   - "real-fix-now": a genuine BLOCKER/MAJOR defect that must be fixed in code before push.
+   - "real-minor-optional": genuine but MINOR; fixing is operator discretion.
+   - "rejected-false-positive": not a defect on re-read (explain why in problem).
+   Reject false positives aggressively, but every rejection needs the evidence from your
+   own re-read. You may downgrade severity with evidence. You may NOT resurrect any
+   finding from the refuter-rejected list below — it is context only.
+5. Be specific enough that the orchestrator can apply each fix in one edit (file + exact
+   change in suggested_fix).
+
+CONFIRMED FINDINGS (survived per-finding refutation; verifyReason = the refuter's evidence):
+${JSON.stringify(confirmed.map((c) => ({ ...c.finding, dimension: undefined, verifyReason: c.verdict.reason })), null, 2)}
+
+REFUTER-REJECTED (context only — do not resurrect):
+${JSON.stringify(rejected.map((c) => ({ title: c.finding.title, location: c.finding.location, refutedBecause: c.verdict.reason })), null, 2)}`,
+    { label: 'judge:synthesis', phase: 'Judge', schema: JUDGE_SCHEMA, agentType: 'Explore' },
+  )
+} else {
+  log('adversarial-ship-review: 0 confirmed findings — judge skipped (clean review)')
+}
+
+// Fail-safe mapping: if the judge ran and returned a classification, fixNow/optional
+// come from the 3-way verdicts. If the judge died (null) while confirmed findings
+// exist, fall back to treating EVERY confirmed finding as fix-now — a judge failure
+// must never silently drop a confirmed defect.
+const classified = judge && Array.isArray(judge.classified) ? judge.classified : null
+const fixNow = classified
+  ? classified.filter((c) => c.verdict === 'real-fix-now')
+  : confirmed.map((c) => ({ ...c.finding, verifyReason: c.verdict.reason, verdict: 'real-fix-now' }))
+const optional = classified ? classified.filter((c) => c.verdict === 'real-minor-optional') : []
+const judgeRejected = classified ? classified.filter((c) => c.verdict === 'rejected-false-positive') : []
+
+log(`adversarial-ship-review: judge → ${fixNow.length} fix-now, ${optional.length} optional, ${judgeRejected.length} judge-rejected${classified ? '' : confirmed.length ? ' (JUDGE UNAVAILABLE — fail-safe: all confirmed treated as fix-now)' : ''}`)
+
 return {
   base: BASE,
   dimensionsRun: requested.map((d) => d.key),
   confirmedCount: confirmed.length,
   bySeverity,
+  // v2 contract: fix everything in fixNow before push; optional is operator judgment.
+  fixNow,
+  optional,
+  judgeRejected,
+  judgeSummary: judge ? judge.summary : null,
+  // v1-compatible surfaces (raw refuter-stage outputs).
   confirmed: confirmed.map((c) => ({ ...c.finding, verifyReason: c.verdict.reason })),
   rejected: rejected.map((c) => ({ title: c.finding.title, location: c.finding.location, refutedBecause: c.verdict.reason })),
 }

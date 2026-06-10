@@ -1,9 +1,13 @@
 /**
- * Adversarial ship-review discipline — drift-guard (v1.49.968 Ship 1.1).
+ * Adversarial ship-review discipline — drift-guard (v1.49.968 Ship 1.1;
+ * extended v1.49.1029 Ship 3 for the v2 judge stage).
  *
  * Ship 1.1 codifies the project's empirically-best QA mechanism (the ad-hoc
  * "adversarial Workflow review" that caught real defects pre-push in v965, v966,
- * and 11/35 F4 ships) as a load-bearing T14 step. Three surfaces must stay in
+ * and 11/35 F4 ships) as a load-bearing T14 step. Ship 3 (v1.49.1029) folds in
+ * the NASA 4-auditor judge IP (AUDIT-2026-06-09 §4b): a cross-lens synthesis
+ * judge with independent re-read, an exception allow-list of known-correct
+ * steady states, and a 3-way verdict enum. Three surfaces must stay in
  * sync, and one learned isolation invariant must not silently regress:
  *
  *   1. tools/ship-review/adversarial-ship-review.mjs — the reusable Workflow script.
@@ -76,24 +80,64 @@ describe('adversarial ship-review discipline — drift-guard (v1.49.968 Ship 1.1
     expect(sorted(keys)).toEqual(sorted(EXPECTED_DIMENSIONS));
   });
 
-  it('WORKFLOW — is a valid Workflow script with a Review→Verify shape', () => {
+  it('WORKFLOW — is a valid Workflow script with a Review→Verify→Judge shape', () => {
     const src = read(WORKFLOW_PATH);
     expect(src).toMatch(/export const meta\s*=/);
     expect(src).toContain("name: 'adversarial-ship-review'");
-    // Both phases present and pipelined (review then adversarial verify).
+    // All three phases present; review→verify pipelined, judge after.
     expect(src).toMatch(/phase:\s*'Review'/);
     expect(src).toMatch(/phase:\s*'Verify'/);
+    expect(src).toMatch(/phase:\s*'Judge'/);
     expect(src).toMatch(/\bpipeline\s*\(/);
   });
 
-  it('WORKFLOW — reviewers are read-only Explore agents and NEVER worktree-isolated', () => {
+  it('WORKFLOW — reviewers, refuters, and the judge are read-only Explore agents, NEVER worktree-isolated', () => {
     const src = read(WORKFLOW_PATH);
     // Read-only enforcement: the Explore agentType has no Edit/Write in its toolkit.
-    expect(src).toMatch(/agentType:\s*'Explore'/);
+    // Exact-count parity (3 agent sites: review lens, per-finding refuter, synthesis
+    // judge) — dropping Explore from ANY of them is caught, not hidden by the others.
+    const exploreSites = src.match(/agentType:\s*'Explore'/g) ?? [];
+    expect(exploreSites.length).toBe(3);
     // The learned isolation invariant: reviewers must not use worktree isolation
     // (fresh worktree lacks node_modules → probes fail). Pin the ABSENCE of the
     // isolation option so adding it back is a deliberate, guard-updating act.
     expect(src).not.toMatch(/isolation:\s*'worktree'/);
+  });
+
+  it('WORKFLOW v2 — cross-lens judge: 3-way verdict enum, no-resurrection rule, fail-safe fallback', () => {
+    const src = read(WORKFLOW_PATH);
+    // The 3-way verdict enum (NASA judge IP) — all three literals present, and
+    // wired as a schema enum (not just prose).
+    for (const v of ['real-fix-now', 'real-minor-optional', 'rejected-false-positive']) {
+      expect(src, `3-way verdict literal "${v}" must be present`).toContain(`'${v}'`);
+    }
+    expect(src).toMatch(/verdict:\s*\{\s*type:\s*'string',\s*enum:\s*\['real-fix-now'/);
+    // The judge may not resurrect refuter-rejected findings (context only).
+    expect(src).toMatch(/NOT resurrect/);
+    // Fail-safe: a dead judge (null) with confirmed findings must degrade to
+    // all-confirmed-are-fix-now, never silently drop a confirmed defect.
+    expect(src).toMatch(/fail-safe/i);
+    expect(src).toMatch(/JUDGE UNAVAILABLE/);
+  });
+
+  it('WORKFLOW v2 — exception allow-list: standing steady-states + args.exceptions, injected into prompts', () => {
+    const src = read(WORKFLOW_PATH);
+    // The standing allow-list exists and is non-empty (INV-1 STORY-drift is the
+    // canonical first entry).
+    expect(src).toMatch(/STANDING_EXCEPTIONS\s*=\s*\[/);
+    expect(src).toMatch(/STORY-drift/);
+    // Ship-specific exceptions arrive via args and are CONCATENATED (standing list
+    // can never be silently replaced by a caller).
+    expect(src).toMatch(/STANDING_EXCEPTIONS\.concat/);
+    // The combined list is injected into the shared prompt context used by every
+    // reviewer/refuter/judge agent.
+    expect(src).toMatch(/exceptionsBlock\(\)/);
+  });
+
+  it('WORKFLOW v2 — findings carry enum severity + confidence', () => {
+    const src = read(WORKFLOW_PATH);
+    expect(src).toMatch(/enum:\s*\['BLOCKER',\s*'MAJOR',\s*'MINOR',\s*'INFO'\]/);
+    expect(src).toMatch(/required:\s*\['severity',\s*'title',\s*'detail',\s*'location',\s*'confidence'\]/);
   });
 
   it('T14 — the ship sequence references the pre-push review step + the workflow', () => {
@@ -111,7 +155,7 @@ describe('adversarial ship-review discipline — drift-guard (v1.49.968 Ship 1.1
     // The doc names the learned isolation discipline.
     expect(doc).toMatch(/Explore/);
     expect(doc).toMatch(/worktree/);
-    // Staged-promotion (#10463): advisory now, gate-enforced later.
+    // Promotion lineage (#10463): staged advisory rung → gate-enforced at v1029.
     expect(doc).toMatch(/#10463|[Ss]taged/);
     // Every expected lens is named in the doc's lens list.
     for (const dim of EXPECTED_DIMENSIONS) {
@@ -119,5 +163,10 @@ describe('adversarial ship-review discipline — drift-guard (v1.49.968 Ship 1.1
         new RegExp(dim.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&'), 'i'),
       );
     }
+    // v2: the doc documents the synthesis judge and the 3-way verdict semantics.
+    expect(doc).toMatch(/synthesis judge/i);
+    expect(doc).toContain('real-fix-now');
+    expect(doc).toContain('real-minor-optional');
+    expect(doc).toContain('rejected-false-positive');
   });
 });

@@ -14,9 +14,12 @@
 Before pushing a ship's code to `origin/dev`, run a multi-agent **adversarial
 review of the diff**: parallel read-only reviewers each examine the change through
 one lens, produce structured findings, and every non-trivial finding is then
-**adversarially verified** by an independent skeptic that tries to refute it. Only
-findings that survive refutation are "confirmed" — the orchestrator fixes each
-confirmed REAL finding **in code** before push, then re-runs the gate.
+**adversarially verified** by an independent skeptic that tries to refute it.
+Findings that survive refutation go to a **cross-lens synthesis judge** (v2,
+v1.49.1029) that dedupes across lenses, independently re-reads every cited
+location, applies the exception allow-list, and classifies each survivor with a
+3-way verdict. The orchestrator fixes each `real-fix-now` finding **in code**
+before push, then re-runs the gate.
 
 This makes the project's empirically-best QA mechanism load-bearing instead of
 ad-hoc. It is not a replacement for `tools/pre-tag-gate.sh` (deterministic checks)
@@ -63,6 +66,36 @@ that redundancy cannot. The lenses are encoded in
 
 ---
 
+## The cross-lens synthesis judge (v2 — v1.49.1029)
+
+v2 folds in the judge IP proven across the 11 untracked NASA 4-auditor review
+clones (AUDIT-2026-06-09 §4b): after the per-finding refuters settle, **one**
+synthesis judge sees every confirmed finding together and:
+
+1. **Re-reads independently** — opens each cited file/location itself; it never
+   trusts the reviewer's quote or the refuter's paraphrase (both can hallucinate
+   line numbers and content). This is the anti-hallucination layer.
+2. **Dedupes across lenses** — the same underlying defect raised by two lenses
+   becomes ONE entry (`mergedFrom` records the lens keys).
+3. **Applies the exception allow-list** — `STANDING_EXCEPTIONS` (known-correct
+   steady states of this repo: the INV-1 pre-bump STORY-drift WARN, the
+   installer `--dry-run` exit-1 steady state, the two intentional marker-agent
+   differs) plus ship-specific `args.exceptions`. A finding that merely restates
+   one of these is rejected as a false positive. Exceptions are stated
+   POSITIVELY (what IS correct), never as forbidden-token enumerations.
+4. **Classifies with the 3-way verdict enum:**
+   - `real-fix-now` — genuine BLOCKER/MAJOR; fix in code before push.
+   - `real-minor-optional` — genuine but MINOR; fixing is operator discretion.
+   - `rejected-false-positive` — not a defect on re-read (evidence required).
+
+Two hard rules: the judge may **not resurrect** a refuter-rejected finding
+(rejected findings are context only), and a **dead judge fails safe** — if the
+judge agent returns nothing while confirmed findings exist, every confirmed
+finding is treated as `real-fix-now` (a judge failure must never silently drop a
+defect).
+
+---
+
 ## Isolation discipline (load-bearing)
 
 Reviewers run as the read-only **`Explore`** agent type — its toolkit excludes
@@ -90,13 +123,16 @@ v1.49.963).
 
 ## Disposition of findings
 
-- **Confirmed REAL → fix in code, not in prose.** A confirmed finding is fixed by
+- **`real-fix-now` → fix in code, not in prose.** A fix-now finding is fixed by
   changing the code/test/doc, never by re-wording the release notes to "explain it
   away". (v966: the fragile regex was widened to `exit\s+`, not documented around.)
-- **Refuted → record why.** A rejected finding is noted with the evidence that
-  refuted it, so the same false positive isn't re-raised next ship.
+- **`real-minor-optional` → operator judgment.** Genuine but MINOR; fix it, defer
+  it to the next ship, or decline with a reason in the retrospective.
+- **Refuted / judge-rejected → record why.** A rejected finding is noted with the
+  evidence that refuted it, so the same false positive isn't re-raised next ship
+  (judge rejections that restate a standing exception are the canonical case).
 - After fixes, **re-run pre-tag-gate and the touched tests**; the ship's
-  verification section should state the review's confirmed/rejected counts.
+  verification section should state the review's fix-now/optional/rejected counts.
 
 ---
 
@@ -125,13 +161,17 @@ Workflow({
   args: {
     base: 'HEAD~1',                       // or the ship's first code commit
     intent: '<one paragraph: what this ship is supposed to do>',
-    // dimensions: ['correctness','guard-soundness']   // optional subset
+    // dimensions: ['correctness','guard-soundness'],  // optional subset
+    // exceptions: ['<ship-specific known-correct steady state>'],  // appended to STANDING_EXCEPTIONS
   }
 })
 ```
 
-The workflow returns `{ confirmedCount, bySeverity, confirmed[], rejected[] }`. Fix
-each `confirmed` finding in code, then proceed with push → CI → pre-tag-gate.
+The workflow returns
+`{ fixNow[], optional[], judgeRejected[], judgeSummary, confirmedCount, bySeverity, confirmed[], rejected[] }`.
+Fix each `fixNow` finding in code (then write the attestation — see Promotion below),
+then proceed with push → CI → pre-tag-gate. `confirmed[]`/`rejected[]` are the raw
+refuter-stage outputs (v1-compatible surfaces).
 
 ---
 
@@ -142,8 +182,13 @@ gate-enforcement rung was promoted at v1.49.1029 after meeting the K=30 evidence
 (one full `SC_ADOPTION_BASELINE_MAX_DRIFT` window of consecutive reviewed ships).
 
 **Evidence for promotion:**
-- **51 distinct release versions** since v968 have the adversarial review documented in
-  their release notes (across ~116 ships in range; NASA ships run the content-review variant).
+- **55 distinct release versions** (all-time) have the adversarial review documented in
+  their committed release notes — 20 within v968+ (v968–v985 consecutively + v1027/v1028)
+  plus the pre-codification founding era (v965/v966 + the F4 campaign). The v986–v1026
+  NASA band ran the 4-auditor content-review variant recorded in untracked mission
+  artifacts, so the committed-notes proxy under-counts true participation (it can only
+  DEFER readiness, never advance it). Measured by
+  `tools/gate/warn-promotion-readiness.mjs --step ship-review`.
 - **Caught-defect ledger** kept growing: v965 (3 BLOCKERs: cross-line false-FRESH,
   exit-22 collision, missing T14 step), v966 (1 MAJOR: whitespace-fragile regex),
   v982, 11/35 F4 ships, v1027 (1 BLOCKER + 1 MAJOR), v1028 (1 MAJOR).
