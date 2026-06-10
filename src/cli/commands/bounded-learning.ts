@@ -21,6 +21,9 @@
  *   - `suggestions.cooldown_days`           (v1.49.796)
  *   - `suggestions.auto_dismiss_after_days` (v1.49.797)
  *   - `token_budget.warn_at_percent`        (v1.49.798)
+ *   - `predictive.low_confidence_threshold` (v1.49.837)
+ *   - `token_budget.max_percent`            (v1.49.888)
+ *   - `observation.retention_days`          (v1.49.944)
  *   - `amiga.min_sequence_count`            (v1.49.1027)
  *
  * Every invocation appends a single JSON line to

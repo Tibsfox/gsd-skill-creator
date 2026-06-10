@@ -178,6 +178,9 @@ describe('readIntegrationConfig', () => {
           cooldown_days: 14,
           auto_dismiss_after_days: 60,
         },
+        amiga: {
+          min_sequence_count: 4,
+        },
         terminal: {
           port: 9090,
           base_path: '/term',

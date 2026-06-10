@@ -400,6 +400,9 @@ describe('Full config roundtrip', () => {
         cooldown_days: 14,
         auto_dismiss_after_days: 60,
       },
+      amiga: {
+        min_sequence_count: 4,
+      },
       terminal: {
         port: 4000,
         base_path: '/shell',
@@ -541,6 +544,9 @@ describe('Full config roundtrip with terminal', () => {
         min_occurrences: 5,
         cooldown_days: 14,
         auto_dismiss_after_days: 60,
+      },
+      amiga: {
+        min_sequence_count: 4,
       },
       terminal: {
         port: 9090,
