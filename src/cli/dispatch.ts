@@ -280,6 +280,10 @@ export const REGISTRY: readonly CommandEntry[] = [
     const { amigaCommand } = await import('./commands/amiga.js');
     return amigaCommand(ctx.args.slice(1));
   } },
+  { aliases: ['activations', 'act'], handler: async (ctx) => {
+    const { activationsCommand } = await import('./commands/activations.js');
+    return activationsCommand(ctx.args.slice(1));
+  } },
   { aliases: ['graph', 'gr'], handler: async (ctx) => {
     const { graphCommand } = await import('./commands/graph.js');
     return graphCommand(ctx.args.slice(1));

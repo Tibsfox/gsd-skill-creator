@@ -63,6 +63,7 @@ Quick reference for all commands organized by workflow stage.
 |---------|-------|-------------|
 | [discover](#discover) | `disc` | Scan session logs, extract patterns, rank candidates, generate draft skills |
 | [amiga](#amiga) | `am` | Mine candidates via the AMIGA meta-mission detector + CE-1 attribution (`--corpus`, `--emit`) |
+| [activations](#activations) | `act` | Mine per-skill activation counts from the session corpus; optionally write into `.skill-index.json` (`--write`) |
 
 ### Teams: Multi-Agent Coordination
 
@@ -2245,6 +2246,72 @@ skill-creator amiga ~/.claude/projects/<slug>/<id>.jsonl --json
 
 ---
 
+## activations
+
+Mine per-skill activation counts from the real Claude Code session corpus and optionally write them into `.skill-index.json`. Uses the same `TranscriptParser.extractActiveSkills()` miner as co-activation tracking (Skill tool_use blocks + `<command-name>` tags, 15-builtin denylist). Aggregates at session granularity: `count` = number of sessions in which a skill appeared (not occurrence count within a session).
+
+**Aliases:** `act`
+
+**Usage:**
+
+```bash
+skill-creator activations [options]
+```
+
+**Options:**
+
+| Option | Description |
+|--------|-------------|
+| `--corpus-dir <dir>` | Transcript source dir (default: the cwd's `~/.claude/projects/<slug>` folder) |
+| `--skills-dir <dir>` | Skills dir used when `--write` is active (default `.claude/skills`) |
+| `--json` | Machine-readable output |
+| `--write` | Record counts into `.skill-index.json` via `SkillIndex.recordActivations()`. Dry-run by default (nothing written without this flag) |
+| `--help, -h` | Show usage |
+
+**Description:**
+
+Scans every `.jsonl` transcript in the corpus dir. For each session, `TranscriptParser.extractActiveSkills()` extracts skills from two signal sources:
+
+1. **Skill tool_use blocks** — `{ type: 'tool_use', name: 'Skill', input: { skill: '<name>' } }` inside assistant `message.content[]`.
+2. **`<command-name>` tags** — slash-command activations in user message string content, with leading `/` stripped and the 15-builtin denylist applied.
+
+The per-skill `count` is the number of **sessions** in which it appeared (not total occurrences). `lastActivation` is the ISO-8601 timestamp of the newest such session (derived from the transcript file mtime).
+
+With `--write`, `SkillIndex.recordActivations()` is called with SET semantics — each re-run overwrites with the freshly-computed counts, so re-runs are idempotent. Only names that exist in the index (have a `SKILL.md`) are recorded; mined names not present in the index are reported as "unknown" but never silently dropped.
+
+**Examples:**
+
+```bash
+# Report mined counts (dry-run — nothing written)
+skill-creator activations
+
+# Machine-readable dry-run
+skill-creator activations --json
+
+# Write counts into .skill-index.json
+skill-creator activations --write
+
+# Target a specific corpus dir and skills dir
+skill-creator activations --write \
+  --corpus-dir ~/.claude/projects/-my-project \
+  --skills-dir /path/to/.claude/skills
+```
+
+**Exit Codes:**
+
+| Code | Meaning |
+|------|---------|
+| 0 | Success (even when 0 activations found) |
+| 1 | Error |
+
+**Notes:**
+
+- Dry-run by default — only `--write` modifies `.skill-index.json`.
+- Activation fields (`activationCount`, `lastActivation`) on index entries are OPTIONAL — absent means never-measured, not zero.
+- Re-running `--write` after adding new sessions produces updated counts (SET semantics, not cumulative).
+
+---
+
 ## Integration: Config Management
 
 Commands for inspecting and maintaining the skill-creator integration config at `.planning/skill-creator.json` — the file that controls feature toggles, token budget, observation retention, and suggestion thresholds. A missing file means all defaults are used; a partial file is merged with defaults, so you only specify the values you override.
@@ -2442,6 +2509,7 @@ Commands return exit codes for CI/scripting integration:
 | team spawn | All member agents resolved | One or more agents missing |
 | discover | Pipeline completes, drafts written | Error during scan/extract/rank |
 | amiga | Seam proven (candidate detected AND CE-1 attribution captured) | No transcripts / nothing analyzable / no attribution / error |
+| activations | Success (even when 0 activations found) | Error |
 | integration | Config valid / shown / nothing to migrate / migration applied | Validation errors, unparseable JSON, or a refused/failed migrate |
 | (all others) | Success | Error occurred |
 
@@ -2482,6 +2550,7 @@ Commands supporting `--json` output for scripting:
 | integration show | `--json` | Effective config object |
 | integration migrate | `--json` | `{ path, action, applied, reason, backup? }` |
 | amiga | `--json` | single: `{ mode, transcript, sessionId, toolUses, topTools, missionId, structuralCandidates, workflowCandidates, candidates[], attribution, emit?, seamProven }`; corpus: `{ mode, projectsDir, sessionsAnalyzed, sessionsSkipped, totalToolUses, totalCaptured, totalErrors, candidates[], meanWeights[], emit?, seamProven }` |
+| activations | `--json` | `{ sessionsScanned, sessionsWithActivations, skills: [{ name, count, lastActivation }], unknown: string[] }` — with `--write` additionally includes `recorded` (count) and `unknownCount` |
 
 ### JSON Schema: detect-conflicts
 
@@ -2524,6 +2593,44 @@ Commands supporting `--json` output for scripting:
   ]
 }
 ```
+
+### JSON Schema: activations
+
+```json
+{
+  "sessionsScanned": 194,
+  "sessionsWithActivations": 14,
+  "skills": [
+    {
+      "name": "gsd-workflow",
+      "count": 12,
+      "lastActivation": "2026-06-09T14:32:00.000Z"
+    },
+    {
+      "name": "security-hygiene",
+      "count": 5,
+      "lastActivation": "2026-05-28T10:00:00.000Z"
+    }
+  ],
+  "unknown": ["some-external-skill-without-skill-md"]
+}
+```
+
+With `--write` the object additionally includes:
+- `recorded`: number of skill names written to the index (had a matching SKILL.md)
+- `unknownCount`: number of mined names not present in the index
+
+**Field descriptions:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `sessionsScanned` | number | Total transcript files processed |
+| `sessionsWithActivations` | number | Sessions that contained at least one skill activation |
+| `skills` | array | Sorted by `count` descending |
+| `skills[].name` | string | Skill name (as extracted from the transcript) |
+| `skills[].count` | number | Number of **sessions** in which the skill appeared |
+| `skills[].lastActivation` | string \| null | ISO-8601 timestamp of the newest session with this skill (derived from transcript file mtime) |
+| `unknown` | string[] | Mined skill names with no matching entry in `.skill-index.json` (dry-run: always `[]`; only populated with `--write`) |
 
 ### Example CI Pipeline
 

@@ -54,6 +54,10 @@ export interface SkillIndexEntry {
   };
   path: string;
   mtime: number;  // File modification time for cache invalidation
+  // Activation counters — populated by `skill-creator activations --write`.
+  // Absent means never-measured (not the same as zero).
+  activationCount?: number;
+  lastActivation?: string | null;
 }
 
 export interface SkillIndexData {
@@ -144,6 +148,17 @@ export class SkillIndex {
 
   // Full rebuild of index from skill files
   async rebuild(): Promise<void> {
+    // Capture activation counters before clearing so they survive the rebuild.
+    const prior = new Map<string, { activationCount?: number; lastActivation?: string | null }>();
+    for (const [name, entry] of this.entries) {
+      if (entry.activationCount !== undefined || entry.lastActivation !== undefined) {
+        prior.set(name, {
+          activationCount: entry.activationCount,
+          lastActivation: entry.lastActivation,
+        });
+      }
+    }
+
     this.entries.clear();
 
     const skillNames = await this.skillStore.list();
@@ -155,6 +170,12 @@ export class SkillIndex {
         const stats = await stat(skillPath);
 
         const entry = this.buildEntry(skill, skillPath, stats.mtimeMs);
+        // Carry over activation counters from the prior map if present.
+        const saved = prior.get(skillName);
+        if (saved !== undefined) {
+          if (saved.activationCount !== undefined) entry.activationCount = saved.activationCount;
+          if (saved.lastActivation !== undefined) entry.lastActivation = saved.lastActivation;
+        }
         this.entries.set(skillName, entry);
       } catch (err) {
         // Skip skills that fail to parse
@@ -193,6 +214,9 @@ export class SkillIndex {
           const stats = await stat(entry.path);
 
           const updatedEntry = this.buildEntry(skill, entry.path, stats.mtimeMs);
+          // Carry over activation counters from the stale entry.
+          if (entry.activationCount !== undefined) updatedEntry.activationCount = entry.activationCount;
+          if (entry.lastActivation !== undefined) updatedEntry.lastActivation = entry.lastActivation;
           this.entries.set(skillName, updatedEntry);
         } catch {
           // Skill was deleted, remove from index
@@ -238,6 +262,42 @@ export class SkillIndex {
       entry.name.toLowerCase().includes(lowerQuery) ||
       entry.description.toLowerCase().includes(lowerQuery)
     );
+  }
+
+  /**
+   * Record corpus-mined activation counts onto existing index entries (SET
+   * semantics — the miner recomputes absolute counts from the full corpus each
+   * run, so re-runs are idempotent). Loads the index if it hasn't been loaded
+   * yet. Only sets fields on entries that exist in the index; names not present
+   * are collected and returned as `unknown` so the caller can report them — no
+   * silent drops. Saves once at the end.
+   *
+   * @param counts  Map from skill name to { count, lastActivation }.
+   * @returns       { recorded: string[], unknown: string[] }
+   */
+  async recordActivations(
+    counts: Map<string, { count: number; lastActivation: string | null }>,
+  ): Promise<{ recorded: string[]; unknown: string[] }> {
+    if (!this.loaded) {
+      await this.load();
+    }
+
+    const recorded: string[] = [];
+    const unknown: string[] = [];
+
+    for (const [name, { count, lastActivation }] of counts) {
+      const entry = this.entries.get(name);
+      if (entry === undefined) {
+        unknown.push(name);
+        continue;
+      }
+      entry.activationCount = count;
+      entry.lastActivation = lastActivation;
+      recorded.push(name);
+    }
+
+    await this.save();
+    return { recorded, unknown };
   }
 
   // Find skills matching trigger patterns
