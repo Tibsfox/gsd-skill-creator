@@ -43,11 +43,11 @@
   {
     "name": "SC_PRE_TAG_GATE_REQUIRE",
     "default_behavior": "unset → WARN-only steps remain informational",
-    "override_behavior": "`=<csv>` → escalate WARN-only steps to BLOCKER (apply-to-self, citation-debt-sync, story-drift, adoption-freshness, trip-vocab currently WARN-only)"
+    "override_behavior": "`=<csv>` → escalate WARN-only steps to BLOCKER (remaining WARN-only steps as of v1.49.1029: apply-to-self, citation-debt-sync, story-drift, sps-cohort-uniqueness; adoption-freshness and trip-vocab promoted to default-BLOCK in v1.49.1029)"
   },
   {
     "name": "SC_ADOPTION_BASELINE_MAX_DRIFT",
-    "default_behavior": "unset → pre-tag-gate step 20 (adoption-freshness, v1.49.965 Ship 0.1) tolerates the newest `docs/ADOPTION-BASELINE-v*.json` trailing the shipping version by up to 30 ships before it WARNs (forward-progress mode, not exact-match — avoids churning a fresh baseline every ship)",
+    "default_behavior": "unset → pre-tag-gate step 20 (adoption-freshness, v1.49.965 Ship 0.1) tolerates the newest `docs/ADOPTION-BASELINE-v*.json` trailing the shipping version by up to 30 ships before it BLOCKs (exit 23, default-BLOCK as of v1.49.1029; forward-progress mode, not exact-match — avoids churning a fresh baseline every ship)",
     "override_behavior": "`=<N>` → set a custom ship-drift tolerance (e.g. `=10` strict, `=50` lenient). Refresh the baseline with `node tools/adoption-refresh.mjs` (AFTER bump-version, #10424). Consumed by `tools/adoption-baseline-freshness.mjs`"
   },
   {

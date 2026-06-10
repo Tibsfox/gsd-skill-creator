@@ -165,9 +165,9 @@
 #   18  nasa-canonical-sidebar drift (BLOCKER as of 2026-05-24)
 #   19  project-md: default-BLOCK when latest-shipped patch-drift > SC_PROJECT_MD_MAX_PATCH_DRIFT; also BLOCKs under require flag
 #   20  stale-known-unwired entries present (BLOCKER)
-#   23  adoption-freshness escalation (BLOCKER only when require flag set; default WARN-only — v1.49.965 Ship 0.1)
+#   23  adoption-freshness: stale ADOPTION-BASELINE (BLOCKER as of v1.49.1029, was WARN-only)
 #   24  state-backups: lingering .planning/ backup file(s) (BLOCKER as of v1.49.961 cc#28; code was 21, reassigned 21→24 at v1.49.966 to resolve a collision with tools-suite)
-#   25  trip-vocab budget escalation (BLOCKER only when require flag set; default WARN-only — v1.49.983 Ship 5.3 GAP-7)
+#   25  trip-vocab: TRIP-RISK verdict on current NASA page (BLOCKER as of v1.49.1029, was WARN-only)
 #
 # Step overrides (v1.49.653 consolidation; CONCERNS §26):
 #   SC_PRE_TAG_GATE_BYPASS=<csv>   skip these steps entirely
@@ -1017,12 +1017,16 @@ fi
 # by tools/adoption-refresh.mjs) silently FROZE at v1.49.801 for ~163 ships because
 # nothing gated its freshness — the #10461 un-gated-runnable-surface class: the alarm
 # the project built to answer the 2026-05-26 audit's #1 concern went quiet unnoticed.
-# This step re-arms it: WARN when the newest committed baseline trails the shipping
-# version by more than SC_ADOPTION_BASELINE_MAX_DRIFT ships (default 30, FORWARD-
-# PROGRESS mode — NOT exact-match, so a fresh baseline is not forced on every ship).
-# WARN-only by default (#10463 staged promotion); escalate to BLOCKER via
-# SC_PRE_TAG_GATE_REQUIRE=adoption-freshness. Fix: node tools/adoption-refresh.mjs
-# (run AFTER bump-version, #10424). Bypass: SC_PRE_TAG_GATE_BYPASS=adoption-freshness.
+# This step re-arms it: BLOCK (exit 23) when the tool exits 1 (STALE verdict) and the
+# newest committed baseline trails the shipping version by more than
+# SC_ADOPTION_BASELINE_MAX_DRIFT ships (default 30, FORWARD-PROGRESS mode — NOT
+# exact-match, so a fresh baseline is not forced on every ship). Tool exit 2
+# (indeterminate/malfunction) stays WARN-only — a broken tool is not a staleness
+# verdict (same mislabeling guard step 21 carries for its exit-2 path).
+# Fix: node tools/adoption-refresh.mjs (run AFTER bump-version, #10424).
+# Bypass: SC_PRE_TAG_GATE_BYPASS=adoption-freshness.
+#
+# PROMOTION-MARKER: adoption-freshness default-BLOCK since v1.49.1029 (K=30; evidence: 64 consecutive baselines v965-v1028; reporter: tools/gate/warn-promotion-readiness.mjs)
 if gate_bypassed "adoption-freshness"; then
   log "[pre-tag-gate] step 20/21: SKIPPED (adoption-freshness)"
 else
@@ -1031,15 +1035,20 @@ else
   # `OUTPUT="$(...)"` aborts on the tool's exit-1 BEFORE the WARN/FAIL handling — see
   # the matching note on steps 18/19).
   AF_OUTPUT="$(node "$REPO_ROOT/tools/adoption-baseline-freshness.mjs" 2>&1)" && AF_EXIT=0 || AF_EXIT=$?
-  if [ "$AF_EXIT" -ne 0 ]; then
-    echo "[pre-tag-gate] WARN: adoption baseline is stale" >&2
+  if [ "$AF_EXIT" -eq 1 ]; then
+    # exit 1 = STALE verdict — the baseline is genuinely stale. BLOCK by default.
+    echo "[pre-tag-gate] FAIL: adoption baseline is stale (default-BLOCK as of v1.49.1029)" >&2
     echo "$AF_OUTPUT" | head -10 >&2
     echo "[pre-tag-gate]   Fix: node tools/adoption-refresh.mjs (AFTER bump-version)" >&2
-    if gate_required "adoption-freshness"; then
-      echo "[pre-tag-gate] FAIL: adoption-freshness escalated to BLOCKER (SC_PRE_TAG_GATE_REQUIRE)" >&2
-      exit 23
-    fi
-    log "[pre-tag-gate] step 20/21: WARN (informational; set SC_PRE_TAG_GATE_REQUIRE=adoption-freshness to block)"
+    echo "[pre-tag-gate]   Bypass: SC_PRE_TAG_GATE_BYPASS=adoption-freshness (emergency only)" >&2
+    exit 23
+  elif [ "$AF_EXIT" -ne 0 ]; then
+    # exit 2+ = tool malfunction (indeterminate) — NOT a staleness verdict.
+    # Surface it distinctly and do NOT block (escalating would mislabel a broken
+    # tool as a staleness verdict).
+    echo "[pre-tag-gate] WARN: adoption-freshness tool could not run (exit $AF_EXIT; not a staleness verdict)" >&2
+    echo "$AF_OUTPUT" | head -10 >&2
+    log "[pre-tag-gate] step 20/21: WARN (adoption-freshness tool error — not a staleness verdict)"
   else
     log "[pre-tag-gate] step 20/21: PASS"
   fi
@@ -1055,9 +1064,13 @@ fi
 # checkout has no page to scan and the step SKIPs cleanly (same as depth-audit's
 # STATE.md-absent path). Page mode is a POST-HOC proxy — the real pre-dispatch
 # surface is `node tools/trip-vocab-check.mjs <brief> --mode brief|prompt`, run
-# by hand before a build sub-agent dispatch. WARN-only by default (#10463 staged
-# promotion); escalate to BLOCKER via SC_PRE_TAG_GATE_REQUIRE=trip-vocab. Bypass:
-# SC_PRE_TAG_GATE_BYPASS=trip-vocab.
+# by hand before a build sub-agent dispatch. Tool exit 1 (TRIP-RISK verdict)
+# BLOCKs by default (exit 25); tool exit 2 (tool error/malfunction) stays WARN
+# (a broken tool is not a content-filter verdict — mislabeling guard).
+# Clean-CI SKIP path (no page on disk) unchanged.
+# Bypass: SC_PRE_TAG_GATE_BYPASS=trip-vocab.
+#
+# PROMOTION-MARKER: trip-vocab default-BLOCK since v1.49.1029 (K=30; evidence: degrees 1.161-1.217 all clean under the v983 regime; reporter: tools/gate/warn-promotion-readiness.mjs)
 if gate_bypassed "trip-vocab"; then
   log "[pre-tag-gate] step 21/21: SKIPPED (trip-vocab)"
 else
@@ -1068,22 +1081,19 @@ else
   else
     log "[pre-tag-gate] step 21/21: trip-vocab budget (NASA degree $TV_DEGREE, --mode page)"
     # `&& X=0 || X=$?` preserves the real exit code under `set -euo pipefail`
-    # (a bare assignment aborts on the tool's exit-1 before the WARN handling).
+    # (a bare assignment aborts on the tool's exit-1 before the FAIL handling).
     TV_OUTPUT="$(node "$REPO_ROOT/tools/trip-vocab-check.mjs" "$TV_PAGE" --mode page 2>&1)" && TV_EXIT=0 || TV_EXIT=$?
     if [ "$TV_EXIT" -eq 1 ]; then
-      # exit 1 = TRIP-RISK (a content verdict): budget exceeded on the page.
-      echo "[pre-tag-gate] WARN: trip-vocab budget exceeded on the current NASA page (degree $TV_DEGREE)" >&2
+      # exit 1 = TRIP-RISK (a content verdict): budget exceeded on the page. BLOCK by default.
+      echo "[pre-tag-gate] FAIL: trip-vocab budget exceeded on the current NASA page (degree $TV_DEGREE, default-BLOCK as of v1.49.1029)" >&2
       echo "$TV_OUTPUT" | head -10 >&2
       echo "[pre-tag-gate]   Pre-dispatch: node tools/trip-vocab-check.mjs <brief> --mode brief (docs/MISSION-PACKAGE-DISCIPLINE.md §3)" >&2
-      if gate_required "trip-vocab"; then
-        echo "[pre-tag-gate] FAIL: trip-vocab escalated to BLOCKER (SC_PRE_TAG_GATE_REQUIRE)" >&2
-        exit 25
-      fi
-      log "[pre-tag-gate] step 21/21: WARN (informational; set SC_PRE_TAG_GATE_REQUIRE=trip-vocab to block)"
+      echo "[pre-tag-gate]   Bypass: SC_PRE_TAG_GATE_BYPASS=trip-vocab (emergency only)" >&2
+      exit 25
     elif [ "$TV_EXIT" -ne 0 ]; then
       # exit 2 = tool FATAL (unreadable page / usage error) — a TOOL MALFUNCTION,
-      # NOT a content-filter verdict. Surface it distinctly and do NOT escalate the
-      # require flag (escalating would mislabel a broken tool as a content trip).
+      # NOT a content-filter verdict. Surface it distinctly and do NOT block
+      # (escalating would mislabel a broken tool as a content trip).
       echo "[pre-tag-gate] WARN: trip-vocab check could not run (tool exit $TV_EXIT; not a content verdict)" >&2
       echo "$TV_OUTPUT" | head -10 >&2
       log "[pre-tag-gate] step 21/21: WARN (trip-vocab tool error — not a budget verdict)"

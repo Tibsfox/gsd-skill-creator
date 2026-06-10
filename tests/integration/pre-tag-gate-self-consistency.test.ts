@@ -164,15 +164,30 @@ describe('pre-tag-gate self-consistency (Ship 0.2)', () => {
     });
 
     it('POSITIVE CONTROL — the genuinely WARN-only steps still say "default WARN-only"', () => {
-      // 10 apply-to-self · 13 citation-debt-sync · 14 story-drift · 16 sps-cohort ·
-      // 23 adoption-freshness — all block ONLY under the require flag (verified against
-      // the gate_required guards in the step bodies). If one gains a ceiling-BLOCK path,
-      // this fails until both code and legend are updated.
-      for (const code of [10, 13, 14, 16, 23]) {
+      // 10 apply-to-self · 13 citation-debt-sync · 14 story-drift · 16 sps-cohort-uniqueness —
+      // all block ONLY under the require flag (verified against the gate_required guards in
+      // the step bodies). 23 adoption-freshness and 25 trip-vocab were WARN-only until
+      // v1.49.1029 when they were promoted to default-BLOCK. If one gains a ceiling-BLOCK
+      // path, this fails until both code and legend are updated.
+      for (const code of [10, 13, 14, 16]) {
         const desc = legendByCode.get(code);
         expect(desc, `legend entry for exit ${code}`).toBeDefined();
         expect(desc!, `exit ${code} should remain default WARN-only`).toMatch(/default WARN-only/i);
       }
+    });
+
+    it('exit 23 (adoption-freshness) is documented as default-BLOCK, NOT "default WARN-only"', () => {
+      const desc = legendByCode.get(23);
+      expect(desc).toBeDefined();
+      expect(desc!).not.toMatch(/default WARN-only/i);
+      expect(desc!).toMatch(/BLOCKER as of v1\.49\.1029/);
+    });
+
+    it('exit 25 (trip-vocab) is documented as default-BLOCK, NOT "default WARN-only"', () => {
+      const desc = legendByCode.get(25);
+      expect(desc).toBeDefined();
+      expect(desc!).not.toMatch(/default WARN-only/i);
+      expect(desc!).toMatch(/BLOCKER as of v1\.49\.1029/);
     });
   });
 
