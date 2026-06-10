@@ -1,13 +1,14 @@
 # Release History
 
-1069 milestones shipped across the v1.0 → v1.49.1026 arc. The table below lists every shipped release, newest first.
+1070 milestones shipped across the v1.0 → v1.49.1027 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
-**Snapshot:** 1069 releases · 1068 with retrospectives · 802 with extracted lessons · quality A:701 B:98 C:62 D:12 F:196 (avg 83) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 1070 releases · 1069 with retrospectives · 803 with extracted lessons · quality A:701 B:98 C:62 D:12 F:197 (avg 83) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.1027](release-notes/v1.49.1027) | Loop-Outcome Ship: First Evidence-Driven Calibration Tick, Dismissal-Feedback Actuation, Co-Activation Widening | 2026-06-10 | 10 | — | — | [s](release-notes/v1.49.1027/chapter/00-summary.md) [r](release-notes/v1.49.1027/chapter/03-retrospective.md) [l](release-notes/v1.49.1027/chapter/04-lessons.md) [c](release-notes/v1.49.1027/chapter/99-context.md) | 1 | F 28 |  |
 | [v1.49.1026](release-notes/v1.49.1026) | Gravity Probe B NASA General-Relativity Test, Cryogenic Gyroscope Precision, and Frame-Dragging Measurement Mission | 2026-06-10 | 3 | 6 | — | [s](release-notes/v1.49.1026/chapter/00-summary.md) [r](release-notes/v1.49.1026/chapter/03-retrospective.md) [l](release-notes/v1.49.1026/chapter/04-lessons.md) [c](release-notes/v1.49.1026/chapter/99-context.md) | 11 | A 99 |  |
 | [v1.49.1025](release-notes/v1.49.1025) | WMAP NASA Wilkinson Microwave Anisotropy Probe High-Resolution CMB Mapping and Precision Cosmology Mission | 2026-06-10 | 3 | 6 | — | [s](release-notes/v1.49.1025/chapter/00-summary.md) [r](release-notes/v1.49.1025/chapter/03-retrospective.md) [l](release-notes/v1.49.1025/chapter/04-lessons.md) [c](release-notes/v1.49.1025/chapter/99-context.md) | 11 | A 99 |  |
 | [v1.49.1024](release-notes/v1.49.1024) | COBE NASA Cosmic Background Explorer Microwave-Background Blackbody and Anisotropy Cosmology Mission | 2026-06-09 | 3 | 6 | — | [s](release-notes/v1.49.1024/chapter/00-summary.md) [r](release-notes/v1.49.1024/chapter/03-retrospective.md) [l](release-notes/v1.49.1024/chapter/04-lessons.md) [c](release-notes/v1.49.1024/chapter/99-context.md) | 11 | A 99 |  |
