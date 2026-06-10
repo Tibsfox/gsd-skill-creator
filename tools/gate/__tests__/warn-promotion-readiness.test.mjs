@@ -21,6 +21,7 @@ import {
   detectPromotionState,
   computeTripVocabTail,
   computeShipReviewCount,
+  SHIP_REVIEW_PATTERN,
 } from '../warn-promotion-readiness.mjs';
 
 const TOOL_PATH = resolve(
@@ -323,16 +324,28 @@ describe('computeTripVocabTail', () => {
 // ─── computeShipReviewCount ──────────────────────────────────────────────────
 
 describe('computeShipReviewCount', () => {
-  it('counts only dirs with N >= 968 that are matched', () => {
+  it('counts ALL matched v1.49.N dirs (no version floor — pre-968 founding evidence counts)', () => {
     const records = [
-      { name: 'v1.49.967', matched: true },  // below threshold — excluded
-      { name: 'v1.49.968', matched: true },  // included
+      { name: 'v1.49.965', matched: true },  // pre-codification founding evidence — counted
+      { name: 'v1.49.968', matched: true },  // counted
       { name: 'v1.49.969', matched: false }, // not matched — excluded
-      { name: 'v1.49.970', matched: true },  // included
+      { name: 'v1.49.970', matched: true },  // counted
     ];
     const r = computeShipReviewCount(records);
-    expect(r.count).toBe(2);
-    expect(r.dirNames).toEqual(['v1.49.968', 'v1.49.970']);
+    expect(r.count).toBe(3);
+    expect(r.dirNames).toEqual(['v1.49.965', 'v1.49.968', 'v1.49.970']);
+  });
+
+  it('reports the >= 968 sub-count separately (transparency, not a floor)', () => {
+    const records = [
+      { name: 'v1.49.965', matched: true },
+      { name: 'v1.49.967', matched: true },
+      { name: 'v1.49.968', matched: true },
+      { name: 'v1.49.1028', matched: true },
+    ];
+    const r = computeShipReviewCount(records);
+    expect(r.count).toBe(4);
+    expect(r.inRange968).toBe(2);
   });
 
   it('empty records → count=0', () => {
@@ -349,23 +362,32 @@ describe('computeShipReviewCount', () => {
     expect(r.count).toBe(1);
   });
 
-  it('all 51 dirs count when N >= 968 and matched', () => {
-    const records = Array.from({ length: 51 }, (_, i) => ({
-      name: `v1.49.${968 + i}`,
+  it('a 55-dir matched corpus counts 55 (the live 2026-06-10 evidence shape)', () => {
+    const records = Array.from({ length: 55 }, (_, i) => ({
+      name: `v1.49.${965 + i}`,
       matched: true,
     }));
     const r = computeShipReviewCount(records);
-    expect(r.count).toBe(51);
+    expect(r.count).toBe(55);
+  });
+});
+
+// ─── SHIP_REVIEW_PATTERN — regression pins for the "step passes" inflation bug ─
+
+describe('SHIP_REVIEW_PATTERN', () => {
+  it('does NOT match "step passes" (the /i + no-boundary inflation caught live 2026-06-10)', () => {
+    expect(SHIP_REVIEW_PATTERN.test('every gate step passes')).toBe(false);
+    expect(SHIP_REVIEW_PATTERN.test('this step performs a check')).toBe(false);
+    expect(SHIP_REVIEW_PATTERN.test('step plan was approved')).toBe(false);
   });
 
-  it('threshold boundary: N=967 excluded, N=968 included', () => {
-    const records = [
-      { name: 'v1.49.967', matched: true },
-      { name: 'v1.49.968', matched: true },
-    ];
-    const r = computeShipReviewCount(records);
-    expect(r.count).toBe(1);
-    expect(r.dirNames).toEqual(['v1.49.968']);
+  it('matches the real step-P / adversarial-review vocabulary, any case', () => {
+    expect(SHIP_REVIEW_PATTERN.test('T14 step P ran on the diff')).toBe(true);
+    expect(SHIP_REVIEW_PATTERN.test('Step P adversarial review')).toBe(true);
+    expect(SHIP_REVIEW_PATTERN.test('the adversarial-ship-review workflow')).toBe(true);
+    expect(SHIP_REVIEW_PATTERN.test('Adversarial ship review (5 lenses)')).toBe(true);
+    expect(SHIP_REVIEW_PATTERN.test('an adversarial review caught it')).toBe(true);
+    expect(SHIP_REVIEW_PATTERN.test('ends with step P.')).toBe(true);
   });
 });
 
@@ -519,18 +541,23 @@ describe('CLI — ship-review step', () => {
     }
   });
 
-  it('dirs below v1.49.968 are not counted', () => {
+  it('dirs below v1.49.968 COUNT toward the streak (all-time model); inRange968 discloses the split', () => {
     const dir = mkdtempSync(join(tmpdir(), 'wpr-sr-'));
     try {
-      // 29 valid dirs + 10 that are below the threshold
+      // 29 in-range dirs + 10 pre-codification dirs: under the all-time model the
+      // founding evidence (v965/v966 + F4-era) is real participation, so the
+      // streak is 39 (READY at n=30) with inRange968=29 reported alongside.
       const names = [
         ...Array.from({ length: 29 }, (_, i) => `v1.49.${968 + i}`),
         ...Array.from({ length: 10 }, (_, i) => `v1.49.${958 + i}`),
       ];
       const f = tmpJson(dir, 'dirs.json', names);
       const { status, stdout } = runCli({ step: 'ship-review', n: 30, json: true, notesDirsFile: f });
-      expect(status).toBe(1);
-      expect(JSON.parse(stdout)[0].streak).toBe(29);
+      expect(status).toBe(0);
+      const r = JSON.parse(stdout)[0];
+      expect(r.streak).toBe(39);
+      expect(r.ready).toBe(true);
+      expect(r.details.inRange968).toBe(29);
     } finally {
       rmSync(dir, { recursive: true, force: true });
     }

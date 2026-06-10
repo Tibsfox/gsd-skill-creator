@@ -225,31 +225,48 @@ export function computeTripVocabTail(sweepRecords) {
 
 // ─── ship-review evidence model (pure computation over injected dirs+content) ──
 
-const SHIP_REVIEW_PATTERN =
-  /step P|adversarial[ -]?ship[ -]?review|adversarial review/i;
+// `step P` carries a TRAILING WORD BOUNDARY: without it the /i flag makes the
+// literal match the prefix of "step passes" — a phrase ~39 NASA release-note
+// dirs contain — silently inflating the count (caught live at first wiring,
+// 2026-06-10: 59 loose vs 55 corrected; the "first real parse of an unobserved
+// surface is itself an audit" class, 2nd observation).
+export const SHIP_REVIEW_PATTERN =
+  /step P\b|adversarial[ -]?ship[ -]?review|adversarial review/i;
 
 /**
- * Count distinct release-note dirs (v1.49.N where N >= 968) whose files match
- * the ship-review pattern.
+ * Count distinct release-note dirs (any v1.49.N) whose files match the
+ * ship-review pattern.
+ *
+ * MODEL (a participation PROXY, disclosed per #10421 no-silent-caps): the count
+ * is ALL-TIME, not floored at the v968 codification, because the mechanism's
+ * founding evidence (v965/v966 BLOCKER catches + the F4-campaign reviews in
+ * ~35 pre-968 dirs) predates its codification — the canonical doc's own
+ * evidence table starts at v965. The >= 968 sub-count is ALSO returned for
+ * transparency. KNOWN UNDER-COUNT: the NASA band (v986–v1026) ran the
+ * 4-auditor CONTENT review variant documented in untracked mission artifacts
+ * and session handoffs, not in committed notes with matching vocabulary —
+ * those ships are real participation this proxy cannot see, so the proxy only
+ * ever DEFERS readiness (safe direction).
  *
  * @param {Array<{name:string, matched:boolean}>} dirRecords
  *   Each record: name = dir basename (e.g. "v1.49.968"), matched = whether any
  *   file in that dir matches the pattern (injected for tests; live code reads disk).
- * @returns {{ count, dirNames }}
+ * @returns {{ count, inRange968, dirNames }}
  */
 export function computeShipReviewCount(dirRecords) {
   let count = 0;
+  let inRange968 = 0;
   const dirNames = [];
   for (const r of dirRecords) {
     const m = r.name.match(/^v1\.49\.(\d+)$/);
     if (!m) continue;
-    if (Number(m[1]) < 968) continue;
     if (r.matched) {
       count++;
+      if (Number(m[1]) >= 968) inRange968++;
       dirNames.push(r.name);
     }
   }
-  return { count, dirNames };
+  return { count, inRange968, dirNames };
 }
 
 /**
@@ -266,7 +283,7 @@ export function scanReleaseNoteDirs(releaseNotesDir) {
   const records = [];
   for (const name of entries) {
     const m = name.match(/^v1\.49\.(\d+)$/);
-    if (!m || Number(m[1]) < 968) continue;
+    if (!m) continue;
     const full = join(releaseNotesDir, name);
     const matched = dirContainsMatch(full, SHIP_REVIEW_PATTERN);
     records.push({ name, matched });
@@ -303,9 +320,17 @@ const DEFAULT_K = 30;
 const DEFAULT_STEP = 'all';
 
 function parseArgs(argv) {
+  // Accept BOTH `--name=value` and `--name value` (the usage header documents the
+  // space form; honoring only `=` would make `--step ship-review` silently fall
+  // back to `all` — a #10427 doc/behavior mismatch).
   const get = (name, def) => {
-    const hit = argv.find((a) => a.startsWith(`--${name}=`));
-    return hit ? hit.slice(name.length + 3) : def;
+    const eq = argv.find((a) => a.startsWith(`--${name}=`));
+    if (eq) return eq.slice(name.length + 3);
+    const idx = argv.indexOf(`--${name}`);
+    if (idx !== -1 && idx + 1 < argv.length && !argv[idx + 1].startsWith('--')) {
+      return argv[idx + 1];
+    }
+    return def;
   };
   return {
     step: get('step', DEFAULT_STEP),
@@ -469,7 +494,7 @@ function runStep(step, args, gateText, t14Text) {
       const releaseNotesDir = join(root, 'docs', 'release-notes');
       dirRecords = scanReleaseNoteDirs(releaseNotesDir);
     }
-    const { count } = computeShipReviewCount(dirRecords);
+    const { count, inRange968 } = computeShipReviewCount(dirRecords);
     const ready = count >= n;
     return {
       step,
@@ -478,7 +503,11 @@ function runStep(step, args, gateText, t14Text) {
       streak: count,
       n,
       promotionState,
-      details: { totalDirsScanned: dirRecords.length },
+      details: {
+        totalDirsScanned: dirRecords.length,
+        inRange968,
+        note: 'all-time committed-notes proxy; NASA-band content reviews (v986–v1026) live in untracked mission artifacts and are invisible here (under-count only — defers, never advances)',
+      },
     };
   }
 

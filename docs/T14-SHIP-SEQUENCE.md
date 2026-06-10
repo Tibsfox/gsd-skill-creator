@@ -74,7 +74,9 @@ P.   Adversarial ship review (PRE-PUSH; v1.49.968 Ship 1.1 — REQUIRED as of v1
        - Pre-tag-gate step 22 enforces the attestation is present and fresh for THIS ship
          (exit 26 if missing/stale; bypass token ship-review-attestation for emergencies).
        - Promoted from ADVISORY (staged #10463) to REQUIRED at v1.49.1029: K=30 clean ships,
-         evidence = 51 reviewed ships since v968 + caught-defect ledger (v965: 3 BLOCKERs;
+         evidence = 55 reviewed release dirs all-time (20 within v968+; the v986–v1026 NASA
+         band ran content reviews recorded in untracked mission artifacts, so the
+         committed-notes proxy under-counts) + caught-defect ledger (v965: 3 BLOCKERs;
          v966: 1 MAJOR; v982; 11/35 F4; v1027: 1 BLOCKER + 1 MAJOR; v1028: 1 MAJOR).
        - Canonical: docs/adversarial-ship-review.md. Caught real defects pre-push in
          v965 (3 BLOCKERs), v966 (1 MAJOR), v982, 11/35 F4, v1027 (1 BLOCKER + 1 MAJOR),
@@ -233,7 +235,7 @@ Milestone-specific notes:
 | 2026-05-11 | Initial canonical doc. T14 sequence documented with STORY-gate as step 2.5 (post bump-version, pre git-tag). | v1.49.638 C2 (Lesson #10197 closure) |
 | 2026-06-03 | Added step 2.7 adoption-baseline refresh (post bump-version, pre chore-commit): `adoption-refresh.mjs` + `adoption-trends.mjs --write`. SOURCE-ELIMINATOR half of the two-layer closure (#10431/#10436) for the baseline-freeze drift class; DETECTOR is pre-tag-gate step 20 (adoption-freshness, WARN-only). | v1.49.965 Ship 0.1 (audit T1.3) |
 | 2026-06-04 | Added pre-flight step P — adversarial ship review on the diff before `git push origin dev` (ADVISORY, staged #10463). Reusable workflow `tools/ship-review/adversarial-ship-review.mjs`; canonical doc `docs/adversarial-ship-review.md`; drift-guard `tests/integration/adversarial-ship-review-discipline.test.ts`. | v1.49.968 Ship 1.1 (audit T1.4) |
-| 2026-06-10 | Step P promoted from ADVISORY to REQUIRED. Pre-tag-gate step 22 (ship-review-attestation, exit 26) enforces that `write-attestation.mjs` was run after the review (K=30; 51 reviewed ships since v968; caught-defect ledger: v965 3 BLOCKERs, v966, v982, 11/35 F4, v1027 1 BLOCKER + 1 MAJOR, v1028 1 MAJOR). Gate count 21→22. | v1.49.1029 (audit §10 ship 3) |
+| 2026-06-10 | Step P promoted from ADVISORY to REQUIRED. Pre-tag-gate step 22 (ship-review-attestation, exit 26) enforces that `write-attestation.mjs` was run after the review (K=30; 55 reviewed release dirs all-time, 20 within v968+ — the NASA band's content reviews live in untracked mission artifacts; caught-defect ledger: v965 3 BLOCKERs, v966, v982, 11/35 F4, v1027 1 BLOCKER + 1 MAJOR, v1028 1 MAJOR). Gate count 21→22. | v1.49.1029 (audit §10 ship 3) |
 
 ## Lesson coverage (codified v1.49.654 C08+C09)
 

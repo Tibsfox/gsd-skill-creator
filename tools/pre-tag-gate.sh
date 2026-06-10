@@ -1108,7 +1108,8 @@ fi
 # Deterministic gate verifying that the adversarial ship review (T14 step P) ran on
 # THIS ship's diff and wrote .planning/ship-review/last-attestation.json. The
 # advisory-only rung was v1.49.968 Ship 1.1 (staged #10463); this step is the
-# promotion: 51 distinct release versions since v968 have had the review, and the
+# promotion: 55 distinct release versions all-time document the review (20 within
+# v968+; the NASA band's content reviews live in untracked mission artifacts), and the
 # caught-defect ledger keeps growing (v1027: 1 BLOCKER + 1 MAJOR; v1028: 1 MAJOR;
 # v965: 3 BLOCKERs; v966; v982; 11/35 F4).
 #
@@ -1124,7 +1125,7 @@ fi
 # Bypass: SC_PRE_TAG_GATE_BYPASS=ship-review-attestation (emergency only — run step P
 # and write-attestation.mjs instead).
 #
-# PROMOTION-MARKER: ship-review-attestation default-BLOCK since v1.49.1029 (K=30; evidence: 51 reviewed ships since v968 + the caught-defect ledger; reporter: tools/gate/warn-promotion-readiness.mjs)
+# PROMOTION-MARKER: ship-review-attestation default-BLOCK since v1.49.1029 (K=30; evidence: 55 reviewed release dirs all-time, 20 within v968+ + the caught-defect ledger; reporter: tools/gate/warn-promotion-readiness.mjs)
 if gate_bypassed "ship-review-attestation"; then
   log "[pre-tag-gate] step 22/22: SKIPPED (ship-review-attestation)"
 elif [ ! -f "$REPO_ROOT/.planning/STATE.md" ]; then
