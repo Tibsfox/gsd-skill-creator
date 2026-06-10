@@ -198,6 +198,83 @@ describe('activationsCommand', () => {
     expect(gsdEntry!['activationCount']).toBe(1);
   });
 
+  it('--write handles mixed skills: array-triggers + object-triggers + broken-frontmatter', async () => {
+    const corpus = mkTmp('act-mixed-corpus-');
+    const skillsDir = mkTmp('act-mixed-skills-');
+
+    // Session activating two skills.
+    writeFixtureTranscript(corpus, 's1.jsonl', 'sess-1', 'array-skill', 'object-skill');
+
+    // array-triggers skill (dominant in-repo format).
+    const arrayDir = join(skillsDir, 'array-skill');
+    mkdirSync(arrayDir, { recursive: true });
+    writeFileSync(
+      join(arrayDir, 'SKILL.md'),
+      [
+        '---',
+        'name: array-skill',
+        'description: Skill with taxonomy array-form triggers.',
+        'triggers:',
+        '  - "when reviewing a PR"',
+        '  - "when auditing scope"',
+        '---',
+        '',
+        '# array-skill',
+      ].join('\n') + '\n',
+      'utf8',
+    );
+
+    // object-triggers skill (object form).
+    const objectDir = join(skillsDir, 'object-skill');
+    mkdirSync(objectDir, { recursive: true });
+    writeFileSync(
+      join(objectDir, 'SKILL.md'),
+      [
+        '---',
+        'name: object-skill',
+        'description: Skill with object-form triggers.',
+        'triggers:',
+        '  intents:',
+        '    - "for git workflows"',
+        '---',
+        '',
+        '# object-skill',
+      ].join('\n') + '\n',
+      'utf8',
+    );
+
+    // Broken frontmatter skill — must be skipped, not abort.
+    const brokenDir = join(skillsDir, 'broken-skill');
+    mkdirSync(brokenDir, { recursive: true });
+    writeFileSync(
+      join(brokenDir, 'SKILL.md'),
+      // Missing required `description` field + invalid name char → validation failure.
+      '---\nname: broken skill\n---\n\n# broken\n',
+      'utf8',
+    );
+
+    const logs: string[] = [];
+    vi.spyOn(console, 'log').mockImplementation((m?: unknown) => void logs.push(String(m)));
+    // Allow console.warn for the skip message from rebuild().
+    vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+    const code = await activationsCommand([
+      '--write',
+      '--json',
+      '--corpus-dir', corpus,
+      '--skills-dir', skillsDir,
+    ]);
+    expect(code).toBe(0);
+
+    const out = JSON.parse(logs.join('\n'));
+    // 2 valid skills parsed into the index, 1 skipped.
+    expect(out.indexEntries).toBe(2);
+    expect(out.skippedOnRebuild).toBe(1);
+    // Both activations recorded (both skills exist in index).
+    expect(out.recorded).toBe(2);
+    expect(out.unknownCount).toBe(0);
+  });
+
   it('--write is idempotent (second run same count, no duplication)', async () => {
     const corpus = mkTmp('act-idem-corpus-');
     const skillsDir = mkTmp('act-idem-skills-');

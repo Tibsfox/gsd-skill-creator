@@ -260,4 +260,70 @@ describe('Backward Compatibility: Edge Cases', () => {
       expect((result.data as Record<string, unknown>)['another-thing']).toBe(42);
     }
   });
+
+  // -------------------------------------------------------------------------
+  // Taxonomy array-form triggers (v1.49.1028 fix — 34/37 installed skills use
+  // this format; TriggerPatternsSchema normalizes string[] → { intents: [] }).
+  // -------------------------------------------------------------------------
+
+  it('should accept taxonomy array-form triggers and normalize to {intents}', () => {
+    // This is the dominant in-repo format (flat YAML list under `triggers:`).
+    const skill = {
+      name: 'array-triggers-skill',
+      description: 'Skill with taxonomy array-form triggers.',
+      triggers: [
+        'reviewing a pull request before merge',
+        'auditing scope compliance',
+      ],
+    };
+    const result = SkillMetadataSchema.safeParse(skill);
+    expect(result.success).toBe(true);
+    if (result.success) {
+      const triggers = result.data.triggers as { intents?: string[] } | undefined;
+      expect(triggers).toBeDefined();
+      expect(triggers!.intents).toEqual([
+        'reviewing a pull request before merge',
+        'auditing scope compliance',
+      ]);
+    }
+  });
+
+  it('should normalize empty array-form triggers to {intents: []}', () => {
+    const skill = {
+      name: 'empty-array-triggers-skill',
+      description: 'Skill with empty triggers array.',
+      triggers: [],
+    };
+    const result = SkillMetadataSchema.safeParse(skill);
+    expect(result.success).toBe(true);
+    if (result.success) {
+      const triggers = result.data.triggers as { intents?: string[] } | undefined;
+      expect(triggers).toBeDefined();
+      expect(triggers!.intents).toEqual([]);
+    }
+  });
+
+  it('should still accept object-form triggers unchanged', () => {
+    const skill = {
+      name: 'object-triggers-skill',
+      description: 'Skill with object-form triggers.',
+      triggers: { intents: ['test intent'], threshold: 0.8 },
+    };
+    const result = SkillMetadataSchema.safeParse(skill);
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.triggers).toMatchObject({ intents: ['test intent'], threshold: 0.8 });
+    }
+  });
+
+  it('should reject array of non-strings (array of objects) for triggers', () => {
+    const skill = {
+      name: 'bad-triggers-skill',
+      description: 'Skill with invalid array-of-objects triggers.',
+      triggers: [{ something: 'wrong' }],
+    };
+    const result = SkillMetadataSchema.safeParse(skill);
+    // Array of objects is NOT a valid trigger form and must fail.
+    expect(result.success).toBe(false);
+  });
 });

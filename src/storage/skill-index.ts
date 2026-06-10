@@ -229,12 +229,17 @@ export class SkillIndex {
     const skillNames = await this.skillStore.list();
     for (const skillName of skillNames) {
       if (!this.entries.has(skillName)) {
-        const skill = await this.skillStore.read(skillName);
-        const skillPath = join(this.skillsDir, skillName, 'SKILL.md');
-        const stats = await stat(skillPath);
+        try {
+          const skill = await this.skillStore.read(skillName);
+          const skillPath = join(this.skillsDir, skillName, 'SKILL.md');
+          const stats = await stat(skillPath);
 
-        const newEntry = this.buildEntry(skill, skillPath, stats.mtimeMs);
-        this.entries.set(skillName, newEntry);
+          const newEntry = this.buildEntry(skill, skillPath, stats.mtimeMs);
+          this.entries.set(skillName, newEntry);
+        } catch (err) {
+          // Skip skills that fail to parse (mirrors rebuild() behavior).
+          console.warn(`Skipping skill ${skillName}:`, err);
+        }
       }
     }
 

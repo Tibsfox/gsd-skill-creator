@@ -50,6 +50,47 @@ afterEach(() => {
 });
 
 // ---------------------------------------------------------------------------
+// Array-form triggers: rebuild() must include skills with taxonomy array form
+// ---------------------------------------------------------------------------
+
+describe('SkillIndex rebuild — array-form triggers skill is included', () => {
+  it('rebuild() indexes a skill with taxonomy array-form triggers', async () => {
+    // Write a SKILL.md with the dominant in-repo triggers format (flat YAML list).
+    const dir = path.join(skillsDir, 'security-hygiene');
+    fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(
+      path.join(dir, 'SKILL.md'),
+      [
+        '---',
+        'name: security-hygiene',
+        'description: Security hygiene skill for testing.',
+        'triggers:',
+        '  - "for discussions about skill-creator security"',
+        '  - "trust models or content hygiene"',
+        '---',
+        '',
+        '# security-hygiene',
+      ].join('\n') + '\n',
+      'utf8',
+    );
+
+    const index = new SkillIndex(store, skillsDir);
+    await index.rebuild();
+
+    const all = await index.getAll();
+    expect(all).toHaveLength(1);
+    const entry = all[0]!;
+    expect(entry.name).toBe('security-hygiene');
+    // Triggers should be normalized to {intents: [...]}
+    expect(entry.triggers).toBeDefined();
+    expect(entry.triggers!.intents).toEqual([
+      'for discussions about skill-creator security',
+      'trust models or content hygiene',
+    ]);
+  });
+});
+
+// ---------------------------------------------------------------------------
 // D3(a): activation fields preserved across rebuild()
 // ---------------------------------------------------------------------------
 

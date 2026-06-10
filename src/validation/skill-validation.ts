@@ -323,13 +323,38 @@ export const SkillNameSchema = z
   .max(64, 'Name must be 64 characters or less')
   .regex(/^[a-z0-9-]+$/, 'Name must be lowercase letters, numbers, and hyphens only');
 
-// Schema for trigger patterns
-export const TriggerPatternsSchema = z.object({
+// Schema for trigger patterns (object form, canonical internal representation).
+const TriggerPatternsObjectSchema = z.object({
   intents: z.array(z.string()).optional(),
   files: z.array(z.string()).optional(),
   contexts: z.array(z.string()).optional(),
   threshold: z.number().min(0).max(1).optional(),
 });
+
+/**
+ * Schema for trigger patterns with taxonomy array-form normalization.
+ *
+ * In-repo SKILL.md files predominantly use the flat YAML array form:
+ *   triggers:
+ *     - "phrase one"
+ *     - "phrase two"
+ * This is the taxonomy format (34/37 installed skills as of v1.49.1028).
+ * The object form (`{ intents: [...] }`) is the canonical internal shape.
+ *
+ * This schema accepts BOTH and normalizes the array form to
+ * `{ intents: <array> }` so all downstream consumers (findByTrigger, etc.)
+ * work identically.
+ */
+export const TriggerPatternsSchema = z.preprocess(
+  (v) => {
+    // Flat string array → normalize to object form with `intents`.
+    if (Array.isArray(v) && (v.length === 0 || typeof v[0] === 'string')) {
+      return { intents: v };
+    }
+    return v;
+  },
+  TriggerPatternsObjectSchema,
+);
 
 // Schema for skill correction entries
 export const SkillCorrectionSchema = z.object({

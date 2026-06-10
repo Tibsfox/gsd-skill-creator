@@ -139,15 +139,31 @@ export async function activationsCommand(args: string[]): Promise<number> {
 
     let recorded: string[] = [];
     let unknown: string[] = [];
+    let indexEntriesCount = 0;
+    let skippedOnRebuild = 0;
 
     if (opts.write) {
       const store = new SkillStore(opts.skillsDir);
       const index = new SkillIndex(store, opts.skillsDir);
-      await index.load();
-      const all = await index.getAll();
-      if (all.length === 0) {
-        await index.rebuild();
+      // recordActivations calls load() if not loaded; rebuild if entries empty.
+      // We call rebuild() directly to get a fresh count and log skips honestly.
+      await index.rebuild();
+      const allAfterRebuild = await index.getAll();
+      indexEntriesCount = allAfterRebuild.length;
+      // Detect skipped skills: compare skillStore list vs what made it into the index.
+      const listedNames = await store.list();
+      skippedOnRebuild = Math.max(0, listedNames.length - indexEntriesCount);
+
+      if (indexEntriesCount === 0 && listedNames.length > 0) {
+        const msg = `--write: rebuild produced 0 index entries (${listedNames.length} skills listed, all failed to parse). Check skill frontmatter.`;
+        if (opts.json) {
+          console.log(JSON.stringify({ error: msg, sessionsScanned, sessionsWithActivations, skills: sortedSkills, unknown: [], recorded: 0, unknownCount: 0, skippedOnRebuild }, null, 2));
+        } else {
+          p.log.error(`activations: ${msg}`);
+        }
+        return 1;
       }
+
       const result = await index.recordActivations(counts);
       recorded = result.recorded;
       unknown = result.unknown;
@@ -166,7 +182,12 @@ export async function activationsCommand(args: string[]): Promise<number> {
             sessionsWithActivations,
             skills: sortedSkills,
             unknown,
-            ...(opts.write ? { recorded: recorded.length, unknownCount: unknown.length } : {}),
+            ...(opts.write ? {
+              recorded: recorded.length,
+              unknownCount: unknown.length,
+              indexEntries: indexEntriesCount,
+              skippedOnRebuild,
+            } : {}),
           },
           null,
           2,
@@ -199,7 +220,10 @@ export async function activationsCommand(args: string[]): Promise<number> {
 
     if (opts.write) {
       console.log('');
-      console.log(`  wrote .skill-index.json: ${recorded.length} recorded, ${unknown.length} unknown`);
+      console.log(
+        `  wrote .skill-index.json: ${recorded.length} recorded, ${unknown.length} unknown` +
+        (skippedOnRebuild > 0 ? `, ${skippedOnRebuild} skipped (parse failures)` : ''),
+      );
       if (unknown.length > 0) {
         console.log('');
         console.log(pc.dim('  mined but not in index (no SKILL.md):'));
