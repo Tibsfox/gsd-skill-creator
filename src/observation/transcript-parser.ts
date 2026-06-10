@@ -126,33 +126,84 @@ export class TranscriptParser {
   }
 
   /**
+   * Built-in Claude Code slash commands excluded from co-activation tracking.
+   * These are Claude Code internals, not skill activations. Comparison is
+   * case-insensitive (normalised to lower before lookup).
+   */
+  static readonly COMMAND_NAME_DENYLIST: ReadonlySet<string> = new Set([
+    'model', 'effort', 'clear', 'help', 'config', 'workflows', 'fast',
+    'login', 'logout', 'status', 'compact', 'resume', 'cost', 'exit', 'quit',
+  ]);
+
+  /**
    * Extract the distinct skill names activated during the session.
    *
-   * Skills surface in the live Claude Code transcript as `Skill` tool_use
-   * blocks nested inside `message.content[]` (e.g.
-   * `{ type: 'tool_use', name: 'Skill', input: { skill: 'context-handoff' } }`)
-   * — NOT as top-level `tool_name` entries. This descends into the content
-   * blocks and collects `input.skill`. Sidechain (sub-agent) entries are
-   * already excluded by {@link parse}/{@link parseString}, so sub-agent skill
-   * invocations are not counted. Returns a sorted, de-duplicated list.
+   * Two signal sources are merged (both stay behind the caller's
+   * `observation.mine_active_skills` gate — see {@link SessionObserver}):
+   *
+   * 1. **Skill tool_use blocks** — nested inside `message.content[]` on
+   *    assistant entries (e.g.
+   *    `{ type: 'tool_use', name: 'Skill', input: { skill: 'context-handoff' } }`).
+   *    This is NOT a top-level `tool_name` entry.
+   *
+   * 2. **`<command-name>` tags** in user-message string content — the real
+   *    shape in which slash-command activations appear in Claude Code transcripts
+   *    (e.g. `<command-name>/gsd-progress</command-name>`). The leading `/` is
+   *    stripped and the result is preserved as-is (namespaced names like
+   *    `sc:status` are kept whole). Built-in Claude Code commands are excluded
+   *    via {@link COMMAND_NAME_DENYLIST}.
+   *
+   * Sidechain (sub-agent) entries are already excluded by
+   * {@link parse}/{@link parseString}. Results are de-duplicated and returned
+   * in stable insertion order (Skill blocks first in document order, then
+   * command-name tags in document order, deduped across both).
    */
   extractActiveSkills(entries: TranscriptEntry[]): string[] {
-    const skills = new Set<string>();
+    // Use an insertion-order-preserving Map (Set is fine here but explicit
+    // insertion-order tracking makes the contract clear).
+    const seen = new Set<string>();
+    const result: string[] = [];
+
+    const add = (name: string): void => {
+      const trimmed = name.trim();
+      if (trimmed && !seen.has(trimmed)) {
+        seen.add(trimmed);
+        result.push(trimmed);
+      }
+    };
 
     for (const entry of entries) {
       const content = entry.message?.content;
-      if (!Array.isArray(content)) continue;
 
-      for (const block of content) {
-        if (block.type !== 'tool_use' || block.name !== 'Skill') continue;
-        const skill = block.input?.skill;
-        if (typeof skill === 'string' && skill.trim()) {
-          skills.add(skill.trim());
+      // Source 1: Skill tool_use blocks in content arrays (assistant messages)
+      if (Array.isArray(content)) {
+        for (const block of content) {
+          if (block.type !== 'tool_use' || block.name !== 'Skill') continue;
+          const skill = block.input?.skill;
+          if (typeof skill === 'string') {
+            add(skill);
+          }
+        }
+      }
+
+      // Source 2: <command-name> tags in user-message string content.
+      // Real invocation shape: user entry with message.content = string such as
+      // "<command-name>/gsd-progress</command-name>\n<command-message>…"
+      if (typeof content === 'string') {
+        const tagRe = /<command-name>([^<]+)<\/command-name>/g;
+        let match: RegExpExecArray | null;
+        while ((match = tagRe.exec(content)) !== null) {
+          const raw = match[1].trim();
+          // Strip leading slash, keep namespace as-is (e.g. "sc:status")
+          const name = raw.startsWith('/') ? raw.slice(1) : raw;
+          const normalised = name.trim().toLowerCase();
+          if (!normalised || TranscriptParser.COMMAND_NAME_DENYLIST.has(normalised)) continue;
+          add(name.trim());
         }
       }
     }
 
-    return Array.from(skills).sort();
+    return result;
   }
 
   /**

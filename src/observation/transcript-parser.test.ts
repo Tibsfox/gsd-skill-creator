@@ -2,6 +2,46 @@ import { describe, it, expect } from 'vitest';
 import { TranscriptParser } from './transcript-parser.js';
 import type { ExecutionContext } from '../types/observation.js';
 
+// ---------------------------------------------------------------------------
+// Helpers shared across extractActiveSkills tests
+// ---------------------------------------------------------------------------
+
+/** Build a JSONL line for an assistant entry with one Skill tool_use block */
+function skillEntry(uuid: string, skill: string, isSidechain = false): string {
+  return JSON.stringify({
+    uuid,
+    parentUuid: null,
+    isSidechain,
+    sessionId: 's1',
+    timestamp: '2026-01-30T12:00:00Z',
+    type: 'assistant',
+    message: {
+      role: 'assistant',
+      content: [
+        { type: 'text', text: 'invoking a skill' },
+        { type: 'tool_use', name: 'Skill', input: { skill } },
+      ],
+    },
+  });
+}
+
+/** Build a JSONL line for a user entry whose message.content is a plain string
+ *  containing one <command-name> tag (real transcript invocation shape). */
+function commandEntry(uuid: string, commandName: string): string {
+  return JSON.stringify({
+    uuid,
+    parentUuid: null,
+    isSidechain: false,
+    sessionId: 's1',
+    timestamp: '2026-01-30T12:00:00Z',
+    type: 'user',
+    message: {
+      role: 'user',
+      content: `<command-name>${commandName}</command-name>\n            <command-message>${commandName.replace('/', '')}</command-message>\n            <command-args></command-args>`,
+    },
+  });
+}
+
 describe('TranscriptParser', () => {
   const parser = new TranscriptParser();
 
@@ -63,37 +103,22 @@ this is not valid json
   });
 
   describe('extractActiveSkills', () => {
-    // Skills surface in the live transcript as Skill tool_use blocks nested in
-    // message.content[], on assistant entries — NOT top-level tool_name (5.1b).
-    function entry(uuid: string, skill: string, isSidechain = false): string {
-      return JSON.stringify({
-        uuid,
-        parentUuid: null,
-        isSidechain,
-        sessionId: 's1',
-        timestamp: '2026-01-30T12:00:00Z',
-        type: 'assistant',
-        message: {
-          role: 'assistant',
-          content: [
-            { type: 'text', text: 'invoking a skill' },
-            { type: 'tool_use', name: 'Skill', input: { skill } },
-          ],
-        },
-      });
-    }
+    // Skills surface in two forms:
+    //   1. Skill tool_use blocks nested in message.content[] (assistant entries) — 5.1b
+    //   2. <command-name> tags in user-message string content (slash-command activations) — 5.1c
 
-    it('mines distinct, sorted skill names from nested Skill tool_use blocks', () => {
+    it('mines distinct skill names from nested Skill tool_use blocks in insertion order', () => {
       const entries = parser.parseString(
-        [entry('1', 'context-handoff'), entry('2', 'graphify'), entry('3', 'context-handoff')].join('\n'),
+        [skillEntry('1', 'context-handoff'), skillEntry('2', 'graphify'), skillEntry('3', 'context-handoff')].join('\n'),
       );
+      // Insertion order: context-handoff first (uuid 1), graphify second (uuid 2)
       expect(parser.extractActiveSkills(entries)).toEqual(['context-handoff', 'graphify']);
     });
 
     it('excludes sidechain (sub-agent) skill invocations', () => {
       // parseString drops isSidechain entries, so their skills never count.
       const entries = parser.parseString(
-        [entry('1', 'main-skill'), entry('2', 'subagent-skill', true)].join('\n'),
+        [skillEntry('1', 'main-skill'), skillEntry('2', 'subagent-skill', true)].join('\n'),
       );
       expect(parser.extractActiveSkills(entries)).toEqual(['main-skill']);
     });
@@ -105,12 +130,7 @@ this is not valid json
           timestamp: '2026-01-30T12:00:00Z', type: 'assistant',
           message: { role: 'assistant', content: [{ type: 'tool_use', name: 'Read', input: { file_path: '/a.ts' } }] },
         }),
-        JSON.stringify({
-          uuid: '2', parentUuid: null, isSidechain: false, sessionId: 's1',
-          timestamp: '2026-01-30T12:00:01Z', type: 'user',
-          message: { role: 'user', content: 'plain string content, no blocks' },
-        }),
-        entry('3', 'real-skill'),
+        skillEntry('3', 'real-skill'),
       ].join('\n');
       const entries = parser.parseString(content);
       expect(parser.extractActiveSkills(entries)).toEqual(['real-skill']);
@@ -120,7 +140,7 @@ this is not valid json
       // Mutation guard: dropping the `.trim()` filter would let '' / '   ' leak
       // into the skill set and break the flag-off byte-identical contract.
       const entries = parser.parseString(
-        [entry('1', ''), entry('2', '   '), entry('3', 'kept')].join('\n'),
+        [skillEntry('1', ''), skillEntry('2', '   '), skillEntry('3', 'kept')].join('\n'),
       );
       expect(parser.extractActiveSkills(entries)).toEqual(['kept']);
     });
@@ -130,6 +150,69 @@ this is not valid json
         '{"uuid":"1","parentUuid":null,"isSidechain":false,"sessionId":"s1","timestamp":"2026-01-30T12:00:00Z","type":"user","message":{"role":"user","content":"hi"}}',
       );
       expect(parser.extractActiveSkills(entries)).toEqual([]);
+    });
+
+    // -----------------------------------------------------------------------
+    // 5.1c: <command-name> tag extraction
+    // -----------------------------------------------------------------------
+
+    it('extracts command-name tags from user-message string content, stripping leading slash', () => {
+      const entries = parser.parseString(
+        [commandEntry('1', '/gsd-progress'), commandEntry('2', '/sc:status')].join('\n'),
+      );
+      expect(parser.extractActiveSkills(entries)).toEqual(['gsd-progress', 'sc:status']);
+    });
+
+    it('excludes denylisted builtins from command-name tags (case-insensitive)', () => {
+      // /model and /clear are on the denylist
+      const entries = parser.parseString(
+        [commandEntry('1', '/model'), commandEntry('2', '/CLEAR'), commandEntry('3', '/gsd-progress')].join('\n'),
+      );
+      expect(parser.extractActiveSkills(entries)).toEqual(['gsd-progress']);
+    });
+
+    it('deduplicates across both sources and preserves insertion order', () => {
+      // Fixture: Skill block 'context-handoff', command-name '/gsd-progress',
+      // command-name '/gsd-progress' (duplicate), Skill block 'context-handoff' (dup),
+      // denylisted '/model' — expect exactly 2 results in insertion order
+      const lines = [
+        skillEntry('1', 'context-handoff'),        // source 1 — first occurrence
+        commandEntry('2', '/gsd-progress'),          // source 2 — first occurrence
+        commandEntry('3', '/gsd-progress'),          // duplicate → skip
+        skillEntry('4', 'context-handoff'),          // duplicate → skip
+        commandEntry('5', '/model'),                 // denylisted → skip
+      ];
+      const entries = parser.parseString(lines.join('\n'));
+      expect(parser.extractActiveSkills(entries)).toEqual(['context-handoff', 'gsd-progress']);
+    });
+
+    it('full fixture: 2 distinct command-name tags + 1 Skill block + 1 denylisted + 1 duplicate → 3 activeSkills', () => {
+      // Canonical verify-test from design doc § Component C
+      const lines = [
+        skillEntry('1', 'gsd-workflow'),              // Skill tool_use → 'gsd-workflow'
+        commandEntry('2', '/gsd-progress'),            // command-name → 'gsd-progress'
+        commandEntry('3', '/sc:status'),               // namespaced command → 'sc:status'
+        commandEntry('4', '/model'),                   // denylisted builtin → excluded
+        commandEntry('5', '/gsd-progress'),            // duplicate of uuid-2 → excluded
+      ];
+      const entries = parser.parseString(lines.join('\n'));
+      const skills = parser.extractActiveSkills(entries);
+      expect(skills).toHaveLength(3);
+      expect(skills).toEqual(['gsd-workflow', 'gsd-progress', 'sc:status']);
+    });
+
+    it('flag-off (empty entries): returns []', () => {
+      // When mineActiveSkills=false the caller passes [] directly and never
+      // calls extractActiveSkills; but calling it on an empty array is safe.
+      expect(parser.extractActiveSkills([])).toEqual([]);
+    });
+
+    it('COMMAND_NAME_DENYLIST is exported and contains expected builtins', () => {
+      const dl = TranscriptParser.COMMAND_NAME_DENYLIST;
+      for (const builtin of ['model', 'effort', 'clear', 'help', 'config', 'workflows',
+        'fast', 'login', 'logout', 'status', 'compact', 'resume', 'cost', 'exit', 'quit']) {
+        expect(dl.has(builtin), `expected '${builtin}' in denylist`).toBe(true);
+      }
     });
   });
 
