@@ -23,6 +23,35 @@ const isGlobal = args.includes('--global');
 const isLocal = args.includes('--local');
 const showHelp = args.includes('--help') || args.includes('-h');
 
+// --only <target> (repeatable): when non-empty, only process per-file installs
+// whose target path matches one of these values (forward-slash normalized).
+// Section-level handlers (CLAUDE.md, extensions, settings, settingsHooks,
+// integration config, patterns dir, gitignore, git hook, final validation)
+// are skipped entirely in targeted mode.
+const onlyTargets = (() => {
+  const targets = [];
+  for (let i = 0; i < args.length; i++) {
+    if (args[i] === '--only' && i + 1 < args.length) {
+      targets.push(args[i + 1].replace(/\\/g, '/'));
+      i++;
+    }
+  }
+  return targets;
+})();
+const hasOnlyFilter = onlyTargets.length > 0;
+
+// Normalize a target path to forward-slash form for --only comparison.
+function normalizeTarget(t) {
+  return t.replace(/\\/g, '/');
+}
+
+// Returns true if the given target (forward-slash normalized) matches the --only filter.
+function matchesOnly(target) {
+  if (!hasOnlyFilter) return true;
+  const norm = normalizeTarget(target);
+  return onlyTargets.some(t => t === norm);
+}
+
 // --- Help ---
 if (showHelp) {
   console.log(`
@@ -36,6 +65,10 @@ Usage:
   npx gsd-skill-creator --force     Overwrite modified files
   npx gsd-skill-creator --uninstall Remove installed components
   npx gsd-skill-creator --quiet     Suppress output
+  npx gsd-skill-creator --only <target>  Only deploy matching target(s); repeatable.
+                         Target is a relative path like .claude/skills/team-control/SKILL.md.
+                         Skips section-level handlers (CLAUDE.md, settings, git hook, etc.).
+                         Combine with --force and/or --dry-run.
   npx gsd-skill-creator --help      Show this help
 
 Installs: skills, agents, commands, hooks, settings, and CLAUDE.md.
@@ -102,6 +135,7 @@ function readFileSafe(filePath) {
 
 // --- Standalone file install ---
 function installStandalone(entry) {
+  if (!matchesOnly(entry.target)) return;
   const sourcePath = path.join(sourceDir, entry.source);
   const targetPath = path.join(projectRoot, entry.target);
 
@@ -153,9 +187,19 @@ function installAutoDiscover(block, manifest) {
   // Build set of already-claimed source paths from the manifest.
   // Include hookScripts so auto-discovery of hook/*.cjs files doesn't
   // double-install entries already listed there.
+  //
+  // A2 dedupe fix: manifest.files.skills entries have DIRECTORY sources
+  // (e.g. "skills/skill-integration") but autoDiscover candidates are FILE
+  // paths (e.g. "skills/skill-integration/SKILL.md") — so the directory-level
+  // add never matched. Fix: for each skills entry also add the per-file paths.
   const claimed = new Set();
   for (const s of (manifest.files.standalone || [])) claimed.add(s.source);
-  for (const s of (manifest.files.skills || [])) claimed.add(s.source);
+  for (const s of (manifest.files.skills || [])) {
+    claimed.add(s.source); // keep dir-level add for future-proofing
+    for (const relFile of (s.files || [])) {
+      claimed.add(s.source + '/' + relFile); // posix join — consistent with enumerateMatches
+    }
+  }
   for (const s of (manifest.files.hookScripts || [])) claimed.add(s.source);
 
   // Honor explicit exclude list (e.g. skip `.test.ts` files that live
@@ -235,6 +279,8 @@ function installSkillDir(entry) {
   let skillCurrent = 0;
 
   for (const relFile of files) {
+    const fileTarget = `${entry.target}/${relFile}`;
+    if (!matchesOnly(fileTarget)) continue;
     const sourcePath = path.join(sourceBase, relFile);
     const targetPath = path.join(targetBase, relFile);
 
@@ -251,22 +297,22 @@ function installSkillDir(entry) {
         ensureDir(targetPath);
         fs.writeFileSync(targetPath, sourceContent);
       }
-      log(`  + installed: ${entry.target}/${relFile}`);
+      log(`  + installed: ${fileTarget}`);
       stats.installed++;
       skillInstalled++;
     } else if (sha256(sourceContent) === sha256(targetContent)) {
-      if (!quiet) log(`  = current:   ${entry.target}/${relFile}`);
+      if (!quiet) log(`  = current:   ${fileTarget}`);
       stats.current++;
       skillCurrent++;
     } else if (force) {
       if (!dryRun) {
         fs.writeFileSync(targetPath, sourceContent);
       }
-      log(`  ↻ updated:   ${entry.target}/${relFile}`);
+      log(`  ↻ updated:   ${fileTarget}`);
       stats.updated++;
       skillInstalled++;
     } else {
-      warn(`differs: ${entry.target}/${relFile} (use --force to overwrite)`);
+      warn(`differs: ${fileTarget} (use --force to overwrite)`);
     }
   }
 
@@ -310,6 +356,8 @@ function installCartridgeDir(entry) {
   const files = walkDirRel(sourceBase);
 
   for (const rel of files) {
+    const fileTarget = `${entry.target}/${rel}`;
+    if (!matchesOnly(fileTarget)) continue;
     const sourcePath = path.join(sourceBase, rel);
     const targetPath = path.join(targetBase, rel);
     const sourceContent = readFileSafe(sourcePath);
@@ -323,17 +371,17 @@ function installCartridgeDir(entry) {
         ensureDir(targetPath);
         fs.writeFileSync(targetPath, sourceContent);
       }
-      log(`  + installed: ${entry.target}/${rel}`);
+      log(`  + installed: ${fileTarget}`);
       stats.installed++;
     } else if (sha256(sourceContent) === sha256(targetContent)) {
-      if (!quiet) log(`  = current:   ${entry.target}/${rel}`);
+      if (!quiet) log(`  = current:   ${fileTarget}`);
       stats.current++;
     } else if (force) {
       if (!dryRun) fs.writeFileSync(targetPath, sourceContent);
-      log(`  ↻ updated:   ${entry.target}/${rel}`);
+      log(`  ↻ updated:   ${fileTarget}`);
       stats.updated++;
     } else {
-      warn(`differs: ${entry.target}/${rel} (use --force to overwrite)`);
+      warn(`differs: ${fileTarget} (use --force to overwrite)`);
     }
   }
 }
@@ -346,6 +394,7 @@ function chmodSafe(filePath, mode) {
 }
 
 function installHookScript(entry) {
+  if (!matchesOnly(entry.target)) return;
   const sourcePath = path.join(sourceDir, entry.source);
   const targetPath = path.join(projectRoot, entry.target);
 
@@ -1027,24 +1076,30 @@ function main() {
   }
 
   const prefix = dryRun ? '[DRY RUN] ' : '';
+
+  if (hasOnlyFilter) {
+    log(`Scope: ${onlyTargets.length} target(s) via --only`);
+    log('');
+  }
+
   log(`${prefix}Installing project-claude files...\n`);
 
   // Install standalone files
   if (manifest.files.standalone) {
-    log('Standalone files:');
+    if (!hasOnlyFilter) log('Standalone files:');
     for (const entry of manifest.files.standalone) {
       installStandalone(entry);
     }
-    log('');
+    if (!hasOnlyFilter) log('');
   }
 
   // Install skill directories
   if (manifest.files.skills) {
-    log('Skills:');
+    if (!hasOnlyFilter) log('Skills:');
     for (const entry of manifest.files.skills) {
       installSkillDir(entry);
     }
-    log('');
+    if (!hasOnlyFilter) log('');
   }
 
   // Auto-discover: enumerate agents + skills not listed in the manifest.
@@ -1052,76 +1107,81 @@ function main() {
   // project-claude/skills/<name>/SKILL.md flow to .claude/ without
   // editing manifest.json.
   if (manifest.files.autoDiscover) {
-    log('Auto-discovery:');
+    if (!hasOnlyFilter) log('Auto-discovery:');
     for (const block of manifest.files.autoDiscover) {
       installAutoDiscover(block, manifest);
     }
-    log('');
+    if (!hasOnlyFilter) log('');
   }
 
   // Install hook scripts (with executable permissions)
   if (manifest.files.hookScripts) {
-    log('Hook scripts:');
+    if (!hasOnlyFilter) log('Hook scripts:');
     for (const entry of manifest.files.hookScripts) {
       installHookScript(entry);
     }
-    log('');
+    if (!hasOnlyFilter) log('');
   }
 
-  // Install CLAUDE.md (with legacy backup)
-  if (manifest.files.claudeMd) {
-    log('CLAUDE.md:');
-    installClaudeMd(manifest.files.claudeMd);
-    log('');
-  }
-
-  // Install extensions
-  if (manifest.files.extensions) {
-    log('Extensions:');
-    for (const entry of manifest.files.extensions) {
-      installExtension(entry);
+  // Section-level handlers skipped entirely in targeted (--only) mode:
+  // CLAUDE.md, extensions, settings, settingsHooks, cartridges,
+  // integration config, patterns dir, gitignore, git hook, validation.
+  if (!hasOnlyFilter) {
+    // Install CLAUDE.md (with legacy backup)
+    if (manifest.files.claudeMd) {
+      log('CLAUDE.md:');
+      installClaudeMd(manifest.files.claudeMd);
+      log('');
     }
-    log('');
-  }
 
-  // Install settings (primary settings.json)
-  if (manifest.files.settings) {
-    log('Settings:');
-    installSettings(manifest.files.settings);
-    log('');
-  }
-
-  // Install settings hooks (merge additional hook config)
-  if (manifest.files.settingsHooks) {
-    log('Settings hooks:');
-    installSettings(manifest.files.settingsHooks);
-    log('');
-  }
-
-  // Install cartridges (recursive directory copy)
-  if (manifest.files.cartridges) {
-    log('Cartridges:');
-    for (const entry of manifest.files.cartridges) {
-      installCartridgeDir(entry);
+    // Install extensions
+    if (manifest.files.extensions) {
+      log('Extensions:');
+      for (const entry of manifest.files.extensions) {
+        installExtension(entry);
+      }
+      log('');
     }
+
+    // Install settings (primary settings.json)
+    if (manifest.files.settings) {
+      log('Settings:');
+      installSettings(manifest.files.settings);
+      log('');
+    }
+
+    // Install settings hooks (merge additional hook config)
+    if (manifest.files.settingsHooks) {
+      log('Settings hooks:');
+      installSettings(manifest.files.settingsHooks);
+      log('');
+    }
+
+    // Install cartridges (recursive directory copy)
+    if (manifest.files.cartridges) {
+      log('Cartridges:');
+      for (const entry of manifest.files.cartridges) {
+        installCartridgeDir(entry);
+      }
+      log('');
+    }
+
+    // Install integration config
+    log('Integration:');
+    installIntegrationConfig();
+    log('');
+
+    // Install patterns directory
+    log('Patterns:');
+    installPatternsDir();
+    updateGitignore();
+    log('');
+
+    // Install git hook
+    log('Git hooks:');
+    installGitHook();
     log('');
   }
-
-  // Install integration config
-  log('Integration:');
-  installIntegrationConfig();
-  log('');
-
-  // Install patterns directory
-  log('Patterns:');
-  installPatternsDir();
-  updateGitignore();
-  log('');
-
-  // Install git hook
-  log('Git hooks:');
-  installGitHook();
-  log('');
 
   // Summary
   const total = stats.installed + stats.updated + stats.current + stats.warnings;
@@ -1132,8 +1192,8 @@ function main() {
     log('\n(Dry run — no files were modified)');
   }
 
-  // Validation (skip during dry-run since nothing was actually installed)
-  if (!dryRun) {
+  // Validation (skip during dry-run or --only targeted mode)
+  if (!dryRun && !hasOnlyFilter) {
     log('');
     const valid = validateInstallation();
     if (!valid) {
