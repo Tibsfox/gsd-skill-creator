@@ -155,8 +155,9 @@ export class TranscriptParser {
    *
    * Sidechain (sub-agent) entries are already excluded by
    * {@link parse}/{@link parseString}. Results are de-duplicated and returned
-   * in stable insertion order (Skill blocks first in document order, then
-   * command-name tags in document order, deduped across both).
+   * in stable insertion order: entries are processed in document order, and
+   * within each entry its Skill tool_use blocks are processed before its
+   * command-name tags (deduplication applies across both sources).
    */
   extractActiveSkills(entries: TranscriptEntry[]): string[] {
     // Use an insertion-order-preserving Map (Set is fine here but explicit
