@@ -110,6 +110,24 @@ export interface SuggestionConfig {
 }
 
 // ============================================================================
+// CONFIG-05: AMIGA Detector Settings
+// ============================================================================
+
+/**
+ * AMIGA SkillCandidateDetector configuration.
+ *
+ * Controls detection sensitivity for the sequence_repetition method.
+ */
+export interface AmigaConfig {
+  /**
+   * Minimum number of bigram repetitions required before a sequence_repetition
+   * candidate is surfaced (1-20, default 2 = historic hardcoded bar).
+   * Calibrated by `bounded-learning --threshold amiga.min_sequence_count`.
+   */
+  min_sequence_count: number;
+}
+
+// ============================================================================
 // Composite Config
 // ============================================================================
 
@@ -130,6 +148,8 @@ export interface IntegrationConfig {
   suggestions: SuggestionConfig;
   /** Terminal integration settings (CONF-01/02/03). */
   terminal: TerminalConfig;
+  /** AMIGA detector settings (CONFIG-05). */
+  amiga: AmigaConfig;
 }
 
 export type { TerminalConfig } from './terminal-types.js';

@@ -84,6 +84,18 @@ const SuggestionSchema = z.object({
 });
 
 // ============================================================================
+// CONFIG-05: AMIGA Detector Schema
+// ============================================================================
+
+/**
+ * Schema for AMIGA SkillCandidateDetector configuration.
+ * min_sequence_count defaults to 2 (historic hardcoded bar).
+ */
+const AmigaSchema = z.object({
+  min_sequence_count: z.number().int().min(1).max(20).default(2),
+});
+
+// ============================================================================
 // Composite Integration Config Schema
 // ============================================================================
 
@@ -133,6 +145,9 @@ export const IntegrationConfigSchema = z.object({
     auth_mode: 'none' as const,
     theme: 'dark' as const,
     session_name: 'dev',
+  })),
+  amiga: AmigaSchema.default(() => ({
+    min_sequence_count: 2,
   })),
 });
 

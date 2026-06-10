@@ -280,6 +280,7 @@ describe('toSiliconPanelData', () => {
         theme: 'dark' as const,
         session_name: 'gsd',
       },
+      amiga: { min_sequence_count: 2 },
     };
 
     const data = toSiliconPanelData(config);
@@ -322,6 +323,7 @@ describe('toSiliconPanelData', () => {
         theme: 'dark' as const,
         session_name: 'gsd',
       },
+      amiga: { min_sequence_count: 2 },
     };
 
     const data = toSiliconPanelData(config);
@@ -390,6 +392,7 @@ describe('collectBudgetSiliconData', () => {
         theme: 'dark' as const,
         session_name: 'gsd',
       },
+      amiga: { min_sequence_count: 2 },
     };
 
     // Access the mock from the module factory

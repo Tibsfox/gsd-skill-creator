@@ -46,6 +46,7 @@ import {
 import type { SessionAnalysis, CorpusAnalysis } from '../../amiga/spike/revive-pipeline.js';
 import { SuggestionStore } from '../../detection/suggestion-store.js';
 import type { SkillCandidate as SuggestionCandidate } from '../../types/detection.js';
+import { readIntegrationConfig } from '../../integration/config/reader.js';
 
 interface Options {
   corpus: boolean;
@@ -112,8 +113,20 @@ export async function amigaCommand(args: string[]): Promise<number> {
     return 0;
   }
   const limit = Number.isFinite(opts.limit) ? (opts.limit as number) : opts.corpus ? 20 : 10;
+
+  // Read amiga.min_sequence_count from skill-creator.json (defaults to 2 if missing/ENOENT).
+  let minSequenceCount: number;
   try {
-    return opts.corpus ? await runCorpus(opts, limit) : await runSingle(opts, limit);
+    const config = await readIntegrationConfig();
+    minSequenceCount = config.amiga.min_sequence_count;
+  } catch {
+    minSequenceCount = 2;
+  }
+
+  try {
+    return opts.corpus
+      ? await runCorpus(opts, limit, minSequenceCount)
+      : await runSingle(opts, limit, minSequenceCount);
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     if (opts.json) console.log(JSON.stringify({ error: msg }, null, 2));
@@ -122,7 +135,7 @@ export async function amigaCommand(args: string[]): Promise<number> {
   }
 }
 
-async function runSingle(opts: Options, limit: number): Promise<number> {
+async function runSingle(opts: Options, limit: number, minSequenceCount: number): Promise<number> {
   const dir = opts.projectsDir ?? defaultProjectsDir();
   const path = opts.transcript ?? largestTranscript(dir);
   if (!path) {
@@ -134,7 +147,7 @@ async function runSingle(opts: Options, limit: number): Promise<number> {
     return fail(opts, `${basename(path)} has < 2 tool-uses; pass a richer transcript`);
   }
 
-  const a = analyzeSession(session);
+  const a = analyzeSession(session, 1, minSequenceCount);
   const structural = a.missionDetection.candidates.filter(
     (c) => c.detection_method !== 'sequence_repetition',
   );
@@ -180,7 +193,7 @@ async function runSingle(opts: Options, limit: number): Promise<number> {
   return seamProven ? 0 : 1;
 }
 
-async function runCorpus(opts: Options, limit: number): Promise<number> {
+async function runCorpus(opts: Options, limit: number, minSequenceCount: number): Promise<number> {
   const dir = opts.projectsDir ?? defaultProjectsDir();
   const paths = listTranscripts(dir);
   if (paths.length === 0) {
@@ -204,7 +217,7 @@ async function runCorpus(opts: Options, limit: number): Promise<number> {
     }
     seq++;
     try {
-      analyses.push(analyzeSession(session, seq));
+      analyses.push(analyzeSession(session, seq, minSequenceCount));
     } catch {
       skipped++;
     }

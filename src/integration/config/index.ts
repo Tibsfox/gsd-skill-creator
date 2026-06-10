@@ -14,6 +14,7 @@ export type {
   TokenBudgetConfig,
   ObservationConfig,
   SuggestionConfig,
+  AmigaConfig,
   IntegrationConfig,
   TerminalConfig,
 } from './types.js';

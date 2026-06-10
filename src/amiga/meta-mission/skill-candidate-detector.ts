@@ -79,14 +79,28 @@ const PHASE_ORDER = [
 // ============================================================================
 
 /**
+ * Options for SkillCandidateDetector.
+ */
+export interface SkillCandidateDetectorOptions {
+  /**
+   * Minimum bigram repetition count required before a sequence_repetition
+   * candidate is emitted. Default 2 (historic hardcoded bar). Wired to
+   * `amiga.min_sequence_count` in skill-creator.json via the bounded-learning
+   * calibration loop (v1.49.1027).
+   */
+  minSequenceCount?: number;
+}
+
+/**
  * Analyzes completed mission event logs using four detection methods
  * to surface skill candidates for the skill-creator pipeline.
  */
 export class SkillCandidateDetector {
   private skillPackage: SkillPackageDraft | null = null;
+  private readonly minSequenceCount: number;
 
-  constructor(_config?: Record<string, never>) {
-    // Config reserved for future extensibility
+  constructor(options?: SkillCandidateDetectorOptions) {
+    this.minSequenceCount = options?.minSequenceCount ?? 2;
   }
 
   /**
@@ -248,9 +262,9 @@ export class SkillCandidateDetector {
       }
     }
 
-    // Find bigrams that repeat 2+ times
+    // Find bigrams that repeat minSequenceCount+ times
     for (const [bigram, data] of bigramCounts) {
-      if (data.count >= 2) {
+      if (data.count >= this.minSequenceCount) {
         // Derive name from event types
         const parts = bigram.split('->');
         const name = parts

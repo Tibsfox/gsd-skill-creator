@@ -72,7 +72,11 @@ function isSelfLoop(c: AmigaSkillCandidate): boolean {
  * Run the full AMIGA detection + attribution pipeline on one distilled session.
  * Throws if the session has fewer than 2 tool-uses (no mission to project).
  */
-export function analyzeSession(session: TranscriptSession, seq = 1): SessionAnalysis {
+export function analyzeSession(
+  session: TranscriptSession,
+  seq = 1,
+  minSequenceCount?: number,
+): SessionAnalysis {
   if (session.tools.length < 2) {
     throw new Error(`session ${session.sessionId} has < 2 tool-uses; nothing to analyze`);
   }
@@ -83,13 +87,15 @@ export function analyzeSession(session: TranscriptSession, seq = 1): SessionAnal
   const ledgerEnvelopes = missionLog.filter((e) => e.type === 'LEDGER_ENTRY');
   const missionId = String((ledgerEnvelopes[0]!.payload as Record<string, unknown>).mission_id);
 
+  const detectorOpts = minSequenceCount !== undefined ? { minSequenceCount } : undefined;
+
   // Layer B1: detector over the mission/ledger log (lifecycle-aware).
-  const detector = new SkillCandidateDetector();
+  const detector = new SkillCandidateDetector(detectorOpts);
   detector.enrichWithAttribution(SessionEventBridge.buildDraft(missionLog));
   const missionDetection = detector.analyze(missionLog);
 
   // Layer B2: detector over the tool-sequence log (real workflows).
-  const seqDetection = new SkillCandidateDetector().analyze(toolSeqLog);
+  const seqDetection = new SkillCandidateDetector(detectorOpts).analyze(toolSeqLog);
 
   // Layer A: CE-1 attribution over the same ledger envelopes.
   const ledger = new AttributionLedger();

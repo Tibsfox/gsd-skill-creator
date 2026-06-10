@@ -54,6 +54,7 @@ const fullConfig: IntegrationConfig = {
   observation: { retention_days: 90, max_entries: 1000, capture_corrections: true, mine_active_skills: false },
   suggestions: { min_occurrences: 3, cooldown_days: 7, auto_dismiss_after_days: 30 },
   terminal: defaultTerminal,
+  amiga: { min_sequence_count: 2 },
 };
 
 // ---------------------------------------------------------------------------
