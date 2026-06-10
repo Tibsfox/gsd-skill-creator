@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.1026`.
+The story begins at `v1.0` and continues to `v1.49.1027`.
 
-**1069 chapters.** 1068 have retrospectives.
+**1070 chapters.** 1069 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -1077,3 +1077,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.1024](v1.49.1024/00-summary.md)** — COBE NASA Cosmic Background Explorer Microwave-Background Blackbody and Anisotropy Cosmology Mission · 2026-06-09
 - **[v1.49.1025](v1.49.1025/00-summary.md)** — WMAP NASA Wilkinson Microwave Anisotropy Probe High-Resolution CMB Mapping and Precision Cosmology Mission · 2026-06-10
 - **[v1.49.1026](v1.49.1026/00-summary.md)** — Gravity Probe B NASA General-Relativity Test, Cryogenic Gyroscope Precision, and Frame-Dragging Measurement Mission · 2026-06-10
+- **[v1.49.1027](v1.49.1027/00-summary.md)** — Loop-Outcome Ship: First Evidence-Driven Calibration Tick, Dismissal-Feedback Actuation, and Co-Activation Widening · 2026-06-10
