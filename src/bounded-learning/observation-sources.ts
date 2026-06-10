@@ -83,6 +83,13 @@ export interface ObservationLoaderOptions {
    * `observation.retention_days`; v884 read-side wire).
    */
   observationRetentionEventsPath?: string;
+  /**
+   * Path to suggestions.json used as the evidence source for
+   * `amiga.min_sequence_count` (consumed by amiga.* threshold class; v1027).
+   * When absent the default `suggestionsPath` is used as a fallback, so
+   * callers that already pass `suggestionsPath` do not need to duplicate it.
+   */
+  amigaSuggestionsPath?: string;
 }
 
 /**
@@ -164,6 +171,17 @@ export function observationSourceFor(threshold: CalibratableThreshold): Observat
       wired: true,
     };
   }
+  if (threshold === 'amiga.min_sequence_count') {
+    return {
+      sourceId: 'suggestions.json (amiga.sequence_repetition)',
+      description:
+        'Operator accept/dismiss decisions on AMIGA sequence_repetition ' +
+        'candidates in suggestions.json — accept = sequence bar was appropriately ' +
+        'low (favor decrease), dismiss = sequences were noisy (favor increase). ' +
+        'Wire: v1.49.1027.',
+      wired: true,
+    };
+  }
   // Defensive fallback for future threshold classes.
   return {
     sourceId: 'unknown',
@@ -188,6 +206,20 @@ async function loadSuggestionsFromFile(path: string): Promise<SuggestionEntry[]>
 }
 
 /**
+ * Filter a raw suggestions.json array to only entries whose
+ * `candidate.suggestedDescription` contains the given source tag.
+ * Entries missing the field are excluded (conservative).
+ */
+function filterBySourceTag(entries: SuggestionEntry[], sourceTag: string): SuggestionEntry[] {
+  return entries.filter((e) => {
+    const candidate = (e as Record<string, unknown>).candidate;
+    if (typeof candidate !== 'object' || candidate === null) return false;
+    const desc = (candidate as Record<string, unknown>).suggestedDescription;
+    return typeof desc === 'string' && desc.includes(sourceTag);
+  });
+}
+
+/**
  * Dispatch to the per-class loader and return the resulting observations.
  *
  * Wired classes:
@@ -197,8 +229,10 @@ async function loadSuggestionsFromFile(path: string): Promise<SuggestionEntry[]>
  *   - `predictive.low_confidence_threshold` — reads
  *     `predictive-low-confidence-events.jsonl` (v837).
  *   - `observation.retention_days`   — reads `observation-retention-events.jsonl` (v884).
+ *   - `amiga.min_sequence_count`     — reads `suggestions.json`, filtered to
+ *     entries tagged `[source: AMIGA sequence_repetition]` (v1027).
  *
- * Unwired classes (none remaining as of v888) return an empty array —
+ * Unwired classes (none remaining as of v1027) return an empty array —
  * the calibration loop then returns `direction: 'hold'` with
  * `observations: 0`, the honest outcome for "wire exists, source not yet
  * captured."
@@ -237,6 +271,19 @@ export async function loadObservationsForThreshold(
     const events = await readObservationRetentionEvents(path);
     return observationRetentionEventsToObservations(events);
   }
-  // No unwired classes remain as of v888.
+  if (threshold === 'amiga.min_sequence_count') {
+    // Evidence: suggestions.json entries tagged [source: AMIGA sequence_repetition].
+    // Polarity matches suggestions.*: accept = +1 (bar OK, may decrease),
+    // dismiss = -1 (noisy, favor increase).
+    const path =
+      options.amigaSuggestionsPath
+      ?? options.suggestionsPath
+      ?? undefined;
+    if (path === undefined) return [];
+    const entries = await loadSuggestionsFromFile(path);
+    const filtered = filterBySourceTag(entries, '[source: AMIGA sequence_repetition]');
+    return entriesToObservations(filtered);
+  }
+  // No unwired classes remain as of v1027.
   return [];
 }

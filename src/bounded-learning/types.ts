@@ -41,7 +41,8 @@ export type CalibratableThreshold =
   | 'token_budget.warn_at_percent'
   | 'token_budget.max_percent'
   | 'observation.retention_days'
-  | 'predictive.low_confidence_threshold';
+  | 'predictive.low_confidence_threshold'
+  | 'amiga.min_sequence_count';
 
 /**
  * Runtime enumeration of every `CalibratableThreshold` union member.
@@ -60,6 +61,7 @@ export const ALL_CALIBRATABLE_THRESHOLDS = [
   'token_budget.max_percent',
   'observation.retention_days',
   'predictive.low_confidence_threshold',
+  'amiga.min_sequence_count',
 ] as const satisfies readonly CalibratableThreshold[];
 
 /**

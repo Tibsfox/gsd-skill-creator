@@ -21,6 +21,7 @@
  *   - `suggestions.cooldown_days`           (v1.49.796)
  *   - `suggestions.auto_dismiss_after_days` (v1.49.797)
  *   - `token_budget.warn_at_percent`        (v1.49.798)
+ *   - `amiga.min_sequence_count`            (v1.49.1027)
  *
  * Every invocation appends a single JSON line to
  * `.planning/patterns/bounded-learning-log.jsonl` (configurable via
@@ -109,6 +110,7 @@ const SUPPORTED_THRESHOLDS: CalibratableThreshold[] = [
   'token_budget.max_percent',
   'predictive.low_confidence_threshold',
   'observation.retention_days',
+  'amiga.min_sequence_count',
 ];
 
 const DEFAULT_SUGGESTIONS_PATH = join(process.cwd(), '.planning', 'patterns', 'suggestions.json');
@@ -365,10 +367,14 @@ async function runCalibrationTick(ctx: TickContext): Promise<number> {
     tokenBudgetEventsPath: string;
     tokenBudgetMaxEventsPath: string;
     observationRetentionEventsPath?: string;
+    amigaSuggestionsPath?: string;
   } = {
     suggestionsPath: ctx.suggestionsPath,
     tokenBudgetEventsPath: ctx.tokenBudgetEventsPath,
     tokenBudgetMaxEventsPath: ctx.tokenBudgetMaxEventsPath,
+    // For amiga.min_sequence_count, re-use the suggestions path (same file,
+    // filtered by source tag inside loadObservationsForThreshold).
+    amigaSuggestionsPath: ctx.suggestionsPath,
   };
   if (ctx.retentionEventsPath !== undefined) {
     loadOptions.observationRetentionEventsPath = ctx.retentionEventsPath;
