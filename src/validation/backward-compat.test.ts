@@ -262,8 +262,9 @@ describe('Backward Compatibility: Edge Cases', () => {
   });
 
   // -------------------------------------------------------------------------
-  // Taxonomy array-form triggers (v1.49.1028 fix — 34/37 installed skills use
-  // this format; TriggerPatternsSchema normalizes string[] → { intents: [] }).
+  // Taxonomy array-form triggers (v1.49.1028 fix — all 36 source skills and
+  // 36/37 installed use this format as of v1.49.1028; TriggerPatternsSchema
+  // normalizes string[] → { intents: [] }).
   // -------------------------------------------------------------------------
 
   it('should accept taxonomy array-form triggers and normalize to {intents}', () => {

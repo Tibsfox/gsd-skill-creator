@@ -338,7 +338,9 @@ const TriggerPatternsObjectSchema = z.object({
  *   triggers:
  *     - "phrase one"
  *     - "phrase two"
- * This is the taxonomy format (34/37 installed skills as of v1.49.1028).
+ * This is the taxonomy format (all 36 source skills and 36/37 installed as of
+ * v1.49.1028 — the remaining installed skill, uc-observatory, has no triggers
+ * key; zero skills use the object form in frontmatter).
  * The object form (`{ intents: [...] }`) is the canonical internal shape.
  *
  * This schema accepts BOTH and normalizes the array form to
