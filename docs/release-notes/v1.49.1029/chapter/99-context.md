@@ -41,8 +41,8 @@ renorm), `a45474a4b` (reporter fix), `5cc526514` (ship-review v2).
 
 ## Step P review (dogfood, first v2 run)
 
-Run on the full ship diff with `{ base: 'v1.49.1028' }` — results recorded here after the run at
-T14: see the Verification section of README.md for the fix-now/optional/rejected counts.
+Run on the full ship diff with `{ base: 'v1.49.1028' }`. Results (filled at T14 after the run;
+this section is the single landing spot for the counts): PENDING-FILL-AT-T14.
 
 ## Files changed
 
@@ -50,7 +50,7 @@ T14: see the Verification section of README.md for the fix-now/optional/rejected
 file; `tools/pre-tag-gate.sh` (promotions + step 22 + denominator renorm); `tools/pre-tag-gate.test.sh`;
 `tools/ship-review/write-attestation.mjs` (+297, new) + its node:test file (+205);
 `tools/ship-review/adversarial-ship-review.mjs` (v2 judge);
-`tests/integration/adversarial-ship-review-discipline.test.ts` (5→9 workflow pins + doc pins);
+`tests/integration/adversarial-ship-review-discipline.test.ts` (6→9 workflow pins + doc pins);
 `tests/integration/pre-tag-gate-self-consistency.test.ts` (denominator 22 + exit-26 pins);
 `tools/render-claude-md/env-vars.json`; `docs/T14-SHIP-SEQUENCE.md` (step P REQUIRED);
 `docs/adversarial-ship-review.md` (promotion + v2 sections); `vitest.tools.config.mjs` (include).

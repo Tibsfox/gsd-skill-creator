@@ -270,9 +270,10 @@ describe('check-tools-test-coverage — node:test runner mode (v1.49.914)', () =
   const EXPECTED_NODE_TEST_FILES = [
     'tools/citation-debt/__tests__/list.test.mjs',
     'tools/release-history/__tests__/phases-plans-extraction.test.mjs',
+    'tools/ship-review/__tests__/write-attestation.test.mjs', // v1.49.1029 step P attestation (caught by the v2 review dogfood)
   ].sort();
 
-  it('--print-node-test lists EXACTLY the two known node:test files, exit 0', () => {
+  it('--print-node-test lists EXACTLY the three known node:test files, exit 0', () => {
     const r = spawnSync(process.execPath, [TOOL, '--print-node-test'], {
       cwd: REPO_ROOT,
       encoding: 'utf8',

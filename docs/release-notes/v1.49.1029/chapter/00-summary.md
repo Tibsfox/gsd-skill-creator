@@ -25,7 +25,7 @@ judge IP (§4b). Design pass at `.planning/SHIP-v1.49.1029-DESIGN.md`.
   self-consistency + bypass-vocab + env-vars + T14 + canonical doc all updated; 13 node:test tests.
 - **Ship-review v2** — cross-lens synthesis Judge phase (independent re-read, cross-lens dedupe,
   `STANDING_EXCEPTIONS` + `args.exceptions` allow-lists, 3-way verdict enum); no-resurrection rule;
-  dead-judge fail-safe; enum severity/confidence on findings; discipline drift-guard 5→9 workflow
+  dead-judge fail-safe; enum severity/confidence on findings; discipline drift-guard 6→9 workflow
   pins + doc pins.
 - **Live-caught reporter bug fixed in-ship** — `/step P/i` without a word boundary matched
   "step passes" (~39 NASA dirs), inflating the first live count to 59; fixed with `\b`, negative

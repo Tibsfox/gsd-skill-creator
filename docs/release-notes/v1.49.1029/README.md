@@ -76,7 +76,7 @@ push). Evidence verified live before promoting:
   (known-correct steady states, stated positively), and classifies survivors with the 3-way verdict
   enum `real-fix-now | real-minor-optional | rejected-false-positive`. The judge cannot resurrect
   refuter-rejected findings; a dead judge fails safe (all confirmed treated as fix-now). Findings
-  carry enum severity + confidence. Discipline drift-guard extended 5→9 workflow pins + doc pins.
+  carry enum severity + confidence. Discipline drift-guard extended 6→9 workflow pins + doc pins.
 - **Reporter counting bug caught live (`a45474a4b`).** The reporter's first real run inflated the
   step-P count to 59: `/step P/i` without a trailing word boundary matches "**step p**asses",
   present in ~39 NASA release-note dirs. Fixed with `\b` + negative regression pins, plus the
