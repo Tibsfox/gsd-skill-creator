@@ -15,6 +15,7 @@ pub mod keyring_backend;
 pub mod keystore;
 pub mod migration;
 pub mod panic_hook;
+pub mod process_context;
 pub mod proxy;
 pub mod proxy_server;
 pub mod sandbox;
