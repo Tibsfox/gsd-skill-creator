@@ -30,9 +30,12 @@ export async function sendChatMessage(
   message: string,
   conversationId?: string,
 ): Promise<ChatMessageResponse> {
+  // Tauri v2 expects camelCase wire keys for snake_case Rust params
+  // (conversation_id -> conversationId); a snake_case key here is silently
+  // ignored and the backend mints a fresh conversation every call.
   return invoke<ChatMessageResponse>("send_chat_message", {
     message,
-    conversation_id: conversationId,
+    conversationId,
   });
 }
 
@@ -56,23 +59,23 @@ export async function getConversationHistory(
   conversationId: string,
 ): Promise<ConversationHistory> {
   return invoke<ConversationHistory>("get_conversation_history", {
-    conversation_id: conversationId,
+    conversationId,
   });
 }
 
 /** Start a managed service. */
 export async function startService(serviceId: string): Promise<ServiceCommandResult> {
-  return invoke<ServiceCommandResult>("start_service", { service_id: serviceId });
+  return invoke<ServiceCommandResult>("start_service", { serviceId });
 }
 
 /** Stop a managed service. */
 export async function stopService(serviceId: string): Promise<ServiceCommandResult> {
-  return invoke<ServiceCommandResult>("stop_service", { service_id: serviceId });
+  return invoke<ServiceCommandResult>("stop_service", { serviceId });
 }
 
 /** Restart a managed service. */
 export async function restartService(serviceId: string): Promise<ServiceCommandResult> {
-  return invoke<ServiceCommandResult>("restart_service", { service_id: serviceId });
+  return invoke<ServiceCommandResult>("restart_service", { serviceId });
 }
 
 /** Get staging intake status counts. */

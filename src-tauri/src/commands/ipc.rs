@@ -89,14 +89,6 @@ pub async fn send_chat_message(
     }
 }
 
-/// Get the current state of all managed services.
-///
-/// Stub: will be wired to service launcher in Phase 380.
-#[tauri::command]
-pub async fn get_service_states() -> Result<serde_json::Value, String> {
-    Ok(json!([]))
-}
-
 /// Get conversation history from the conversations directory.
 ///
 /// If conversation_id is provided, loads that specific file.
@@ -130,29 +122,15 @@ pub async fn get_conversation_history(
     }
 }
 
-/// Start a managed service.
-///
-/// Stub: will be wired to service launcher in Phase 380.
-#[tauri::command]
-pub async fn start_service(service_id: String) -> Result<serde_json::Value, String> {
-    let _ = service_id; // suppress unused warning in stub
-    Ok(json!({ "ok": true }))
-}
-
 /// Stop a managed service.
 ///
-/// Stub: will be wired to service launcher in Phase 380.
+/// Honest stub (v1.49.1030): ServiceLauncher exposes no per-service stop
+/// and ShutdownCoordinator is unwired, so this no-op is the whole surface.
+/// The Phase 380 start/restart/get_service_states stubs that used to live
+/// beside it were replaced by the real commands::services implementations
+/// (LL-BOOT-007 unification). Wire this to a real stop path when one exists.
 #[tauri::command]
 pub async fn stop_service(service_id: String) -> Result<serde_json::Value, String> {
-    let _ = service_id; // suppress unused warning in stub
-    Ok(json!({ "ok": true }))
-}
-
-/// Restart a managed service.
-///
-/// Stub: will be wired to service launcher in Phase 380.
-#[tauri::command]
-pub async fn restart_service(service_id: String) -> Result<serde_json::Value, String> {
     let _ = service_id; // suppress unused warning in stub
     Ok(json!({ "ok": true }))
 }

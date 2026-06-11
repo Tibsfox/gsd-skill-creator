@@ -34,7 +34,9 @@ export type BootstrapStage =
  */
 const SERVICE_ORDER = [
   { id: "tmux", deps: [] as string[], optional: true },
-  { id: "claude", deps: ["tmux"], optional: false },
+  // v1.49.1030: "claude" -> "claude_code" — the Rust parse_service_id /
+  // ServiceId registry knows only "claude_code"; the old id was NotFound.
+  { id: "claude_code", deps: ["tmux"], optional: false },
   { id: "file_watcher", deps: [] as string[], optional: false },
   { id: "dashboard", deps: ["file_watcher"], optional: false },
   { id: "console", deps: ["file_watcher"], optional: false },
@@ -48,6 +50,10 @@ export interface IpcCommandsPort {
   getServiceStates(): Promise<
     Array<{ service_id: string; status: string; led_color: string }>
   >;
+  // TODO(v1.49.1030): has_api_key/store_api_key Tauri commands were deleted
+  // (superseded by keystore_status/keystore_set). BootstrapFlow is never
+  // constructed in production; wire these port methods to the unified
+  // keystore surface (desktop/src/keystore/invoke.ts) when bootstrap revives.
   hasApiKey(): Promise<boolean>;
   storeApiKey(key: string): Promise<void>;
   getMagicLevel(): Promise<{ level: number }>;
