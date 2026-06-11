@@ -9,17 +9,27 @@
  * counting, no LLM) + a negative-test fixture + pre-tag-gate step 21 (WARN-first,
  * #10463 staged promotion).
  *
- * As the NEWEST step-addition meta-test, this file OWNS the absolute gate count
- * ("all 21 checks PASS"); the prior owner (v1-49-965-meta-test) was made
- * count-agnostic in this same ship (the repo's single-count-owner convention).
+ * This file owned the absolute gate count ("all 21 checks PASS") from v983 until
+ * v1.49.1029 added step 22 (ship-review-attestation); the absolute count is now
+ * owned by pre-tag-gate-self-consistency.test.ts (which derives denominator ==
+ * summary count dynamically), and C2 here is count-agnostic per the
+ * single-count-owner convention.
+ *
+ * PROMOTED at v1.49.1029 (audit-2026-06-09 ship 3): the staged WARN-only rung
+ * served its #10463 purpose (degrees 1.161–1.217 all clean under the regime,
+ * K=30); the step now BLOCKs (exit 25) on a TRIP-RISK verdict (tool exit 1) by
+ * default, while tool malfunction (exit 2) stays WARN — a broken tool is not a
+ * content verdict. C1/C4 updated accordingly; the gate_required escalation
+ * branch is gone (meaningless once the default is BLOCK).
  *
  * Gates exercised (committed surfaces only — the gate scans gitignored www/ +
  * .planning/ at runtime, but those are absent in clean CI, so this meta-test
  * pins the COMMITTED gate/tool/doc surfaces, never disk state):
- *   C1 — step 21 trip-vocab invokes the checker, is WARN-only by default,
- *        escalates to BLOCKER (exit 25) under gate_required, is gateable via
+ *   C1 — step 21 trip-vocab invokes the checker, BLOCKs (exit 25) on the
+ *        TRIP-RISK verdict by default (PROMOTION-MARKER recorded), keeps the
+ *        exit-2 malfunction path WARN, is gateable via
  *        SC_PRE_TAG_GATE_BYPASS=trip-vocab, and names the pre-dispatch fix.
- *   C2 — final summary advanced to "all 21 checks PASS" (the pre-v983 20-count gone).
+ *   C2 — (count-agnostic since v1029) step-21 present; pre-v983 20-count gone.
  *   C3 — step 21 appears after step 20 and before the final summary.
  *   C4 — the trip-vocab BLOCKER exit code (25) is UNIQUE (no collision).
  *   C5 — step 21 captures the tool exit code without tripping set -e
@@ -46,15 +56,19 @@ const ENV_VARS_PATH = join(REPO_ROOT, 'tools/render-claude-md/env-vars.json');
 const TOOL_PATH = join(REPO_ROOT, 'tools/trip-vocab-check.mjs');
 
 describe('v1.49.983 integration meta-test (Ship 5.3 GAP-7 trip-vocab budget gate)', () => {
-  it('C1 — step 21 trip-vocab: WARN-only default, escalatable, gateable, names the fix', () => {
+  it('C1 — step 21 trip-vocab: default-BLOCK on trip-risk verdict, WARN on malfunction, gateable', () => {
     const gate = readFileSync(GATE_PATH, 'utf8');
-    // Denominator-agnostic for the step body; the ABSOLUTE count is pinned by C2.
+    // Denominator-agnostic for the step body; the ABSOLUTE count is owned by
+    // pre-tag-gate-self-consistency.test.ts since v1029.
     expect(gate).toMatch(/step 21\/\d+: trip-vocab budget/);
     // Invokes the deterministic checker.
     expect(gate).toMatch(/node "\$REPO_ROOT\/tools\/trip-vocab-check\.mjs"/);
-    // WARN-only by default + escalation hook.
-    expect(gate).toMatch(/gate_required "trip-vocab"/);
-    expect(gate).toMatch(/set SC_PRE_TAG_GATE_REQUIRE=trip-vocab to block/);
+    // PROMOTED (v1.49.1029): TRIP-RISK verdict blocks by default; the promotion
+    // is recorded in a machine-readable marker (the readiness reporter greps it).
+    expect(gate).toMatch(/PROMOTION-MARKER: trip-vocab default-BLOCK since v1\.49\.1029/);
+    expect(gate).not.toMatch(/gate_required "trip-vocab"/); // escalation branch gone
+    // The exit-2 malfunction path stays WARN (a broken tool is not a verdict).
+    expect(gate).toMatch(/trip-vocab (tool error|check could not run)/);
     // Gateable via the named bypass token.
     expect(gate).toMatch(/gate_bypassed "trip-vocab"/);
     // Names the on-demand pre-dispatch invocation.
@@ -63,9 +77,13 @@ describe('v1.49.983 integration meta-test (Ship 5.3 GAP-7 trip-vocab budget gate
     expect(gate).toMatch(/trip-vocab\)"/);
   });
 
-  it('C2 — final summary advanced to "all 21 checks PASS" (pre-v983 20-count gone)', () => {
+  it('C2 — the v983 trip-vocab step landed; absolute count owned by self-consistency since v1029', () => {
     const gate = readFileSync(GATE_PATH, 'utf8');
-    expect(gate).toMatch(/all 21 checks PASS/);
+    // COUNT-AGNOSTIC as of v1029: pre-tag-gate-self-consistency.test.ts derives
+    // denominator == summary count dynamically (single-count-owner convention;
+    // ownership transferred when step 22 ship-review-attestation landed).
+    expect(gate).toMatch(/step 21\/\d+: trip-vocab budget/);
+    expect(gate).toMatch(/all \d+ checks PASS/);
     // The pre-v983 20-count summary is gone (the step-21 addition landed).
     expect(gate).not.toMatch(/all 20 checks PASS/);
   });
@@ -82,9 +100,12 @@ describe('v1.49.983 integration meta-test (Ship 5.3 GAP-7 trip-vocab budget gate
 
   it('C4 — the trip-vocab BLOCKER exit code (25) is UNIQUE (no collision)', () => {
     const gate = readFileSync(GATE_PATH, 'utf8');
-    // The escalation path uses exit 25 (next free after 24=state-backups; 23=adoption).
+    // The verdict-BLOCK path uses exit 25 (next free after 24=state-backups; 23=adoption).
     expect(gate).toMatch(/exit 25/);
-    const exit25 = (gate.match(/exit 25\b/g) || []).length;
+    // Line-anchored (the post-v966 idiom, mirroring the self-consistency test):
+    // comment mentions like "(exit 25)" in the promoted step's prose are not
+    // exit statements and must not count.
+    const exit25 = (gate.match(/^\s*exit 25\b/gm) || []).length;
     expect(exit25).toBe(1); // one owner
   });
 

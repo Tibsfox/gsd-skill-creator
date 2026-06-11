@@ -13,10 +13,18 @@
  * C2/C3 here were made count-agnostic at v983 per the single-count-owner
  * convention (the v983 meta-test now pins "all 21 checks PASS").
  *
+ * PROMOTED at v1.49.1029 (audit-2026-06-09 ship 3): the staged WARN-only rung
+ * served its #10463 purpose (64 consecutive per-ship baselines accrued, K=30);
+ * the step now BLOCKs (exit 23) on a stale VERDICT (tool exit 1) by default,
+ * while tool malfunction (exit 2) stays WARN — a broken tool is not a staleness
+ * verdict. C1/C4 updated accordingly; the gate_required escalation branch is
+ * gone (meaningless once the default is BLOCK).
+ *
  * Gates exercised:
- *   C1 — step 20/20 adoption-freshness invokes the freshness tool, is WARN-only by
- *        default, escalates to BLOCKER (exit 23) under gate_required, is gateable
- *        via SC_PRE_TAG_GATE_BYPASS=adoption-freshness, and names the fix.
+ *   C1 — step 20 adoption-freshness invokes the freshness tool, BLOCKs (exit 23)
+ *        on the stale verdict by default (PROMOTION-MARKER recorded), keeps the
+ *        exit-2 malfunction path WARN, is gateable via
+ *        SC_PRE_TAG_GATE_BYPASS=adoption-freshness, and names the fix.
  *   C2 — (count-agnostic since v983) step-20 adoption-freshness present; pre-v965 19-count gone.
  *   C3 — step 20 appears after step 19 and before the final summary.
  *   C4 — exit 23 is UNIQUE (no collision with tools-node-test's exit 22).
@@ -39,17 +47,20 @@ const T14_PATH = join(REPO_ROOT, 'docs/T14-SHIP-SEQUENCE.md');
 const ENV_VARS_PATH = join(REPO_ROOT, 'tools/render-claude-md/env-vars.json');
 
 describe('v1.49.965 integration meta-test (Ship 0.1 adoption-baseline freshness gate)', () => {
-  it('C1 — step 20 adoption-freshness: WARN-only default, escalatable, gateable', () => {
+  it('C1 — step 20 adoption-freshness: default-BLOCK on stale verdict, WARN on malfunction, gateable', () => {
     const gate = readFileSync(GATE_PATH, 'utf8');
     // Denominator-agnostic: per-step denominators are owned by
     // pre-tag-gate-self-consistency.test.ts (Ship 0.2). The ABSOLUTE count is
-    // owned by the v983 meta-test ("all 21 checks PASS"); C2 here is count-agnostic.
+    // owned by the newest step-addition meta-test; C2 here is count-agnostic.
     expect(gate).toMatch(/step 20\/\d+: adoption-baseline freshness/);
     // Invokes the freshness tool.
     expect(gate).toMatch(/node "\$REPO_ROOT\/tools\/adoption-baseline-freshness\.mjs"/);
-    // WARN-only by default + escalation hook.
-    expect(gate).toMatch(/gate_required "adoption-freshness"/);
-    expect(gate).toMatch(/set SC_PRE_TAG_GATE_REQUIRE=adoption-freshness to block/);
+    // PROMOTED (v1.49.1029): stale VERDICT blocks by default; the promotion is
+    // recorded in a machine-readable marker (the readiness reporter greps it).
+    expect(gate).toMatch(/PROMOTION-MARKER: adoption-freshness default-BLOCK since v1\.49\.1029/);
+    expect(gate).not.toMatch(/gate_required "adoption-freshness"/); // escalation branch gone
+    // The exit-2 malfunction path stays WARN (a broken tool is not a verdict).
+    expect(gate).toMatch(/adoption-freshness tool (error|could not run)/);
     // Gateable via the named bypass token.
     expect(gate).toMatch(/gate_bypassed "adoption-freshness"/);
     // Names the one-command fix.
@@ -81,12 +92,15 @@ describe('v1.49.965 integration meta-test (Ship 0.1 adoption-baseline freshness 
 
   it('C4 — the adoption-freshness BLOCKER exit code (23) is UNIQUE (no collision)', () => {
     const gate = readFileSync(GATE_PATH, 'utf8');
-    // The escalation path uses exit 23.
+    // The verdict-BLOCK path uses exit 23.
     expect(gate).toMatch(/exit 23/);
-    // 23 appears exactly once (one owner); the original draft reused 22 (the
-    // tools-node-test code) — the review caught the collision, this pins the fix.
-    const exit23 = (gate.match(/exit 23\b/g) || []).length;
-    const exit22 = (gate.match(/exit 22\b/g) || []).length;
+    // Exactly one REAL exit statement owns 23 (one owner); the original draft
+    // reused 22 (the tools-node-test code) — the review caught the collision,
+    // this pins the fix. Line-anchored (the post-v966 idiom, mirroring the
+    // self-consistency test): comment mentions like "BLOCK (exit 23)" in the
+    // promoted step's prose are not exit statements and must not count.
+    const exit23 = (gate.match(/^\s*exit 23\b/gm) || []).length;
+    const exit22 = (gate.match(/^\s*exit 22\b/gm) || []).length;
     expect(exit23).toBe(1);
     expect(exit22).toBe(1); // tools-node-test still owns 22, alone
   });
