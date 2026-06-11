@@ -79,8 +79,8 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.17](v1.49.17/00-summary.md)** — The Space Between · 2026-03-04
 - **[v1.49.18](v1.49.18/00-summary.md)** — Space Between Observatory · 2026-03-06
 - **[v1.49.19](v1.49.19/00-summary.md)** — Gastown Chipset Integration · 2026-03-06
-- **[v1.49.20](v1.49.20/00-summary.md)** — Documentation Consolidation · 2026-03-06
 - **[v1.49.20.1](v1.49.20.1/00-summary.md)** — Documentation Reflections · 2026-03-06
+- **[v1.49.20](v1.49.20/00-summary.md)** — Documentation Consolidation · 2026-03-06
 - **[v1.49.21](v1.49.21/00-summary.md)** — Image to Mission Pipeline · 2026-03-07
 - **[v1.49.22](v1.49.22/00-summary.md)** — PNW Research Series · 2026-03-07
 - **[v1.49.23](v1.49.23/00-summary.md)** — Unison Language & Math Co-Processor Completion · 2026-03-08
@@ -1017,28 +1017,28 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.964](v1.49.964/00-summary.md)** — M4 orphan trunk-tmp cleanup on commit-lock reap · 2026-06-03
 - **[v1.49.965](v1.49.965/00-summary.md)** — adoption-baseline freshness gate + tool · 2026-06-03
 - **[v1.49.966](v1.49.966/00-summary.md)** — pre-tag-gate self-consistency + exit-21 collision fix · 2026-06-03
-- **[v1.49.967](v1.49.967/00-summary.md)** — examples/ catalog frontmatter hygiene + stray test-skill cleanup · 2026-06-04
-- **[v1.49.968](v1.49.968/00-summary.md)** — codify adversarial pre-push ship review (T14 step + workflow) · 2026-06-04
+- **[v1.49.967](v1.49.967/00-summary.md)** — examples/ catalog frontmatter hygiene · 2026-06-04
+- **[v1.49.968](v1.49.968/00-summary.md)** — codify adversarial pre-push ship review · 2026-06-04
 - **[v1.49.969](v1.49.969/00-summary.md)** — ME-2 model-affinity dispatch actuator · 2026-06-04
 - **[v1.49.970](v1.49.970/00-summary.md)** — de-hardcode examples/ catalog tooling + re-catalog storefront · 2026-06-04
 - **[v1.49.971](v1.49.971/00-summary.md)** — mark agent-teams primitive dormant (D2) · 2026-06-04
 - **[v1.49.972](v1.49.972/00-summary.md)** — park MA/MB/MD control-theory island + retire intrinsic-telemetry (D3) · 2026-06-04
-- **[v1.49.973](v1.49.973/00-summary.md)** — update sub-agent dispatch discipline for opus 4.8 harness (Ship 1.3) · 2026-06-04
-- **[v1.49.974](v1.49.974/00-summary.md)** — skills source-of-truth promotion + research-skill wires (Ship 2.2) · 2026-06-04
+- **[v1.49.973](v1.49.973/00-summary.md)** — update sub-agent dispatch discipline for opus 4.8 harness · 2026-06-04
+- **[v1.49.974](v1.49.974/00-summary.md)** — skills source-of-truth promotion + research-skill wires · 2026-06-04
 - **[v1.49.975](v1.49.975/00-summary.md)** — agent adoption scan + dormant-agent verdicts · 2026-06-04
 - **[v1.49.976](v1.49.976/00-summary.md)** — team schema reconcile + chipset taxonomy/validate fixes · 2026-06-04
-- **[v1.49.977](v1.49.977/00-summary.md)** — reachability-aware adoption scanner (Ship 3.1) · 2026-06-05
-- **[v1.49.978](v1.49.978/00-summary.md)** — reachability shelfware disposition: 2 wired, 14 allowlisted, upstream pair retired · 2026-06-05
+- **[v1.49.977](v1.49.977/00-summary.md)** — reachability-aware adoption scanner · 2026-06-05
+- **[v1.49.978](v1.49.978/00-summary.md)** — reachability shelfware disposition · 2026-06-05
 - **[v1.49.979](v1.49.979/00-summary.md)** — sc-learn + scan-arxiv CLI dispatch wire · 2026-06-05
-- **[v1.49.980](v1.49.980/00-summary.md)** — wire co-activation consumer (envelope unwrap + skill-mining) · 2026-06-05
-- **[v1.49.981](v1.49.981/00-summary.md)** — skill-mining default-on + bootstrap co-activation thresholds (Ship 5.1c) · 2026-06-05
-- **[v1.49.982](v1.49.982/00-summary.md)** — outcome-driven retention substrate + bidirectional apply-guard (Ship 5.2) · 2026-06-05
+- **[v1.49.980](v1.49.980/00-summary.md)** — Co-activation consumer wire · 2026-06-05
+- **[v1.49.981](v1.49.981/00-summary.md)** — Skill-mining default-on + bootstrap co-activation thresholds · 2026-06-05
+- **[v1.49.982](v1.49.982/00-summary.md)** — outcome-driven retention substrate · 2026-06-05
 - **[v1.49.983](v1.49.983/00-summary.md)** — GAP-7 deterministic trip-vocab check · 2026-06-05
 - **[v1.49.984](v1.49.984/00-summary.md)** — skill-mining config migrator (integration migrate) · 2026-06-05
 - **[v1.49.985](v1.49.985/00-summary.md)** — staged windows-latest CI test leg (Phase 4) · 2026-06-05
-- **[v1.49.986](v1.49.986/00-summary.md)** — windows CI cross-platform green + load-bearing flip (Phase 4 rungs 2-3) · 2026-06-06
+- **[v1.49.986](v1.49.986/00-summary.md)** — Phase 4 rungs 2-3 — windows CI cross-platform green + load-bearing flip · 2026-06-06
 - **[v1.49.987](v1.49.987/00-summary.md)** — AMIGA revive: wired amiga CLI command + corpus mode · 2026-06-06
-- **[v1.49.988](v1.49.988/00-summary.md)** — Wind NASA Comprehensive In-Situ Solar-Wind Monitor at Sun-Earth L1 Halo Orbit (NASA 1.178→1.179) · 2026-06-06
+- **[v1.49.988](v1.49.988/00-summary.md)** — Wind NASA Comprehensive In-Situ Solar-Wind Monitor at Sun-Earth L1 Halo Orbit · 2026-06-06
 - **[v1.49.989](v1.49.989/00-summary.md)** — Voyager 1 NASA Grand-Tour Outer-Planets and Interstellar Mission · 2026-06-06
 - **[v1.49.990](v1.49.990/00-summary.md)** — Voyager 2 NASA Grand-Tour Four-Giant-Planet and Interstellar Mission · 2026-06-06
 - **[v1.49.991](v1.49.991/00-summary.md)** — Pioneer 10 NASA Outer-Planets Trailblazer and Outer-Heliosphere Precursor Mission · 2026-06-06
@@ -1064,7 +1064,7 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.1011](v1.49.1011/00-summary.md)** — Spitzer Space Telescope Infrared Great Observatory Deep-Infrared Imaging and Spectroscopy Mission · 2026-06-08
 - **[v1.49.1012](v1.49.1012/00-summary.md)** — WISE Wide-field Infrared Survey Explorer Deep Infrared All-Sky Survey and NEOWISE Mission · 2026-06-08
 - **[v1.49.1013](v1.49.1013/00-summary.md)** — Compton Gamma Ray Observatory Gamma-Ray Great Observatory All-Sky Survey and Burst Monitoring Mission · 2026-06-08
-- **[v1.49.1014](v1.49.1014/00-summary.md)** — Swift Gamma-Ray Burst Rapid Localization and Multiwavelength Afterglow Follow-Up Mission · 2026-06-08
+- **[v1.49.1014](v1.49.1014/00-summary.md)** — Neil Gehrels Swift Observatory Gamma-Ray Burst Rapid Localization and Multiwavelength Afterglow Follow-Up Mission · 2026-06-08
 - **[v1.49.1015](v1.49.1015/00-summary.md)** — Fermi Gamma-ray Space Telescope Continuous High-Energy All-Sky Survey Mission · 2026-06-08
 - **[v1.49.1016](v1.49.1016/00-summary.md)** — Kepler Space Telescope Exoplanet Transit-Photometry Survey and First Statistical Census Mission · 2026-06-08
 - **[v1.49.1017](v1.49.1017/00-summary.md)** — TESS Transiting Exoplanet Survey Satellite All-Sky Transit Survey of Nearby Bright Stars Mission · 2026-06-08
@@ -1077,6 +1077,6 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.1024](v1.49.1024/00-summary.md)** — COBE NASA Cosmic Background Explorer Microwave-Background Blackbody and Anisotropy Cosmology Mission · 2026-06-09
 - **[v1.49.1025](v1.49.1025/00-summary.md)** — WMAP NASA Wilkinson Microwave Anisotropy Probe High-Resolution CMB Mapping and Precision Cosmology Mission · 2026-06-10
 - **[v1.49.1026](v1.49.1026/00-summary.md)** — Gravity Probe B NASA General-Relativity Test, Cryogenic Gyroscope Precision, and Frame-Dragging Measurement Mission · 2026-06-10
-- **[v1.49.1027](v1.49.1027/00-summary.md)** — Loop-Outcome Ship: First Evidence-Driven Calibration Tick, Dismissal-Feedback Actuation, and Co-Activation Widening · 2026-06-10
+- **[v1.49.1027](v1.49.1027/00-summary.md)** — Loop-Outcome Ship: First Evidence-Driven Calibration Tick, Dismissal-Feedback Actuation, Co-Activation Widening · 2026-06-10
 - **[v1.49.1028](v1.49.1028/00-summary.md)** — Deploy-Layer Fix: Targeted Install, Parity Drift-Guard, Activation Counter · 2026-06-10
 - **[v1.49.1029](v1.49.1029/00-summary.md)** — WARN-to-BLOCK Promotions: 22-Step Gate, Ship-Review v2, Readiness Reporter · 2026-06-10

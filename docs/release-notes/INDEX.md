@@ -1,11 +1,154 @@
 # Release History — Chapter Index
 
-_Generated 2026-05-29 from `release_history.*`. Source of truth: Postgres._
+_Generated 2026-06-11 from `release_history.*`. Source of truth: Postgres._
 
-**929 releases.** 928 with retrospective. 731 with extracted lessons.
+**1072 releases.** 1071 with retrospective. 805 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
+| `v1.49.1029` | WARN-to-BLOCK Promotions: 22-Step Gate, Ship-Review v2, Readiness Reporter | 2026-06-10 | ✓ | 1 | [read](v1.49.1029/00-summary.md) |
+| `v1.49.1028` | Deploy-Layer Fix: Targeted Install, Parity Drift-Guard, Activation Counter | 2026-06-10 | ✓ | 1 | [read](v1.49.1028/00-summary.md) |
+| `v1.49.1027` | Loop-Outcome Ship: First Evidence-Driven Calibration Tick, Dismissal-Feedback Actuation, Co-Activation Widening | 2026-06-10 | ✓ | 1 | [read](v1.49.1027/00-summary.md) |
+| `v1.49.1026` | Gravity Probe B NASA General-Relativity Test, Cryogenic Gyroscope Precision, and Frame-Dragging Measurement Mission | 2026-06-10 | ✓ | 11 | [read](v1.49.1026/00-summary.md) |
+| `v1.49.1025` | WMAP NASA Wilkinson Microwave Anisotropy Probe High-Resolution CMB Mapping and Precision Cosmology Mission | 2026-06-10 | ✓ | 11 | [read](v1.49.1025/00-summary.md) |
+| `v1.49.1024` | COBE NASA Cosmic Background Explorer Microwave-Background Blackbody and Anisotropy Cosmology Mission | 2026-06-09 | ✓ | 11 | [read](v1.49.1024/00-summary.md) |
+| `v1.49.1023` | Dawn NASA Vesta and Ceres Ion-Propelled Protoplanet and Dwarf-Planet Orbital Exploration Mission | 2026-06-09 | ✓ | 11 | [read](v1.49.1023/00-summary.md) |
+| `v1.49.1022` | MESSENGER Mercury Orbital Imaging, Geochemistry, and Magnetic-Field Mapping Mission | 2026-06-09 | ✓ | 11 | [read](v1.49.1022/00-summary.md) |
+| `v1.49.1021` | Magellan Venus Radar Surface-Mapping Mission | 2026-06-08 | ✓ | 11 | [read](v1.49.1021/00-summary.md) |
+| `v1.49.1020` | Aqua EOS Afternoon Water-Cycle Observatory Mission | 2026-06-08 | ✓ | 11 | [read](v1.49.1020/00-summary.md) |
+| `v1.49.1019` | Terra EOS Flagship Multi-Instrument Whole-Earth-System Observation Mission | 2026-06-08 | ✓ | 11 | [read](v1.49.1019/00-summary.md) |
+| `v1.49.1018` | Landsat Earth-Observation Multispectral Land-Imaging Continuous Earth-Surface Record Mission | 2026-06-08 | ✓ | 11 | [read](v1.49.1018/00-summary.md) |
+| `v1.49.1017` | TESS Transiting Exoplanet Survey Satellite All-Sky Transit Survey of Nearby Bright Stars Mission | 2026-06-08 | ✓ | 11 | [read](v1.49.1017/00-summary.md) |
+| `v1.49.1016` | Kepler Space Telescope Exoplanet Transit-Photometry Survey and First Statistical Census Mission | 2026-06-08 | ✓ | 11 | [read](v1.49.1016/00-summary.md) |
+| `v1.49.1015` | Fermi Gamma-ray Space Telescope Continuous High-Energy All-Sky Survey Mission | 2026-06-08 | ✓ | 11 | [read](v1.49.1015/00-summary.md) |
+| `v1.49.1014` | Neil Gehrels Swift Observatory Gamma-Ray Burst Rapid Localization and Multiwavelength Afterglow Follow-Up Mission | 2026-06-08 | ✓ | 11 | [read](v1.49.1014/00-summary.md) |
+| `v1.49.1013` | Compton Gamma Ray Observatory Gamma-Ray Great Observatory All-Sky Survey and Burst Monitoring Mission | 2026-06-08 | ✓ | 11 | [read](v1.49.1013/00-summary.md) |
+| `v1.49.1012` | WISE Wide-field Infrared Survey Explorer Deep Infrared All-Sky Survey and NEOWISE Mission | 2026-06-08 | ✓ | 11 | [read](v1.49.1012/00-summary.md) |
+| `v1.49.1011` | Spitzer Space Telescope Infrared Great Observatory Deep-Infrared Imaging and Spectroscopy Mission | 2026-06-08 | ✓ | 11 | [read](v1.49.1011/00-summary.md) |
+| `v1.49.1010` | IRAS Infrared Astronomical Satellite First Infrared All-Sky Survey Mission | 2026-06-07 | ✓ | 11 | [read](v1.49.1010/00-summary.md) |
+| `v1.49.1009` | Parker Solar Probe First Spacecraft Through the Solar Corona In-Situ Near-Sun Mission | 2026-06-07 | ✓ | 11 | [read](v1.49.1009/00-summary.md) |
+| `v1.49.1008` | IRIS Interface Region Imaging Spectrograph Chromosphere and Transition-Region UV Imaging-Spectroscopy Mission | 2026-06-07 | ✓ | 11 | [read](v1.49.1008/00-summary.md) |
+| `v1.49.1007` | RHESSI Reuven Ramaty High Energy Solar Spectroscopic Imager Hard-X-Ray Gamma-Ray Flare Imaging Mission | 2026-06-07 | ✓ | 11 | [read](v1.49.1007/00-summary.md) |
+| `v1.49.1006` | TRACE Transition Region and Coronal Explorer High-Resolution Solar EUV Imaging Mission | 2026-06-07 | ✓ | 11 | [read](v1.49.1006/00-summary.md) |
+| `v1.49.1005` | OSO Orbiting Solar Observatory Continuous Solar-Cycle Monitoring Program Mission | 2026-06-07 | ✓ | 11 | [read](v1.49.1005/00-summary.md) |
+| `v1.49.1004` | AE Atmosphere Explorer Upper-Atmosphere In-Situ Aeronomy Mission | 2026-06-07 | ✓ | 11 | [read](v1.49.1004/00-summary.md) |
+| `v1.49.1003` | OGO Orbiting Geophysical Observatory Comprehensive Geophysical Survey Program Mission | 2026-06-07 | ✓ | 11 | [read](v1.49.1003/00-summary.md) |
+| `v1.49.1002` | TWINS Two Wide-angle Imaging Neutral-atom Spectrometers Stereoscopic Magnetosphere Imaging Mission | 2026-06-07 | ✓ | 11 | [read](v1.49.1002/00-summary.md) |
+| `v1.49.1001` | ISEE-1/2 International Sun-Earth Explorer Mother-Daughter Variable-Separation Boundary-Physics Mission | 2026-06-06 | ✓ | 11 | [read](v1.49.1001/00-summary.md) |
+| `v1.49.1000` | CRRES Combined Release and Radiation Effects Satellite Radiation-Belt Environment Mapping Mission | 2026-06-06 | ✓ | 11 | [read](v1.49.1000/00-summary.md) |
+| `v1.49.999` | AMPTE Active Magnetospheric Particle Tracer Explorers Ring-Current Composition and Tracer-Release Mission | 2026-06-06 | ✓ | 12 | [read](v1.49.999/00-summary.md) |
+| `v1.49.998` | Polar Global Geospace Science Polar Multi-Wavelength Auroral Imaging and Polar-Cusp In-Situ Mission | 2026-06-06 | ✓ | 12 | [read](v1.49.998/00-summary.md) |
+| `v1.49.997` | IMAGE Imager for Magnetopause-to-Aurora Global Exploration First Global Magnetosphere Imaging Mission | 2026-06-06 | ✓ | 12 | [read](v1.49.997/00-summary.md) |
+| `v1.49.996` | DE-1 Dynamics Explorer 1 Global Auroral Imaging and Magnetosphere-Ionosphere Coupling Mission | 2026-06-06 | ✓ | 12 | [read](v1.49.996/00-summary.md) |
+| `v1.49.995` | FAST Fast Auroral Snapshot Explorer NASA Small Explorer High-Cadence Magnetosphere Mission | 2026-06-06 | ✓ | 12 | [read](v1.49.995/00-summary.md) |
+| `v1.49.994` | Cassini-Huygens NASA-ESA-ASI Saturn System Flagship and Heliosphere ENA Imaging Mission | 2026-06-06 | ✓ | 14 | [read](v1.49.994/00-summary.md) |
+| `v1.49.993` | New Horizons NASA Pluto Reconnaissance and Outer-Heliosphere Frontier Mission | 2026-06-06 | ✓ | 14 | [read](v1.49.993/00-summary.md) |
+| `v1.49.992` | Pioneer 11 NASA First-Saturn-Flyby and Paired Outer-Heliosphere Precursor Mission | 2026-06-06 | ✓ | 14 | [read](v1.49.992/00-summary.md) |
+| `v1.49.991` | Pioneer 10 NASA Outer-Planets Trailblazer and Outer-Heliosphere Precursor Mission | 2026-06-06 | ✓ | 14 | [read](v1.49.991/00-summary.md) |
+| `v1.49.990` | Voyager 2 NASA Grand-Tour Four-Giant-Planet and Interstellar Mission | 2026-06-06 | ✓ | 13 | [read](v1.49.990/00-summary.md) |
+| `v1.49.989` | Voyager 1 NASA Grand-Tour Outer-Planets and Interstellar Mission | 2026-06-06 | ✓ | 12 | [read](v1.49.989/00-summary.md) |
+| `v1.49.988` | Wind NASA Comprehensive In-Situ Solar-Wind Monitor at Sun-Earth L1 Halo Orbit | 2026-06-06 | ✓ | 12 | [read](v1.49.988/00-summary.md) |
+| `v1.49.987` | AMIGA revive: wired amiga CLI command + corpus mode | 2026-06-06 | ✓ | — | [read](v1.49.987/00-summary.md) |
+| `v1.49.986` | Phase 4 rungs 2-3 — windows CI cross-platform green + load-bearing flip | 2026-06-06 | ✓ | — | [read](v1.49.986/00-summary.md) |
+| `v1.49.985` | staged windows-latest CI test leg (Phase 4) | 2026-06-05 | ✓ | — | [read](v1.49.985/00-summary.md) |
+| `v1.49.984` | skill-mining config migrator (integration migrate) | 2026-06-05 | ✓ | — | [read](v1.49.984/00-summary.md) |
+| `v1.49.983` | GAP-7 deterministic trip-vocab check | 2026-06-05 | ✓ | — | [read](v1.49.983/00-summary.md) |
+| `v1.49.982` | outcome-driven retention substrate | 2026-06-05 | ✓ | — | [read](v1.49.982/00-summary.md) |
+| `v1.49.981` | Skill-mining default-on + bootstrap co-activation thresholds | 2026-06-05 | ✓ | — | [read](v1.49.981/00-summary.md) |
+| `v1.49.980` | Co-activation consumer wire | 2026-06-05 | ✓ | — | [read](v1.49.980/00-summary.md) |
+| `v1.49.979` | sc-learn + scan-arxiv CLI dispatch wire | 2026-06-05 | ✓ | — | [read](v1.49.979/00-summary.md) |
+| `v1.49.978` | reachability shelfware disposition | 2026-06-05 | ✓ | — | [read](v1.49.978/00-summary.md) |
+| `v1.49.977` | reachability-aware adoption scanner | 2026-06-05 | ✓ | — | [read](v1.49.977/00-summary.md) |
+| `v1.49.976` | team schema reconcile + chipset taxonomy/validate fixes | 2026-06-04 | ✓ | — | [read](v1.49.976/00-summary.md) |
+| `v1.49.975` | agent adoption scan + dormant-agent verdicts | 2026-06-04 | ✓ | — | [read](v1.49.975/00-summary.md) |
+| `v1.49.974` | skills source-of-truth promotion + research-skill wires | 2026-06-04 | ✓ | — | [read](v1.49.974/00-summary.md) |
+| `v1.49.973` | update sub-agent dispatch discipline for opus 4.8 harness | 2026-06-04 | ✓ | — | [read](v1.49.973/00-summary.md) |
+| `v1.49.972` | park MA/MB/MD control-theory island + retire intrinsic-telemetry (D3) | 2026-06-04 | ✓ | — | [read](v1.49.972/00-summary.md) |
+| `v1.49.971` | mark agent-teams primitive dormant (D2) | 2026-06-04 | ✓ | — | [read](v1.49.971/00-summary.md) |
+| `v1.49.970` | de-hardcode examples/ catalog tooling + re-catalog storefront | 2026-06-04 | ✓ | — | [read](v1.49.970/00-summary.md) |
+| `v1.49.969` | ME-2 model-affinity dispatch actuator | 2026-06-04 | ✓ | — | [read](v1.49.969/00-summary.md) |
+| `v1.49.968` | codify adversarial pre-push ship review | 2026-06-04 | ✓ | — | [read](v1.49.968/00-summary.md) |
+| `v1.49.967` | examples/ catalog frontmatter hygiene | 2026-06-04 | ✓ | — | [read](v1.49.967/00-summary.md) |
+| `v1.49.966` | pre-tag-gate self-consistency + exit-21 collision fix | 2026-06-03 | ✓ | — | [read](v1.49.966/00-summary.md) |
+| `v1.49.965` | adoption-baseline freshness gate + tool | 2026-06-03 | ✓ | — | [read](v1.49.965/00-summary.md) |
+| `v1.49.964` | M4 orphan trunk-tmp cleanup on commit-lock reap | 2026-06-03 | ✓ | — | [read](v1.49.964/00-summary.md) |
+| `v1.49.963` | verify-detector paren-param + nested-self-call bounds | 2026-06-03 | ✓ | — | [read](v1.49.963/00-summary.md) |
+| `v1.49.962` | bypass-vocab parity drift-guard (counter-cadence #29) | 2026-06-03 | ✓ | — | [read](v1.49.962/00-summary.md) |
+| `v1.49.961` | STATE.md backup-file two-layer closure (counter-cadence #28) | 2026-06-03 | ✓ | — | [read](v1.49.961/00-summary.md) |
+| `v1.49.960` | M4 intent-journal crash recovery for wedged commits | 2026-06-03 | ✓ | — | [read](v1.49.960/00-summary.md) |
+| `v1.49.959` | param-return-through + parenthesized-literal detector lifts | 2026-06-03 | ✓ | — | [read](v1.49.959/00-summary.md) |
+| `v1.49.958` | release-notes 5-file scaffolding source eliminator (counter-cadence #27) | 2026-06-02 | ✓ | — | [read](v1.49.958/00-summary.md) |
+| `v1.49.957` | return-value dataflow for the cadence verify wire detector | 2026-06-02 | ✓ | — | [read](v1.49.957/00-summary.md) |
+| `v1.49.956` | inter-procedural call-graph + N-level binding for the cadence verify detector | 2026-06-02 | ✓ | — | [read](v1.49.956/00-summary.md) |
+| `v1.49.955` | AST/call-graph wire detector for the cadence verify axis (counter-cadence #26) | 2026-06-02 | ✓ | — | [read](v1.49.955/00-summary.md) |
+| `v1.49.954` | PROJECT.md latest-shipped source eliminator (counter-cadence #25) | 2026-06-02 | ✓ | — | [read](v1.49.954/00-summary.md) |
+| `v1.49.953` | structural substrate-to-caller wire detector for the cadence verify axis | 2026-06-02 | ✓ | — | [read](v1.49.953/00-summary.md) |
+| `v1.49.952` | close the M4 commit-lock crash-recovery boundary (write-ahead + gc reaping) | 2026-06-02 | ✓ | — | [read](v1.49.952/00-summary.md) |
+| `v1.49.951` | close the last bounded-learning verify gap (suggestions.* end-to-end test) | 2026-06-02 | ✓ | — | [read](v1.49.951/00-summary.md) |
+| `v1.49.950` | machine-track the cadence ships-since second conjunct (candidate -> overdue gate) | 2026-06-02 | ✓ | — | [read](v1.49.950/00-summary.md) |
+| `v1.49.949` | harden the cadence verify axis (dedicated end-to-end test detection) | 2026-06-02 | ✓ | — | [read](v1.49.949/00-summary.md) |
+| `v1.49.948` | fix M4 branches first-commit-wins double-win (permanent per-round commit lock) | 2026-06-02 | ✓ | — | [read](v1.49.948/00-summary.md) |
+| `v1.49.947` | `skill-creator cadence` CLI: deterministic meta-cadence overdue-check (counter-cadence #24) | 2026-06-01 | ✓ | — | [read](v1.49.947/00-summary.md) |
+| `v1.49.946` | honor observation.max_entries in the session-end prune (count-cap config wire) | 2026-06-01 | ✓ | — | [read](v1.49.946/00-summary.md) |
+| `v1.49.945` | serialize the ANTHROPIC_API_KEY env-var Rust tests (close the v939 cargo-lane flake) | 2026-06-01 | ✓ | — | [read](v1.49.945/00-summary.md) |
+| `v1.49.944` | wire the session-end prune through the observation.retention_days substrate (counter-cadence consume) | 2026-06-01 | ✓ | — | [read](v1.49.944/00-summary.md) |
+| `v1.49.943` | defer-biased-gate Set-boundary lesson promotion (#10464) + named-transparency pins (counter-cadence) | 2026-06-01 | ✓ | — | [read](v1.49.943/00-summary.md) |
+| `v1.49.942` | macOS flip-readiness Set-boundary test hardening (counter-cadence) | 2026-06-01 | ✓ | — | [read](v1.49.942/00-summary.md) |
+| `v1.49.941` | security: resolve critical vitest-UI + moderate qs advisories (vitest family → 4.1.8) | 2026-06-01 | ✓ | 1 | [read](v1.49.941/00-summary.md) |
+| `v1.49.940` | gateway integration tests on ephemeral ports (EADDRINUSE flake closed) | 2026-06-01 | ✓ | 1 | [read](v1.49.940/00-summary.md) |
+| `v1.49.939` | cargo lane flipped to load-bearing (#10463 two-rung complete) | 2026-06-01 | ✓ | 3 | [read](v1.49.939/00-summary.md) |
+| `v1.49.938` | cargo lane flip-readiness gate (lane-stability model) | 2026-06-01 | ✓ | 2 | [read](v1.49.938/00-summary.md) |
+| `v1.49.937` | CF4d: algebrus.eigen complex-serialization wire fix | 2026-06-01 | ✓ | 1 | [read](v1.49.937/00-summary.md) |
+| `v1.49.936` | CF4a: staged non-blocking cargo CI lane | 2026-06-01 | ✓ | 1 | [read](v1.49.936/00-summary.md) |
+| `v1.49.935` | CF4b: first `coprocessor:` skill consumer + CF4c eigen verdict | 2026-06-01 | ✓ | 1 | [read](v1.49.935/00-summary.md) |
+| `v1.49.934` | CF3: integration-test proofs for the 3 dormant substrates | 2026-06-01 | ✓ | 1 | [read](v1.49.934/00-summary.md) |
+| `v1.49.933` | Sanitize NaN importance: close a silently-wrong-winner bug | 2026-05-31 | ✓ | 1 | [read](v1.49.933/00-summary.md) |
+| `v1.49.932` | Recover v931 red CI: fixture fix + gate the integration project | 2026-05-31 | ✓ | 2 | [read](v1.49.932/00-summary.md) |
+| `v1.49.931` | In-branch stochastic selector wire into M4 exploration (CF2a) | 2026-05-31 | ✓ | 1 | [read](v1.49.931/00-summary.md) |
+| `v1.49.930` | Standing .college/→src/ import gate + dead-code cleanup (CF1) | 2026-05-31 | ✓ | 2 | [read](v1.49.930/00-summary.md) |
+| `v1.49.929` | Close the College concept-fallback selector wire (GAP-2) | 2026-05-31 | ✓ | 2 | [read](v1.49.929/00-summary.md) |
+| `v1.49.928` | Flip the macOS CI Matrix Leg to Load-Bearing (#10463 rung 3) | 2026-05-31 | ✓ | — | [read](v1.49.928/00-summary.md) |
+| `v1.49.927` | Wire the MA-3 Stochastic Bridge into the M5 Selector | 2026-05-31 | ✓ | — | [read](v1.49.927/00-summary.md) |
+| `v1.49.926` | Complete the `token_budget.warn_at_percent` Loop: Substrate Auto-Emit + Verify E2E | 2026-05-31 | ✓ | — | [read](v1.49.926/00-summary.md) |
+| `v1.49.925` | Operationalize the #10463 Flip Gate: macOS-Flip Readiness Checker | 2026-05-31 | ✓ | — | [read](v1.49.925/00-summary.md) |
+| `v1.49.924` | Counter-Cadence Codify: Staged CI-Lane Promotion (#10463) | 2026-05-31 | ✓ | — | [read](v1.49.924/00-summary.md) |
+| `v1.49.923` | Staged macOS Lane Promotion (Non-Blocking ci.yml Matrix) | 2026-05-30 | ✓ | — | [read](v1.49.923/00-summary.md) |
+| `v1.49.922` | Ship-Tooling Cross-Platform Hardening (macOS Lane Green End-to-End) | 2026-05-30 | ✓ | — | [read](v1.49.922/00-summary.md) |
+| `v1.49.921` | macOS Lane First Run: 6 Cross-Platform Bugs Fixed (tmpdir-Symlink Test Hardening) | 2026-05-30 | ✓ | — | [read](v1.49.921/00-summary.md) |
+| `v1.49.920` | Cross-Platform CI: macOS vitest Lane (Decoupled) | 2026-05-30 | ✓ | — | [read](v1.49.920/00-summary.md) |
+| `v1.49.919` | GAP-table Reconciliation (GAP-4 closed, GAP-5 scoped-out) | 2026-05-30 | ✓ | — | [read](v1.49.919/00-summary.md) |
+| `v1.49.918` | Memory Arena Resume (M14–M16) | 2026-05-30 | ✓ | — | [read](v1.49.918/00-summary.md) |
+| `v1.49.917` | Counter-Cadence Codify + Audit-Step Semantics | 2026-05-30 | ✓ | — | [read](v1.49.917/00-summary.md) |
+| `v1.49.916` | Counter-Cadence Codify + Tool-Robustness Ship: Codify #10461 (Gate-Enforce-Every-Runnable-Surface + Drift-Guard) + Release-History PG/Refresh Robustness (Advisory Drift-Check + Loud Credential Error) + AC7 Leak-Scan False-Positive Allowlist | 2026-05-30 | ✓ | — | [read](v1.49.916/00-summary.md) |
+| `v1.49.915` | Counter-Cadence Tools-Suite Hygiene: atlas-deps-audit Flake-Audit (De-Noise + Stale-Allowlist Fix + Live-Tree Enforcement) + Tools-Suite CI-Hardening (mus-smoke skip-guard + chapter.mjs entrypoint guard) — #10461 3rd Instance | 2026-05-30 | ✓ | — | [read](v1.49.915/00-summary.md) |
+| `v1.49.914` | Tools-Suite Cluster Closure: node:test Gate + CI-Enforcement + Layer-2 node:test Drift-Guard | 2026-05-29 | ✓ | — | [read](v1.49.914/00-summary.md) |
+| `v1.49.913` | Tools-Suite Gate Wiring + Silent-Rot Green-Up + Layer-2 Drift-Guard | 2026-05-29 | ✓ | — | [read](v1.49.913/00-summary.md) |
+| `v1.49.912` | Gate-Tightening Micro-Ship: Discipline-Coverage Ceiling Ratchet (41 → 5) + PARTIAL Companion Ceiling | 2026-05-29 | ✓ | 3 | [read](v1.49.912/00-summary.md) |
+| `v1.49.911` | Counter-Cadence Codify Ship: UNCODIFIED Drain — NASA Mission Authoring Domain + Reusable-Subset Promotion | 2026-05-29 | ✓ | 3 | [read](v1.49.911/00-summary.md) |
+| `v1.49.910` | Counter-Cadence Codify Ship: Promote #10459 (Class-Multi-Method Consolidated-Gate) ESTABLISHED + Clear 8 PARTIAL Discipline-Coverage Entries | 2026-05-29 | ✓ | 3 | [read](v1.49.910/00-summary.md) |
+| `v1.49.909` | — | 2026-05-29 | ✓ | — | [read](v1.49.909/00-summary.md) |
+| `v1.49.908` | Fourteenth LoaderContext Chip: `memory/conversation-store.ts` (Class-Multi-Method Consolidated-Gate — 3rd Instance PROMOTES to ESTABLISHED) | 2026-05-29 | ✓ | 1 | [read](v1.49.908/00-summary.md) |
+| `v1.49.907` | Thirteenth LoaderContext Chip: `memory/file-store.ts` (Class-Multi-Method Consolidated-Gate — 2nd Instance PROMOTES v902 Sub-Variant) | 2026-05-29 | ✓ | — | [read](v1.49.907/00-summary.md) |
+| `v1.49.906` | Twelfth LoaderContext Chip: `aminet/emulated-scanner.ts` (Module-Function Multi-Site Mixed-Chokepoint) | 2026-05-29 | ✓ | — | [read](v1.49.906/00-summary.md) |
+| `v1.49.905` | Eleventh LoaderContext Chip: `atlas/spatial/pmtiles-reader.ts` (Module-Function Two-Site, Mixed Sync+Async) | 2026-05-29 | ✓ | — | [read](v1.49.905/00-summary.md) |
+| `v1.49.904` | Tenth LoaderContext Chip: `events/skill-event-store.ts` (Class-Instance Multi-Method Read-Side) | 2026-05-29 | ✓ | — | [read](v1.49.904/00-summary.md) |
+| `v1.49.903` | Ninth LoaderContext Chip: `cli/commands/keystore.ts` (Sync Two-Site Hoisted-Check) | 2026-05-29 | ✓ | — | [read](v1.49.903/00-summary.md) |
+| `v1.49.902` | Eighth LoaderContext Chip: `orchestrator/state/state-reader.ts` (Class-Multi-Method Consolidated Public-Entry Gate) | 2026-05-29 | ✓ | — | [read](v1.49.902/00-summary.md) |
+| `v1.49.901` | Counter-Cadence Codify Ship: Promote #10458 (Fake-Fixture Wire Test Pattern) | 2026-05-29 | ✓ | 3 | [read](v1.49.901/00-summary.md) |
+| `v1.49.900` | Seventh LoaderContext Chip: `orchestrator/lifecycle/artifact-scanner.ts` (Module-Function Hoist-at-Top) | 2026-05-29 | ✓ | 3 | [read](v1.49.900/00-summary.md) |
+| `v1.49.899` | Counter-Cadence Codify Ship: Promote #10455 (Class-Stored Hoist-at-Top) + #10456 (Audit-Record-Count Test) + #10457 (Read-Side-Only at Write-Bearing) + #10453 to ESTABLISHED | 2026-05-29 | ✓ | 4 | [read](v1.49.899/00-summary.md) |
+| `v1.49.898` | Verify-Axis Integration Test: `token_budget.max_percent` (Substrate→Calibration End-to-End — 3rd Instance PROMOTES Pattern) | 2026-05-29 | ✓ | 3 | [read](v1.49.898/00-summary.md) |
+| `v1.49.897` | Sixth LoaderContext Chip: `discovery/scan-state-store.ts` (Class-Stored Hoist-at-Top — 3rd Instance PROMOTES Sub-Variant) | 2026-05-29 | ✓ | 3 | [read](v1.49.897/00-summary.md) |
+| `v1.49.896` | Fifth LoaderContext Chip: `skill-workflows/workflow-run-store.ts` (Class-Stored Hoist-at-Top) | 2026-05-29 | ✓ | 3 | [read](v1.49.896/00-summary.md) |
+| `v1.49.895` | Counter-Cadence Codify Ship: Promote #10452 (Substrate-Wrapper Pattern) + #10453 (Substrate→Calibration End-to-End Test) + #10454 (Fire-and-Forget Test-Side Wait) | 2026-05-28 | ✓ | 2 | [read](v1.49.895/00-summary.md) |
+| `v1.49.894` | Verify-Axis Integration Test: `observation.retention_days` Substrate→Calibration End-to-End | 2026-05-28 | ✓ | 2 | [read](v1.49.894/00-summary.md) |
+| `v1.49.893` | Substrate Auto-Emit: `token_budget.max_percent` Ceiling Check | 2026-05-28 | ✓ | 2 | [read](v1.49.893/00-summary.md) |
+| `v1.49.892` | Fourth LoaderContext Chip: `dacp/bus/scanner.ts` (Two-Site Hoisted-Check) | 2026-05-28 | ✓ | 1 | [read](v1.49.892/00-summary.md) |
+| `v1.49.891` | Substrate Auto-Emit: `observation.retention_days` Retention-Sweep Consumer | 2026-05-28 | ✓ | 1 | [read](v1.49.891/00-summary.md) |
+| `v1.49.890` | Third LoaderContext Chip: src/eval/calibration-adjustment-store.ts | 2026-05-28 | ✓ | 1 | [read](v1.49.890/00-summary.md) |
+| `v1.49.889` | Second LoaderContext Chip: src/intelligence/atlas-indexer/file-walker.ts | 2026-05-28 | ✓ | 1 | [read](v1.49.889/00-summary.md) |
+| `v1.49.888` | Bounded-Learning Read-Side Wire: `token_budget.max_percent` | 2026-05-28 | ✓ | 1 | [read](v1.49.888/00-summary.md) |
+| `v1.49.887` | First LoaderContext Chip: src/console/reader.ts | 2026-05-28 | ✓ | 1 | [read](v1.49.887/00-summary.md) |
 | `v1.49.886` | Counter-Cadence Codify Ship: Promote #10450 (Tools Fail Loudly) + #10451 (Read-Side Wire Recipe) | 2026-05-28 | ✓ | 1 | [read](v1.49.886/00-summary.md) |
 | `v1.49.885` | LoaderContext Chip-Down Opener: Audit Extension + KNOWN_UNWIRED Ledger Initialization | 2026-05-28 | ✓ | 2 | [read](v1.49.885/00-summary.md) |
 | `v1.49.884` | Bounded-Learning Verify-Axis Chip: observation.retention_days Read-Side Wire | 2026-05-28 | ✓ | 1 | [read](v1.49.884/00-summary.md) |
@@ -103,7 +246,7 @@ _Generated 2026-05-29 from `release_history.*`. Source of truth: Postgres._
 | `v1.49.792` | Shelfware Verdict 4: WIRE `koopman-memory` via `skill-creator koopman-check` | 2026-05-26 | ✓ | 3 | [read](v1.49.792/00-summary.md) |
 | `v1.49.791` | Shelfware Verdict 2 + 3: ALLOWLIST `tonnetz` + `wasserstein-hebbian` | 2026-05-26 | ✓ | 3 | [read](v1.49.791/00-summary.md) |
 | `v1.49.790` | Codification: 7 Lessons from v785-v789 → 2 New Operative Disciplines | 2026-05-26 | ✓ | 3 | [read](v1.49.790/00-summary.md) |
-| `v1.49.789` | Shelfware Verdict 1: WIRE `semantic-channel` via `dacp drift-check` | 2026-05-26 | ✓ | 5 | [read](v1.49.789/00-summary.md) |
+| `v1.49.789` | Shelfware Verdict 1: WIRE `semantic-channel` via `dacp drift-check` | 2026-05-26 | ✓ | 7 | [read](v1.49.789/00-summary.md) |
 | `v1.49.788` | IBEX NASA Interstellar Boundary Explorer SMEX-Class Earth-Orbit Energetic-Neutral-Atom All-Sky Imaging Mission | 2026-05-26 | ✓ | 12 | [read](v1.49.788/00-summary.md) |
 | `v1.49.787` | Adoption Telemetry: Dashboard + Automation + Allowlist | 2026-05-26 | ✓ | — | [read](v1.49.787/00-summary.md) |
 | `v1.49.786` | Adoption Telemetry: Module-Usage Scanner | 2026-05-26 | ✓ | — | [read](v1.49.786/00-summary.md) |
@@ -515,7 +658,7 @@ _Generated 2026-05-29 from `release_history.*`. Source of truth: Postgres._
 | `v1.49.380` | Degree 239: The Ventures + Steelhead | 2026-04-03 | ✓ | 14 | [read](v1.49.380/00-summary.md) |
 | `v1.49.379` | Degree 238: Presidents of the United States of America + Coho Salmon | 2026-04-03 | ✓ | 13 | [read](v1.49.379/00-summary.md) |
 | `v1.49.378` | Degree 237: Foo Fighters + Chinook Salmon | 2026-04-03 | ✓ | 13 | [read](v1.49.378/00-summary.md) |
-| `v1.49.377` | Degree 236: Queensryche + Pacific Salmon | 2026-04-03 | ✓ | 13 | [read](v1.49.377/00-summary.md) |
+| `v1.49.377` | Degree 236: Queensryche + Pacific Salmon | 2026-04-03 | ✓ | 14 | [read](v1.49.377/00-summary.md) |
 | `v1.49.376` | Degree 235: Heart + Turkey Vulture | 2026-04-03 | ✓ | 13 | [read](v1.49.376/00-summary.md) |
 | `v1.49.375` | Degree 234: Heart + American Kestrel | 2026-04-03 | ✓ | 13 | [read](v1.49.375/00-summary.md) |
 | `v1.49.374` | Degree 233: Love Battery (return) + Merlin | 2026-04-03 | ✓ | 13 | [read](v1.49.374/00-summary.md) |
@@ -678,27 +821,27 @@ _Generated 2026-05-29 from `release_history.*`. Source of truth: Postgres._
 | `v1.49.217` | Degree 77: Mree + Olympic Marmot | 2026-04-01 | ✓ | 27 | [read](v1.49.217/00-summary.md) |
 | `v1.49.216` | Degree 76: Chris Pureka + Hoary Marmot | 2026-04-01 | ✓ | 16 | [read](v1.49.216/00-summary.md) |
 | `v1.49.215` | Degree 75: The Lonely Forest + Yellow-bellied Marmot | 2026-04-01 | ✓ | 17 | [read](v1.49.215/00-summary.md) |
-| `v1.49.214` | Degree 74: Poor Moon + American Pika | 2026-04-01 | ✓ | 20 | [read](v1.49.214/00-summary.md) |
+| `v1.49.214` | Degree 74: Poor Moon + American Pika | 2026-04-01 | ✓ | 22 | [read](v1.49.214/00-summary.md) |
 | `v1.49.213` | Degree 73: LAKE + Snowshoe Hare | 2026-04-01 | ✓ | 17 | [read](v1.49.213/00-summary.md) |
 | `v1.49.212` | Degree 72: Briana Marela + Opossum | 2026-04-01 | ✓ | 28 | [read](v1.49.212/00-summary.md) |
 | `v1.49.211` | Degree 71: Phil Elverum (Mount Eerie) + Red Fox | 2026-04-01 | ✓ | 25 | [read](v1.49.211/00-summary.md) |
 | `v1.49.210` | Degree 70: Horse Feathers + Raccoon | 2026-04-01 | ✓ | 24 | [read](v1.49.210/00-summary.md) |
 | `v1.49.209` | Degree Sixty-Nine | 2026-04-01 | ✓ | 25 | [read](v1.49.209/00-summary.md) |
-| `v1.49.208` | Degree Sixty-Eight | 2026-04-01 | ✓ | 25 | [read](v1.49.208/00-summary.md) |
-| `v1.49.207` | Degree Sixty-Seven | 2026-04-01 | ✓ | 30 | [read](v1.49.207/00-summary.md) |
+| `v1.49.208` | Degree Sixty-Eight | 2026-04-01 | ✓ | 26 | [read](v1.49.208/00-summary.md) |
+| `v1.49.207` | Degree Sixty-Seven | 2026-04-01 | ✓ | 32 | [read](v1.49.207/00-summary.md) |
 | `v1.49.206` | Degree 66: Neko Case + Fisher | 2026-04-01 | ✓ | 31 | [read](v1.49.206/00-summary.md) |
-| `v1.49.205` | Degree Sixty-Five | 2026-04-01 | ✓ | 21 | [read](v1.49.205/00-summary.md) |
-| `v1.49.204` | Degree Sixty-Four | 2026-04-01 | ✓ | 26 | [read](v1.49.204/00-summary.md) |
+| `v1.49.205` | Degree Sixty-Five | 2026-04-01 | ✓ | 23 | [read](v1.49.205/00-summary.md) |
+| `v1.49.204` | Degree Sixty-Four | 2026-04-01 | ✓ | 27 | [read](v1.49.204/00-summary.md) |
 | `v1.49.203` | Thicc Splines Save Lives: BLN Blender User Manual | 2026-04-01 | ✓ | 20 | [read](v1.49.203/00-summary.md) |
 | `v1.49.202` | Degree Sixty-Three | 2026-04-01 | ✓ | 29 | [read](v1.49.202/00-summary.md) |
 | `v1.49.201` | Degree 62: Pickwick + Beaver Chewing | 2026-04-01 | ✓ | 31 | [read](v1.49.201/00-summary.md) |
-| `v1.49.200` | Degree Sixty-One | 2026-04-01 | ✓ | 32 | [read](v1.49.200/00-summary.md) |
+| `v1.49.200` | Degree Sixty-One | 2026-04-01 | ✓ | 33 | [read](v1.49.200/00-summary.md) |
 | `v1.49.199` | Degree Sixty | 2026-04-01 | ✓ | 30 | [read](v1.49.199/00-summary.md) |
 | `v1.49.198` | Degree 59: The Long Winters + Mallard | 2026-04-01 | ✓ | 36 | [read](v1.49.198/00-summary.md) |
 | `v1.49.197` | Degree Fifty-Eight | 2026-04-01 | ✓ | 30 | [read](v1.49.197/00-summary.md) |
 | `v1.49.196` | Degree 57: Laura Gibson + Belted Kingfisher | 2026-03-31 | ✓ | 29 | [read](v1.49.196/00-summary.md) |
 | `v1.49.195` | Ecosystem Alignment, Helium Corridor, OOPS Analysis, OPEN Problems | 2026-03-31 | ✓ | 21 | [read](v1.49.195/00-summary.md) |
-| `v1.49.194` | HEL: Helium Supply Chain & Pacific Rim Semiconductor Infrastructure | 2026-03-31 | ✓ | 20 | [read](v1.49.194/00-summary.md) |
+| `v1.49.194` | HEL: Helium Supply Chain & Pacific Rim Semiconductor Infrastructure | 2026-03-31 | ✓ | 21 | [read](v1.49.194/00-summary.md) |
 | `v1.49.193` | Ecosystem Alignment | 2026-03-31 | ✓ | 17 | [read](v1.49.193/00-summary.md) |
 | `v1.49.192` | Degree Fifty-Six | 2026-03-30 | ✓ | 28 | [read](v1.49.192/00-summary.md) |
 | `v1.49.191` | Degree Fifty-Five | 2026-03-30 | ✓ | 24 | [read](v1.49.191/00-summary.md) |
@@ -712,9 +855,9 @@ _Generated 2026-05-29 from `release_history.*`. Source of truth: Postgres._
 | `v1.49.183` | Degree Forty-Seven | 2026-03-30 | ✓ | 23 | [read](v1.49.183/00-summary.md) |
 | `v1.49.182` | Degree Forty-Six | 2026-03-30 | ✓ | 17 | [read](v1.49.182/00-summary.md) |
 | `v1.49.181` | Degree Forty-Five | 2026-03-30 | ✓ | 20 | [read](v1.49.181/00-summary.md) |
-| `v1.49.180` | Degree Forty-Four | 2026-03-30 | ✓ | 24 | [read](v1.49.180/00-summary.md) |
+| `v1.49.180` | Degree Forty-Four | 2026-03-30 | ✓ | 27 | [read](v1.49.180/00-summary.md) |
 | `v1.49.179` | Degree Forty-Three | 2026-03-30 | ✓ | 18 | [read](v1.49.179/00-summary.md) |
-| `v1.49.178` | Degree Forty-Two | 2026-03-30 | ✓ | 13 | [read](v1.49.178/00-summary.md) |
+| `v1.49.178` | Degree Forty-Two | 2026-03-30 | ✓ | 14 | [read](v1.49.178/00-summary.md) |
 | `v1.49.177` | Degree Forty-One | 2026-03-29 | ✓ | 16 | [read](v1.49.177/00-summary.md) |
 | `v1.49.176` | Degree Forty | 2026-03-29 | ✓ | 15 | [read](v1.49.176/00-summary.md) |
 | `v1.49.175` | Degree Thirty-Nine — The Returning Wave and the Canopy Buzz | 2026-03-29 | ✓ | 16 | [read](v1.49.175/00-summary.md) |
@@ -749,7 +892,7 @@ _Generated 2026-05-29 from `release_history.*`. Source of truth: Postgres._
 | `v1.49.146` | Degree Eleven | 2026-03-29 | ✓ | 15 | [read](v1.49.146/00-summary.md) |
 | `v1.49.145` | Degree Ten | 2026-03-29 | ✓ | 12 | [read](v1.49.145/00-summary.md) |
 | `v1.49.144` | Degree Nine | 2026-03-28 | ✓ | 18 | [read](v1.49.144/00-summary.md) |
-| `v1.49.143` | Degree Eight: The Ultrasonic Threshold | 2026-03-28 | ✓ | 17 | [read](v1.49.143/00-summary.md) |
+| `v1.49.143` | Degree Eight: The Ultrasonic Threshold | 2026-03-28 | ✓ | 18 | [read](v1.49.143/00-summary.md) |
 | `v1.49.142` | Degree Seven — Harmonic Spiral | 2026-03-28 | ✓ | 14 | [read](v1.49.142/00-summary.md) |
 | `v1.49.141` | Degree 6: The Erasure and the Unseeable | 2026-03-28 | ✓ | 18 | [read](v1.49.141/00-summary.md) |
 | `v1.49.140` | Degree 5: The Persistence and the Metronome | 2026-03-28 | ✓ | 14 | [read](v1.49.140/00-summary.md) |
@@ -775,7 +918,7 @@ _Generated 2026-05-29 from `release_history.*`. Source of truth: Postgres._
 | `v1.49.120` | A Beautiful Mind | 2026-03-28 | ✓ | 23 | [read](v1.49.120/00-summary.md) |
 | `v1.49.119` | Cartoon Network & Adult Swim | 2026-03-28 | ✓ | 24 | [read](v1.49.119/00-summary.md) |
 | `v1.49.118` | Comedy Central & The Daily Show | 2026-03-28 | ✓ | 22 | [read](v1.49.118/00-summary.md) |
-| `v1.49.117` | Late Night Television | 2026-03-28 | ✓ | 23 | [read](v1.49.117/00-summary.md) |
+| `v1.49.117` | Late Night Television | 2026-03-28 | ✓ | 24 | [read](v1.49.117/00-summary.md) |
 | `v1.49.116` | Live From New York, It's Saturday Night | 2026-03-28 | ✓ | 22 | [read](v1.49.116/00-summary.md) |
 | `v1.49.115` | Almost Live! — Seattle Sketch Comedy and the Bill Nye Origin | 2026-03-28 | ✓ | 21 | [read](v1.49.115/00-summary.md) |
 | `v1.49.114` | The Television Era: A Century of Signal Coming Home | 2026-03-28 | ✓ | 20 | [read](v1.49.114/00-summary.md) |
@@ -797,11 +940,11 @@ _Generated 2026-05-29 from `release_history.*`. Source of truth: Postgres._
 | `v1.49.88` | The Observable Universe | 2026-03-27 | ✓ | 19 | [read](v1.49.88/00-summary.md) |
 | `v1.49.87` | The Frequency Spectrum | 2026-03-27 | ✓ | 17 | [read](v1.49.87/00-summary.md) |
 | `v1.49.86` | The Music Wall | 2026-03-27 | ✓ | 18 | [read](v1.49.86/00-summary.md) |
-| `v1.49.85` | The Full Stack | 2026-03-27 | ✓ | 19 | [read](v1.49.85/00-summary.md) |
+| `v1.49.85` | The Full Stack | 2026-03-27 | ✓ | 20 | [read](v1.49.85/00-summary.md) |
 | `v1.49.84` | The Invisible Layer | 2026-03-27 | ✓ | 18 | [read](v1.49.84/00-summary.md) |
 | `v1.49.83` | The Signal Stack | 2026-03-27 | ✓ | 18 | [read](v1.49.83/00-summary.md) |
-| `v1.49.82` | Pike Place to Bellingham | 2026-03-27 | ✓ | 20 | [read](v1.49.82/00-summary.md) |
-| `v1.49.81` | The Last Signal | 2026-03-27 | ✓ | 17 | [read](v1.49.81/00-summary.md) |
+| `v1.49.82` | Pike Place to Bellingham | 2026-03-27 | ✓ | 21 | [read](v1.49.82/00-summary.md) |
+| `v1.49.81` | The Last Signal | 2026-03-27 | ✓ | 18 | [read](v1.49.81/00-summary.md) |
 | `v1.49.80` | First Frost, Last Frost | 2026-03-26 | ✓ | 15 | [read](v1.49.80/00-summary.md) |
 | `v1.49.79` | The Listening Trail | 2026-03-26 | ✓ | 15 | [read](v1.49.79/00-summary.md) |
 | `v1.49.78` | Raven Steals the Sun | 2026-03-26 | ✓ | 15 | [read](v1.49.78/00-summary.md) |
@@ -823,11 +966,11 @@ _Generated 2026-05-29 from `release_history.*`. Source of truth: Postgres._
 | `v1.49.62` | Over My Head | 2026-03-26 | ✓ | 12 | [read](v1.49.62/00-summary.md) |
 | `v1.49.61` | Fix You | 2026-03-26 | ✓ | 11 | [read](v1.49.61/00-summary.md) |
 | `v1.49.60` | Inclusionary Wave | 2026-03-26 | ✓ | 15 | [read](v1.49.60/00-summary.md) |
-| `v1.49.59` | Whoever You Are | 2026-03-26 | ✓ | 15 | [read](v1.49.59/00-summary.md) |
+| `v1.49.59` | Whoever You Are | 2026-03-26 | ✓ | 16 | [read](v1.49.59/00-summary.md) |
 | `v1.49.58` | Sonic Alchemy | 2026-03-26 | ✓ | 14 | [read](v1.49.58/00-summary.md) |
 | `v1.49.57` | Ground Truth | 2026-03-26 | ✓ | 16 | [read](v1.49.57/00-summary.md) |
 | `v1.49.56` | The 20th Extension | 2026-03-26 | ✓ | 19 | [read](v1.49.56/00-summary.md) |
-| `v1.49.55` | Grandmother Cedar | 2026-03-26 | ✓ | 14 | [read](v1.49.55/00-summary.md) |
+| `v1.49.55` | Grandmother Cedar | 2026-03-26 | ✓ | 15 | [read](v1.49.55/00-summary.md) |
 | `v1.49.54` | Cosmic Crisp | 2026-03-26 | ✓ | 13 | [read](v1.49.54/00-summary.md) |
 | `v1.49.53` | Daypack | 2026-03-26 | ✓ | 14 | [read](v1.49.53/00-summary.md) |
 | `v1.49.52` | Everett | 2026-03-26 | ✓ | 14 | [read](v1.49.52/00-summary.md) |
@@ -835,12 +978,12 @@ _Generated 2026-05-29 from `release_history.*`. Source of truth: Postgres._
 | `v1.49.50` | Double Entry | 2026-03-26 | ✓ | 14 | [read](v1.49.50/00-summary.md) |
 | `v1.49.49` | Shields Up | 2026-03-26 | ✓ | 14 | [read](v1.49.49/00-summary.md) |
 | `v1.49.48` | Secret Masters of Fandom | 2026-03-26 | ✓ | 12 | [read](v1.49.48/00-summary.md) |
-| `v1.49.47` | West of the Rockies | 2026-03-26 | ✓ | 13 | [read](v1.49.47/00-summary.md) |
+| `v1.49.47` | West of the Rockies | 2026-03-26 | ✓ | 14 | [read](v1.49.47/00-summary.md) |
 | `v1.49.46` | Room 101 | 2026-03-26 | ✓ | 15 | [read](v1.49.46/00-summary.md) |
 | `v1.49.45` | Ten | 2026-03-26 | ✓ | 16 | [read](v1.49.45/00-summary.md) |
 | `v1.49.44` | Skill Check | 2026-03-26 | ✓ | 15 | [read](v1.49.44/00-summary.md) |
 | `v1.49.43` | Evergreen | 2026-03-26 | ✓ | 13 | [read](v1.49.43/00-summary.md) |
-| `v1.49.42` | The Mote in God's Eye | 2026-03-26 | ✓ | 15 | [read](v1.49.42/00-summary.md) |
+| `v1.49.42` | The Mote in God's Eye | 2026-03-26 | ✓ | 16 | [read](v1.49.42/00-summary.md) |
 | `v1.49.41` | Green River | 2026-03-25 | ✓ | 14 | [read](v1.49.41/00-summary.md) |
 | `v1.49.40` | Dizz Knee Land | 2026-03-25 | ✓ | 15 | [read](v1.49.40/00-summary.md) |
 | `v1.49.39` | Weird Al: Eat It | 2026-03-25 | ✓ | 19 | [read](v1.49.39/00-summary.md) |
@@ -862,8 +1005,8 @@ _Generated 2026-05-29 from `release_history.*`. Source of truth: Postgres._
 | `v1.49.23` | Unison Language & Math Co-Processor Completion | 2026-03-08 | ✓ | 23 | [read](v1.49.23/00-summary.md) |
 | `v1.49.22` | PNW Research Series | 2026-03-07 | ✓ | 24 | [read](v1.49.22/00-summary.md) |
 | `v1.49.21` | Image to Mission Pipeline | 2026-03-07 | ✓ | 22 | [read](v1.49.21/00-summary.md) |
-| `v1.49.20.1` | Documentation Reflections | 2026-03-06 | — | — | [read](v1.49.20.1/00-summary.md) |
 | `v1.49.20` | Documentation Consolidation | 2026-03-06 | ✓ | 13 | [read](v1.49.20/00-summary.md) |
+| `v1.49.20.1` | Documentation Reflections | 2026-03-06 | — | — | [read](v1.49.20.1/00-summary.md) |
 | `v1.49.19` | Gastown Chipset Integration | 2026-03-06 | ✓ | 19 | [read](v1.49.19/00-summary.md) |
 | `v1.49.18` | Space Between Observatory | 2026-03-06 | ✓ | 17 | [read](v1.49.18/00-summary.md) |
 | `v1.49.17` | The Space Between | 2026-03-04 | ✓ | 19 | [read](v1.49.17/00-summary.md) |
@@ -893,7 +1036,7 @@ _Generated 2026-05-29 from `release_history.*`. Source of truth: Postgres._
 | `v1.42` | SC Git Support | 2026-02-26 | ✓ | 16 | [read](v1.42/00-summary.md) |
 | `v1.41` | Claude Code Integration Reliability | 2026-02-26 | ✓ | 16 | [read](v1.41/00-summary.md) |
 | `v1.40` | sc:learn Dogfood Mission | 2026-02-26 | ✓ | 17 | [read](v1.40/00-summary.md) |
-| `v1.39` | GSD-OS Bootstrap & READY Prompt | 2026-02-26 | ✓ | 18 | [read](v1.39/00-summary.md) |
+| `v1.39` | GSD-OS Bootstrap & READY Prompt | 2026-02-26 | ✓ | 20 | [read](v1.39/00-summary.md) |
 | `v1.38` | SSH Agent Security | 2026-02-26 | ✓ | 18 | [read](v1.38/00-summary.md) |
 | `v1.37` | Complex Plane Learning Framework | 2026-02-26 | ✓ | 18 | [read](v1.37/00-summary.md) |
 | `v1.36` | Citation Management & Source Attribution | 2026-02-26 | ✓ | 20 | [read](v1.36/00-summary.md) |
@@ -903,7 +1046,7 @@ _Generated 2026-05-29 from `release_history.*`. Source of truth: Postgres._
 | `v1.32` | Brainstorm Session Support | 2026-02-22 | ✓ | 19 | [read](v1.32/00-summary.md) |
 | `v1.31` | GSD-OS MCP Integration | 2026-02-22 | ✓ | 20 | [read](v1.31/00-summary.md) |
 | `v1.30` | Vision-to-Mission Pipeline | 2026-02-22 | ✓ | 23 | [read](v1.30/00-summary.md) |
-| `v1.29` | Electronics Educational Pack | 2026-02-21 | ✓ | 16 | [read](v1.29/00-summary.md) |
+| `v1.29` | Electronics Educational Pack | 2026-02-21 | ✓ | 17 | [read](v1.29/00-summary.md) |
 | `v1.28` | GSD Den Operations | 2026-02-21 | ✓ | 20 | [read](v1.28/00-summary.md) |
 | `v1.27` | GSD Foundational Knowledge Packs | 2026-02-20 | ✓ | 21 | [read](v1.27/00-summary.md) |
 | `v1.26` | Aminet Archive Extension Pack | 2026-02-19 | ✓ | 21 | [read](v1.26/00-summary.md) |
@@ -919,7 +1062,7 @@ _Generated 2026-05-29 from `release_history.*`. Source of truth: Postgres._
 | `v1.16` | Dashboard Console & Milestone Ingestion | 2026-02-13 | ✓ | 19 | [read](v1.16/00-summary.md) |
 | `v1.15` | Live Dashboard Terminal | 2026-02-13 | ✓ | 18 | [read](v1.15/00-summary.md) |
 | `v1.14` | Promotion Pipeline | 2026-02-13 | ✓ | 16 | [read](v1.14/00-summary.md) |
-| `v1.13` | Session Lifecycle & Workflow Coprocessor | 2026-02-12 | ✓ | 18 | [read](v1.13/00-summary.md) |
+| `v1.13` | Session Lifecycle & Workflow Coprocessor | 2026-02-12 | ✓ | 19 | [read](v1.13/00-summary.md) |
 | `v1.12.1` | Live Metrics Dashboard | 2026-02-12 | ✓ | 20 | [read](v1.12.1/00-summary.md) |
 | `v1.12` | GSD Planning Docs Dashboard | 2026-02-12 | ✓ | 19 | [read](v1.12/00-summary.md) |
 | `v1.11` | GSD Integration Layer | 2026-02-12 | ✓ | 18 | [read](v1.11/00-summary.md) |
