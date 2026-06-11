@@ -60,7 +60,7 @@ function createMockIpc(overrides?: Partial<IpcCommandsPort>): IpcCommandsPort {
       // Return started services as online, others as offline
       const allServices = [
         "tmux",
-        "claude",
+        "claude_code",
         "file_watcher",
         "dashboard",
         "console",
@@ -110,7 +110,7 @@ describe("BootstrapFlow (full bootstrap sequence)", () => {
 
     // Ensure getServiceStates reflects the services started so far
     const allServiceIds = [
-      "tmux", "claude", "file_watcher", "dashboard",
+      "tmux", "claude_code", "file_watcher", "dashboard",
       "console", "staging", "terminal",
     ];
     ipc.getServiceStates = vi.fn(async () =>
@@ -133,7 +133,7 @@ describe("BootstrapFlow (full bootstrap sequence)", () => {
     // Services started in dependency order
     expect(startOrder).toEqual([
       "tmux",
-      "claude",
+      "claude_code",
       "file_watcher",
       "dashboard",
       "console",
@@ -203,12 +203,12 @@ describe("BootstrapFlow (full bootstrap sequence)", () => {
   it("handles service start failure", async () => {
     const startedServices = new Set<string>();
     const allServiceIds = [
-      "tmux", "claude", "file_watcher", "dashboard",
+      "tmux", "claude_code", "file_watcher", "dashboard",
       "console", "staging", "terminal",
     ];
 
     ipc.startService = vi.fn(async (serviceId: string) => {
-      if (serviceId === "claude") {
+      if (serviceId === "claude_code") {
         return { ok: false, error: "Process not found" };
       }
       startedServices.add(serviceId);
@@ -277,7 +277,7 @@ describe("BootstrapFlow (full bootstrap sequence)", () => {
     // Second run: all services already online
     ipc.getServiceStates = vi.fn(async () => [
       { service_id: "tmux", status: "online", led_color: "green" },
-      { service_id: "claude", status: "online", led_color: "green" },
+      { service_id: "claude_code", status: "online", led_color: "green" },
       { service_id: "file_watcher", status: "online", led_color: "green" },
       { service_id: "dashboard", status: "online", led_color: "green" },
       { service_id: "console", status: "online", led_color: "green" },
