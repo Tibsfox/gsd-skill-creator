@@ -2,10 +2,11 @@
 
 _Generated 2026-06-11 from `release_history.*`. Source of truth: Postgres._
 
-**1072 releases.** 1071 with retrospective. 805 with extracted lessons.
+**1073 releases.** 1072 with retrospective. 805 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
+| `v1.49.1030` | Rust ACL Reconciliation: 98-Command Manifest, Service Unification, Drift-Guard | 2026-06-10 | ✓ | — | [read](v1.49.1030/00-summary.md) |
 | `v1.49.1029` | WARN-to-BLOCK Promotions: 22-Step Gate, Ship-Review v2, Readiness Reporter | 2026-06-10 | ✓ | 1 | [read](v1.49.1029/00-summary.md) |
 | `v1.49.1028` | Deploy-Layer Fix: Targeted Install, Parity Drift-Guard, Activation Counter | 2026-06-10 | ✓ | 1 | [read](v1.49.1028/00-summary.md) |
 | `v1.49.1027` | Loop-Outcome Ship: First Evidence-Driven Calibration Tick, Dismissal-Feedback Actuation, Co-Activation Widening | 2026-06-10 | ✓ | 1 | [read](v1.49.1027/00-summary.md) |
