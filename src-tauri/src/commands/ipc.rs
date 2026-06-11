@@ -1,7 +1,8 @@
 //! Tauri commands for GSD-OS IPC communication paths.
 //!
-//! Phase 376 wires send_chat_message, has_api_key, and store_api_key
-//! to the real API client. Other commands remain stubs for later phases.
+//! Phase 376 wired send_chat_message to the real API client. The legacy
+//! has_api_key/store_api_key pair was deleted in v1.49.1030 (superseded by
+//! the v1.49.636 unified keystore surface: keystore_status/keystore_set).
 
 use serde_json::json;
 use tauri::Emitter;
@@ -86,31 +87,6 @@ pub async fn send_chat_message(
         }
         Err(e) => Err(e.to_string()),
     }
-}
-
-/// Check whether an API key is available.
-#[tauri::command]
-pub async fn has_api_key(
-    state: tauri::State<'_, tokio::sync::Mutex<ApiClientState>>,
-) -> Result<bool, String> {
-    let api_state = state.lock().await;
-    if api_state.client.is_some() {
-        return Ok(true);
-    }
-    Ok(KeyStore::load().is_ok())
-}
-
-/// Store a new API key and initialize the client.
-#[tauri::command]
-pub async fn store_api_key(
-    key: String,
-    state: tauri::State<'_, tokio::sync::Mutex<ApiClientState>>,
-) -> Result<(), String> {
-    let ks = KeyStore::store_key(key).map_err(|e| e.to_string())?;
-    let client = AnthropicClient::new(ks).map_err(|e| e.to_string())?;
-    let mut api_state = state.lock().await;
-    api_state.client = Some(client);
-    Ok(())
 }
 
 /// Get the current state of all managed services.

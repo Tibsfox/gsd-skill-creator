@@ -62,7 +62,6 @@ pub fn run() {
             app.manage(tokio::sync::Mutex::new(services::launcher::ServiceLauncher::new_without_emitter()));
             app.manage(commands::memory_arena::ArenaState::default());
             app.manage(commands::memory_arena::ArenaSetState::default());
-            app.manage(commands::memory_arena::CgroupState::default());
 
             // v1.49.7 (PR #24 @PatrickRobotham): gate tmux session auto-detection
             // and monitor on tmux availability. Without tmux, these would poll a
@@ -137,13 +136,6 @@ pub fn run() {
             mcp_host::commands::mcp_get_trace,
             mcp_host::commands::mcp_get_trust_state,
             commands::security_init::init_security_directory,
-            commands::sandbox::get_sandbox_platform,
-            commands::sandbox::configure_sandbox,
-            commands::sandbox::get_sandbox_status,
-            commands::sandbox::verify_sandbox,
-            commands::proxy::start_proxy,
-            commands::proxy::stop_proxy,
-            commands::proxy::proxy_status,
             commands::security::security_get_status,
             commands::security::security_release_quarantine,
             commands::security::sandbox_verify_full,
@@ -157,8 +149,6 @@ pub fn run() {
             commands::keystore::keystore_migrate_v1_to_v2,
             commands::keystore::keystore_set,
             commands::ipc::send_chat_message,
-            commands::ipc::has_api_key,
-            commands::ipc::store_api_key,
             commands::ipc::get_service_states,
             commands::magic::set_magic_level,
             commands::magic::get_magic_level,
@@ -171,9 +161,6 @@ pub fn run() {
             commands::services::svc_start_all_services,
             commands::services::svc_get_all_service_states,
             commands::services::svc_restart_service,
-            commands::staging::staging_trigger_intake,
-            commands::staging::staging_get_debrief,
-            commands::staging::staging_list_quarantine,
             commands::memory_arena::arena_init,
             commands::memory_arena::arena_stats,
             commands::memory_arena::arena_alloc,
@@ -190,9 +177,6 @@ pub fn run() {
             commands::memory_arena::arena_set_flush,
             commands::memory_arena::arena_set_free,
             commands::memory_arena::arena_set_list_ids,
-            commands::memory_arena::cgroup_init,
-            commands::memory_arena::cgroup_state,
-            commands::memory_arena::cgroup_grow,
             // Phase 824 / C07 — Intelligence Dashboard commands
             crate::intelligence::server::intelligence_list_projects,
             // v1.49.607 W1 Track C — Code Atlas commands

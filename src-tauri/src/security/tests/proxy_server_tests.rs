@@ -208,17 +208,6 @@ async fn health_serializes_to_json() {
     assert!(json.contains("\"domains_active\""));
 }
 
-// ============================================================================
-// Test 7: Tauri commands exist (compile-time verification)
-// ============================================================================
-
-#[test]
-fn proxy_tauri_commands_compile() {
-    // This test verifies the commands module compiles and the functions
-    // are accessible. Actual invocation tested in integration tests.
-    use crate::commands::proxy::{start_proxy, stop_proxy, proxy_status};
-    // If this compiles, the commands exist
-    let _ = start_proxy;
-    let _ = stop_proxy;
-    let _ = proxy_status;
-}
+// Former Test 7 (proxy_tauri_commands_compile) removed in v1.49.1030: the
+// stub commands::proxy module it pinned was deleted by the ACL
+// permit-or-delete triage (superseded by commands::security::proxy_health).
