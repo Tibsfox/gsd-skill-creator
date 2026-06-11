@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.1033`.
+The story begins at `v1.0` and continues to `v1.49.1034`.
 
-**1076 chapters.** 1075 have retrospectives.
+**1077 chapters.** 1076 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -1084,3 +1084,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.1031](v1.49.1031/00-summary.md)** — Workflows Library: Committed NASA-Ops Skeletons, Mode-Flip Codification, Drift-Guard · 2026-06-10
 - **[v1.49.1032](v1.49.1032/00-summary.md)** — Rust Process-Context Chokepoint: 28-Site Spawn Gate, Drift-Guard, Node-24 Actions Bump · 2026-06-10
 - **[v1.49.1033](v1.49.1033/00-summary.md)** — SCRIBE v621 Refinement: Errata Sweep, Evidence Closure, Lean First Proof · 2026-06-11
+- **[v1.49.1034](v1.49.1034/00-summary.md)** — Gravity Probe A NASA Gravitational-Redshift Hydrogen-Maser Precision-Clock Relativity Test Mission · 2026-06-11
