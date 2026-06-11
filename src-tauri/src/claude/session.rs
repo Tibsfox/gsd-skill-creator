@@ -3,6 +3,8 @@ use std::collections::HashMap;
 use std::process::Command;
 use std::time::{SystemTime, UNIX_EPOCH};
 
+use crate::security::process_context::{ensure_process_allowed, ProcessOp};
+
 /// Status of a Claude Code session.
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 #[serde(rename_all = "lowercase")]
@@ -81,12 +83,17 @@ pub fn start_claude_in_tmux(
     window_name: &str,
     project_dir: Option<&str>,
 ) -> Result<(), String> {
-    let mut cmd = Command::new("tmux");
-    cmd.args(["new-window", "-t", session_name, "-n", window_name]);
+    // Build argv once so the gate audits exactly what spawns.
+    let mut argv: Vec<&str> = vec!["new-window", "-t", session_name, "-n", window_name];
     if let Some(dir) = project_dir {
-        cmd.args(["-c", dir]);
+        argv.push("-c");
+        argv.push(dir);
     }
-    cmd.arg("claude");
+    argv.push("claude");
+    ensure_process_allowed("claude/start_claude_in_tmux", ProcessOp::Output, "tmux", &argv)
+        .map_err(|e| e.to_string())?;
+    let mut cmd = Command::new("tmux");
+    cmd.args(&argv);
     let output = cmd.output().map_err(|e| e.to_string())?;
     if !output.status.success() {
         return Err(String::from_utf8_lossy(&output.stderr).to_string());
@@ -102,6 +109,15 @@ pub fn stop_claude_in_tmux(
     window_name: &str,
 ) -> Result<(), String> {
     let target = format!("{}:{}", session_name, window_name);
+    // Gate hoisted ABOVE the swallowed send-keys: a security denial must
+    // propagate even though the operational error is intentionally ignored.
+    ensure_process_allowed(
+        "claude/stop_claude_in_tmux",
+        ProcessOp::Output,
+        "tmux",
+        &["send-keys", "-t", &target, "C-c", "C-c"],
+    )
+    .map_err(|e| e.to_string())?;
     // Send Ctrl-C to interrupt Claude
     let _ = Command::new("tmux")
         .args(["send-keys", "-t", &target, "C-c", "C-c"])
@@ -109,6 +125,13 @@ pub fn stop_claude_in_tmux(
     // Brief pause for graceful shutdown
     std::thread::sleep(std::time::Duration::from_millis(500));
     // Kill the tmux window
+    ensure_process_allowed(
+        "claude/stop_claude_in_tmux",
+        ProcessOp::Output,
+        "tmux",
+        &["kill-window", "-t", &target],
+    )
+    .map_err(|e| e.to_string())?;
     let output = Command::new("tmux")
         .args(["kill-window", "-t", &target])
         .output()
@@ -124,9 +147,25 @@ pub fn stop_claude_in_tmux(
 /// v1.49.7 (PR #24 @PatrickRobotham): replaced `which` with cross-platform
 /// detection — `command -v` on Unix, `where.exe` on Windows.
 pub fn detect_claude_binary() -> Option<String> {
+    // Detector shape: a denial fails closed to None (binary not available
+    // TO US); the audit record carries the denial signal.
     let output = if cfg!(windows) {
+        ensure_process_allowed(
+            "claude/detect_claude_binary",
+            ProcessOp::Output,
+            "where.exe",
+            &["claude"],
+        )
+        .ok()?;
         Command::new("where.exe").arg("claude").output().ok()?
     } else {
+        ensure_process_allowed(
+            "claude/detect_claude_binary",
+            ProcessOp::Output,
+            "sh",
+            &["-c", "command -v claude"],
+        )
+        .ok()?;
         Command::new("sh")
             .args(["-c", "command -v claude"])
             .output()

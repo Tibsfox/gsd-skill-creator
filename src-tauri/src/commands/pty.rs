@@ -76,6 +76,19 @@ pub async fn pty_open(
             shell_path,
         ));
     }
+    // Second gate behind shell_allowed: the static allowlist screens the
+    // shell NAME; the chokepoint audits the actual spawn with its argv.
+    let extra_refs: Vec<&str> = args
+        .as_ref()
+        .map(|v| v.iter().map(|a| a.as_str()).collect())
+        .unwrap_or_default();
+    crate::security::process_context::ensure_process_allowed(
+        "commands/pty_open",
+        crate::security::process_context::ProcessOp::Spawn,
+        &shell_path,
+        &extra_refs,
+    )
+    .map_err(|e| e.to_string())?;
     let mut cmd = CommandBuilder::new(&shell_path);
     if let Some(ref extra_args) = args {
         for a in extra_args {

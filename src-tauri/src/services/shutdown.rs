@@ -8,6 +8,7 @@ use std::time::Duration;
 
 use super::registry;
 use super::types::ServiceId;
+use crate::security::process_context::{ensure_process_allowed, ProcessOp};
 
 /// Manages tracked process PIDs and graceful shutdown sequencing.
 pub struct ShutdownManager {
@@ -122,6 +123,13 @@ impl ShutdownManager {
         timeout: Duration,
     ) -> Result<(), String> {
         // Send SIGTERM via kill command (avoids direct libc dependency)
+        ensure_process_allowed(
+            "services/graceful_shutdown_pid",
+            ProcessOp::Output,
+            "kill",
+            &["-TERM", &pid.to_string()],
+        )
+        .map_err(|e| e.to_string())?;
         let term_output = std::process::Command::new("kill")
             .arg("-TERM")
             .arg(pid.to_string())
@@ -137,7 +145,16 @@ impl ShutdownManager {
             return Err(format!("Failed to send SIGTERM to {}: {}", pid, stderr.trim()));
         }
 
-        // Wait for process to exit
+        // Wait for process to exit. Gate hoisted ONCE above the poll loop
+        // (same target every iteration; per-iteration gating would only
+        // duplicate audit records at 10Hz).
+        ensure_process_allowed(
+            "services/graceful_shutdown_pid",
+            ProcessOp::Output,
+            "kill",
+            &["-0", &pid.to_string()],
+        )
+        .map_err(|e| e.to_string())?;
         let deadline = tokio::time::Instant::now() + timeout;
         loop {
             // Check if process still exists (signal 0 = check only)
@@ -162,6 +179,13 @@ impl ShutdownManager {
         }
 
         // Timeout exceeded -- send SIGKILL
+        ensure_process_allowed(
+            "services/graceful_shutdown_pid",
+            ProcessOp::Output,
+            "kill",
+            &["-KILL", &pid.to_string()],
+        )
+        .map_err(|e| e.to_string())?;
         let kill_output = std::process::Command::new("kill")
             .arg("-KILL")
             .arg(pid.to_string())

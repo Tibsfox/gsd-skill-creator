@@ -1,13 +1,27 @@
 use std::process::Command;
 
+use crate::security::process_context::{ensure_process_allowed, ProcessOp};
+
 /// Check if the tmux binary exists in PATH and return its absolute path.
 ///
 /// v1.49.7 (PR #24 @PatrickRobotham): replaced `which` with cross-platform
 /// detection — `command -v` on Unix, `where.exe` on Windows.
+///
+/// Detector shape: a ProcessContext denial fails closed to None; the audit
+/// record carries the denial signal.
 pub fn detect_tmux() -> Option<String> {
     let output = if cfg!(windows) {
+        ensure_process_allowed("tmux/detect_tmux", ProcessOp::Output, "where.exe", &["tmux"])
+            .ok()?;
         Command::new("where.exe").arg("tmux").output().ok()?
     } else {
+        ensure_process_allowed(
+            "tmux/detect_tmux",
+            ProcessOp::Output,
+            "sh",
+            &["-c", "command -v tmux"],
+        )
+        .ok()?;
         Command::new("sh")
             .args(["-c", "command -v tmux"])
             .output()
@@ -28,6 +42,7 @@ pub fn detect_tmux() -> Option<String> {
 /// Return the tmux version string (e.g., "tmux 3.4").
 #[allow(dead_code)] // awaiting tmux info command
 pub fn tmux_version() -> Option<String> {
+    ensure_process_allowed("tmux/tmux_version", ProcessOp::Output, "tmux", &["-V"]).ok()?;
     let output = Command::new("tmux").arg("-V").output().ok()?;
     if output.status.success() {
         let version = String::from_utf8_lossy(&output.stdout).trim().to_string();

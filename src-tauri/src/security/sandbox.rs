@@ -11,6 +11,7 @@ use std::process::Command;
 
 use serde::{Deserialize, Serialize};
 
+use super::process_context::{ensure_process_allowed, ProcessOp};
 use super::types::AgentType;
 
 // ============================================================================
@@ -44,19 +45,37 @@ pub struct MissingDependency {
 /// On Linux: looks for bubblewrap (`bwrap`) in PATH and reads its version.
 /// On macOS: checks for `sandbox-exec` availability.
 /// Elsewhere: returns `Unsupported` with OS description.
+/// Detector shape throughout: a ProcessContext denial fails closed to the
+/// "not available" arm of each probe; the audit record carries the denial.
 pub fn detect_platform() -> SandboxPlatform {
     if cfg!(target_os = "linux") {
+        if ensure_process_allowed(
+            "sandbox/detect_platform",
+            ProcessOp::Output,
+            "which",
+            &["bwrap"],
+        )
+        .is_err()
+        {
+            return SandboxPlatform::Unsupported(
+                "Linux detected but bwrap probe denied by ProcessContext".to_string(),
+            );
+        }
         match Command::new("which").arg("bwrap").output() {
             Ok(output) if output.status.success() => {
                 let bwrap_path = PathBuf::from(
                     String::from_utf8_lossy(&output.stdout).trim().to_string(),
                 );
-                let version = Command::new("bwrap")
-                    .arg("--version")
-                    .output()
-                    .ok()
-                    .map(|v| String::from_utf8_lossy(&v.stdout).trim().to_string())
-                    .unwrap_or_else(|| "unknown".to_string());
+                let version = ensure_process_allowed(
+                    "sandbox/detect_platform",
+                    ProcessOp::Output,
+                    "bwrap",
+                    &["--version"],
+                )
+                .ok()
+                .and_then(|_| Command::new("bwrap").arg("--version").output().ok())
+                .map(|v| String::from_utf8_lossy(&v.stdout).trim().to_string())
+                .unwrap_or_else(|| "unknown".to_string());
                 SandboxPlatform::Linux {
                     bwrap_path,
                     bwrap_version: version,
@@ -67,11 +86,18 @@ pub fn detect_platform() -> SandboxPlatform {
             ),
         }
     } else if cfg!(target_os = "macos") {
-        let available = Command::new("which")
-            .arg("sandbox-exec")
-            .output()
-            .map(|o| o.status.success())
-            .unwrap_or(false);
+        let available = ensure_process_allowed(
+            "sandbox/detect_platform",
+            ProcessOp::Output,
+            "which",
+            &["sandbox-exec"],
+        )
+        .is_ok()
+            && Command::new("which")
+                .arg("sandbox-exec")
+                .output()
+                .map(|o| o.status.success())
+                .unwrap_or(false);
         SandboxPlatform::MacOS {
             sandbox_exec_available: available,
         }
@@ -93,12 +119,20 @@ pub fn check_dependencies(platform: &SandboxPlatform) -> Result<(), Vec<MissingD
             let mut missing = Vec::new();
 
             // Check for bwrap (already found if we got Linux variant, but
-            // also check socat for proxy socket forwarding)
-            if Command::new("which")
-                .arg("socat")
-                .output()
-                .map(|o| !o.status.success())
-                .unwrap_or(true)
+            // also check socat for proxy socket forwarding). A ProcessContext
+            // denial counts as missing (fail closed).
+            if ensure_process_allowed(
+                "sandbox/check_dependencies",
+                ProcessOp::Output,
+                "which",
+                &["socat"],
+            )
+            .is_err()
+                || Command::new("which")
+                    .arg("socat")
+                    .output()
+                    .map(|o| !o.status.success())
+                    .unwrap_or(true)
             {
                 missing.push(MissingDependency {
                     name: "socat".to_string(),

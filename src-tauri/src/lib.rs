@@ -66,7 +66,17 @@ pub fn run() {
             // v1.49.7 (PR #24 @PatrickRobotham): gate tmux session auto-detection
             // and monitor on tmux availability. Without tmux, these would poll a
             // nonexistent binary every 2 seconds, causing needless ENOENT errors.
-            if tmux::detector::detect_tmux().is_some() {
+            // Detector shape: a ProcessContext denial skips auto-detection
+            // (fail closed); the audit record carries the denial signal.
+            if tmux::detector::detect_tmux().is_some()
+                && security::process_context::ensure_process_allowed(
+                    "lib/setup_session_autodetect",
+                    security::process_context::ProcessOp::Output,
+                    "tmux",
+                    &["list-windows", "-t", "gsd", "-F", "#{window_name}"],
+                )
+                .is_ok()
+            {
                 // Auto-detect existing Claude sessions in the gsd tmux session
                 if let Ok(output) = std::process::Command::new("tmux")
                     .args(["list-windows", "-t", "gsd", "-F", "#{window_name}"])

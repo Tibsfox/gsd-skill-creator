@@ -1,5 +1,7 @@
 use std::process::Command;
 
+use crate::security::process_context::{ensure_process_allowed, ProcessOp};
+
 /// Represents a tmux session with its metadata.
 #[derive(Debug, Clone)]
 pub struct TmuxSession {
@@ -41,6 +43,17 @@ pub fn parse_session_line(line: &str) -> Option<TmuxSession> {
 /// Runs `tmux list-sessions` and parses the output. Returns an empty
 /// vec if the tmux server is not running (not an error condition).
 pub fn list_sessions() -> Result<Vec<TmuxSession>, String> {
+    ensure_process_allowed(
+        "tmux/list_sessions",
+        ProcessOp::Output,
+        "tmux",
+        &[
+            "list-sessions",
+            "-F",
+            "#{session_name}|#{session_created}|#{session_attached}|#{session_windows}",
+        ],
+    )
+    .map_err(|e| e.to_string())?;
     let output = Command::new("tmux")
         .args([
             "list-sessions",
@@ -71,6 +84,18 @@ pub fn list_sessions() -> Result<Vec<TmuxSession>, String> {
 
 /// Check whether a tmux session with the given name exists.
 pub fn has_session(name: &str) -> bool {
+    // Detector shape: a denial fails closed to false; the audit record
+    // carries the denial signal.
+    if ensure_process_allowed(
+        "tmux/has_session",
+        ProcessOp::Status,
+        "tmux",
+        &["has-session", "-t", name],
+    )
+    .is_err()
+    {
+        return false;
+    }
     Command::new("tmux")
         .args(["has-session", "-t", name])
         .status()
@@ -83,6 +108,13 @@ pub fn has_session(name: &str) -> bool {
 /// Sets initial window size to 200x50 to avoid the tmux 80x24 default
 /// which may be too small for the desktop terminal.
 pub fn create_session(name: &str) -> Result<(), String> {
+    ensure_process_allowed(
+        "tmux/create_session",
+        ProcessOp::Output,
+        "tmux",
+        &["new-session", "-d", "-s", name, "-x", "200", "-y", "50"],
+    )
+    .map_err(|e| e.to_string())?;
     let output = Command::new("tmux")
         .args(["new-session", "-d", "-s", name, "-x", "200", "-y", "50"])
         .output()
@@ -99,6 +131,13 @@ pub fn create_session(name: &str) -> Result<(), String> {
 /// Kill a tmux session by name.
 #[allow(dead_code)] // awaiting session lifecycle command
 pub fn kill_session(name: &str) -> Result<(), String> {
+    ensure_process_allowed(
+        "tmux/kill_session",
+        ProcessOp::Output,
+        "tmux",
+        &["kill-session", "-t", name],
+    )
+    .map_err(|e| e.to_string())?;
     let output = Command::new("tmux")
         .args(["kill-session", "-t", name])
         .output()

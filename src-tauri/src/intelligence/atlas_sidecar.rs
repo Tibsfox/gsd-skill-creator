@@ -174,6 +174,25 @@ async fn run_indexer_task(
         serde_json::json!({ "snapshot_id": snapshot_id }),
     );
 
+    // Gate hoisted above the spawn; a denial takes the same failure path the
+    // spawn error does (emitted event), so the UI sees an honest failed state.
+    let argv_refs: Vec<&str> = argv.iter().map(|a| a.as_str()).collect();
+    if let Err(e) = crate::security::process_context::ensure_process_allowed(
+        "intelligence/run_indexer_task",
+        crate::security::process_context::ProcessOp::Spawn,
+        "node",
+        &argv_refs,
+    ) {
+        let _ = app.emit(
+            "atlas:indexing.failed",
+            serde_json::json!({
+                "snapshot_id": snapshot_id,
+                "error": e.to_string()
+            }),
+        );
+        return;
+    }
+
     let mut child = match Command::new("node")
         .arg(script)
         .args(rest)

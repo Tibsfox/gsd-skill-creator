@@ -9,6 +9,7 @@ use tokio::io::{AsyncBufReadExt, AsyncWriteExt, BufReader, Lines};
 use tokio::process::{Child, ChildStdin, ChildStdout};
 
 use super::types::{Prompt, Resource, ServerCapability, Tool, TransportConfig};
+use crate::security::process_context::{ensure_process_allowed, ProcessOp};
 
 // ============================================================================
 // ConnectionStatus
@@ -76,6 +77,16 @@ impl ServerConnection {
         };
 
         self.status = ConnectionStatus::Connecting;
+
+        // Dynamic target: the executable comes from TransportConfig::Stdio.
+        // The gate records exactly what the config asked us to run.
+        let argv: Vec<&str> = args.iter().map(|a| a.as_str()).collect();
+        ensure_process_allowed("mcp_host/spawn", ProcessOp::Spawn, &command, &argv).map_err(
+            |e| {
+                self.status = ConnectionStatus::Failed;
+                e.to_string()
+            },
+        )?;
 
         let mut cmd = tokio::process::Command::new(&command);
         cmd.args(&args)

@@ -62,12 +62,21 @@ fn check_sessions(app_handle: &AppHandle) {
         let tmux_window = session.tmux_window.clone();
         let old_status = session.status.clone();
 
-        // Check if the tmux window still exists
-        let window_exists = std::process::Command::new("tmux")
-            .args(["has-session", "-t", &tmux_window])
-            .status()
-            .map(|s| s.success())
-            .unwrap_or(false);
+        // Check if the tmux window still exists. Detector shape: a
+        // ProcessContext denial fails closed to "window gone"; the audit
+        // record carries the denial signal.
+        let window_exists = crate::security::process_context::ensure_process_allowed(
+            "claude/check_sessions",
+            crate::security::process_context::ProcessOp::Status,
+            "tmux",
+            &["has-session", "-t", &tmux_window],
+        )
+        .is_ok()
+            && std::process::Command::new("tmux")
+                .args(["has-session", "-t", &tmux_window])
+                .status()
+                .map(|s| s.success())
+                .unwrap_or(false);
 
         let new_status = if !window_exists {
             ClaudeStatus::Stopped

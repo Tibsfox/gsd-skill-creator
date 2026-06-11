@@ -93,6 +93,13 @@ const os = require('os');
         page_lit,
     );
 
+    crate::security::process_context::ensure_process_allowed(
+        "commands/generate_dashboard",
+        crate::security::process_context::ProcessOp::Output,
+        "node",
+        &["-e", &script],
+    )
+    .map_err(|e| e.to_string())?;
     let output = Command::new("node")
         .arg("-e")
         .arg(&script)

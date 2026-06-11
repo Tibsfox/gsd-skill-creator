@@ -15,6 +15,7 @@ use std::process::Command;
 
 use serde::{Deserialize, Serialize};
 
+use super::process_context::{ensure_process_allowed, ProcessOp};
 use super::types::{
     AgentType, EventSeverity, EventSource, Filesystem, Network, SandboxProfile, SecurityEvent,
 };
@@ -235,6 +236,14 @@ impl AgentIsolationManager {
         let worktree_path = self.agents_dir.join(&agent_id);
 
         // Run git worktree add
+        let worktree_arg = worktree_path.to_string_lossy().to_string();
+        ensure_process_allowed(
+            "security/create_agent",
+            ProcessOp::Output,
+            "git",
+            &["worktree", "add", &worktree_arg],
+        )
+        .map_err(|e| IsolationError::GitError(e.to_string()))?;
         let output = Command::new("git")
             .args(["worktree", "add", &worktree_path.to_string_lossy()])
             .current_dir(&self.project_root)
@@ -351,7 +360,17 @@ impl AgentIsolationManager {
             let _ = copy_dir_recursive(&outbox, &results_dest);
         }
 
-        // Try git worktree remove first
+        // Try git worktree remove first. Gate hoisted ABOVE the
+        // swallow-into-fallback match: a security denial propagates instead
+        // of silently degrading to the manual-removal path.
+        let worktree_arg = agent.worktree_path.to_string_lossy().to_string();
+        ensure_process_allowed(
+            "security/destroy_agent",
+            ProcessOp::Output,
+            "git",
+            &["worktree", "remove", "--force", &worktree_arg],
+        )
+        .map_err(|e| IsolationError::GitError(e.to_string()))?;
         let output = Command::new("git")
             .args(["worktree", "remove", "--force", &agent.worktree_path.to_string_lossy()])
             .current_dir(&self.project_root)

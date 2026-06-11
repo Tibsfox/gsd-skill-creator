@@ -100,6 +100,14 @@ pub async fn sandbox_verify_full(
         .join("verify-sandbox.sh");
 
     let result = if script_path.exists() {
+        let script_arg = script_path.to_string_lossy().to_string();
+        crate::security::process_context::ensure_process_allowed(
+            "commands/sandbox_verify_full",
+            crate::security::process_context::ProcessOp::Output,
+            "bash",
+            &[&script_arg],
+        )
+        .map_err(|e| e.to_string())?;
         let output = std::process::Command::new("bash")
             .arg(&script_path)
             .output()
