@@ -121,7 +121,11 @@ fn main() {
         "atlas_list_provenance_for_line",
         "atlas_request_index_snapshot",
         "atlas_invalidate_cache",
-        // CAP-024: SCRIBE Dashboard native Tauri window
+        // CAP-024: SCRIBE Dashboard native Tauri window.
+        // KEEP (operator, 2026-06-11): zero desktop/ callers BY DESIGN —
+        // operator-facing utility window launched via `npm run tauri:scribe`
+        // or a manual devtools invoke('open_scribe_dashboard'); not wired
+        // into the main-window UI. Do not triage as an ACL orphan.
         "open_scribe_dashboard",
     ]);
 

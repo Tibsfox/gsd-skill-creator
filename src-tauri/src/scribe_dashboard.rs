@@ -3,6 +3,13 @@
 //! Opens the SCRIBE dashboard (`dashboard-lod-rendering/dashboard/`) in a
 //! dedicated Tauri [`WebviewWindow`] alongside the existing GSD-OS main window.
 //!
+//! # Caller surface (ACL-orphan triage note)
+//!
+//! This command intentionally has **no `desktop/` frontend caller**. It is an
+//! operator-facing utility window, launched via `npm run tauri:scribe` or a
+//! manual devtools `invoke('open_scribe_dashboard')`. KEEP per operator
+//! decision 2026-06-11 — do not delete in capability-ACL orphan sweeps.
+//!
 //! # Architecture
 //!
 //! The dashboard's HTML/JS/CSS files are bundled into the Tauri app at build
