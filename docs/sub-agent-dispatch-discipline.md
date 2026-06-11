@@ -468,3 +468,10 @@ thresholds, memorial-substrate framing) live in
   `degree-sync.json` and writes ~13 deliverables in 28–36 tool uses (mean
   ~31). Validated across 5+ substrate-form-distinct Shuttle mission classes.
   (Memory: `feedback_nasa-canonical-sibling-rebuild-pattern`.)
+  **SUPERSEDED for catalog-clone rewrites (v1.49.1031):** the DECOMPOSE-build
+  pattern (`tools/workflows/decompose-build.mjs`; 8 bounded parallel rewrite
+  agents, ANCHORS guard built in) replaces single-dispatch for full-degree
+  clone rewrites, which hit the ~290s sub-agent ceiling — confirmed 6×
+  (v1021–v1026). #10408 remains the default for constrained harnesses
+  (no Workflow tool) and non-clone rebuild work. See
+  [NASA mission authoring §0.1](nasa-mission-authoring-discipline.md).

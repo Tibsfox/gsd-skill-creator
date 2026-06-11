@@ -228,6 +228,62 @@ Milestone-specific notes:
 
 ---
 
+## Appendix — NASA per-ship T14 variant (resume-era, v988–v1026)
+
+The autonomous NASA degree ships run a streamlined ~14-Bash-call T14 whose
+ordering obeys every invariant above (INV-1 included). Until v1.49.1031 this
+sequence lived only in untracked per-run handoffs (a pointer chain through
+gitignored files — the documented single point of failure); this appendix is
+its committed home. Build/review machinery feeding into it:
+`tools/workflows/decompose-build.mjs` and
+`tools/workflows/content-adversarial-review.mjs`
+([workflows-library.md](workflows-library.md));
+per-mission discipline at
+[nasa-mission-authoring-discipline.md](nasa-mission-authoring-discipline.md) §0.
+
+```
+N0.  Revert refresh side-effects if present:
+       git checkout -- docs/release-notes/INDEX.md docs/release-notes/STORY.md docs/RELEASE-HISTORY.md
+N1.  Machine load < ~7.5 (cat /proc/loadavg) -> bash tools/pre-tag-gate.sh -> all checks PASS
+       (step-12 STORY-drift WARN pre-bump is the INV-1 designed steady state).
+     Step P equivalent for NASA content ships: the adversarial CONTENT review ran post-build;
+       write the attestation with --mode content.
+N2.  docs(release): git add docs/release-notes/v<X>/ && git commit   (single Bash call —
+       the git-add-blocker trips a standalone `git commit`)
+N3.  Bump chain: node scripts/bump-version.mjs <X>
+       -> node tools/adoption-refresh.mjs
+       -> node tools/adoption-trends.mjs --write
+       -> node scripts/append-story-entry.mjs        (AFTER bump — INV-1)
+N4.  chore(release): git add the 9 manifest/baseline files && git commit
+N5.  git tag v<X> <chore-release-sha>
+N6.  git push origin dev && git push origin v<X>
+N7.  git push origin dev:main && git branch -f main dev   (single-step FF, Lesson #10184)
+N8.  bash tools/gh-release-publish.sh <X>
+N9.  FTP publish: pre-flight port 21 (nc -zvw5 <host> 21)
+       -> bash scripts/sync-research-to-live.sh --nasa-only
+       -> curl 200 spot-checks on the new degree pages + shader
+N10. Post-tag: node tools/release-history/run-with-pg.mjs refresh --fast --quiet
+N11. chore(post-ship): git add docs/RELEASE-HISTORY.md && git commit
+       (revert any INDEX/STORY refresh side-effects first if they appear)
+N12. git push origin dev && git push origin dev:main && git branch -f main dev
+N13. State reset: node tools/state-md-set-shipped.mjs --version v<X> --name "<...>"
+       --degree <D> --predecessor v<P> --predecessor-sha "<sha>"   (quote shas — \d+e\d+
+       short-shas corrupt to .inf unquoted)
+       -> node tools/state-md-clean-backups.mjs --write
+N14. MANDATORY: node tools/project-md-normalizer.mjs --write --version v<X>
+       --name "<...>" --date <date>   (PROJECT.md is gitignored and drifts +1/ship;
+       gate step 19 BLOCKs at >3)
+```
+
+Standing notes: `bump-version.mjs` / `append-story-entry.mjs` /
+`sync-research-to-live.sh` live under `scripts/`, the rest under `tools/`;
+`www/` and the pairings data are gitignored (FTP-deployed) — only
+`docs/release-notes/v<X>/` + the chore(release) manifest files +
+`docs/RELEASE-HISTORY.md` are git-tracked NASA deliverables; always pair
+`git add <paths> && git commit` in one call.
+
+---
+
 ## Change log
 
 | Date | Change | Driver |
@@ -236,6 +292,7 @@ Milestone-specific notes:
 | 2026-06-03 | Added step 2.7 adoption-baseline refresh (post bump-version, pre chore-commit): `adoption-refresh.mjs` + `adoption-trends.mjs --write`. SOURCE-ELIMINATOR half of the two-layer closure (#10431/#10436) for the baseline-freeze drift class; DETECTOR is pre-tag-gate step 20 (adoption-freshness, WARN-only). | v1.49.965 Ship 0.1 (audit T1.3) |
 | 2026-06-04 | Added pre-flight step P — adversarial ship review on the diff before `git push origin dev` (ADVISORY, staged #10463). Reusable workflow `tools/ship-review/adversarial-ship-review.mjs`; canonical doc `docs/adversarial-ship-review.md`; drift-guard `tests/integration/adversarial-ship-review-discipline.test.ts`. | v1.49.968 Ship 1.1 (audit T1.4) |
 | 2026-06-10 | Step P promoted from ADVISORY to REQUIRED. Pre-tag-gate step 22 (ship-review-attestation, exit 26) enforces that `write-attestation.mjs` was run after the review (K=30; 55 reviewed release dirs all-time, 20 within v968+ — the NASA band's content reviews live in untracked mission artifacts; caught-defect ledger: v965 3 BLOCKERs, v966, v982, 11/35 F4, v1027 1 BLOCKER + 1 MAJOR, v1028 1 MAJOR). Gate count 21→22. | v1.49.1029 (audit §10 ship 3) |
+| 2026-06-10 | Added the NASA per-ship T14 appendix (the resume-era ~14-call variant, previously only in untracked handoffs) + cross-refs to the committed `tools/workflows/` skeletons. | v1.49.1031 (audit §10 ship 5) |
 
 ## Lesson coverage (codified v1.49.654 C08+C09)
 

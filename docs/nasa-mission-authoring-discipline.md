@@ -24,10 +24,16 @@ but were never wired into the discipline manifest. This doc codifies the
 phrasing, dispatch density, protected-path safety, brief accuracy) were
 promoted into their natural existing homes and are cross-referenced below.
 
-The campaign is currently frozen at degree **1.178** (a deliberate
-pressure-margin hold, not a cancellation). These disciplines are preserved
-for a campaign resume and — for the subset flagged below — for any
-high-volume mission-page authoring effort.
+The campaign **resumed on 2026-06-06** after a deliberate pressure-margin
+hold at degree 1.178: autonomous runs 1–4 shipped degrees 1.179–1.217
+(v1.49.988–v1.49.1026, 39 ships, full gate every ship, zero content-filter
+trips across runs 2–4). The resume runs built a second generation of
+operational machinery — DECOMPOSE-build and the 4-auditor adversarial
+content review — codified in [section 0](#0-resume-era-machinery-v988v1026--read-this-first-for-new-ships)
+below and committed as generic skeletons under `tools/workflows/`
+([workflows-library.md](workflows-library.md)). The v652–v716-era lessons in
+sections 1–8 remain valid; where the resume-era machinery supersedes one
+(#10408), the supersession is marked explicitly.
 
 > ### Generalizable beyond NASA
 >
@@ -43,6 +49,84 @@ high-volume mission-page authoring effort.
 > first observed in the NASA campaign.
 
 ---
+
+## 0. Resume-era machinery (v988–v1026) — READ THIS FIRST for new ships
+
+The v988–v1026 autonomous runs replaced the v652-era W0→W1→W2 pipeline and
+the #10408 single-dispatch rebuild with a two-stage committed-skeleton flow.
+Both skeletons live in `tools/workflows/` (canonical doc:
+[workflows-library.md](workflows-library.md); drift-guard:
+`tests/integration/workflows-library-discipline.test.ts`); per-mission
+instances are authored as args payloads from the untracked MISSION-BRIEF.md
+and are never committed.
+
+### 0.1 DECOMPOSE-build (`tools/workflows/decompose-build.mjs`)
+
+**Why it exists:** single-dispatch builds die at the ~290s sub-agent ceiling
+on full-degree page sets. DECOMPOSE-build splits the build into the canonical
+**8-task page decomposition** — index.html / research / organism / math-sim /
+papers-curriculum / jsons / pointers-shader / readme — each a bounded
+sub-5-minute rewrite agent dispatched in parallel: 8/8 agents ok at ~350s
+total wall-clock, zero ceiling deaths, confirmed 6× (v1021–v1026).
+
+**The SHARED-prompt contract** (every task agent receives it): rewrite
+textual content only, preserve HTML/JSON/markdown STRUCTURE exactly; read
+the MISSION-BRIEF first (it is authoritative for facts, anchors, engine
+state, organism pairing, dedication guidance); the **ANCHORS guard** — use
+ONLY the degree's canonical NEW-LOCKED anchors, never carry predecessor
+anchors; DISCIPLINE (a)–(e) (positive framing, <=200-word dedications, <=5x
+single-word repetition, anchor tag-sentence house style, mode-scoped
+predecessor-vocab replacement); and the footer (no commit/tag/push/FTP,
+per-HTML-file trip-vocab check with VERDICT PASS, short confirmation
+return).
+
+**The rotation-vs-continuation flip (load-bearing):** for an AXIS-ROTATION
+build the predecessor vocabulary is NOT shared — essentially every topical
+word must be replaced, and ALL predecessor content is a leak except a single
+deliberate nav-prev/lineage note. For an INTRA-AXIS CONTINUATION the axis
+vocabulary is SHARED and correct — only predecessor-specific items are
+leaks. This was previously clone-selection folklore ("clone gp-b-* for a
+rotation, wmap-* for a continuation"); it is now the required `mode` arg in
+both skeletons.
+
+**Lesson #10408 — SUPERSEDED for catalog-clone rewrites.** The per-mission
+single-dispatch rebuild template (~1200-word brief, one general-purpose
+sub-agent, 13 deliverables, 28–36 tool uses) is functionally replaced by
+DECOMPOSE-build for catalog-clone rewrites: the single dispatch runs into
+the ~290s ceiling exactly where DECOMPOSE-build does not, and carries no
+ANCHORS guard. #10408 remains valid for constrained harnesses (no Workflow
+tool) and for non-clone rebuild work. Marked at the lesson's home in
+[Sub-agent dispatch](sub-agent-dispatch-discipline.md).
+
+### 0.2 Adversarial content review (`tools/workflows/content-adversarial-review.mjs`)
+
+Run after the build, before pre-tag-gate, for fresh-topic ships. Four
+read-only auditors (2 fact-checkers split by claim cluster + 1
+framing/anchor-canonicality + 1 structure/leak) feed a synthesis judge that
+independently re-reads every cited file and classifies findings with the
+3-way verdict (`real-fix-now` / `real-minor-optional` /
+`rejected-false-positive`). Caught-defect ledger — defects no mechanical
+gate could catch: v1013 CGRO physics BLOCKER, v1014 Swift terminology
+MAJOR, v1023 Dawn 2 MAJOR predecessor-anchor leaks, v1026 GP-B clean
+(guard maturity). Cost ~400K tokens/review; accepted per fresh topic.
+
+**The ANCHOR-LEAK guard** (the framing auditor's first duty, always on):
+only the degree's canonical anchors may be stamped "NEW LOCKED at v<X>";
+predecessor anchors carried over from the cloned source are MAJOR findings;
+research.html and research.md must stamp identical anchor sets. Born from
+the v1023 Dawn catch; held 3 consecutive clean ships (COBE/WMAP/GP-B);
+existed in only 3 of 11 untracked clones before promotion — committing it
+ended the silent-regression-by-clone-choice failure mode.
+
+### 0.3 Per-ship flow (resume-era)
+
+Brief (untracked, trip-vocab checked `--mode brief`) → DECOMPOSE-build via
+the committed skeleton → adversarial content review → apply fix-now findings
+in the main context → mechanical gates (trip-vocab pages, canonical-layout,
+sidebar) → pre-tag-gate → the NASA T14 variant
+([T14-SHIP-SEQUENCE.md](T14-SHIP-SEQUENCE.md), NASA appendix). Path B
+(main-context hand-author) remains the escalation when dispatch trips
+(#10402); the substitute-on-trip ladder is unchanged.
 
 ## 1. Authoring cadence — direct-author vs dispatch vs hybrid
 
@@ -281,7 +365,7 @@ elsewhere:
 | **#10402** | Secondary-trip-vocab density threshold → Path B (main-context hand-author) selection (primary > 0 OR secondary > 5) | [Sub-agent dispatch](sub-agent-dispatch-discipline.md) |
 | **#10406** | Positive-framing dispatch discipline; don't enumerate forbidden tokens (they self-replicate); planetary-protection-as-planned-final-state framing | [Sub-agent dispatch](sub-agent-dispatch-discipline.md) |
 | **#10407** | Dispatch-prompt density budget applies to the prompt itself, not just the brief — describe behavioral guidance abstractly | [Sub-agent dispatch](sub-agent-dispatch-discipline.md) |
-| **#10408** | Per-mission single-dispatch rebuild template (~1200-word brief, general-purpose subagent, 13 deliverables, 28–36 tool uses) | [Sub-agent dispatch](sub-agent-dispatch-discipline.md) |
+| **#10408** | Per-mission single-dispatch rebuild template (~1200-word brief, general-purpose subagent, 13 deliverables, 28–36 tool uses). **SUPERSEDED for catalog-clone rewrites by DECOMPOSE-build (§0.1, v1.49.1031); remains valid for constrained harnesses / non-clone rebuilds** | [Sub-agent dispatch](sub-agent-dispatch-discipline.md) |
 
 ## Cross-references — sibling discipline docs
 
@@ -289,4 +373,6 @@ elsewhere:
 - [`MISSION-PACKAGE-DISCIPLINE.md`](MISSION-PACKAGE-DISCIPLINE.md) — W0 brief framing, trip-vocab budget (#10401), closure-verification gate
 - [`sub-agent-dispatch-discipline.md`](sub-agent-dispatch-discipline.md) — generic dispatch mechanics + the promoted content-filter / dispatch-cadence lessons
 - [`counter-cadence-discipline.md`](counter-cadence-discipline.md) — the cadence framework these same-day-cluster thresholds feed
+- [`workflows-library.md`](workflows-library.md) — the committed skeletons behind §0 (DECOMPOSE-build, adversarial content review, audit harness)
+- [`T14-SHIP-SEQUENCE.md`](T14-SHIP-SEQUENCE.md) — the NASA T14 appendix (the resume-era ~14-call per-ship sequence)
 - Memory: `feedback_nasa-ship-sequence-streamlined`, `feedback_nasa-path-b-substrate-anchor-count`, `feedback_nasa-brief-secondary-trip-vocab-classes`, `feedback_positive-framing-dispatch-discipline`, `feedback_nasa-canonical-sibling-rebuild-pattern`
