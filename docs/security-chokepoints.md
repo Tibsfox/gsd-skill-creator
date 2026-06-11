@@ -357,3 +357,48 @@ Each ship documents the not-gated discipline in both the class docstring (inline
 | LoaderContext    | ~10 (filename-matched)       | majority                 | none — wired at v782 ship       | 1 (self)                             |
 | EgressContext    | ~22 (behavior-matched)       | 1 (osv-client)           | 16                              | 5 (dashboard string-emitters) + 1 self |
 | ProcessContext   | ~39 (behavior-matched)       | 1 (dry-run-gate)         | 38                              | 1 (self)                             |
+
+## Rust analogue (src-tauri) — v1.49.1032
+
+The audit 2026-06-09 §3.3 re-carry ("no Rust analogue of the
+ProcessContext/LoaderContext chokepoints") closed at v1.49.1032 with a fourth
+sibling, specialized to the Tauri backend:
+
+| Chokepoint              | Target type     | Audit-op tags             | Reference impl                               | Audit harness                                      |
+|-------------------------|-----------------|---------------------------|----------------------------------------------|----------------------------------------------------|
+| ProcessContext (Rust)   | command + argv  | spawn, output, status     | `src-tauri/src/security/process_context.rs`  | `src/security/process-context-rust-audit.test.ts`  |
+
+Same shape, three deliberate divergences from the TS siblings, each forced by
+the Rust surface rather than chosen:
+
+1. **Process-wide `OnceLock` policy instead of a threaded `ctx?` parameter.**
+   Threading an optional context through 13 modules of sync/async/Tauri-command
+   signatures is the invasive path #10414 exists to avoid; the analogue of
+   "callers pass `undefined` = legacy permissive" is "no policy installed =
+   legacy permissive". `install_process_policy` is one-shot; nothing installs a
+   policy today, so behavior is unchanged until a startup hook opts in.
+2. **Detector-shaped sites fail closed instead of throwing (Rust variant of
+   #10427).** Functions returning `Option`/`bool` (`detect_tmux`,
+   `has_session`, the monitor poll, `lib.rs` setup autodetect, the sandbox
+   platform probes) cannot propagate a typed error without signature changes
+   that ripple to callers. A denial at those sites returns the "not available"
+   value — nothing spawns — and the **audit record carries the denial signal**,
+   which is the load-bearing telemetry. `Result`-channel sites propagate
+   `ProcessContextDenied` through their existing error path, gates hoisted
+   above any swallowing handler exactly as #10427 requires.
+3. **Roster starts at the end-state.** All 28 spawn sites (27 `Command::new`
+   across 12 files + the portable-pty `spawn_command` surface in
+   `commands/pty.rs`) were wired 1:1 in the introducing ship — there is no
+   `KNOWN_UNWIRED` grandfather list to chip down. The vitest audit pins the
+   per-file spawn-site counts and requires gate-count ≥ spawn-count, with
+   comment-stripping so the zero-spawn structural invariants documented in
+   `intelligence/atlas.rs` / `intelligence/server.rs` comments don't read as
+   sites (those invariants are also pinned as code-token zero checks).
+
+The audit harness is a vitest test over committed Rust source text (the
+`acl-reconciliation-audit.test.ts` house pattern, per #10417): the cargo lane
+is CI-only and cannot gate, while the default vitest project reaches
+pre-tag-gate and every CI leg. Behavioral unit tests live in
+`src-tauri/src/security/tests/process_context_tests.rs`; the process-wide
+policy is exercised by exactly one test (permissive install only) because the
+`OnceLock` is process-global under parallel cargo tests.
