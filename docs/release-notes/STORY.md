@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.1028`.
+The story begins at `v1.0` and continues to `v1.49.1029`.
 
-**1071 chapters.** 1070 have retrospectives.
+**1072 chapters.** 1071 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -1079,3 +1079,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.1026](v1.49.1026/00-summary.md)** — Gravity Probe B NASA General-Relativity Test, Cryogenic Gyroscope Precision, and Frame-Dragging Measurement Mission · 2026-06-10
 - **[v1.49.1027](v1.49.1027/00-summary.md)** — Loop-Outcome Ship: First Evidence-Driven Calibration Tick, Dismissal-Feedback Actuation, and Co-Activation Widening · 2026-06-10
 - **[v1.49.1028](v1.49.1028/00-summary.md)** — Deploy-Layer Fix: Targeted Install, Parity Drift-Guard, Activation Counter · 2026-06-10
+- **[v1.49.1029](v1.49.1029/00-summary.md)** — WARN-to-BLOCK Promotions: 22-Step Gate, Ship-Review v2, Readiness Reporter · 2026-06-10
