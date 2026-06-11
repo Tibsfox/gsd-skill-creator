@@ -44,7 +44,11 @@ export async function isAvailable(
 
   const [yosysOk, netlistsvgOk] = await Promise.all([
     probeCommand(yosysBin, ['-V'], ctx),
-    probeCommand(netlistsvgBin, ['--version'], ctx),
+    // netlistsvg's yargs CLI exits non-zero for EVERY no-input invocation —
+    // it has no --version/--help that exits 0, so an exit-code-0 probe can
+    // never report it available. Binary-exists semantics: spawned and exited
+    // on its own = available; only ENOENT/spawn-error = unavailable.
+    probeCommand(netlistsvgBin, ['--help'], ctx, { binaryExistsIsEnough: true }),
   ]);
 
   const reasons: string[] = [];
@@ -79,7 +83,12 @@ export function _resetCache(): void {
  * command exits with code 0 within 5 seconds. Returns false on any error
  * (ENOENT, non-zero exit, timeout).
  */
-function probeCommand(bin: string, args: string[], ctx?: ProcessContext): Promise<boolean> {
+function probeCommand(
+  bin: string,
+  args: string[],
+  ctx?: ProcessContext,
+  opts: { binaryExistsIsEnough?: boolean } = {},
+): Promise<boolean> {
   // ProcessContextDenied is load-bearing per #10427 — hoist outside the
   // Promise's try/catch which swallows spawn errors into resolve(false).
   ensureProcessAllowed(ctx, PROCESS_SOURCE, 'spawn', bin, args);
@@ -108,7 +117,7 @@ function probeCommand(bin: string, args: string[], ctx?: ProcessContext): Promis
     child.on('error', () => settle(false));
     child.on('close', (code: number | null) => {
       clearTimeout(timer);
-      settle(code === 0);
+      settle(opts.binaryExistsIsEnough === true ? true : code === 0);
     });
   });
 }

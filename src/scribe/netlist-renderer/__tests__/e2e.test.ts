@@ -79,11 +79,15 @@ endmodule
 type DomParserCtor = { new(): Pick<DOMParser, 'parseFromString'> };
 
 async function getDomParser(): Promise<DomParserCtor> {
-  // Use Function constructor to bypass TS static import resolution for jsdom
-  // (no @types/jsdom in root package.json; jsdom is a runtime-only dep here).
-  const dynamicImport = new Function('m', 'return import(m)') as
-    (m: string) => Promise<{ JSDOM: new (html: string) => { window: { DOMParser: DomParserCtor } } }>;
-  const { JSDOM } = await dynamicImport('jsdom');
+  // jsdom is a runtime-only dep (no @types/jsdom in root package.json); a
+  // variable specifier keeps TS from demanding type declarations while
+  // letting vitest's module runner service the dynamic import. A bare
+  // `new Function('return import(...)')` has no import callback inside the
+  // vitest VM and throws "A dynamic import callback was not specified".
+  const specifier = 'jsdom';
+  const { JSDOM } = (await import(/* @vite-ignore */ specifier)) as {
+    JSDOM: new (html: string) => { window: { DOMParser: DomParserCtor } };
+  };
   return new JSDOM('').window.DOMParser;
 }
 
