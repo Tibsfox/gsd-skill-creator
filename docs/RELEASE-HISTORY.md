@@ -1,13 +1,14 @@
 # Release History
 
-1076 milestones shipped across the v1.0 → v1.49.1033 arc. The table below lists every shipped release, newest first.
+1077 milestones shipped across the v1.0 → v1.49.1034 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
-**Snapshot:** 1076 releases · 1075 with retrospectives · 806 with extracted lessons · quality A:701 B:98 C:62 D:12 F:203 (avg 83) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 1077 releases · 1076 with retrospectives · 807 with extracted lessons · quality A:702 B:98 C:62 D:12 F:203 (avg 83) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.1034](release-notes/v1.49.1034) | Gravity Probe A NASA Gravitational-Redshift Hydrogen-Maser Precision-Clock Relativity Test Mission | 2026-06-11 | 5 | 5 | — | [s](release-notes/v1.49.1034/chapter/00-summary.md) [r](release-notes/v1.49.1034/chapter/03-retrospective.md) [l](release-notes/v1.49.1034/chapter/04-lessons.md) [c](release-notes/v1.49.1034/chapter/99-context.md) | 12 | A 99 |  |
 | [v1.49.1033](release-notes/v1.49.1033) | SCRIBE v621 Refinement: Errata Sweep, Evidence Closure, Lean First Proof | 2026-06-11 | 10 | — | — | [s](release-notes/v1.49.1033/chapter/00-summary.md) [r](release-notes/v1.49.1033/chapter/03-retrospective.md) [l](release-notes/v1.49.1033/chapter/04-lessons.md) [c](release-notes/v1.49.1033/chapter/99-context.md) | 4 | F 30 |  |
 | [v1.49.1032](release-notes/v1.49.1032) | Rust Process-Context Chokepoint: 28-Site Spawn Gate, Drift-Guard, Node-24 Actions Bump | 2026-06-10 | 7 | — | — | [s](release-notes/v1.49.1032/chapter/00-summary.md) [r](release-notes/v1.49.1032/chapter/03-retrospective.md) [l](release-notes/v1.49.1032/chapter/04-lessons.md) [c](release-notes/v1.49.1032/chapter/99-context.md) | — | F 36 |  |
 | [v1.49.1031](release-notes/v1.49.1031) | Workflows Library: Committed NASA-Ops Skeletons, Mode-Flip Codification, Drift-Guard | 2026-06-10 | 7 | — | — | [s](release-notes/v1.49.1031/chapter/00-summary.md) [r](release-notes/v1.49.1031/chapter/03-retrospective.md) [l](release-notes/v1.49.1031/chapter/04-lessons.md) [c](release-notes/v1.49.1031/chapter/99-context.md) | — | F 39 |  |
