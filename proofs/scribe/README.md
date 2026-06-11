@@ -11,25 +11,29 @@ specified in T3 doc 08 §2.1, §2.2, §2.3 (`08-formal-verification-angle.md`):
 | §2.2 | Round-trip preserves Verilog emission semantics | `ScribeRoundTrip/Section22.lean` |
 | §2.3 | Composition: §2.1 ∧ §2.2 → end-to-end semantic equivalence | `ScribeRoundTrip/Section23.lean` |
 
-## Status: scaffold (proof obligations are `sorry`)
+## Status: building scaffold, first lemma machine-checked (2026-06-11)
 
 The file structure, type definitions, theorem statements, and proof
-obligations are concrete. The actual proof terms (the bodies that fill
-each `sorry`) are **not** filled — that work is multi-week formal-
-verification effort tracked in `docs/proof-obligations.md`.
+obligations are concrete. The remaining proof terms (the bodies that fill
+each `sorry`) are multi-week formal-verification effort tracked in
+`docs/proof-obligations.md`.
 
 What's done:
 - Lean toolchain pinned (`lean-toolchain` → `leanprover/lean4:v4.15.0`)
-- Mathlib dependency declared with version pin in `lakefile.lean`
+- `lake-manifest.json` materialized via `lake update` (2026-06-11); `lake build`
+  succeeds from a clean checkout
+- Mathlib dependency REMOVED from `lakefile.lean` (2026-06-11) — no module
+  imports it; the package builds against bare Lean in seconds. Re-add the
+  pinned directive when a proof needs it (see `docs/mathlib-deps.md`)
 - Inductive types mirroring `src/scribe/types/metadata-namespace.ts` (Basic.lean, ToyAst.lean)
 - Function signatures mirroring `parse.ts` and `render.ts` (Parse.lean, Render.lean)
 - Theorem statements for §2.1, §2.2, §2.3 with documented obligations (Section21..23.lean)
 - Three worked-example theorem statements (Examples/Add.lean, Xor1.lean, Mux.lean)
+- **P1 `binop_label_roundtrip` CLOSED** (`cases op <;> rfl`) — the first
+  machine-checked lemma in the package
 
 What's NOT done:
-- Filling the `sorry`s — see `docs/proof-obligations.md` for the full list (9 obligations)
-- Running `lake update` to populate `lake-manifest.json` with concrete commit hashes
-  (operator must do this once on a machine with Lean 4 installed; result should be committed)
+- Filling the `sorry`s — see `docs/proof-obligations.md` for the full list (16 open `sorry` declarations as of 2026-06-11; P1 closed)
 
 ## Operator setup
 
@@ -54,18 +58,13 @@ elan --version
 `elan` reads `lean-toolchain` automatically; the first `lake` command in
 this directory will install Lean 4 v4.15.0 if not already cached.
 
-### 3. Resolve and lock dependencies
+### 3. Dependencies
 
-From this directory:
-
-```bash
-cd proofs/scribe
-lake update                # downloads Mathlib + transitive deps; populates lake-manifest.json
-git add lake-manifest.json # commit the populated lockfile
-```
-
-This step takes ~10-30 minutes the first time (Mathlib is ~500 MB).
-Subsequent operators get reproducible builds via the committed manifest.
+None — the committed `lake-manifest.json` is the real (empty-deps) lockfile,
+materialized 2026-06-11. There is nothing to fetch: the package builds
+against bare Lean v4.15.0. If a future proof re-adds Mathlib to
+`lakefile.lean`, run `lake update` once and commit the regenerated manifest
+(~10-30 min; Mathlib is ~500 MB).
 
 ### 4. Build (expect `sorry` warnings)
 
@@ -73,9 +72,10 @@ Subsequent operators get reproducible builds via the committed manifest.
 lake build
 ```
 
-Expected output: build succeeds, with one `unsolved goals (sorry was used)`
-warning per `sorry` in the source. Currently 9 such warnings; see
-`docs/proof-obligations.md` for the obligation-by-obligation list.
+Expected output: build succeeds, with one `declaration uses 'sorry'`
+warning per open obligation. Currently 16 such warnings (P1 closed
+2026-06-11); see `docs/proof-obligations.md` for the
+obligation-by-obligation list.
 
 This is the working state. The build *succeeding* (modulo `sorry`) means
 all theorem statements are well-typed, and the proof-fill work can begin

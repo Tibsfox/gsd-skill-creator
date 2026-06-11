@@ -11,10 +11,13 @@
     examples/cartridges/code-svg-hdl-bridge/svg-to-ast/parse.ts
     examples/cartridges/code-svg-hdl-bridge/ast-to-svg/render.ts
 
-  Mathlib pin rationale: per CLAUDE.md "External Citations" §JULIA-PARAMETER,
-  the v1.50 proof companion compiles against the Markov-kernel formalization
-  upstreamed by Degenne et al. (arXiv:2510.04070). This package follows the
-  same pinning discipline; see `docs/mathlib-deps.md`.
+  Mathlib: NOT required (removed 2026-06-11). No module in ScribeRoundTrip/
+  imports Mathlib — the inductive types and round-trip lemmas are elementary
+  and build against bare Lean v4.15.0 in seconds, vs a multi-GB Mathlib
+  fetch + build. Re-add the pinned `require mathlib ... @ "v4.15.0"`
+  directive (see docs/mathlib-deps.md for the pin rationale) when a proof
+  actually needs it (expected first at §2.2 semantics work, per
+  docs/proof-obligations.md).
 -/
 import Lake
 open Lake DSL
@@ -25,9 +28,6 @@ package «scribe-roundtrip» where
     ⟨`pp.unicode.fun, true⟩,
     ⟨`autoImplicit, false⟩
   ]
-
-require mathlib from git
-  "https://github.com/leanprover-community/mathlib4.git" @ "v4.15.0"
 
 @[default_target]
 lean_lib «ScribeRoundTrip» where

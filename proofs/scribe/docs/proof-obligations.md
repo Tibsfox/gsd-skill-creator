@@ -46,14 +46,17 @@ All references to "Doc N" are to the T3 spec under
   expression with 3 children should return `none`).
 - **Operator action:** `match n.subType with | "FunctionDeclaration" => ... | "Parameter" => ... | ...`.
 
-### P1 — `binop_label_roundtrip` (Section21.lean)
+### P1 — `binop_label_roundtrip` (Section21.lean) — ✅ CLOSED 2026-06-11
 
 - **Invariant:** I-AST-6 for binary-operator labels.
 - **Statement:** `BinOp.fromLabel (BinOp.toLabel op) = some op`
 - **Tractability:** Trivial. Case analysis over 8 BinOp constructors.
 - **Mathlib needs:** none — `decide` should work, or 8 `rfl`s after `simp`.
 - **ETA:** 30 minutes.
-- **Operator action:** `intro op; cases op <;> rfl` — likely closes the goal.
+- **Closed by:** `cases op <;> rfl`, exactly as predicted below — the first
+  machine-checked lemma in this package (build verified, sorry-warning count
+  17 → 16).
+- **Operator action:** ~~`intro op; cases op <;> rfl` — likely closes the goal.~~ Done.
 
 ### P2 — `render_preserves_node_count` (Section21.lean)
 

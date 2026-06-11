@@ -40,10 +40,11 @@ namespace Section21
 
 theorem binop_label_roundtrip (op : BinOp) :
     BinOp.fromLabel (BinOp.toLabel op) = some op := by
-  -- Proof obligation P1: case analysis over BinOp constructors.
-  -- For each of {.add, .sub, .mul, .bitAnd, .bitOr, .bitXor, .eq, .lt}:
-  --   simp [BinOp.toLabel, BinOp.fromLabel]  -- or `rfl` after unfolding.
-  sorry
+  -- Proof obligation P1 (CLOSED 2026-06-11 — first machine-checked lemma in
+  -- this package): case analysis over the 8 BinOp constructors
+  -- {.add, .sub, .mul, .bitAnd, .bitOr, .bitXor, .eq, .lt}; each case
+  -- reduces definitionally.
+  cases op <;> rfl
 
 /-! ## Lemma 2 — node-count preservation (I-AST-1)
 
