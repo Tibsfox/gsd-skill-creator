@@ -160,3 +160,6 @@ test-results/
 # Phase 825 / C12: skill scripts are .ts source — exclude tsx-generated .js/.d.ts
 project-claude/skills/intelligence-investigator/scripts/*.js
 project-claude/skills/intelligence-investigator/scripts/*.d.ts
+
+# Lean 4 build artifacts (proofs/scribe)
+proofs/scribe/.lake/
