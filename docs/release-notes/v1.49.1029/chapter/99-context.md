@@ -41,17 +41,30 @@ renorm), `a45474a4b` (reporter fix), `5cc526514` (ship-review v2).
 
 ## Step P review (dogfood, first v2 run)
 
-Run on the full ship diff with `{ base: 'v1.49.1028' }`. Results (filled at T14 after the run;
-this section is the single landing spot for the counts): PENDING-FILL-AT-T14.
+Run on the full ship diff with `{ base: 'v1.49.1028' }` — Workflow `wf_3dc6d33b-f78`, 14 agents
+(5 lens reviewers + 8 per-finding refuters + 1 synthesis judge). Outcome: 8 findings reached
+refutation, 6 refuted, 2 confirmed; judge classified **1 real-fix-now** (BLOCKER: the new
+write-attestation node:test file escaped the exact-set acknowledgment in
+`tools-config-coverage.test.mjs` — only the gate's tools-suite step would have caught it later)
++ **1 real-minor-optional** (release notes said the discipline drift-guard went 5→9; the true
+baseline is 6) + 0 judge-rejected, 0 resurrections. Both fixed in code (`3c184d1c1`). First-run
+calibration note: the judge's BLOCKER was real and its re-read evidence sound, but the SECOND half
+of its suggested fix (also add the node:test file to the vitest include list) was wrong — node:test
+files are excluded from vitest by design. The orchestrator verified before applying and used only
+the acknowledgment-list half; "judge classifies, orchestrator verifies the fix" stays the rule.
 
 ## Files changed
 
-14 files, +2,533 / −225: `tools/gate/warn-promotion-readiness.mjs` (+681, new) + its 768-line test
-file; `tools/pre-tag-gate.sh` (promotions + step 22 + denominator renorm); `tools/pre-tag-gate.test.sh`;
+17 code/test/doc files (+ the 5-file v1.49.1029 release-notes dir):
+`tools/gate/warn-promotion-readiness.mjs` (+681, new) + its 768-line test file;
+`tools/pre-tag-gate.sh` (promotions + step 22 + denominator renorm); `tools/pre-tag-gate.test.sh`;
 `tools/ship-review/write-attestation.mjs` (+297, new) + its node:test file (+205);
 `tools/ship-review/adversarial-ship-review.mjs` (v2 judge);
 `tests/integration/adversarial-ship-review-discipline.test.ts` (6→9 workflow pins + doc pins);
 `tests/integration/pre-tag-gate-self-consistency.test.ts` (denominator 22 + exit-26 pins);
+`tests/integration/v1-49-965-meta-test.test.ts` + `v1-49-983-meta-test.test.ts` (promoted-rung
+pins — the full suite caught these two staged-era sibling guards post-promotion);
+`tools/__tests__/tools-config-coverage.test.mjs` (node:test acknowledgment — step P catch);
 `tools/render-claude-md/env-vars.json`; `docs/T14-SHIP-SEQUENCE.md` (step P REQUIRED);
 `docs/adversarial-ship-review.md` (promotion + v2 sections); `vitest.tools.config.mjs` (include).
 
