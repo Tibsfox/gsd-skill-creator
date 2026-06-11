@@ -111,7 +111,7 @@ Forward arc: v616 Viking 2 → v617 Voyager 2 (NASA 1.94; outer-planets grand to
 - **Five-track convergence at v1.49.616:** NASA + MUS + ELC + SPS + TRS reproducibly-stable cross-track substrate alignment per #10242 ESTABLISHED reaffirm
 - **Cross-track read-discipline maintained:** zero fabrication across W2 builds; all sibling references sourced from W1 drafts per #10243 ESTABLISHED reaffirm
 - **Engine-cadence wave pipeline:** W0 version+brief → W1 research → W2 build (NASA serial-first then MUS+ELC+SPS parallel) → W3 recovery+catalog → W4 release-notes → W5 ship-pipeline; six-wave deterministic execution at v1.49.616
-- **Pre-tag-gate composite at v1.49.616:** 8/8 PASS gate held (build + vitest + completeness + CI-on-dev + www-bundles + depth-audit + CLAUDE.md + catalog-index) per #10244 ESTABLISHED counter-cadence pattern
+- **Pre-tag-gate composite at v1.49.616:** ship gated by the 8-sub-check pre-tag-gate (build + vitest + completeness + CI-on-dev + www-bundles + depth-audit + CLAUDE.md + catalog-index) per #10244 — errata 2026-06-11: original "8/8 PASS gate held" wording was enrichment-generated boilerplate, not a recorded result
 - **Substrate-coherence-predicts-cross-pack-density at v1.49.616:** TRS pack-pair completion confirms #10273 + #10274 + #10284 post-ESTABLISHED reproducibility holds
 ## Cross-track structural pair anchor inventory
 
@@ -128,6 +128,6 @@ Forward arc: v616 Viking 2 → v617 Voyager 2 (NASA 1.94; outer-planets grand to
 - **Five-track convergence at v1.49.616:** NASA + MUS + ELC + SPS + TRS reproducibly-stable cross-track substrate alignment per #10242 ESTABLISHED reaffirm
 - **Cross-track read-discipline maintained:** zero fabrication across W2 builds; all sibling references sourced from W1 drafts per #10243 ESTABLISHED reaffirm
 - **Engine-cadence wave pipeline:** W0 version+brief → W1 research → W2 build (NASA serial-first then MUS+ELC+SPS parallel) → W3 recovery+catalog → W4 release-notes → W5 ship-pipeline; six-wave deterministic execution at v1.49.616
-- **Pre-tag-gate composite at v1.49.616:** 8/8 PASS gate held (build + vitest + completeness + CI-on-dev + www-bundles + depth-audit + CLAUDE.md + catalog-index) per #10244 ESTABLISHED counter-cadence pattern
+- **Pre-tag-gate composite at v1.49.616:** ship gated by the 8-sub-check pre-tag-gate (build + vitest + completeness + CI-on-dev + www-bundles + depth-audit + CLAUDE.md + catalog-index) per #10244 — errata 2026-06-11: original "8/8 PASS gate held" wording was enrichment-generated boilerplate, not a recorded result
 - **Substrate-coherence-predicts-cross-pack-density at v1.49.616:** TRS pack-pair completion confirms #10273 + #10274 + #10284 post-ESTABLISHED reproducibility holds
 

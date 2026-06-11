@@ -297,7 +297,7 @@ function enrich03Retrospective(text) {
       `- **Chunked Write+Edit discipline:** applied across W2 build subagents at ${version2} per #10246 ESTABLISHED reaffirm`,
       `- **Cross-track sibling W1 read-discipline:** all sibling W1 drafts read before W2 build authoring at ${version2} per #10243 ESTABLISHED reaffirm`,
       `- **Track-card BLOCKER gate:** depth-audit step 6 PASS at BLOCKER mode for ${version2} per #10244 ESTABLISHED reaffirm`,
-      `- **Pre-tag-gate composite:** 8/8 PASS gate held at ${version2} (build + vitest + completeness + CI-on-dev + www-bundles + depth-audit + CLAUDE.md + catalog-index)`,
+      `- **Pre-tag-gate composite:** ship gated by the 8-sub-check pre-tag-gate at ${version2} (build + vitest + completeness + CI-on-dev + www-bundles + depth-audit + CLAUDE.md + catalog-index); per-check outcomes not recorded by enrichment`,
       `- **Engine-cadence wave pipeline:** W0-W5 deterministic execution at ${version2}`,
       '',
     ].join('\n');
@@ -333,7 +333,7 @@ function enrich03Retrospective(text) {
     bullets.push(`- **Wave dispatch cadence:** W0 main-context + W1 research subagent + W2 build subagents (NASA serial-first then MUS+ELC+SPS parallel) — pattern held at ${version}`);
     bullets.push(`- **Recovery hierarchy:** Tier-2 inline-Edit recovery applied if depth-audit FAIL — engine-cadence resilience pattern`);
     bullets.push(`- **Cross-track read-discipline:** all sibling W1 drafts read before W2 build authoring — zero fabrication maintained at ${version}`);
-    bullets.push(`- **Pre-tag-gate composite:** 8/8 PASS gate held at ${version} (build + vitest + completeness + CI-on-dev + www-bundles + depth-audit + CLAUDE.md + catalog-index)`);
+    bullets.push(`- **Pre-tag-gate composite:** ship gated by the 8-sub-check pre-tag-gate at ${version} (build + vitest + completeness + CI-on-dev + www-bundles + depth-audit + CLAUDE.md + catalog-index); per-check outcomes not recorded by enrichment`);
     bullets.push(`- **Drift detection:** post-ship RH refresh emitted advisory drift signal at ${version} (active soak per FA-621 disposition)`);
   }
 
@@ -402,7 +402,7 @@ function enrich99Context(text) {
   bullets.push(`- **Five-track convergence at ${version}:** NASA + MUS + ELC + SPS + TRS reproducibly-stable cross-track substrate alignment per #10242 ESTABLISHED reaffirm`);
   bullets.push(`- **Cross-track read-discipline maintained:** zero fabrication across W2 builds; all sibling references sourced from W1 drafts per #10243 ESTABLISHED reaffirm`);
   bullets.push(`- **Engine-cadence wave pipeline:** W0 version+brief → W1 research → W2 build (NASA serial-first then MUS+ELC+SPS parallel) → W3 recovery+catalog → W4 release-notes → W5 ship-pipeline; six-wave deterministic execution at ${version}`);
-  bullets.push(`- **Pre-tag-gate composite at ${version}:** 8/8 PASS gate held (build + vitest + completeness + CI-on-dev + www-bundles + depth-audit + CLAUDE.md + catalog-index) per #10244 ESTABLISHED counter-cadence pattern`);
+  bullets.push(`- **Pre-tag-gate composite at ${version}:** ship gated by the 8-sub-check pre-tag-gate (build + vitest + completeness + CI-on-dev + www-bundles + depth-audit + CLAUDE.md + catalog-index) per #10244; per-check outcomes not recorded by enrichment`);
   bullets.push(`- **Substrate-coherence-predicts-cross-pack-density at ${version}:** TRS pack-pair completion confirms #10273 + #10274 + #10284 post-ESTABLISHED reproducibility holds`);
 
   // If we derived nothing, emit generic anchors so the regex matches.

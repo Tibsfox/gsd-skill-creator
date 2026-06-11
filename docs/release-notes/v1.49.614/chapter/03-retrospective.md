@@ -89,6 +89,6 @@ K_13 single-pass ACHIEVED — all 78 = C(13,2) pack-pair edges of foundational t
 - **Wave dispatch cadence:** W0 main-context + W1 research subagent + W2 build subagents (NASA serial-first then MUS+ELC+SPS parallel) — pattern held at v1.49.614
 - **Recovery hierarchy:** Tier-2 inline-Edit recovery applied if depth-audit FAIL — engine-cadence resilience pattern
 - **Cross-track read-discipline:** all sibling W1 drafts read before W2 build authoring — zero fabrication maintained at v1.49.614
-- **Pre-tag-gate composite:** 8/8 PASS gate held at v1.49.614 (build + vitest + completeness + CI-on-dev + www-bundles + depth-audit + CLAUDE.md + catalog-index)
+- **Pre-tag-gate composite:** ship gated by the 8-sub-check pre-tag-gate at v1.49.614 (build + vitest + completeness + CI-on-dev + www-bundles + depth-audit + CLAUDE.md + catalog-index) — errata 2026-06-11: original "8/8 PASS gate held" wording was enrichment-generated boilerplate, not a recorded result
 - **Drift detection:** post-ship RH refresh emitted advisory drift signal at v1.49.614 (active soak per FA-621 disposition)
 

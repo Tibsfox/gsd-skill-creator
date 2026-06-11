@@ -76,6 +76,6 @@ FA-615-6 (TRS pack-14↔pack-N edge back-fill counter-cadence) resolved at v616 
 - **Wave dispatch cadence:** W0 main-context + W1 research subagent + W2 build subagents (NASA serial-first then MUS+ELC+SPS parallel) — pattern held at v1.49.616
 - **Recovery hierarchy:** Tier-2 inline-Edit recovery applied if depth-audit FAIL — engine-cadence resilience pattern
 - **Cross-track read-discipline:** all sibling W1 drafts read before W2 build authoring — zero fabrication maintained at v1.49.616
-- **Pre-tag-gate composite:** 8/8 PASS gate held at v1.49.616 (build + vitest + completeness + CI-on-dev + www-bundles + depth-audit + CLAUDE.md + catalog-index)
+- **Pre-tag-gate composite:** ship gated by the 8-sub-check pre-tag-gate at v1.49.616 (build + vitest + completeness + CI-on-dev + www-bundles + depth-audit + CLAUDE.md + catalog-index) — errata 2026-06-11: original "8/8 PASS gate held" wording was enrichment-generated boilerplate, not a recorded result
 - **Drift detection:** post-ship RH refresh emitted advisory drift signal at v1.49.616 (active soak per FA-621 disposition)
 

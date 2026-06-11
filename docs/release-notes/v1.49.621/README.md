@@ -6,14 +6,14 @@
 **Predecessor:** v1.49.620
 **Mission package:** `.planning/missions/v1-49-621-scribe-build-out-counter-cadence/`
 **Phases:** 6 (W0-W5 wave-pipeline: W0 version+brief / W1 research / W2 build / W3 recovery+catalog / W4 release-notes / W5 ship-pipeline)
-**Engine state:** NASA degree:: 1.92 → **1.92 + MUS degree:: unchanged + ELC degree:: unchanged + SPS species:: unchanged + Seattle 360:: 57/360 + SCRIBE foundational chipset:: newly shipped at `cartridges/foundational/scribe/` + Public deployment:: 12 SCRIBE files + Test count:: 21,298 baseline → +95 SCRIBE
+**Engine state:** NASA degree:: 1.92 → **1.92 + MUS degree:: unchanged + ELC degree:: unchanged + SPS species:: unchanged + Seattle 360:: 57/360 + SCRIBE foundational chipset:: newly shipped at `cartridges/foundational/scribe/` + Public deployment:: 12 SCRIBE files *(errata 2026-06-11: 4 dashboard files retracted 2026-05-10 at `ac4b9dd5f`, `.planning/`-leak cleanup; 8 files live since)* + Test count:: 21,298 baseline → +95 SCRIBE
 
 ## Summary
 
 
 <!-- SHORT-FINDINGS-PREPENDED v1 -->
 
-**Forward-cadence NASA degree advance.** v1.49.621 advances the engine from N.NNN to N.NNN with substrate-anchors NEW LOCKED at this ship.
+**Counter-cadence ship — no NASA degree advance.** *(errata 2026-06-11: this prepended short-findings line originally read "Forward-cadence NASA degree advance… from N.NNN to N.NNN" — unfilled template boilerplate contradicting the counter-cadence facts below.)*
 
 **Per-mission canonical-sibling rebuild.** SCRIBE Build-Out ships as the per-mission canonical deliverable set.
 
@@ -25,7 +25,7 @@
 
 **Substrate-axis state.** Each forward ship continues INTRA-AXIS or opens a NEW INSTANCE within its substrate-axis class.
 
-**Counter-cadence operational milestone — NASA degree stays at 1.92** (predecessor v1.49.620 Pioneer Venus 1 closed the previous degree-advancing cycle; v1.49.621 ships substrate work without advancing NASA / MUS / ELC / SPS / Seattle 360). This is the **substrate-continuity thesis** instantiated at the operational layer: 5 SCRIBE track cartridges (T1 markup-lineage, T2 svg-substrate, T3 code-svg-hdl-bridge, T4 dashboard-lod-rendering, T5 retrieval-provenance) compose into **one foundational chipset** at the first-of-its-kind `cartridges/foundational/scribe/` directory. 24 already-shipped Part-1 capabilities + 16 newly-wired Part-2 capabilities = **40 of 47 SCRIBE capabilities live**; 4 explicit deferrals (CAP-024 Tauri-native, CAP-046 chip-as-document silicon, CAP-047 Lean formal verification, CAP-041 viewer-embed) + 3 light/partial classifications (CAP-040, CAP-021, CAP-019 reclassified to runtime). 9 source components + 1 verification component shipped across 4 waves; ~16% of fleet token ceiling spent.
+**Counter-cadence operational milestone — NASA degree stays at 1.92** (predecessor v1.49.620 Pioneer Venus 1 closed the previous degree-advancing cycle; v1.49.621 ships substrate work without advancing NASA / MUS / ELC / SPS / Seattle 360). This is the **substrate-continuity thesis** instantiated at the operational layer: 5 SCRIBE track cartridges (T1 markup-lineage, T2 svg-substrate, T3 code-svg-hdl-bridge, T4 dashboard-lod-rendering, T5 retrieval-provenance) compose into **one foundational chipset** at the first-of-its-kind `cartridges/foundational/scribe/` directory. 24 already-shipped Part-1 capabilities + 16 newly-wired Part-2 capabilities = **40 of 47 SCRIBE capabilities live**; 4 explicit deferrals (CAP-024 Tauri-native, CAP-046 chip-as-document silicon, CAP-047 Lean formal verification, CAP-041 viewer-embed) *(errata 2026-06-11: the same-day expansion wave shipped CAP-041, the CAP-024 webview rung, and the CAP-047 scaffold inside the v1.49.621 tag — commits `3eea481fa`, `54c7f6759`, `f3cdc872a`; CAP-046 is the only remaining full deferral)* + 3 light/partial classifications (CAP-040, CAP-021, CAP-019 reclassified to runtime). 9 source components + 1 verification component shipped across 4 waves; ~16% of fleet token ceiling spent.
 
 ## Engine state advances
 
@@ -35,7 +35,7 @@
 - **SPS species:** unchanged
 - **Seattle 360:** 57/360 (paused, unchanged)
 - **SCRIBE foundational chipset:** newly shipped at `cartridges/foundational/scribe/` (manifest declares `composes: [code-svg-hdl-bridge, dashboard-lod-rendering, markup-lineage, retrieval-provenance, svg-substrate]`)
-- **Public deployment:** 12 SCRIBE files (369,668 bytes) live at https://tibsfox.com/Research/SCRIBE/ (5/5 HTTPS verification probes 200)
+- **Public deployment:** 12 SCRIBE files (369,668 bytes) live at https://tibsfox.com/Research/SCRIBE/ (5/5 HTTPS verification probes 200) *(errata 2026-06-11: accurate at ship; 4 dashboard files retracted 2026-05-10 at `ac4b9dd5f` — `.planning/`-leak cleanup; 8 files / 305,584 bytes live since)*
 - **Test count:** 21,298 baseline → +95 SCRIBE (Waves 1-3) + 44 integration/substrate (Wave 4 Component 09) = SCRIBE suite at 255 pass / 17 skip / 0 fail across 26 test files
 
 
@@ -49,7 +49,7 @@
 | SPS | unchanged |
 | Seattle | 57/360 (paused, unchanged) |
 | SCRIBE | newly shipped at `cartridges/foundational/scribe/` (manifest declares `composes: [code-svg-hdl-bridge, dashboard-lod-rendering, markup-lineage, retrieval-provenance, svg-substrate]`) |
-| Public | 12 SCRIBE files (369,668 bytes) live at https://tibsfox.com/Research/SCRIBE/ (5/5 HTTPS verification probes 200) |
+| Public | 12 SCRIBE files (369,668 bytes) live at https://tibsfox.com/Research/SCRIBE/ (5/5 HTTPS verification probes 200) — retracted to 8 files 2026-05-10, see errata above |
 | Test | 21,298 baseline → +95 SCRIBE (Waves 1-3) + 44 integration/substrate (Wave 4 Component 09) = SCRIBE suite at 255 pass / 17 skip / 0 fail across 26 test files |
 
 ## Cross-track
@@ -78,7 +78,7 @@ conservative; tune downward in next mission spec.
 
 - Predecessor (degree-advancing): v1.49.620 Pioneer Venus 1 Twin-Mission-Pair Continuation
 - Successor candidate: TBD per CSV cadence (next NASA degree resumes at v1.49.622+)
-- 4 deferred SCRIBE caps (024 Tauri-native, 046 chip-as-document silicon, 047 Lean formal verification, 041 viewer-embed) remain on the deferred list; track in their own follow-on milestones
+- 4 deferred SCRIBE caps (024 Tauri-native, 046 chip-as-document silicon, 047 Lean formal verification, 041 viewer-embed) remain on the deferred list; track in their own follow-on milestones *(errata 2026-06-11: superseded same-day — the expansion wave shipped CAP-041 complete, CAP-024's webview rung, and CAP-047's scaffold inside the tag; remaining: CAP-046 in full, CAP-024 native-wgpu rung, CAP-047 proof-fill)*
 
 ## Chapter files
 

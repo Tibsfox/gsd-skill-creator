@@ -51,7 +51,7 @@ Status at v604 close: **still unavailable in flight-ops surface.** Tier-2 inline
 - **Wave dispatch cadence:** W0 main-context + W1 research subagent + W2 build subagents (NASA serial-first then MUS+ELC+SPS parallel) — pattern held at v1.49.604
 - **Recovery hierarchy:** Tier-2 inline-Edit recovery applied if depth-audit FAIL — engine-cadence resilience pattern
 - **Cross-track read-discipline:** all sibling W1 drafts read before W2 build authoring — zero fabrication maintained at v1.49.604
-- **Pre-tag-gate composite:** 8/8 PASS gate held at v1.49.604 (build + vitest + completeness + CI-on-dev + www-bundles + depth-audit + CLAUDE.md + catalog-index)
+- **Pre-tag-gate composite:** ship gated by the 8-sub-check pre-tag-gate at v1.49.604 (build + vitest + completeness + CI-on-dev + www-bundles + depth-audit + CLAUDE.md + catalog-index) — errata 2026-06-11: original "8/8 PASS gate held" wording was enrichment-generated boilerplate, not a recorded result
 - **Drift detection:** post-ship RH refresh emitted advisory drift signal at v1.49.604 (active soak per FA-621 disposition)
 
 ## Carryover lessons applied at v1.49.604
@@ -59,5 +59,5 @@ Status at v604 close: **still unavailable in flight-ops surface.** Tier-2 inline
 - **Chunked Write+Edit discipline:** applied across W2 build subagents at v1.49.604 per #10246 ESTABLISHED reaffirm
 - **Cross-track sibling W1 read-discipline:** all sibling W1 drafts read before W2 build authoring at v1.49.604 per #10243 ESTABLISHED reaffirm
 - **Track-card BLOCKER gate:** depth-audit step 6 PASS at BLOCKER mode for v1.49.604 per #10244 ESTABLISHED reaffirm
-- **Pre-tag-gate composite:** 8/8 PASS gate held at v1.49.604 (build + vitest + completeness + CI-on-dev + www-bundles + depth-audit + CLAUDE.md + catalog-index)
+- **Pre-tag-gate composite:** ship gated by the 8-sub-check pre-tag-gate at v1.49.604 (build + vitest + completeness + CI-on-dev + www-bundles + depth-audit + CLAUDE.md + catalog-index) — errata 2026-06-11: original "8/8 PASS gate held" wording was enrichment-generated boilerplate, not a recorded result
 - **Engine-cadence wave pipeline:** W0-W5 deterministic execution at v1.49.604
