@@ -53,6 +53,15 @@ of its suggested fix (also add the node:test file to the vitest include list) wa
 files are excluded from vitest by design. The orchestrator verified before applying and used only
 the acknowledgment-list half; "judge classifies, orchestrator verifies the fix" stays the rule.
 
+## Suite evidence
+
+Final full `npx vitest run` at `4b1b0155a`: **35,908 passed / 0 failed** (1,979 files passed, 7
+skipped; 55 skipped + 7 todo tests), 295 s, no timing flakes despite machine load ~9. A mid-ship
+full run had exactly 5 failures — all in the v965/v983 staged-era meta-tests pinning the
+pre-promotion state (the "sibling drift-guard only the full suite sees" class; the bare root run
+does not include the tools project, and the tools-suite/coverage catch came from step P instead) —
+fixed at `12bf0bd01`. Tools-suite 961/961; node:test runner green; coverage checker exit 0.
+
 ## Files changed
 
 17 code/test/doc files (+ the 5-file v1.49.1029 release-notes dir):
