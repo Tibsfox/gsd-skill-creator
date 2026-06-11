@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-atlas-get-symbol"
+description = "Enables the atlas_get_symbol command without any pre-configured scope."
+commands.allow = ["atlas_get_symbol"]
+
+[[permission]]
+identifier = "deny-atlas-get-symbol"
+description = "Denies the atlas_get_symbol command without any pre-configured scope."
+commands.deny = ["atlas_get_symbol"]

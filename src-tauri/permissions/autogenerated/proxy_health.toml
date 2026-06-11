@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-proxy-health"
+description = "Enables the proxy_health command without any pre-configured scope."
+commands.allow = ["proxy_health"]
+
+[[permission]]
+identifier = "deny-proxy-health"
+description = "Denies the proxy_health command without any pre-configured scope."
+commands.deny = ["proxy_health"]

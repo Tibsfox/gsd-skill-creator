@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-arena-set-get-hot"
+description = "Enables the arena_set_get_hot command without any pre-configured scope."
+commands.allow = ["arena_set_get_hot"]
+
+[[permission]]
+identifier = "deny-arena-set-get-hot"
+description = "Denies the arena_set_get_hot command without any pre-configured scope."
+commands.deny = ["arena_set_get_hot"]

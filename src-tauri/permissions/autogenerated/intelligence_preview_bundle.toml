@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-intelligence-preview-bundle"
+description = "Enables the intelligence_preview_bundle command without any pre-configured scope."
+commands.allow = ["intelligence_preview_bundle"]
+
+[[permission]]
+identifier = "deny-intelligence-preview-bundle"
+description = "Denies the intelligence_preview_bundle command without any pre-configured scope."
+commands.deny = ["intelligence_preview_bundle"]

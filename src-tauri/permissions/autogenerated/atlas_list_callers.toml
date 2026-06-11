@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-atlas-list-callers"
+description = "Enables the atlas_list_callers command without any pre-configured scope."
+commands.allow = ["atlas_list_callers"]
+
+[[permission]]
+identifier = "deny-atlas-list-callers"
+description = "Denies the atlas_list_callers command without any pre-configured scope."
+commands.deny = ["atlas_list_callers"]

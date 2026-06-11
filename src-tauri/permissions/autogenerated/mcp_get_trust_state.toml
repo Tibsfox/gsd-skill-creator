@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-mcp-get-trust-state"
+description = "Enables the mcp_get_trust_state command without any pre-configured scope."
+commands.allow = ["mcp_get_trust_state"]
+
+[[permission]]
+identifier = "deny-mcp-get-trust-state"
+description = "Denies the mcp_get_trust_state command without any pre-configured scope."
+commands.deny = ["mcp_get_trust_state"]

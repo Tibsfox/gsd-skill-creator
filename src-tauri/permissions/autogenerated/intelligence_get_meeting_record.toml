@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-intelligence-get-meeting-record"
+description = "Enables the intelligence_get_meeting_record command without any pre-configured scope."
+commands.allow = ["intelligence_get_meeting_record"]
+
+[[permission]]
+identifier = "deny-intelligence-get-meeting-record"
+description = "Denies the intelligence_get_meeting_record command without any pre-configured scope."
+commands.deny = ["intelligence_get_meeting_record"]

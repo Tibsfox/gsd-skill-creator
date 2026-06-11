@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-intelligence-withdraw-decision"
+description = "Enables the intelligence_withdraw_decision command without any pre-configured scope."
+commands.allow = ["intelligence_withdraw_decision"]
+
+[[permission]]
+identifier = "deny-intelligence-withdraw-decision"
+description = "Denies the intelligence_withdraw_decision command without any pre-configured scope."
+commands.deny = ["intelligence_withdraw_decision"]

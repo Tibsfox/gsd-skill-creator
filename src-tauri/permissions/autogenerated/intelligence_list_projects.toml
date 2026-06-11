@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-intelligence-list-projects"
+description = "Enables the intelligence_list_projects command without any pre-configured scope."
+commands.allow = ["intelligence_list_projects"]
+
+[[permission]]
+identifier = "deny-intelligence-list-projects"
+description = "Denies the intelligence_list_projects command without any pre-configured scope."
+commands.deny = ["intelligence_list_projects"]

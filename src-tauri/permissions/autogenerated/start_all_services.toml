@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-start-all-services"
+description = "Enables the start_all_services command without any pre-configured scope."
+commands.allow = ["start_all_services"]
+
+[[permission]]
+identifier = "deny-start-all-services"
+description = "Denies the start_all_services command without any pre-configured scope."
+commands.deny = ["start_all_services"]

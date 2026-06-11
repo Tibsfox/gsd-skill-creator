@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-mcp-get-trace"
+description = "Enables the mcp_get_trace command without any pre-configured scope."
+commands.allow = ["mcp_get_trace"]
+
+[[permission]]
+identifier = "deny-mcp-get-trace"
+description = "Denies the mcp_get_trace command without any pre-configured scope."
+commands.deny = ["mcp_get_trace"]

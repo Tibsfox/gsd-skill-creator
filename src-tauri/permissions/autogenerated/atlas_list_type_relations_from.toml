@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-atlas-list-type-relations-from"
+description = "Enables the atlas_list_type_relations_from command without any pre-configured scope."
+commands.allow = ["atlas_list_type_relations_from"]
+
+[[permission]]
+identifier = "deny-atlas-list-type-relations-from"
+description = "Denies the atlas_list_type_relations_from command without any pre-configured scope."
+commands.deny = ["atlas_list_type_relations_from"]

@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-intelligence-request-briefing-refresh"
+description = "Enables the intelligence_request_briefing_refresh command without any pre-configured scope."
+commands.allow = ["intelligence_request_briefing_refresh"]
+
+[[permission]]
+identifier = "deny-intelligence-request-briefing-refresh"
+description = "Denies the intelligence_request_briefing_refresh command without any pre-configured scope."
+commands.deny = ["intelligence_request_briefing_refresh"]

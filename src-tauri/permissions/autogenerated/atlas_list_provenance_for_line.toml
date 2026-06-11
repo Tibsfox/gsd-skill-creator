@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-atlas-list-provenance-for-line"
+description = "Enables the atlas_list_provenance_for_line command without any pre-configured scope."
+commands.allow = ["atlas_list_provenance_for_line"]
+
+[[permission]]
+identifier = "deny-atlas-list-provenance-for-line"
+description = "Denies the atlas_list_provenance_for_line command without any pre-configured scope."
+commands.deny = ["atlas_list_provenance_for_line"]

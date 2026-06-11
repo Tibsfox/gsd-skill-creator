@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-intelligence-add-decision"
+description = "Enables the intelligence_add_decision command without any pre-configured scope."
+commands.allow = ["intelligence_add_decision"]
+
+[[permission]]
+identifier = "deny-intelligence-add-decision"
+description = "Denies the intelligence_add_decision command without any pre-configured scope."
+commands.deny = ["intelligence_add_decision"]

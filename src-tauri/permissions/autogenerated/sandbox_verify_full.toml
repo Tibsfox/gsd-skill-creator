@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-sandbox-verify-full"
+description = "Enables the sandbox_verify_full command without any pre-configured scope."
+commands.allow = ["sandbox_verify_full"]
+
+[[permission]]
+identifier = "deny-sandbox-verify-full"
+description = "Denies the sandbox_verify_full command without any pre-configured scope."
+commands.deny = ["sandbox_verify_full"]

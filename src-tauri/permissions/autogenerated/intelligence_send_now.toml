@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-intelligence-send-now"
+description = "Enables the intelligence_send_now command without any pre-configured scope."
+commands.allow = ["intelligence_send_now"]
+
+[[permission]]
+identifier = "deny-intelligence-send-now"
+description = "Denies the intelligence_send_now command without any pre-configured scope."
+commands.deny = ["intelligence_send_now"]

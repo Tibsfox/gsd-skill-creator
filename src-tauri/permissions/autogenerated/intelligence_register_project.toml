@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-intelligence-register-project"
+description = "Enables the intelligence_register_project command without any pre-configured scope."
+commands.allow = ["intelligence_register_project"]
+
+[[permission]]
+identifier = "deny-intelligence-register-project"
+description = "Denies the intelligence_register_project command without any pre-configured scope."
+commands.deny = ["intelligence_register_project"]

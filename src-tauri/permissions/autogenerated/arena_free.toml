@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-arena-free"
+description = "Enables the arena_free command without any pre-configured scope."
+commands.allow = ["arena_free"]
+
+[[permission]]
+identifier = "deny-arena-free"
+description = "Denies the arena_free command without any pre-configured scope."
+commands.deny = ["arena_free"]

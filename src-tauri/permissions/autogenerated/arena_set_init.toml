@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-arena-set-init"
+description = "Enables the arena_set_init command without any pre-configured scope."
+commands.allow = ["arena_set_init"]
+
+[[permission]]
+identifier = "deny-arena-set-init"
+description = "Denies the arena_set_init command without any pre-configured scope."
+commands.deny = ["arena_set_init"]

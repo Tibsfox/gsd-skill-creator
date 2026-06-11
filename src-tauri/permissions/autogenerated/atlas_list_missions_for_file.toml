@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-atlas-list-missions-for-file"
+description = "Enables the atlas_list_missions_for_file command without any pre-configured scope."
+commands.allow = ["atlas_list_missions_for_file"]
+
+[[permission]]
+identifier = "deny-atlas-list-missions-for-file"
+description = "Denies the atlas_list_missions_for_file command without any pre-configured scope."
+commands.deny = ["atlas_list_missions_for_file"]

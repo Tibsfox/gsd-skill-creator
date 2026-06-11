@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-mcp-list-servers"
+description = "Enables the mcp_list_servers command without any pre-configured scope."
+commands.allow = ["mcp_list_servers"]
+
+[[permission]]
+identifier = "deny-mcp-list-servers"
+description = "Denies the mcp_list_servers command without any pre-configured scope."
+commands.deny = ["mcp_list_servers"]

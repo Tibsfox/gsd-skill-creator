@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-intelligence-list-findings"
+description = "Enables the intelligence_list_findings command without any pre-configured scope."
+commands.allow = ["intelligence_list_findings"]
+
+[[permission]]
+identifier = "deny-intelligence-list-findings"
+description = "Denies the intelligence_list_findings command without any pre-configured scope."
+commands.deny = ["intelligence_list_findings"]

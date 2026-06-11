@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-arena-stats"
+description = "Enables the arena_stats command without any pre-configured scope."
+commands.allow = ["arena_stats"]
+
+[[permission]]
+identifier = "deny-arena-stats"
+description = "Denies the arena_stats command without any pre-configured scope."
+commands.deny = ["arena_stats"]

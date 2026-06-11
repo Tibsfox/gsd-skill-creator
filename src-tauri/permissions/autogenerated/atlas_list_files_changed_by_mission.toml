@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-atlas-list-files-changed-by-mission"
+description = "Enables the atlas_list_files_changed_by_mission command without any pre-configured scope."
+commands.allow = ["atlas_list_files_changed_by_mission"]
+
+[[permission]]
+identifier = "deny-atlas-list-files-changed-by-mission"
+description = "Denies the atlas_list_files_changed_by_mission command without any pre-configured scope."
+commands.deny = ["atlas_list_files_changed_by_mission"]

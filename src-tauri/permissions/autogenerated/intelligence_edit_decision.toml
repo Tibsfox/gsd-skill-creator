@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-intelligence-edit-decision"
+description = "Enables the intelligence_edit_decision command without any pre-configured scope."
+commands.allow = ["intelligence_edit_decision"]
+
+[[permission]]
+identifier = "deny-intelligence-edit-decision"
+description = "Denies the intelligence_edit_decision command without any pre-configured scope."
+commands.deny = ["intelligence_edit_decision"]

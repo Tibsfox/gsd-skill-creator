@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-arena-checkpoint"
+description = "Enables the arena_checkpoint command without any pre-configured scope."
+commands.allow = ["arena_checkpoint"]
+
+[[permission]]
+identifier = "deny-arena-checkpoint"
+description = "Denies the arena_checkpoint command without any pre-configured scope."
+commands.deny = ["arena_checkpoint"]

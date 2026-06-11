@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-arena-set-gc"
+description = "Enables the arena_set_gc command without any pre-configured scope."
+commands.allow = ["arena_set_gc"]
+
+[[permission]]
+identifier = "deny-arena-set-gc"
+description = "Denies the arena_set_gc command without any pre-configured scope."
+commands.deny = ["arena_set_gc"]

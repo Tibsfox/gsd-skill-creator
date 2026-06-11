@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-agent-destroy"
+description = "Enables the agent_destroy command without any pre-configured scope."
+commands.allow = ["agent_destroy"]
+
+[[permission]]
+identifier = "deny-agent-destroy"
+description = "Denies the agent_destroy command without any pre-configured scope."
+commands.deny = ["agent_destroy"]
