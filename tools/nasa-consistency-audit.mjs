@@ -150,6 +150,30 @@ function auditMission(ver, allDirs, manifestVers) {
   if (artFiles.length > 0 && artHrefs.length === 0) issue('ARTIFACTS_UNLINKED_ALL', `${artFiles.length} files, 0 links`);
   if (artFiles.length < 11) issue('ARTIFACT_COLLAPSE', `${artFiles.length} files (spec: 21)`);
 
+  // ---- page-wide internal dead links (index.html) ----
+  // Catches stale references the nav/artifact checks miss (e.g. sidebar links
+  // to discoveries.html, wrong-version axis links like ../1.708/).
+  // Only the Research/ subtree is mirrored locally; links elsewhere within the
+  // web root (e.g. the site homepage) are assumed live. Links resolving ABOVE
+  // the web root are always bugs.
+  const WEB_ROOT = path.join(ROOT, 'www/tibsfox/com');
+  const RESEARCH_ROOT = path.join(WEB_ROOT, 'Research');
+  const deadInternal = [];
+  const escapes = [];
+  for (const m of html.matchAll(/href="([^"#?]+)(?:[#?][^"]*)?"/g)) {
+    const h = m[1];
+    if (/^(https?:|mailto:|javascript:|data:)/.test(h)) continue;
+    if (h.startsWith('artifacts/')) continue; // covered by artifact check
+    const target = h.startsWith('/') ? path.join(WEB_ROOT, h) : path.resolve(dir, h);
+    if (!target.startsWith(WEB_ROOT + path.sep)) { escapes.push(h); continue; }
+    if (!target.startsWith(RESEARCH_ROOT + path.sep)) continue; // not mirrored locally
+    const candidates = h.endsWith('/') ? [path.join(target, 'index.html'), target] : [target];
+    if (!candidates.some((c) => fs.existsSync(c))) deadInternal.push(h);
+  }
+  f.dead_internal = [...new Set(deadInternal)];
+  if (f.dead_internal.length) issue('DEAD_INTERNAL_LINKS', f.dead_internal.slice(0, 6).join(','));
+  if (escapes.length) issue('LINK_ESCAPES_WEBROOT', [...new Set(escapes)].slice(0, 4).join(','));
+
   // ---- forest (§14.0) ----
   const fmDir = path.join(dir, 'forest-module');
   let forest = 'missing';
