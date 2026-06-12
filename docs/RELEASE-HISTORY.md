@@ -1,13 +1,14 @@
 # Release History
 
-1078 milestones shipped across the v1.0 → v1.49.1035 arc. The table below lists every shipped release, newest first.
+1079 milestones shipped across the v1.0 → v1.49.1036 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
-**Snapshot:** 1078 releases · 1077 with retrospectives · 808 with extracted lessons · quality A:703 B:98 C:62 D:12 F:203 (avg 83) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 1079 releases · 1078 with retrospectives · 809 with extracted lessons · quality A:704 B:98 C:62 D:12 F:203 (avg 83) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.1036](release-notes/v1.49.1036) | LAGEOS-2 NASA-ASI Twin Laser Geodynamics Satellite Complementary-Inclination Satellite-Laser-Ranging Geodesy Mission | 2026-06-11 | 3 | 5 | — | [s](release-notes/v1.49.1036/chapter/00-summary.md) [r](release-notes/v1.49.1036/chapter/03-retrospective.md) [l](release-notes/v1.49.1036/chapter/04-lessons.md) [c](release-notes/v1.49.1036/chapter/99-context.md) | 12 | A 99 |  |
 | [v1.49.1035](release-notes/v1.49.1035) | LAGEOS-1 NASA Laser Geodynamics Satellite Passive-Retroreflector Satellite-Laser-Ranging Geodesy Mission | 2026-06-11 | 3 | 5 | — | [s](release-notes/v1.49.1035/chapter/00-summary.md) [r](release-notes/v1.49.1035/chapter/03-retrospective.md) [l](release-notes/v1.49.1035/chapter/04-lessons.md) [c](release-notes/v1.49.1035/chapter/99-context.md) | 12 | A 99 |  |
 | [v1.49.1034](release-notes/v1.49.1034) | Gravity Probe A NASA Gravitational-Redshift Hydrogen-Maser Precision-Clock Relativity Test Mission | 2026-06-11 | 5 | 5 | — | [s](release-notes/v1.49.1034/chapter/00-summary.md) [r](release-notes/v1.49.1034/chapter/03-retrospective.md) [l](release-notes/v1.49.1034/chapter/04-lessons.md) [c](release-notes/v1.49.1034/chapter/99-context.md) | 12 | A 99 |  |
 | [v1.49.1033](release-notes/v1.49.1033) | SCRIBE v621 Refinement: Errata Sweep, Evidence Closure, Lean First Proof | 2026-06-11 | 10 | — | — | [s](release-notes/v1.49.1033/chapter/00-summary.md) [r](release-notes/v1.49.1033/chapter/03-retrospective.md) [l](release-notes/v1.49.1033/chapter/04-lessons.md) [c](release-notes/v1.49.1033/chapter/99-context.md) | 4 | F 30 |  |
