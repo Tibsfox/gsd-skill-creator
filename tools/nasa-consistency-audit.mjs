@@ -224,6 +224,20 @@ function main() {
   const missions = listMissions();
   const allDirs = new Set(missions);
   const manifestVers = loadManifestVersions();
+
+  // --mission 1.N : audit one mission, print findings to stdout, write nothing.
+  const argMission = process.argv.indexOf('--mission');
+  if (argMission > -1) {
+    const v = process.argv[argMission + 1];
+    if (!allDirs.has(v)) {
+      console.error(`unknown mission: ${v}`);
+      process.exit(2);
+    }
+    const one = auditMission(v, allDirs, manifestVers);
+    console.log(JSON.stringify(one, null, 1));
+    process.exit(one.issues.length ? 1 : 0);
+  }
+
   const findings = missions.map((v) => auditMission(v, allDirs, manifestVers));
 
   fs.mkdirSync(OUT_DIR, { recursive: true });
