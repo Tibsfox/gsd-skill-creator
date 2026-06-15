@@ -62,6 +62,9 @@ NASA degree (1.221, GRACE) ships as v1.49.1038.
 - **Drift-guards** — `nasa-consistency-gate-wiring.test.ts` (new) and updated
   `workflows-library-discipline.test.ts` pin the wiring and the artifact-tree
   task roster so neither can silently regress.
+- **Dependency hygiene** — an `esbuild` override to 0.28.1 clears a
+  high-severity dev-dependency advisory (GHSA-gv7w-rqvm-qjhr) disclosed since
+  v1.49.1036; toolchain validated (vitest transforms unaffected).
 
 ## Verification
 

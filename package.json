@@ -135,7 +135,8 @@
     "onnxruntime-node": "1.20.1",
     "@huggingface/transformers": {
       "sharp": "npm:empty-npm-package@1.0.0"
-    }
+    },
+    "esbuild": "0.28.1"
   },
   "devDependencies": {
     "@playwright/test": "^1.59.1",
