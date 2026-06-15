@@ -34,6 +34,10 @@ import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const argRoot = process.argv.indexOf('--root');
+if (argRoot > -1 && !process.argv[argRoot + 1]) {
+  console.error('--root requires a path value');
+  process.exit(2);
+}
 const ROOT = argRoot > -1 ? process.argv[argRoot + 1] : path.resolve(__dirname, '..');
 const QUIET = process.argv.includes('--quiet');
 const GATE = process.argv.includes('--gate');
@@ -168,10 +172,11 @@ function auditMission(ver, allDirs, manifestVers) {
   const escapes = [];
   for (const m of html.matchAll(/href="([^"#?]+)(?:[#?][^"]*)?"/g)) {
     const h = m[1];
-    if (/^(https?:|mailto:|javascript:|data:)/.test(h)) continue;
+    if (/^(https?:|mailto:|tel:|ftp:|javascript:|data:|\/\/)/.test(h)) continue;
     if (h.startsWith('artifacts/')) continue; // covered by artifact check
     const target = h.startsWith('/') ? path.join(WEB_ROOT, h) : path.resolve(dir, h);
-    if (!target.startsWith(WEB_ROOT + path.sep)) { escapes.push(h); continue; }
+    // target === WEB_ROOT (a link to the site root) is in-root, not an escape.
+    if (target !== WEB_ROOT && !target.startsWith(WEB_ROOT + path.sep)) { escapes.push(h); continue; }
     if (!target.startsWith(RESEARCH_ROOT + path.sep)) continue; // not mirrored locally
     const candidates = h.endsWith('/') ? [path.join(target, 'index.html'), target] : [target];
     if (!candidates.some((c) => fs.existsSync(c))) deadInternal.push(h);

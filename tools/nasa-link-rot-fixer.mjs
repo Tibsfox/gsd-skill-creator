@@ -28,7 +28,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const NASA = path.join(ROOT, 'www/tibsfox/com/Research/NASA');
 const DRY = process.argv.includes('--dry-run');
 const skipArg = process.argv.indexOf('--skip');
-const SKIP = new Set(skipArg > -1 ? process.argv[skipArg + 1].split(',') : []);
+const SKIP = new Set(skipArg > -1 ? (process.argv[skipArg + 1] || '').split(',').filter(Boolean) : []);
 
 const missions = fs.readdirSync(NASA)
   .filter((d) => /^1\.\d+$/.test(d))

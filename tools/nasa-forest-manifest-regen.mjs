@@ -28,7 +28,7 @@ for (const m of missions) {
   const fm = path.join(NASA, m, 'forest-module');
   if (!fs.existsSync(fm)) continue;
   for (const f of fs.readdirSync(fm).sort()) {
-    if (f.endsWith('.js') && !/\.bak\d*/.test(f)) modules.push(`../../${m}/forest-module/${f}`);
+    if (f.endsWith('.js') && !/\.bak\d*$/.test(f)) modules.push(`../../${m}/forest-module/${f}`);
   }
 }
 
