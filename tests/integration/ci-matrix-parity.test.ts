@@ -17,9 +17,11 @@
  *
  *   PARITY — because all OSes are legs of ONE job definition, they run the exact
  *     same steps by construction (no two-file drift is possible anymore). We still
- *     assert the matrix includes ubuntu-latest, macos-latest, AND windows-latest and
+ *     assert the matrix includes ubuntu-latest, macos-latest, AND a windows leg and
  *     that the job runs the full test-command set, so a future edit that drops an OS
- *     or a test invocation is caught.
+ *     or a test invocation is caught. NOTE: the windows leg is PINNED to windows-2022
+ *     (see WINDOWS-PIN below), so the assertion checks `windows-2022`, not the bare
+ *     `windows-latest` label.
  *
  *   LOAD-BEARING — the macOS leg MUST NOT carry `continue-on-error` (the v1.49.928
  *     flip deleted it). The pre-tag-gate ci-gate reads the run-level conclusion, and
@@ -40,6 +42,17 @@
  *     (re-adding the windows-gated line) — or any job-unconditional / step-level COE
  *     that masks a leg — is the deliberate reverse act and MUST update this test; a
  *     silent re-stage fails here.
+ *
+ *   WINDOWS-PIN — (2026-06-15) the windows leg runs on `windows-2022`, NOT
+ *     `windows-latest`. The hosted `windows-latest` image rolled to Visual Studio 18
+ *     (2026), which the bundled node-gyp 11.5 cannot recognize ("find VS unknown
+ *     version 'undefined' ...\Visual Studio\18\Enterprise"), so `npm ci`'s native
+ *     tree-sitter build fails. node-gyp 11.5 is already the newest release (no upgrade
+ *     to take — VS-18 support must land upstream first), so the leg is pinned to
+ *     windows-2022 (VS 2022 / v17, which node-gyp builds against). This is an
+ *     image pin, NOT a masking: the windows leg stays fully load-bearing (ZERO
+ *     continue-on-error). Flip back to windows-latest once node-gyp ships VS-18
+ *     support; that flip MUST update the PARITY assertion below.
  *
  *   RETIREMENT — `ci-macos.yml` must NOT exist. A re-created separate lane would
  *     re-introduce the `.[0]` run-selection ambiguity the v1.49.922 ci-gate pin
@@ -88,10 +101,17 @@ describe('CI cross-platform matrix — parity + load-bearing drift-guard', () =>
     expect(testJob).toMatch(/matrix:/);
   });
 
-  it('PARITY — the matrix includes ubuntu-latest, macos-latest, AND windows-latest', () => {
+  it('PARITY — the matrix includes ubuntu-latest, macos-latest, AND a windows leg (pinned windows-2022)', () => {
     expect(osList).toContain('ubuntu-latest');
     expect(osList).toContain('macos-latest');
-    expect(osList).toContain('windows-latest');
+    // The windows leg is PINNED to windows-2022, NOT windows-latest: the hosted
+    // `windows-latest` image rolled to Visual Studio 18 (2026), which the bundled
+    // node-gyp 11.5 cannot recognize, breaking `npm ci`'s native tree-sitter build.
+    // windows-2022 ships VS 2022 (v17) which node-gyp builds against. This assertion
+    // is the drift-guard half of that pin — flipping back to windows-latest (once
+    // node-gyp ships VS-18 support) is a DELIBERATE act that must update this line.
+    expect(osList).toContain('windows-2022');
+    expect(osList).not.toContain('windows-latest');
   });
 
   it('LOAD-BEARING — the macOS leg is ship-blocking (the staged continue-on-error is GONE)', () => {

@@ -78,19 +78,32 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        # The windows leg is PINNED to windows-2022 (NOT windows-latest). The
+        # hosted `windows-latest` image rolled forward to Visual Studio 18 (2026),
+        # which the bundled node-gyp 11.5 cannot recognize — `npm ci`'s native
+        # tree-sitter build dies with:
+        #     gyp ERR! find VS unknown version "undefined" found at
+        #             "C:\Program Files\Microsoft Visual Studio\18\Enterprise"
+        #     gyp ERR! find VS could not find a version of Visual Studio 2017 or newer
+        # node-gyp 11.5 is already the newest release (no toolchain upgrade to take
+        # yet — VS 18 support has to land upstream first), so the only fix that keeps
+        # this leg load-bearing is to pin a runner image whose VS node-gyp understands.
+        # windows-2022 ships VS 2022 (v17), which node-gyp builds against cleanly (it
+        # was green here through v1.49.1036 on 2026-06-12, before the VS-18 drift).
+        # REVISIT — flip back to windows-latest once node-gyp ships VS 18 support.
+        # Pairs with tests/integration/ci-matrix-parity.test.ts (drift-guard). (2026-06-15)
+        os: [ubuntu-latest, macos-latest, windows-2022]
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
         with:
           node-version: '22'
-      # Pin Python for node-gyp native-addon builds (tree-sitter, better-sqlite3).
-      # The hosted runner image rolled Python forward to 3.14, which node-gyp
-      # cannot drive yet — npm ci then fails the native build on windows-latest
-      # (the load-bearing leg). setup-python alone is not enough: node-gyp does
-      # NOT honor its PATH and still discovers the runner's 3.14, so the PYTHON
-      # env var below points node-gyp explicitly at the pinned interpreter. Keeps
-      # `npm ci` green across all three legs regardless of runner drift. (2026-06-15)
+      # Pin Python 3.12 for node-gyp native-addon builds (tree-sitter, better-sqlite3).
+      # Defensive determinism against runner-image drift: hosted images have rolled
+      # Python forward to versions node-gyp cannot drive (3.14 on the 2026-06 windows
+      # image). setup-python alone is not enough — node-gyp does NOT honor its PATH —
+      # so the PYTHON env var below points node-gyp explicitly at the pinned
+      # interpreter. Retained alongside the windows-2022 pin above. (2026-06-15)
       - uses: actions/setup-python@v5
         id: setup-python
         with:
