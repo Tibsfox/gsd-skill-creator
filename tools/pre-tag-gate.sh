@@ -108,8 +108,16 @@
 #                       missions had drifted from canonical due to v1.58/1.60
 #                       spec rewrite + v1.118+ build-pipeline gap. Hybrid
 #                       restore (v1.0 cards + substrate-form additions) is
-#                       the new normative. Override:
-#                       SC_PRE_TAG_GATE_BYPASS=nasa-canonical-layout
+#                       the new normative. As of 2026-06-15 the layout gate
+#                       also delegates to tools/nasa-consistency-audit.mjs
+#                       --gate (badge discipline, SVG organism diagram,
+#                       artifact link-integrity, papers external-link floor,
+#                       forest-module + retrospective presence, dead internal
+#                       links, JSON floors) — promoted WARN->BLOCK after the
+#                       corpus reached 221/221 clean. Override:
+#                       SC_PRE_TAG_GATE_BYPASS=nasa-canonical-layout (whole
+#                       step) or SC_SKIP_NASA_CONSISTENCY_AUDIT=1 (just the
+#                       consistency sub-check)
 #                       (emergency only — fix the drift instead).
 #   17. PROJECT.md drift check (v1.49.785, WARN-only) — runs
 #                       `node tools/project-md-normalizer.mjs --check`.
@@ -855,9 +863,10 @@ if gate_bypassed "nasa-canonical-layout" "SC_SKIP_NASA_CANONICAL_LAYOUT_GATE"; t
 else
   log "[pre-tag-gate] step 15/22: NASA canonical layout gate"
   if ! bash "$REPO_ROOT/tools/nasa-canonical-layout-gate.sh" >/dev/null 2>&1; then
-    echo "[pre-tag-gate] FAIL: NASA canonical layout drift detected" >&2
+    echo "[pre-tag-gate] FAIL: NASA canonical layout or consistency-audit drift detected" >&2
     echo "[pre-tag-gate]   Diagnose:  bash tools/nasa-canonical-layout-gate.sh" >&2
     echo "[pre-tag-gate]   JSON:      bash tools/nasa-canonical-layout-gate.sh --json" >&2
+    echo "[pre-tag-gate]   Consistency detail: node tools/nasa-consistency-audit.mjs" >&2
     echo "[pre-tag-gate]   Restore:   node tools/nasa-layout-restorer.mjs <ver>" >&2
     echo "[pre-tag-gate]   Override (emergency only): SC_PRE_TAG_GATE_BYPASS=nasa-canonical-layout" >&2
     exit 17

@@ -34,6 +34,20 @@
 #                    also be present (closes substrate-era visual-bunching bug
 #                    where v1.159-1.168 + v1.57 had markup but no styling)
 #
+# Consistency-audit invariant added 2026-06-15 (WARN->BLOCK):
+#  15. ConsistencyAudit — delegates to tools/nasa-consistency-audit.mjs --gate
+#                    for the deeper per-page + corpus checks the bash card-scan
+#                    can't express: header-badge discipline, SVG organism
+#                    diagram, artifact link-integrity, papers external-link
+#                    floor, forest-module + retrospective presence, page-wide
+#                    dead internal links, JSON floors. Single source of truth
+#                    (the .mjs); the gate just surfaces its exit code. Promoted
+#                    to BLOCK after the corpus reached 221/221 clean (2026-06
+#                    consistency campaign + W6 backfill + fabricated-citation
+#                    fact-check). Runs on a FULL corpus check only (skipped when
+#                    --since-ver is set). Bypass (emergency only — fix the
+#                    drift): SC_SKIP_NASA_CONSISTENCY_AUDIT=1.
+#
 # Canonical sibling files (--strict only):
 #   research.md, organism.md, knowledge-nodes.json, data-sources.json,
 #   research.html, papers.html, organism.html, mathematics.html,
@@ -138,6 +152,23 @@ for d in "$BASE"/[0-9]*/; do
   fi
 done
 
+# ----- consistency-audit invariant (2026-06-15, BLOCK) -----
+# Delegate the deeper per-page + corpus checks to the single source of truth.
+# Runs on a FULL corpus check only (--since-ver unset); a partial diagnostic
+# skips it because the audit is always corpus-wide. Bypass: emergency only.
+consistency_fail=0
+consistency_summary=""
+if (( SINCE == 0 )) && [[ -z "${SC_SKIP_NASA_CONSISTENCY_AUDIT:-}" ]]; then
+  SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+  if command -v node >/dev/null 2>&1; then
+    if ! consistency_summary="$(node "$SCRIPT_DIR/nasa-consistency-audit.mjs" --gate --quiet 2>&1)"; then
+      consistency_fail=1
+    fi
+  else
+    consistency_summary="node not found on PATH; consistency-audit invariant SKIPPED"
+  fi
+fi
+
 if (( JSON )); then
   printf '{"checked":%d,"deviations":[' "$checked"
   for i in "${!deviations[@]}"; do
@@ -149,13 +180,22 @@ if (( JSON )); then
     (( i > 0 )) && printf ','
     printf '"%s"' "${strict_misses[$i]}"
   done
-  printf ']}\n'
+  if (( consistency_fail )); then cstat=fail; elif (( SINCE != 0 )); then cstat=skipped; else cstat=pass; fi
+  printf '],"consistency_audit":"%s"}\n' "$cstat"
 else
   echo "NASA canonical-layout gate"
   echo "  checked: $checked missions"
   echo "  card deviations: ${#deviations[@]}"
   for x in "${deviations[@]}"; do echo "    $x"; done | head -20
   (( ${#deviations[@]} > 20 )) && echo "    ...(+$((${#deviations[@]}-20)) more)"
+  if (( SINCE == 0 )); then
+    if (( consistency_fail )); then
+      echo "  consistency-audit: FAIL"
+      echo "$consistency_summary" | head -20 | sed 's/^/    /'
+    else
+      echo "  consistency-audit: PASS"
+    fi
+  fi
   if (( STRICT )); then
     echo "  sibling-file misses: ${#strict_misses[@]}"
     for x in "${strict_misses[@]}"; do echo "    $x"; done | head -20
@@ -163,7 +203,7 @@ else
   fi
 fi
 
-if (( ${#deviations[@]} > 0 )) || (( STRICT && ${#strict_misses[@]} > 0 )); then
+if (( ${#deviations[@]} > 0 )) || (( STRICT && ${#strict_misses[@]} > 0 )) || (( consistency_fail )); then
   exit 1
 fi
 exit 0

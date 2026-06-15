@@ -20,7 +20,12 @@
  * Output: .planning/nasa-audit/findings.json + console summary.
  * Read-only: never writes inside www/.
  *
- * Usage: node tools/nasa-consistency-audit.mjs [--root <repo-root>] [--quiet]
+ * Usage: node tools/nasa-consistency-audit.mjs [--root <repo-root>] [--quiet] [--gate]
+ *
+ * --gate: corpus mode exits 1 if ANY mission has findings (else 0), so the
+ *   ship gate (tools/nasa-canonical-layout-gate.sh, invoked by pre-tag-gate
+ *   step 15) can BLOCK on the consistency invariants. Without --gate the
+ *   corpus run always exits 0 (report-only), preserving legacy callers.
  */
 
 import fs from 'node:fs';
@@ -31,6 +36,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const argRoot = process.argv.indexOf('--root');
 const ROOT = argRoot > -1 ? process.argv[argRoot + 1] : path.resolve(__dirname, '..');
 const QUIET = process.argv.includes('--quiet');
+const GATE = process.argv.includes('--gate');
 const NASA = path.join(ROOT, 'www/tibsfox/com/Research/NASA');
 const OUT_DIR = path.join(ROOT, '.planning/nasa-audit');
 
@@ -275,12 +281,22 @@ function main() {
     tally[code] = (tally[code] || 0) + 1;
   }
   const clean = findings.filter((f) => f.issues.length === 0).length;
+  const dirty = findings.filter((f) => f.issues.length > 0);
   if (!QUIET) {
     console.log(`missions audited: ${findings.length}  clean: ${clean}`);
     for (const [code, n] of Object.entries(tally).sort((a, b) => b[1] - a[1])) {
       console.log(`  ${code.padEnd(28)} ${n}`);
     }
     console.log(`findings written: ${outPath}`);
+  }
+  // --gate: BLOCK (exit 1) if any mission has findings. Even under --quiet,
+  // print the offending missions to stderr so the gate output is actionable.
+  if (GATE && dirty.length) {
+    console.error(`[nasa-consistency-audit] GATE FAIL: ${dirty.length} mission(s) with findings:`);
+    for (const f of dirty) {
+      console.error(`  ${f.version}: ${f.issues.join('; ')}`);
+    }
+    process.exit(1);
   }
   process.exit(0);
 }
