@@ -84,6 +84,14 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: '22'
+      # Pin Python for node-gyp native-addon builds (tree-sitter, better-sqlite3).
+      # The hosted runner image rolled Python forward to 3.14, which node-gyp
+      # cannot drive yet — npm ci then fails the native build on windows-latest
+      # (the load-bearing leg). Pinning a supported Python keeps `npm ci` green
+      # across all three legs regardless of runner-image drift. (2026-06-15)
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
       - run: npm ci
       # Build the dist/ tree before tests — several tests (e.g.
       # src/intelligence/__tests__/c12-write-briefing.test.ts, the
