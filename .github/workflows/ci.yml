@@ -104,7 +104,10 @@ jobs:
       # image). setup-python alone is not enough — node-gyp does NOT honor its PATH —
       # so the PYTHON env var below points node-gyp explicitly at the pinned
       # interpreter. Retained alongside the windows-2022 pin above. (2026-06-15)
-      - uses: actions/setup-python@v5
+      # @v6 runs on Node 24 (v5 was the last Node-20 release; GitHub force-runs
+      # Node-20 actions under Node 24 from 2026-06-16, so v5 emitted a deprecation
+      # annotation). checkout@v5 + setup-node@v5 are already Node 24. (2026-06-15)
+      - uses: actions/setup-python@v6
         id: setup-python
         with:
           python-version: '3.12'
