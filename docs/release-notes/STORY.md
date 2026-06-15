@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.1036`.
+The story begins at `v1.0` and continues to `v1.49.1037`.
 
-**1079 chapters.** 1078 have retrospectives.
+**1080 chapters.** 1079 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -1087,3 +1087,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.1034](v1.49.1034/00-summary.md)** — Gravity Probe A NASA Gravitational-Redshift Hydrogen-Maser Precision-Clock Relativity Test Mission · 2026-06-11
 - **[v1.49.1035](v1.49.1035/00-summary.md)** — LAGEOS-1 NASA Laser Geodynamics Satellite Passive-Retroreflector Satellite-Laser-Ranging Geodesy Mission · 2026-06-11
 - **[v1.49.1036](v1.49.1036/00-summary.md)** — LAGEOS-2 NASA-ASI Twin Laser Geodynamics Satellite Complementary-Inclination Satellite-Laser-Ranging Geodesy Mission · 2026-06-11
+- **[v1.49.1037](v1.49.1037/00-summary.md)** — NASA Corpus Consistency Tooling, Ship-Gate Enforcement, and Decompose-Build Artifact-Tree Fix (counter-cadence) · 2026-06-15
