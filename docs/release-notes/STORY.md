@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.1038`.
+The story begins at `v1.0` and continues to `v1.49.1039`.
 
-**1081 chapters.** 1080 have retrospectives.
+**1082 chapters.** 1081 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -1089,3 +1089,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.1036](v1.49.1036/00-summary.md)** — LAGEOS-2 NASA-ASI Twin Laser Geodynamics Satellite Complementary-Inclination Satellite-Laser-Ranging Geodesy Mission · 2026-06-11
 - **[v1.49.1037](v1.49.1037/00-summary.md)** — NASA Corpus Consistency Tooling, Ship-Gate Enforcement, and Decompose-Build Artifact-Tree Fix (counter-cadence) · 2026-06-15
 - **[v1.49.1038](v1.49.1038/00-summary.md)** — GRACE NASA-DLR-GFZ Gravity Recovery and Climate Experiment Twin-Spacecraft Inter-Satellite-Ranging Time-Variable-Gravity Geodesy Mission · 2026-06-15
+- **[v1.49.1039](v1.49.1039/00-summary.md)** — ICESat NASA Ice, Cloud, and land Elevation Satellite Spaceborne-Laser-Altimetry Ice-Sheet-Elevation Geodesy Mission · 2026-06-15
