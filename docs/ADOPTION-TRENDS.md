@@ -2,7 +2,7 @@
 
 > **Auto-generated** by `tools/adoption-trends.mjs` from `docs/ADOPTION-BASELINE-v*.json`. Run `node tools/adoption-trends.mjs --write` to refresh.
 
-**Snapshots considered:** 88 (`v1.49.787` → `v1.49.1040`)
+**Snapshots considered:** 89 (`v1.49.787` → `v1.49.1041`)
 **Shelfware threshold:** 6 consecutive non-living snapshots (override via `SC_ADOPTION_STALE_SHIPS`)
 **New-module watch window:** last 10 snapshots (override via `SC_NEW_MODULE_WATCH_SHIPS`)
 
@@ -98,6 +98,7 @@
 | v1.49.1038 | 151 | 98 | 45 | 8 | 28 |
 | v1.49.1039 | 151 | 98 | 45 | 8 | 28 |
 | v1.49.1040 | 151 | 98 | 45 | 8 | 28 |
+| v1.49.1041 | 151 | 98 | 45 | 8 | 28 |
 
 ## Status changes
 
@@ -119,45 +120,45 @@
 
 | module | consecutive non-living | current status | non-living since |
 |---|---|---|---|
-| `activation-steering` | 6 | test-only | v1.49.1034 |
-| `agc` | 6 | test-only | v1.49.1034 |
-| `alternative-discoverer` | 6 | test-only | v1.49.1034 |
-| `aminet` | 6 | test-only | v1.49.1034 |
-| `artifactnet-provenance` | 6 | test-only | v1.49.1034 |
-| `bounded-learning-empirical` | 6 | test-only | v1.49.1034 |
-| `brainstorm` | 6 | test-only | v1.49.1034 |
-| `catalog` | 6 | test-only | v1.49.1034 |
-| `citations` | 6 | test-only | v1.49.1034 |
-| `cloud-ops` | 6 | test-only | v1.49.1034 |
-| `code-absorber` | 6 | test-only | v1.49.1034 |
-| `compression-spectrum` | 6 | test-only | v1.49.1034 |
-| `convergent` | 6 | test-only | v1.49.1034 |
-| `dependency-resolver` | 6 | test-only | v1.49.1034 |
-| `experience-compression` | 6 | test-only | v1.49.1034 |
-| `fl-threat-model` | 6 | test-only | v1.49.1034 |
-| `hardware-infrastructure` | 6 | test-only | v1.49.1034 |
-| `heuristics-free-skill-space` | 6 | test-only | v1.49.1034 |
-| `hooks` | 6 | test-only | v1.49.1034 |
+| `activation-steering` | 6 | test-only | v1.49.1035 |
+| `agc` | 6 | test-only | v1.49.1035 |
+| `alternative-discoverer` | 6 | test-only | v1.49.1035 |
+| `aminet` | 6 | test-only | v1.49.1035 |
+| `artifactnet-provenance` | 6 | test-only | v1.49.1035 |
+| `bounded-learning-empirical` | 6 | test-only | v1.49.1035 |
+| `brainstorm` | 6 | test-only | v1.49.1035 |
+| `catalog` | 6 | test-only | v1.49.1035 |
+| `citations` | 6 | test-only | v1.49.1035 |
+| `cloud-ops` | 6 | test-only | v1.49.1035 |
+| `code-absorber` | 6 | test-only | v1.49.1035 |
+| `compression-spectrum` | 6 | test-only | v1.49.1035 |
+| `convergent` | 6 | test-only | v1.49.1035 |
+| `dependency-resolver` | 6 | test-only | v1.49.1035 |
+| `experience-compression` | 6 | test-only | v1.49.1035 |
+| `fl-threat-model` | 6 | test-only | v1.49.1035 |
+| `hardware-infrastructure` | 6 | test-only | v1.49.1035 |
+| `heuristics-free-skill-space` | 6 | test-only | v1.49.1035 |
+| `hooks` | 6 | test-only | v1.49.1035 |
 | `intrinsic-telemetry` | 6 | test-only | v1.49.966 |
-| `knowledge` | 6 | test-only | v1.49.1034 |
-| `launcher` | 6 | test-only | v1.49.1034 |
-| `mcp-defense` | 6 | test-only | v1.49.1034 |
-| `mission-world-model` | 6 | test-only | v1.49.1034 |
-| `promptcluster-batcheffect` | 6 | test-only | v1.49.1034 |
-| `random` | 6 | test-only | v1.49.1034 |
-| `reasoning-graphs` | 6 | test-only | v1.49.1034 |
-| `rumor-delay-model` | 6 | test-only | v1.49.1034 |
-| `runtime-hal` | 6 | test-only | v1.49.1034 |
-| `scribe` | 6 | test-only | v1.49.1034 |
-| `sigreg` | 6 | test-only | v1.49.1034 |
-| `skill-creator` | 6 | test-only | v1.49.1034 |
-| `skilldex-auditor` | 6 | test-only | v1.49.1034 |
-| `spatial-awareness` | 6 | test-only | v1.49.1034 |
-| `stackelberg-pricing` | 6 | test-only | v1.49.1034 |
-| `token-budget` | 6 | test-only | v1.49.1034 |
-| `trust-tiers` | 6 | test-only | v1.49.1034 |
-| `utils` | 6 | test-only | v1.49.1034 |
-| `vtm` | 6 | test-only | v1.49.1034 |
+| `knowledge` | 6 | test-only | v1.49.1035 |
+| `launcher` | 6 | test-only | v1.49.1035 |
+| `mcp-defense` | 6 | test-only | v1.49.1035 |
+| `mission-world-model` | 6 | test-only | v1.49.1035 |
+| `promptcluster-batcheffect` | 6 | test-only | v1.49.1035 |
+| `random` | 6 | test-only | v1.49.1035 |
+| `reasoning-graphs` | 6 | test-only | v1.49.1035 |
+| `rumor-delay-model` | 6 | test-only | v1.49.1035 |
+| `runtime-hal` | 6 | test-only | v1.49.1035 |
+| `scribe` | 6 | test-only | v1.49.1035 |
+| `sigreg` | 6 | test-only | v1.49.1035 |
+| `skill-creator` | 6 | test-only | v1.49.1035 |
+| `skilldex-auditor` | 6 | test-only | v1.49.1035 |
+| `spatial-awareness` | 6 | test-only | v1.49.1035 |
+| `stackelberg-pricing` | 6 | test-only | v1.49.1035 |
+| `token-budget` | 6 | test-only | v1.49.1035 |
+| `trust-tiers` | 6 | test-only | v1.49.1035 |
+| `utils` | 6 | test-only | v1.49.1035 |
+| `vtm` | 6 | test-only | v1.49.1035 |
 
 ## New-module watch
 
