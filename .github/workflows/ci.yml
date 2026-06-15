@@ -87,12 +87,17 @@ jobs:
       # Pin Python for node-gyp native-addon builds (tree-sitter, better-sqlite3).
       # The hosted runner image rolled Python forward to 3.14, which node-gyp
       # cannot drive yet — npm ci then fails the native build on windows-latest
-      # (the load-bearing leg). Pinning a supported Python keeps `npm ci` green
-      # across all three legs regardless of runner-image drift. (2026-06-15)
+      # (the load-bearing leg). setup-python alone is not enough: node-gyp does
+      # NOT honor its PATH and still discovers the runner's 3.14, so the PYTHON
+      # env var below points node-gyp explicitly at the pinned interpreter. Keeps
+      # `npm ci` green across all three legs regardless of runner drift. (2026-06-15)
       - uses: actions/setup-python@v5
+        id: setup-python
         with:
           python-version: '3.12'
       - run: npm ci
+        env:
+          PYTHON: ${{ steps.setup-python.outputs.python-path }}
       # Build the dist/ tree before tests — several tests (e.g.
       # src/intelligence/__tests__/c12-write-briefing.test.ts, the
       # intelligence-investigator skill harness, dashboard generator
