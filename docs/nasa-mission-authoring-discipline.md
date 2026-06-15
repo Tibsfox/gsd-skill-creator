@@ -82,6 +82,22 @@ the forest module via `tools/nasa-forest-manifest-regen.mjs`. A forward degree
 built this way passes `tools/nasa-consistency-audit.mjs` (a ship-gate BLOCKER)
 with no separate backfill.
 
+**Leading-edge nav rule (folded in 2026-06-15):** the degree being built is the
+newest in the series — its successor does not exist yet — so its `index.html`
+nav uses the **leading-edge form**: right cell **Series hub** (`../index.html`),
+*never* a "Next mission → successor" link (a dead link the consistency audit
+BLOCKs: `NAV_DEAD_TARGET` + `DEAD_INTERNAL_LINKS`). The `retro-forest` task then
+**promotes the predecessor**: it flips the predecessor degree's own right cell
+Series hub → Next mission → this degree, via the deterministic, idempotent
+`tools/nasa-nav-promote-predecessor.mjs --predecessor <P> --new-degree <D>
+--new-mission "<name>"` (edits both the top and bottom nav-cards; safe to re-run;
+`--check` for a gate). The same task coordinates the **forest-module filename**
+(`forestModuleFile` arg) so the index `module source` href and the module rename
+cannot desync into a dead link, and the `index.html` task enforces the H1 ≤200 /
+breadcrumb ≤160 audit limits. These three were manual post-build fixes on the
+v1.221 GRACE ship; the tooling now applies them. Pass `leadingEdge:false` only
+to rebuild a *non-newest* degree that already has a shipped successor.
+
 **The SHARED-prompt contract** (every task agent receives it): rewrite
 textual content only, preserve HTML/JSON/markdown STRUCTURE exactly; read
 the MISSION-BRIEF first (it is authoritative for facts, anchors, engine

@@ -241,6 +241,15 @@ its committed home. Build/review machinery feeding into it:
 per-mission discipline at
 [nasa-mission-authoring-discipline.md](nasa-mission-authoring-discipline.md) §0.
 
+**Leading-edge nav (build-time, no longer a manual T14 step):** the new degree
+ships with the leading-edge nav (right cell **Series hub**, never a dead
+"Next mission → successor"), and `decompose-build`'s `retro-forest` task promotes
+the predecessor's nav (Series hub → Next mission → this degree) via
+`tools/nasa-nav-promote-predecessor.mjs`. If a build predates this wiring, run
+that script by hand before pre-tag-gate (it is idempotent; `--check` reports
+whether a promotion is still pending). This retired the old "index.html nav-next
+×2" manual fix that lived only in per-run handoffs.
+
 ```
 N0.  Revert refresh side-effects if present:
        git checkout -- docs/release-notes/INDEX.md docs/release-notes/STORY.md docs/RELEASE-HISTORY.md
@@ -293,6 +302,7 @@ Standing notes: `bump-version.mjs` / `append-story-entry.mjs` /
 | 2026-06-04 | Added pre-flight step P — adversarial ship review on the diff before `git push origin dev` (ADVISORY, staged #10463). Reusable workflow `tools/ship-review/adversarial-ship-review.mjs`; canonical doc `docs/adversarial-ship-review.md`; drift-guard `tests/integration/adversarial-ship-review-discipline.test.ts`. | v1.49.968 Ship 1.1 (audit T1.4) |
 | 2026-06-10 | Step P promoted from ADVISORY to REQUIRED. Pre-tag-gate step 22 (ship-review-attestation, exit 26) enforces that `write-attestation.mjs` was run after the review (K=30; 55 reviewed release dirs all-time, 20 within v968+ — the NASA band's content reviews live in untracked mission artifacts; caught-defect ledger: v965 3 BLOCKERs, v966, v982, 11/35 F4, v1027 1 BLOCKER + 1 MAJOR, v1028 1 MAJOR). Gate count 21→22. | v1.49.1029 (audit §10 ship 3) |
 | 2026-06-10 | Added the NASA per-ship T14 appendix (the resume-era ~14-call variant, previously only in untracked handoffs) + cross-refs to the committed `tools/workflows/` skeletons. | v1.49.1031 (audit §10 ship 5) |
+| 2026-06-15 | Leading-edge nav folded into the build: `decompose-build` emits the Series-hub right cell for the newest degree and `retro-forest` promotes the predecessor via `tools/nasa-nav-promote-predecessor.mjs` (idempotent, `--check`-able). Retired the manual "index.html nav-next ×2" + forest-href + H1/breadcrumb post-build fixes (v1.221 GRACE). Drift-guards: `tests/integration/workflows-library-discipline.test.ts` + `tests/integration/nasa-nav-promote-predecessor.test.ts`. | v1.49.1038 follow-up (nav-rule tooling hardening) |
 
 ## Lesson coverage (codified v1.49.654 C08+C09)
 

@@ -60,7 +60,10 @@ export const meta = {
 //     shaderBlock: string,         // REQUIRED — shader filename + 4-mode spec (one consistent name across all tasks)
 //     factsBlock?: string,         // VERIFIED FACTS block (brief remains authoritative; this reinforces)
 //     leakNote?: string,           // per-mission replacement guidance for DISCIPLINE (e)
-//     nav?: { prevHref, prevLabel, nextHref, nextLabel },  // index.html nav-card payload
+//     nav?: { prevHref, prevLabel, nextHref, nextLabel },  // index.html nav-card payload override
+//     leadingEdge?: boolean,       // default TRUE — the newest degree: right nav cell = Series hub, NOT a dead next link. Set false only to rebuild a non-newest degree that already has a shipped successor.
+//     successorMission?: string,   // short successor mission name for the next-cell label when leadingEdge:false
+//     forestModuleFile?: string,   // the new forest module *.js filename — coordinates the index "module source" href and the retro-forest rename (absent => both keep the clone filename)
 //     readme?: { path, modelPath },// release-notes README task payload (task skipped if absent)
 //     taskNotes?: { [label]: string },  // extra per-task payload appended to that task's prompt
 //     tasks?: [{ label, prompt }] }    // full roster override (SHARED is still prepended)
@@ -111,10 +114,36 @@ DISCIPLINE: (a) Positive framing — describe the mission's measurements, engine
 
 Do NOT commit/tag/push/FTP/bump-version. Only edit your assigned files. After rewriting, if your files include .html, run \`node tools/trip-vocab-check.mjs <file> --mode page\` and confirm VERDICT PASS. Return a SHORT (1-3 line) confirmation listing the files you rewrote + any trip-vocab verdict + any anomaly.`
 
+// A freshly-built degree is the NEWEST in the series — its successor does not
+// exist yet, so its index nav uses the LEADING-EDGE form (Previous / Current /
+// Series hub), NOT a "Next mission -> successor" link (that target is a dead
+// link the consistency audit BLOCKS: NAV_DEAD_TARGET + DEAD_INTERNAL_LINKS). The
+// predecessor's OWN nav is promoted to point here separately, by
+// tools/nasa-nav-promote-predecessor.mjs (run in the retro-forest task below).
+// Pass leadingEdge:false only to rebuild a NON-newest degree that already has a
+// shipped successor.
+const LEADING_EDGE = A.leadingEdge !== false
 const NAV = A.nav || {
-  prevHref: `../${PRED.degree}/`, prevLabel: `v${PRED.degree} ${PRED.mission}`,
-  nextHref: `../${A.successorDegree}/`, nextLabel: `v${A.successorDegree} ->`,
+  prevHref: `../${PRED.degree}/index.html`, prevLabel: `&larr; v${PRED.degree} ${PRED.mission}`,
+  nextHref: `../${A.successorDegree}/index.html`, nextLabel: `v${A.successorDegree}${A.successorMission ? ` ${A.successorMission}` : ''} &rarr;`,
 }
+// NOTE: NAV.nextHref / NAV.nextLabel are consulted ONLY on the leadingEdge:false
+// branch. For the (default) leading edge the right cell is the Series hub, so any
+// next* in an A.nav override is intentionally unused — by design, not a bug.
+const NAV_RIGHT = LEADING_EDGE
+  ? `RIGHT cell -> nav-label "Series hub", link href="../index.html" "NASA Mission Series &rarr;". DO NOT emit a "Next mission" cell or ANY ../1.NNN/index.html link to a not-yet-shipped successor — this degree is the LEADING EDGE of the series; a next->successor link is a DEAD LINK the consistency audit BLOCKS (NAV_DEAD_TARGET + DEAD_INTERNAL_LINKS).`
+  : `RIGHT cell -> nav-label "Next mission", link href="${NAV.nextHref}" "${NAV.nextLabel}".`
+
+// The forest module *.js filename. When provided, the index "module source"
+// href and the retro-forest rename are COORDINATED to it: the clone's filename
+// names the PREDECESSOR's species, so it must change — but those two tasks run
+// in parallel and would otherwise desync, leaving a dead forest-module/ link
+// (the v1.221 ship's manual fix). When absent, both tasks KEEP the clone
+// filename (safe no-rename fallback — no desync, just a less-specific name).
+const FOREST_MODULE_FILE = A.forestModuleFile || null
+const FOREST_LINK_NOTE = FOREST_MODULE_FILE
+  ? ` FOREST-MODULE LINK: this degree's forest module file is "${FOREST_MODULE_FILE}" (the retro-forest task writes EXACTLY this name). The "module source" link in the forest-coupling paragraph MUST be href="forest-module/${FOREST_MODULE_FILE}" — do NOT keep the predecessor clone's module filename (a stale forest-module/ href is a DEAD_INTERNAL_LINK the audit BLOCKS).`
+  : ` FOREST-MODULE LINK: KEEP the existing forest-module/ "module source" href exactly as the clone has it (the retro-forest task rewrites that module in place without renaming).`
 
 // The page decomposition — the 7 track/JSON/shader tasks (identical across all
 // 6 ancestor clones, evidence fleet wf_28691c0e) plus the 4 artifact/forest/
@@ -127,7 +156,7 @@ const note = (label) => (A.taskNotes && A.taskNotes[label] ? `\n\nPER-MISSION NO
 const DEFAULT_TASKS = [
   {
     label: 'index.html',
-    prompt: `ASSIGNED FILE: ${DIR}/index.html (the largest, most structured file). Rewrite to ${MISSION}, preserving the canonical card layout EXACTLY: the 12-card v1.0 floor + Mission Journey narrative card (>500 words, told from the brief's mission narrative) + Structural Firsts card + Governance & Chain Declarations card + the numbered resonance axes each with a mission paragraph and an organism pairing + the sidebar lineage table + a haiku card. NAV-CARD PAIRS (both top AND bottom): previous cell -> ${NAV.prevHref} "${NAV.prevLabel}"; next cell -> ${NAV.nextHref} "${NAV.nextLabel}". Reference the shader exactly as specified in the SHARED spec. Use ONLY the canonical anchors. Dedication card <=200 words. ARTIFACT-LINK INTEGRITY: the artifact files keep their cloned filenames (rewritten in place by the artifacts-*/retro-forest tasks), so KEEP the Creative Artifacts / Runnable Simulations / Interactive Lab / Data Files cards linking the SAME artifacts/... paths the clone already used — every href="artifacts/..." must resolve to a file that exists in ${DIR}/artifacts/; introduce no dead artifact links and leave at least the existing artifact links in place. Run the trip-vocab page check and confirm PASS.${note('index.html')}`,
+    prompt: `ASSIGNED FILE: ${DIR}/index.html (the largest, most structured file). Rewrite to ${MISSION}, preserving the canonical card layout EXACTLY: the 12-card v1.0 floor + Mission Journey narrative card (>500 words, told from the brief's mission narrative) + Structural Firsts card + Governance & Chain Declarations card + the numbered resonance axes each with a mission paragraph and an organism pairing + the sidebar lineage table + a haiku card. NAV-CARDS (BOTH the top AND bottom nav-card divs; 3 cells each — left/center/right): LEFT cell -> nav-label "Previous mission", link href="${NAV.prevHref}" "${NAV.prevLabel}"; CENTER cell -> nav-label "Current", text "NASA ${DEGREE} &middot; ${VERSION}" (NO link); ${NAV_RIGHT} Reference the shader exactly as specified in the SHARED spec. Use ONLY the canonical anchors. Dedication card <=200 words. HEADER LENGTH (audit limits): keep the <h1> text <=200 chars and the <div class="breadcrumb"> text <=160 chars — long mission names overflow; if the mission name is long, shorten the H1's trailing axis/engine clause and the breadcrumb's descriptor to fit (the audit BLOCKS H1_LONG / BREADCRUMB_LONG).${FOREST_LINK_NOTE} ARTIFACT-LINK INTEGRITY: the artifact files keep their cloned filenames (rewritten in place by the artifacts-*/retro-forest tasks), so KEEP the Creative Artifacts / Runnable Simulations / Interactive Lab / Data Files cards linking the SAME artifacts/... paths the clone already used — every href="artifacts/..." must resolve to a file that exists in ${DIR}/artifacts/; introduce no dead artifact links and leave at least the existing artifact links in place. Run the trip-vocab page check and confirm PASS.${note('index.html')}`,
   },
   {
     label: 'research',
@@ -183,12 +212,19 @@ Real ${MISSION} parameters from the brief; canonical anchors only. If the sims/ 
   },
   {
     label: 'retro-forest',
-    prompt: `ASSIGNED FILES: ${DIR}/retrospective/lessons-carryover.json, ${DIR}/retrospective/corpus-deltas.md, AND the forest module under ${DIR}/forest-module/ (the *.js module). REWRITE each in place to ${MISSION}, KEEPING THE EXISTING FILENAMES.
+    prompt: `ASSIGNED FILES: ${DIR}/retrospective/lessons-carryover.json, ${DIR}/retrospective/corpus-deltas.md, AND the forest module under ${DIR}/forest-module/ (the *.js module). REWRITE each in place to ${MISSION}. The retrospective JSON + MD KEEP THEIR FILENAMES; the forest module follows the FOREST-MODULE rule below.
 - retrospective/lessons-carryover.json: { "missionVersion":"${DEGREE}", "predecessor":"${PRED.degree}", "readFromPredecessor":"<path or note>", "appliedLessons":[{"id","summary","applicationInThisMission"}], "newLessons":[{"id","summary","carryForwardTo":[...],"scope"}], "corpusDeltaHints":[...] } — >=1 applied + >=1 new lesson grounded in ${MISSION}'s real engineering/science. Valid JSON.
 - retrospective/corpus-deltas.md: 300-800 words on what ${MISSION} reveals about earlier missions, with explicit retrofit hints.
-- forest-module/*.js: rewrite the forest-simulation module to ${MISSION}'s paired species per the brief's organism pairing (plant -> lsystem/physarum/circadian; animal -> boids/audio/kuramoto). Keep it valid JS with the SAME module export shape as the clone.
+${FOREST_MODULE_FILE
+  ? `- FOREST-MODULE (rename): rewrite the forest-simulation module to ${MISSION}'s paired species per the brief's organism pairing (plant -> lsystem/physarum/circadian; animal -> boids/audio/kuramoto), keep valid JS with the SAME module export shape, AND RENAME the file to EXACTLY "${FOREST_MODULE_FILE}" (the index task's "module source" link points at forest-module/${FOREST_MODULE_FILE}; the two MUST match or the audit flags a dead link). Use \`git mv <clone>.js ${FOREST_MODULE_FILE}\` (or write the new file + rm the clone) so EXACTLY ONE *.js remains in forest-module/.`
+  : `- forest-module/*.js: rewrite the forest-simulation module to ${MISSION}'s paired species per the brief's organism pairing (plant -> lsystem/physarum/circadian; animal -> boids/audio/kuramoto). Keep it valid JS with the SAME module export shape AND KEEP THE CLONE FILENAME (do NOT rename — the index "module source" href still points at it).`}
 If any of these are ABSENT in the clone, author them fresh modeled on ${EXEMPLAR}/retrospective/ and ${EXEMPLAR}/forest-module/ using canonical filenames.
-FINALLY, from the repository root run \`node tools/nasa-forest-manifest-regen.mjs\` so degree ${DEGREE}'s forest module is registered in www/tibsfox/com/Research/NASA/_harness/v1.0.0/forest-module-manifest.json (a module not in the manifest does not load); confirm ${DEGREE} now appears. Return the files written + the manifest confirmation.${note('retro-forest')}`,
+FINALLY, from the repository root run BOTH of these repo-root scripts (the sanctioned exceptions to "only edit your assigned files"):
+  (1) \`node tools/nasa-forest-manifest-regen.mjs\` so degree ${DEGREE}'s forest module is registered in www/tibsfox/com/Research/NASA/_harness/v1.0.0/forest-module-manifest.json (a module not in the manifest does not load); confirm ${DEGREE} now appears.
+  (2) ${LEADING_EDGE
+    ? `\`node tools/nasa-nav-promote-predecessor.mjs --predecessor ${PRED.degree} --new-degree ${DEGREE} --new-mission "${MISSION}"\` — flips the predecessor ${PRED.degree}'s right nav cell from "Series hub" to "Next mission -> ${DEGREE}" (idempotent; correct precisely because ${DEGREE} is the new leading edge). Confirm it reports the cell(s) updated.`
+    : `(skip nav promotion — leadingEdge:false; the predecessor already has a downstream successor).`}
+Return the files written + the manifest confirmation${LEADING_EDGE ? ' + the nav-promotion confirmation' : ''}.${note('retro-forest')}`,
   },
 ]
 if (A.readme && A.readme.path) {

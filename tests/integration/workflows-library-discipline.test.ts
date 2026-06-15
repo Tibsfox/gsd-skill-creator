@@ -219,6 +219,46 @@ describe('workflows library discipline — drift-guard (v1.49.1031 Ship 5)', () 
       expect(src).not.toMatch(/agentType:\s*'Explore'/);
       expect(src).not.toMatch(/isolation:\s*'worktree'/);
     });
+
+    // ---- leading-edge nav hardening (folded in after the v1.221 GRACE ship) ----
+    // A freshly-built degree is the newest, so its index nav right cell is the
+    // Series hub, NOT a "Next mission -> successor" dead link the consistency
+    // audit BLOCKS. These pin the rule into the tooling so it stops being a
+    // manual post-build fix each ship.
+    it('leading-edge nav: index emits Series hub for the newest degree, never a dead next link', () => {
+      const src = read(BUILD_PATH);
+      expect(src).toMatch(/const LEADING_EDGE = A\.leadingEdge !== false/);
+      expect(src).toMatch(/Series hub/);
+      expect(src).toMatch(/NAV_DEAD_TARGET \+ DEAD_INTERNAL_LINKS/);
+      // the index task consumes the computed right-cell guidance, not a raw next link
+      expect(src).toMatch(/\$\{NAV_RIGHT\}/);
+    });
+
+    it('predecessor nav promotion is wired into the retro-forest finalization', () => {
+      const src = read(BUILD_PATH);
+      // The companion deterministic script must exist and be invoked when leading-edge.
+      expect(existsSync(join(REPO_ROOT, 'tools/nasa-nav-promote-predecessor.mjs'))).toBe(true);
+      expect(src).toMatch(/nasa-nav-promote-predecessor\.mjs --predecessor \$\{PRED\.degree\} --new-degree \$\{DEGREE\}/);
+      expect(src).toMatch(/skip nav promotion — leadingEdge:false/);
+    });
+
+    it('forest-module filename is coordinated between the index href and the retro rename', () => {
+      const src = read(BUILD_PATH);
+      expect(src).toMatch(/const FOREST_MODULE_FILE = A\.forestModuleFile \|\| null/);
+      // index task references the coordinated href note
+      expect(src).toMatch(/\$\{FOREST_LINK_NOTE\}/);
+      // retro task renames to exactly that file when provided, keeps clone name otherwise (no desync either way)
+      expect(src).toMatch(/RENAME the file to EXACTLY/);
+      expect(src).toMatch(/KEEP THE CLONE FILENAME/);
+    });
+
+    it('index task carries the H1/breadcrumb length guidance (audit BLOCKs overflow)', () => {
+      const src = read(BUILD_PATH);
+      expect(src).toMatch(/HEADER LENGTH \(audit limits\)/);
+      expect(src).toMatch(/<h1> text <=200 chars/);
+      expect(src).toMatch(/breadcrumb"> text <=160 chars/);
+      expect(src).toMatch(/H1_LONG \/ BREADCRUMB_LONG/);
+    });
   });
 
   describe('audit-harness.mjs', () => {

@@ -103,6 +103,20 @@ result passes `tools/nasa-consistency-audit.mjs` (a ship-gate BLOCKER as of
 2026-06-15) on the artifact-count, forest-in-manifest, and retrospective-chain
 invariants.
 
+**Leading-edge nav + predecessor promotion (folded in 2026-06-15):** the newest
+degree has no successor yet, so the `index.html` task emits the **leading-edge
+nav** — right cell **Series hub** (`../index.html`), *not* a "Next mission →
+successor" link (a dead link `nasa-consistency-audit` BLOCKs: `NAV_DEAD_TARGET` +
+`DEAD_INTERNAL_LINKS`). `retro-forest` then promotes the **predecessor's** own
+right cell Series hub → Next mission → this degree via the deterministic,
+idempotent `tools/nasa-nav-promote-predecessor.mjs`. The same task coordinates
+the **forest-module filename** (`forestModuleFile`) across the index `module
+source` href and the module rename so the two never desync, and the index task
+carries the H1 ≤200 / breadcrumb ≤160 audit limits. Together these retire the
+three manual post-build fixes the v1.221 GRACE ship needed. Set
+`leadingEdge: false` only when rebuilding a non-newest degree that already has a
+shipped successor.
+
 - **SHARED contract (invariant across all 6 ancestors):**
   clone-rewrite-preserve-STRUCTURE rule; "REQUIRED: first read `<brief>`";
   AXIS/ENGINE block; the **ANCHORS guard** ("use ONLY these; do NOT carry
@@ -120,6 +134,9 @@ invariants.
 - Required args: `{ mission, degree, version, dir, brief, mode,
   predecessor{ mission, degree }, successorDegree, anchorsBlock, axisBlock,
   organismBlock, shaderBlock }`. Optional: `factsBlock`, `leakNote`, `nav`,
+  `leadingEdge` (default **true** — leading-edge nav, see above),
+  `successorMission` (next-cell label when `leadingEdge:false`),
+  `forestModuleFile` (coordinates the index href + retro rename),
   `readme{ path, modelPath }`, `taskNotes{ label: extra }`, `tasks` (full
   roster override for non-NASA genera).
 - Supersedes the #10408 single-dispatch rebuild template for catalog-clone
