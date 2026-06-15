@@ -18,7 +18,7 @@
  *
  * Four surfaces must stay in sync:
  *   1. tools/workflows/content-adversarial-review.mjs — 4-auditor + judge content review.
- *   2. tools/workflows/decompose-build.mjs            — 8-task DECOMPOSE-build.
+ *   2. tools/workflows/decompose-build.mjs            — page + artifact-tree DECOMPOSE-build.
  *   3. tools/workflows/audit-harness.mjs              — retrospective-audit harness.
  *   4. docs/workflows-library.md                      — the canonical process doc;
  *      plus the cross-referencing docs (NASA discipline §0 + its #10408
@@ -45,9 +45,12 @@ const NASA_DOC_PATH = join(REPO_ROOT, 'docs/nasa-mission-authoring-discipline.md
 const T14_PATH = join(REPO_ROOT, 'docs/T14-SHIP-SEQUENCE.md');
 const DISPATCH_DOC_PATH = join(REPO_ROOT, 'docs/sub-agent-dispatch-discipline.md');
 
-// The canonical 8-task page decomposition — identical across all 6 untracked
-// ancestor builds (evidence fleet wf_28691c0e); parity-pinned so a renamed or
-// dropped task is caught. 'readme' is the conditional 8th task (args.readme).
+// The full DECOMPOSE-build task roster — parity-pinned so a renamed or dropped
+// task is caught. The first 7 are the page decomposition identical across all 6
+// untracked ancestor builds (evidence fleet wf_28691c0e). The 4 artifacts-*/
+// retro-forest tasks were added 2026-06-15 to close W6 collapse debt (the
+// original 8 tasks dropped the artifact tree, retrospective chain, and forest
+// module from every forward degree). 'readme' is the conditional task (args.readme).
 const EXPECTED_BUILD_TASKS = [
   'index.html',
   'research',
@@ -56,6 +59,10 @@ const EXPECTED_BUILD_TASKS = [
   'papers-curriculum',
   'jsons',
   'pointers-shader',
+  'artifacts-story-audio',
+  'artifacts-circuits',
+  'artifacts-sims',
+  'retro-forest',
   'readme',
 ];
 
@@ -157,7 +164,7 @@ describe('workflows library discipline — drift-guard (v1.49.1031 Ship 5)', () 
   });
 
   describe('decompose-build.mjs', () => {
-    it('is a Workflow script with the canonical 8-task page decomposition', () => {
+    it('is a Workflow script with the full page + artifact-tree task roster', () => {
       const src = read(BUILD_PATH);
       expect(src).toMatch(/export const meta\s*=/);
       expect(src).toContain("name: 'decompose-build'");
@@ -165,6 +172,23 @@ describe('workflows library discipline — drift-guard (v1.49.1031 Ship 5)', () 
       expect(sorted(labels)).toEqual(sorted(EXPECTED_BUILD_TASKS));
       expect(src).toMatch(/phase\('Rewrite'\)/);
       expect(src).toMatch(/\bparallel\s*\(/);
+    });
+
+    it('W6-debt closure: covers the artifact tree, retrospective chain, and forest module', () => {
+      // The 2026-06-15 fix — without these a forward degree re-accrues collapse
+      // debt (only track pages + JSONs + shader shipped). Pin each surface.
+      const src = read(BUILD_PATH);
+      expect(src).toMatch(/artifacts\/story\//);
+      expect(src).toMatch(/artifacts\/circuits\//);
+      expect(src).toMatch(/artifacts\/audio\//);
+      expect(src).toMatch(/artifacts\/sims\//);
+      expect(src).toMatch(/retrospective\/lessons-carryover\.json/);
+      expect(src).toMatch(/retrospective\/corpus-deltas\.md/);
+      expect(src).toMatch(/forest-module\//);
+      // and re-registers the new module so it actually loads (and passes the audit)
+      expect(src).toMatch(/nasa-forest-manifest-regen\.mjs/);
+      // filenames are preserved so index.html artifact links stay valid
+      expect(src).toMatch(/KEEPING THE EXISTING FILENAMES/);
     });
 
     it('SHARED contract: brief-first, preserve-structure, discipline items, footers', () => {

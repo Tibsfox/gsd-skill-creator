@@ -80,13 +80,28 @@ the two are siblings with different inputs; both stay.
   mechanical gates. A dead judge fail-safes to all-raw-findings-are-fix-now —
   it never silently passes the review.
 
-### 2. `decompose-build.mjs` — DECOMPOSE-build (8 parallel rewrite agents)
+### 2. `decompose-build.mjs` — DECOMPOSE-build (parallel rewrite agents)
 
-Rewrites a cloned content directory (predecessor clone → new mission) via the
-canonical **8-task page decomposition** — `index.html` / `research` /
-`organism` / `math-sim` / `papers-curriculum` / `jsons` / `pointers-shader` /
+Rewrites a cloned content directory (predecessor clone → new mission) via a
+**page + artifact-tree decomposition** — the 7 page tasks `index.html` /
+`research` / `organism` / `math-sim` / `papers-curriculum` / `jsons` /
+`pointers-shader`, plus the **artifact-tree tasks** `artifacts-story-audio` /
+`artifacts-circuits` / `artifacts-sims` / `retro-forest`, plus the conditional
 `readme` — each task one bounded sub-5-minute agent, beating the ~290s
 sub-agent ceiling that killed single-dispatch builds.
+
+The `artifacts-*` and `retro-forest` tasks (added 2026-06-15) close **W6
+collapse debt**: the original 8 tasks rewrote only the track pages + JSONs +
+shader, silently dropping the substrate-era artifact tree (story/circuits/
+sims/audio), the retrospective chain, and the forest module — so every forward
+degree shipped collapsed and needed a later W6 backfill. Forward degrees now
+clone a post-backfill predecessor (1.220+, full NASA-1.150 shape) and rewrite
+the **whole tree in place, keeping cloned filenames** (so `index.html`'s
+artifact links stay valid with zero slug coordination), and `retro-forest`
+re-runs `tools/nasa-forest-manifest-regen.mjs` so the new module loads. The
+result passes `tools/nasa-consistency-audit.mjs` (a ship-gate BLOCKER as of
+2026-06-15) on the artifact-count, forest-in-manifest, and retrospective-chain
+invariants.
 
 - **SHARED contract (invariant across all 6 ancestors):**
   clone-rewrite-preserve-STRUCTURE rule; "REQUIRED: first read `<brief>`";

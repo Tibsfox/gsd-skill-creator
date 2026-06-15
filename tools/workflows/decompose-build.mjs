@@ -1,8 +1,8 @@
 export const meta = {
   name: 'decompose-build',
-  description: 'Parametrized DECOMPOSE-build: parallel bounded file-rewrite agents (predecessor clone -> new mission content) that beat the ~290s sub-agent ceiling via the canonical 8-task page decomposition',
-  whenToUse: 'Run to rewrite a cloned content directory (NASA degree pages or any clone-rewrite genus) into the new mission. Each task agent rewrites 1-4 assigned files in place and runs the per-file trip-vocab check; the orchestrator then runs content-adversarial-review.mjs and the mechanical gates. Build agents WRITE files (general-purpose), unlike the read-only review/audit skeletons.',
-  phases: [{ title: 'Rewrite', detail: 'parallel file-rewrite agents, each rewriting 1-4 cloned files in place' }],
+  description: 'Parametrized DECOMPOSE-build: parallel bounded file-rewrite agents (predecessor clone -> new mission content) that beat the ~290s sub-agent ceiling. Rewrites the FULL substrate-era tree — track pages + JSONs + shader AND the artifact tree (story/circuits/sims/audio), the retrospective chain, and the forest module (re-registered in the manifest) — so a forward degree never re-accrues W6 collapse debt.',
+  whenToUse: 'Run to rewrite a cloned content directory (NASA degree pages or any clone-rewrite genus) into the new mission. Each task agent rewrites its assigned files in place (keeping filenames so index.html artifact links stay valid) and runs the per-file trip-vocab check; the orchestrator then runs content-adversarial-review.mjs and the mechanical gates. The artifact/retrospective/forest tasks make the result pass nasa-consistency-audit with no separate W6 backfill. Build agents WRITE files (general-purpose), unlike the read-only review/audit skeletons.',
+  phases: [{ title: 'Rewrite', detail: 'parallel file-rewrite agents, each rewriting its assigned cloned files in place' }],
 }
 
 // ---------------------------------------------------------------------------
@@ -32,6 +32,18 @@ export const meta = {
 // shader spec, and leak-replacement guidance arrive via args blocks authored
 // per-mission from MISSION-BRIEF.md — the brief stays the authoritative source
 // and every task agent must read it first.
+//
+// W6-DEBT CLOSURE (2026-06-15): the original 8 tasks rewrote only the track
+// pages + JSONs + shader, silently dropping the substrate-era artifact tree
+// (story/circuits/sims/audio), the retrospective chain, and the forest module
+// — so every forward degree shipped collapsed and had to be W6-backfilled
+// later. The artifacts-*/retro-forest tasks below close that gap: a forward
+// degree now clones a post-backfill predecessor (1.220+, full NASA-1.150
+// shape) and rewrites the WHOLE tree in place, KEEPING cloned filenames (so
+// index.html's artifact links stay valid with zero slug coordination) and
+// re-running tools/nasa-forest-manifest-regen.mjs so the new module loads. The
+// result passes tools/nasa-consistency-audit.mjs (now a ship-gate BLOCKER) on
+// the artifact-count, forest-in-manifest, and retrospective-chain invariants.
 //
 // args:
 //   { mission: string,             // REQUIRED, e.g. 'Gravity Probe B'
@@ -104,13 +116,18 @@ const NAV = A.nav || {
   nextHref: `../${A.successorDegree}/`, nextLabel: `v${A.successorDegree} ->`,
 }
 
-// The canonical 8-task page decomposition — identical across all 6 ancestor
-// clones (evidence fleet wf_28691c0e): each task is one bounded sub-5-min agent.
+// The page decomposition — the 7 track/JSON/shader tasks (identical across all
+// 6 ancestor clones, evidence fleet wf_28691c0e) plus the 4 artifact/forest/
+// retro tasks that close W6 collapse debt. Each task is one bounded sub-5-min
+// agent. EXEMPLAR is the substrate-era structural gold standard (NASA 1.150),
+// a sibling of the degree dir — used as the "model on" fallback when a clone
+// predates the artifact tree.
+const EXEMPLAR = `${DIR}/../1.150`
 const note = (label) => (A.taskNotes && A.taskNotes[label] ? `\n\nPER-MISSION NOTES (payload):\n${A.taskNotes[label]}` : '')
 const DEFAULT_TASKS = [
   {
     label: 'index.html',
-    prompt: `ASSIGNED FILE: ${DIR}/index.html (the largest, most structured file). Rewrite to ${MISSION}, preserving the canonical card layout EXACTLY: the 12-card v1.0 floor + Mission Journey narrative card (>500 words, told from the brief's mission narrative) + Structural Firsts card + Governance & Chain Declarations card + the numbered resonance axes each with a mission paragraph and an organism pairing + the sidebar lineage table + a haiku card. NAV-CARD PAIRS (both top AND bottom): previous cell -> ${NAV.prevHref} "${NAV.prevLabel}"; next cell -> ${NAV.nextHref} "${NAV.nextLabel}". Reference the shader exactly as specified in the SHARED spec. Use ONLY the canonical anchors. Dedication card <=200 words. Run the trip-vocab page check and confirm PASS.${note('index.html')}`,
+    prompt: `ASSIGNED FILE: ${DIR}/index.html (the largest, most structured file). Rewrite to ${MISSION}, preserving the canonical card layout EXACTLY: the 12-card v1.0 floor + Mission Journey narrative card (>500 words, told from the brief's mission narrative) + Structural Firsts card + Governance & Chain Declarations card + the numbered resonance axes each with a mission paragraph and an organism pairing + the sidebar lineage table + a haiku card. NAV-CARD PAIRS (both top AND bottom): previous cell -> ${NAV.prevHref} "${NAV.prevLabel}"; next cell -> ${NAV.nextHref} "${NAV.nextLabel}". Reference the shader exactly as specified in the SHARED spec. Use ONLY the canonical anchors. Dedication card <=200 words. ARTIFACT-LINK INTEGRITY: the artifact files keep their cloned filenames (rewritten in place by the artifacts-*/retro-forest tasks), so KEEP the Creative Artifacts / Runnable Simulations / Interactive Lab / Data Files cards linking the SAME artifacts/... paths the clone already used — every href="artifacts/..." must resolve to a file that exists in ${DIR}/artifacts/; introduce no dead artifact links and leave at least the existing artifact links in place. Run the trip-vocab page check and confirm PASS.${note('index.html')}`,
   },
   {
     label: 'research',
@@ -139,6 +156,39 @@ const DEFAULT_TASKS = [
 - to-${A.successorDegree}.md: rewrite as forward-anticipation per the brief's forward-queue guidance.
 - Retheme the GLSL fragment shader to the 4 modes in the SHARED spec; keep it valid GLSL 3.30 core; replace any leftover predecessor shader content.
 - viewer.html: update the 4 mode labels + the shader fetch to the new .frag filename; KEEP the \`#version 330 core\` -> \`#version 300 es\` load-time rewrite intact.${note('pointers-shader')}`,
+  },
+  {
+    label: 'artifacts-story-audio',
+    prompt: `ASSIGNED FILES: every file under ${DIR}/artifacts/story/ AND ${DIR}/artifacts/audio/ (cloned from ${PRED.mission}; substrate-era NASA 1.150 shape = story/{slug}.html + {slug}.tex, audio/{mission}-synth.dsp + {species}.dsp). REWRITE each cloned file in place to ${MISSION}, KEEPING THE EXISTING FILENAMES (index.html links artifacts by name — renaming breaks those links and trips the audit's dead-link check).
+- story .html: creative nonfiction (2500-4000 words) weaving ${MISSION} + its paired animal + paired plant into one factual narrative; same dark-theme <style> idiom.
+- story .tex: the XeLaTeX companion (article + amsmath + hyperref + geometry + fancyhdr), same piece.
+- audio .dsp files: Faust DSP — one for the mission's audio signature (launch/telemetry/maneuver events), one for the paired species' sound; declared params + comments.
+Engineering/naturalist register; behavioral-description-only for organisms; real ${MISSION} hardware/dates/species from the brief; canonical anchors only. If the story/ or audio/ dir (or a file) is ABSENT in the clone (a predecessor predating the artifact tree), AUTHOR it fresh modeled on ${EXEMPLAR}/artifacts/{story,audio}/ using 1.150's canonical filenames, and list any newly-created file in your return. Run \`node tools/trip-vocab-check.mjs <story.html> --mode page\` and confirm VERDICT PASS.${note('artifacts-story-audio')}`,
+  },
+  {
+    label: 'artifacts-circuits',
+    prompt: `ASSIGNED FILES: every file under ${DIR}/artifacts/circuits/ (cloned from ${PRED.mission}; NASA 1.150 shape = {slug}.cir + {slug}.md + {slug}.html). REWRITE each in place to ONE real ${MISSION}-era instrument/sensor/subsystem, KEEPING THE EXISTING FILENAMES.
+- .cir: ngspice netlist (80-200 lines), runnable + commented, real component values where known (placeholders clearly commented otherwise).
+- .md: design doc (200-500 lines) — schematic description, parts list, operating principle, modern DIY equivalent.
+- .html: self-contained dark-theme design-doc page (~120 lines; meta block, tables, diagram block) — a standalone page, NOT a harness loader.
+Pick a ${MISSION}-specific subsystem from the brief; canonical anchors only. If the circuits/ dir is ABSENT, author fresh modeled on ${EXEMPLAR}/artifacts/circuits/ using 1.150's canonical filenames, and list new files in your return. Run \`node tools/trip-vocab-check.mjs <circuits.html> --mode page\` and confirm VERDICT PASS.${note('artifacts-circuits')}`,
+  },
+  {
+    label: 'artifacts-sims',
+    prompt: `ASSIGNED FILES: every file under ${DIR}/artifacts/sims/ (cloned from ${PRED.mission}; NASA 1.150 shape = two .py + one interactive .html). REWRITE each in place to ${MISSION}, KEEPING THE EXISTING FILENAMES.
+- analytical .py: Python 3 + numpy + matplotlib (200-400 lines) — a ${MISSION}-specific analytical sim (trajectory/orbit/instrument response); runnable, docstring + plots, real parameters.
+- explorer .py: a second sim (retrieval / parameter-fit / data explorer), 200-400 lines.
+- interactive .html: standalone HTML+canvas/SVG visualization (300-500 lines) — mission event sequence OR paired-species visualization; self-contained, no external deps.
+Real ${MISSION} parameters from the brief; canonical anchors only. If the sims/ dir is ABSENT, author fresh modeled on ${EXEMPLAR}/artifacts/sims/ using 1.150's canonical filenames, and list new files in your return. Run \`node tools/trip-vocab-check.mjs <interactive.html> --mode page\` and confirm VERDICT PASS.${note('artifacts-sims')}`,
+  },
+  {
+    label: 'retro-forest',
+    prompt: `ASSIGNED FILES: ${DIR}/retrospective/lessons-carryover.json, ${DIR}/retrospective/corpus-deltas.md, AND the forest module under ${DIR}/forest-module/ (the *.js module). REWRITE each in place to ${MISSION}, KEEPING THE EXISTING FILENAMES.
+- retrospective/lessons-carryover.json: { "missionVersion":"${DEGREE}", "predecessor":"${PRED.degree}", "readFromPredecessor":"<path or note>", "appliedLessons":[{"id","summary","applicationInThisMission"}], "newLessons":[{"id","summary","carryForwardTo":[...],"scope"}], "corpusDeltaHints":[...] } — >=1 applied + >=1 new lesson grounded in ${MISSION}'s real engineering/science. Valid JSON.
+- retrospective/corpus-deltas.md: 300-800 words on what ${MISSION} reveals about earlier missions, with explicit retrofit hints.
+- forest-module/*.js: rewrite the forest-simulation module to ${MISSION}'s paired species per the brief's organism pairing (plant -> lsystem/physarum/circadian; animal -> boids/audio/kuramoto). Keep it valid JS with the SAME module export shape as the clone.
+If any of these are ABSENT in the clone, author them fresh modeled on ${EXEMPLAR}/retrospective/ and ${EXEMPLAR}/forest-module/ using canonical filenames.
+FINALLY, from the repository root run \`node tools/nasa-forest-manifest-regen.mjs\` so degree ${DEGREE}'s forest module is registered in www/tibsfox/com/Research/NASA/_harness/v1.0.0/forest-module-manifest.json (a module not in the manifest does not load); confirm ${DEGREE} now appears. Return the files written + the manifest confirmation.${note('retro-forest')}`,
   },
 ]
 if (A.readme && A.readme.path) {

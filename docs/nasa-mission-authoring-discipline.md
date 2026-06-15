@@ -63,11 +63,24 @@ and are never committed.
 ### 0.1 DECOMPOSE-build (`tools/workflows/decompose-build.mjs`)
 
 **Why it exists:** single-dispatch builds die at the ~290s sub-agent ceiling
-on full-degree page sets. DECOMPOSE-build splits the build into the canonical
-**8-task page decomposition** — index.html / research / organism / math-sim /
-papers-curriculum / jsons / pointers-shader / readme — each a bounded
-sub-5-minute rewrite agent dispatched in parallel: 8/8 agents ok at ~350s
-total wall-clock, zero ceiling deaths, confirmed 6× (v1021–v1026).
+on full-degree page sets. DECOMPOSE-build splits the build into a **page +
+artifact-tree decomposition** — the 7 page tasks (index.html / research /
+organism / math-sim / papers-curriculum / jsons / pointers-shader), the 4
+artifact-tree tasks (artifacts-story-audio / artifacts-circuits /
+artifacts-sims / retro-forest), and the conditional readme — each a bounded
+sub-5-minute rewrite agent dispatched in parallel: the original 7-page split
+ran 8/8 agents ok at ~350s wall-clock, zero ceiling deaths, confirmed 6×
+(v1021–v1026).
+
+**W6-debt closure (2026-06-15):** the original 8 tasks rewrote only the track
+pages + JSONs + shader, dropping the substrate-era artifact tree (story/
+circuits/sims/audio), the retrospective chain, and the forest module — so each
+forward degree shipped collapsed and needed a later W6 backfill. The
+`artifacts-*`/`retro-forest` tasks rewrite the whole cloned tree in place,
+keeping filenames so `index.html` artifact links stay valid, and re-register
+the forest module via `tools/nasa-forest-manifest-regen.mjs`. A forward degree
+built this way passes `tools/nasa-consistency-audit.mjs` (a ship-gate BLOCKER)
+with no separate backfill.
 
 **The SHARED-prompt contract** (every task agent receives it): rewrite
 textual content only, preserve HTML/JSON/markdown STRUCTURE exactly; read
