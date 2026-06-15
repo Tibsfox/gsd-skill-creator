@@ -35,7 +35,9 @@ HARD RULES:
 - Never create *.bak* files. No generator scripts — hand-author factually-grounded content.
 - Engineering/naturalist register. No references to AI assistants or model names. No metaphysical claims about organisms (behavioral descriptions only).
 - Content must be specific to THIS mission's real hardware, science, dates, and paired species — not boilerplate. Use placeholders only where a real value is genuinely unavailable, and comment them clearly.
-- Slugs: short, kebab-case, mission-specific (e.g. "${v.replace('.', '-')}-..." style consistent with 1.150's naming).`
+- Slugs: short, kebab-case, mission-specific (e.g. "${v.replace('.', '-')}-..." style consistent with 1.150's naming).
+
+IDEMPOTENT RE-RUN (this wave resumes after interruptions): FIRST list your role's target directory (ls ${NASA}/${v}/artifacts/...). If ALL your assigned files already exist and are non-empty/substantive, briefly verify them and RETURN their paths WITHOUT rewriting (do not duplicate or clobber good work). If SOME exist, author ONLY the missing ones and leave the existing good files untouched. Only author from scratch when none exist.`
 
 const roles = [
   {
