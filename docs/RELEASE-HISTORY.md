@@ -1,13 +1,14 @@
 # Release History
 
-1085 milestones shipped across the v1.0 → v1.49.1042 arc. The table below lists every shipped release, newest first.
+1086 milestones shipped across the v1.0 → v1.49.1043 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
-**Snapshot:** 1085 releases · 1084 with retrospectives · 814 with extracted lessons · quality A:709 B:98 C:62 D:12 F:204 (avg 83) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+**Snapshot:** 1086 releases · 1085 with retrospectives · 815 with extracted lessons · quality A:710 B:98 C:62 D:12 F:204 (avg 83) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.1043](release-notes/v1.49.1043) | IXPE Imaging X-Ray Polarimetry Explorer X-Ray-Polarimetry X-Ray-Astronomy Mission | 2026-06-15 | 5 | 5 | — | [s](release-notes/v1.49.1043/chapter/00-summary.md) [r](release-notes/v1.49.1043/chapter/03-retrospective.md) [l](release-notes/v1.49.1043/chapter/04-lessons.md) [c](release-notes/v1.49.1043/chapter/99-context.md) | 12 | A 99 |  |
 | [v1.49.1042](release-notes/v1.49.1042) | RXTE Rossi X-Ray Timing Explorer X-Ray-Timing Variability X-Ray-Astronomy Mission | 2026-06-15 | 4 | 5 | — | [s](release-notes/v1.49.1042/chapter/00-summary.md) [r](release-notes/v1.49.1042/chapter/03-retrospective.md) [l](release-notes/v1.49.1042/chapter/04-lessons.md) [c](release-notes/v1.49.1042/chapter/99-context.md) | 12 | A 99 |  |
 | [v1.49.1041](release-notes/v1.49.1041) | NuSTAR Nuclear Spectroscopic Telescope Array Hard-X-Ray Focusing Deployable-Mast X-Ray-Astronomy Mission | 2026-06-15 | 3 | 5 | — | [s](release-notes/v1.49.1041/chapter/00-summary.md) [r](release-notes/v1.49.1041/chapter/03-retrospective.md) [l](release-notes/v1.49.1041/chapter/04-lessons.md) [c](release-notes/v1.49.1041/chapter/99-context.md) | 12 | A 99 |  |
 | [v1.49.1040](release-notes/v1.49.1040) | Chandra X-ray Observatory Grazing-Incidence X-Ray-Astronomy Great-Observatory Mission | 2026-06-15 | 3 | 5 | — | [s](release-notes/v1.49.1040/chapter/00-summary.md) [r](release-notes/v1.49.1040/chapter/03-retrospective.md) [l](release-notes/v1.49.1040/chapter/04-lessons.md) [c](release-notes/v1.49.1040/chapter/99-context.md) | 12 | A 99 |  |
