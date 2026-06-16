@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.1042`.
+The story begins at `v1.0` and continues to `v1.49.1043`.
 
-**1085 chapters.** 1084 have retrospectives.
+**1086 chapters.** 1085 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -1093,3 +1093,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.1040](v1.49.1040/00-summary.md)** — Chandra X-ray Observatory Grazing-Incidence X-Ray-Astronomy Great-Observatory Mission · 2026-06-15
 - **[v1.49.1041](v1.49.1041/00-summary.md)** — NuSTAR Nuclear Spectroscopic Telescope Array Hard-X-Ray Focusing Deployable-Mast X-Ray-Astronomy Mission · 2026-06-15
 - **[v1.49.1042](v1.49.1042/00-summary.md)** — RXTE Rossi X-Ray Timing Explorer X-Ray-Timing Variability X-Ray-Astronomy Mission · 2026-06-15
+- **[v1.49.1043](v1.49.1043/00-summary.md)** — IXPE Imaging X-Ray Polarimetry Explorer X-Ray-Polarimetry X-Ray-Astronomy Mission · 2026-06-15
