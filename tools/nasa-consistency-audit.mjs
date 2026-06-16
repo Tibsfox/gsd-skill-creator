@@ -185,6 +185,49 @@ function auditMission(ver, allDirs, manifestVers) {
   if (f.dead_internal.length) issue('DEAD_INTERNAL_LINKS', f.dead_internal.slice(0, 6).join(','));
   if (escapes.length) issue('LINK_ESCAPES_WEBROOT', [...new Set(escapes)].slice(0, 4).join(','));
 
+  // ---- shader references (JS-fetched .frag paths; v1.49.1043 carryover #3) ----
+  // The artifact-href check above only catches <a href="artifacts/..."> links.
+  // Shaders are loaded by JavaScript via fetch('<name>.frag') (e.g. the
+  // standalone artifacts/shaders/viewer.html), a reference the href regex is
+  // blind to: a renamed shader whose fetch path was not updated breaks the
+  // screensaver at runtime while the audit stays green (the v1039–v1042
+  // "verified by hand" gap). Scan every quoted string literal ending in .frag
+  // across the degree's .html/.js files and assert each resolves to a file on
+  // disk, relative to the referencing file. Static literals only (interpolated
+  // / concatenated paths are skipped — not statically checkable). Degrees with
+  // no shader carry no such references and are naturally exempt.
+  const shaderRefs = [];
+  const deadShaderRefs = [];
+  const scanForFrag = (fileAbs) => {
+    let txt;
+    try { txt = fs.readFileSync(fileAbs, 'utf8'); } catch { return; }
+    for (const m of txt.matchAll(/(['"`])([^'"`\n]*\.frag)\1/g)) {
+      const ref = m[2];
+      if (/^(https?:|\/\/)/.test(ref)) continue;     // external URL, not local
+      if (ref.includes('${') || ref.includes('+')) continue; // dynamic, not statically checkable
+      const resolved = ref.startsWith('/')
+        ? path.join(WEB_ROOT, ref)
+        : path.resolve(path.dirname(fileAbs), ref);
+      const relFrom = path.relative(dir, fileAbs);
+      shaderRefs.push(`${relFrom}:${ref}`);
+      if (!fs.existsSync(resolved)) deadShaderRefs.push(`${relFrom} -> ${ref}`);
+    }
+  };
+  const walkScan = (d) => {
+    for (const e of fs.readdirSync(d, { withFileTypes: true })) {
+      const p = path.join(d, e.name);
+      if (e.isDirectory()) walkScan(p);
+      else if (/\.(html|js)$/.test(e.name) && !/\.bak\d*$/.test(e.name)) scanForFrag(p);
+    }
+  };
+  walkScan(dir);
+  f.shaders = {
+    frag_on_disk: artFiles.filter((p) => p.endsWith('.frag')).length,
+    refs: [...new Set(shaderRefs)].length,
+    dead_refs: [...new Set(deadShaderRefs)],
+  };
+  if (f.shaders.dead_refs.length) issue('SHADER_REF_DEAD', f.shaders.dead_refs.slice(0, 5).join(' ; '));
+
   // ---- forest (§14.0) ----
   const fmDir = path.join(dir, 'forest-module');
   let forest = 'missing';
