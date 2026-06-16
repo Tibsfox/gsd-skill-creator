@@ -136,7 +136,9 @@
     "@huggingface/transformers": {
       "sharp": "npm:empty-npm-package@1.0.0"
     },
-    "esbuild": "0.28.1"
+    "esbuild": "0.28.1",
+    "vite": "^7.3.5",
+    "protobufjs": "^7.6.4"
   },
   "devDependencies": {
     "@playwright/test": "^1.59.1",
