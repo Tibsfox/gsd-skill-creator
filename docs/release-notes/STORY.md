@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.1048`.
+The story begins at `v1.0` and continues to `v1.49.1049`.
 
-**1091 chapters.** 1090 have retrospectives.
+**1092 chapters.** 1091 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -1099,3 +1099,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.1046](v1.49.1046/00-summary.md)** — XRISM (X-Ray Imaging and Spectroscopy Mission) High-Resolution X-Ray-Spectroscopy X-Ray-Astronomy Mission · 2026-06-16
 - **[v1.49.1047](v1.49.1047/00-summary.md)** — Einstein Observatory (HEAO-2) Cosmic-Imaging Focusing X-Ray Telescope X-Ray-Astronomy Mission · 2026-06-16
 - **[v1.49.1048](v1.49.1048/00-summary.md)** — Uhuru (SAS-1) First-Dedicated All-Sky X-Ray Survey-and-Catalog X-Ray-Astronomy Mission · 2026-06-17
+- **[v1.49.1049](v1.49.1049/00-summary.md)** — HEAO-1 (High Energy Astronomy Observatory 1) Deep All-Sky X-Ray Survey-Sustain X-Ray-Astronomy Mission · 2026-06-17
