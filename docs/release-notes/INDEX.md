@@ -1,11 +1,28 @@
 # Release History — Chapter Index
 
-_Generated 2026-06-11 from `release_history.*`. Source of truth: Postgres._
+_Generated 2026-06-18 from `release_history.*`. Source of truth: Postgres._
 
-**1076 releases.** 1075 with retrospective. 806 with extracted lessons.
+**1093 releases.** 1092 with retrospective. 822 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
+| `v1.49.1050` | ROSAT (Röntgensatellit) Imaging All-Sky X-Ray Survey-Sustain X-Ray-Astronomy Mission | 2026-06-18 | ✓ | 14 | [read](v1.49.1050/00-summary.md) |
+| `v1.49.1049` | HEAO-1 (High Energy Astronomy Observatory 1) Deep All-Sky X-Ray Survey-Sustain X-Ray-Astronomy Mission | 2026-06-17 | ✓ | 12 | [read](v1.49.1049/00-summary.md) |
+| `v1.49.1048` | Uhuru (SAS-1) First-Dedicated All-Sky X-Ray Survey-and-Catalog X-Ray-Astronomy Mission | 2026-06-17 | ✓ | 12 | [read](v1.49.1048/00-summary.md) |
+| `v1.49.1047` | Einstein Observatory (HEAO-2) Cosmic-Imaging Focusing X-Ray Telescope X-Ray-Astronomy Mission | 2026-06-16 | ✓ | 12 | [read](v1.49.1047/00-summary.md) |
+| `v1.49.1046` | XRISM (X-Ray Imaging and Spectroscopy Mission) High-Resolution X-Ray-Spectroscopy X-Ray-Astronomy Mission | 2026-06-16 | ✓ | 12 | [read](v1.49.1046/00-summary.md) |
+| `v1.49.1045` | Neil Gehrels Swift Observatory Gamma-Ray-Burst X-Ray-Astronomy Mission | 2026-06-16 | ✓ | 12 | [read](v1.49.1045/00-summary.md) |
+| `v1.49.1044` | NICER Neutron Star Interior Composition Explorer X-Ray-Timing X-Ray-Astronomy Mission | 2026-06-15 | ✓ | 12 | [read](v1.49.1044/00-summary.md) |
+| `v1.49.1043` | IXPE Imaging X-Ray Polarimetry Explorer X-Ray-Polarimetry X-Ray-Astronomy Mission | 2026-06-15 | ✓ | 12 | [read](v1.49.1043/00-summary.md) |
+| `v1.49.1042` | RXTE Rossi X-Ray Timing Explorer X-Ray-Timing Variability X-Ray-Astronomy Mission | 2026-06-15 | ✓ | 12 | [read](v1.49.1042/00-summary.md) |
+| `v1.49.1041` | NuSTAR Nuclear Spectroscopic Telescope Array Hard-X-Ray Focusing Deployable-Mast X-Ray-Astronomy Mission | 2026-06-15 | ✓ | 12 | [read](v1.49.1041/00-summary.md) |
+| `v1.49.1040` | Chandra X-ray Observatory Grazing-Incidence X-Ray-Astronomy Great-Observatory Mission | 2026-06-15 | ✓ | 12 | [read](v1.49.1040/00-summary.md) |
+| `v1.49.1039` | ICESat NASA Ice, Cloud, and land Elevation Satellite Spaceborne-Laser-Altimetry Ice-Sheet-Elevation Geodesy Mission | 2026-06-15 | ✓ | 12 | [read](v1.49.1039/00-summary.md) |
+| `v1.49.1038` | GRACE NASA-DLR-GFZ Gravity Recovery and Climate Experiment Twin-Spacecraft Inter-Satellite-Ranging Time-Variable-Gravity Geodesy Mission | 2026-06-15 | ✓ | 12 | [read](v1.49.1038/00-summary.md) |
+| `v1.49.1037` | NASA corpus consistency tooling + ship-gate wiring + decompose-build artifact-tree fix | 2026-06-15 | ✓ | — | [read](v1.49.1037/00-summary.md) |
+| `v1.49.1036` | LAGEOS-2 NASA-ASI Twin Laser Geodynamics Satellite Complementary-Inclination Satellite-Laser-Ranging Geodesy Mission | 2026-06-11 | ✓ | 12 | [read](v1.49.1036/00-summary.md) |
+| `v1.49.1035` | LAGEOS-1 NASA Laser Geodynamics Satellite Passive-Retroreflector Satellite-Laser-Ranging Geodesy Mission | 2026-06-11 | ✓ | 12 | [read](v1.49.1035/00-summary.md) |
+| `v1.49.1034` | Gravity Probe A NASA Gravitational-Redshift Hydrogen-Maser Precision-Clock Relativity Test Mission | 2026-06-11 | ✓ | 12 | [read](v1.49.1034/00-summary.md) |
 | `v1.49.1033` | SCRIBE v621 Refinement: Errata Sweep, Evidence Closure, Lean First Proof | 2026-06-11 | ✓ | 4 | [read](v1.49.1033/00-summary.md) |
 | `v1.49.1032` | Rust Process-Context Chokepoint: 28-Site Spawn Gate, Drift-Guard, Node-24 Actions Bump | 2026-06-10 | ✓ | — | [read](v1.49.1032/00-summary.md) |
 | `v1.49.1031` | Workflows Library: Committed NASA-Ops Skeletons, Mode-Flip Codification, Drift-Guard | 2026-06-10 | ✓ | — | [read](v1.49.1031/00-summary.md) |
@@ -1009,8 +1026,8 @@ _Generated 2026-06-11 from `release_history.*`. Source of truth: Postgres._
 | `v1.49.23` | Unison Language & Math Co-Processor Completion | 2026-03-08 | ✓ | 23 | [read](v1.49.23/00-summary.md) |
 | `v1.49.22` | PNW Research Series | 2026-03-07 | ✓ | 24 | [read](v1.49.22/00-summary.md) |
 | `v1.49.21` | Image to Mission Pipeline | 2026-03-07 | ✓ | 22 | [read](v1.49.21/00-summary.md) |
-| `v1.49.20` | Documentation Consolidation | 2026-03-06 | ✓ | 13 | [read](v1.49.20/00-summary.md) |
 | `v1.49.20.1` | Documentation Reflections | 2026-03-06 | — | — | [read](v1.49.20.1/00-summary.md) |
+| `v1.49.20` | Documentation Consolidation | 2026-03-06 | ✓ | 13 | [read](v1.49.20/00-summary.md) |
 | `v1.49.19` | Gastown Chipset Integration | 2026-03-06 | ✓ | 19 | [read](v1.49.19/00-summary.md) |
 | `v1.49.18` | Space Between Observatory | 2026-03-06 | ✓ | 17 | [read](v1.49.18/00-summary.md) |
 | `v1.49.17` | The Space Between | 2026-03-04 | ✓ | 19 | [read](v1.49.17/00-summary.md) |
