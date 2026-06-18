@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.1049`.
+The story begins at `v1.0` and continues to `v1.49.1050`.
 
-**1092 chapters.** 1091 have retrospectives.
+**1093 chapters.** 1092 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -79,8 +79,8 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.17](v1.49.17/00-summary.md)** — The Space Between · 2026-03-04
 - **[v1.49.18](v1.49.18/00-summary.md)** — Space Between Observatory · 2026-03-06
 - **[v1.49.19](v1.49.19/00-summary.md)** — Gastown Chipset Integration · 2026-03-06
-- **[v1.49.20.1](v1.49.20.1/00-summary.md)** — Documentation Reflections · 2026-03-06
 - **[v1.49.20](v1.49.20/00-summary.md)** — Documentation Consolidation · 2026-03-06
+- **[v1.49.20.1](v1.49.20.1/00-summary.md)** — Documentation Reflections · 2026-03-06
 - **[v1.49.21](v1.49.21/00-summary.md)** — Image to Mission Pipeline · 2026-03-07
 - **[v1.49.22](v1.49.22/00-summary.md)** — PNW Research Series · 2026-03-07
 - **[v1.49.23](v1.49.23/00-summary.md)** — Unison Language & Math Co-Processor Completion · 2026-03-08
@@ -1087,7 +1087,7 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.1034](v1.49.1034/00-summary.md)** — Gravity Probe A NASA Gravitational-Redshift Hydrogen-Maser Precision-Clock Relativity Test Mission · 2026-06-11
 - **[v1.49.1035](v1.49.1035/00-summary.md)** — LAGEOS-1 NASA Laser Geodynamics Satellite Passive-Retroreflector Satellite-Laser-Ranging Geodesy Mission · 2026-06-11
 - **[v1.49.1036](v1.49.1036/00-summary.md)** — LAGEOS-2 NASA-ASI Twin Laser Geodynamics Satellite Complementary-Inclination Satellite-Laser-Ranging Geodesy Mission · 2026-06-11
-- **[v1.49.1037](v1.49.1037/00-summary.md)** — NASA Corpus Consistency Tooling, Ship-Gate Enforcement, and Decompose-Build Artifact-Tree Fix (counter-cadence) · 2026-06-15
+- **[v1.49.1037](v1.49.1037/00-summary.md)** — NASA corpus consistency tooling + ship-gate wiring + decompose-build artifact-tree fix · 2026-06-15
 - **[v1.49.1038](v1.49.1038/00-summary.md)** — GRACE NASA-DLR-GFZ Gravity Recovery and Climate Experiment Twin-Spacecraft Inter-Satellite-Ranging Time-Variable-Gravity Geodesy Mission · 2026-06-15
 - **[v1.49.1039](v1.49.1039/00-summary.md)** — ICESat NASA Ice, Cloud, and land Elevation Satellite Spaceborne-Laser-Altimetry Ice-Sheet-Elevation Geodesy Mission · 2026-06-15
 - **[v1.49.1040](v1.49.1040/00-summary.md)** — Chandra X-ray Observatory Grazing-Incidence X-Ray-Astronomy Great-Observatory Mission · 2026-06-15
@@ -1100,3 +1100,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.1047](v1.49.1047/00-summary.md)** — Einstein Observatory (HEAO-2) Cosmic-Imaging Focusing X-Ray Telescope X-Ray-Astronomy Mission · 2026-06-16
 - **[v1.49.1048](v1.49.1048/00-summary.md)** — Uhuru (SAS-1) First-Dedicated All-Sky X-Ray Survey-and-Catalog X-Ray-Astronomy Mission · 2026-06-17
 - **[v1.49.1049](v1.49.1049/00-summary.md)** — HEAO-1 (High Energy Astronomy Observatory 1) Deep All-Sky X-Ray Survey-Sustain X-Ray-Astronomy Mission · 2026-06-17
+- **[v1.49.1050](v1.49.1050/00-summary.md)** — ROSAT (Röntgensatellit) Imaging All-Sky X-Ray Survey-Sustain X-Ray-Astronomy Mission · 2026-06-18
