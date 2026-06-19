@@ -1,13 +1,16 @@
 # Release History
 
-1100 milestones shipped across the v1.0 → v1.49.1057 arc. The table below lists every shipped release, newest first.
+1101 milestones shipped across the v1.0 → v1.49.1058 arc. The table below lists every shipped release, newest first.
 
 Each version links to a detailed release notes directory with full feature descriptions. `Commits` is the count of commits between this tag and the previous tag (from git; falls back to first-parent + date-bounded counting when long-divergent parallel branches inflate the default count). `Phases` and `Plans` come from structured GSD metadata in the release README. `Chapters` links each available chapter file: `[s]` 00-summary, `[r]` 03-retrospective, `[l]` 04-lessons, `[c]` 99-context. `Lessons` counts extracted lessons, formatted `applied/total` when any are known closed. `Quality` grades each README+chapters corpus against [`TEMPLATE.md`](TEMPLATE.md); [`v1.49.165`](release-notes/v1.49.165/) is the canonical gold standard.
 
-**Snapshot:** 1100 releases · 1099 with retrospectives · 829 with extracted lessons · quality A:724 B:98 C:62 D:12 F:204 (avg 83) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
+
+> **Drift detected:** 1 releases flag a retrospective but have no `03-retrospective.md` on disk; 1 flag lessons without `04-lessons.md`. Run `node tools/release-history/publish.mjs --execute` to sync, or investigate with `node tools/release-history/audit.mjs`.
+**Snapshot:** 1101 releases · 1100 with retrospectives · 830 with extracted lessons · quality A:725 B:98 C:62 D:12 F:204 (avg 83) · source of truth: Postgres `release_history` schema, regenerated via `tools/release-history/refresh.mjs`.
 
 | Version | Name | Shipped | Commits | Phases | Plans | Chapters | Lessons | Quality | Notes |
 |---------|------|---------|---------|--------|-------|----------|---------|---------|-------|
+| [v1.49.1058](release-notes/v1.49.1058) | Mars Exploration Rovers Spirit and Opportunity, Long-Traverse Field Geology and the First In-Situ Mineral Evidence of Ancient Water — Mars-Exploration Axis obs#4 Sustain | 2026-06-19 | — | 5 | — | — | 14 | A 99 |  |
 | [v1.49.1057](release-notes/v1.49.1057) | Mars Pathfinder and Sojourner, First Wheeled Rover to Operate on Another Planet — Mars-Exploration Axis obs#3 Sustain | 2026-06-19 | 3 | 5 | — | [s](release-notes/v1.49.1057/chapter/00-summary.md) [r](release-notes/v1.49.1057/chapter/03-retrospective.md) [l](release-notes/v1.49.1057/chapter/04-lessons.md) [c](release-notes/v1.49.1057/chapter/99-context.md) | 15 | A 99 |  |
 | [v1.49.1056](release-notes/v1.49.1056) | Mariner 9 First Spacecraft to Orbit Another Planet and First Global Map of Mars — Mars-Exploration Axis obs#2 Sustain | 2026-06-19 | 3 | 5 | — | [s](release-notes/v1.49.1056/chapter/00-summary.md) [r](release-notes/v1.49.1056/chapter/03-retrospective.md) [l](release-notes/v1.49.1056/chapter/04-lessons.md) [c](release-notes/v1.49.1056/chapter/99-context.md) | 1/15 | A 99 |  |
 | [v1.49.1055](release-notes/v1.49.1055) | Viking First Fully Successful Mars Landing and First In-Situ Search for Life — Mars-Exploration Axis Opens | 2026-06-19 | 3 | 5 | — | [s](release-notes/v1.49.1055/chapter/00-summary.md) [r](release-notes/v1.49.1055/chapter/03-retrospective.md) [l](release-notes/v1.49.1055/chapter/04-lessons.md) [c](release-notes/v1.49.1055/chapter/99-context.md) | 14 | A 99 |  |

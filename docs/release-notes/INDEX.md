@@ -2,11 +2,12 @@
 
 _Generated 2026-06-19 from `release_history.*`. Source of truth: Postgres._
 
-**1100 releases.** 1099 with retrospective. 829 with extracted lessons.
+**1101 releases.** 1100 with retrospective. 830 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
-| `v1.49.1057` | Mars Pathfinder and Sojourner, First Wheeled Rover to Operate on Another Planet — Mars-Exploration Axis obs#3 Sustain | 2026-06-19 | ✓ | 14 | [read](v1.49.1057/00-summary.md) |
+| `v1.49.1058` | Mars Exploration Rovers Spirit and Opportunity, Long-Traverse Field Geology and the First In-Situ Mineral Evidence of Ancient Water — Mars-Exploration Axis obs#4 Sustain | 2026-06-19 | ✓ | 14 | [read](v1.49.1058/00-summary.md) |
+| `v1.49.1057` | Mars Pathfinder and Sojourner, First Wheeled Rover to Operate on Another Planet — Mars-Exploration Axis obs#3 Sustain | 2026-06-19 | ✓ | 15 | [read](v1.49.1057/00-summary.md) |
 | `v1.49.1056` | Mariner 9 First Spacecraft to Orbit Another Planet and First Global Map of Mars — Mars-Exploration Axis obs#2 Sustain | 2026-06-19 | ✓ | 15 | [read](v1.49.1056/00-summary.md) |
 | `v1.49.1055` | Viking First Fully Successful Mars Landing and First In-Situ Search for Life — Mars-Exploration Axis Opens | 2026-06-19 | ✓ | 14 | [read](v1.49.1055/00-summary.md) |
 | `v1.49.1054` | Suzaku Lowest-Background Broadband-Sensitivity Focusing-Imaging-Sustain X-Ray-Astronomy Mission | 2026-06-19 | ✓ | 14 | [read](v1.49.1054/00-summary.md) |

@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.1057`.
+The story begins at `v1.0` and continues to `v1.49.1058`.
 
-**1100 chapters.** 1099 have retrospectives.
+**1101 chapters.** 1100 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -79,8 +79,8 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.17](v1.49.17/00-summary.md)** — The Space Between · 2026-03-04
 - **[v1.49.18](v1.49.18/00-summary.md)** — Space Between Observatory · 2026-03-06
 - **[v1.49.19](v1.49.19/00-summary.md)** — Gastown Chipset Integration · 2026-03-06
-- **[v1.49.20](v1.49.20/00-summary.md)** — Documentation Consolidation · 2026-03-06
 - **[v1.49.20.1](v1.49.20.1/00-summary.md)** — Documentation Reflections · 2026-03-06
+- **[v1.49.20](v1.49.20/00-summary.md)** — Documentation Consolidation · 2026-03-06
 - **[v1.49.21](v1.49.21/00-summary.md)** — Image to Mission Pipeline · 2026-03-07
 - **[v1.49.22](v1.49.22/00-summary.md)** — PNW Research Series · 2026-03-07
 - **[v1.49.23](v1.49.23/00-summary.md)** — Unison Language & Math Co-Processor Completion · 2026-03-08
@@ -1101,10 +1101,11 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.1048](v1.49.1048/00-summary.md)** — Uhuru (SAS-1) First-Dedicated All-Sky X-Ray Survey-and-Catalog X-Ray-Astronomy Mission · 2026-06-17
 - **[v1.49.1049](v1.49.1049/00-summary.md)** — HEAO-1 (High Energy Astronomy Observatory 1) Deep All-Sky X-Ray Survey-Sustain X-Ray-Astronomy Mission · 2026-06-17
 - **[v1.49.1050](v1.49.1050/00-summary.md)** — ROSAT (Röntgensatellit) Imaging All-Sky X-Ray Survey-Sustain X-Ray-Astronomy Mission · 2026-06-18
-- **[v1.49.1051](v1.49.1051/00-summary.md)** — eROSITA Extended ROentgen Survey CCD-Imaging All-Sky X-Ray Survey-Sustain X-Ray-Astronomy Mission · 2026-06-19
+- **[v1.49.1051](v1.49.1051/00-summary.md)** — eROSITA CCD Imaging All-Sky X-Ray Survey-Sustain X-Ray-Astronomy Mission · 2026-06-19
 - **[v1.49.1052](v1.49.1052/00-summary.md)** — XMM-Newton Largest-Effective-Area Focusing-Imaging-Sustain X-Ray-Astronomy Mission · 2026-06-19
-- **[v1.49.1053](v1.49.1053/00-summary.md)** — ASCA First X-Ray CCD Imaging-Spectroscopy X-Ray-Astronomy Mission · 2026-06-19
+- **[v1.49.1053](v1.49.1053/00-summary.md)** — ASCA CCD-Imaging-Spectroscopy Focusing-Imaging-Sustain X-Ray-Astronomy Mission · 2026-06-19
 - **[v1.49.1054](v1.49.1054/00-summary.md)** — Suzaku Lowest-Background Broadband-Sensitivity Focusing-Imaging-Sustain X-Ray-Astronomy Mission · 2026-06-19
-- **[v1.49.1055](v1.49.1055/00-summary.md)** — Viking First-Successful-Mars-Landing and First-In-Situ-Search-for-Life Mars-Exploration-Axis-Open Mission · 2026-06-19
-- **[v1.49.1056](v1.49.1056/00-summary.md)** — Mariner 9 First Spacecraft to Orbit Another Planet and First Global Map of Mars — Mars-Exploration obs#2 · 2026-06-19
-- **[v1.49.1057](v1.49.1057/00-summary.md)** — Mars Pathfinder First Rover to Operate on Another Planet and First Airbag-Cushioned Mars Landing — Mars-Exploration obs#3 Sustain · 2026-06-19
+- **[v1.49.1055](v1.49.1055/00-summary.md)** — Viking First Fully Successful Mars Landing and First In-Situ Search for Life — Mars-Exploration Axis Opens · 2026-06-19
+- **[v1.49.1056](v1.49.1056/00-summary.md)** — Mariner 9 First Spacecraft to Orbit Another Planet and First Global Map of Mars — Mars-Exploration Axis obs#2 Sustain · 2026-06-19
+- **[v1.49.1057](v1.49.1057/00-summary.md)** — Mars Pathfinder and Sojourner, First Wheeled Rover to Operate on Another Planet — Mars-Exploration Axis obs#3 Sustain · 2026-06-19
+- **[v1.49.1058](v1.49.1058/00-summary.md)** — Mars Exploration Rovers Spirit and Opportunity, Long-Traverse Field Geology and the First In-Situ Mineral Evidence of Ancient Water — Mars-Exploration Axis obs#4 Sustain · 2026-06-19
