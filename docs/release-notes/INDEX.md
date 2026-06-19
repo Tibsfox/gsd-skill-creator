@@ -2,11 +2,12 @@
 
 _Generated 2026-06-19 from `release_history.*`. Source of truth: Postgres._
 
-**1102 releases.** 1101 with retrospective. 831 with extracted lessons.
+**1103 releases.** 1102 with retrospective. 832 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
-| `v1.49.1059` | Mars Science Laboratory and the Rover Curiosity, the First Sky-Crane Landing and the First In-Situ Assessment of Ancient Habitability on Mars — Mars-Exploration Axis obs#5 Sustain | 2026-06-19 | ✓ | 14 | [read](v1.49.1059/00-summary.md) |
+| `v1.49.1060` | The Mars 2020 Mission and the Rover Perseverance, the First Collection and Caching of Mars Samples for Return, the First Powered Flight on Another Planet (Ingenuity), and the First In-Situ Resource Production (MOXIE) — Mars-Exploration Axis obs#6 Sustain | 2026-06-19 | ✓ | 14 | [read](v1.49.1060/00-summary.md) |
+| `v1.49.1059` | Mars Science Laboratory and the Rover Curiosity, the First Sky-Crane Landing and the First In-Situ Assessment of Ancient Habitability on Mars — Mars-Exploration Axis obs#5 Sustain | 2026-06-19 | ✓ | 15 | [read](v1.49.1059/00-summary.md) |
 | `v1.49.1058` | Mars Exploration Rovers Spirit and Opportunity, Long-Traverse Field Geology and the First In-Situ Mineral Evidence of Ancient Water — Mars-Exploration Axis obs#4 Sustain | 2026-06-19 | ✓ | 15 | [read](v1.49.1058/00-summary.md) |
 | `v1.49.1057` | Mars Pathfinder and Sojourner, First Wheeled Rover to Operate on Another Planet — Mars-Exploration Axis obs#3 Sustain | 2026-06-19 | ✓ | 15 | [read](v1.49.1057/00-summary.md) |
 | `v1.49.1056` | Mariner 9 First Spacecraft to Orbit Another Planet and First Global Map of Mars — Mars-Exploration Axis obs#2 Sustain | 2026-06-19 | ✓ | 15 | [read](v1.49.1056/00-summary.md) |
