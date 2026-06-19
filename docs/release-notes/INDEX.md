@@ -2,10 +2,11 @@
 
 _Generated 2026-06-19 from `release_history.*`. Source of truth: Postgres._
 
-**1098 releases.** 1097 with retrospective. 827 with extracted lessons.
+**1099 releases.** 1098 with retrospective. 828 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
+| `v1.49.1056` | Mariner 9 First Spacecraft to Orbit Another Planet and First Global Map of Mars — Mars-Exploration Axis obs#2 Sustain | 2026-06-19 | ✓ | 14 | [read](v1.49.1056/00-summary.md) |
 | `v1.49.1055` | Viking First Fully Successful Mars Landing and First In-Situ Search for Life — Mars-Exploration Axis Opens | 2026-06-19 | ✓ | 14 | [read](v1.49.1055/00-summary.md) |
 | `v1.49.1054` | Suzaku Lowest-Background Broadband-Sensitivity Focusing-Imaging-Sustain X-Ray-Astronomy Mission | 2026-06-19 | ✓ | 14 | [read](v1.49.1054/00-summary.md) |
 | `v1.49.1053` | ASCA CCD-Imaging-Spectroscopy Focusing-Imaging-Sustain X-Ray-Astronomy Mission | 2026-06-19 | ✓ | 14 | [read](v1.49.1053/00-summary.md) |
