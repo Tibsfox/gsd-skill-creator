@@ -2,11 +2,12 @@
 
 _Generated 2026-06-19 from `release_history.*`. Source of truth: Postgres._
 
-**1103 releases.** 1102 with retrospective. 832 with extracted lessons.
+**1104 releases.** 1103 with retrospective. 833 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
-| `v1.49.1060` | The Mars 2020 Mission and the Rover Perseverance, the First Collection and Caching of Mars Samples for Return, the First Powered Flight on Another Planet (Ingenuity), and the First In-Situ Resource Production (MOXIE) — Mars-Exploration Axis obs#6 Sustain | 2026-06-19 | ✓ | 14 | [read](v1.49.1060/00-summary.md) |
+| `v1.49.1061` | InSight, the First Mission to Study the Deep Interior of Mars, the First Seismometer to Record Marsquakes, the First Determination of a Planet's Deep Interior Structure Beyond Earth, and the First Interplanetary Launch from the US West Coast — Mars-Exploration Axis obs#7 Sustain | 2026-06-19 | ✓ | 14 | [read](v1.49.1061/00-summary.md) |
+| `v1.49.1060` | The Mars 2020 Mission and the Rover Perseverance, the First Collection and Caching of Mars Samples for Return, the First Powered Flight on Another Planet (Ingenuity), and the First In-Situ Resource Production (MOXIE) — Mars-Exploration Axis obs#6 Sustain | 2026-06-19 | ✓ | 15 | [read](v1.49.1060/00-summary.md) |
 | `v1.49.1059` | Mars Science Laboratory and the Rover Curiosity, the First Sky-Crane Landing and the First In-Situ Assessment of Ancient Habitability on Mars — Mars-Exploration Axis obs#5 Sustain | 2026-06-19 | ✓ | 15 | [read](v1.49.1059/00-summary.md) |
 | `v1.49.1058` | Mars Exploration Rovers Spirit and Opportunity, Long-Traverse Field Geology and the First In-Situ Mineral Evidence of Ancient Water — Mars-Exploration Axis obs#4 Sustain | 2026-06-19 | ✓ | 15 | [read](v1.49.1058/00-summary.md) |
 | `v1.49.1057` | Mars Pathfinder and Sojourner, First Wheeled Rover to Operate on Another Planet — Mars-Exploration Axis obs#3 Sustain | 2026-06-19 | ✓ | 15 | [read](v1.49.1057/00-summary.md) |

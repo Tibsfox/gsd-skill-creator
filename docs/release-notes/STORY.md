@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.1060`.
+The story begins at `v1.0` and continues to `v1.49.1061`.
 
-**1103 chapters.** 1102 have retrospectives.
+**1104 chapters.** 1103 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -1111,3 +1111,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.1058](v1.49.1058/00-summary.md)** — Mars Exploration Rovers Spirit and Opportunity, Long-Traverse Field Geology and the First In-Situ Mineral Evidence of Ancient Water — Mars-Exploration Axis obs#4 Sustain · 2026-06-19
 - **[v1.49.1059](v1.49.1059/00-summary.md)** — Mars Science Laboratory and the Rover Curiosity, the First Sky-Crane Landing and the First In-Situ Assessment of Ancient Habitability on Mars — Mars-Exploration Axis obs#5 Sustain · 2026-06-19
 - **[v1.49.1060](v1.49.1060/00-summary.md)** — The Mars 2020 Mission and the Rover Perseverance, the First Collection and Caching of Mars Samples for Return, the First Powered Flight on Another Planet (Ingenuity), and the First In-Situ Resource Production (MOXIE) — Mars-Exploration Axis obs#6 Sustain · 2026-06-19
+- **[v1.49.1061](v1.49.1061/00-summary.md)** — InSight, the First Mission to Study the Deep Interior of Mars, the First Seismometer to Record Marsquakes, the First Determination of a Planet's Deep Interior Structure Beyond Earth, and the First Interplanetary Launch from the US West Coast — Mars-Exploration Axis obs#7 Sustain · 2026-06-19
