@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.1055`.
+The story begins at `v1.0` and continues to `v1.49.1056`.
 
-**1098 chapters.** 1097 have retrospectives.
+**1099 chapters.** 1098 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -1106,3 +1106,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.1053](v1.49.1053/00-summary.md)** — ASCA First X-Ray CCD Imaging-Spectroscopy X-Ray-Astronomy Mission · 2026-06-19
 - **[v1.49.1054](v1.49.1054/00-summary.md)** — Suzaku Lowest-Background Broadband-Sensitivity Focusing-Imaging-Sustain X-Ray-Astronomy Mission · 2026-06-19
 - **[v1.49.1055](v1.49.1055/00-summary.md)** — Viking First-Successful-Mars-Landing and First-In-Situ-Search-for-Life Mars-Exploration-Axis-Open Mission · 2026-06-19
+- **[v1.49.1056](v1.49.1056/00-summary.md)** — Mariner 9 First Spacecraft to Orbit Another Planet and First Global Map of Mars — Mars-Exploration obs#2 · 2026-06-19
