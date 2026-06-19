@@ -139,7 +139,8 @@
     },
     "esbuild": "0.28.1",
     "vite": "^7.3.5",
-    "protobufjs": "^7.6.4"
+    "protobufjs": "^7.6.4",
+    "undici": "^7.28.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.59.1",
