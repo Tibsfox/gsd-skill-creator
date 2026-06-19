@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.1050`.
+The story begins at `v1.0` and continues to `v1.49.1051`.
 
-**1093 chapters.** 1092 have retrospectives.
+**1094 chapters.** 1093 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -1101,3 +1101,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.1048](v1.49.1048/00-summary.md)** — Uhuru (SAS-1) First-Dedicated All-Sky X-Ray Survey-and-Catalog X-Ray-Astronomy Mission · 2026-06-17
 - **[v1.49.1049](v1.49.1049/00-summary.md)** — HEAO-1 (High Energy Astronomy Observatory 1) Deep All-Sky X-Ray Survey-Sustain X-Ray-Astronomy Mission · 2026-06-17
 - **[v1.49.1050](v1.49.1050/00-summary.md)** — ROSAT (Röntgensatellit) Imaging All-Sky X-Ray Survey-Sustain X-Ray-Astronomy Mission · 2026-06-18
+- **[v1.49.1051](v1.49.1051/00-summary.md)** — eROSITA Extended ROentgen Survey CCD-Imaging All-Sky X-Ray Survey-Sustain X-Ray-Astronomy Mission · 2026-06-19
