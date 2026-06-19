@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.1052`.
+The story begins at `v1.0` and continues to `v1.49.1053`.
 
-**1095 chapters.** 1094 have retrospectives.
+**1096 chapters.** 1095 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -1103,3 +1103,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.1050](v1.49.1050/00-summary.md)** — ROSAT (Röntgensatellit) Imaging All-Sky X-Ray Survey-Sustain X-Ray-Astronomy Mission · 2026-06-18
 - **[v1.49.1051](v1.49.1051/00-summary.md)** — eROSITA Extended ROentgen Survey CCD-Imaging All-Sky X-Ray Survey-Sustain X-Ray-Astronomy Mission · 2026-06-19
 - **[v1.49.1052](v1.49.1052/00-summary.md)** — XMM-Newton Largest-Effective-Area Focusing-Imaging-Sustain X-Ray-Astronomy Mission · 2026-06-19
+- **[v1.49.1053](v1.49.1053/00-summary.md)** — ASCA First X-Ray CCD Imaging-Spectroscopy X-Ray-Astronomy Mission · 2026-06-19
