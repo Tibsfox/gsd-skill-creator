@@ -2,10 +2,11 @@
 
 _Generated 2026-06-19 from `release_history.*`. Source of truth: Postgres._
 
-**1094 releases.** 1093 with retrospective. 823 with extracted lessons.
+**1095 releases.** 1094 with retrospective. 824 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
+| `v1.49.1052` | XMM-Newton Largest-Effective-Area Focusing-Imaging-Sustain X-Ray-Astronomy Mission | 2026-06-19 | ✓ | 14 | [read](v1.49.1052/00-summary.md) |
 | `v1.49.1051` | eROSITA CCD Imaging All-Sky X-Ray Survey-Sustain X-Ray-Astronomy Mission | 2026-06-19 | ✓ | 14 | [read](v1.49.1051/00-summary.md) |
 | `v1.49.1050` | ROSAT (Röntgensatellit) Imaging All-Sky X-Ray Survey-Sustain X-Ray-Astronomy Mission | 2026-06-18 | ✓ | 14 | [read](v1.49.1050/00-summary.md) |
 | `v1.49.1049` | HEAO-1 (High Energy Astronomy Observatory 1) Deep All-Sky X-Ray Survey-Sustain X-Ray-Astronomy Mission | 2026-06-17 | ✓ | 12 | [read](v1.49.1049/00-summary.md) |
@@ -1027,8 +1028,8 @@ _Generated 2026-06-19 from `release_history.*`. Source of truth: Postgres._
 | `v1.49.23` | Unison Language & Math Co-Processor Completion | 2026-03-08 | ✓ | 23 | [read](v1.49.23/00-summary.md) |
 | `v1.49.22` | PNW Research Series | 2026-03-07 | ✓ | 24 | [read](v1.49.22/00-summary.md) |
 | `v1.49.21` | Image to Mission Pipeline | 2026-03-07 | ✓ | 22 | [read](v1.49.21/00-summary.md) |
-| `v1.49.20` | Documentation Consolidation | 2026-03-06 | ✓ | 13 | [read](v1.49.20/00-summary.md) |
 | `v1.49.20.1` | Documentation Reflections | 2026-03-06 | — | — | [read](v1.49.20.1/00-summary.md) |
+| `v1.49.20` | Documentation Consolidation | 2026-03-06 | ✓ | 13 | [read](v1.49.20/00-summary.md) |
 | `v1.49.19` | Gastown Chipset Integration | 2026-03-06 | ✓ | 19 | [read](v1.49.19/00-summary.md) |
 | `v1.49.18` | Space Between Observatory | 2026-03-06 | ✓ | 17 | [read](v1.49.18/00-summary.md) |
 | `v1.49.17` | The Space Between | 2026-03-04 | ✓ | 19 | [read](v1.49.17/00-summary.md) |
