@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.1068`.
+The story begins at `v1.0` and continues to `v1.49.1069`.
 
-**1111 chapters.** 1110 have retrospectives.
+**1112 chapters.** 1111 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -79,8 +79,8 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.17](v1.49.17/00-summary.md)** — The Space Between · 2026-03-04
 - **[v1.49.18](v1.49.18/00-summary.md)** — Space Between Observatory · 2026-03-06
 - **[v1.49.19](v1.49.19/00-summary.md)** — Gastown Chipset Integration · 2026-03-06
-- **[v1.49.20.1](v1.49.20.1/00-summary.md)** — Documentation Reflections · 2026-03-06
 - **[v1.49.20](v1.49.20/00-summary.md)** — Documentation Consolidation · 2026-03-06
+- **[v1.49.20.1](v1.49.20.1/00-summary.md)** — Documentation Reflections · 2026-03-06
 - **[v1.49.21](v1.49.21/00-summary.md)** — Image to Mission Pipeline · 2026-03-07
 - **[v1.49.22](v1.49.22/00-summary.md)** — PNW Research Series · 2026-03-07
 - **[v1.49.23](v1.49.23/00-summary.md)** — Unison Language & Math Co-Processor Completion · 2026-03-08
@@ -1119,3 +1119,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.1066](v1.49.1066/00-summary.md)** — Mars Reconnaissance Orbiter, the Highest-Resolution Imaging of Mars from Orbit, the First Detection of Recurring Slope Lineae, and the Highest Data Return of Any Mars Mission — Mars-Exploration Axis obs#12 Sustain · 2026-06-19
 - **[v1.49.1067](v1.49.1067/00-summary.md)** — Pioneer 10, the First Mission to the Outer Solar System, the First Spacecraft to Traverse the Asteroid Belt, the First Flyby of Jupiter, and the First Spacecraft Placed on a Solar-System Escape Trajectory — Outer-Planets-Exploration Axis OPENS at obs#1 (Rotation #37) · 2026-06-19
 - **[v1.49.1068](v1.49.1068/00-summary.md)** — Pioneer 11 (a.k.a. Pioneer Saturn), the First Spacecraft to Fly By Saturn, the Discovery of Saturn's F Ring, and the First Detection of Saturn's Magnetic Field and Magnetosphere — Outer-Planets-Exploration Axis SUSTAINS at obs#2 (Rotation #37, the First Consecutive Sustain) · 2026-06-19
+- **[v1.49.1069](v1.49.1069/00-summary.md)** — Voyager 1, the Detailed Grand Tour of the Outer Planets, the Discovery of Active Volcanism on Io, the Most Distant Human-Made Object, and the First Crossing of the Heliopause into Interstellar Space — Outer-Planets-Exploration Axis SUSTAINS at obs#3 (Rotation #37, the Second Consecutive Sustain) · 2026-06-20
