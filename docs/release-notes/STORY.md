@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.1069`.
+The story begins at `v1.0` and continues to `v1.49.1070`.
 
-**1112 chapters.** 1111 have retrospectives.
+**1113 chapters.** 1112 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -1120,3 +1120,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.1067](v1.49.1067/00-summary.md)** — Pioneer 10, the First Mission to the Outer Solar System, the First Spacecraft to Traverse the Asteroid Belt, the First Flyby of Jupiter, and the First Spacecraft Placed on a Solar-System Escape Trajectory — Outer-Planets-Exploration Axis OPENS at obs#1 (Rotation #37) · 2026-06-19
 - **[v1.49.1068](v1.49.1068/00-summary.md)** — Pioneer 11 (a.k.a. Pioneer Saturn), the First Spacecraft to Fly By Saturn, the Discovery of Saturn's F Ring, and the First Detection of Saturn's Magnetic Field and Magnetosphere — Outer-Planets-Exploration Axis SUSTAINS at obs#2 (Rotation #37, the First Consecutive Sustain) · 2026-06-19
 - **[v1.49.1069](v1.49.1069/00-summary.md)** — Voyager 1, the Detailed Grand Tour of the Outer Planets, the Discovery of Active Volcanism on Io, the Most Distant Human-Made Object, and the First Crossing of the Heliopause into Interstellar Space — Outer-Planets-Exploration Axis SUSTAINS at obs#3 (Rotation #37, the Second Consecutive Sustain) · 2026-06-20
+- **[v1.49.1070](v1.49.1070/00-summary.md)** — Voyager 2, the Grand Tour Across All Four Giant Planets, the First and Only Flyby of Uranus, and the First and Only Flyby of Neptune — Outer-Planets-Exploration Axis SUSTAINS at obs#4 (Rotation #37, the Third Consecutive Sustain) · 2026-06-20

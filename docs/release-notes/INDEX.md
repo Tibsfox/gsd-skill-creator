@@ -2,10 +2,11 @@
 
 _Generated 2026-06-20 from `release_history.*`. Source of truth: Postgres._
 
-**1112 releases.** 1111 with retrospective. 841 with extracted lessons.
+**1113 releases.** 1112 with retrospective. 842 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
+| `v1.49.1070` | Voyager 2, the Grand Tour Across All Four Giant Planets, the First and Only Flyby of Uranus, and the First and Only Flyby of Neptune — Outer-Planets-Exploration Axis SUSTAINS at obs#4 (Rotation #37, the Third Consecutive Sustain) | 2026-06-20 | ✓ | 15 | [read](v1.49.1070/00-summary.md) |
 | `v1.49.1069` | Voyager 1, the Detailed Grand Tour of the Outer Planets, the Discovery of Active Volcanism on Io, the Most Distant Human-Made Object, and the First Crossing of the Heliopause into Interstellar Space — Outer-Planets-Exploration Axis SUSTAINS at obs#3 (Rotation #37, the Second Consecutive Sustain) | 2026-06-20 | ✓ | 14 | [read](v1.49.1069/00-summary.md) |
 | `v1.49.1068` | Pioneer 11 (a.k.a. Pioneer Saturn), the First Spacecraft to Fly By Saturn, the Discovery of Saturn's F Ring, and the First Detection of Saturn's Magnetic Field and Magnetosphere — Outer-Planets-Exploration Axis SUSTAINS at obs#2 (Rotation #37, the First Consecutive Sustain) | 2026-06-19 | ✓ | 15 | [read](v1.49.1068/00-summary.md) |
 | `v1.49.1067` | Pioneer 10, the First Mission to the Outer Solar System, the First Spacecraft to Traverse the Asteroid Belt, the First Flyby of Jupiter, and the First Spacecraft Placed on a Solar-System Escape Trajectory — Outer-Planets-Exploration Axis OPENS at obs#1 (Rotation #37) | 2026-06-19 | ✓ | 14 | [read](v1.49.1067/00-summary.md) |
