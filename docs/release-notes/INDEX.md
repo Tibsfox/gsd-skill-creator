@@ -2,10 +2,11 @@
 
 _Generated 2026-06-20 from `release_history.*`. Source of truth: Postgres._
 
-**1110 releases.** 1109 with retrospective. 839 with extracted lessons.
+**1111 releases.** 1110 with retrospective. 840 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
+| `v1.49.1068` | Pioneer 11 (a.k.a. Pioneer Saturn), the First Spacecraft to Fly By Saturn, the Discovery of Saturn's F Ring, and the First Detection of Saturn's Magnetic Field and Magnetosphere — Outer-Planets-Exploration Axis SUSTAINS at obs#2 (Rotation #37, the First Consecutive Sustain) | 2026-06-19 | ✓ | 14 | [read](v1.49.1068/00-summary.md) |
 | `v1.49.1067` | Pioneer 10, the First Mission to the Outer Solar System, the First Spacecraft to Traverse the Asteroid Belt, the First Flyby of Jupiter, and the First Spacecraft Placed on a Solar-System Escape Trajectory — Outer-Planets-Exploration Axis OPENS at obs#1 (Rotation #37) | 2026-06-19 | ✓ | 14 | [read](v1.49.1067/00-summary.md) |
 | `v1.49.1066` | Mars Reconnaissance Orbiter, the Highest-Resolution Imaging of Mars from Orbit, the First Detection of Recurring Slope Lineae, and the Highest Data Return of Any Mars Mission — Mars-Exploration Axis obs#12 Sustain | 2026-06-19 | ✓ | 14 | [read](v1.49.1066/00-summary.md) |
 | `v1.49.1065` | Phoenix Mars Lander, the First Landing in the Martian Arctic, the First to Touch and Confirm Water Ice on Mars In Situ, and the First Detection of Perchlorate in Martian Soil — Mars-Exploration Axis obs#11 Sustain | 2026-06-19 | ✓ | 14 | [read](v1.49.1065/00-summary.md) |
