@@ -2,10 +2,11 @@
 
 _Generated 2026-06-20 from `release_history.*`. Source of truth: Postgres._
 
-**1106 releases.** 1105 with retrospective. 835 with extracted lessons.
+**1107 releases.** 1106 with retrospective. 836 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
+| `v1.49.1064` | 2001 Mars Odyssey, the Longest-Operating Spacecraft at Mars, the First Global Detection of Near-Surface Water Ice from Orbit, and the First Radiation-Environment Characterization en Route to and at Mars — Mars-Exploration Axis obs#10 Sustain | 2026-06-19 | ✓ | 14 | [read](v1.49.1064/00-summary.md) |
 | `v1.49.1063` | Mars Global Surveyor, the First Precise Global Topographic Map of Mars, the Discovery of an Ancient Crustal Magnetic Field and Extinct Dynamo, and the First Global Thermal-Infrared Mineral Survey of Mars — Mars-Exploration Axis obs#9 Sustain | 2026-06-19 | ✓ | 14 | [read](v1.49.1063/00-summary.md) |
 | `v1.49.1062` | MAVEN, the First Mission Dedicated to the Martian Upper Atmosphere and Ionosphere, the First Measurement of How Mars Loses Its Atmosphere to Space, and the First Detection of Persistent Metal-Ion Layers in a Planetary Ionosphere Beyond Earth — Mars-Exploration Axis obs#8 Sustain | 2026-06-19 | ✓ | 14 | [read](v1.49.1062/00-summary.md) |
 | `v1.49.1061` | InSight, the First Mission to Study the Deep Interior of Mars, the First Seismometer to Record Marsquakes, the First Determination of a Planet's Deep Interior Structure Beyond Earth, and the First Interplanetary Launch from the US West Coast — Mars-Exploration Axis obs#7 Sustain | 2026-06-19 | ✓ | 14 | [read](v1.49.1061/00-summary.md) |
@@ -1039,8 +1040,8 @@ _Generated 2026-06-20 from `release_history.*`. Source of truth: Postgres._
 | `v1.49.23` | Unison Language & Math Co-Processor Completion | 2026-03-08 | ✓ | 23 | [read](v1.49.23/00-summary.md) |
 | `v1.49.22` | PNW Research Series | 2026-03-07 | ✓ | 24 | [read](v1.49.22/00-summary.md) |
 | `v1.49.21` | Image to Mission Pipeline | 2026-03-07 | ✓ | 22 | [read](v1.49.21/00-summary.md) |
-| `v1.49.20.1` | Documentation Reflections | 2026-03-06 | — | — | [read](v1.49.20.1/00-summary.md) |
 | `v1.49.20` | Documentation Consolidation | 2026-03-06 | ✓ | 13 | [read](v1.49.20/00-summary.md) |
+| `v1.49.20.1` | Documentation Reflections | 2026-03-06 | — | — | [read](v1.49.20.1/00-summary.md) |
 | `v1.49.19` | Gastown Chipset Integration | 2026-03-06 | ✓ | 19 | [read](v1.49.19/00-summary.md) |
 | `v1.49.18` | Space Between Observatory | 2026-03-06 | ✓ | 17 | [read](v1.49.18/00-summary.md) |
 | `v1.49.17` | The Space Between | 2026-03-04 | ✓ | 19 | [read](v1.49.17/00-summary.md) |
