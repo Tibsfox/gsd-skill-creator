@@ -2,10 +2,11 @@
 
 _Generated 2026-06-20 from `release_history.*`. Source of truth: Postgres._
 
-**1115 releases.** 1114 with retrospective. 844 with extracted lessons.
+**1116 releases.** 1115 with retrospective. 845 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
+| `v1.49.1073` | Juno, the First Spacecraft to Orbit Jupiter in a Polar Orbit, the First to Map Jupiter's Deep Interior from Orbit, and the Farthest Solar-Powered Spacecraft Yet Flown — Outer-Planets-Exploration Axis SUSTAINS at obs#7 (Rotation #37, the Sixth Consecutive Sustain) | 2026-06-20 | ✓ | 15 | [read](v1.49.1073/00-summary.md) |
 | `v1.49.1072` | Cassini-Huygens, the First Spacecraft to Orbit Saturn, the First Landing in the Outer Solar System, and the First Detection of Active Plumes from Enceladus — Outer-Planets-Exploration Axis SUSTAINS at obs#6 (Rotation #37, the Fifth Consecutive Sustain) | 2026-06-20 | ✓ | 15 | [read](v1.49.1072/00-summary.md) |
 | `v1.49.1071` | Galileo, the First Spacecraft to Orbit Jupiter, the First Atmospheric Entry Probe at a Giant Planet, and the First Spacecraft Flyby of an Asteroid — Outer-Planets-Exploration Axis SUSTAINS at obs#5 (Rotation #37, the Fourth Consecutive Sustain) | 2026-06-20 | ✓ | 15 | [read](v1.49.1071/00-summary.md) |
 | `v1.49.1070` | Voyager 2, the Grand Tour Across All Four Giant Planets, the First and Only Flyby of Uranus, and the First and Only Flyby of Neptune — Outer-Planets-Exploration Axis SUSTAINS at obs#4 (Rotation #37, the Third Consecutive Sustain) | 2026-06-20 | ✓ | 15 | [read](v1.49.1070/00-summary.md) |

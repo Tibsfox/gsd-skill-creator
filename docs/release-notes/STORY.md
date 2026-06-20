@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.1072`.
+The story begins at `v1.0` and continues to `v1.49.1073`.
 
-**1115 chapters.** 1114 have retrospectives.
+**1116 chapters.** 1115 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -1123,3 +1123,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.1070](v1.49.1070/00-summary.md)** — Voyager 2, the Grand Tour Across All Four Giant Planets, the First and Only Flyby of Uranus, and the First and Only Flyby of Neptune — Outer-Planets-Exploration Axis SUSTAINS at obs#4 (Rotation #37, the Third Consecutive Sustain) · 2026-06-20
 - **[v1.49.1071](v1.49.1071/00-summary.md)** — Galileo, the First Spacecraft to Orbit Jupiter, the First Atmospheric Entry Probe at a Giant Planet, and the First Spacecraft Flyby of an Asteroid — Outer-Planets-Exploration Axis SUSTAINS at obs#5 (Rotation #37, the Fourth Consecutive Sustain) · 2026-06-20
 - **[v1.49.1072](v1.49.1072/00-summary.md)** — Cassini-Huygens, the First Spacecraft to Orbit Saturn, the First Landing in the Outer Solar System, and the First Detection of Active Plumes from Enceladus — Outer-Planets-Exploration Axis SUSTAINS at obs#6 (Rotation #37, the Fifth Consecutive Sustain) · 2026-06-20
+- **[v1.49.1073](v1.49.1073/00-summary.md)** — Juno, the First Spacecraft to Orbit Jupiter in a Polar Orbit, the First to Map Jupiter's Deep Interior from Orbit, and the Farthest Solar-Powered Spacecraft Yet Flown — Outer-Planets-Exploration Axis SUSTAINS at obs#7 (Rotation #37, the Sixth Consecutive Sustain) · 2026-06-20
