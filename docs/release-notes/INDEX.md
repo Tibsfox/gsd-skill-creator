@@ -2,10 +2,11 @@
 
 _Generated 2026-06-20 from `release_history.*`. Source of truth: Postgres._
 
-**1105 releases.** 1104 with retrospective. 834 with extracted lessons.
+**1106 releases.** 1105 with retrospective. 835 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
+| `v1.49.1063` | Mars Global Surveyor, the First Precise Global Topographic Map of Mars, the Discovery of an Ancient Crustal Magnetic Field and Extinct Dynamo, and the First Global Thermal-Infrared Mineral Survey of Mars — Mars-Exploration Axis obs#9 Sustain | 2026-06-19 | ✓ | 14 | [read](v1.49.1063/00-summary.md) |
 | `v1.49.1062` | MAVEN, the First Mission Dedicated to the Martian Upper Atmosphere and Ionosphere, the First Measurement of How Mars Loses Its Atmosphere to Space, and the First Detection of Persistent Metal-Ion Layers in a Planetary Ionosphere Beyond Earth — Mars-Exploration Axis obs#8 Sustain | 2026-06-19 | ✓ | 14 | [read](v1.49.1062/00-summary.md) |
 | `v1.49.1061` | InSight, the First Mission to Study the Deep Interior of Mars, the First Seismometer to Record Marsquakes, the First Determination of a Planet's Deep Interior Structure Beyond Earth, and the First Interplanetary Launch from the US West Coast — Mars-Exploration Axis obs#7 Sustain | 2026-06-19 | ✓ | 14 | [read](v1.49.1061/00-summary.md) |
 | `v1.49.1060` | The Mars 2020 Mission and the Rover Perseverance, the First Collection and Caching of Mars Samples for Return, the First Powered Flight on Another Planet (Ingenuity), and the First In-Situ Resource Production (MOXIE) — Mars-Exploration Axis obs#6 Sustain | 2026-06-19 | ✓ | 15 | [read](v1.49.1060/00-summary.md) |
