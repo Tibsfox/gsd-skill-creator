@@ -2,10 +2,11 @@
 
 _Generated 2026-06-20 from `release_history.*`. Source of truth: Postgres._
 
-**1108 releases.** 1107 with retrospective. 837 with extracted lessons.
+**1109 releases.** 1108 with retrospective. 838 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
+| `v1.49.1066` | Mars Reconnaissance Orbiter, the Highest-Resolution Imaging of Mars from Orbit, the First Detection of Recurring Slope Lineae, and the Highest Data Return of Any Mars Mission — Mars-Exploration Axis obs#12 Sustain | 2026-06-19 | ✓ | 14 | [read](v1.49.1066/00-summary.md) |
 | `v1.49.1065` | Phoenix Mars Lander, the First Landing in the Martian Arctic, the First to Touch and Confirm Water Ice on Mars In Situ, and the First Detection of Perchlorate in Martian Soil — Mars-Exploration Axis obs#11 Sustain | 2026-06-19 | ✓ | 14 | [read](v1.49.1065/00-summary.md) |
 | `v1.49.1064` | 2001 Mars Odyssey, the Longest-Operating Spacecraft at Mars, the First Global Detection of Near-Surface Water Ice from Orbit, and the First Radiation-Environment Characterization en Route to and at Mars — Mars-Exploration Axis obs#10 Sustain | 2026-06-19 | ✓ | 14 | [read](v1.49.1064/00-summary.md) |
 | `v1.49.1063` | Mars Global Surveyor, the First Precise Global Topographic Map of Mars, the Discovery of an Ancient Crustal Magnetic Field and Extinct Dynamo, and the First Global Thermal-Infrared Mineral Survey of Mars — Mars-Exploration Axis obs#9 Sustain | 2026-06-19 | ✓ | 14 | [read](v1.49.1063/00-summary.md) |

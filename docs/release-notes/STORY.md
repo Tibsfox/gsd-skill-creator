@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.1065`.
+The story begins at `v1.0` and continues to `v1.49.1066`.
 
-**1108 chapters.** 1107 have retrospectives.
+**1109 chapters.** 1108 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -1116,3 +1116,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.1063](v1.49.1063/00-summary.md)** — Mars Global Surveyor, the First Precise Global Topographic Map of Mars, the Discovery of an Ancient Crustal Magnetic Field and Extinct Dynamo, and the First Global Thermal-Infrared Mineral Survey of Mars — Mars-Exploration Axis obs#9 Sustain · 2026-06-19
 - **[v1.49.1064](v1.49.1064/00-summary.md)** — 2001 Mars Odyssey, the Longest-Operating Spacecraft at Mars, the First Global Detection of Near-Surface Water Ice from Orbit, and the First Radiation-Environment Characterization en Route to and at Mars — Mars-Exploration Axis obs#10 Sustain · 2026-06-19
 - **[v1.49.1065](v1.49.1065/00-summary.md)** — Phoenix Mars Lander, the First Landing in the Martian Arctic, the First to Touch and Confirm Water Ice on Mars In Situ, and the First Detection of Perchlorate in Martian Soil — Mars-Exploration Axis obs#11 Sustain · 2026-06-19
+- **[v1.49.1066](v1.49.1066/00-summary.md)** — Mars Reconnaissance Orbiter, the Highest-Resolution Imaging of Mars from Orbit, the First Detection of Recurring Slope Lineae, and the Highest Data Return of Any Mars Mission — Mars-Exploration Axis obs#12 Sustain · 2026-06-19
