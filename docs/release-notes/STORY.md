@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.1066`.
+The story begins at `v1.0` and continues to `v1.49.1067`.
 
-**1109 chapters.** 1108 have retrospectives.
+**1110 chapters.** 1109 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -79,8 +79,8 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.17](v1.49.17/00-summary.md)** — The Space Between · 2026-03-04
 - **[v1.49.18](v1.49.18/00-summary.md)** — Space Between Observatory · 2026-03-06
 - **[v1.49.19](v1.49.19/00-summary.md)** — Gastown Chipset Integration · 2026-03-06
-- **[v1.49.20](v1.49.20/00-summary.md)** — Documentation Consolidation · 2026-03-06
 - **[v1.49.20.1](v1.49.20.1/00-summary.md)** — Documentation Reflections · 2026-03-06
+- **[v1.49.20](v1.49.20/00-summary.md)** — Documentation Consolidation · 2026-03-06
 - **[v1.49.21](v1.49.21/00-summary.md)** — Image to Mission Pipeline · 2026-03-07
 - **[v1.49.22](v1.49.22/00-summary.md)** — PNW Research Series · 2026-03-07
 - **[v1.49.23](v1.49.23/00-summary.md)** — Unison Language & Math Co-Processor Completion · 2026-03-08
@@ -1117,3 +1117,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.1064](v1.49.1064/00-summary.md)** — 2001 Mars Odyssey, the Longest-Operating Spacecraft at Mars, the First Global Detection of Near-Surface Water Ice from Orbit, and the First Radiation-Environment Characterization en Route to and at Mars — Mars-Exploration Axis obs#10 Sustain · 2026-06-19
 - **[v1.49.1065](v1.49.1065/00-summary.md)** — Phoenix Mars Lander, the First Landing in the Martian Arctic, the First to Touch and Confirm Water Ice on Mars In Situ, and the First Detection of Perchlorate in Martian Soil — Mars-Exploration Axis obs#11 Sustain · 2026-06-19
 - **[v1.49.1066](v1.49.1066/00-summary.md)** — Mars Reconnaissance Orbiter, the Highest-Resolution Imaging of Mars from Orbit, the First Detection of Recurring Slope Lineae, and the Highest Data Return of Any Mars Mission — Mars-Exploration Axis obs#12 Sustain · 2026-06-19
+- **[v1.49.1067](v1.49.1067/00-summary.md)** — Pioneer 10, the First Mission to the Outer Solar System, the First Spacecraft to Traverse the Asteroid Belt, the First Flyby of Jupiter, and the First Spacecraft Placed on a Solar-System Escape Trajectory — Outer-Planets-Exploration Axis OPENS at obs#1 (Rotation #37) · 2026-06-19
