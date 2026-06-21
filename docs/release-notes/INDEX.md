@@ -2,10 +2,11 @@
 
 _Generated 2026-06-21 from `release_history.*`. Source of truth: Postgres._
 
-**1127 releases.** 1126 with retrospective. 856 with extracted lessons.
+**1128 releases.** 1127 with retrospective. 857 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
+| `v1.49.1085` | — | 2026-06-21 | ✓ | 16 | [read](v1.49.1085/00-summary.md) |
 | `v1.49.1084` | Ulysses, the Joint ESA/NASA Mission and the First Spacecraft to Fly over the Sun's Poles, Built by ESA (Prime Contractor Dornier) with NASA Providing the Launch, the Radioisotope-Thermoelectric-Generator Power, Deep Space Network Tracking, and about Half the Science Instruments, Launched 6 October 1990 on Space Shuttle Discovery (STS-41) and Flung Steeply out of the Ecliptic Plane by an 8 February 1992 Jupiter Gravity Assist into a High-Inclination Polar Solar Orbit, Making the First In-Situ Survey of the Heliosphere at All Solar Latitudes — Heliophysics-Exploration Axis SUSTAINS at obs#2 (Rotation #39), the Catalog Continues from the Sun's Equator to the Sun's Poles | 2026-06-21 | ✓ | 16 | [read](v1.49.1084/00-summary.md) |
 | `v1.49.1083` | — | 2026-06-21 | ✓ | 16 | [read](v1.49.1083/00-summary.md) |
 | `v1.49.1082` | — | 2026-06-21 | ✓ | 16 | [read](v1.49.1082/00-summary.md) |
