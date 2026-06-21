@@ -2,10 +2,11 @@
 
 _Generated 2026-06-21 from `release_history.*`. Source of truth: Postgres._
 
-**1126 releases.** 1125 with retrospective. 855 with extracted lessons.
+**1127 releases.** 1126 with retrospective. 856 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
+| `v1.49.1084` | Ulysses, the Joint ESA/NASA Mission and the First Spacecraft to Fly over the Sun's Poles, Built by ESA (Prime Contractor Dornier) with NASA Providing the Launch, the Radioisotope-Thermoelectric-Generator Power, Deep Space Network Tracking, and about Half the Science Instruments, Launched 6 October 1990 on Space Shuttle Discovery (STS-41) and Flung Steeply out of the Ecliptic Plane by an 8 February 1992 Jupiter Gravity Assist into a High-Inclination Polar Solar Orbit, Making the First In-Situ Survey of the Heliosphere at All Solar Latitudes — Heliophysics-Exploration Axis SUSTAINS at obs#2 (Rotation #39), the Catalog Continues from the Sun's Equator to the Sun's Poles | 2026-06-21 | ✓ | 16 | [read](v1.49.1084/00-summary.md) |
 | `v1.49.1083` | — | 2026-06-21 | ✓ | 16 | [read](v1.49.1083/00-summary.md) |
 | `v1.49.1082` | — | 2026-06-21 | ✓ | 16 | [read](v1.49.1082/00-summary.md) |
 | `v1.49.1081` | The James Webb Space Telescope (JWST), the Largest and Most Powerful Space Telescope Ever Flown and Spitzer's Infrared Successor, a NASA + ESA + CSA Partnership Operated by STScI in Baltimore, Whose 6.5 m Segmented Gold Mirror Took the Deepest Infrared View of the Earliest Galaxies and Made the First Definitive Detection of Carbon Dioxide in an Exoplanet Atmosphere — Space-Telescope-Exploration Axis SUSTAINS at obs#7 (Rotation #38), Reaching the Next-Generation Flagship Era | 2026-06-21 | ✓ | 16 | [read](v1.49.1081/00-summary.md) |

@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.1083`.
+The story begins at `v1.0` and continues to `v1.49.1084`.
 
-**1126 chapters.** 1125 have retrospectives.
+**1127 chapters.** 1126 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -1134,3 +1134,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.1081](v1.49.1081/00-summary.md)** — The James Webb Space Telescope (JWST), the Largest and Most Powerful Space Telescope Ever Flown and Spitzer's Infrared Successor, a NASA + ESA + CSA Partnership Operated by STScI in Baltimore, Whose 6.5 m Segmented Gold Mirror Took the Deepest Infrared View of the Earliest Galaxies and Made the First Definitive Detection of Carbon Dioxide in an Exoplanet Atmosphere — Space-Telescope-Exploration Axis SUSTAINS at obs#7 (Rotation #38), Reaching the Next-Generation Flagship Era · 2026-06-21
 - **[v1.49.1082](v1.49.1082/00-summary.md)** — _(unnamed)_ · 2026-06-21
 - **[v1.49.1083](v1.49.1083/00-summary.md)** — _(unnamed)_ · 2026-06-21
+- **[v1.49.1084](v1.49.1084/00-summary.md)** — Ulysses, the Joint ESA/NASA Mission and the First Spacecraft to Fly over the Sun's Poles, Built by ESA (Prime Contractor Dornier) with NASA Providing the Launch, the Radioisotope-Thermoelectric-Generator Power, Deep Space Network Tracking, and about Half the Science Instruments, Launched 6 October 1990 on Space Shuttle Discovery (STS-41) and Flung Steeply out of the Ecliptic Plane by an 8 February 1992 Jupiter Gravity Assist into a High-Inclination Polar Solar Orbit, Making the First In-Situ Survey of the Heliosphere at All Solar Latitudes — Heliophysics-Exploration Axis SUSTAINS at obs#2 (Rotation #39), the Catalog Continues from the Sun's Equator to the Sun's Poles · 2026-06-21
