@@ -1,0 +1,67 @@
+# Lessons — v1.49.1080
+
+16 lessons extracted. Classification source: ⚙ rule-based · 🤖 LLM tiebreaker (needs review) · 👤 human.
+
+1. **A sustain KEEPS the shared domain vocabulary and replaces only the predecessor-specific content.**
+   Unlike a rotation, this is a SUSTAIN (mode=continuation, clone 1.262): TESS and the Kepler predecessor share the space-telescope vocabulary, so the rewrite KEPT the shared content words — the orbital observatory, the optics and cameras, the deep observation, the astrophysics, the survey, and the transit method — and replaced only the Kepler-specific facts: the single staring field in Cygnus–Lyra; the 0.95 m photometer; the ~150,000-star single field; NASA Ames; being the first NASA mission for Earth-size habitable-zone planets; the most-prolific-discoverer and K2 solar-pressure anchors; the Delta II launch; the Earth-trailing heliocentric orbit; and the Prickly Sculpin + Oregon Sunshine pairing all went OUT, replaced by TESS: the all-sky exoplanet-transit survey managed by Goddard with…
+   _⚙ Status: `investigate` · lesson #12594_
+
+2. **A sustain ADVANCES the axis-continuation counter (obs#5 → obs#6) while the substrate-axis-rotation discipline HOLDS.**
+   TESS SUSTAINS the SPACE-TELESCOPE-EXPLORATION axis at obs#6, so the SPACE-TELESCOPE-EXPLORATION-AXIS-INTRA-CONTINUATION counter advances obs#5 → obs#6; but because no NEW substrate-axis rotation is observed (the axis opened at 1.258 via rotation #38), the SUBSTRATE-AXIS-ROTATION-DISCIPLINE HOLDS at obs#102. The only backward reference is the single deliberate nav-prev to the 1.262 Kepler predecessor, noting that the exoplanet-survey era continues past the four (now-complete) Great Observatories.
+   _⚙ Status: `investigate` · lesson #12595_
+
+3. **TESS is managed by NASA Goddard with science led by MIT (PI George Ricker) and a spacecraft by Orbital ATK / Northrop Grumman — NOT Ames, JPL/IPAC, Marshall/CXC-SAO, or STScI.**
+   It is a NASA mission managed by NASA's Goddard Space Flight Center, with science led by MIT and the MIT Kavli Institute and the spacecraft built by Orbital ATK / Northrop Grumman — a different management center from Kepler's Ames, Spitzer's JPL/IPAC, Chandra's Marshall/CXC-SAO, and Hubble's STScI; the catalog states this precisely throughout, as a correct intra-axis distinction (each space telescope has a different management center; NASA Ames, the CfA, MIT Lincoln Laboratory, and STScI are partners, not the lead).
+   _⚙ Status: `investigate` · lesson #12596_
+
+4. **★ TESS is NOT one of NASA's four Great Observatories.**
+   The four Great Observatories (Hubble optical/UV, Compton gamma, Chandra X-ray, Spitzer infrared) are complete at obs#1–4; TESS is a separate Astrophysics Explorer survey mission, so the catalog stamps no Great-Observatory ordinal anchor and re-stamps none of the four Great Observatories' anchors. The axis is in its exoplanet-survey era (Kepler obs#5 → TESS obs#6).
+   _⚙ Status: `investigate` · lesson #12597_
+
+5. **TESS launched 18 April 2018 on a SpaceX Falcon 9 from Cape Canaveral into a novel 2:1 lunar-resonant high-Earth orbit.**
+   It launched on a SpaceX Falcon 9 from Cape Canaveral into a novel high-Earth elliptical orbit in 2:1 resonance with the Moon (the "P/2" orbit, ~13.7-day period, perigee ~108,000 km / apogee ~375,000 km), reached via a lunar gravity assist; the catalog states this precisely, including that the orbit is reached by a lunar gravity assist and gives a stable, low-radiation, thermally quiet platform for long unbroken viewing.
+   _⚙ Status: `investigate` · lesson #12598_
+
+6. **The first-mission achievement is the first nearly-all-sky space transit survey for exoplanets, not "the first transit survey" or "the first exoplanet detection.**
+   TESS is the first space mission to survey nearly the whole sky for transiting exoplanets; the catalog scopes this strictly and explicitly does NOT call it the first transit survey (the French/ESA CoRoT, 2006, and Kepler, 2009, came earlier) or the first exoplanet detection (51 Pegasi b, 1995). Both distinctions are held load-bearing, and the ~85% figure is tied to the prime mission.
+   _⚙ Status: `investigate` · lesson #12599_
+
+7. **The bright-target achievement is the survey of the nearest, brightest stars for transiting planets.**
+   TESS is designed to find transiting planets around the nearest and brightest stars (~200,000 bright, nearby stars), unlike Kepler's single distant field, so the planets it finds are the best targets for radial-velocity masses and atmospheric characterization; the catalog scopes this strictly to the nearest-brightest-stars focus, kept distinct from the all-sky-coverage first.
+   _⚙ Status: `investigate` · lesson #12600_
+
+8. **The orbit achievement is a novel 2:1 lunar-resonant orbit, not a universal "first.**
+   TESS flies in a novel high-Earth elliptical orbit in 2:1 resonance with the Moon (the "P/2" orbit, ~13.7-day period); the catalog scopes this strictly as a novel orbit and does NOT call it the first spacecraft to use a lunar-resonant orbit, since NASA's IBEX used a similar lunar-resonant (P/3) orbit earlier.
+   _⚙ Status: `investigate` · lesson #12601_
+
+9. **0 re-stamps — a sustain continues the exoplanet-survey era and re-stamps none of the predecessors' firsts.**
+   TESS does not re-stamp any of Hubble's three obs#1 anchors, any of Chandra's three obs#2 anchors, any of Spitzer's four obs#3 anchors, any of Compton's three obs#4 anchors, or any of Kepler's three obs#5 anchors; all stay capped with their missions, and it re-stamps no outer-planets anchor. In particular, TESS stamps no Great-Observatory ordinal. TESS's firsts are the first nearly-all-sky space transit survey for exoplanets, the nearest-brightest-stars focus, and the novel 2:1 lunar-resonant orbit, yielding 0 re-stamps.
+   _⚙ Status: `investigate` · lesson #12602_
+
+10. **★ The mission is framed present-tense per verified status.**
+   TESS is STILL OPERATING in 2026 — its prime mission completed in 2020 and it is now in an extended mission, with hundreds of confirmed planets and thousands of candidates — so the catalog frames the mission in the present tense throughout (TESS observes, surveys, is operating), flipping every status and activity verb from the past-tense form carried by the clone-source Kepler page (which ended in 2018) and breaking the recent Spitzer/Compton/Kepler past-tense streak per the verified still-operating state.
+   _⚙ Status: `investigate` · lesson #12603_
+
+11. **A single nav-prev lineage note is the only backward reference for the sustain.**
+   Because TESS sustains the axis Hubble opened and Chandra, Spitzer, Compton, and Kepler continued, the only backward reference is the single deliberate nav-prev to v1.262 Kepler (obs#5, the exoplanet-survey telescope whose single-field survey TESS extends to the whole sky), noting that the exoplanet-survey era continues. The landmark science (the TOI catalog, the bright-star planet census) is described but not stamped as TESS-only anchors beyond the five canonical ones.
+   _⚙ Status: `investigate` · lesson #12604_
+
+12. **Positive framing held on the topic.**
+   The 2018 Falcon 9 launch and the climb, via a lunar gravity assist, into the lunar-resonant orbit, the four wide cameras and the sector sweep, the bright-star transit, and the long ongoing watch were framed throughout as the active, productive work of a successful exoplanet-survey telescope, with the achievements reported precisely and the status framed plainly in the present tense per its verified still-operating state.
+   _⚙ Status: `investigate` · lesson #12605_
+
+13. **The shader renders procedural geometry rather than archived TESS imagery.**
+   The TESS shader uses analytic curves and procedural noise rather than loading actual mission data or TESS images. A future revision could render real TESS data — an actual TESS transit light curve, a full-frame-image sector map, or the TOI catalog distribution (publicly available from the MAST TESS archive) — for a higher-fidelity view.
+   _⚙ Status: `investigate` · lesson #12606_
+
+14. **The TESS diorama is a forthcoming artifact.**
+   The 3D-printable diorama STL files are referenced as forthcoming rather than provided; a future ship could include the actual STL geometry of the TESS spacecraft with its four wide-field cameras, the sunshade, the spacecraft bus, and the solar panels.
+   _⚙ Status: `investigate` · lesson #12607_
+
+15. **The launch, sector-sweep, and transit modes are depicted rather than driven by real data.**
+   The launch-and-climb, the four-wide-eyes sector-sweep, and the bright-star transit modes are depicted but not rendered from archived Falcon 9 launch imagery, the real sector map, or actual TESS light-curve data; a future ship could drive the modes from the actual data sets for a quantitatively faithful reading.
+   _⚙ Status: `investigate` · lesson #12608_
+
+16. **The follow-up mode is depicted rather than computed.**
+   The long-watch-and-follow-up mode is depicted rather than rendered from the real TOI-to-confirmed-planet pipeline and the published radial-velocity and JWST follow-up record; a future ship could drive a follow-up sub-mode from the actual catalog statistics and the reconstructed follow-up sequence for a quantitatively faithful view.
+   _⚙ Status: `investigate` · lesson #12609_
