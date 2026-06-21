@@ -2,10 +2,11 @@
 
 _Generated 2026-06-21 from `release_history.*`. Source of truth: Postgres._
 
-**1128 releases.** 1127 with retrospective. 857 with extracted lessons.
+**1129 releases.** 1128 with retrospective. 858 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
+| `v1.49.1086` | Genesis, NASA's Discovery-Class Solar-Wind Sample-Return Mission, the First Mission Dedicated to Capturing Particles of the Solar Wind in Deep Space and Returning Them to Earth — Spacecraft Built by Lockheed Martin Astronautics, Managed by NASA's Jet Propulsion Laboratory with Principal Investigator Donald Burnett of Caltech, Launched 8 August 2001 on a Delta II 7326 from Cape Canaveral SLC-17A and Stationed in a Halo Orbit about the Sun-Earth L1 Point Where It Opened Ultra-Pure Collector Arrays to Embed Solar-Wind Ions for about 2.3 Years (3 December 2001 – 1 April 2004), with Separate Arrays for the Fast, Slow, and Coronal-Mass-Ejection Regimes — Its Sample-Return Capsule Recovered over the Utah Test and Training Range on 8 September 2004, and the Returned Collectors Read in the Laboratory to Reveal the Sun's Oxygen and Nitrogen Isotopic Composition and the First Sample Return from beyond the Moon — Heliophysics-Exploration Axis SUSTAINS at obs#4 (Rotation #39), the Catalog Continues from a View of the Sun in Depth to the Sun's Own Material Gathered and Brought Home | 2026-06-21 | ✓ | 16 | [read](v1.49.1086/00-summary.md) |
 | `v1.49.1085` | — | 2026-06-21 | ✓ | 16 | [read](v1.49.1085/00-summary.md) |
 | `v1.49.1084` | Ulysses, the Joint ESA/NASA Mission and the First Spacecraft to Fly over the Sun's Poles, Built by ESA (Prime Contractor Dornier) with NASA Providing the Launch, the Radioisotope-Thermoelectric-Generator Power, Deep Space Network Tracking, and about Half the Science Instruments, Launched 6 October 1990 on Space Shuttle Discovery (STS-41) and Flung Steeply out of the Ecliptic Plane by an 8 February 1992 Jupiter Gravity Assist into a High-Inclination Polar Solar Orbit, Making the First In-Situ Survey of the Heliosphere at All Solar Latitudes — Heliophysics-Exploration Axis SUSTAINS at obs#2 (Rotation #39), the Catalog Continues from the Sun's Equator to the Sun's Poles | 2026-06-21 | ✓ | 16 | [read](v1.49.1084/00-summary.md) |
 | `v1.49.1083` | — | 2026-06-21 | ✓ | 16 | [read](v1.49.1083/00-summary.md) |
@@ -1061,8 +1062,8 @@ _Generated 2026-06-21 from `release_history.*`. Source of truth: Postgres._
 | `v1.49.23` | Unison Language & Math Co-Processor Completion | 2026-03-08 | ✓ | 23 | [read](v1.49.23/00-summary.md) |
 | `v1.49.22` | PNW Research Series | 2026-03-07 | ✓ | 24 | [read](v1.49.22/00-summary.md) |
 | `v1.49.21` | Image to Mission Pipeline | 2026-03-07 | ✓ | 22 | [read](v1.49.21/00-summary.md) |
-| `v1.49.20.1` | Documentation Reflections | 2026-03-06 | — | — | [read](v1.49.20.1/00-summary.md) |
 | `v1.49.20` | Documentation Consolidation | 2026-03-06 | ✓ | 13 | [read](v1.49.20/00-summary.md) |
+| `v1.49.20.1` | Documentation Reflections | 2026-03-06 | — | — | [read](v1.49.20.1/00-summary.md) |
 | `v1.49.19` | Gastown Chipset Integration | 2026-03-06 | ✓ | 19 | [read](v1.49.19/00-summary.md) |
 | `v1.49.18` | Space Between Observatory | 2026-03-06 | ✓ | 17 | [read](v1.49.18/00-summary.md) |
 | `v1.49.17` | The Space Between | 2026-03-04 | ✓ | 19 | [read](v1.49.17/00-summary.md) |
