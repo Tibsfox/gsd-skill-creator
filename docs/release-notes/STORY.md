@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.1080`.
+The story begins at `v1.0` and continues to `v1.49.1081`.
 
-**1123 chapters.** 1122 have retrospectives.
+**1124 chapters.** 1123 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -79,8 +79,8 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.17](v1.49.17/00-summary.md)** — The Space Between · 2026-03-04
 - **[v1.49.18](v1.49.18/00-summary.md)** — Space Between Observatory · 2026-03-06
 - **[v1.49.19](v1.49.19/00-summary.md)** — Gastown Chipset Integration · 2026-03-06
-- **[v1.49.20.1](v1.49.20.1/00-summary.md)** — Documentation Reflections · 2026-03-06
 - **[v1.49.20](v1.49.20/00-summary.md)** — Documentation Consolidation · 2026-03-06
+- **[v1.49.20.1](v1.49.20.1/00-summary.md)** — Documentation Reflections · 2026-03-06
 - **[v1.49.21](v1.49.21/00-summary.md)** — Image to Mission Pipeline · 2026-03-07
 - **[v1.49.22](v1.49.22/00-summary.md)** — PNW Research Series · 2026-03-07
 - **[v1.49.23](v1.49.23/00-summary.md)** — Unison Language & Math Co-Processor Completion · 2026-03-08
@@ -1131,3 +1131,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.1078](v1.49.1078/00-summary.md)** — The Compton Gamma Ray Observatory, NASA's Flagship Gamma-Ray Observatory, the Gamma-Ray Member of NASA's Four Great Observatories and the Second of Them to Launch, the First All-Sky Survey Showing Gamma-Ray Bursts Are Isotropic, and the First Complete All-Sky Map in High-Energy Gamma Rays — Space-Telescope-Exploration Axis SUSTAINS at obs#4 (Rotation #38), Completing the Four Great Observatories · 2026-06-20
 - **[v1.49.1079](v1.49.1079/00-summary.md)** — The Kepler Space Telescope, NASA's Dedicated Exoplanet-Survey Space Telescope, the First NASA Mission Designed to Find Earth-Size Planets in the Habitable Zone of Sun-Like Stars by the Transit Method, the Most Prolific Exoplanet Discoverer of Its Era, and the K2 Solar-Pressure-Pointing Recovery — Space-Telescope-Exploration Axis SUSTAINS at obs#5 (Rotation #38), Turning from the Four Great Observatories to the Exoplanet-Survey Telescopes · 2026-06-20
 - **[v1.49.1080](v1.49.1080/00-summary.md)** — TESS, the Transiting Exoplanet Survey Satellite, NASA's All-Sky Exoplanet-Transit Survey and Kepler's Successor, the First Space Mission to Survey Nearly the Whole Sky for Transiting Exoplanets, Designed to Find Transiting Planets Around the Nearest, Brightest Stars from a Novel 2:1 Lunar-Resonant Orbit — Space-Telescope-Exploration Axis SUSTAINS at obs#6 (Rotation #38), Continuing the Exoplanet-Survey Era · 2026-06-20
+- **[v1.49.1081](v1.49.1081/00-summary.md)** — The James Webb Space Telescope (JWST), the Largest and Most Powerful Space Telescope Ever Flown and Spitzer's Infrared Successor, a NASA + ESA + CSA Partnership Operated by STScI in Baltimore, Whose 6.5 m Segmented Gold Mirror Took the Deepest Infrared View of the Earliest Galaxies and Made the First Definitive Detection of Carbon Dioxide in an Exoplanet Atmosphere — Space-Telescope-Exploration Axis SUSTAINS at obs#7 (Rotation #38), Reaching the Next-Generation Flagship Era · 2026-06-21

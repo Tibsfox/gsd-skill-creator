@@ -2,10 +2,11 @@
 
 _Generated 2026-06-21 from `release_history.*`. Source of truth: Postgres._
 
-**1123 releases.** 1122 with retrospective. 852 with extracted lessons.
+**1124 releases.** 1123 with retrospective. 853 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
+| `v1.49.1081` | The James Webb Space Telescope (JWST), the Largest and Most Powerful Space Telescope Ever Flown and Spitzer's Infrared Successor, a NASA + ESA + CSA Partnership Operated by STScI in Baltimore, Whose 6.5 m Segmented Gold Mirror Took the Deepest Infrared View of the Earliest Galaxies and Made the First Definitive Detection of Carbon Dioxide in an Exoplanet Atmosphere — Space-Telescope-Exploration Axis SUSTAINS at obs#7 (Rotation #38), Reaching the Next-Generation Flagship Era | 2026-06-21 | ✓ | 16 | [read](v1.49.1081/00-summary.md) |
 | `v1.49.1080` | TESS, the Transiting Exoplanet Survey Satellite, NASA's All-Sky Exoplanet-Transit Survey and Kepler's Successor, the First Space Mission to Survey Nearly the Whole Sky for Transiting Exoplanets, Designed to Find Transiting Planets Around the Nearest, Brightest Stars from a Novel 2:1 Lunar-Resonant Orbit — Space-Telescope-Exploration Axis SUSTAINS at obs#6 (Rotation #38), Continuing the Exoplanet-Survey Era | 2026-06-20 | ✓ | 16 | [read](v1.49.1080/00-summary.md) |
 | `v1.49.1079` | The Kepler Space Telescope, NASA's Dedicated Exoplanet-Survey Space Telescope, the First NASA Mission Designed to Find Earth-Size Planets in the Habitable Zone of Sun-Like Stars by the Transit Method, the Most Prolific Exoplanet Discoverer of Its Era, and the K2 Solar-Pressure-Pointing Recovery — Space-Telescope-Exploration Axis SUSTAINS at obs#5 (Rotation #38), Turning from the Four Great Observatories to the Exoplanet-Survey Telescopes | 2026-06-20 | ✓ | 16 | [read](v1.49.1079/00-summary.md) |
 | `v1.49.1078` | The Compton Gamma Ray Observatory, NASA's Flagship Gamma-Ray Observatory, the Gamma-Ray Member of NASA's Four Great Observatories and the Second of Them to Launch, the First All-Sky Survey Showing Gamma-Ray Bursts Are Isotropic, and the First Complete All-Sky Map in High-Energy Gamma Rays — Space-Telescope-Exploration Axis SUSTAINS at obs#4 (Rotation #38), Completing the Four Great Observatories | 2026-06-20 | ✓ | 15 | [read](v1.49.1078/00-summary.md) |
@@ -1056,8 +1057,8 @@ _Generated 2026-06-21 from `release_history.*`. Source of truth: Postgres._
 | `v1.49.23` | Unison Language & Math Co-Processor Completion | 2026-03-08 | ✓ | 23 | [read](v1.49.23/00-summary.md) |
 | `v1.49.22` | PNW Research Series | 2026-03-07 | ✓ | 24 | [read](v1.49.22/00-summary.md) |
 | `v1.49.21` | Image to Mission Pipeline | 2026-03-07 | ✓ | 22 | [read](v1.49.21/00-summary.md) |
-| `v1.49.20` | Documentation Consolidation | 2026-03-06 | ✓ | 13 | [read](v1.49.20/00-summary.md) |
 | `v1.49.20.1` | Documentation Reflections | 2026-03-06 | — | — | [read](v1.49.20.1/00-summary.md) |
+| `v1.49.20` | Documentation Consolidation | 2026-03-06 | ✓ | 13 | [read](v1.49.20/00-summary.md) |
 | `v1.49.19` | Gastown Chipset Integration | 2026-03-06 | ✓ | 19 | [read](v1.49.19/00-summary.md) |
 | `v1.49.18` | Space Between Observatory | 2026-03-06 | ✓ | 17 | [read](v1.49.18/00-summary.md) |
 | `v1.49.17` | The Space Between | 2026-03-04 | ✓ | 19 | [read](v1.49.17/00-summary.md) |
