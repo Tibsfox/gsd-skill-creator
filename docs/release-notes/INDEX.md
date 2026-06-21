@@ -2,10 +2,11 @@
 
 _Generated 2026-06-21 from `release_history.*`. Source of truth: Postgres._
 
-**1120 releases.** 1119 with retrospective. 849 with extracted lessons.
+**1121 releases.** 1120 with retrospective. 850 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
+| `v1.49.1078` | The Compton Gamma Ray Observatory, NASA's Flagship Gamma-Ray Observatory, the Gamma-Ray Member of NASA's Four Great Observatories and the Second of Them to Launch, the First All-Sky Survey Showing Gamma-Ray Bursts Are Isotropic, and the First Complete All-Sky Map in High-Energy Gamma Rays — Space-Telescope-Exploration Axis SUSTAINS at obs#4 (Rotation #38), Completing the Four Great Observatories | 2026-06-20 | ✓ | 15 | [read](v1.49.1078/00-summary.md) |
 | `v1.49.1077` | The Spitzer Space Telescope, NASA's Flagship Infrared Observatory, the Infrared Member and Fourth and Last of NASA's Great Observatories, the First Detection of Light from an Exoplanet, and the First Weather Map of a Planet Beyond the Solar System — Space-Telescope-Exploration Axis SUSTAINS at obs#3 (Rotation #38) | 2026-06-20 | ✓ | 15 | [read](v1.49.1077/00-summary.md) |
 | `v1.49.1076` | The Chandra X-ray Observatory, the X-ray Member of NASA's Great Observatories, the Highest-Resolution X-ray Observatory Ever Flown, the Third Great Observatory by Launch Order, and the Heaviest Payload Ever Launched by the Space Shuttle — Space-Telescope-Exploration Axis SUSTAINS at obs#2 (Rotation #38) | 2026-06-20 | ✓ | 15 | [read](v1.49.1076/00-summary.md) |
 | `v1.49.1075` | The Hubble Space Telescope, the First of NASA's Great Observatories, the First Telescope Serviced and Upgraded by Astronauts in Orbit, and the First Detection of an Exoplanet's Atmosphere — Space-Telescope-Exploration Axis OPENS at obs#1 (Rotation #38) | 2026-06-20 | ✓ | 15 | [read](v1.49.1075/00-summary.md) |
