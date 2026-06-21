@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.1078`.
+The story begins at `v1.0` and continues to `v1.49.1079`.
 
-**1121 chapters.** 1120 have retrospectives.
+**1122 chapters.** 1121 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -79,8 +79,8 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.17](v1.49.17/00-summary.md)** — The Space Between · 2026-03-04
 - **[v1.49.18](v1.49.18/00-summary.md)** — Space Between Observatory · 2026-03-06
 - **[v1.49.19](v1.49.19/00-summary.md)** — Gastown Chipset Integration · 2026-03-06
-- **[v1.49.20](v1.49.20/00-summary.md)** — Documentation Consolidation · 2026-03-06
 - **[v1.49.20.1](v1.49.20.1/00-summary.md)** — Documentation Reflections · 2026-03-06
+- **[v1.49.20](v1.49.20/00-summary.md)** — Documentation Consolidation · 2026-03-06
 - **[v1.49.21](v1.49.21/00-summary.md)** — Image to Mission Pipeline · 2026-03-07
 - **[v1.49.22](v1.49.22/00-summary.md)** — PNW Research Series · 2026-03-07
 - **[v1.49.23](v1.49.23/00-summary.md)** — Unison Language & Math Co-Processor Completion · 2026-03-08
@@ -1129,3 +1129,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.1076](v1.49.1076/00-summary.md)** — The Chandra X-ray Observatory, the X-ray Member of NASA's Great Observatories, the Highest-Resolution X-ray Observatory Ever Flown, the Third Great Observatory by Launch Order, and the Heaviest Payload Ever Launched by the Space Shuttle — Space-Telescope-Exploration Axis SUSTAINS at obs#2 (Rotation #38) · 2026-06-20
 - **[v1.49.1077](v1.49.1077/00-summary.md)** — The Spitzer Space Telescope, NASA's Flagship Infrared Observatory, the Infrared Member and Fourth and Last of NASA's Great Observatories, the First Detection of Light from an Exoplanet, and the First Weather Map of a Planet Beyond the Solar System — Space-Telescope-Exploration Axis SUSTAINS at obs#3 (Rotation #38) · 2026-06-20
 - **[v1.49.1078](v1.49.1078/00-summary.md)** — The Compton Gamma Ray Observatory, NASA's Flagship Gamma-Ray Observatory, the Gamma-Ray Member of NASA's Four Great Observatories and the Second of Them to Launch, the First All-Sky Survey Showing Gamma-Ray Bursts Are Isotropic, and the First Complete All-Sky Map in High-Energy Gamma Rays — Space-Telescope-Exploration Axis SUSTAINS at obs#4 (Rotation #38), Completing the Four Great Observatories · 2026-06-20
+- **[v1.49.1079](v1.49.1079/00-summary.md)** — The Kepler Space Telescope, NASA's Dedicated Exoplanet-Survey Space Telescope, the First NASA Mission Designed to Find Earth-Size Planets in the Habitable Zone of Sun-Like Stars by the Transit Method, the Most Prolific Exoplanet Discoverer of Its Era, and the K2 Solar-Pressure-Pointing Recovery — Space-Telescope-Exploration Axis SUSTAINS at obs#5 (Rotation #38), Turning from the Four Great Observatories to the Exoplanet-Survey Telescopes · 2026-06-20

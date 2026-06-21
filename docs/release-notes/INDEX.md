@@ -2,10 +2,11 @@
 
 _Generated 2026-06-21 from `release_history.*`. Source of truth: Postgres._
 
-**1121 releases.** 1120 with retrospective. 850 with extracted lessons.
+**1122 releases.** 1121 with retrospective. 851 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
+| `v1.49.1079` | The Kepler Space Telescope, NASA's Dedicated Exoplanet-Survey Space Telescope, the First NASA Mission Designed to Find Earth-Size Planets in the Habitable Zone of Sun-Like Stars by the Transit Method, the Most Prolific Exoplanet Discoverer of Its Era, and the K2 Solar-Pressure-Pointing Recovery — Space-Telescope-Exploration Axis SUSTAINS at obs#5 (Rotation #38), Turning from the Four Great Observatories to the Exoplanet-Survey Telescopes | 2026-06-20 | ✓ | 16 | [read](v1.49.1079/00-summary.md) |
 | `v1.49.1078` | The Compton Gamma Ray Observatory, NASA's Flagship Gamma-Ray Observatory, the Gamma-Ray Member of NASA's Four Great Observatories and the Second of Them to Launch, the First All-Sky Survey Showing Gamma-Ray Bursts Are Isotropic, and the First Complete All-Sky Map in High-Energy Gamma Rays — Space-Telescope-Exploration Axis SUSTAINS at obs#4 (Rotation #38), Completing the Four Great Observatories | 2026-06-20 | ✓ | 15 | [read](v1.49.1078/00-summary.md) |
 | `v1.49.1077` | The Spitzer Space Telescope, NASA's Flagship Infrared Observatory, the Infrared Member and Fourth and Last of NASA's Great Observatories, the First Detection of Light from an Exoplanet, and the First Weather Map of a Planet Beyond the Solar System — Space-Telescope-Exploration Axis SUSTAINS at obs#3 (Rotation #38) | 2026-06-20 | ✓ | 15 | [read](v1.49.1077/00-summary.md) |
 | `v1.49.1076` | The Chandra X-ray Observatory, the X-ray Member of NASA's Great Observatories, the Highest-Resolution X-ray Observatory Ever Flown, the Third Great Observatory by Launch Order, and the Heaviest Payload Ever Launched by the Space Shuttle — Space-Telescope-Exploration Axis SUSTAINS at obs#2 (Rotation #38) | 2026-06-20 | ✓ | 15 | [read](v1.49.1076/00-summary.md) |
@@ -1054,8 +1055,8 @@ _Generated 2026-06-21 from `release_history.*`. Source of truth: Postgres._
 | `v1.49.23` | Unison Language & Math Co-Processor Completion | 2026-03-08 | ✓ | 23 | [read](v1.49.23/00-summary.md) |
 | `v1.49.22` | PNW Research Series | 2026-03-07 | ✓ | 24 | [read](v1.49.22/00-summary.md) |
 | `v1.49.21` | Image to Mission Pipeline | 2026-03-07 | ✓ | 22 | [read](v1.49.21/00-summary.md) |
-| `v1.49.20.1` | Documentation Reflections | 2026-03-06 | — | — | [read](v1.49.20.1/00-summary.md) |
 | `v1.49.20` | Documentation Consolidation | 2026-03-06 | ✓ | 13 | [read](v1.49.20/00-summary.md) |
+| `v1.49.20.1` | Documentation Reflections | 2026-03-06 | — | — | [read](v1.49.20.1/00-summary.md) |
 | `v1.49.19` | Gastown Chipset Integration | 2026-03-06 | ✓ | 19 | [read](v1.49.19/00-summary.md) |
 | `v1.49.18` | Space Between Observatory | 2026-03-06 | ✓ | 17 | [read](v1.49.18/00-summary.md) |
 | `v1.49.17` | The Space Between | 2026-03-04 | ✓ | 19 | [read](v1.49.17/00-summary.md) |
