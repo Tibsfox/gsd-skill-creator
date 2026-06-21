@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.1082`.
+The story begins at `v1.0` and continues to `v1.49.1083`.
 
-**1125 chapters.** 1124 have retrospectives.
+**1126 chapters.** 1125 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -1133,3 +1133,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.1080](v1.49.1080/00-summary.md)** — TESS, the Transiting Exoplanet Survey Satellite, NASA's All-Sky Exoplanet-Transit Survey and Kepler's Successor, the First Space Mission to Survey Nearly the Whole Sky for Transiting Exoplanets, Designed to Find Transiting Planets Around the Nearest, Brightest Stars from a Novel 2:1 Lunar-Resonant Orbit — Space-Telescope-Exploration Axis SUSTAINS at obs#6 (Rotation #38), Continuing the Exoplanet-Survey Era · 2026-06-20
 - **[v1.49.1081](v1.49.1081/00-summary.md)** — The James Webb Space Telescope (JWST), the Largest and Most Powerful Space Telescope Ever Flown and Spitzer's Infrared Successor, a NASA + ESA + CSA Partnership Operated by STScI in Baltimore, Whose 6.5 m Segmented Gold Mirror Took the Deepest Infrared View of the Earliest Galaxies and Made the First Definitive Detection of Carbon Dioxide in an Exoplanet Atmosphere — Space-Telescope-Exploration Axis SUSTAINS at obs#7 (Rotation #38), Reaching the Next-Generation Flagship Era · 2026-06-21
 - **[v1.49.1082](v1.49.1082/00-summary.md)** — _(unnamed)_ · 2026-06-21
+- **[v1.49.1083](v1.49.1083/00-summary.md)** — _(unnamed)_ · 2026-06-21
