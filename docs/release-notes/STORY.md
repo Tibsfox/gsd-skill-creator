@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.1074`.
+The story begins at `v1.0` and continues to `v1.49.1075`.
 
-**1117 chapters.** 1116 have retrospectives.
+**1118 chapters.** 1117 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -79,8 +79,8 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.17](v1.49.17/00-summary.md)** — The Space Between · 2026-03-04
 - **[v1.49.18](v1.49.18/00-summary.md)** — Space Between Observatory · 2026-03-06
 - **[v1.49.19](v1.49.19/00-summary.md)** — Gastown Chipset Integration · 2026-03-06
-- **[v1.49.20](v1.49.20/00-summary.md)** — Documentation Consolidation · 2026-03-06
 - **[v1.49.20.1](v1.49.20.1/00-summary.md)** — Documentation Reflections · 2026-03-06
+- **[v1.49.20](v1.49.20/00-summary.md)** — Documentation Consolidation · 2026-03-06
 - **[v1.49.21](v1.49.21/00-summary.md)** — Image to Mission Pipeline · 2026-03-07
 - **[v1.49.22](v1.49.22/00-summary.md)** — PNW Research Series · 2026-03-07
 - **[v1.49.23](v1.49.23/00-summary.md)** — Unison Language & Math Co-Processor Completion · 2026-03-08
@@ -1125,3 +1125,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.1072](v1.49.1072/00-summary.md)** — Cassini-Huygens, the First Spacecraft to Orbit Saturn, the First Landing in the Outer Solar System, and the First Detection of Active Plumes from Enceladus — Outer-Planets-Exploration Axis SUSTAINS at obs#6 (Rotation #37, the Fifth Consecutive Sustain) · 2026-06-20
 - **[v1.49.1073](v1.49.1073/00-summary.md)** — Juno, the First Spacecraft to Orbit Jupiter in a Polar Orbit, the First to Map Jupiter's Deep Interior from Orbit, and the Farthest Solar-Powered Spacecraft Yet Flown — Outer-Planets-Exploration Axis SUSTAINS at obs#7 (Rotation #37, the Sixth Consecutive Sustain) · 2026-06-20
 - **[v1.49.1074](v1.49.1074/00-summary.md)** — New Horizons, the First Spacecraft to Fly By and Explore Pluto, the First to Fly By a Kuiper Belt Object, and the Fastest Spacecraft Ever Launched from Earth — Outer-Planets-Exploration Axis SUSTAINS at obs#8 (Rotation #37, the Seventh Consecutive Sustain) · 2026-06-20
+- **[v1.49.1075](v1.49.1075/00-summary.md)** — The Hubble Space Telescope, the First of NASA's Great Observatories, the First Telescope Serviced and Upgraded by Astronauts in Orbit, and the First Detection of an Exoplanet's Atmosphere — Space-Telescope-Exploration Axis OPENS at obs#1 (Rotation #38) · 2026-06-20

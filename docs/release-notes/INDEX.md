@@ -1,11 +1,12 @@
 # Release History — Chapter Index
 
-_Generated 2026-06-20 from `release_history.*`. Source of truth: Postgres._
+_Generated 2026-06-21 from `release_history.*`. Source of truth: Postgres._
 
-**1117 releases.** 1116 with retrospective. 846 with extracted lessons.
+**1118 releases.** 1117 with retrospective. 847 with extracted lessons.
 
 | Version | Name | Shipped | Retro | Lessons | Chapter |
 |---------|------|---------|-------|---------|---------|
+| `v1.49.1075` | The Hubble Space Telescope, the First of NASA's Great Observatories, the First Telescope Serviced and Upgraded by Astronauts in Orbit, and the First Detection of an Exoplanet's Atmosphere — Space-Telescope-Exploration Axis OPENS at obs#1 (Rotation #38) | 2026-06-20 | ✓ | 15 | [read](v1.49.1075/00-summary.md) |
 | `v1.49.1074` | New Horizons, the First Spacecraft to Fly By and Explore Pluto, the First to Fly By a Kuiper Belt Object, and the Fastest Spacecraft Ever Launched from Earth — Outer-Planets-Exploration Axis SUSTAINS at obs#8 (Rotation #37, the Seventh Consecutive Sustain) | 2026-06-20 | ✓ | 15 | [read](v1.49.1074/00-summary.md) |
 | `v1.49.1073` | Juno, the First Spacecraft to Orbit Jupiter in a Polar Orbit, the First to Map Jupiter's Deep Interior from Orbit, and the Farthest Solar-Powered Spacecraft Yet Flown — Outer-Planets-Exploration Axis SUSTAINS at obs#7 (Rotation #37, the Sixth Consecutive Sustain) | 2026-06-20 | ✓ | 15 | [read](v1.49.1073/00-summary.md) |
 | `v1.49.1072` | Cassini-Huygens, the First Spacecraft to Orbit Saturn, the First Landing in the Outer Solar System, and the First Detection of Active Plumes from Enceladus — Outer-Planets-Exploration Axis SUSTAINS at obs#6 (Rotation #37, the Fifth Consecutive Sustain) | 2026-06-20 | ✓ | 15 | [read](v1.49.1072/00-summary.md) |
@@ -1050,8 +1051,8 @@ _Generated 2026-06-20 from `release_history.*`. Source of truth: Postgres._
 | `v1.49.23` | Unison Language & Math Co-Processor Completion | 2026-03-08 | ✓ | 23 | [read](v1.49.23/00-summary.md) |
 | `v1.49.22` | PNW Research Series | 2026-03-07 | ✓ | 24 | [read](v1.49.22/00-summary.md) |
 | `v1.49.21` | Image to Mission Pipeline | 2026-03-07 | ✓ | 22 | [read](v1.49.21/00-summary.md) |
-| `v1.49.20.1` | Documentation Reflections | 2026-03-06 | — | — | [read](v1.49.20.1/00-summary.md) |
 | `v1.49.20` | Documentation Consolidation | 2026-03-06 | ✓ | 13 | [read](v1.49.20/00-summary.md) |
+| `v1.49.20.1` | Documentation Reflections | 2026-03-06 | — | — | [read](v1.49.20.1/00-summary.md) |
 | `v1.49.19` | Gastown Chipset Integration | 2026-03-06 | ✓ | 19 | [read](v1.49.19/00-summary.md) |
 | `v1.49.18` | Space Between Observatory | 2026-03-06 | ✓ | 17 | [read](v1.49.18/00-summary.md) |
 | `v1.49.17` | The Space Between | 2026-03-04 | ✓ | 19 | [read](v1.49.17/00-summary.md) |
