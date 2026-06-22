@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.1088`.
+The story begins at `v1.0` and continues to `v1.49.1089`.
 
-**1131 chapters.** 1130 have retrospectives.
+**1132 chapters.** 1131 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -79,8 +79,8 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.17](v1.49.17/00-summary.md)** — The Space Between · 2026-03-04
 - **[v1.49.18](v1.49.18/00-summary.md)** — Space Between Observatory · 2026-03-06
 - **[v1.49.19](v1.49.19/00-summary.md)** — Gastown Chipset Integration · 2026-03-06
-- **[v1.49.20](v1.49.20/00-summary.md)** — Documentation Consolidation · 2026-03-06
 - **[v1.49.20.1](v1.49.20.1/00-summary.md)** — Documentation Reflections · 2026-03-06
+- **[v1.49.20](v1.49.20/00-summary.md)** — Documentation Consolidation · 2026-03-06
 - **[v1.49.21](v1.49.21/00-summary.md)** — Image to Mission Pipeline · 2026-03-07
 - **[v1.49.22](v1.49.22/00-summary.md)** — PNW Research Series · 2026-03-07
 - **[v1.49.23](v1.49.23/00-summary.md)** — Unison Language & Math Co-Processor Completion · 2026-03-08
@@ -1139,3 +1139,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.1086](v1.49.1086/00-summary.md)** — Genesis, NASA's Discovery-Class Solar-Wind Sample-Return Mission, the First Mission Dedicated to Capturing Particles of the Solar Wind in Deep Space and Returning Them to Earth — Spacecraft Built by Lockheed Martin Astronautics, Managed by NASA's Jet Propulsion Laboratory with Principal Investigator Donald Burnett of Caltech, Launched 8 August 2001 on a Delta II 7326 from Cape Canaveral SLC-17A and Stationed in a Halo Orbit about the Sun-Earth L1 Point Where It Opened Ultra-Pure Collector Arrays to Embed Solar-Wind Ions for about 2.3 Years (3 December 2001 – 1 April 2004), with Separate Arrays for the Fast, Slow, and Coronal-Mass-Ejection Regimes — Its Sample-Return Capsule Recovered over the Utah Test and Training Range on 8 September 2004, and the Returned Collectors Read in the Laboratory to Reveal the Sun's Oxygen and Nitrogen Isotopic Composition and the First Sample Return from beyond the Moon — Heliophysics-Exploration Axis SUSTAINS at obs#4 (Rotation #39), the Catalog Continues from a View of the Sun in Depth to the Sun's Own Material Gathered and Brought Home · 2026-06-21
 - **[v1.49.1087](v1.49.1087/00-summary.md)** — Solar Orbiter, the ESA-Led Mission with NASA Participation that Takes Among the Closest and Highest-Resolution Images of the Sun and Has Captured the First Images of the Sun's Poles — Spacecraft Built by Airbus Defence and Space (Stevenage, UK), Mission Control at ESA's European Space Operations Centre (ESOC, Darmstadt) with ESA's ESTRACK as the Primary Tracking Network, NASA Providing the Atlas V 411 Launch Vehicle, One Full Instrument (SoloHI, the Solar Orbiter Heliospheric Imager) and the Heavy Ion Sensor of the SWA Suite, Launched 10 February 2020 (UTC) on a United Launch Alliance Atlas V 411 from Cape Canaveral SLC-41 into an Elliptical Heliocentric Orbit with Perihelion inside Mercury's Orbit (~0.28 AU) that Repeated Venus Gravity Assists Progressively Tilt out of the Ecliptic (~17° in 2025, Climbing toward ~33° in the Extended Mission) to Look Down on the Poles, Carrying Six Remote-Sensing Imagers (EUI, PHI, SPICE, STIX, Metis, SoloHI) and Four In-Situ Instruments (EPD, MAG, RPW, SWA) Designed to Connect Close-Up Imaging of the Sun's Surface with In-Situ Measurement of the Solar Wind It Produces, and Still Operating — Heliophysics-Exploration Axis SUSTAINS at obs#5 (Rotation #39), the Catalog Continues from the Sun's Own Material Gathered and Brought Home to the First Sight of the Sun's Hidden Poles · 2026-06-21
 - **[v1.49.1088](v1.49.1088/00-summary.md)** — _(unnamed)_ · 2026-06-21
+- **[v1.49.1089](v1.49.1089/00-summary.md)** — Stardust, NASA's Fourth Discovery-Program Comet Sample-Return Mission, Built by Lockheed Martin Astronautics and Managed by NASA's Jet Propulsion Laboratory (JPL), Principal Investigator Donald Brownlee of the University of Washington, Launched 7 February 1999 on a Delta II from Cape Canaveral, Flew Past the Small Asteroid 5535 Annefrank on 2 November 2002, Flew Through the Coma of Comet 81P/Wild 2 on 2 January 2004 (Closest Approach ~237 km) Capturing Thousands of Cometary Dust Grains in Silica Aerogel Behind a Whipple Shield, Returned the Sample Return Capsule by Parachute to the Utah Test and Training Range on 15 January 2006 as the First Cometary Samples Returned to Earth and the First Capture-and-Return of Contemporary Interstellar Dust, with the Capsule Making the Fastest Reentry of a Human-Made Object into Earth's Atmosphere (~12.9 km/s), and Re-Targeted as Stardust-NExT to Comet 9P/Tempel 1 on 15 February 2011 — Comet & Asteroid Exploration Axis SUSTAINS at obs#2 (Rotation #40), the Catalog Brings the Finest Grains of a Comet Home · 2026-06-21
