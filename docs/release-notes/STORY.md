@@ -1,9 +1,9 @@
 # The Story of This Project
 
 Read this directory like a book. Each subdirectory is a chapter. Each chapter is a release.
-The story begins at `v1.0` and continues to `v1.49.1110`.
+The story begins at `v1.0` and continues to `v1.49.1111`.
 
-**1153 chapters.** 1152 have retrospectives.
+**1154 chapters.** 1153 have retrospectives.
 For the structural view, read `INDEX.md`. For the backlog of open lessons, read `RETROSPECTIVE-TRACKER.md`.
 
 ## Chapters
@@ -79,8 +79,8 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.17](v1.49.17/00-summary.md)** — The Space Between · 2026-03-04
 - **[v1.49.18](v1.49.18/00-summary.md)** — Space Between Observatory · 2026-03-06
 - **[v1.49.19](v1.49.19/00-summary.md)** — Gastown Chipset Integration · 2026-03-06
-- **[v1.49.20](v1.49.20/00-summary.md)** — Documentation Consolidation · 2026-03-06
 - **[v1.49.20.1](v1.49.20.1/00-summary.md)** — Documentation Reflections · 2026-03-06
+- **[v1.49.20](v1.49.20/00-summary.md)** — Documentation Consolidation · 2026-03-06
 - **[v1.49.21](v1.49.21/00-summary.md)** — Image to Mission Pipeline · 2026-03-07
 - **[v1.49.22](v1.49.22/00-summary.md)** — PNW Research Series · 2026-03-07
 - **[v1.49.23](v1.49.23/00-summary.md)** — Unison Language & Math Co-Processor Completion · 2026-03-08
@@ -1161,3 +1161,4 @@ For the structural view, read `INDEX.md`. For the backlog of open lessons, read 
 - **[v1.49.1108](v1.49.1108/00-summary.md)** — CALIPSO, the NASA/CNES Satellite That Read the Thin Veil of the Sky, Carrying the CALIOP Two-Wavelength Polarization Lidar — a 532-Nanometre and 1064-Nanometre Elastic-Backscatter Lidar That Fired Pulses of Laser Light Straight Down and Profiled the Vertical Distribution of the Faint Suspended Layers of the Atmosphere, the Aerosols and the Thin Clouds, the Dust and the Smoke and the Sea Salt, the Ice Told From the Water by the Depolarization of the Light — Launched on 28 April 2006 on a Delta II From Vandenberg Together With CloudSat, the Pair Joining the A-Train and Flying in Close Formation So That the Lidar and the Radar Together Built a Three-Dimensional View of the Clouds and Aerosols — Operating From 2006 to 2023 Across a Run of Some Seventeen Years, Returning the First Long, Global, Day-and-Night Profile of the Vertical Distribution of Aerosols and Thin Clouds by Polarization Lidar, the Science Mission Completed on 1 August 2023 and the Spacecraft Passivated in December 2023 as the Eleventh Observation of the Earth-System-Science Axis, the Long Record of the Thin Veil of the Sky Now Complete — EARTH-SYSTEM-SCIENCE Exploration Axis SUSTAINS at obs#11 (Rotation #42 Continued), the Catalog Stays on Earth and Turns From Profiling the Layered Sky With Radar to Reading the Thin Veil With Light · 2026-06-23
 - **[v1.49.1109](v1.49.1109/00-summary.md)** — _(unnamed)_ · 2026-06-23
 - **[v1.49.1110](v1.49.1110/00-summary.md)** — Aquarius, NASA's Sea-Surface-Salinity Instrument That Flew Aboard the Argentine SAC-D Spacecraft to Map the Saltiness of the Global Ocean From Space, an L-Band Radiometer That Read the Faint Microwave Glow of the Sea Surface — Brighter Where the Water Was Fresher and Dimmer Where It Was Saltier — Paired With an L-Band Scatterometer That Measured the Roughness of the Waves to Correct for It, Together Turning the Ocean's Salt Into the First NASA Global Monthly Maps of Sea Surface Salinity — Launched on 10 June 2011 on a Delta II From Vandenberg, Operated From 2011 to 2015 Across a Run of Some Four Years From a Design of Three, the First NASA Mission Dedicated to Measuring Sea Surface Salinity From Space, the Prime Three-Year Science Completed in November 2014 and the Mission Concluded in June 2015, Opening the Satellite Record of Ocean Salinity as the Thirteenth Observation of the Earth-System-Science Axis, the Salt of the Sea It Measured Now Part of the Long Record — EARTH-SYSTEM-SCIENCE Exploration Axis SUSTAINS at obs#13 (Rotation #42 Continued), the Catalog Stays in Earth-System Science and Turns From Measuring the Sun's Whole Energy at the Source to Reading the Salt of the Global Ocean · 2026-06-23
+- **[v1.49.1111](v1.49.1111/00-summary.md)** — Aura, NASA's Atmospheric-Chemistry Satellite, the Third of the Original Earth Observing System Flagship Trio That Watches the Air Itself — the Ozone Layer That Shields Life From the Sun's Ultraviolet and the Chemistry of the Troposphere and Stratosphere — Carrying the Ozone Monitoring Instrument That Maps Ozone, Nitrogen Dioxide, Sulphur Dioxide, and Aerosols Across the Whole Globe Each Day by Ultraviolet–Visible Spectrometry and the Microwave Limb Sounder That Reads the Composition of the Stratosphere Along the Limb — Launched on 15 July 2004 on a Delta II From Vandenberg, Flying in the A-Train and Watching the Slow Recovery of the Ozone Layer for Two Decades, Still Operating — the Fourteenth Observation of the Earth-System-Science Axis, the Breath and the Shield of the Air — EARTH-SYSTEM-SCIENCE Exploration Axis SUSTAINS at obs#14 (Rotation #42 Continued), the Catalog Stays in Earth-System Science and Turns From Reading the Salt of the Global Ocean to Watching the Ozone Layer and the Chemistry of the Air · 2026-06-23
