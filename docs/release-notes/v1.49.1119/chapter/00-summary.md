@@ -1,0 +1,11 @@
+> Following v1.49.1118 — _Sentinel-6 Michael Freilich, the US-EU (NASA/NOAA + ESA/EUMETSAT/CNES) Ocean-Surface-Topography Reference Radar-Altimetry Mission, a Free-Flying Satellite That Measures the Height of the Sea Surface to Within a Few Centimetres and Carries Forward the Decades-Long Reference Record of Global Sea Level Begun by TOPEX/Poseidon and Carried by Jason-1, Jason-2, and Jason-3 — Ranging the Sea Surface From the TOPEX/Jason Reference Orbit With the Poseidon-4 Ku-Band and C-Band Radar Altimeter Operating in SAR (Synthetic-Aperture) Mode Interleaved With Conventional Low-Resolution Mode, the Advanced Microwave Radiometer for Climate for the Wet-Tropospheric Correction, DORIS, GNSS, and a Laser Retroreflector Array for Precise Orbit, and a GNSS-Radio-Occultation Receiver Profiling the Atmosphere Alongside the Altimeter, Mapping Sea-Surface Height, Ocean Circulation, and Global Mean Sea-Level Rise — Launched on 21 November 2020 on a SpaceX Falcon 9 From Vandenberg SLC-4E Into the ~1336 km, 66° Reference Orbit With a ~10-Day Repeat, Operating Today as the Prime Reference Altimeter Having Become the Reference Altimetry Mission in 2022 and Carrying the Reference Record Forward With a New SAR-Mode Altimeter — the Twenty-First Observation of the Earth-System-Science Axis, the Height of the Sea Carried Forward — EARTH-SYSTEM-SCIENCE Exploration Axis SUSTAINS at obs#21 (Rotation #42 Continued), the Catalog Stays in Earth-System Science and Turns From the Poseidon-3B Low-Resolution Nadir Reference Altimetry of the Prior Reference to the Poseidon-4 SAR-Mode Altimetry of the Current Prime Reference_, v1.49.1119 continues the arc.
+# v1.49.1119
+**Shipped:** 2026-06-27
+**Branch:** dev → main
+_Parse confidence: 0.50 — source `docs/release-notes/v1.49.1119/README.md`_
+## Summary
+No structured feature list was captured for this release; see the source README for prose details.
+It also produced retrospective content (lessons_learned, surprises, what_could_be_better, what_worked); see `03-retrospective.md`.
+16 lessons extracted; see `04-lessons.md` or the `RETROSPECTIVE-TRACKER.md`.
+---
+**Prev:** [v1.49.1118](../v1.49.1118/00-summary.md) · _(current tip)_
