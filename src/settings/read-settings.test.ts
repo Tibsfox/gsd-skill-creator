@@ -15,6 +15,9 @@ import {
   readNested,
   readBooleanFlag,
   readNumber,
+  harnessCandidatePaths,
+  HARNESS_SETTINGS_PATH,
+  DEDICATED_SETTINGS_PATH,
 } from './read-settings.js';
 
 describe('read-settings (QUAL-1a contract)', () => {
@@ -74,6 +77,21 @@ describe('read-settings (QUAL-1a contract)', () => {
     expect(readNumber(['n'], 7, [dedicated])).toBe(42);
     expect(readNumber(['bad'], 7, [dedicated])).toBe(7);
     expect(readNumber(['missing'], 7, [dedicated])).toBe(7);
+  });
+
+  it('harnessCandidatePaths tries both files for the default path, one for an override', () => {
+    // Default harness path → dedicated sibling first, then the harness file.
+    expect(harnessCandidatePaths(HARNESS_SETTINGS_PATH)).toEqual([
+      DEDICATED_SETTINGS_PATH,
+      HARNESS_SETTINGS_PATH,
+    ]);
+    // No argument defaults to the harness path → same two-file list.
+    expect(harnessCandidatePaths()).toEqual([
+      DEDICATED_SETTINGS_PATH,
+      HARNESS_SETTINGS_PATH,
+    ]);
+    // An override path is used verbatim and alone (no sibling fallback).
+    expect(harnessCandidatePaths('/tmp/custom.json')).toEqual(['/tmp/custom.json']);
   });
 
   it('degrades safely (no throw) on malformed JSON', () => {

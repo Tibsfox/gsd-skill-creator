@@ -15,10 +15,35 @@
 
 import { readFileSync } from 'node:fs';
 
+/** The harness-owned settings file (strict schema; rejects unknown keys). */
+export const HARNESS_SETTINGS_PATH = '.claude/settings.json';
+
+/** The dedicated gsd-skill-creator sibling file (checked first). */
+export const DEDICATED_SETTINGS_PATH = '.claude/gsd-skill-creator.json';
+
 const DEFAULT_PROJECT_PATHS = [
-  '.claude/gsd-skill-creator.json',
-  '.claude/settings.json',
+  DEDICATED_SETTINGS_PATH,
+  HARNESS_SETTINGS_PATH,
 ];
+
+/**
+ * Translate the legacy single-`settingsPath` argument convention (used by the
+ * inline flag readers this module replaces) into the candidate-path list that
+ * `loadGsdScope`/`readNested` consume.
+ *
+ * The inline readers all followed one rule: when the caller left `settingsPath`
+ * at the default harness path, BOTH the dedicated sibling file and the harness
+ * file were tried (dedicated first); when the caller passed an override path,
+ * ONLY that path was tried. Centralizing that rule here keeps every migrated
+ * reader byte-identical to its pre-migration override semantics.
+ */
+export function harnessCandidatePaths(
+  settingsPath: string = HARNESS_SETTINGS_PATH,
+): string[] {
+  return settingsPath === HARNESS_SETTINGS_PATH
+    ? [DEDICATED_SETTINGS_PATH, HARNESS_SETTINGS_PATH]
+    : [settingsPath];
+}
 
 /**
  * Load the `gsd-skill-creator` scope from the first file that parses cleanly.
