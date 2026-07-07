@@ -20,14 +20,14 @@ Activates when checking upstream compatibility, auditing spec compliance, or ali
 - Claude Code version update detected
 - User mentions "alignment", "upstream", "spec compliance", "version check"
 - New agentskills.io spec changes published
-- GSD upstream (get-shit-done) version update
+- GSD upstream (@opengsd/gsd-core) version update
 
 ## Checklist
 
 ### 1. Version Check
 ```bash
-claude --version                    # Claude Code
-npm list get-shit-done 2>/dev/null  # GSD upstream
+claude --version                       # Claude Code
+npm list @opengsd/gsd-core 2>/dev/null # GSD upstream
 ```
 
 ### 2. Skill Description Compliance

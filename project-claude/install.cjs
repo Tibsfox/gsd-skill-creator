@@ -1129,7 +1129,7 @@ function main() {
     } else {
       console.error('Error: .claude/ directory not found.');
       console.error('Run with --global to install to ~/.claude/ or --local to install to ./.claude/');
-      console.error('Or install GSD first: npx get-shit-done-cc --claude --global');
+      console.error('Or install GSD first: npx @opengsd/gsd-core@latest');
       process.exit(1);
     }
   }

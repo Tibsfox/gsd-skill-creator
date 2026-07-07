@@ -17,8 +17,8 @@ Complete command routing tables. The condensed version is in SKILL.md. This file
 |-------------|-------------|-----------|
 | "I want to discuss how phase X should work" | `/gsd:discuss-phase N` | Capture vision before planning |
 | "Plan the next phase" | `/gsd:plan-phase N` | Creates detailed, executable plans |
-| "I need to research this domain" | `/gsd:research-phase N` | Deep ecosystem investigation |
-| "What will Claude do for this phase?" | `/gsd:list-phase-assumptions N` | Preview approach before committing |
+| "I need to research this domain" | `/gsd:plan-phase N --research` | Deep ecosystem investigation (research is a plan-phase mode) |
+| "What will Claude do for this phase?" | `/gsd:spec-phase N` | Clarify what the phase delivers before committing |
 
 ## Executing Work
 
@@ -40,9 +40,9 @@ Complete command routing tables. The condensed version is in SKILL.md. This file
 | User Intent | GSD Command | Rationale |
 |-------------|-------------|-----------|
 | "I need to add a phase" | `/gsd:phase` | Append to roadmap |
-| "Urgent work mid-milestone" | `/gsd:insert-phase` | Insert without renumbering |
-| "Remove a planned phase" | `/gsd:remove-phase` | Clean removal with renumbering |
-| "Capture this idea for later" | `/gsd:add-todo` | Park ideas without derailing current work |
+| "Urgent work mid-milestone" | `/gsd:phase --insert` | Insert a phase mid-roadmap |
+| "Remove a planned phase" | `/gsd:phase --remove` | Clean removal from the roadmap |
+| "Capture this idea for later" | `/gsd:capture` | Park ideas without derailing current work |
 
 ## skill-creator Actions
 

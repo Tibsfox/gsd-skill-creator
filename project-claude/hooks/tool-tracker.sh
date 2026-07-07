@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # tool-tracker.sh — Tool-call telemetry for the four event types missed by W1.
 #
-# Subscribes to: PostCompact, FileChanged, PermissionDenied, SubagentSpawn.
+# Subscribes to: PostCompact, FileChanged, PermissionDenied, SubagentStart.
 # Privacy tier: B (operational data, no PII). See project-claude/.claude/skills/
 # security-hygiene/ for the canonical 4-tier privacy taxonomy.
 #
@@ -50,7 +50,7 @@ case "$EVENT" in
         # Capture only: resource type (NOT the payload body)
         PAYLOAD="{\"resource_type\":\"${CLAUDE_RESOURCE_TYPE:-unknown}\"}"
         ;;
-    SubagentSpawn)
+    SubagentStart)
         # Capture only: agent type + token count (NOT the prompt)
         PAYLOAD="{\"agent_type\":\"${CLAUDE_SUBAGENT_TYPE:-unknown}\",\"effort\":\"${CLAUDE_SUBAGENT_EFFORT:-default}\"}"
         ;;

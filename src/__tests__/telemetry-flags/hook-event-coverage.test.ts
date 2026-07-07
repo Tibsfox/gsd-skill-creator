@@ -2,8 +2,12 @@
  * CF-H-017 — Hook-event coverage rollup.
  *
  * Asserts that project-claude/settings.json subscribes to >=12 distinct hook
- * event keys. The C5 additions (FileChanged, PermissionDenied, SubagentSpawn,
+ * event keys. The C5 additions (FileChanged, PermissionDenied, SubagentStart,
  * SubagentStop, UserPromptSubmit) bring the count from 8 to 13.
+ *
+ * Also lints every subscribed event name against the known Claude Code hook
+ * events (CC-2 guard): a typo'd key like the former `SubagentSpawn` is silently
+ * ignored by Claude Code, so the hook never fires — this catches it in CI.
  *
  * Closes the test arm of OGA-017.
  */
@@ -36,5 +40,42 @@ describe('CF-H-017: hook-event coverage rollup', () => {
         expect(c.length).toBeGreaterThan(0);
       }
     }
+  });
+
+  it('every subscribed event name is a known Claude Code hook event (CC-2 guard)', () => {
+    // Known Claude Code hook events. A hook registered under an unknown key is
+    // silently ignored (never fires), which is exactly how the former
+    // `SubagentSpawn` typo produced dead telemetry. Keep this in sync with the
+    // upstream event catalog; the trailing two are repo-accepted extended events.
+    const KNOWN_HOOK_EVENTS = new Set([
+      // Session lifecycle
+      'SessionStart', 'SessionEnd', 'Setup',
+      // Compaction
+      'PreCompact', 'PostCompact',
+      // Per-turn
+      'UserPromptSubmit', 'UserPromptExpansion', 'Stop', 'StopFailure',
+      // Tool execution
+      'PreToolUse', 'PostToolUse', 'PostToolUseFailure',
+      'Notification',
+      // Subagent / team / task
+      'SubagentStart', 'SubagentStop', 'TeammateIdle',
+      // Repo-accepted extended events (C5)
+      'FileChanged', 'PermissionDenied',
+    ]);
+
+    const check = (path: string) => {
+      const settings = JSON.parse(readFileSync(path, 'utf8'));
+      for (const event of Object.keys(settings.hooks ?? {})) {
+        expect(
+          KNOWN_HOOK_EVENTS.has(event),
+          `Unknown hook event "${event}" in ${path} — Claude Code ignores unknown ` +
+            `keys, so this hook would never fire. Fix the name or add it to ` +
+            `KNOWN_HOOK_EVENTS if it is genuinely a new upstream event.`,
+        ).toBe(true);
+      }
+    };
+
+    check(SETTINGS);
+    check(join(REPO_ROOT, 'project-claude', 'settings-hooks.json'));
   });
 });
