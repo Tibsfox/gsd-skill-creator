@@ -17,6 +17,30 @@ Source reports:
 
 ---
 
+## 0. Implementation status — updated 2026-07-07
+
+Implemented this session (on `dev`, atomic commits, each verified against its tests; not pushed):
+
+| ID | Commit | What landed |
+|----|--------|-------------|
+| INT-1 | `dbc91eeec` | `install.cjs --uninstall` now cleans our hook groups from the host settings file (roundtrip-verified; user hooks preserved) |
+| AC-1 | `841238dc4` | Cartridge `src:` reads contained via opt-in `allowedRoots` + `assertWithinRoots`; CLI/scaffold opt in with the project root; e2e-verified an absolute-path escape is blocked before read |
+| LEARN-3 | `8e5f20a23` | `hitlGate` hard-blocks critical hygiene findings centrally (covers `--yes` + all arxiv ingest tools); `--force-critical` override |
+| CC-2, B2, B9 | `016a56607` | `SubagentSpawn`→`SubagentStart` (+ tool-tracker + hook-event allowlist lint); dead `get-shit-done-cc` → `@opengsd/gsd-core`; gsd-workflow routing table repointed to shipped commands |
+| PG-2, PG-4 | `e2c74682a` | PgStore resolves `RH_POSTGRES_URL` via `loadPgEnv` + uses `connectionString`; vector index IVFFlat→HNSW |
+| ORCH-1/2/3/N1 | `375869123` | `canonicalCommandName` normalization fixes the whole-classifier hyphen/colon mismatch; vocabulary reconciled to shipped `gsd:phase`; destructive gate for phase; ORCH-N1 drift guard |
+| CLI-1/2/3 | `ab8198042` | `pic2html` wired + argv parser; `activations`/`cadence`/`pic2html` documented; registry↔help parity test |
+| B10 | `1f7160bb5` | Config validator accepts modern gsd-core config (`model_profile: adaptive|inherit`, `granularity`, `effort`) |
+| QUAL-1a | `35fd433a9` | Contract tests pinning the shared settings reader (target for the QUAL-1b cascade) |
+
+**All 14 Tier-1 items are done** (INT-1, AC-1, LEARN-3, ORCH-1/2/3/N1, CC-2, CLI-1/2/3, B2, B9, QUAL-1a) plus three Tier-2 (PG-2, PG-4, B10).
+
+**Memory/RAG/Postgres decision — SETTLED as "wire, not quarantine"** (the operator's explicit ask was to *use* the capability). The foundation is laid: PG-2 makes the store reach the real DB, PG-4 fixes the index. The remaining capability unlock — **MEM-1** (wire `MemoryService` into the gateway factory behind a default-off flag + `skill-creator gateway` CLI), then **PG-1/PG-3** (LOD-400 tier + migration versioning) and **RET-1/RET-4** (dense recall + hybrid RRF fusion) — is the sequenced milestone in §4.1. It is deliberately deferred rather than rushed: a half-wired capability would be worse than the current foundationed-and-dormant state.
+
+**Deferred (tracked here, not started):** the QUAL-1b settings-reader cascade (50-file mechanical migration — do test-first per §5, watch override-caller semantics), MEM-1 + the memory/RAG capability chain (§4.1), INT-2 (installer consolidation), ORCH-4 (atomic WorkState write), B3 (install detector), LEARN-1/2, and the rest of the Tier-2/Tier-3 backlog below. Nothing in the deferred set is a live defect that harms users today.
+
+---
+
 ## 1. Executive summary
 
 **Overall health: good.** No CRITICAL defects survived verification. Across ~387K non-test LOC the classic quality axes are clean (23 TODO/FIXME, 8 ts-suppressions, chokepoint audits green with KNOWN_UNWIRED=0). The dominant theme is not bugs but **drift and dormancy**: shipped-but-unwired subsystems, command vocabulary that lags the current GSD install, and two parallel installers. Exactly **one** finding is a genuine untrusted-input security hole (AC-1); one is a host-breaking teardown bug (INT-1). Everything else degrades safely.
